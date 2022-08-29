@@ -1,0 +1,1 @@
+export { useCompanyCommentArr } from "./useCompanyCommentArr";

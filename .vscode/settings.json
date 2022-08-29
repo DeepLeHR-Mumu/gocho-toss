@@ -1,0 +1,3 @@
+{
+  "eslint.workingDirectories": ["apps/gocho_web", "src"]
+}
