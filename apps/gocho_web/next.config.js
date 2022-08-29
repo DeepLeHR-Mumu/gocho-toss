@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
-}
+  images: {
+    domains: [`d2nnzfahmszi6w.cloudfront.net`],
+    formats: ["image/avif", "image/webp"],
+  },
+  pageExtensions: ["page.tsx"],
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
