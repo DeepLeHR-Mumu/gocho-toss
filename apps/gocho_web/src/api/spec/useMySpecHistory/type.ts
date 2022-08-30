@@ -1,0 +1,16 @@
+import { QueryFunctionContext } from "react-query";
+
+import { mySpecHistoryKeyObj } from "@constant/queryKeyFactory/spec/userHistoryKeyObj";
+import { getMySpecHistoryDef } from "../type/mySpecHistory";
+
+interface ResponseObjDef {
+  data: getMySpecHistoryDef;
+}
+
+export interface GetMySpecHistoryArrDef {
+  ({
+    queryKey,
+  }: QueryFunctionContext<
+    ReturnType<typeof mySpecHistoryKeyObj.list>
+  >): Promise<ResponseObjDef>;
+}
