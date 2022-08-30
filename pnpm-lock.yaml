@@ -84,6 +84,7 @@ importers:
       axios: ^0.27.2
       eslint-config-deeple: workspace:^1.0.0
       next: 12.2.5
+      next-transpile-modules: ^9.0.0
       react: 17.0.2
       react-dom: 17.0.2
       react-hook-form: ^7.34.2
@@ -92,6 +93,7 @@ importers:
       react-textarea-autosize: ^8.3.4
       recoil: ^0.7.5
       slick-carousel: ^1.8.1
+      tsconfig-deeple: workspace:^0.0.0
       typescript: 4.8.2
     dependencies:
       '@emotion/react': 11.10.0_bfb6djzltvsnysio7m46rk7clm
@@ -101,6 +103,7 @@ importers:
       axios: 0.27.2
       eslint-config-deeple: link:../../packages/eslint-config-deeple
       next: 12.2.5_q6el6r4hbd2fftzckrwpdnyobi
+      next-transpile-modules: 9.0.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-hook-form: 7.34.2_react@17.0.2
@@ -109,6 +112,7 @@ importers:
       react-textarea-autosize: 8.3.4_k33vb7fucsny7mu5lic4ab3hri
       recoil: 0.7.5_sfoxds7t5ydpegc3knd667wn6m
       slick-carousel: 1.8.1_jquery@3.6.1
+      tsconfig-deeple: link:../../packages/tsconfig-deeple
     devDependencies:
       '@types/node': 18.7.13
       '@types/react': 18.0.17
@@ -8546,6 +8550,13 @@ packages:
 
   /nested-error-stacks/2.1.1:
     resolution: {integrity: sha512-9iN1ka/9zmX1ZvLV9ewJYEk9h7RyRRtqdK0woXcqohu8EWIerfPUjYJPg0ULy0UqP7cslmdGc8xKDJcojlKiaw==}
+
+  /next-transpile-modules/9.0.0:
+    resolution: {integrity: sha512-VCNFOazIAnXn1hvgYYSTYMnoWgKgwlYh4lm1pKbSfiB3kj5ZYLcKVhfh3jkPOg1cnd9DP+pte9yCUocdPEUBTQ==}
+    dependencies:
+      enhanced-resolve: 5.10.0
+      escalade: 3.1.1
+    dev: false
 
   /next/12.2.5_q6el6r4hbd2fftzckrwpdnyobi:
     resolution: {integrity: sha512-tBdjqX5XC/oFs/6gxrZhjmiq90YWizUYU6qOWAfat7zJwrwapJ+BYgX2PmiacunXMaRpeVT4vz5MSPSLgNkrpA==}
