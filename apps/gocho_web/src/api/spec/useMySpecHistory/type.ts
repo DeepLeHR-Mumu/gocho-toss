@@ -1,4 +1,4 @@
-import { QueryFunctionContext } from "react-query";
+import { QueryFunctionContext } from "@tanstack/react-query";
 
 import { mySpecHistoryKeyObj } from "@constant/queryKeyFactory/spec/userHistoryKeyObj";
 import { getMySpecHistoryDef } from "../type/mySpecHistory";
