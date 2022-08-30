@@ -4,7 +4,7 @@ import { COLORS } from "@style/constant";
 
 export const wrapper = css`
   padding: 11.5rem 0 4.1875rem;
-  /* height: calc(100vh - 18rem); */
+  height: calc(100vh - 20rem);
   box-sizing: border-box;
   background-color: ${COLORS.BLUE_SECOND40};
 `;
@@ -12,15 +12,10 @@ export const wrapper = css`
 export const title = css`
   font-size: 1px;
   opacity: 0;
-  /* apple 표기법  가린부분은 필요없어 보임 */
   position: absolute;
-  /* clip: rect(1px, 1px, 1px, 1px); */
-  /* clip-path: inset(0px 0px 99.9% 99.9%); */
   overflow: hidden;
   height: 1px;
   width: 1px;
-  /* padding: 0; */
-  /* border: 0; */
 `;
 
 export const flexBox = css`
