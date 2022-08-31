@@ -5,7 +5,10 @@ addReviewers: true
 addAssignees: author
 
 # A list of reviewers to be added to PRs (GitHub user name)
-# reviewers:
+reviewers:
+  - DeepLeHR-Mumu
+  - DeepLeHR-Ahri
+  - DeepLeHR-Vi
 
 # A number of reviewers added to the PR
 # Set 0 to add all the reviewers (default: 0)
