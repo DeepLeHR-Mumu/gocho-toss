@@ -5,8 +5,12 @@ import axios from "axios";
 import { useUserInfo } from "@api/auth";
 import { useModal } from "@recoil/hook/modal";
 
+import { Layout } from "@component/layout";
+import { AsideMenu } from "./component/asideMenu";
 import { CarouselPart } from "./part/carouselPart";
 import { ListPart } from "./part/listPart";
+
+import { title, colorPoint, flexBox } from "./style";
 
 const MainList: NextPage = () => {
   const { setCurrentModal, closeModal } = useModal();
@@ -25,12 +29,21 @@ const MainList: NextPage = () => {
     return () => {
       closeModal();
     };
-  }, []);
+  }, [closeModal]);
 
   return (
     <main>
       <CarouselPart />
-      <ListPart />
+      <Layout>
+        <h1 css={title}>
+          <span css={colorPoint}>All </span>
+          스펙 List 📃✨
+        </h1>
+        <div css={flexBox}>
+          <AsideMenu />
+          <ListPart />
+        </div>
+      </Layout>
     </main>
   );
 };
