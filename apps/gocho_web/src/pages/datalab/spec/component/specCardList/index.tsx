@@ -41,7 +41,7 @@ export const SpecCardList: FunctionComponent<SpecCardListProps> = ({
       observerRef.current.disconnect(); // 연결 해제
     }
 
-    observerRef.current = new IntersectionObserver(intersectionObserver); // IntersectionObserver 새롭게 정의
+    observerRef.current = new IntersectionObserver(intersectionObserver, { threshold: 0.2 }); // IntersectionObserver 새롭게 정의
     if (boxRef.current) observerRef.current.observe(boxRef.current); // boxRef 관찰 시작
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [specArrData]); // res 값이 변경될때마다 실행

@@ -18,9 +18,9 @@ import { setCarouselSetting } from "./util";
 
 export const CompanyCommentPart: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
-  const { data: companyArrData } = useCompanyArr({ order: "comment" });
+  const { data: companyDataArr } = useCompanyArr({ order: "comment" });
 
-  if (!companyArrData) {
+  if (!companyDataArr) {
     return <>w</>;
   }
   return (
@@ -32,11 +32,11 @@ export const CompanyCommentPart: FunctionComponent = () => {
       </Layout>
       <section css={cardListContainer}>
         <Slider {...setCarouselSetting()} ref={sliderRef} css={sliderContainer}>
-          {companyArrData.map((companyId) => {
+          {companyDataArr.companyDataArr.map((data) => {
             return (
               <CompanyCommentCard
-                companyId={companyId}
-                key={`companyComment${companyId}`}
+                companyId={data.id}
+                key={`companyComment${data.id}`}
               />
             );
           })}
