@@ -1,7 +1,7 @@
-import { OrderDef, textDef } from "./type";
+import { OrderDef, TextDef } from "./type";
 
 export const setJobOrderButtonArr: {
-  text: textDef;
+  text: TextDef;
   order: OrderDef;
 }[] = [
   {

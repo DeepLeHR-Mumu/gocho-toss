@@ -1,7 +1,7 @@
 import { JobObjDef } from "../type/jobArr";
 
-export const selector = (jobArr: JobObjDef[]) => {
-  return jobArr.map((job) => {
+export const selector = (jobArr: JobObjDef[], count: number) => {
+  const jobDataArr = jobArr.map((job) => {
     return {
       id: job.id,
       companyName: job.company.name,
@@ -18,4 +18,5 @@ export const selector = (jobArr: JobObjDef[]) => {
       view: job.view,
     };
   });
+  return { jobDataArr, count };
 };

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="866f2cce-1a13-45c4-a885-e40a61ab2404" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/gocho.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/api/company/useCompanyDetail/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/api/company/useCompanyDetail/type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/api/company/useCompanyDetail/util.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/component/card/jobCard/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/component/card/jobCard/style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/[companyId]/index.page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/[companyId]/style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/[companyId]/type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/[companyId]/util.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/component/menuButtonList/constant.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/component/menuButtonList/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/component/menuButtonList/style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/component/menuButtonList/type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/component/workingNotice/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/component/workingNotice/style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/component/workingNotice/type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/part/basicInfoPart/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/part/basicInfoPart/style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/part/basicInfoPart/type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/part/companyJobPart/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/part/companyJobPart/style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/part/companyJobPart/type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/part/factoryInfoPart/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/part/factoryInfoPart/style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/part/factoryInfoPart/type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/part/headerPart/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/part/headerPart/style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/part/headerPart/type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/part/payInfoPart/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/part/payInfoPart/style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/part/payInfoPart/type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/part/welfareInfoPart/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/part/welfareInfoPart/style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/companies/part/welfareInfoPart/type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/component/bottomPagination/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/component/bottomPagination/style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/component/bottomPagination/type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/component/pagination/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/component/pagination/style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/component/pagination/type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/explist/component/expJobCard/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/explist/component/expJobCard/style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/explist/component/expJobCard/type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/explist/component/expJobCardList/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/explist/component/expJobCardList/style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/explist/component/expJobCardList/type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/explist/constant.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/explist/style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/explist/type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/checkbox/Checkbox.stories.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/checkbox/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/checkbox/style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/checkbox/type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/filter/constant.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/filter/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/filter/style.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/filter/type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/jobAdCard/type.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/api/company/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/api/company/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/api/company/useCompanyArr/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/api/company/useCompanyArr/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/api/company/useCompanyArr/type.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/api/company/useCompanyArr/type.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/api/company/useCompanyArr/util.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/api/company/useCompanyArr/util.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/api/job/useJobArr/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/api/job/useJobArr/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/api/job/useJobArr/type.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/api/job/useJobArr/type.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/api/job/useJobArr/util.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/api/job/useJobArr/util.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/constant/internalURL.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/constant/internalURL.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/constant/queryKeyFactory/company/arrKeyObj.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/constant/queryKeyFactory/company/arrKeyObj.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/constant/queryKeyFactory/job/jobArrKeyObj.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/constant/queryKeyFactory/job/jobArrKeyObj.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/explist/index.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/explist/index.page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/jobAdCard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/jobAdCard/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/jobAdCard/style.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/jobAdCard/style.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/jobAdCardList/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/jobAdCardList/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/jobAdCardList/style.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/jobAdCardList/style.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/jobCard/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/jobCard/style.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/jobCard/type.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/component/card/jobCard/type.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/jobCardList/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/jobCardList/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/jobCardList/style.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/jobCardList/style.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/jobCardList/type.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/component/jobCardList/type.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/part/adPart/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/part/adPart/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/part/adPart/style.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/part/adPart/style.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/part/listPart/constant.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/part/listPart/constant.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/part/listPart/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/part/listPart/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/part/listPart/style.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/part/listPart/style.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/part/listPart/type.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/gocho_web/src/pages/jd/list/part/listPart/type.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2E9ChQfos1H57VUBzII7JdFps0E" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/seungmok/gocho/apps/gocho_web/src/pages",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "pnpm",
+    "ts.external.directory.path": "/Users/seungmok/gocho/apps/gocho_web/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/apps/gocho_web/src/pages" />
+      <recent name="$PROJECT_DIR$/apps/gocho_web/src/api/company" />
+      <recent name="$PROJECT_DIR$/apps/gocho_web/src/api/job" />
+      <recent name="$PROJECT_DIR$/apps/gocho_web/src/component/card" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="866f2cce-1a13-45c4-a885-e40a61ab2404" name="Changes" comment="" />
+      <created>1661998531684</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1661998531684</updated>
+      <workItem from="1661998532791" duration="1421000" />
+      <workItem from="1661999971006" duration="2900000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

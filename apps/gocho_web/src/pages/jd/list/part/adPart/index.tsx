@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+
 import { Layout } from "@component/layout";
 
 import { JobAdCardList } from "../../component/jobAdCardList";
@@ -11,6 +12,7 @@ export const AdPart: FunctionComponent = () => {
         <h2 css={title}>
           <span css={colorPoint}>Today</span> 오늘의 추천 공고
         </h2>
+        {/* TODO: ~List 없애고 map으로 처리 */}
         <JobAdCardList />
       </Layout>
     </section>

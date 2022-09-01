@@ -12,7 +12,7 @@ import { selector } from "./util";
 export const getJobArr: GetJobArrDef = async ({
   queryKey: [{ requestObj }],
 }) => {
-  const { data } = await axiosInstance.get(`/jds`, {
+  const { data } = await axiosInstance.get("/jds", {
     params: requestObj,
   });
   return data;
@@ -20,8 +20,8 @@ export const getJobArr: GetJobArrDef = async ({
 
 export const useJobArr = (requestObj: JobArrRequestObjDef) => {
   const queryResult = useQuery(jobArrKeyObj.jobArr(requestObj), getJobArr, {
-    select: ({ data }) => {
-      return selector(data);
+    select: ({ data, count }) => {
+      return selector(data, count);
     },
   });
   return queryResult;

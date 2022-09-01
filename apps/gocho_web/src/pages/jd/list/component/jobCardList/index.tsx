@@ -1,29 +1,20 @@
 import { FunctionComponent } from "react";
 
-import { useJobArr } from "@api/job";
 import { dummyArrCreator } from "@util/dummyArrCreator";
 
-import { JobCard } from "../jobCard";
+import { JobCard } from "@component/card/jobCard";
 import { JobCardListProps } from "./type";
 import { listContainer } from "./style";
 
 export const JobCardList: FunctionComponent<JobCardListProps> = ({
-  listOrder,
+  jobDataArr,
+  isLoading,
+  isError,
 }) => {
-  const {
-    data: jobArrData,
-    isLoading,
-    isError,
-  } = useJobArr({
-    order: listOrder,
-    filter: "valid",
-    limit: 9,
-  });
-
-  if (!jobArrData || isError || isLoading) {
+  if (!jobDataArr || isError || isLoading) {
     return (
-      <div>
-        {dummyArrCreator(9).map((dummy) => {
+      <div css={listContainer}>
+        {dummyArrCreator(10).map((dummy) => {
           return <JobCard isSkeleton key={`JobCardSkeleton${dummy}`} />;
         })}
       </div>
@@ -32,8 +23,8 @@ export const JobCardList: FunctionComponent<JobCardListProps> = ({
 
   return (
     <section css={listContainer}>
-      {jobArrData.map((job) => {
-        return <JobCard jobData={job} key={job.id} />;
+      {jobDataArr.map((jobData) => {
+        return <JobCard jobData={jobData} key={`JobCard${jobData.id}`} />;
       })}
     </section>
   );

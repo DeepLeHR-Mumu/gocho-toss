@@ -6,6 +6,7 @@ export interface JobArrRequestObjDef {
   userId?: string;
   filter?: "todayUpload" | "almostDeadline" | " deadline" | "expired" | "valid";
   parsing?: "full" | "raw";
+  companyId?: number;
 }
 
 export const jobArrKeyObj = {

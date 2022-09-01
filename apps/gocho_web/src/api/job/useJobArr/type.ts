@@ -4,6 +4,7 @@ import { JobObjDef } from "../type/jobArr";
 
 export interface ResponseObjDef {
   data: JobObjDef[];
+  count: number;
 }
 
 export interface GetJobArrDef {

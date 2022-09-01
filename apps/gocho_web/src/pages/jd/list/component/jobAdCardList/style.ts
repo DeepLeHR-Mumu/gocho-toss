@@ -22,7 +22,7 @@ export const sliderButton = css`
   font-size: 1.5rem;
   border-radius: 50%;
   color: ${COLORS.GRAY40};
-  background-color: ${COLORS.GRAY100};
+  background-color: ${COLORS.GRAY90};
   opacity: 0.7;
 
   transition: all 0.2s ease-in;
