@@ -13,12 +13,12 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "14.x"
-      - name: Install dependencies
-        run: pnpm install
-      - name: Install Playwright Browsers
-        run: pnpx playwright install --with-deps
+      # - name: Install dependencies
+      # run: pnpm install
+      # - name: Install Playwright Browsers
+      # run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: pnpx playwright test
+        run: pnpm playwright
       - uses: actions/upload-artifact@v2
         if: always()
         with:
