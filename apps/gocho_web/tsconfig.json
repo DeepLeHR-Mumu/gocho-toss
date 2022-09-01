@@ -1,66 +1,21 @@
 {
   "extends": "tsconfig-deeple/nextjs.json",
   "compilerOptions": {
-    "types": [
-      "@emotion/react/types/css-prop"
-    ],
+    "types": ["@emotion/react/types/css-prop"],
     "baseUrl": ".",
     "paths": {
-      "@public/*": [
-        "public/*"
-      ],
-      "@component/*": [
-        "src/component/*"
-      ],
-      "@constant/*": [
-        "src/constant/*"
-      ],
-      "@pages/*": [
-        "src/pages/*"
-      ],
-      "@type/*": [
-        "src/type/*"
-      ],
-      "@style/*": [
-        "src/style/*"
-      ],
-      "@util/*": [
-        "src/util/*"
-      ],
-      "@api/*": [
-        "src/api/*"
-      ],
-      "@recoil/*": [
-        "src/recoil/*"
-      ],
-      "@hook/*": [
-        "src/hook/*"
-      ]
-    },
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "incremental": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve"
+      "@public/*": ["public/*"],
+      "@component/*": ["src/component/*"],
+      "@constant/*": ["src/constant/*"],
+      "@pages/*": ["src/pages/*"],
+      "@type/*": ["src/type/*"],
+      "@style/*": ["src/style/*"],
+      "@util/*": ["src/util/*"],
+      "@api/*": ["src/api/*"],
+      "@recoil/*": ["src/recoil/*"],
+      "@hook/*": ["src/hook/*"]
+    }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }
