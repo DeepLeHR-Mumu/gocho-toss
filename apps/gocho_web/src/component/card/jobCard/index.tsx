@@ -53,6 +53,9 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
     );
   }
 
+  const today = new Date();
+  const isExpired = jobData.endTime - Number(today) < 0;
+
   const {
     year: startYear,
     month: startMonth,
@@ -66,7 +69,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   } = dateConverter(jobData.endTime);
 
   return (
-    <article css={cardWrapper}>
+    <article css={cardWrapper(isExpired)}>
       <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
         <a>
           <button type="button" css={bookmarkButtonWrapper}>

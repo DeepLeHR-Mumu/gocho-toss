@@ -11,34 +11,36 @@ export const jobCardSkeleton = css`
   background-color: ${COLORS.GRAY100};
 `;
 
-export const cardWrapper = css`
-  position: relative;
-  width: 49.5%;
-  height: 16rem;
-  border-radius: 1.5rem;
-  margin-bottom: 1rem;
-  padding: 1.5rem;
-  background-color: ${COLORS.GRAY100};
-  box-shadow: 0 0 8px rgba(43, 43, 43, 0.1);
-  transition: all 0.3s ease;
+export const cardWrapper = (isExpired = false) => {
+  return css`
+    position: relative;
+    width: 49.5%;
+    height: 16rem;
+    border-radius: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    background-color: ${isExpired ? COLORS.GRAY90 : `${COLORS.GRAY100}`};
+    box-shadow: 0 0 8px rgba(43, 43, 43, 0.1);
+    transition: all 0.3s ease;
 
-  ${PC_HOVER} {
-    :hover .Logo {
-      width: 8.5rem;
-      height: 8.5rem;
-      box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
-    }
+    ${PC_HOVER} {
+      :hover .Logo {
+        width: 8.5rem;
+        height: 8.5rem;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+      }
 
-    :hover .hoverButton {
-      opacity: 1;
-    }
+      :hover .hoverButton {
+        opacity: 1;
+      }
 
-    :hover {
-      transform: translateY(-2px);
-      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+      :hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+      }
     }
-  }
-`;
+  `;
+}
 
 export const bookmarkButtonWrapper = css`
   display: flex;
@@ -203,6 +205,7 @@ export const hoverButton = css`
   right: 1.5rem;
   font-size: 0.875rem;
   color: ${COLORS.BLUE_FIRST40};
+  background-color: ${COLORS.GRAY100};
   padding: 0.75rem 3rem;
   border-radius: 1.5rem;
   transition: all 0.3s ease;
