@@ -72,3 +72,19 @@ export const setJobOrderButton = (active = false) => {
     }
   `;
 };
+
+export const infoContainer = css`
+  display: flex;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: ${COLORS.GRAY60};
+`;
+
+export const infoImage = css`
+  margin: 0 1rem;
+
+  &:last-of-type {
+    margin-left: 0;
+  }
+`;

@@ -29,6 +29,10 @@ export const cardWrapper = css`
       box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
     }
 
+    :hover .hoverButton {
+      opacity: 1;
+    }
+
     :hover {
       transform: translateY(-2px);
       box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
@@ -189,4 +193,18 @@ export const taskBox = css`
   margin-right: 0.5rem;
   color: ${COLORS.GRAY40};
   border: 1px solid ${COLORS.GRAY40};
+`;
+
+export const hoverButton = css`
+  opacity: 0;
+  z-index: 20;
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  font-size: 0.875rem;
+  color: ${COLORS.BLUE_FIRST40};
+  padding: 0.75rem 3rem;
+  border-radius: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 12px 0 #eeeeee;
 `;

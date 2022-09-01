@@ -1,6 +1,10 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { FiSearch } from "react-icons/fi";
+import { FiSearch, FiInfo } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
+import Image from "next/image";
+
+import highTrue from "@public/images/global/common/go_color.svg";
+import collegeTrue from "@public/images/global/common/cho_color.svg";
 
 import { Layout } from "@component/layout";
 import { useJobArr } from "@api/job";
@@ -26,6 +30,8 @@ import {
   searchButton,
   buttonArrContainer,
   setJobOrderButton,
+  infoContainer,
+  infoImage,
 } from "./style";
 
 export const ListPart: FunctionComponent = () => {
@@ -134,6 +140,16 @@ export const ListPart: FunctionComponent = () => {
             />
           </div>
         </form>
+        <div css={infoContainer}>
+          <FiInfo />
+          <div css={infoImage}>
+            <Image src={highTrue} alt="" />
+          </div>
+          <div css={infoImage}>
+            <Image src={collegeTrue} alt="" />
+          </div>
+          고는 고졸지원가능 초는 초대졸 지원 가능합니다
+        </div>
         <JobCardList
           jobDataArr={jobDataArr?.jobDataArr}
           isLoading={isLoading}

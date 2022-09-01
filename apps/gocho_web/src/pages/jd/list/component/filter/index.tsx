@@ -37,7 +37,7 @@ export const Filter: FunctionComponent<FilterProps> = ({
   setValue,
   getValues,
 }) => {
-  const [activeMenu, setActiveMenu] = useState<filterMenuDef | null>();
+  const [activeMenu, setActiveMenu] = useState<filterMenuDef | null>(null);
 
   const watchList: watchListDef[] = filterMenuListArr.map((menu) => {
     return { query: menu.query, categoryArr: watch(menu.query) };

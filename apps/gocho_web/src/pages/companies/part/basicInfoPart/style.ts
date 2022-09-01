@@ -28,6 +28,17 @@ export const infoTitle = css`
 
 export const info = css`
   flex-grow: 1;
+  max-width: 15rem;
+  word-break: break-all;
+  display: flex;
+  align-items: center;
+`;
+
+export const nozoImage = css`
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-left: 1rem;
+  position: relative;
 `;
 
 export const mapView = css`

@@ -1,7 +1,18 @@
 import { FunctionComponent, useEffect } from "react";
+import Image from "next/image";
+
+import nozoTrue from "@public/images/global/companyDetail/nozo_true_icon.svg";
+import nozoFalse from "@public/images/global/companyDetail/nozo_false_icon.svg";
 
 import { BasicInfoPartProps } from "./type";
-import { infoContainer, flexBox, infoTitle, info, mapView } from "./style";
+import {
+  infoContainer,
+  flexBox,
+  infoTitle,
+  info,
+  nozoImage,
+  mapView,
+} from "./style";
 
 declare global {
   interface Window {
@@ -103,6 +114,9 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
           <h4 css={infoTitle}>노조여부</h4>
           <div css={info}>
             {companyData.nozo.exists ? "노조 있음" : "노조 없음"}
+            <div css={nozoImage}>
+              <Image src={companyData.nozo.exists ? nozoTrue : nozoFalse} />
+            </div>
           </div>
         </div>
       </div>

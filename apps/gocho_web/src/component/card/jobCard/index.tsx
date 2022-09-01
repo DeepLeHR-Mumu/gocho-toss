@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BsFillBookmarkFill } from "react-icons/bs";
@@ -36,12 +36,15 @@ import {
   taskSummary,
   taskNumber,
   taskBox,
+  hoverButton,
 } from "./style";
 
 export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   jobData,
   isSkeleton,
 }) => {
+  const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
+
   if (isSkeleton || typeof jobData === "undefined") {
     return (
       <div css={jobCardSkeleton}>
@@ -81,8 +84,11 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
                 <Image
                   layout="fill"
                   objectFit="contain"
-                  src={jobData.companyLogo || defaultCompanyLogo}
+                  src={imageSrc}
                   alt=""
+                  onError={() => {
+                    return setImageSrc(defaultCompanyLogo);
+                  }}
                 />
               </div>
             </div>
@@ -141,6 +147,12 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
               );
             })}
           </div>
+
+          <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
+            <a css={hoverButton} className="hoverButton">
+              공고보기
+            </a>
+          </Link>
         </a>
       </Link>
     </article>

@@ -69,7 +69,7 @@ export const ExpJobCard: FunctionComponent<
           <div css={companyName}>{companyData.name}</div>
           <div css={buttonContainer}>
             <Link href={`${COMPANY_DETAIL_URL}/${companyData.id}`} passHref>
-              <a css={moreExpJobButton}>만료공고 더보기</a>
+              <a css={moreExpJobButton}>공고 더보기</a>
             </Link>
             <Link href={`${COMPANY_DETAIL_URL}/${companyData.id}`} passHref>
               <a css={companyDetailButton}>기업상세</a>
