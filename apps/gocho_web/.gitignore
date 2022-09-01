@@ -34,3 +34,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# cypress
+cypress/videos
+cypress/screenshots
+.nyc_output
+
+# vscode
+.vscode
+
+# jetbrain
+.idea
