@@ -4,4 +4,5 @@ export interface ContainerBoxProps {
     marginValue: number;
     maxWidth?: number;
   };
+  children: React.ReactNode;
 }
