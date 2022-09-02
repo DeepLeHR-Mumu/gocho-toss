@@ -85,7 +85,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
     return () => {
       return mapScript.removeEventListener("load", onLoadKakaoMap);
     };
-  }, []);
+  }, [companyData.address]);
 
   return (
     <div css={infoContainer}>

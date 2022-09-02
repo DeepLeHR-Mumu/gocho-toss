@@ -39,13 +39,14 @@ export const TipCardList: FunctionComponent<TipCardListProps> = ({
 
   useEffect(() => {
     if (observerRef.current) {
-      // 기존에 IntersectionObserver이 있을 경우
-      observerRef.current.disconnect(); // 연결 해제
+      observerRef.current.disconnect();
     }
 
-    observerRef.current = new IntersectionObserver(intersectionObserver); // IntersectionObserver 새롭게 정의
-    if (boxRef.current) observerRef.current.observe(boxRef.current); // boxRef 관찰 시작
-  }, [infiniteTipArrData]); // res 값이 변경될때마다 실행
+    observerRef.current = new IntersectionObserver(intersectionObserver, {
+      threshold: 0.2,
+    });
+    if (boxRef.current) observerRef.current.observe(boxRef.current);
+  }, [infiniteTipArrData, intersectionObserver]);
 
   if (!infiniteTipArrData || isError || isLoading) {
     return (
@@ -64,7 +65,6 @@ export const TipCardList: FunctionComponent<TipCardListProps> = ({
           return <TipCard tipData={tipData} key={tipData.id} />;
         });
       })}
-      {/* LATER 마지막에 도달했을 시 무한 요청 해결 */}
       <div ref={boxRef} />
     </div>
   );

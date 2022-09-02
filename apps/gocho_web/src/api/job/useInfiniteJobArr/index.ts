@@ -14,7 +14,7 @@ export const getInfiniteJobArr: GetInfiniteJobArrDef = async ({
   pageParam,
 }) => {
   const { data } = await axiosInstance.get("/jds", {
-    params: requestObj,
+    params: { ...requestObj, offset: pageParam },
   });
 
   const nextPage = pageParam === undefined ? 10 : pageParam + 10;

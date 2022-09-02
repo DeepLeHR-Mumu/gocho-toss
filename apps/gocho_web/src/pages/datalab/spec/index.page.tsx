@@ -25,7 +25,7 @@ const MainList: NextPage = () => {
     return () => {
       closeModal();
     };
-  }, []);
+  }, [closeModal]);
 
   return (
     <main>
