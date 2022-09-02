@@ -29,7 +29,6 @@ export const useInfiniteSpecArr = (requestObj: SpecArrInfinityRequestDef) => {
     {
       getNextPageParam: (responseObj) => {
         return responseObj.data.length !== 0 ? responseObj.nextPage : undefined;
-
       },
       select: (data) => {
         return {

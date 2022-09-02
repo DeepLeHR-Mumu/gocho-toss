@@ -32,16 +32,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           keepPreviousData: true,
           retry: 0,
           onError: (error) => {
-            if (
-              axios.isAxiosError(error) &&
-              error.response?.status === 404
-            ) {
+            if (axios.isAxiosError(error) && error.response?.status === 404) {
               router.push("/404");
             }
-            if (
-              axios.isAxiosError(error) &&
-              error.response?.status === 500
-            ) {
+            if (axios.isAxiosError(error) && error.response?.status === 500) {
               router.push("/404");
             }
           },

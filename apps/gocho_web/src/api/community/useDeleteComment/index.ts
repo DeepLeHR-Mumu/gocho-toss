@@ -21,7 +21,8 @@ const postDeleteComment: PostDeleteCommentDef = async (requestObj) => {
 };
 
 export const useDeleteComment: useDeleteCommentProps = () => {
-  const mutationResult =
-    useMutation<ResponseDef, AxiosError, RequestObjDef>(postDeleteComment);
+  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(
+    postDeleteComment
+  );
   return mutationResult;
 };

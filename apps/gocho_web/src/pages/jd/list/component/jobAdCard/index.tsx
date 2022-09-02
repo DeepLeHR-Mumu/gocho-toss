@@ -17,43 +17,44 @@ import {
   companyName,
 } from "./style";
 
-export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> =
-  ({ jobAdData, isSkeleton }) => {
-    if (isSkeleton || jobAdData === undefined) {
-      return (
-        <div css={jobAdCardSkeleton}>
-          <SkeletonBox />
-        </div>
-      );
-    }
-
-    const { month: startMonth, date: startDate } = dateConverter(
-      jobAdData.startTime
-    );
-
-    const { month: endMonth, date: endDate } = dateConverter(jobAdData.endTime);
-
+export const JobAdCard: FunctionComponent<
+  JobAdCardProps | JobAdCardSkeleton
+> = ({ jobAdData, isSkeleton }) => {
+  if (isSkeleton || jobAdData === undefined) {
     return (
-      <article css={cardWrapper}>
-        <div css={mainContainer}>
-          <div css={companyLogoWrapper}>
-            <div css={companyLogoBox}>
-              <Image
-                layout="fill"
-                objectFit="contain"
-                src={jobAdData.companyLogo || defaultCompanyLogo}
-                alt=""
-              />
-            </div>
-          </div>
-          <div css={infoContainer}>
-            <div css={companyName}>{jobAdData.companyName}</div>
-            <div css={date}>
-              {`${startMonth}/${startDate}`}~{`${endMonth}/${endDate}`}
-            </div>
+      <div css={jobAdCardSkeleton}>
+        <SkeletonBox />
+      </div>
+    );
+  }
+
+  const { month: startMonth, date: startDate } = dateConverter(
+    jobAdData.startTime
+  );
+
+  const { month: endMonth, date: endDate } = dateConverter(jobAdData.endTime);
+
+  return (
+    <article css={cardWrapper}>
+      <div css={mainContainer}>
+        <div css={companyLogoWrapper}>
+          <div css={companyLogoBox}>
+            <Image
+              layout="fill"
+              objectFit="contain"
+              src={jobAdData.companyLogo || defaultCompanyLogo}
+              alt=""
+            />
           </div>
         </div>
-        <h3>{jobAdData.title}</h3>
-      </article>
-    );
-  };
+        <div css={infoContainer}>
+          <div css={companyName}>{jobAdData.companyName}</div>
+          <div css={date}>
+            {`${startMonth}/${startDate}`}~{`${endMonth}/${endDate}`}
+          </div>
+        </div>
+      </div>
+      <h3>{jobAdData.title}</h3>
+    </article>
+  );
+};

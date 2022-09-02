@@ -11,6 +11,8 @@ export default {
   },
 } as ComponentMeta<typeof Footer>;
 
-const Template: ComponentStory<typeof Footer> = () => {return <Footer />};
+const Template: ComponentStory<typeof Footer> = () => {
+  return <Footer />;
+};
 
 export const 기본 = Template.bind({});

@@ -2,32 +2,29 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { axiosInstance } from "@api/axiosInstance";
 import {
-  communityPostingArrKeyObj,
-  CommunityPostingArrRequestDef,
-} from "@constant/queryKeyFactory/community/postingArrKeyObj";
+  jobArrKeyObj,
+  JobArrRequestObjDef,
+} from "@constant/queryKeyFactory/job/jobArrKeyObj";
 
-import { GetInfinitePostingArrDef } from "./type";
+import { GetInfiniteJobArrDef } from "./type";
 import { selector } from "./util";
 
-export const getInfiniteCommunityPostingArr: GetInfinitePostingArrDef = async ({
+export const getInfiniteJobArr: GetInfiniteJobArrDef = async ({
   queryKey: [{ requestObj }],
   pageParam,
 }) => {
-  const { data } = await axiosInstance.get(`/postings`, {
-    params: { ...requestObj, offset: pageParam },
+  const { data } = await axiosInstance.get("/jds", {
+    params: requestObj,
   });
 
   const nextPage = pageParam === undefined ? 10 : pageParam + 10;
-
   return { ...data, nextPage };
 };
 
-export const useInfiniteCommunityPostingArr = (
-  requestObj: CommunityPostingArrRequestDef
-) => {
+export const useInfiniteJobArr = (requestObj: JobArrRequestObjDef) => {
   const queryResult = useInfiniteQuery(
-    communityPostingArrKeyObj.infinite(requestObj),
-    getInfiniteCommunityPostingArr,
+    jobArrKeyObj.infinite(requestObj),
+    getInfiniteJobArr,
     {
       getNextPageParam: (responseObj) => {
         return responseObj.data.length !== 0 ? responseObj.nextPage : undefined;
@@ -35,7 +32,7 @@ export const useInfiniteCommunityPostingArr = (
       select: (data) => {
         return {
           pages: data.pages.map((page) => {
-            return selector(page);
+            return selector(page.data, page.count);
           }),
           pageParams: [...data.pageParams],
         };

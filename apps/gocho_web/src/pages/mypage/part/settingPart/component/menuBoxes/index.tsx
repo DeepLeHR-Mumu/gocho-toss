@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import Link from "next/link";
 import { FiHome, FiSettings } from "react-icons/fi";
 
-import {  MYPAGE_URL } from "@constant/internalURL";
+import { MYPAGE_URL } from "@constant/internalURL";
 
 import { MenuBoxesProps } from "./type";
 import { boxWrapper } from "./style";

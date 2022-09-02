@@ -29,4 +29,3 @@ export interface SubmitButtonProps {
   };
   buttonClick?: never;
 }
-

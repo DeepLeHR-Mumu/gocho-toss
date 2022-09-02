@@ -107,7 +107,9 @@ const CompaniesDetail: NextPage = () => {
             채용공고 모음
           </button>
         </div>
-        {shownData === "info" && (
+      </Layout>
+      {shownData === "info" && (
+        <Layout>
           <div css={flexBox}>
             <div css={partContainer}>
               <section css={sectionContainer}>
@@ -159,11 +161,9 @@ const CompaniesDetail: NextPage = () => {
             </div>
             <div css={tempChatBox}>This will be Chat</div>
           </div>
-        )}
-        {shownData === "job" && (
-          <CompanyJobPart companyId={Number(companyId)} />
-        )}
-      </Layout>
+        </Layout>
+      )}
+      {shownData === "job" && <CompanyJobPart companyId={Number(companyId)} />}
     </main>
   );
 };

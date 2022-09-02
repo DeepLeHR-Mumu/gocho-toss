@@ -6,7 +6,7 @@ import {
   COMMUNITY_TIPS_LIST_URL,
   SPEC_URL,
   INTERVIEW_REVIEW,
-  DATALAB_DETAIL
+  DATALAB_DETAIL,
 } from "@constant/internalURL";
 
 export const menuArr = [

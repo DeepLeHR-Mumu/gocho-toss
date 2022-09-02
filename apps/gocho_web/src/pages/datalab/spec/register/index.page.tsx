@@ -28,7 +28,7 @@ const Register: NextPage = () => {
     if (currentModal?.activatedModal === "signUpModal") {
       setCurrentModal("signUpModal");
     }
-  }, [error,]);
+  }, [error]);
 
   usePageBlocking(setCurrentModal);
   useResetProgress();

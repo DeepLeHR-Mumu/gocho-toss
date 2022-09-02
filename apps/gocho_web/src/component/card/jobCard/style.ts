@@ -40,7 +40,7 @@ export const cardWrapper = (isExpired = false) => {
       }
     }
   `;
-}
+};
 
 export const bookmarkButtonWrapper = css`
   display: flex;

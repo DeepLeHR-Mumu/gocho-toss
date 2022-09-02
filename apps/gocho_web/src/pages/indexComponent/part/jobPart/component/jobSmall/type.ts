@@ -4,6 +4,7 @@ export type JobSmallCardSkeleton = {
 };
 export type JobSmallCardProps = {
   jobData: {
+    id: number;
     companyName: string;
     companyLogo: string;
     title: string;

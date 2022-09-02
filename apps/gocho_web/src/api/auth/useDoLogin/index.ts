@@ -16,7 +16,8 @@ const postLogin: PostLoginDef = async (requestObj) => {
 };
 
 export const useDoLogin: useDoLoginProps = () => {
-  const mutationResult =
-    useMutation<ResponseObjDef, AxiosError, RequestObjDef>(postLogin);
+  const mutationResult = useMutation<ResponseObjDef, AxiosError, RequestObjDef>(
+    postLogin
+  );
   return mutationResult;
 };

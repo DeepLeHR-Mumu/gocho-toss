@@ -29,38 +29,30 @@ export const jobInfoBox = css`
   width: calc(100% - 5rem);
 `;
 
-export const companyNameBox = css`
+export const companyNameContainer = css`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  ${shorten()}
 `;
 
-export const companyNameCSS = css`
+export const companyNameBox = css`
+  width: 75%;
+  ${shorten()}
+`;
+
+export const companyName = css`
   font-size: 1.25rem;
   font-weight: 600;
   color: ${COLORS.GRAY10};
-  padding-bottom: 10px;
-  ${shorten()}
 `;
 
 export const titleCSS = css`
   font-size: 0.875rem;
   color: ${COLORS.GRAY30};
+  margin-top: 0.5rem;
   line-height: 1.2;
   ${shorten()}
-`;
-
-export const tagArrContainer = css`
-  display: flex;
-  margin-top: 1.5rem;
-`;
-
-export const tagCSS = css`
-  font-size: 0.875rem;
-  font-weight: 600;
-  margin-right: 1.75rem;
-  white-space: nowrap;
-  color: ${COLORS.GRAY30};
 `;
 
 export const jobCardSkeleton = css`
