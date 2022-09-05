@@ -8,9 +8,7 @@ import { Layout } from "@component/layout";
 import { CompanyJobPartProps } from "./type";
 import { partContainer, listContainer } from "./style";
 
-export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({
-  companyId,
-}) => {
+export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({ companyId }) => {
   const {
     data: jobDataArr,
     isLoading,
@@ -24,10 +22,7 @@ export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({
   const observerRef = useRef<IntersectionObserver>();
   const boxRef = useRef<HTMLDivElement>(null);
 
-  const intersectionObserver = (
-    entries: IntersectionObserverEntry[],
-    io: IntersectionObserver
-  ) => {
+  const intersectionObserver = (entries: IntersectionObserverEntry[], io: IntersectionObserver) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         // 관찰하고 있는 entry가 화면에 보여지는 경우

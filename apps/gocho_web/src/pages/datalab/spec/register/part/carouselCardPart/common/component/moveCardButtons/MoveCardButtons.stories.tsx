@@ -3,8 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { MoveCardButtons } from ".";
 
 export default {
-  title:
-    "datalab/spec/register/part/carouselCardPart/common/component/MoveCardButtons",
+  title: "datalab/spec/register/part/carouselCardPart/common/component/MoveCardButtons",
   component: MoveCardButtons,
   argTypes: {
     movePrevCard: {
@@ -30,8 +29,7 @@ export default {
     backgrounds: {
       default: "dark",
     },
-    componentSubtitle:
-      "스펙등록 각 카드에서 이전/다음으로 넘어가는 동작 + 작성된 데이터를 post하기위한 버튼",
+    componentSubtitle: "스펙등록 각 카드에서 이전/다음으로 넘어가는 동작 + 작성된 데이터를 post하기위한 버튼",
   },
 } as ComponentMeta<typeof MoveCardButtons>;
 

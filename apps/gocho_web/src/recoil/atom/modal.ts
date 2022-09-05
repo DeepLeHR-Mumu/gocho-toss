@@ -51,17 +51,9 @@ export interface factoryObjDef {
   factoryName: string;
 }
 
-export type contentModalDef =
-  | postingObjDef
-  | tipObjDef
-  | changePostingObjDef
-  | factoryObjDef;
+export type contentModalDef = postingObjDef | tipObjDef | changePostingObjDef | factoryObjDef;
 
-export type contentModalNameDef =
-  | "postingModal"
-  | "tipModal"
-  | "changePostingModal"
-  | "factoryModal";
+export type contentModalNameDef = "postingModal" | "tipModal" | "changePostingModal" | "factoryModal";
 
 export type modalNameDef =
   | "loginModal"

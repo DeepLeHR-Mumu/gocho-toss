@@ -65,9 +65,7 @@ export const buttonCSSCreator: buttonCSSDef = (location) => {
     z-index: 10;
     transform: translate(-50%, -50%);
     transition: all 0.2s ease-in;
-    ${location === "left"
-      ? "left:calc(50% - 15rem)"
-      : "right:calc(50% - 19rem)"};
+    ${location === "left" ? "left:calc(50% - 15rem)" : "right:calc(50% - 19rem)"};
 
     ${PC_HOVER} {
       :hover {

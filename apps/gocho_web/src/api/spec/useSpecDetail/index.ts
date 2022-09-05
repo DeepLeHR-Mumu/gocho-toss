@@ -2,10 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { axiosInstance } from "@api/axiosInstance";
 
-import {
-  specDetailKeyObj,
-  SpecDetailRequestDef,
-} from "@constant/queryKeyFactory/spec/detailKeyObj";
+import { specDetailKeyObj, SpecDetailRequestDef } from "@constant/queryKeyFactory/spec/detailKeyObj";
 import { selector } from "./util";
 import { GetSpecDetailDef } from "./type";
 
@@ -25,15 +22,11 @@ export const getSpecDetail: GetSpecDetailDef = async ({
 };
 
 export const useSpecDetail = (requestObj: SpecDetailRequestDef) => {
-  const queryResult = useQuery(
-    specDetailKeyObj.spec(requestObj),
-    getSpecDetail,
-    {
-      select: ({ data }) => {
-        return selector(data);
-      },
-      enabled: Boolean(requestObj.specId),
-    }
-  );
+  const queryResult = useQuery(specDetailKeyObj.spec(requestObj), getSpecDetail, {
+    select: ({ data }) => {
+      return selector(data);
+    },
+    enabled: Boolean(requestObj.specId),
+  });
   return queryResult;
 };

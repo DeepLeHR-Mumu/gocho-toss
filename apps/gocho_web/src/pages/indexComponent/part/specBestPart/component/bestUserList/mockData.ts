@@ -1176,8 +1176,7 @@ export const data = [
       careers: [
         {
           dept: "품질관리팀(차단기검사)",
-          detail:
-            "귝내 및 국외의 변전소와 발전소에 설치된 GIS 현장시험 밑 유지보수 업무",
+          detail: "귝내 및 국외의 변전소와 발전소에 설치된 GIS 현장시험 밑 유지보수 업무",
           onWork: "정규직",
           company: "효성중공업",
           endYear: "2020",

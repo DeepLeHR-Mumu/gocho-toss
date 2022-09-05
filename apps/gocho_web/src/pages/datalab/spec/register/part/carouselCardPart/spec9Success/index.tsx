@@ -15,8 +15,7 @@ export const Spec9Success: FunctionComponent = () => {
         <p css={desc}>
           스펙이 등록되었습니다.
           <br />
-          다른 사용자들의 스펙을 5개 이상 평가하고 자신의 평가내역을
-          확인해보세요
+          다른 사용자들의 스펙을 5개 이상 평가하고 자신의 평가내역을 확인해보세요
         </p>
       </div>
 

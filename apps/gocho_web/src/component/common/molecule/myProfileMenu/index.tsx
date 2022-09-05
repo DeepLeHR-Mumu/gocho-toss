@@ -4,18 +4,11 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { profileMenuArr } from "@constant/menuArr";
 
-import {
-  myProfileMenuWrapper,
-  myProfileTitle,
-  myProfileMenuCSS,
-  logoutCSS,
-} from "./style";
+import { myProfileMenuWrapper, myProfileTitle, myProfileMenuCSS, logoutCSS } from "./style";
 
 import { MyProfileMenuProps } from "./type";
 
-export const MyProfileMenu: FunctionComponent<MyProfileMenuProps> = ({
-  active,
-}) => {
+export const MyProfileMenu: FunctionComponent<MyProfileMenuProps> = ({ active }) => {
   const queryClient = useQueryClient();
 
   const doLogout = () => {

@@ -38,11 +38,9 @@ export const StarEvaluation: FunctionComponent<SettingProps | DisplayProps> = ({
           dummyArrCreator(5).map((val) => {
             const point = val + 1;
             const rounded = Math.round(score);
-            if (point <= rounded / 2 && rounded / 2 !== 0.5)
-              return <BsStarFill key={`filledStar${val + 1}`} />;
+            if (point <= rounded / 2 && rounded / 2 !== 0.5) return <BsStarFill key={`filledStar${val + 1}`} />;
 
-            if (point - rounded / 2 === 0.5)
-              return <BsStarHalf key={`halfStar${val + 1}`} />;
+            if (point - rounded / 2 === 0.5) return <BsStarHalf key={`halfStar${val + 1}`} />;
 
             return <BsStar key={`emptyStar${val + 1}`} />;
           })}
@@ -53,8 +51,7 @@ export const StarEvaluation: FunctionComponent<SettingProps | DisplayProps> = ({
             if (point <= visibleScore / 2 && visibleScore / 2 !== 0.5)
               return <BsStarFill key={`filledStar${val + 1}`} />;
 
-            if (point - visibleScore / 2 === 0.5)
-              return <BsStarHalf key={`halfStar${val + 1}`} />;
+            if (point - visibleScore / 2 === 0.5) return <BsStarHalf key={`halfStar${val + 1}`} />;
 
             return <BsStar key={`emptyStar${val + 1}`} />;
           })}

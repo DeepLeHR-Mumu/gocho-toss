@@ -21,9 +21,11 @@ import {
 } from "./style";
 import { PostingCardProps, PostingCardSkeleton } from "./type";
 
-export const PostingCard: FunctionComponent<
-  PostingCardProps | PostingCardSkeleton
-> = ({ postingData, isSkeleton, modalOpen }) => {
+export const PostingCard: FunctionComponent<PostingCardProps | PostingCardSkeleton> = ({
+  postingData,
+  isSkeleton,
+  modalOpen,
+}) => {
   if (isSkeleton || postingData === undefined) {
     return (
       <div css={postingCardSkeleton}>

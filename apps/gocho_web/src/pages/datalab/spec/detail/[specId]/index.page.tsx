@@ -15,11 +15,7 @@ import { container, loadingBox, mainWrapper, wrapper } from "./style";
 const Detail: NextPage = () => {
   const router = useRouter();
   const { specId } = router.query;
-  const {
-    data: specDetailData,
-    error,
-    isLoading,
-  } = useSpecDetail({ specId: Number(specId) });
+  const { data: specDetailData, error, isLoading } = useSpecDetail({ specId: Number(specId) });
 
   if (axios.isAxiosError(error) && error.response?.status === 401) {
     return <div>로그인 안됐는데?{JSON.stringify(error.response)}</div>;

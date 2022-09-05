@@ -10,18 +10,9 @@ import { useWriteComment } from "@api/community/useWriteComment";
 import { communityCommentArrKeyObj } from "@constant/queryKeyFactory/community/commentArrKeyObj";
 
 import { WriteCommentProps, CommentFormValues } from "./type";
-import {
-  formCSS,
-  userProfileImage,
-  writeCommentBox,
-  writeCommentWrapper,
-  postCommentButton,
-} from "./style";
+import { formCSS, userProfileImage, writeCommentBox, writeCommentWrapper, postCommentButton } from "./style";
 
-export const WriteComment: FunctionComponent<WriteCommentProps> = ({
-  postingId,
-  parentCommentId,
-}) => {
+export const WriteComment: FunctionComponent<WriteCommentProps> = ({ postingId, parentCommentId }) => {
   const { data: userInfoData } = useUserInfo();
   const { register, handleSubmit, reset } = useForm<CommentFormValues>({
     defaultValues: {
@@ -50,11 +41,7 @@ export const WriteComment: FunctionComponent<WriteCommentProps> = ({
   return (
     <form css={formCSS} onSubmit={handleSubmit(commentSubmit)}>
       <div css={writeCommentWrapper}>
-        <div css={userProfileImage}>
-          {userInfoData && (
-            <ProfileImg imageStr={userInfoData.image} size="S" />
-          )}
-        </div>
+        <div css={userProfileImage}>{userInfoData && <ProfileImg imageStr={userInfoData.image} size="S" />}</div>
         <TextareaAutosize
           {...register("description", {
             required: true,

@@ -8,9 +8,7 @@ import { ModalComponent } from "@component/modal/modalBackground";
 import { PageBlockingBoxProps } from "./type";
 import { title, wrapper, descCSS, flexBox, noButton, yesButton } from "./style";
 
-const PageBlockingBox: FunctionComponent<PageBlockingBoxProps> = ({
-  closeModal,
-}) => {
+const PageBlockingBox: FunctionComponent<PageBlockingBoxProps> = ({ closeModal }) => {
   const { setIsBlocking } = useIsSpecPageBlocking();
 
   const doNotBlocking = () => {
@@ -26,9 +24,7 @@ const PageBlockingBox: FunctionComponent<PageBlockingBoxProps> = ({
   return (
     <div css={wrapper}>
       <h2 css={title}>페이지를 나가시겠습니까?</h2>
-      <p css={descCSS}>
-        이전 / 다음 버튼으로 현재까지 입력한 스펙을 저장할 수 있습니다.
-      </p>
+      <p css={descCSS}>이전 / 다음 버튼으로 현재까지 입력한 스펙을 저장할 수 있습니다.</p>
       <div css={flexBox}>
         <button type="button" css={noButton} onClick={doBlocking}>
           아니오

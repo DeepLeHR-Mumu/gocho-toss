@@ -4,8 +4,7 @@ import { css } from "@emotion/react";
 import { WarningText } from ".";
 
 export default {
-  title:
-    "datalab/spec/register/part/carouselCardPart/common/component/WarningText",
+  title: "datalab/spec/register/part/carouselCardPart/common/component/WarningText",
   component: WarningText,
   argTypes: {
     msg: {

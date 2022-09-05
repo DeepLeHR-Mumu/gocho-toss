@@ -37,16 +37,8 @@ export const TipBox: FunctionComponent = () => {
     return <div>error!!</div>;
   }
 
-  const {
-    thumbnailSrc,
-    title,
-    tagArr,
-    description,
-    createdTime,
-    likeCount,
-    viewCount,
-    imgPageCount,
-  } = currentModal.modalContentObj as tipObjDef;
+  const { thumbnailSrc, title, tagArr, description, createdTime, likeCount, viewCount, imgPageCount } =
+    currentModal.modalContentObj as tipObjDef;
 
   const { year, month, date } = dateConverter(createdTime);
   return (

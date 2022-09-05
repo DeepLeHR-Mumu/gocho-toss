@@ -6,14 +6,7 @@ import { CompanyCommentCard } from "@component/card/companyComment";
 import { Layout } from "@component/layout";
 import { useCompanyArr } from "@api/company/useCompanyArr";
 
-import {
-  partContainer,
-  title,
-  colorPoint,
-  cardListContainer,
-  sliderContainer,
-  buttonCSSCreator,
-} from "./style";
+import { partContainer, title, colorPoint, cardListContainer, sliderContainer, buttonCSSCreator } from "./style";
 import { setCarouselSetting } from "./util";
 
 export const CompanyCommentPart: FunctionComponent = () => {
@@ -33,12 +26,7 @@ export const CompanyCommentPart: FunctionComponent = () => {
       <section css={cardListContainer}>
         <Slider {...setCarouselSetting()} ref={sliderRef} css={sliderContainer}>
           {companyDataArr.companyDataArr.map((data) => {
-            return (
-              <CompanyCommentCard
-                companyId={data.id}
-                key={`companyComment${data.id}`}
-              />
-            );
+            return <CompanyCommentCard companyId={data.id} key={`companyComment${data.id}`} />;
           })}
         </Slider>
         <button

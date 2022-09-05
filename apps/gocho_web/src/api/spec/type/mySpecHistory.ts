@@ -83,14 +83,7 @@ export interface specArrDef {
     class_miss: number;
   };
   id: number;
-  image:
-    | "default"
-    | "default_work"
-    | "jobi"
-    | "jobi_safety"
-    | "jobi_chat"
-    | "jobi_play"
-    | "jobi_teach";
+  image: "default" | "default_work" | "jobi" | "jobi_safety" | "jobi_chat" | "jobi_play" | "jobi_teach";
   language: LanguageType | null;
   last_education: "고졸" | "초대졸";
   military: "군필" | "미필" | "면제-해당없음";

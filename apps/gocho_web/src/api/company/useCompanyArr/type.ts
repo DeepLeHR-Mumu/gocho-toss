@@ -8,9 +8,5 @@ interface ResponseObjDef {
 }
 
 export interface GetCompanyArrDef {
-  ({
-    queryKey,
-  }: QueryFunctionContext<
-    ReturnType<typeof companyArrKeyObj.companyArr>
-  >): Promise<ResponseObjDef>;
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof companyArrKeyObj.companyArr>>): Promise<ResponseObjDef>;
 }

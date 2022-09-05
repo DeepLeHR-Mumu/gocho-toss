@@ -3,17 +3,10 @@ import { FunctionComponent, useState } from "react";
 import { SpecCardList } from "../../component/specCardList";
 import { setSpecOrderButtonArr } from "./constant";
 import { OrderDef, changeOrderDef } from "./type";
-import {
-  partContainer,
-  mainContainer,
-  listContainer,
-  OrderButtonContainer,
-  setSpecOrderButton,
-} from "./style";
+import { partContainer, mainContainer, listContainer, OrderButtonContainer, setSpecOrderButton } from "./style";
 
 export const ListPart: FunctionComponent = () => {
-  const [activeButtonOrder, setActiveButtonOrder] =
-    useState<OrderDef>("recent");
+  const [activeButtonOrder, setActiveButtonOrder] = useState<OrderDef>("recent");
 
   const changeOrder: changeOrderDef = (newOrder: OrderDef) => {
     setActiveButtonOrder(newOrder);

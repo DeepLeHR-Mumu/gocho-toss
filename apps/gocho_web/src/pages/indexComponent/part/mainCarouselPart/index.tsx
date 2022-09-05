@@ -7,11 +7,7 @@ import { Control } from "./component/control";
 
 import { carouselArr } from "./constant";
 import { setCarouselSetting } from "./util";
-import {
-  mainCarouselWrapper,
-  carouselContainer,
-  invisibleHeading,
-} from "./style";
+import { mainCarouselWrapper, carouselContainer, invisibleHeading } from "./style";
 
 export const MainCarouselPart: FunctionComponent = () => {
   const [activeIndex, setActiveIndex] = useState<number>(1);

@@ -5,25 +5,12 @@ import { useRouter } from "next/router";
 import { useUserInfo } from "@api/auth";
 
 import { ProfileImg } from "@component/common/atom/profileImg";
-import {
-  SPEC_MY_URL,
-  SPEC_URL,
-  SPEC_REGISTER_URL,
-} from "@constant/internalURL";
+import { SPEC_MY_URL, SPEC_URL, SPEC_REGISTER_URL } from "@constant/internalURL";
 
 import { AsideMenuProps } from "./type";
-import {
-  wrapper,
-  partContainer,
-  asideProfile,
-  loginNickname,
-  asideLink,
-  activeLink,
-} from "./style";
+import { wrapper, partContainer, asideProfile, loginNickname, asideLink, activeLink } from "./style";
 
-export const AsideMenu: FunctionComponent<AsideMenuProps> = ({
-  isFix = true,
-}) => {
+export const AsideMenu: FunctionComponent<AsideMenuProps> = ({ isFix = true }) => {
   const { data: userInfoData, error } = useUserInfo();
 
   const { pathname } = useRouter();

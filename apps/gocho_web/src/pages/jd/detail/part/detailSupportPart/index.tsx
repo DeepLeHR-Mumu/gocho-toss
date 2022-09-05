@@ -8,15 +8,7 @@ import { getJobTitleCreator } from "../common/util";
 
 import { getPossibleEduArr } from "./util";
 import { DetailSupportPartProps } from "./type";
-import {
-  container,
-  containerTitle,
-  flexBox,
-  flexBetweenBox,
-  subTitle,
-  desc,
-  restPoint,
-} from "../common/style";
+import { container, containerTitle, flexBox, flexBetweenBox, subTitle, desc, restPoint } from "../common/style";
 import {
   wrapper,
   logoImageBox,
@@ -30,9 +22,7 @@ import {
 } from "./style";
 import { NoDataDesc } from "../common/component/noDataDesc";
 
-export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({
-  freshPosition,
-}) => {
+export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ freshPosition }) => {
   return (
     <section css={wrapper}>
       <div css={logoImageBox}>
@@ -79,11 +69,9 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({
               <p css={desc}>
                 {freshPosition.requiredExp.type}
 
-                {freshPosition.requiredExp.maxYear >= 1 &&
-                  ` ${freshPosition.requiredExp.maxYear}년 이상`}
+                {freshPosition.requiredExp.maxYear >= 1 && ` ${freshPosition.requiredExp.maxYear}년 이상`}
 
-                {freshPosition.requiredExp.minYear >= 1 &&
-                  ` ${freshPosition.requiredExp.minYear}년 이하`}
+                {freshPosition.requiredExp.minYear >= 1 && ` ${freshPosition.requiredExp.minYear}년 이하`}
               </p>
             </div>
           </div>

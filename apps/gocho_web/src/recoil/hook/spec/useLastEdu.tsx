@@ -2,8 +2,7 @@ import { useRecoilState, useResetRecoilState } from "recoil";
 import { lastEducationAtom } from "@recoil/atom";
 
 export const useLastEdu = () => {
-  const [_currentLastEdu, _setCurrentLastEdu] =
-    useRecoilState(lastEducationAtom);
+  const [_currentLastEdu, _setCurrentLastEdu] = useRecoilState(lastEducationAtom);
 
   const resetLastEdu = useResetRecoilState(lastEducationAtom);
 

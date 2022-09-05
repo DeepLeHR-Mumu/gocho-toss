@@ -46,23 +46,10 @@ export const PostingBox: FunctionComponent = () => {
   const { mutate } = useDeletePosting();
   const queryClient = useQueryClient();
 
-  const {
-    id,
-    userID,
-    nickname,
-    title,
-    description,
-    type,
-    createdTime,
-    like,
-    view,
-  } = currentModal?.modalContentObj as postingObjDef;
+  const { id, userID, nickname, title, description, type, createdTime, like, view } =
+    currentModal?.modalContentObj as postingObjDef;
 
-  const {
-    data: commentArrData,
-    isLoading,
-    isError,
-  } = usePostingCommentArr({ postingId: id });
+  const { data: commentArrData, isLoading, isError } = usePostingCommentArr({ postingId: id });
 
   const openChangePostingModal = () => {
     setCurrentModal("changePostingModal", {
@@ -133,11 +120,7 @@ export const PostingBox: FunctionComponent = () => {
         <div css={infoBox}>
           {openPostingSetting && (
             <div css={settingButtonList}>
-              <button
-                type="button"
-                css={settingButton}
-                onClick={openChangePostingModal}
-              >
+              <button type="button" css={settingButton} onClick={openChangePostingModal}>
                 글 수정하기
               </button>
               <button
@@ -175,8 +158,7 @@ export const PostingBox: FunctionComponent = () => {
           const reCommentList: null | ReturnType<typeof selector> = [];
 
           commentArrData.forEach((reComment) => {
-            if (reComment.parentCommentId === comment.id)
-              reCommentList.push(reComment);
+            if (reComment.parentCommentId === comment.id) reCommentList.push(reComment);
           });
 
           if (comment.parentCommentId === null) {

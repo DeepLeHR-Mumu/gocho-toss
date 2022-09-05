@@ -15,8 +15,7 @@ export default {
     },
   },
   parameters: {
-    componentSubtitle:
-      "메인페이지 - 꿀팁 리스트 하단 최신 꿀팁리스트의 카드형태",
+    componentSubtitle: "메인페이지 - 꿀팁 리스트 하단 최신 꿀팁리스트의 카드형태",
   },
 } as ComponentMeta<typeof LatestCard>;
 

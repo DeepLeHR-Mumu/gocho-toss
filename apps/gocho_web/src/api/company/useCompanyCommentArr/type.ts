@@ -9,9 +9,5 @@ interface ResponseObjDef {
 }
 
 export interface GetCompanyCommentDef {
-  ({
-    queryKey,
-  }: QueryFunctionContext<
-    ReturnType<typeof companyCommentArrKeyObj.commentArr>
-  >): Promise<ResponseObjDef>;
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof companyCommentArrKeyObj.commentArr>>): Promise<ResponseObjDef>;
 }

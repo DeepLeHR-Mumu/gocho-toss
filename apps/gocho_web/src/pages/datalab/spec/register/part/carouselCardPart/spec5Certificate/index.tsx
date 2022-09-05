@@ -5,19 +5,10 @@ import { FiX } from "react-icons/fi";
 
 import { useSpecRegisterObj } from "@recoil/hook/spec";
 
-import {
-  SpecCardTitle,
-  Toggle,
-  MoveCardButtons,
-  CheckBox,
-} from "../common/component";
+import { SpecCardTitle, Toggle, MoveCardButtons, CheckBox } from "../common/component";
 
 import { getResData, hasFieldsInIncludes } from "./util";
-import {
-  Spec5CertificateProps,
-  PostSubmitValues,
-  ChangeSearchFilterArrDef,
-} from "./type";
+import { Spec5CertificateProps, PostSubmitValues, ChangeSearchFilterArrDef } from "./type";
 import { certificateArr } from "./constant";
 import { specCardWrapper, formCSS } from "../common/style";
 import {
@@ -32,10 +23,7 @@ import {
   certificateCard,
 } from "./style";
 
-export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({
-  moveNextCard,
-  movePrevCard,
-}) => {
+export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ moveNextCard, movePrevCard }) => {
   const { handleSubmit, register, control, watch } = useForm<PostSubmitValues>({
     mode: "onChange",
   });
@@ -46,9 +34,7 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({
   });
 
   const [isClick, setIsClick] = useState(false);
-  const [searchCertificateArr, setSearchCertificateArr] = useState<string[]>(
-    []
-  );
+  const [searchCertificateArr, setSearchCertificateArr] = useState<string[]>([]);
   const { setCurrentSpecObj } = useSpecRegisterObj();
   const textInputRef = useRef<HTMLInputElement>(null);
   const isCertificateWatch = watch("isCertificate");
@@ -107,11 +93,7 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({
         {isCertificateWatch && (
           <div css={certificateContainer}>
             <div css={buttonContainer}>
-              <button
-                type="button"
-                css={appendButton}
-                onClick={handleShowCertificateArrBox}
-              >
+              <button type="button" css={appendButton} onClick={handleShowCertificateArrBox}>
                 키워드를 입력하면 관련 자격증이 검색됩니다
                 <span>
                   <BsChevronDown />
@@ -142,9 +124,7 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({
                   {searchCertificateArr.map((keyword) => {
                     return (
                       <li key={`certificate_${keyword}`}>
-                        <CheckBox
-                          isChecked={hasFieldsInIncludes(fields, keyword)}
-                        />
+                        <CheckBox isChecked={hasFieldsInIncludes(fields, keyword)} />
                         <button
                           css={appendKeywordButton}
                           type="button"
@@ -182,10 +162,7 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({
           </div>
         )}
 
-        <MoveCardButtons
-          movePrevCard={movePrevCard}
-          postSubmit={handleSubmit(postSubmit)}
-        />
+        <MoveCardButtons movePrevCard={movePrevCard} postSubmit={handleSubmit(postSubmit)} />
       </form>
     </div>
   );

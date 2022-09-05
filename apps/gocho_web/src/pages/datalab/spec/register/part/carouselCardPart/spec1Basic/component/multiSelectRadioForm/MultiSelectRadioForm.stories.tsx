@@ -4,8 +4,7 @@ import { desiredIndustryArr } from "./mockData";
 import { MultiSelectRadioForm } from ".";
 
 export default {
-  title:
-    "datalab/spec/register/part/carouselCardPart/Spec1Basic/component/MultiSelectRadioForm",
+  title: "datalab/spec/register/part/carouselCardPart/Spec1Basic/component/MultiSelectRadioForm",
   component: MultiSelectRadioForm,
   argTypes: {
     itemArr: {

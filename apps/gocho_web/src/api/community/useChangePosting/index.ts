@@ -3,11 +3,7 @@ import { AxiosError } from "axios";
 
 import { axiosInstance } from "@api/axiosInstance";
 import { ResponseDef } from "@type/api/responseType";
-import {
-  PostChangePostingDef,
-  useChangePostingProps,
-  RequestObjDef,
-} from "./type";
+import { PostChangePostingDef, useChangePostingProps, RequestObjDef } from "./type";
 
 const postChangePosting: PostChangePostingDef = async (requestObj) => {
   const token = localStorage.getItem("token") as string;
@@ -29,8 +25,6 @@ const postChangePosting: PostChangePostingDef = async (requestObj) => {
 };
 
 export const useChangePosting: useChangePostingProps = () => {
-  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(
-    postChangePosting
-  );
+  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(postChangePosting);
   return mutationResult;
 };

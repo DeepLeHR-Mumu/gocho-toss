@@ -9,7 +9,5 @@ export interface ResponseObjDef {
 }
 
 export interface GetInfiniteTipArrObjDef {
-  (
-    requestObj: QueryFunctionContext<ReturnType<typeof tipArrKeyObj.infinite>>
-  ): Promise<ResponseObjDef>;
+  (requestObj: QueryFunctionContext<ReturnType<typeof tipArrKeyObj.infinite>>): Promise<ResponseObjDef>;
 }

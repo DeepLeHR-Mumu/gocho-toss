@@ -7,11 +7,7 @@ import { dummyArrCreator } from "@util/dummyArrCreator";
 import { container, titleCSS, button } from "./style";
 import { HeaderProps, changeWeekDef } from "./type";
 
-export const Header: FunctionComponent<HeaderProps> = ({
-  setCurrentDate,
-  currentDate,
-  setTwoWeek,
-}) => {
+export const Header: FunctionComponent<HeaderProps> = ({ setCurrentDate, currentDate, setTwoWeek }) => {
   const { year, month } = dateConverter(currentDate.getTime());
   const title = `${year}년 ${month}월`;
 

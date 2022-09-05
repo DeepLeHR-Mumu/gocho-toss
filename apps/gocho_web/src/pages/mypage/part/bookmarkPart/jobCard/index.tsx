@@ -42,12 +42,7 @@ export const JobCard: FunctionComponent<JobCardProps> = ({ jobData }) => {
       <div css={buttonContainer}>
         <div css={bookmarkButtonWrapper}>
           <div css={bookmarkButtonBox}>
-            <Image
-              layout="fill"
-              objectFit="contain"
-              src="/images/global/star.png"
-              alt="북마크 버튼"
-            />
+            <Image layout="fill" objectFit="contain" src="/images/global/star.png" alt="북마크 버튼" />
           </div>
         </div>
         <button type="button" css={button}>

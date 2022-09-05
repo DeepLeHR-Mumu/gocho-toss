@@ -5,14 +5,7 @@ import { MdKeyboardArrowRight, MdClear } from "react-icons/md";
 import { Layout } from "@component/layout";
 import { COMMUNITY_TIPS_LIST_URL } from "@constant/internalURL";
 
-import {
-  topBannerWrapper,
-  topBannerPosition,
-  topBannerContainer,
-  bannerDesc,
-  closeButton,
-  linkButton,
-} from "./style";
+import { topBannerWrapper, topBannerPosition, topBannerContainer, bannerDesc, closeButton, linkButton } from "./style";
 
 export const TopBannerPart: FunctionComponent = () => {
   return (

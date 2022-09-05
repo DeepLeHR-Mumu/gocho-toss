@@ -50,14 +50,7 @@ export interface RequestObjDef {
   )[];
   lastEducation?: "고졸" | "초대졸";
   highschool?: {
-    type:
-      | "일반고"
-      | "공업고"
-      | "마이스터고"
-      | "농업고"
-      | "상업고"
-      | "검정고시"
-      | "기타";
+    type: "일반고" | "공업고" | "마이스터고" | "농업고" | "상업고" | "검정고시" | "기타";
     naesin: number;
     absent: number;
     tardy: number;

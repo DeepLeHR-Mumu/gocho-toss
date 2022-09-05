@@ -17,9 +17,7 @@ import {
   positionTitleSkeleton,
 } from "./style";
 
-export const HeaderPart: FunctionComponent<
-  HeaderPartProps | HeaderPartSkeleton
-> = ({
+export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton> = ({
   isSkeleton,
   jobDetailData,
   currentPositionId,
@@ -77,11 +75,7 @@ export const HeaderPart: FunctionComponent<
 
   return (
     <div>
-      {isOverlap ? (
-        <Header jobDetailData={jobDetailData} />
-      ) : (
-        <HeaderFix jobDetailData={jobDetailData} />
-      )}
+      {isOverlap ? <Header jobDetailData={jobDetailData} /> : <HeaderFix jobDetailData={jobDetailData} />}
 
       <div css={observeCSS} ref={observeRef} />
 
@@ -105,19 +99,11 @@ export const HeaderPart: FunctionComponent<
 
           {jobDetailData.positionArr.length > 5 &&
             (defaultCardCount === jobDetailData.positionArr.length ? (
-              <button
-                css={moreButton}
-                type="button"
-                onClick={handleLessCardCount}
-              >
+              <button css={moreButton} type="button" onClick={handleLessCardCount}>
                 줄이기 <FiChevronUp />
               </button>
             ) : (
-              <button
-                css={moreButton}
-                type="button"
-                onClick={handleMoreCardCount}
-              >
+              <button css={moreButton} type="button" onClick={handleMoreCardCount}>
                 더보기 <FiChevronDown />
               </button>
             ))}

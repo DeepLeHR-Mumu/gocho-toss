@@ -23,12 +23,7 @@ export interface DetailSupportPartProps {
 }
 
 export interface GetPossibleEduArr {
-  (possibleEdu: {
-    middle: boolean;
-    high: boolean;
-    college: boolean;
-    four: boolean;
-  }): {
+  (possibleEdu: { middle: boolean; high: boolean; college: boolean; four: boolean }): {
     desc: string;
     isPossible: boolean;
   }[];

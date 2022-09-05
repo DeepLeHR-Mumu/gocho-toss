@@ -8,9 +8,5 @@ export interface ResponseObjDef {
 }
 
 export interface GetJobArrDef {
-  ({
-    queryKey,
-  }: QueryFunctionContext<
-    ReturnType<typeof jobArrKeyObj.jobArr>
-  >): Promise<ResponseObjDef>;
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof jobArrKeyObj.jobArr>>): Promise<ResponseObjDef>;
 }

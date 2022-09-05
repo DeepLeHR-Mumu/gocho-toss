@@ -33,12 +33,8 @@ import {
   booleanIcon,
 } from "./style";
 
-export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({
-  companyData,
-}) => {
-  const [activeFactory, setActiveFactory] = useState<number>(
-    companyData.factoryArr[0] && companyData.factoryArr[0].id
-  );
+export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({ companyData }) => {
+  const [activeFactory, setActiveFactory] = useState<number>(companyData.factoryArr[0] && companyData.factoryArr[0].id);
 
   return (
     <div>
@@ -84,12 +80,7 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({
                 <div css={infoWrapper}>
                   <div css={productInfo}>
                     <div css={infoIcon}>
-                      <Image
-                        layout="fill"
-                        objectFit="contain"
-                        src={productIcon}
-                        alt="공장 생산품 정보 아이콘"
-                      />
+                      <Image layout="fill" objectFit="contain" src={productIcon} alt="공장 생산품 정보 아이콘" />
                     </div>
                     <div css={infoText}>
                       <h4 css={infoTitle}>생산품</h4>
@@ -99,12 +90,7 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({
                   <div css={flexBox}>
                     <div>
                       <div css={infoIcon}>
-                        <Image
-                          layout="fill"
-                          objectFit="contain"
-                          src={hireNumberIcon}
-                          alt="공장 임직원 정보 아이콘"
-                        />
+                        <Image layout="fill" objectFit="contain" src={hireNumberIcon} alt="공장 임직원 정보 아이콘" />
                       </div>
                       <div css={infoText}>
                         <h4 css={infoTitle}>임직원</h4>
@@ -113,12 +99,7 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({
                     </div>
                     <div>
                       <div css={infoIcon}>
-                        <Image
-                          layout="fill"
-                          objectFit="contain"
-                          src={genderIcon}
-                          alt="공장 임직원 성비 정보 아이콘"
-                        />
+                        <Image layout="fill" objectFit="contain" src={genderIcon} alt="공장 임직원 성비 정보 아이콘" />
                       </div>
                       <div css={infoText}>
                         <h4 css={infoTitle}>남</h4>
@@ -127,12 +108,7 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({
                           %&nbsp;
                         </div>
                         <h4 css={infoTitle}>여</h4>
-                        <div css={info}>
-                          {Math.round(
-                            (factory.femaleNumber / totalNumber) * 100
-                          )}
-                          %
-                        </div>
+                        <div css={info}>{Math.round((factory.femaleNumber / totalNumber) * 100)}%</div>
                       </div>
                     </div>
                     <div>
@@ -151,12 +127,7 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({
                     </div>
                     <div>
                       <div css={infoIcon}>
-                        <Image
-                          layout="fill"
-                          objectFit="contain"
-                          src={dormitoryIcon}
-                          alt="공장 기숙사 정보 아이콘"
-                        />
+                        <Image layout="fill" objectFit="contain" src={dormitoryIcon} alt="공장 기숙사 정보 아이콘" />
                       </div>
                       <div css={infoText}>
                         <h4 css={infoTitle}>기숙사</h4>

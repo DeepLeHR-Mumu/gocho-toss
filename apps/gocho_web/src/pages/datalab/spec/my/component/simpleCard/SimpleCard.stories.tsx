@@ -23,8 +23,7 @@ export default {
     },
   },
   parameters: {
-    componentSubtitle:
-      "데이터랩/나의스펙내역에 단순하게 보여질 나의 평가로그 컴포넌트",
+    componentSubtitle: "데이터랩/나의스펙내역에 단순하게 보여질 나의 평가로그 컴포넌트",
   },
 } as ComponentMeta<typeof SimpleCard>;
 

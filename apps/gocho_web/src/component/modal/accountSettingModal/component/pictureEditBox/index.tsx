@@ -15,13 +15,9 @@ export const PictureEditBox: FunctionComponent = () => {
   const { mutate } = usePatchUserInfo();
 
   const { register, handleSubmit } = useForm<ImageChangeFormValues>();
-  const [checkedImage, setCheckedImage] = useState<ImageType>(
-    userInfoData?.image as ImageType
-  );
+  const [checkedImage, setCheckedImage] = useState<ImageType>(userInfoData?.image as ImageType);
 
-  const profileImgSubmit: SubmitHandler<ImageChangeFormValues> = ({
-    image,
-  }) => {
+  const profileImgSubmit: SubmitHandler<ImageChangeFormValues> = ({ image }) => {
     if (userInfoData) {
       mutate(
         {

@@ -51,8 +51,7 @@ export const 기본 = Template.bind({});
     company: {
       companyId: 337,
       name: "포스코 ICT",
-      logoUrl:
-        "https://d2nnzfahmszi6w.cloudfront.net/company_images/337/logo.png",
+      logoUrl: "https://d2nnzfahmszi6w.cloudfront.net/company_images/337/logo.png",
       youtubeUrl: "https://youtube.com",
     },
   },

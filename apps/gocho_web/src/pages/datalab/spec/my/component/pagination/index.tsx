@@ -6,11 +6,7 @@ import { dummyArrCreator } from "@util/dummyArrCreator";
 import { PaginationProps } from "./type";
 import { wrapper, buttonCSS, isActiveButton } from "./style";
 
-export const Pagination: FunctionComponent<PaginationProps> = ({
-  totalPage,
-  currentPage,
-  setCurrentPage,
-}) => {
+export const Pagination: FunctionComponent<PaginationProps> = ({ totalPage, currentPage, setCurrentPage }) => {
   return (
     <ul css={wrapper}>
       <li>

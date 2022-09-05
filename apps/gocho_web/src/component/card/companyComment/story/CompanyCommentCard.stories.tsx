@@ -14,8 +14,7 @@ export default {
   },
   parameters: {
     layout: "padded",
-    componentSubtitle:
-      "파라미터로 입력되는 회사에 대한 댓글을 출력하는 컴포넌트",
+    componentSubtitle: "파라미터로 입력되는 회사에 대한 댓글을 출력하는 컴포넌트",
   },
 } as ComponentMeta<typeof CompanyCommentCard>;
 
@@ -47,12 +46,9 @@ export const 정상작동 = Template.bind({});
 정상작동.parameters = {
   msw: {
     handlers: [
-      rest.get(
-        "https://gocho-back.com/v1/companies/4/comments",
-        (req, res, ctx) => {
-          return res(ctx.json(workingResponse));
-        }
-      ),
+      rest.get("https://gocho-back.com/v1/companies/4/comments", (req, res, ctx) => {
+        return res(ctx.json(workingResponse));
+      }),
     ],
   },
 };
@@ -64,12 +60,9 @@ export const 에러 = Template.bind({});
 에러.parameters = {
   msw: {
     handlers: [
-      rest.get(
-        "https://gocho-back.com/v1/companies/50000/comments",
-        (req, res, ctx) => {
-          return res(ctx.json(errorResponse), ctx.status(404));
-        }
-      ),
+      rest.get("https://gocho-back.com/v1/companies/50000/comments", (req, res, ctx) => {
+        return res(ctx.json(errorResponse), ctx.status(404));
+      }),
     ],
   },
 };

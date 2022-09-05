@@ -7,27 +7,10 @@ import { useModal } from "@recoil/hook/modal";
 import { NoDataDesc } from "../common/component/noDataDesc";
 
 import { DetailWorkPartProps, ShowFactoryModalDef } from "./type";
-import {
-  container,
-  containerTitle,
-  flexBox,
-  flexBetweenBox,
-  subTitle,
-  restPoint,
-  desc,
-} from "../common/style";
-import {
-  colorPoint,
-  mainProductDesc,
-  productContainer,
-  workPlaceContainer,
-  factoryButton,
-  flexDesc,
-} from "./style";
+import { container, containerTitle, flexBox, flexBetweenBox, subTitle, restPoint, desc } from "../common/style";
+import { colorPoint, mainProductDesc, productContainer, workPlaceContainer, factoryButton, flexDesc } from "./style";
 
-export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({
-  freshPosition,
-}) => {
+export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPosition }) => {
   const { setCurrentModal } = useModal();
 
   const showFactoryModal: ShowFactoryModalDef = (factoryObj) => {
@@ -67,10 +50,7 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({
               {freshPosition.contractType.type}{" "}
               {freshPosition.contractType.conversionRate && (
                 <>
-                  전환율{" "}
-                  <span css={colorPoint}>
-                    {freshPosition.contractType.conversionRate}%
-                  </span>
+                  전환율 <span css={colorPoint}>{freshPosition.contractType.conversionRate}%</span>
                 </>
               )}
             </p>

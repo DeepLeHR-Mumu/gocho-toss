@@ -14,12 +14,7 @@ import { BottomPagination } from "@pages/jd/component/bottomPagination";
 import { JobCardList } from "../../component/jobCardList";
 import { Filter } from "../../component/filter";
 import { setJobOrderButtonArr } from "./constant";
-import {
-  OrderDef,
-  SearchQueryDef,
-  changeOrderDef,
-  PostingValues,
-} from "./type";
+import { OrderDef, SearchQueryDef, changeOrderDef, PostingValues } from "./type";
 import {
   partContainer,
   title,
@@ -42,18 +37,17 @@ export const ListPart: FunctionComponent = () => {
   const [activeOrder, setActiveOrder] = useState<OrderDef>("recent");
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
 
-  const { register, handleSubmit, watch, setValue, getValues } =
-    useForm<PostingValues>({
-      defaultValues: {
-        contractType: [],
-        industry: [],
-        place: [],
-        possibleEdu: [],
-        requiredExp: [],
-        rotation: [],
-        task: [],
-      },
-    });
+  const { register, handleSubmit, watch, setValue, getValues } = useForm<PostingValues>({
+    defaultValues: {
+      contractType: [],
+      industry: [],
+      place: [],
+      possibleEdu: [],
+      requiredExp: [],
+      rotation: [],
+      task: [],
+    },
+  });
 
   const postingSearch: SubmitHandler<PostingValues> = (postingVal) => {
     setSearchQuery({
@@ -98,19 +92,10 @@ export const ListPart: FunctionComponent = () => {
           <span css={colorPoint}>Now</span> 채용공고
         </h2>
         <form onSubmit={handleSubmit(postingSearch)}>
-          <Filter
-            register={register}
-            watch={watch}
-            setValue={setValue}
-            getValues={getValues}
-          />
+          <Filter register={register} watch={watch} setValue={setValue} getValues={getValues} />
           <div css={flexBox}>
             <div css={searchWrapper}>
-              <input
-                {...register("searchWord", {})}
-                css={searchBox}
-                placeholder="검색어를 입력해주세요"
-              />
+              <input {...register("searchWord", {})} css={searchBox} placeholder="검색어를 입력해주세요" />
               <button type="submit" css={searchButton}>
                 <FiSearch />
               </button>
@@ -132,12 +117,7 @@ export const ListPart: FunctionComponent = () => {
                 );
               })}
             </div>
-            <Pagination
-              total={total}
-              limit={limit}
-              page={page}
-              setPage={setPage}
-            />
+            <Pagination total={total} limit={limit} page={page} setPage={setPage} />
           </div>
         </form>
         <div css={infoContainer}>
@@ -150,17 +130,8 @@ export const ListPart: FunctionComponent = () => {
           </div>
           고는 고졸지원가능 초는 초대졸 지원 가능합니다
         </div>
-        <JobCardList
-          jobDataArr={jobDataArr?.jobDataArr}
-          isLoading={isLoading}
-          isError={isError}
-        />
-        <BottomPagination
-          total={total}
-          limit={limit}
-          page={page}
-          setPage={setPage}
-        />
+        <JobCardList jobDataArr={jobDataArr?.jobDataArr} isLoading={isLoading} isError={isError} />
+        <BottomPagination total={total} limit={limit} page={page} setPage={setPage} />
       </Layout>
     </section>
   );

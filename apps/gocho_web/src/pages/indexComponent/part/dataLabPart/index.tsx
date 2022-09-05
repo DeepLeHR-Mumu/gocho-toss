@@ -8,15 +8,7 @@ import { Layout } from "@component/layout";
 
 import { CompanyPassDataCard } from "./component/companyPassDataCard";
 import { dataLabCompanyArr, settings } from "./contant";
-import {
-  dataLabWrapper,
-  title,
-  textPoint,
-  dataLabContainer,
-  companyLogoBox,
-  dataLabDesc,
-  linkButton,
-} from "./style";
+import { dataLabWrapper, title, textPoint, dataLabContainer, companyLogoBox, dataLabDesc, linkButton } from "./style";
 
 export const DataLabPart: FunctionComponent = () => {
   return (
@@ -32,11 +24,7 @@ export const DataLabPart: FunctionComponent = () => {
           <Slider {...settings} css={companyLogoBox}>
             {dataLabCompanyArr.map((company) => {
               return (
-                <CompanyPassDataCard
-                  key={company.id}
-                  companyName={company.companyName}
-                  companyLogo={company.logoSrc}
-                />
+                <CompanyPassDataCard key={company.id} companyName={company.companyName} companyLogo={company.logoSrc} />
               );
             })}
           </Slider>

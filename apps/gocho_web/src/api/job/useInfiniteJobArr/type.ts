@@ -9,9 +9,5 @@ export interface ResponseObjDef {
 }
 
 export interface GetInfiniteJobArrDef {
-  ({
-    queryKey,
-  }: QueryFunctionContext<
-    ReturnType<typeof jobArrKeyObj.infinite>
-  >): Promise<ResponseObjDef>;
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof jobArrKeyObj.infinite>>): Promise<ResponseObjDef>;
 }

@@ -48,8 +48,6 @@ export const 기본 = Template.bind({});
 기본.args = {
   freshPosition: {
     preferredCertiArr: ["전산자격증", "재택근무 가능"],
-    preferredEtcArr: [
-      "정규직 전환 연계 채용(계약기간 1년 종료 후 평가 우수자는 정규직 전환 검토)",
-    ],
+    preferredEtcArr: ["정규직 전환 연계 채용(계약기간 1년 종료 후 평가 우수자는 정규직 전환 검토)"],
   },
 };

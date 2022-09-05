@@ -6,9 +6,7 @@ import { dummyArrCreator } from "@util/dummyArrCreator";
 import { SpecCardListProps } from "./type";
 import { SpecCard } from "../specCard";
 
-export const SpecCardList: FunctionComponent<SpecCardListProps> = ({
-  order,
-}) => {
+export const SpecCardList: FunctionComponent<SpecCardListProps> = ({ order }) => {
   const {
     data: specArrData,
     isLoading,
@@ -22,10 +20,7 @@ export const SpecCardList: FunctionComponent<SpecCardListProps> = ({
   const observerRef = useRef<IntersectionObserver>();
   const boxRef = useRef<HTMLDivElement>(null);
 
-  const intersectionObserver = (
-    entries: IntersectionObserverEntry[],
-    io: IntersectionObserver
-  ) => {
+  const intersectionObserver = (entries: IntersectionObserverEntry[], io: IntersectionObserver) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         // 관찰하고 있는 entry가 화면에 보여지는 경우

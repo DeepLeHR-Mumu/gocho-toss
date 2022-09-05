@@ -24,8 +24,7 @@ export default {
     backgrounds: {
       default: "dark",
     },
-    componentSubtitle:
-      "공고 디테일 headerPart에서 채용중인 직무 position 카드 컴포넌트",
+    componentSubtitle: "공고 디테일 headerPart에서 채용중인 직무 position 카드 컴포넌트",
   },
 } as ComponentMeta<typeof PositionCard>;
 

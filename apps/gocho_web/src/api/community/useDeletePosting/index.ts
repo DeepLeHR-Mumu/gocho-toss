@@ -3,11 +3,7 @@ import { AxiosError } from "axios";
 
 import { axiosInstance } from "@api/axiosInstance";
 import { ResponseDef } from "@type/api/responseType";
-import {
-  PostDeletePostingDef,
-  useDeletePostingProps,
-  RequestObjDef,
-} from "./type";
+import { PostDeletePostingDef, useDeletePostingProps, RequestObjDef } from "./type";
 
 const postDeletePosting: PostDeletePostingDef = async (requestObj) => {
   const token = localStorage.getItem("token") as string;
@@ -21,8 +17,6 @@ const postDeletePosting: PostDeletePostingDef = async (requestObj) => {
 };
 
 export const useDeletePosting: useDeletePostingProps = () => {
-  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(
-    postDeletePosting
-  );
+  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(postDeletePosting);
   return mutationResult;
 };

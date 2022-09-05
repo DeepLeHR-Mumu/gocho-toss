@@ -15,17 +15,7 @@ import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "@constant/errorMessage";
 import { NormalButton } from "@component/common/atom/Button";
 import smallMono from "@public/images/global/deepLeLogo/smallMono.svg";
 
-import {
-  wrapper,
-  desc,
-  formCSS,
-  formArr,
-  errorMsgCSS,
-  closeBtn,
-  errorBox,
-  loginButton,
-  logoContainer,
-} from "./style";
+import { wrapper, desc, formCSS, formArr, errorMsgCSS, closeBtn, errorBox, loginButton, logoContainer } from "./style";
 import { LoginFormValues } from "./type";
 
 export const LoginBox: FunctionComponent = () => {
@@ -58,11 +48,7 @@ export const LoginBox: FunctionComponent = () => {
   return (
     <div css={wrapper}>
       <div css={closeBtn}>
-        {pathname === MYPAGE_URL ? (
-          <CloseButton size="S" isHome />
-        ) : (
-          <CloseButton size="S" buttonClick={closeModal} />
-        )}
+        {pathname === MYPAGE_URL ? <CloseButton size="S" isHome /> : <CloseButton size="S" buttonClick={closeModal} />}
       </div>
       <div css={logoContainer}>
         <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" />
@@ -110,9 +96,7 @@ export const LoginBox: FunctionComponent = () => {
             />
           </li>
         </ul>
-        <div css={errorBox}>
-          {errorMsg && <p css={errorMsgCSS}>{errorMsg}</p>}
-        </div>
+        <div css={errorBox}>{errorMsg && <p css={errorMsgCSS}>{errorMsg}</p>}</div>
         <div css={loginButton}>
           <NormalButton wide variant="filled" text="로그인 하기" isSubmit />
         </div>

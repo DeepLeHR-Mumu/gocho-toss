@@ -20,18 +20,12 @@ export const getCompanyComment: GetCompanyCommentDef = async ({
   return data;
 };
 
-export const useCompanyCommentArr = (
-  requestObj: CompanyCommentArrRequestDef
-) => {
-  const queryResult = useQuery(
-    companyCommentArrKeyObj.commentArr(requestObj),
-    getCompanyComment,
-    {
-      enabled: Boolean(requestObj.companyId),
-      select: ({ data }) => {
-        return selector(data);
-      },
-    }
-  );
+export const useCompanyCommentArr = (requestObj: CompanyCommentArrRequestDef) => {
+  const queryResult = useQuery(companyCommentArrKeyObj.commentArr(requestObj), getCompanyComment, {
+    enabled: Boolean(requestObj.companyId),
+    select: ({ data }) => {
+      return selector(data);
+    },
+  });
   return queryResult;
 };

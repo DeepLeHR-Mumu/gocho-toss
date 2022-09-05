@@ -7,7 +7,5 @@ interface ResponseObjDef {
 }
 
 export interface GetTipArrDef {
-  (
-    requestObj: QueryFunctionContext<ReturnType<typeof tipArrKeyObj.tipArr>>
-  ): Promise<ResponseObjDef>;
+  (requestObj: QueryFunctionContext<ReturnType<typeof tipArrKeyObj.tipArr>>): Promise<ResponseObjDef>;
 }

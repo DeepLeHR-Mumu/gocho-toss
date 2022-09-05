@@ -27,11 +27,7 @@ export const CommunityPostingPartSkeleton: FunctionComponent = () => {
             <div css={buttonArrContainer}>
               {setPostingOrderButtonArr.map((button) => {
                 return (
-                  <button
-                    type="button"
-                    key={button.text}
-                    css={postingOrderButton}
-                  >
+                  <button type="button" key={button.text} css={postingOrderButton}>
                     {button.text}
                   </button>
                 );

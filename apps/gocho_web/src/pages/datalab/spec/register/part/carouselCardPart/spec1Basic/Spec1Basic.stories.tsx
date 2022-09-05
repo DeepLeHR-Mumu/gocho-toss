@@ -46,12 +46,9 @@ export const 기본 = Template.bind({});
 기본.parameters = {
   msw: {
     handlers: {
-      login: rest.post(
-        "https://gocho-back.com/v1/auth/check",
-        (req, res, ctx) => {
-          return res(ctx.json(authorizedResponse));
-        }
-      ),
+      login: rest.post("https://gocho-back.com/v1/auth/check", (req, res, ctx) => {
+        return res(ctx.json(authorizedResponse));
+      }),
     },
   },
 };

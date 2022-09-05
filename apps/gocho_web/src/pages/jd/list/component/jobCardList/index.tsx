@@ -6,11 +6,7 @@ import { JobCard } from "@component/card/jobCard";
 import { JobCardListProps } from "./type";
 import { listContainer } from "./style";
 
-export const JobCardList: FunctionComponent<JobCardListProps> = ({
-  jobDataArr,
-  isLoading,
-  isError,
-}) => {
+export const JobCardList: FunctionComponent<JobCardListProps> = ({ jobDataArr, isLoading, isError }) => {
   if (!jobDataArr || isError || isLoading) {
     return (
       <div css={listContainer}>

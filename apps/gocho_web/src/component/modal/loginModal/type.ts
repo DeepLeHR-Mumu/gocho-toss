@@ -10,8 +10,5 @@ export interface closeLoginModalDef {
 }
 
 export interface openSignUpModalDef {
-  (
-    loginSetFunc: SetterOrUpdater<boolean>,
-    signUpSetFunc: SetterOrUpdater<boolean>
-  ): void;
+  (loginSetFunc: SetterOrUpdater<boolean>, signUpSetFunc: SetterOrUpdater<boolean>): void;
 }

@@ -24,17 +24,13 @@ import {
   wrapperSkeleton,
 } from "./style";
 
-export const AsidePart: FunctionComponent<
-  AsidePartProps | AsidePartSkeleton
-> = ({ companyId, isSkeleton }) => {
+export const AsidePart: FunctionComponent<AsidePartProps | AsidePartSkeleton> = ({ companyId, isSkeleton }) => {
   const { data: userData, isSuccess } = useUserInfo();
   const { data: companyCommentArrData, isLoading } = useCompanyCommentArr({
     companyId: Number(companyId),
   });
 
-  const [imageSrc, setImageSrc] = useState(
-    companyCommentArrData?.company.logoUrl as string
-  );
+  const [imageSrc, setImageSrc] = useState(companyCommentArrData?.company.logoUrl as string);
 
   if (isSkeleton || !companyCommentArrData || isLoading) {
     return (
@@ -79,11 +75,7 @@ export const AsidePart: FunctionComponent<
             </ul>
           </nav>
         </header>
-        {isSuccess ? (
-          <LoginCommentBox userData={userData} commentArr={commentArr} />
-        ) : (
-          <UnLoginCommentBox />
-        )}
+        {isSuccess ? <LoginCommentBox userData={userData} commentArr={commentArr} /> : <UnLoginCommentBox />}
       </aside>
       <ADComponent />
     </div>

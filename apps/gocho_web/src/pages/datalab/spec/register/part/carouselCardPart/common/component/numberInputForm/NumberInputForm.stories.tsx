@@ -4,8 +4,7 @@ import { css } from "@emotion/react";
 import { NumberInputForm } from ".";
 
 export default {
-  title:
-    "datalab/spec/register/part/carouselCardPart/common/component/NumberInputForm",
+  title: "datalab/spec/register/part/carouselCardPart/common/component/NumberInputForm",
   component: NumberInputForm,
   argTypes: {
     firstDesc: {

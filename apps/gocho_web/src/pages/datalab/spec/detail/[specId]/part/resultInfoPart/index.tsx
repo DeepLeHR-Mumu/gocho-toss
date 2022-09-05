@@ -26,16 +26,13 @@ import {
   notQualifiedText,
 } from "./style";
 
-export const ResultInfoPart: FunctionComponent<ResultInfoPartProps> = ({
-  resultData,
-}) => {
+export const ResultInfoPart: FunctionComponent<ResultInfoPartProps> = ({ resultData }) => {
   if (resultData.isMine && resultData.evalCount < 5) {
     return (
       <div css={notQualifiedBox}>
         <div>
           <p css={notQualifiedText}>
-            평가하기를 <span>{5 - resultData.evalCount}</span> 번만 하시면 내
-            스펙평가내역을 볼 수 있어요
+            평가하기를 <span>{5 - resultData.evalCount}</span> 번만 하시면 내 스펙평가내역을 볼 수 있어요
           </p>
         </div>
       </div>
@@ -75,13 +72,7 @@ export const ResultInfoPart: FunctionComponent<ResultInfoPartProps> = ({
           ) : (
             <div css={chipList}>
               {resultData.evals?.strongPointArr.map((strong) => {
-                return (
-                  <ChipBox
-                    key={`강점 칩${strong[0]}`}
-                    string={strong[0]}
-                    number={strong[1]}
-                  />
-                );
+                return <ChipBox key={`강점 칩${strong[0]}`} string={strong[0]} number={strong[1]} />;
               })}
             </div>
           )}
@@ -101,13 +92,7 @@ export const ResultInfoPart: FunctionComponent<ResultInfoPartProps> = ({
             ) : (
               <div css={chipList}>
                 {resultData.evals?.weakPointArr.map((weakness) => {
-                  return (
-                    <ChipBox
-                      key={`약점 칩${weakness[0]}`}
-                      string={weakness[0]}
-                      number={weakness[1]}
-                    />
-                  );
+                  return <ChipBox key={`약점 칩${weakness[0]}`} string={weakness[0]} number={weakness[1]} />;
                 })}
               </div>
             )}

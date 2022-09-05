@@ -3,9 +3,7 @@ import { FunctionComponent, useState } from "react";
 import { MultiSelectRadioFormProps, handleToggleDef } from "./type";
 import { radioContainer, radioDisplay, moreButton, hide } from "./style";
 
-export const MultiSelectRadioForm: FunctionComponent<
-  MultiSelectRadioFormProps
-> = ({
+export const MultiSelectRadioForm: FunctionComponent<MultiSelectRadioFormProps> = ({
   itemArr,
   backgroundStyle = "blue01",
   maxCount,

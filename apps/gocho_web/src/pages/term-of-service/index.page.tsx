@@ -3,14 +3,7 @@ import { NextPage } from "next";
 import { Layout } from "@component/layout";
 
 import { mainDesc, executionDesc, tosArr } from "./constant";
-import {
-  tosTitle,
-  descCSS,
-  subTitle,
-  listCSS,
-  subListCSS,
-  executionDescCSS,
-} from "./style";
+import { tosTitle, descCSS, subTitle, listCSS, subListCSS, executionDescCSS } from "./style";
 
 import { tosItemDef } from "./type";
 

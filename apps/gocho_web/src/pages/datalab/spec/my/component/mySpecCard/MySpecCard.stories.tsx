@@ -11,8 +11,7 @@ export default {
     },
   },
   parameters: {
-    componentSubtitle:
-      "데이터랩/나의스펙내역에 SimpleCard 선택시 보여지는 디테일카드 컴포넌트",
+    componentSubtitle: "데이터랩/나의스펙내역에 SimpleCard 선택시 보여지는 디테일카드 컴포넌트",
   },
 } as ComponentMeta<typeof MySpecCard>;
 

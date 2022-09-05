@@ -2,15 +2,7 @@ import { FunctionComponent, useState } from "react";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 
 import { SelectChipFormProps } from "./type";
-import {
-  chipButton,
-  chipContainer,
-  hide,
-  labelCSS,
-  langArrBox,
-  langArrContainer,
-  langTitle,
-} from "./style";
+import { chipButton, chipContainer, hide, labelCSS, langArrBox, langArrContainer, langTitle } from "./style";
 
 export const SelectChipForm: FunctionComponent<SelectChipFormProps> = ({
   value,

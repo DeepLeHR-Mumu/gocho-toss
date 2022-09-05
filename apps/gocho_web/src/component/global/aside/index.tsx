@@ -23,11 +23,7 @@ export const Aside: FunctionComponent = () => {
   }, []);
 
   return (
-    <aside
-      css={asideWrapperCreator(
-        windowHeight !== null && windowHeight <= activeHeight
-      )}
-    >
+    <aside css={asideWrapperCreator(windowHeight !== null && windowHeight <= activeHeight)}>
       {pathname === "/" && <RightBanner />}
     </aside>
   );

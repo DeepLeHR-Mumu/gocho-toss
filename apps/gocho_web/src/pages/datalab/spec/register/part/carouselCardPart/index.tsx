@@ -43,27 +43,15 @@ export const SpecWritePart: FunctionComponent = () => {
       <Slider {...setCarouselSetting} ref={sliderRef}>
         <Spec1Basic moveNextCard={moveNextCard} />
 
-        <Spec2lastEducation
-          movePrevCard={movePrevCard}
-          moveNextCard={moveNextCard}
-        />
+        <Spec2lastEducation movePrevCard={movePrevCard} moveNextCard={moveNextCard} />
 
         {currentLastEdu === "고졸" ? (
-          <Spec3Highschool
-            movePrevCard={movePrevCard}
-            moveNextCard={moveNextCard}
-          />
+          <Spec3Highschool movePrevCard={movePrevCard} moveNextCard={moveNextCard} />
         ) : (
-          <Spec4University
-            movePrevCard={movePrevCard}
-            moveNextCard={moveNextCard}
-          />
+          <Spec4University movePrevCard={movePrevCard} moveNextCard={moveNextCard} />
         )}
 
-        <Spec5Certificate
-          movePrevCard={movePrevCard}
-          moveNextCard={moveNextCard}
-        />
+        <Spec5Certificate movePrevCard={movePrevCard} moveNextCard={moveNextCard} />
 
         {isSpec6MiddleEnd && (
           <Spec6MiddleEnd
@@ -73,16 +61,9 @@ export const SpecWritePart: FunctionComponent = () => {
           />
         )}
 
-        {!isSpec6MiddleEnd && (
-          <Spec7Lang movePrevCard={movePrevCard} moveNextCard={moveNextCard} />
-        )}
+        {!isSpec6MiddleEnd && <Spec7Lang movePrevCard={movePrevCard} moveNextCard={moveNextCard} />}
 
-        {!isSpec6MiddleEnd && (
-          <Spec8AwardCareerEtc
-            movePrevCard={movePrevCard}
-            moveNextCard={moveNextCard}
-          />
-        )}
+        {!isSpec6MiddleEnd && <Spec8AwardCareerEtc movePrevCard={movePrevCard} moveNextCard={moveNextCard} />}
 
         <Spec9Success />
       </Slider>

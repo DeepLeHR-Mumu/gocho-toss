@@ -8,8 +8,7 @@ export const dDayCalculator: setDdayValueCreatorDef = (endTime) => {
   const todayDateNoHours = new Date().setHours(0, 0, 0, 0);
 
   const dDay = Math.floor(
-    (endTimeNoHours - new Date(new Date().setHours(0, 0, 0, 0)).getTime()) /
-      (1000 * 60 * 60 * 24)
+    (endTimeNoHours - new Date(new Date().setHours(0, 0, 0, 0)).getTime()) / (1000 * 60 * 60 * 24)
   );
 
   if (endDate.getFullYear() === 9999) {

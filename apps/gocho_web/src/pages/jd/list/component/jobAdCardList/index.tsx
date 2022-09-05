@@ -38,13 +38,7 @@ export const JobAdCardList: FunctionComponent = () => {
     <div css={listContainer}>
       <Slider {...setCarouselSetting()} ref={sliderRef}>
         {response.jobDataArr.map((job) => {
-          return (
-            <JobAdCard
-              jobAdData={job}
-              isSkeleton={false}
-              key={`JobAdCard${job.id}`}
-            />
-          );
+          return <JobAdCard jobAdData={job} isSkeleton={false} key={`JobAdCard${job.id}`} />;
         })}
       </Slider>
 

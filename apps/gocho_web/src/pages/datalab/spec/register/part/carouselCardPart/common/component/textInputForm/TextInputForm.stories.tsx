@@ -4,8 +4,7 @@ import { css } from "@emotion/react";
 import { TextInputForm } from ".";
 
 export default {
-  title:
-    "datalab/spec/register/part/carouselCardPart/common/component/TextInputForm",
+  title: "datalab/spec/register/part/carouselCardPart/common/component/TextInputForm",
   component: TextInputForm,
   argTypes: {
     placeholder: {
@@ -18,8 +17,7 @@ export default {
       description: "width를 100%를 원한다면 ture, 필요없을시 기본값 false",
     },
     minWidth: {
-      description:
-        "min-width를 주기위함, 단위는 rem으로 고정, 필요없을시 기본값 auto",
+      description: "min-width를 주기위함, 단위는 rem으로 고정, 필요없을시 기본값 auto",
     },
     registerObj: {
       description: "react-hook-form register",

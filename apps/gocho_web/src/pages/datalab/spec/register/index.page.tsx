@@ -19,10 +19,7 @@ const Register: NextPage = () => {
 
   // LATER : 에러코드 추가 예정
   useEffect(() => {
-    if (
-      axios.isAxiosError(error) &&
-      (error.response?.status === 401 || error.response?.status === 403)
-    ) {
+    if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
       setCurrentModal("loginModal");
     }
     if (currentModal?.activatedModal === "signUpModal") {

@@ -26,15 +26,9 @@ import {
   buttonContainer,
 } from "./style";
 
-export const SpecRecommendCard: FunctionComponent<SpecRecommendCardProps> = ({
-  specData,
-}) => {
-  const schoolType =
-    specData.lastEducation === "초대졸"
-      ? specData.college?.department
-      : specData.highschool.type;
-  const pointType =
-    specData.lastEducation === "초대졸" ? "평균 학점" : "내신 등급";
+export const SpecRecommendCard: FunctionComponent<SpecRecommendCardProps> = ({ specData }) => {
+  const schoolType = specData.lastEducation === "초대졸" ? specData.college?.department : specData.highschool.type;
+  const pointType = specData.lastEducation === "초대졸" ? "평균 학점" : "내신 등급";
   const grade =
     specData.lastEducation === "초대졸" && specData.college !== undefined
       ? specData.college?.grade
@@ -60,10 +54,7 @@ export const SpecRecommendCard: FunctionComponent<SpecRecommendCardProps> = ({
               {pointType}
               <span css={gradeCSS}>
                 {grade}
-                <span css={maxGradeCSS}>
-                  {specData.lastEducation === "초대졸" &&
-                    `/${specData.college?.maxGrade}`}
-                </span>
+                <span css={maxGradeCSS}>{specData.lastEducation === "초대졸" && `/${specData.college?.maxGrade}`}</span>
               </span>
             </p>
           </div>
@@ -98,11 +89,7 @@ export const SpecRecommendCard: FunctionComponent<SpecRecommendCardProps> = ({
         </div>
       </div>
       <div css={buttonContainer}>
-        <LinkButton
-          text="평가하기"
-          variant="filled"
-          linkTo={`${SPEC_DETAIL_URL}/${specData.id}`}
-        />
+        <LinkButton text="평가하기" variant="filled" linkTo={`${SPEC_DETAIL_URL}/${specData.id}`} />
       </div>
     </article>
   );

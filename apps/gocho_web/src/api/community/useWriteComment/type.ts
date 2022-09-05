@@ -9,11 +9,7 @@ export interface RequestObjDef {
 }
 
 export interface PostWriteCommentDef {
-  ({
-    postingId,
-    description,
-    parentCommentId,
-  }: RequestObjDef): Promise<ResponseDef>;
+  ({ postingId, description, parentCommentId }: RequestObjDef): Promise<ResponseDef>;
 }
 
 export interface useWriteCommentProps {

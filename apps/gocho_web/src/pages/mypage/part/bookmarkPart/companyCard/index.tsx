@@ -16,9 +16,7 @@ import {
   companyLogoBox,
 } from "./style";
 
-export const CompanyCard: FunctionComponent<CompanyCardProps> = ({
-  companyData,
-}) => {
+export const CompanyCard: FunctionComponent<CompanyCardProps> = ({ companyData }) => {
   let size = "";
   let sector = "";
 
@@ -35,12 +33,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps> = ({
     <article css={cardWrapper}>
       <div css={bookmarkButtonWrapper}>
         <div css={bookmarkButtonBox}>
-          <Image
-            layout="fill"
-            objectFit="contain"
-            src="/images/global/star.png"
-            alt="북마크 버튼"
-          />
+          <Image layout="fill" objectFit="contain" src="/images/global/star.png" alt="북마크 버튼" />
         </div>
       </div>
       <p css={isRecruitingCSS}>#채용중</p>

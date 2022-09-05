@@ -4,12 +4,7 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { PaginationProps } from "./type";
 import { paginationContainer, movePageButton } from "./style";
 
-export const Pagination: FunctionComponent<PaginationProps> = ({
-  total,
-  limit,
-  page,
-  setPage,
-}) => {
+export const Pagination: FunctionComponent<PaginationProps> = ({ total, limit, page, setPage }) => {
   const totalPage = Math.ceil(total / limit);
 
   return (

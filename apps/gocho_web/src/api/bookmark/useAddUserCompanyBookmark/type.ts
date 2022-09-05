@@ -15,16 +15,9 @@ export interface AddUserCompanyBookmarkResponseDef {
 }
 
 export interface PostAddUserCompanyBookmarkDef {
-  ({
-    userId,
-    companyId,
-  }: RequestObjDef): Promise<AddUserCompanyBookmarkResponseDef>;
+  ({ userId, companyId }: RequestObjDef): Promise<AddUserCompanyBookmarkResponseDef>;
 }
 
 export interface useAddUserCompanyBookmarkProps {
-  (): UseMutationResult<
-    AddUserCompanyBookmarkResponseDef,
-    AxiosError,
-    RequestObjDef
-  >;
+  (): UseMutationResult<AddUserCompanyBookmarkResponseDef, AxiosError, RequestObjDef>;
 }

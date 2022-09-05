@@ -12,39 +12,12 @@ import etcPic from "@public/images/global/companyDetail/etc.svg";
 
 import { WelfareInfoPartProps } from "./type";
 
-import {
-  infoContainer,
-  infoBox,
-  infoPicture,
-  infoTitle,
-  textBox,
-  infoText,
-} from "./style";
+import { infoContainer, infoBox, infoPicture, infoTitle, textBox, infoText } from "./style";
 
-export const WelfareInfoPart: FunctionComponent<WelfareInfoPartProps> = ({
-  companyData,
-}) => {
-  const menuPictureList = [
-    moneyPic,
-    healthPic,
-    lifePic,
-    holidayPic,
-    facilityPic,
-    vacationPic,
-    growthPic,
-    etcPic,
-  ];
+export const WelfareInfoPart: FunctionComponent<WelfareInfoPartProps> = ({ companyData }) => {
+  const menuPictureList = [moneyPic, healthPic, lifePic, holidayPic, facilityPic, vacationPic, growthPic, etcPic];
 
-  const menuNameList = [
-    "급여",
-    "의료",
-    "생활",
-    "명절/경조사",
-    "시설",
-    "휴일/휴가",
-    "자기계발",
-    "기타",
-  ];
+  const menuNameList = ["급여", "의료", "생활", "명절/경조사", "시설", "휴일/휴가", "자기계발", "기타"];
 
   const menuDescList = [
     companyData.welfare.money,
@@ -64,12 +37,7 @@ export const WelfareInfoPart: FunctionComponent<WelfareInfoPartProps> = ({
           menuDescList[index] && (
             <div css={infoBox} key={`companyWelfareInfo${menuNameList[index]}`}>
               <div css={infoPicture}>
-                <Image
-                  layout="fill"
-                  objectFit="contain"
-                  src={pic}
-                  alt="급여 복지 관련 로고"
-                />
+                <Image layout="fill" objectFit="contain" src={pic} alt="급여 복지 관련 로고" />
               </div>
               <h4 css={infoTitle}>{menuNameList[index]}</h4>
               <div css={textBox}>

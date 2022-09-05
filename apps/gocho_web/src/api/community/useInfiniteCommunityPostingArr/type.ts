@@ -9,9 +9,5 @@ export interface ResponseObjDef {
 }
 
 export interface GetInfinitePostingArrDef {
-  (
-    requestObj: QueryFunctionContext<
-      ReturnType<typeof communityPostingArrKeyObj.infinite>
-    >
-  ): Promise<ResponseObjDef>;
+  (requestObj: QueryFunctionContext<ReturnType<typeof communityPostingArrKeyObj.infinite>>): Promise<ResponseObjDef>;
 }

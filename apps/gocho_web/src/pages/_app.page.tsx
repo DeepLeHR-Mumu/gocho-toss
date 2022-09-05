@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  QueryClient,
-  QueryClientProvider,
-  Hydrate,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import axios from "axios";

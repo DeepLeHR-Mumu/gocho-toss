@@ -28,10 +28,7 @@ import {
   buttonContainer,
 } from "./style";
 
-export const SpecCard: FunctionComponent<SpecCardProps | SpecCardSkeleton> = ({
-  specData,
-  isSkeleton,
-}) => {
+export const SpecCard: FunctionComponent<SpecCardProps | SpecCardSkeleton> = ({ specData, isSkeleton }) => {
   if (isSkeleton || typeof specData === "undefined") {
     return (
       <div css={specCardSkeleton}>
@@ -40,12 +37,8 @@ export const SpecCard: FunctionComponent<SpecCardProps | SpecCardSkeleton> = ({
     );
   }
 
-  const schoolDept =
-    specData.college === null
-      ? specData.highschool.type
-      : specData.college.department;
-  const gradeType =
-    specData.lastEducation === "초대졸" ? "평균 학점" : "내신 등급";
+  const schoolDept = specData.college === null ? specData.highschool.type : specData.college.department;
+  const gradeType = specData.lastEducation === "초대졸" ? "평균 학점" : "내신 등급";
   const grade =
     specData.lastEducation === "초대졸" && specData.college !== null
       ? specData.college.grade
@@ -72,9 +65,7 @@ export const SpecCard: FunctionComponent<SpecCardProps | SpecCardSkeleton> = ({
             <span css={gradeCSS}>
               {grade}
               <span css={maxGradeCSS}>
-                {specData.lastEducation === "초대졸" &&
-                  specData.college !== null &&
-                  `/${specData.college?.maxGrade}`}
+                {specData.lastEducation === "초대졸" && specData.college !== null && `/${specData.college?.maxGrade}`}
               </span>
             </span>
           </p>
@@ -115,11 +106,7 @@ export const SpecCard: FunctionComponent<SpecCardProps | SpecCardSkeleton> = ({
         </div>
       </div>
       <div css={buttonContainer}>
-        <LinkButton
-          text="평가하기"
-          variant="filled"
-          linkTo={`${SPEC_DETAIL_URL}/${specData.id}`}
-        />
+        <LinkButton text="평가하기" variant="filled" linkTo={`${SPEC_DETAIL_URL}/${specData.id}`} />
       </div>
     </article>
   );

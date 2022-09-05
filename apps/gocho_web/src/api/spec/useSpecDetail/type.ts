@@ -8,9 +8,5 @@ interface ResponseObjDef {
   data: SpecDetailObjDef;
 }
 export interface GetSpecDetailDef {
-  ({
-    queryKey,
-  }: QueryFunctionContext<
-    ReturnType<typeof specDetailKeyObj.spec>
-  >): Promise<ResponseObjDef>;
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof specDetailKeyObj.spec>>): Promise<ResponseObjDef>;
 }

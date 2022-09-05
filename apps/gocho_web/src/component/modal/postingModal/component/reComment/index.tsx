@@ -5,14 +5,7 @@ import { useDeleteComment } from "@api/community/useDeleteComment";
 import { communityCommentArrKeyObj } from "@constant/queryKeyFactory/community/commentArrKeyObj";
 
 import { reCommentProps } from "./type";
-import {
-  commentWrapper,
-  nicknameCSS,
-  bodyBox,
-  bodyCSS,
-  settingButtonContainer,
-  settingButton,
-} from "./style";
+import { commentWrapper, nicknameCSS, bodyBox, bodyCSS, settingButtonContainer, settingButton } from "./style";
 
 export const ReComment: FunctionComponent<reCommentProps> = ({
   id,

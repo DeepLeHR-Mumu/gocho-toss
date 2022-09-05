@@ -7,10 +7,7 @@ import { MYPAGE_URL } from "@constant/internalURL";
 import { MenuBoxesProps } from "./type";
 import { boxWrapper } from "./style";
 
-export const MenuBoxes: FunctionComponent<MenuBoxesProps> = ({
-  currentMenu,
-  handleSettingModal,
-}) => {
+export const MenuBoxes: FunctionComponent<MenuBoxesProps> = ({ currentMenu, handleSettingModal }) => {
   return (
     <>
       <Link href={MYPAGE_URL} passHref>
@@ -22,11 +19,7 @@ export const MenuBoxes: FunctionComponent<MenuBoxesProps> = ({
         </a>
       </Link>
 
-      <button
-        css={boxWrapper(currentMenu === "계정설정")}
-        type="button"
-        onClick={handleSettingModal}
-      >
+      <button css={boxWrapper(currentMenu === "계정설정")} type="button" onClick={handleSettingModal}>
         <FiSettings />
         <p>계정설정</p>
       </button>

@@ -24,9 +24,7 @@ import {
   wrapper,
 } from "./style";
 
-export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({
-  jobDetailData,
-}) => {
+export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDetailData }) => {
   const {
     year: startYear,
     month: startMonth,
@@ -54,12 +52,7 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({
             <li>{`${endYear}. ${endMonth}. ${endDate}  ${endHour}:${endMinute}`}</li>
           </ul>
           <DdayBox endTime={jobDetailData.endTime} />
-          <a
-            css={applyButton}
-            target="_blank"
-            href={jobDetailData.applyUrl}
-            rel="noopener noreferrer"
-          >
+          <a css={applyButton} target="_blank" href={jobDetailData.applyUrl} rel="noopener noreferrer">
             지원하러가기
           </a>
         </div>

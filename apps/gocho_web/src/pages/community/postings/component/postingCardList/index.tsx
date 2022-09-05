@@ -7,11 +7,7 @@ import { useModal } from "@recoil/hook/modal";
 import { PostingCardListProps } from "./type";
 import { PostingCard } from "../postingCard";
 
-export const PostingCardList: FunctionComponent<PostingCardListProps> = ({
-  keyword,
-  hashTag,
-  activeButtonFilter,
-}) => {
+export const PostingCardList: FunctionComponent<PostingCardListProps> = ({ keyword, hashTag, activeButtonFilter }) => {
   const {
     data: communityPostingArrData,
     isLoading,
@@ -28,10 +24,7 @@ export const PostingCardList: FunctionComponent<PostingCardListProps> = ({
   const observerRef = useRef<IntersectionObserver>();
   const boxRef = useRef<HTMLDivElement>(null);
 
-  const intersectionObserver = (
-    entries: IntersectionObserverEntry[],
-    io: IntersectionObserver
-  ) => {
+  const intersectionObserver = (entries: IntersectionObserverEntry[], io: IntersectionObserver) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         // 관찰하고 있는 entry가 화면에 보여지는 경우

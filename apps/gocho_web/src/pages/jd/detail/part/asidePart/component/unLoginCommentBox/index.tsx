@@ -35,8 +35,8 @@ export const UnLoginCommentBox: FunctionComponent = () => {
               <div css={commentBox}>
                 <h5 css={commentTypeCSS}>현재 공고 : 현재공고의 제목입니다.</h5>
                 <p css={commentDesc}>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Fugiat assumenda excepturi autem officiis dignissimos,
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat assumenda excepturi autem officiis
+                  dignissimos,
                 </p>
               </div>
             </div>
@@ -49,9 +49,7 @@ export const UnLoginCommentBox: FunctionComponent = () => {
             <div css={commentBody}>
               <div css={commentBox}>
                 <h5 css={commentTypeCSS}>현재 공고 : 현재공고의 제목입니다.</h5>
-                <p css={commentDesc}>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                </p>
+                <p css={commentDesc}>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
               </div>
             </div>
           </li>

@@ -31,9 +31,7 @@ export const AccountSettingBox: FunctionComponent = () => {
       <div css={wrapper}>
         <div css={marginContainer}>
           <div css={profileImgContainer}>
-            {userInfoData?.image && (
-              <ProfileImg imageStr={userInfoData?.image} size="L" />
-            )}
+            {userInfoData?.image && <ProfileImg imageStr={userInfoData?.image} size="L" />}
           </div>
           <p css={userNameCSS}>{userInfoData?.nickname}</p>
           <p css={accountCSS}>{userInfoData?.id}</p>

@@ -1,14 +1,7 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { FiX, FiCheckCircle } from "react-icons/fi";
 
-import {
-  buttonCSS,
-  container,
-  errorMessage,
-  errorMessageBox,
-  inputCSS,
-  labelCSS,
-} from "./style";
+import { buttonCSS, container, errorMessage, errorMessageBox, inputCSS, labelCSS } from "./style";
 import { AccountInputProps, ColorStateDef } from "./type";
 
 export const AccountInput: FunctionComponent<AccountInputProps> = ({

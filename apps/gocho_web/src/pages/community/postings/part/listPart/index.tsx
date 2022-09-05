@@ -8,17 +8,8 @@ import { Layout } from "@component/layout";
 import { useUserInfo } from "@api/auth";
 
 import { PostingCardList } from "../../component/postingCardList";
-import {
-  changeFilterDef,
-  changeHashtagDef,
-  FilterDef,
-  HashtagDef,
-  PostingValues,
-} from "./type";
-import {
-  setPostingFilterButtonArr,
-  setPostingHashtagButtonArr,
-} from "./constant";
+import { changeFilterDef, changeHashtagDef, FilterDef, HashtagDef, PostingValues } from "./type";
+import { setPostingFilterButtonArr, setPostingHashtagButtonArr } from "./constant";
 import {
   partContainer,
   colorPoint,
@@ -38,8 +29,7 @@ import {
 
 export const ListPart: FunctionComponent = () => {
   const [activeButtonFilter, setActiveButtonFilter] = useState<FilterDef>();
-  const [activeButtonHashtag, setActiveButtonHashtag] =
-    useState<HashtagDef>("recent");
+  const [activeButtonHashtag, setActiveButtonHashtag] = useState<HashtagDef>("recent");
   const [keyword, setKeyword] = useState("");
 
   const { setCurrentModal } = useModal();
@@ -89,9 +79,7 @@ export const ListPart: FunctionComponent = () => {
                 <button
                   type="button"
                   key={button.text}
-                  css={setPostingFilterButton(
-                    button.filter === activeButtonFilter
-                  )}
+                  css={setPostingFilterButton(button.filter === activeButtonFilter)}
                   onClick={() => {
                     return changePostingFilter(button.filter);
                   }}
@@ -100,11 +88,7 @@ export const ListPart: FunctionComponent = () => {
                 </button>
               );
             })}
-            <button
-              type="button"
-              css={writePostingButton}
-              onClick={openWritePostingModal}
-            >
+            <button type="button" css={writePostingButton} onClick={openWritePostingModal}>
               글 남기기
               <br />
               <AiOutlineEdit />
@@ -131,9 +115,7 @@ export const ListPart: FunctionComponent = () => {
                   <button
                     type="button"
                     key={button.text}
-                    css={setPostingHashtagButton(
-                      button.hashtag === activeButtonHashtag
-                    )}
+                    css={setPostingHashtagButton(button.hashtag === activeButtonHashtag)}
                     onClick={() => {
                       return changePostingHashtag(button.hashtag);
                     }}
@@ -143,11 +125,7 @@ export const ListPart: FunctionComponent = () => {
                 );
               })}
             </div>
-            <PostingCardList
-              keyword={keyword}
-              hashTag={activeButtonHashtag}
-              activeButtonFilter={activeButtonFilter}
-            />
+            <PostingCardList keyword={keyword} hashTag={activeButtonHashtag} activeButtonFilter={activeButtonFilter} />
           </div>
         </div>
       </Layout>

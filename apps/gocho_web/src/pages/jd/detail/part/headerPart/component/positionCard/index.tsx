@@ -18,9 +18,12 @@ import {
   containerSkeleton,
 } from "./style";
 
-export const PositionCard: FunctionComponent<
-  PositionCardProps | PositionCardSkeleton
-> = ({ currentPositionId, setCurrentPositionId, position, isSkeleton }) => {
+export const PositionCard: FunctionComponent<PositionCardProps | PositionCardSkeleton> = ({
+  currentPositionId,
+  setCurrentPositionId,
+  position,
+  isSkeleton,
+}) => {
   const [isHover, setIsHover] = useState<boolean>(false);
 
   const onMouseEnter = () => {
@@ -40,15 +43,9 @@ export const PositionCard: FunctionComponent<
 
   const isCurrentPosition = position.id === currentPositionId;
   return (
-    <article
-      css={wrapper}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
+    <article css={wrapper} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       <section css={container(isCurrentPosition, isHover)}>
-        <h4 css={titleCSS(isCurrentPosition, isHover)}>
-          {getJobTitleCreator(position)}
-        </h4>
+        <h4 css={titleCSS(isCurrentPosition, isHover)}>{getJobTitleCreator(position)}</h4>
 
         <div css={infoBox}>
           <p css={desc}>{position.possibleEdu.summary}</p>

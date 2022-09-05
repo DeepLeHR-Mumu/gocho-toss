@@ -8,9 +8,5 @@ interface ResponseObjDef {
 }
 
 export interface GetTipDetailDef {
-  ({
-    queryKey,
-  }: QueryFunctionContext<
-    ReturnType<typeof tipDetailKeyObj.detail>
-  >): Promise<ResponseObjDef>;
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof tipDetailKeyObj.detail>>): Promise<ResponseObjDef>;
 }
