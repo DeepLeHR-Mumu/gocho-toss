@@ -9,6 +9,7 @@ import defaultCompanyLogo from "@public/images/global/common/default_company_log
 import { dateConverter } from "@util/date";
 import { DdayBox } from "@component/common/atom/dDayBox";
 
+import { COMPANY_DETAIL_URL } from "@constant/internalURL";
 import { HeaderProps } from "./type";
 import {
   applyButton,
@@ -91,7 +92,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData }) => {
           </li>
           <li>
             <Link
-              href={`/companies/detail/${jobDetailData.company.companyId}`}
+              href={`${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`}
               passHref
             >
               <a css={ButtonCSS}>기업정보</a>

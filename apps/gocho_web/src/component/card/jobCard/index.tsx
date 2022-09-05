@@ -1,0 +1,163 @@
+import { FunctionComponent, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { BsFillBookmarkFill } from "react-icons/bs";
+import { FiEye } from "react-icons/fi";
+
+import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
+import highTrue from "@public/images/global/common/go_color.svg";
+import highFalse from "@public/images/global/common/go_mono.svg";
+import collegeTrue from "@public/images/global/common/cho_color.svg";
+import collegeFalse from "@public/images/global/common/cho_mono.svg";
+import { SkeletonBox } from "@component/common/atom/skeletonBox";
+import { DdayBox } from "@component/common/atom/dDayBox";
+import { JOBS_DETAIL_URL } from "@constant/internalURL";
+import { dateConverter } from "@util/date";
+
+import { JobCardProps, JobCardSkeleton } from "./type";
+import {
+  jobCardSkeleton,
+  cardWrapper,
+  bookmarkButtonWrapper,
+  bookmarkNumber,
+  viewWrapper,
+  viewNumber,
+  mainContainer,
+  companyLogoWrapper,
+  companyLogoBox,
+  dateInfoContainer,
+  date,
+  companyName,
+  titleCSS,
+  detailInfoContainer,
+  eduQual,
+  detailInfo,
+  taskContainer,
+  taskSummary,
+  taskNumber,
+  taskBox,
+  hoverButton,
+} from "./style";
+
+export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
+  jobData,
+  isSkeleton,
+}) => {
+  const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
+
+  if (isSkeleton || typeof jobData === "undefined") {
+    return (
+      <div css={jobCardSkeleton}>
+        <SkeletonBox />
+      </div>
+    );
+  }
+
+  const today = new Date();
+  const isExpired = jobData.endTime - Number(today) < 0;
+
+  const {
+    year: startYear,
+    month: startMonth,
+    date: startDate,
+  } = dateConverter(jobData.startTime);
+
+  const {
+    year: endYear,
+    month: endMonth,
+    date: endDate,
+  } = dateConverter(jobData.endTime);
+
+  return (
+    <article css={cardWrapper(isExpired)}>
+      <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
+        <a>
+          <button type="button" css={bookmarkButtonWrapper}>
+            <BsFillBookmarkFill />
+            <span css={bookmarkNumber}>{jobData.bookmark}</span>
+          </button>
+          <div css={viewWrapper}>
+            <FiEye />
+            <span css={viewNumber}>{jobData.view}</span>
+          </div>
+
+          <div css={mainContainer}>
+            <div css={companyLogoWrapper}>
+              <div className="Logo" css={companyLogoBox}>
+                <Image
+                  layout="fill"
+                  objectFit="contain"
+                  src={imageSrc}
+                  alt=""
+                  onError={() => {
+                    return setImageSrc(defaultCompanyLogo);
+                  }}
+                />
+              </div>
+            </div>
+            <div>
+              <div css={dateInfoContainer}>
+                <div css={date}>
+                  {`${startYear}/${startMonth}/${startDate}`}~
+                  {`${endYear}/${endMonth}/${endDate}`}
+                </div>
+                <DdayBox endTime={jobData.endTime} />
+              </div>
+              <div css={companyName}>{jobData.companyName}</div>
+              <h2 css={titleCSS}>{jobData.title}</h2>
+              <div css={detailInfoContainer}>
+                <div css={eduQual}>
+                  <Image
+                    src={jobData.high ? highTrue : highFalse}
+                    alt={jobData.high ? "고졸 지원 가능" : "고졸 지원 불가능"}
+                  />
+                </div>
+                <div css={eduQual}>
+                  <Image
+                    src={jobData.college ? collegeTrue : collegeFalse}
+                    alt={
+                      jobData.college
+                        ? "초대졸 지원 가능"
+                        : "초대졸 지원 불가능"
+                    }
+                  />
+                </div>
+                <div css={detailInfo}>
+                  {jobData.placeArr[0][1]}{" "}
+                  {jobData.placeArr.length !== 1 &&
+                    `외 ${jobData.placeArr.length - 1}곳`}
+                </div>
+
+                <div css={detailInfo}>
+                  {jobData.rotationArr[0]}{" "}
+                  {jobData.rotationArr.length !== 1 &&
+                    `외 ${jobData.rotationArr.length - 1}형태`}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div css={taskContainer}>
+            <div css={taskSummary}>
+              채용중인 직무
+              <span css={taskNumber}>{jobData.taskArr.length}</span>
+            </div>
+            {jobData.taskArr.map((task) => {
+              return (
+                <div css={taskBox} key={`${jobData.id}${task}`}>
+                  {task}
+                </div>
+              );
+            })}
+          </div>
+
+          <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
+            <a css={hoverButton} className="hoverButton">
+              공고보기
+            </a>
+          </Link>
+        </a>
+      </Link>
+    </article>
+  );
+};

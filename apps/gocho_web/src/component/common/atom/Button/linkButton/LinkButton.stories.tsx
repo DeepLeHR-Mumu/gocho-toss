@@ -19,7 +19,8 @@ export default {
     linkTo: { description: "버튼 클릭 시 이동되는 href" },
   },
   parameters: {
-    componentSubtitle: "메인페이지에서 전체적으로 사용되는 다른페이지로 이동하는 버튼",
+    componentSubtitle:
+      "메인페이지에서 전체적으로 사용되는 다른페이지로 이동하는 버튼",
   },
 } as ComponentMeta<typeof LinkButton>;
 
@@ -42,5 +43,6 @@ filled_링크아이콘.args = {
   iconObj: { size: 1, color: COLORS.GRAY100, icon: FiCheck, position: "right" },
 };
 filled_링크아이콘.parameters = {
-  componentSubtitle: "BaseButton의 wrapping 컴포넌트 - 링크에 사용되는 버튼 variant",
+  componentSubtitle:
+    "BaseButton의 wrapping 컴포넌트 - 링크에 사용되는 버튼 variant",
 };

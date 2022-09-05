@@ -20,7 +20,8 @@ export default {
     buttonClick: { description: "버튼 클릭 시 실행되는 onclick 함수" },
   },
   parameters: {
-    componentSubtitle: "메인페이지에서 전체적으로 사용되는 onClick또는 submit을 위한 버튼",
+    componentSubtitle:
+      "메인페이지에서 전체적으로 사용되는 onClick또는 submit을 위한 버튼",
   },
 } as ComponentMeta<typeof NormalButton>;
 

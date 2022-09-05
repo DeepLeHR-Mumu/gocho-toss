@@ -26,8 +26,8 @@ export const useInfiniteTipArr = (requestObj: TipArrRequestObjDef) => {
     tipArrKeyObj.infinite(requestObj),
     getInfiniteTipArr,
     {
-      getNextPageParam: (responseDef) => {
-        return responseDef.nextPage;
+      getNextPageParam: (responseObj) => {
+        return responseObj.data.length !== 0 ? responseObj.nextPage : undefined;
       },
       select: (data) => {
         return {

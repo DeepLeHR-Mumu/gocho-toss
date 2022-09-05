@@ -26,7 +26,8 @@ const postWriteComment: PostWriteCommentDef = async (requestObj) => {
 };
 
 export const useWriteComment: useWriteCommentProps = () => {
-  const mutationResult =
-    useMutation<ResponseDef, AxiosError, RequestObjDef>(postWriteComment);
+  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(
+    postWriteComment
+  );
   return mutationResult;
 };

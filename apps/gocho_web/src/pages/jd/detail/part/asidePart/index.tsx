@@ -24,67 +24,68 @@ import {
   wrapperSkeleton,
 } from "./style";
 
-export const AsidePart: FunctionComponent<AsidePartProps | AsidePartSkeleton> =
-  ({ companyId, isSkeleton }) => {
-    const { data: userData, isSuccess } = useUserInfo();
-    const { data: companyCommentArrData, isLoading } = useCompanyCommentArr({
-      companyId: Number(companyId),
-    });
+export const AsidePart: FunctionComponent<
+  AsidePartProps | AsidePartSkeleton
+> = ({ companyId, isSkeleton }) => {
+  const { data: userData, isSuccess } = useUserInfo();
+  const { data: companyCommentArrData, isLoading } = useCompanyCommentArr({
+    companyId: Number(companyId),
+  });
 
-    const [imageSrc, setImageSrc] = useState(
-      companyCommentArrData?.company.logoUrl as string
-    );
+  const [imageSrc, setImageSrc] = useState(
+    companyCommentArrData?.company.logoUrl as string
+  );
 
-    if (isSkeleton || !companyCommentArrData || isLoading) {
-      return (
-        <div css={wrapperSkeleton}>
-          <SkeletonBox />
-        </div>
-      );
-    }
-
-    const { commentArr, company } = companyCommentArrData;
-
+  if (isSkeleton || !companyCommentArrData || isLoading) {
     return (
-      <div>
-        <aside css={wrapper}>
-          <header css={headerCSS}>
-            <div css={flexBox}>
-              <div css={imageBox}>
-                <Image
-                  onError={() => {
-                    return setImageSrc(defaultCompanyLogo);
-                  }}
-                  src={imageSrc || company.logoUrl}
-                  alt={company.name}
-                  objectFit="contain"
-                  layout="fill"
-                />
-              </div>
-              <h3 css={companyName}>{company.name}</h3>
-            </div>
-            <nav css={commentButtonContainer}>
-              <ul>
-                <li>
-                  <button css={commentButton} type="button">
-                    전체 댓글 <span>{commentArr.length}</span>
-                  </button>
-                </li>
-                <li>
-                  <button css={commentButton} type="button">
-                    현재 공고 댓글
-                  </button>
-                </li>
-              </ul>
-            </nav>
-          </header>
-          {isSuccess ? (
-            <LoginCommentBox userData={userData} commentArr={commentArr} />
-          ) : (
-            <UnLoginCommentBox />
-          )}
-        </aside>
-        <ADComponent />
+      <div css={wrapperSkeleton}>
+        <SkeletonBox />
       </div>
     );
-  };
+  }
+
+  const { commentArr, company } = companyCommentArrData;
+
+  return (
+    <div>
+      <aside css={wrapper}>
+        <header css={headerCSS}>
+          <div css={flexBox}>
+            <div css={imageBox}>
+              <Image
+                onError={() => {
+                  return setImageSrc(defaultCompanyLogo);
+                }}
+                src={imageSrc || company.logoUrl}
+                alt={company.name}
+                objectFit="contain"
+                layout="fill"
+              />
+            </div>
+            <h3 css={companyName}>{company.name}</h3>
+          </div>
+          <nav css={commentButtonContainer}>
+            <ul>
+              <li>
+                <button css={commentButton} type="button">
+                  전체 댓글 <span>{commentArr.length}</span>
+                </button>
+              </li>
+              <li>
+                <button css={commentButton} type="button">
+                  현재 공고 댓글
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </header>
+        {isSuccess ? (
+          <LoginCommentBox userData={userData} commentArr={commentArr} />
+        ) : (
+          <UnLoginCommentBox />
+        )}
+      </aside>
+      <ADComponent />
+    </div>
+  );
+};

@@ -3,7 +3,6 @@ import { IconType } from "react-icons";
 
 export type ButtonVariant = "filled" | "outlined" | "text";
 
-
 interface ButtonProps {
   text: string;
   variant: ButtonVariant;
@@ -34,6 +33,4 @@ interface LinkButtonProps {
   };
 }
 
-export type GeneralButtonProps =
-  | ButtonProps
-  | LinkButtonProps;
+export type GeneralButtonProps = ButtonProps | LinkButtonProps;

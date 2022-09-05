@@ -29,7 +29,8 @@ const postWritePosting: PostWritePostingDef = async (requestObj) => {
 };
 
 export const useWritePosting: useWritePostingProps = () => {
-  const mutationResult =
-    useMutation<ResponseDef, AxiosError, RequestObjDef>(postWritePosting);
+  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(
+    postWritePosting
+  );
   return mutationResult;
 };

@@ -15,7 +15,10 @@ export default {
     title: { control: "string", description: "게시글 제목" },
     description: { control: "string", description: "게시글 본문" },
     nickname: { control: "string", description: "게시글 작성자의 닉네임" },
-    createdTime: { control: "number", description: "게시글 작성 시간, ms로 표시됨" },
+    createdTime: {
+      control: "number",
+      description: "게시글 작성 시간, ms로 표시됨",
+    },
     like: { control: "number", description: "게시글이 받은 좋아요 수" },
     view: { control: "number", description: "게시글 조회수" },
     commentCount: {

@@ -29,7 +29,8 @@ const postChangePosting: PostChangePostingDef = async (requestObj) => {
 };
 
 export const useChangePosting: useChangePostingProps = () => {
-  const mutationResult =
-    useMutation<ResponseDef, AxiosError, RequestObjDef>(postChangePosting);
+  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(
+    postChangePosting
+  );
   return mutationResult;
 };

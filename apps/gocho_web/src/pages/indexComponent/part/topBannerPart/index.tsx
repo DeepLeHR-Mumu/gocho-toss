@@ -29,11 +29,7 @@ export const TopBannerPart: FunctionComponent = () => {
               </a>
             </Link>
           </div>
-          <button
-            css={closeButton}
-            type="button"
-            aria-label="광고 바 닫기"
-          >
+          <button css={closeButton} type="button" aria-label="광고 바 닫기">
             <MdClear />
           </button>
         </div>

@@ -11,7 +11,7 @@ export const JobCardList: FunctionComponent<JobCardArrProps> = ({
   listOrder,
 }) => {
   const {
-    data: jobArrData,
+    data: jobDataArr,
     isLoading,
     isError,
   } = useJobArr({
@@ -20,7 +20,7 @@ export const JobCardList: FunctionComponent<JobCardArrProps> = ({
     limit: 9,
   });
 
-  if (!jobArrData || isError || isLoading) {
+  if (!jobDataArr || isError || isLoading) {
     return (
       <div css={cardListContainer}>
         {dummyArrCreator(9).map((value) => {
@@ -33,7 +33,7 @@ export const JobCardList: FunctionComponent<JobCardArrProps> = ({
   }
   return (
     <div css={cardListContainer}>
-      {jobArrData.map((job) => {
+      {jobDataArr.jobDataArr.map((job) => {
         return <JobSmallCard key={job.id} jobData={job} />;
       })}
     </div>

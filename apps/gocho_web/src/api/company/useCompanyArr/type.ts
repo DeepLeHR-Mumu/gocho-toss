@@ -4,6 +4,7 @@ import { CompanyDef } from "../type/companyArr";
 
 interface ResponseObjDef {
   data: CompanyDef[];
+  count: number;
 }
 
 export interface GetCompanyArrDef {

@@ -30,7 +30,7 @@ export const useInfiniteCommunityPostingArr = (
     getInfiniteCommunityPostingArr,
     {
       getNextPageParam: (responseObj) => {
-        return responseObj.nextPage;
+        return responseObj.data.length !== 0 ? responseObj.nextPage : undefined;
       },
       select: (data) => {
         return {

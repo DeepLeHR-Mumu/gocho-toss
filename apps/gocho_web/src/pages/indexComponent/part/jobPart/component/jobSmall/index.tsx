@@ -5,15 +5,15 @@ import Image from "next/image";
 import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
 import { DdayBox } from "@component/common/atom/dDayBox";
 import { SkeletonBox } from "@component/common/atom/skeletonBox";
-import { MAIN_URL } from "@constant/internalURL";
-
+import { JOBS_DETAIL_URL } from "@constant/internalURL";
 import {
   cardWrapper,
   jobInfoContainer,
   companyLogoBox,
   jobInfoBox,
+  companyNameContainer,
   companyNameBox,
-  companyNameCSS,
+  companyName,
   titleCSS,
   jobCardSkeleton,
 } from "./style";
@@ -31,7 +31,7 @@ export const JobSmallCard: FunctionComponent<
     );
   }
   return (
-    <Link href={MAIN_URL} passHref>
+    <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
       <a css={cardWrapper} aria-label={`${jobData.title} 채용 공고로 이동`}>
         <div css={jobInfoContainer}>
           <div css={companyLogoBox}>
@@ -46,9 +46,9 @@ export const JobSmallCard: FunctionComponent<
             />
           </div>
           <div css={jobInfoBox}>
-            <div css={companyNameBox}>
-              <p>
-                <strong css={companyNameCSS}>{jobData.companyName}</strong>
+            <div css={companyNameContainer}>
+              <p css={companyNameBox}>
+                <strong css={companyName}>{jobData.companyName}</strong>
               </p>
               <DdayBox endTime={jobData.endTime} />
             </div>

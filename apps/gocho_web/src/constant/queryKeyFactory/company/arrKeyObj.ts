@@ -1,5 +1,8 @@
 export interface CompanyArrRequestDef {
-  order: "comment";
+  q?: string;
+  limit?: number;
+  offset?: number;
+  order?: "recent" | "comment" | "name" | "popular" | "rand" | "view";
 }
 
 export const companyArrKeyObj = {
