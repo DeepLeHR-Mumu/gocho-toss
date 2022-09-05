@@ -7,9 +7,7 @@ import { dummyArrCreator } from "@util/dummyArrCreator";
 import { cardListContainer } from "./style";
 import { JobCardArrProps } from "./type";
 
-export const JobCardList: FunctionComponent<JobCardArrProps> = ({
-  listOrder,
-}) => {
+export const JobCardList: FunctionComponent<JobCardArrProps> = ({ listOrder }) => {
   const {
     data: jobDataArr,
     isLoading,
@@ -24,9 +22,7 @@ export const JobCardList: FunctionComponent<JobCardArrProps> = ({
     return (
       <div css={cardListContainer}>
         {dummyArrCreator(9).map((value) => {
-          return (
-            <JobSmallCard key={`JobSmallCardSkeleton${value}`} isSkeleton />
-          );
+          return <JobSmallCard key={`JobSmallCardSkeleton${value}`} isSkeleton />;
         })}
       </div>
     );

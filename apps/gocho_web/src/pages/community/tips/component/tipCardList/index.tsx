@@ -6,10 +6,7 @@ import { dummyArrCreator } from "@util/dummyArrCreator";
 import { TipCardListProps } from "./type";
 import { TipCard } from "../tipCard";
 
-export const TipCardList: FunctionComponent<TipCardListProps> = ({
-  companyId,
-  q,
-}) => {
+export const TipCardList: FunctionComponent<TipCardListProps> = ({ companyId, q }) => {
   const {
     data: infiniteTipArrData,
     isLoading,
@@ -24,10 +21,7 @@ export const TipCardList: FunctionComponent<TipCardListProps> = ({
   const observerRef = useRef<IntersectionObserver>();
   const boxRef = useRef<HTMLDivElement>(null);
 
-  const intersectionObserver = (
-    entries: IntersectionObserverEntry[],
-    io: IntersectionObserver
-  ) => {
+  const intersectionObserver = (entries: IntersectionObserverEntry[], io: IntersectionObserver) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         // 관찰하고 있는 entry가 화면에 보여지는 경우

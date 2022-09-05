@@ -7,9 +7,5 @@ interface ResponseObjDef {
 }
 
 export interface GetUserJobBookmarkArrDef {
-  (
-    requestObj: QueryFunctionContext<
-      ReturnType<typeof userJobBookmarkArrKeyObj.bookmarkArr>
-    >
-  ): Promise<ResponseObjDef>;
+  (requestObj: QueryFunctionContext<ReturnType<typeof userJobBookmarkArrKeyObj.bookmarkArr>>): Promise<ResponseObjDef>;
 }

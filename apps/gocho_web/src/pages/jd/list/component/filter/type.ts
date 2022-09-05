@@ -1,9 +1,4 @@
-import {
-  UseFormGetValues,
-  UseFormRegister,
-  UseFormSetValue,
-  UseFormWatch,
-} from "react-hook-form";
+import { UseFormGetValues, UseFormRegister, UseFormSetValue, UseFormWatch } from "react-hook-form";
 import { PostingValues } from "../../part/listPart/type";
 
 export interface FilterProps {
@@ -13,14 +8,7 @@ export interface FilterProps {
   getValues: UseFormGetValues<PostingValues>;
 }
 
-export type filterMenuDef =
-  | "학력"
-  | "근무지"
-  | "경력"
-  | "계약형태"
-  | "교대형태"
-  | "업종"
-  | "직무";
+export type filterMenuDef = "학력" | "근무지" | "경력" | "계약형태" | "교대형태" | "업종" | "직무";
 
 export type filterQueryDef =
   | "possibleEdu"

@@ -7,11 +7,7 @@ import { MAIN_URL } from "@constant/internalURL";
 import { closeButtonWrapper } from "./style";
 import { ButtonProps } from "./type";
 
-export const CloseButton: FunctionComponent<ButtonProps> = ({
-  size,
-  buttonClick,
-  isHome,
-}) => {
+export const CloseButton: FunctionComponent<ButtonProps> = ({ size, buttonClick, isHome }) => {
   if (isHome) {
     return (
       <a>

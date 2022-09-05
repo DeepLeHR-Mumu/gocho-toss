@@ -12,8 +12,7 @@ export default {
     backgrounds: {
       default: "dark",
     },
-    componentSubtitle:
-      "마이페이지에서 이용자 정보를 수정하는 모달 창, createportal 사용",
+    componentSubtitle: "마이페이지에서 이용자 정보를 수정하는 모달 창, createportal 사용",
   },
 } as ComponentMeta<typeof AccountSettingBox>;
 

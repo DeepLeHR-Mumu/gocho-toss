@@ -17,21 +17,14 @@ import {
   noData,
 } from "./style";
 
-export const PayInfoPart: FunctionComponent<PayInfoPartProps> = ({
-  companyData,
-}) => {
+export const PayInfoPart: FunctionComponent<PayInfoPartProps> = ({ companyData }) => {
   return (
     <div css={infoContainer}>
       <div css={flexBox}>
         <div css={infoBox}>
           <div>
             <div css={infoPicture}>
-              <Image
-                layout="fill"
-                objectFit="contain"
-                src={payAvg}
-                alt="급여 복지 관련 로고"
-              />
+              <Image layout="fill" objectFit="contain" src={payAvg} alt="급여 복지 관련 로고" />
             </div>
             <h4 css={infoTitle}>평균 연봉</h4>
           </div>
@@ -47,12 +40,7 @@ export const PayInfoPart: FunctionComponent<PayInfoPartProps> = ({
         <div css={infoBox}>
           <div>
             <div css={infoPicture}>
-              <Image
-                layout="fill"
-                objectFit="contain"
-                src={payStart}
-                alt="급여 복지 관련 로고"
-              />
+              <Image layout="fill" objectFit="contain" src={payStart} alt="급여 복지 관련 로고" />
             </div>
             <h4 css={infoTitle}>평균 초봉</h4>
           </div>
@@ -70,11 +58,7 @@ export const PayInfoPart: FunctionComponent<PayInfoPartProps> = ({
       <div css={flexBox}>
         <h4 css={etcTitle}>기타 연봉 정보</h4>
         <div>
-          {companyData.payDesc ? (
-            <div>{companyData.payDesc}</div>
-          ) : (
-            <div css={noData}>아직 모으고 있는 중이에요!</div>
-          )}
+          {companyData.payDesc ? <div>{companyData.payDesc}</div> : <div css={noData}>아직 모으고 있는 중이에요!</div>}
         </div>
       </div>
     </div>

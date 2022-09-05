@@ -1,9 +1,4 @@
-import {
-  EvalDef,
-  IndustryType,
-  LanguageType,
-  TaskType,
-} from "@api/spec/type/common";
+import { EvalDef, IndustryType, LanguageType, TaskType } from "@api/spec/type/common";
 import { ImageType } from "@type/ui/imageType";
 
 export interface SpecDetailObjDef {

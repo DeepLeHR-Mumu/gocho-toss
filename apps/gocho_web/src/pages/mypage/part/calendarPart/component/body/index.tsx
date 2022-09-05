@@ -9,14 +9,7 @@ import { Bookmark } from "../bookmark";
 
 import { weekDayCreator, getDateHours } from "./util";
 import { BodyProps } from "./type";
-import {
-  skeletonContainer,
-  weekdayContainer,
-  weekdayCSS,
-  table,
-  todayCSS,
-  dayCSS,
-} from "./style";
+import { skeletonContainer, weekdayContainer, weekdayCSS, table, todayCSS, dayCSS } from "./style";
 
 export const Body: FunctionComponent<BodyProps> = ({ twoWeek }) => {
   const { data: userInfoData } = useUserInfo();

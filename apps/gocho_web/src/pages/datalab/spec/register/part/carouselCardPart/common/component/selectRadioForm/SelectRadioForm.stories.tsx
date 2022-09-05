@@ -4,8 +4,7 @@ import { css } from "@emotion/react";
 import { SelectRadioForm } from ".";
 
 export default {
-  title:
-    "datalab/spec/register/part/carouselCardPart/common/component/SelectRadioForm",
+  title: "datalab/spec/register/part/carouselCardPart/common/component/SelectRadioForm",
   component: SelectRadioForm,
   argTypes: {
     itemArr: {

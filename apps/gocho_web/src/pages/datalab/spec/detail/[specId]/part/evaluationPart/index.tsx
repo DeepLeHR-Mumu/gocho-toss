@@ -23,18 +23,10 @@ import {
   disabledButton,
   titleContainer,
 } from "./style";
-import {
-  DeleteSelectedBoxDef,
-  EvaluationValues,
-  EvaluationPartProps,
-} from "./type";
+import { DeleteSelectedBoxDef, EvaluationValues, EvaluationPartProps } from "./type";
 import { EvalPointBox } from "./component/evalPointBox";
 
-export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({
-  isMine,
-  didEval,
-  evalCount,
-}) => {
+export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine, didEval, evalCount }) => {
   const router = useRouter();
   const { specId } = router.query;
   const [specScore, setSpecScore] = useState(0);
@@ -56,11 +48,7 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({
   const weakWatch = watch("weakness");
   const scoreWatch = watch("score");
 
-  const deleteSelectedBox: DeleteSelectedBoxDef = (
-    formValue,
-    pointName,
-    targetArr
-  ) => {
+  const deleteSelectedBox: DeleteSelectedBoxDef = (formValue, pointName, targetArr) => {
     setValue(formValue, [
       ...targetArr.filter((value) => {
         return value !== pointName;
@@ -77,11 +65,7 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({
     // eslint-disable-next-line no-console
     if (isDirty) console.log(submitData);
     // eslint-disable-next-line no-useless-return
-    if (
-      submitData.strength.length === 0 ||
-      submitData.weakness.length === 0 ||
-      submitData.score === 0
-    ) {
+    if (submitData.strength.length === 0 || submitData.weakness.length === 0 || submitData.score === 0) {
       return;
     }
     mutate(
@@ -149,9 +133,7 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({
         <section css={sectionContainer}>
           <div css={titleContainer}>
             <h3>강점</h3>
-            {(isSubmitted || isDirty) && strengthWatch.length === 0 && (
-              <span>최소 1개를 골라주세요</span>
-            )}
+            {(isSubmitted || isDirty) && strengthWatch.length === 0 && <span>최소 1개를 골라주세요</span>}
           </div>
           <div>
             <div css={listBox(isStrongSelectBox)}>
@@ -196,9 +178,7 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({
         <section css={sectionContainer}>
           <div css={titleContainer}>
             <h3>약점</h3>
-            {(isSubmitted || isDirty) && weakWatch.length === 0 && (
-              <span>최소 1개를 골라주세요</span>
-            )}
+            {(isSubmitted || isDirty) && weakWatch.length === 0 && <span>최소 1개를 골라주세요</span>}
           </div>
           <div>
             <div css={listBox(isWeakSelectBox)}>
@@ -245,16 +225,11 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({
             <h3>기타 피드백(선택)</h3>
           </div>
           <div css={feedBackContainer}>
-            <textarea
-              maxLength={100}
-              {...register("feedback", { maxLength: 100 })}
-            />
+            <textarea maxLength={100} {...register("feedback", { maxLength: 100 })} />
           </div>
         </section>
         <section css={pointContainer}>
-          {(isSubmitted || isDirty) && scoreWatch === 0 && (
-            <span>0점 이상 메겨주세요.</span>
-          )}
+          {(isSubmitted || isDirty) && scoreWatch === 0 && <span>0점 이상 메겨주세요.</span>}
           <h3 css={subTitle}>총점</h3>
           <input type="hidden" {...register("score")} value={specScore} />
           <p css={pointCSS}>{specScore}</p>

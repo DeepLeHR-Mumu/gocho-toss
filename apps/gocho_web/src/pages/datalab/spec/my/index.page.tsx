@@ -11,14 +11,7 @@ import { AsideMenu } from "../component/asideMenu";
 import { SimpleCard } from "./component/simpleCard";
 import { Pagination } from "./component/pagination";
 
-import {
-  flexBox,
-  title,
-  wrapper,
-  container,
-  tableHead,
-  cardBox,
-} from "./style";
+import { flexBox, title, wrapper, container, tableHead, cardBox } from "./style";
 
 export const MySpecHistory: NextPage = () => {
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
@@ -33,10 +26,7 @@ export const MySpecHistory: NextPage = () => {
 
   // LATER : 모달 홈으로 가기 부분 props로 변경하기?
   useEffect(() => {
-    if (
-      axios.isAxiosError(error) &&
-      (error.response?.status === 401 || error.response?.status === 403)
-    ) {
+    if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
       setCurrentModal("loginModal");
     }
     return () => {
@@ -68,16 +58,11 @@ export const MySpecHistory: NextPage = () => {
     );
   }
 
-  const totalPage = Math.ceil(
-    mySpecHistoryData.specArr.length / activeCardCount
-  );
+  const totalPage = Math.ceil(mySpecHistoryData.specArr.length / activeCardCount);
 
   const firstArrIndex = (currentPage - 1) * activeCardCount;
   const lastArrIndex = currentPage * activeCardCount;
-  const filterMySpecHistoryArr = mySpecHistoryData.specArr.slice(
-    firstArrIndex,
-    lastArrIndex
-  );
+  const filterMySpecHistoryArr = mySpecHistoryData.specArr.slice(firstArrIndex, lastArrIndex);
 
   return (
     <main css={wrapper}>
@@ -110,11 +95,7 @@ export const MySpecHistory: NextPage = () => {
                 })}
               </div>
 
-              <Pagination
-                totalPage={totalPage}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-              />
+              <Pagination totalPage={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
             </article>
           </div>
         </section>

@@ -5,9 +5,7 @@ import { FiHome, FiAward, FiSettings } from "react-icons/fi";
 import { activatedBox } from "./style";
 import { CurrentMenuBoxProps } from "./type";
 
-export const CurrentMenuBox: FunctionComponent<CurrentMenuBoxProps> = ({
-  currentMenu,
-}) => {
+export const CurrentMenuBox: FunctionComponent<CurrentMenuBoxProps> = ({ currentMenu }) => {
   return (
     <div css={activatedBox}>
       {currentMenu === "MY 홈" && <FiHome color={COLORS.BLUE_FIRST40} />}

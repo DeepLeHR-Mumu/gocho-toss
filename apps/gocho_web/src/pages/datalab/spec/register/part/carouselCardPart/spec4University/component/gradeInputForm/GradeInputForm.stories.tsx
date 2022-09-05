@@ -4,8 +4,7 @@ import { css } from "@emotion/react";
 import { GradeInputForm } from ".";
 
 export default {
-  title:
-    "datalab/spec/register/part/carouselCardPart/Spec4University/component/GradeInputForm",
+  title: "datalab/spec/register/part/carouselCardPart/Spec4University/component/GradeInputForm",
   component: GradeInputForm,
   argTypes: {
     gradeObj: {

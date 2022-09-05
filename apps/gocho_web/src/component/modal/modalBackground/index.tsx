@@ -3,10 +3,7 @@ import { createPortal } from "react-dom";
 import { dimmed } from "./style";
 import { modalComponentProps } from "./type";
 
-export const ModalComponent: FunctionComponent<modalComponentProps> = ({
-  children,
-  closeModal,
-}) => {
+export const ModalComponent: FunctionComponent<modalComponentProps> = ({ children, closeModal }) => {
   const closeOnClick = useCallback(
     (event?): void => {
       if (event?.target === event?.currentTarget) {

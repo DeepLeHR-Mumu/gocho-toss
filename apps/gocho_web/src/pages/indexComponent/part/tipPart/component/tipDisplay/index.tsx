@@ -99,11 +99,7 @@ export const TipDisplay: FunctionComponent<TipDisplayProps> = ({ id }) => {
           </strong>
         </p>
         <p css={currentTipDesc}>{tipDetailData.description}</p>
-        <LinkButton
-          linkTo={COMMUNITY_TIPS_LIST_URL}
-          variant="filled"
-          text="취업꿀팁 더보기"
-        />
+        <LinkButton linkTo={COMMUNITY_TIPS_LIST_URL} variant="filled" text="취업꿀팁 더보기" />
       </div>
     </article>
   );

@@ -18,8 +18,7 @@ export default {
       description: "선택된 position의 아이디를 변환해주는 setAction",
     },
     setFreshPosition: {
-      description:
-        "변경된 currentPositionId값 기준으로 position를 변환해주는 setAction",
+      description: "변경된 currentPositionId값 기준으로 position를 변환해주는 setAction",
     },
     currentPositionId: {
       description: "선택된 최신의 position Id",
@@ -64,8 +63,7 @@ export const 기본 = Template.bind({});
     company: {
       companyId: 307,
       name: "포스터 ICT",
-      logoUrl:
-        "https://d2nnzfahmszi6w.cloudfront.net/company_images/337/logo.png",
+      logoUrl: "https://d2nnzfahmszi6w.cloudfront.net/company_images/337/logo.png",
       youtubeUrl: "https://youtube.com",
     },
     positionArr: [

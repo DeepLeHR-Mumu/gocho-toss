@@ -2,13 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 
 import { axiosInstance } from "@api/axiosInstance";
 
-import {
-  PatchUserInfoDef,
-  RequestObjDef,
-  UserInfoResponse,
-  UsePatchUserInfoProps,
-  ErrorResponse,
-} from "./type";
+import { PatchUserInfoDef, RequestObjDef, UserInfoResponse, UsePatchUserInfoProps, ErrorResponse } from "./type";
 
 const patchUserInfo: PatchUserInfoDef = async (requestObj) => {
   const token = localStorage.getItem("token") as string;
@@ -26,10 +20,6 @@ const patchUserInfo: PatchUserInfoDef = async (requestObj) => {
 };
 
 export const usePatchUserInfo: UsePatchUserInfoProps = () => {
-  const mutationResult = useMutation<
-    UserInfoResponse,
-    ErrorResponse,
-    RequestObjDef
-  >(patchUserInfo);
+  const mutationResult = useMutation<UserInfoResponse, ErrorResponse, RequestObjDef>(patchUserInfo);
   return mutationResult;
 };

@@ -23,8 +23,7 @@ export default {
   },
   parameters: {
     layout: "padded",
-    componentSubtitle:
-      "메인페이지 - 실시간 커뮤니티 글 모음에 출력되는 커뮤니티 글 카드",
+    componentSubtitle: "메인페이지 - 실시간 커뮤니티 글 모음에 출력되는 커뮤니티 글 카드",
   },
 } as ComponentMeta<typeof CommunityPostingCard>;
 
@@ -40,9 +39,7 @@ const Template: ComponentStory<typeof CommunityPostingCard> = (args) => {
   );
 };
 
-const TemplateSkelton: ComponentStory<typeof CommunityPostingCardSkeleton> = (
-  args
-) => {
+const TemplateSkelton: ComponentStory<typeof CommunityPostingCardSkeleton> = (args) => {
   return (
     <div
       css={css`

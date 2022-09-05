@@ -6,10 +6,7 @@ import { getBetweenDate, getDateHours } from "./util";
 import { container, desc } from "./style";
 import { BookmarkProps } from "./type";
 
-export const Bookmark: FunctionComponent<BookmarkProps> = ({
-  bookmarkData,
-  dayHours,
-}) => {
+export const Bookmark: FunctionComponent<BookmarkProps> = ({ bookmarkData, dayHours }) => {
   return (
     <ul css={container}>
       {/* LATER null 제거하기, nul이 존재한다 === 구조가 잘못됐다 로 보면 될듯 */}

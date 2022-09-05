@@ -10,8 +10,6 @@ interface ResponseObjDef {
 
 export interface GetUserCompanyBookmarkArrDef {
   (
-    requestObj: QueryFunctionContext<
-      ReturnType<typeof userCompanyBookmarkArrKeyObj.bookmarkArr>
-    >
+    requestObj: QueryFunctionContext<ReturnType<typeof userCompanyBookmarkArrKeyObj.bookmarkArr>>
   ): Promise<ResponseObjDef>;
 }

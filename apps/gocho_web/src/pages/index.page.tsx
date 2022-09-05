@@ -33,42 +33,18 @@ export async function getStaticProps() {
     }),
     getJobArr
   );
-  await queryClient.prefetchQuery(
-    companyCommentArrKeyObj.commentArr({ companyId: 623 }),
-    getCompanyComment
-  );
-  await queryClient.prefetchQuery(
-    companyCommentArrKeyObj.commentArr({ companyId: 87 }),
-    getCompanyComment
-  );
-  await queryClient.prefetchQuery(
-    companyCommentArrKeyObj.commentArr({ companyId: 418 }),
-    getCompanyComment
-  );
-  await queryClient.prefetchQuery(
-    companyCommentArrKeyObj.commentArr({ companyId: 585 }),
-    getCompanyComment
-  );
-  await queryClient.prefetchQuery(
-    companyCommentArrKeyObj.commentArr({ companyId: 612 }),
-    getCompanyComment
-  );
-  await queryClient.prefetchQuery(
-    companyCommentArrKeyObj.commentArr({ companyId: 334 }),
-    getCompanyComment
-  );
+  await queryClient.prefetchQuery(companyCommentArrKeyObj.commentArr({ companyId: 623 }), getCompanyComment);
+  await queryClient.prefetchQuery(companyCommentArrKeyObj.commentArr({ companyId: 87 }), getCompanyComment);
+  await queryClient.prefetchQuery(companyCommentArrKeyObj.commentArr({ companyId: 418 }), getCompanyComment);
+  await queryClient.prefetchQuery(companyCommentArrKeyObj.commentArr({ companyId: 585 }), getCompanyComment);
+  await queryClient.prefetchQuery(companyCommentArrKeyObj.commentArr({ companyId: 612 }), getCompanyComment);
+  await queryClient.prefetchQuery(companyCommentArrKeyObj.commentArr({ companyId: 334 }), getCompanyComment);
 
-  await queryClient.prefetchQuery(
-    communityPostingArrKeyObj.postingArr({ limit: 6 }),
-    getCommunityPostingArr
-  );
+  await queryClient.prefetchQuery(communityPostingArrKeyObj.postingArr({ limit: 6 }), getCommunityPostingArr);
 
   await queryClient.prefetchQuery(tipArrKeyObj.tipArr({}), getTipArr);
 
-  await queryClient.prefetchQuery(
-    specArrKeyObj.list({ order: "-score", limit: 9 }),
-    getSpecArr
-  );
+  await queryClient.prefetchQuery(specArrKeyObj.list({ order: "-score", limit: 9 }), getSpecArr);
   return {
     props: {
       dehydratedState: dehydrate(queryClient),

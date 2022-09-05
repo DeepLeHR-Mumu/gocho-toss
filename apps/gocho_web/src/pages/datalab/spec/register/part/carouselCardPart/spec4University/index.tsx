@@ -20,10 +20,7 @@ import { Spec4UniversityProps, PostSubmitValues } from "./type";
 import { specCardWrapper, formCSS } from "../common/style";
 import { flex, arrContainer } from "./style";
 
-export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({
-  moveNextCard,
-  movePrevCard,
-}) => {
+export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveNextCard, movePrevCard }) => {
   const {
     handleSubmit,
     register,
@@ -54,10 +51,7 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({
 
   return (
     <div css={specCardWrapper}>
-      <SpecCardTitle
-        title="고등학교 학력정보"
-        desc="정확하게 입력할 수록 스펙평가의 적중도는 올라갑니다."
-      />
+      <SpecCardTitle title="고등학교 학력정보" desc="정확하게 입력할 수록 스펙평가의 적중도는 올라갑니다." />
 
       <form css={formCSS}>
         <ContainerBox
@@ -74,9 +68,7 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({
             backgroundStyle="blue02"
             itemArr={highschoolType}
           />
-          {errors.highschool?.type && (
-            <WarningText msg={errors.highschool?.type} />
-          )}
+          {errors.highschool?.type && <WarningText msg={errors.highschool?.type} />}
         </ContainerBox>
 
         <ContainerBox
@@ -149,18 +141,10 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({
               />
             </li>
           </ul>
-          {errors.highschool?.absent?.message && (
-            <WarningText msg={errors.highschool.absent.message} />
-          )}
-          {errors.highschool?.tardy?.message && (
-            <WarningText msg={errors.highschool.tardy.message} />
-          )}
-          {errors.highschool?.leaveEarly?.message && (
-            <WarningText msg={errors.highschool.leaveEarly.message} />
-          )}
-          {errors.highschool?.classMiss?.message && (
-            <WarningText msg={errors.highschool.classMiss.message} />
-          )}
+          {errors.highschool?.absent?.message && <WarningText msg={errors.highschool.absent.message} />}
+          {errors.highschool?.tardy?.message && <WarningText msg={errors.highschool.tardy.message} />}
+          {errors.highschool?.leaveEarly?.message && <WarningText msg={errors.highschool.leaveEarly.message} />}
+          {errors.highschool?.classMiss?.message && <WarningText msg={errors.highschool.classMiss.message} />}
         </ContainerBox>
 
         <ContainerBox
@@ -188,9 +172,7 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({
             lastDesc="등급"
             placeholder="입력칸"
           />
-          {errors.highschool?.naesin?.message && (
-            <WarningText msg={errors.highschool.naesin.message} />
-          )}
+          {errors.highschool?.naesin?.message && <WarningText msg={errors.highschool.naesin.message} />}
         </ContainerBox>
 
         <ContainerBox
@@ -230,15 +212,9 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({
               })}
             />
           </div>
-          {errors.college?.department?.message && (
-            <WarningText msg={errors.college?.department?.message} />
-          )}
-          {errors.college?.grade?.message && (
-            <WarningText msg={errors.college?.grade?.message} />
-          )}
-          {errors.college?.maxGrade?.message && (
-            <WarningText msg={errors.college?.maxGrade?.message} />
-          )}
+          {errors.college?.department?.message && <WarningText msg={errors.college?.department?.message} />}
+          {errors.college?.grade?.message && <WarningText msg={errors.college?.grade?.message} />}
+          {errors.college?.maxGrade?.message && <WarningText msg={errors.college?.maxGrade?.message} />}
         </ContainerBox>
 
         <ContainerBox
@@ -248,19 +224,10 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({
           }}
         >
           <Desc desc="잠깐, 혹시 U - 턴 하셨나요?" />
-          <Toggle
-            registerObj={register("college.uturn")}
-            value={uturnWatch}
-            id="uTurn"
-            yesDesc="네"
-            noDesc="아니오"
-          />
+          <Toggle registerObj={register("college.uturn")} value={uturnWatch} id="uTurn" yesDesc="네" noDesc="아니오" />
         </ContainerBox>
 
-        <MoveCardButtons
-          movePrevCard={movePrevCard}
-          postSubmit={handleSubmit(postSubmit)}
-        />
+        <MoveCardButtons movePrevCard={movePrevCard} postSubmit={handleSubmit(postSubmit)} />
       </form>
     </div>
   );

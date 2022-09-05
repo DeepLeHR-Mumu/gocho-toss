@@ -8,13 +8,7 @@ import { Layout } from "@component/layout";
 
 import { BestUserList } from "./component/bestUserList";
 import { BestUserBox } from "./component/bestUserInfo";
-import {
-  specBestWrapper,
-  colorPoint,
-  title,
-  linkButton,
-  bestUserWrapper,
-} from "./stye";
+import { specBestWrapper, colorPoint, title, linkButton, bestUserWrapper } from "./stye";
 
 export const SpecBestPart: FunctionComponent = () => {
   const [activeUserID, setActiveUserID] = useState(0);

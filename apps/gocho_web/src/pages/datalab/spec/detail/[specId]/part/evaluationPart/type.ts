@@ -12,9 +12,5 @@ export interface EvaluationPartProps {
 }
 
 export interface DeleteSelectedBoxDef {
-  (
-    formValue: "weakness" | "strength",
-    pointName: string,
-    targetArr: string[]
-  ): void;
+  (formValue: "weakness" | "strength", pointName: string, targetArr: string[]): void;
 }

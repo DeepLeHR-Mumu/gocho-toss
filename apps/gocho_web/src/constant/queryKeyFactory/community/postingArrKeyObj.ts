@@ -1,7 +1,4 @@
-import {
-  FilterDef,
-  HashtagDef,
-} from "@pages/community/postings/part/listPart/type";
+import { FilterDef, HashtagDef } from "@pages/community/postings/part/listPart/type";
 
 export interface CommunityPostingArrRequestDef {
   order?: "recent" | "popular" | "rand" | "view";

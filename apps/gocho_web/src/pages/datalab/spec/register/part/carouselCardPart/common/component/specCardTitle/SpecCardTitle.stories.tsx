@@ -3,8 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { SpecCardTitle } from ".";
 
 export default {
-  title:
-    "datalab/spec/register/part/carouselCardPart/common/component/SpecCardTitle",
+  title: "datalab/spec/register/part/carouselCardPart/common/component/SpecCardTitle",
   component: SpecCardTitle,
   argTypes: {
     title: {

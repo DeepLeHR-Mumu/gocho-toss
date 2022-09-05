@@ -20,18 +20,10 @@ export const tipFadeContainer = css`
 `;
 
 interface buttonCSSDef {
-  (
-    location: "left" | "right",
-    length: number,
-    activeNumber: number
-  ): SerializedStyles;
+  (location: "left" | "right", length: number, activeNumber: number): SerializedStyles;
 }
 
-export const buttonCSSCreator: buttonCSSDef = (
-  location,
-  length,
-  activeNumber
-) => {
+export const buttonCSSCreator: buttonCSSDef = (location, length, activeNumber) => {
   return css`
     width: 4.125rem;
     height: 4.125rem;

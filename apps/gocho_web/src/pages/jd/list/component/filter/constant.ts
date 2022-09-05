@@ -126,12 +126,4 @@ export const positionArr: filterMenuListDef = {
   ],
 };
 
-export const filterMenuListArr = [
-  eduArr,
-  placeArr,
-  expArr,
-  contractArr,
-  rotationArr,
-  taskArr,
-  positionArr,
-];
+export const filterMenuListArr = [eduArr, placeArr, expArr, contractArr, rotationArr, taskArr, positionArr];

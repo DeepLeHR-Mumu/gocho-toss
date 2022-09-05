@@ -30,13 +30,9 @@ import {
 } from "./style";
 import { BestUserInfoProps } from "./type";
 
-export const BestUserBox: FunctionComponent<BestUserInfoProps> = ({
-  bestUserData,
-}) => {
+export const BestUserBox: FunctionComponent<BestUserInfoProps> = ({ bestUserData }) => {
   const educationTypeTitle = bestUserData.college ? "학과" : "학교종류";
-  const educationType = bestUserData.college
-    ? `${bestUserData.college.department}`
-    : `${bestUserData.highschool.type}`;
+  const educationType = bestUserData.college ? `${bestUserData.college.department}` : `${bestUserData.highschool.type}`;
 
   return (
     <div css={bestUserInfoWrapper}>
@@ -53,9 +49,7 @@ export const BestUserBox: FunctionComponent<BestUserInfoProps> = ({
               <span css={scoreTitle}>총 점</span>
               <span css={currentScore}>{bestUserData.score} </span>
               <span css={totalScore}> / 5</span>
-              <span css={userEvalCount}>
-                평가수 : {bestUserData.scoreCount}
-              </span>
+              <span css={userEvalCount}>평가수 : {bestUserData.scoreCount}</span>
             </p>
             <p css={recruSectorDesc}>{bestUserData.desiredTask}</p>
           </div>
@@ -79,21 +73,15 @@ export const BestUserBox: FunctionComponent<BestUserInfoProps> = ({
             <ul css={infoArrCSS}>
               <li>
                 기능사
-                <span css={infoValueCSS}>
-                  {bestUserData.certificate.level1}
-                </span>
+                <span css={infoValueCSS}>{bestUserData.certificate.level1}</span>
               </li>
               <li>
                 산업기사
-                <span css={infoValueCSS}>
-                  {bestUserData.certificate.level2}
-                </span>
+                <span css={infoValueCSS}>{bestUserData.certificate.level2}</span>
               </li>
               <li>
                 산업기사+
-                <span css={infoValueCSS}>
-                  {bestUserData.certificate.level3}
-                </span>
+                <span css={infoValueCSS}>{bestUserData.certificate.level3}</span>
               </li>
             </ul>
           )}

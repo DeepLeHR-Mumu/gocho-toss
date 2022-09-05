@@ -14,8 +14,7 @@ export default {
     variant: { description: "버튼의 변형 형태 지정" },
     buttonClick: { description: "버튼이 클릭될 떄 실행되는 함수" },
     wide: {
-      description:
-        "버튼이 부모 객체의 사이즈에 꽉찬 크기로 변경되어야 할 경우 사용하는 값",
+      description: "버튼이 부모 객체의 사이즈에 꽉찬 크기로 변경되어야 할 경우 사용하는 값",
     },
     isSubmit: { description: "submit 여부를 지정해주는 값" },
     iconObj: {

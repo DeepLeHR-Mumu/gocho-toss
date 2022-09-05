@@ -14,8 +14,7 @@ export default {
     id: { control: "number", description: "해당 게시글의 id" },
   },
   parameters: {
-    componentSubtitle:
-      "메인페이지 - 꿀팁 리스트 상단 최신 꿀팁리스트의 큰 배너형태",
+    componentSubtitle: "메인페이지 - 꿀팁 리스트 상단 최신 꿀팁리스트의 큰 배너형태",
   },
 } as ComponentMeta<typeof TipDisplay>;
 

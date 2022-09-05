@@ -7,23 +7,12 @@ import { useDoSignUp, useUserInfo } from "@api/auth";
 import { useModal } from "@recoil/hook/modal";
 import { EMAIL_REGEXP, PWD_REGEXP } from "@constant/regExp";
 import { AccountInput } from "@component/common/atom/accountInput";
-import {
-  EMAIL_ERROR_MESSAGE,
-  NICKNAME_ERROR_MESSAGE,
-  PWD_ERROR_MESSAGE,
-} from "@constant/errorMessage";
+import { EMAIL_ERROR_MESSAGE, NICKNAME_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "@constant/errorMessage";
 import { NormalButton } from "@component/common/atom/Button";
 import { CloseButton } from "@component/common/atom/closeButton";
 import smallMono from "@public/images/global/deepLeLogo/smallMono.svg";
 
-import {
-  wrapper,
-  desc,
-  formCSS,
-  closeBtn,
-  formArr,
-  logoContainer,
-} from "./style";
+import { wrapper, desc, formCSS, closeBtn, formArr, logoContainer } from "./style";
 import { SignUpFormValues } from "./type";
 import { validateNickname } from "./util";
 

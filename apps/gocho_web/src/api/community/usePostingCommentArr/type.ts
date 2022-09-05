@@ -7,9 +7,5 @@ interface ResponseObjDef {
 }
 
 export interface GetPostingCommentArrDef {
-  (
-    requestObj: QueryFunctionContext<
-      ReturnType<typeof communityCommentArrKeyObj.commentArr>
-    >
-  ): Promise<ResponseObjDef>;
+  (requestObj: QueryFunctionContext<ReturnType<typeof communityCommentArrKeyObj.commentArr>>): Promise<ResponseObjDef>;
 }

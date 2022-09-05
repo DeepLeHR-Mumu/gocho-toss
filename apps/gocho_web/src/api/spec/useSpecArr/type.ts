@@ -6,7 +6,5 @@ interface ResponseObjDef {
   data: SpecObjDef[];
 }
 export interface GetSpecArrDef {
-  (
-    requestObj: QueryFunctionContext<ReturnType<typeof specArrKeyObj.list>>
-  ): Promise<ResponseObjDef>;
+  (requestObj: QueryFunctionContext<ReturnType<typeof specArrKeyObj.list>>): Promise<ResponseObjDef>;
 }

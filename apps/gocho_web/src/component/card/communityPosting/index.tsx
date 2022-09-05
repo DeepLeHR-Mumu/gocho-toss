@@ -14,15 +14,11 @@ import {
 } from "./style";
 import { CommunityPostingCardProps } from "./type";
 
-export const CommunityPostingCard: FunctionComponent<
-  CommunityPostingCardProps
-> = ({ communityPostingData }) => {
+export const CommunityPostingCard: FunctionComponent<CommunityPostingCardProps> = ({ communityPostingData }) => {
   return (
     <article css={cardWrapper}>
       <div css={topContainer}>
-        <p css={typeCreatorCSS(communityPostingData.type)}>
-          {communityPostingData.type}
-        </p>
+        <p css={typeCreatorCSS(communityPostingData.type)}>{communityPostingData.type}</p>
         <p css={postingNicknameCSS}>닉네임 : {communityPostingData.nickname}</p>
       </div>
       <strong css={titleCSS}>{communityPostingData.title}</strong>
@@ -30,16 +26,10 @@ export const CommunityPostingCard: FunctionComponent<
       <div>
         {communityPostingData.commentArr.length !== 0 && (
           <>
-            <p css={commentCount}>
-              댓글 {communityPostingData.commentArr.length}개
-            </p>
+            <p css={commentCount}>댓글 {communityPostingData.commentArr.length}개</p>
             <div css={commentCSS}>
-              <span css={commentNickname}>
-                {communityPostingData.commentArr[0]?.nickname}
-              </span>
-              <p css={commentBody}>
-                {communityPostingData.commentArr[0]?.description}
-              </p>
+              <span css={commentNickname}>{communityPostingData.commentArr[0]?.nickname}</span>
+              <p css={commentBody}>{communityPostingData.commentArr[0]?.description}</p>
             </div>
           </>
         )}

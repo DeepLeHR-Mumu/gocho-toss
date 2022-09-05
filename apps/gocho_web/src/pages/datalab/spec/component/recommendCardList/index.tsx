@@ -9,11 +9,7 @@ import { setCarouselSetting } from "./util";
 import { listContainer, sliderButtonContainer, sliderButton } from "./style";
 
 export const RecommendCardList: FunctionComponent = () => {
-  const {
-    data: selectedSpecArr,
-    isError,
-    isLoading,
-  } = useSpecArr({ order: "eval" });
+  const { data: selectedSpecArr, isError, isLoading } = useSpecArr({ order: "eval" });
   const sliderRef = useRef<Slider>(null);
 
   if (!selectedSpecArr || isError || isLoading) {
@@ -24,9 +20,7 @@ export const RecommendCardList: FunctionComponent = () => {
     <div css={listContainer}>
       <Slider {...setCarouselSetting()} ref={sliderRef}>
         {selectedSpecArr.map((selectedSpec) => {
-          return (
-            <SpecRecommendCard key={selectedSpec.id} specData={selectedSpec} />
-          );
+          return <SpecRecommendCard key={selectedSpec.id} specData={selectedSpec} />;
         })}
       </Slider>
       <div css={sliderButtonContainer}>

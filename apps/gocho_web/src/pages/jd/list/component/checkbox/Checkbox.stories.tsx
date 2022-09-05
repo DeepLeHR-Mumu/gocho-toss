@@ -3,8 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { CheckBox } from ".";
 
 export default {
-  title:
-    "datalab/spec/register/part/carouselCardPart/common/component/CheckBox",
+  title: "datalab/spec/register/part/carouselCardPart/common/component/CheckBox",
   component: CheckBox,
   argTypes: {
     isChecked: {

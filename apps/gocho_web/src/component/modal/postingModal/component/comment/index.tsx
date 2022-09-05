@@ -60,11 +60,7 @@ export const Comment: FunctionComponent<CommentProps> = ({
         <div css={bodyBox}>
           <div css={bodyCSS}>{body}</div>
           <div css={buttonContainer}>
-            <button
-              css={writeReCommentButtonBox}
-              type="button"
-              onClick={handleShowWriteComment}
-            >
+            <button css={writeReCommentButtonBox} type="button" onClick={handleShowWriteComment}>
               <AiOutlineEnter />
             </button>
             {loginUserId === userId && (
@@ -84,9 +80,7 @@ export const Comment: FunctionComponent<CommentProps> = ({
               </div>
             )}
             {errorMsg && <p> {errorMsg}</p>}
-            {showWriteComment && (
-              <WriteComment postingId={postingId} parentCommentId={id} />
-            )}
+            {showWriteComment && <WriteComment postingId={postingId} parentCommentId={id} />}
           </div>
         </div>
       </div>

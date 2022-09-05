@@ -14,9 +14,7 @@ export const SettingPart: FunctionComponent = () => {
   const { pathname } = useRouter();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentMenu, setCurrentMenu] = useState<MenuType>(
-    pathname as MenuType
-  );
+  const [currentMenu, setCurrentMenu] = useState<MenuType>(pathname as MenuType);
   const { currentModal, setCurrentModal } = useModal();
 
   const handleSettingModal = () => {
@@ -49,10 +47,7 @@ export const SettingPart: FunctionComponent = () => {
           <FiList />
         </div>
         {isMenuOpen ? (
-          <MenuBoxes
-            currentMenu={currentMenu}
-            handleSettingModal={handleSettingModal}
-          />
+          <MenuBoxes currentMenu={currentMenu} handleSettingModal={handleSettingModal} />
         ) : (
           <CurrentMenuBox currentMenu={currentMenu} />
         )}

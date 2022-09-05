@@ -21,10 +21,7 @@ import {
 } from "./style";
 import { TipCardProps, TipCardSkeleton } from "./type";
 
-export const TipCard: FunctionComponent<TipCardProps | TipCardSkeleton> = ({
-  tipData,
-  isSkeleton,
-}) => {
+export const TipCard: FunctionComponent<TipCardProps | TipCardSkeleton> = ({ tipData, isSkeleton }) => {
   const { setCurrentModal } = useModal();
 
   if (isSkeleton || typeof tipData === "undefined") {
@@ -44,12 +41,7 @@ export const TipCard: FunctionComponent<TipCardProps | TipCardSkeleton> = ({
     <button type="button" onClick={openTipModal}>
       <article css={cardContainer}>
         <div css={thumbnailBox}>
-          <Image
-            src={tipData.thumbnailSrc}
-            alt={tipData.title}
-            layout="fill"
-            objectFit="cover"
-          />
+          <Image src={tipData.thumbnailSrc} alt={tipData.title} layout="fill" objectFit="cover" />
         </div>
         <div css={contentContainer}>
           <div>

@@ -15,12 +15,7 @@ export interface UserInfoResponse {
 }
 
 export interface PatchUserInfoDef {
-  ({
-    userId,
-    originPassword,
-    password,
-    image,
-  }: RequestObjDef): Promise<UserInfoResponse>;
+  ({ userId, originPassword, password, image }: RequestObjDef): Promise<UserInfoResponse>;
 }
 
 export interface ErrorResponse extends AxiosError {

@@ -25,10 +25,7 @@ import {
   writeContainer,
 } from "./style";
 
-export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
-  commentArr,
-  userData,
-}) => {
+export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ commentArr, userData }) => {
   const postLikeSubmit = () => {
     return true;
   };
@@ -55,24 +52,16 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
                 </div>
                 <div css={commentBody}>
                   <div css={commentBox}>
-                    {comment.jdTitle && (
-                      <h5 css={commentTypeCSS}>{comment.jdTitle}</h5>
-                    )}
+                    {comment.jdTitle && <h5 css={commentTypeCSS}>{comment.jdTitle}</h5>}
 
                     <p css={commentDesc}>{comment.description}</p>
                   </div>
                   <ul css={evalButtonBox}>
                     <li>
-                      <CommentLikeButton
-                        count={comment.like}
-                        setLikeSubmit={postLikeSubmit}
-                      />
+                      <CommentLikeButton count={comment.like} setLikeSubmit={postLikeSubmit} />
                     </li>
                     <li>
-                      <CommentDislikeButton
-                        count={comment.dislike}
-                        setDislikeSubmit={postDislikeSubmit}
-                      />
+                      <CommentDislikeButton count={comment.dislike} setDislikeSubmit={postDislikeSubmit} />
                     </li>
                   </ul>
                 </div>

@@ -70,18 +70,9 @@ export const CommunityPostingPart: FunctionComponent = () => {
         </div>
 
         <div css={cardListContainer}>
-          <Slider
-            {...setCarouselSetting()}
-            ref={sliderRef}
-            css={sliderListContainer}
-          >
+          <Slider {...setCarouselSetting()} ref={sliderRef} css={sliderListContainer}>
             {communityPostingArrData.map((communityPostingData) => {
-              return (
-                <CommunityPostingCard
-                  communityPostingData={communityPostingData}
-                  key={communityPostingData.id}
-                />
-              );
+              return <CommunityPostingCard communityPostingData={communityPostingData} key={communityPostingData.id} />;
             })}
           </Slider>
           <button

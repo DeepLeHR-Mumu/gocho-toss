@@ -5,16 +5,7 @@ import { dateConverter } from "@util/date";
 import { MySpecCard } from "../mySpecCard";
 
 import { SimpleCardProps } from "./type";
-import {
-  cardBox,
-  countCSS,
-  dateCSS,
-  listCSS,
-  moreButton,
-  evalBox,
-  scoreText,
-  noEval,
-} from "./style";
+import { cardBox, countCSS, dateCSS, listCSS, moreButton, evalBox, scoreText, noEval } from "./style";
 
 export const SimpleCard: FunctionComponent<SimpleCardProps> = ({
   index,
@@ -45,9 +36,7 @@ export const SimpleCard: FunctionComponent<SimpleCardProps> = ({
         <li>
           {hasEvalCount ? (
             <div css={evalBox}>
-              <p css={scoreText(mySpecData.score)}>
-                {mySpecData.score ? mySpecData.score : "평가없음"}
-              </p>
+              <p css={scoreText(mySpecData.score)}>{mySpecData.score ? mySpecData.score : "평가없음"}</p>
               {/* LATER : display만 가능하도록 변경 */}
               <StarEvaluation size="S" parentScore={mySpecData.score} />
             </div>

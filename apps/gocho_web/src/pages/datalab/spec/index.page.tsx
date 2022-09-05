@@ -17,10 +17,7 @@ const MainList: NextPage = () => {
   const { error } = useUserInfo();
 
   useEffect(() => {
-    if (
-      axios.isAxiosError(error) &&
-      (error.response?.status === 401 || error.response?.status === 403)
-    ) {
+    if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
       setCurrentModal("loginModal");
     }
   }, [error, setCurrentModal]);

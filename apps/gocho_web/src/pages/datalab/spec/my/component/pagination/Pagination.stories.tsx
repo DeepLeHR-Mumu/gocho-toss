@@ -17,8 +17,7 @@ export default {
     },
   },
   parameters: {
-    componentSubtitle:
-      "데이터랩/나의스펙내역에 배열 카운트에 따른 페이지네이션 컴포넌트",
+    componentSubtitle: "데이터랩/나의스펙내역에 배열 카운트에 따른 페이지네이션 컴포넌트",
   },
 } as ComponentMeta<typeof Pagination>;
 

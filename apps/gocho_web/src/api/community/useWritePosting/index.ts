@@ -3,11 +3,7 @@ import { AxiosError } from "axios";
 
 import { axiosInstance } from "@api/axiosInstance";
 import { ResponseDef } from "@type/api/responseType";
-import {
-  PostWritePostingDef,
-  useWritePostingProps,
-  RequestObjDef,
-} from "./type";
+import { PostWritePostingDef, useWritePostingProps, RequestObjDef } from "./type";
 
 const postWritePosting: PostWritePostingDef = async (requestObj) => {
   const token = localStorage.getItem("token") as string;
@@ -29,8 +25,6 @@ const postWritePosting: PostWritePostingDef = async (requestObj) => {
 };
 
 export const useWritePosting: useWritePostingProps = () => {
-  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(
-    postWritePosting
-  );
+  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(postWritePosting);
   return mutationResult;
 };

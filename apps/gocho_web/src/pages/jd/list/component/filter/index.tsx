@@ -1,11 +1,5 @@
 import { FunctionComponent, useState } from "react";
-import {
-  FiRefreshCw,
-  FiChevronDown,
-  FiPlus,
-  FiX,
-  FiFilter,
-} from "react-icons/fi";
+import { FiRefreshCw, FiChevronDown, FiPlus, FiX, FiFilter } from "react-icons/fi";
 import { BsFolderSymlink } from "react-icons/bs";
 
 import { CheckBox } from "../checkbox";
@@ -31,12 +25,7 @@ import {
   submitButton,
 } from "./style";
 
-export const Filter: FunctionComponent<FilterProps> = ({
-  register,
-  watch,
-  setValue,
-  getValues,
-}) => {
+export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setValue, getValues }) => {
   const [activeMenu, setActiveMenu] = useState<filterMenuDef | null>(null);
 
   const watchList: watchListDef[] = filterMenuListArr.map((menu) => {
@@ -110,11 +99,9 @@ export const Filter: FunctionComponent<FilterProps> = ({
                     {menu.categoryArr.map((category) => {
                       const activeQuery = menu.query;
                       const isMenuEmpty = watch(activeQuery).length === 0;
-                      const isCategoryActive = watch(activeQuery).some(
-                        (watchCategory) => {
-                          return watchCategory === category;
-                        }
-                      );
+                      const isCategoryActive = watch(activeQuery).some((watchCategory) => {
+                        return watchCategory === category;
+                      });
 
                       // TODO: category 전체 및 전체 아닌 부분 합치기
                       if (category === "전체") {
@@ -127,10 +114,7 @@ export const Filter: FunctionComponent<FilterProps> = ({
                                 setValue(activeQuery, []);
                               }}
                             />
-                            <label
-                              htmlFor={`menuCategory${menu.name}${category}`}
-                              css={menuCategory(isMenuEmpty)}
-                            >
+                            <label htmlFor={`menuCategory${menu.name}${category}`} css={menuCategory(isMenuEmpty)}>
                               <CheckBox isChecked={isMenuEmpty} />
                               {category}
                             </label>
@@ -146,10 +130,7 @@ export const Filter: FunctionComponent<FilterProps> = ({
                             value={category}
                             {...register(menu.query, {})}
                           />
-                          <label
-                            htmlFor={`menuCategory${menu.name}${category}`}
-                            css={menuCategory(isCategoryActive)}
-                          >
+                          <label htmlFor={`menuCategory${menu.name}${category}`} css={menuCategory(isCategoryActive)}>
                             <CheckBox isChecked={isCategoryActive} />
                             {category}
                           </label>
@@ -198,10 +179,7 @@ export const Filter: FunctionComponent<FilterProps> = ({
           {watchList.map((list) => {
             return list.categoryArr.map((category) => {
               return (
-                <span
-                  css={categoryBox(list.query)}
-                  key={`activeMenuCategory${category}`}
-                >
+                <span css={categoryBox(list.query)} key={`activeMenuCategory${category}`}>
                   {category}
                   <button
                     type="button"

@@ -9,12 +9,5 @@ export interface UserInfoObjDef {
   exp: number;
   iss: string;
   sub: string;
-  image:
-    | "default"
-    | "default_work"
-    | "jobi"
-    | "jobi_safety"
-    | "jobi_chat"
-    | "jobi_play"
-    | "jobi_teach";
+  image: "default" | "default_work" | "jobi" | "jobi_safety" | "jobi_chat" | "jobi_play" | "jobi_teach";
 }

@@ -13,9 +13,7 @@ import { Spec8AwardCareerEtcProps, PostSubmitValues } from "./type";
 import { specCardWrapper, formCSS } from "../common/style";
 import { textareaCSS } from "./style";
 
-export const Spec8AwardCareerEtc: FunctionComponent<
-  Spec8AwardCareerEtcProps
-> = ({ moveNextCard, movePrevCard }) => {
+export const Spec8AwardCareerEtc: FunctionComponent<Spec8AwardCareerEtcProps> = ({ moveNextCard, movePrevCard }) => {
   const { handleSubmit, register } = useForm<PostSubmitValues>({
     mode: "onChange",
   });
@@ -50,10 +48,7 @@ export const Spec8AwardCareerEtc: FunctionComponent<
     <div>
       <div css={specCardWrapper}>
         <form css={formCSS}>
-          <SpecCardTitle
-            title="수상이력"
-            desc="수상한 이력이 있다면 적어주세요."
-          />
+          <SpecCardTitle title="수상이력" desc="수상한 이력이 있다면 적어주세요." />
           <textarea
             css={textareaCSS}
             placeholder="예시 산업통상인력자원부 생산직 기능 실기대회 금상"
@@ -61,31 +56,18 @@ export const Spec8AwardCareerEtc: FunctionComponent<
           />
 
           <SpecCardTitle title="경력사항" desc="경력이 있다면 적어주세요." />
-          <textarea
-            css={textareaCSS}
-            placeholder="예시 생산직/오퍼레이터 3년 2개월"
-            {...register("career")}
-          />
+          <textarea css={textareaCSS} placeholder="예시 생산직/오퍼레이터 3년 2개월" {...register("career")} />
 
-          <SpecCardTitle
-            title="기타"
-            desc="그 외 입력하고 싶은 사항이 있다면 적어주세요"
-          />
+          <SpecCardTitle title="기타" desc="그 외 입력하고 싶은 사항이 있다면 적어주세요" />
           <textarea
             css={textareaCSS}
             placeholder="예시 대외활동/봉사활동 현대 오일 뱅크 앰배서더 3개월"
             {...register("etc")}
           />
 
-          <div>
-            {errorMsg && <p> 스펙등록 과정에 문제가 생긴 메세지{errorMsg}</p>}
-          </div>
+          <div>{errorMsg && <p> 스펙등록 과정에 문제가 생긴 메세지{errorMsg}</p>}</div>
 
-          <MoveCardButtons
-            nextTitle="완료"
-            movePrevCard={movePrevCard}
-            postSubmit={handleSubmit(postSubmit)}
-          />
+          <MoveCardButtons nextTitle="완료" movePrevCard={movePrevCard} postSubmit={handleSubmit(postSubmit)} />
         </form>
       </div>
     </div>

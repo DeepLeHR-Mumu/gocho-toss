@@ -3,18 +3,15 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { ContainerBox } from ".";
 
 export default {
-  title:
-    "datalab/spec/register/part/carouselCardPart/common/component/ContainerBox",
+  title: "datalab/spec/register/part/carouselCardPart/common/component/ContainerBox",
   component: ContainerBox,
   argTypes: {
     optionObj: {
-      description:
-        "콘테이너박스의 스타일을 위한 옵션객체 {location, marginValue, maxWidth}",
+      description: "콘테이너박스의 스타일을 위한 옵션객체 {location, marginValue, maxWidth}",
     },
   },
   parameters: {
-    componentSubtitle:
-      "maxWidth와 마진의 방향,범위를 주기위한 폼전용 콘테이너 컴포넌트",
+    componentSubtitle: "maxWidth와 마진의 방향,범위를 주기위한 폼전용 콘테이너 컴포넌트",
     backgrounds: {
       default: "dark",
     },

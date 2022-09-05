@@ -8,9 +8,7 @@ import { NotExistingBox } from "../component/notExistingBox";
 import { DetailSpecBox } from "./component/detailSpecBox";
 import { container, divider, title } from "./style";
 
-export const DetailInfoPart: FunctionComponent<DetailInfoPartProps> = ({
-  detailData,
-}) => {
+export const DetailInfoPart: FunctionComponent<DetailInfoPartProps> = ({ detailData }) => {
   return (
     <div>
       <section css={container}>
@@ -40,11 +38,7 @@ export const DetailInfoPart: FunctionComponent<DetailInfoPartProps> = ({
           </div>
           <h3>수상</h3>
         </div>
-        {detailData.award ? (
-          <DetailSpecBox specStr={detailData.award} wide />
-        ) : (
-          <NotExistingBox />
-        )}
+        {detailData.award ? <DetailSpecBox specStr={detailData.award} wide /> : <NotExistingBox />}
       </section>
       <section css={container}>
         <div css={title}>
@@ -53,11 +47,7 @@ export const DetailInfoPart: FunctionComponent<DetailInfoPartProps> = ({
           </div>
           <h3>경력</h3>
         </div>
-        {detailData.career ? (
-          <DetailSpecBox specStr={detailData.career} wide />
-        ) : (
-          <NotExistingBox />
-        )}
+        {detailData.career ? <DetailSpecBox specStr={detailData.career} wide /> : <NotExistingBox />}
       </section>
       <section css={container}>
         <div css={title}>
@@ -66,11 +56,7 @@ export const DetailInfoPart: FunctionComponent<DetailInfoPartProps> = ({
           </div>
           <h3>기타</h3>
         </div>
-        {detailData.etc ? (
-          <DetailSpecBox specStr={detailData.etc} wide />
-        ) : (
-          <NotExistingBox />
-        )}
+        {detailData.etc ? <DetailSpecBox specStr={detailData.etc} wide /> : <NotExistingBox />}
         <hr css={divider} />
       </section>
     </div>

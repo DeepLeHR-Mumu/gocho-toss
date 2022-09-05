@@ -9,23 +9,14 @@ import { useModal } from "@recoil/hook/modal";
 import { SettingPart } from "./part/settingPart";
 import { CalendarPart } from "./part/calendarPart";
 import { BookmarkPart } from "./part/bookmarkPart";
-import {
-  mainContainer,
-  title,
-  colorPoint,
-  mypagePosition,
-  mypageBody,
-} from "./style";
+import { mainContainer, title, colorPoint, mypagePosition, mypageBody } from "./style";
 
 const MypageHome: NextPage = () => {
   const { setCurrentModal, closeModal } = useModal();
 
   const { error } = useUserInfo();
   useEffect(() => {
-    if (
-      axios.isAxiosError(error) &&
-      (error.response?.status === 401 || error.response?.status === 403)
-    ) {
+    if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
       setCurrentModal("loginModal");
     }
     return () => {

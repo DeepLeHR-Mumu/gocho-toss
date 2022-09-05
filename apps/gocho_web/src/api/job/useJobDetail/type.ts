@@ -8,9 +8,5 @@ interface ResponseObjDef {
 }
 
 export interface GetJobDetailDef {
-  ({
-    queryKey,
-  }: QueryFunctionContext<
-    ReturnType<typeof jobDetailKeyObj.detail>
-  >): Promise<ResponseObjDef>;
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof jobDetailKeyObj.detail>>): Promise<ResponseObjDef>;
 }

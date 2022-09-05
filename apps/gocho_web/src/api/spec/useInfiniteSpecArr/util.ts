@@ -30,10 +30,7 @@ export const selector = (specDataArr: SpecObjDef[]) => {
         leaveEarly: specData.highschool.leave_early,
       },
       // NOTMYFAULT undefined 해결 예정
-      certificate:
-        specData.certificate === null || specData.certificate === undefined
-          ? null
-          : specData.certificate,
+      certificate: specData.certificate === null || specData.certificate === undefined ? null : specData.certificate,
     };
   });
 };

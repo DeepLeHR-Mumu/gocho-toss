@@ -10,14 +10,7 @@ import { userInfoKeyObj } from "@constant/queryKeyFactory/user/infoKeyObj";
 import { SpecCardTitle } from "../common/component";
 import { Spec6MiddleEndProps } from "./type";
 import { specCardWrapper } from "../common/style";
-import {
-  desc,
-  animationBox,
-  postButtonCSS,
-  moveButtonContainer,
-  prevButton,
-  nextButton,
-} from "./style";
+import { desc, animationBox, postButtonCSS, moveButtonContainer, prevButton, nextButton } from "./style";
 
 export const Spec6MiddleEnd: FunctionComponent<Spec6MiddleEndProps> = ({
   moveNextCard,

@@ -6,10 +6,7 @@ import { ExpJobCard } from "../expJobCard";
 import { ExpJobCardListProps } from "./type";
 import { listContainer } from "./style";
 
-export const ExpJobCardList: FunctionComponent<ExpJobCardListProps> = ({
-  companyDataArr,
-  isLoading,
-}) => {
+export const ExpJobCardList: FunctionComponent<ExpJobCardListProps> = ({ companyDataArr, isLoading }) => {
   if (!companyDataArr || isLoading) {
     return (
       <div css={listContainer}>
@@ -23,12 +20,7 @@ export const ExpJobCardList: FunctionComponent<ExpJobCardListProps> = ({
   return (
     <section css={listContainer}>
       {companyDataArr.map((companyData) => {
-        return (
-          <ExpJobCard
-            companyData={companyData}
-            key={`ExpJobCard${companyData.id}`}
-          />
-        );
+        return <ExpJobCard companyData={companyData} key={`ExpJobCard${companyData.id}`} />;
       })}
     </section>
   );

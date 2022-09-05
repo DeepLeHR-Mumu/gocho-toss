@@ -8,9 +8,5 @@ interface ResponseObjDef {
 }
 
 export interface GetMySpecHistoryArrDef {
-  ({
-    queryKey,
-  }: QueryFunctionContext<
-    ReturnType<typeof mySpecHistoryKeyObj.list>
-  >): Promise<ResponseObjDef>;
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof mySpecHistoryKeyObj.list>>): Promise<ResponseObjDef>;
 }

@@ -39,10 +39,7 @@ import {
   hoverButton,
 } from "./style";
 
-export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
-  jobData,
-  isSkeleton,
-}) => {
+export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ jobData, isSkeleton }) => {
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
 
   if (isSkeleton || typeof jobData === "undefined") {
@@ -56,17 +53,9 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   const today = new Date();
   const isExpired = jobData.endTime - Number(today) < 0;
 
-  const {
-    year: startYear,
-    month: startMonth,
-    date: startDate,
-  } = dateConverter(jobData.startTime);
+  const { year: startYear, month: startMonth, date: startDate } = dateConverter(jobData.startTime);
 
-  const {
-    year: endYear,
-    month: endMonth,
-    date: endDate,
-  } = dateConverter(jobData.endTime);
+  const { year: endYear, month: endMonth, date: endDate } = dateConverter(jobData.endTime);
 
   return (
     <article css={cardWrapper(isExpired)}>
@@ -98,8 +87,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
             <div>
               <div css={dateInfoContainer}>
                 <div css={date}>
-                  {`${startYear}/${startMonth}/${startDate}`}~
-                  {`${endYear}/${endMonth}/${endDate}`}
+                  {`${startYear}/${startMonth}/${startDate}`}~{`${endYear}/${endMonth}/${endDate}`}
                 </div>
                 <DdayBox endTime={jobData.endTime} />
               </div>
@@ -115,23 +103,16 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
                 <div css={eduQual}>
                   <Image
                     src={jobData.college ? collegeTrue : collegeFalse}
-                    alt={
-                      jobData.college
-                        ? "초대졸 지원 가능"
-                        : "초대졸 지원 불가능"
-                    }
+                    alt={jobData.college ? "초대졸 지원 가능" : "초대졸 지원 불가능"}
                   />
                 </div>
                 <div css={detailInfo}>
-                  {jobData.placeArr[0][1]}{" "}
-                  {jobData.placeArr.length !== 1 &&
-                    `외 ${jobData.placeArr.length - 1}곳`}
+                  {jobData.placeArr[0][1]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
                 </div>
 
                 <div css={detailInfo}>
                   {jobData.rotationArr[0]}{" "}
-                  {jobData.rotationArr.length !== 1 &&
-                    `외 ${jobData.rotationArr.length - 1}형태`}
+                  {jobData.rotationArr.length !== 1 && `외 ${jobData.rotationArr.length - 1}형태`}
                 </div>
               </div>
             </div>

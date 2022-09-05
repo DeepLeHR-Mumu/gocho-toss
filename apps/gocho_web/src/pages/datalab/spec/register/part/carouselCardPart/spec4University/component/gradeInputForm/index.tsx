@@ -33,11 +33,8 @@ export const GradeInputForm: FunctionComponent<SelectNumberInputFormProps> = ({
   return (
     <div css={wrapper}>
       <button type="button" css={buttonCSS} onClick={handleShowBox}>
-        평균학점 :
-        <span css={isValueColor(gradeValue)}>{`${gradeValue || "학점"}`}/</span>
-        <span css={isValueColor(maxGradeValue)}>{`${
-          maxGradeValue || "기준선택"
-        }`}</span>
+        평균학점 :<span css={isValueColor(gradeValue)}>{`${gradeValue || "학점"}`}/</span>
+        <span css={isValueColor(maxGradeValue)}>{`${maxGradeValue || "기준선택"}`}</span>
       </button>
 
       <div css={langArrBox(isClick)}>
@@ -60,13 +57,7 @@ export const GradeInputForm: FunctionComponent<SelectNumberInputFormProps> = ({
           {selectArr.map((select) => {
             return (
               <li key={select}>
-                <input
-                  css={hide}
-                  type="radio"
-                  id={`${select}`}
-                  value={select}
-                  {...maxGradeObj}
-                />
+                <input css={hide} type="radio" id={`${select}`} value={select} {...maxGradeObj} />
                 <label htmlFor={`${select}`} css={labelCSS}>
                   <p>{select}</p>
                 </label>

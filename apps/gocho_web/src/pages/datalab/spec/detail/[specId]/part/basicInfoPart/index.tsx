@@ -25,9 +25,7 @@ import {
 import { CertificateBox } from "./component/certifiacateBox";
 import { NotExistingBox } from "../component/notExistingBox";
 
-export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
-  basicData,
-}) => {
+export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ basicData }) => {
   return (
     <div css={container}>
       <button css={backButton} type="button">

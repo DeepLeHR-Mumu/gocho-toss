@@ -46,11 +46,7 @@ export const variantModifier: VariantModifierDef = (variant) => {
 };
 
 interface ButtonCSSDef {
-  (
-    variant: ButtonVariant,
-    wide: boolean | undefined,
-    iconDirection?: "left" | "right"
-  ): SerializedStyles;
+  (variant: ButtonVariant, wide: boolean | undefined, iconDirection?: "left" | "right"): SerializedStyles;
 }
 export const buttonCSS: ButtonCSSDef = (variant, wide, iconDirection) => {
   return css`

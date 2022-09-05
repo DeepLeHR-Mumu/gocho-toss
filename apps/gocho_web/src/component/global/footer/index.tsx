@@ -39,12 +39,7 @@ export const Footer: FunctionComponent = () => {
         <div css={footerContainer}>
           <div css={companyInfoWrapper}>
             <h2 css={GDtitle}>
-              <Image
-                layout="fill"
-                objectFit="contain"
-                src={GDtitleSrc}
-                alt="고초대졸닷컴"
-              />
+              <Image layout="fill" objectFit="contain" src={GDtitleSrc} alt="고초대졸닷컴" />
             </h2>
             <ul css={companyInfoListCSS}>
               <li>

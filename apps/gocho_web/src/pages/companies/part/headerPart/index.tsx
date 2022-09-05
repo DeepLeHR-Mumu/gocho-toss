@@ -23,9 +23,7 @@ import {
   youtubeLinkButton,
 } from "./style";
 
-export const HeaderPart: FunctionComponent<HeaderPartProps> = ({
-  companyData,
-}) => {
+export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData }) => {
   const [imageSrc, setImageSrc] = useState(companyData?.logoUrl as string);
 
   return (

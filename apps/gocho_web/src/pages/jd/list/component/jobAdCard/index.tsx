@@ -17,9 +17,7 @@ import {
   companyName,
 } from "./style";
 
-export const JobAdCard: FunctionComponent<
-  JobAdCardProps | JobAdCardSkeleton
-> = ({ jobAdData, isSkeleton }) => {
+export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = ({ jobAdData, isSkeleton }) => {
   if (isSkeleton || jobAdData === undefined) {
     return (
       <div css={jobAdCardSkeleton}>
@@ -28,9 +26,7 @@ export const JobAdCard: FunctionComponent<
     );
   }
 
-  const { month: startMonth, date: startDate } = dateConverter(
-    jobAdData.startTime
-  );
+  const { month: startMonth, date: startDate } = dateConverter(jobAdData.startTime);
 
   const { month: endMonth, date: endDate } = dateConverter(jobAdData.endTime);
 
@@ -39,12 +35,7 @@ export const JobAdCard: FunctionComponent<
       <div css={mainContainer}>
         <div css={companyLogoWrapper}>
           <div css={companyLogoBox}>
-            <Image
-              layout="fill"
-              objectFit="contain"
-              src={jobAdData.companyLogo || defaultCompanyLogo}
-              alt=""
-            />
+            <Image layout="fill" objectFit="contain" src={jobAdData.companyLogo || defaultCompanyLogo} alt="" />
           </div>
         </div>
         <div css={infoContainer}>

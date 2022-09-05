@@ -30,10 +30,7 @@ export const BookmarkCompanyArr: FunctionComponent = () => {
   return (
     <div css={cardListContainer}>
       {userCompanyBookmarkArrData.data.length === 0 && (
-        <p css={descCSS}>
-          {userInfoData.nickname} 님! 북마크를 이용하시면 기업공고가 더
-          정교해져요 😳
-        </p>
+        <p css={descCSS}>{userInfoData.nickname} 님! 북마크를 이용하시면 기업공고가 더 정교해져요 😳</p>
       )}
       {userCompanyBookmarkArrData.data.map((companyData) => {
         return <CompanyCard key={companyData.id} companyData={companyData} />;

@@ -17,10 +17,7 @@ import { highSchoolTypeArr } from "./constant";
 import { specCardWrapper, formCSS } from "../common/style";
 import { arrContainer } from "./style";
 
-export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({
-  movePrevCard,
-  moveNextCard,
-}) => {
+export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ movePrevCard, moveNextCard }) => {
   const {
     handleSubmit,
     register,
@@ -37,15 +34,10 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({
 
   return (
     <div css={specCardWrapper}>
-      <SpecCardTitle
-        title="고등학교 학력정보"
-        desc="정확하게 입력할 수록 스펙평가의 적중도는 올라갑니다."
-      />
+      <SpecCardTitle title="고등학교 학력정보" desc="정확하게 입력할 수록 스펙평가의 적중도는 올라갑니다." />
 
       <form css={formCSS}>
-        <ContainerBox
-          optionObj={{ location: "bottom", marginValue: 3.5, maxWidth: 40 }}
-        >
+        <ContainerBox optionObj={{ location: "bottom", marginValue: 3.5, maxWidth: 40 }}>
           <SelectRadioForm
             registerObj={register("highschool.type", {
               required: "고등학교 정보를 선택해주세요.",
@@ -53,14 +45,10 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({
             backgroundStyle="blue02"
             itemArr={highSchoolTypeArr}
           />
-          {errors.highschool?.type && (
-            <WarningText msg={errors.highschool.type} />
-          )}
+          {errors.highschool?.type && <WarningText msg={errors.highschool.type} />}
         </ContainerBox>
 
-        <ContainerBox
-          optionObj={{ location: "bottom", marginValue: 4, maxWidth: 58 }}
-        >
+        <ContainerBox optionObj={{ location: "bottom", marginValue: 4, maxWidth: 58 }}>
           <Desc desc="출결사항도 중요하죠!" />
           <ul css={arrContainer}>
             <li>
@@ -124,23 +112,13 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({
               />
             </li>
           </ul>
-          {errors.highschool?.absent?.message && (
-            <WarningText msg={errors.highschool.absent.message} />
-          )}
-          {errors.highschool?.tardy?.message && (
-            <WarningText msg={errors.highschool.tardy.message} />
-          )}
-          {errors.highschool?.leaveEarly?.message && (
-            <WarningText msg={errors.highschool.leaveEarly.message} />
-          )}
-          {errors.highschool?.classMiss?.message && (
-            <WarningText msg={errors.highschool.classMiss.message} />
-          )}
+          {errors.highschool?.absent?.message && <WarningText msg={errors.highschool.absent.message} />}
+          {errors.highschool?.tardy?.message && <WarningText msg={errors.highschool.tardy.message} />}
+          {errors.highschool?.leaveEarly?.message && <WarningText msg={errors.highschool.leaveEarly.message} />}
+          {errors.highschool?.classMiss?.message && <WarningText msg={errors.highschool.classMiss.message} />}
         </ContainerBox>
 
-        <ContainerBox
-          optionObj={{ location: "bottom", marginValue: 2, maxWidth: 23.75 }}
-        >
+        <ContainerBox optionObj={{ location: "bottom", marginValue: 2, maxWidth: 23.75 }}>
           <Desc desc="내신등급도 알려주시겠어요?" />
           <NumberInputForm
             registerObj={register("highschool.naesin", {
@@ -159,15 +137,10 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({
             lastDesc="등급"
             placeholder="입력칸"
           />
-          {errors.highschool?.naesin?.message && (
-            <WarningText msg={errors.highschool.naesin.message} />
-          )}
+          {errors.highschool?.naesin?.message && <WarningText msg={errors.highschool.naesin.message} />}
         </ContainerBox>
 
-        <MoveCardButtons
-          postSubmit={handleSubmit(postSubmit)}
-          movePrevCard={movePrevCard}
-        />
+        <MoveCardButtons postSubmit={handleSubmit(postSubmit)} movePrevCard={movePrevCard} />
       </form>
     </div>
   );

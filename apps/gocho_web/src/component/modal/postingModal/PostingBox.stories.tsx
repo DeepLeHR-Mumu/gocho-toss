@@ -59,8 +59,7 @@ export const 기본 = Template.bind({
   commentList: [
     {
       qna_answer_id: 1229,
-      qna_answer_desc:
-        "거기서 안전자격증 하나랑 환경자격증 하나 따서 반도체 대기업 회사 가는게 더 좋을듯 합니다",
+      qna_answer_desc: "거기서 안전자격증 하나랑 환경자격증 하나 따서 반도체 대기업 회사 가는게 더 좋을듯 합니다",
       author_id: 4331,
       qna_id: 488,
       re_comment: null,

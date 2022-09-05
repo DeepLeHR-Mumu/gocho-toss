@@ -33,18 +33,12 @@ export const normalResponse = {
       recru_step: ["서류전형", "1차면접"],
       recru_sector: "생산/제조/포장/조립",
       XXXXX: 0,
-      recru_work:
-        "원료의약품 및 제품 생산/제조\r\n유기 합성 반응을 통한 제조 수행\r\n원료의약품 정제 수행",
+      recru_work: "원료의약품 및 제품 생산/제조\r\n유기 합성 반응을 통한 제조 수행\r\n원료의약품 정제 수행",
       place_province: "인천광역시",
       place_city: "남동구",
       rotation: "주간",
       favor_certi: ["지게차운전"],
-      favor_etc: [
-        "화학, 화학공학, 이공계열 전공자",
-        "지게차운전기능사",
-        "운전가능자",
-        "컴퓨터 활용 능력 우수",
-      ],
+      favor_etc: ["화학, 화학공학, 이공계열 전공자", "지게차운전기능사", "운전가능자", "컴퓨터 활용 능력 우수"],
       submit_doc: ["온라인 이력서"],
       etc: ["수습기간 3개월", "근무일시 : 08:30 ~ 17:30"],
       apply_url:
@@ -55,8 +49,7 @@ export const normalResponse = {
       qual_edu_long: "고졸 이상",
       recru_type_long: "정규직",
       bus: [false, null],
-      company_logo_url:
-        "https://d2nnzfahmszi6w.cloudfront.net/company_images/7251/logo.png",
+      company_logo_url: "https://d2nnzfahmszi6w.cloudfront.net/company_images/7251/logo.png",
     },
     {
       id: 7566,
@@ -88,8 +81,7 @@ export const normalResponse = {
       qual_edu_long: "고졸 이상",
       recru_type_long: "정규직",
       bus: [false, null],
-      company_logo_url:
-        "https://d2nnzfahmszi6w.cloudfront.net/company_images/7566/logo.png",
+      company_logo_url: "https://d2nnzfahmszi6w.cloudfront.net/company_images/7566/logo.png",
     },
     {
       id: 7572,
@@ -124,8 +116,7 @@ export const normalResponse = {
       qual_edu_long: "고졸 이상",
       recru_type_long: "정규직",
       bus: [false, null],
-      company_logo_url:
-        "https://d2nnzfahmszi6w.cloudfront.net/company_images/7572/logo.png",
+      company_logo_url: "https://d2nnzfahmszi6w.cloudfront.net/company_images/7572/logo.png",
     },
   ],
   result: "OK",

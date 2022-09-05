@@ -27,20 +27,10 @@ import {
 } from "./style";
 
 export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData }) => {
-  const [imageSrc, setImageSrc] = useState(
-    jobDetailData.company.logoUrl as string
-  );
-  const {
-    year: startYear,
-    month: startMonth,
-    date: startDate,
-  } = dateConverter(jobDetailData.startTime);
+  const [imageSrc, setImageSrc] = useState(jobDetailData.company.logoUrl as string);
+  const { year: startYear, month: startMonth, date: startDate } = dateConverter(jobDetailData.startTime);
 
-  const {
-    year: endYear,
-    month: endMonth,
-    date: endDate,
-  } = dateConverter(jobDetailData.endTime);
+  const { year: endYear, month: endMonth, date: endDate } = dateConverter(jobDetailData.endTime);
 
   return (
     <header css={headerCSS}>
@@ -61,9 +51,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData }) => {
             <DdayBox endTime={jobDetailData.endTime} />
           </li>
           <li>
-            <p css={dateCSS}>
-              {`${startYear}. ${startMonth}. ${startDate} ~ ${endYear}. ${endMonth}. ${endDate}`}
-            </p>
+            <p css={dateCSS}>{`${startYear}. ${startMonth}. ${startDate} ~ ${endYear}. ${endMonth}. ${endDate}`}</p>
           </li>
         </ul>
         <p css={companyNameCSS}>
@@ -75,12 +63,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData }) => {
         <h2 css={titleCSS}>{jobDetailData.title}</h2>
         <ul css={linksCSS}>
           <li>
-            <a
-              href={jobDetailData.applyUrl}
-              target="_blank"
-              css={applyButton}
-              rel="noopener noreferrer"
-            >
+            <a href={jobDetailData.applyUrl} target="_blank" css={applyButton} rel="noopener noreferrer">
               채용사이트
             </a>
           </li>
@@ -91,21 +74,13 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData }) => {
             </button>
           </li>
           <li>
-            <Link
-              href={`${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`}
-              passHref
-            >
+            <Link href={`${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`} passHref>
               <a css={ButtonCSS}>기업정보</a>
             </Link>
           </li>
           {jobDetailData.company.youtubeUrl && (
             <li>
-              <a
-                href={jobDetailData.company.youtubeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                css={youtubeButton}
-              >
+              <a href={jobDetailData.company.youtubeUrl} target="_blank" rel="noopener noreferrer" css={youtubeButton}>
                 <FiYoutube />
               </a>
             </li>

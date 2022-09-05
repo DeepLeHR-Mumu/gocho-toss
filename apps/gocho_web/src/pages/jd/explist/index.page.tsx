@@ -22,12 +22,7 @@ import {
   buttonArrContainer,
   setJobOrderButton,
 } from "./style";
-import {
-  changeOrderDef,
-  PostingValues,
-  SearchQueryDef,
-  OrderDef,
-} from "./type";
+import { changeOrderDef, PostingValues, SearchQueryDef, OrderDef } from "./type";
 
 const JobsExpList: NextPage = () => {
   const limit = 10;
@@ -71,16 +66,8 @@ const JobsExpList: NextPage = () => {
         <section css={sectionContainer}>
           <form css={searchContainer} onSubmit={handleSubmit(postingSearch)}>
             <div css={searchWrapper}>
-              <input
-                {...register("name", {})}
-                css={searchBox}
-                placeholder="검색어를 입력해주세요"
-              />
-              <button
-                type="submit"
-                css={searchButton}
-                aria-label="만료 공고 검색"
-              >
+              <input {...register("name", {})} css={searchBox} placeholder="검색어를 입력해주세요" />
+              <button type="submit" css={searchButton} aria-label="만료 공고 검색">
                 <FiSearch />
               </button>
             </div>
@@ -101,23 +88,10 @@ const JobsExpList: NextPage = () => {
                 );
               })}
             </div>
-            <Pagination
-              total={total}
-              limit={limit}
-              page={page}
-              setPage={setPage}
-            />
+            <Pagination total={total} limit={limit} page={page} setPage={setPage} />
           </form>
-          <ExpJobCardList
-            companyDataArr={companyDataArr?.companyDataArr}
-            isLoading={isLoading}
-          />
-          <BottomPagination
-            total={total}
-            limit={limit}
-            page={page}
-            setPage={setPage}
-          />
+          <ExpJobCardList companyDataArr={companyDataArr?.companyDataArr} isLoading={isLoading} />
+          <BottomPagination total={total} limit={limit} page={page} setPage={setPage} />
         </section>
       </Layout>
     </main>

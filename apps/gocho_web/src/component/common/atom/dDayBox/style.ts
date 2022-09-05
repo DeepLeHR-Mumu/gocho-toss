@@ -8,8 +8,7 @@ interface setDdayStyleCSS {
 const dateColor = (endTime: number) => {
   const endDate = new Date(endTime);
 
-  const dDay =
-    (endDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24);
+  const dDay = (endDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24);
 
   if (endDate.getFullYear() === 9999) {
     return css`

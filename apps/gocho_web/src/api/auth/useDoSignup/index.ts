@@ -3,12 +3,7 @@ import { AxiosError } from "axios";
 
 import { axiosInstance } from "@api/axiosInstance";
 
-import {
-  PostSignUpDef,
-  RequestObjDef,
-  SignUpResponseDef,
-  UseDoSignUpProps,
-} from "./type";
+import { PostSignUpDef, RequestObjDef, SignUpResponseDef, UseDoSignUpProps } from "./type";
 
 const postSignUp: PostSignUpDef = async (requestObj) => {
   const { data } = await axiosInstance.post("/auth/register", {
@@ -18,10 +13,6 @@ const postSignUp: PostSignUpDef = async (requestObj) => {
 };
 
 export const useDoSignUp: UseDoSignUpProps = () => {
-  const mutationResult = useMutation<
-    SignUpResponseDef,
-    AxiosError,
-    RequestObjDef
-  >(postSignUp);
+  const mutationResult = useMutation<SignUpResponseDef, AxiosError, RequestObjDef>(postSignUp);
   return mutationResult;
 };

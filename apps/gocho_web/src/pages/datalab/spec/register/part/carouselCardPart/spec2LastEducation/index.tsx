@@ -3,21 +3,13 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import { useSpecRegisterObj, useLastEdu } from "@recoil/hook/spec";
 
-import {
-  SpecCardTitle,
-  MoveCardButtons,
-  WarningText,
-  ContainerBox,
-} from "../common/component";
+import { SpecCardTitle, MoveCardButtons, WarningText, ContainerBox } from "../common/component";
 
 import { Spec2lastEducationProps, PostSubmitValues } from "./type";
 import { specCardWrapper, formCSS } from "../common/style";
 import { container, title, imageBox } from "./style";
 
-export const Spec2lastEducation: FunctionComponent<Spec2lastEducationProps> = ({
-  movePrevCard,
-  moveNextCard,
-}) => {
+export const Spec2lastEducation: FunctionComponent<Spec2lastEducationProps> = ({ movePrevCard, moveNextCard }) => {
   const {
     handleSubmit,
     register,
@@ -86,14 +78,9 @@ export const Spec2lastEducation: FunctionComponent<Spec2lastEducationProps> = ({
               </label>
             </li>
           </ul>
-          {errors.lastEducation?.message && (
-            <WarningText msg={errors.lastEducation.message} />
-          )}
+          {errors.lastEducation?.message && <WarningText msg={errors.lastEducation.message} />}
         </ContainerBox>
-        <MoveCardButtons
-          postSubmit={handleSubmit(postSubmit)}
-          movePrevCard={movePrevCard}
-        />
+        <MoveCardButtons postSubmit={handleSubmit(postSubmit)} movePrevCard={movePrevCard} />
       </form>
     </div>
   );

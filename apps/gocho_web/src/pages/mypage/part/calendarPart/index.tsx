@@ -19,16 +19,10 @@ export const CalendarPart: FunctionComponent = () => {
     <section css={container}>
       <h3 css={title}>
         MY 채용일정
-        <span css={desc}>
-          {userInfoData?.nickname}님 북마크한 공고 일정을 한 눈에 확인하세요.
-        </span>
+        <span css={desc}>{userInfoData?.nickname}님 북마크한 공고 일정을 한 눈에 확인하세요.</span>
       </h3>
 
-      <Header
-        setCurrentDate={setCurrentDate}
-        currentDate={currentDate}
-        setTwoWeek={setTwoWeek}
-      />
+      <Header setCurrentDate={setCurrentDate} currentDate={currentDate} setTwoWeek={setTwoWeek} />
       <Body twoWeek={twoWeek} />
     </section>
   );

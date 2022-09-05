@@ -9,8 +9,7 @@ export const workingResponse = {
         noti_comment_id: 3512,
         company_id: 4,
         noti_id: 0,
-        comment:
-          "팩트는 주말출근앙하면 세후300도 힘듬 ㅋㅋ 여기 다니다 로템 갔는데 믿기 싫으면 마셈",
+        comment: "팩트는 주말출근앙하면 세후300도 힘듬 ㅋㅋ 여기 다니다 로템 갔는데 믿기 싫으면 마셈",
         user_id: 7783,
         time: 1650456847000,
         like_list: [7783],

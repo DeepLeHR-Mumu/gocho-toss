@@ -25,9 +25,7 @@ import {
   titleCSS,
 } from "./style";
 
-export const HeaderFix: FunctionComponent<HeaderFixProps> = ({
-  jobDetailData,
-}) => {
+export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData }) => {
   const { isSuccess } = useUserInfo();
 
   return (
@@ -54,12 +52,7 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({
               <div css={dDayContainer}>
                 <DdayBox endTime={jobDetailData.endTime} />
               </div>
-              <a
-                href={jobDetailData.applyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                css={applyButton}
-              >
+              <a href={jobDetailData.applyUrl} target="_blank" rel="noopener noreferrer" css={applyButton}>
                 채용사이트
               </a>
             </div>

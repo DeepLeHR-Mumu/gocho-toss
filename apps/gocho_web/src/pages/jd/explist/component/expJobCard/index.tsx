@@ -31,9 +31,7 @@ import {
   jobDetailButton,
 } from "./style";
 
-export const ExpJobCard: FunctionComponent<
-  ExpJobCardProps | ExpJobCardSkeleton
-> = ({ companyData, isSkeleton }) => {
+export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton> = ({ companyData, isSkeleton }) => {
   const [imageSrc, setImageSrc] = useState(companyData?.logoUrl as string);
 
   const { data: jobDataArr } = useJobArr({
@@ -83,25 +81,16 @@ export const ExpJobCard: FunctionComponent<
             return index < 3;
           })
           .map((jobData) => {
-            const {
-              year: startYear,
-              month: startMonth,
-              date: startDate,
-            } = dateConverter(jobData.startTime);
+            const { year: startYear, month: startMonth, date: startDate } = dateConverter(jobData.startTime);
 
-            const {
-              year: endYear,
-              month: endMonth,
-              date: endDate,
-            } = dateConverter(jobData.endTime);
+            const { year: endYear, month: endMonth, date: endDate } = dateConverter(jobData.endTime);
 
             return (
               <div key={`ExpJob${jobData.id}`} css={expJobBox}>
                 <div css={jobTitleContainer}>
                   <h2 css={jobTitle}>{jobData.title}</h2>
                   <div css={jobDate}>
-                    {`${startYear}/${startMonth}/${startDate}`}~
-                    {`${endYear}/${endMonth}/${endDate}`}
+                    {`${startYear}/${startMonth}/${startDate}`}~{`${endYear}/${endMonth}/${endDate}`}
                   </div>
                 </div>
 

@@ -30,22 +30,13 @@ const CompaniesDetail: NextPage = () => {
   const { companyId } = router.query;
   const [shownData, setShownData] = useState<shownDataDef>("info");
 
-  const tabs = [
-    useMoveScroll(),
-    useMoveScroll(),
-    useMoveScroll(),
-    useMoveScroll(),
-  ];
+  const tabs = [useMoveScroll(), useMoveScroll(), useMoveScroll(), useMoveScroll()];
 
   const changeShownData = (newData: shownDataDef) => {
     setShownData(newData);
   };
 
-  const {
-    data: response,
-    isError,
-    isLoading,
-  } = useCompanyDetail({ companyId: Number(companyId) });
+  const { data: response, isError, isLoading } = useCompanyDetail({ companyId: Number(companyId) });
 
   if (!response || isError || isLoading) {
     return <main>Loading...</main>;

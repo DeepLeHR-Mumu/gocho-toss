@@ -19,9 +19,5 @@ export interface PostAddUserJobBookmarkDef {
 }
 
 export interface useAddUserJobBookmarkProps {
-  (): UseMutationResult<
-    AddUserJobBookmarkResponseDef,
-    AxiosError,
-    RequestObjDef
-  >;
+  (): UseMutationResult<AddUserJobBookmarkResponseDef, AxiosError, RequestObjDef>;
 }

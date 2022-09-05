@@ -55,14 +55,7 @@ export const factoryNameCSS = css`
 `;
 
 interface flexBoxDef {
-  (
-    justify:
-      | "center"
-      | "flex-start"
-      | "space-between"
-      | "space-around"
-      | "space-evenly"
-  ): SerializedStyles;
+  (justify: "center" | "flex-start" | "space-between" | "space-around" | "space-evenly"): SerializedStyles;
 }
 
 export const flexBox: flexBoxDef = (justify) => {

@@ -37,14 +37,7 @@ export interface CompanyProps {
   id: number;
   name: string;
   industry: string;
-  size:
-    | "대기업"
-    | "중견기업"
-    | "중소기업"
-    | "외국계"
-    | "공기업"
-    | "공공기관"
-    | "기타";
+  size: "대기업" | "중견기업" | "중소기업" | "외국계" | "공기업" | "공공기관" | "기타";
   catchUrl: string;
   youtubeUrl: string | null;
   logoUrl: string;
@@ -82,8 +75,5 @@ export interface GetCompanyDetailDef {
 }
 
 export interface UseCompanyDetailDef {
-  (requestObj: RequestObjDef): UseQueryResult<
-    UseCompanyDetailResultDef,
-    AxiosError
-  >;
+  (requestObj: RequestObjDef): UseQueryResult<UseCompanyDetailResultDef, AxiosError>;
 }

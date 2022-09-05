@@ -2,9 +2,7 @@ import { CompanyObjDef } from "@api/company/type/company";
 
 import { UseCompanyDetailResultDef } from "./type";
 
-export const companyConverter = (
-  data: CompanyObjDef
-): UseCompanyDetailResultDef => {
+export const companyConverter = (data: CompanyObjDef): UseCompanyDetailResultDef => {
   return {
     data: {
       id: data.id,

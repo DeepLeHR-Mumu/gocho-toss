@@ -6,8 +6,7 @@ export default {
   title: "데이터랩/스펙디테일/Part/ResultInfoPart/index",
   component: ResultInfoPart,
   parameters: {
-    componentSubtitle:
-      "스펙 디테일 페이지에 이용자의 스펙에 대한 평가가 출력되는 part",
+    componentSubtitle: "스펙 디테일 페이지에 이용자의 스펙에 대한 평가가 출력되는 part",
   },
 } as ComponentMeta<typeof ResultInfoPart>;
 

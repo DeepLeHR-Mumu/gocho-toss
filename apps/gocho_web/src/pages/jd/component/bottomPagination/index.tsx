@@ -1,22 +1,12 @@
 import { FunctionComponent } from "react";
-import {
-  FiChevronLeft,
-  FiChevronRight,
-  FiChevronsLeft,
-  FiChevronsRight,
-} from "react-icons/fi";
+import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 
 import { dummyArrCreator } from "@util/dummyArrCreator";
 
 import { BottomPaginationProps } from "./type";
 import { paginationContainer, movePageButton, selectPageButton } from "./style";
 
-export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({
-  total,
-  limit,
-  page,
-  setPage,
-}) => {
+export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ total, limit, page, setPage }) => {
   const totalPage = Math.ceil(total / limit);
   const count = Math.floor(page / 10);
 

@@ -4,8 +4,7 @@ import { css } from "@emotion/react";
 import { SelectChipForm } from ".";
 
 export default {
-  title:
-    "datalab/spec/register/part/carouselCardPart/Spec7Lang/component/SelectChipForm",
+  title: "datalab/spec/register/part/carouselCardPart/Spec7Lang/component/SelectChipForm",
   component: SelectChipForm,
   argTypes: {
     value: {

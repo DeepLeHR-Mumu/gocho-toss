@@ -12,8 +12,7 @@ export const SelectBox: FunctionComponent<SelectBoxProps> = ({
   setValue,
   closeFunction,
 }) => {
-  const chipArr =
-    valueName === "strength" ? STRONGPOINT_CHIP : WEAKNESSPOINT_CHIP;
+  const chipArr = valueName === "strength" ? STRONGPOINT_CHIP : WEAKNESSPOINT_CHIP;
   return (
     <div css={wrapper}>
       <button type="button" onClick={closeFunction} css={closeButton}>

@@ -5,13 +5,7 @@ import { BookmarkCompanyArr } from "@pages/mypage/component/bookmarkCompanyArr";
 
 import { setBookmarkViewButtonArr } from "./constant";
 import { changeOrderDef } from "./type";
-import {
-  partContainer,
-  headerContainer,
-  title,
-  buttonArrContainer,
-  setBookmarkViewButton,
-} from "./style";
+import { partContainer, headerContainer, title, buttonArrContainer, setBookmarkViewButton } from "./style";
 
 export const BookmarkPart: FunctionComponent = () => {
   const [activeButtonType, setActiveButtonType] = useState("job");

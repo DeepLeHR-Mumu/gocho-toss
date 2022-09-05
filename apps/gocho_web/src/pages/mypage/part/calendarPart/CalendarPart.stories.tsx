@@ -47,18 +47,12 @@ export const 로그인상태 = Template.bind({});
 로그인상태.parameters = {
   msw: {
     handlers: {
-      login: rest.post(
-        "https://gocho-back.com/v1/auth/check",
-        (req, res, ctx) => {
-          return res(ctx.json(authorizedResponse));
-        }
-      ),
-      bookmark: rest.get(
-        "https://gocho-back.com/v1/users/12765/job-bookmarks",
-        (req, res, ctx) => {
-          return res(ctx.json(normalResponse));
-        }
-      ),
+      login: rest.post("https://gocho-back.com/v1/auth/check", (req, res, ctx) => {
+        return res(ctx.json(authorizedResponse));
+      }),
+      bookmark: rest.get("https://gocho-back.com/v1/users/12765/job-bookmarks", (req, res, ctx) => {
+        return res(ctx.json(normalResponse));
+      }),
     },
   },
 };

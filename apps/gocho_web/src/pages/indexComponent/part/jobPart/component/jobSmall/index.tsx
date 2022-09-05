@@ -19,9 +19,7 @@ import {
 } from "./style";
 import { JobSmallCardProps, JobSmallCardSkeleton } from "./type";
 
-export const JobSmallCard: FunctionComponent<
-  JobSmallCardProps | JobSmallCardSkeleton
-> = ({ jobData, isSkeleton }) => {
+export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSkeleton> = ({ jobData, isSkeleton }) => {
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
   if (isSkeleton || jobData === undefined) {
     return (

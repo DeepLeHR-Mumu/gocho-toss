@@ -62,11 +62,7 @@ export const WritePostingBox: FunctionComponent = () => {
         <CloseButton size="L" buttonClick={closeModal} />
       </div>
       <div css={userProfile}>
-        <div css={userProfileImage}>
-          {userInfoData && (
-            <ProfileImg imageStr={userInfoData.image} size="S" />
-          )}
-        </div>
+        <div css={userProfileImage}>{userInfoData && <ProfileImg imageStr={userInfoData.image} size="S" />}</div>
         <p css={userNickname}>{userInfoData && userInfoData.nickname}</p>
       </div>
       <div>{errorMsg && <p> {errorMsg}</p>}</div>

@@ -20,12 +20,8 @@ import {
 import { wrapper, flexBox, container, containerSkeleton } from "./style";
 
 const JobsDetail: NextPage = () => {
-  const [currentPositionId, setCurrentPositionId] = useState<number | null>(
-    null
-  );
-  const [freshPosition, setFreshPosition] = useState<PositionObjDef | null>(
-    null
-  );
+  const [currentPositionId, setCurrentPositionId] = useState<number | null>(null);
+  const [freshPosition, setFreshPosition] = useState<PositionObjDef | null>(null);
 
   const router = useRouter();
   const { jobId } = router.query;

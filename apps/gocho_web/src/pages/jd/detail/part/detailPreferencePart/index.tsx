@@ -3,19 +3,10 @@ import { FunctionComponent } from "react";
 import { NoDataDesc } from "../common/component/noDataDesc";
 
 import { DetailPreferencePartProps } from "./type";
-import {
-  container,
-  containerTitle,
-  flexBetweenBox,
-  subTitle,
-  desc,
-  restPoint,
-} from "../common/style";
+import { container, containerTitle, flexBetweenBox, subTitle, desc, restPoint } from "../common/style";
 import { preferredCertiContainer } from "./style";
 
-export const DetailPreferencePart: FunctionComponent<
-  DetailPreferencePartProps
-> = ({ freshPosition }) => {
+export const DetailPreferencePart: FunctionComponent<DetailPreferencePartProps> = ({ freshPosition }) => {
   return (
     <section css={container}>
       <h4 css={containerTitle}>우대 사항</h4>

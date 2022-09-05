@@ -4,14 +4,7 @@ import Link from "next/link";
 
 import { COMMUNITY_TIPS_LIST_URL } from "@constant/internalURL";
 
-import {
-  cardWrapper,
-  linkArea,
-  cardImageBox,
-  cardInfo,
-  cardTitle,
-  cardDesc,
-} from "./style";
+import { cardWrapper, linkArea, cardImageBox, cardInfo, cardTitle, cardDesc } from "./style";
 import { LatestCardProps } from "./type";
 
 export const LatestCard: FunctionComponent<LatestCardProps> = ({ tipData }) => {
@@ -20,12 +13,7 @@ export const LatestCard: FunctionComponent<LatestCardProps> = ({ tipData }) => {
       <Link href={COMMUNITY_TIPS_LIST_URL} passHref>
         <a css={linkArea}>
           <div css={cardImageBox}>
-            <Image
-              src={tipData.thumbnailSrc}
-              alt=""
-              layout="fill"
-              objectFit="cover"
-            />
+            <Image src={tipData.thumbnailSrc} alt="" layout="fill" objectFit="cover" />
           </div>
           <div css={cardInfo}>
             <p>

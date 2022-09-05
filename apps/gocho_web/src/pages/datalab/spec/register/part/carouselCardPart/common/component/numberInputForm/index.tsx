@@ -1,12 +1,7 @@
 import { FunctionComponent, useState } from "react";
 
 import { NumberInputFormProps } from "./type";
-import {
-  numberInputCSS,
-  numberInputLabelCSS,
-  labelFirstDesc,
-  labelLastDesc,
-} from "./style";
+import { numberInputCSS, numberInputLabelCSS, labelFirstDesc, labelLastDesc } from "./style";
 
 export const NumberInputForm: FunctionComponent<NumberInputFormProps> = ({
   firstDesc,
@@ -29,13 +24,7 @@ export const NumberInputForm: FunctionComponent<NumberInputFormProps> = ({
       }}
     >
       <p css={labelFirstDesc(isFocus)}>{firstDesc}</p>
-      <input
-        css={numberInputCSS(isFocus)}
-        type="number"
-        id={id}
-        placeholder={placeholder}
-        {...registerObj}
-      />
+      <input css={numberInputCSS(isFocus)} type="number" id={id} placeholder={placeholder} {...registerObj} />
       <p css={labelLastDesc(isFocus)}>{lastDesc}</p>
     </label>
   );

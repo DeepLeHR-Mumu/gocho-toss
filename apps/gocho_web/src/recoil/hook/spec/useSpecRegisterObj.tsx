@@ -7,8 +7,7 @@ interface SetCurrentSpecObjDef {
 }
 
 export const useSpecRegisterObj = () => {
-  const [_currentSpecObj, _setCurrentSpecObj] =
-    useRecoilState(specRegisterAtom);
+  const [_currentSpecObj, _setCurrentSpecObj] = useRecoilState(specRegisterAtom);
 
   const resetSpecRegisterObj = useResetRecoilState(specRegisterAtom);
 

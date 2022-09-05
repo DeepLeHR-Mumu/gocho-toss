@@ -22,25 +22,19 @@ export const getInfiniteCommunityPostingArr: GetInfinitePostingArrDef = async ({
   return { ...data, nextPage };
 };
 
-export const useInfiniteCommunityPostingArr = (
-  requestObj: CommunityPostingArrRequestDef
-) => {
-  const queryResult = useInfiniteQuery(
-    communityPostingArrKeyObj.infinite(requestObj),
-    getInfiniteCommunityPostingArr,
-    {
-      getNextPageParam: (responseObj) => {
-        return responseObj.data.length !== 0 ? responseObj.nextPage : undefined;
-      },
-      select: (data) => {
-        return {
-          pages: data.pages.map((page) => {
-            return selector(page);
-          }),
-          pageParams: [...data.pageParams],
-        };
-      },
-    }
-  );
+export const useInfiniteCommunityPostingArr = (requestObj: CommunityPostingArrRequestDef) => {
+  const queryResult = useInfiniteQuery(communityPostingArrKeyObj.infinite(requestObj), getInfiniteCommunityPostingArr, {
+    getNextPageParam: (responseObj) => {
+      return responseObj.data.length !== 0 ? responseObj.nextPage : undefined;
+    },
+    select: (data) => {
+      return {
+        pages: data.pages.map((page) => {
+          return selector(page);
+        }),
+        pageParams: [...data.pageParams],
+      };
+    },
+  });
   return queryResult;
 };

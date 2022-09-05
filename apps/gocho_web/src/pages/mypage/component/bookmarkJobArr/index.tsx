@@ -31,10 +31,7 @@ export const BookmarkJobArr: FunctionComponent = () => {
   return (
     <div css={cardListContainer}>
       {userJobBookmarkArrData.length === 0 && (
-        <p css={desc}>
-          {userInfoData.nickname} 님! 북마크를 이용하시면 추천공고가 더
-          정교해져요 😳
-        </p>
+        <p css={desc}>{userInfoData.nickname} 님! 북마크를 이용하시면 추천공고가 더 정교해져요 😳</p>
       )}
       {userJobBookmarkArrData.map((job) => {
         return <JobCard key={job.id} jobData={job} />;

@@ -3,11 +3,7 @@ import { AxiosError } from "axios";
 
 import { axiosInstance } from "@api/axiosInstance";
 import { ResponseDef } from "@type/api/responseType";
-import {
-  postRegisterSpecDef,
-  useRegisterSpecProps,
-  RequestObjDef,
-} from "./type";
+import { postRegisterSpecDef, useRegisterSpecProps, RequestObjDef } from "./type";
 
 export const postRegisterSpec: postRegisterSpecDef = async (requestObj) => {
   const token = localStorage.getItem("token") as string;
@@ -18,8 +14,6 @@ export const postRegisterSpec: postRegisterSpecDef = async (requestObj) => {
 };
 
 export const useRegisterSpec: useRegisterSpecProps = () => {
-  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(
-    postRegisterSpec
-  );
+  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(postRegisterSpec);
   return mutationResult;
 };

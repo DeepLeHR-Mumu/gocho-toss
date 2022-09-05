@@ -1,11 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/router";
 
-import {
-  useSpecRegisterObj,
-  useIsSpecPageBlocking,
-  useProgress,
-} from "@recoil/hook/spec";
+import { useSpecRegisterObj, useIsSpecPageBlocking, useProgress } from "@recoil/hook/spec";
 
 import { UsePageBlockingDef } from "./type";
 
@@ -20,8 +16,7 @@ export const usePageBlocking: UsePageBlockingDef = (setCurrentModal) => {
 
   const routeChangeStart = useCallback(
     (url: string) => {
-      const isCompare =
-        router.pathname !== url && !isBlocking && currentSpecObjLength !== 0;
+      const isCompare = router.pathname !== url && !isBlocking && currentSpecObjLength !== 0;
 
       if (isCompare) {
         setLinkUrl(url);

@@ -20,9 +20,7 @@ import {
 } from "./style";
 import { CommentCardProps } from "./type";
 
-export const CompanyCommentCard: FunctionComponent<CommentCardProps> = ({
-  companyId,
-}) => {
+export const CompanyCommentCard: FunctionComponent<CommentCardProps> = ({ companyId }) => {
   const commentContainerRef = useRef<HTMLDivElement | null>(null);
 
   // 최초 load가 완료 된 후 실행
@@ -32,10 +30,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps> = ({
     // commentContainerRef의 현재 스크롤 값을 만약 bottomHeight이 undefined가 아니라면 bottomHeight으로
     // undefined라면 0으로 적용합니다.
     // useEffect이전 최초 로딩 완료시 commentContainerRef.current의 데이터를 찾지못하기에 undefined가 노출됩니다.
-    commentContainerRef.current?.scrollTo(
-      0,
-      bottomHeight !== undefined ? bottomHeight : 0
-    );
+    commentContainerRef.current?.scrollTo(0, bottomHeight !== undefined ? bottomHeight : 0);
   }, []);
 
   const { data: companyCommentArrData, isError } = useCompanyCommentArr({
@@ -58,13 +53,9 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps> = ({
               alt={`${companyCommentArrData.company.name} 기업 로고`}
             />
           </div>
-          <strong css={companyName}>
-            {companyCommentArrData.company.name}
-          </strong>
+          <strong css={companyName}>{companyCommentArrData.company.name}</strong>
         </div>
-        <p css={commentCount}>
-          총 댓글 {companyCommentArrData.commentArr.length}개
-        </p>
+        <p css={commentCount}>총 댓글 {companyCommentArrData.commentArr.length}개</p>
       </header>
       <section css={commentBodyContainer}>
         <div css={commentContainer} ref={commentContainerRef}>

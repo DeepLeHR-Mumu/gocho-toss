@@ -39,8 +39,7 @@ export const ChangePostingBox: FunctionComponent = () => {
   const { closeModal, currentModal } = useModal();
   const queryClient = useQueryClient();
 
-  const { id, title, description, type } =
-    currentModal?.modalContentObj as changePostingObjDef;
+  const { id, title, description, type } = currentModal?.modalContentObj as changePostingObjDef;
 
   const { register, handleSubmit, setValue } = useForm<PostingFormValues>({
     defaultValues: {
@@ -70,11 +69,7 @@ export const ChangePostingBox: FunctionComponent = () => {
         <CloseButton size="L" buttonClick={closeModal} />
       </div>
       <div css={userProfile}>
-        <div css={userProfileImage}>
-          {userInfoData && (
-            <ProfileImg imageStr={userInfoData.image} size="S" />
-          )}
-        </div>
+        <div css={userProfileImage}>{userInfoData && <ProfileImg imageStr={userInfoData.image} size="S" />}</div>
         <p css={userNickname}>{userInfoData && userInfoData.nickname}</p>
       </div>
       <div>{errorMsg && <p> {errorMsg}</p>}</div>

@@ -10,9 +10,5 @@ interface ResponseDef {
 }
 
 export interface GetInifiniteSpecArrDef {
-  ({
-    queryKey,
-  }: QueryFunctionContext<
-    ReturnType<typeof specArrKeyObj.infinite>
-  >): Promise<ResponseDef>;
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof specArrKeyObj.infinite>>): Promise<ResponseDef>;
 }

@@ -5,14 +5,7 @@ import nozoTrue from "@public/images/global/companyDetail/nozo_true_icon.svg";
 import nozoFalse from "@public/images/global/companyDetail/nozo_false_icon.svg";
 
 import { BasicInfoPartProps } from "./type";
-import {
-  infoContainer,
-  flexBox,
-  infoTitle,
-  info,
-  nozoImage,
-  mapView,
-} from "./style";
+import { infoContainer, flexBox, infoTitle, info, nozoImage, mapView } from "./style";
 
 declare global {
   interface Window {
@@ -21,9 +14,7 @@ declare global {
   }
 }
 
-export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
-  companyData,
-}) => {
+export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ companyData }) => {
   useEffect(() => {
     const mapScript = document.createElement("script");
 
@@ -36,10 +27,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
       window.kakao.maps.load(() => {
         const container = document.getElementById("map");
         const options = {
-          center: new window.kakao.maps.LatLng(
-            37.365264512305174,
-            127.10676860117488
-          ),
+          center: new window.kakao.maps.LatLng(37.365264512305174, 127.10676860117488),
           level: 7,
         };
         const map = new window.kakao.maps.Map(container, options);
@@ -53,10 +41,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
           (result: any, status: any) => {
             // 정상적으로 검색이 완료됐으면
             if (status === window.kakao.maps.services.Status.OK) {
-              const coords = new window.kakao.maps.LatLng(
-                result[0].y,
-                result[0].x
-              );
+              const coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
 
               // 결과값으로 받은 위치를 마커로 표시합니다
               const marker = new window.kakao.maps.Marker({
