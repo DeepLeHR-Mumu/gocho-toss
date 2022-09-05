@@ -27,6 +27,7 @@ import {
   companyLogoBox,
   dateInfoContainer,
   date,
+  cutBox,
   companyName,
   titleCSS,
   detailInfoContainer,
@@ -42,7 +43,7 @@ import {
 export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ jobData, isSkeleton }) => {
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
 
-  if (isSkeleton || typeof jobData === "undefined") {
+  if (isSkeleton || jobData === undefined) {
     return (
       <div css={jobCardSkeleton}>
         <SkeletonBox />
@@ -54,7 +55,6 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
   const isExpired = jobData.endTime - Number(today) < 0;
 
   const { year: startYear, month: startMonth, date: startDate } = dateConverter(jobData.startTime);
-
   const { year: endYear, month: endMonth, date: endDate } = dateConverter(jobData.endTime);
 
   return (
@@ -87,9 +87,12 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
             <div>
               <div css={dateInfoContainer}>
                 <div css={date}>
-                  {`${startYear}/${startMonth}/${startDate}`}~{`${endYear}/${endMonth}/${endDate}`}
+                  {endYear === 9999
+                    ? `${startYear}/${startMonth}/${startDate}`
+                    : `${startYear}/${startMonth}/${startDate}~${endYear}/${endMonth}/${endDate}`}
                 </div>
                 <DdayBox endTime={jobData.endTime} />
+                {jobData.cut && <div css={cutBox}>채용시 마감</div>}
               </div>
               <div css={companyName}>{jobData.companyName}</div>
               <h2 css={titleCSS}>{jobData.title}</h2>
@@ -131,6 +134,8 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
               );
             })}
           </div>
+
+          <div>{jobData.cut ? "true" : "false"}</div>
 
           <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
             <a css={hoverButton} className="hoverButton">
