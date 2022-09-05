@@ -1,0 +1,24 @@
+name: Slack Notification Demo
+# 액션 페이지에 나오는 이름
+
+on:
+  pull_request:
+    branches:
+      - "dev"
+  push:
+    branches:
+      - "dev"
+# workflow trigger하는 이벤트
+
+jobs:
+  slack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          author_name:"FE_Github 알림"
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,pullRequest # selectable (default: repo,message)
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always() # Pick up events even if the job fails or is canceled.
