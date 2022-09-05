@@ -18,7 +18,7 @@ jobs:
         with:
           status: ${{ job.status }}
           author_name: FE_Github 알림
-          fields: repo,message,commit,author,action,eventName,ref,workflow,job,pullRequest # selectable (default: repo,message)
+          fields: repo,message,author,eventName,job,pullRequest # selectable (default: repo,message)
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         if: always() # Pick up events even if the job fails or is canceled.
