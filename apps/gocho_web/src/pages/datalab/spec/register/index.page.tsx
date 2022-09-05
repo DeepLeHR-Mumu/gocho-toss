@@ -29,6 +29,7 @@ const Register: NextPage = () => {
 
   usePageBlocking(setCurrentModal);
   useResetProgress();
+
   return (
     <main css={wrapper}>
       <ProgressPart />
