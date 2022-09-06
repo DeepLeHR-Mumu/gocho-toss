@@ -1,11 +1,11 @@
-import { FunctionComponent, useCallback, useEffect } from "react";
+import { FunctionComponent, MouseEvent, useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { dimmed } from "./style";
 import { modalComponentProps } from "./type";
 
 export const ModalComponent: FunctionComponent<modalComponentProps> = ({ children, closeModal }) => {
   const closeOnClick = useCallback(
-    (event?): void => {
+    (event: MouseEvent): void => {
       if (event?.target === event?.currentTarget) {
         closeModal?.();
       }

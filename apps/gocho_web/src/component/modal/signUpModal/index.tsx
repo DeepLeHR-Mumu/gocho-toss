@@ -26,7 +26,6 @@ export const SignUpBox: FunctionComponent = () => {
   const { refetch } = useUserInfo();
   const { closeModal } = useModal();
   const { mutate } = useDoSignUp();
-  const [, setErrorMsg] = useState<null | string>(null);
 
   const signUpSubmit: SubmitHandler<SignUpFormValues> = (signUpObj) => {
     mutate(signUpObj, {
@@ -34,9 +33,6 @@ export const SignUpBox: FunctionComponent = () => {
         localStorage.setItem("token", `${response?.data.token}`);
         refetch();
         closeModal();
-      },
-      onError: (err) => {
-        setErrorMsg(err.response?.data.error.errorMessage);
       },
     });
   };

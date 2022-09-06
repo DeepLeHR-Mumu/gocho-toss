@@ -80,11 +80,6 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
             console.log("등록완료");
           }
         },
-        onError: (response) => {
-          if (response.response?.status === 401) {
-            // console.log("등록완료");
-          }
-        },
       }
     );
   };

@@ -42,7 +42,6 @@ export const PostingBox: FunctionComponent = () => {
   const { data: userData } = useUserInfo();
 
   const [openPostingSetting, setOpenPostingSetting] = useState<boolean>(false);
-  const [errorMsg, setErrorMsg] = useState<null | number>(null);
   const { mutate } = useDeletePosting();
   const queryClient = useQueryClient();
 
@@ -67,9 +66,6 @@ export const PostingBox: FunctionComponent = () => {
         onSuccess: () => {
           closeModal();
           queryClient.invalidateQueries(communityPostingArrKeyObj.all);
-        },
-        onError: (err) => {
-          setErrorMsg(err.response?.data.error.status);
         },
       }
     );
@@ -132,7 +128,6 @@ export const PostingBox: FunctionComponent = () => {
               >
                 글 삭제하기
               </button>
-              {errorMsg && <p> {errorMsg}</p>}
             </div>
           )}
           {userData.id === userID && (

@@ -84,6 +84,7 @@ importers:
       '@types/node': 18.7.13
       '@types/react': 18.0.17
       '@types/react-dom': 18.0.6
+      '@types/react-slick': ^0.23.10
       axios: ^0.27.2
       eslint-config-deeple: workspace:^1.0.0
       next: 12.2.5
@@ -103,6 +104,7 @@ importers:
       '@storybook/react': 6.5.10_8db7cb6234632b4a50e64616f386af01
       '@tanstack/react-query': 4.2.3_react-dom@17.0.2+react@17.0.2
       '@tanstack/react-query-devtools': 4.2.3_a4c5514fbeda3b2683a63dbe98a24957
+      '@types/react-slick': 0.23.10
       axios: 0.27.2
       eslint-config-deeple: link:../../packages/eslint-config-deeple
       next: 12.2.5_react-dom@17.0.2+react@17.0.2
@@ -4397,7 +4399,6 @@ packages:
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
-    dev: true
 
   /@types/qs/6.9.7:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
@@ -4408,17 +4409,21 @@ packages:
       '@types/react': 18.0.17
     dev: true
 
+  /@types/react-slick/0.23.10:
+    resolution: {integrity: sha512-ZiqdencANDZy6sWOWJ54LDvebuXFEhDlHtXU9FFipQR2BcYU2QJxZhvJPW6YK7cocibUiNn+YvDTbt1HtCIBVA==}
+    dependencies:
+      '@types/react': 18.0.17
+    dev: false
+
   /@types/react/18.0.17:
     resolution: {integrity: sha512-38ETy4tL+rn4uQQi7mB81G7V1g0u2ryquNmsVIOKUAEIDK+3CUjZ6rSRpdvS99dNBnkLFL83qfmtLacGOTIhwQ==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
       csstype: 3.1.0
-    dev: true
 
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
-    dev: true
 
   /@types/source-list-map/0.1.2:
     resolution: {integrity: sha512-K5K+yml8LTo9bWJI/rECfIPrGgxdpeNbj+d53lwN4QjW1MCwlkhUms+gtdzigTeUyBr09+u8BwOIY3MXvHdcsA==}

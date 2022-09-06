@@ -39,9 +39,6 @@ export const LoginBox: FunctionComponent = () => {
         queryClient.invalidateQueries();
         closeModal();
       },
-      onError: (err) => {
-        setErrorMsg(err.response?.data.error.errorMessage);
-      },
     });
   };
 

@@ -16,6 +16,7 @@ export const selector = (jobArr: JobObjDef[], count: number) => {
       taskArr: job.task_arr,
       bookmark: job.bookmark,
       view: job.view,
+      cut: job.cut,
     };
   });
   return { jobDataArr, count };

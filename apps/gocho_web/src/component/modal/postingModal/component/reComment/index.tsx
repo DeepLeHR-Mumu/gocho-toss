@@ -26,9 +26,6 @@ export const ReComment: FunctionComponent<reCommentProps> = ({
         onSuccess: () => {
           queryClient.invalidateQueries(communityCommentArrKeyObj.all);
         },
-        onError: (err) => {
-          setErrorMsg(err.response?.data.error.errorMessage);
-        },
       }
     );
   };

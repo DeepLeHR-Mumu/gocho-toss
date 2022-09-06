@@ -24,16 +24,11 @@ export const WriteComment: FunctionComponent<WriteCommentProps> = ({ postingId, 
   const { mutate } = useWriteComment();
   const queryClient = useQueryClient();
 
-  const [errorMsg, setErrorMsg] = useState<null | string>(null);
-
   const commentSubmit: SubmitHandler<CommentFormValues> = (commentObj) => {
     mutate(commentObj, {
       onSuccess: () => {
         reset();
         queryClient.invalidateQueries(communityCommentArrKeyObj.all);
-      },
-      onError: (err) => {
-        setErrorMsg(err.response?.data.error.errorMessage);
       },
     });
   };
@@ -54,7 +49,6 @@ export const WriteComment: FunctionComponent<WriteCommentProps> = ({ postingId, 
           <AiOutlineSend />
         </button>
       </div>
-      {errorMsg && <p>{errorMsg}</p>}
     </form>
   );
 };

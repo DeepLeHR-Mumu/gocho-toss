@@ -14,6 +14,7 @@ export interface JobCardListProps {
         taskArr: string[];
         bookmark: number;
         view: number;
+        cut: boolean;
       }[]
     | undefined;
   isLoading: boolean;
