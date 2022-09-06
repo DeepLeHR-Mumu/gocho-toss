@@ -28,7 +28,6 @@ import {
 
 export const WritePostingBox: FunctionComponent = () => {
   const [activeButtonIndex, setActiveButtonIndex] = useState(0);
-  const [errorMsg, setErrorMsg] = useState<null | number>(null);
   const changeIndex = (newId: number) => {
     setActiveButtonIndex(newId);
   };
@@ -50,9 +49,6 @@ export const WritePostingBox: FunctionComponent = () => {
         closeModal();
         queryClient.invalidateQueries(communityPostingArrKeyObj.all);
       },
-      onError: (err) => {
-        setErrorMsg(err.response?.data.error.status);
-      },
     });
   };
 
@@ -65,7 +61,6 @@ export const WritePostingBox: FunctionComponent = () => {
         <div css={userProfileImage}>{userInfoData && <ProfileImg imageStr={userInfoData.image} size="S" />}</div>
         <p css={userNickname}>{userInfoData && userInfoData.nickname}</p>
       </div>
-      <div>{errorMsg && <p> {errorMsg}</p>}</div>
       <form css={formContainer} onSubmit={handleSubmit(postingSubmit)}>
         <input
           {...register("title", {

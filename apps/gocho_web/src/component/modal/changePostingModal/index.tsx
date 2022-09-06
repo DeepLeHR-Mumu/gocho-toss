@@ -35,7 +35,6 @@ export const ChangePostingBox: FunctionComponent = () => {
 
   const { mutate } = useChangePosting();
   const { data: userInfoData } = useUserInfo();
-  const [errorMsg, setErrorMsg] = useState<null | number>(null);
   const { closeModal, currentModal } = useModal();
   const queryClient = useQueryClient();
 
@@ -56,9 +55,6 @@ export const ChangePostingBox: FunctionComponent = () => {
         closeModal();
         queryClient.invalidateQueries(communityPostingArrKeyObj.all);
       },
-      onError: (err) => {
-        setErrorMsg(err.response?.data.error.status);
-      },
     });
   };
 
@@ -72,7 +68,6 @@ export const ChangePostingBox: FunctionComponent = () => {
         <div css={userProfileImage}>{userInfoData && <ProfileImg imageStr={userInfoData.image} size="S" />}</div>
         <p css={userNickname}>{userInfoData && userInfoData.nickname}</p>
       </div>
-      <div>{errorMsg && <p> {errorMsg}</p>}</div>
       <form css={formContainer} onSubmit={handleSubmit(postingSubmit)}>
         <input
           {...register("title", {

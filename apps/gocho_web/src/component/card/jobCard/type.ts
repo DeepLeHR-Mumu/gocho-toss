@@ -13,6 +13,7 @@ export interface JobCardProps {
     taskArr: string[];
     bookmark: number;
     view: number;
+    cut: boolean;
   };
   isSkeleton?: never;
 }

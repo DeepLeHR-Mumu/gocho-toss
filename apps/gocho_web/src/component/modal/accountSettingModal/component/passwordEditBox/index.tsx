@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 
@@ -20,8 +20,6 @@ import {
 import { PasswordChangeFormValues } from "./type";
 
 export const PasswordEditBox: FunctionComponent = () => {
-  const [, setServerErrorMsg] = useState(null);
-
   const {
     register,
     handleSubmit,
@@ -44,9 +42,6 @@ export const PasswordEditBox: FunctionComponent = () => {
             localStorage.setItem("token", `${data?.data.token}`);
             // LATER 토스 메시지 적용 예정
             refetch();
-          },
-          onError: (err) => {
-            setServerErrorMsg(err.response?.data.error.errorMessage);
           },
         }
       );

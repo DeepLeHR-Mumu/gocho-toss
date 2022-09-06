@@ -29,9 +29,6 @@ export const PictureEditBox: FunctionComponent = () => {
             localStorage.setItem("token", `${data?.data.token}`);
             refetch();
           },
-          // onError: (err) => {
-          //   setServerErrorMsg(err.userInfoData?.data.error.errorMessage);
-          // },
         }
       );
     }
