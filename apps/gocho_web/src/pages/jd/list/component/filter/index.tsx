@@ -144,14 +144,7 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
           })}
         </div>
         <div css={flexBox}>
-          {/* LATER: API 제작 후 추가 */}
-          <button
-            type="button"
-            css={userFilterButton}
-            onClick={() => {
-              // console.log(watchList);
-            }}
-          >
+          <button type="button" css={userFilterButton} onClick={() => {}}>
             My 필터 불러오기 <BsFolderSymlink />
           </button>
           <button type="button" css={userFilterButton}>

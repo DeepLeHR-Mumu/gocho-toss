@@ -16,6 +16,7 @@ const postAddUserJobBookmark: PostAddUserJobBookmarkDef = async (requestObj) => 
       "x-access-token": token,
     },
 
+    // TODO: jobId -> jdID
     body: { jobId: `${requestObj?.jobId}` },
   });
   return data;

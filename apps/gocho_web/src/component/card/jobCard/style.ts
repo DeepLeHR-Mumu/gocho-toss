@@ -121,6 +121,19 @@ export const date = css`
   margin-right: 0.75rem;
 `;
 
+export const cutBox = css`
+  font-size: 0.75rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  white-space: nowrap;
+  font-weight: 700;
+  border-radius: 1rem;
+  margin-left: 0.25rem;
+  padding: 0.3rem 0.5rem;
+  background-color: #f6f6f6;
+  color: #1553cd;
+`;
+
 export const companyName = css`
   font-size: 0.875rem;
   color: ${COLORS.GRAY40};

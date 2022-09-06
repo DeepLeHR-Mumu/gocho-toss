@@ -46,9 +46,6 @@ export const Comment: FunctionComponent<CommentProps> = ({
         onSuccess: () => {
           queryClient.invalidateQueries(communityCommentArrKeyObj.all);
         },
-        onError: (err) => {
-          setErrorMsg(err.response?.data.error.errorMessage);
-        },
       }
     );
   };

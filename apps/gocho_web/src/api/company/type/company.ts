@@ -50,4 +50,5 @@ export interface CompanyObjDef {
     exists: boolean;
     desc: string | null;
   };
+  factory_arr: FactoryDef[];
 }
