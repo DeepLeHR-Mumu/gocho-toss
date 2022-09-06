@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import TextareaAutosize from "react-textarea-autosize";
 import { AiOutlineSend } from "react-icons/ai";
