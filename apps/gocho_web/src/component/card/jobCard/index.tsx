@@ -135,8 +135,6 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
             })}
           </div>
 
-          <div>{jobData.cut ? "true" : "false"}</div>
-
           <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
             <a css={hoverButton} className="hoverButton">
               공고보기

@@ -12,7 +12,7 @@ export const specArrKeyObj = {
   infinite: (requestObj: SpecArrInfinityRequestDef) => {
     return [
       {
-        usage: "infinity",
+        usage: "infinite",
         requestObj,
       },
     ] as const;
