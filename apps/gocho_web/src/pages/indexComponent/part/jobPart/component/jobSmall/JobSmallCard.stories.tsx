@@ -25,6 +25,7 @@ export const 기본 = Template.bind({});
 
 기본.args = {
   jobData: {
+    id: 3223,
     companyName: "우리회사",
     companyLogo: "null",
     title: "공고이름인데요",

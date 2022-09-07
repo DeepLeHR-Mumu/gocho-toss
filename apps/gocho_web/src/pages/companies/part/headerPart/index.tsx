@@ -57,13 +57,16 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData }) 
         <h2 css={companyName}>{companyData.name}</h2>
         <p css={industry}>{companyData.industry}</p>
       </div>
-      <Link href={companyData.catchUrl} passHref>
-        <a>
-          <button type="button" css={catchLinkButton}>
-            캐치 기업정보 더보기
-          </button>
-        </a>
-      </Link>
+      {/* LATER null data들에대한 정확한 파악 필요 null 일 시 렌더링 안되는 것 확인 및 디자인 변경 확인 필요 */}
+      {companyData.catchUrl && (
+        <Link href={companyData.catchUrl} passHref>
+          <a>
+            <button type="button" css={catchLinkButton}>
+              캐치 기업정보 더보기
+            </button>
+          </a>
+        </Link>
+      )}
 
       {companyData.youtubeUrl && (
         <Link href={companyData.youtubeUrl} passHref>

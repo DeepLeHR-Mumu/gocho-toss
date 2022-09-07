@@ -30,7 +30,7 @@ export const Comment: FunctionComponent<CommentProps> = ({
   nickname,
 }) => {
   const [showWriteComment, setShowWriteComment] = useState<boolean>(false);
-  const [errorMsg, setErrorMsg] = useState<null | string>(null);
+  const [errorMsg] = useState<null | string>(null);
   const handleShowWriteComment = () => {
     if (showWriteComment) return setShowWriteComment(false);
     return setShowWriteComment(true);
