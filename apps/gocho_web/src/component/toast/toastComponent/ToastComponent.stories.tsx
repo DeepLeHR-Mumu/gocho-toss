@@ -31,7 +31,7 @@ const MockedComponent = () => {
     setTimeout(() => {
       closeToast();
     }, 3500);
-  }, [setCurrentToast]);
+  }, [closeToast, setCurrentToast]);
 
   return (
     <>

@@ -12,7 +12,7 @@ export const ToastComponent: FunctionComponent = () => {
     setTimeout(() => {
       closeToast();
     }, 3500);
-  }, []);
+  }, [closeToast]);
 
   return createPortal(
     <div css={wrapper} aria-hidden onClick={closeToast}>
