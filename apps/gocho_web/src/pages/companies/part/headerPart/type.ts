@@ -5,7 +5,7 @@ export interface HeaderPartProps {
     view: number;
     name: string;
     industry: string;
-    catchUrl: string;
+    catchUrl: string | null;
     youtubeUrl: string | null;
   };
 }

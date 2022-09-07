@@ -15,7 +15,7 @@ export const ReComment: FunctionComponent<reCommentProps> = ({
   body,
   nickname,
 }) => {
-  const [errorMsg, setErrorMsg] = useState<null | string>(null);
+  const [errorMsg] = useState<null | string>(null);
   const { mutate } = useDeleteComment();
   const queryClient = useQueryClient();
 

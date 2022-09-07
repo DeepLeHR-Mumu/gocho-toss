@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 
