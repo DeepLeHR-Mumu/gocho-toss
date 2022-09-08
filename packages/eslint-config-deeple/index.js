@@ -10,6 +10,7 @@ module.exports = {
   ],
   plugins: ["import"],
   rules: {
+    "react/no-unknown-property": ["error", { ignore: ["css"] }],
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-unused-vars": "error",
     "react/require-default-props": "off",
@@ -21,10 +22,7 @@ module.exports = {
         namedComponents: ["arrow-function", "function-declaration"],
       },
     ],
-    "react/jsx-filename-extension": [
-      "warn",
-      { extensions: [".ts", ".tsx"] },
-    ],
+    "react/jsx-filename-extension": ["warn", { extensions: [".ts", ".tsx"] }],
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "import/no-extraneous-dependencies": [

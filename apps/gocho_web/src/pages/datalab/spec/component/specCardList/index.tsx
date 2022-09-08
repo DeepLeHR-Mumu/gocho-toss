@@ -20,17 +20,17 @@ export const SpecCardList: FunctionComponent<SpecCardListProps> = ({ order }) =>
   const observerRef = useRef<IntersectionObserver>();
   const boxRef = useRef<HTMLDivElement>(null);
 
-  const intersectionObserver = (entries: IntersectionObserverEntry[], io: IntersectionObserver) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        // 관찰하고 있는 entry가 화면에 보여지는 경우
-        io.unobserve(entry.target); // entry 관찰 해제
-        fetchNextPage(); // 다음 페이지 데이터 요청
-      }
-    });
-  };
-
   useEffect(() => {
+    const intersectionObserver = (entries: IntersectionObserverEntry[], io: IntersectionObserver) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // 관찰하고 있는 entry가 화면에 보여지는 경우
+          io.unobserve(entry.target); // entry 관찰 해제
+          fetchNextPage(); // 다음 페이지 데이터 요청
+        }
+      });
+    };
+
     if (observerRef.current) {
       observerRef.current.disconnect();
     }
@@ -39,7 +39,7 @@ export const SpecCardList: FunctionComponent<SpecCardListProps> = ({ order }) =>
       threshold: 0.2,
     });
     if (boxRef.current) observerRef.current.observe(boxRef.current);
-  }, [specArrData, intersectionObserver]);
+  }, [fetchNextPage, specArrData]);
 
   if (!specArrData || isError || isLoading) {
     return (

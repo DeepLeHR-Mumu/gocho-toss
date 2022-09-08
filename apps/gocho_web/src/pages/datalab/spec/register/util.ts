@@ -42,7 +42,7 @@ export const usePageBlocking: UsePageBlockingDef = (setCurrentModal) => {
       router.replace(linkUrl);
       resetCurrentProgress();
     }
-  }, [linkUrl, isBlocking]);
+  }, [linkUrl, isBlocking, router, resetCurrentProgress]);
 };
 
 export const useResetProgress = () => {
@@ -50,5 +50,5 @@ export const useResetProgress = () => {
 
   useEffect(() => {
     resetCurrentProgress();
-  }, []);
+  }, [resetCurrentProgress]);
 };
