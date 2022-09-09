@@ -31,7 +31,8 @@
     "@storybook/react": "^6.5.10",
     "@storybook/testing-library": "^0.0.13",
     "babel-loader": "^8.2.5",
-    "husky": "^8.0.0"
+    "husky": "^8.0.0",
+    "turbo": "^1.4.6"
   },
   "dependencies": {
     "eslint-config-deeple": "workspace:^1.0.0",
