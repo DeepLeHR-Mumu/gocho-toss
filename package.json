@@ -7,10 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "eslint \"**/*.{ts,tsx}\" --ext .ts,.tsx",
+    "lint-fix": "eslint \"**/*.{ts,tsx}\" --ext .ts,.tsx --fix"
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx}": [
+    "apps/**/src/**/*.{ts,tsx}": [
       "npm run lint",
       "bash -c tsc --noEmit"
     ]
@@ -32,6 +34,7 @@
     "husky": "^8.0.0"
   },
   "dependencies": {
+    "eslint-config-deeple": "workspace:^1.0.0",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1"
   }

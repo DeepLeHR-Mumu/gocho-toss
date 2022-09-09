@@ -56,8 +56,7 @@ export async function getStaticProps() {
 const Home: NextPage = () => {
   return (
     <main>
-      <img src="x" />
-
+      <img src="x"></img>
       <Head>
         <title>고초대졸닷컴 - 생산/기능직 No.1 취업 플랫폼</title>
       </Head>
