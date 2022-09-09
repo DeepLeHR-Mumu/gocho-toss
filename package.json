@@ -8,12 +8,12 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "prepare": "husky install",
-    "lint": "eslint \"**/*.{ts,tsx}\" --ext .ts,.tsx",
+    "lint": "turbo run lint",
     "lint-fix": "eslint \"**/*.{ts,tsx}\" --ext .ts,.tsx --fix"
   },
   "lint-staged": {
     "apps/**/src/**/*.{ts,tsx}": [
-      "npm run lint",
+      "pnpm lint",
       "bash -c tsc --noEmit"
     ]
   },
