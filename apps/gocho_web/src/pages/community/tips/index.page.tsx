@@ -4,7 +4,7 @@ import { ListPart } from "./part/listPart";
 
 const Tip: NextPage = () => {
   let tet = 3;
-  tet = "3";
+  tet = "33";
   return (
     <main>
       {tet}
