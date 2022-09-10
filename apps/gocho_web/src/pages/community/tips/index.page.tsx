@@ -5,7 +5,6 @@ import { ListPart } from "./part/listPart";
 const Tip: NextPage = () => {
   return (
     <main>
-      {tet}
       <AdPart />
       <ListPart />
     </main>
