@@ -13,7 +13,8 @@
   },
   "lint-staged": {
     "apps/**/*.{ts,tsx}": [
-      "eslint"
+      "eslint",
+      "tsc --project tsconfig.json"
     ]
   },
   "keywords": [],
