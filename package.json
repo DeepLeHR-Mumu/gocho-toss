@@ -12,9 +12,9 @@
     "lint-fix": "eslint \"**/*.{ts,tsx}\" --ext .ts,.tsx --fix"
   },
   "lint-staged": {
-    "apps/gocho_web/*.{ts,tsx}": [
+    "apps/**/*.{ts,tsx}": [
       "eslint",
-      "tsc --project tsconfig.json"
+      "tsc --noEmit --jsx react-jsx"
     ]
   },
   "keywords": [],
