@@ -12,7 +12,7 @@
     "lint-fix": "eslint \"**/*.{ts,tsx}\" --ext .ts,.tsx --fix"
   },
   "lint-staged": {
-    "apps/**/*.{ts,tsx}": [
+    "apps/gocho_web/*.{ts,tsx}": [
       "eslint",
       "tsc --project tsconfig.json"
     ]
