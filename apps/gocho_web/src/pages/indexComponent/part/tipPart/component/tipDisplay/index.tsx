@@ -4,7 +4,7 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 import { useTipDetail } from "@api/tip";
 import { COMMUNITY_TIPS_LIST_URL } from "@constant/internalURL";
-import { LinkButton } from "@component/common/atom/Button";
+import { LinkButton } from "@component/common/atom/button";
 
 import { TipDisplaySkeleton } from "../tipDisplaySkeleton";
 import {

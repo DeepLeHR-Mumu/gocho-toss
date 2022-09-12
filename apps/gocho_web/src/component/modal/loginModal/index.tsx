@@ -12,7 +12,7 @@ import { EMAIL_REGEXP, PWD_REGEXP } from "@constant/regExp";
 import { useModal } from "@recoil/hook/modal";
 import { AccountInput } from "@component/common/atom/accountInput";
 import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "@constant/errorMessage";
-import { NormalButton } from "@component/common/atom/Button";
+import { NormalButton } from "@component/common/atom/button";
 import smallMono from "@public/images/global/deepLeLogo/smallMono.svg";
 
 import { wrapper, desc, formCSS, formArr, errorMsgCSS, closeBtn, errorBox, loginButton, logoContainer } from "./style";

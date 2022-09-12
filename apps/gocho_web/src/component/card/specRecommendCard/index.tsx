@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 
 import { SPEC_DETAIL_URL } from "@constant/internalURL";
 import { ProfileImg } from "@component/common/atom/profileImg";
-import { LinkButton } from "@component/common/atom/Button";
+import { LinkButton } from "@component/common/atom/button";
 
 import { SpecRecommendCardProps } from "./type";
 import {
