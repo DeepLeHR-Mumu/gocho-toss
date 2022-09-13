@@ -35,6 +35,7 @@ export const Spec1Basic: FunctionComponent<Spec1BasicProps> = ({ moveNextCard })
   const secretWatch = watch("secret");
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
+    sessionStorage.setItem("specObj", JSON.stringify(formData));
     setCurrentSpecObj(formData);
     moveNextCard(15);
   };

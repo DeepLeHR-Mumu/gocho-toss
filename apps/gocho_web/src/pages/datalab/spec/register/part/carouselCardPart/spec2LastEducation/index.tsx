@@ -22,6 +22,9 @@ export const Spec2lastEducation: FunctionComponent<Spec2lastEducationProps> = ({
   const { currentLastEdu, setCurrentLastEdu } = useLastEdu();
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
+    const prevFormData = JSON.parse(sessionStorage.getItem("specObj") || "{}");
+    const formDataObj = Object.assign(prevFormData, formData);
+    sessionStorage.setItem("specObj", JSON.stringify(formDataObj));
     setCurrentSpecObj(formData);
     moveNextCard(25);
   };
