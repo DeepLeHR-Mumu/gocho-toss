@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
-tsc ./apps/gocho_web/src/**/*.tsx --noEmit --esModuleInterop --jsx react-jsx
-pnpm lint-staged
+cd apps/gocho_web && tsc --noEmit
+cd ../gocho_mobile && tsc --noEmit
+
+cd ../../ && pnpm lint-staged

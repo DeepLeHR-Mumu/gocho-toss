@@ -12,9 +12,8 @@
     "lint-fix": "eslint \"**/*.{ts,tsx}\" --ext .ts,.tsx --fix"
   },
   "lint-staged": {
-    "apps/**/*.{ts,tsx}": [
-      "eslint",
-      "tsc --noEmit --jsx react-jsx"
+    "apps/**/src/*.{ts,tsx}": [
+      "eslint"
     ]
   },
   "keywords": [],
