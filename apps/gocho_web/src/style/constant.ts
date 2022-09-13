@@ -31,5 +31,6 @@ export const COLORS = {
   GRAY70: "#DDDDDD",
   GRAY80: "#E9E9E9",
   GRAY90: "#F6F6F6",
+  GRAY95: "#FAFAFA",
   GRAY100: "#FFFFFF",
 } as const;

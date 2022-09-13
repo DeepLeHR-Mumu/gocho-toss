@@ -93,7 +93,7 @@ export const globalStyles = css`
     vertical-align: baseline;
   }
   html {
-    font-family: Noto Sans KR, sans-serif;
+    font-family: "Noto Sans KR", Verdana, sans-serif;
     min-width: 768px;
     font-size: 16px;
     ${DESKTOP} {

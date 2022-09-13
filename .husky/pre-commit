@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
+echo "precommit entered"
 cd apps/gocho_web && tsc --noEmit
-cd ../gocho_mobile && tsc --noEmit
+echo "precommit done"
+# cd ../gocho_mobile && tsc --noEmit
 
 cd ../../ && pnpm lint-staged
