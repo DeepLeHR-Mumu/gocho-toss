@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { LinkButton, NormalButton } from "@component/common/atom/Button";
+import { LinkButton, NormalButton } from "@component/common/atom/button";
 import { SPEC_DETAIL_URL } from "@constant/internalURL";
 import { ProfileImg } from "@component/common/atom/profileImg";
 

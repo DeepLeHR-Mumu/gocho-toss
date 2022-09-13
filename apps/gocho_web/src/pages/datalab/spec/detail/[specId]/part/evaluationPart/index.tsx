@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import { StarEvaluation } from "@component/common/molecule/starEvaluation";
 import { useEvalSpec } from "@api/spec/useEvalSpec";
-import { NormalButton } from "@component/common/atom/Button";
+import { NormalButton } from "@component/common/atom/button";
 
 import { SelectBox } from "./component/selectBox";
 import {

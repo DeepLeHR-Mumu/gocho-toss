@@ -14,6 +14,7 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-unused-vars": "error",
     "react/require-default-props": "off",
+    "react-hooks/exhaustive-deps": "error",
     "react/jsx-props-no-spreading": "off",
     "react/no-unused-prop-types": "off",
     "react/function-component-definition": [
@@ -44,9 +45,9 @@ module.exports = {
     "import/no-unresolved": "error",
     "arrow-body-style": ["error", "always"],
     "no-console": "error",
+    "@next/next/no-img-element": "error",
     camelcase: "off",
   },
-
   overrides: [
     {
       files: ["*.stories.tsx"],

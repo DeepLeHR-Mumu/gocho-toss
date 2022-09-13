@@ -1,4 +1,5 @@
 module.exports = {
-  root: true,
+  parserOptions: { tsconfigRootDir: __dirname, root: true },
   extends: ["deeple"],
+  rules: { "import/no-unresolved": "off" },
 };

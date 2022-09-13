@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import deepLeLogo from "@public/images/global/deepLeLogo/smallMono.svg";
 import jobiError from "@public/images/global/errrorPage/jobi_500.png";
-import { LinkButton } from "@component/common/atom/Button";
+import { LinkButton } from "@component/common/atom/button";
 import { MAIN_URL } from "@constant/internalURL";
 
 import { catchphrase, errorWrapper, jobiImageContainer, logoContainer, title, wrapper } from "./style";
