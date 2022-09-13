@@ -2,7 +2,9 @@
 . "$(dirname -- "$0")/_/husky.sh"
 echo "precommit entered"
 cd apps/gocho_web && tsc --noEmit
-echo "precommit done"
+echo "PC 버전 타입 검사 완료"
+
 cd ../gocho_mobile && tsc --noEmit
+echo "모바일 버전 타입 검사 완료"
 
 cd ../../ && pnpm lint-staged
