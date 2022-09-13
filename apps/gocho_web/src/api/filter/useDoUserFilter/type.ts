@@ -1,17 +1,24 @@
-import { QueryFunctionContext } from "@tanstack/react-query";
-import { filterKeyObj } from "@constant/queryKeyFactory/filter/filterKeyObj";
+import { ResponseDef } from "@type/api/responseType";
+import { AxiosError } from "axios";
+import { UseMutationResult } from "@tanstack/react-query";
 
-export interface ResponseObjDef {
-  possibleEdu: string[];
-  place: string[];
-  requiredExp: string[];
-  contractType: string[];
-  rotation: string[];
-  industry: string[];
-  task: string[];
-  searchWord: string;
+export interface RequestObjDef {
+  userId: number | undefined;
+  q: {
+    possibleEdu: string[];
+    place: string[];
+    requiredExp: string[];
+    contractType: string[];
+    rotation: string[];
+    industry: string[];
+    task: string[];
+  };
 }
 
 export interface PostDoUserFilterDef {
-  ({ queryKey }: QueryFunctionContext<ReturnType<typeof filterKeyObj.post>>): Promise<ResponseObjDef>;
+  ({ userId, q }: RequestObjDef): Promise<ResponseDef>;
+}
+
+export interface useDoUserFilterProps {
+  (): UseMutationResult<ResponseDef, AxiosError, RequestObjDef>;
 }

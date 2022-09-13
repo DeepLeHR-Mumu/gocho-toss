@@ -19,7 +19,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ companyDa
     const mapScript = document.createElement("script");
 
     mapScript.async = true;
-    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=4cd1e44b1f4020047498f82bf6ac02c1&libraries=services&libraries=services&autoload=false`;
+    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=0687bed33c060c4758f582d26ff44e16&libraries=services&libraries=services&autoload=false`;
 
     document.head.appendChild(mapScript);
 

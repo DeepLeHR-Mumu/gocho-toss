@@ -54,6 +54,7 @@ export const bookmarkButtonWrapper = css`
   top: 0;
   right: 0;
   transition: all 0.3s ease;
+  z-index: 20;
 
   ${PC_HOVER} {
     :hover {

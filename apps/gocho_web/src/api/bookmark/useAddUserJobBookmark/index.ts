@@ -10,15 +10,18 @@ import {
 } from "./type";
 
 const postAddUserJobBookmark: PostAddUserJobBookmarkDef = async (requestObj) => {
-  const token = localStorage.getItem("token");
-  const { data } = await axiosInstance.post(`/users/${requestObj?.userId}/job-bookmarks`, {
-    headers: {
-      "x-access-token": token,
+  const token = localStorage.getItem("token") as string;
+  const { data } = await axiosInstance.post(
+    `/users/${requestObj?.userId}/jd-bookmarks`,
+    {
+      jdId: requestObj?.jdId,
     },
-
-    // TODO: jobId -> jdID
-    body: { jobId: `${requestObj?.jobId}` },
-  });
+    {
+      headers: {
+        "x-access-token": token,
+      },
+    }
+  );
   return data;
 };
 

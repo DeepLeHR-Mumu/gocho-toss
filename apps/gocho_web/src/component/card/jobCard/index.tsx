@@ -4,6 +4,8 @@ import Link from "next/link";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
 
+import { useAddUserJobBookmark } from "@api/bookmark/useAddUserJobBookmark";
+
 import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
 import highTrue from "@public/images/global/common/go_color.svg";
 import highFalse from "@public/images/global/common/go_mono.svg";
@@ -43,6 +45,8 @@ import {
 export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ jobData, isSkeleton }) => {
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
 
+  const { mutate } = useAddUserJobBookmark();
+
   if (isSkeleton || jobData === undefined) {
     return (
       <div css={jobCardSkeleton}>
@@ -50,6 +54,20 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
       </div>
     );
   }
+
+  const addJobBookmark = () => {
+    mutate(
+      { userId: 4, jdId: jobData.id },
+      {
+        onSuccess: () => {
+          console.log("Ok");
+        },
+        onError: () => {
+          console.log("Fail");
+        },
+      }
+    );
+  };
 
   const today = new Date();
   const isExpired = jobData.endTime - Number(today) < 0;
@@ -61,7 +79,13 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
     <article css={cardWrapper(isExpired)}>
       <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
         <a>
-          <button type="button" css={bookmarkButtonWrapper}>
+          <button
+            type="button"
+            css={bookmarkButtonWrapper}
+            onClick={() => {
+              addJobBookmark();
+            }}
+          >
             <BsFillBookmarkFill />
             <span css={bookmarkNumber}>{jobData.bookmark}</span>
           </button>

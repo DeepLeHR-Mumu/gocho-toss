@@ -3,7 +3,7 @@ import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
   userId: number;
-  jobId: number;
+  jdId: number;
 }
 
 export interface AddUserJobBookmarkResponseDef {
@@ -15,7 +15,7 @@ export interface AddUserJobBookmarkResponseDef {
 }
 
 export interface PostAddUserJobBookmarkDef {
-  ({ userId, jobId }: RequestObjDef): Promise<AddUserJobBookmarkResponseDef>;
+  ({ userId, jdId }: RequestObjDef): Promise<AddUserJobBookmarkResponseDef>;
 }
 
 export interface useAddUserJobBookmarkProps {
