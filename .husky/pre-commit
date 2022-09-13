@@ -1,6 +1,9 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 cd apps/gocho_web && tsc --noEmit
+echo "PC 버전 타입 검사 완료"
+
 cd ../gocho_mobile && tsc --noEmit
+echo "모바일 버전 타입 검사 완료"
 
 cd ../../ && pnpm lint-staged
