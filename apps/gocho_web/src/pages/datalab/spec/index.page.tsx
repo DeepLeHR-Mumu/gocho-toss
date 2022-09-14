@@ -20,13 +20,10 @@ const MainList: NextPage = () => {
     if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
       setCurrentModal("loginModal");
     }
-  }, [error, setCurrentModal]);
-
-  useEffect(() => {
     return () => {
       closeModal();
     };
-  }, [closeModal]);
+  }, [error, setCurrentModal, closeModal]);
 
   return (
     <main>

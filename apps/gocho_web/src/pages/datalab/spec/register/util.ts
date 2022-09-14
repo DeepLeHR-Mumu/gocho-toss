@@ -1,13 +1,12 @@
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/router";
 
-import { useIsSpecPageBlocking, useProgress } from "@recoil/hook/spec";
+import { useIsSpecPageBlocking } from "@recoil/hook/spec";
 
 import { UsePageBlockingDef } from "./type";
 
 export const usePageBlocking: UsePageBlockingDef = (setCurrentModal) => {
   const { isBlocking } = useIsSpecPageBlocking();
-  const { resetCurrentProgress } = useProgress();
 
   const [linkUrl, setLinkUrl] = useState<string | null>(null);
   const router = useRouter();
@@ -38,7 +37,10 @@ export const usePageBlocking: UsePageBlockingDef = (setCurrentModal) => {
   useEffect(() => {
     if (isBlocking && linkUrl) {
       router.replace(linkUrl);
-      resetCurrentProgress();
     }
-  }, [linkUrl, isBlocking, router, resetCurrentProgress]);
+
+    return () => {
+      setLinkUrl(null);
+    };
+  }, [linkUrl, isBlocking, router]);
 };

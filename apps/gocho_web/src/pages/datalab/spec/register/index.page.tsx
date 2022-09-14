@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { useUserInfo } from "@api/auth";
 import { useModal } from "@recoil/hook/modal";
-import { useProgress, useIsSpecPageBlocking } from "@recoil/hook/spec";
+import { useProgress } from "@recoil/hook/spec";
 
 import { Layout } from "@component/layout";
 import { ProgressPart } from "./part/progressPart";
@@ -18,11 +18,10 @@ const Register: NextPage = () => {
 
   const { error } = useUserInfo();
   const { resetCurrentProgress } = useProgress();
-  const { setIsBlocking } = useIsSpecPageBlocking();
 
   useEffect(() => {
     resetCurrentProgress();
-  }, [resetCurrentProgress, setIsBlocking]);
+  }, [resetCurrentProgress]);
 
   // LATER : 에러코드 추가 예정
   useEffect(() => {
