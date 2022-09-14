@@ -4,18 +4,25 @@ import axios from "axios";
 
 import { useUserInfo } from "@api/auth";
 import { useModal } from "@recoil/hook/modal";
+import { useProgress, useIsSpecPageBlocking } from "@recoil/hook/spec";
 
 import { Layout } from "@component/layout";
 import { ProgressPart } from "./part/progressPart";
 import { SpecWritePart } from "./part/carouselCardPart";
 
-import { usePageBlocking, useResetProgress } from "./util";
+import { usePageBlocking } from "./util";
 import { wrapper, title } from "./style";
 
 const Register: NextPage = () => {
   const { setCurrentModal, currentModal } = useModal();
 
   const { error } = useUserInfo();
+  const { resetCurrentProgress } = useProgress();
+  const { setIsBlocking } = useIsSpecPageBlocking();
+
+  useEffect(() => {
+    resetCurrentProgress();
+  }, [resetCurrentProgress, setIsBlocking]);
 
   // LATER : 에러코드 추가 예정
   useEffect(() => {
@@ -28,7 +35,6 @@ const Register: NextPage = () => {
   }, [currentModal?.activatedModal, error, setCurrentModal]);
 
   usePageBlocking(setCurrentModal);
-  useResetProgress();
 
   return (
     <main css={wrapper}>

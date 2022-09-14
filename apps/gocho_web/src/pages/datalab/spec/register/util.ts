@@ -1,22 +1,20 @@
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/router";
 
-import { useSpecRegisterObj, useIsSpecPageBlocking, useProgress } from "@recoil/hook/spec";
+import { useIsSpecPageBlocking, useProgress } from "@recoil/hook/spec";
 
 import { UsePageBlockingDef } from "./type";
 
 export const usePageBlocking: UsePageBlockingDef = (setCurrentModal) => {
-  const { currentSpecObj } = useSpecRegisterObj();
   const { isBlocking } = useIsSpecPageBlocking();
   const { resetCurrentProgress } = useProgress();
 
   const [linkUrl, setLinkUrl] = useState<string | null>(null);
   const router = useRouter();
-  const currentSpecObjLength = Object.keys(currentSpecObj).length;
 
   const routeChangeStart = useCallback(
     (url: string) => {
-      const isCompare = router.pathname !== url && !isBlocking && currentSpecObjLength !== 0;
+      const isCompare = router.pathname !== url && !isBlocking;
 
       if (isCompare) {
         setLinkUrl(url);
@@ -27,7 +25,7 @@ export const usePageBlocking: UsePageBlockingDef = (setCurrentModal) => {
         throw true;
       }
     },
-    [currentSpecObjLength, setCurrentModal, isBlocking, router]
+    [setCurrentModal, isBlocking, router]
   );
 
   useEffect(() => {
@@ -43,12 +41,4 @@ export const usePageBlocking: UsePageBlockingDef = (setCurrentModal) => {
       resetCurrentProgress();
     }
   }, [linkUrl, isBlocking, router, resetCurrentProgress]);
-};
-
-export const useResetProgress = () => {
-  const { resetCurrentProgress } = useProgress();
-
-  useEffect(() => {
-    resetCurrentProgress();
-  }, [resetCurrentProgress]);
 };

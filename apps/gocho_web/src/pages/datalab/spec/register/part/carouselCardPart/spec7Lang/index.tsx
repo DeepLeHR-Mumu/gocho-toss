@@ -2,8 +2,6 @@ import { FunctionComponent } from "react";
 import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
 import { FiX } from "react-icons/fi";
 
-import { useSpecRegisterObj } from "@recoil/hook/spec";
-
 import { SpecCardTitle, MoveCardButtons, TextInputForm, WarningText } from "../common/component";
 import { SelectChipForm } from "./component/selectChipForm";
 
@@ -22,7 +20,6 @@ export const Spec7Lang: FunctionComponent<Spec7LangProps> = ({ moveNextCard, mov
   } = useForm<PostSubmitValues>({
     mode: "onChange",
   });
-  const { setCurrentSpecObj } = useSpecRegisterObj();
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -31,9 +28,10 @@ export const Spec7Lang: FunctionComponent<Spec7LangProps> = ({ moveNextCard, mov
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
     const { language } = formData;
-    setCurrentSpecObj({
-      language,
-    });
+
+    const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
+    const currentSpecObj = Object.assign(prevSpecObj, { language });
+    sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
     moveNextCard(80);
   };
 
