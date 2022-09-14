@@ -1,6 +1,6 @@
-import { CompanyBookmarkObjDef } from "../type/companyBookmark";
+import { companyBookmarkObjDef } from "../type/bookmark";
 
-export const selector = (data: CompanyBookmarkObjDef[]) => {
+export const selector = (data: companyBookmarkObjDef[]) => {
   return data.map((company) => {
     return {
       id: company.id,

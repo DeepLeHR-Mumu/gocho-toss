@@ -4,7 +4,7 @@ import Link from "next/link";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
 
-import { useAddUserJobBookmark } from "@api/bookmark/useAddUserJobBookmark";
+import { useAddUserBookmark } from "@api/bookmark/useAddUserBookmark";
 
 import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
 import highTrue from "@public/images/global/common/go_color.svg";
@@ -45,7 +45,7 @@ import {
 export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ jobData, isSkeleton }) => {
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
 
-  const { mutate } = useAddUserJobBookmark();
+  const { mutate } = useAddUserBookmark();
 
   if (isSkeleton || jobData === undefined) {
     return (
@@ -57,7 +57,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
 
   const addJobBookmark = () => {
     mutate(
-      { userId: 4, jdId: jobData.id },
+      { userId: 4, likeType: "jd-bookmarks", elemId: jobData.id },
       {
         onSuccess: () => {
           console.log("Ok");

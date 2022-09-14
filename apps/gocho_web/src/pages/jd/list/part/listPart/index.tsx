@@ -8,6 +8,8 @@ import collegeTrue from "@public/images/global/common/cho_color.svg";
 
 import { Layout } from "@component/layout";
 import { useJobArr } from "@api/job";
+import { useUserInfo } from "@api/auth";
+import { useUserJobBookmarkArr } from "@api/bookmark";
 import { Pagination } from "@pages/jd/component/pagination";
 import { BottomPagination } from "@pages/jd/component/bottomPagination";
 
@@ -36,6 +38,10 @@ export const ListPart: FunctionComponent = () => {
   const [page, setPage] = useState(1);
   const [activeOrder, setActiveOrder] = useState<OrderDef>("recent");
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
+
+  const { data: userData } = useUserInfo();
+  const { data: userJobBookmark } = useUserJobBookmarkArr({ userId: userData?.id });
+  console.log(userJobBookmark);
 
   const { register, handleSubmit, watch, setValue, getValues } = useForm<SearchValues>({
     defaultValues: {
