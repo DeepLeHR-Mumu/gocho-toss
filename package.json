@@ -12,7 +12,7 @@
     "lint-fix": "eslint \"**/*.{ts,tsx}\" --ext .ts,.tsx --fix"
   },
   "lint-staged": {
-    "apps/**/src/*.{ts,tsx}": [
+    "apps/**/src/pages/**/*.{ts,tsx}": [
       "eslint"
     ]
   },
