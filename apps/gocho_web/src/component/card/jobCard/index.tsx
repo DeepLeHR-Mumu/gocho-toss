@@ -4,7 +4,7 @@ import Link from "next/link";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
 
-import { useAddUserBookmark } from "@api/bookmark/useAddUserBookmark";
+import { useAddUserBookmark, useDeleteUserBookmark } from "@api/bookmark";
 
 import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
 import highTrue from "@public/images/global/common/go_color.svg";
@@ -42,10 +42,16 @@ import {
   hoverButton,
 } from "./style";
 
-export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ jobData, isSkeleton }) => {
+export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
+  jobData,
+  isBookmarked,
+  userId,
+  isSkeleton,
+}) => {
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
 
-  const { mutate } = useAddUserBookmark();
+  const { mutate: addMutate } = useAddUserBookmark();
+  const { mutate: deleteMutate } = useDeleteUserBookmark();
 
   if (isSkeleton || jobData === undefined) {
     return (
@@ -56,16 +62,36 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
   }
 
   const addJobBookmark = () => {
-    mutate(
-      { userId: 4, likeType: "jd-bookmarks", elemId: jobData.id },
-      {
-        onSuccess: () => {
-          console.log("Ok");
-        },
-        onError: () => {
-          console.log("Fail");
-        },
-      }
+    return (
+      userId &&
+      addMutate(
+        { userId, likeType: "jd-bookmarks", elemId: jobData.id },
+        {
+          onSuccess: () => {
+            console.log("add ok");
+          },
+          onError: () => {
+            console.log("add fail");
+          },
+        }
+      )
+    );
+  };
+
+  const deleteJobBookmark = () => {
+    return (
+      userId &&
+      deleteMutate(
+        { userId, likeType: "jd-bookmarks", elemId: jobData.id },
+        {
+          onSuccess: () => {
+            console.log("delete ok");
+          },
+          onError: () => {
+            console.log("delete fail");
+          },
+        }
+      )
     );
   };
 
@@ -81,9 +107,9 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
         <a>
           <button
             type="button"
-            css={bookmarkButtonWrapper}
+            css={bookmarkButtonWrapper(isBookmarked)}
             onClick={() => {
-              addJobBookmark();
+              return isBookmarked ? deleteJobBookmark() : addJobBookmark();
             }}
           >
             <BsFillBookmarkFill />

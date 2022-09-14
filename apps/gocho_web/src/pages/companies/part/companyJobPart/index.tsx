@@ -1,6 +1,8 @@
 import { FunctionComponent, useEffect, useRef } from "react";
 
 import { useInfiniteJobArr } from "@api/job/useInfiniteJobArr";
+import { useUserInfo } from "@api/auth";
+import { useUserJobBookmarkArr } from "@api/bookmark";
 import { dummyArrCreator } from "@util/dummyArrCreator";
 import { JobCard } from "@component/card/jobCard";
 
@@ -18,6 +20,9 @@ export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({ company
     companyId,
     limit: 10,
   });
+
+  const { data: userData } = useUserInfo();
+  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
   const observerRef = useRef<IntersectionObserver>();
   const boxRef = useRef<HTMLDivElement>(null);
@@ -61,7 +66,18 @@ export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({ company
         <section css={listContainer}>
           {jobDataArr.pages.map((page) => {
             return page.jobDataArr.map((jobData) => {
-              return <JobCard jobData={jobData} key={`JobCard${jobData.id}`} />;
+              const isBookmarked = !!userJobBookmarkArr?.some((job) => {
+                return job.id === jobData.id;
+              });
+
+              return (
+                <JobCard
+                  jobData={jobData}
+                  isBookmarked={isBookmarked}
+                  userId={userData?.id}
+                  key={`JobCard${jobData.id}`}
+                />
+              );
             });
           })}
         </section>

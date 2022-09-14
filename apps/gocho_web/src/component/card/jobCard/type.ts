@@ -15,10 +15,14 @@ export interface JobCardProps {
     view: number;
     cut: boolean;
   };
+  isBookmarked: boolean;
+  userId: number | undefined;
   isSkeleton?: never;
 }
 
 export interface JobCardSkeleton {
   jobData?: never;
+  isBookmarked?: never;
+  userId?: never;
   isSkeleton: boolean;
 }

@@ -6,11 +6,15 @@ import { AddUserBookmarkResponseDef, AddUserBookmarkDef, useAddUserBookmarkProps
 
 const addUserBookmark: AddUserBookmarkDef = async (requestObj) => {
   const token = localStorage.getItem("token") as string;
-  const { data } = await axiosInstance.post(`/users/${requestObj?.userId}/${requestObj.elemId}`, {
-    headers: {
-      "x-access-token": token,
-    },
-  });
+  const { data } = await axiosInstance.post(
+    `/users/${requestObj?.userId}/${requestObj.likeType}/`,
+    { elemId: requestObj.elemId },
+    {
+      headers: {
+        "x-access-token": token,
+      },
+    }
+  );
   return data;
 };
 

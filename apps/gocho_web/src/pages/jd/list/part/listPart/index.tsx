@@ -40,8 +40,7 @@ export const ListPart: FunctionComponent = () => {
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
 
   const { data: userData } = useUserInfo();
-  const { data: userJobBookmark } = useUserJobBookmarkArr({ userId: userData?.id });
-  console.log(userJobBookmark);
+  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
   const { register, handleSubmit, watch, setValue, getValues } = useForm<SearchValues>({
     defaultValues: {
@@ -136,7 +135,13 @@ export const ListPart: FunctionComponent = () => {
           </div>
           고는 고졸지원가능 초는 초대졸 지원 가능합니다
         </div>
-        <JobCardList jobDataArr={jobDataArr?.jobDataArr} isLoading={isLoading} isError={isError} />
+        <JobCardList
+          jobDataArr={jobDataArr?.jobDataArr}
+          isLoading={isLoading}
+          isError={isError}
+          userJobBookmarkArr={userJobBookmarkArr}
+          userId={userData?.id}
+        />
         <BottomPagination total={total} limit={limit} page={page} setPage={setPage} />
       </Layout>
     </section>
