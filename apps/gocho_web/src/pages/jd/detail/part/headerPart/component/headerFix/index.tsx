@@ -10,6 +10,7 @@ import { Layout } from "@component/layout";
 import { JOBS_LIST_URL } from "@constant/internalURL";
 import { useUserInfo } from "@api/auth";
 
+import { useAddUserBookmark, useDeleteUserBookmark } from "@api/bookmark";
 import { HeaderFixProps } from "./type";
 import {
   applyBox,
@@ -25,8 +26,43 @@ import {
   titleCSS,
 } from "./style";
 
-export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData }) => {
+export const HeaderFix: FunctionComponent<HeaderFixProps> = ({
+  jobDetailData,
+  isBookmarked,
+  userId,
+  refetchUserBookmark,
+}) => {
   const { isSuccess } = useUserInfo();
+  const { mutate: addMutate } = useAddUserBookmark();
+  const { mutate: deleteMutate } = useDeleteUserBookmark();
+
+  const addJobBookmark = () => {
+    return (
+      userId &&
+      addMutate(
+        { userId, likeType: "jd-bookmarks", elemId: jobDetailData.id },
+        {
+          onSuccess: () => {
+            refetchUserBookmark();
+          },
+        }
+      )
+    );
+  };
+
+  const deleteJobBookmark = () => {
+    return (
+      userId &&
+      deleteMutate(
+        { userId, likeType: "jd-bookmarks", elemId: jobDetailData.id },
+        {
+          onSuccess: () => {
+            refetchUserBookmark();
+          },
+        }
+      )
+    );
+  };
 
   return (
     <header css={headerCSS}>
@@ -44,7 +80,13 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData }) 
             </div>
           </div>
           <div css={flexBox}>
-            <button type="button" css={bookmarkButton}>
+            <button
+              type="button"
+              css={bookmarkButton(isBookmarked)}
+              onClick={() => {
+                return isBookmarked ? deleteJobBookmark() : addJobBookmark();
+              }}
+            >
               <BsFillBookmarkFill />
               공고 북마크 <span> {jobDetailData.bookmarkCount}</span>
             </button>

@@ -1,3 +1,5 @@
+import { QueryObserverResult } from "@tanstack/react-query";
+
 export interface JobCardProps {
   jobData: {
     id: number;
@@ -15,10 +17,16 @@ export interface JobCardProps {
     view: number;
     cut: boolean;
   };
+  isBookmarked: boolean;
+  userId: number | undefined;
+  refetchUserBookmark: () => Promise<QueryObserverResult>;
   isSkeleton?: never;
 }
 
 export interface JobCardSkeleton {
   jobData?: never;
+  isBookmarked?: never;
+  userId?: never;
+  refetchUserBookmark?: never;
   isSkeleton: boolean;
 }

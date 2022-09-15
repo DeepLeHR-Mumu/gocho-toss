@@ -16,7 +16,7 @@ export interface changeOrderDef {
   (order: OrderDef): void;
 }
 
-export interface PostingValues {
+export interface SearchValues {
   possibleEdu: string[];
   place: string[];
   requiredExp: string[];

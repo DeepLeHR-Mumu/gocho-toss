@@ -28,22 +28,22 @@ export const infoBox = css`
   margin-bottom: 0.5rem;
 `;
 
-export const bookmarkButton = css`
-  padding: 0.25rem 1rem;
-  border-radius: 1.5rem;
-  color: ${COLORS.GRAY30};
-  background-color: ${COLORS.GRAY90};
-  margin-right: 0.5rem;
-`;
+export const bookmarkButton = (isBookmarked = false) => {
+  return css`
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 1rem;
+    border-radius: 1.5rem;
+    background-color: ${isBookmarked ? COLORS.STATE_SUCCESS : `${COLORS.GRAY90}`};
+    color: ${isBookmarked ? COLORS.BLUE_FIRST40 : `${COLORS.GRAY30}`};
+    margin-right: 0.5rem;
+    transition: all 0.2s ease;
+  `;
+};
 
 export const icon = css`
-  color: ${COLORS.GRAY60};
+  margin-top: 0.25rem;
   margin-right: 0.25rem;
-`;
-
-export const bookmarkColor = css`
-  color: ${COLORS.GRAY60};
-  margin-left: 0.25rem;
 `;
 
 export const viewBox = css`

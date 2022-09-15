@@ -54,6 +54,7 @@ const Template: ComponentStory<typeof HeaderPart> = (args) => {
 export const 기본 = Template.bind({});
 기본.args = {
   jobDetailData: {
+    id: 4,
     startTime: 1631026799000,
     endTime: 1631199599000,
     applyUrl: "https://naver.com",
