@@ -13,7 +13,7 @@ import { companyCommentArrKeyObj } from "@constant/queryKeyFactory/company/comme
 import { jobArrKeyObj } from "@constant/queryKeyFactory/job/jobArrKeyObj";
 import { communityPostingArrKeyObj } from "@constant/queryKeyFactory/community/postingArrKeyObj";
 import { tipArrKeyObj } from "@constant/queryKeyFactory/tip/arrKeyObj";
-import { HeadingH1 } from "ui/common/atom/headingH1";
+import { HeadingH1 } from "shared-ui/common/atom/headingH1";
 
 import { JobPart } from "./indexComponent/part/jobPart";
 import { CommunityPostingPart } from "./indexComponent/part/communityPostingPart";
@@ -72,6 +72,5 @@ const Home: NextPage = () => {
     </main>
   );
 };
-
 
 export default Home;

@@ -1,0 +1,11 @@
+{
+  "extends": "tsconfig-deeple/nextjs.json",
+  "compilerOptions": {
+    "baseUrl": "../",
+    "paths": {
+      "@sharedConstant/*": ["constant/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}

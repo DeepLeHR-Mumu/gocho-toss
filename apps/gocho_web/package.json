@@ -27,7 +27,9 @@
     "recoil": "^0.7.5",
     "slick-carousel": "^1.8.1",
     "tsconfig-deeple": "workspace:^0.0.0",
-    "ui": "workspace:^0.0.0"
+    "shared-ui": "workspace:^0.0.0",
+    "shared-api": "workspace:^0.0.0",
+    "shared-constant": "workspace:^0.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.0",

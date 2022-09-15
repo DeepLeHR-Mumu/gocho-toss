@@ -1,18 +1,17 @@
 {
-  "name": "shared-ui",
+  "name": "shared-api",
   "version": "0.0.0",
   "license": "MIT",
   "main": "./index.tsx",
   "types": "./index.tsx",
   "dependencies": {
-    "@emotion/react": "^11.10.0",
-    "react-icons": "^4.4.0"
+    "@tanstack/react-query": "^4.2.3",
+    "axios": "^0.27.2",
+    "next-transpile-modules": "^9.0.0"
   },
   "devDependencies": {
     "tsconfig-deeple": "workspace:^0.0.0",
     "eslint-config-deeple": "workspace:^1.0.0",
-    "@types/react": "18.0.17",
-    "@types/react-dom": "18.0.6",
     "typescript": "4.7.2"
   }
 }

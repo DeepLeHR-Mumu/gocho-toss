@@ -150,12 +150,14 @@ importers:
       react-slick: ^0.29.0
       react-textarea-autosize: ^8.3.4
       recoil: ^0.7.5
+      shared-api: workspace:^0.0.0
+      shared-constant: workspace:^0.0.0
+      shared-ui: workspace:^0.0.0
       slick-carousel: ^1.8.1
       storybook-addon-next: ^1.6.7
       tsconfig-deeple: workspace:^0.0.0
       tsconfig-paths-webpack-plugin: ^4.0.0
       typescript: 4.7.2
-      ui: workspace:*
       webpack: ^5.74.0
     dependencies:
       '@emotion/react': 11.10.4_v7wa3uncfa5agztyqirlhe5v34
@@ -172,9 +174,11 @@ importers:
       react-slick: 0.29.0_sfoxds7t5ydpegc3knd667wn6m
       react-textarea-autosize: 8.3.4_k33vb7fucsny7mu5lic4ab3hri
       recoil: 0.7.5_sfoxds7t5ydpegc3knd667wn6m
+      shared-api: link:../../shared/api
+      shared-constant: link:../../shared/constant
+      shared-ui: link:../../shared/ui
       slick-carousel: 1.8.1_jquery@3.6.1
       tsconfig-deeple: link:../../packages/tsconfig-deeple
-      ui: link:../../shared/ui
     devDependencies:
       '@babel/core': 7.19.1
       '@babel/plugin-proposal-class-properties': 7.18.6_@babel+core@7.19.1
@@ -234,6 +238,36 @@ importers:
 
   packages/tsconfig-deeple:
     specifiers: {}
+
+  shared/api:
+    specifiers:
+      '@tanstack/react-query': ^4.2.3
+      axios: ^0.27.2
+      eslint-config-deeple: workspace:^1.0.0
+      next-transpile-modules: ^9.0.0
+      tsconfig-deeple: workspace:^0.0.0
+      typescript: 4.7.2
+    dependencies:
+      '@tanstack/react-query': 4.3.4_react@17.0.2
+      axios: 0.27.2
+      next-transpile-modules: 9.0.0
+    devDependencies:
+      eslint-config-deeple: link:../../packages/eslint-config-deeple
+      tsconfig-deeple: link:../../packages/tsconfig-deeple
+      typescript: 4.7.2
+
+  shared/constant:
+    specifiers:
+      eslint-config-deeple: workspace:^1.0.0
+      next-transpile-modules: ^9.0.0
+      tsconfig-deeple: workspace:^0.0.0
+      typescript: 4.7.2
+    dependencies:
+      next-transpile-modules: 9.0.0
+    devDependencies:
+      eslint-config-deeple: link:../../packages/eslint-config-deeple
+      tsconfig-deeple: link:../../packages/tsconfig-deeple
+      typescript: 4.7.2
 
   shared/ui:
     specifiers:
@@ -3887,6 +3921,23 @@ packages:
       '@tanstack/react-query': 4.3.4_sfoxds7t5ydpegc3knd667wn6m
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
+      use-sync-external-store: 1.2.0_react@17.0.2
+    dev: false
+
+  /@tanstack/react-query/4.3.4_react@17.0.2:
+    resolution: {integrity: sha512-IiAo+B8bxphEpO7xwLQaCptd2rY4Ef3pW1q9J3pT66G+J/st4QpGQ+cSm9iESp9ccRy1YNUk3klk/hQtWewl6g==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@tanstack/query-core': 4.3.4
+      react: 17.0.2
       use-sync-external-store: 1.2.0_react@17.0.2
     dev: false
 

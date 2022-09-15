@@ -30,7 +30,7 @@ export const LoginBox: FunctionComponent = () => {
   const { pathname } = useRouter();
   const { closeModal, setCurrentModal } = useModal();
 
-  const [errorMsg,] = useState<null | string>(null);
+  const [errorMsg] = useState<null | string>(null);
 
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     mutate(loginObj, {
