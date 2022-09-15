@@ -1,8 +1,8 @@
 import { css, SerializedStyles } from "@emotion/react";
 
-import { ColorDef } from "@type/style/color";
-import { COLORS } from "@style/constant";
-import { PC_HOVER } from "@style/mediaQuery";
+import { ColorDef } from "@sharedType/style/color";
+import { COLORS } from "@sharedStyle/color";
+import { PC_HOVER } from "@sharedStyle/mediaQuery";
 
 import { ButtonVariant } from "./type";
 

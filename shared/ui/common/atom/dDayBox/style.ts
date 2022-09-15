@@ -1,5 +1,5 @@
 import { css, SerializedStyles } from "@emotion/react";
-import { COLORS } from "@style/constant";
+import { COLORS } from "@sharedStyle/color";
 
 interface setDdayStyleCSS {
   (endTime: number): SerializedStyles;

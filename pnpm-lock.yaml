@@ -29,7 +29,7 @@ importers:
       '@babel/core': 7.19.1
       '@storybook/addon-actions': 6.5.12_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/addon-essentials': 6.5.12_hmn6dpyz5jsqa4i6xcwdei5ula
-      '@storybook/addon-interactions': 6.5.12_zhhpsva3z5bogbpqgwmco3ntli
+      '@storybook/addon-interactions': 6.5.12_k26rfrdk2uh2ao3d3jcmn6wejm
       '@storybook/addon-links': 6.5.12_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/builder-webpack5': 6.5.12_k26rfrdk2uh2ao3d3jcmn6wejm
       '@storybook/manager-webpack5': 6.5.12_k26rfrdk2uh2ao3d3jcmn6wejm
@@ -152,6 +152,8 @@ importers:
       recoil: ^0.7.5
       shared-api: workspace:^0.0.0
       shared-constant: workspace:^0.0.0
+      shared-image: workspace:^0.0.0
+      shared-style: workspace:^0.0.0
       shared-type: workspace:^0.0.0
       shared-ui: workspace:^0.0.0
       shared-util: workspace:^0.0.0
@@ -178,6 +180,8 @@ importers:
       recoil: 0.7.5_sfoxds7t5ydpegc3knd667wn6m
       shared-api: link:../../shared/api
       shared-constant: link:../../shared/constant
+      shared-image: link:../../shared/image
+      shared-style: link:../../shared/style
       shared-type: link:../../shared/type
       shared-ui: link:../../shared/ui
       shared-util: link:../../shared/util
@@ -273,6 +277,28 @@ importers:
       tsconfig-deeple: link:../../packages/tsconfig-deeple
       typescript: 4.7.2
 
+  shared/image:
+    specifiers:
+      babel-loader: ^8.2.5
+      eslint-config-deeple: workspace:^1.0.0
+      tsconfig-deeple: workspace:^0.0.0
+      typescript: 4.7.2
+    devDependencies:
+      babel-loader: 8.2.5_rhsdbzevgb5tizdhlla5jsbgyu
+      eslint-config-deeple: link:../../packages/eslint-config-deeple
+      tsconfig-deeple: link:../../packages/tsconfig-deeple
+      typescript: 4.7.2
+
+  shared/style:
+    specifiers:
+      eslint-config-deeple: workspace:^1.0.0
+      tsconfig-deeple: workspace:^0.0.0
+      typescript: 4.7.2
+    devDependencies:
+      eslint-config-deeple: link:../../packages/eslint-config-deeple
+      tsconfig-deeple: link:../../packages/tsconfig-deeple
+      typescript: 4.7.2
+
   shared/type:
     specifiers:
       eslint-config-deeple: workspace:^1.0.0
@@ -289,11 +315,13 @@ importers:
       '@types/react': 18.0.17
       '@types/react-dom': 18.0.6
       eslint-config-deeple: workspace:^1.0.0
+      next: 12.2.5
       react-icons: ^4.4.0
       tsconfig-deeple: workspace:^0.0.0
       typescript: 4.7.2
     dependencies:
       '@emotion/react': 11.10.4_v7wa3uncfa5agztyqirlhe5v34
+      next: 12.2.5_2f3qgkpmmpou2hyqrmueifddme
       react-icons: 4.4.0_react@17.0.2
     devDependencies:
       '@types/react': 18.0.17
@@ -1785,7 +1813,7 @@ packages:
     dev: true
     optional: true
 
-  /@design-systems/utils/2.12.0_qbczzgerydrfkz4fnz3mzraodu:
+  /@design-systems/utils/2.12.0_sfoxds7t5ydpegc3knd667wn6m:
     resolution: {integrity: sha512-Y/d2Zzr+JJfN6u1gbuBUb1ufBuLMJJRZQk+dRmw8GaTpqKx5uf7cGUYGTwN02dIb3I+Tf+cW8jcGBTRiFxdYFg==}
     peerDependencies:
       '@types/react': '*'
@@ -1793,7 +1821,6 @@ packages:
       react-dom: '>= 16.8.6'
     dependencies:
       '@babel/runtime': 7.19.0
-      '@types/react': 18.0.20
       clsx: 1.1.0
       focus-lock: 0.8.1
       react: 17.0.2
@@ -1817,15 +1844,15 @@ packages:
       react-merge-refs: 1.1.0
     dev: true
 
-  /@devtools-ds/object-inspector/1.2.0_qbczzgerydrfkz4fnz3mzraodu:
+  /@devtools-ds/object-inspector/1.2.0_sfoxds7t5ydpegc3knd667wn6m:
     resolution: {integrity: sha512-VztcwqVwScSvYdvJVZBJYsVO/2Pew3JPpFV3T9fuCHQLlHcLYOV3aU/kBS2ScuE2O1JN0ZbobLqFLa3vQF54Fw==}
     peerDependencies:
       react: '>= 16.8.6'
     dependencies:
       '@babel/runtime': 7.7.2
       '@devtools-ds/object-parser': 1.2.0
-      '@devtools-ds/themes': 1.2.0_qbczzgerydrfkz4fnz3mzraodu
-      '@devtools-ds/tree': 1.2.0_qbczzgerydrfkz4fnz3mzraodu
+      '@devtools-ds/themes': 1.2.0_sfoxds7t5ydpegc3knd667wn6m
+      '@devtools-ds/tree': 1.2.0_sfoxds7t5ydpegc3knd667wn6m
       clsx: 1.1.0
       react: 17.0.2
     transitivePeerDependencies:
@@ -1855,13 +1882,13 @@ packages:
       '@babel/runtime': 7.5.5
     dev: true
 
-  /@devtools-ds/themes/1.2.0_qbczzgerydrfkz4fnz3mzraodu:
+  /@devtools-ds/themes/1.2.0_sfoxds7t5ydpegc3knd667wn6m:
     resolution: {integrity: sha512-LimEITorE6yWZWWuMc6OiBfLQgPrQqWbyMEmfRUDPa3PHXoAY4SpDxczfg31fgyRDUNWnZhjaJH5bBbu8VEbIw==}
     peerDependencies:
       react: '>= 16.8.6'
     dependencies:
       '@babel/runtime': 7.5.5
-      '@design-systems/utils': 2.12.0_qbczzgerydrfkz4fnz3mzraodu
+      '@design-systems/utils': 2.12.0_sfoxds7t5ydpegc3knd667wn6m
       clsx: 1.1.0
       react: 17.0.2
     transitivePeerDependencies:
@@ -1883,13 +1910,13 @@ packages:
       - react-dom
     dev: true
 
-  /@devtools-ds/tree/1.2.0_qbczzgerydrfkz4fnz3mzraodu:
+  /@devtools-ds/tree/1.2.0_sfoxds7t5ydpegc3knd667wn6m:
     resolution: {integrity: sha512-hC4g4ocuo2eg7jsnzKdauxH0sDQiPW3KSM2+uK3kRgcmr9PzpBD5Kob+Y/WFSVKswFleftOGKL4BQLuRv0sPxA==}
     peerDependencies:
       react: '>= 16.8.6'
     dependencies:
       '@babel/runtime': 7.7.2
-      '@devtools-ds/themes': 1.2.0_qbczzgerydrfkz4fnz3mzraodu
+      '@devtools-ds/themes': 1.2.0_sfoxds7t5ydpegc3knd667wn6m
       clsx: 1.1.0
       react: 17.0.2
     transitivePeerDependencies:
@@ -2686,7 +2713,7 @@ packages:
       - webpack-command
     dev: true
 
-  /@storybook/addon-interactions/6.5.12_lpddxej3z5bxm425elitzlwdva:
+  /@storybook/addon-interactions/6.5.12_k26rfrdk2uh2ao3d3jcmn6wejm:
     resolution: {integrity: sha512-wAkKqUX57qZMzgykMIltjDrFfA0II+pKz2SchK4hXHK3/2rtOe+Ah0Sj5nTQo++Ee5oC1PVZWIq/Y1kufCTBJQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -2697,7 +2724,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      '@devtools-ds/object-inspector': 1.2.0_x6vcehmdzjj6pm7ndhhuigqb3i
+      '@devtools-ds/object-inspector': 1.2.0_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/addons': 6.5.12_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/api': 6.5.12_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/client-logger': 6.5.12
@@ -2724,7 +2751,7 @@ packages:
       - webpack-command
     dev: true
 
-  /@storybook/addon-interactions/6.5.12_zhhpsva3z5bogbpqgwmco3ntli:
+  /@storybook/addon-interactions/6.5.12_lpddxej3z5bxm425elitzlwdva:
     resolution: {integrity: sha512-wAkKqUX57qZMzgykMIltjDrFfA0II+pKz2SchK4hXHK3/2rtOe+Ah0Sj5nTQo++Ee5oC1PVZWIq/Y1kufCTBJQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -2735,7 +2762,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      '@devtools-ds/object-inspector': 1.2.0_qbczzgerydrfkz4fnz3mzraodu
+      '@devtools-ds/object-inspector': 1.2.0_x6vcehmdzjj6pm7ndhhuigqb3i
       '@storybook/addons': 6.5.12_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/api': 6.5.12_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/client-logger': 6.5.12

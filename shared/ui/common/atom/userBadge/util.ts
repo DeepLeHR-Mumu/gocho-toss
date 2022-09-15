@@ -1,6 +1,6 @@
-import defaultBadgeImage from "@public/images/global/badge/default.png";
-import earlyBirdBadgeImage from "@public/images/global/badge/early_bird.png";
-import adminBadgeImage from "@public/images/global/badge/admin.png";
+import defaultBadgeImage from "@sharedImage/global/badge/default.png";
+import earlyBirdBadgeImage from "@sharedImage/global/badge/early_bird.png";
+import adminBadgeImage from "@sharedImage/global/badge/admin.png";
 
 import { GetUserBadgeSrcDef } from "./type";
 

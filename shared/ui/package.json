@@ -6,7 +6,8 @@
   "types": "./index.tsx",
   "dependencies": {
     "@emotion/react": "^11.10.0",
-    "react-icons": "^4.4.0"
+    "react-icons": "^4.4.0",
+    "next": "12.2.5"
   },
   "devDependencies": {
     "tsconfig-deeple": "workspace:^0.0.0",

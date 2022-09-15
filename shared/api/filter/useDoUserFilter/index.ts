@@ -1,21 +1,26 @@
 import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 
 import { axiosInstance } from "../../axiosInstance";
-import { filterKeyObj, FilterRequestObjDef } from "@sharedConstant/queryKeyFactory/filter/filterKeyObj";
+import { ResponseDef } from "@sharedType/api/responseType";
 
-import { PostDoUserFilterDef } from "./type";
+import { PostDoUserFilterDef, useDoUserFilterProps, RequestObjDef } from "./type";
 
-const postDoUserFilter: PostDoUserFilterDef = async ({ queryKey: [{ requestObj }] }) => {
-  const token = localStorage.getItem("token");
-  const { data } = await axiosInstance.post(`/users/${requestObj?.userId}/filter`, {
-    headers: {
-      "x-access-token": token,
+const postDoUserFilter: PostDoUserFilterDef = async (requestObj) => {
+  const token = localStorage.getItem("token") as string;
+  const { data } = await axiosInstance.put(
+    `/users/${requestObj?.userId}/filter`,
+    {
+      q: requestObj?.q,
     },
-  });
+    {
+      headers: { "x-access-token": token },
+    }
+  );
   return data;
 };
 
-export const useDoUserFilter = (requestObj: FilterRequestObjDef) => {
-  const mutationResult = useMutation(filterKeyObj.post(requestObj), postDoUserFilter);
+export const useDoUserFilter: useDoUserFilterProps = () => {
+  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(postDoUserFilter);
   return mutationResult;
 };
