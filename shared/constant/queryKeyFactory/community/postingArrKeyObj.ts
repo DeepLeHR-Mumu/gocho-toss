@@ -1,5 +1,5 @@
-import { FilterDef, HashtagDef } from "@pages/community/postings/part/listPart/type";
-
+type FilterDef = "free" | "com" | "career" | "certi" | undefined;
+type HashtagDef = "recent" | "popular" | "view" | "rand";
 export interface CommunityPostingArrRequestDef {
   order?: "recent" | "popular" | "rand" | "view";
   limit?: number;
