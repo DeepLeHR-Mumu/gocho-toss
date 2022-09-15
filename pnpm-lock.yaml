@@ -152,7 +152,9 @@ importers:
       recoil: ^0.7.5
       shared-api: workspace:^0.0.0
       shared-constant: workspace:^0.0.0
+      shared-type: workspace:^0.0.0
       shared-ui: workspace:^0.0.0
+      shared-util: workspace:^0.0.0
       slick-carousel: ^1.8.1
       storybook-addon-next: ^1.6.7
       tsconfig-deeple: workspace:^0.0.0
@@ -176,7 +178,9 @@ importers:
       recoil: 0.7.5_sfoxds7t5ydpegc3knd667wn6m
       shared-api: link:../../shared/api
       shared-constant: link:../../shared/constant
+      shared-type: link:../../shared/type
       shared-ui: link:../../shared/ui
+      shared-util: link:../../shared/util
       slick-carousel: 1.8.1_jquery@3.6.1
       tsconfig-deeple: link:../../packages/tsconfig-deeple
     devDependencies:
@@ -269,6 +273,16 @@ importers:
       tsconfig-deeple: link:../../packages/tsconfig-deeple
       typescript: 4.7.2
 
+  shared/type:
+    specifiers:
+      eslint-config-deeple: workspace:^1.0.0
+      tsconfig-deeple: workspace:^0.0.0
+      typescript: 4.7.2
+    devDependencies:
+      eslint-config-deeple: link:../../packages/eslint-config-deeple
+      tsconfig-deeple: link:../../packages/tsconfig-deeple
+      typescript: 4.7.2
+
   shared/ui:
     specifiers:
       '@emotion/react': ^11.10.0
@@ -284,6 +298,16 @@ importers:
     devDependencies:
       '@types/react': 18.0.17
       '@types/react-dom': 18.0.6
+      eslint-config-deeple: link:../../packages/eslint-config-deeple
+      tsconfig-deeple: link:../../packages/tsconfig-deeple
+      typescript: 4.7.2
+
+  shared/util:
+    specifiers:
+      eslint-config-deeple: workspace:^1.0.0
+      tsconfig-deeple: workspace:^0.0.0
+      typescript: 4.7.2
+    devDependencies:
       eslint-config-deeple: link:../../packages/eslint-config-deeple
       tsconfig-deeple: link:../../packages/tsconfig-deeple
       typescript: 4.7.2

@@ -29,7 +29,9 @@
     "tsconfig-deeple": "workspace:^0.0.0",
     "shared-ui": "workspace:^0.0.0",
     "shared-api": "workspace:^0.0.0",
-    "shared-constant": "workspace:^0.0.0"
+    "shared-constant": "workspace:^0.0.0",
+    "shared-util": "workspace:^0.0.0",
+    "shared-type": "workspace:^0.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.0",

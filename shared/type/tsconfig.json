@@ -1,0 +1,11 @@
+{
+  "extends": "tsconfig-deeple/react-library.json",
+  "compilerOptions": {
+    "baseUrl": "../",
+    "paths": {
+      "@sharedColor": ["constant/color"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}

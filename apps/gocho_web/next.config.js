@@ -1,5 +1,11 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const withTM = require("next-transpile-modules")(["shared-ui", "shared-api", "shared-constant"]);
+const withTM = require("next-transpile-modules")([
+  "shared-ui",
+  "shared-api",
+  "shared-constant",
+  "shared-util",
+  "shared-type",
+]);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
