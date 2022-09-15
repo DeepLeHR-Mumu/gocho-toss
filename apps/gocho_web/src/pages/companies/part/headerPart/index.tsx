@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
 
+import { useAddUserBookmark, useDeleteUserBookmark } from "@api/bookmark";
 import { HeaderPartProps } from "./type";
 import {
   sectionContainer,
@@ -14,7 +15,6 @@ import {
   infoBox,
   bookmarkButton,
   icon,
-  bookmarkColor,
   viewBox,
   viewColor,
   companyName,
@@ -23,8 +23,44 @@ import {
   youtubeLinkButton,
 } from "./style";
 
-export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData }) => {
+export const HeaderPart: FunctionComponent<HeaderPartProps> = ({
+  companyData,
+  isBookmarked,
+  userId,
+  refetchUserBookmark,
+}) => {
   const [imageSrc, setImageSrc] = useState(companyData?.logoUrl as string);
+
+  const { mutate: addMutate } = useAddUserBookmark();
+  const { mutate: deleteMutate } = useDeleteUserBookmark();
+
+  const addCompanyBookmark = () => {
+    return (
+      userId &&
+      addMutate(
+        { userId, likeType: "company-bookmarks", elemId: companyData.id },
+        {
+          onSuccess: () => {
+            refetchUserBookmark();
+          },
+        }
+      )
+    );
+  };
+
+  const deleteCompanyBookmark = () => {
+    return (
+      userId &&
+      deleteMutate(
+        { userId, likeType: "company-bookmarks", elemId: companyData.id },
+        {
+          onSuccess: () => {
+            refetchUserBookmark();
+          },
+        }
+      )
+    );
+  };
 
   return (
     <section css={sectionContainer}>
@@ -41,11 +77,17 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData }) 
       </div>
       <div css={infoContainer}>
         <div css={infoBox}>
-          <button type="button" css={bookmarkButton}>
-            <span css={icon}>
+          <button
+            type="button"
+            css={bookmarkButton(isBookmarked)}
+            onClick={() => {
+              return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
+            }}
+          >
+            <div css={icon}>
               <BsFillBookmarkFill />
-            </span>
-            기업 북마크 <span css={bookmarkColor}>{companyData.bookmark}</span>
+            </div>
+            기업 북마크 {companyData.bookmark}
           </button>
           <div css={viewBox}>
             <span css={icon}>
