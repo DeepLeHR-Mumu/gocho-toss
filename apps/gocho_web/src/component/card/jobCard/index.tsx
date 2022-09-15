@@ -4,6 +4,8 @@ import Link from "next/link";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
 
+import { useAddUserBookmark, useDeleteUserBookmark } from "@api/bookmark";
+
 import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
 import highTrue from "@public/images/global/common/go_color.svg";
 import highFalse from "@public/images/global/common/go_mono.svg";
@@ -40,8 +42,17 @@ import {
   hoverButton,
 } from "./style";
 
-export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ jobData, isSkeleton }) => {
+export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
+  jobData,
+  isBookmarked,
+  userId,
+  isSkeleton,
+  refetchUserBookmark,
+}) => {
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
+
+  const { mutate: addMutate } = useAddUserBookmark();
+  const { mutate: deleteMutate } = useDeleteUserBookmark();
 
   if (isSkeleton || jobData === undefined) {
     return (
@@ -50,6 +61,34 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
       </div>
     );
   }
+
+  const addJobBookmark = () => {
+    return (
+      userId &&
+      addMutate(
+        { userId, likeType: "jd-bookmarks", elemId: jobData.id },
+        {
+          onSuccess: () => {
+            refetchUserBookmark();
+          },
+        }
+      )
+    );
+  };
+
+  const deleteJobBookmark = () => {
+    return (
+      userId &&
+      deleteMutate(
+        { userId, likeType: "jd-bookmarks", elemId: jobData.id },
+        {
+          onSuccess: () => {
+            refetchUserBookmark();
+          },
+        }
+      )
+    );
+  };
 
   const today = new Date();
   const isExpired = jobData.endTime - Number(today) < 0;
@@ -61,7 +100,14 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
     <article css={cardWrapper(isExpired)}>
       <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
         <a>
-          <button type="button" css={bookmarkButtonWrapper}>
+          <button
+            type="button"
+            css={bookmarkButtonWrapper(isBookmarked)}
+            onClick={(event) => {
+              event.preventDefault();
+              return isBookmarked ? deleteJobBookmark() : addJobBookmark();
+            }}
+          >
             <BsFillBookmarkFill />
             <span css={bookmarkNumber}>{jobData.bookmark}</span>
           </button>

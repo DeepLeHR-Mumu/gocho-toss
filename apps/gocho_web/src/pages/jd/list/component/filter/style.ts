@@ -154,5 +154,7 @@ export const submitButton = css`
   border-radius: 1.5rem;
   border: 1px solid ${COLORS.BLUE_FIRST40};
   width: fit-content;
+  word-break: keep-all;
+  white-space: nowrap;
   padding: 0.5rem 1rem;
 `;

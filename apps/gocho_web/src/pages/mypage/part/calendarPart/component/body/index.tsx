@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 
 import { useUserInfo } from "@api/auth";
-import { useUserJobBookmarkArr } from "@api/bookmark/useUserJobBookmark";
+import { useUserJobBookmarkArr } from "@api/bookmark";
 import { dummyArrCreator } from "@util/dummyArrCreator";
 
 import { SkeletonBox } from "@component/common/atom/skeletonBox";

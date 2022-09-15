@@ -42,26 +42,29 @@ export const cardWrapper = (isExpired = false) => {
   `;
 };
 
-export const bookmarkButtonWrapper = css`
-  display: flex;
-  align-items: center;
-  font-size: 0.75rem;
-  background-color: ${COLORS.GRAY90};
-  color: ${COLORS.GRAY60};
-  border-radius: 0 1rem 0 1rem;
-  padding: 0.25rem 2rem;
-  position: absolute;
-  top: 0;
-  right: 0;
-  transition: all 0.3s ease;
+export const bookmarkButtonWrapper = (isBookmarked = false) => {
+  return css`
+    display: flex;
+    align-items: center;
+    font-size: 0.75rem;
+    background-color: ${isBookmarked ? COLORS.STATE_SUCCESS : `${COLORS.GRAY90}`};
+    color: ${isBookmarked ? COLORS.BLUE_FIRST40 : `${COLORS.GRAY60}`};
+    border-radius: 0 1rem 0 1rem;
+    padding: 0.25rem 2rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: all 0.3s ease;
+    z-index: 20;
 
-  ${PC_HOVER} {
-    :hover {
-      background-color: ${COLORS.GRAY80};
-      color: ${COLORS.GRAY40};
+    ${PC_HOVER} {
+      :hover {
+        background-color: ${COLORS.GRAY80};
+        color: ${COLORS.GRAY40};
+      }
     }
-  }
-`;
+  `;
+};
 
 export const bookmarkNumber = css`
   margin-left: 0.25rem;

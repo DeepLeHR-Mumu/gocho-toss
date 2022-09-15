@@ -10,11 +10,12 @@ import { dateConverter } from "@util/date";
 import { DdayBox } from "@component/common/atom/dDayBox";
 
 import { COMPANY_DETAIL_URL } from "@constant/internalURL";
+import { useAddUserBookmark, useDeleteUserBookmark } from "@api/bookmark";
 import { HeaderProps } from "./type";
 import {
   applyButton,
   bookmarkButton,
-  ButtonCSS,
+  buttonCSS,
   youtubeButton,
   companyNameCSS,
   dateBox,
@@ -26,10 +27,45 @@ import {
   viewCSS,
 } from "./style";
 
-export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData }) => {
+export const Header: FunctionComponent<HeaderProps> = ({
+  jobDetailData,
+  isBookmarked,
+  userId,
+  refetchUserBookmark,
+}) => {
   const [imageSrc, setImageSrc] = useState(jobDetailData.company.logoUrl as string);
-  const { year: startYear, month: startMonth, date: startDate } = dateConverter(jobDetailData.startTime);
+  const { mutate: addMutate } = useAddUserBookmark();
+  const { mutate: deleteMutate } = useDeleteUserBookmark();
 
+  const addJobBookmark = () => {
+    return (
+      userId &&
+      addMutate(
+        { userId, likeType: "jd-bookmarks", elemId: jobDetailData.id },
+        {
+          onSuccess: () => {
+            refetchUserBookmark();
+          },
+        }
+      )
+    );
+  };
+
+  const deleteJobBookmark = () => {
+    return (
+      userId &&
+      deleteMutate(
+        { userId, likeType: "jd-bookmarks", elemId: jobDetailData.id },
+        {
+          onSuccess: () => {
+            refetchUserBookmark();
+          },
+        }
+      )
+    );
+  };
+
+  const { year: startYear, month: startMonth, date: startDate } = dateConverter(jobDetailData.startTime);
   const { year: endYear, month: endMonth, date: endDate } = dateConverter(jobDetailData.endTime);
 
   return (
@@ -68,14 +104,20 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData }) => {
             </a>
           </li>
           <li>
-            <button type="button" css={ButtonCSS}>
+            <button
+              type="button"
+              css={buttonCSS(isBookmarked)}
+              onClick={() => {
+                return isBookmarked ? deleteJobBookmark() : addJobBookmark();
+              }}
+            >
               <BsFillBookmarkFill />
               공고 북마크 {jobDetailData.bookmarkCount}
             </button>
           </li>
           <li>
             <Link href={`${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`} passHref>
-              <a css={ButtonCSS}>기업정보</a>
+              <a css={buttonCSS(false)}>기업정보</a>
             </Link>
           </li>
           {jobDetailData.company.youtubeUrl && (

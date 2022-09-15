@@ -8,13 +8,15 @@ import collegeTrue from "@public/images/global/common/cho_color.svg";
 
 import { Layout } from "@component/layout";
 import { useJobArr } from "@api/job";
+import { useUserInfo } from "@api/auth";
+import { useUserJobBookmarkArr } from "@api/bookmark";
 import { Pagination } from "@pages/jd/component/pagination";
 import { BottomPagination } from "@pages/jd/component/bottomPagination";
 
 import { JobCardList } from "../../component/jobCardList";
 import { Filter } from "../../component/filter";
 import { setJobOrderButtonArr } from "./constant";
-import { OrderDef, SearchQueryDef, changeOrderDef, PostingValues } from "./type";
+import { OrderDef, SearchQueryDef, changeOrderDef, SearchValues } from "./type";
 import {
   partContainer,
   title,
@@ -37,7 +39,10 @@ export const ListPart: FunctionComponent = () => {
   const [activeOrder, setActiveOrder] = useState<OrderDef>("recent");
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
 
-  const { register, handleSubmit, watch, setValue, getValues } = useForm<PostingValues>({
+  const { data: userData } = useUserInfo();
+  const { data: userJobBookmarkArr, refetch } = useUserJobBookmarkArr({ userId: userData?.id });
+
+  const { register, handleSubmit, watch, setValue, getValues } = useForm<SearchValues>({
     defaultValues: {
       contractType: [],
       industry: [],
@@ -49,16 +54,16 @@ export const ListPart: FunctionComponent = () => {
     },
   });
 
-  const postingSearch: SubmitHandler<PostingValues> = (postingVal) => {
+  const jdSearch: SubmitHandler<SearchValues> = (searchVal) => {
     setSearchQuery({
-      contractType: postingVal.contractType,
-      industry: postingVal.industry,
-      place: postingVal.place,
-      possibleEdu: postingVal.possibleEdu,
-      requiredExp: postingVal.requiredExp,
-      rotation: postingVal.rotation,
-      task: postingVal.task,
-      searchWord: postingVal.searchWord,
+      contractType: searchVal.contractType,
+      industry: searchVal.industry,
+      place: searchVal.place,
+      possibleEdu: searchVal.possibleEdu,
+      requiredExp: searchVal.requiredExp,
+      rotation: searchVal.rotation,
+      task: searchVal.task,
+      searchWord: searchVal.searchWord,
     });
   };
 
@@ -91,7 +96,7 @@ export const ListPart: FunctionComponent = () => {
         <h2 css={title}>
           <span css={colorPoint}>Now</span> 채용공고
         </h2>
-        <form onSubmit={handleSubmit(postingSearch)}>
+        <form onSubmit={handleSubmit(jdSearch)}>
           <Filter register={register} watch={watch} setValue={setValue} getValues={getValues} />
           <div css={flexBox}>
             <div css={searchWrapper}>
@@ -130,7 +135,14 @@ export const ListPart: FunctionComponent = () => {
           </div>
           고는 고졸지원가능 초는 초대졸 지원 가능합니다
         </div>
-        <JobCardList jobDataArr={jobDataArr?.jobDataArr} isLoading={isLoading} isError={isError} />
+        <JobCardList
+          jobDataArr={jobDataArr?.jobDataArr}
+          isLoading={isLoading}
+          isError={isError}
+          userJobBookmarkArr={userJobBookmarkArr}
+          userId={userData?.id}
+          refetchUserBookmark={refetch}
+        />
         <BottomPagination total={total} limit={limit} page={page} setPage={setPage} />
       </Layout>
     </section>

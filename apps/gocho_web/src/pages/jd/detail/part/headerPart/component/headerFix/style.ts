@@ -54,28 +54,30 @@ export const titleCSS = css`
   ${shorten()}
 `;
 
-export const bookmarkButton = css`
-  background-color: ${COLORS.GRAY90};
-  border-radius: 2rem;
-  padding: 0.625rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: ${COLORS.GRAY30};
-  transition: all 0.2s ease;
+export const bookmarkButton = (isBookmarked = false) => {
+  return css`
+    background-color: ${isBookmarked ? COLORS.STATE_SUCCESS : `${COLORS.GRAY90}`};
+    color: ${isBookmarked ? COLORS.BLUE_FIRST40 : `${COLORS.GRAY60}`};
+    border-radius: 2rem;
+    padding: 0.625rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
 
-  ${PC_HOVER} {
-    :hover {
-      background-color: ${COLORS.GRAY80};
+    ${PC_HOVER} {
+      :hover {
+        background-color: ${COLORS.GRAY80};
+      }
     }
-  }
 
-  > span {
-    color: ${COLORS.GRAY60};
-  }
-`;
+    > span {
+      color: ${COLORS.GRAY60};
+    }
+  `;
+};
 
 export const applyBox = css`
   display: flex;

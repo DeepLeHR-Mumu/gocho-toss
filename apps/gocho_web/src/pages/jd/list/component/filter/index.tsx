@@ -2,6 +2,9 @@ import { FunctionComponent, useState } from "react";
 import { FiRefreshCw, FiChevronDown, FiPlus, FiX, FiFilter } from "react-icons/fi";
 import { BsFolderSymlink } from "react-icons/bs";
 
+import { useUserFilter, useDoUserFilter } from "@api/filter";
+import { useUserInfo } from "@api/auth";
+
 import { CheckBox } from "../checkbox";
 import { filterMenuListArr } from "./constant";
 import { FilterProps, filterMenuDef, watchListDef } from "./type";
@@ -38,6 +41,48 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
 
   const openMenu = (menu: filterMenuDef) => {
     setActiveMenu(menu);
+  };
+
+  const { data: userInfoData } = useUserInfo();
+  const { data: userFilter, refetch: refetchUserFilter } = useUserFilter({ userId: userInfoData?.id });
+  const { mutate } = useDoUserFilter();
+
+  const applyUserFilter = () => {
+    const userFilterArr: watchListDef[] = [
+      { query: "possibleEdu", categoryArr: userFilter?.possibleEdu || [] },
+      { query: "place", categoryArr: userFilter?.place || [] },
+      { query: "requiredExp", categoryArr: userFilter?.requiredExp || [] },
+      { query: "contractType", categoryArr: userFilter?.contractType || [] },
+      { query: "rotation", categoryArr: userFilter?.rotation || [] },
+      { query: "industry", categoryArr: userFilter?.industry || [] },
+      { query: "task", categoryArr: userFilter?.task || [] },
+    ];
+
+    userFilterArr.map((filterMenu) => {
+      return setValue(filterMenu.query, filterMenu.categoryArr);
+    });
+  };
+
+  const saveUserFilter = () => {
+    mutate(
+      {
+        userId: userInfoData?.id,
+        q: {
+          possibleEdu: watch("possibleEdu"),
+          place: watch("place"),
+          industry: watch("industry"),
+          rotation: watch("rotation"),
+          task: watch("task"),
+          requiredExp: watch("requiredExp"),
+          contractType: watch("contractType"),
+        },
+      },
+      {
+        onSuccess: () => {
+          refetchUserFilter();
+        },
+      }
+    );
   };
 
   return (
@@ -144,11 +189,22 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
           })}
         </div>
         <div css={flexBox}>
-          {/* LATER 에러로 인해 린트 onClick 제거 -> 추후확인 예정 */}
-          <button type="button" css={userFilterButton}>
+          <button
+            type="button"
+            css={userFilterButton}
+            onClick={() => {
+              applyUserFilter();
+            }}
+          >
             My 필터 불러오기 <BsFolderSymlink />
           </button>
-          <button type="button" css={userFilterButton}>
+          <button
+            type="button"
+            css={userFilterButton}
+            onClick={() => {
+              saveUserFilter();
+            }}
+          >
             My 필터 저장 <FiPlus />
           </button>
         </div>
