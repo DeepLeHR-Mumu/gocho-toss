@@ -38,7 +38,7 @@ export const Spec8AwardCareerEtc: FunctionComponent<Spec8AwardCareerEtcProps> = 
 
         if (errorCode === 401) {
           queryClient.invalidateQueries(userInfoKeyObj.userInfo);
-          setCurrentModal("loginModal");
+          setCurrentModal("loginModal", { button: "home" });
         }
       },
     });

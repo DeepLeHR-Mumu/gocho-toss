@@ -1,12 +1,10 @@
 import { FunctionComponent, useState } from "react";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useRouter } from "next/router";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { ModalComponent } from "@component/modal/modalBackground";
 import { CloseButton } from "@component/common/atom/closeButton";
-import { MYPAGE_URL } from "@constant/internalURL";
 import { useDoLogin } from "@api/auth";
 import { EMAIL_REGEXP, PWD_REGEXP } from "@constant/regExp";
 import { useModal } from "@recoil/hook/modal";
@@ -14,11 +12,12 @@ import { AccountInput } from "@component/common/atom/accountInput";
 import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "@constant/errorMessage";
 import { NormalButton } from "@component/common/atom/button";
 import smallMono from "@public/images/global/deepLeLogo/smallMono.svg";
+import { loginObjDef } from "@recoil/atom/modal";
 
 import { wrapper, desc, formCSS, formArr, errorMsgCSS, closeBtn, errorBox, loginButton, logoContainer } from "./style";
-import { LoginFormValues } from "./type";
+import { ButtonProps, LoginFormValues } from "./type";
 
-export const LoginBox: FunctionComponent = () => {
+export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   const {
     register,
     handleSubmit,
@@ -27,15 +26,14 @@ export const LoginBox: FunctionComponent = () => {
   const queryClient = useQueryClient();
 
   const { mutate } = useDoLogin();
-  const { pathname } = useRouter();
   const { closeModal, setCurrentModal } = useModal();
 
-  const [errorMsg,] = useState<null | string>(null);
+  const [errorMsg] = useState<null | string>(null);
 
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     mutate(loginObj, {
       onSuccess: (response) => {
-        localStorage.setItem("token", `${response?.data.token}`);
+        localStorage.setItem("token", `${response.data.token}`);
         queryClient.invalidateQueries();
         closeModal();
       },
@@ -45,17 +43,12 @@ export const LoginBox: FunctionComponent = () => {
   return (
     <div css={wrapper}>
       <div css={closeBtn}>
-        {pathname === MYPAGE_URL ? <CloseButton size="S" isHome /> : <CloseButton size="S" buttonClick={closeModal} />}
+        {button === "home" ? <CloseButton size="S" isHome /> : <CloseButton size="S" buttonClick={closeModal} />}
       </div>
       <div css={logoContainer}>
         <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" />
       </div>
-
-      {pathname === MYPAGE_URL ? (
-        <p css={desc}>로그인이 필요한 서비스입니다.</p>
-      ) : (
-        <p css={desc}>로그인하고 모든 서비스를 누려보세요.</p>
-      )}
+      <p css={desc}>로그인이 필요한 서비스입니다.</p>
       <form css={formCSS} onSubmit={handleSubmit(loginSubmit)}>
         <ul css={formArr}>
           <li>
@@ -111,11 +104,12 @@ export const LoginBox: FunctionComponent = () => {
 };
 
 export const LoginModal: FunctionComponent = () => {
-  const { closeModal } = useModal();
+  const { closeModal, currentModal } = useModal();
 
+  const loginObj = currentModal?.modalContentObj as loginObjDef;
   return (
     <ModalComponent closeModal={closeModal}>
-      <LoginBox />
+      <LoginBox button={loginObj.button} />
     </ModalComponent>
   );
 };
