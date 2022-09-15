@@ -1,5 +1,8 @@
+import { QueryObserverResult } from "@tanstack/react-query";
+
 export interface HeaderFixProps {
   jobDetailData: {
+    id: number;
     endTime: number;
     applyUrl: string;
     title: string;
@@ -8,4 +11,7 @@ export interface HeaderFixProps {
       name: string;
     };
   };
+  isBookmarked: boolean;
+  userId: number | undefined;
+  refetchUserBookmark: () => Promise<QueryObserverResult>;
 }

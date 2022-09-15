@@ -40,7 +40,7 @@ export const ListPart: FunctionComponent = () => {
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
 
   const { data: userData } = useUserInfo();
-  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
+  const { data: userJobBookmarkArr, refetch } = useUserJobBookmarkArr({ userId: userData?.id });
 
   const { register, handleSubmit, watch, setValue, getValues } = useForm<SearchValues>({
     defaultValues: {
@@ -141,6 +141,7 @@ export const ListPart: FunctionComponent = () => {
           isError={isError}
           userJobBookmarkArr={userJobBookmarkArr}
           userId={userData?.id}
+          refetchUserBookmark={refetch}
         />
         <BottomPagination total={total} limit={limit} page={page} setPage={setPage} />
       </Layout>

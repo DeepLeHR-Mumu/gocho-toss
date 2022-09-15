@@ -45,18 +45,21 @@ export const viewCSS = css`
   }
 `;
 
-export const ButtonCSS = css`
-  background-color: ${COLORS.GRAY90};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 8.5rem;
-  height: 2.5rem;
-  border-radius: 2rem;
-  color: ${COLORS.GRAY30};
-  font-size: 0.875rem;
-  font-weight: 500;
-`;
+export const buttonCSS = (isBookmarked = false) => {
+  return css`
+    background-color: ${isBookmarked ? COLORS.STATE_SUCCESS : `${COLORS.GRAY90}`};
+    color: ${isBookmarked ? COLORS.BLUE_FIRST40 : `${COLORS.GRAY60}`};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 8.5rem;
+    height: 2.5rem;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  `;
+};
 
 export const youtubeButton = css`
   background-color: ${COLORS.GRAY90};

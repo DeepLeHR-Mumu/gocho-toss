@@ -2,6 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { axiosInstance } from "@api/axiosInstance";
+// import { jobBookmarkObjDef } from "@api/bookmark/type/bookmark";
+
 import { AddUserBookmarkResponseDef, AddUserBookmarkDef, useAddUserBookmarkProps, RequestObjDef } from "./type";
 
 const addUserBookmark: AddUserBookmarkDef = async (requestObj) => {
@@ -19,6 +21,30 @@ const addUserBookmark: AddUserBookmarkDef = async (requestObj) => {
 };
 
 export const useAddUserBookmark: useAddUserBookmarkProps = () => {
-  const mutationResult = useMutation<AddUserBookmarkResponseDef, AxiosError, RequestObjDef>(addUserBookmark);
+  // const queryClient = useQueryClient();
+
+  const mutationResult = useMutation<AddUserBookmarkResponseDef, AxiosError, RequestObjDef>(
+    addUserBookmark
+    // {
+    //   onMutate: async (requestObj) => {
+    //     await queryClient.cancelQueries([{ data: "userJobBookmarkArr", userId: requestObj.userId }]);
+    //     const prevBookmarkArr = queryClient.getQueryData([{ data: "userJobBookmarkArr", userId: requestObj.userId }]);
+    //     queryClient.setQueryData<jobBookmarkObjDef[]>(
+    //       [{ data: "userJobBookmarkArr", userId: requestObj.userId }],
+    //       (old) => {
+    //         if (!old) {
+    //           return [];
+    //         }
+    //         return [
+    //           old.map((jobDef) => {
+    //             return jobDef.id;
+    //           }),
+    //           requestObj.elemId,
+    //         ];
+    //       }
+    //     );
+    //   },
+    // });
+  );
   return mutationResult;
 };

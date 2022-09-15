@@ -54,6 +54,7 @@ export const 비로그인상태 = Template.bind({});
 
 비로그인상태.args = {
   jobDetailData: {
+    id: 4,
     endTime: 1658329199000,
     title: "[공무(자동기)] 사원 채용",
     bookmarkCount: 0,
@@ -77,6 +78,7 @@ export const 로그인상태 = Template.bind({});
 
 로그인상태.args = {
   jobDetailData: {
+    id: 4,
     endTime: 1658329199000,
     title: "[공무(자동기)] 사원 채용",
     bookmarkCount: 0,

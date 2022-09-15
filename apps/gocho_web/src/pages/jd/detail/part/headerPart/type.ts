@@ -1,10 +1,12 @@
 import { Dispatch, SetStateAction } from "react";
+import { QueryObserverResult } from "@tanstack/react-query";
 
 export interface HeaderPartProps {
   isSkeleton?: never;
   setCurrentPositionId: Dispatch<SetStateAction<number | null>>;
   currentPositionId: number | null;
   jobDetailData: {
+    id: number;
     startTime: number;
     endTime: number;
     applyUrl: string;
@@ -37,6 +39,9 @@ export interface HeaderPartProps {
       };
     }[];
   };
+  isBookmarked: boolean;
+  userId: number | undefined;
+  refetchUserBookmark: () => Promise<QueryObserverResult>;
 }
 
 export interface HeaderPartSkeleton {
@@ -44,4 +49,7 @@ export interface HeaderPartSkeleton {
   setCurrentPositionId?: never;
   currentPositionId?: never;
   jobDetailData?: never;
+  isBookmarked?: never;
+  userId?: never;
+  refetchUserBookmark?: never;
 }

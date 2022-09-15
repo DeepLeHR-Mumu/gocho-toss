@@ -12,6 +12,7 @@ export const JobCardList: FunctionComponent<JobCardListProps> = ({
   isError,
   userJobBookmarkArr,
   userId,
+  refetchUserBookmark,
 }) => {
   if (!jobDataArr || isError || isLoading) {
     return (
@@ -29,7 +30,15 @@ export const JobCardList: FunctionComponent<JobCardListProps> = ({
         const isBookmarked = !!userJobBookmarkArr?.some((job) => {
           return job.id === jobData.id;
         });
-        return <JobCard jobData={jobData} isBookmarked={isBookmarked} userId={userId} key={`JobCard${jobData.id}`} />;
+        return (
+          <JobCard
+            jobData={jobData}
+            isBookmarked={isBookmarked}
+            userId={userId}
+            refetchUserBookmark={refetchUserBookmark}
+            key={`JobCard${jobData.id}`}
+          />
+        );
       })}
     </section>
   );

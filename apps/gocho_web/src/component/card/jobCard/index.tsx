@@ -47,6 +47,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   isBookmarked,
   userId,
   isSkeleton,
+  refetchUserBookmark,
 }) => {
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
 
@@ -68,10 +69,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         { userId, likeType: "jd-bookmarks", elemId: jobData.id },
         {
           onSuccess: () => {
-            console.log("add ok");
-          },
-          onError: () => {
-            console.log("add fail");
+            refetchUserBookmark();
           },
         }
       )
@@ -85,10 +83,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         { userId, likeType: "jd-bookmarks", elemId: jobData.id },
         {
           onSuccess: () => {
-            console.log("delete ok");
-          },
-          onError: () => {
-            console.log("delete fail");
+            refetchUserBookmark();
           },
         }
       )
@@ -108,7 +103,8 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
           <button
             type="button"
             css={bookmarkButtonWrapper(isBookmarked)}
-            onClick={() => {
+            onClick={(event) => {
+              event.preventDefault();
               return isBookmarked ? deleteJobBookmark() : addJobBookmark();
             }}
           >

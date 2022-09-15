@@ -22,6 +22,9 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
   jobDetailData,
   currentPositionId,
   setCurrentPositionId,
+  isBookmarked,
+  userId,
+  refetchUserBookmark,
 }) => {
   const [defaultCardCount, setDefaultCardCount] = useState(5);
   const [isOverlap, setIsOverlap] = useState(true);
@@ -75,7 +78,21 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
 
   return (
     <div>
-      {isOverlap ? <Header jobDetailData={jobDetailData} /> : <HeaderFix jobDetailData={jobDetailData} />}
+      {isOverlap ? (
+        <Header
+          jobDetailData={jobDetailData}
+          isBookmarked={isBookmarked}
+          userId={userId}
+          refetchUserBookmark={refetchUserBookmark}
+        />
+      ) : (
+        <HeaderFix
+          jobDetailData={jobDetailData}
+          isBookmarked={isBookmarked}
+          userId={userId}
+          refetchUserBookmark={refetchUserBookmark}
+        />
+      )}
 
       <div css={observeCSS} ref={observeRef} />
 
