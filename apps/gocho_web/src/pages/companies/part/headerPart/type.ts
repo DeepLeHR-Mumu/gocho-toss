@@ -11,7 +11,5 @@ export interface HeaderPartProps {
     catchUrl: string | null;
     youtubeUrl: string | null;
   };
-  isBookmarked: boolean;
-  userId: number | undefined;
-  refetchUserBookmark: () => Promise<QueryObserverResult>;
+  refetchCompanyDetail: () => Promise<QueryObserverResult>;
 }

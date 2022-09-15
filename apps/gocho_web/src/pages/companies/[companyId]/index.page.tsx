@@ -6,8 +6,6 @@ import { useCompanyDetail } from "@api/company";
 import { Layout } from "@component/layout";
 import useMoveScroll from "@pages/companies/[companyId]/util";
 
-import { useUserCompanyBookmarkArr } from "@api/bookmark";
-import { useUserInfo } from "@api/auth";
 import { WorkingNotice } from "../component/workingNotice";
 import { MenuButtonList } from "../component/menuButtonList";
 import { HeaderPart } from "../part/headerPart";
@@ -38,9 +36,7 @@ const CompaniesDetail: NextPage = () => {
     setShownData(newData);
   };
 
-  const { data: userData } = useUserInfo();
-  const { data: userCompanyBookmarkArr, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
-  const { data: response, isError, isLoading } = useCompanyDetail({ companyId: Number(companyId) });
+  const { data: response, isError, isLoading, refetch } = useCompanyDetail({ companyId: Number(companyId) });
 
   if (!response || isError || isLoading) {
     return <main>Loading...</main>;
@@ -79,19 +75,10 @@ const CompaniesDetail: NextPage = () => {
     factoryData: { factoryArr: data.factoryArr },
   };
 
-  const isBookmarked = !!userCompanyBookmarkArr?.some((company) => {
-    return company.id === companyData.headerData.id;
-  });
-
   return (
     <main css={mainContainer}>
       <Layout>
-        <HeaderPart
-          companyData={companyData.headerData}
-          isBookmarked={isBookmarked}
-          userId={userData?.id}
-          refetchUserBookmark={refetch}
-        />
+        <HeaderPart companyData={companyData.headerData} refetchCompanyDetail={refetch} />
         <div css={buttonContainer}>
           <button
             type="button"

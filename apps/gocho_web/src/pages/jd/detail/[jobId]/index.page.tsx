@@ -6,8 +6,6 @@ import { useJobDetail } from "@api/job";
 import { SkeletonBox } from "@component/common/atom/skeletonBox";
 import { Layout } from "@component/layout";
 
-import { useUserJobBookmarkArr } from "@api/bookmark";
-import { useUserInfo } from "@api/auth";
 import { PositionObjDef } from "./type";
 import {
   HeaderPart,
@@ -24,9 +22,6 @@ import { wrapper, flexBox, container, containerSkeleton } from "./style";
 const JobsDetail: NextPage = () => {
   const [currentPositionId, setCurrentPositionId] = useState<number | null>(null);
   const [freshPosition, setFreshPosition] = useState<PositionObjDef | null>(null);
-
-  const { data: userData } = useUserInfo();
-  const { data: userJobBookmarkArr, refetch } = useUserJobBookmarkArr({ userId: userData?.id });
 
   const router = useRouter();
   const { jobId } = router.query;
@@ -64,10 +59,6 @@ const JobsDetail: NextPage = () => {
     );
   }
 
-  const isBookmarked = !!userJobBookmarkArr?.some((job) => {
-    return job.id === jobDetailData.id;
-  });
-
   return (
     <main css={wrapper}>
       <Layout>
@@ -75,9 +66,6 @@ const JobsDetail: NextPage = () => {
           jobDetailData={jobDetailData}
           setCurrentPositionId={setCurrentPositionId}
           currentPositionId={currentPositionId}
-          isBookmarked={isBookmarked}
-          userId={userData?.id}
-          refetchUserBookmark={refetch}
         />
         <div css={flexBox}>
           {freshPosition && (

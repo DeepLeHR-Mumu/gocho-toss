@@ -6,7 +6,8 @@ import Link from "next/link";
 
 import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
 
-import { useAddUserBookmark, useDeleteUserBookmark } from "@api/bookmark";
+import { useAddUserBookmark, useDeleteUserBookmark, useUserCompanyBookmarkArr } from "@api/bookmark";
+import { useUserInfo } from "@api/auth";
 import { HeaderPartProps } from "./type";
 import {
   sectionContainer,
@@ -23,25 +24,28 @@ import {
   youtubeLinkButton,
 } from "./style";
 
-export const HeaderPart: FunctionComponent<HeaderPartProps> = ({
-  companyData,
-  isBookmarked,
-  userId,
-  refetchUserBookmark,
-}) => {
+export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData, refetchCompanyDetail }) => {
   const [imageSrc, setImageSrc] = useState(companyData?.logoUrl as string);
+
+  const { data: userData } = useUserInfo();
+  const { data: userCompanyBookmarkArr, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
+
+  const isBookmarked = !!userCompanyBookmarkArr?.some((company) => {
+    return company.id === companyData.id;
+  });
 
   const { mutate: addMutate } = useAddUserBookmark();
   const { mutate: deleteMutate } = useDeleteUserBookmark();
 
   const addCompanyBookmark = () => {
     return (
-      userId &&
+      userData?.id &&
       addMutate(
-        { userId, likeType: "company-bookmarks", elemId: companyData.id },
+        { userId: userData?.id, likeType: "company-bookmarks", elemId: companyData.id },
         {
           onSuccess: () => {
-            refetchUserBookmark();
+            refetch();
+            refetchCompanyDetail();
           },
         }
       )
@@ -50,12 +54,13 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({
 
   const deleteCompanyBookmark = () => {
     return (
-      userId &&
+      userData?.id &&
       deleteMutate(
-        { userId, likeType: "company-bookmarks", elemId: companyData.id },
+        { userId: userData?.id, likeType: "company-bookmarks", elemId: companyData.id },
         {
           onSuccess: () => {
-            refetchUserBookmark();
+            refetch();
+            refetchCompanyDetail();
           },
         }
       )
