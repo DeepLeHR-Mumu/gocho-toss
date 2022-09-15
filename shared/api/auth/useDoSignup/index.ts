@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import { axiosInstance } from "@api/axiosInstance";
+import { axiosInstance } from "../../axiosInstance";
 
 import { PostSignUpDef, RequestObjDef, SignUpResponseDef, UseDoSignUpProps } from "./type";
 

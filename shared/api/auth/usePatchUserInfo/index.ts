@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { axiosInstance } from "@api/axiosInstance";
+import { axiosInstance } from "../../axiosInstance";
 
 import { PatchUserInfoDef, RequestObjDef, UserInfoResponse, UsePatchUserInfoProps, ErrorResponse } from "./type";
 

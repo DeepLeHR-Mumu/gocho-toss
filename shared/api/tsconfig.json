@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": "../",
     "paths": {
-      "@sharedConstant/*": ["constant/*"]
+      "@sharedConstant/*": ["constant/*"],
+      "@sharedType/*": ["type/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

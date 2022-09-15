@@ -1,6 +1,6 @@
-import { axiosInstance } from "@api/axiosInstance";
+import { axiosInstance } from "../../axiosInstance";
 import { useQuery } from "@tanstack/react-query";
-import { userInfoKeyObj } from "@constant/queryKeyFactory/user/infoKeyObj";
+import { userInfoKeyObj } from "@sharedConstant/queryKeyFactory/user/infoKeyObj";
 
 import { selector } from "./util";
 
