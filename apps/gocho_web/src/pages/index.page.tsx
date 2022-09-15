@@ -13,6 +13,7 @@ import { companyCommentArrKeyObj } from "@constant/queryKeyFactory/company/comme
 import { jobArrKeyObj } from "@constant/queryKeyFactory/job/jobArrKeyObj";
 import { communityPostingArrKeyObj } from "@constant/queryKeyFactory/community/postingArrKeyObj";
 import { tipArrKeyObj } from "@constant/queryKeyFactory/tip/arrKeyObj";
+import { HeadingH1 } from "ui/common/atom/headingH1";
 
 import { JobPart } from "./indexComponent/part/jobPart";
 import { CommunityPostingPart } from "./indexComponent/part/communityPostingPart";
@@ -59,6 +60,7 @@ const Home: NextPage = () => {
       <Head>
         <title>고초대졸닷컴 - 생산/기능직 No.1 취업 플랫폼</title>
       </Head>
+      <HeadingH1 title="고초대졸닷컴 - 생산/기능직 No.1 취업 플랫폼" />
       <TopBannerPart />
       <MainCarouselPart />
       <DataLabPart />

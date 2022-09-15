@@ -1,0 +1,9 @@
+{
+  "extends": "tsconfig-deeple/react-library.json",
+  "compilerOptions": {
+    "types": ["@emotion/react/types/css-prop"],
+    "moduleResolution": "Node"
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}

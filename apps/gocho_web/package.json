@@ -26,7 +26,8 @@
     "react-textarea-autosize": "^8.3.4",
     "recoil": "^0.7.5",
     "slick-carousel": "^1.8.1",
-    "tsconfig-deeple": "workspace:^0.0.0"
+    "tsconfig-deeple": "workspace:^0.0.0",
+    "ui": "workspace:^0.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.0",
