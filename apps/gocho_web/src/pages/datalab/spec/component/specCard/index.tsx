@@ -2,8 +2,8 @@ import { FunctionComponent } from "react";
 
 import { SkeletonBox } from "@component/common/atom/skeletonBox";
 import { SPEC_DETAIL_URL } from "@constant/internalURL";
-import { ProfileImg } from "@component/common/atom/profileImg";
-import { LinkButton } from "@component/common/atom/button";
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
+import { LinkButton } from "shared-ui/common/atom/button";
 
 import { SpecCardProps, SpecCardSkeleton } from "./type";
 import {

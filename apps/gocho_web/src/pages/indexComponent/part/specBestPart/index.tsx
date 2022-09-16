@@ -2,7 +2,7 @@ import { FunctionComponent, useState } from "react";
 import Link from "next/link";
 import { BsChevronRight } from "react-icons/bs";
 
-import { useSpecArr } from "@api/spec";
+import { useSpecArr } from "shared-api/spec";
 import { MAIN_URL } from "@constant/internalURL";
 import { Layout } from "@component/layout";
 

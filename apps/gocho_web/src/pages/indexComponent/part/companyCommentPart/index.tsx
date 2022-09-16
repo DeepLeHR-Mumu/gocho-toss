@@ -4,7 +4,7 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 import { CompanyCommentCard } from "@component/card/companyComment";
 import { Layout } from "@component/layout";
-import { useCompanyArr } from "@api/company/useCompanyArr";
+import { useCompanyArr } from "shared-api/company/useCompanyArr";
 
 import { partContainer, title, colorPoint, cardListContainer, sliderContainer, buttonCSSCreator } from "./style";
 import { setCarouselSetting } from "./util";

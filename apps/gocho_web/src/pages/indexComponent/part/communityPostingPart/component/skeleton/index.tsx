@@ -3,7 +3,7 @@ import { BsChevronRight } from "react-icons/bs";
 
 import { Layout } from "@component/layout";
 import { CommunityPostingCardSkeleton } from "@component/card/communityPosting/skeleton";
-import { dummyArrCreator } from "@util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
 import { setPostingOrderButtonArr } from "../../constant";
 import {

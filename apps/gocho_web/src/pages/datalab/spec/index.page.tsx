@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { NextPage } from "next";
 import axios from "axios";
 
-import { useUserInfo } from "@api/auth";
+import { useUserInfo } from "shared-api/auth";
 import { useModal } from "@recoil/hook/modal";
 
 import { Layout } from "@component/layout";

@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { useUserInfo } from "@api/auth";
+import { useUserInfo } from "shared-api/auth";
 
 import {
   SpecCardTitle,

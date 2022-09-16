@@ -1,8 +1,8 @@
 import { FunctionComponent, useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
 
-import { useUserInfo } from "@api/auth";
-import { ProfileImg } from "@component/common/atom/profileImg";
+import { useUserInfo } from "shared-api/auth";
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
 import { MyProfileMenu } from "../myProfileMenu";
 import { profileWrapper, greetingMsg, downIconCSS } from "./style";

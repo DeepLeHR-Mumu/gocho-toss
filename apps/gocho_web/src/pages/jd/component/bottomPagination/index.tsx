@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 
-import { dummyArrCreator } from "@util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
 import { BottomPaginationProps } from "./type";
 import { paginationContainer, movePageButton, selectPageButton } from "./style";

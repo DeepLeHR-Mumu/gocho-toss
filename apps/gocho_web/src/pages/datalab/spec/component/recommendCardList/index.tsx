@@ -2,7 +2,7 @@ import { FunctionComponent, useRef } from "react";
 import Slider from "react-slick";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
-import { useSpecArr } from "@api/spec";
+import { useSpecArr } from "shared-api/spec";
 import { SpecRecommendCard } from "@component/card/specRecommendCard";
 
 import { setCarouselSetting } from "./util";

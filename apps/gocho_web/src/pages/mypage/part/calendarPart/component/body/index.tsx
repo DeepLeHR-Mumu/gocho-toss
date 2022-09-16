@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
 
-import { useUserInfo } from "@api/auth";
-import { useUserJobBookmarkArr } from "@api/bookmark";
-import { dummyArrCreator } from "@util/dummyArrCreator";
+import { useUserInfo } from "shared-api/auth";
+import { useUserJobBookmarkArr } from "shared-api/bookmark";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
 import { SkeletonBox } from "@component/common/atom/skeletonBox";
 import { Bookmark } from "../bookmark";

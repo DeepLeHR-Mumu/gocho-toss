@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
 
-import { CDN_URL } from "@constant/externalURL";
-import { DdayBox } from "@component/common/atom/dDayBox";
+import { CDN_URL } from "shared-constant/externalURL";
+import { DdayBox } from "shared-ui/common/atom/dDayBox";
 
 import {
   cardWrapper,

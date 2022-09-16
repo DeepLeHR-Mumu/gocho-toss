@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { FiCheck } from "react-icons/fi";
 
-import { ProfileImg } from "@component/common/atom/profileImg";
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
 import { imageWrapper, invisibleRadioButton } from "./style";
 import { ImageRadioButtonProps } from "./type";

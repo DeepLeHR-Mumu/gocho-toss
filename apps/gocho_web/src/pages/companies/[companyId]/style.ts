@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const mainContainer = css`
   background-color: #f2f2f6;

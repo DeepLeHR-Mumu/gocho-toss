@@ -4,12 +4,12 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { AiFillCaretDown } from "react-icons/ai";
 
-import colorLogoSrc from "@public/images/global/deepLeLogo/smallColor.svg";
-import grayLogoSrc from "@public/images/global/deepLeLogo/smallMono.svg";
+import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
+import grayLogoSrc from "shared-image/global/deepLeLogo/smallMono.svg";
 
 import { MAIN_URL } from "@constant/internalURL";
 import { Layout } from "@component/layout";
-import { useUserInfo } from "@api/auth";
+import { useUserInfo } from "shared-api/auth";
 import { Profile } from "@component/common/molecule/profile";
 import { UnAuthMenu } from "@component/common/molecule/unAuthMenu";
 import { menuArr } from "@constant/menuArr";

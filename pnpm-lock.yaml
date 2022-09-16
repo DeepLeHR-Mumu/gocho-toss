@@ -252,13 +252,17 @@ importers:
       '@tanstack/react-query': ^4.2.3
       axios: ^0.27.2
       eslint-config-deeple: workspace:^1.0.0
+      react: 17.0.2
+      react-dom: 17.0.2
       shared-constant: workspace:^0.0.0
       shared-type: workspace:^0.0.0
       tsconfig-deeple: workspace:^0.0.0
       typescript: 4.7.2
     dependencies:
-      '@tanstack/react-query': 4.3.4_react@17.0.2
+      '@tanstack/react-query': 4.3.4_sfoxds7t5ydpegc3knd667wn6m
       axios: 0.27.2
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
       shared-constant: link:../constant
       shared-type: link:../type
     devDependencies:
@@ -318,6 +322,7 @@ importers:
       next: 12.2.5
       react: 17.0.2
       react-dom: 17.0.2
+      react-hook-form: ^7.34.2
       react-icons: ^4.4.0
       shared-constant: workspace:^0.0.0
       shared-image: workspace:^0.0.0
@@ -331,6 +336,7 @@ importers:
       next: 12.2.5_2f3qgkpmmpou2hyqrmueifddme
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
+      react-hook-form: 7.35.0_react@17.0.2
       react-icons: 4.4.0_react@17.0.2
       shared-constant: link:../constant
       shared-image: link:../image
@@ -3987,23 +3993,6 @@ packages:
       '@tanstack/react-query': 4.3.4_sfoxds7t5ydpegc3knd667wn6m
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-      use-sync-external-store: 1.2.0_react@17.0.2
-    dev: false
-
-  /@tanstack/react-query/4.3.4_react@17.0.2:
-    resolution: {integrity: sha512-IiAo+B8bxphEpO7xwLQaCptd2rY4Ef3pW1q9J3pT66G+J/st4QpGQ+cSm9iESp9ccRy1YNUk3klk/hQtWewl6g==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-native: '*'
-    peerDependenciesMeta:
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-    dependencies:
-      '@tanstack/query-core': 4.3.4
-      react: 17.0.2
       use-sync-external-store: 1.2.0_react@17.0.2
     dev: false
 

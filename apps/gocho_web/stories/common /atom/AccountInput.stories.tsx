@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Ref } from "react-hook-form";
 
-import { AccountInput } from "@component/common/atom/accountInput";
+import { AccountInput } from "shared-ui/common/atom/accountInput";
 
 export default {
   title: "공용 컴포넌트/common/atom/AccountInput",

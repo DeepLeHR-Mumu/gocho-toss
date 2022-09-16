@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { CheckBox } from "@component/common/atom/checkbox";
+import { CheckBox } from "shared-ui/common/atom/checkbox";
 
 export default {
   title: "공용 컴포넌트/common/atom/CheckBox",

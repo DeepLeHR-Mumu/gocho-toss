@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import Image from "next/image";
 
 import { SkeletonBox } from "@component/common/atom/skeletonBox";
-import { dateConverter } from "@util/date";
+import { dateConverter } from "shared-util/date";
 import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
 
 import { JobAdCardProps, JobAdCardSkeleton } from "./type";

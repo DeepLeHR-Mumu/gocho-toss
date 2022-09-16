@@ -3,9 +3,9 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { useModal } from "@recoil/hook/modal";
 import { useIsSpecPageBlocking } from "@recoil/hook/spec";
-import { useRegisterSpec } from "@api/spec";
-import { specArrKeyObj } from "@constant/queryKeyFactory/spec/arrKeyObj";
-import { userInfoKeyObj } from "@constant/queryKeyFactory/user/infoKeyObj";
+import { useRegisterSpec } from "shared-api/spec";
+import { specArrKeyObj } from "shared-constant/queryKeyFactory/spec/arrKeyObj";
+import { userInfoKeyObj } from "shared-constant/queryKeyFactory/user/infoKeyObj";
 
 import { SpecCardTitle } from "../common/component";
 import { Spec6MiddleEndProps } from "./type";

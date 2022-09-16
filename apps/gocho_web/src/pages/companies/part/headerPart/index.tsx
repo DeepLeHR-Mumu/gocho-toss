@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
 
-import { useAddUserBookmark, useDeleteUserBookmark } from "@api/bookmark";
+import { useAddUserBookmark, useDeleteUserBookmark } from "shared-api/bookmark";
 import { HeaderPartProps } from "./type";
 import {
   sectionContainer,

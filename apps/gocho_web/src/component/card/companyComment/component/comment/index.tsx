@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { dateConverter } from "@util/date/dateConverter";
+import { dateConverter } from "shared-util/date/dateConverter";
 
 import {
   container,

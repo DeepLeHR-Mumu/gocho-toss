@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
 
-import { CDN_URL } from "@constant/externalURL";
+import { CDN_URL } from "shared-constant/externalURL";
 
 import { CompanyCardProps } from "./type";
 import {

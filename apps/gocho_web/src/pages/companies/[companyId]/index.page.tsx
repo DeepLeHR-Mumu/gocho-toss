@@ -2,12 +2,12 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-import { useCompanyDetail } from "@api/company";
+import { useCompanyDetail } from "shared-api/company";
 import { Layout } from "@component/layout";
 import useMoveScroll from "@pages/companies/[companyId]/util";
 
-import { useUserCompanyBookmarkArr } from "@api/bookmark";
-import { useUserInfo } from "@api/auth";
+import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
+import { useUserInfo } from "shared-api/auth";
 import { WorkingNotice } from "../component/workingNotice";
 import { MenuButtonList } from "../component/menuButtonList";
 import { HeaderPart } from "../part/headerPart";

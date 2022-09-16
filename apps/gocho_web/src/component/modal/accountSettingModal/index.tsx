@@ -1,9 +1,9 @@
 import { FunctionComponent, useState } from "react";
 
 import { useModal } from "@recoil/hook/modal";
-import { useUserInfo } from "@api/auth";
+import { useUserInfo } from "shared-api/auth";
 
-import { ProfileImg } from "@component/common/atom/profileImg";
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
 import { ModalComponent } from "../modalBackground";
 import {

@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import { AiOutlineEye, AiOutlineLike } from "react-icons/ai";
 import Image from "next/image";
 
-import { dateConverter } from "@util/date/dateConverter";
+import { dateConverter } from "shared-util/date/dateConverter";
 import { useModal } from "@recoil/hook/modal";
 import { SkeletonBox } from "@component/common/atom/skeletonBox";
 import {

@@ -1,4 +1,4 @@
-import { selector } from "@api/community/usePostingCommentArr/util";
+import { selector } from "shared-api/community/usePostingCommentArr/util";
 
 export interface CommentProps {
   id: number;

@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from "react";
 
-import { useUserInfo } from "@api/auth";
+import { useUserInfo } from "shared-api/auth";
 
 import { Header } from "./component/header";
 import { Body } from "./component/body";

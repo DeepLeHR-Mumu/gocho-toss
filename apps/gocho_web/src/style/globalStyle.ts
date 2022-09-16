@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { DESKTOP, TABLET } from "./mediaQuery";
+import { DESKTOP, TABLET } from "shared-style/mediaQuery";
 
 export const globalStyles = css`
   * {

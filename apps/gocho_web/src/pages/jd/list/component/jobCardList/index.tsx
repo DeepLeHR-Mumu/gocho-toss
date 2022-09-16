@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { dummyArrCreator } from "@util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
 import { JobCard } from "@component/card/jobCard";
 import { JobCardListProps } from "./type";

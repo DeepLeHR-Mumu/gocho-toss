@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
-import { dummyArrCreator } from "@util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
 import { PaginationProps } from "./type";
 import { wrapper, buttonCSS, isActiveButton } from "./style";

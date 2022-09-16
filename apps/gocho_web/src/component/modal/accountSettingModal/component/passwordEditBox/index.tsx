@@ -2,10 +2,10 @@ import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 
-import GDTitleSrc from "@public/images/global/deepLeLogo/smallMono.svg";
-import { PWD_REGEXP } from "@constant/regExp";
-import { usePatchUserInfo } from "@api/auth/usePatchUserInfo";
-import { useUserInfo } from "@api/auth";
+import GDTitleSrc from "shared-image/global/deepLeLogo/smallMono.svg";
+import { PWD_REGEXP } from "shared-constant/regExp";
+import { usePatchUserInfo } from "shared-api/auth/usePatchUserInfo";
+import { useUserInfo } from "shared-api/auth";
 
 import {
   formContainer,

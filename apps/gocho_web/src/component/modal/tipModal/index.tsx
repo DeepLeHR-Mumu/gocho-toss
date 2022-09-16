@@ -5,7 +5,7 @@ import Image from "next/image";
 import { ModalComponent } from "@component/modal/modalBackground";
 import { useModal } from "@recoil/hook/modal";
 import { tipObjDef } from "@recoil/atom/modal";
-import { dateConverter } from "@util/date/dateConverter";
+import { dateConverter } from "shared-util/date/dateConverter";
 import { AiOutlineEye, AiOutlineLike } from "react-icons/ai";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { CloseButton } from "@component/common/atom/closeButton";

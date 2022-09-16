@@ -2,8 +2,8 @@ import { FunctionComponent } from "react";
 
 import { SkeletonBox } from "@component/common/atom/skeletonBox";
 
-import { useUserInfo } from "@api/auth";
-import { useUserCompanyBookmarkArr } from "@api/bookmark";
+import { useUserInfo } from "shared-api/auth";
+import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { CompanyCard } from "@pages/mypage/part/bookmarkPart/companyCard";
 
 import { cardListContainer, skeletonContainer, descCSS } from "./style";
