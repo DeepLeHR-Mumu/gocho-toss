@@ -7,7 +7,6 @@
   "dependencies": {
     "@tanstack/react-query": "^4.2.3",
     "axios": "^0.27.2",
-    "next-transpile-modules": "^9.0.0",
     "shared-constant": "workspace:^0.0.0",
     "shared-type": "workspace:^0.0.0"
   },
