@@ -14,7 +14,6 @@ import { jobArrKeyObj } from "@constant/queryKeyFactory/job/jobArrKeyObj";
 import { communityPostingArrKeyObj } from "@constant/queryKeyFactory/community/postingArrKeyObj";
 import { tipArrKeyObj } from "@constant/queryKeyFactory/tip/arrKeyObj";
 import { HeadingH1 } from "shared-ui/common/seo/headingH1";
-
 import { JobPart } from "./indexComponent/part/jobPart";
 import { CommunityPostingPart } from "./indexComponent/part/communityPostingPart";
 import { TopBannerPart } from "./indexComponent/part/topBannerPart";

@@ -4,7 +4,7 @@ import { axiosInstance } from "../../axiosInstance";
 import {
   communityPostingArrKeyObj,
   CommunityPostingArrRequestDef,
-} from "@sharedConstant/queryKeyFactory/community/postingArrKeyObj";
+} from "shared-constant/queryKeyFactory/community/postingArrKeyObj";
 
 import { GetPostingArrDef } from "./type";
 import { selector } from "./util";

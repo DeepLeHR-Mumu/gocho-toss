@@ -1,10 +1,10 @@
-import Default from "public/images/global/profile/default.png";
-import DefaultWork from "public/images/global/profile/default_work.png";
-import Jobi from "public/images/global/profile/jobi.png";
-import JobiSafety from "public/images/global/profile/jobi_safety.png";
-import JobiChat from "public/images/global/profile/jobi_chat.png";
-import JobiPlay from "public/images/global/profile/jobi_play.png";
-import JobiTeach from "public/images/global/profile/jobi_teach.png";
+import Default from "shared-image/global/profile/default.png";
+import DefaultWork from "shared-image/global/profile/default_work.png";
+import Jobi from "shared-image/global/profile/jobi.png";
+import JobiSafety from "shared-image/global/profile/jobi_safety.png";
+import JobiChat from "shared-image/global/profile/jobi_chat.png";
+import JobiPlay from "shared-image/global/profile/jobi_play.png";
+import JobiTeach from "shared-image/global/profile/jobi_teach.png";
 
 export const selectImage = (str: string) => {
   if (str === "default") {

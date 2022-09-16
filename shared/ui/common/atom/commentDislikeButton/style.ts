@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "@sharedStyle/color";
+import { COLORS } from "shared-style/color";
 
 export const buttonCSS = css`
   white-space: nowrap;

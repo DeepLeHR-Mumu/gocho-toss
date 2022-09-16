@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { userBookmarkKeyObj, UserBookmarkArrRequestDef } from "@sharedConstant/queryKeyFactory/bookmark/bookmarkKeyObj";
+import { userBookmarkKeyObj, UserBookmarkArrRequestDef } from "shared-constant/queryKeyFactory/bookmark/bookmarkKeyObj";
 import { axiosInstance } from "../../axiosInstance";
 
 import { GetUserJobBookmarkArrDef } from "./type";

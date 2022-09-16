@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { axiosInstance } from "../../axiosInstance";
-import { ResponseDef } from "@sharedType/api/responseType";
+import { ResponseDef } from "shared-type/api/responseType";
 import { postRegisterSpecDef, useRegisterSpecProps, RequestObjDef } from "./type";
 
 export const postRegisterSpec: postRegisterSpecDef = async (requestObj) => {

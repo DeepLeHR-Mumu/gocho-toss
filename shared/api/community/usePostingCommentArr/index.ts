@@ -4,7 +4,7 @@ import { axiosInstance } from "../../axiosInstance";
 import {
   communityCommentArrKeyObj,
   CommunityCommentArrReqObj,
-} from "@sharedConstant/queryKeyFactory/community/commentArrKeyObj";
+} from "shared-constant/queryKeyFactory/community/commentArrKeyObj";
 
 import { GetPostingCommentArrDef } from "./type";
 import { selector } from "./util";

@@ -2,15 +2,7 @@
   "extends": "tsconfig-deeple/nextjs.json",
   "compilerOptions": {
     "types": ["@emotion/react/types/css-prop"],
-    "jsxImportSource": "@emotion/react",
-    "moduleResolution": "Node",
-    "baseUrl": "../",
-    "paths": {
-      "@sharedImage/*": ["../shared-image/*"],
-      "@sharedUtil/*": ["util/*"],
-      "@sharedType/*": ["type/*"],
-      "@sharedStyle/*": ["style/*"]
-    }
+    "jsxImportSource": "@emotion/react"
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

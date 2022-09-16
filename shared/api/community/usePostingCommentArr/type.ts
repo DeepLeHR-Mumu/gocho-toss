@@ -1,4 +1,4 @@
-import { communityCommentArrKeyObj } from "@sharedConstant/queryKeyFactory/community/commentArrKeyObj";
+import { communityCommentArrKeyObj } from "shared-constant/queryKeyFactory/community/commentArrKeyObj";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import { PostingCommentObjDef } from "../type/postingComment";
 

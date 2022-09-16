@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import { ResponseDef } from "@sharedType/api/responseType";
+import { ResponseDef } from "shared-type/api/responseType";
 import { axiosInstance } from "../../axiosInstance";
 import { useDeleteUserBookmarkProps, RequestObjDef, DeleteUserBookmarkDef } from "./type";
 

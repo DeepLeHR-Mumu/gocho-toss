@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { useJobDetail } from "@api/job";
 import { SkeletonBox } from "@component/common/atom/skeletonBox";
 import { Layout } from "@component/layout";
-
 import { useUserJobBookmarkArr } from "@api/bookmark";
 import { useUserInfo } from "@api/auth";
 import { PositionObjDef } from "./type";

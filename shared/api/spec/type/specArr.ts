@@ -1,5 +1,5 @@
 import { IndustryType, LanguageType, TaskType } from "../../spec/type/common";
-import { ImageType } from "@sharedType/ui/imageType";
+import { ImageType } from "shared-type/ui/imageType";
 
 export interface SpecObjDef {
   id: number;

@@ -1,4 +1,4 @@
-import { ResponseDef } from "@sharedType/api/responseType";
+import { ResponseDef } from "shared-type/api/responseType";
 import { AxiosError } from "axios";
 import { UseQueryResult } from "@tanstack/react-query";
 import { CompanyObjDef } from "../../company/type/company";

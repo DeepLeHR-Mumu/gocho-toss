@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { axiosInstance } from "../../axiosInstance";
-import { SpecArrInfinityRequestDef, specArrKeyObj } from "@sharedConstant/queryKeyFactory/spec/arrKeyObj";
+import { SpecArrInfinityRequestDef, specArrKeyObj } from "shared-constant/queryKeyFactory/spec/arrKeyObj";
 
 import { GetInifiniteSpecArrDef } from "./type";
 import { selector } from "./util";

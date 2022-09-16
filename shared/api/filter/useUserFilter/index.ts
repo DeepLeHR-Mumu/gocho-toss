@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { filterKeyObj, FilterRequestObjDef } from "@sharedConstant/queryKeyFactory/filter/filterKeyObj";
+import { filterKeyObj, FilterRequestObjDef } from "shared-constant/queryKeyFactory/filter/filterKeyObj";
 import { axiosInstance } from "../../axiosInstance";
 
 import { GetUserFilterDef } from "./type";

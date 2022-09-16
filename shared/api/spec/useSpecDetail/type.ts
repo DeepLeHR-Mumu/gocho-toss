@@ -1,6 +1,6 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
-import { specDetailKeyObj } from "@sharedConstant/queryKeyFactory/spec/detailKeyObj";
+import { specDetailKeyObj } from "shared-constant/queryKeyFactory/spec/detailKeyObj";
 
 import { SpecDetailObjDef } from "../type/specDetail";
 

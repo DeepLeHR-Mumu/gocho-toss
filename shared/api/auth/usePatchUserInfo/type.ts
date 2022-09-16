@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
-import { ImageType } from "@sharedType/ui/imageType";
+import { ImageType } from "shared-type/ui/imageType";
 
 export interface RequestObjDef {
   userId: number;

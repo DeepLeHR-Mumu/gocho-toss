@@ -4,7 +4,7 @@ import { axiosInstance } from "../../axiosInstance";
 import {
   mySpecHistoryKeyObj,
   mySpecHistoryRequestObjDef,
-} from "@sharedConstant/queryKeyFactory/spec/userHistoryKeyObj";
+} from "shared-constant/queryKeyFactory/spec/userHistoryKeyObj";
 
 import { selector } from "./util";
 import { GetMySpecHistoryArrDef } from "./type";

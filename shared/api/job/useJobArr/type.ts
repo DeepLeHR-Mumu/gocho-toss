@@ -1,4 +1,4 @@
-import { jobArrKeyObj } from "@sharedConstant/queryKeyFactory/job/jobArrKeyObj";
+import { jobArrKeyObj } from "shared-constant/queryKeyFactory/job/jobArrKeyObj";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import { JobObjDef } from "../type/jobArr";
 

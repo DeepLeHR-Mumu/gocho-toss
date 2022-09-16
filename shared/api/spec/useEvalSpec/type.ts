@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
-import { ResponseDef } from "@sharedType/api/responseType";
+import { ResponseDef } from "shared-type/api/responseType";
 
 export interface RequestObjDef {
   specId: number;

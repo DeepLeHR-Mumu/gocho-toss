@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import {
   CompanyCommentArrRequestDef,
   companyCommentArrKeyObj,
-} from "@sharedConstant/queryKeyFactory/company/commentArrKeyObj";
+} from "shared-constant/queryKeyFactory/company/commentArrKeyObj";
 import { axiosInstance } from "../../axiosInstance";
 
 import { GetCompanyCommentDef } from "./type";

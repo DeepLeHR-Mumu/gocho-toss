@@ -4,7 +4,9 @@
   "license": "MIT",
   "main": "./index.tsx",
   "types": "./index.tsx",
-  "dependencies": {},
+  "dependencies": {
+    "shared-style": "workspace:^0.0.0"
+  },
   "devDependencies": {
     "tsconfig-deeple": "workspace:^0.0.0",
     "eslint-config-deeple": "workspace:^1.0.0",

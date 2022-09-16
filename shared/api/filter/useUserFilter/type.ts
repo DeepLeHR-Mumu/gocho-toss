@@ -1,5 +1,5 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
-import { filterKeyObj } from "@sharedConstant/queryKeyFactory/filter/filterKeyObj";
+import { filterKeyObj } from "shared-constant/queryKeyFactory/filter/filterKeyObj";
 
 export interface ResponseObjDef {
   data: {

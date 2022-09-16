@@ -1,6 +1,6 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
-import { jobDetailKeyObj } from "@sharedConstant/queryKeyFactory/job/jobDetailKeyObj";
+import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { JobDetailObjDef } from "../type/jobDetail";
 
 interface ResponseObjDef {

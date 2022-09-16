@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { axiosInstance } from "../../axiosInstance";
-import { ResponseDef } from "@sharedType/api/responseType";
+import { ResponseDef } from "shared-type/api/responseType";
 import { PostWritePostingDef, useWritePostingProps, RequestObjDef } from "./type";
 
 const postWritePosting: PostWritePostingDef = async (requestObj) => {

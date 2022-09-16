@@ -1,4 +1,4 @@
-import { ColorDef } from "@type/style/color";
+import { ColorDef } from "shared-type/style/color";
 import { IconType } from "react-icons";
 
 export type ButtonVariant = "filled" | "outlined" | "text";
