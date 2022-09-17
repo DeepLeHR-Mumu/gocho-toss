@@ -5,6 +5,14 @@ cd shared/ui && tsc --noEmit
 echo "shared ui 컴포넌트 타입 검사 완료"
 cd ../api && tsc --noEmit
 echo "shared api 컴포넌트 타입 검사 완료"
+cd ../constant && tsc --noEmit
+echo "shared constant 컴포넌트 타입 검사 완료"
+cd ../style && tsc --noEmit
+echo "shared style 컴포넌트 타입 검사 완료"
+cd ../type && tsc --noEmit
+echo "shared type 컴포넌트 타입 검사 완료"
+cd ../util && tsc --noEmit
+echo "shared util 컴포넌트 타입 검사 완료"
 cd ../../apps/gocho_web && tsc --noEmit
 echo "PC 버전 타입 검사 완료"
 cd ../gocho_mobile && tsc --noEmit
