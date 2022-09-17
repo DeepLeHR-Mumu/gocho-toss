@@ -8,7 +8,7 @@ import { useModal } from "@recoil/hook/modal";
 import { changePostingObjDef } from "@recoil/atom/modal";
 import { useUserInfo } from "shared-api/auth";
 import { useChangePosting } from "shared-api/community/useChangePosting";
-import { ProfileImg } from "shared-ui/common/atom/profileImg";
+import { ProfileImg } from "shared-ui/pages/common/atom/profileImg";
 import { CloseButton } from "@component/common/atom/closeButton";
 import { communityPostingArrKeyObj } from "shared-constant/queryKeyFactory/community/postingArrKeyObj";
 

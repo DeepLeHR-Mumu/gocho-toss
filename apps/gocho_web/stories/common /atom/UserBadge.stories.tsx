@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { UserBadge } from "shared-ui/common/atom/userBadge";
+import { UserBadge } from "shared-ui/pages/common/atom/userBadge";
 
 export default {
   title: "공용 컴포넌트/common/atom/UserBadge",

@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Image from "next/image";
 
-import { LinkButton } from "shared-ui/common/atom/button";
+import { LinkButton } from "shared-ui/pages/common/atom/button";
 
 import deepLeLogo from "shared-image/global/deepLeLogo/smallMono.svg";
 import jobiError from "@public/images/global/errrorPage/jobi_500.png";

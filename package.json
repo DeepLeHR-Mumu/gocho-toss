@@ -20,7 +20,7 @@
     "apps/**/src/pages/**/*.{ts,tsx}": [
       "eslint"
     ],
-    "shared/**/*.{ts.tsx}": [
+    "shared/**/*.{ts,tsx}": [
       "eslint"
     ]
   },

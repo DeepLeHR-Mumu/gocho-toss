@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import TextareaAutosize from "react-textarea-autosize";
 import { AiOutlineSend } from "react-icons/ai";
 
-import { ProfileImg } from "shared-ui/common/atom/profileImg";
+import { ProfileImg } from "shared-ui/pages/common/atom/profileImg";
 import { useUserInfo } from "shared-api/auth";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useWriteComment } from "shared-api/community/useWriteComment";

@@ -2,7 +2,7 @@ import { FunctionComponent, useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
 
 import { useUserInfo } from "shared-api/auth";
-import { ProfileImg } from "shared-ui/common/atom/profileImg";
+import { ProfileImg } from "shared-ui/pages/common/atom/profileImg";
 
 import { MyProfileMenu } from "../myProfileMenu";
 import { profileWrapper, greetingMsg, downIconCSS } from "./style";

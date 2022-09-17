@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { CommentDislikeButton } from "shared-ui/common/atom/commentDislikeButton";
+import { CommentDislikeButton } from "shared-ui/pages/common/atom/commentDislikeButton";
 
 export default {
   title: "공용 컴포넌트/common/atom/CommentDislikeButton",

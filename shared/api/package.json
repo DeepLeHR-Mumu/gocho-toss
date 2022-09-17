@@ -1,6 +1,7 @@
 {
   "name": "shared-api",
   "version": "0.0.0",
+  "private": true,
   "license": "MIT",
   "main": "./index.tsx",
   "types": "./index.tsx",

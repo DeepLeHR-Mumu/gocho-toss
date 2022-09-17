@@ -13,7 +13,7 @@ import { companyCommentArrKeyObj } from "shared-constant/queryKeyFactory/company
 import { jobArrKeyObj } from "shared-constant/queryKeyFactory/job/jobArrKeyObj";
 import { communityPostingArrKeyObj } from "shared-constant/queryKeyFactory/community/postingArrKeyObj";
 import { tipArrKeyObj } from "shared-constant/queryKeyFactory/tip/arrKeyObj";
-import { HeadingH1 } from "shared-ui/common/seo/headingH1";
+import { HeadingH1 } from "shared-ui/pages/common/seo/headingH1";
 import { JobPart } from "./indexComponent/part/jobPart";
 import { CommunityPostingPart } from "./indexComponent/part/communityPostingPart";
 import { TopBannerPart } from "./indexComponent/part/topBannerPart";

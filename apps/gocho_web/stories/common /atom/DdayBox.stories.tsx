@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { DdayBox } from "shared-ui/common/atom/dDayBox";
+import { DdayBox } from "shared-ui/pages/common/atom/dDayBox";
 
 export default {
   title: "공용 컴포넌트/common/atom/DdayBox",

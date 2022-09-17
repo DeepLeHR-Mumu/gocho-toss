@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { ProfileImg } from "shared-ui/common/atom/profileImg";
+import { ProfileImg } from "shared-ui/pages/common/atom/profileImg";
 
 export default {
   title: "공용 컴포넌트/common/atom/ProfileImg",
