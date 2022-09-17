@@ -3,7 +3,7 @@
 echo "precommit entered"
 cd shared/ui && tsc --noEmit
 echo "shared ui 컴포넌트 타입 검사 완료"
-cd ../shared/api && tsc --noEmit
+cd ../api && tsc --noEmit
 echo "shared api 컴포넌트 타입 검사 완료"
 cd ../apps/gocho_web && tsc --noEmit
 echo "PC 버전 타입 검사 완료"
