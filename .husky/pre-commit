@@ -2,10 +2,11 @@
 . "$(dirname -- "$0")/_/husky.sh"
 echo "precommit entered"
 cd shared/ui && tsc --noEmit
-echo "shared 공통 컴포넌트 타입 검사 완료"
+echo "shared ui 컴포넌트 타입 검사 완료"
+cd ../shared/api && tsc --noEmit
+echo "shared api 컴포넌트 타입 검사 완료"
 cd ../apps/gocho_web && tsc --noEmit
 echo "PC 버전 타입 검사 완료"
-
 cd ../gocho_mobile && tsc --noEmit
 echo "모바일 버전 타입 검사 완료"
 
