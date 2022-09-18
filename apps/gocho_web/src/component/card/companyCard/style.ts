@@ -1,6 +1,15 @@
 import { css } from "@emotion/react";
 import { COLORS } from "@style/constant";
 
+export const companyCardSkeleton = css`
+  overflow: hidden;
+  width: 32%;
+  height: 11.5rem;
+  border-radius: 1.5rem;
+  margin-bottom: 1rem;
+  background-color: ${COLORS.GRAY100};
+`;
+
 export const cardWrapper = css`
   width: 32%;
   margin-bottom: 1.5%;
@@ -9,6 +18,7 @@ export const cardWrapper = css`
   border: 2px solid ${COLORS.GRAY90};
   padding: 1.75rem;
   position: relative;
+  background-color: ${COLORS.GRAY100};
 
   :nth-of-type(3n) {
     margin-right: 0;

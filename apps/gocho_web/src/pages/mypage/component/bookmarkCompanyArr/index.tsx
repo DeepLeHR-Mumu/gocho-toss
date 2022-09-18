@@ -1,10 +1,9 @@
 import { FunctionComponent } from "react";
 
-import { SkeletonBox } from "@component/common/atom/skeletonBox";
+import { CompanyCard } from "@component/card/companyCard";
 
 import { useUserInfo } from "@api/auth";
 import { useUserCompanyBookmarkArr } from "@api/bookmark";
-import { CompanyCard } from "@pages/mypage/part/bookmarkPart/companyCard";
 
 import { cardListContainer, skeletonContainer, descCSS } from "./style";
 
@@ -22,7 +21,7 @@ export const BookmarkCompanyArr: FunctionComponent = () => {
   if (!userInfoData || !userCompanyBookmarkArrData || isError || isLoading) {
     return (
       <div css={skeletonContainer}>
-        <SkeletonBox />
+        return <CompanyCard isSkeleton />;
       </div>
     );
   }
@@ -33,7 +32,7 @@ export const BookmarkCompanyArr: FunctionComponent = () => {
         <p css={descCSS}>{userInfoData.nickname} 님! 북마크를 이용하시면 기업공고가 더 정교해져요 😳</p>
       )}
       {userCompanyBookmarkArrData.map((companyData) => {
-        return <CompanyCard key={companyData.id} companyData={companyData} />;
+        return <CompanyCard key={companyData.id} isBookmarked companyData={companyData} />;
       })}
     </div>
   );

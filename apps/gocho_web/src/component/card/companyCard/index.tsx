@@ -1,10 +1,11 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import Image from "next/image";
 
-import { CDN_URL } from "@constant/externalURL";
-
-import { CompanyCardProps } from "./type";
+import { SkeletonBox } from "@component/common/atom/skeletonBox";
+import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
+import { CompanyCardProps, CompanyCardSkeleton } from "./type";
 import {
+  companyCardSkeleton,
   cardWrapper,
   bookmarkButtonBox,
   bookmarkButtonWrapper,
@@ -16,19 +17,20 @@ import {
   companyLogoBox,
 } from "./style";
 
-export const CompanyCard: FunctionComponent<CompanyCardProps> = ({ companyData }) => {
-  let size = "";
-  let sector = "";
+export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkeleton> = ({ companyData, isSkeleton }) => {
+  const [imageSrc, setImageSrc] = useState(companyData?.logoUrl as string);
 
-  companyData.info.forEach((info) => {
-    const title = info.split(":")[0].trim();
-    const desc = info.split(":")[1].trim();
-    if (title === "기업규모") {
-      size = desc;
-    } else if (title === "업종") {
-      sector = desc;
-    }
-  });
+  const size = "";
+  const sector = "";
+
+  if (isSkeleton || companyData === undefined) {
+    return (
+      <div css={companyCardSkeleton}>
+        <SkeletonBox />
+      </div>
+    );
+  }
+
   return (
     <article css={cardWrapper}>
       <div css={bookmarkButtonWrapper}>
@@ -46,8 +48,11 @@ export const CompanyCard: FunctionComponent<CompanyCardProps> = ({ companyData }
         <Image
           layout="fill"
           objectFit="contain"
-          src={`${CDN_URL}/company_images/${companyData.id}/logo.png`}
-          alt={`${companyData.name} 기업 로고`}
+          src={imageSrc}
+          alt=""
+          onError={() => {
+            return setImageSrc(defaultCompanyLogo);
+          }}
         />
       </div>
     </article>

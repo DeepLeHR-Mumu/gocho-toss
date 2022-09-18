@@ -6,6 +6,7 @@ export const headerWrapper = css`
   border-bottom: 1px solid ${COLORS.GRAY70};
   height: 6rem;
   display: flex;
+  z-index: 10;
 `;
 
 export const headerContainer = css`
@@ -73,7 +74,7 @@ export const subMenuToggleWrapper: subMenuToggleWrapperDef = (ishover) => {
   return css`
     position: absolute;
     z-index: 10;
-    top: 2.8rem;
+    top: 2.5rem;
     left: -1rem;
     padding: 0.5rem 1rem;
     background-color: ${COLORS.GRAY100};
@@ -84,3 +85,47 @@ export const subMenuToggleWrapper: subMenuToggleWrapperDef = (ishover) => {
     display: ${ishover ? "block" : "none"};
   `;
 };
+
+export const searchIcon = css`
+  color: ${COLORS.BLUE_SECOND30};
+`;
+
+export const unifiedSearchWrapperOn = css`
+  position: absolute;
+  top: 6.1rem;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 60%;
+  transition: all 0.2s ease;
+`;
+
+export const unifiedSearchWrapperOff = css`
+  position: absolute;
+  top: 4rem;
+  opacity: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 60%;
+  transition: all 0.2s ease;
+`;
+
+export const unifiedSearch = css`
+  width: 100%;
+  height: 2.5rem;
+  font-weight: 400;
+  font-size: 0.875rem;
+  background-color: ${COLORS.GRAY100};
+  padding: 0.5rem 2rem;
+  border-radius: 1.5rem;
+  border: 2px solid ${COLORS.BLUE_SECOND40};
+  box-shadow: 0 2px 8px 0 #b4b4b440;
+`;
+
+export const searchButton = css`
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translate(0, -50%);
+  color: ${COLORS.GRAY40};
+  width: 1.25rem;
+`;

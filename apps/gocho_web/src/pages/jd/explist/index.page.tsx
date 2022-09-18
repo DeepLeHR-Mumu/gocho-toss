@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useCompanyArr } from "@api/company";
 import { Layout } from "@component/layout";
 import { Pagination } from "@pages/jd/component/pagination";
-import { BottomPagination } from "@pages/jd/component/bottomPagination";
+import { BottomPagination } from "@component/common/molecule/bottomPagination";
 
 import { ExpJobCardList } from "./component/expJobCardList";
 import { setJobOrderButtonArr } from "./constant";

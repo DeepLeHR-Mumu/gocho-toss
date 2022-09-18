@@ -6,10 +6,10 @@ import Image from "next/image";
 import highTrue from "@public/images/global/common/go_color.svg";
 import collegeTrue from "@public/images/global/common/cho_color.svg";
 
-import { Layout } from "@component/layout";
 import { useJobArr } from "@api/job";
+import { Layout } from "@component/layout";
+import { BottomPagination } from "@component/common/molecule/bottomPagination";
 import { Pagination } from "@pages/jd/component/pagination";
-import { BottomPagination } from "@pages/jd/component/bottomPagination";
 
 import { JobCardList } from "../../component/jobCardList";
 import { Filter } from "../../component/filter";
