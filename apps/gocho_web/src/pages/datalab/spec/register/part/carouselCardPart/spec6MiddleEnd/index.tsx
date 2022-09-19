@@ -40,7 +40,7 @@ export const Spec6MiddleEnd: FunctionComponent<Spec6MiddleEndProps> = ({
 
         if (errorCode === 401) {
           queryClient.invalidateQueries(userInfoKeyObj.userInfo);
-          setCurrentModal("loginModal");
+          setCurrentModal("loginModal", { button: "home" });
         }
       },
     });

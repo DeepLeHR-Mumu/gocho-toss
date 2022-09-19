@@ -23,10 +23,9 @@ const Register: NextPage = () => {
     resetCurrentProgress();
   }, [resetCurrentProgress]);
 
-  // LATER : 에러코드 추가 예정
   useEffect(() => {
     if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
-      setCurrentModal("loginModal");
+      setCurrentModal("loginModal", { button: "home" });
     }
     if (currentModal?.activatedModal === "signUpModal") {
       setCurrentModal("signUpModal");

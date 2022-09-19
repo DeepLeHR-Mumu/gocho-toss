@@ -1,22 +1,14 @@
 import { useState } from "react";
-import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query";
-import { RecoilRoot } from "recoil";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import axios from "axios";
 import type { AppProps } from "next/app";
-import { Global } from "@emotion/react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { RecoilRoot } from "recoil";
+import axios from "axios";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Global } from "@emotion/react";
 
-import { globalStyles } from "@style/globalStyle";
-import { Header } from "@component/global/header";
-import { Footer } from "@component/global/footer";
-import { Aside } from "@component/global/aside";
-import { ModalPlaceholder } from "@component/modal/modalPlaceHolder";
-import { ToastPlaceholder } from "@component/toast/toastPlaceholder";
-
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { globalStyles } from "@style/globalStyles";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -49,12 +41,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <Global styles={globalStyles} />
-          <ModalPlaceholder />
-          <ToastPlaceholder />
-          <Header />
           <Component {...pageProps} />
-          <Aside />
-          <Footer />
           <ReactQueryDevtools initialIsOpen={false} />
         </Hydrate>
       </QueryClientProvider>

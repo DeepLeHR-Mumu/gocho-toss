@@ -44,7 +44,7 @@ export const ListPart: FunctionComponent = () => {
   };
 
   const openWritePostingModal = () => {
-    if (userError) return setCurrentModal("loginModal");
+    if (userError) return setCurrentModal("loginModal", { button: "home" });
     return setCurrentModal("writePostingModal");
   };
 
