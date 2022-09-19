@@ -1,4 +1,3 @@
-// NOTMYFAULT : 훗날 CDN으로 빼기 + d-day 계산
 import DUMMY_IMAGE from "@public/images/dummy/carousel_dummy_image.jpg";
 
 export const carouselArr = [
