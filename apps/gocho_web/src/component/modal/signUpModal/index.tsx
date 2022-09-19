@@ -6,9 +6,9 @@ import { ModalComponent } from "@component/modal/modalBackground";
 import { useDoSignUp, useUserInfo } from "shared-api/auth";
 import { useModal } from "@recoil/hook/modal";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
-import { AccountInput } from "shared-ui/pages/common/atom/accountInput";
+import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { EMAIL_ERROR_MESSAGE, NICKNAME_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant/errorMessage";
-import { NormalButton } from "shared-ui/pages/common/atom/button";
+import { NormalButton } from "shared-ui/common/atom/button";
 import { CloseButton } from "@component/common/atom/closeButton";
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 

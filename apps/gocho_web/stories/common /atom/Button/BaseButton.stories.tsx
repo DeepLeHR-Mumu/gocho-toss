@@ -4,7 +4,7 @@ import { FiCheck } from "react-icons/fi";
 
 import { COLORS } from "shared-style/color";
 
-import { BaseButton } from "shared-ui/pages/common/atom/button/baseButton";
+import { BaseButton } from "shared-ui/common/atom/button/baseButton";
 
 export default {
   title: "공용 컴포넌트/common/atom/BaseButton",

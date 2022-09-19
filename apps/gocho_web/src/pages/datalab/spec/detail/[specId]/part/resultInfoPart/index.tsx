@@ -3,7 +3,7 @@ import { FiSmile, FiMeh, FiMessageSquare } from "react-icons/fi";
 import { BsChevronLeft } from "react-icons/bs";
 
 import { StarEvaluation } from "@component/common/molecule/starEvaluation";
-import { LinkButton } from "shared-ui/pages/common/atom/button";
+import { LinkButton } from "shared-ui/common/atom/button";
 import { SPEC_URL } from "@constant/internalURL";
 import { COLORS } from "shared-style/color";
 

@@ -5,7 +5,7 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 
 import { Profile } from "@component/common/molecule/profile";
 import { UnAuthMenu } from "@component/common/molecule/unAuthMenu";
-import { DdayBox } from "shared-ui/pages/common/atom/dDayBox";
+import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { Layout } from "@component/layout";
 import { JOBS_LIST_URL } from "@constant/internalURL";
 import { useUserInfo } from "shared-api/auth";

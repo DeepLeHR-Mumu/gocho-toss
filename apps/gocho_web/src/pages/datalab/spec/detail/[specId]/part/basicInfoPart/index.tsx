@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { BsStars } from "react-icons/bs";
 
-import { ProfileImg } from "shared-ui/pages/common/atom/profileImg";
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { BasicInfoPartProps } from "./type";
 
 import {

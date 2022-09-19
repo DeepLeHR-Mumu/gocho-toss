@@ -12,7 +12,7 @@ import highFalse from "@public/images/global/common/go_mono.svg";
 import collegeTrue from "@public/images/global/common/cho_color.svg";
 import collegeFalse from "@public/images/global/common/cho_mono.svg";
 import { SkeletonBox } from "@component/common/atom/skeletonBox";
-import { DdayBox } from "shared-ui/pages/common/atom/dDayBox";
+import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { JOBS_DETAIL_URL } from "@constant/internalURL";
 import { dateConverter } from "shared-util/date";
 

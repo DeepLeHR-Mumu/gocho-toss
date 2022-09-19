@@ -4,7 +4,7 @@ import { FiCheck } from "react-icons/fi";
 
 import { COLORS } from "shared-style/color";
 
-import { LinkButton } from "shared-ui/pages/common/atom/button/linkButton";
+import { LinkButton } from "shared-ui/common/atom/button/linkButton";
 
 export default {
   title: "공용 컴포넌트/common/atom/LinkButton",

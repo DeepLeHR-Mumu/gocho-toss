@@ -7,7 +7,7 @@ import { ModalComponent } from "@component/modal/modalBackground";
 import { useModal } from "@recoil/hook/modal";
 import { useUserInfo } from "shared-api/auth";
 import { useWritePosting } from "shared-api/community/useWritePosting";
-import { ProfileImg } from "shared-ui/pages/common/atom/profileImg";
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { CloseButton } from "@component/common/atom/closeButton";
 import { communityPostingArrKeyObj } from "shared-constant/queryKeyFactory/community/postingArrKeyObj";
 

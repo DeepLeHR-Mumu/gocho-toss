@@ -3,7 +3,7 @@ import { AiOutlineLike, AiOutlineMessage, AiOutlineEye } from "react-icons/ai";
 
 // import { useModal } from "@recoil/hook/modal";
 import { dateConverter } from "shared-util/date";
-import { ProfileImg } from "shared-ui/pages/common/atom/profileImg";
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { SkeletonBox } from "@component/common/atom/skeletonBox";
 
 import {

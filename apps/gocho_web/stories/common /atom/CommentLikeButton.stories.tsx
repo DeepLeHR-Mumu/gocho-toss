@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { CommentLikeButton } from "shared-ui/pages/common/atom/commentLikeButton";
+import { CommentLikeButton } from "shared-ui/common/atom/commentLikeButton";
 
 export default {
   title: "공용 컴포넌트/common/atom/CommentLikeButton",
