@@ -44,6 +44,10 @@ cypress/screenshots
 # turbo
 .turbo
 
+#playwrite
+/test-results/
+/playwright-report/
+/playwright/.cache/
 # vscode
 .vscode
 

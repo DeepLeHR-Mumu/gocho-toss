@@ -14,7 +14,9 @@
     "build-storybook": "build-storybook",
     "prepare": "husky install",
     "lint": "turbo run lint",
-    "lint-fix": "eslint \"**/*.{ts,tsx}\" --ext .ts,.tsx --fix"
+    "lint-fix": "eslint \"**/*.{ts,tsx}\" --ext .ts,.tsx --fix",
+    "e2e": "pnpx playwright test --trace on",
+    "e2e:report": "pnpx playwright show-report"
   },
   "lint-staged": {
     "apps/**/src/pages/**/*.{ts,tsx}": [
@@ -28,7 +30,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@playwright/test": "^1.25.1",
     "@babel/core": "^7.18.13",
+    "@types/node": "18.7.13",
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-essentials": "^6.5.10",
     "@storybook/addon-interactions": "^6.5.10",

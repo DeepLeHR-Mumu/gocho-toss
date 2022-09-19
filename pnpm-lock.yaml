@@ -5,6 +5,7 @@ importers:
   .:
     specifiers:
       '@babel/core': ^7.18.13
+      '@playwright/test': ^1.25.1
       '@storybook/addon-actions': ^6.5.10
       '@storybook/addon-essentials': ^6.5.10
       '@storybook/addon-interactions': ^6.5.10
@@ -13,6 +14,7 @@ importers:
       '@storybook/manager-webpack5': ^6.5.10
       '@storybook/react': ^6.5.10
       '@storybook/testing-library': ^0.0.13
+      '@types/node': 18.7.13
       babel-loader: ^8.2.5
       eslint-config-deeple: workspace:^1.0.0
       husky: ^8.0.0
@@ -27,14 +29,16 @@ importers:
       typescript: 4.7.2
     devDependencies:
       '@babel/core': 7.19.1
+      '@playwright/test': 1.25.2
       '@storybook/addon-actions': 6.5.12_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/addon-essentials': 6.5.12_hmn6dpyz5jsqa4i6xcwdei5ula
-      '@storybook/addon-interactions': 6.5.12_zhhpsva3z5bogbpqgwmco3ntli
+      '@storybook/addon-interactions': 6.5.12_k26rfrdk2uh2ao3d3jcmn6wejm
       '@storybook/addon-links': 6.5.12_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/builder-webpack5': 6.5.12_k26rfrdk2uh2ao3d3jcmn6wejm
       '@storybook/manager-webpack5': 6.5.12_k26rfrdk2uh2ao3d3jcmn6wejm
       '@storybook/react': 6.5.12_gqggrcjydhwzdw7gkdyr5xn2eq
       '@storybook/testing-library': 0.0.13_sfoxds7t5ydpegc3knd667wn6m
+      '@types/node': 18.7.13
       babel-loader: 8.2.5_rhsdbzevgb5tizdhlla5jsbgyu
       husky: 8.0.1
       turbo: 1.4.6
@@ -1833,7 +1837,7 @@ packages:
     dev: true
     optional: true
 
-  /@design-systems/utils/2.12.0_qbczzgerydrfkz4fnz3mzraodu:
+  /@design-systems/utils/2.12.0_sfoxds7t5ydpegc3knd667wn6m:
     resolution: {integrity: sha512-Y/d2Zzr+JJfN6u1gbuBUb1ufBuLMJJRZQk+dRmw8GaTpqKx5uf7cGUYGTwN02dIb3I+Tf+cW8jcGBTRiFxdYFg==}
     peerDependencies:
       '@types/react': '*'
@@ -1841,7 +1845,6 @@ packages:
       react-dom: '>= 16.8.6'
     dependencies:
       '@babel/runtime': 7.19.0
-      '@types/react': 18.0.20
       clsx: 1.1.0
       focus-lock: 0.8.1
       react: 17.0.2
@@ -1865,15 +1868,15 @@ packages:
       react-merge-refs: 1.1.0
     dev: true
 
-  /@devtools-ds/object-inspector/1.2.0_qbczzgerydrfkz4fnz3mzraodu:
+  /@devtools-ds/object-inspector/1.2.0_sfoxds7t5ydpegc3knd667wn6m:
     resolution: {integrity: sha512-VztcwqVwScSvYdvJVZBJYsVO/2Pew3JPpFV3T9fuCHQLlHcLYOV3aU/kBS2ScuE2O1JN0ZbobLqFLa3vQF54Fw==}
     peerDependencies:
       react: '>= 16.8.6'
     dependencies:
       '@babel/runtime': 7.7.2
       '@devtools-ds/object-parser': 1.2.0
-      '@devtools-ds/themes': 1.2.0_qbczzgerydrfkz4fnz3mzraodu
-      '@devtools-ds/tree': 1.2.0_qbczzgerydrfkz4fnz3mzraodu
+      '@devtools-ds/themes': 1.2.0_sfoxds7t5ydpegc3knd667wn6m
+      '@devtools-ds/tree': 1.2.0_sfoxds7t5ydpegc3knd667wn6m
       clsx: 1.1.0
       react: 17.0.2
     transitivePeerDependencies:
@@ -1903,13 +1906,13 @@ packages:
       '@babel/runtime': 7.5.5
     dev: true
 
-  /@devtools-ds/themes/1.2.0_qbczzgerydrfkz4fnz3mzraodu:
+  /@devtools-ds/themes/1.2.0_sfoxds7t5ydpegc3knd667wn6m:
     resolution: {integrity: sha512-LimEITorE6yWZWWuMc6OiBfLQgPrQqWbyMEmfRUDPa3PHXoAY4SpDxczfg31fgyRDUNWnZhjaJH5bBbu8VEbIw==}
     peerDependencies:
       react: '>= 16.8.6'
     dependencies:
       '@babel/runtime': 7.5.5
-      '@design-systems/utils': 2.12.0_qbczzgerydrfkz4fnz3mzraodu
+      '@design-systems/utils': 2.12.0_sfoxds7t5ydpegc3knd667wn6m
       clsx: 1.1.0
       react: 17.0.2
     transitivePeerDependencies:
@@ -1931,13 +1934,13 @@ packages:
       - react-dom
     dev: true
 
-  /@devtools-ds/tree/1.2.0_qbczzgerydrfkz4fnz3mzraodu:
+  /@devtools-ds/tree/1.2.0_sfoxds7t5ydpegc3knd667wn6m:
     resolution: {integrity: sha512-hC4g4ocuo2eg7jsnzKdauxH0sDQiPW3KSM2+uK3kRgcmr9PzpBD5Kob+Y/WFSVKswFleftOGKL4BQLuRv0sPxA==}
     peerDependencies:
       react: '>= 16.8.6'
     dependencies:
       '@babel/runtime': 7.7.2
-      '@devtools-ds/themes': 1.2.0_qbczzgerydrfkz4fnz3mzraodu
+      '@devtools-ds/themes': 1.2.0_sfoxds7t5ydpegc3knd667wn6m
       clsx: 1.1.0
       react: 17.0.2
     transitivePeerDependencies:
@@ -2453,6 +2456,15 @@ packages:
       tslib: 2.4.0
     dev: false
 
+  /@playwright/test/1.25.2:
+    resolution: {integrity: sha512-6qPznIR4Fw02OMbqXUPMG6bFFg1hDVNEdihKy0t9K0dmRbus1DyP5Q5XFQhGwEHQkLG5hrSfBuu9CW/foqhQHQ==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dependencies:
+      '@types/node': 18.7.18
+      playwright-core: 1.25.2
+    dev: true
+
   /@pmmmwh/react-refresh-webpack-plugin/0.5.7_metx475lqcp4j5c75za4zf7xbi:
     resolution: {integrity: sha512-bcKCAzF0DV2IIROp9ZHkRJa6O4jy7NlnHdWL3GmcUxYWNjLXkK5kfELELwEfSP5hXPfVL/qOGMAROuMQb9GG8Q==}
     engines: {node: '>= 10.13'}
@@ -2734,7 +2746,7 @@ packages:
       - webpack-command
     dev: true
 
-  /@storybook/addon-interactions/6.5.12_lpddxej3z5bxm425elitzlwdva:
+  /@storybook/addon-interactions/6.5.12_k26rfrdk2uh2ao3d3jcmn6wejm:
     resolution: {integrity: sha512-wAkKqUX57qZMzgykMIltjDrFfA0II+pKz2SchK4hXHK3/2rtOe+Ah0Sj5nTQo++Ee5oC1PVZWIq/Y1kufCTBJQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -2745,7 +2757,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      '@devtools-ds/object-inspector': 1.2.0_x6vcehmdzjj6pm7ndhhuigqb3i
+      '@devtools-ds/object-inspector': 1.2.0_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/addons': 6.5.12_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/api': 6.5.12_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/client-logger': 6.5.12
@@ -2772,7 +2784,7 @@ packages:
       - webpack-command
     dev: true
 
-  /@storybook/addon-interactions/6.5.12_zhhpsva3z5bogbpqgwmco3ntli:
+  /@storybook/addon-interactions/6.5.12_lpddxej3z5bxm425elitzlwdva:
     resolution: {integrity: sha512-wAkKqUX57qZMzgykMIltjDrFfA0II+pKz2SchK4hXHK3/2rtOe+Ah0Sj5nTQo++Ee5oC1PVZWIq/Y1kufCTBJQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -2783,7 +2795,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      '@devtools-ds/object-inspector': 1.2.0_qbczzgerydrfkz4fnz3mzraodu
+      '@devtools-ds/object-inspector': 1.2.0_x6vcehmdzjj6pm7ndhhuigqb3i
       '@storybook/addons': 6.5.12_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/api': 6.5.12_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/client-logger': 6.5.12
@@ -4074,14 +4086,14 @@ packages:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 16.11.59
+      '@types/node': 18.7.18
     dev: true
 
   /@types/glob/8.0.0:
     resolution: {integrity: sha512-l6NQsDDyQUVeoTynNpC9uRvCUint/gSUXQA2euwmTuWGvPY5LSDUu6tkCtJB2SvGQlJQzLaKqcGZP4//7EDveA==}
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 16.11.59
+      '@types/node': 18.7.18
     dev: true
 
   /@types/graceful-fs/4.1.5:
@@ -4156,7 +4168,7 @@ packages:
   /@types/node-fetch/2.6.2:
     resolution: {integrity: sha512-DHqhlq5jeESLy19TYhLakJ07kNumXWjcDdxXsLUMJZ6ue8VZJj4kLPQVE/2mdHh3xZziNF1xppu5lwmS53HR+A==}
     dependencies:
-      '@types/node': 16.11.59
+      '@types/node': 18.7.18
       form-data: 3.0.1
     dev: true
 
@@ -4259,7 +4271,7 @@ packages:
   /@types/webpack-sources/3.2.0:
     resolution: {integrity: sha512-Ft7YH3lEVRQ6ls8k4Ff1oB4jN6oy/XmU6tQISKdhfh+1mR+viZFphS6WL0IrtDOzvefmJg5a0s7ZQoRXwqTEFg==}
     dependencies:
-      '@types/node': 16.11.59
+      '@types/node': 18.7.18
       '@types/source-list-map': 0.1.2
       source-map: 0.7.4
     dev: true
@@ -4267,7 +4279,7 @@ packages:
   /@types/webpack/4.41.32:
     resolution: {integrity: sha512-cb+0ioil/7oz5//7tZUSwbrSAN/NWHrQylz5cW8G0dWTcF/g+/dSdMlKVZspBYuMAN1+WnwHrkxiRrLcwd0Heg==}
     dependencies:
-      '@types/node': 16.11.59
+      '@types/node': 18.7.18
       '@types/tapable': 1.0.8
       '@types/uglify-js': 3.17.0
       '@types/webpack-sources': 3.2.0
@@ -10588,6 +10600,12 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       find-up: 5.0.0
+    dev: true
+
+  /playwright-core/1.25.2:
+    resolution: {integrity: sha512-0yTbUE9lIddkEpLHL3u8PoCL+pWiZtj5A/j3U7YoNjcmKKDGBnCrgHJMzwd2J5vy6l28q4ki3JIuz7McLHhl1A==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: true
 
   /pnp-webpack-plugin/1.6.4_typescript@4.7.2:
