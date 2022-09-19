@@ -10,7 +10,7 @@ import { CompanyListPartProps } from "./type";
 
 export const CompanyPreviewPart: FunctionComponent<CompanyListPartProps> = ({ companyDataArr, count, isLoading }) => {
   const { data: userData } = useUserInfo();
-  const { data: userCompanyBookmarkArr } = useUserCompanyBookmarkArr({ userId: userData?.id });
+  const { data: userCompanyBookmarkArr, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
 
   if (!companyDataArr || isLoading) {
     return (
@@ -40,6 +40,8 @@ export const CompanyPreviewPart: FunctionComponent<CompanyListPartProps> = ({ co
           <CompanyCard
             companyData={companyData}
             isBookmarked={isBookmarked}
+            userId={userData?.id}
+            refetchUserBookmark={refetch}
             key={`UnifiedSearchCompanyCard${companyData.id}`}
           />
         );

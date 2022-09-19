@@ -5,7 +5,6 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
 
 import { useAddUserBookmark, useDeleteUserBookmark } from "@api/bookmark";
-
 import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
 import highTrue from "@public/images/global/common/go_color.svg";
 import highFalse from "@public/images/global/common/go_mono.svg";

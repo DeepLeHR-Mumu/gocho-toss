@@ -8,17 +8,10 @@ import { useUserCompanyBookmarkArr } from "@api/bookmark";
 import { cardListContainer, skeletonContainer, descCSS } from "./style";
 
 export const BookmarkCompanyArr: FunctionComponent = () => {
-  const { data: userInfoData } = useUserInfo();
+  const { data: userData } = useUserInfo();
+  const { data: userCompanyBookmarkArr, isLoading, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
 
-  const {
-    data: userCompanyBookmarkArrData,
-    isLoading,
-    isError,
-  } = useUserCompanyBookmarkArr({
-    userId: userInfoData?.id,
-  });
-
-  if (!userInfoData || !userCompanyBookmarkArrData || isError || isLoading) {
+  if (!userData || !userCompanyBookmarkArr || isLoading) {
     return (
       <div css={skeletonContainer}>
         return <CompanyCard isSkeleton />;
@@ -28,11 +21,19 @@ export const BookmarkCompanyArr: FunctionComponent = () => {
 
   return (
     <div css={cardListContainer}>
-      {userCompanyBookmarkArrData.length === 0 && (
-        <p css={descCSS}>{userInfoData.nickname} 님! 북마크를 이용하시면 기업공고가 더 정교해져요 😳</p>
+      {userCompanyBookmarkArr.length === 0 && (
+        <p css={descCSS}>{userData.nickname} 님! 북마크를 이용하시면 기업공고가 더 정교해져요 😳</p>
       )}
-      {userCompanyBookmarkArrData.map((companyData) => {
-        return <CompanyCard key={companyData.id} isBookmarked companyData={companyData} />;
+      {userCompanyBookmarkArr.map((companyData) => {
+        return (
+          <CompanyCard
+            key={companyData.id}
+            isBookmarked
+            userId={userData?.id}
+            refetchUserBookmark={refetch}
+            companyData={companyData}
+          />
+        );
       })}
     </div>
   );
