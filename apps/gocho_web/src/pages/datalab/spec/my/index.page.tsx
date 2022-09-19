@@ -24,10 +24,9 @@ export const MySpecHistory: NextPage = () => {
     id: userInfoData?.id,
   });
 
-  // LATER : 모달 홈으로 가기 부분 props로 변경하기?
   useEffect(() => {
     if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
-      setCurrentModal("loginModal");
+      setCurrentModal("loginModal", { button: "home" });
     }
     return () => {
       closeModal();
