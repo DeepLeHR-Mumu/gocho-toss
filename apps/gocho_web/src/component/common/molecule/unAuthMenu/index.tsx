@@ -8,7 +8,7 @@ export const UnAuthMenu: FunctionComponent = () => {
   const { setCurrentModal } = useModal();
 
   const openLoginModal = () => {
-    setCurrentModal("loginModal");
+    setCurrentModal("loginModal", { button: "close" });
   };
 
   const openSignUpModal = () => {

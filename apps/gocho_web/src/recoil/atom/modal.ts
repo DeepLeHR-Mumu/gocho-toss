@@ -51,12 +51,15 @@ export interface factoryObjDef {
   factoryName: string;
 }
 
-export type contentModalDef = postingObjDef | tipObjDef | changePostingObjDef | factoryObjDef;
+export interface loginObjDef {
+  button: "home" | "close";
+}
 
-export type contentModalNameDef = "postingModal" | "tipModal" | "changePostingModal" | "factoryModal";
+export type contentModalDef = postingObjDef | tipObjDef | changePostingObjDef | factoryObjDef | loginObjDef;
+
+export type contentModalNameDef = "postingModal" | "tipModal" | "changePostingModal" | "factoryModal" | "loginModal";
 
 export type modalNameDef =
-  | "loginModal"
   | "logoutModal"
   | "signUpModal"
   | "writePostingModal"

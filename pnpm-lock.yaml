@@ -82,6 +82,7 @@ importers:
       next: 12.2.5
       react: 17.0.2
       react-dom: 17.0.2
+      recoil: ^0.7.5
       tsconfig-deeple: workspace:^0.0.0
       typescript: 4.7.2
     dependencies:
@@ -93,6 +94,7 @@ importers:
       next: 12.2.5_oj5jbg2ldmqbgxwq3dy6abnm5a
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
+      recoil: 0.7.5_sfoxds7t5ydpegc3knd667wn6m
       tsconfig-deeple: link:../../packages/tsconfig-deeple
     devDependencies:
       '@babel/core': 7.19.0

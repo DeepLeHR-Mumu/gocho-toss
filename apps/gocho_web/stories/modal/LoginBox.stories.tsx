@@ -41,4 +41,8 @@ const Template: ComponentStory<typeof LoginBox> = (args) => {
   );
 };
 
-export const 기본 = Template.bind({});
+export const 홈버튼 = Template.bind({});
+홈버튼.args = { button: "home" };
+
+export const 닫기버튼 = Template.bind({});
+닫기버튼.args = { button: "close" };
