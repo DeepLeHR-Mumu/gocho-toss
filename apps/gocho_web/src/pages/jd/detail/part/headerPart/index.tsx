@@ -2,6 +2,8 @@ import { FunctionComponent, useEffect, useState, useRef } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 import { SkeletonBox } from "@component/common/atom/skeletonBox";
+import { useUserInfo } from "shared-api/auth";
+import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { PositionCard } from "./component/positionCard";
 import { HeaderFix } from "./component/headerFix";
 import { Header } from "./component/header";
@@ -22,13 +24,13 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
   jobDetailData,
   currentPositionId,
   setCurrentPositionId,
-  isBookmarked,
-  userId,
-  refetchUserBookmark,
 }) => {
   const [defaultCardCount, setDefaultCardCount] = useState(5);
   const [isOverlap, setIsOverlap] = useState(true);
   const observeRef = useRef<HTMLDivElement | null>(null);
+
+  const { data: userData } = useUserInfo();
+  const { data: userJobBookmarkArr, refetch } = useUserJobBookmarkArr({ userId: userData?.id });
 
   useEffect(() => {
     if (setCurrentPositionId) {
@@ -76,21 +78,27 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
     );
   }
 
+  const isBookmarked = Boolean(
+    userJobBookmarkArr?.some((job) => {
+      return job.id === jobDetailData.id;
+    })
+  );
+
   return (
     <div>
       {isOverlap ? (
         <Header
           jobDetailData={jobDetailData}
           isBookmarked={isBookmarked}
-          userId={userId}
-          refetchUserBookmark={refetchUserBookmark}
+          userId={userData?.id}
+          refetchUserBookmark={refetch}
         />
       ) : (
         <HeaderFix
           jobDetailData={jobDetailData}
           isBookmarked={isBookmarked}
-          userId={userId}
-          refetchUserBookmark={refetchUserBookmark}
+          userId={userData?.id}
+          refetchUserBookmark={refetch}
         />
       )}
 

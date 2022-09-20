@@ -8,19 +8,28 @@ import { Layout } from "@component/layout";
 
 import { CompanyPassDataCard } from "./component/companyPassDataCard";
 import { dataLabCompanyArr, settings } from "./contant";
-import { dataLabWrapper, title, textPoint, dataLabContainer, companyLogoBox, dataLabDesc, linkButton } from "./style";
+import {
+  dataLabWrapper,
+  title,
+  textPoint,
+  dataLabContainer,
+  companyLogoBox,
+  dataLabDesc,
+  dataLabLayout,
+  linkButton,
+} from "./style";
 
 export const DataLabPart: FunctionComponent = () => {
   return (
     <section css={dataLabWrapper}>
       <Layout>
-        <div css={title}>
-          <h2>
-            합격한 인재들의 <span css={textPoint}>데이터 정보</span> 확인하기
-          </h2>
-        </div>
+        <p css={title}>
+          합격한 인재들의 <span css={textPoint}>데이터 정보</span> 확인하기 🙌🏻
+        </p>
+      </Layout>
 
-        <article css={dataLabContainer}>
+      <article css={dataLabContainer}>
+        <div css={dataLabLayout}>
           <Slider {...settings} css={companyLogoBox}>
             {dataLabCompanyArr.map((company) => {
               return (
@@ -36,8 +45,8 @@ export const DataLabPart: FunctionComponent = () => {
               데이터랩 바로가기 <BsChevronRight />
             </a>
           </Link>
-        </article>
-      </Layout>
+        </div>
+      </article>
     </section>
   );
 };

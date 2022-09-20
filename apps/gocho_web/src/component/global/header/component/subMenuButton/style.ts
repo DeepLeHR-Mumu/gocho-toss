@@ -5,9 +5,9 @@ import { COLORS } from "shared-style/color";
 
 export const subMenuButtonCSS = css`
   white-space: nowrap;
-  color: ${COLORS.GRAY10};
-  font-size: 1rem;
-  font-weight: 400;
+  color: ${COLORS.GRAY30};
+  font-size: 0.875rem;
+  font-weight: 500;
   line-height: 2.5;
 
   > a {

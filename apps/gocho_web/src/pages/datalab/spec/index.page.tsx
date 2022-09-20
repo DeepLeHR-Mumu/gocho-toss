@@ -3,9 +3,10 @@ import { NextPage } from "next";
 import axios from "axios";
 
 import { useUserInfo } from "shared-api/auth";
-import { useModal } from "@recoil/hook/modal";
 
+import { useModal } from "@recoil/hook/modal";
 import { Layout } from "@component/layout";
+
 import { AsideMenu } from "./component/asideMenu";
 import { CarouselPart } from "./part/carouselPart";
 import { ListPart } from "./part/listPart";

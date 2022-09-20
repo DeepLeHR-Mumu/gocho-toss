@@ -1,5 +1,3 @@
-import { QueryObserverResult } from "@tanstack/react-query";
-
 export interface JobCardListProps {
   jobDataArr:
     | {
@@ -21,9 +19,4 @@ export interface JobCardListProps {
     | undefined;
   isLoading: boolean;
   isError: boolean;
-  userJobBookmarkArr:
-    | { id: number; title: string; endTime: number; company: { id: number; name: string } }[]
-    | undefined;
-  userId: number | undefined;
-  refetchUserBookmark: () => Promise<QueryObserverResult>;
 }

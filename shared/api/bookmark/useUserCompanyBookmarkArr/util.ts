@@ -5,7 +5,7 @@ export const selector = (data: companyBookmarkObjDef[]) => {
     return {
       id: company.id,
       name: company.name,
-      info: company.info,
+      logoUrl: company.logo_url,
     };
   });
 };

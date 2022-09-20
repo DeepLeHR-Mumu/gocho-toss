@@ -1,5 +1,5 @@
-import { EvalDef, IndustryType, LanguageType, TaskType } from "../../spec/type/common";
 import { ImageType } from "shared-type/ui/imageType";
+import { EvalDef, IndustryType, LanguageType, TaskType } from "./common";
 
 export interface SpecDetailObjDef {
   id: number;

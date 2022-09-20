@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, SerializedStyles } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
 
@@ -8,38 +8,54 @@ export const slideWrapper = css`
   position: relative;
 `;
 
-export const slideInfo = css`
-  position: absolute;
-  width: 100%;
-  max-width: 24.375rem;
-  height: 100%;
-  background-color: ${COLORS.GRAY20};
-  padding: 3.4375rem;
-  right: 0;
-  top: 0;
-  z-index: 20;
-`;
+interface slideInfoDef {
+  (backgroundColor: string): SerializedStyles;
+}
 
-export const ddayCSS = css`
+export const slideInfo: slideInfoDef = (backgroundColor) => {
+  return css`
+    position: absolute;
+    width: 100%;
+    max-width: 24.375rem;
+    height: 100%;
+    background-color: ${backgroundColor};
+    padding: 3rem;
+    right: 0;
+    top: 0;
+    z-index: 20;
+  `;
+};
+
+export const topDescCSS = css`
   color: ${COLORS.GRAY100};
   font-size: 1.25rem;
-  margin-bottom: 1.25rem;
-  text-decoration: underline;
+  font-weight: 600;
+  margin-bottom: 1rem;
 `;
 
-export const infoTitle = css`
-  font-size: 2rem;
+export const middleDescCSS = css`
+  font-weight: 600;
+  display: flex;
+  align-items: center;
   color: ${COLORS.GRAY100};
-  font-weight: 500;
+  font-size: 1.25rem;
+  margin-bottom: 1.75rem;
+`;
+
+export const middleDescIconBox = css`
+  width: 2.1875rem;
+  height: 3.25rem;
+  position: relative;
+  margin-left: 0.5rem;
+`;
+
+export const titleCSS = css`
+  font-size: 1.5rem;
+  color: ${COLORS.GRAY100};
+  font-weight: 600;
   line-height: 1.5;
-  margin-bottom: 1.25rem;
   word-break: keep-all;
-`;
-
-export const dayTimeCSS = css`
-  font-size: 1rem;
-  color: ${COLORS.GRAY100};
-  white-space: nowrap;
+  margin-bottom: 1.5rem;
 `;
 
 export const dimmed = css`
@@ -48,7 +64,13 @@ export const dimmed = css`
   top: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(to right, #000, transparent);
-  opacity: 0.5;
+  background-image: linear-gradient(to right, #000 5%, transparent 95%);
+  opacity: 0.25;
   z-index: 10;
+`;
+
+export const lastDescCSS = css`
+  font-size: 1rem;
+  font-weight: 400;
+  color: ${COLORS.GRAY100};
 `;
