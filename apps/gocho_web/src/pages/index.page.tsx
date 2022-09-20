@@ -2,7 +2,7 @@ import { NextPage } from "next";
 // import { dehydrate, QueryClient } from "@tanstack/react-query";
 import Head from "next/head";
 
-import { HeadingH1 } from "shared-ui/common/atom/invisibleH1";
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 // import { getJobArr } from "@api/job/useJobArr";
 // import { getCompanyComment } from "@api/company/useCompanyCommentArr";
 // import { getCommunityPostingArr } from "@api/community/useCommunityPostingArr";
@@ -59,7 +59,7 @@ const Home: NextPage = () => {
       <Head>
         <title>고초대졸닷컴 - 생산/기능직 No.1 취업 플랫폼</title>
       </Head>
-      <HeadingH1 title="고초대졸닷컴 - 생산/기능직 No.1 취업 플랫폼" />
+      <InvisibleH1 title="고초대졸닷컴 - 생산/기능직 No.1 취업 플랫폼" />
       <MainCarouselPart />
       <DataLabPart />
       <JobPart />

@@ -1,3 +1,3 @@
-export interface HeadingH1Props {
+export interface InvisibleH1Props {
   title: string;
 }
