@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useRef } from "react";
 
-import { useInfiniteCommunityPostingArr } from "@api/community";
-import { dummyArrCreator } from "@util/dummyArrCreator";
+import { useInfiniteCommunityPostingArr } from "shared-api/community";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { useModal } from "@recoil/hook/modal";
 
 import { PostingCardListProps } from "./type";

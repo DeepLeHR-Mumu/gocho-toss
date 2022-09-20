@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import GDtitleSrc from "@public/images/global/deepLeLogo/smallMono.svg";
+import GDtitleSrc from "shared-image/global/deepLeLogo/smallMono.svg";
 import { MAIN_URL, PRIVACY_URL, TOS_URL } from "@constant/internalURL";
 import { Layout } from "@component/layout";
 

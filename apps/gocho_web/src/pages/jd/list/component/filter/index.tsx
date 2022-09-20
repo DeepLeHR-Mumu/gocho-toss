@@ -2,8 +2,8 @@ import { FunctionComponent, useState } from "react";
 import { FiRefreshCw, FiChevronDown, FiPlus, FiX, FiFilter } from "react-icons/fi";
 import { BsFolderSymlink } from "react-icons/bs";
 
-import { useUserFilter, useDoUserFilter } from "@api/filter";
-import { useUserInfo } from "@api/auth";
+import { useUserFilter, useDoUserFilter } from "shared-api/filter";
+import { useUserInfo } from "shared-api/auth";
 
 import { CheckBox } from "../checkbox";
 import { filterMenuListArr } from "./constant";

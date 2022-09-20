@@ -1,9 +1,9 @@
 import { FunctionComponent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { useUserInfo } from "@api/auth";
-import { usePatchUserInfo } from "@api/auth/usePatchUserInfo";
-import { ImageType } from "@type/ui/imageType";
+import { useUserInfo } from "shared-api/auth";
+import { usePatchUserInfo } from "shared-api/auth/usePatchUserInfo";
+import { ImageType } from "shared-type/ui/imageType";
 
 import { wrapper, imgContainer, confirmButton } from "./style";
 import { ImageRadioButton } from "./component/imageRadioButton";

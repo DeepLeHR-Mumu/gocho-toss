@@ -1,17 +1,12 @@
-name: Slack Notification Demo
+name: Vercel deploy Slack Notification
 # 액션 페이지에 나오는 이름
-
 on:
-  pull_request:
-    branches:
-      - "dev"
-  push:
-    branches:
-      - "dev"
-# workflow trigger하는 이벤트
-
+  check_run:
+    types: [completed]
+  deployment_status:
 jobs:
-  slack:
+  success_slack:
+    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: 8398a7/action-slack@v3
@@ -20,4 +15,13 @@ jobs:
           fields: eventName,author,commit,message,pullRequest
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        if: always() # Pick up events even if the job fails or is canceled.
+  fail_slack:
+    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'failure'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 8398a7/action-slack@v3
+        with:
+          status: "failure"
+          fields: eventName,author,commit,message,pullRequest
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

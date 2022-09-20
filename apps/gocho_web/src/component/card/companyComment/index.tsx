@@ -2,8 +2,8 @@ import { FunctionComponent, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { CDN_URL } from "@constant/externalURL";
-import { useCompanyCommentArr } from "@api/company";
+import { CDN_URL } from "shared-constant/externalURL";
+import { useCompanyCommentArr } from "shared-api/company";
 
 import { Comment } from "./component/comment";
 

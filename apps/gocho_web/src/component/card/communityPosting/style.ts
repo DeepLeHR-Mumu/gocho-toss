@@ -1,6 +1,6 @@
 import { css, SerializedStyles } from "@emotion/react";
 import { shorten } from "@style/common";
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const cardWrapper = css`
   border-radius: 1.875rem 1.875rem 1.875rem 0;

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const animationSlide = css`
   animation: moveNextAnimation 0.6s forwards ease-in-out;

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { NextPage } from "next";
 import axios from "axios";
 
-import { useUserInfo } from "@api/auth";
+import { useUserInfo } from "shared-api/auth";
 import { useModal } from "@recoil/hook/modal";
 
 import { Layout } from "@component/layout";
@@ -20,13 +20,10 @@ const MainList: NextPage = () => {
     if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
       setCurrentModal("loginModal", { button: "home" });
     }
-  }, [error, setCurrentModal]);
-
-  useEffect(() => {
     return () => {
       closeModal();
     };
-  }, [closeModal]);
+  }, [error, setCurrentModal, closeModal]);
 
   return (
     <main>

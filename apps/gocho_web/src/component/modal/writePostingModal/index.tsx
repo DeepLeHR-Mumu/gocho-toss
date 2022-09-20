@@ -5,11 +5,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import { ModalComponent } from "@component/modal/modalBackground";
 import { useModal } from "@recoil/hook/modal";
-import { useUserInfo } from "@api/auth";
-import { useWritePosting } from "@api/community/useWritePosting";
-import { ProfileImg } from "@component/common/atom/profileImg";
+import { useUserInfo } from "shared-api/auth";
+import { useWritePosting } from "shared-api/community/useWritePosting";
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { CloseButton } from "@component/common/atom/closeButton";
-import { communityPostingArrKeyObj } from "@constant/queryKeyFactory/community/postingArrKeyObj";
+import { communityPostingArrKeyObj } from "shared-constant/queryKeyFactory/community/postingArrKeyObj";
 
 import { setPostingTypeButtonArr, PostingFormValues } from "./type";
 import {

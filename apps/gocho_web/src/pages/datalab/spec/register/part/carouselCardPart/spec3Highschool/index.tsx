@@ -1,7 +1,6 @@
 import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { useSpecRegisterObj } from "@recoil/hook/spec";
 import {
   SpecCardTitle,
   MoveCardButtons,
@@ -25,10 +24,11 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
   } = useForm<PostSubmitValues>({
     mode: "onChange",
   });
-  const { setCurrentSpecObj } = useSpecRegisterObj();
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
-    setCurrentSpecObj({ ...formData, college: null });
+    const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
+    const currentSpecObj = Object.assign(prevSpecObj, { ...formData, college: null });
+    sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
     moveNextCard(35);
   };
 

@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { useTipArr } from "@api/tip/useTipArr";
+import { useTipArr } from "shared-api/tip/useTipArr";
 import { Layout } from "@component/layout";
 
 import { LatestCard } from "./component/latestCard";

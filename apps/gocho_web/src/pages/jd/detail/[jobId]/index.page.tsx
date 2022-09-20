@@ -2,12 +2,11 @@ import { NextPage } from "next";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-import { useJobDetail } from "@api/job";
+import { useJobDetail } from "shared-api/job";
 import { SkeletonBox } from "@component/common/atom/skeletonBox";
 import { Layout } from "@component/layout";
-
-import { useUserJobBookmarkArr } from "@api/bookmark";
-import { useUserInfo } from "@api/auth";
+import { useUserJobBookmarkArr } from "shared-api/bookmark";
+import { useUserInfo } from "shared-api/auth";
 import { PositionObjDef } from "./type";
 import {
   HeaderPart,

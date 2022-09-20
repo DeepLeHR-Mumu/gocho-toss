@@ -2,9 +2,9 @@ import { css } from "@emotion/react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { FiCheck } from "react-icons/fi";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
-import { LinkButton } from "@component/common/atom/button/linkButton";
+import { LinkButton } from "shared-ui/common/atom/button/linkButton";
 
 export default {
   title: "공용 컴포넌트/common/atom/LinkButton",

@@ -3,8 +3,8 @@ import { FunctionComponent } from "react";
 import { JobCard } from "@pages/mypage/part/bookmarkPart/jobCard";
 import { SkeletonBox } from "@component/common/atom/skeletonBox";
 
-import { useUserJobBookmarkArr } from "@api/bookmark";
-import { useUserInfo } from "@api/auth";
+import { useUserJobBookmarkArr } from "shared-api/bookmark";
+import { useUserInfo } from "shared-api/auth";
 
 import { cardListContainer, skeletonContainer, desc } from "./style";
 

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 // detail 공용 스타일
 
@@ -59,12 +59,16 @@ export const subTitle = css`
 export const desc = css`
   color: ${COLORS.GRAY10};
   font-size: 0.875rem;
-  line-height: 1.8;
+  line-height: 1.4;
   font-weight: 400;
   word-break: keep-all;
 `;
 
 export const restPoint = css`
+  margin-right: 0.25rem;
+  margin-bottom: 0.6rem;
+  word-break: keep-all;
+  display: inline-block;
   ::after {
     content: ", ";
   }

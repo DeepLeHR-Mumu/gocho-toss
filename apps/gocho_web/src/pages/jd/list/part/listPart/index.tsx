@@ -7,9 +7,9 @@ import highTrue from "@public/images/global/common/go_color.svg";
 import collegeTrue from "@public/images/global/common/cho_color.svg";
 
 import { Layout } from "@component/layout";
-import { useJobArr } from "@api/job";
-import { useUserInfo } from "@api/auth";
-import { useUserJobBookmarkArr } from "@api/bookmark";
+import { useJobArr } from "shared-api/job";
+import { useUserInfo } from "shared-api/auth";
+import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { Pagination } from "@pages/jd/component/pagination";
 import { BottomPagination } from "@pages/jd/component/bottomPagination";
 

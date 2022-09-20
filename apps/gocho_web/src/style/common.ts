@@ -1,6 +1,6 @@
 import { css, SerializedStyles } from "@emotion/react";
-import { PC_HOVER } from "@style/mediaQuery";
-import { COLORS } from "./constant";
+import { PC_HOVER } from "shared-style/mediaQuery";
+import { COLORS } from "shared-style/color";
 
 interface shortenDef {
   (line?: number): SerializedStyles;

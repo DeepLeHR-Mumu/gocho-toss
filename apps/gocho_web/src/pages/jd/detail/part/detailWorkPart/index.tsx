@@ -60,7 +60,11 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
             <h5 css={subTitle}>세부 직무</h5>
             <p css={desc}>
               {freshPosition.taskDetailArr.map((detail) => {
-                return <span key={`직무상세_${detail}`}>{detail}</span>;
+                return (
+                  <span css={restPoint} key={`직무상세_${detail}`}>
+                    {detail}
+                  </span>
+                );
               })}
             </p>
           </div>

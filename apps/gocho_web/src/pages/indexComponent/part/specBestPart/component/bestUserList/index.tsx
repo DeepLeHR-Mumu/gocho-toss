@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { ProfileImg } from "@component/common/atom/profileImg";
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
 import {
   bestUserArrWrapper,

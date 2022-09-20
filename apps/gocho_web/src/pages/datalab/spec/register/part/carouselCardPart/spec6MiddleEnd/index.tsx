@@ -2,10 +2,10 @@ import { FunctionComponent, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useModal } from "@recoil/hook/modal";
-import { useRegisterSpec } from "@api/spec";
-import { useSpecRegisterObj } from "@recoil/hook/spec";
-import { specArrKeyObj } from "@constant/queryKeyFactory/spec/arrKeyObj";
-import { userInfoKeyObj } from "@constant/queryKeyFactory/user/infoKeyObj";
+import { useIsSpecPageBlocking } from "@recoil/hook/spec";
+import { useRegisterSpec } from "shared-api/spec";
+import { specArrKeyObj } from "shared-constant/queryKeyFactory/spec/arrKeyObj";
+import { userInfoKeyObj } from "shared-constant/queryKeyFactory/user/infoKeyObj";
 
 import { SpecCardTitle } from "../common/component";
 import { Spec6MiddleEndProps } from "./type";
@@ -18,18 +18,21 @@ export const Spec6MiddleEnd: FunctionComponent<Spec6MiddleEndProps> = ({
   handleKeepWriteSpec,
 }) => {
   const [errorMsg, setErrorMsg] = useState<number | undefined>(undefined);
-  const { currentSpecObj, resetSpecRegisterObj } = useSpecRegisterObj();
   const { setCurrentModal } = useModal();
+  const { setIsBlocking } = useIsSpecPageBlocking();
 
   const { mutate } = useRegisterSpec();
   const queryClient = useQueryClient();
 
   const specSubmit = () => {
-    mutate(currentSpecObj, {
+    const userSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
+
+    mutate(userSpecObj, {
       onSuccess: () => {
-        queryClient.invalidateQueries(specArrKeyObj.all);
+        setIsBlocking(true);
         moveNextCard(100);
-        resetSpecRegisterObj();
+        queryClient.invalidateQueries(specArrKeyObj.all);
+        sessionStorage.removeItem("specObj");
       },
       onError: (error) => {
         const errorCode = error.response?.status;

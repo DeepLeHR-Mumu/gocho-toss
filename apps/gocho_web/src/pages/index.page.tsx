@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import Head from "next/head";
 
 import { CompanyCommentPart } from "@pages/indexComponent/part/companyCommentPart";
+import { HeadingH1 } from "shared-ui/common/atom/invisibleH1";
 // import { getJobArr } from "@api/job/useJobArr";
 // import { getCompanyComment } from "@api/company/useCompanyCommentArr";
 // import { getCommunityPostingArr } from "@api/community/useCommunityPostingArr";
@@ -59,6 +60,7 @@ const Home: NextPage = () => {
       <Head>
         <title>고초대졸닷컴 - 생산/기능직 No.1 취업 플랫폼</title>
       </Head>
+      <HeadingH1 title="고초대졸닷컴 - 생산/기능직 No.1 취업 플랫폼" />
       <TopBannerPart />
       <MainCarouselPart />
       <DataLabPart />

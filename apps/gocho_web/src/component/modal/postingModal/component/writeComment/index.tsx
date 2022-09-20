@@ -3,11 +3,11 @@ import { useQueryClient } from "@tanstack/react-query";
 import TextareaAutosize from "react-textarea-autosize";
 import { AiOutlineSend } from "react-icons/ai";
 
-import { ProfileImg } from "@component/common/atom/profileImg";
-import { useUserInfo } from "@api/auth";
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
+import { useUserInfo } from "shared-api/auth";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useWriteComment } from "@api/community/useWriteComment";
-import { communityCommentArrKeyObj } from "@constant/queryKeyFactory/community/commentArrKeyObj";
+import { useWriteComment } from "shared-api/community/useWriteComment";
+import { communityCommentArrKeyObj } from "shared-constant/queryKeyFactory/community/commentArrKeyObj";
 
 import { WriteCommentProps, CommentFormValues } from "./type";
 import { formCSS, userProfileImage, writeCommentBox, writeCommentWrapper, postCommentButton } from "./style";

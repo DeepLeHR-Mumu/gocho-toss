@@ -2,8 +2,8 @@ import { NextPage } from "next";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import { useMySpecHistory } from "@api/spec/useMySpecHistory";
-import { useUserInfo } from "@api/auth";
+import { useMySpecHistory } from "shared-api/spec/useMySpecHistory";
+import { useUserInfo } from "shared-api/auth";
 
 import { Layout } from "@component/layout";
 import { useModal } from "@recoil/hook/modal";

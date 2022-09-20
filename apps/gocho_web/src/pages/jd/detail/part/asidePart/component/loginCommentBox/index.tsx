@@ -1,10 +1,10 @@
 import { FunctionComponent } from "react";
 import { AiOutlineSend } from "react-icons/ai";
 
-import { dateConverter } from "@util/date";
-import { UserBadge } from "@component/common/atom/userBadge";
-import { CommentLikeButton } from "@component/common/atom/commentLikeButton";
-import { CommentDislikeButton } from "@component/common/atom/commentDislikeButton";
+import { dateConverter } from "shared-util/date";
+import { UserBadge } from "shared-ui/common/atom/userBadge";
+import { CommentLikeButton } from "shared-ui/common/atom/commentLikeButton";
+import { CommentDislikeButton } from "shared-ui/common/atom/commentDislikeButton";
 
 import { LoginCommentBoxProps } from "./type";
 import {

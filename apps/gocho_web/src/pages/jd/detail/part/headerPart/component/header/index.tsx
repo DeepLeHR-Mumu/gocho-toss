@@ -6,11 +6,11 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 
 import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
 
-import { dateConverter } from "@util/date";
-import { DdayBox } from "@component/common/atom/dDayBox";
+import { dateConverter } from "shared-util/date";
+import { DdayBox } from "shared-ui/common/atom/dDayBox";
 
 import { COMPANY_DETAIL_URL } from "@constant/internalURL";
-import { useAddUserBookmark, useDeleteUserBookmark } from "@api/bookmark";
+import { useAddUserBookmark, useDeleteUserBookmark } from "shared-api/bookmark";
 import { HeaderProps } from "./type";
 import {
   applyButton,

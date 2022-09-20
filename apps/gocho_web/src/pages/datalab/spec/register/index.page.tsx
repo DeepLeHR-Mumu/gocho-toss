@@ -2,20 +2,26 @@ import { useEffect } from "react";
 import { NextPage } from "next";
 import axios from "axios";
 
-import { useUserInfo } from "@api/auth";
+import { useUserInfo } from "shared-api/auth";
 import { useModal } from "@recoil/hook/modal";
+import { useProgress } from "@recoil/hook/spec";
 
 import { Layout } from "@component/layout";
 import { ProgressPart } from "./part/progressPart";
 import { SpecWritePart } from "./part/carouselCardPart";
 
-import { usePageBlocking, useResetProgress } from "./util";
+import { usePageBlocking } from "./util";
 import { wrapper, title } from "./style";
 
 const Register: NextPage = () => {
   const { setCurrentModal, currentModal } = useModal();
 
   const { error } = useUserInfo();
+  const { resetCurrentProgress } = useProgress();
+
+  useEffect(() => {
+    resetCurrentProgress();
+  }, [resetCurrentProgress]);
 
   useEffect(() => {
     if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
@@ -27,7 +33,6 @@ const Register: NextPage = () => {
   }, [currentModal?.activatedModal, error, setCurrentModal]);
 
   usePageBlocking(setCurrentModal);
-  useResetProgress();
 
   return (
     <main css={wrapper}>

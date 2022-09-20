@@ -1,8 +1,9 @@
 import { FunctionComponent } from "react";
 
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
+
 import { SPEC_DETAIL_URL } from "@constant/internalURL";
-import { ProfileImg } from "@component/common/atom/profileImg";
-import { LinkButton } from "@component/common/atom/button";
+import { LinkButton } from "shared-ui/common/atom/button";
 
 import { SpecRecommendCardProps } from "./type";
 import {
