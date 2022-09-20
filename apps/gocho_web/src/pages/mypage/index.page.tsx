@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import axios from "axios";
 
 import { Layout } from "@component/layout";
-import { useUserInfo } from "@api/auth";
+import { useUserInfo } from "shared-api/auth";
 import { useModal } from "@recoil/hook/modal";
 
 import { SettingPart } from "./part/settingPart";

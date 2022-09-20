@@ -1,7 +1,6 @@
 import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { useSpecRegisterObj } from "@recoil/hook/spec";
 import {
   SpecCardTitle,
   MoveCardButtons,
@@ -34,10 +33,11 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
   const maxGradeWatch = watch("college.maxGrade");
   const gradeWatch = watch("college.grade");
 
-  const { setCurrentSpecObj } = useSpecRegisterObj();
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
     const { department, uturn, grade, maxGrade } = formData.college;
-    setCurrentSpecObj({
+
+    const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
+    const currentSpecObj = Object.assign(prevSpecObj, {
       ...formData,
       college: {
         department,
@@ -46,6 +46,7 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
         maxGrade: Number(maxGrade),
       },
     });
+    sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
     moveNextCard(40);
   };
 

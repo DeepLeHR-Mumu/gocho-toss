@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BsFillBookmarkFill } from "react-icons/bs";
 
-import { useAddUserBookmark, useDeleteUserBookmark } from "@api/bookmark";
+import { useAddUserBookmark, useDeleteUserBookmark } from "shared-api/bookmark";
 import { SkeletonBox } from "@component/common/atom/skeletonBox";
 import { COMPANY_DETAIL_URL } from "@constant/internalURL";
 import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";

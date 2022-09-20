@@ -1,4 +1,4 @@
-import { ImageType } from "@type/ui/imageType";
+import { ImageType } from "shared-type/ui/imageType";
 
 export interface ImageChangeFormValues {
   image: ImageType;

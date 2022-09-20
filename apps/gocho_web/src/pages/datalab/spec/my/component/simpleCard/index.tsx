@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 
 import { StarEvaluation } from "@component/common/molecule/starEvaluation";
-import { dateConverter } from "@util/date";
+import { dateConverter } from "shared-util/date";
 import { MySpecCard } from "../mySpecCard";
 
 import { SimpleCardProps } from "./type";

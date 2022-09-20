@@ -1,8 +1,7 @@
 import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { useUserInfo } from "@api/auth";
-import { useSpecRegisterObj } from "@recoil/hook/spec";
+import { useUserInfo } from "shared-api/auth";
 
 import {
   SpecCardTitle,
@@ -31,11 +30,10 @@ export const Spec1Basic: FunctionComponent<Spec1BasicProps> = ({ moveNextCard })
   });
 
   const { data: userInfoData, isSuccess } = useUserInfo();
-  const { setCurrentSpecObj } = useSpecRegisterObj();
   const secretWatch = watch("secret");
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
-    setCurrentSpecObj(formData);
+    sessionStorage.setItem("specObj", JSON.stringify(formData));
     moveNextCard(15);
   };
 

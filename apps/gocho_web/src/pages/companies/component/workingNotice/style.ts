@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const flexBox = css`
   display: flex;

@@ -1,8 +1,8 @@
 import { FunctionComponent, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useDeleteComment } from "@api/community/useDeleteComment";
-import { communityCommentArrKeyObj } from "@constant/queryKeyFactory/community/commentArrKeyObj";
+import { useDeleteComment } from "shared-api/community/useDeleteComment";
+import { communityCommentArrKeyObj } from "shared-constant/queryKeyFactory/community/commentArrKeyObj";
 
 import { reCommentProps } from "./type";
 import { commentWrapper, nicknameCSS, bodyBox, bodyCSS, settingButtonContainer, settingButton } from "./style";

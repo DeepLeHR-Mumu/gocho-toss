@@ -2,8 +2,8 @@ import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import { useJobArr } from "@api/job";
-import { useCompanyArr } from "@api/company";
+import { useJobArr } from "shared-api/job";
+import { useCompanyArr } from "shared-api/company";
 import { Layout } from "@component/layout";
 import { searchMenuButtonArr } from "@pages/search/constant";
 

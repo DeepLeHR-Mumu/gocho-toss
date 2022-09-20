@@ -2,15 +2,16 @@ import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 
+import { useDoSignUp, useUserInfo } from "shared-api/auth";
+import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
+import { EMAIL_ERROR_MESSAGE, NICKNAME_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant/errorMessage";
+import { AccountInput } from "shared-ui/common/atom/accountInput";
+import { NormalButton } from "shared-ui/common/atom/button";
+import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
+
 import { ModalComponent } from "@component/modal/modalBackground";
-import { useDoSignUp, useUserInfo } from "@api/auth";
 import { useModal } from "@recoil/hook/modal";
-import { EMAIL_REGEXP, PWD_REGEXP } from "@constant/regExp";
-import { AccountInput } from "@component/common/atom/accountInput";
-import { EMAIL_ERROR_MESSAGE, NICKNAME_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "@constant/errorMessage";
-import { NormalButton } from "@component/common/atom/button";
 import { CloseButton } from "@component/common/atom/closeButton";
-import smallMono from "@public/images/global/deepLeLogo/smallMono.svg";
 
 import { wrapper, desc, formCSS, closeBtn, formArr, logoContainer } from "./style";
 import { SignUpFormValues } from "./type";

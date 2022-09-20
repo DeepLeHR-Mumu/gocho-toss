@@ -2,8 +2,8 @@ import { FunctionComponent } from "react";
 import { AiOutlineLike, AiOutlineMessage, AiOutlineEye } from "react-icons/ai";
 
 // import { useModal } from "@recoil/hook/modal";
-import { dateConverter } from "@util/date";
-import { ProfileImg } from "@component/common/atom/profileImg";
+import { dateConverter } from "shared-util/date";
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { SkeletonBox } from "@component/common/atom/skeletonBox";
 
 import {

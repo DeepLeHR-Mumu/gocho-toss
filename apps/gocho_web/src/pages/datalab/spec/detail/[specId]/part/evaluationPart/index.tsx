@@ -3,9 +3,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { FiChevronDown } from "react-icons/fi";
 import { useRouter } from "next/router";
 
+import { useEvalSpec } from "shared-api/spec/useEvalSpec";
+import { NormalButton } from "shared-ui/common/atom/button";
+
 import { StarEvaluation } from "@component/common/molecule/starEvaluation";
-import { useEvalSpec } from "@api/spec/useEvalSpec";
-import { NormalButton } from "@component/common/atom/button";
 
 import { SelectBox } from "./component/selectBox";
 import {

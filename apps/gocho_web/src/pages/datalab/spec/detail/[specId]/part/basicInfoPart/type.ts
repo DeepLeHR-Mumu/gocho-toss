@@ -1,5 +1,5 @@
-import { IndustryType, TaskType } from "@api/spec/type/common";
-import { ImageType } from "@type/ui/imageType";
+import { IndustryType, TaskType } from "shared-api/spec/type/common";
+import { ImageType } from "shared-type/ui/imageType";
 
 export interface BasicInfoPartProps {
   basicData: {

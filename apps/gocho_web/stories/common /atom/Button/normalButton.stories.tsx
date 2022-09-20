@@ -2,9 +2,9 @@ import { css } from "@emotion/react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { FiCheck } from "react-icons/fi";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
-import { NormalButton } from "@component/common/atom/button/normalButton";
+import { NormalButton } from "shared-ui/common/atom/button/normalButton";
 
 export default {
   title: "공용 컴포넌트/common/atom/NormalButton",

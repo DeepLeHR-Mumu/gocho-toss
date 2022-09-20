@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { PC_HOVER } from "@style/mediaQuery";
-import { COLORS } from "@style/constant";
+import { PC_HOVER } from "shared-style/mediaQuery";
+import { COLORS } from "shared-style/color";
 
 export const desc = css`
   color: ${COLORS.GRAY40};

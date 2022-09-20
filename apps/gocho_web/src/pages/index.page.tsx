@@ -3,11 +3,12 @@ import { NextPage } from "next";
 import Head from "next/head";
 
 import { CompanyCommentPart } from "@pages/indexComponent/part/companyCommentPart";
-// import { getJobArr } from "@api/job/useJobArr";
-// import { getCompanyComment } from "@api/company/useCompanyCommentArr";
-// import { getCommunityPostingArr } from "@api/community/useCommunityPostingArr";
-// import { getTipArr } from "@api/tip";
-// import { getSpecArr } from "@api/spec";
+import { HeadingH1 } from "shared-ui/common/atom/invisibleH1";
+// import { getJobArr } from "shared-api/job/useJobArr";
+// import { getCompanyComment } from "shared-api/company/useCompanyCommentArr";
+// import { getCommunityPostingArr } from "shared-api/community/useCommunityPostingArr";
+// import { getTipArr } from "shared-api/tip";
+// import { getSpecArr } from "shared-api/spec";
 // import { specArrKeyObj } from "@constant/queryKeyFactory/spec/arrKeyObj";
 // import { companyCommentArrKeyObj } from "@constant/queryKeyFactory/company/commentArrKeyObj";
 // import { jobArrKeyObj } from "@constant/queryKeyFactory/job/jobArrKeyObj";
@@ -59,6 +60,7 @@ const Home: NextPage = () => {
       <Head>
         <title>고초대졸닷컴 - 생산/기능직 No.1 취업 플랫폼</title>
       </Head>
+      <HeadingH1 title="고초대졸닷컴 - 생산/기능직 No.1 취업 플랫폼" />
       <TopBannerPart />
       <MainCarouselPart />
       <DataLabPart />

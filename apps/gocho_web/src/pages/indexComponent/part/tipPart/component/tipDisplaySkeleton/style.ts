@@ -1,8 +1,8 @@
 import { css } from "@emotion/react";
 
-import { TABLET } from "@style/mediaQuery";
+import { TABLET } from "shared-style/mediaQuery";
 import { skeletonCreatorCSS } from "@style/common";
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const tipDisplayWrapper = css`
   display: flex;

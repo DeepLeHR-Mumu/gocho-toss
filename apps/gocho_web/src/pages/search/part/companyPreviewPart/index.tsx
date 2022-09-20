@@ -1,9 +1,9 @@
 import { FunctionComponent } from "react";
 
-import { useUserInfo } from "@api/auth";
-import { useUserCompanyBookmarkArr } from "@api/bookmark";
+import { useUserInfo } from "shared-api/auth";
+import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { CompanyCard } from "@component/card/companyCard";
-import { dummyArrCreator } from "@util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
 import { listContainer, noDataText } from "./style";
 import { CompanyListPartProps } from "./type";

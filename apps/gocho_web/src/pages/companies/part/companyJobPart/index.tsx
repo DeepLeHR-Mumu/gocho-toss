@@ -1,11 +1,11 @@
 import { FunctionComponent, useEffect, useRef } from "react";
 
-import { useInfiniteJobArr } from "@api/job/useInfiniteJobArr";
-import { useUserInfo } from "@api/auth";
-import { useUserJobBookmarkArr } from "@api/bookmark";
-import { dummyArrCreator } from "@util/dummyArrCreator";
-import { JobCard } from "@component/card/jobCard";
+import { useInfiniteJobArr } from "shared-api/job/useInfiniteJobArr";
+import { useUserInfo } from "shared-api/auth";
+import { useUserJobBookmarkArr } from "shared-api/bookmark";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
+import { JobCard } from "@component/card/jobCard";
 import { Layout } from "@component/layout";
 import { CompanyJobPartProps } from "./type";
 import { partContainer, listContainer } from "./style";

@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import Link from "next/link";
 
-import { useCommunityPostingArr } from "@api/community";
+import { useCommunityPostingArr } from "shared-api/community";
 import { Layout } from "@component/layout";
 import { CommunityPostingCard } from "@component/card/communityPosting";
 import { CommunityPostingPartSkeleton } from "./component/skeleton";

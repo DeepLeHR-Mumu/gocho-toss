@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
-import { ImageType } from "@type/ui/imageType";
+import { ImageType } from "shared-type/ui/imageType";
 
 export interface ImageRadioButtonProps {
   registerObj: UseFormRegisterReturn;

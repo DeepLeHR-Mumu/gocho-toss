@@ -1,4 +1,4 @@
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 import { FunctionComponent } from "react";
 import { FiHome, FiAward, FiSettings } from "react-icons/fi";
 

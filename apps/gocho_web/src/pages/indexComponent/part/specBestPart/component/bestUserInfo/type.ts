@@ -1,5 +1,5 @@
-import { ImageType } from "@type/ui/imageType";
-import { TaskType } from "@api/spec/type/common";
+import { ImageType } from "shared-type/ui/imageType";
+import { TaskType } from "shared-api/spec/type/common";
 
 export interface BestUserInfoProps {
   bestUserData: {

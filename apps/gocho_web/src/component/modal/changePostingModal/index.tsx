@@ -3,14 +3,16 @@ import { useQueryClient } from "@tanstack/react-query";
 import { AiOutlineEdit } from "react-icons/ai";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
+import { useUserInfo } from "shared-api/auth";
+import { useChangePosting } from "shared-api/community/useChangePosting";
+import { communityPostingArrKeyObj } from "shared-constant/queryKeyFactory/community/postingArrKeyObj";
+
 import { ModalComponent } from "@component/modal/modalBackground";
 import { useModal } from "@recoil/hook/modal";
 import { changePostingObjDef } from "@recoil/atom/modal";
-import { useUserInfo } from "@api/auth";
-import { useChangePosting } from "@api/community/useChangePosting";
-import { ProfileImg } from "@component/common/atom/profileImg";
+
 import { CloseButton } from "@component/common/atom/closeButton";
-import { communityPostingArrKeyObj } from "@constant/queryKeyFactory/community/postingArrKeyObj";
 
 import { setPostingTypeButtonArr, PostingFormValues } from "./type";
 import {

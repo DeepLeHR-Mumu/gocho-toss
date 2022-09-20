@@ -3,9 +3,10 @@ import { AiOutlineEdit, AiOutlineWechat } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+import { useUserInfo } from "shared-api/auth";
+
 import { useModal } from "@recoil/hook/modal";
 import { Layout } from "@component/layout";
-import { useUserInfo } from "@api/auth";
 
 import { PostingCardList } from "../../component/postingCardList";
 import { changeFilterDef, changeHashtagDef, FilterDef, HashtagDef, PostingValues } from "./type";

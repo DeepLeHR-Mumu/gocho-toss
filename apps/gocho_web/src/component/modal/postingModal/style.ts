@@ -1,8 +1,8 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 import { shorten } from "@style/common";
-import { PC_HOVER } from "@style/mediaQuery";
+import { PC_HOVER } from "shared-style/mediaQuery";
 
 interface typeColor {
   [key: string]: string;

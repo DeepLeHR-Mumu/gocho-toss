@@ -2,20 +2,22 @@ import { FunctionComponent, useRef } from "react";
 import Slider from "react-slick";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
+import { useCompanyArr } from "shared-api/company/useCompanyArr";
+
 import { CompanyCommentCard } from "@component/card/companyComment";
 import { Layout } from "@component/layout";
-import { useCompanyArr } from "@api/company/useCompanyArr";
 
 import { partContainer, title, colorPoint, cardListContainer, sliderContainer, buttonCSSCreator } from "./style";
 import { setCarouselSetting } from "./util";
 
 export const CompanyCommentPart: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
-  const { data: companyDataArr } = useCompanyArr({ order: "comment" });
+  const { data: companyDataArr } = useCompanyArr({ order: "view" });
 
   if (!companyDataArr) {
     return <>w</>;
   }
+
   return (
     <div css={partContainer}>
       <Layout>

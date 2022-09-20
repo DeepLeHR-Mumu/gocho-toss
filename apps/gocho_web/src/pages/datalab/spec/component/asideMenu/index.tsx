@@ -2,9 +2,9 @@ import { FunctionComponent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { useUserInfo } from "@api/auth";
+import { useUserInfo } from "shared-api/auth";
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
-import { ProfileImg } from "@component/common/atom/profileImg";
 import { SPEC_MY_URL, SPEC_URL, SPEC_REGISTER_URL } from "@constant/internalURL";
 
 import { AsideMenuProps } from "./type";

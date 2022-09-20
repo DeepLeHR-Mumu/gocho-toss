@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import Image from "next/image";
 import { FiInfo } from "react-icons/fi";
 
-import logoSrc from "@public/images/global/deepLeLogo/largeColor.svg";
+import logoSrc from "shared-image/global/deepLeLogo/largeColor.svg";
 
 import { getJobTitleCreator } from "../common/util";
 

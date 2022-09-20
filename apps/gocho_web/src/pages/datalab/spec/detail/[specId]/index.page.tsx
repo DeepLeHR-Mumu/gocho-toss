@@ -2,8 +2,9 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import axios from "axios";
 
+import { useSpecDetail } from "shared-api/spec";
+
 import { Layout } from "@component/layout";
-import { useSpecDetail } from "@api/spec";
 import { SkeletonBox } from "@component/common/atom/skeletonBox";
 
 import { BasicInfoPart } from "./part/basicInfoPart";

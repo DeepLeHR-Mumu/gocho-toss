@@ -1,6 +1,6 @@
 import { css, SerializedStyles } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const headerWrapper = css`
   border-bottom: 1px solid ${COLORS.GRAY70};

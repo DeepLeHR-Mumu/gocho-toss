@@ -2,7 +2,10 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-import { useCompanyDetail } from "@api/company";
+import { useUserInfo } from "shared-api/auth";
+import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
+import { useCompanyDetail } from "shared-api/company";
+
 import { Layout } from "@component/layout";
 import useMoveScroll from "@pages/companies/[companyId]/util";
 
@@ -36,7 +39,9 @@ const CompaniesDetail: NextPage = () => {
     setShownData(newData);
   };
 
-  const { data: response, isError, isLoading, refetch } = useCompanyDetail({ companyId: Number(companyId) });
+  const { data: userData } = useUserInfo();
+  const { data: userCompanyBookmarkArr, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
+  const { data: response, isError, isLoading } = useCompanyDetail({ companyId: Number(companyId) });
 
   if (!response || isError || isLoading) {
     return <main>Loading...</main>;
@@ -75,10 +80,21 @@ const CompaniesDetail: NextPage = () => {
     factoryData: { factoryArr: data.factoryArr },
   };
 
+  const isBookmarked = Boolean(
+    userCompanyBookmarkArr?.some((company) => {
+      return company.id === companyData.headerData.id;
+    })
+  );
+
   return (
     <main css={mainContainer}>
       <Layout>
-        <HeaderPart companyData={companyData.headerData} refetchCompanyDetail={refetch} />
+        <HeaderPart
+          companyData={companyData.headerData}
+          isBookmarked={isBookmarked}
+          userId={userData?.id}
+          refetchUserBookmark={refetch}
+        />
         <div css={buttonContainer}>
           <button
             type="button"

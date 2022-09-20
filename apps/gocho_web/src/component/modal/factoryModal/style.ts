@@ -1,6 +1,6 @@
 import { css, SerializedStyles } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
   position: fixed;
@@ -94,7 +94,7 @@ export const boxDesc = css`
   display: flex;
   align-items: flex-start;
   margin: 0 0.5rem;
-  word-break: keep-all;
+  word-break: normal;
   font-weight: 400;
   line-height: 1.6;
   margin-top: 0.5rem;

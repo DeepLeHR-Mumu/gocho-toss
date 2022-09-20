@@ -1,4 +1,4 @@
-import { LanguageType } from "@api/spec/type/common";
+import { LanguageType } from "shared-api/spec/type/common";
 
 export interface DetailInfoPartProps {
   detailData: {

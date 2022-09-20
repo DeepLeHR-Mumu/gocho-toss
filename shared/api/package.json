@@ -1,0 +1,21 @@
+{
+  "name": "shared-api",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "main": "./index.tsx",
+  "types": "./index.tsx",
+  "dependencies": {
+    "@tanstack/react-query": "^4.2.3",
+    "axios": "^0.27.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "shared-constant": "workspace:^0.0.0",
+    "shared-type": "workspace:^0.0.0"
+  },
+  "devDependencies": {
+    "tsconfig-deeple": "workspace:^0.0.0",
+    "eslint-config-deeple": "workspace:^1.0.0",
+    "typescript": "4.7.2"
+  }
+}

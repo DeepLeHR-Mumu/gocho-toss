@@ -1,10 +1,10 @@
 import { FunctionComponent } from "react";
 
-import { dummyArrCreator } from "@util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { JobCard } from "@component/card/jobCard";
 
-import { useUserInfo } from "@api/auth";
-import { useUserJobBookmarkArr } from "@api/bookmark";
+import { useUserInfo } from "shared-api/auth";
+import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { listContainer, noDataText } from "./style";
 import { JobPreviewPartProps } from "./type";
 

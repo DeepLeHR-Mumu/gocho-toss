@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import { FiSearch } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { useCompanyArr } from "@api/company";
+import { useCompanyArr } from "shared-api/company";
 import { Layout } from "@component/layout";
 import { Pagination } from "@pages/jd/component/pagination";
 import { BottomPagination } from "@component/common/molecule/bottomPagination";

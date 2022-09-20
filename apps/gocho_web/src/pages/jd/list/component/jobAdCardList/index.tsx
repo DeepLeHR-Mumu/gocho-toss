@@ -2,8 +2,8 @@ import { FunctionComponent, useRef } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Slider from "react-slick";
 
-import { useJobArr } from "@api/job";
-import { dummyArrCreator } from "@util/dummyArrCreator";
+import { useJobArr } from "shared-api/job";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { setCarouselSetting } from "./util";
 
 import { JobAdCard } from "../jobAdCard";

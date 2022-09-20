@@ -1,8 +1,9 @@
 import { FunctionComponent } from "react";
 
-import { useJobArr } from "@api/job";
+import { useJobArr } from "shared-api/job";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
+
 import { JobSmallCard } from "@pages/indexComponent/part/jobPart/component/jobSmall";
-import { dummyArrCreator } from "@util/dummyArrCreator";
 
 import { cardListContainer } from "./style";
 import { JobCardArrProps } from "./type";

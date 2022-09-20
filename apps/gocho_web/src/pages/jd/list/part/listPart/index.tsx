@@ -3,13 +3,14 @@ import { FiSearch, FiInfo } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 
+import { useJobArr } from "shared-api/job";
+
 import highTrue from "@public/images/global/common/go_color.svg";
 import collegeTrue from "@public/images/global/common/cho_color.svg";
 
-import { useJobArr } from "@api/job";
 import { Layout } from "@component/layout";
-import { BottomPagination } from "@component/common/molecule/bottomPagination";
 import { Pagination } from "@pages/jd/component/pagination";
+import { BottomPagination } from "@component/common/molecule/bottomPagination";
 
 import { JobCardList } from "../../component/jobCardList";
 import { Filter } from "../../component/filter";

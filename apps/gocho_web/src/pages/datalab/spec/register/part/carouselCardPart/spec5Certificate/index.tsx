@@ -3,8 +3,6 @@ import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { FiX } from "react-icons/fi";
 
-import { useSpecRegisterObj } from "@recoil/hook/spec";
-
 import { SpecCardTitle, Toggle, MoveCardButtons, CheckBox } from "../common/component";
 
 import { getResData, hasFieldsInIncludes } from "./util";
@@ -35,15 +33,17 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
 
   const [isClick, setIsClick] = useState(false);
   const [searchCertificateArr, setSearchCertificateArr] = useState<string[]>([]);
-  const { setCurrentSpecObj } = useSpecRegisterObj();
   const textInputRef = useRef<HTMLInputElement>(null);
   const isCertificateWatch = watch("isCertificate");
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
     const { certificate } = formData;
-    setCurrentSpecObj({
+
+    const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
+    const currentSpecObj = Object.assign(prevSpecObj, {
       certificate: getResData(certificate),
     });
+    sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
     moveNextCard(60);
   };
 

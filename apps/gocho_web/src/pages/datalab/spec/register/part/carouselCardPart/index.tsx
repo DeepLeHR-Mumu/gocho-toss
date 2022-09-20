@@ -1,7 +1,7 @@
-import { FunctionComponent, useRef, useState } from "react";
+import { FunctionComponent, useRef, useState, useEffect } from "react";
 import Slider from "react-slick";
 
-import { useProgress, useLastEdu } from "@recoil/hook/spec";
+import { useProgress, useIsSpecPageBlocking } from "@recoil/hook/spec";
 
 import { Spec1Basic } from "./spec1Basic";
 import { Spec2lastEducation } from "./spec2LastEducation";
@@ -19,9 +19,15 @@ import { wrapper } from "./style";
 
 export const SpecWritePart: FunctionComponent = () => {
   const [isSpec6MiddleEnd, setIsSpec6MiddleEnd] = useState<boolean>(true);
-  const { setCurrentProgress } = useProgress();
-  const { currentLastEdu } = useLastEdu();
+  const [userLastEdu, setUserLastEdu] = useState<null | "고졸" | "초대졸">(null);
+  const { setIsBlocking } = useIsSpecPageBlocking();
+
   const sliderRef = useRef<Slider>(null);
+  const { setCurrentProgress } = useProgress();
+
+  useEffect(() => {
+    setIsBlocking(false);
+  }, [setIsBlocking]);
 
   const moveNextCard: moveNextCardDef = (percent) => {
     scrollTop();
@@ -43,9 +49,14 @@ export const SpecWritePart: FunctionComponent = () => {
       <Slider {...setCarouselSetting} ref={sliderRef}>
         <Spec1Basic moveNextCard={moveNextCard} />
 
-        <Spec2lastEducation movePrevCard={movePrevCard} moveNextCard={moveNextCard} />
+        <Spec2lastEducation
+          movePrevCard={movePrevCard}
+          moveNextCard={moveNextCard}
+          userLastEdu={userLastEdu}
+          setUserLastEdu={setUserLastEdu}
+        />
 
-        {currentLastEdu === "고졸" ? (
+        {userLastEdu === "고졸" ? (
           <Spec3Highschool movePrevCard={movePrevCard} moveNextCard={moveNextCard} />
         ) : (
           <Spec4University movePrevCard={movePrevCard} moveNextCard={moveNextCard} />

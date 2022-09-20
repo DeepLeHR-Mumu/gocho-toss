@@ -1,9 +1,8 @@
 import { FunctionComponent } from "react";
 
+import { useUserInfo } from "shared-api/auth";
+import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { CompanyCard } from "@component/card/companyCard";
-
-import { useUserInfo } from "@api/auth";
-import { useUserCompanyBookmarkArr } from "@api/bookmark";
 
 import { cardListContainer, skeletonContainer, descCSS } from "./style";
 

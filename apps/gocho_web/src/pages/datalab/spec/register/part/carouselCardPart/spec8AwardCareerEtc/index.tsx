@@ -3,10 +3,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useModal } from "@recoil/hook/modal";
-import { useSpecRegisterObj } from "@recoil/hook/spec";
-import { useRegisterSpec } from "@api/spec";
-import { specArrKeyObj } from "@constant/queryKeyFactory/spec/arrKeyObj";
-import { userInfoKeyObj } from "@constant/queryKeyFactory/user/infoKeyObj";
+import { useIsSpecPageBlocking } from "@recoil/hook/spec";
+import { useRegisterSpec } from "shared-api/spec";
+import { specArrKeyObj } from "shared-constant/queryKeyFactory/spec/arrKeyObj";
+import { userInfoKeyObj } from "shared-constant/queryKeyFactory/user/infoKeyObj";
 
 import { SpecCardTitle, MoveCardButtons } from "../common/component";
 import { Spec8AwardCareerEtcProps, PostSubmitValues } from "./type";
@@ -17,20 +17,23 @@ export const Spec8AwardCareerEtc: FunctionComponent<Spec8AwardCareerEtcProps> = 
   const { handleSubmit, register } = useForm<PostSubmitValues>({
     mode: "onChange",
   });
-  const { currentSpecObj, resetSpecRegisterObj } = useSpecRegisterObj();
   const [errorMsg, setErrorMsg] = useState<number | undefined>(undefined);
 
   const { setCurrentModal } = useModal();
+  const { setIsBlocking } = useIsSpecPageBlocking();
   const { mutate } = useRegisterSpec();
   const queryClient = useQueryClient();
 
-  const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
-    const specRegisterObj = { ...currentSpecObj, ...formData };
-    mutate(specRegisterObj, {
+  const postSubmit: SubmitHandler<PostSubmitValues> = async (formData) => {
+    const prevSpecObj = await JSON.parse(sessionStorage.getItem("specObj") || "{}");
+    const currentSpecObj = await Object.assign(prevSpecObj, { ...formData });
+
+    mutate(currentSpecObj, {
       onSuccess: () => {
+        setIsBlocking(true);
         queryClient.invalidateQueries(specArrKeyObj.all);
         moveNextCard(100);
-        resetSpecRegisterObj();
+        sessionStorage.removeItem("specObj");
       },
       onError: (error) => {
         const errorCode = error.response?.status;

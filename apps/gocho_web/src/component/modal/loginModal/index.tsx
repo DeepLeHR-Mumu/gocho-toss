@@ -3,16 +3,17 @@ import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
+import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
+import { useDoLogin } from "shared-api/auth";
+import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
+import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant/errorMessage";
+import { AccountInput } from "shared-ui/common/atom/accountInput";
+import { NormalButton } from "shared-ui/common/atom/button";
+
 import { ModalComponent } from "@component/modal/modalBackground";
 import { CloseButton } from "@component/common/atom/closeButton";
-import { useDoLogin } from "@api/auth";
-import { EMAIL_REGEXP, PWD_REGEXP } from "@constant/regExp";
-import { useModal } from "@recoil/hook/modal";
-import { AccountInput } from "@component/common/atom/accountInput";
-import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "@constant/errorMessage";
-import { NormalButton } from "@component/common/atom/button";
-import smallMono from "@public/images/global/deepLeLogo/smallMono.svg";
 import { loginObjDef } from "@recoil/atom/modal";
+import { useModal } from "@recoil/hook/modal";
 
 import { wrapper, desc, formCSS, formArr, errorMsgCSS, closeBtn, errorBox, loginButton, logoContainer } from "./style";
 import { ButtonProps, LoginFormValues } from "./type";

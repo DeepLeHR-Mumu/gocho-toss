@@ -6,8 +6,7 @@ import Link from "next/link";
 
 import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
 
-import { useAddUserBookmark, useDeleteUserBookmark, useUserCompanyBookmarkArr } from "@api/bookmark";
-import { useUserInfo } from "@api/auth";
+import { useAddUserBookmark, useDeleteUserBookmark } from "shared-api/bookmark";
 import { HeaderPartProps } from "./type";
 import {
   sectionContainer,
@@ -24,30 +23,25 @@ import {
   youtubeLinkButton,
 } from "./style";
 
-export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData, refetchCompanyDetail }) => {
+export const HeaderPart: FunctionComponent<HeaderPartProps> = ({
+  companyData,
+  isBookmarked,
+  userId,
+  refetchUserBookmark,
+}) => {
   const [imageSrc, setImageSrc] = useState(companyData?.logoUrl as string);
-
-  const { data: userData } = useUserInfo();
-  const { data: userCompanyBookmarkArr, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
-
-  const isBookmarked = Boolean(
-    userCompanyBookmarkArr?.some((company) => {
-      return company.id === companyData.id;
-    })
-  );
 
   const { mutate: addMutate } = useAddUserBookmark();
   const { mutate: deleteMutate } = useDeleteUserBookmark();
 
   const addCompanyBookmark = () => {
     return (
-      userData?.id &&
+      userId &&
       addMutate(
-        { userId: userData?.id, likeType: "company-bookmarks", elemId: companyData.id },
+        { userId, likeType: "company-bookmarks", elemId: companyData.id },
         {
           onSuccess: () => {
-            refetch();
-            refetchCompanyDetail();
+            refetchUserBookmark();
           },
         }
       )
@@ -56,13 +50,12 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData, re
 
   const deleteCompanyBookmark = () => {
     return (
-      userData?.id &&
+      userId &&
       deleteMutate(
-        { userId: userData?.id, likeType: "company-bookmarks", elemId: companyData.id },
+        { userId, likeType: "company-bookmarks", elemId: companyData.id },
         {
           onSuccess: () => {
-            refetch();
-            refetchCompanyDetail();
+            refetchUserBookmark();
           },
         }
       )

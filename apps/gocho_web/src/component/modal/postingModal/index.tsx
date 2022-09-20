@@ -3,17 +3,18 @@ import { useQueryClient } from "@tanstack/react-query";
 import { AiOutlineEye, AiOutlineLike, AiOutlineMessage } from "react-icons/ai";
 import { FiMoreVertical } from "react-icons/fi";
 
-import { usePostingCommentArr } from "@api/community/usePostingCommentArr";
-import { useDeletePosting } from "@api/community/useDeletePosting";
+import { useUserInfo } from "shared-api/auth";
+import { usePostingCommentArr } from "shared-api/community/usePostingCommentArr";
+import { useDeletePosting } from "shared-api/community/useDeletePosting";
+import { selector } from "shared-api/community/usePostingCommentArr/util";
+import { communityPostingArrKeyObj } from "shared-constant/queryKeyFactory/community/postingArrKeyObj";
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
+import { dateConverter } from "shared-util/date/dateConverter";
+
+import { CloseButton } from "@component/common/atom/closeButton";
 import { ModalComponent } from "@component/modal/modalBackground";
-import { dateConverter } from "@util/date/dateConverter";
 import { useModal } from "@recoil/hook/modal";
 import { postingObjDef } from "@recoil/atom/modal";
-import { CloseButton } from "@component/common/atom/closeButton";
-import { ProfileImg } from "@component/common/atom/profileImg";
-import { communityPostingArrKeyObj } from "@constant/queryKeyFactory/community/postingArrKeyObj";
-import { useUserInfo } from "@api/auth";
-import { selector } from "@api/community/usePostingCommentArr/util";
 
 import { WriteComment } from "./component/writeComment";
 import { Comment } from "./component/comment";
