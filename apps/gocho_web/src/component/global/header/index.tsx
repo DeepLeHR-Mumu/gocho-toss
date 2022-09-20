@@ -2,7 +2,7 @@ import { FunctionComponent, useState, ChangeEvent, FormEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { AiFillCaretDown } from "react-icons/ai";
+import { BsChevronDown } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 
 import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
@@ -67,13 +67,7 @@ export const Header: FunctionComponent = () => {
         <div css={headerContainer}>
           <div css={logoCSS}>
             <Link href={MAIN_URL} passHref>
-              <a>
-                <Image
-                  src={pathname === MAIN_URL ? colorLogoSrc : grayLogoSrc}
-                  alt="고초대졸닷컴"
-                  objectFit="contain"
-                />
-              </a>
+              <Image src={pathname === MAIN_URL ? colorLogoSrc : grayLogoSrc} alt="고초대졸닷컴" objectFit="contain" />
             </Link>
           </div>
 
@@ -82,7 +76,7 @@ export const Header: FunctionComponent = () => {
               {menuArr.map((menu, index) => {
                 return (
                   <li
-                    key={menu.menuTitle}
+                    key={`navMenu_${menu.menuTitle}`}
                     css={activeRouter(pathname === menu.menuLink)}
                     onMouseOver={() => {
                       setActiveIndex(index);
@@ -97,7 +91,7 @@ export const Header: FunctionComponent = () => {
                     {menu.subMenuArr ? (
                       <>
                         {menu.menuTitle}
-                        <AiFillCaretDown size={12} css={downIconCSS} />
+                        <BsChevronDown css={downIconCSS} />
 
                         <ul css={subMenuToggleWrapper(activeIndex === index)}>
                           {menu.subMenuArr.map((subMenu) => {

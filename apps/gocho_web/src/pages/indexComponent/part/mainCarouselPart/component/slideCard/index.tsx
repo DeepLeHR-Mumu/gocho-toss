@@ -1,20 +1,45 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
 
-import { slideWrapper, slideInfo, ddayCSS, infoTitle, dayTimeCSS, dimmed } from "./style";
-import { SlideCardProps } from "./type";
-// NOTMYFAULT : 이미지 훗날 CDN으로 뺀 후 string으로 교체
+import {
+  slideWrapper,
+  slideInfo,
+  topDescCSS,
+  middleDescCSS,
+  middleDescIconBox,
+  lastDescCSS,
+  titleCSS,
+  dimmed,
+} from "./style";
 
-export const SlideCard: FunctionComponent<SlideCardProps> = ({ imgSrc, title, dday, dayTime }) => {
+import { SlideCardProps } from "./type";
+
+export const SlideCard: FunctionComponent<SlideCardProps> = ({
+  topDesc,
+  middleDesc,
+  title,
+  lastDesc,
+  backgroundColor,
+  iconImage,
+  backgroundImage,
+}) => {
   return (
     <div css={slideWrapper}>
-      <div css={slideInfo}>
-        <p css={ddayCSS}>D-{dday}</p>
-        <h2 css={infoTitle}>{title}</h2>
-        <p css={dayTimeCSS}>{dayTime}</p>
+      <div css={slideInfo(backgroundColor)}>
+        <p css={topDescCSS}>{topDesc}</p>
+        <p css={middleDescCSS}>
+          {middleDesc}
+          {iconImage && (
+            <div css={middleDescIconBox}>
+              <Image src={iconImage} alt="" objectFit="contain" layout="fill" />
+            </div>
+          )}
+        </p>
+        <h3 css={titleCSS}>{title}</h3>
+        <p css={lastDescCSS}>{lastDesc}</p>
       </div>
       <div css={dimmed} />
-      <Image priority src={imgSrc} alt={title} layout="responsive" />
+      <Image priority src={backgroundImage} alt={title} layout="responsive" />
     </div>
   );
 };

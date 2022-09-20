@@ -21,6 +21,24 @@
   "lint-staged": {
     "apps/**/src/pages/**/*.{ts,tsx}": [
       "eslint"
+    ],
+    "shared/ui/**/*.{ts,tsx}": [
+      "eslint"
+    ],
+    "shared/constant/**/*.{ts,tsx}": [
+      "eslint"
+    ],
+    "shared/style/**/*.{ts,tsx}": [
+      "eslint"
+    ],
+    "shared/type/**/*.{ts,tsx}": [
+      "eslint"
+    ],
+    "shared/api/**/*.{ts,tsx}": [
+      "eslint"
+    ],
+    "shared/util/**/*.{ts,tsx}": [
+      "eslint"
     ]
   },
   "keywords": [],

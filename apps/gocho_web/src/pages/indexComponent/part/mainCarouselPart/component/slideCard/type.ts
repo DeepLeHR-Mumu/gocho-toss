@@ -1,8 +1,11 @@
 import { StaticImageData } from "next/image";
 
 export interface SlideCardProps {
-  imgSrc: StaticImageData;
+  topDesc: string;
+  middleDesc: string;
   title: string;
-  dday: number;
-  dayTime: string;
+  lastDesc: string;
+  backgroundImage: StaticImageData;
+  iconImage?: StaticImageData;
+  backgroundColor: string;
 }
