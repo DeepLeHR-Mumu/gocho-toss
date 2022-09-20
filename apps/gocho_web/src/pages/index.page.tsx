@@ -3,11 +3,6 @@ import { NextPage } from "next";
 import Head from "next/head";
 
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
-// import { getJobArr } from "@api/job/useJobArr";
-// import { getCompanyComment } from "@api/company/useCompanyCommentArr";
-// import { getCommunityPostingArr } from "@api/community/useCommunityPostingArr";
-// import { getTipArr } from "@api/tip";
-// import { getSpecArr } from "@api/spec";
 // import { specArrKeyObj } from "@constant/queryKeyFactory/spec/arrKeyObj";
 // import { companyCommentArrKeyObj } from "@constant/queryKeyFactory/company/commentArrKeyObj";
 // import { jobArrKeyObj } from "@constant/queryKeyFactory/job/jobArrKeyObj";

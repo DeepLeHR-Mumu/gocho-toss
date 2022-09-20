@@ -63,9 +63,11 @@ const JobsDetail: NextPage = () => {
     );
   }
 
-  const isBookmarked = !!userJobBookmarkArr?.some((job) => {
-    return job.id === jobDetailData.id;
-  });
+  const isBookmarked = Boolean(
+    userJobBookmarkArr?.some((job) => {
+      return job.id === jobDetailData.id;
+    })
+  );
 
   return (
     <main css={wrapper}>

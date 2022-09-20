@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { CompanyCard } from "@pages/mypage/part/bookmarkPart/companyCard";
+import { CompanyCard } from "@component/card/companyCard";
 
 export default {
   title: "마이페이지/bookmarkPart/CompanyCard",
@@ -22,6 +22,6 @@ export const 기본 = Template.bind({});
   companyData: {
     name: "SK하이닉스",
     id: 119,
-    info: ["기업규모:대기업", "업종:업종이라는데"],
+    logoUrl: "https://d2nnzfahmszi6w.cloudfront.net/Fcompany_images/119/logo.png",
   },
 };

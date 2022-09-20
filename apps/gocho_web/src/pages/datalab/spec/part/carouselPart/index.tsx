@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 
-import { Layout } from "@component/layout";
 import { useUserInfo } from "shared-api/auth";
+import { Layout } from "@component/layout";
 
 import { partContainer, title, colorPoint } from "./style";
 import { RecommendCardList } from "../../component/recommendCardList";
