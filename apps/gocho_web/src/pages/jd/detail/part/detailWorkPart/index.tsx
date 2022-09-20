@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
 
-import factoryIcon from "@public/images/global/common/factory_icon.svg";
+import factoryIcon from "shared-image/global/common/factory_icon.svg";
 
 import { useModal } from "@recoil/hook/modal";
 import { NoDataDesc } from "../common/component/noDataDesc";

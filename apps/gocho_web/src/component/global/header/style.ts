@@ -86,7 +86,9 @@ export const subMenuToggleWrapper: subMenuToggleWrapperDef = (isHover) => {
 };
 
 export const searchIcon = css`
-  color: ${COLORS.BLUE_SECOND30};
+  color: ${COLORS.BLUE_FIRST40};
+  font-size: 1.25rem;
+  padding-right: 1rem;
 `;
 
 export const unifiedSearchWrapper = (isOn = false) => {
@@ -120,4 +122,9 @@ export const searchButton = css`
   transform: translate(0, -50%);
   color: ${COLORS.GRAY40};
   width: 1.25rem;
+`;
+
+export const flexBox = css`
+  display: flex;
+  align-items: center;
 `;

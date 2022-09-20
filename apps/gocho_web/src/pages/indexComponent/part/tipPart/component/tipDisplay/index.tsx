@@ -3,7 +3,7 @@ import Image from "next/image";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 import { useTipDetail } from "shared-api/tip";
-import { COMMUNITY_TIPS_LIST_URL } from "@constant/internalURL";
+import { COMMUNITY_TIPS_LIST_URL } from "shared-constant/internalURL";
 import { LinkButton } from "shared-ui/common/atom/button";
 
 import { TipDisplaySkeleton } from "../tipDisplaySkeleton";

@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { COMMUNITY_TIPS_LIST_URL } from "@constant/internalURL";
+import { COMMUNITY_TIPS_LIST_URL } from "shared-constant/internalURL";
 
 import { cardWrapper, linkArea, cardImageBox, cardInfo, cardTitle, cardDesc } from "./style";
 import { LatestCardProps } from "./type";

@@ -7,13 +7,13 @@ import { FiEye } from "react-icons/fi";
 import { useAddUserBookmark, useDeleteUserBookmark } from "shared-api/bookmark";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 
-import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
-import highTrue from "@public/images/global/common/go_color.svg";
-import highFalse from "@public/images/global/common/go_mono.svg";
-import collegeTrue from "@public/images/global/common/cho_color.svg";
-import collegeFalse from "@public/images/global/common/cho_mono.svg";
-import { SkeletonBox } from "@component/common/atom/skeletonBox";
-import { JOBS_DETAIL_URL } from "@constant/internalURL";
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
+import highTrue from "shared-image/global/common/go_color.svg";
+import highFalse from "shared-image/global/common/go_mono.svg";
+import collegeTrue from "shared-image/global/common/cho_color.svg";
+import collegeFalse from "shared-image/global/common/cho_mono.svg";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
+import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 import { dateConverter } from "shared-util/date";
 
 import { JobCardProps, JobCardSkeleton } from "./type";

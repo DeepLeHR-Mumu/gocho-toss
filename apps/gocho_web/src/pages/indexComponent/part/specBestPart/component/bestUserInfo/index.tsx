@@ -2,9 +2,9 @@ import { FunctionComponent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import headerIcon from "@public/images/global/common/box_heart.svg";
+import headerIcon from "shared-image/global/common/box_heart.svg";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
-import { SPEC_DETAIL_URL } from "@constant/internalURL";
+import { SPEC_DETAIL_URL } from "shared-constant/internalURL";
 
 import {
   bestUserInfoWrapper,

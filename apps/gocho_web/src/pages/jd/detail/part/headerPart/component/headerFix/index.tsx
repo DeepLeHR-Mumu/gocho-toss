@@ -7,7 +7,7 @@ import { Profile } from "@component/common/molecule/profile";
 import { UnAuthMenu } from "@component/common/molecule/unAuthMenu";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { Layout } from "@component/layout";
-import { JOBS_LIST_URL } from "@constant/internalURL";
+import { JOBS_LIST_URL } from "shared-constant/internalURL";
 import { useUserInfo } from "shared-api/auth";
 
 import { useAddUserBookmark, useDeleteUserBookmark } from "shared-api/bookmark";

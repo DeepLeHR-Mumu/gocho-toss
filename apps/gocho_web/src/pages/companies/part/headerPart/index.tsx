@@ -4,7 +4,7 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import Image from "next/image";
 import Link from "next/link";
 
-import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
 import { useAddUserBookmark, useDeleteUserBookmark } from "shared-api/bookmark";
 import { HeaderPartProps } from "./type";

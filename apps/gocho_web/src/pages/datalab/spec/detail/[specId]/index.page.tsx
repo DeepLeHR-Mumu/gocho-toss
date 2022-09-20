@@ -5,7 +5,7 @@ import axios from "axios";
 import { useSpecDetail } from "shared-api/spec";
 
 import { Layout } from "@component/layout";
-import { SkeletonBox } from "@component/common/atom/skeletonBox";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 
 import { BasicInfoPart } from "./part/basicInfoPart";
 import { DetailInfoPart } from "./part/detailInfoPart";

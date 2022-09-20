@@ -4,12 +4,12 @@ import Image from "next/image";
 import { FiYoutube, FiEye } from "react-icons/fi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 
-import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
 import { dateConverter } from "shared-util/date";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 
-import { COMPANY_DETAIL_URL } from "@constant/internalURL";
+import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import { useAddUserBookmark, useDeleteUserBookmark } from "shared-api/bookmark";
 import { HeaderProps } from "./type";
 import {

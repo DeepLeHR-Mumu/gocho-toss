@@ -1,12 +1,12 @@
 import { FunctionComponent, useState } from "react";
 import Image from "next/image";
 
-import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
 import { useUserInfo } from "shared-api/auth";
 import { useCompanyCommentArr } from "shared-api/company";
 
-import { SkeletonBox } from "@component/common/atom/skeletonBox";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { LoginCommentBox } from "./component/loginCommentBox";
 import { UnLoginCommentBox } from "./component/unLoginCommentBox";
 

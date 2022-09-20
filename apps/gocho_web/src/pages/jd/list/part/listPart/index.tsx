@@ -5,8 +5,8 @@ import Image from "next/image";
 
 import { useJobArr } from "shared-api/job";
 
-import highTrue from "@public/images/global/common/go_color.svg";
-import collegeTrue from "@public/images/global/common/cho_color.svg";
+import highTrue from "shared-image/global/common/go_color.svg";
+import collegeTrue from "shared-image/global/common/cho_color.svg";
 
 import { Layout } from "@component/layout";
 import { Pagination } from "@pages/jd/component/pagination";

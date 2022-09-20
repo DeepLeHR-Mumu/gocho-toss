@@ -3,7 +3,7 @@ import { BsChevronLeft } from "react-icons/bs";
 import Link from "next/link";
 
 import { dateConverter } from "shared-util/date";
-import { JOBS_LIST_URL } from "@constant/internalURL";
+import { JOBS_LIST_URL } from "shared-constant/internalURL";
 
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { NoDataDesc } from "../common/component/noDataDesc";

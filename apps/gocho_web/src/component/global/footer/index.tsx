@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import GDtitleSrc from "shared-image/global/deepLeLogo/smallMono.svg";
-import { MAIN_URL, PRIVACY_URL, TOS_URL } from "@constant/internalURL";
+import { MAIN_URL, PRIVACY_URL, TOS_URL } from "shared-constant/internalURL";
 import { Layout } from "@component/layout";
 
 import { companyInfoObj } from "./constant";

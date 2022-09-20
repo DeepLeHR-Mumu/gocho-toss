@@ -3,7 +3,7 @@ import Link from "next/link";
 import { BsChevronRight } from "react-icons/bs";
 import Slider from "react-slick";
 
-import { DATALAB_DETAIL } from "@constant/internalURL";
+import { DATALAB_DETAIL } from "shared-constant/internalURL";
 import { Layout } from "@component/layout";
 
 import { CompanyPassDataCard } from "./component/companyPassDataCard";

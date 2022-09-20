@@ -7,7 +7,7 @@ import {
   SPEC_URL,
   INTERVIEW_REVIEW,
   DATALAB_DETAIL,
-} from "@constant/internalURL";
+} from "shared-constant/internalURL";
 
 export const menuArr = [
   {

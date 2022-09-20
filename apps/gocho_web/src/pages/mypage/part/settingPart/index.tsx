@@ -3,7 +3,7 @@ import { FunctionComponent, useState, useEffect } from "react";
 import { FiList } from "react-icons/fi";
 
 import { useModal } from "@recoil/hook/modal";
-import { MYPAGE_URL } from "@constant/internalURL";
+import { MYPAGE_URL } from "shared-constant/internalURL";
 
 import { MenuBoxes } from "./component/menuBoxes";
 import { menuOpenBox } from "./style";

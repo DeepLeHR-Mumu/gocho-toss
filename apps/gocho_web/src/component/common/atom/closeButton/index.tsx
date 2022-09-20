@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import Link from "next/link";
 import { FiX, FiHome } from "react-icons/fi";
 
-import { MAIN_URL } from "@constant/internalURL";
+import { MAIN_URL } from "shared-constant/internalURL";
 
 import { closeButtonWrapper } from "./style";
 import { ButtonProps } from "./type";

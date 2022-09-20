@@ -9,7 +9,7 @@ import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
 import grayLogoSrc from "shared-image/global/deepLeLogo/smallMono.svg";
 import { useUserInfo } from "shared-api/auth";
 
-import { MAIN_URL } from "@constant/internalURL";
+import { MAIN_URL } from "shared-constant/internalURL";
 import { Layout } from "@component/layout";
 import { Profile } from "@component/common/molecule/profile";
 import { UnAuthMenu } from "@component/common/molecule/unAuthMenu";
@@ -29,6 +29,7 @@ import {
   unifiedSearchWrapper,
   unifiedSearch,
   searchButton,
+  flexBox,
 } from "./style";
 
 export const Header: FunctionComponent = () => {
@@ -115,18 +116,21 @@ export const Header: FunctionComponent = () => {
                 );
               })}
             </ul>
-            <button
-              type="button"
-              css={searchIcon}
-              onClick={() => {
-                setIsUnifiedSearch((prev) => {
-                  return !prev;
-                });
-              }}
-            >
-              <FiSearch />
-            </button>
-            {isSuccess ? <Profile /> : <UnAuthMenu />}
+
+            <div css={flexBox}>
+              <button
+                type="button"
+                css={searchIcon}
+                onClick={() => {
+                  setIsUnifiedSearch((prev) => {
+                    return !prev;
+                  });
+                }}
+              >
+                <FiSearch />
+              </button>
+              {isSuccess ? <Profile /> : <UnAuthMenu />}
+            </div>
           </nav>
         </div>
       </Layout>

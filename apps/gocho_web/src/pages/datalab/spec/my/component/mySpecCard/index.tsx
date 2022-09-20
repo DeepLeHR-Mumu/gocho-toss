@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 
 import { LinkButton, NormalButton } from "shared-ui/common/atom/button";
-import { SPEC_DETAIL_URL } from "@constant/internalURL";
+import { SPEC_DETAIL_URL } from "shared-constant/internalURL";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
 import { MySpecCardProps } from "./type";

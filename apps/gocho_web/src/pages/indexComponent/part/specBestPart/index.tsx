@@ -3,7 +3,7 @@ import Link from "next/link";
 import { BsChevronRight } from "react-icons/bs";
 
 import { useSpecArr } from "shared-api/spec";
-import { MAIN_URL } from "@constant/internalURL";
+import { MAIN_URL } from "shared-constant/internalURL";
 import { Layout } from "@component/layout";
 
 import { BestUserList } from "./component/bestUserList";
