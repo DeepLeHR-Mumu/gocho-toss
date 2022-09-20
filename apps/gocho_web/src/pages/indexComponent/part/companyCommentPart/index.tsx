@@ -11,11 +11,12 @@ import { setCarouselSetting } from "./util";
 
 export const CompanyCommentPart: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
-  const { data: companyDataArr } = useCompanyArr({ order: "comment" });
+  const { data: companyDataArr } = useCompanyArr({ order: "view" });
 
   if (!companyDataArr) {
     return <>w</>;
   }
+
   return (
     <div css={partContainer}>
       <Layout>
