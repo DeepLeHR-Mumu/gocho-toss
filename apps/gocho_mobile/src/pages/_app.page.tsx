@@ -10,6 +10,9 @@ import { Global } from "@emotion/react";
 
 import { globalStyles } from "@style/globalStyles";
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [queryClient] = useState(() => {

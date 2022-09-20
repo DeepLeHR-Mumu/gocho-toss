@@ -7,7 +7,7 @@ import { Control } from "./component/control";
 
 import { carouselArr } from "./constant";
 import { setCarouselSetting } from "./util";
-import { mainCarouselWrapper, carouselContainer, invisibleHeading } from "./style";
+import { mainCarouselWrapper, carouselContainer } from "./style";
 
 export const MainCarouselPart: FunctionComponent = () => {
   const [activeIndex, setActiveIndex] = useState<number>(1);
@@ -16,23 +16,24 @@ export const MainCarouselPart: FunctionComponent = () => {
   return (
     <div css={mainCarouselWrapper}>
       <Layout>
-        <h1 css={invisibleHeading}>메인 페이지</h1>
         <section css={carouselContainer}>
           <Slider {...setCarouselSetting(setActiveIndex)} ref={sliderRef}>
             {carouselArr.map((slide) => {
               return (
                 <SlideCard
-                  key={slide.id}
-                  imgSrc={slide.image}
+                  key={`mainCarousel_${slide.id}`}
+                  backgroundImage={slide.backgroundImage}
+                  topDesc={slide.topDesc}
+                  middleDesc={slide.middleDesc}
                   title={slide.title}
-                  dday={slide.dday}
-                  dayTime={slide.dateTime}
+                  lastDesc={slide.lastDesc}
+                  iconImage={slide.iconImage}
+                  backgroundColor={slide.backgroundColor}
                 />
               );
             })}
           </Slider>
 
-          {/* LATER 굳이 control이 앞으로 안나와도 될듯 */}
           <Control
             allIndex={carouselArr.length}
             currentIndex={activeIndex}
