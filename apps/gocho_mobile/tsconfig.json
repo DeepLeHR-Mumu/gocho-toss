@@ -15,8 +15,7 @@
       "@api/*": ["src/api/*"],
       "@recoil/*": ["src/recoil/*"],
       "@hook/*": ["src/hook/*"]
-    },
-    "jsx": "preserve"
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

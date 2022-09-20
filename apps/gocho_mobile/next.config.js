@@ -1,5 +1,13 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-// const withTM = require("next-transpile-modules")(["component"]);
+const withTM = require("next-transpile-modules")([
+  "shared-ui",
+  "shared-api",
+  "shared-constant",
+  "shared-util",
+  "shared-type",
+  "shared-style",
+  "shared-image",
+]);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -11,5 +19,4 @@ const nextConfig = {
   pageExtensions: ["page.tsx"],
 };
 
-module.exports = nextConfig;
-// module.exports = withTM(nextConfig);
+module.exports = withTM(nextConfig);
