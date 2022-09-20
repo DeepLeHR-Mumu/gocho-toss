@@ -5,6 +5,8 @@ import { css } from "@emotion/react";
 import { MainCarouselPart } from "./indexComponent/part/mainCarouselPart";
 import { JobPart } from "./indexComponent/part/jobPart";
 import { BannerPart } from "./indexComponent/part/bannerPart";
+import { SuggestedPart } from "./indexComponent/suggestedPart";
+
 
 const Home: NextPage = () => {
   return (
@@ -15,6 +17,7 @@ const Home: NextPage = () => {
       <MainCarouselPart />
       <JobPart />
       <BannerPart />
+      <SuggestedPart />
     </main>
   );
 };
