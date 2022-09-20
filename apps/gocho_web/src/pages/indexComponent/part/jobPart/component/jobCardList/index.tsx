@@ -31,7 +31,7 @@ export const JobCardList: FunctionComponent<JobCardArrProps> = ({ listOrder }) =
   return (
     <div css={cardListContainer}>
       {jobDataArr.jobDataArr.map((job) => {
-        return <JobSmallCard key={`jobSmallCard_${job.id}`} jobData={job} isWeb={false} />;
+        return <JobSmallCard key={`jobSmallCard_${job.id}`} jobData={job} />;
       })}
     </div>
   );

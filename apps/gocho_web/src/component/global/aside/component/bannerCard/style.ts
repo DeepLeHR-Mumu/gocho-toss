@@ -1,4 +1,5 @@
 import { css, SerializedStyles } from "@emotion/react";
+import { COLORS } from "shared-style/color";
 
 interface changeBannerColor {
   (bgColor: string): SerializedStyles;
@@ -8,7 +9,7 @@ export const changeBannerColor: changeBannerColor = (bgColor) => {
   return css`
     background-color: ${bgColor};
     margin-bottom: 1rem;
-    border-radius: 1rem 0 0 0;
+    border-radius: 1rem;
     box-shadow: 15px 15px 20px rgba(221, 221, 221, 0.34);
   `;
 };
@@ -24,9 +25,10 @@ export const linkCSS = css`
 `;
 
 export const titleCSS = css`
-  white-space: nowrap;
   font-size: 0.875rem;
-  color: #1f1f1f;
+  line-height: 1.6;
+  word-break: keep-all;
+  color: ${COLORS.GRAY10};
   font-weight: 600;
   padding-bottom: 0.5rem;
 `;
@@ -34,6 +36,13 @@ export const titleCSS = css`
 export const descCSS = css`
   font-size: 0.75rem;
   word-break: keep-all;
-  color: #5f5f6a;
+  color: ${COLORS.GRAY30};
   line-height: 1.5;
+  margin-bottom: 0.875rem;
+`;
+
+export const iconBox = css`
+  width: 1.5rem;
+  height: 1.5rem;
+  position: relative;
 `;

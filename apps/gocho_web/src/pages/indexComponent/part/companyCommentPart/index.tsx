@@ -6,6 +6,7 @@ import { useCompanyArr } from "shared-api/company/useCompanyArr";
 
 import { CompanyCommentCard } from "@component/card/companyComment";
 import { Layout } from "@component/layout";
+import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
 import { partContainer, title, colorPoint, cardListContainer, sliderContainer, buttonCSSCreator } from "./style";
 import { setCarouselSetting } from "./util";
@@ -15,22 +16,42 @@ export const CompanyCommentPart: FunctionComponent = () => {
   const { data: companyDataArr } = useCompanyArr({ order: "view" });
 
   if (!companyDataArr) {
-    return <>w</>;
+    return (
+      <section css={partContainer}>
+        <InvisibleH2 title="기업별 댓글" />
+        <Layout>
+          <p css={title}>
+            <span css={colorPoint}>생생한</span> 기업 댓글 확인하기 🙌🏻
+          </p>
+        </Layout>
+
+        <section css={cardListContainer}>
+          {/* <Slider {...setCarouselSetting()} ref={sliderRef} css={sliderContainer}>
+            {companyDataArr.companyDataArr.map((data) => {
+              return <CompanyCommentCard companyId={data.id} key={`companyComment${data.id}`} />;
+            })}
+          </Slider> */}
+        </section>
+      </section>
+    );
   }
 
   return (
-    <div css={partContainer}>
+    <section css={partContainer}>
+      <InvisibleH2 title="기업별 댓글" />
       <Layout>
-        <h2 css={title}>
-          <span css={colorPoint}>생생한</span> 기업 댓글 확인하기
-        </h2>
+        <p css={title}>
+          <span css={colorPoint}>생생한</span> 기업 댓글 확인하기 🙌🏻
+        </p>
       </Layout>
+
       <section css={cardListContainer}>
         <Slider {...setCarouselSetting()} ref={sliderRef} css={sliderContainer}>
           {companyDataArr.companyDataArr.map((data) => {
             return <CompanyCommentCard companyId={data.id} key={`companyComment${data.id}`} />;
           })}
         </Slider>
+
         <button
           css={buttonCSSCreator("left")}
           aria-label="이전 기업 댓글 확인"
@@ -52,6 +73,6 @@ export const CompanyCommentPart: FunctionComponent = () => {
           <BsChevronRight />
         </button>
       </section>
-    </div>
+    </section>
   );
 };

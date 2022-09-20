@@ -33,11 +33,11 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps> = ({ compan
     commentContainerRef.current?.scrollTo(0, bottomHeight !== undefined ? bottomHeight : 0);
   }, []);
 
-  const { data: companyCommentArrData, isError } = useCompanyCommentArr({
+  const { data: companyCommentArrData } = useCompanyCommentArr({
     companyId,
   });
 
-  if (!companyCommentArrData || isError) {
+  if (!companyCommentArrData) {
     return <div css={cardWrapper}>에러가 발생</div>;
   }
 
