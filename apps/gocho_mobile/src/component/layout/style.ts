@@ -5,5 +5,4 @@ export const layout = css`
   padding: 0 2rem;
   margin: auto;
   transition: padding 0.2s ease;
-  background-color: pink;
 `;

@@ -6,16 +6,16 @@ interface changeBannerColor {
 
 export const changeBannerColor: changeBannerColor = (bgColor) => {
   return css`
+    width: 30%;
     background-color: ${bgColor};
     margin-bottom: 1rem;
-    border-radius: 1rem 0 0 0;
-    /* box-shadow: 15px 15px 20px rgba(221, 221, 221, 0.34); */
+    border-radius: 1rem;
+    padding: 1.375rem;
+    height: 10rem;
   `;
 };
 
 export const linkCSS = css`
-  /* min-height: 9rem; */
-  /* padding: 1.25rem; */
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -24,8 +24,9 @@ export const linkCSS = css`
 `;
 
 export const titleCSS = css`
-  white-space: nowrap;
+  word-break: keep-all;
   font-size: 0.875rem;
+  line-height: 1.25rem;
   color: #1f1f1f;
   font-weight: 600;
   padding-bottom: 0.5rem;
