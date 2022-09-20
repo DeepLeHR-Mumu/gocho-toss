@@ -3,14 +3,14 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const dataLabWrapper = css`
-  margin-top: 5.3125rem;
+  margin-top: 4.5rem;
 `;
 
 export const title = css`
   font-size: 1.25rem;
   color: ${COLORS.GRAY10};
-  font-weight: 600;
-  margin-bottom: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 4.5rem;
 `;
 
 export const dataLabContainer = css`
@@ -52,5 +52,5 @@ export const dataLabDesc = css`
 `;
 
 export const textPoint = css`
-  color: ${COLORS.BLUE_NEON40};
+  color: ${COLORS.BLUE_NEON30};
 `;

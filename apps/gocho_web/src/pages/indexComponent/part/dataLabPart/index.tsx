@@ -14,30 +14,28 @@ export const DataLabPart: FunctionComponent = () => {
   return (
     <section css={dataLabWrapper}>
       <Layout>
-        <div css={title}>
-          <h2>
-            합격한 인재들의 <span css={textPoint}>데이터 정보</span> 확인하기
-          </h2>
-        </div>
-
-        <article css={dataLabContainer}>
-          <Slider {...settings} css={companyLogoBox}>
-            {dataLabCompanyArr.map((company) => {
-              return (
-                <CompanyPassDataCard key={company.id} companyName={company.companyName} companyLogo={company.logoSrc} />
-              );
-            })}
-          </Slider>
-          <p css={dataLabDesc}>
-            <span css={textPoint}>합격 데이터</span>가 궁금하다면
-          </p>
-          <Link href={DATALAB_DETAIL} passHref>
-            <a css={linkButton}>
-              데이터랩 바로가기 <BsChevronRight />
-            </a>
-          </Link>
-        </article>
+        <p css={title}>
+          합격한 인재들의 <span css={textPoint}>데이터 정보</span> 확인하기
+        </p>
       </Layout>
+
+      <article css={dataLabContainer}>
+        <Slider {...settings} css={companyLogoBox}>
+          {dataLabCompanyArr.map((company) => {
+            return (
+              <CompanyPassDataCard key={company.id} companyName={company.companyName} companyLogo={company.logoSrc} />
+            );
+          })}
+        </Slider>
+        <p css={dataLabDesc}>
+          <span css={textPoint}>합격 데이터</span>가 궁금하다면
+        </p>
+        <Link href={DATALAB_DETAIL} passHref>
+          <a css={linkButton}>
+            데이터랩 바로가기 <BsChevronRight />
+          </a>
+        </Link>
+      </article>
     </section>
   );
 };
