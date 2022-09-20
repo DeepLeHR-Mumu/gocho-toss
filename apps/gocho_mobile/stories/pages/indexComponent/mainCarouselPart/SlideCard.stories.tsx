@@ -1,15 +1,19 @@
-import React from "react";
-
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { SlideCard } from "@pages/indexComponent/part/mainCarouselPart/component/sliderCard";
 
 export default {
-  title: "SlideCard",
+  title: "pages/indexComponent/SlideCard",
   component: SlideCard,
+  argTypes: {
+    carouselData: {
+      control: "object",
+      description: "슬라이드 제목, 내용, 배경색에 해당되는 문자열로 이루어진 객체",
+    },
+  },
 } as ComponentMeta<typeof SlideCard>;
 
-export const Template: ComponentStory<typeof SlideCard> = (args) => {
+const Template: ComponentStory<typeof SlideCard> = (args) => {
   return <SlideCard {...args} />;
 };
 
