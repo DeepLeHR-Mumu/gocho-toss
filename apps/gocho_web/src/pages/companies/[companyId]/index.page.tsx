@@ -2,12 +2,13 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
+import { useUserInfo } from "shared-api/auth";
+import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { useCompanyDetail } from "shared-api/company";
+
 import { Layout } from "@component/layout";
 import useMoveScroll from "@pages/companies/[companyId]/util";
 
-import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
-import { useUserInfo } from "shared-api/auth";
 import { WorkingNotice } from "../component/workingNotice";
 import { MenuButtonList } from "../component/menuButtonList";
 import { HeaderPart } from "../part/headerPart";
@@ -79,9 +80,11 @@ const CompaniesDetail: NextPage = () => {
     factoryData: { factoryArr: data.factoryArr },
   };
 
-  const isBookmarked = !!userCompanyBookmarkArr?.some((company) => {
-    return company.id === companyData.headerData.id;
-  });
+  const isBookmarked = Boolean(
+    userCompanyBookmarkArr?.some((company) => {
+      return company.id === companyData.headerData.id;
+    })
+  );
 
   return (
     <main css={mainContainer}>

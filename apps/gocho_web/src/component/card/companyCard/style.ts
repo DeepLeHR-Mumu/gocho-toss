@@ -1,5 +1,15 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
+import { PC_HOVER } from "shared-style/mediaQuery";
+
+export const companyCardSkeleton = css`
+  overflow: hidden;
+  width: 32%;
+  height: 11.5rem;
+  border-radius: 1.5rem;
+  margin-bottom: 1rem;
+  background-color: ${COLORS.GRAY100};
+`;
 
 export const cardWrapper = css`
   width: 32%;
@@ -9,25 +19,34 @@ export const cardWrapper = css`
   border: 2px solid ${COLORS.GRAY90};
   padding: 1.75rem;
   position: relative;
+  background-color: ${COLORS.GRAY100};
 
   :nth-of-type(3n) {
     margin-right: 0;
   }
 `;
 
-export const bookmarkButtonWrapper = css`
-  padding: 1rem;
-  position: absolute;
-  top: 0;
-  right: 0;
-`;
+export const bookmarkButtonWrapper = (isBookmarked = false) => {
+  return css`
+    display: flex;
+    align-items: center;
+    background-color: ${isBookmarked ? COLORS.STATE_SUCCESS : `${COLORS.GRAY90}`};
+    color: ${isBookmarked ? COLORS.BLUE_FIRST40 : `${COLORS.GRAY60}`};
+    border-radius: 0 1rem 0 1rem;
+    padding: 1rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: all 0.3s ease;
 
-export const bookmarkButtonBox = css`
-  width: 1.2rem;
-  height: 1.2rem;
-  background-color: ${COLORS.GRAY100};
-  position: relative;
-`;
+    ${PC_HOVER} {
+      :hover {
+        background-color: ${COLORS.GRAY80};
+        color: ${COLORS.GRAY40};
+      }
+    }
+  `;
+};
 
 export const isRecruitingCSS = css`
   color: ${COLORS.ERROR_RED40};

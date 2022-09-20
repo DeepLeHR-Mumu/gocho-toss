@@ -4,11 +4,11 @@ import Head from "next/head";
 
 import { CompanyCommentPart } from "@pages/indexComponent/part/companyCommentPart";
 import { HeadingH1 } from "shared-ui/common/atom/invisibleH1";
-// import { getJobArr } from "@api/job/useJobArr";
-// import { getCompanyComment } from "@api/company/useCompanyCommentArr";
-// import { getCommunityPostingArr } from "@api/community/useCommunityPostingArr";
-// import { getTipArr } from "@api/tip";
-// import { getSpecArr } from "@api/spec";
+// import { getJobArr } from "shared-api/job/useJobArr";
+// import { getCompanyComment } from "shared-api/company/useCompanyCommentArr";
+// import { getCommunityPostingArr } from "shared-api/community/useCommunityPostingArr";
+// import { getTipArr } from "shared-api/tip";
+// import { getSpecArr } from "shared-api/spec";
 // import { specArrKeyObj } from "@constant/queryKeyFactory/spec/arrKeyObj";
 // import { companyCommentArrKeyObj } from "@constant/queryKeyFactory/company/commentArrKeyObj";
 // import { jobArrKeyObj } from "@constant/queryKeyFactory/job/jobArrKeyObj";

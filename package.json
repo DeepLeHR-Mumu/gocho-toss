@@ -21,9 +21,6 @@
   "lint-staged": {
     "apps/**/src/pages/**/*.{ts,tsx}": [
       "eslint"
-    ],
-    "shared/**/*.{ts,tsx}": [
-      "eslint"
     ]
   },
   "keywords": [],

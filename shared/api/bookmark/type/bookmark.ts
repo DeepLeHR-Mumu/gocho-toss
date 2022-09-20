@@ -8,7 +8,7 @@ export interface jobBookmarkObjDef {
 export interface companyBookmarkObjDef {
   id: number;
   name: string;
-  info: string[];
+  logo_url: string;
 }
 
 export interface postingBookmarkObjDef {

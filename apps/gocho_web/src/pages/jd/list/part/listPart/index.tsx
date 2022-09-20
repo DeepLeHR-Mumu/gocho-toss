@@ -3,15 +3,14 @@ import { FiSearch, FiInfo } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 
+import { useJobArr } from "shared-api/job";
+
 import highTrue from "@public/images/global/common/go_color.svg";
 import collegeTrue from "@public/images/global/common/cho_color.svg";
 
 import { Layout } from "@component/layout";
-import { useJobArr } from "shared-api/job";
-import { useUserInfo } from "shared-api/auth";
-import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { Pagination } from "@pages/jd/component/pagination";
-import { BottomPagination } from "@pages/jd/component/bottomPagination";
+import { BottomPagination } from "@component/common/molecule/bottomPagination";
 
 import { JobCardList } from "../../component/jobCardList";
 import { Filter } from "../../component/filter";
@@ -38,9 +37,6 @@ export const ListPart: FunctionComponent = () => {
   const [page, setPage] = useState(1);
   const [activeOrder, setActiveOrder] = useState<OrderDef>("recent");
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
-
-  const { data: userData } = useUserInfo();
-  const { data: userJobBookmarkArr, refetch } = useUserJobBookmarkArr({ userId: userData?.id });
 
   const { register, handleSubmit, watch, setValue, getValues } = useForm<SearchValues>({
     defaultValues: {
@@ -135,14 +131,7 @@ export const ListPart: FunctionComponent = () => {
           </div>
           고는 고졸지원가능 초는 초대졸 지원 가능합니다
         </div>
-        <JobCardList
-          jobDataArr={jobDataArr?.jobDataArr}
-          isLoading={isLoading}
-          isError={isError}
-          userJobBookmarkArr={userJobBookmarkArr}
-          userId={userData?.id}
-          refetchUserBookmark={refetch}
-        />
+        <JobCardList jobDataArr={jobDataArr?.jobDataArr} isLoading={isLoading} isError={isError} />
         <BottomPagination total={total} limit={limit} page={page} setPage={setPage} />
       </Layout>
     </section>
