@@ -2,7 +2,6 @@ import { NextPage } from "next";
 // import { dehydrate, QueryClient } from "@tanstack/react-query";
 import Head from "next/head";
 
-import { CompanyCommentPart } from "@pages/indexComponent/part/companyCommentPart";
 import { HeadingH1 } from "shared-ui/common/atom/invisibleH1";
 // import { getJobArr } from "@api/job/useJobArr";
 // import { getCompanyComment } from "@api/company/useCompanyCommentArr";
@@ -15,11 +14,11 @@ import { HeadingH1 } from "shared-ui/common/atom/invisibleH1";
 // import { communityPostingArrKeyObj } from "@constant/queryKeyFactory/community/postingArrKeyObj";
 // import { tipArrKeyObj } from "@constant/queryKeyFactory/tip/arrKeyObj";
 
-import { JobPart } from "./indexComponent/part/jobPart";
-import { CommunityPostingPart } from "./indexComponent/part/communityPostingPart";
-import { TopBannerPart } from "./indexComponent/part/topBannerPart";
+import { CompanyCommentPart } from "@pages/indexComponent/part/companyCommentPart";
 import { MainCarouselPart } from "./indexComponent/part/mainCarouselPart";
 import { DataLabPart } from "./indexComponent/part/dataLabPart";
+import { JobPart } from "./indexComponent/part/jobPart";
+import { CommunityPostingPart } from "./indexComponent/part/communityPostingPart";
 import { SpecBestPart } from "./indexComponent/part/specBestPart";
 import { TipPart } from "./indexComponent/part/tipPart";
 
@@ -61,7 +60,6 @@ const Home: NextPage = () => {
         <title>고초대졸닷컴 - 생산/기능직 No.1 취업 플랫폼</title>
       </Head>
       <HeadingH1 title="고초대졸닷컴 - 생산/기능직 No.1 취업 플랫폼" />
-      <TopBannerPart />
       <MainCarouselPart />
       <DataLabPart />
       <JobPart />
