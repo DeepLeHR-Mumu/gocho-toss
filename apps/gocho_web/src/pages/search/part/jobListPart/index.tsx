@@ -16,7 +16,7 @@ export const JobListPart: FunctionComponent<JobListPartProps> = ({
 }) => {
   return (
     <section>
-      <h2 css={title}>채용 공고 📮</h2>
+      <p css={title}>채용 공고 📮</p>
       <JobCardList jobDataArr={jobDataArr} isLoading={isLoading} />
       <BottomPagination total={total || 0} limit={limit} page={page} setPage={setPage} />
     </section>

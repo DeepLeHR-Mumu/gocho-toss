@@ -26,8 +26,7 @@ import {
   activeRouter,
   subMenuToggleWrapper,
   searchIcon,
-  unifiedSearchWrapperOn,
-  unifiedSearchWrapperOff,
+  unifiedSearchWrapper,
   unifiedSearch,
   searchButton,
 } from "./style";
@@ -42,19 +41,19 @@ export const Header: FunctionComponent = () => {
   const [query, setQuery] = useState("");
 
   const handleParam = () => {
-    return (e: ChangeEvent<HTMLInputElement>) => {
-      return setQuery(e.target.value);
+    return (typeKeyword: ChangeEvent<HTMLInputElement>) => {
+      return setQuery(typeKeyword.target.value);
     };
   };
 
-  const preventDefault = (f: (event: FormEvent) => void) => {
-    return (e: FormEvent) => {
-      e.preventDefault();
-      f(e);
+  const preventRefresh = (goNewPage: (event: FormEvent) => void) => {
+    return (submitForm: FormEvent) => {
+      submitForm.preventDefault();
+      goNewPage(submitForm);
     };
   };
 
-  const handleSubmit = preventDefault(() => {
+  const handleSubmit = preventRefresh(() => {
     router.push({
       pathname: "/search",
       query: { q: query },
@@ -137,8 +136,9 @@ export const Header: FunctionComponent = () => {
           </nav>
         </div>
       </Layout>
-      <form onSubmit={handleSubmit} css={isUnifiedSearch ? unifiedSearchWrapperOn : unifiedSearchWrapperOff}>
-        <input css={unifiedSearch} placeholder="궁금한 기업명이나 공고를 검색해보세요" onChange={handleParam()} />
+      {/* TODO: 다른 페이지에서 검색창과 겹치는 부분 있는지 확인! */}
+      <form onSubmit={handleSubmit} css={unifiedSearchWrapper(isUnifiedSearch)}>
+        <input css={unifiedSearch} placeholder="궁금한 기업명이나 공고를 검색해보세요" onChange={handleParam} />
         <button type="submit" css={searchButton}>
           <FiSearch />
         </button>

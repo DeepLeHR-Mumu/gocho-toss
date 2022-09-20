@@ -33,9 +33,11 @@ export const JobPreviewPart: FunctionComponent<JobPreviewPartProps> = ({ jobData
   return (
     <section css={listContainer}>
       {jobDataArr.slice(0, 4).map((jobData) => {
-        const isBookmarked = !!userJobBookmarkArr?.some((job) => {
-          return job.id === jobData.id;
-        });
+        const isBookmarked = Boolean(
+          userJobBookmarkArr?.some((job) => {
+            return job.id === jobData.id;
+          })
+        );
         return (
           <JobCard
             jobData={jobData}

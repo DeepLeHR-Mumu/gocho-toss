@@ -25,9 +25,11 @@ export const CompanyCardList: FunctionComponent<CompanyCardListProps> = ({ compa
   return (
     <section css={listContainer}>
       {companyDataArr.map((companyData) => {
-        const isBookmarked = !!userCompanyBookmarkArr?.some((company) => {
-          return company.id === companyData.id;
-        });
+        const isBookmarked = Boolean(
+          userCompanyBookmarkArr?.some((company) => {
+            return company.id === companyData.id;
+          })
+        );
         return (
           <CompanyCard
             companyData={companyData}

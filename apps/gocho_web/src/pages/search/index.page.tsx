@@ -45,6 +45,7 @@ const UnifiedSearch: NextPage = () => {
     offset: (companyPage - 1) * companyLimit,
   });
 
+  // TODO: sharedUtil로 빼기
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -69,8 +70,8 @@ const UnifiedSearch: NextPage = () => {
                     }}
                   >
                     {menuText} {menuText === "전체" && (jobDataArr?.count || 0) + (companyDataArr?.count || 0)}
-                    {menuText === "공고" && jobDataArr?.count}
-                    {menuText === "기업" && companyDataArr?.count}
+                    {menuText === "공고" && jobDataArr?.count.toLocaleString()}
+                    {menuText === "기업" && companyDataArr?.count.toLocaleString()}
                   </button>
                 </li>
               );
@@ -79,7 +80,7 @@ const UnifiedSearch: NextPage = () => {
         </nav>
         {menu === "전체" && (
           <div>
-            <h2 css={title}>채용 공고 📮</h2>
+            <p css={title}>채용 공고 📮</p>
             <JobPreviewPart jobDataArr={jobDataArr?.jobDataArr} count={jobDataArr?.count} isLoading={isJobLoading} />
             {jobDataArr?.count !== 0 && (
               <button
@@ -90,11 +91,12 @@ const UnifiedSearch: NextPage = () => {
                   setMenu("공고");
                 }}
               >
+                {/* TODO: 공통버튼으로 변경 */}
                 채용공고 더보기 {">"}
               </button>
             )}
 
-            <h2 css={title}>기업 정보 🏢</h2>
+            <p css={title}>기업 정보 🏢</p>
             <CompanyPreviewPart
               companyDataArr={companyDataArr?.companyDataArr}
               count={companyDataArr?.count}
@@ -109,6 +111,7 @@ const UnifiedSearch: NextPage = () => {
                   setMenu("기업");
                 }}
               >
+                {/* TODO: 공통버튼으로 변경 */}
                 기업정보 더보기 {">"}
               </button>
             )}

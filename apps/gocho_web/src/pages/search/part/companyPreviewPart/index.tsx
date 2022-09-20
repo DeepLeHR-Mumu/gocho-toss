@@ -33,9 +33,11 @@ export const CompanyPreviewPart: FunctionComponent<CompanyListPartProps> = ({ co
   return (
     <section css={listContainer}>
       {companyDataArr.slice(0, 6).map((companyData) => {
-        const isBookmarked = !!userCompanyBookmarkArr?.some((company) => {
-          return company.id === companyData.id;
-        });
+        const isBookmarked = Boolean(
+          userCompanyBookmarkArr?.some((company) => {
+            return company.id === companyData.id;
+          })
+        );
         return (
           <CompanyCard
             companyData={companyData}

@@ -25,9 +25,11 @@ export const JobCardList: FunctionComponent<JobCardListProps> = ({ jobDataArr, i
   return (
     <section css={listContainer}>
       {jobDataArr.map((jobData) => {
-        const isBookmarked = !!userJobBookmarkArr?.some((job) => {
-          return job.id === jobData.id;
-        });
+        const isBookmarked = Boolean(
+          userJobBookmarkArr?.some((job) => {
+            return job.id === jobData.id;
+          })
+        );
         return (
           <JobCard
             jobData={jobData}

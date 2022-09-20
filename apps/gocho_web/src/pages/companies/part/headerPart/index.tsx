@@ -30,9 +30,11 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData, re
   const { data: userData } = useUserInfo();
   const { data: userCompanyBookmarkArr, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
 
-  const isBookmarked = !!userCompanyBookmarkArr?.some((company) => {
-    return company.id === companyData.id;
-  });
+  const isBookmarked = Boolean(
+    userCompanyBookmarkArr?.some((company) => {
+      return company.id === companyData.id;
+    })
+  );
 
   const { mutate: addMutate } = useAddUserBookmark();
   const { mutate: deleteMutate } = useDeleteUserBookmark();

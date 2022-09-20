@@ -90,24 +90,17 @@ export const searchIcon = css`
   color: ${COLORS.BLUE_SECOND30};
 `;
 
-export const unifiedSearchWrapperOn = css`
-  position: absolute;
-  top: 6.1rem;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  width: 60%;
-  transition: all 0.2s ease;
-`;
-
-export const unifiedSearchWrapperOff = css`
-  position: absolute;
-  top: 4rem;
-  opacity: 0;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  width: 60%;
-  transition: all 0.2s ease;
-`;
+export const unifiedSearchWrapper = (isOn = false) => {
+  return css`
+    position: absolute;
+    top: ${isOn ? "6.1rem" : "4rem"};
+    opacity: ${isOn ? 1 : 0};
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 60%;
+    transition: all 0.2s ease;
+  `;
+};
 
 export const unifiedSearch = css`
   width: 100%;
