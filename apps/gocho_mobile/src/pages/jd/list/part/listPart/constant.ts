@@ -5,19 +5,19 @@ export const setJobOrderButtonArr: {
   order: OrderDef;
 }[] = [
   {
-    text: "📬 최신",
+    text: "📬최신",
     order: "recent",
   },
   {
-    text: "⏲ 마감임박",
+    text: "⏲마감임박",
     order: "end",
   },
   {
-    text: "👀 조회수",
+    text: "👀조회수",
     order: "view",
   },
   {
-    text: "🔖 북마크",
+    text: "🔖북마크",
     order: "popular",
   },
 ];
