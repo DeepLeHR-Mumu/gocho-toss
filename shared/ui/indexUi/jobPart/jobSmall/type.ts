@@ -1,10 +1,8 @@
 export type JobSmallCardSkeleton = {
-  isWeb?: never;
   jobData?: never;
   isSkeleton: boolean;
 };
 export type JobSmallCardProps = {
-  isWeb?: boolean;
   jobData: {
     id: number;
     companyName: string;

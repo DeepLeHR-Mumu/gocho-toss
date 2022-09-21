@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, SerializedStyles } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
 
@@ -18,8 +18,16 @@ export const greetingMsg = css`
   padding-left: 5px;
 `;
 
-export const downIconCSS = css`
-  font-size: 1rem;
-  margin-left: 0.5rem;
-  color: ${COLORS.GRAY40};
-`;
+interface IconCSSDef {
+  (isActive: boolean): SerializedStyles;
+}
+
+export const iconCSS: IconCSSDef = (isActive) => {
+  return css`
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    color: ${COLORS.GRAY40};
+    transition: all 0.3s ease-in;
+    transform: ${isActive ? "rotate(0deg)" : "rotate(540deg)"};
+  `;
+};

@@ -4,6 +4,7 @@ import { BsChevronRight } from "react-icons/bs";
 import { Layout } from "@component/layout";
 import { CommunityPostingCardSkeleton } from "@component/card/communityPosting/skeleton";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
 import { setPostingOrderButtonArr } from "../../constant";
 import {
@@ -23,7 +24,8 @@ export const CommunityPostingPartSkeleton: FunctionComponent = () => {
       <Layout>
         <div>
           <header css={headerContainer}>
-            <h2 css={title}>실시간 커뮤니티 글 모음</h2>
+            <InvisibleH2 title="생산/기능직 커뮤니티 게시글" />
+            <p css={title}>실시간 커뮤니티 글 모음</p>
             <div css={buttonArrContainer}>
               {setPostingOrderButtonArr.map((button) => {
                 return (

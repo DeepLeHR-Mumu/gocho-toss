@@ -8,7 +8,15 @@ import { CompanyCommentCard } from "@component/card/companyComment";
 import { Layout } from "@component/layout";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
-import { partContainer, title, colorPoint, cardListContainer, sliderContainer, buttonCSSCreator } from "./style";
+import {
+  partContainer,
+  title,
+  colorPoint,
+  cardListContainer,
+  sliderContainer,
+  emptyBox,
+  buttonCSSCreator,
+} from "./style";
 import { setCarouselSetting } from "./util";
 
 export const CompanyCommentPart: FunctionComponent = () => {
@@ -25,13 +33,7 @@ export const CompanyCommentPart: FunctionComponent = () => {
           </p>
         </Layout>
 
-        <section css={cardListContainer}>
-          {/* <Slider {...setCarouselSetting()} ref={sliderRef} css={sliderContainer}>
-            {companyDataArr.companyDataArr.map((data) => {
-              return <CompanyCommentCard companyId={data.id} key={`companyComment${data.id}`} />;
-            })}
-          </Slider> */}
-        </section>
+        <section css={emptyBox} />
       </section>
     );
   }
@@ -48,7 +50,7 @@ export const CompanyCommentPart: FunctionComponent = () => {
       <section css={cardListContainer}>
         <Slider {...setCarouselSetting()} ref={sliderRef} css={sliderContainer}>
           {companyDataArr.companyDataArr.map((data) => {
-            return <CompanyCommentCard companyId={data.id} key={`companyComment${data.id}`} />;
+            return <CompanyCommentCard companyData={data} key={`companyComment${data.id}`} />;
           })}
         </Slider>
 

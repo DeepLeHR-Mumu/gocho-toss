@@ -9,6 +9,7 @@ export const cardWrapper = css`
   border-radius: 2rem;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.15);
   padding: 1.5rem;
+  overflow: hidden;
 `;
 
 export const bookmarkButtonCSS = css`
@@ -17,7 +18,7 @@ export const bookmarkButtonCSS = css`
   top: 0;
   padding: 1rem;
   background-color: ${COLORS.GRAY90};
-  border-radius: 0 1.25rem;
+  border-radius: 0 0 0 1.25rem;
   color: ${COLORS.GRAY60};
   font-size: 1rem;
   z-index: 20;

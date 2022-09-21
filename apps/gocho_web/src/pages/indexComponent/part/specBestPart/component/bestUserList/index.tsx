@@ -1,15 +1,9 @@
 import { FunctionComponent } from "react";
-import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
-import {
-  bestUserArrWrapper,
-  setUserCard,
-  profileBox,
-  userNickname,
-  scoreCSS,
-  setPointColor,
-  recruitSectorCSS,
-} from "./style";
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
+import { UserBadge } from "shared-ui/common/atom/userBadge";
+
+import { bestUserArrWrapper, setUserCard, userNickname, scoreCSS, setPointColor, recruitSectorCSS } from "./style";
 import { BestUserArrProps } from "./type";
 
 export const BestUserList: FunctionComponent<BestUserArrProps> = ({
@@ -26,31 +20,24 @@ export const BestUserList: FunctionComponent<BestUserArrProps> = ({
       {bestUserDataArr.map((user, index) => {
         const isActive = index === activeUserID;
         return (
-          <section
+          <button
+            type="button"
             onClick={() => {
               handleActiveUser(index);
             }}
-            onKeyDown={() => {
-              handleActiveUser(index);
-            }}
-            role="presentation"
             key={user.id}
             css={setUserCard(isActive)}
           >
-            <div css={profileBox}>
-              <ProfileImg imageStr={user.profileImg} size="S" />
-            </div>
-            <p>
-              <strong css={userNickname}>{user.nickname}</strong>
+            <ProfileImg imageStr={user.profileImg} size="S" />
+            <strong css={userNickname}>
+              {user.nickname} <UserBadge badge="admin" />
+            </strong>
+            <p css={scoreCSS}>
+              <span css={setPointColor(isActive)}>{user.score}</span> / 5
             </p>
-            {user.score && (
-              <p css={scoreCSS}>
-                <span css={setPointColor(isActive)}>{user.score}</span> / 5
-              </p>
-            )}
 
-            <p css={recruitSectorCSS}>{user.desiredTask}</p>
-          </section>
+            <p css={recruitSectorCSS}>평가수 {user.score}</p>
+          </button>
         );
       })}
     </div>

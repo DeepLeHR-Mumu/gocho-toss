@@ -27,11 +27,7 @@ import {
 } from "./style";
 import { JobSmallCardProps, JobSmallCardSkeleton } from "./type";
 
-export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSkeleton> = ({
-  isWeb = true,
-  jobData,
-  isSkeleton,
-}) => {
+export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSkeleton> = ({ jobData, isSkeleton }) => {
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
 
   // TODO : 2주차 작업분
@@ -56,19 +52,17 @@ export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSke
         </button>
 
         <div css={flexBox}>
-          {isWeb && (
-            <div css={companyLogoBox}>
-              <Image
-                layout="fill"
-                objectFit="contain"
-                src={imageSrc}
-                alt=""
-                onError={() => {
-                  return setImageSrc(defaultCompanyLogo);
-                }}
-              />
-            </div>
-          )}
+          <div css={companyLogoBox}>
+            <Image
+              layout="fill"
+              objectFit="contain"
+              src={imageSrc}
+              alt=""
+              onError={() => {
+                return setImageSrc(defaultCompanyLogo);
+              }}
+            />
+          </div>
 
           <div css={infoBox}>
             <DdayBox endTime={jobData.endTime} />

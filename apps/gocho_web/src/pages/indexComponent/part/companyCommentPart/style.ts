@@ -25,23 +25,20 @@ export const cardListContainer = css`
   overflow: hidden;
 `;
 
+export const emptyBox = css`
+  min-height: 48.3125rem;
+`;
+
 export const sliderContainer = css`
   .slick-track {
     padding: 2rem 0 8rem 0;
   }
+  .slick-slide {
+    transition: all 0.2s ease;
+    transform: scale(0.9);
+  }
   .slick-center {
-    .active {
-      /* width: 31.125rem; */
-      /* transform: translateY(2rem) scale(1.2); */
-      transform: translateY(-2rem);
-      /* margin: 0 5rem; */
-
-      .CommentButton {
-        background-color: ${COLORS.BLUE_FIRST40};
-        border: 0;
-        color: ${COLORS.GRAY100};
-      }
-    }
+    transform: scale(1);
   }
 `;
 

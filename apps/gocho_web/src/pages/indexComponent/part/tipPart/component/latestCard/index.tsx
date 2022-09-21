@@ -13,16 +13,12 @@ export const LatestCard: FunctionComponent<LatestCardProps> = ({ tipData }) => {
       <Link href={COMMUNITY_TIPS_LIST_URL} passHref>
         <a css={linkArea}>
           <div css={cardImageBox}>
-            <Image src={tipData.thumbnailSrc} alt="" layout="fill" objectFit="cover" />
+            <Image src={tipData.thumbnailSrc} alt={tipData.title} layout="fill" objectFit="cover" />
           </div>
           <div css={cardInfo}>
-            <p>
-              <strong css={cardTitle}>
-                {tipData.title.split("-").map((line) => {
-                  return <span key={line}>{line}</span>;
-                })}
-              </strong>
-            </p>
+            <h3>
+              <strong css={cardTitle}>{tipData.title}</strong>
+            </h3>
             <p css={cardDesc}>{tipData.description}</p>
           </div>
         </a>

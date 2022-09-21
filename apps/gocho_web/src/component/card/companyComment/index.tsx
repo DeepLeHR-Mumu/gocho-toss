@@ -1,10 +1,15 @@
 import { FunctionComponent, useRef, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
+import { useModal } from "@recoil/hook/modal";
+import { LinkButton, NormalButton } from "shared-ui/common/atom/button";
 import { CDN_URL } from "shared-constant/externalURL";
 import { useCompanyCommentArr } from "shared-api/company";
+import { useUserInfo } from "shared-api/auth";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 
+import { UnLoginComment } from "./component/unLoginComment";
 import { Comment } from "./component/comment";
 
 import {
@@ -16,29 +21,75 @@ import {
   companyName,
   commentCount,
   commentContainer,
-  showMoreCompanyCommentButton,
+  unLoginContainer,
+  linkBox,
+  unLoginBox,
+  unLoginDesc,
 } from "./style";
 import { CommentCardProps } from "./type";
 
-export const CompanyCommentCard: FunctionComponent<CommentCardProps> = ({ companyId }) => {
+export const CompanyCommentCard: FunctionComponent<CommentCardProps> = ({ companyData }) => {
   const commentContainerRef = useRef<HTMLDivElement | null>(null);
+  const { isSuccess, data: userInfoData } = useUserInfo();
+  const { setCurrentModal } = useModal();
 
-  // 최초 load가 완료 된 후 실행
   useEffect(() => {
-    // commentContainerRef의 스크롤 높이를 bottomHeight변수에 적용합니다.
     const bottomHeight = commentContainerRef.current?.scrollHeight;
-    // commentContainerRef의 현재 스크롤 값을 만약 bottomHeight이 undefined가 아니라면 bottomHeight으로
-    // undefined라면 0으로 적용합니다.
-    // useEffect이전 최초 로딩 완료시 commentContainerRef.current의 데이터를 찾지못하기에 undefined가 노출됩니다.
     commentContainerRef.current?.scrollTo(0, bottomHeight !== undefined ? bottomHeight : 0);
   }, []);
 
   const { data: companyCommentArrData } = useCompanyCommentArr({
-    companyId,
+    companyId: companyData.id,
   });
 
-  if (!companyCommentArrData) {
-    return <div css={cardWrapper}>에러가 발생</div>;
+  if (!companyCommentArrData || !isSuccess) {
+    return (
+      <div css={cardWrapper} className="active">
+        <header css={header}>
+          <div css={companyInfoContainer}>
+            <div css={companyLogoBox}>
+              <Image
+                layout="fill"
+                objectFit="contain"
+                src={`${CDN_URL}/company_images/${companyData.id}/logo.png`}
+                alt={`${companyData.name} 기업 로고`}
+              />
+            </div>
+            <h3 css={companyName}>{companyData.name}</h3>
+          </div>
+          <p css={commentCount}>총 댓글 000개</p>
+        </header>
+
+        <section css={commentBodyContainer}>
+          <div css={unLoginBox}>
+            <p css={unLoginDesc}>댓글이 궁금하시다면</p>
+            <NormalButton
+              text="로그인/회원가입"
+              variant="filled"
+              wide={false}
+              buttonClick={() => {
+                setCurrentModal("loginModal", { button: "close" });
+              }}
+            />
+          </div>
+
+          <div css={unLoginContainer} ref={commentContainerRef}>
+            {dummyArrCreator(6).map((_) => {
+              return <UnLoginComment key={_} />;
+            })}
+          </div>
+        </section>
+
+        <div css={linkBox}>
+          <LinkButton
+            text="실시간 댓글 보러가기"
+            linkTo={`${COMPANY_DETAIL_URL}/${companyData.id}`}
+            wide
+            variant="outlined"
+          />
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -49,26 +100,31 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps> = ({ compan
             <Image
               layout="fill"
               objectFit="contain"
-              src={`${CDN_URL}/company_images/${companyId}/logo.png`}
+              src={`${CDN_URL}/company_images/${companyData.id}/logo.png`}
               alt={`${companyCommentArrData.company.name} 기업 로고`}
             />
           </div>
           <strong css={companyName}>{companyCommentArrData.company.name}</strong>
         </div>
-        <p css={commentCount}>총 댓글 {companyCommentArrData.commentArr.length}개</p>
+        <p css={commentCount}>총 댓글 {companyCommentArrData.commentArr.length.toLocaleString("ko-KR")}개</p>
       </header>
+
       <section css={commentBodyContainer}>
         <div css={commentContainer} ref={commentContainerRef}>
           {companyCommentArrData.commentArr.map((comment) => {
-            return <Comment commentData={comment} key={comment.id} />;
+            return <Comment nickname={userInfoData.nickname} commentData={comment} key={comment.id} />;
           })}
         </div>
-        <Link href="/company/id" passHref>
-          <a className="CommentButton" css={showMoreCompanyCommentButton}>
-            실시간 댓글 보러가기
-          </a>
-        </Link>
       </section>
+
+      <div css={linkBox}>
+        <LinkButton
+          text="실시간 댓글 보러가기"
+          linkTo={`${COMPANY_DETAIL_URL}/${companyData.id}`}
+          wide
+          variant="outlined"
+        />
+      </div>
     </div>
   );
 };

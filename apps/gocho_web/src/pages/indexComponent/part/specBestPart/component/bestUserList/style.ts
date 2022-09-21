@@ -4,7 +4,7 @@ import { COLORS } from "shared-style/color";
 
 export const bestUserArrWrapper = css`
   width: 100%;
-  max-width: 30rem;
+  max-width: 29rem;
   display: flex;
   flex-wrap: wrap;
 `;
@@ -15,17 +15,16 @@ interface setUserCardDef {
 
 export const setUserCard: setUserCardDef = (active) => {
   return css`
-    width: 8rem;
-    height: 9rem;
-    border-radius: 0.5rem;
+    width: 8.75rem;
+    height: 8.75rem;
+    border-radius: 1.5rem;
     background-color: ${COLORS.GRAY100};
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 1rem;
-    margin: 0 1rem 1rem 0;
-    cursor: pointer;
+    padding: 0.875rem;
+    margin: 0 1.375rem 1.375rem 0;
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.16);
     transition: all 0.2s ease-in;
 
@@ -38,7 +37,6 @@ export const setUserCard: setUserCardDef = (active) => {
 
     ${active &&
     `
-      width:9rem;
       background-color: ${COLORS.BLUE_NEON40};
       h4 {
         color: ${COLORS.GRAY100};
@@ -50,14 +48,9 @@ export const setUserCard: setUserCardDef = (active) => {
   `;
 };
 
-export const profileBox = css`
-  width: 2.5rem;
-  height: 2.5rem;
-  position: relative;
-  border-radius: 50%;
-`;
-
 export const userNickname = css`
+  display: flex;
+  align-items: center;
   font-size: 0.875rem;
   font-weight: 600;
   color: ${COLORS.GRAY20};

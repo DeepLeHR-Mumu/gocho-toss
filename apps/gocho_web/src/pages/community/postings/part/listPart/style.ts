@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 import { PC_HOVER } from "shared-style/mediaQuery";
-import { hoverShadow } from "@style/common";
+import { hoverShadow } from "shared-style/common";
 
 export const partContainer = css`
   background-color: ${COLORS.GRAY90};

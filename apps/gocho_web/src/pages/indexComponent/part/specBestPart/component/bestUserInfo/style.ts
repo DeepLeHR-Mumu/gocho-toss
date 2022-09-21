@@ -1,5 +1,5 @@
 import { css, keyframes } from "@emotion/react";
-import { shorten } from "@style/common";
+import { shorten } from "shared-style/common";
 import { COLORS } from "shared-style/color";
 
 const bounceAnimation = keyframes`

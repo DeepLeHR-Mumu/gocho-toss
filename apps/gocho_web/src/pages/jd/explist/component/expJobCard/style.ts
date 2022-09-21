@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
-import { shorten } from "@style/common";
+import { shorten } from "shared-style/common";
 
 export const expJobCardSkeleton = css`
   overflow: hidden;

@@ -7,7 +7,7 @@ export const wrapper = css`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -80%);
-  z-index: 50;
+  z-index: 80;
   width: 22rem;
   height: auto;
   padding: 2rem;

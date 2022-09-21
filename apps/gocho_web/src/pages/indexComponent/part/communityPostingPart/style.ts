@@ -1,65 +1,66 @@
-import { css, SerializedStyles } from "@emotion/react";
+import { css } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
 import { PC_HOVER } from "shared-style/mediaQuery";
 
 export const partContainer = css`
-  margin-top: 7.9375rem;
+  margin-top: 10rem;
 `;
 
-export const headerContainer = css`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 2.5rem;
-`;
+export const headerContainer = css``;
 
 export const title = css`
   font-size: 1.25rem;
   color: ${COLORS.GRAY10};
-  font-weight: 600;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+`;
+
+export const colorPoint = css`
+  color: ${COLORS.BLUE_FIRST40};
 `;
 
 export const buttonArrContainer = css`
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 3rem;
 `;
 
 export const setPostingOrderButton = (active = false) => {
   return css`
-    width: fit-content;
     text-align: center;
     border-radius: 1rem;
     font-weight: ${active ? "600" : "400"};
     margin-right: 0.5rem;
-    padding: 0.25rem 1rem;
-    border: 1px solid;
+    font-size: 0.75rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 2.0625rem;
     transition: all 0.2s ease;
 
     :nth-of-type(1) {
-      border-color: ${active ? COLORS.BLUE_SECOND40 : `${COLORS.GRAY70}`};
-      color: ${active ? "#3171b7" : `${COLORS.GRAY30}`};
-      background-color: ${active ? COLORS.BLUE_SECOND40 : "transparent"};
+      color: ${active ? COLORS.BLUE_FIRST30 : `${COLORS.GRAY40}`};
+      background-color: ${active ? "#E9EFFA" : COLORS.GRAY90};
     }
     :nth-of-type(2) {
-      border-color: ${active ? "#ebe3ff" : `${COLORS.GRAY70}`};
-      color: ${active ? "#5429cd" : `${COLORS.GRAY30}`};
-      background-color: ${active ? "#ebe3ff" : "transparent"};
+      color: ${active ? "#5429cd" : `${COLORS.GRAY40}`};
+      background-color: ${active ? "#ebe3ff" : COLORS.GRAY90};
     }
     :nth-of-type(3) {
-      border-color: ${active ? "#edffe3" : `${COLORS.GRAY70}`};
-      color: ${active ? "#3f7222" : `${COLORS.GRAY30}`};
-      background-color: ${active ? "#edffe3" : "transparent"};
+      color: ${active ? "#09A434" : `${COLORS.GRAY40}`};
+      background-color: ${active ? "#edffe3" : COLORS.GRAY90};
     }
     :nth-of-type(4) {
-      border-color: ${active ? COLORS.GRAY90 : `${COLORS.GRAY70}`};
-      color: ${active ? `${COLORS.GRAY10}` : `${COLORS.GRAY30}`};
-      background-color: ${active ? COLORS.GRAY90 : "transparent"};
+      color: ${active ? `${COLORS.GRAY10}` : `${COLORS.GRAY40}`};
+      background-color: ${active ? COLORS.GRAY90 : COLORS.GRAY90};
     }
     :nth-of-type(5) {
-      border-color: ${active ? "#fff8f8" : COLORS.GRAY70};
-      color: ${active ? COLORS.ERROR_RED40 : COLORS.GRAY30};
-      background-color: ${active ? "#fff8f8" : "transparent"};
+      color: ${active ? "#F16E0E" : COLORS.GRAY40};
+      background-color: ${active ? "#FFF4DC" : COLORS.GRAY90};
     }
 
     :last-of-type {
@@ -74,41 +75,61 @@ export const cardListContainer = css`
 
 export const sliderListContainer = css`
   > div {
-    padding-bottom: 30px;
+    padding-bottom: 1.75rem;
   }
 `;
 
-interface buttonCSSDef {
-  (location: "left" | "right"): SerializedStyles;
-}
+export const buttonBox = css`
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: ${COLORS.GRAY100};
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-export const buttonCSSCreator: buttonCSSDef = (location) => {
-  return css`
-    width: 4.125rem;
-    height: 4.125rem;
-    border-radius: 50%;
-    background-color: ${COLORS.GRAY100};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: ${COLORS.GRAY70};
-    border: 1px solid ${COLORS.GRAY70};
+  :after {
+    content: "";
+    width: 8rem;
     position: absolute;
-    top: 50%;
-    z-index: 10;
-    transform: translate(0, -50%);
-    transition: all 0.2s ease-in;
-    ${location === "left" ? "left:-2rem" : "right:0rem"};
+    left: -8rem;
+    top: 0;
+    height: 100%;
+    background-image: linear-gradient(to left, #fff 50%, transparent);
+  }
 
-    ${PC_HOVER} {
-      :hover {
-        color: ${COLORS.GRAY100};
-        background-color: ${COLORS.GRAY10};
-        border: 0;
-      }
+  > button {
+    margin-bottom: 1rem;
+
+    :last-of-type {
+      margin-bottom: 0;
     }
-  `;
-};
+  }
+`;
+
+export const buttonCSSCreator = css`
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  opacity: 0.8;
+  background-color: ${COLORS.GRAY100};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${COLORS.GRAY40};
+  border: 1px solid ${COLORS.GRAY70};
+  transition: all 0.2s ease-in;
+
+  ${PC_HOVER} {
+    :hover {
+      color: ${COLORS.GRAY100};
+      background-color: ${COLORS.GRAY10};
+      border: 0;
+    }
+  }
+`;
 
 export const showMoreCommunityPostingButton = css`
   display: flex;
@@ -130,4 +151,10 @@ export const showMoreCommunityPostingButton = css`
     display: flex;
     align-items: center;
   }
+`;
+
+export const linkButtonBox = css`
+  width: 100%;
+  margin: 1.5rem auto 0;
+  max-width: 25.5rem;
 `;
