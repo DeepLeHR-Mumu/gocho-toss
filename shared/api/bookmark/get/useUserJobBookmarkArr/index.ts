@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { userBookmarkKeyObj, UserBookmarkArrRequestDef } from "shared-constant/queryKeyFactory/bookmark/bookmarkKeyObj";
-import { axiosInstance } from "../../axiosInstance";
+import { axiosInstance } from "../../../axiosInstance";
 
 import { GetUserJobBookmarkArrDef } from "./type";
 import { selector } from "./util";
 
-export const getUserJobBookmarkArr: GetUserJobBookmarkArrDef = async ({ queryKey: [{ requestObj }] }) => {
+export const getUserJobBookmarkArr: GetUserJobBookmarkArrDef = async ({ queryKey: [, { requestObj }] }) => {
   const token = localStorage.getItem("token") as string;
   const { data } = await axiosInstance.get(`/users/${requestObj?.userId}/jd-bookmarks`, {
     headers: {
@@ -19,7 +19,7 @@ export const getUserJobBookmarkArr: GetUserJobBookmarkArrDef = async ({ queryKey
 export const useUserJobBookmarkArr = (requestObj: UserBookmarkArrRequestDef) => {
   const queryResult = useQuery(userBookmarkKeyObj.jobBookmarkArr(requestObj), getUserJobBookmarkArr, {
     enabled: Boolean(requestObj.userId),
-    select: ({ data }) => {
+    select: (data) => {
       return selector(data);
     },
   });

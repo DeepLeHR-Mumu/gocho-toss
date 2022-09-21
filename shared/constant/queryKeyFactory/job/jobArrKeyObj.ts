@@ -12,7 +12,7 @@ export interface JobArrRequestObjDef {
 export const jobArrKeyObj = {
   all: [{ data: "jobArr" }] as const,
   jobArr: (requestObj: JobArrRequestObjDef) => {
-    return [{ data: "jobArr", requestObj }] as const;
+    return ["jobArr", { requestObj }] as const;
   },
   infinite: (requestObj: JobArrRequestObjDef) => {
     return [

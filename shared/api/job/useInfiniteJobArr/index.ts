@@ -1,7 +1,8 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-import { axiosInstance } from "../../axiosInstance";
 import { jobArrKeyObj, JobArrRequestObjDef } from "shared-constant/queryKeyFactory/job/jobArrKeyObj";
+
+import { axiosInstance } from "../../axiosInstance";
 
 import { GetInfiniteJobArrDef } from "./type";
 import { selector } from "./util";

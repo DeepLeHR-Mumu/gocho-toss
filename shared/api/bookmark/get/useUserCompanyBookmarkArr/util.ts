@@ -1,4 +1,4 @@
-import { companyBookmarkObjDef } from "../type/bookmark";
+import { companyBookmarkObjDef } from "../../type/bookmark";
 
 export const selector = (data: companyBookmarkObjDef[]) => {
   return data.map((company) => {

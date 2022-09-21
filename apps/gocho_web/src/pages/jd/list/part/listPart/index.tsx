@@ -31,7 +31,6 @@ import {
 } from "./style";
 
 export const ListPart: FunctionComponent = () => {
-  // TODO: constant로 뺄까?
   const limit = 10;
   const [total, setTotal] = useState<number>(0);
   const [page, setPage] = useState(1);

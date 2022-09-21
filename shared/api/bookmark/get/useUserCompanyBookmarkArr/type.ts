@@ -1,6 +1,8 @@
-import { userBookmarkKeyObj } from "shared-constant/queryKeyFactory/bookmark/bookmarkKeyObj";
 import { QueryFunctionContext } from "@tanstack/react-query";
-import { companyBookmarkObjDef } from "../type/bookmark";
+
+import { userBookmarkKeyObj } from "shared-constant/queryKeyFactory/bookmark/bookmarkKeyObj";
+
+import { companyBookmarkObjDef } from "../../type/bookmark";
 
 interface ResponseObjDef {
   data: companyBookmarkObjDef[];

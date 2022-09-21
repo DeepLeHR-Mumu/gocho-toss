@@ -2,8 +2,9 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { ResponseDef } from "shared-type/api/responseType";
-import { axiosInstance } from "../../axiosInstance";
+
 import { useDeleteUserBookmarkProps, RequestObjDef, DeleteUserBookmarkDef } from "./type";
+import { axiosInstance } from "../../../axiosInstance";
 
 const deleteUserBookmark: DeleteUserBookmarkDef = async (requestObj) => {
   const token = localStorage.getItem("token") as string;

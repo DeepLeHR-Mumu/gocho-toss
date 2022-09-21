@@ -6,6 +6,7 @@ export const selector = (jobArr: JobObjDef[], count: number) => {
       id: job.id,
       companyName: job.company.name,
       companyLogo: job.company.logo_url,
+      companyId: job.company_id,
       startTime: job.start_time,
       endTime: job.end_time,
       title: job.title,

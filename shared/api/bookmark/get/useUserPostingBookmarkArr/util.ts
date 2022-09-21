@@ -1,4 +1,4 @@
-import { postingBookmarkObjDef } from "../type/bookmark";
+import { postingBookmarkObjDef } from "../../type/bookmark";
 
 export const selector = (data: postingBookmarkObjDef[]) => {
   return data.map((bookmark) => {

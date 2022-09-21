@@ -14,7 +14,7 @@ export const userBookmarkKeyObj = {
     return [{ data: "userBookmark", requestObj }] as const;
   },
   jobBookmarkArr: (requestObj: UserBookmarkArrRequestDef) => {
-    return [{ data: "userJobBookmarkArr", requestObj }] as const;
+    return ["userJobBookmarkArr", { requestObj }] as const;
   },
   companyBookmarkArr: (requestObj: UserBookmarkArrRequestDef) => {
     return [{ data: "userCompanyBookmarkArr", requestObj }] as const;

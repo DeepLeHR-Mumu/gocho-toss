@@ -1,8 +1,5 @@
-export interface jobBookmarkObjDef {
-  id: number;
-  title: string;
-  end_time: number;
-  company: { id: number; name: string };
+export interface jobBookmarkResObjDef {
+  data: { id: number; title: string; end_time: number; company: { id: number; name: string } }[];
 }
 
 export interface companyBookmarkObjDef {
