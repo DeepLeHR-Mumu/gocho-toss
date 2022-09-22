@@ -8,4 +8,6 @@ export const companyInfoObj = {
   phoneVisualNumber: "010-8545-7161",
   corporationNumber: "331-86-02342",
   copyrightText: "Copyright by 주식회사 디플에이치알, All right reserved.",
+  helpEmail: "",
+  kakaoPlus: "",
 };
