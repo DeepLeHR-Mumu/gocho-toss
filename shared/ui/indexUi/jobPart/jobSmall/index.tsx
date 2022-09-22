@@ -47,7 +47,7 @@ export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSke
   return (
     <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
       <a css={cardWrapper} aria-label={`${jobData.title} 채용 공고로 이동`}>
-        <button type="button" css={bookmarkButtonCSS}>
+        <button type="button" css={bookmarkButtonCSS} aria-label={`${jobData.companyName} 북마크하기`}>
           <BsFillBookmarkFill />
         </button>
 
@@ -66,13 +66,15 @@ export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSke
 
           <div css={infoBox}>
             <DdayBox endTime={jobData.endTime} />
-            <h3 css={companyNameCSS}>{jobData.companyName}</h3>
+            <p css={companyNameCSS}>{jobData.companyName}</p>
             <p css={titleCSS}>{jobData.title}</p>
           </div>
         </div>
         <ul css={bottomInfo}>
           <li>
             <Image
+              layout="fixed"
+              objectFit="contain"
               src={jobData.high ? highTrue : highFalse}
               alt={jobData.high ? "고졸 지원 가능" : "고졸 지원 불가능"}
             />

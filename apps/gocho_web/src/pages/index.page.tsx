@@ -1,14 +1,13 @@
 import { NextPage } from "next";
 // import { dehydrate, QueryClient } from "@tanstack/react-query";
-import Head from "next/head";
 
-import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 // import { specArrKeyObj } from "@constant/queryKeyFactory/spec/arrKeyObj";
 // import { companyCommentArrKeyObj } from "@constant/queryKeyFactory/company/commentArrKeyObj";
 // import { jobArrKeyObj } from "@constant/queryKeyFactory/job/jobArrKeyObj";
 // import { communityPostingArrKeyObj } from "@constant/queryKeyFactory/community/postingArrKeyObj";
 // import { tipArrKeyObj } from "@constant/queryKeyFactory/tip/arrKeyObj";
-
+import { META_INDEX } from "shared-constant/meta";
+import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { CompanyCommentPart } from "@pages/indexComponent/part/companyCommentPart";
 import { MainCarouselPart } from "./indexComponent/part/mainCarouselPart";
 import { DataLabPart } from "./indexComponent/part/dataLabPart";
@@ -51,10 +50,7 @@ import { TipPart } from "./indexComponent/part/tipPart";
 const Home: NextPage = () => {
   return (
     <main>
-      <Head>
-        <title>고초대졸닷컴 - 생산/기능직 No.1 취업 플랫폼</title>
-      </Head>
-      <InvisibleH1 title="고초대졸닷컴 - 생산/기능직 No.1 취업 플랫폼" />
+      <MetaHead metaData={META_INDEX} />
       <MainCarouselPart />
       <DataLabPart />
       <JobPart />

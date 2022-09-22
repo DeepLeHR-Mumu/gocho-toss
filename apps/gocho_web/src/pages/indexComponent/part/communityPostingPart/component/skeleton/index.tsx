@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
-import { BsChevronRight } from "react-icons/bs";
 
+import { COMMUNITY_POSTINGS_LIST_URL } from "shared-constant/internalURL";
+import { LinkButton } from "shared-ui/common/atom/button";
 import { Layout } from "@component/layout";
 import { CommunityPostingCardSkeleton } from "@component/card/communityPosting/skeleton";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
@@ -9,13 +10,13 @@ import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { setPostingOrderButtonArr } from "../../constant";
 import {
   partContainer,
-  headerContainer,
   title,
   buttonArrContainer,
   postingOrderButton,
   cardListContainer,
+  colorPoint,
   sliderListContainer,
-  showMoreCommunityPostingButton,
+  linkButtonBox,
 } from "./style";
 
 export const CommunityPostingPartSkeleton: FunctionComponent = () => {
@@ -23,9 +24,11 @@ export const CommunityPostingPartSkeleton: FunctionComponent = () => {
     <section css={partContainer}>
       <Layout>
         <div>
-          <header css={headerContainer}>
+          <header>
             <InvisibleH2 title="생산/기능직 커뮤니티 게시글" />
-            <p css={title}>실시간 커뮤니티 글 모음</p>
+            <p css={title}>
+              <span css={colorPoint}>NEW</span> 실시간 커뮤니티 글 모음 💬
+            </p>
             <div css={buttonArrContainer}>
               {setPostingOrderButtonArr.map((button) => {
                 return (
@@ -40,16 +43,14 @@ export const CommunityPostingPartSkeleton: FunctionComponent = () => {
 
         <div css={cardListContainer}>
           <div css={sliderListContainer}>
-            {dummyArrCreator(3).map((dummy) => {
+            {dummyArrCreator(4).map((dummy) => {
               return <CommunityPostingCardSkeleton key={`posting${dummy}`} />;
             })}
           </div>
         </div>
-        <div css={showMoreCommunityPostingButton}>
-          실시간 커뮤니티
-          <span>
-            더보기 <BsChevronRight />
-          </span>
+
+        <div css={linkButtonBox}>
+          <LinkButton text="실시간 커뮤니티 더보기" linkTo={COMMUNITY_POSTINGS_LIST_URL} variant="filled" />
         </div>
       </Layout>
     </section>

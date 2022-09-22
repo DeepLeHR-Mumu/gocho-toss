@@ -16,9 +16,7 @@ export const LatestCard: FunctionComponent<LatestCardProps> = ({ tipData }) => {
             <Image src={tipData.thumbnailSrc} alt={tipData.title} layout="fill" objectFit="cover" />
           </div>
           <div css={cardInfo}>
-            <h3>
-              <strong css={cardTitle}>{tipData.title}</strong>
-            </h3>
+            <strong css={cardTitle}>{tipData.title}</strong>
             <p css={cardDesc}>{tipData.description}</p>
           </div>
         </a>

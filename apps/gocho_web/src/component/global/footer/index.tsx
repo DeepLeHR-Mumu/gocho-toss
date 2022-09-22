@@ -38,9 +38,9 @@ export const Footer: FunctionComponent = () => {
       <Layout>
         <div css={footerContainer}>
           <div css={companyInfoWrapper}>
-            <h2 css={GDtitle}>
+            <p css={GDtitle}>
               <Image layout="fill" objectFit="contain" src={GDtitleSrc} alt="고초대졸닷컴" />
-            </h2>
+            </p>
             <ul css={companyInfoListCSS}>
               <li>
                 <Link href={MAIN_URL}>홈</Link>
@@ -78,13 +78,13 @@ export const Footer: FunctionComponent = () => {
             <p css={copyrightTextCSS}>{copyrightText}</p>
           </div>
           <div css={inquiryContainer}>
-            <h3 css={inquiryTitle}>광고 문의</h3>
+            <p css={inquiryTitle}>광고 문의</p>
             <p css={inquiryText}>
               <Link href={`mailto:${marketingEmail}`}>
                 <a>기업공고 / 광고 등록 문의 ({marketingEmail})</a>
               </Link>
             </p>
-            <h3 css={inquiryTitle}>고객센터</h3>
+            <p css={inquiryTitle}>고객센터</p>
             <p css={notReadyText}>게시 준비중 입니다.</p>
           </div>
         </div>

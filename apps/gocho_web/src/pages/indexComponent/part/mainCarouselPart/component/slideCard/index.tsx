@@ -35,7 +35,7 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({
             </div>
           )}
         </p>
-        <h3 css={titleCSS}>{title}</h3>
+        <p css={titleCSS}>{title}</p>
         <p css={lastDescCSS}>{lastDesc}</p>
       </div>
       <div css={dimmed} />

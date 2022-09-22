@@ -20,7 +20,26 @@ export const SpecBestPart: FunctionComponent = () => {
   });
 
   if (!selectedSpecArr) {
-    return <div>데이터 없을시 처리방법 고민</div>;
+    return (
+      <section css={specBestWrapper}>
+        <InvisibleH2 title="생산/기능직 구직자 스펙 평가 리스트" />
+        <Layout>
+          <p css={title}>
+            <span css={colorPoint}>BEST</span> 스펙평가 ✨
+          </p>
+          <Link href={MAIN_URL} passHref>
+            <a css={linkButton}>
+              전체보기 <BsChevronRight />
+            </a>
+          </Link>
+
+          <div css={bestUserWrapper}>
+            <BestUserList isSkeleton />
+            <BestUserBox isSkeleton />
+          </div>
+        </Layout>
+      </section>
+    );
   }
 
   return (

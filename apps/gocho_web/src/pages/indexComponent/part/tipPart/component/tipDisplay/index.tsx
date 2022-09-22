@@ -90,7 +90,7 @@ export const TipDisplay: FunctionComponent<TipDisplayProps> = ({ id }) => {
             return <li key={`${tipDetailData.id}${keyword}`}>#{keyword}</li>;
           })}
         </ul>
-        <h3 css={currentTipTitle}>{tipDetailData.title}</h3>
+        <strong css={currentTipTitle}>{tipDetailData.title}</strong>
         <p css={currentTipDesc}>{tipDetailData.description}</p>
         <LinkButton linkTo={COMMUNITY_TIPS_LIST_URL} variant="filled" text="취업꿀팁 더보기" />
       </div>

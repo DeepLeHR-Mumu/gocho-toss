@@ -72,6 +72,7 @@ export const bottomInfo = css`
   align-items: center;
 
   > li {
+    position: relative;
     background-color: ${COLORS.GRAY90};
     margin-right: 1rem;
     padding: 0.5rem;

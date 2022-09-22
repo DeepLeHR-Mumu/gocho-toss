@@ -1,6 +1,7 @@
 import { css, SerializedStyles } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
+import { shorten } from "shared-style/common";
 
 export const bestUserArrWrapper = css`
   width: 100%;
@@ -38,7 +39,7 @@ export const setUserCard: setUserCardDef = (active) => {
     ${active &&
     `
       background-color: ${COLORS.BLUE_NEON40};
-      h4 {
+      strong {
         color: ${COLORS.GRAY100};
       }
       p {
@@ -48,16 +49,33 @@ export const setUserCard: setUserCardDef = (active) => {
   `;
 };
 
+export const skeletonCardBox = css`
+  width: 8.75rem;
+  height: 8.75rem;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  margin: 0 1.375rem 1.375rem 0;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.16);
+
+  :nth-of-type(3n) {
+    margin-right: 0;
+  }
+  :nth-of-type(n + 7) {
+    margin-bottom: 0;
+  }
+`;
+
 export const userNickname = css`
   display: flex;
   align-items: center;
   font-size: 0.875rem;
   font-weight: 600;
   color: ${COLORS.GRAY20};
+  ${shorten()};
 `;
 
 export const scoreCSS = css`
-  color: ${COLORS.GRAY30};
+  color: ${COLORS.GRAY40};
   font-weight: 600;
   font-size: 0.875rem;
 `;
@@ -70,10 +88,11 @@ export const setPointColor: setPointColorDef = (active) => {
   return css`
     color: ${active ? COLORS.ERROR_YELLOW40 : COLORS.BLUE_FIRST40};
     font-size: 1rem;
+    font-weight: 500;
   `;
 };
 
 export const recruitSectorCSS = css`
-  font-size: 8px;
-  color: ${COLORS.GRAY30};
+  font-size: 0.75rem;
+  color: ${COLORS.GRAY40};
 `;

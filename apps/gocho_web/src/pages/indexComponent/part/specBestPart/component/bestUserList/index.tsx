@@ -1,16 +1,41 @@
 import { FunctionComponent } from "react";
 
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { UserBadge } from "shared-ui/common/atom/userBadge";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
-import { bestUserArrWrapper, setUserCard, userNickname, scoreCSS, setPointColor, recruitSectorCSS } from "./style";
-import { BestUserArrProps } from "./type";
+import {
+  bestUserArrWrapper,
+  setUserCard,
+  skeletonCardBox,
+  userNickname,
+  scoreCSS,
+  setPointColor,
+  recruitSectorCSS,
+} from "./style";
+import { BestUserArrProps, SkeletonProps } from "./type";
 
-export const BestUserList: FunctionComponent<BestUserArrProps> = ({
+export const BestUserList: FunctionComponent<BestUserArrProps | SkeletonProps> = ({
   setActiveUserID,
   activeUserID,
   bestUserDataArr,
+  isSkeleton,
 }) => {
+  if (isSkeleton || !bestUserDataArr) {
+    return (
+      <div css={bestUserArrWrapper}>
+        {dummyArrCreator(9).map((_) => {
+          return (
+            <div key={`skeleton_${_}`} css={skeletonCardBox}>
+              <SkeletonBox />
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
   const handleActiveUser = (index: number) => {
     setActiveUserID(index);
   };

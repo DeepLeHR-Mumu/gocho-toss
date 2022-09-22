@@ -3,7 +3,8 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 import { useSpecDetail } from "shared-api/spec";
-
+import { META_SPEC_DETAIL } from "shared-constant/meta";
+import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { Layout } from "@component/layout";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 
@@ -38,6 +39,17 @@ const Detail: NextPage = () => {
 
   return (
     <div css={wrapper}>
+      <MetaHead
+        metaData={META_SPEC_DETAIL}
+        specDetail={{
+          nickName: specDetailData.nickname,
+          age: specDetailData.age,
+          gender: specDetailData.gender,
+          certificate: specDetailData.certificate?.data,
+          desiredTask: specDetailData.desiredTask,
+          desiredIndustry: specDetailData.desiredIndustry,
+        }}
+      />
       <Layout>
         <div css={container}>
           <div css={mainWrapper}>

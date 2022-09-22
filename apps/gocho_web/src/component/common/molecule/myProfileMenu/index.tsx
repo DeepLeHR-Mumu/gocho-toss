@@ -18,7 +18,7 @@ export const MyProfileMenu: FunctionComponent<MyProfileMenuProps> = ({ active })
 
   return (
     <article css={myProfileMenuWrapper(active)}>
-      <h3 css={myProfileTitle}>나의 프로필</h3>
+      <p css={myProfileTitle}>나의 프로필</p>
       <ul css={myProfileMenuCSS}>
         {profileMenuArr.map((profileMenu) => {
           return (

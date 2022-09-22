@@ -3,6 +3,7 @@ import { css, SerializedStyles } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const headerWrapper = css`
+  border-bottom: 1px solid ${COLORS.GRAY90};
   height: 4.5rem;
   display: flex;
   z-index: 50;

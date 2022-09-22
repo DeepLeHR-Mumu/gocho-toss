@@ -9,6 +9,8 @@ import { useCompanyDetail } from "shared-api/company";
 import { Layout } from "@component/layout";
 import useMoveScroll from "@pages/companies/[companyId]/util";
 
+import { META_COMPANY_INFO, META_COMPANY_RECRUIT } from "shared-constant/meta";
+import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { WorkingNotice } from "../component/workingNotice";
 import { MenuButtonList } from "../component/menuButtonList";
 import { HeaderPart } from "../part/headerPart";
@@ -41,13 +43,13 @@ const CompaniesDetail: NextPage = () => {
 
   const { data: userData } = useUserInfo();
   const { data: userCompanyBookmarkArr, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
-  const { data: response, isError, isLoading } = useCompanyDetail({ companyId: Number(companyId) });
+  const { data: companyDetailData, isError, isLoading } = useCompanyDetail({ companyId: Number(companyId) });
 
-  if (!response || isError || isLoading) {
+  if (!companyDetailData || isError || isLoading) {
     return <main>Loading...</main>;
   }
 
-  const { data } = response;
+  const { data } = companyDetailData;
 
   const companyData = {
     headerData: {
@@ -118,6 +120,7 @@ const CompaniesDetail: NextPage = () => {
       </Layout>
       {shownData === "info" && (
         <Layout>
+          <MetaHead companyDetail={{ companyName: data.name }} metaData={META_COMPANY_INFO} />
           <div css={flexBox}>
             <div css={partContainer}>
               <section css={sectionContainer}>
@@ -171,7 +174,12 @@ const CompaniesDetail: NextPage = () => {
           </div>
         </Layout>
       )}
-      {shownData === "job" && <CompanyJobPart companyId={Number(companyId)} />}
+      {shownData === "job" && (
+        <div>
+          <MetaHead companyDetail={{ companyName: data.name }} metaData={META_COMPANY_RECRUIT} />
+          <CompanyJobPart companyId={Number(companyId)} />
+        </div>
+      )}
     </main>
   );
 };

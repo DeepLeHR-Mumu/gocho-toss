@@ -7,8 +7,6 @@ export const partContainer = css`
   margin-top: 10rem;
 `;
 
-export const headerContainer = css``;
-
 export const title = css`
   font-size: 1.25rem;
   color: ${COLORS.GRAY10};

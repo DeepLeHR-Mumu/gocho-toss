@@ -125,6 +125,7 @@ export const Header: FunctionComponent = () => {
 
             <div css={flexBox}>
               <button
+                aria-label={isUnifiedSearch ? "통합검색창 닫기" : "통합검색창 열기"}
                 type="button"
                 css={searchIcon}
                 onClick={() => {
@@ -144,7 +145,7 @@ export const Header: FunctionComponent = () => {
       {/* TODO: 다른 페이지에서 검색창과 겹치는 부분 있는지 확인! */}
       <form onSubmit={handleSubmit} css={unifiedSearchWrapper(isUnifiedSearch)}>
         <input css={unifiedSearch} placeholder="궁금한 기업명이나 공고를 검색해보세요" onChange={handleParam} />
-        <button type="submit" css={searchButton}>
+        <button type="submit" css={searchButton} aria-label="통합검색 실행">
           <FiSearch />
         </button>
       </form>

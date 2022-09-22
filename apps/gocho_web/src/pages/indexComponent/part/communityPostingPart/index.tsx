@@ -15,7 +15,6 @@ import { setCarouselSetting } from "./utils";
 import { setPostingOrderButtonArr } from "./constant";
 import {
   partContainer,
-  headerContainer,
   title,
   colorPoint,
   buttonArrContainer,
@@ -47,7 +46,7 @@ export const CommunityPostingPart: FunctionComponent = () => {
   return (
     <section css={partContainer}>
       <Layout>
-        <header css={headerContainer}>
+        <header>
           <InvisibleH2 title="생산/기능직 커뮤니티 게시글" />
           <p css={title}>
             <span css={colorPoint}>NEW</span> 실시간 커뮤니티 글 모음 💬
