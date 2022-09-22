@@ -10,7 +10,7 @@ import { JobPreviewPartProps } from "./type";
 
 export const JobPreviewPart: FunctionComponent<JobPreviewPartProps> = ({ jobDataArr, count, isLoading }) => {
   const { data: userData } = useUserInfo();
-  const { data: userJobBookmarkArr, refetch } = useUserJobBookmarkArr({ userId: userData?.id });
+  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
   if (!jobDataArr || isLoading) {
     return (
@@ -43,7 +43,6 @@ export const JobPreviewPart: FunctionComponent<JobPreviewPartProps> = ({ jobData
             jobData={jobData}
             isBookmarked={isBookmarked}
             userId={userData?.id}
-            refetchUserBookmark={refetch}
             key={`UnifiedSearchJobPreview${jobData.id}`}
           />
         );

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { userBookmarkKeyObj, UserBookmarkRequestDef } from "shared-constant/queryKeyFactory/bookmark/bookmarkKeyObj";
+import { oldBookmarkKeyObj, OldUserBookmarkRequestDef } from "shared-constant/queryKeyFactory/bookmark/bookmarkKeyObj";
 
 import { axiosInstance } from "../../../axiosInstance";
 
@@ -16,8 +16,8 @@ export const getUserBookmark: GetUserBookmarkDef = async ({ queryKey: [{ request
   return data;
 };
 
-export const useUserBookmark = (requestObj: UserBookmarkRequestDef) => {
-  const queryResult = useQuery(userBookmarkKeyObj.bookmark(requestObj), getUserBookmark, {
+export const useUserBookmark = (requestObj: OldUserBookmarkRequestDef) => {
+  const queryResult = useQuery(oldBookmarkKeyObj.bookmark(requestObj), getUserBookmark, {
     enabled: Boolean(requestObj.userId),
   });
   return queryResult;

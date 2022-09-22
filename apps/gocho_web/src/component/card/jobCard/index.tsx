@@ -5,7 +5,7 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useAddJobUserBookmark, useDeleteUserBookmark } from "shared-api/bookmark";
+import { useAddUserJobBookmarkArr, useDeleteUserJobBookmark } from "shared-api/bookmark";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 
 import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
@@ -48,19 +48,23 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   isBookmarked,
   userId,
   isSkeleton,
-  // refetchUserBookmark,
 }) => {
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
 
   const queryClient = useQueryClient();
 
-  const { mutate: addMutate } = useAddJobUserBookmark({
+  const { mutate: addMutate } = useAddUserJobBookmarkArr({
     id: jobData?.id as number,
     title: jobData?.title as string,
     end_time: jobData?.endTime as number,
     company: { id: jobData?.companyId as number, name: jobData?.companyName as string },
   });
-  const { mutate: deleteMutate } = useDeleteUserBookmark();
+  const { mutate: deleteMutate } = useDeleteUserJobBookmark({
+    id: jobData?.id as number,
+    title: jobData?.title as string,
+    end_time: jobData?.endTime as number,
+    company: { id: jobData?.companyId as number, name: jobData?.companyName as string },
+  });
 
   if (isSkeleton || jobData === undefined) {
     return (
@@ -76,14 +80,22 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         { userId, elemId: jobData.id },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(["jobArr"]);
+            queryClient.invalidateQueries([{ data: "jobArr" }]);
           },
-        } 
+        }
       );
   };
 
   const deleteJobBookmark = () => {
-    if (userId) deleteMutate({ userId, likeType: "jd-bookmarks", elemId: jobData.id });
+    if (userId)
+      deleteMutate(
+        { userId, elemId: jobData.id },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries([{ data: "jobArr" }]);
+          },
+        }
+      );
   };
 
   const today = new Date();

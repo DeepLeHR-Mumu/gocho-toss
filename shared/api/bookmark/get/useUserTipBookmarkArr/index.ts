@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { userBookmarkKeyObj, UserBookmarkArrRequestDef } from "shared-constant/queryKeyFactory/bookmark/bookmarkKeyObj";
+import { oldBookmarkKeyObj, UserBookmarkArrRequestDef } from "shared-constant/queryKeyFactory/bookmark/bookmarkKeyObj";
 
 import { axiosInstance } from "../../../axiosInstance";
 
@@ -19,7 +19,7 @@ export const getUserTipBookmarkArr: GetUserTipBookmarkArrDef = async ({ queryKey
 };
 
 export const useUserTipBookmarkArr = (requestObj: UserBookmarkArrRequestDef) => {
-  const queryResult = useQuery(userBookmarkKeyObj.tipBookmarkArr(requestObj), getUserTipBookmarkArr, {
+  const queryResult = useQuery(oldBookmarkKeyObj.tipBookmarkArr(requestObj), getUserTipBookmarkArr, {
     enabled: Boolean(requestObj.userId),
     select: ({ data }) => {
       return selector(data);

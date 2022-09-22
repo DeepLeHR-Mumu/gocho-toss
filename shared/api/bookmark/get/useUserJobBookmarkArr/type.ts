@@ -1,10 +1,10 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
-import { userBookmarkKeyObj } from "shared-constant/queryKeyFactory/bookmark/bookmarkKeyObj";
+import { oldBookmarkKeyObj } from "shared-constant/queryKeyFactory/bookmark/bookmarkKeyObj";
 
 import { jobBookmarkResObjDef } from "../../type/bookmark";
 
 export interface GetUserJobBookmarkArrDef {
   (
-    requestObj: QueryFunctionContext<ReturnType<typeof userBookmarkKeyObj.jobBookmarkArr>>
+    requestObj: QueryFunctionContext<ReturnType<typeof oldBookmarkKeyObj.jobBookmarkArr>>
   ): Promise<jobBookmarkResObjDef>;
 }

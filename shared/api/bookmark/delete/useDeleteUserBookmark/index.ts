@@ -8,14 +8,11 @@ import { axiosInstance } from "../../../axiosInstance";
 
 const deleteUserBookmark: DeleteUserBookmarkDef = async (requestObj) => {
   const token = localStorage.getItem("token") as string;
-  const { data } = await axiosInstance.delete(
-    `/users/${requestObj?.userId}/${requestObj.likeType}/${requestObj.elemId}`,
-    {
-      headers: {
-        "x-access-token": token,
-      },
-    }
-  );
+  const { data } = await axiosInstance.delete(`/users/${requestObj?.userId}/"jd-bookmark"/${requestObj.elemId}`, {
+    headers: {
+      "x-access-token": token,
+    },
+  });
   return data;
 };
 

@@ -4,12 +4,11 @@ import { ResponseDef } from "shared-type/api/responseType";
 
 export interface RequestObjDef {
   userId: number;
-  likeType: string;
   elemId: number;
 }
 
-export interface DeleteUserBookmarkDef {
-  ({ userId, likeType, elemId }: RequestObjDef): Promise<ResponseDef>;
+export interface DeleteUserJobBookmark {
+  ({ userId, elemId }: RequestObjDef): Promise<ResponseDef>;
 }
 
 export interface useDeleteUserBookmarkProps {
