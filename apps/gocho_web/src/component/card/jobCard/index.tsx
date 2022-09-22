@@ -5,7 +5,7 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useAddUserJobBookmarkArr, useDeleteUserJobBookmark } from "shared-api/bookmark";
+import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 
 import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
@@ -53,13 +53,13 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
 
   const queryClient = useQueryClient();
 
-  const { mutate: addMutate } = useAddUserJobBookmarkArr({
+  const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobData?.id as number,
     title: jobData?.title as string,
     end_time: jobData?.endTime as number,
     company: { id: jobData?.companyId as number, name: jobData?.companyName as string },
   });
-  const { mutate: deleteMutate } = useDeleteUserJobBookmark({
+  const { mutate: deleteMutate } = useDeleteJobBookmarkArr({
     id: jobData?.id as number,
     title: jobData?.title as string,
     end_time: jobData?.endTime as number,

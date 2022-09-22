@@ -12,7 +12,7 @@ import { JOBS_LIST_URL } from "@constant/internalURL";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { useUserInfo } from "shared-api/auth";
 
-import { useAddUserJobBookmarkArr, useDeleteUserJobBookmark } from "shared-api/bookmark";
+import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { HeaderFixProps } from "./type";
 import {
   applyBox,
@@ -32,13 +32,13 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, is
   const queryClient = useQueryClient();
 
   const { isSuccess } = useUserInfo();
-  const { mutate: addMutate } = useAddUserJobBookmarkArr({
+  const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobDetailData?.id as number,
     title: jobDetailData?.title as string,
     end_time: jobDetailData?.endTime as number,
     company: { id: jobDetailData.company?.companyId as number, name: jobDetailData?.company.name as string },
   });
-  const { mutate: deleteMutate } = useDeleteUserJobBookmark({
+  const { mutate: deleteMutate } = useDeleteJobBookmarkArr({
     id: jobDetailData?.id as number,
     title: jobDetailData?.title as string,
     end_time: jobDetailData?.endTime as number,

@@ -12,7 +12,7 @@ import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKe
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 
 import { COMPANY_DETAIL_URL } from "@constant/internalURL";
-import { useAddUserJobBookmarkArr, useDeleteUserJobBookmark } from "shared-api/bookmark";
+import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { HeaderProps } from "./type";
 import {
   applyButton,
@@ -33,13 +33,13 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
   const queryClient = useQueryClient();
 
   const [imageSrc, setImageSrc] = useState(jobDetailData.company.logoUrl as string);
-  const { mutate: addMutate } = useAddUserJobBookmarkArr({
+  const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobDetailData?.id as number,
     title: jobDetailData?.title as string,
     end_time: jobDetailData?.endTime as number,
     company: { id: jobDetailData?.company.companyId as number, name: jobDetailData?.company.name as string },
   });
-  const { mutate: deleteMutate } = useDeleteUserJobBookmark({
+  const { mutate: deleteMutate } = useDeleteJobBookmarkArr({
     id: jobDetailData?.id as number,
     title: jobDetailData?.title as string,
     end_time: jobDetailData?.endTime as number,

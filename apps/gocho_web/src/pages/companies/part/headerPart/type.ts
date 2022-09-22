@@ -1,5 +1,3 @@
-import { QueryObserverResult } from "@tanstack/react-query";
-
 export interface HeaderPartProps {
   companyData: {
     id: number;
@@ -13,5 +11,4 @@ export interface HeaderPartProps {
   };
   isBookmarked: boolean;
   userId: number | undefined;
-  refetchUserBookmark: () => Promise<QueryObserverResult>;
 }
