@@ -1,4 +1,3 @@
-export { CheckBox } from "./checkbox";
 export { Desc } from "./desc";
 export { MoveCardButtons } from "./moveCardButtons";
 export { SpecCardTitle } from "./specCardTitle";

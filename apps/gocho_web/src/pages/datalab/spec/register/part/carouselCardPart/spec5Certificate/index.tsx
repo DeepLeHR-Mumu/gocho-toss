@@ -3,7 +3,8 @@ import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { FiX } from "react-icons/fi";
 
-import { SpecCardTitle, Toggle, MoveCardButtons, CheckBox } from "../common/component";
+import { CheckBox } from "shared-ui/common/atom/checkbox";
+import { SpecCardTitle, Toggle, MoveCardButtons } from "../common/component";
 
 import { getResData, hasFieldsInIncludes } from "./util";
 import { Spec5CertificateProps, PostSubmitValues, ChangeSearchFilterArrDef } from "./type";
