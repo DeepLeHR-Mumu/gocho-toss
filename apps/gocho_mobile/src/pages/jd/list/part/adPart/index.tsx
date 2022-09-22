@@ -37,7 +37,7 @@ export const AdPart: FunctionComponent = () => {
       <section css={carouselContainer}>
         <Slider {...setCarouselSetting} ref={sliderRef}>
           {jobDataArr.jobDataArr.map((job) => {
-            return <JobAdCard jobData={job} bgColor="#97C8FC" key={`jobAd${job.id}`} />;
+            return <JobAdCard jobData={job} bgColor="#527CCD" key={`jobAd${job.id}`} />;
           })}
         </Slider>
       </section>

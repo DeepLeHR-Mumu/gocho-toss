@@ -1,6 +1,6 @@
 import { css, SerializedStyles } from "@emotion/react";
 import { PC_HOVER, TABLET } from "shared-style/mediaQuery";
-import { shorten } from "@style/common";
+import { shorten } from "shared-style/shorten";
 import { COLORS } from "shared-style/color";
 
 export const tipDisplayWrapper = css`

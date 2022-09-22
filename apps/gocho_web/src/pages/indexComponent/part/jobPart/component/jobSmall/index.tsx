@@ -2,7 +2,7 @@ import { FunctionComponent, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { SkeletonBox } from "@component/common/atom/skeletonBox";
 import { JOBS_DETAIL_URL } from "@constant/internalURL";

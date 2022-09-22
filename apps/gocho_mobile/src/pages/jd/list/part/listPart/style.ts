@@ -4,11 +4,10 @@ import { PC_HOVER } from "shared-style/mediaQuery";
 
 export const partContainer = css`
   position: relative;
-  border-radius: 1rem 1rem 0 0;
+  border-radius: 1.5rem 1.5rem 0 0;
   background-color: ${COLORS.GRAY90};
   margin-top: -1rem;
   padding: 3rem 0;
-  height: 100rem;
   z-index: 10;
 `;
 
@@ -29,7 +28,7 @@ export const filterButton = css`
   background-color: ${COLORS.GRAY100};
 `;
 
-export const sortButtonList = css`
+export const buttonArrContainer = css`
   display: flex;
 `;
 
