@@ -6,7 +6,7 @@ import { PC_HOVER } from "shared-style/mediaQuery";
 export const jobCardSkeleton = css`
   overflow: hidden;
   width: calc(50% - 0.5rem);
-  height: 16rem;
+  height: 14.75rem;
   border-radius: 1.5rem;
   margin-bottom: 1rem;
   background-color: ${COLORS.GRAY100};
@@ -17,7 +17,6 @@ export const cardWrapper = (isExpired = false) => {
     overflow: hidden;
     position: relative;
     width: calc(50% - 0.5rem);
-    /* height: 16rem; */
     border-radius: 1.5rem;
     margin-bottom: 1rem;
     padding: 1rem;
@@ -58,7 +57,7 @@ export const bookmarkButtonWrapper = (isBookmarked = false) => {
     top: 0;
     right: 0;
     transition: all 0.3s ease;
-    z-index: 10;
+    z-index: 5;
 
     ${PC_HOVER} {
       :hover {

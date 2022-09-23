@@ -155,7 +155,6 @@ export const searchDimmed: SearchDimmedDef = (isUnifiedSearch) => {
     height: 5rem;
     z-index: 10;
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 5%, transparent 95%);
-    opacity: ${isUnifiedSearch ? 1 : 0};
-    transition: all 0.2s ease;
+    display: ${isUnifiedSearch ? "block" : "none"};
   `;
 };
