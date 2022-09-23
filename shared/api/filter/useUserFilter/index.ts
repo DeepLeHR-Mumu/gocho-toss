@@ -18,6 +18,7 @@ const getUserFilter: GetUserFilterDef = async ({ queryKey: [{ requestObj }] }) =
 
 export const useUserFilter = (requestObj: FilterRequestObjDef) => {
   const queryResult = useQuery(filterKeyObj.all(requestObj), getUserFilter, {
+    enabled: Boolean(requestObj.userId),
     select: ({ data }) => {
       return selector(data);
     },

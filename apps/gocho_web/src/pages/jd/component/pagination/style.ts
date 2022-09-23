@@ -6,10 +6,13 @@ export const paginationContainer = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 7rem;
-  border-radius: 1.5rem;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.75rem;
+  width: fit-content;
+  padding: 0 0.75rem;
+  border-radius: 2rem;
+  padding: 0 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  height: 2.5rem;
   color: ${COLORS.GRAY100};
   background-color: ${COLORS.GRAY60};
 `;

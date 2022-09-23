@@ -1,5 +1,7 @@
-import { css } from "@emotion/react";
+import { css, SerializedStyles } from "@emotion/react";
+
 import { COLORS } from "shared-style/color";
+import { shorten } from "shared-style/common";
 
 export const jobAdCardSkeleton = css`
   overflow: hidden;
@@ -12,58 +14,81 @@ export const cardWrapper = css`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 97%;
-  height: 15rem;
+  width: calc(100% - 1rem);
   border-radius: 1.5rem 1.5rem 0 0;
   padding: 1rem;
-  background-color: ${COLORS.GRAY90};
+  background-color: #f2f4f7;
 `;
+
+interface ColorLineDef {
+  (colorCode: string): SerializedStyles;
+}
+
+export const colorLine: ColorLineDef = (colorCode) => {
+  return css`
+    height: 0.8rem;
+    width: calc(100% - 1rem);
+    background-image: linear-gradient(to right, ${colorCode}, ${COLORS.BLUE_FIRST40});
+  `;
+};
 
 export const mainContainer = css`
   display: flex;
+  position: relative;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 `;
 
 export const companyLogoWrapper = css`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: ${COLORS.GRAY100};
-  width: 7.5rem;
-  height: 7.5rem;
+  width: 8.5rem;
+  height: 8.5rem;
   padding: 0.5rem;
   border-radius: 1.5rem;
-  margin-right: 2rem;
 `;
 
 export const companyLogoBox = css`
-  width: 6.5rem;
-  height: 6.5rem;
-  overflow: hidden;
-  border-radius: 1.5rem;
+  width: 7.5rem;
+  height: 7.5rem;
   position: relative;
 `;
 
 export const infoContainer = css`
-  flex-grow: 1;
+  margin-left: 0.5rem;
+  width: 100%;
 `;
 
 export const companyName = css`
   width: fit-content;
+  display: block;
+  color: ${COLORS.GRAY10};
+  font-size: 0.875rem;
+  font-weight: 500;
   background-color: ${COLORS.GRAY100};
   border-radius: 1.5rem;
-  margin: 0 0 1rem auto;
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 1rem;
+  line-height: 1.6;
+  ${shorten(2)}
 `;
 
 export const date = css`
-  text-align: right;
   font-size: 0.875rem;
   font-weight: 500;
   color: ${COLORS.GRAY10};
+  position: absolute;
+  bottom: 0;
+  right: 0.5rem;
 `;
 
-export const title = css`
-  font-size: 1.5rem;
+export const titleCSS = css`
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: ${COLORS.GRAY10};
+  line-height: 1.6;
+  height: 3.35rem;
+  ${shorten(2)};
 `;

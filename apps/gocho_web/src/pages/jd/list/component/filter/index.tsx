@@ -24,7 +24,6 @@ import {
   activeCategoryContainer,
   activeCategory,
   categoryBox,
-  deleteCategory,
   submitButton,
 } from "./style";
 
@@ -107,10 +106,11 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
             .every((list) => {
               return list.length === 0;
             }) ? (
-            <p css={title}>필터를 선택하세요</p>
+            <p css={title}>필터</p>
           ) : (
             <button
               type="button"
+              aria-label="필터 초기화"
               css={resetButton}
               onClick={() => {
                 filterMenuListArr.map((menu) => {
@@ -123,10 +123,12 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
           )}
           {filterMenuListArr.map((menu) => {
             const isActiveMenu = menu.name === activeMenu;
+            const isCategoryLengthThen11 = Boolean(menu.categoryArr.length >= 11);
 
             return (
               <div css={menuBox} key={`filterMenu${menu.name}`}>
                 <button
+                  aria-label={isActiveMenu ? `${menu.name} 메뉴 닫기` : `${menu.name} 메뉴 열기`}
                   css={menuButton(isActiveMenu)}
                   type="button"
                   onClick={() => {
@@ -140,7 +142,7 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
                 </button>
 
                 {isActiveMenu && (
-                  <div css={setFilterMenu}>
+                  <div css={setFilterMenu(isCategoryLengthThen11)}>
                     {menu.categoryArr.map((category) => {
                       const activeQuery = menu.query;
                       const isMenuEmpty = watch(activeQuery).length === 0;
@@ -219,33 +221,30 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
             .every((list) => {
               return list.length === 0;
             }) && (
-            <span css={categoryBox(null)} key="activeMenuCategoryBasic">
-              전체 공고
-              <button type="button" css={deleteCategory}>
-                <FiX />
-              </button>
-            </span>
+            <p css={categoryBox(null)} key="activeMenuCategoryBasic">
+              전체
+            </p>
           )}
           {watchList.map((list) => {
             return list.categoryArr.map((category) => {
               return (
-                <span css={categoryBox(list.query)} key={`activeMenuCategory${category}`}>
-                  {category}
-                  <button
-                    type="button"
-                    css={deleteCategory}
-                    onClick={() => {
-                      setValue(
-                        list.query,
-                        getValues(list.query).filter((watchCategory) => {
-                          return watchCategory !== category;
-                        })
-                      );
-                    }}
-                  >
-                    <FiX />
-                  </button>
-                </span>
+                <button
+                  type="button"
+                  key={`activeMenuCategory${category}`}
+                  css={categoryBox(list.query)}
+                  aria-label={`${category}필터 제거`}
+                  onClick={() => {
+                    setValue(
+                      list.query,
+                      getValues(list.query).filter((watchCategory) => {
+                        return watchCategory !== category;
+                      })
+                    );
+                  }}
+                >
+                  <span>{category}</span>
+                  <FiX />
+                </button>
               );
             });
           })}
