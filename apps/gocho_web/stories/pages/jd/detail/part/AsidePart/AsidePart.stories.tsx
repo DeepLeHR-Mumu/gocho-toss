@@ -11,11 +11,8 @@ export default {
   title: "공고/detail/part/AsidePart",
   component: AsidePart,
   argTypes: {
-    isSkeleton: {
-      description: "데이터 로딩중 스켈레톤 boolean값",
-    },
-    companyId: {
-      description: "detail 메인에서 전달되어 해당 컴포넌트에 사용될 company id",
+    jobDetailData: {
+      description: "detail 메인에서 전달되어 해당 컴포넌트에 사용될 company 기본정보",
     },
   },
   parameters: {
@@ -52,6 +49,12 @@ const Template: ComponentStory<typeof AsidePart> = (args) => {
   );
 };
 
+export const 데이터가없을때 = Template.bind({});
+
+데이터가없을때.args = {
+  jobDetailData: null,
+};
+
 export const 비로그인상태 = Template.bind({});
 비로그인상태.parameters = {
   msw: {
@@ -64,7 +67,14 @@ export const 비로그인상태 = Template.bind({});
 };
 
 비로그인상태.args = {
-  companyId: 307,
+  jobDetailData: {
+    company: {
+      companyId: 24,
+      name: "companyName",
+      logoUrl:
+        "http://localhost:3000/_next/image?url=https%3A%2F%2Fd2nnzfahmszi6w.cloudfront.net%2Fcompany_images%2F213%2Flogo.png&w=1080&q=75",
+    },
+  },
 };
 
 export const 로그인상태 = Template.bind({});
@@ -79,11 +89,12 @@ export const 로그인상태 = Template.bind({});
 };
 
 로그인상태.args = {
-  companyId: 307,
-};
-
-export const 로딩중 = Template.bind({});
-
-로딩중.args = {
-  isSkeleton: true,
+  jobDetailData: {
+    company: {
+      companyId: 24,
+      name: "companyName",
+      logoUrl:
+        "http://localhost:3000/_next/image?url=https%3A%2F%2Fd2nnzfahmszi6w.cloudfront.net%2Fcompany_images%2F213%2Flogo.png&w=1080&q=75",
+    },
+  },
 };

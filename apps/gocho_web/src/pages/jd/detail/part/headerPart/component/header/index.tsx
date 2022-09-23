@@ -92,11 +92,18 @@ export const Header: FunctionComponent<HeaderProps> = ({
         </ul>
         <p css={companyNameCSS}>
           {jobDetailData.company.name}
-          <button type="button" css={bookmarkButton}>
+          <button
+            type="button"
+            css={bookmarkButton(isBookmarked)}
+            onClick={() => {
+              return isBookmarked ? deleteJobBookmark() : addJobBookmark();
+            }}
+            aria-label={isBookmarked ? "공고 북마크 해지" : "공고 북마크"}
+          >
             <BsFillBookmarkFill />
           </button>
         </p>
-        <h2 css={titleCSS}>{jobDetailData.title}</h2>
+        <p css={titleCSS}>{jobDetailData.title}</p>
         <ul css={linksCSS}>
           <li>
             <a href={jobDetailData.applyUrl} target="_blank" css={applyButton} rel="noopener noreferrer">

@@ -9,6 +9,7 @@ export const commentContainer = css`
   max-height: 15rem;
   overflow: hidden;
   overflow-y: scroll;
+  position: relative;
 `;
 
 export const commentContainerSkeleton = css`
@@ -22,6 +23,21 @@ export const commentContainerSkeleton = css`
 `;
 
 export const commentArrCSS = css``;
+
+export const firstCommentAlert = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  line-height: 2;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.875rem;
+  color: ${COLORS.GRAY20};
+`;
 
 export const commentHeader = css`
   display: flex;

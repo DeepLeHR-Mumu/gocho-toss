@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
+import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { META_JD_DETAIL } from "shared-constant/meta";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { useJobDetail } from "shared-api/job";
@@ -12,7 +13,6 @@ import { useUserInfo } from "shared-api/auth";
 import { PositionObjDef } from "./type";
 import {
   HeaderPart,
-  ADPart,
   AsidePart,
   DetailSupportPart,
   DetailWorkPart,
@@ -32,7 +32,7 @@ const JobsDetail: NextPage = () => {
   const router = useRouter();
   const { jobId } = router.query;
 
-  const { data: jobDetailData, isLoading } = useJobDetail({
+  const { data: jobDetailData } = useJobDetail({
     id: Number(jobId),
   });
 
@@ -49,7 +49,7 @@ const JobsDetail: NextPage = () => {
     }
   }, [currentPositionId, jobDetailData]);
 
-  if (isLoading || !jobDetailData) {
+  if (!jobDetailData) {
     return (
       <main css={wrapper}>
         <Layout>
@@ -58,7 +58,7 @@ const JobsDetail: NextPage = () => {
             <section css={containerSkeleton}>
               <SkeletonBox />
             </section>
-            <AsidePart isSkeleton />
+            <AsidePart jobDetailData={null} />
           </div>
         </Layout>
       </main>
@@ -71,20 +71,23 @@ const JobsDetail: NextPage = () => {
     })
   );
 
-  const metaObj = {
-    companyName: jobDetailData.company.name,
-    jdTitle: jobDetailData.title,
-    rotation: jobDetailData.positionArr[0].rotationArr[0],
-    taskDetail: jobDetailData.positionArr[0].taskDetailArr[0],
-    pay: jobDetailData.positionArr[0].payArr && jobDetailData.positionArr[0].payArr[0],
-    place: jobDetailData.positionArr[0].placeArr[0],
-    possibleEdu: jobDetailData.positionArr[0].possibleEdu.summary,
-  };
-
   return (
     <main css={wrapper}>
-      <MetaHead jdDetail={metaObj} metaData={META_JD_DETAIL} />
+      <MetaHead
+        jdDetail={{
+          companyName: jobDetailData.company.name,
+          jdTitle: jobDetailData.title,
+          rotation: jobDetailData.positionArr[0].rotationArr[0],
+          taskDetail: jobDetailData.positionArr[0].taskDetailArr[0],
+          pay: jobDetailData.positionArr[0].payArr && jobDetailData.positionArr[0].payArr[0],
+          place: jobDetailData.positionArr[0].placeArr[0],
+          possibleEdu: jobDetailData.positionArr[0].possibleEdu.summary,
+        }}
+        metaData={META_JD_DETAIL}
+      />
+
       <Layout>
+        <InvisibleH2 title={jobDetailData.title} />
         <HeaderPart
           jobDetailData={jobDetailData}
           setCurrentPositionId={setCurrentPositionId}
@@ -101,10 +104,9 @@ const JobsDetail: NextPage = () => {
               <DetailPreferencePart freshPosition={freshPosition} />
             </section>
           )}
-          <AsidePart companyId={jobDetailData.company.companyId} />
+          <AsidePart jobDetailData={jobDetailData} />
         </div>
         <ReceptInfoPart jobDetailData={jobDetailData} />
-        <ADPart />
       </Layout>
     </main>
   );

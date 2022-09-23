@@ -45,7 +45,7 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
     <div>
       <section css={wrapper}>
         <div css={infoBox}>
-          <h3 css={infoTitle}>접수안내</h3>
+          <h4 css={infoTitle}>접수안내</h4>
           <ul css={beforeAfterDateBox}>
             <li>{`${startYear}. ${startMonth}. ${startDate}  ${startHour}:${startMinute}`}</li>
             <li>~</li>
@@ -58,7 +58,7 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
         </div>
 
         <div css={infoDetailBox}>
-          <h4 css={detailTitle}>채용절차</h4>
+          <p css={detailTitle}>채용절차</p>
           <ul css={processBox}>
             {jobDetailData.processArr.map((process) => {
               return <li key={`채용절차_${process}`}>{process}</li>;
@@ -66,7 +66,7 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
           </ul>
 
           <div css={flexBox}>
-            <h4 css={detailTitle}>지원방법</h4>
+            <p css={detailTitle}>지원방법</p>
             <p css={desc}>
               {jobDetailData.applyRouteArr.map((route) => {
                 return (
@@ -79,7 +79,7 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
           </div>
 
           <div css={flexBox}>
-            <h4 css={detailTitle}>기타사항</h4>
+            <p css={detailTitle}>기타사항</p>
             {jobDetailData.etcArr ? (
               <p css={desc}>
                 {jobDetailData.etcArr.map((etc) => {

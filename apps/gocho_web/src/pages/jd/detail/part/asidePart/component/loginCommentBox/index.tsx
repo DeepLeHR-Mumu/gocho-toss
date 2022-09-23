@@ -23,6 +23,7 @@ import {
   textareaCSS,
   userNicknameCSS,
   writeContainer,
+  firstCommentAlert,
 } from "./style";
 
 export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ commentArr, userData }) => {
@@ -38,21 +39,28 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ comme
     <div>
       <section css={commentContainer}>
         <ul css={commentArrCSS}>
+          {commentArr.length === 0 && (
+            <li css={firstCommentAlert}>
+              작성된 코멘트가 없습니다
+              <br />
+              첫번째 댓글을 작성해주세요 :)
+            </li>
+          )}
           {commentArr.map((comment) => {
             const { month, date } = dateConverter(comment.createdTime);
             return (
               <li key={comment.id}>
                 <div css={commentHeader}>
-                  <h4 css={nicknameCSS}>
+                  <p css={nicknameCSS}>
                     {comment.nickname} <UserBadge badge={comment.badge} />
-                  </h4>
+                  </p>
                   <p css={dateCSS}>
                     {month}.{date}
                   </p>
                 </div>
                 <div css={commentBody}>
                   <div css={commentBox}>
-                    {comment.jdTitle && <h5 css={commentTypeCSS}>{comment.jdTitle}</h5>}
+                    {comment.jdTitle && <p css={commentTypeCSS}>{comment.jdTitle}</p>}
 
                     <p css={commentDesc}>{comment.description}</p>
                   </div>
@@ -71,10 +79,10 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ comme
         </ul>
       </section>
       <section css={writeContainer}>
-        <h4 css={userNicknameCSS}>
+        <p css={userNicknameCSS}>
           {userData.nickname}
           <UserBadge badge={userData.badge} />
-        </h4>
+        </p>
         <form css={formCSS}>
           <textarea css={textareaCSS} placeholder="댓글을 입력해주세요." />
           <button type="submit" css={submitButton}>

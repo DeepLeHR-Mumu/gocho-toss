@@ -45,7 +45,7 @@ export const PositionCard: FunctionComponent<PositionCardProps | PositionCardSke
   return (
     <article css={wrapper} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       <section css={container(isCurrentPosition, isHover)}>
-        <h4 css={titleCSS(isCurrentPosition, isHover)}>{getJobTitleCreator(position)}</h4>
+        <strong css={titleCSS(isCurrentPosition, isHover)}>{getJobTitleCreator(position)}</strong>
 
         <div css={infoBox}>
           <p css={desc}>{position.possibleEdu.summary}</p>

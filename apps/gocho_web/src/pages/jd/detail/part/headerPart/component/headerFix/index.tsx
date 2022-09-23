@@ -3,12 +3,9 @@ import Link from "next/link";
 import { FiArrowLeft } from "react-icons/fi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 
-import { Profile } from "@component/common/molecule/profile";
-import { UnAuthMenu } from "@component/common/molecule/unAuthMenu";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { Layout } from "@component/layout";
 import { JOBS_LIST_URL } from "shared-constant/internalURL";
-import { useUserInfo } from "shared-api/auth";
 
 import { useAddUserBookmark, useDeleteUserBookmark } from "shared-api/bookmark";
 import { HeaderFixProps } from "./type";
@@ -32,7 +29,6 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({
   userId,
   refetchUserBookmark,
 }) => {
-  const { isSuccess } = useUserInfo();
   const { mutate: addMutate } = useAddUserBookmark();
   const { mutate: deleteMutate } = useDeleteUserBookmark();
 
@@ -70,13 +66,13 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({
         <div css={flexBetweenBox}>
           <div css={flexBox}>
             <Link href={JOBS_LIST_URL} passHref>
-              <a css={goBackButton}>
+              <a css={goBackButton} aria-label="이전 페이지 이동">
                 <FiArrowLeft />
               </a>
             </Link>
             <div css={titleBox}>
               <p css={companyNameCSS}>{jobDetailData.company.name}</p>
-              <h2 css={titleCSS}>{jobDetailData.title}</h2>
+              <p css={titleCSS}>{jobDetailData.title}</p>
             </div>
           </div>
           <div css={flexBox}>
@@ -98,7 +94,6 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({
                 채용사이트
               </a>
             </div>
-            {isSuccess ? <Profile /> : <UnAuthMenu />}
           </div>
         </div>
       </Layout>

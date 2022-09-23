@@ -85,9 +85,5 @@ export const loginButton = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${COLORS.BLUE_FIRST40};
-  color: ${COLORS.GRAY100};
-  padding: 0.875rem 1.5rem;
-  border-radius: 2rem;
   margin-top: 1rem;
 `;

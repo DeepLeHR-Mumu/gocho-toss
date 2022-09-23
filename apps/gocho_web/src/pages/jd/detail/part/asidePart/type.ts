@@ -1,9 +1,9 @@
 export interface AsidePartProps {
-  companyId: number;
-  isSkeleton?: never;
-}
-
-export interface AsidePartSkeleton {
-  companyId?: number;
-  isSkeleton: boolean;
+  jobDetailData: {
+    company: {
+      companyId: number;
+      name: string;
+      logoUrl: string;
+    };
+  } | null;
 }
