@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import { dateConverter } from "shared-util/date/dateConverter";
 import { useModal } from "@recoil/hook/modal";
-import { SkeletonBox } from "@component/common/atom/skeletonBox";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import {
   cardContainer,
   tagListCSS,

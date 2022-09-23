@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { useJobArr } from "shared-api/job";
-import { SkeletonBox } from "@component/common/atom/skeletonBox";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { JOBS_DETAIL_URL, COMPANY_DETAIL_URL } from "@constant/internalURL";
 import { dateConverter } from "shared-util/date";

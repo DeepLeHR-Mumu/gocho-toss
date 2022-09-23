@@ -4,9 +4,10 @@ import Link from "next/link";
 import { BsFillBookmarkFill } from "react-icons/bs";
 
 import { useAddUserBookmark, useDeleteUserBookmark } from "shared-api/bookmark";
-import { SkeletonBox } from "@component/common/atom/skeletonBox";
-import { COMPANY_DETAIL_URL } from "@constant/internalURL";
+import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
+
+import { SkeletonBox } from "../atom/skeletonBox";
 
 import { CompanyCardProps, CompanyCardSkeleton } from "./type";
 import {

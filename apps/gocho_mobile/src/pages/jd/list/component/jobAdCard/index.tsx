@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 
 import { dDayCalculator } from "shared-util/date";
 
-import { SkeletonBox } from "@component/atom/skeletonBox";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 
 import { SlideCardProps, SlideCardSkeleton } from "./type";
 import { cardSkeleton, cardWrapper, slideInfo, endTime, companyName, jdTitle } from "./style";

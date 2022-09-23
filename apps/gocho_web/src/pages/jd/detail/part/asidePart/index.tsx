@@ -6,7 +6,7 @@ import defaultCompanyLogo from "shared-image/global/common/default_company_logo.
 import { useUserInfo } from "shared-api/auth";
 import { useCompanyCommentArr } from "shared-api/company";
 
-import { SkeletonBox } from "@component/common/atom/skeletonBox";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { LoginCommentBox } from "./component/loginCommentBox";
 import { UnLoginCommentBox } from "./component/unLoginCommentBox";
 

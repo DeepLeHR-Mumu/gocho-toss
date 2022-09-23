@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
 
-import { SkeletonBox } from "@component/common/atom/skeletonBox";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { dateConverter } from "shared-util/date";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 

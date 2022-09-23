@@ -1,7 +1,7 @@
 import { FunctionComponent, useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 
-import { SkeletonBox } from "@component/common/atom/skeletonBox";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 
 import { getJobTitleCreator } from "../../../common/util";
 import { PositionCardProps, PositionCardSkeleton } from "./type";

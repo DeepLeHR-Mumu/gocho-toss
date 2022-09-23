@@ -4,15 +4,18 @@ import { PC_HOVER } from "shared-style/mediaQuery";
 
 export const companyCardSkeleton = css`
   overflow: hidden;
+  min-width: 18rem;
   width: 32%;
-  height: 11.5rem;
+  height: 12.5rem;
   border-radius: 1.5rem;
   margin-bottom: 1rem;
   background-color: ${COLORS.GRAY100};
 `;
 
 export const cardWrapper = css`
+  min-width: 18rem;
   width: 32%;
+  height: 12.5rem;
   margin-bottom: 1.5%;
   margin-right: 1.8%;
   border-radius: 1.5rem;

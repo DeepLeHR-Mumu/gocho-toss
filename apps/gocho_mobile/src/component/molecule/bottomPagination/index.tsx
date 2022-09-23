@@ -8,7 +8,7 @@ import { paginationContainer, movePageButton, selectPageButton } from "./style";
 
 export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ total, limit, page, setPage }) => {
   const totalPage = Math.ceil(total / limit);
-  const count = Math.floor(page / 10);
+  const count = Math.floor(page / 5);
 
   return (
     <div css={paginationContainer}>

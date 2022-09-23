@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
-import { SkeletonBox } from "@component/common/atom/skeletonBox";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { JOBS_DETAIL_URL } from "@constant/internalURL";
 import {
   cardWrapper,
