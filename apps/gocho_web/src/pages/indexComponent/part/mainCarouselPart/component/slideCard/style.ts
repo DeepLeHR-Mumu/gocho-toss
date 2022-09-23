@@ -52,6 +52,7 @@ export const middleDescIconBox = css`
 export const titleCSS = css`
   font-size: 1.5rem;
   color: ${COLORS.GRAY100};
+  display: block;
   font-weight: 600;
   line-height: 1.5;
   word-break: keep-all;
@@ -72,5 +73,6 @@ export const dimmed = css`
 export const lastDescCSS = css`
   font-size: 1rem;
   font-weight: 400;
+  font-style: normal;
   color: ${COLORS.GRAY100};
 `;

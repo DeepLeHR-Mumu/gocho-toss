@@ -35,8 +35,8 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({
             </div>
           )}
         </p>
-        <p css={titleCSS}>{title}</p>
-        <p css={lastDescCSS}>{lastDesc}</p>
+        <strong css={titleCSS}>{title}</strong>
+        <em css={lastDescCSS}>{lastDesc}</em>
       </div>
       <div css={dimmed} />
       <Image priority src={backgroundImage} alt={title} layout="responsive" />
