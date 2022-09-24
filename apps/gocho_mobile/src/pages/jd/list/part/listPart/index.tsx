@@ -6,13 +6,12 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useJobArr } from "shared-api/job";
 
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
+import { BottomPopup } from "@component/bottomPopup";
 import { JobCardList } from "../../component/jobCardList";
 import { Filter } from "../../component/filter";
 import { setJobOrderButtonArr } from "./constant";
 import {
   partContainer,
-  formBackground,
-  filterContainer,
   titleContainer,
   filterButton,
   searchWrapper,
@@ -76,18 +75,15 @@ export const ListPart: FunctionComponent = () => {
     <section css={partContainer}>
       <form onSubmit={handleSubmit(jdSearch)}>
         {showFilter && (
-          <div>
-            <div css={formBackground} />
-            <div css={filterContainer}>
-              <Filter
-                register={register}
-                watch={watch}
-                setValue={setValue}
-                getValues={getValues}
-                setShowFilter={setShowFilter}
-              />
-            </div>
-          </div>
+          <BottomPopup>
+            <Filter
+              register={register}
+              watch={watch}
+              setValue={setValue}
+              getValues={getValues}
+              setShowFilter={setShowFilter}
+            />
+          </BottomPopup>
         )}
         <Layout>
           <div css={titleContainer}>
