@@ -1,9 +1,11 @@
 import { FunctionComponent, MouseEvent, useCallback, useEffect } from "react";
+import Link from "next/link";
 import { createPortal } from "react-dom";
+import { MAIN_URL } from "shared-constant/internalURL";
 import { dimmed } from "./style";
 import { modalComponentProps } from "./type";
 
-export const ModalComponent: FunctionComponent<modalComponentProps> = ({ children, closeModal }) => {
+export const ModalComponent: FunctionComponent<modalComponentProps> = ({ button, children, closeModal }) => {
   const closeOnClick = useCallback(
     (event: MouseEvent): void => {
       if (event?.target === event?.currentTarget) {
@@ -39,10 +41,21 @@ export const ModalComponent: FunctionComponent<modalComponentProps> = ({ childre
     };
   }, [closeModal]);
 
+  if (button === "home") {
+    return createPortal(
+      <Link href={MAIN_URL} passHref>
+        <a aria-hidden css={dimmed}>
+          {children}
+        </a>
+      </Link>,
+      document.getElementById("portal") as HTMLElement
+    );
+  }
+
   return createPortal(
-    <div aria-hidden css={dimmed} onClick={closeOnClick}>
+    <button aria-label="팝업 닫기" type="button" css={dimmed} onClick={closeOnClick}>
       {children}
-    </div>,
+    </button>,
     document.getElementById("portal") as HTMLElement
   );
 };

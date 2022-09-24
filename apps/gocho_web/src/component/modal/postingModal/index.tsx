@@ -185,7 +185,7 @@ export const PostingModal: FunctionComponent = () => {
   const { closeModal } = useModal();
 
   return (
-    <ModalComponent closeModal={closeModal}>
+    <ModalComponent closeModal={closeModal} button="close">
       <PostingBox />
     </ModalComponent>
   );

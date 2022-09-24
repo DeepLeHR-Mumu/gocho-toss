@@ -7,7 +7,7 @@ export const wrapper = css`
   left: 50%;
   top: 50%;
   width: 22rem;
-  transform: translate(-50%, -80%);
+  transform: translate(-50%, -50%);
   height: auto;
   padding: 2rem;
   background-color: ${COLORS.GRAY100};

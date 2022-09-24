@@ -21,7 +21,7 @@ export const bookmarkButtonCSS = css`
   border-radius: 0 0 0 1.25rem;
   color: ${COLORS.GRAY60};
   font-size: 1rem;
-  z-index: 20;
+  z-index: 15;
 `;
 
 export const flexBox = css`
