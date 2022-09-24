@@ -1,4 +1,4 @@
-import { H2Heading } from "@component/atom/h2Heading";
+import { H2Heading } from "@component/common/atom/h2Heading";
 import { Layout } from "@component/layout";
 import { FunctionComponent } from "react";
 

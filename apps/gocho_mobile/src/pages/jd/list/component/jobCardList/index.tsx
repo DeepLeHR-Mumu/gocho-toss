@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
-import { JobCard } from "@component/card/jobCard";
+import { JobCard } from "@component/common/molecule/jobCard";
 import { useUserInfo } from "shared-api/auth";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { JobCardListProps } from "./type";

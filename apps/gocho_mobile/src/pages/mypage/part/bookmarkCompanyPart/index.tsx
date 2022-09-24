@@ -2,7 +2,7 @@ import { FunctionComponent, useState } from "react";
 
 import { useCompanyArr } from "shared-api/company";
 
-import { BottomPagination } from "@component/molecule/bottomPagination";
+import { BottomPagination } from "@component/common/molecule/bottomPagination";
 import { CompanyCardList } from "../../component/companyCardList";
 
 export const BookmarkCompanyPart: FunctionComponent = () => {

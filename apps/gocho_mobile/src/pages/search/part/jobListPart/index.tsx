@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { BottomPagination } from "@component/molecule/bottomPagination";
+import { BottomPagination } from "@component/common/molecule/bottomPagination";
 
 import { JobCardList } from "../../component/jobCardList";
 import { title } from "./style";

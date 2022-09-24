@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import { useJobArr } from "shared-api/job";
 
-import { BottomPagination } from "@component/molecule/bottomPagination";
+import { BottomPagination } from "@component/common/molecule/bottomPagination";
 import { JobCardList } from "../../component/jobCardList";
 import { Filter } from "../../component/filter";
 import { setJobOrderButtonArr } from "./constant";

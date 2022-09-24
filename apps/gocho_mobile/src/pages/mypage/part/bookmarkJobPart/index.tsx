@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from "react";
 import { JobCardList } from "@pages/search/component/jobCardList";
-import { BottomPagination } from "@component/molecule/bottomPagination";
+import { BottomPagination } from "@component/common/molecule/bottomPagination";
 import { useJobArr } from "shared-api/job";
 
 export const BookmarkJobPart: FunctionComponent = () => {

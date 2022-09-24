@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { H2Heading } from "@component/atom/h2Heading";
+import { H2Heading } from "@component/common/atom/h2Heading";
 import { Layout } from "@component/layout";
 
 export const JobPart: FunctionComponent = () => {
