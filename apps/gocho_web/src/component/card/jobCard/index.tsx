@@ -16,6 +16,7 @@ import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 import { dateConverter } from "shared-util/date";
 
+import { dDayBooleanReturn } from "./util";
 import { JobCardProps, JobCardSkeleton } from "./type";
 import {
   jobCardSkeleton,
@@ -91,11 +92,10 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
     );
   };
 
-  const today = new Date();
-  const isExpired = jobData.endTime - Number(today) < 0;
-
   const { year: startYear, month: startMonth, date: startDate } = dateConverter(jobData.startTime);
   const { year: endYear, month: endMonth, date: endDate } = dateConverter(jobData.endTime);
+
+  const isExpired = dDayBooleanReturn(jobData.endTime);
 
   return (
     <article css={cardWrapper(isExpired)}>
@@ -175,9 +175,9 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
           </div>
 
           <div css={taskContainer}>
-            <p css={taskSummary}>
+            <p css={taskSummary(isExpired)}>
               채용중인 직무
-              <span css={taskNumber}>{jobData.taskArr.length}</span>
+              <span css={taskNumber(isExpired)}>{jobData.taskArr.length}</span>
             </p>
             {jobData.taskArr.map((task) => {
               return (

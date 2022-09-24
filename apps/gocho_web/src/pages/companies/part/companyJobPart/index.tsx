@@ -8,7 +8,7 @@ import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { JobCard } from "@component/card/jobCard";
 import { Layout } from "@component/layout";
 import { CompanyJobPartProps } from "./type";
-import { partContainer, listContainer } from "./style";
+import { partContainer, listContainer, totalCount } from "./style";
 
 export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({ companyId }) => {
   const {
@@ -63,6 +63,7 @@ export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({ company
   return (
     <div css={partContainer}>
       <Layout>
+        <p css={totalCount}>총 채용공고 0개</p>
         <section css={listContainer}>
           {jobDataArr.pages.map((page) => {
             return page.jobDataArr.map((jobData) => {

@@ -1,7 +1,7 @@
 import { ResponseDef } from "shared-type/api/responseType";
 import { AxiosError } from "axios";
 import { UseQueryResult } from "@tanstack/react-query";
-import { CompanyObjDef } from "../../company/type/company";
+import { CompanyObjDef } from "../type/company";
 
 export interface WelfareProps {
   money: string[] | null;
@@ -15,6 +15,7 @@ export interface WelfareProps {
 }
 
 export interface FactoryProps {
+  name: string;
   id: number;
   companyId: number;
   place1: string;

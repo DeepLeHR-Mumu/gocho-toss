@@ -8,17 +8,11 @@ import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { useJobDetail } from "shared-api/job";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { Layout } from "@component/layout";
+import { DetailComment } from "@component/global/detailComment";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
 import { PositionObjDef } from "./type";
-import {
-  HeaderPart,
-  AsidePart,
-  DetailSupportPart,
-  DetailWorkPart,
-  DetailPreferencePart,
-  ReceptInfoPart,
-} from "../part";
+import { HeaderPart, DetailSupportPart, DetailWorkPart, DetailPreferencePart, ReceptInfoPart } from "../part";
 
 import { wrapper, flexBox, container, containerSkeleton } from "./style";
 
@@ -58,7 +52,7 @@ const JobsDetail: NextPage = () => {
             <section css={containerSkeleton}>
               <SkeletonBox />
             </section>
-            <AsidePart jobDetailData={null} />
+            <DetailComment detailData={null} />
           </div>
         </Layout>
       </main>
@@ -70,6 +64,12 @@ const JobsDetail: NextPage = () => {
       return job.id === jobDetailData.id;
     })
   );
+
+  const commentData = {
+    companyId: jobDetailData.company.companyId,
+    name: jobDetailData.company.name,
+    logoUrl: jobDetailData.company.logoUrl,
+  };
 
   return (
     <main css={wrapper}>
@@ -104,7 +104,7 @@ const JobsDetail: NextPage = () => {
               <DetailPreferencePart freshPosition={freshPosition} />
             </section>
           )}
-          <AsidePart jobDetailData={jobDetailData} />
+          <DetailComment detailData={commentData} />
         </div>
         <ReceptInfoPart jobDetailData={jobDetailData} />
       </Layout>

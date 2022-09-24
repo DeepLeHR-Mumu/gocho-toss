@@ -1,4 +1,4 @@
-import { CompanyObjDef } from "../../company/type/company";
+import { CompanyObjDef } from "../type/company";
 
 import { UseCompanyDetailResultDef } from "./type";
 
@@ -37,6 +37,7 @@ export const companyConverter = (data: CompanyObjDef): UseCompanyDetailResultDef
       },
       factoryArr: data.factory_arr.map((factory) => {
         return {
+          name: factory.name,
           id: factory.id,
           companyId: factory.company_id,
           place1: factory.place_1,

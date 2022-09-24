@@ -4,6 +4,7 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import Image from "next/image";
 import Link from "next/link";
 
+import catchLogoSrc from "shared-image/global/common/catch_logo.png";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
 import { useAddUserBookmark, useDeleteUserBookmark } from "shared-api/bookmark";
@@ -21,6 +22,7 @@ import {
   industry,
   catchLinkButton,
   youtubeLinkButton,
+  catchLogoBox,
 } from "./style";
 
 export const HeaderPart: FunctionComponent<HeaderPartProps> = ({
@@ -67,7 +69,7 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({
       <div css={companyLogoBox}>
         <Image
           layout="fill"
-          objectFit="contain"
+          objectFit="cover"
           src={imageSrc}
           alt={`${companyData.name} 기업 로고`}
           onError={() => {
@@ -84,38 +86,35 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({
               return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
             }}
           >
-            <div css={icon}>
-              <BsFillBookmarkFill />
-            </div>
+            <BsFillBookmarkFill />
             기업 북마크 {companyData.bookmark}
           </button>
-          <div css={viewBox}>
+          <p css={viewBox}>
             <span css={icon}>
               <FiEye />
             </span>
             조회수 <span css={viewColor}>{companyData.view}</span>
-          </div>
+          </p>
         </div>
-        <h2 css={companyName}>{companyData.name}</h2>
+        <p css={companyName}>{companyData.name}</p>
         <p css={industry}>{companyData.industry}</p>
       </div>
       {/* LATER null data들에대한 정확한 파악 필요 null 일 시 렌더링 안되는 것 확인 및 디자인 변경 확인 필요 */}
       {companyData.catchUrl && (
         <Link href={companyData.catchUrl} passHref>
-          <a>
-            <button type="button" css={catchLinkButton}>
-              캐치 기업정보 더보기
-            </button>
+          <a css={catchLinkButton}>
+            캐치 기업정보 더보기
+            <div css={catchLogoBox}>
+              <Image src={catchLogoSrc} alt="" layout="fill" objectFit="contain" />
+            </div>
           </a>
         </Link>
       )}
 
       {companyData.youtubeUrl && (
         <Link href={companyData.youtubeUrl} passHref>
-          <a>
-            <button type="button" css={youtubeLinkButton}>
-              <FiYoutube />
-            </button>
+          <a css={youtubeLinkButton} aria-label={`${companyData.name} 유튜브 바로가기`}>
+            <FiYoutube />
           </a>
         </Link>
       )}

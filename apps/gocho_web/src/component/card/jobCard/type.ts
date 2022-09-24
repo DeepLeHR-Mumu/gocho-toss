@@ -30,3 +30,7 @@ export interface JobCardSkeleton {
   refetchUserBookmark?: never;
   isSkeleton: boolean;
 }
+
+export interface DDayBooleanReturnDef {
+  (endTime: number): boolean;
+}

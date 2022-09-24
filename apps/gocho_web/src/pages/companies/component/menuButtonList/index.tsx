@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
 
-import { buttonContainer, menuButton } from "./style";
 import { menuButtonArr } from "./constant";
 import { MenuButtonListProps } from "./type";
+import { buttonContainer, menuButton } from "./style";
 
 export const MenuButtonList: FunctionComponent<MenuButtonListProps> = ({ activeMenu, tab, tabClick }) => {
   return (
