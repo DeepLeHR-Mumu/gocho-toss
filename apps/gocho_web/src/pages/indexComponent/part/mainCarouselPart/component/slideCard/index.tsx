@@ -1,5 +1,7 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { FiArrowRight } from "react-icons/fi";
 
 import {
   slideWrapper,
@@ -10,6 +12,7 @@ import {
   lastDescCSS,
   titleCSS,
   dimmed,
+  linkButton,
 } from "./style";
 
 import { SlideCardProps } from "./type";
@@ -22,6 +25,9 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({
   backgroundColor,
   iconImage,
   backgroundImage,
+  buttonColor,
+  buttonText,
+  buttonUrl,
 }) => {
   return (
     <div css={slideWrapper}>
@@ -37,6 +43,14 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({
         </p>
         <strong css={titleCSS}>{title}</strong>
         <em css={lastDescCSS}>{lastDesc}</em>
+        {buttonText && (
+          <Link href={`${buttonUrl}`} passHref>
+            <a css={linkButton(buttonColor)}>
+              <FiArrowRight />
+              {buttonText}
+            </a>
+          </Link>
+        )}
       </div>
       <div css={dimmed} />
       <Image priority src={backgroundImage} alt={title} layout="responsive" />

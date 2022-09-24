@@ -13,6 +13,9 @@ export const carouselArr = [
     backgroundImage: banner01,
     iconImage: checkIconImage,
     backgroundColor: "#121012",
+    buttonText: "자세히보기",
+    buttonColor: "#505050",
+    buttonUrl: "/event/renewal",
   },
   {
     id: 2,
