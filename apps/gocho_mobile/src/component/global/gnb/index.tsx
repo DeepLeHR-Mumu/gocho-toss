@@ -9,8 +9,12 @@ import { MAIN_URL } from "shared-constant/internalURL";
 import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
 
 import { Layout } from "@component/layout";
-import { useModal } from "@recoil/hook/modal";
 
+import { AuthedMenu } from "./component/authedMenu";
+import { UnAuthedMenu } from "./component/unAuthedMenu";
+import { SubMenuButton } from "./component/subMenuButton";
+import { menuArr } from "./constant";
+import { openedElementDef } from "./type";
 import {
   headerWrapper,
   headerContainer,
@@ -20,12 +24,14 @@ import {
   backIcon,
   unifiedSearch,
   searchButton,
+  navContainer,
+  menuContainer,
+  menuCategory,
 } from "./style";
 
 export const GNB: FunctionComponent = () => {
-  const [isUnifiedSearch, setIsUnifiedSearch] = useState<boolean>(false);
+  const [openedElement, setOpenedElement] = useState<openedElementDef>(null);
   const { isSuccess } = useUserInfo();
-  const { setCurrentModal } = useModal();
 
   const router = useRouter();
 
@@ -50,10 +56,11 @@ export const GNB: FunctionComponent = () => {
       query: { q: query },
     });
   });
+
   return (
     <header css={headerWrapper}>
       <Layout>
-        <div css={headerContainer(isUnifiedSearch)}>
+        <div css={headerContainer(openedElement === "통합검색")}>
           <div css={logo}>
             <Link href={MAIN_URL} passHref>
               <Image src={colorLogoSrc} alt="고초대졸닷컴" objectFit="contain" />
@@ -63,9 +70,7 @@ export const GNB: FunctionComponent = () => {
             type="button"
             css={icon}
             onClick={() => {
-              setIsUnifiedSearch((prev) => {
-                return !prev;
-              });
+              setOpenedElement("통합검색");
             }}
           >
             <FiSearch />
@@ -74,21 +79,21 @@ export const GNB: FunctionComponent = () => {
             type="button"
             css={icon}
             onClick={() => {
-              setCurrentModal("loginModal");
+              setOpenedElement((prev) => {
+                return prev === "메뉴" ? null : "메뉴";
+              });
             }}
           >
             <FiMenu />
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} css={unifiedSearchWrapper(isUnifiedSearch)}>
+        <form onSubmit={handleSubmit} css={unifiedSearchWrapper(openedElement === "통합검색")}>
           <button
             css={backIcon}
             type="button"
             onClick={() => {
-              setIsUnifiedSearch((prev) => {
-                return !prev;
-              });
+              setOpenedElement(null);
             }}
           >
             <FiArrowLeft />
@@ -99,6 +104,32 @@ export const GNB: FunctionComponent = () => {
           </button>
         </form>
       </Layout>
+
+      <nav css={navContainer(openedElement === "메뉴")}>
+        <Layout>
+          <ul css={menuContainer}>
+            {menuArr.map((menu) => {
+              return (
+                <li key={`navMenu_${menu.menuTitle}`}>
+                  <p css={menuCategory}>{menu.menuTitle}</p>
+                  <ul>
+                    {menu.subMenuArr.map((subMenu) => {
+                      return (
+                        <SubMenuButton key={subMenu.menuTitle} link={subMenu.menuLink} title={subMenu.menuTitle} />
+                      );
+                    })}
+                  </ul>
+                </li>
+              );
+            })}
+          </ul>
+          {isSuccess ? (
+            <AuthedMenu setOpenedElement={setOpenedElement} />
+          ) : (
+            <UnAuthedMenu setOpenedElement={setOpenedElement} />
+          )}
+        </Layout>
+      </nav>
     </header>
   );
 };

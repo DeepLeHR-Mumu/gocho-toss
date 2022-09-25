@@ -63,6 +63,7 @@ export const unifiedSearch = css`
     border: 1px solid ${COLORS.BLUE_SECOND40};
   }
 `;
+
 export const searchButton = css`
   position: absolute;
   top: 50%;
@@ -70,4 +71,27 @@ export const searchButton = css`
   transform: translate(0, -50%);
   color: ${COLORS.GRAY40};
   width: 1.25rem;
+`;
+
+export const navContainer = (isOn = false) => {
+  return css`
+    display: ${isOn ? "block" : "none"};
+    position: absolute;
+    top: 3.25rem;
+    width: 100%;
+    background-color: ${COLORS.GRAY100};
+    border-radius: 0 0 1.5rem 1.5rem;
+    padding-bottom: 1rem;
+  `;
+};
+
+export const menuContainer = css`
+  padding-bottom: 1rem;
+  border-bottom: 1px solid ${COLORS.GRAY80};
+`;
+
+export const menuCategory = css`
+  font-weight: 500;
+  color: ${COLORS.GRAY30};
+  line-height: 2.5;
 `;
