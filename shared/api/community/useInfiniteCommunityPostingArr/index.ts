@@ -1,10 +1,10 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-import { axiosInstance } from "../../axiosInstance";
 import {
   communityPostingArrKeyObj,
   CommunityPostingArrRequestDef,
 } from "shared-constant/queryKeyFactory/community/postingArrKeyObj";
+import { axiosInstance } from "../../axiosInstance";
 
 import { GetInfinitePostingArrDef } from "./type";
 import { selector } from "./util";

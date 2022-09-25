@@ -5,35 +5,52 @@ import { hoverShadow } from "shared-style/common";
 
 export const partContainer = css`
   background-color: ${COLORS.GRAY90};
-  padding: 3rem 0;
+  padding: 4.125rem 0;
   border-radius: 2rem 2rem 0 0;
 `;
 
 export const title = css`
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 700;
   color: ${COLORS.GRAY10};
+  margin-bottom: 3.5rem;
 `;
 
 export const mainContainer = css`
   display: flex;
-  margin-top: 3rem;
+  align-items: flex-start;
+  justify-content: space-between;
 `;
 
 export const buttonArrContainer = css`
-  margin-right: 2rem;
+  width: 5.5rem;
+  position: sticky;
+  left: 0;
+  top: 10rem;
+  margin-top: 3.5rem;
+`;
+
+export const buttonTitle = css`
+  font-weight: 500;
+  font-size: 1rem;
+  color: ${COLORS.GRAY40};
+  margin-bottom: 0.5rem;
 `;
 
 export const setPostingFilterButton = (active = false) => {
   return css`
-    width: 6rem;
+    width: 5.5rem;
+    height: 2.5rem;
     text-align: center;
     border-radius: 1.5rem;
+    font-size: 0.875rem;
     font-weight: 500;
-    margin-top: 0.5rem;
-    padding: 0.5rem 2rem;
     transition: all 0.2s ease;
-    word-break: keep-all;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
 
     ${PC_HOVER} {
       &:hover {
@@ -103,33 +120,33 @@ export const setPostingFilterButton = (active = false) => {
 };
 
 export const listContainer = css`
-  flex-grow: 1;
+  width: 100%;
+  max-width: 58.9375rem;
 `;
 
 export const tempContainer = css`
   display: flex;
-  flex-direction: row;
-  align-items: baseline;
+  align-items: center;
+  margin-bottom: 1rem;
 `;
 
 export const formCSS = css`
-  flex-grow: 1;
+  width: 100%;
 `;
 
 export const searchWrapper = css`
   width: 100%;
   position: relative;
-  margin-top: 0.5rem;
 `;
 
 export const searchBox = css`
   width: 100%;
   height: 2.5rem;
-  font-family: Noto Sans KR, sans-serif;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 400;
-  margin-bottom: 1rem;
-  padding: 0.5rem 3rem;
+  display: flex;
+  align-items: flex-start;
+  padding: 0 2rem;
   border-radius: 1.5rem;
   background-color: ${COLORS.GRAY100};
 `;
@@ -146,12 +163,16 @@ export const searchButton = css`
 export const setPostingHashtagButton = (active = false) => {
   return css`
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 1.5rem;
     font-weight: 400;
     margin-left: 0.5rem;
-    padding: 0.5rem 1rem;
+    padding: 0 1rem;
     transition: all 0.2s ease;
-    word-break: keep-all;
+    white-space: nowrap;
+    height: 2.5rem;
     color: ${COLORS.GRAY10};
 
     &:nth-of-type(1) {
@@ -195,18 +216,18 @@ export const setPostingHashtagButton = (active = false) => {
 };
 
 export const writePostingButton = css`
-  width: 6rem;
+  width: 5.5rem;
+  height: 5.5rem;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 1.5rem;
-  margin-top: 0.5rem;
-  padding: 1.25rem 1rem;
-  word-break: keep-all;
-  font-weight: 400;
+  font-weight: 500;
   background-color: ${COLORS.BLUE_FIRST40};
   transition: all 0.2s ease;
   color: ${COLORS.GRAY100};
   flex-direction: column;
-
   ${hoverShadow};
 `;
 

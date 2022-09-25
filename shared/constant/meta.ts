@@ -167,7 +167,7 @@ export const META_COMMUNITY_TIP_DETAIL = {
 };
 
 export const META_COMMUNITY_POSTING = {
-  pageName: "포스팅 리스트",
+  pageName: "생산직 자유게시판",
   title: "생산직 자유게시판 - 고초대졸닷컴",
   desc: "생산직만을 위한 커뮤니티, 고초대졸닷컴이 만들어나갑니다. 나 혼자 갖고 있던 정보와 고민을 다른 구직자들과 나눠보세요! 생산직 취업의 새로운 기준, 고초대졸닷컴.",
   keyword: defaultKeyword,

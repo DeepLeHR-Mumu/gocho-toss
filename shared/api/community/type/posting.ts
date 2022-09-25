@@ -10,6 +10,6 @@ export interface PostingObjDef {
   like: number;
   view: number;
   nickname: string;
-  badge: null;
+  badge: "default" | "early_bird" | "admin";
   comments: PostingCommentObjDef[];
 }

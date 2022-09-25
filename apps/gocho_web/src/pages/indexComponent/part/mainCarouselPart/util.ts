@@ -3,7 +3,7 @@ import { setCarouselSettingDef } from "./type";
 export const setCarouselSetting: setCarouselSettingDef = (setActiveIndex) => {
   return {
     dots: false,
-    autoplay: false,
+    autoplay: true,
     arrows: false,
     autoPlaySpeed: 6000,
     infinite: true,

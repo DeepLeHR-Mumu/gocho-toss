@@ -93,7 +93,7 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({
             <span css={icon}>
               <FiEye />
             </span>
-            조회수 <span css={viewColor}>{companyData.view}</span>
+            조회수 <span css={viewColor}>{companyData.view.toLocaleString("ko-KR")}</span>
           </p>
         </div>
         <p css={companyName}>{companyData.name}</p>
