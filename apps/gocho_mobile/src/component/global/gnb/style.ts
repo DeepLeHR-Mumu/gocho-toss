@@ -15,6 +15,7 @@ export const headerWrapper = css`
 export const headerContainer = (isOn = false) => {
   return css`
     display: ${isOn ? "none" : "flex"};
+    align-items: center;
   `;
 };
 

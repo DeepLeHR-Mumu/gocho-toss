@@ -7,7 +7,9 @@ import { FiSearch, FiMenu, FiArrowLeft } from "react-icons/fi";
 import { useUserInfo } from "shared-api/auth";
 import { MAIN_URL } from "shared-constant/internalURL";
 import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
+
 import { Layout } from "@component/layout";
+import { useModal } from "@recoil/hook/modal";
 
 import {
   headerWrapper,
@@ -23,6 +25,7 @@ import {
 export const GNB: FunctionComponent = () => {
   const [isUnifiedSearch, setIsUnifiedSearch] = useState<boolean>(false);
   const { isSuccess } = useUserInfo();
+  const { setCurrentModal } = useModal();
 
   const router = useRouter();
 
@@ -67,10 +70,17 @@ export const GNB: FunctionComponent = () => {
           >
             <FiSearch />
           </button>
-          <button type="button" css={icon}>
+          <button
+            type="button"
+            css={icon}
+            onClick={() => {
+              setCurrentModal("loginModal");
+            }}
+          >
             <FiMenu />
           </button>
         </div>
+
         <form onSubmit={handleSubmit} css={unifiedSearchWrapper(isUnifiedSearch)}>
           <button
             css={backIcon}
