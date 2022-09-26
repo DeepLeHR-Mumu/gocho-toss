@@ -30,7 +30,7 @@ export const CommunityPostingPart: FunctionComponent = () => {
   const [activeButtonIndex, setActiveButtonIndex] = useState(0);
   const sliderRef = useRef<Slider>(null);
 
-  const { data: communityPostingArrData } = useCommunityPostingArr({
+  const { data: communityPostingArrData, isLoading } = useCommunityPostingArr({
     filter: setPostingOrderButtonArr[activeButtonIndex].filter,
     limit: 6,
   });
@@ -39,7 +39,7 @@ export const CommunityPostingPart: FunctionComponent = () => {
     setActiveButtonIndex(newId);
   };
 
-  if (!communityPostingArrData) {
+  if (!communityPostingArrData || isLoading) {
     return <CommunityPostingPartSkeleton />;
   }
 

@@ -9,7 +9,7 @@ import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
 import { BestUserList } from "./component/bestUserList";
 import { BestUserBox } from "./component/bestUserInfo";
-import { specBestWrapper, colorPoint, title, linkButton, bestUserWrapper } from "./stye";
+import { specBestWrapper, colorPoint, title, linkButton, bestUserWrapper } from "./style";
 
 export const SpecBestPart: FunctionComponent = () => {
   const [activeUserID, setActiveUserID] = useState(0);

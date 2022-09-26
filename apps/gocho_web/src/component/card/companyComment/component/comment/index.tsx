@@ -37,7 +37,7 @@ export const Comment: FunctionComponent<CommentProps> = ({ nickname, commentData
           <p css={bodyCSS}>{commentData.description}</p>
         </div>
 
-        {/* TOTO : 2주차 작업분 */}
+        {/* TODO : 2주차 작업분 */}
         <div css={reactionContainer}>
           <CommentLikeButton
             count={commentData.like}

@@ -37,7 +37,6 @@ import {
   infoTitle,
   info,
   booleanIcon,
-  factoryWrapper,
   noFactoryWarning,
   noFactoryBox,
   noFactoryDesc,
@@ -48,7 +47,7 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({ compa
   const [activeFactory, setActiveFactory] = useState<number>(companyData.factoryArr[0] && companyData.factoryArr[0].id);
 
   return (
-    <div css={factoryWrapper}>
+    <div>
       <InvisibleH3 title="공장 정보" />
       <div css={buttonContainer}>
         <div css={iconBox}>
@@ -147,7 +146,7 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({ compa
                           layout="fill"
                           objectFit="contain"
                           src={factory.bus.exists ? busTrueIcon : busFalseIcon}
-                          alt="공장 통근버스 정보 아이콘"
+                          alt={factory.bus.exists ? "통근버스 있음" : "통근버스 없음"}
                         />
                       </div>
                       <div css={infoText}>
@@ -157,7 +156,7 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({ compa
                             layout="fill"
                             objectFit="contain"
                             src={factory.bus.exists ? oIcon : xIcon}
-                            alt="공장 통근버스 정보 아이콘"
+                            alt={factory.bus.exists ? "통근버스 있음" : "통근버스 없음"}
                           />
                         </div>
                       </div>

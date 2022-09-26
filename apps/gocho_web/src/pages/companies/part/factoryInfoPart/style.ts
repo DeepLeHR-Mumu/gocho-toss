@@ -2,8 +2,6 @@ import { css } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
 
-export const factoryWrapper = css``;
-
 export const buttonContainer = css`
   display: flex;
   align-items: center;

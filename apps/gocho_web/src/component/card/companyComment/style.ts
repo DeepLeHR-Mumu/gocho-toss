@@ -83,7 +83,7 @@ export const unLoginContainer = css`
 `;
 
 export const linkBox = css`
-  min-height: 4.6094rem;
+  min-height: 4rem;
   padding: 1.25rem;
 `;
 

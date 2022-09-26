@@ -26,7 +26,7 @@ const JobsDetail: NextPage = () => {
   const router = useRouter();
   const { jobId } = router.query;
 
-  const { data: jobDetailData } = useJobDetail({
+  const { data: jobDetailData, isLoading } = useJobDetail({
     id: Number(jobId),
   });
 
@@ -43,7 +43,7 @@ const JobsDetail: NextPage = () => {
     }
   }, [currentPositionId, jobDetailData]);
 
-  if (!jobDetailData) {
+  if (!jobDetailData || isLoading) {
     return (
       <main css={wrapper}>
         <Layout>
