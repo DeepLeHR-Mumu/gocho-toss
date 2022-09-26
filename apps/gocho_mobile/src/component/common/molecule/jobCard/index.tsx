@@ -30,11 +30,11 @@ import {
   detailInfoContainer,
   eduQual,
   detailInfo,
-  taskContainer,
+  taskTitle,
   taskSummary,
   taskNumber,
   taskBox,
-  hoverButton,
+  taskContainer,
 } from "./style";
 
 export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
@@ -151,11 +151,11 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
             </div>
           </div>
 
-          <div css={taskContainer}>
+          <div css={taskTitle}>
             <div css={taskSummary}>채용중인 직무</div>
             <span css={taskNumber}>{jobData.taskArr.length}</span>
           </div>
-          <div>
+          <div css={taskContainer}>
             {jobData.taskArr.map((task) => {
               return (
                 <div css={taskBox} key={`${jobData.id}${task}`}>
@@ -164,12 +164,6 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
               );
             })}
           </div>
-
-          <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
-            <a css={hoverButton} className="hoverButton">
-              공고보기
-            </a>
-          </Link>
         </a>
       </Link>
     </article>

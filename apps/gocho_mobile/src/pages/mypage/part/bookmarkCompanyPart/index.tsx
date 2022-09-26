@@ -1,23 +1,24 @@
 import { FunctionComponent, useState } from "react";
 
-import { useCompanyArr } from "shared-api/company";
+import { useUserInfo } from "shared-api/auth";
+import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
+
 import { CompanyCardList } from "../../component/companyCardList";
 
 export const BookmarkCompanyPart: FunctionComponent = () => {
   const limit = 6;
   const [page, setPage] = useState(1);
-  const { data: companyDataArr, isLoading } = useCompanyArr({
-    order: "recent",
-    limit,
-    offset: (page - 1) * limit,
+  const { data: userInfoData } = useUserInfo();
+  const { data: userBookmarkCompanyDataArr, isLoading } = useUserCompanyBookmarkArr({
+    userId: userInfoData?.id,
   });
 
   return (
     <section>
-      <CompanyCardList companyDataArr={companyDataArr?.companyDataArr} isLoading={isLoading} />
-      <BottomPagination total={companyDataArr?.count || 0} limit={limit} page={page} setPage={setPage} />
+      <CompanyCardList companyDataArr={userBookmarkCompanyDataArr} isLoading={isLoading} />
+      <BottomPagination total={userBookmarkCompanyDataArr?.length || 0} limit={limit} page={page} setPage={setPage} />
     </section>
   );
 };

@@ -21,7 +21,7 @@ export const cardWrapper = (isExpired = false) => {
     border-radius: 1.5rem;
     margin-bottom: 1rem;
     padding: 1rem;
-    background-color: ${isExpired ? COLORS.GRAY90 : `${COLORS.GRAY100}`};
+    background-color: ${isExpired ? COLORS.GRAY95 : `${COLORS.GRAY100}`};
     box-shadow: 0 0 8px rgba(43, 43, 43, 0.1);
     transition: all 0.3s ease;
   `;
@@ -131,7 +131,7 @@ export const detailInfo = css`
   color: ${COLORS.GRAY40};
 `;
 
-export const taskContainer = css`
+export const taskTitle = css`
   display: flex;
   align-items: center;
   margin: 1rem 0 0.5rem;
@@ -162,17 +162,8 @@ export const taskBox = css`
   border: 1px solid ${COLORS.GRAY80};
 `;
 
-export const hoverButton = css`
-  opacity: 0;
-  z-index: 20;
-  position: absolute;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  font-size: 0.875rem;
-  color: ${COLORS.BLUE_FIRST40};
-  background-color: ${COLORS.GRAY100};
-  padding: 0.75rem 3rem;
-  border-radius: 1.5rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 12px 0 #eeeeee;
+export const taskContainer = css`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
 `;

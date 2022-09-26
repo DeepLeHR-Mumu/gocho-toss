@@ -1,8 +1,17 @@
 export interface jobBookmarkObjDef {
   id: number;
-  title: string;
+  start_time: number;
   end_time: number;
-  company: { id: number; name: string };
+  title: string;
+  high: boolean;
+  college: boolean;
+  place_arr: string[];
+  rotation_arr: string[];
+  task_arr: string[];
+  cut: boolean;
+  bookmark: number;
+  view: number;
+  company: { id: number; name: string; logo_url: string };
 }
 
 export interface companyBookmarkObjDef {

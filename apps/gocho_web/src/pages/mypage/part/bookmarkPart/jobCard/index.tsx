@@ -1,7 +1,6 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
 
-import { CDN_URL } from "shared-constant/externalURL";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 
 import {
@@ -24,16 +23,11 @@ export const JobCard: FunctionComponent<JobCardProps> = ({ jobData }) => {
     <article css={cardWrapper}>
       <div css={jobInfoContainer}>
         <div css={companyLogoBox}>
-          <Image
-            layout="fill"
-            objectFit="contain"
-            src={`${CDN_URL}/company_images/${jobData.company.id}/logo.png`}
-            alt={`${jobData.company.name} 기업 로고`}
-          />
+          <Image layout="fill" objectFit="contain" src={jobData.companyLogo} alt="" />
         </div>
         <div css={jobInfoBox}>
           <div css={companyNameBox}>
-            <h3 css={companyNameCSS}>{jobData.company.name}</h3>
+            <h3 css={companyNameCSS}>{jobData.companyName}</h3>
             <DdayBox endTime={jobData.endTime} />
           </div>
           <p css={titleCSS}>{jobData.title}</p>

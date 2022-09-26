@@ -6,14 +6,14 @@ import { Layout } from "@component/layout";
 import { BookmarkCompanyPart } from "./part/bookmarkCompanyPart";
 import { BookmarkJobPart } from "./part/bookmarkJobPart";
 import { setBookmarkViewButtonArr } from "./constant";
-import { headerContainer, title, buttonArrContainer, setBookmarkViewButton } from "./style";
+import { mainContainer, headerContainer, title, buttonArrContainer, setBookmarkViewButton } from "./style";
 import { activeButtonDef } from "./type";
 
 const MyPage: NextPage = () => {
   const [activeButton, setActiveButton] = useState<activeButtonDef>("채용공고");
 
   return (
-    <main>
+    <main css={mainContainer}>
       <Layout>
         <div css={headerContainer}>
           <h2 css={title}>MY 북마크</h2>
