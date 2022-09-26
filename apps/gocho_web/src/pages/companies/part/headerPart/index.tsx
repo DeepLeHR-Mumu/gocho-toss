@@ -75,7 +75,7 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData, is
       <div css={companyLogoBox}>
         <Image
           layout="fill"
-          objectFit="cover"
+          objectFit="contain"
           src={imageSrc}
           alt={`${companyData.name} 기업 로고`}
           onError={() => {

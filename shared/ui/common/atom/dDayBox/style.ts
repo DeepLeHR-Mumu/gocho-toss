@@ -10,6 +10,14 @@ const dateColor = (endTime: number) => {
 
   const dDay = (endDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24);
 
+  // D-day
+  if (Math.floor(dDay) === 0) {
+    return css`
+      color: ${COLORS.GRAY100};
+      background-color: ${COLORS.ERROR_RED40};
+    `;
+  }
+
   // 상시채용
   if (endDate.getFullYear() === 9999) {
     return css`
