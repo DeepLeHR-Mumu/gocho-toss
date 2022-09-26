@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     return new QueryClient({
       defaultOptions: {
         queries: {
-          staleTime: 150000,
+          staleTime: 15000,
           refetchOnWindowFocus: false,
           keepPreviousData: true,
           retry: 0,
