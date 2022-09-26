@@ -96,7 +96,10 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
             <DdayBox endTime={jobDetailData.endTime} />
           </li>
           <li>
-            <p css={dateCSS}>{`${startYear}. ${startMonth}. ${startDate} ~ ${endYear}. ${endMonth}. ${endDate}`}</p>
+            <p css={dateCSS}>
+              {`${startYear}. ${startMonth}. ${startDate}`} ~{" "}
+              {endYear !== 9999 && `${endYear}. ${endMonth}. ${endDate}`}
+            </p>
           </li>
         </ul>
         <p css={companyNameCSS}>
