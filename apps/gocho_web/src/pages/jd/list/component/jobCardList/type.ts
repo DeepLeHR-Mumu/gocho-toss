@@ -4,6 +4,7 @@ export interface JobCardListProps {
         id: number;
         companyName: string;
         companyLogo: string;
+        companyId: number;
         startTime: number;
         endTime: number;
         title: string;

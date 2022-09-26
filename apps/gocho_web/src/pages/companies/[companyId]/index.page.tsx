@@ -40,7 +40,7 @@ const CompaniesDetail: NextPage = () => {
   };
 
   const { data: userData } = useUserInfo();
-  const { data: userCompanyBookmarkArr, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
+  const { data: userCompanyBookmarkArr } = useUserCompanyBookmarkArr({ userId: userData?.id });
   const { data: response, isError, isLoading } = useCompanyDetail({ companyId: Number(companyId) });
 
   if (!response || isError || isLoading) {
@@ -93,7 +93,6 @@ const CompaniesDetail: NextPage = () => {
           companyData={companyData.headerData}
           isBookmarked={isBookmarked}
           userId={userData?.id}
-          refetchUserBookmark={refetch}
         />
         <div css={buttonContainer}>
           <button

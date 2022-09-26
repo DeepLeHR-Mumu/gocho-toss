@@ -3,8 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
+import { useQueryClient } from "@tanstack/react-query";
 
-import { useAddUserBookmark, useDeleteUserBookmark } from "shared-api/bookmark";
+import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 
 import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
@@ -47,12 +48,23 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   isBookmarked,
   userId,
   isSkeleton,
-  refetchUserBookmark,
 }) => {
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
 
-  const { mutate: addMutate } = useAddUserBookmark();
-  const { mutate: deleteMutate } = useDeleteUserBookmark();
+  const queryClient = useQueryClient();
+
+  const { mutate: addMutate } = useAddJobBookmarkArr({
+    id: jobData?.id as number,
+    title: jobData?.title as string,
+    end_time: jobData?.endTime as number,
+    company: { id: jobData?.companyId as number, name: jobData?.companyName as string },
+  });
+  const { mutate: deleteMutate } = useDeleteJobBookmarkArr({
+    id: jobData?.id as number,
+    title: jobData?.title as string,
+    end_time: jobData?.endTime as number,
+    company: { id: jobData?.companyId as number, name: jobData?.companyName as string },
+  });
 
   if (isSkeleton || jobData === undefined) {
     return (
@@ -63,31 +75,27 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   }
 
   const addJobBookmark = () => {
-    return (
-      userId &&
+    if (userId)
       addMutate(
-        { userId, likeType: "jd-bookmarks", elemId: jobData.id },
+        { userId, elemId: jobData.id },
         {
           onSuccess: () => {
-            refetchUserBookmark();
+            queryClient.invalidateQueries([{ data: "jobArr" }]);
           },
         }
-      )
-    );
+      );
   };
 
   const deleteJobBookmark = () => {
-    return (
-      userId &&
+    if (userId)
       deleteMutate(
-        { userId, likeType: "jd-bookmarks", elemId: jobData.id },
+        { userId, elemId: jobData.id },
         {
           onSuccess: () => {
-            refetchUserBookmark();
+            queryClient.invalidateQueries([{ data: "jobArr" }]);
           },
         }
-      )
-    );
+      );
   };
 
   const today = new Date();

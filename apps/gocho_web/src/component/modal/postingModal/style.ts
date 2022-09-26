@@ -103,6 +103,12 @@ export const infoCSS = css`
   }
 `;
 
+export const likeButtonCSS = (isBookmark: boolean) => {
+  return css`
+    color: ${isBookmark ? COLORS.BLUE_FIRST40 : COLORS.GRAY40};
+  `;
+};
+
 export const setPostingType = (type: string) => {
   return css`
     margin-right: 1rem;

@@ -10,7 +10,7 @@ import { JobListPartProps } from "./type";
 
 export const JobCardList: FunctionComponent<JobListPartProps> = ({ jobDataArr, isLoading }) => {
   const { data: userData } = useUserInfo();
-  const { data: userJobBookmarkArr, refetch } = useUserJobBookmarkArr({ userId: userData?.id });
+  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
   if (!jobDataArr || isLoading) {
     return (
@@ -35,7 +35,6 @@ export const JobCardList: FunctionComponent<JobListPartProps> = ({ jobDataArr, i
             jobData={jobData}
             isBookmarked={isBookmarked}
             userId={userData?.id}
-            refetchUserBookmark={refetch}
             key={`UnifiedSearchJobCard${jobData.id}`}
           />
         );

@@ -61,6 +61,7 @@ export const 비로그인상태 = Template.bind({});
     applyUrl: "https://naver.com",
     company: {
       name: "농심",
+      companyId: 2093,
     },
   },
 };
@@ -85,6 +86,7 @@ export const 로그인상태 = Template.bind({});
     applyUrl: "https://naver.com",
     company: {
       name: "농심",
+      companyId: 2302390,
     },
   },
 };

@@ -3,10 +3,12 @@ import { FiEye, FiYoutube } from "react-icons/fi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import Image from "next/image";
 import Link from "next/link";
+import { useQueryClient } from "@tanstack/react-query";
 
 import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
+import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 
-import { useAddUserBookmark, useDeleteUserBookmark } from "shared-api/bookmark";
+import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr } from "shared-api/bookmark";
 import { HeaderPartProps } from "./type";
 import {
   sectionContainer,
@@ -23,25 +25,29 @@ import {
   youtubeLinkButton,
 } from "./style";
 
-export const HeaderPart: FunctionComponent<HeaderPartProps> = ({
-  companyData,
-  isBookmarked,
-  userId,
-  refetchUserBookmark,
-}) => {
+export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData, isBookmarked, userId }) => {
+  const queryClient = useQueryClient();
   const [imageSrc, setImageSrc] = useState(companyData?.logoUrl as string);
 
-  const { mutate: addMutate } = useAddUserBookmark();
-  const { mutate: deleteMutate } = useDeleteUserBookmark();
+  const { mutate: addMutate } = useAddCompanyBookmarkArr({
+    id: companyData?.id as number,
+    logo_url: companyData?.logoUrl as string,
+    name: companyData?.name as string,
+  });
+  const { mutate: deleteMutate } = useDeleteCompanyBookmarkArr({
+    id: companyData?.id as number,
+    logo_url: companyData?.logoUrl as string,
+    name: companyData?.name as string,
+  });
 
   const addCompanyBookmark = () => {
     return (
       userId &&
       addMutate(
-        { userId, likeType: "company-bookmarks", elemId: companyData.id },
+        { userId, elemId: companyData.id },
         {
           onSuccess: () => {
-            refetchUserBookmark();
+            queryClient.invalidateQueries(companyDetailKeyObj.detail({ companyId: companyData.id }));
           },
         }
       )
@@ -52,10 +58,10 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({
     return (
       userId &&
       deleteMutate(
-        { userId, likeType: "company-bookmarks", elemId: companyData.id },
+        { userId, elemId: companyData.id },
         {
           onSuccess: () => {
-            refetchUserBookmark();
+            queryClient.invalidateQueries(companyDetailKeyObj.detail({ companyId: companyData.id }));
           },
         }
       )

@@ -10,7 +10,7 @@ import { listContainer } from "./style";
 
 export const JobCardList: FunctionComponent<JobCardListProps> = ({ jobDataArr, isLoading, isError }) => {
   const { data: userData } = useUserInfo();
-  const { data: userJobBookmarkArr, refetch } = useUserJobBookmarkArr({ userId: userData?.id });
+  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
   if (!jobDataArr || isError || isLoading) {
     return (
@@ -31,13 +31,7 @@ export const JobCardList: FunctionComponent<JobCardListProps> = ({ jobDataArr, i
           })
         );
         return (
-          <JobCard
-            jobData={jobData}
-            isBookmarked={isBookmarked}
-            userId={userData?.id}
-            refetchUserBookmark={refetch}
-            key={`JobCard${jobData.id}`}
-          />
+          <JobCard jobData={jobData} isBookmarked={isBookmarked} userId={userData?.id} key={`JobCard${jobData.id}`} />
         );
       })}
     </section>

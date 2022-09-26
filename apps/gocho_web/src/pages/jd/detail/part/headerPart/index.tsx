@@ -30,7 +30,7 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
   const observeRef = useRef<HTMLDivElement | null>(null);
 
   const { data: userData } = useUserInfo();
-  const { data: userJobBookmarkArr, refetch } = useUserJobBookmarkArr({ userId: userData?.id });
+  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
   useEffect(() => {
     if (setCurrentPositionId) {
@@ -87,19 +87,9 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
   return (
     <div>
       {isOverlap ? (
-        <Header
-          jobDetailData={jobDetailData}
-          isBookmarked={isBookmarked}
-          userId={userData?.id}
-          refetchUserBookmark={refetch}
-        />
+        <Header jobDetailData={jobDetailData} isBookmarked={isBookmarked} userId={userData?.id} />
       ) : (
-        <HeaderFix
-          jobDetailData={jobDetailData}
-          isBookmarked={isBookmarked}
-          userId={userData?.id}
-          refetchUserBookmark={refetch}
-        />
+        <HeaderFix jobDetailData={jobDetailData} isBookmarked={isBookmarked} userId={userData?.id} />
       )}
 
       <div css={observeCSS} ref={observeRef} />
