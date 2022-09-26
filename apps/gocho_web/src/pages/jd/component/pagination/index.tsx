@@ -16,6 +16,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({ total, limit, p
           return setPage(page - 1);
         }}
         disabled={page === 1}
+        aria-label="이전페이지로 가기"
       >
         <FiChevronLeft />
       </button>
@@ -27,6 +28,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({ total, limit, p
           return setPage(page + 1);
         }}
         disabled={page === totalPage}
+        aria-label="다음페이지로 가기"
       >
         <FiChevronRight />
       </button>

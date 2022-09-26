@@ -1,22 +1,17 @@
 import { css, SerializedStyles } from "@emotion/react";
-import { PC_HOVER, TABLET } from "shared-style/mediaQuery";
-import { shorten } from "@style/common";
+
+import { PC_HOVER } from "shared-style/mediaQuery";
+import { shorten } from "shared-style/common";
 import { COLORS } from "shared-style/color";
 
 export const tipDisplayWrapper = css`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  position: relative;
 `;
 
 export const tipFadeContainer = css`
-  position: relative;
-  width: 100%;
-  max-width: 35rem;
-
-  ${TABLET} {
-    max-width: 50%;
-  }
+  margin-right: 1.5rem;
 `;
 
 interface buttonCSSDef {
@@ -25,14 +20,15 @@ interface buttonCSSDef {
 
 export const buttonCSSCreator: buttonCSSDef = (location, length, activeNumber) => {
   return css`
-    width: 4.125rem;
-    height: 4.125rem;
+    font-size: 1.25rem;
+    width: 3.5rem;
+    height: 3.5rem;
     border-radius: 50%;
     background-color: ${COLORS.GRAY100};
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${COLORS.GRAY70};
+    color: ${COLORS.GRAY40};
     border: 1px solid ${COLORS.GRAY70};
     position: absolute;
     top: 50%;
@@ -41,6 +37,7 @@ export const buttonCSSCreator: buttonCSSDef = (location, length, activeNumber) =
     transition: all 0.2s ease-in;
     ${location === "left" ? "left:-2rem" : "right:-2rem"};
     ${length === activeNumber && "display:none"};
+    opacity: 0.8;
 
     ${PC_HOVER} {
       :hover {
@@ -53,24 +50,14 @@ export const buttonCSSCreator: buttonCSSDef = (location, length, activeNumber) =
 };
 
 export const tipImageBox = css`
-  overflow: hidden;
+  width: 38.9375rem;
+  height: 21.0625rem;
   border-radius: 20rem;
-`;
-
-export const fadeImageCSS = css`
-  height: 18rem;
-  background-color: ${COLORS.GRAY90};
-  font-size: 2rem;
+  overflow: hidden;
   position: relative;
-
-  ${TABLET} {
-    height: 15rem;
-  }
 `;
 
 export const currentTipContainer = css`
-  width: 100%;
-  max-width: 25rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -80,12 +67,13 @@ export const currentTipContainer = css`
 export const tagArrCSS = css`
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 
   > li {
-    font-size: 1.125rem;
-    color: ${COLORS.GRAY30};
+    font-size: 1rem;
+    color: ${COLORS.GRAY40};
     margin-right: 1rem;
+    font-weight: 400;
     white-space: nowrap;
 
     :last-of-type {
@@ -95,23 +83,20 @@ export const tagArrCSS = css`
 `;
 
 export const currentTipTitle = css`
-  font-size: 1.75rem;
+  font-size: 1.625rem;
   font-weight: 600;
   word-break: keep-all;
-  color: ${COLORS.GRAY20};
-  line-height: 1.5;
-  margin-bottom: 1.8125rem;
-
-  > span {
-    display: block;
-  }
+  color: ${COLORS.GRAY10};
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  ${shorten(2)}
 `;
 
 export const currentTipDesc = css`
-  font-size: 1rem;
-  color: ${COLORS.GRAY20};
+  width: 90%;
+  font-size: 0.875rem;
+  color: ${COLORS.GRAY40};
   line-height: 1.6;
-  width: 100%;
-  margin-bottom: 1rem;
-  ${shorten(2)}
+  margin-bottom: 2rem;
+  ${shorten(3)}
 `;

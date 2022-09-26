@@ -1,7 +1,7 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
-import { PostingObjDef } from "../../community/type/posting";
 import { communityPostingArrKeyObj } from "shared-constant/queryKeyFactory/community/postingArrKeyObj";
+import { PostingObjDef } from "../type/posting";
 
 export interface ResponseObjDef {
   data: PostingObjDef[];

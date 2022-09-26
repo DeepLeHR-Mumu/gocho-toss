@@ -5,13 +5,13 @@ import { FiYoutube, FiEye } from "react-icons/fi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { useQueryClient } from "@tanstack/react-query";
 
-import defaultCompanyLogo from "@public/images/global/common/default_company_logo.svg";
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
 import { dateConverter } from "shared-util/date";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 
-import { COMPANY_DETAIL_URL } from "@constant/internalURL";
+import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { HeaderProps } from "./type";
 import {
@@ -96,16 +96,26 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
             <DdayBox endTime={jobDetailData.endTime} />
           </li>
           <li>
-            <p css={dateCSS}>{`${startYear}. ${startMonth}. ${startDate} ~ ${endYear}. ${endMonth}. ${endDate}`}</p>
+            <p css={dateCSS}>
+              {`${startYear}. ${startMonth}. ${startDate}`} ~{" "}
+              {endYear !== 9999 && `${endYear}. ${endMonth}. ${endDate}`}
+            </p>
           </li>
         </ul>
         <p css={companyNameCSS}>
           {jobDetailData.company.name}
-          <button type="button" css={bookmarkButton}>
+          <button
+            type="button"
+            css={bookmarkButton(isBookmarked)}
+            onClick={() => {
+              return isBookmarked ? deleteJobBookmark() : addJobBookmark();
+            }}
+            aria-label={isBookmarked ? "공고 북마크 해지" : "공고 북마크"}
+          >
             <BsFillBookmarkFill />
           </button>
         </p>
-        <h2 css={titleCSS}>{jobDetailData.title}</h2>
+        <p css={titleCSS}>{jobDetailData.title}</p>
         <ul css={linksCSS}>
           <li>
             <a href={jobDetailData.applyUrl} target="_blank" css={applyButton} rel="noopener noreferrer">

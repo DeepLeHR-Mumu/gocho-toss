@@ -10,7 +10,7 @@ export default {
   title: "공용 컴포넌트/card/CompanyCommentCard",
   component: CompanyCommentCard,
   argTypes: {
-    companyId: { control: "number", description: "회사 고유 ID" },
+    companyData: { control: "", description: "회사 기본정보" },
   },
   parameters: {
     layout: "padded",
@@ -42,7 +42,13 @@ const Template: ComponentStory<typeof CompanyCommentCard> = (args) => {
 };
 
 export const 정상작동 = Template.bind({});
-정상작동.args = { companyId: 4 };
+정상작동.args = {
+  companyData: {
+    id: 2,
+    name: "기업이름",
+    logoUrl: "",
+  },
+};
 정상작동.parameters = {
   msw: {
     handlers: [
@@ -55,7 +61,11 @@ export const 정상작동 = Template.bind({});
 
 export const 에러 = Template.bind({});
 에러.args = {
-  companyId: 50000,
+  companyData: {
+    id: 2,
+    name: "기업이름",
+    logoUrl: "",
+  },
 };
 에러.parameters = {
   msw: {

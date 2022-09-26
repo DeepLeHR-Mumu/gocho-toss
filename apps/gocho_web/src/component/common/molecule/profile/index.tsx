@@ -1,39 +1,32 @@
 import { FunctionComponent, useState } from "react";
-import { BsChevronDown } from "react-icons/bs";
+import { BsChevronUp } from "react-icons/bs";
 
 import { useUserInfo } from "shared-api/auth";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
 import { MyProfileMenu } from "../myProfileMenu";
-import { profileWrapper, greetingMsg, downIconCSS } from "./style";
-import { activeDef } from "./type";
+import { profileWrapper, greetingMsg, iconCSS } from "./style";
 
 export const Profile: FunctionComponent = () => {
-  const [isHover, setIsHover] = useState<boolean>(false);
+  const [isActive, setIsActive] = useState<boolean>(false);
   const { data: userInfoData } = useUserInfo();
 
-  const handleIsHover: activeDef = (active) => {
-    setIsHover(active);
-  };
-
   return (
-    <div
+    <button
       css={profileWrapper}
-      onMouseOver={() => {
-        handleIsHover(true);
-      }}
-      onFocus={() => {
-        handleIsHover(true);
-      }}
-      onMouseLeave={() => {
-        handleIsHover(false);
+      type="button"
+      aria-label={isActive ? "서브메뉴 열기" : "서브메뉴 닫기"}
+      onClick={() => {
+        setIsActive((isPrev) => {
+          return !isPrev;
+        });
       }}
     >
       {userInfoData && <ProfileImg imageStr={userInfoData?.image} size="S" />}
 
       <p css={greetingMsg}>{userInfoData?.nickname}</p>
-      <BsChevronDown css={downIconCSS} />
-      <MyProfileMenu active={isHover} />
-    </div>
+      <BsChevronUp css={iconCSS(isActive)} />
+      <MyProfileMenu active={isActive} />
+    </button>
   );
 };

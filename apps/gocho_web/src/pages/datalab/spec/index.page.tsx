@@ -14,17 +14,20 @@ import { ListPart } from "./part/listPart";
 import { title, colorPoint, flexBox } from "./style";
 
 const MainList: NextPage = () => {
-  const { setCurrentModal, closeModal } = useModal();
+  const { setCurrentModal, closeModal, currentModal } = useModal();
   const { error } = useUserInfo();
 
   useEffect(() => {
     if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
       setCurrentModal("loginModal", { button: "home" });
     }
+    if (currentModal?.activatedModal === "signUpModal") {
+      setCurrentModal("signUpModal");
+    }
     return () => {
       closeModal();
     };
-  }, [error, setCurrentModal, closeModal]);
+  }, [closeModal, currentModal?.activatedModal, setCurrentModal, error]);
 
   return (
     <main>

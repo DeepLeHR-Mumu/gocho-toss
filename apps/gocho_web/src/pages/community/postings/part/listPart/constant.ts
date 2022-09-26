@@ -30,11 +30,11 @@ export const setPostingHashtagButtonArr: {
   hashtag: HashtagDef;
 }[] = [
   {
-    text: "#조회수급상승",
+    text: "조회수급상승",
     hashtag: "popular",
   },
   {
-    text: "#추천폭발",
+    text: "추천폭발",
     hashtag: "view",
   },
 ];

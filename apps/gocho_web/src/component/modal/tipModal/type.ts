@@ -14,3 +14,17 @@ export interface setCarouselSettingDef {
     afterChange: (current: number) => void;
   };
 }
+
+export interface TipBoxProps {
+  tipData: {
+    id: number;
+    title: string;
+    description: string;
+    tagArr: string[];
+    createdTime: number;
+    likeCount: number;
+    viewCount: number;
+    thumbnailSrc: string;
+    imgPageCount: number;
+  };
+}

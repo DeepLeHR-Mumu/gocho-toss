@@ -16,7 +16,10 @@ export const getCompanyComment: GetCompanyCommentDef = async ({
     },
   ],
 }) => {
-  const { data } = await axiosInstance.get(`/companies/${companyId}/comments`);
+  const token = localStorage.getItem("token") as string;
+  const { data } = await axiosInstance.get(`/companies/${companyId}/comments`, {
+    headers: { "x-access-token": token },
+  });
   return data;
 };
 

@@ -15,6 +15,7 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ tot
       <button
         css={movePageButton}
         type="button"
+        aria-label="첫 페이지 이동"
         onClick={() => {
           return setPage(1);
         }}
@@ -25,6 +26,7 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ tot
       <button
         css={movePageButton}
         type="button"
+        aria-label="이전 페이지 이동"
         onClick={() => {
           return setPage(page - 1);
         }}
@@ -37,6 +39,7 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ tot
           return (
             <button
               css={selectPageButton(count * 10 + idx === page)}
+              aria-label={`${count * 10 + idx}페이지 이동`}
               type="button"
               onClick={() => {
                 return setPage(count * 10 + idx);
@@ -51,6 +54,7 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ tot
       <button
         css={movePageButton}
         type="button"
+        aria-label="다음 페이지 이동"
         onClick={() => {
           return setPage(page + 1);
         }}
@@ -61,6 +65,7 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ tot
       <button
         css={movePageButton}
         type="button"
+        aria-label="마지막 페이지 이동"
         onClick={() => {
           return setPage(totalPage);
         }}

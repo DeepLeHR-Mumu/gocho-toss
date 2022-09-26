@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useState, useRef } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
-import { SkeletonBox } from "@component/common/atom/skeletonBox";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { useUserInfo } from "shared-api/auth";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { PositionCard } from "./component/positionCard";
@@ -67,9 +67,9 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
           <SkeletonBox />
         </div>
         <section css={positionContainer}>
-          <h3 css={positionTitleSkeleton}>
+          <p css={positionTitleSkeleton}>
             <SkeletonBox />
-          </h3>
+          </p>
           <div css={cardContainer}>
             <PositionCard isSkeleton />
           </div>
@@ -95,9 +95,9 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
       <div css={observeCSS} ref={observeRef} />
 
       <section css={positionContainer}>
-        <h3 css={positionTitle}>
+        <p css={positionTitle}>
           채용중인 직무<span>{jobDetailData.positionArr.length}</span>
-        </h3>
+        </p>
         <div css={cardContainer}>
           {jobDetailData.positionArr.map((position, index) => {
             return (
@@ -114,11 +114,11 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
 
           {jobDetailData.positionArr.length > 5 &&
             (defaultCardCount === jobDetailData.positionArr.length ? (
-              <button css={moreButton} type="button" onClick={handleLessCardCount}>
+              <button css={moreButton} type="button" onClick={handleLessCardCount} aria-label="공고리스트 줄이기">
                 줄이기 <FiChevronUp />
               </button>
             ) : (
-              <button css={moreButton} type="button" onClick={handleMoreCardCount}>
+              <button css={moreButton} type="button" onClick={handleMoreCardCount} aria-label="공고리스트 더보기">
                 더보기 <FiChevronDown />
               </button>
             ))}

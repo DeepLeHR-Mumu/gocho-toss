@@ -4,12 +4,13 @@ import { COLORS } from "shared-style/color";
 export const infoContainer = css`
   display: flex;
   flex-wrap: wrap;
+  padding: 2rem;
   margin-bottom: 3rem;
-  gap: 0.5rem;
+  gap: 1rem;
 `;
 
 export const infoBox = css`
-  width: 23.5%;
+  width: 23%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,30 +25,31 @@ export const infoPicture = css`
 export const infoTitle = css`
   font-size: 0.875rem;
   width: 9rem;
-  padding: 0.75rem;
+  height: 2.25rem;
   background-color: ${COLORS.GRAY100};
   color: ${COLORS.BLUE_NEON50};
   text-align: center;
-  border-radius: 1.5rem;
+  border-radius: 2rem;
   box-shadow: 0 2px 8px 0 #7b7b7b33;
   z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
 `;
 
 export const textBox = css`
-  width: 95%;
+  width: 100%;
   background-color: ${COLORS.GRAY90};
-  border-radius: 1.5rem 0 1.5rem 1.5rem;
-  padding: 1.25rem 1rem 1rem;
+  border-radius: 2rem 0 2rem 2rem;
+  padding: 1rem;
   margin-top: -0.25rem;
+  list-style: disc;
 `;
 
 export const infoText = css`
-  :before {
-    content: " ·   ";
-  }
-
+  margin-left: 1rem;
   font-size: 0.75rem;
   font-weight: 400;
-  line-height: 1.2;
-  margin-bottom: 0.25rem;
+  line-height: 1.8;
 `;

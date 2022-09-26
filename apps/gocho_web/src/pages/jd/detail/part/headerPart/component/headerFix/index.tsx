@@ -4,13 +4,10 @@ import { FiArrowLeft } from "react-icons/fi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { Profile } from "@component/common/molecule/profile";
-import { UnAuthMenu } from "@component/common/molecule/unAuthMenu";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { Layout } from "@component/layout";
-import { JOBS_LIST_URL } from "@constant/internalURL";
+import { JOBS_LIST_URL } from "shared-constant/internalURL";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
-import { useUserInfo } from "shared-api/auth";
 
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { HeaderFixProps } from "./type";
@@ -31,7 +28,6 @@ import {
 export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, isBookmarked, userId }) => {
   const queryClient = useQueryClient();
 
-  const { isSuccess } = useUserInfo();
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobDetailData?.id as number,
     title: jobDetailData?.title as string,
@@ -77,13 +73,13 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, is
         <div css={flexBetweenBox}>
           <div css={flexBox}>
             <Link href={JOBS_LIST_URL} passHref>
-              <a css={goBackButton}>
+              <a css={goBackButton} aria-label="이전 페이지 이동">
                 <FiArrowLeft />
               </a>
             </Link>
             <div css={titleBox}>
               <p css={companyNameCSS}>{jobDetailData.company.name}</p>
-              <h2 css={titleCSS}>{jobDetailData.title}</h2>
+              <p css={titleCSS}>{jobDetailData.title}</p>
             </div>
           </div>
           <div css={flexBox}>
@@ -105,7 +101,6 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, is
                 채용사이트
               </a>
             </div>
-            {isSuccess ? <Profile /> : <UnAuthMenu />}
           </div>
         </div>
       </Layout>

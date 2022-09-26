@@ -3,9 +3,18 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { useDeleteComment } from "shared-api/community/useDeleteComment";
 import { communityCommentArrKeyObj } from "shared-constant/queryKeyFactory/community/commentArrKeyObj";
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
 import { reCommentProps } from "./type";
-import { commentWrapper, nicknameCSS, bodyBox, bodyCSS, settingButtonContainer, settingButton } from "./style";
+import {
+  commentWrapper,
+  nicknameBox,
+  nicknameCSS,
+  bodyBox,
+  bodyCSS,
+  settingButtonContainer,
+  settingButton,
+} from "./style";
 
 export const ReComment: FunctionComponent<reCommentProps> = ({
   id,
@@ -32,7 +41,10 @@ export const ReComment: FunctionComponent<reCommentProps> = ({
 
   return (
     <div css={commentWrapper}>
-      <div css={nicknameCSS}>{nickname}</div>
+      <div css={nicknameBox}>
+        <ProfileImg imageStr="default" size="S" />
+        <p css={nicknameCSS}>{nickname}</p>
+      </div>
       <div css={bodyBox}>
         <div css={bodyCSS}>{body}</div>
         {loginUserId === userId && (

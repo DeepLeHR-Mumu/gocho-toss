@@ -5,7 +5,6 @@ import {
   tipFadeContainer,
   currentTipContainer,
   tipImageBox,
-  fadeImageCSS,
   tagArrCSS,
   currentTipTitle,
   currentTipDesc,
@@ -16,9 +15,7 @@ export const TipDisplaySkeleton: FunctionComponent = () => {
   return (
     <article css={tipDisplayWrapper}>
       <div css={tipFadeContainer}>
-        <div css={tipImageBox}>
-          <div css={fadeImageCSS} />
-        </div>
+        <div css={tipImageBox} />
       </div>
 
       <div css={currentTipContainer}>

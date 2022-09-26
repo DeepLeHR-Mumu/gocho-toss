@@ -54,6 +54,9 @@ export const buttonCSS: ButtonCSSDef = (variant, wide, iconDirection) => {
     css`
       width: 100%;
     `}
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 0.875rem 1.5rem;
     border-radius: 1.5rem;
     font-size: 0.875rem;

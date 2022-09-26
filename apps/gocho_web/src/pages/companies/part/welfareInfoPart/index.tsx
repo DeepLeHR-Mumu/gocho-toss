@@ -10,6 +10,8 @@ import vacationPic from "@public/images/global/companyDetail/vacation.svg";
 import growthPic from "@public/images/global/companyDetail/growth.svg";
 import etcPic from "@public/images/global/companyDetail/etc.svg";
 
+import { InvisibleH3 } from "shared-ui/common/atom/invisibleH3";
+
 import { WelfareInfoPartProps } from "./type";
 
 import { infoContainer, infoBox, infoPicture, infoTitle, textBox, infoText } from "./style";
@@ -32,6 +34,7 @@ export const WelfareInfoPart: FunctionComponent<WelfareInfoPartProps> = ({ compa
 
   return (
     <div css={infoContainer}>
+      <InvisibleH3 title="복지정보" />
       {menuPictureList.map((pic, index) => {
         return (
           menuDescList[index] && (
@@ -39,16 +42,16 @@ export const WelfareInfoPart: FunctionComponent<WelfareInfoPartProps> = ({ compa
               <div css={infoPicture}>
                 <Image layout="fill" objectFit="contain" src={pic} alt="급여 복지 관련 로고" />
               </div>
-              <h4 css={infoTitle}>{menuNameList[index]}</h4>
-              <div css={textBox}>
+              <strong css={infoTitle}>{menuNameList[index]}</strong>
+              <ul css={textBox}>
                 {menuDescList[index]?.map((data) => {
                   return (
-                    <div key={data} css={infoText}>
+                    <li key={data} css={infoText}>
                       {data}
-                    </div>
+                    </li>
                   );
                 })}
-              </div>
+              </ul>
             </div>
           )
         );

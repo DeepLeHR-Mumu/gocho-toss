@@ -22,6 +22,8 @@ export const MainCarouselPart: FunctionComponent = () => {
               return (
                 <SlideCard
                   key={`mainCarousel_${slide.id}`}
+                  buttonColor={slide.buttonColor}
+                  buttonText={slide.buttonText}
                   backgroundImage={slide.backgroundImage}
                   topDesc={slide.topDesc}
                   middleDesc={slide.middleDesc}
@@ -29,6 +31,7 @@ export const MainCarouselPart: FunctionComponent = () => {
                   lastDesc={slide.lastDesc}
                   iconImage={slide.iconImage}
                   backgroundColor={slide.backgroundColor}
+                  buttonUrl={slide.buttonUrl}
                 />
               );
             })}

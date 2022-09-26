@@ -44,17 +44,8 @@ export const setJobOrderButton = (active = false) => {
   `;
 };
 
-export const showMoreJobButton = css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+export const showMoreJobBox = css`
   width: 100%;
   max-width: 25rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  border-radius: 2rem;
   margin: 5.5rem auto 0;
-  padding: 1rem;
-  background-color: ${COLORS.BLUE_FIRST40};
-  color: ${COLORS.GRAY100};
 `;

@@ -1,14 +1,14 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
-import { shorten } from "@style/common";
+import { shorten } from "shared-style/common";
 
 export const cardContainer = css`
   display: flex;
   padding: 2rem;
   background-color: ${COLORS.GRAY100};
-  border-radius: 1rem;
+  border-radius: 2rem;
   margin-bottom: 1rem;
-  text-align: start;
+  text-align: left;
 `;
 
 export const infoContainer = css`
@@ -20,24 +20,28 @@ export const infoContainer = css`
 
 export const tagListCSS = css`
   display: flex;
-  color: ${COLORS.BLUE_FIRST40};
-  font-size: 1rem;
-  font-weight: 500;
   margin-bottom: 0.5rem;
 `;
 
 export const tagCSS = css`
-  margin-right: 0.25rem;
+  margin-right: 0.5rem;
+  color: ${COLORS.BLUE_FIRST40};
+  font-weight: 500;
+  font-size: 0.875rem;
 
   :before {
     content: "#";
   }
+
+  :last-of-type {
+    margin-right: 0;
+  }
 `;
 
 export const thumbnailBox = css`
-  border-radius: 1.5rem;
+  border-radius: 2rem;
   overflow: hidden;
-  margin-right: 2rem;
+  margin-right: 3.75rem;
   min-width: 16rem;
   height: 12rem;
   position: relative;
@@ -50,6 +54,7 @@ export const contentContainer = css`
 `;
 
 export const titleCSS = css`
+  display: block;
   font-size: 1rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
@@ -58,9 +63,9 @@ export const titleCSS = css`
 export const bodyCSS = css`
   font-size: 0.875rem;
   font-weight: 400;
-  color: ${COLORS.GRAY30};
-  margin-bottom: 1rem;
-  line-height: 1.5;
+  color: ${COLORS.GRAY10};
+  margin-bottom: 2rem;
+  line-height: 1.8;
   word-break: break-all;
   ${shorten(4)}
 `;

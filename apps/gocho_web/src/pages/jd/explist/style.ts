@@ -3,39 +3,43 @@ import { COLORS } from "shared-style/color";
 import { PC_HOVER } from "shared-style/mediaQuery";
 
 export const mainContainer = css`
-  padding: 4rem 0;
+  margin-top: 4.5rem;
 `;
 
 export const title = css`
-  font-size: 1.5rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: ${COLORS.GRAY10};
+  margin: 3.5rem 0 4.5rem 0;
+`;
+
+export const listContainer = css`
+  margin-bottom: 2.75rem;
 `;
 
 export const colorPoint = css`
   color: ${COLORS.BLUE_FIRST40};
 `;
 
-export const sectionContainer = css`
-  padding: 4rem 0;
-`;
-
 export const searchContainer = css`
   display: flex;
+  align-items: center;
 `;
 
 export const searchWrapper = css`
   flex-grow: 1;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
   position: relative;
 `;
 
 export const searchBox = css`
   width: 100%;
   height: 2.5rem;
-  font-family: Noto Sans KR, sans-serif;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 400;
-  padding: 0.5rem 3rem;
+  padding: 0.625rem 2rem;
   border-radius: 1.5rem;
+  color: ${COLORS.GRAY10};
   background-color: ${COLORS.GRAY90};
 `;
 
@@ -57,8 +61,12 @@ export const buttonArrContainer = css`
 export const setJobOrderButton = (active = false) => {
   return css`
     width: fit-content;
+    height: 2.5rem;
     text-align: center;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid ${active ? COLORS.GRAY10 : `${COLORS.GRAY80}`};
     color: ${COLORS.GRAY10};
     background-color: ${active ? COLORS.STATE_SUCCESS : `${COLORS.GRAY100}`};

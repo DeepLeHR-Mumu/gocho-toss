@@ -2,14 +2,17 @@ import { FunctionComponent, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { Layout } from "@component/layout";
-
+import { META_COMMUNITY_TIP } from "shared-constant/meta";
+import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { TipCardList } from "../../component/tipCardList";
+
 import { setTipCompanyButtonArr } from "./constant";
 import { TipValues } from "./type";
 import {
   partContainer,
-  colorPoint,
+  weightPoint,
   title,
   mainContainer,
   listContainer,
@@ -19,6 +22,7 @@ import {
   searchButton,
   setTipsFilterButton,
   buttonArrContainer,
+  buttonTitle,
 } from "./style";
 
 export const ListPart: FunctionComponent = () => {
@@ -40,13 +44,16 @@ export const ListPart: FunctionComponent = () => {
 
   return (
     <section css={partContainer}>
+      <MetaHead metaData={META_COMMUNITY_TIP} />
       <Layout>
-        <h2 css={title}>
-          <span css={colorPoint}>고수들의 💬 취업꿀팁</span> by. 고초대졸닷컴
-        </h2>
+        <InvisibleH2 title="생산/기능직 취업 꿀팁" />
+        <p css={title}>
+          고수들의 🍯취업꿀팁
+          <span css={weightPoint}>by.고초대졸 닷컴</span>
+        </p>
         <div css={mainContainer}>
           <div css={buttonArrContainer}>
-            <h3>💬 글 종류</h3>
+            <strong css={buttonTitle}>💬 글 종류</strong>
             {setTipCompanyButtonArr.map((button) => {
               return (
                 <button
@@ -72,7 +79,7 @@ export const ListPart: FunctionComponent = () => {
                   css={searchBox}
                   placeholder="검색어를 입력해주세요"
                 />
-                <button type="submit" css={searchButton}>
+                <button type="submit" css={searchButton} aria-label="꿀팁 검색">
                   <FiSearch />
                 </button>
               </div>

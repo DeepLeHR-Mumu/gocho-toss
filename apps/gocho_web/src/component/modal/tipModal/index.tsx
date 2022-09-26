@@ -4,6 +4,8 @@ import Image from "next/image";
 import { AiOutlineEye, AiOutlineLike } from "react-icons/ai";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
+import gochoLogoMono from "shared-image/global/deepLeLogo/smallMono.svg";
+
 import { useAddTipBookmarkArr, useDeleteTipBookmarkArr, useUserTipBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
 import { dateConverter } from "shared-util/date/dateConverter";
@@ -17,7 +19,6 @@ import {
   contentContainer,
   closeButtonWrapper,
   tagListCSS,
-  tagCSS,
   titleCSS,
   sliderContainer,
   tipImageBox,
@@ -29,24 +30,12 @@ import {
   info,
   numInfo,
   likeButtonCSS,
+  logoBox,
 } from "./style";
+import { TipBoxProps } from "./type";
 import { setCarouselSetting } from "./util";
 
-interface TipBox {
-  tipData: {
-    id: number;
-    title: string;
-    description: string;
-    tagArr: string[];
-    createdTime: number;
-    likeCount: number;
-    viewCount: number;
-    thumbnailSrc: string;
-    imgPageCount: number;
-  };
-}
-
-export const TipBox: FunctionComponent<TipBox> = ({ tipData }) => {
+export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
   const [activeIndex, setActiveIndex] = useState<number>(1);
   const sliderRef = useRef<Slider>(null);
   const { closeModal, currentModal } = useModal();
@@ -77,17 +66,18 @@ export const TipBox: FunctionComponent<TipBox> = ({ tipData }) => {
       <div css={closeButtonWrapper}>
         <CloseButton size="L" buttonClick={closeModal} />
       </div>
+
       <article css={contentContainer}>
-        <div css={tagListCSS}>
-          {tipData.tagArr.map((tag: string) => {
-            return (
-              <p css={tagCSS} key={tag}>
-                {tag}
-              </p>
-            );
-          })}
+        <div css={logoBox}>
+          <Image src={gochoLogoMono} alt="고초대졸닷컴" objectFit="contain" layout="fill" />
         </div>
-        <p css={titleCSS}>{tipData.title}</p>
+        <strong css={titleCSS}>{tipData.title}</strong>
+        <ul css={tagListCSS}>
+          {tipData.tagArr.map((tag: string) => {
+            return <li key={tag}>{tag}</li>;
+          })}
+        </ul>
+
         <div css={sliderContainer}>
           <Slider {...setCarouselSetting(setActiveIndex)} ref={sliderRef}>
             {[...Array(tipData.imgPageCount)].map((value, index) => {
@@ -97,7 +87,7 @@ export const TipBox: FunctionComponent<TipBox> = ({ tipData }) => {
                   <div css={tipImageBox}>
                     <Image
                       layout="fill"
-                      objectFit="cover"
+                      objectFit="contain"
                       src={`${srcURL + (index + 1)}.png`}
                       alt={`${tipData.title} 본문`}
                       loading="eager"
@@ -116,6 +106,7 @@ export const TipBox: FunctionComponent<TipBox> = ({ tipData }) => {
               onClick={() => {
                 return sliderRef.current?.slickPrev();
               }}
+              aria-label="이전 꿀팁보기"
             >
               <BsChevronLeft />
             </button>
@@ -130,6 +121,7 @@ export const TipBox: FunctionComponent<TipBox> = ({ tipData }) => {
               onClick={() => {
                 return sliderRef.current?.slickNext();
               }}
+              aria-label="다음 꿀팁보기"
             >
               <BsChevronRight />
             </button>
@@ -138,13 +130,16 @@ export const TipBox: FunctionComponent<TipBox> = ({ tipData }) => {
 
         <p css={bodyCSS}>{tipData.description}</p>
         <div css={infoContainer}>
-          <p css={info}>{`${year}/${month}/${date}`}</p>
-          <button type="button" onClick={likePosting} css={likeButtonCSS(isBookmarked)}>
+          <p css={info}>{`${year}.${month}.${date}`}</p>
+
+          <button type="button" onClick={likePosting} css={likeButtonCSS(isBookmarked)} aria-label="꿀팁 좋아요">
             <AiOutlineLike />
+            {tipData.likeCount}
           </button>
-          <p css={numInfo}>{tipData.likeCount}</p>
-          <AiOutlineEye />
-          <p css={numInfo}>{tipData.viewCount}</p>
+
+          <p css={numInfo}>
+            <AiOutlineEye /> {tipData.viewCount.toLocaleString("Ko-KR")}
+          </p>
         </div>
       </article>
     </div>
@@ -155,7 +150,7 @@ export const TipModal: FunctionComponent = () => {
   const { closeModal, currentModal } = useModal();
 
   return (
-    <ModalComponent closeModal={closeModal}>
+    <ModalComponent closeModal={closeModal} button="close">
       <TipBox tipData={currentModal?.modalContentObj as tipObjDef} />
     </ModalComponent>
   );

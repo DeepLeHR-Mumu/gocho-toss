@@ -1,111 +1,56 @@
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent } from "react";
 import Image from "next/image";
 
 import nozoTrue from "@public/images/global/companyDetail/nozo_true_icon.svg";
 import nozoFalse from "@public/images/global/companyDetail/nozo_false_icon.svg";
 
-import { BasicInfoPartProps } from "./type";
-import { infoContainer, flexBox, infoTitle, info, nozoImage, mapView } from "./style";
+import { KakaoMap } from "@pages/companies/component/kakaoMap";
+import { InvisibleH3 } from "shared-ui/common/atom/invisibleH3";
 
-declare global {
-  interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    kakao: any;
-  }
-}
+import { BasicInfoPartProps } from "./type";
+import { infoContainer, flexBox, infoTitle, info, nozoImage, infoBox } from "./style";
 
 export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ companyData }) => {
-  useEffect(() => {
-    const mapScript = document.createElement("script");
-
-    mapScript.async = true;
-    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=0687bed33c060c4758f582d26ff44e16&libraries=services&libraries=services&autoload=false`;
-
-    document.head.appendChild(mapScript);
-
-    const onLoadKakaoMap = () => {
-      window.kakao.maps.load(() => {
-        const container = document.getElementById("map");
-        const options = {
-          center: new window.kakao.maps.LatLng(37.365264512305174, 127.10676860117488),
-          level: 7,
-        };
-        const map = new window.kakao.maps.Map(container, options);
-
-        const geocoder = new window.kakao.maps.services.Geocoder();
-
-        // 주소로 좌표를 검색합니다
-        geocoder.addressSearch(
-          companyData.address,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (result: any, status: any) => {
-            // 정상적으로 검색이 완료됐으면
-            if (status === window.kakao.maps.services.Status.OK) {
-              const coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
-
-              // 결과값으로 받은 위치를 마커로 표시합니다
-              const marker = new window.kakao.maps.Marker({
-                map,
-                position: coords,
-              });
-
-              // 마커가 지도 위에 표시되도록 설정합니다
-              marker.setMap(map);
-
-              // 인포윈도우로 장소에 대한 설명을 표시합니다
-              const infoWindow = new window.kakao.maps.InfoWindow({
-                content: `<div style='height: 3rem; padding: 0.5rem; text-align: center; font-size: 0.875rem;'>${companyData.address}</div>`,
-              });
-              infoWindow.open(map, marker);
-
-              // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-              map.setCenter(coords);
-            }
-          }
-        );
-      });
-    };
-    mapScript.addEventListener("load", onLoadKakaoMap);
-
-    return () => {
-      return mapScript.removeEventListener("load", onLoadKakaoMap);
-    };
-  }, [companyData.address]);
-
   return (
-    <div css={infoContainer}>
-      <div>
+    <section css={infoContainer}>
+      <InvisibleH3 title="일반 정보" />
+      <div css={infoBox}>
         <div css={flexBox}>
-          <h4 css={infoTitle}>업종</h4>
-          <div css={info}>{companyData.industry}</div>
+          <strong css={infoTitle}>업종</strong>
+          <p css={info}>{companyData.industry}</p>
         </div>
         <div css={flexBox}>
-          <h4 css={infoTitle}>기업형태</h4>
-          <div css={info}>{companyData.size}</div>
+          <strong css={infoTitle}>기업형태</strong>
+          <p css={info}>{companyData.size}</p>
         </div>
         <div css={flexBox}>
-          <h4 css={infoTitle}>사원수</h4>
-          <div css={info}>{companyData.employeeNumber}</div>
+          <strong css={infoTitle}>사원수</strong>
+          <p css={info}>{companyData.employeeNumber.toLocaleString("ko-KR")}</p>
         </div>
         <div css={flexBox}>
-          <h4 css={infoTitle}>기업 한줄소개</h4>
-          <div css={info}>{companyData.intro}</div>
+          <strong css={infoTitle}>기업 한줄소개</strong>
+          <p css={info}>{companyData.intro}</p>
         </div>
         <div css={flexBox}>
-          <h4 css={infoTitle}>기업 주소</h4>
-          <div css={info}>{companyData.address}</div>
+          <strong css={infoTitle}>기업 주소</strong>
+          <p css={info}>{companyData.address}</p>
         </div>
         <div css={flexBox}>
-          <h4 css={infoTitle}>노조여부</h4>
-          <div css={info}>
+          <strong css={infoTitle}>노조여부</strong>
+          <p css={info}>
             {companyData.nozo.exists ? "노조 있음" : "노조 없음"}
             <div css={nozoImage}>
-              <Image src={companyData.nozo.exists ? nozoTrue : nozoFalse} />
+              <Image
+                src={companyData.nozo.exists ? nozoTrue : nozoFalse}
+                alt={companyData.nozo.exists ? "노조 있음" : "노조 없음"}
+                objectFit="contain"
+                layout="fill"
+              />
             </div>
-          </div>
+          </p>
         </div>
       </div>
-      <div id="map" css={mapView} />
-    </div>
+      <KakaoMap address={companyData.address} />
+    </section>
   );
 };

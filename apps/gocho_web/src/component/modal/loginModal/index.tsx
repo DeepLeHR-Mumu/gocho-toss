@@ -109,7 +109,7 @@ export const LoginModal: FunctionComponent = () => {
 
   const loginObj = currentModal?.modalContentObj as loginObjDef;
   return (
-    <ModalComponent closeModal={closeModal}>
+    <ModalComponent closeModal={closeModal} button={loginObj.button}>
       <LoginBox button={loginObj.button} />
     </ModalComponent>
   );
