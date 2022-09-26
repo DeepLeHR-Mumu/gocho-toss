@@ -77,7 +77,9 @@ export const Footer: FunctionComponent = () => {
             <strong css={inquiryTitle}>고객센터</strong>
             <p css={notReadyText}>
               <Link href={`mailto:${companyInfoObj.helpEmail}`}>help@deeplehr.com</Link>
-              <Link href={companyInfoObj.kakaoPlus}>카카오톡 플러스친구</Link>
+              <Link href={companyInfoObj.kakaoPlus} passHref>
+                <a target="_blank">카카오톡 플러스친구</a>
+              </Link>
 
               <div css={kakaoBox}>
                 <Image src={kakaoMonoSrc} alt="카카오톡 플러스친구" layout="fill" objectFit="contain" />

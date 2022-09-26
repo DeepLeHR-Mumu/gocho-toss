@@ -148,6 +148,7 @@ export const META_DATA_LAB = {
 };
 
 export const META_COMMUNITY_TIP = {
+  pageName: "생산직 취업꿀팁",
   title: "생산직 취업꿀팁 - 고초대졸닷컴",
   desc: "생산직 취업, 혼자 준비하기 막막하셨죠? 바로 여기, 고수들의 취업꿀팁을 다 모았습니다! 어디에서도 구할 수 없는 고초대졸 취업꿀팁! 생산직 취업의 새로운 기준, 고초대졸닷컴.",
   keyword: defaultKeyword,

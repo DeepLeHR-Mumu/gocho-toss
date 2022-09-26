@@ -1,3 +1,5 @@
+import { kakaoChannelUrl } from "shared-constant/help";
+
 export const companyInfoObj = {
   CSEmail: "contact@deeplehr.com",
   CEOName: "박중우",
@@ -9,5 +11,5 @@ export const companyInfoObj = {
   corporationNumber: "331-86-02342",
   copyrightText: "Copyright by 주식회사 디플에이치알, All right reserved.",
   helpEmail: "",
-  kakaoPlus: "",
+  kakaoPlus: kakaoChannelUrl,
 };

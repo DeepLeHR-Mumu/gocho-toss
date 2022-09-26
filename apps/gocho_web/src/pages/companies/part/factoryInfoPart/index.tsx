@@ -1,5 +1,6 @@
 import { FunctionComponent, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import yesData from "@public/images/global/factory/yes_data.svg";
 import noData from "@public/images/global/factory/no_data.svg";
@@ -12,6 +13,7 @@ import dormitoryIcon from "@public/images/global/factory/dormitory_icon.svg";
 import xIcon from "@public/images/global/factory/x_icon.svg";
 import oIcon from "@public/images/global/factory/o_icon.svg";
 
+import { kakaoChannelUrl } from "shared-constant/help";
 // import { KakaoMap } from "@pages/companies/component/kakaoMap";
 import { InvisibleH3 } from "shared-ui/common/atom/invisibleH3";
 
@@ -80,9 +82,11 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({ compa
         {companyData.factoryArr.length === 0 && (
           <div css={noFactoryBox}>
             <p css={noFactoryDesc}>혹시 재직자이신가요?</p>
-            <button type="button" css={noFactoryButton}>
-              공장 정보 수정 요청하기 +
-            </button>
+            <Link href={kakaoChannelUrl} passHref>
+              <a css={noFactoryButton} target="_blank">
+                공장 정보 수정 요청하기 +
+              </a>
+            </Link>
           </div>
         )}
 
