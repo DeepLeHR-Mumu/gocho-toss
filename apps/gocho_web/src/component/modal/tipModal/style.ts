@@ -65,6 +65,12 @@ export const tagCSS = css`
   }
 `;
 
+export const likeButtonCSS = (isBookmark: boolean) => {
+  return css`
+    color: ${isBookmark ? COLORS.BLUE_FIRST40 : COLORS.GRAY40};
+  `;
+};
+
 export const titleCSS = css`
   font-size: 1.5rem;
   font-weight: 700;

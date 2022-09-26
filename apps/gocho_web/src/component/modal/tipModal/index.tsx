@@ -1,13 +1,16 @@
 import { FunctionComponent, useRef, useState } from "react";
 import Slider from "react-slick";
 import Image from "next/image";
+import { AiOutlineEye, AiOutlineLike } from "react-icons/ai";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+
+import { useAddTipBookmarkArr, useDeleteTipBookmarkArr, useUserTipBookmarkArr } from "shared-api/bookmark";
+import { useUserInfo } from "shared-api/auth";
+import { dateConverter } from "shared-util/date/dateConverter";
 
 import { ModalComponent } from "@component/modal/modalBackground";
 import { useModal } from "@recoil/hook/modal";
 import { tipObjDef } from "@recoil/atom/modal";
-import { dateConverter } from "shared-util/date/dateConverter";
-import { AiOutlineEye, AiOutlineLike } from "react-icons/ai";
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { CloseButton } from "@component/common/atom/closeButton";
 import {
   modalWrapper,
@@ -25,22 +28,50 @@ import {
   infoContainer,
   info,
   numInfo,
+  likeButtonCSS,
 } from "./style";
 import { setCarouselSetting } from "./util";
 
-export const TipBox: FunctionComponent = () => {
+interface TipBox {
+  tipData: {
+    id: number;
+    title: string;
+    description: string;
+    tagArr: string[];
+    createdTime: number;
+    likeCount: number;
+    viewCount: number;
+    thumbnailSrc: string;
+    imgPageCount: number;
+  };
+}
+
+export const TipBox: FunctionComponent<TipBox> = ({ tipData }) => {
   const [activeIndex, setActiveIndex] = useState<number>(1);
   const sliderRef = useRef<Slider>(null);
   const { closeModal, currentModal } = useModal();
+  const { data: userData } = useUserInfo();
+
+  const { mutate: addBookmarkMutate } = useAddTipBookmarkArr({ id: tipData.id });
+  const { mutate: deleteBookmarkMutate } = useDeleteTipBookmarkArr({ id: tipData.id });
+  const { data: tipBookmarkArr } = useUserTipBookmarkArr({ userId: userData?.id });
+
+  const isBookmarked = Boolean(
+    tipBookmarkArr?.some((tipBookmark) => {
+      return tipBookmark === tipData.id;
+    })
+  );
+
+  const likePosting = () => {
+    if (isBookmarked) return deleteBookmarkMutate({ userId: userData?.id as number, elemId: tipData.id });
+    return addBookmarkMutate({ userId: userData?.id as number, elemId: tipData.id });
+  };
 
   if (currentModal?.modalContentObj === undefined) {
     return <div>error!!</div>;
   }
 
-  const { thumbnailSrc, title, tagArr, description, createdTime, likeCount, viewCount, imgPageCount } =
-    currentModal.modalContentObj as tipObjDef;
-
-  const { year, month, date } = dateConverter(createdTime);
+  const { year, month, date } = dateConverter(tipData.createdTime);
   return (
     <div css={modalWrapper}>
       <div css={closeButtonWrapper}>
@@ -48,7 +79,7 @@ export const TipBox: FunctionComponent = () => {
       </div>
       <article css={contentContainer}>
         <div css={tagListCSS}>
-          {tagArr.map((tag: string) => {
+          {tipData.tagArr.map((tag: string) => {
             return (
               <p css={tagCSS} key={tag}>
                 {tag}
@@ -56,19 +87,19 @@ export const TipBox: FunctionComponent = () => {
             );
           })}
         </div>
-        <p css={titleCSS}>{title}</p>
+        <p css={titleCSS}>{tipData.title}</p>
         <div css={sliderContainer}>
           <Slider {...setCarouselSetting(setActiveIndex)} ref={sliderRef}>
-            {[...Array(imgPageCount)].map((value, index) => {
-              const srcURL = thumbnailSrc.substring(0, thumbnailSrc.length - 5);
+            {[...Array(tipData.imgPageCount)].map((value, index) => {
+              const srcURL = tipData.thumbnailSrc.substring(0, tipData.thumbnailSrc.length - 5);
               return (
-                <div key={`${title + index}`}>
+                <div key={`${tipData.title + index}`}>
                   <div css={tipImageBox}>
                     <Image
                       layout="fill"
                       objectFit="cover"
                       src={`${srcURL + (index + 1)}.png`}
-                      alt={`${title} 본문`}
+                      alt={`${tipData.title} 본문`}
                       loading="eager"
                       unoptimized
                     />
@@ -90,7 +121,7 @@ export const TipBox: FunctionComponent = () => {
             </button>
 
             <p css={page}>
-              {activeIndex} / {imgPageCount}
+              {activeIndex} / {tipData.imgPageCount}
             </p>
 
             <button
@@ -105,13 +136,15 @@ export const TipBox: FunctionComponent = () => {
           </div>
         </div>
 
-        <p css={bodyCSS}>{description}</p>
+        <p css={bodyCSS}>{tipData.description}</p>
         <div css={infoContainer}>
           <p css={info}>{`${year}/${month}/${date}`}</p>
-          <AiOutlineLike />
-          <p css={numInfo}>{likeCount}</p>
+          <button type="button" onClick={likePosting} css={likeButtonCSS(isBookmarked)}>
+            <AiOutlineLike />
+          </button>
+          <p css={numInfo}>{tipData.likeCount}</p>
           <AiOutlineEye />
-          <p css={numInfo}>{viewCount}</p>
+          <p css={numInfo}>{tipData.viewCount}</p>
         </div>
       </article>
     </div>
@@ -119,11 +152,11 @@ export const TipBox: FunctionComponent = () => {
 };
 
 export const TipModal: FunctionComponent = () => {
-  const { closeModal } = useModal();
+  const { closeModal, currentModal } = useModal();
 
   return (
     <ModalComponent closeModal={closeModal} button="close">
-      <TipBox />
+      <TipBox tipData={currentModal?.modalContentObj as tipObjDef} />
     </ModalComponent>
   );
 };

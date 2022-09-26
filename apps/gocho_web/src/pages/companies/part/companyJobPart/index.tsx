@@ -22,7 +22,7 @@ export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({ company
   });
 
   const { data: userData } = useUserInfo();
-  const { data: userJobBookmarkArr, refetch } = useUserJobBookmarkArr({ userId: userData?.id });
+  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
   const observerRef = useRef<IntersectionObserver>();
   const boxRef = useRef<HTMLDivElement>(null);
@@ -79,7 +79,6 @@ export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({ company
                   isBookmarked={isBookmarked}
                   userId={userData?.id}
                   key={`JobCard${jobData.id}`}
-                  refetchUserBookmark={refetch}
                 />
               );
             });

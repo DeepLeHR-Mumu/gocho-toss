@@ -11,6 +11,7 @@ import { Spinner } from "shared-ui/common/atom/spinner";
 import { communityPostingArrKeyObj } from "shared-constant/queryKeyFactory/community/postingArrKeyObj";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { dateConverter } from "shared-util/date/dateConverter";
+import { useAddPostingBookmarkArr, useDeletePostingBookmarkArr, useUserPostingBookmarkArr } from "shared-api/bookmark";
 
 import { CloseButton } from "@component/common/atom/closeButton";
 import { ModalComponent } from "@component/modal/modalBackground";
@@ -20,6 +21,7 @@ import { postingObjDef } from "@recoil/atom/modal";
 import { WriteComment } from "./component/writeComment";
 import { Comment } from "./component/comment";
 import { changeTypeIndex } from "./util";
+import { PostingBoxProps } from "./type";
 import {
   closeButtonWrapper,
   modalWrapperSkeleton,
@@ -32,6 +34,7 @@ import {
   infoContainer,
   infoBox,
   infoCSS,
+  likeButtonCSS,
   setPostingType,
   numInfo,
   settingButtonList,
@@ -42,25 +45,26 @@ import {
   overviewYBox,
 } from "./style";
 
-export const PostingBox: FunctionComponent = () => {
-  const { closeModal, currentModal, setCurrentModal } = useModal();
+export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) => {
+  const queryClient = useQueryClient();
+
+  const { closeModal, setCurrentModal } = useModal();
   const { data: userData } = useUserInfo();
 
   const [openPostingSetting, setOpenPostingSetting] = useState<boolean>(false);
   const { mutate } = useDeletePosting();
-  const queryClient = useQueryClient();
+  const { mutate: addBookmarkMutate } = useAddPostingBookmarkArr({ id: postingData.id });
+  const { mutate: deleteBookmarkMutate } = useDeletePostingBookmarkArr({ id: postingData.id });
+  const { data: postingBookmarkArr } = useUserPostingBookmarkArr({ userId: userData?.id });
 
-  const { id, userID, nickname, title, description, type, createdTime, like, view } =
-    currentModal?.modalContentObj as postingObjDef;
-
-  const { data: commentArrData, isLoading, isError } = usePostingCommentArr({ postingId: id });
+  const { data: commentArrData, isLoading, isError } = usePostingCommentArr({ postingId: postingData.id });
 
   const openChangePostingModal = () => {
     setCurrentModal("changePostingModal", {
-      id,
-      title,
-      description,
-      type: changeTypeIndex(type),
+      id: postingData.id,
+      title: postingData.title,
+      description: postingData.description,
+      type: changeTypeIndex(postingData.type),
     });
   };
 
@@ -80,8 +84,18 @@ export const PostingBox: FunctionComponent = () => {
     closeModal();
     queryClient.invalidateQueries(communityPostingArrKeyObj.all);
   };
+  const isBookmarked = Boolean(
+    postingBookmarkArr?.some((postingBookmark) => {
+      return postingBookmark === postingData.id;
+    })
+  );
 
-  if (!commentArrData || !userData || isError || isLoading) {
+  const likePosting = () => {
+    if (isBookmarked) return deleteBookmarkMutate({ userId: userData?.id as number, elemId: postingData.id });
+    return addBookmarkMutate({ userId: userData?.id as number, elemId: postingData.id });
+  };
+
+  if (!commentArrData || isError || isLoading) {
     return (
       <div css={modalWrapperSkeleton}>
         <Spinner backgroundColor="#fff" />
@@ -89,7 +103,7 @@ export const PostingBox: FunctionComponent = () => {
     );
   }
 
-  const { year, month, date } = dateConverter(createdTime);
+  const { year, month, date } = dateConverter(postingData.createdTime);
   // LATER 게시글 내용 댓글부분을 파트로 나누면 코드가 좀더 짧고 간결해보일듯 -> 극단적으로 나눌 필요는 없음
   // LATER data-cy 제거 후 테스트코드 다시확인
   return (
@@ -103,39 +117,40 @@ export const PostingBox: FunctionComponent = () => {
             <div css={writerProfileImage}>
               <ProfileImg imageStr="default_work" size="S" />
             </div>
-            <p css={writerNickname}>{nickname}</p>
+            <p css={writerNickname}>{postingData.nickname}</p>
           </div>
         </div>
 
         <strong data-cy="postingTitle" css={titleCSS}>
-          {title}
+          {postingData.title}
         </strong>
+
         <p data-cy="postingBody" css={bodyCSS}>
-          {description}
+          {postingData.description}
         </p>
 
         <div css={infoContainer}>
           <ul css={infoBox}>
-            <li data-cy="postingType" css={setPostingType(type)}>
-              {type}
+            <li data-cy="postingType" css={setPostingType(postingData.type)}>
+              {postingData.type}
             </li>
-            <li css={infoCSS}>{`${year}.${month}.${date}`}</li>
-
-            <li css={numInfo}>
-              <AiOutlineLike />
-              {like}
-            </li>
-
-            <li css={numInfo}>
-              <AiOutlineMessage />
-              {commentArrData.length}
+            <li css={infoCSS}>{`${year}/${month}/${date}`}</li>
+            <li>
+              <button type="button" aria-label="좋아요 버튼" onClick={likePosting} css={likeButtonCSS(isBookmarked)}>
+                <AiOutlineLike />
+              </button>
             </li>
 
+            <li css={numInfo}>{postingData.like}</li>
+
             <li css={numInfo}>
-              <AiOutlineEye /> {view}
+              <AiOutlineMessage /> {commentArrData.length}
+            </li>
+
+            <li css={numInfo}>
+              <AiOutlineEye /> {postingData.view}
             </li>
           </ul>
-
           <div css={infoBox}>
             {openPostingSetting && (
               <div css={settingButtonList}>
@@ -144,16 +159,17 @@ export const PostingBox: FunctionComponent = () => {
                 </button>
                 <button
                   type="button"
-                  css={settingButton}
+                  css={settingMenu}
+                  aria-label="글 삭제하기"
                   onClick={() => {
-                    return postingDelete(id);
+                    return postingDelete(postingData.id);
                   }}
                 >
-                  글 삭제하기
+                  <FiMoreVertical />
                 </button>
               </div>
             )}
-            {userData.id === userID && (
+            {userData?.id === postingData.userID && (
               <button
                 type="button"
                 css={settingMenu}
@@ -168,26 +184,20 @@ export const PostingBox: FunctionComponent = () => {
             )}
           </div>
         </div>
-
-        <WriteComment postingId={id} parentCommentId={null} />
+        <WriteComment postingId={postingData.id} parentCommentId={null} />
 
         <div css={commentListWrapper}>
           {commentArrData.map((comment) => {
             // LATER 복잡한 처리방식 간소화 - > 빈배열을 만들어서 해야할지?, filter 사용하면 될거같음
             const reCommentList: null | ReturnType<typeof selector> = [];
 
-            commentArrData.forEach((reComment) => {
-              if (reComment.parentCommentId === comment.id) reCommentList.push(reComment);
-            });
-
             if (comment.parentCommentId === null) {
               return (
                 <Comment
                   id={comment.id}
-                  postingId={id}
+                  postingId={postingData.id}
                   userId={comment.userId}
-                  // LATER as로 undefined 해결하지 않기 -> 구조적 문제해결, 넘겨줄 당시에는number라고 타입확정을 해줬으나 실제로 받는 loginUerId는 undefined일 수 있는것 아닌지?,
-                  loginUserId={userData.id as number}
+                  loginUserId={userData?.id}
                   body={comment.description}
                   nickname={comment.nickname}
                   emblem={comment.badge}
@@ -206,11 +216,11 @@ export const PostingBox: FunctionComponent = () => {
 };
 
 export const PostingModal: FunctionComponent = () => {
-  const { closeModal } = useModal();
+  const { closeModal, currentModal } = useModal();
 
   return (
     <ModalComponent closeModal={closeModal} button="close">
-      <PostingBox />
+      <PostingBox postingData={currentModal?.modalContentObj as postingObjDef} />
     </ModalComponent>
   );
 };

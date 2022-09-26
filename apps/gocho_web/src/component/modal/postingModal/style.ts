@@ -18,6 +18,7 @@ export const modalWrapper = css`
 `;
 
 export const modalWrapperSkeleton = css`
+  min-height: 50vh;
   position: fixed;
   left: 50%;
   top: 50%;
@@ -141,6 +142,12 @@ const typeColor = {
   자유: "#09a434",
   기업: `${COLORS.GRAY10}`,
   자격증: "#f06500",
+};
+
+export const likeButtonCSS = (isBookmark: boolean) => {
+  return css`
+    color: ${isBookmark ? COLORS.BLUE_FIRST40 : COLORS.GRAY40};
+  `;
 };
 
 export const setPostingType: SetPostingTypeDef = (type) => {

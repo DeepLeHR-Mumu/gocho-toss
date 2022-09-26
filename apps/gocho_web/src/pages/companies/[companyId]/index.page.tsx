@@ -45,7 +45,7 @@ const CompaniesDetail: NextPage = () => {
   };
 
   const { data: userData } = useUserInfo();
-  const { data: userCompanyBookmarkArr, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
+  const { data: userCompanyBookmarkArr } = useUserCompanyBookmarkArr({ userId: userData?.id });
   const { data: companyDetailData, isError, isLoading } = useCompanyDetail({ companyId: Number(companyId) });
 
   if (!companyDetailData || isError || isLoading) {
@@ -99,12 +99,7 @@ const CompaniesDetail: NextPage = () => {
   return (
     <main css={mainContainer}>
       <Layout>
-        <HeaderPart
-          companyData={companyData.headerData}
-          isBookmarked={isBookmarked}
-          userId={userData?.id}
-          refetchUserBookmark={refetch}
-        />
+        <HeaderPart companyData={companyData.headerData} isBookmarked={isBookmarked} userId={userData?.id} />
         <div css={buttonContainer}>
           <button
             type="button"
