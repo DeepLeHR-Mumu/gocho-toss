@@ -1,3 +1,7 @@
 export interface CommentCardProps {
-  companyId: number;
+  companyData: {
+    id: number;
+    logoUrl: string;
+    name: string;
+  };
 }

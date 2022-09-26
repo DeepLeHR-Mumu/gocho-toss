@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import Link from "next/link";
 
-import { SPEC_URL } from "@constant/internalURL";
+import { SPEC_URL } from "shared-constant/internalURL";
 
 import { SpecCardTitle } from "../common/component";
 

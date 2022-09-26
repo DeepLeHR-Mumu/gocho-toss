@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 
 import { JobCard } from "@pages/mypage/part/bookmarkPart/jobCard";
-import { SkeletonBox } from "@component/common/atom/skeletonBox";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";

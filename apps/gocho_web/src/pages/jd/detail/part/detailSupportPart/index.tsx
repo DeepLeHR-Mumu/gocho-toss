@@ -5,7 +5,7 @@ import { FiInfo } from "react-icons/fi";
 import logoSrc from "shared-image/global/deepLeLogo/largeColor.svg";
 
 import { getJobTitleCreator } from "../common/util";
-
+import { NoDataDesc } from "../common/component/noDataDesc";
 import { getPossibleEduArr } from "./util";
 import { DetailSupportPartProps } from "./type";
 import { container, containerTitle, flexBox, flexBetweenBox, subTitle, desc, restPoint } from "../common/style";
@@ -19,8 +19,8 @@ import {
   isPossibleEduIcon,
   eduContainer,
   eduImageBox,
+  flexText,
 } from "./style";
-import { NoDataDesc } from "../common/component/noDataDesc";
 
 export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ freshPosition }) => {
   return (
@@ -31,27 +31,23 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
       <h3 css={title}>{getJobTitleCreator(freshPosition)}</h3>
 
       <section css={container}>
-        <h4 css={containerTitle}>
-          지원 조건
+        <div css={flexText}>
+          <h4 css={containerTitle}>지원 조건</h4>
           <p css={containerSubTitle}>
             <FiInfo />
-
             <span css={isColorPoint(true)}>
-              <p>
-                <strong css={isPossibleEduIcon(true)} /> 지원가능
-              </p>
+              <strong css={isPossibleEduIcon(true)} /> 지원가능
             </span>
             <span css={isColorPoint(false)}>
-              <p>
-                <strong css={isPossibleEduIcon(false)} /> 지원불가
-              </p>
+              <strong css={isPossibleEduIcon(false)} /> 지원불가
             </span>
           </p>
-        </h4>
+        </div>
+
         <div css={flexBox}>
           <div>
             <div css={flexBetweenBox}>
-              <h5 css={subTitle}>학력</h5>
+              <p css={subTitle}>학력</p>
 
               <ul css={eduContainer}>
                 {getPossibleEduArr(freshPosition.possibleEdu).map((edu) => {
@@ -65,7 +61,7 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
               </ul>
             </div>
             <div css={flexBetweenBox}>
-              <h5 css={subTitle}>경력</h5>
+              <p css={subTitle}>경력</p>
               <p css={desc}>
                 {freshPosition.requiredExp.type}
 
@@ -76,7 +72,7 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
             </div>
           </div>
           <div css={flexBetweenBox}>
-            <h5 css={subTitle}>기타</h5>
+            <p css={subTitle}>기타</p>
             {freshPosition.requiredEtcArr ? (
               <p css={desc}>
                 {freshPosition.requiredEtcArr.map((etc) => {

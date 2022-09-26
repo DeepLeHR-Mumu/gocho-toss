@@ -7,6 +7,7 @@ export const selector = (tipArr: TipObjDef[]) => {
       title: tip.title,
       description: tip.description,
       thumbnailSrc: tip.thumbnail_url,
+      tag: tip.tag,
     };
   });
 };

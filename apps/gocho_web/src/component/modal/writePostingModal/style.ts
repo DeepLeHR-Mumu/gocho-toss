@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 import { PC_HOVER } from "shared-style/mediaQuery";
-import { shorten } from "@style/common";
+import { shorten } from "shared-style/common";
 
 export const modalWrapper = css`
   position: fixed;
@@ -9,94 +9,103 @@ export const modalWrapper = css`
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 50;
-  width: 60rem;
-  height: auto;
-  padding: 2rem 4.5rem;
+  width: 100%;
+  max-width: 60rem;
+  padding: 1.875rem 6.25rem;
   background-color: ${COLORS.GRAY100};
-  border-radius: 1rem;
-  text-align: left;
+  border-radius: 2rem;
 `;
 
 export const closeButtonWrapper = css`
   position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate(35%, -35%);
+  top: -0.5rem;
+  right: -0.5rem;
 `;
 
 export const userProfile = css`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  float: right;
   margin-bottom: 1rem;
+  background-color: ${COLORS.GRAY90};
+  width: 10rem;
+  height: 2rem;
+  border-radius: 1rem;
+  position: relative;
 `;
 
 export const userProfileImage = css`
   border-radius: 50%;
   overflow: hidden;
-  width: 2rem;
-  height: 2rem;
-  position: relative;
-  z-index: 10;
-  margin-right: -1.75rem;
+  position: absolute;
+  left: 0;
 `;
 
 export const userNickname = css`
   display: flex;
   align-items: center;
-  width: 8.5rem;
-  height: 2rem;
+  padding: 0 0.5rem;
   font-size: 0.75rem;
   font-weight: 500;
   color: ${COLORS.GRAY10};
-  background-color: ${COLORS.GRAY90};
-  padding: 0.5rem 0.5rem 0.5rem 2.25rem;
-  border-radius: 1rem;
-  ${shorten(1)}
+  width: calc(100% - 2.25rem);
+  ${shorten(1)};
 `;
 
 export const formContainer = css``;
 
 export const titleCSS = css`
   width: 100%;
-  border-radius: 1.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2rem;
   background-color: ${COLORS.GRAY90};
   color: ${COLORS.GRAY30};
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 400;
   margin-bottom: 1.5rem;
-  padding: 0.875rem 2.5rem;
+  padding: 0 2.5rem;
+
+  ::placeholder {
+    color: ${COLORS.GRAY60};
+  }
 `;
 
 export const bodyCSS = css`
   width: 100%;
-  height: 22.5rem;
+  min-height: 23rem;
   border: none;
   margin-bottom: 0.5rem;
   padding: 1.5rem 2.5rem;
   border-radius: 1.5rem;
   background-color: ${COLORS.GRAY90};
-  font-family: Noto Sans KR, sans-serif;
   font-size: 1rem;
   font-weight: 400;
   vertical-align: text-top;
-  color: ${COLORS.GRAY30};
+  color: ${COLORS.GRAY10};
   resize: none;
-  outline: none;
-  box-shadow: none;
+
+  ::placeholder {
+    color: #b2b2b2;
+  }
 `;
 
 export const setPostingTypeButton = (active = false) => {
   return css`
     width: 7.5rem;
+    height: 2.5rem;
     text-align: center;
     border-radius: 1.5rem;
-    font-weight: 500;
+    font-weight: 400;
     margin-right: 0.5rem;
-    margin-bottom: 1rem;
-    padding: 0.5rem 2rem;
     transition: all 0.2s ease;
-    word-break: keep-all;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     ${PC_HOVER} {
       &:hover {
@@ -151,14 +160,33 @@ export const setPostingTypeButton = (active = false) => {
   `;
 };
 
+export const optionDesc = css`
+  text-align: left;
+  font-size: 0.875rem;
+  color: ${COLORS.GRAY30};
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  margin-bottom: 0.8rem;
+`;
+
 export const buttonContainer = css`
   display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
 `;
 
 export const submitButton = css`
   background-color: ${COLORS.BLUE_FIRST40};
-  padding: 0.5rem 1.5rem;
+  padding: 0 0.875rem;
   color: ${COLORS.GRAY100};
   border-radius: 1.5rem;
   margin: 0 0 0 auto;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  width: 7.5rem;
 `;

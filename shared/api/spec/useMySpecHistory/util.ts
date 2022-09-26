@@ -2,7 +2,8 @@ import { getMySpecHistoryDef } from "../type/mySpecHistory";
 
 export const selector = (mySpecHistoryData: getMySpecHistoryDef) => {
   return {
-    EvalCount: mySpecHistoryData.eval_count,
+    // TODO : 대문자 제거
+    EvalCount: mySpecHistoryData.evalCount,
     specArr: mySpecHistoryData.spec_arr.map((mySpec) => {
       return {
         age: mySpec.age,

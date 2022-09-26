@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { SkeletonBox } from "@component/common/atom/skeletonBox";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 
 export default {
   title: "공용 컴포넌트/common/atom/SkeletonBox",

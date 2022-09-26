@@ -3,7 +3,7 @@ import { setCarouselSettingDef } from "./type";
 export const setCarouselSetting: setCarouselSettingDef = () => {
   return {
     infinite: true,
-    slidesToShow: 3,
+    slidesToShow: 4,
     centerPadding: "0px",
     slidesToScroll: 1,
     speed: 500,

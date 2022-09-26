@@ -1,6 +1,7 @@
 import { css, SerializedStyles } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
+import { PC_HOVER } from "shared-style/mediaQuery";
 
 export const slideWrapper = css`
   width: 100%;
@@ -52,6 +53,7 @@ export const middleDescIconBox = css`
 export const titleCSS = css`
   font-size: 1.5rem;
   color: ${COLORS.GRAY100};
+  display: block;
   font-weight: 600;
   line-height: 1.5;
   word-break: keep-all;
@@ -72,5 +74,35 @@ export const dimmed = css`
 export const lastDescCSS = css`
   font-size: 1rem;
   font-weight: 400;
+  font-style: normal;
   color: ${COLORS.GRAY100};
 `;
+
+interface LinkButtonDef {
+  (colorCode?: string): SerializedStyles;
+}
+
+export const linkButton: LinkButtonDef = (colorCode) => {
+  return css`
+    width: 7.5rem;
+    height: 2.5rem;
+    background-color: ${colorCode};
+    color: ${COLORS.GRAY100};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+    position: absolute;
+    bottom: 2rem;
+
+    ${PC_HOVER} {
+      :hover {
+        opacity: 1;
+      }
+    }
+  `;
+};

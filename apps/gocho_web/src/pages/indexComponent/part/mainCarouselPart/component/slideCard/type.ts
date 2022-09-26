@@ -6,6 +6,9 @@ export interface SlideCardProps {
   title: string;
   lastDesc: string;
   backgroundImage: StaticImageData;
-  iconImage?: StaticImageData;
   backgroundColor: string;
+  iconImage?: StaticImageData;
+  buttonColor?: string;
+  buttonText?: string;
+  buttonUrl?: string;
 }

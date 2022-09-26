@@ -7,7 +7,7 @@ import { axiosInstance } from "../../axiosInstance";
 import { GetInfiniteJobArrDef } from "./type";
 import { selector } from "./util";
 
-export const getInfiniteJobArr: GetInfiniteJobArrDef = async ({ queryKey: requestObj, pageParam }) => {
+export const getInfiniteJobArr: GetInfiniteJobArrDef = async ({ queryKey: [{ requestObj }], pageParam }) => {
   const { data } = await axiosInstance.get("/jds", {
     params: { ...requestObj, offset: pageParam },
   });

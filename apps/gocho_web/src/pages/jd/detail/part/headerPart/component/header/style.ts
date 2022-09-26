@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, SerializedStyles } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
 
@@ -13,11 +13,17 @@ export const headerCSS = css`
   align-items: flex-start;
 `;
 
-export const bookmarkButton = css`
-  color: ${COLORS.GRAY60};
-  font-size: 1rem;
-  margin-left: 0.375rem;
-`;
+interface BookmarkButtonDef {
+  (isBookmarked: boolean): SerializedStyles;
+}
+
+export const bookmarkButton: BookmarkButtonDef = (isBookmarked) => {
+  return css`
+    color: ${isBookmarked ? COLORS.BLUE_FIRST40 : COLORS.GRAY60};
+    font-size: 1rem;
+    margin-left: 0.375rem;
+  `;
+};
 
 export const applyButton = css`
   background-color: ${COLORS.BLUE_FIRST40};
@@ -45,10 +51,14 @@ export const viewCSS = css`
   }
 `;
 
-export const buttonCSS = (isBookmarked = false) => {
+interface ButtonCSSDef {
+  (isBookmarked: boolean): SerializedStyles;
+}
+
+export const buttonCSS: ButtonCSSDef = (isBookmarked) => {
   return css`
     background-color: ${isBookmarked ? COLORS.STATE_SUCCESS : `${COLORS.GRAY90}`};
-    color: ${isBookmarked ? COLORS.BLUE_FIRST40 : `${COLORS.GRAY60}`};
+    color: ${isBookmarked ? COLORS.BLUE_FIRST40 : COLORS.GRAY60};
     display: flex;
     align-items: center;
     justify-content: center;

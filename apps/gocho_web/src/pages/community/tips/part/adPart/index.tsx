@@ -1,12 +1,17 @@
-import { Layout } from "@component/layout";
 import { FunctionComponent } from "react";
-import { partContainer } from "./style";
+import Link from "next/link";
+
+import { Layout } from "@component/layout";
+
+import { bannerContainer, partContainer } from "./style";
 
 export const AdPart: FunctionComponent = () => {
   return (
     <section css={partContainer}>
       <Layout>
-        <h2>광고 문의: 010-8545-7161</h2>
+        <Link href="/" passHref aria-label="임시광고배너">
+          <a css={bannerContainer}>사이트 내 핵심메뉴 광고 영역 / 면접리뷰 이벤트 배너 이미지</a>
+        </Link>
       </Layout>
     </section>
   );

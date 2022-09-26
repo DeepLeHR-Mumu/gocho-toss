@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
 
-import factoryIcon from "@public/images/global/common/factory_icon.svg";
+import factoryIcon from "shared-image/global/common/factory_icon.svg";
 
 import { useModal } from "@recoil/hook/modal";
 import { NoDataDesc } from "../common/component/noDataDesc";
@@ -23,12 +23,12 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
       <div css={flexBox}>
         <div>
           <div css={flexBetweenBox}>
-            <h5 css={subTitle}>채용 인원</h5>
+            <p css={subTitle}>채용 인원</p>
             <p css={desc}>{freshPosition.hireCount}명</p>
           </div>
 
           <div css={flexBetweenBox}>
-            <h5 css={subTitle}>채용 직무</h5>
+            <p css={subTitle}>채용 직무</p>
             <div css={flexBetweenBox}>
               <p css={mainProductDesc}>{freshPosition.task.mainTask}</p>
 
@@ -45,7 +45,7 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
 
         <div>
           <div css={flexBetweenBox}>
-            <h5 css={subTitle}>계약 형태</h5>
+            <p css={subTitle}>계약 형태</p>
             <p css={desc}>
               {freshPosition.contractType.type}{" "}
               {freshPosition.contractType.conversionRate && (
@@ -57,7 +57,7 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
           </div>
 
           <div css={flexBetweenBox}>
-            <h5 css={subTitle}>세부 직무</h5>
+            <p css={subTitle}>세부 직무</p>
             <p css={desc}>
               {freshPosition.taskDetailArr.map((detail) => {
                 return (
@@ -73,7 +73,7 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
 
       <div css={workPlaceContainer}>
         <div css={flexBetweenBox}>
-          <h5 css={subTitle}>근무지</h5>
+          <p css={subTitle}>근무지</p>
           <div>
             <p css={flexDesc}>
               [
@@ -112,7 +112,7 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
       <div css={flexBox}>
         <div>
           <div css={flexBetweenBox}>
-            <h5 css={subTitle}>교대형태</h5>
+            <p css={subTitle}>교대형태</p>
             <p css={desc}>
               {freshPosition.rotationArr.map((rotation) => {
                 if (rotation === "정보없음") {
@@ -130,7 +130,7 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
 
         <div>
           <div css={flexBetweenBox}>
-            <h5 css={subTitle}>급여</h5>
+            <p css={subTitle}>급여</p>
             <p css={desc}>
               {freshPosition.payArr ? (
                 freshPosition.payArr.map((pay) => {

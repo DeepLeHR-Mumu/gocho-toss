@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { axiosInstance } from "../../axiosInstance";
 import { tipArrKeyObj, TipArrRequestObjDef } from "shared-constant/queryKeyFactory/tip/arrKeyObj";
+import { axiosInstance } from "../../axiosInstance";
 
 import { GetTipArrDef } from "./type";
 import { selector } from "./util";

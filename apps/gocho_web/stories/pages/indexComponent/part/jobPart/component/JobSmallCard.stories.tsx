@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { JobSmallCard } from "@pages/indexComponent/part/jobPart/component/jobSmall";
+import { JobSmallCard } from "shared-ui/indexUi/jobPart/jobSmall";
 
 export default {
   title: "메인페이지/jobPart/JobSmallCard",
@@ -28,8 +28,12 @@ export const 기본 = Template.bind({});
     id: 3223,
     companyName: "우리회사",
     companyLogo: "null",
-    title: "공고이름인데요",
+    title: "[물류] 사원0명 채용",
     endTime: 2390878230,
+    high: true,
+    college: false,
+    placeArr: ["서울시", "안성시"],
+    rotationArr: ["주간"],
   },
 };
 

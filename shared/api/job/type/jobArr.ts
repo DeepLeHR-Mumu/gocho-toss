@@ -2,7 +2,6 @@ import { CompanyObjDef } from "../../company/type/company";
 
 export interface JobObjDef {
   id: number;
-  company_id: number;
   company: CompanyObjDef;
   created_time: number;
   start_time: number;

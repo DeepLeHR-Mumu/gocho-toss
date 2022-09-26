@@ -12,4 +12,4 @@ export { useUserPostingBookmarkArr } from "./get/useUserPostingBookmarkArr";
 
 export { useAddTipBookmarkArr } from "./add/useAddTipBookmarkArr";
 export { useUserTipBookmarkArr } from "./get/useUserTipBookmarkArr";
-export {useDeleteTipBookmarkArr} from "./delete/useDeleteTipBookmark"
+export { useDeleteTipBookmarkArr } from "./delete/useDeleteTipBookmark";

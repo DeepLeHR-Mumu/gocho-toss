@@ -94,6 +94,6 @@ export interface specArrDef {
 }
 
 export interface getMySpecHistoryDef {
-  eval_count: number;
+  evalCount: number;
   spec_arr: specArrDef[];
 }

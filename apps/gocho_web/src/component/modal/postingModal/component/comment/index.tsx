@@ -1,14 +1,15 @@
 import { FunctionComponent, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { AiOutlineEnter } from "react-icons/ai";
 
 import { useDeleteComment } from "shared-api/community/useDeleteComment";
 import { communityCommentArrKeyObj } from "shared-constant/queryKeyFactory/community/commentArrKeyObj";
 
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { CommentProps } from "./type";
 import {
   wrapper,
   commentWrapper,
+  nicknameBox,
   nicknameCSS,
   bodyBox,
   bodyCSS,
@@ -53,12 +54,15 @@ export const Comment: FunctionComponent<CommentProps> = ({
   return (
     <div css={wrapper}>
       <div css={commentWrapper}>
-        <div css={nicknameCSS}>{nickname}</div>
+        <div css={nicknameBox}>
+          <ProfileImg imageStr="default" size="S" />
+          <p css={nicknameCSS}>{nickname}</p>
+        </div>
         <div css={bodyBox}>
-          <div css={bodyCSS}>{body}</div>
+          <p css={bodyCSS}>{body}</p>
           <div css={buttonContainer}>
             <button css={writeReCommentButtonBox} type="button" onClick={handleShowWriteComment}>
-              <AiOutlineEnter />
+              답글
             </button>
             {loginUserId === userId && (
               <div css={settingButtonContainer}>

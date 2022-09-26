@@ -10,6 +10,7 @@ export interface WelfareDef {
 }
 
 export interface FactoryDef {
+  name: string;
   id: number;
   company_id: number;
   place_1: string;

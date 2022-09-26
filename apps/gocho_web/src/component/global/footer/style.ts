@@ -1,7 +1,8 @@
 import { css } from "@emotion/react";
+import { COLORS } from "shared-style/color";
 
 export const footerWrapper = css`
-  background-color: #2d2d2d;
+  background-color: ${COLORS.GRAY10};
 `;
 
 export const footerContainer = css`
@@ -11,14 +12,14 @@ export const footerContainer = css`
 
 export const companyInfoWrapper = css`
   width: 55%;
-  padding: 3rem 0;
+  padding: 4.75rem 0;
 `;
 
-export const GDtitle = css`
-  width: 12rem;
-  height: 2.1875rem;
+export const GDtitleBox = css`
+  width: 9.5rem;
+  height: 1.5rem;
   position: relative;
-  margin-bottom: 1rem;
+  margin-bottom: 2.5rem;
 `;
 
 export const companyInfoListCSS = css`
@@ -28,8 +29,9 @@ export const companyInfoListCSS = css`
   > li {
     position: relative;
     white-space: nowrap;
-    color: #818181;
-    font-size: 0.8rem;
+    color: ${COLORS.GRAY60};
+    font-weight: 500;
+    font-size: 0.75rem;
     line-height: 2;
     padding-right: 0.5rem;
     margin-right: 0.5rem;
@@ -38,7 +40,7 @@ export const companyInfoListCSS = css`
       content: "";
       width: 1px;
       height: 1rem;
-      background-color: #818181;
+      background-color: ${COLORS.GRAY60};
       position: absolute;
       right: 0;
       top: 50%;
@@ -53,16 +55,17 @@ export const companyInfoListCSS = css`
 
     > a {
       :hover {
-        color: #9f9f9f;
+        color: ${COLORS.GRAY60};
       }
     }
   }
 `;
 
 export const copyrightTextCSS = css`
-  color: #818181;
-  margin-top: 1rem;
+  color: ${COLORS.GRAY60};
+  margin-top: 2.5rem;
   font-size: 0.75rem;
+  font-weight: 500;
 `;
 
 export const inquiryContainer = css`
@@ -83,17 +86,32 @@ export const inquiryTitle = css`
 `;
 
 export const inquiryText = css`
-  color: #818181;
+  color: ${COLORS.GRAY60};
   line-height: 1.6;
   font-size: 0.875rem;
   margin-bottom: 2rem;
 `;
 
 export const notReadyText = css`
-  background-color: #333333;
-  padding: 1rem;
-  color: #818181;
+  color: ${COLORS.GRAY60};
   font-size: 0.875rem;
   border-radius: 0.5em;
   width: 100%;
+  display: flex;
+  align-items: center;
+
+  a {
+    padding-right: 0.5rem;
+
+    :last-of-type {
+      padding: 0;
+    }
+  }
+`;
+
+export const kakaoBox = css`
+  margin-left: 0.2rem;
+  position: relative;
+  width: 0.75rem;
+  height: 0.75rem;
 `;

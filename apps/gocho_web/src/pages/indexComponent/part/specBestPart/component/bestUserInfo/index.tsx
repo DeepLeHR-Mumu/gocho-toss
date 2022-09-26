@@ -1,19 +1,20 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
-import headerIcon from "@public/images/global/common/box_heart.svg";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
+import { LinkButton } from "shared-ui/common/atom/button";
+import headerIcon from "shared-image/global/common/box_heart.svg";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
-import { SPEC_DETAIL_URL } from "@constant/internalURL";
+import { UserBadge } from "shared-ui/common/atom/userBadge";
+import { SPEC_DETAIL_URL } from "shared-constant/internalURL";
+import { StarEvaluation } from "@component/common/molecule/starEvaluation";
 
 import {
   bestUserInfoWrapper,
   cardWrapper,
   cardHeader,
-  userProfileImageBox,
   cardHeaderInfo,
   userNickname,
-  recruSectorDesc,
   scoreDesc,
   scoreTitle,
   currentScore,
@@ -23,14 +24,24 @@ import {
   infoArrCSS,
   infoValueCSS,
   cardFooter,
-  moreButton,
+  colorPoint,
+  skeletonBoxCSS,
+  userTaskCSS,
   bestUserDesc,
   bestUserNickName,
   bounceIcon,
 } from "./style";
-import { BestUserInfoProps } from "./type";
+import { BestUserInfoProps, skeletonProps } from "./type";
 
-export const BestUserBox: FunctionComponent<BestUserInfoProps> = ({ bestUserData }) => {
+export const BestUserBox: FunctionComponent<BestUserInfoProps | skeletonProps> = ({ bestUserData, isSkeleton }) => {
+  if (!bestUserData || isSkeleton) {
+    return (
+      <div css={skeletonBoxCSS}>
+        <SkeletonBox />
+      </div>
+    );
+  }
+
   const educationTypeTitle = bestUserData.college ? "학과" : "학교종류";
   const educationType = bestUserData.college ? `${bestUserData.college.department}` : `${bestUserData.highschool.type}`;
 
@@ -38,21 +49,29 @@ export const BestUserBox: FunctionComponent<BestUserInfoProps> = ({ bestUserData
     <div css={bestUserInfoWrapper}>
       <div css={cardWrapper}>
         <div css={cardHeader}>
-          <div css={userProfileImageBox}>
-            <ProfileImg imageStr={bestUserData.profileImg} size="L" />
-          </div>
+          <ProfileImg imageStr={bestUserData.profileImg} size="XL" />
           <div css={cardHeaderInfo}>
-            <p>
-              <strong css={userNickname}>{bestUserData.nickname}</strong>
-            </p>
+            <strong css={userNickname}>
+              {bestUserData.nickname} <UserBadge badge="default" />
+            </strong>
             <p css={scoreDesc}>
               <span css={scoreTitle}>총 점</span>
               <span css={currentScore}>{bestUserData.score} </span>
               <span css={totalScore}> / 5</span>
-              <span css={userEvalCount}>평가수 : {bestUserData.scoreCount}</span>
             </p>
-            <p css={recruSectorDesc}>{bestUserData.desiredTask}</p>
+            <StarEvaluation size="M" parentScore={bestUserData.score} />
+
+            {bestUserData.desiredTask && (
+              <ul css={userTaskCSS}>
+                {bestUserData.desiredTask.map((task) => {
+                  return <li key={`userTask_${task}`}>{task}</li>;
+                })}
+              </ul>
+            )}
           </div>
+          <p css={userEvalCount}>
+            평가수 : <span css={colorPoint}>{bestUserData.scoreCount}</span>{" "}
+          </p>
         </div>
 
         <div css={cardInfo}>
@@ -97,9 +116,7 @@ export const BestUserBox: FunctionComponent<BestUserInfoProps> = ({ bestUserData
               </span>
               님
             </p>
-            <Link href={`${SPEC_DETAIL_URL}/${bestUserData.id}`} passHref>
-              <a css={moreButton}>평가/상세보기</a>
-            </Link>
+            <LinkButton variant="filled" text="평가/상세보기" linkTo={`${SPEC_DETAIL_URL}/${bestUserData.id}`} />
           </div>
         </div>
       </div>

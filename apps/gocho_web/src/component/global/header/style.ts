@@ -3,9 +3,15 @@ import { css, SerializedStyles } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const headerWrapper = css`
+  border-bottom: 1px solid ${COLORS.GRAY90};
   height: 4.5rem;
   display: flex;
-  z-index: 10;
+  z-index: 50;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: ${COLORS.GRAY100};
 `;
 
 export const headerContainer = css`
@@ -72,7 +78,7 @@ interface subMenuToggleWrapperDef {
 export const subMenuToggleWrapper: subMenuToggleWrapperDef = (isHover) => {
   return css`
     position: absolute;
-    z-index: 10;
+    z-index: 30;
     top: 2.5rem;
     left: -1rem;
     padding: 0.5rem 1rem;
@@ -86,18 +92,22 @@ export const subMenuToggleWrapper: subMenuToggleWrapperDef = (isHover) => {
 };
 
 export const searchIcon = css`
-  color: ${COLORS.BLUE_SECOND30};
+  color: ${COLORS.BLUE_FIRST40};
+  font-size: 1.25rem;
+  padding-right: 1rem;
 `;
 
 export const unifiedSearchWrapper = (isOn = false) => {
   return css`
     position: absolute;
-    top: ${isOn ? "6.1rem" : "4rem"};
+    bottom: ${isOn ? "-4rem" : "4rem"};
     opacity: ${isOn ? 1 : 0};
     left: 50%;
-    transform: translate(-50%, 0%);
-    width: 60%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 53.75rem;
     transition: all 0.2s ease;
+    z-index: 20;
   `;
 };
 
@@ -111,6 +121,11 @@ export const unifiedSearch = css`
   border-radius: 1.5rem;
   border: 2px solid ${COLORS.BLUE_SECOND40};
   box-shadow: 0 2px 8px 0 #b4b4b440;
+
+  :focus {
+    outline: 2px solid ${COLORS.BLUE_FIRST40};
+    outline-offset: -2px;
+  }
 `;
 
 export const searchButton = css`
@@ -121,3 +136,25 @@ export const searchButton = css`
   color: ${COLORS.GRAY40};
   width: 1.25rem;
 `;
+
+export const flexBox = css`
+  display: flex;
+  align-items: center;
+`;
+
+interface SearchDimmedDef {
+  (isUnifiedSearch: boolean): SerializedStyles;
+}
+
+export const searchDimmed: SearchDimmedDef = (isUnifiedSearch) => {
+  return css`
+    position: absolute;
+    left: 0;
+    bottom: -5rem;
+    width: 100%;
+    height: 5rem;
+    z-index: 10;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 5%, transparent 95%);
+    display: ${isUnifiedSearch ? "block" : "none"};
+  `;
+};

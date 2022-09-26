@@ -7,6 +7,7 @@ import { useUserInfo } from "shared-api/auth";
 import { usePostingCommentArr } from "shared-api/community/usePostingCommentArr";
 import { useDeletePosting } from "shared-api/community/useDeletePosting";
 import { selector } from "shared-api/community/usePostingCommentArr/util";
+import { Spinner } from "shared-ui/common/atom/spinner";
 import { communityPostingArrKeyObj } from "shared-constant/queryKeyFactory/community/postingArrKeyObj";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { dateConverter } from "shared-util/date/dateConverter";
@@ -20,8 +21,10 @@ import { postingObjDef } from "@recoil/atom/modal";
 import { WriteComment } from "./component/writeComment";
 import { Comment } from "./component/comment";
 import { changeTypeIndex } from "./util";
+import { PostingBoxProps } from "./type";
 import {
   closeButtonWrapper,
+  modalWrapperSkeleton,
   modalWrapper,
   writerProfile,
   writerProfileImage,
@@ -38,21 +41,9 @@ import {
   settingButton,
   settingMenu,
   commentListWrapper,
+  flexBox,
+  overviewYBox,
 } from "./style";
-
-interface PostingBoxProps {
-  postingData: {
-    id: number;
-    userID: number;
-    nickname: string;
-    title: string;
-    description: string;
-    createdTime: number;
-    type: "진로" | "자유" | "기업" | "자격증";
-    like: number;
-    view: number;
-  };
-}
 
 export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) => {
   const queryClient = useQueryClient();
@@ -104,8 +95,12 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
     return addBookmarkMutate({ userId: userData?.id as number, elemId: postingData.id });
   };
 
-  if (!commentArrData || !userData || isError || isLoading) {
-    return <div>loading...</div>;
+  if (!commentArrData || isError || isLoading) {
+    return (
+      <div css={modalWrapperSkeleton}>
+        <Spinner backgroundColor="#fff" />
+      </div>
+    );
   }
 
   const { year, month, date } = dateConverter(postingData.createdTime);
@@ -116,94 +111,105 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
       <div css={closeButtonWrapper}>
         <CloseButton size="L" buttonClick={closeRefetch} />
       </div>
-      <div css={writerProfile}>
-        <div css={writerProfileImage}>
-          <ProfileImg imageStr="default_work" size="S" />
+      <div css={overviewYBox}>
+        <div css={flexBox}>
+          <div css={writerProfile}>
+            <div css={writerProfileImage}>
+              <ProfileImg imageStr="default_work" size="S" />
+            </div>
+            <p css={writerNickname}>{postingData.nickname}</p>
+          </div>
         </div>
-        <p css={writerNickname}>{postingData.nickname}</p>
-      </div>
-      <h2 data-cy="postingTitle" css={titleCSS}>
-        {postingData.title}
-      </h2>
-      <div data-cy="postingBody" css={bodyCSS}>
-        {postingData.description}
-      </div>
-      <div css={infoContainer}>
-        <div css={infoBox}>
-          <p data-cy="postingType" css={setPostingType(postingData.type)}>
-            {postingData.type}
-          </p>
-          <p css={infoCSS}>{`${year}/${month}/${date}`}</p>
-          <button type="button" aria-label="좋아요 버튼" onClick={likePosting} css={likeButtonCSS(isBookmarked)}>
-            <AiOutlineLike />
-          </button>
-          <p css={numInfo}>{postingData.like}</p>
-          <AiOutlineMessage />
-          <p css={numInfo}>{commentArrData.length}</p>
-          <AiOutlineEye />
-          <p css={numInfo}>{postingData.view}</p>
-        </div>
-        <div css={infoBox}>
-          {openPostingSetting && (
-            <div css={settingButtonList}>
-              <button type="button" css={settingButton} onClick={openChangePostingModal}>
-                글 수정하기
+
+        <strong data-cy="postingTitle" css={titleCSS}>
+          {postingData.title}
+        </strong>
+
+        <p data-cy="postingBody" css={bodyCSS}>
+          {postingData.description}
+        </p>
+
+        <div css={infoContainer}>
+          <ul css={infoBox}>
+            <li data-cy="postingType" css={setPostingType(postingData.type)}>
+              {postingData.type}
+            </li>
+            <li css={infoCSS}>{`${year}/${month}/${date}`}</li>
+            <li>
+              <button type="button" aria-label="좋아요 버튼" onClick={likePosting} css={likeButtonCSS(isBookmarked)}>
+                <AiOutlineLike />
               </button>
+            </li>
+
+            <li css={numInfo}>{postingData.like}</li>
+
+            <li css={numInfo}>
+              <AiOutlineMessage /> {commentArrData.length}
+            </li>
+
+            <li css={numInfo}>
+              <AiOutlineEye /> {postingData.view}
+            </li>
+          </ul>
+          <div css={infoBox}>
+            {openPostingSetting && (
+              <div css={settingButtonList}>
+                <button type="button" css={settingButton} onClick={openChangePostingModal}>
+                  글 수정하기
+                </button>
+                <button
+                  type="button"
+                  css={settingMenu}
+                  aria-label="글 삭제하기"
+                  onClick={() => {
+                    return postingDelete(postingData.id);
+                  }}
+                >
+                  <FiMoreVertical />
+                </button>
+              </div>
+            )}
+            {userData?.id === postingData.userID && (
               <button
                 type="button"
-                css={settingButton}
+                css={settingMenu}
                 onClick={() => {
-                  return postingDelete(postingData.id);
+                  return setOpenPostingSetting((PostingSetting) => {
+                    return !PostingSetting;
+                  });
                 }}
               >
-                글 삭제하기
+                <FiMoreVertical />
               </button>
-            </div>
-          )}
-          {userData.id === postingData.userID && (
-            <button
-              type="button"
-              css={settingMenu}
-              onClick={() => {
-                return setOpenPostingSetting((PostingSetting) => {
-                  return !PostingSetting;
-                });
-              }}
-            >
-              <FiMoreVertical />
-            </button>
-          )}
+            )}
+          </div>
         </div>
-      </div>
-      <WriteComment postingId={postingData.id} parentCommentId={null} />
+        <WriteComment postingId={postingData.id} parentCommentId={null} />
 
-      <div css={commentListWrapper}>
-        {commentArrData.map((comment) => {
-          // LATER 복잡한 처리방식 간소화 - > 빈배열을 만들어서 해야할지?, filter 사용하면 될거같음
-          const reCommentList: null | ReturnType<typeof selector> = [];
+        <div css={commentListWrapper}>
+          {commentArrData.map((comment) => {
+            // LATER 복잡한 처리방식 간소화 - > 빈배열을 만들어서 해야할지?, filter 사용하면 될거같음
+            const reCommentList: null | ReturnType<typeof selector> = [];
 
-          commentArrData.forEach((reComment) => {
-            if (reComment.parentCommentId === comment.id) reCommentList.push(reComment);
-          });
-
-          if (comment.parentCommentId === null) {
-            return (
-              <Comment
-                id={comment.id}
-                postingId={postingData.id}
-                userId={comment.userId}
-                loginUserId={userData.id}
-                body={comment.description}
-                nickname={comment.nickname}
-                emblem={comment.badge}
-                reCommentList={reCommentList}
-                key={comment.id}
-              />
-            );
-          }
-          // LATER return null 없앨 수 있는 방법 고민
-          return null;
-        })}
+            if (comment.parentCommentId === null) {
+              return (
+                <Comment
+                  id={comment.id}
+                  postingId={postingData.id}
+                  userId={comment.userId}
+                  loginUserId={userData?.id}
+                  body={comment.description}
+                  nickname={comment.nickname}
+                  emblem={comment.badge}
+                  reCommentList={reCommentList}
+                  key={comment.id}
+                />
+              );
+            }
+            // LATER return null 없앨 수 있는 방법 고민
+            return null;
+          })}
+        </div>
       </div>
     </article>
   );
@@ -213,7 +219,7 @@ export const PostingModal: FunctionComponent = () => {
   const { closeModal, currentModal } = useModal();
 
   return (
-    <ModalComponent closeModal={closeModal}>
+    <ModalComponent closeModal={closeModal} button="close">
       <PostingBox postingData={currentModal?.modalContentObj as postingObjDef} />
     </ModalComponent>
   );
