@@ -1,9 +1,10 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useUserInfo } from "shared-api/auth";
 import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
+import { useAddCompanyViewCount } from "shared-api/viewCount";
 import { useCompanyDetail } from "shared-api/company";
 
 import { Layout } from "@component/layout";
@@ -42,7 +43,19 @@ const CompaniesDetail: NextPage = () => {
   const { data: userData } = useUserInfo();
   const { data: userCompanyBookmarkArr } = useUserCompanyBookmarkArr({ userId: userData?.id });
   const { data: response, isError, isLoading } = useCompanyDetail({ companyId: Number(companyId) });
+  const { mutate: addViewCount } = useAddCompanyViewCount();
 
+  useEffect(() => {
+    sessionStorage.setItem("companyView", JSON.stringify([990]));
+
+    const viewStr = sessionStorage.getItem("companyView");
+    if (response && viewStr) {
+      addViewCount({ elemId: response.data.id });
+      const viewArr: number[] = JSON.parse(viewStr);
+      viewArr.push(response.data.id);
+      sessionStorage.setItem("companyView", JSON.stringify(viewArr));
+    }
+  }, [response, addViewCount]);
   if (!response || isError || isLoading) {
     return <main>Loading...</main>;
   }
@@ -89,11 +102,7 @@ const CompaniesDetail: NextPage = () => {
   return (
     <main css={mainContainer}>
       <Layout>
-        <HeaderPart
-          companyData={companyData.headerData}
-          isBookmarked={isBookmarked}
-          userId={userData?.id}
-        />
+        <HeaderPart companyData={companyData.headerData} isBookmarked={isBookmarked} userId={userData?.id} />
         <div css={buttonContainer}>
           <button
             type="button"
