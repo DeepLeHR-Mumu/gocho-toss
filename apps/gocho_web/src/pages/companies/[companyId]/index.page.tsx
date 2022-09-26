@@ -62,11 +62,13 @@ const CompaniesDetail: NextPage = () => {
       addViewCount({ elemId: response.data.id });
       return;
     }
-    // 해당 세션에서 첫 조회
-    sessionStorage.setItem("companyView", JSON.stringify([response.data.id]));
-    addViewCount({ elemId: response.data.id });
+    if (!isViewed) {
+      // 해당 세션에서 첫 조회
+      sessionStorage.setItem("companyView", JSON.stringify([response.data.id]));
+      addViewCount({ elemId: response.data.id });
+    }
   }, [response, addViewCount]);
-  
+
   if (!response || isError || isLoading) {
     return <main>Loading...</main>;
   }
