@@ -4,7 +4,7 @@ import { axiosInstance } from "../../axiosInstance";
 
 import { RequestObjDef } from "./type";
 
-const addJobViewCount = async (requestObj: RequestObjDef) => {
+const addPostingViewCount = async (requestObj: RequestObjDef) => {
   const token = localStorage.getItem("token") as string;
   const { data } = await axiosInstance.post(`/postings/${requestObj.elemId}/views`, {
     headers: {
@@ -14,7 +14,7 @@ const addJobViewCount = async (requestObj: RequestObjDef) => {
   return data;
 };
 
-export const useAddCompanyViewCount = () => {
-  const mutationResult = useMutation(addJobViewCount);
+export const useAddPostingViewCount = () => {
+  const mutationResult = useMutation(addPostingViewCount);
   return mutationResult;
 };

@@ -7,7 +7,7 @@ import { axiosInstance } from "../../axiosInstance";
 import { GetJobArrDef } from "./type";
 import { selector } from "./util";
 
-export const getJobArr: GetJobArrDef = async ({ queryKey: requestObj }) => {
+export const getJobArr: GetJobArrDef = async ({ queryKey: [{ requestObj }] }) => {
   const { data } = await axiosInstance.get("/jds", {
     params: requestObj,
   });
