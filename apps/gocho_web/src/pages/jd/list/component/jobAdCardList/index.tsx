@@ -4,9 +4,9 @@ import Slider from "react-slick";
 
 import { useJobArr } from "shared-api/job";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { JobAdCard } from "shared-ui/card/jobAdCard";
 import { setCarouselSetting } from "./util";
 
-import { JobAdCard } from "../jobAdCard";
 import { listContainer, sliderButton, sliderButtonContainer } from "./style";
 
 export const JobAdCardList: FunctionComponent = () => {

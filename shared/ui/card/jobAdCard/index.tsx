@@ -3,9 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
-import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { dateConverter } from "shared-util/date";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
+import { SkeletonBox } from "../../common/atom/skeletonBox";
 
 import { JobAdCardProps, JobAdCardSkeleton } from "./type";
 import {
