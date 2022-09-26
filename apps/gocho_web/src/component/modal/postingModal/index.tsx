@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { AiOutlineEye, AiOutlineLike, AiOutlineMessage } from "react-icons/ai";
 import { FiMoreVertical } from "react-icons/fi";
@@ -12,6 +12,7 @@ import { communityPostingArrKeyObj } from "shared-constant/queryKeyFactory/commu
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { dateConverter } from "shared-util/date/dateConverter";
 import { useAddPostingBookmarkArr, useDeletePostingBookmarkArr, useUserPostingBookmarkArr } from "shared-api/bookmark";
+import { useAddPostingViewCount } from "shared-api/viewCount";
 
 import { CloseButton } from "@component/common/atom/closeButton";
 import { ModalComponent } from "@component/modal/modalBackground";
@@ -53,6 +54,7 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
 
   const [openPostingSetting, setOpenPostingSetting] = useState<boolean>(false);
   const { mutate } = useDeletePosting();
+  const { mutate: addViewCount } = useAddPostingViewCount();
   const { mutate: addBookmarkMutate } = useAddPostingBookmarkArr({ id: postingData.id });
   const { mutate: deleteBookmarkMutate } = useDeletePostingBookmarkArr({ id: postingData.id });
   const { data: postingBookmarkArr } = useUserPostingBookmarkArr({ userId: userData?.id });
@@ -94,6 +96,25 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
     if (isBookmarked) return deleteBookmarkMutate({ userId: userData?.id as number, elemId: postingData.id });
     return addBookmarkMutate({ userId: userData?.id as number, elemId: postingData.id });
   };
+
+  useEffect(() => {
+    const postingViewStr = sessionStorage.getItem("postingViewArr");
+
+    const isViewed = postingViewStr?.includes(String(postingData.id));
+    if (isViewed) return;
+
+    if (postingViewStr) {
+      const postingViewArr: number[] = JSON.parse(postingViewStr);
+      postingViewArr.push(postingData.id);
+      sessionStorage.setItem("postingViewArr", JSON.stringify(postingViewArr));
+      addViewCount({ elemId: postingData.id });
+      return;
+    }
+    if (!isViewed) {
+      sessionStorage.setItem("postingViewArr", JSON.stringify([postingData.id]));
+      addViewCount({ elemId: postingData.id });
+    }
+  }, [postingData, addViewCount]);
 
   if (!commentArrData || isError || isLoading) {
     return (

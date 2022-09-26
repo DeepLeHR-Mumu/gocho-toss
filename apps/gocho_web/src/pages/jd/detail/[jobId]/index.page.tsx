@@ -40,7 +40,6 @@ const JobsDetail: NextPage = () => {
     const isViewed = jobViewStr?.includes(String(jobDetailData?.id));
     if (isViewed) return;
 
-    // 해당 세션에서 이미 첫 조회가 이루어진 경우 - 조회한 기록이 없는 게시글 일 경우
     if (jobViewStr) {
       const jobViewArr: number[] = JSON.parse(jobViewStr);
       jobViewArr.push(jobDetailData.id);
@@ -49,7 +48,6 @@ const JobsDetail: NextPage = () => {
       return;
     }
     if (!isViewed) {
-      // 해당 세션에서 첫 조회
       sessionStorage.setItem("jobViewArr", JSON.stringify([jobDetailData.id]));
       addViewCount({ elemId: jobDetailData.id });
     }
