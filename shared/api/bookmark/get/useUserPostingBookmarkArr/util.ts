@@ -1,9 +1,9 @@
-import { postingBookmarkObjDef } from "../../type/bookmark";
+import { postingBookmarkResObjDef } from "../../type/bookmark";
 
-export const selector = (data: postingBookmarkObjDef[]) => {
-  return data.map((bookmark) => {
-    return {
-      id: bookmark.id,
-    };
+export const selector = ({ data }: postingBookmarkResObjDef) => {
+  const result = data.map((bookmark) => {
+    return bookmark;
   });
+
+  return result;
 };

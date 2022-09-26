@@ -1,11 +1,9 @@
-import { oldBookmarkKeyObj } from "shared-constant/queryKeyFactory/bookmark/bookmarkKeyObj";
+import { userBookmarkKeyObj } from "shared-constant/queryKeyFactory/bookmark/bookmarkKeyObj";
 import { QueryFunctionContext } from "@tanstack/react-query";
-import { postingBookmarkObjDef } from "../../type/bookmark";
-
-interface ResponseObjDef {
-  data: postingBookmarkObjDef[];
-}
+import { postingBookmarkResObjDef } from "../../type/bookmark";
 
 export interface GetUserPostingBookmarkArrDef {
-  (requestObj: QueryFunctionContext<ReturnType<typeof oldBookmarkKeyObj.postingBookmarkArr>>): Promise<ResponseObjDef>;
+  (
+    requestObj: QueryFunctionContext<ReturnType<typeof userBookmarkKeyObj.postingBookmarkArr>>
+  ): Promise<postingBookmarkResObjDef>;
 }

@@ -12,10 +12,10 @@ export interface companyBookmarkObjDef {
   logo_url: string;
 }
 
-export interface postingBookmarkObjDef {
-  id: number;
+export interface postingBookmarkResObjDef {
+  data: number[];
 }
 
 export interface tipBookmarkObjDef {
-  id: number;
+  data: number[];
 }

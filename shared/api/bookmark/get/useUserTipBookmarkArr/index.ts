@@ -10,7 +10,7 @@ import { selector } from "./util";
 export const getUserTipBookmarkArr: GetUserTipBookmarkArrDef = async ({ queryKey: [{ requestObj }] }) => {
   const token = localStorage.getItem("token") as string;
 
-  const { data } = await axiosInstance.get(`/users/${requestObj?.userId}/tips-likes`, {
+  const { data } = await axiosInstance.get(`/users/${requestObj?.userId}/tip-likes`, {
     headers: {
       "x-access-token": token,
     },
@@ -21,7 +21,7 @@ export const getUserTipBookmarkArr: GetUserTipBookmarkArrDef = async ({ queryKey
 export const useUserTipBookmarkArr = (requestObj: UserBookmarkArrRequestDef) => {
   const queryResult = useQuery(oldBookmarkKeyObj.tipBookmarkArr(requestObj), getUserTipBookmarkArr, {
     enabled: Boolean(requestObj.userId),
-    select: ({ data }) => {
+    select: (data) => {
       return selector(data);
     },
   });
