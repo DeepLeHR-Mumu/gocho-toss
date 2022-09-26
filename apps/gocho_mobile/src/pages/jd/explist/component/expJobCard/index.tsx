@@ -37,7 +37,6 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
   const { data: jobDataArr } = useJobArr({
     companyId: companyData?.id,
   });
-  // TODO: companyId enabled를 어떻게 처리할까?
 
   if (isSkeleton || companyData === undefined) {
     return (
