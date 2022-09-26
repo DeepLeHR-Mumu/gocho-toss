@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineEdit, AiOutlineInfoCircle } from "react-icons/ai";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { useUserInfo } from "shared-api/auth";
@@ -25,6 +25,7 @@ import {
   buttonContainer,
   setPostingTypeButton,
   submitButton,
+  optionDesc,
 } from "./style";
 
 export const WritePostingBox: FunctionComponent = () => {
@@ -62,6 +63,7 @@ export const WritePostingBox: FunctionComponent = () => {
         <div css={userProfileImage}>{userInfoData && <ProfileImg imageStr={userInfoData.image} size="S" />}</div>
         <p css={userNickname}>{userInfoData && userInfoData.nickname}</p>
       </div>
+      {/* LATER : 스페이스 누르면 모달 꺼짐 */}
       <form css={formContainer} onSubmit={handleSubmit(postingSubmit)}>
         <input
           {...register("title", {
@@ -98,6 +100,10 @@ export const WritePostingBox: FunctionComponent = () => {
             );
           })}
         </div>
+        <p css={optionDesc}>
+          <AiOutlineInfoCircle />
+          토크 주제는 무엇으로 하시겠어요? 기본옵션은 자유! 😚
+        </p>
         <button type="submit" css={submitButton}>
           글 남기기 <AiOutlineEdit />
         </button>

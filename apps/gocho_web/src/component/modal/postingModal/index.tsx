@@ -7,6 +7,7 @@ import { useUserInfo } from "shared-api/auth";
 import { usePostingCommentArr } from "shared-api/community/usePostingCommentArr";
 import { useDeletePosting } from "shared-api/community/useDeletePosting";
 import { selector } from "shared-api/community/usePostingCommentArr/util";
+import { Spinner } from "shared-ui/common/atom/spinner";
 import { communityPostingArrKeyObj } from "shared-constant/queryKeyFactory/community/postingArrKeyObj";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { dateConverter } from "shared-util/date/dateConverter";
@@ -21,6 +22,7 @@ import { Comment } from "./component/comment";
 import { changeTypeIndex } from "./util";
 import {
   closeButtonWrapper,
+  modalWrapperSkeleton,
   modalWrapper,
   writerProfile,
   writerProfileImage,
@@ -36,6 +38,8 @@ import {
   settingButton,
   settingMenu,
   commentListWrapper,
+  flexBox,
+  overviewYBox,
 } from "./style";
 
 export const PostingBox: FunctionComponent = () => {
@@ -78,7 +82,11 @@ export const PostingBox: FunctionComponent = () => {
   };
 
   if (!commentArrData || !userData || isError || isLoading) {
-    return <div>loading...</div>;
+    return (
+      <div css={modalWrapperSkeleton}>
+        <Spinner backgroundColor="#fff" />
+      </div>
+    );
   }
 
   const { year, month, date } = dateConverter(createdTime);
@@ -89,93 +97,109 @@ export const PostingBox: FunctionComponent = () => {
       <div css={closeButtonWrapper}>
         <CloseButton size="L" buttonClick={closeRefetch} />
       </div>
-      <div css={writerProfile}>
-        <div css={writerProfileImage}>
-          <ProfileImg imageStr="default_work" size="S" />
+      <div css={overviewYBox}>
+        <div css={flexBox}>
+          <div css={writerProfile}>
+            <div css={writerProfileImage}>
+              <ProfileImg imageStr="default_work" size="S" />
+            </div>
+            <p css={writerNickname}>{nickname}</p>
+          </div>
         </div>
-        <p css={writerNickname}>{nickname}</p>
-      </div>
-      <h2 data-cy="postingTitle" css={titleCSS}>
-        {title}
-      </h2>
-      <div data-cy="postingBody" css={bodyCSS}>
-        {description}
-      </div>
-      <div css={infoContainer}>
-        <div css={infoBox}>
-          <p data-cy="postingType" css={setPostingType(type)}>
-            {type}
-          </p>
-          <p css={infoCSS}>{`${year}/${month}/${date}`}</p>
-          <AiOutlineLike />
-          <p css={numInfo}>{like}</p>
-          <AiOutlineMessage />
-          <p css={numInfo}>{commentArrData.length}</p>
-          <AiOutlineEye />
-          <p css={numInfo}>{view}</p>
-        </div>
-        <div css={infoBox}>
-          {openPostingSetting && (
-            <div css={settingButtonList}>
-              <button type="button" css={settingButton} onClick={openChangePostingModal}>
-                글 수정하기
-              </button>
+
+        <strong data-cy="postingTitle" css={titleCSS}>
+          {title}
+        </strong>
+        <p data-cy="postingBody" css={bodyCSS}>
+          {description}
+        </p>
+
+        <div css={infoContainer}>
+          <ul css={infoBox}>
+            <li data-cy="postingType" css={setPostingType(type)}>
+              {type}
+            </li>
+            <li css={infoCSS}>{`${year}.${month}.${date}`}</li>
+
+            <li css={numInfo}>
+              <AiOutlineLike />
+              {like}
+            </li>
+
+            <li css={numInfo}>
+              <AiOutlineMessage />
+              {commentArrData.length}
+            </li>
+
+            <li css={numInfo}>
+              <AiOutlineEye /> {view}
+            </li>
+          </ul>
+
+          <div css={infoBox}>
+            {openPostingSetting && (
+              <div css={settingButtonList}>
+                <button type="button" css={settingButton} onClick={openChangePostingModal}>
+                  글 수정하기
+                </button>
+                <button
+                  type="button"
+                  css={settingButton}
+                  onClick={() => {
+                    return postingDelete(id);
+                  }}
+                >
+                  글 삭제하기
+                </button>
+              </div>
+            )}
+            {userData.id === userID && (
               <button
                 type="button"
-                css={settingButton}
+                css={settingMenu}
                 onClick={() => {
-                  return postingDelete(id);
+                  return setOpenPostingSetting((PostingSetting) => {
+                    return !PostingSetting;
+                  });
                 }}
               >
-                글 삭제하기
+                <FiMoreVertical />
               </button>
-            </div>
-          )}
-          {userData.id === userID && (
-            <button
-              type="button"
-              css={settingMenu}
-              onClick={() => {
-                return setOpenPostingSetting((PostingSetting) => {
-                  return !PostingSetting;
-                });
-              }}
-            >
-              <FiMoreVertical />
-            </button>
-          )}
+            )}
+          </div>
         </div>
-      </div>
-      <WriteComment postingId={id} parentCommentId={null} />
 
-      <div css={commentListWrapper}>
-        {commentArrData.map((comment) => {
-          // LATER 복잡한 처리방식 간소화 - > 빈배열을 만들어서 해야할지?, filter 사용하면 될거같음
-          const reCommentList: null | ReturnType<typeof selector> = [];
+        <WriteComment postingId={id} parentCommentId={null} />
 
-          commentArrData.forEach((reComment) => {
-            if (reComment.parentCommentId === comment.id) reCommentList.push(reComment);
-          });
+        <div css={commentListWrapper}>
+          {commentArrData.map((comment) => {
+            // LATER 복잡한 처리방식 간소화 - > 빈배열을 만들어서 해야할지?, filter 사용하면 될거같음
+            const reCommentList: null | ReturnType<typeof selector> = [];
 
-          if (comment.parentCommentId === null) {
-            return (
-              <Comment
-                id={comment.id}
-                postingId={id}
-                userId={comment.userId}
-                // LATER as로 undefined 해결하지 않기 -> 구조적 문제해결, 넘겨줄 당시에는number라고 타입확정을 해줬으나 실제로 받는 loginUerId는 undefined일 수 있는것 아닌지?,
-                loginUserId={userData.id as number}
-                body={comment.description}
-                nickname={comment.nickname}
-                emblem={comment.badge}
-                reCommentList={reCommentList}
-                key={comment.id}
-              />
-            );
-          }
-          // LATER return null 없앨 수 있는 방법 고민
-          return null;
-        })}
+            commentArrData.forEach((reComment) => {
+              if (reComment.parentCommentId === comment.id) reCommentList.push(reComment);
+            });
+
+            if (comment.parentCommentId === null) {
+              return (
+                <Comment
+                  id={comment.id}
+                  postingId={id}
+                  userId={comment.userId}
+                  // LATER as로 undefined 해결하지 않기 -> 구조적 문제해결, 넘겨줄 당시에는number라고 타입확정을 해줬으나 실제로 받는 loginUerId는 undefined일 수 있는것 아닌지?,
+                  loginUserId={userData.id as number}
+                  body={comment.description}
+                  nickname={comment.nickname}
+                  emblem={comment.badge}
+                  reCommentList={reCommentList}
+                  key={comment.id}
+                />
+              );
+            }
+            // LATER return null 없앨 수 있는 방법 고민
+            return null;
+          })}
+        </div>
       </div>
     </article>
   );

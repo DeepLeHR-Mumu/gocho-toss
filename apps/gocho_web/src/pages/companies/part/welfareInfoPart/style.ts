@@ -10,7 +10,7 @@ export const infoContainer = css`
 `;
 
 export const infoBox = css`
-  width: 23.5%;
+  width: 23%;
   display: flex;
   flex-direction: column;
   align-items: center;

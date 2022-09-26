@@ -4,16 +4,13 @@ import { AiOutlineSend } from "react-icons/ai";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useUserInfo } from "shared-api/auth";
 import { useWriteComment } from "shared-api/community/useWriteComment";
 import { communityCommentArrKeyObj } from "shared-constant/queryKeyFactory/community/commentArrKeyObj";
-import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
 import { WriteCommentProps, CommentFormValues } from "./type";
-import { formCSS, userProfileImage, writeCommentBox, writeCommentWrapper, postCommentButton } from "./style";
+import { formCSS, writeCommentBox, writeCommentWrapper, postCommentButton } from "./style";
 
 export const WriteComment: FunctionComponent<WriteCommentProps> = ({ postingId, parentCommentId }) => {
-  const { data: userInfoData } = useUserInfo();
   const { register, handleSubmit, reset } = useForm<CommentFormValues>({
     defaultValues: {
       postingId,
@@ -36,7 +33,6 @@ export const WriteComment: FunctionComponent<WriteCommentProps> = ({ postingId, 
   return (
     <form css={formCSS} onSubmit={handleSubmit(commentSubmit)}>
       <div css={writeCommentWrapper}>
-        <div css={userProfileImage}>{userInfoData && <ProfileImg imageStr={userInfoData.image} size="S" />}</div>
         <TextareaAutosize
           {...register("description", {
             required: true,
@@ -45,7 +41,7 @@ export const WriteComment: FunctionComponent<WriteCommentProps> = ({ postingId, 
           maxRows={5}
           placeholder="댓글을 입력하시겠어요?"
         />
-        <button type="submit" css={postCommentButton}>
+        <button type="submit" css={postCommentButton} aria-label="댓글입력">
           <AiOutlineSend />
         </button>
       </div>
