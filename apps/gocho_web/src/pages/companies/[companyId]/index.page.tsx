@@ -46,7 +46,7 @@ const CompaniesDetail: NextPage = () => {
   const { mutate: addViewCount } = useAddCompanyViewCount();
 
   useEffect(() => {
-    const companyViewStr = sessionStorage.getItem("companyView");
+    const companyViewStr = sessionStorage.getItem("companyViewArr");
     // response가 없으면 useEffect 탈출
     if (!response) return;
 
@@ -58,13 +58,13 @@ const CompaniesDetail: NextPage = () => {
     if (companyViewStr) {
       const companyViewArr: number[] = JSON.parse(companyViewStr);
       companyViewArr.push(response.data.id);
-      sessionStorage.setItem("companyView", JSON.stringify(companyViewArr));
+      sessionStorage.setItem("companyViewArr", JSON.stringify(companyViewArr));
       addViewCount({ elemId: response.data.id });
       return;
     }
     if (!isViewed) {
       // 해당 세션에서 첫 조회
-      sessionStorage.setItem("companyView", JSON.stringify([response.data.id]));
+      sessionStorage.setItem("companyViewArr", JSON.stringify([response.data.id]));
       addViewCount({ elemId: response.data.id });
     }
   }, [response, addViewCount]);
