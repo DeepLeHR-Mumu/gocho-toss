@@ -51,24 +51,27 @@ const CompaniesDetail: NextPage = () => {
   const { mutate: addViewCount } = useAddCompanyViewCount();
 
   useEffect(() => {
+    // TODO string으로 가져오기
     const companyViewStr = sessionStorage.getItem("companyViewArr");
-    // companyDetailData가 없으면 useEffect 탈출
+
+    // TODO companyDetailData가 없으면 useEffect 탈출
     if (!companyDetailData) return;
 
-    // 이미 조회한 게시글일 경우 useEffect 탈출
+    // TODO 이미 조회한 게시글일 경우 useEffect 탈출
     const isViewed = companyViewStr?.includes(String(companyDetailData?.data.id));
     if (isViewed) return;
 
-    // 해당 세션에서 이미 첫 조회가 이루어진 경우 - 조회한 기록이 없는 게시글 일 경우
+    // TODO 해당 세션에서 이미 첫 조회가 이루어진 경우 - 조회한 기록이 없는 게시글 일 경우
     if (companyViewStr) {
-      const companyViewArr: number[] = JSON.parse(companyViewStr);
-      companyViewArr.push(companyDetailData.data.id);
-      sessionStorage.setItem("companyViewArr", JSON.stringify(companyViewArr));
+      const companyViewArr: number[] = JSON.parse(companyViewStr); // [33]
+      companyViewArr.push(companyDetailData.data.id); // [33, 45]
+      sessionStorage.setItem("companyViewArr", JSON.stringify(companyViewArr)); // "[33, 45]"
       addViewCount({ elemId: companyDetailData.data.id });
       return;
     }
+
+    // TODO 해당 세션에서 첫 조회
     if (!isViewed) {
-      // 해당 세션에서 첫 조회
       sessionStorage.setItem("companyViewArr", JSON.stringify([companyDetailData.data.id]));
       addViewCount({ elemId: companyDetailData.data.id });
     }
