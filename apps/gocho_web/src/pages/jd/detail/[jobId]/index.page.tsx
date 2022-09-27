@@ -11,6 +11,8 @@ import { Layout } from "@component/layout";
 import { DetailComment } from "@component/global/detailComment";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
+import { useAddJobViewCount } from "shared-api/viewCount";
+
 import { PositionObjDef } from "./type";
 import { HeaderPart, DetailSupportPart, DetailWorkPart, DetailPreferencePart, ReceptInfoPart } from "../part";
 
@@ -22,6 +24,7 @@ const JobsDetail: NextPage = () => {
 
   const { data: userData } = useUserInfo();
   const { data: userJobBookmarkArr, refetch } = useUserJobBookmarkArr({ userId: userData?.id });
+  const { mutate: addViewCount } = useAddJobViewCount();
 
   const router = useRouter();
   const { jobId } = router.query;
@@ -29,6 +32,26 @@ const JobsDetail: NextPage = () => {
   const { data: jobDetailData, isLoading } = useJobDetail({
     id: Number(jobId),
   });
+
+  useEffect(() => {
+    const jobViewStr = sessionStorage.getItem("jobViewArr");
+    if (!jobDetailData) return;
+
+    const isViewed = jobViewStr?.includes(String(jobDetailData?.id));
+    if (isViewed) return;
+
+    if (jobViewStr) {
+      const jobViewArr: number[] = JSON.parse(jobViewStr);
+      jobViewArr.push(jobDetailData.id);
+      sessionStorage.setItem("jobViewArr", JSON.stringify(jobViewArr));
+      addViewCount({ elemId: jobDetailData.id });
+      return;
+    }
+    if (!isViewed) {
+      sessionStorage.setItem("jobViewArr", JSON.stringify([jobDetailData.id]));
+      addViewCount({ elemId: jobDetailData.id });
+    }
+  }, [jobDetailData, addViewCount]);
 
   useEffect(() => {
     if (!jobDetailData || !currentPositionId) {

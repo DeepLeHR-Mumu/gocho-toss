@@ -9,7 +9,6 @@ import collegeTrue from "shared-image/global/common/cho_color.svg";
 import collegeFalse from "shared-image/global/common/cho_mono.svg";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
-import { useAddUserBookmark, useDeleteUserBookmark } from "shared-api/bookmark";
 import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 import { SkeletonBox } from "../../../common/atom/skeletonBox";
 import { DdayBox } from "../../../common/atom/dDayBox";
@@ -30,11 +29,7 @@ import { JobSmallCardProps, JobSmallCardSkeleton } from "./type";
 export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSkeleton> = ({ jobData, isSkeleton }) => {
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
 
-  // TODO : 2주차 작업분
-  //  eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { mutate: addMutate } = useAddUserBookmark();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { mutate: deleteMutate } = useDeleteUserBookmark();
+  // NOTMYFAULT OU?
 
   if (isSkeleton || jobData === undefined) {
     return (
