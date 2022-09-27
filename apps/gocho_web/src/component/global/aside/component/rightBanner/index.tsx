@@ -16,6 +16,7 @@ export const RightBanner: FunctionComponent = () => {
             desc={banner.desc}
             backgroundColor={banner.backgroundColor}
             link={banner.linkUrl}
+            iconSrc={banner.iconSrc}
           />
         );
       })}

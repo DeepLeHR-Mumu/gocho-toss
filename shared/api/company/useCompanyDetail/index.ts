@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
+import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 
 import { axiosInstance } from "../../axiosInstance";
 
@@ -12,9 +13,8 @@ export const getCompanyDetail: GetCompanyDetailDef = async (requestObj) => {
 };
 
 export const useCompanyDetail: UseCompanyDetailDef = (requestObj) => {
-  const key = ["companyDetail", requestObj];
   const queryResult = useQuery<CompanyDetailResponseDef, AxiosError, UseCompanyDetailResultDef>(
-    key,
+    companyDetailKeyObj.detail(requestObj),
     () => {
       return getCompanyDetail(requestObj);
     },

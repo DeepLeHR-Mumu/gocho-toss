@@ -2,6 +2,7 @@ import { ImageType } from "shared-type/ui/imageType";
 import { TaskType } from "shared-api/spec/type/common";
 
 export interface BestUserInfoProps {
+  isSkeleton?: never;
   bestUserData: {
     profileImg: ImageType;
     nickname: string;
@@ -19,4 +20,9 @@ export interface BestUserInfoProps {
     } | null;
     id: number;
   };
+}
+
+export interface skeletonProps {
+  isSkeleton: boolean;
+  bestUserData?: never;
 }

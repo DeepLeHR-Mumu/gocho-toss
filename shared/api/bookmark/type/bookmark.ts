@@ -1,17 +1,15 @@
-export interface jobBookmarkObjDef {
-  id: number;
-  start_time: number;
-  end_time: number;
-  title: string;
-  high: boolean;
-  college: boolean;
-  place_arr: string[];
-  rotation_arr: string[];
-  task_arr: string[];
-  cut: boolean;
-  bookmark: number;
-  view: number;
-  company: { id: number; name: string; logo_url: string };
+export interface jobBookmarkResObjDef {
+  data: {
+    id: number;
+    end_time: number;
+    title: string;
+    cut: boolean;
+    company: { id: number; name: string; logo_url: string };
+  }[];
+}
+
+export interface CompanyBookmarkResObjDef {
+  data: { id: number; name: string; logo_url: string }[];
 }
 
 export interface companyBookmarkObjDef {
@@ -20,10 +18,10 @@ export interface companyBookmarkObjDef {
   logo_url: string;
 }
 
-export interface postingBookmarkObjDef {
-  id: number;
+export interface postingBookmarkResObjDef {
+  data: number[];
 }
 
 export interface tipBookmarkObjDef {
-  id: number;
+  data: number[];
 }

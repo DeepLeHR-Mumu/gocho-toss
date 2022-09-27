@@ -2,6 +2,7 @@ export type JobPreviewPartProps = {
   jobDataArr:
     | {
         id: number;
+        companyId: number;
         companyName: string;
         companyLogo: string;
         startTime: number;

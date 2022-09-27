@@ -1,8 +1,9 @@
 import { FunctionComponent, useState } from "react";
-import { JobCardList } from "@pages/search/component/jobCardList";
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
+
+import { JobCardList } from "../../component/jobCardList";
 
 export const BookmarkJobPart: FunctionComponent = () => {
   const limit = 4;

@@ -1,12 +1,13 @@
 import { FunctionComponent, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { BsChevronRight } from "react-icons/bs";
 
 import { useJobArr } from "shared-api/job";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-import { dateConverter } from "shared-util/date";
 import { JOBS_DETAIL_URL, COMPANY_DETAIL_URL } from "shared-constant/internalURL";
+import { dateConverter } from "shared-util/date";
 
 import { ExpJobCardProps, ExpJobCardSkeleton } from "./type";
 import {
@@ -17,6 +18,7 @@ import {
   buttonContainer,
   moreExpJobButton,
   companyDetailButton,
+  companyInfoBox,
   companyName,
   expJobListContainer,
   expJobBox,
@@ -57,13 +59,13 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
             layout="fill"
             objectFit="contain"
             src={imageSrc}
-            alt=""
+            alt={companyData.name}
             onError={() => {
               return setImageSrc(defaultCompanyLogo);
             }}
           />
         </div>
-        <div>
+        <div css={companyInfoBox}>
           <div css={companyName}>{companyData.name}</div>
           <div css={buttonContainer}>
             <Link href={`${COMPANY_DETAIL_URL}/${companyData.id}`} passHref>
@@ -75,6 +77,7 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
           </div>
         </div>
       </div>
+
       <div css={expJobListContainer}>
         {jobDataArr?.jobDataArr
           .filter((data, index) => {
@@ -88,28 +91,30 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
             return (
               <div key={`ExpJob${jobData.id}`} css={expJobBox}>
                 <div css={jobTitleContainer}>
-                  <h2 css={jobTitle}>{jobData.title}</h2>
-                  <div css={jobDate}>
-                    {`${startYear}/${startMonth}/${startDate}`}~{`${endYear}/${endMonth}/${endDate}`}
-                  </div>
+                  <strong css={jobTitle}>{jobData.title}</strong>
+                  <p css={jobDate}>
+                    {`${startYear}.${startMonth}.${startDate}`}~{`${endYear}.${endMonth}.${endDate}`}
+                  </p>
                 </div>
 
                 <div css={taskContainer}>
                   <div css={flexBox}>
-                    <div css={taskSummary}>
+                    <p css={taskSummary}>
                       모집한 직무
                       <span css={taskNumber}>{jobData.taskArr.length}</span>
-                    </div>
+                    </p>
                     {jobData.taskArr.map((task) => {
                       return (
-                        <div css={taskBox} key={`${jobData.id}${task}`}>
+                        <p css={taskBox} key={`${jobData.id}${task}`}>
                           {task}
-                        </div>
+                        </p>
                       );
                     })}
                   </div>
                   <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
-                    <a css={jobDetailButton}>상세보기 {">"}</a>
+                    <a css={jobDetailButton}>
+                      상세보기 <BsChevronRight />
+                    </a>
                   </Link>
                 </div>
               </div>

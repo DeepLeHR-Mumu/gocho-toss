@@ -18,7 +18,7 @@ export const Aside: FunctionComponent = () => {
   };
 
   useEffect(() => {
-    setWindowHeight(window.innerHeight / 2);
+    setWindowHeight(window.innerHeight / 5);
     getScrollTop();
   }, []);
 

@@ -1,10 +1,20 @@
 import { css } from "@emotion/react";
-import { shorten } from "shared-style/shorten";
+
+import { shorten } from "shared-style/common";
 import { COLORS } from "shared-style/color";
+import { PC_HOVER } from "shared-style/mediaQuery";
 
 export const cardWrapper = css`
-  width: 47%;
-  margin-bottom: 2rem;
+  width: 32%;
+  padding-bottom: 0.875rem;
+  border-bottom: 2px solid ${COLORS.GRAY90};
+  transition: border 0.2s ease;
+
+  ${PC_HOVER} {
+    :hover {
+      border-color: ${COLORS.GRAY10};
+    }
+  }
 `;
 
 export const linkArea = css`
@@ -14,41 +24,31 @@ export const linkArea = css`
 `;
 
 export const cardImageBox = css`
-  width: 100%;
-  max-width: 9rem;
-  height: 6.25rem;
-  background-color: ${COLORS.GRAY90};
-  border-radius: 1rem;
+  width: 11.25rem;
+  height: 6rem;
+  border-radius: 3rem;
   overflow: hidden;
   position: relative;
 `;
 
 export const cardInfo = css`
-  padding-left: 2rem;
-  width: 100%;
-  max-width: calc(100% - 9rem);
+  padding-left: 0.5rem;
+  width: calc(100% - 11.25rem);
 `;
 
 export const cardTitle = css`
-  font-size: 1.25rem;
-  color: ${COLORS.GRAY20};
-  font-weight: 600;
+  font-size: 0.875rem;
+  color: ${COLORS.GRAY10};
+  font-weight: 500;
   word-break: keep-all;
-  line-height: 1.5;
+  line-height: 1.6;
   margin-bottom: 1rem;
   ${shorten(2)};
-
-  > span {
-    display: block;
-
-    :first-of-type {
-      text-decoration: underline;
-    }
-  }
 `;
 
 export const cardDesc = css`
-  font-size: 1rem;
-  color: ${COLORS.GRAY30};
-  ${shorten()};
+  font-size: 0.875rem;
+  color: ${COLORS.GRAY40};
+  line-height: 1.6;
+  ${shorten(2)};
 `;

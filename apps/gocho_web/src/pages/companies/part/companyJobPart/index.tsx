@@ -8,7 +8,7 @@ import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { JobCard } from "@component/card/jobCard";
 import { Layout } from "@component/layout";
 import { CompanyJobPartProps } from "./type";
-import { partContainer, listContainer } from "./style";
+import { partContainer, listContainer, totalCount } from "./style";
 
 export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({ companyId }) => {
   const {
@@ -22,7 +22,7 @@ export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({ company
   });
 
   const { data: userData } = useUserInfo();
-  const { data: userJobBookmarkArr, refetch } = useUserJobBookmarkArr({ userId: userData?.id });
+  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
   const observerRef = useRef<IntersectionObserver>();
   const boxRef = useRef<HTMLDivElement>(null);
@@ -63,6 +63,7 @@ export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({ company
   return (
     <div css={partContainer}>
       <Layout>
+        <p css={totalCount}>총 채용공고 0개</p>
         <section css={listContainer}>
           {jobDataArr.pages.map((page) => {
             return page.jobDataArr.map((jobData) => {
@@ -78,7 +79,6 @@ export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({ company
                   isBookmarked={isBookmarked}
                   userId={userData?.id}
                   key={`JobCard${jobData.id}`}
-                  refetchUserBookmark={refetch}
                 />
               );
             });

@@ -8,7 +8,7 @@ import { badgeCSS } from "./style";
 export const UserBadge: FunctionComponent<UserBadgeProps> = ({ badge }) => {
   return (
     <div css={badgeCSS}>
-      <Image src={getUserBadgeSrc(badge)} alt={badge} layout="fill" objectFit="contain" />
+      <Image src={getUserBadgeSrc(badge)} alt={`${badge} 뱃지`} layout="fill" objectFit="contain" />
     </div>
   );
 };

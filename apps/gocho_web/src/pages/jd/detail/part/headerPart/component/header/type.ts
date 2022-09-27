@@ -1,5 +1,3 @@
-import { QueryObserverResult } from "@tanstack/react-query";
-
 export interface HeaderProps {
   jobDetailData: {
     id: number;
@@ -7,6 +5,7 @@ export interface HeaderProps {
     endTime: number;
     applyUrl: string;
     title: string;
+    cut: boolean;
     bookmarkCount: number;
     viewCount: number;
     company: {
@@ -18,5 +17,4 @@ export interface HeaderProps {
   };
   isBookmarked: boolean;
   userId: number | undefined;
-  refetchUserBookmark: () => Promise<QueryObserverResult>;
 }

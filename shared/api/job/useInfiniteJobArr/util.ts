@@ -4,6 +4,7 @@ export const selector = (jobArr: JobObjDef[], count: number) => {
   const jobDataArr = jobArr.map((job) => {
     return {
       id: job.id,
+      companyId: job.company.id,
       companyName: job.company.name,
       companyLogo: job.company.logo_url,
       startTime: job.start_time,

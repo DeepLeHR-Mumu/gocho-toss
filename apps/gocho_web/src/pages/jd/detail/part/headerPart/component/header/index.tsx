@@ -3,14 +3,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { FiYoutube, FiEye } from "react-icons/fi";
 import { BsFillBookmarkFill } from "react-icons/bs";
+import { useQueryClient } from "@tanstack/react-query";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
 import { dateConverter } from "shared-util/date";
+import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 
-import { COMPANY_DETAIL_URL } from "@constant/internalURL";
-import { useAddUserBookmark, useDeleteUserBookmark } from "shared-api/bookmark";
+import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
+import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { HeaderProps } from "./type";
 import {
   applyButton,
@@ -27,24 +29,43 @@ import {
   viewCSS,
 } from "./style";
 
-export const Header: FunctionComponent<HeaderProps> = ({
-  jobDetailData,
-  isBookmarked,
-  userId,
-  refetchUserBookmark,
-}) => {
+export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookmarked, userId }) => {
+  const queryClient = useQueryClient();
+
   const [imageSrc, setImageSrc] = useState(jobDetailData.company.logoUrl as string);
-  const { mutate: addMutate } = useAddUserBookmark();
-  const { mutate: deleteMutate } = useDeleteUserBookmark();
+
+  const { mutate: addMutate } = useAddJobBookmarkArr({
+    id: jobDetailData?.id as number,
+    end_time: jobDetailData?.endTime as number,
+    title: jobDetailData?.title as string,
+    cut: jobDetailData?.cut as boolean,
+    company: {
+      id: jobDetailData?.company.companyId as number,
+      name: jobDetailData?.company.name as string,
+      logo_url: jobDetailData?.company.logoUrl as string,
+    },
+  });
+
+  const { mutate: deleteMutate } = useDeleteJobBookmarkArr({
+    id: jobDetailData?.id as number,
+    end_time: jobDetailData?.endTime as number,
+    title: jobDetailData?.title as string,
+    cut: jobDetailData?.cut as boolean,
+    company: {
+      id: jobDetailData?.company.companyId as number,
+      name: jobDetailData?.company.name as string,
+      logo_url: jobDetailData?.company.logoUrl as string,
+    },
+  });
 
   const addJobBookmark = () => {
     return (
       userId &&
       addMutate(
-        { userId, likeType: "jd-bookmarks", elemId: jobDetailData.id },
+        { userId, elemId: jobDetailData.id },
         {
           onSuccess: () => {
-            refetchUserBookmark();
+            queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
           },
         }
       )
@@ -55,10 +76,10 @@ export const Header: FunctionComponent<HeaderProps> = ({
     return (
       userId &&
       deleteMutate(
-        { userId, likeType: "jd-bookmarks", elemId: jobDetailData.id },
+        { userId, elemId: jobDetailData.id },
         {
           onSuccess: () => {
-            refetchUserBookmark();
+            queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
           },
         }
       )
@@ -87,16 +108,26 @@ export const Header: FunctionComponent<HeaderProps> = ({
             <DdayBox endTime={jobDetailData.endTime} />
           </li>
           <li>
-            <p css={dateCSS}>{`${startYear}. ${startMonth}. ${startDate} ~ ${endYear}. ${endMonth}. ${endDate}`}</p>
+            <p css={dateCSS}>
+              {`${startYear}. ${startMonth}. ${startDate}`} ~{" "}
+              {endYear !== 9999 && `${endYear}. ${endMonth}. ${endDate}`}
+            </p>
           </li>
         </ul>
         <p css={companyNameCSS}>
           {jobDetailData.company.name}
-          <button type="button" css={bookmarkButton}>
+          <button
+            type="button"
+            css={bookmarkButton(isBookmarked)}
+            onClick={() => {
+              return isBookmarked ? deleteJobBookmark() : addJobBookmark();
+            }}
+            aria-label={isBookmarked ? "공고 북마크 해지" : "공고 북마크"}
+          >
             <BsFillBookmarkFill />
           </button>
         </p>
-        <h2 css={titleCSS}>{jobDetailData.title}</h2>
+        <p css={titleCSS}>{jobDetailData.title}</p>
         <ul css={linksCSS}>
           <li>
             <a href={jobDetailData.applyUrl} target="_blank" css={applyButton} rel="noopener noreferrer">

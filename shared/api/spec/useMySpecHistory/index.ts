@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { axiosInstance } from "../../axiosInstance";
 import {
   mySpecHistoryKeyObj,
   mySpecHistoryRequestObjDef,
 } from "shared-constant/queryKeyFactory/spec/userHistoryKeyObj";
+import { axiosInstance } from "../../axiosInstance";
 
 import { selector } from "./util";
 import { GetMySpecHistoryArrDef } from "./type";

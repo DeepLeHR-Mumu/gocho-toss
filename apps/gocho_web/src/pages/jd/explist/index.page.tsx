@@ -3,10 +3,14 @@ import { NextPage } from "next";
 import { FiSearch } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+import { META_JD_EXPLIST } from "shared-constant/meta";
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { useCompanyArr } from "shared-api/company";
 import { Layout } from "@component/layout";
 import { Pagination } from "@pages/jd/component/pagination";
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
+import { DataLabContainer } from "@component/global/datalabCarousel/datalabContainer";
 
 import { ExpJobCardList } from "./component/expJobCardList";
 import { setJobOrderButtonArr } from "./constant";
@@ -14,11 +18,11 @@ import {
   mainContainer,
   title,
   colorPoint,
-  sectionContainer,
   searchContainer,
   searchWrapper,
   searchBox,
   searchButton,
+  listContainer,
   buttonArrContainer,
   setJobOrderButton,
 } from "./style";
@@ -59,11 +63,14 @@ const JobsExpList: NextPage = () => {
 
   return (
     <main css={mainContainer}>
+      <MetaHead metaData={META_JD_EXPLIST} />
+      <DataLabContainer />
       <Layout>
-        <h2 css={title}>
+        <InvisibleH2 title="기업별 만료 공고" />
+        <p css={title}>
           <span css={colorPoint}>Expired</span> 기업별 만료공고
-        </h2>
-        <section css={sectionContainer}>
+        </p>
+        <section css={listContainer}>
           <form css={searchContainer} onSubmit={handleSubmit(postingSearch)}>
             <div css={searchWrapper}>
               <input {...register("name", {})} css={searchBox} placeholder="검색어를 입력해주세요" />
@@ -83,6 +90,7 @@ const JobsExpList: NextPage = () => {
                       return changeOrder(button.order);
                     }}
                   >
+                    {button.icon}&nbsp;
                     {button.text}
                   </button>
                 );
@@ -90,6 +98,7 @@ const JobsExpList: NextPage = () => {
             </div>
             <Pagination total={total} limit={limit} page={page} setPage={setPage} />
           </form>
+
           <ExpJobCardList companyDataArr={companyDataArr?.companyDataArr} isLoading={isLoading} />
           <BottomPagination total={total} limit={limit} page={page} setPage={setPage} />
         </section>

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
-import { shorten } from "shared-style/shorten";
+import { shorten } from "shared-style/common";
 
 export const cardContainer = css`
   display: flex;
@@ -17,57 +17,51 @@ export const cardContainer = css`
 export const titleCSS = css`
   font-size: 1rem;
   font-weight: 500;
+  display: block;
+  width: 80%;
+  color: ${COLORS.GRAY10};
+  line-height: 2;
   margin-bottom: 0.5rem;
+  ${shorten()};
 `;
 
 export const bodyCSS = css`
-  width: 75%;
+  width: 80%;
   font-size: 0.875rem;
   font-weight: 400;
   color: ${COLORS.GRAY30};
-  margin-bottom: 1rem;
-  line-height: 1.5;
+  margin-bottom: 1.125rem;
+  line-height: 1.6;
   word-break: break-all;
-  ${shorten(3)}
+  ${shorten(2)}
 `;
 
 export const infoContainer = css`
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  font-size: 0.875rem;
+  align-items: center;
 `;
 
 export const infoBox = css`
   display: flex;
   align-items: center;
-  color: ${COLORS.GRAY40};
+  list-style: disc;
+  margin-left: 1.125rem;
 `;
 
 export const info = css`
-  margin-right: 1rem;
+  margin: 0 1rem;
+  font-size: 0.875rem;
+  font-weight: 400;
   color: ${COLORS.GRAY40};
-
-  :after {
-    content: " · ";
-    margin-left: 1rem;
-  }
 `;
 
 export const numInfo = css`
-  margin: 0 1rem 0 0.25rem;
-  color: ${COLORS.GRAY10};
-
-  :after {
-    content: " · ";
-    margin-left: 1rem;
-  }
-
-  :last-of-type {
-    :after {
-      content: "";
-    }
-  }
+  margin: 0 1rem;
+  color: ${COLORS.GRAY40};
+  font-size: 0.875rem;
+  font-weight: 400;
+  list-style: disc;
 `;
 
 export const writerProfile = css`

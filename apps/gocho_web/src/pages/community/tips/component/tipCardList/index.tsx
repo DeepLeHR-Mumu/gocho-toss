@@ -2,9 +2,10 @@ import { FunctionComponent, useEffect, useRef } from "react";
 
 import { useInfiniteTipArr } from "shared-api/tip";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { TipCard } from "../tipCard";
 
 import { TipCardListProps } from "./type";
-import { TipCard } from "../tipCard";
+import { noSearchDataBox, noSearchDataDesc } from "./style";
 
 export const TipCardList: FunctionComponent<TipCardListProps> = ({ companyId, q }) => {
   const {
@@ -48,6 +49,14 @@ export const TipCardList: FunctionComponent<TipCardListProps> = ({ companyId, q 
         {dummyArrCreator(9).map((dummy) => {
           return <TipCard isSkeleton key={`TipCardSkeleton${dummy}`} />;
         })}
+      </div>
+    );
+  }
+
+  if (infiniteTipArrData.pages[0].length === 0) {
+    return (
+      <div css={noSearchDataBox}>
+        <p css={noSearchDataDesc}>일치하는 검색 결과가 없습니다</p>
       </div>
     );
   }

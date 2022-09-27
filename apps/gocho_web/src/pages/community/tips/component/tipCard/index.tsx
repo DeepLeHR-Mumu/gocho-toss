@@ -38,33 +38,39 @@ export const TipCard: FunctionComponent<TipCardProps | TipCardSkeleton> = ({ tip
 
   const { year, month, date } = dateConverter(tipData.createdTime);
   return (
-    <button type="button" onClick={openTipModal}>
+    <button type="button" onClick={openTipModal} aria-label={`${tipData.title} 자세히보기`}>
       <article css={cardContainer}>
         <div css={thumbnailBox}>
           <Image src={tipData.thumbnailSrc} alt={tipData.title} layout="fill" objectFit="cover" />
         </div>
         <div css={contentContainer}>
           <div>
-            <div css={tagListCSS}>
+            <ul css={tagListCSS}>
               {tipData.tagArr.map((tag: string) => {
                 return (
-                  <p css={tagCSS} key={tag}>
+                  <li css={tagCSS} key={tag}>
                     {tag}
-                  </p>
+                  </li>
                 );
               })}
-            </div>
-            <h2 css={titleCSS}>{tipData.title}</h2>
+            </ul>
+            <strong css={titleCSS}>{tipData.title}</strong>
             <p css={bodyCSS}>{tipData.description}</p>
           </div>
+
           <div css={infoContainer}>
-            <div css={infoBox}>
-              <p css={info}>{`${year}/${month}/${date}`}</p>
-              <AiOutlineLike />
-              <p css={numInfo}>{tipData.likeCount}</p>
-              <AiOutlineEye />
-              <p css={numInfo}>{tipData.viewCount}</p>
-            </div>
+            <ul css={infoBox}>
+              <li css={info}>고수들의 취업꿀팁</li>
+              <li css={info}>{`${year}.${month}.${date}`}</li>
+
+              <li css={numInfo}>
+                <AiOutlineLike /> {tipData.likeCount}
+              </li>
+
+              <li css={numInfo}>
+                <AiOutlineEye /> {tipData.viewCount}
+              </li>
+            </ul>
           </div>
         </div>
       </article>

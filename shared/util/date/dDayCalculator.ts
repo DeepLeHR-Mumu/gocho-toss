@@ -12,7 +12,7 @@ export const dDayCalculator: setDdayValueCreatorDef = (endTime) => {
   );
 
   if (endDate.getFullYear() === 9999) {
-    return "상시공고";
+    return "상시채용";
   }
   if (
     (endDate.getHours() === 0 &&
@@ -25,7 +25,7 @@ export const dDayCalculator: setDdayValueCreatorDef = (endTime) => {
     return "D-DAY";
   }
   if (endTime < new Date().getTime()) {
-    return "만료공고";
+    return "만료";
   }
   return `D-${dDay}`;
 };

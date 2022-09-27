@@ -1,14 +1,14 @@
 import { css } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
-import { shorten } from "shared-style/shorten";
+import { shorten } from "shared-style/common";
 import { PC_HOVER } from "shared-style/mediaQuery";
 
 export const headerCSS = css`
   position: fixed;
   left: 0;
   right: 0;
-  top: 0;
+  top: 4.5rem;
   z-index: 10;
   background-color: ${COLORS.GRAY100};
   box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.1);
@@ -74,7 +74,7 @@ export const bookmarkButton = (isBookmarked = false) => {
     }
 
     > span {
-      color: ${COLORS.GRAY60};
+      color: ${isBookmarked ? COLORS.BLUE_FIRST40 : `${COLORS.GRAY60}`};
     }
   `;
 };
@@ -82,7 +82,7 @@ export const bookmarkButton = (isBookmarked = false) => {
 export const applyBox = css`
   display: flex;
   align-items: center;
-  margin: 0 1rem;
+  margin-left: 1rem;
 `;
 
 export const dDayContainer = css`

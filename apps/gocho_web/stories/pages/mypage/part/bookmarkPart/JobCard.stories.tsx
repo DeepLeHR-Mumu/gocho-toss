@@ -30,9 +30,11 @@ const Template: ComponentStory<typeof JobCard> = (args) => {
 export const 기본 = Template.bind({});
 기본.args = {
   jobData: {
-    companyName: "SK하이닉스",
-    companyLogo: "https://d2nnzfahmszi6w.cloudfront.net/company_images/119/logo.png",
+    id: 1234,
     title: "[반도체 오퍼레이터] 사원 0명 채용",
     endTime: new Date().getTime(),
+    cut: false,
+    companyName: "SK하이닉스",
+    companyLogo: "https://d2nnzfahmszi6w.cloudfront.net/company_images/119/logo.png",
   },
 };

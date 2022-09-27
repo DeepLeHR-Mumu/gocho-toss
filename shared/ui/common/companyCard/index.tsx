@@ -3,11 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { BsFillBookmarkFill } from "react-icons/bs";
 
-import { useAddUserBookmark, useDeleteUserBookmark } from "shared-api/bookmark";
+import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr } from "shared-api/bookmark";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-
-import { SkeletonBox } from "../atom/skeletonBox";
 
 import { CompanyCardProps, CompanyCardSkeleton } from "./type";
 import {
@@ -27,12 +26,19 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
   isBookmarked,
   userId,
   isSkeleton,
-  refetchUserBookmark,
 }) => {
   const [imageSrc, setImageSrc] = useState(companyData?.logoUrl as string);
 
-  const { mutate: addMutate } = useAddUserBookmark();
-  const { mutate: deleteMutate } = useDeleteUserBookmark();
+  const { mutate: addMutate } = useAddCompanyBookmarkArr({
+    id: companyData?.id as number,
+    logo_url: companyData?.logoUrl as string,
+    name: companyData?.name as string,
+  });
+  const { mutate: deleteMutate } = useDeleteCompanyBookmarkArr({
+    id: companyData?.id as number,
+    logo_url: companyData?.logoUrl as string,
+    name: companyData?.name as string,
+  });
 
   const size = "";
   const sector = "";
@@ -46,31 +52,11 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
   }
 
   const addCompanyBookmark = () => {
-    return (
-      userId &&
-      addMutate(
-        { userId, likeType: "company-bookmarks", elemId: companyData.id },
-        {
-          onSuccess: () => {
-            refetchUserBookmark();
-          },
-        }
-      )
-    );
+    if (userId) addMutate({ userId, elemId: companyData.id });
   };
 
   const deleteCompanyBookmark = () => {
-    return (
-      userId &&
-      deleteMutate(
-        { userId, likeType: "company-bookmarks", elemId: companyData.id },
-        {
-          onSuccess: () => {
-            refetchUserBookmark();
-          },
-        }
-      )
-    );
+    if (userId) deleteMutate({ userId, elemId: companyData.id });
   };
 
   return (

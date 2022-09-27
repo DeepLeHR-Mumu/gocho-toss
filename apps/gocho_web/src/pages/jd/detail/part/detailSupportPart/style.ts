@@ -4,6 +4,11 @@ import { COLORS } from "shared-style/color";
 
 export const wrapper = css``;
 
+export const flexText = css`
+  display: flex;
+  align-items: center;
+`;
+
 export const logoImageBox = css`
   max-width: 11.5rem;
   width: fit-content;
@@ -112,6 +117,7 @@ export const eduImageBox: EduImageBox = (isPossibleEdu) => {
 };
 
 export const containerSubTitle = css`
+  padding-bottom: 1.5rem;
   color: ${COLORS.GRAY40};
   font-weight: 500;
   font-size: 0.875rem;

@@ -8,6 +8,7 @@ import { useJobArr } from "shared-api/job";
 import highTrue from "shared-image/global/common/go_color.svg";
 import collegeTrue from "shared-image/global/common/cho_color.svg";
 
+import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { Layout } from "@component/layout";
 import { Pagination } from "@pages/jd/component/pagination";
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
@@ -31,7 +32,6 @@ import {
 } from "./style";
 
 export const ListPart: FunctionComponent = () => {
-  // TODO: constant로 뺄까?
   const limit = 10;
   const [total, setTotal] = useState<number>(0);
   const [page, setPage] = useState(1);
@@ -88,16 +88,23 @@ export const ListPart: FunctionComponent = () => {
 
   return (
     <section css={partContainer}>
+      <InvisibleH2 title="최신 채용 공고" />
       <Layout>
-        <h2 css={title}>
-          <span css={colorPoint}>Now</span> 채용공고
-        </h2>
+        <p css={title}>
+          <span css={colorPoint}>Now</span> 채용공고 📮
+        </p>
+
         <form onSubmit={handleSubmit(jdSearch)}>
           <Filter register={register} watch={watch} setValue={setValue} getValues={getValues} />
+
           <div css={flexBox}>
             <div css={searchWrapper}>
-              <input {...register("searchWord", {})} css={searchBox} placeholder="검색어를 입력해주세요" />
-              <button type="submit" css={searchButton}>
+              <input
+                {...register("searchWord", {})}
+                css={searchBox}
+                placeholder="검색이후 오른쪽 태그로 공고를 정렬할 수 있어요. 물론 검색전에도요!"
+              />
+              <button type="submit" css={searchButton} aria-label="공고 검색하기">
                 <FiSearch />
               </button>
             </div>
@@ -121,16 +128,18 @@ export const ListPart: FunctionComponent = () => {
             <Pagination total={total} limit={limit} page={page} setPage={setPage} />
           </div>
         </form>
+
         <div css={infoContainer}>
           <FiInfo />
           <div css={infoImage}>
-            <Image src={highTrue} alt="" />
+            <Image src={highTrue} alt="고졸 지원가능" layout="fill" objectFit="contain" />
           </div>
           <div css={infoImage}>
-            <Image src={collegeTrue} alt="" />
+            <Image src={collegeTrue} alt="초대졸 지원가능" layout="fill" objectFit="contain" />
           </div>
-          고는 고졸지원가능 초는 초대졸 지원 가능합니다
+          <p>고는 고졸지원가능 초는 초대졸 지원 가능합니다</p>
         </div>
+
         <JobCardList jobDataArr={jobDataArr?.jobDataArr} isLoading={isLoading} isError={isError} />
         <BottomPagination total={total} limit={limit} page={page} setPage={setPage} />
       </Layout>

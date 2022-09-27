@@ -12,7 +12,7 @@ export const DetailPreferencePart: FunctionComponent<DetailPreferencePartProps> 
       <h4 css={containerTitle}>우대 사항</h4>
 
       <div css={flexBetweenBox}>
-        <h5 css={subTitle}>우대 자격증</h5>
+        <p css={subTitle}>우대 자격증</p>
 
         {freshPosition.preferredCertiArr ? (
           <ul css={preferredCertiContainer}>
@@ -26,7 +26,7 @@ export const DetailPreferencePart: FunctionComponent<DetailPreferencePartProps> 
       </div>
 
       <div css={flexBetweenBox}>
-        <h5 css={subTitle}>기타 우대 사항</h5>
+        <p css={subTitle}>기타 우대 사항</p>
         <p css={desc}>
           {freshPosition.preferredEtcArr ? (
             freshPosition.preferredEtcArr.map((etc) => {

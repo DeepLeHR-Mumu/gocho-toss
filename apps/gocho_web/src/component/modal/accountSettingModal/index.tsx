@@ -53,7 +53,7 @@ export const AccountSettingBox: FunctionComponent = () => {
 export const AccountSettingModal: FunctionComponent = () => {
   const { closeModal } = useModal();
   return (
-    <ModalComponent closeModal={closeModal}>
+    <ModalComponent closeModal={closeModal} button="close">
       <AccountSettingBox />
     </ModalComponent>
   );

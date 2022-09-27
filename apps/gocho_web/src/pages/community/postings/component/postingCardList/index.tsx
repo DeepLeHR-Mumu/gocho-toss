@@ -6,6 +6,7 @@ import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
 import { PostingCardListProps } from "./type";
 import { PostingCard } from "../postingCard";
+import { noSearchDataBox, noSearchDataDesc } from "./style";
 
 export const PostingCardList: FunctionComponent<PostingCardListProps> = ({ keyword, hashTag, activeButtonFilter }) => {
   const {
@@ -55,9 +56,17 @@ export const PostingCardList: FunctionComponent<PostingCardListProps> = ({ keywo
     );
   }
 
+  if (communityPostingArrData.pages[0].length === 0) {
+    return (
+      <div css={noSearchDataBox}>
+        <p css={noSearchDataDesc}>일치하는 검색 결과가 없습니다</p>
+      </div>
+    );
+  }
+
   return (
     <div>
-      {communityPostingArrData?.pages.map((page) => {
+      {communityPostingArrData.pages.map((page) => {
         return page.map((postingData) => {
           return (
             <PostingCard
