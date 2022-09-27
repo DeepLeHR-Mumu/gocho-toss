@@ -7,6 +7,7 @@ import { useCompanyArr } from "shared-api/company";
 import { Layout } from "@component/layout";
 import { searchMenuButtonArr } from "@pages/search/constant";
 
+import { NormalButton } from "shared-ui/common/atom/button";
 import { JobPreviewPart } from "./part/jobPreviewPart";
 import { CompanyPreviewPart } from "./part/companyPreviewPart";
 import { JobListPart } from "./part/jobListPart";
@@ -82,6 +83,15 @@ const UnifiedSearch: NextPage = () => {
           <div>
             <p css={title}>채용 공고 📮</p>
             <JobPreviewPart jobDataArr={jobDataArr?.jobDataArr} count={jobDataArr?.count} isLoading={isJobLoading} />
+            <NormalButton
+              text="채용공고 더보기"
+              variant="filled"
+              buttonClick={() => {
+                scrollToTop();
+                setMenu("공고");
+              }}
+              wide={false}
+            />
             {jobDataArr?.count !== 0 && (
               <button
                 type="button"

@@ -19,11 +19,12 @@ const MyPage: NextPage = () => {
           <h2 css={title}>MY 북마크</h2>
           <div css={buttonArrContainer}>
             {setBookmarkViewButtonArr.map((text) => {
+              const isActive = text === activeButton;
               return (
                 <button
                   type="button"
                   key={text}
-                  css={setBookmarkViewButton(text === activeButton)}
+                  css={setBookmarkViewButton(isActive)}
                   onClick={() => {
                     setActiveButton(text);
                   }}

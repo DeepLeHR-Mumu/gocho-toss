@@ -34,7 +34,6 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, is
     title: jobDetailData?.title as string,
     cut: jobDetailData?.cut as boolean,
     company: {
-      id: jobDetailData?.company.companyId as number,
       name: jobDetailData?.company.name as string,
       logo_url: jobDetailData?.company.logoUrl as string,
     },
@@ -46,7 +45,6 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, is
     title: jobDetailData?.title as string,
     cut: jobDetailData?.cut as boolean,
     company: {
-      id: jobDetailData?.company.companyId as number,
       name: jobDetailData?.company.name as string,
       logo_url: jobDetailData?.company.logoUrl as string,
     },

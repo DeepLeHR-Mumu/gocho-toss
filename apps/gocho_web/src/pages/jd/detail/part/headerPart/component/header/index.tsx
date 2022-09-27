@@ -40,7 +40,6 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
     title: jobDetailData?.title as string,
     cut: jobDetailData?.cut as boolean,
     company: {
-      id: jobDetailData?.company.companyId as number,
       name: jobDetailData?.company.name as string,
       logo_url: jobDetailData?.company.logoUrl as string,
     },
@@ -52,7 +51,6 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
     title: jobDetailData?.title as string,
     cut: jobDetailData?.cut as boolean,
     company: {
-      id: jobDetailData?.company.companyId as number,
       name: jobDetailData?.company.name as string,
       logo_url: jobDetailData?.company.logoUrl as string,
     },

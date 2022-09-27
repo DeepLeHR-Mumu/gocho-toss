@@ -2,6 +2,7 @@ export interface JobCardListProps {
   jobDataArr:
     | {
         id: number;
+        companyId: number;
         companyName: string;
         companyLogo: string;
         startTime: number;

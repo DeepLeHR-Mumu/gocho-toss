@@ -10,8 +10,8 @@ import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
 
 import { Layout } from "@component/layout";
 
-import { AuthedMenu } from "./component/authedMenu";
-import { UnAuthedMenu } from "./component/unAuthedMenu";
+import { AuthorziedMenu } from "./component/authorziedMenu";
+import { UnauthorizedMenu } from "./component/unauthorizedMenu";
 import { SubMenuButton } from "./component/subMenuButton";
 import { menuArr } from "./constant";
 import { openedElementDef } from "./type";
@@ -124,9 +124,9 @@ export const GNB: FunctionComponent = () => {
             })}
           </ul>
           {isSuccess ? (
-            <AuthedMenu setOpenedElement={setOpenedElement} />
+            <AuthorziedMenu setOpenedElement={setOpenedElement} />
           ) : (
-            <UnAuthedMenu setOpenedElement={setOpenedElement} />
+            <UnauthorizedMenu setOpenedElement={setOpenedElement} />
           )}
         </Layout>
       </nav>

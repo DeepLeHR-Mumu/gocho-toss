@@ -3,9 +3,9 @@ import { FunctionComponent } from "react";
 import { useModal } from "@recoil/hook/modal";
 
 import { wrapper, buttonCSS, divider } from "./style";
-import { unAuthedMenuDef } from "./type";
+import { unauthorizedMEnuDef } from "./type";
 
-export const UnAuthedMenu: FunctionComponent<unAuthedMenuDef> = ({ setOpenedElement }) => {
+export const UnauthorizedMenu: FunctionComponent<unauthorizedMEnuDef> = ({ setOpenedElement }) => {
   const { setCurrentModal } = useModal();
 
   const openLoginModal = () => {

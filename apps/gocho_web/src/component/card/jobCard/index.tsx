@@ -61,7 +61,6 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
     title: jobData?.title as string,
     cut: jobData?.cut as boolean,
     company: {
-      id: jobData?.companyId as number,
       name: jobData?.companyName as string,
       logo_url: jobData?.companyLogo as string,
     },
@@ -73,7 +72,6 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
     title: jobData?.title as string,
     cut: jobData?.cut as boolean,
     company: {
-      id: jobData?.companyId as number,
       name: jobData?.companyName as string,
       logo_url: jobData?.companyLogo as string,
     },

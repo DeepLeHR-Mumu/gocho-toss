@@ -12,7 +12,7 @@ interface JobObjDef {
   end_time: number;
   title: string;
   cut: boolean;
-  company: { id: number; name: string; logo_url: string };
+  company: { name: string; logo_url: string };
 }
 
 const addJobBookmark: AddJobBookmarkDef = async (requestObj) => {
