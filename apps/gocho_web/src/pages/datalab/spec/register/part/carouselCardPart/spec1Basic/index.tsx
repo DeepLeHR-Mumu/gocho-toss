@@ -3,15 +3,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import { useUserInfo } from "shared-api/auth";
 
-import {
-  SpecCardTitle,
-  MoveCardButtons,
-  SelectRadioForm,
-  Desc,
-  WarningText,
-  CheckBox,
-  ContainerBox,
-} from "../common/component";
+import { CheckBox } from "shared-ui/common/atom/checkbox";
+import { SpecCardTitle, MoveCardButtons, SelectRadioForm, Desc, WarningText, ContainerBox } from "../common/component";
 import { MultiSelectRadioForm } from "./component/multiSelectRadioForm";
 
 import { genderArr, militaryArr, desiredTaskArr, desiredIndustryArr } from "./constant";

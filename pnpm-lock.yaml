@@ -93,6 +93,8 @@ importers:
       next-transpile-modules: ^9.0.0
       react: 17.0.2
       react-dom: 17.0.2
+      react-hook-form: ^7.34.2
+      react-icons: ^4.4.0
       react-slick: ^0.29.0
       recoil: ^0.7.5
       shared-api: workspace:^0.0.0
@@ -115,6 +117,8 @@ importers:
       next-transpile-modules: 9.0.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
+      react-hook-form: 7.35.0_react@17.0.2
+      react-icons: 4.4.0_react@17.0.2
       react-slick: 0.29.0_sfoxds7t5ydpegc3knd667wn6m
       recoil: 0.7.5_sfoxds7t5ydpegc3knd667wn6m
       shared-api: link:../../shared/api
@@ -359,6 +363,7 @@ importers:
   shared/ui:
     specifiers:
       '@emotion/react': ^11.10.0
+      '@tanstack/react-query': ^4.2.3
       '@types/react': 18.0.17
       '@types/react-dom': 18.0.6
       eslint-config-deeple: workspace:^1.0.0
@@ -372,11 +377,13 @@ importers:
       shared-image: workspace:^0.0.0
       shared-style: workspace:^0.0.0
       shared-type: workspace:^0.0.0
+      shared-ui: workspace:^0.0.0
       shared-util: workspace:^0.0.0
       tsconfig-deeple: workspace:^0.0.0
       typescript: 4.7.2
     dependencies:
       '@emotion/react': 11.10.4_k33vb7fucsny7mu5lic4ab3hri
+      '@tanstack/react-query': 4.3.4_sfoxds7t5ydpegc3knd667wn6m
       next: 12.2.5_sfoxds7t5ydpegc3knd667wn6m
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -387,6 +394,7 @@ importers:
       shared-image: link:../image
       shared-style: link:../style
       shared-type: link:../type
+      shared-ui: 'link:'
       shared-util: link:../util
     devDependencies:
       '@types/react': 18.0.17

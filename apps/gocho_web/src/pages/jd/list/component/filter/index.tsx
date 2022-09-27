@@ -4,8 +4,8 @@ import { BsFolderSymlink } from "react-icons/bs";
 
 import { useUserFilter, useDoUserFilter } from "shared-api/filter";
 import { useUserInfo } from "shared-api/auth";
+import { CheckBox } from "shared-ui/common/atom/checkbox";
 
-import { CheckBox } from "../checkbox";
 import { filterMenuListArr } from "./constant";
 import { FilterProps, filterMenuDef, watchListDef } from "./type";
 import {

@@ -33,17 +33,27 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
   const queryClient = useQueryClient();
 
   const [imageSrc, setImageSrc] = useState(jobDetailData.company.logoUrl as string);
+
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobDetailData?.id as number,
-    title: jobDetailData?.title as string,
     end_time: jobDetailData?.endTime as number,
-    company: { id: jobDetailData?.company.companyId as number, name: jobDetailData?.company.name as string },
+    title: jobDetailData?.title as string,
+    cut: jobDetailData?.cut as boolean,
+    company: {
+      name: jobDetailData?.company.name as string,
+      logo_url: jobDetailData?.company.logoUrl as string,
+    },
   });
+
   const { mutate: deleteMutate } = useDeleteJobBookmarkArr({
     id: jobDetailData?.id as number,
-    title: jobDetailData?.title as string,
     end_time: jobDetailData?.endTime as number,
-    company: { id: jobDetailData?.company.companyId as number, name: jobDetailData?.company.name as string },
+    title: jobDetailData?.title as string,
+    cut: jobDetailData?.cut as boolean,
+    company: {
+      name: jobDetailData?.company.name as string,
+      logo_url: jobDetailData?.company.logoUrl as string,
+    },
   });
 
   const addJobBookmark = () => {

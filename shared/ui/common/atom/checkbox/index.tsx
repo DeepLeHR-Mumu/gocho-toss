@@ -1,15 +1,9 @@
 import { FunctionComponent } from "react";
+import { FiCheck } from "react-icons/fi";
 
 import { CheckBoxProps } from "./type";
-import { labelCSS, inputCSS } from "./style";
+import { checkCSS } from "./style";
 
-export const CheckBox: FunctionComponent<CheckBoxProps> = ({ type, registerObj, value, text, checked }) => {
-  return (
-    <>
-      <input css={inputCSS} type={type} value={value} id={value} checked={checked} {...registerObj} />
-      <label css={labelCSS} htmlFor={value}>
-        <p>{text}</p>
-      </label>
-    </>
-  );
+export const CheckBox: FunctionComponent<CheckBoxProps> = ({ isChecked }) => {
+  return <div css={checkCSS}>{isChecked && <FiCheck />}</div>;
 };

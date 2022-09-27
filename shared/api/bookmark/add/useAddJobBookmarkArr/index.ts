@@ -9,9 +9,10 @@ import { ResponseObjDef, AddJobBookmarkDef, RequestObjDef } from "./type";
 
 interface JobObjDef {
   id: number;
-  title: string;
   end_time: number;
-  company: { id: number; name: string };
+  title: string;
+  cut: boolean;
+  company: { name: string; logo_url: string };
 }
 
 const addJobBookmark: AddJobBookmarkDef = async (requestObj) => {

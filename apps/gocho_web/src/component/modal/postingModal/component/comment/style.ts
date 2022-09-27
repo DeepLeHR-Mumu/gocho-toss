@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
-import { shorten } from "shared-style/common";
+import { shorten } from "shared-style/shorten";
 
 export const wrapper = css`
   margin-bottom: 1rem;
