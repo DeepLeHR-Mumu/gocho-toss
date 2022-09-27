@@ -1,14 +1,14 @@
-import { FunctionComponent, useRef, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import Image from "next/image";
 import { AiOutlineEye, AiOutlineLike } from "react-icons/ai";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 import gochoLogoMono from "shared-image/global/deepLeLogo/smallMono.svg";
-
 import { useAddTipBookmarkArr, useDeleteTipBookmarkArr, useUserTipBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
 import { dateConverter } from "shared-util/date/dateConverter";
+import { useAddTipViewCount } from "shared-api/viewCount";
 
 import { ModalComponent } from "@component/modal/modalBackground";
 import { useModal } from "@recoil/hook/modal";
@@ -41,6 +41,7 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
   const { closeModal, currentModal } = useModal();
   const { data: userData } = useUserInfo();
 
+  const { mutate: addViewCount } = useAddTipViewCount();
   const { mutate: addBookmarkMutate } = useAddTipBookmarkArr({ id: tipData.id });
   const { mutate: deleteBookmarkMutate } = useDeleteTipBookmarkArr({ id: tipData.id });
   const { data: tipBookmarkArr } = useUserTipBookmarkArr({ userId: userData?.id });
@@ -55,6 +56,25 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
     if (isBookmarked) return deleteBookmarkMutate({ userId: userData?.id as number, elemId: tipData.id });
     return addBookmarkMutate({ userId: userData?.id as number, elemId: tipData.id });
   };
+
+  useEffect(() => {
+    const tipViewStr = sessionStorage.getItem("tipViewArr");
+
+    const isViewed = tipViewStr?.includes(String(tipData.id));
+    if (isViewed) return;
+
+    if (tipViewStr) {
+      const tipViewArr: number[] = JSON.parse(tipViewStr);
+      tipViewArr.push(tipData.id);
+      sessionStorage.setItem("tipViewArr", JSON.stringify(tipViewArr));
+      addViewCount({ elemId: tipData.id });
+      return;
+    }
+    if (!isViewed) {
+      sessionStorage.setItem("tipViewArr", JSON.stringify([tipData.id]));
+      addViewCount({ elemId: tipData.id });
+    }
+  }, [tipData, addViewCount]);
 
   if (currentModal?.modalContentObj === undefined) {
     return <div>error!!</div>;
