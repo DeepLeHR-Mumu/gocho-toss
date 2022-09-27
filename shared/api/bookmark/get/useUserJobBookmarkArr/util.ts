@@ -5,8 +5,10 @@ export const selector = ({ data }: jobBookmarkResObjDef) => {
     return {
       id: job.id,
       title: job.title,
+      cut: job.cut,
       endTime: job.end_time,
-      company: job.company,
+      companyName: job.company.name,
+      companyLogo: job.company.logo_url,
     };
   });
 };

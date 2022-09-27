@@ -1,5 +1,5 @@
 import { css, SerializedStyles } from "@emotion/react";
-import { shorten } from "shared-style/common";
+import { shorten } from "shared-style/shorten";
 import { COLORS } from "shared-style/color";
 
 export const cardWrapper = css`

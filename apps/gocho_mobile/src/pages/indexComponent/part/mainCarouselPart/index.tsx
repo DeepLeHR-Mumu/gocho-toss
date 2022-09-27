@@ -1,22 +1,35 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useRef, useState } from "react";
 import Slider from "react-slick";
 
 import { SlideCard } from "./component/sliderCard";
+import { Control } from "./component/control";
 import { slideArr } from "./constant";
 import { wrapper } from "./style";
 
 import { setCarouselSetting } from "./util";
 
 export const MainCarouselPart: FunctionComponent = () => {
-  const [, setActiveIndex] = useState<number>(1);
-  // const sliderRef = useRef<Slider>(null);
+  const [activeIndex, setActiveIndex] = useState<number>(1);
+  const sliderRef = useRef<Slider>(null);
+
   return (
     <section css={wrapper}>
-      <Slider {...setCarouselSetting(setActiveIndex)}>
+      <Slider {...setCarouselSetting(setActiveIndex)} ref={sliderRef}>
         {slideArr.map((slide) => {
-          return <SlideCard carouselData={slide} key={`$deosn't${slide}`} />;
+          return <SlideCard carouselData={slide} key={`mainCarouselSlide${slide.title}`} />;
         })}
       </Slider>
+
+      <Control
+        allIndex={slideArr.length}
+        currentIndex={activeIndex}
+        onSlickPrev={() => {
+          return sliderRef.current?.slickPrev();
+        }}
+        onSlickNext={() => {
+          return sliderRef.current?.slickNext();
+        }}
+      />
     </section>
   );
 };

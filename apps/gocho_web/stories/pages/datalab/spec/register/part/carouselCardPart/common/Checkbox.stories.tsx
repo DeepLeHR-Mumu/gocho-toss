@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { CheckBox } from "@pages/datalab/spec/register/part/carouselCardPart/common/component";
+import { CheckBox } from "shared-ui/common/atom/checkbox";
 
 export default {
   title: "datalab/spec/register/part/carouselCardPart/common/component/CheckBox",

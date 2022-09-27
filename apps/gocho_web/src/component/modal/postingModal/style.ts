@@ -1,7 +1,7 @@
 import { css, SerializedStyles } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
-import { shorten } from "shared-style/common";
+import { shorten } from "shared-style/shorten";
 import { PC_HOVER } from "shared-style/mediaQuery";
 
 export const modalWrapper = css`

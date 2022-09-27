@@ -6,8 +6,6 @@ import { ColorStateDef } from "./type";
 
 export const container = css`
   position: relative;
-  width: fit-content;
-  height: fit-content;
 `;
 
 interface inputCSSDef {
@@ -17,19 +15,23 @@ export const inputCSS: inputCSSDef = (colorState) => {
   let colorStatus = css`
     border: 1px solid ${COLORS.GRAY60};
   `;
+
   if (colorState === "error")
     colorStatus = css`
       border: 1px solid ${COLORS.ERROR_RED30};
     `;
+
   if (colorState === "focus" || colorState === "success")
     colorStatus = css`
       border: 1px solid ${COLORS.BLUE_FIRST40};
     `;
+
   return css`
     ${colorStatus}
-    width:18rem;
-    padding: 1rem 2.6rem 1rem 1.75rem;
-    border-radius: 1.5rem;
+    width: 100%;
+    height: 3.25rem;
+    padding: 0 2.6rem 0 1.75rem;
+    border-radius: 2rem;
     color: ${COLORS.GRAY60};
     font-size: 1rem;
   `;

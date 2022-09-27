@@ -57,15 +57,24 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
 
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobData?.id as number,
-    title: jobData?.title as string,
     end_time: jobData?.endTime as number,
-    company: { id: jobData?.companyId as number, name: jobData?.companyName as string },
+    title: jobData?.title as string,
+    cut: jobData?.cut as boolean,
+    company: {
+      name: jobData?.companyName as string,
+      logo_url: jobData?.companyLogo as string,
+    },
   });
+
   const { mutate: deleteMutate } = useDeleteJobBookmarkArr({
     id: jobData?.id as number,
-    title: jobData?.title as string,
     end_time: jobData?.endTime as number,
-    company: { id: jobData?.companyId as number, name: jobData?.companyName as string },
+    title: jobData?.title as string,
+    cut: jobData?.cut as boolean,
+    company: {
+      name: jobData?.companyName as string,
+      logo_url: jobData?.companyLogo as string,
+    },
   });
 
   if (isSkeleton || jobData === undefined) {
