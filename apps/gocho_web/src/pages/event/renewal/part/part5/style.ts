@@ -9,6 +9,9 @@ export const wrapper = css`
 `;
 
 export const title = css`
+  text-align: center;
+  line-height: 1.6;
+  word-break: keep-all;
   font-size: 2.5rem;
   font-weight: 700;
   color: ${COLORS.GRAY10};

@@ -7,6 +7,9 @@ export const wrapper = css`
 `;
 
 export const title = css`
+  text-align: center;
+  line-height: 1.6;
+  word-break: keep-all;
   font-size: 2.5rem;
   color: ${COLORS.GRAY10};
   font-weight: 700;
@@ -15,6 +18,7 @@ export const title = css`
 `;
 
 export const desc = css`
+  line-height: 1.6;
   font-size: 1rem;
   font-weight: 400;
   color: ${COLORS.GRAY10};

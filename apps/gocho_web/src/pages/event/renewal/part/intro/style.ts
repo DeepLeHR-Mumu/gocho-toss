@@ -35,6 +35,7 @@ export const topLayoutCSS = css`
 export const infoBox = css`
   width: 37vw;
   height: 22vh;
+  min-width: 20rem;
   max-width: 27.5rem;
   position: absolute;
   left: 50%;
@@ -54,6 +55,9 @@ export const logoBox = css`
 `;
 
 export const titleCSS = css`
+  text-align: center;
+  line-height: 1.6;
+  word-break: keep-all;
   font-size: 1.25rem;
   font-weight: 700;
   padding: 1.5rem 0 1.875rem;
