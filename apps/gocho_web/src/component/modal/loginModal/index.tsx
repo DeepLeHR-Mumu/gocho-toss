@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -17,6 +17,15 @@ import { useModal } from "@recoil/hook/modal";
 
 import { wrapper, desc, formCSS, formArr, errorMsgCSS, closeBtn, errorBox, loginButton, logoContainer } from "./style";
 import { ButtonProps, LoginFormValues } from "./type";
+
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Kakao: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    naver: any;
+  }
+}
 
 export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   const {
@@ -41,6 +50,11 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
     });
   };
 
+  useEffect(() => {
+    window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
+    window.Kakao.isInitialized();
+    // try{  window?.Kakao?.init("0687bed33c060c4758f582d26ff44e16");}catch(e){console.log(e)}
+  }, []);
   return (
     <div css={wrapper}>
       <div css={closeBtn}>
