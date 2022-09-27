@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
+import { openedElementDef } from "@component/global/gnb/type";
 
 export const headerWrapper = css`
   display: flex;
@@ -12,9 +13,9 @@ export const headerWrapper = css`
   z-index: 100;
 `;
 
-export const headerContainer = (isOn = false) => {
+export const headerContainer = (openedElement: openedElementDef) => {
   return css`
-    display: ${isOn ? "none" : "flex"};
+    display: ${openedElement === "통합검색" ? "none" : "flex"};
     align-items: center;
   `;
 };
@@ -36,9 +37,9 @@ export const icon = css`
   }
 `;
 
-export const unifiedSearchWrapper = (isOn = false) => {
+export const unifiedSearchWrapper = (openedElement: openedElementDef) => {
   return css`
-    display: ${isOn ? "flex" : "none"};
+    display: ${openedElement === "통합검색" ? "flex" : "none"};
     width: 100%;
   `;
 };

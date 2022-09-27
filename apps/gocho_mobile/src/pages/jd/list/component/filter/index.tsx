@@ -203,7 +203,7 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
           }) && (
           <span css={categoryBox(null)} key="activeMenuCategoryBasic">
             전체 공고
-            <button type="button" css={deleteCategory}>
+            <button type="button" css={deleteCategory} aria-label="">
               <FiX />
             </button>
           </span>

@@ -60,7 +60,7 @@ export const GNB: FunctionComponent = () => {
   return (
     <header css={headerWrapper}>
       <Layout>
-        <div css={headerContainer(openedElement === "통합검색")}>
+        <div css={headerContainer(openedElement)}>
           <div css={logo}>
             <Link href={MAIN_URL} passHref>
               <Image src={colorLogoSrc} alt="고초대졸닷컴" objectFit="contain" />
@@ -72,6 +72,7 @@ export const GNB: FunctionComponent = () => {
             onClick={() => {
               setOpenedElement("통합검색");
             }}
+            aria-label="통합검색 열기"
           >
             <FiSearch />
           </button>
@@ -88,7 +89,7 @@ export const GNB: FunctionComponent = () => {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} css={unifiedSearchWrapper(openedElement === "통합검색")}>
+        <form onSubmit={handleSubmit} css={unifiedSearchWrapper(openedElement)}>
           <button
             css={backIcon}
             type="button"

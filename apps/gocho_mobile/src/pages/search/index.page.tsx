@@ -13,7 +13,7 @@ import { CompanyPreviewPart } from "./part/companyPreviewPart";
 import { JobListPart } from "./part/jobListPart";
 import { CompanyListPart } from "./part/companyListPart";
 
-import { mainContainer, menuList, menuElement, menuButton, title, moreButton } from "./style";
+import { mainContainer, menuList, menuElement, menuButton, title, buttonBox } from "./style";
 import { searchMenuDef } from "./type";
 
 const UnifiedSearch: NextPage = () => {
@@ -40,7 +40,7 @@ const UnifiedSearch: NextPage = () => {
   });
 
   const { data: companyDataArr, isLoading: isCompanyLoading } = useCompanyArr({
-    q: `name=${searchWord}`,
+    q: searchWord,
     order: "recent",
     limit: companyLimit,
     offset: (companyPage - 1) * companyLimit,
@@ -83,27 +83,18 @@ const UnifiedSearch: NextPage = () => {
           <div>
             <p css={title}>채용 공고 📮</p>
             <JobPreviewPart jobDataArr={jobDataArr?.jobDataArr} count={jobDataArr?.count} isLoading={isJobLoading} />
-            <NormalButton
-              text="채용공고 더보기"
-              variant="filled"
-              buttonClick={() => {
-                scrollToTop();
-                setMenu("공고");
-              }}
-              wide={false}
-            />
             {jobDataArr?.count !== 0 && (
-              <button
-                type="button"
-                css={moreButton}
-                onClick={() => {
-                  scrollToTop();
-                  setMenu("공고");
-                }}
-              >
-                {/* TODO: 공통버튼으로 변경 */}
-                채용공고 더보기 {">"}
-              </button>
+              <div css={buttonBox}>
+                <NormalButton
+                  text="채용공고 더보기 >"
+                  variant="outlined"
+                  buttonClick={() => {
+                    scrollToTop();
+                    setMenu("공고");
+                  }}
+                  wide={false}
+                />
+              </div>
             )}
 
             <p css={title}>기업 정보 🏢</p>
@@ -113,17 +104,17 @@ const UnifiedSearch: NextPage = () => {
               isLoading={isCompanyLoading}
             />
             {companyDataArr?.count !== 0 && (
-              <button
-                type="button"
-                css={moreButton}
-                onClick={() => {
-                  scrollToTop();
-                  setMenu("기업");
-                }}
-              >
-                {/* TODO: 공통버튼으로 변경 */}
-                기업정보 더보기 {">"}
-              </button>
+              <div css={buttonBox}>
+                <NormalButton
+                  text="기업정보 더보기 >"
+                  variant="outlined"
+                  buttonClick={() => {
+                    scrollToTop();
+                    setMenu("기업");
+                  }}
+                  wide={false}
+                />
+              </div>
             )}
           </div>
         )}

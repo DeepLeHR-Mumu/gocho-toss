@@ -106,6 +106,7 @@ export const taskArr: filterMenuListDef = {
     "전자제품",
     "기타",
   ],
+  // TODO: filterMenuListDef를 없애고, 전부 as const로 변경
 };
 
 export const positionArr: filterMenuListDef = {
