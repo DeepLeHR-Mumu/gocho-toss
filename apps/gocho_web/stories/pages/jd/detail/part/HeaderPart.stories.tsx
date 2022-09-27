@@ -59,6 +59,7 @@ export const 기본 = Template.bind({});
     endTime: 1631199599000,
     applyUrl: "https://naver.com",
     title: "[설비 전담정비] 사원 0명 채용",
+    cut: false,
     bookmarkCount: 20,
     viewCount: 322,
     company: {

@@ -8,6 +8,10 @@ import axios from "axios";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Global } from "@emotion/react";
 
+import { GNB } from "@component/global/gnb";
+import { Footer } from "@component/global/footer";
+import { ModalPlaceholder } from "@component/common/organisms/modal/modalPlaceHolder";
+
 import { globalStyles } from "@style/globalStyles";
 
 import "slick-carousel/slick/slick.css";
@@ -44,7 +48,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <Global styles={globalStyles} />
+          <ModalPlaceholder />
+          <GNB />
           <Component {...pageProps} />
+          <Footer />
           <ReactQueryDevtools initialIsOpen={false} />
         </Hydrate>
       </QueryClientProvider>

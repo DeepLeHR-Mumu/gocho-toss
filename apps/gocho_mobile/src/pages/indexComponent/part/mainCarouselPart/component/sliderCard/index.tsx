@@ -1,5 +1,9 @@
 import { FunctionComponent } from "react";
-import { topMsg, wrapper } from "./style";
+import Image from "next/image";
+
+import checkIconImage from "shared-image/global/common/mainBanner_check.png";
+
+import { wrapper, logo, title, desc, iconBox } from "./style";
 
 interface SlideCardProps {
   carouselData: { title: string; desc: string; bgColor: string };
@@ -7,10 +11,14 @@ interface SlideCardProps {
 export const SlideCard: FunctionComponent<SlideCardProps> = ({ carouselData }) => {
   return (
     <div css={wrapper(carouselData.bgColor)}>
-      <p css={topMsg}>open</p>
-      <p>고초대졸닷컴</p>
-      <p>{carouselData.title}</p>
-      <p>{carouselData.desc}</p>
+      <div css={logo}>
+        <p>고초대졸닷컴</p>
+        <div css={iconBox}>
+          <Image src={checkIconImage} alt="" objectFit="contain" layout="fill" />
+        </div>
+      </div>
+      <p css={title}>{carouselData.title}</p>
+      <p css={desc}>{carouselData.desc}</p>
     </div>
   );
 };

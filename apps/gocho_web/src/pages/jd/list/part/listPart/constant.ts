@@ -1,23 +1,23 @@
-import { OrderDef, TextDef } from "./type";
+import { OrderDef } from "./type";
 
 export const setJobOrderButtonArr: {
-  text: TextDef;
+  text: string;
   order: OrderDef;
 }[] = [
   {
-    text: "실시간",
+    text: "📬 최신",
     order: "recent",
   },
   {
-    text: "마감임박",
+    text: "⏲ 마감임박",
     order: "end",
   },
   {
-    text: "조회수",
+    text: "👀 조회수",
     order: "view",
   },
   {
-    text: "인기",
+    text: "🔖 북마크",
     order: "popular",
   },
 ];

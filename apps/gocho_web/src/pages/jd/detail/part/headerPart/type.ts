@@ -8,6 +8,7 @@ export interface HeaderPartProps {
     endTime: number;
     applyUrl: string;
     title: string;
+    cut: boolean;
     bookmarkCount: number;
     viewCount: number;
     company: {

@@ -1,7 +1,10 @@
 export interface JobCardProps {
   jobData: {
-    company: { id: number; name: string };
-    title: string;
+    id: number;
     endTime: number;
+    title: string;
+    cut: boolean;
+    companyName: string;
+    companyLogo: string;
   };
 }

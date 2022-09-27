@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { H2Heading } from "@component/atom/h2Heading";
+import { H2Heading } from "@component/common/atom/h2Heading";
 
 export default {
   title: "component/atom/H2Heading",
