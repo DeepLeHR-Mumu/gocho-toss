@@ -7,6 +7,7 @@ export const partContainer = css`
 `;
 
 export const title = css`
+  display: block;
   font-size: 1.75rem;
   font-weight: 700;
 `;

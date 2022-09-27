@@ -33,10 +33,10 @@ const MainList: NextPage = () => {
     <main>
       <CarouselPart />
       <Layout>
-        <h1 css={title}>
+        <strong css={title}>
           <span css={colorPoint}>All </span>
           스펙 List 📃✨
-        </h1>
+        </strong>
         <div css={flexBox}>
           <AsideMenu />
           <ListPart />

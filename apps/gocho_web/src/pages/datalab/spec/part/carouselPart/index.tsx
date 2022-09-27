@@ -16,10 +16,10 @@ export const CarouselPart: FunctionComponent = () => {
   return (
     <section css={partContainer}>
       <Layout>
-        <h2 css={title}>
+        <strong css={title}>
           <span css={colorPoint}>New </span>
-          {userInfoData.nickname} 님의 스펙 평가를 기다리고 있어요.
-        </h2>
+          {userInfoData.nickname} 님의 스펙 평가를 기다리고 있어요 👀
+        </strong>
         <RecommendCardList />
       </Layout>
     </section>
