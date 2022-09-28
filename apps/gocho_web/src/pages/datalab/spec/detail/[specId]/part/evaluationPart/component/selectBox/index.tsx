@@ -1,9 +1,10 @@
 import { FunctionComponent } from "react";
 import { FiChevronUp } from "react-icons/fi";
 
+import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { STRONGPOINT_CHIP, WEAKNESSPOINT_CHIP } from "../../constant";
 import { SelectBoxProps } from "./type";
-import { closeButton, container, wrapper } from "./style";
+import { closeButton, container, labelBox, labelDesc, wrapper } from "./style";
 
 export const SelectBox: FunctionComponent<SelectBoxProps> = ({
   register,
@@ -15,7 +16,7 @@ export const SelectBox: FunctionComponent<SelectBoxProps> = ({
   const chipArr = valueName === "strength" ? STRONGPOINT_CHIP : WEAKNESSPOINT_CHIP;
   return (
     <div css={wrapper}>
-      <button type="button" onClick={closeFunction} css={closeButton}>
+      <button type="button" onClick={closeFunction} css={closeButton} aria-label="선택창 닫기">
         <FiChevronUp />
       </button>
       {/* TODO arrelement */}
@@ -26,6 +27,7 @@ export const SelectBox: FunctionComponent<SelectBoxProps> = ({
               type="checkbox"
               value={arrElement}
               {...register(valueName)}
+              id={`key_${arrElement}`}
               checked={watchArr.some((element) => {
                 return arrElement === element;
               })}
@@ -57,7 +59,15 @@ export const SelectBox: FunctionComponent<SelectBoxProps> = ({
                 setValue(valueName, [arrElement], { shouldDirty: true });
               }}
             />
-            <p>{arrElement}</p>
+
+            <label htmlFor={`key_${arrElement}`} css={labelBox}>
+              <CheckBox
+                isChecked={watchArr.some((element) => {
+                  return arrElement === element;
+                })}
+              />
+              <p css={labelDesc}>{arrElement}</p>
+            </label>
           </div>
         );
       })}

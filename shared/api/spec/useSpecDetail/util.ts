@@ -3,7 +3,11 @@ import { SpecDetailObjDef } from "../type/specDetail";
 export const selector = (data: SpecDetailObjDef) => {
   return {
     profileImg: data.image,
-    nickname: data.nickname,
+    user: {
+      nickname: data.user.nickname,
+      badge: data.user.badge,
+      image: data.user.image,
+    },
     gender: data.gender,
     age: data.age,
     military: data.military,

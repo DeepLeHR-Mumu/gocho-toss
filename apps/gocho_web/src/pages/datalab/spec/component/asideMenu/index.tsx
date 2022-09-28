@@ -23,8 +23,8 @@ export const AsideMenu: FunctionComponent<AsideMenuProps> = ({ isFix = true }) =
   return (
     <aside css={wrapper(isFix)}>
       <div css={asideProfile}>
-        <ProfileImg imageStr={userInfoData.image} size="S" />
-        <p css={loginNickname}>{userInfoData?.nickname}</p>
+        <ProfileImg imageStr={userInfoData.image} size="M" />
+        <p css={loginNickname}>{userInfoData.nickname}</p>
       </div>
       <Link href={SPEC_REGISTER_URL} passHref>
         <a css={asideLink}>

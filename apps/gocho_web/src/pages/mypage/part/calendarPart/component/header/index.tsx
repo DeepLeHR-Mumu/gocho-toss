@@ -39,16 +39,18 @@ export const Header: FunctionComponent<HeaderProps> = ({ setCurrentDate, current
         onClick={() => {
           return changeWeek("prev");
         }}
+        aria-label="2주 전 보기"
       >
         <BsChevronLeft />
       </button>
-      <h3 css={titleCSS}>{title}</h3>
+      <p css={titleCSS}>{title}</p>
       <button
         type="button"
         css={button}
         onClick={() => {
           return changeWeek("next");
         }}
+        aria-label="2주 후 보기"
       >
         <BsChevronRight />
       </button>

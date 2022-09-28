@@ -1,6 +1,7 @@
 import { css, SerializedStyles } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
+import { shorten } from "shared-style/common";
 
 export const partContainer = css`
   background-color: ${COLORS.GRAY100};
@@ -48,7 +49,10 @@ export const loginNickname = css`
   color: ${COLORS.GRAY10};
   word-break: keep-all;
   font-size: 0.75rem;
+  line-height: 1.6;
   font-weight: 500;
+  width: 100%;
+  ${shorten()}
 `;
 
 export const asideLink = css`

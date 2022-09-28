@@ -2,6 +2,7 @@ import { FunctionComponent, useState } from "react";
 
 import { BookmarkJobArr } from "@pages/mypage/component/bookmarkJobArr";
 import { BookmarkCompanyArr } from "@pages/mypage/component/bookmarkCompanyArr";
+import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
 import { setBookmarkViewButtonArr } from "./constant";
 import { changeOrderDef } from "./type";
@@ -16,8 +17,9 @@ export const BookmarkPart: FunctionComponent = () => {
 
   return (
     <section css={partContainer}>
+      <InvisibleH2 title="북마크한 공고/기업 목록" />
       <div css={headerContainer}>
-        <h2 css={title}>MY 북마크</h2>
+        <strong css={title}>MY 북마크</strong>
         <div css={buttonArrContainer}>
           {setBookmarkViewButtonArr.map((button) => {
             return (

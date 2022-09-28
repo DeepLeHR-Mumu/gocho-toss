@@ -4,7 +4,7 @@ import { useUserInfo } from "shared-api/auth";
 import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { CompanyCard } from "shared-ui/common/companyCard";
 
-import { cardListContainer, skeletonContainer, descCSS } from "./style";
+import { cardListContainer, descCSS } from "./style";
 
 export const BookmarkCompanyArr: FunctionComponent = () => {
   const { data: userData } = useUserInfo();
@@ -12,8 +12,8 @@ export const BookmarkCompanyArr: FunctionComponent = () => {
 
   if (!userData || !userCompanyBookmarkArr || isLoading) {
     return (
-      <div css={skeletonContainer}>
-        return <CompanyCard isSkeleton />;
+      <div css={cardListContainer}>
+        <p css={descCSS}>기업 북마크를 이용하시면 기업공고가 더 정교해져요 😳</p>
       </div>
     );
   }

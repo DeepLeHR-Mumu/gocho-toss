@@ -48,9 +48,9 @@ export const SpecCard: FunctionComponent<SpecCardProps | SpecCardSkeleton> = ({ 
   return (
     <article css={cardWrapper}>
       <div css={userInfoContainer}>
-        <ProfileImg imageStr="default" size="S" />
+        <ProfileImg imageStr={specData.user.image} size="S" />
         <div css={userInfoBox}>
-          <p css={nicknameCSS}>{specData.nickname}</p>
+          <p css={nicknameCSS}>{specData.user.nickname}</p>
           <p css={genderCSS}>
             {specData.gender} {specData.age}살
           </p>
@@ -65,7 +65,9 @@ export const SpecCard: FunctionComponent<SpecCardProps | SpecCardSkeleton> = ({ 
             <span css={gradeCSS}>
               {grade}
               <span css={maxGradeCSS}>
-                {specData.lastEducation === "초대졸" && specData.college !== null && `/${specData.college?.maxGrade}`}
+                {specData.lastEducation === "초대졸" &&
+                  specData.college !== null &&
+                  `/${specData.college?.maxGrade.toFixed(1)}`}
               </span>
             </span>
           </p>
@@ -89,15 +91,21 @@ export const SpecCard: FunctionComponent<SpecCardProps | SpecCardSkeleton> = ({ 
             <>
               <div css={certiLabel}>
                 기능사
-                <span css={certiNumber}>{specData.certificate?.level1}</span>
+                {specData.certificate?.level1 !== undefined && specData.certificate?.level1 !== 0 && (
+                  <span css={certiNumber}>{specData.certificate.level1}</span>
+                )}
               </div>
               <div css={certiLabel}>
                 산업기사
-                <span css={certiNumber}>{specData.certificate?.level2}</span>
+                {specData.certificate?.level2 !== undefined && specData.certificate?.level2 !== 0 && (
+                  <span css={certiNumber}>{specData.certificate.level2}</span>
+                )}
               </div>
               <div css={certiLabel}>
                 기사+
-                <span css={certiNumber}>{specData.certificate?.level3}</span>
+                {specData.certificate?.level3 !== undefined && specData.certificate?.level3 !== 0 && (
+                  <span css={certiNumber}>{specData.certificate.level3}</span>
+                )}
               </div>
             </>
           ) : (

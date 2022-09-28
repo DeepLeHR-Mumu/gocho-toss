@@ -4,10 +4,15 @@ import { IndustryType, LanguageType, TaskType } from "./common";
 export interface SpecObjDef {
   id: number;
   image: ImageType;
-  nickname: string;
   gender: "남" | "여";
   age: number;
+  isMine: boolean;
   military: "군필" | "미필" | "면제-해당없음";
+  user: {
+    nickname: string;
+    image: "default" | "default_work" | "jobi" | "jobi_safety" | "jobi_chat" | "jobi_play" | "jobi_teach";
+    badge: "default" | "early_bird" | "admin";
+  };
   desired_task: TaskType | null;
   desired_industry: IndustryType | null;
   last_education: "고졸" | "초대졸";

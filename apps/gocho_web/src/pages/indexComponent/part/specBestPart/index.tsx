@@ -14,12 +14,12 @@ import { specBestWrapper, colorPoint, title, linkButton, bestUserWrapper } from 
 export const SpecBestPart: FunctionComponent = () => {
   const [activeUserID, setActiveUserID] = useState(0);
 
-  const { data: selectedSpecArr } = useSpecArr({
+  const { data: selectedSpecArr, isLoading } = useSpecArr({
     order: "-score",
     limit: 9,
   });
 
-  if (!selectedSpecArr) {
+  if (!selectedSpecArr || isLoading) {
     return (
       <section css={specBestWrapper}>
         <InvisibleH2 title="생산/기능직 구직자 스펙 평가 리스트" />

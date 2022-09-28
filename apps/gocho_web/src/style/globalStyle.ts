@@ -94,7 +94,8 @@ export const globalStyles = css`
   }
   html {
     font-family: "Noto Sans KR", Verdana, sans-serif;
-    min-width: 768px;
+    /* min-width: 768px; */
+    min-width: 360px;
     font-size: 16px;
     ${DESKTOP} {
       font-size: 14px;
@@ -142,6 +143,16 @@ export const globalStyles = css`
   a {
     text-decoration: none;
     color: inherit;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  strong {
+    word-break: keep-all;
   }
   input,
   select,
