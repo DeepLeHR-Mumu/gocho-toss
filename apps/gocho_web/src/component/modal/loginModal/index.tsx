@@ -22,8 +22,6 @@ declare global {
   interface Window {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     Kakao: any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    naver: any;
   }
 }
 
@@ -50,13 +48,30 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
     });
   };
 
+  const kakaoLogin = () => {
+    window.Kakao.Auth.authorize({
+      redirectUri: "http://localhost:3000/kakaologin",
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // console.log("I'm successed");
+      // axiosInstance.post("/auth/kakao-login", { code: authObj.access_token });
+    });
+    // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // fail(err: any) {
+    //   console.log(err);
+    // },
+  };
+
   useEffect(() => {
+    if (window.Kakao.isInitialized()) {
+      return;
+    }
     window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
-    window.Kakao.isInitialized();
-    // try{  window?.Kakao?.init("0687bed33c060c4758f582d26ff44e16");}catch(e){console.log(e)}
   }, []);
   return (
     <div css={wrapper}>
+      <button type="button" onClick={kakaoLogin}>
+        카카오 로그인 버튼
+      </button>
       <div css={closeBtn}>
         {button === "home" ? <CloseButton size="S" isHome /> : <CloseButton size="S" buttonClick={closeModal} />}
       </div>
