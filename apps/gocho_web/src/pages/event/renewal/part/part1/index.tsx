@@ -8,7 +8,7 @@ import { Layout } from "@component/layout";
 
 import { desc, infoBox, logoBox, subDesc, subInfoBox, subTitle, titleCSS, topLayoutCSS, topSectionCSS } from "./style";
 
-export const Intro: FunctionComponent = () => {
+export const Part1: FunctionComponent = () => {
   return (
     <section css={topSectionCSS}>
       <Layout>

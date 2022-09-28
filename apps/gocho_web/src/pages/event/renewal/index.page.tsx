@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 
-import { Intro } from "./part/intro";
+import { Part1 } from "./part/part1";
 import { Part2 } from "./part/part2";
 import { Part3 } from "./part/part3";
 import { Part4 } from "./part/part4";
@@ -12,7 +12,7 @@ import { wrapper } from "./style";
 const EventRenewal: NextPage = () => {
   return (
     <main css={wrapper}>
-      <Intro />
+      <Part1 />
       <Part2 />
       <Part3 />
       <Part4 />
