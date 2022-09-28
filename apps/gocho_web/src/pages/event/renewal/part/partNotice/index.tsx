@@ -4,7 +4,7 @@ import { Layout } from "@component/layout";
 
 import { wrapper, title, desc, listDesc, circleCSS } from "./style";
 
-export const Part2: FunctionComponent = () => {
+export const PartNotice: FunctionComponent = () => {
   return (
     <section css={wrapper}>
       <Layout>

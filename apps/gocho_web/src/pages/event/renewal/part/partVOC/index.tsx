@@ -7,7 +7,7 @@ import { Layout } from "@component/layout";
 
 import { desc, imgBox, title, wrapper } from "./style";
 
-export const Part5: FunctionComponent = () => {
+export const PartVOC: FunctionComponent = () => {
   return (
     <section css={wrapper}>
       <Layout>

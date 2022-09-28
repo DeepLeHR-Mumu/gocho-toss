@@ -9,7 +9,7 @@ import { Layout } from "@component/layout";
 
 import { desc, flexBox, imgBox, infoBox, infoDesc, linkCSS, title, wrapper } from "./style";
 
-export const Part4: FunctionComponent = () => {
+export const PartJd: FunctionComponent = () => {
   return (
     <section css={wrapper}>
       <Layout>

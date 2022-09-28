@@ -23,7 +23,7 @@ import {
   wrapper,
 } from "./style";
 
-export const Part6: FunctionComponent = () => {
+export const PartRenewal: FunctionComponent = () => {
   const { setCurrentModal } = useModal();
   const { isSuccess } = useUserInfo();
 

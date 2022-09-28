@@ -23,7 +23,7 @@ import {
   wrapper,
 } from "./style";
 
-export const Part3: FunctionComponent = () => {
+export const PartVideo: FunctionComponent = () => {
   return (
     <section css={wrapper} style={{ backgroundImage: `url(${mainBackground02.src})` }}>
       <div css={positionBox}>
