@@ -47,7 +47,7 @@ export const sectionContainer = css`
   width: 100%;
 `;
 
-export const parentPositionBox = css`
+export const buttonContainer = css`
   position: relative;
 `;
 

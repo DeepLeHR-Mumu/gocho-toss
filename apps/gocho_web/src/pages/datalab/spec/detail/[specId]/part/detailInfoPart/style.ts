@@ -9,7 +9,7 @@ export const container = css`
   flex-direction: column;
 `;
 
-export const marginBox = css`
+export const infoBox = css`
   margin-bottom: 2rem;
 
   :last-of-type {

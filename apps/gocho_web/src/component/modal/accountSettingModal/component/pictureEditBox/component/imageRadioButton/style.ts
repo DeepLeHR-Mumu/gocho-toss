@@ -23,7 +23,7 @@ export const imageWrapper: ImageWrapperDef = (isImageWrapper) => {
   `;
 };
 
-export const checkPointCSS = css`
+export const checkPoint = css`
   position: absolute;
   top: 0;
   right: 0;

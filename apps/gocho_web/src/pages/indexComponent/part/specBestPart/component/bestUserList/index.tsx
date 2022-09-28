@@ -58,7 +58,7 @@ export const BestUserList: FunctionComponent<BestUserArrProps | SkeletonProps> =
               {user.user.nickname} <UserBadge badge="admin" />
             </strong>
             <p css={scoreCSS}>
-              <span css={setPointColor(isActive)}>{user.score}</span> / 5
+              <span css={setPointColor(isActive)}>{user.score?.toFixed(1)}</span> / 5
             </p>
 
             <p css={recruitSectorCSS}>평가수 {user.score}</p>

@@ -25,7 +25,7 @@ import {
   titleContainer,
   strongTitle,
   warningDesc,
-  parentPositionBox,
+  buttonContainer,
   scoreTitle,
   warningBox,
 } from "./style";
@@ -137,7 +137,7 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
             <strong css={strongTitle}>강점</strong>
             {(isSubmitted || isDirty) && strengthWatch.length === 0 && <p css={warningDesc}>최소 1개를 골라주세요</p>}
           </div>
-          <div css={parentPositionBox}>
+          <div css={buttonContainer}>
             <button
               type="button"
               css={listBox(isStrongSelectBox)}
@@ -183,7 +183,7 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
             <strong css={strongTitle}>약점</strong>
             {(isSubmitted || isDirty) && weakWatch.length === 0 && <p css={warningDesc}>최소 1개를 골라주세요</p>}
           </div>
-          <div css={parentPositionBox}>
+          <div css={buttonContainer}>
             <button
               css={listBox(isWeakSelectBox)}
               type="button"

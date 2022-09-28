@@ -6,12 +6,12 @@ import { DetailInfoPartProps } from "./type";
 
 import { NotExistingBox } from "../component/notExistingBox";
 import { DetailSpecBox } from "./component/detailSpecBox";
-import { container, marginBox, title } from "./style";
+import { container, infoBox, title } from "./style";
 
 export const DetailInfoPart: FunctionComponent<DetailInfoPartProps> = ({ detailData }) => {
   return (
     <section css={container}>
-      <div css={marginBox}>
+      <div css={infoBox}>
         <p css={title}>
           <BsStars /> 어학
         </p>
@@ -29,21 +29,21 @@ export const DetailInfoPart: FunctionComponent<DetailInfoPartProps> = ({ detailD
         )}
       </div>
 
-      <div css={marginBox}>
+      <div css={infoBox}>
         <p css={title}>
           <BsStars /> 수상
         </p>
         {detailData.award ? <DetailSpecBox specStr={detailData.award} wide /> : <NotExistingBox />}
       </div>
 
-      <div css={marginBox}>
+      <div css={infoBox}>
         <p css={title}>
           <BsStars /> 경력
         </p>
         {detailData.career ? <DetailSpecBox specStr={detailData.career} wide /> : <NotExistingBox />}
       </div>
 
-      <div css={marginBox}>
+      <div css={infoBox}>
         <p css={title}>
           <AiOutlineEdit /> 기타
         </p>
