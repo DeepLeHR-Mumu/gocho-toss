@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
 
-import checkIconImage from "shared-image/global/common/mainBanner_check.png";
+import checkIconImage from "shared-image/global/common/yellow_check.png";
 
 import { wrapper, logo, title, desc, iconBox } from "./style";
 
