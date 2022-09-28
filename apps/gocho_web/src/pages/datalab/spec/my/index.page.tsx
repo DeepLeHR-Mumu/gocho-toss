@@ -71,7 +71,7 @@ export const MySpecHistory: NextPage = () => {
       <MetaHead metaData={META_SPEC_MY} />
       <Layout>
         <section>
-          <h1 css={title}>등록한 스펙 내역</h1>
+          <strong css={title}>등록한 스펙 내역</strong>
           <div css={flexBox}>
             <AsideMenu isFix={false} />
 
