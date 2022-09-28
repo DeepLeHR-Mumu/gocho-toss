@@ -62,7 +62,7 @@ export const Part6: FunctionComponent = () => {
           <Image src={gochoLogoColor} alt="고초대졸닷컴" layout="fixed" objectFit="contain" />
         </div>
 
-        {isSuccess && (
+        {!isSuccess && (
           <div css={buttonBox}>
             <NormalButton buttonClick={openLoginModal} text="지금 로그인 하기" variant="filled" wide />
           </div>

@@ -4,7 +4,7 @@ export interface JobCardProps {
     endTime: number;
     title: string;
     cut: boolean;
-    companyName: string;
     companyLogo: string;
+    companyName: string;
   };
 }

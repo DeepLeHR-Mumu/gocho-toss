@@ -4,7 +4,11 @@ import { ImageType } from "shared-type/ui/imageType";
 export interface BasicInfoPartProps {
   basicData: {
     profileImg: ImageType;
-    nickname: string;
+    user: {
+      nickname: string;
+      image: "default" | "default_work" | "jobi" | "jobi_safety" | "jobi_chat" | "jobi_play" | "jobi_teach";
+      badge: "default" | "early_bird" | "admin";
+    };
     gender: "남" | "여";
     age: number;
     military: "군필" | "미필" | "면제-해당없음";

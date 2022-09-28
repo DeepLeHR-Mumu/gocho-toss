@@ -2,6 +2,7 @@ import { FunctionComponent, useState } from "react";
 
 import { useUserInfo } from "shared-api/auth";
 
+import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { Header } from "./component/header";
 import { Body } from "./component/body";
 
@@ -17,10 +18,11 @@ export const CalendarPart: FunctionComponent = () => {
 
   return (
     <section css={container}>
-      <h3 css={title}>
+      <InvisibleH2 title="나의 채용 일정" />
+      <strong css={title}>
         MY 채용일정
         <span css={desc}>{userInfoData?.nickname}님 북마크한 공고 일정을 한 눈에 확인하세요.</span>
-      </h3>
+      </strong>
 
       <Header setCurrentDate={setCurrentDate} currentDate={currentDate} setTwoWeek={setTwoWeek} />
       <Body twoWeek={twoWeek} />

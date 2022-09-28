@@ -5,7 +5,8 @@ import axios from "axios";
 import { Layout } from "@component/layout";
 import { useUserInfo } from "shared-api/auth";
 import { useModal } from "@recoil/hook/modal";
-import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_MYPAGE } from "shared-constant/meta";
 
 import { SettingPart } from "./part/settingPart";
 import { CalendarPart } from "./part/calendarPart";
@@ -27,8 +28,8 @@ const MypageHome: NextPage = () => {
 
   return (
     <main css={mainContainer}>
+      <MetaHead metaData={META_MYPAGE} />
       <Layout>
-        <InvisibleH2 title="마이페이지" />
         <strong css={title}>
           마이페이지 <span css={colorPoint}>홈</span>
         </strong>

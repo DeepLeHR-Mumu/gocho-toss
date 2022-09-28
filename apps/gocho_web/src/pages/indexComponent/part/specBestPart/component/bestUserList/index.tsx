@@ -55,7 +55,7 @@ export const BestUserList: FunctionComponent<BestUserArrProps | SkeletonProps> =
           >
             <ProfileImg imageStr={user.profileImg} size="S" />
             <strong css={userNickname}>
-              {user.nickname} <UserBadge badge="admin" />
+              {user.user.nickname} <UserBadge badge="admin" />
             </strong>
             <p css={scoreCSS}>
               <span css={setPointColor(isActive)}>{user.score}</span> / 5

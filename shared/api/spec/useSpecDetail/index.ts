@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 
+import { specDetailKeyObj, SpecDetailRequestDef } from "shared-constant/queryKeyFactory/spec/detailKeyObj";
 import { axiosInstance } from "../../axiosInstance";
 
-import { specDetailKeyObj, SpecDetailRequestDef } from "shared-constant/queryKeyFactory/spec/detailKeyObj";
 import { selector } from "./util";
 import { GetSpecDetailDef } from "./type";
 

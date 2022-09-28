@@ -3,7 +3,7 @@ import { FiCheck } from "react-icons/fi";
 
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
-import { imageWrapper, invisibleRadioButton } from "./style";
+import { checkPointCSS, imageWrapper, invisibleRadioButton } from "./style";
 import { ImageRadioButtonProps } from "./type";
 
 export const ImageRadioButton: FunctionComponent<ImageRadioButtonProps> = ({
@@ -13,7 +13,7 @@ export const ImageRadioButton: FunctionComponent<ImageRadioButtonProps> = ({
   setCheckedImage,
 }) => {
   return (
-    <div>
+    <li>
       <label htmlFor={`checkImg1${imageValue}`}>
         <input
           {...registerObj}
@@ -25,11 +25,15 @@ export const ImageRadioButton: FunctionComponent<ImageRadioButtonProps> = ({
             return setCheckedImage(imageValue);
           }}
         />
-        <div css={imageWrapper}>
+        <div css={imageWrapper(checkedImage === imageValue)}>
           <ProfileImg size="L" imageStr={imageValue} />
+          {checkedImage === imageValue && (
+            <div css={checkPointCSS}>
+              <FiCheck />
+            </div>
+          )}
         </div>
-        <div>{checkedImage === imageValue && <FiCheck />}</div>
       </label>
-    </div>
+    </li>
   );
 };

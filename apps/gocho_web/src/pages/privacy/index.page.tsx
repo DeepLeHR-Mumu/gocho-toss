@@ -7,12 +7,12 @@ import { tosTitle, descCSS, subTitle, listCSS, subListCSS, executionDescCSS, wra
 
 import { tosItemDef } from "./type";
 
-const Tos: NextPage = () => {
+const Privacy: NextPage = () => {
   return (
     <main css={wrapper}>
       <section>
         <Layout>
-          <h1 css={tosTitle}>서비스 이용 약관</h1>
+          <h1 css={tosTitle}>개인정보 처리방침</h1>
           <p css={descCSS}>{mainDesc}</p>
 
           {tosArr.map((item: tosItemDef) => {
@@ -57,4 +57,4 @@ const Tos: NextPage = () => {
   );
 };
 
-export default Tos;
+export default Privacy;

@@ -7,6 +7,7 @@ import { useEvalSpec } from "shared-api/spec/useEvalSpec";
 import { NormalButton } from "shared-ui/common/atom/button";
 
 import { StarEvaluation } from "@component/common/molecule/starEvaluation";
+import { EvalPointBox } from "./component/evalPointBox";
 
 import { SelectBox } from "./component/selectBox";
 import {
@@ -15,7 +16,6 @@ import {
   sectionContainer,
   feedBackContainer,
   subTitle,
-  pointCSS,
   pointContainer,
   notSelectedBox,
   listBox,
@@ -23,9 +23,13 @@ import {
   mySpecMent,
   disabledButton,
   titleContainer,
+  strongTitle,
+  warningDesc,
+  parentPositionBox,
+  scoreTitle,
+  warningBox,
 } from "./style";
 import { DeleteSelectedBoxDef, EvaluationValues, EvaluationPartProps } from "./type";
-import { EvalPointBox } from "./component/evalPointBox";
 
 export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine, didEval, evalCount }) => {
   const router = useRouter();
@@ -92,7 +96,7 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
   if (isMine) {
     return (
       <aside css={wrapper}>
-        <h2 css={title}>스펙 평가하기</h2>
+        <strong css={title}>스펙 평가하기</strong>
         <p css={subTitle}>내가 평가한 횟수 : {evalCount}</p>
         <p css={mySpecMent}>자신의 스펙은 평가할 수 없습니다.</p>
         <div css={disabledButton}>평가하기</div>
@@ -102,47 +106,50 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
   if (didEval) {
     return (
       <aside css={wrapper}>
-        <h2 css={title}>스펙 평가하기</h2>
+        <strong css={title}>스펙 평가하기</strong>
         <p css={subTitle}>내가 평가한 횟수 : {evalCount}</p>
-        <div css={hookingMentSection}>
-          <p>데이터 뒤에 사람있어요!</p>
-          <p>평가는 차갑게, 가슴은 따스하게</p>
-          <p>부탁드립니다.</p>
-        </div>
+        <p css={hookingMentSection}>
+          데이터 뒤에 사람있어요!
+          <br />
+          평가는 차갑게, 가슴은 따스하게
+          <br />
+          😉 부탁드립니다
+        </p>
         <p css={mySpecMent}>이미 평가한 스펙입니다.</p>
         <div css={disabledButton}>평가하기</div>
       </aside>
     );
   }
+
   return (
     <aside css={wrapper}>
-      <h2 css={title}>스펙 평가하기</h2>
+      <strong css={title}>스펙 평가하기</strong>
       <p css={subTitle}>내가 평가한 횟수 : {evalCount}</p>
       {evalCount < 5 && (
-        <div css={hookingMentSection}>
-          <p>평가하기를 5번만 하면 </p>
-          <p>내 스펙 평가내역을 볼 수 있어요! 화이팅!</p>
-        </div>
+        <p css={hookingMentSection}>
+          평가하기를 {5 - evalCount}번만 하면 <br />내 스펙 평가내역을 볼 수 있어요! 화이팅!
+        </p>
       )}
 
       <form onSubmit={handleSubmit(submitEvaluation)}>
         <section css={sectionContainer}>
           <div css={titleContainer}>
-            <h3>강점</h3>
-            {(isSubmitted || isDirty) && strengthWatch.length === 0 && <span>최소 1개를 골라주세요</span>}
+            <strong css={strongTitle}>강점</strong>
+            {(isSubmitted || isDirty) && strengthWatch.length === 0 && <p css={warningDesc}>최소 1개를 골라주세요</p>}
           </div>
-          <div>
-            <div css={listBox(isStrongSelectBox)}>
+          <div css={parentPositionBox}>
+            <button
+              type="button"
+              css={listBox(isStrongSelectBox)}
+              onClick={() => {
+                return setIsStrongSelectBox(true);
+              }}
+              aria-label={isStrongSelectBox ? "장점 목록 닫기" : "장점 목록 열기"}
+            >
               최대 3개
-              <button
-                type="button"
-                onClick={() => {
-                  return setIsStrongSelectBox(true);
-                }}
-              >
-                <FiChevronDown />
-              </button>
-            </div>
+              <FiChevronDown />
+            </button>
+
             {isStrongSelectBox && (
               <SelectBox
                 register={register}
@@ -154,9 +161,8 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
                 setValue={setValue}
               />
             )}
-            <div css={notSelectedBox}>
-              <p>강점이 무엇인가요?</p>
-            </div>
+
+            {strengthWatch.length === 0 && <p css={notSelectedBox}>강점이 무엇인가요?</p>}
             {!isStrongSelectBox &&
               strengthWatch?.map((strength) => {
                 return (
@@ -171,23 +177,23 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
               })}
           </div>
         </section>
+
         <section css={sectionContainer}>
           <div css={titleContainer}>
-            <h3>약점</h3>
-            {(isSubmitted || isDirty) && weakWatch.length === 0 && <span>최소 1개를 골라주세요</span>}
+            <strong css={strongTitle}>약점</strong>
+            {(isSubmitted || isDirty) && weakWatch.length === 0 && <p css={warningDesc}>최소 1개를 골라주세요</p>}
           </div>
-          <div>
-            <div css={listBox(isWeakSelectBox)}>
+          <div css={parentPositionBox}>
+            <button
+              css={listBox(isWeakSelectBox)}
+              type="button"
+              onClick={() => {
+                return setIsWeakSelectBox(true);
+              }}
+            >
               최대 3개
-              <button
-                type="button"
-                onClick={() => {
-                  return setIsWeakSelectBox(true);
-                }}
-              >
-                <FiChevronDown />
-              </button>
-            </div>
+              <FiChevronDown />
+            </button>
             {isWeakSelectBox && (
               <SelectBox
                 register={register}
@@ -199,9 +205,7 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
                 setValue={setValue}
               />
             )}
-            <div css={notSelectedBox}>
-              <p>약점이 무엇인가요?</p>
-            </div>
+            {weakWatch.length === 0 && <p css={notSelectedBox}>약점이 무엇인가요?</p>}
             {!isWeakSelectBox &&
               weakWatch?.map((weakness) => {
                 return (
@@ -216,21 +220,24 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
               })}
           </div>
         </section>
+
         <section css={sectionContainer}>
           <div css={titleContainer}>
-            <h3>기타 피드백(선택)</h3>
+            <strong css={strongTitle}>기타 피드백(선택)</strong>
           </div>
-          <div css={feedBackContainer}>
-            <textarea maxLength={100} {...register("feedback", { maxLength: 100 })} />
-          </div>
+          <textarea css={feedBackContainer} maxLength={100} {...register("feedback", { maxLength: 100 })} />
         </section>
+
         <section css={pointContainer}>
-          {(isSubmitted || isDirty) && scoreWatch === 0 && <span>0점 이상 메겨주세요.</span>}
-          <h3 css={subTitle}>총점</h3>
+          <strong css={subTitle}>총점</strong>
           <input type="hidden" {...register("score")} value={specScore} />
-          <p css={pointCSS}>{specScore}</p>
+          <p css={scoreTitle}>{specScore}</p>
           <StarEvaluation size="M" parentSetState={setSpecScore} />
+          <div css={warningBox}>
+            {(isSubmitted || isDirty) && scoreWatch === 0 && <p css={warningDesc}>0점 이상 메겨주세요.</p>}
+          </div>
         </section>
+
         <NormalButton variant="filled" text="평가하기" isSubmit wide />
       </form>
     </aside>
