@@ -6,7 +6,7 @@ import { axiosInstance } from "../../axiosInstance";
 import { GetSpecArrDef } from "./type";
 import { selector } from "./util";
 
-export const getSpecArr: GetSpecArrDef = async ({ queryKey: requestObj }) => {
+export const getSpecArr: GetSpecArrDef = async ({ queryKey: [{ requestObj }] }) => {
   const { data } = await axiosInstance.get(`/specs`, {
     params: requestObj,
   });
