@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { JobSmallCard } from "shared-ui/indexUi/jobPart/jobSmall";
+import { JobSmallCard } from "shared-ui/card/jobSmall";
 
 export default {
   title: "메인페이지/jobPart/JobSmallCard",

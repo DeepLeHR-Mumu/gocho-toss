@@ -5,7 +5,7 @@
     "jsxImportSource": "@emotion/react",
     "baseUrl": ".",
     "paths": {
-      "@shared-ui/*": ["*"]
+      "shared-ui/*": ["*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],

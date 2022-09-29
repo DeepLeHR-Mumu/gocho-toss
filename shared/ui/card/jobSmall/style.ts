@@ -3,14 +3,30 @@ import { css } from "@emotion/react";
 import { shorten } from "shared-style/common";
 import { COLORS } from "shared-style/color";
 
-export const cardWrapper = css`
-  position: relative;
-  width: calc(33% - 0.5rem);
-  border-radius: 2rem;
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.15);
-  padding: 1.5rem;
-  overflow: hidden;
-`;
+export const cardWrapper = (isMobile: boolean) => {
+  return css`
+    position: relative;
+    display: block;
+    cursor: pointer;
+    width: ${isMobile ? "100%" : "calc(33% - 0.5rem)"};
+    border-radius: 1.5rem;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.15);
+    padding: 1.5rem;
+    overflow: hidden;
+  `;
+};
+
+// export const bookmarkButtonCSS = css`
+//   position: absolute;
+//   top: 1.5rem;
+//   right: 1.5rem;
+//   padding: 1rem;
+//   background-color: ${COLORS.GRAY90};
+//   border-radius: 0 1.25rem 0 1.25rem;
+//   color: ${COLORS.GRAY60};
+//   font-size: 1rem;
+//   z-index: 15;
+// `;
 
 export const bookmarkButtonCSS = css`
   position: absolute;
@@ -18,7 +34,7 @@ export const bookmarkButtonCSS = css`
   top: 0;
   padding: 1rem;
   background-color: ${COLORS.GRAY90};
-  border-radius: 0 0 0 1.25rem;
+  border-radius: 0 1.25rem 0 1.25rem;
   color: ${COLORS.GRAY60};
   font-size: 1rem;
   z-index: 15;
@@ -74,7 +90,7 @@ export const bottomInfo = css`
   > li {
     position: relative;
     background-color: ${COLORS.GRAY90};
-    margin-right: 1rem;
+    margin-right: 0.5rem;
     padding: 0.5rem;
     border-radius: 1rem;
     min-width: 1.75rem;
@@ -84,6 +100,7 @@ export const bottomInfo = css`
     font-size: 0.75rem;
     font-weight: 500;
     color: ${COLORS.GRAY40};
+    ${shorten()};
 
     :last-of-type {
       margin-right: 0;

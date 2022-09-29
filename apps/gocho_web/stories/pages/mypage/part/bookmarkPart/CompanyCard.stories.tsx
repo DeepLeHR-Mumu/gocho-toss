@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { CompanyCard } from "shared-ui/common/companyCard";
+import { CompanyCard } from "shared-ui/card/companyCard";
 
 export default {
   title: "마이페이지/bookmarkPart/CompanyCard",

@@ -1,7 +1,3 @@
-export type JobSmallCardSkeleton = {
-  jobData?: never;
-  isSkeleton: boolean;
-};
 export type JobSmallCardProps = {
   jobData: {
     id: number;
@@ -14,5 +10,12 @@ export type JobSmallCardProps = {
     placeArr: string[];
     rotationArr: string[];
   };
+  isMobile: boolean;
   isSkeleton?: never;
+};
+
+export type JobSmallCardSkeleton = {
+  jobData?: never;
+  isMobile?: never;
+  isSkeleton: boolean;
 };

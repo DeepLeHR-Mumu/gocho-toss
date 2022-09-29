@@ -10,8 +10,8 @@ import collegeFalse from "shared-image/global/common/cho_mono.svg";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
 import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
-import { SkeletonBox } from "../../../common/atom/skeletonBox";
-import { DdayBox } from "../../../common/atom/dDayBox";
+import { SkeletonBox } from "../../common/atom/skeletonBox";
+import { DdayBox } from "../../common/atom/dDayBox";
 
 import {
   cardWrapper,
@@ -26,10 +26,14 @@ import {
 } from "./style";
 import { JobSmallCardProps, JobSmallCardSkeleton } from "./type";
 
-export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSkeleton> = ({ jobData, isSkeleton }) => {
+export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSkeleton> = ({
+  jobData,
+  isSkeleton,
+  isMobile,
+}) => {
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
 
-  // NOTMYFAULT OU?
+  // TODO: OU
 
   if (isSkeleton || jobData === undefined) {
     return (
@@ -41,7 +45,7 @@ export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSke
 
   return (
     <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
-      <a css={cardWrapper} aria-label={`${jobData.title} 채용 공고로 이동`}>
+      <a css={cardWrapper(isMobile)} aria-label={`${jobData.title} 채용 공고로 이동`}>
         <button type="button" css={bookmarkButtonCSS} aria-label={`${jobData.companyName} 북마크하기`}>
           <BsFillBookmarkFill />
         </button>

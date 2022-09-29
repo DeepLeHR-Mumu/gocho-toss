@@ -3,7 +3,7 @@ import { modalAtom } from "@recoil/atom";
 import { contentModalDef, contentModalNameDef, modalNameDef } from "@recoil/atom/modal";
 import { useCallback } from "react";
 
-interface setCurrentModalDef {
+export interface setCurrentModalDef {
   (modalName: modalNameDef, modalContentObj?: never): void;
   (modalName: contentModalNameDef, modalContentObj: contentModalDef): void;
 }

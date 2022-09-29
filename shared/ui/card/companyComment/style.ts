@@ -3,14 +3,23 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 import { shorten } from "shared-style/common";
 
-export const cardWrapper = css`
-  width: 30rem;
+export const companyCommentCardSkeleton = css`
+  overflow: hidden;
   border-radius: 1.5rem;
-  background-color: ${COLORS.GRAY100};
-  box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.15);
-  margin: 0 1rem;
-  transition: all 0.1s ease-in;
+  height: 40rem;
 `;
+
+export const cardWrapper = (isMobile: boolean) => {
+  return css`
+    width: ${isMobile ? "100%" : "30rem"};
+    border-radius: 1.5rem;
+    background-color: ${COLORS.GRAY100};
+    box-shadow: ${isMobile ? "0px 4px 12px #E9E9E9;" : "10px 10px 15px 0 rgba(0, 0, 0, 0.15)"};
+    margin: ${isMobile ? "0" : "0 1rem"};
+
+    transition: all 0.1s ease-in;
+  `;
+};
 
 export const header = css`
   display: flex;

@@ -3,7 +3,7 @@ import { FunctionComponent } from "react";
 import { useJobArr } from "shared-api/job";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
-import { JobSmallCard } from "shared-ui/indexUi/jobPart/jobSmall";
+import { JobSmallCard } from "shared-ui/card/jobSmall";
 
 import { cardListContainer } from "./style";
 import { JobCardArrProps } from "./type";
@@ -31,7 +31,7 @@ export const JobCardList: FunctionComponent<JobCardArrProps> = ({ listOrder }) =
   return (
     <div css={cardListContainer}>
       {jobDataArr.jobDataArr.map((job) => {
-        return <JobSmallCard key={`jobSmallCard_${job.id}`} jobData={job} />;
+        return <JobSmallCard key={`jobSmallCard_${job.id}`} jobData={job} isMobile={false} />;
       })}
     </div>
   );

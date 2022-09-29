@@ -1,7 +1,6 @@
 import { FunctionComponent, useRef, useEffect } from "react";
 import Image from "next/image";
 
-import { useModal } from "@recoil/hook/modal";
 import { LinkButton, NormalButton } from "shared-ui/common/atom/button";
 import { CDN_URL } from "shared-constant/externalURL";
 import { useCompanyCommentArr } from "shared-api/company";
@@ -9,10 +8,12 @@ import { useUserInfo } from "shared-api/auth";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { UnLoginComment } from "./component/unLoginComment";
 import { Comment } from "./component/comment";
 
 import {
+  companyCommentCardSkeleton,
   cardWrapper,
   header,
   companyInfoContainer,
@@ -26,12 +27,16 @@ import {
   unLoginBox,
   unLoginDesc,
 } from "./style";
-import { CommentCardProps } from "./type";
+import { CommentCardProps, CommentCardSkeleton } from "./type";
 
-export const CompanyCommentCard: FunctionComponent<CommentCardProps> = ({ companyData }) => {
+export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCardSkeleton> = ({
+  companyData,
+  setCurrentModal,
+  isSkeleton,
+  isMobile,
+}) => {
   const commentContainerRef = useRef<HTMLDivElement | null>(null);
   const { isSuccess, data: userInfoData } = useUserInfo();
-  const { setCurrentModal } = useModal();
 
   useEffect(() => {
     const bottomHeight = commentContainerRef.current?.scrollHeight;
@@ -39,12 +44,20 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps> = ({ compan
   }, []);
 
   const { data: companyCommentArrData } = useCompanyCommentArr({
-    companyId: companyData.id,
+    companyId: companyData?.id || 0,
   });
 
-  if (!companyCommentArrData || !isSuccess) {
+  if (!companyCommentArrData || isSkeleton || companyData === undefined) {
     return (
-      <div css={cardWrapper} className="active">
+      <div css={companyCommentCardSkeleton}>
+        <SkeletonBox />
+      </div>
+    );
+  }
+
+  if (!isSuccess) {
+    return (
+      <div css={cardWrapper(isMobile)} className="active">
         <header css={header}>
           <div css={companyInfoContainer}>
             <div css={companyLogoBox}>
@@ -93,7 +106,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps> = ({ compan
   }
 
   return (
-    <div css={cardWrapper} className="active">
+    <div css={cardWrapper(isMobile)} className="active">
       <header css={header}>
         <div css={companyInfoContainer}>
           <div css={companyLogoBox}>
