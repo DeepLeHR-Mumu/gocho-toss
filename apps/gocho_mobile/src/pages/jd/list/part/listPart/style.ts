@@ -1,6 +1,5 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
-import { PC_HOVER } from "shared-style/mediaQuery";
 
 export const partContainer = css`
   position: relative;
@@ -69,12 +68,5 @@ export const setJobOrderButton = (active = false) => {
     margin-right: 0.5rem;
     padding: 0.5rem 0.75rem;
     transition: all 0.2s ease;
-
-    ${PC_HOVER} {
-      :hover {
-        border: 1px solid ${active ? COLORS.GRAY10 : `${COLORS.GRAY80}`};
-        background-color: ${active ? COLORS.STATE_SUCCESS : `${COLORS.GRAY90}`};
-      }
-    }
   `;
 };

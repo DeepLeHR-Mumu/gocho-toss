@@ -1,12 +1,8 @@
-import { css, SerializedStyles } from "@emotion/react";
+import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 import { shorten } from "shared-style/common";
 
-interface ContainerDef {
-  (isClick: boolean): SerializedStyles;
-}
-
-export const container: ContainerDef = (isClick) => {
+export const container = (isClick: boolean) => {
   const defaultContainerCSS = css`
     width: 100%;
     display: flex;
@@ -19,6 +15,28 @@ export const container: ContainerDef = (isClick) => {
   return css`
     ${defaultContainerCSS};
     background-color: ${isClick ? COLORS.GRAY100 : COLORS.GRAY95};
+    border: ${isClick ? `1px solid ${COLORS.BLUE_SECOND30}` : "none"};
+    border-width: 1px 0px;
+  `;
+};
+
+export const title = (isClick: boolean) => {
+  const defaultTitleCSS = css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 500;
+    height: 2.25rem;
+    transition: all 0.2s ease;
+  `;
+
+  return css`
+    ${defaultTitleCSS};
+    background-color: ${isClick ? COLORS.BLUE_SECOND30 : COLORS.GRAY90};
+    color: ${isClick ? COLORS.GRAY10 : COLORS.GRAY40};
+    width: ${isClick ? "10rem" : "9rem"};
+    padding: ${isClick ? "0 0.75rem;" : "0 0.25rem;"};
   `;
 };
 
@@ -33,37 +51,6 @@ export const containerSkeleton = css`
   margin-bottom: 2px;
   padding: 2px;
 `;
-
-interface TitleDef {
-  (isClick: boolean): SerializedStyles;
-}
-
-export const title: TitleDef = (isClick) => {
-  const defaultTitleCSS = css`
-    width: 9rem;
-    height: 2.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-    font-size: 0.75rem;
-    font-weight: 500;
-  `;
-
-  if (!isClick) {
-    return css`
-      ${defaultTitleCSS};
-      color: ${COLORS.GRAY40};
-      background-color: ${COLORS.GRAY90};
-    `;
-  }
-
-  return css`
-    ${defaultTitleCSS};
-    background-color: ${isClick ? COLORS.BLUE_SECOND70 : COLORS.GRAY100};
-    color: ${isClick ? COLORS.GRAY10 : COLORS.GRAY40};
-  `;
-};
 
 export const infoBox = css`
   width: 100%;

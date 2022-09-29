@@ -71,7 +71,6 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
   return (
     <div>
       <Header jobDetailData={jobDetailData} isBookmarked={isBookmarked} userId={userData?.id} />
-
       <section css={positionContainer}>
         <p css={positionTitle}>
           채용중인 직무<span>{jobDetailData.positionArr.length}</span>

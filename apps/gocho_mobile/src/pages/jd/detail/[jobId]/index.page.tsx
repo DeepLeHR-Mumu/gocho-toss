@@ -11,8 +11,9 @@ import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
 import { useAddJobViewCount } from "shared-api/viewCount";
 
-import { TopSticky } from "../component/topSticky";
-import { BottomSticky } from "../component/bottomSticky";
+import { DetailComment } from "@component/common/organisms/detailComment";
+import { TopMenu } from "../component/topMenu";
+import { BottomMenu } from "../component/bottomMenu";
 import { PositionObjDef } from "./type";
 import { HeaderPart, DetailSupportPart, DetailWorkPart, DetailPreferencePart, ReceptInfoPart } from "../part";
 
@@ -21,6 +22,7 @@ import { wrapper, flexBox, container, containerSkeleton } from "./style";
 const JobsDetail: NextPage = () => {
   const [currentPositionId, setCurrentPositionId] = useState<number | null>(null);
   const [freshPosition, setFreshPosition] = useState<PositionObjDef | null>(null);
+  const [openComment, setOpenComment] = useState<boolean>(false);
 
   const { data: userData } = useUserInfo();
   const { data: userJobBookmarkArr, refetch } = useUserJobBookmarkArr({ userId: userData?.id });
@@ -85,11 +87,11 @@ const JobsDetail: NextPage = () => {
     })
   );
 
-  // const commentData = {
-  //   companyId: jobDetailData.company.companyId,
-  //   name: jobDetailData.company.name,
-  //   logoUrl: jobDetailData.company.logoUrl,
-  // };
+  const commentData = {
+    companyId: jobDetailData.company.companyId,
+    name: jobDetailData.company.name,
+    logoUrl: jobDetailData.company.logoUrl,
+  };
 
   return (
     <main css={wrapper}>
@@ -107,7 +109,7 @@ const JobsDetail: NextPage = () => {
       />
 
       <InvisibleH2 title={jobDetailData.title} />
-      <TopSticky />
+      <TopMenu title={jobDetailData.title} />
       <HeaderPart
         jobDetailData={jobDetailData}
         setCurrentPositionId={setCurrentPositionId}
@@ -126,7 +128,13 @@ const JobsDetail: NextPage = () => {
         )}
       </div>
       <ReceptInfoPart jobDetailData={jobDetailData} />
-      <BottomSticky />
+      {openComment && <DetailComment detailData={commentData} setOpenComment={setOpenComment} />}
+      <BottomMenu
+        jobDetailData={jobDetailData}
+        isBookmarked={isBookmarked}
+        userId={userData?.id}
+        setOpenComment={setOpenComment}
+      />
     </main>
   );
 };

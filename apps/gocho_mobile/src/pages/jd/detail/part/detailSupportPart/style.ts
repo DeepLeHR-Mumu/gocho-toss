@@ -1,8 +1,6 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
-export const wrapper = css``;
-
 export const flexText = css`
   display: flex;
   align-items: center;
@@ -56,9 +54,8 @@ export const isPossibleEduIcon = css`
 `;
 
 export const eduContainer = css`
-  width: 100%;
   display: flex;
-  gap: 0 0.5rem;
+  gap: 0 0.25rem;
 
   > li {
     text-align: center;

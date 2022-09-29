@@ -52,19 +52,19 @@ export const subTitle = css`
 `;
 
 export const desc = css`
-  color: ${COLORS.GRAY10};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   font-size: 0.875rem;
   line-height: 1.4;
   font-weight: 400;
   word-break: keep-all;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  color: ${COLORS.GRAY10};
+  width: 70%;
   gap: 0.25rem 0;
 `;
 
 export const restPoint = css`
-  flex-grow: 1;
   word-break: keep-all;
   display: inline-block;
   ::after {

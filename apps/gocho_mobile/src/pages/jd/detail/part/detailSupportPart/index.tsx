@@ -12,7 +12,6 @@ import { getPossibleEduArr } from "./util";
 import { DetailSupportPartProps } from "./type";
 import { container, containerTitle, flexBox, subTitle, desc, restPoint } from "../common/style";
 import {
-  wrapper,
   logoImageBox,
   title,
   containerSubTitle,
@@ -26,7 +25,7 @@ import {
 
 export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ freshPosition }) => {
   return (
-    <section css={wrapper}>
+    <section>
       <div css={logoImageBox}>
         <Image src={logoSrc} alt="고초대졸닷컴" objectFit="contain" />
       </div>
@@ -46,7 +45,7 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
             <span css={isColorPoint(false)}>
               <strong css={isPossibleEduIcon}>
                 <Image src={graduateGray} alt="" />
-              </strong>{" "}
+              </strong>
               지원불가
             </span>
           </p>

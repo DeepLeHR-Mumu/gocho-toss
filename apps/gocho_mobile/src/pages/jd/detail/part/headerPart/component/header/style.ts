@@ -112,7 +112,7 @@ export const date = css`
   justify-content: center;
   color: ${COLORS.GRAY40};
   font-size: 0.875rem;
-  height: 1.5rem;
+  height: 1.625rem;
   font-weight: 400;
   border-radius: 1rem;
 `;
