@@ -3,5 +3,6 @@ export interface CommentCardProps {
     id: number;
     logoUrl: string;
     name: string;
+    commentCount: number;
   };
 }

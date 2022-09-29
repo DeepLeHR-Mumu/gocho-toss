@@ -142,7 +142,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
                 <Image
                   layout="fill"
                   objectFit="contain"
-                  src={imageSrc}
+                  src={imageSrc || jobData.companyLogo}
                   alt={jobData.companyName}
                   onError={() => {
                     return setImageSrc(defaultCompanyLogo);

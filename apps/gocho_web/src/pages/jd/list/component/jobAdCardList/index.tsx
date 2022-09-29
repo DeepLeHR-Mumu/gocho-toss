@@ -12,13 +12,12 @@ import { listContainer, sliderButton, sliderButtonContainer } from "./style";
 export const JobAdCardList: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
 
-  const { data: response } = useJobArr({
+  const { data: jobArrData } = useJobArr({
     order: "view",
     filter: "valid",
-    limit: 5,
   });
 
-  if (!response) {
+  if (!jobArrData) {
     return (
       <div css={listContainer}>
         <Slider {...setCarouselSetting()} ref={sliderRef}>
@@ -33,7 +32,7 @@ export const JobAdCardList: FunctionComponent = () => {
   return (
     <div css={listContainer}>
       <Slider {...setCarouselSetting()} ref={sliderRef}>
-        {response.jobDataArr.map((job) => {
+        {jobArrData.jobDataArr.map((job) => {
           return <JobAdCard jobAdData={job} isSkeleton={false} key={`JobAdCard${job.id}`} />;
         })}
       </Slider>

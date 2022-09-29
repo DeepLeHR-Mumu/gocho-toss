@@ -16,6 +16,7 @@ export const wrapper = css`
 `;
 
 export const title = css`
+  display: block;
   font-size: 1rem;
   font-weight: 400;
   color: ${COLORS.BLUE_FIRST40};

@@ -76,7 +76,7 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData, is
         <Image
           layout="fill"
           objectFit="contain"
-          src={imageSrc}
+          src={imageSrc || companyData.logoUrl}
           alt={`${companyData.name} 기업 로고`}
           onError={() => {
             return setImageSrc(defaultCompanyLogo);
