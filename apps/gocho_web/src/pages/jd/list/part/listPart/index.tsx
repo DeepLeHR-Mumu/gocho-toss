@@ -2,17 +2,17 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { FiSearch, FiInfo } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
-
-import { useJobArr } from "shared-api/job";
+import { useRouter } from "next/router";
 
 import highTrue from "shared-image/global/common/go_color.svg";
 import collegeTrue from "shared-image/global/common/cho_color.svg";
 
+import { useJobArr } from "shared-api/job";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { Layout } from "@component/layout";
 import { Pagination } from "@pages/jd/component/pagination";
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
-
+import { JOBS_LIST_URL, defaultPageNumber } from "shared-constant/internalURL";
 import { JobCardList } from "../../component/jobCardList";
 import { Filter } from "../../component/filter";
 import { setJobOrderButtonArr } from "./constant";
@@ -32,9 +32,10 @@ import {
 } from "./style";
 
 export const ListPart: FunctionComponent = () => {
+  const router = useRouter();
   const limit = 10;
   const [total, setTotal] = useState<number>(0);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(Number(router.query.page));
   const [activeOrder, setActiveOrder] = useState<OrderDef>("recent");
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
 
@@ -51,6 +52,7 @@ export const ListPart: FunctionComponent = () => {
   });
 
   const jdSearch: SubmitHandler<SearchValues> = (searchVal) => {
+    router.push(`${JOBS_LIST_URL}${defaultPageNumber}`);
     setSearchQuery({
       contractType: searchVal.contractType,
       industry: searchVal.industry,
@@ -80,11 +82,16 @@ export const ListPart: FunctionComponent = () => {
   });
 
   useEffect(() => {
-    if (jobDataArr && jobDataArr.count !== total) {
+    setPage(Number(router.query.page));
+  }, [router.query]);
+
+  useEffect(() => {
+    if (jobDataArr) {
       setTotal(jobDataArr.count);
-      setPage(1);
     }
-  }, [jobDataArr, total]);
+  }, [jobDataArr]);
+
+  const totalPage = Math.ceil(total / limit);
 
   return (
     <section css={partContainer}>
@@ -125,7 +132,7 @@ export const ListPart: FunctionComponent = () => {
                 );
               })}
             </div>
-            <Pagination total={total} limit={limit} page={page} setPage={setPage} />
+            <Pagination totalPage={totalPage} />
           </div>
         </form>
 
@@ -141,7 +148,7 @@ export const ListPart: FunctionComponent = () => {
         </div>
 
         <JobCardList jobDataArr={jobDataArr?.jobDataArr} isLoading={isLoading} isError={isError} />
-        <BottomPagination total={total} limit={limit} page={page} setPage={setPage} />
+        <BottomPagination totalPage={totalPage} url={JOBS_LIST_URL} />
       </Layout>
     </section>
   );

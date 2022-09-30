@@ -36,16 +36,13 @@ import {
 export const Header: FunctionComponent = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [isUnifiedSearch, setIsUnifiedSearch] = useState<boolean>(false);
+  const [query, setQuery] = useState("");
 
   const router = useRouter();
   const { pathname } = router;
 
-  const [query, setQuery] = useState("");
-
-  const handleParam = () => {
-    return (typeKeyword: ChangeEvent<HTMLInputElement>) => {
-      return setQuery(typeKeyword.target.value);
-    };
+  const handleParam = (typeKeyword: ChangeEvent<HTMLInputElement>) => {
+    return setQuery(typeKeyword.target.value);
   };
 
   const preventRefresh = (goNewPage: (event: FormEvent) => void) => {
@@ -58,7 +55,7 @@ export const Header: FunctionComponent = () => {
   const handleSubmit = preventRefresh(() => {
     router.push({
       pathname: "/search",
-      query: { q: query },
+      query: { q: query, page: 1 },
     });
   });
 

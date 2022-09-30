@@ -1,9 +1,5 @@
 import { setCarouselSettingDef } from "./type";
 
-export const scrollTop = () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-};
-
 export const setCarouselSetting: setCarouselSettingDef = {
   dots: false,
   autoplay: false,

@@ -58,7 +58,7 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
           <Image
             layout="fill"
             objectFit="contain"
-            src={imageSrc}
+            src={imageSrc || companyData.logoUrl}
             alt={companyData.name}
             onError={() => {
               return setImageSrc(defaultCompanyLogo);

@@ -1,4 +1,5 @@
 import {
+  defaultPageNumber,
   JOBS_LIST_URL,
   JOBS_EXPLIST_URL,
   MYPAGE_URL,
@@ -12,15 +13,15 @@ import {
 export const menuArr = [
   {
     menuTitle: "채용공고",
-    menuLink: `${JOBS_LIST_URL}`,
+    menuLink: `${JOBS_LIST_URL}${defaultPageNumber}`,
     subMenuArr: [
       {
         menuTitle: "최신채용공고",
-        menuLink: `${JOBS_LIST_URL}`,
+        menuLink: `${JOBS_LIST_URL}${defaultPageNumber}`,
       },
       {
         menuTitle: "만료채용공고",
-        menuLink: `${JOBS_EXPLIST_URL}`,
+        menuLink: `${JOBS_EXPLIST_URL}${defaultPageNumber}`,
       },
     ],
   },

@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { FiSearch } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 
+import { JOBS_EXPLIST_URL, defaultPageNumber } from "shared-constant/internalURL";
 import { META_JD_EXPLIST } from "shared-constant/meta";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
@@ -25,19 +27,22 @@ import {
   listContainer,
   buttonArrContainer,
   setJobOrderButton,
+  noDataBox,
+  noDataDesc,
 } from "./style";
 import { changeOrderDef, PostingValues, SearchQueryDef, OrderDef } from "./type";
 
 const JobsExpList: NextPage = () => {
+  const router = useRouter();
   const limit = 10;
   const [total, setTotal] = useState<number>(0);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(Number(router.query.page));
   const [activeOrder, setActiveOrder] = useState<OrderDef>("recent");
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
 
   const { register, handleSubmit } = useForm<PostingValues>({});
-
   const postingSearch: SubmitHandler<PostingValues> = (postingVal) => {
+    router.push(`${JOBS_EXPLIST_URL}${defaultPageNumber}`);
     setSearchQuery({
       name: postingVal.name,
     });
@@ -48,19 +53,23 @@ const JobsExpList: NextPage = () => {
   };
 
   const { data: companyDataArr, isLoading } = useCompanyArr({
-    q: JSON.stringify(searchQuery),
+    q: searchQuery?.name as string,
     order: activeOrder,
     limit,
     offset: (page - 1) * 10,
   });
 
   useEffect(() => {
-    if (companyDataArr && companyDataArr.count !== total) {
-      setTotal(companyDataArr.count);
-      setPage(1);
-    }
-  }, [companyDataArr, total]);
+    setPage(Number(router.query.page));
+  }, [router.query]);
 
+  useEffect(() => {
+    if (companyDataArr) {
+      setTotal(companyDataArr.count);
+    }
+  }, [companyDataArr]);
+
+  const totalPage = Math.ceil(total / limit);
   return (
     <main css={mainContainer}>
       <MetaHead metaData={META_JD_EXPLIST} />
@@ -96,11 +105,17 @@ const JobsExpList: NextPage = () => {
                 );
               })}
             </div>
-            <Pagination total={total} limit={limit} page={page} setPage={setPage} />
+            <Pagination totalPage={totalPage} />
           </form>
 
+          {companyDataArr?.companyDataArr.length === 0 && (
+            <div css={noDataBox}>
+              <p css={noDataDesc}>검색결과가 없습니다 👀</p>
+            </div>
+          )}
+
           <ExpJobCardList companyDataArr={companyDataArr?.companyDataArr} isLoading={isLoading} />
-          <BottomPagination total={total} limit={limit} page={page} setPage={setPage} />
+          <BottomPagination url={JOBS_EXPLIST_URL} totalPage={totalPage} />
         </section>
       </Layout>
     </main>
