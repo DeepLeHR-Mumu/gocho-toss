@@ -3,7 +3,7 @@ export interface setCarouselSettingDef {
     dots: boolean;
     arrows: boolean;
     infinite: boolean;
-    autoPlaySpeed: number;
+    autoplaySpeed: number;
     swipeToSlide: boolean;
     slidesToShow: number;
     speed: number;

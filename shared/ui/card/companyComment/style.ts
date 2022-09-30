@@ -41,11 +41,13 @@ export const commentBodyContainer = css`
 export const companyInfoContainer = css`
   display: flex;
   align-items: center;
+  width: 70%;
+  ${shorten()};
 `;
 
 export const companyLogoBox = css`
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3rem;
+  height: 3rem;
   position: relative;
 `;
 
@@ -53,7 +55,7 @@ export const companyName = css`
   font-size: 0.875rem;
   font-weight: 500;
   color: ${COLORS.GRAY10};
-  margin-left: 1rem;
+  margin-left: 0.75rem;
   ${shorten()}
 `;
 

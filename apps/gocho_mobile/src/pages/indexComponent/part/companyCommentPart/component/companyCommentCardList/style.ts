@@ -15,11 +15,11 @@ export const listContainer = css`
   }
 
   .slick-slide {
-    padding: 0.5rem;
+    padding: 0.25rem;
   }
 
   .slick-slide > div {
     width: auto;
-    margin: 0 0.5rem;
+    margin: 0 0.25rem;
   }
 `;
