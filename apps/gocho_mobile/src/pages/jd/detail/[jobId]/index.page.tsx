@@ -109,7 +109,7 @@ const JobsDetail: NextPage = () => {
       />
 
       <InvisibleH2 title={jobDetailData.title} />
-      <TopMenu title={jobDetailData.title} />
+      <TopMenu title={jobDetailData.title} id={jobDetailData.id} />
       <HeaderPart
         jobDetailData={jobDetailData}
         setCurrentPositionId={setCurrentPositionId}

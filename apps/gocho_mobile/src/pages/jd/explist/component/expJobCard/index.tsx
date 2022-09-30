@@ -45,8 +45,8 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
       </div>
     );
   }
-  // TODO: 스토리북으로 공고 없을 때 테스트해보기 (여러 가지 경우, SDD 기억하기~~!!)
-  // TODO: RQ call 없이 SSG로 바꾸고 보여드리기~~!!
+  // TODO: 스토리북으로 공고 없을 때 테스트해보기 (여러 가지 경우, SDD 기억하기)
+  // TODO: RQ call 없이 SSG로 바꾸기
 
   return (
     <article css={cardWrapper}>
@@ -81,7 +81,6 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
           })
           .map((jobData) => {
             const { year: startYear, month: startMonth, date: startDate } = dateConverter(jobData.startTime);
-
             const { year: endYear, month: endMonth, date: endDate } = dateConverter(jobData.endTime);
 
             return (
@@ -89,16 +88,16 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
                 <div css={jobTitleContainer}>
                   <h2 css={jobTitle}>{jobData.title}</h2>
                   <div css={jobDate}>
-                    {`${startYear}/${startMonth}/${startDate}`}~{`${endYear}/${endMonth}/${endDate}`}
+                    {`${startYear}.${startMonth}.${startDate}`} ~ {`${endYear}.${endMonth}.${endDate}`}
                   </div>
                 </div>
 
                 <div css={taskContainer}>
+                  <div css={taskSummary}>
+                    모집한 직무
+                    <span css={taskNumber}>{jobData.taskArr.length}</span>
+                  </div>
                   <div css={flexBox}>
-                    <div css={taskSummary}>
-                      모집한 직무
-                      <span css={taskNumber}>{jobData.taskArr.length}</span>
-                    </div>
                     {jobData.taskArr.map((task) => {
                       return (
                         <div css={taskBox} key={`${jobData.id}${task}`}>

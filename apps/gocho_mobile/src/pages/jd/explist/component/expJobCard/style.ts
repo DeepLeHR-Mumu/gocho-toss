@@ -5,7 +5,6 @@ import { shorten } from "shared-style/common";
 export const expJobCardSkeleton = css`
   overflow: hidden;
   width: 100%;
-  min-width: 21rem;
   height: 27.5rem;
   border-radius: 1.5rem;
   margin-bottom: 2rem;
@@ -14,7 +13,6 @@ export const expJobCardSkeleton = css`
 
 export const cardWrapper = css`
   width: 100%;
-  min-width: 21rem;
   height: 27.5rem;
   margin-bottom: 2rem;
 `;
@@ -34,9 +32,9 @@ export const companyName = css`
 `;
 
 export const companyLogo = css`
-  width: 5.5rem;
-  height: 5.5rem;
-  margin-right: 1.5rem;
+  width: 5rem;
+  height: 5rem;
+  margin-right: 1.25rem;
   position: relative;
 `;
 
@@ -50,7 +48,7 @@ export const moreExpJobButton = css`
   border-radius: 1.5rem;
   width: fit-content;
   padding: 1rem 1rem;
-  margin-right: 0.25rem;
+  margin-right: 0.5rem;
 
   background-color: ${COLORS.GRAY80};
 `;
@@ -96,12 +94,14 @@ export const jobTitle = css`
   border-radius: 1.5rem;
   background-color: ${COLORS.GRAY100};
   padding: 0.25rem 0.5rem;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 
   ${shorten()}
 `;
 
 export const jobDate = css`
+  min-width: 7.75rem;
+  text-align: right;
   font-size: 0.75rem;
   font-weight: 400;
   color: ${COLORS.GRAY40};
@@ -113,17 +113,12 @@ export const taskContainer = css`
   align-items: center;
 `;
 
-export const flexBox = css`
-  display: flex;
-  align-items: center;
-`;
-
 export const taskSummary = css`
   font-size: 0.75rem;
   font-weight: 700;
   word-break: keep-all;
 
-  width: fit-content;
+  width: 6.75rem;
   position: relative;
   color: ${COLORS.GRAY100};
   background-color: ${COLORS.GRAY40};
@@ -144,15 +139,27 @@ export const taskNumber = css`
   transform: translate(35%, -35%);
 `;
 
+export const flexBox = css`
+  display: flex;
+  align-items: center;
+  max-width: 40%;
+  ${shorten()};
+`;
+
 export const taskBox = css`
   font-size: 0.75rem;
   margin-right: 0.5rem;
   color: ${COLORS.GRAY40};
-  ${shorten()}
+  word-break: keep-all;
+
+  :last-of-type {
+    ${shorten()};
+  }
 `;
 
 export const jobDetailButton = css`
   font-size: 0.75rem;
   color: ${COLORS.GRAY30};
   word-break: keep-all;
+  margin: 0 0 0 auto;
 `;

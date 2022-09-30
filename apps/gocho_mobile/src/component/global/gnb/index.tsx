@@ -116,7 +116,12 @@ export const GNB: FunctionComponent = () => {
                   <ul>
                     {menu.subMenuArr.map((subMenu) => {
                       return (
-                        <SubMenuButton key={subMenu.menuTitle} link={subMenu.menuLink} title={subMenu.menuTitle} />
+                        <SubMenuButton
+                          key={subMenu.menuTitle}
+                          link={subMenu.menuLink}
+                          title={subMenu.menuTitle}
+                          setOpenedElement={setOpenedElement}
+                        />
                       );
                     })}
                   </ul>
