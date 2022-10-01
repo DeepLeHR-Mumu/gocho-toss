@@ -10,7 +10,7 @@ import { useCompanyDetail } from "shared-api/company";
 import { Layout } from "@component/layout";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { DetailComment } from "@component/global/detailComment";
-import useMoveScroll from "@pages/companies/[companyId]/util";
+import useMoveScroll from "@pages/company/[companyId]/util";
 import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import { META_COMPANY_INFO, META_COMPANY_RECRUIT } from "shared-constant/meta";
 import { MetaHead } from "shared-ui/common/atom/metaHead";

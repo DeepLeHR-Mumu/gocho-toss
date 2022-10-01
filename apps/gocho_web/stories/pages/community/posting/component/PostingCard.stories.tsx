@@ -2,7 +2,7 @@ import { RecoilRoot } from "recoil";
 
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { PostingCard } from "@pages/community/postings/component/postingCard";
+import { PostingCard } from "@pages/community/posting/component/postingCard";
 
 export default {
   title: "커뮤니티/게시판/PostingCard",

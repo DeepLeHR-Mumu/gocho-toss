@@ -2,7 +2,7 @@ import { RecoilRoot } from "recoil";
 
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { TipCard } from "@pages/community/tips/component/tipCard";
+import { TipCard } from "@pages/community/tip/component/tipCard";
 
 export default {
   title: "커뮤니티/취업꿀팁/TipCard",
