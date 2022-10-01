@@ -69,7 +69,7 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
             backgroundStyle="blue02"
             itemArr={highschoolType}
           />
-          {errors.highschool?.type && <WarningText msg={errors.highschool?.type} />}
+          {errors.highschool?.type && <WarningText msg="고등학교 정보를 선택해주세요." />}
         </ContainerBox>
 
         <ContainerBox

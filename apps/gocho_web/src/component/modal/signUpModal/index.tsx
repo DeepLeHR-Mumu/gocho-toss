@@ -106,10 +106,8 @@ export const SignUpBox: FunctionComponent = () => {
 };
 
 export const SignUpModal: FunctionComponent = () => {
-  const { closeModal } = useModal();
-
   return (
-    <ModalComponent closeModal={closeModal} button="close">
+    <ModalComponent>
       <SignUpBox />
     </ModalComponent>
   );

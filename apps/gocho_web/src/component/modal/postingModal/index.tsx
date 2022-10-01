@@ -237,10 +237,10 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
 };
 
 export const PostingModal: FunctionComponent = () => {
-  const { closeModal, currentModal } = useModal();
+  const { currentModal } = useModal();
 
   return (
-    <ModalComponent closeModal={closeModal} button="close">
+    <ModalComponent>
       <PostingBox postingData={currentModal?.modalContentObj as postingObjDef} />
     </ModalComponent>
   );

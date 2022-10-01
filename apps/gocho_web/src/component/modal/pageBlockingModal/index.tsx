@@ -41,7 +41,7 @@ export const PageBlockingModal: FunctionComponent = () => {
   const { closeModal } = useModal();
 
   return (
-    <ModalComponent closeModal={closeModal} button="close">
+    <ModalComponent>
       <PageBlockingBox closeModal={closeModal} />
     </ModalComponent>
   );

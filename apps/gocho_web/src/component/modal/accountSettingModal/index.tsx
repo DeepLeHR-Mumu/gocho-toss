@@ -1,6 +1,5 @@
 import { FunctionComponent, useState } from "react";
 
-import { useModal } from "@recoil/hook/modal";
 import { useUserInfo } from "shared-api/auth";
 
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
@@ -48,9 +47,8 @@ export const AccountSettingBox: FunctionComponent = () => {
 };
 
 export const AccountSettingModal: FunctionComponent = () => {
-  const { closeModal } = useModal();
   return (
-    <ModalComponent closeModal={closeModal} button="close">
+    <ModalComponent>
       <AccountSettingBox />
     </ModalComponent>
   );

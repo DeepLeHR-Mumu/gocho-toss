@@ -105,11 +105,11 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
 };
 
 export const LoginModal: FunctionComponent = () => {
-  const { closeModal, currentModal } = useModal();
+  const { currentModal } = useModal();
 
   const loginObj = currentModal?.modalContentObj as loginObjDef;
   return (
-    <ModalComponent closeModal={closeModal} button={loginObj.button}>
+    <ModalComponent>
       <LoginBox button={loginObj.button} />
     </ModalComponent>
   );
