@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useRef, useEffect } from "react";
 import { AiOutlineSend } from "react-icons/ai";
 
 import { dateConverter } from "shared-util/date";
@@ -27,6 +27,8 @@ import {
 } from "./style";
 
 export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ commentArr, userData }) => {
+  const commentBoxRef = useRef<HTMLDivElement | null>(null);
+
   const postLikeSubmit = () => {
     return true;
   };
@@ -35,9 +37,14 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ comme
     return true;
   };
 
+  useEffect(() => {
+    const bottomHeight = commentBoxRef.current?.scrollHeight;
+    commentBoxRef.current?.scrollTo(0, bottomHeight !== undefined ? bottomHeight : 0);
+  }, [commentArr]);
+
   return (
     <div>
-      <section css={commentContainer}>
+      <section css={commentContainer} ref={commentBoxRef}>
         <ul css={commentArrCSS}>
           {commentArr.length === 0 && (
             <li css={firstCommentAlert}>

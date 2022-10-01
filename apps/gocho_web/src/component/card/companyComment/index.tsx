@@ -35,14 +35,14 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps> = ({ compan
   const { isSuccess, data: userInfoData } = useUserInfo();
   const { setCurrentModal } = useModal();
 
-  useEffect(() => {
-    const bottomHeight = commentContainerRef.current?.scrollHeight;
-    commentContainerRef.current?.scrollTo(0, bottomHeight !== undefined ? bottomHeight : 0);
-  }, []);
-
   const { data: companyCommentArrData } = useCompanyCommentArr({
     companyId: companyData.id,
   });
+
+  useEffect(() => {
+    const bottomHeight = commentContainerRef.current?.scrollHeight;
+    commentContainerRef.current?.scrollTo(0, bottomHeight !== undefined ? bottomHeight : 0);
+  }, [companyCommentArrData]);
 
   if (!companyCommentArrData || !isSuccess) {
     return (

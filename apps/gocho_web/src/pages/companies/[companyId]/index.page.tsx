@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { useUserInfo } from "shared-api/auth";
 import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
@@ -11,7 +11,7 @@ import { Layout } from "@component/layout";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { DetailComment } from "@component/global/detailComment";
 import useMoveScroll from "@pages/companies/[companyId]/util";
-
+import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import { META_COMPANY_INFO, META_COMPANY_RECRUIT } from "shared-constant/meta";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { WorkingNotice } from "../component/workingNotice";
@@ -22,7 +22,6 @@ import { WelfareInfoPart } from "../part/welfareInfoPart";
 import { FactoryInfoPart } from "../part/factoryInfoPart";
 import { PayInfoPart } from "../part/payInfoPart";
 import { CompanyJobPart } from "../part/companyJobPart";
-import { shownDataDef } from "./type";
 import {
   mainContainer,
   mainContainerSkeleton,
@@ -36,14 +35,9 @@ import {
 
 const CompaniesDetail: NextPage = () => {
   const router = useRouter();
-  const { companyId } = router.query;
-  const [shownData, setShownData] = useState<shownDataDef>("info");
+  const { companyId, info } = router.query;
 
   const tabs = [useMoveScroll(), useMoveScroll(), useMoveScroll(), useMoveScroll()];
-
-  const changeShownData = (newData: shownDataDef) => {
-    setShownData(newData);
-  };
 
   const { data: userData } = useUserInfo();
   const { data: userCompanyBookmarkArr } = useUserCompanyBookmarkArr({ userId: userData?.id });
@@ -133,24 +127,30 @@ const CompaniesDetail: NextPage = () => {
           <button
             type="button"
             onClick={() => {
-              changeShownData("info");
+              router.push({
+                pathname: `${COMPANY_DETAIL_URL}/${companyData.headerData.id}`,
+                query: { info: "detail" },
+              });
             }}
-            css={changeDataButton(shownData === "info")}
+            css={changeDataButton(info === "detail")}
           >
             기업 정보
           </button>
           <button
             type="button"
             onClick={() => {
-              changeShownData("job");
+              router.push({
+                pathname: `${COMPANY_DETAIL_URL}/${companyData.headerData.id}`,
+                query: { info: "jd" },
+              });
             }}
-            css={changeDataButton(shownData === "job")}
+            css={changeDataButton(info === "jd")}
           >
             채용공고 모음
           </button>
         </div>
 
-        {shownData === "info" && (
+        {info === "detail" && (
           <section>
             <MetaHead companyDetail={{ companyName: data.name }} metaData={META_COMPANY_INFO} />
             <InvisibleH2 title={`${companyData.headerData.name} 기업정보`} />
@@ -210,7 +210,7 @@ const CompaniesDetail: NextPage = () => {
           </section>
         )}
 
-        {shownData === "job" && (
+        {info === "jd" && (
           <section>
             <MetaHead companyDetail={{ companyName: data.name }} metaData={META_COMPANY_RECRUIT} />
             <InvisibleH2 title={`${companyData.headerData.name} 채용공고 모음`} />

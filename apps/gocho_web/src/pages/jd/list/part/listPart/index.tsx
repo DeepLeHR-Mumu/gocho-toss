@@ -12,7 +12,7 @@ import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { Layout } from "@component/layout";
 import { Pagination } from "@pages/jd/component/pagination";
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
-import { JOBS_LIST_URL, defaultPageNumber } from "shared-constant/internalURL";
+import { JOBS_LIST_URL } from "shared-constant/internalURL";
 import { JobCardList } from "../../component/jobCardList";
 import { Filter } from "../../component/filter";
 import { setJobOrderButtonArr } from "./constant";
@@ -52,7 +52,10 @@ export const ListPart: FunctionComponent = () => {
   });
 
   const jdSearch: SubmitHandler<SearchValues> = (searchVal) => {
-    router.push(`${JOBS_LIST_URL}${defaultPageNumber}`);
+    router.push({
+      pathname: JOBS_LIST_URL,
+      query: { page: 1 },
+    });
     setSearchQuery({
       contractType: searchVal.contractType,
       industry: searchVal.industry,

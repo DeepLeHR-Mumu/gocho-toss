@@ -1,4 +1,3 @@
-export const defaultPageNumber = "?page=1";
 export const MAIN_URL = "/";
 
 export const JOBS_LIST_URL = "/jd/list";

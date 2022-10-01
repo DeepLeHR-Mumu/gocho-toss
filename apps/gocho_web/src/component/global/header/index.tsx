@@ -60,6 +60,8 @@ export const Header: FunctionComponent = () => {
   });
 
   const { isSuccess } = useUserInfo();
+  const menuMainUrl = pathname.split("/")[1];
+
   return (
     <header css={headerWrapper}>
       <Layout>
@@ -81,7 +83,7 @@ export const Header: FunctionComponent = () => {
                 return (
                   <li
                     key={`navMenu_${menu.menuTitle}`}
-                    css={activeRouter(pathname === menu.menuLink)}
+                    css={activeRouter(menuMainUrl === menu.mainUrl)}
                     onMouseOver={() => {
                       setActiveIndex(index);
                     }}
@@ -101,6 +103,7 @@ export const Header: FunctionComponent = () => {
                           {menu.subMenuArr.map((subMenu) => {
                             return (
                               <SubMenuButton
+                                isPageQuery={subMenu.pageQuery}
                                 key={subMenu.menuTitle}
                                 link={subMenu.menuLink}
                                 title={subMenu.menuTitle}

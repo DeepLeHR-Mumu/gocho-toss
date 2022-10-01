@@ -4,7 +4,7 @@ import { FiSearch } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 
-import { JOBS_EXPLIST_URL, defaultPageNumber } from "shared-constant/internalURL";
+import { JOBS_EXPLIST_URL } from "shared-constant/internalURL";
 import { META_JD_EXPLIST } from "shared-constant/meta";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
@@ -42,7 +42,10 @@ const JobsExpList: NextPage = () => {
 
   const { register, handleSubmit } = useForm<PostingValues>({});
   const postingSearch: SubmitHandler<PostingValues> = (postingVal) => {
-    router.push(`${JOBS_EXPLIST_URL}${defaultPageNumber}`);
+    router.push({
+      pathname: JOBS_EXPLIST_URL,
+      query: { page: 1 },
+    });
     setSearchQuery({
       name: postingVal.name,
     });
