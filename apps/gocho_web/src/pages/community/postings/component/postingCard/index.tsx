@@ -18,6 +18,9 @@ import {
   writerProfileImage,
   writerNickname,
   postingCardSkeleton,
+  popularBadge,
+  viewBadge,
+  badgeBox,
 } from "./style";
 import { PostingCardProps, PostingCardSkeleton } from "./type";
 
@@ -33,11 +36,17 @@ export const PostingCard: FunctionComponent<PostingCardProps | PostingCardSkelet
       </div>
     );
   }
+  // const { createdTime } = postingData;
+  // console.log(createdTime);
 
   const { year, month, date } = dateConverter(postingData.createdTime);
   return (
     <button type="button" css={cardContainer} onClick={modalOpen}>
       <article>
+        <ul css={badgeBox}>
+          <li css={popularBadge}>#추천폭발</li>
+          <li css={viewBadge}>#조회수급상승</li>
+        </ul>
         <strong css={titleCSS}>{postingData.title}</strong>
         <p css={bodyCSS}>{postingData.description}</p>
         <div css={infoContainer}>

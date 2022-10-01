@@ -95,3 +95,37 @@ export const postingCardSkeleton = css`
   height: 10.9375rem;
   margin-bottom: 1rem;
 `;
+
+export const badgeBox = css`
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+`;
+
+const defaultBadge = css`
+  width: fit-content;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.5rem;
+  border-radius: 2rem;
+  margin-right: 1rem;
+  font-size: 0.75rem;
+  color: ${COLORS.GRAY10};
+  font-weight: 500;
+
+  :last-of-type {
+    margin-right: 0;
+  }
+`;
+
+export const popularBadge = css`
+  ${defaultBadge};
+  background-color: #ffe3fc;
+`;
+
+export const viewBadge = css`
+  ${defaultBadge};
+  background-color: #deffcf;
+`;

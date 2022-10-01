@@ -41,6 +41,7 @@ export const menuArr = [
   },
   {
     menuTitle: "면접리뷰",
+    disabled: true,
     menuLink: `${INTERVIEW_REVIEW}`,
   },
   {
@@ -53,6 +54,7 @@ export const menuArr = [
       },
       {
         menuTitle: "합격데이터",
+        disabled: true,
         menuLink: `${DATALAB_DETAIL}`,
       },
     ],

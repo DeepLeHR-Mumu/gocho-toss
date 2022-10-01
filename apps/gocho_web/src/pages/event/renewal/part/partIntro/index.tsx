@@ -6,13 +6,24 @@ import mainBackground01 from "shared-image/event/renewal/main_background_01.png"
 
 import { Layout } from "@component/layout";
 
-import { desc, infoBox, logoBox, subDesc, subInfoBox, subTitle, titleCSS, topLayoutCSS, topSectionCSS } from "./style";
+import {
+  backgroundBox,
+  desc,
+  infoBox,
+  logoBox,
+  subDesc,
+  subInfoBox,
+  subTitle,
+  titleCSS,
+  topLayoutCSS,
+  topSectionCSS,
+} from "./style";
 
 export const PartIntro: FunctionComponent = () => {
   return (
     <section css={topSectionCSS}>
       <Layout>
-        <div css={topLayoutCSS} style={{ backgroundImage: `url(${mainBackground01.src})` }}>
+        <div css={topLayoutCSS}>
           <div css={infoBox}>
             <div css={logoBox}>
               <Image src={gochoLogoColor} alt="고초대졸닷컴" layout="fixed" objectFit="contain" />
@@ -31,6 +42,10 @@ export const PartIntro: FunctionComponent = () => {
               <br />
               간단히 준비해봤습니다!
             </p>
+          </div>
+
+          <div css={backgroundBox}>
+            <Image src={mainBackground01} alt="" layout="fill" objectFit="cover" />
           </div>
         </div>
       </Layout>
