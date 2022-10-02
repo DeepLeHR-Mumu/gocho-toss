@@ -120,8 +120,7 @@ export const setPostingFilterButton = (active = false) => {
 };
 
 export const listContainer = css`
-  width: 100%;
-  max-width: 58.9375rem;
+  width: calc(100% - 10rem);
 `;
 
 export const tempContainer = css`

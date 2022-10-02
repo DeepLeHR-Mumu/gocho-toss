@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
+import { TABLET } from "shared-style/mediaQuery";
 
 export const wrapper = css`
   display: flex;
@@ -87,6 +88,11 @@ export const certiCSS = css`
   justify-content: space-around;
   align-items: center;
 
+  ${TABLET} {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   > li {
     position: relative;
     width: fit-content;
@@ -102,6 +108,10 @@ export const certiCSS = css`
 
     :last-of-type {
       margin-right: 0;
+    }
+
+    ${TABLET} {
+      margin: 0.25rem 0;
     }
 
     > strong {

@@ -72,20 +72,20 @@ export const SpecCard: FunctionComponent<SpecCardProps | SpecCardSkeleton> = ({ 
             </span>
           </p>
         </div>
-        <div css={attendance}>
-          <p css={infoTitle}>
+        <ul css={attendance}>
+          <li css={infoTitle}>
             무단 결석 <span css={info}>{specData.highschool.absent}</span>
-          </p>
-          <p css={infoTitle}>
+          </li>
+          <li css={infoTitle}>
             무단 조퇴 <span css={info}>{specData.highschool.leaveEarly}</span>
-          </p>
-          <p css={infoTitle}>
+          </li>
+          <li css={infoTitle}>
             무단 결과 <span css={info}>{specData.highschool.classMiss}</span>
-          </p>
-          <p css={infoTitle}>
+          </li>
+          <li css={infoTitle}>
             무단 지각 <span css={info}>{specData.highschool.tardy}</span>
-          </p>
-        </div>
+          </li>
+        </ul>
         <div css={certi}>
           {isCerti ? (
             <>

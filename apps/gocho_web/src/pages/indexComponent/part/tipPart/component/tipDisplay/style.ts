@@ -1,6 +1,6 @@
 import { css, SerializedStyles } from "@emotion/react";
 
-import { PC_HOVER } from "shared-style/mediaQuery";
+import { PC_HOVER, TABLET } from "shared-style/mediaQuery";
 import { shorten } from "shared-style/common";
 import { COLORS } from "shared-style/color";
 
@@ -35,7 +35,7 @@ export const buttonCSSCreator: buttonCSSDef = (location, length, activeNumber) =
     z-index: 10;
     transform: translate(0, -50%);
     transition: all 0.2s ease-in;
-    ${location === "left" ? "left:-2rem" : "right:-2rem"};
+    ${location === "left" ? "left:-1rem" : "right:-1rem"};
     ${length === activeNumber && "display:none"};
     opacity: 0.8;
 
@@ -55,6 +55,11 @@ export const tipImageBox = css`
   border-radius: 20rem;
   overflow: hidden;
   position: relative;
+
+  ${TABLET} {
+    width: 30.25rem;
+    height: 18rem;
+  }
 `;
 
 export const currentTipContainer = css`

@@ -14,6 +14,7 @@ export const menuButton = (active = false) => {
     font-weight: 400;
     margin-right: 0.5rem;
     padding: 0.75rem 3rem;
+    white-space: nowrap;
     color: ${active ? COLORS.BLUE_FIRST30 : COLORS.GRAY40};
     background-color: ${active ? COLORS.STATE_SUCCESS : COLORS.GRAY100};
     position: relative;

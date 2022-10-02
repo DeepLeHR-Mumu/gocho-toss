@@ -63,7 +63,7 @@ export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({ company
   return (
     <div css={partContainer}>
       <Layout>
-        <p css={totalCount}>총 채용공고 0개</p>
+        <p css={totalCount}>총 채용공고 {jobDataArr.pages[0].count}개</p>
         <section css={listContainer}>
           {jobDataArr.pages.map((page) => {
             return page.jobDataArr.map((jobData) => {

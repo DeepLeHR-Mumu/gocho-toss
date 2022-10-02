@@ -1,5 +1,6 @@
 import { css, SerializedStyles } from "@emotion/react";
 import { COLORS } from "shared-style/color";
+import { TABLET } from "shared-style/mediaQuery";
 import { filterQueryDef } from "./type";
 
 export const filterMenuClose = css`
@@ -19,6 +20,10 @@ export const filterSelect = css`
   align-items: center;
   position: relative;
   margin-bottom: 0.5rem;
+
+  ${TABLET} {
+    flex-wrap: wrap;
+  }
 `;
 
 export const title = css`
@@ -56,6 +61,10 @@ export const colorPoint = css`
 export const flexBox = css`
   display: flex;
   align-items: center;
+
+  ${TABLET} {
+    margin-bottom: 1rem;
+  }
 `;
 
 export const menuBox = css`
@@ -133,6 +142,11 @@ export const userFilterButton = css`
   padding: 0 1rem;
   font-weight: 400;
   white-space: nowrap;
+
+  ${TABLET} {
+    margin-left: 0;
+    margin-right: 0.5rem;
+  }
 `;
 
 export const activeCategoryContainer = css`

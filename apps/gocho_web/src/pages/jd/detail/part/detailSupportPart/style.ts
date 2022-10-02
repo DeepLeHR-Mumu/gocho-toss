@@ -1,6 +1,7 @@
 import { css, SerializedStyles } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
+import { TABLET } from "shared-style/mediaQuery";
 
 export const wrapper = css``;
 
@@ -113,6 +114,11 @@ export const eduImageBox: EduImageBox = (isPossibleEdu) => {
     background-image: ${isPossibleEdu
       ? `url("/images/global/jdDetail/graduate_color.svg")`
       : `url("/images/global/jdDetail/graduate_gray.svg")`};
+
+    ${TABLET} {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
   `;
 };
 

@@ -1,7 +1,7 @@
 import { css, SerializedStyles } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 import { shorten } from "shared-style/common";
-import { PC_HOVER } from "shared-style/mediaQuery";
+import { MOBILE, PC_HOVER } from "shared-style/mediaQuery";
 
 export const jobCardSkeleton = css`
   overflow: hidden;
@@ -64,6 +64,10 @@ export const bookmarkButtonWrapper = (isBookmarked = false) => {
         background-color: ${COLORS.GRAY80};
         color: ${COLORS.GRAY40};
       }
+    }
+
+    ${MOBILE} {
+      width: 5rem;
     }
   `;
 };

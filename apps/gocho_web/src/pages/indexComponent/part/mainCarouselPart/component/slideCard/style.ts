@@ -1,7 +1,7 @@
 import { css, SerializedStyles } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
-import { PC_HOVER } from "shared-style/mediaQuery";
+import { PC_HOVER, TABLET } from "shared-style/mediaQuery";
 
 export const slideWrapper = css`
   width: 100%;
@@ -24,6 +24,10 @@ export const slideInfo: slideInfoDef = (backgroundColor) => {
     right: 0;
     top: 0;
     z-index: 20;
+
+    ${TABLET} {
+      padding: 2rem;
+    }
   `;
 };
 
@@ -40,7 +44,7 @@ export const middleDescCSS = css`
   align-items: center;
   color: ${COLORS.GRAY100};
   font-size: 1.25rem;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
 `;
 
 export const middleDescIconBox = css`

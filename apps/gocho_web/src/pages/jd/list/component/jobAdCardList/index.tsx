@@ -36,7 +36,6 @@ export const JobAdCardList: FunctionComponent = () => {
           return <JobAdCard jobAdData={job} isSkeleton={false} key={`JobAdCard${job.id}`} />;
         })}
       </Slider>
-
       <div css={sliderButtonContainer}>
         <button
           css={sliderButton}

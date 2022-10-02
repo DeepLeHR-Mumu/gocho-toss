@@ -48,10 +48,6 @@ export const globalNavBarContainer = css`
     white-space: nowrap;
     align-items: center;
     justify-content: center;
-
-    :last-of-type {
-      margin-right: 0;
-    }
   }
 `;
 

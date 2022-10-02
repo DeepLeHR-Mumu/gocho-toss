@@ -75,6 +75,7 @@ export const bottomInfo = css`
     position: relative;
     background-color: ${COLORS.GRAY90};
     margin-right: 1rem;
+    white-space: nowrap;
     padding: 0.5rem;
     border-radius: 1rem;
     min-width: 1.75rem;
