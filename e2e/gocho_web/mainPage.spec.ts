@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { linkObj } from "./constant/internalURL";
+import { linkObj } from "../constant/internalURL";
 
 test.beforeEach(async ({ page, request, baseURL }) => {
   await page.goto(linkObj.baseUrl);
