@@ -4,7 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useDeleteComment } from "shared-api/community/useDeleteComment";
 import { communityCommentArrKeyObj } from "shared-constant/queryKeyFactory/community/commentArrKeyObj";
 
-import { ProfileImg } from "shared-ui/common/atom/profileImg";
+// import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { CommentProps } from "./type";
 import {
   wrapper,
@@ -55,7 +55,7 @@ export const Comment: FunctionComponent<CommentProps> = ({
     <div css={wrapper}>
       <div css={commentWrapper}>
         <div css={nicknameBox}>
-          <ProfileImg imageStr="default" size="S" />
+          {/* <ProfileImg imageStr="default" size="S" /> */}
           <p css={nicknameCSS}>{nickname}</p>
         </div>
         <div css={bodyBox}>

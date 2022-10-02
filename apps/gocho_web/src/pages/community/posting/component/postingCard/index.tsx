@@ -81,7 +81,7 @@ export const PostingCard: FunctionComponent<PostingCardProps | PostingCardSkelet
           </ul>
           <div css={writerProfile}>
             <div css={writerProfileImage}>
-              <ProfileImg imageStr="default_work" size="S" />
+              <ProfileImg imageStr={postingData.image} size="S" />
             </div>
             <p css={writerNickname}>{postingData.nickname}</p>
           </div>

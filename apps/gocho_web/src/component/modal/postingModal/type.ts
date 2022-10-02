@@ -9,5 +9,6 @@ export interface PostingBoxProps {
     type: "진로" | "자유" | "기업" | "자격증";
     like: number;
     view: number;
+    image: "default" | "default_work" | "jobi" | "jobi_safety" | "jobi_chat" | "jobi_play" | "jobi_teach";
   };
 }

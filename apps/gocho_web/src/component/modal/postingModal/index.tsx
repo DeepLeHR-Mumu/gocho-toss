@@ -127,6 +127,7 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
   const { year, month, date } = dateConverter(postingData.createdTime);
   // LATER 게시글 내용 댓글부분을 파트로 나누면 코드가 좀더 짧고 간결해보일듯 -> 극단적으로 나눌 필요는 없음
   // LATER data-cy 제거 후 테스트코드 다시확인
+
   return (
     <article css={modalWrapper}>
       <div css={closeButtonWrapper}>
@@ -136,7 +137,7 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
         <div css={flexBox}>
           <div css={writerProfile}>
             <div css={writerProfileImage}>
-              <ProfileImg imageStr="default_work" size="S" />
+              <ProfileImg imageStr={postingData.image} size="S" />
             </div>
             <p css={writerNickname}>{postingData.nickname}</p>
           </div>
@@ -180,13 +181,13 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
                 </button>
                 <button
                   type="button"
-                  css={settingMenu}
+                  css={settingButton}
                   aria-label="글 삭제하기"
                   onClick={() => {
                     return postingDelete(postingData.id);
                   }}
                 >
-                  <FiMoreVertical />
+                  글 삭제하기
                 </button>
               </div>
             )}

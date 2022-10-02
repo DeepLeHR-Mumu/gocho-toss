@@ -48,6 +48,7 @@ export const 기본 = Template.bind({});
     like: 32,
     view: 23223,
     commentCount: 3,
+    image: "default",
   },
 };
 

@@ -11,6 +11,7 @@ export interface postingObjDef {
   like: number;
   view: number;
   commentCount: number;
+  image: "default" | "default_work" | "jobi" | "jobi_safety" | "jobi_chat" | "jobi_play" | "jobi_teach";
 }
 
 export interface tipObjDef {

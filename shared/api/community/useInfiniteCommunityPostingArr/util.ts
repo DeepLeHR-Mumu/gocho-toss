@@ -13,6 +13,7 @@ export const selector = (communityPostingArr: ResponseObjDef) => {
       view: communityPosting.view,
       nickname: communityPosting.nickname,
       commentCount: communityPosting.comments.length,
+      image: communityPosting.image,
     };
   });
 };

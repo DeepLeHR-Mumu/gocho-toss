@@ -17,6 +17,7 @@ export const nicknameBox = css`
   max-width: 11rem;
   height: 2.25rem;
   display: flex;
+  justify-content: center;
   align-items: center;
   border-radius: 1.5rem;
   background-color: ${COLORS.GRAY90};
@@ -26,7 +27,6 @@ export const nicknameBox = css`
 
 export const nicknameCSS = css`
   font-size: 0.875rem;
-  padding-left: 0.5rem;
   color: ${COLORS.GRAY10};
   font-weight: 500;
   ${shorten()};
