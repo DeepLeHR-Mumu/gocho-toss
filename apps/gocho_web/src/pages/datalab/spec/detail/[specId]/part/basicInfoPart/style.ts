@@ -3,7 +3,8 @@ import { COLORS } from "shared-style/color";
 
 export const container = css`
   position: relative;
-  padding: 1rem 4rem;
+  padding: 1rem 2rem 0;
+  border-bottom: 1px solid ${COLORS.GRAY80};
 `;
 
 export const backButton = css`
@@ -19,27 +20,33 @@ export const imageContainer = css`
 `;
 
 export const basicInfoContainer = css`
-  margin-top: 2.75rem;
+  margin: 2.75rem 0 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
 `;
 
 export const userId = css`
   color: ${COLORS.GRAY10};
   font-size: 1.375rem;
-  margin-bottom: 0.6rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
 `;
 
 export const characteristicCSS = css`
-  margin-bottom: 1.2rem;
-  font-size: 0.875rem;
+  margin-bottom: 1.25rem;
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
   > li {
+    font-size: 0.875rem;
     color: ${COLORS.GRAY40};
+    font-weight: 500;
     margin-right: 0.5rem;
+
     &:last-of-type {
       margin-right: 0;
     }
@@ -49,23 +56,25 @@ export const characteristicCSS = css`
 export const descTitle = css`
   color: ${COLORS.GRAY60};
   font-size: 0.75rem;
-  margin-right: 1rem;
   font-weight: 500;
+  margin-right: 1rem;
 `;
 
 export const preferenceContainer = css`
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
 `;
 
 export const preference = css`
-  margin-bottom: 0.3rem;
   display: flex;
-  flex-direction: row;
-  margin-bottom: 2rem;
+  align-items: center;
+
   > li {
     margin-right: 1rem;
     color: ${COLORS.BLUE_FIRST40};
+    font-weight: 400;
     font-size: 0.875rem;
     &:last-of-type {
       margin-right: 0rem;
@@ -75,25 +84,31 @@ export const preference = css`
 
 export const descContainer = css`
   display: flex;
-  flex-direction: row;
-  justify-content: left;
-  flex-wrap: wrap;
+  align-items: center;
   margin-bottom: 2rem;
 `;
 
 export const schoolInfo = css`
-  margin-right: 3rem;
-  > h3 {
-    font-size: 0.75rem;
-    color: ${COLORS.GRAY60};
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-  }
-  > p {
-    font-size: 0.875rem;
-    color: ${COLORS.GRAY10};
-    margin-bottom: 0;
-  }
+  margin-right: 2.5rem;
+`;
+
+export const schoolInfoTitle = css`
+  font-size: 0.75rem;
+  color: ${COLORS.GRAY60};
+  font-weight: 500;
+  line-height: 2;
+`;
+
+export const schoolInfoDesc = css`
+  font-size: 0.875rem;
+  color: ${COLORS.GRAY10};
+  font-weight: 500;
+  line-height: 2;
+`;
+
+export const noStrongDesc = css`
+  color: ${COLORS.GRAY60};
+  font-size: 0.875rem;
 `;
 
 export const certiContainer = css`
@@ -104,42 +119,48 @@ export const certiContainer = css`
 `;
 
 export const certiTitle = css`
-  display: flex;
-  flex-direction: row;
   color: ${COLORS.GRAY60};
-  margin-bottom: 0.5rem;
-  > div {
-    margin-right: 0.2rem;
-  }
-  > h3 {
-    font-size: 0.75rem;
-    color: ${COLORS.GRAY60};
-    font-weight: 500;
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  line-height: 3;
+  font-weight: 500;
+
+  > svg {
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
+    color: ${COLORS.BLUE_NEON40};
   }
 `;
 
 export const certiInfo = css`
   display: flex;
-  justify-content: left;
-  margin-bottom: 1rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
   > li {
-    margin-right: 3rem;
+    margin: 0 1.5rem;
     font-size: 0.875rem;
+    font-weight: 500;
     color: ${COLORS.GRAY10};
   }
 `;
+
 export const certiList = css`
   display: flex;
-  justify-content: left;
-  flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
   > li {
-    margin-right: 0.5625rem;
-    margin-bottom: 0.75rem;
+    margin: 0 0.5rem 0.5rem 0;
+    display: flex;
+    align-items: center;
+    border-radius: 2rem;
+    justify-content: center;
+    padding: 0 1.75rem;
+    height: 2rem;
+    width: fit-content;
+    border: 1px solid ${COLORS.GRAY60};
+    color: ${COLORS.GRAY40};
+    font-size: 0.875rem;
+    font-weight: 400;
   }
-`;
-
-export const divider = css`
-  border: 1px solid ${COLORS.GRAY80};
 `;

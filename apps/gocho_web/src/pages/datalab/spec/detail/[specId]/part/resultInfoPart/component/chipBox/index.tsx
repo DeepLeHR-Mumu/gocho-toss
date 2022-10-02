@@ -4,9 +4,9 @@ import { wrapper, numberBox } from "./style";
 
 export const ChipBox: FunctionComponent<ChipBoxProps> = ({ string, number }) => {
   return (
-    <div css={wrapper}>
+    <li css={wrapper}>
       {string}
-      <div css={numberBox}>{number}</div>
-    </div>
+      <span css={numberBox}>{number}</span>
+    </li>
   );
 };

@@ -7,6 +7,8 @@ import { useUserInfo } from "shared-api/auth";
 
 import { Layout } from "@component/layout";
 import { useModal } from "@recoil/hook/modal";
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_SPEC_MY } from "shared-constant/meta";
 import { AsideMenu } from "../component/asideMenu";
 import { SimpleCard } from "./component/simpleCard";
 import { Pagination } from "./component/pagination";
@@ -36,9 +38,10 @@ export const MySpecHistory: NextPage = () => {
   if (!mySpecHistoryData || isLoading) {
     return (
       <div css={wrapper}>
+        <MetaHead metaData={META_SPEC_MY} />
         <Layout>
           <section>
-            <h1 css={title}>등록한 스펙 내역</h1>
+            <strong css={title}>등록한 스펙 내역</strong>
             <div css={flexBox}>
               <AsideMenu isFix={false} />
 
@@ -65,9 +68,10 @@ export const MySpecHistory: NextPage = () => {
 
   return (
     <main css={wrapper}>
+      <MetaHead metaData={META_SPEC_MY} />
       <Layout>
         <section>
-          <h1 css={title}>등록한 스펙 내역</h1>
+          <strong css={title}>등록한 스펙 내역</strong>
           <div css={flexBox}>
             <AsideMenu isFix={false} />
 

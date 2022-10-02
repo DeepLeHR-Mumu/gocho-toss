@@ -4,8 +4,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useUserInfo } from "shared-api/auth";
 import { usePatchUserInfo } from "shared-api/auth/usePatchUserInfo";
 import { ImageType } from "shared-type/ui/imageType";
+import { NormalButton } from "shared-ui/common/atom/button";
+import { CloseButton } from "@component/common/atom/closeButton";
+import { useModal } from "@recoil/hook/modal";
 
-import { wrapper, imgContainer, confirmButton } from "./style";
+import { wrapper, imgContainer, closeButtonBox, title } from "./style";
 import { ImageRadioButton } from "./component/imageRadioButton";
 import { ImageChangeFormValues } from "./type";
 import { profileArr } from "./constant";
@@ -13,7 +16,7 @@ import { profileArr } from "./constant";
 export const PictureEditBox: FunctionComponent = () => {
   const { data: userInfoData, refetch } = useUserInfo();
   const { mutate } = usePatchUserInfo();
-
+  const { closeModal } = useModal();
   const { register, handleSubmit } = useForm<ImageChangeFormValues>();
   const [checkedImage, setCheckedImage] = useState<ImageType>(userInfoData?.image as ImageType);
 
@@ -36,8 +39,12 @@ export const PictureEditBox: FunctionComponent = () => {
 
   return (
     <div css={wrapper}>
+      <div css={closeButtonBox}>
+        <CloseButton size="M" buttonClick={closeModal} />
+      </div>
+      <strong css={title}>프로필 사진을 바꾸시겠습니까?</strong>
       <form onSubmit={handleSubmit(profileImgSubmit)}>
-        <div css={imgContainer}>
+        <ul css={imgContainer}>
           {profileArr.map((profile) => {
             return (
               <ImageRadioButton
@@ -49,10 +56,8 @@ export const PictureEditBox: FunctionComponent = () => {
               />
             );
           })}
-        </div>
-        <button type="submit" css={confirmButton}>
-          확인
-        </button>
+        </ul>
+        <NormalButton isSubmit text="확인" variant="filled" wide />
       </form>
     </div>
   );

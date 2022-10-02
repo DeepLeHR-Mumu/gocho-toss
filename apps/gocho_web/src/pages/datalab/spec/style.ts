@@ -5,7 +5,9 @@ import { COLORS } from "shared-style/color";
 export const title = css`
   font-size: 1.75rem;
   font-weight: 700;
+  display: block;
   padding: 6rem 0 3.5rem;
+  color: ${COLORS.GRAY10};
 `;
 
 export const colorPoint = css`

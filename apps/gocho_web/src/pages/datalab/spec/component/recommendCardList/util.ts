@@ -5,8 +5,9 @@ export const setCarouselSetting: setCarouselSettingDef = () => {
     dots: false,
     arrows: false,
     infinite: true,
+    autoplay: true,
     swipeToSlide: true,
-    slidesToShow: 3.8,
+    slidesToShow: 4,
     centerPadding: "0px",
     speed: 400,
   };

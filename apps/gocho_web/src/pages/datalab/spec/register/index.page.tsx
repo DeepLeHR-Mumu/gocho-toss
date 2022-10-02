@@ -5,8 +5,11 @@ import axios from "axios";
 import { useUserInfo } from "shared-api/auth";
 import { useModal } from "@recoil/hook/modal";
 import { useProgress } from "@recoil/hook/spec";
+import { META_SPEC_REGISTER } from "shared-constant/meta";
+import { MetaHead } from "shared-ui/common/atom/metaHead";
 
 import { Layout } from "@component/layout";
+import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { ProgressPart } from "./part/progressPart";
 import { SpecWritePart } from "./part/carouselCardPart";
 
@@ -36,11 +39,13 @@ const Register: NextPage = () => {
 
   return (
     <main css={wrapper}>
+      <MetaHead metaData={META_SPEC_REGISTER} />
       <ProgressPart />
       <Layout>
-        <h2 css={title}>
+        <strong css={title}>
           DataLab <span>스펙등록하기</span>
-        </h2>
+        </strong>
+        <InvisibleH2 title="생산직 스펙 평가 등록하기" />
         <SpecWritePart />
       </Layout>
     </main>

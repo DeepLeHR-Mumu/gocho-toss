@@ -7,7 +7,6 @@ import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
 import { ModalComponent } from "../modalBackground";
 import {
-  profileImgContainer,
   wrapper,
   marginContainer,
   userNameCSS,
@@ -30,9 +29,7 @@ export const AccountSettingBox: FunctionComponent = () => {
     <div css={modalContainer}>
       <div css={wrapper}>
         <div css={marginContainer}>
-          <div css={profileImgContainer}>
-            {userInfoData?.image && <ProfileImg imageStr={userInfoData?.image} size="L" />}
-          </div>
+          {userInfoData?.image && <ProfileImg imageStr={userInfoData?.image} size="L" />}
           <p css={userNameCSS}>{userInfoData?.nickname}</p>
           <p css={accountCSS}>{userInfoData?.id}</p>
           <p css={emailCSS}>{userInfoData?.email}</p>

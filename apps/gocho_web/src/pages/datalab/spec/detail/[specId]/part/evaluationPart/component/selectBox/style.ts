@@ -22,7 +22,16 @@ export const closeButton = css`
   right: 0;
 `;
 
-export const container = css`
+export const container = css``;
+
+export const labelBox = css`
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+`;
+
+export const labelDesc = css`
+  font-size: 0.875rem;
+  color: ${COLORS.GRAY40};
+  font-weight: 400;
 `;

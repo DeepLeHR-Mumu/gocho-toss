@@ -18,7 +18,11 @@ export const 초대졸유턴 = Template.bind({});
 초대졸유턴.args = {
   basicData: {
     profileImg: "jobi_play",
-    nickname: "회원명",
+    user: {
+      nickname: "회원명",
+      image: "default",
+      badge: "default",
+    },
     gender: "남",
     age: 30,
     military: "면제-해당없음",
@@ -52,7 +56,11 @@ export const 고졸 = Template.bind({});
 고졸.args = {
   basicData: {
     profileImg: "jobi_chat",
-    nickname: "회원명",
+    user: {
+      nickname: "회원명",
+      image: "default",
+      badge: "default",
+    },
     gender: "남",
     age: 30,
     military: "면제-해당없음",

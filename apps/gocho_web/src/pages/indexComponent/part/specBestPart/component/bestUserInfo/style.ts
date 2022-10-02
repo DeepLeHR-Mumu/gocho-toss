@@ -83,20 +83,21 @@ export const userEvalCount = css`
 
 export const userTaskCSS = css`
   margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 
   > li {
     color: ${COLORS.GRAY40};
     font-size: 0.75rem;
     font-weight: 400;
-    margin-right: 0.5rem;
+    margin: 0 0.5rem 0.5rem 0;
 
     :last-of-type {
       margin-right: 0;
     }
   }
 `;
-
-export const starScore = css``;
 
 export const cardInfo = css`
   display: flex;

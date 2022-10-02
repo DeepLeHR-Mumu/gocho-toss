@@ -5,6 +5,8 @@ import axios from "axios";
 import { Layout } from "@component/layout";
 import { useUserInfo } from "shared-api/auth";
 import { useModal } from "@recoil/hook/modal";
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_MYPAGE } from "shared-constant/meta";
 
 import { SettingPart } from "./part/settingPart";
 import { CalendarPart } from "./part/calendarPart";
@@ -26,10 +28,11 @@ const MypageHome: NextPage = () => {
 
   return (
     <main css={mainContainer}>
+      <MetaHead metaData={META_MYPAGE} />
       <Layout>
-        <h2 css={title}>
+        <strong css={title}>
           마이페이지 <span css={colorPoint}>홈</span>
-        </h2>
+        </strong>
         <div css={mypagePosition}>
           <SettingPart />
           <div css={mypageBody}>

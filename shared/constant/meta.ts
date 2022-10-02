@@ -101,6 +101,7 @@ export const META_COMPANY_RECRUIT = {
 };
 
 export const META_SPEC_LIST = {
+  pageName: "생산직 스펙평가 리스트",
   title: "생산직 스펙평가 리스트 - 고초대졸닷컴",
   desc: "내 스펙은 몇점일까요? 고초대졸닷컴에서만 운영중인 생산직 스펙평가 서비스로 내 스펙으로 어떤 기업에 갈 수 있는지, 다른 생산직 구직자들의 스펙은 어떤지 확인해보세요!",
   keyword: `생산직, 스펙, 평가, 자격증 ${defaultKeyword}`,
@@ -121,6 +122,7 @@ export const META_SPEC_DETAIL = {
 };
 
 export const META_SPEC_MY = {
+  pageName: "나의 스펙 목록",
   title: "내가 작성한 스펙 - 고초대졸닷컴",
   desc: "",
   keyword: "",
@@ -130,6 +132,7 @@ export const META_SPEC_MY = {
 };
 
 export const META_SPEC_REGISTER = {
+  pageName: "내 스펙 등록하기",
   title: "내 스펙 등록하기 - 고초대졸닷컴",
   desc: "",
   keyword: "",
