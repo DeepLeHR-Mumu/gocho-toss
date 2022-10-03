@@ -1,8 +1,10 @@
 import { NextPage } from "next";
+import { useRouter } from "next/router";
 
 const KakaoLogin: NextPage = () => {
-
-  return <main>고초대졸닷컴 리뉴얼 시작</main>;
+  const router = useRouter();
+  const { code } = router.query;
+  return <main>{code}</main>;
 };
 
 export default KakaoLogin;
