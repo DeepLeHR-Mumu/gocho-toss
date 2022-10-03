@@ -1,14 +1,14 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
 
-import moneyPic from "@public/images/global/companyDetail/money.svg";
-import healthPic from "@public/images/global/companyDetail/health.svg";
-import lifePic from "@public/images/global/companyDetail/life.svg";
-import holidayPic from "@public/images/global/companyDetail/holiday.svg";
-import facilityPic from "@public/images/global/companyDetail/facility.svg";
-import vacationPic from "@public/images/global/companyDetail/vacation.svg";
-import growthPic from "@public/images/global/companyDetail/growth.svg";
-import etcPic from "@public/images/global/companyDetail/etc.svg";
+import moneyPic from "shared-image/page/companyDetail/money.svg";
+import healthPic from "shared-image/page/companyDetail/health.svg";
+import lifePic from "shared-image/page/companyDetail/life.svg";
+import holidayPic from "shared-image/page/companyDetail/holiday.svg";
+import facilityPic from "shared-image/page/companyDetail/facility.svg";
+import vacationPic from "shared-image/page/companyDetail/vacation.svg";
+import growthPic from "shared-image/page/companyDetail/growth.svg";
+import etcPic from "shared-image/page/companyDetail/etc.svg";
 
 import { InvisibleH3 } from "shared-ui/common/atom/invisibleH3";
 

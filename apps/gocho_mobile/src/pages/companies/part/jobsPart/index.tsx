@@ -1,22 +1,24 @@
+import { BottomPagination } from "@component/common/molecule/bottomPagination";
 import { JobCard } from "@component/common/molecule/jobCard";
 import { Layout } from "@component/layout";
-import { css } from "@emotion/react";
 import { useRouter } from "next/router";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import { useUserInfo } from "shared-api/auth";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useJobArr } from "shared-api/job";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
-import { listContainer } from "./style";
+import { listContainer, totalCountContainer, totalText } from "./style";
 
 export const JobsPart: FunctionComponent = () => {
+  const [pageIndex, setPageIndex] = useState(1);
+
   const router = useRouter();
   const { companyId } = router.query;
-
   const { data: jobDataArr, isLoading } = useJobArr({
     companyId: Number(companyId),
     limit: 10,
+    offset: (pageIndex - 1) * 10,
   });
 
   const { data: userData } = useUserInfo();
@@ -34,14 +36,10 @@ export const JobsPart: FunctionComponent = () => {
 
   return (
     <Layout>
+      <div css={totalCountContainer}>
+        <p css={totalText}>총 채용공고 {jobDataArr.count}개</p>
+      </div>
       <section css={listContainer}>
-        <div
-          css={css`
-            display: flex;
-          `}
-        >
-          {jobDataArr.jobDataArr.length}
-        </div>
         {jobDataArr.jobDataArr.map((jobData) => {
           const isBookmarked = Boolean(
             userJobBookmarkArr?.some((job) => {
@@ -53,6 +51,7 @@ export const JobsPart: FunctionComponent = () => {
           );
         })}
       </section>
+      <BottomPagination total={jobDataArr.count} limit={10} page={pageIndex} setPage={setPageIndex} />
     </Layout>
   );
 };
