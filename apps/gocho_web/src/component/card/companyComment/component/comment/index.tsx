@@ -33,20 +33,20 @@ export const Comment: FunctionComponent<CommentProps> = ({ nickname, commentData
 
       <div css={bodyContainer}>
         <div css={bodyWrapper(Boolean(nickname === commentData.nickname))}>
-          <p css={locationCSS}>{commentData.jdTitle || "기업 정보"}</p>
+          <p css={locationCSS}>{commentData.title || "기업 정보"}</p>
           <p css={bodyCSS}>{commentData.description}</p>
         </div>
 
         {/* TODO : 2주차 작업분 */}
         <div css={reactionContainer}>
           <CommentLikeButton
-            count={commentData.like}
+            count={commentData.likeCount}
             setLikeSubmit={() => {
               return undefined;
             }}
           />
           <CommentDislikeButton
-            count={commentData.dislike}
+            count={commentData.disLikeCount}
             setDislikeSubmit={() => {
               return undefined;
             }}

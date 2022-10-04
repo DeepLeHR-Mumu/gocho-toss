@@ -88,7 +88,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps> = ({ compan
         <div css={linkBox}>
           <LinkButton
             text="실시간 댓글 보러가기"
-            linkTo={`${COMPANY_DETAIL_URL}/${companyData.id}`}
+            linkTo={`${COMPANY_DETAIL_URL}/${companyData.id}?info=detail`}
             wide
             variant="outlined"
           />
@@ -128,7 +128,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps> = ({ compan
       <div css={linkBox}>
         <LinkButton
           text="실시간 댓글 보러가기"
-          linkTo={`${COMPANY_DETAIL_URL}/${companyData.id}`}
+          linkTo={`${COMPANY_DETAIL_URL}/${companyData.id}?info=detail`}
           wide
           variant="outlined"
         />

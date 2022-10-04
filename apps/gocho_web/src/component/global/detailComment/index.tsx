@@ -75,6 +75,7 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ detailDat
     );
   }
 
+  console.log(companyCommentArrData);
   const { commentArr, company } = companyCommentArrData;
 
   return (
