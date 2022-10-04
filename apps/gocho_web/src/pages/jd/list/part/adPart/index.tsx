@@ -14,7 +14,6 @@ export const AdPart: FunctionComponent = () => {
         <p css={title}>
           <span css={colorPoint}>Today</span> 오늘의 추천 공고 🙌🏻
         </p>
-        {/* LATER: ~List 없애고 map으로 처리 */}
         <JobAdCardList />
       </Layout>
     </section>
