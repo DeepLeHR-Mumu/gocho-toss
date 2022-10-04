@@ -9,7 +9,16 @@ export const container = css`
   margin-bottom: 2rem;
 `;
 
-export const payStartContainer = css`
+export const flexContainer = css`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  > div {
+    width: 22.5rem;
+  }
+`;
+
+export const payContainer = css`
   display: flex;
   padding-bottom: 1.6875rem;
 `;
@@ -50,5 +59,45 @@ export const moneyInfoContainer = css`
       font-weight: 700;
       margin-right: 0.2rem;
     }
+  }
+`;
+
+export const payIconBox = css`
+  width: 5rem;
+  height: 5rem;
+  position: relative;
+`;
+
+export const descContainer = css`
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+`;
+
+export const descMenuBox = css`
+  padding: 0.5rem;
+  box-shadow: 0px 2px 8px rgba(123, 123, 123, 0.2);
+  border-radius: 1.5rem;
+  width: 7.25rem;
+  text-align: center;
+  flex-shrink: 0;
+`;
+
+export const descMenuText = css`
+  color: ${COLORS.GRAY60};
+  font-weight: 700;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+`;
+
+export const descText = css`
+  border-radius: 1.5rem;
+  background-color: ${COLORS.GRAY90};
+  padding: 0.5rem 1rem;
+  > p {
+    font-size: 0.875rem;
+    color: ${COLORS.GRAY10};
+    font-weight: 400;
   }
 `;

@@ -8,7 +8,7 @@ export const wrapper = css`
 
 export const buttonBox = css`
   width: 100%;
-  background-color: white;
+  background-color: ${COLORS.GRAY100};
   display: flex;
   flex-direction: column;
 `;

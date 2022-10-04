@@ -172,8 +172,8 @@ export const WelfarePart: FunctionComponent = () => {
       <div css={informationWrapper}>
         <IconSelector activatedMenu={activatedTab} />
         <div css={infoBox}>
-          {companyDetailData.data.welfare[activatedTab]?.map((weflare) => {
-            return <p>&#183; {weflare}</p>;
+          {companyDetailData.data.welfare[activatedTab]?.map((welfare) => {
+            return <p>&#183; {welfare}</p>;
           })}
         </div>
       </div>

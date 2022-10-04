@@ -49,7 +49,6 @@ export const updownIconBox = css`
 
 export const menuContainer = css`
   display: flex;
-  flex-direction: row;
   margin-bottom: 1rem;
   > div {
     :first-of-type {

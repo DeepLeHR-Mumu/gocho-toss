@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const hrLine = css`
-  border-top: 0.0625rem solid ${COLORS.GRAY80};
+  border-top: 1px solid ${COLORS.GRAY80};
 `;
 
 export const container = css`
