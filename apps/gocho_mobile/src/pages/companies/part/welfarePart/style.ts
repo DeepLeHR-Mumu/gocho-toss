@@ -9,7 +9,6 @@ export const headerBox = css`
   overflow: hidden;
   overflow-x: scroll;
   width: 100%;
-  padding: 1rem 0;
   scrollbar-width: none;
   ::-webkit-scrollbar {
     display: none;
@@ -19,13 +18,28 @@ export const headerBox = css`
 export const menuList = css`
   display: flex;
   font-size: 1rem;
-  > li {
+  border-top: 1px solid #e9e9e9;
+  height: 2.875rem;
+`;
+
+export const menu = (isActivated: boolean) => {
+  return css`
     flex-shrink: 0;
-    margin: 0 2rem;
+    padding: 0 2rem;
     display: flex;
     justify-content: center;
-  }
-`;
+    height: 100%;
+    ${isActivated &&
+    css`
+      border-bottom: 2px solid ${COLORS.BLUE_FIRST50};
+    `};
+
+    > button {
+      color: ${isActivated ? COLORS.BLUE_NEON50 : COLORS.GRAY40};
+      font-weight: 700;
+    }
+  `;
+};
 
 export const informationWrapper = css`
   display: flex;

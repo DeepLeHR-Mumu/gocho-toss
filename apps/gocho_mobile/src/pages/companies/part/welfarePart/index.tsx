@@ -7,7 +7,7 @@ import { NoRegisteredInfoBox } from "../../component/noRegisterdInfoBox";
 import { UpdateInfoLink } from "../../component/updateInfoLink";
 import { ActivatedMenuType } from "./type";
 import { IconSelector } from "./component/iconSelector";
-import { container, headerBox, infoBox, informationWrapper, menuList } from "./style";
+import { container, headerBox, infoBox, informationWrapper, menu, menuList } from "./style";
 
 export const WelfarePart: FunctionComponent = () => {
   const router = useRouter();
@@ -72,7 +72,7 @@ export const WelfarePart: FunctionComponent = () => {
       <div css={headerBox}>
         <ul css={menuList}>
           {companyDetailData.data.welfare.money && (
-            <li>
+            <li css={menu(activatedTab === "money")}>
               <button
                 type="button"
                 onClick={() => {
@@ -84,7 +84,7 @@ export const WelfarePart: FunctionComponent = () => {
             </li>
           )}
           {companyDetailData.data.welfare.health && (
-            <li>
+            <li css={menu(activatedTab === "health")}>
               <button
                 type="button"
                 onClick={() => {
@@ -96,7 +96,7 @@ export const WelfarePart: FunctionComponent = () => {
             </li>
           )}
           {companyDetailData.data.welfare.life && (
-            <li>
+            <li css={menu(activatedTab === "life")}>
               <button
                 type="button"
                 onClick={() => {
@@ -108,7 +108,7 @@ export const WelfarePart: FunctionComponent = () => {
             </li>
           )}
           {companyDetailData.data.welfare.holiday && (
-            <li>
+            <li css={menu(activatedTab === "holiday")}>
               <button
                 type="button"
                 onClick={() => {
@@ -120,7 +120,7 @@ export const WelfarePart: FunctionComponent = () => {
             </li>
           )}
           {companyDetailData.data.welfare.facility && (
-            <li>
+            <li css={menu(activatedTab === "facility")}>
               <button
                 type="button"
                 onClick={() => {
@@ -132,7 +132,7 @@ export const WelfarePart: FunctionComponent = () => {
             </li>
           )}
           {companyDetailData.data.welfare.vacation && (
-            <li>
+            <li css={menu(activatedTab === "vacation")}>
               <button
                 type="button"
                 onClick={() => {
@@ -144,7 +144,7 @@ export const WelfarePart: FunctionComponent = () => {
             </li>
           )}
           {companyDetailData.data.welfare.growth && (
-            <li>
+            <li css={menu(activatedTab === "growth")}>
               <button
                 type="button"
                 onClick={() => {
@@ -156,7 +156,7 @@ export const WelfarePart: FunctionComponent = () => {
             </li>
           )}
           {companyDetailData.data.welfare.etc && (
-            <li>
+            <li css={menu(activatedTab === "etc")}>
               <button
                 type="button"
                 onClick={() => {

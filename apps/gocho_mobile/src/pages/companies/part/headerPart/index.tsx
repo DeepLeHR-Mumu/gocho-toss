@@ -1,10 +1,9 @@
 import { FunctionComponent } from "react";
-import { css } from "@emotion/react";
 
 import { Layout } from "@component/layout";
 
 import { InfoBox } from "./component/infoCard";
-import { buttonCSS, wrapper } from "./style";
+import { buttonCSS, container, wrapper } from "./style";
 import { HeaderPartProps } from "./type";
 
 export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ setActivatedMenu, activatedMenu }) => {
@@ -12,13 +11,7 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ setActivatedMen
     <section css={wrapper}>
       <Layout>
         <InfoBox />
-        <div
-          css={css`
-            display: flex;
-            width: 100%;
-            justify-content: space-between;
-          `}
-        >
+        <div css={container}>
           <button
             css={buttonCSS(activatedMenu === "companyInfo")}
             type="button"

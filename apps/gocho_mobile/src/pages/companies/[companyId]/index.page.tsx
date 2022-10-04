@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 import { useAddCompanyViewCount } from "shared-api/viewCount";
+import { useCompanyDetail } from "shared-api/company";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 
 import { HeaderPart } from "../part/headerPart";
 import { BasicInfoPart } from "../part/basicInfoPart";
@@ -13,7 +15,7 @@ import { CheckMorePart } from "../part/checkMorePart";
 import { MoneyPart } from "../part/moneyPart";
 import { FactoryPart } from "../part/factoryInfoPart";
 import { H2Title } from "../component/h2Title";
-import { container } from "./style";
+import { container, loadingBox } from "./style";
 import { LinkPart } from "../part/linkPart";
 
 const CompanyDetail: NextPage = () => {
@@ -22,6 +24,7 @@ const CompanyDetail: NextPage = () => {
 
   const [activatedMenu, setActivatedMenu] = useState<menuType>("companyInfo");
   const { mutate: addViewCount } = useAddCompanyViewCount();
+  const { isLoading, isSuccess } = useCompanyDetail({ companyId: Number(companyId) as number });
 
   useEffect(() => {
     const companyViewStr = sessionStorage.getItem("jobViewArr");
@@ -47,15 +50,25 @@ const CompanyDetail: NextPage = () => {
       <HeaderPart setActivatedMenu={setActivatedMenu} activatedMenu={activatedMenu} />
       {activatedMenu === "companyInfo" ? (
         <div css={container}>
-          <H2Title titleStr="일반 정보" />
-          <BasicInfoPart />
-          <H2Title titleStr="복지 정보" />
-          <WelfarePart />
-          <H2Title titleStr="연봉 정보" />
-          <MoneyPart />
-          <H2Title titleStr="공장 정보" />
-          <FactoryPart />
-          <LinkPart />
+          {isLoading || !isSuccess ? (
+            <div css={loadingBox}>
+              <div>
+                <SkeletonBox />
+              </div>
+            </div>
+          ) : (
+            <>
+              <H2Title titleStr="일반 정보" />
+              <BasicInfoPart />
+              <H2Title titleStr="복지 정보" />
+              <WelfarePart />
+              <H2Title titleStr="연봉 정보" />
+              <MoneyPart />
+              <H2Title titleStr="공장 정보" />
+              <FactoryPart />
+              <LinkPart />
+            </>
+          )}
         </div>
       ) : (
         <JobsPart />

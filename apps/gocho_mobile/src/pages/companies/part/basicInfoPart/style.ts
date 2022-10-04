@@ -106,6 +106,7 @@ export const nozoIconBox = css`
   height: 2.5rem;
   position: relative;
   margin-left: 0.5rem;
+  top: -0.7rem;
 `;
 
 export const nozoExplainText = css`

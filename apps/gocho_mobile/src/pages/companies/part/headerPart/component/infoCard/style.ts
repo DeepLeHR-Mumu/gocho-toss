@@ -5,6 +5,10 @@ export const wrapper = css`
   width: 100%;
   border-radius: 1.5rem;
   padding: 1.5rem;
+  height: 17rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-color: ${COLORS.GRAY100};
   margin-bottom: 2rem;
 `;
@@ -28,9 +32,9 @@ export const logoBox = css`
 export const bookmarkButton = (isBookmarked: boolean) => {
   return css`
     background-color: ${isBookmarked ? "#E9EEF9" : COLORS.GRAY90};
-    padding: 16px 24px;
-    border-radius: 24px;
-    width: 152px;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    width: 11rem;
     display: flex;
     justify-content: center;
     margin-bottom: 0.875rem;
@@ -42,7 +46,7 @@ export const bookmarkButton = (isBookmarked: boolean) => {
     > p {
       color: ${COLORS.GRAY30};
       font-weight: 400;
-      font-size: 14px;
+      font-size: 0.875rem;
       > span {
         margin-left: 0.3rem;
         color: ${isBookmarked ? COLORS.BLUE_NEON40 : COLORS.GRAY60};
@@ -50,12 +54,6 @@ export const bookmarkButton = (isBookmarked: boolean) => {
     }
   `;
 };
-
-export const iconBox = css``;
-
-export const bookmarkText = css``;
-
-export const bookmarkCount = css``;
 
 export const viewCountContainer = css`
   display: flex;

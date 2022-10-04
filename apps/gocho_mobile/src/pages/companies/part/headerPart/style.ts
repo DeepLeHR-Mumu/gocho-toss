@@ -7,7 +7,11 @@ export const wrapper = css`
   padding-bottom: 2rem;
 `;
 
-
+export const container = css`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`;
 
 export const buttonCSS = (isActivated: boolean) => {
   return css`

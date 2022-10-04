@@ -9,6 +9,7 @@ import { useUserInfo } from "shared-api/auth";
 import { useCompanyDetail } from "shared-api/company";
 import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr, useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 
 import {
   wrapper,
@@ -85,7 +86,11 @@ export const InfoBox: FunctionComponent = () => {
   };
 
   if (!isSuccess || isLoading) {
-    return <>Loading TODO</>;
+    return (
+      <section css={wrapper}>
+        <SkeletonBox />
+      </section>
+    );
   }
 
   return (
