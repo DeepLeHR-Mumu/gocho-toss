@@ -41,7 +41,7 @@ export const MyProfileMenu: FunctionComponent<MyProfileMenuProps> = ({ active })
           );
         })}
         <li>
-          <button type="button" css={logoutCSS} onClick={doLogout}>
+          <button type="button" css={logoutCSS} onClick={doLogout} aria-label="로그아웃">
             로그아웃
           </button>
         </li>

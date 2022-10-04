@@ -36,9 +36,9 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({
         <p css={middleDescCSS}>
           {middleDesc}
           {iconImage && (
-            <div css={middleDescIconBox}>
+            <span css={middleDescIconBox}>
               <Image src={iconImage} alt="" objectFit="contain" layout="fill" />
-            </div>
+            </span>
           )}
         </p>
         <strong css={titleCSS}>{title}</strong>

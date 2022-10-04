@@ -9,6 +9,8 @@ import { UserBadge } from "shared-ui/common/atom/userBadge";
 import { CommentLikeButton } from "shared-ui/common/atom/commentLikeButton";
 import { CommentDislikeButton } from "shared-ui/common/atom/commentDislikeButton";
 import { companyCommentArrKeyObj } from "shared-constant/queryKeyFactory/company/commentArrKeyObj";
+import { useLikeComment } from "shared-api/company/useLikeComment";
+import { useDisLikeComment } from "shared-api/company/useDisLikeComment";
 
 import { LoginCommentBoxProps, CommentFormValues } from "./type";
 import {
@@ -44,24 +46,40 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
     },
   });
 
-  const postLikeSubmit = () => {
-    return true;
-  };
-
-  const postDislikeSubmit = () => {
-    return true;
-  };
-
-  const { mutate } = useWriteCompanyComment();
+  const { mutate: postLikeComment } = useLikeComment();
+  const { mutate: postDisLikeComment } = useDisLikeComment();
+  const { mutate: postWriteCompanyComment } = useWriteCompanyComment();
   const queryClient = useQueryClient();
 
   const commentSubmit: SubmitHandler<CommentFormValues> = (commentObj) => {
-    mutate(commentObj, {
+    postWriteCompanyComment(commentObj, {
       onSuccess: () => {
         reset();
         queryClient.invalidateQueries(companyCommentArrKeyObj.all);
       },
     });
+  };
+
+  const postLikeSubmit = (companyId: number, commentId: number) => {
+    postLikeComment(
+      { companyId, commentId },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries(companyCommentArrKeyObj.all);
+        },
+      }
+    );
+  };
+
+  const postDislikeSubmit = (companyId: number, commentId: number) => {
+    postDisLikeComment(
+      { companyId, commentId },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries(companyCommentArrKeyObj.all);
+        },
+      }
+    );
   };
 
   useEffect(() => {
@@ -82,12 +100,13 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
           )}
           {commentArr.map((comment) => {
             const { month, date } = dateConverter(comment.createdTime);
+
             return (
               <li key={comment.id}>
                 <div css={commentHeader}>
-                  <p css={nicknameCSS}>
+                  <div css={nicknameCSS}>
                     {comment.nickname} <UserBadge badge={comment.badge} />
-                  </p>
+                  </div>
                   <p css={dateCSS}>
                     {month}.{date}
                   </p>
@@ -100,10 +119,22 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
                   </div>
                   <ul css={evalButtonBox}>
                     <li>
-                      <CommentLikeButton count={comment.likeCount} setLikeSubmit={postLikeSubmit} />
+                      <CommentLikeButton
+                        count={comment.likeCount}
+                        setLikeSubmit={() => {
+                          return comment.liked
+                            ? postDislikeSubmit(comment.companyId, comment.id)
+                            : postLikeSubmit(comment.companyId, comment.id);
+                        }}
+                      />
                     </li>
                     <li>
-                      <CommentDislikeButton count={comment.disLikeCount} setDislikeSubmit={postDislikeSubmit} />
+                      <CommentDislikeButton
+                        count={comment.disLikeCount}
+                        setDislikeSubmit={() => {
+                          postDislikeSubmit(comment.companyId, comment.id);
+                        }}
+                      />
                     </li>
                   </ul>
                 </div>
@@ -113,10 +144,10 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
         </ul>
       </section>
       <section css={writeContainer}>
-        <p css={userNicknameCSS}>
+        <div css={userNicknameCSS}>
           {userData.nickname}
           <UserBadge badge={userData.badge} />
-        </p>
+        </div>
         <form css={formCSS} onSubmit={handleSubmit(commentSubmit)}>
           <textarea css={textareaCSS} placeholder="댓글을 입력해주세요." {...register("description")} />
           <button type="submit" css={submitButton}>

@@ -71,6 +71,7 @@ export const commentBody = css`
 export const commentBox = css`
   background-color: ${COLORS.GRAY100};
   padding: 0.75rem;
+  min-width: 3.75rem;
   box-sizing: border-box;
   border-radius: 0 1rem 1rem 1rem;
   position: relative;
