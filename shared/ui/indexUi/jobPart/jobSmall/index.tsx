@@ -2,7 +2,9 @@ import { FunctionComponent, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { BsFillBookmarkFill } from "react-icons/bs";
+import { useQueryClient } from "@tanstack/react-query";
 
+import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import highTrue from "shared-image/global/common/go_color.svg";
 import highFalse from "shared-image/global/common/go_mono.svg";
 import collegeTrue from "shared-image/global/common/cho_color.svg";
@@ -26,10 +28,37 @@ import {
 } from "./style";
 import { JobSmallCardProps, JobSmallCardSkeleton } from "./type";
 
-export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSkeleton> = ({ jobData, isSkeleton }) => {
+export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSkeleton> = ({
+  userId,
+  isBookmarked,
+  jobData,
+  isSkeleton,
+}) => {
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
 
-  // NOTMYFAULT OU?
+  const queryClient = useQueryClient();
+
+  const { mutate: addMutate } = useAddJobBookmarkArr({
+    id: jobData?.id as number,
+    end_time: jobData?.endTime as number,
+    title: jobData?.title as string,
+    cut: jobData?.cut as boolean,
+    company: {
+      name: jobData?.companyName as string,
+      logo_url: jobData?.companyLogo as string,
+    },
+  });
+
+  const { mutate: deleteMutate } = useDeleteJobBookmarkArr({
+    id: jobData?.id as number,
+    end_time: jobData?.endTime as number,
+    title: jobData?.title as string,
+    cut: jobData?.cut as boolean,
+    company: {
+      name: jobData?.companyName as string,
+      logo_url: jobData?.companyLogo as string,
+    },
+  });
 
   if (isSkeleton || jobData === undefined) {
     return (
@@ -39,55 +68,86 @@ export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSke
     );
   }
 
+  const addJobBookmark = () => {
+    if (userId)
+      addMutate(
+        { userId, elemId: jobData.id },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries([{ data: "jobArr" }]);
+          },
+        }
+      );
+  };
+
+  const deleteJobBookmark = () => {
+    if (userId)
+      deleteMutate(
+        { userId, elemId: jobData.id },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries([{ data: "jobArr" }]);
+          },
+        }
+      );
+  };
+
   return (
-    <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
-      <a css={cardWrapper} aria-label={`${jobData.title} 채용 공고로 이동`}>
-        <button type="button" css={bookmarkButtonCSS} aria-label={`${jobData.companyName} 북마크하기`}>
-          <BsFillBookmarkFill />
-        </button>
+    <div css={cardWrapper}>
+      <button
+        type="button"
+        onClick={isBookmarked ? deleteJobBookmark : addJobBookmark}
+        css={bookmarkButtonCSS(isBookmarked)}
+        aria-label={`${jobData.companyName} 북마크하기`}
+      >
+        <BsFillBookmarkFill />
+      </button>
 
-        <div css={flexBox}>
-          <div css={companyLogoBox}>
-            <Image
-              layout="fill"
-              objectFit="contain"
-              src={imageSrc}
-              alt=""
-              onError={() => {
-                return setImageSrc(defaultCompanyLogo);
-              }}
-            />
-          </div>
+      <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
+        <a aria-label={`${jobData.title} 채용 공고로 이동`}>
+          <div css={flexBox}>
+            <div css={companyLogoBox}>
+              <Image
+                layout="fill"
+                objectFit="contain"
+                src={imageSrc}
+                alt=""
+                onError={() => {
+                  return setImageSrc(defaultCompanyLogo);
+                }}
+              />
+            </div>
 
-          <div css={infoBox}>
-            <DdayBox endTime={jobData.endTime} />
-            <p css={companyNameCSS}>{jobData.companyName}</p>
-            <p css={titleCSS}>{jobData.title}</p>
+            <div css={infoBox}>
+              <DdayBox endTime={jobData.endTime} />
+              <p css={companyNameCSS}>{jobData.companyName}</p>
+              <p css={titleCSS}>{jobData.title}</p>
+            </div>
           </div>
-        </div>
-        <ul css={bottomInfo}>
-          <li>
-            <Image
-              layout="fixed"
-              objectFit="contain"
-              src={jobData.high ? highTrue : highFalse}
-              alt={jobData.high ? "고졸 지원 가능" : "고졸 지원 불가능"}
-            />
-          </li>
-          <li>
-            <Image
-              src={jobData.college ? collegeTrue : collegeFalse}
-              alt={jobData.college ? "초대졸 지원 가능" : "초대졸 지원 불가능"}
-            />
-          </li>
-          <li>
-            {jobData.placeArr[0][1]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
-          </li>
-          <li>
-            {jobData.rotationArr[0]} {jobData.rotationArr.length !== 1 && `외 ${jobData.rotationArr.length - 1}형태`}
-          </li>
-        </ul>
-      </a>
-    </Link>
+          <ul css={bottomInfo}>
+            <li>
+              <Image
+                layout="fixed"
+                objectFit="contain"
+                src={jobData.high ? highTrue : highFalse}
+                alt={jobData.high ? "고졸 지원 가능" : "고졸 지원 불가능"}
+              />
+            </li>
+            <li>
+              <Image
+                src={jobData.college ? collegeTrue : collegeFalse}
+                alt={jobData.college ? "초대졸 지원 가능" : "초대졸 지원 불가능"}
+              />
+            </li>
+            <li>
+              {jobData.placeArr[0][1]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
+            </li>
+            <li>
+              {jobData.rotationArr[0]} {jobData.rotationArr.length !== 1 && `외 ${jobData.rotationArr.length - 1}형태`}
+            </li>
+          </ul>
+        </a>
+      </Link>
+    </div>
   );
 };

@@ -55,6 +55,7 @@ test.describe("메인페이지 테스트", () => {
     await expect(page.locator("h2")).toContainText(headingH2Arr);
   });
 
+  // 결과가 없다면 다음 대처방식의 대한 고민 만약 Header 컴포넌트가 없다면 다음으로 ...??
   test("Header component 테스트", async ({ page }) => {
     await page.locator("_react=Header").nth(0).locator("a").nth(0).click();
     await expect(page).toHaveURL(`${linkObj.baseUrl}/`);
