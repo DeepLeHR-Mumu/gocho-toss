@@ -75,9 +75,6 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   }, []);
   return (
     <div css={wrapper}>
-      <button type="button" onClick={kakaoLogin}>
-        카카오 로그인 버튼
-      </button>
       <div css={closeBtn}>
         {button === "home" ? <CloseButton size="S" isHome /> : <CloseButton size="S" buttonClick={closeModal} />}
       </div>
@@ -125,7 +122,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
         <div css={errorBox}>{errorMsg && <p css={errorMsgCSS}>{errorMsg}</p>}</div>
         <div css={loginButton}>
           <NormalButton wide variant="filled" text="로그인 하기" isSubmit />
-          <button type="button" css={kakaoLoginBox}>
+          <button type="button" css={kakaoLoginBox} onClick={kakaoLogin}>
             <div css={kakaoLogoBox}>
               <Image src={kakaoMono} alt="카카오 로그인" layout="fill" objectFit="contain" />
             </div>
