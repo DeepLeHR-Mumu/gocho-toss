@@ -7,6 +7,8 @@ import { useCompanyArr } from "shared-api/company";
 import { Layout } from "@component/layout";
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
 
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_JD_EXPLIST } from "shared-constant/meta";
 import { ExpJobCardList } from "./component/expJobCardList";
 import { setJobOrderButtonArr } from "./constant";
 import {
@@ -53,6 +55,7 @@ const JobsExpList: NextPage = () => {
 
   return (
     <main css={mainContainer}>
+      <MetaHead metaData={META_JD_EXPLIST} />
       <Layout>
         <h2>만료 공고</h2>
         <section css={sectionContainer}>

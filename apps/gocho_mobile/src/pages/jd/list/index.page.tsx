@@ -1,14 +1,15 @@
 import { NextPage } from "next";
-import Head from "next/head";
+
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_JD_LIST } from "shared-constant/meta";
+
 import { AdPart } from "./part/adPart";
 import { ListPart } from "./part/listPart";
 
 const JdList: NextPage = () => {
   return (
     <main>
-      <Head>
-        <title>실시간 채용 공고 - 고초대졸닷컴</title>
-      </Head>
+      <MetaHead metaData={META_JD_LIST} />
       <AdPart />
       <ListPart />
     </main>

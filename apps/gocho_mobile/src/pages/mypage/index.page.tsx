@@ -3,6 +3,8 @@ import { useState } from "react";
 
 import { Layout } from "@component/layout";
 
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_MYPAGE } from "shared-constant/meta";
 import { BookmarkCompanyPart } from "./part/bookmarkCompanyPart";
 import { BookmarkJobPart } from "./part/bookmarkJobPart";
 import { setBookmarkViewButtonArr } from "./constant";
@@ -14,6 +16,7 @@ const MyPage: NextPage = () => {
 
   return (
     <main css={mainContainer}>
+      <MetaHead metaData={META_MYPAGE} />
       <Layout>
         <div css={headerContainer}>
           <h2 css={title}>MY 북마크</h2>
