@@ -2,16 +2,18 @@ import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
-  email: string;
-  password: string;
+  code: string;
 }
 
 export interface ResponseObjDef {
-  data: { token: string };
+  data: {
+    result: "NEW_USER" | "GOCHO_USER" | "KAKAO_LOGIN_OK";
+    token: string | undefined;
+  };
 }
 
-export interface PostLoginDef {
-  ({ email, password }: RequestObjDef): Promise<ResponseObjDef>;
+export interface PostKakaoLoginDef {
+  ({ code }: RequestObjDef): Promise<ResponseObjDef>;
 }
 
 export interface useDoLoginProps {

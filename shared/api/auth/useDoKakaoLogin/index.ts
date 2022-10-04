@@ -3,10 +3,11 @@ import { AxiosError } from "axios";
 
 import { axiosInstance } from "../../axiosInstance";
 
-import { ResponseObjDef, useDoLoginProps, PostLoginDef, RequestObjDef } from "./type";
+import { ResponseObjDef, useDoLoginProps, PostKakaoLoginDef, RequestObjDef } from "./type";
 
-const postKakaoLogin: PostLoginDef = async (requestObj) => {
-  const { data } = await axiosInstance.post("/auth/login", { ...requestObj });
+const postKakaoLogin: PostKakaoLoginDef = async (requestObj) => {
+  const { data } = await axiosInstance.post("/auth/kakao-login", { ...requestObj });
+
   return data;
 };
 

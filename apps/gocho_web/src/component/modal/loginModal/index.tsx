@@ -51,14 +51,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   const kakaoLogin = () => {
     window.Kakao.Auth.authorize({
       redirectUri: "http://localhost:3000/kakaologin",
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      // console.log("I'm successed");
-      // axiosInstance.post("/auth/kakao-login", { code: authObj.access_token });
     });
-    // // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    // fail(err: any) {
-    //   console.log(err);
-    // },
   };
 
   useEffect(() => {

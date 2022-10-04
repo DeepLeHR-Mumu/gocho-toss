@@ -12,7 +12,7 @@ import dormitoryIcon from "shared-image/page/factory/dormitory_icon.svg";
 import xIcon from "shared-image/page/factory/x_icon.svg";
 import oIcon from "shared-image/page/factory/o_icon.svg";
 
-import { FiChevronUp, FiCopy, FiInfo, FiMapPin } from "react-icons/fi";
+import { FiChevronUp, FiChevronDown, FiCopy, FiInfo, FiMapPin } from "react-icons/fi";
 import {
   addressCSS,
   xoBox,
@@ -72,7 +72,7 @@ export const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factoryInfo }
             });
           }}
         >
-          <FiChevronUp />
+          {isCardOpen ? <FiChevronUp /> : <FiChevronDown />}
         </button>
       </header>
       {isCardOpen && (

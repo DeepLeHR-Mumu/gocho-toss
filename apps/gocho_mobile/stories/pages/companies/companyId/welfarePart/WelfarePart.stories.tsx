@@ -5,7 +5,8 @@ import { rest } from "msw";
 import { BACKEND_URL } from "shared-constant/externalURL";
 
 import { WelfarePart } from "@pages/companies/part/welfarePart";
-import { MockingMother } from "../mockingMother";
+import { ALL } from "./mockData";
+// import { MockingMother } from "../mockingMother";
 
 export default {
   title: "pages/indexComponent/WelfarePart",
@@ -34,7 +35,7 @@ export const 하이닉스 = Template.bind({});
   msw: {
     handlers: [
       rest.get(`${BACKEND_URL}companies/119`, (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json(MockingMother));
+        return res(ctx.status(200), ctx.json(ALL));
       }),
     ],
   },
