@@ -47,7 +47,7 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
   const { data: tipBookmarkArr } = useUserTipBookmarkArr({ userId: userData?.id });
 
   const isBookmarked = Boolean(
-    tipBookmarkArr?.some((tipBookmark) => {
+    tipBookmarkArr?.some((tipBookmark: number) => {
       return tipBookmark === tipData.id;
     })
   );

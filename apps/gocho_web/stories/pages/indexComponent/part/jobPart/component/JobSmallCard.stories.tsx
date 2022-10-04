@@ -1,10 +1,10 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { JobSmallCard } from "shared-ui/card/jobSmall";
+import { MainJobCard } from "shared-ui/card/MainJobCard";
 
 export default {
-  title: "메인페이지/jobPart/JobSmallCard",
-  component: JobSmallCard,
+  title: "메인페이지/jobPart/MainJobCard",
+  component: MainJobCard,
   argTypes: {
     companyName: { control: "text", description: "카드에 출력되는 회사이름" },
     companyId: { control: "number", description: "회사 id" },
@@ -15,10 +15,10 @@ export default {
   parameters: {
     componentSubtitle: "메인페이지 - 실시간 채용 공고에 출력되는 채용공고 카드",
   },
-} as ComponentMeta<typeof JobSmallCard>;
+} as ComponentMeta<typeof MainJobCard>;
 
-const Template: ComponentStory<typeof JobSmallCard> = (args) => {
-  return <JobSmallCard {...args} />;
+const Template: ComponentStory<typeof MainJobCard> = (args) => {
+  return <MainJobCard {...args} />;
 };
 
 export const 기본 = Template.bind({});
@@ -30,6 +30,7 @@ export const 기본 = Template.bind({});
     companyLogo: "null",
     title: "[물류] 사원0명 채용",
     endTime: 2390878230,
+    cut: false,
     high: true,
     college: false,
     placeArr: ["서울시", "안성시"],

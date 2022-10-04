@@ -158,7 +158,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
                     : `${startYear}.${startMonth}.${startDate}~${endYear}.${endMonth}.${endDate}`}
                 </p>
                 <DdayBox endTime={jobData.endTime} />
-                {jobData.cut && <div css={cutBox}>채용시 마감</div>}
+                {jobData.cut && <div css={cutBox}>채용시마감</div>}
               </div>
               <p css={companyName}>{jobData.companyName}</p>
               <strong css={titleCSS}>{jobData.title}</strong>

@@ -10,6 +10,7 @@ import {
   sectionWrapper,
   applyButton,
   beforeAfterDateBox,
+  cutBox,
   desc,
   detailTitle,
   flexBox,
@@ -48,6 +49,7 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
             <li>{`${endYear}. ${endMonth}. ${endDate}  ${endHour}:${endMinute}`}</li>
           </ul>
           <DdayBox endTime={jobDetailData.endTime} />
+          {jobDetailData.cut && <div css={cutBox}>채용시마감</div>}
           <a css={applyButton} target="_blank" href={jobDetailData.applyUrl} rel="noopener noreferrer">
             지원하러가기
           </a>

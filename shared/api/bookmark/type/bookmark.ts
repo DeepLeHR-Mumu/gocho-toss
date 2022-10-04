@@ -22,6 +22,6 @@ export interface postingBookmarkResObjDef {
   data: number[];
 }
 
-export interface tipBookmarkObjDef {
+export interface tipBookmarkResObjDef {
   data: number[];
 }

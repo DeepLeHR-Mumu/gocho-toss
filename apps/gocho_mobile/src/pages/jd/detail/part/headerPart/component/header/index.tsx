@@ -21,6 +21,7 @@ import {
   logoBox,
   linkContainer,
   applyButton,
+  cutBox,
   bookmarkButton,
   buttonCSS,
   youtubeButton,
@@ -117,6 +118,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
               onClick={() => {
                 return isBookmarked ? deleteJobBookmark() : addJobBookmark();
               }}
+              aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
             >
               <BsFillBookmarkFill />
               공고 북마크 {jobDetailData.bookmarkCount}
@@ -141,6 +143,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
           <li>
             <DdayBox endTime={jobDetailData.endTime} />
           </li>
+          <li>{jobDetailData.cut && <div css={cutBox}>채용시마감</div>}</li>
           <li>
             <p css={date}>
               {`${startYear}. ${startMonth}. ${startDate}`} ~{" "}

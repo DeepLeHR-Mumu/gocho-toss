@@ -22,6 +22,7 @@ import {
   companyNameCSS,
   dateBox,
   dateCSS,
+  cutBox,
   headerCSS,
   imageBox,
   linksCSS,
@@ -105,6 +106,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
           <li>
             <DdayBox endTime={jobDetailData.endTime} />
           </li>
+          <li>{jobDetailData.cut && <div css={cutBox}>채용시마감</div>}</li>
           <li>
             <p css={dateCSS}>
               {`${startYear}. ${startMonth}. ${startDate}`} ~{" "}
@@ -120,7 +122,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
             onClick={() => {
               return isBookmarked ? deleteJobBookmark() : addJobBookmark();
             }}
-            aria-label={isBookmarked ? "공고 북마크 해지" : "공고 북마크"}
+            aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
           >
             <BsFillBookmarkFill />
           </button>

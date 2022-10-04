@@ -4,9 +4,7 @@ import { shorten } from "shared-style/common";
 
 export const jobCardSkeleton = css`
   overflow: hidden;
-  max-width: 11rem;
-  width: 48.5%;
-  height: 22rem;
+  width: 100%;
   border-radius: 1.5rem;
   margin-bottom: 1rem;
   background-color: ${COLORS.GRAY100};
@@ -15,9 +13,7 @@ export const jobCardSkeleton = css`
 export const cardWrapper = (isExpired = false) => {
   return css`
     position: relative;
-    max-width: 11rem;
-    width: 48.5%;
-    height: 22rem;
+    width: 100%;
     border-radius: 1.5rem;
     margin-bottom: 1rem;
     padding: 1rem;
@@ -71,15 +67,19 @@ export const dateInfoContainer = css`
 
 export const cutBox = css`
   font-size: 0.75rem;
-  width: -moz-fit-content;
-  width: fit-content;
   white-space: nowrap;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.25rem;
+  margin-left: 0.375rem;
   border-radius: 1rem;
-  margin-left: 0.25rem;
-  padding: 0.3rem 0.5rem;
-  background-color: #f6f6f6;
+  width: fit-content;
+  height: 1.625rem;
+  background-color: #f2f2f2;
   color: #1553cd;
+  z-index: 20;
 `;
 
 export const companyInfoContainer = css`

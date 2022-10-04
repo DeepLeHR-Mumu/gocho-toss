@@ -1,27 +1,27 @@
 import { css } from "@emotion/react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { JobCard } from "@pages/mypage/part/bookmarkPart/jobCard";
+import { BookmarkedJobCard } from "shared-ui/card/bookmarkedJobCard";
 
 export default {
   title: "마이페이지/bookmarkPart/JobCard",
-  component: JobCard,
+  component: BookmarkedJobCard,
   argTypes: {
     companyName: { description: "카드에 출력될 기업이름" },
     companyId: { description: "기업 이미지를 불러오기 위한 기업 Id" },
     title: { description: "카드에 출력되는 채용 공고 이름" },
     endDateNumber: { description: "D-Day 계산을 위해 받아오는 시작일 ms" },
   },
-} as ComponentMeta<typeof JobCard>;
+} as ComponentMeta<typeof BookmarkedJobCard>;
 
-const Template: ComponentStory<typeof JobCard> = (args) => {
+const Template: ComponentStory<typeof BookmarkedJobCard> = (args) => {
   return (
     <div
       css={css`
         width: 40rem;
       `}
     >
-      <JobCard {...args} />
+      <BookmarkedJobCard {...args} />
     </div>
   );
 };

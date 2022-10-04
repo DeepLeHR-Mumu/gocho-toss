@@ -79,6 +79,7 @@ export const BottomMenu: FunctionComponent<BottomMenuProps> = ({
         onClick={() => {
           return isBookmarked ? deleteJobBookmark() : addJobBookmark();
         }}
+        aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
       >
         <BsFillBookmarkFill />
       </button>

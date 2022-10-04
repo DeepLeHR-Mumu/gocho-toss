@@ -11,39 +11,51 @@ export const cardWrapper = (isMobile: boolean) => {
     width: ${isMobile ? "100%" : "calc(33% - 0.5rem)"};
     border-radius: 1.5rem;
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.15);
-    padding: 1.5rem;
+    padding: 1rem;
     overflow: hidden;
   `;
 };
 
-// export const bookmarkButtonCSS = css`
-//   position: absolute;
-//   top: 1.5rem;
-//   right: 1.5rem;
-//   padding: 1rem;
-//   background-color: ${COLORS.GRAY90};
-//   border-radius: 0 1.25rem 0 1.25rem;
-//   color: ${COLORS.GRAY60};
-//   font-size: 1rem;
-//   z-index: 15;
-// `;
+export const bookmarkButton = (isBookmarked = false) => {
+  return css`
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 1rem;
+    background-color: ${COLORS.GRAY90};
+    border-radius: 0 1.25rem 0 1.25rem;
+    color: ${isBookmarked ? COLORS.BLUE_FIRST40 : COLORS.GRAY60};
+    background-color: ${isBookmarked ? COLORS.STATE_SUCCESS : `${COLORS.GRAY90}`};
+    font-size: 1rem;
+    z-index: 15;
+  `;
+};
 
-export const bookmarkButtonCSS = css`
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 1rem;
-  background-color: ${COLORS.GRAY90};
-  border-radius: 0 1.25rem 0 1.25rem;
-  color: ${COLORS.GRAY60};
-  font-size: 1rem;
-  z-index: 15;
+export const labelContainer = css`
+  display: flex;
+`;
+
+export const cutBox = css`
+  font-size: 0.75rem;
+  white-space: nowrap;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.25rem;
+  margin-left: 0.375rem;
+  border-radius: 1rem;
+  width: fit-content;
+  height: 1.625rem;
+  background-color: #f2f2f2;
+  color: ${COLORS.GRAY40};
 `;
 
 export const flexBox = css`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
+  margin-top: 0.5rem;
 `;
 
 export const infoBox = css`
@@ -54,7 +66,7 @@ export const companyNameCSS = css`
   font-size: 0.875rem;
   color: ${COLORS.GRAY40};
   font-weight: 500;
-  padding: 0.375rem 0;
+  margin-bottom: 0.375rem;
   line-height: 1.8;
   ${shorten()}
 `;

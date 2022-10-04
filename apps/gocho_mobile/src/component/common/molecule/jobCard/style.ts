@@ -71,14 +71,17 @@ export const dateInfoContainer = css`
 
 export const cutBox = css`
   font-size: 0.75rem;
-  width: -moz-fit-content;
-  width: fit-content;
   white-space: nowrap;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.25rem;
+  margin-left: 0.375rem;
   border-radius: 1rem;
-  margin-left: 0.25rem;
-  padding: 0.3rem 0.5rem;
-  background-color: #f6f6f6;
+  width: fit-content;
+  height: 1.625rem;
+  background-color: #f2f2f2;
   color: #1553cd;
 `;
 

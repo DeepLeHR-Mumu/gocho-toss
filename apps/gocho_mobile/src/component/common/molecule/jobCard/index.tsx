@@ -121,7 +121,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
 
           <div css={dateInfoContainer}>
             <DdayBox endTime={jobData.endTime} />
-            {jobData.cut && <div css={cutBox}>채용시 마감</div>}
+            {jobData.cut && <div css={cutBox}>채용시마감</div>}
           </div>
           <div css={companyInfoContainer}>
             <div css={companyLogoWrapper}>

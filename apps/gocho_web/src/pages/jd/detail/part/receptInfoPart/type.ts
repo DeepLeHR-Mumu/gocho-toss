@@ -3,6 +3,7 @@ export interface ReceptInfoPartProps {
     processArr: string[];
     startTime: number;
     endTime: number;
+    cut: boolean;
     applyUrl: string;
     applyRouteArr: string[];
     etcArr: string[];
