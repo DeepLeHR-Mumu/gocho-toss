@@ -90,6 +90,21 @@ export const dDayContainer = css`
   position: relative;
 `;
 
+export const cutBox = css`
+  font-size: 0.75rem;
+  white-space: nowrap;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.25rem;
+  border-radius: 1rem;
+  width: fit-content;
+  height: 1.625rem;
+  background-color: #f2f2f2;
+  color: #1553cd;
+`;
+
 export const applyButton = css`
   background-color: ${COLORS.BLUE_FIRST40};
   display: flex;

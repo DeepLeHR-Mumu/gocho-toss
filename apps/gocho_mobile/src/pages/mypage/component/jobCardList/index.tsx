@@ -2,22 +2,20 @@ import { FunctionComponent } from "react";
 
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
+import { BookmarkedJobCard } from "shared-ui/card/bookmarkedJobCard";
 import { useUserInfo } from "shared-api/auth";
-import { useUserJobBookmarkArr } from "shared-api/bookmark";
 
-import { JobCard } from "../jobCard";
 import { listContainer } from "./style";
 import { JobListPartProps } from "./type";
 
 export const JobCardList: FunctionComponent<JobListPartProps> = ({ jobDataArr, isLoading }) => {
   const { data: userData } = useUserInfo();
-  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
   if (!jobDataArr || isLoading) {
     return (
       <div css={listContainer}>
         {dummyArrCreator(10).map((dummy) => {
-          return <JobCard isSkeleton key={`UnifiedSearchJobCardSkeleton${dummy}`} />;
+          return <BookmarkedJobCard isSkeleton key={`UnifiedSearchJobCardSkeleton${dummy}`} />;
         })}
       </div>
     );
@@ -26,15 +24,11 @@ export const JobCardList: FunctionComponent<JobListPartProps> = ({ jobDataArr, i
   return (
     <section css={listContainer}>
       {jobDataArr.map((jobData) => {
-        const isBookmarked = Boolean(
-          userJobBookmarkArr?.some((job) => {
-            return job.id === jobData.id;
-          })
-        );
         return (
-          <JobCard
+          <BookmarkedJobCard
             jobData={jobData}
-            isBookmarked={isBookmarked}
+            isBookmarked
+            isMobile
             userId={userData?.id}
             key={`UnifiedSearchJobCard${jobData.id}`}
           />

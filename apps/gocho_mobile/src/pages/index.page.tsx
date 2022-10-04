@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_INDEX } from "shared-constant/meta";
 import { MainCarouselPart } from "./indexComponent/part/mainCarouselPart";
 import { JobPart } from "./indexComponent/part/jobPart";
 import { SuggestedJobPart } from "./indexComponent/part/suggestedJobPart";
@@ -10,9 +11,7 @@ import { CompanyCommentPart } from "./indexComponent/part/companyCommentPart";
 const Home: NextPage = () => {
   return (
     <main>
-      <Head>
-        <title>생산직 NO.1 취업 플랫폼 - 고초대졸닷컴</title>
-      </Head>
+      <MetaHead metaData={META_INDEX} />
       <MainCarouselPart />
       <JobPart />
       <BannerPart />

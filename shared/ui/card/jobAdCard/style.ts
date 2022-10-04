@@ -1,4 +1,4 @@
-import { css, SerializedStyles } from "@emotion/react";
+import { css } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
 import { shorten } from "shared-style/common";
@@ -10,24 +10,22 @@ export const jobAdCardSkeleton = css`
   margin: 0.5rem;
 `;
 
-export const cardWrapper = css`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: calc(100% - 1rem);
-  border-radius: 1.5rem 1.5rem 0 0;
-  padding: 1rem;
-  background-color: #f2f4f7;
-`;
+export const cardWrapper = (isMobile: boolean) => {
+  return css`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: ${isMobile ? "100%" : "calc(100% - 1rem)"};
+    border-radius: 1.5rem 1.5rem 0 0;
+    padding: 1rem;
+    background-color: #f2f4f7;
+  `;
+};
 
-interface ColorLineDef {
-  (colorCode: string): SerializedStyles;
-}
-
-export const colorLine: ColorLineDef = (colorCode) => {
+export const colorLine = (colorCode: string, isMobile: boolean) => {
   return css`
     height: 0.8rem;
-    width: calc(100% - 1rem);
+    width: ${isMobile ? "100%" : "calc(100% - 1rem)"};
     background-image: linear-gradient(to right, ${colorCode}, ${COLORS.BLUE_FIRST40});
   `;
 };

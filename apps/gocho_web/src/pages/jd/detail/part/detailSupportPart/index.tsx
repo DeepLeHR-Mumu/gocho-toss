@@ -3,6 +3,8 @@ import Image from "next/image";
 import { FiInfo } from "react-icons/fi";
 
 import logoSrc from "shared-image/global/deepLeLogo/largeColor.svg";
+import graduateColor from "shared-image/global/common/graduate_color.svg";
+import graduateGray from "shared-image/global/common/graduate_gray.svg";
 
 import { getJobTitleCreator } from "../common/util";
 import { NoDataDesc } from "../common/component/noDataDesc";
@@ -36,10 +38,16 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
           <p css={containerSubTitle}>
             <FiInfo />
             <span css={isColorPoint(true)}>
-              <strong css={isPossibleEduIcon(true)} /> 지원가능
+              <strong css={isPossibleEduIcon}>
+                <Image src={graduateColor} alt="" />
+              </strong>
+              지원가능
             </span>
             <span css={isColorPoint(false)}>
-              <strong css={isPossibleEduIcon(false)} /> 지원불가
+              <strong css={isPossibleEduIcon}>
+                <Image src={graduateGray} alt="" />
+              </strong>
+              지원불가
             </span>
           </p>
         </div>
@@ -53,7 +61,9 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
                 {getPossibleEduArr(freshPosition.possibleEdu).map((edu) => {
                   return (
                     <li key={edu.desc}>
-                      <div css={eduImageBox(edu.isPossible)} />
+                      <div css={eduImageBox(edu.isPossible)}>
+                        <Image src={edu.isPossible ? graduateColor : graduateGray} alt="" />
+                      </div>
                       <p css={isPossibleEduDesc(edu.isPossible)}>{edu.desc}</p>
                     </li>
                   );

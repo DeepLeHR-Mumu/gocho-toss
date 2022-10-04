@@ -4,12 +4,20 @@ import Link from "next/link";
 import { subMenuButton } from "./style";
 import { SubMenuButtonProps } from "./type";
 
-export const SubMenuButton: FunctionComponent<SubMenuButtonProps> = ({ link, title }) => {
+export const SubMenuButton: FunctionComponent<SubMenuButtonProps> = ({ link, title, setOpenedElement }) => {
   return (
-    <li css={subMenuButton} role="presentation">
-      <Link href={link} passHref>
-        {title}
-      </Link>
+    <li role="presentation">
+      <button
+        css={subMenuButton}
+        type="button"
+        onClick={() => {
+          setOpenedElement(null);
+        }}
+      >
+        <Link href={link} passHref>
+          {title}
+        </Link>
+      </button>
     </li>
   );
 };

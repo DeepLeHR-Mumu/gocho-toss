@@ -1,6 +1,6 @@
-import { tipBookmarkObjDef } from "../../type/bookmark";
+import { tipBookmarkResObjDef } from "../../type/bookmark";
 
-export const selector = ({ data }: tipBookmarkObjDef) => {
+export const selector = ({ data }: tipBookmarkResObjDef) => {
   return data.map((bookmark) => {
     return bookmark;
   });

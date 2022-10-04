@@ -19,5 +19,5 @@ export const bottomPopup = css`
   bottom: 0;
   background-color: ${COLORS.GRAY100};
   border-radius: 1.5rem 1.5rem 0 0;
-  z-index: 50;
+  z-index: 110;
 `;

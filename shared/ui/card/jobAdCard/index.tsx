@@ -21,9 +21,12 @@ import {
   titleCSS,
 } from "./style";
 
-export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = ({ jobAdData, isSkeleton }) => {
+export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = ({
+  jobAdData,
+  isSkeleton,
+  isMobile,
+}) => {
   const [imageSrc, setImageSrc] = useState(jobAdData?.companyLogo as string);
-
   if (isSkeleton || jobAdData === undefined) {
     return (
       <div css={jobAdCardSkeleton}>
@@ -38,7 +41,7 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
   return (
     <>
       <Link href={`${JOBS_DETAIL_URL}/${jobAdData.id}`} passHref>
-        <a css={cardWrapper}>
+        <a css={cardWrapper(isMobile)}>
           <div css={mainContainer}>
             <div css={companyLogoWrapper}>
               <div css={companyLogoBox}>
@@ -64,7 +67,7 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
         </a>
       </Link>
       {/* LATER : 관리자페이지 color 연결 */}
-      <div css={colorLine("#2284a5")} />
+      <div css={colorLine("#2284a5", isMobile)} />
     </>
   );
 };

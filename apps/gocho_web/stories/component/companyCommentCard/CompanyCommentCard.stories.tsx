@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { rest } from "msw";
 
-import { CompanyCommentCard } from "@component/card/companyComment";
+import { CompanyCommentCard } from "shared-ui/card/companyComment";
 import { workingResponse, errorResponse } from "./mockData";
 
 export default {

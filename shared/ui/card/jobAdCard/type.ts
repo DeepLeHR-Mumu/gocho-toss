@@ -7,10 +7,12 @@ export interface JobAdCardProps {
     endTime: number;
     title: string;
   };
-  isSkeleton: boolean;
+  isMobile: boolean;
+  isSkeleton?: never;
 }
 
 export interface JobAdCardSkeleton {
-  jobAdData?: undefined;
+  jobAdData?: never;
+  isMobile?: never;
   isSkeleton: boolean;
 }
