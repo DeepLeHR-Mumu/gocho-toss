@@ -22,7 +22,11 @@ export const commentContainerSkeleton = css`
   box-shadow: 0px 0.25rem 0.75rem ${COLORS.GRAY80};
 `;
 
-export const commentArrCSS = css``;
+export const commentArrCSS = css`
+  > li {
+    margin-bottom: 0.75rem;
+  }
+`;
 
 export const firstCommentAlert = css`
   display: flex;

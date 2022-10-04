@@ -1,4 +1,10 @@
 export interface LoginCommentBoxProps {
+  jdId: number | null;
+  companyData: {
+    name: string;
+    logoUrl: string;
+    id: number;
+  };
   commentArr: {
     id: number;
     companyId: number;
@@ -19,4 +25,10 @@ export interface LoginCommentBoxProps {
     badge: "default" | "early_bird" | "admin";
     nickname: string;
   };
+}
+
+export interface CommentFormValues {
+  description: string;
+  companyId: number;
+  jdId: number | null;
 }

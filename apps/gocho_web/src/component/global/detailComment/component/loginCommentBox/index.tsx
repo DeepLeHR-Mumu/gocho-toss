@@ -1,12 +1,16 @@
 import { FunctionComponent, useRef, useEffect } from "react";
 import { AiOutlineSend } from "react-icons/ai";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
 
+import { useWriteCompanyComment } from "shared-api/company/useWriteCompanyComment";
 import { dateConverter } from "shared-util/date";
 import { UserBadge } from "shared-ui/common/atom/userBadge";
 import { CommentLikeButton } from "shared-ui/common/atom/commentLikeButton";
 import { CommentDislikeButton } from "shared-ui/common/atom/commentDislikeButton";
+import { companyCommentArrKeyObj } from "shared-constant/queryKeyFactory/company/commentArrKeyObj";
 
-import { LoginCommentBoxProps } from "./type";
+import { LoginCommentBoxProps, CommentFormValues } from "./type";
 import {
   commentArrCSS,
   commentBody,
@@ -26,8 +30,19 @@ import {
   firstCommentAlert,
 } from "./style";
 
-export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ commentArr, userData }) => {
+export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
+  jdId = null,
+  companyData,
+  commentArr,
+  userData,
+}) => {
   const commentBoxRef = useRef<HTMLDivElement | null>(null);
+  const { register, handleSubmit, reset } = useForm<CommentFormValues>({
+    defaultValues: {
+      companyId: companyData.id,
+      jdId,
+    },
+  });
 
   const postLikeSubmit = () => {
     return true;
@@ -35,6 +50,18 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ comme
 
   const postDislikeSubmit = () => {
     return true;
+  };
+
+  const { mutate } = useWriteCompanyComment();
+  const queryClient = useQueryClient();
+
+  const commentSubmit: SubmitHandler<CommentFormValues> = (commentObj) => {
+    mutate(commentObj, {
+      onSuccess: () => {
+        reset();
+        queryClient.invalidateQueries(companyCommentArrKeyObj.all);
+      },
+    });
   };
 
   useEffect(() => {
@@ -90,8 +117,8 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ comme
           {userData.nickname}
           <UserBadge badge={userData.badge} />
         </p>
-        <form css={formCSS}>
-          <textarea css={textareaCSS} placeholder="댓글을 입력해주세요." />
+        <form css={formCSS} onSubmit={handleSubmit(commentSubmit)}>
+          <textarea css={textareaCSS} placeholder="댓글을 입력해주세요." {...register("description")} />
           <button type="submit" css={submitButton}>
             <AiOutlineSend />
           </button>

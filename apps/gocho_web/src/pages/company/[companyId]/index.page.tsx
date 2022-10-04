@@ -204,7 +204,7 @@ const CompaniesDetail: NextPage = () => {
                 </section>
               </div>
 
-              <DetailComment detailData={companyData.commentData} />
+              <DetailComment jdId={null} detailData={companyData.commentData} />
             </div>
             <p css={warningDesc}>유의사항 : 실제 정보와 상이할 수도 있으니 참고해주세요.</p>
           </section>

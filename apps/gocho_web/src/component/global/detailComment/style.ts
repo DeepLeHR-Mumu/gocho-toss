@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, SerializedStyles } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
 import { PC_HOVER } from "shared-style/mediaQuery";
@@ -65,40 +65,47 @@ export const commentButtonContainer = css`
   }
 `;
 
-export const commentButton = css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: fit-content;
-  padding: 0 1rem;
-  height: 2rem;
-  white-space: nowrap;
-  border: 1px solid ${COLORS.GRAY80};
-  font-size: 0.75rem;
-  border-radius: 1rem;
-  color: ${COLORS.GRAY10};
-  transition: border-color 0.2s ease;
-  position: relative;
+interface CommentButtonDef {
+  (isTotalComment: boolean): SerializedStyles;
+}
 
-  ${PC_HOVER} {
-    :hover {
-      border-color: ${COLORS.GRAY30};
-    }
-  }
-
-  > span {
-    position: absolute;
-    top: -0.625rem;
-    right: -0.375rem;
-    width: fit-content;
-    background-color: ${COLORS.BLUE_SECOND70};
-    border-radius: 1rem;
-    min-width: 1.625rem;
-    height: 1.25rem;
+export const commentButton: CommentButtonDef = (isTotalComment) => {
+  return css`
     display: flex;
     align-items: center;
     justify-content: center;
+    width: fit-content;
+    padding: 0 1rem;
+    height: 2rem;
+    white-space: nowrap;
+    border: 1px solid ${COLORS.GRAY80};
     font-size: 0.75rem;
-    color: ${COLORS.GRAY10};
-  }
-`;
+    border-radius: 1rem;
+    background-color: ${isTotalComment ? COLORS.BLUE_FIRST40 : COLORS.GRAY100};
+    color: ${isTotalComment ? COLORS.GRAY100 : COLORS.GRAY10};
+    transition: border-color 0.2s ease;
+    position: relative;
+
+    ${PC_HOVER} {
+      :hover {
+        border-color: ${COLORS.GRAY30};
+      }
+    }
+
+    > span {
+      position: absolute;
+      top: -0.625rem;
+      right: -0.375rem;
+      width: fit-content;
+      background-color: ${COLORS.BLUE_SECOND70};
+      border-radius: 1rem;
+      min-width: 1.625rem;
+      height: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: ${COLORS.GRAY10};
+    }
+  `;
+};

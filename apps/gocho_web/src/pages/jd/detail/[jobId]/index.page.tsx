@@ -75,7 +75,7 @@ const JobsDetail: NextPage = () => {
             <section css={containerSkeleton}>
               <SkeletonBox />
             </section>
-            <DetailComment detailData={null} />
+            <DetailComment jdId={null} detailData={null} />
           </div>
         </Layout>
       </main>
@@ -127,7 +127,7 @@ const JobsDetail: NextPage = () => {
               <DetailPreferencePart freshPosition={freshPosition} />
             </section>
           )}
-          <DetailComment detailData={commentData} />
+          <DetailComment jdId={currentPositionId} detailData={commentData} />
         </div>
         <ReceptInfoPart jobDetailData={jobDetailData} />
       </Layout>
