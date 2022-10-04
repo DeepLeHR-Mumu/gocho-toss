@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
 
-import payAvg from "@public/images/global/companyDetail/payAvg.svg";
-import payStart from "@public/images/global/companyDetail/payStart.svg";
+import payAvg from "shared-image/page/companyDetail/payAvg.svg";
+import payStart from "shared-image/page/companyDetail/payStart.svg";
 
 import { InvisibleH3 } from "shared-ui/common/atom/invisibleH3";
 

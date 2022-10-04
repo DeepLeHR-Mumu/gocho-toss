@@ -11,6 +11,7 @@ export default function Document() {
           rel="stylesheet preload"
           as="style"
         />
+        <script src="https://developers.kakao.com/sdk/js/kakao.js" async />
       </Head>
       <body>
         <div id="portal" />

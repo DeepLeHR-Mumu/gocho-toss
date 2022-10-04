@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
 
-import nozoTrue from "@public/images/global/companyDetail/nozo_true_icon.svg";
-import nozoFalse from "@public/images/global/companyDetail/nozo_false_icon.svg";
+import nozoTrue from "shared-image/page/companyDetail/nozo_true_icon.svg";
+import nozoFalse from "shared-image/page/companyDetail/nozo_false_icon.svg";
 
 import { KakaoMap } from "@pages/company/component/kakaoMap";
 import { InvisibleH3 } from "shared-ui/common/atom/invisibleH3";
