@@ -11,6 +11,8 @@ import { CommentDislikeButton } from "shared-ui/common/atom/commentDislikeButton
 import { companyCommentArrKeyObj } from "shared-constant/queryKeyFactory/company/commentArrKeyObj";
 import { useLikeComment } from "shared-api/company/useLikeComment";
 import { useDisLikeComment } from "shared-api/company/useDisLikeComment";
+import { useFakeComment } from "shared-api/company/useFakeComment";
+import { useDisFakeComment } from "shared-api/company/useDisFakeComment";
 
 import { LoginCommentBoxProps, CommentFormValues } from "./type";
 import {
@@ -48,6 +50,9 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
 
   const { mutate: postLikeComment } = useLikeComment();
   const { mutate: postDisLikeComment } = useDisLikeComment();
+  const { mutate: postFakeComment } = useFakeComment();
+  const { mutate: postDisFakeComment } = useDisFakeComment();
+
   const { mutate: postWriteCompanyComment } = useWriteCompanyComment();
   const queryClient = useQueryClient();
 
@@ -71,8 +76,30 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
     );
   };
 
+  const postFakeSubmit = (companyId: number, commentId: number) => {
+    postFakeComment(
+      { companyId, commentId },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries(companyCommentArrKeyObj.all);
+        },
+      }
+    );
+  };
+
   const postDislikeSubmit = (companyId: number, commentId: number) => {
     postDisLikeComment(
+      { companyId, commentId },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries(companyCommentArrKeyObj.all);
+        },
+      }
+    );
+  };
+
+  const postDisFakeSubmit = (companyId: number, commentId: number) => {
+    postDisFakeComment(
       { companyId, commentId },
       {
         onSuccess: () => {
@@ -132,7 +159,9 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
                       <CommentDislikeButton
                         count={comment.disLikeCount}
                         setDislikeSubmit={() => {
-                          postDislikeSubmit(comment.companyId, comment.id);
+                          return comment.disLiked
+                            ? postDisFakeSubmit(comment.companyId, comment.id)
+                            : postFakeSubmit(comment.companyId, comment.id);
                         }}
                       />
                     </li>
