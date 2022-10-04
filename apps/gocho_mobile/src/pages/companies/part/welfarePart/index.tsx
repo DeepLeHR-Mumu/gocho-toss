@@ -1,15 +1,13 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { css } from "@emotion/react";
 import { useRouter } from "next/router";
 
-import { Layout } from "@component/layout";
-import { COLORS } from "shared-style/color";
 import { useCompanyDetail } from "shared-api/company";
 
 import { NoRegisteredInfoBox } from "../../component/noRegisterdInfoBox";
 import { UpdateInfoLink } from "../../component/updateInfoLink";
 import { ActivatedMenuType } from "./type";
 import { IconSelector } from "./component/iconSelector";
+import { container, headerBox, infoBox, informationWrapper, menuList } from "./style";
 
 export const WelfarePart: FunctionComponent = () => {
   const router = useRouter();
@@ -62,53 +60,17 @@ export const WelfarePart: FunctionComponent = () => {
     return <>Loading</>;
   }
   const { money, health, life, holiday, facility, vacation, growth, etc } = companyDetailData.data.welfare;
+  if (!(money || health || life || holiday || facility || vacation || growth || etc)) {
+    return (
+      <section css={container}>
+        <NoRegisteredInfoBox infoName="복지" />
+      </section>
+    );
+  }
   return (
-    <section>
-      <Layout>
-        <h2
-          css={css`
-            color: ${COLORS.GRAY10};
-            font-size: 1.375rem;
-            font-weight: 500;
-            margin-top: 3rem;
-            margin-bottom: 1rem;
-          `}
-        >
-          복지정보
-        </h2>
-      </Layout>
-      {money === null &&
-        health === null &&
-        life === null &&
-        holiday === null &&
-        facility === null &&
-        vacation === null &&
-        growth === null &&
-        etc === null && <NoRegisteredInfoBox infoName="복지" />}
-      <div
-        css={css`
-          overflow: hidden;
-          overflow-x: scroll;
-          width: 100%;
-          padding: 1rem 0;
-          scrollbar-width: none;
-          ::-webkit-scrollbar {
-            display: none;
-          }
-        `}
-      >
-        <ul
-          css={css`
-            display: flex;
-            font-size: 16px;
-            > li {
-              flex-shrink: 0;
-              margin: 0 2rem;
-              display: flex;
-              justify-content: center;
-            }
-          `}
-        >
+    <section css={container}>
+      <div css={headerBox}>
+        <ul css={menuList}>
           {companyDetailData.data.welfare.money && (
             <li>
               <button
@@ -207,32 +169,9 @@ export const WelfarePart: FunctionComponent = () => {
           )}
         </ul>
       </div>
-      <div
-        css={css`
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          width: 100%;
-          background-color: ${COLORS.BLUE_SECOND90};
-          padding: 1.5rem 0;
-          margin-bottom: 1.5625rem;
-        `}
-      >
+      <div css={informationWrapper}>
         <IconSelector activatedMenu={activatedTab} />
-        <div
-          css={css`
-            width: 16.25rem;
-            background-color: ${COLORS.GRAY100};
-            padding: 1rem;
-            border-radius: 1.5rem 0 1.5rem 1.5rem;
-            > p {
-              margin-bottom: 0.5rem;
-              :last-of-type {
-                margin-bottom: 0;
-              }
-            }
-          `}
-        >
+        <div css={infoBox}>
           {companyDetailData.data.welfare[activatedTab]?.map((weflare) => {
             return <p>&#183; {weflare}</p>;
           })}

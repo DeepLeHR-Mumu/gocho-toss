@@ -1,10 +1,13 @@
 import { useRouter } from "next/router";
 import { FunctionComponent } from "react";
 import { FiInfo } from "react-icons/fi";
+import Image from "next/image";
 
 import { Layout } from "@component/layout";
 import { useCompanyDetail } from "shared-api/company/useCompanyDetail";
 import { dateConverter } from "shared-util/date/index";
+import nozo_false from "shared-image/page/companyDetail/nozo_false_icon.svg";
+import nozo_true from "shared-image/page/companyDetail/nozo_true_icon.svg";
 
 import {
   companyListContainer,
@@ -12,11 +15,11 @@ import {
   employeeNumberCSS,
   factoryBox,
   factoryText,
-  h2Title,
   infoContainer,
   mapButton,
   nozoContainer,
   nozoExplainText,
+  nozoIconBox,
   sectionContainer,
   sizeContainer,
   wrapper,
@@ -40,7 +43,6 @@ export const BasicInfoPart: FunctionComponent = () => {
   return (
     <div css={wrapper}>
       <Layout>
-        <h2 css={h2Title}>일반 정보</h2>
         <section css={sectionContainer}>
           <div css={sizeContainer}>
             <div css={infoContainer}>
@@ -90,10 +92,15 @@ export const BasicInfoPart: FunctionComponent = () => {
             )}
             <div css={nozoContainer}>
               <p>노조 여부</p>
-              <div>
-                <p>{companyDetailData.data.nozo.exists ? "노조 있음" : "노조 없음"}</p>
-                {companyDetailData.data.nozo.desc && <p css={nozoExplainText}>{companyDetailData.data.nozo.desc}</p>}
+              <p>{companyDetailData.data.nozo.exists ? "노조 있음" : "노조 없음"}</p>
+              <div css={nozoIconBox}>
+                <Image
+                  src={companyDetailData.data.nozo.exists ? nozo_true : nozo_false}
+                  layout="fill"
+                  objectFit="contain"
+                />
               </div>
+              {companyDetailData.data.nozo.desc && <p css={nozoExplainText}>{companyDetailData.data.nozo.desc}</p>}
             </div>
           </div>
         </section>

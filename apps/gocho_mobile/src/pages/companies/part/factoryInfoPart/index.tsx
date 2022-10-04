@@ -7,7 +7,7 @@ import { Layout } from "@component/layout";
 import { UpdateInfoLink } from "@pages/companies/component/updateInfoLink";
 
 import { FactoryCard } from "./component/factoryCard";
-import { container, h2Title } from "./style";
+import { cardContainer, container } from "./style";
 
 export const FactoryPart: FunctionComponent = () => {
   const router = useRouter();
@@ -21,10 +21,9 @@ export const FactoryPart: FunctionComponent = () => {
     return <>loading</>;
   }
   return (
-    <section>
+    <section css={container}>
       <Layout>
-        <h2 css={h2Title}>공장 정보</h2>
-        <div css={container}>
+        <div css={cardContainer}>
           <div>
             {companyDetailData.data.factoryArr.map((factory) => {
               return <FactoryCard key={factory.name} factoryInfo={factory} />;

@@ -1,13 +1,12 @@
-import { Layout } from "@component/layout";
+import { FunctionComponent } from "react";
 import { css } from "@emotion/react";
-import { Dispatch, FunctionComponent, SetStateAction } from "react";
+
+import { Layout } from "@component/layout";
+
 import { InfoBox } from "./component/infoCard";
 import { buttonCSS, wrapper } from "./style";
+import { HeaderPartProps } from "./type";
 
-interface HeaderPartProps {
-  setActivatedMenu: Dispatch<SetStateAction<"companyInfo" | "jdList">>;
-  activatedMenu: "companyInfo" | "jdList";
-}
 export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ setActivatedMenu, activatedMenu }) => {
   return (
     <section css={wrapper}>

@@ -4,19 +4,13 @@ import { COLORS } from "shared-style/color";
 export const wrapper = css`
   width: 100%;
   background-color: ${COLORS.GRAY100};
-  padding-top: 4rem;
+  margin-bottom: 2rem;
 `;
 
 export const sectionContainer = css`
   width: 100%;
   display: flex;
   justify-content: center;
-`;
-
-export const h2Title = css`
-  color: ${COLORS.GRAY10};
-  font-size: 1.375rem;
-  font-weight: 500;
 `;
 
 export const sizeContainer = css`
@@ -70,7 +64,7 @@ export const companyListContainer = css`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
 `;
 
 export const companyLogo = css`
@@ -105,6 +99,13 @@ export const nozoContainer = css`
       color: ${COLORS.GRAY60};
     }
   }
+`;
+
+export const nozoIconBox = css`
+  width: 2.5rem;
+  height: 2.5rem;
+  position: relative;
+  margin-left: 0.5rem;
 `;
 
 export const nozoExplainText = css`

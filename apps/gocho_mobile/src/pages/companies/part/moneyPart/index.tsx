@@ -11,16 +11,8 @@ import { COLORS } from "shared-style/color";
 
 import { Layout } from "@component/layout";
 
-import {
-  asideContainer,
-  container,
-  h2Title,
-  imageBox,
-  menuBox,
-  menuText,
-  moneyInfoContainer,
-  payStartContainer,
-} from "./style";
+import { asideContainer, container, imageBox, menuBox, menuText, moneyInfoContainer, payStartContainer } from "./style";
+import { NoRegisteredInfoBox } from "../../component/noRegisterdInfoBox";
 
 export const MoneyPart: FunctionComponent = () => {
   const router = useRouter();
@@ -35,10 +27,16 @@ export const MoneyPart: FunctionComponent = () => {
     return <>loading</>;
   }
 
+  if (companyDetailData.data.payAvg === null && companyDetailData.data.payAvg === null) {
+    return (
+      <section css={container}>
+        <NoRegisteredInfoBox infoName="연봉" />
+      </section>
+    );
+  }
   return (
     <section css={container}>
       <Layout>
-        <h2 css={h2Title}>연봉 정보</h2>
         <div
           css={css`
             width: 100%;

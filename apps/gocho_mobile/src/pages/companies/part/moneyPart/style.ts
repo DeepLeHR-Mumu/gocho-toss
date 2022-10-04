@@ -6,13 +6,7 @@ export const container = css`
   display: flex;
   width: 100%;
   justify-content: center;
-`;
-
-export const h2Title = css`
-  font-weight: 500;
-  font-size: 1.375rem;
-  color: ${COLORS.GRAY10};
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 `;
 
 export const payStartContainer = css`

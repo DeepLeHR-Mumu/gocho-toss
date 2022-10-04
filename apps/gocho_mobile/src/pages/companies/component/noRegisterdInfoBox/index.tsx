@@ -22,7 +22,7 @@ export const NoRegisteredInfoBox: FunctionComponent<NoRegisteredInfoBoxProps> = 
           color: ${COLORS.GRAY40};
         `}
       >
-        등록된 {infoName}정보가 없습니다
+        등록된 {infoName} 정보가 없습니다
       </p>
     </div>
   );
