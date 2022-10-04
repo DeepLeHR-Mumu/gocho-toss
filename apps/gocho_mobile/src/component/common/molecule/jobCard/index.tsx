@@ -69,7 +69,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
     },
   });
 
-  if (isSkeleton || jobData === undefined) {
+  if (isSkeleton || !jobData) {
     return (
       <div css={jobCardSkeleton}>
         <SkeletonBox />

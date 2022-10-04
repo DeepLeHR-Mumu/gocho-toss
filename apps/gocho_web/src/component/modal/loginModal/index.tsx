@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -17,6 +17,13 @@ import { useModal } from "@recoil/hook/modal";
 
 import { wrapper, desc, formCSS, formArr, errorMsgCSS, closeBtn, errorBox, loginButton, logoContainer } from "./style";
 import { ButtonProps, LoginFormValues } from "./type";
+
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Kakao: any;
+  }
+}
 
 export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   const {
@@ -41,8 +48,23 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
     });
   };
 
+  const kakaoLogin = () => {
+    window.Kakao.Auth.authorize({
+      redirectUri: "http://localhost:3000/kakaologin",
+    });
+  };
+
+  useEffect(() => {
+    if (window.Kakao.isInitialized()) {
+      return;
+    }
+    window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
+  }, []);
   return (
     <div css={wrapper}>
+      <button type="button" onClick={kakaoLogin}>
+        카카오 로그인 버튼
+      </button>
       <div css={closeBtn}>
         {button === "home" ? <CloseButton size="S" isHome /> : <CloseButton size="S" buttonClick={closeModal} />}
       </div>

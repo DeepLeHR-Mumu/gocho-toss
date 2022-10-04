@@ -2,16 +2,16 @@ import { FunctionComponent, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import yesData from "@public/images/global/factory/yes_data.svg";
-import noData from "@public/images/global/factory/no_data.svg";
-import productIcon from "@public/images/global/factory/product_icon.svg";
-import hireNumberIcon from "@public/images/global/factory/hireNumber_icon.svg";
-import genderIcon from "@public/images/global/factory/gender_icon.svg";
-import busTrueIcon from "@public/images/global/factory/bus_true_icon.svg";
-import busFalseIcon from "@public/images/global/factory/bus_false_icon.svg";
-import dormitoryIcon from "@public/images/global/factory/dormitory_icon.svg";
-import xIcon from "@public/images/global/factory/x_icon.svg";
-import oIcon from "@public/images/global/factory/o_icon.svg";
+import yesData from "shared-image/page/factory/yes_data.svg";
+import noData from "shared-image/page/factory/no_data.svg";
+import productIcon from "shared-image/page/factory/product_icon.svg";
+import hireNumberIcon from "shared-image/page/factory/hireNumber_icon.svg";
+import genderIcon from "shared-image/page/factory/gender_icon.svg";
+import busTrueIcon from "shared-image/page/factory/bus_true_icon.svg";
+import busFalseIcon from "shared-image/page/factory/bus_false_icon.svg";
+import dormitoryIcon from "shared-image/page/factory/dormitory_icon.svg";
+import xIcon from "shared-image/page/factory/x_icon.svg";
+import oIcon from "shared-image/page/factory/o_icon.svg";
 
 import { kakaoChannelUrl } from "shared-constant/help";
 // import { KakaoMap } from "@pages/companies/component/kakaoMap";
