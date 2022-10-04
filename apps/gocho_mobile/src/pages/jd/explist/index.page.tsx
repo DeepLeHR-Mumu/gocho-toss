@@ -7,6 +7,8 @@ import { useCompanyArr } from "shared-api/company";
 import { Layout } from "@component/layout";
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
 
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_JD_EXPLIST } from "shared-constant/meta";
 import { ExpJobCardList } from "./component/expJobCardList";
 import { setJobOrderButtonArr } from "./constant";
 import {
@@ -18,21 +20,19 @@ import {
   buttonArrContainer,
   setJobOrderButton,
 } from "./style";
-import { changeOrderDef, PostingValues, SearchQueryDef, OrderDef } from "./type";
+import { changeOrderDef, PostingValues, OrderDef } from "./type";
 
 const JobsExpList: NextPage = () => {
   const limit = 6;
   const [total, setTotal] = useState<number>(0);
   const [page, setPage] = useState(1);
   const [activeOrder, setActiveOrder] = useState<OrderDef>("recent");
-  const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   const { register, handleSubmit } = useForm<PostingValues>({});
 
-  const postingSearch: SubmitHandler<PostingValues> = (postingVal) => {
-    setSearchQuery({
-      name: postingVal.name,
-    });
+  const postingSearch: SubmitHandler<PostingValues> = (searchVal) => {
+    setSearchQuery(searchVal.q);
   };
 
   const changeOrder: changeOrderDef = (newId) => {
@@ -40,7 +40,7 @@ const JobsExpList: NextPage = () => {
   };
 
   const { data: companyDataArr, isLoading } = useCompanyArr({
-    q: JSON.stringify(searchQuery),
+    q: searchQuery,
     order: activeOrder,
     limit,
     offset: (page - 1) * 10,
@@ -55,12 +55,13 @@ const JobsExpList: NextPage = () => {
 
   return (
     <main css={mainContainer}>
+      <MetaHead metaData={META_JD_EXPLIST} />
       <Layout>
-        <h2>기업별 만료공고</h2>
+        <h2>만료 공고</h2>
         <section css={sectionContainer}>
           <form onSubmit={handleSubmit(postingSearch)}>
             <div css={searchContainer}>
-              <input {...register("name", {})} css={searchBox} placeholder="검색어를 입력해주세요" />
+              <input {...register("q", {})} css={searchBox} placeholder="검색어를 입력해주세요" />
               <button type="submit" css={searchButton} aria-label="만료 공고 검색">
                 <FiSearch />
               </button>

@@ -10,7 +10,7 @@ export const headerWrapper = css`
   position: sticky;
   top: 0;
   height: 3.25rem;
-  z-index: 100;
+  z-index: 70;
 `;
 
 export const headerContainer = (openedElement: openedElementDef) => {

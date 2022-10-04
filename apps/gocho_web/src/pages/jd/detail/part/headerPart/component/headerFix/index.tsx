@@ -21,6 +21,7 @@ import {
   goBackButton,
   headerCSS,
   dDayContainer,
+  cutBox,
   titleBox,
   titleCSS,
 } from "./style";
@@ -98,6 +99,7 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, is
               onClick={() => {
                 return isBookmarked ? deleteJobBookmark() : addJobBookmark();
               }}
+              aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
             >
               <BsFillBookmarkFill />
               공고 북마크 <span> {jobDetailData.bookmarkCount}</span>
@@ -105,6 +107,7 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, is
             <div css={applyBox}>
               <div css={dDayContainer}>
                 <DdayBox endTime={jobDetailData.endTime} />
+                {jobDetailData.cut && <div css={cutBox}>채용시마감</div>}
               </div>
               <a href={jobDetailData.applyUrl} target="_blank" rel="noopener noreferrer" css={applyButton}>
                 채용사이트

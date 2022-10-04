@@ -5,6 +5,7 @@ export const linkObj = {
   JOBS_LIST_URL: "/jd/list",
   JOBS_DETAIL_URL: "/jd/detail",
   JOBS_EXPLIST_URL: "/jd/explist",
+  COMPANY_DETAIL_URL: "/companies/detail",
   COMMUNITY_POSTINGS_LIST_URL: "/community/postings",
   INTERVIEW_REVIEW: "/review",
   SPEC_URL: "/datalab/spec",
@@ -12,6 +13,7 @@ export const linkObj = {
   SPEC_REGISTER_URL: "/datalab/spec/register",
   SPEC_MY_URL: "/datalab/spec/my",
   MYPAGE_URL: "/mypage",
+  SEARCH_URL: "/search",
   TOS_URL: "/term-of-service",
   PRIVACY_URL: "/privacy",
 };

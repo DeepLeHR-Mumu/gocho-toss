@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
-import { shorten } from "shared-style/shorten";
+import { shorten } from "shared-style/common";
 
 export const commentWrapper = css`
   display: flex;

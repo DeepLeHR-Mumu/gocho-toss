@@ -1,5 +1,4 @@
-import { css, SerializedStyles } from "@emotion/react";
-
+import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const wrapper = css``;
@@ -41,11 +40,7 @@ export const title = css`
   }
 `;
 
-interface IsColorPointDef {
-  (isColor: boolean): SerializedStyles;
-}
-
-export const isColorPoint: IsColorPointDef = (isColor) => {
+export const isColorPoint = (isColor: boolean) => {
   return css`
     display: flex;
     align-items: center;
@@ -54,23 +49,11 @@ export const isColorPoint: IsColorPointDef = (isColor) => {
   `;
 };
 
-interface IsPossibleEduIconDef {
-  (isPossible: boolean): SerializedStyles;
-}
-
-export const isPossibleEduIcon: IsPossibleEduIconDef = (isPossible) => {
-  return css`
-    width: 2rem;
-    height: 2rem;
-    display: inline-block;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-image: ${isPossible
-      ? `url("/images/global/jdDetail/graduate_color.svg")`
-      : `url("/images/global/jdDetail/graduate_gray.svg")`};
-  `;
-};
+export const isPossibleEduIcon = css`
+  width: 2rem;
+  height: 2rem;
+  display: inline-block;
+`;
 
 export const eduContainer = css`
   width: 100%;
@@ -88,33 +71,17 @@ export const eduContainer = css`
   }
 `;
 
-interface IsPossibleEduDesc {
-  (isPossibleEdu: boolean): SerializedStyles;
-}
-
-export const isPossibleEduDesc: IsPossibleEduDesc = (isPossibleEdu) => {
+export const isPossibleEduDesc = (isPossibleEdu: boolean) => {
   return css`
     color: ${isPossibleEdu ? COLORS.GRAY10 : COLORS.GRAY60};
   `;
 };
 
-interface EduImageBox {
-  (isPossibleEdu: boolean): SerializedStyles;
-}
-
-export const eduImageBox: EduImageBox = (isPossibleEdu) => {
-  return css`
-    width: 3.5rem;
-    height: 3.5rem;
-    margin-bottom: 0.5rem;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-image: ${isPossibleEdu
-      ? `url("/images/global/jdDetail/graduate_color.svg")`
-      : `url("/images/global/jdDetail/graduate_gray.svg")`};
-  `;
-};
+export const eduImageBox = css`
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-bottom: 0.5rem;
+`;
 
 export const containerSubTitle = css`
   padding-bottom: 1.5rem;

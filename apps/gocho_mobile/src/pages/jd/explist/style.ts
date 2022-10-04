@@ -1,6 +1,5 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
-import { PC_HOVER } from "shared-style/mediaQuery";
 
 export const mainContainer = css`
   padding: 2rem 0;
@@ -24,6 +23,10 @@ export const searchBox = css`
   padding: 0.5rem 2rem;
   border-radius: 1.5rem;
   border: 1px solid ${COLORS.GRAY80};
+
+  ::placeholder {
+    color: #b2b2b2;
+  }
 `;
 
 export const searchButton = css`
@@ -42,22 +45,15 @@ export const buttonArrContainer = css`
 
 export const setJobOrderButton = (active = false) => {
   return css`
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     width: fit-content;
     text-align: center;
     border-radius: 1.5rem;
     border: 1px solid ${active ? COLORS.GRAY10 : `${COLORS.GRAY80}`};
     color: ${COLORS.GRAY10};
     background-color: ${active ? COLORS.STATE_SUCCESS : `${COLORS.GRAY100}`};
-    margin-right: 0.25rem;
-    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+    padding: 0.5rem 0.75rem;
     transition: all 0.2s ease;
-
-    ${PC_HOVER} {
-      :hover {
-        border: 1px solid ${active ? COLORS.GRAY10 : `${COLORS.GRAY80}`};
-        background-color: ${active ? COLORS.STATE_SUCCESS : `${COLORS.GRAY90}`};
-      }
-    }
   `;
 };

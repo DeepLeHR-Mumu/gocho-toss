@@ -5,7 +5,7 @@ interface setCarouselSettingDef {
     dots: boolean;
     autoplay: boolean;
     arrows: boolean;
-    autoPlaySpeed: number;
+    autoplaySpeed: number;
     infinite: boolean;
     centerMode: boolean;
     speed: number;
@@ -21,7 +21,7 @@ export const setCarouselSetting: setCarouselSettingDef = (setActiveIndex) => {
     dots: false,
     autoplay: true,
     arrows: false,
-    autoPlaySpeed: 5000,
+    autoplaySpeed: 5000,
     infinite: true,
     centerMode: true,
     speed: 500,

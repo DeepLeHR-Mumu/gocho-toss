@@ -50,6 +50,7 @@ export const 기본 = Template.bind({});
     processArr: ["서류전형", "인성/직무지향성검사", "실무면접", "최종면접", "신체검사"],
     startTime: 1657551599000,
     endTime: 1658329199000,
+    cut: false,
     applyUrl: "https://naver.com",
     applyRouteArr: [
       "고등학교 생활기록부",

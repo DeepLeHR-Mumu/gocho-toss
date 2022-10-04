@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 
 import { useUserInfo } from "shared-api/auth";
 import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
-import { CompanyCard } from "shared-ui/common/companyCard";
+import { CompanyCard } from "shared-ui/card/companyCard";
 
 import { cardListContainer, descCSS } from "./style";
 

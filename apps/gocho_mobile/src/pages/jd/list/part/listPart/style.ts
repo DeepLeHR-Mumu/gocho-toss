@@ -1,13 +1,12 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
-import { PC_HOVER } from "shared-style/mediaQuery";
 
 export const partContainer = css`
   position: relative;
   border-radius: 1.5rem 1.5rem 0 0;
   background-color: ${COLORS.GRAY90};
   margin-top: -1rem;
-  padding: 3rem 0;
+  padding: 1.5rem 0 3rem;
   z-index: 10;
 `;
 
@@ -42,6 +41,9 @@ export const searchBox = css`
   border-radius: 1.5rem;
   background-color: ${COLORS.GRAY100};
   border: 1px solid ${COLORS.GRAY80};
+
+  ::placeholder {
+    color: #b2b2b2;
 `;
 
 export const searchButton = css`
@@ -69,12 +71,5 @@ export const setJobOrderButton = (active = false) => {
     margin-right: 0.5rem;
     padding: 0.5rem 0.75rem;
     transition: all 0.2s ease;
-
-    ${PC_HOVER} {
-      :hover {
-        border: 1px solid ${active ? COLORS.GRAY10 : `${COLORS.GRAY80}`};
-        background-color: ${active ? COLORS.STATE_SUCCESS : `${COLORS.GRAY90}`};
-      }
-    }
   `;
 };

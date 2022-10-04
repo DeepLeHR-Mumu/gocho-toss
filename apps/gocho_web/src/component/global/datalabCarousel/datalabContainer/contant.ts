@@ -22,7 +22,7 @@ export const settings = {
   dots: false,
   autoplay: true,
   arrows: false,
-  autoPlaySpeed: 2000,
+  autoplaySpeed: 2000,
   infinite: true,
   speed: 500,
   centerPadding: "0px",

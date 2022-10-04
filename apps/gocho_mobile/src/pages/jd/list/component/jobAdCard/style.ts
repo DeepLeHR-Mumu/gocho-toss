@@ -1,6 +1,7 @@
-import { css, SerializedStyles } from "@emotion/react";
+import { css } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
+import { shorten } from "shared-style/common";
 
 export const cardSkeleton = css`
   width: 100%;
@@ -14,12 +15,9 @@ export const cardWrapper = css`
   height: 22rem;
 `;
 
-interface slideInfoDef {
-  (backgroundColor: string): SerializedStyles;
-}
-
-export const slideInfo: slideInfoDef = (bgColor) => {
+export const slideInfo = (bgColor: string) => {
   return css`
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -27,23 +25,44 @@ export const slideInfo: slideInfoDef = (bgColor) => {
     height: 22rem;
     background: linear-gradient(${bgColor}, ${bgColor}33);
     padding: 3rem;
+    gap: 1rem 0;
+    ${shorten()};
   `;
 };
 
+export const companyLogoWrapper = css`
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${COLORS.GRAY100};
+  width: 6.5rem;
+  height: 6.5rem;
+  padding: 0.5rem;
+  border-radius: 1.5rem;
+`;
+
+export const companyLogoBox = css`
+  width: 5.5rem;
+  height: 5.5rem;
+  position: relative;
+`;
+
 export const endTime = css`
-  color: ${COLORS.GRAY10};
   font-size: 1.25rem;
   font-weight: 600;
+  color: ${COLORS.GRAY10};
   margin-bottom: 1rem;
 `;
 
 export const companyName = css`
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  color: ${COLORS.GRAY10};
   font-size: 1.25rem;
-  margin-bottom: 1.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: ${COLORS.GRAY10};
+  ${shorten(2)};
 `;
 
 export const jdTitle = css`
@@ -52,5 +71,5 @@ export const jdTitle = css`
   font-weight: 600;
   line-height: 1.5;
   word-break: keep-all;
-  margin-bottom: 2.5rem;
+  ${shorten(2)};
 `;

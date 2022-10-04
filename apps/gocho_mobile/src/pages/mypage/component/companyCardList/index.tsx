@@ -2,8 +2,8 @@ import { FunctionComponent } from "react";
 
 import { useUserInfo } from "shared-api/auth";
 import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
-import { CompanyCard } from "shared-ui/common/companyCard";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { CompanyCard } from "shared-ui/card/companyCard";
 
 import { listContainer } from "./style";
 import { CompanyCardListProps } from "./type";

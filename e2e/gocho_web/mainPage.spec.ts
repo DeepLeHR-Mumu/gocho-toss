@@ -39,6 +39,7 @@ test.beforeEach(async ({ page, request, baseURL }) => {
   expect(userInfo.data.nickname).toEqual("testUser");
 });
 
+test.describe.configure({ mode: "parallel" });
 test.describe("메인페이지 테스트", () => {
   test("SEO 검사", async ({ page }) => {
     const headingH2Arr = [
@@ -49,9 +50,9 @@ test.describe("메인페이지 테스트", () => {
       "실시간 커뮤니티 글 모음",
       "스펙평가 BEST",
     ];
-    await expect(page).toHaveTitle("고초대졸닷컴 - 생산/기능직 No.1 취업 플랫폼");
 
-    await expect(page.locator("h1")).toHaveText("메인 페이지");
+    await expect(page).toHaveTitle("고초대졸닷컴 | 생산직 취업의 새로운 기준");
+    await expect(page.locator("h1")).toHaveText("고초대졸닷컴 | 생산직 취업의 새로운 기준");
     await expect(page.locator("h2")).toContainText(headingH2Arr);
   });
 
