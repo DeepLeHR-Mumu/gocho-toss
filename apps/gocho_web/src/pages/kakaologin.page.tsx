@@ -19,7 +19,7 @@ const KakaoLogin: NextPage = () => {
           onSuccess: (response) => {
             localStorage.setItem("token", `${response.data.token}`);
             queryClient.invalidateQueries();
-            router.back();
+            router.push("/");
           },
         }
       );

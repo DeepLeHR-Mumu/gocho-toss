@@ -23,11 +23,7 @@ export const MyProfileMenu: FunctionComponent<MyProfileMenuProps> = ({ active })
     window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
   }, []);
   const doLogout = () => {
-    window.Kakao.API.request({
-      url: "/v1/user/unlink",
-    });
     localStorage.removeItem("token");
-
     queryClient.invalidateQueries();
   };
 
