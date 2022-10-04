@@ -39,6 +39,11 @@ export const useAddJobBookmarkArr = (jobObj: JobObjDef | undefined) => {
       queryClient.setQueryData<jobBookmarkResObjDef>(
         userBookmarkKeyObj.jobBookmarkArr({ userId: requestObj.userId }),
         (old) => {
+          if (old?.data === null) {
+            return {
+              data: [jobObj as JobObjDef],
+            };
+          }
           if (old && jobObj)
             return {
               data: [...old.data, jobObj],
