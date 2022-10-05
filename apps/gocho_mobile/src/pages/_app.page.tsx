@@ -20,10 +20,9 @@ import "slick-carousel/slick/slick-theme.css";
 import { datadogRum } from "@datadog/browser-rum";
 
 if (typeof window !== "undefined" && !window.location.href.includes("localhost")) {
-  // console.log("hi");
   datadogRum.init({
-    applicationId: "e4f4a9e9-315d-4f9d-941c-2a4b52455b58",
-    clientToken: "pub98f9201040940ffceb0d8d3e9b11e9d4",
+    applicationId: "d5f1a305-fd71-4a93-ac57-c335dce26d07",
+    clientToken: "pub63fb692ac2e701e2a7183d0d7b03167e",
     site: "datadoghq.com",
     service: "gocho-mobile",
 
