@@ -149,6 +149,7 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
                   <div key={field.id} css={certificateCard}>
                     {field.value}
                     <button
+                      aria-label={`${field.value} 제거`}
                       type="button"
                       onClick={() => {
                         return remove(index);

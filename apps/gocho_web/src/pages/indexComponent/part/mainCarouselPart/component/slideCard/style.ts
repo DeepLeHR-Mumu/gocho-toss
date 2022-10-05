@@ -1,7 +1,7 @@
 import { css, SerializedStyles } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
-import { PC_HOVER } from "shared-style/mediaQuery";
+import { TABLET } from "shared-style/mediaQuery";
 
 export const slideWrapper = css`
   width: 100%;
@@ -24,6 +24,10 @@ export const slideInfo: slideInfoDef = (backgroundColor) => {
     right: 0;
     top: 0;
     z-index: 20;
+
+    ${TABLET} {
+      padding: 2rem;
+    }
   `;
 };
 
@@ -40,7 +44,7 @@ export const middleDescCSS = css`
   align-items: center;
   color: ${COLORS.GRAY100};
   font-size: 1.25rem;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
 `;
 
 export const middleDescIconBox = css`
@@ -79,30 +83,23 @@ export const lastDescCSS = css`
 `;
 
 interface LinkButtonDef {
-  (colorCode?: string): SerializedStyles;
+  (backgroundColor: string, color: string): SerializedStyles;
 }
 
-export const linkButton: LinkButtonDef = (colorCode) => {
+export const linkButton: LinkButtonDef = (backgroundColor, color) => {
   return css`
     width: 7.5rem;
     height: 2.5rem;
-    background-color: ${colorCode};
-    color: ${COLORS.GRAY100};
+    background-color: ${backgroundColor};
+    color: ${color};
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 2rem;
     font-size: 0.75rem;
     font-weight: 500;
-    opacity: 0.6;
     transition: opacity 0.2s ease;
     position: absolute;
     bottom: 2rem;
-
-    ${PC_HOVER} {
-      :hover {
-        opacity: 1;
-      }
-    }
   `;
 };

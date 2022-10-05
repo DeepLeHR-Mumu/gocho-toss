@@ -56,7 +56,7 @@ export const moreExpJobButton = css`
   border-radius: 1.5rem;
   width: fit-content;
   padding: 0 1.5rem;
-  margin-right: 4px;
+  margin-left: 4px;
   background-color: ${COLORS.GRAY80};
   color: ${COLORS.GRAY10};
   font-weight: 500;

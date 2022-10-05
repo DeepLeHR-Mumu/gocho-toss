@@ -19,21 +19,7 @@ export const MainCarouselPart: FunctionComponent = () => {
         <section css={carouselContainer}>
           <Slider {...setCarouselSetting(setActiveIndex)} ref={sliderRef}>
             {carouselArr.map((slide) => {
-              return (
-                <SlideCard
-                  key={`mainCarousel_${slide.id}`}
-                  buttonColor={slide.buttonColor}
-                  buttonText={slide.buttonText}
-                  backgroundImage={slide.backgroundImage}
-                  topDesc={slide.topDesc}
-                  middleDesc={slide.middleDesc}
-                  title={slide.title}
-                  lastDesc={slide.lastDesc}
-                  iconImage={slide.iconImage}
-                  backgroundColor={slide.backgroundColor}
-                  buttonUrl={slide.buttonUrl}
-                />
-              );
+              return <SlideCard key={`mainCarousel_${slide.id}`} slideData={slide} />;
             })}
           </Slider>
 

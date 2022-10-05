@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
+import { TABLET } from "shared-style/mediaQuery";
 
 export const footerWrapper = css`
   background-color: ${COLORS.GRAY10};
@@ -8,11 +9,20 @@ export const footerWrapper = css`
 export const footerContainer = css`
   display: flex;
   justify-content: space-between;
+
+  ${TABLET} {
+    flex-direction: column-reverse;
+  }
 `;
 
 export const companyInfoWrapper = css`
   width: 55%;
   padding: 4.75rem 0;
+
+  ${TABLET} {
+    width: 100%;
+    padding: 2rem 0;
+  }
 `;
 
 export const GDtitleBox = css`
@@ -76,9 +86,26 @@ export const inquiryContainer = css`
   flex-direction: column;
   padding: 2rem;
   background-color: #282828;
+
+  ${TABLET} {
+    width: 100%;
+    background-color: transparent;
+    padding: 2rem 0;
+    border-bottom: 1px solid ${COLORS.GRAY20};
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+`;
+
+export const inquiryBox = css`
+  ${TABLET} {
+    margin-right: 2rem;
+  }
 `;
 
 export const inquiryTitle = css`
+  display: block;
   font-size: 1.25rem;
   color: #ababab;
   font-weight: 500;
@@ -90,6 +117,10 @@ export const inquiryText = css`
   line-height: 1.6;
   font-size: 0.875rem;
   margin-bottom: 2rem;
+
+  ${TABLET} {
+    margin-bottom: 0;
+  }
 `;
 
 export const notReadyText = css`
@@ -110,6 +141,7 @@ export const notReadyText = css`
 `;
 
 export const kakaoBox = css`
+  display: block;
   margin-left: 0.2rem;
   position: relative;
   width: 0.75rem;

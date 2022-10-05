@@ -32,7 +32,6 @@ import {
 
 export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookmarked, userId }) => {
   const queryClient = useQueryClient();
-
   const [imageSrc, setImageSrc] = useState(jobDetailData.company.logoUrl as string);
 
   const { mutate: addMutate } = useAddJobBookmarkArr({
@@ -147,7 +146,13 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
             </button>
           </li>
           <li>
-            <Link href={`${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`} passHref>
+            <Link
+              href={{
+                pathname: `${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`,
+                query: { info: "detail" },
+              }}
+              passHref
+            >
               <a css={buttonCSS(false)}>기업정보</a>
             </Link>
           </li>

@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { axiosInstance } from "../../axiosInstance";
 import {
   communityCommentArrKeyObj,
   CommunityCommentArrReqObj,
 } from "shared-constant/queryKeyFactory/community/commentArrKeyObj";
+import { axiosInstance } from "../../axiosInstance";
 
 import { GetPostingCommentArrDef } from "./type";
 import { selector } from "./util";

@@ -3,6 +3,7 @@ export interface CommentCardProps {
     id: number;
     logoUrl: string;
     name: string;
+    commentCount: number;
   };
   setCurrentModal: {
     (modalName: "loginModal", modalContentObj: { button: "home" | "close" }): void;

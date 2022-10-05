@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import { axiosInstance } from "../../axiosInstance";
 import { ResponseDef } from "shared-type/api/responseType";
+import { axiosInstance } from "../../axiosInstance";
 import { PostWriteCommentDef, useWriteCommentProps, RequestObjDef } from "./type";
 
 const postWriteComment: PostWriteCommentDef = async (requestObj) => {

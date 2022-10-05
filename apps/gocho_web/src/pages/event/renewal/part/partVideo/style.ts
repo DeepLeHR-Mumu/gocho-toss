@@ -3,14 +3,20 @@ import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
   height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
   position: relative;
+`;
+
+export const backgroundBox = css`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
 `;
 
 export const positionBox = css`
   position: absolute;
+  z-index: 10;
   top: 5vw;
   left: 5vw;
   width: 100%;

@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
+import kakaoMono from "shared-image/global/sns/kakaoLogo.svg";
 import { useDoLogin } from "shared-api/auth";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
 import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant/errorMessage";
@@ -15,7 +16,20 @@ import { CloseButton } from "@component/common/atom/closeButton";
 import { loginObjDef } from "@recoil/atom/modal";
 import { useModal } from "@recoil/hook/modal";
 
-import { wrapper, desc, formCSS, formArr, errorMsgCSS, closeBtn, errorBox, loginButton, logoContainer } from "./style";
+import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
+import {
+  wrapper,
+  desc,
+  formCSS,
+  formArr,
+  errorMsgCSS,
+  closeBtn,
+  errorBox,
+  loginButton,
+  logoContainer,
+  kakaoLogoBox,
+  kakaoLoginBox,
+} from "./style";
 import { ButtonProps, LoginFormValues } from "./type";
 
 declare global {
@@ -36,10 +50,14 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   const { mutate } = useDoLogin();
   const { closeModal, setCurrentModal } = useModal();
 
-  const [errorMsg] = useState<null | string>(null);
+  const [errorMsg, setErrorMsg] = useState<null | string>(null);
 
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     mutate(loginObj, {
+      onError: (error) => {
+        const errorResponse = error.response?.data as ErrorResponse;
+        setErrorMsg(errorResponse.error.errorMessage);
+      },
       onSuccess: (response) => {
         localStorage.setItem("token", `${response.data.token}`);
         queryClient.invalidateQueries();
@@ -62,9 +80,6 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   }, []);
   return (
     <div css={wrapper}>
-      <button type="button" onClick={kakaoLogin}>
-        카카오 로그인 버튼
-      </button>
       <div css={closeBtn}>
         {button === "home" ? <CloseButton size="S" isHome /> : <CloseButton size="S" buttonClick={closeModal} />}
       </div>
@@ -112,6 +127,12 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
         <div css={errorBox}>{errorMsg && <p css={errorMsgCSS}>{errorMsg}</p>}</div>
         <div css={loginButton}>
           <NormalButton wide variant="filled" text="로그인 하기" isSubmit />
+          <button type="button" css={kakaoLoginBox} onClick={kakaoLogin}>
+            <div css={kakaoLogoBox}>
+              <Image src={kakaoMono} alt="카카오 로그인" layout="fill" objectFit="contain" />
+            </div>
+            카카오톡으로 로그인하기
+          </button>
         </div>
         <NormalButton
           wide
@@ -127,11 +148,11 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
 };
 
 export const LoginModal: FunctionComponent = () => {
-  const { closeModal, currentModal } = useModal();
+  const { currentModal } = useModal();
 
   const loginObj = currentModal?.modalContentObj as loginObjDef;
   return (
-    <ModalComponent closeModal={closeModal} button={loginObj.button}>
+    <ModalComponent>
       <LoginBox button={loginObj.button} />
     </ModalComponent>
   );

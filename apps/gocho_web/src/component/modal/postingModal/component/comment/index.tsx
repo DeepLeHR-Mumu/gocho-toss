@@ -4,7 +4,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useDeleteComment } from "shared-api/community/useDeleteComment";
 import { communityCommentArrKeyObj } from "shared-constant/queryKeyFactory/community/commentArrKeyObj";
 
-import { ProfileImg } from "shared-ui/common/atom/profileImg";
+import { ChangeComment } from "../changeComment";
+// import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { CommentProps } from "./type";
 import {
   wrapper,
@@ -31,6 +32,7 @@ export const Comment: FunctionComponent<CommentProps> = ({
   nickname,
 }) => {
   const [showWriteComment, setShowWriteComment] = useState<boolean>(false);
+  const [isChangeComment, setIsChangeComment] = useState(false);
   const [errorMsg] = useState<null | string>(null);
   const handleShowWriteComment = () => {
     if (showWriteComment) return setShowWriteComment(false);
@@ -55,20 +57,40 @@ export const Comment: FunctionComponent<CommentProps> = ({
     <div css={wrapper}>
       <div css={commentWrapper}>
         <div css={nicknameBox}>
-          <ProfileImg imageStr="default" size="S" />
+          {/* <ProfileImg imageStr="default" size="S" /> */}
           <p css={nicknameCSS}>{nickname}</p>
         </div>
         <div css={bodyBox}>
-          <p css={bodyCSS}>{body}</p>
+          {isChangeComment ? (
+            <ChangeComment
+              setIsChangeComment={setIsChangeComment}
+              prevDesc={body}
+              postingId={postingId}
+              commentId={id}
+            />
+          ) : (
+            <p css={bodyCSS}>{body}</p>
+          )}
+
           <div css={buttonContainer}>
             <button css={writeReCommentButtonBox} type="button" onClick={handleShowWriteComment}>
-              답글
+              {showWriteComment ? "닫기" : "답글"}
             </button>
             {loginUserId === userId && (
               <div css={settingButtonContainer}>
-                <button type="button" css={settingButton}>
-                  수정
+                <button
+                  type="button"
+                  css={settingButton}
+                  aria-label={isChangeComment ? "수정 취소" : "댓글 수정"}
+                  onClick={() => {
+                    setIsChangeComment((isPrev) => {
+                      return !isPrev;
+                    });
+                  }}
+                >
+                  {isChangeComment ? "취소" : "수정"}
                 </button>
+
                 <button
                   type="button"
                   css={settingButton}
@@ -86,18 +108,7 @@ export const Comment: FunctionComponent<CommentProps> = ({
         </div>
       </div>
       {reCommentList.map((reComment) => {
-        return (
-          <ReComment
-            id={reComment.id}
-            postingId={postingId}
-            userId={reComment.userId}
-            loginUserId={loginUserId}
-            body={reComment.description}
-            nickname={reComment.nickname}
-            emblem={reComment.badge}
-            key={reComment.id}
-          />
-        );
+        return <ReComment reComment={reComment} postingId={postingId} loginUserId={loginUserId} key={reComment.id} />;
       })}
     </div>
   );

@@ -24,6 +24,7 @@ export const MyProfileMenu: FunctionComponent<MyProfileMenuProps> = ({ active })
     }
     window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
   }, []);
+
   const doLogout = () => {
     localStorage.removeItem("token");
     queryClient.invalidateQueries();
@@ -43,7 +44,7 @@ export const MyProfileMenu: FunctionComponent<MyProfileMenuProps> = ({ active })
           );
         })}
         <li>
-          <button type="button" css={logoutCSS} onClick={doLogout}>
+          <button type="button" css={logoutCSS} onClick={doLogout} aria-label="로그아웃">
             로그아웃
           </button>
         </li>

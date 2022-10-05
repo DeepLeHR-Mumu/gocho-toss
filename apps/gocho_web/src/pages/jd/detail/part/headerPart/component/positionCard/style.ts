@@ -1,6 +1,7 @@
 import { css, SerializedStyles } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
+import { TABLET } from "shared-style/mediaQuery";
 
 export const wrapper = css`
   position: relative;
@@ -117,6 +118,10 @@ const defaultArrowBox = css`
   right: 1rem;
   top: 50%;
   transform: translateY(-50%);
+
+  ${TABLET} {
+    right: -1rem;
+  }
 `;
 
 export const arrowClickBox = css`

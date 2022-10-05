@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 import { filterKeyObj, FilterRequestObjDef } from "shared-constant/queryKeyFactory/filter/filterKeyObj";
 import { axiosInstance } from "../../axiosInstance";
@@ -18,6 +19,12 @@ const getUserFilter: GetUserFilterDef = async ({ queryKey: [{ requestObj }] }) =
 
 export const useUserFilter = (requestObj: FilterRequestObjDef) => {
   const queryResult = useQuery(filterKeyObj.all(requestObj), getUserFilter, {
+    onError: (error) => {
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        return null;
+      }
+      return error;
+    },
     enabled: Boolean(requestObj.userId),
     select: ({ data }) => {
       return selector(data);

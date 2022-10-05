@@ -31,7 +31,6 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
     sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
     moveNextCard(35);
   };
-
   return (
     <div css={specCardWrapper}>
       <SpecCardTitle title="고등학교 학력정보" desc="정확하게 입력할 수록 스펙평가의 적중도는 올라갑니다." />
@@ -45,7 +44,7 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
             backgroundStyle="blue02"
             itemArr={highSchoolTypeArr}
           />
-          {errors.highschool?.type && <WarningText msg={errors.highschool.type} />}
+          {errors.highschool?.type && <WarningText msg="고등학교 정보를 선택해주세요." />}
         </ContainerBox>
 
         <ContainerBox optionObj={{ location: "bottom", marginValue: 4, maxWidth: 58 }}>

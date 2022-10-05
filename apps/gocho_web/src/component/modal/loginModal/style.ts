@@ -19,6 +19,27 @@ export const wrapper = css`
   align-items: center;
 `;
 
+export const kakaoLoginBox = css`
+  background-color: #ffe812;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  border-radius: 1.5rem;
+  font-size: 0.875rem;
+  color: #4d4d4d;
+  font-weight: 500;
+  margin-top: 0.3rem;
+`;
+
+export const kakaoLogoBox = css`
+  position: relative;
+  width: 1rem;
+  height: 0.875rem;
+  margin-right: 0.5rem;
+`;
+
 export const closeBtn = css`
   position: absolute;
   right: -0.5rem;
@@ -50,18 +71,23 @@ export const formArr = css`
 
   > li {
     margin-bottom: 1.25rem;
+
+    :last-of-type {
+      margin-bottom: 0;
+    }
   }
 `;
 
 export const errorBox = css`
   margin-top: 0.2rem;
+  min-height: 0.75rem;
+  margin-bottom: 1.25rem;
 `;
 
 export const errorMsgCSS = css`
   font-size: 0.875rem;
   color: ${COLORS.ERROR_RED30};
   text-align: center;
-  margin-bottom: 1rem;
 `;
 
 export const loginButton = css`

@@ -19,6 +19,7 @@ export const nicknameBox = css`
   height: 2.25rem;
   display: flex;
   align-items: center;
+  justify-content: center;
   border-radius: 1.5rem;
   background-color: ${COLORS.GRAY90};
   margin-right: 0.5rem;

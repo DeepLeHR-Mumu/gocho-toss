@@ -6,7 +6,7 @@ import { wrapper, titleCSS, descCSS } from "./style";
 export const SpecCardTitle: FunctionComponent<SpecCardTitleProps> = ({ title, desc }) => {
   return (
     <div css={wrapper}>
-      <h3 css={titleCSS}>{title}</h3>
+      <strong css={titleCSS}>{title}</strong>
       <p css={descCSS}>{desc}</p>
     </div>
   );
