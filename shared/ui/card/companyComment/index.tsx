@@ -47,15 +47,15 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
     commentContainerRef.current?.scrollTo(0, bottomHeight !== undefined ? bottomHeight : 0);
   }, [companyCommentArrData]);
 
-  if (!companyCommentArrData || isSkeleton || companyData === undefined) {
+  if (isSkeleton || companyData === undefined) {
     return (
-      <div css={companyCommentCardSkeleton}>
+      <div css={companyCommentCardSkeleton(isMobile)}>
         <SkeletonBox />
       </div>
     );
   }
 
-  if (!isSuccess) {
+  if (!companyCommentArrData || !isSuccess) {
     return (
       <div css={cardWrapper(isMobile)} className="active">
         <header css={header}>

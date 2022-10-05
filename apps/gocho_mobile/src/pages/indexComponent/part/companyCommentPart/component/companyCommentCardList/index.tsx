@@ -19,7 +19,7 @@ export const CompanyCommentCardList: FunctionComponent = () => {
       <div css={listContainer}>
         <Slider {...setCarouselSetting()} ref={sliderRef}>
           {dummyArrCreator(4).map((value) => {
-            return <CompanyCommentCard isSkeleton key={`CompanyCommentSkeleton${value}`} />;
+            return <CompanyCommentCard isSkeleton isMobile key={`CompanyCommentSkeleton${value}`} />;
           })}
         </Slider>
       </div>

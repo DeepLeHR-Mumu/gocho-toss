@@ -25,10 +25,6 @@ export const cardListContainer = css`
   overflow: hidden;
 `;
 
-export const emptyBox = css`
-  min-height: 48.3125rem;
-`;
-
 export const sliderContainer = css`
   .slick-track {
     padding: 2rem 0 8rem 0;
