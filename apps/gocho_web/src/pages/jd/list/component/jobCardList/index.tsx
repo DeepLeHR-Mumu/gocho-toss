@@ -30,6 +30,7 @@ export const JobCardList: FunctionComponent<JobCardListProps> = ({ jobDataArr, i
             return job.id === jobData.id;
           })
         );
+
         return (
           <JobCard jobData={jobData} isBookmarked={isBookmarked} userId={userData?.id} key={`JobCard${jobData.id}`} />
         );

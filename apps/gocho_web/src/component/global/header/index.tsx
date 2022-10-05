@@ -1,4 +1,4 @@
-import { FunctionComponent, useState, ChangeEvent, FormEvent } from "react";
+import { FunctionComponent, useEffect, useState, ChangeEvent, FormEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -14,6 +14,7 @@ import { Layout } from "@component/layout";
 import { Profile } from "@component/common/molecule/profile";
 import { UnAuthMenu } from "@component/common/molecule/unAuthMenu";
 import { menuArr } from "@constant/menuArr";
+import { useModal } from "@recoil/hook/modal";
 
 import { SubMenuButton } from "./component/subMenuButton";
 import {
@@ -37,6 +38,7 @@ export const Header: FunctionComponent = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [isUnifiedSearch, setIsUnifiedSearch] = useState<boolean>(false);
   const [query, setQuery] = useState("");
+  const { closeModal } = useModal();
 
   const router = useRouter();
   const { pathname } = router;
@@ -58,6 +60,10 @@ export const Header: FunctionComponent = () => {
       query: { q: query, page: 1 },
     });
   });
+
+  useEffect(() => {
+    closeModal();
+  }, [closeModal, pathname]);
 
   const { isSuccess } = useUserInfo();
   const menuMainUrl = pathname.split("/")[1];

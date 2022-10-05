@@ -17,43 +17,32 @@ import {
 
 import { SlideCardProps } from "./type";
 
-export const SlideCard: FunctionComponent<SlideCardProps> = ({
-  topDesc,
-  middleDesc,
-  title,
-  lastDesc,
-  backgroundColor,
-  iconImage,
-  backgroundImage,
-  buttonColor,
-  buttonText,
-  buttonUrl,
-}) => {
+export const SlideCard: FunctionComponent<SlideCardProps> = ({ slideData }) => {
   return (
     <div css={slideWrapper}>
-      <div css={slideInfo(backgroundColor)}>
-        <p css={topDescCSS}>{topDesc}</p>
+      <div css={slideInfo(slideData.backgroundColor)}>
+        <p css={topDescCSS}>{slideData.topDesc}</p>
         <p css={middleDescCSS}>
-          {middleDesc}
-          {iconImage && (
+          {slideData.middleDesc}
+          {slideData.iconImage && (
             <span css={middleDescIconBox}>
-              <Image src={iconImage} alt="" objectFit="contain" layout="fill" />
+              <Image src={slideData.iconImage} alt="" objectFit="contain" layout="fill" />
             </span>
           )}
         </p>
-        <strong css={titleCSS}>{title}</strong>
-        <em css={lastDescCSS}>{lastDesc}</em>
-        {buttonText && (
-          <Link href={`${buttonUrl}`} passHref>
-            <a css={linkButton(buttonColor)}>
+        <strong css={titleCSS}>{slideData.title}</strong>
+        <em css={lastDescCSS}>{slideData.lastDesc}</em>
+        {slideData.buttonObj && (
+          <Link href={slideData.buttonObj.url} passHref target={slideData.buttonObj.target}>
+            <a css={linkButton(slideData.buttonObj.backgroundColor, slideData.buttonObj.color)}>
               <FiArrowRight />
-              {buttonText}
+              {slideData.buttonObj.text}
             </a>
           </Link>
         )}
       </div>
       <div css={dimmed} />
-      <Image priority src={backgroundImage} alt={title} layout="responsive" />
+      <Image priority src={slideData.backgroundImage} alt={slideData.title} layout="responsive" />
     </div>
   );
 };

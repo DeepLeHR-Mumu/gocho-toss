@@ -13,9 +13,13 @@ export const carouselArr = [
     backgroundImage: banner01,
     iconImage: checkIconImage,
     backgroundColor: "#121012",
-    buttonText: "자세히보기",
-    buttonColor: "#505050",
-    buttonUrl: "/event/renewal",
+    buttonObj: {
+      target: "_self",
+      text: "자세히보기",
+      color: "#fff",
+      backgroundColor: "#333",
+      url: "/event/renewal",
+    },
   },
   {
     id: 2,
@@ -26,6 +30,7 @@ export const carouselArr = [
     backgroundImage: banner02,
     iconImage: checkIconImage,
     backgroundColor: "#2961CD",
+    buttonObj: null,
   },
   {
     id: 3,
@@ -35,6 +40,13 @@ export const carouselArr = [
     lastDesc: "다양한 취업정보 및 꿀팁을 물어보세요",
     backgroundImage: banner03,
     iconImage: checkIconImage,
-    backgroundColor: "#F5BD58",
+    backgroundColor: "#fbc540",
+    buttonObj: {
+      target: "_blank",
+      text: "오픈카톡 바로가기",
+      color: "#fff",
+      backgroundColor: "#fbc540",
+      url: "https://open.kakao.com/o/gxquBCud",
+    },
   },
 ];

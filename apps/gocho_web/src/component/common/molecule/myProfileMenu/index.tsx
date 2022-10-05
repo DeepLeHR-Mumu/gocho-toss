@@ -22,6 +22,7 @@ export const MyProfileMenu: FunctionComponent<MyProfileMenuProps> = ({ active })
   useEffect(() => {
     window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
   }, []);
+
   const doLogout = () => {
     localStorage.removeItem("token");
     queryClient.invalidateQueries();
