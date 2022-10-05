@@ -40,9 +40,6 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
   datadogRum.startSessionReplayRecording();
 }
 
-if (typeof window !== "undefined" && window.location.href.includes("localhost")) {
-  // console.log("this is not localhost")
-}
 
 
 function MyApp({ Component, pageProps }: AppProps) {
