@@ -17,9 +17,11 @@ declare global {
 
 export const MyProfileMenu: FunctionComponent<MyProfileMenuProps> = ({ active }) => {
   const queryClient = useQueryClient();
-  // window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
 
   useEffect(() => {
+    if (window.Kakao.isInitialized()) {
+      return;
+    }
     window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
   }, []);
 
