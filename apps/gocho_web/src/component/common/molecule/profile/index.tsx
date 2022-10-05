@@ -1,32 +1,40 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { BsChevronUp } from "react-icons/bs";
+import { useRouter } from "next/router";
 
 import { useUserInfo } from "shared-api/auth";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
 import { MyProfileMenu } from "../myProfileMenu";
-import { profileWrapper, greetingMsg, iconCSS } from "./style";
+import { profileWrapper, greetingMsg, iconCSS, wrapper } from "./style";
 
 export const Profile: FunctionComponent = () => {
+  const { pathname } = useRouter();
   const [isActive, setIsActive] = useState<boolean>(false);
   const { data: userInfoData } = useUserInfo();
 
-  return (
-    <button
-      css={profileWrapper}
-      type="button"
-      aria-label={isActive ? "서브메뉴 열기" : "서브메뉴 닫기"}
-      onClick={() => {
-        setIsActive((isPrev) => {
-          return !isPrev;
-        });
-      }}
-    >
-      {userInfoData && <ProfileImg imageStr={userInfoData?.image} size="S" />}
+  useEffect(() => {
+    setIsActive(false);
+  }, [pathname]);
 
-      <p css={greetingMsg}>{userInfoData?.nickname}</p>
-      <BsChevronUp css={iconCSS(isActive)} />
+  return (
+    <div css={wrapper}>
+      <button
+        css={profileWrapper}
+        type="button"
+        aria-label={isActive ? "서브메뉴 열기" : "서브메뉴 닫기"}
+        onClick={() => {
+          setIsActive((isPrev) => {
+            return !isPrev;
+          });
+        }}
+      >
+        {userInfoData && <ProfileImg imageStr={userInfoData?.image} size="S" />}
+
+        <p css={greetingMsg}>{userInfoData?.nickname}</p>
+        <BsChevronUp css={iconCSS(isActive)} />
+      </button>
       <MyProfileMenu active={isActive} />
-    </button>
+    </div>
   );
 };

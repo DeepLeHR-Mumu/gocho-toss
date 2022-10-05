@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 
 import { shorten } from "shared-style/common";
 import { COLORS } from "shared-style/color";
+import { TABLET } from "shared-style/mediaQuery";
 
 export const bestUserInfoWrapper = css`
   width: 100%;
@@ -25,6 +26,10 @@ export const cardWrapper = css`
   padding: 3rem;
   display: flex;
   flex-direction: column;
+
+  ${TABLET} {
+    padding: 2rem;
+  }
 `;
 export const colorPoint = css`
   color: ${COLORS.BLUE_FIRST40};
@@ -79,6 +84,7 @@ export const userEvalCount = css`
   font-size: 0.75rem;
   color: ${COLORS.GRAY40};
   padding-left: 1rem;
+  white-space: nowrap;
 `;
 
 export const userTaskCSS = css`

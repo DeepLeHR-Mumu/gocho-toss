@@ -22,7 +22,11 @@ export const commentContainerSkeleton = css`
   box-shadow: 0px 0.25rem 0.75rem ${COLORS.GRAY80};
 `;
 
-export const commentArrCSS = css``;
+export const commentArrCSS = css`
+  > li {
+    margin-bottom: 0.75rem;
+  }
+`;
 
 export const firstCommentAlert = css`
   display: flex;
@@ -67,6 +71,7 @@ export const commentBody = css`
 export const commentBox = css`
   background-color: ${COLORS.GRAY100};
   padding: 0.75rem;
+  min-width: 3.75rem;
   box-sizing: border-box;
   border-radius: 0 1rem 1rem 1rem;
   position: relative;

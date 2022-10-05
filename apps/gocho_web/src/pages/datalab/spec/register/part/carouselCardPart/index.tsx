@@ -3,6 +3,7 @@ import Slider from "react-slick";
 
 import { useProgress, useIsSpecPageBlocking } from "@recoil/hook/spec";
 
+import { scrollToTop } from "shared-ui/common/atom/scrollTop";
 import { Spec1Basic } from "./spec1Basic";
 import { Spec2lastEducation } from "./spec2LastEducation";
 import { Spec3Highschool } from "./spec3Highschool";
@@ -13,7 +14,7 @@ import { Spec7Lang } from "./spec7Lang";
 import { Spec8AwardCareerEtc } from "./spec8AwardCareerEtc";
 import { Spec9Success } from "./spec9Success";
 
-import { setCarouselSetting, scrollTop } from "./util";
+import { setCarouselSetting } from "./util";
 import { moveNextCardDef } from "./type";
 import { wrapper } from "./style";
 
@@ -30,13 +31,13 @@ export const SpecWritePart: FunctionComponent = () => {
   }, [setIsBlocking]);
 
   const moveNextCard: moveNextCardDef = (percent) => {
-    scrollTop();
+    scrollToTop();
     setCurrentProgress(percent);
     sliderRef.current?.slickNext();
   };
 
   const movePrevCard = () => {
-    scrollTop();
+    scrollToTop();
     sliderRef.current?.slickPrev();
   };
 

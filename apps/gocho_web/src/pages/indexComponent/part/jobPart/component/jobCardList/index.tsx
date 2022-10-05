@@ -2,15 +2,17 @@ import { FunctionComponent } from "react";
 
 import { useJobArr } from "shared-api/job";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
-
 import { MainJobCard } from "shared-ui/card/MainJobCard";
-
 import { useUserInfo } from "shared-api/auth";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
+
 import { cardListContainer } from "./style";
 import { JobCardArrProps } from "./type";
 
 export const JobCardList: FunctionComponent<JobCardArrProps> = ({ listOrder }) => {
+  const { data: userData } = useUserInfo();
+  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
+
   const {
     data: jobDataArr,
     isLoading,
@@ -20,9 +22,6 @@ export const JobCardList: FunctionComponent<JobCardArrProps> = ({ listOrder }) =
     filter: "valid",
     limit: 9,
   });
-
-  const { data: userData } = useUserInfo();
-  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
   if (!jobDataArr || isError || isLoading) {
     return (

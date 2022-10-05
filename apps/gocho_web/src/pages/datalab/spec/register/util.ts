@@ -13,9 +13,9 @@ export const usePageBlocking: UsePageBlockingDef = (setCurrentModal) => {
 
   const routeChangeStart = useCallback(
     (url: string) => {
-      const isCompare = router.pathname !== url && !isBlocking;
+      const isUrl = router.pathname !== url && !isBlocking;
 
-      if (isCompare) {
+      if (isUrl) {
         setLinkUrl(url);
         setCurrentModal("pageBlockModal");
         router.events.emit("routeChangeError");
@@ -28,19 +28,15 @@ export const usePageBlocking: UsePageBlockingDef = (setCurrentModal) => {
   );
 
   useEffect(() => {
+    if (isBlocking && linkUrl) {
+      router.replace(linkUrl);
+    }
+  }, [linkUrl, isBlocking, router]);
+
+  useEffect(() => {
     router.events.on("routeChangeStart", routeChangeStart);
     return () => {
       router.events.off("routeChangeStart", routeChangeStart);
     };
   }, [routeChangeStart, router.events]);
-
-  useEffect(() => {
-    if (isBlocking && linkUrl) {
-      router.replace(linkUrl);
-    }
-
-    return () => {
-      setLinkUrl(null);
-    };
-  }, [linkUrl, isBlocking, router]);
 };

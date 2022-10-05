@@ -2,6 +2,24 @@ import { css, SerializedStyles } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
 
+interface SpinnerWrapperDef {
+  (backgroundColor: string): SerializedStyles;
+}
+
+export const spinnerWrapper: SpinnerWrapperDef = (backgroundColor) => {
+  return css`
+    z-index: 60;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 8.5rem;
+    height: 8.5rem;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background-color: ${backgroundColor};
+  `;
+};
+
 interface spinnerContainer {
   (backgroundColor: string): SerializedStyles;
 }

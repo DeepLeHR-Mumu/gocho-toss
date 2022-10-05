@@ -9,6 +9,7 @@ export const selector = (commentArr: PostingCommentObjDef[]) => {
       description: comment.description,
       badge: comment.badge,
       nickname: comment.nickname,
+      image: comment.image,
     };
   });
 };

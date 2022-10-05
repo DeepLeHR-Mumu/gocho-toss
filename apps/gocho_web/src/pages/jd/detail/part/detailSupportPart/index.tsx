@@ -61,7 +61,7 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
                 {getPossibleEduArr(freshPosition.possibleEdu).map((edu) => {
                   return (
                     <li key={edu.desc}>
-                      <div css={eduImageBox}>
+                      <div css={eduImageBox(edu.isPossible)}>
                         <Image src={edu.isPossible ? graduateColor : graduateGray} alt="" />
                       </div>
                       <p css={isPossibleEduDesc(edu.isPossible)}>{edu.desc}</p>

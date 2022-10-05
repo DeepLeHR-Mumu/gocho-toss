@@ -34,8 +34,15 @@ export const selector = (specDataArr: SpecObjDef[]) => {
         tardy: specData.highschool.tardy,
         leaveEarly: specData.highschool.leave_early,
       },
-      // NOTMYFAULT undefined 해결 예정
-      certificate: specData.certificate === null || specData.certificate === undefined ? null : specData.certificate,
+      certificate:
+        specData.certificate === null || specData.certificate === undefined
+          ? null
+          : {
+              data: specData.certificate.data,
+              level1: specData.certificate.level1,
+              level2: specData.certificate.level2,
+              level3: specData.certificate.level3,
+            },
     };
   });
 };

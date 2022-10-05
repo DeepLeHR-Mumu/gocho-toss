@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import { axiosInstance } from "../../axiosInstance";
 import { ResponseDef } from "shared-type/api/responseType";
+import { axiosInstance } from "../../axiosInstance";
 import { PostChangePostingDef, useChangePostingProps, RequestObjDef } from "./type";
 
 const postChangePosting: PostChangePostingDef = async (requestObj) => {

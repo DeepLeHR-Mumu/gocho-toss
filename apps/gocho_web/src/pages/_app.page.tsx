@@ -2,10 +2,10 @@ import { useState } from "react";
 import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-// import axios from "axios";
+import axios from "axios";
 import type { AppProps } from "next/app";
 import { Global } from "@emotion/react";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Head from "next/head";
 
 import { globalStyles } from "@style/globalStyle";
@@ -46,7 +46,7 @@ if (typeof window !== "undefined" && window.location.href.includes("localhost"))
 
 
 function MyApp({ Component, pageProps }: AppProps) {
-  // const router = useRouter();
+  const router = useRouter();
   const [queryClient] = useState(() => {
     return new QueryClient({
       defaultOptions: {
@@ -55,14 +55,14 @@ function MyApp({ Component, pageProps }: AppProps) {
           refetchOnWindowFocus: false,
           keepPreviousData: true,
           retry: 0,
-          // onError: (error) => {
-          //   if (axios.isAxiosError(error) && error.response?.status === 404) {
-          //     router.push("/404");
-          //   }
-          //   if (axios.isAxiosError(error) && error.response?.status === 500) {
-          //     router.push("/404");
-          //   }
-          // },
+          onError: (error) => {
+            if (axios.isAxiosError(error) && error.response?.status === 404) {
+              router.push("/404");
+            }
+            if (axios.isAxiosError(error) && error.response?.status === 500) {
+              router.push("/404");
+            }
+          },
         },
       },
     });

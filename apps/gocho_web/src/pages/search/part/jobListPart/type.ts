@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
-
 export type JobListPartProps = {
   jobDataArr:
     | {
@@ -21,8 +19,6 @@ export type JobListPartProps = {
       }[]
     | undefined;
   isLoading: boolean;
-  total: number | undefined;
+  total: number;
   limit: number;
-  page: number;
-  setPage: Dispatch<SetStateAction<number>>;
 };

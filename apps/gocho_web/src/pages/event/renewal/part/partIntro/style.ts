@@ -26,10 +26,15 @@ export const topLayoutCSS = css`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
   position: relative;
+`;
+
+export const backgroundBox = css`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
 `;
 
 export const infoBox = css`
@@ -38,6 +43,7 @@ export const infoBox = css`
   min-width: 20rem;
   max-width: 27.5rem;
   position: absolute;
+  z-index: 10;
   left: 50%;
   top: 46%;
   transform: translate(-50%, -50%);
@@ -81,6 +87,7 @@ export const desc = css`
 export const subInfoBox = css`
   text-align: center;
   position: absolute;
+  z-index: 10;
   left: 50%;
   bottom: 10%;
   transform: translate(-50%, 0);

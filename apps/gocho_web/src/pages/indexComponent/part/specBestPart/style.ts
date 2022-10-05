@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
+import { DESKTOP } from "shared-style/mediaQuery";
 
 export const specBestWrapper = css`
   margin-top: 5.5rem;
@@ -28,6 +29,10 @@ export const bestUserWrapper = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  ${DESKTOP} {
+    justify-content: space-evenly;
+  }
 `;
 
 export const colorPoint = css`

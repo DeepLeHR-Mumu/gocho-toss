@@ -27,7 +27,7 @@ const addCompanyBookmarkArr: AddCompanyBookamrkArrDef = async (requestObj) => {
   return data;
 };
 
-export const useAddCompanyBookmarkArr = (CompanyObj: CompanyObjDef | undefined) => {
+export const useAddCompanyBookmarkArr = (companyObj: CompanyObjDef | undefined) => {
   const queryClient = useQueryClient();
   const mutationResult = useMutation<ResponseObjDef, AxiosError, RequestObjDef>(addCompanyBookmarkArr, {
     onMutate: async (requestObj) => {
@@ -39,9 +39,14 @@ export const useAddCompanyBookmarkArr = (CompanyObj: CompanyObjDef | undefined) 
       queryClient.setQueryData<CompanyBookmarkResObjDef>(
         userBookmarkKeyObj.companyBookmarkArr({ userId: requestObj.userId }),
         (old) => {
-          if (old && CompanyObj)
+          if (old?.data === null) {
             return {
-              data: [...old.data, CompanyObj],
+              data: [companyObj as CompanyObjDef],
+            };
+          }
+          if (old && companyObj)
+            return {
+              data: [...old.data, companyObj],
             };
           return undefined;
         }

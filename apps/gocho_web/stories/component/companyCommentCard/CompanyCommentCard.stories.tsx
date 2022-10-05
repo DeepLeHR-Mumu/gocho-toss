@@ -44,6 +44,7 @@ const Template: ComponentStory<typeof CompanyCommentCard> = (args) => {
 export const 정상작동 = Template.bind({});
 정상작동.args = {
   companyData: {
+    commentCount: 555,
     id: 2,
     name: "기업이름",
     logoUrl: "",
@@ -62,6 +63,7 @@ export const 정상작동 = Template.bind({});
 export const 에러 = Template.bind({});
 에러.args = {
   companyData: {
+    commentCount: 555,
     id: 2,
     name: "기업이름",
     logoUrl: "",

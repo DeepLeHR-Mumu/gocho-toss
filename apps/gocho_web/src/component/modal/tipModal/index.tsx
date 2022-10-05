@@ -167,10 +167,10 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
 };
 
 export const TipModal: FunctionComponent = () => {
-  const { closeModal, currentModal } = useModal();
+  const { currentModal } = useModal();
 
   return (
-    <ModalComponent closeModal={closeModal} button="close">
+    <ModalComponent>
       <TipBox tipData={currentModal?.modalContentObj as tipObjDef} />
     </ModalComponent>
   );

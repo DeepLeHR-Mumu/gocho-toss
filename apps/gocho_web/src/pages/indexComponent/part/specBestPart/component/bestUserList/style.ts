@@ -2,6 +2,7 @@ import { css, SerializedStyles } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
 import { shorten } from "shared-style/common";
+import { TABLET } from "shared-style/mediaQuery";
 
 export const bestUserArrWrapper = css`
   width: 100%;
@@ -46,6 +47,12 @@ export const setUserCard: setUserCardDef = (active) => {
         color: ${COLORS.GRAY100};
       }    
     `}
+
+    ${TABLET} {
+      width: 28%;
+      height: auto;
+      margin: 0 1rem 1rem 0;
+    }
   `;
 };
 

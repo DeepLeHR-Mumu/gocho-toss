@@ -21,7 +21,6 @@ export const container = css`
 
 export const mainWrapper = css`
   background-color: ${COLORS.GRAY100};
-  width: 100%;
-  max-width: 53rem;
+  width: calc(100% - 18rem);
   border-radius: 2rem;
 `;

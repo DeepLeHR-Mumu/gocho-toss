@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { LinkButton, NormalButton } from "shared-ui/common/atom/button";
+import { LinkButton } from "shared-ui/common/atom/button";
 import { SPEC_DETAIL_URL } from "shared-constant/internalURL";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
@@ -97,7 +97,7 @@ export const MySpecCard: FunctionComponent<MySpecCardProps> = ({ mySpecData }) =
 
       <div css={buttonBox}>
         {/* LATER : button에 aria-label 추가하기 */}
-        <NormalButton text="삭제하기" variant="text" wide={false} isSubmit={false} />
+        {/* <NormalButton text="삭제하기" variant="text" wide={false} isSubmit={false} /> */}
         <LinkButton
           text="평가 내역 보기"
           variant="filled"

@@ -6,7 +6,6 @@ import { FiMoreVertical } from "react-icons/fi";
 import { useUserInfo } from "shared-api/auth";
 import { usePostingCommentArr } from "shared-api/community/usePostingCommentArr";
 import { useDeletePosting } from "shared-api/community/useDeletePosting";
-import { selector } from "shared-api/community/usePostingCommentArr/util";
 import { Spinner } from "shared-ui/common/atom/spinner";
 import { communityPostingArrKeyObj } from "shared-constant/queryKeyFactory/community/postingArrKeyObj";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
@@ -86,6 +85,7 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
     closeModal();
     queryClient.invalidateQueries(communityPostingArrKeyObj.all);
   };
+
   const isBookmarked = Boolean(
     postingBookmarkArr?.some((postingBookmark) => {
       return postingBookmark === postingData.id;
@@ -126,7 +126,7 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
 
   const { year, month, date } = dateConverter(postingData.createdTime);
   // LATER 게시글 내용 댓글부분을 파트로 나누면 코드가 좀더 짧고 간결해보일듯 -> 극단적으로 나눌 필요는 없음
-  // LATER data-cy 제거 후 테스트코드 다시확인
+
   return (
     <article css={modalWrapper}>
       <div css={closeButtonWrapper}>
@@ -136,7 +136,7 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
         <div css={flexBox}>
           <div css={writerProfile}>
             <div css={writerProfileImage}>
-              <ProfileImg imageStr="default_work" size="S" />
+              <ProfileImg imageStr={postingData.image} size="S" />
             </div>
             <p css={writerNickname}>{postingData.nickname}</p>
           </div>
@@ -155,14 +155,12 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
             <li data-cy="postingType" css={setPostingType(postingData.type)}>
               {postingData.type}
             </li>
-            <li css={infoCSS}>{`${year}/${month}/${date}`}</li>
+            <li css={infoCSS}>{`${year}.${month}.${date}`}</li>
             <li>
               <button type="button" aria-label="좋아요 버튼" onClick={likePosting} css={likeButtonCSS(isBookmarked)}>
-                <AiOutlineLike />
+                <AiOutlineLike /> {postingData.like}
               </button>
             </li>
-
-            <li css={numInfo}>{postingData.like}</li>
 
             <li css={numInfo}>
               <AiOutlineMessage /> {commentArrData.length}
@@ -180,13 +178,13 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
                 </button>
                 <button
                   type="button"
-                  css={settingMenu}
+                  css={settingButton}
                   aria-label="글 삭제하기"
                   onClick={() => {
                     return postingDelete(postingData.id);
                   }}
                 >
-                  <FiMoreVertical />
+                  글 삭제하기
                 </button>
               </div>
             )}
@@ -209,8 +207,9 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
 
         <div css={commentListWrapper}>
           {commentArrData.map((comment) => {
-            // LATER 복잡한 처리방식 간소화 - > 빈배열을 만들어서 해야할지?, filter 사용하면 될거같음
-            const reCommentList: null | ReturnType<typeof selector> = [];
+            const reCommentList = commentArrData.filter((data) => {
+              return comment.id === data.parentCommentId;
+            });
 
             if (comment.parentCommentId === null) {
               return (
@@ -237,10 +236,10 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
 };
 
 export const PostingModal: FunctionComponent = () => {
-  const { closeModal, currentModal } = useModal();
+  const { currentModal } = useModal();
 
   return (
-    <ModalComponent closeModal={closeModal} button="close">
+    <ModalComponent>
       <PostingBox postingData={currentModal?.modalContentObj as postingObjDef} />
     </ModalComponent>
   );

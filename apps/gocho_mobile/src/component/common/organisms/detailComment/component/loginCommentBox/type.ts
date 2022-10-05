@@ -1,12 +1,14 @@
 export interface LoginCommentBoxProps {
   commentArr: {
     nickname: string;
-    jdTitle: string;
+    title: string;
     createdTime: number;
     description: string;
-    like: number;
-    dislike: number;
     id: number;
+    liked: boolean;
+    disLiked: boolean;
+    likeCount: number;
+    disLikeCount: number;
     badge: "default" | "early_bird" | "admin";
   }[];
   userData: {

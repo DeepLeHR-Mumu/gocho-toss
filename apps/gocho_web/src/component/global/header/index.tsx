@@ -1,4 +1,4 @@
-import { FunctionComponent, useState, ChangeEvent, FormEvent } from "react";
+import { FunctionComponent, useEffect, useState, ChangeEvent, FormEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -14,6 +14,7 @@ import { Layout } from "@component/layout";
 import { Profile } from "@component/common/molecule/profile";
 import { UnAuthMenu } from "@component/common/molecule/unAuthMenu";
 import { menuArr } from "@constant/menuArr";
+import { useModal } from "@recoil/hook/modal";
 
 import { SubMenuButton } from "./component/subMenuButton";
 import {
@@ -36,16 +37,14 @@ import {
 export const Header: FunctionComponent = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [isUnifiedSearch, setIsUnifiedSearch] = useState<boolean>(false);
+  const [query, setQuery] = useState("");
+  const { closeModal } = useModal();
 
   const router = useRouter();
   const { pathname } = router;
 
-  const [query, setQuery] = useState("");
-
-  const handleParam = () => {
-    return (typeKeyword: ChangeEvent<HTMLInputElement>) => {
-      return setQuery(typeKeyword.target.value);
-    };
+  const handleParam = (typeKeyword: ChangeEvent<HTMLInputElement>) => {
+    return setQuery(typeKeyword.target.value);
   };
 
   const preventRefresh = (goNewPage: (event: FormEvent) => void) => {
@@ -58,23 +57,31 @@ export const Header: FunctionComponent = () => {
   const handleSubmit = preventRefresh(() => {
     router.push({
       pathname: "/search",
-      query: { q: query },
+      query: { q: query, page: 1 },
     });
   });
 
+  useEffect(() => {
+    closeModal();
+  }, [closeModal, pathname]);
+
   const { isSuccess } = useUserInfo();
+  const menuMainUrl = pathname.split("/")[1];
+
   return (
     <header css={headerWrapper}>
       <Layout>
         <div css={headerContainer}>
           <div css={logoCSS}>
             <Link href={MAIN_URL} passHref>
-              <Image
-                src={pathname === MAIN_URL ? colorLogoSrc : grayLogoSrc}
-                alt="고초대졸닷컴"
-                objectFit="contain"
-                layout="fill"
-              />
+              <a>
+                <Image
+                  src={pathname === MAIN_URL ? colorLogoSrc : grayLogoSrc}
+                  alt="고초대졸닷컴"
+                  objectFit="contain"
+                  layout="fill"
+                />
+              </a>
             </Link>
           </div>
 
@@ -84,7 +91,7 @@ export const Header: FunctionComponent = () => {
                 return (
                   <li
                     key={`navMenu_${menu.menuTitle}`}
-                    css={activeRouter(pathname === menu.menuLink)}
+                    css={activeRouter(menuMainUrl === menu.mainUrl)}
                     onMouseOver={() => {
                       setActiveIndex(index);
                     }}
@@ -104,6 +111,7 @@ export const Header: FunctionComponent = () => {
                           {menu.subMenuArr.map((subMenu) => {
                             return (
                               <SubMenuButton
+                                isPageQuery={subMenu.pageQuery}
                                 key={subMenu.menuTitle}
                                 link={subMenu.menuLink}
                                 title={subMenu.menuTitle}

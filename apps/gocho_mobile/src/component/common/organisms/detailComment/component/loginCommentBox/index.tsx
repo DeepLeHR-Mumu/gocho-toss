@@ -59,16 +59,16 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ comme
                 </div>
                 <div css={commentBody}>
                   <div css={commentBox}>
-                    {comment.jdTitle && <p css={commentTypeCSS}>{comment.jdTitle}</p>}
+                    {comment.title && <p css={commentTypeCSS}>{comment.title}</p>}
 
                     <p css={commentDesc}>{comment.description}</p>
                   </div>
                   <ul css={evalButtonBox}>
                     <li>
-                      <CommentLikeButton count={comment.like} setLikeSubmit={postLikeSubmit} />
+                      <CommentLikeButton count={comment.likeCount} setLikeSubmit={postLikeSubmit} />
                     </li>
                     <li>
-                      <CommentDislikeButton count={comment.dislike} setDislikeSubmit={postDislikeSubmit} />
+                      <CommentDislikeButton count={comment.disLikeCount} setDislikeSubmit={postDislikeSubmit} />
                     </li>
                   </ul>
                 </div>

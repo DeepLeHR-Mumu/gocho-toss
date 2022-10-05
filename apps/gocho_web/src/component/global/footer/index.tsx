@@ -20,6 +20,7 @@ import {
   inquiryText,
   notReadyText,
   kakaoBox,
+  inquiryBox,
 } from "./style";
 
 export const Footer: FunctionComponent = () => {
@@ -68,23 +69,27 @@ export const Footer: FunctionComponent = () => {
             <p css={copyrightTextCSS}>{companyInfoObj.copyrightText}</p>
           </div>
           <div css={inquiryContainer}>
-            <strong css={inquiryTitle}>광고 문의</strong>
-            <p css={inquiryText}>
-              <Link href={`mailto:${companyInfoObj.marketingEmail}`}>
-                <a>채용공고 / 광고 등록 문의 {companyInfoObj.marketingEmail}</a>
-              </Link>
-            </p>
-            <strong css={inquiryTitle}>고객센터</strong>
-            <p css={notReadyText}>
-              <Link href={`mailto:${companyInfoObj.helpEmail}`}>help@deeplehr.com</Link>
-              <Link href={companyInfoObj.kakaoPlus} passHref>
-                <a target="_blank">카카오톡 플러스친구</a>
-              </Link>
+            <div css={inquiryBox}>
+              <strong css={inquiryTitle}>광고 문의</strong>
+              <p css={inquiryText}>
+                <Link href={`mailto:${companyInfoObj.marketingEmail}`}>
+                  <a>채용공고 / 광고 등록 문의 {companyInfoObj.marketingEmail}</a>
+                </Link>
+              </p>
+            </div>
+            <div css={inquiryBox}>
+              <strong css={inquiryTitle}>고객센터</strong>
+              <p css={notReadyText}>
+                <Link href={`mailto:${companyInfoObj.helpEmail}`}>help@deeplehr.com</Link>
+                <Link href={companyInfoObj.kakaoPlus} passHref>
+                  <a target="_blank">카카오톡 플러스친구</a>
+                </Link>
 
-              <div css={kakaoBox}>
-                <Image src={kakaoMonoSrc} alt="카카오톡 플러스친구" layout="fill" objectFit="contain" />
-              </div>
-            </p>
+                <span css={kakaoBox}>
+                  <Image src={kakaoMonoSrc} alt="카카오톡 플러스친구" layout="fill" objectFit="contain" />
+                </span>
+              </p>
+            </div>
           </div>
         </div>
       </Layout>

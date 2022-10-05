@@ -12,4 +12,5 @@ export interface PostingObjDef {
   nickname: string;
   badge: "default" | "early_bird" | "admin";
   comments: PostingCommentObjDef[];
+  image: "default" | "default_work" | "jobi" | "jobi_safety" | "jobi_chat" | "jobi_play" | "jobi_teach";
 }

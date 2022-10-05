@@ -2,7 +2,6 @@ import { FunctionComponent, useState } from "react";
 import Image from "next/image";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-
 import { useUserInfo } from "shared-api/auth";
 import { useCompanyCommentArr } from "shared-api/company";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
@@ -21,13 +20,14 @@ import {
   wrapper,
 } from "./style";
 
-export const DetailComment: FunctionComponent<DetailCommentProps> = ({ detailData }) => {
+export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, detailData }) => {
   const { data: userData, isSuccess } = useUserInfo();
   const { data: companyCommentArrData } = useCompanyCommentArr({
     companyId: Number(detailData?.companyId),
   });
 
   const [imageSrc, setImageSrc] = useState(detailData?.logoUrl as string);
+  const [isTotalComment, setIsTotalComment] = useState(true);
 
   if (!detailData) {
     return (
@@ -58,12 +58,12 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ detailDat
           <nav css={commentButtonContainer}>
             <ul>
               <li>
-                <button css={commentButton} type="button">
+                <button css={commentButton(isTotalComment)} type="button">
                   전체 댓글
                 </button>
               </li>
               <li>
-                <button css={commentButton} type="button">
+                <button css={commentButton(!isTotalComment)} type="button">
                   현재 공고 댓글
                 </button>
               </li>
@@ -76,6 +76,10 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ detailDat
   }
 
   const { commentArr, company } = companyCommentArrData;
+
+  const currentJdCommentArr = commentArr.filter((comment) => {
+    return comment.jdId === jdId;
+  });
 
   return (
     <aside css={wrapper}>
@@ -97,19 +101,37 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ detailDat
         <nav css={commentButtonContainer}>
           <ul>
             <li>
-              <button css={commentButton} type="button">
+              <button
+                css={commentButton(isTotalComment)}
+                type="button"
+                onClick={() => {
+                  setIsTotalComment(true);
+                }}
+              >
                 전체 댓글 <span>{commentArr.length}</span>
               </button>
             </li>
             <li>
-              <button css={commentButton} type="button">
-                현재 공고 댓글
+              <button
+                css={commentButton(!isTotalComment)}
+                type="button"
+                onClick={() => {
+                  setIsTotalComment(false);
+                }}
+              >
+                현재 공고 댓글 <span>{currentJdCommentArr.length}</span>
               </button>
             </li>
           </ul>
         </nav>
       </header>
-      <LoginCommentBox userData={userData} commentArr={commentArr} />
+
+      <LoginCommentBox
+        jdId={jdId}
+        userData={userData}
+        commentArr={isTotalComment ? commentArr : currentJdCommentArr}
+        companyData={company}
+      />
     </aside>
   );
 };

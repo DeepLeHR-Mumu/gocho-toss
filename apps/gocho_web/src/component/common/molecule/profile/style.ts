@@ -2,12 +2,14 @@ import { css, SerializedStyles } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
 
+export const wrapper = css`
+  position: relative;
+`;
 export const profileWrapper = css`
   display: flex;
   padding: 1rem 0;
   align-items: center;
   cursor: pointer;
-  position: relative;
 `;
 
 export const greetingMsg = css`

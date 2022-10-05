@@ -1,11 +1,15 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 
+import { CloseButton } from "@component/common/atom/closeButton";
 import GDTitleSrc from "shared-image/global/deepLeLogo/smallMono.svg";
 import { PWD_REGEXP } from "shared-constant/regExp";
 import { usePatchUserInfo } from "shared-api/auth/usePatchUserInfo";
 import { useUserInfo } from "shared-api/auth";
+import { useToast } from "@recoil/hook/toast";
+import { useModal } from "@recoil/hook/modal";
+import { NormalButton } from "shared-ui/common/atom/button";
 
 import {
   formContainer,
@@ -15,7 +19,7 @@ import {
   errorMsgContiner,
   wrapper,
   passwordErrorMsg,
-  submitButton,
+  closeButtonBox,
 } from "./style";
 import { PasswordChangeFormValues } from "./type";
 
@@ -28,6 +32,9 @@ export const PasswordEditBox: FunctionComponent = () => {
   } = useForm<PasswordChangeFormValues>();
   const { data: userInfoData, refetch } = useUserInfo();
   const { mutate } = usePatchUserInfo();
+  const { setCurrentToast } = useToast();
+  const { closeModal } = useModal();
+  const [failCurrentPw, setFailCurrentPw] = useState(false);
 
   const passwordSubmit: SubmitHandler<PasswordChangeFormValues> = ({ originPassword, password }) => {
     if (userInfoData) {
@@ -38,9 +45,14 @@ export const PasswordEditBox: FunctionComponent = () => {
           password,
         },
         {
+          onError: () => {
+            setFailCurrentPw(true);
+          },
           onSuccess: (data) => {
+            setFailCurrentPw(false);
+            setCurrentToast("비밀번호가 변경되었습니다.");
+            closeModal();
             localStorage.setItem("token", `${data?.data.token}`);
-            // LATER 토스 메시지 적용 예정
             refetch();
           },
         }
@@ -50,6 +62,9 @@ export const PasswordEditBox: FunctionComponent = () => {
 
   return (
     <div css={wrapper}>
+      <div css={closeButtonBox}>
+        <CloseButton size="M" buttonClick={closeModal} />
+      </div>
       <div css={imageContainer}>
         <Image src={GDTitleSrc} layout="responsive" objectFit="contain" alt="고초대졸닷컴 로고" />
       </div>
@@ -67,6 +82,7 @@ export const PasswordEditBox: FunctionComponent = () => {
           placeholder="현재비밀번호"
         />
         <div css={errorMsgContiner}>
+          {failCurrentPw && <p css={passwordErrorMsg}>현재 비밀번호가 일치하지 않습니다.</p>}
           {errors.originPassword?.type === "required" && <p css={passwordErrorMsg}>현재 비밀번호를 입력해주세요</p>}
           {errors.originPassword?.type === "minLength" && (
             <p css={passwordErrorMsg}>비밀번호는 8자 이상 입력해주세요</p>
@@ -110,9 +126,11 @@ export const PasswordEditBox: FunctionComponent = () => {
           )}
           {errors.chkNewPassword?.type === "validate" && <p css={passwordErrorMsg}>비밀번호가 일치하지 않습니다</p>}
         </div>
-        <button type="submit" css={submitButton}>
+
+        <NormalButton text="변경하기" isSubmit wide variant="outlined" />
+        {/* <button type="submit" css={submitButton}>
           확인
-        </button>
+        </button> */}
       </form>
     </div>
   );
