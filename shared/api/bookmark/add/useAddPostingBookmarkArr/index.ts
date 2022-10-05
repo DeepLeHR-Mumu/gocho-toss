@@ -33,6 +33,11 @@ export const useAddPostingBookmarkArr = (postingObj: PostingObjDef | undefined) 
       queryClient.setQueryData<postingBookmarkResObjDef>(
         userBookmarkKeyObj.postingBookmarkArr({ userId: requestObj.userId }),
         (old) => {
+          if (old?.data === null) {
+            return {
+              data: [postingObj?.id as number],
+            };
+          }
           if (old && postingObj) {
             return {
               data: [...old.data, postingObj.id],
