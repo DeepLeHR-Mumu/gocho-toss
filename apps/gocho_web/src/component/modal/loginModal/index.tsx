@@ -16,6 +16,7 @@ import { CloseButton } from "@component/common/atom/closeButton";
 import { loginObjDef } from "@recoil/atom/modal";
 import { useModal } from "@recoil/hook/modal";
 
+import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
 import {
   wrapper,
   desc,
@@ -49,10 +50,14 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   const { mutate } = useDoLogin();
   const { closeModal, setCurrentModal } = useModal();
 
-  const [errorMsg] = useState<null | string>(null);
+  const [errorMsg, setErrorMsg] = useState<null | string>(null);
 
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     mutate(loginObj, {
+      onError: (error) => {
+        const errorResponse = error.response?.data as ErrorResponse;
+        setErrorMsg(errorResponse.error.errorMessage);
+      },
       onSuccess: (response) => {
         localStorage.setItem("token", `${response.data.token}`);
         queryClient.invalidateQueries();

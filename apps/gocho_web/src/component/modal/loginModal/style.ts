@@ -71,18 +71,23 @@ export const formArr = css`
 
   > li {
     margin-bottom: 1.25rem;
+
+    :last-of-type {
+      margin-bottom: 0;
+    }
   }
 `;
 
 export const errorBox = css`
   margin-top: 0.2rem;
+  min-height: 0.75rem;
+  margin-bottom: 1.25rem;
 `;
 
 export const errorMsgCSS = css`
   font-size: 0.875rem;
   color: ${COLORS.ERROR_RED30};
   text-align: center;
-  margin-bottom: 1rem;
 `;
 
 export const loginButton = css`
