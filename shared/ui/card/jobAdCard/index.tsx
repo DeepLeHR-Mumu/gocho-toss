@@ -1,10 +1,10 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 import { dateConverter } from "shared-util/date";
-import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { SkeletonBox } from "../../common/atom/skeletonBox";
 
 import { JobAdCardProps, JobAdCardSkeleton } from "./type";
@@ -26,6 +26,7 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
   isSkeleton,
   isMobile,
 }) => {
+  const [imageSrc, setImageSrc] = useState(jobAdData?.companyLogo as string);
   if (isSkeleton || jobAdData === undefined) {
     return (
       <div css={jobAdCardSkeleton}>
@@ -35,7 +36,6 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
   }
 
   const { month: startMonth, date: startDate } = dateConverter(jobAdData.startTime);
-
   const { month: endMonth, date: endDate } = dateConverter(jobAdData.endTime);
 
   return (
@@ -47,8 +47,11 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
               <div css={companyLogoBox}>
                 <Image
                   layout="fill"
-                  objectFit="cover"
-                  src={jobAdData.companyLogo || defaultCompanyLogo}
+                  objectFit="contain"
+                  src={imageSrc || jobAdData.companyLogo}
+                  onError={() => {
+                    return setImageSrc(defaultCompanyLogo);
+                  }}
                   alt={jobAdData.companyName}
                 />
               </div>

@@ -67,9 +67,9 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
           <SkeletonBox />
         </div>
         <section css={positionContainer}>
-          <p css={positionTitleSkeleton}>
+          <div css={positionTitleSkeleton}>
             <SkeletonBox />
-          </p>
+          </div>
           <div css={cardContainer}>
             <PositionCard isSkeleton />
           </div>

@@ -35,6 +35,7 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
   const router = useRouter();
   const { specId } = router.query;
   const [specScore, setSpecScore] = useState(0);
+  const [currentDidEval, setCurrentDidEval] = useState<boolean>(didEval);
   const [isStrongSelectBox, setIsStrongSelectBox] = useState(false);
   const [isWeakSelectBox, setIsWeakSelectBox] = useState(false);
 
@@ -79,11 +80,8 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
         specData: submitData,
       },
       {
-        onSuccess: (response) => {
-          if (response.status === 201) {
-            // eslint-disable-next-line no-console
-            console.log("등록완료");
-          }
+        onSuccess: () => {
+          setCurrentDidEval(true);
         },
       }
     );
@@ -103,7 +101,7 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
       </aside>
     );
   }
-  if (didEval) {
+  if (currentDidEval) {
     return (
       <aside css={wrapper}>
         <strong css={title}>스펙 평가하기</strong>

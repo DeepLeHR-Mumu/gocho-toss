@@ -13,7 +13,7 @@ export const asideWrapperCreator: asideWrapperCreatorDef = (isScrollTop) => {
     left: 50%;
     transform: translate(-50%, 0);
     transition: opacity 0.3s ease-in;
-    opacity: ${isScrollTop ? 0 : 1};
+    display: ${isScrollTop ? "none" : "block"};
     z-index: 10;
 
     /* 양 사이즈 배너 100px 기준 1400px - 200px = layout : 1200px  */

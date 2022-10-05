@@ -12,47 +12,54 @@ import {
 export const menuArr = [
   {
     menuTitle: "채용공고",
-    menuLink: `${JOBS_LIST_URL}`,
+    mainUrl: "jd",
     subMenuArr: [
       {
+        pageQuery: true,
         menuTitle: "최신채용공고",
-        menuLink: `${JOBS_LIST_URL}`,
+        menuLink: JOBS_LIST_URL,
       },
       {
+        pageQuery: true,
         menuTitle: "만료채용공고",
-        menuLink: `${JOBS_EXPLIST_URL}`,
+        menuLink: JOBS_EXPLIST_URL,
       },
     ],
   },
   {
     menuTitle: "커뮤니티",
-    menuLink: `${COMMUNITY_POSTINGS_LIST_URL}`,
+    mainUrl: "community",
     subMenuArr: [
       {
+        pageQuery: false,
         menuTitle: "자유게시판",
-        menuLink: `${COMMUNITY_POSTINGS_LIST_URL}`,
+        menuLink: COMMUNITY_POSTINGS_LIST_URL,
       },
       {
+        pageQuery: false,
         menuTitle: "고수들의 취업꿀팁",
-        menuLink: `${COMMUNITY_TIPS_LIST_URL}`,
+        menuLink: COMMUNITY_TIPS_LIST_URL,
       },
     ],
   },
   {
     menuTitle: "면접리뷰",
-    menuLink: `${INTERVIEW_REVIEW}`,
+    mainUrl: "review",
+    menuLink: INTERVIEW_REVIEW,
   },
   {
     menuTitle: "dataLab",
-    menuLink: `${SPEC_URL}`,
+    mainUrl: "datalab",
     subMenuArr: [
       {
+        pageQuery: false,
         menuTitle: "스펙평가",
-        menuLink: `${SPEC_URL}`,
+        menuLink: SPEC_URL,
       },
       {
+        pageQuery: false,
         menuTitle: "합격데이터",
-        menuLink: `${DATALAB_DETAIL}`,
+        menuLink: DATALAB_DETAIL,
       },
     ],
   },
@@ -61,6 +68,6 @@ export const menuArr = [
 export const profileMenuArr = [
   {
     title: "마이페이지",
-    link: `${MYPAGE_URL}`,
+    link: MYPAGE_URL,
   },
 ];

@@ -11,19 +11,19 @@ import { title, wrapper, descCSS, flexBox, noButton, yesButton } from "./style";
 const PageBlockingBox: FunctionComponent<PageBlockingBoxProps> = ({ closeModal }) => {
   const { setIsBlocking } = useIsSpecPageBlocking();
 
-  const doNotBlocking = () => {
+  const doBlocking = () => {
+    setIsBlocking(false);
     closeModal();
-    setIsBlocking(true);
   };
 
-  const doBlocking = () => {
+  const doNotBlocking = () => {
+    setIsBlocking(true);
     closeModal();
-    setIsBlocking(false);
   };
 
   return (
     <div css={wrapper}>
-      <h2 css={title}>페이지를 나가시겠습니까?</h2>
+      <strong css={title}>페이지를 나가시겠습니까?</strong>
       <p css={descCSS}>이전 / 다음 버튼으로 현재까지 입력한 스펙을 저장할 수 있습니다.</p>
       <div css={flexBox}>
         <button type="button" css={noButton} onClick={doBlocking}>
@@ -41,7 +41,7 @@ export const PageBlockingModal: FunctionComponent = () => {
   const { closeModal } = useModal();
 
   return (
-    <ModalComponent closeModal={closeModal} button="close">
+    <ModalComponent>
       <PageBlockingBox closeModal={closeModal} />
     </ModalComponent>
   );

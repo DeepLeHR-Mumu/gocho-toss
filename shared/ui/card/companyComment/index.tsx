@@ -38,14 +38,14 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
   const commentContainerRef = useRef<HTMLDivElement | null>(null);
   const { isSuccess, data: userInfoData } = useUserInfo();
 
-  useEffect(() => {
-    const bottomHeight = commentContainerRef.current?.scrollHeight;
-    commentContainerRef.current?.scrollTo(0, bottomHeight !== undefined ? bottomHeight : 0);
-  }, []);
-
   const { data: companyCommentArrData } = useCompanyCommentArr({
     companyId: companyData?.id || 0,
   });
+
+  useEffect(() => {
+    const bottomHeight = commentContainerRef.current?.scrollHeight;
+    commentContainerRef.current?.scrollTo(0, bottomHeight !== undefined ? bottomHeight : 0);
+  }, [companyCommentArrData]);
 
   if (!companyCommentArrData || isSkeleton || companyData === undefined) {
     return (
@@ -70,7 +70,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
             </div>
             <h3 css={companyName}>{companyData.name}</h3>
           </div>
-          <p css={commentCount}>총 댓글 000개</p>
+          <p css={commentCount}>총 댓글 {companyData.commentCount.toLocaleString("ko-KR")}개</p>
         </header>
 
         <section css={commentBodyContainer}>

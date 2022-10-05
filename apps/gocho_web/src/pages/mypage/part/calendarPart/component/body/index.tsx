@@ -15,16 +15,12 @@ export const Body: FunctionComponent<BodyProps> = ({ twoWeek }) => {
   const { data: userInfoData } = useUserInfo();
   const todayHours = getDateHours(new Date());
 
-  const {
-    data: userJobBookmarkArrData,
-    isError,
-    isLoading,
-  } = useUserJobBookmarkArr({
+  const { data: userJobBookmarkArrData, isLoading } = useUserJobBookmarkArr({
     userId: userInfoData?.id,
   });
 
   // LATER: 해당 날짜에 관련된 북마크만 처음부터 불러와라
-  if (!userInfoData || !userJobBookmarkArrData || isError || isLoading) {
+  if (!userInfoData || !userJobBookmarkArrData || isLoading) {
     return (
       <div css={skeletonContainer}>
         <SkeletonBox />

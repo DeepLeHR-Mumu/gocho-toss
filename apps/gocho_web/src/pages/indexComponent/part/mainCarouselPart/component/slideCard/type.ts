@@ -1,14 +1,21 @@
 import { StaticImageData } from "next/image";
 
 export interface SlideCardProps {
-  topDesc: string;
-  middleDesc: string;
-  title: string;
-  lastDesc: string;
-  backgroundImage: StaticImageData;
-  backgroundColor: string;
-  iconImage?: StaticImageData;
-  buttonColor?: string;
-  buttonText?: string;
-  buttonUrl?: string;
+  slideData: {
+    id: number;
+    topDesc: string;
+    title: string;
+    middleDesc: string;
+    lastDesc: string;
+    backgroundImage: StaticImageData;
+    iconImage?: StaticImageData;
+    backgroundColor: string;
+    buttonObj: {
+      target: string;
+      text: string;
+      color: string;
+      backgroundColor: string;
+      url: string;
+    } | null;
+  };
 }

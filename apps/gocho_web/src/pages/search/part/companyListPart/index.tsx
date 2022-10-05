@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import { useRouter } from "next/router";
 
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
 
@@ -11,14 +12,15 @@ export const CompanyListPart: FunctionComponent<CompanyListPartProps> = ({
   isLoading,
   total,
   limit,
-  page,
-  setPage,
 }) => {
+  const router = useRouter();
+  const totalPage = Math.ceil(total / limit);
+
   return (
     <section>
       <p css={title}>기업 정보 🏢</p>
       <CompanyCardList companyDataArr={companyDataArr} isLoading={isLoading} />
-      <BottomPagination total={total || 0} limit={limit} page={page} setPage={setPage} />
+      <BottomPagination totalPage={totalPage} q={router.query.q} url="/search" />
     </section>
   );
 };

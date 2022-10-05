@@ -14,17 +14,20 @@ import { BookmarkPart } from "./part/bookmarkPart";
 import { mainContainer, title, colorPoint, mypagePosition, mypageBody } from "./style";
 
 const MypageHome: NextPage = () => {
-  const { setCurrentModal, closeModal } = useModal();
+  const { setCurrentModal, currentModal, closeModal } = useModal();
 
   const { error } = useUserInfo();
   useEffect(() => {
     if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
       setCurrentModal("loginModal", { button: "home" });
     }
+    if (currentModal?.activatedModal === "signUpModal") {
+      setCurrentModal("signUpModal");
+    }
     return () => {
       closeModal();
     };
-  }, [error, closeModal, setCurrentModal]);
+  }, [error, closeModal, setCurrentModal, currentModal?.activatedModal]);
 
   return (
     <main css={mainContainer}>

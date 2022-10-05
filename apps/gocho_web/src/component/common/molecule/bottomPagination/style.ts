@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, SerializedStyles } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 import { PC_HOVER } from "shared-style/mediaQuery";
 
@@ -36,5 +36,24 @@ export const selectPageButton = (isCurrent = false) => {
     font-weight: 500;
     font-size: 1rem;
     padding: 0 1rem;
+  `;
+};
+
+export const paginationBox = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+interface PaginationButtonDef {
+  (isActivePage: boolean): SerializedStyles;
+}
+
+export const paginationButton: PaginationButtonDef = (isActivePage) => {
+  return css`
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: ${isActivePage ? COLORS.GRAY10 : COLORS.GRAY60};
+    padding: 1rem;
   `;
 };

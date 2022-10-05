@@ -44,15 +44,18 @@ export const inputCSS = css`
   text-align: center;
 `;
 
+export const closeButtonBox = css`
+  position: absolute;
+  right: -0.5rem;
+  top: -0.5rem;
+`;
+
 export const errorMsgContiner = css`
   height: 2rem;
 `;
 
 export const passwordErrorMsg = css`
   font-size: 0.8rem;
+  margin-top: 0.2rem;
   color: ${COLORS.ERROR_RED40};
-`;
-
-export const submitButton = css`
-  margin-top: 3.25rem;
 `;

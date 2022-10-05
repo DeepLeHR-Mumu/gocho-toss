@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 
 import { shorten } from "shared-style/common";
 import { COLORS } from "shared-style/color";
-import { PC_HOVER } from "shared-style/mediaQuery";
+import { PC_HOVER, TABLET } from "shared-style/mediaQuery";
 
 export const cardWrapper = css`
   width: 32%;
@@ -29,11 +29,20 @@ export const cardImageBox = css`
   border-radius: 3rem;
   overflow: hidden;
   position: relative;
+
+  ${TABLET} {
+    width: 7.5rem;
+    height: 5rem;
+  }
 `;
 
 export const cardInfo = css`
   padding-left: 0.5rem;
   width: calc(100% - 11.25rem);
+
+  ${TABLET} {
+    width: calc(100% - 7.5rem);
+  }
 `;
 
 export const cardTitle = css`
@@ -43,7 +52,8 @@ export const cardTitle = css`
   word-break: keep-all;
   line-height: 1.6;
   margin-bottom: 1rem;
-  ${shorten(2)};
+  display: block;
+  ${shorten()};
 `;
 
 export const cardDesc = css`

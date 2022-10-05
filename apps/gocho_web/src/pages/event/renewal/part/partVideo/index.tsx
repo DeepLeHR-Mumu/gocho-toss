@@ -8,6 +8,7 @@ import drawLine from "shared-image/event/renewal/draw_line.svg";
 import drawPoint from "shared-image/event/renewal/draw_point.svg";
 
 import {
+  backgroundBox,
   checkBox,
   desc,
   descPoint,
@@ -25,7 +26,7 @@ import {
 
 export const PartVideo: FunctionComponent = () => {
   return (
-    <section css={wrapper} style={{ backgroundImage: `url(${mainBackground02.src})` }}>
+    <section css={wrapper}>
       <div css={positionBox}>
         <div css={videoBox}>
           <video loop muted autoPlay>
@@ -97,6 +98,9 @@ export const PartVideo: FunctionComponent = () => {
             <span css={unCheckBox} /> 취직 성공하기
           </li>
         </ul>
+      </div>
+      <div css={backgroundBox}>
+        <Image src={mainBackground02} alt="" layout="fill" objectFit="cover" />
       </div>
     </section>
   );

@@ -94,8 +94,8 @@ export const globalStyles = css`
   }
   html {
     font-family: "Noto Sans KR", Verdana, sans-serif;
-    /* min-width: 768px; */
-    min-width: 360px;
+    min-width: 768px;
+    /* overflow-x: hidden; */
     font-size: 16px;
     ${DESKTOP} {
       font-size: 14px;

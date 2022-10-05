@@ -5,6 +5,7 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
 import { useQueryClient } from "@tanstack/react-query";
 
+import { jobArrKeyObj } from "shared-constant/queryKeyFactory/job/jobArrKeyObj";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 
@@ -91,7 +92,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         { userId, elemId: jobData.id },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries([{ data: "jobArr" }]);
+            queryClient.invalidateQueries(jobArrKeyObj.jobArr({}));
           },
         }
       );
@@ -103,7 +104,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         { userId, elemId: jobData.id },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries([{ data: "jobArr" }]);
+            queryClient.invalidateQueries(jobArrKeyObj.jobArr({}));
           },
         }
       );
@@ -142,7 +143,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
                 <Image
                   layout="fill"
                   objectFit="contain"
-                  src={imageSrc}
+                  src={imageSrc || jobData.companyLogo}
                   alt={jobData.companyName}
                   onError={() => {
                     return setImageSrc(defaultCompanyLogo);

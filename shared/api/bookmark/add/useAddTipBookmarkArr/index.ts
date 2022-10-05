@@ -33,6 +33,11 @@ export const useAddTipBookmarkArr = (tipObj: TipObjDef | undefined) => {
       queryClient.setQueryData<postingBookmarkResObjDef>(
         userBookmarkKeyObj.tipBookmarkArr({ userId: requestObj.userId }),
         (old) => {
+          if (old?.data === null) {
+            return {
+              data: [tipObj?.id as number],
+            };
+          }
           if (old && tipObj) {
             return {
               data: [...old.data, tipObj.id],

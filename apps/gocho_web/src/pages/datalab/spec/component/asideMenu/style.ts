@@ -56,6 +56,7 @@ export const loginNickname = css`
 `;
 
 export const asideLink = css`
+  white-space: nowrap;
   font-size: 0.75rem;
   display: flex;
   line-height: 1.8;

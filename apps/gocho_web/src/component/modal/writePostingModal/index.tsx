@@ -113,10 +113,8 @@ export const WritePostingBox: FunctionComponent = () => {
 };
 
 export const WritePostingModal: FunctionComponent = () => {
-  const { closeModal } = useModal();
-
   return (
-    <ModalComponent closeModal={closeModal} button="close">
+    <ModalComponent>
       <WritePostingBox />
     </ModalComponent>
   );

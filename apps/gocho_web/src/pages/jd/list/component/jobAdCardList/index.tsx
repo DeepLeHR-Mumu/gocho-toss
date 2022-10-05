@@ -15,7 +15,6 @@ export const JobAdCardList: FunctionComponent = () => {
   const { data: jobDataArr, isLoading } = useJobArr({
     order: "view",
     filter: "valid",
-    limit: 5,
   });
 
   if (!jobDataArr || isLoading) {
@@ -37,7 +36,6 @@ export const JobAdCardList: FunctionComponent = () => {
           return <JobAdCard jobAdData={job} isMobile={false} key={`JobAdCard${job.id}`} />;
         })}
       </Slider>
-
       <div css={sliderButtonContainer}>
         <button
           css={sliderButton}
