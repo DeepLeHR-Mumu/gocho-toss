@@ -6,12 +6,15 @@ import { MainJobCard } from "shared-ui/card/MainJobCard";
 import { useUserInfo } from "shared-api/auth";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 
+import { useModal } from "@recoil/hook/modal";
+
 import { cardListContainer } from "./style";
 import { JobCardArrProps } from "./type";
 
 export const JobCardList: FunctionComponent<JobCardArrProps> = ({ listOrder }) => {
   const { data: userData } = useUserInfo();
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
+  const { setCurrentModal } = useModal();
 
   const {
     data: jobDataArr,
@@ -22,6 +25,10 @@ export const JobCardList: FunctionComponent<JobCardArrProps> = ({ listOrder }) =
     filter: "valid",
     limit: 9,
   });
+
+  const loginModalOpener = () => {
+    setCurrentModal("loginModal", { button: "close" });
+  };
 
   if (!jobDataArr || isError || isLoading) {
     return (
@@ -40,6 +47,7 @@ export const JobCardList: FunctionComponent<JobCardArrProps> = ({ listOrder }) =
             return job.id === jobData.id;
           })
         );
+
         return (
           <MainJobCard
             key={`MainJobCard${jobData.id}`}
@@ -47,6 +55,7 @@ export const JobCardList: FunctionComponent<JobCardArrProps> = ({ listOrder }) =
             isMobile={false}
             isBookmarked={isBookmarked}
             userId={userData?.id}
+            loginOpener={loginModalOpener}
           />
         );
       })}

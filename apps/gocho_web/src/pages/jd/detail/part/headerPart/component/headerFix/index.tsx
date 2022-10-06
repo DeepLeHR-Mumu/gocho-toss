@@ -5,11 +5,13 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
-import { Layout } from "@component/layout";
 import { JOBS_LIST_URL } from "shared-constant/internalURL";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
+import { useUserInfo } from "shared-api/auth";
+import { useUserJobBookmarkArr, useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 
-import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
+import { Layout } from "@component/layout";
+
 import { HeaderFixProps } from "./type";
 import {
   applyBox,
@@ -26,8 +28,11 @@ import {
   titleCSS,
 } from "./style";
 
-export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, isBookmarked, userId }) => {
+export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, userId }) => {
   const queryClient = useQueryClient();
+  const { data: userInfoData } = useUserInfo();
+
+  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userInfoData?.id });
 
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobDetailData?.id as number,
@@ -76,6 +81,12 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, is
       )
     );
   };
+
+  const isBookmarked = Boolean(
+    userJobBookmarkArr?.some((job) => {
+      return job.id === jobDetailData.id;
+    })
+  );
 
   return (
     <header css={headerCSS}>

@@ -12,7 +12,9 @@ import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKe
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 
 import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
-import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
+import { useAddJobBookmarkArr, useDeleteJobBookmarkArr, useUserJobBookmarkArr } from "shared-api/bookmark";
+import { useUserInfo } from "shared-api/auth";
+
 import { HeaderProps } from "./type";
 import {
   applyButton,
@@ -30,8 +32,11 @@ import {
   viewCSS,
 } from "./style";
 
-export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookmarked, userId }) => {
+export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId }) => {
   const queryClient = useQueryClient();
+  const { data: userInfoData } = useUserInfo();
+  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userInfoData?.id });
+
   const [imageSrc, setImageSrc] = useState(jobDetailData.company.logoUrl as string);
 
   const { mutate: addMutate } = useAddJobBookmarkArr({
@@ -85,8 +90,14 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
   };
 
   const { year: startYear, month: startMonth, date: startDate } = dateConverter(jobDetailData.startTime);
+
   const { year: endYear, month: endMonth, date: endDate } = dateConverter(jobDetailData.endTime);
 
+  const isBookmarked = Boolean(
+    userJobBookmarkArr?.some((job) => {
+      return job.id === jobDetailData.id;
+    })
+  );
   return (
     <header css={headerCSS}>
       <div css={imageBox}>
@@ -121,7 +132,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
             onClick={() => {
               return isBookmarked ? deleteJobBookmark() : addJobBookmark();
             }}
-            aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
+            aria-label={isBookmarked ? "북마크 취소" : "북마크 하기"}
           >
             <BsFillBookmarkFill />
           </button>
