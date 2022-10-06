@@ -12,6 +12,5 @@ export interface HeaderFixProps {
       logoUrl: string;
     };
   };
-  isBookmarked: boolean;
   userId: number | undefined;
 }

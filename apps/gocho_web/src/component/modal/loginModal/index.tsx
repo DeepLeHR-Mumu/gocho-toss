@@ -65,10 +65,11 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
       },
     });
   };
+  const mainURL = window.location.href;
 
   const kakaoLogin = () => {
     window.Kakao.Auth.authorize({
-      redirectUri: "http://localhost:3000/kakaologin",
+      redirectUri: `${mainURL.substring(0, mainURL.indexOf("/", 7))}kakaologin`,
     });
   };
 

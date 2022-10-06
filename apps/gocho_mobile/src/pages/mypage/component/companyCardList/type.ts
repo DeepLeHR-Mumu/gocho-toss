@@ -5,6 +5,7 @@ export type CompanyCardListProps = {
         name: string;
         logoUrl: string;
       }[]
-    | undefined;
+    | undefined
+    | null;
   isLoading: boolean;
 };

@@ -29,6 +29,11 @@ export const useDeletePostingBookmarkArr = (postingObj: PostingObjDef | undefine
       queryClient.setQueryData<postingBookmarkResObjDef>(
         userBookmarkKeyObj.postingBookmarkArr({ userId: requestObj.userId }),
         (old) => {
+          if (old?.data === null) {
+            return {
+              data: null,
+            };
+          }
           if (old && postingObj) {
             return {
               data: [

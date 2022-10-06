@@ -36,6 +36,11 @@ export const useDeleteJobBookmarkArr = (jobObj: JobObjDef | undefined) => {
         userBookmarkKeyObj.jobBookmarkArr({ userId: requestObj.userId }),
         (old) => {
           if (old && jobObj) {
+            if (old?.data === null) {
+              return {
+                data: null,
+              };
+            }
             return {
               data: [
                 ...old.data.filter((element) => {

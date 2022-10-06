@@ -1,15 +1,17 @@
 export interface jobBookmarkResObjDef {
-  data: {
-    id: number;
-    end_time: number;
-    title: string;
-    cut: boolean;
-    company: { name: string; logo_url: string };
-  }[];
+  data:
+    | {
+        id: number;
+        end_time: number;
+        title: string;
+        cut: boolean;
+        company: { name: string; logo_url: string };
+      }[]
+    | null;
 }
 
 export interface CompanyBookmarkResObjDef {
-  data: { id: number; name: string; logo_url: string }[];
+  data: { id: number; name: string; logo_url: string }[] | null;
 }
 
 export interface companyBookmarkObjDef {
@@ -19,9 +21,9 @@ export interface companyBookmarkObjDef {
 }
 
 export interface postingBookmarkResObjDef {
-  data: number[];
+  data: number[] | null;
 }
 
 export interface tipBookmarkResObjDef {
-  data: number[];
+  data: number[] | null;
 }

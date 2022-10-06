@@ -29,6 +29,11 @@ export const useDeleteTipBookmarkArr = (postingObj: TipObjDef | undefined) => {
       queryClient.setQueryData<postingBookmarkResObjDef>(
         userBookmarkKeyObj.tipBookmarkArr({ userId: requestObj.userId }),
         (old) => {
+          if (old?.data === null) {
+            return {
+              data: null,
+            };
+          }
           if (old && postingObj) {
             return {
               data: [
