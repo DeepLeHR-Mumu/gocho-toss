@@ -6,45 +6,66 @@ import {
   ASIDE_BANNER_URL,
   COMPANY_UPLOAD_URL,
   COMPANY_LIST_URL,
-  FACTORY_UPLOAD_URL,
-  VIRAL_URL,
+  VIRAL_BLOG_URL,
+  VIRAL_INSTA_URL,
 } from "@constant/internalURL";
 
 export const menuArr = [
   {
-    menuTitle: "공고 업로드",
-    menuLink: JD_UPLOAD_URL,
+    menuTitle: "공고",
+    subMenuArr: [
+      {
+        menuTitle: "공고 업로드",
+        menuLink: JD_UPLOAD_URL,
+      },
+      {
+        menuTitle: "공고 목록",
+        menuLink: JD_LIST_URL,
+      },
+    ],
   },
   {
-    menuTitle: "공고 목록",
-    menuLink: JD_LIST_URL,
+    menuTitle: "배너 등록",
+    subMenuArr: [
+      {
+        menuTitle: "메인 배너",
+        menuLink: MAIN_BANNER_URL,
+      },
+      {
+        menuTitle: "공고 상단 배너",
+        menuLink: JD_TOP_BANNER_URL,
+      },
+      {
+        menuTitle: "사이드 배너",
+        menuLink: ASIDE_BANNER_URL,
+      },
+    ],
   },
   {
-    menuTitle: "메인 배너 업로드/목록",
-    menuLink: MAIN_BANNER_URL,
+    menuTitle: "기업",
+    subMenuArr: [
+      {
+        menuTitle: "기업 등록",
+        menuLink: COMPANY_UPLOAD_URL,
+      },
+      {
+        menuTitle: "기업 목록",
+        menuLink: COMPANY_LIST_URL,
+      },
+    ],
   },
-  {
-    menuTitle: "공고 상단 배너 업로드/목록",
-    menuLink: JD_TOP_BANNER_URL,
-  },
-  {
-    menuTitle: "사이드 배너 업로드/목록",
-    menuLink: ASIDE_BANNER_URL,
-  },
-  {
-    menuTitle: "기업 등록",
-    menuLink: COMPANY_UPLOAD_URL,
-  },
-  {
-    menuTitle: "기업 목록",
-    menuLink: COMPANY_LIST_URL,
-  },
-  {
-    menuTitle: "공장 등록",
-    menuLink: FACTORY_UPLOAD_URL,
-  },
+
   {
     menuTitle: "바이럴 마케팅",
-    menuLink: VIRAL_URL,
+    subMenuArr: [
+      {
+        menuTitle: "블로그/디시인사이드",
+        menuLink: VIRAL_BLOG_URL,
+      },
+      {
+        menuTitle: "인스타그램/카카오뷰",
+        menuLink: VIRAL_INSTA_URL,
+      },
+    ],
   },
 ];

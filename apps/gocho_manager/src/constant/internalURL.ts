@@ -6,5 +6,5 @@ export const JD_TOP_BANNER_URL = "/topbanner";
 export const ASIDE_BANNER_URL = "/asidebanner";
 export const COMPANY_UPLOAD_URL = "/company/upload";
 export const COMPANY_LIST_URL = "/company/list";
-export const FACTORY_UPLOAD_URL = "/factory";
-export const VIRAL_URL = "/viral";
+export const VIRAL_BLOG_URL = "/viral/blog";
+export const VIRAL_INSTA_URL = "/viral/instagram";

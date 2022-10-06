@@ -1,10 +1,10 @@
 import type { NextPage } from "next";
-import { mainContainer, title } from "@style/commonStyles";
+import { mainContainer, pageTitle } from "@style/commonStyles";
 
 const Home: NextPage = () => {
   return (
     <main css={mainContainer}>
-      <h2 css={title}>This is Manager Page!!</h2>
+      <h2 css={pageTitle}>매니저 페이지 홈</h2>
     </main>
   );
 };

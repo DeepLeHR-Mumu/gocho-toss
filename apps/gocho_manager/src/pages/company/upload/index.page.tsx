@@ -1,10 +1,10 @@
 import type { NextPage } from "next";
-import { mainContainer, title } from "@style/commonStyles";
+import { mainContainer, pageTitle } from "@style/commonStyles";
 
 const CompanyUpload: NextPage = () => {
   return (
     <main css={mainContainer}>
-      <h2 css={title}>기업 등록</h2>
+      <h2 css={pageTitle}>기업 등록</h2>
       <section>기업 등록 영역</section>
     </main>
   );

@@ -7,7 +7,7 @@ export const mainContainer = css`
   height: 100vh;
 `;
 
-export const title = css`
+export const pageTitle = css`
   font-weight: 700;
   font-size: 1.75rem;
   color: ${COLORS.GRAY10};

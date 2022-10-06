@@ -11,20 +11,26 @@ export const SideBar: FunctionComponent = () => {
       <nav>
         <ul>
           {menuArr.map((menu) => {
-            const isActive = activeMenu === menu.menuTitle;
             return (
-              <li css={linkContainer(isActive)}>
-                <Link href={menu.menuLink} passHref>
-                  <button
-                    css={buttonBox(isActive)}
-                    type="button"
-                    onClick={() => {
-                      return setActiveMenu(menu.menuTitle);
-                    }}
-                  >
-                    {menu.menuTitle}
-                  </button>
-                </Link>
+              <li css={linkContainer}>
+                <strong>{menu.menuTitle}</strong>
+                {menu.subMenuArr?.map((subMenu) => {
+                  const isActive = activeMenu === subMenu.menuTitle;
+
+                  return (
+                    <Link href={subMenu.menuLink} passHref>
+                      <button
+                        css={buttonBox(isActive)}
+                        type="button"
+                        onClick={() => {
+                          return setActiveMenu(subMenu.menuTitle);
+                        }}
+                      >
+                        {subMenu.menuTitle}
+                      </button>
+                    </Link>
+                  );
+                })}
               </li>
             );
           })}
