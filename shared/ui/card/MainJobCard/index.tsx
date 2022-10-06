@@ -8,8 +8,9 @@ import highFalse from "shared-image/global/common/go_mono.svg";
 import collegeTrue from "shared-image/global/common/cho_color.svg";
 import collegeFalse from "shared-image/global/common/cho_mono.svg";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-
 import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
+import { useUserInfo } from "shared-api/auth";
+
 import { useQueryClient } from "@tanstack/react-query";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { SkeletonBox } from "../../common/atom/skeletonBox";
@@ -36,9 +37,10 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
   isMobile,
   isBookmarked,
   userId,
+  loginOpener,
 }) => {
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
-
+  const { error: useUserInfoError } = useUserInfo();
   const queryClient = useQueryClient();
 
   const { mutate: addMutate } = useAddJobBookmarkArr({
@@ -103,6 +105,9 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
           css={bookmarkButton(isBookmarked)}
           onClick={(event) => {
             event.preventDefault();
+            if (useUserInfoError) {
+              return loginOpener();
+            }
             return isBookmarked ? deleteJobBookmark() : addJobBookmark();
           }}
           aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
