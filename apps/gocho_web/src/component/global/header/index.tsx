@@ -111,10 +111,8 @@ export const Header: FunctionComponent = () => {
                           {menu.subMenuArr.map((subMenu) => {
                             return (
                               <SubMenuButton
-                                isPageQuery={subMenu.pageQuery}
+                                subMenuData={subMenu}
                                 key={subMenu.menuTitle}
-                                link={subMenu.menuLink}
-                                title={subMenu.menuTitle}
                                 setActiveIndex={setActiveIndex}
                               />
                             );

@@ -117,6 +117,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   const isExpired = dDayBooleanReturn(jobData.endTime);
 
   const savePaginationNumber = () => {
+    sessionStorage.setItem("jdPageOrder", JSON.stringify(router.query.order));
     sessionStorage.setItem("jdPageNumber", JSON.stringify(router.query.page));
   };
 

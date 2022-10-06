@@ -36,7 +36,7 @@ export const ListPart: FunctionComponent = () => {
   const limit = 10;
   const [total, setTotal] = useState<number>(0);
   const [page, setPage] = useState<number>(Number(router.query.page));
-  const [activeOrder, setActiveOrder] = useState<OrderDef>("recent");
+  const [activeOrder, setActiveOrder] = useState<OrderDef>(router.query.order as OrderDef);
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
 
   const { register, handleSubmit, watch, setValue, getValues } = useForm<SearchValues>({
@@ -54,7 +54,7 @@ export const ListPart: FunctionComponent = () => {
   const jdSearch: SubmitHandler<SearchValues> = (searchVal) => {
     router.push({
       pathname: JOBS_LIST_URL,
-      query: { page: 1 },
+      query: { page: 1, order: activeOrder },
     });
     setSearchQuery({
       contractType: searchVal.contractType,
@@ -86,7 +86,11 @@ export const ListPart: FunctionComponent = () => {
 
   useEffect(() => {
     setPage(Number(router.query.page));
-  }, [router.query]);
+  }, [router.query.page]);
+
+  useEffect(() => {
+    setActiveOrder(router.query.order as OrderDef);
+  }, [router.query.order]);
 
   useEffect(() => {
     if (jobDataArr) {
@@ -127,6 +131,10 @@ export const ListPart: FunctionComponent = () => {
                     key={`jobCardArr${button.text}`}
                     css={setJobOrderButton(isActive)}
                     onClick={() => {
+                      router.push({
+                        pathname: JOBS_LIST_URL,
+                        query: { page: 1, order: button.order },
+                      });
                       return changeOrder(button.order);
                     }}
                   >
@@ -135,7 +143,13 @@ export const ListPart: FunctionComponent = () => {
                 );
               })}
             </div>
-            <Pagination totalPage={totalPage} />
+            <Pagination
+              totalPage={totalPage}
+              linkObj={{
+                pathname: JOBS_LIST_URL,
+                query: { order: activeOrder },
+              }}
+            />
           </div>
         </form>
 
@@ -151,7 +165,13 @@ export const ListPart: FunctionComponent = () => {
         </div>
 
         <JobCardList jobDataArr={jobDataArr?.jobDataArr} isLoading={isLoading} isError={isError} />
-        <BottomPagination totalPage={totalPage} url={JOBS_LIST_URL} />
+        <BottomPagination
+          totalPage={totalPage}
+          linkObj={{
+            pathname: JOBS_LIST_URL,
+            query: { order: activeOrder },
+          }}
+        />
       </Layout>
     </section>
   );

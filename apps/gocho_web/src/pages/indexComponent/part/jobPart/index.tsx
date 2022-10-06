@@ -46,7 +46,11 @@ export const JobPart: FunctionComponent = () => {
         <JobCardList listOrder={activeOrder} />
 
         <div css={showMoreJobBox}>
-          <LinkButton variant="filled" text="실시간 채용공고 더보기" linkTo={JOBS_LIST_URL} />
+          <LinkButton
+            variant="filled"
+            text="실시간 채용공고 더보기"
+            linkTo={`${JOBS_LIST_URL}?page=1&order=${activeOrder}`}
+          />
         </div>
       </Layout>
     </section>

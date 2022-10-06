@@ -43,11 +43,16 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
     setActiveMenu(menu);
   };
 
-  const { data: userInfoData } = useUserInfo();
+  const { data: userInfoData, isSuccess } = useUserInfo();
   const { data: userFilter, refetch: refetchUserFilter } = useUserFilter({ userId: userInfoData?.id });
   const { mutate } = useDoUserFilter();
 
   const applyUserFilter = () => {
+    if (!isSuccess) {
+      setCurrentToast("로그인후 My 필터를 저장해주세요.");
+      return;
+    }
+
     const userFilterArr: watchListDef[] = [
       { query: "possibleEdu", categoryArr: userFilter?.possibleEdu || [] },
       { query: "place", categoryArr: userFilter?.place || [] },
@@ -58,12 +63,22 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
       { query: "task", categoryArr: userFilter?.task || [] },
     ];
 
+    if (!userFilter) {
+      setCurrentToast("My필터를 저장해주세요.");
+      return;
+    }
+
     userFilterArr.map((filterMenu) => {
       return setValue(filterMenu.query, filterMenu.categoryArr);
     });
   };
 
   const saveUserFilter = () => {
+    if (!isSuccess) {
+      setCurrentToast("로그인후 My 필터를 저장해주세요.");
+      return;
+    }
+
     mutate(
       {
         userId: userInfoData?.id,

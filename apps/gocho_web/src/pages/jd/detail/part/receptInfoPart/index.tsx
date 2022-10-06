@@ -27,6 +27,8 @@ import {
 
 export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDetailData }) => {
   const [pageNumber, setPageNumber] = useState<number>(1);
+  const [pageOrder, setPageOrder] = useState<"recent" | "popular" | "view" | "end" | undefined>(undefined);
+
   const {
     year: startYear,
     month: startMonth,
@@ -45,15 +47,23 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
 
   useEffect(() => {
     const sessionJdNumber = sessionStorage.getItem("jdPageNumber");
+    const sessionJdOrder = sessionStorage.getItem("jdPageOrder");
+
+    if (sessionJdOrder) {
+      const beforePageOrder = JSON.parse(sessionJdOrder);
+      setPageOrder(beforePageOrder);
+    }
+
     if (sessionJdNumber) {
       const beforePageNumber = JSON.parse(sessionJdNumber);
       setPageNumber(beforePageNumber);
     }
 
     return () => {
+      sessionStorage.removeItem("jdPageOrder");
       sessionStorage.removeItem("jdPageNumber");
     };
-  }, [setPageNumber]);
+  }, [setPageNumber, setPageOrder]);
 
   return (
     <div>
@@ -112,7 +122,7 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
           </div>
         </div>
       </section>
-      <Link href={{ pathname: JOBS_LIST_URL, query: { page: pageNumber } }} passHref>
+      <Link href={{ pathname: JOBS_LIST_URL, query: { page: pageNumber, order: pageOrder } }} passHref>
         <a css={goBackButton}>
           <BsChevronLeft /> 공고 리스트로 돌아가기
         </a>
