@@ -15,6 +15,7 @@ export type MainJobCardProps = {
   isBookmarked: boolean;
   userId: number | undefined;
   isSkeleton?: never;
+  loginOpener: () => void;
 };
 
 export type MainJobCardSkeleton = {
@@ -23,4 +24,5 @@ export type MainJobCardSkeleton = {
   isBookmarked?: never;
   userId?: never;
   isSkeleton: boolean;
+  loginOpener?: never;
 };

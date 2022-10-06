@@ -9,7 +9,6 @@ import { useJobDetail } from "shared-api/job";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { Layout } from "@component/layout";
 import { DetailComment } from "@component/global/detailComment";
-import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
 import { useAddJobViewCount } from "shared-api/viewCount";
 
@@ -23,7 +22,6 @@ const JobsDetail: NextPage = () => {
   const [freshPosition, setFreshPosition] = useState<PositionObjDef | null>(null);
 
   const { data: userData } = useUserInfo();
-  const { data: userJobBookmarkArr, refetch } = useUserJobBookmarkArr({ userId: userData?.id });
   const { mutate: addViewCount } = useAddJobViewCount();
 
   const router = useRouter();
@@ -82,11 +80,7 @@ const JobsDetail: NextPage = () => {
     );
   }
 
-  const isBookmarked = Boolean(
-    userJobBookmarkArr?.some((job) => {
-      return job.id === jobDetailData.id;
-    })
-  );
+
 
   const commentData = {
     companyId: jobDetailData.company.companyId,
@@ -115,9 +109,7 @@ const JobsDetail: NextPage = () => {
           jobDetailData={jobDetailData}
           setCurrentPositionId={setCurrentPositionId}
           currentPositionId={currentPositionId}
-          isBookmarked={isBookmarked}
           userId={userData?.id}
-          refetchUserBookmark={refetch}
         />
         <div css={flexBox}>
           {freshPosition && (

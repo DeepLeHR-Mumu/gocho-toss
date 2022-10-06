@@ -8,6 +8,7 @@ export type JobListPartProps = {
         title: string;
         cut: boolean;
       }[]
-    | undefined;
+    | undefined
+    | null;
   isLoading: boolean;
 };

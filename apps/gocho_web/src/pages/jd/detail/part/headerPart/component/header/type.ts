@@ -15,6 +15,5 @@ export interface HeaderProps {
       youtubeUrl: string | null;
     };
   };
-  isBookmarked: boolean;
   userId: number | undefined;
 }

@@ -34,6 +34,11 @@ export const useDeleteCompanyBookmarkArr = (companyObj: CompanyObjDef | undefine
       queryClient.setQueryData<CompanyBookmarkResObjDef>(
         userBookmarkKeyObj.companyBookmarkArr({ userId: requestObj.userId }),
         (old) => {
+          if (old?.data === null) {
+            return {
+              data: null,
+            };
+          }
           if (old && companyObj) {
             return {
               data: [

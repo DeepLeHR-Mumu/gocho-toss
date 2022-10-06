@@ -5,7 +5,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import { profileMenuArr } from "@constant/menuArr";
 
 import { myProfileMenuWrapper, myProfileTitle, myProfileMenuCSS, logoutCSS } from "./style";
-
 import { MyProfileMenuProps } from "./type";
 
 declare global {
@@ -27,7 +26,7 @@ export const MyProfileMenu: FunctionComponent<MyProfileMenuProps> = ({ active })
 
   const doLogout = () => {
     localStorage.removeItem("token");
-    queryClient.invalidateQueries();
+    queryClient.resetQueries();
   };
 
   return (
