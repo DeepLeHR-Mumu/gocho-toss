@@ -44,7 +44,13 @@ export const PositionCard: FunctionComponent<PositionCardProps | PositionCardSke
   const isCurrentPosition = position.id === currentPositionId;
   return (
     <article css={wrapper} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-      <section css={container(isCurrentPosition, isHover)}>
+      <button
+        css={container(isCurrentPosition, isHover)}
+        type="button"
+        onClick={() => {
+          setCurrentPositionId(position.id);
+        }}
+      >
         <strong css={titleCSS(isCurrentPosition, isHover)}>{getJobTitleCreator(position)}</strong>
 
         <div css={infoBox}>
@@ -69,17 +75,9 @@ export const PositionCard: FunctionComponent<PositionCardProps | PositionCardSke
             })}
           </p>
 
-          <button
-            type="button"
-            css={viewButton}
-            onClick={() => {
-              setCurrentPositionId(position.id);
-            }}
-          >
-            자세히보기
-          </button>
+          <p css={viewButton}>자세히보기</p>
         </div>
-      </section>
+      </button>
 
       {isCurrentPosition && (
         <div css={arrowClickBox}>

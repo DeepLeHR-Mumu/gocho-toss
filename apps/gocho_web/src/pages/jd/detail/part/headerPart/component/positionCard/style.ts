@@ -15,6 +15,7 @@ interface ContainerDef {
 export const container: ContainerDef = (isClick, isHover) => {
   const defaultContainerCSS = css`
     display: flex;
+    width: 100%;
     align-items: center;
     justify-content: space-between;
     border-radius: 2rem;

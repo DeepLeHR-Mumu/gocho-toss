@@ -269,7 +269,7 @@ export const taskBox = css`
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: ${COLORS.GRAY40};
+  color: ${COLORS.GRAY10};
   height: 1.5rem;
   border: 1px solid ${COLORS.GRAY40};
   background-color: ${COLORS.GRAY100};
