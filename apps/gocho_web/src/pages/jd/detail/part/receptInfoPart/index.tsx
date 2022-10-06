@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState, useEffect } from "react";
 import { BsChevronLeft } from "react-icons/bs";
 import Link from "next/link";
 
@@ -26,6 +26,7 @@ import {
 } from "./style";
 
 export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDetailData }) => {
+  const [pageNumber, setPageNumber] = useState<number | null>(null);
   const {
     year: startYear,
     month: startMonth,
@@ -41,6 +42,14 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
     hour: endHour,
     minute: endMinute,
   } = dateConverter(jobDetailData.endTime);
+
+  useEffect(() => {
+    const sessionJdNumber = sessionStorage.getItem("jdPageNumber");
+    if (sessionJdNumber) {
+      const beforePageNumber = JSON.parse(sessionJdNumber);
+      setPageNumber(beforePageNumber);
+    }
+  }, [setPageNumber]);
 
   return (
     <div>
@@ -99,7 +108,7 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
           </div>
         </div>
       </section>
-      <Link href={JOBS_LIST_URL} passHref>
+      <Link href={{ pathname: JOBS_LIST_URL, query: { page: pageNumber } }} passHref>
         <a css={goBackButton}>
           <BsChevronLeft /> 공고 리스트로 돌아가기
         </a>
