@@ -26,7 +26,7 @@ import {
 } from "./style";
 
 export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDetailData }) => {
-  const [pageNumber, setPageNumber] = useState<number | null>(null);
+  const [pageNumber, setPageNumber] = useState<number>(1);
   const {
     year: startYear,
     month: startMonth,
@@ -49,6 +49,10 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
       const beforePageNumber = JSON.parse(sessionJdNumber);
       setPageNumber(beforePageNumber);
     }
+
+    return () => {
+      sessionStorage.removeItem("jdPageNumber");
+    };
   }, [setPageNumber]);
 
   return (
