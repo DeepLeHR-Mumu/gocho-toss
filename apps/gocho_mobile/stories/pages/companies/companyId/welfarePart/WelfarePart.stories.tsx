@@ -4,7 +4,7 @@ import { rest } from "msw";
 
 import { BACKEND_URL } from "shared-constant/externalURL";
 
-import { WelfarePart } from "@pages/companies/part/welfarePart";
+import { WelfarePart } from "@pages/company/part/welfarePart";
 import { ALL } from "./mockData";
 // import { MockingMother } from "../mockingMother";
 

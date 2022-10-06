@@ -4,7 +4,7 @@ import { rest } from "msw";
 
 import { BACKEND_URL } from "shared-constant/externalURL";
 
-import { BasicInfoPart } from "@pages/companies/part/basicInfoPart";
+import { BasicInfoPart } from "@pages/company/part/basicInfoPart";
 import { hynixMockData } from "./mockData";
 
 export default {
