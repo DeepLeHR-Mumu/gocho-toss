@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import payStart from "shared-image/page/companyDetail/payStart.svg";
 import payAvg from "shared-image/page/companyDetail/payAvg.svg";
-import { UpdateInfoLink } from "@pages/companies/component/updateInfoLink";
+import { UpdateInfoLink } from "@pages/company/component/updateInfoLink";
 import { useCompanyDetail } from "shared-api/company";
 
 import { Layout } from "@component/layout";
