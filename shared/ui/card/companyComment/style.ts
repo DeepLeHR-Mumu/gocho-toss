@@ -3,11 +3,14 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 import { shorten } from "shared-style/common";
 
-export const companyCommentCardSkeleton = css`
-  overflow: hidden;
-  border-radius: 1.5rem;
-  height: 40rem;
-`;
+export const companyCommentCardSkeleton = (isMobile: boolean) => {
+  return css`
+    width: ${isMobile ? "100%" : "30rem"};
+    overflow: hidden;
+    border-radius: 1.5rem;
+    height: 40rem;
+  `;
+};
 
 export const cardWrapper = (isMobile: boolean) => {
   return css`

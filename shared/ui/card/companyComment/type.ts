@@ -15,6 +15,6 @@ export interface CommentCardProps {
 export interface CommentCardSkeleton {
   companyData?: never;
   setCurrentModal?: never;
-  isMobile?: never;
+  isMobile: boolean;
   isSkeleton: boolean;
 }
