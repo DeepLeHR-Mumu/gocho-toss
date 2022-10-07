@@ -13,6 +13,7 @@ import { dateConverter } from "shared-util/date/dateConverter";
 import { useAddPostingBookmarkArr, useDeletePostingBookmarkArr, useUserPostingBookmarkArr } from "shared-api/bookmark";
 import { useAddPostingViewCount } from "shared-api/viewCount";
 
+import { useToast } from "@recoil/hook/toast";
 import { CloseButton } from "@component/common/atom/closeButton";
 import { ModalComponent } from "@component/modal/modalBackground";
 import { useModal } from "@recoil/hook/modal";
@@ -49,16 +50,17 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
   const queryClient = useQueryClient();
 
   const { closeModal, setCurrentModal } = useModal();
-  const { data: userData } = useUserInfo();
+  const { data: userInfoData } = useUserInfo();
 
   const [openPostingSetting, setOpenPostingSetting] = useState<boolean>(false);
   const { mutate } = useDeletePosting();
   const { mutate: addViewCount } = useAddPostingViewCount();
   const { mutate: addBookmarkMutate } = useAddPostingBookmarkArr({ id: postingData.id });
   const { mutate: deleteBookmarkMutate } = useDeletePostingBookmarkArr({ id: postingData.id });
-  const { data: postingBookmarkArr } = useUserPostingBookmarkArr({ userId: userData?.id });
-
+  const { data: postingBookmarkArr } = useUserPostingBookmarkArr({ userId: userInfoData?.id });
   const { data: commentArrData, isLoading, isError } = usePostingCommentArr({ postingId: postingData.id });
+
+  const { setCurrentToast, currentToast } = useToast();
 
   const openChangePostingModal = () => {
     setCurrentModal("changePostingModal", {
@@ -80,6 +82,10 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
       }
     );
   };
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log(`posting modal의 currentToast ${currentToast}`);
+  }, [currentToast]);
 
   const closeRefetch = () => {
     closeModal();
@@ -93,8 +99,11 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
   );
 
   const likePosting = () => {
-    if (isBookmarked) return deleteBookmarkMutate({ userId: userData?.id as number, elemId: postingData.id });
-    return addBookmarkMutate({ userId: userData?.id as number, elemId: postingData.id });
+    if (!userInfoData) {
+      return setCurrentToast("로그인이 필요한 서비스입니다.");
+    }
+    if (isBookmarked) return deleteBookmarkMutate({ userId: userInfoData?.id as number, elemId: postingData.id });
+    return addBookmarkMutate({ userId: userInfoData?.id as number, elemId: postingData.id });
   };
 
   useEffect(() => {
@@ -188,7 +197,7 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
                 </button>
               </div>
             )}
-            {userData?.id === postingData.userID && (
+            {userInfoData?.id === postingData.userID && (
               <button
                 type="button"
                 css={settingMenu}
@@ -217,7 +226,7 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
                   id={comment.id}
                   postingId={postingData.id}
                   userId={comment.userId}
-                  loginUserId={userData?.id}
+                  loginUserId={userInfoData?.id}
                   body={comment.description}
                   nickname={comment.nickname}
                   emblem={comment.badge}

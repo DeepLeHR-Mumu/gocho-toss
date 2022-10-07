@@ -15,10 +15,11 @@ import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr, useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
 
+import { useModal } from "@recoil/hook/modal";
+
 import { HeaderProps } from "./type";
 import {
   applyButton,
-  bookmarkButton,
   buttonCSS,
   youtubeButton,
   companyNameCSS,
@@ -36,6 +37,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId }
   const queryClient = useQueryClient();
   const { data: userInfoData } = useUserInfo();
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userInfoData?.id });
+  const { setCurrentModal } = useModal();
 
   const [imageSrc, setImageSrc] = useState(jobDetailData.company.logoUrl as string);
 
@@ -124,19 +126,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId }
             </p>
           </li>
         </ul>
-        <p css={companyNameCSS}>
-          {jobDetailData.company.name}
-          <button
-            type="button"
-            css={bookmarkButton(isBookmarked)}
-            onClick={() => {
-              return isBookmarked ? deleteJobBookmark() : addJobBookmark();
-            }}
-            aria-label={isBookmarked ? "북마크 취소" : "북마크 하기"}
-          >
-            <BsFillBookmarkFill />
-          </button>
-        </p>
+        <p css={companyNameCSS}>{jobDetailData.company.name}</p>
         <p css={titleCSS}>{jobDetailData.title}</p>
         <ul css={linksCSS}>
           <li>
@@ -149,6 +139,9 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId }
               type="button"
               css={buttonCSS(isBookmarked)}
               onClick={() => {
+                if (!userInfoData) {
+                  setCurrentModal("loginModal", { button: "close" });
+                }
                 return isBookmarked ? deleteJobBookmark() : addJobBookmark();
               }}
             >

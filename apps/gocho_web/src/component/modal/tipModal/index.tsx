@@ -10,6 +10,7 @@ import { useUserInfo } from "shared-api/auth";
 import { dateConverter } from "shared-util/date/dateConverter";
 import { useAddTipViewCount } from "shared-api/viewCount";
 
+import { useToast } from "@recoil/hook/toast";
 import { ModalComponent } from "@component/modal/modalBackground";
 import { useModal } from "@recoil/hook/modal";
 import { tipObjDef } from "@recoil/atom/modal";
@@ -39,12 +40,13 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
   const [activeIndex, setActiveIndex] = useState<number>(1);
   const sliderRef = useRef<Slider>(null);
   const { closeModal, currentModal } = useModal();
-  const { data: userData } = useUserInfo();
+  const { setCurrentToast } = useToast();
+  const { data: userInfoData } = useUserInfo();
 
   const { mutate: addViewCount } = useAddTipViewCount();
   const { mutate: addBookmarkMutate } = useAddTipBookmarkArr({ id: tipData.id });
   const { mutate: deleteBookmarkMutate } = useDeleteTipBookmarkArr({ id: tipData.id });
-  const { data: tipBookmarkArr } = useUserTipBookmarkArr({ userId: userData?.id });
+  const { data: tipBookmarkArr } = useUserTipBookmarkArr({ userId: userInfoData?.id });
 
   const isBookmarked = Boolean(
     tipBookmarkArr?.some((tipBookmark: number) => {
@@ -53,8 +55,11 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
   );
 
   const likePosting = () => {
-    if (isBookmarked) return deleteBookmarkMutate({ userId: userData?.id as number, elemId: tipData.id });
-    return addBookmarkMutate({ userId: userData?.id as number, elemId: tipData.id });
+    if (!userInfoData) {
+      return setCurrentToast("로그인이 필요한 서비스입니다.");
+    }
+    if (isBookmarked) return deleteBookmarkMutate({ userId: userInfoData?.id as number, elemId: tipData.id });
+    return addBookmarkMutate({ userId: userInfoData?.id as number, elemId: tipData.id });
   };
 
   useEffect(() => {
