@@ -4,7 +4,7 @@ export interface JobArrRequestObjDef {
   offset?: number;
   q?: string;
   userId?: string;
-  filter?: "todayUpload" | "almostDeadline" | " deadline" | "expired" | "valid";
+  filter?: "todayUpload" | "almostDeadline" | "deadline" | "expired" | "valid";
   parsing?: "full" | "raw";
   companyId?: number;
 }
