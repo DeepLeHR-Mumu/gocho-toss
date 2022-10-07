@@ -35,18 +35,22 @@ import {
 } from "./style";
 
 export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
-  jdId = null,
+  jdId,
   companyData,
   commentArr,
   userData,
 }) => {
   const commentBoxRef = useRef<HTMLDivElement | null>(null);
-  const { register, handleSubmit, reset } = useForm<CommentFormValues>({
+  const { register, handleSubmit, setValue, watch } = useForm<CommentFormValues>({
     defaultValues: {
       companyId: companyData.id,
       jdId,
     },
   });
+
+  useEffect(() => {
+    setValue("jdId", jdId);
+  }, [jdId, setValue, watch]);
 
   const { mutate: postLikeComment } = useLikeComment();
   const { mutate: postDisLikeComment } = useDisLikeComment();
@@ -59,7 +63,6 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
   const commentSubmit: SubmitHandler<CommentFormValues> = (commentObj) => {
     postWriteCompanyComment(commentObj, {
       onSuccess: () => {
-        reset();
         queryClient.invalidateQueries(companyCommentArrKeyObj.all);
       },
     });

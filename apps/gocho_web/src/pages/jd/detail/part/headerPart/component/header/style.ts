@@ -41,7 +41,7 @@ export const applyButton = css`
 export const viewCSS = css`
   position: absolute;
   right: 1rem;
-  top: 1rem;
+  top: 1.6rem;
   color: ${COLORS.GRAY60};
   font-size: 0.75rem;
   display: flex;
