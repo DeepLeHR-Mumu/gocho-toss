@@ -7,8 +7,10 @@ import { ToastComponent } from "../toastComponent";
 export const ToastPlaceholder: FunctionComponent = () => {
   const { currentToast } = useToast();
 
+
+
   if (currentToast) {
-    return <ToastComponent />;
+    return <ToastComponent nickName={currentToast.nickname} activatedMsg={currentToast.activatedMsg} />;
   }
   return null;
 };

@@ -32,9 +32,7 @@ export const 기본닫기 = Template.bind({});
 기본닫기.args = {
   size: "S",
   buttonClick: () => {
-    // 테스팅을 위해 추가한 console.log
-    // eslint-disable-next-line no-console
-    return console.log("이동");
+    return null;
   },
 };
 

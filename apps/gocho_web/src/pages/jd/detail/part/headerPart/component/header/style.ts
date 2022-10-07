@@ -13,18 +13,6 @@ export const headerCSS = css`
   align-items: flex-start;
 `;
 
-interface BookmarkButtonDef {
-  (isBookmarked: boolean): SerializedStyles;
-}
-
-export const bookmarkButton: BookmarkButtonDef = (isBookmarked) => {
-  return css`
-    color: ${isBookmarked ? COLORS.BLUE_FIRST40 : COLORS.GRAY60};
-    font-size: 1rem;
-    margin-left: 0.375rem;
-  `;
-};
-
 export const applyButton = css`
   background-color: ${COLORS.BLUE_FIRST40};
   display: flex;

@@ -17,7 +17,7 @@ export const wrapper = css`
   top: 80%;
   cursor: pointer;
   box-shadow: 0 0.3125rem 3rem rgba(0, 0, 0, 0.65);
-  animation: upAndFadeOut 3s forwards cubic-bezier(0.69, 0, 0.23, 1);
+  animation: upAndFadeOut 3.2s forwards cubic-bezier(0.69, 0, 0.23, 1);
   transform: translate(-50%, -50%);
 
   @keyframes upAndFadeOut {
