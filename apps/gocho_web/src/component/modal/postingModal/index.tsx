@@ -60,7 +60,7 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
   const { data: postingBookmarkArr } = useUserPostingBookmarkArr({ userId: userInfoData?.id });
   const { data: commentArrData, isLoading, isError } = usePostingCommentArr({ postingId: postingData.id });
 
-  const { setCurrentToast, currentToast } = useToast();
+  const { setCurrentToast } = useToast();
 
   const openChangePostingModal = () => {
     setCurrentModal("changePostingModal", {
@@ -82,10 +82,6 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
       }
     );
   };
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(`posting modal의 currentToast ${currentToast}`);
-  }, [currentToast]);
 
   const closeRefetch = () => {
     closeModal();

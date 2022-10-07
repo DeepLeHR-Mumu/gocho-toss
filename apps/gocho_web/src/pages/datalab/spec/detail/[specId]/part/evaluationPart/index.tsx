@@ -45,7 +45,7 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
     handleSubmit,
     setValue,
     watch,
-    formState: { isSubmitted, isDirty, dirtyFields },
+    formState: { isSubmitted, isDirty },
   } = useForm<EvaluationValues>({
     mode: "onChange",
     defaultValues: { strength: [], weakness: [], score: 0, feedback: "" },
@@ -66,11 +66,6 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
     if (!isDirty) {
       return;
     }
-    // eslint-disable-next-line no-console
-    console.log(dirtyFields);
-    // eslint-disable-next-line no-console
-    if (isDirty) console.log(submitData);
-    // eslint-disable-next-line no-useless-return
     if (submitData.strength.length === 0 || submitData.weakness.length === 0 || submitData.score === 0) {
       return;
     }
