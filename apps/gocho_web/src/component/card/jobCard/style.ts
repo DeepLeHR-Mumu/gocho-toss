@@ -41,6 +41,11 @@ export const cardWrapper = (isExpired = false) => {
   `;
 };
 
+export const jobDetailLink = css`
+  display: block;
+  width: 100%;
+`;
+
 export const bookmarkButtonWrapper = (isBookmarked = false) => {
   return css`
     display: flex;
@@ -155,6 +160,7 @@ export const cutBox = css`
 
 export const companyName = css`
   font-size: 0.875rem;
+  text-align: left;
   font-weight: 500;
   color: ${COLORS.GRAY40};
   margin-bottom: 0.5rem;
@@ -204,7 +210,7 @@ export const detailInfo = css`
 
 export const taskContainer = css`
   display: flex;
-  align-items: baseline;
+  align-items: center;
 `;
 
 interface TaskSummaryDef {
@@ -254,9 +260,17 @@ export const taskNumber: TaskNumberDef = (isExpired) => {
 export const taskBox = css`
   border-radius: 1.5rem;
   font-size: 0.75rem;
-  padding: 0.5rem;
   margin-right: 0.5rem;
-  color: ${COLORS.GRAY40};
+  min-width: 4rem;
+  width: fit-content;
+  padding: 0 1.25rem;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: ${COLORS.GRAY10};
+  height: 1.5rem;
   border: 1px solid ${COLORS.GRAY40};
   background-color: ${COLORS.GRAY100};
 `;

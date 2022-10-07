@@ -96,6 +96,7 @@ export const commentTypeCSS = css`
 
 export const commentDesc = css`
   color: ${COLORS.GRAY10};
+  word-break: break-word;
   font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.5;

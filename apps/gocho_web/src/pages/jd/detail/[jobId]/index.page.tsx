@@ -80,8 +80,6 @@ const JobsDetail: NextPage = () => {
     );
   }
 
-
-
   const commentData = {
     companyId: jobDetailData.company.companyId,
     name: jobDetailData.company.name,

@@ -37,14 +37,14 @@ const JobsExpList: NextPage = () => {
   const limit = 10;
   const [total, setTotal] = useState<number>(0);
   const [page, setPage] = useState<number>(Number(router.query.page));
-  const [activeOrder, setActiveOrder] = useState<OrderDef>("recent");
+  const [activeOrder, setActiveOrder] = useState<OrderDef>(router.query.page as OrderDef);
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
 
   const { register, handleSubmit } = useForm<PostingValues>({});
   const postingSearch: SubmitHandler<PostingValues> = (postingVal) => {
     router.push({
       pathname: JOBS_EXPLIST_URL,
-      query: { page: 1 },
+      query: { page: 1, order: activeOrder },
     });
     setSearchQuery({
       name: postingVal.name,
@@ -64,7 +64,11 @@ const JobsExpList: NextPage = () => {
 
   useEffect(() => {
     setPage(Number(router.query.page));
-  }, [router.query]);
+  }, [router.query.page]);
+
+  useEffect(() => {
+    setActiveOrder(router.query.order as OrderDef);
+  }, [router.query.order]);
 
   useEffect(() => {
     if (companyDataArr) {
@@ -99,6 +103,10 @@ const JobsExpList: NextPage = () => {
                     key={`jobCardArr${button.text}`}
                     css={setJobOrderButton(isActive)}
                     onClick={() => {
+                      router.push({
+                        pathname: JOBS_EXPLIST_URL,
+                        query: { page: 1, order: button.order },
+                      });
                       return changeOrder(button.order);
                     }}
                   >
@@ -108,7 +116,13 @@ const JobsExpList: NextPage = () => {
                 );
               })}
             </div>
-            <Pagination totalPage={totalPage} />
+            <Pagination
+              totalPage={totalPage}
+              linkObj={{
+                pathname: JOBS_EXPLIST_URL,
+                query: { order: activeOrder },
+              }}
+            />
           </form>
 
           {companyDataArr?.companyDataArr.length === 0 && (
@@ -118,7 +132,13 @@ const JobsExpList: NextPage = () => {
           )}
 
           <ExpJobCardList companyDataArr={companyDataArr?.companyDataArr} isLoading={isLoading} />
-          <BottomPagination url={JOBS_EXPLIST_URL} totalPage={totalPage} />
+          <BottomPagination
+            linkObj={{
+              pathname: JOBS_EXPLIST_URL,
+              query: { order: activeOrder },
+            }}
+            totalPage={totalPage}
+          />
         </section>
       </Layout>
     </main>

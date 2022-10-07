@@ -3,20 +3,20 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { JOBS_EXPLIST_URL } from "shared-constant/internalURL";
 import { PaginationProps } from "./type";
 import { paginationContainer, movePageButton } from "./style";
 
-export const Pagination: FunctionComponent<PaginationProps> = ({ totalPage }) => {
+export const Pagination: FunctionComponent<PaginationProps> = ({ linkObj, totalPage }) => {
   const { query } = useRouter();
   const currentPageNumber = Number(query.page);
 
   return (
     <div css={paginationContainer}>
       <Link
-        href={
-          currentPageNumber > 1 ? `${JOBS_EXPLIST_URL}?page=${currentPageNumber - 1}` : `${JOBS_EXPLIST_URL}?page=1`
-        }
+        href={{
+          pathname: linkObj.pathname,
+          query: { page: currentPageNumber > 1 ? currentPageNumber - 1 : 1, order: linkObj.query.order },
+        }}
         passHref
       >
         <a css={movePageButton}>
@@ -25,11 +25,13 @@ export const Pagination: FunctionComponent<PaginationProps> = ({ totalPage }) =>
       </Link>
       {currentPageNumber}/{totalPage}
       <Link
-        href={
-          currentPageNumber !== totalPage
-            ? `${JOBS_EXPLIST_URL}?page=${currentPageNumber + 1}`
-            : `${JOBS_EXPLIST_URL}?page=${totalPage}`
-        }
+        href={{
+          pathname: linkObj.pathname,
+          query: {
+            page: currentPageNumber !== totalPage ? currentPageNumber + 1 : totalPage,
+            order: linkObj.query.order,
+          },
+        }}
         passHref
       >
         <a css={movePageButton}>

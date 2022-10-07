@@ -39,8 +39,6 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
   datadogRum.startSessionReplayRecording();
 }
 
-
-
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [queryClient] = useState(() => {

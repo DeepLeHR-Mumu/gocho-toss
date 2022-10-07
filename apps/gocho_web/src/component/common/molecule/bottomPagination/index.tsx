@@ -6,7 +6,7 @@ import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { BottomPaginationProps } from "./type";
 import { paginationContainer, movePageButton, paginationBox, paginationButton } from "./style";
 
-export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ q, url, totalPage }) => {
+export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ q, linkObj, totalPage }) => {
   const router = useRouter();
   const currentPageNumber = Number(router.query.page);
   const count = Math.floor(currentPageNumber / 10);
@@ -23,9 +23,10 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ q, 
         aria-label="첫 페이지로 이동"
         onClick={() => {
           router.push({
-            pathname: url,
+            pathname: linkObj.pathname,
             query: {
               q,
+              order: linkObj?.query?.order,
               page: 1,
             },
           });
@@ -41,9 +42,10 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ q, 
         aria-label="이전 페이지로 이동"
         onClick={() => {
           router.push({
-            pathname: url,
+            pathname: linkObj.pathname,
             query: {
               q,
+              order: linkObj?.query?.order,
               page: currentPageNumber - 1,
             },
           });
@@ -65,9 +67,10 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ q, 
                   aria-label={`${pageIndex}번 페이지로 이동`}
                   onClick={() => {
                     router.push({
-                      pathname: url,
+                      pathname: linkObj.pathname,
                       query: {
                         q,
+                        order: linkObj?.query?.order,
                         page: pageIndex,
                       },
                     });
@@ -77,7 +80,7 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ q, 
                 </button>
               </li>
             );
-          return <li key={`bottomPagination${pageIndex}`} />;
+          return <li key={`bottomPagination${idx}`} />;
         })}
       </ul>
 
@@ -88,9 +91,10 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ q, 
         aria-label="다음 페이지로 이동"
         onClick={() => {
           router.push({
-            pathname: url,
+            pathname: linkObj.pathname,
             query: {
               q,
+              order: linkObj?.query?.order,
               page: currentPageNumber + 1,
             },
           });
@@ -105,9 +109,10 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ q, 
         aria-label="마지막 페이지로 이동"
         onClick={() => {
           router.push({
-            pathname: url,
+            pathname: linkObj.pathname,
             query: {
               q,
+              order: linkObj?.query?.order,
               page: totalPage,
             },
           });

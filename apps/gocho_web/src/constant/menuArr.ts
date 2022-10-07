@@ -16,11 +16,13 @@ export const menuArr = [
     subMenuArr: [
       {
         pageQuery: true,
+        pageOrder: "recent",
         menuTitle: "최신채용공고",
         menuLink: JOBS_LIST_URL,
       },
       {
         pageQuery: true,
+        pageOrder: "recent",
         menuTitle: "만료채용공고",
         menuLink: JOBS_EXPLIST_URL,
       },
