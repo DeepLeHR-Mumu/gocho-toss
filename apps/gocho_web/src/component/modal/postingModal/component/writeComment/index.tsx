@@ -6,11 +6,19 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { useWriteComment } from "shared-api/community/useWriteComment";
 import { communityCommentArrKeyObj } from "shared-constant/queryKeyFactory/community/commentArrKeyObj";
+import { useUserInfo } from "shared-api/auth";
+
+import { useToast } from "@recoil/hook/toast";
 
 import { WriteCommentProps, CommentFormValues } from "./type";
 import { formCSS, writeCommentBox, writeCommentWrapper, postCommentButton } from "./style";
 
 export const WriteComment: FunctionComponent<WriteCommentProps> = ({ postingId, parentCommentId }) => {
+  const queryClient = useQueryClient();
+  const { data: userInfoData } = useUserInfo();
+  const { mutate } = useWriteComment();
+  const { setCurrentToast } = useToast();
+
   const { register, handleSubmit, reset } = useForm<CommentFormValues>({
     defaultValues: {
       postingId,
@@ -18,10 +26,11 @@ export const WriteComment: FunctionComponent<WriteCommentProps> = ({ postingId, 
     },
   });
 
-  const { mutate } = useWriteComment();
-  const queryClient = useQueryClient();
-
   const commentSubmit: SubmitHandler<CommentFormValues> = (commentObj) => {
+    if (!userInfoData) {
+      setCurrentToast("로그인이 필요한 서비스입니다.");
+      return;
+    }
     mutate(commentObj, {
       onSuccess: () => {
         reset();
