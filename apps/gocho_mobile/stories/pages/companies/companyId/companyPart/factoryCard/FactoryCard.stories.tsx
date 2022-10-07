@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { FactoryCard } from "@pages/companies/part/factoryInfoPart/component/factoryCard";
+import { FactoryCard } from "@pages/company/part/factoryInfoPart/component/factoryCard";
 
 export default {
   title: "pages/indexComponent/FactoryCard",

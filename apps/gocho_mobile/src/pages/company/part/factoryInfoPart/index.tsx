@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useCompanyDetail } from "shared-api/company";
 
 import { Layout } from "@component/layout";
-import { UpdateInfoLink } from "@pages/companies/component/updateInfoLink";
+import { UpdateInfoLink } from "@pages/company/component/updateInfoLink";
 
 import { FactoryCard } from "./component/factoryCard";
 import { cardContainer, container } from "./style";
