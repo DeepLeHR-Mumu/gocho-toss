@@ -3,7 +3,6 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
-  margin-top: 4.5rem;
   background-color: ${COLORS.GRAY90};
   padding-bottom: 7.8125rem;
 `;

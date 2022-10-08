@@ -119,3 +119,18 @@ export const applyButton = css`
   margin-left: -0.5rem;
   z-index: 0;
 `;
+
+export const applyEndButton = css`
+  background-color: ${COLORS.GRAY90};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8.5rem;
+  height: 2.5rem;
+  border-radius: 2rem;
+  color: ${COLORS.GRAY70};
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-left: -0.5rem;
+  z-index: 0;
+`;

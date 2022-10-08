@@ -7,7 +7,7 @@ export const headerWrapper = css`
   height: 4.5rem;
   display: flex;
   z-index: 50;
-  position: fixed;
+  position: sticky;
   left: 0;
   top: 0;
   width: 100%;

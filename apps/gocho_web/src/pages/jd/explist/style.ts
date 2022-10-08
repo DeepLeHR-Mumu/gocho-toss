@@ -2,9 +2,7 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 import { PC_HOVER } from "shared-style/mediaQuery";
 
-export const mainContainer = css`
-  margin-top: 4.5rem;
-`;
+export const mainContainer = css``;
 
 export const title = css`
   font-size: 1.75rem;

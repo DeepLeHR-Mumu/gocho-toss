@@ -2,7 +2,7 @@ import { FunctionComponent, useState, useEffect } from "react";
 import { BsChevronLeft } from "react-icons/bs";
 import Link from "next/link";
 
-import { dateConverter } from "shared-util/date";
+import { dateConverter, dDayCalculator } from "shared-util/date";
 import { JOBS_LIST_URL } from "shared-constant/internalURL";
 
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
@@ -11,6 +11,7 @@ import { NoDataDesc } from "../common/component/noDataDesc";
 import { ReceptInfoPartProps } from "./type";
 import {
   applyButton,
+  applyEndButton,
   beforeAfterDateBox,
   cutBox,
   desc,
@@ -26,7 +27,7 @@ import {
 } from "./style";
 
 export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDetailData }) => {
-  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [pageNumber, setPageNumber] = useState<number | undefined>(undefined);
   const [pageOrder, setPageOrder] = useState<"recent" | "popular" | "view" | "end" | undefined>(undefined);
 
   const {
@@ -46,16 +47,16 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
   } = dateConverter(jobDetailData.endTime);
 
   useEffect(() => {
-    const sessionJdNumber = sessionStorage.getItem("jdPageNumber");
     const sessionJdOrder = sessionStorage.getItem("jdPageOrder");
+    const sessionJdNumber = sessionStorage.getItem("jdPageNumber");
 
-    if (sessionJdOrder) {
-      const beforePageOrder = JSON.parse(sessionJdOrder);
+    if (sessionJdOrder !== "undefined") {
+      const beforePageOrder = JSON.parse(sessionJdOrder as string);
       setPageOrder(beforePageOrder);
     }
 
-    if (sessionJdNumber) {
-      const beforePageNumber = JSON.parse(sessionJdNumber);
+    if (sessionJdNumber !== "undefined") {
+      const beforePageNumber = JSON.parse(sessionJdNumber as string);
       setPageNumber(beforePageNumber);
     }
 
@@ -64,6 +65,8 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
       sessionStorage.removeItem("jdPageNumber");
     };
   }, [setPageNumber, setPageOrder]);
+
+  const isDdayEnd = dDayCalculator(jobDetailData.endTime) === "만료";
 
   return (
     <div>
@@ -78,9 +81,13 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
           <DdayBox endTime={jobDetailData.endTime} />
           {jobDetailData.cut && <div css={cutBox}>채용시마감</div>}
 
-          <a css={applyButton} target="_blank" href={jobDetailData.applyUrl} rel="noopener noreferrer">
-            지원하러가기
-          </a>
+          {isDdayEnd ? (
+            <p css={applyEndButton}>지원하러가기</p>
+          ) : (
+            <a css={applyButton} target="_blank" href={jobDetailData.applyUrl} rel="noopener noreferrer">
+              지원하러가기
+            </a>
+          )}
         </div>
 
         <div css={infoDetailBox}>

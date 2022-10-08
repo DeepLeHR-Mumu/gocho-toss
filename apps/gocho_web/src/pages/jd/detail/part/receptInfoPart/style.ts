@@ -69,6 +69,18 @@ export const applyButton = css`
   margin-top: 1.375rem;
 `;
 
+export const applyEndButton = css`
+  width: 7.875rem;
+  height: 3rem;
+  background-color: ${COLORS.GRAY90};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${COLORS.GRAY70};
+  border-radius: 2rem;
+  margin-top: 1.375rem;
+`;
+
 // 채용프로세스
 
 export const infoDetailBox = css`

@@ -50,10 +50,10 @@ export const containerSkeleton = css`
 `;
 
 interface TitleCSSDef {
-  (isClick: boolean, isHover: boolean): SerializedStyles;
+  (isClick: boolean, isHover: boolean, isDdayEnd: boolean): SerializedStyles;
 }
 
-export const titleCSS: TitleCSSDef = (isClick, isHover) => {
+export const titleCSS: TitleCSSDef = (isClick, isHover, isDdayEnd) => {
   const defaultTitleCSS = css`
     width: 14.5rem;
     height: 2.25rem;
@@ -65,12 +65,18 @@ export const titleCSS: TitleCSSDef = (isClick, isHover) => {
     font-size: 0.75rem;
     font-weight: 500;
   `;
-
+  if (isDdayEnd) {
+    return css`
+      ${defaultTitleCSS};
+      background-color: ${isClick ? COLORS.GRAY40 : COLORS.GRAY100};
+      color: ${COLORS.GRAY10};
+    `;
+  }
   if (!isClick) {
     return css`
       ${defaultTitleCSS};
       color: ${isHover ? COLORS.GRAY10 : COLORS.GRAY40};
-      background-color: ${isHover ? COLORS.BLUE_SECOND70 : COLORS.GRAY100};
+      background-color: ${COLORS.BLUE_SECOND70};
     `;
   }
   return css`

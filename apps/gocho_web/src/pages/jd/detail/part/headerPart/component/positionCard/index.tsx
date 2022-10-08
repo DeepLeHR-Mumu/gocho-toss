@@ -19,6 +19,7 @@ import {
 } from "./style";
 
 export const PositionCard: FunctionComponent<PositionCardProps | PositionCardSkeleton> = ({
+  isDdayEnd,
   currentPositionId,
   setCurrentPositionId,
   position,
@@ -51,7 +52,7 @@ export const PositionCard: FunctionComponent<PositionCardProps | PositionCardSke
           setCurrentPositionId(position.id);
         }}
       >
-        <strong css={titleCSS(isCurrentPosition, isHover)}>{getJobTitleCreator(position)}</strong>
+        <strong css={titleCSS(isCurrentPosition, isHover, isDdayEnd)}>{getJobTitleCreator(position)}</strong>
 
         <div css={infoBox}>
           <p css={desc}>{position.possibleEdu.summary}</p>

@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 export const mainCarouselWrapper = css`
-  margin-top: 9rem;
+  margin-top: 4.5rem;
 `;
 
 export const carouselContainer = css`

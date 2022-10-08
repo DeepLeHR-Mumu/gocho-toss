@@ -44,13 +44,26 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
   };
 
   const { data: userInfoData, isSuccess } = useUserInfo();
-  const { data: userFilter, refetch: refetchUserFilter } = useUserFilter({ userId: userInfoData?.id });
+  const {
+    data: userFilter,
+    isSuccess: userFilterSuccess,
+    refetch: refetchUserFilter,
+  } = useUserFilter({ userId: userInfoData?.id });
   const { mutate } = useDoUserFilter();
 
   const applyUserFilter = () => {
     if (!isSuccess) {
       setCurrentToast("로그인후 My 필터를 저장해주세요.");
       return;
+    }
+
+    if (!userFilter) {
+      setCurrentToast("My필터를 저장후 불러주세요.");
+      return;
+    }
+
+    if (userFilterSuccess) {
+      setCurrentToast("My필터를 불러왔습니다.");
     }
 
     const userFilterArr: watchListDef[] = [
@@ -62,11 +75,6 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
       { query: "industry", categoryArr: userFilter?.industry || [] },
       { query: "task", categoryArr: userFilter?.task || [] },
     ];
-
-    if (!userFilter) {
-      setCurrentToast("My필터를 저장해주세요.");
-      return;
-    }
 
     userFilterArr.map((filterMenu) => {
       return setValue(filterMenu.query, filterMenu.categoryArr);

@@ -26,6 +26,19 @@ export const applyButton = css`
   font-weight: 500;
 `;
 
+export const applyEndButton = css`
+  background-color: ${COLORS.GRAY90};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8.5rem;
+  height: 2.5rem;
+  border-radius: 2rem;
+  color: ${COLORS.GRAY70};
+  font-size: 0.875rem;
+  font-weight: 500;
+`;
+
 export const viewCSS = css`
   position: absolute;
   right: 1rem;
@@ -56,6 +69,10 @@ export const buttonCSS: ButtonCSSDef = (isBookmarked) => {
     font-size: 0.875rem;
     font-weight: 500;
     transition: all 0.2s ease;
+
+    > svg {
+      margin-right: 0.2rem;
+    }
   `;
 };
 

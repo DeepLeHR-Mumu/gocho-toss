@@ -12,7 +12,6 @@ import { useCompanyArr } from "shared-api/company";
 import { Layout } from "@component/layout";
 import { Pagination } from "@pages/jd/component/pagination";
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
-import { DataLabContainer } from "@component/global/datalabCarousel/datalabContainer";
 
 import { ExpJobCardList } from "./component/expJobCardList";
 import { setJobOrderButtonArr } from "./constant";
@@ -80,7 +79,6 @@ const JobsExpList: NextPage = () => {
   return (
     <main css={mainContainer}>
       <MetaHead metaData={META_JD_EXPLIST} />
-      <DataLabContainer />
       <Layout>
         <InvisibleH2 title="기업별 만료 공고" />
         <p css={title}>
