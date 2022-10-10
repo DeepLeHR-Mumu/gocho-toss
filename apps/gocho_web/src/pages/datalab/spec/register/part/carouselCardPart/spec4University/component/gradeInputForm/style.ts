@@ -49,6 +49,11 @@ export const textForm = css`
     font-size: 0.875rem;
     color: ${COLORS.GRAY40};
   }
+
+  :focus {
+    outline: 0;
+    border-bottom: 1px solid ${COLORS.BLUE_FIRST40};
+  }
 `;
 
 interface langArrBoxDef {

@@ -2,7 +2,6 @@ import { FunctionComponent, useRef, useEffect } from "react";
 import Image from "next/image";
 
 import { LinkButton, NormalButton } from "shared-ui/common/atom/button";
-import { CDN_URL } from "shared-constant/externalURL";
 import { useCompanyCommentArr } from "shared-api/company";
 import { useUserInfo } from "shared-api/auth";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
@@ -45,7 +44,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
   useEffect(() => {
     const bottomHeight = commentContainerRef.current?.scrollHeight;
     commentContainerRef.current?.scrollTo(0, bottomHeight !== undefined ? bottomHeight : 0);
-  }, [companyCommentArrData]);
+  }, [isSuccess]);
 
   if (isSkeleton || companyData === undefined) {
     return (
@@ -64,7 +63,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
               <Image
                 layout="fill"
                 objectFit="contain"
-                src={`${CDN_URL}/company_images/${companyData.id}/logo.png`}
+                src={companyData.logoUrl}
                 alt={`${companyData.name} 기업 로고`}
               />
             </div>
@@ -113,7 +112,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
             <Image
               layout="fill"
               objectFit="contain"
-              src={`${CDN_URL}/company_images/${companyData.id}/logo.png`}
+              src={companyData.logoUrl}
               alt={`${companyCommentArrData.company.name} 기업 로고`}
             />
           </div>

@@ -3,6 +3,7 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { useUserInfo } from "shared-api/auth";
+import { dDayCalculator } from "shared-util/date";
 import { PositionCard } from "./component/positionCard";
 import { HeaderFix } from "./component/headerFix";
 import { Header } from "./component/header";
@@ -76,18 +77,20 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
     );
   }
 
+  const isDdayEnd = dDayCalculator(jobDetailData.endTime) === "만료";
+
   return (
     <div>
       {isOverlap ? (
-        <Header jobDetailData={jobDetailData} userId={userData?.id} />
+        <Header jobDetailData={jobDetailData} userId={userData?.id} isDdayEnd={isDdayEnd} />
       ) : (
-        <HeaderFix jobDetailData={jobDetailData} userId={userData?.id} />
+        <HeaderFix jobDetailData={jobDetailData} userId={userData?.id} isDdayEnd={isDdayEnd} />
       )}
 
       <div css={observeCSS} ref={observeRef} />
 
       <section css={positionContainer}>
-        <p css={positionTitle}>
+        <p css={positionTitle(isDdayEnd)}>
           채용중인 직무<span>{jobDetailData.positionArr.length}</span>
         </p>
         <div css={cardContainer}>
@@ -95,6 +98,7 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
             return (
               index < defaultCardCount && (
                 <PositionCard
+                  isDdayEnd={isDdayEnd}
                   currentPositionId={currentPositionId}
                   setCurrentPositionId={setCurrentPositionId}
                   position={position}

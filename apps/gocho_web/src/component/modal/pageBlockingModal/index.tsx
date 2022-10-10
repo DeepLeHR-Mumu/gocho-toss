@@ -1,36 +1,37 @@
 import { FunctionComponent } from "react";
-
-import { useIsSpecPageBlocking } from "@recoil/hook/spec";
+import { useRouter } from "next/router";
 import { useModal } from "@recoil/hook/modal";
 
+import { pageBlockModalDef } from "@recoil/atom/modal";
 import { ModalComponent } from "@component/modal/modalBackground";
 
 import { PageBlockingBoxProps } from "./type";
 import { title, wrapper, descCSS, flexBox, noButton, yesButton } from "./style";
 
-const PageBlockingBox: FunctionComponent<PageBlockingBoxProps> = ({ closeModal }) => {
-  const { setIsBlocking } = useIsSpecPageBlocking();
+const PageBlockingBox: FunctionComponent<PageBlockingBoxProps> = ({ urlObj, closeModal }) => {
+  const router = useRouter();
 
   const doBlocking = () => {
-    setIsBlocking(false);
     closeModal();
   };
 
   const doNotBlocking = () => {
-    setIsBlocking(true);
+    // LATER : 다른 페이지에도 사용시 props로 전달하기
+    sessionStorage.removeItem("specObj");
+    router.push(urlObj.url);
     closeModal();
   };
 
   return (
     <div css={wrapper}>
       <strong css={title}>페이지를 나가시겠습니까?</strong>
-      <p css={descCSS}>이전 / 다음 버튼으로 현재까지 입력한 스펙을 저장할 수 있습니다.</p>
+      <p css={descCSS}>작성 중인 스펙이 초기화됩니다. 나가시겠습니까?</p>
       <div css={flexBox}>
         <button type="button" css={noButton} onClick={doBlocking}>
           아니오
         </button>
         <button type="button" css={yesButton} onClick={doNotBlocking}>
-          네
+          나가기
         </button>
       </div>
     </div>
@@ -38,11 +39,11 @@ const PageBlockingBox: FunctionComponent<PageBlockingBoxProps> = ({ closeModal }
 };
 
 export const PageBlockingModal: FunctionComponent = () => {
-  const { closeModal } = useModal();
+  const { closeModal, currentModal } = useModal();
 
   return (
     <ModalComponent>
-      <PageBlockingBox closeModal={closeModal} />
+      <PageBlockingBox closeModal={closeModal} urlObj={currentModal?.modalContentObj as pageBlockModalDef} />
     </ModalComponent>
   );
 };

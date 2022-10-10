@@ -35,6 +35,10 @@ export const MySpecHistory: NextPage = () => {
     };
   }, [error, closeModal, setCurrentModal]);
 
+  useEffect(() => {
+    setActiveCardIndex(null);
+  }, [currentPage]);
+
   if (!mySpecHistoryData || isLoading) {
     return (
       <div css={wrapper}>

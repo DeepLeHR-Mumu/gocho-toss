@@ -1,4 +1,5 @@
 import { FunctionComponent, useEffect, useRef } from "react";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 
 import { useInfiniteJobArr } from "shared-api/job/useInfiniteJobArr";
 import { useUserInfo } from "shared-api/auth";
@@ -8,7 +9,7 @@ import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { JobCard } from "@component/card/jobCard";
 import { Layout } from "@component/layout";
 import { CompanyJobPartProps } from "./type";
-import { partContainer, listContainer, totalCount } from "./style";
+import { partContainer, listContainer, totalCount, noJobListText } from "./style";
 
 export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({ companyId }) => {
   const {
@@ -65,6 +66,12 @@ export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({ company
       <Layout>
         <p css={totalCount}>총 채용공고 {jobDataArr.pages[0].count}개</p>
         <section css={listContainer}>
+          {jobDataArr.pages[0].count === 0 && (
+            <p css={noJobListText}>
+              <AiOutlineInfoCircle />
+              현재 채용중인 공고가 없습니다.
+            </p>
+          )}
           {jobDataArr.pages.map((page) => {
             return page.jobDataArr.map((jobData) => {
               const isBookmarked = Boolean(

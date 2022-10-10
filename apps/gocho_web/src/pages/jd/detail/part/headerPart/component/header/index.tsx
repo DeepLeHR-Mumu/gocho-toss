@@ -31,9 +31,10 @@ import {
   linksCSS,
   titleCSS,
   viewCSS,
+  applyEndButton,
 } from "./style";
 
-export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId }) => {
+export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, isDdayEnd }) => {
   const queryClient = useQueryClient();
   const { data: userInfoData } = useUserInfo();
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userInfoData?.id });
@@ -100,6 +101,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId }
       return job.id === jobDetailData.id;
     })
   );
+
   return (
     <header css={headerCSS}>
       <div css={imageBox}>
@@ -138,9 +140,13 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId }
         <p css={titleCSS}>{jobDetailData.title}</p>
         <ul css={linksCSS}>
           <li>
-            <a href={jobDetailData.applyUrl} target="_blank" css={applyButton} rel="noopener noreferrer">
-              채용사이트
-            </a>
+            {isDdayEnd ? (
+              <p css={applyEndButton}>채용사이트</p>
+            ) : (
+              <a href={jobDetailData.applyUrl} target="_blank" css={applyButton} rel="noopener noreferrer">
+                채용사이트
+              </a>
+            )}
           </li>
           <li>
             <button

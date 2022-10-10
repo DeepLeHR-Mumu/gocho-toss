@@ -16,12 +16,10 @@ export const jobCardSkeleton = css`
 
 export const cardWrapper = (isMobile: boolean) => {
   return css`
-    display: flex;
     width: ${isMobile ? "100%" : "49%"};
     margin-bottom: 1.5rem;
     border-radius: 1.5rem;
     border: 1px solid ${COLORS.GRAY90};
-    align-items: flex-start;
     position: relative;
     padding: 1rem;
     box-shadow: 0px 0px 0.5rem 0px #2b2b2b1a;
@@ -29,12 +27,18 @@ export const cardWrapper = (isMobile: boolean) => {
   `;
 };
 
+export const linkButtonCSS = css`
+  display: flex;
+  align-items: flex-start;
+`;
+
 export const bookmarkButton = (isBookmarked: boolean) => {
   return css`
     color: ${isBookmarked ? COLORS.BLUE_FIRST40 : COLORS.GRAY60};
     background-color: ${isBookmarked ? COLORS.STATE_SUCCESS : `${COLORS.GRAY90}`};
     position: absolute;
     right: 0;
+    z-index: 10;
     top: 0;
     border-radius: 0 0 0 1rem;
     padding: 1rem;

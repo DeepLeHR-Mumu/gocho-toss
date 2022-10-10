@@ -80,7 +80,7 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({ compa
       <div>
         {companyData.factoryArr.length === 0 && (
           <div css={noFactoryBox}>
-            <p css={noFactoryDesc}>혹시 재직자이신가요?</p>
+            <p css={noFactoryDesc}>혹시 재직자/인사담당자 이신가요?</p>
             <Link href={kakaoChannelUrl} passHref>
               <a css={noFactoryButton} target="_blank">
                 공장 정보 수정 요청하기 +

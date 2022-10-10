@@ -9,7 +9,6 @@ import { NextPage } from "next";
 import { META_INDEX } from "shared-constant/meta";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { CompanyCommentPart } from "@pages/indexComponent/part/companyCommentPart";
-import { DataLabPart } from "@pages/indexComponent/part/dataLabPart";
 import { MainCarouselPart } from "./indexComponent/part/mainCarouselPart";
 import { JobPart } from "./indexComponent/part/jobPart";
 import { CommunityPostingPart } from "./indexComponent/part/communityPostingPart";
@@ -52,7 +51,6 @@ const Home: NextPage = () => {
     <main>
       <MetaHead metaData={META_INDEX} />
       <MainCarouselPart />
-      <DataLabPart />
       <JobPart />
       <CompanyCommentPart />
       <TipPart />

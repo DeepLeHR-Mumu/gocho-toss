@@ -26,9 +26,10 @@ import {
   cutBox,
   titleBox,
   titleCSS,
+  applyEndButton,
 } from "./style";
 
-export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, userId }) => {
+export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, userId, isDdayEnd }) => {
   const queryClient = useQueryClient();
   const { data: userInfoData } = useUserInfo();
 
@@ -120,9 +121,13 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, us
                 <DdayBox endTime={jobDetailData.endTime} />
                 {jobDetailData.cut && <div css={cutBox}>채용시마감</div>}
               </div>
-              <a href={jobDetailData.applyUrl} target="_blank" rel="noopener noreferrer" css={applyButton}>
-                채용사이트
-              </a>
+              {isDdayEnd ? (
+                <p css={applyEndButton}>채용사이트</p>
+              ) : (
+                <a href={jobDetailData.applyUrl} target="_blank" rel="noopener noreferrer" css={applyButton}>
+                  채용사이트
+                </a>
+              )}
             </div>
           </div>
         </div>

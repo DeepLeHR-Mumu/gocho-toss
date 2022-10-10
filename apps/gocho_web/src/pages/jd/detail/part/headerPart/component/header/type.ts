@@ -1,4 +1,5 @@
 export interface HeaderProps {
+  isDdayEnd: boolean;
   jobDetailData: {
     id: number;
     startTime: number;

@@ -27,7 +27,7 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
   });
 
   const [imageSrc, setImageSrc] = useState(detailData?.logoUrl as string);
-  const [isTotalComment, setIsTotalComment] = useState(true);
+  const [isTotalComment, setIsTotalComment] = useState<boolean>(true);
 
   if (!detailData) {
     return (
@@ -62,11 +62,13 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
                   전체 댓글
                 </button>
               </li>
-              <li>
-                <button css={commentButton(!isTotalComment)} type="button">
-                  현재 공고 댓글
-                </button>
-              </li>
+              {jdId !== null && (
+                <li>
+                  <button css={commentButton(!isTotalComment)} type="button">
+                    현재 공고 댓글
+                  </button>
+                </li>
+              )}
             </ul>
           </nav>
         </header>
@@ -77,9 +79,23 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
 
   const { commentArr, company } = companyCommentArrData;
 
-  const currentJdCommentArr = commentArr.filter((comment) => {
-    return comment.jdId === jdId;
-  });
+  const getCompanyComment = (isTotal: boolean) => {
+    if (isTotal) {
+      return commentArr;
+    }
+    return commentArr.filter((comment) => {
+      return comment.title === null;
+    });
+  };
+
+  const getJobComment = (isTotal: boolean) => {
+    if (isTotal) {
+      return commentArr;
+    }
+    return commentArr.filter((comment) => {
+      return comment.title !== null;
+    });
+  };
 
   return (
     <aside css={wrapper}>
@@ -111,17 +127,20 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
                 전체 댓글 <span>{commentArr.length}</span>
               </button>
             </li>
-            <li>
-              <button
-                css={commentButton(!isTotalComment)}
-                type="button"
-                onClick={() => {
-                  setIsTotalComment(false);
-                }}
-              >
-                현재 공고 댓글 <span>{currentJdCommentArr.length}</span>
-              </button>
-            </li>
+
+            {jdId !== null && (
+              <li>
+                <button
+                  css={commentButton(!isTotalComment)}
+                  type="button"
+                  onClick={() => {
+                    setIsTotalComment(false);
+                  }}
+                >
+                  현재 공고 댓글 <span>{getJobComment(false).length}</span>
+                </button>
+              </li>
+            )}
           </ul>
         </nav>
       </header>
@@ -129,7 +148,7 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
       <LoginCommentBox
         jdId={jdId}
         userData={userData}
-        commentArr={isTotalComment ? commentArr : currentJdCommentArr}
+        commentArr={jdId === null ? getCompanyComment(isTotalComment) : getJobComment(isTotalComment)}
         companyData={company}
       />
     </aside>

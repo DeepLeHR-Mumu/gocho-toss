@@ -44,6 +44,10 @@ export const bookmarkButton = (isBookmarked = false) => {
     transition: all 0.2s ease;
     font-size: 0.875rem;
     font-weight: 400;
+
+    > svg {
+      margin-right: 0.2rem;
+    }
   `;
 };
 

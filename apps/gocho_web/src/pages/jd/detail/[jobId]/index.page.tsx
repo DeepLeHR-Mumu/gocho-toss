@@ -117,7 +117,7 @@ const JobsDetail: NextPage = () => {
               <DetailPreferencePart freshPosition={freshPosition} />
             </section>
           )}
-          <DetailComment jdId={currentPositionId} detailData={commentData} />
+          <DetailComment jdId={jobDetailData.id} detailData={commentData} />
         </div>
         <ReceptInfoPart jobDetailData={jobDetailData} />
       </Layout>

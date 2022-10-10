@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 
@@ -12,12 +12,14 @@ import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { ModalComponent } from "@component/modal/modalBackground";
 import { useModal } from "@recoil/hook/modal";
 import { CloseButton } from "@component/common/atom/closeButton";
+import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
 
-import { wrapper, desc, formCSS, closeBtn, formArr, logoContainer } from "./style";
+import { wrapper, desc, formCSS, closeBtn, formArr, logoContainer, sideErrorMsg } from "./style";
 import { SignUpFormValues } from "./type";
 import { validateNickname } from "./util";
 
 export const SignUpBox: FunctionComponent = () => {
+  const [errorMsg, setErrorMsg] = useState<string | undefined>(undefined);
   const {
     register,
     handleSubmit,
@@ -30,6 +32,10 @@ export const SignUpBox: FunctionComponent = () => {
 
   const signUpSubmit: SubmitHandler<SignUpFormValues> = (signUpObj) => {
     mutate(signUpObj, {
+      onError: (error) => {
+        const errorResponse = error.response?.data as ErrorResponse;
+        setErrorMsg(errorResponse.error.errorMessage);
+      },
       onSuccess: (response) => {
         localStorage.setItem("token", `${response?.data.token}`);
         refetch();
@@ -99,6 +105,8 @@ export const SignUpBox: FunctionComponent = () => {
             />
           </li>
         </ul>
+
+        <p css={sideErrorMsg}>{errorMsg && errorMsg}</p>
         <NormalButton isSubmit wide text="확인" variant="filled" />
       </form>
     </div>

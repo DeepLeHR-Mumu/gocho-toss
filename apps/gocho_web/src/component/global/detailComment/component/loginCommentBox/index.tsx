@@ -49,7 +49,11 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
   });
 
   useEffect(() => {
-    setValue("jdId", jdId);
+    const jdValue = watch("jdId");
+    if (jdValue) {
+      return setValue("jdId", jdId);
+    }
+    return setValue("jdId", null);
   }, [jdId, setValue, watch]);
 
   const { mutate: postLikeComment } = useLikeComment();
@@ -115,7 +119,7 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
   useEffect(() => {
     const bottomHeight = commentBoxRef.current?.scrollHeight;
     commentBoxRef.current?.scrollTo(0, bottomHeight !== undefined ? bottomHeight : 0);
-  }, [commentArr]);
+  }, [jdId]);
 
   return (
     <div>
@@ -143,14 +147,14 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
                 </div>
                 <div css={commentBody}>
                   <div css={commentBox}>
-                    {comment.title && <p css={commentTypeCSS}>{comment.title}</p>}
-
+                    <p css={commentTypeCSS}>{comment.title || "기업 정보"}</p>
                     <p css={commentDesc}>{comment.description}</p>
                   </div>
                   <ul css={evalButtonBox}>
                     <li>
                       <CommentLikeButton
                         count={comment.likeCount}
+                        isLiked={comment.liked}
                         setLikeSubmit={() => {
                           return comment.liked
                             ? postDislikeSubmit(comment.companyId, comment.id)
@@ -160,6 +164,7 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
                     </li>
                     <li>
                       <CommentDislikeButton
+                        isDisLiked={comment.disLiked}
                         count={comment.disLikeCount}
                         setDislikeSubmit={() => {
                           return comment.disLiked
@@ -182,7 +187,7 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
         </div>
         <form css={formCSS} onSubmit={handleSubmit(commentSubmit)}>
           <textarea css={textareaCSS} placeholder="댓글을 입력해주세요." {...register("description")} />
-          <button type="submit" css={submitButton}>
+          <button type="submit" css={submitButton} aria-label="댓글 작성">
             <AiOutlineSend />
           </button>
         </form>

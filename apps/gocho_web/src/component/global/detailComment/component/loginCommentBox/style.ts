@@ -127,7 +127,7 @@ export const userNicknameCSS = css`
   font-weight: 500;
   display: flex;
   align-items: center;
-  margin-bottom: 4px;
+  margin-bottom: 0.5rem;
 `;
 
 export const formCSS = css`

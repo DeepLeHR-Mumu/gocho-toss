@@ -127,7 +127,7 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
       <p css={subTitle}>내가 평가한 횟수 : {evalCount}</p>
       {evalCount < 5 && (
         <p css={hookingMentSection}>
-          평가하기를 {5 - evalCount}번만 하면 <br />내 스펙 평가내역을 볼 수 있어요! 화이팅!
+          평가하기를 {5 - evalCount}번만 더하면 <br />내 스펙 평가내역을 볼 수 있어요! 화이팅!
         </p>
       )}
 

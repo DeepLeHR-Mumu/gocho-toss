@@ -69,7 +69,7 @@ export const writerProfileImage = css`
 `;
 
 export const writerNickname = css`
-  display: flex;
+  display: block;
   align-items: center;
   padding: 0 0.5rem;
   font-size: 0.75rem;

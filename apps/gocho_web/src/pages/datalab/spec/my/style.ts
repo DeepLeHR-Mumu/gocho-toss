@@ -4,7 +4,6 @@ import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
   padding: 11.5rem 0 4.1875rem;
-  height: calc(100vh - 20rem);
   box-sizing: border-box;
   background-color: ${COLORS.BLUE_SECOND40};
 `;

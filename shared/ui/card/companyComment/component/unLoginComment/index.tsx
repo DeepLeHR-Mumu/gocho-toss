@@ -33,12 +33,14 @@ export const UnLoginComment: FunctionComponent = () => {
 
         <div css={reactionContainer}>
           <CommentLikeButton
+            isLiked={false}
             count={0}
             setLikeSubmit={() => {
               return undefined;
             }}
           />
           <CommentDislikeButton
+            isDisLiked={false}
             count={0}
             setDislikeSubmit={() => {
               return undefined;
