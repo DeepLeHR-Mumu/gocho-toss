@@ -98,7 +98,12 @@ export const MySpecHistory: NextPage = () => {
                 })}
               </div>
 
-              <Pagination totalPage={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+              <Pagination
+                totalPage={totalPage}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                setActiveCardIndex={setActiveCardIndex}
+              />
             </article>
           </div>
         </section>

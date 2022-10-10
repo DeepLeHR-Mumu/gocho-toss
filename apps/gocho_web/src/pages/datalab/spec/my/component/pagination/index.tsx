@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
@@ -6,7 +6,16 @@ import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { PaginationProps } from "./type";
 import { wrapper, buttonCSS, isActiveButton } from "./style";
 
-export const Pagination: FunctionComponent<PaginationProps> = ({ totalPage, currentPage, setCurrentPage }) => {
+export const Pagination: FunctionComponent<PaginationProps> = ({
+  setActiveCardIndex,
+  totalPage,
+  currentPage,
+  setCurrentPage,
+}) => {
+  useEffect(() => {
+    setActiveCardIndex(null);
+  }, [setActiveCardIndex, setCurrentPage]);
+
   return (
     <ul css={wrapper}>
       <li>

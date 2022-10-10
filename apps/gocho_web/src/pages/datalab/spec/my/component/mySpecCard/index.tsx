@@ -1,8 +1,11 @@
 import { FunctionComponent } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
-import { LinkButton } from "shared-ui/common/atom/button";
+import { LinkButton, NormalButton } from "shared-ui/common/atom/button";
 import { SPEC_DETAIL_URL } from "shared-constant/internalURL";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
+import { useDeleteMySpec } from "shared-api/spec";
+import { mySpecHistoryKeyObj } from "shared-constant/queryKeyFactory/spec/userHistoryKeyObj";
 
 import { MySpecCardProps } from "./type";
 import {
@@ -19,6 +22,20 @@ import {
 } from "./style";
 
 export const MySpecCard: FunctionComponent<MySpecCardProps> = ({ mySpecData }) => {
+  const queryClient = useQueryClient();
+  const { mutate } = useDeleteMySpec();
+
+  const mySpecDelete = (specId: number) => {
+    mutate(
+      { id: specId },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries(mySpecHistoryKeyObj.all);
+        },
+      }
+    );
+  };
+
   return (
     <article css={wrapper}>
       <div css={profileBox}>
@@ -43,7 +60,7 @@ export const MySpecCard: FunctionComponent<MySpecCardProps> = ({ mySpecData }) =
               <li>
                 내신등급
                 <span css={circleBox}>
-                  <strong css={strongPoint}>{mySpecData.highschool.naesin}</strong>
+                  <strong css={strongPoint}>{String(mySpecData.highschool.naesin).slice(0, 1)}</strong>
                 </span>
               </li>
             </>
@@ -56,8 +73,8 @@ export const MySpecCard: FunctionComponent<MySpecCardProps> = ({ mySpecData }) =
               <li>
                 평균학점
                 <span css={circleBox}>
-                  <strong css={strongPoint}>{mySpecData.college?.grade}</strong>
-                  {mySpecData.college?.maxGrade}
+                  <strong css={strongPoint}>{mySpecData.college?.grade?.toFixed(1)}</strong>/
+                  {mySpecData.college?.maxGrade?.toFixed(1)}
                 </span>
               </li>
             </>
@@ -66,16 +83,36 @@ export const MySpecCard: FunctionComponent<MySpecCardProps> = ({ mySpecData }) =
 
         <ul css={highschoolInfoCSS}>
           <li>
-            무단결석 <strong css={strongPoint}>{mySpecData.highschool.absent}</strong>
+            무단결석
+            <strong css={strongPoint}>
+              {String(mySpecData.highschool.absent).length >= 2
+                ? `${String(mySpecData.highschool.absent).slice(0, 1)}..`
+                : mySpecData.highschool.absent}
+            </strong>
           </li>
           <li>
-            무단지각 <strong css={strongPoint}>{mySpecData.highschool.tardy}</strong>
+            무단지각{" "}
+            <strong css={strongPoint}>
+              {String(mySpecData.highschool.tardy).length >= 2
+                ? `${String(mySpecData.highschool.tardy).slice(0, 1)}..`
+                : mySpecData.highschool.tardy}
+            </strong>
           </li>
           <li>
-            무단조퇴 <strong css={strongPoint}>{mySpecData.highschool.leaveEarly}</strong>
+            무단조퇴
+            <strong css={strongPoint}>
+              {String(mySpecData.highschool.leaveEarly).length >= 2
+                ? `${String(mySpecData.highschool.leaveEarly).slice(0, 1)}..`
+                : mySpecData.highschool.leaveEarly}
+            </strong>
           </li>
           <li>
-            무단결과 <strong css={strongPoint}>{mySpecData.highschool.classMiss}</strong>
+            무단결과
+            <strong css={strongPoint}>
+              {String(mySpecData.highschool.classMiss).length >= 2
+                ? `${String(mySpecData.highschool.classMiss).slice(0, 1)}..`
+                : mySpecData.highschool.classMiss}
+            </strong>
           </li>
         </ul>
 
@@ -96,8 +133,15 @@ export const MySpecCard: FunctionComponent<MySpecCardProps> = ({ mySpecData }) =
       </div>
 
       <div css={buttonBox}>
-        {/* LATER : button에 aria-label 추가하기 */}
-        {/* <NormalButton text="삭제하기" variant="text" wide={false} isSubmit={false} /> */}
+        <NormalButton
+          text="삭제하기"
+          variant="text"
+          wide={false}
+          isSubmit={false}
+          buttonClick={() => {
+            mySpecDelete(mySpecData.id);
+          }}
+        />
         <LinkButton
           text="평가 내역 보기"
           variant="filled"

@@ -8,7 +8,7 @@ export const title = css`
   font-size: 1.75rem;
   font-weight: 700;
   color: ${COLORS.GRAY10};
-  margin: 3.5rem 0 4.5rem 0;
+  margin: 5rem 0 4.5rem 0;
 `;
 
 export const listContainer = css`

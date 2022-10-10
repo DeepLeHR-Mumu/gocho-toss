@@ -76,7 +76,6 @@ export const writerProfileImage = css`
 `;
 
 export const writerNickname = css`
-  display: flex;
   align-items: center;
   width: 8.5rem;
   height: 2rem;
@@ -85,6 +84,7 @@ export const writerNickname = css`
   background-color: ${COLORS.GRAY90};
   padding: 0.5rem 0.5rem 0.5rem 2.25rem;
   border-radius: 1rem;
+  display: block;
   ${shorten()}
 `;
 

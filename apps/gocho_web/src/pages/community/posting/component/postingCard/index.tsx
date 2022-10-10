@@ -67,7 +67,7 @@ export const PostingCard: FunctionComponent<PostingCardProps | PostingCardSkelet
             <li css={info}>{`${year}.${month}.${date}`}</li>
 
             <li css={numInfo}>
-            <AiOutlineLike /> {postingData.like.toLocaleString("Ko-KR")}
+              <AiOutlineLike /> {postingData.like.toLocaleString("Ko-KR")}
             </li>
 
             <li css={numInfo}>

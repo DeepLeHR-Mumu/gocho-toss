@@ -129,7 +129,7 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
           </div>
         </div>
       </section>
-      <Link href={{ pathname: JOBS_LIST_URL, query: { page: pageNumber, order: pageOrder } }} passHref>
+      <Link href={{ pathname: JOBS_LIST_URL, query: { page: pageNumber || 1, order: pageOrder || "recent" } }} passHref>
         <a css={goBackButton}>
           <BsChevronLeft /> 공고 리스트로 돌아가기
         </a>

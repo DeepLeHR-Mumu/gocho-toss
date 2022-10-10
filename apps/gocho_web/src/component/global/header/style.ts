@@ -48,6 +48,11 @@ export const globalNavBarContainer = css`
     white-space: nowrap;
     align-items: center;
     justify-content: center;
+    transition: color 0.2s ease;
+
+    :hover {
+      color: ${COLORS.BLUE_FIRST40};
+    }
   }
 `;
 

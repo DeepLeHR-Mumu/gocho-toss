@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
+import { shorten } from "shared-style/common";
 import { TABLET } from "shared-style/mediaQuery";
 
 export const wrapper = css`
@@ -133,6 +134,7 @@ export const strongPoint = css`
   font-size: 0.75rem;
   color: ${COLORS.GRAY10};
   font-weight: 500;
+  ${shorten()};
 `;
 
 export const circleBox = css`
