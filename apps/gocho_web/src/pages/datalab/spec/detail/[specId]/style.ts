@@ -7,7 +7,6 @@ export const loadingBox = css`
 `;
 
 export const wrapper = css`
-  margin-top: 4.5rem;
   background-color: #f2f2f6;
   padding: 10rem 0;
 `;

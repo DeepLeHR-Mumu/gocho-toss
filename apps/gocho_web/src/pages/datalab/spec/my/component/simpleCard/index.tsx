@@ -37,7 +37,6 @@ export const SimpleCard: FunctionComponent<SimpleCardProps> = ({
           {hasEvalCount ? (
             <div css={evalBox}>
               <p css={scoreText(mySpecData.score)}>{mySpecData.score ? mySpecData.score : "평가없음"}</p>
-              {/* LATER : display만 가능하도록 변경 */}
               <StarEvaluation size="S" parentScore={mySpecData.score} />
             </div>
           ) : (

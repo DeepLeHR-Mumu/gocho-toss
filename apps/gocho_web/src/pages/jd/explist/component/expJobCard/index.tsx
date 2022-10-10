@@ -2,6 +2,7 @@ import { FunctionComponent, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BsChevronRight } from "react-icons/bs";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 
 import { useJobArr } from "shared-api/job";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
@@ -31,6 +32,7 @@ import {
   taskNumber,
   taskSummary,
   jobDetailButton,
+  noExplistArrText,
 } from "./style";
 
 export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton> = ({ companyData, isSkeleton }) => {
@@ -38,6 +40,7 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
 
   const { data: jobDataArr } = useJobArr({
     companyId: companyData?.id,
+    filter: "expired",
   });
   // TODO: companyId enabled를 어떻게 처리할까?
 
@@ -91,6 +94,11 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
       </div>
 
       <div css={expJobListContainer}>
+        {jobDataArr?.count === 0 && (
+          <p css={noExplistArrText}>
+            <AiOutlineInfoCircle /> 만료된 공고가 없습니다.
+          </p>
+        )}
         {jobDataArr?.jobDataArr
           .filter((data, index) => {
             return index < 3;

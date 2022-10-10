@@ -67,7 +67,7 @@ export const Spec1Basic: FunctionComponent<Spec1BasicProps> = ({ moveNextCard })
               },
               max: {
                 value: 99,
-                message: "최대 나이는 99세 이상입니다.",
+                message: "최대 나이는 99세 입니다.",
               },
             })}
             placeholder="나이를 숫자로만 적어주세요 예시: 32"

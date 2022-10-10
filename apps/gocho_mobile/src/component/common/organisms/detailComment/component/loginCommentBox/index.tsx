@@ -65,10 +65,18 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ comme
                   </div>
                   <ul css={evalButtonBox}>
                     <li>
-                      <CommentLikeButton count={comment.likeCount} setLikeSubmit={postLikeSubmit} />
+                      <CommentLikeButton
+                        count={comment.likeCount}
+                        setLikeSubmit={postLikeSubmit}
+                        isLiked={comment.liked}
+                      />
                     </li>
                     <li>
-                      <CommentDislikeButton count={comment.disLikeCount} setDislikeSubmit={postDislikeSubmit} />
+                      <CommentDislikeButton
+                        count={comment.disLikeCount}
+                        setDislikeSubmit={postDislikeSubmit}
+                        isDisLiked={comment.disLiked}
+                      />
                     </li>
                   </ul>
                 </div>

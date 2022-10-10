@@ -3,7 +3,6 @@ import { COLORS } from "shared-style/color";
 
 export const partContainer = css`
   background-color: ${COLORS.GRAY100};
-  margin-top: 4.5rem;
   padding: 1rem 0;
 `;
 

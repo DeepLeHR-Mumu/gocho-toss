@@ -61,7 +61,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
 
   return (
     <article css={cardWrapper}>
-      <Link href={`${COMPANY_DETAIL_URL}/${companyData.id}`} passHref>
+      <Link href={{ pathname: `${COMPANY_DETAIL_URL}/${companyData.id}`, query: { info: "detail" } }} passHref>
         <a>
           <button
             type="button"

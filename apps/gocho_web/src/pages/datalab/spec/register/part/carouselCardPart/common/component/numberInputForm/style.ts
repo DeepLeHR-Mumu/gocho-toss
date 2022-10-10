@@ -55,6 +55,9 @@ export const numberInputCSS: numberInputCSSDef = (isFocus) => {
       color: ${COLORS.GRAY10};
       text-decoration: underline;
     }
+    :focus {
+      outline: 0;
+    }
   `;
 };
 

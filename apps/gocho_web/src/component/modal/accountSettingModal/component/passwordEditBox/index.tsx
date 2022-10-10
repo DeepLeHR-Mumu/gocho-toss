@@ -79,7 +79,7 @@ export const PasswordEditBox: FunctionComponent = () => {
           })}
           css={inputCSS}
           type="password"
-          placeholder="현재비밀번호"
+          placeholder="현재 비밀번호"
         />
         <div css={errorMsgContiner}>
           {failCurrentPw && <p css={passwordErrorMsg}>현재 비밀번호가 일치하지 않습니다.</p>}

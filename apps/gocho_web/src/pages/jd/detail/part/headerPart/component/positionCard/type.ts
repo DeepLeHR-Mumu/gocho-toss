@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 
 export interface PositionCardProps {
+  isDdayEnd: boolean;
   isSkeleton?: never;
   currentPositionId: number | null;
   setCurrentPositionId: Dispatch<SetStateAction<number | null>>;
@@ -25,6 +26,7 @@ export interface PositionCardProps {
 }
 
 export interface PositionCardSkeleton {
+  isDdayEnd?: never;
   isSkeleton: boolean;
   currentPositionId?: never;
   setCurrentPositionId?: never;

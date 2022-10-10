@@ -79,10 +79,24 @@ export const companyDetailButton = css`
 export const expJobListContainer = css`
   min-height: 20rem;
   padding: 1rem;
+  position: relative;
   border: solid 1px ${COLORS.GRAY80};
   border-top: 0;
   border-radius: 0 0 1.5rem 1.5rem;
   background-color: ${COLORS.GRAY90};
+`;
+
+export const noExplistArrText = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.875rem;
+  text-align: center;
+  color: ${COLORS.GRAY40};
 `;
 
 export const expJobBox = css`

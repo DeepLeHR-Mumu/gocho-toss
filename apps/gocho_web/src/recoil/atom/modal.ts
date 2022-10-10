@@ -56,16 +56,27 @@ export interface loginObjDef {
   button: "home" | "close";
 }
 
-export type contentModalDef = postingObjDef | tipObjDef | changePostingObjDef | factoryObjDef | loginObjDef;
+export interface pageBlockModalDef {
+  url: string;
+}
 
-export type contentModalNameDef = "postingModal" | "tipModal" | "changePostingModal" | "factoryModal" | "loginModal";
+export type contentModalDef =
+  | pageBlockModalDef
+  | postingObjDef
+  | tipObjDef
+  | changePostingObjDef
+  | factoryObjDef
+  | loginObjDef;
 
-export type modalNameDef =
-  | "logoutModal"
-  | "signUpModal"
-  | "writePostingModal"
-  | "accountSettingModal"
+export type contentModalNameDef =
+  | "postingModal"
+  | "tipModal"
+  | "changePostingModal"
+  | "factoryModal"
+  | "loginModal"
   | "pageBlockModal";
+
+export type modalNameDef = "logoutModal" | "signUpModal" | "writePostingModal" | "accountSettingModal";
 
 export interface modalAtomDef {
   activatedModal: modalNameDef | contentModalNameDef;

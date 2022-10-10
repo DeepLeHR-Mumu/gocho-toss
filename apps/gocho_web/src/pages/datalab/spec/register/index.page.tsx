@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { NextPage } from "next";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 import { useUserInfo } from "shared-api/auth";
 import { useModal } from "@recoil/hook/modal";
@@ -13,10 +14,10 @@ import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { ProgressPart } from "./part/progressPart";
 import { SpecWritePart } from "./part/carouselCardPart";
 
-import { usePageBlocking } from "./util";
 import { wrapper, title } from "./style";
 
 const Register: NextPage = () => {
+  const router = useRouter();
   const { setCurrentModal, currentModal } = useModal();
 
   const { error } = useUserInfo();
@@ -35,7 +36,29 @@ const Register: NextPage = () => {
     }
   }, [currentModal?.activatedModal, error, setCurrentModal]);
 
-  usePageBlocking(setCurrentModal);
+  // blocking modal
+
+  const routeChangeStart = useCallback(
+    (url: string) => {
+      const isCurrentSpecObj = Boolean(sessionStorage.getItem("specObj") !== null);
+
+      if (isCurrentSpecObj) {
+        setCurrentModal("pageBlockModal", { url });
+        router.events.emit("routeChangeError");
+        // 모달을 멈추기 위한 disable
+        // eslint-disable-next-line no-throw-literal
+        throw true;
+      }
+    },
+    [setCurrentModal, router]
+  );
+
+  useEffect(() => {
+    router.events.on("routeChangeStart", routeChangeStart);
+    return () => {
+      router.events.off("routeChangeStart", routeChangeStart);
+    };
+  }, [routeChangeStart, router.events]);
 
   return (
     <main css={wrapper}>

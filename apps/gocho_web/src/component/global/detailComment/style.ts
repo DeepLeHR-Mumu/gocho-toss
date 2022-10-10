@@ -10,6 +10,9 @@ export const wrapper = css`
   box-sizing: border-box;
   border-radius: 2rem;
   box-shadow: 0px 0.25rem 0.75rem ${COLORS.GRAY80};
+  position: sticky;
+  top: 9rem;
+  right: 0;
 `;
 
 export const wrapperSkeleton = css`

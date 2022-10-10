@@ -10,11 +10,11 @@ import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
 import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant/errorMessage";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
-
 import { ModalComponent } from "@component/modal/modalBackground";
 import { CloseButton } from "@component/common/atom/closeButton";
 import { loginObjDef } from "@recoil/atom/modal";
 import { useModal } from "@recoil/hook/modal";
+import { useToast } from "@recoil/hook/toast";
 
 import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
 import {
@@ -47,6 +47,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   } = useForm<LoginFormValues>({ mode: "onChange" });
   const queryClient = useQueryClient();
 
+  const { setCurrentToast } = useToast();
   const { mutate } = useDoLogin();
   const { closeModal, setCurrentModal } = useModal();
 
@@ -62,6 +63,8 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
         localStorage.setItem("token", `${response.data.token}`);
         queryClient.invalidateQueries();
         closeModal();
+        // LATER : response에 유저네임 추가요청??
+        setCurrentToast("님 반갑습니다.", "userName");
       },
     });
   };
