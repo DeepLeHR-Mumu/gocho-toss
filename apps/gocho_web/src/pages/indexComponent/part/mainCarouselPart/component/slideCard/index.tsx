@@ -32,13 +32,23 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({ slideData }) => {
         </p>
         <strong css={titleCSS}>{slideData.title}</strong>
         <em css={lastDescCSS}>{slideData.lastDesc}</em>
-        {slideData.buttonObj && (
+        {slideData.buttonObj && slideData.buttonObj.target === "_self" && (
           <Link href={slideData.buttonObj.url} passHref target={slideData.buttonObj.target}>
             <a css={linkButton(slideData.buttonObj.backgroundColor, slideData.buttonObj.color)}>
               <FiArrowRight />
               {slideData.buttonObj.text}
             </a>
           </Link>
+        )}
+        {slideData.buttonObj && slideData.buttonObj.target === "_blank" && (
+          <a
+            href={slideData.buttonObj.url}
+            target={slideData.buttonObj.target}
+            css={linkButton(slideData.buttonObj.backgroundColor, slideData.buttonObj.color)}
+          >
+            <FiArrowRight />
+            {slideData.buttonObj.text}
+          </a>
         )}
       </div>
       <div css={dimmed} />

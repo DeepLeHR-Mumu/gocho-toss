@@ -14,7 +14,6 @@ export const wrapper: WrapperDef = (wide) => {
     border-radius: 2rem;
     min-height: 2rem;
     margin-bottom: 0.5rem;
-
     :last-of-type {
       margin-bottom: 0;
     }

@@ -47,6 +47,7 @@ export const bodyCSS = css`
   display: flex;
   align-items: center;
   min-height: 2.25rem;
+  word-break: break-all;
 `;
 
 export const buttonContainer = css`

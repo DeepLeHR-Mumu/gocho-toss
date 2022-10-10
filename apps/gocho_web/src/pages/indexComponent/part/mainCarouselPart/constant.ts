@@ -14,7 +14,7 @@ export const carouselArr = [
     iconImage: checkIconImage,
     backgroundColor: "#121012",
     buttonObj: {
-      target: "_self",
+      target: "_self" as const,
       text: "자세히보기",
       color: "#fff",
       backgroundColor: "#333",
@@ -42,10 +42,10 @@ export const carouselArr = [
     iconImage: checkIconImage,
     backgroundColor: "#fbc540",
     buttonObj: {
-      target: "_blank",
+      target: "_blank" as const,
       text: "오픈카톡 바로가기",
       color: "#fff",
-      backgroundColor: "#fbc540",
+      backgroundColor: "#333",
       url: "https://open.kakao.com/o/gxquBCud",
     },
   },

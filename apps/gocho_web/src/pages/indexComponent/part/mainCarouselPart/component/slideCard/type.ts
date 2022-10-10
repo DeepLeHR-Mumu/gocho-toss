@@ -11,7 +11,7 @@ export interface SlideCardProps {
     iconImage?: StaticImageData;
     backgroundColor: string;
     buttonObj: {
-      target: string;
+      target: "_self" | "_blank";
       text: string;
       color: string;
       backgroundColor: string;

@@ -63,7 +63,7 @@ const UnifiedSearch: NextPage = () => {
             {searchMenuButtonArr.map((menuText) => {
               const isActive = menuText === menu;
               return (
-                <li css={menuElement}>
+                <li css={menuElement} key={menuText}>
                   <button
                     css={menuButton(isActive)}
                     type="button"
