@@ -25,21 +25,27 @@ export const dateCSS = css`
   color: ${COLORS.GRAY40};
 `;
 
-export const bodyContainer = css`
-  display: flex;
-  align-items: flex-end;
-  position: relative;
-  margin-bottom: 2rem;
+interface BodyContainerDef {
+  (isSameUserNickname: boolean): SerializedStyles;
+}
 
-  ::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-left: 1rem solid ${COLORS.GRAY100};
-    border-top: 1rem solid transparent;
-  }
-`;
+export const bodyContainer: BodyContainerDef = (isSameUserNickname) => {
+  return css`
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    margin-bottom: 2rem;
+
+    ::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-left: 1rem solid ${isSameUserNickname ? COLORS.BLUE_SECOND70 : COLORS.GRAY100};
+      border-top: 1rem solid transparent;
+    }
+  `;
+};
 
 interface BodyWrapperDef {
   (isSameUserNickname: boolean): SerializedStyles;

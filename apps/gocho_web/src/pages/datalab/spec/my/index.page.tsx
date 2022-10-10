@@ -35,6 +35,10 @@ export const MySpecHistory: NextPage = () => {
     };
   }, [error, closeModal, setCurrentModal]);
 
+  useEffect(() => {
+    setActiveCardIndex(null);
+  }, [currentPage]);
+
   if (!mySpecHistoryData || isLoading) {
     return (
       <div css={wrapper}>
@@ -98,12 +102,7 @@ export const MySpecHistory: NextPage = () => {
                 })}
               </div>
 
-              <Pagination
-                totalPage={totalPage}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                setActiveCardIndex={setActiveCardIndex}
-              />
+              <Pagination totalPage={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
             </article>
           </div>
         </section>

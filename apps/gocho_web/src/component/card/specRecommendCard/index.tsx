@@ -65,12 +65,12 @@ export const SpecRecommendCard: FunctionComponent<SpecRecommendCardProps | Skele
           <p css={gradeCSSTitle}>
             {pointType}
             <span css={gradeCSS}>
-              {specData.lastEducation === "고졸" && `${grade}등급`}
+              {specData.lastEducation === "고졸" && `${String(grade).slice(0, 1)}등급`}
 
               <span css={maxGradeCSS}>
                 {specData.lastEducation === "초대졸" && (
                   <>
-                    <strong css={strongCSS}>{grade}</strong> / {specData.college?.maxGrade.toFixed(1)}
+                    <strong css={strongCSS}>{grade?.toFixed(1)}</strong> / {specData.college?.maxGrade.toFixed(1)}
                   </>
                 )}
               </span>
@@ -80,16 +80,36 @@ export const SpecRecommendCard: FunctionComponent<SpecRecommendCardProps | Skele
 
         <ul css={attendance}>
           <li css={infoTitle}>
-            무단 결석 <span css={info}>{specData.highschool.absent}</span>
+            무단 결석
+            <span css={info}>
+              {String(specData.highschool.absent).length >= 2
+                ? `${String(specData.highschool.absent).slice(0, 1)}..`
+                : specData.highschool.absent}
+            </span>
           </li>
           <li css={infoTitle}>
-            무단 조퇴 <span css={info}>{specData.highschool.leaveEarly}</span>
+            무단 조퇴
+            <span css={info}>
+              {String(specData.highschool.leaveEarly).length >= 2
+                ? `${String(specData.highschool.leaveEarly).slice(0, 1)}..`
+                : specData.highschool.leaveEarly}
+            </span>
           </li>
           <li css={infoTitle}>
-            무단 결과 <span css={info}>{specData.highschool.classMiss}</span>
+            무단 결과
+            <span css={info}>
+              {String(specData.highschool.classMiss).length >= 2
+                ? `${String(specData.highschool.classMiss).slice(0, 1)}..`
+                : specData.highschool.classMiss}
+            </span>
           </li>
           <li css={infoTitle}>
-            무단 지각 <span css={info}>{specData.highschool.tardy}</span>
+            무단 지각
+            <span css={info}>
+              {String(specData.highschool.tardy).length >= 2
+                ? `${String(specData.highschool.tardy).slice(0, 1)}..`
+                : specData.highschool.tardy}
+            </span>
           </li>
         </ul>
         <ul css={certi}>

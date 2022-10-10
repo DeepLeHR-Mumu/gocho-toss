@@ -29,9 +29,15 @@ export const langContainer = css`
 `;
 
 export const removeButton = css`
-  position: absolute;
-  right: 2rem;
-  top: 1rem;
+  height: 3rem;
+  width: 3rem;
+  border: 1px solid ${COLORS.GRAY60};
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${COLORS.GRAY90};
+  border-radius: 50%;
   color: ${COLORS.GRAY60};
 `;
 

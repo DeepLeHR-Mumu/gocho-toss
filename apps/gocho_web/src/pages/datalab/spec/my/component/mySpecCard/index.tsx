@@ -6,6 +6,7 @@ import { SPEC_DETAIL_URL } from "shared-constant/internalURL";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { useDeleteMySpec } from "shared-api/spec";
 import { mySpecHistoryKeyObj } from "shared-constant/queryKeyFactory/spec/userHistoryKeyObj";
+import { useToast } from "@recoil/hook/toast";
 
 import { MySpecCardProps } from "./type";
 import {
@@ -23,6 +24,7 @@ import {
 
 export const MySpecCard: FunctionComponent<MySpecCardProps> = ({ mySpecData }) => {
   const queryClient = useQueryClient();
+  const { setCurrentToast } = useToast();
   const { mutate } = useDeleteMySpec();
 
   const mySpecDelete = (specId: number) => {
@@ -30,6 +32,7 @@ export const MySpecCard: FunctionComponent<MySpecCardProps> = ({ mySpecData }) =
       { id: specId },
       {
         onSuccess: () => {
+          setCurrentToast("스펙이 삭제되었습니다.");
           queryClient.invalidateQueries(mySpecHistoryKeyObj.all);
         },
       }

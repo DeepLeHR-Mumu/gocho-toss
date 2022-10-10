@@ -49,7 +49,7 @@ export const ListPart: FunctionComponent = () => {
         <InvisibleH2 title="생산/기능직 취업 꿀팁" />
         <p css={title}>
           고수들의 🍯취업꿀팁
-          <span css={weightPoint}>by.고초대졸 닷컴</span>
+          <span css={weightPoint}> by.고초대졸 닷컴</span>
         </p>
         <div css={mainContainer}>
           <div css={buttonArrContainer}>

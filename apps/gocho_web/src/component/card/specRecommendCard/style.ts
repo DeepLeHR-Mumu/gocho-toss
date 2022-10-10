@@ -117,6 +117,7 @@ export const infoTitle = css`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  white-space: nowrap;
 `;
 
 export const info = css`

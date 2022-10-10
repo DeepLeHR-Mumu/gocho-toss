@@ -81,9 +81,11 @@ export const Spec7Lang: FunctionComponent<Spec7LangProps> = ({ moveNextCard, mov
                     onClick={() => {
                       return remove(index);
                     }}
+                    aria-label="어학 추가 제거"
                   >
                     <FiX />
                   </button>
+
                   <div css={errorBox}>
                     {errors.language?.[index]?.language?.message && (
                       <WarningText msg={errors.language?.[index]?.language?.message} />

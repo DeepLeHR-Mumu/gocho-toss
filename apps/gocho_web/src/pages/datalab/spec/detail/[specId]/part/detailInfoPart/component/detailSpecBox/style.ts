@@ -24,7 +24,7 @@ export const wrapper: WrapperDef = (wide) => {
 export const specStrCSS = css`
   color: ${COLORS.GRAY10};
   font-weight: 400;
-  word-break: keep-all;
+  word-break: break-all;
   font-size: 0.875rem;
   line-height: 1.8;
 `;
