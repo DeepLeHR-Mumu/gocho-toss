@@ -13,6 +13,7 @@ export const menuArr = [
   {
     menuTitle: "채용공고",
     mainUrl: "jd",
+    menuLink: JOBS_LIST_URL,
     subMenuArr: [
       {
         pageQuery: true,
@@ -31,6 +32,7 @@ export const menuArr = [
   {
     menuTitle: "커뮤니티",
     mainUrl: "community",
+    menuLink: COMMUNITY_POSTINGS_LIST_URL,
     subMenuArr: [
       {
         pageQuery: false,
@@ -52,6 +54,7 @@ export const menuArr = [
   {
     menuTitle: "dataLab",
     mainUrl: "datalab",
+    menuLink: SPEC_URL,
     subMenuArr: [
       {
         pageQuery: false,

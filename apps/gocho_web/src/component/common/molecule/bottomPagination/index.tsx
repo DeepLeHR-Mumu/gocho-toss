@@ -6,7 +6,7 @@ import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { BottomPaginationProps } from "./type";
 import { paginationContainer, movePageButton, paginationBox, paginationButton } from "./style";
 
-export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ q, linkObj, totalPage }) => {
+export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ linkObj, totalPage }) => {
   const router = useRouter();
   const currentPageNumber = Number(router.query.page);
   const count = Math.floor(currentPageNumber / 10);
@@ -25,8 +25,7 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ q, 
           router.push({
             pathname: linkObj.pathname,
             query: {
-              q,
-              order: linkObj?.query?.order,
+              ...router.query,
               page: 1,
             },
           });
@@ -44,8 +43,7 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ q, 
           router.push({
             pathname: linkObj.pathname,
             query: {
-              q,
-              order: linkObj?.query?.order,
+              ...router.query,
               page: currentPageNumber - 1,
             },
           });
@@ -69,8 +67,7 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ q, 
                     router.push({
                       pathname: linkObj.pathname,
                       query: {
-                        q,
-                        order: linkObj?.query?.order,
+                        ...router.query,
                         page: pageIndex,
                       },
                     });
@@ -93,8 +90,7 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ q, 
           router.push({
             pathname: linkObj.pathname,
             query: {
-              q,
-              order: linkObj?.query?.order,
+              ...router.query,
               page: currentPageNumber + 1,
             },
           });
@@ -111,8 +107,7 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ q, 
           router.push({
             pathname: linkObj.pathname,
             query: {
-              q,
-              order: linkObj?.query?.order,
+              ...router.query,
               page: totalPage,
             },
           });

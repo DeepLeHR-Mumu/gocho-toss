@@ -128,9 +128,6 @@ export const PasswordEditBox: FunctionComponent = () => {
         </div>
 
         <NormalButton text="변경하기" isSubmit wide variant="outlined" />
-        {/* <button type="submit" css={submitButton}>
-          확인
-        </button> */}
       </form>
     </div>
   );

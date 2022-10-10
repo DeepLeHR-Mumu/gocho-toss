@@ -15,7 +15,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({ linkObj, totalP
       <Link
         href={{
           pathname: linkObj.pathname,
-          query: { page: currentPageNumber > 1 ? currentPageNumber - 1 : 1, order: linkObj.query.order },
+          query: { ...query, page: currentPageNumber > 1 ? currentPageNumber - 1 : 1 },
         }}
         passHref
       >
@@ -28,8 +28,8 @@ export const Pagination: FunctionComponent<PaginationProps> = ({ linkObj, totalP
         href={{
           pathname: linkObj.pathname,
           query: {
+            ...query,
             page: currentPageNumber !== totalPage ? currentPageNumber + 1 : totalPage,
-            order: linkObj.query.order,
           },
         }}
         passHref

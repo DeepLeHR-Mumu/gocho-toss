@@ -20,7 +20,7 @@ export const CompanyListPart: FunctionComponent<CompanyListPartProps> = ({
     <section>
       <p css={title}>기업 정보 🏢</p>
       <CompanyCardList companyDataArr={companyDataArr} isLoading={isLoading} />
-      <BottomPagination totalPage={totalPage} q={router.query.q} linkObj={{ pathname: "/search", query: {} }} />
+      <BottomPagination totalPage={totalPage} linkObj={{ pathname: "/search", q: router.query.q as string }} />
     </section>
   );
 };
