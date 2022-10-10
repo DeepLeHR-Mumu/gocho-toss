@@ -32,6 +32,7 @@ module.exports = {
         devDependencies: true,
       },
     ],
+    "react/jsx-key": "error",
     "import/extensions": ["off"],
     "import/prefer-default-export": "off",
     "jsx-a11y/anchor-is-valid": [

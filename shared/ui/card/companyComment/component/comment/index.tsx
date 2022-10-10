@@ -31,7 +31,7 @@ export const Comment: FunctionComponent<CommentProps> = ({ nickname, commentData
         <p css={dateCSS}>{`${year}/${month}/${date}`}</p>
       </div>
 
-      <div css={bodyContainer}>
+      <div css={bodyContainer(Boolean(nickname === commentData.nickname))}>
         <div css={bodyWrapper(Boolean(nickname === commentData.nickname))}>
           <p css={locationCSS}>{commentData.title || "기업 정보"}</p>
           <p css={bodyCSS}>{commentData.description}</p>

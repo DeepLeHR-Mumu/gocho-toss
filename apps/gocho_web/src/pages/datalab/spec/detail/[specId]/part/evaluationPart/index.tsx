@@ -2,13 +2,16 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FiChevronDown } from "react-icons/fi";
 import { useRouter } from "next/router";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { useEvalSpec } from "shared-api/spec/useEvalSpec";
 import { NormalButton } from "shared-ui/common/atom/button";
+import { specDetailKeyObj } from "shared-constant/queryKeyFactory/spec/detailKeyObj";
 
+import { useToast } from "@recoil/hook/toast";
 import { StarEvaluation } from "@component/common/molecule/starEvaluation";
-import { EvalPointBox } from "./component/evalPointBox";
 
+import { EvalPointBox } from "./component/evalPointBox";
 import { SelectBox } from "./component/selectBox";
 import {
   title,
@@ -36,10 +39,12 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
   const { specId } = router.query;
   const [specScore, setSpecScore] = useState(0);
   const [currentDidEval, setCurrentDidEval] = useState<boolean>(didEval);
-  const [isStrongSelectBox, setIsStrongSelectBox] = useState(false);
-  const [isWeakSelectBox, setIsWeakSelectBox] = useState(false);
+  const [openedSelectBox, setOpenedSelectBox] = useState<"strongPoint" | "weakPoint" | null>(null);
 
+  const queryClient = useQueryClient();
   const { mutate } = useEvalSpec();
+  const { setCurrentToast } = useToast();
+
   const {
     register,
     handleSubmit,
@@ -77,6 +82,8 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
       {
         onSuccess: () => {
           setCurrentDidEval(true);
+          queryClient.invalidateQueries(specDetailKeyObj.spec({ specId: Number(specId) }));
+          setCurrentToast("평가를 완료하였습니다.");
         },
       }
     );
@@ -133,21 +140,21 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
           <div css={buttonContainer}>
             <button
               type="button"
-              css={listBox(isStrongSelectBox)}
+              css={listBox(openedSelectBox === "strongPoint")}
               onClick={() => {
-                return setIsStrongSelectBox(true);
+                return setOpenedSelectBox("strongPoint");
               }}
-              aria-label={isStrongSelectBox ? "장점 목록 닫기" : "장점 목록 열기"}
+              aria-label={openedSelectBox === "strongPoint" ? "장점 목록 닫기" : "장점 목록 열기"}
             >
               최대 3개
               <FiChevronDown />
             </button>
 
-            {isStrongSelectBox && (
+            {openedSelectBox === "strongPoint" && (
               <SelectBox
                 register={register}
                 closeFunction={() => {
-                  setIsStrongSelectBox(false);
+                  setOpenedSelectBox(null);
                 }}
                 valueName="strength"
                 watchArr={strengthWatch}
@@ -156,7 +163,7 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
             )}
 
             {strengthWatch.length === 0 && <p css={notSelectedBox}>강점이 무엇인가요?</p>}
-            {!isStrongSelectBox &&
+            {openedSelectBox === null &&
               strengthWatch?.map((strength) => {
                 return (
                   <EvalPointBox
@@ -178,20 +185,20 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
           </div>
           <div css={buttonContainer}>
             <button
-              css={listBox(isWeakSelectBox)}
+              css={listBox(openedSelectBox === "weakPoint")}
               type="button"
               onClick={() => {
-                return setIsWeakSelectBox(true);
+                setOpenedSelectBox("weakPoint");
               }}
             >
               최대 3개
               <FiChevronDown />
             </button>
-            {isWeakSelectBox && (
+            {openedSelectBox === "weakPoint" && (
               <SelectBox
                 register={register}
                 closeFunction={() => {
-                  setIsWeakSelectBox(false);
+                  setOpenedSelectBox(null);
                 }}
                 valueName="weakness"
                 watchArr={weakWatch}
@@ -199,7 +206,7 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
               />
             )}
             {weakWatch.length === 0 && <p css={notSelectedBox}>약점이 무엇인가요?</p>}
-            {!isWeakSelectBox &&
+            {openedSelectBox === null &&
               weakWatch?.map((weakness) => {
                 return (
                   <EvalPointBox
@@ -218,7 +225,12 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
           <div css={titleContainer}>
             <strong css={strongTitle}>기타 피드백(선택)</strong>
           </div>
-          <textarea css={feedBackContainer} maxLength={100} {...register("feedback", { maxLength: 100 })} />
+          <textarea
+            css={feedBackContainer}
+            maxLength={100}
+            placeholder="최대 100자"
+            {...register("feedback", { maxLength: 100 })}
+          />
         </section>
 
         <section css={pointContainer}>

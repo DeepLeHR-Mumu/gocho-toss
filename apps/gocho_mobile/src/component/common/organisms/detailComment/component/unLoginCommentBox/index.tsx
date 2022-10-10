@@ -28,9 +28,9 @@ export const UnLoginCommentBox: FunctionComponent = () => {
     <div>
       <section css={commentContainerBlur}>
         <ul>
-          {dummyArrCreator(3).map(() => {
+          {dummyArrCreator(3).map((value) => {
             return (
-              <div>
+              <div key={value}>
                 <li>
                   <div css={commentHeader}>
                     <p css={nicknameCSS}>유저닉네임</p>

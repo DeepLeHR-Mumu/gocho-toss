@@ -83,7 +83,7 @@ export const BasicInfoPart: FunctionComponent = () => {
                 </div>
                 {companyDetailData.data.factoryArr.map((factory) => {
                   return (
-                    <div css={factoryBox}>
+                    <div css={factoryBox} key={factory.id}>
                       <p css={factoryText}>{factory.name}</p>
                     </div>
                   );

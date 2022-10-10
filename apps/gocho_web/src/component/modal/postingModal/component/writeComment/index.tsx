@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, KeyboardEvent } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { AiOutlineSend } from "react-icons/ai";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -39,6 +39,15 @@ export const WriteComment: FunctionComponent<WriteCommentProps> = ({ postingId, 
     });
   };
 
+  const enterSubmit = (changeEvent: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (changeEvent.key === "Enter" && changeEvent.shiftKey) {
+      return;
+    }
+    if (changeEvent.key === "Enter") {
+      changeEvent.preventDefault();
+      handleSubmit(commentSubmit)();
+    }
+  };
   return (
     <form css={formCSS} onSubmit={handleSubmit(commentSubmit)}>
       <div css={writeCommentWrapper}>
@@ -49,6 +58,7 @@ export const WriteComment: FunctionComponent<WriteCommentProps> = ({ postingId, 
           css={writeCommentBox}
           maxRows={5}
           placeholder="댓글을 입력하시겠어요?"
+          onKeyDown={enterSubmit}
         />
         <button type="submit" css={postCommentButton} aria-label="댓글입력">
           <AiOutlineSend />

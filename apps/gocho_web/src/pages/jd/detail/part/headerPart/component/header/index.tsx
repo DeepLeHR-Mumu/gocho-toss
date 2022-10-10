@@ -125,8 +125,16 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId }
               {endYear !== 9999 && `${endYear}. ${endMonth}. ${endDate}`}
             </p>
           </li>
-        </ul>
-        <p css={companyNameCSS}>{jobDetailData.company.name}</p>
+        </ul>{" "}
+        <Link
+          href={{
+            pathname: `${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`,
+            query: { info: "detail" },
+          }}
+          passHref
+        >
+          <a css={companyNameCSS}>{jobDetailData.company.name}</a>
+        </Link>
         <p css={titleCSS}>{jobDetailData.title}</p>
         <ul css={linksCSS}>
           <li>
