@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 
@@ -13,6 +13,7 @@ import { ModalComponent } from "@component/modal/modalBackground";
 import { useModal } from "@recoil/hook/modal";
 import { CloseButton } from "@component/common/atom/closeButton";
 import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
+import { useToast } from "@recoil/hook/toast";
 
 import { wrapper, desc, formCSS, closeBtn, formArr, logoContainer, sideErrorMsg } from "./style";
 import { SignUpFormValues } from "./type";
@@ -23,12 +24,14 @@ export const SignUpBox: FunctionComponent = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, dirtyFields },
   } = useForm<SignUpFormValues>({ mode: "onChange" });
 
   const { refetch } = useUserInfo();
   const { closeModal } = useModal();
   const { mutate } = useDoSignUp();
+  const { setCurrentToast } = useToast();
 
   const signUpSubmit: SubmitHandler<SignUpFormValues> = (signUpObj) => {
     mutate(signUpObj, {
@@ -37,12 +40,17 @@ export const SignUpBox: FunctionComponent = () => {
         setErrorMsg(errorResponse.error.errorMessage);
       },
       onSuccess: (response) => {
+        setCurrentToast("님 환영합니다.", watch("nickname"));
         localStorage.setItem("token", `${response?.data.token}`);
         refetch();
         closeModal();
       },
     });
   };
+
+  useEffect(() => {
+    setErrorMsg(undefined);
+  }, [closeModal]);
 
   return (
     <div css={wrapper}>
@@ -80,8 +88,7 @@ export const SignUpBox: FunctionComponent = () => {
                 maxLength: { value: 20, message: PWD_ERROR_MESSAGE.MIN_MAX },
                 pattern: {
                   value: PWD_REGEXP,
-                  // TODO: 메시지 전달받기
-                  message: "비밀번호 달라요",
+                  message: PWD_ERROR_MESSAGE.NOT_SPACE,
                 },
               })}
               placeholder="비밀번호를 입력해주세요"

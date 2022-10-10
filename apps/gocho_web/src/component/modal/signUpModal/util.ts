@@ -16,6 +16,6 @@ export const validateNickname = (nickname: string) => {
   // 닉네임 한글 1~10자, 영문 및 숫자 2~20자
   if (nickLength < 4 || nickLength > 16) return "닉네임은 한글 2~8자, 영문 및 숫자 4~16자 입니다.";
   // 영어 한글 특수문자만 허용
-  if (!regex.test(nickname)) return "닉네임은 특수문자를 포함 할 수 없습니다.";
+  if (!regex.test(nickname)) return "닉네임은 특수문자와 자음, 모음만을 포함 할 수 없습니다.";
   return undefined;
 };

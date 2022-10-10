@@ -63,6 +63,7 @@ export const Header: FunctionComponent = () => {
 
   useEffect(() => {
     closeModal();
+    setIsUnifiedSearch(false);
   }, [closeModal, pathname]);
 
   const { isSuccess } = useUserInfo();

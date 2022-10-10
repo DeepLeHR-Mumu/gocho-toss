@@ -54,6 +54,7 @@ const UnifiedSearch: NextPage = () => {
     offset: (companyPage - 1) * companyLimit,
   });
 
+  const totalCount = (jobDataArr?.count || 0) + (companyDataArr?.count || 0);
   return (
     <main css={mainContainer}>
       <Layout>
@@ -81,7 +82,7 @@ const UnifiedSearch: NextPage = () => {
                       setMenu(menuText);
                     }}
                   >
-                    {menuText} {menuText === "전체" && (jobDataArr?.count || 0) + (companyDataArr?.count || 0)}
+                    {menuText} {menuText === "전체" && totalCount.toLocaleString("Ko-KR")}
                     {menuText === "공고" && jobDataArr?.count.toLocaleString("Ko-KR")}
                     {menuText === "기업" && companyDataArr?.count.toLocaleString("Ko-KR")}
                   </button>
