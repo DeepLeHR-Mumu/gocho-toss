@@ -71,7 +71,7 @@ export const WritePostingBox: FunctionComponent = () => {
             maxLength: 30,
           })}
           css={titleCSS}
-          placeholder="제목"
+          placeholder="제목(최대 30자)"
         />
         <textarea
           {...register("description", {

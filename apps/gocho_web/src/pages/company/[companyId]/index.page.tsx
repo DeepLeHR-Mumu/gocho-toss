@@ -45,6 +45,16 @@ const CompaniesDetail: NextPage = () => {
   const { mutate: addViewCount } = useAddCompanyViewCount();
 
   useEffect(() => {
+    if (info) {
+      return;
+    }
+    router.replace({
+      pathname: `${COMPANY_DETAIL_URL}/${companyId}`,
+      query: { info: "detail" },
+    });
+  }, [companyId, info, router]);
+
+  useEffect(() => {
     // TODO string으로 가져오기
     const companyViewStr = sessionStorage.getItem("companyViewArr");
 

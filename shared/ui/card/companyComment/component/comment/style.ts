@@ -25,11 +25,7 @@ export const dateCSS = css`
   color: ${COLORS.GRAY40};
 `;
 
-interface BodyContainerDef {
-  (isSameUserNickname: boolean): SerializedStyles;
-}
-
-export const bodyContainer: BodyContainerDef = (isSameUserNickname) => {
+export const bodyContainer = (isSameUserNickname: boolean) => {
   return css`
     display: flex;
     align-items: flex-end;
