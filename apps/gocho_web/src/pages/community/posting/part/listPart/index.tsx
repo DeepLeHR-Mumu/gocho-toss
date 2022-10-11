@@ -65,7 +65,10 @@ export const ListPart: FunctionComponent = () => {
   };
 
   const changePostingHashtag = (filter: HashtagDef) => {
-    if (filter === activeButtonHashtag) changeHashtag("recent");
+    if (filter === activeButtonHashtag) {
+      changeHashtag("recent");
+      return;
+    }
     changeHashtag(filter);
   };
 
@@ -125,7 +128,7 @@ export const ListPart: FunctionComponent = () => {
                     key={button.text}
                     css={setPostingHashtagButton(button.hashtag === activeButtonHashtag)}
                     onClick={() => {
-                      return changePostingHashtag(button.hashtag);
+                      changePostingHashtag(button.hashtag);
                     }}
                   >
                     #{button.text}

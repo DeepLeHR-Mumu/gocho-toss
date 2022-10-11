@@ -8,6 +8,7 @@ import { useWritePosting } from "shared-api/community/useWritePosting";
 import { communityPostingArrKeyObj } from "shared-constant/queryKeyFactory/community/postingArrKeyObj";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
+import { useToast } from "@recoil/hook/toast";
 import { CloseButton } from "@component/common/atom/closeButton";
 import { ModalComponent } from "@component/modal/modalBackground";
 import { useModal } from "@recoil/hook/modal";
@@ -29,15 +30,15 @@ import {
 } from "./style";
 
 export const WritePostingBox: FunctionComponent = () => {
+  const queryClient = useQueryClient();
+  const { mutate } = useWritePosting();
+  const { data: userInfoData } = useUserInfo();
+  const { closeModal } = useModal();
+  const { setCurrentToast } = useToast();
   const [activeButtonIndex, setActiveButtonIndex] = useState(0);
   const changeIndex = (newId: number) => {
     setActiveButtonIndex(newId);
   };
-
-  const { mutate } = useWritePosting();
-  const { data: userInfoData } = useUserInfo();
-  const { closeModal } = useModal();
-  const queryClient = useQueryClient();
 
   const { register, handleSubmit, setValue } = useForm<PostingFormValues>({
     defaultValues: {
@@ -49,6 +50,7 @@ export const WritePostingBox: FunctionComponent = () => {
     mutate(postingObj, {
       onSuccess: () => {
         closeModal();
+        setCurrentToast("게시글이 등록되었습니다.");
         queryClient.invalidateQueries(communityPostingArrKeyObj.all);
       },
     });
