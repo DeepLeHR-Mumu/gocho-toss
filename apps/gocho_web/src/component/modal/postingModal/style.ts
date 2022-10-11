@@ -122,6 +122,8 @@ export const infoBox = css`
   > li {
     margin: 0 1rem;
 
+    display: flex;
+    justify-content: center;
     :first-of-type {
       margin-left: 0;
     }

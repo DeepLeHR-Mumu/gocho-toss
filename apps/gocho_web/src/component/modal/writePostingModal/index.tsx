@@ -9,6 +9,7 @@ import { useWritePosting } from "shared-api/community/useWritePosting";
 import { communityPostingArrKeyObj } from "shared-constant/queryKeyFactory/community/postingArrKeyObj";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
+import { useToast } from "@recoil/hook/toast";
 import { CloseButton } from "@component/common/atom/closeButton";
 import { ModalComponent } from "@component/modal/modalBackground";
 import { useModal } from "@recoil/hook/modal";
@@ -37,7 +38,7 @@ export const WritePostingBox: FunctionComponent<WritePostingBoxProps> = ({ title
   const changeIndex = (newId: number) => {
     setActiveButtonIndex(newId);
   };
-
+  const { setCurrentToast } = useToast();
   const { mutate } = useWritePosting();
   const { data: userInfoData } = useUserInfo();
   const { closeModal, setCurrentModal } = useModal();
@@ -53,6 +54,7 @@ export const WritePostingBox: FunctionComponent<WritePostingBoxProps> = ({ title
     mutate(postingObj, {
       onSuccess: () => {
         closeModal();
+        setCurrentToast("게시글이 등록되었습니다.");
         queryClient.invalidateQueries(communityPostingArrKeyObj.all);
       },
     });

@@ -1,6 +1,15 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
+export const backgroundCloseButton = css`
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  `;
+
 export const wrapper = css`
   position: absolute;
   background-color: ${COLORS.GRAY100};
