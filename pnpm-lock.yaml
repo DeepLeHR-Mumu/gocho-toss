@@ -197,6 +197,7 @@ importers:
       postcss-loader: ^7.0.1
       react: 17.0.2
       react-dom: 17.0.2
+      react-ga4: ^1.4.1
       react-hook-form: ^7.34.2
       react-icons: ^4.4.0
       react-slick: ^0.29.0
@@ -204,6 +205,7 @@ importers:
       recoil: ^0.7.5
       shared-api: workspace:^0.0.0
       shared-constant: workspace:^0.0.0
+      shared-ga: workspace:^0.0.0
       shared-image: workspace:^0.0.0
       shared-style: workspace:^0.0.0
       shared-type: workspace:^0.0.0
@@ -227,6 +229,7 @@ importers:
       next-transpile-modules: 9.0.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
+      react-ga4: 1.4.1
       react-hook-form: 7.35.0_react@17.0.2
       react-icons: 4.4.0_react@17.0.2
       react-slick: 0.29.0_sfoxds7t5ydpegc3knd667wn6m
@@ -234,6 +237,7 @@ importers:
       recoil: 0.7.5_sfoxds7t5ydpegc3knd667wn6m
       shared-api: link:../../shared/api
       shared-constant: link:../../shared/constant
+      shared-ga: link:../../shared/ga
       shared-image: link:../../shared/image
       shared-style: link:../../shared/style
       shared-type: link:../../shared/type
@@ -329,6 +333,21 @@ importers:
       eslint-config-deeple: workspace:^1.0.0
       tsconfig-deeple: workspace:^0.0.0
       typescript: 4.7.2
+    devDependencies:
+      eslint-config-deeple: link:../../packages/eslint-config-deeple
+      tsconfig-deeple: link:../../packages/tsconfig-deeple
+      typescript: 4.7.2
+
+  shared/ga:
+    specifiers:
+      eslint-config-deeple: workspace:^1.0.0
+      react-ga4: ^1.4.1
+      shared-constant: workspace:^0.0.0
+      tsconfig-deeple: workspace:^0.0.0
+      typescript: 4.7.2
+    dependencies:
+      react-ga4: 1.4.1
+      shared-constant: link:../constant
     devDependencies:
       eslint-config-deeple: link:../../packages/eslint-config-deeple
       tsconfig-deeple: link:../../packages/tsconfig-deeple
@@ -11293,6 +11312,10 @@ packages:
       react-dom: 17.0.2_react@17.0.2
       react-is: 17.0.2
     dev: true
+
+  /react-ga4/1.4.1:
+    resolution: {integrity: sha512-ioBMEIxd4ePw4YtaloTUgqhQGqz5ebDdC4slEpLgy2sLx1LuZBC9iYCwDymTXzcntw6K1dHX183ulP32nNdG7w==}
+    dev: false
 
   /react-hook-form/7.35.0_react@17.0.2:
     resolution: {integrity: sha512-9CYdOed+Itbiu5VMVxW0PK9mBR3f0gDGJcZEyUSm0eJbDymQ913TRs2gHcQZZmfTC+rtxyDFRuelMxx/+xwMcw==}

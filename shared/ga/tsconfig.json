@@ -1,0 +1,5 @@
+{
+  "extends": "tsconfig-deeple/nextjs.json",
+  "compilerOptions": {},
+  "exclude": ["node_modules"]
+}
