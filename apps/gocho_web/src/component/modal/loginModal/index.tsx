@@ -84,6 +84,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   }, []);
   return (
     <div css={wrapper}>
+      &#ud83d;
       <div css={closeBtn}>
         {button === "home" ? <CloseButton size="S" isHome /> : <CloseButton size="S" buttonClick={closeModal} />}
       </div>

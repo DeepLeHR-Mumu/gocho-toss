@@ -175,32 +175,41 @@ export const setPostingHashtagButton = (active = false) => {
     color: ${COLORS.GRAY10};
 
     &:nth-of-type(1) {
-      background-color: #ebe3ff;
-    }
-
-    &:nth-of-type(2) {
-      background-color: #deffcf;
-    }
-
-    &:nth-of-type(3) {
-      background-color: #ffe3fc;
-    }
-
-    ${PC_HOVER} {
-      &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 2px 2px 0 #00000040;
+      ${active
+        ? css`
+            border: 1px solid rgba(43, 43, 43, 0.5);
+            background-color: #7fc061;
+          `
+        : css`
+            border: 1px solid #cbc3df;
+            background-color: #b2cca5;
+          `}
+      ${PC_HOVER} {
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 2px 2px 0 #00000040;
+          background-color: #deffcf;
+        }
       }
     }
 
-    &:nth-of-type(1) {
-      border-color: ${active ? "#ebe3ff" : "#cbc3df"};
-      background-color: ${active ? "#ebe3ff" : "#cbc3df"};
-    }
-
     &:nth-of-type(2) {
-      border-color: ${active ? "#deffcf" : "#bedfaf"};
-      background-color: ${active ? "#deffcf" : "#bedfaf"};
+      ${active
+        ? css`
+            border: 1px solid rgba(43, 43, 43, 0.5);
+            background-color: #ffabf7;
+          `
+        : css`
+            border: 1px solid #cbc3df;
+            background-color: #e5cee3;
+          `}
+      ${PC_HOVER} {
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 2px 2px 0 #00000040;
+          background-color: #ffe3fc;
+        }
+      }
     }
 
     &:nth-of-type(3) {
