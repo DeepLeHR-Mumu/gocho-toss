@@ -5,6 +5,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import kakaoMono from "shared-image/global/sns/kakaoLogo.svg";
+import { LoginEvent } from "shared-ga/loginEvent";
 import { useDoLogin } from "shared-api/auth";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
 import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant/errorMessage";
@@ -77,6 +78,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   };
 
   useEffect(() => {
+    LoginEvent();
     if (window.Kakao.isInitialized()) {
       return;
     }

@@ -17,8 +17,11 @@ const KakaoLogin: NextPage = () => {
         { code: code as string },
         {
           onSuccess: (response) => {
-            localStorage.setItem("token", `${response.data.token}`);
+            if (response.data.result === "NEW_USER") {
+              return;
+            }
             queryClient.invalidateQueries();
+            localStorage.setItem("token", `${response.data.token}`);
             router.push("/");
           },
         }
