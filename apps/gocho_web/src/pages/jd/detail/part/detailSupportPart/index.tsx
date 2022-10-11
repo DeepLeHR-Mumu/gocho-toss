@@ -10,7 +10,16 @@ import { getJobTitleCreator } from "../common/util";
 import { NoDataDesc } from "../common/component/noDataDesc";
 import { getPossibleEduArr } from "./util";
 import { DetailSupportPartProps } from "./type";
-import { container, containerTitle, flexBox, flexBetweenBox, subTitle, desc, restPoint } from "../common/style";
+import {
+  container,
+  containerTitle,
+  flexBox,
+  flexBetweenBox,
+  subTitle,
+  desc,
+  restPoint,
+  subDesc,
+} from "../common/style";
 import {
   wrapper,
   logoImageBox,
@@ -75,9 +84,19 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
               <p css={desc}>
                 {freshPosition.requiredExp.type}
 
-                {freshPosition.requiredExp.maxYear >= 1 && ` ${freshPosition.requiredExp.maxYear}년 이상`}
-
-                {freshPosition.requiredExp.minYear >= 1 && ` ${freshPosition.requiredExp.minYear}년 이하`}
+                {freshPosition.requiredExp.type === "경력" && (
+                  <span css={subDesc}>
+                    {freshPosition.requiredExp.minYear >= 1 && ` ${freshPosition.requiredExp.minYear}년 이상`}
+                    {freshPosition.requiredExp.maxYear >= 1 && ` ${freshPosition.requiredExp.maxYear}년 이하`}
+                  </span>
+                )}
+                {freshPosition.requiredExp.type === "신입/경력" && (
+                  <span css={subDesc}>
+                    경력인 경우
+                    {freshPosition.requiredExp.minYear >= 1 && ` ${freshPosition.requiredExp.minYear}년 이상`}
+                    {freshPosition.requiredExp.maxYear >= 1 && ` ${freshPosition.requiredExp.maxYear}년 이하`}
+                  </span>
+                )}
               </p>
             </div>
           </div>

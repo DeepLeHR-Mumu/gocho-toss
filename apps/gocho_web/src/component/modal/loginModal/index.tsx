@@ -63,8 +63,8 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
         localStorage.setItem("token", `${response.data.token}`);
         queryClient.invalidateQueries();
         closeModal();
-        // LATER : response에 유저네임 추가요청??
-        setCurrentToast("님 반갑습니다.", "userName");
+        // LATER : 여유있을때 decode로 get
+        setCurrentToast("접속해주셔서 감사합니다.");
       },
     });
   };

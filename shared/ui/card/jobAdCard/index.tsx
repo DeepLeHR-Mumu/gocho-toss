@@ -41,7 +41,7 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
   return (
     <>
       <Link href={`${JOBS_DETAIL_URL}/${jobAdData.id}`} passHref>
-        <a css={cardWrapper(isMobile)}>
+        <a css={cardWrapper(isMobile)} target="_blank">
           <div css={mainContainer}>
             <div css={companyLogoWrapper}>
               <div css={companyLogoBox}>

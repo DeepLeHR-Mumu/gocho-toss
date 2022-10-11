@@ -5,6 +5,7 @@ import { AiOutlineLike, AiOutlineMessage, AiOutlineEye } from "react-icons/ai";
 import { dateConverter } from "shared-util/date";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
+import { useUserInfo } from "shared-api/auth";
 
 import {
   cardContainer,
@@ -29,6 +30,7 @@ export const PostingCard: FunctionComponent<PostingCardProps | PostingCardSkelet
   isSkeleton,
   modalOpen,
 }) => {
+  const { data: userInfoData } = useUserInfo();
   if (isSkeleton || postingData === undefined) {
     return (
       <div css={postingCardSkeleton}>
@@ -48,6 +50,8 @@ export const PostingCard: FunctionComponent<PostingCardProps | PostingCardSkelet
   const isHotViewPosting = isBetweenTwoWeek && postingData.view >= 100;
 
   const { year, month, date } = dateConverter(postingData.createdTime);
+
+  const hasMyPosting = userInfoData?.nickname === postingData.nickname;
   return (
     <button type="button" css={cardContainer} onClick={modalOpen}>
       <article>
@@ -83,7 +87,7 @@ export const PostingCard: FunctionComponent<PostingCardProps | PostingCardSkelet
             <div css={writerProfileImage}>
               <ProfileImg imageStr={postingData.image} size="S" />
             </div>
-            <p css={writerNickname}>{postingData.nickname}</p>
+            <p css={writerNickname(hasMyPosting)}>{postingData.nickname}</p>
           </div>
         </div>
       </article>

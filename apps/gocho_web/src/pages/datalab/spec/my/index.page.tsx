@@ -18,7 +18,7 @@ import { flexBox, title, wrapper, container, tableHead, cardBox } from "./style"
 export const MySpecHistory: NextPage = () => {
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const { setCurrentModal, closeModal } = useModal();
+  const { setCurrentModal, closeModal, currentModal } = useModal();
   const activeCardCount = 5;
 
   const { data: userInfoData, error } = useUserInfo();
@@ -30,10 +30,13 @@ export const MySpecHistory: NextPage = () => {
     if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
       setCurrentModal("loginModal", { button: "home" });
     }
+    if (currentModal?.activatedModal === "signUpModal") {
+      setCurrentModal("signUpModal");
+    }
     return () => {
       closeModal();
     };
-  }, [error, closeModal, setCurrentModal]);
+  }, [error, closeModal, setCurrentModal, currentModal?.activatedModal]);
 
   useEffect(() => {
     setActiveCardIndex(null);

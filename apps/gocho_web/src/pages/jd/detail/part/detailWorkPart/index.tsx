@@ -87,7 +87,7 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
             {freshPosition.factoryArr &&
               freshPosition.factoryArr.map((factory) => {
                 return (
-                  <p css={flexDesc} key={`공장_${factory.id}`}>
+                  <div css={flexDesc} key={`${factory.factoryName}_${factory.id}`}>
                     <button
                       css={factoryButton}
                       type="button"
@@ -96,11 +96,10 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
                       }}
                     >
                       <Image src={factoryIcon} alt="" objectFit="contain" />
-                      {/* LATER : 나중에 공장이름 나오면 바꿔주기 */}
-                      factoryName
+                      {factory.factoryName}
                     </button>
                     {factory.address}
-                  </p>
+                  </div>
                 );
               })}
           </div>

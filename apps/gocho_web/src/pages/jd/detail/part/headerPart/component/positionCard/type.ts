@@ -8,7 +8,7 @@ export interface PositionCardProps {
   position: {
     id: number;
     requiredExp: {
-      type: "신입" | "경력" | "무관";
+      type: "신입" | "경력" | "무관" | "신입/경력";
     };
     rotationArr: string[];
     placeArr: string[];
