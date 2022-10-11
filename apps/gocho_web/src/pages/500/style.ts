@@ -4,7 +4,7 @@ import { COLORS } from "shared-style/color";
 export const wrapper = css`
   background-color: ${COLORS.GRAY90};
   width: 100%;
-  height: 100vh;
+  height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;

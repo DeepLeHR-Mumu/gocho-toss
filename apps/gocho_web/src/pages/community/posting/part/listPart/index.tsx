@@ -49,7 +49,7 @@ export const ListPart: FunctionComponent = () => {
 
   const openWritePostingModal = () => {
     if (userError) return setCurrentModal("loginModal", { button: "close" });
-    return setCurrentModal("writePostingModal");
+    return setCurrentModal("writePostingModal", { title: "", description: "" });
   };
 
   const { register, reset, handleSubmit } = useForm<PostingValues>({});

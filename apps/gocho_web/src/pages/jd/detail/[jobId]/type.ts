@@ -21,7 +21,7 @@ export interface PositionObjDef {
   id: number;
   jdId: number;
   requiredExp: {
-    type: "신입" | "경력" | "무관";
+    type: "신입" | "경력" | "무관" | "신입/경력";
     maxYear: number;
     minYear: number;
   };

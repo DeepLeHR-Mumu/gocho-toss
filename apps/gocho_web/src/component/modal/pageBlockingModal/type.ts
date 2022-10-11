@@ -1,6 +1,8 @@
 export interface PageBlockingBoxProps {
-  urlObj: {
+  dataObj: {
     url: string;
+    text: string;
+    afterAction?(): void;
   };
   closeModal(): void;
 }

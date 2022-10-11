@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState, useEffect } from "react";
 import Link from "next/link";
 import { FiArrowLeft } from "react-icons/fi";
 import { BsFillBookmarkFill } from "react-icons/bs";
@@ -30,6 +30,8 @@ import {
 } from "./style";
 
 export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, userId, isDdayEnd }) => {
+  const [pageNumber, setPageNumber] = useState<number | undefined>(undefined);
+  const [pageOrder, setPageOrder] = useState<"recent" | "popular" | "view" | "end" | undefined>(undefined);
   const queryClient = useQueryClient();
   const { data: userInfoData } = useUserInfo();
 
@@ -83,6 +85,26 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, us
     );
   };
 
+  useEffect(() => {
+    const sessionJdOrder = sessionStorage.getItem("jdPageOrder");
+    const sessionJdNumber = sessionStorage.getItem("jdPageNumber");
+
+    if (sessionJdOrder !== "undefined") {
+      const beforePageOrder = JSON.parse(sessionJdOrder as string);
+      setPageOrder(beforePageOrder);
+    }
+
+    if (sessionJdNumber !== "undefined") {
+      const beforePageNumber = JSON.parse(sessionJdNumber as string);
+      setPageNumber(beforePageNumber);
+    }
+
+    return () => {
+      sessionStorage.removeItem("jdPageOrder");
+      sessionStorage.removeItem("jdPageNumber");
+    };
+  }, [setPageNumber, setPageOrder]);
+
   const isBookmarked = Boolean(
     userJobBookmarkArr?.some((job) => {
       return job.id === jobDetailData.id;
@@ -94,7 +116,13 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, us
       <Layout>
         <div css={flexBetweenBox}>
           <div css={flexBox}>
-            <Link href={JOBS_LIST_URL} passHref>
+            <Link
+              href={{
+                pathname: JOBS_LIST_URL,
+                query: { page: pageNumber || 1, order: pageOrder || "recent" },
+              }}
+              passHref
+            >
               <a css={goBackButton} aria-label="이전 페이지 이동">
                 <FiArrowLeft />
               </a>

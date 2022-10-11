@@ -21,3 +21,13 @@ export interface PostingFormValues {
   description: string;
   type: number;
 }
+
+export interface WritePostingBoxProps {
+  title: string;
+  description: string;
+}
+
+export interface PostingDataObjDef {
+  title: string;
+  description: string;
+}

@@ -86,7 +86,7 @@ export const MySpecCard: FunctionComponent<MySpecCardProps> = ({ mySpecData }) =
 
         <ul css={highschoolInfoCSS}>
           <li>
-            무단결석
+            무단결석{" "}
             <strong css={strongPoint}>
               {String(mySpecData.highschool.absent).length >= 2
                 ? `${String(mySpecData.highschool.absent).slice(0, 1)}..`
@@ -102,7 +102,7 @@ export const MySpecCard: FunctionComponent<MySpecCardProps> = ({ mySpecData }) =
             </strong>
           </li>
           <li>
-            무단조퇴
+            무단조퇴{" "}
             <strong css={strongPoint}>
               {String(mySpecData.highschool.leaveEarly).length >= 2
                 ? `${String(mySpecData.highschool.leaveEarly).slice(0, 1)}..`
@@ -110,7 +110,7 @@ export const MySpecCard: FunctionComponent<MySpecCardProps> = ({ mySpecData }) =
             </strong>
           </li>
           <li>
-            무단결과
+            무단결과{" "}
             <strong css={strongPoint}>
               {String(mySpecData.highschool.classMiss).length >= 2
                 ? `${String(mySpecData.highschool.classMiss).slice(0, 1)}..`

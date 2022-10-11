@@ -20,8 +20,7 @@ export const selector = (jobDetailObj: JobDetailObjDef) => {
           exists: factory.dormitory.exists,
           desc: factory.dormitory.desc,
         },
-        // LATER : 나중에 추가되면 변경하기
-        factoryName: "공장 이름",
+        factoryName: factory.name,
       };
     });
     return {

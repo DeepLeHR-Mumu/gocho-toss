@@ -1,4 +1,4 @@
-import { FunctionComponent, useRef, useEffect } from "react";
+import { FunctionComponent, useRef, useState, useEffect } from "react";
 import { AiOutlineSend } from "react-icons/ai";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -41,6 +41,7 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
   userData,
 }) => {
   const commentBoxRef = useRef<HTMLDivElement | null>(null);
+  const [textValue, setTextValue] = useState("");
   const { register, handleSubmit, setValue, watch } = useForm<CommentFormValues>({
     defaultValues: {
       companyId: companyData.id,
@@ -61,12 +62,13 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
   const { mutate: postFakeComment } = useFakeComment();
   const { mutate: postDisFakeComment } = useDisFakeComment();
 
-  const { mutate: postWriteCompanyComment } = useWriteCompanyComment();
+  const { mutate: postWriteCompanyComment, isSuccess } = useWriteCompanyComment();
   const queryClient = useQueryClient();
 
   const commentSubmit: SubmitHandler<CommentFormValues> = (commentObj) => {
     postWriteCompanyComment(commentObj, {
       onSuccess: () => {
+        setTextValue("");
         queryClient.invalidateQueries(companyCommentArrKeyObj.all);
       },
     });
@@ -116,10 +118,16 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
     );
   };
 
-  useEffect(() => {
+  const activeDownScroll = () => {
     const bottomHeight = commentBoxRef.current?.scrollHeight;
     commentBoxRef.current?.scrollTo(0, bottomHeight !== undefined ? bottomHeight : 0);
-  }, [jdId]);
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      activeDownScroll();
+    }, 100);
+  }, [jdId, isSuccess]);
 
   return (
     <div>
@@ -186,7 +194,25 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
           <UserBadge badge={userData.badge} />
         </div>
         <form css={formCSS} onSubmit={handleSubmit(commentSubmit)}>
-          <textarea css={textareaCSS} placeholder="댓글을 입력해주세요." {...register("description")} />
+          <textarea
+            css={textareaCSS}
+            placeholder="댓글을 입력해주세요."
+            value={textValue}
+            {...register("description")}
+            onChange={(changeEvent) => {
+              setTextValue(changeEvent.currentTarget.value);
+            }}
+            onKeyDown={(onKeyDownEvent) => {
+              if (onKeyDownEvent.key === "Enter") {
+                onKeyDownEvent.preventDefault();
+                commentSubmit({
+                  companyId: companyData.id,
+                  jdId,
+                  description: textValue,
+                });
+              }
+            }}
+          />
           <button type="submit" css={submitButton} aria-label="댓글 작성">
             <AiOutlineSend />
           </button>
