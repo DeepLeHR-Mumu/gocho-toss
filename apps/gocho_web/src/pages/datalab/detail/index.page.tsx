@@ -8,7 +8,7 @@ import { SPEC_URL } from "shared-constant/internalURL";
 
 import { buttonBox, catchphrase, errorWrapper, jobiImageContainer, logoContainer, title, wrapper } from "./style";
 
-const NoutFound: NextPage = () => {
+const NotFound: NextPage = () => {
   return (
     <main css={wrapper}>
       <article css={errorWrapper}>
@@ -34,4 +34,4 @@ const NoutFound: NextPage = () => {
   );
 };
 
-export default NoutFound;
+export default NotFound;

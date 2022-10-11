@@ -75,14 +75,14 @@ export const writerProfileImage = css`
   margin-right: -1.75rem;
 `;
 
-export const writerNickname = (hasMyPostion: boolean) => {
+export const writerNickname = (isMyPositing: boolean) => {
   return css`
     align-items: center;
     width: 8.5rem;
     height: 2rem;
     font-size: 0.75rem;
-    color: ${hasMyPostion ? COLORS.BLUE_FIRST40 : COLORS.GRAY10};
-    background-color: ${hasMyPostion ? COLORS.BLUE_SECOND40 : COLORS.GRAY90};
+    color: ${isMyPositing ? COLORS.BLUE_FIRST40 : COLORS.GRAY10};
+    background-color: ${isMyPositing ? COLORS.BLUE_SECOND40 : COLORS.GRAY90};
     padding: 0.5rem 0.5rem 0.5rem 2.25rem;
     border-radius: 1rem;
     display: block;
