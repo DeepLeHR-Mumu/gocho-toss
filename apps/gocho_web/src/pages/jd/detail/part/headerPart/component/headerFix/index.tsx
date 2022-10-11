@@ -9,8 +9,10 @@ import { JOBS_LIST_URL } from "shared-constant/internalURL";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { useUserInfo } from "shared-api/auth";
 import { useUserJobBookmarkArr, useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
+import { jdBookmarkEvent } from "shared-ga/jd";
 
 import { Layout } from "@component/layout";
+import { useModal } from "@recoil/hook/modal";
 
 import { HeaderFixProps } from "./type";
 import {
@@ -32,6 +34,7 @@ import {
 export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, userId, isDdayEnd }) => {
   const queryClient = useQueryClient();
   const { data: userInfoData } = useUserInfo();
+  const { setCurrentModal } = useModal();
 
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userInfoData?.id });
 
@@ -64,6 +67,7 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, us
         {
           onSuccess: () => {
             queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
+            jdBookmarkEvent(jobDetailData.id);
           },
         }
       );
@@ -109,6 +113,9 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, us
               type="button"
               css={bookmarkButton(isBookmarked)}
               onClick={() => {
+                if (!userInfoData) {
+                  setCurrentModal("loginModal", { button: "close" });
+                }
                 return isBookmarked ? deleteJobBookmark() : addJobBookmark();
               }}
               aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}

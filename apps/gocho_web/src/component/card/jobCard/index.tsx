@@ -17,6 +17,7 @@ import collegeFalse from "shared-image/global/common/cho_mono.svg";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 import { dateConverter } from "shared-util/date";
+import { jdBookmarkEvent } from "shared-ga/jd";
 
 import { dDayBooleanReturn } from "./util";
 import { JobCardProps, JobCardSkeleton } from "./type";
@@ -94,6 +95,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         {
           onSuccess: () => {
             queryClient.invalidateQueries(jobArrKeyObj.jobArr({}));
+            jdBookmarkEvent(jobData.id);
           },
         }
       );

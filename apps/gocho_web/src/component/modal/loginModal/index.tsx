@@ -1,11 +1,11 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import kakaoMono from "shared-image/global/sns/kakaoLogo.svg";
-import { LoginEvent } from "shared-ga/loginEvent";
+import { loginModalCloseEvent, loginModalOpenEvent, loginSuccessEvent } from "shared-ga/auth";
 import { useDoLogin } from "shared-api/auth";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
 import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant/errorMessage";
@@ -51,18 +51,21 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   const { setCurrentToast } = useToast();
   const { mutate } = useDoLogin();
   const { closeModal, setCurrentModal } = useModal();
-
   const [errorMsg, setErrorMsg] = useState<null | string>(null);
+  // const [errorCount, setErrorCount] = useState<number>(0);
+  const ref = useRef(0);
 
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     mutate(loginObj, {
       onError: (error) => {
         const errorResponse = error.response?.data as ErrorResponse;
         setErrorMsg(errorResponse.error.errorMessage);
+        ref.current += 1;
       },
       onSuccess: (response) => {
         localStorage.setItem("token", `${response.data.token}`);
         queryClient.invalidateQueries();
+        loginSuccessEvent();
         closeModal();
         // LATER : response에 유저네임 추가요청??
         setCurrentToast("님 반갑습니다.", "userName");
@@ -71,6 +74,10 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   };
   const mainURL = window.location.href;
 
+  const closeLoginModal = () => {
+    closeModal();
+  };
+
   const kakaoLogin = () => {
     window.Kakao.Auth.authorize({
       redirectUri: `${mainURL.substring(0, mainURL.indexOf("/", 7))}kakaologin`,
@@ -78,16 +85,23 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   };
 
   useEffect(() => {
-    LoginEvent();
+    loginModalOpenEvent();
     if (window.Kakao.isInitialized()) {
       return;
     }
     window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    return () => {
+      loginModalCloseEvent(ref.current);
+    };
+  }, []);
+
   return (
     <div css={wrapper}>
       <div css={closeBtn}>
-        {button === "home" ? <CloseButton size="S" isHome /> : <CloseButton size="S" buttonClick={closeModal} />}
+        {button === "home" ? <CloseButton size="S" isHome /> : <CloseButton size="S" buttonClick={closeLoginModal} />}
       </div>
       <div css={logoContainer}>
         <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" />

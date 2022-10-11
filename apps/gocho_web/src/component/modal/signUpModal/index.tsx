@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 
@@ -8,6 +8,7 @@ import { EMAIL_ERROR_MESSAGE, NICKNAME_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
+import { signupModalOpenEvent, signupModalCloseEvent, signupSuccessEvent } from "shared-ga/auth";
 
 import { ModalComponent } from "@component/modal/modalBackground";
 import { useModal } from "@recoil/hook/modal";
@@ -19,30 +20,40 @@ import { SignUpFormValues } from "./type";
 import { validateNickname } from "./util";
 
 export const SignUpBox: FunctionComponent = () => {
-  const [errorMsg, setErrorMsg] = useState<string | undefined>(undefined);
   const {
     register,
     handleSubmit,
     formState: { errors, dirtyFields },
   } = useForm<SignUpFormValues>({ mode: "onChange" });
-
   const { refetch } = useUserInfo();
   const { closeModal } = useModal();
   const { mutate } = useDoSignUp();
+
+  const [errorMsg, setErrorMsg] = useState<string | undefined>(undefined);
+  const signupAttempt = useRef(0);
 
   const signUpSubmit: SubmitHandler<SignUpFormValues> = (signUpObj) => {
     mutate(signUpObj, {
       onError: (error) => {
         const errorResponse = error.response?.data as ErrorResponse;
         setErrorMsg(errorResponse.error.errorMessage);
+        signupAttempt.current -= 1;
       },
       onSuccess: (response) => {
         localStorage.setItem("token", `${response?.data.token}`);
+        signupSuccessEvent();
         refetch();
         closeModal();
       },
     });
   };
+
+  useEffect(() => {
+    signupModalOpenEvent();
+    return () => {
+      signupModalCloseEvent(signupAttempt.current);
+    };
+  }, []);
 
   return (
     <div css={wrapper}>

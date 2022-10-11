@@ -5,8 +5,9 @@ import Link from "next/link";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 import { dateConverter } from "shared-util/date";
-import { SkeletonBox } from "../../common/atom/skeletonBox";
+import { jdAdClickEvent } from "shared-ga/jd";
 
+import { SkeletonBox } from "../../common/atom/skeletonBox";
 import { JobAdCardProps, JobAdCardSkeleton } from "./type";
 import {
   jobAdCardSkeleton,
@@ -27,6 +28,7 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
   isMobile,
 }) => {
   const [imageSrc, setImageSrc] = useState(jobAdData?.companyLogo as string);
+
   if (isSkeleton || jobAdData === undefined) {
     return (
       <div css={jobAdCardSkeleton}>
@@ -40,7 +42,13 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
 
   return (
     <>
-      <Link href={`${JOBS_DETAIL_URL}/${jobAdData.id}`} passHref>
+      <Link
+        href={`${JOBS_DETAIL_URL}/${jobAdData.id}`}
+        passHref
+        onClick={() => {
+          jdAdClickEvent(jobAdData.id);
+        }}
+      >
         <a css={cardWrapper(isMobile)}>
           <div css={mainContainer}>
             <div css={companyLogoWrapper}>

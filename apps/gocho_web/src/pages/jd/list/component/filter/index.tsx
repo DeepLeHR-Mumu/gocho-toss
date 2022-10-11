@@ -5,6 +5,8 @@ import { BsFolderSymlink } from "react-icons/bs";
 import { useUserFilter, useDoUserFilter } from "shared-api/filter";
 import { useUserInfo } from "shared-api/auth";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
+import { myFilterLoadEvent, myFilterSaveEvent } from "shared-ga/jd";
+
 import { useToast } from "@recoil/hook/toast";
 
 import { filterMenuListArr } from "./constant";
@@ -63,6 +65,7 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
     }
 
     if (userFilterSuccess) {
+      myFilterLoadEvent();
       setCurrentToast("My필터를 불러왔습니다.");
     }
 
@@ -82,6 +85,7 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
   };
 
   const saveUserFilter = () => {
+    myFilterSaveEvent();
     if (!isSuccess) {
       setCurrentToast("로그인후 My 필터를 저장해주세요.");
       return;
@@ -102,8 +106,8 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
       },
       {
         onSuccess: () => {
-          setCurrentToast("My필터가 저장되었습니다");
           refetchUserFilter();
+          setCurrentToast("My필터가 저장되었습니다");
         },
       }
     );

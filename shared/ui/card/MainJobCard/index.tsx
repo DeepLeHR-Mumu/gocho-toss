@@ -2,6 +2,7 @@ import { FunctionComponent, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { BsFillBookmarkFill } from "react-icons/bs";
+import { useQueryClient } from "@tanstack/react-query";
 
 import highTrue from "shared-image/global/common/go_color.svg";
 import highFalse from "shared-image/global/common/go_mono.svg";
@@ -10,9 +11,9 @@ import collegeFalse from "shared-image/global/common/cho_mono.svg";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 import { useUserInfo } from "shared-api/auth";
-
-import { useQueryClient } from "@tanstack/react-query";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
+import { jdBookmarkEvent } from "shared-ga/jd";
+
 import { SkeletonBox } from "../../common/atom/skeletonBox";
 import { DdayBox } from "../../common/atom/dDayBox";
 
@@ -79,6 +80,7 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
         { userId, elemId: jobData.id },
         {
           onSuccess: () => {
+            jdBookmarkEvent(jobData.id);
             queryClient.invalidateQueries([{ data: "jobArr" }]);
           },
         }
