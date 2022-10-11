@@ -8,6 +8,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { jobArrKeyObj } from "shared-constant/queryKeyFactory/job/jobArrKeyObj";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
+import { useUserInfo } from "shared-api/auth";
+import { useModal } from "@recoil/hook/modal";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import highTrue from "shared-image/global/common/go_color.svg";
@@ -45,6 +47,7 @@ import {
   taskBox,
   hoverButton,
   infoBox,
+  taskArrCSS,
 } from "./style";
 
 export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
@@ -56,6 +59,8 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { isSuccess } = useUserInfo();
+  const { setCurrentModal } = useModal();
 
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobData?.id as number,
@@ -88,6 +93,9 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   }
 
   const addJobBookmark = () => {
+    if (!isSuccess) {
+      setCurrentModal("loginModal", { button: "close" });
+    }
     if (userId)
       addMutate(
         { userId, elemId: jobData.id },
@@ -211,13 +219,15 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
             채용중인 직무
             <span css={taskNumber(isExpired)}>{jobData.taskArr.length}</span>
           </p>
-          {jobData.taskArr.map((task) => {
-            return (
-              <p css={taskBox} key={`${jobData.id}${task}`}>
-                {task}
-              </p>
-            );
-          })}
+          <ul css={taskArrCSS}>
+            {jobData.taskArr.map((task) => {
+              return (
+                <li css={taskBox} key={`${jobData.id}${task}`}>
+                  {task}
+                </li>
+              );
+            })}
+          </ul>
         </div>
 
         <p css={hoverButton} className="hoverButton">

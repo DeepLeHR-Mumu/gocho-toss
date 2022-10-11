@@ -223,6 +223,7 @@ export const taskSummary: TaskSummaryDef = (isExpired) => {
     font-size: 0.75rem;
     font-weight: 700;
     width: fit-content;
+    white-space: nowrap;
     position: relative;
     color: ${COLORS.GRAY100};
     background-color: ${isExpired ? COLORS.GRAY40 : COLORS.GRAY10};
@@ -235,6 +236,19 @@ export const taskSummary: TaskSummaryDef = (isExpired) => {
     height: 2.25rem;
   `;
 };
+
+export const taskArrCSS = css`
+  display: flex;
+  flex-wrap: wrap;
+
+  > li {
+    margin: 0 0.5rem 0.5rem 0;
+
+    :last-of-type {
+      margin: 0;
+    }
+  }
+`;
 
 interface TaskNumberDef {
   (isExpired: boolean): SerializedStyles;
@@ -261,7 +275,6 @@ export const taskNumber: TaskNumberDef = (isExpired) => {
 export const taskBox = css`
   border-radius: 1.5rem;
   font-size: 0.75rem;
-  margin-right: 0.5rem;
   min-width: 4rem;
   width: fit-content;
   padding: 0 1.25rem;
