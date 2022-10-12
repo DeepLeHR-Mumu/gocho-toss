@@ -102,6 +102,7 @@ importers:
       recoil: ^0.7.5
       shared-api: workspace:^0.0.0
       shared-constant: workspace:^0.0.0
+      shared-ga: workspace:^0.0.0
       shared-image: workspace:^0.0.0
       shared-style: workspace:^0.0.0
       shared-type: workspace:^0.0.0
@@ -128,6 +129,7 @@ importers:
       recoil: 0.7.5_sfoxds7t5ydpegc3knd667wn6m
       shared-api: link:../../shared/api
       shared-constant: link:../../shared/constant
+      shared-ga: link:../../shared/ga
       shared-image: link:../../shared/image
       shared-style: link:../../shared/style
       shared-type: link:../../shared/type
