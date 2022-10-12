@@ -31,3 +31,7 @@ export const specListFunnelEvent = () => {
 export const specRegisterStepEvent = (step: number) => {
   ReactGA.event(`register_spec_step_${step}`);
 };
+
+export const specRegisterEvent = (hasDetail: boolean) => {
+  ReactGA.event("register_spec", { has_detail: hasDetail });
+};

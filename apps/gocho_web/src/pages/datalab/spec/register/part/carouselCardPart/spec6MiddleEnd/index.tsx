@@ -6,6 +6,7 @@ import jobiFighting from "shared-image/global/jobi/fighting.png";
 import { useRegisterSpec } from "shared-api/spec";
 import { specArrKeyObj } from "shared-constant/queryKeyFactory/spec/arrKeyObj";
 import { userInfoKeyObj } from "shared-constant/queryKeyFactory/user/infoKeyObj";
+import { specRegisterEvent } from "shared-ga/spec";
 
 import { useModal } from "@recoil/hook/modal";
 import { useIsSpecPageBlocking } from "@recoil/hook/spec";
@@ -29,7 +30,6 @@ export const Spec6MiddleEnd: FunctionComponent<Spec6MiddleEndProps> = ({
 
   const specSubmit = () => {
     const userSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
-
     mutate(userSpecObj, {
       onError: (error) => {
         const errorCode = error.response?.status;
@@ -41,6 +41,7 @@ export const Spec6MiddleEnd: FunctionComponent<Spec6MiddleEndProps> = ({
         }
       },
       onSuccess: () => {
+        specRegisterEvent(false);
         setIsBlocking(true);
         moveNextCard(100);
         queryClient.invalidateQueries(specArrKeyObj.all);
