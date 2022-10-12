@@ -42,36 +42,37 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
 
   return (
     <>
-      <Link
-        href={`${JOBS_DETAIL_URL}/${jobAdData.id}`}
-        passHref
-        onClick={() => {
-          jdAdClickEvent(jobAdData.id);
-        }}
-      >
+      <Link href={`${JOBS_DETAIL_URL}/${jobAdData.id}`} passHref>
         <a css={cardWrapper(isMobile)}>
-          <div css={mainContainer}>
-            <div css={companyLogoWrapper}>
-              <div css={companyLogoBox}>
-                <Image
-                  layout="fill"
-                  objectFit="contain"
-                  src={imageSrc || jobAdData.companyLogo}
-                  onError={() => {
-                    return setImageSrc(defaultCompanyLogo);
-                  }}
-                  alt={jobAdData.companyName}
-                />
+          <button
+            type="button"
+            onClick={() => {
+              jdAdClickEvent(jobAdData.id);
+            }}
+          >
+            <div css={mainContainer}>
+              <div css={companyLogoWrapper}>
+                <div css={companyLogoBox}>
+                  <Image
+                    layout="fill"
+                    objectFit="contain"
+                    src={imageSrc || jobAdData.companyLogo}
+                    onError={() => {
+                      return setImageSrc(defaultCompanyLogo);
+                    }}
+                    alt={jobAdData.companyName}
+                  />
+                </div>
+              </div>
+              <div css={infoContainer}>
+                <p css={companyName}>{jobAdData.companyName}</p>
+                <p css={date}>
+                  {`${startMonth}/${startDate}`}~{`${endMonth}/${endDate}`}
+                </p>
               </div>
             </div>
-            <div css={infoContainer}>
-              <p css={companyName}>{jobAdData.companyName}</p>
-              <p css={date}>
-                {`${startMonth}/${startDate}`}~{`${endMonth}/${endDate}`}
-              </p>
-            </div>
-          </div>
-          <strong css={titleCSS}>{jobAdData.title}</strong>
+            <strong css={titleCSS}>{jobAdData.title}</strong>
+          </button>
         </a>
       </Link>
       {/* LATER : 관리자페이지 color 연결 */}

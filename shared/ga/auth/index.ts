@@ -8,7 +8,9 @@ export const loginModalCloseEvent = (errorCount: number) => {
   ReactGA.event("close_login_modal", { error_count: errorCount });
 };
 
-export const loginSuccessEvent = () => {
+export const loginSuccessEvent = (loginId: string, loginMethod: "kakao" | "gocho") => {
+  ReactGA.set({ user_id: loginId });
+  ReactGA.set({ login_method: loginMethod });
   ReactGA.event("login", { referrer: document.referrer, path: window.location.pathname });
 };
 
