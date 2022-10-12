@@ -17,6 +17,14 @@ export const buttonContainer = css`
   gap: 0 0.5rem;
 `;
 
+export const jdButton = css`
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background-color: ${COLORS.BLUE_FIRST40};
+  color: ${COLORS.GRAY100};
+  font-weight: 500;
+`;
+
 export const naverButton = css`
   border-radius: 0.5rem;
   padding: 0.5rem 0.75rem;

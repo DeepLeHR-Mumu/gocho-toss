@@ -1,17 +1,21 @@
 import type { NextPage } from "next";
 
-import { mainContainer, pageTitle } from "@style/commonStyles";
-
-import { useJobArr } from "shared-api/job";
-
 import { dateConverter } from "shared-util/date";
+
+import { mainContainer, pageTitle } from "@style/commonStyles";
+import { useJobArr } from "@api/job/useJobArr";
+import { LoadingScreen, ErrorScreen } from "@component/screen";
 import { JobDef } from "../type";
-import { sectionContainer, sectionTitle, buttonContainer, naverButton } from "./style";
+import { sectionContainer, sectionTitle, buttonContainer, naverButton, jdButton } from "./style";
 
 const Blog: NextPage = () => {
-  const { data: jobDataArr } = useJobArr({
+  const {
+    data: jobDataArr,
+    isLoading,
+    isError,
+  } = useJobArr({
     order: "popular",
-    filter: "valid", // 나중에 todayUpload로 변경
+    // filter: "todayUpload",
     limit: 10,
   });
 
@@ -23,10 +27,10 @@ const Blog: NextPage = () => {
       const endDate = endYear === 9999 ? "상시" : `~ ${startYear}-${startMonth}-${startDate} 까지`;
 
       text += `🚀 ${job.companyName}\n${job.title}\n- 접수기간 : ${endDate}\n`;
-      text += `- ${job.placeArr[0][0]} ${job.placeArr[0][1]} ${
+      text += `- ${job.placeArr[0]} ${job.placeArr[1]} ${
         job.placeArr.length !== 1 ? `외 ${job.placeArr.length - 1}곳` : ""
       }\n`;
-      text += `- ${job.high ? "고졸, " : ""}${job.college ? "초대졸, " : ""}`;
+      text += `- ${job.taskArr}, ${job.rotationArr}, ${job.contractArr}`;
       let taskString = "";
       job.taskArr.map((task, index, taskArr) => {
         taskString += index + 1 === taskArr.length ? `${task}` : `${task}/`;
@@ -63,15 +67,28 @@ const Blog: NextPage = () => {
     }
   };
 
+  if (!jobDataArr || isLoading) {
+    return <LoadingScreen />;
+  }
+
+  if (isError) {
+    return <ErrorScreen />;
+  }
+
   return (
     <main css={mainContainer}>
       <h2 css={pageTitle}>바이럴 마케팅</h2>
       <section css={sectionContainer}>
-        <h3 css={sectionTitle}>오늘의 공고 복사하기</h3>
+        <h3 css={sectionTitle}>오늘의 공고</h3>
+        <div css={buttonContainer}>
+          <button css={jdButton} type="button">
+            오늘의 공고 복사히기
+          </button>
+        </div>
       </section>
 
       <section css={sectionContainer}>
-        <h3 css={sectionTitle}>네이버 블로그 복사하기</h3>
+        <h3 css={sectionTitle}>네이버 블로그</h3>
         {jobDataArr && (
           <div css={buttonContainer}>
             <button

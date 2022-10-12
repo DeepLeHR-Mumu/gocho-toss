@@ -1,17 +1,14 @@
 export type JobDef = {
   id: number;
   companyName: string;
-  companyLogo: string;
   companyId: number;
+  title: string;
+  cut: boolean;
   startTime: number;
   endTime: number;
-  title: string;
-  high: boolean;
-  college: boolean;
+  taskArr: string[];
+  eduArr: string[];
   placeArr: string[];
   rotationArr: string[];
-  taskArr: string[];
-  bookmark: number;
-  view: number;
-  cut: boolean;
+  contractArr: string[];
 };

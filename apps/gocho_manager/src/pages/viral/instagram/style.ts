@@ -12,7 +12,7 @@ export const sectionTitle = css`
 `;
 
 export const jobContainer = css`
-  padding: 0.5rem 0;
+  padding: 1rem 0;
   border-bottom: 2px solid ${COLORS.GRAY10};
 `;
 
@@ -60,19 +60,27 @@ export const info = css`
 export const buttonContainer = css`
   display: flex;
   align-items: center;
-  gap: 0 0.5rem;
+  gap: 0 1rem;
 `;
 
 export const buttonBox = css`
   display: flex;
   align-items: center;
+  gap: 0 0.5rem;
+`;
+
+export const kakaoButton = css`
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  background-color: #fae301;
+  color: #391b1b;
+  border-radius: 0.5rem;
 `;
 
 export const copyButton = css`
-  font-weight: 600;
+  font-weight: 500;
   padding: 0.25rem 0.5rem;
-  background-color: ${COLORS.BLUE_NEON40};
+  background: linear-gradient(to top right, #ffcf23, #bb00b1);
   color: ${COLORS.GRAY100};
   border-radius: 0.5rem;
-  margin: 0 0.5rem;
 `;

@@ -1,11 +1,12 @@
 import type { NextPage } from "next";
-import { mainContainer, pageTitle } from "@style/commonStyles";
-import { useJobArr } from "shared-api/job";
 import Image from "next/image";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { dateConverter } from "shared-util/date";
 
+import { mainContainer, pageTitle } from "@style/commonStyles";
+import { useJobArr } from "@api/job/useJobArr";
+import { ErrorScreen, LoadingScreen } from "@component/screen";
 import { JobDef } from "../type";
 
 import {
@@ -21,13 +22,18 @@ import {
   info,
   buttonContainer,
   buttonBox,
+  kakaoButton,
   copyButton,
 } from "./style";
 
 const Instagram: NextPage = () => {
-  const { data: jobDataArr } = useJobArr({
+  const {
+    data: jobDataArr,
+    isLoading,
+    isError,
+  } = useJobArr({
     order: "popular",
-    filter: "valid",
+    // filter: "valid",
     limit: 10,
   });
 
@@ -71,13 +77,21 @@ const Instagram: NextPage = () => {
     }
   };
 
+  if (!jobDataArr || isLoading) {
+    return <LoadingScreen />;
+  }
+
+  if (isError) {
+    return <ErrorScreen />;
+  }
+
   return (
     <main css={mainContainer}>
       <h2 css={pageTitle}>바이럴 마케팅</h2>
       <section css={sectionContainer}>
-        <h3 css={sectionTitle}>인스타그램 & 카카오뷰 복사하기</h3>
+        <h3 css={sectionTitle}>인스타그램 & 카카오뷰</h3>
         <ul>
-          {jobDataArr?.jobDataArr.map((job) => {
+          {jobDataArr.jobDataArr.map((job) => {
             const { year: startYear, month: startMonth, date: startDate } = dateConverter(job.startTime);
             const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
 
@@ -110,12 +124,14 @@ const Instagram: NextPage = () => {
                   <div css={infoBox}>
                     <p css={infoName}>근무지</p>
                     <div css={info}>
-                      {job.placeArr[0][0]} {job.placeArr[0][1]}{" "}
+                      {job.placeArr[0]} {job.placeArr[1]}
+                      <br />
                       {job.placeArr.length !== 1 && `외 ${job.placeArr.length - 1}곳`}
                     </div>
                     <p css={infoName}>교대</p>
                     <div css={info}>
-                      {job.rotationArr[0]} {job.rotationArr.length !== 1 && `외 ${job.rotationArr.length - 1}형태`}
+                      {job.rotationArr[0]} <br />
+                      {job.rotationArr.length !== 1 && `외 ${job.rotationArr.length - 1}형태`}
                     </div>
                   </div>
                   <div css={infoBox}>
@@ -128,7 +144,7 @@ const Instagram: NextPage = () => {
                     <strong>카카오뷰</strong>
                     <button
                       type="button"
-                      css={copyButton}
+                      css={kakaoButton}
                       onClick={() => {
                         copyKakaoTitle(job);
                       }}
@@ -137,7 +153,7 @@ const Instagram: NextPage = () => {
                     </button>
                     <button
                       type="button"
-                      css={copyButton}
+                      css={kakaoButton}
                       onClick={() => {
                         copyKakaoDesc(job);
                       }}
@@ -146,7 +162,7 @@ const Instagram: NextPage = () => {
                     </button>
                     <button
                       type="button"
-                      css={copyButton}
+                      css={kakaoButton}
                       onClick={() => {
                         copyKakaoURL(job);
                       }}

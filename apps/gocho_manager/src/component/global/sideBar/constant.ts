@@ -20,7 +20,7 @@ export const menuArr = [
       },
       {
         menuTitle: "공고 목록",
-        menuLink: JD_LIST_URL,
+        menuLink: `${JD_LIST_URL}?page=1`,
       },
     ],
   },
@@ -59,7 +59,7 @@ export const menuArr = [
     menuTitle: "바이럴 마케팅",
     subMenuArr: [
       {
-        menuTitle: "블로그/디시인사이드",
+        menuTitle: "오늘의공고/블로그",
         menuLink: VIRAL_BLOG_URL,
       },
       {
