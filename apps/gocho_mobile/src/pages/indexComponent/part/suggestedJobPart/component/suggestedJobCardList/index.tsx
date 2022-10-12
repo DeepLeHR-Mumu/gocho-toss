@@ -3,9 +3,10 @@ import Slider from "react-slick";
 import { useJobArr } from "shared-api/job";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { JobAdCard } from "shared-ui/card/jobAdCard";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 import { setCarouselSetting } from "./util";
-import { listContainer } from "./style";
+import { listContainer, controlWrapper, buttonCSS } from "./style";
 
 export const SuggestedJobCardList: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
@@ -38,6 +39,16 @@ export const SuggestedJobCardList: FunctionComponent = () => {
           return <JobAdCard jobAdData={job} isMobile key={`JobAdCard${job.id}`} />;
         })}
       </Slider>
+
+      <div css={controlWrapper}>
+        <button type="button" css={buttonCSS} aria-label="이전 추천공고 이동" onClick={sliderRef.current?.slickPrev}>
+          <BsChevronLeft />
+        </button>
+
+        <button type="button" css={buttonCSS} aria-label="다음 추천공고 이동" onClick={sliderRef.current?.slickNext}>
+          <BsChevronRight />
+        </button>
+      </div>
     </div>
   );
 };

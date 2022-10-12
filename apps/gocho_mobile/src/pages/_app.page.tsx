@@ -11,6 +11,7 @@ import { Global } from "@emotion/react";
 import { GNB } from "@component/global/gnb";
 import { Footer } from "@component/global/footer";
 import { ModalPlaceholder } from "@component/common/organisms/modal/modalPlaceHolder";
+import { ToastPlaceholder } from "@component/toast/toastPlaceholder";
 
 import { globalStyles } from "@style/globalStyles";
 
@@ -65,12 +66,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     <RecoilRoot>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <Global styles={globalStyles} />
           <ModalPlaceholder />
+          <ToastPlaceholder />
           <GNB />
           <Component {...pageProps} />
           <Footer />

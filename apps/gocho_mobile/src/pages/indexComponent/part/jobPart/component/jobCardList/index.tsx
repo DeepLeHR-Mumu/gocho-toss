@@ -44,6 +44,7 @@ export const JobCardList: FunctionComponent = () => {
       </div>
     );
   }
+
   return (
     <div css={listContainer}>
       <Slider {...setCarouselSetting()} ref={sliderRef}>

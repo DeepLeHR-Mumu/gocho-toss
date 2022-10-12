@@ -20,7 +20,7 @@ import { SignUpFormValues } from "./type";
 import { validateNickname } from "./util";
 
 export const SignUpBox: FunctionComponent = () => {
-  const [errorMsg, setErrorMsg] = useState<string | undefined>(undefined);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -40,16 +40,16 @@ export const SignUpBox: FunctionComponent = () => {
         setErrorMsg(errorResponse.error.errorMessage);
       },
       onSuccess: (response) => {
-        setCurrentToast("님 환영합니다.", watch("nickname"));
         localStorage.setItem("token", `${response?.data.token}`);
         refetch();
         closeModal();
+        setCurrentToast("님 환영합니다.", watch("nickname"));
       },
     });
   };
 
   useEffect(() => {
-    setErrorMsg(undefined);
+    setErrorMsg(null);
   }, [closeModal]);
 
   return (
@@ -58,7 +58,7 @@ export const SignUpBox: FunctionComponent = () => {
         <CloseButton size="S" buttonClick={closeModal} />
       </div>
       <div css={logoContainer}>
-        <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" />
+        <Image objectFit="contain" src={smallMono} alt="고초대졸 닷컴" layout="fill" />
       </div>
       <p css={desc}>가입은 5초면 가능!</p>
 

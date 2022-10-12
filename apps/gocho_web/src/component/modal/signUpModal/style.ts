@@ -20,6 +20,7 @@ export const wrapper = css`
 
 export const logoContainer = css`
   width: 7.5rem;
+  height: 1rem;
   position: relative;
   margin-bottom: 1rem;
 `;
