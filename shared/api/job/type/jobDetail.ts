@@ -7,6 +7,7 @@ export interface FactoryObjDef {
   male_number: number;
   female_number: number;
   product: string;
+  name: string;
   bus: {
     exists: boolean;
     desc: string | null;
@@ -21,7 +22,7 @@ export interface PositionObjDef {
   id: number;
   jd_id: number;
   required_exp: {
-    type: "신입" | "경력" | "무관";
+    type: "신입" | "경력" | "무관" | "신입/경력";
     max_year: number;
     min_year: number;
   };

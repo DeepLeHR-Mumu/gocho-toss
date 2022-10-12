@@ -42,7 +42,7 @@ const Register: NextPage = () => {
       const isCurrentSpecObj = Boolean(sessionStorage.getItem("specObj") !== null);
 
       if (isCurrentSpecObj) {
-        setCurrentModal("pageBlockModal", { url });
+        setCurrentModal("pageBlockModal", { url, text: "작성 중인 스펙이 초기화됩니다. 나가시겠습니까?" });
         router.events.emit("routeChangeError");
         // 모달을 멈추기 위한 disable
         // eslint-disable-next-line no-throw-literal

@@ -65,6 +65,7 @@ export const Header: FunctionComponent = () => {
 
   useEffect(() => {
     closeModal();
+    setIsUnifiedSearch(false);
   }, [closeModal, pathname]);
 
   const { isSuccess } = useUserInfo();
@@ -106,9 +107,12 @@ export const Header: FunctionComponent = () => {
                   >
                     {menu.subMenuArr ? (
                       <>
-                        {menu.menuTitle}
-                        <BsChevronDown css={downIconCSS} />
-
+                        <Link href={menu.menuLink} passHref>
+                          <a>
+                            {menu.menuTitle}
+                            <BsChevronDown css={downIconCSS} />
+                          </a>
+                        </Link>
                         <ul css={subMenuToggleWrapper(activeIndex === index)}>
                           {menu.subMenuArr.map((subMenu) => {
                             return (

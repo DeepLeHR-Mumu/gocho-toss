@@ -66,6 +66,13 @@ export const desc = css`
   word-break: keep-all;
 `;
 
+export const subDesc = css`
+  display: block;
+  padding-top: 0.5rem;
+  color: ${COLORS.BLUE_FIRST40};
+  font-weight: 500;
+`;
+
 export const restPoint = css`
   line-height: 1.8;
   word-break: keep-all;

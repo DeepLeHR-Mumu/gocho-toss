@@ -58,6 +58,13 @@ export interface loginObjDef {
 
 export interface pageBlockModalDef {
   url: string;
+  text: string;
+  afterAction?(): void;
+}
+
+export interface WritePostingModalDef {
+  title: string;
+  description: string;
 }
 
 export type contentModalDef =
@@ -66,7 +73,8 @@ export type contentModalDef =
   | tipObjDef
   | changePostingObjDef
   | factoryObjDef
-  | loginObjDef;
+  | loginObjDef
+  | WritePostingModalDef;
 
 export type contentModalNameDef =
   | "postingModal"
@@ -74,9 +82,10 @@ export type contentModalNameDef =
   | "changePostingModal"
   | "factoryModal"
   | "loginModal"
-  | "pageBlockModal";
+  | "pageBlockModal"
+  | "writePostingModal";
 
-export type modalNameDef = "logoutModal" | "signUpModal" | "writePostingModal" | "accountSettingModal";
+export type modalNameDef = "logoutModal" | "signUpModal" | "accountSettingModal" | "writeKakaoInfoModal";
 
 export interface modalAtomDef {
   activatedModal: modalNameDef | contentModalNameDef;

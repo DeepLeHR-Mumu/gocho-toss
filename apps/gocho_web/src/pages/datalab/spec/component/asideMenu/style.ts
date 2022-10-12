@@ -73,6 +73,11 @@ export const asideLink = css`
   text-align: center;
 `;
 
+export const pointLink = css`
+  background-color: ${COLORS.BLUE_SECOND40};
+  color: ${COLORS.BLUE_FIRST40};
+`;
+
 export const activeLink = css`
   background-color: ${COLORS.BLUE_SECOND70};
   color: ${COLORS.BLUE_NEON40};

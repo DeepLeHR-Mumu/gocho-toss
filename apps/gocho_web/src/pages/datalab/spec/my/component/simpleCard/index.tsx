@@ -49,9 +49,7 @@ export const SimpleCard: FunctionComponent<SimpleCardProps> = ({
             css={moreButton}
             type="button"
             onClick={() => {
-              if (hasEvalCount) {
-                handleShowMore();
-              }
+              handleShowMore();
             }}
             aria-label="평가 자세히 보기"
           >

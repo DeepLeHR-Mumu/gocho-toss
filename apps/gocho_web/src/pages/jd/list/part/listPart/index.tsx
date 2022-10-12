@@ -154,7 +154,6 @@ export const ListPart: FunctionComponent = () => {
               totalPage={totalPage}
               linkObj={{
                 pathname: JOBS_LIST_URL,
-                query: { order: activeOrder },
               }}
             />
           </div>
@@ -176,7 +175,6 @@ export const ListPart: FunctionComponent = () => {
           totalPage={totalPage}
           linkObj={{
             pathname: JOBS_LIST_URL,
-            query: { order: activeOrder },
           }}
         />
       </Layout>

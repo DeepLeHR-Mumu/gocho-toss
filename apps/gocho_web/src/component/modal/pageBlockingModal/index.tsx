@@ -8,24 +8,27 @@ import { ModalComponent } from "@component/modal/modalBackground";
 import { PageBlockingBoxProps } from "./type";
 import { title, wrapper, descCSS, flexBox, noButton, yesButton } from "./style";
 
-const PageBlockingBox: FunctionComponent<PageBlockingBoxProps> = ({ urlObj, closeModal }) => {
+const PageBlockingBox: FunctionComponent<PageBlockingBoxProps> = ({ dataObj, closeModal }) => {
   const router = useRouter();
 
   const doBlocking = () => {
     closeModal();
+    if (dataObj.afterAction) {
+      dataObj.afterAction();
+    }
   };
 
   const doNotBlocking = () => {
     // LATER : 다른 페이지에도 사용시 props로 전달하기
     sessionStorage.removeItem("specObj");
-    router.push(urlObj.url);
+    router.push(dataObj.url);
     closeModal();
   };
 
   return (
     <div css={wrapper}>
       <strong css={title}>페이지를 나가시겠습니까?</strong>
-      <p css={descCSS}>작성 중인 스펙이 초기화됩니다. 나가시겠습니까?</p>
+      <p css={descCSS}>{dataObj.text}</p>
       <div css={flexBox}>
         <button type="button" css={noButton} onClick={doBlocking}>
           아니오
@@ -43,7 +46,7 @@ export const PageBlockingModal: FunctionComponent = () => {
 
   return (
     <ModalComponent>
-      <PageBlockingBox closeModal={closeModal} urlObj={currentModal?.modalContentObj as pageBlockModalDef} />
+      <PageBlockingBox closeModal={closeModal} dataObj={currentModal?.modalContentObj as pageBlockModalDef} />
     </ModalComponent>
   );
 };

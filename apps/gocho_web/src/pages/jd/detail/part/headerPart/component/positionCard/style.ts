@@ -76,7 +76,7 @@ export const titleCSS: TitleCSSDef = (isClick, isHover, isDdayEnd) => {
     return css`
       ${defaultTitleCSS};
       color: ${isHover ? COLORS.GRAY10 : COLORS.GRAY40};
-      background-color: ${COLORS.BLUE_SECOND70};
+      background-color: ${isClick ? COLORS.BLUE_SECOND70 : COLORS.GRAY100};
     `;
   }
   return css`

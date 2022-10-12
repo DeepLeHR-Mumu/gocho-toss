@@ -39,13 +39,19 @@ const JobsExpList: NextPage = () => {
   const [total, setTotal] = useState<number>(0);
   const [page, setPage] = useState<number>(Number(router.query.page));
   const [activeOrder, setActiveOrder] = useState<OrderDef>(router.query.page as OrderDef);
-  const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
+  const [searchQuery, setSearchQuery] = useState<SearchQueryDef>({
+    name: router.query.q || undefined,
+  } as SearchQueryDef);
 
-  const { register, handleSubmit } = useForm<PostingValues>({});
+  const { register, handleSubmit } = useForm<PostingValues>({
+    defaultValues: {
+      name: searchQuery.name,
+    },
+  });
   const postingSearch: SubmitHandler<PostingValues> = (postingVal) => {
     router.push({
       pathname: JOBS_EXPLIST_URL,
-      query: { page: 1, order: activeOrder },
+      query: { page: 1, order: activeOrder, q: postingVal.name },
     });
     setSearchQuery({
       name: postingVal.name,
@@ -57,7 +63,8 @@ const JobsExpList: NextPage = () => {
   };
 
   const { data: companyDataArr, isLoading } = useCompanyArr({
-    q: searchQuery?.name as string,
+    // q: searchQuery.name as string,
+    q: router.query.q as string,
     order: activeOrder,
     limit,
     offset: (page - 1) * 10,
@@ -106,7 +113,7 @@ const JobsExpList: NextPage = () => {
                       expiredJdListSortingEvent(button.text);
                       router.push({
                         pathname: JOBS_EXPLIST_URL,
-                        query: { page: 1, order: button.order },
+                        query: { ...router.query, page: 1, order: button.order },
                       });
                       return changeOrder(button.order);
                     }}
@@ -121,7 +128,6 @@ const JobsExpList: NextPage = () => {
               totalPage={totalPage}
               linkObj={{
                 pathname: JOBS_EXPLIST_URL,
-                query: { order: activeOrder },
               }}
             />
           </form>
@@ -136,7 +142,6 @@ const JobsExpList: NextPage = () => {
           <BottomPagination
             linkObj={{
               pathname: JOBS_EXPLIST_URL,
-              query: { order: activeOrder },
             }}
             totalPage={totalPage}
           />
