@@ -10,7 +10,6 @@ import {
   WarningText,
   ContainerBox,
 } from "../common/component";
-
 import { Spec3HighschoolProps, PostSubmitValues } from "./type";
 import { highSchoolTypeArr } from "./constant";
 import { specCardWrapper, formCSS } from "../common/style";
@@ -31,6 +30,7 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
     sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
     moveNextCard(35);
   };
+
   return (
     <div css={specCardWrapper}>
       <SpecCardTitle title="고등학교 학력정보" desc="정확하게 입력할 수록 스펙평가의 적중도는 올라갑니다." />

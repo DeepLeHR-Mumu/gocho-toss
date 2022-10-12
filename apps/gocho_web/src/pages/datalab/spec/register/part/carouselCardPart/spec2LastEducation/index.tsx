@@ -1,8 +1,9 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { SpecCardTitle, MoveCardButtons, WarningText, ContainerBox } from "../common/component";
+import { specRegisterStepEvent } from "shared-ga/spec";
 
+import { SpecCardTitle, MoveCardButtons, WarningText, ContainerBox } from "../common/component";
 import { Spec2lastEducationProps, PostSubmitValues } from "./type";
 import { specCardWrapper, formCSS } from "../common/style";
 import { container, title, imageBox } from "./style";
@@ -27,6 +28,10 @@ export const Spec2lastEducation: FunctionComponent<Spec2lastEducationProps> = ({
     sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
     moveNextCard(25);
   };
+
+  useEffect(() => {
+    specRegisterStepEvent(2);
+  }, []);
 
   return (
     <div css={specCardWrapper}>

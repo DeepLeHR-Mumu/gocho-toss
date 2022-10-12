@@ -2,11 +2,13 @@ import { NextPage } from "next";
 import { useEffect } from "react";
 import axios from "axios";
 
-import { Layout } from "@component/layout";
 import { useUserInfo } from "shared-api/auth";
-import { useModal } from "@recoil/hook/modal";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { META_MYPAGE } from "shared-constant/meta";
+import { myPageFunnelEvent } from "shared-ga/myPage";
+
+import { useModal } from "@recoil/hook/modal";
+import { Layout } from "@component/layout";
 
 import { SettingPart } from "./part/settingPart";
 import { CalendarPart } from "./part/calendarPart";
@@ -29,6 +31,9 @@ const MypageHome: NextPage = () => {
     };
   }, [error, closeModal, setCurrentModal, currentModal?.activatedModal]);
 
+  useEffect(() => {
+    myPageFunnelEvent();
+  }, []);
   return (
     <main css={mainContainer}>
       <MetaHead metaData={META_MYPAGE} />

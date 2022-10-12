@@ -1,9 +1,11 @@
 import { FunctionComponent, useState } from "react";
 
-import { Layout } from "@component/layout";
 import { JOBS_LIST_URL } from "shared-constant/internalURL";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { LinkButton } from "shared-ui/common/atom/button";
+import { changeHomeJdListSortingEvent } from "shared-ga/home";
+
+import { Layout } from "@component/layout";
 
 import { setJobOrderButtonArr } from "./constant";
 import { partContainer, buttonArrContainer, title, setJobOrderButton, showMoreJobBox, colorPoint } from "./style";
@@ -33,7 +35,8 @@ export const JobPart: FunctionComponent = () => {
                   key={`JobCardList${button.text}`}
                   css={setJobOrderButton(Boolean(button.order === activeOrder))}
                   onClick={() => {
-                    return changeOrder(button.order);
+                    changeHomeJdListSortingEvent(button.text);
+                    changeOrder(button.order);
                   }}
                 >
                   {button.text}

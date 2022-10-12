@@ -100,9 +100,10 @@ export const ListPart: FunctionComponent = () => {
       setTotal(jobDataArr.count);
     }
   }, [jobDataArr]);
+  
   useEffect(() => {
     jdListFunnelEvent();
-  });
+  }, []);
 
   const totalPage = Math.ceil(total / limit);
 

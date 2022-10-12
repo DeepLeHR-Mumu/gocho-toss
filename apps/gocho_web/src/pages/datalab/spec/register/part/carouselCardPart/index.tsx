@@ -4,6 +4,8 @@ import Slider from "react-slick";
 import { useProgress, useIsSpecPageBlocking } from "@recoil/hook/spec";
 
 import { scrollToTop } from "shared-ui/common/atom/scrollTop";
+import { specRegisterStepEvent } from "shared-ga/spec";
+
 import { Spec1Basic } from "./spec1Basic";
 import { Spec2lastEducation } from "./spec2LastEducation";
 import { Spec3Highschool } from "./spec3Highschool";
@@ -13,7 +15,6 @@ import { Spec6MiddleEnd } from "./spec6MiddleEnd";
 import { Spec7Lang } from "./spec7Lang";
 import { Spec8AwardCareerEtc } from "./spec8AwardCareerEtc";
 import { Spec9Success } from "./spec9Success";
-
 import { setCarouselSetting } from "./util";
 import { moveNextCardDef } from "./type";
 import { wrapper } from "./style";
@@ -21,6 +22,7 @@ import { wrapper } from "./style";
 export const SpecWritePart: FunctionComponent = () => {
   const [isSpec6MiddleEnd, setIsSpec6MiddleEnd] = useState<boolean>(true);
   const [userLastEdu, setUserLastEdu] = useState<null | "고졸" | "초대졸">(null);
+  const [currentIndex, setCurrenIndex] = useState(1);
   const { setIsBlocking } = useIsSpecPageBlocking();
 
   const sliderRef = useRef<Slider>(null);
@@ -33,17 +35,27 @@ export const SpecWritePart: FunctionComponent = () => {
   const moveNextCard: moveNextCardDef = (percent) => {
     scrollToTop();
     setCurrentProgress(percent);
+    setCurrenIndex((prev) => {
+      return prev + 1;
+    });
     sliderRef.current?.slickNext();
   };
 
   const movePrevCard = () => {
     scrollToTop();
+    setCurrenIndex((prev) => {
+      return prev - 1;
+    });
     sliderRef.current?.slickPrev();
   };
 
   const handleKeepWriteSpec = () => {
     setIsSpec6MiddleEnd(false);
   };
+
+  useEffect(() => {
+    specRegisterStepEvent(currentIndex);
+  }, [currentIndex]);
 
   return (
     <section css={wrapper}>
