@@ -72,7 +72,6 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
       },
     });
   };
-  const mainURL = window.location.href;
 
   const closeLoginModal = () => {
     loginModalCloseEvent(ref.current);
@@ -81,7 +80,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
 
   const kakaoLogin = () => {
     window.Kakao.Auth.authorize({
-      redirectUri: `${mainURL.substring(0, mainURL.indexOf("/", 7))}/kakaologin`,
+      redirectUri: `${window.location.origin}/kakaologin`,
     });
   };
 
