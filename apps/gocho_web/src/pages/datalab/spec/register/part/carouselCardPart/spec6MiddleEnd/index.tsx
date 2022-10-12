@@ -33,8 +33,6 @@ export const Spec6MiddleEnd: FunctionComponent<Spec6MiddleEndProps> = ({
     mutate(userSpecObj, {
       onError: (error) => {
         const errorCode = error.response?.status;
-        // setErrorMsg(errorCode);
-
         if (errorCode === 401) {
           queryClient.invalidateQueries(userInfoKeyObj.userInfo);
           setCurrentModal("loginModal", { button: "home" });

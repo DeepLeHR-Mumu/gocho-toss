@@ -23,6 +23,7 @@ export const SpecWritePart: FunctionComponent = () => {
   const [isSpec6MiddleEnd, setIsSpec6MiddleEnd] = useState<boolean>(true);
   const [userLastEdu, setUserLastEdu] = useState<null | "고졸" | "초대졸">(null);
   const [currentIndex, setCurrenIndex] = useState(1);
+  const [maximumIndex, setMaximumIndex] = useState(1);
   const { setIsBlocking } = useIsSpecPageBlocking();
 
   const sliderRef = useRef<Slider>(null);
@@ -51,11 +52,23 @@ export const SpecWritePart: FunctionComponent = () => {
 
   const handleKeepWriteSpec = () => {
     setIsSpec6MiddleEnd(false);
+    setCurrenIndex((prev) => {
+      return prev + 1;
+    });
   };
 
   useEffect(() => {
-    specRegisterStepEvent(currentIndex);
-  }, [currentIndex]);
+    if (isSpec6MiddleEnd && maximumIndex > 5) {
+      return;
+    }
+    specRegisterStepEvent(maximumIndex);
+  }, [maximumIndex, isSpec6MiddleEnd]);
+
+  useEffect(() => {
+    if (currentIndex > maximumIndex) {
+      setMaximumIndex(currentIndex);
+    }
+  }, [currentIndex, maximumIndex]);
 
   return (
     <section css={wrapper}>

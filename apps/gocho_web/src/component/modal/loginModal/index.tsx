@@ -2,6 +2,7 @@ import { FunctionComponent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import kakaoMono from "shared-image/global/sns/kakaoLogo.svg";
@@ -55,6 +56,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   const [errorMsg, setErrorMsg] = useState<null | string>(null);
   // const [errorCount, setErrorCount] = useState<number>(0);
   const ref = useRef(0);
+  const router = useRouter();
 
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     mutate(loginObj, {
@@ -80,6 +82,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   };
 
   const kakaoLogin = () => {
+    sessionStorage.setItem("kakaopath", router.pathname);
     window.Kakao.Auth.authorize({
       redirectUri: `${window.location.origin}/kakaologin`,
     });
