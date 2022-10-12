@@ -17,6 +17,7 @@ import { loginObjDef } from "@recoil/atom/modal";
 import { useModal } from "@recoil/hook/modal";
 import { useToast } from "@recoil/hook/toast";
 
+import { tokenDecryptor } from "shared-util/tokenDecryptor";
 import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
 import {
   wrapper,
@@ -65,10 +66,10 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
       onSuccess: (response) => {
         localStorage.setItem("token", `${response.data.token}`);
         queryClient.invalidateQueries();
-        loginSuccessEvent(loginObj.email, "gocho");
+        const { id, nickname } = tokenDecryptor(response.data.token);
+        loginSuccessEvent(id, "gocho");
         closeModal();
-        // LATER : 여유있을때 decode로 get
-        setCurrentToast("접속해주셔서 감사합니다.");
+        setCurrentToast("님 반갑습니다.", nickname);
       },
     });
   };

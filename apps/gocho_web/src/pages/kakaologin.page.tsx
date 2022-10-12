@@ -5,6 +5,7 @@ import { useEffect } from "react";
 
 import { useDoKakaoLogin } from "shared-api/auth/useDoKakaoLogin";
 import { loginSuccessEvent } from "shared-ga/auth";
+import { tokenDecryptor } from "shared-util/tokenDecryptor";
 
 const KakaoLogin: NextPage = () => {
   const queryClient = useQueryClient();
@@ -23,9 +24,10 @@ const KakaoLogin: NextPage = () => {
               return;
             }
             queryClient.invalidateQueries();
-            const decodedURIArr = decodeURIComponent(response.data.token as string).split(".")[1];
-            const userObj = JSON.parse(window.atob(decodedURIArr));
-            loginSuccessEvent(userObj.id, "kakao");
+            // const decodedURIArr = decodeURIComponent(response.data.token as string).split(".")[1];
+            // const userObj = JSON.parse(window.atob(decodedURIArr));
+            const { id } = tokenDecryptor(response.data.token as string);
+            loginSuccessEvent(id, "kakao");
             localStorage.setItem("token", `${response.data.token}`);
             router.push("/");
           },
