@@ -40,7 +40,7 @@ export const SignUpBox: FunctionComponent = () => {
       onError: (error) => {
         const errorResponse = error.response?.data as ErrorResponse;
         setErrorMsg(errorResponse.error.errorMessage);
-        signupAttempt.current -= 1;
+        signupAttempt.current += 1;
       },
       onSuccess: (response) => {
         setCurrentToast("님 환영합니다.", watch("nickname"));
@@ -54,15 +54,18 @@ export const SignUpBox: FunctionComponent = () => {
 
   useEffect(() => {
     signupModalOpenEvent();
-    return () => {
-      signupModalCloseEvent(signupAttempt.current);
-    };
   }, []);
 
   return (
     <div css={wrapper}>
       <div css={closeBtn}>
-        <CloseButton size="S" buttonClick={closeModal} />
+        <CloseButton
+          size="S"
+          buttonClick={() => {
+            signupModalCloseEvent(signupAttempt.current);
+            closeModal();
+          }}
+        />
       </div>
       <div css={logoContainer}>
         <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" />

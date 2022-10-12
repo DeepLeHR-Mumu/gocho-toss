@@ -65,7 +65,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
       onSuccess: (response) => {
         localStorage.setItem("token", `${response.data.token}`);
         queryClient.invalidateQueries();
-        loginSuccessEvent();
+        loginSuccessEvent(loginObj.email, "gocho");
         closeModal();
         // LATER : 여유있을때 decode로 get
         setCurrentToast("접속해주셔서 감사합니다.");
@@ -75,12 +75,13 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   const mainURL = window.location.href;
 
   const closeLoginModal = () => {
+    loginModalCloseEvent(ref.current);
     closeModal();
   };
 
   const kakaoLogin = () => {
     window.Kakao.Auth.authorize({
-      redirectUri: `${mainURL.substring(0, mainURL.indexOf("/", 7))}kakaologin`,
+      redirectUri: `${mainURL.substring(0, mainURL.indexOf("/", 7))}/kakaologin`,
     });
   };
 
@@ -90,12 +91,6 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
       return;
     }
     window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  useEffect(() => {
-    return () => {
-      loginModalCloseEvent(ref.current);
-    };
   }, []);
 
   return (
