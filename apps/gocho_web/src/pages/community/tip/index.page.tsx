@@ -3,7 +3,6 @@ import { useEffect } from "react";
 
 import { tipListFunnelEvent } from "shared-ga/tip";
 
-import { AdPart } from "./part/adPart";
 import { ListPart } from "./part/listPart";
 
 const Tip: NextPage = () => {
@@ -12,7 +11,6 @@ const Tip: NextPage = () => {
   }, []);
   return (
     <main>
-      <AdPart />
       <ListPart />
     </main>
   );

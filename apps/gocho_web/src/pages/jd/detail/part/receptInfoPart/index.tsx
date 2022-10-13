@@ -1,9 +1,6 @@
-import { FunctionComponent, useState, useEffect } from "react";
-import { BsChevronLeft } from "react-icons/bs";
-import Link from "next/link";
+import { FunctionComponent } from "react";
 
 import { dateConverter, dDayCalculator } from "shared-util/date";
-import { JOBS_LIST_URL } from "shared-constant/internalURL";
 
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { NoDataDesc } from "../common/component/noDataDesc";
@@ -17,7 +14,6 @@ import {
   desc,
   detailTitle,
   flexBox,
-  goBackButton,
   infoBox,
   infoDetailBox,
   infoTitle,
@@ -27,9 +23,6 @@ import {
 } from "./style";
 
 export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDetailData }) => {
-  const [pageNumber, setPageNumber] = useState<number | undefined>(undefined);
-  const [pageOrder, setPageOrder] = useState<"recent" | "popular" | "view" | "end" | undefined>(undefined);
-
   const {
     year: startYear,
     month: startMonth,
@@ -45,26 +38,6 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
     hour: endHour,
     minute: endMinute,
   } = dateConverter(jobDetailData.endTime);
-
-  useEffect(() => {
-    const sessionJdOrder = sessionStorage.getItem("jdPageOrder");
-    const sessionJdNumber = sessionStorage.getItem("jdPageNumber");
-
-    if (sessionJdOrder !== "undefined") {
-      const beforePageOrder = JSON.parse(sessionJdOrder as string);
-      setPageOrder(beforePageOrder);
-    }
-
-    if (sessionJdNumber !== "undefined") {
-      const beforePageNumber = JSON.parse(sessionJdNumber as string);
-      setPageNumber(beforePageNumber);
-    }
-
-    return () => {
-      sessionStorage.removeItem("jdPageOrder");
-      sessionStorage.removeItem("jdPageNumber");
-    };
-  }, [setPageNumber, setPageOrder]);
 
   const isDdayEnd = dDayCalculator(jobDetailData.endTime) === "만료";
 
@@ -129,11 +102,6 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
           </div>
         </div>
       </section>
-      <Link href={{ pathname: JOBS_LIST_URL, query: { page: pageNumber || 1, order: pageOrder || "recent" } }} passHref>
-        <a css={goBackButton}>
-          <BsChevronLeft /> 공고 리스트로 돌아가기
-        </a>
-      </Link>
     </div>
   );
 };

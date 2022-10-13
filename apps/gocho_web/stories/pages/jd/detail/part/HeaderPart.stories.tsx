@@ -51,50 +51,50 @@ const Template: ComponentStory<typeof HeaderPart> = (args) => {
   );
 };
 
-export const 기본 = Template.bind({});
-기본.args = {
-  jobDetailData: {
-    id: 4,
-    startTime: 1631026799000,
-    endTime: 1631199599000,
-    applyUrl: "https://naver.com",
-    title: "[설비 전담정비] 사원 0명 채용",
-    cut: false,
-    bookmarkCount: 20,
-    viewCount: 322,
-    company: {
-      companyId: 307,
-      name: "포스터 ICT",
-      logoUrl: "https://d2nnzfahmszi6w.cloudfront.net/company_images/337/logo.png",
-      youtubeUrl: "https://youtube.com",
-    },
-    positionArr: [
-      {
-        id: 725,
-        requiredExp: {
-          type: "무관",
-        },
-        hireCount: -1,
-        rotationArr: ["주간"],
-        contractType: {
-          type: "연수생",
-        },
-        placeArr: ["경상북도", "포항시"],
-        possibleEdu: {
-          summary: "고졸",
-        },
-        task: {
-          mainTask: "설비",
-          subTaskArr: null,
-        },
-      },
-    ],
-  },
-  currentPositionId: 725,
-  setCurrentPositionId: () => {
-    return undefined;
-  },
-};
+// export const 기본 = Template.bind({});
+// 기본.args = {
+//   jobDetailData: {
+//     id: 4,
+//     startTime: 1631026799000,
+//     endTime: 1631199599000,
+//     applyUrl: "https://naver.com",
+//     title: "[설비 전담정비] 사원 0명 채용",
+//     cut: false,
+//     bookmarkCount: 20,
+//     viewCount: 322,
+//     company: {
+//       companyId: 307,
+//       name: "포스터 ICT",
+//       logoUrl: "https://d2nnzfahmszi6w.cloudfront.net/company_images/337/logo.png",
+//       youtubeUrl: "https://youtube.com",
+//     },
+//     positionArr: [
+//       {
+//         id: 725,
+//         requiredExp: {
+//           type: "무관",
+//         },
+//         hireCount: -1,
+//         rotationArr: ["주간"],
+//         contractType: {
+//           type: "연수생",
+//         },
+//         placeArr: ["경상북도", "포항시"],
+//         possibleEdu: {
+//           summary: "고졸",
+//         },
+//         task: {
+//           mainTask: "설비",
+//           subTaskArr: null,
+//         },
+//       },
+//     ],
+//   },
+//   // currentPositionId: 725,
+//   // setCurrentPositionId: () => {
+//     // return undefined;
+//   // },
+// };
 
 export const 로딩중 = Template.bind({});
 로딩중.args = {

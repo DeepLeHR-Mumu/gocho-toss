@@ -2,27 +2,30 @@ import { JobDetailObjDef } from "../type/jobDetail";
 
 export const selector = (jobDetailObj: JobDetailObjDef) => {
   const positionCamelArr = jobDetailObj.position_arr.map((position) => {
-    const factoryCamelArr = position.factory_arr?.map((factory) => {
-      return {
-        id: factory.id,
-        companyId: factory.company_id,
-        place1: factory.place_1,
-        place2: factory.place_2,
-        address: factory.address,
-        maleNumber: factory.male_number,
-        femaleNumber: factory.female_number,
-        product: factory.product,
-        bus: {
-          exists: factory.bus.exists,
-          desc: factory.bus.desc,
-        },
-        dormitory: {
-          exists: factory.dormitory.exists,
-          desc: factory.dormitory.desc,
-        },
-        factoryName: factory.name,
-      };
-    });
+    const factoryCamelArr =
+      position.place.factory_arr === null
+        ? null
+        : position.place.factory_arr?.map((factory) => {
+            return {
+              id: factory.id,
+              companyId: factory.company_id,
+              place1: factory.place_1,
+              place2: factory.place_2,
+              address: factory.address,
+              maleNumber: factory.male_number,
+              femaleNumber: factory.female_number,
+              product: factory.product,
+              bus: {
+                exists: factory.bus.exists,
+                desc: factory.bus.desc,
+              },
+              dormitory: {
+                exists: factory.dormitory.exists,
+                desc: factory.dormitory.desc,
+              },
+              factoryName: factory.name,
+            };
+          });
     return {
       id: position.id,
       jdId: position.jd_id,
@@ -38,8 +41,12 @@ export const selector = (jobDetailObj: JobDetailObjDef) => {
       },
       taskDetailArr: position.task_detail_arr,
       rotationArr: position.rotation_arr,
-      factoryArr: factoryCamelArr,
-      placeArr: position.place_arr,
+      place: {
+        addressArr: position.place.address_arr,
+        factoryArr: factoryCamelArr,
+        etc: position.place.etc,
+        type: position.place.type,
+      },
       hireCount: position.hire_number,
       payArr: position.pay_arr,
       preferredCertiArr: position.preferred_certi_arr,

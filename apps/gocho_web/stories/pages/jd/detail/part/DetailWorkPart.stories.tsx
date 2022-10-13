@@ -51,40 +51,40 @@ const Template: ComponentStory<typeof DetailWorkPart> = (args) => {
 
 export const 기본 = Template.bind({});
 
-기본.args = {
-  freshPosition: {
-    contractType: {
-      type: "계약직",
-      conversionRate: null,
-    },
-    taskDetailArr: ["공무기술직 : 자동기동"],
-    rotationArr: ["3교대"],
-    factoryArr: [
-      {
-        id: 1,
-        place1: "인천광역시",
-        place2: "서구",
-        address: "인천광역시 서구 백범로 680 (가좌동)",
-        maleNumber: 16,
-        femaleNumber: 1,
-        product: "폴리우레탄,정밀화학제품",
-        bus: {
-          exists: false,
-          desc: null,
-        },
-        dormitory: {
-          exists: false,
-          desc: null,
-        },
-        factoryName: "factoryName",
-      },
-    ],
-    placeArr: ["부산광역시", "사상구"],
-    hireCount: -2,
-    payArr: null,
-    task: {
-      mainTask: "설비",
-      subTaskArr: ["동력", "에너지"],
-    },
-  },
-};
+// 기본.args = {
+//   freshPosition: {
+//     contractType: {
+//       type: "계약직",
+//       conversionRate: null,
+//     },
+//     taskDetailArr: ["공무기술직 : 자동기동"],
+//     rotationArr: ["3교대"],
+//     factoryArr: [
+//       {
+//         id: 1,
+//         place1: "인천광역시",
+//         place2: "서구",
+//         address: "인천광역시 서구 백범로 680 (가좌동)",
+//         maleNumber: 16,
+//         femaleNumber: 1,
+//         product: "폴리우레탄,정밀화학제품",
+//         bus: {
+//           exists: false,
+//           desc: null,
+//         },
+//         dormitory: {
+//           exists: false,
+//           desc: null,
+//         },
+//         factoryName: "factoryName",
+//       },
+//     ],
+//     placeArr: ["부산광역시", "사상구"],
+//     hireCount: -2,
+//     payArr: null,
+//     task: {
+//       mainTask: "설비",
+//       subTaskArr: ["동력", "에너지"],
+//     },
+//   },
+// };
