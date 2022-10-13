@@ -91,6 +91,13 @@ const JobsDetail: NextPage = () => {
     logoUrl: jobDetailData.company.logoUrl,
   };
 
+  const placeDetail = () => {
+    const addrObject = jobDetailData.positionArr[0].place;
+    if (addrObject.addressArr) return addrObject.addressArr[0];
+    if (addrObject.factoryArr) return addrObject.factoryArr[0].factoryName;
+    if (addrObject.etc) return addrObject.etc;
+    return addrObject.type;
+  };
   return (
     <main css={wrapper}>
       <MetaHead
@@ -100,7 +107,7 @@ const JobsDetail: NextPage = () => {
           rotation: jobDetailData.positionArr[0].rotationArr[0],
           taskDetail: jobDetailData.positionArr[0].taskDetailArr[0],
           pay: jobDetailData.positionArr[0].payArr && jobDetailData.positionArr[0].payArr[0],
-          place: jobDetailData.positionArr[0].placeArr[0],
+          place: placeDetail(),
           possibleEdu: jobDetailData.positionArr[0].possibleEdu.summary,
         }}
         metaData={META_JD_DETAIL}
@@ -109,7 +116,6 @@ const JobsDetail: NextPage = () => {
       <Layout>
         <InvisibleH2 title={jobDetailData.title} />
         <HeaderPart
-          jobDetailData={jobDetailData}
           setCurrentPositionId={setCurrentPositionId}
           currentPositionId={currentPositionId}
           userId={userData?.id}
