@@ -50,10 +50,11 @@ const CompaniesDetail: NextPage = () => {
     if (info) {
       return;
     }
-    router.replace({
-      pathname: `${COMPANY_DETAIL_URL}/${companyId}`,
-      query: { info: "detail" },
-    });
+    if (!info && companyId)
+      router.replace({
+        pathname: `${COMPANY_DETAIL_URL}/${companyId}`,
+        query: { info: "detail" },
+      });
   }, [companyId, info, router]);
 
   useEffect(() => {

@@ -43,6 +43,7 @@ export const WriteComment: FunctionComponent<WriteCommentProps> = ({ postingId, 
     if (changeEvent.key === "Enter" && changeEvent.shiftKey) {
       return;
     }
+    if (changeEvent.keyCode === 229) return;
     if (changeEvent.key === "Enter") {
       changeEvent.preventDefault();
       handleSubmit(commentSubmit)();

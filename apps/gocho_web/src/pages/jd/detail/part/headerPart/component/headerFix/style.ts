@@ -26,18 +26,6 @@ export const flexBox = css`
   align-items: center;
 `;
 
-export const goBackButton = css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  background-color: ${COLORS.GRAY90};
-  border-radius: 50%;
-  color: ${COLORS.GRAY40};
-  margin-right: 1.25rem;
-`;
-
 export const titleBox = css``;
 
 export const companyNameCSS = css`

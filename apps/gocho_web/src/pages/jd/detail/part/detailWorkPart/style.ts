@@ -51,8 +51,9 @@ export const flexDesc = css`
   line-height: 1.8;
   font-weight: 400;
   word-break: keep-all;
-  display: flex;
-  align-items: center;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
 `;
 
 export const factoryButton = css`

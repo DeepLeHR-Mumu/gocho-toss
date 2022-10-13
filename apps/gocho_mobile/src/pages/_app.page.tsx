@@ -54,7 +54,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               router.push("/404");
             }
             if (axios.isAxiosError(error) && error.response?.status === 500) {
-              router.push("/404");
+              router.push("/500");
             }
           },
         },

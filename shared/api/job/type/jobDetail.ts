@@ -33,8 +33,12 @@ export interface PositionObjDef {
   };
   task_detail_arr: string[];
   rotation_arr: string[];
-  factory_arr: FactoryObjDef[];
-  place_arr: string[];
+  place: {
+    address_arr: string[] | null;
+    factory_arr: FactoryObjDef[] | null;
+    etc: string | null;
+    type: "일반" | "전국" | "해외" | "기타";
+  };
   hire_number: number;
   pay_arr: number[] | null;
   preferred_certi_arr: string[] | null;

@@ -70,38 +70,45 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
           </div>
         </div>
       </div>
+      {/* 일반일때는 일반주소 address arr, factory arr 없으면 노출력, 둘중 하나는 꼭 있음 ,  etc는 null */}
+
+      {/* 전국 해외 기타 addressarr, factoryarr 전부 null, etc만 출력하면된다 */}
 
       <div css={workPlaceContainer}>
         <div css={flexBetweenBox}>
           <p css={subTitle}>근무지</p>
           <div>
             <p css={flexDesc}>
-              {freshPosition.placeArr.map((place) => {
+              {freshPosition.place.addressArr?.map((place) => {
                 return (
-                  <span css={restPoint} key={`지역_${place}`}>
-                    {place}
-                  </span>
-                );
-              })}
-            </p>
-            {freshPosition.factoryArr &&
-              freshPosition.factoryArr.map((factory) => {
-                return (
-                  <div css={flexDesc} key={`${factory.factoryName}_${factory.id}`}>
-                    <button
-                      css={factoryButton}
-                      type="button"
-                      onClick={() => {
-                        showFactoryModal(factory);
-                      }}
-                    >
-                      <Image src={factoryIcon} alt="" objectFit="contain" />
-                      {factory.factoryName}
-                    </button>
-                    {factory.address}
+                  <div key={`지역_${place}`}>
+                    <p css={restPoint}>{place}</p>
                   </div>
                 );
               })}
+              {!freshPosition.place.addressArr && !freshPosition.place.factoryArr && (
+                <div key={`지역_${freshPosition.place.etc}`}>
+                  <p css={restPoint}>{freshPosition.place.etc}</p>
+                </div>
+              )}
+            </p>
+            {freshPosition.place.factoryArr?.map((factory) => {
+              return (
+                <div css={flexDesc} key={`${factory.factoryName}_${factory.id}`}>
+                  <button
+                    css={factoryButton}
+                    type="button"
+                    onClick={() => {
+                      showFactoryModal(factory);
+                    }}
+                  >
+                    <Image src={factoryIcon} alt="" objectFit="contain" />
+                    {factory.factoryName}
+                  </button>
+                  {factory.address}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

@@ -203,6 +203,8 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
               setTextValue(changeEvent.currentTarget.value);
             }}
             onKeyDown={(onKeyDownEvent) => {
+              if (onKeyDownEvent.keyCode === 229) return;
+
               if (onKeyDownEvent.key === "Enter") {
                 onKeyDownEvent.preventDefault();
                 commentSubmit({

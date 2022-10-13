@@ -5,7 +5,7 @@ import { useUserInfo } from "shared-api/auth";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
 import { ModalComponent } from "../modalBackground";
-import { wrapper, marginContainer, userNameCSS, accountCSS, buttonCSS, emailCSS, modalContainer } from "./style";
+import { wrapper, marginContainer, userNameCSS, buttonCSS, emailCSS, modalContainer } from "./style";
 import { PictureEditBox } from "./component/pictureEditBox";
 import { PasswordEditBox } from "./component/passwordEditBox";
 
@@ -21,7 +21,6 @@ export const AccountSettingBox: FunctionComponent = () => {
         <div css={marginContainer}>
           {userInfoData?.image && <ProfileImg imageStr={userInfoData?.image} size="L" />}
           <p css={userNameCSS}>{userInfoData?.nickname}</p>
-          <p css={accountCSS}>{userInfoData?.id}</p>
           <p css={emailCSS}>{userInfoData?.email}</p>
         </div>
 

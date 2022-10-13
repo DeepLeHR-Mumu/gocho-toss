@@ -11,7 +11,7 @@ import ReactGA from "react-ga4";
 
 import { TEST_KEY } from "shared-constant/gaKey";
 
-import { globalStyles } from "@style/globalStyle";
+import { globalStyles } from "src/style/globalStyle";
 import { Header } from "@component/global/header";
 import { Footer } from "@component/global/footer";
 import { Aside } from "@component/global/aside";
