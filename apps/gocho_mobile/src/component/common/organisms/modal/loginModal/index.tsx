@@ -2,6 +2,7 @@ import { FunctionComponent, useState } from "react";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import kakaoMono from "shared-image/global/sns/kakaoLogo.svg";
@@ -15,6 +16,7 @@ import { useModal } from "@recoil/hook/modal";
 import { BottomPopup } from "@component/bottomPopup";
 import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
 
+import { MAIN_URL } from "shared-constant/internalURL";
 import {
   wrapper,
   closeButton,
@@ -40,7 +42,7 @@ export const LoginModal: FunctionComponent = () => {
 
   const { setCurrentToast } = useToast();
   const { mutate } = useDoLogin();
-  const { closeModal, setCurrentModal } = useModal();
+  const { closeModal, setCurrentModal, currentModal } = useModal();
 
   const [errorMsg, setErrorMsg] = useState<null | string>(null);
 
@@ -62,15 +64,23 @@ export const LoginModal: FunctionComponent = () => {
   return (
     <BottomPopup>
       <div css={wrapper}>
-        <button
-          css={closeButton}
-          type="button"
-          onClick={() => {
-            closeModal();
-          }}
-        >
-          닫기
-        </button>
+        {currentModal?.modalContentObj?.button === "close" && (
+          <button
+            css={closeButton}
+            type="button"
+            onClick={() => {
+              closeModal();
+            }}
+          >
+            닫기
+          </button>
+        )}
+
+        {currentModal?.modalContentObj?.button === "home" && (
+          <Link href={MAIN_URL}>
+            <a css={closeButton}>홈으로</a>
+          </Link>
+        )}
 
         <div css={logoContainer}>
           <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" layout="fill" />

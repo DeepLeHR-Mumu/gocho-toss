@@ -8,7 +8,6 @@ import { paginationContainer, movePageButton, selectPageButton } from "./style";
 
 export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ total, limit, page, setPage }) => {
   const totalPage = Math.ceil(total / limit);
-  const count = Math.floor(page / 5);
 
   return (
     <div css={paginationContainer}>
@@ -26,27 +25,25 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ tot
         css={movePageButton}
         type="button"
         onClick={() => {
-          return setPage(page - 1);
+          return setPage(page);
         }}
         disabled={page === 1}
       >
         <FiChevronLeft />
       </button>
-      {dummyArrCreator(5).map((idx) => {
-        if (count * 5 + idx !== 0 && totalPage >= count * 5 + idx)
-          return (
-            <button
-              css={selectPageButton(count * 5 + idx === page)}
-              type="button"
-              onClick={() => {
-                return setPage(count * 5 + idx);
-              }}
-              key={`bottomPagination${count * 5 + idx}`}
-            >
-              {count * 5 + idx}
-            </button>
-          );
-        return <div key={`bottomPagination${count * 5 + idx}`} />;
+      {dummyArrCreator(totalPage).map((idx) => {
+        return (
+          <button
+            css={selectPageButton(false)}
+            type="button"
+            onClick={() => {
+              return setPage(2);
+            }}
+            key={`bottomPagination${idx}`}
+          >
+            {idx + 1}
+          </button>
+        );
       })}
       <button
         css={movePageButton}

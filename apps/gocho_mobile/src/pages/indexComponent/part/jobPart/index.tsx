@@ -7,7 +7,7 @@ import { Layout } from "@component/layout";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { JobCardList } from "./component/jobCardList";
 
-import { linkButton, sectionContainer, title, titleBox } from "./style";
+import { cardContainer, linkButton, sectionContainer, title, titleBox } from "./style";
 
 export const JobPart: FunctionComponent = () => {
   return (
@@ -28,8 +28,10 @@ export const JobPart: FunctionComponent = () => {
             </a>
           </Link>
         </div>
-        <JobCardList />
       </Layout>
+      <div css={cardContainer}>
+        <JobCardList />
+      </div>
     </section>
   );
 };

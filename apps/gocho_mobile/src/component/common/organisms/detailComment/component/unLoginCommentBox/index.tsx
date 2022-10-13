@@ -21,7 +21,7 @@ export const UnLoginCommentBox: FunctionComponent = () => {
   const { setCurrentModal } = useModal();
 
   const showLoginModal = () => {
-    setCurrentModal("loginModal");
+    setCurrentModal("loginModal", { button: "close" });
   };
 
   return (

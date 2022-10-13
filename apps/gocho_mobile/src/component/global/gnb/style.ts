@@ -11,6 +11,7 @@ export const headerWrapper = css`
   top: 0;
   height: 3.25rem;
   z-index: 70;
+  border-bottom: 1px solid ${COLORS.GRAY70};
 `;
 
 export const headerContainer = (openedElement: openedElementDef) => {

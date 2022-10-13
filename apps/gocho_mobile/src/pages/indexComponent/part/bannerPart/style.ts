@@ -46,6 +46,7 @@ export const descCSS = css`
   word-break: keep-all;
   color: #5f5f6a;
   line-height: 1.5;
+  margin-bottom: 0.5rem;
 `;
 
 export const iconBox = css`

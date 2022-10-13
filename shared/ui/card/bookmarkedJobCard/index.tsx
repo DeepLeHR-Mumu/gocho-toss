@@ -89,7 +89,7 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
   };
 
   return (
-    <article css={cardWrapper(isMobile)}>
+    <article css={cardWrapper}>
       <button
         type="button"
         css={bookmarkButton(isBookmarked)}
@@ -101,7 +101,7 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
         <BsFillBookmarkFill />
       </button>
       <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
-        <a css={linkButtonCSS}>
+        <a css={linkButtonCSS(isMobile)}>
           <div css={companyLogoBox}>
             <Image
               layout="fill"
@@ -113,7 +113,7 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
               alt={`${jobData.companyName}의 로고`}
             />
           </div>
-          <div css={jobInfoBox}>
+          <div css={jobInfoBox(isMobile)}>
             <div css={flexBox}>
               <DdayBox endTime={jobData.endTime} />
               {jobData.cut && <div css={cutBox}>채용시마감</div>}

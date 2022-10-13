@@ -25,3 +25,7 @@ export const linkButton = css`
   color: ${COLORS.GRAY10};
   font-weight: 400;
 `;
+
+export const cardContainer = css`
+  padding-left: 1rem;
+`;
