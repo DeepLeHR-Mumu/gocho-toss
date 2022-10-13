@@ -1,6 +1,7 @@
 {
   "extends": "tsconfig-deeple/nextjs.json",
   "compilerOptions": {
+    "downlevelIteration": true,
     "types": [
       "@emotion/react/types/css-prop"
     ],

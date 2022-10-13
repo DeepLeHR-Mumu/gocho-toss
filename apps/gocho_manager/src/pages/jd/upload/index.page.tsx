@@ -9,6 +9,7 @@ import { useFindCompany } from "@api/company/useFindCompany";
 import { useAddJob } from "@api/job/useAddJob";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
+import { JobFormValues } from "./type";
 import {
   formContainer,
   sectionTitle,
@@ -30,7 +31,6 @@ import {
   addPositionButton,
   submitButton,
 } from "./style";
-import { JobFormValues } from "./type";
 import { requiredExpArr, contractTypeArr, taskArr, rotationArr } from "./constant";
 
 const JdUpload: NextPage = () => {
