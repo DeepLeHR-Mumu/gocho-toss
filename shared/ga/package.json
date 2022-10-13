@@ -1,0 +1,16 @@
+{
+  "name": "shared-ga",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "./index.tsx",
+  "types": "./index.tsx",
+  "dependencies": {
+    "react-ga4": "^1.4.1",
+    "shared-constant": "workspace:^0.0.0"
+  },
+  "devDependencies": {
+    "eslint-config-deeple": "workspace:^1.0.0",
+    "tsconfig-deeple": "workspace:^0.0.0",
+    "typescript": "4.7.2"
+  }
+}

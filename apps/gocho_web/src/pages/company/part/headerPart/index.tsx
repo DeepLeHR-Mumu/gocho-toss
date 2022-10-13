@@ -9,6 +9,7 @@ import catchLogoSrc from "shared-image/global/common/catch_logo.png";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { useUserInfo } from "shared-api/auth";
+import { companyBookmarkEvent } from "shared-ga/company";
 
 import { useModal } from "@recoil/hook/modal";
 
@@ -32,7 +33,6 @@ import {
 
 export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData, isBookmarked, userId }) => {
   const queryClient = useQueryClient();
-  const [imageSrc, setImageSrc] = useState(companyData?.logoUrl as string);
   const { data: userInfoData } = useUserInfo();
   const { setCurrentModal } = useModal();
 
@@ -47,6 +47,8 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData, is
     name: companyData?.name as string,
   });
 
+  const [imageSrc, setImageSrc] = useState(companyData?.logoUrl as string);
+
   const addCompanyBookmark = () => {
     return (
       userId &&
@@ -54,6 +56,7 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData, is
         { userId, elemId: companyData.id },
         {
           onSuccess: () => {
+            companyBookmarkEvent(companyData.id);
             queryClient.invalidateQueries(companyDetailKeyObj.detail({ companyId: companyData.id }));
           },
         }

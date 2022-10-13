@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 import { useDoKakaoLogin } from "shared-api/auth/useDoKakaoLogin";
+import { loginSuccessEvent } from "shared-ga/auth";
+import { tokenDecryptor } from "shared-util/tokenDecryptor";
 
 const KakaoLogin: NextPage = () => {
   const queryClient = useQueryClient();
@@ -11,21 +13,28 @@ const KakaoLogin: NextPage = () => {
   const router = useRouter();
   const { code } = router.query;
   const { mutate: kakaologinMutation } = useDoKakaoLogin();
+
   useEffect(() => {
-    if (code) {
+    if (code && queryClient && router) {
       kakaologinMutation(
         { code: code as string },
         {
           onSuccess: (response) => {
-            localStorage.setItem("token", `${response.data.token}`);
+            if (response.data.result === "NEW_USER") {
+              return;
+            }
             queryClient.invalidateQueries();
-            router.push("/");
+            const { id } = tokenDecryptor(response.data.token as string);
+            const kakaopath = sessionStorage.getItem("kakaopath");
+            loginSuccessEvent(id, "kakao", kakaopath);
+            localStorage.setItem("token", `${response.data.token}`);
+            router.back();
           },
         }
       );
     }
   }, [kakaologinMutation, code, queryClient, router]);
-  return <main>{code}</main>;
+  return <> </>;
 };
 
 export default KakaoLogin;

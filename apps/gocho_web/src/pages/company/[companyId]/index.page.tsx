@@ -6,14 +6,16 @@ import { useUserInfo } from "shared-api/auth";
 import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { useAddCompanyViewCount } from "shared-api/viewCount";
 import { useCompanyDetail } from "shared-api/company";
-
-import { Layout } from "@component/layout";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { DetailComment } from "@component/global/detailComment";
 import useMoveScroll from "@pages/company/[companyId]/util";
 import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import { META_COMPANY_INFO, META_COMPANY_RECRUIT } from "shared-constant/meta";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { companyInfoFunnelEvent, companyJdFunnelEvent } from "shared-ga/company";
+
+import { Layout } from "@component/layout";
+
 import { WorkingNotice } from "../component/workingNotice";
 import { MenuButtonList } from "../component/menuButtonList";
 import { HeaderPart } from "../part/headerPart";
@@ -55,31 +57,31 @@ const CompaniesDetail: NextPage = () => {
   }, [companyId, info, router]);
 
   useEffect(() => {
-    // TODO string으로 가져오기
     const companyViewStr = sessionStorage.getItem("companyViewArr");
 
-    // TODO companyDetailData가 없으면 useEffect 탈출
     if (!companyDetailData) return;
 
-    // TODO 이미 조회한 게시글일 경우 useEffect 탈출
     const isViewed = companyViewStr?.includes(String(companyDetailData?.data.id));
     if (isViewed) return;
 
-    // TODO 해당 세션에서 이미 첫 조회가 이루어진 경우 - 조회한 기록이 없는 게시글 일 경우
     if (companyViewStr) {
-      const companyViewArr: number[] = JSON.parse(companyViewStr); // [33]
-      companyViewArr.push(companyDetailData.data.id); // [33, 45]
-      sessionStorage.setItem("companyViewArr", JSON.stringify(companyViewArr)); // "[33, 45]"
+      const companyViewArr: number[] = JSON.parse(companyViewStr);
+      companyViewArr.push(companyDetailData.data.id);
+      sessionStorage.setItem("companyViewArr", JSON.stringify(companyViewArr));
       addViewCount({ elemId: companyDetailData.data.id });
       return;
     }
 
-    // TODO 해당 세션에서 첫 조회
     if (!isViewed) {
       sessionStorage.setItem("companyViewArr", JSON.stringify([companyDetailData.data.id]));
       addViewCount({ elemId: companyDetailData.data.id });
     }
   }, [companyDetailData, addViewCount]);
+
+  useEffect(() => {
+    if (companyDetailData && info === "detail") companyInfoFunnelEvent(companyDetailData.data.id);
+    if (companyDetailData && info === "jd") companyJdFunnelEvent(companyDetailData.data.id);
+  }, [companyDetailData, info]);
 
   if (!companyDetailData || isError || isLoading) {
     return <main css={mainContainerSkeleton} />;

@@ -2,11 +2,13 @@ import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useModal } from "@recoil/hook/modal";
-import { useIsSpecPageBlocking } from "@recoil/hook/spec";
 import { useRegisterSpec } from "shared-api/spec";
 import { specArrKeyObj } from "shared-constant/queryKeyFactory/spec/arrKeyObj";
 import { userInfoKeyObj } from "shared-constant/queryKeyFactory/user/infoKeyObj";
+import { specRegisterEvent } from "shared-ga/spec";
+
+import { useModal } from "@recoil/hook/modal";
+import { useIsSpecPageBlocking } from "@recoil/hook/spec";
 
 import { SpecCardTitle, MoveCardButtons } from "../common/component";
 import { Spec8AwardCareerEtcProps, PostSubmitValues } from "./type";
@@ -40,6 +42,7 @@ export const Spec8AwardCareerEtc: FunctionComponent<Spec8AwardCareerEtcProps> = 
       },
       onSuccess: () => {
         setIsBlocking(true);
+        specRegisterEvent(true);
         queryClient.invalidateQueries(specArrKeyObj.all);
         moveNextCard(100);
         sessionStorage.removeItem("specObj");

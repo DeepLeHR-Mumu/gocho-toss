@@ -13,6 +13,8 @@ import { Layout } from "@component/layout";
 import { Pagination } from "@pages/jd/component/pagination";
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
 import { JOBS_LIST_URL } from "shared-constant/internalURL";
+import { jdListFunnelEvent, jdSearchEvent } from "shared-ga/jd";
+
 import { JobCardList } from "../../component/jobCardList";
 import { Filter } from "../../component/filter";
 import { setJobOrderButtonArr } from "./constant";
@@ -56,6 +58,7 @@ export const ListPart: FunctionComponent = () => {
       pathname: JOBS_LIST_URL,
       query: { page: 1, order: activeOrder },
     });
+    jdSearchEvent(searchVal.searchWord);
     setSearchQuery({
       contractType: searchVal.contractType,
       industry: searchVal.industry,
@@ -97,6 +100,10 @@ export const ListPart: FunctionComponent = () => {
       setTotal(jobDataArr.count);
     }
   }, [jobDataArr]);
+  
+  useEffect(() => {
+    jdListFunnelEvent();
+  }, []);
 
   const totalPage = Math.ceil(total / limit);
 

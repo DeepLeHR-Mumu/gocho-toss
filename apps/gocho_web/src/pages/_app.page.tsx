@@ -7,6 +7,9 @@ import type { AppProps } from "next/app";
 import { Global } from "@emotion/react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import ReactGA from "react-ga4";
+
+import { TEST_KEY } from "shared-constant/gaKey";
 
 import { globalStyles } from "@style/globalStyle";
 import { Header } from "@component/global/header";
@@ -41,6 +44,20 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  ReactGA.initialize(TEST_KEY);
+
+  // useEffect(() => {
+  //   router.events.on("routeChangeComplete", () => {
+  //     ReactGA.event("page_view");
+  //   });
+
+  //   return () => {
+  //     router.events.off("routeChangeComplete", () => {
+  //       ReactGA.event("page_view");
+  //     });
+  //   };
+  // }, [router.events]);
+
   const [queryClient] = useState(() => {
     return new QueryClient({
       defaultOptions: {
@@ -54,7 +71,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               router.push("/404");
             }
             if (axios.isAxiosError(error) && error.response?.status === 500) {
-              router.push("/404");
+              router.push("/500");
             }
           },
         },

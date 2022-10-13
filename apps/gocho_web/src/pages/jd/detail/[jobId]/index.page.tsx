@@ -11,6 +11,7 @@ import { Layout } from "@component/layout";
 import { DetailComment } from "@component/global/detailComment";
 import { useUserInfo } from "shared-api/auth";
 import { useAddJobViewCount } from "shared-api/viewCount";
+import { jdDetailFunnelEvent } from "shared-ga/jd";
 
 import { PositionObjDef } from "./type";
 import { HeaderPart, DetailSupportPart, DetailWorkPart, DetailPreferencePart, ReceptInfoPart } from "../part";
@@ -63,6 +64,10 @@ const JobsDetail: NextPage = () => {
       setFreshPosition(filterPosition);
     }
   }, [currentPositionId, jobDetailData]);
+
+  useEffect(() => {
+    if (jobDetailData) jdDetailFunnelEvent(jobDetailData.id);
+  }, [jobDetailData]);
 
   if (!jobDetailData || isLoading) {
     return (
