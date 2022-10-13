@@ -1,14 +1,16 @@
 import { FunctionComponent, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { AiOutlineEnter } from "react-icons/ai";
 
-import { useDeleteComment } from "@api/community/useDeleteComment";
-import { communityCommentArrKeyObj } from "@constant/queryKeyFactory/community/commentArrKeyObj";
+import { useDeleteComment } from "shared-api/community/useDeleteComment";
+import { communityCommentArrKeyObj } from "shared-constant/queryKeyFactory/community/commentArrKeyObj";
 
+import { ChangeComment } from "../changeComment";
+// import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { CommentProps } from "./type";
 import {
   wrapper,
   commentWrapper,
+  nicknameBox,
   nicknameCSS,
   bodyBox,
   bodyCSS,
@@ -30,7 +32,8 @@ export const Comment: FunctionComponent<CommentProps> = ({
   nickname,
 }) => {
   const [showWriteComment, setShowWriteComment] = useState<boolean>(false);
-  const [errorMsg, setErrorMsg] = useState<null | string>(null);
+  const [isChangeComment, setIsChangeComment] = useState(false);
+  const [errorMsg] = useState<null | string>(null);
   const handleShowWriteComment = () => {
     if (showWriteComment) return setShowWriteComment(false);
     return setShowWriteComment(true);
@@ -46,9 +49,6 @@ export const Comment: FunctionComponent<CommentProps> = ({
         onSuccess: () => {
           queryClient.invalidateQueries(communityCommentArrKeyObj.all);
         },
-        onError: (err) => {
-          setErrorMsg(err.response?.data.error.errorMessage);
-        },
       }
     );
   };
@@ -56,22 +56,41 @@ export const Comment: FunctionComponent<CommentProps> = ({
   return (
     <div css={wrapper}>
       <div css={commentWrapper}>
-        <div css={nicknameCSS}>{nickname}</div>
+        <div css={nicknameBox}>
+          {/* <ProfileImg imageStr="default" size="S" /> */}
+          <p css={nicknameCSS}>{nickname}</p>
+        </div>
         <div css={bodyBox}>
-          <div css={bodyCSS}>{body}</div>
+          {isChangeComment ? (
+            <ChangeComment
+              setIsChangeComment={setIsChangeComment}
+              prevDesc={body}
+              postingId={postingId}
+              commentId={id}
+            />
+          ) : (
+            <p css={bodyCSS}>{body}</p>
+          )}
+
           <div css={buttonContainer}>
-            <button
-              css={writeReCommentButtonBox}
-              type="button"
-              onClick={handleShowWriteComment}
-            >
-              <AiOutlineEnter />
+            <button css={writeReCommentButtonBox} type="button" onClick={handleShowWriteComment}>
+              {showWriteComment ? "닫기" : "답글"}
             </button>
             {loginUserId === userId && (
               <div css={settingButtonContainer}>
-                <button type="button" css={settingButton}>
-                  수정
+                <button
+                  type="button"
+                  css={settingButton}
+                  aria-label={isChangeComment ? "수정 취소" : "댓글 수정"}
+                  onClick={() => {
+                    setIsChangeComment((isPrev) => {
+                      return !isPrev;
+                    });
+                  }}
+                >
+                  {isChangeComment ? "취소" : "수정"}
                 </button>
+
                 <button
                   type="button"
                   css={settingButton}
@@ -84,25 +103,12 @@ export const Comment: FunctionComponent<CommentProps> = ({
               </div>
             )}
             {errorMsg && <p> {errorMsg}</p>}
-            {showWriteComment && (
-              <WriteComment postingId={postingId} parentCommentId={id} />
-            )}
+            {showWriteComment && <WriteComment postingId={postingId} parentCommentId={id} />}
           </div>
         </div>
       </div>
       {reCommentList.map((reComment) => {
-        return (
-          <ReComment
-            id={reComment.id}
-            postingId={postingId}
-            userId={reComment.userId}
-            loginUserId={loginUserId}
-            body={reComment.description}
-            nickname={reComment.nickname}
-            emblem={reComment.badge}
-            key={reComment.id}
-          />
-        );
+        return <ReComment reComment={reComment} postingId={postingId} loginUserId={loginUserId} key={reComment.id} />;
       })}
     </div>
   );

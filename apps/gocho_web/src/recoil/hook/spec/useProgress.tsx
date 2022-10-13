@@ -2,8 +2,7 @@ import { useRecoilState, useResetRecoilState } from "recoil";
 import { progressPercentAtom } from "@recoil/atom";
 
 export const useProgress = () => {
-  const [_currentProgress, _setCurrentProgress] =
-    useRecoilState(progressPercentAtom);
+  const [_currentProgress, _setCurrentProgress] = useRecoilState(progressPercentAtom);
 
   const resetCurrentProgress = useResetRecoilState(progressPercentAtom);
 

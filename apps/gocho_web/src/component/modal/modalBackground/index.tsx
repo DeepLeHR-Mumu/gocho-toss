@@ -1,21 +1,10 @@
-import { FunctionComponent, useCallback, useEffect } from "react";
+import { FunctionComponent, useEffect } from "react";
 import { createPortal } from "react-dom";
+
 import { dimmed } from "./style";
 import { modalComponentProps } from "./type";
 
-export const ModalComponent: FunctionComponent<modalComponentProps> = ({
-  children,
-  closeModal,
-}) => {
-  const closeOnClick = useCallback(
-    (event?): void => {
-      if (event?.target === event?.currentTarget) {
-        closeModal?.();
-      }
-    },
-    [closeModal]
-  );
-
+export const ModalComponent: FunctionComponent<modalComponentProps> = ({ children }) => {
   useEffect(() => {
     // TODO: body css로 옮기기
     document.body.style.cssText = `
@@ -30,22 +19,5 @@ export const ModalComponent: FunctionComponent<modalComponentProps> = ({
     };
   }, []);
 
-  useEffect(() => {
-    const handleEsc = (event: KeyboardEvent): void => {
-      if (event.key === "Escape") {
-        closeModal();
-      }
-    };
-    window.addEventListener("keydown", handleEsc);
-    return () => {
-      window.removeEventListener("keydown", handleEsc);
-    };
-  }, [closeModal]);
-
-  return createPortal(
-    <div aria-hidden css={dimmed} onClick={closeOnClick}>
-      {children}
-    </div>,
-    document.getElementById("portal") as HTMLElement
-  );
+  return createPortal(<div css={dimmed}>{children}</div>, document.getElementById("portal") as HTMLElement);
 };

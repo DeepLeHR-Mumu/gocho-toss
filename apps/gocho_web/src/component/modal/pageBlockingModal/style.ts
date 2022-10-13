@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
   position: fixed;
@@ -16,6 +16,7 @@ export const wrapper = css`
 `;
 
 export const title = css`
+  display: block;
   font-size: 1rem;
   font-weight: 400;
   color: ${COLORS.BLUE_FIRST40};

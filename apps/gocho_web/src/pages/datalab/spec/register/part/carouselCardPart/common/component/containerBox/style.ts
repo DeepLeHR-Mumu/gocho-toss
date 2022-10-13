@@ -1,18 +1,10 @@
 import { css, SerializedStyles } from "@emotion/react";
 
 interface ContainerBoxDef {
-  (optionObj: {
-    location: "top" | "bottom";
-    marginValue: number;
-    maxWidth?: number;
-  }): SerializedStyles;
+  (optionObj: { location: "top" | "bottom"; marginValue: number; maxWidth?: number }): SerializedStyles;
 }
 
-export const containerBoxCSS: ContainerBoxDef = ({
-  location,
-  marginValue,
-  maxWidth,
-}) => {
+export const containerBoxCSS: ContainerBoxDef = ({ location, marginValue, maxWidth }) => {
   return css`
     width: 100%;
     display: flex;

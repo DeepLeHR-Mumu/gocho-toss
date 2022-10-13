@@ -1,24 +1,19 @@
 import { createPortal } from "react-dom";
-import { FunctionComponent, useEffect } from "react";
-
-import { useToast } from "@recoil/hook/toast";
+import { FunctionComponent } from "react";
 
 import { wrapper, descCSS } from "./style";
 
-export const ToastComponent: FunctionComponent = () => {
-  const { closeToast, currentToast } = useToast();
+interface ToastComponentProps {
+  nickName?: string;
+  activatedMsg?: string;
+}
 
-  useEffect(() => {
-    setTimeout(() => {
-      closeToast();
-    }, 3500);
-  }, []);
-
+export const ToastComponent: FunctionComponent<ToastComponentProps> = ({ nickName, activatedMsg }) => {
   return createPortal(
-    <div css={wrapper} aria-hidden onClick={closeToast}>
+    <div css={wrapper} aria-hidden>
       <p css={descCSS}>
-        {currentToast?.nickname}
-        {currentToast?.activatedMsg}
+        {nickName}
+        {activatedMsg}
       </p>
     </div>,
     document.getElementById("toast") as HTMLElement

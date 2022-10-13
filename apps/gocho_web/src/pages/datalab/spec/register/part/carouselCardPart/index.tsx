@@ -1,7 +1,10 @@
-import { FunctionComponent, useRef, useState } from "react";
+import { FunctionComponent, useRef, useState, useEffect } from "react";
 import Slider from "react-slick";
 
-import { useProgress, useLastEdu } from "@recoil/hook/spec";
+import { useProgress, useIsSpecPageBlocking } from "@recoil/hook/spec";
+
+import { scrollToTop } from "shared-ui/common/atom/scrollTop";
+import { specRegisterStepEvent } from "shared-ga/spec";
 
 import { Spec1Basic } from "./spec1Basic";
 import { Spec2lastEducation } from "./spec2LastEducation";
@@ -12,31 +15,60 @@ import { Spec6MiddleEnd } from "./spec6MiddleEnd";
 import { Spec7Lang } from "./spec7Lang";
 import { Spec8AwardCareerEtc } from "./spec8AwardCareerEtc";
 import { Spec9Success } from "./spec9Success";
-
-import { setCarouselSetting, scrollTop } from "./util";
+import { setCarouselSetting } from "./util";
 import { moveNextCardDef } from "./type";
 import { wrapper } from "./style";
 
 export const SpecWritePart: FunctionComponent = () => {
   const [isSpec6MiddleEnd, setIsSpec6MiddleEnd] = useState<boolean>(true);
-  const { setCurrentProgress } = useProgress();
-  const { currentLastEdu } = useLastEdu();
+  const [userLastEdu, setUserLastEdu] = useState<null | "고졸" | "초대졸">(null);
+  const [currentIndex, setCurrenIndex] = useState(1);
+  const [maximumIndex, setMaximumIndex] = useState(1);
+  const { setIsBlocking } = useIsSpecPageBlocking();
+
   const sliderRef = useRef<Slider>(null);
+  const { setCurrentProgress } = useProgress();
+
+  useEffect(() => {
+    setIsBlocking(false);
+  }, [setIsBlocking]);
 
   const moveNextCard: moveNextCardDef = (percent) => {
-    scrollTop();
+    scrollToTop();
     setCurrentProgress(percent);
+    setCurrenIndex((prev) => {
+      return prev + 1;
+    });
     sliderRef.current?.slickNext();
   };
 
   const movePrevCard = () => {
-    scrollTop();
+    scrollToTop();
+    setCurrenIndex((prev) => {
+      return prev - 1;
+    });
     sliderRef.current?.slickPrev();
   };
 
   const handleKeepWriteSpec = () => {
     setIsSpec6MiddleEnd(false);
+    setCurrenIndex((prev) => {
+      return prev + 1;
+    });
   };
+
+  useEffect(() => {
+    if (isSpec6MiddleEnd && maximumIndex > 5) {
+      return;
+    }
+    specRegisterStepEvent(maximumIndex);
+  }, [maximumIndex, isSpec6MiddleEnd]);
+
+  useEffect(() => {
+    if (currentIndex > maximumIndex) {
+      setMaximumIndex(currentIndex);
+    }
+  }, [currentIndex, maximumIndex]);
 
   return (
     <section css={wrapper}>
@@ -46,24 +78,17 @@ export const SpecWritePart: FunctionComponent = () => {
         <Spec2lastEducation
           movePrevCard={movePrevCard}
           moveNextCard={moveNextCard}
+          userLastEdu={userLastEdu}
+          setUserLastEdu={setUserLastEdu}
         />
 
-        {currentLastEdu === "고졸" ? (
-          <Spec3Highschool
-            movePrevCard={movePrevCard}
-            moveNextCard={moveNextCard}
-          />
+        {userLastEdu === "고졸" ? (
+          <Spec3Highschool movePrevCard={movePrevCard} moveNextCard={moveNextCard} />
         ) : (
-          <Spec4University
-            movePrevCard={movePrevCard}
-            moveNextCard={moveNextCard}
-          />
+          <Spec4University movePrevCard={movePrevCard} moveNextCard={moveNextCard} />
         )}
 
-        <Spec5Certificate
-          movePrevCard={movePrevCard}
-          moveNextCard={moveNextCard}
-        />
+        <Spec5Certificate movePrevCard={movePrevCard} moveNextCard={moveNextCard} />
 
         {isSpec6MiddleEnd && (
           <Spec6MiddleEnd
@@ -73,16 +98,9 @@ export const SpecWritePart: FunctionComponent = () => {
           />
         )}
 
-        {!isSpec6MiddleEnd && (
-          <Spec7Lang movePrevCard={movePrevCard} moveNextCard={moveNextCard} />
-        )}
+        {!isSpec6MiddleEnd && <Spec7Lang movePrevCard={movePrevCard} moveNextCard={moveNextCard} />}
 
-        {!isSpec6MiddleEnd && (
-          <Spec8AwardCareerEtc
-            movePrevCard={movePrevCard}
-            moveNextCard={moveNextCard}
-          />
-        )}
+        {!isSpec6MiddleEnd && <Spec8AwardCareerEtc movePrevCard={movePrevCard} moveNextCard={moveNextCard} />}
 
         <Spec9Success />
       </Slider>

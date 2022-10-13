@@ -2,9 +2,9 @@ import { FunctionComponent, useState } from "react";
 import Image from "next/image";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
-import { useTipDetail } from "@api/tip";
-import { COMMUNITY_TIPS_LIST_URL } from "@constant/internalURL";
-import { LinkButton } from "@component/common/atom/Button";
+import { useTipDetail } from "shared-api/tip";
+import { COMMUNITY_TIPS_LIST_URL } from "shared-constant/internalURL";
+import { LinkButton } from "shared-ui/common/atom/button";
 
 import { TipDisplaySkeleton } from "../tipDisplaySkeleton";
 import {
@@ -13,7 +13,6 @@ import {
   currentTipContainer,
   buttonCSSCreator,
   tipImageBox,
-  fadeImageCSS,
   tagArrCSS,
   currentTipTitle,
   currentTipDesc,
@@ -22,9 +21,9 @@ import { TipDisplayProps } from "./type";
 
 export const TipDisplay: FunctionComponent<TipDisplayProps> = ({ id }) => {
   const [currentId, setCurrentId] = useState(id);
-  const { data: tipDetailData, isLoading } = useTipDetail({ id: currentId });
+  const { data: tipDetailData } = useTipDetail({ id: currentId });
 
-  if (!tipDetailData || isLoading) {
+  if (!tipDetailData) {
     return <TipDisplaySkeleton />;
   }
 
@@ -60,20 +59,20 @@ export const TipDisplay: FunctionComponent<TipDisplayProps> = ({ id }) => {
           onClick={handlePrevTipId}
           aria-label="이전 꿀팁 확인하기"
         >
-          <BsChevronLeft size={20} />
+          <BsChevronLeft />
         </button>
+
         <div css={tipImageBox}>
-          <div css={fadeImageCSS}>
-            <Image
-              src={tipDetailData.thumbnailSrc}
-              alt={tipDetailData.title}
-              layout="fill"
-              objectFit="cover"
-              draggable="false"
-              loading="eager"
-            />
-          </div>
+          <Image
+            src={tipDetailData.thumbnailSrc}
+            alt={tipDetailData.title}
+            layout="fill"
+            objectFit="cover"
+            draggable="false"
+            loading="eager"
+          />
         </div>
+
         <button
           type="button"
           // LATER 이해가 어려운 CSS 함수 지양
@@ -81,29 +80,19 @@ export const TipDisplay: FunctionComponent<TipDisplayProps> = ({ id }) => {
           onClick={handleNextTipId}
           aria-label="다음 꿀팁 확인하기"
         >
-          <BsChevronRight size={20} />
+          <BsChevronRight />
         </button>
       </div>
 
       <div css={currentTipContainer}>
         <ul css={tagArrCSS}>
           {tipDetailData.tag.map((keyword) => {
-            return <li key={`${tipDetailData.id}${keyword}`}>{keyword}</li>;
+            return <li key={`${tipDetailData.id}${keyword}`}>#{keyword}</li>;
           })}
         </ul>
-        <p>
-          <strong css={currentTipTitle}>
-            {tipDetailData.title.split("-").map((line) => {
-              return <span key={line}>{line}</span>;
-            })}
-          </strong>
-        </p>
+        <strong css={currentTipTitle}>{tipDetailData.title}</strong>
         <p css={currentTipDesc}>{tipDetailData.description}</p>
-        <LinkButton
-          linkTo={COMMUNITY_TIPS_LIST_URL}
-          variant="filled"
-          text="취업꿀팁 더보기"
-        />
+        <LinkButton linkTo={COMMUNITY_TIPS_LIST_URL} variant="filled" text="취업꿀팁 더보기" />
       </div>
     </article>
   );

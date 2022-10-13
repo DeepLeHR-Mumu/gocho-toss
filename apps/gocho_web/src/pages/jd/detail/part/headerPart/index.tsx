@@ -1,7 +1,9 @@
 import { FunctionComponent, useEffect, useState, useRef } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
-import { SkeletonBox } from "@component/common/atom/skeletonBox";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
+import { useUserInfo } from "shared-api/auth";
+import { dDayCalculator } from "shared-util/date";
 import { PositionCard } from "./component/positionCard";
 import { HeaderFix } from "./component/headerFix";
 import { Header } from "./component/header";
@@ -17,9 +19,7 @@ import {
   positionTitleSkeleton,
 } from "./style";
 
-export const HeaderPart: FunctionComponent<
-  HeaderPartProps | HeaderPartSkeleton
-> = ({
+export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton> = ({
   isSkeleton,
   jobDetailData,
   currentPositionId,
@@ -28,6 +28,8 @@ export const HeaderPart: FunctionComponent<
   const [defaultCardCount, setDefaultCardCount] = useState(5);
   const [isOverlap, setIsOverlap] = useState(true);
   const observeRef = useRef<HTMLDivElement | null>(null);
+
+  const { data: userData } = useUserInfo();
 
   useEffect(() => {
     if (setCurrentPositionId) {
@@ -64,9 +66,9 @@ export const HeaderPart: FunctionComponent<
           <SkeletonBox />
         </div>
         <section css={positionContainer}>
-          <h3 css={positionTitleSkeleton}>
+          <div css={positionTitleSkeleton}>
             <SkeletonBox />
-          </h3>
+          </div>
           <div css={cardContainer}>
             <PositionCard isSkeleton />
           </div>
@@ -75,25 +77,28 @@ export const HeaderPart: FunctionComponent<
     );
   }
 
+  const isDdayEnd = dDayCalculator(jobDetailData.endTime) === "만료";
+
   return (
     <div>
       {isOverlap ? (
-        <Header jobDetailData={jobDetailData} />
+        <Header jobDetailData={jobDetailData} userId={userData?.id} isDdayEnd={isDdayEnd} />
       ) : (
-        <HeaderFix jobDetailData={jobDetailData} />
+        <HeaderFix jobDetailData={jobDetailData} userId={userData?.id} isDdayEnd={isDdayEnd} />
       )}
 
       <div css={observeCSS} ref={observeRef} />
 
       <section css={positionContainer}>
-        <h3 css={positionTitle}>
+        <p css={positionTitle(isDdayEnd)}>
           채용중인 직무<span>{jobDetailData.positionArr.length}</span>
-        </h3>
+        </p>
         <div css={cardContainer}>
           {jobDetailData.positionArr.map((position, index) => {
             return (
               index < defaultCardCount && (
                 <PositionCard
+                  isDdayEnd={isDdayEnd}
                   currentPositionId={currentPositionId}
                   setCurrentPositionId={setCurrentPositionId}
                   position={position}
@@ -105,19 +110,11 @@ export const HeaderPart: FunctionComponent<
 
           {jobDetailData.positionArr.length > 5 &&
             (defaultCardCount === jobDetailData.positionArr.length ? (
-              <button
-                css={moreButton}
-                type="button"
-                onClick={handleLessCardCount}
-              >
+              <button css={moreButton} type="button" onClick={handleLessCardCount} aria-label="공고리스트 줄이기">
                 줄이기 <FiChevronUp />
               </button>
             ) : (
-              <button
-                css={moreButton}
-                type="button"
-                onClick={handleMoreCardCount}
-              >
+              <button css={moreButton} type="button" onClick={handleMoreCardCount} aria-label="공고리스트 더보기">
                 더보기 <FiChevronDown />
               </button>
             ))}

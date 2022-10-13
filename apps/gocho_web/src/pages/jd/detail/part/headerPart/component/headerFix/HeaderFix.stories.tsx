@@ -54,12 +54,16 @@ export const 비로그인상태 = Template.bind({});
 
 비로그인상태.args = {
   jobDetailData: {
+    id: 4,
     endTime: 1658329199000,
     title: "[공무(자동기)] 사원 채용",
+    cut: false,
     bookmarkCount: 0,
     applyUrl: "https://naver.com",
     company: {
       name: "농심",
+      companyId: 230,
+      logoUrl: "https://d2nnzfahmszi6w.cloudfront.net/company_images/230/logo.png",
     },
   },
 };
@@ -77,12 +81,16 @@ export const 로그인상태 = Template.bind({});
 
 로그인상태.args = {
   jobDetailData: {
+    id: 4,
     endTime: 1658329199000,
     title: "[공무(자동기)] 사원 채용",
+    cut: false,
     bookmarkCount: 0,
     applyUrl: "https://naver.com",
     company: {
       name: "농심",
+      companyId: 230,
+      logoUrl: "https://d2nnzfahmszi6w.cloudfront.net/company_images/230/logo.png",
     },
   },
 };

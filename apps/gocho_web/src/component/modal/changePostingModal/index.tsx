@@ -3,14 +3,16 @@ import { useQueryClient } from "@tanstack/react-query";
 import { AiOutlineEdit } from "react-icons/ai";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
+import { useUserInfo } from "shared-api/auth";
+import { useChangePosting } from "shared-api/community/useChangePosting";
+import { communityPostingArrKeyObj } from "shared-constant/queryKeyFactory/community/postingArrKeyObj";
+
 import { ModalComponent } from "@component/modal/modalBackground";
 import { useModal } from "@recoil/hook/modal";
 import { changePostingObjDef } from "@recoil/atom/modal";
-import { useUserInfo } from "@api/auth";
-import { useChangePosting } from "@api/community/useChangePosting";
-import { ProfileImg } from "@component/common/atom/profileImg";
+
 import { CloseButton } from "@component/common/atom/closeButton";
-import { communityPostingArrKeyObj } from "@constant/queryKeyFactory/community/postingArrKeyObj";
 
 import { setPostingTypeButtonArr, PostingFormValues } from "./type";
 import {
@@ -35,12 +37,10 @@ export const ChangePostingBox: FunctionComponent = () => {
 
   const { mutate } = useChangePosting();
   const { data: userInfoData } = useUserInfo();
-  const [errorMsg, setErrorMsg] = useState<null | number>(null);
   const { closeModal, currentModal } = useModal();
   const queryClient = useQueryClient();
 
-  const { id, title, description, type } =
-    currentModal?.modalContentObj as changePostingObjDef;
+  const { id, title, description, type } = currentModal?.modalContentObj as changePostingObjDef;
 
   const { register, handleSubmit, setValue } = useForm<PostingFormValues>({
     defaultValues: {
@@ -57,9 +57,6 @@ export const ChangePostingBox: FunctionComponent = () => {
         closeModal();
         queryClient.invalidateQueries(communityPostingArrKeyObj.all);
       },
-      onError: (err) => {
-        setErrorMsg(err.response?.data.error.status);
-      },
     });
   };
 
@@ -70,14 +67,9 @@ export const ChangePostingBox: FunctionComponent = () => {
         <CloseButton size="L" buttonClick={closeModal} />
       </div>
       <div css={userProfile}>
-        <div css={userProfileImage}>
-          {userInfoData && (
-            <ProfileImg imageStr={userInfoData.image} size="S" />
-          )}
-        </div>
+        <div css={userProfileImage}>{userInfoData && <ProfileImg imageStr={userInfoData.image} size="S" />}</div>
         <p css={userNickname}>{userInfoData && userInfoData.nickname}</p>
       </div>
-      <div>{errorMsg && <p> {errorMsg}</p>}</div>
       <form css={formContainer} onSubmit={handleSubmit(postingSubmit)}>
         <input
           {...register("title", {
@@ -123,10 +115,8 @@ export const ChangePostingBox: FunctionComponent = () => {
 };
 
 export const ChangePostingModal: FunctionComponent = () => {
-  const { closeModal } = useModal();
-
   return (
-    <ModalComponent closeModal={closeModal}>
+    <ModalComponent>
       <ChangePostingBox />
     </ModalComponent>
   );

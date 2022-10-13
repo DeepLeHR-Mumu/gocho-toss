@@ -1,7 +1,10 @@
 import { FunctionComponent } from "react";
 import { BsStars } from "react-icons/bs";
+import { FiChevronLeft } from "react-icons/fi";
+import Link from "next/link";
 
-import { ProfileImg } from "@component/common/atom/profileImg";
+import { SPEC_URL } from "shared-constant/internalURL";
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { BasicInfoPartProps } from "./type";
 
 import {
@@ -19,115 +22,116 @@ import {
   certiTitle,
   certiContainer,
   certiInfo,
-  divider,
   certiList,
+  schoolInfoTitle,
+  schoolInfoDesc,
+  noStrongDesc,
 } from "./style";
-import { CertificateBox } from "./component/certifiacateBox";
-import { NotExistingBox } from "../component/notExistingBox";
 
-export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
-  basicData,
-}) => {
+export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ basicData }) => {
   return (
     <div css={container}>
-      <button css={backButton} type="button">
-        {"<"}리스트로 돌아가기
-      </button>
+      <Link href={SPEC_URL} passHref>
+        <a css={backButton}>
+          <FiChevronLeft /> 리스트로 돌아가기
+        </a>
+      </Link>
+
       <div css={imageContainer}>
-        <ProfileImg imageStr={basicData.profileImg} size="L" />
+        <ProfileImg imageStr={basicData.user.image} size="L" />
       </div>
+
       <section css={basicInfoContainer}>
-        <h2 css={userId}>{basicData.nickname}</h2>
+        <p css={userId}>{basicData.user.nickname}</p>
+
         <ul css={characteristicCSS}>
           <li>{basicData.gender}</li>
-          <li>{basicData.age}</li>
+          <li>{basicData.age}살</li>
           <li>{basicData.military}</li>
         </ul>
+
         <div css={preferenceContainer}>
-          <h3 css={descTitle}>희망직무</h3>
+          <p css={descTitle}>희망직무</p>
           {basicData.desiredTask && (
             <ul css={preference}>
               {basicData.desiredTask?.map((task) => {
-                return <li key={task}>{task}</li>;
+                return <li key={task}>#{task}</li>;
               })}
             </ul>
           )}
         </div>
+
         {basicData.desiredIndustry && (
           <div css={preferenceContainer}>
-            <h3 css={descTitle}>희망업종</h3>
+            <p css={descTitle}>희망업종</p>
             <ul css={preference}>
               {basicData.desiredIndustry?.map((industry) => {
-                return <li key={industry}>{industry}</li>;
+                return <li key={industry}>#{industry}</li>;
               })}
             </ul>
           </div>
         )}
       </section>
+
       {basicData.lastEducation === "초대졸" && basicData.college && (
         <section css={descContainer}>
           <div css={schoolInfo}>
-            <h3>최종학력</h3>
-            <p>{basicData.lastEducation}</p>
+            <p css={schoolInfoTitle}>최종학력</p>
+            <p css={schoolInfoDesc}>{basicData.lastEducation}</p>
           </div>
           <div css={schoolInfo}>
-            <h3>학과</h3>
-            <p>{basicData.college.department}</p>
+            <p css={schoolInfoTitle}>학과</p>
+            <p css={schoolInfoDesc}>{basicData.college.department}</p>
           </div>
           <div css={schoolInfo}>
-            <h3>평균학점</h3>
-            <p>
-              {basicData.college.grade}/{basicData.college.maxGrade}
+            <p css={schoolInfoTitle}>평균학점</p>
+            <p css={schoolInfoDesc}>
+              {basicData.college.grade.toFixed(1)}{" "}
+              <span css={noStrongDesc}>/{basicData.college.maxGrade.toFixed(1)}</span>
             </p>
           </div>
-          {basicData.college.isUturn && (
-            <div css={schoolInfo}>
-              <h3> </h3>
-              <p>U-턴함</p>
-            </div>
-          )}
+          {basicData.college.isUturn && <p css={schoolInfoDesc}>U-턴함</p>}
         </section>
       )}
+
       <section css={descContainer}>
         {basicData.lastEducation === "고졸" && (
           <div css={schoolInfo}>
-            <h3>최종학력</h3>
-            <p>{basicData.lastEducation}</p>
+            <p css={schoolInfoTitle}>최종학력</p>
+            <p css={schoolInfoDesc}>{basicData.lastEducation}</p>
           </div>
         )}
         <div css={schoolInfo}>
-          <h3>고등학교종류</h3>
-          <p>{basicData.highschool.type}</p>
+          <p css={schoolInfoTitle}>고등학교종류</p>
+          <p css={schoolInfoDesc}>{basicData.highschool.type}</p>
         </div>
         <div css={schoolInfo}>
-          <h3>내신등급</h3>
-          <p>{basicData.highschool.naesin}등급</p>
+          <p css={schoolInfoTitle}>내신등급</p>
+          <p css={schoolInfoDesc}>{basicData.highschool.naesin}등급</p>
         </div>
         <div css={schoolInfo}>
-          <h3>무단 결석</h3>
-          <p>{basicData.highschool.absent}일</p>
+          <p css={schoolInfoTitle}>무단 결석</p>
+          <p css={schoolInfoDesc}>{basicData.highschool.absent}일</p>
         </div>
         <div css={schoolInfo}>
-          <h3>무단 지각</h3>
-          <p>{basicData.highschool.tardy}일</p>
+          <p css={schoolInfoTitle}>무단 지각</p>
+          <p css={schoolInfoDesc}>{basicData.highschool.tardy}일</p>
         </div>
         <div css={schoolInfo}>
-          <h3>무단 조퇴</h3>
-          <p>{basicData.highschool.leaveEarly}일</p>
+          <p css={schoolInfoTitle}>무단 조퇴</p>
+          <p css={schoolInfoDesc}>{basicData.highschool.leaveEarly}일</p>
         </div>
         <div css={schoolInfo}>
-          <p>{basicData.highschool.classMiss}일</p>
-          <h3>무단 결과</h3>
+          <p css={schoolInfoTitle}>무단 결과</p>
+          <p css={schoolInfoDesc}>{basicData.highschool.classMiss}일</p>
         </div>
       </section>
+
       {basicData.certificate && (
         <section css={certiContainer}>
-          <div css={certiTitle}>
-            <div>
-              <BsStars />
-            </div>
-            <h3>자격증</h3>
-          </div>
+          <p css={certiTitle}>
+            <BsStars /> 자격증
+          </p>
           {basicData.certificate.data && (
             <>
               <ul css={certiInfo}>
@@ -135,18 +139,16 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                 <li>산업기사 {basicData.certificate.level2}</li>
                 <li>기사 {basicData.certificate.level3}</li>
               </ul>
+
               <ul css={certiList}>
                 {basicData.certificate.data.map((certiData) => {
-                  return <CertificateBox key={certiData} value={certiData} />;
+                  return <li key={certiData}>{certiData}</li>;
                 })}
               </ul>
             </>
           )}
-          {!basicData.certificate.data && <NotExistingBox />}
         </section>
       )}
-
-      <hr css={divider} />
     </div>
   );
 };

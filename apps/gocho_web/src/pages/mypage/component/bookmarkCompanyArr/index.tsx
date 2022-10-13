@@ -1,42 +1,38 @@
 import { FunctionComponent } from "react";
 
-import { SkeletonBox } from "@component/common/atom/skeletonBox";
+import { useUserInfo } from "shared-api/auth";
+import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
+import { CompanyCard } from "shared-ui/card/companyCard";
 
-import { useUserInfo } from "@api/auth";
-import { useUserCompanyBookmarkArr } from "@api/bookmark";
-import { CompanyCard } from "@pages/mypage/part/bookmarkPart/companyCard";
-
-import { cardListContainer, skeletonContainer, descCSS } from "./style";
+import { cardListContainer, descCSS } from "./style";
 
 export const BookmarkCompanyArr: FunctionComponent = () => {
-  const { data: userInfoData } = useUserInfo();
+  const { data: userData } = useUserInfo();
+  const { data: userCompanyBookmarkArr, isLoading, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
 
-  const {
-    data: userCompanyBookmarkArrData,
-    isLoading,
-    isError,
-  } = useUserCompanyBookmarkArr({
-    userId: userInfoData?.id,
-  });
-
-  if (!userInfoData || !userCompanyBookmarkArrData || isError || isLoading) {
+  if (!userData || !userCompanyBookmarkArr || isLoading) {
     return (
-      <div css={skeletonContainer}>
-        <SkeletonBox />
+      <div css={cardListContainer}>
+        <p css={descCSS}>기업 북마크를 이용하시면 기업공고가 더 정교해져요 😳</p>
       </div>
     );
   }
 
   return (
     <div css={cardListContainer}>
-      {userCompanyBookmarkArrData.data.length === 0 && (
-        <p css={descCSS}>
-          {userInfoData.nickname} 님! 북마크를 이용하시면 기업공고가 더
-          정교해져요 😳
-        </p>
+      {userCompanyBookmarkArr.length === 0 && (
+        <p css={descCSS}>{userData.nickname} 님! 북마크를 이용하시면 기업공고가 더 정교해져요 😳</p>
       )}
-      {userCompanyBookmarkArrData.data.map((companyData) => {
-        return <CompanyCard key={companyData.id} companyData={companyData} />;
+      {userCompanyBookmarkArr.map((companyData) => {
+        return (
+          <CompanyCard
+            key={companyData.id}
+            isBookmarked
+            userId={userData?.id}
+            refetchUserBookmark={refetch}
+            companyData={companyData}
+          />
+        );
       })}
     </div>
   );

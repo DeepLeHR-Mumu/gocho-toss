@@ -1,6 +1,6 @@
 import { css, SerializedStyles } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 interface numberInputLabelCSSDef {
   (isFocus: boolean): SerializedStyles;
@@ -54,6 +54,9 @@ export const numberInputCSS: numberInputCSSDef = (isFocus) => {
     ::placeholder {
       color: ${COLORS.GRAY10};
       text-decoration: underline;
+    }
+    :focus {
+      outline: 0;
     }
   `;
 };

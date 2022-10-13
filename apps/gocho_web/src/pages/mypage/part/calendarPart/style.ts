@@ -1,20 +1,20 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const container = css`
   min-height: 300px;
   border-radius: 2rem;
   padding: 3rem;
   background-color: ${COLORS.GRAY100};
-  margin: 0 0 2rem 1rem;
+  margin-bottom: 2rem;
 `;
 
 export const title = css`
   display: flex;
   align-items: center;
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 500;
   color: ${COLORS.GRAY10};
   margin-bottom: 2.5rem;
 `;

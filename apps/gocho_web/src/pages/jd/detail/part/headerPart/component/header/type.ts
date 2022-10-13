@@ -1,9 +1,12 @@
 export interface HeaderProps {
+  isDdayEnd: boolean;
   jobDetailData: {
+    id: number;
     startTime: number;
     endTime: number;
     applyUrl: string;
     title: string;
+    cut: boolean;
     bookmarkCount: number;
     viewCount: number;
     company: {
@@ -13,4 +16,5 @@ export interface HeaderProps {
       youtubeUrl: string | null;
     };
   };
+  userId: number | undefined;
 }

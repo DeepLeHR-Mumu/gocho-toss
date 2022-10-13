@@ -1,13 +1,13 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
   background-color: rgba(43, 43, 43, 0.8);
   width: fit-content;
   padding: 1rem 3rem;
   position: fixed;
-  z-index: 50;
+  z-index: 70;
   border-radius: 2rem;
   display: flex;
   align-items: center;
@@ -17,7 +17,7 @@ export const wrapper = css`
   top: 80%;
   cursor: pointer;
   box-shadow: 0 0.3125rem 3rem rgba(0, 0, 0, 0.65);
-  animation: upAndFadeOut 3s forwards cubic-bezier(0.69, 0, 0.23, 1);
+  animation: upAndFadeOut 3.2s forwards cubic-bezier(0.69, 0, 0.23, 1);
   transform: translate(-50%, -50%);
 
   @keyframes upAndFadeOut {

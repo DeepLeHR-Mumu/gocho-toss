@@ -11,6 +11,7 @@ export interface postingObjDef {
   like: number;
   view: number;
   commentCount: number;
+  image: "default" | "default_work" | "jobi" | "jobi_safety" | "jobi_chat" | "jobi_play" | "jobi_teach";
 }
 
 export interface tipObjDef {
@@ -51,25 +52,40 @@ export interface factoryObjDef {
   factoryName: string;
 }
 
+export interface loginObjDef {
+  button: "home" | "close";
+}
+
+export interface pageBlockModalDef {
+  url: string;
+  text: string;
+  afterAction?(): void;
+}
+
+export interface WritePostingModalDef {
+  title: string;
+  description: string;
+}
+
 export type contentModalDef =
+  | pageBlockModalDef
   | postingObjDef
   | tipObjDef
   | changePostingObjDef
-  | factoryObjDef;
+  | factoryObjDef
+  | loginObjDef
+  | WritePostingModalDef;
 
 export type contentModalNameDef =
   | "postingModal"
   | "tipModal"
   | "changePostingModal"
-  | "factoryModal";
-
-export type modalNameDef =
+  | "factoryModal"
   | "loginModal"
-  | "logoutModal"
-  | "signUpModal"
-  | "writePostingModal"
-  | "accountSettingModal"
-  | "pageBlockModal";
+  | "pageBlockModal"
+  | "writePostingModal";
+
+export type modalNameDef = "logoutModal" | "signUpModal" | "accountSettingModal" | "writeKakaoInfoModal";
 
 export interface modalAtomDef {
   activatedModal: modalNameDef | contentModalNameDef;

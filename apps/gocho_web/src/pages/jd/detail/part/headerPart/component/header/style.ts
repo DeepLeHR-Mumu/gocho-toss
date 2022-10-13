@@ -1,6 +1,6 @@
-import { css } from "@emotion/react";
+import { css, SerializedStyles } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const headerCSS = css`
   background-color: ${COLORS.GRAY100};
@@ -11,12 +11,6 @@ export const headerCSS = css`
   display: flex;
   position: relative;
   align-items: flex-start;
-`;
-
-export const bookmarkButton = css`
-  color: ${COLORS.GRAY60};
-  font-size: 1rem;
-  margin-left: 0.375rem;
 `;
 
 export const applyButton = css`
@@ -32,10 +26,23 @@ export const applyButton = css`
   font-weight: 500;
 `;
 
+export const applyEndButton = css`
+  background-color: ${COLORS.GRAY90};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8.5rem;
+  height: 2.5rem;
+  border-radius: 2rem;
+  color: ${COLORS.GRAY70};
+  font-size: 0.875rem;
+  font-weight: 500;
+`;
+
 export const viewCSS = css`
   position: absolute;
   right: 1rem;
-  top: 1rem;
+  top: 1.6rem;
   color: ${COLORS.GRAY60};
   font-size: 0.75rem;
   display: flex;
@@ -45,18 +52,29 @@ export const viewCSS = css`
   }
 `;
 
-export const ButtonCSS = css`
-  background-color: ${COLORS.GRAY90};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 8.5rem;
-  height: 2.5rem;
-  border-radius: 2rem;
-  color: ${COLORS.GRAY30};
-  font-size: 0.875rem;
-  font-weight: 500;
-`;
+interface ButtonCSSDef {
+  (isBookmarked: boolean): SerializedStyles;
+}
+
+export const buttonCSS: ButtonCSSDef = (isBookmarked) => {
+  return css`
+    background-color: ${isBookmarked ? COLORS.STATE_SUCCESS : `${COLORS.GRAY90}`};
+    color: ${isBookmarked ? COLORS.BLUE_FIRST40 : COLORS.GRAY60};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 8.5rem;
+    height: 2.5rem;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+
+    > svg {
+      margin-right: 0.2rem;
+    }
+  `;
+};
 
 export const youtubeButton = css`
   background-color: ${COLORS.GRAY90};
@@ -82,6 +100,21 @@ export const dateCSS = css`
   height: 1.5rem;
   font-weight: 400;
   border-radius: 1rem;
+`;
+
+export const cutBox = css`
+  font-size: 0.75rem;
+  white-space: nowrap;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.25rem;
+  border-radius: 1rem;
+  width: fit-content;
+  height: 1.625rem;
+  background-color: #f2f2f2;
+  color: #1553cd;
 `;
 
 export const companyNameCSS = css`

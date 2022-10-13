@@ -1,6 +1,8 @@
 import { css, SerializedStyles } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
+import { shorten } from "shared-style/common";
+import { TABLET } from "shared-style/mediaQuery";
 
 export const wrapper = css`
   position: relative;
@@ -13,6 +15,7 @@ interface ContainerDef {
 export const container: ContainerDef = (isClick, isHover) => {
   const defaultContainerCSS = css`
     display: flex;
+    width: 100%;
     align-items: center;
     justify-content: space-between;
     border-radius: 2rem;
@@ -47,10 +50,10 @@ export const containerSkeleton = css`
 `;
 
 interface TitleCSSDef {
-  (isClick: boolean, isHover: boolean): SerializedStyles;
+  (isClick: boolean, isHover: boolean, isDdayEnd: boolean): SerializedStyles;
 }
 
-export const titleCSS: TitleCSSDef = (isClick, isHover) => {
+export const titleCSS: TitleCSSDef = (isClick, isHover, isDdayEnd) => {
   const defaultTitleCSS = css`
     width: 14.5rem;
     height: 2.25rem;
@@ -62,12 +65,18 @@ export const titleCSS: TitleCSSDef = (isClick, isHover) => {
     font-size: 0.75rem;
     font-weight: 500;
   `;
-
+  if (isDdayEnd) {
+    return css`
+      ${defaultTitleCSS};
+      background-color: ${isClick ? COLORS.GRAY40 : COLORS.GRAY100};
+      color: ${COLORS.GRAY10};
+    `;
+  }
   if (!isClick) {
     return css`
       ${defaultTitleCSS};
       color: ${isHover ? COLORS.GRAY10 : COLORS.GRAY40};
-      background-color: ${isHover ? COLORS.BLUE_SECOND70 : COLORS.GRAY100};
+      background-color: ${isClick ? COLORS.BLUE_SECOND70 : COLORS.GRAY100};
     `;
   }
   return css`
@@ -84,11 +93,13 @@ export const infoBox = css`
 `;
 
 export const desc = css`
+  white-space: nowrap;
   text-align: center;
   width: 20%;
   font-size: 0.75rem;
   color: ${COLORS.GRAY40};
   font-weight: 500;
+  ${shorten()}
 `;
 
 export const restCSS = css`
@@ -117,6 +128,10 @@ const defaultArrowBox = css`
   right: 1rem;
   top: 50%;
   transform: translateY(-50%);
+
+  ${TABLET} {
+    right: -1rem;
+  }
 `;
 
 export const arrowClickBox = css`

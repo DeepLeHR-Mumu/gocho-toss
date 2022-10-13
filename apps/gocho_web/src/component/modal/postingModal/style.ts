@@ -1,19 +1,8 @@
-import { css } from "@emotion/react";
+import { css, SerializedStyles } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
-import { shorten } from "@style/common";
-import { PC_HOVER } from "@style/mediaQuery";
-
-interface typeColor {
-  [key: string]: string;
-}
-
-const typeColor: typeColor = {
-  진로: "#09A434",
-  자유: "#5429CD",
-  기업: `${COLORS.GRAY10}`,
-  자격증: "#5429CD",
-};
+import { COLORS } from "shared-style/color";
+import { shorten } from "shared-style/common";
+import { PC_HOVER } from "shared-style/mediaQuery";
 
 export const modalWrapper = css`
   position: fixed;
@@ -21,62 +10,98 @@ export const modalWrapper = css`
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 50;
-  width: 60rem;
-  height: auto;
-  padding: 2rem 7rem;
+  width: 100%;
+  max-width: 60rem;
   background-color: ${COLORS.GRAY100};
-  border-radius: 1rem;
+  border-radius: 2rem;
   text-align: left;
+`;
+
+export const modalWrapperSkeleton = css`
+  min-height: 50vh;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  width: 100%;
+  max-width: 60rem;
+  padding: 1.875rem 6.25rem;
+  background-color: ${COLORS.GRAY100};
+  border-radius: 2rem;
+`;
+
+export const overviewYBox = css`
+  max-height: 70vh;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 1.875rem 6.25rem;
+`;
+
+export const flexBox = css`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const closeButtonWrapper = css`
   position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate(35%, -35%);
+  top: -0.5rem;
+  right: -0.5rem;
 `;
 
 export const writerProfile = css`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin-bottom: 1rem;
+  background-color: ${COLORS.GRAY90};
+  width: 10rem;
+  height: 2rem;
+  border-radius: 1rem;
+  position: relative;
 `;
 
 export const writerProfileImage = css`
-  position: relative;
-  z-index: 10;
-  margin-right: -1.75rem;
+  border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
 `;
 
 export const writerNickname = css`
-  display: flex;
+  display: block;
   align-items: center;
-  width: 8.5rem;
-  height: 2rem;
+  padding: 0 0.5rem;
   font-size: 0.75rem;
+  font-weight: 500;
   color: ${COLORS.GRAY10};
-  background-color: ${COLORS.GRAY90};
-  padding: 0.5rem 0.5rem 0.5rem 2.25rem;
-  border-radius: 1rem;
-  ${shorten(1)}
+  width: calc(100% - 2.25rem);
+  ${shorten(1)};
 `;
 
 export const titleCSS = css`
+  display: block;
+  width: 100%;
+  color: ${COLORS.GRAY10};
   font-size: 1.5rem;
   font-weight: 700;
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.5rem;
-  border-bottom: 1px solid ${COLORS.GRAY90};
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid ${COLORS.GRAY70};
+
+  ::placeholder {
+    color: ${COLORS.GRAY60};
+  }
 `;
 
 export const bodyCSS = css`
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 400;
-  color: ${COLORS.GRAY30};
-  padding: 2rem 0 5rem;
+  color: ${COLORS.GRAY10};
+  padding: 2.5rem 0 7.5rem;
   border-bottom: 1px solid ${COLORS.GRAY90};
   margin-bottom: 1rem;
-  line-height: 1.5;
+  line-height: 1.8;
   word-break: break-all;
 `;
 
@@ -91,42 +116,51 @@ export const infoContainer = css`
 export const infoBox = css`
   display: flex;
   align-items: center;
+  list-style: disc;
+  margin-left: 2rem;
+
+  > li {
+    margin: 0 1rem;
+
+    display: flex;
+    justify-content: center;
+    :first-of-type {
+      margin-left: 0;
+    }
+  }
 `;
 
 export const infoCSS = css`
   margin-right: 1rem;
   color: ${COLORS.GRAY40};
-
-  :after {
-    content: " · ";
-    margin-left: 1rem;
-  }
 `;
 
-export const setPostingType = (type: string) => {
+interface SetPostingTypeDef {
+  (type: "자유" | "진로" | "기업" | "자격증"): SerializedStyles;
+}
+
+const typeColor = {
+  진로: "#5429cd",
+  자유: "#09a434",
+  기업: `${COLORS.GRAY10}`,
+  자격증: "#f06500",
+};
+
+export const likeButtonCSS = (isBookmark: boolean) => {
+  return css`
+    color: ${isBookmark ? COLORS.BLUE_FIRST40 : COLORS.GRAY40};
+  `;
+};
+
+export const setPostingType: SetPostingTypeDef = (type) => {
   return css`
     margin-right: 1rem;
     color: ${typeColor[type]};
-
-    :after {
-      content: " · ";
-      margin-left: 1rem;
-    }
   `;
 };
 
 export const numInfo = css`
-  margin: 0 1rem 0 0.25rem;
-  color: ${COLORS.GRAY10};
-
-  :after {
-    content: " · ";
-    margin-left: 1rem;
-  }
-
-  :last-child:after {
-    content: "";
-  }
+  color: ${COLORS.GRAY40};
 `;
 
 export const settingButtonList = css`

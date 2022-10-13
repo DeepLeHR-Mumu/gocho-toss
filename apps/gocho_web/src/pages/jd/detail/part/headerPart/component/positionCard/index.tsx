@@ -1,7 +1,7 @@
 import { FunctionComponent, useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 
-import { SkeletonBox } from "@component/common/atom/skeletonBox";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 
 import { getJobTitleCreator } from "../../../common/util";
 import { PositionCardProps, PositionCardSkeleton } from "./type";
@@ -18,9 +18,13 @@ import {
   containerSkeleton,
 } from "./style";
 
-export const PositionCard: FunctionComponent<
-  PositionCardProps | PositionCardSkeleton
-> = ({ currentPositionId, setCurrentPositionId, position, isSkeleton }) => {
+export const PositionCard: FunctionComponent<PositionCardProps | PositionCardSkeleton> = ({
+  isDdayEnd,
+  currentPositionId,
+  setCurrentPositionId,
+  position,
+  isSkeleton,
+}) => {
   const [isHover, setIsHover] = useState<boolean>(false);
 
   const onMouseEnter = () => {
@@ -40,15 +44,15 @@ export const PositionCard: FunctionComponent<
 
   const isCurrentPosition = position.id === currentPositionId;
   return (
-    <article
-      css={wrapper}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
-      <section css={container(isCurrentPosition, isHover)}>
-        <h4 css={titleCSS(isCurrentPosition, isHover)}>
-          {getJobTitleCreator(position)}
-        </h4>
+    <article css={wrapper} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+      <button
+        css={container(isCurrentPosition, isHover)}
+        type="button"
+        onClick={() => {
+          setCurrentPositionId(position.id);
+        }}
+      >
+        <strong css={titleCSS(isCurrentPosition, isHover, isDdayEnd)}>{getJobTitleCreator(position)}</strong>
 
         <div css={infoBox}>
           <p css={desc}>{position.possibleEdu.summary}</p>
@@ -72,17 +76,9 @@ export const PositionCard: FunctionComponent<
             })}
           </p>
 
-          <button
-            type="button"
-            css={viewButton}
-            onClick={() => {
-              setCurrentPositionId(position.id);
-            }}
-          >
-            자세히보기
-          </button>
+          <p css={viewButton}>자세히보기</p>
         </div>
-      </section>
+      </button>
 
       {isCurrentPosition && (
         <div css={arrowClickBox}>

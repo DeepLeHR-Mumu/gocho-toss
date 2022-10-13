@@ -1,6 +1,6 @@
 import { css, SerializedStyles } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const container = css`
   width: 100%;
@@ -34,6 +34,8 @@ interface titleDef {
 export const title: titleDef = (isCheck) => {
   return css`
     width: 8.25rem;
+    cursor: pointer;
+    margin: 0 auto 1.5rem;
     height: 3rem;
     display: flex;
     justify-content: center;
@@ -44,7 +46,6 @@ export const title: titleDef = (isCheck) => {
     text-align: center;
     border: 1px solid ${isCheck ? COLORS.BLUE_NEON40 : COLORS.GRAY70};
     border-radius: 2rem;
-    margin-bottom: 1.5rem;
     transition: all 0.2s ease;
   `;
 };

@@ -1,20 +1,12 @@
 import { css, SerializedStyles } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 interface textFormBoxDef {
-  (
-    minWidth: "auto" | number,
-    fullWidth: boolean,
-    activeBorderStyle: "gray" | "blue"
-  ): SerializedStyles;
+  (minWidth: "auto" | number, fullWidth: boolean, activeBorderStyle: "gray" | "blue"): SerializedStyles;
 }
 
-export const textFormBox: textFormBoxDef = (
-  minWidth,
-  fullWidth,
-  activeBorderStyle
-) => {
+export const textFormBox: textFormBoxDef = (minWidth, fullWidth, activeBorderStyle) => {
   return css`
     ${activeBorderStyle === "gray" &&
     `

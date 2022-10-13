@@ -1,7 +1,7 @@
 import { css, SerializedStyles } from "@emotion/react";
 
-import { PC_HOVER } from "@style/mediaQuery";
-import { COLORS } from "@style/constant";
+import { PC_HOVER } from "shared-style/mediaQuery";
+import { COLORS } from "shared-style/color";
 
 interface profileMenuWrapperDef {
   (active: boolean): SerializedStyles;
@@ -10,20 +10,22 @@ interface profileMenuWrapperDef {
 export const myProfileMenuWrapper: profileMenuWrapperDef = (active) => {
   return css`
     position: absolute;
-    z-index: 10;
-    top: 3.5rem;
     border: 1px solid ${COLORS.GRAY70};
     padding: 1.25rem;
     background-color: ${COLORS.GRAY100};
     left: 50%;
     width: fit-content;
-    transform: translate(-50%, 0);
+    z-index: 10;
+    top: 3.5rem;
     display: ${active ? "block" : "none"};
+    transform-origin: 0 0;
+    transform: translate(-50%, 0);
   `;
 };
 
 export const myProfileTitle = css`
   font-size: 0.75rem;
+  white-space: nowrap;
   color: ${COLORS.GRAY30};
   border-bottom: 1px solid ${COLORS.GRAY70};
   padding-bottom: 1rem;

@@ -1,29 +1,22 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 
-import { ModalComponent } from "@component/modal/modalBackground";
-import { useDoSignUp, useUserInfo } from "@api/auth";
-import { useModal } from "@recoil/hook/modal";
-import { EMAIL_REGEXP, PWD_REGEXP } from "@constant/regExp";
-import { AccountInput } from "@component/common/atom/accountInput";
-import {
-  EMAIL_ERROR_MESSAGE,
-  NICKNAME_ERROR_MESSAGE,
-  PWD_ERROR_MESSAGE,
-} from "@constant/errorMessage";
-import { NormalButton } from "@component/common/atom/Button";
-import { CloseButton } from "@component/common/atom/closeButton";
-import smallMono from "@public/images/global/deepLeLogo/smallMono.svg";
+import { useDoSignUp, useUserInfo } from "shared-api/auth";
+import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
+import { EMAIL_ERROR_MESSAGE, NICKNAME_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant/errorMessage";
+import { AccountInput } from "shared-ui/common/atom/accountInput";
+import { NormalButton } from "shared-ui/common/atom/button";
+import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
+import { signupModalOpenEvent, signupModalCloseEvent, signupSuccessEvent } from "shared-ga/auth";
 
-import {
-  wrapper,
-  desc,
-  formCSS,
-  closeBtn,
-  formArr,
-  logoContainer,
-} from "./style";
+import { ModalComponent } from "@component/modal/modalBackground";
+import { useModal } from "@recoil/hook/modal";
+import { CloseButton } from "@component/common/atom/closeButton";
+import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
+import { useToast } from "@recoil/hook/toast";
+
+import { wrapper, desc, formCSS, closeBtn, formArr, logoContainer, sideErrorMsg } from "./style";
 import { SignUpFormValues } from "./type";
 import { validateNickname } from "./util";
 
@@ -31,31 +24,48 @@ export const SignUpBox: FunctionComponent = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, dirtyFields },
   } = useForm<SignUpFormValues>({ mode: "onChange" });
-
   const { refetch } = useUserInfo();
   const { closeModal } = useModal();
   const { mutate } = useDoSignUp();
-  const [, setErrorMsg] = useState<null | string>(null);
+  const { setCurrentToast } = useToast();
+
+  const [errorMsg, setErrorMsg] = useState<string | undefined>(undefined);
+  const signupAttempt = useRef(0);
 
   const signUpSubmit: SubmitHandler<SignUpFormValues> = (signUpObj) => {
     mutate(signUpObj, {
+      onError: (error) => {
+        const errorResponse = error.response?.data as ErrorResponse;
+        setErrorMsg(errorResponse.error.errorMessage);
+        signupAttempt.current += 1;
+      },
       onSuccess: (response) => {
+        setCurrentToast("님 환영합니다.", watch("nickname"));
         localStorage.setItem("token", `${response?.data.token}`);
+        signupSuccessEvent();
         refetch();
         closeModal();
-      },
-      onError: (err) => {
-        setErrorMsg(err.response?.data.error.errorMessage);
       },
     });
   };
 
+  useEffect(() => {
+    signupModalOpenEvent();
+  }, []);
+
   return (
     <div css={wrapper}>
       <div css={closeBtn}>
-        <CloseButton size="S" buttonClick={closeModal} />
+        <CloseButton
+          size="S"
+          buttonClick={() => {
+            signupModalCloseEvent(signupAttempt.current);
+            closeModal();
+          }}
+        />
       </div>
       <div css={logoContainer}>
         <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" />
@@ -88,8 +98,7 @@ export const SignUpBox: FunctionComponent = () => {
                 maxLength: { value: 20, message: PWD_ERROR_MESSAGE.MIN_MAX },
                 pattern: {
                   value: PWD_REGEXP,
-                  // TODO: 메시지 전달받기
-                  message: "비밀번호 달라요",
+                  message: PWD_ERROR_MESSAGE.NOT_SPACE,
                 },
               })}
               placeholder="비밀번호를 입력해주세요"
@@ -113,6 +122,8 @@ export const SignUpBox: FunctionComponent = () => {
             />
           </li>
         </ul>
+
+        <p css={sideErrorMsg}>{errorMsg && errorMsg}</p>
         <NormalButton isSubmit wide text="확인" variant="filled" />
       </form>
     </div>
@@ -120,10 +131,8 @@ export const SignUpBox: FunctionComponent = () => {
 };
 
 export const SignUpModal: FunctionComponent = () => {
-  const { closeModal } = useModal();
-
   return (
-    <ModalComponent closeModal={closeModal}>
+    <ModalComponent>
       <SignUpBox />
     </ModalComponent>
   );

@@ -5,7 +5,7 @@ export const setCarouselSetting: setCarouselSettingDef = (setActiveIndex) => {
     dots: false,
     autoplay: true,
     arrows: false,
-    autoPlaySpeed: 5000,
+    autoplaySpeed: 6000,
     infinite: true,
     centerMode: true,
     speed: 500,

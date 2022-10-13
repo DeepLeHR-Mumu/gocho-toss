@@ -1,22 +1,41 @@
 import { FunctionComponent } from "react";
-import { ProfileImg } from "@component/common/atom/profileImg";
+
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
+import { UserBadge } from "shared-ui/common/atom/userBadge";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
 import {
   bestUserArrWrapper,
   setUserCard,
-  profileBox,
+  skeletonCardBox,
   userNickname,
   scoreCSS,
   setPointColor,
   recruitSectorCSS,
 } from "./style";
-import { BestUserArrProps } from "./type";
+import { BestUserArrProps, SkeletonProps } from "./type";
 
-export const BestUserList: FunctionComponent<BestUserArrProps> = ({
+export const BestUserList: FunctionComponent<BestUserArrProps | SkeletonProps> = ({
   setActiveUserID,
   activeUserID,
   bestUserDataArr,
+  isSkeleton,
 }) => {
+  if (isSkeleton || !bestUserDataArr) {
+    return (
+      <div css={bestUserArrWrapper}>
+        {dummyArrCreator(9).map((_) => {
+          return (
+            <div key={`skeleton_${_}`} css={skeletonCardBox}>
+              <SkeletonBox />
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
   const handleActiveUser = (index: number) => {
     setActiveUserID(index);
   };
@@ -26,31 +45,24 @@ export const BestUserList: FunctionComponent<BestUserArrProps> = ({
       {bestUserDataArr.map((user, index) => {
         const isActive = index === activeUserID;
         return (
-          <section
+          <button
+            type="button"
             onClick={() => {
               handleActiveUser(index);
             }}
-            onKeyDown={() => {
-              handleActiveUser(index);
-            }}
-            role="presentation"
             key={user.id}
             css={setUserCard(isActive)}
           >
-            <div css={profileBox}>
-              <ProfileImg imageStr={user.profileImg} size="S" />
-            </div>
-            <p>
-              <strong css={userNickname}>{user.nickname}</strong>
+            <ProfileImg imageStr={user.profileImg} size="S" />
+            <strong css={userNickname}>
+              {user.user.nickname} <UserBadge badge={user.user.badge} />
+            </strong>
+            <p css={scoreCSS}>
+              <span css={setPointColor(isActive)}>{user.score?.toFixed(1)}</span> / 5
             </p>
-            {user.score && (
-              <p css={scoreCSS}>
-                <span css={setPointColor(isActive)}>{user.score}</span> / 5
-              </p>
-            )}
 
-            <p css={recruitSectorCSS}>{user.desiredTask}</p>
-          </section>
+            <p css={recruitSectorCSS}>평가수 {user.score}</p>
+          </button>
         );
       })}
     </div>

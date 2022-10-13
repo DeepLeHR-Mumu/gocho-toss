@@ -1,17 +1,19 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState, useEffect } from "react";
 import { BsChevronLeft } from "react-icons/bs";
 import Link from "next/link";
 
-import { dateConverter } from "@util/date";
-import { JOBS_LIST_URL } from "@constant/internalURL";
+import { dateConverter, dDayCalculator } from "shared-util/date";
+import { JOBS_LIST_URL } from "shared-constant/internalURL";
 
-import { DdayBox } from "@component/common/atom/dDayBox";
+import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { NoDataDesc } from "../common/component/noDataDesc";
 
 import { ReceptInfoPartProps } from "./type";
 import {
   applyButton,
+  applyEndButton,
   beforeAfterDateBox,
+  cutBox,
   desc,
   detailTitle,
   flexBox,
@@ -24,9 +26,10 @@ import {
   wrapper,
 } from "./style";
 
-export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({
-  jobDetailData,
-}) => {
+export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDetailData }) => {
+  const [pageNumber, setPageNumber] = useState<number | undefined>(undefined);
+  const [pageOrder, setPageOrder] = useState<"recent" | "popular" | "view" | "end" | undefined>(undefined);
+
   const {
     year: startYear,
     month: startMonth,
@@ -43,29 +46,52 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({
     minute: endMinute,
   } = dateConverter(jobDetailData.endTime);
 
+  useEffect(() => {
+    const sessionJdOrder = sessionStorage.getItem("jdPageOrder");
+    const sessionJdNumber = sessionStorage.getItem("jdPageNumber");
+
+    if (sessionJdOrder !== "undefined") {
+      const beforePageOrder = JSON.parse(sessionJdOrder as string);
+      setPageOrder(beforePageOrder);
+    }
+
+    if (sessionJdNumber !== "undefined") {
+      const beforePageNumber = JSON.parse(sessionJdNumber as string);
+      setPageNumber(beforePageNumber);
+    }
+
+    return () => {
+      sessionStorage.removeItem("jdPageOrder");
+      sessionStorage.removeItem("jdPageNumber");
+    };
+  }, [setPageNumber, setPageOrder]);
+
+  const isDdayEnd = dDayCalculator(jobDetailData.endTime) === "만료";
+
   return (
     <div>
       <section css={wrapper}>
         <div css={infoBox}>
-          <h3 css={infoTitle}>접수안내</h3>
+          <h4 css={infoTitle}>접수안내</h4>
           <ul css={beforeAfterDateBox}>
             <li>{`${startYear}. ${startMonth}. ${startDate}  ${startHour}:${startMinute}`}</li>
             <li>~</li>
             <li>{`${endYear}. ${endMonth}. ${endDate}  ${endHour}:${endMinute}`}</li>
           </ul>
           <DdayBox endTime={jobDetailData.endTime} />
-          <a
-            css={applyButton}
-            target="_blank"
-            href={jobDetailData.applyUrl}
-            rel="noopener noreferrer"
-          >
-            지원하러가기
-          </a>
+          {jobDetailData.cut && <div css={cutBox}>채용시마감</div>}
+
+          {isDdayEnd ? (
+            <p css={applyEndButton}>지원하러가기</p>
+          ) : (
+            <a css={applyButton} target="_blank" href={jobDetailData.applyUrl} rel="noopener noreferrer">
+              지원하러가기
+            </a>
+          )}
         </div>
 
         <div css={infoDetailBox}>
-          <h4 css={detailTitle}>채용절차</h4>
+          <p css={detailTitle}>채용절차</p>
           <ul css={processBox}>
             {jobDetailData.processArr.map((process) => {
               return <li key={`채용절차_${process}`}>{process}</li>;
@@ -73,7 +99,7 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({
           </ul>
 
           <div css={flexBox}>
-            <h4 css={detailTitle}>지원방법</h4>
+            <p css={detailTitle}>지원방법</p>
             <p css={desc}>
               {jobDetailData.applyRouteArr.map((route) => {
                 return (
@@ -86,7 +112,7 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({
           </div>
 
           <div css={flexBox}>
-            <h4 css={detailTitle}>기타사항</h4>
+            <p css={detailTitle}>기타사항</p>
             {jobDetailData.etcArr ? (
               <p css={desc}>
                 {jobDetailData.etcArr.map((etc) => {
@@ -103,7 +129,7 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({
           </div>
         </div>
       </section>
-      <Link href={JOBS_LIST_URL} passHref>
+      <Link href={{ pathname: JOBS_LIST_URL, query: { page: pageNumber || 1, order: pageOrder || "recent" } }} passHref>
         <a css={goBackButton}>
           <BsChevronLeft /> 공고 리스트로 돌아가기
         </a>

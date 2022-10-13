@@ -1,7 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
 
 export interface SubMenuButtonProps {
-  link: string;
-  title: string;
+  subMenuData: {
+    pageQuery?: boolean;
+    pageOrder?: string;
+    menuLink: string;
+    menuTitle: string;
+  };
   setActiveIndex: Dispatch<SetStateAction<number | null>>;
 }

@@ -1,29 +1,21 @@
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/router";
 
-import {
-  useSpecRegisterObj,
-  useIsSpecPageBlocking,
-  useProgress,
-} from "@recoil/hook/spec";
+import { useIsSpecPageBlocking } from "@recoil/hook/spec";
 
 import { UsePageBlockingDef } from "./type";
 
 export const usePageBlocking: UsePageBlockingDef = (setCurrentModal) => {
-  const { currentSpecObj } = useSpecRegisterObj();
   const { isBlocking } = useIsSpecPageBlocking();
-  const { resetCurrentProgress } = useProgress();
 
   const [linkUrl, setLinkUrl] = useState<string | null>(null);
   const router = useRouter();
-  const currentSpecObjLength = Object.keys(currentSpecObj).length;
 
   const routeChangeStart = useCallback(
     (url: string) => {
-      const isCompare =
-        router.pathname !== url && !isBlocking && currentSpecObjLength !== 0;
+      const isUrl = router.pathname !== url && !isBlocking;
 
-      if (isCompare) {
+      if (isUrl) {
         setLinkUrl(url);
         setCurrentModal("pageBlockModal");
         router.events.emit("routeChangeError");
@@ -32,8 +24,14 @@ export const usePageBlocking: UsePageBlockingDef = (setCurrentModal) => {
         throw true;
       }
     },
-    [currentSpecObjLength, setCurrentModal, isBlocking, router]
+    [setCurrentModal, isBlocking, router]
   );
+
+  useEffect(() => {
+    if (isBlocking && linkUrl) {
+      router.replace(linkUrl);
+    }
+  }, [linkUrl, isBlocking, router]);
 
   useEffect(() => {
     router.events.on("routeChangeStart", routeChangeStart);
@@ -41,19 +39,4 @@ export const usePageBlocking: UsePageBlockingDef = (setCurrentModal) => {
       router.events.off("routeChangeStart", routeChangeStart);
     };
   }, [routeChangeStart, router.events]);
-
-  useEffect(() => {
-    if (isBlocking && linkUrl) {
-      router.replace(linkUrl);
-      resetCurrentProgress();
-    }
-  }, [linkUrl, isBlocking]);
-};
-
-export const useResetProgress = () => {
-  const { resetCurrentProgress } = useProgress();
-
-  useEffect(() => {
-    resetCurrentProgress();
-  }, []);
 };

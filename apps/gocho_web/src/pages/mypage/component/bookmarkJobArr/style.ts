@@ -1,10 +1,11 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const cardListContainer = css`
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   margin-top: 2rem;
 `;
 
@@ -17,12 +18,15 @@ export const skeletonContainer = css`
 
 export const desc = css`
   text-align: center;
+  padding: 1rem;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 10rem;
+  background-color: ${COLORS.GRAY90};
+  height: 2.5rem;
   font-size: 0.875rem;
   font-weight: 500;
-  color: ${COLORS.ERROR_YELLOW20};
+  color: ${COLORS.GRAY60};
+  border-radius: 2rem;
 `;

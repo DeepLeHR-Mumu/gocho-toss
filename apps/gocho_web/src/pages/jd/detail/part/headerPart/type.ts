@@ -1,14 +1,13 @@
 import { Dispatch, SetStateAction } from "react";
 
 export interface HeaderPartProps {
-  isSkeleton?: never;
-  setCurrentPositionId: Dispatch<SetStateAction<number | null>>;
-  currentPositionId: number | null;
   jobDetailData: {
+    id: number;
     startTime: number;
     endTime: number;
     applyUrl: string;
     title: string;
+    cut: boolean;
     bookmarkCount: number;
     viewCount: number;
     company: {
@@ -20,7 +19,7 @@ export interface HeaderPartProps {
     positionArr: {
       id: number;
       requiredExp: {
-        type: "신입" | "경력" | "무관";
+        type: "신입" | "경력" | "무관" | "신입/경력";
       };
       hireCount: number;
       rotationArr: string[];
@@ -37,6 +36,10 @@ export interface HeaderPartProps {
       };
     }[];
   };
+  setCurrentPositionId: Dispatch<SetStateAction<number | null>>;
+  currentPositionId: number | null;
+  userId: number | undefined;
+  isSkeleton?: never;
 }
 
 export interface HeaderPartSkeleton {
@@ -44,4 +47,5 @@ export interface HeaderPartSkeleton {
   setCurrentPositionId?: never;
   currentPositionId?: never;
   jobDetailData?: never;
+  userId?: never;
 }

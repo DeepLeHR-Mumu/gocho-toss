@@ -3,16 +3,50 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "shared/*"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prepare": "husky install",
+    "lint": "turbo run lint",
+    "lint-fix": "eslint \"**/*.{ts,tsx}\" --ext .ts,.tsx --fix",
+    "e2e": "pnpx playwright test --trace on",
+    "e2e:report": "pnpx playwright show-report"
+  },
+  "lint-staged": {
+    "apps/**/src/pages/**/*.{ts,tsx}": [
+      "eslint"
+    ],
+    "shared/ui/**/*.{ts,tsx}": [
+      "eslint"
+    ],
+    "shared/constant/**/*.{ts,tsx}": [
+      "eslint"
+    ],
+    "shared/style/**/*.{ts,tsx}": [
+      "eslint"
+    ],
+    "shared/type/**/*.{ts,tsx}": [
+      "eslint"
+    ],
+    "shared/api/**/*.{ts,tsx}": [
+      "eslint"
+    ],
+    "shared/util/**/*.{ts,tsx}": [
+      "eslint"
+    ]
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.18.13",
+    "@playwright/test": "^1.25.1",
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-essentials": "^6.5.10",
     "@storybook/addon-interactions": "^6.5.10",
@@ -21,7 +55,15 @@
     "@storybook/manager-webpack5": "^6.5.10",
     "@storybook/react": "^6.5.10",
     "@storybook/testing-library": "^0.0.13",
-    "babel-loader": "^8.2.5"
+    "@types/node": "18.7.13",
+    "babel-loader": "^8.2.5",
+    "husky": "^8.0.0",
+    "turbo": "^1.4.6"
   },
-  "dependencies": {}
+  "dependencies": {
+    "eslint-config-deeple": "workspace:^1.0.0",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "typescript": "4.7.2"
+  }
 }

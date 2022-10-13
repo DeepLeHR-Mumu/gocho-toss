@@ -29,5 +29,27 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# cypress
+cypress/videos
+cypress/screenshots
+.nyc_output
+
 # turbo
 .turbo
+
+#playwrite
+/test-results/
+/playwright-report/
+/playwright/.cache/
+# vscode
+.vscode
+
+# jetbrain
+.idea

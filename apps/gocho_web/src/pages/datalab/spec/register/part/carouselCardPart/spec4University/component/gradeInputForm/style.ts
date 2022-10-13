@@ -1,6 +1,6 @@
 import { css, SerializedStyles } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
   position: relative;
@@ -48,6 +48,11 @@ export const textForm = css`
   ::placeholder {
     font-size: 0.875rem;
     color: ${COLORS.GRAY40};
+  }
+
+  :focus {
+    outline: 0;
+    border-bottom: 1px solid ${COLORS.BLUE_FIRST40};
   }
 `;
 

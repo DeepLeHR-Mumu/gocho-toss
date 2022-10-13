@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { PC_HOVER } from "@style/mediaQuery";
-import { COLORS } from "@style/constant";
+import { PC_HOVER } from "shared-style/mediaQuery";
+import { COLORS } from "shared-style/color";
 
 export const desc = css`
   color: ${COLORS.GRAY40};
@@ -11,14 +11,21 @@ export const desc = css`
   line-height: 2;
 `;
 
+export const colorPoint = css`
+  font-weight: 700;
+  color: ${COLORS.BLUE_FIRST40};
+`;
+
 export const animationBox = css`
   width: 18.75rem;
   height: 18.75rem;
-  background-color: ${COLORS.GRAY80};
+  background-color: ${COLORS.GRAY100};
   margin: 2rem auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  text-indent: -99999px;
   color: ${COLORS.GRAY10};
 `;
 

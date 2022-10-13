@@ -5,5 +5,5 @@ export const cardListContainer = css`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 2rem 0;
+  gap: 1rem;
 `;

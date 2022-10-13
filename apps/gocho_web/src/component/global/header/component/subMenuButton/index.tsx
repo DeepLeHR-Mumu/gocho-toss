@@ -4,11 +4,7 @@ import Link from "next/link";
 import { subMenuButtonCSS } from "./style";
 import { SubMenuButtonProps } from "./type";
 
-export const SubMenuButton: FunctionComponent<SubMenuButtonProps> = ({
-  link,
-  title,
-  setActiveIndex,
-}) => {
+export const SubMenuButton: FunctionComponent<SubMenuButtonProps> = ({ subMenuData, setActiveIndex }) => {
   return (
     <li
       css={subMenuButtonCSS}
@@ -20,9 +16,21 @@ export const SubMenuButton: FunctionComponent<SubMenuButtonProps> = ({
       }}
       role="presentation"
     >
-      <Link href={link} passHref>
-        {title}
-      </Link>
+      {subMenuData.pageQuery ? (
+        <Link
+          href={{
+            pathname: subMenuData.menuLink,
+            query: { page: 1, order: subMenuData.pageOrder },
+          }}
+          passHref
+        >
+          {subMenuData.menuTitle}
+        </Link>
+      ) : (
+        <Link href={subMenuData.menuLink} passHref>
+          {subMenuData.menuTitle}
+        </Link>
+      )}
     </li>
   );
 };

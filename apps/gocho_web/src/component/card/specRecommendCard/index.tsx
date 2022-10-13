@@ -1,10 +1,11 @@
 import { FunctionComponent } from "react";
 
-import { SPEC_DETAIL_URL } from "@constant/internalURL";
-import { ProfileImg } from "@component/common/atom/profileImg";
-import { LinkButton } from "@component/common/atom/Button";
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
-import { SpecRecommendCardProps } from "./type";
+import { SPEC_DETAIL_URL } from "shared-constant/internalURL";
+import { LinkButton } from "shared-ui/common/atom/button";
+
+import { SpecRecommendCardProps, SkeletonCardProps } from "./type";
 import {
   cardWrapper,
   userInfoContainer,
@@ -24,17 +25,21 @@ import {
   certiLabel,
   certiNumber,
   buttonContainer,
+  schoolTypeCSS,
+  strongCSS,
+  cardSkeletonContainer,
 } from "./style";
 
-export const SpecRecommendCard: FunctionComponent<SpecRecommendCardProps> = ({
+export const SpecRecommendCard: FunctionComponent<SpecRecommendCardProps | SkeletonCardProps> = ({
+  isSkeleton,
   specData,
 }) => {
-  const schoolType =
-    specData.lastEducation === "초대졸"
-      ? specData.college?.department
-      : specData.highschool.type;
-  const pointType =
-    specData.lastEducation === "초대졸" ? "평균 학점" : "내신 등급";
+  if (isSkeleton || !specData) {
+    return <article css={cardSkeletonContainer} />;
+  }
+
+  const schoolType = specData.lastEducation === "초대졸" ? specData.college?.department : specData.highschool.type;
+  const pointType = specData.lastEducation === "초대졸" ? "평균 학점" : "내신 등급";
   const grade =
     specData.lastEducation === "초대졸" && specData.college !== undefined
       ? specData.college?.grade
@@ -43,63 +48,97 @@ export const SpecRecommendCard: FunctionComponent<SpecRecommendCardProps> = ({
   return (
     <article css={cardWrapper}>
       <div css={userInfoContainer}>
-        <ProfileImg imageStr="default" size="S" />
+        <ProfileImg imageStr={specData.user.image} size="M" />
         <div css={userInfoBox}>
-          <p css={nicknameCSS}>{specData.nickname}</p>
+          <p css={nicknameCSS}>{specData.user.nickname}</p>
           <p css={genderCSS}>
             {specData.gender} {specData.age}살
           </p>
         </div>
       </div>
+
       <div css={bodyContainer}>
-        <div>
-          <p css={schoolCSS}>{specData.lastEducation}</p>
-          <div css={schoolInfo}>
-            <p css={schoolCSS}>{schoolType}</p>
-            <p css={gradeCSSTitle}>
-              {pointType}
-              <span css={gradeCSS}>
-                {grade}
-                <span css={maxGradeCSS}>
-                  {specData.lastEducation === "초대졸" &&
-                    `/${specData.college?.maxGrade}`}
-                </span>
+        <p css={schoolTypeCSS}>{specData.lastEducation}</p>
+
+        <div css={schoolInfo}>
+          <p css={schoolCSS}>{schoolType}</p>
+          <p css={gradeCSSTitle}>
+            {pointType}
+            <span css={gradeCSS}>
+              {specData.lastEducation === "고졸" && `${String(grade).slice(0, 1)}등급`}
+
+              <span css={maxGradeCSS}>
+                {specData.lastEducation === "초대졸" && (
+                  <>
+                    <strong css={strongCSS}>{grade?.toFixed(1)}</strong> / {specData.college?.maxGrade.toFixed(1)}
+                  </>
+                )}
               </span>
-            </p>
-          </div>
-        </div>
-        <div css={attendance}>
-          <p css={infoTitle}>
-            무단 결석 <span css={info}>{specData.highschool.absent}</span>
-          </p>
-          <p css={infoTitle}>
-            무단 조퇴 <span css={info}>{specData.highschool.leaveEarly}</span>
-          </p>
-          <p css={infoTitle}>
-            무단 결과 <span css={info}>{specData.highschool.classMiss}</span>
-          </p>
-          <p css={infoTitle}>
-            무단 지각 <span css={info}>{specData.highschool.tardy}</span>
+            </span>
           </p>
         </div>
-        <div css={certi}>
+
+        <ul css={attendance}>
+          <li css={infoTitle}>
+            무단 결석
+            <span css={info}>
+              {String(specData.highschool.absent).length >= 2
+                ? `${String(specData.highschool.absent).slice(0, 1)}..`
+                : specData.highschool.absent}
+            </span>
+          </li>
+          <li css={infoTitle}>
+            무단 조퇴
+            <span css={info}>
+              {String(specData.highschool.leaveEarly).length >= 2
+                ? `${String(specData.highschool.leaveEarly).slice(0, 1)}..`
+                : specData.highschool.leaveEarly}
+            </span>
+          </li>
+          <li css={infoTitle}>
+            무단 결과
+            <span css={info}>
+              {String(specData.highschool.classMiss).length >= 2
+                ? `${String(specData.highschool.classMiss).slice(0, 1)}..`
+                : specData.highschool.classMiss}
+            </span>
+          </li>
+          <li css={infoTitle}>
+            무단 지각
+            <span css={info}>
+              {String(specData.highschool.tardy).length >= 2
+                ? `${String(specData.highschool.tardy).slice(0, 1)}..`
+                : specData.highschool.tardy}
+            </span>
+          </li>
+        </ul>
+        <ul css={certi}>
           {/* TODO 자격증 정보 유연한 */}
-          <div css={certiLabel}>
-            기능사<span css={certiNumber}>{specData.certificate?.level1}</span>
-          </div>
-          <div css={certiLabel}>
+          <li css={certiLabel}>
+            기능사
+            {specData.certificate?.level1 !== undefined && specData.certificate?.level1 !== 0 && (
+              <span css={certiNumber}>{specData.certificate.level1}</span>
+            )}
+          </li>
+
+          <li css={certiLabel}>
             산업기사
-            <span css={certiNumber}>{specData.certificate?.level2}</span>
-          </div>
-          <div css={certiLabel}>
+            {specData.certificate?.level2 !== undefined && specData.certificate?.level2 !== 0 && (
+              <span css={certiNumber}>{specData.certificate.level2}</span>
+            )}
+          </li>
+          <li css={certiLabel}>
             기사+
-            <span css={certiNumber}>{specData.certificate?.level3}</span>
-          </div>
-        </div>
+            {specData.certificate?.level3 !== undefined && specData.certificate?.level3 !== 0 && (
+              <span css={certiNumber}>{specData.certificate.level3}</span>
+            )}
+          </li>
+        </ul>
       </div>
+
       <div css={buttonContainer}>
         <LinkButton
-          text="평가하기"
+          text={specData.isMine ? "평가 내역 보기" : "평가하기"}
           variant="filled"
           linkTo={`${SPEC_DETAIL_URL}/${specData.id}`}
         />

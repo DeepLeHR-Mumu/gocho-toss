@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
   position: absolute;
@@ -7,7 +7,7 @@ export const wrapper = css`
   left: 50%;
   top: 50%;
   width: 22rem;
-  transform: translate(-50%, -80%);
+  transform: translate(-50%, -50%);
   height: auto;
   padding: 2rem;
   background-color: ${COLORS.GRAY100};
@@ -44,7 +44,21 @@ export const formArr = css`
     width: 100%;
     display: flex;
     flex-direction: column;
+
+    :last-of-type {
+      margin-bottom: 0;
+    }
   }
+`;
+
+export const sideErrorMsg = css`
+  color: ${COLORS.ERROR_RED30};
+  font-size: 0.75rem;
+  height: 0.75rem;
+  margin: 0.5rem 0 2rem 1.75rem;
+  white-space: nowrap;
+  font-weight: 400;
+  display: block;
 `;
 
 export const closeBtn = css`

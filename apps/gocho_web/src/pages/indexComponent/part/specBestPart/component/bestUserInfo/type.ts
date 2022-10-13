@@ -1,10 +1,15 @@
-import { ImageType } from "@type/ui/imageType";
-import { TaskType } from "@api/spec/type/common";
+import { ImageType } from "shared-type/ui/imageType";
+import { TaskType } from "shared-api/spec/type/common";
 
 export interface BestUserInfoProps {
+  isSkeleton?: never;
   bestUserData: {
     profileImg: ImageType;
-    nickname: string;
+    user: {
+      nickname: string;
+      image: "default" | "default_work" | "jobi" | "jobi_safety" | "jobi_chat" | "jobi_play" | "jobi_teach";
+      badge: "default" | "early_bird" | "admin";
+    };
     score: number | null;
     scoreCount: number;
     desiredTask: TaskType | null;
@@ -19,4 +24,9 @@ export interface BestUserInfoProps {
     } | null;
     id: number;
   };
+}
+
+export interface skeletonProps {
+  isSkeleton: boolean;
+  bestUserData?: never;
 }

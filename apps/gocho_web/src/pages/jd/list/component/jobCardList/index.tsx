@@ -1,29 +1,21 @@
 import { FunctionComponent } from "react";
 
-import { useJobArr } from "@api/job";
-import { dummyArrCreator } from "@util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
-import { JobCard } from "../jobCard";
+import { JobCard } from "@component/card/jobCard";
+import { useUserInfo } from "shared-api/auth";
+import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { JobCardListProps } from "./type";
 import { listContainer } from "./style";
 
-export const JobCardList: FunctionComponent<JobCardListProps> = ({
-  listOrder,
-}) => {
-  const {
-    data: jobArrData,
-    isLoading,
-    isError,
-  } = useJobArr({
-    order: listOrder,
-    filter: "valid",
-    limit: 9,
-  });
+export const JobCardList: FunctionComponent<JobCardListProps> = ({ jobDataArr, isLoading, isError }) => {
+  const { data: userData } = useUserInfo();
+  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
-  if (!jobArrData || isError || isLoading) {
+  if (!jobDataArr || isError || isLoading) {
     return (
-      <div>
-        {dummyArrCreator(9).map((dummy) => {
+      <div css={listContainer}>
+        {dummyArrCreator(10).map((dummy) => {
           return <JobCard isSkeleton key={`JobCardSkeleton${dummy}`} />;
         })}
       </div>
@@ -32,8 +24,16 @@ export const JobCardList: FunctionComponent<JobCardListProps> = ({
 
   return (
     <section css={listContainer}>
-      {jobArrData.map((job) => {
-        return <JobCard jobData={job} key={job.id} />;
+      {jobDataArr.map((jobData) => {
+        const isBookmarked = Boolean(
+          userJobBookmarkArr?.some((job) => {
+            return job.id === jobData.id;
+          })
+        );
+
+        return (
+          <JobCard jobData={jobData} isBookmarked={isBookmarked} userId={userData?.id} key={`JobCard${jobData.id}`} />
+        );
       })}
     </section>
   );

@@ -1,4 +1,4 @@
-import { dummyArrCreator } from "@util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { FunctionComponent, useEffect, useState } from "react";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { hoverLayer, container, starLayer } from "./style";
@@ -18,13 +18,13 @@ export const StarEvaluation: FunctionComponent<SettingProps | DisplayProps> = ({
     }
   }, [score, parentSetState]);
 
-  // eslint-disable-next-line consistent-return
   useEffect(() => {
     if (parentScore === null) {
-      return setScore(0);
+      setScore(0);
+      return;
     }
     if (parentScore) {
-      return setScore(parentScore * 2);
+      setScore(parentScore * 2);
     }
   }, [parentScore]);
 
@@ -38,11 +38,9 @@ export const StarEvaluation: FunctionComponent<SettingProps | DisplayProps> = ({
           dummyArrCreator(5).map((val) => {
             const point = val + 1;
             const rounded = Math.round(score);
-            if (point <= rounded / 2 && rounded / 2 !== 0.5)
-              return <BsStarFill key={`filledStar${val + 1}`} />;
+            if (point <= rounded / 2 && rounded / 2 !== 0.5) return <BsStarFill key={`filledStar${val + 1}`} />;
 
-            if (point - rounded / 2 === 0.5)
-              return <BsStarHalf key={`halfStar${val + 1}`} />;
+            if (point - rounded / 2 === 0.5) return <BsStarHalf key={`halfStar${val + 1}`} />;
 
             return <BsStar key={`emptyStar${val + 1}`} />;
           })}
@@ -53,13 +51,12 @@ export const StarEvaluation: FunctionComponent<SettingProps | DisplayProps> = ({
             if (point <= visibleScore / 2 && visibleScore / 2 !== 0.5)
               return <BsStarFill key={`filledStar${val + 1}`} />;
 
-            if (point - visibleScore / 2 === 0.5)
-              return <BsStarHalf key={`halfStar${val + 1}`} />;
+            if (point - visibleScore / 2 === 0.5) return <BsStarHalf key={`halfStar${val + 1}`} />;
 
             return <BsStar key={`emptyStar${val + 1}`} />;
           })}
       </div>
-      {!parentScore && (
+      {!parentScore && parentSetState && (
         <div css={hoverLayer}>
           {dummyArrCreator(10).map((val) => {
             const point = val + 1;

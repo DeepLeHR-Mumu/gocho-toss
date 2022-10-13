@@ -1,14 +1,19 @@
 import { css } from "@emotion/react";
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const cardWrapper = css`
   border-radius: 1.875rem 1.875rem 1.875rem 0;
   background-color: ${COLORS.GRAY90};
   padding: 2rem;
-  margin-right: 2rem;
+  width: 100%;
+  margin-right: 0.875rem;
+  margin-bottom: 1.75rem;
   position: relative;
-  width: 31%;
   min-height: 18.75rem;
+
+  :last-of-type {
+    margin-right: 0;
+  }
 
   ::after {
     content: "";

@@ -2,56 +2,59 @@ import { FunctionComponent, useState } from "react";
 import Link from "next/link";
 import { BsChevronRight } from "react-icons/bs";
 
-import { useSpecArr } from "@api/spec";
-import { MAIN_URL } from "@constant/internalURL";
+import { useSpecArr } from "shared-api/spec";
+import { SPEC_URL } from "shared-constant/internalURL";
 import { Layout } from "@component/layout";
+import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
 import { BestUserList } from "./component/bestUserList";
 import { BestUserBox } from "./component/bestUserInfo";
-import {
-  specBestWrapper,
-  colorPoint,
-  title,
-  linkButton,
-  bestUserWrapper,
-} from "./stye";
+import { specBestWrapper, colorPoint, title, linkButton, bestUserWrapper } from "./style";
 
 export const SpecBestPart: FunctionComponent = () => {
   const [activeUserID, setActiveUserID] = useState(0);
 
-  const {
-    data: selectedSpecArr,
-    isError,
-    isLoading,
-    isSuccess,
-  } = useSpecArr({
+  const { data: selectedSpecArr, isLoading } = useSpecArr({
     order: "-score",
     limit: 9,
   });
 
-  // LATER - 데이터 로딩 검사방안 변경
-  if (!selectedSpecArr || !isSuccess || isError) {
-    return <div>데이터 없을시 처리방법 고민</div>;
-  }
+  if (!selectedSpecArr || isLoading) {
+    return (
+      <section css={specBestWrapper}>
+        <InvisibleH2 title="생산/기능직 구직자 스펙 평가 리스트" />
+        <Layout>
+          <p css={title}>
+            <span css={colorPoint}>BEST</span> 스펙평가 ✨
+          </p>
+          <Link href={SPEC_URL} passHref>
+            <a css={linkButton}>
+              전체보기 <BsChevronRight />
+            </a>
+          </Link>
 
-  if (isLoading) {
-    return <div>데이터 없을시 처리방법 고민</div>;
+          <div css={bestUserWrapper}>
+            <BestUserList isSkeleton />
+            <BestUserBox isSkeleton />
+          </div>
+        </Layout>
+      </section>
+    );
   }
 
   return (
     <section css={specBestWrapper}>
+      <InvisibleH2 title="생산/기능직 구직자 스펙 평가 리스트" />
       <Layout>
-        <h2 css={title}>
-          <span>
-            스펙평가 <span css={colorPoint}>BEST</span>
-          </span>
-          {/* LATER - Link를 h2 밖으로 꺼내기 */}
-          <Link href={MAIN_URL} passHref>
-            <a css={linkButton}>
-              <span>전체보기</span> <BsChevronRight />
-            </a>
-          </Link>
-        </h2>
+        <p css={title}>
+          <span css={colorPoint}>BEST</span> 스펙평가 ✨
+        </p>
+        <Link href={SPEC_URL} passHref>
+          <a css={linkButton}>
+            전체보기 <BsChevronRight />
+          </a>
+        </Link>
+
         <div css={bestUserWrapper}>
           <BestUserList
             setActiveUserID={setActiveUserID}

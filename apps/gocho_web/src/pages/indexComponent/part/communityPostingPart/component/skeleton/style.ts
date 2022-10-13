@@ -1,40 +1,42 @@
 import { css } from "@emotion/react";
-import { COLORS } from "@style/constant";
+
+import { COLORS } from "shared-style/color";
 
 export const partContainer = css`
-  margin-top: 7.9375rem;
-`;
-
-export const headerContainer = css`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 2.5rem;
+  margin-top: 10rem;
 `;
 
 export const title = css`
   font-size: 1.25rem;
   color: ${COLORS.GRAY10};
-  font-weight: 600;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+`;
+
+export const colorPoint = css`
+  color: ${COLORS.BLUE_FIRST40};
 `;
 
 export const buttonArrContainer = css`
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 3rem;
 `;
 
 export const postingOrderButton = css`
-  width: fit-content;
   text-align: center;
   border-radius: 1rem;
-  font-weight: 400;
   margin-right: 0.5rem;
-  padding: 0.25rem 1rem;
-  border: 1px solid;
-  transition: all 0.2s ease;
-  border-color: ${COLORS.GRAY70};
-  color: ${COLORS.GRAY30};
-  background-color: transparent;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 2.0625rem;
+  background-color: ${COLORS.GRAY90};
+  color: ${COLORS.GRAY10};
 
   :last-of-type {
     margin-right: 0;
@@ -43,13 +45,12 @@ export const postingOrderButton = css`
 
 export const cardListContainer = css`
   position: relative;
-  overflow: hidden;
+  min-height: 20.625rem;
 `;
 
 export const sliderListContainer = css`
   display: flex;
-  align-items: center;
-  padding-bottom: 30px;
+  padding-bottom: 1.25rem;
 `;
 
 export const showMoreCommunityPostingButton = css`
@@ -72,4 +73,10 @@ export const showMoreCommunityPostingButton = css`
     display: flex;
     align-items: center;
   }
+`;
+
+export const linkButtonBox = css`
+  width: 100%;
+  margin: 1.5rem auto 0;
+  max-width: 25.5rem;
 `;

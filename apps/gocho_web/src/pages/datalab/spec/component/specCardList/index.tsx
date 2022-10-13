@@ -1,14 +1,12 @@
 import { FunctionComponent, useEffect, useRef } from "react";
 
-import { useInfiniteSpecArr } from "@api/spec/useInfiniteSpecArr";
-import { dummyArrCreator } from "@util/dummyArrCreator";
+import { useInfiniteSpecArr } from "shared-api/spec/useInfiniteSpecArr";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
 import { SpecCardListProps } from "./type";
 import { SpecCard } from "../specCard";
 
-export const SpecCardList: FunctionComponent<SpecCardListProps> = ({
-  order,
-}) => {
+export const SpecCardList: FunctionComponent<SpecCardListProps> = ({ order }) => {
   const {
     data: specArrData,
     isLoading,
@@ -22,29 +20,26 @@ export const SpecCardList: FunctionComponent<SpecCardListProps> = ({
   const observerRef = useRef<IntersectionObserver>();
   const boxRef = useRef<HTMLDivElement>(null);
 
-  const intersectionObserver = (
-    entries: IntersectionObserverEntry[],
-    io: IntersectionObserver
-  ) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        // 관찰하고 있는 entry가 화면에 보여지는 경우
-        io.unobserve(entry.target); // entry 관찰 해제
-        fetchNextPage(); // 다음 페이지 데이터 요청
-      }
-    });
-  };
-
   useEffect(() => {
+    const intersectionObserver = (entries: IntersectionObserverEntry[], io: IntersectionObserver) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // 관찰하고 있는 entry가 화면에 보여지는 경우
+          io.unobserve(entry.target); // entry 관찰 해제
+          fetchNextPage(); // 다음 페이지 데이터 요청
+        }
+      });
+    };
+
     if (observerRef.current) {
-      // 기존에 IntersectionObserver이 있을 경우
-      observerRef.current.disconnect(); // 연결 해제
+      observerRef.current.disconnect();
     }
 
-    observerRef.current = new IntersectionObserver(intersectionObserver); // IntersectionObserver 새롭게 정의
-    if (boxRef.current) observerRef.current.observe(boxRef.current); // boxRef 관찰 시작
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [specArrData]); // res 값이 변경될때마다 실행
+    observerRef.current = new IntersectionObserver(intersectionObserver, {
+      threshold: 0.2,
+    });
+    if (boxRef.current) observerRef.current.observe(boxRef.current);
+  }, [fetchNextPage, specArrData]);
 
   if (!specArrData || isError || isLoading) {
     return (

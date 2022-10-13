@@ -1,7 +1,7 @@
-import { css } from "@emotion/react";
+import { css, SerializedStyles } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
-import { PC_HOVER } from "@style/mediaQuery";
+import { COLORS } from "shared-style/color";
+import { PC_HOVER } from "shared-style/mediaQuery";
 
 export const skeletonContainer = css`
   overflow: hidden;
@@ -23,34 +23,40 @@ export const positionContainer = css`
   margin: 1rem 0 2.1875rem;
 `;
 
-export const positionTitle = css`
-  width: 8.5rem;
-  height: 2.25rem;
-  background-color: ${COLORS.GRAY10};
-  border-radius: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-  font-size: 0.75rem;
-  color: ${COLORS.GRAY100};
-  font-weight: 700;
+interface PositionTitleDef {
+  (isDdayEnd: boolean): SerializedStyles;
+}
 
-  > span {
-    position: absolute;
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 50%;
-    background-color: ${COLORS.BLUE_SECOND70};
-    color: ${COLORS.GRAY10};
+export const positionTitle: PositionTitleDef = (isDdayEnd) => {
+  return css`
+    width: 8.5rem;
+    height: 2.25rem;
+    background-color: ${isDdayEnd ? COLORS.GRAY40 : COLORS.GRAY10};
+    border-radius: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    top: -0.5rem;
-    right: -0.5rem;
-  }
-`;
+    text-align: center;
+    position: relative;
+    font-size: 0.75rem;
+    color: ${COLORS.GRAY100};
+    font-weight: 700;
+
+    > span {
+      position: absolute;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      background-color: ${isDdayEnd ? COLORS.GRAY80 : COLORS.BLUE_SECOND70};
+      color: ${COLORS.GRAY10};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: -0.5rem;
+      right: -0.5rem;
+    }
+  `;
+};
 
 export const positionTitleSkeleton = css`
   width: 8.5rem;

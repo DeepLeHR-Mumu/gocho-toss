@@ -1,28 +1,23 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const partContainer = css`
-  margin-top: 5.3125rem;
-`;
-
-export const headerContainer = css`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2.5rem;
+  margin-top: 9rem;
 `;
 
 export const buttonArrContainer = css`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
 `;
 
 export const title = css`
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 700;
   color: ${COLORS.GRAY10};
+  margin-bottom: 1.5rem;
 `;
 
 export const colorPoint = css`
@@ -34,10 +29,11 @@ export const setJobOrderButton = (active = false) => {
     width: fit-content;
     text-align: center;
     border-radius: 1rem;
-    border: 1px solid ${active ? COLORS.BLUE_SECOND40 : `${COLORS.GRAY70}`};
-    color: ${active ? "#3171b7" : `${COLORS.GRAY30}`};
-    background-color: ${active ? COLORS.BLUE_SECOND40 : "transparent"};
-    font-weight: ${active ? "600" : "400"};
+    border: 1px solid ${active ? COLORS.GRAY10 : COLORS.GRAY80};
+    color: ${active ? COLORS.GRAY10 : COLORS.GRAY40};
+    background-color: ${active ? COLORS.STATE_SUCCESS : "transparent"};
+    font-weight: 500;
+    font-size: 0.75rem;
     margin-right: 0.5rem;
     padding: 0.25rem 1rem;
     transition: all 0.2s ease;
@@ -48,24 +44,8 @@ export const setJobOrderButton = (active = false) => {
   `;
 };
 
-export const showMoreJobButton = css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+export const showMoreJobBox = css`
   width: 100%;
-  max-width: 29.25rem;
-  font-size: 0.9375rem;
-  border-radius: 2rem;
-  margin: 2.5rem auto 0;
-  padding: 1rem;
-  background-color: ${COLORS.GRAY20};
-  color: ${COLORS.GRAY100};
-
-  > span {
-    padding-left: 5px;
-    color: ${COLORS.GRAY100};
-    opacity: 0.4;
-    display: flex;
-    align-items: center;
-  }
+  max-width: 25rem;
+  margin: 5.5rem auto 0;
 `;

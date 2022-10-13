@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
   text-align: center;
@@ -8,6 +8,7 @@ export const wrapper = css`
 `;
 
 export const titleCSS = css`
+  display: block;
   font-size: 1.25rem;
   font-weight: 500;
   color: ${COLORS.GRAY10};

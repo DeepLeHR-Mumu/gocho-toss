@@ -1,6 +1,6 @@
 import { css, SerializedStyles } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const certificateContainer = css`
   width: 100%;
@@ -61,6 +61,20 @@ export const certificateArrBox: certificateArrBox = (isClick) => {
   `;
 };
 
+interface HideCertificateArrButtonDef {
+  (isClick: boolean): SerializedStyles;
+}
+
+export const hideCertificateArrButton: HideCertificateArrButtonDef = (isClick) => {
+  return css`
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    height: 100%;
+    display: ${isClick ? "block" : "none"};
+  `;
+};
+
 export const inputTextCSS = css`
   width: 100%;
   display: flex;
@@ -75,6 +89,10 @@ export const inputTextCSS = css`
     font-size: 0.875rem;
     font-weight: 400;
     width: 90%;
+
+    :focus {
+      outline: 0;
+    }
   }
 `;
 

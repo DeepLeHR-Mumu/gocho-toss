@@ -1,5 +1,14 @@
 import { css } from "@emotion/react";
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
+
+export const backgroundCloseButton = css`
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  `;
 
 export const wrapper = css`
   position: absolute;
@@ -22,7 +31,16 @@ export const closeButton = css`
   right: 0;
 `;
 
-export const container = css`
+export const container = css``;
+
+export const labelBox = css`
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+`;
+
+export const labelDesc = css`
+  font-size: 0.875rem;
+  color: ${COLORS.GRAY40};
+  font-weight: 400;
 `;

@@ -1,15 +1,13 @@
 import { css } from "@emotion/react";
-import { COLORS } from "@style/constant";
-import { PC_HOVER } from "@style/mediaQuery";
 
-export const listContainer = css`
-  margin-top: 3rem;
-`;
+import { COLORS } from "shared-style/color";
+import { PC_HOVER } from "shared-style/mediaQuery";
 
 export const sliderButtonContainer = css`
   margin-top: 1.5rem;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 `;
 
 export const sliderButton = css`
@@ -23,15 +21,13 @@ export const sliderButton = css`
   border-radius: 50%;
   color: ${COLORS.GRAY40};
   background-color: ${COLORS.GRAY100};
-  opacity: 0.7;
-
+  opacity: 0.8;
   transition: all 0.2s ease-in;
 
   ${PC_HOVER} {
     :hover {
       color: ${COLORS.GRAY100};
       background-color: ${COLORS.GRAY10};
-      border: 0;
     }
   }
 `;

@@ -5,7 +5,6 @@ export interface setCarouselSettingDef {
     infinite: boolean;
     swipeToSlide: boolean;
     slidesToShow: number;
-    centerPadding: string;
     speed: number;
   };
 }

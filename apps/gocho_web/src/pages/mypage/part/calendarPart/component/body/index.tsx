@@ -1,37 +1,26 @@
 import { FunctionComponent } from "react";
 
-import { useUserInfo } from "@api/auth";
-import { useUserJobBookmarkArr } from "@api/bookmark/useUserJobBookmark";
-import { dummyArrCreator } from "@util/dummyArrCreator";
+import { useUserInfo } from "shared-api/auth";
+import { useUserJobBookmarkArr } from "shared-api/bookmark";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
-import { SkeletonBox } from "@component/common/atom/skeletonBox";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { Bookmark } from "../bookmark";
 
 import { weekDayCreator, getDateHours } from "./util";
 import { BodyProps } from "./type";
-import {
-  skeletonContainer,
-  weekdayContainer,
-  weekdayCSS,
-  table,
-  todayCSS,
-  dayCSS,
-} from "./style";
+import { skeletonContainer, weekdayContainer, weekdayCSS, table, todayCSS, dayCSS } from "./style";
 
 export const Body: FunctionComponent<BodyProps> = ({ twoWeek }) => {
   const { data: userInfoData } = useUserInfo();
   const todayHours = getDateHours(new Date());
 
-  const {
-    data: userJobBookmarkArrData,
-    isError,
-    isLoading,
-  } = useUserJobBookmarkArr({
+  const { data: userJobBookmarkArrData, isLoading } = useUserJobBookmarkArr({
     userId: userInfoData?.id,
   });
 
   // LATER: 해당 날짜에 관련된 북마크만 처음부터 불러와라
-  if (!userInfoData || !userJobBookmarkArrData || isError || isLoading) {
+  if (!userInfoData || !userJobBookmarkArrData || isLoading) {
     return (
       <div css={skeletonContainer}>
         <SkeletonBox />

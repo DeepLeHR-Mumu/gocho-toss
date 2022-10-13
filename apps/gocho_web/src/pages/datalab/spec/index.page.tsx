@@ -1,36 +1,37 @@
-import { useEffect } from "react";
 import { NextPage } from "next";
-import axios from "axios";
+import { useEffect } from "react";
 
-import { useUserInfo } from "@api/auth";
-import { useModal } from "@recoil/hook/modal";
+import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_SPEC_LIST } from "shared-constant/meta";
+import { specListFunnelEvent } from "shared-ga/spec";
 
+import { Layout } from "@component/layout";
+
+import { AsideMenu } from "./component/asideMenu";
 import { CarouselPart } from "./part/carouselPart";
 import { ListPart } from "./part/listPart";
+import { title, colorPoint, flexBox } from "./style";
 
 const MainList: NextPage = () => {
-  const { setCurrentModal, closeModal } = useModal();
-  const { error } = useUserInfo();
-
   useEffect(() => {
-    if (
-      axios.isAxiosError(error) &&
-      (error.response?.status === 401 || error.response?.status === 403)
-    ) {
-      setCurrentModal("loginModal");
-    }
-  }, [error, setCurrentModal]);
-
-  useEffect(() => {
-    return () => {
-      closeModal();
-    };
+    specListFunnelEvent();
   }, []);
-
   return (
     <main>
+      <MetaHead metaData={META_SPEC_LIST} />
       <CarouselPart />
-      <ListPart />
+      <Layout>
+        <InvisibleH2 title="전체 스펙 리스트" />
+        <strong css={title}>
+          <span css={colorPoint}>All </span>
+          스펙 List 📃✨
+        </strong>
+        <div css={flexBox}>
+          <AsideMenu />
+          <ListPart />
+        </div>
+      </Layout>
     </main>
   );
 };

@@ -1,39 +1,40 @@
-import { FunctionComponent, useState } from "react";
-import { BsChevronDown } from "react-icons/bs";
+import { FunctionComponent, useEffect, useState } from "react";
+import { BsChevronUp } from "react-icons/bs";
+import { useRouter } from "next/router";
 
-import { useUserInfo } from "@api/auth";
-import { ProfileImg } from "@component/common/atom/profileImg";
+import { useUserInfo } from "shared-api/auth";
+import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
 import { MyProfileMenu } from "../myProfileMenu";
-import { profileWrapper, greetingMsg, downIconCSS } from "./style";
-import { activeDef } from "./type";
+import { profileWrapper, greetingMsg, iconCSS, wrapper } from "./style";
 
 export const Profile: FunctionComponent = () => {
-  const [isHover, setIsHover] = useState<boolean>(false);
+  const { pathname } = useRouter();
+  const [isActive, setIsActive] = useState<boolean>(false);
   const { data: userInfoData } = useUserInfo();
 
-  const handleIsHover: activeDef = (active) => {
-    setIsHover(active);
-  };
+  useEffect(() => {
+    setIsActive(false);
+  }, [pathname]);
 
   return (
-    <div
-      css={profileWrapper}
-      onMouseOver={() => {
-        handleIsHover(true);
-      }}
-      onFocus={() => {
-        handleIsHover(true);
-      }}
-      onMouseLeave={() => {
-        handleIsHover(false);
-      }}
-    >
-      {userInfoData && <ProfileImg imageStr={userInfoData?.image} size="S" />}
+    <div css={wrapper}>
+      <button
+        css={profileWrapper}
+        type="button"
+        aria-label={isActive ? "서브메뉴 열기" : "서브메뉴 닫기"}
+        onClick={() => {
+          setIsActive((isPrev) => {
+            return !isPrev;
+          });
+        }}
+      >
+        {userInfoData && <ProfileImg imageStr={userInfoData?.image} size="S" />}
 
-      <p css={greetingMsg}>{userInfoData?.nickname}</p>
-      <BsChevronDown css={downIconCSS} />
-      <MyProfileMenu active={isHover} />
+        <p css={greetingMsg}>{userInfoData?.nickname}</p>
+        <BsChevronUp css={iconCSS(isActive)} />
+      </button>
+      <MyProfileMenu active={isActive} />
     </div>
   );
 };

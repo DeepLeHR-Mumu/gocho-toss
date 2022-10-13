@@ -18,16 +18,12 @@ export const Aside: FunctionComponent = () => {
   };
 
   useEffect(() => {
-    setWindowHeight(window.innerHeight / 2);
+    setWindowHeight(window.innerHeight / 5);
     getScrollTop();
   }, []);
 
   return (
-    <aside
-      css={asideWrapperCreator(
-        windowHeight !== null && windowHeight <= activeHeight
-      )}
-    >
+    <aside css={asideWrapperCreator(windowHeight !== null && windowHeight <= activeHeight)}>
       {pathname === "/" && <RightBanner />}
     </aside>
   );

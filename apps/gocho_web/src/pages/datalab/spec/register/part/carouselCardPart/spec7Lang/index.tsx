@@ -2,31 +2,15 @@ import { FunctionComponent } from "react";
 import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
 import { FiX } from "react-icons/fi";
 
-import { useSpecRegisterObj } from "@recoil/hook/spec";
-
-import {
-  SpecCardTitle,
-  MoveCardButtons,
-  TextInputForm,
-  WarningText,
-} from "../common/component";
+import { SpecCardTitle, MoveCardButtons, TextInputForm, WarningText } from "../common/component";
 import { SelectChipForm } from "./component/selectChipForm";
 
 import { Spec7LangProps, PostSubmitValues } from "./type";
 import { langArr, langTestArr } from "./constant";
 import { specCardWrapper, formCSS } from "../common/style";
-import {
-  appendButton,
-  errorBox,
-  langContainer,
-  removeButton,
-  animationSlide,
-} from "./style";
+import { appendButton, errorBox, langContainer, removeButton, animationSlide } from "./style";
 
-export const Spec7Lang: FunctionComponent<Spec7LangProps> = ({
-  moveNextCard,
-  movePrevCard,
-}) => {
+export const Spec7Lang: FunctionComponent<Spec7LangProps> = ({ moveNextCard, movePrevCard }) => {
   const {
     handleSubmit,
     register,
@@ -36,7 +20,6 @@ export const Spec7Lang: FunctionComponent<Spec7LangProps> = ({
   } = useForm<PostSubmitValues>({
     mode: "onChange",
   });
-  const { setCurrentSpecObj } = useSpecRegisterObj();
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -45,9 +28,10 @@ export const Spec7Lang: FunctionComponent<Spec7LangProps> = ({
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
     const { language } = formData;
-    setCurrentSpecObj({
-      language,
-    });
+
+    const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
+    const currentSpecObj = Object.assign(prevSpecObj, { language });
+    sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
     moveNextCard(80);
   };
 
@@ -97,24 +81,20 @@ export const Spec7Lang: FunctionComponent<Spec7LangProps> = ({
                     onClick={() => {
                       return remove(index);
                     }}
+                    aria-label="어학 추가 제거"
                   >
                     <FiX />
                   </button>
+
                   <div css={errorBox}>
                     {errors.language?.[index]?.language?.message && (
-                      <WarningText
-                        msg={errors.language?.[index]?.language?.message}
-                      />
+                      <WarningText msg={errors.language?.[index]?.language?.message} />
                     )}
                     {errors.language?.[index]?.test?.message && (
-                      <WarningText
-                        msg={errors.language?.[index]?.test?.message}
-                      />
+                      <WarningText msg={errors.language?.[index]?.test?.message} />
                     )}
                     {errors.language?.[index]?.score?.message && (
-                      <WarningText
-                        msg={errors.language?.[index]?.score?.message}
-                      />
+                      <WarningText msg={errors.language?.[index]?.score?.message} />
                     )}
                   </div>
                 </li>
@@ -136,10 +116,7 @@ export const Spec7Lang: FunctionComponent<Spec7LangProps> = ({
             어학 추가하기
           </button>
 
-          <MoveCardButtons
-            movePrevCard={movePrevCard}
-            postSubmit={handleSubmit(postSubmit)}
-          />
+          <MoveCardButtons movePrevCard={movePrevCard} postSubmit={handleSubmit(postSubmit)} />
         </form>
       </div>
     </div>

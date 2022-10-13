@@ -1,12 +1,12 @@
 import { css } from "@emotion/react";
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const modalContainer = css`
   position: fixed;
   display: flex;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -70%);
+  transform: translate(-50%, -50%);
 `;
 
 export const wrapper = css`
@@ -44,17 +44,18 @@ export const userNameCSS = css`
   font-size: 1.3125rem;
   margin-bottom: 0.3125rem;
   font-weight: bold;
+  line-height: 2;
 `;
 
 export const accountCSS = css`
   color: #919191;
   font-size: 1rem;
-  /* margin-bottom: .1rem; */
+  line-height: 2;
 `;
 export const emailCSS = css`
   color: #919191;
   font-size: 1rem;
-  /* margin-bottom: 3.75rem; */
+  line-height: 2;
 `;
 
 export const buttonCSS = css`

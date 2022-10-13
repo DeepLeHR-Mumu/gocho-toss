@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
   padding: 2.5rem 2rem 3rem 3rem;
@@ -13,20 +13,25 @@ export const wrapper = css`
   background-color: ${COLORS.GRAY100};
   min-width: 330px;
   margin-left: -1.5rem;
+  position: relative;
+`;
+
+export const closeButtonBox = css`
+  position: absolute;
+  right: -0.5rem;
+  top: -0.5rem;
+`;
+
+export const title = css`
+  color: ${COLORS.BLUE_FIRST40};
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
 `;
 
 export const imgContainer = css`
-  gap: 1rem;
   display: flex;
-  margin: auto;
   justify-content: space-between;
   flex-wrap: wrap;
-`;
-
-export const confirmButton = css`
-  height: 3rem;
-  width: 4rem;
-  border-radius: 1.5rem;
-  border: solid 1px ${COLORS.GRAY30};
-  color: ${COLORS.GRAY30};
+  align-items: center;
 `;

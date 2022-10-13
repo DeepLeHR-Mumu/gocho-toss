@@ -1,94 +1,52 @@
 import { css } from "@emotion/react";
-import { COLORS } from "@style/constant";
-import { PC_HOVER } from "@style/mediaQuery";
+
+import { COLORS } from "shared-style/color";
+import { PC_HOVER } from "shared-style/mediaQuery";
 
 export const partContainer = css`
   background-color: ${COLORS.GRAY100};
-  padding: 6rem 0;
-`;
-
-export const title = css`
-  font-size: 1.75rem;
-  font-weight: 700;
-`;
-
-export const colorPoint = css`
-  color: ${COLORS.BLUE_NEON30};
-`;
-
-export const mainContainer = css`
+  width: calc(100% - 6rem);
   display: flex;
   align-items: flex-start;
-  margin-top: 2rem;
-`;
-
-export const menu = css`
-  position: sticky;
-  top: 0;
-  left: 0;
-  padding-top: 120px;
-  z-index: 10;
-`;
-
-export const asideProfile = css`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 0.75rem;
-  width: 5rem;
-  background-color: ${COLORS.GRAY90};
-  border-radius: 1.5rem;
-  color: ${COLORS.GRAY40};
-  margin-bottom: 0.5rem;
-  padding: 1rem;
-  word-break: break-all;
-  text-align: center;
-`;
-
-export const loginNickname = css`
-  margin-top: 0.5rem;
-`;
-
-export const asideButton = css`
-  font-size: 0.75rem;
-  width: 5rem;
-  background-color: ${COLORS.GRAY90};
-  border-radius: 1.5rem;
-  color: ${COLORS.GRAY40};
-  margin-bottom: 0.5rem;
-  padding: 0.5rem 1rem;
-  word-break: break-all;
-  text-align: center;
 `;
 
 export const listContainer = css`
-  margin-left: 1rem;
-  flex-grow: 1;
+  width: 100%;
 `;
 
 export const OrderButtonContainer = css`
   display: flex;
   align-items: center;
-  width: 100%;
-  border-radius: 1.5rem;
+  border-radius: 2rem;
   background-color: ${COLORS.BLUE_SECOND90};
-  color: ${COLORS.GRAY40};
-  font-size: 0.875rem;
   padding: 1.5rem 2.5rem;
+`;
+
+export const desc = css`
+  font-size: 0.875rem;
+  color: ${COLORS.GRAY40};
+  font-weight: 400;
 `;
 
 export const setSpecOrderButton = (active = false) => {
   return css`
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${COLORS.GRAY30};
+    font-size: 0.875rem;
+    font-weight: 400;
     width: fit-content;
     text-align: center;
     border-radius: 1.5rem;
-    padding: 0.5rem 2rem;
+    padding: 0 2rem;
     margin-left: 1rem;
     transition: all 0.2s ease;
-    word-break: keep-all;
+    white-space: nowrap;
     font-weight: ${active ? 500 : 400};
-    border: 1px solid ${active ? COLORS.BLUE_SECOND40 : `${COLORS.GRAY40}`};
-    color: ${active ? "#3171b7" : `${COLORS.GRAY30}`};
+    border: 1px solid ${active ? COLORS.BLUE_SECOND40 : COLORS.GRAY40};
+    color: ${active ? "#3171b7" : COLORS.GRAY30};
     background-color: ${active ? COLORS.BLUE_SECOND40 : "transparent"};
 
     ${PC_HOVER} {

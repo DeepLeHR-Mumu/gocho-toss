@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
 
 export const dimmed = css`
-  cursor: default;
   position: fixed;
   z-index: 20;
   left: 0;

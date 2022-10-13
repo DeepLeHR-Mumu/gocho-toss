@@ -1,44 +1,26 @@
 import { css } from "@emotion/react";
 
-import { TABLET } from "@style/mediaQuery";
-import { skeletonCreatorCSS } from "@style/common";
-import { COLORS } from "@style/constant";
+import { skeletonCreatorCSS } from "shared-style/common";
+import { COLORS } from "shared-style/color";
 
 export const tipDisplayWrapper = css`
   display: flex;
   align-items: center;
-  justify-content: space-between;
 `;
 
 export const tipFadeContainer = css`
-  position: relative;
-  width: 100%;
-  max-width: 35rem;
-
-  ${TABLET} {
-    max-width: 50%;
-  }
+  margin-right: 1.5rem;
 `;
 
 export const tipImageBox = css`
-  overflow: hidden;
+  width: 38.9375rem;
+  height: 21.0625rem;
   border-radius: 20rem;
-`;
-
-export const fadeImageCSS = css`
-  height: 18rem;
-  background-color: ${COLORS.GRAY90};
-  font-size: 2rem;
+  overflow: hidden;
   position: relative;
-
-  ${TABLET} {
-    height: 15rem;
-  }
 `;
 
 export const currentTipContainer = css`
-  width: 100%;
-  max-width: 25rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -48,12 +30,13 @@ export const currentTipContainer = css`
 export const tagArrCSS = css`
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 
   > li {
-    font-size: 1.125rem;
+    font-size: 1rem;
     color: ${COLORS.GRAY30};
     margin-right: 1rem;
+    font-weight: 400;
     white-space: nowrap;
     ${skeletonCreatorCSS("4rem")}
 
@@ -64,20 +47,11 @@ export const tagArrCSS = css`
 `;
 
 export const currentTipTitle = css`
-  font-size: 1.75rem;
+  font-size: 1.625rem;
   word-break: keep-all;
-  line-height: 1.5;
-  margin-bottom: 1.8125rem;
-  width: 100%;
-
-  > span {
-    margin-bottom: 10px;
-    ${skeletonCreatorCSS()}
-
-    :last-of-type {
-      ${skeletonCreatorCSS("80%")}
-    }
-  }
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  ${skeletonCreatorCSS()}
 `;
 
 export const currentTipDesc = css`

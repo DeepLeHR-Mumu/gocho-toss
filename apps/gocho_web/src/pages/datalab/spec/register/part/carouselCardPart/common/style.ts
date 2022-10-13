@@ -1,9 +1,9 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const specCardWrapper = css`
-    width: 100%;
+  width: 100%;
   min-height: 630px;
   padding: 3rem 3rem 10rem 3rem;
   background-color: ${COLORS.GRAY100};

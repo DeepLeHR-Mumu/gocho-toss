@@ -1,22 +1,20 @@
 import { FunctionComponent } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
-import { changeBannerColor, linkCSS, titleCSS, descCSS } from "./style";
+import { changeBannerColor, linkCSS, titleCSS, descCSS, iconBox } from "./style";
 import { BannerCardProps } from "./type";
 
-// 위로 빼도 될듯? 복잡하지 않은 로직
-export const BannerCard: FunctionComponent<BannerCardProps> = ({
-  title,
-  desc,
-  backgroundColor,
-  link,
-}) => {
+export const BannerCard: FunctionComponent<BannerCardProps> = ({ title, desc, backgroundColor, link, iconSrc }) => {
   return (
     <li css={changeBannerColor(backgroundColor)}>
       <Link href={link} passHref>
         <a css={linkCSS}>
           <strong css={titleCSS}>{title}</strong>
           <p css={descCSS}>{desc}</p>
+          <div css={iconBox}>
+            <Image src={iconSrc} alt="" layout="fill" objectFit="contain" />
+          </div>
         </a>
       </Link>
     </li>

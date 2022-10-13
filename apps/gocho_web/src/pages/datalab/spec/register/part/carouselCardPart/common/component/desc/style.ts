@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const descCSS = css`
   color: ${COLORS.BLUE_FIRST40};

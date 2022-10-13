@@ -7,26 +7,16 @@ import { wrapper, buttonCSS } from "./style";
 export const UnAuthMenu: FunctionComponent = () => {
   const { setCurrentModal } = useModal();
 
-  const openLoginModal = () => {
-    setCurrentModal("loginModal");
-  };
-
-  const openSignUpModal = () => {
-    setCurrentModal("signUpModal");
-  };
-
   return (
-    <ul css={wrapper}>
-      <li>
-        <button css={buttonCSS} type="button" onClick={openLoginModal}>
-          로그인
-        </button>
-      </li>
-      <li>
-        <button css={buttonCSS} type="button" onClick={openSignUpModal}>
-          회원가입
-        </button>
-      </li>
-    </ul>
+    <button
+      css={wrapper}
+      type="button"
+      onClick={() => {
+        setCurrentModal("loginModal", { button: "close" });
+      }}
+    >
+      <div css={buttonCSS}>로그인 /</div>
+      <div css={buttonCSS}> 회원가입</div>
+    </button>
   );
 };

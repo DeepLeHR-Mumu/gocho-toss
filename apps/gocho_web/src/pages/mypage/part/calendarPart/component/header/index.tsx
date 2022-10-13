@@ -1,17 +1,13 @@
 import { FunctionComponent, useEffect } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
-import { dateConverter } from "@util/date";
-import { dummyArrCreator } from "@util/dummyArrCreator";
+import { dateConverter } from "shared-util/date";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
 import { container, titleCSS, button } from "./style";
 import { HeaderProps, changeWeekDef } from "./type";
 
-export const Header: FunctionComponent<HeaderProps> = ({
-  setCurrentDate,
-  currentDate,
-  setTwoWeek,
-}) => {
+export const Header: FunctionComponent<HeaderProps> = ({ setCurrentDate, currentDate, setTwoWeek }) => {
   const { year, month } = dateConverter(currentDate.getTime());
   const title = `${year}년 ${month}월`;
 
@@ -43,16 +39,18 @@ export const Header: FunctionComponent<HeaderProps> = ({
         onClick={() => {
           return changeWeek("prev");
         }}
+        aria-label="2주 전 보기"
       >
         <BsChevronLeft />
       </button>
-      <h3 css={titleCSS}>{title}</h3>
+      <p css={titleCSS}>{title}</p>
       <button
         type="button"
         css={button}
         onClick={() => {
           return changeWeek("next");
         }}
+        aria-label="2주 후 보기"
       >
         <BsChevronRight />
       </button>

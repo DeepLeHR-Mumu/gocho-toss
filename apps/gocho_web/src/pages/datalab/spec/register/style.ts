@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
+import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
   background-color: ${COLORS.GRAY90};
@@ -12,6 +12,7 @@ export const title = css`
   color: ${COLORS.GRAY10};
   font-weight: 500;
   padding: 3.625rem 0 4rem;
+  display: block;
 
   > span {
     color: ${COLORS.BLUE_FIRST40};

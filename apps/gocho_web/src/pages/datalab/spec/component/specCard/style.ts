@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
-import { COLORS } from "@style/constant";
-import { shorten } from "@style/common";
+import { COLORS } from "shared-style/color";
+import { shorten } from "shared-style/common";
+import { TABLET } from "shared-style/mediaQuery";
 
 export const specCardSkeleton = css`
   overflow: hidden;
@@ -16,7 +17,6 @@ export const specCardSkeleton = css`
 
 export const cardWrapper = css`
   display: flex;
-  height: 7rem;
   margin-bottom: 1.5rem;
   background-color: ${COLORS.GRAY100};
   border-radius: 1.5rem;
@@ -29,6 +29,7 @@ export const cardWrapper = css`
 
 export const userInfoContainer = css`
   display: flex;
+  align-items: center;
   padding: 2.5rem 1rem;
   border-right: 1px solid ${COLORS.GRAY70};
 `;
@@ -97,6 +98,9 @@ export const infoTitle = css`
   font-size: 0.75rem;
   color: ${COLORS.GRAY40};
   margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
 
   :first-of-type {
     margin-top: 0;
@@ -113,17 +117,26 @@ export const info = css`
 
 export const certi = css`
   display: flex;
+
+  ${TABLET} {
+    flex-direction: column;
+  }
 `;
 
 export const certiLabel = css`
   font-size: 0.75rem;
   width: fit-content;
   position: relative;
+  white-space: nowrap;
   color: ${COLORS.GRAY10};
   background-color: ${COLORS.GRAY90};
   border-radius: 1.5rem;
   padding: 0.75rem 1rem;
   margin-right: 1.5rem;
+
+  ${TABLET} {
+    margin: 0.25rem 0;
+  }
 `;
 
 export const certiNumber = css`
@@ -139,6 +152,7 @@ export const certiNumber = css`
 
 export const buttonContainer = css`
   display: flex;
+  white-space: nowrap;
   align-items: flex-end;
   justify-content: flex-end;
   padding: 1rem;

@@ -1,13 +1,14 @@
 import { Dispatch, SetStateAction } from "react";
 
 export interface PositionCardProps {
+  isDdayEnd: boolean;
   isSkeleton?: never;
   currentPositionId: number | null;
   setCurrentPositionId: Dispatch<SetStateAction<number | null>>;
   position: {
     id: number;
     requiredExp: {
-      type: "신입" | "경력" | "무관";
+      type: "신입" | "경력" | "무관" | "신입/경력";
     };
     rotationArr: string[];
     placeArr: string[];
@@ -25,6 +26,7 @@ export interface PositionCardProps {
 }
 
 export interface PositionCardSkeleton {
+  isDdayEnd?: never;
   isSkeleton: boolean;
   currentPositionId?: never;
   setCurrentPositionId?: never;

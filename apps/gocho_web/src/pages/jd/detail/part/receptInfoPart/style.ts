@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { PC_HOVER } from "@style/mediaQuery";
-import { COLORS } from "@style/constant";
+import { PC_HOVER } from "shared-style/mediaQuery";
+import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
   display: flex;
@@ -42,6 +42,21 @@ export const beforeAfterDateBox = css`
   }
 `;
 
+export const cutBox = css`
+  font-size: 0.75rem;
+  white-space: nowrap;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.25rem;
+  border-radius: 1rem;
+  width: fit-content;
+  height: 1.625rem;
+  background-color: #f2f2f2;
+  color: #1553cd;
+`;
+
 export const applyButton = css`
   width: 7.875rem;
   height: 3rem;
@@ -50,6 +65,18 @@ export const applyButton = css`
   align-items: center;
   justify-content: center;
   color: ${COLORS.GRAY100};
+  border-radius: 2rem;
+  margin-top: 1.375rem;
+`;
+
+export const applyEndButton = css`
+  width: 7.875rem;
+  height: 3rem;
+  background-color: ${COLORS.GRAY90};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${COLORS.GRAY70};
   border-radius: 2rem;
   margin-top: 1.375rem;
 `;

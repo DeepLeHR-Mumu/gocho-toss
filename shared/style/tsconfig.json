@@ -1,0 +1,8 @@
+{
+  "extends": "tsconfig-deeple/react-library.json",
+  "compilerOptions": {
+    "moduleResolution": "node"
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}

@@ -2,43 +2,45 @@ import { NextPage } from "next";
 import { useEffect } from "react";
 import axios from "axios";
 
-import { Layout } from "@component/layout";
-import { useUserInfo } from "@api/auth";
+import { useUserInfo } from "shared-api/auth";
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_MYPAGE } from "shared-constant/meta";
+import { myPageFunnelEvent } from "shared-ga/myPage";
+
 import { useModal } from "@recoil/hook/modal";
+import { Layout } from "@component/layout";
 
 import { SettingPart } from "./part/settingPart";
 import { CalendarPart } from "./part/calendarPart";
 import { BookmarkPart } from "./part/bookmarkPart";
-import {
-  mainContainer,
-  title,
-  colorPoint,
-  mypagePosition,
-  mypageBody,
-} from "./style";
+import { mainContainer, title, colorPoint, mypagePosition, mypageBody } from "./style";
 
 const MypageHome: NextPage = () => {
-  const { setCurrentModal, closeModal } = useModal();
+  const { setCurrentModal, currentModal, closeModal } = useModal();
 
   const { error } = useUserInfo();
   useEffect(() => {
-    if (
-      axios.isAxiosError(error) &&
-      (error.response?.status === 401 || error.response?.status === 403)
-    ) {
-      setCurrentModal("loginModal");
+    if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
+      setCurrentModal("loginModal", { button: "home" });
+    }
+    if (currentModal?.activatedModal === "signUpModal") {
+      setCurrentModal("signUpModal");
     }
     return () => {
       closeModal();
     };
-  }, [error, closeModal, setCurrentModal]);
+  }, [error, closeModal, setCurrentModal, currentModal?.activatedModal]);
 
+  useEffect(() => {
+    myPageFunnelEvent();
+  }, []);
   return (
     <main css={mainContainer}>
+      <MetaHead metaData={META_MYPAGE} />
       <Layout>
-        <h2 css={title}>
+        <strong css={title}>
           마이페이지 <span css={colorPoint}>홈</span>
-        </h2>
+        </strong>
         <div css={mypagePosition}>
           <SettingPart />
           <div css={mypageBody}>

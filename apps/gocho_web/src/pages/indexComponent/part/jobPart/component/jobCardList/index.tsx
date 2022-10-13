@@ -1,17 +1,23 @@
 import { FunctionComponent } from "react";
 
-import { useJobArr } from "@api/job";
-import { JobSmallCard } from "@pages/indexComponent/part/jobPart/component/jobSmall";
-import { dummyArrCreator } from "@util/dummyArrCreator";
+import { useJobArr } from "shared-api/job";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { MainJobCard } from "shared-ui/card/MainJobCard";
+import { useUserInfo } from "shared-api/auth";
+import { useUserJobBookmarkArr } from "shared-api/bookmark";
+
+import { useModal } from "@recoil/hook/modal";
 
 import { cardListContainer } from "./style";
 import { JobCardArrProps } from "./type";
 
-export const JobCardList: FunctionComponent<JobCardArrProps> = ({
-  listOrder,
-}) => {
+export const JobCardList: FunctionComponent<JobCardArrProps> = ({ listOrder }) => {
+  const { data: userData } = useUserInfo();
+  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
+  const { setCurrentModal } = useModal();
+
   const {
-    data: jobArrData,
+    data: jobDataArr,
     isLoading,
     isError,
   } = useJobArr({
@@ -20,21 +26,38 @@ export const JobCardList: FunctionComponent<JobCardArrProps> = ({
     limit: 9,
   });
 
-  if (!jobArrData || isError || isLoading) {
+  const loginModalOpener = () => {
+    setCurrentModal("loginModal", { button: "close" });
+  };
+
+  if (!jobDataArr || isError || isLoading) {
     return (
       <div css={cardListContainer}>
         {dummyArrCreator(9).map((value) => {
-          return (
-            <JobSmallCard key={`JobSmallCardSkeleton${value}`} isSkeleton />
-          );
+          return <MainJobCard key={`MainJobCardSkeleton${value}`} isSkeleton />;
         })}
       </div>
     );
   }
   return (
     <div css={cardListContainer}>
-      {jobArrData.map((job) => {
-        return <JobSmallCard key={job.id} jobData={job} />;
+      {jobDataArr.jobDataArr.map((jobData) => {
+        const isBookmarked = Boolean(
+          userJobBookmarkArr?.some((job) => {
+            return job.id === jobData.id;
+          })
+        );
+
+        return (
+          <MainJobCard
+            key={`MainJobCard${jobData.id}`}
+            jobData={jobData}
+            isMobile={false}
+            isBookmarked={isBookmarked}
+            userId={userData?.id}
+            loginOpener={loginModalOpener}
+          />
+        );
       })}
     </div>
   );

@@ -1,7 +1,7 @@
 import { css, SerializedStyles } from "@emotion/react";
 
-import { COLORS } from "@style/constant";
-import { shorten } from "@style/common";
+import { COLORS } from "shared-style/color";
+import { shorten } from "shared-style/common";
 
 export const container = css``;
 

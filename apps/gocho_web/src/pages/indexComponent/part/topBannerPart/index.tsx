@@ -3,16 +3,9 @@ import Link from "next/link";
 import { MdKeyboardArrowRight, MdClear } from "react-icons/md";
 
 import { Layout } from "@component/layout";
-import { COMMUNITY_TIPS_LIST_URL } from "@constant/internalURL";
+import { COMMUNITY_TIPS_LIST_URL } from "shared-constant/internalURL";
 
-import {
-  topBannerWrapper,
-  topBannerPosition,
-  topBannerContainer,
-  bannerDesc,
-  closeButton,
-  linkButton,
-} from "./style";
+import { topBannerWrapper, topBannerPosition, topBannerContainer, bannerDesc, closeButton, linkButton } from "./style";
 
 export const TopBannerPart: FunctionComponent = () => {
   return (
@@ -29,11 +22,7 @@ export const TopBannerPart: FunctionComponent = () => {
               </a>
             </Link>
           </div>
-          <button
-            css={closeButton}
-            type="button"
-            aria-label="광고 바 닫기"
-          >
+          <button css={closeButton} type="button" aria-label="광고 바 닫기">
             <MdClear />
           </button>
         </div>
