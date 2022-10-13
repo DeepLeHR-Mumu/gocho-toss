@@ -9,6 +9,7 @@ import { BottomPagination } from "@component/common/molecule/bottomPagination";
 
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { META_JD_EXPLIST } from "shared-constant/meta";
+import { JOBS_EXPLIST_URL } from "shared-constant/internalURL";
 import { ExpJobCardList } from "./component/expJobCardList";
 import { setJobOrderButtonArr } from "./constant";
 import {
@@ -52,6 +53,7 @@ const JobsExpList: NextPage = () => {
       setPage(1);
     }
   }, [companyDataArr, total]);
+  const totalPage = Math.ceil(total / limit);
 
   return (
     <main css={mainContainer}>
@@ -85,7 +87,12 @@ const JobsExpList: NextPage = () => {
             })}
           </div>
           <ExpJobCardList companyDataArr={companyDataArr?.companyDataArr} isLoading={isLoading} />
-          <BottomPagination total={total} limit={limit} page={page} setPage={setPage} />
+          <BottomPagination
+            totalPage={totalPage}
+            linkObj={{
+              pathname: JOBS_EXPLIST_URL,
+            }}
+          />
         </section>
       </Layout>
     </main>

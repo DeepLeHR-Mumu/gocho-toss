@@ -21,6 +21,7 @@ export const linkText = css`
 `;
 
 export const title = css`
+  display: block;
   font-size: 0.875rem;
   font-weight: 700;
   color: ${COLORS.GRAY60};
@@ -36,6 +37,7 @@ export const emailText = css`
 export const logo = css`
   width: 7.125rem;
   height: 1.25rem;
+  display: block;
   position: relative;
   margin: 2.5rem 0 1rem;
 `;
@@ -45,6 +47,10 @@ export const infoContainer = css`
   font-size: 0.75rem;
   color: ${COLORS.GRAY60};
   line-height: 1.75;
+
+  > li {
+    line-height: 2;
+  }
 `;
 
 export const text = css`

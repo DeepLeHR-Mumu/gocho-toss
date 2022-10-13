@@ -14,7 +14,7 @@ const withTM = require("next-transpile-modules")([
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [`d2nnzfahmszi6w.cloudfront.net`],
+    domains: [`cdn.gocho-back.com`],
     formats: ["image/avif", "image/webp"],
   },
   pageExtensions: ["page.tsx"],

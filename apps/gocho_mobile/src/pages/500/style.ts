@@ -5,7 +5,7 @@ import { COLORS } from "shared-style/color";
 export const wrapper = css`
   background-color: ${COLORS.GRAY90};
   width: 100%;
-  height: 50rem;
+  height: 40rem;
   padding-top: 2rem;
   display: flex;
   align-items: flex-start;
@@ -21,7 +21,7 @@ export const errorMsgWrapper = css`
   flex-direction: column;
   border-radius: 2rem;
   width: calc(100% - 4rem);
-  padding: 6rem 2rem;
+  padding: 3rem;
   position: relative;
 
   ::after {
@@ -36,24 +36,28 @@ export const errorMsgWrapper = css`
 `;
 
 export const errorMsgContainer = css`
-  margin-bottom: 2.5rem;
-  > p {
-    font-size: 1.3rem;
-    line-height: 1.75rem;
+  margin-bottom: 1.5rem;
+  > h1 {
+    font-size: 1rem;
+    color: ${COLORS.GRAY10};
+    line-height: 1.6rem;
     text-align: center;
+    white-space: nowrap;
+    font-weight: 500;
   }
 `;
 
 export const catchPhrase = css`
-  margin-bottom: 1.6875rem;
-  display: flex;
-  flex-direction: column;
-  p,
+  margin-bottom: 1.5rem;
+  > p,
   a {
-    font-size: 0.95rem;
     text-align: center;
+    font-size: 0.875rem;
     color: ${COLORS.GRAY60};
-    line-height: 1.5rem;
+    font-weight: 400;
+    display: block;
+    white-space: nowrap;
+    line-height: 1.6rem;
   }
 `;
 

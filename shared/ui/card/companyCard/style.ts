@@ -1,26 +1,25 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 import { PC_HOVER } from "shared-style/mediaQuery";
+import { shorten } from "shared-style/common";
 
 export const companyCardSkeleton = css`
   overflow: hidden;
   min-width: 18rem;
-  width: 32%;
+  width: calc(33% - 0.5rem);
   height: 12.5rem;
   border-radius: 1.5rem;
-  margin-bottom: 1rem;
   background-color: ${COLORS.GRAY100};
 `;
 
 export const cardWrapper = css`
   min-width: 18rem;
-  width: 32%;
-  height: 12.5rem;
-  margin-bottom: 1.5%;
-  margin-right: 1.8%;
-  border-radius: 1.5rem;
-  border: 2px solid ${COLORS.GRAY90};
-  padding: 1.75rem;
+  width: calc(33% - 0.5rem);
+  /* height: 12.5rem; */
+  overflow: hidden;
+  border-radius: 2rem;
+  border: 1px solid ${COLORS.GRAY90};
+  padding: 1.25rem;
   position: relative;
   background-color: ${COLORS.GRAY100};
 
@@ -52,14 +51,19 @@ export const bookmarkButtonWrapper = (isBookmarked = false) => {
 };
 
 export const isRecruitingCSS = css`
-  color: ${COLORS.ERROR_RED40};
+  color: ${COLORS.BLUE_FIRST40};
+  font-size: 0.875rem;
+  font-weight: 500;
 `;
 
 export const NameCSS = css`
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: ${COLORS.GRAY30};
-  margin-top: 0.5rem;
+  font-size: 1rem;
+  display: block;
+  margin: 0.5rem 0;
+  font-weight: 500;
+  color: ${COLORS.GRAY10};
+  line-height: 1.6;
+  ${shorten(2)};
 `;
 
 export const infoWrapper = css`

@@ -127,7 +127,7 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
             <Image
               layout="fill"
               objectFit="contain"
-              src={imageSrc}
+              src={imageSrc || jobData.companyLogo}
               alt=""
               onError={() => {
                 return setImageSrc(defaultCompanyLogo);

@@ -10,7 +10,7 @@ export const UnauthorizedMenu: FunctionComponent<unauthorizedMEnuDef> = ({ setOp
 
   const openLoginModal = () => {
     setOpenedElement(null);
-    setCurrentModal("loginModal");
+    setCurrentModal("loginModal", { button: "close" });
   };
 
   const openSignUpModal = () => {

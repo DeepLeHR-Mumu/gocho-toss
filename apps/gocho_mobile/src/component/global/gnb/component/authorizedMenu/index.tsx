@@ -7,9 +7,9 @@ import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { MYPAGE_URL } from "shared-constant/internalURL";
 import Link from "next/link";
 import { profileWrapper, menuCategory, flexBox, nickname } from "./style";
-import { authorziedMenu } from "./type";
+import { AuthorizedMenuProps } from "./type";
 
-export const AuthorziedMenu: FunctionComponent<authorziedMenu> = ({ setOpenedElement }) => {
+export const AuthorizedMenu: FunctionComponent<AuthorizedMenuProps> = ({ setOpenedElement }) => {
   const queryClient = useQueryClient();
 
   const doLogout = () => {

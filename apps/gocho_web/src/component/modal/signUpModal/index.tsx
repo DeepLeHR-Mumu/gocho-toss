@@ -32,7 +32,7 @@ export const SignUpBox: FunctionComponent = () => {
   const { mutate } = useDoSignUp();
   const { setCurrentToast } = useToast();
 
-  const [errorMsg, setErrorMsg] = useState<string | undefined>(undefined);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const signupAttempt = useRef(0);
 
   const signUpSubmit: SubmitHandler<SignUpFormValues> = (signUpObj) => {
@@ -43,14 +43,18 @@ export const SignUpBox: FunctionComponent = () => {
         signupAttempt.current += 1;
       },
       onSuccess: (response) => {
-        setCurrentToast("님 환영합니다.", watch("nickname"));
         localStorage.setItem("token", `${response?.data.token}`);
         signupSuccessEvent();
         refetch();
         closeModal();
+        setCurrentToast("님 환영합니다.", watch("nickname"));
       },
     });
   };
+
+  useEffect(() => {
+    setErrorMsg(null);
+  }, [closeModal]);
 
   useEffect(() => {
     signupModalOpenEvent();
@@ -68,7 +72,7 @@ export const SignUpBox: FunctionComponent = () => {
         />
       </div>
       <div css={logoContainer}>
-        <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" />
+        <Image objectFit="contain" src={smallMono} alt="고초대졸 닷컴" layout="fill" />
       </div>
       <p css={desc}>가입은 5초면 가능!</p>
 

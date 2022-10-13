@@ -2,7 +2,7 @@ import { NextPage } from "next";
 
 import { Layout } from "@component/layout";
 
-import { mainDesc, executionDesc, tosArr } from "./constant";
+import { mainDesc, executionDesc, tosArr } from "shared-constant/TOS";
 import { tosTitle, descCSS, subTitle, listCSS, subListCSS, executionDescCSS, wrapper } from "./style";
 
 import { tosItemDef } from "./type";

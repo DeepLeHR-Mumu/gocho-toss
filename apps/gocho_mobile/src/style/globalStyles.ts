@@ -1,8 +1,5 @@
 import { css } from "@emotion/react";
 
-
-const MOBILE = `@media (max-width:400px)`;
-
 export const globalStyles = css`
   * {
     box-sizing: border-box;
@@ -98,9 +95,6 @@ export const globalStyles = css`
     font-family: Noto Sans KR, sans-serif;
     font-size: 16px;
     min-width: 360px;
-    ${MOBILE}{
-      font-size: 14px;
-    }
   }
   /* HTML5 display-role reset for older browsers */
   article,

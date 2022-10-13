@@ -1,24 +1,44 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { FiArrowRight } from "react-icons/fi";
 
-import checkIconImage from "shared-image/global/common/yellow_check.png";
+import { SlideCardProps } from "./type";
+import { wrapper, logo, title, desc, iconBox, linkButton, middleDescCSS, topDescCSS } from "./style";
 
-import { wrapper, logo, title, desc, iconBox } from "./style";
-
-interface SlideCardProps {
-  carouselData: { title: string; desc: string; bgColor: string };
-}
 export const SlideCard: FunctionComponent<SlideCardProps> = ({ carouselData }) => {
   return (
-    <div css={wrapper(carouselData.bgColor)}>
+    <div css={wrapper(carouselData.backgroundColor)}>
+      <p css={topDescCSS}>{carouselData.topDesc}</p>
       <div css={logo}>
-        <p>고초대졸닷컴</p>
-        <div css={iconBox}>
-          <Image src={checkIconImage} alt="" objectFit="contain" layout="fill" />
-        </div>
+        <p css={middleDescCSS}>{carouselData.middleDesc}</p>
+        {carouselData.iconImage && (
+          <div css={iconBox}>
+            <Image src={carouselData.iconImage} alt="" objectFit="contain" layout="fill" />
+          </div>
+        )}
       </div>
-      <p css={title}>{carouselData.title}</p>
-      <p css={desc}>{carouselData.desc}</p>
+      <strong css={title}>{carouselData.title}</strong>
+      <p css={desc}>{carouselData.lastDesc}</p>
+
+      {carouselData.buttonObj && carouselData.buttonObj.target === "_self" && (
+        <Link href={carouselData.buttonObj.url} passHref target={carouselData.buttonObj.target}>
+          <a css={linkButton(carouselData.buttonObj.backgroundColor, carouselData.buttonObj.color)}>
+            <FiArrowRight />
+            {carouselData.buttonObj.text}
+          </a>
+        </Link>
+      )}
+      {carouselData.buttonObj && carouselData.buttonObj.target === "_blank" && (
+        <a
+          href={carouselData.buttonObj.url}
+          target={carouselData.buttonObj.target}
+          css={linkButton(carouselData.buttonObj.backgroundColor, carouselData.buttonObj.color)}
+        >
+          <FiArrowRight />
+          {carouselData.buttonObj.text}
+        </a>
+      )}
     </div>
   );
 };

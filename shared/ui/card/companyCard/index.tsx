@@ -15,9 +15,6 @@ import {
   bookmarkButtonWrapper,
   isRecruitingCSS,
   NameCSS,
-  infoWrapper,
-  sizeCSS,
-  sectorCSS,
   companyLogoBox,
 } from "./style";
 
@@ -39,9 +36,6 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
     logo_url: companyData?.logoUrl as string,
     name: companyData?.name as string,
   });
-
-  const size = "";
-  const sector = "";
 
   if (isSkeleton || companyData === undefined) {
     return (
@@ -74,17 +68,13 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
             <BsFillBookmarkFill />
           </button>
           <p css={isRecruitingCSS}>#채용중</p>
-          <div css={NameCSS}>{companyData.name}</div>
-          <div css={infoWrapper}>
-            <div css={sizeCSS}>{size}</div>
-            <div css={sectorCSS}>{sector}</div>
-          </div>
+          <strong css={NameCSS}>{companyData.name}</strong>
           <div css={companyLogoBox}>
             <Image
               layout="fill"
               objectFit="contain"
-              src={imageSrc}
-              alt=""
+              src={imageSrc || companyData.logoUrl}
+              alt={companyData.name}
               onError={() => {
                 return setImageSrc(defaultCompanyLogo);
               }}

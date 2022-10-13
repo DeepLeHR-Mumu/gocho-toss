@@ -22,6 +22,7 @@ export const bookmarkButton = (isBookmarked = false) => {
     right: 0;
     top: 0;
     padding: 1rem;
+    margin: 0;
     background-color: ${COLORS.GRAY90};
     border-radius: 0 1.25rem 0 1.25rem;
     color: ${isBookmarked ? COLORS.BLUE_FIRST40 : COLORS.GRAY60};

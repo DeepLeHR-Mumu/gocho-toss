@@ -129,10 +129,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
                 required: PWD_ERROR_MESSAGE.REQUIRED,
                 minLength: { value: 8, message: PWD_ERROR_MESSAGE.LOGIN_MIN_MAX },
                 maxLength: { value: 20, message: PWD_ERROR_MESSAGE.LOGIN_MIN_MAX },
-                pattern: {
-                  value: PWD_REGEXP,
-                  message: "비밀번호 달라요",
-                },
+                pattern: PWD_REGEXP,
               })}
               placeholder="비밀번호를 입력해주세요"
               label="비밀번호"
@@ -145,6 +142,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
         <div css={errorBox}>{errorMsg && <p css={errorMsgCSS}>아이디 또는 비밀번호가 틀렸습니다.</p>}</div>
         <div css={loginButton}>
           <NormalButton wide variant="filled" text="로그인 하기" isSubmit />
+
           <button type="button" css={kakaoLoginBox} onClick={kakaoLogin}>
             <div css={kakaoLogoBox}>
               <Image src={kakaoMono} alt="카카오 로그인" layout="fill" objectFit="contain" />

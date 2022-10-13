@@ -13,8 +13,11 @@ const ErrorPage: NextPage = () => {
     <main css={wrapper}>
       <div css={errorMsgWrapper}>
         <div css={errorMsgContainer}>
-          <p>죄송합니다.</p>
-          <p>해당 페이지를 찾을 수 없습니다.</p>
+          <h1>
+            죄송합니다.
+            <br />
+            해당 페이지를 찾을 수 없습니다.
+          </h1>
         </div>
         <div css={catchPhrase}>
           <p>생산직 취업의 새로운 기준</p>

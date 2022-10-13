@@ -1,16 +1,15 @@
 import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
+import { useRouter } from "next/router";
+import { FiSearch, FiMenu, FiArrowLeft, FiX } from "react-icons/fi";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { FiSearch, FiMenu, FiArrowLeft } from "react-icons/fi";
 
-import { useUserInfo } from "shared-api/auth";
-import { MAIN_URL } from "shared-constant/internalURL";
 import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
 
+import { MAIN_URL } from "shared-constant/internalURL";
+import { useUserInfo } from "shared-api/auth";
 import { Layout } from "@component/layout";
-
-import { AuthorziedMenu } from "./component/authorziedMenu";
+import { AuthorizedMenu } from "./component/authorizedMenu";
 import { UnauthorizedMenu } from "./component/unauthorizedMenu";
 import { SubMenuButton } from "./component/subMenuButton";
 import { menuArr } from "./constant";
@@ -18,7 +17,7 @@ import { openedElementDef } from "./type";
 import {
   headerWrapper,
   headerContainer,
-  logo,
+  MainLogoBox,
   icon,
   unifiedSearchWrapper,
   backIcon,
@@ -27,6 +26,8 @@ import {
   navContainer,
   menuContainer,
   menuCategory,
+  subMenuArr,
+  iconBox,
 } from "./style";
 
 export const GNB: FunctionComponent = () => {
@@ -61,32 +62,36 @@ export const GNB: FunctionComponent = () => {
     <header css={headerWrapper}>
       <Layout>
         <div css={headerContainer(openedElement)}>
-          <div css={logo}>
-            <Link href={MAIN_URL} passHref>
-              <Image src={colorLogoSrc} alt="고초대졸닷컴" objectFit="contain" />
-            </Link>
+          <Link href={MAIN_URL} passHref>
+            <a css={MainLogoBox}>
+              <Image src={colorLogoSrc} alt="고초대졸닷컴" objectFit="contain" layout="fill" />
+            </a>
+          </Link>
+          <div css={iconBox}>
+            <button
+              type="button"
+              css={icon}
+              onClick={() => {
+                setOpenedElement("통합검색");
+              }}
+              aria-label="통합검색 열기"
+            >
+              <FiSearch />
+            </button>
+            <button
+              type="button"
+              css={icon}
+              aria-label={openedElement === "메뉴" ? "메뉴 닫기" : "메뉴 열기"}
+              onClick={() => {
+                setOpenedElement((prev) => {
+                  return prev === "메뉴" ? null : "메뉴";
+                });
+              }}
+            >
+              {openedElement === "메뉴" && <FiX />}
+              {openedElement === null && <FiMenu />}
+            </button>
           </div>
-          <button
-            type="button"
-            css={icon}
-            onClick={() => {
-              setOpenedElement("통합검색");
-            }}
-            aria-label="통합검색 열기"
-          >
-            <FiSearch />
-          </button>
-          <button
-            type="button"
-            css={icon}
-            onClick={() => {
-              setOpenedElement((prev) => {
-                return prev === "메뉴" ? null : "메뉴";
-              });
-            }}
-          >
-            <FiMenu />
-          </button>
         </div>
 
         <form onSubmit={handleSubmit} css={unifiedSearchWrapper(openedElement)}>
@@ -96,11 +101,13 @@ export const GNB: FunctionComponent = () => {
             onClick={() => {
               setOpenedElement(null);
             }}
+            aria-label="이전 메뉴 돌아가기"
           >
             <FiArrowLeft />
           </button>
+
           <input css={unifiedSearch} placeholder="궁금한 기업/공고를 검색해보세요" onChange={handleParam} />
-          <button type="submit" css={searchButton}>
+          <button type="submit" css={searchButton} aria-label="통합 검색하기">
             <FiSearch />
           </button>
         </form>
@@ -113,7 +120,7 @@ export const GNB: FunctionComponent = () => {
               return (
                 <li key={`navMenu_${menu.menuTitle}`}>
                   <p css={menuCategory}>{menu.menuTitle}</p>
-                  <ul>
+                  <ul css={subMenuArr}>
                     {menu.subMenuArr.map((subMenu) => {
                       return (
                         <SubMenuButton
@@ -130,7 +137,7 @@ export const GNB: FunctionComponent = () => {
             })}
           </ul>
           {isSuccess ? (
-            <AuthorziedMenu setOpenedElement={setOpenedElement} />
+            <AuthorizedMenu setOpenedElement={setOpenedElement} />
           ) : (
             <UnauthorizedMenu setOpenedElement={setOpenedElement} />
           )}
