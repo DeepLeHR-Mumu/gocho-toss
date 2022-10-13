@@ -6,7 +6,7 @@ import { PostLogoDef, useUploadLogoProps, PostLogoResponseDef, RequestObjDef } f
 
 export const postLogo: PostLogoDef = async (requestObj) => {
   const { data } = await axiosInstance.post("/upload/logo", requestObj, {
-    headers: { "Content-Type": "multipart/form-data" },
+    // headers: { "Content-Type": "multipart/form-data" },
   });
   return data;
 };

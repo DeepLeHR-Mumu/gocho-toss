@@ -1,4 +1,4 @@
-import { ResponseDef } from "shared-type/api/responseType";
+import { AdminResponseDef } from "shared-type/api/responseType";
 import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
@@ -65,9 +65,9 @@ export interface PostCompanyDef {
     welfare,
     nozo,
     factories,
-  }: RequestObjDef): Promise<ResponseDef>;
+  }: RequestObjDef): Promise<AdminResponseDef>;
 }
 
 export interface useAddCompanyProps {
-  (): UseMutationResult<ResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
 }
