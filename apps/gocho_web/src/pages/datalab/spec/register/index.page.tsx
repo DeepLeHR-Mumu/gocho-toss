@@ -4,11 +4,12 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 import { useUserInfo } from "shared-api/auth";
-import { useModal } from "@recoil/hook/modal";
 import { useProgress } from "@recoil/hook/spec";
 import { META_SPEC_REGISTER } from "shared-constant/meta";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { specRegisterFunnelEvent } from "shared-ga/spec";
 
+import { useModal } from "@recoil/hook/modal";
 import { Layout } from "@component/layout";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { ProgressPart } from "./part/progressPart";
@@ -36,8 +37,6 @@ const Register: NextPage = () => {
     }
   }, [currentModal?.activatedModal, error, setCurrentModal]);
 
-  // blocking modal
-
   const routeChangeStart = useCallback(
     (url: string) => {
       const isCurrentSpecObj = Boolean(sessionStorage.getItem("specObj") !== null);
@@ -59,6 +58,10 @@ const Register: NextPage = () => {
       router.events.off("routeChangeStart", routeChangeStart);
     };
   }, [routeChangeStart, router.events]);
+
+  useEffect(() => {
+    specRegisterFunnelEvent();
+  }, []);
 
   return (
     <main css={wrapper}>

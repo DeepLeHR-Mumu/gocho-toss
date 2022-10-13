@@ -4,10 +4,12 @@ import axios from "axios";
 
 import { useMySpecHistory } from "shared-api/spec/useMySpecHistory";
 import { useUserInfo } from "shared-api/auth";
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { mySpecListFunnelEvent } from "shared-ga/spec";
 
 import { Layout } from "@component/layout";
 import { useModal } from "@recoil/hook/modal";
-import { MetaHead } from "shared-ui/common/atom/metaHead";
+
 import { META_SPEC_MY } from "shared-constant/meta";
 import { AsideMenu } from "../component/asideMenu";
 import { SimpleCard } from "./component/simpleCard";
@@ -41,6 +43,10 @@ export const MySpecHistory: NextPage = () => {
   useEffect(() => {
     setActiveCardIndex(null);
   }, [currentPage]);
+
+  useEffect(() => {
+    mySpecListFunnelEvent();
+  }, []);
 
   if (!mySpecHistoryData || isLoading) {
     return (

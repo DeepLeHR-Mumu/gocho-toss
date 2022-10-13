@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 
@@ -8,6 +8,7 @@ import { EMAIL_ERROR_MESSAGE, NICKNAME_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
+import { signupModalOpenEvent, signupModalCloseEvent, signupSuccessEvent } from "shared-ga/auth";
 
 import { ModalComponent } from "@component/modal/modalBackground";
 import { useModal } from "@recoil/hook/modal";
@@ -20,27 +21,30 @@ import { SignUpFormValues } from "./type";
 import { validateNickname } from "./util";
 
 export const SignUpBox: FunctionComponent = () => {
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors, dirtyFields },
   } = useForm<SignUpFormValues>({ mode: "onChange" });
-
   const { refetch } = useUserInfo();
   const { closeModal } = useModal();
   const { mutate } = useDoSignUp();
   const { setCurrentToast } = useToast();
+
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const signupAttempt = useRef(0);
 
   const signUpSubmit: SubmitHandler<SignUpFormValues> = (signUpObj) => {
     mutate(signUpObj, {
       onError: (error) => {
         const errorResponse = error.response?.data as ErrorResponse;
         setErrorMsg(errorResponse.error.errorMessage);
+        signupAttempt.current += 1;
       },
       onSuccess: (response) => {
         localStorage.setItem("token", `${response?.data.token}`);
+        signupSuccessEvent();
         refetch();
         closeModal();
         setCurrentToast("님 환영합니다.", watch("nickname"));
@@ -52,10 +56,20 @@ export const SignUpBox: FunctionComponent = () => {
     setErrorMsg(null);
   }, [closeModal]);
 
+  useEffect(() => {
+    signupModalOpenEvent();
+  }, []);
+
   return (
     <div css={wrapper}>
       <div css={closeBtn}>
-        <CloseButton size="S" buttonClick={closeModal} />
+        <CloseButton
+          size="S"
+          buttonClick={() => {
+            signupModalCloseEvent(signupAttempt.current);
+            closeModal();
+          }}
+        />
       </div>
       <div css={logoContainer}>
         <Image objectFit="contain" src={smallMono} alt="고초대졸 닷컴" layout="fill" />

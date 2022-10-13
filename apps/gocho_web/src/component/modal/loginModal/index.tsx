@@ -1,10 +1,12 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import kakaoMono from "shared-image/global/sns/kakaoLogo.svg";
+import { loginModalCloseEvent, loginModalOpenEvent, loginSuccessEvent } from "shared-ga/auth";
 import { useDoLogin } from "shared-api/auth";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
 import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant/errorMessage";
@@ -16,6 +18,7 @@ import { loginObjDef } from "@recoil/atom/modal";
 import { useModal } from "@recoil/hook/modal";
 import { useToast } from "@recoil/hook/toast";
 
+import { tokenDecryptor } from "shared-util/tokenDecryptor";
 import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
 import {
   wrapper,
@@ -50,42 +53,53 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   const { setCurrentToast } = useToast();
   const { mutate } = useDoLogin();
   const { closeModal, setCurrentModal } = useModal();
-
   const [errorMsg, setErrorMsg] = useState<null | string>(null);
+  // const [errorCount, setErrorCount] = useState<number>(0);
+  const ref = useRef(0);
+  const router = useRouter();
 
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     mutate(loginObj, {
       onError: (error) => {
         const errorResponse = error.response?.data as ErrorResponse;
         setErrorMsg(errorResponse.error.errorMessage);
+        ref.current += 1;
       },
       onSuccess: (response) => {
         localStorage.setItem("token", `${response.data.token}`);
         queryClient.invalidateQueries();
+        const { id, nickname } = tokenDecryptor(response.data.token);
+        loginSuccessEvent(id, "gocho");
         closeModal();
-        // LATER : 여유있을때 decode로 get
-        setCurrentToast("접속해주셔서 감사합니다.");
+        setCurrentToast("님 반갑습니다.", nickname);
       },
     });
   };
-  const mainURL = window.location.href;
+
+  const closeLoginModal = () => {
+    loginModalCloseEvent(ref.current);
+    closeModal();
+  };
 
   const kakaoLogin = () => {
+    sessionStorage.setItem("kakaopath", router.pathname);
     window.Kakao.Auth.authorize({
-      redirectUri: `${mainURL.substring(0, mainURL.indexOf("/", 7))}kakaologin`,
+      redirectUri: `${window.location.origin}/kakaologin`,
     });
   };
 
   useEffect(() => {
+    loginModalOpenEvent();
     if (window.Kakao.isInitialized()) {
       return;
     }
     window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
   }, []);
+
   return (
     <div css={wrapper}>
       <div css={closeBtn}>
-        {button === "home" ? <CloseButton size="S" isHome /> : <CloseButton size="S" buttonClick={closeModal} />}
+        {button === "home" ? <CloseButton size="S" isHome /> : <CloseButton size="S" buttonClick={closeLoginModal} />}
       </div>
       <div css={logoContainer}>
         <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" />

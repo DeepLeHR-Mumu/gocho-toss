@@ -10,10 +10,10 @@ import defaultCompanyLogo from "shared-image/global/common/default_company_logo.
 import { dateConverter } from "shared-util/date";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
-
 import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr, useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
+import { jdBookmarkEvent } from "shared-ga/jd";
 
 import { useModal } from "@recoil/hook/modal";
 
@@ -71,6 +71,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
         { userId, elemId: jobDetailData.id },
         {
           onSuccess: () => {
+            jdBookmarkEvent(jobDetailData.id);
             queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
           },
         }

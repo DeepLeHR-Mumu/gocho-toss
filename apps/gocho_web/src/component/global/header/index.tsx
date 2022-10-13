@@ -8,6 +8,7 @@ import { FiSearch } from "react-icons/fi";
 import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
 import grayLogoSrc from "shared-image/global/deepLeLogo/smallMono.svg";
 import { useUserInfo } from "shared-api/auth";
+import { globalSearchEvent } from "shared-ga/search";
 
 import { MAIN_URL } from "shared-constant/internalURL";
 import { Layout } from "@component/layout";
@@ -55,6 +56,7 @@ export const Header: FunctionComponent = () => {
   };
 
   const handleSubmit = preventRefresh(() => {
+    globalSearchEvent(query);
     router.push({
       pathname: "/search",
       query: { q: query, page: 1 },

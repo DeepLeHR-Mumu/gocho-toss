@@ -9,6 +9,8 @@ import { META_JD_EXPLIST } from "shared-constant/meta";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { useCompanyArr } from "shared-api/company";
+import { expiredJdListSortingEvent } from "shared-ga/jd";
+
 import { Layout } from "@component/layout";
 import { Pagination } from "@pages/jd/component/pagination";
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
@@ -108,6 +110,7 @@ const JobsExpList: NextPage = () => {
                     key={`jobCardArr${button.text}`}
                     css={setJobOrderButton(isActive)}
                     onClick={() => {
+                      expiredJdListSortingEvent(button.text);
                       router.push({
                         pathname: JOBS_EXPLIST_URL,
                         query: { ...router.query, page: 1, order: button.order },

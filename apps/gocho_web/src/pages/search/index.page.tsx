@@ -5,16 +5,18 @@ import { BsChevronRight } from "react-icons/bs";
 
 import { useJobArr } from "shared-api/job";
 import { useCompanyArr } from "shared-api/company";
-import { Layout } from "@component/layout";
-import { searchMenuButtonArr } from "@pages/search/constant";
 import { COLORS } from "shared-style/color";
 import { scrollToTop } from "shared-ui/common/atom/scrollTop";
 import { NormalButton } from "shared-ui/common/atom/button";
+import { searchFunnelEvent } from "shared-ga/search";
+
+import { Layout } from "@component/layout";
+import { searchMenuButtonArr } from "@pages/search/constant";
+
 import { JobPreviewPart } from "./part/jobPreviewPart";
 import { CompanyPreviewPart } from "./part/companyPreviewPart";
 import { JobListPart } from "./part/jobListPart";
 import { CompanyListPart } from "./part/companyListPart";
-
 import { mainContainer, menuList, menuElement, menuButton, title, buttonBox } from "./style";
 import { searchMenuDef } from "./type";
 
@@ -39,6 +41,9 @@ const UnifiedSearch: NextPage = () => {
     scrollToTop();
   }, [router.query]);
 
+  useEffect(() => {
+    searchFunnelEvent();
+  }, []);
   const { data: jobDataArr, isLoading: isJobLoading } = useJobArr({
     q: JSON.stringify({ searchWord }),
     order: "recent",
