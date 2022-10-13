@@ -1,3 +1,4 @@
+import { useToast } from "@recoil/hook/toast";
 import { useQueryClient } from "@tanstack/react-query";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -12,6 +13,7 @@ const KakaoLogin: NextPage = () => {
 
   const router = useRouter();
   const { code } = router.query;
+  const { setCurrentToast } = useToast();
   const { mutate: kakaologinMutation } = useDoKakaoLogin();
 
   useEffect(() => {
@@ -24,15 +26,17 @@ const KakaoLogin: NextPage = () => {
               return;
             }
             queryClient.invalidateQueries();
-            const { id } = tokenDecryptor(response.data.token as string);
+            const { id, nickname } = tokenDecryptor(response.data.token as string);
             const kakaopath = sessionStorage.getItem("kakaopath");
             loginSuccessEvent(id, "kakao", kakaopath);
             localStorage.setItem("token", `${response.data.token}`);
-            router.back();
+            router.push(kakaopath as string);
+            setCurrentToast("님 환영합니다.", nickname);
           },
         }
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [kakaologinMutation, code, queryClient, router]);
   return <> </>;
 };
