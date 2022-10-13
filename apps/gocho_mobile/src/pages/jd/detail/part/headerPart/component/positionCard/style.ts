@@ -9,7 +9,7 @@ export const container = (isClick: boolean) => {
     align-items: center;
     justify-content: flex-start;
     transition: all 0.2s ease;
-    cursor: pointer;
+    margin: 0;
   `;
 
   return css`
@@ -20,23 +20,35 @@ export const container = (isClick: boolean) => {
   `;
 };
 
-export const title = (isClick: boolean) => {
+export const title = (isClick: boolean, isDdayEnd: boolean) => {
   const defaultTitleCSS = css`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     font-size: 0.75rem;
     font-weight: 500;
-    height: 2.25rem;
+    height: 3rem;
     transition: all 0.2s ease;
+    line-height: 1.8;
   `;
 
   return css`
     ${defaultTitleCSS};
     background-color: ${isClick ? COLORS.BLUE_SECOND30 : COLORS.GRAY90};
+    ${isDdayEnd &&
+    `
+        background-color: ${isClick ? COLORS.GRAY40 : COLORS.GRAY90};
+    `}
     color: ${isClick ? COLORS.GRAY10 : COLORS.GRAY40};
     width: ${isClick ? "10rem" : "9rem"};
     padding: ${isClick ? "0 0.75rem;" : "0 0.25rem;"};
+
+    > span {
+      display: block;
+      width: 100%;
+      ${shorten()};
+    }
   `;
 };
 

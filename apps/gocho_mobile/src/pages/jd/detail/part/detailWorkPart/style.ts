@@ -65,3 +65,21 @@ export const factoryButton = css`
     padding: 0 0.5rem;
   }
 `;
+export const factoryArrCSS = css`
+  width: 100%;
+  margin-bottom: 1.5rem;
+
+  > li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: ${COLORS.BLUE_SECOND90};
+    padding: 0.5rem;
+    border-radius: 1rem;
+    margin-bottom: 0.5rem;
+
+    :last-of-type {
+      margin-bottom: 0;
+    }
+  }
+`;

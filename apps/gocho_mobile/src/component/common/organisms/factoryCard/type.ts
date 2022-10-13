@@ -1,6 +1,6 @@
 export interface FactoryCardProps {
   factoryInfo: {
-    name: string;
+    factoryName: string;
     address: string;
     maleNumber: number;
     femaleNumber: number;
