@@ -5,7 +5,7 @@ export const partContainer = css`
   position: relative;
   border-radius: 1.5rem 1.5rem 0 0;
   background-color: ${COLORS.GRAY90};
-  margin-top: -1rem;
+  margin-top: -1.5rem;
   padding: 1.5rem 0 3rem;
   z-index: 10;
 `;
@@ -17,14 +17,31 @@ export const titleContainer = css`
   margin-bottom: 1rem;
 `;
 
+export const title = css`
+  font-size: 1rem;
+  display: block;
+  font-weight: 700;
+  color: ${COLORS.GRAY10};
+`;
+
 export const filterButton = css`
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 400;
   width: fit-content;
   border: 1px solid ${COLORS.GRAY70};
   border-radius: 1.5rem;
-  padding: 0.5rem 1.5rem;
+  padding: 0 1.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: ${COLORS.GRAY100};
+  color: ${COLORS.GRAY10};
+
+  > svg {
+    color: ${COLORS.GRAY70};
+    font-size: 1.25rem;
+  }
 `;
 
 export const searchWrapper = css`
@@ -34,7 +51,6 @@ export const searchWrapper = css`
 
 export const searchBox = css`
   width: 100%;
-  font-family: Noto Sans KR, sans-serif;
   font-size: 0.875rem;
   font-weight: 400;
   padding: 0.5rem 2rem;
@@ -44,6 +60,7 @@ export const searchBox = css`
 
   ::placeholder {
     color: #b2b2b2;
+  }
 `;
 
 export const searchButton = css`

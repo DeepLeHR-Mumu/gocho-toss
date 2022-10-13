@@ -69,7 +69,7 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
               <div css={infoContainer}>
                 <p css={companyName}>{jobAdData.companyName}</p>
                 <p css={date}>
-                  {`${startMonth}/${startDate}`}~{`${endMonth}/${endDate}`}
+                  {`${startMonth}.${startDate}`}~{`${endMonth}.${endDate}`}
                 </p>
               </div>
             </div>

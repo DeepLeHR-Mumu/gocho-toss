@@ -19,12 +19,45 @@ export const Body: FunctionComponent<BodyProps> = ({ twoWeek }) => {
     userId: userInfoData?.id,
   });
 
-  // LATER: 해당 날짜에 관련된 북마크만 처음부터 불러와라
-  if (!userInfoData || !userJobBookmarkArrData || isLoading) {
+  if (!userInfoData || isLoading) {
     return (
       <div css={skeletonContainer}>
         <SkeletonBox />
       </div>
+    );
+  }
+
+  if (!userJobBookmarkArrData) {
+    return (
+      <>
+        <ul css={weekdayContainer}>
+          {dummyArrCreator(7).map((weekday) => {
+            return (
+              <li key={weekday}>
+                <p css={weekdayCSS(weekday)}>{weekDayCreator(weekday)}</p>
+              </li>
+            );
+          })}
+        </ul>
+
+        <ul css={table}>
+          {twoWeek.map((day) => {
+            const dayHours = getDateHours(day.date);
+            const date = new Date(day.date).getDate();
+
+            return (
+              <li key={dayHours}>
+                {todayHours === dayHours && (
+                  <p css={todayCSS}>
+                    today
+                    <span>{date}</span>
+                  </p>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </>
     );
   }
 

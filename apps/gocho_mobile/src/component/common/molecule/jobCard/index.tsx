@@ -159,7 +159,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
 
           <div css={detailInfoContainer}>
             <div css={detailInfo}>
-              {jobData.placeArr[0][1]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
+              {jobData.placeArr[0]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
             </div>
 
             <div css={detailInfo}>

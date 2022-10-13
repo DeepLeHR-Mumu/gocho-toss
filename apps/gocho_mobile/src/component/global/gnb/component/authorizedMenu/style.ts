@@ -12,6 +12,7 @@ export const menuCategory = css`
   font-weight: 500;
   color: ${COLORS.GRAY30};
   line-height: 2.5;
+  font-size: 1rem;
 `;
 
 export const flexBox = css`

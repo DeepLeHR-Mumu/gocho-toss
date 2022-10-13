@@ -1,19 +1,23 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
+import { TOS_URL, PRIVACY_URL } from "shared-constant/internalURL";
 import { useDoSignUp, useUserInfo } from "shared-api/auth";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
 import { EMAIL_ERROR_MESSAGE, NICKNAME_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant/errorMessage";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
-
 import { useModal } from "@recoil/hook/modal";
 import { BottomPopup } from "@component/bottomPopup";
-
 import { closeButton } from "@component/common/organisms/modal/loginModal/style";
-import { wrapper, desc, formCSS, formArr, logoContainer } from "./style";
+import { useToast } from "@recoil/hook/toast";
+
+import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
+import { wrapper, desc, formCSS, formArr, logoContainer, bottomDesc, colorPoint, sideErrorMsg } from "./style";
 import { SignUpFormValues } from "./type";
 import { validateNickname } from "./util";
 
@@ -21,22 +25,37 @@ export const SignUpModal: FunctionComponent = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, dirtyFields },
   } = useForm<SignUpFormValues>({ mode: "onChange" });
-
+  const [errorMsg, setErrorMsg] = useState<null | string>(null);
+  const queryClient = useQueryClient();
+  const { setCurrentToast } = useToast();
   const { refetch } = useUserInfo();
+  const router = useRouter();
+
   const { closeModal } = useModal();
   const { mutate } = useDoSignUp();
 
   const signUpSubmit: SubmitHandler<SignUpFormValues> = (signUpObj) => {
     mutate(signUpObj, {
+      onError: (error) => {
+        const errorResponse = error.response?.data as ErrorResponse;
+        setErrorMsg(errorResponse.error.errorMessage);
+      },
       onSuccess: (response) => {
         localStorage.setItem("token", `${response?.data.token}`);
-        refetch();
+        queryClient.invalidateQueries();
         closeModal();
+        refetch();
+        setCurrentToast("님 환영합니다.", watch("nickname"));
       },
     });
   };
+
+  useEffect(() => {
+    setErrorMsg(null);
+  }, [closeModal]);
 
   return (
     <BottomPopup>
@@ -50,8 +69,9 @@ export const SignUpModal: FunctionComponent = () => {
         >
           닫기
         </button>
+
         <div css={logoContainer}>
-          <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" />
+          <Image objectFit="contain" src={smallMono} alt="고초대졸 닷컴" layout="fill" />
         </div>
         <p css={desc}>가입은 5초면 가능!</p>
 
@@ -81,8 +101,7 @@ export const SignUpModal: FunctionComponent = () => {
                   maxLength: { value: 20, message: PWD_ERROR_MESSAGE.MIN_MAX },
                   pattern: {
                     value: PWD_REGEXP,
-                    // TODO: 메시지 전달받기
-                    message: "비밀번호 달라요",
+                    message: PWD_ERROR_MESSAGE.NOT_SPACE,
                   },
                 })}
                 placeholder="비밀번호를 입력해주세요"
@@ -106,8 +125,36 @@ export const SignUpModal: FunctionComponent = () => {
               />
             </li>
           </ul>
+          <p css={sideErrorMsg}>{errorMsg && errorMsg}</p>
+
           <NormalButton isSubmit wide text="확인" variant="filled" />
         </form>
+
+        <p css={bottomDesc}>
+          회원 가입 시<br />
+          <button
+            css={colorPoint}
+            type="button"
+            onClick={() => {
+              router.push(TOS_URL);
+              closeModal();
+            }}
+          >
+            이용약관
+          </button>{" "}
+          및{" "}
+          <button
+            css={colorPoint}
+            type="button"
+            onClick={() => {
+              router.push(PRIVACY_URL);
+              closeModal();
+            }}
+          >
+            개인정보처리방침
+          </button>
+          에 동의하게 됩니다.
+        </p>
       </div>
     </BottomPopup>
   );

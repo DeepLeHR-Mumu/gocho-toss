@@ -1,13 +1,11 @@
-import React, { FunctionComponent, ReactNode } from "react";
-import { popupBackground, bottomPopup } from "./style";
+import { FunctionComponent } from "react";
 
-interface LayoutDef {
-  children: ReactNode;
-}
+import { LayoutDef } from "./type";
+import { popupBackground, bottomPopup, wrapper } from "./style";
 
 export const BottomPopup: FunctionComponent<LayoutDef> = ({ children }) => {
   return (
-    <div>
+    <div css={wrapper}>
       <div css={popupBackground} />
       <div css={bottomPopup}>{children}</div>
     </div>
