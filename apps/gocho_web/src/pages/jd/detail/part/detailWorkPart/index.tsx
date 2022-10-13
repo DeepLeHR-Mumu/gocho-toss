@@ -4,11 +4,19 @@ import Image from "next/image";
 import factoryIcon from "shared-image/global/common/factory_icon.svg";
 
 import { useModal } from "@recoil/hook/modal";
-import { NoDataDesc } from "../common/component/noDataDesc";
 
+import { NoDataDesc } from "../common/component/noDataDesc";
 import { DetailWorkPartProps, ShowFactoryModalDef } from "./type";
 import { container, containerTitle, flexBox, flexBetweenBox, subTitle, restPoint, desc } from "../common/style";
-import { colorPoint, mainProductDesc, productContainer, workPlaceContainer, factoryButton, flexDesc } from "./style";
+import {
+  colorPoint,
+  mainProductDesc,
+  productContainer,
+  workPlaceContainer,
+  factoryButton,
+  flexDesc,
+  typeText,
+} from "./style";
 
 export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPosition }) => {
   const { setCurrentModal } = useModal();
@@ -87,7 +95,8 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
                 );
               })}
               {!freshPosition.place.addressArr && !freshPosition.place.factoryArr && (
-                <div key={`지역_${freshPosition.place.etc}`}>
+                <div css={container} key={`지역_${freshPosition.place.etc}`}>
+                  <div css={typeText}>{freshPosition.place.type}</div>
                   <p css={restPoint}>{freshPosition.place.etc}</p>
                 </div>
               )}
