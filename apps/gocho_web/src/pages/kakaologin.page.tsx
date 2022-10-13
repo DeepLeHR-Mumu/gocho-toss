@@ -34,7 +34,7 @@ const KakaoLogin: NextPage = () => {
       );
     }
   }, [kakaologinMutation, code, queryClient, router]);
-  return <>null</>;
+  return <> </>;
 };
 
 export default KakaoLogin;
