@@ -20,6 +20,7 @@ import {
   date,
   companyName,
   titleCSS,
+  buttonBox,
 } from "./style";
 
 export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = ({
@@ -46,6 +47,7 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
         <a css={cardWrapper(isMobile)}>
           <button
             type="button"
+            css={buttonBox}
             onClick={() => {
               jdAdClickEvent(jobAdData.id);
             }}
