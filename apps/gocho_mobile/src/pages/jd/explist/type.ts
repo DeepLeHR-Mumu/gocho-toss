@@ -5,5 +5,9 @@ export interface changeOrderDef {
 }
 
 export interface PostingValues {
-  q: string;
+  name: string | null;
 }
+
+export type SearchQueryDef = {
+  name: string | null;
+};

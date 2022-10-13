@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
-  max-height: 85vh;
+  max-height: 90vh;
   min-height: 70vh;
   background-color: ${COLORS.GRAY100};
   display: flex;
@@ -60,6 +60,7 @@ export const bottomDesc = css`
   line-height: 2;
   font-weight: 400;
   word-break: break-all;
+  white-space: nowrap;
 `;
 
 export const colorPoint = css`

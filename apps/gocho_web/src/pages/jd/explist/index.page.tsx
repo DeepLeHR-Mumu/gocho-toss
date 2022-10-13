@@ -48,6 +48,7 @@ const JobsExpList: NextPage = () => {
       name: searchQuery.name,
     },
   });
+
   const postingSearch: SubmitHandler<PostingValues> = (postingVal) => {
     router.push({
       pathname: JOBS_EXPLIST_URL,
@@ -63,7 +64,6 @@ const JobsExpList: NextPage = () => {
   };
 
   const { data: companyDataArr, isLoading } = useCompanyArr({
-    // q: searchQuery.name as string,
     q: router.query.q as string,
     order: activeOrder,
     limit,
@@ -132,19 +132,21 @@ const JobsExpList: NextPage = () => {
             />
           </form>
 
-          {companyDataArr?.companyDataArr.length === 0 && (
+          {companyDataArr?.companyDataArr.length === 0 ? (
             <div css={noDataBox}>
               <p css={noDataDesc}>검색결과가 없습니다 👀</p>
             </div>
+          ) : (
+            <>
+              <ExpJobCardList companyDataArr={companyDataArr?.companyDataArr} isLoading={isLoading} />
+              <BottomPagination
+                linkObj={{
+                  pathname: JOBS_EXPLIST_URL,
+                }}
+                totalPage={totalPage}
+              />
+            </>
           )}
-
-          <ExpJobCardList companyDataArr={companyDataArr?.companyDataArr} isLoading={isLoading} />
-          <BottomPagination
-            linkObj={{
-              pathname: JOBS_EXPLIST_URL,
-            }}
-            totalPage={totalPage}
-          />
         </section>
       </Layout>
     </main>

@@ -26,3 +26,7 @@ export interface JobCardSkeleton {
   userId?: never;
   isSkeleton: boolean;
 }
+
+export interface DDayBooleanReturnDef {
+  (endTime: number): boolean;
+}
