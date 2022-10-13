@@ -35,8 +35,6 @@ export const BookmarkJobPart: FunctionComponent = () => {
     );
   }
 
-  // 로그아웃시 그페이지 그대로임....비로그인시 모달 띄어야함
-
   const totalPage = Math.ceil(userBookmarkJobDataArr.length / activeCardCount);
 
   const firstArrIndex = (currentPage - 1) * activeCardCount;
@@ -46,8 +44,6 @@ export const BookmarkJobPart: FunctionComponent = () => {
   return (
     <section>
       <InvisibleH2 title="채용공고 북마크" />
-      {filterMyBookmarkArr.length === 0}
-
       {totalPage === 0 && (
         <div css={emptyBox}>
           <p css={warningCSS}>

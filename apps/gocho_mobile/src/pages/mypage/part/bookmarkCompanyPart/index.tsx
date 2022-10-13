@@ -1,25 +1,66 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useState, useEffect } from "react";
 
 import { useUserInfo } from "shared-api/auth";
 import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
-import { BottomPagination } from "@component/common/molecule/bottomPagination";
-
+import { Pagination } from "@pages/mypage/component/pagination";
 import { CompanyCardList } from "../../component/companyCardList";
 
+import { emptyBox, warningCSS } from "./style";
+
 export const BookmarkCompanyPart: FunctionComponent = () => {
-  const limit = 6;
-  const [page, setPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const activeCardCount = 3;
+
   const { data: userInfoData } = useUserInfo();
   const { data: userBookmarkCompanyDataArr, isLoading } = useUserCompanyBookmarkArr({
     userId: userInfoData?.id,
   });
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [setCurrentPage, currentPage]);
+
+  if (isLoading || !userBookmarkCompanyDataArr) {
+    return (
+      <section>
+        <InvisibleH2 title="기업 북마크" />
+        <div css={emptyBox}>
+          <p css={warningCSS}>
+            기업 북마크를 이용하시면
+            <br />
+            기업공고가 더 정교해져요 😳
+          </p>
+        </div>
+      </section>
+    );
+  }
+
+  const totalPage = Math.ceil(userBookmarkCompanyDataArr.length / activeCardCount);
+
+  const firstArrIndex = (currentPage - 1) * activeCardCount;
+  const lastArrIndex = currentPage * activeCardCount;
+  const filterMyBookmarkArr = userBookmarkCompanyDataArr.slice(firstArrIndex, lastArrIndex);
+
   return (
     <section>
       <InvisibleH2 title="기업 북마크" />
-      <CompanyCardList companyDataArr={userBookmarkCompanyDataArr} isLoading={isLoading} />
-      <BottomPagination total={userBookmarkCompanyDataArr?.length || 0} limit={limit} page={page} setPage={setPage} />
+      {totalPage === 0 && (
+        <div css={emptyBox}>
+          <p css={warningCSS}>
+            기업 북마크를 이용하시면
+            <br />
+            기업공고가 더 정교해져요 😳
+          </p>
+        </div>
+      )}
+
+      {totalPage !== 0 && (
+        <>
+          <CompanyCardList companyDataArr={filterMyBookmarkArr} />
+          <Pagination totalPage={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        </>
+      )}
     </section>
   );
 };

@@ -11,14 +11,19 @@ export const CompanyListPart: FunctionComponent<CompanyListPartProps> = ({
   isLoading,
   total,
   limit,
-  page,
-  setPage,
 }) => {
+  const totalPage = Math.ceil(total || 0 / limit);
+
   return (
     <section>
       <p css={title}>기업 정보 🏢</p>
       <CompanyCardList companyDataArr={companyDataArr} isLoading={isLoading} />
-      <BottomPagination total={total || 0} limit={limit} page={page} setPage={setPage} />
+      <BottomPagination
+        totalPage={totalPage}
+        linkObj={{
+          pathname: "/",
+        }}
+      />
     </section>
   );
 };

@@ -12,7 +12,6 @@ export const cardSkeleton = css`
 
 export const cardWrapper = css`
   width: 100%;
-  height: 22rem;
 `;
 
 export const slideInfo = (bgColor: string) => {
@@ -23,10 +22,9 @@ export const slideInfo = (bgColor: string) => {
     justify-content: center;
     width: 100%;
     height: 22rem;
-    background: linear-gradient(${bgColor}, ${bgColor}33);
-    padding: 3rem;
+    background-image: linear-gradient(180deg, ${COLORS.BLUE_FIRST40} 10%, ${bgColor} 90%);
+    padding: 2rem;
     gap: 1rem 0;
-    ${shorten()};
   `;
 };
 
@@ -53,23 +51,22 @@ export const companyLogoBox = css`
 export const endTime = css`
   font-size: 1.25rem;
   font-weight: 600;
-  color: ${COLORS.GRAY10};
-  margin-bottom: 1rem;
+  color: ${COLORS.GRAY100};
 `;
 
 export const companyName = css`
   font-size: 1.25rem;
   font-weight: 600;
-  line-height: 1.25;
-  color: ${COLORS.GRAY10};
-  ${shorten(2)};
+  color: ${COLORS.GRAY100};
+  ${shorten(1)};
 `;
 
 export const jdTitle = css`
   font-size: 1.5rem;
-  color: ${COLORS.GRAY10};
+  display: block;
+  color: ${COLORS.GRAY100};
   font-weight: 600;
-  line-height: 1.5;
+  line-height: 1.6;
   word-break: keep-all;
   ${shorten(2)};
 `;

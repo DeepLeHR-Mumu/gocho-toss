@@ -11,6 +11,7 @@ import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { listContainer, totalCountContainer, totalText } from "./style";
 
 export const JobsPart: FunctionComponent = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [pageIndex, setPageIndex] = useState(1);
 
   const router = useRouter();
@@ -51,7 +52,13 @@ export const JobsPart: FunctionComponent = () => {
           );
         })}
       </section>
-      <BottomPagination total={jobDataArr.count} limit={10} page={pageIndex} setPage={setPageIndex} />
+      {/* <BottomPagination total={jobDataArr.count} limit={10} page={pageIndex} setPage={setPageIndex} /> */}
+      <BottomPagination
+        totalPage={jobDataArr.count}
+        linkObj={{
+          pathname: "/",
+        }}
+      />
     </Layout>
   );
 };

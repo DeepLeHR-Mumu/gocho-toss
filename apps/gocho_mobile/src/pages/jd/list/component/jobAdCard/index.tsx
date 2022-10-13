@@ -35,8 +35,8 @@ export const JobAdCard: FunctionComponent<SlideCardProps | SlideCardSkeleton> = 
           <div css={companyLogoBox}>
             <Image
               layout="fill"
-              objectFit="cover"
-              src={imageSrc}
+              objectFit="contain"
+              src={imageSrc || jobData.companyLogo}
               alt={jobData.companyName}
               onError={() => {
                 return setImageSrc(defaultCompanyLogo);
@@ -46,7 +46,7 @@ export const JobAdCard: FunctionComponent<SlideCardProps | SlideCardSkeleton> = 
         </div>
         <p css={endTime}>{dDayCalculator(jobData.endTime)}</p>
         <p css={companyName}>{jobData.companyName}</p>
-        <h3 css={jdTitle}>{jobData.title}</h3>
+        <strong css={jdTitle}>{jobData.title}</strong>
       </div>
     </div>
   );

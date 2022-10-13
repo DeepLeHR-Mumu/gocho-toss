@@ -33,7 +33,6 @@ export const bottomPopup = css`
   background-color: ${COLORS.GRAY100};
   border-radius: 1.5rem 1.5rem 0 0;
   z-index: 20;
-  padding: 3rem;
   transform: translateY(100%);
   animation: showUp 0.5s forwards ease;
 

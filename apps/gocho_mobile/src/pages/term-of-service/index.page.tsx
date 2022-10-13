@@ -1,18 +1,37 @@
 import { NextPage } from "next";
+import { useRouter } from "next/router";
+import { FiChevronLeft } from "react-icons/fi";
 
 import { Layout } from "@component/layout";
 
-import { mainDesc, executionDesc, tosArr } from "shared-constant/privacy";
-import { tosTitle, descCSS, subTitle, listCSS, subListCSS, executionDescCSS, wrapper } from "./style";
+import { mainDesc, executionDesc, tosArr } from "shared-constant/TOS";
+import {
+  tosTitle,
+  descCSS,
+  subTitle,
+  listCSS,
+  subListCSS,
+  executionDescCSS,
+  wrapper,
+  headerCSS,
+  backButton,
+  sectionBox,
+} from "./style";
 
 import { tosItemDef } from "./type";
 
-const Privacy: NextPage = () => {
+const Tos: NextPage = () => {
+  const router = useRouter();
   return (
     <main css={wrapper}>
-      <section>
+      <header css={headerCSS}>
+        <button type="button" onClick={router.back} aria-label="이전 페이지로 가기" css={backButton}>
+          <FiChevronLeft />
+        </button>
+        <h1 css={tosTitle}>개인회원 이용약관</h1>
+      </header>
+      <section css={sectionBox}>
         <Layout>
-          <h1 css={tosTitle}>개인정보 처리방침</h1>
           <p css={descCSS}>{mainDesc}</p>
 
           {tosArr.map((item: tosItemDef) => {
@@ -50,11 +69,14 @@ const Privacy: NextPage = () => {
               </div>
             );
           })}
-          <p css={executionDescCSS}>{executionDesc}</p>
+          <p css={executionDescCSS}>
+            <span>[부칙]</span>
+            {executionDesc}
+          </p>
         </Layout>
       </section>
     </main>
   );
 };
 
-export default Privacy;
+export default Tos;

@@ -7,6 +7,7 @@ export const wrapper = css`
   min-height: 70vh;
   background-color: ${COLORS.GRAY100};
   display: flex;
+  padding: 3rem;
   flex-direction: column;
   align-items: center;
 `;

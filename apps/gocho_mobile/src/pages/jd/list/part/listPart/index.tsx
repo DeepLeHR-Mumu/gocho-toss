@@ -2,12 +2,16 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { Layout } from "@component/layout";
 import { FiChevronDown, FiSearch } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 
+import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { useJobArr } from "shared-api/job";
-
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
 import { BottomPopup } from "@component/bottomPopup";
+import { JOBS_LIST_URL } from "shared-constant/internalURL";
+import { jdListFunnelEvent, jdSearchEvent } from "shared-ga/jd";
 import { JobCardList } from "../../component/jobCardList";
+
 import { Filter } from "../../component/filter";
 import { setJobOrderButtonArr } from "./constant";
 import {
@@ -19,14 +23,16 @@ import {
   searchButton,
   buttonArrContainer,
   setJobOrderButton,
+  title,
 } from "./style";
 import { OrderDef, SearchQueryDef, SearchValues } from "./type";
 
 export const ListPart: FunctionComponent = () => {
-  const limit = 10;
+  const router = useRouter();
+  const limit = 6;
   const [total, setTotal] = useState<number>(0);
-  const [page, setPage] = useState(1);
-  const [activeOrder, setActiveOrder] = useState<OrderDef>("recent");
+  const [page, setPage] = useState<number>(Number(router.query.page));
+  const [activeOrder, setActiveOrder] = useState<OrderDef>(router.query.order as OrderDef);
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
   const [showFilter, setShowFilter] = useState<boolean>(false);
 
@@ -43,6 +49,11 @@ export const ListPart: FunctionComponent = () => {
   });
 
   const jdSearch: SubmitHandler<SearchValues> = (searchVal) => {
+    router.push({
+      pathname: JOBS_LIST_URL,
+      query: { page: 1, order: activeOrder },
+    });
+    jdSearchEvent(searchVal.searchWord);
     setSearchQuery({
       contractType: searchVal.contractType,
       industry: searchVal.industry,
@@ -65,14 +76,29 @@ export const ListPart: FunctionComponent = () => {
   });
 
   useEffect(() => {
-    if (jobDataArr && jobDataArr.count !== total) {
+    setPage(Number(router.query.page));
+  }, [router.query.page]);
+
+  useEffect(() => {
+    setActiveOrder(router.query.order as OrderDef);
+  }, [router.query.order]);
+
+  useEffect(() => {
+    if (jobDataArr) {
       setTotal(jobDataArr.count);
-      setPage(1);
     }
-  }, [jobDataArr, total]);
+  }, [jobDataArr]);
+
+  useEffect(() => {
+    jdListFunnelEvent();
+  }, []);
+
+  const totalPage = Math.ceil(total / limit);
 
   return (
     <section css={partContainer}>
+      <InvisibleH2 title="최신 채용 공고" />
+
       <form onSubmit={handleSubmit(jdSearch)}>
         {showFilter && (
           <BottomPopup>
@@ -87,7 +113,7 @@ export const ListPart: FunctionComponent = () => {
         )}
         <Layout>
           <div css={titleContainer}>
-            <h2>채용 공고</h2>
+            <strong css={title}>채용 공고</strong>
             <button
               css={filterButton}
               type="button"
@@ -102,7 +128,7 @@ export const ListPart: FunctionComponent = () => {
           </div>
           <div css={searchWrapper}>
             <input {...register("searchWord", {})} css={searchBox} placeholder="검색어를 입력해주세요" />
-            <button type="submit" css={searchButton}>
+            <button type="submit" css={searchButton} aria-label="공고 검색하기">
               <FiSearch />
             </button>
           </div>
@@ -115,6 +141,10 @@ export const ListPart: FunctionComponent = () => {
                   key={`jobCardArr${button.text}`}
                   css={setJobOrderButton(isActive)}
                   onClick={() => {
+                    router.push({
+                      pathname: JOBS_LIST_URL,
+                      query: { page: 1, order: button.order },
+                    });
                     return setActiveOrder(button.order);
                   }}
                 >
@@ -124,7 +154,12 @@ export const ListPart: FunctionComponent = () => {
             })}
           </div>
           <JobCardList jobDataArr={jobDataArr?.jobDataArr} isLoading={isLoading} />
-          <BottomPagination total={total} limit={limit} page={page} setPage={setPage} />
+          <BottomPagination
+            totalPage={totalPage}
+            linkObj={{
+              pathname: JOBS_LIST_URL,
+            }}
+          />
         </Layout>
       </form>
     </section>

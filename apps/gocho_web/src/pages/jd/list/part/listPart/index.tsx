@@ -100,7 +100,7 @@ export const ListPart: FunctionComponent = () => {
       setTotal(jobDataArr.count);
     }
   }, [jobDataArr]);
-  
+
   useEffect(() => {
     jdListFunnelEvent();
   }, []);

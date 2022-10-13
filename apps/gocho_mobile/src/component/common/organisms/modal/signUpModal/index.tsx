@@ -2,7 +2,7 @@ import { FunctionComponent, useState, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { TOS_URL, PRIVACY_URL } from "shared-constant/internalURL";
 import { useDoSignUp, useUserInfo } from "shared-api/auth";
@@ -32,6 +32,7 @@ export const SignUpModal: FunctionComponent = () => {
   const queryClient = useQueryClient();
   const { setCurrentToast } = useToast();
   const { refetch } = useUserInfo();
+  const router = useRouter();
 
   const { closeModal } = useModal();
   const { mutate } = useDoSignUp();
@@ -131,13 +132,27 @@ export const SignUpModal: FunctionComponent = () => {
 
         <p css={bottomDesc}>
           회원 가입 시<br />
-          <Link href={TOS_URL} passHref>
-            <a css={colorPoint}>이용약관</a>
-          </Link>{" "}
+          <button
+            css={colorPoint}
+            type="button"
+            onClick={() => {
+              router.push(TOS_URL);
+              closeModal();
+            }}
+          >
+            이용약관
+          </button>{" "}
           및{" "}
-          <Link href={PRIVACY_URL} passHref>
-            <a css={colorPoint}>개인정보처리방침</a>
-          </Link>
+          <button
+            css={colorPoint}
+            type="button"
+            onClick={() => {
+              router.push(PRIVACY_URL);
+              closeModal();
+            }}
+          >
+            개인정보처리방침
+          </button>
           에 동의하게 됩니다.
         </p>
       </div>
