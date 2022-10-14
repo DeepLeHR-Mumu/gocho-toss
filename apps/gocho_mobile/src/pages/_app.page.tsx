@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
+import ReactGA from "react-ga4";
 import Head from "next/head";
 import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
@@ -12,6 +13,7 @@ import { GNB } from "@component/global/gnb";
 import { Footer } from "@component/global/footer";
 import { ModalPlaceholder } from "@component/common/organisms/modal/modalPlaceHolder";
 import { ToastPlaceholder } from "@component/toast/toastPlaceholder";
+import { KEY } from "shared-constant/gaKey";
 
 import { globalStyles } from "@style/globalStyles";
 
@@ -40,6 +42,7 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
+  ReactGA.initialize(KEY);
   const router = useRouter();
   const [queryClient] = useState(() => {
     return new QueryClient({
