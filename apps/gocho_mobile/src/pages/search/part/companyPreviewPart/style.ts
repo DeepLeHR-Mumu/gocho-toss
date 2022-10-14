@@ -6,6 +6,7 @@ export const listContainer = css`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  gap: 1rem;
 `;
 
 export const noDataText = css`

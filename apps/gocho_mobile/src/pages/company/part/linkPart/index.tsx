@@ -26,7 +26,11 @@ export const LinkPart: FunctionComponent = () => {
       <Layout>
         <div css={container}>
           <div css={linkBox}>
-            {companyDetailData.data.catchUrl && <a href={companyDetailData.data.catchUrl}>캐치 기업정보 더보기</a>}
+            {companyDetailData.data.catchUrl && (
+              <a target="_blank" href={companyDetailData.data.catchUrl} rel="noreferrer">
+                캐치 기업정보 더보기
+              </a>
+            )}
             {companyDetailData.data.youtubeUrl && (
               <a>
                 <div css={youtubeIconBox}>

@@ -27,6 +27,11 @@ export const logoBox = css`
   box-shadow: 0px 2px 8px rgba(160, 160, 160, 0.25);
   border-radius: 1rem;
   overflow: hidden;
+
+  img {
+    min-width: 90% !important;
+    min-height: 90% !important;
+  }
 `;
 
 export const buttonBox = css`

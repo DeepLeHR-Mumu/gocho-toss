@@ -9,7 +9,7 @@ export type CompanyListPartProps = {
       }[]
     | undefined;
   isLoading: boolean;
-  total: number | undefined;
+  total: number;
   limit: number;
   page: number;
   setPage: Dispatch<SetStateAction<number>>;

@@ -11,13 +11,16 @@ export const container = css`
   > p {
     color: ${COLORS.GRAY30};
     font-size: 0.75rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
   }
   > a {
-    border-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2rem;
     background-color: ${COLORS.GRAY90};
     color: ${COLORS.GRAY30};
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     padding: 1rem;
   }
 `;

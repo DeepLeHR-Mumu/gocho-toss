@@ -21,13 +21,13 @@ export const linkBox = css`
   gap: 1rem;
   > a {
     background-color: ${COLORS.GRAY90};
-    padding: 1rem;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 1.5rem;
-    font-size: 0.6875rem;
+    font-size: 0.875rem;
     color: ${COLORS.GRAY40};
-    :last-of-type {
-      padding: 0.7rem;
-    }
   }
 `;
 

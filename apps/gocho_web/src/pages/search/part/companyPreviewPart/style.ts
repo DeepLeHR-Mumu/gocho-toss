@@ -5,6 +5,7 @@ export const listContainer = css`
   margin: 2rem 0 3rem;
   display: flex;
   flex-wrap: wrap;
+  gap: 1rem;
 `;
 
 export const noDataText = css`

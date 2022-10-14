@@ -8,6 +8,9 @@ import { useCompanyDetail } from "shared-api/company/useCompanyDetail";
 import { dateConverter } from "shared-util/date/index";
 import nozo_false from "shared-image/page/companyDetail/nozo_false_icon.svg";
 import nozo_true from "shared-image/page/companyDetail/nozo_true_icon.svg";
+import { META_COMPANY_RECRUIT } from "shared-constant/meta";
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
 import {
   companyListContainer,
@@ -15,9 +18,9 @@ import {
   employeeNumberCSS,
   factoryBox,
   factoryText,
+  iconText,
   infoContainer,
   mapButton,
-  nozoContainer,
   nozoExplainText,
   nozoIconBox,
   sectionContainer,
@@ -42,6 +45,8 @@ export const BasicInfoPart: FunctionComponent = () => {
   const { year: foundYear, month: foundMonth, date: foundDate } = dateConverter(companyDetailData.data.foundDate);
   return (
     <div css={wrapper}>
+      <MetaHead metaData={META_COMPANY_RECRUIT} companyDetail={{ companyName: companyDetailData.data.name }} />
+      <InvisibleH2 title={`${companyDetailData.data.name} 기업정보`} />
       <Layout>
         <section css={sectionContainer}>
           <div css={sizeContainer}>
@@ -62,7 +67,7 @@ export const BasicInfoPart: FunctionComponent = () => {
             <div css={infoContainer}>
               <p>사원수</p>
               <p>
-                <span css={employeeNumberCSS}>{companyDetailData.data.employeeNumber}</span>명
+                <span css={employeeNumberCSS}>{companyDetailData.data.employeeNumber.toLocaleString("Ko-KR")}</span>명
               </p>
             </div>
             <div css={infoContainer}>
@@ -73,33 +78,49 @@ export const BasicInfoPart: FunctionComponent = () => {
               <p>기업 주소</p>
               <p>{companyDetailData.data.address}</p>
             </div>
-            <a css={mapButton} href={`https://map.kakao.com/?q=${companyDetailData.data.address}`}>
+
+            <a
+              css={mapButton}
+              href={`https://map.kakao.com/?q=${companyDetailData.data.address}`}
+              target="_blank"
+              rel="noreferrer"
+            >
               지도 보기
             </a>
+
             {companyDetailData.data.factoryArr && (
               <div css={companyListContainer}>
                 <div css={companyLogo}>
                   <FiInfo />
                 </div>
-                {companyDetailData.data.factoryArr.map((factory) => {
-                  return (
-                    <div css={factoryBox} key={factory.id}>
-                      <p css={factoryText}>{factory.factoryName}</p>
-                    </div>
-                  );
-                })}
+                <ul css={factoryBox}>
+                  {companyDetailData.data.factoryArr.map((factory) => {
+                    return (
+                      <li css={factoryText} key={factory.id}>
+                        {factory.factoryName}
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
             )}
-            <div css={nozoContainer}>
+
+            <div css={infoContainer}>
               <p>노조 여부</p>
-              <p>{companyDetailData.data.nozo.exists ? "노조 있음" : "노조 없음"}</p>
-              <div css={nozoIconBox}>
-                <Image
-                  src={companyDetailData.data.nozo.exists ? nozo_true : nozo_false}
-                  layout="fill"
-                  objectFit="contain"
-                />
-              </div>
+              <p css={iconText}>
+                {companyDetailData.data.nozo.exists ? "노조 있음" : "노조 없음"}
+
+                <span css={nozoIconBox}>
+                  <Image
+                    src={companyDetailData.data.nozo.exists ? nozo_true : nozo_false}
+                    layout="fixed"
+                    objectFit="contain"
+                  />
+                </span>
+              </p>
+            </div>
+            <div css={infoContainer}>
+              <p />
               {companyDetailData.data.nozo.desc && <p css={nozoExplainText}>{companyDetailData.data.nozo.desc}</p>}
             </div>
           </div>
