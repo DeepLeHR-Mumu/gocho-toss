@@ -96,3 +96,12 @@ export const findPwButton = css`
   text-decoration: underline;
   font-size: 0.875rem;
 `;
+
+export const findPasswordButton = css`
+  margin-top: 1rem;
+  width: 100%;
+  font-size: 0.875rem;
+  color: ${COLORS.GRAY40};
+  text-decoration-line: underline;
+  line-height: 1.25rem;
+`;

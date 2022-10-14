@@ -1,76 +1,50 @@
 import { NextPage } from "next";
-import { useRouter } from "next/router";
-import { FiChevronLeft } from "react-icons/fi";
 
 import { Layout } from "@component/layout";
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_TOS } from "shared-constant/meta";
 
-import { mainDesc, executionDesc, tosArr } from "shared-constant/TOS";
-import {
-  tosTitle,
-  descCSS,
-  subTitle,
-  listCSS,
-  subListCSS,
-  executionDescCSS,
-  wrapper,
-  headerCSS,
-  backButton,
-  sectionBox,
-} from "./style";
+import { executionDesc, tosArr } from "shared-constant/TOS";
+import { tosTitle, subTitle, container, executionDescCSS, wrapper, listTitle, listArr, desc } from "./style";
 
-import { tosItemDef } from "./type";
+import { tosArrDef } from "./type";
 
 const Tos: NextPage = () => {
-  const router = useRouter();
   return (
     <main css={wrapper}>
-      <header css={headerCSS}>
-        <button type="button" onClick={router.back} aria-label="이전 페이지로 가기" css={backButton}>
-          <FiChevronLeft />
-        </button>
-        <h1 css={tosTitle}>개인회원 이용약관</h1>
-      </header>
-      <section css={sectionBox}>
+      <section>
+        <MetaHead metaData={META_TOS} />
         <Layout>
-          <p css={descCSS}>{mainDesc}</p>
+          <strong css={tosTitle}>개인회원 이용약관</strong>
 
-          {tosArr.map((item: tosItemDef) => {
+          {tosArr.map((item: tosArrDef) => {
             return (
-              <div key={item.title}>
+              <div key={item.title} css={container}>
                 <h2 css={subTitle}>{item.title}</h2>
-                {item.desc && <p css={descCSS}>{item.desc}</p>}
-                {item.itemArr && (
-                  <ul css={listCSS}>
-                    {item.itemArr.map((subItem) => {
-                      return (
-                        <li key={subItem.desc}>
-                          {subItem.desc}
-                          {subItem.subItemArr && (
-                            <ul css={subListCSS}>
-                              {subItem.subItemArr.map((subList) => {
-                                return <li key={subList}>{subList}</li>;
-                              })}
-                            </ul>
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
-                {item.centerDesc && <p css={descCSS}>{item.centerDesc}</p>}
-                {item.centerList && (
-                  <ul css={listCSS}>
-                    {item.centerList.map((centerItem) => {
-                      return <li key={centerItem.desc}>{centerItem.desc}</li>;
-                    })}
-                  </ul>
-                )}
-                {item.lastDesc && <p css={descCSS}>{item.lastDesc}</p>}
+                {item.subItem.map((data) => {
+                  return (
+                    <>
+                      <strong css={listTitle}>{data.title}</strong>
+                      <ul css={listArr}>
+                        {data.infoArr.map((list) => {
+                          return (
+                            <li css={desc} key={list}>
+                              {list}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </>
+                  );
+                })}
               </div>
             );
           })}
+
           <p css={executionDescCSS}>
-            <span>[부칙]</span>
+            <span>
+              {"<"} 부칙 {">"}
+            </span>
             {executionDesc}
           </p>
         </Layout>

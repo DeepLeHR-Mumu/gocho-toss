@@ -2,7 +2,6 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
-  height: 100vh;
   position: relative;
 `;
 
@@ -15,19 +14,21 @@ export const backgroundBox = css`
 `;
 
 export const positionBox = css`
-  position: absolute;
-  z-index: 10;
-  top: 5vw;
-  left: 5vw;
-  width: 100%;
-  max-width: 75vw;
-  height: 100%;
-  max-height: 70vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
 `;
 
 export const videoBox = css`
   width: 100%;
-  height: 100%;
+  max-width: 300px;
+  height: 70vh;
+  max-height: 460px;
+  position: relative;
+  z-index: 10;
+  margin-bottom: 2rem;
 
   > video {
     width: 100%;
@@ -38,15 +39,13 @@ export const videoBox = css`
 `;
 
 export const infoBox = css`
-  position: absolute;
-  right: -25%;
-  top: 50%;
-  transform: translate(0, -50%);
+  position: relative;
   z-index: 10;
+  width: 100%;
 
   > li {
     background-color: #ffffffcc;
-    padding: 1.625rem;
+    padding: 1rem;
     text-align: center;
     margin-bottom: 0.75rem;
     border-radius: 2rem;
@@ -57,7 +56,7 @@ export const infoBox = css`
 export const infoTitle = css`
   display: inline-block;
   position: relative;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 700;
   color: ${COLORS.GRAY10};
 `;
@@ -78,10 +77,12 @@ export const pointBox = css`
 `;
 
 export const desc = css`
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 400;
   color: ${COLORS.GRAY10};
   line-height: 1.6;
+  padding: 0 1rem;
+  word-break: keep-all;
 `;
 
 export const descPoint = css`
@@ -104,11 +105,10 @@ export const linkCSS = css`
 
 export const listBox = css`
   background-color: rgba(216, 216, 216, 0.8);
-  position: absolute;
-  right: -5rem;
-  bottom: -5rem;
   padding: 1rem;
   border-radius: 1rem;
+  position: relative;
+  z-index: 10;
 
   > li {
     font-size: 0.875rem;

@@ -3,19 +3,12 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 80;
-  width: 22rem;
-  height: auto;
-  padding: 2rem;
+  max-height: 90vh;
+  min-height: 70vh;
   background-color: ${COLORS.GRAY100};
-  border-radius: 1rem;
   display: flex;
+  padding: 3rem;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
 `;
 

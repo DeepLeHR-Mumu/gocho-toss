@@ -50,3 +50,14 @@ export const tableHead = css`
 export const cardBox = css`
   margin-bottom: 3.125rem;
 `;
+
+export const noMySpecDesc = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 15rem;
+  font-size: 1rem;
+  color: ${COLORS.GRAY30};
+  font-weight: 400;
+`;
