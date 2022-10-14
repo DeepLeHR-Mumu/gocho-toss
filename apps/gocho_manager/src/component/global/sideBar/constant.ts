@@ -50,7 +50,7 @@ export const menuArr = [
       },
       {
         menuTitle: "기업 목록",
-        menuLink: COMPANY_LIST_URL,
+        menuLink: `${COMPANY_LIST_URL}?page=1`,
       },
     ],
   },

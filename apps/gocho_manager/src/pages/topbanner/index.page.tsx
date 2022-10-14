@@ -4,6 +4,15 @@ import { useBannerArr } from "@api/banner/useBannerArr";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 import { dateConverter } from "shared-util/date";
 
+import {
+  bannerId,
+  companyName,
+  deleteBannerButton,
+  expireDate,
+  sectionContainer,
+  title,
+  titleBox,
+} from "@pages/mainbanner/style";
 import { bannerBox } from "./style";
 
 const TopBanner: NextPage = () => {
@@ -19,24 +28,39 @@ const TopBanner: NextPage = () => {
 
   return (
     <main css={mainContainer}>
-      <h2 css={pageTitle}>상단 배너</h2>
-      <section>상단 배너 영역</section>
-      <h2 css={pageTitle}>배너 리스트</h2>
-      <section>
-        {BannerDataArr.bannerDataArr.map((banner) => {
-          const { year: endYear, month: endMonth, date: endDate } = dateConverter(banner.endTime);
+      <h2 css={pageTitle}>공고 상단 배너 업로드</h2>
+      <section css={sectionContainer}>상단 배너 영역</section>
 
-          return (
-            <li css={bannerBox}>
-              <div>{banner.id}</div>
-              <div>{banner.companyName}</div>
-              <div>{banner.title}</div>
-              <div>
-                {endYear}-{endMonth}-{endDate}
-              </div>
-            </li>
-          );
-        })}
+      <h2 css={pageTitle}>배너 리스트</h2>
+      <section css={sectionContainer}>
+        <table>
+          <tr css={titleBox}>
+            <th css={bannerId}>배너 ID</th>
+            <th css={companyName}>회사 이름</th>
+            <th css={title}>배너 제목</th>
+            <th css={expireDate}>만료 날짜</th>
+            <th> </th>
+          </tr>
+          {BannerDataArr.bannerDataArr.map((banner) => {
+            const { year: endYear, month: endMonth, date: endDate } = dateConverter(banner.endTime);
+
+            return (
+              <tr css={bannerBox}>
+                <td css={bannerId}>{banner.id}</td>
+                <td css={companyName}>{banner.companyName}</td>
+                <td css={title}>{banner.title}</td>
+                <td css={expireDate}>
+                  {endYear}-{endMonth}-{endDate}
+                </td>
+                <td>
+                  <button css={deleteBannerButton} type="button">
+                    배너 삭제
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </table>
       </section>
     </main>
   );

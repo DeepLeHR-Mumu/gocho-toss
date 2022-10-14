@@ -53,7 +53,6 @@ const CompanyUpload: NextPage = () => {
   });
 
   const companySubmit: SubmitHandler<CompanyFormValues> = async (companyObj) => {
-    // console.log(companyObj);
     if (logoData) {
       mutateLogo(
         { logo: logoData },
@@ -68,15 +67,15 @@ const CompanyUpload: NextPage = () => {
     mutateCompany(companyObj, {});
   };
 
-  const onUploadLogo = (e: ChangeEvent<HTMLInputElement>) => {
+  const onUploadLogo = async (e: ChangeEvent<HTMLInputElement>) => {
+    const formData = new FormData();
+    const reader = new FileReader();
+
     if (e.target.files?.[0]) {
       const img = e.target.files[0];
-      const formData = new FormData();
       formData.append("logo", img);
-      // console.log(img);
       setLogoData(formData);
 
-      const reader = new FileReader();
       reader.onloadend = () => {
         setImageSrc(reader.result as string);
       };
@@ -101,12 +100,7 @@ const CompanyUpload: NextPage = () => {
           </div>
           <div css={imageInput}>
             <strong css={inputTitle}>기업 로고</strong>
-            <input
-              type="file"
-              accept="image/png, image/gif, image/jpeg, image/jpg"
-              name="logo"
-              onChange={onUploadLogo}
-            />
+            <input type="file" accept="image/png, image/gif, image/jpeg, image/jpg" onChange={onUploadLogo} />
             {imageSrc && (
               <div css={logoPreviewContainer}>
                 <Image layout="fill" objectFit="contain" src={imageSrc} alt="" />
