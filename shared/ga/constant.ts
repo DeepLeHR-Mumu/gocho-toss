@@ -12,4 +12,5 @@ export const FUNNEL = {
   POSTING_LIST: "enter_posting_list",
   HOME: "enter_home",
   SEARCH_PAGE: "enter_search_result",
+  WELCOME: "enter_welcome",
 };
