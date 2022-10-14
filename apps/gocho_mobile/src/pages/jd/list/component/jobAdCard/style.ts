@@ -22,6 +22,7 @@ export const slideInfo = (bgColor: string) => {
   return css`
     position: relative;
     display: flex;
+    text-align: left;
     flex-direction: column;
     justify-content: center;
     width: 100%;
@@ -53,6 +54,7 @@ export const companyLogoBox = css`
 `;
 
 export const endTime = css`
+  text-align: left;
   font-size: 1.25rem;
   font-weight: 600;
   color: ${COLORS.GRAY100};
@@ -61,12 +63,14 @@ export const endTime = css`
 export const companyName = css`
   font-size: 1.25rem;
   font-weight: 600;
+  text-align: left;
   color: ${COLORS.GRAY100};
   ${shorten(1)};
 `;
 
 export const jdTitle = css`
   font-size: 1.5rem;
+  text-align: left;
   display: block;
   color: ${COLORS.GRAY100};
   font-weight: 600;
