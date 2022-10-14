@@ -3,11 +3,11 @@ import { AiOutlineSend } from "react-icons/ai";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useWriteCompanyComment } from "shared-api/company/useWriteCompanyComment";
 import { dateConverter } from "shared-util/date";
 import { UserBadge } from "shared-ui/common/atom/userBadge";
 import { CommentLikeButton } from "shared-ui/common/atom/commentLikeButton";
 import { CommentDislikeButton } from "shared-ui/common/atom/commentDislikeButton";
+import { useWriteCompanyComment } from "shared-api/company/useWriteCompanyComment";
 import { companyCommentArrKeyObj } from "shared-constant/queryKeyFactory/company/commentArrKeyObj";
 import { useLikeComment } from "shared-api/company/useLikeComment";
 import { useDisLikeComment } from "shared-api/company/useDisLikeComment";
@@ -42,6 +42,7 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
 }) => {
   const commentBoxRef = useRef<HTMLDivElement | null>(null);
   const [textValue, setTextValue] = useState("");
+  const { nickname } = userData;
   const { register, handleSubmit, setValue, watch } = useForm<CommentFormValues>({
     defaultValues: {
       companyId: companyData.id,
@@ -142,7 +143,7 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
           )}
           {commentArr.map((comment) => {
             const { month, date } = dateConverter(comment.createdTime);
-
+            const isMyComment = Boolean(nickname === comment.nickname);
             return (
               <li key={comment.id}>
                 <div css={commentHeader}>
@@ -154,7 +155,7 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
                   </p>
                 </div>
                 <div css={commentBody}>
-                  <div css={commentBox}>
+                  <div css={commentBox(isMyComment)}>
                     <p css={commentTypeCSS}>{comment.title || "기업 정보"}</p>
                     <p css={commentDesc}>{comment.description}</p>
                   </div>
@@ -203,6 +204,8 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
               setTextValue(changeEvent.currentTarget.value);
             }}
             onKeyDown={(onKeyDownEvent) => {
+              if (onKeyDownEvent.keyCode === 229) return;
+
               if (onKeyDownEvent.key === "Enter") {
                 onKeyDownEvent.preventDefault();
                 commentSubmit({

@@ -7,5 +7,4 @@ export type CompanyCardListProps = {
       }[]
     | undefined
     | null;
-  isLoading: boolean;
 };

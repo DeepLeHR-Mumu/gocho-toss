@@ -55,8 +55,9 @@ export const isPossibleEduIcon = css`
 
 export const eduContainer = css`
   display: flex;
-  gap: 0 0.25rem;
-
+  justify-content: space-between;
+  /* gap: 0 0.25rem; */
+  flex-grow: 1;
   > li {
     text-align: center;
     font-size: 0.875rem;
@@ -75,8 +76,8 @@ export const isPossibleEduDesc = (isPossibleEdu: boolean) => {
 };
 
 export const eduImageBox = css`
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3rem;
+  height: 3rem;
   margin-bottom: 0.5rem;
 `;
 
@@ -88,4 +89,11 @@ export const containerSubTitle = css`
   display: inline-flex;
   align-items: center;
   margin-left: 1rem;
+`;
+
+export const subDesc = css`
+  display: block;
+  padding-top: 0.5rem;
+  color: ${COLORS.BLUE_FIRST40};
+  font-weight: 500;
 `;

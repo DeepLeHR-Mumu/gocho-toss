@@ -47,11 +47,6 @@ export const userNameCSS = css`
   line-height: 2;
 `;
 
-export const accountCSS = css`
-  color: #919191;
-  font-size: 1rem;
-  line-height: 2;
-`;
 export const emailCSS = css`
   color: #919191;
   font-size: 1rem;

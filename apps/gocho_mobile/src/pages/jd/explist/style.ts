@@ -14,14 +14,23 @@ export const searchContainer = css`
   margin-bottom: 1rem;
 `;
 
+export const title = css`
+  display: block;
+  font-size: 1rem;
+  color: ${COLORS.GRAY10};
+  font-weight: 700;
+`;
+
 export const searchBox = css`
   width: 100%;
   height: 2.5rem;
-  font-family: Noto Sans KR, sans-serif;
-  font-size: 0.875rem;
+  font-size: 16px;
   font-weight: 400;
-  padding: 0.5rem 2rem;
-  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 3rem 0.5rem 1.5rem;
+  border-radius: 2rem;
   border: 1px solid ${COLORS.GRAY80};
 
   ::placeholder {
@@ -45,15 +54,38 @@ export const buttonArrContainer = css`
 
 export const setJobOrderButton = (active = false) => {
   return css`
-    font-size: 0.75rem;
     width: fit-content;
+    height: 2.5rem;
     text-align: center;
-    border-radius: 1.5rem;
-    border: 1px solid ${active ? COLORS.GRAY10 : `${COLORS.GRAY80}`};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2rem;
+    border: 1px solid ${active ? COLORS.GRAY10 : COLORS.GRAY80};
     color: ${COLORS.GRAY10};
-    background-color: ${active ? COLORS.STATE_SUCCESS : `${COLORS.GRAY100}`};
+    background-color: ${active ? COLORS.STATE_SUCCESS : COLORS.GRAY100};
     margin-right: 0.5rem;
-    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 400;
+    white-space: nowrap;
+    padding: 0 0.75rem;
     transition: all 0.2s ease;
+
+    :last-of-type {
+      margin-right: 0;
+    }
   `;
 };
+
+export const noDataBox = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30vh;
+`;
+
+export const noDataDesc = css`
+  color: ${COLORS.GRAY30};
+  font-size: 1rem;
+  font-weight: 500;
+`;

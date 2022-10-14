@@ -1,6 +1,5 @@
 import { css } from "@emotion/react";
 
-import { PC_HOVER } from "shared-style/mediaQuery";
 import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
@@ -170,28 +169,6 @@ export const desc = css`
   font-size: 0.875rem;
   color: ${COLORS.GRAY10};
   line-height: 1.5;
-`;
-
-export const goBackButton = css`
-  border: 1px solid ${COLORS.BLUE_FIRST40};
-  color: ${COLORS.BLUE_FIRST40};
-  font-size: 0.875rem;
-  font-weight: 500;
-  border-radius: 2rem;
-  width: 12.1875rem;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 2.5rem auto;
-  transition: all 0.2s ease;
-
-  ${PC_HOVER} {
-    :hover {
-      background-color: ${COLORS.BLUE_FIRST40};
-      color: ${COLORS.GRAY100};
-    }
-  }
 `;
 
 export const restPoint = css`

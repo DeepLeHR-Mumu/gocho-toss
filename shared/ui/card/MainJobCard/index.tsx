@@ -127,7 +127,7 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
             <Image
               layout="fill"
               objectFit="contain"
-              src={imageSrc}
+              src={imageSrc || jobData.companyLogo}
               alt=""
               onError={() => {
                 return setImageSrc(defaultCompanyLogo);
@@ -157,7 +157,7 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
             />
           </li>
           <li>
-            {jobData.placeArr[0][1]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
+            {jobData.placeArr[0]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
           </li>
           <li>
             {jobData.rotationArr[0]} {jobData.rotationArr.length !== 1 && `외 ${jobData.rotationArr.length - 1}형태`}

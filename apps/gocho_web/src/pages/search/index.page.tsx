@@ -44,6 +44,7 @@ const UnifiedSearch: NextPage = () => {
   useEffect(() => {
     searchFunnelEvent();
   }, []);
+  
   const { data: jobDataArr, isLoading: isJobLoading } = useJobArr({
     q: JSON.stringify({ searchWord }),
     order: "recent",

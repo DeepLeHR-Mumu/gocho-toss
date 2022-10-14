@@ -1,5 +1,6 @@
 import { css, SerializedStyles } from "@emotion/react";
 
+import { MOBILE } from "shared-style/mediaQuery";
 import { COLORS } from "shared-style/color";
 
 import { ColorStateDef } from "./type";
@@ -34,6 +35,10 @@ export const inputCSS: inputCSSDef = (colorState) => {
     border-radius: 2rem;
     color: ${COLORS.GRAY60};
     font-size: 1rem;
+
+    ${MOBILE} {
+      font-size: 16px;
+    }
   `;
 };
 

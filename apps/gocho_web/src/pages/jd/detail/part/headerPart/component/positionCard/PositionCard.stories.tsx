@@ -43,33 +43,33 @@ const Template: ComponentStory<typeof PositionCard> = (args) => {
 
 export const 기본 = Template.bind({});
 
-기본.args = {
-  position: {
-    id: 725,
-    requiredExp: {
-      type: "무관",
-    },
-    rotationArr: ["주간"],
-    placeArr: ["경상북도", "포항시"],
-    possibleEdu: {
-      summary: "고졸",
-    },
-    hireCount: -1,
-    task: {
-      mainTask: "설비",
-    },
-    contractType: {
-      type: "정규직",
-    },
-  },
-  currentPositionId: 375,
-  setCurrentPositionId: () => {
-    return undefined;
-  },
-};
+// 기본.args = {
+//   position: {
+//     id: 725,
+//     requiredExp: {
+//       type: "무관",
+//     },
+//     rotationArr: ["주간"],
+//     // placeArr: ["경상북도", "포항시"],
+//     possibleEdu: {
+//       summary: "고졸",
+//     },
+//     hireCount: -1,
+//     task: {
+//       mainTask: "설비",
+//     },
+//     contractType: {
+//       type: "정규직",
+//     },
+//   },
+//   currentPositionId: 375,
+//   setCurrentPositionId: () => {
+//     return undefined;
+//   },
+// };
 
-export const 로딩중 = Template.bind({});
+// export const 로딩중 = Template.bind({});
 
-로딩중.args = {
-  isSkeleton: true,
-};
+// 로딩중.args = {
+//   isSkeleton: true,
+// };

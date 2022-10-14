@@ -5,7 +5,7 @@ import { shorten } from "shared-style/common";
 
 export const jobCardSkeleton = css`
   display: flex;
-  width: 49%;
+  width: calc(50% - 0.5rem);
   height: 10rem;
   margin-bottom: 1.5rem;
   border-radius: 1.5rem;
@@ -14,23 +14,23 @@ export const jobCardSkeleton = css`
   overflow: hidden;
 `;
 
-export const cardWrapper = (isMobile: boolean) => {
+export const cardWrapper = css`
+  width: calc(50% - 0.5rem);
+  border-radius: 2rem;
+  border: 1px solid ${COLORS.GRAY90};
+  position: relative;
+  padding: 1rem;
+  box-shadow: 0px 0px 0.5rem 0px #2b2b2b1a;
+  overflow: hidden;
+`;
+
+export const linkButtonCSS = (isMobile: boolean) => {
   return css`
-    width: ${isMobile ? "100%" : "49%"};
-    margin-bottom: 1.5rem;
-    border-radius: 1.5rem;
-    border: 1px solid ${COLORS.GRAY90};
-    position: relative;
-    padding: 1rem;
-    box-shadow: 0px 0px 0.5rem 0px #2b2b2b1a;
-    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: ${isMobile ? "column" : "row"};
   `;
 };
-
-export const linkButtonCSS = css`
-  display: flex;
-  align-items: flex-start;
-`;
 
 export const bookmarkButton = (isBookmarked: boolean) => {
   return css`
@@ -52,9 +52,11 @@ export const companyLogoBox = css`
   position: relative;
 `;
 
-export const jobInfoBox = css`
-  margin-left: 1rem;
-`;
+export const jobInfoBox = (isMobile: boolean) => {
+  return css`
+    margin-left: ${!isMobile && "1rem"};
+  `;
+};
 
 export const flexBox = css`
   display: flex;
@@ -89,6 +91,6 @@ export const title = css`
   font-size: 1rem;
   font-weight: 500;
   color: ${COLORS.GRAY10};
-  line-height: 1.5;
+  line-height: 1.6;
   ${shorten(2)}
 `;

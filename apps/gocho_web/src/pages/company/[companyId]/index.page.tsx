@@ -50,10 +50,11 @@ const CompaniesDetail: NextPage = () => {
     if (info) {
       return;
     }
-    router.replace({
-      pathname: `${COMPANY_DETAIL_URL}/${companyId}`,
-      query: { info: "detail" },
-    });
+    if (!info && companyId)
+      router.replace({
+        pathname: `${COMPANY_DETAIL_URL}/${companyId}`,
+        query: { info: "detail" },
+      });
   }, [companyId, info, router]);
 
   useEffect(() => {
@@ -131,6 +132,7 @@ const CompaniesDetail: NextPage = () => {
     })
   );
 
+  // TODO PART와 컴포넌트와 div, button들의 향연 -> 추상화 레벨을 최대한 하나로 유지하자 
   return (
     <main css={mainContainer}>
       <Layout>

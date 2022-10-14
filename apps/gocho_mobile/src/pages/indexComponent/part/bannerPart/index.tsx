@@ -1,31 +1,26 @@
 import { FunctionComponent } from "react";
-import Link from "next/link";
-import { css } from "@emotion/react";
+import Image from "next/image";
 
 import { Layout } from "@component/layout";
 
 import { bannerArr } from "./constant";
-import { changeBannerColor, descCSS, linkCSS, titleCSS } from "./style";
+import { changeBannerColor, bannerArrCSS, descCSS, linkCSS, titleCSS, iconBox, wrapper } from "./style";
 
 export const BannerPart: FunctionComponent = () => {
   return (
     <Layout>
-      <section>
-        <ul
-          css={css`
-            display: flex;
-            justify-content: space-between;
-          `}
-        >
+      <section css={wrapper}>
+        <ul css={bannerArrCSS}>
           {bannerArr.map((banner) => {
             return (
               <li css={changeBannerColor(banner.backgroundColor)} key={banner.title}>
-                <Link href={banner.linkUrl} passHref>
-                  <a css={linkCSS}>
-                    <strong css={titleCSS}>{banner.title}</strong>
-                    <p css={descCSS}>{banner.desc}</p>
-                  </a>
-                </Link>
+                <a css={linkCSS} href={banner.linkUrl} target="_blank" rel="noreferrer">
+                  <strong css={titleCSS}>{banner.title}</strong>
+                  <p css={descCSS}>{banner.desc}</p>
+                  <div css={iconBox}>
+                    <Image src={banner.iconSrc} alt="" layout="fill" objectFit="contain" />
+                  </div>
+                </a>
               </li>
             );
           })}

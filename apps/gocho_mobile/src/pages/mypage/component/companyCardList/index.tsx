@@ -8,11 +8,11 @@ import { CompanyCard } from "shared-ui/card/companyCard";
 import { listContainer } from "./style";
 import { CompanyCardListProps } from "./type";
 
-export const CompanyCardList: FunctionComponent<CompanyCardListProps> = ({ companyDataArr, isLoading }) => {
+export const CompanyCardList: FunctionComponent<CompanyCardListProps> = ({ companyDataArr }) => {
   const { data: userData } = useUserInfo();
   const { data: userCompanyBookmarkArr, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
 
-  if (!companyDataArr || isLoading) {
+  if (!companyDataArr) {
     return (
       <div css={listContainer}>
         {dummyArrCreator(6).map((dummy) => {

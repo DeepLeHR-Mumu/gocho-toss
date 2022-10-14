@@ -37,7 +37,7 @@ export const companyConverter = (data: CompanyObjDef): UseCompanyDetailResultDef
       },
       factoryArr: data.factory_arr.map((factory) => {
         return {
-          name: factory.name,
+          factoryName: factory.name,
           id: factory.id,
           companyId: factory.company_id,
           place1: factory.place_1,

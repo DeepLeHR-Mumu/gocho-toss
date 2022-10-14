@@ -4,6 +4,9 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
+import { useModal } from "@recoil/hook/modal";
+import { useUserInfo } from "shared-api/auth";
+import { dDayCalculator } from "shared-util/date";
 
 import { NormalButton } from "shared-ui/common/atom/button";
 import { BottomMenuProps } from "./type";
@@ -16,6 +19,8 @@ export const BottomMenu: FunctionComponent<BottomMenuProps> = ({
   setOpenComment,
 }) => {
   const queryClient = useQueryClient();
+  const { setCurrentModal } = useModal();
+  const { isSuccess } = useUserInfo();
 
   const openJobInNewTab = () => {
     window.open(jobDetailData.applyUrl, "_blank", "noopener, noreferrer");
@@ -71,12 +76,17 @@ export const BottomMenu: FunctionComponent<BottomMenuProps> = ({
     );
   };
 
+  const isJobEnd = dDayCalculator(jobDetailData.endTime) === "만료";
+
   return (
     <div css={wrapper}>
       <button
         type="button"
         css={bookmarkButton(isBookmarked)}
         onClick={() => {
+          if (!isSuccess) {
+            setCurrentModal("loginModal", { button: "close" });
+          }
           return isBookmarked ? deleteJobBookmark() : addJobBookmark();
         }}
         aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
@@ -92,7 +102,7 @@ export const BottomMenu: FunctionComponent<BottomMenuProps> = ({
           variant="outlined"
           wide
         />
-        <NormalButton text="지원하기" buttonClick={openJobInNewTab} variant="filled" wide />
+        {!isJobEnd && <NormalButton text="지원하기" buttonClick={openJobInNewTab} variant="filled" wide />}
       </div>
     </div>
   );

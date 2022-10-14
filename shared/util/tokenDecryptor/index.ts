@@ -8,6 +8,6 @@ interface DecryptedTokenObj {
 }
 
 export const tokenDecryptor = (token: string) => {
-  const decodedURIArr = decodeURIComponent(token).split(".")[1];
-  return JSON.parse(atob(decodedURIArr)) as DecryptedTokenObj;
+  const decodedURIArr = token.split(".")[1];
+  return JSON.parse(decodeURIComponent(escape(atob(decodedURIArr)))) as DecryptedTokenObj;
 };

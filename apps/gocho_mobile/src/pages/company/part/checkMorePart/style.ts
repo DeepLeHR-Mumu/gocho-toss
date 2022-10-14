@@ -30,7 +30,13 @@ export const buttonText = css`
 export const buttonIcon = css`
   border-radius: 0.75rem;
   background-color: ${COLORS.GRAY90};
-  padding: 0.35rem 0.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${COLORS.GRAY30};
+  font-size: 1.25rem;
 `;
 
 export const copyrightText = css`
@@ -38,4 +44,8 @@ export const copyrightText = css`
   text-align: left;
   font-size: 0.75rem;
   font-weight: 400;
+  color: ${COLORS.GRAY20};
+  font-weight: 400;
+  line-height: 1.8;
+  word-break: keep-all;
 `;

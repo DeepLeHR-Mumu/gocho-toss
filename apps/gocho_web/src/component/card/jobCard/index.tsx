@@ -152,12 +152,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         <span css={bookmarkNumber}>{jobData.bookmark}</span>
       </button>
 
-      <Link
-        href={{
-          pathname: `${JOBS_DETAIL_URL}/${jobData.id}`,
-        }}
-        passHref
-      >
+      <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
         <a
           target="_blank"
           css={jobDetailLink}
@@ -214,7 +209,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
                   />
                 </li>
                 <li css={detailInfo}>
-                  {jobData.placeArr[0][1]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
+                  {jobData.placeArr[0]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
                 </li>
 
                 <li css={detailInfo}>

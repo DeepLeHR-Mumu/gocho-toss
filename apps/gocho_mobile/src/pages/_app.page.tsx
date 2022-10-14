@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -11,6 +11,7 @@ import { Global } from "@emotion/react";
 import { GNB } from "@component/global/gnb";
 import { Footer } from "@component/global/footer";
 import { ModalPlaceholder } from "@component/common/organisms/modal/modalPlaceHolder";
+import { ToastPlaceholder } from "@component/toast/toastPlaceholder";
 
 import { globalStyles } from "@style/globalStyles";
 
@@ -53,7 +54,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               router.push("/404");
             }
             if (axios.isAxiosError(error) && error.response?.status === 500) {
-              router.push("/404");
+              router.push("/500");
             }
           },
         },
@@ -61,16 +62,29 @@ function MyApp({ Component, pageProps }: AppProps) {
     });
   });
 
+  useEffect(() => {
+    const toMatch = [/Android/i, /webOS/i, /iPhone/i, /iPad/i, /iPod/i, /BlackBerry/i, /Windows Phone/i, /Mobile/i];
+
+    if (
+      toMatch.some((toMatchItem) => {
+        return navigator.userAgent.match(toMatchItem);
+      })
+    ) {
+      const currentLocation = window.location.href.slice(window.location.href.indexOf("."));
+      window.location.href = `${currentLocation}`;
+    }
+  }, []);
+
   return (
     <RecoilRoot>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <Global styles={globalStyles} />
           <ModalPlaceholder />
+          <ToastPlaceholder />
           <GNB />
           <Component {...pageProps} />
           <Footer />

@@ -3,19 +3,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
-
+import { useUserInfo } from "shared-api/auth";
+import { useModal } from "@recoil/hook/modal";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import highTrue from "shared-image/global/common/go_color.svg";
 import highFalse from "shared-image/global/common/go_mono.svg";
 import collegeTrue from "shared-image/global/common/cho_color.svg";
 import collegeFalse from "shared-image/global/common/cho_mono.svg";
-
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 
+import { dDayBooleanReturn } from "./util";
 import { JobCardProps, JobCardSkeleton } from "./type";
 import {
   jobCardSkeleton,
@@ -46,6 +48,9 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
 }) => {
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
   const queryClient = useQueryClient();
+  const router = useRouter();
+  const { isSuccess } = useUserInfo();
+  const { setCurrentModal } = useModal();
 
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobData?.id as number,
@@ -78,6 +83,10 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   }
 
   const addJobBookmark = () => {
+    if (!isSuccess) {
+      setCurrentModal("loginModal", { button: "close" });
+      return;
+    }
     if (userId)
       addMutate(
         { userId, elemId: jobData.id },
@@ -101,27 +110,31 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
       );
   };
 
-  const today = new Date();
-  const isExpired = jobData.endTime - Number(today) < 0;
+  const isExpired = dDayBooleanReturn(jobData.endTime);
 
+  const savePaginationNumber = () => {
+    sessionStorage.setItem("jdPageOrder", JSON.stringify(router.query.order));
+    sessionStorage.setItem("jdPageNumber", JSON.stringify(router.query.page));
+  };
   return (
     <article css={cardWrapper(isExpired)}>
-      <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
-        <a>
-          <button
-            type="button"
-            css={bookmarkButtonWrapper(isBookmarked)}
-            onClick={(event) => {
-              event.preventDefault();
-              return isBookmarked ? deleteJobBookmark() : addJobBookmark();
-            }}
-          >
-            <BsFillBookmarkFill />
-          </button>
+      <button
+        type="button"
+        css={bookmarkButtonWrapper(isBookmarked)}
+        onClick={(event) => {
+          event.preventDefault();
+          return isBookmarked ? deleteJobBookmark() : addJobBookmark();
+        }}
+        aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
+      >
+        <BsFillBookmarkFill />
+      </button>
 
+      <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
+        <a onClick={savePaginationNumber} target="_blank" rel="noreferrer" href={`${JOBS_DETAIL_URL}/${jobData.id}`}>
           <div css={dateInfoContainer}>
             <DdayBox endTime={jobData.endTime} />
-            {jobData.cut && <div css={cutBox}>채용시마감</div>}
+            {jobData.cut && <p css={cutBox}>채용시마감</p>}
           </div>
           <div css={companyInfoContainer}>
             <div css={companyLogoWrapper}>
@@ -129,57 +142,61 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
                 <Image
                   layout="fill"
                   objectFit="contain"
-                  src={imageSrc}
-                  alt=""
+                  src={imageSrc || jobData.companyLogo}
+                  alt={jobData.companyName}
                   onError={() => {
                     return setImageSrc(defaultCompanyLogo);
                   }}
                 />
               </div>
             </div>
-            <div css={companyName}>{jobData.companyName}</div>
+            <p css={companyName}>{jobData.companyName}</p>
           </div>
 
-          <h2 css={title}>{jobData.title}</h2>
+          <strong css={title}>{jobData.title}</strong>
 
           <div css={detailInfoContainer}>
             <div css={eduQual}>
               <Image
                 src={jobData.high ? highTrue : highFalse}
                 alt={jobData.high ? "고졸 지원 가능" : "고졸 지원 불가능"}
+                layout="fixed"
+                objectFit="cover"
               />
             </div>
             <div css={eduQual}>
               <Image
                 src={jobData.college ? collegeTrue : collegeFalse}
                 alt={jobData.college ? "초대졸 지원 가능" : "초대졸 지원 불가능"}
+                layout="fixed"
+                objectFit="cover"
               />
             </div>
           </div>
 
           <div css={detailInfoContainer}>
-            <div css={detailInfo}>
-              {jobData.placeArr[0][1]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
-            </div>
+            <p css={detailInfo}>
+              {jobData.placeArr[0]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
+            </p>
 
-            <div css={detailInfo}>
+            <p css={detailInfo}>
               {jobData.rotationArr[0]} {jobData.rotationArr.length !== 1 && `외 ${jobData.rotationArr.length - 1}형태`}
-            </div>
+            </p>
           </div>
 
           <div css={taskTitle}>
-            <div css={taskSummary}>채용중인 직무</div>
-            <span css={taskNumber}>{jobData.taskArr.length}</span>
+            <p css={taskSummary}>채용중인 직무</p>
+            <p css={taskNumber}>{jobData.taskArr.length}</p>
           </div>
-          <div css={taskContainer}>
+          <ul css={taskContainer}>
             {jobData.taskArr.map((task) => {
               return (
-                <div css={taskBox} key={`${jobData.id}${task}`}>
+                <li css={taskBox} key={`${jobData.id}${task}`}>
                   {task}
-                </div>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </a>
       </Link>
     </article>

@@ -30,7 +30,7 @@ export const JobCardList: FunctionComponent = () => {
   const { setCurrentModal } = useModal();
 
   const loginOpener = () => {
-    setCurrentModal("loginModal");
+    setCurrentModal("loginModal", { button: "close" });
   };
 
   if (!jobDataArr || isError || isLoading) {
@@ -44,6 +44,7 @@ export const JobCardList: FunctionComponent = () => {
       </div>
     );
   }
+
   return (
     <div css={listContainer}>
       <Slider {...setCarouselSetting()} ref={sliderRef}>

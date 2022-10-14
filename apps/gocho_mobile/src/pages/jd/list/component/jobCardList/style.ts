@@ -1,8 +1,9 @@
 import { css } from "@emotion/react";
 
 export const listContainer = css`
-  margin: 1rem 0 4rem;
+  margin-bottom: 5rem;
   display: flex;
   flex-wrap: wrap;
+  gap: 1rem;
   justify-content: space-between;
 `;

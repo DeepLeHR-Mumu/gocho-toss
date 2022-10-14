@@ -7,6 +7,7 @@ export const cardListContainer = css`
   flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 2rem;
+  gap: 1rem;
 `;
 
 export const skeletonContainer = css`
@@ -17,6 +18,21 @@ export const skeletonContainer = css`
 `;
 
 export const desc = css`
+  text-align: center;
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${COLORS.GRAY90};
+  height: 2.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: ${COLORS.GRAY60};
+  border-radius: 2rem;
+`;
+
+export const warningCSS = css`
   text-align: center;
   padding: 1rem;
   width: 100%;

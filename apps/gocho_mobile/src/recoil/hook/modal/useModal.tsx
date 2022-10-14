@@ -1,12 +1,12 @@
 import { useRecoilState } from "recoil";
 import { modalAtom } from "@recoil/atom";
-import { modalNameDef } from "@recoil/atom/modal";
+import { contentModalDef, contentModalNameDef, modalNameDef } from "@recoil/atom/modal";
 import { useCallback } from "react";
 
-interface setCurrentModalDef {
-  (modalName: modalNameDef): void;
+export interface setCurrentModalDef {
+  (modalName: modalNameDef, modalContentObj?: never): void;
+  (modalName: contentModalNameDef, modalContentObj: contentModalDef): void;
 }
-
 export const useModal = () => {
   const [_currentModal, _setCurrentModal] = useRecoilState(modalAtom);
 
@@ -17,7 +17,12 @@ export const useModal = () => {
   const currentModal = _currentModal;
 
   const setCurrentModal: setCurrentModalDef = useCallback(
-    (modalName) => {
+    (modalName, modalContentObj) => {
+      if (modalContentObj)
+        return _setCurrentModal({
+          activatedModal: modalName,
+          modalContentObj,
+        });
       return _setCurrentModal({ activatedModal: modalName });
     },
     [_setCurrentModal]

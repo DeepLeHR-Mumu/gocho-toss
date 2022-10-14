@@ -1,25 +1,45 @@
+import { FunctionComponent, useState, useEffect } from "react";
+import { useRouter } from "next/router";
+
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
 import { JobCard } from "@component/common/molecule/jobCard";
 import { Layout } from "@component/layout";
-import { useRouter } from "next/router";
-import { FunctionComponent, useState } from "react";
 import { useUserInfo } from "shared-api/auth";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useJobArr } from "shared-api/job";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
+import { useCompanyDetail } from "shared-api/company";
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_COMPANY_RECRUIT } from "shared-constant/meta";
 
-import { listContainer, totalCountContainer, totalText } from "./style";
+import { listContainer, totalText } from "./style";
 
 export const JobsPart: FunctionComponent = () => {
-  const [pageIndex, setPageIndex] = useState(1);
-
   const router = useRouter();
   const { companyId } = router.query;
+  const limit = 6;
+  const [total, setTotal] = useState<number>(0);
+  const [page, setPage] = useState<number>(Number(router.query.page));
+
+  const { data: companyDetailData, isLoading: isCompanyDataLoading } = useCompanyDetail({
+    companyId: Number(companyId),
+  });
   const { data: jobDataArr, isLoading } = useJobArr({
     companyId: Number(companyId),
-    limit: 10,
-    offset: (pageIndex - 1) * 10,
+    limit,
+    offset: (page - 1) * limit,
   });
+
+  useEffect(() => {
+    if (jobDataArr) {
+      setTotal(jobDataArr.count);
+    }
+  }, [jobDataArr]);
+
+  useEffect(() => {
+    setPage(Number(router.query.page));
+  }, [router.query.page]);
 
   const { data: userData } = useUserInfo();
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
@@ -34,11 +54,24 @@ export const JobsPart: FunctionComponent = () => {
     );
   }
 
+  if (!companyDetailData || isCompanyDataLoading) {
+    return (
+      <div css={listContainer}>
+        {dummyArrCreator(10).map((dummy) => {
+          return <JobCard isSkeleton key={`JobCardSkeleton${dummy}`} />;
+        })}
+      </div>
+    );
+  }
+
+  const { data } = companyDetailData;
+  const totalPage = Math.ceil(total / limit);
+
   return (
     <Layout>
-      <div css={totalCountContainer}>
-        <p css={totalText}>총 채용공고 {jobDataArr.count}개</p>
-      </div>
+      <MetaHead metaData={META_COMPANY_RECRUIT} companyDetail={{ companyName: data.name }} />
+      <InvisibleH2 title={`${data.name} 채용공고 모음`} />
+      <strong css={totalText}>총 채용공고 {jobDataArr.count}개</strong>
       <section css={listContainer}>
         {jobDataArr.jobDataArr.map((jobData) => {
           const isBookmarked = Boolean(
@@ -51,7 +84,12 @@ export const JobsPart: FunctionComponent = () => {
           );
         })}
       </section>
-      <BottomPagination total={jobDataArr.count} limit={10} page={pageIndex} setPage={setPageIndex} />
+      <BottomPagination
+        totalPage={totalPage}
+        linkObj={{
+          pathname: router.pathname,
+        }}
+      />
     </Layout>
   );
 };

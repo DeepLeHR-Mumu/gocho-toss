@@ -1,9 +1,12 @@
 import { FunctionComponent, useEffect, useState, useRef } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { useRouter } from "next/router";
 
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { useUserInfo } from "shared-api/auth";
+import { useJobDetail } from "shared-api/job";
 import { dDayCalculator } from "shared-util/date";
+
 import { PositionCard } from "./component/positionCard";
 import { HeaderFix } from "./component/headerFix";
 import { Header } from "./component/header";
@@ -21,19 +24,21 @@ import {
 
 export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton> = ({
   isSkeleton,
-  jobDetailData,
   currentPositionId,
   setCurrentPositionId,
 }) => {
+  const router = useRouter();
+  const { jobId } = router.query;
   const [defaultCardCount, setDefaultCardCount] = useState(5);
   const [isOverlap, setIsOverlap] = useState(true);
   const observeRef = useRef<HTMLDivElement | null>(null);
+  const { data: jobDetailData } = useJobDetail({ id: Number(jobId) });
 
   const { data: userData } = useUserInfo();
 
   useEffect(() => {
     if (setCurrentPositionId) {
-      setCurrentPositionId(jobDetailData.positionArr[0].id);
+      setCurrentPositionId(jobDetailData?.positionArr[0].id as number);
     }
   }, [setCurrentPositionId, jobDetailData]);
 
@@ -59,7 +64,7 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
     setDefaultCardCount(5);
   };
 
-  if (isSkeleton || !jobDetailData) {
+  if (isSkeleton || !jobDetailData || setCurrentPositionId === undefined || currentPositionId === undefined) {
     return (
       <div>
         <div css={skeletonContainer}>
@@ -68,9 +73,6 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
         <section css={positionContainer}>
           <div css={positionTitleSkeleton}>
             <SkeletonBox />
-          </div>
-          <div css={cardContainer}>
-            <PositionCard isSkeleton />
           </div>
         </section>
       </div>
@@ -99,7 +101,7 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
               index < defaultCardCount && (
                 <PositionCard
                   isDdayEnd={isDdayEnd}
-                  currentPositionId={currentPositionId}
+                  currentPositionId={currentPositionId as number | null}
                   setCurrentPositionId={setCurrentPositionId}
                   position={position}
                   key={position.id}

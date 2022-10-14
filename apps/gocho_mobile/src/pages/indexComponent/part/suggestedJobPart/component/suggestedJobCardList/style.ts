@@ -1,25 +1,24 @@
 import { css } from "@emotion/react";
+import { COLORS } from "shared-style/color";
 
 export const listContainer = css`
-  margin: 1.5rem 0;
-
-  .slick-slider {
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .slick-list {
-    position: relative;
-    display: block !important;
-    width: 100%;
-  }
-
   .slick-slide {
-    padding: 0.25rem;
+    padding-right: 0.5rem;
   }
+`;
 
-  .slick-slide > div {
-    width: auto;
-    margin: 0 0.25rem;
-  }
+export const controlWrapper = css`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 0.875rem;
+`;
+
+export const buttonCSS = css`
+  margin-left: 1rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: ${COLORS.GRAY90};
+  border-radius: 50%;
+  color: ${COLORS.GRAY40};
 `;

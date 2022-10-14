@@ -3,7 +3,6 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const mainContainer = css`
-  margin-top: 4.5rem;
   background-color: #f2f2f6;
   padding: 4rem 0;
 `;

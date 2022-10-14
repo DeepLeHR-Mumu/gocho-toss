@@ -70,9 +70,9 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({ compa
               onClick={() => {
                 return setActiveFactory(factory.id);
               }}
-              aria-label={`${factory.name} 자세히보기`}
+              aria-label={`${factory.factoryName} 자세히보기`}
             >
-              {factory.name}
+              {factory.factoryName}
             </button>
           );
         })}
@@ -96,7 +96,7 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({ compa
             factory.id === activeFactory && (
               <div css={infoContainer}>
                 <div css={addressWrapper}>
-                  <div css={factoryName}>{factory.name}</div>
+                  <div css={factoryName}>{factory.factoryName}</div>
                   <div css={addressBox}>
                     <strong css={addressTitle}>주소</strong>
                     <p css={address}>{factory.address}</p>

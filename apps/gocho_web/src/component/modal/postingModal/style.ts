@@ -103,6 +103,7 @@ export const bodyCSS = css`
   margin-bottom: 1rem;
   line-height: 1.8;
   word-break: break-all;
+  white-space: pre-line;
 `;
 
 export const infoContainer = css`
