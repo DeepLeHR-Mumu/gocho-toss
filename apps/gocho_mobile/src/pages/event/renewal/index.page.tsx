@@ -3,6 +3,8 @@ import { useEffect } from "react";
 
 import { eventFunnelEvent } from "shared-ga/event";
 
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_EVENT } from "shared-constant/meta";
 import { PartIntro } from "./part/partIntro";
 import { PartNotice } from "./part/partNotice";
 import { PartVideo } from "./part/partVideo";
@@ -19,6 +21,7 @@ const EventRenewal: NextPage = () => {
 
   return (
     <main css={wrapper}>
+      <MetaHead metaData={META_EVENT} />
       <PartIntro />
       <PartNotice />
       <PartVideo />

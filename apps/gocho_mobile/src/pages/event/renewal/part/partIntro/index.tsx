@@ -26,7 +26,7 @@ export const PartIntro: FunctionComponent = () => {
             <div css={logoBox}>
               <Image src={gochoLogoColor} alt="고초대졸닷컴" layout="fixed" objectFit="contain" />
             </div>
-            <h1 css={titleCSS}>더욱 편하게 돌아왔습니다.</h1>
+            <strong css={titleCSS}>더욱 편하게 돌아왔습니다.</strong>
             <p css={desc}>
               리뉴얼 서비스 <span>OPEN</span>
             </p>

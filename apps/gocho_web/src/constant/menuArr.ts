@@ -14,6 +14,7 @@ export const menuArr = [
     menuTitle: "채용공고",
     mainUrl: "jd",
     menuLink: JOBS_LIST_URL,
+    pageQuery: true,
     subMenuArr: [
       {
         pageQuery: true,
