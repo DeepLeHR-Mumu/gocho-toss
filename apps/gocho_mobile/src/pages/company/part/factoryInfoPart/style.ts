@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 export const container = css`
-  margin-bottom: 2rem;
+  margin-bottom: 5rem;
 `;
 
 export const cardContainer = css`

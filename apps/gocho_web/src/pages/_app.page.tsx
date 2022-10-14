@@ -59,17 +59,16 @@ function MyApp({ Component, pageProps }: AppProps) {
     ].some((toMatchItem) => {
       return navigator.userAgent.match(toMatchItem);
     });
-    const isVercel = window.location.href.includes("vercel");
-    const isLocal = window.location.href.includes("localhost");
-    
-    if (isVercel || isLocal) {
-      return;
-    }
     if (isMobile) {
-      const currentLocation = window.location.href.slice(window.location.href.indexOf(".") + 1);
-      window.location.href = `https://${currentLocation}`;
+      const { host, pathname, protocol } = window.location;
+      window.location.href = `${protocol}//m.${host}${pathname}`;
     }
   }, []);
+
+  // host : localhost:3000
+  // origin : http://localhost:3000
+  // pathname: /
+  // protocol : http:
 
   const [queryClient] = useState(() => {
     return new QueryClient({

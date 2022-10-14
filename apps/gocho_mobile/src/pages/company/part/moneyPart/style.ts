@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const container = css`
-  margin-bottom: 3.4375rem;
+  margin-bottom: 5rem;
   display: flex;
   width: 100%;
   justify-content: center;
@@ -46,6 +46,7 @@ export const menuText = css`
   color: ${COLORS.BLUE_NEON40};
   font-weight: 700;
   font-size: 0.875rem;
+  line-height: 1.6;
 `;
 
 export const moneyInfoContainer = css`
@@ -89,6 +90,7 @@ export const descMenuText = css`
   font-weight: 700;
   font-size: 0.875rem;
   flex-shrink: 0;
+  line-height: 1.6;
 `;
 
 export const descText = css`
@@ -96,6 +98,7 @@ export const descText = css`
   background-color: ${COLORS.GRAY90};
   padding: 0.5rem 1rem;
   > p {
+    line-height: 1.6;
     font-size: 0.875rem;
     color: ${COLORS.GRAY10};
     font-weight: 400;

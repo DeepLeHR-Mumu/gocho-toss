@@ -9,7 +9,7 @@ export interface H2TitleProps {
 export const H2Title: FunctionComponent<H2TitleProps> = ({ titleStr }) => {
   return (
     <Layout>
-      <h2 css={h2Title}>{titleStr}</h2>
+      <strong css={h2Title}>{titleStr}</strong>
     </Layout>
   );
 };

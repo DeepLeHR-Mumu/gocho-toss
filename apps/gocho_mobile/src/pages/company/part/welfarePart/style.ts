@@ -2,17 +2,29 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const container = css`
-  margin-bottom: 2rem;
+  margin-bottom: 5rem;
 `;
 
 export const headerBox = css`
-  overflow: hidden;
-  overflow-x: scroll;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
-  scrollbar-width: none;
-  ::-webkit-scrollbar {
-    display: none;
-  }
+  border-top: 1px solid #e9e9e9;
+`;
+
+export const sliderBox = css`
+  width: calc(100% - 6rem);
+`;
+
+export const iconBox = css`
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${COLORS.GRAY40};
+  font-size: 1.25rem;
 `;
 
 export const menuList = css`
@@ -24,20 +36,16 @@ export const menuList = css`
 
 export const menu = (isActivated: boolean) => {
   return css`
-    flex-shrink: 0;
-    padding: 0 2rem;
-    display: flex;
-    justify-content: center;
-    height: 100%;
+    padding: 0.25rem;
+    white-space: nowrap;
+    color: ${isActivated ? COLORS.BLUE_NEON50 : COLORS.GRAY40};
+    font-weight: 700;
+    font-size: 0.875rem;
+    height: 3rem;
     ${isActivated &&
     css`
-      border-bottom: 2px solid ${COLORS.BLUE_FIRST50};
+      border-bottom: 3px solid ${COLORS.BLUE_NEON50};
     `};
-
-    > button {
-      color: ${isActivated ? COLORS.BLUE_NEON50 : COLORS.GRAY40};
-      font-weight: 700;
-    }
   `;
 };
 
@@ -47,19 +55,22 @@ export const informationWrapper = css`
   align-items: center;
   width: 100%;
   background-color: ${COLORS.BLUE_SECOND90};
-  padding: 1.5rem 0;
-  margin-bottom: 1.5625rem;
+  padding: 2rem;
+  margin-bottom: 3rem;
 `;
 
 export const infoBox = css`
-  width: 16.25rem;
+  width: 100%;
   background-color: ${COLORS.GRAY100};
   padding: 1rem;
   border-radius: 1.5rem 0 1.5rem 1.5rem;
-  > p {
-    margin-bottom: 0.5rem;
-    :last-of-type {
-      margin-bottom: 0;
-    }
+  > li {
+    line-height: 2;
+    font-size: 0.875rem;
+    margin-left: 1rem;
+    font-weight: 400;
+    word-break: keep-all;
+    color: ${COLORS.GRAY10};
+    list-style: disc;
   }
 `;
