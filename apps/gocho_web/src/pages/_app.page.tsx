@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -45,8 +45,19 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   ReactGA.initialize(TEST_KEY);
+  useEffect(() => {
+    const toMatch = [/Android/i, /webOS/i, /iPhone/i, /iPad/i, /iPod/i, /BlackBerry/i, /Windows Phone/i, /Mobile/i];
 
-const [queryClient] = useState(() => {
+    if (
+      toMatch.some((toMatchItem) => {
+        return navigator.userAgent.match(toMatchItem);
+      })
+    ) {
+      const currentLocation = window.location.href.slice(window.location.href.indexOf("."));
+      window.location.href = `m.${currentLocation}`;
+    }
+  }, []);
+  const [queryClient] = useState(() => {
     return new QueryClient({
       defaultOptions: {
         queries: {

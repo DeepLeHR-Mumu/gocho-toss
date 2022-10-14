@@ -7,7 +7,6 @@ import { ResponseObjDef, PostKakaoRegisterDef, RequestObjDef } from "./type";
 
 const postKakaoLogin: PostKakaoRegisterDef = async (requestObj) => {
   const token = localStorage.getItem("token");
-  console.log(token);
   const { data } = await axiosInstance.post(
     "/auth/kakao-register",
     { ...requestObj },
