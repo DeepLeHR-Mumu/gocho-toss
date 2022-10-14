@@ -10,6 +10,7 @@ import { useCompanyDetail } from "shared-api/company";
 import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr, useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
+import { useModal } from "@recoil/hook/modal";
 
 import {
   wrapper,
@@ -17,11 +18,11 @@ import {
   container,
   bookmarkButton,
   viewCountContainer,
-  viewIconBox,
-  viewText,
   viewCount,
   companyName,
   industryText,
+  buttonBox,
+  countCSS,
 } from "./style";
 
 export const InfoBox: FunctionComponent = () => {
@@ -29,6 +30,7 @@ export const InfoBox: FunctionComponent = () => {
   const router = useRouter();
   const { companyId } = router.query;
 
+  const { setCurrentModal } = useModal();
   const { data: userData } = useUserInfo();
   const { data: userCompanyBookmarkArr } = useUserCompanyBookmarkArr({ userId: userData?.id });
   const {
@@ -36,11 +38,13 @@ export const InfoBox: FunctionComponent = () => {
     isLoading,
     isSuccess,
   } = useCompanyDetail({ companyId: Number(companyId) as number });
+
   const { mutate: addMutate } = useAddCompanyBookmarkArr({
     id: companyDetailData?.data.id as number,
     logo_url: companyDetailData?.data.logoUrl as string,
     name: companyDetailData?.data.name as string,
   });
+
   const { mutate: deleteMutate } = useDeleteCompanyBookmarkArr({
     id: companyDetailData?.data.id as number,
     logo_url: companyDetailData?.data.logoUrl as string,
@@ -54,6 +58,9 @@ export const InfoBox: FunctionComponent = () => {
   );
 
   const addCompanyBookmark = () => {
+    if (!userData) {
+      setCurrentModal("loginModal", { button: "close" });
+    }
     return (
       userData?.id &&
       addMutate(
@@ -99,32 +106,24 @@ export const InfoBox: FunctionComponent = () => {
         <div css={logoBox}>
           <Image src={companyDetailData.data.logoUrl} layout="fill" objectFit="contain" />
         </div>
-        <div>
+        <div css={buttonBox}>
           <button
             type="button"
             css={bookmarkButton(isBookmarked)}
             onClick={isBookmarked ? deleteCompanyBookmark : addCompanyBookmark}
           >
-            <div>
-              <BsFillBookmarkFill />
-            </div>
-            <p>
-              기업 북마크
-              <span>{companyDetailData.data.bookmark}</span>
-            </p>
+            <BsFillBookmarkFill />
+            기업 북마크 <span css={countCSS}>{companyDetailData.data.bookmark.toLocaleString("Ko-KR")}</span>
           </button>
-          <div css={viewCountContainer}>
-            <div css={viewIconBox}>
-              <FiEye />
-            </div>
-            <p css={viewText}>
-              조회수
-              <span css={viewCount}>{companyDetailData.data.view}</span>
-            </p>
-          </div>
+
+          <p css={viewCountContainer}>
+            <FiEye />
+            조회수
+            <span css={viewCount}>{companyDetailData.data.view.toLocaleString("Ko-KR")}</span>
+          </p>
         </div>
       </div>
-      <p css={companyName}>{companyDetailData.data.name}</p>
+      <strong css={companyName}>{companyDetailData.data.name}</strong>
       <p css={industryText}>{companyDetailData.data.industry}</p>
     </section>
   );

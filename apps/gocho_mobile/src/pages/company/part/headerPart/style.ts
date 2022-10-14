@@ -3,19 +3,18 @@ import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
   background-color: #f2f2f6;
-  padding-top: 8rem;
-  padding-bottom: 2rem;
+  padding: 3rem 0;
 `;
 
 export const container = css`
   display: flex;
-  width: 100%;
+  align-items: center;
   justify-content: space-between;
 `;
 
 export const buttonCSS = (isActivated: boolean) => {
   return css`
-    width: 47%;
+    width: 48%;
     border-radius: 3rem;
     height: 3.5rem;
     font-size: 1.125rem;

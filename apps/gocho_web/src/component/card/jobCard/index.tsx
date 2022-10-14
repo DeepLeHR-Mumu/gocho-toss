@@ -152,12 +152,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         <span css={bookmarkNumber}>{jobData.bookmark}</span>
       </button>
 
-      <Link
-        href={{
-          pathname: `${JOBS_DETAIL_URL}/${jobData.id}`,
-        }}
-        passHref
-      >
+      <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
         <a
           target="_blank"
           css={jobDetailLink}

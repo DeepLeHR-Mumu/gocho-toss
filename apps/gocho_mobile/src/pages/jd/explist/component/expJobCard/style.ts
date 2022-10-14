@@ -13,7 +13,6 @@ export const expJobCardSkeleton = css`
 
 export const cardWrapper = css`
   width: 100%;
-  height: 27.5rem;
   margin-bottom: 2rem;
 `;
 
@@ -21,10 +20,10 @@ export const companyInfoContainer = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 9.5rem;
   border: solid 1px ${COLORS.GRAY80};
   padding: 1rem;
   border-radius: 1.5rem 1.5rem 0 0;
+  border-bottom: 0;
 `;
 
 export const companyName = css`
@@ -48,8 +47,7 @@ export const moreExpJobButton = css`
   border-radius: 1.5rem;
   width: fit-content;
   padding: 1rem 1rem;
-  margin-right: 0.5rem;
-
+  margin-left: 0.5rem;
   background-color: ${COLORS.GRAY80};
 `;
 
@@ -62,7 +60,8 @@ export const companyDetailButton = css`
 `;
 
 export const expJobListContainer = css`
-  height: 18rem;
+  min-height: 18rem;
+  position: relative;
   padding: 1rem;
   border: solid 1px ${COLORS.GRAY80};
   border-radius: 0 0 1.5rem 1.5rem;
@@ -88,22 +87,27 @@ export const jobTitleContainer = css`
 
 export const jobTitle = css`
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 400;
+  width: 100%;
   flex-grow: 1;
   border: solid 1px ${COLORS.GRAY80};
   border-radius: 1.5rem;
   background-color: ${COLORS.GRAY100};
-  padding: 0.25rem 0.5rem;
+  padding: 0.5rem;
   margin-right: 0.5rem;
-
-  ${shorten()}
+  align-items: center;
+  display: block;
+  color: ${COLORS.GRAY10};
+  ${shorten()};
 `;
 
 export const jobDate = css`
-  min-width: 7.75rem;
-  text-align: right;
+  white-space: nowrap;
   font-size: 0.75rem;
   font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   color: ${COLORS.GRAY40};
 `;
 
@@ -113,18 +117,26 @@ export const taskContainer = css`
   align-items: center;
 `;
 
+export const flexRow = css`
+  display: flex;
+  align-items: center;
+`;
+
 export const taskSummary = css`
   font-size: 0.75rem;
+  margin-right: 01rem;
   font-weight: 700;
-  word-break: keep-all;
-
-  width: 6.75rem;
+  white-space: nowrap;
+  width: fit-content;
   position: relative;
   color: ${COLORS.GRAY100};
   background-color: ${COLORS.GRAY40};
-  border-radius: 1.5rem;
-  padding: 0.5rem 1.5rem;
-  margin-right: 1.5rem;
+  border-radius: 2rem;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.5rem;
 `;
 
 export const taskNumber = css`
@@ -142,8 +154,6 @@ export const taskNumber = css`
 export const flexBox = css`
   display: flex;
   align-items: center;
-  max-width: 40%;
-  ${shorten()};
 `;
 
 export const taskBox = css`
@@ -160,6 +170,21 @@ export const taskBox = css`
 export const jobDetailButton = css`
   font-size: 0.75rem;
   color: ${COLORS.GRAY30};
-  word-break: keep-all;
-  margin: 0 0 0 auto;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+export const noExplistArrText = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.875rem;
+  text-align: center;
+  color: ${COLORS.GRAY40};
 `;

@@ -11,6 +11,7 @@ import busFalseIcon from "shared-image/page/factory/bus_false_icon.svg";
 import dormitoryIcon from "shared-image/page/factory/dormitory_icon.svg";
 import xIcon from "shared-image/page/factory/x_icon.svg";
 import oIcon from "shared-image/page/factory/o_icon.svg";
+import { useToast } from "@recoil/hook/toast";
 
 import { FiChevronUp, FiChevronDown, FiCopy, FiInfo, FiMapPin } from "react-icons/fi";
 import {
@@ -35,6 +36,9 @@ import {
   additionalInfoIcon,
   additionalInfoText,
   additionalContainer,
+  titleBox,
+  contentBox,
+  infoBox,
 } from "./style";
 import { FactoryCardProps } from "./type";
 
@@ -42,7 +46,7 @@ export const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factoryInfo }
   const totalNumber = factoryInfo.maleNumber + factoryInfo.femaleNumber;
   const femaleRatio = Math.round((factoryInfo.femaleNumber / totalNumber) * 100);
   const maleRatio = Math.round((factoryInfo.maleNumber / totalNumber) * 100);
-
+  const { setCurrentToast } = useToast();
   const [isCardOpen, setIsCardOpen] = useState(false);
   return (
     <section css={wrapper}>
@@ -60,67 +64,56 @@ export const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factoryInfo }
               });
             }}
           >
-            <p>{factoryInfo.name}</p>
+            {factoryInfo.factoryName}
+
+            <span css={updownIconBox}>{isCardOpen ? <FiChevronUp /> : <FiChevronDown />}</span>
           </button>
         </div>
-        <button
-          type="button"
-          css={updownIconBox}
-          onClick={() => {
-            setIsCardOpen((prev) => {
-              return !prev;
-            });
-          }}
-        >
-          {isCardOpen ? <FiChevronUp /> : <FiChevronDown />}
-        </button>
       </header>
+
       {isCardOpen && (
         <>
           <section css={menuContainer}>
-            <div>
+            <div css={titleBox}>
               <div css={menuIconBox}>
                 <Image src={locationIcon} layout="fill" objectFit="contain" />
               </div>
-              <div css={menuNameBox}>위치</div>
+              <p css={menuNameBox}>위치</p>
             </div>
-            <div>
+            <div css={infoBox}>
               <address css={addressCSS}>{factoryInfo.address}</address>
               <div css={locationContainer}>
                 <a css={mapLink} href={`https://map.kakao.com/?q=${factoryInfo.address}`}>
-                  <div>
-                    <FiMapPin />
-                  </div>
+                  <FiMapPin />
                   지도 보기
                 </a>
                 <button
                   css={mapLink}
                   type="button"
                   onClick={() => {
+                    setCurrentToast("주소가 복사되었습니다.");
                     return navigator.clipboard.writeText(factoryInfo.address);
                   }}
                 >
-                  <div>
-                    <FiCopy />
-                  </div>
+                  <FiCopy />
                   복사하기
                 </button>
               </div>
             </div>
           </section>
+
           <section css={menuContainer}>
-            <div>
+            <div css={titleBox}>
               <div css={menuIconBox}>
                 <Image src={productIcon} layout="fill" objectFit="contain" />
               </div>
               <p css={menuNameBox}>생산품</p>
             </div>
-            <div css={productCSS}>
-              <p>{factoryInfo.product}</p>
-            </div>
+            <p css={productCSS}>{factoryInfo.product}</p>
           </section>
+
           <section css={infoContainer}>
-            <div>
+            <div css={contentBox}>
               <div css={menuIconBox}>
                 <Image src={hireNumberIcon} layout="fill" objectFit="contain" />
               </div>
@@ -128,15 +121,15 @@ export const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factoryInfo }
                 임직원 <span css={numberCSS}>{totalNumber}명</span>
               </p>
             </div>
-            <div>
+            <div css={contentBox}>
               <div css={menuIconBox}>
                 <Image src={genderIcon} layout="fill" objectFit="contain" />
               </div>
               <p css={largeMenuNameBox}>
-                남 <span css={numberCSS}>{maleRatio}%</span> 여 <span css={numberCSS}>{femaleRatio}%</span>
+                남 <span css={numberCSS}>{maleRatio}% </span> 여 <span css={numberCSS}>{femaleRatio}%</span>
               </p>
             </div>
-            <div>
+            <div css={contentBox}>
               <div css={menuIconBox}>
                 <Image src={factoryInfo.bus.exists ? busTrueIcon : busFalseIcon} layout="fill" objectFit="contain" />
               </div>
@@ -155,7 +148,7 @@ export const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factoryInfo }
                 </div>
               )}
             </div>
-            <div>
+            <div css={contentBox}>
               <div css={menuIconBox}>
                 <Image src={dormitoryIcon} layout="fill" objectFit="contain" />
               </div>

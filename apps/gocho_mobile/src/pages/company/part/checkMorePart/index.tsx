@@ -10,7 +10,7 @@ export const CheckMorePart: FunctionComponent = () => {
     <section css={wrapper}>
       <button
         type="button"
-        aria-label="데이터 확인사항"
+        aria-label={isTextOpen ? "데이터 확인사항 닫기" : "데이터 확인사항 열기"}
         css={buttonBox}
         onClick={() => {
           setIsTextOpen((prev) => {

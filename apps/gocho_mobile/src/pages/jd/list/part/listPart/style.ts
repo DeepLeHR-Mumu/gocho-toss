@@ -51,12 +51,17 @@ export const searchWrapper = css`
 
 export const searchBox = css`
   width: 100%;
-  font-size: 0.875rem;
+  font-size: 16px;
   font-weight: 400;
-  padding: 0.5rem 2rem;
-  border-radius: 1.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 3rem 0.25rem 1.5rem;
+  border-radius: 2rem;
   background-color: ${COLORS.GRAY100};
   border: 1px solid ${COLORS.GRAY80};
+  color: ${COLORS.GRAY10};
 
   ::placeholder {
     color: #b2b2b2;
@@ -70,10 +75,13 @@ export const searchButton = css`
   transform: translate(0, -50%);
   color: ${COLORS.GRAY40};
   width: 1.25rem;
+  font-size: 2rem;
 `;
 
 export const buttonArrContainer = css`
   display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
 `;
 
 export const setJobOrderButton = (active = false) => {
@@ -81,12 +89,31 @@ export const setJobOrderButton = (active = false) => {
     font-size: 0.75rem;
     width: fit-content;
     text-align: center;
-    border-radius: 1.5rem;
+    white-space: nowrap;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2rem;
     border: 1px solid ${active ? COLORS.GRAY10 : `${COLORS.GRAY80}`};
     color: ${COLORS.GRAY10};
     background-color: ${active ? COLORS.STATE_SUCCESS : `${COLORS.GRAY100}`};
     margin-right: 0.5rem;
-    padding: 0.5rem 0.75rem;
+    padding: 0 0.75rem;
     transition: all 0.2s ease;
+
+    :last-of-type {
+      margin-right: 0;
+    }
   `;
 };
+
+export const noArrDesc = css`
+  color: ${COLORS.GRAY60};
+  font-size: 1rem;
+  font-weight: 500;
+  min-height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

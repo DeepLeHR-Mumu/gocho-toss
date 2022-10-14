@@ -8,15 +8,17 @@ export const sectionWrapper = css`
   margin-bottom: 2rem;
 `;
 
-export const infoBox = css`
-  background-color: ${COLORS.BLUE_SECOND70};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 1.5rem 0;
-  box-sizing: border-box;
-`;
+export const infoBox = (isJobEnd: boolean) => {
+  return css`
+    background-color: ${isJobEnd ? COLORS.GRAY60 : COLORS.BLUE_SECOND70};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1.5rem 0;
+    box-sizing: border-box;
+  `;
+};
 
 export const infoTitle = css`
   font-size: 1rem;
@@ -39,6 +41,11 @@ export const beforeAfterDateBox = css`
   }
 `;
 
+export const flexAlignBox = css`
+  display: flex;
+  align-items: center;
+`;
+
 export const cutBox = css`
   font-size: 0.75rem;
   white-space: nowrap;
@@ -50,8 +57,9 @@ export const cutBox = css`
   border-radius: 1rem;
   width: fit-content;
   height: 1.625rem;
-  background-color: #f2f2f2;
-  color: #1553cd;
+  margin-left: 0.5rem;
+  background-color: ${COLORS.GRAY90};
+  color: ${COLORS.BLUE_FIRST40};
 `;
 
 export const applyButton = css`
@@ -121,6 +129,9 @@ export const processBox = css`
 
   > li {
     color: ${COLORS.GRAY60};
+    text-align: center;
+    line-height: 1.6;
+    padding: 0 0.25rem;
     font-size: 0.75rem;
     font-weight: 500;
     position: relative;
@@ -154,6 +165,7 @@ export const desc = css`
   flex-direction: column;
   color: ${COLORS.GRAY10};
   line-height: 1.5;
+  font-size: 0.875rem;
 `;
 
 export const restPoint = css`

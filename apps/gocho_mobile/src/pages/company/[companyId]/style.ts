@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 export const container = css`
-  margin-top: 2rem;
+  padding: 3rem 0;
 `;
 
 export const loadingBox = css`

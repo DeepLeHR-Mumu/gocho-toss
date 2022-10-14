@@ -46,6 +46,8 @@ export const title = css`
 
 export const desc = css`
   font-size: 1rem;
+  word-break: keep-all;
+  line-height: 1.6;
   font-weight: 400;
   color: ${COLORS.GRAY100};
 `;

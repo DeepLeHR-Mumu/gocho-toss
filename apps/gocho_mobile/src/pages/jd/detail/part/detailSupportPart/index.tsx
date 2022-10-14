@@ -21,6 +21,7 @@ import {
   eduContainer,
   eduImageBox,
   flexText,
+  subDesc,
 } from "./style";
 
 export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ freshPosition }) => {
@@ -69,8 +70,20 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
           <p css={subTitle}>경력</p>
           <p css={desc}>
             {freshPosition.requiredExp.type}
-            {freshPosition.requiredExp.maxYear >= 1 && ` ${freshPosition.requiredExp.maxYear}년 이상`}
-            {freshPosition.requiredExp.minYear >= 1 && ` ${freshPosition.requiredExp.minYear}년 이하`}
+
+            {freshPosition.requiredExp.type === "경력" && (
+              <span css={subDesc}>
+                {freshPosition.requiredExp.minYear >= 1 && ` ${freshPosition.requiredExp.minYear}년 이상`}
+                {freshPosition.requiredExp.maxYear >= 1 && ` ${freshPosition.requiredExp.maxYear}년 이하`}
+              </span>
+            )}
+            {freshPosition.requiredExp.type === "신입/경력" && (
+              <span css={subDesc}>
+                경력인 경우
+                {freshPosition.requiredExp.minYear >= 1 && ` ${freshPosition.requiredExp.minYear}년 이상`}
+                {freshPosition.requiredExp.maxYear >= 1 && ` ${freshPosition.requiredExp.maxYear}년 이하`}
+              </span>
+            )}
           </p>
         </div>
         <div css={flexBox}>
