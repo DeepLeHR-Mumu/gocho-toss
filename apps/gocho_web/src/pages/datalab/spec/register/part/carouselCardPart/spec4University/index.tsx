@@ -93,9 +93,9 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                     message: "최대 일수는 365입니다.",
                   },
                   required: "무단결석 일수를 입력해주세요.",
-                  value: 0,
                 })}
                 id="absent"
+                placeholder="?"
                 firstDesc="#무단 결석:"
                 lastDesc="/일"
               />
@@ -112,8 +112,8 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                     message: "최대 일수는 365입니다.",
                   },
                   required: "무단지각 일수를 입력해주세요.",
-                  value: 0,
                 })}
+                placeholder="?"
                 id="tardy"
                 firstDesc="#무단 지각:"
                 lastDesc="/일"
@@ -131,8 +131,8 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                     message: "최대 일수는 365입니다.",
                   },
                   required: "무단 조퇴 일수를 입력해주세요.",
-                  value: 0,
                 })}
+                placeholder="?"
                 id="leaveEarly"
                 firstDesc="#무단 조퇴:"
                 lastDesc="/일"
@@ -150,8 +150,8 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                     message: "최대 일수는 365입니다.",
                   },
                   required: "무단결과 일수를 입력해주세요.",
-                  value: 0,
                 })}
+                placeholder="?"
                 id="classMiss"
                 firstDesc="#무단 결과:"
                 lastDesc="/일"

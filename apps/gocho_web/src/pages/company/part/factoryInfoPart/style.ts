@@ -31,6 +31,7 @@ export const selectButton = (active = false) => {
     width: fit-content;
     padding: 0 1rem;
     font-size: 0.875rem;
+    white-space: nowrap;
     margin-right: 1rem;
     display: flex;
     align-items: center;

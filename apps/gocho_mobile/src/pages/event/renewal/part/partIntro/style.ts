@@ -21,7 +21,7 @@ export const topSectionCSS = css`
 `;
 
 export const topLayoutCSS = css`
-  height: 50rem;
+  height: 40rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,7 +66,7 @@ export const titleCSS = css`
   word-break: keep-all;
   font-size: 1.25rem;
   font-weight: 700;
-  padding: 1.5rem 0 1.875rem;
+  padding: 1rem 0;
   color: ${COLORS.GRAY10};
 `;
 
@@ -86,16 +86,16 @@ export const desc = css`
 
 export const subInfoBox = css`
   text-align: center;
-  position: absolute;
+  margin-top: -15rem;
+  position: relative;
+  padding: 0 1.5rem;
   z-index: 10;
-  left: 50%;
-  bottom: 10%;
-  transform: translate(-50%, 0);
 `;
 
 export const subTitle = css`
   color: ${COLORS.GRAY90};
-  font-size: 1.25rem;
+  font-size: 1rem;
+  white-space: nowrap;
   font-weight: 700;
   margin-bottom: 1rem;
   display: block;
@@ -105,5 +105,6 @@ export const subDesc = css`
   color: ${COLORS.GRAY90};
   line-height: 1.8;
   font-weight: 400;
-  font-size: 1rem;
+  font-size: 0.875rem;
+  word-break: keep-all;
 `;

@@ -6,6 +6,8 @@ import { BsChevronRight } from "react-icons/bs";
 import { useJobArr } from "shared-api/job";
 import { useCompanyArr } from "shared-api/company";
 import { COLORS } from "shared-style/color";
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_INDEX } from "shared-constant/meta";
 import { scrollToTop } from "shared-ui/common/atom/scrollTop";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { searchFunnelEvent } from "shared-ga/search";
@@ -44,7 +46,7 @@ const UnifiedSearch: NextPage = () => {
   useEffect(() => {
     searchFunnelEvent();
   }, []);
-  
+
   const { data: jobDataArr, isLoading: isJobLoading } = useJobArr({
     q: JSON.stringify({ searchWord }),
     order: "recent",
@@ -63,6 +65,7 @@ const UnifiedSearch: NextPage = () => {
   const totalCount = (jobDataArr?.count || 0) + (companyDataArr?.count || 0);
   return (
     <main css={mainContainer}>
+      <MetaHead metaData={META_INDEX} />
       <Layout>
         <nav>
           <ul css={menuList}>

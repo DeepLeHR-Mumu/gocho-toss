@@ -3,7 +3,7 @@ import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
   background-color: ${COLORS.GRAY90};
-  padding-top: 6rem;
+  padding: 5rem 0;
   text-align: center;
   position: relative;
 `;
@@ -12,24 +12,28 @@ export const title = css`
   text-align: center;
   line-height: 1.6;
   word-break: keep-all;
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: ${COLORS.GRAY10};
   margin-bottom: 2.5rem;
   display: block;
 `;
 
+export const iconCSS = css`
+  display: block;
+  font-size: 3rem;
+`;
+
 export const desc = css`
   font-size: 1rem;
+  line-height: 1.6;
   font-weight: 400;
   color: ${COLORS.GRAY10};
+  margin-bottom: 3rem;
 `;
 
 export const imgBox = css`
   width: 100%;
   margin: auto;
-  position: relative;
-  max-width: 56.25rem;
-  height: 37.5rem;
-  bottom: -8rem;
+  margin-top: 1.5rem;
 `;

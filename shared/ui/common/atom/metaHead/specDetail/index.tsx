@@ -27,7 +27,7 @@ export const SpecDetailMetaHead: FunctionComponent<SpecDetailMetaHeadProps> = ({
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`${DOMAIN}${metaData.path}`} />
         <meta property="og:site_name" content={`고초대졸닷컴 | ${metaData.pageName}`} />
-        {/* <meta property="og:image" content={image} /> */}
+        <meta property="og:image" content={metaData.ogImage} />
         <meta property="og:article:author" content={`[${userNickname}]${metaData.title}`} />
       </Head>
       <InvisibleH1 title={`[${userNickname}]${metaData.title}`} />
