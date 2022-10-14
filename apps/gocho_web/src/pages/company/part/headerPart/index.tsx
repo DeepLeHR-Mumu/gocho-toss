@@ -11,6 +11,7 @@ import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/com
 import { useUserInfo } from "shared-api/auth";
 import { companyBookmarkEvent } from "shared-ga/company";
 
+
 import { useModal } from "@recoil/hook/modal";
 
 import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr } from "shared-api/bookmark";

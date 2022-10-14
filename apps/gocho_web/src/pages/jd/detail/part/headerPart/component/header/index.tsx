@@ -6,7 +6,6 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import { useQueryClient } from "@tanstack/react-query";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-
 import { dateConverter } from "shared-util/date";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";

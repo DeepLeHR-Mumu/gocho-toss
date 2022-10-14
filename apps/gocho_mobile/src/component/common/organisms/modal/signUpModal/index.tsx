@@ -1,4 +1,4 @@
-import { FunctionComponent, useState, useEffect } from "react";
+import { FunctionComponent, useState, useEffect, useRef } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
@@ -11,12 +11,14 @@ import { EMAIL_ERROR_MESSAGE, NICKNAME_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
+import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
+import { signupModalOpenEvent, signupModalCloseEvent, signupSuccessEvent } from "shared-ga/auth";
+
 import { useModal } from "@recoil/hook/modal";
 import { BottomPopup } from "@component/bottomPopup";
 import { closeButton } from "@component/common/organisms/modal/loginModal/style";
 import { useToast } from "@recoil/hook/toast";
 
-import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
 import { wrapper, desc, formCSS, formArr, logoContainer, bottomDesc, colorPoint, sideErrorMsg } from "./style";
 import { SignUpFormValues } from "./type";
 import { validateNickname } from "./util";
@@ -33,6 +35,7 @@ export const SignUpModal: FunctionComponent = () => {
   const { setCurrentToast } = useToast();
   const { refetch } = useUserInfo();
   const router = useRouter();
+  const signupAttempt = useRef(0);
 
   const { closeModal } = useModal();
   const { mutate } = useDoSignUp();
@@ -41,10 +44,12 @@ export const SignUpModal: FunctionComponent = () => {
     mutate(signUpObj, {
       onError: (error) => {
         const errorResponse = error.response?.data as ErrorResponse;
+        signupAttempt.current += 1;
         setErrorMsg(errorResponse.error.errorMessage);
       },
       onSuccess: (response) => {
         localStorage.setItem("token", `${response?.data.token}`);
+        signupSuccessEvent();
         queryClient.invalidateQueries();
         closeModal();
         refetch();
@@ -57,6 +62,10 @@ export const SignUpModal: FunctionComponent = () => {
     setErrorMsg(null);
   }, [closeModal]);
 
+  useEffect(() => {
+    signupModalOpenEvent();
+  }, []);
+
   return (
     <BottomPopup>
       <div css={wrapper}>
@@ -64,6 +73,7 @@ export const SignUpModal: FunctionComponent = () => {
           css={closeButton}
           type="button"
           onClick={() => {
+            signupModalCloseEvent(signupAttempt.current);
             closeModal();
           }}
         >

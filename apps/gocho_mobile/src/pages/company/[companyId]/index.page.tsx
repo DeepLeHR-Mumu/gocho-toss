@@ -4,6 +4,9 @@ import { useEffect } from "react";
 
 import { useAddCompanyViewCount } from "shared-api/viewCount";
 import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
+import { useCompanyDetail } from "shared-api/company";
+import { companyInfoFunnelEvent, companyJdFunnelEvent } from "shared-ga/company";
+
 import { HeaderPart } from "../part/headerPart";
 import { BasicInfoPart } from "../part/basicInfoPart";
 import { JobsPart } from "../part/jobsPart";
@@ -19,6 +22,8 @@ const CompanyDetail: NextPage = () => {
   const router = useRouter();
   const { companyId, info } = router.query;
   const { mutate: addViewCount } = useAddCompanyViewCount();
+  const { data: companyDetailData } = useCompanyDetail({ companyId: Number(companyId) });
+
   useEffect(() => {
     if (info) {
       return;
@@ -49,6 +54,11 @@ const CompanyDetail: NextPage = () => {
       addViewCount({ elemId: Number(companyId) });
     }
   }, [addViewCount, companyId]);
+
+  useEffect(() => {
+    if (companyDetailData && info === "detail") companyInfoFunnelEvent(companyDetailData.data.id);
+    if (companyDetailData && info === "jd") companyJdFunnelEvent(companyDetailData.data.id);
+  }, [companyDetailData, info]);
 
   return (
     <>

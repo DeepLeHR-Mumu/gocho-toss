@@ -5,10 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 
 import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
-
+import { globalSearchEvent } from "shared-ga/search";
 import { MAIN_URL } from "shared-constant/internalURL";
 import { useUserInfo } from "shared-api/auth";
+
 import { Layout } from "@component/layout";
+
 import { AuthorizedMenu } from "./component/authorizedMenu";
 import { UnauthorizedMenu } from "./component/unauthorizedMenu";
 import { SubMenuButton } from "./component/subMenuButton";
@@ -54,6 +56,7 @@ export const GNB: FunctionComponent = () => {
   };
 
   const handleSubmit = preventRefresh(() => {
+    globalSearchEvent(query);
     router.push({
       pathname: "/search",
       query: { q: query, page: 1 },

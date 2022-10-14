@@ -85,7 +85,6 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
   };
 
   const saveUserFilter = () => {
-    myFilterSaveEvent();
     if (!isSuccess) {
       setCurrentToast("로그인후 My 필터를 저장해주세요.");
       return;
@@ -107,6 +106,7 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
       {
         onSuccess: () => {
           refetchUserFilter();
+          myFilterSaveEvent();
           setCurrentToast("My필터가 저장되었습니다");
         },
       }
