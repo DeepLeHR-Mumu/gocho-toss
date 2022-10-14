@@ -1,3 +1,4 @@
+import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 import banner01 from "@public/images/global/MainCarousel/open_renewal_banner.jpg";
 import banner02 from "@public/images/global/MainCarousel/factory_banner.jpg";
 import banner03 from "@public/images/global/MainCarousel/openTalk_banner.jpg";
@@ -15,7 +16,13 @@ export const carouselArr = [
     backgroundImage: banner04,
     iconImage: checkIconImage,
     backgroundColor: "#88c3a8",
-    buttonObj: null,
+    buttonObj: {
+      target: "_self" as const,
+      text: "자세히보기",
+      color: "#fff",
+      backgroundColor: "#089e66",
+      url: `${JOBS_DETAIL_URL}/10021`,
+    },
   },
   {
     id: 1,
