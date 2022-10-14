@@ -70,7 +70,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         return navigator.userAgent.match(toMatchItem);
       })
     ) {
-      const currentLocation = window.location.href.slice(window.location.href.indexOf("."));
+      const currentLocation = window.location.href.slice(window.location.href.indexOf(".")+1);
       window.location.href = `https://${currentLocation}`;
     }
   }, []);
