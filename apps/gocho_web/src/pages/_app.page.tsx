@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import ReactGA from "react-ga4";
 
-import { TEST_KEY } from "shared-constant/gaKey";
+import { KEY } from "shared-constant/gaKey";
 
 import { globalStyles } from "src/style/globalStyle";
 import { Header } from "@component/global/header";
@@ -44,7 +44,7 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  ReactGA.initialize(TEST_KEY);
+  ReactGA.initialize(KEY);
 
   useEffect(() => {
     const isMobile = [
