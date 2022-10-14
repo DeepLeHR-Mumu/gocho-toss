@@ -46,19 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   ReactGA.initialize(TEST_KEY);
 
-  // useEffect(() => {
-  //   router.events.on("routeChangeComplete", () => {
-  //     ReactGA.event("page_view");
-  //   });
-
-  //   return () => {
-  //     router.events.off("routeChangeComplete", () => {
-  //       ReactGA.event("page_view");
-  //     });
-  //   };
-  // }, [router.events]);
-
-  const [queryClient] = useState(() => {
+const [queryClient] = useState(() => {
     return new QueryClient({
       defaultOptions: {
         queries: {

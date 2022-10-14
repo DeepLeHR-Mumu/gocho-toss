@@ -16,6 +16,7 @@ import {
   factoryButton,
   flexDesc,
   typeText,
+  placeContainer,
 } from "./style";
 
 export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPosition }) => {
@@ -78,10 +79,6 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
           </div>
         </div>
       </div>
-      {/* 일반일때는 일반주소 address arr, factory arr 없으면 노출력, 둘중 하나는 꼭 있음 ,  etc는 null */}
-
-      {/* 전국 해외 기타 addressarr, factoryarr 전부 null, etc만 출력하면된다 */}
-
       <div css={workPlaceContainer}>
         <div css={flexBetweenBox}>
           <p css={subTitle}>근무지</p>
@@ -95,7 +92,7 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
                 );
               })}
               {!freshPosition.place.addressArr && !freshPosition.place.factoryArr && (
-                <div css={container} key={`지역_${freshPosition.place.etc}`}>
+                <div css={placeContainer} key={`지역_${freshPosition.place.etc}`}>
                   <div css={typeText}>{freshPosition.place.type}</div>
                   <p css={restPoint}>{freshPosition.place.etc}</p>
                 </div>

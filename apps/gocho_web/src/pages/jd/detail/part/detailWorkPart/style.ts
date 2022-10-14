@@ -54,7 +54,7 @@ export const typeText = css`
   font-size: 0.875rem;
   color: ${COLORS.BLUE_NEON40};
   font-weight: 700;
-  padding: 0.3rem;
+  padding: 0.14rem 1rem;
   box-sizing: border-box;
   white-space: nowrap;
   margin-right: 0.5rem;
@@ -86,4 +86,8 @@ export const factoryButton = css`
     color: ${COLORS.GRAY40};
     padding: 0 0.5rem;
   }
+`;
+
+export const placeContainer = css`
+  display: flex;
 `;
