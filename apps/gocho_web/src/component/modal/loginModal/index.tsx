@@ -32,6 +32,7 @@ import {
   logoContainer,
   kakaoLogoBox,
   kakaoLoginBox,
+  findPasswordButton,
 } from "./style";
 import { ButtonProps, LoginFormValues } from "./type";
 
@@ -157,6 +158,15 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
             setCurrentModal("signUpModal");
           }}
         />
+        <button
+          type="button"
+          css={findPasswordButton}
+          onClick={() => {
+            setCurrentModal("findPasswordModal");
+          }}
+        >
+          비밀번호 찾기
+        </button>
       </form>
     </div>
   );

@@ -176,6 +176,14 @@ export const LoginModal: FunctionComponent = () => {
           <button type="button" css={findPwButton}>
             비밀번호 찾기
           </button>
+          <button
+            type="button"
+            onClick={() => {
+              setCurrentModal("findPasswordModal");
+            }}
+          >
+            비밀번호찾기
+          </button>
         </form>
       </div>
     </BottomPopup>
