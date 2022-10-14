@@ -82,8 +82,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       return;
     }
     if (isDesktop) {
-      const currentLocation = window.location.href.slice(window.location.href.indexOf(".") + 1);
-      window.location.href = `https://${currentLocation}`;
+      const { host, pathname, protocol } = window.location;
+      const desktopHost = host.slice(host.indexOf(".") + 1);
+      window.location.href = `${protocol}//${desktopHost}${pathname}`;
     }
   }, []);
 
