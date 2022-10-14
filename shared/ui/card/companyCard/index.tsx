@@ -9,14 +9,7 @@ import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
 import { CompanyCardProps, CompanyCardSkeleton } from "./type";
-import {
-  companyCardSkeleton,
-  cardWrapper,
-  bookmarkButtonWrapper,
-  isRecruitingCSS,
-  NameCSS,
-  companyLogoBox,
-} from "./style";
+import { companyCardSkeleton, cardWrapper, bookmarkButtonWrapper, NameCSS, companyLogoBox } from "./style";
 
 export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkeleton> = ({
   companyData,
@@ -67,7 +60,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
           >
             <BsFillBookmarkFill />
           </button>
-          <p css={isRecruitingCSS}>#채용중</p>
+          {/* <p css={isRecruitingCSS}>#채용중</p> */}
           <strong css={NameCSS}>{companyData.name}</strong>
           <div css={companyLogoBox}>
             <Image

@@ -10,18 +10,17 @@ export const totalCountContainer = css`
 `;
 export const totalText = css`
   font-size: 0.875rem;
+  font-weight: 500;
   color: ${COLORS.GRAY10};
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 `;
 
 export const listContainer = css`
-  margin: 1rem 0;
+  margin: 1rem 0 2rem;
   display: flex;
   gap: 1rem;
-  /* justify-content: flex-start; */
   flex-wrap: wrap;
   justify-content: space-between;
-  ::after {
-    content: "";
-    flex: auto;
-  }
 `;
