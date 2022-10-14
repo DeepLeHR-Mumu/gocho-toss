@@ -66,6 +66,7 @@ export const titleCSS = css`
   word-break: keep-all;
   font-size: 1.25rem;
   font-weight: 700;
+  display: block;
   padding: 1.5rem 0 1.875rem;
   color: ${COLORS.GRAY10};
 `;
