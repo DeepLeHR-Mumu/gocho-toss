@@ -1,4 +1,5 @@
 import checkIconImage from "shared-image/global/common/yellow_check.png";
+import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 
 export const carouselArr = [
   {
@@ -9,7 +10,13 @@ export const carouselArr = [
     lastDesc: "2022.09.26(월)-10.16(일)",
     iconImage: checkIconImage,
     backgroundColor: "#089e66",
-    buttonObj: null,
+    buttonObj: {
+      target: "_self" as const,
+      text: "자세히보기",
+      color: "#fff",
+      backgroundColor: "#88c3a8",
+      url: `${JOBS_DETAIL_URL}/10021`,
+    },
   },
   {
     id: 1,
