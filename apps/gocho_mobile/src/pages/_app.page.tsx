@@ -63,15 +63,27 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
 
   useEffect(() => {
-    const toMatch = [/Android/i, /webOS/i, /iPhone/i, /iPad/i, /iPod/i, /BlackBerry/i, /Windows Phone/i, /Mobile/i];
+    const isDesktop = ![
+      /Android/i,
+      /webOS/i,
+      /iPhone/i,
+      /iPad/i,
+      /iPod/i,
+      /BlackBerry/i,
+      /Windows Phone/i,
+      /Mobile/i,
+    ].some((toMatchItem) => {
+      return navigator.userAgent.match(toMatchItem);
+    });
+    const isVercel = window.location.href.includes("vercel");
+    const isLocal = window.location.href.includes("localhost");
 
-    if (
-      toMatch.some((toMatchItem) => {
-        return navigator.userAgent.match(toMatchItem);
-      })
-    ) {
-      const currentLocation = window.location.href.slice(window.location.href.indexOf("."));
-      window.location.href = `${currentLocation}`;
+    if (isVercel || isLocal) {
+      return;
+    }
+    if (isDesktop) {
+      const currentLocation = window.location.href.slice(window.location.href.indexOf(".") + 1);
+      window.location.href = `https://${currentLocation}`;
     }
   }, []);
 
