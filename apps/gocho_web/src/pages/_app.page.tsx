@@ -61,7 +61,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     });
     if (isMobile) {
       const { host, pathname, protocol } = window.location;
-      window.location.href = `${protocol}//m.${host}${pathname}`;
+      const mobileHost = host.slice(host.indexOf(".") + 1);
+      window.location.href = `${protocol}//m.${mobileHost}${pathname}`;
     }
   }, []);
 
