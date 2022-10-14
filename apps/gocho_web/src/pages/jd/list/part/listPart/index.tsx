@@ -9,11 +9,13 @@ import collegeTrue from "shared-image/global/common/cho_color.svg";
 
 import { useJobArr } from "shared-api/job";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
+import { JOBS_LIST_URL } from "shared-constant/internalURL";
+import { jdListFunnelEvent, jdSearchEvent } from "shared-ga/jd";
+
 import { Layout } from "@component/layout";
 import { Pagination } from "@pages/jd/component/pagination";
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
-import { JOBS_LIST_URL } from "shared-constant/internalURL";
-import { jdListFunnelEvent, jdSearchEvent } from "shared-ga/jd";
+import { useToast } from "@recoil/hook/toast";
 
 import { JobCardList } from "../../component/jobCardList";
 import { Filter } from "../../component/filter";
@@ -36,6 +38,8 @@ import {
 export const ListPart: FunctionComponent = () => {
   const router = useRouter();
   const limit = 10;
+  const { setCurrentToast } = useToast();
+
   const [total, setTotal] = useState<number>(0);
   const [page, setPage] = useState<number>(Number(router.query.page));
   const [activeOrder, setActiveOrder] = useState<OrderDef>((router.query.order as OrderDef) || "recent");
@@ -54,6 +58,12 @@ export const ListPart: FunctionComponent = () => {
   });
 
   const jdSearch: SubmitHandler<SearchValues> = (searchVal) => {
+    const regExp = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/g;
+
+    if (searchVal.searchWord?.match(regExp)) {
+      setCurrentToast("검색어에 특수문자는 포함될 수 없습니다.");
+      return;
+    }
     router.push({
       pathname: JOBS_LIST_URL,
       query: { page: 1, order: activeOrder },

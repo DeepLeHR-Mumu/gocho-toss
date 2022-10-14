@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { AiOutlineEdit } from "react-icons/ai";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -41,7 +41,6 @@ export const ChangePostingBox: FunctionComponent = () => {
   const queryClient = useQueryClient();
 
   const { id, title, description, type } = currentModal?.modalContentObj as changePostingObjDef;
-
   const { register, handleSubmit, setValue } = useForm<PostingFormValues>({
     defaultValues: {
       id,
@@ -59,6 +58,10 @@ export const ChangePostingBox: FunctionComponent = () => {
       },
     });
   };
+
+  useEffect(() => {
+    setActiveButtonIndex(type);
+  }, [type]);
 
   // LATER TODO 해결하기
   return (
@@ -92,10 +95,7 @@ export const ChangePostingBox: FunctionComponent = () => {
               <button
                 type="button"
                 key={`postingChangeModalMenu${button.text}`}
-                // TODO: index와 activeButtonIndex 변수로 주고 active 안에서 확인
-                // TODO: index -> string
                 css={setPostingTypeButton(index === activeButtonIndex)}
-                // TODO: 기명함수로 바꾸기
                 onClick={() => {
                   changeIndex(index);
                   setValue("type", index);

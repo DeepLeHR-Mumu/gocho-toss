@@ -1,14 +1,22 @@
 import { FunctionComponent } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
+import axios from "axios";
+import { useQueryClient } from "@tanstack/react-query";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import kakaoMono from "shared-image/global/sns/kakaoLogo.svg";
+import { tokenDecryptor } from "shared-util/tokenDecryptor";
+import { loginSuccessEvent } from "shared-ga/auth";
 
-import { CloseButton } from "@component/common/atom/closeButton";
 import { NICKNAME_ERROR_MESSAGE } from "shared-constant/errorMessage";
-import { useModal } from "@recoil/hook/modal";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
+import { useDoKakaoRegister } from "shared-api/auth/useDoKakaoRegister";
+
+import { useToast } from "@recoil/hook/toast";
+import { CloseButton } from "@component/common/atom/closeButton";
+import { useModal } from "@recoil/hook/modal";
 import { ModalComponent } from "@component/modal/modalBackground";
 
 import {
@@ -28,6 +36,10 @@ import { validateNickname } from "./util";
 import { SignUpFormValues } from "./type";
 
 export const KakaoBox: FunctionComponent = () => {
+  const { mutate: kakaoRegister } = useDoKakaoRegister();
+  const { setCurrentToast } = useToast();
+  const router = useRouter();
+  const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
@@ -35,8 +47,25 @@ export const KakaoBox: FunctionComponent = () => {
   } = useForm<SignUpFormValues>({ mode: "onChange" });
   const { closeModal } = useModal();
 
-  const TEST_FUNC: SubmitHandler<SignUpFormValues> = () => {
-    return undefined;
+  const TEST_FUNC: SubmitHandler<SignUpFormValues> = (submitObj) => {
+
+    kakaoRegister(submitObj, {
+      onError: (error) => {
+        if (axios.isAxiosError(error)) {
+          setCurrentToast("이미 사용중인 닉네임 입니다.");
+        }
+      },
+      onSuccess: (response) => {
+        queryClient.invalidateQueries();
+        const { id, nickname: accountNickname } = tokenDecryptor(response.data.token as string);
+        const kakaopath = sessionStorage.getItem("kakaopath");
+        loginSuccessEvent(id, "kakao", kakaopath);
+        localStorage.setItem("token", `${response.data.token}`);
+        router.push(kakaopath as string);
+        setCurrentToast("님 환영합니다.", accountNickname);
+        router.back();
+      },
+    });
   };
 
   return (
@@ -54,7 +83,7 @@ export const KakaoBox: FunctionComponent = () => {
         <ul css={formArr}>
           <li css={positionRelative}>
             <p css={labelCSS}>이메일</p>
-            <input css={inputCSS} value="test@naver.com" disabled readOnly />
+            <input css={inputCSS} value={sessionStorage.getItem("kakaoId") as string} disabled readOnly />
           </li>
           <li>
             <AccountInput

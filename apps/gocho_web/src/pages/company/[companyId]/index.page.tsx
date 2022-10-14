@@ -132,6 +132,7 @@ const CompaniesDetail: NextPage = () => {
     })
   );
 
+  // TODO PART와 컴포넌트와 div, button들의 향연 -> 추상화 레벨을 최대한 하나로 유지하자 
   return (
     <main css={mainContainer}>
       <Layout>

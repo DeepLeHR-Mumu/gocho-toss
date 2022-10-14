@@ -34,7 +34,7 @@ export const flexBox = css`
 
 export const flexBetweenBox = css`
   display: flex;
-  align-items: center;
+  justify-items: flex-start;
   margin-bottom: 1.5rem;
 
   :last-of-type {
