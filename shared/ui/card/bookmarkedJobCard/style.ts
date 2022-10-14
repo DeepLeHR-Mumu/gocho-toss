@@ -40,6 +40,7 @@ export const bookmarkButton = (isBookmarked: boolean) => {
     right: 0;
     z-index: 10;
     top: 0;
+    margin: 0;
     border-radius: 0 0 0 1rem;
     padding: 1rem;
     font-size: 0.875rem;

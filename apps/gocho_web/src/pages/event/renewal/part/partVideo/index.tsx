@@ -6,6 +6,7 @@ import { FiArrowRight, FiCheck } from "react-icons/fi";
 import mainBackground02 from "shared-image/event/renewal/main_background_02.jpg";
 import drawLine from "shared-image/event/renewal/draw_line.svg";
 import drawPoint from "shared-image/event/renewal/draw_point.svg";
+import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 
 import {
   backgroundBox,
@@ -58,7 +59,7 @@ export const PartVideo: FunctionComponent = () => {
               <br />
               <span css={descPoint}>실제로 근무하게 될 공장</span>에 대한 정보를 살펴보아요!
             </p>
-            <Link href="/" passHref>
+            <Link href={`${JOBS_DETAIL_URL}/5360`} passHref>
               <a css={linkCSS}>
                 <FiArrowRight /> 공장정보 보러가기
               </a>

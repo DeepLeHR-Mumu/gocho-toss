@@ -131,8 +131,7 @@ export const textareaCSS = css`
   width: 100%;
   padding: 0 0.5rem;
   min-height: 3.125rem;
-  font-family: "Noto Sans KR", Verdana, sans-serif;
-  font-size: 0.75rem;
+  font-size: 16px;
   color: ${COLORS.GRAY10};
   border: 0;
   resize: none;

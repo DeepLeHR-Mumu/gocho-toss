@@ -50,9 +50,7 @@ export const listCSS = css`
 
   > li {
     position: relative;
-    width: 30%;
-    height: 13.5rem;
-    background-color: ${COLORS.GRAY60};
+    width: 32%;
   }
 `;
 

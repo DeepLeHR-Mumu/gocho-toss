@@ -3,59 +3,73 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
-  padding-bottom: 6.25rem;
+  padding: 5rem 0;
+  background-color: ${COLORS.GRAY90};
 `;
 
 export const tosTitle = css`
-  font-size: 1.5rem;
-  font-weight: 500;
+  font-size: 1.25rem;
+  font-weight: 700;
   color: ${COLORS.GRAY10};
-  padding: 5rem 0 2rem 0;
+  margin-bottom: 3rem;
 `;
 
-export const descCSS = css`
-  font-size: 0.875rem;
-  line-height: 1.8;
-  color: #212121;
-  padding: 1rem 0;
-  font-weight: 400;
+export const container = css`
+  margin-bottom: 2.5rem;
 `;
 
 export const subTitle = css`
   font-size: 1rem;
   color: ${COLORS.GRAY30};
-  font-weight: 500;
-  padding: 2rem 0 0.5rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  word-break: keep-all;
 `;
 
-export const listCSS = css`
-  padding: 1rem 0;
-
-  > li {
-    font-size: 0.875rem;
-    color: ${COLORS.GRAY30};
-    line-height: 1.8;
-
-    margin-bottom: 1rem;
-
-    :last-of-type {
-      margin-bottom: 0;
-    }
-  }
+export const listTitle = css`
+  font-size: 0.75rem;
+  line-height: 1.8;
+  display: block;
+  color: ${COLORS.GRAY30};
+  font-weight: 400;
+  word-break: keep-all;
+  margin-bottom: 1rem;
 `;
 
-export const subListCSS = css`
-  padding: 1rem 0 1rem 2rem;
-  > li {
-    font-size: 0.875rem;
-    color: ${COLORS.GRAY20};
-    line-height: 1.8;
-  }
+export const listArr = css`
+  padding: 0 0 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const desc = css`
+  line-height: 1.8;
+  font-size: 0.75rem;
+  color: ${COLORS.GRAY30};
+  font-weight: 400;
 `;
 
 export const executionDescCSS = css`
-  color: ${COLORS.GRAY10};
-  font-size: 1rem;
-  font-weight: 500;
-  margin-top: 2rem;
+  line-height: 1.8;
+  font-size: 0.75rem;
+  color: ${COLORS.GRAY30};
+  font-weight: 400;
+
+  > span {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: ${COLORS.GRAY10};
+    margin-bottom: 1rem;
+  }
+`;
+
+export const CTOInfoCSS = css`
+  margin-bottom: 2rem;
+  > li {
+    line-height: 1.6;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: ${COLORS.GRAY10};
+  }
 `;

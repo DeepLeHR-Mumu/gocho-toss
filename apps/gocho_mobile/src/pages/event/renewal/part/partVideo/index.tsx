@@ -7,6 +7,7 @@ import mainBackground02 from "shared-image/event/renewal/main_background_02.jpg"
 import drawLine from "shared-image/event/renewal/draw_line.svg";
 import drawPoint from "shared-image/event/renewal/draw_point.svg";
 
+import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 import {
   backgroundBox,
   checkBox,
@@ -44,21 +45,16 @@ export const PartVideo: FunctionComponent = () => {
             </strong>
 
             <div css={lineBox}>
-              <Image src={drawLine} alt="" objectFit="contain" layout="fixed" />
+              <Image src={drawLine} alt="" objectFit="contain" layout="responsive" />
             </div>
-            <p css={desc}>
-              40만건에 해당하는 공장 정보를 손수 가공하여
-              <br />
-              구직 과정에 필요한 정보를 정리했습니다!
-            </p>
+            <p css={desc}>40만건에 해당하는 공장 정보를 손수 가공하여 구직 과정에 필요한 정보를 정리했습니다!</p>
           </li>
           <li>
             <p css={desc}>
               생산품부터 통근버스, 기숙사까지 기업정보가 아닌
-              <br />
               <span css={descPoint}>실제로 근무하게 될 공장</span>에 대한 정보를 살펴보아요!
             </p>
-            <Link href="/" passHref>
+            <Link href={`${JOBS_DETAIL_URL}/5360`} passHref>
               <a css={linkCSS}>
                 <FiArrowRight /> 공장정보 보러가기
               </a>
@@ -99,6 +95,7 @@ export const PartVideo: FunctionComponent = () => {
           </li>
         </ul>
       </div>
+
       <div css={backgroundBox}>
         <Image src={mainBackground02} alt="" layout="fill" objectFit="cover" />
       </div>

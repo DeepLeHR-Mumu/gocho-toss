@@ -1,17 +1,7 @@
-interface listItemDef {
-  desc?: string;
-  subItemArr?: string[];
-}
-
-interface centerListDef {
-  desc: string;
-}
-
-export interface tosItemDef {
+export interface tosArrDef {
   title: string;
-  desc?: string;
-  itemArr?: listItemDef[];
-  centerDesc?: string;
-  centerList?: centerListDef[];
-  lastDesc?: string;
+  subItem: {
+    title: string;
+    infoArr: string[];
+  }[];
 }
