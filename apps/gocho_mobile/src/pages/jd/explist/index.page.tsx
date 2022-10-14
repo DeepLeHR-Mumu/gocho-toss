@@ -11,6 +11,7 @@ import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { META_JD_EXPLIST } from "shared-constant/meta";
 import { JOBS_EXPLIST_URL } from "shared-constant/internalURL";
+import { expiredJdListFunnelEvent, expiredJdListSortingEvent } from "shared-ga/jd";
 import { ExpJobCardList } from "./component/expJobCardList";
 import { setJobOrderButtonArr } from "./constant";
 import {
@@ -77,6 +78,10 @@ const JobsExpList: NextPage = () => {
       setTotal(companyDataArr.count);
     }
   }, [companyDataArr]);
+  
+  useEffect(() => {
+    expiredJdListFunnelEvent();
+  }, []);
 
   const totalPage = Math.ceil(total / limit);
 
@@ -104,6 +109,7 @@ const JobsExpList: NextPage = () => {
                   key={`jobCardArr${button.text}`}
                   css={setJobOrderButton(isActive)}
                   onClick={() => {
+                    expiredJdListSortingEvent(button.text);
                     router.push({
                       pathname: JOBS_EXPLIST_URL,
                       query: { ...router.query, page: 1, order: button.order },

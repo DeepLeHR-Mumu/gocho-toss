@@ -16,6 +16,7 @@ import highFalse from "shared-image/global/common/go_mono.svg";
 import collegeTrue from "shared-image/global/common/cho_color.svg";
 import collegeFalse from "shared-image/global/common/cho_mono.svg";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
+import { jdBookmarkEvent } from "shared-ga/jd";
 
 import { dDayBooleanReturn } from "./util";
 import { JobCardProps, JobCardSkeleton } from "./type";
@@ -93,6 +94,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         {
           onSuccess: () => {
             queryClient.invalidateQueries([{ data: "jobArr" }]);
+            jdBookmarkEvent(jobData.id);
           },
         }
       );

@@ -10,6 +10,7 @@ import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
 import { useAddJobViewCount } from "shared-api/viewCount";
+import { jdDetailFunnelEvent } from "shared-ga/jd";
 
 import { DetailComment } from "@component/common/organisms/detailComment";
 import { TopMenu } from "../component/topMenu";
@@ -66,6 +67,10 @@ const JobsDetail: NextPage = () => {
       setFreshPosition(filterPosition);
     }
   }, [currentPositionId, jobDetailData]);
+
+  useEffect(() => {
+    if (jobDetailData) jdDetailFunnelEvent(jobDetailData.id);
+  }, [jobDetailData]);
 
   if (!jobDetailData || isLoading) {
     return (
