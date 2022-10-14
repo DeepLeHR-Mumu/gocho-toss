@@ -54,7 +54,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       })
     ) {
       const currentLocation = window.location.href.slice(window.location.href.indexOf("."));
-      window.location.href = `m.${currentLocation}`;
+      window.location.href = `https://m.${currentLocation}`;
     }
   }, []);
   const [queryClient] = useState(() => {
