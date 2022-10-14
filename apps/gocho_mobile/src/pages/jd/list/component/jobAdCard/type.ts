@@ -1,5 +1,6 @@
 export interface SlideCardProps {
   jobData: {
+    id: number;
     endTime: number;
     companyLogo: string;
     companyName: string;

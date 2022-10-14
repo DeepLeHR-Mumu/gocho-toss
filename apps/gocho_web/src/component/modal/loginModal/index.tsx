@@ -54,7 +54,6 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   const { mutate } = useDoLogin();
   const { closeModal, setCurrentModal } = useModal();
   const [errorMsg, setErrorMsg] = useState<null | string>(null);
-  // const [errorCount, setErrorCount] = useState<number>(0);
   const ref = useRef(0);
   const router = useRouter();
 

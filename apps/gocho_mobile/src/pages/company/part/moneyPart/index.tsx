@@ -62,7 +62,7 @@ export const MoneyPart: FunctionComponent = () => {
                 </div>
                 <div css={moneyInfoContainer}>
                   <p>
-                    <span>{companyDetailData.data.payStart}</span>
+                    <span>{companyDetailData.data.payStart.toLocaleString("Ko-KR")}</span>
                     만원
                   </p>
                 </div>
@@ -80,7 +80,7 @@ export const MoneyPart: FunctionComponent = () => {
                 </div>
                 <div css={moneyInfoContainer}>
                   <p>
-                    <span>{companyDetailData.data.payAvg}</span>
+                    <span>{companyDetailData.data.payAvg.toLocaleString("Ko-KR")}</span>
                     만원
                   </p>
                 </div>

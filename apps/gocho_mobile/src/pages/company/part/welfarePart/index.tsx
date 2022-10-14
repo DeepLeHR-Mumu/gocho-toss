@@ -1,5 +1,7 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
+import Slider from "react-slick";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 import { useCompanyDetail } from "shared-api/company";
 
@@ -7,10 +9,12 @@ import { NoRegisteredInfoBox } from "../../component/noRegisterdInfoBox";
 import { UpdateInfoLink } from "../../component/updateInfoLink";
 import { ActivatedMenuType } from "./type";
 import { IconSelector } from "./component/iconSelector";
-import { container, headerBox, infoBox, informationWrapper, menu, menuList } from "./style";
+import { container, headerBox, iconBox, infoBox, informationWrapper, menu, sliderBox } from "./style";
+import { setCarouselSetting } from "./util";
 
 export const WelfarePart: FunctionComponent = () => {
   const router = useRouter();
+  const sliderRef = useRef<Slider>(null);
   const { companyId } = router.query;
   const [activatedTab, setActivatedTab] = useState<ActivatedMenuType>("money");
 
@@ -70,10 +74,15 @@ export const WelfarePart: FunctionComponent = () => {
   return (
     <section css={container}>
       <div css={headerBox}>
-        <ul css={menuList}>
-          {companyDetailData.data.welfare.money && (
-            <li css={menu(activatedTab === "money")}>
+        <button css={iconBox} type="button" onClick={sliderRef.current?.slickPrev} aria-label="이전 복지 정보 선택">
+          <FiChevronLeft />
+        </button>
+
+        <div css={sliderBox}>
+          <Slider {...setCarouselSetting()} ref={sliderRef}>
+            {companyDetailData.data.welfare.money && (
               <button
+                css={menu(activatedTab === "money")}
                 type="button"
                 onClick={() => {
                   setActivatedTab("money");
@@ -81,11 +90,10 @@ export const WelfarePart: FunctionComponent = () => {
               >
                 급여
               </button>
-            </li>
-          )}
-          {companyDetailData.data.welfare.health && (
-            <li css={menu(activatedTab === "health")}>
+            )}
+            {companyDetailData.data.welfare.health && (
               <button
+                css={menu(activatedTab === "health")}
                 type="button"
                 onClick={() => {
                   setActivatedTab("health");
@@ -93,11 +101,10 @@ export const WelfarePart: FunctionComponent = () => {
               >
                 의료
               </button>
-            </li>
-          )}
-          {companyDetailData.data.welfare.life && (
-            <li css={menu(activatedTab === "life")}>
+            )}
+            {companyDetailData.data.welfare.life && (
               <button
+                css={menu(activatedTab === "life")}
                 type="button"
                 onClick={() => {
                   setActivatedTab("life");
@@ -105,11 +112,10 @@ export const WelfarePart: FunctionComponent = () => {
               >
                 생활
               </button>
-            </li>
-          )}
-          {companyDetailData.data.welfare.holiday && (
-            <li css={menu(activatedTab === "holiday")}>
+            )}
+            {companyDetailData.data.welfare.holiday && (
               <button
+                css={menu(activatedTab === "holiday")}
                 type="button"
                 onClick={() => {
                   setActivatedTab("holiday");
@@ -117,11 +123,10 @@ export const WelfarePart: FunctionComponent = () => {
               >
                 명절/경조사
               </button>
-            </li>
-          )}
-          {companyDetailData.data.welfare.facility && (
-            <li css={menu(activatedTab === "facility")}>
+            )}
+            {companyDetailData.data.welfare.facility && (
               <button
+                css={menu(activatedTab === "facility")}
                 type="button"
                 onClick={() => {
                   setActivatedTab("facility");
@@ -129,11 +134,10 @@ export const WelfarePart: FunctionComponent = () => {
               >
                 시설
               </button>
-            </li>
-          )}
-          {companyDetailData.data.welfare.vacation && (
-            <li css={menu(activatedTab === "vacation")}>
+            )}
+            {companyDetailData.data.welfare.vacation && (
               <button
+                css={menu(activatedTab === "vacation")}
                 type="button"
                 onClick={() => {
                   setActivatedTab("vacation");
@@ -141,11 +145,10 @@ export const WelfarePart: FunctionComponent = () => {
               >
                 휴일/휴가
               </button>
-            </li>
-          )}
-          {companyDetailData.data.welfare.growth && (
-            <li css={menu(activatedTab === "growth")}>
+            )}
+            {companyDetailData.data.welfare.growth && (
               <button
+                css={menu(activatedTab === "growth")}
                 type="button"
                 onClick={() => {
                   setActivatedTab("growth");
@@ -153,11 +156,10 @@ export const WelfarePart: FunctionComponent = () => {
               >
                 자기계발
               </button>
-            </li>
-          )}
-          {companyDetailData.data.welfare.etc && (
-            <li css={menu(activatedTab === "etc")}>
+            )}
+            {companyDetailData.data.welfare.etc && (
               <button
+                css={menu(activatedTab === "etc")}
                 type="button"
                 onClick={() => {
                   setActivatedTab("etc");
@@ -165,17 +167,22 @@ export const WelfarePart: FunctionComponent = () => {
               >
                 기타
               </button>
-            </li>
-          )}
-        </ul>
+            )}
+          </Slider>
+        </div>
+
+        <button css={iconBox} type="button" onClick={sliderRef.current?.slickNext} aria-label="다음 복지 정보 선택">
+          <FiChevronRight />
+        </button>
       </div>
+
       <div css={informationWrapper}>
         <IconSelector activatedMenu={activatedTab} />
-        <div css={infoBox}>
+        <ul css={infoBox}>
           {companyDetailData.data.welfare[activatedTab]?.map((welfare) => {
-            return <p key={`${activatedTab}+${welfare}`}>&#183; {welfare}</p>;
+            return <li key={`${activatedTab}+${welfare}`}>{welfare}</li>;
           })}
-        </div>
+        </ul>
       </div>
       <UpdateInfoLink infoName="복지" />
     </section>
