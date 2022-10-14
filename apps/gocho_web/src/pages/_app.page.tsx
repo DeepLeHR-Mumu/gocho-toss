@@ -45,18 +45,32 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   ReactGA.initialize(TEST_KEY);
-  useEffect(() => {
-    const toMatch = [/Android/i, /webOS/i, /iPhone/i, /iPad/i, /iPod/i, /BlackBerry/i, /Windows Phone/i, /Mobile/i];
 
-    if (
-      toMatch.some((toMatchItem) => {
-        return navigator.userAgent.match(toMatchItem);
-      })
-    ) {
-      const currentLocation = window.location.href.slice(window.location.href.indexOf("."));
-      window.location.href = `https://m.${currentLocation}`;
+  useEffect(() => {
+    const isMobile = [
+      /Android/i,
+      /webOS/i,
+      /iPhone/i,
+      /iPad/i,
+      /iPod/i,
+      /BlackBerry/i,
+      /Windows Phone/i,
+      /Mobile/i,
+    ].some((toMatchItem) => {
+      return navigator.userAgent.match(toMatchItem);
+    });
+    const isVercel = window.location.href.includes("vercel");
+    const isLocal = window.location.href.includes("localhost");
+    
+    if (isVercel || isLocal) {
+      return;
+    }
+    if (isMobile) {
+      const currentLocation = window.location.href.slice(window.location.href.indexOf(".") + 1);
+      window.location.href = `https://${currentLocation}`;
     }
   }, []);
+
   const [queryClient] = useState(() => {
     return new QueryClient({
       defaultOptions: {
