@@ -116,12 +116,28 @@ export const Header: FunctionComponent = () => {
                   >
                     {menu.subMenuArr ? (
                       <>
-                        <Link href={menu.menuLink} passHref>
-                          <a>
-                            {menu.menuTitle}
-                            <BsChevronDown css={downIconCSS} />
-                          </a>
-                        </Link>
+                        {menu.pageQuery ? (
+                          <Link
+                            href={{
+                              pathname: menu.menuLink,
+                              query: { page: 1, order: "recent" },
+                            }}
+                            passHref
+                          >
+                            <a>
+                              {menu.menuTitle}
+                              <BsChevronDown css={downIconCSS} />
+                            </a>
+                          </Link>
+                        ) : (
+                          <Link href={menu.menuLink} passHref>
+                            <a>
+                              {menu.menuTitle}
+                              <BsChevronDown css={downIconCSS} />
+                            </a>
+                          </Link>
+                        )}
+
                         <ul css={subMenuToggleWrapper(activeIndex === index)}>
                           {menu.subMenuArr.map((subMenu) => {
                             return (
