@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const container = css`
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
 `;
 
 export const headerBox = css`

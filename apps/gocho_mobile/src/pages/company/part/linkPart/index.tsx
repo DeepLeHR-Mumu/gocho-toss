@@ -32,7 +32,7 @@ export const LinkPart: FunctionComponent = () => {
               </a>
             )}
             {companyDetailData.data.youtubeUrl && (
-              <a>
+              <a target="_blank" href={companyDetailData.data.youtubeUrl} rel="noreferrer">
                 <div css={youtubeIconBox}>
                   <FiYoutube />
                 </div>

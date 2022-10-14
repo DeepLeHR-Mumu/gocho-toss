@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
+import { ChangeEvent, FormEvent, FunctionComponent, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { FiSearch, FiMenu, FiArrowLeft, FiX } from "react-icons/fi";
 import Link from "next/link";
@@ -41,6 +41,10 @@ export const GNB: FunctionComponent = () => {
   const handleParam = (typeKeyword: ChangeEvent<HTMLInputElement>) => {
     return setQuery(typeKeyword.target.value);
   };
+
+  useEffect(() => {
+    setOpenedElement(null);
+  }, [router]);
 
   const preventRefresh = (goNewPage: (event: FormEvent) => void) => {
     return (submitForm: FormEvent) => {
@@ -97,6 +101,9 @@ export const GNB: FunctionComponent = () => {
             css={backIcon}
             type="button"
             onClick={() => {
+              if (router.pathname !== MAIN_URL) {
+                router.back();
+              }
               setOpenedElement(null);
             }}
             aria-label="이전 메뉴 돌아가기"
@@ -117,7 +124,14 @@ export const GNB: FunctionComponent = () => {
             {menuArr.map((menu) => {
               return (
                 <li key={`navMenu_${menu.menuTitle}`}>
-                  <p css={menuCategory}>{menu.menuTitle}</p>
+                  <Link
+                    href={{
+                      pathname: menu.menuLink,
+                      query: { order: "recent", page: 1 },
+                    }}
+                  >
+                    <a css={menuCategory}>{menu.menuTitle}</a>
+                  </Link>
                   <ul css={subMenuArr}>
                     {menu.subMenuArr.map((subMenu) => {
                       return (

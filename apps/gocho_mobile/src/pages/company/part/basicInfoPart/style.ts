@@ -3,7 +3,7 @@ import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
   background-color: ${COLORS.GRAY100};
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
 `;
 
 export const sectionContainer = css`
