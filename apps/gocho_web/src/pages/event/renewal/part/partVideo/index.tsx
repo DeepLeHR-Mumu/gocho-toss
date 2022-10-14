@@ -31,7 +31,7 @@ export const PartVideo: FunctionComponent = () => {
       <div css={positionBox}>
         <div css={videoBox}>
           <video loop muted autoPlay>
-            <source src="/video/sample_web.mp4" type="video/mp4" />
+            <source src="https://cdn.gocho-back.com/temp/Event_video.mp4" type="video/mp4" />
           </video>
         </div>
 
