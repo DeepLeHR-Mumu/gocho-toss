@@ -75,6 +75,11 @@ export const paginationButton: PaginationButtonDef = (isActivePage) => {
     font-size: 0.75rem;
     font-weight: 500;
     color: ${isActivePage ? COLORS.GRAY10 : COLORS.GRAY60};
-    padding: 0.75rem;
+    width: 2rem;
+    height: 2rem;
+    margin: 0 0.125rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   `;
 };

@@ -7,7 +7,6 @@ import { useModal } from "@recoil/hook/modal";
 import { useUserInfo } from "shared-api/auth";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { META_MYPAGE } from "shared-constant/meta";
-import { myPageFunnelEvent } from "shared-ga/myPage";
 import { BookmarkCompanyPart } from "./part/bookmarkCompanyPart";
 import { BookmarkJobPart } from "./part/bookmarkJobPart";
 
@@ -31,10 +30,6 @@ const MyPage: NextPage = () => {
       closeModal();
     };
   }, [error, closeModal, setCurrentModal, currentModal?.activatedModal]);
-
-  useEffect(() => {
-    myPageFunnelEvent();
-  }, []);
 
   return (
     <main css={mainContainer}>

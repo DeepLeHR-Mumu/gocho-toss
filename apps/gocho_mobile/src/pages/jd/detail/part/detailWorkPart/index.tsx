@@ -1,13 +1,10 @@
 import { FunctionComponent } from "react";
-import Image from "next/image";
 
-import factoryIcon from "shared-image/global/common/factory_icon.svg";
-
+import { FactoryCard } from "@component/common/organisms/factoryCard";
 import { NoDataDesc } from "../common/component/noDataDesc";
-
 import { DetailWorkPartProps } from "./type";
 import { container, containerTitle, flexBox, subTitle, restPoint, desc } from "../common/style";
-import { colorPoint, mainProductDesc, productContainer, factoryButton, flexDesc } from "./style";
+import { colorPoint, mainProductDesc, productContainer, flexDesc, factoryArrCSS } from "./style";
 
 export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPosition }) => {
   return (
@@ -61,28 +58,28 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
       <div css={flexBox}>
         <p css={subTitle}>근무지</p>
         <p css={flexDesc}>
-          {freshPosition.placeArr.map((place) => {
+          {freshPosition.place.addressArr?.map((place) => {
             return (
               <span css={restPoint} key={`지역_${place}`}>
                 {place}
               </span>
             );
           })}
+          {!freshPosition.place.addressArr && !freshPosition.place.factoryArr && (
+            <div key={`지역_${freshPosition.place.etc}`}>
+              <p css={restPoint}>{freshPosition.place.etc}</p>
+            </div>
+          )}
         </p>
-        {freshPosition.factoryArr &&
-          freshPosition.factoryArr.map((factory) => {
-            return (
-              <p css={flexDesc} key={`공장_${factory.id}`}>
-                <button css={factoryButton} type="button">
-                  <Image src={factoryIcon} alt="" objectFit="contain" />
-                  {/* LATER : 나중에 공장이름 나오면 바꿔주기 */}
-                  factoryName
-                </button>
-                {factory.address}
-              </p>
-            );
-          })}
       </div>
+
+      {freshPosition.place.factoryArr && (
+        <div css={factoryArrCSS}>
+          {freshPosition.place.factoryArr.map((factory) => {
+            return <FactoryCard key={factory.factoryName} factoryInfo={factory} />;
+          })}
+        </div>
+      )}
 
       <div css={flexBox}>
         <p css={subTitle}>교대형태</p>

@@ -1,5 +1,6 @@
 import { css, SerializedStyles } from "@emotion/react";
 import { COLORS } from "shared-style/color";
+import { MOBILE } from "shared-style/mediaQuery";
 
 interface setDdayStyleCSS {
   (endTime: number): SerializedStyles;
@@ -61,5 +62,9 @@ export const setDdayStyleCSS: setDdayStyleCSS = (endTime) => {
     width: 3.5rem;
     height: 1.625rem;
     ${dateColor(endTime)}
+
+    ${MOBILE} {
+      font-size: 10px;
+    }
   `;
 };

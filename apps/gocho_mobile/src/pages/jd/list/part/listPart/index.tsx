@@ -9,7 +9,6 @@ import { useJobArr } from "shared-api/job";
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
 import { BottomPopup } from "@component/bottomPopup";
 import { JOBS_LIST_URL } from "shared-constant/internalURL";
-import { jdListFunnelEvent, jdSearchEvent } from "shared-ga/jd";
 import { JobCardList } from "../../component/jobCardList";
 
 import { Filter } from "../../component/filter";
@@ -24,6 +23,7 @@ import {
   buttonArrContainer,
   setJobOrderButton,
   title,
+  noArrDesc,
 } from "./style";
 import { OrderDef, SearchQueryDef, SearchValues } from "./type";
 
@@ -32,7 +32,7 @@ export const ListPart: FunctionComponent = () => {
   const limit = 6;
   const [total, setTotal] = useState<number>(0);
   const [page, setPage] = useState<number>(Number(router.query.page));
-  const [activeOrder, setActiveOrder] = useState<OrderDef>(router.query.order as OrderDef);
+  const [activeOrder, setActiveOrder] = useState<OrderDef>((router.query.order as OrderDef) || "recent");
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
   const [showFilter, setShowFilter] = useState<boolean>(false);
 
@@ -53,7 +53,6 @@ export const ListPart: FunctionComponent = () => {
       pathname: JOBS_LIST_URL,
       query: { page: 1, order: activeOrder },
     });
-    jdSearchEvent(searchVal.searchWord);
     setSearchQuery({
       contractType: searchVal.contractType,
       industry: searchVal.industry,
@@ -72,7 +71,7 @@ export const ListPart: FunctionComponent = () => {
     order: activeOrder,
     filter: "valid",
     limit,
-    offset: (page - 1) * 10,
+    offset: (page - 1) * limit,
   });
 
   useEffect(() => {
@@ -88,10 +87,6 @@ export const ListPart: FunctionComponent = () => {
       setTotal(jobDataArr.count);
     }
   }, [jobDataArr]);
-
-  useEffect(() => {
-    jdListFunnelEvent();
-  }, []);
 
   const totalPage = Math.ceil(total / limit);
 
@@ -153,13 +148,19 @@ export const ListPart: FunctionComponent = () => {
               );
             })}
           </div>
-          <JobCardList jobDataArr={jobDataArr?.jobDataArr} isLoading={isLoading} />
-          <BottomPagination
-            totalPage={totalPage}
-            linkObj={{
-              pathname: JOBS_LIST_URL,
-            }}
-          />
+          {jobDataArr?.jobDataArr.length === 0 ? (
+            <p css={noArrDesc}>검색된 공고가 존재하지 않습니다.</p>
+          ) : (
+            <>
+              <JobCardList jobDataArr={jobDataArr?.jobDataArr} isLoading={isLoading} />
+              <BottomPagination
+                totalPage={totalPage}
+                linkObj={{
+                  pathname: JOBS_LIST_URL,
+                }}
+              />
+            </>
+          )}
         </Layout>
       </form>
     </section>

@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { dateConverter } from "shared-util/date";
+import { dateConverter, dDayCalculator } from "shared-util/date";
 
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { NoDataDesc } from "../common/component/noDataDesc";
@@ -8,7 +8,6 @@ import { NoDataDesc } from "../common/component/noDataDesc";
 import { ReceptInfoPartProps } from "./type";
 import {
   sectionWrapper,
-  applyButton,
   beforeAfterDateBox,
   cutBox,
   desc,
@@ -19,6 +18,7 @@ import {
   infoTitle,
   processBox,
   restPoint,
+  flexAlignBox,
 } from "./style";
 
 export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDetailData }) => {
@@ -38,30 +38,45 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
     minute: endMinute,
   } = dateConverter(jobDetailData.endTime);
 
+  const isJobEnd = dDayCalculator(jobDetailData.endTime) === "만료";
   return (
     <div>
       <section css={sectionWrapper}>
-        <div css={infoBox}>
+        <div css={infoBox(isJobEnd)}>
           <h4 css={infoTitle}>접수안내</h4>
           <ul css={beforeAfterDateBox}>
             <li>{`${startYear}. ${startMonth}. ${startDate}  ${startHour}:${startMinute}`}</li>
             <li>~</li>
             <li>{`${endYear}. ${endMonth}. ${endDate}  ${endHour}:${endMinute}`}</li>
           </ul>
-          <DdayBox endTime={jobDetailData.endTime} />
-          {jobDetailData.cut && <div css={cutBox}>채용시마감</div>}
-          <a css={applyButton} target="_blank" href={jobDetailData.applyUrl} rel="noopener noreferrer">
-            지원하러가기
-          </a>
+          <div css={flexAlignBox}>
+            <DdayBox endTime={jobDetailData.endTime} />
+            {jobDetailData.cut && <div css={cutBox}>채용시마감</div>}
+          </div>
         </div>
 
         <div css={infoDetailBox}>
           <p css={detailTitle}>채용절차</p>
-          <ul css={processBox}>
-            {jobDetailData.processArr.map((process) => {
-              return <li key={`채용절차_${process}`}>{process}</li>;
-            })}
-          </ul>
+          {jobDetailData.processArr.length > 4 ? (
+            <>
+              <ul css={processBox}>
+                {jobDetailData.processArr.map((process, index) => {
+                  return index < 3 && <li key={`채용절차_${process}`}>{process}</li>;
+                })}
+              </ul>
+              <ul css={processBox}>
+                {jobDetailData.processArr.map((process, index) => {
+                  return index > 2 && <li key={`채용절차_${process}`}>{process}</li>;
+                })}
+              </ul>
+            </>
+          ) : (
+            <ul css={processBox}>
+              {jobDetailData.processArr.map((process) => {
+                return <li key={`채용절차_${process}`}>{process}</li>;
+              })}
+            </ul>
+          )}
 
           <div css={flexBox}>
             <p css={detailTitle}>지원방법</p>

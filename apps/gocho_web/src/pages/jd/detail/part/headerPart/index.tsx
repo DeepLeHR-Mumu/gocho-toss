@@ -110,7 +110,6 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
             );
           })}
 
-  
           {jobDetailData.positionArr.length > 5 &&
             (defaultCardCount === jobDetailData.positionArr.length ? (
               <button css={moreButton} type="button" onClick={handleLessCardCount} aria-label="공고리스트 줄이기">

@@ -28,6 +28,7 @@ export const popupBackground = css`
 export const bottomPopup = css`
   width: 100%;
   position: absolute;
+  overflow: hidden;
   bottom: 0;
   left: 0;
   background-color: ${COLORS.GRAY100};

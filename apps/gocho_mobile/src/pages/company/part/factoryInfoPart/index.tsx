@@ -6,7 +6,7 @@ import { useCompanyDetail } from "shared-api/company";
 import { Layout } from "@component/layout";
 import { UpdateInfoLink } from "@pages/company/component/updateInfoLink";
 
-import { FactoryCard } from "./component/factoryCard";
+import { FactoryCard } from "@component/common/organisms/factoryCard";
 import { cardContainer, container } from "./style";
 
 export const FactoryPart: FunctionComponent = () => {
@@ -26,7 +26,7 @@ export const FactoryPart: FunctionComponent = () => {
         <div css={cardContainer}>
           <div>
             {companyDetailData.data.factoryArr.map((factory) => {
-              return <FactoryCard key={factory.name} factoryInfo={factory} />;
+              return <FactoryCard key={factory.factoryName} factoryInfo={factory} />;
             })}
           </div>
         </div>
