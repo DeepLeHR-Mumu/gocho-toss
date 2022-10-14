@@ -1,6 +1,8 @@
 import { NextPage } from "next";
 
 import { Layout } from "@component/layout";
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_TOS } from "shared-constant/meta";
 
 import { executionDesc, tosArr } from "shared-constant/TOS";
 import { tosTitle, subTitle, container, executionDescCSS, wrapper, listTitle, listArr, desc } from "./style";
@@ -11,8 +13,9 @@ const Tos: NextPage = () => {
   return (
     <main css={wrapper}>
       <section>
+        <MetaHead metaData={META_TOS} />
         <Layout>
-          <h1 css={tosTitle}>개인회원 이용약관</h1>
+          <strong css={tosTitle}>개인회원 이용약관</strong>
 
           {tosArr.map((item: tosArrDef) => {
             return (

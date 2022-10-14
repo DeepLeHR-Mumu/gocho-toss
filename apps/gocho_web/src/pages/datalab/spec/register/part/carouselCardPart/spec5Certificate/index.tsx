@@ -140,7 +140,6 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
 
                     return (
                       <li key={`certificate_${keyword}`}>
-                        <CheckBox isChecked={hasFieldsInIncludes(fields, keyword)} />
                         <button
                           css={appendKeywordButton}
                           type="button"
@@ -149,6 +148,7 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
                             return isOverCerti ? remove(getOverCertiIndex) : append({ value: keyword });
                           }}
                         >
+                          <CheckBox isChecked={hasFieldsInIncludes(fields, keyword)} />
                           {keyword}
                         </button>
                       </li>

@@ -4,7 +4,6 @@ import { COLORS } from "shared-style/color";
 export const mainContainer = css`
   padding: 5rem 0;
   background-color: ${COLORS.GRAY90};
-  margin-top: 4.5rem;
 `;
 
 export const menuList = css`

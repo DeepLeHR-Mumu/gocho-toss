@@ -5,6 +5,7 @@ export interface MetaHeadProps {
     desc: string;
     keyword: string;
     ogTitle: string;
+    ogImage?: string;
     ogDesc: string;
     path: string;
   };

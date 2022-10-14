@@ -85,8 +85,6 @@ export const PartRenewal: FunctionComponent = () => {
             <NormalButton buttonClick={openLoginModal} text="지금 로그인 하기" variant="filled" wide />
           </div>
         )}
-
-        <p css={subDesc}>스펙평가도 받고 원하는 기업의 정보도 받아보세요</p>
       </Layout>
     </section>
   );

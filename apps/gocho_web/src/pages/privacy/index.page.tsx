@@ -1,5 +1,7 @@
 import { NextPage } from "next";
 
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_PRIVACY } from "shared-constant/meta";
 import { Layout } from "@component/layout";
 
 import { executionDesc, privacyArr, CTOINFO } from "shared-constant/privacy";
@@ -20,9 +22,10 @@ import { PrivacyDef } from "./type";
 const Privacy: NextPage = () => {
   return (
     <main css={wrapper}>
+      <MetaHead metaData={META_PRIVACY} />
       <section>
         <Layout>
-          <h1 css={tosTitle}>개인정보 처리방침</h1>
+          <strong css={tosTitle}>개인정보 처리방침</strong>
 
           {privacyArr.map((item: PrivacyDef) => {
             return (

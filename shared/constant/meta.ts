@@ -1,3 +1,4 @@
+import { CDN_URL } from "./externalURL";
 import {
   MAIN_URL,
   JOBS_LIST_URL,
@@ -15,6 +16,11 @@ import {
   TOS_URL,
   PRIVACY_URL,
 } from "./internalURL";
+
+const defaultOgImage = `${CDN_URL}og_image/default.png`;
+const companyOgImage = `${CDN_URL}og_image/company.png`;
+const jdOgImage = `${CDN_URL}og_image/jd.png`;
+const specOgImage = `${CDN_URL}og_image/spec.png`;
 
 const defaultKeyword =
   "고초대졸, 고초대졸닷컴, 초대졸취업, 생산직, 현장직, 기능직, 고졸, 초대졸, 전문대졸, 채용정보, 공장정보, 기업정보, 복지, 통근버스, 기숙사, 노조, 현대모비스, 현대두산인프라코어, sk하이닉스, 유한양행, 삼성바이오로직스, sk이노베이션, 버슘머트리얼즈, 공무, 메인트, sk트리캠, 고졸채용, 오비맥주, ls전선, lg에너지솔루션, 생산직채용, 덕양산업, 앰코, 미원상사, 해성디에스";
@@ -48,6 +54,7 @@ export const META_INDEX = {
   ogTitle: "고초대졸닷컴 | 생산직 취업의 새로운 기준",
   ogDesc: "오직 고졸 초대졸 전문대졸만을 위한 전문 취업플랫폼",
   path: MAIN_URL,
+  ogImage: defaultOgImage,
 };
 
 export const META_JD_LIST = {
@@ -58,6 +65,7 @@ export const META_JD_LIST = {
   ogTitle: "실시간 생산직 채용공고 - 고초대졸닷컴",
   ogDesc: "어디에서도 볼 수 없는 빠르고 정확한 생산직 채용공고를 느껴보세요! ",
   path: JOBS_LIST_URL,
+  ogImage: jdOgImage,
 };
 
 export const META_JD_DETAIL = {
@@ -68,6 +76,7 @@ export const META_JD_DETAIL = {
   ogTitle: "생산직 채용공고 - 고초대졸닷컴",
   ogDesc: "",
   path: JOBS_DETAIL_URL,
+  ogImage: jdOgImage,
 };
 
 export const META_JD_EXPLIST = {
@@ -78,6 +87,7 @@ export const META_JD_EXPLIST = {
   ogTitle: "만료된 채용공고 - 고초대졸닷컴",
   ogDesc: "지금까지 어디에서도 볼 수 없었던 생산직 만료공고를 이곳에서 확인해보세요",
   path: JOBS_EXPLIST_URL,
+  ogImage: jdOgImage,
 };
 
 export const META_COMPANY_INFO = {
@@ -88,6 +98,7 @@ export const META_COMPANY_INFO = {
   ogTitle: "기업/공장 정보 - 고초대졸닷컴",
   ogDesc: "생산직의 연봉/복지 정보, 노조정보, 공장별 통근버스/기숙사에 대한 자세한 정보를 한눈에 확인해보세요!",
   path: COMPANY_DETAIL_URL,
+  ogImage: companyOgImage,
 };
 
 export const META_COMPANY_RECRUIT = {
@@ -98,6 +109,7 @@ export const META_COMPANY_RECRUIT = {
   ogTitle: "생산직 채용공고 - 고초대졸닷컴",
   ogDesc: "생산직 채용공고를 한눈에 확인해보세요!",
   path: COMPANY_DETAIL_URL,
+  ogImage: companyOgImage,
 };
 
 export const META_SPEC_LIST = {
@@ -108,6 +120,7 @@ export const META_SPEC_LIST = {
   ogTitle: "생산직 스펙평가 리스트 - 고초대졸닷컴",
   ogDesc: "내 스펙으로 어떤 기업에 갈 수 있는지, 다른 생산직 구직자들의 스펙은 어떤지 확인해보세요!",
   path: SPEC_URL,
+  ogImage: specOgImage,
 };
 
 // LATER : 배포 후 검색 가능하게 변경
@@ -119,6 +132,7 @@ export const META_SPEC_DETAIL = {
   ogTitle: "님의 생산직 스펙평가 - 고초대졸닷컴",
   ogDesc: "",
   path: SPEC_DETAIL_URL,
+  ogImage: specOgImage,
 };
 
 export const META_SPEC_MY = {
@@ -129,6 +143,7 @@ export const META_SPEC_MY = {
   ogTitle: "",
   ogDesc: "",
   path: SPEC_MY_URL,
+  ogImage: specOgImage,
 };
 
 export const META_SPEC_REGISTER = {
@@ -139,6 +154,7 @@ export const META_SPEC_REGISTER = {
   ogTitle: "",
   ogDesc: "",
   path: SPEC_REGISTER_URL,
+  ogImage: specOgImage,
 };
 
 export const META_DATA_LAB = {

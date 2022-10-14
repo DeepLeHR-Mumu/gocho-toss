@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { BsChevronRight } from "react-icons/bs";
 
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_INDEX } from "shared-constant/meta";
 import { useJobArr } from "shared-api/job";
 import { useCompanyArr } from "shared-api/company";
 import { Layout } from "@component/layout";
@@ -58,6 +60,7 @@ const UnifiedSearch: NextPage = () => {
 
   return (
     <main css={mainContainer}>
+      <MetaHead metaData={META_INDEX} />
       <nav>
         <ul css={menuList}>
           {searchMenuButtonArr.map((menuText) => {

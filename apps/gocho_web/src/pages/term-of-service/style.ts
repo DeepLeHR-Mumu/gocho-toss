@@ -11,6 +11,7 @@ export const tosTitle = css`
   font-size: 1.25rem;
   font-weight: 700;
   color: ${COLORS.GRAY10};
+  display: block;
   margin-bottom: 3rem;
 `;
 

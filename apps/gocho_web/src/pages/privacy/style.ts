@@ -12,6 +12,7 @@ export const tosTitle = css`
   font-weight: 700;
   color: ${COLORS.GRAY10};
   margin-bottom: 3rem;
+  display: block;
 `;
 
 export const container = css`

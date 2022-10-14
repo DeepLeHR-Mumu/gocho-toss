@@ -10,6 +10,7 @@ export const wrapper = css`
 export const tosTitle = css`
   font-size: 1.25rem;
   font-weight: 700;
+  display: block;
   color: ${COLORS.GRAY10};
   margin-bottom: 3rem;
 `;
