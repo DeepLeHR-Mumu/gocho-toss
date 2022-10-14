@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 
 import jdCardWeb from "shared-image/event/renewal/jd_card_web.png";
-
+import { JOBS_LIST_URL } from "shared-constant/internalURL";
 import { Layout } from "@component/layout";
 
 import { desc, flexBox, imgBox, infoBox, infoDesc, linkCSS, title, wrapper } from "./style";
@@ -25,7 +25,16 @@ export const PartJd: FunctionComponent = () => {
               <br />
               요약카드에서 한번에 확인할 수 있습니다
             </p>
-            <Link href="/" passHref>
+            <Link
+              href={{
+                pathname: JOBS_LIST_URL,
+                query: {
+                  page: 1,
+                  order: "recent",
+                },
+              }}
+              passHref
+            >
               <a css={linkCSS}>
                 <FiArrowRight /> 채용공고 보러가기
               </a>

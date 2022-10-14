@@ -9,9 +9,10 @@ export type contentModalNameDef = "loginModal";
 export type modalNameDef =
   | "logoutModal"
   | "signUpModal"
-  | "writePostingModal"
   | "accountSettingModal"
-  | "pageBlockModal";
+  | "pageBlockModal"
+  | "writeKakaoInfoModal"
+  | "findPasswordModal";
 
 export type contentModalDef = loginObjDef;
 

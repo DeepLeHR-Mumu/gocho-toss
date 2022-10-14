@@ -37,7 +37,7 @@ export const Footer: FunctionComponent = () => {
                 <Link href={MAIN_URL}>홈</Link>
               </li>
               <li>
-                채용문의
+                채용문의{" "}
                 <Link href={`mailto:${companyInfoObj.CSEmail}`}>
                   <a>{companyInfoObj.CSEmail}</a>
                 </Link>

@@ -15,7 +15,7 @@ import { AsideMenu } from "../component/asideMenu";
 import { SimpleCard } from "./component/simpleCard";
 import { Pagination } from "./component/pagination";
 
-import { flexBox, title, wrapper, container, tableHead, cardBox } from "./style";
+import { flexBox, title, wrapper, container, tableHead, cardBox, noMySpecDesc } from "./style";
 
 export const MySpecHistory: NextPage = () => {
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
@@ -97,6 +97,9 @@ export const MySpecHistory: NextPage = () => {
               </ul>
 
               <div css={cardBox}>
+                {filterMySpecHistoryArr.length === 0 && (
+                  <p css={noMySpecDesc}>스펙을 등록하고 평가받아보시겠어요? 🧐</p>
+                )}
                 {filterMySpecHistoryArr.map((mySpecData, index) => {
                   return (
                     <SimpleCard
@@ -111,7 +114,9 @@ export const MySpecHistory: NextPage = () => {
                 })}
               </div>
 
-              <Pagination totalPage={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+              {filterMySpecHistoryArr.length > activeCardCount && (
+                <Pagination totalPage={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+              )}
             </article>
           </div>
         </section>

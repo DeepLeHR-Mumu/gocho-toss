@@ -1,9 +1,22 @@
 import banner01 from "@public/images/global/MainCarousel/open_renewal_banner.jpg";
 import banner02 from "@public/images/global/MainCarousel/factory_banner.jpg";
 import banner03 from "@public/images/global/MainCarousel/openTalk_banner.jpg";
+import banner04 from "@public/images/global/MainCarousel/sinbo_job.jpg";
+
 import checkIconImage from "shared-image/global/common/yellow_check.png";
 
 export const carouselArr = [
+  {
+    id: 0,
+    topDesc: "2022년",
+    middleDesc: "신보그룹",
+    title: "초대졸 신입사원 공개채용",
+    lastDesc: "2022.09.26(월)-10.16(일)",
+    backgroundImage: banner04,
+    iconImage: checkIconImage,
+    backgroundColor: "#88c3a8",
+    buttonObj: null,
+  },
   {
     id: 1,
     topDesc: "OPEN",

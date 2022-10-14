@@ -3,6 +3,7 @@ export const EMAIL_ERROR_MESSAGE = {
   REQUIRED: "이메일을 입력해주세요",
   OCCUPIED: "이미 가입된 이메일입니다",
   NOT_EXISTING: "가입되지 않은 이메일입니다",
+  LOGIN_MIN_MAX: "이메일 주소는 최대 30자 입니다",
 };
 
 export const PWD_ERROR_MESSAGE = {

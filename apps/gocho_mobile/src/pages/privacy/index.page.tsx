@@ -1,76 +1,67 @@
 import { NextPage } from "next";
-import { useRouter } from "next/router";
-import { FiChevronLeft } from "react-icons/fi";
 
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_PRIVACY } from "shared-constant/meta";
 import { Layout } from "@component/layout";
 
-import { mainDesc, executionDesc, tosArr } from "shared-constant/privacy";
+import { executionDesc, privacyArr, CTOINFO } from "shared-constant/privacy";
 import {
   tosTitle,
-  descCSS,
   subTitle,
-  listCSS,
-  subListCSS,
+  container,
   executionDescCSS,
   wrapper,
-  headerCSS,
-  backButton,
-  sectionBox,
+  listTitle,
+  listArr,
+  desc,
+  CTOInfoCSS,
 } from "./style";
 
-import { tosItemDef } from "./type";
+import { PrivacyDef } from "./type";
 
-const Tos: NextPage = () => {
-  const router = useRouter();
+const Privacy: NextPage = () => {
   return (
     <main css={wrapper}>
-      <header css={headerCSS}>
-        <button type="button" onClick={router.back} aria-label="이전 페이지로 가기" css={backButton}>
-          <FiChevronLeft />
-        </button>
-        <h1 css={tosTitle}>개인정보 처리방침</h1>
-      </header>
-      <section css={sectionBox}>
+      <section>
+        <MetaHead metaData={META_PRIVACY} />
         <Layout>
-          <p css={descCSS}>{mainDesc}</p>
+          <strong css={tosTitle}>개인정보 처리방침</strong>
 
-          {tosArr.map((item: tosItemDef) => {
+          {privacyArr.map((item: PrivacyDef) => {
             return (
-              <div key={item.title}>
+              <div key={item.title} css={container}>
                 <h2 css={subTitle}>{item.title}</h2>
-                {item.desc && <p css={descCSS}>{item.desc}</p>}
-                {item.itemArr && (
-                  <ul css={listCSS}>
-                    {item.itemArr.map((subItem) => {
-                      return (
-                        <li key={subItem.desc}>
-                          {subItem.desc}
-                          {subItem.subItemArr && (
-                            <ul css={subListCSS}>
-                              {subItem.subItemArr.map((subList) => {
-                                return <li key={subList}>{subList}</li>;
-                              })}
-                            </ul>
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
-                {item.centerDesc && <p css={descCSS}>{item.centerDesc}</p>}
-                {item.centerList && (
-                  <ul css={listCSS}>
-                    {item.centerList.map((centerItem) => {
-                      return <li key={centerItem.desc}>{centerItem.desc}</li>;
-                    })}
-                  </ul>
-                )}
-                {item.lastDesc && <p css={descCSS}>{item.lastDesc}</p>}
+                {item.subItem.map((data) => {
+                  return (
+                    <>
+                      <strong css={listTitle}>{data.title}</strong>
+                      <ul css={listArr}>
+                        {data.infoArr.map((list) => {
+                          return (
+                            <li css={desc} key={list}>
+                              {list}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </>
+                  );
+                })}
               </div>
             );
           })}
+
+          <ul css={CTOInfoCSS}>
+            <li>가. 개인정보 보호 책임자</li>
+            <li>성명 : {CTOINFO.name}</li>
+            <li>전화번호 : {CTOINFO.tel}</li>
+            <li>이메일 : {CTOINFO.eMail}</li>
+          </ul>
+
           <p css={executionDescCSS}>
-            <span>[부칙]</span>
+            <span>
+              {"<"} 부칙 {">"}
+            </span>
             {executionDesc}
           </p>
         </Layout>
@@ -79,4 +70,4 @@ const Tos: NextPage = () => {
   );
 };
 
-export default Tos;
+export default Privacy;
