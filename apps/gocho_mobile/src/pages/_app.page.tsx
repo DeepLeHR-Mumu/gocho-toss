@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -61,6 +61,19 @@ function MyApp({ Component, pageProps }: AppProps) {
       },
     });
   });
+
+  useEffect(() => {
+    const toMatch = [/Android/i, /webOS/i, /iPhone/i, /iPad/i, /iPod/i, /BlackBerry/i, /Windows Phone/i, /Mobile/i];
+
+    if (
+      toMatch.some((toMatchItem) => {
+        return navigator.userAgent.match(toMatchItem);
+      })
+    ) {
+      const currentLocation = window.location.href.slice(window.location.href.indexOf("."));
+      window.location.href = `${currentLocation}`;
+    }
+  }, []);
 
   return (
     <RecoilRoot>
