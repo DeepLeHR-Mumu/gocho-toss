@@ -70,7 +70,7 @@ export const PositionCard: FunctionComponent<PositionCardProps> = ({
                   </span>
                 );
               })}
-            {position.place.type !== "일반" && <span css={restCSS}>기타 근무지</span>}
+            {position.place.type !== "일반" && <span css={restCSS}>{position.place.type}</span>}
           </p>
           <p css={desc}>{position.requiredExp.type}</p>
           <p css={desc}>

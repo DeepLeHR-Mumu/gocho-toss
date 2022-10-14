@@ -1,3 +1,4 @@
+import { useModal } from "@recoil/hook/modal";
 import { useToast } from "@recoil/hook/toast";
 import { useQueryClient } from "@tanstack/react-query";
 import { NextPage } from "next";
@@ -15,6 +16,7 @@ const KakaoLogin: NextPage = () => {
   const { code } = router.query;
   const { setCurrentToast } = useToast();
   const { mutate: kakaologinMutation } = useDoKakaoLogin();
+  const { setCurrentModal } = useModal();
 
   useEffect(() => {
     if (code && queryClient && router) {
@@ -22,14 +24,17 @@ const KakaoLogin: NextPage = () => {
         { code: code as string },
         {
           onSuccess: (response) => {
+            localStorage.setItem("token", `${response.data.token}`);
             if (response.data.result === "NEW_USER") {
+              const { email } = tokenDecryptor(response.data.token as string);
+              sessionStorage.setItem("kakaoId", email);
+              setCurrentModal("writeKakaoInfoModal");
               return;
             }
             queryClient.invalidateQueries();
             const { id, nickname } = tokenDecryptor(response.data.token as string);
             const kakaopath = sessionStorage.getItem("kakaopath");
             loginSuccessEvent(id, "kakao", kakaopath);
-            localStorage.setItem("token", `${response.data.token}`);
             router.push(kakaopath as string);
             setCurrentToast("님 환영합니다.", nickname);
           },
