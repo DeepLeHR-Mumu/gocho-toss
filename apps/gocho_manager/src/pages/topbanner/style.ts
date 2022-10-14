@@ -14,6 +14,43 @@ export const titleBox = css`
   padding: 0.5rem;
 `;
 
+export const inputBox = (isSmall: boolean) => {
+  return css`
+    width: ${isSmall ? "6rem" : "30%"};
+    border-radius: 0.5rem;
+    border: 1px solid ${COLORS.GRAY70};
+    background-color: ${COLORS.GRAY100};
+    height: 2rem;
+    padding: 0.25rem 0.5rem;
+    margin-right: 1rem;
+  `;
+};
+
+export const inputContainer = css`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 1.5rem;
+`;
+
+export const inputTitle = css`
+  color: ${COLORS.GRAY30};
+  margin-right: 1rem;
+`;
+
+export const imageInput = css`
+  display: flex;
+  align-items: center;
+  height: 13rem;
+`;
+
+export const imageUploadLabel = css`
+  padding: 0.25rem 0.5rem;
+  background-color: ${COLORS.BLUE_NEON50};
+  color: ${COLORS.GRAY100};
+  border: 2px solid ${COLORS.GRAY10};
+`;
+
 export const bannerBox = css`
   height: 3rem;
   margin-top: 0.5rem;

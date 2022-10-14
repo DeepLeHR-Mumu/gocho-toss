@@ -1,13 +1,26 @@
+import { ChangeEvent, useState } from "react";
 import type { NextPage } from "next";
-
-import { mainContainer, pageTitle } from "@style/commonStyles";
-import { useBannerArr } from "@api/banner/useBannerArr";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
+import { ChromePicker } from "react-color";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 import { dateConverter } from "shared-util/date";
+import { useAddBanner } from "@api/banner/addBanner";
+import { useBannerArr } from "@api/banner/useBannerArr";
+import { mainContainer, pageTitle } from "@style/commonStyles";
+import { ErrorScreen, LoadingScreen } from "@component/screen";
+
+import Image from "next/image";
+import { BannerFormValues } from "./type";
 import {
   sectionContainer,
   titleBox,
+  inputContainer,
+  inputTitle,
+  inputBox,
+  imageInput,
+  imageUploadLabel,
+  bannerPreviewContainer,
+  submitBannerButton,
   bannerBox,
   bannerId,
   companyName,
@@ -17,7 +30,35 @@ import {
 } from "./style";
 
 const MainBanner: NextPage = () => {
+  const [color, setColor] = useState<string>("");
+  const [imageSrc, setImageSrc] = useState<string>();
+  const [, setBannerPicture] = useState<FormData>();
+  // const [uuid, setUuid] = useState<string>("");
+
   const { data: BannerDataArr, isLoading, isError } = useBannerArr({ type: 0 });
+  const { mutate } = useAddBanner();
+
+  const { register, handleSubmit } = useForm<BannerFormValues>({});
+
+  const bannerSubmit: SubmitHandler<BannerFormValues> = (bannerObj) => {
+    mutate(bannerObj);
+  };
+
+  const onUploadLogo = async (e: ChangeEvent<HTMLInputElement>) => {
+    const formData = new FormData();
+    const reader = new FileReader();
+
+    if (e.target.files?.[0]) {
+      const img = e.target.files[0];
+      formData.append("banner", img);
+      setBannerPicture(formData);
+
+      reader.onloadend = () => {
+        setImageSrc(reader.result as string);
+      };
+      reader.readAsDataURL(img);
+    }
+  };
 
   if (!BannerDataArr || isLoading) {
     return <LoadingScreen />;
@@ -30,9 +71,73 @@ const MainBanner: NextPage = () => {
   return (
     <main css={mainContainer}>
       <h2 css={pageTitle}>메인 배너 업로드</h2>
-      <section css={sectionContainer}>메인 배너 영역</section>
-      <h2 css={pageTitle}>배너 리스트</h2>
+      <section css={sectionContainer}>
+        <form onSubmit={handleSubmit(bannerSubmit)}>
+          <div css={inputContainer}>
+            <strong css={inputTitle}>공고 번호</strong>
+            <input
+              css={inputBox(true)}
+              {...register("jd_id", {
+                valueAsNumber: true,
+                required: true,
+              })}
+            />
+            <strong css={inputTitle}>게시 기간</strong>
+            <input
+              type="date"
+              css={inputBox(false)}
+              {...register("start_time", {
+                required: true,
+                setValueAs: (d: Date) => {
+                  const date = new Date(d);
+                  return date.getTime();
+                },
+              })}
+            />
+            <input
+              type="date"
+              css={inputBox(false)}
+              {...register("end_time", {
+                required: true,
+                setValueAs: (d: Date) => {
+                  const date = new Date(d);
+                  return date.getTime();
+                },
+              })}
+            />
+          </div>
+          <div css={inputContainer}>
+            <div css={imageInput}>
+              <label css={imageUploadLabel} htmlFor="bannerImg">
+                사진 업로드
+                <input
+                  type="file"
+                  id="bannerImg"
+                  accept="image/png, image/gif, image/jpeg, image/jpg"
+                  onChange={onUploadLogo}
+                  style={{ display: "none" }}
+                />
+              </label>
+              {imageSrc && (
+                <div css={bannerPreviewContainer}>
+                  <Image layout="fill" objectFit="contain" src={imageSrc} alt="" />
+                </div>
+              )}
+            </div>
+            <ChromePicker
+              color={color}
+              onChange={(colorChange) => {
+                setColor(colorChange.hex);
+              }}
+            />
+          </div>
+          <button css={submitBannerButton} type="submit">
+            배너 제출
+          </button>
+        </form>
+      </section>
 
+      <h2 css={pageTitle}>배너 리스트</h2>
       <section css={sectionContainer}>
         <table>
           <tr css={titleBox}>

@@ -78,7 +78,6 @@ const JdUpload: NextPage = () => {
   }
 
   const jobSubmit: SubmitHandler<JobFormValues> = (jobObj) => {
-    // console.log(jobObj);
     mutate(jobObj, {});
   };
 
@@ -110,7 +109,7 @@ const JdUpload: NextPage = () => {
               css={selectBox}
               {...register("companyId", {
                 valueAsNumber: true,
-                // required: true,
+                required: true,
               })}
             >
               <option value="">기업 선택 ▼</option>
@@ -124,7 +123,7 @@ const JdUpload: NextPage = () => {
             <input
               css={inputBox}
               {...register("title", {
-                // required: true,
+                required: true,
               })}
             />
           </div>
@@ -135,7 +134,7 @@ const JdUpload: NextPage = () => {
                 css={inputBox}
                 type="datetime-local"
                 {...register("startTime", {
-                  // required: true,
+                  required: true,
                 })}
               />
               <input
@@ -157,7 +156,7 @@ const JdUpload: NextPage = () => {
             <textarea
               css={textareaBox}
               {...register("processArr", {
-                // required: true,
+                required: true,
                 setValueAs: (v: string) => {
                   return v.split("\n");
                 },
@@ -170,7 +169,7 @@ const JdUpload: NextPage = () => {
             <textarea
               css={textareaBox}
               {...register("applyRouteArr", {
-                // required: true,
+                required: true,
                 setValueAs: (v: string) => {
                   return v.split("\n");
                 },
@@ -184,7 +183,7 @@ const JdUpload: NextPage = () => {
               type="url"
               css={inputBox}
               {...register("applyUrl", {
-                // required: true,
+                required: true,
               })}
             />
           </div>
@@ -245,7 +244,9 @@ const JdUpload: NextPage = () => {
                             type="radio"
                             value={expName}
                             id={`${expName}${index}`}
-                            {...register(`positionArr.${index}.requiredExp`)}
+                            {...register(`positionArr.${index}.requiredExp`, {
+                              required: true,
+                            })}
                           />
                           <CheckBox isChecked={watch("positionArr")[index].requiredExp === expName} />
                           {expName}
@@ -279,7 +280,6 @@ const JdUpload: NextPage = () => {
                     <textarea
                       css={textareaBox}
                       {...register(`positionArr.${index}.requiredEtcArr`, {
-                        // required: true,
                         setValueAs: (v: string) => {
                           return v.split("\n");
                         },
@@ -296,7 +296,9 @@ const JdUpload: NextPage = () => {
                             type="radio"
                             value={contractName}
                             id={`${contractName}${index}`}
-                            {...register(`positionArr.${index}.contractType`)}
+                            {...register(`positionArr.${index}.contractType`, {
+                              required: true,
+                            })}
                           />
                           <CheckBox isChecked={watch("positionArr")[index].contractType === contractName} />
                           {contractName}
@@ -318,7 +320,7 @@ const JdUpload: NextPage = () => {
                     <select
                       css={selectBox}
                       {...register(`positionArr.${index}.taskMain`, {
-                        // required: true,
+                        required: true,
                       })}
                     >
                       <option value="" disabled>
@@ -332,7 +334,7 @@ const JdUpload: NextPage = () => {
                       css={selectBox}
                       multiple
                       {...register(`positionArr.${index}.taskSubArr`, {
-                        // required: true,
+                        required: true,
                       })}
                     >
                       <option value="" disabled>
@@ -358,7 +360,7 @@ const JdUpload: NextPage = () => {
                     <textarea
                       css={textareaBox}
                       {...register(`positionArr.${index}.taskDetailArr`, {
-                        // required: true,
+                        required: true,
                         setValueAs: (v: string) => {
                           return v.split("\n");
                         },
@@ -373,7 +375,7 @@ const JdUpload: NextPage = () => {
                       placeholder="교대형태 선택"
                       multiple
                       {...register(`positionArr.${index}.rotationArr`, {
-                        // required: true,
+                        required: true,
                       })}
                     >
                       <option value="" disabled>
@@ -390,14 +392,14 @@ const JdUpload: NextPage = () => {
                   </div>
                   <div css={inputContainer}>
                     <strong css={inputTitle}>명수</strong>
-                    <input css={inputBox} {...register(`positionArr.${index}.hireNumber`)} />
+                    <input css={inputBox} {...register(`positionArr.${index}.hireNumber`, { required: true })} />
                   </div>
                   <div css={inputContainer}>
                     <strong css={inputTitle}>급여</strong>
                     <textarea
                       css={textareaBox}
                       {...register(`positionArr.${index}.payArr`, {
-                        // required: true,
+                        required: true,
                         setValueAs: (v: string) => {
                           return v.split("\n");
                         },
