@@ -2,11 +2,13 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
+  max-height: 90vh;
+  min-height: 70vh;
+  background-color: ${COLORS.GRAY100};
   display: flex;
+  padding: 3rem;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 3rem 3rem 15rem 3rem;
 `;
 
 export const logoContainer = css`
@@ -65,9 +67,10 @@ export const kakaoLogoBox = css`
 
 export const closeBtn = css`
   position: absolute;
-  right: 2rem;
-  top: 1.5rem;
-  font-size: 0.875rem;
+  top: 0.875rem;
+  right: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
   color: ${COLORS.BLUE_FIRST40};
 `;
 

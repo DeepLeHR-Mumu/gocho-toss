@@ -3,19 +3,12 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 80;
-  width: 22rem;
-  height: auto;
-  padding: 2rem;
+  max-height: 90vh;
+  min-height: 70vh;
   background-color: ${COLORS.GRAY100};
-  border-radius: 1rem;
   display: flex;
+  padding: 3rem;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
 `;
 
@@ -40,11 +33,13 @@ export const kakaoLogoBox = css`
   margin-right: 0.5rem;
 `;
 
-export const closeBtn = css`
+export const closeButton = css`
   position: absolute;
-  right: -0.5rem;
-  top: -0.5rem;
-  border-radius: 50%;
+  top: 0.875rem;
+  right: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: ${COLORS.BLUE_FIRST40};
 `;
 
 export const logoContainer = css`
@@ -68,6 +63,7 @@ export const formArr = css`
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 2.5rem;
 
   > li {
     margin-bottom: 1.25rem;
@@ -92,13 +88,4 @@ export const errorMsgCSS = css`
 
 export const loginButton = css`
   margin-bottom: 0.3rem;
-`;
-
-export const findPasswordButton = css`
-  margin-top: 1rem;
-  width: 100%;
-  font-size: 0.875rem;
-  color: ${COLORS.GRAY40};
-  text-decoration-line: underline;
-  line-height: 1.25rem;
 `;
