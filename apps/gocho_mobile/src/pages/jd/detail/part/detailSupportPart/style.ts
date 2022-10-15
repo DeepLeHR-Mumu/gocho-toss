@@ -15,9 +15,10 @@ export const logoImageBox = css`
 `;
 
 export const title = css`
-  font-size: 1.375rem;
+  font-size: 1.25rem;
   color: ${COLORS.GRAY10};
   font-weight: 500;
+  word-break: keep-all;
   position: relative;
   text-align: center;
   z-index: 0;
