@@ -1,21 +1,22 @@
 import type { NextPage } from "next";
+import { ChromePicker } from "react-color";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+import { dateConverter } from "shared-util/date";
 import { useBannerArr } from "@api/banner/useBannerArr";
 import { useAddBanner } from "@api/banner/addBanner";
 
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
-import { dateConverter } from "shared-util/date";
 
-import { ChromePicker } from "react-color";
-import { useState } from "react";
 import { BannerFormValues } from "./type";
 import {
   sectionContainer,
   inputContainer,
   inputTitle,
   inputBox,
+  submitBannerButton,
   titleBox,
   bannerId,
   companyName,
@@ -89,6 +90,9 @@ const TopBanner: NextPage = () => {
               setColor(colorChange.hex);
             }}
           />
+          <button css={submitBannerButton} type="submit">
+            배너 제출
+          </button>
         </form>
       </section>
 

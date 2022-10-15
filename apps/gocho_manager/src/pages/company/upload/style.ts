@@ -38,6 +38,15 @@ export const inputBox = css`
   margin-right: 1rem;
 `;
 
+export const logoUploadLabel = css`
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  margin: 0 1rem;
+  background-color: ${COLORS.BLUE_NEON50};
+  color: ${COLORS.GRAY100};
+  border: 2px solid ${COLORS.GRAY10};
+`;
+
 export const imageInput = css`
   display: flex;
   align-items: center;

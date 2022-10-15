@@ -20,6 +20,7 @@ import {
   inputTitle,
   selectBox,
   inputBox,
+  logoUploadLabel,
   imageInput,
   logoPreviewContainer,
   enterNotice,
@@ -40,32 +41,17 @@ import {
 const CompanyUpload: NextPage = () => {
   const [imageSrc, setImageSrc] = useState<string>();
   const [logoData, setLogoData] = useState<FormData>();
-  const [, setUuid] = useState<string>("");
+  const [checkMsg, setCheckMsg] = useState<string>();
 
   const { mutate: mutateCompany } = useAddCompany();
   const { mutate: mutateLogo } = useUploadLogo();
 
-  const { register, control, handleSubmit, watch } = useForm<CompanyFormValues>({});
+  const { register, control, handleSubmit, watch, setValue } = useForm<CompanyFormValues>({});
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: "factories",
   });
-
-  const companySubmit: SubmitHandler<CompanyFormValues> = async (companyObj) => {
-    if (logoData) {
-      mutateLogo(
-        { logo: logoData },
-        {
-          onSuccess: (response) => {
-            // console.log(response.data);
-            setUuid(response.data);
-          },
-        }
-      );
-    }
-    mutateCompany(companyObj, {});
-  };
 
   const onUploadLogo = async (e: ChangeEvent<HTMLInputElement>) => {
     const formData = new FormData();
@@ -83,6 +69,25 @@ const CompanyUpload: NextPage = () => {
     }
   };
 
+  const logoSubmit = () => {
+    if (logoData) {
+      mutateLogo(
+        { logo: logoData },
+        {
+          onSuccess: (response) => {
+            // console.log(response.data);
+            setValue("file_id", response.data);
+            setCheckMsg("업로드 되었습니다!");
+          },
+        }
+      );
+    }
+  };
+
+  const companySubmit: SubmitHandler<CompanyFormValues> = async (companyObj) => {
+    mutateCompany(companyObj, {});
+  };
+
   return (
     <main css={mainContainer}>
       <h2 css={pageTitle}>기업 등록</h2>
@@ -94,25 +99,38 @@ const CompanyUpload: NextPage = () => {
             <input
               css={inputBox}
               {...register("name", {
-                // required: true,
+                required: true,
               })}
             />
           </div>
           <div css={imageInput}>
             <strong css={inputTitle}>기업 로고</strong>
-            <input type="file" accept="image/png, image/gif, image/jpeg, image/jpg" onChange={onUploadLogo} />
+            <label css={logoUploadLabel} htmlFor="logoImg">
+              로고 업로드
+              <input
+                type="file"
+                id="logoImg"
+                accept="image/png, image/gif, image/jpeg, image/jpg"
+                onChange={onUploadLogo}
+                style={{ display: "none" }}
+              />
+            </label>
             {imageSrc && (
               <div css={logoPreviewContainer}>
                 <Image layout="fill" objectFit="contain" src={imageSrc} alt="" />
               </div>
             )}
+            <button type="button" css={logoUploadLabel} onClick={logoSubmit}>
+              {checkMsg || "서버에 올리기"}
+            </button>
+            <p css={enterNotice}>로고 업로드 후 반드시 서버에 올리기 버튼을 눌러주세요!</p>
           </div>
           <div css={inputContainer}>
             <strong css={inputTitle}>업종</strong>
             <select
               css={selectBox}
               {...register("industry", {
-                // required: true,
+                required: true,
               })}
             >
               <option value="">업종 선택 ▼</option>
@@ -126,7 +144,7 @@ const CompanyUpload: NextPage = () => {
             <select
               css={selectBox}
               {...register("size", {
-                // required: true,
+                required: true,
               })}
             >
               <option value="">기업 규모 선택 ▼</option>
@@ -141,7 +159,7 @@ const CompanyUpload: NextPage = () => {
               type="date"
               css={inputBox}
               {...register("found_date", {
-                // required: true,
+                required: true,
               })}
             />
           </div>
@@ -151,7 +169,7 @@ const CompanyUpload: NextPage = () => {
               type="number"
               css={inputBox}
               {...register("employee_number", {
-                // required: true,
+                required: true,
               })}
             />
           </div>
@@ -160,7 +178,7 @@ const CompanyUpload: NextPage = () => {
             <input
               css={inputBox}
               {...register("intro", {
-                // required: true,
+                required: true,
               })}
             />
           </div>
@@ -169,8 +187,27 @@ const CompanyUpload: NextPage = () => {
             <input
               css={inputBox}
               {...register("address", {
-                // required: true,
+                required: true,
               })}
+            />
+          </div>
+          <div css={inputContainer}>
+            <strong css={inputTitle}>노조</strong>
+            <label css={inputLabel} htmlFor="노조유무">
+              <input
+                type="checkbox"
+                id="노조유무"
+                {...register("nozo.exists", {
+                  required: true,
+                })}
+              />
+              <CheckBox isChecked={watch("nozo.exists")} /> <p css={checkboxText}>있음</p>
+              <CheckBox isChecked={!watch("nozo.exists")} /> <p css={checkboxText}>없음</p>
+            </label>
+            <input
+              css={booleanInputBox(!watch("nozo.exists"))}
+              disabled={!watch("nozo.exists")}
+              {...register("nozo.desc", {})}
             />
           </div>
           <div css={inputContainer}>
@@ -179,7 +216,7 @@ const CompanyUpload: NextPage = () => {
               type="url"
               css={inputBox}
               {...register("catch_url", {
-                // required: true,
+                required: true,
               })}
             />
           </div>
@@ -221,7 +258,7 @@ const CompanyUpload: NextPage = () => {
                 type="number"
                 css={inputBox}
                 {...register("pay_start", {
-                  // required: true,
+                  required: true,
                 })}
               />
             </div>
@@ -231,7 +268,7 @@ const CompanyUpload: NextPage = () => {
                 type="number"
                 css={inputBox}
                 {...register("pay_avg", {
-                  // required: true,
+                  required: true,
                 })}
               />
             </div>
@@ -251,7 +288,7 @@ const CompanyUpload: NextPage = () => {
                   <input
                     css={inputBox}
                     {...register(`factories.${index}.factory_name`, {
-                      // required: true,
+                      required: true,
                     })}
                   />
                 </div>
@@ -260,7 +297,7 @@ const CompanyUpload: NextPage = () => {
                   <input
                     css={inputBox}
                     {...register(`factories.${index}.address`, {
-                      // required: true,
+                      required: true,
                     })}
                   />
                 </div>
@@ -271,7 +308,7 @@ const CompanyUpload: NextPage = () => {
                       type="number"
                       css={inputBox}
                       {...register(`factories.${index}.male_number`, {
-                        // required: true,
+                        required: true,
                       })}
                     />
                   </div>
@@ -281,7 +318,7 @@ const CompanyUpload: NextPage = () => {
                       type="number"
                       css={inputBox}
                       {...register(`factories.${index}.female_number`, {
-                        // required: true,
+                        required: true,
                       })}
                     />
                   </div>
@@ -291,7 +328,7 @@ const CompanyUpload: NextPage = () => {
                   <input
                     css={inputBox}
                     {...register(`factories.${index}.product`, {
-                      // required: true,
+                      required: true,
                     })}
                   />
                 </div>
@@ -302,7 +339,7 @@ const CompanyUpload: NextPage = () => {
                       type="checkbox"
                       id={`버스유무${index}`}
                       {...register(`factories.${index}.bus_bool`, {
-                        // required: true,
+                        required: true,
                       })}
                     />
                     <CheckBox isChecked={watch("factories")[index].bus_bool} /> <p css={checkboxText}>있음</p>
@@ -312,7 +349,7 @@ const CompanyUpload: NextPage = () => {
                     css={booleanInputBox(!watch("factories")[index].bus_bool)}
                     disabled={!watch("factories")[index].bus_bool}
                     {...register(`factories.${index}.bus_etc`, {
-                      // required: true,
+                      required: true,
                     })}
                   />
                 </div>
@@ -323,7 +360,7 @@ const CompanyUpload: NextPage = () => {
                       type="checkbox"
                       id={`기숙사유무${index}`}
                       {...register(`factories.${index}.dormitory_bool`, {
-                        // required: true,
+                        required: true,
                       })}
                     />
                     <CheckBox isChecked={watch("factories")[index].dormitory_bool} /> <p css={checkboxText}>있음</p>
@@ -333,7 +370,7 @@ const CompanyUpload: NextPage = () => {
                     css={booleanInputBox(!watch("factories")[index].dormitory_bool)}
                     disabled={!watch("factories")[index].dormitory_bool}
                     {...register(`factories.${index}.dormitory_etc`, {
-                      // required: true,
+                      required: true,
                     })}
                   />
                 </div>

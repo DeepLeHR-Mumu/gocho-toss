@@ -10,6 +10,7 @@ import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
 import Image from "next/image";
+import { useUploadBanner } from "@api/upload/useUploadBanner";
 import { BannerFormValues } from "./type";
 import {
   sectionContainer,
@@ -32,19 +33,16 @@ import {
 const MainBanner: NextPage = () => {
   const [color, setColor] = useState<string>("");
   const [imageSrc, setImageSrc] = useState<string>();
-  const [, setBannerPicture] = useState<FormData>();
-  // const [uuid, setUuid] = useState<string>("");
+  const [bannerPicture, setBannerPicture] = useState<FormData>();
+  const [checkMsg, setCheckMsg] = useState<string>();
 
   const { data: BannerDataArr, isLoading, isError } = useBannerArr({ type: 0 });
-  const { mutate } = useAddBanner();
+  const { mutate: mutatePicture } = useUploadBanner();
+  const { mutate: mutateBanner } = useAddBanner();
 
-  const { register, handleSubmit } = useForm<BannerFormValues>({});
+  const { register, handleSubmit, setValue } = useForm<BannerFormValues>({});
 
-  const bannerSubmit: SubmitHandler<BannerFormValues> = (bannerObj) => {
-    mutate(bannerObj);
-  };
-
-  const onUploadLogo = async (e: ChangeEvent<HTMLInputElement>) => {
+  const onUploadBannerPicture = async (e: ChangeEvent<HTMLInputElement>) => {
     const formData = new FormData();
     const reader = new FileReader();
 
@@ -58,6 +56,25 @@ const MainBanner: NextPage = () => {
       };
       reader.readAsDataURL(img);
     }
+  };
+
+  const bannerPictureSubmit = () => {
+    if (bannerPicture) {
+      mutatePicture(
+        { type: 0, banner: bannerPicture },
+        {
+          onSuccess: (response) => {
+            // console.log(response.data);
+            setValue("file_id", response.data);
+            setCheckMsg("업로드 되었습니다!");
+          },
+        }
+      );
+    }
+  };
+
+  const bannerSubmit: SubmitHandler<BannerFormValues> = (bannerObj) => {
+    mutateBanner(bannerObj);
   };
 
   if (!BannerDataArr || isLoading) {
@@ -114,7 +131,7 @@ const MainBanner: NextPage = () => {
                   type="file"
                   id="bannerImg"
                   accept="image/png, image/gif, image/jpeg, image/jpg"
-                  onChange={onUploadLogo}
+                  onChange={onUploadBannerPicture}
                   style={{ display: "none" }}
                 />
               </label>
@@ -123,14 +140,18 @@ const MainBanner: NextPage = () => {
                   <Image layout="fill" objectFit="contain" src={imageSrc} alt="" />
                 </div>
               )}
+              <button type="button" css={imageUploadLabel} onClick={bannerPictureSubmit}>
+                {checkMsg || "서버에 올리기"}
+              </button>
             </div>
-            <ChromePicker
-              color={color}
-              onChange={(colorChange) => {
-                setColor(colorChange.hex);
-              }}
-            />
           </div>
+          <ChromePicker
+            color={color}
+            onChange={(colorChange) => {
+              setColor(colorChange.hex);
+              setValue("color", colorChange.hex);
+            }}
+          />
           <button css={submitBannerButton} type="submit">
             배너 제출
           </button>

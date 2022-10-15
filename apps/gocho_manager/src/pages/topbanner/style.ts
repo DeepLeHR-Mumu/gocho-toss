@@ -38,17 +38,14 @@ export const inputTitle = css`
   margin-right: 1rem;
 `;
 
-export const imageInput = css`
-  display: flex;
-  align-items: center;
-  height: 13rem;
-`;
-
-export const imageUploadLabel = css`
-  padding: 0.25rem 0.5rem;
-  background-color: ${COLORS.BLUE_NEON50};
-  color: ${COLORS.GRAY100};
+export const submitBannerButton = css`
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 2.5rem auto 0;
+  padding: 0.25rem 3rem;
   border: 2px solid ${COLORS.GRAY10};
+  background-color: ${COLORS.BLUE_NEON40};
+  color: ${COLORS.GRAY100};
 `;
 
 export const bannerBox = css`

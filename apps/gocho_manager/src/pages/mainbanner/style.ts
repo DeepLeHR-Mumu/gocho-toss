@@ -45,9 +45,11 @@ export const imageInput = css`
 `;
 
 export const imageUploadLabel = css`
+  cursor: pointer;
   padding: 0.25rem 0.5rem;
   background-color: ${COLORS.BLUE_NEON50};
   color: ${COLORS.GRAY100};
+  margin: 0 1rem;
   border: 2px solid ${COLORS.GRAY10};
 `;
 

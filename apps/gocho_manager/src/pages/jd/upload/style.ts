@@ -116,6 +116,22 @@ export const smallInputBox = (disabled: boolean) => {
   `;
 };
 
+export const deletePlaceButton = css`
+  margin: 0 1rem;
+  padding: 0.25rem 0.5rem;
+  border: 2px solid ${COLORS.GRAY10};
+  background-color: ${COLORS.ERROR_RED30};
+  color: ${COLORS.GRAY100};
+`;
+
+export const hireNumberButton = css`
+  margin-right: 1rem;
+  padding: 0.25rem 0.5rem;
+  border: 2px solid ${COLORS.GRAY10};
+  background-color: ${COLORS.BLUE_NEON40};
+  color: ${COLORS.GRAY100};
+`;
+
 export const deletePositionButton = css`
   margin: 0 0 0 auto;
   padding: 0.25rem 1rem;

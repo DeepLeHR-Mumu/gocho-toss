@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import type { NextPage } from "next";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
@@ -27,19 +27,31 @@ import {
   positionTitle,
   smallInputContainer,
   smallInputBox,
+  deletePlaceButton,
+  hireNumberButton,
   deletePositionButton,
   addPositionButton,
   submitButton,
 } from "./style";
-import { requiredExpArr, contractTypeArr, taskArr, rotationArr } from "./constant";
+import {
+  requiredExpArr,
+  contractTypeArr,
+  taskArr,
+  rotationArr,
+  certificateArr,
+  placeArr,
+  placeTypeArr,
+} from "./constant";
 
 const JdUpload: NextPage = () => {
-  const { mutate } = useAddJob();
   const [prevSearchWord, setPrevSearchWord] = useState<string>("");
   const [searchWord, setSearchWord] = useState<string>("");
+  const [bigPlace, setBigPlace] = useState<string>();
+  const [smallPlace, setSmallPlace] = useState<string>();
   const { data: companyDataArr, isLoading, isError, error } = useFindCompany({ word: searchWord });
 
-  const { register, control, handleSubmit, watch } = useForm<JobFormValues>({
+  const { mutate } = useAddJob();
+  const { register, control, handleSubmit, watch, setValue } = useForm<JobFormValues>({
     defaultValues: {
       positionArr: [
         {
@@ -47,18 +59,27 @@ const JdUpload: NextPage = () => {
           high: false,
           college: false,
           four: false,
-          requiredExp: "",
-          minYear: undefined,
-          maxYear: undefined,
-          contractType: "",
-          conversionRate: undefined,
-          taskMain: "",
-          taskSubArr: [],
-          rotationArr: [],
-          rotationEtc: "",
-          placeArr: "",
-          hireNumber: undefined,
-          payArr: undefined,
+          required_exp: "",
+          min_year: undefined,
+          max_year: undefined,
+          required_etc_arr: undefined,
+          contract_type: "",
+          conversion_rate: undefined,
+          task_main: "",
+          task_sub_arr: undefined,
+          task_detail_arr: undefined,
+          rotation_arr: undefined,
+          rotation_etc: "",
+          place_arr: {
+            type: "",
+            address_arr: [],
+            factory_arr: [],
+            etc: "",
+          },
+          hire_number: undefined,
+          pay_arr: undefined,
+          preferred_certi_arr: undefined,
+          preferred_etc_arr: undefined,
         },
       ],
     },
@@ -107,7 +128,7 @@ const JdUpload: NextPage = () => {
             </button>
             <select
               css={selectBox}
-              {...register("companyId", {
+              {...register("company_id", {
                 valueAsNumber: true,
                 required: true,
               })}
@@ -133,14 +154,14 @@ const JdUpload: NextPage = () => {
               <input
                 css={inputBox}
                 type="datetime-local"
-                {...register("startTime", {
+                {...register("start_time", {
                   required: true,
                 })}
               />
               <input
                 css={inputBox}
                 type="datetime-local"
-                {...register("endTime", {
+                {...register("end_time", {
                   // required: true,
                 })}
               />
@@ -155,7 +176,7 @@ const JdUpload: NextPage = () => {
             <strong css={inputTitle}>채용 절차</strong>
             <textarea
               css={textareaBox}
-              {...register("processArr", {
+              {...register("process_arr", {
                 required: true,
                 setValueAs: (v: string) => {
                   return v.split("\n");
@@ -168,7 +189,7 @@ const JdUpload: NextPage = () => {
             <strong css={inputTitle}>지원 방법</strong>
             <textarea
               css={textareaBox}
-              {...register("applyRouteArr", {
+              {...register("apply_route_arr", {
                 required: true,
                 setValueAs: (v: string) => {
                   return v.split("\n");
@@ -182,7 +203,7 @@ const JdUpload: NextPage = () => {
             <input
               type="url"
               css={inputBox}
-              {...register("applyUrl", {
+              {...register("apply_url", {
                 required: true,
               })}
             />
@@ -191,7 +212,7 @@ const JdUpload: NextPage = () => {
             <strong css={inputTitle}>기타 사항</strong>
             <textarea
               css={textareaBox}
-              {...register("etcArr", {
+              {...register("etc_arr", {
                 setValueAs: (v: string) => {
                   return v.split("\n");
                 },
@@ -202,12 +223,12 @@ const JdUpload: NextPage = () => {
           <ul>
             {fields.map((item, index) => {
               const yearDisable =
-                watch("positionArr")[index].requiredExp !== "경력" &&
-                watch("positionArr")[index].requiredExp !== "신입/경력";
+                watch("positionArr")[index].required_exp !== "경력" &&
+                watch("positionArr")[index].required_exp !== "신입/경력";
 
               const conversionDisable =
-                watch("positionArr")[index].contractType !== "인턴" &&
-                watch("positionArr")[index].contractType !== "계약>정규";
+                watch("positionArr")[index].contract_type !== "인턴" &&
+                watch("positionArr")[index].contract_type !== "계약>정규";
 
               return (
                 <li css={positionContainer} key={item.id}>
@@ -244,11 +265,11 @@ const JdUpload: NextPage = () => {
                             type="radio"
                             value={expName}
                             id={`${expName}${index}`}
-                            {...register(`positionArr.${index}.requiredExp`, {
+                            {...register(`positionArr.${index}.required_exp`, {
                               required: true,
                             })}
                           />
-                          <CheckBox isChecked={watch("positionArr")[index].requiredExp === expName} />
+                          <CheckBox isChecked={watch("positionArr")[index].required_exp === expName} />
                           {expName}
                         </label>
                       );
@@ -258,7 +279,7 @@ const JdUpload: NextPage = () => {
                       <input
                         type="number"
                         css={smallInputBox(yearDisable)}
-                        {...register(`positionArr.${index}.minYear`, {
+                        {...register(`positionArr.${index}.min_year`, {
                           valueAsNumber: true,
                         })}
                         disabled={yearDisable}
@@ -267,7 +288,7 @@ const JdUpload: NextPage = () => {
                       <input
                         type="number"
                         css={smallInputBox(yearDisable)}
-                        {...register(`positionArr.${index}.maxYear`, {
+                        {...register(`positionArr.${index}.max_year`, {
                           valueAsNumber: true,
                         })}
                         disabled={yearDisable}
@@ -279,7 +300,7 @@ const JdUpload: NextPage = () => {
                     <strong css={inputTitle}>기타 조건</strong>
                     <textarea
                       css={textareaBox}
-                      {...register(`positionArr.${index}.requiredEtcArr`, {
+                      {...register(`positionArr.${index}.required_etc_arr`, {
                         setValueAs: (v: string) => {
                           return v.split("\n");
                         },
@@ -296,11 +317,11 @@ const JdUpload: NextPage = () => {
                             type="radio"
                             value={contractName}
                             id={`${contractName}${index}`}
-                            {...register(`positionArr.${index}.contractType`, {
+                            {...register(`positionArr.${index}.contract_type`, {
                               required: true,
                             })}
                           />
-                          <CheckBox isChecked={watch("positionArr")[index].contractType === contractName} />
+                          <CheckBox isChecked={watch("positionArr")[index].contract_type === contractName} />
                           {contractName}
                         </label>
                       );
@@ -310,7 +331,7 @@ const JdUpload: NextPage = () => {
                       <input
                         type="number"
                         css={smallInputBox(conversionDisable)}
-                        {...register(`positionArr.${index}.conversionRate`)}
+                        {...register(`positionArr.${index}.conversion_rate`)}
                         disabled={conversionDisable}
                       />
                     </div>
@@ -319,11 +340,11 @@ const JdUpload: NextPage = () => {
                     <strong css={inputTitle}>채용 직무</strong>
                     <select
                       css={selectBox}
-                      {...register(`positionArr.${index}.taskMain`, {
+                      {...register(`positionArr.${index}.task_main`, {
                         required: true,
                       })}
                     >
-                      <option value="" disabled>
+                      <option value="" selected disabled>
                         1차직무 선택 ▼
                       </option>
                       {taskArr.map((task) => {
@@ -333,7 +354,7 @@ const JdUpload: NextPage = () => {
                     <select
                       css={selectBox}
                       multiple
-                      {...register(`positionArr.${index}.taskSubArr`, {
+                      {...register(`positionArr.${index}.task_sub_arr`, {
                         required: true,
                       })}
                     >
@@ -341,7 +362,7 @@ const JdUpload: NextPage = () => {
                         2차직무 선택 ▼
                       </option>
                       {taskArr.map((task) => {
-                        const isMainTask = watch("positionArr")[index].taskMain === task.mainTask;
+                        const isMainTask = watch("positionArr")[index].task_main === task.mainTask;
                         if (isMainTask)
                           return task.subTaskArr.map((subTask) => {
                             return <option value={subTask}>{subTask}</option>;
@@ -359,7 +380,7 @@ const JdUpload: NextPage = () => {
                     <strong css={inputTitle}>세부 직무 내용</strong>
                     <textarea
                       css={textareaBox}
-                      {...register(`positionArr.${index}.taskDetailArr`, {
+                      {...register(`positionArr.${index}.task_detail_arr`, {
                         required: true,
                         setValueAs: (v: string) => {
                           return v.split("\n");
@@ -372,9 +393,8 @@ const JdUpload: NextPage = () => {
                     <strong css={inputTitle}>교대 형태</strong>
                     <select
                       css={selectBox}
-                      placeholder="교대형태 선택"
                       multiple
-                      {...register(`positionArr.${index}.rotationArr`, {
+                      {...register(`positionArr.${index}.rotation_arr`, {
                         required: true,
                       })}
                     >
@@ -388,17 +408,123 @@ const JdUpload: NextPage = () => {
                     <p css={enterNotice}>Ctrl키를 누른 채로 중복 선택이 가능합니다.</p>
                   </div>
                   <div css={inputContainer}>
-                    <strong css={inputTitle}>근무지</strong>
+                    <strong css={inputTitle}>근무지 종류</strong>
+                    <select
+                      css={selectBox}
+                      {...register(`positionArr.${index}.place_arr.type`, {
+                        required: true,
+                      })}
+                    >
+                      <option value="" selected disabled>
+                        근무지 종류 선택 ▼
+                      </option>
+                      {placeTypeArr.map((placeType) => {
+                        return <option value={placeType}>{placeType}</option>;
+                      })}
+                    </select>
                   </div>
                   <div css={inputContainer}>
+                    <strong css={inputTitle}>일반 근무지</strong>
+                    <select
+                      css={selectBox}
+                      onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                        setBigPlace(e.target.value);
+                      }}
+                    >
+                      <option value="" selected disabled>
+                        도/시 선택 ▼
+                      </option>
+                      {placeArr.map((place) => {
+                        return <option value={place}>{place}</option>;
+                      })}
+                    </select>
+                    <input
+                      css={inputBox}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                        setSmallPlace(e.target.value);
+                      }}
+                    />
+                    <button
+                      type="button"
+                      css={hireNumberButton}
+                      onClick={() => {
+                        setValue(`positionArr.${index}.place_arr.address_arr`, [
+                          ...watch("positionArr")[index].place_arr.address_arr,
+                          `${bigPlace} ${smallPlace}`,
+                        ]);
+                      }}
+                    >
+                      일반 근무지 추가
+                    </button>
+                  </div>
+                  <div css={flexBox}>
+                    {watch("positionArr")[index].place_arr.address_arr.map((place) => {
+                      return (
+                        <div css={inputContainer}>
+                          {place}
+                          <button
+                            type="button"
+                            css={deletePlaceButton}
+                            onClick={() => {
+                              setValue(`positionArr.${index}.place_arr.address_arr`, [
+                                ...watch("positionArr")[index].place_arr.address_arr.filter((element) => {
+                                  return element !== place;
+                                }),
+                              ]);
+                            }}
+                          >
+                            삭제
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <div css={inputContainer}>
+                    <strong css={inputTitle}>기타 근무지</strong>
+                    <input css={inputBox} {...register(`positionArr.${index}.place_arr.etc`)} />
+                    <p css={enterNotice}>전국/기타일 경우 입력</p>
+                  </div>
+
+                  <div css={inputContainer}>
                     <strong css={inputTitle}>명수</strong>
-                    <input css={inputBox} {...register(`positionArr.${index}.hireNumber`, { required: true })} />
+                    <button
+                      type="button"
+                      css={hireNumberButton}
+                      onClick={() => {
+                        setValue(`positionArr.${index}.hire_number`, -1);
+                      }}
+                    >
+                      0명 채용
+                    </button>
+                    <button
+                      type="button"
+                      css={hireNumberButton}
+                      onClick={() => {
+                        setValue(`positionArr.${index}.hire_number`, -2);
+                      }}
+                    >
+                      00명 채용
+                    </button>
+                    <button
+                      type="button"
+                      css={hireNumberButton}
+                      onClick={() => {
+                        setValue(`positionArr.${index}.hire_number`, -3);
+                      }}
+                    >
+                      000명 채용
+                    </button>
+                    <input
+                      type="number"
+                      css={smallInputBox(false)}
+                      {...register(`positionArr.${index}.hire_number`, { valueAsNumber: true, required: true })}
+                    />
                   </div>
                   <div css={inputContainer}>
                     <strong css={inputTitle}>급여</strong>
                     <textarea
                       css={textareaBox}
-                      {...register(`positionArr.${index}.payArr`, {
+                      {...register(`positionArr.${index}.pay_arr`, {
                         required: true,
                         setValueAs: (v: string) => {
                           return v.split("\n");
@@ -409,12 +535,19 @@ const JdUpload: NextPage = () => {
                   </div>
                   <div css={inputContainer}>
                     <strong css={inputTitle}>우대 자격증</strong>
+                    <select css={selectBox} multiple {...register(`positionArr.${index}.preferred_certi_arr`, {})}>
+                      <option value="">교대형태 선택 ▼</option>
+                      {certificateArr.map((certi) => {
+                        return <option value={certi}>{certi}</option>;
+                      })}
+                    </select>
+                    <p css={enterNotice}>Ctrl+F로 검색해서 찾으면 편리합니다.</p>
                   </div>
                   <div css={inputContainer}>
                     <strong css={inputTitle}>기타 우대 사항</strong>
                     <textarea
                       css={textareaBox}
-                      {...register(`positionArr.${index}.preferredEtcArr`, {
+                      {...register(`positionArr.${index}.preferred_etc_arr`, {
                         setValueAs: (v: string) => {
                           return v.split("\n");
                         },
@@ -444,22 +577,27 @@ const JdUpload: NextPage = () => {
                 high: false,
                 college: false,
                 four: false,
-                requiredExp: "",
-                minYear: undefined,
-                maxYear: undefined,
-                requiredEtcArr: undefined,
-                contractType: "",
-                conversionRate: undefined,
-                taskMain: "",
-                taskSubArr: undefined,
-                taskDetailArr: undefined,
-                rotationArr: undefined,
-                rotationEtc: "",
-                placeArr: "",
-                hireNumber: undefined,
-                payArr: undefined,
-                preferredCertiArr: [],
-                preferredEtcArr: undefined,
+                required_exp: "",
+                min_year: undefined,
+                max_year: undefined,
+                required_etc_arr: undefined,
+                contract_type: "",
+                conversion_rate: undefined,
+                task_main: "",
+                task_sub_arr: undefined,
+                task_detail_arr: undefined,
+                rotation_arr: undefined,
+                rotation_etc: "",
+                place_arr: {
+                  type: "",
+                  address_arr: [],
+                  factory_arr: [],
+                  etc: "",
+                },
+                hire_number: undefined,
+                pay_arr: undefined,
+                preferred_certi_arr: undefined,
+                preferred_etc_arr: undefined,
               });
             }}
           >

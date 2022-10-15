@@ -4,7 +4,7 @@ import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
   name: string;
-  file_id: number;
+  file_id: string;
   business_number: number;
   catch_url: string;
   youtube_url: string;
