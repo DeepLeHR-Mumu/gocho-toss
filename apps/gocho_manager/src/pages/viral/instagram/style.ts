@@ -52,9 +52,24 @@ export const infoBox = css`
 `;
 
 export const info = css`
+  display: flex;
   font-weight: 400;
   color: ${COLORS.GRAY30};
   margin-bottom: 0.25rem;
+`;
+
+export const infoText = css`
+  margin-right: 0.125rem;
+
+  :after {
+    content: ", ";
+  }
+
+  :last-of-type {
+    :after {
+      content: "";
+    }
+  }
 `;
 
 export const buttonContainer = css`

@@ -20,6 +20,7 @@ import {
   companyLogo,
   infoBox,
   info,
+  infoText,
   buttonContainer,
   buttonBox,
   kakaoButton,
@@ -33,7 +34,7 @@ const Instagram: NextPage = () => {
     isError,
   } = useJobArr({
     order: "popular",
-    // filter: "valid",
+    filter: "valid", // TODO: to TodayUpload
     limit: 10,
   });
 
@@ -99,7 +100,7 @@ const Instagram: NextPage = () => {
               <li css={jobContainer}>
                 <div css={jobInfoContainer}>
                   <div css={companyLogo}>
-                    <Image layout="fill" objectFit="contain" src={job.companyLogo || defaultCompanyLogo} alt="" />
+                    <Image layout="fill" objectFit="contain" src={defaultCompanyLogo} alt="" />
                   </div>
                   <div css={companyInfo}>
                     <div css={infoName}>{job.companyName}</div>
@@ -107,10 +108,16 @@ const Instagram: NextPage = () => {
                   </div>
                   <div css={infoBox}>
                     <p css={infoName}>채용 분야</p>
-                    <div css={info}>{job.taskArr}</div>
+                    <div css={info}>
+                      {job.taskArr.map((task) => {
+                        return <p css={infoText}>{task}</p>;
+                      })}
+                    </div>
                     <p css={infoName}>학력</p>
                     <div css={info}>
-                      {job.high && "고졸"} {job.college && "초대졸"}
+                      {job.eduArr.map((edu) => {
+                        return <p css={infoText}>{edu}</p>;
+                      })}
                     </div>
                   </div>
                   <div css={infoBox}>
@@ -124,19 +131,20 @@ const Instagram: NextPage = () => {
                   <div css={infoBox}>
                     <p css={infoName}>근무지</p>
                     <div css={info}>
-                      {job.placeArr[0]} {job.placeArr[1]}
-                      <br />
-                      {job.placeArr.length !== 1 && `외 ${job.placeArr.length - 1}곳`}
+                      {job.placeArr.map((place) => {
+                        return <p css={infoText}>{place}</p>;
+                      })}
                     </div>
                     <p css={infoName}>교대</p>
                     <div css={info}>
-                      {job.rotationArr[0]} <br />
-                      {job.rotationArr.length !== 1 && `외 ${job.rotationArr.length - 1}형태`}
+                      {job.rotationArr.map((rotation) => {
+                        return <p css={infoText}>{rotation}</p>;
+                      })}
                     </div>
                   </div>
                   <div css={infoBox}>
                     <p css={infoName}>조회수</p>
-                    <div css={info}>{job.view}</div>
+                    {/* <div css={info}>{job.view}</div> */}
                   </div>
                 </div>
                 <div css={buttonContainer}>

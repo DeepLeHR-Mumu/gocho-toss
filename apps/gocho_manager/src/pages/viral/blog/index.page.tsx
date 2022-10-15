@@ -15,9 +15,49 @@ const Blog: NextPage = () => {
     isError,
   } = useJobArr({
     order: "popular",
-    // filter: "todayUpload",
+    filter: "valid", // TODO: to TodayUpload
     limit: 10,
   });
+
+  const copyViral = async (jobList: JobDef[]) => {
+    let text = "";
+    const date = new Date();
+    text += "💡 고초대졸닷컴 오늘의 채용공고 소식\n";
+    text += `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}\n\n`;
+    text += `------ \n\n`;
+
+    jobList.map((job) => {
+      const { year: startYear, month: startMonth, date: startDate } = dateConverter(job.startTime);
+      const { year: endYear } = dateConverter(job.endTime);
+      const endDate = endYear === 9999 ? "상시" : `~ ${startYear}-${startMonth}-${startDate} 까지`;
+
+      text += `🚀 ${job.companyName}\n${job.title}\n- 접수기간 : ${endDate}\n`;
+      let taskString = "";
+      job.taskArr.map((task, index, taskArr) => {
+        taskString += index + 1 === taskArr.length ? `${task}` : `${task}, `;
+        return taskString;
+      });
+      text += `- 직무: ${taskString}\n`;
+      let contractString = "";
+      job.contractArr.map((contract, index, contractArr) => {
+        contractString += index + 1 === contractArr.length ? `${contract}` : `${contract}, `;
+        return contractString;
+      });
+      text += `- 채용형태: ${contractString}\n`;
+      text += `- 근무지: ${job.placeArr[0]} ${job.placeArr.length !== 1 ? `외 ${job.placeArr.length - 1}곳` : ""}\n`;
+      text += `- 근무형태: ${job.rotationArr[0]} ${
+        job.rotationArr.length !== 1 ? `외 ${job.rotationArr.length - 1}형태` : ""
+      }\n\n`;
+      return text;
+    });
+
+    try {
+      await navigator.clipboard.writeText(text);
+      alert("오늘의 채용공고가 복사되었습니다!");
+    } catch (error) {
+      alert("오류!");
+    }
+  };
 
   const copyBlogTodayJob = async (jobList: JobDef[]) => {
     let text = "";
@@ -27,17 +67,20 @@ const Blog: NextPage = () => {
       const endDate = endYear === 9999 ? "상시" : `~ ${startYear}-${startMonth}-${startDate} 까지`;
 
       text += `🚀 ${job.companyName}\n${job.title}\n- 접수기간 : ${endDate}\n`;
-      text += `- ${job.placeArr[0]} ${job.placeArr[1]} ${
-        job.placeArr.length !== 1 ? `외 ${job.placeArr.length - 1}곳` : ""
-      }\n`;
-      text += `- ${job.taskArr}, ${job.rotationArr}, ${job.contractArr}`;
       let taskString = "";
       job.taskArr.map((task, index, taskArr) => {
-        taskString += index + 1 === taskArr.length ? `${task}` : `${task}/`;
+        taskString += index + 1 === taskArr.length ? `${task}` : `${task}, `;
         return taskString;
       });
-      text += `${taskString}\n`;
-      text += `- ${job.rotationArr[0]} ${
+      text += `- 직무: ${taskString}\n`;
+      let contractString = "";
+      job.contractArr.map((contract, index, contractArr) => {
+        contractString += index + 1 === contractArr.length ? `${contract}` : `${contract}, `;
+        return contractString;
+      });
+      text += `- 채용형태: ${contractString}\n`;
+      text += `- 근무지: ${job.placeArr[0]} ${job.placeArr.length !== 1 ? `외 ${job.placeArr.length - 1}곳` : ""}\n`;
+      text += `- 근무형태: ${job.rotationArr[0]} ${
         job.rotationArr.length !== 1 ? `외 ${job.rotationArr.length - 1}형태` : ""
       }\n\n`;
       return text;
@@ -81,36 +124,40 @@ const Blog: NextPage = () => {
       <section css={sectionContainer}>
         <h3 css={sectionTitle}>오늘의 공고</h3>
         <div css={buttonContainer}>
-          <button css={jdButton} type="button">
-            오늘의 공고 복사히기
+          <button
+            css={jdButton}
+            type="button"
+            onClick={() => {
+              return copyViral(jobDataArr.jobDataArr);
+            }}
+          >
+            오늘의 공고 복사하기
           </button>
         </div>
       </section>
 
       <section css={sectionContainer}>
         <h3 css={sectionTitle}>네이버 블로그</h3>
-        {jobDataArr && (
-          <div css={buttonContainer}>
-            <button
-              css={naverButton}
-              type="button"
-              onClick={() => {
-                return copyBlogTodayJob(jobDataArr.jobDataArr);
-              }}
-            >
-              오늘의 채용공고 복사하기
-            </button>
-            <button
-              css={naverButton}
-              type="button"
-              onClick={() => {
-                return copyBlogTag(jobDataArr.jobDataArr);
-              }}
-            >
-              태그 복사하기
-            </button>
-          </div>
-        )}
+        <div css={buttonContainer}>
+          <button
+            css={naverButton}
+            type="button"
+            onClick={() => {
+              return copyBlogTodayJob(jobDataArr.jobDataArr);
+            }}
+          >
+            오늘의 채용공고 복사하기
+          </button>
+          <button
+            css={naverButton}
+            type="button"
+            onClick={() => {
+              return copyBlogTag(jobDataArr.jobDataArr);
+            }}
+          >
+            태그 복사하기
+          </button>
+        </div>
       </section>
     </main>
   );
