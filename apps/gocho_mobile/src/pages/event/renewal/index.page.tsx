@@ -20,6 +20,7 @@ const EventRenewal: NextPage = () => {
   }, []);
 
   return (
+    // w
     <main css={wrapper}>
       <MetaHead metaData={META_EVENT} />
       <PartIntro />
