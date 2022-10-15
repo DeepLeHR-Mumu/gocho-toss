@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 
@@ -8,12 +8,15 @@ import { EMAIL_ERROR_MESSAGE, NICKNAME_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
+import { signupModalOpenEvent, signupModalCloseEvent, signupSuccessEvent } from "shared-ga/auth";
 
 import { ModalComponent } from "@component/modal/modalBackground";
 import { useModal } from "@recoil/hook/modal";
 import { CloseButton } from "@component/common/atom/closeButton";
+import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
+import { useToast } from "@recoil/hook/toast";
 
-import { wrapper, desc, formCSS, closeBtn, formArr, logoContainer } from "./style";
+import { wrapper, desc, formCSS, closeBtn, formArr, logoContainer, sideErrorMsg } from "./style";
 import { SignUpFormValues } from "./type";
 import { validateNickname } from "./util";
 
@@ -21,30 +24,55 @@ export const SignUpBox: FunctionComponent = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, dirtyFields },
   } = useForm<SignUpFormValues>({ mode: "onChange" });
-
   const { refetch } = useUserInfo();
   const { closeModal } = useModal();
   const { mutate } = useDoSignUp();
+  const { setCurrentToast } = useToast();
+
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const signupAttempt = useRef(0);
 
   const signUpSubmit: SubmitHandler<SignUpFormValues> = (signUpObj) => {
     mutate(signUpObj, {
+      onError: (error) => {
+        const errorResponse = error.response?.data as ErrorResponse;
+        setErrorMsg(errorResponse.error.errorMessage);
+        signupAttempt.current += 1;
+      },
       onSuccess: (response) => {
         localStorage.setItem("token", `${response?.data.token}`);
+        signupSuccessEvent();
         refetch();
         closeModal();
+        setCurrentToast("님 환영합니다.", watch("nickname"));
       },
     });
   };
 
+  useEffect(() => {
+    setErrorMsg(null);
+  }, [closeModal]);
+
+  useEffect(() => {
+    signupModalOpenEvent();
+  }, []);
+
   return (
     <div css={wrapper}>
       <div css={closeBtn}>
-        <CloseButton size="S" buttonClick={closeModal} />
+        <CloseButton
+          size="S"
+          buttonClick={() => {
+            signupModalCloseEvent(signupAttempt.current);
+            closeModal();
+          }}
+        />
       </div>
       <div css={logoContainer}>
-        <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" />
+        <Image objectFit="contain" src={smallMono} alt="고초대졸 닷컴" layout="fill" />
       </div>
       <p css={desc}>가입은 5초면 가능!</p>
 
@@ -54,6 +82,7 @@ export const SignUpBox: FunctionComponent = () => {
             <AccountInput
               registerObj={register("email", {
                 required: EMAIL_ERROR_MESSAGE.REQUIRED,
+                maxLength: { value: 30, message: EMAIL_ERROR_MESSAGE.LOGIN_MIN_MAX },
                 pattern: {
                   value: EMAIL_REGEXP,
                   message: EMAIL_ERROR_MESSAGE.REGEX,
@@ -74,8 +103,7 @@ export const SignUpBox: FunctionComponent = () => {
                 maxLength: { value: 20, message: PWD_ERROR_MESSAGE.MIN_MAX },
                 pattern: {
                   value: PWD_REGEXP,
-                  // TODO: 메시지 전달받기
-                  message: "비밀번호 달라요",
+                  message: PWD_ERROR_MESSAGE.NOT_SPACE,
                 },
               })}
               placeholder="비밀번호를 입력해주세요"
@@ -99,6 +127,8 @@ export const SignUpBox: FunctionComponent = () => {
             />
           </li>
         </ul>
+
+        <p css={sideErrorMsg}>{errorMsg && errorMsg}</p>
         <NormalButton isSubmit wide text="확인" variant="filled" />
       </form>
     </div>

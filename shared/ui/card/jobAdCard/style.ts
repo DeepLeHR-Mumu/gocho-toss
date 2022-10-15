@@ -22,6 +22,10 @@ export const cardWrapper = (isMobile: boolean) => {
   `;
 };
 
+export const buttonBox = css`
+  display: block;
+`;
+
 export const colorLine = (colorCode: string, isMobile: boolean) => {
   return css`
     height: 0.8rem;
@@ -89,4 +93,5 @@ export const titleCSS = css`
   line-height: 1.6;
   height: 3.35rem;
   ${shorten(2)};
+  text-align: left;
 `;

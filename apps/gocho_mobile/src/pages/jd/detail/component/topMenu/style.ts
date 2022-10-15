@@ -6,36 +6,37 @@ export const menuWrapper = css`
   position: sticky;
   top: 3.25rem;
   background-color: ${COLORS.GRAY95};
-  height: 3rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1.5rem;
+  padding: 0.5rem 1rem;
   z-index: 10;
 `;
 
 export const flexBox = css`
   display: flex;
   align-items: center;
-  margin-right: 1rem;
-  ${shorten()};
+  width: calc(100% - 3rem);
 `;
 
 export const backButton = css`
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.5rem;
   margin-right: 0.5rem;
-  color: ${COLORS.GRAY10};
+  width: 2rem;
+  color: ${COLORS.GRAY20};
 `;
 
 export const jobTitle = css`
-  flex-grow: 1;
+  display: block;
   font-weight: 700;
-  line-height: 1.5;
+  font-size: 1rem;
+  color: ${COLORS.GRAY10};
+  width: calc(100% - 2.5rem);
   ${shorten()};
 `;
 
 export const shareIcon = css`
   font-size: 1.25rem;
+  width: 2rem;
   color: ${COLORS.BLUE_FIRST40};
 `;

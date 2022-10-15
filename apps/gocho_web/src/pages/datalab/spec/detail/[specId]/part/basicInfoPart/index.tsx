@@ -86,7 +86,8 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ basicData
           <div css={schoolInfo}>
             <p css={schoolInfoTitle}>평균학점</p>
             <p css={schoolInfoDesc}>
-              {basicData.college.grade} <span css={noStrongDesc}>/{basicData.college.maxGrade.toFixed(1)}</span>
+              {basicData.college.grade.toFixed(1)}{" "}
+              <span css={noStrongDesc}>/{basicData.college.maxGrade.toFixed(1)}</span>
             </p>
           </div>
           {basicData.college.isUturn && <p css={schoolInfoDesc}>U-턴함</p>}

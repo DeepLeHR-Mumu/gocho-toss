@@ -2,16 +2,18 @@ import { FunctionComponent, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { BsFillBookmarkFill } from "react-icons/bs";
+import { useQueryClient } from "@tanstack/react-query";
 
 import highTrue from "shared-image/global/common/go_color.svg";
 import highFalse from "shared-image/global/common/go_mono.svg";
 import collegeTrue from "shared-image/global/common/cho_color.svg";
 import collegeFalse from "shared-image/global/common/cho_mono.svg";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-
 import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
-import { useQueryClient } from "@tanstack/react-query";
+import { useUserInfo } from "shared-api/auth";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
+import { jdBookmarkEvent } from "shared-ga/jd";
+
 import { SkeletonBox } from "../../common/atom/skeletonBox";
 import { DdayBox } from "../../common/atom/dDayBox";
 
@@ -36,9 +38,10 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
   isMobile,
   isBookmarked,
   userId,
+  loginOpener,
 }) => {
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
-
+  const { error: useUserInfoError } = useUserInfo();
   const queryClient = useQueryClient();
 
   const { mutate: addMutate } = useAddJobBookmarkArr({
@@ -77,6 +80,7 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
         { userId, elemId: jobData.id },
         {
           onSuccess: () => {
+            jdBookmarkEvent(jobData.id);
             queryClient.invalidateQueries([{ data: "jobArr" }]);
           },
         }
@@ -103,6 +107,9 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
           css={bookmarkButton(isBookmarked)}
           onClick={(event) => {
             event.preventDefault();
+            if (useUserInfoError) {
+              return loginOpener();
+            }
             return isBookmarked ? deleteJobBookmark() : addJobBookmark();
           }}
           aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
@@ -120,7 +127,7 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
             <Image
               layout="fill"
               objectFit="contain"
-              src={imageSrc}
+              src={imageSrc || jobData.companyLogo}
               alt=""
               onError={() => {
                 return setImageSrc(defaultCompanyLogo);
@@ -150,7 +157,7 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
             />
           </li>
           <li>
-            {jobData.placeArr[0][1]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
+            {jobData.placeArr[0]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
           </li>
           <li>
             {jobData.rotationArr[0]} {jobData.rotationArr.length !== 1 && `외 ${jobData.rotationArr.length - 1}형태`}

@@ -10,6 +10,7 @@ import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
 import { useAddJobViewCount } from "shared-api/viewCount";
+import { jdDetailFunnelEvent } from "shared-ga/jd";
 
 import { DetailComment } from "@component/common/organisms/detailComment";
 import { TopMenu } from "../component/topMenu";
@@ -34,7 +35,6 @@ const JobsDetail: NextPage = () => {
   const { data: jobDetailData, isLoading } = useJobDetail({
     id: Number(jobId),
   });
-
   useEffect(() => {
     const jobViewStr = sessionStorage.getItem("jobViewArr");
     if (!jobDetailData) return;
@@ -68,6 +68,10 @@ const JobsDetail: NextPage = () => {
     }
   }, [currentPositionId, jobDetailData]);
 
+  useEffect(() => {
+    if (jobDetailData) jdDetailFunnelEvent(jobDetailData.id);
+  }, [jobDetailData]);
+
   if (!jobDetailData || isLoading) {
     return (
       <main css={wrapper}>
@@ -93,6 +97,14 @@ const JobsDetail: NextPage = () => {
     logoUrl: jobDetailData.company.logoUrl,
   };
 
+  const placeDetail = () => {
+    const addrObject = jobDetailData.positionArr[0].place;
+    if (addrObject.addressArr) return addrObject.addressArr[0];
+    if (addrObject.factoryArr) return addrObject.factoryArr[0].factoryName;
+    if (addrObject.etc) return addrObject.etc;
+    return addrObject.type;
+  };
+
   return (
     <main css={wrapper}>
       <MetaHead
@@ -102,7 +114,7 @@ const JobsDetail: NextPage = () => {
           rotation: jobDetailData.positionArr[0].rotationArr[0],
           taskDetail: jobDetailData.positionArr[0].taskDetailArr[0],
           pay: jobDetailData.positionArr[0].payArr && jobDetailData.positionArr[0].payArr[0],
-          place: jobDetailData.positionArr[0].placeArr[0],
+          place: placeDetail(),
           possibleEdu: jobDetailData.positionArr[0].possibleEdu.summary,
         }}
         metaData={META_JD_DETAIL}
@@ -111,7 +123,6 @@ const JobsDetail: NextPage = () => {
       <InvisibleH2 title={jobDetailData.title} />
       <TopMenu title={jobDetailData.title} id={jobDetailData.id} />
       <HeaderPart
-        jobDetailData={jobDetailData}
         setCurrentPositionId={setCurrentPositionId}
         currentPositionId={currentPositionId}
         isBookmarked={isBookmarked}
@@ -128,7 +139,9 @@ const JobsDetail: NextPage = () => {
         )}
       </div>
       <ReceptInfoPart jobDetailData={jobDetailData} />
-      {openComment && <DetailComment detailData={commentData} setOpenComment={setOpenComment} />}
+      {openComment && (
+        <DetailComment jdId={jobDetailData.id} detailData={commentData} setOpenComment={setOpenComment} />
+      )}
       <BottomMenu
         jobDetailData={jobDetailData}
         isBookmarked={isBookmarked}

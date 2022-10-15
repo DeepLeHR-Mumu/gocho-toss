@@ -25,8 +25,8 @@ export const containerSkeleton = css`
 
 export const container = css`
   width: 100%;
-  padding: 3rem 2rem;
+  padding: 3rem 1.5rem;
   background-color: ${COLORS.GRAY100};
   box-sizing: border-box;
-  border-radius: 2rem 2rem 0 0;
+  border-radius: 2rem;
 `;

@@ -4,7 +4,7 @@ import { FiArrowLeft } from "react-icons/fi";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 
 import { getJobTitleCreator } from "../../../common/util";
-import { PositionCardProps, PositionCardSkeleton } from "./type";
+import { PositionCardProps } from "./type";
 import {
   container,
   desc,
@@ -18,11 +18,11 @@ import {
   containerSkeleton,
 } from "./style";
 
-export const PositionCard: FunctionComponent<PositionCardProps | PositionCardSkeleton> = ({
+export const PositionCard: FunctionComponent<PositionCardProps> = ({
+  isDdayEnd,
   currentPositionId,
   setCurrentPositionId,
   position,
-  isSkeleton,
 }) => {
   const [isHover, setIsHover] = useState<boolean>(false);
 
@@ -33,7 +33,7 @@ export const PositionCard: FunctionComponent<PositionCardProps | PositionCardSke
     setIsHover(false);
   };
 
-  if (isSkeleton || !position) {
+  if (!position) {
     return (
       <div css={containerSkeleton}>
         <SkeletonBox />
@@ -44,19 +44,33 @@ export const PositionCard: FunctionComponent<PositionCardProps | PositionCardSke
   const isCurrentPosition = position.id === currentPositionId;
   return (
     <article css={wrapper} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-      <section css={container(isCurrentPosition, isHover)}>
-        <strong css={titleCSS(isCurrentPosition, isHover)}>{getJobTitleCreator(position)}</strong>
+      <button
+        css={container(isCurrentPosition, isHover)}
+        type="button"
+        onClick={() => {
+          setCurrentPositionId(position.id);
+        }}
+      >
+        <strong css={titleCSS(isCurrentPosition, isHover, isDdayEnd)}>{getJobTitleCreator(position)}</strong>
 
         <div css={infoBox}>
           <p css={desc}>{position.possibleEdu.summary}</p>
           <p css={desc}>
-            {position.placeArr.map((place) => {
-              return (
-                <span css={restCSS} key={`지역_${place}`}>
-                  {place}
-                </span>
-              );
-            })}
+            {position.place.type === "일반" &&
+              position.place.addressArr &&
+              position.place.addressArr.map((address, i) => {
+                return `${i !== 0 ? ", " : ""}${address.split(" ")[0]}`;
+              })}
+            {position.place.type === "일반" &&
+              !position.place.addressArr &&
+              position.place.factoryArr?.map((factory) => {
+                return (
+                  <span css={restCSS} key={`지역_${factory}`}>
+                    {factory.factoryName}
+                  </span>
+                );
+              })}
+            {position.place.type !== "일반" && <span css={restCSS}>{position.place.type}</span>}
           </p>
           <p css={desc}>{position.requiredExp.type}</p>
           <p css={desc}>
@@ -69,17 +83,9 @@ export const PositionCard: FunctionComponent<PositionCardProps | PositionCardSke
             })}
           </p>
 
-          <button
-            type="button"
-            css={viewButton}
-            onClick={() => {
-              setCurrentPositionId(position.id);
-            }}
-          >
-            자세히보기
-          </button>
+          <p css={viewButton}>자세히보기</p>
         </div>
-      </section>
+      </button>
 
       {isCurrentPosition && (
         <div css={arrowClickBox}>

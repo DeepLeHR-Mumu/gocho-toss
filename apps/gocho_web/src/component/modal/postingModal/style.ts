@@ -69,7 +69,7 @@ export const writerProfileImage = css`
 `;
 
 export const writerNickname = css`
-  display: flex;
+  display: block;
   align-items: center;
   padding: 0 0.5rem;
   font-size: 0.75rem;
@@ -103,6 +103,7 @@ export const bodyCSS = css`
   margin-bottom: 1rem;
   line-height: 1.8;
   word-break: break-all;
+  white-space: pre-line;
 `;
 
 export const infoContainer = css`
@@ -122,6 +123,8 @@ export const infoBox = css`
   > li {
     margin: 0 1rem;
 
+    display: flex;
+    justify-content: center;
     :first-of-type {
       margin-left: 0;
     }

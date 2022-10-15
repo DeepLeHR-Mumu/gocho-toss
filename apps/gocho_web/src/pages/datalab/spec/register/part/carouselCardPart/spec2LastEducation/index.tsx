@@ -2,7 +2,6 @@ import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { SpecCardTitle, MoveCardButtons, WarningText, ContainerBox } from "../common/component";
-
 import { Spec2lastEducationProps, PostSubmitValues } from "./type";
 import { specCardWrapper, formCSS } from "../common/style";
 import { container, title, imageBox } from "./style";
@@ -44,8 +43,8 @@ export const Spec2lastEducation: FunctionComponent<Spec2lastEducationProps> = ({
         >
           <ul css={container}>
             <li>
-              <h3 css={title(userLastEdu === "고졸")}>고등학교</h3>
               <label htmlFor="highSchool">
+                <h3 css={title(userLastEdu === "고졸")}>고등학교</h3>
                 <div css={imageBox(userLastEdu === "고졸", "고졸")} />
                 <input
                   type="radio"
@@ -62,8 +61,8 @@ export const Spec2lastEducation: FunctionComponent<Spec2lastEducationProps> = ({
               </label>
             </li>
             <li>
-              <h3 css={title(userLastEdu === "초대졸")}>대학교</h3>
               <label htmlFor="university">
+                <h3 css={title(userLastEdu === "초대졸")}>대학교</h3>
                 <div css={imageBox(userLastEdu === "초대졸", "초대졸")} />
                 <input
                   type="radio"

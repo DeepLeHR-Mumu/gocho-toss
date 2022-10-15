@@ -1,14 +1,14 @@
 import { FunctionComponent, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
 import { useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
 
 import { jobArrKeyObj } from "shared-constant/queryKeyFactory/job/jobArrKeyObj";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
-
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import highTrue from "shared-image/global/common/go_color.svg";
 import highFalse from "shared-image/global/common/go_mono.svg";
@@ -17,11 +17,16 @@ import collegeFalse from "shared-image/global/common/cho_mono.svg";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 import { dateConverter } from "shared-util/date";
+import { jdBookmarkEvent } from "shared-ga/jd";
+import { useUserInfo } from "shared-api/auth";
+
+import { useModal } from "@recoil/hook/modal";
 
 import { dDayBooleanReturn } from "./util";
 import { JobCardProps, JobCardSkeleton } from "./type";
 import {
   jobCardSkeleton,
+  jobDetailLink,
   cardWrapper,
   bookmarkButtonWrapper,
   bookmarkNumber,
@@ -44,6 +49,7 @@ import {
   taskBox,
   hoverButton,
   infoBox,
+  taskArrCSS,
 } from "./style";
 
 export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
@@ -52,10 +58,12 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   userId,
   isSkeleton,
 }) => {
-  const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
-
   const queryClient = useQueryClient();
+  const router = useRouter();
+  const { isSuccess } = useUserInfo();
+  const { setCurrentModal } = useModal();
 
+  const { data: userInfoData } = useUserInfo();
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobData?.id as number,
     end_time: jobData?.endTime as number,
@@ -78,6 +86,8 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
     },
   });
 
+  const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
+
   if (isSkeleton || jobData === undefined) {
     return (
       <div css={jobCardSkeleton}>
@@ -87,12 +97,16 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   }
 
   const addJobBookmark = () => {
+    if (!isSuccess) {
+      setCurrentModal("loginModal", { button: "close" });
+    }
     if (userId)
       addMutate(
         { userId, elemId: jobData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries(jobArrKeyObj.jobArr({}));
+            jdBookmarkEvent(jobData.id);
           },
         }
       );
@@ -115,12 +129,20 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
 
   const isExpired = dDayBooleanReturn(jobData.endTime);
 
+  const savePaginationNumber = () => {
+    sessionStorage.setItem("jdPageOrder", JSON.stringify(router.query.order));
+    sessionStorage.setItem("jdPageNumber", JSON.stringify(router.query.page));
+  };
+
   return (
     <article css={cardWrapper(isExpired)}>
       <button
         type="button"
         css={bookmarkButtonWrapper(isBookmarked)}
         onClick={(event) => {
+          if (!userInfoData) {
+            setCurrentModal("loginModal", { button: "close" });
+          }
           event.preventDefault();
           return isBookmarked ? deleteJobBookmark() : addJobBookmark();
         }}
@@ -131,7 +153,13 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
       </button>
 
       <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
-        <a>
+        <a
+          target="_blank"
+          css={jobDetailLink}
+          href={`${JOBS_DETAIL_URL}/${jobData.id}`}
+          onClick={savePaginationNumber}
+          rel="noreferrer"
+        >
           <p css={viewWrapper}>
             <FiEye />
             <span css={viewNumber}>{jobData.view}</span>
@@ -181,7 +209,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
                   />
                 </li>
                 <li css={detailInfo}>
-                  {jobData.placeArr[0][1]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
+                  {jobData.placeArr[0]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
                 </li>
 
                 <li css={detailInfo}>
@@ -197,20 +225,20 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
               채용중인 직무
               <span css={taskNumber(isExpired)}>{jobData.taskArr.length}</span>
             </p>
-            {jobData.taskArr.map((task) => {
-              return (
-                <div css={taskBox} key={`${jobData.id}${task}`}>
-                  {task}
-                </div>
-              );
-            })}
+            <ul css={taskArrCSS}>
+              {jobData.taskArr.map((task) => {
+                return (
+                  <li css={taskBox} key={`${jobData.id}${task}`}>
+                    {task}
+                  </li>
+                );
+              })}
+            </ul>
           </div>
 
-          <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
-            <a css={hoverButton} className="hoverButton">
-              공고보기
-            </a>
-          </Link>
+          <p css={hoverButton} className="hoverButton">
+            공고보기
+          </p>
         </a>
       </Link>
     </article>

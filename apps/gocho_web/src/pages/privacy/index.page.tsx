@@ -1,56 +1,69 @@
 import { NextPage } from "next";
 
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_PRIVACY } from "shared-constant/meta";
 import { Layout } from "@component/layout";
 
-import { mainDesc, executionDesc, tosArr } from "./constant";
-import { tosTitle, descCSS, subTitle, listCSS, subListCSS, executionDescCSS, wrapper } from "./style";
+import { executionDesc, privacyArr, CTOINFO } from "shared-constant/privacy";
+import {
+  tosTitle,
+  subTitle,
+  container,
+  executionDescCSS,
+  wrapper,
+  listTitle,
+  listArr,
+  desc,
+  CTOInfoCSS,
+} from "./style";
 
-import { tosItemDef } from "./type";
+import { PrivacyDef } from "./type";
 
 const Privacy: NextPage = () => {
   return (
     <main css={wrapper}>
+      <MetaHead metaData={META_PRIVACY} />
       <section>
         <Layout>
-          <h1 css={tosTitle}>개인정보 처리방침</h1>
-          <p css={descCSS}>{mainDesc}</p>
+          <strong css={tosTitle}>개인정보 처리방침</strong>
 
-          {tosArr.map((item: tosItemDef) => {
+          {privacyArr.map((item: PrivacyDef) => {
             return (
-              <div key={item.title}>
+              <div key={item.title} css={container}>
                 <h2 css={subTitle}>{item.title}</h2>
-                {item.desc && <p css={descCSS}>{item.desc}</p>}
-                {item.itemArr && (
-                  <ul css={listCSS}>
-                    {item.itemArr.map((subItem) => {
-                      return (
-                        <li key={subItem.desc}>
-                          {subItem.desc}
-                          {subItem.subItemArr && (
-                            <ul css={subListCSS}>
-                              {subItem.subItemArr.map((subList) => {
-                                return <li key={subList}>{subList}</li>;
-                              })}
-                            </ul>
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
-                {item.centerDesc && <p css={descCSS}>{item.centerDesc}</p>}
-                {item.centerList && (
-                  <ul css={listCSS}>
-                    {item.centerList.map((centerItem) => {
-                      return <li key={centerItem.desc}>{centerItem.desc}</li>;
-                    })}
-                  </ul>
-                )}
-                {item.lastDesc && <p css={descCSS}>{item.lastDesc}</p>}
+                {item.subItem.map((data) => {
+                  return (
+                    <>
+                      <strong css={listTitle}>{data.title}</strong>
+                      <ul css={listArr}>
+                        {data.infoArr.map((list) => {
+                          return (
+                            <li css={desc} key={list}>
+                              {list}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </>
+                  );
+                })}
               </div>
             );
           })}
-          <p css={executionDescCSS}>{executionDesc}</p>
+
+          <ul css={CTOInfoCSS}>
+            <li>가. 개인정보 보호 책임자</li>
+            <li>성명 : {CTOINFO.name}</li>
+            <li>전화번호 : {CTOINFO.tel}</li>
+            <li>이메일 : {CTOINFO.eMail}</li>
+          </ul>
+
+          <p css={executionDescCSS}>
+            <span>
+              {"<"} 부칙 {">"}
+            </span>
+            {executionDesc}
+          </p>
         </Layout>
       </section>
     </main>

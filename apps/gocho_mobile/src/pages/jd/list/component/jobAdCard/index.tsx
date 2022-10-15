@@ -1,9 +1,12 @@
 import { FunctionComponent, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import { dDayCalculator } from "shared-util/date";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
+import { jdAdClickEvent } from "shared-ga/jd";
+import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 
 import { SlideCardProps, SlideCardSkeleton } from "./type";
 import {
@@ -15,6 +18,7 @@ import {
   endTime,
   companyName,
   jdTitle,
+  buttonBox,
 } from "./style";
 
 export const JobAdCard: FunctionComponent<SlideCardProps | SlideCardSkeleton> = ({ jobData, bgColor, isSkeleton }) => {
@@ -29,25 +33,35 @@ export const JobAdCard: FunctionComponent<SlideCardProps | SlideCardSkeleton> = 
   }
 
   return (
-    <div css={cardWrapper}>
-      <div css={slideInfo(bgColor)}>
-        <div css={companyLogoWrapper}>
-          <div css={companyLogoBox}>
-            <Image
-              layout="fill"
-              objectFit="cover"
-              src={imageSrc}
-              alt={jobData.companyName}
-              onError={() => {
-                return setImageSrc(defaultCompanyLogo);
-              }}
-            />
+    <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`}>
+      <button
+        type="button"
+        css={buttonBox}
+        onClick={() => {
+          jdAdClickEvent(jobData.id);
+        }}
+      >
+        <div css={cardWrapper}>
+          <div css={slideInfo(bgColor)}>
+            <div css={companyLogoWrapper}>
+              <div css={companyLogoBox}>
+                <Image
+                  layout="fill"
+                  objectFit="contain"
+                  src={imageSrc || jobData.companyLogo}
+                  alt={jobData.companyName}
+                  onError={() => {
+                    return setImageSrc(defaultCompanyLogo);
+                  }}
+                />
+              </div>
+            </div>
+            <p css={endTime}>{dDayCalculator(jobData.endTime)}</p>
+            <p css={companyName}>{jobData.companyName}</p>
+            <strong css={jdTitle}>{jobData.title}</strong>
           </div>
         </div>
-        <p css={endTime}>{dDayCalculator(jobData.endTime)}</p>
-        <p css={companyName}>{jobData.companyName}</p>
-        <h3 css={jdTitle}>{jobData.title}</h3>
-      </div>
-    </div>
+      </button>
+    </Link>
   );
 };

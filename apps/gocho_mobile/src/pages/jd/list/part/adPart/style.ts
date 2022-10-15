@@ -32,6 +32,11 @@ export const carouselContainer = css`
     }
   }
 
+  .slick-slide button {
+    width: 100%;
+    margin: 0;
+  }
+
   .slick-dots li.slick-active button {
     background-color: ${COLORS.GRAY100};
   }

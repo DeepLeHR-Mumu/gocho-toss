@@ -34,6 +34,7 @@ export const flexBox = css`
 
 export const flexBetweenBox = css`
   display: flex;
+  justify-items: flex-start;
   margin-bottom: 1.5rem;
 
   :last-of-type {
@@ -45,6 +46,7 @@ export const subTitle = css`
   background-color: ${COLORS.GRAY90};
   border-radius: 0.5rem;
   display: flex;
+  height: 100%;
   align-items: center;
   justify-content: center;
   color: ${COLORS.GRAY40};
@@ -64,9 +66,15 @@ export const desc = css`
   word-break: keep-all;
 `;
 
+export const subDesc = css`
+  display: block;
+  padding-top: 0.5rem;
+  color: ${COLORS.BLUE_FIRST40};
+  font-weight: 500;
+`;
+
 export const restPoint = css`
-  margin-right: 0.25rem;
-  margin-bottom: 0.6rem;
+  line-height: 1.8;
   word-break: keep-all;
   display: inline-block;
   ::after {

@@ -4,6 +4,7 @@ import { useModal } from "@recoil/hook/modal";
 import { NormalButton } from "shared-ui/common/atom/button";
 
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { UnLoginCommentBoxProps } from "./type";
 import {
   commentBody,
   commentBox,
@@ -17,20 +18,21 @@ import {
   nicknameCSS,
 } from "./style";
 
-export const UnLoginCommentBox: FunctionComponent = () => {
+export const UnLoginCommentBox: FunctionComponent<UnLoginCommentBoxProps> = ({ setOpenComment }) => {
   const { setCurrentModal } = useModal();
 
   const showLoginModal = () => {
-    setCurrentModal("loginModal");
+    setOpenComment(false);
+    setCurrentModal("loginModal", { button: "close" });
   };
 
   return (
     <div>
       <section css={commentContainerBlur}>
         <ul>
-          {dummyArrCreator(3).map(() => {
+          {dummyArrCreator(3).map((value) => {
             return (
-              <div>
+              <div key={value}>
                 <li>
                   <div css={commentHeader}>
                     <p css={nicknameCSS}>유저닉네임</p>

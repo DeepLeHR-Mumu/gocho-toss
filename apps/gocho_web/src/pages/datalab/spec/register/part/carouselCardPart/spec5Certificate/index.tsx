@@ -20,6 +20,7 @@ import {
   appendKeywordButton,
   certificateCardBox,
   certificateCard,
+  hideCertificateArrButton,
 } from "./style";
 
 export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ moveNextCard, movePrevCard }) => {
@@ -82,6 +83,12 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
   return (
     <div css={specCardWrapper}>
       <SpecCardTitle title="자격증" desc="스펙의 꽃! 증 중의 증 자격증!" />
+      <button
+        type="button"
+        aria-label="자격증 검색창 닫기"
+        css={hideCertificateArrButton(isClick)}
+        onClick={handleHideCertificateArrBox}
+      />
 
       <form css={formCSS}>
         <Toggle
@@ -117,23 +124,31 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
                       }
                     }}
                   />
-                  <button type="button" onClick={handleHideCertificateArrBox}>
+                  <button type="button" onClick={handleHideCertificateArrBox} aria-label="자격증 검색 닫기">
                     <BsChevronUp />
                   </button>
                 </div>
                 <ul css={certificateArrCSS}>
                   {searchCertificateArr.map((keyword) => {
+                    const isOverCerti = fields.some((selectKeyword) => {
+                      return selectKeyword.value === keyword;
+                    });
+
+                    const getOverCertiIndex = fields.findIndex((field) => {
+                      return field.value === keyword;
+                    });
+
                     return (
                       <li key={`certificate_${keyword}`}>
-                        <CheckBox isChecked={hasFieldsInIncludes(fields, keyword)} />
                         <button
                           css={appendKeywordButton}
                           type="button"
                           onClick={() => {
                             handleHideCertificateArrBox();
-                            return append({ value: keyword });
+                            return isOverCerti ? remove(getOverCertiIndex) : append({ value: keyword });
                           }}
                         >
+                          <CheckBox isChecked={hasFieldsInIncludes(fields, keyword)} />
                           {keyword}
                         </button>
                       </li>
@@ -146,18 +161,18 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
             <div css={certificateCardBox}>
               {fields.map((field, index) => {
                 return (
-                  <div key={field.id} css={certificateCard}>
+                  <button
+                    key={field.id}
+                    css={certificateCard}
+                    aria-label={`${field.value} 제거`}
+                    type="button"
+                    onClick={() => {
+                      return remove(index);
+                    }}
+                  >
                     {field.value}
-                    <button
-                      aria-label={`${field.value} 제거`}
-                      type="button"
-                      onClick={() => {
-                        return remove(index);
-                      }}
-                    >
-                      <FiX />
-                    </button>
-                  </div>
+                    <FiX />
+                  </button>
                 );
               })}
             </div>

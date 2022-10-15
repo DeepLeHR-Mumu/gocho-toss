@@ -1,19 +1,34 @@
 import { FunctionComponent, useState } from "react";
-
-import { useUserInfo } from "shared-api/auth";
-
+import { useQueryClient } from "@tanstack/react-query";
+import { useUserInfo, useDeleteUserInfo } from "shared-api/auth";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
-
+import { userInfoKeyObj } from "shared-constant/queryKeyFactory/user/infoKeyObj";
+import { useToast } from "@recoil/hook/toast";
 import { ModalComponent } from "../modalBackground";
-import { wrapper, marginContainer, userNameCSS, accountCSS, buttonCSS, emailCSS, modalContainer } from "./style";
+import { wrapper, marginContainer, userNameCSS, buttonCSS, emailCSS, modalContainer, deleteAccountCSS } from "./style";
 import { PictureEditBox } from "./component/pictureEditBox";
 import { PasswordEditBox } from "./component/passwordEditBox";
 
 export const AccountSettingBox: FunctionComponent = () => {
   const [isPictureEditing, setIsPictureEditing] = useState(true);
   const [isPasswordEditing, setIsPasswordEditing] = useState(false);
+  const queryClient = useQueryClient();
 
   const { data: userInfoData } = useUserInfo();
+  const { setCurrentToast } = useToast();
+  const { mutate } = useDeleteUserInfo();
+
+  const deleteUserInfo = (id: number) => {
+    mutate(
+      { id },
+      {
+        onSuccess: () => {
+          setCurrentToast("회원탈퇴가 되었습니다.");
+          queryClient.invalidateQueries(userInfoKeyObj.userInfo);
+        },
+      }
+    );
+  };
 
   return (
     <div css={modalContainer}>
@@ -21,7 +36,6 @@ export const AccountSettingBox: FunctionComponent = () => {
         <div css={marginContainer}>
           {userInfoData?.image && <ProfileImg imageStr={userInfoData?.image} size="L" />}
           <p css={userNameCSS}>{userInfoData?.nickname}</p>
-          <p css={accountCSS}>{userInfoData?.id}</p>
           <p css={emailCSS}>{userInfoData?.email}</p>
         </div>
 
@@ -50,10 +64,17 @@ export const AccountSettingBox: FunctionComponent = () => {
           </button>
         )}
 
-        {/* LATER : api 완료시 추가 예정 */}
-        {/* <button type="button" css={deleteAccountCSS}>
+        <button
+          type="button"
+          css={deleteAccountCSS}
+          onClick={() => {
+            if (userInfoData) {
+              deleteUserInfo(userInfoData.id);
+            }
+          }}
+        >
           계정삭제
-        </button> */}
+        </button>
       </div>
       {isPictureEditing && <PictureEditBox />}
       {isPasswordEditing && <PasswordEditBox />}

@@ -4,11 +4,9 @@ export const setPostingTypeButtonArr: {
   {
     text: "자유",
   },
+  { text: "기업" },
   {
     text: "진로",
-  },
-  {
-    text: "기업",
   },
   {
     text: "자격증",

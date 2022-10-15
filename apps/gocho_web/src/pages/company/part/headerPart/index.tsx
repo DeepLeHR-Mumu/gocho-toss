@@ -8,6 +8,11 @@ import { useQueryClient } from "@tanstack/react-query";
 import catchLogoSrc from "shared-image/global/common/catch_logo.png";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
+import { useUserInfo } from "shared-api/auth";
+import { companyBookmarkEvent } from "shared-ga/company";
+
+
+import { useModal } from "@recoil/hook/modal";
 
 import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr } from "shared-api/bookmark";
 import { HeaderPartProps } from "./type";
@@ -29,7 +34,8 @@ import {
 
 export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData, isBookmarked, userId }) => {
   const queryClient = useQueryClient();
-  const [imageSrc, setImageSrc] = useState(companyData?.logoUrl as string);
+  const { data: userInfoData } = useUserInfo();
+  const { setCurrentModal } = useModal();
 
   const { mutate: addMutate } = useAddCompanyBookmarkArr({
     id: companyData?.id as number,
@@ -42,6 +48,8 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData, is
     name: companyData?.name as string,
   });
 
+  const [imageSrc, setImageSrc] = useState(companyData?.logoUrl as string);
+
   const addCompanyBookmark = () => {
     return (
       userId &&
@@ -49,6 +57,7 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData, is
         { userId, elemId: companyData.id },
         {
           onSuccess: () => {
+            companyBookmarkEvent(companyData.id);
             queryClient.invalidateQueries(companyDetailKeyObj.detail({ companyId: companyData.id }));
           },
         }
@@ -89,6 +98,9 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData, is
             type="button"
             css={bookmarkButton(isBookmarked)}
             onClick={() => {
+              if (!userInfoData) {
+                return setCurrentModal("loginModal", { button: "close" });
+              }
               return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
             }}
           >

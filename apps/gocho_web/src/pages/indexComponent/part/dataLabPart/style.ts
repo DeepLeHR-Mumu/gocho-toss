@@ -2,9 +2,7 @@ import { css } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
 
-export const dataLabWrapper = css`
-  margin-top: 4.5rem;
-`;
+export const dataLabWrapper = css``;
 
 export const title = css`
   font-size: 1.25rem;

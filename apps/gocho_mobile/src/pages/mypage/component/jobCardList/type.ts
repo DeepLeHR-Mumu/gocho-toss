@@ -1,13 +1,10 @@
 export type JobListPartProps = {
-  jobDataArr:
-    | {
-        id: number;
-        companyName: string;
-        companyLogo: string;
-        endTime: number;
-        title: string;
-        cut: boolean;
-      }[]
-    | undefined;
-  isLoading: boolean;
+  jobDataArr: {
+    id: number;
+    companyName: string;
+    companyLogo: string;
+    endTime: number;
+    title: string;
+    cut: boolean;
+  }[];
 };

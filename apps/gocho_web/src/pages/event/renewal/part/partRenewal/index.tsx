@@ -4,6 +4,9 @@ import Image from "next/image";
 import drawPoint1 from "shared-image/event/renewal/draw_point.svg";
 import drawPoint2 from "shared-image/event/renewal/draw_point2.svg";
 import gochoLogoColor from "shared-image/global/deepLeLogo/smallColor.svg";
+import renewal01Src from "shared-image/event/renewal/renewal_01.png";
+import renewal02Src from "shared-image/event/renewal/renewal_02.png";
+import renewal03Src from "shared-image/event/renewal/renewal_03.png";
 
 import { NormalButton } from "shared-ui/common/atom/button";
 import { useModal } from "@recoil/hook/modal";
@@ -47,9 +50,15 @@ export const PartRenewal: FunctionComponent = () => {
         </div>
 
         <ul css={listCSS}>
-          <li />
-          <li />
-          <li />
+          <li>
+            <Image src={renewal01Src} layout="responsive" objectFit="cover" />
+          </li>
+          <li>
+            <Image src={renewal02Src} layout="responsive" objectFit="cover" />
+          </li>
+          <li>
+            <Image src={renewal03Src} layout="responsive" objectFit="cover" />
+          </li>
         </ul>
 
         <p css={subDesc}>
@@ -67,8 +76,6 @@ export const PartRenewal: FunctionComponent = () => {
             <NormalButton buttonClick={openLoginModal} text="지금 로그인 하기" variant="filled" wide />
           </div>
         )}
-
-        <p css={subDesc}>스펙평가도 받고 원하는 기업의 정보도 받아보세요</p>
       </Layout>
     </section>
   );

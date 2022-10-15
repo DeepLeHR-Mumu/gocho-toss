@@ -21,7 +21,7 @@ export interface PositionObjDef {
   id: number;
   jdId: number;
   requiredExp: {
-    type: "신입" | "경력" | "무관";
+    type: "신입" | "경력" | "무관" | "신입/경력";
     maxYear: number;
     minYear: number;
   };
@@ -32,8 +32,32 @@ export interface PositionObjDef {
   };
   taskDetailArr: string[];
   rotationArr: string[];
-  factoryArr: FactoryObjDef[];
-  placeArr: string[];
+  place: {
+    addressArr: string[] | null;
+    factoryArr:
+      | {
+          id: number;
+          companyId: number;
+          place1: string;
+          place2: string;
+          address: string;
+          maleNumber: number;
+          femaleNumber: number;
+          product: string;
+          bus: {
+            exists: boolean;
+            desc: string | null;
+          };
+          dormitory: {
+            exists: boolean;
+            desc: string | null;
+          };
+          factoryName: string;
+        }[]
+      | null;
+    etc: string | null;
+    type: "일반" | "전국" | "해외" | "기타";
+  };
   hireCount: number;
   payArr: number[] | null;
   preferredCertiArr: string[] | null;

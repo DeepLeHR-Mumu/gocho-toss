@@ -15,7 +15,7 @@ export const JobListPart: FunctionComponent<JobListPartProps> = ({ jobDataArr, i
     <section>
       <p css={title}>채용 공고 📮</p>
       <JobCardList jobDataArr={jobDataArr} isLoading={isLoading} />
-      <BottomPagination totalPage={totalPage} q={router.query.q} url="/search" />
+      <BottomPagination totalPage={totalPage} linkObj={{ pathname: "/search", q: router.query.q as string }} />
     </section>
   );
 };

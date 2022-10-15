@@ -5,16 +5,20 @@ import { BsChevronRight } from "react-icons/bs";
 
 import { useJobArr } from "shared-api/job";
 import { useCompanyArr } from "shared-api/company";
-import { Layout } from "@component/layout";
-import { searchMenuButtonArr } from "@pages/search/constant";
 import { COLORS } from "shared-style/color";
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { META_INDEX } from "shared-constant/meta";
 import { scrollToTop } from "shared-ui/common/atom/scrollTop";
 import { NormalButton } from "shared-ui/common/atom/button";
+import { searchFunnelEvent } from "shared-ga/search";
+
+import { Layout } from "@component/layout";
+import { searchMenuButtonArr } from "@pages/search/constant";
+
 import { JobPreviewPart } from "./part/jobPreviewPart";
 import { CompanyPreviewPart } from "./part/companyPreviewPart";
 import { JobListPart } from "./part/jobListPart";
 import { CompanyListPart } from "./part/companyListPart";
-
 import { mainContainer, menuList, menuElement, menuButton, title, buttonBox } from "./style";
 import { searchMenuDef } from "./type";
 
@@ -39,6 +43,10 @@ const UnifiedSearch: NextPage = () => {
     scrollToTop();
   }, [router.query]);
 
+  useEffect(() => {
+    searchFunnelEvent();
+  }, []);
+
   const { data: jobDataArr, isLoading: isJobLoading } = useJobArr({
     q: JSON.stringify({ searchWord }),
     order: "recent",
@@ -54,15 +62,17 @@ const UnifiedSearch: NextPage = () => {
     offset: (companyPage - 1) * companyLimit,
   });
 
+  const totalCount = (jobDataArr?.count || 0) + (companyDataArr?.count || 0);
   return (
     <main css={mainContainer}>
+      <MetaHead metaData={META_INDEX} />
       <Layout>
         <nav>
           <ul css={menuList}>
             {searchMenuButtonArr.map((menuText) => {
               const isActive = menuText === menu;
               return (
-                <li css={menuElement}>
+                <li css={menuElement} key={menuText}>
                   <button
                     css={menuButton(isActive)}
                     type="button"
@@ -81,7 +91,7 @@ const UnifiedSearch: NextPage = () => {
                       setMenu(menuText);
                     }}
                   >
-                    {menuText} {menuText === "전체" && (jobDataArr?.count || 0) + (companyDataArr?.count || 0)}
+                    {menuText} {menuText === "전체" && totalCount.toLocaleString("Ko-KR")}
                     {menuText === "공고" && jobDataArr?.count.toLocaleString("Ko-KR")}
                     {menuText === "기업" && companyDataArr?.count.toLocaleString("Ko-KR")}
                   </button>

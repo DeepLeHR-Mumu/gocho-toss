@@ -1,4 +1,5 @@
 export interface HeaderProps {
+  isDdayEnd: boolean;
   jobDetailData: {
     id: number;
     startTime: number;
@@ -15,6 +16,5 @@ export interface HeaderProps {
       youtubeUrl: string | null;
     };
   };
-  isBookmarked: boolean;
   userId: number | undefined;
 }

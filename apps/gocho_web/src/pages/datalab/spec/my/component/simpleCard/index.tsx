@@ -37,7 +37,6 @@ export const SimpleCard: FunctionComponent<SimpleCardProps> = ({
           {hasEvalCount ? (
             <div css={evalBox}>
               <p css={scoreText(mySpecData.score)}>{mySpecData.score ? mySpecData.score : "평가없음"}</p>
-              {/* LATER : display만 가능하도록 변경 */}
               <StarEvaluation size="S" parentScore={mySpecData.score} />
             </div>
           ) : (
@@ -50,9 +49,7 @@ export const SimpleCard: FunctionComponent<SimpleCardProps> = ({
             css={moreButton}
             type="button"
             onClick={() => {
-              if (hasEvalCount) {
-                handleShowMore();
-              }
+              handleShowMore();
             }}
             aria-label="평가 자세히 보기"
           >

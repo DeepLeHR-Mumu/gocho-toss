@@ -1,4 +1,6 @@
 import { NextPage } from "next";
+import { useEffect } from "react";
+
 // import { dehydrate, QueryClient } from "@tanstack/react-query";
 
 // import { specArrKeyObj } from "@constant/queryKeyFactory/spec/arrKeyObj";
@@ -8,8 +10,10 @@ import { NextPage } from "next";
 // import { tipArrKeyObj } from "@constant/queryKeyFactory/tip/arrKeyObj";
 import { META_INDEX } from "shared-constant/meta";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { homeFunnelEvent } from "shared-ga/home";
+
 import { CompanyCommentPart } from "@pages/indexComponent/part/companyCommentPart";
-import { DataLabPart } from "@pages/indexComponent/part/dataLabPart";
+
 import { MainCarouselPart } from "./indexComponent/part/mainCarouselPart";
 import { JobPart } from "./indexComponent/part/jobPart";
 import { CommunityPostingPart } from "./indexComponent/part/communityPostingPart";
@@ -48,11 +52,13 @@ import { TipPart } from "./indexComponent/part/tipPart";
 // }
 
 const Home: NextPage = () => {
+  useEffect(() => {
+    homeFunnelEvent();
+  }, []);
   return (
     <main>
       <MetaHead metaData={META_INDEX} />
       <MainCarouselPart />
-      <DataLabPart />
       <JobPart />
       <CompanyCommentPart />
       <TipPart />

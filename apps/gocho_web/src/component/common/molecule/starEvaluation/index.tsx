@@ -18,13 +18,13 @@ export const StarEvaluation: FunctionComponent<SettingProps | DisplayProps> = ({
     }
   }, [score, parentSetState]);
 
-  // eslint-disable-next-line consistent-return
   useEffect(() => {
     if (parentScore === null) {
-      return setScore(0);
+      setScore(0);
+      return;
     }
     if (parentScore) {
-      return setScore(parentScore * 2);
+      setScore(parentScore * 2);
     }
   }, [parentScore]);
 
@@ -56,7 +56,7 @@ export const StarEvaluation: FunctionComponent<SettingProps | DisplayProps> = ({
             return <BsStar key={`emptyStar${val + 1}`} />;
           })}
       </div>
-      {!parentScore && (
+      {!parentScore && parentSetState && (
         <div css={hoverLayer}>
           {dummyArrCreator(10).map((val) => {
             const point = val + 1;

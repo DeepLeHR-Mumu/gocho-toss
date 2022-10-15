@@ -4,11 +4,20 @@ import Image from "next/image";
 import factoryIcon from "shared-image/global/common/factory_icon.svg";
 
 import { useModal } from "@recoil/hook/modal";
-import { NoDataDesc } from "../common/component/noDataDesc";
 
+import { NoDataDesc } from "../common/component/noDataDesc";
 import { DetailWorkPartProps, ShowFactoryModalDef } from "./type";
 import { container, containerTitle, flexBox, flexBetweenBox, subTitle, restPoint, desc } from "../common/style";
-import { colorPoint, mainProductDesc, productContainer, workPlaceContainer, factoryButton, flexDesc } from "./style";
+import {
+  colorPoint,
+  mainProductDesc,
+  productContainer,
+  workPlaceContainer,
+  factoryButton,
+  flexDesc,
+  typeText,
+  placeContainer,
+} from "./style";
 
 export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPosition }) => {
   const { setCurrentModal } = useModal();
@@ -70,41 +79,42 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
           </div>
         </div>
       </div>
-
       <div css={workPlaceContainer}>
         <div css={flexBetweenBox}>
           <p css={subTitle}>근무지</p>
           <div>
             <p css={flexDesc}>
-              [
-              {freshPosition.placeArr.map((place) => {
+              {freshPosition.place.addressArr?.map((place) => {
                 return (
-                  <span css={restPoint} key={`지역_${place}`}>
-                    {place}
-                  </span>
+                  <div key={`지역_${place}`}>
+                    <p css={restPoint}>{place}</p>
+                  </div>
                 );
               })}
-              ]
+              {!freshPosition.place.addressArr && !freshPosition.place.factoryArr && (
+                <div css={placeContainer} key={`지역_${freshPosition.place.etc}`}>
+                  <div css={typeText}>{freshPosition.place.type}</div>
+                  <p css={restPoint}>{freshPosition.place.etc}</p>
+                </div>
+              )}
             </p>
-            {freshPosition.factoryArr &&
-              freshPosition.factoryArr.map((factory) => {
-                return (
-                  <p css={flexDesc} key={`공장_${factory.id}`}>
-                    <button
-                      css={factoryButton}
-                      type="button"
-                      onClick={() => {
-                        showFactoryModal(factory);
-                      }}
-                    >
-                      <Image src={factoryIcon} alt="" objectFit="contain" />
-                      {/* LATER : 나중에 공장이름 나오면 바꿔주기 */}
-                      factoryName
-                    </button>
-                    {factory.address}
-                  </p>
-                );
-              })}
+            {freshPosition.place.factoryArr?.map((factory) => {
+              return (
+                <div css={flexDesc} key={`${factory.factoryName}_${factory.id}`}>
+                  <button
+                    css={factoryButton}
+                    type="button"
+                    onClick={() => {
+                      showFactoryModal(factory);
+                    }}
+                  >
+                    <Image src={factoryIcon} alt="" objectFit="contain" />
+                    {factory.factoryName}
+                  </button>
+                  {factory.address}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ import kakaoMonoSrc from "shared-image/global/sns/kakaoMono.svg";
 import { MAIN_URL, PRIVACY_URL, TOS_URL } from "shared-constant/internalURL";
 import { Layout } from "@component/layout";
 
-import { companyInfoObj } from "./constant";
+import { companyInfoObj } from "shared-constant/deepleInfo";
 import {
   footerWrapper,
   footerContainer,
@@ -37,7 +37,7 @@ export const Footer: FunctionComponent = () => {
                 <Link href={MAIN_URL}>홈</Link>
               </li>
               <li>
-                채용문의
+                채용문의{" "}
                 <Link href={`mailto:${companyInfoObj.CSEmail}`}>
                   <a>{companyInfoObj.CSEmail}</a>
                 </Link>

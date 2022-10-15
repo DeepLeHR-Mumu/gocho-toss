@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
+import ReactGA from "react-ga4";
 import Head from "next/head";
 import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
@@ -11,6 +12,8 @@ import { Global } from "@emotion/react";
 import { GNB } from "@component/global/gnb";
 import { Footer } from "@component/global/footer";
 import { ModalPlaceholder } from "@component/common/organisms/modal/modalPlaceHolder";
+import { ToastPlaceholder } from "@component/toast/toastPlaceholder";
+import { KEY } from "shared-constant/gaKey";
 
 import { globalStyles } from "@style/globalStyles";
 
@@ -39,6 +42,7 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
+  ReactGA.initialize(KEY);
   const router = useRouter();
   const [queryClient] = useState(() => {
     return new QueryClient({
@@ -53,7 +57,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               router.push("/404");
             }
             if (axios.isAxiosError(error) && error.response?.status === 500) {
-              router.push("/404");
+              router.push("/500");
             }
           },
         },
@@ -61,16 +65,42 @@ function MyApp({ Component, pageProps }: AppProps) {
     });
   });
 
+  useEffect(() => {
+    const isDesktop = ![
+      /Android/i,
+      /webOS/i,
+      /iPhone/i,
+      /iPad/i,
+      /iPod/i,
+      /BlackBerry/i,
+      /Windows Phone/i,
+      /Mobile/i,
+    ].some((toMatchItem) => {
+      return navigator.userAgent.match(toMatchItem);
+    });
+    const isVercel = window.location.href.includes("vercel");
+    const isLocal = window.location.href.includes("localhost");
+
+    if (isVercel || isLocal) {
+      return;
+    }
+    if (isDesktop) {
+      const { host, pathname, protocol } = window.location;
+      const desktopHost = host.slice(host.indexOf(".") + 1);
+      window.location.href = `${protocol}//${desktopHost}${pathname}`;
+    }
+  }, []);
+
   return (
     <RecoilRoot>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <Global styles={globalStyles} />
           <ModalPlaceholder />
+          <ToastPlaceholder />
           <GNB />
           <Component {...pageProps} />
           <Footer />

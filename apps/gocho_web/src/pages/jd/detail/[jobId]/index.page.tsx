@@ -9,9 +9,9 @@ import { useJobDetail } from "shared-api/job";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { Layout } from "@component/layout";
 import { DetailComment } from "@component/global/detailComment";
-import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
 import { useAddJobViewCount } from "shared-api/viewCount";
+import { jdDetailFunnelEvent } from "shared-ga/jd";
 
 import { PositionObjDef } from "./type";
 import { HeaderPart, DetailSupportPart, DetailWorkPart, DetailPreferencePart, ReceptInfoPart } from "../part";
@@ -23,7 +23,6 @@ const JobsDetail: NextPage = () => {
   const [freshPosition, setFreshPosition] = useState<PositionObjDef | null>(null);
 
   const { data: userData } = useUserInfo();
-  const { data: userJobBookmarkArr, refetch } = useUserJobBookmarkArr({ userId: userData?.id });
   const { mutate: addViewCount } = useAddJobViewCount();
 
   const router = useRouter();
@@ -66,6 +65,10 @@ const JobsDetail: NextPage = () => {
     }
   }, [currentPositionId, jobDetailData]);
 
+  useEffect(() => {
+    if (jobDetailData) jdDetailFunnelEvent(jobDetailData.id);
+  }, [jobDetailData]);
+
   if (!jobDetailData || isLoading) {
     return (
       <main css={wrapper}>
@@ -82,18 +85,19 @@ const JobsDetail: NextPage = () => {
     );
   }
 
-  const isBookmarked = Boolean(
-    userJobBookmarkArr?.some((job) => {
-      return job.id === jobDetailData.id;
-    })
-  );
-
   const commentData = {
     companyId: jobDetailData.company.companyId,
     name: jobDetailData.company.name,
     logoUrl: jobDetailData.company.logoUrl,
   };
 
+  const placeDetail = () => {
+    const addrObject = jobDetailData.positionArr[0].place;
+    if (addrObject.addressArr) return addrObject.addressArr[0];
+    if (addrObject.factoryArr) return addrObject.factoryArr[0].factoryName;
+    if (addrObject.etc) return addrObject.etc;
+    return addrObject.type;
+  };
   return (
     <main css={wrapper}>
       <MetaHead
@@ -103,7 +107,7 @@ const JobsDetail: NextPage = () => {
           rotation: jobDetailData.positionArr[0].rotationArr[0],
           taskDetail: jobDetailData.positionArr[0].taskDetailArr[0],
           pay: jobDetailData.positionArr[0].payArr && jobDetailData.positionArr[0].payArr[0],
-          place: jobDetailData.positionArr[0].placeArr[0],
+          place: placeDetail(),
           possibleEdu: jobDetailData.positionArr[0].possibleEdu.summary,
         }}
         metaData={META_JD_DETAIL}
@@ -112,12 +116,9 @@ const JobsDetail: NextPage = () => {
       <Layout>
         <InvisibleH2 title={jobDetailData.title} />
         <HeaderPart
-          jobDetailData={jobDetailData}
           setCurrentPositionId={setCurrentPositionId}
           currentPositionId={currentPositionId}
-          isBookmarked={isBookmarked}
           userId={userData?.id}
-          refetchUserBookmark={refetch}
         />
         <div css={flexBox}>
           {freshPosition && (
@@ -127,7 +128,7 @@ const JobsDetail: NextPage = () => {
               <DetailPreferencePart freshPosition={freshPosition} />
             </section>
           )}
-          <DetailComment jdId={currentPositionId} detailData={commentData} />
+          <DetailComment jdId={jobDetailData.id} detailData={commentData} />
         </div>
         <ReceptInfoPart jobDetailData={jobDetailData} />
       </Layout>

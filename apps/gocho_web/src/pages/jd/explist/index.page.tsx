@@ -9,10 +9,11 @@ import { META_JD_EXPLIST } from "shared-constant/meta";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { useCompanyArr } from "shared-api/company";
+import { expiredJdListSortingEvent, expiredJdListFunnelEvent } from "shared-ga/jd";
+
 import { Layout } from "@component/layout";
 import { Pagination } from "@pages/jd/component/pagination";
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
-import { DataLabContainer } from "@component/global/datalabCarousel/datalabContainer";
 
 import { ExpJobCardList } from "./component/expJobCardList";
 import { setJobOrderButtonArr } from "./constant";
@@ -37,14 +38,21 @@ const JobsExpList: NextPage = () => {
   const limit = 10;
   const [total, setTotal] = useState<number>(0);
   const [page, setPage] = useState<number>(Number(router.query.page));
-  const [activeOrder, setActiveOrder] = useState<OrderDef>("recent");
-  const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
+  const [activeOrder, setActiveOrder] = useState<OrderDef>(router.query.page as OrderDef);
+  const [searchQuery, setSearchQuery] = useState<SearchQueryDef>({
+    name: router.query.q || undefined,
+  } as SearchQueryDef);
 
-  const { register, handleSubmit } = useForm<PostingValues>({});
+  const { register, handleSubmit } = useForm<PostingValues>({
+    defaultValues: {
+      name: searchQuery.name,
+    },
+  });
+
   const postingSearch: SubmitHandler<PostingValues> = (postingVal) => {
     router.push({
       pathname: JOBS_EXPLIST_URL,
-      query: { page: 1 },
+      query: { page: 1, order: activeOrder, q: postingVal.name },
     });
     setSearchQuery({
       name: postingVal.name,
@@ -56,7 +64,7 @@ const JobsExpList: NextPage = () => {
   };
 
   const { data: companyDataArr, isLoading } = useCompanyArr({
-    q: searchQuery?.name as string,
+    q: router.query.q as string,
     order: activeOrder,
     limit,
     offset: (page - 1) * 10,
@@ -64,7 +72,11 @@ const JobsExpList: NextPage = () => {
 
   useEffect(() => {
     setPage(Number(router.query.page));
-  }, [router.query]);
+  }, [router.query.page]);
+
+  useEffect(() => {
+    setActiveOrder(router.query.order as OrderDef);
+  }, [router.query.order]);
 
   useEffect(() => {
     if (companyDataArr) {
@@ -72,11 +84,14 @@ const JobsExpList: NextPage = () => {
     }
   }, [companyDataArr]);
 
+  useEffect(() => {
+    expiredJdListFunnelEvent();
+  }, []);
+
   const totalPage = Math.ceil(total / limit);
   return (
     <main css={mainContainer}>
       <MetaHead metaData={META_JD_EXPLIST} />
-      <DataLabContainer />
       <Layout>
         <InvisibleH2 title="기업별 만료 공고" />
         <p css={title}>
@@ -99,6 +114,11 @@ const JobsExpList: NextPage = () => {
                     key={`jobCardArr${button.text}`}
                     css={setJobOrderButton(isActive)}
                     onClick={() => {
+                      expiredJdListSortingEvent(button.text);
+                      router.push({
+                        pathname: JOBS_EXPLIST_URL,
+                        query: { ...router.query, page: 1, order: button.order },
+                      });
                       return changeOrder(button.order);
                     }}
                   >
@@ -108,17 +128,29 @@ const JobsExpList: NextPage = () => {
                 );
               })}
             </div>
-            <Pagination totalPage={totalPage} />
+            <Pagination
+              totalPage={totalPage}
+              linkObj={{
+                pathname: JOBS_EXPLIST_URL,
+              }}
+            />
           </form>
 
-          {companyDataArr?.companyDataArr.length === 0 && (
+          {companyDataArr?.companyDataArr.length === 0 ? (
             <div css={noDataBox}>
               <p css={noDataDesc}>검색결과가 없습니다 👀</p>
             </div>
+          ) : (
+            <>
+              <ExpJobCardList companyDataArr={companyDataArr?.companyDataArr} isLoading={isLoading} />
+              <BottomPagination
+                linkObj={{
+                  pathname: JOBS_EXPLIST_URL,
+                }}
+                totalPage={totalPage}
+              />
+            </>
           )}
-
-          <ExpJobCardList companyDataArr={companyDataArr?.companyDataArr} isLoading={isLoading} />
-          <BottomPagination url={JOBS_EXPLIST_URL} totalPage={totalPage} />
         </section>
       </Layout>
     </main>

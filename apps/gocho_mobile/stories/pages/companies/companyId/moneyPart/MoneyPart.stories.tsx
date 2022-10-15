@@ -4,7 +4,7 @@ import { rest } from "msw";
 
 import { BACKEND_URL } from "shared-constant/externalURL";
 
-import { MoneyPart } from "@pages/companies/part/moneyPart";
+import { MoneyPart } from "@pages/company/part/moneyPart";
 import { PAY_AVG_NULL, PAY_START_NULL, NORMAL, PAY_NULL } from "./monckData";
 
 export default {

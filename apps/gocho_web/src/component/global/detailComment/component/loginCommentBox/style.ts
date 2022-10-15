@@ -68,23 +68,25 @@ export const commentBody = css`
   align-items: flex-end;
 `;
 
-export const commentBox = css`
-  background-color: ${COLORS.GRAY100};
-  padding: 0.75rem;
-  min-width: 3.75rem;
-  box-sizing: border-box;
-  border-radius: 0 1rem 1rem 1rem;
-  position: relative;
+export const commentBox = (isMyComment: boolean) => {
+  return css`
+    background-color: ${isMyComment ? COLORS.BLUE_SECOND70 : COLORS.GRAY100};
+    padding: 0.75rem;
+    min-width: 3.75rem;
+    box-sizing: border-box;
+    border-radius: 0 1rem 1rem 1rem;
+    position: relative;
 
-  ::after {
-    content: "";
-    position: absolute;
-    top: -0.5rem;
-    left: 0;
-    border-left: 1rem solid ${COLORS.GRAY100};
-    border-top: 1rem solid transparent;
-  }
-`;
+    ::after {
+      content: "";
+      position: absolute;
+      top: -0.5rem;
+      left: 0;
+      border-left: 1rem solid ${isMyComment ? COLORS.BLUE_SECOND70 : COLORS.GRAY100};
+      border-top: 1rem solid transparent;
+    }
+  `;
+};
 
 export const commentTypeCSS = css`
   color: ${COLORS.GRAY30};
@@ -96,6 +98,7 @@ export const commentTypeCSS = css`
 
 export const commentDesc = css`
   color: ${COLORS.GRAY10};
+  word-break: break-word;
   font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.5;
@@ -126,7 +129,7 @@ export const userNicknameCSS = css`
   font-weight: 500;
   display: flex;
   align-items: center;
-  margin-bottom: 4px;
+  margin-bottom: 0.5rem;
 `;
 
 export const formCSS = css`

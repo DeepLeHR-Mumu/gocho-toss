@@ -4,21 +4,23 @@ import axios from "axios";
 
 import { useMySpecHistory } from "shared-api/spec/useMySpecHistory";
 import { useUserInfo } from "shared-api/auth";
+import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { mySpecListFunnelEvent } from "shared-ga/spec";
 
 import { Layout } from "@component/layout";
 import { useModal } from "@recoil/hook/modal";
-import { MetaHead } from "shared-ui/common/atom/metaHead";
+
 import { META_SPEC_MY } from "shared-constant/meta";
 import { AsideMenu } from "../component/asideMenu";
 import { SimpleCard } from "./component/simpleCard";
 import { Pagination } from "./component/pagination";
 
-import { flexBox, title, wrapper, container, tableHead, cardBox } from "./style";
+import { flexBox, title, wrapper, container, tableHead, cardBox, noMySpecDesc } from "./style";
 
 export const MySpecHistory: NextPage = () => {
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const { setCurrentModal, closeModal } = useModal();
+  const { setCurrentModal, closeModal, currentModal } = useModal();
   const activeCardCount = 5;
 
   const { data: userInfoData, error } = useUserInfo();
@@ -30,10 +32,21 @@ export const MySpecHistory: NextPage = () => {
     if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
       setCurrentModal("loginModal", { button: "home" });
     }
+    if (currentModal?.activatedModal === "signUpModal") {
+      setCurrentModal("signUpModal");
+    }
     return () => {
       closeModal();
     };
-  }, [error, closeModal, setCurrentModal]);
+  }, [error, closeModal, setCurrentModal, currentModal?.activatedModal]);
+
+  useEffect(() => {
+    setActiveCardIndex(null);
+  }, [currentPage]);
+
+  useEffect(() => {
+    mySpecListFunnelEvent();
+  }, []);
 
   if (!mySpecHistoryData || isLoading) {
     return (
@@ -84,6 +97,9 @@ export const MySpecHistory: NextPage = () => {
               </ul>
 
               <div css={cardBox}>
+                {filterMySpecHistoryArr.length === 0 && (
+                  <p css={noMySpecDesc}>스펙을 등록하고 평가받아보시겠어요? 🧐</p>
+                )}
                 {filterMySpecHistoryArr.map((mySpecData, index) => {
                   return (
                     <SimpleCard
@@ -98,7 +114,9 @@ export const MySpecHistory: NextPage = () => {
                 })}
               </div>
 
-              <Pagination totalPage={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+              {filterMySpecHistoryArr.length > activeCardCount && (
+                <Pagination totalPage={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+              )}
             </article>
           </div>
         </section>

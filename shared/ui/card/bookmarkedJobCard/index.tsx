@@ -1,9 +1,11 @@
 import { FunctionComponent, useState } from "react";
 import Image from "next/image";
 import { BsFillBookmarkFill } from "react-icons/bs";
+import Link from "next/link";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
+import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 
 import { useQueryClient } from "@tanstack/react-query";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
@@ -19,6 +21,7 @@ import {
   cutBox,
   title,
   bookmarkButton,
+  linkButtonCSS,
 } from "./style";
 
 export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | BookmarkedJobCardSkeleton> = ({
@@ -86,7 +89,7 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
   };
 
   return (
-    <article css={cardWrapper(isMobile)}>
+    <article css={cardWrapper}>
       <button
         type="button"
         css={bookmarkButton(isBookmarked)}
@@ -97,25 +100,29 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
       >
         <BsFillBookmarkFill />
       </button>
-      <div css={companyLogoBox}>
-        <Image
-          layout="fill"
-          objectFit="contain"
-          src={imageSrc}
-          onError={() => {
-            setImageSrc(defaultCompanyLogo);
-          }}
-          alt={`${jobData.companyName}의 로고`}
-        />
-      </div>
-      <div css={jobInfoBox}>
-        <div css={flexBox}>
-          <DdayBox endTime={jobData.endTime} />
-          {jobData.cut && <div css={cutBox}>채용시마감</div>}
-        </div>
-        <p css={companyName}>{jobData.companyName}</p>
-        <p css={title}>{jobData.title}</p>
-      </div>
+      <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
+        <a css={linkButtonCSS(isMobile)}>
+          <div css={companyLogoBox}>
+            <Image
+              layout="fill"
+              objectFit="contain"
+              src={imageSrc}
+              onError={() => {
+                setImageSrc(defaultCompanyLogo);
+              }}
+              alt={`${jobData.companyName}의 로고`}
+            />
+          </div>
+          <div css={jobInfoBox(isMobile)}>
+            <div css={flexBox}>
+              <DdayBox endTime={jobData.endTime} />
+              {jobData.cut && <div css={cutBox}>채용시마감</div>}
+            </div>
+            <p css={companyName}>{jobData.companyName}</p>
+            <p css={title}>{jobData.title}</p>
+          </div>
+        </a>
+      </Link>
     </article>
   );
 };

@@ -4,7 +4,6 @@ import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
   padding: 11.5rem 0 4.1875rem;
-  height: calc(100vh - 20rem);
   box-sizing: border-box;
   background-color: ${COLORS.BLUE_SECOND40};
 `;
@@ -50,4 +49,15 @@ export const tableHead = css`
 
 export const cardBox = css`
   margin-bottom: 3.125rem;
+`;
+
+export const noMySpecDesc = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 15rem;
+  font-size: 1rem;
+  color: ${COLORS.GRAY30};
+  font-weight: 400;
 `;

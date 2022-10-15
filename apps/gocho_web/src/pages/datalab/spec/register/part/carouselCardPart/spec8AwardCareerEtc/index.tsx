@@ -1,12 +1,14 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useModal } from "@recoil/hook/modal";
-import { useIsSpecPageBlocking } from "@recoil/hook/spec";
 import { useRegisterSpec } from "shared-api/spec";
 import { specArrKeyObj } from "shared-constant/queryKeyFactory/spec/arrKeyObj";
 import { userInfoKeyObj } from "shared-constant/queryKeyFactory/user/infoKeyObj";
+import { specRegisterEvent } from "shared-ga/spec";
+
+import { useModal } from "@recoil/hook/modal";
+import { useIsSpecPageBlocking } from "@recoil/hook/spec";
 
 import { SpecCardTitle, MoveCardButtons } from "../common/component";
 import { Spec8AwardCareerEtcProps, PostSubmitValues } from "./type";
@@ -17,7 +19,7 @@ export const Spec8AwardCareerEtc: FunctionComponent<Spec8AwardCareerEtcProps> = 
   const { handleSubmit, register } = useForm<PostSubmitValues>({
     mode: "onChange",
   });
-  const [errorMsg, setErrorMsg] = useState<number | undefined>(undefined);
+  // const [errorMsg, setErrorMsg] = useState<number | undefined>(undefined);
 
   const { setCurrentModal } = useModal();
   const { setIsBlocking } = useIsSpecPageBlocking();
@@ -29,20 +31,21 @@ export const Spec8AwardCareerEtc: FunctionComponent<Spec8AwardCareerEtcProps> = 
     const currentSpecObj = await Object.assign(prevSpecObj, { ...formData });
 
     mutate(currentSpecObj, {
-      onSuccess: () => {
-        setIsBlocking(true);
-        queryClient.invalidateQueries(specArrKeyObj.all);
-        moveNextCard(100);
-        sessionStorage.removeItem("specObj");
-      },
       onError: (error) => {
         const errorCode = error.response?.status;
-        setErrorMsg(errorCode);
+        // setErrorMsg(errorCode);
 
         if (errorCode === 401) {
           queryClient.invalidateQueries(userInfoKeyObj.userInfo);
           setCurrentModal("loginModal", { button: "home" });
         }
+      },
+      onSuccess: () => {
+        setIsBlocking(true);
+        specRegisterEvent(true);
+        queryClient.invalidateQueries(specArrKeyObj.all);
+        moveNextCard(100);
+        sessionStorage.removeItem("specObj");
       },
     });
   };
@@ -68,7 +71,7 @@ export const Spec8AwardCareerEtc: FunctionComponent<Spec8AwardCareerEtcProps> = 
             {...register("etc")}
           />
 
-          <div>{errorMsg && <p> 스펙등록 과정에 문제가 생긴 메세지{errorMsg}</p>}</div>
+          {/* <div>{errorMsg && <p> 스펙등록 과정에 문제가 생긴 메세지{errorMsg}</p>}</div> */}
 
           <MoveCardButtons nextTitle="완료" movePrevCard={movePrevCard} postSubmit={handleSubmit(postSubmit)} />
         </form>

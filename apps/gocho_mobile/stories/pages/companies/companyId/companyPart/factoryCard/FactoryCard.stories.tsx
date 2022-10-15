@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { FactoryCard } from "@pages/companies/part/factoryInfoPart/component/factoryCard";
+import { FactoryCard } from "@component/common/organisms/factoryCard";
 
 export default {
   title: "pages/indexComponent/FactoryCard",
@@ -27,7 +27,7 @@ const Template: ComponentStory<typeof FactoryCard> = (args) => {
 export const 기본정보 = Template.bind({});
 기본정보.args = {
   factoryInfo: {
-    name: "희성촉매본공장",
+    factoryName: "희성촉매본공장",
     address: "인천광역시 서구 봉수대로 415 (서인천우체국 사서함 17호)",
     maleNumber: 33,
     femaleNumber: 32,

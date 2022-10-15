@@ -26,18 +26,6 @@ export const flexBox = css`
   align-items: center;
 `;
 
-export const goBackButton = css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  background-color: ${COLORS.GRAY90};
-  border-radius: 50%;
-  color: ${COLORS.GRAY40};
-  margin-right: 1.25rem;
-`;
-
 export const titleBox = css``;
 
 export const companyNameCSS = css`
@@ -114,6 +102,21 @@ export const applyButton = css`
   height: 2.5rem;
   border-radius: 2rem;
   color: ${COLORS.GRAY100};
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-left: -0.5rem;
+  z-index: 0;
+`;
+
+export const applyEndButton = css`
+  background-color: ${COLORS.GRAY90};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8.5rem;
+  height: 2.5rem;
+  border-radius: 2rem;
+  color: ${COLORS.GRAY70};
   font-size: 0.875rem;
   font-weight: 500;
   margin-left: -0.5rem;

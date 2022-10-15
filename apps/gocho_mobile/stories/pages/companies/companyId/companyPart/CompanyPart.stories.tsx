@@ -4,7 +4,7 @@ import { rest } from "msw";
 
 import { BACKEND_URL } from "shared-constant/externalURL";
 
-import { FactoryPart } from "@pages/companies/part/factoryInfoPart";
+import { FactoryPart } from "@pages/company/part/factoryInfoPart";
 import { MockingMother } from "../mockingMother";
 
 export default {

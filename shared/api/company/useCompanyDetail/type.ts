@@ -15,7 +15,7 @@ export interface WelfareProps {
 }
 
 export interface FactoryProps {
-  name: string;
+  factoryName: string;
   id: number;
   companyId: number;
   place1: string;

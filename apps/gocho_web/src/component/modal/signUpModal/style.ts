@@ -20,6 +20,7 @@ export const wrapper = css`
 
 export const logoContainer = css`
   width: 7.5rem;
+  height: 1rem;
   position: relative;
   margin-bottom: 1rem;
 `;
@@ -44,7 +45,21 @@ export const formArr = css`
     width: 100%;
     display: flex;
     flex-direction: column;
+
+    :last-of-type {
+      margin-bottom: 0;
+    }
   }
+`;
+
+export const sideErrorMsg = css`
+  color: ${COLORS.ERROR_RED30};
+  font-size: 0.75rem;
+  height: 0.75rem;
+  margin: 0.5rem 0 2rem 1.75rem;
+  white-space: nowrap;
+  font-weight: 400;
+  display: block;
 `;
 
 export const closeBtn = css`

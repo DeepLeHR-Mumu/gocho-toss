@@ -42,7 +42,7 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
       college: {
         department,
         uturn,
-        grade: Number(grade),
+        grade: Number(grade).toFixed(2),
         maxGrade: Number(maxGrade),
       },
     });
@@ -88,10 +88,14 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                     value: 0,
                     message: "최소 일수는 0입니다.",
                   },
+                  max: {
+                    value: 365,
+                    message: "최대 일수는 365입니다.",
+                  },
                   required: "무단결석 일수를 입력해주세요.",
                 })}
                 id="absent"
-                placeholder="0"
+                placeholder="?"
                 firstDesc="#무단 결석:"
                 lastDesc="/일"
               />
@@ -103,10 +107,14 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                     value: 0,
                     message: "최소 일수는 0입니다.",
                   },
+                  max: {
+                    value: 365,
+                    message: "최대 일수는 365입니다.",
+                  },
                   required: "무단지각 일수를 입력해주세요.",
                 })}
+                placeholder="?"
                 id="tardy"
-                placeholder="0"
                 firstDesc="#무단 지각:"
                 lastDesc="/일"
               />
@@ -118,10 +126,14 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                     value: 0,
                     message: "최소 일수는 0입니다.",
                   },
+                  max: {
+                    value: 365,
+                    message: "최대 일수는 365입니다.",
+                  },
                   required: "무단 조퇴 일수를 입력해주세요.",
                 })}
+                placeholder="?"
                 id="leaveEarly"
-                placeholder="0"
                 firstDesc="#무단 조퇴:"
                 lastDesc="/일"
               />
@@ -133,10 +145,14 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                     value: 0,
                     message: "최소 일수는 0입니다.",
                   },
+                  max: {
+                    value: 365,
+                    message: "최대 일수는 365입니다.",
+                  },
                   required: "무단결과 일수를 입력해주세요.",
                 })}
+                placeholder="?"
                 id="classMiss"
-                placeholder="0"
                 firstDesc="#무단 결과:"
                 lastDesc="/일"
               />
@@ -171,7 +187,7 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
             id="naesin"
             firstDesc="내신:"
             lastDesc="등급"
-            placeholder="입력칸"
+            placeholder="?"
           />
           {errors.highschool?.naesin?.message && <WarningText msg={errors.highschool.naesin.message} />}
         </ContainerBox>

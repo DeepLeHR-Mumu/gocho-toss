@@ -8,7 +8,7 @@ import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { SPEC_MY_URL, SPEC_URL, SPEC_REGISTER_URL } from "shared-constant/internalURL";
 
 import { AsideMenuProps } from "./type";
-import { wrapper, partContainer, asideProfile, loginNickname, asideLink, activeLink } from "./style";
+import { wrapper, partContainer, asideProfile, loginNickname, pointLink, asideLink, activeLink } from "./style";
 
 export const AsideMenu: FunctionComponent<AsideMenuProps> = ({ isFix = true }) => {
   const { data: userInfoData, error } = useUserInfo();
@@ -27,7 +27,7 @@ export const AsideMenu: FunctionComponent<AsideMenuProps> = ({ isFix = true }) =
         <p css={loginNickname}>{userInfoData.nickname}</p>
       </div>
       <Link href={SPEC_REGISTER_URL} passHref>
-        <a css={asideLink}>
+        <a css={[asideLink, pointLink]}>
           스펙
           <br />
           등록하기

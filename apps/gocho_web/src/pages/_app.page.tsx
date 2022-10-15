@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -7,8 +7,11 @@ import type { AppProps } from "next/app";
 import { Global } from "@emotion/react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import ReactGA from "react-ga4";
 
-import { globalStyles } from "@style/globalStyle";
+import { KEY } from "shared-constant/gaKey";
+
+import { globalStyles } from "src/style/globalStyle";
 import { Header } from "@component/global/header";
 import { Footer } from "@component/global/footer";
 import { Aside } from "@component/global/aside";
@@ -21,7 +24,6 @@ import "slick-carousel/slick/slick-theme.css";
 import { datadogRum } from "@datadog/browser-rum";
 
 if (typeof window !== "undefined" && !window.location.href.includes("localhost")) {
-  // console.log("hi");
   datadogRum.init({
     applicationId: "e4f4a9e9-315d-4f9d-941c-2a4b52455b58",
     clientToken: "pub98f9201040940ffceb0d8d3e9b11e9d4",
@@ -40,10 +42,35 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
   datadogRum.startSessionReplayRecording();
 }
 
-
-
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  ReactGA.initialize(KEY);
+
+  useEffect(() => {
+    const isMobile = [
+      /Android/i,
+      /webOS/i,
+      /iPhone/i,
+      /iPad/i,
+      /iPod/i,
+      /BlackBerry/i,
+      /Windows Phone/i,
+      /Mobile/i,
+    ].some((toMatchItem) => {
+      return navigator.userAgent.match(toMatchItem);
+    });
+    if (isMobile) {
+      const { host, pathname, protocol } = window.location;
+      const mobileHost = host.slice(host.indexOf(".") + 1);
+      window.location.href = `${protocol}//m.${mobileHost}${pathname}`;
+    }
+  }, []);
+
+  // host : localhost:3000
+  // origin : http://localhost:3000
+  // pathname: /
+  // protocol : http:
+
   const [queryClient] = useState(() => {
     return new QueryClient({
       defaultOptions: {
@@ -57,7 +84,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               router.push("/404");
             }
             if (axios.isAxiosError(error) && error.response?.status === 500) {
-              router.push("/404");
+              router.push("/500");
             }
           },
         },

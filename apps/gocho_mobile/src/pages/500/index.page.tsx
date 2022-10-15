@@ -13,7 +13,7 @@ const ErrorPage: NextPage = () => {
     <main css={wrapper}>
       <div css={errorMsgWrapper}>
         <div css={errorMsgContainer}>
-          <p>열심히 고치고 있습니다</p>
+          <h1>열심히 고치고 있습니다</h1>
         </div>
         <div css={catchPhrase}>
           <p>고장, 불편신고는 아래 메일로 부탁드려요 😢</p>

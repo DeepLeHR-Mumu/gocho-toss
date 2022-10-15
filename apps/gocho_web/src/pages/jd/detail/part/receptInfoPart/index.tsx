@@ -1,9 +1,6 @@
 import { FunctionComponent } from "react";
-import { BsChevronLeft } from "react-icons/bs";
-import Link from "next/link";
 
-import { dateConverter } from "shared-util/date";
-import { JOBS_LIST_URL } from "shared-constant/internalURL";
+import { dateConverter, dDayCalculator } from "shared-util/date";
 
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { NoDataDesc } from "../common/component/noDataDesc";
@@ -11,12 +8,12 @@ import { NoDataDesc } from "../common/component/noDataDesc";
 import { ReceptInfoPartProps } from "./type";
 import {
   applyButton,
+  applyEndButton,
   beforeAfterDateBox,
   cutBox,
   desc,
   detailTitle,
   flexBox,
-  goBackButton,
   infoBox,
   infoDetailBox,
   infoTitle,
@@ -24,6 +21,7 @@ import {
   restPoint,
   wrapper,
 } from "./style";
+import { utmLinkCreator } from "./util";
 
 export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDetailData }) => {
   const {
@@ -42,6 +40,8 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
     minute: endMinute,
   } = dateConverter(jobDetailData.endTime);
 
+  const isDdayEnd = dDayCalculator(jobDetailData.endTime) === "만료";
+
   return (
     <div>
       <section css={wrapper}>
@@ -55,9 +55,18 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
           <DdayBox endTime={jobDetailData.endTime} />
           {jobDetailData.cut && <div css={cutBox}>채용시마감</div>}
 
-          <a css={applyButton} target="_blank" href={jobDetailData.applyUrl} rel="noopener noreferrer">
-            지원하러가기
-          </a>
+          {isDdayEnd ? (
+            <p css={applyEndButton}>지원하러가기</p>
+          ) : (
+            <a
+              css={applyButton}
+              target="_blank"
+              href={utmLinkCreator(jobDetailData.applyUrl)}
+              rel="noopener noreferrer"
+            >
+              지원하러가기
+            </a>
+          )}
         </div>
 
         <div css={infoDetailBox}>
@@ -99,11 +108,6 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
           </div>
         </div>
       </section>
-      <Link href={JOBS_LIST_URL} passHref>
-        <a css={goBackButton}>
-          <BsChevronLeft /> 공고 리스트로 돌아가기
-        </a>
-      </Link>
     </div>
   );
 };

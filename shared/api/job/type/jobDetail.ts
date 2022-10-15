@@ -7,6 +7,7 @@ export interface FactoryObjDef {
   male_number: number;
   female_number: number;
   product: string;
+  name: string;
   bus: {
     exists: boolean;
     desc: string | null;
@@ -21,7 +22,7 @@ export interface PositionObjDef {
   id: number;
   jd_id: number;
   required_exp: {
-    type: "신입" | "경력" | "무관";
+    type: "신입" | "경력" | "무관" | "신입/경력";
     max_year: number;
     min_year: number;
   };
@@ -32,8 +33,12 @@ export interface PositionObjDef {
   };
   task_detail_arr: string[];
   rotation_arr: string[];
-  factory_arr: FactoryObjDef[];
-  place_arr: string[];
+  place: {
+    address_arr: string[] | null;
+    factory_arr: FactoryObjDef[] | null;
+    etc: string | null;
+    type: "일반" | "전국" | "해외" | "기타";
+  };
   hire_number: number;
   pay_arr: number[] | null;
   preferred_certi_arr: string[] | null;

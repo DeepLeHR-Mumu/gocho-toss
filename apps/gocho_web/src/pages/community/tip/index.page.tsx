@@ -1,11 +1,16 @@
 import { NextPage } from "next";
-import { AdPart } from "./part/adPart";
+import { useEffect } from "react";
+
+import { tipListFunnelEvent } from "shared-ga/tip";
+
 import { ListPart } from "./part/listPart";
 
 const Tip: NextPage = () => {
+  useEffect(() => {
+    tipListFunnelEvent();
+  }, []);
   return (
     <main>
-      <AdPart />
       <ListPart />
     </main>
   );

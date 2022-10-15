@@ -1,12 +1,12 @@
 import { FunctionComponent, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 import { dateConverter } from "shared-util/date";
-import { SkeletonBox } from "../../common/atom/skeletonBox";
+import { jdAdClickEvent } from "shared-ga/jd";
 
+import { SkeletonBox } from "../../common/atom/skeletonBox";
 import { JobAdCardProps, JobAdCardSkeleton } from "./type";
 import {
   jobAdCardSkeleton,
@@ -19,6 +19,7 @@ import {
   date,
   companyName,
   titleCSS,
+  buttonBox,
 } from "./style";
 
 export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = ({
@@ -27,6 +28,7 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
   isMobile,
 }) => {
   const [imageSrc, setImageSrc] = useState(jobAdData?.companyLogo as string);
+
   if (isSkeleton || jobAdData === undefined) {
     return (
       <div css={jobAdCardSkeleton}>
@@ -40,8 +42,19 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
 
   return (
     <>
-      <Link href={`${JOBS_DETAIL_URL}/${jobAdData.id}`} passHref>
-        <a css={cardWrapper(isMobile)}>
+      <a
+        css={cardWrapper(isMobile)}
+        href={`${JOBS_DETAIL_URL}/${jobAdData.id}`}
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        <button
+          type="button"
+          css={buttonBox}
+          onClick={() => {
+            jdAdClickEvent(jobAdData.id);
+          }}
+        >
           <div css={mainContainer}>
             <div css={companyLogoWrapper}>
               <div css={companyLogoBox}>
@@ -64,8 +77,8 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
             </div>
           </div>
           <strong css={titleCSS}>{jobAdData.title}</strong>
-        </a>
-      </Link>
+        </button>
+      </a>
       {/* LATER : 관리자페이지 color 연결 */}
       <div css={colorLine("#2284a5", isMobile)} />
     </>

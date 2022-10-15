@@ -6,10 +6,12 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import { useQueryClient } from "@tanstack/react-query";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-
-import { dateConverter } from "shared-util/date";
+import { useUserInfo } from "shared-api/auth";
+import { useModal } from "@recoil/hook/modal";
+import { dateConverter, dDayCalculator } from "shared-util/date";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
+import { jdBookmarkEvent } from "shared-ga/jd";
 
 import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
@@ -22,18 +24,19 @@ import {
   linkContainer,
   applyButton,
   cutBox,
-  bookmarkButton,
   buttonCSS,
   youtubeButton,
   dateBox,
   date,
   companyName,
   title,
+  applyEndButton,
 } from "./style";
 
 export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookmarked, userId }) => {
   const queryClient = useQueryClient();
-
+  const { setCurrentModal } = useModal();
+  const { isSuccess } = useUserInfo();
   const [imageSrc, setImageSrc] = useState(jobDetailData.company.logoUrl as string);
 
   const { mutate: addMutate } = useAddJobBookmarkArr({
@@ -59,12 +62,17 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
   });
 
   const addJobBookmark = () => {
+    if (!isSuccess) {
+      setCurrentModal("loginModal", { button: "close" });
+      return undefined;
+    }
     return (
       userId &&
       addMutate(
         { userId, elemId: jobDetailData.id },
         {
           onSuccess: () => {
+            jdBookmarkEvent(jobDetailData.id);
             queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
           },
         }
@@ -89,6 +97,8 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
   const { year: startYear, month: startMonth, date: startDate } = dateConverter(jobDetailData.startTime);
   const { year: endYear, month: endMonth, date: endDate } = dateConverter(jobDetailData.endTime);
 
+  const isDdayEnd = dDayCalculator(jobDetailData.endTime) === "만료";
+
   return (
     <header css={headerWrapper}>
       <div css={flexBox}>
@@ -107,9 +117,13 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
         </div>
         <ul css={linkContainer}>
           <li>
-            <a href={jobDetailData.applyUrl} target="_blank" css={applyButton} rel="noopener noreferrer">
-              채용사이트
-            </a>
+            {isDdayEnd ? (
+              <p css={applyEndButton}>채용사이트</p>
+            ) : (
+              <a href={jobDetailData.applyUrl} target="_blank" css={applyButton} rel="noopener noreferrer">
+                채용사이트
+              </a>
+            )}
           </li>
           <li>
             <button
@@ -125,7 +139,13 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
             </button>
           </li>
           <li>
-            <Link href={`${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`} passHref>
+            <Link
+              href={{
+                pathname: `${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`,
+                query: { info: "detail" },
+              }}
+              passHref
+            >
               <a css={buttonCSS(false)}>기업정보</a>
             </Link>
           </li>
@@ -138,12 +158,14 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
           )}
         </ul>
       </div>
+
+      {/*  */}
       <div>
         <ul css={dateBox}>
           <li>
             <DdayBox endTime={jobDetailData.endTime} />
           </li>
-          <li>{jobDetailData.cut && <div css={cutBox}>채용시마감</div>}</li>
+          <li>{jobDetailData.cut && <p css={cutBox}>채용시마감</p>}</li>
           <li>
             <p css={date}>
               {`${startYear}. ${startMonth}. ${startDate}`} ~{" "}
@@ -151,19 +173,14 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
             </p>
           </li>
         </ul>
-        <p css={companyName}>
-          {jobDetailData.company.name}
-          <button
-            type="button"
-            css={bookmarkButton(isBookmarked)}
-            onClick={() => {
-              return isBookmarked ? deleteJobBookmark() : addJobBookmark();
-            }}
-            aria-label={isBookmarked ? "공고 북마크 해지" : "공고 북마크"}
-          >
-            <BsFillBookmarkFill />
-          </button>
-        </p>
+        <Link
+          href={{
+            pathname: `${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`,
+            query: { info: "detail" },
+          }}
+        >
+          <a css={companyName}>{jobDetailData.company.name}</a>
+        </Link>
         <p css={title}>{jobDetailData.title}</p>
       </div>
     </header>

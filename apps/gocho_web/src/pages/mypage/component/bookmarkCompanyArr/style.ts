@@ -6,6 +6,7 @@ export const cardListContainer = css`
   display: flex;
   flex-wrap: wrap;
   margin-top: 2rem;
+  gap: 1rem;
 `;
 
 export const skeletonContainer = css`

@@ -1,9 +1,29 @@
+import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 import banner01 from "@public/images/global/MainCarousel/open_renewal_banner.jpg";
 import banner02 from "@public/images/global/MainCarousel/factory_banner.jpg";
 import banner03 from "@public/images/global/MainCarousel/openTalk_banner.jpg";
+import banner04 from "@public/images/global/MainCarousel/sinbo_job.jpg";
+
 import checkIconImage from "shared-image/global/common/yellow_check.png";
 
 export const carouselArr = [
+  {
+    id: 0,
+    topDesc: "2022년",
+    middleDesc: "신보그룹",
+    title: "초대졸 신입사원 공개채용",
+    lastDesc: "2022.09.26(월)-10.16(일)",
+    backgroundImage: banner04,
+    iconImage: checkIconImage,
+    backgroundColor: "#88c3a8",
+    buttonObj: {
+      target: "_self" as const,
+      text: "자세히보기",
+      color: "#fff",
+      backgroundColor: "#089e66",
+      url: `${JOBS_DETAIL_URL}/10021`,
+    },
+  },
   {
     id: 1,
     topDesc: "OPEN",
@@ -14,7 +34,7 @@ export const carouselArr = [
     iconImage: checkIconImage,
     backgroundColor: "#121012",
     buttonObj: {
-      target: "_self",
+      target: "_self" as const,
       text: "자세히보기",
       color: "#fff",
       backgroundColor: "#333",
@@ -42,10 +62,10 @@ export const carouselArr = [
     iconImage: checkIconImage,
     backgroundColor: "#fbc540",
     buttonObj: {
-      target: "_blank",
+      target: "_blank" as const,
       text: "오픈카톡 바로가기",
       color: "#fff",
-      backgroundColor: "#fbc540",
+      backgroundColor: "#333",
       url: "https://open.kakao.com/o/gxquBCud",
     },
   },

@@ -4,7 +4,7 @@ import { COLORS } from "shared-style/color";
 
 export const commentContainerBlur = css`
   background-color: ${COLORS.GRAY90};
-  height: calc(100vh - 17rem);
+  height: calc(70vh - 16.5rem);
   overflow: hidden;
   overflow-y: scroll;
   filter: blur(3px);

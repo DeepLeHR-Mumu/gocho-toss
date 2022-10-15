@@ -6,6 +6,7 @@ export const preferredCertiContainer = css`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  width: calc(100% - 5.5rem);
 
   > li {
     border: 1px solid ${COLORS.GRAY60};

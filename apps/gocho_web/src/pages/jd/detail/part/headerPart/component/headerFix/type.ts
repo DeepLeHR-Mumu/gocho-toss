@@ -1,4 +1,5 @@
 export interface HeaderFixProps {
+  isDdayEnd: boolean;
   jobDetailData: {
     id: number;
     endTime: number;
@@ -12,6 +13,5 @@ export interface HeaderFixProps {
       logoUrl: string;
     };
   };
-  isBookmarked: boolean;
   userId: number | undefined;
 }

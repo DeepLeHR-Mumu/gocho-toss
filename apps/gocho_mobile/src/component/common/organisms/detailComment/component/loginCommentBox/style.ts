@@ -5,7 +5,7 @@ import { COLORS } from "shared-style/color";
 export const commentContainer = css`
   background-color: ${COLORS.GRAY90};
   padding: 1rem;
-  height: calc(100vh - 14.5rem);
+  height: calc(70vh - 16.5rem);
   overflow: hidden;
   overflow-y: scroll;
   position: relative;
@@ -51,22 +51,24 @@ export const commentBody = css`
   align-items: flex-end;
 `;
 
-export const commentBox = css`
-  background-color: ${COLORS.GRAY100};
-  padding: 0.75rem;
-  box-sizing: border-box;
-  border-radius: 0 1rem 1rem 1rem;
-  position: relative;
+export const commentBox = (isMyComment: boolean) => {
+  return css`
+    background-color: ${isMyComment ? COLORS.BLUE_SECOND70 : COLORS.GRAY100};
+    padding: 0.75rem;
+    box-sizing: border-box;
+    border-radius: 0 1rem 1rem 1rem;
+    position: relative;
 
-  ::after {
-    content: "";
-    position: absolute;
-    top: -0.5rem;
-    left: 0;
-    border-left: 1rem solid ${COLORS.GRAY100};
-    border-top: 1rem solid transparent;
-  }
-`;
+    ::after {
+      content: "";
+      position: absolute;
+      top: -0.5rem;
+      left: 0;
+      border-left: 1rem solid ${isMyComment ? COLORS.BLUE_SECOND70 : COLORS.GRAY100};
+      border-top: 1rem solid transparent;
+    }
+  `;
+};
 
 export const commentTypeCSS = css`
   color: ${COLORS.GRAY30};
@@ -98,8 +100,11 @@ export const evalButtonBox = css`
 //  commentWrite
 
 export const writeContainer = css`
-  height: 7.5rem;
+  height: 10rem;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   box-sizing: border-box;
 `;
 
@@ -109,7 +114,7 @@ export const userNicknameCSS = css`
   font-weight: 500;
   display: flex;
   align-items: center;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 `;
 
 export const formCSS = css`
@@ -126,8 +131,7 @@ export const textareaCSS = css`
   width: 100%;
   padding: 0 0.5rem;
   min-height: 3.125rem;
-  font-family: "Noto Sans KR", Verdana, sans-serif;
-  font-size: 0.75rem;
+  font-size: 16px;
   color: ${COLORS.GRAY10};
   border: 0;
   resize: none;

@@ -5,6 +5,8 @@ import { BsFolderSymlink } from "react-icons/bs";
 import { useUserFilter, useDoUserFilter } from "shared-api/filter";
 import { useUserInfo } from "shared-api/auth";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
+import { myFilterLoadEvent, myFilterSaveEvent } from "shared-ga/jd";
+import { useToast } from "@recoil/hook/toast";
 
 import { filterMenuListArr } from "./constant";
 import { FilterProps, filterMenuDef, watchListDef } from "./type";
@@ -25,22 +27,43 @@ import {
   userFilterButton,
   activeCategoryContainer,
   categoryBox,
-  deleteCategory,
   submitButton,
+  categoryArr,
+  categoryActiveCSS,
 } from "./style";
 
 export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setValue, getValues, setShowFilter }) => {
   const [activeMenu, setActiveMenu] = useState<filterMenuDef>("학력");
-
   const watchList: watchListDef[] = filterMenuListArr.map((menu) => {
     return { query: menu.query, categoryArr: watch(menu.query) };
   });
 
-  const { data: userInfoData } = useUserInfo();
-  const { data: userFilter, refetch: refetchUserFilter } = useUserFilter({ userId: userInfoData?.id });
+  const { data: userInfoData, isSuccess } = useUserInfo();
+  const { setCurrentToast } = useToast();
+
+  const {
+    data: userFilter,
+    refetch: refetchUserFilter,
+    isSuccess: userFilterSuccess,
+  } = useUserFilter({ userId: userInfoData?.id });
   const { mutate } = useDoUserFilter();
 
   const applyUserFilter = () => {
+    if (!isSuccess) {
+      setCurrentToast("로그인후 My 필터를 사용해주세요.");
+      return;
+    }
+
+    if (!userFilter) {
+      setCurrentToast("My필터를 저장후 불러주세요.");
+      return;
+    }
+
+    if (userFilterSuccess) {
+      myFilterLoadEvent();
+      setCurrentToast("My필터를 불러왔습니다.");
+    }
+
     const userFilterArr: watchListDef[] = [
       { query: "possibleEdu", categoryArr: userFilter?.possibleEdu || [] },
       { query: "place", categoryArr: userFilter?.place || [] },
@@ -57,6 +80,10 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
   };
 
   const saveUserFilter = () => {
+    if (!isSuccess) {
+      setCurrentToast("로그인후 My 필터를 저장해주세요.");
+      return;
+    }
     mutate(
       {
         userId: userInfoData?.id,
@@ -72,6 +99,8 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
       },
       {
         onSuccess: () => {
+          setCurrentToast("My필터가 저장되었습니다");
+          myFilterSaveEvent();
           refetchUserFilter();
         },
       }
@@ -117,20 +146,19 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
             const isActiveMenu = menu.name === activeMenu;
 
             return (
-              <div key={`filterMenu${menu.name}`}>
-                <button
-                  css={menuButton(isActiveMenu)}
-                  type="button"
-                  onClick={() => {
-                    return setActiveMenu(menu.name);
-                  }}
-                >
-                  {menu.name}
-                  <span css={menuArrow}>
-                    <FiChevronRight />
-                  </span>
-                </button>
-              </div>
+              <button
+                key={`filterMenu${menu.name}`}
+                css={menuButton(isActiveMenu)}
+                type="button"
+                onClick={() => {
+                  return setActiveMenu(menu.name);
+                }}
+              >
+                {menu.name}
+                <span css={menuArrow}>
+                  <FiChevronRight />
+                </span>
+              </button>
             );
           })}
         </div>
@@ -142,7 +170,7 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
             return (
               <div key={`filterMenu${menu.name}`}>
                 {isActiveMenu && (
-                  <div>
+                  <ul css={categoryArr}>
                     {menu.categoryArr.map((category) => {
                       const activeQuery = menu.query;
                       const isMenuEmpty = watch(activeQuery).length === 0;
@@ -152,7 +180,7 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
 
                       if (category === "전체") {
                         return (
-                          <div key={`menuCategory${menu.name}${category}`}>
+                          <li key={`menuCategory${menu.name}${category}`} css={categoryActiveCSS(isCategoryActive)}>
                             <input
                               type="checkbox"
                               css={menuCategoryInput}
@@ -161,16 +189,16 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
                                 setValue(activeQuery, []);
                               }}
                             />
-                            <label htmlFor={`menuCategory${menu.name}${category}`} css={menuCategory(isMenuEmpty)}>
+                            <label htmlFor={`menuCategory${menu.name}${category}`} css={menuCategory}>
                               <CheckBox isChecked={isMenuEmpty} />
                               {category}
                             </label>
-                          </div>
+                          </li>
                         );
                       }
 
                       return (
-                        <div key={`menuCategory${menu.name}${category}`}>
+                        <li key={`menuCategory${menu.name}${category}`} css={categoryActiveCSS(isCategoryActive)}>
                           <input
                             type="checkbox"
                             css={menuCategoryInput}
@@ -178,14 +206,14 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
                             value={category}
                             {...register(menu.query, {})}
                           />
-                          <label htmlFor={`menuCategory${menu.name}${category}`} css={menuCategory(isCategoryActive)}>
+                          <label htmlFor={`menuCategory${menu.name}${category}`} css={menuCategory}>
                             <CheckBox isChecked={isCategoryActive} />
                             {category}
                           </label>
-                        </div>
+                        </li>
                       );
                     })}
-                  </div>
+                  </ul>
                 )}
               </div>
             );
@@ -201,33 +229,31 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
           .every((list) => {
             return list.length === 0;
           }) && (
-          <span css={categoryBox(null)} key="activeMenuCategoryBasic">
+          <button type="button" css={categoryBox(null)} aria-label="" key="activeMenuCategoryBasic">
             전체 공고
-            <button type="button" css={deleteCategory} aria-label="">
-              <FiX />
-            </button>
-          </span>
+            <FiX />
+          </button>
         )}
         {watchList.map((list) => {
           return list.categoryArr.map((category) => {
             return (
-              <span css={categoryBox(list.query)} key={`activeMenuCategory${category}`}>
+              <button
+                type="button"
+                key={`activeMenuCategory${category}`}
+                aria-label={`${category}필터 제거`}
+                css={categoryBox(list.query)}
+                onClick={() => {
+                  setValue(
+                    list.query,
+                    getValues(list.query).filter((watchCategory) => {
+                      return watchCategory !== category;
+                    })
+                  );
+                }}
+              >
                 {category}
-                <button
-                  type="button"
-                  css={deleteCategory}
-                  onClick={() => {
-                    setValue(
-                      list.query,
-                      getValues(list.query).filter((watchCategory) => {
-                        return watchCategory !== category;
-                      })
-                    );
-                  }}
-                >
-                  <FiX />
-                </button>
-              </span>
+                <FiX />
+              </button>
             );
           });
         })}

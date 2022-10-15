@@ -1,15 +1,16 @@
 import { FunctionComponent } from "react";
-import Link from "next/link";
-import { FiArrowLeft } from "react-icons/fi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
-import { Layout } from "@component/layout";
-import { JOBS_LIST_URL } from "shared-constant/internalURL";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
+import { useUserInfo } from "shared-api/auth";
+import { useUserJobBookmarkArr, useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
+import { jdBookmarkEvent } from "shared-ga/jd";
 
-import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
+import { Layout } from "@component/layout";
+import { useModal } from "@recoil/hook/modal";
+
 import { HeaderFixProps } from "./type";
 import {
   applyBox,
@@ -18,16 +19,20 @@ import {
   companyNameCSS,
   flexBetweenBox,
   flexBox,
-  goBackButton,
   headerCSS,
   dDayContainer,
   cutBox,
   titleBox,
   titleCSS,
+  applyEndButton,
 } from "./style";
 
-export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, isBookmarked, userId }) => {
+export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, userId, isDdayEnd }) => {
   const queryClient = useQueryClient();
+  const { data: userInfoData } = useUserInfo();
+  const { setCurrentModal } = useModal();
+
+  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userInfoData?.id });
 
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobDetailData?.id as number,
@@ -58,6 +63,7 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, is
         {
           onSuccess: () => {
             queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
+            jdBookmarkEvent(jobDetailData.id);
           },
         }
       );
@@ -77,16 +83,17 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, is
     );
   };
 
+  const isBookmarked = Boolean(
+    userJobBookmarkArr?.some((job) => {
+      return job.id === jobDetailData.id;
+    })
+  );
+
   return (
     <header css={headerCSS}>
       <Layout>
         <div css={flexBetweenBox}>
           <div css={flexBox}>
-            <Link href={JOBS_LIST_URL} passHref>
-              <a css={goBackButton} aria-label="이전 페이지 이동">
-                <FiArrowLeft />
-              </a>
-            </Link>
             <div css={titleBox}>
               <p css={companyNameCSS}>{jobDetailData.company.name}</p>
               <p css={titleCSS}>{jobDetailData.title}</p>
@@ -97,6 +104,9 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, is
               type="button"
               css={bookmarkButton(isBookmarked)}
               onClick={() => {
+                if (!userInfoData) {
+                  setCurrentModal("loginModal", { button: "close" });
+                }
                 return isBookmarked ? deleteJobBookmark() : addJobBookmark();
               }}
               aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
@@ -109,9 +119,13 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, is
                 <DdayBox endTime={jobDetailData.endTime} />
                 {jobDetailData.cut && <div css={cutBox}>채용시마감</div>}
               </div>
-              <a href={jobDetailData.applyUrl} target="_blank" rel="noopener noreferrer" css={applyButton}>
-                채용사이트
-              </a>
+              {isDdayEnd ? (
+                <p css={applyEndButton}>채용사이트</p>
+              ) : (
+                <a href={jobDetailData.applyUrl} target="_blank" rel="noopener noreferrer" css={applyButton}>
+                  채용사이트
+                </a>
+              )}
             </div>
           </div>
         </div>

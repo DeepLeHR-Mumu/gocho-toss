@@ -2,7 +2,6 @@ import { FunctionComponent, useRef, useEffect } from "react";
 import Image from "next/image";
 
 import { LinkButton, NormalButton } from "shared-ui/common/atom/button";
-import { CDN_URL } from "shared-constant/externalURL";
 import { useCompanyCommentArr } from "shared-api/company";
 import { useUserInfo } from "shared-api/auth";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
@@ -45,30 +44,33 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
   useEffect(() => {
     const bottomHeight = commentContainerRef.current?.scrollHeight;
     commentContainerRef.current?.scrollTo(0, bottomHeight !== undefined ? bottomHeight : 0);
-  }, [companyCommentArrData]);
+  }, [isSuccess]);
 
-  if (!companyCommentArrData || isSkeleton || companyData === undefined) {
+  if (isSkeleton || companyData === undefined) {
     return (
-      <div css={companyCommentCardSkeleton}>
+      <div css={companyCommentCardSkeleton(isMobile)}>
         <SkeletonBox />
       </div>
     );
   }
 
-  if (!isSuccess) {
+  if (!companyCommentArrData || !isSuccess) {
     return (
       <div css={cardWrapper(isMobile)} className="active">
         <header css={header}>
           <div css={companyInfoContainer}>
-            <div css={companyLogoBox}>
-              <Image
-                layout="fill"
-                objectFit="contain"
-                src={`${CDN_URL}/company_images/${companyData.id}/logo.png`}
-                alt={`${companyData.name} 기업 로고`}
-              />
-            </div>
-            <h3 css={companyName}>{companyData.name}</h3>
+            {!isMobile && (
+              <div css={companyLogoBox}>
+                <Image
+                  layout="fill"
+                  objectFit="contain"
+                  src={companyData.logoUrl}
+                  alt={`${companyData.name} 기업 로고`}
+                />
+              </div>
+            )}
+
+            <strong css={companyName}>{companyData.name}</strong>
           </div>
           <p css={commentCount}>총 댓글 {companyData.commentCount.toLocaleString("ko-KR")}개</p>
         </header>
@@ -109,14 +111,16 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
     <div css={cardWrapper(isMobile)} className="active">
       <header css={header}>
         <div css={companyInfoContainer}>
-          <div css={companyLogoBox}>
-            <Image
-              layout="fill"
-              objectFit="contain"
-              src={`${CDN_URL}/company_images/${companyData.id}/logo.png`}
-              alt={`${companyCommentArrData.company.name} 기업 로고`}
-            />
-          </div>
+          {!isMobile && (
+            <div css={companyLogoBox}>
+              <Image
+                layout="fill"
+                objectFit="contain"
+                src={companyData.logoUrl}
+                alt={`${companyCommentArrData.company.name} 기업 로고`}
+              />
+            </div>
+          )}
           <strong css={companyName}>{companyCommentArrData.company.name}</strong>
         </div>
         <p css={commentCount}>총 댓글 {companyCommentArrData.commentArr.length.toLocaleString("ko-KR")}개</p>

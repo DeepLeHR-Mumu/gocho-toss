@@ -1,5 +1,7 @@
 export interface BottomPaginationProps {
-  url: string;
-  q?: string | string[] | undefined;
+  linkObj: {
+    pathname: string;
+    q?: string | undefined;
+  };
   totalPage: number;
 }

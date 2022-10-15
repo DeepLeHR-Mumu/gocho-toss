@@ -79,7 +79,7 @@ export const PasswordEditBox: FunctionComponent = () => {
           })}
           css={inputCSS}
           type="password"
-          placeholder="현재비밀번호"
+          placeholder="현재 비밀번호"
         />
         <div css={errorMsgContiner}>
           {failCurrentPw && <p css={passwordErrorMsg}>현재 비밀번호가 일치하지 않습니다.</p>}
@@ -128,9 +128,6 @@ export const PasswordEditBox: FunctionComponent = () => {
         </div>
 
         <NormalButton text="변경하기" isSubmit wide variant="outlined" />
-        {/* <button type="submit" css={submitButton}>
-          확인
-        </button> */}
       </form>
     </div>
   );

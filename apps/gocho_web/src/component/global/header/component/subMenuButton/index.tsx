@@ -4,7 +4,7 @@ import Link from "next/link";
 import { subMenuButtonCSS } from "./style";
 import { SubMenuButtonProps } from "./type";
 
-export const SubMenuButton: FunctionComponent<SubMenuButtonProps> = ({ isPageQuery, link, title, setActiveIndex }) => {
+export const SubMenuButton: FunctionComponent<SubMenuButtonProps> = ({ subMenuData, setActiveIndex }) => {
   return (
     <li
       css={subMenuButtonCSS}
@@ -16,19 +16,19 @@ export const SubMenuButton: FunctionComponent<SubMenuButtonProps> = ({ isPageQue
       }}
       role="presentation"
     >
-      {isPageQuery ? (
+      {subMenuData.pageQuery ? (
         <Link
           href={{
-            pathname: link,
-            query: { page: 1 },
+            pathname: subMenuData.menuLink,
+            query: { page: 1, order: subMenuData.pageOrder },
           }}
           passHref
         >
-          {title}
+          {subMenuData.menuTitle}
         </Link>
       ) : (
-        <Link href={link} passHref>
-          {title}
+        <Link href={subMenuData.menuLink} passHref>
+          {subMenuData.menuTitle}
         </Link>
       )}
     </li>

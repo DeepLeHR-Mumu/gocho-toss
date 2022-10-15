@@ -10,7 +10,6 @@ import {
   WarningText,
   ContainerBox,
 } from "../common/component";
-
 import { Spec3HighschoolProps, PostSubmitValues } from "./type";
 import { highSchoolTypeArr } from "./constant";
 import { specCardWrapper, formCSS } from "../common/style";
@@ -31,6 +30,7 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
     sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
     moveNextCard(35);
   };
+
   return (
     <div css={specCardWrapper}>
       <SpecCardTitle title="고등학교 학력정보" desc="정확하게 입력할 수록 스펙평가의 적중도는 올라갑니다." />
@@ -59,8 +59,8 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
                   },
                   required: "무단결석 일수를 입력해주세요.",
                 })}
-                placeholder="0"
                 id="absent"
+                placeholder="?"
                 firstDesc="#무단 결석:"
                 lastDesc="/일"
               />
@@ -75,7 +75,7 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
                   required: "무단지각 일수를 입력해주세요.",
                 })}
                 id="tardy"
-                placeholder="0"
+                placeholder="?"
                 firstDesc="#무단 지각:"
                 lastDesc="/일"
               />
@@ -90,7 +90,7 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
                   required: "무단 조퇴 일수를 입력해주세요.",
                 })}
                 id="leaveEarly"
-                placeholder="0"
+                placeholder="?"
                 firstDesc="#무단 조퇴:"
                 lastDesc="/일"
               />
@@ -104,8 +104,8 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
                   },
                   required: "무단결과 일수를 입력해주세요.",
                 })}
+                placeholder="?"
                 id="classMiss"
-                placeholder="0"
                 firstDesc="#무단 결과:"
                 lastDesc="/일"
               />
@@ -134,7 +134,7 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
             id="naesin"
             firstDesc="내신:"
             lastDesc="등급"
-            placeholder="입력칸"
+            placeholder="?"
           />
           {errors.highschool?.naesin?.message && <WarningText msg={errors.highschool.naesin.message} />}
         </ContainerBox>

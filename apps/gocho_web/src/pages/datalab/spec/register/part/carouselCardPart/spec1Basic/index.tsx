@@ -1,12 +1,12 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { useUserInfo } from "shared-api/auth";
-
 import { CheckBox } from "shared-ui/common/atom/checkbox";
+import { specRegisterStepEvent } from "shared-ga/spec";
+
 import { SpecCardTitle, MoveCardButtons, SelectRadioForm, Desc, WarningText, ContainerBox } from "../common/component";
 import { MultiSelectRadioForm } from "./component/multiSelectRadioForm";
-
 import { genderArr, militaryArr, desiredTaskArr, desiredIndustryArr } from "./constant";
 import { Spec1BasicProps, PostSubmitValues } from "./type";
 import { specCardWrapper, formCSS } from "../common/style";
@@ -29,6 +29,10 @@ export const Spec1Basic: FunctionComponent<Spec1BasicProps> = ({ moveNextCard })
     sessionStorage.setItem("specObj", JSON.stringify(formData));
     moveNextCard(15);
   };
+
+  useEffect(() => {
+    specRegisterStepEvent(1);
+  }, []);
 
   if (!isSuccess) {
     return <div css={specCardWrapper} />;
@@ -67,7 +71,7 @@ export const Spec1Basic: FunctionComponent<Spec1BasicProps> = ({ moveNextCard })
               },
               max: {
                 value: 99,
-                message: "최대 나이는 99세 이상입니다.",
+                message: "최대 나이는 99세 입니다.",
               },
             })}
             placeholder="나이를 숫자로만 적어주세요 예시: 32"
