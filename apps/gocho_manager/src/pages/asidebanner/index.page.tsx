@@ -32,7 +32,7 @@ const AsideBanner: NextPage = () => {
           const { year: endYear, month: endMonth, date: endDate } = dateConverter(banner.endTime);
 
           return (
-            <li css={bannerBox}>
+            <li key={banner.id} css={bannerBox}>
               <div>{banner.id}</div>
               <div css={bannerImgBox}>
                 <Image src={banner.image || defaultCompanyLogo} alt="" layout="fill" objectFit="contain" />

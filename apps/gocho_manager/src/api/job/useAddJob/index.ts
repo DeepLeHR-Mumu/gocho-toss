@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import { ResponseDef } from "shared-type/api/responseType";
+import { AdminResponseDef } from "shared-type/api/responseType";
 import { axiosInstance } from "@api/axiosInstance";
 import { PostJobDef, useAddJobProps, RequestObjDef } from "./type";
 
@@ -15,6 +15,6 @@ export const postJob: PostJobDef = async (requestObj) => {
 };
 
 export const useAddJob: useAddJobProps = () => {
-  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(postJob);
+  const mutationResult = useMutation<AdminResponseDef, AxiosError, RequestObjDef>(postJob);
   return mutationResult;
 };
