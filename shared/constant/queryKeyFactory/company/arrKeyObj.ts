@@ -3,6 +3,7 @@ export interface CompanyArrRequestDef {
   limit?: number;
   offset?: number;
   order?: "recent" | "comment" | "name" | "popular" | "rand" | "view";
+  word?: string;
 }
 
 export const companyArrKeyObj = {
