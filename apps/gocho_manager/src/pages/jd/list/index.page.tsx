@@ -111,7 +111,7 @@ const JdList: NextPage = () => {
             const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
 
             return (
-              <tr css={jobContainer}>
+              <tr key={job.id} css={jobContainer}>
                 <td css={jobIdBox}>{job.id}</td>
                 <td css={mainInfoBox}>
                   <p css={companyName}>{job.companyName}</p>
@@ -119,7 +119,11 @@ const JdList: NextPage = () => {
                 </td>
                 <td css={taskContainer}>
                   {job.taskArr.map((task) => {
-                    return <p css={taskBox}>{task}</p>;
+                    return (
+                      <p key={`${job.id}${task}`} css={taskBox}>
+                        {task}
+                      </p>
+                    );
                   })}
                 </td>
                 <td css={dateBox}>

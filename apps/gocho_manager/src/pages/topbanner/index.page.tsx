@@ -110,7 +110,7 @@ const TopBanner: NextPage = () => {
             const { year: endYear, month: endMonth, date: endDate } = dateConverter(banner.endTime);
 
             return (
-              <tr css={bannerBox}>
+              <tr key={banner.id} css={bannerBox}>
                 <td css={bannerId}>{banner.id}</td>
                 <td css={companyName}>{banner.companyName}</td>
                 <td css={title}>{banner.title}</td>

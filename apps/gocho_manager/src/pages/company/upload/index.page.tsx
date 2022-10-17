@@ -135,7 +135,11 @@ const CompanyUpload: NextPage = () => {
             >
               <option value="">업종 선택 ▼</option>
               {industryArr.map((industry) => {
-                return <option value={industry}>{industry}</option>;
+                return (
+                  <option key={industry} value={industry}>
+                    {industry}
+                  </option>
+                );
               })}
             </select>
           </div>
@@ -149,7 +153,11 @@ const CompanyUpload: NextPage = () => {
             >
               <option value="">기업 규모 선택 ▼</option>
               {sizeArr.map((size) => {
-                return <option value={size}>{size}</option>;
+                return (
+                  <option key={size} value={size}>
+                    {size}
+                  </option>
+                );
               })}
             </select>
           </div>
@@ -233,7 +241,7 @@ const CompanyUpload: NextPage = () => {
           <div css={welfareWrapper}>
             {welfareArr.map((welfare) => {
               return (
-                <div css={welfareBox}>
+                <div key={welfare.title} css={welfareBox}>
                   <strong css={inputTitle}>{welfare.title}</strong>
                   <textarea
                     css={welfareInputBox}

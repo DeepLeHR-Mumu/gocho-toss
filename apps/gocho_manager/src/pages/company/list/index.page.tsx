@@ -75,7 +75,7 @@ const CompanyList: NextPage = () => {
         <table css={tableContainer}>
           {companyDataArr.companyDataArr.map((company) => {
             return (
-              <tr css={companyContainer}>
+              <tr key={company.id} css={companyContainer}>
                 <div css={flexBox}>
                   <td css={companyIdBox}>{company.id}</td>
                   <td css={companyNameBox}>{company.name}</td>

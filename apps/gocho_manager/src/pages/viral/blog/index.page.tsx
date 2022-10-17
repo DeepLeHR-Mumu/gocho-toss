@@ -15,7 +15,7 @@ const Blog: NextPage = () => {
     isError,
   } = useJobArr({
     order: "popular",
-    filter: "valid", // TODO: to TodayUpload
+    filter: "todayUpload",
     limit: 10,
   });
 
