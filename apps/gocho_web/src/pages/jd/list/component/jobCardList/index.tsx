@@ -6,7 +6,7 @@ import { JobCard } from "@component/card/jobCard";
 import { useUserInfo } from "shared-api/auth";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { JobCardListProps } from "./type";
-import { listContainer } from "./style";
+import { listContainer, noDataDesc } from "./style";
 
 export const JobCardList: FunctionComponent<JobCardListProps> = ({ jobDataArr, isLoading, isError }) => {
   const { data: userData } = useUserInfo();
@@ -24,6 +24,8 @@ export const JobCardList: FunctionComponent<JobCardListProps> = ({ jobDataArr, i
 
   return (
     <section css={listContainer}>
+      {jobDataArr.length === 0 && <p css={noDataDesc}>검색결과가 없습니다 👀</p>}
+
       {jobDataArr.map((jobData) => {
         const isBookmarked = Boolean(
           userJobBookmarkArr?.some((job) => {

@@ -38,7 +38,7 @@ const JobsExpList: NextPage = () => {
   const limit = 10;
   const [total, setTotal] = useState<number>(0);
   const [page, setPage] = useState<number>(Number(router.query.page));
-  const [activeOrder, setActiveOrder] = useState<OrderDef>(router.query.page as OrderDef);
+  const [activeOrder, setActiveOrder] = useState<OrderDef>(router.query.order as OrderDef);
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>({
     name: router.query.q || undefined,
   } as SearchQueryDef);
