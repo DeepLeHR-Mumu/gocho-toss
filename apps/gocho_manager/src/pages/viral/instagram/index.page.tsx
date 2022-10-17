@@ -38,6 +38,26 @@ const Instagram: NextPage = () => {
     limit: 10,
   });
 
+  const copyMoreJobLink = async () => {
+    const text = `https://고초대졸.com/jd/list/?utm_source=instagram&utm_medium=story&utm_campaign=story_detail`;
+    try {
+      await navigator.clipboard.writeText(text);
+      alert("카카오뷰 제목이 복사 되었습니다!");
+    } catch (error) {
+      alert("오류!");
+    }
+  };
+
+  const copyGoWebsiteLink = async () => {
+    const text = `https://고초대졸.com/?utm_source=instagram&utm_medium=story&utm_campaign=story_detail`;
+    try {
+      await navigator.clipboard.writeText(text);
+      alert("카카오뷰 제목이 복사 되었습니다!");
+    } catch (error) {
+      alert("오류!");
+    }
+  };
+
   const copyKakaoTitle = async (job: JobDef) => {
     const text = `🚀 ${job.companyName} ${job.title}`;
     try {
@@ -49,7 +69,28 @@ const Instagram: NextPage = () => {
   };
 
   const copyKakaoDesc = async (job: JobDef) => {
-    const text = `🚀 ${job.companyName} ${job.title}`;
+    let text = "";
+    const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
+    const deadline = endYear === 9999 ? "상시" : `~ ${endYear}-${endMonth}-${endDate} 까지`;
+
+    text += `🚀 ${job.companyName}\n${job.title}\n- 접수기간 : ${deadline}\n`;
+    let taskString = "";
+    job.taskArr.map((task, index, taskArr) => {
+      taskString += index + 1 === taskArr.length ? `${task}` : `${task}, `;
+      return taskString;
+    });
+    text += `- 직무: ${taskString}\n`;
+    let contractString = "";
+    job.contractArr.map((contract, index, contractArr) => {
+      contractString += index + 1 === contractArr.length ? `${contract}` : `${contract}, `;
+      return contractString;
+    });
+    text += `- 채용형태: ${contractString}\n`;
+    text += `- 근무지: ${job.placeArr[0]} ${job.placeArr.length !== 1 ? `외 ${job.placeArr.length - 1}곳` : ""}\n`;
+    text += `- 근무형태: ${job.rotationArr[0]} ${
+      job.rotationArr.length !== 1 ? `외 ${job.rotationArr.length - 1}형태` : ""
+    }\n\n`;
+
     try {
       await navigator.clipboard.writeText(text);
       alert("카카오뷰 설명이 복사 되었습니다!");
@@ -91,6 +132,15 @@ const Instagram: NextPage = () => {
       <h2 css={pageTitle}>바이럴 마케팅</h2>
       <section css={sectionContainer}>
         <h3 css={sectionTitle}>인스타그램 & 카카오뷰</h3>
+        <div css={buttonContainer}>
+          <button type="button" css={copyButton} onClick={copyMoreJobLink}>
+            더 많은 채용공고 보러가기 복사
+          </button>
+          <button type="button" css={copyButton} onClick={copyGoWebsiteLink}>
+            고초대졸닷컴 바로가기 복사
+          </button>
+        </div>
+
         <ul>
           {jobDataArr.jobDataArr.map((job) => {
             const { year: startYear, month: startMonth, date: startDate } = dateConverter(job.startTime);
@@ -100,7 +150,7 @@ const Instagram: NextPage = () => {
               <li key={job.id} css={jobContainer}>
                 <div css={jobInfoContainer}>
                   <div css={companyLogo}>
-                    <Image layout="fill" objectFit="contain" src={defaultCompanyLogo} alt="" />
+                    <Image layout="fill" objectFit="contain" src={job.companyLogo || defaultCompanyLogo} alt="" />
                   </div>
                   <div css={companyInfo}>
                     <div css={infoName}>{job.companyName}</div>
@@ -160,7 +210,7 @@ const Instagram: NextPage = () => {
                   </div>
                   <div css={infoBox}>
                     <p css={infoName}>조회수</p>
-                    {/* <div css={info}>{job.view}</div> */}
+                    <div css={info}>{job.view}</div>
                   </div>
                 </div>
                 <div css={buttonContainer}>
