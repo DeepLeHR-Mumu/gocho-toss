@@ -531,7 +531,7 @@ const JdUpload: NextPage = () => {
                   <div css={inputContainer}>
                     <strong css={inputTitle}>기타 근무지</strong>
                     <input css={inputBox} {...register(`position_arr.${index}.place.etc`)} />
-                    <p css={enterNotice}>전국/기타일 경우 입력</p>
+                    <p css={enterNotice}>전국/해외/기타일 경우 입력</p>
                   </div>
 
                   <div css={inputContainer}>
@@ -570,7 +570,7 @@ const JdUpload: NextPage = () => {
                     />
                   </div>
                   <div css={inputContainer}>
-                    <strong css={inputTitle}>급여</strong>
+                    <strong css={inputTitle}>급여 *</strong>
                     <textarea
                       css={textareaBox}
                       {...register(`position_arr.${index}.pay_arr`, {
