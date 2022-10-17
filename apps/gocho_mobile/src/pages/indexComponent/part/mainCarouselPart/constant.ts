@@ -1,23 +1,6 @@
 import checkIconImage from "shared-image/global/common/yellow_check.png";
-import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 
 export const carouselArr = [
-  {
-    id: 0,
-    topDesc: "2022년",
-    middleDesc: "신보그룹",
-    title: "초대졸 신입사원 공개채용",
-    lastDesc: "2022.09.26(월)-10.16(일)",
-    iconImage: checkIconImage,
-    backgroundColor: "#089e66",
-    buttonObj: {
-      target: "_self" as const,
-      text: "자세히보기",
-      color: "#fff",
-      backgroundColor: "#88c3a8",
-      url: `${JOBS_DETAIL_URL}/10021`,
-    },
-  },
   {
     id: 1,
     topDesc: "OPEN",
