@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect } from "react";
 import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 import { useRouter } from "next/router";
 
@@ -10,6 +10,18 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ lin
   const router = useRouter();
   const currentPageNumber = Number(router.query.page);
   const count = Math.floor(currentPageNumber / 10);
+
+  useEffect(() => {
+    if (currentPageNumber < 0) {
+      router.push({
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          page: 1,
+        },
+      });
+    }
+  }, [currentPageNumber, router, router.query.page]);
 
   if (totalPage <= 1) {
     return <div css={paginationContainer} />;

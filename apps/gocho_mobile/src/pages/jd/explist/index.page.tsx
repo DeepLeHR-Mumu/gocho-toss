@@ -32,7 +32,7 @@ const JobsExpList: NextPage = () => {
   const router = useRouter();
   const limit = 6;
   const [total, setTotal] = useState<number>(0);
-  const [page, setPage] = useState<number>(Number(router.query.page));
+  const [page, setPage] = useState<number>(Number(router.query.page || 1));
   const [activeOrder, setActiveOrder] = useState<OrderDef>(router.query.order as OrderDef);
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>({
     name: router.query.q || undefined,
@@ -62,7 +62,7 @@ const JobsExpList: NextPage = () => {
     q: router.query.q as string,
     order: activeOrder,
     limit,
-    offset: (page - 1) * 5,
+    offset: (page - 1) * 5 || 0,
   });
 
   useEffect(() => {
@@ -78,7 +78,7 @@ const JobsExpList: NextPage = () => {
       setTotal(companyDataArr.count);
     }
   }, [companyDataArr]);
-  
+
   useEffect(() => {
     expiredJdListFunnelEvent();
   }, []);

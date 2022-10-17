@@ -162,7 +162,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         >
           <p css={viewWrapper}>
             <FiEye />
-            <span css={viewNumber}>{jobData.view}</span>
+            <span css={viewNumber}>{jobData.view.toLocaleString("Ko-KR")}</span>
           </p>
 
           <div css={mainContainer}>

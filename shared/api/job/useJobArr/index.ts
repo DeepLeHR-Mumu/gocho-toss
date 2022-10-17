@@ -8,6 +8,15 @@ import { GetJobArrDef } from "./type";
 import { selector } from "./util";
 
 export const getJobArr: GetJobArrDef = async ({ queryKey: [{ requestObj }] }) => {
+  if (requestObj.offset && requestObj.offset < 0) {
+    const { data } = await axiosInstance.get("/jds", {
+      params: {
+        ...requestObj,
+        offset: 0,
+      },
+    });
+    return data;
+  }
   const { data } = await axiosInstance.get("/jds", {
     params: requestObj,
   });

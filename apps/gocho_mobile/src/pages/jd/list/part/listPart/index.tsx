@@ -10,7 +10,6 @@ import { JOBS_LIST_URL } from "shared-constant/internalURL";
 import { jdListFunnelEvent, jdSearchEvent } from "shared-ga/jd";
 // import { myFilterLoadEvent, myFilterSaveEvent } from "shared-ga/jd";
 
-
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
 import { BottomPopup } from "@component/bottomPopup";
 
@@ -35,7 +34,7 @@ export const ListPart: FunctionComponent = () => {
   const router = useRouter();
   const limit = 6;
   const [total, setTotal] = useState<number>(0);
-  const [page, setPage] = useState<number>(Number(router.query.page));
+  const [page, setPage] = useState<number>(Number(router.query.page || 1));
   const [activeOrder, setActiveOrder] = useState<OrderDef>((router.query.order as OrderDef) || "recent");
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
   const [showFilter, setShowFilter] = useState<boolean>(false);
@@ -76,7 +75,7 @@ export const ListPart: FunctionComponent = () => {
     order: activeOrder,
     filter: "valid",
     limit,
-    offset: (page - 1) * limit,
+    offset: (page - 1) * limit || 0,
   });
 
   useEffect(() => {

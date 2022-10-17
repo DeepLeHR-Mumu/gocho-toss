@@ -7,6 +7,15 @@ import { GetCompanyArrDef } from "./type";
 import { selector } from "./util";
 
 export const getCompanyArr: GetCompanyArrDef = async ({ queryKey: [{ requestObj }] }) => {
+  if (requestObj.offset && requestObj.offset < 0) {
+    const { data } = await axiosInstance.get("/companies", {
+      params: {
+        ...requestObj,
+        offset: 0,
+      },
+    });
+    return data;
+  }
   const { data } = await axiosInstance.get(`/companies`, {
     params: requestObj,
   });

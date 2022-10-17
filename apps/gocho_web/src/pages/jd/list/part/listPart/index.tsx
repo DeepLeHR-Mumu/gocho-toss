@@ -41,7 +41,7 @@ export const ListPart: FunctionComponent = () => {
   const { setCurrentToast } = useToast();
 
   const [total, setTotal] = useState<number>(0);
-  const [page, setPage] = useState<number>(Number(router.query.page));
+  const [page, setPage] = useState<number>(Number(router.query.page || 1));
   const [activeOrder, setActiveOrder] = useState<OrderDef>((router.query.order as OrderDef) || "recent");
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
 
@@ -94,7 +94,7 @@ export const ListPart: FunctionComponent = () => {
     order: activeOrder,
     filter: "valid",
     limit,
-    offset: (page - 1) * 10,
+    offset: (page - 1) * 10 || 0,
   });
 
   useEffect(() => {
