@@ -6,7 +6,7 @@ import { RequestObjDef } from "./type";
 
 const addCompanyViewCount = async (requestObj: RequestObjDef) => {
   const token = localStorage.getItem("token") as string;
-  const { data } = await axiosInstance.post(`/companies/${requestObj.elemId}/views`, {
+  const { data } = await axiosInstance.post(`/companies/${requestObj.elemId}/views`, null, {
     headers: {
       "x-access-token": token,
     },
@@ -15,6 +15,7 @@ const addCompanyViewCount = async (requestObj: RequestObjDef) => {
 };
 
 export const useAddCompanyViewCount = () => {
-  const mutationResult = useMutation(addCompanyViewCount);
+  const mutationResult = useMutation(addCompanyViewCount,);
+  
   return mutationResult;
 };
