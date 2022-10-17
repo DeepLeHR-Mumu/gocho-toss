@@ -1,9 +1,12 @@
 import { FunctionComponent, useState } from "react";
+import { useRouter } from "next/router";
 import { useQueryClient } from "@tanstack/react-query";
 import { useUserInfo, useDeleteUserInfo } from "shared-api/auth";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { userInfoKeyObj } from "shared-constant/queryKeyFactory/user/infoKeyObj";
 import { useToast } from "@recoil/hook/toast";
+import { useModal } from "@recoil/hook/modal";
+import { MAIN_URL } from "shared-constant/internalURL";
 import { ModalComponent } from "../modalBackground";
 import { wrapper, marginContainer, userNameCSS, buttonCSS, emailCSS, modalContainer, deleteAccountCSS } from "./style";
 import { PictureEditBox } from "./component/pictureEditBox";
@@ -13,21 +16,31 @@ export const AccountSettingBox: FunctionComponent = () => {
   const [isPictureEditing, setIsPictureEditing] = useState(true);
   const [isPasswordEditing, setIsPasswordEditing] = useState(false);
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const { data: userInfoData } = useUserInfo();
   const { setCurrentToast } = useToast();
   const { mutate } = useDeleteUserInfo();
+  const { setCurrentModal } = useModal();
 
   const deleteUserInfo = (id: number) => {
-    mutate(
-      { id },
-      {
-        onSuccess: () => {
-          setCurrentToast("회원탈퇴가 되었습니다.");
-          queryClient.invalidateQueries(userInfoKeyObj.userInfo);
-        },
-      }
-    );
+    setCurrentModal("dialogModal", {
+      agreeDesc: "삭제",
+      title: "계정을 삭제 하시겠습니까?",
+      desc: "모든 정보가 삭제되며 복구가 불가합니다. 주의사항에 동의하고 삭제하시겠습니까?",
+      doActive: () => {
+        mutate(
+          { id },
+          {
+            onSuccess: () => {
+              setCurrentToast("회원탈퇴가 되었습니다.");
+              router.push(MAIN_URL);
+              queryClient.invalidateQueries(userInfoKeyObj.userInfo);
+            },
+          }
+        );
+      },
+    });
   };
 
   return (
@@ -69,7 +82,7 @@ export const AccountSettingBox: FunctionComponent = () => {
           css={deleteAccountCSS}
           onClick={() => {
             if (userInfoData) {
-              deleteUserInfo(userInfoData.id);
+              deleteUserInfo(userInfoData?.id);
             }
           }}
         >

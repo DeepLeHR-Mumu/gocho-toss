@@ -62,6 +62,13 @@ export interface pageBlockModalDef {
   afterAction?(): void;
 }
 
+export interface dialogModalDef {
+  agreeDesc: string;
+  title: string;
+  desc: string;
+  doActive(): void;
+}
+
 export interface WritePostingModalDef {
   title: string;
   description: string;
@@ -74,7 +81,8 @@ export type contentModalDef =
   | changePostingObjDef
   | factoryObjDef
   | loginObjDef
-  | WritePostingModalDef;
+  | WritePostingModalDef
+  | dialogModalDef;
 
 export type contentModalNameDef =
   | "postingModal"
@@ -83,7 +91,8 @@ export type contentModalNameDef =
   | "factoryModal"
   | "loginModal"
   | "pageBlockModal"
-  | "writePostingModal";
+  | "writePostingModal"
+  | "dialogModal";
 
 export type modalNameDef = "logoutModal" | "signUpModal" | "accountSettingModal" | "writeKakaoInfoModal";
 

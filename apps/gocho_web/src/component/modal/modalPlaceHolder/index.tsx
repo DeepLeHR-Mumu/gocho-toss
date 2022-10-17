@@ -12,6 +12,7 @@ import { ChangePostingModal } from "../changePostingModal";
 import { TipModal } from "../tipModal";
 import { FactoryModal } from "../factoryModal";
 import { WriteKakaoInfoModal } from "../writeKakaoInfoModal";
+import { DialogModal } from "../dialogModal";
 
 export const ModalPlaceholder: FunctionComponent = () => {
   const { currentModal } = useModal();
@@ -45,6 +46,9 @@ export const ModalPlaceholder: FunctionComponent = () => {
   }
   if (currentModal?.activatedModal === "writeKakaoInfoModal") {
     return <WriteKakaoInfoModal />;
+  }
+  if (currentModal?.activatedModal === "dialogModal") {
+    return <DialogModal />;
   }
 
   return null;
