@@ -14,6 +14,10 @@ export const cardWrapper = css`
   width: 100%;
 `;
 
+export const buttonBox = css`
+  display: block;
+`;
+
 export const slideInfo = (bgColor: string) => {
   return css`
     position: relative;

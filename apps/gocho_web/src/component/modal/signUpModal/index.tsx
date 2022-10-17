@@ -82,6 +82,7 @@ export const SignUpBox: FunctionComponent = () => {
             <AccountInput
               registerObj={register("email", {
                 required: EMAIL_ERROR_MESSAGE.REQUIRED,
+                maxLength: { value: 30, message: EMAIL_ERROR_MESSAGE.LOGIN_MIN_MAX },
                 pattern: {
                   value: EMAIL_REGEXP,
                   message: EMAIL_ERROR_MESSAGE.REGEX,

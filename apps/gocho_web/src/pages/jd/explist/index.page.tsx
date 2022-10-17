@@ -9,7 +9,7 @@ import { META_JD_EXPLIST } from "shared-constant/meta";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { useCompanyArr } from "shared-api/company";
-import { expiredJdListSortingEvent } from "shared-ga/jd";
+import { expiredJdListSortingEvent, expiredJdListFunnelEvent } from "shared-ga/jd";
 
 import { Layout } from "@component/layout";
 import { Pagination } from "@pages/jd/component/pagination";
@@ -83,6 +83,10 @@ const JobsExpList: NextPage = () => {
       setTotal(companyDataArr.count);
     }
   }, [companyDataArr]);
+
+  useEffect(() => {
+    expiredJdListFunnelEvent();
+  }, []);
 
   const totalPage = Math.ceil(total / limit);
   return (

@@ -93,3 +93,12 @@ export const errorMsgCSS = css`
 export const loginButton = css`
   margin-bottom: 0.3rem;
 `;
+
+export const findPasswordButton = css`
+  margin-top: 1rem;
+  width: 100%;
+  font-size: 0.875rem;
+  color: ${COLORS.GRAY40};
+  text-decoration-line: underline;
+  line-height: 1.25rem;
+`;

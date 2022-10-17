@@ -1,13 +1,14 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import kakaoMono from "shared-image/global/sns/kakaoLogo.svg";
 import { useDoLogin } from "shared-api/auth";
-import { loginSuccessEvent } from "shared-ga/auth";
+import { loginModalCloseEvent, loginModalOpenEvent, loginSuccessEvent } from "shared-ga/auth";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
 import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant/errorMessage";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
@@ -17,8 +18,8 @@ import { useModal } from "@recoil/hook/modal";
 import { BottomPopup } from "@component/bottomPopup";
 import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
 import { tokenDecryptor } from "shared-util/tokenDecryptor";
-
 import { MAIN_URL } from "shared-constant/internalURL";
+
 import {
   wrapper,
   closeButton,
@@ -30,9 +31,16 @@ import {
   logoContainer,
   kakaoLoginBox,
   kakaoLogoBox,
-  findPwButton,
+  findPasswordButton,
 } from "./style";
 import { LoginFormValues } from "./type";
+
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Kakao: any;
+  }
+}
 
 export const LoginModal: FunctionComponent = () => {
   const {
@@ -42,9 +50,11 @@ export const LoginModal: FunctionComponent = () => {
   } = useForm<LoginFormValues>({ mode: "onChange" });
   const queryClient = useQueryClient();
 
+  const router = useRouter();
   const { setCurrentToast } = useToast();
   const { mutate } = useDoLogin();
   const { closeModal, setCurrentModal, currentModal } = useModal();
+  const ref = useRef(0);
 
   const [errorMsg, setErrorMsg] = useState<null | string>(null);
 
@@ -53,6 +63,7 @@ export const LoginModal: FunctionComponent = () => {
       onError: (error) => {
         const errorResponse = error.response?.data as ErrorResponse;
         setErrorMsg(errorResponse.error.errorMessage);
+        ref.current += 1;
       },
       onSuccess: (response) => {
         localStorage.setItem("token", `${response.data.token}`);
@@ -65,6 +76,21 @@ export const LoginModal: FunctionComponent = () => {
     });
   };
 
+  const kakaoLogin = () => {
+    sessionStorage.setItem("kakaopath", router.pathname);
+    window.Kakao.Auth.authorize({
+      redirectUri: `${window.location.origin}/kakaologin`,
+    });
+  };
+
+  useEffect(() => {
+    loginModalOpenEvent();
+    if (window.Kakao.isInitialized()) {
+      return;
+    }
+    window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
+  }, []);
+
   return (
     <BottomPopup>
       <div css={wrapper}>
@@ -73,6 +99,7 @@ export const LoginModal: FunctionComponent = () => {
             css={closeButton}
             type="button"
             onClick={() => {
+              loginModalCloseEvent(ref.current);
               closeModal();
             }}
           >
@@ -130,13 +157,7 @@ export const LoginModal: FunctionComponent = () => {
           <div css={loginButton}>
             <NormalButton wide variant="filled" text="로그인" isSubmit />
 
-            <button
-              type="button"
-              css={kakaoLoginBox}
-              onClick={() => {
-                return undefined;
-              }}
-            >
+            <button type="button" css={kakaoLoginBox} onClick={kakaoLogin}>
               <div css={kakaoLogoBox}>
                 <Image src={kakaoMono} alt="카카오 로그인" layout="fill" objectFit="contain" />
               </div>
@@ -151,8 +172,13 @@ export const LoginModal: FunctionComponent = () => {
               setCurrentModal("signUpModal");
             }}
           />
-
-          <button type="button" css={findPwButton}>
+          <button
+            type="button"
+            css={findPasswordButton}
+            onClick={() => {
+              setCurrentModal("findPasswordModal");
+            }}
+          >
             비밀번호 찾기
           </button>
         </form>

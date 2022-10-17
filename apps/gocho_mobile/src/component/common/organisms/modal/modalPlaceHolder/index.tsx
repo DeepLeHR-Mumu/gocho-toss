@@ -4,6 +4,8 @@ import { useModal } from "@recoil/hook/modal";
 
 import { SignUpModal } from "../signUpModal";
 import { LoginModal } from "../loginModal";
+import { WriteKakaoInfoModal } from "../writeKakaoInfoModal";
+import { FindPasswordModal } from "../findPasswordModal";
 
 export const ModalPlaceholder: FunctionComponent = () => {
   const { currentModal } = useModal();
@@ -16,5 +18,12 @@ export const ModalPlaceholder: FunctionComponent = () => {
     return <SignUpModal />;
   }
 
+  if (currentModal?.activatedModal === "writeKakaoInfoModal") {
+    return <WriteKakaoInfoModal />;
+  }
+
+  if (currentModal?.activatedModal === "findPasswordModal") {
+    return <FindPasswordModal />;
+  }
   return null;
 };
