@@ -62,16 +62,16 @@ const JdUpload: NextPage = () => {
           college: false,
           four: false,
           required_exp: "",
-          min_year: undefined,
-          max_year: undefined,
+          min_year: null,
+          max_year: null,
           required_etc_arr: undefined,
           contract_type: "",
-          conversion_rate: undefined,
+          conversion_rate: null,
           task_main: "",
           task_sub_arr: undefined,
           task_detail_arr: undefined,
           rotation_arr: undefined,
-          rotation_etc: "",
+          rotation_etc: null,
           place: {
             type: "",
             address_arr: [],
@@ -119,7 +119,7 @@ const JdUpload: NextPage = () => {
         <form css={formContainer} onSubmit={handleSubmit(jobSubmit)}>
           <h3 css={sectionTitle}>공통 공고 내용</h3>
           <div css={inputContainer}>
-            <strong css={inputTitle}>기업 이름</strong>
+            <strong css={inputTitle}>기업 이름 *</strong>
             <input
               css={searchBox}
               type="text"
@@ -154,7 +154,7 @@ const JdUpload: NextPage = () => {
             </select>
           </div>
           <div css={inputContainer}>
-            <strong css={inputTitle}>공고 제목</strong>
+            <strong css={inputTitle}>공고 제목 *</strong>
             <input
               css={inputBox}
               {...register("title", {
@@ -163,7 +163,7 @@ const JdUpload: NextPage = () => {
             />
           </div>
           <div css={inputContainer}>
-            <strong css={inputTitle}>채용 기간</strong>
+            <strong css={inputTitle}>채용 기간 *</strong>
             <div css={flexBox}>
               <input
                 css={inputBox}
@@ -195,7 +195,7 @@ const JdUpload: NextPage = () => {
             </label>
           </div>
           <div css={inputContainer}>
-            <strong css={inputTitle}>채용 절차</strong>
+            <strong css={inputTitle}>채용 절차 *</strong>
             <textarea
               css={textareaBox}
               {...register("process_arr", {
@@ -208,7 +208,7 @@ const JdUpload: NextPage = () => {
             <p css={enterNotice}>엔터로 구분해주세요.</p>
           </div>
           <div css={inputContainer}>
-            <strong css={inputTitle}>지원 방법</strong>
+            <strong css={inputTitle}>지원 방법 *</strong>
             <textarea
               css={textareaBox}
               {...register("apply_route_arr", {
@@ -221,7 +221,7 @@ const JdUpload: NextPage = () => {
             <p css={enterNotice}>엔터로 구분해주세요.</p>
           </div>
           <div css={inputContainer}>
-            <strong css={inputTitle}>채용 링크</strong>
+            <strong css={inputTitle}>채용 링크 *</strong>
             <input
               type="url"
               css={inputBox}
@@ -236,6 +236,7 @@ const JdUpload: NextPage = () => {
               css={textareaBox}
               {...register("etc_arr", {
                 setValueAs: (v: string) => {
+                  if (v === "" || v === undefined) return null;
                   return v.split("\n");
                 },
               })}
@@ -256,7 +257,7 @@ const JdUpload: NextPage = () => {
                 <li css={positionContainer} key={item.id}>
                   <h3 css={positionTitle}>직무 내용</h3>
                   <div css={inputContainer}>
-                    <strong css={inputTitle}>학력 조건</strong>
+                    <strong css={inputTitle}>학력 조건 *</strong>
                     <label css={inputLabel} htmlFor={`중졸${index}`}>
                       <input type="checkbox" id={`중졸${index}`} {...register(`position_arr.${index}.middle`)} />
                       <CheckBox isChecked={watch("position_arr")[index].middle} />
@@ -279,7 +280,7 @@ const JdUpload: NextPage = () => {
                     </label>
                   </div>
                   <div css={inputContainer}>
-                    <strong css={inputTitle}>경력 조건</strong>
+                    <strong css={inputTitle}>경력 조건 *</strong>
                     {requiredExpArr.map((expName) => {
                       return (
                         <label css={inputLabel} key={`${item.id}${expName}`} htmlFor={`${expName}${index}`}>
@@ -324,6 +325,7 @@ const JdUpload: NextPage = () => {
                       css={textareaBox}
                       {...register(`position_arr.${index}.required_etc_arr`, {
                         setValueAs: (v: string) => {
+                          if (v === "" || v === undefined) return null;
                           return v.split("\n");
                         },
                       })}
@@ -331,7 +333,7 @@ const JdUpload: NextPage = () => {
                     <p css={enterNotice}>엔터로 구분해주세요.</p>
                   </div>
                   <div css={inputContainer}>
-                    <strong css={inputTitle}>계약 형태</strong>
+                    <strong css={inputTitle}>계약 형태 *</strong>
                     {contractTypeArr.map((contractName) => {
                       return (
                         <label css={inputLabel} key={`${item.id}${contractName}`} htmlFor={`${contractName}${index}`}>
@@ -359,7 +361,7 @@ const JdUpload: NextPage = () => {
                     </div>
                   </div>
                   <div css={inputContainer}>
-                    <strong css={inputTitle}>채용 직무</strong>
+                    <strong css={inputTitle}>채용 직무 *</strong>
                     <select
                       css={selectBox}
                       {...register(`position_arr.${index}.task_main`, {
@@ -407,12 +409,13 @@ const JdUpload: NextPage = () => {
                     </p>
                   </div>
                   <div css={inputContainer}>
-                    <strong css={inputTitle}>세부 직무 내용</strong>
+                    <strong css={inputTitle}>세부 직무 내용 *</strong>
                     <textarea
                       css={textareaBox}
                       {...register(`position_arr.${index}.task_detail_arr`, {
                         required: true,
                         setValueAs: (v: string) => {
+                          if (v === "" || v === undefined) return null;
                           return v.split("\n");
                         },
                       })}
@@ -420,7 +423,7 @@ const JdUpload: NextPage = () => {
                     <p css={enterNotice}>엔터로 구분해주세요.</p>
                   </div>
                   <div css={inputContainer}>
-                    <strong css={inputTitle}>교대 형태</strong>
+                    <strong css={inputTitle}>교대 형태 *</strong>
                     <select
                       css={selectBox}
                       multiple
@@ -442,7 +445,11 @@ const JdUpload: NextPage = () => {
                     <p css={enterNotice}>Ctrl키를 누른 채로 중복 선택이 가능합니다.</p>
                   </div>
                   <div css={inputContainer}>
-                    <strong css={inputTitle}>근무지 종류</strong>
+                    <strong css={inputTitle}>기타 교대 형태</strong>
+                    <input css={inputBox} {...register(`position_arr.${index}.rotation_etc`, {})} />
+                  </div>
+                  <div css={inputContainer}>
+                    <strong css={inputTitle}>근무지 종류 *</strong>
                     <select
                       css={selectBox}
                       {...register(`position_arr.${index}.place.type`, {
@@ -528,7 +535,7 @@ const JdUpload: NextPage = () => {
                   </div>
 
                   <div css={inputContainer}>
-                    <strong css={inputTitle}>명수</strong>
+                    <strong css={inputTitle}>명수 *</strong>
                     <button
                       type="button"
                       css={hireNumberButton}
@@ -569,6 +576,7 @@ const JdUpload: NextPage = () => {
                       {...register(`position_arr.${index}.pay_arr`, {
                         required: true,
                         setValueAs: (v: string) => {
+                          if (v === "" || v === undefined) return null;
                           return v.split("\n");
                         },
                       })}
@@ -578,7 +586,7 @@ const JdUpload: NextPage = () => {
                   <div css={inputContainer}>
                     <strong css={inputTitle}>우대 자격증</strong>
                     <select css={selectBox} multiple {...register(`position_arr.${index}.preferred_certi_arr`, {})}>
-                      <option value="">교대형태 선택 ▼</option>
+                      <option value="">자격증 선택 ▼</option>
                       {certificateArr.map((certi) => {
                         return (
                           <option key={`${item.id}${certi}`} value={certi}>
@@ -595,6 +603,7 @@ const JdUpload: NextPage = () => {
                       css={textareaBox}
                       {...register(`position_arr.${index}.preferred_etc_arr`, {
                         setValueAs: (v: string) => {
+                          if (v === "" || v === undefined) return null;
                           return v.split("\n");
                         },
                       })}
@@ -624,16 +633,16 @@ const JdUpload: NextPage = () => {
                 college: false,
                 four: false,
                 required_exp: "",
-                min_year: undefined,
-                max_year: undefined,
+                min_year: null,
+                max_year: null,
                 required_etc_arr: undefined,
                 contract_type: "",
-                conversion_rate: undefined,
+                conversion_rate: null,
                 task_main: "",
                 task_sub_arr: undefined,
                 task_detail_arr: undefined,
                 rotation_arr: undefined,
-                rotation_etc: "",
+                rotation_etc: null,
                 place: {
                   type: "",
                   address_arr: [],
