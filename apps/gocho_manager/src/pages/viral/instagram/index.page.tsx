@@ -34,7 +34,7 @@ const Instagram: NextPage = () => {
     isError,
   } = useJobArr({
     order: "popular",
-    filter: "valid", // TODO: to TodayUpload
+    filter: "todayUpload",
     limit: 10,
   });
 
@@ -97,7 +97,7 @@ const Instagram: NextPage = () => {
             const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
 
             return (
-              <li css={jobContainer}>
+              <li key={job.id} css={jobContainer}>
                 <div css={jobInfoContainer}>
                   <div css={companyLogo}>
                     <Image layout="fill" objectFit="contain" src={defaultCompanyLogo} alt="" />
@@ -110,13 +110,21 @@ const Instagram: NextPage = () => {
                     <p css={infoName}>채용 분야</p>
                     <div css={info}>
                       {job.taskArr.map((task) => {
-                        return <p css={infoText}>{task}</p>;
+                        return (
+                          <p key={`${job.id}${task}`} css={infoText}>
+                            {task}
+                          </p>
+                        );
                       })}
                     </div>
                     <p css={infoName}>학력</p>
                     <div css={info}>
                       {job.eduArr.map((edu) => {
-                        return <p css={infoText}>{edu}</p>;
+                        return (
+                          <p key={`${job.id}${edu}`} css={infoText}>
+                            {edu}
+                          </p>
+                        );
                       })}
                     </div>
                   </div>
@@ -132,13 +140,21 @@ const Instagram: NextPage = () => {
                     <p css={infoName}>근무지</p>
                     <div css={info}>
                       {job.placeArr.map((place) => {
-                        return <p css={infoText}>{place}</p>;
+                        return (
+                          <p key={`${job.id}${place}`} css={infoText}>
+                            {place}
+                          </p>
+                        );
                       })}
                     </div>
                     <p css={infoName}>교대</p>
                     <div css={info}>
                       {job.rotationArr.map((rotation) => {
-                        return <p css={infoText}>{rotation}</p>;
+                        return (
+                          <p key={`${job.id}${rotation}`} css={infoText}>
+                            {rotation}
+                          </p>
+                        );
                       })}
                     </div>
                   </div>

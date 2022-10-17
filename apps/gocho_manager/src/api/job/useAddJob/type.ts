@@ -1,4 +1,4 @@
-import { ResponseDef } from "shared-type/api/responseType";
+import { AdminResponseDef } from "shared-type/api/responseType";
 import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
@@ -12,7 +12,7 @@ export interface RequestObjDef {
   apply_route_arr: string[];
   apply_url: string;
   etc_arr: string[];
-  positionArr: {
+  position_arr: {
     middle: boolean;
     high: boolean;
     college: boolean;
@@ -28,7 +28,7 @@ export interface RequestObjDef {
     task_detail_arr: string[] | undefined;
     rotation_arr: string[] | undefined;
     rotation_etc: string;
-    place_arr: {
+    place: {
       type: string;
       address_arr: string[];
       factory_arr: number[];
@@ -52,10 +52,10 @@ export interface PostJobDef {
     apply_route_arr,
     apply_url,
     etc_arr,
-    positionArr,
-  }: RequestObjDef): Promise<ResponseDef>;
+    position_arr,
+  }: RequestObjDef): Promise<AdminResponseDef>;
 }
 
 export interface useAddJobProps {
-  (): UseMutationResult<ResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
 }

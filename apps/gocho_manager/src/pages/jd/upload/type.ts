@@ -8,7 +8,7 @@ export interface JobFormValues {
   apply_route_arr: string[];
   apply_url: string;
   etc_arr: string[];
-  positionArr: {
+  position_arr: {
     middle: boolean;
     high: boolean;
     college: boolean;
@@ -24,7 +24,7 @@ export interface JobFormValues {
     task_detail_arr: string[] | undefined;
     rotation_arr: string[] | undefined;
     rotation_etc: string;
-    place_arr: {
+    place: {
       type: string;
       address_arr: string[];
       factory_arr: number[];

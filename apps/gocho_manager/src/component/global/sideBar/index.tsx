@@ -12,13 +12,13 @@ export const SideBar: FunctionComponent = () => {
         <ul>
           {menuArr.map((menu) => {
             return (
-              <li css={linkContainer}>
+              <li key={menu.menuTitle} css={linkContainer}>
                 <strong>{menu.menuTitle}</strong>
                 {menu.subMenuArr?.map((subMenu) => {
                   const isActive = activeMenu === subMenu.menuTitle;
 
                   return (
-                    <Link href={subMenu.menuLink} passHref>
+                    <Link key={subMenu.menuTitle} href={subMenu.menuLink} passHref>
                       <button
                         css={buttonBox(isActive)}
                         type="button"
