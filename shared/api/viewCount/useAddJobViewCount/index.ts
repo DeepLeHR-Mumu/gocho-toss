@@ -6,7 +6,7 @@ import { RequestObjDef } from "./type";
 
 const addJobViewCount = async (requestObj: RequestObjDef) => {
   const token = localStorage.getItem("token") as string;
-  const { data } = await axiosInstance.post(`/jds/${requestObj.elemId}/views`, {
+  const { data } = await axiosInstance.post(`/jds/${requestObj.elemId}/views`, null, {
     headers: {
       "x-access-token": token,
     },
