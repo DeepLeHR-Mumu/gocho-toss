@@ -18,16 +18,16 @@ export interface RequestObjDef {
     college: boolean;
     four: boolean;
     required_exp: string;
-    min_year: number | undefined;
-    max_year: number | undefined;
-    required_etc_arr: string[] | undefined;
+    min_year: number | null;
+    max_year: number | null;
+    required_etc_arr: string[] | undefined | null;
     contract_type: string;
-    conversion_rate: number | undefined;
+    conversion_rate: number | null;
     task_main: string;
     task_sub_arr: string[] | undefined;
     task_detail_arr: string[] | undefined;
     rotation_arr: string[] | undefined;
-    rotation_etc: string;
+    rotation_etc: string | null;
     place: {
       type: string;
       address_arr: string[];
@@ -36,8 +36,8 @@ export interface RequestObjDef {
     };
     hire_number: number | undefined;
     pay_arr: string[] | undefined;
-    preferred_certi_arr: string[] | undefined;
-    preferred_etc_arr: string[] | undefined;
+    preferred_certi_arr: string[] | undefined | null;
+    preferred_etc_arr: string[] | undefined | null;
   }[];
 }
 
