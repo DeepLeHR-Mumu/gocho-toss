@@ -39,10 +39,11 @@ export const ListPart: FunctionComponent = () => {
   const router = useRouter();
   const limit = 10;
   const { setCurrentToast } = useToast();
+  const { page, order } = router.query;
 
   const [total, setTotal] = useState<number>(0);
-  const [page, setPage] = useState<number>(Number(router.query.page));
-  const [activeOrder, setActiveOrder] = useState<OrderDef>((router.query.order as OrderDef) || "recent");
+  // const [page, setPage] = useState<number>(Number(router.query.page));
+  // const [activeOrder, setActiveOrder] = useState<OrderDef>((router.query.order as OrderDef) || "recent");
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
 
   const { register, handleSubmit, watch, setValue, getValues } = useForm<SearchValues>({
@@ -66,7 +67,7 @@ export const ListPart: FunctionComponent = () => {
     }
     router.push({
       pathname: JOBS_LIST_URL,
-      query: { page: 1, order: activeOrder },
+      query: { page: 1, order },
     });
     jdSearchEvent(searchVal.searchWord);
     setSearchQuery({
@@ -82,7 +83,7 @@ export const ListPart: FunctionComponent = () => {
   };
 
   const changeOrder: changeOrderDef = (newId) => {
-    setActiveOrder(newId);
+    router.query.order = newId;
   };
 
   const {
@@ -91,25 +92,23 @@ export const ListPart: FunctionComponent = () => {
     isError,
   } = useJobArr({
     q: JSON.stringify(searchQuery),
-    order: activeOrder,
+    order: order as OrderDef,
     filter: "valid",
     limit,
-    offset: (page - 1) * 10,
+    offset: (Number(page) - 1) * 10,
   });
-
-  useEffect(() => {
-    setPage(Number(router.query.page));
-  }, [router.query.page]);
-
-  useEffect(() => {
-    setActiveOrder(router.query.order as OrderDef);
-  }, [router.query.order]);
 
   useEffect(() => {
     if (jobDataArr) {
       setTotal(jobDataArr.count);
     }
   }, [jobDataArr]);
+
+  useEffect(() => {
+    if (Object.keys(router.query).length === 0) {
+      router.replace({ pathname: JOBS_LIST_URL, query: { page: 1, order: "recent" } });
+    }
+  }, [router]);
 
   useEffect(() => {
     jdListFunnelEvent();
@@ -141,7 +140,7 @@ export const ListPart: FunctionComponent = () => {
             </div>
             <div css={buttonArrContainer}>
               {setJobOrderButtonArr.map((button) => {
-                const isActive = button.order === activeOrder;
+                const isActive = button.order === order;
                 return (
                   <button
                     type="button"
