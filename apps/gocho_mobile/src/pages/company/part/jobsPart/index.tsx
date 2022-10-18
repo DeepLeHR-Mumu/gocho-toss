@@ -28,6 +28,7 @@ export const JobsPart: FunctionComponent = () => {
   const { data: jobDataArr, isLoading } = useJobArr({
     companyId: Number(companyId),
     limit,
+    order: "recent",
     offset: (page - 1) * limit,
   });
 

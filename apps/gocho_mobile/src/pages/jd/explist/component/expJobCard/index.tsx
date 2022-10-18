@@ -41,6 +41,7 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
   const { data: jobDataArr } = useJobArr({
     companyId: companyData?.id,
     filter: "expired",
+    order: "recent",
   });
 
   if (isSkeleton || companyData === undefined) {

@@ -57,8 +57,8 @@ export const ListPart: FunctionComponent = () => {
 
   const {
     data: jobDataArr,
-    isLoading,
-    isError,
+    isLoading: isJobDataArrLoading,
+    isError: isJobDataArrError,
   } = useJobArr({
     q: JSON.stringify(searchQuery),
     order: order as OrderDef,
@@ -172,7 +172,7 @@ export const ListPart: FunctionComponent = () => {
           <p>고는 고졸지원가능 초는 초대졸 지원 가능합니다</p>
         </div>
 
-        <JobCardList jobDataArr={jobDataArr?.jobDataArr} isLoading={isLoading} isError={isError} />
+        <JobCardList jobDataArr={jobDataArr?.jobDataArr} isLoading={isJobDataArrLoading} isError={isJobDataArrError} />
         <BottomPagination
           totalPage={totalPage}
           linkObj={{
