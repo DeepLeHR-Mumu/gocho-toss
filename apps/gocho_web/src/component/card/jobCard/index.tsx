@@ -93,7 +93,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
 
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
 
-  if (isSkeleton || jobData === undefined || !jobDetailData || jobDetailIsLoading) {
+  if (isSkeleton || !jobData || !jobDetailData || jobDetailIsLoading) {
     return (
       <div css={jobCardSkeleton}>
         <SkeletonBox />
