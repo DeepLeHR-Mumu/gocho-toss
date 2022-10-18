@@ -41,7 +41,7 @@ export const ListPart: FunctionComponent = () => {
   const { setCurrentToast } = useToast();
 
   const [total, setTotal] = useState<number>(0);
-  const [page, setPage] = useState<number>(Number(router.query.page || 1));
+  const [page, setPage] = useState<number>(Number(router.query.page));
   const [activeOrder, setActiveOrder] = useState<OrderDef>((router.query.order as OrderDef) || "recent");
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
 
