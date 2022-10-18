@@ -16,7 +16,11 @@ const defaultChipButton = css`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 10rem;
+  min-width: 15rem;
+  max-width: 15rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   background-color: ${COLORS.GRAY100};
   font-size: 0.875rem;
   border-radius: 2rem;
@@ -59,6 +63,21 @@ export const langArrBox: langArrBoxDef = (isClick) => {
     display: ${isClick ? "block" : "none"};
   `;
 };
+
+export const typeTextInputCSS = css`
+  margin: 1.5rem 0;
+  background-color: red;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`;
 
 export const langTitle = css`
   padding: 0.75rem 1.75rem;

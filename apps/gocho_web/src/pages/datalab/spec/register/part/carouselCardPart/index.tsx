@@ -73,6 +73,8 @@ export const SpecWritePart: FunctionComponent = () => {
   return (
     <section css={wrapper}>
       <Slider {...setCarouselSetting} ref={sliderRef}>
+        <Spec7Lang movePrevCard={movePrevCard} moveNextCard={moveNextCard} />
+
         <Spec1Basic moveNextCard={moveNextCard} />
 
         <Spec2lastEducation

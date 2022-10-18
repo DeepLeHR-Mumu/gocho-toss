@@ -58,15 +58,24 @@ export const Spec7Lang: FunctionComponent<Spec7LangProps> = ({ moveNextCard, mov
                     })}
                   />
 
-                  <SelectChipForm
-                    value={testWatch}
-                    selectArr={languageWatch ? langTestArr[languageWatch] : []}
-                    desc="시험명"
-                    index={index}
-                    registerObj={register(`language.${index}.test`, {
-                      required: "시험명을 선택해주세요.",
-                    })}
-                  />
+                  {watch(`language.${index}.language`) === "기타" ? (
+                    <TextInputForm
+                      placeholder="시험명을 작성해주세요."
+                      registerObj={register(`language.${index}.test`, {
+                        required: "시험명을 작성해주세요.",
+                      })}
+                    />
+                  ) : (
+                    <SelectChipForm
+                      value={testWatch}
+                      selectArr={languageWatch ? langTestArr[languageWatch] : []}
+                      desc="시험명"
+                      index={index}
+                      registerObj={register(`language.${index}.test`, {
+                        required: "시험명을 선택해주세요.",
+                      })}
+                    />
+                  )}
 
                   <TextInputForm
                     placeholder="예시 점수/등급"

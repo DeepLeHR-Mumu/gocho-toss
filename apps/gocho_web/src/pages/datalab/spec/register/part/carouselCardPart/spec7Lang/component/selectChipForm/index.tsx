@@ -35,26 +35,27 @@ export const SelectChipForm: FunctionComponent<SelectChipFormProps> = ({
           </button>
         </h4>
         <ul css={langArrContainer}>
-          {selectArr.map((select) => {
-            return (
-              <li key={select}>
-                <input
-                  css={hide}
-                  type="radio"
-                  id={`language.${index}.${select}`}
-                  value={select}
-                  {...registerObj}
-                  onChange={(onChangeEvent) => {
-                    registerObj.onChange(onChangeEvent);
-                    handleHideBox();
-                  }}
-                />
-                <label htmlFor={`language.${index}.${select}`} css={labelCSS}>
-                  <p>{select}</p>
-                </label>
-              </li>
-            );
-          })}
+          {selectArr !== undefined &&
+            selectArr.map((select) => {
+              return (
+                <li key={select}>
+                  <input
+                    css={hide}
+                    type="radio"
+                    id={`language.${index}.${select}`}
+                    value={select}
+                    {...registerObj}
+                    onChange={(onChangeEvent) => {
+                      registerObj.onChange(onChangeEvent);
+                      handleHideBox();
+                    }}
+                  />
+                  <label htmlFor={`language.${index}.${select}`} css={labelCSS}>
+                    <p>{select}</p>
+                  </label>
+                </li>
+              );
+            })}
         </ul>
       </div>
     </div>

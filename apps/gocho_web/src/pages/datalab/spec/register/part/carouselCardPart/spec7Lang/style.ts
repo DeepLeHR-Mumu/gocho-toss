@@ -16,7 +16,7 @@ export const animationSlide = css`
 
 export const langContainer = css`
   width: 100%;
-  max-width: 640px;
+  max-width: 720px;
 
   > li {
     display: flex;
@@ -29,8 +29,11 @@ export const langContainer = css`
 `;
 
 export const removeButton = css`
-  height: 3rem;
-  width: 3rem;
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  height: 2.5rem;
+  width: 2.5rem;
   border: 1px solid ${COLORS.GRAY60};
   font-size: 1.25rem;
   display: flex;
