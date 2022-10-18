@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 
 import highTrue from "shared-image/global/common/go_color.svg";
 import collegeTrue from "shared-image/global/common/cho_color.svg";
-
 import { useJobArr } from "shared-api/job";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { JOBS_LIST_URL } from "shared-constant/internalURL";
@@ -19,8 +18,8 @@ import { useToast } from "@recoil/hook/toast";
 
 import { JobCardList } from "../../component/jobCardList";
 import { Filter } from "../../component/filter";
-import { setJobOrderButtonArr } from "./constant";
-import { OrderDef, SearchQueryDef, changeOrderDef, SearchValues } from "./type";
+import { limit, setJobOrderButtonArr, specialCharacterRegExp } from "./constant";
+import { OrderDef, SearchQueryDef, SearchValues } from "./type";
 import {
   partContainer,
   title,
@@ -36,15 +35,13 @@ import {
 } from "./style";
 
 export const ListPart: FunctionComponent = () => {
+  const [total, setTotal] = useState<number>(0);
+  const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
+
   const router = useRouter();
-  const limit = 10;
-  const { setCurrentToast } = useToast();
   const { page, order } = router.query;
 
-  const [total, setTotal] = useState<number>(0);
-  // const [page, setPage] = useState<number>(Number(router.query.page));
-  // const [activeOrder, setActiveOrder] = useState<OrderDef>((router.query.order as OrderDef) || "recent");
-  const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
+  const { setCurrentToast } = useToast();
 
   const { register, handleSubmit, watch, setValue, getValues } = useForm<SearchValues>({
     defaultValues: {
@@ -58,17 +55,24 @@ export const ListPart: FunctionComponent = () => {
     },
   });
 
-  const jdSearch: SubmitHandler<SearchValues> = (searchVal) => {
-    const regExp = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/g;
+  const {
+    data: jobDataArr,
+    isLoading,
+    isError,
+  } = useJobArr({
+    q: JSON.stringify(searchQuery),
+    order: order as OrderDef,
+    filter: "valid",
+    limit,
+    offset: (Number(page) - 1) * 10,
+  });
 
-    if (searchVal.searchWord?.match(regExp)) {
+  const jdSearch: SubmitHandler<SearchValues> = (searchVal) => {
+    if (searchVal.searchWord?.match(specialCharacterRegExp)) {
       setCurrentToast("검색어에 특수문자는 포함될 수 없습니다.");
       return;
     }
-    router.push({
-      pathname: JOBS_LIST_URL,
-      query: { page: 1, order },
-    });
+
     jdSearchEvent(searchVal.searchWord);
     setSearchQuery({
       contractType: searchVal.contractType,
@@ -82,34 +86,27 @@ export const ListPart: FunctionComponent = () => {
     });
   };
 
-  const changeOrder: changeOrderDef = (newId) => {
-    router.query.order = newId;
+  const changeOrderHandler = (orderStr: OrderDef) => {
+    router.push(
+      {
+        pathname: JOBS_LIST_URL,
+        query: { ...router.query, page: 1, order: orderStr },
+      },
+      undefined,
+      { scroll: false }
+    );
   };
-
-  const {
-    data: jobDataArr,
-    isLoading,
-    isError,
-  } = useJobArr({
-    q: JSON.stringify(searchQuery),
-    order: order as OrderDef,
-    filter: "valid",
-    limit,
-    offset: (Number(page) - 1) * 10,
-  });
 
   useEffect(() => {
     if (jobDataArr) {
       setTotal(jobDataArr.count);
     }
   }, [jobDataArr]);
-
   useEffect(() => {
     if (Object.keys(router.query).length === 0) {
       router.replace({ pathname: JOBS_LIST_URL, query: { page: 1, order: "recent" } });
     }
   }, [router]);
-
   useEffect(() => {
     jdListFunnelEvent();
   }, []);
@@ -143,15 +140,11 @@ export const ListPart: FunctionComponent = () => {
                 const isActive = button.order === order;
                 return (
                   <button
-                    type="button"
+                    type="submit"
                     key={`jobCardArr${button.text}`}
                     css={setJobOrderButton(isActive)}
                     onClick={() => {
-                      router.push({
-                        pathname: JOBS_LIST_URL,
-                        query: { page: 1, order: button.order },
-                      });
-                      return changeOrder(button.order);
+                      return changeOrderHandler(button.order);
                     }}
                   >
                     {button.text}
