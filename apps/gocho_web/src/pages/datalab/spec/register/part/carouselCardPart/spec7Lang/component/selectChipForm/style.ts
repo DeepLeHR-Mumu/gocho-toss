@@ -16,8 +16,7 @@ const defaultChipButton = css`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 15rem;
-  max-width: 15rem;
+  width: 15rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
