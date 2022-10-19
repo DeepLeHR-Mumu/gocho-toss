@@ -21,6 +21,8 @@ const defaultChipButton = css`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  z-index: 10;
+  position: relative;
   background-color: ${COLORS.GRAY100};
   font-size: 0.875rem;
   border-radius: 2rem;
@@ -55,7 +57,7 @@ export const langArrBox: langArrBoxDef = (isClick) => {
     left: 0;
     width: 100%;
     overflow: hidden;
-    z-index: 10;
+    z-index: 30;
     border: 1px solid ${COLORS.GRAY60};
     border-radius: 2rem;
     background-color: ${COLORS.GRAY100};
@@ -161,3 +163,13 @@ export const hide = css`
 `;
 
 export const appendButton = css``;
+
+export const noLangDesc = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.875rem;
+  color: ${COLORS.BLUE_FIRST40};
+  height: 100%;
+`;

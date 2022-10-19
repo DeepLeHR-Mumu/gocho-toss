@@ -1,8 +1,17 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 
 import { SelectChipFormProps } from "./type";
-import { chipButton, chipContainer, hide, labelCSS, langArrBox, langArrContainer, langTitle } from "./style";
+import {
+  chipButton,
+  chipContainer,
+  hide,
+  labelCSS,
+  langArrBox,
+  langArrContainer,
+  langTitle,
+  noLangDesc,
+} from "./style";
 
 export const SelectChipForm: FunctionComponent<SelectChipFormProps> = ({
   value,
@@ -10,24 +19,29 @@ export const SelectChipForm: FunctionComponent<SelectChipFormProps> = ({
   index,
   desc,
   registerObj,
+  showActiveObj,
 }) => {
-  const [isClick, setIsClick] = useState<boolean>(false);
-
-  const handleShowBox = () => {
-    setIsClick(true);
-  };
-
   const handleHideBox = () => {
-    setIsClick(false);
+    showActiveObj.setIsShowActive(false);
+    showActiveObj.setActive(null);
   };
+
+  const isShowLangArrBox = Boolean(showActiveObj.active === `${desc}_${index}`);
+  if (isShowLangArrBox) showActiveObj.setIsShowActive(isShowLangArrBox);
 
   return (
     <div css={chipContainer}>
-      <button type="button" css={chipButton(value)} onClick={handleShowBox}>
+      <button
+        type="button"
+        css={chipButton(value)}
+        onClick={() => {
+          showActiveObj.setActive(`${desc}_${index}`);
+        }}
+      >
         {value || desc}
         <BsChevronDown />
       </button>
-      <div css={langArrBox(isClick)}>
+      <div css={langArrBox(isShowLangArrBox)}>
         <h4 css={langTitle}>
           {desc}
           <button type="button" onClick={handleHideBox}>
@@ -35,6 +49,7 @@ export const SelectChipForm: FunctionComponent<SelectChipFormProps> = ({
           </button>
         </h4>
         <ul css={langArrContainer}>
+          {selectArr?.length === 0 && <p css={noLangDesc}>언어를 먼저 선택해주세요</p>}
           {selectArr !== undefined &&
             selectArr.map((select) => {
               return (

@@ -63,3 +63,11 @@ export const appendButton = css`
   border-radius: 2rem;
   color: ${COLORS.GRAY20};
 `;
+
+export const hideAllSelectBox = css`
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+`;
