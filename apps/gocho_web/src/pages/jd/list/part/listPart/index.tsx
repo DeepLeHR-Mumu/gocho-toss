@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { FiSearch, FiInfo } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
@@ -37,6 +37,7 @@ import {
 export const ListPart: FunctionComponent = () => {
   const [total, setTotal] = useState<number>(0);
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
+  const scrollRef = useRef<HTMLDivElement | null>(null);
 
   const router = useRouter();
   const { page, order } = router.query;
@@ -108,6 +109,12 @@ export const ListPart: FunctionComponent = () => {
     }
   }, [router]);
   useEffect(() => {
+    // scrollRef.current?.scrollIntoView();
+    const location = (scrollRef.current?.getBoundingClientRect().top as number) + window.pageYOffset - 100;
+    window.scrollTo(0, location);
+  }, [page]);
+
+  useEffect(() => {
     jdListFunnelEvent();
   }, []);
 
@@ -115,6 +122,7 @@ export const ListPart: FunctionComponent = () => {
 
   return (
     <section css={partContainer}>
+      <div ref={scrollRef} />
       <InvisibleH2 title="최신 채용 공고" />
       <Layout>
         <p css={title}>

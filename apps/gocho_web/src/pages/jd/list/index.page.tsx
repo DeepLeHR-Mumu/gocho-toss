@@ -6,6 +6,7 @@ import { AdPart } from "./part/adPart";
 import { ListPart } from "./part/listPart";
 
 const JobsList: NextPage = () => {
+  
   return (
     <main>
       <MetaHead metaData={META_JD_LIST} />
