@@ -75,7 +75,7 @@ export const ListPart: FunctionComponent = () => {
     order: activeOrder,
     filter: "valid",
     limit,
-    offset: (page - 1) * limit || 0,
+    offset: (page - 1) * limit,
   });
 
   useEffect(() => {

@@ -94,7 +94,7 @@ export const ListPart: FunctionComponent = () => {
     order: activeOrder,
     filter: "valid",
     limit,
-    offset: (page - 1) * 10 || 0,
+    offset: (page - 1) * 10,
   });
 
   useEffect(() => {
