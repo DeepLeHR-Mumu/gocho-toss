@@ -32,7 +32,7 @@ export const companyLogo = css`
 `;
 
 export const companyInfo = css`
-  width: 25%;
+  width: 20%;
   margin-right: 1rem;
 `;
 
@@ -52,6 +52,11 @@ export const infoBox = css`
   margin-right: 0.5rem;
 `;
 
+export const longInfoBox = css`
+  width: 20%;
+  margin-right: 0.5rem;
+`;
+
 export const info = css`
   display: flex;
   font-weight: 400;
@@ -60,6 +65,8 @@ export const info = css`
 `;
 
 export const infoText = css`
+  font-weight: 400;
+  color: ${COLORS.GRAY30};
   margin-right: 0.125rem;
 
   :after {
@@ -71,6 +78,12 @@ export const infoText = css`
       content: "";
     }
   }
+`;
+
+export const placeContainer = css`
+  font-weight: 400;
+  color: ${COLORS.GRAY30};
+  margin-bottom: 0.25rem;
 `;
 
 export const buttonContainer = css`
