@@ -60,7 +60,7 @@ export const PayInfoPart: FunctionComponent<PayInfoPartProps> = ({ companyData }
 
       <div css={flexBox}>
         <p css={etcTitle}>기타 연봉 정보</p>
-        {companyData.payDesc ? <p>{companyData.payDesc}</p> : <p css={noData}>정보가 없습니다</p>}
+        {companyData.payDesc ? <p css={infoText}>{companyData.payDesc}</p> : <p css={noData}>정보가 없습니다</p>}
       </div>
     </div>
   );

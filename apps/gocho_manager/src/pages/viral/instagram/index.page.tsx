@@ -21,6 +21,8 @@ import {
   infoBox,
   info,
   infoText,
+  longInfoBox,
+  placeContainer,
   buttonContainer,
   buttonBox,
   kakaoButton,
@@ -34,38 +36,23 @@ const Instagram: NextPage = () => {
     isError,
   } = useJobArr({
     order: "popular",
-    filter: "todayUpload",
+    filter: "valid",
     limit: 10,
   });
 
   const copyMoreJobLink = async () => {
     const text = `https://고초대졸.com/jd/list/?utm_source=instagram&utm_medium=story&utm_campaign=story_detail`;
-    try {
-      await navigator.clipboard.writeText(text);
-      alert("카카오뷰 제목이 복사 되었습니다!");
-    } catch (error) {
-      alert("오류!");
-    }
+    await navigator.clipboard.writeText(text);
   };
 
   const copyGoWebsiteLink = async () => {
     const text = `https://고초대졸.com/?utm_source=instagram&utm_medium=story&utm_campaign=story_detail`;
-    try {
-      await navigator.clipboard.writeText(text);
-      alert("카카오뷰 제목이 복사 되었습니다!");
-    } catch (error) {
-      alert("오류!");
-    }
+    await navigator.clipboard.writeText(text);
   };
 
   const copyKakaoTitle = async (job: JobDef) => {
     const text = `🚀 ${job.companyName} ${job.title}`;
-    try {
-      await navigator.clipboard.writeText(text);
-      alert("카카오뷰 제목이 복사 되었습니다!");
-    } catch (error) {
-      alert("오류!");
-    }
+    await navigator.clipboard.writeText(text);
   };
 
   const copyKakaoDesc = async (job: JobDef) => {
@@ -90,33 +77,17 @@ const Instagram: NextPage = () => {
     text += `- 근무형태: ${job.rotationArr[0]} ${
       job.rotationArr.length !== 1 ? `외 ${job.rotationArr.length - 1}형태` : ""
     }\n\n`;
-
-    try {
-      await navigator.clipboard.writeText(text);
-      alert("카카오뷰 설명이 복사 되었습니다!");
-    } catch (error) {
-      alert("오류!");
-    }
+    navigator.clipboard.writeText(text);
   };
 
   const copyKakaoURL = async (job: JobDef) => {
     const text = `https://고초대졸.com/jd/detail/${job.id}?utm_source=kakaoview&utm_medium=blog`;
-    try {
-      await navigator.clipboard.writeText(text);
-      alert("카카오뷰 URL이 복사 되었습니다!");
-    } catch (error) {
-      alert("오류!");
-    }
+    navigator.clipboard.writeText(text);
   };
 
   const copyInstagramURL = async (job: JobDef) => {
     const text = `https://고초대졸.com/jd/detail/${job.id}?utm_source=instagram&utm_medium=story&utm_campaign=story_detail`;
-    try {
-      await navigator.clipboard.writeText(text);
-      alert("인스타그램 URL이 복사 되었습니다!");
-    } catch (error) {
-      alert("오류!");
-    }
+    navigator.clipboard.writeText(text);
   };
 
   if (!jobDataArr || isLoading) {
@@ -179,24 +150,6 @@ const Instagram: NextPage = () => {
                     </div>
                   </div>
                   <div css={infoBox}>
-                    <p css={infoName}>시작 날짜</p>
-                    <div css={info}>
-                      {startYear}-{startMonth}-{startDate}
-                    </div>
-                    <p css={infoName}>종료 날짜</p>
-                    <div css={info}>{endYear === 9999 ? "상시공고" : `${endYear}-${endMonth}-${endDate}`}</div>
-                  </div>
-                  <div css={infoBox}>
-                    <p css={infoName}>근무지</p>
-                    <div css={info}>
-                      {job.placeArr.map((place) => {
-                        return (
-                          <p key={`${job.id}${place}`} css={infoText}>
-                            {place}
-                          </p>
-                        );
-                      })}
-                    </div>
                     <p css={infoName}>교대</p>
                     <div css={info}>
                       {job.rotationArr.map((rotation) => {
@@ -207,8 +160,41 @@ const Instagram: NextPage = () => {
                         );
                       })}
                     </div>
+                    <p css={infoName}>계약 형태</p>
+                    <div css={info}>
+                      {job.contractArr.map((contract) => {
+                        return (
+                          <p key={`${job.id}${contract}`} css={infoText}>
+                            {contract}
+                          </p>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <div css={longInfoBox}>
+                    <p css={infoName}>근무지</p>
+                    <div css={placeContainer}>
+                      <p>{job.placeArr[0]}</p>
+                      <p>{job.placeArr.length === 2 && job.placeArr[1]}</p>
+                      <p>{job.placeArr.length > 2 ? `외 ${job.placeArr.length - 2}곳` : ""}</p>
+                    </div>
+                    <p css={infoName}>날짜</p>
+                    <div css={info}>
+                      {startYear}-{startMonth}-{startDate}~
+                      {endYear === 9999 ? "상시공고" : `${endYear}-${endMonth}-${endDate}`}
+                    </div>
                   </div>
                   <div css={infoBox}>
+                    <p css={infoName}>경력 조건</p>
+                    <div css={info}>
+                      {job.requiredExpArr.map((exp) => {
+                        return (
+                          <p key={`${job.id}${exp}`} css={infoText}>
+                            {exp}
+                          </p>
+                        );
+                      })}
+                    </div>
                     <p css={infoName}>조회수</p>
                     <div css={info}>{job.view}</div>
                   </div>

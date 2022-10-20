@@ -47,7 +47,7 @@ const Blog: NextPage = () => {
       text += `- 근무형태: ${job.rotationArr[0]} ${
         job.rotationArr.length !== 1 ? `외 ${job.rotationArr.length - 1}형태` : ""
       }\n`;
-      text += `https://고초대졸.com/jd/detail/${job.id}/?utm_source=kakaotalk&utm_medium=chat&utm_campaign=viral\n\n`;
+      text += `https://고초대졸.com/jd/detail/${job.id}?utm_source=kakaotalk&utm_medium=chat&utm_campaign=viral\n\n`;
       return text;
     });
 

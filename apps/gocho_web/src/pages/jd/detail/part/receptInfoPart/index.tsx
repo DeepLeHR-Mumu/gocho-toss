@@ -21,7 +21,6 @@ import {
   restPoint,
   wrapper,
 } from "./style";
-import { utmLinkCreator } from "./util";
 
 export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDetailData }) => {
   const {
@@ -58,12 +57,7 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
           {isDdayEnd ? (
             <p css={applyEndButton}>지원하러가기</p>
           ) : (
-            <a
-              css={applyButton}
-              target="_blank"
-              href={utmLinkCreator(jobDetailData.applyUrl)}
-              rel="noopener noreferrer"
-            >
+            <a css={applyButton} target="_blank" href={jobDetailData.applyUrl} rel="noopener noreferrer">
               지원하러가기
             </a>
           )}

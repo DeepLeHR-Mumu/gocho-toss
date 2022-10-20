@@ -78,7 +78,7 @@ const JobsExpList: NextPage = () => {
       setTotal(companyDataArr.count);
     }
   }, [companyDataArr]);
-  
+
   useEffect(() => {
     expiredJdListFunnelEvent();
   }, []);

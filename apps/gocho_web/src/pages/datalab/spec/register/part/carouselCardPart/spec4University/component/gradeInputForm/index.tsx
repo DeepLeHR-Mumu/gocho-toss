@@ -42,6 +42,13 @@ export const GradeInputForm: FunctionComponent<SelectNumberInputFormProps> = ({
           css={textForm}
           type="number"
           placeholder="학점기입 ex 2.5"
+          maxLength={4}
+          onInput={(onInputEvent: React.ChangeEvent<HTMLInputElement>) => {
+            if (onInputEvent.target.value.length > onInputEvent.target.maxLength) {
+              // eslint-disable-next-line no-param-reassign
+              onInputEvent.target.value = onInputEvent.target.value.slice(0, onInputEvent.target.maxLength);
+            }
+          }}
           {...gradeObj}
           onKeyDown={(onKeyDownEvent) => {
             if (onKeyDownEvent.key === "Escape") {

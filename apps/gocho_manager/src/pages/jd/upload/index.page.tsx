@@ -29,6 +29,8 @@ import {
   smallInputBox,
   deletePlaceButton,
   hireNumberButton,
+  buttonContainer,
+  copyPositionButton,
   deletePositionButton,
   addPositionButton,
   submitButton,
@@ -423,14 +425,8 @@ const JdUpload: NextPage = () => {
                     <p css={enterNotice}>엔터로 구분해주세요.</p>
                   </div>
                   <div css={inputContainer}>
-                    <strong css={inputTitle}>교대 형태 *</strong>
-                    <select
-                      css={selectBox}
-                      multiple
-                      {...register(`position_arr.${index}.rotation_arr`, {
-                        required: true,
-                      })}
-                    >
+                    <strong css={inputTitle}>교대 형태</strong>
+                    <select css={selectBox} multiple {...register(`position_arr.${index}.rotation_arr`, {})}>
                       <option value="" disabled>
                         교대형태 선택 ▼
                       </option>
@@ -442,7 +438,10 @@ const JdUpload: NextPage = () => {
                         );
                       })}
                     </select>
-                    <p css={enterNotice}>Ctrl키를 누른 채로 중복 선택이 가능합니다.</p>
+                    <p css={enterNotice}>
+                      Ctrl키를 누른 채로 중복 선택이 가능합니다. <br />
+                      해당되는 교대 형태가 없다면 아래 &apos;기타 교대 형태&apos; 에 입력해주세요.
+                    </p>
                   </div>
                   <div css={inputContainer}>
                     <strong css={inputTitle}>기타 교대 형태</strong>
@@ -610,15 +609,52 @@ const JdUpload: NextPage = () => {
                     />
                   </div>
 
-                  <button
-                    css={deletePositionButton}
-                    type="button"
-                    onClick={() => {
-                      return remove(index);
-                    }}
-                  >
-                    직무 삭제
-                  </button>
+                  <div css={buttonContainer}>
+                    <button
+                      type="button"
+                      css={copyPositionButton}
+                      onClick={() => {
+                        return append({
+                          middle: watch("position_arr")[index].middle,
+                          high: watch("position_arr")[index].high,
+                          college: watch("position_arr")[index].college,
+                          four: watch("position_arr")[index].four,
+                          required_exp: watch("position_arr")[index].required_exp,
+                          min_year: watch("position_arr")[index].min_year,
+                          max_year: watch("position_arr")[index].max_year,
+                          required_etc_arr: undefined,
+                          contract_type: watch("position_arr")[index].contract_type,
+                          conversion_rate: watch("position_arr")[index].conversion_rate,
+                          task_main: watch("position_arr")[index].task_main,
+                          task_sub_arr: watch("position_arr")[index].task_sub_arr,
+                          task_detail_arr: undefined,
+                          rotation_arr: watch("position_arr")[index].rotation_arr,
+                          rotation_etc: watch("position_arr")[index].rotation_etc,
+                          place: {
+                            type: watch("position_arr")[index].place.type,
+                            address_arr: watch("position_arr")[index].place.address_arr,
+                            factory_arr: watch("position_arr")[index].place.factory_arr,
+                            etc: watch("position_arr")[index].place.etc,
+                          },
+                          hire_number: watch("position_arr")[index].hire_number,
+                          pay_arr: undefined,
+                          preferred_certi_arr: watch("position_arr")[index].preferred_certi_arr,
+                          preferred_etc_arr: undefined,
+                        });
+                      }}
+                    >
+                      해당 직무 복사
+                    </button>
+                    <button
+                      css={deletePositionButton}
+                      type="button"
+                      onClick={() => {
+                        return remove(index);
+                      }}
+                    >
+                      직무 삭제
+                    </button>
+                  </div>
                 </li>
               );
             })}

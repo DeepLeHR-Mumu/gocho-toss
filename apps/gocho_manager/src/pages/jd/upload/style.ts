@@ -132,8 +132,20 @@ export const hireNumberButton = css`
   color: ${COLORS.GRAY100};
 `;
 
+export const buttonContainer = css`
+  display: flex;
+  gap: 0 0.5rem;
+  justify-content: flex-end;
+`;
+
+export const copyPositionButton = css`
+  padding: 0.25rem 1rem;
+  border: 2px solid ${COLORS.GRAY10};
+  background-color: ${COLORS.GRAY30};
+  color: ${COLORS.GRAY100};
+`;
+
 export const deletePositionButton = css`
-  margin: 0 0 0 auto;
   padding: 0.25rem 1rem;
   border: 2px solid ${COLORS.GRAY10};
   background-color: #b32100;
