@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { META_JD_DETAIL } from "shared-constant/meta";
@@ -11,6 +12,7 @@ import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
 import { useAddJobViewCount } from "shared-api/viewCount";
 import { jdDetailFunnelEvent } from "shared-ga/jd";
+import { GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
 
 import { DetailComment } from "@component/common/organisms/detailComment";
 import { TopMenu } from "../component/topMenu";
@@ -75,6 +77,9 @@ const JobsDetail: NextPage = () => {
   if (!jobDetailData || isLoading) {
     return (
       <main css={wrapper}>
+        <Head>
+          <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
+        </Head>
         <HeaderPart isSkeleton />
         <div css={flexBox}>
           <section css={containerSkeleton}>
@@ -107,6 +112,9 @@ const JobsDetail: NextPage = () => {
 
   return (
     <main css={wrapper}>
+      <Head>
+        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
+      </Head>
       <MetaHead
         jdDetail={{
           companyName: jobDetailData.company.name,

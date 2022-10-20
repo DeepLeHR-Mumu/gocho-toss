@@ -10,7 +10,7 @@ import {
   SPEC_DETAIL_URL,
   SPEC_MY_URL,
   SPEC_REGISTER_URL,
-  SPEC_URL,
+  SPEC_LIST_URL,
   DATALAB_DETAIL,
   MYPAGE_URL,
   TOS_URL,
@@ -129,7 +129,7 @@ export const META_SPEC_LIST = {
   keyword: `생산직, 스펙, 평가, 자격증 ${defaultKeyword}`,
   ogTitle: "생산직 스펙평가 리스트 - 고초대졸닷컴",
   ogDesc: "내 스펙으로 어떤 기업에 갈 수 있는지, 다른 생산직 구직자들의 스펙은 어떤지 확인해보세요!",
-  path: SPEC_URL,
+  path: SPEC_LIST_URL,
   ogImage: specOgImage,
 };
 

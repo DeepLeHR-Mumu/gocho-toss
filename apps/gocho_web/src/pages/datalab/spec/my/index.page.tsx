@@ -1,11 +1,14 @@
 import { NextPage } from "next";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Head from "next/head";
+import { useRouter } from "next/router";
 
 import { useMySpecHistory } from "shared-api/spec/useMySpecHistory";
 import { useUserInfo } from "shared-api/auth";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { mySpecListFunnelEvent } from "shared-ga/spec";
+import { GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
 
 import { Layout } from "@component/layout";
 import { useModal } from "@recoil/hook/modal";
@@ -22,6 +25,8 @@ export const MySpecHistory: NextPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { setCurrentModal, closeModal, currentModal } = useModal();
   const activeCardCount = 5;
+
+  const router = useRouter();
 
   const { data: userInfoData, error } = useUserInfo();
   const { data: mySpecHistoryData, isLoading } = useMySpecHistory({
@@ -51,6 +56,9 @@ export const MySpecHistory: NextPage = () => {
   if (!mySpecHistoryData || isLoading) {
     return (
       <div css={wrapper}>
+        <Head>
+          <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
+        </Head>
         <MetaHead metaData={META_SPEC_MY} />
         <Layout>
           <section>
@@ -74,13 +82,15 @@ export const MySpecHistory: NextPage = () => {
   }
 
   const totalPage = Math.ceil(mySpecHistoryData.specArr.length / activeCardCount);
-
   const firstArrIndex = (currentPage - 1) * activeCardCount;
   const lastArrIndex = currentPage * activeCardCount;
   const filterMySpecHistoryArr = mySpecHistoryData.specArr.slice(firstArrIndex, lastArrIndex);
 
   return (
     <main css={wrapper}>
+      <Head>
+        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
+      </Head>
       <MetaHead metaData={META_SPEC_MY} />
       <Layout>
         <section>

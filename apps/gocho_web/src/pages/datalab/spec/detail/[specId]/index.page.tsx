@@ -2,14 +2,17 @@ import { NextPage } from "next";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Head from "next/head";
 
 import { useSpecDetail } from "shared-api/spec";
 import { META_SPEC_DETAIL } from "shared-constant/meta";
 import { useUserInfo } from "shared-api/auth";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
-import { Layout } from "@component/layout";
+import { GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
+
 import { useModal } from "@recoil/hook/modal";
+import { Layout } from "@component/layout";
 
 import { BasicInfoPart } from "./part/basicInfoPart";
 import { DetailInfoPart } from "./part/detailInfoPart";
@@ -52,6 +55,9 @@ const Detail: NextPage = () => {
 
   return (
     <div css={wrapper}>
+      <Head>
+        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
+      </Head>
       <MetaHead
         metaData={META_SPEC_DETAIL}
         specDetail={{

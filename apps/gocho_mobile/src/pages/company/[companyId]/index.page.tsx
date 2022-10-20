@@ -1,9 +1,10 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import Head from "next/head";
 
 import { useAddCompanyViewCount } from "shared-api/viewCount";
-import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
+import { COMPANY_DETAIL_URL, GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
 import { useCompanyDetail } from "shared-api/company";
 import { companyInfoFunnelEvent, companyJdFunnelEvent } from "shared-ga/company";
 
@@ -62,7 +63,10 @@ const CompanyDetail: NextPage = () => {
 
   return (
     <>
-      <HeaderPart />
+      <Head>
+        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
+        <HeaderPart />
+      </Head>
       <div css={container}>
         {info === "detail" && (
           <>

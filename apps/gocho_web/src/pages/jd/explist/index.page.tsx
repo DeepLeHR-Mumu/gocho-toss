@@ -3,8 +3,9 @@ import { NextPage } from "next";
 import { FiSearch } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
-import { JOBS_EXPLIST_URL } from "shared-constant/internalURL";
+import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL, JOBS_EXPLIST_URL } from "shared-constant/internalURL";
 import { META_JD_EXPLIST } from "shared-constant/meta";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
@@ -91,6 +92,14 @@ const JobsExpList: NextPage = () => {
   const totalPage = Math.ceil(total / limit);
   return (
     <main css={mainContainer}>
+      <Head>
+        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
+        <link
+          rel="alternate"
+          media="only screen and (max-width: 640px)"
+          href={`${GOCHO_MOBILE_URL}${router.asPath.split("?")[0]}`}
+        />
+      </Head>
       <MetaHead metaData={META_JD_EXPLIST} />
       <Layout>
         <InvisibleH2 title="기업별 만료 공고" />

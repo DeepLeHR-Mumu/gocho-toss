@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import { useEffect } from "react";
 
 import { useUserInfo } from "shared-api/auth";
@@ -9,7 +10,7 @@ import { useCompanyDetail } from "shared-api/company";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { DetailComment } from "@component/global/detailComment";
 import useMoveScroll from "@pages/company/[companyId]/util";
-import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
+import { COMPANY_DETAIL_URL, GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL } from "shared-constant/internalURL";
 import { META_COMPANY_INFO, META_COMPANY_RECRUIT } from "shared-constant/meta";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { companyInfoFunnelEvent, companyJdFunnelEvent } from "shared-ga/company";
@@ -132,11 +133,19 @@ const CompaniesDetail: NextPage = () => {
     })
   );
 
-  // TODO PART와 컴포넌트와 div, button들의 향연 -> 추상화 레벨을 최대한 하나로 유지하자 
+  // TODO PART와 컴포넌트와 div, button들의 향연 -> 추상화 레벨을 최대한 하나로 유지하자
   return (
     <main css={mainContainer}>
       <Layout>
         <HeaderPart companyData={companyData.headerData} isBookmarked={isBookmarked} userId={userData?.id} />
+        <Head>
+          <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
+          <link
+            rel="alternate"
+            media="only screen and (max-width: 640px)"
+            href={`${GOCHO_MOBILE_URL}${router.asPath.split("?")[0]}`}
+          />
+        </Head>
         <div css={buttonContainer}>
           <button
             type="button"

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { useEffect } from "react";
 
-import { GOCHO_URL } from "shared-constant/internalURL";
+import { GOCHO_DESKTOP_URL  } from "shared-constant/internalURL";
 import { tipListFunnelEvent } from "shared-ga/tip";
 
 import { ListPart } from "./part/listPart";
@@ -17,7 +17,7 @@ const Tip: NextPage = () => {
   return (
     <main>
       <Head>
-        <link rel="canonical" href={`${GOCHO_URL}${pathname}`} />
+        <link rel="canonical" href={`${GOCHO_DESKTOP_URL }${pathname}`} />
       </Head>
       <ListPart />
     </main>

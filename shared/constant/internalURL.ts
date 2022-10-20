@@ -1,4 +1,5 @@
-export const GOCHO_URL = "https://고초대졸.com";
+export const GOCHO_DESKTOP_URL = "https://고초대졸.com";
+export const GOCHO_MOBILE_URL = "https://m.고초대졸.com";
 
 export const MAIN_URL = "/";
 
@@ -13,7 +14,7 @@ export const COMMUNITY_TIPS_LIST_URL = "/community/tip/list";
 
 export const INTERVIEW_REVIEW = "/review";
 
-export const SPEC_URL = "/datalab/spec";
+export const SPEC_LIST_URL = "/datalab/spec/list";
 export const SPEC_DETAIL_URL = "/datalab/spec/detail";
 export const SPEC_REGISTER_URL = "/datalab/spec/register";
 export const SPEC_MY_URL = "/datalab/spec/my";

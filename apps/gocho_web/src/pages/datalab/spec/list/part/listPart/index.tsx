@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from "react";
 
-import { SpecCardList } from "../../component/specCardList";
+import { SpecCardList } from "../../../component/specCardList";
 import { setSpecOrderButtonArr } from "./constant";
 import { OrderDef, changeOrderDef } from "./type";
 import { partContainer, listContainer, OrderButtonContainer, setSpecOrderButton, desc } from "./style";
