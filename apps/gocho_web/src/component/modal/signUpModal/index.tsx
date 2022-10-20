@@ -25,6 +25,7 @@ export const SignUpBox: FunctionComponent = () => {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors, dirtyFields },
   } = useForm<SignUpFormValues>({ mode: "onChange" });
   const { refetch } = useUserInfo();
@@ -88,6 +89,9 @@ export const SignUpBox: FunctionComponent = () => {
                   message: EMAIL_ERROR_MESSAGE.REGEX,
                 },
               })}
+              setValue={() => {
+                setValue("email", "");
+              }}
               placeholder="이메일을 입력해주세요"
               label="이메일"
               errorObj={errors.email}
@@ -106,6 +110,9 @@ export const SignUpBox: FunctionComponent = () => {
                   message: PWD_ERROR_MESSAGE.NOT_SPACE,
                 },
               })}
+              setValue={() => {
+                setValue("password", "");
+              }}
               placeholder="비밀번호를 입력해주세요"
               label="비밀번호"
               errorObj={errors.password}
@@ -119,6 +126,9 @@ export const SignUpBox: FunctionComponent = () => {
                 required: NICKNAME_ERROR_MESSAGE.REQUIRED,
                 validate: validateNickname,
               })}
+              setValue={() => {
+                setValue("nickname", "");
+              }}
               placeholder="닉네임을 입력해주세요"
               label="닉네임"
               errorObj={errors.nickname}

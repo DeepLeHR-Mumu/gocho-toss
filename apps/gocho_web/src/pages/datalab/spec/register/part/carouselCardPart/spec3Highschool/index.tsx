@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+import { NUMBER_REGEXP } from "shared-constant/regExp";
 import {
   SpecCardTitle,
   MoveCardButtons,
@@ -10,6 +11,7 @@ import {
   WarningText,
   ContainerBox,
 } from "../common/component";
+
 import { Spec3HighschoolProps, PostSubmitValues } from "./type";
 import { highSchoolTypeArr } from "./constant";
 import { specCardWrapper, formCSS } from "../common/style";
@@ -57,6 +59,14 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
                     value: 0,
                     message: "최소 일수는 0입니다.",
                   },
+                  max: {
+                    value: 365,
+                    message: "최대 일수는 365입니다.",
+                  },
+                  pattern: {
+                    value: NUMBER_REGEXP,
+                    message: "숫자만 기입할 수 있습니다.",
+                  },
                   required: "무단결석 일수를 입력해주세요.",
                 })}
                 id="absent"
@@ -71,6 +81,14 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
                   min: {
                     value: 0,
                     message: "최소 일수는 0입니다.",
+                  },
+                  max: {
+                    value: 365,
+                    message: "최대 일수는 365입니다.",
+                  },
+                  pattern: {
+                    value: NUMBER_REGEXP,
+                    message: "숫자만 기입할 수 있습니다.",
                   },
                   required: "무단지각 일수를 입력해주세요.",
                 })}
@@ -87,6 +105,14 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
                     value: 0,
                     message: "최소 일수는 0입니다.",
                   },
+                  max: {
+                    value: 365,
+                    message: "최대 일수는 365입니다.",
+                  },
+                  pattern: {
+                    value: NUMBER_REGEXP,
+                    message: "숫자만 기입할 수 있습니다.",
+                  },
                   required: "무단 조퇴 일수를 입력해주세요.",
                 })}
                 id="leaveEarly"
@@ -101,6 +127,14 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
                   min: {
                     value: 0,
                     message: "최소 일수는 0입니다.",
+                  },
+                  max: {
+                    value: 365,
+                    message: "최대 일수는 365입니다.",
+                  },
+                  pattern: {
+                    value: NUMBER_REGEXP,
+                    message: "숫자만 기입할 수 있습니다.",
                   },
                   required: "무단결과 일수를 입력해주세요.",
                 })}

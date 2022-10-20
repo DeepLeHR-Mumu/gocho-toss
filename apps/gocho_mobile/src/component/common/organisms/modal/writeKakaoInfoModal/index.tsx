@@ -41,6 +41,7 @@ export const WriteKakaoInfoModal: FunctionComponent = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, dirtyFields },
   } = useForm<SignUpFormValues>({ mode: "onChange" });
   const { closeModal } = useModal();
@@ -96,6 +97,9 @@ export const WriteKakaoInfoModal: FunctionComponent = () => {
                   required: NICKNAME_ERROR_MESSAGE.REQUIRED,
                   validate: validateNickname,
                 })}
+                setValue={() => {
+                  setValue("nickname", "");
+                }}
                 placeholder="닉네임을 입력해주세요"
                 label="닉네임"
                 errorObj={errors.nickname}
