@@ -42,6 +42,10 @@ export const info = css`
   width: calc(100% - 6rem);
 `;
 
+export const pointInfo = css`
+  color: ${COLORS.BLUE_NEON50};
+`;
+
 export const nozoImage = css`
   width: 2.5rem;
   height: 2.5rem;

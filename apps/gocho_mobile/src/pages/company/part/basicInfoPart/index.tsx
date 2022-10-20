@@ -45,7 +45,10 @@ export const BasicInfoPart: FunctionComponent = () => {
   const { year: foundYear, month: foundMonth, date: foundDate } = dateConverter(companyDetailData.data.foundDate);
   return (
     <div css={wrapper}>
-      <MetaHead metaData={META_COMPANY_RECRUIT} companyDetail={{ companyName: companyDetailData.data.name }} />
+      <MetaHead
+        metaData={META_COMPANY_RECRUIT}
+        companyDetail={{ companyName: companyDetailData.data.name, asPath: router.asPath }}
+      />
       <InvisibleH2 title={`${companyDetailData.data.name} 기업정보`} />
       <Layout>
         <section css={sectionContainer}>

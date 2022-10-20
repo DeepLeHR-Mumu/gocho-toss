@@ -30,6 +30,7 @@ export const 기본 = Template.bind({});
   tipData: {
     id: 1,
     title: "제목입니다.",
+    tag: ["태그1", "태그2", "태그3"],
     description: "설명입니다.",
     thumbnailSrc: "https://d2nnzfahmszi6w.cloudfront.net/tips/9/1.png",
   },

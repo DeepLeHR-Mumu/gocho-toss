@@ -2,6 +2,7 @@ import { MetaHeadProps } from "../type";
 
 export interface SpecDetailMetaHeadProps extends MetaHeadProps {
   specDetail: {
+    id: number;
     nickName: string;
     age: number;
     gender: "남" | "여";

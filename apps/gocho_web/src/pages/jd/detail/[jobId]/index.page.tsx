@@ -88,6 +88,7 @@ const JobsDetail: NextPage = () => {
   const commentData = {
     companyId: jobDetailData.company.companyId,
     name: jobDetailData.company.name,
+    title: jobDetailData.title,
     logoUrl: jobDetailData.company.logoUrl,
   };
 
@@ -104,6 +105,7 @@ const JobsDetail: NextPage = () => {
         jdDetail={{
           companyName: jobDetailData.company.name,
           jdTitle: jobDetailData.title,
+          id: jobDetailData.id,
           rotation: jobDetailData.positionArr[0].rotationArr[0],
           taskDetail: jobDetailData.positionArr[0].taskDetailArr[0],
           pay: jobDetailData.positionArr[0].payArr && jobDetailData.positionArr[0].payArr[0],
