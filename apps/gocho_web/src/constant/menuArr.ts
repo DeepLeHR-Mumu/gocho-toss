@@ -4,7 +4,7 @@ import {
   MYPAGE_URL,
   COMMUNITY_POSTINGS_LIST_URL,
   COMMUNITY_TIPS_LIST_URL,
-  SPEC_URL,
+  SPEC_LIST_URL,
   INTERVIEW_REVIEW,
   DATALAB_DETAIL,
 } from "shared-constant/internalURL";
@@ -55,12 +55,12 @@ export const menuArr = [
   {
     menuTitle: "dataLab",
     mainUrl: "datalab",
-    menuLink: SPEC_URL,
+    menuLink: SPEC_LIST_URL,
     subMenuArr: [
       {
         pageQuery: false,
         menuTitle: "스펙평가",
-        menuLink: SPEC_URL,
+        menuLink: SPEC_LIST_URL,
       },
       {
         pageQuery: false,

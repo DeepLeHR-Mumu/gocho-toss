@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { META_JD_DETAIL } from "shared-constant/meta";
@@ -12,9 +13,10 @@ import { DetailComment } from "@component/global/detailComment";
 import { useUserInfo } from "shared-api/auth";
 import { useAddJobViewCount } from "shared-api/viewCount";
 import { jdDetailFunnelEvent } from "shared-ga/jd";
+import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL } from "shared-constant/internalURL";
 
 import { PositionObjDef } from "./type";
-import { HeaderPart, DetailSupportPart, DetailWorkPart, DetailPreferencePart, ReceptInfoPart } from "../part";
+import { HeaderPart, DetailSupportPart, DetailWorkPart, DetailPreferencePart, ReceptInfoPart } from "./part";
 
 import { wrapper, flexBox, container, containerSkeleton } from "./style";
 
@@ -72,6 +74,14 @@ const JobsDetail: NextPage = () => {
   if (!jobDetailData || isLoading) {
     return (
       <main css={wrapper}>
+        <Head>
+          <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
+          <link
+            rel="alternate"
+            media="only screen and (max-width: 640px)"
+            href={`${GOCHO_MOBILE_URL}${router.asPath.split("?")[0]}`}
+          />
+        </Head>
         <Layout>
           <HeaderPart isSkeleton />
           <div css={flexBox}>
@@ -101,6 +111,14 @@ const JobsDetail: NextPage = () => {
   };
   return (
     <main css={wrapper}>
+      <Head>
+        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
+        <link
+          rel="alternate"
+          media="only screen and (max-width: 640px)"
+          href={`${GOCHO_MOBILE_URL}${router.asPath.split("?")[0]}`}
+        />
+      </Head>
       <MetaHead
         jdDetail={{
           companyName: jobDetailData.company.name,
