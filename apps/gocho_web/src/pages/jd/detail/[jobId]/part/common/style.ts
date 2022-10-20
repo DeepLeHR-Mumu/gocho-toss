@@ -24,6 +24,7 @@ export const containerTitle = css`
 
 export const flexBox = css`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   margin-bottom: 1.5rem;
 
@@ -34,6 +35,8 @@ export const flexBox = css`
 
 export const flexBetweenBox = css`
   display: flex;
+  height: 100%;
+  align-items: center;
   justify-items: flex-start;
   margin-bottom: 1.5rem;
 
@@ -77,6 +80,7 @@ export const restPoint = css`
   line-height: 1.8;
   word-break: keep-all;
   display: inline-block;
+  white-space: pre-line;
   ::after {
     content: ", ";
   }

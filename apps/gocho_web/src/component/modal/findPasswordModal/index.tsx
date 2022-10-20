@@ -29,6 +29,7 @@ export const FindPasswordBox: FunctionComponent = () => {
     register,
     handleSubmit,
     setError,
+    setValue,
     formState: { errors, dirtyFields },
   } = useForm<LoginFormValues>({ mode: "onChange" });
 
@@ -76,6 +77,9 @@ export const FindPasswordBox: FunctionComponent = () => {
                   message: EMAIL_ERROR_MESSAGE.REGEX,
                 },
               })}
+              setValue={() => {
+                setValue("email", "");
+              }}
               placeholder="이메일을 입력해주세요"
               label="이메일"
               errorObj={errors.email}

@@ -41,6 +41,8 @@ import {
   noFactoryBox,
   noFactoryDesc,
   noFactoryButton,
+  infoChildBox,
+  subDesc,
 } from "./style";
 
 export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({ companyData }) => {
@@ -117,7 +119,7 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({ compa
                   </div>
 
                   <div css={flexBox}>
-                    <div>
+                    <div css={infoChildBox}>
                       <div css={infoIcon}>
                         <Image layout="fill" objectFit="contain" src={hireNumberIcon} alt="공장 임직원 정보 아이콘" />
                       </div>
@@ -126,7 +128,7 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({ compa
                         <p css={info}>{totalNumber.toLocaleString("Ko-KR")}명</p>
                       </div>
                     </div>
-                    <div>
+                    <div css={infoChildBox}>
                       <div css={infoIcon}>
                         <Image layout="fill" objectFit="contain" src={genderIcon} alt="공장 임직원 성비 정보 아이콘" />
                       </div>
@@ -140,7 +142,7 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({ compa
                         <p css={info}>{Math.round((factory.femaleNumber / totalNumber) * 100)}%</p>
                       </div>
                     </div>
-                    <div>
+                    <div css={infoChildBox}>
                       <div css={infoIcon}>
                         <Image
                           layout="fill"
@@ -160,9 +162,9 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({ compa
                           />
                         </div>
                       </div>
-                      <p>{factory.bus.desc}</p>
+                      <p css={subDesc}>{factory.bus.desc}</p>
                     </div>
-                    <div>
+                    <div css={infoChildBox}>
                       <div css={infoIcon}>
                         <Image layout="fill" objectFit="contain" src={dormitoryIcon} alt="공장 기숙사 정보 아이콘" />
                       </div>
@@ -177,7 +179,7 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({ compa
                           />
                         </div>
                       </div>
-                      <p>{factory.dormitory.desc}</p>
+                      <p css={subDesc}>{factory.dormitory.desc}</p>
                     </div>
                   </div>
                 </div>

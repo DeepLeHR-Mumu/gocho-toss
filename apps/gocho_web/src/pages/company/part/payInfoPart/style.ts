@@ -48,9 +48,12 @@ export const colorPoint = css`
 `;
 
 export const infoText = css`
-  font-size: 1.375rem;
+  font-size: 1rem;
   font-weight: 400;
   margin-left: 1rem;
+  white-space: pre-line;
+  line-height: 1.8;
+  width: calc(100% - 10rem);
   color: ${COLORS.GRAY10};
 `;
 

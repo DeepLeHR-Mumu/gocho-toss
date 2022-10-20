@@ -10,6 +10,7 @@ export interface MetaHeadProps {
     path: string;
   };
   jdDetail?: {
+    id: number;
     companyName: string;
     jdTitle: string;
     rotation: string;
@@ -19,9 +20,11 @@ export interface MetaHeadProps {
     place: string;
   } | null;
   companyDetail?: {
+    asPath: string;
     companyName: string;
   } | null;
   specDetail?: {
+    id: number;
     nickName: string;
     age: number;
     gender: "남" | "여";

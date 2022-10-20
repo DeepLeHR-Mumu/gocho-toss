@@ -105,6 +105,7 @@ const CompaniesDetail: NextPage = () => {
     basicData: {
       industry: data.industry,
       size: data.size,
+      foundDate: data.foundDate,
       employeeNumber: data.employeeNumber,
       intro: data.intro,
       address: data.address,
@@ -123,6 +124,7 @@ const CompaniesDetail: NextPage = () => {
     commentData: {
       companyId: data.id,
       name: data.name,
+      title: null,
       logoUrl: data.logoUrl,
     },
   };
@@ -175,7 +177,7 @@ const CompaniesDetail: NextPage = () => {
 
         {info === "detail" && (
           <section>
-            <MetaHead companyDetail={{ companyName: data.name }} metaData={META_COMPANY_INFO} />
+            <MetaHead companyDetail={{ companyName: data.name, asPath: router.asPath }} metaData={META_COMPANY_INFO} />
             <InvisibleH2 title={`${companyData.headerData.name} 기업정보`} />
             <div css={flexBox}>
               <div css={partContainer}>
@@ -235,7 +237,10 @@ const CompaniesDetail: NextPage = () => {
 
         {info === "jd" && (
           <section>
-            <MetaHead companyDetail={{ companyName: data.name }} metaData={META_COMPANY_RECRUIT} />
+            <MetaHead
+              companyDetail={{ companyName: data.name, asPath: router.asPath }}
+              metaData={META_COMPANY_RECRUIT}
+            />
             <InvisibleH2 title={`${companyData.headerData.name} 채용공고 모음`} />
             <CompanyJobPart companyId={Number(companyId)} />
           </section>

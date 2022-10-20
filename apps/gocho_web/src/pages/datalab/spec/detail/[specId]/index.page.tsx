@@ -52,7 +52,6 @@ const Detail: NextPage = () => {
       </div>
     );
   }
-
   return (
     <div css={wrapper}>
       <Head>
@@ -61,6 +60,7 @@ const Detail: NextPage = () => {
       <MetaHead
         metaData={META_SPEC_DETAIL}
         specDetail={{
+          id: Number(specId),
           nickName: specDetailData.user.nickname,
           age: specDetailData.age,
           gender: specDetailData.gender,

@@ -25,7 +25,7 @@ export const SpecDetailMetaHead: FunctionComponent<SpecDetailMetaHeadProps> = ({
           content={`${specDetail.age}세 ${specDetail.gender} ${specDetail.desiredTask} 구직자 [${userNickname}]님의 생산직 스펙은 몇점일까요?`}
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${DOMAIN}${metaData.path}`} />
+        <meta property="og:url" content={`${DOMAIN}${metaData.path}/${specDetail.id}`} />
         <meta property="og:site_name" content={`고초대졸닷컴 | ${metaData.pageName}`} />
         <meta property="og:image" content={metaData.ogImage} />
         <meta property="og:article:author" content={`[${userNickname}]${metaData.title}`} />

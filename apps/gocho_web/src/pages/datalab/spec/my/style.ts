@@ -8,13 +8,14 @@ export const wrapper = css`
   background-color: ${COLORS.BLUE_SECOND40};
 `;
 
-export const title = css`
-  font-size: 1px;
-  opacity: 0;
-  position: absolute;
-  overflow: hidden;
-  height: 1px;
-  width: 1px;
+export const totalMySpecCSS = css`
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 1rem;
+  color: ${COLORS.GRAY30};
+  font-weight: 400;
 `;
 
 export const flexBox = css`

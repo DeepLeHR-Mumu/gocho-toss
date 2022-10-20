@@ -15,7 +15,7 @@ export const CompanyDetailMetaHead: FunctionComponent<CompanyDetailMetaHeadProps
         <meta property="og:title" content={`[${companyDetail.companyName}] ${metaData.ogTitle}`} />
         <meta property="og:description" content={`${companyDetail.companyName} ${metaData.ogDesc}`} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${DOMAIN}${metaData.path}`} />
+        <meta property="og:url" content={`${DOMAIN}${companyDetail.asPath}`} />
         <meta property="og:site_name" content={`고초대졸닷컴 | ${metaData.pageName}`} />
         <meta property="og:image" content={metaData.ogImage} />
         <meta property="og:article:author" content={`${companyDetail.companyName} ${metaData.title}`} />

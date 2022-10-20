@@ -86,6 +86,7 @@ export const factoryName = css`
   color: ${COLORS.GRAY100};
   display: flex;
   align-items: center;
+  white-space: nowrap;
   justify-content: center;
   background-color: ${COLORS.BLUE_NEON30};
   width: fit-content;
@@ -133,6 +134,7 @@ export const infoBox = css`
 `;
 
 export const infoIcon = css`
+  margin: auto;
   width: 4.8rem;
   height: 4.8rem;
   position: relative;
@@ -171,12 +173,25 @@ export const info = css`
 
 export const flexBox = css`
   display: flex;
-  justify-content: space-between;
   margin-top: 2rem;
+`;
+
+export const infoChildBox = css`
+  width: 25%;
 `;
 
 export const booleanIcon = css`
   width: 1rem;
   height: 1rem;
   position: relative;
+`;
+
+export const subDesc = css`
+  font-size: 0.875rem;
+  word-break: keep-all;
+  line-height: 1.6;
+  text-align: center;
+  letter-spacing: -1px;
+  color: ${COLORS.GRAY20};
+  margin-top: 0.25rem;
 `;
