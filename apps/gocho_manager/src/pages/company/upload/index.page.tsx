@@ -48,7 +48,11 @@ const CompanyUpload: NextPage = () => {
   const { mutate: mutateCompany } = useAddCompany();
   const { mutate: mutateLogo } = useUploadLogo();
 
-  const { register, control, handleSubmit, watch, setValue } = useForm<CompanyFormValues>({});
+  const { register, control, handleSubmit, watch, setValue } = useForm<CompanyFormValues>({
+    defaultValues: {
+      nozo: { exists: false, desc: null },
+    },
+  });
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -226,13 +230,7 @@ const CompanyUpload: NextPage = () => {
           <div css={inputContainer}>
             <strong css={inputTitle}>노조 *</strong>
             <label css={inputLabel} htmlFor="노조유무">
-              <input
-                type="checkbox"
-                id="노조유무"
-                {...register("nozo.exists", {
-                  required: true,
-                })}
-              />
+              <input type="checkbox" id="노조유무" {...register("nozo.exists", {})} />
               <CheckBox isChecked={watch("nozo.exists")} /> <p css={checkboxText}>있음</p>
               <CheckBox isChecked={!watch("nozo.exists")} /> <p css={checkboxText}>없음</p>
             </label>
@@ -366,13 +364,7 @@ const CompanyUpload: NextPage = () => {
                 <div css={inputContainer}>
                   <strong css={inputTitle}>통근버스 *</strong>
                   <label css={inputLabel} htmlFor={`버스유무${index}`}>
-                    <input
-                      type="checkbox"
-                      id={`버스유무${index}`}
-                      {...register(`factories.${index}.bus_bool`, {
-                        required: true,
-                      })}
-                    />
+                    <input type="checkbox" id={`버스유무${index}`} {...register(`factories.${index}.bus_bool`, {})} />
                     <CheckBox isChecked={watch("factories")[index].bus_bool} /> <p css={checkboxText}>있음</p>
                     <CheckBox isChecked={!watch("factories")[index].bus_bool} /> <p css={checkboxText}>없음</p>
                   </label>
@@ -388,9 +380,7 @@ const CompanyUpload: NextPage = () => {
                     <input
                       type="checkbox"
                       id={`기숙사유무${index}`}
-                      {...register(`factories.${index}.dormitory_bool`, {
-                        required: true,
-                      })}
+                      {...register(`factories.${index}.dormitory_bool`, {})}
                     />
                     <CheckBox isChecked={watch("factories")[index].dormitory_bool} /> <p css={checkboxText}>있음</p>
                     <CheckBox isChecked={!watch("factories")[index].dormitory_bool} /> <p css={checkboxText}>없음</p>
@@ -425,9 +415,9 @@ const CompanyUpload: NextPage = () => {
               female_number: 0,
               product: "",
               bus_bool: false,
-              bus_etc: "",
+              bus_etc: null,
               dormitory_bool: false,
-              dormitory_etc: "",
+              dormitory_etc: null,
             });
           }}
         >
