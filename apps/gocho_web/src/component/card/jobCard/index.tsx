@@ -8,6 +8,7 @@ import Link from "next/link";
 
 import { jobArrKeyObj } from "shared-constant/queryKeyFactory/job/jobArrKeyObj";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
+import { useJobDetail } from "shared-api/job";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import highTrue from "shared-image/global/common/go_color.svg";
@@ -62,8 +63,12 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   const router = useRouter();
   const { isSuccess } = useUserInfo();
   const { setCurrentModal } = useModal();
-
   const { data: userInfoData } = useUserInfo();
+
+  const { data: jobDetailData, isLoading: jobDetailIsLoading } = useJobDetail({
+    id: Number(jobData?.id),
+  });
+
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobData?.id as number,
     end_time: jobData?.endTime as number,
@@ -88,7 +93,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
 
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
 
-  if (isSkeleton || jobData === undefined) {
+  if (isSkeleton || !jobData || !jobDetailData || jobDetailIsLoading) {
     return (
       <div css={jobCardSkeleton}>
         <SkeletonBox />
@@ -162,7 +167,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         >
           <p css={viewWrapper}>
             <FiEye />
-            <span css={viewNumber}>{jobData.view}</span>
+            <span css={viewNumber}>{jobData.view.toLocaleString("Ko-KR")}</span>
           </p>
 
           <div css={mainContainer}>
@@ -223,15 +228,18 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
           <div css={taskContainer}>
             <p css={taskSummary(isExpired)}>
               채용중인 직무
-              <span css={taskNumber(isExpired)}>{jobData.taskArr.length}</span>
+              <span css={taskNumber(isExpired)}>{jobDetailData.positionArr.length}</span>
             </p>
             <ul css={taskArrCSS}>
               {jobData.taskArr.map((task) => {
-                return (
-                  <li css={taskBox} key={`${jobData.id}${task}`}>
-                    {task}
-                  </li>
-                );
+                if (task !== null) {
+                  return (
+                    <li css={taskBox} key={`${jobData.id}${task}`}>
+                      {task}
+                    </li>
+                  );
+                }
+                return <li key={`${jobData.id}${task}`} />;
               })}
             </ul>
           </div>

@@ -52,6 +52,7 @@ export const PostingCard: FunctionComponent<PostingCardProps | PostingCardSkelet
   const { year, month, date } = dateConverter(postingData.createdTime);
 
   const isMyPosting = userInfoData?.nickname === postingData.nickname;
+
   return (
     <button type="button" css={cardContainer} onClick={modalOpen}>
       <article>
@@ -87,7 +88,7 @@ export const PostingCard: FunctionComponent<PostingCardProps | PostingCardSkelet
             <div css={writerProfileImage}>
               <ProfileImg imageStr={postingData.image} size="S" />
             </div>
-            <p css={writerNickname(isMyPosting)}>{postingData.nickname}</p>
+            <p css={writerNickname(isMyPosting)}>{postingData.nickname || "탈퇴한 회원"}</p>
           </div>
         </div>
       </article>

@@ -10,7 +10,6 @@ import { JOBS_LIST_URL } from "shared-constant/internalURL";
 import { jdListFunnelEvent, jdSearchEvent } from "shared-ga/jd";
 // import { myFilterLoadEvent, myFilterSaveEvent } from "shared-ga/jd";
 
-
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
 import { BottomPopup } from "@component/bottomPopup";
 
