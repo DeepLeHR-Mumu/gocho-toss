@@ -143,7 +143,7 @@ export const PostingBox: FunctionComponent<PostingBoxProps> = ({ postingData }) 
             <div css={writerProfileImage}>
               <ProfileImg imageStr={postingData.image} size="S" />
             </div>
-            <p css={writerNickname}>{postingData.nickname}</p>
+            <p css={writerNickname}>{postingData.nickname || "탈퇴한 회원"}</p>
           </div>
         </div>
 

@@ -16,6 +16,14 @@ export const buttonContainer = css`
   position: relative;
 `;
 
+export const noCertiDesc = css`
+  width: 100%;
+  font-size: 0.875rem;
+  color: ${COLORS.ERROR_RED20};
+  text-align: center;
+  line-height: 3;
+`;
+
 export const appendButton = css`
   background-color: ${COLORS.GRAY100};
   border: 1px solid ${COLORS.GRAY60};

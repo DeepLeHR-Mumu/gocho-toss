@@ -68,7 +68,7 @@ export const TipCard: FunctionComponent<TipCardProps | TipCardSkeleton> = ({ tip
               </li>
 
               <li css={numInfo}>
-                <AiOutlineEye /> {tipData.viewCount}
+                <AiOutlineEye /> {tipData.viewCount.toLocaleString("Ko-KR")}
               </li>
             </ul>
           </div>

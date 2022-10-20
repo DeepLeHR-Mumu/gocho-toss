@@ -58,7 +58,7 @@ export const Comment: FunctionComponent<CommentProps> = ({
       <div css={commentWrapper}>
         <div css={nicknameBox}>
           {/* <ProfileImg imageStr="default" size="S" /> */}
-          <p css={nicknameCSS}>{nickname}</p>
+          <p css={nicknameCSS}>{nickname || "탈퇴한 회원"}</p>
         </div>
         <div css={bodyBox}>
           {isChangeComment ? (
