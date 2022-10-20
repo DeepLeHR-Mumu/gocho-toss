@@ -65,8 +65,8 @@ const CompanyDetail: NextPage = () => {
     <>
       <Head>
         <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
-        <HeaderPart />
       </Head>
+      <HeaderPart />
       <div css={container}>
         {info === "detail" && (
           <>
