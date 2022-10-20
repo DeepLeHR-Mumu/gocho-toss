@@ -3,7 +3,7 @@ import Link from "next/link";
 import { BsChevronRight } from "react-icons/bs";
 
 import { useSpecArr } from "shared-api/spec";
-import { SPEC_URL } from "shared-constant/internalURL";
+import { SPEC_LIST_URL } from "shared-constant/internalURL";
 import { Layout } from "@component/layout";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
@@ -27,7 +27,7 @@ export const SpecBestPart: FunctionComponent = () => {
           <p css={title}>
             <span css={colorPoint}>BEST</span> 스펙평가 ✨
           </p>
-          <Link href={SPEC_URL} passHref>
+          <Link href={SPEC_LIST_URL} passHref>
             <a css={linkButton}>
               전체보기 <BsChevronRight />
             </a>
@@ -49,7 +49,7 @@ export const SpecBestPart: FunctionComponent = () => {
         <p css={title}>
           <span css={colorPoint}>BEST</span> 스펙평가 ✨
         </p>
-        <Link href={SPEC_URL} passHref>
+        <Link href={SPEC_LIST_URL} passHref>
           <a css={linkButton}>
             전체보기 <BsChevronRight />
           </a>

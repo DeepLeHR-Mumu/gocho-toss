@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { BsChevronRight } from "react-icons/bs";
+import Head from "next/head";
 
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { META_INDEX } from "shared-constant/meta";
@@ -11,6 +12,7 @@ import { COLORS } from "shared-style/color";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { scrollToTop } from "shared-ui/common/atom/scrollTop";
 import { searchFunnelEvent } from "shared-ga/search";
+import { GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
 
 import { Layout } from "@component/layout";
 import { searchMenuButtonArr } from "@pages/search/constant";
@@ -68,6 +70,9 @@ const UnifiedSearch: NextPage = () => {
   return (
     <main css={mainContainer}>
       <MetaHead metaData={META_INDEX} />
+      <Head>
+        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
+      </Head>
       <nav>
         <ul css={menuList}>
           {searchMenuButtonArr.map((menuText) => {
