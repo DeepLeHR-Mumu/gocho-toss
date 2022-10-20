@@ -66,6 +66,7 @@ importers:
     specifiers:
       '@emotion/react': ^11.10.0
       '@tanstack/react-query': ^4.2.3
+      '@tanstack/react-query-devtools': ^4.2.3
       '@types/node': 18.7.13
       '@types/react': 18.0.17
       '@types/react-color': ^3.0.6
@@ -92,6 +93,7 @@ importers:
     dependencies:
       '@emotion/react': 11.10.4_v7wa3uncfa5agztyqirlhe5v34
       '@tanstack/react-query': 4.3.4_sfoxds7t5ydpegc3knd667wn6m
+      '@tanstack/react-query-devtools': 4.3.5_rc2nloshn5awlpljd7lgxlyskm
       '@types/react-color': 3.0.6
       axios: 0.27.2
       next: 12.2.5_2f3qgkpmmpou2hyqrmueifddme

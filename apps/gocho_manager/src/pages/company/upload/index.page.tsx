@@ -9,6 +9,7 @@ import { useUploadLogo } from "@api/upload/useUploadLogo";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 
 import { ChangeEvent, useState } from "react";
+import { checkMsgBox } from "@pages/jd/upload/style";
 import { CompanyFormValues } from "./type";
 import { industryArr, sizeArr, welfareArr } from "./constant";
 
@@ -41,6 +42,7 @@ import {
 const CompanyUpload: NextPage = () => {
   const [imageSrc, setImageSrc] = useState<string>();
   const [logoData, setLogoData] = useState<FormData>();
+  const [logoMsg, setLogoMsg] = useState<string>();
   const [checkMsg, setCheckMsg] = useState<string>();
 
   const { mutate: mutateCompany } = useAddCompany();
@@ -77,15 +79,23 @@ const CompanyUpload: NextPage = () => {
           onSuccess: (response) => {
             // console.log(response.data);
             setValue("file_id", response.data);
-            setCheckMsg("업로드 되었습니다!");
+            setLogoMsg("업로드 완료");
           },
         }
       );
     }
   };
 
-  const companySubmit: SubmitHandler<CompanyFormValues> = async (companyObj) => {
-    mutateCompany(companyObj, {});
+  const companySubmit: SubmitHandler<CompanyFormValues> = (companyObj) => {
+    mutateCompany(companyObj, {
+      onSuccess: () => {
+        setCheckMsg("기업이 업로드 되었습니다!");
+      },
+
+      onError: () => {
+        setCheckMsg("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
+      },
+    });
   };
 
   return (
@@ -95,7 +105,7 @@ const CompanyUpload: NextPage = () => {
         <section css={sectionContainer}>
           <h3 css={sectionTitle}>일반 기업 정보</h3>
           <div css={inputContainer}>
-            <strong css={inputTitle}>기업명</strong>
+            <strong css={inputTitle}>기업명 *</strong>
             <input
               css={inputBox}
               {...register("name", {
@@ -121,12 +131,22 @@ const CompanyUpload: NextPage = () => {
               </div>
             )}
             <button type="button" css={logoUploadLabel} onClick={logoSubmit}>
-              {checkMsg || "서버에 올리기"}
+              {logoMsg || "서버에 올리기"}
             </button>
             <p css={enterNotice}>로고 업로드 후 반드시 서버에 올리기 버튼을 눌러주세요!</p>
           </div>
           <div css={inputContainer}>
-            <strong css={inputTitle}>업종</strong>
+            <strong css={inputTitle}>사업자번호 *</strong>
+            <input
+              type="number"
+              css={inputBox}
+              {...register("business_number", {
+                required: true,
+              })}
+            />
+          </div>
+          <div css={inputContainer}>
+            <strong css={inputTitle}>업종 *</strong>
             <select
               css={selectBox}
               {...register("industry", {
@@ -144,7 +164,7 @@ const CompanyUpload: NextPage = () => {
             </select>
           </div>
           <div css={inputContainer}>
-            <strong css={inputTitle}>기업 형태</strong>
+            <strong css={inputTitle}>기업 형태 *</strong>
             <select
               css={selectBox}
               {...register("size", {
@@ -162,17 +182,21 @@ const CompanyUpload: NextPage = () => {
             </select>
           </div>
           <div css={inputContainer}>
-            <strong css={inputTitle}>설립일</strong>
+            <strong css={inputTitle}>설립일 *</strong>
             <input
               type="date"
               css={inputBox}
               {...register("found_date", {
                 required: true,
+                setValueAs: (d: Date) => {
+                  const date = new Date(d);
+                  return date.getTime();
+                },
               })}
             />
           </div>
           <div css={inputContainer}>
-            <strong css={inputTitle}>사원수</strong>
+            <strong css={inputTitle}>사원수 *</strong>
             <input
               type="number"
               css={inputBox}
@@ -182,7 +206,7 @@ const CompanyUpload: NextPage = () => {
             />
           </div>
           <div css={inputContainer}>
-            <strong css={inputTitle}>한 줄 소개</strong>
+            <strong css={inputTitle}>한 줄 소개 *</strong>
             <input
               css={inputBox}
               {...register("intro", {
@@ -191,7 +215,7 @@ const CompanyUpload: NextPage = () => {
             />
           </div>
           <div css={inputContainer}>
-            <strong css={inputTitle}>기업 주소</strong>
+            <strong css={inputTitle}>기업 주소 *</strong>
             <input
               css={inputBox}
               {...register("address", {
@@ -200,7 +224,7 @@ const CompanyUpload: NextPage = () => {
             />
           </div>
           <div css={inputContainer}>
-            <strong css={inputTitle}>노조</strong>
+            <strong css={inputTitle}>노조 *</strong>
             <label css={inputLabel} htmlFor="노조유무">
               <input
                 type="checkbox"
@@ -219,7 +243,7 @@ const CompanyUpload: NextPage = () => {
             />
           </div>
           <div css={inputContainer}>
-            <strong css={inputTitle}>캐치 URL</strong>
+            <strong css={inputTitle}>캐치 URL *</strong>
             <input
               type="url"
               css={inputBox}
@@ -246,7 +270,6 @@ const CompanyUpload: NextPage = () => {
                   <textarea
                     css={welfareInputBox}
                     {...register(`${welfare.data}`, {
-                      // required: true,
                       setValueAs: (v: string) => {
                         return v.split("\n");
                       },
@@ -261,7 +284,7 @@ const CompanyUpload: NextPage = () => {
           <h3 css={sectionTitle}>연봉 정보</h3>
           <div css={inputContainer}>
             <div css={welfareBox}>
-              <strong css={inputTitle}>평균 초봉</strong>
+              <strong css={inputTitle}>평균 초봉 *</strong>
               <input
                 type="number"
                 css={inputBox}
@@ -271,7 +294,7 @@ const CompanyUpload: NextPage = () => {
               />
             </div>
             <div css={welfareBox}>
-              <strong css={inputTitle}>평균 연봉</strong>
+              <strong css={inputTitle}>평균 연봉 *</strong>
               <input
                 type="number"
                 css={inputBox}
@@ -292,7 +315,7 @@ const CompanyUpload: NextPage = () => {
               <li css={factoryContainer} key={item.id}>
                 <h3 css={factoryTitle}>공장 정보</h3>
                 <div css={inputContainer}>
-                  <strong css={inputTitle}>공장 이름</strong>
+                  <strong css={inputTitle}>공장 이름 *</strong>
                   <input
                     css={inputBox}
                     {...register(`factories.${index}.factory_name`, {
@@ -301,7 +324,7 @@ const CompanyUpload: NextPage = () => {
                   />
                 </div>
                 <div css={inputContainer}>
-                  <strong css={inputTitle}>공장 주소</strong>
+                  <strong css={inputTitle}>공장 주소 *</strong>
                   <input
                     css={inputBox}
                     {...register(`factories.${index}.address`, {
@@ -311,7 +334,7 @@ const CompanyUpload: NextPage = () => {
                 </div>
                 <div css={inputContainer}>
                   <div css={welfareBox}>
-                    <strong css={inputTitle}>남자 임직원</strong>
+                    <strong css={inputTitle}>남자 임직원 *</strong>
                     <input
                       type="number"
                       css={inputBox}
@@ -321,7 +344,7 @@ const CompanyUpload: NextPage = () => {
                     />
                   </div>
                   <div css={welfareBox}>
-                    <strong css={inputTitle}>여자 임직원</strong>
+                    <strong css={inputTitle}>여자 임직원 *</strong>
                     <input
                       type="number"
                       css={inputBox}
@@ -332,7 +355,7 @@ const CompanyUpload: NextPage = () => {
                   </div>
                 </div>
                 <div css={inputContainer}>
-                  <strong css={inputTitle}>생산품</strong>
+                  <strong css={inputTitle}>생산품 *</strong>
                   <input
                     css={inputBox}
                     {...register(`factories.${index}.product`, {
@@ -341,7 +364,7 @@ const CompanyUpload: NextPage = () => {
                   />
                 </div>
                 <div css={inputContainer}>
-                  <strong css={inputTitle}>통근버스</strong>
+                  <strong css={inputTitle}>통근버스 *</strong>
                   <label css={inputLabel} htmlFor={`버스유무${index}`}>
                     <input
                       type="checkbox"
@@ -356,13 +379,11 @@ const CompanyUpload: NextPage = () => {
                   <input
                     css={booleanInputBox(!watch("factories")[index].bus_bool)}
                     disabled={!watch("factories")[index].bus_bool}
-                    {...register(`factories.${index}.bus_etc`, {
-                      required: true,
-                    })}
+                    {...register(`factories.${index}.bus_etc`, {})}
                   />
                 </div>
                 <div css={inputContainer}>
-                  <strong css={inputTitle}>기숙사</strong>
+                  <strong css={inputTitle}>기숙사 *</strong>
                   <label css={inputLabel} htmlFor={`기숙사유무${index}`}>
                     <input
                       type="checkbox"
@@ -377,9 +398,7 @@ const CompanyUpload: NextPage = () => {
                   <input
                     css={booleanInputBox(!watch("factories")[index].dormitory_bool)}
                     disabled={!watch("factories")[index].dormitory_bool}
-                    {...register(`factories.${index}.dormitory_etc`, {
-                      required: true,
-                    })}
+                    {...register(`factories.${index}.dormitory_etc`, {})}
                   />
                 </div>
                 <button
@@ -417,6 +436,7 @@ const CompanyUpload: NextPage = () => {
         <button css={submitButton} type="submit">
           기업 등록하기
         </button>
+        {checkMsg && <p css={checkMsgBox}>{checkMsg}</p>}
       </form>
     </main>
   );

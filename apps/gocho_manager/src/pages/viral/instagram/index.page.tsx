@@ -36,7 +36,7 @@ const Instagram: NextPage = () => {
     isError,
   } = useJobArr({
     order: "popular",
-    filter: "valid",
+    filter: "todayUpload",
     limit: 10,
   });
 

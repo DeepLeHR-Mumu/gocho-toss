@@ -158,3 +158,10 @@ export const submitButton = css`
   background-color: ${COLORS.BLUE_FIRST40};
   color: ${COLORS.GRAY100};
 `;
+
+export const checkMsgBox = css`
+  color: ${COLORS.BLUE_FIRST40};
+  font-weight: 500;
+  text-align: center;
+  margin-top: 1rem;
+`;
