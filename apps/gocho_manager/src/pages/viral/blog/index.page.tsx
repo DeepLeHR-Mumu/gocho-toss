@@ -16,7 +16,7 @@ const Blog: NextPage = () => {
   } = useJobArr({
     order: "popular",
     filter: "todayUpload",
-    limit: 10,
+    limit: 0,
   });
 
   const copyViral = async (jobList: JobDef[]) => {
@@ -27,11 +27,10 @@ const Blog: NextPage = () => {
     text += `------ \n\n`;
 
     jobList.map((job) => {
-      const { year: startYear, month: startMonth, date: startDate } = dateConverter(job.startTime);
-      const { year: endYear } = dateConverter(job.endTime);
-      const endDate = endYear === 9999 ? "상시" : `~ ${startYear}-${startMonth}-${startDate} 까지`;
+      const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
+      const deadline = endYear === 9999 ? "상시" : `~ ${endYear}-${endMonth}-${endDate} 까지`;
 
-      text += `🚀 ${job.companyName}\n${job.title}\n- 접수기간 : ${endDate}\n`;
+      text += `🚀 ${job.companyName}\n${job.title}\n- 접수기간 : ${deadline}\n`;
       let taskString = "";
       job.taskArr.map((task, index, taskArr) => {
         taskString += index + 1 === taskArr.length ? `${task}` : `${task}, `;
@@ -47,7 +46,8 @@ const Blog: NextPage = () => {
       text += `- 근무지: ${job.placeArr[0]} ${job.placeArr.length !== 1 ? `외 ${job.placeArr.length - 1}곳` : ""}\n`;
       text += `- 근무형태: ${job.rotationArr[0]} ${
         job.rotationArr.length !== 1 ? `외 ${job.rotationArr.length - 1}형태` : ""
-      }\n\n`;
+      }\n`;
+      text += `https://고초대졸.com/jd/detail/${job.id}/?utm_source=kakaotalk&utm_medium=chat&utm_campaign=viral\n\n`;
       return text;
     });
 
@@ -62,11 +62,10 @@ const Blog: NextPage = () => {
   const copyBlogTodayJob = async (jobList: JobDef[]) => {
     let text = "";
     jobList.map((job) => {
-      const { year: startYear, month: startMonth, date: startDate } = dateConverter(job.startTime);
-      const { year: endYear } = dateConverter(job.endTime);
-      const endDate = endYear === 9999 ? "상시" : `~ ${startYear}-${startMonth}-${startDate} 까지`;
+      const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
+      const deadline = endYear === 9999 ? "상시" : `~ ${endYear}-${endMonth}-${endDate} 까지`;
 
-      text += `🚀 ${job.companyName}\n${job.title}\n- 접수기간 : ${endDate}\n`;
+      text += `🚀 ${job.companyName}\n${job.title}\n- 접수기간 : ${deadline}\n`;
       let taskString = "";
       job.taskArr.map((task, index, taskArr) => {
         taskString += index + 1 === taskArr.length ? `${task}` : `${task}, `;

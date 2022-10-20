@@ -9,6 +9,7 @@ export const sectionTitle = css`
   font-size: 1.125rem;
   font-weight: 700;
   color: ${COLORS.GRAY30};
+  margin-bottom: 1rem;
 `;
 
 export const jobContainer = css`
