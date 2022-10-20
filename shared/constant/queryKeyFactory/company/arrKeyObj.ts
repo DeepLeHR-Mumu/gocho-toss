@@ -2,7 +2,7 @@ export interface CompanyArrRequestDef {
   q?: string;
   limit?: number;
   offset?: number;
-  order?: "recent" | "comment" | "name" | "popular" | "rand" | "view";
+  order: "recent" | "comment" | "name" | "popular" | "rand" | "view" | undefined;
   word?: string;
 }
 

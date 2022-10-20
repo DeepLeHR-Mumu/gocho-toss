@@ -8,7 +8,7 @@ export const linkObj = {
   COMPANY_DETAIL_URL: "/companies/detail",
   COMMUNITY_POSTINGS_LIST_URL: "/community/postings",
   INTERVIEW_REVIEW: "/review",
-  SPEC_URL: "/datalab/spec",
+  SPEC_LIST_URL: "/datalab/spec/list",
   SPEC_DETAIL_URL: "/datalab/spec/detail",
   SPEC_REGISTER_URL: "/datalab/spec/register",
   SPEC_MY_URL: "/datalab/spec/my",

@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import { FiSearch } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import { useCompanyArr } from "shared-api/company";
 import { Layout } from "@component/layout";
@@ -10,7 +11,7 @@ import { BottomPagination } from "@component/common/molecule/bottomPagination";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { META_JD_EXPLIST } from "shared-constant/meta";
-import { JOBS_EXPLIST_URL } from "shared-constant/internalURL";
+import { GOCHO_DESKTOP_URL, JOBS_EXPLIST_URL } from "shared-constant/internalURL";
 import { expiredJdListFunnelEvent, expiredJdListSortingEvent } from "shared-ga/jd";
 import { ExpJobCardList } from "./component/expJobCardList";
 import { setJobOrderButtonArr } from "./constant";
@@ -87,6 +88,9 @@ const JobsExpList: NextPage = () => {
 
   return (
     <main css={mainContainer}>
+      <Head>
+        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
+      </Head>
       <MetaHead metaData={META_JD_EXPLIST} />
       <Layout>
         <InvisibleH2 title="기업별 만료 공고" />

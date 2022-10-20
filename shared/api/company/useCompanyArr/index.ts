@@ -18,6 +18,7 @@ export const useCompanyArr = (requestObj: CompanyArrRequestDef) => {
     select: ({ data, count }) => {
       return selector(data, count);
     },
+    enabled: Boolean(requestObj.order),
   });
   return queryResult;
 };

@@ -1,5 +1,5 @@
 export interface JobDetailRequestObjDef {
-  id: number;
+  id: number | null;
 }
 
 export const jobDetailKeyObj = {

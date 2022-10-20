@@ -5,7 +5,7 @@ import { Layout } from "@component/layout";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
 import { partContainer, title, colorPoint } from "./style";
-import { RecommendCardList } from "../../component/recommendCardList";
+import { RecommendCardList } from "../../../component/recommendCardList";
 
 export const CarouselPart: FunctionComponent = () => {
   const { data: userInfoData, error } = useUserInfo();

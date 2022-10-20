@@ -37,10 +37,10 @@ import {
 export const ListPart: FunctionComponent = () => {
   const [total, setTotal] = useState<number>(0);
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
+  const firstRenderingRef = useRef<boolean>(true);
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   const router = useRouter();
-  const { page, order } = router.query;
 
   const { setCurrentToast } = useToast();
 
@@ -62,10 +62,10 @@ export const ListPart: FunctionComponent = () => {
     isError: isJobDataArrError,
   } = useJobArr({
     q: JSON.stringify(searchQuery),
-    order: order as OrderDef,
+    order: router.query.order as OrderDef,
     filter: "valid",
     limit,
-    offset: (Number(page) - 1) * 10,
+    offset: (Number(router.query.page) - 1) * 10,
   });
 
   const jdSearch: SubmitHandler<SearchValues> = (searchVal) => {
@@ -73,7 +73,6 @@ export const ListPart: FunctionComponent = () => {
       setCurrentToast("검색어에 특수문자는 포함될 수 없습니다.");
       return;
     }
-
     jdSearchEvent(searchVal.searchWord);
     setSearchQuery({
       contractType: searchVal.contractType,
@@ -104,15 +103,20 @@ export const ListPart: FunctionComponent = () => {
     }
   }, [jobDataArr]);
   useEffect(() => {
-    if (Object.keys(router.query).length === 0) {
+    if (Object.keys(router.query).length === 0 && router.isReady) {
       router.replace({ pathname: JOBS_LIST_URL, query: { page: 1, order: "recent" } });
     }
   }, [router]);
   useEffect(() => {
-    // scrollRef.current?.scrollIntoView();
-    const location = (scrollRef.current?.getBoundingClientRect().top as number) + window.pageYOffset - 100;
-    window.scrollTo(0, location);
-  }, [page]);
+    if (router.query.page && firstRenderingRef.current) {
+      firstRenderingRef.current = false;
+      return;
+    }
+    if (!firstRenderingRef.current) {
+      const location = (scrollRef.current?.getBoundingClientRect().top as number) + window.pageYOffset - 400;
+      window.scrollTo(0, location);
+    }
+  }, [router.query.page]);
 
   useEffect(() => {
     jdListFunnelEvent();
@@ -128,7 +132,6 @@ export const ListPart: FunctionComponent = () => {
         <p css={title}>
           <span css={colorPoint}>Now</span> 채용공고 📮
         </p>
-
         <form onSubmit={handleSubmit(jdSearch)}>
           <Filter register={register} watch={watch} setValue={setValue} getValues={getValues} />
 
@@ -145,7 +148,7 @@ export const ListPart: FunctionComponent = () => {
             </div>
             <div css={buttonArrContainer}>
               {setJobOrderButtonArr.map((button) => {
-                const isActive = button.order === order;
+                const isActive = button.order === router.query.order;
                 return (
                   <button
                     type="submit"
