@@ -18,6 +18,7 @@ export const selector = (jobArr: JobObjDef[], count: number) => {
       placeArr: job.place_arr,
       rotationArr: job.rotation_arr,
       contractArr: job.contract_type,
+      requiredExpArr: job.required_exp_arr,
     };
   });
   return { jobDataArr, count };

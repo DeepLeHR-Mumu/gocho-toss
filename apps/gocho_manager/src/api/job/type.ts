@@ -12,4 +12,5 @@ export interface JobObjDef {
   place_arr: string[];
   rotation_arr: string[];
   contract_type: string[];
+  required_exp_arr: string[];
 }

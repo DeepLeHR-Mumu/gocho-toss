@@ -185,6 +185,16 @@ const Instagram: NextPage = () => {
                     </div>
                   </div>
                   <div css={infoBox}>
+                    <p css={infoName}>경력 조건</p>
+                    <div css={info}>
+                      {job.requiredExpArr.map((exp) => {
+                        return (
+                          <p key={`${job.id}${exp}`} css={infoText}>
+                            {exp}
+                          </p>
+                        );
+                      })}
+                    </div>
                     <p css={infoName}>조회수</p>
                     <div css={info}>{job.view}</div>
                   </div>

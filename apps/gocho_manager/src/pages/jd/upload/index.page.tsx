@@ -425,14 +425,8 @@ const JdUpload: NextPage = () => {
                     <p css={enterNotice}>엔터로 구분해주세요.</p>
                   </div>
                   <div css={inputContainer}>
-                    <strong css={inputTitle}>교대 형태 *</strong>
-                    <select
-                      css={selectBox}
-                      multiple
-                      {...register(`position_arr.${index}.rotation_arr`, {
-                        required: true,
-                      })}
-                    >
+                    <strong css={inputTitle}>교대 형태</strong>
+                    <select css={selectBox} multiple {...register(`position_arr.${index}.rotation_arr`, {})}>
                       <option value="" disabled>
                         교대형태 선택 ▼
                       </option>
@@ -444,7 +438,10 @@ const JdUpload: NextPage = () => {
                         );
                       })}
                     </select>
-                    <p css={enterNotice}>Ctrl키를 누른 채로 중복 선택이 가능합니다.</p>
+                    <p css={enterNotice}>
+                      Ctrl키를 누른 채로 중복 선택이 가능합니다. <br />
+                      해당되는 교대 형태가 없다면 아래 &apos;기타 교대 형태&apos; 에 입력해주세요.
+                    </p>
                   </div>
                   <div css={inputContainer}>
                     <strong css={inputTitle}>기타 교대 형태</strong>
