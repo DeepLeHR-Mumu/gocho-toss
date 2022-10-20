@@ -1,3 +1,5 @@
+export const GOCHO_URL = "https://고초대졸.com";
+
 export const MAIN_URL = "/";
 
 export const JOBS_LIST_URL = "/jd/list";
@@ -6,8 +8,8 @@ export const JOBS_EXPLIST_URL = "/jd/explist";
 
 export const COMPANY_DETAIL_URL = "/company";
 
-export const COMMUNITY_POSTINGS_LIST_URL = "/community/posting";
-export const COMMUNITY_TIPS_LIST_URL = "/community/tip";
+export const COMMUNITY_POSTINGS_LIST_URL = "/community/posting/list";
+export const COMMUNITY_TIPS_LIST_URL = "/community/tip/list";
 
 export const INTERVIEW_REVIEW = "/review";
 
