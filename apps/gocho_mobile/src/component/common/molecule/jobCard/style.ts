@@ -68,17 +68,17 @@ export const dateInfoContainer = css`
 `;
 
 export const cutBox = css`
-  font-size: 10px;
+  font-size: 0.9rem;
   white-space: nowrap;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 0.25rem;
-  margin-left: 0.3rem;
   border-radius: 1rem;
   margin-top: 0.5rem;
   width: fit-content;
+  padding: 0 1rem;
   height: 1.625rem;
   background-color: ${COLORS.GRAY90};
   color: ${COLORS.BLUE_FIRST40};
@@ -91,7 +91,7 @@ export const companyInfoContainer = css`
 `;
 
 export const companyName = css`
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: ${COLORS.GRAY10};
   font-weight: 500;
   ${shorten()};

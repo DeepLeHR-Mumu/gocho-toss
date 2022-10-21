@@ -185,3 +185,10 @@ export const restPoint = css`
     }
   }
 `;
+
+export const isEveryDate = css`
+  font-size: 1rem;
+  color: ${COLORS.GRAY30};
+  margin-bottom: 0.5rem;
+  text-align: center;
+`;
