@@ -17,6 +17,7 @@ import {
   infoBox,
   infoDetailBox,
   infoTitle,
+  isEveryDate,
   processBox,
   restPoint,
   wrapper,
@@ -40,6 +41,7 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
   } = dateConverter(jobDetailData.endTime);
 
   const isDdayEnd = dDayCalculator(jobDetailData.endTime) === "만료";
+  const isEveryJob = Boolean(endYear === 9999);
 
   return (
     <div>
@@ -47,9 +49,15 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
         <div css={infoBox}>
           <h4 css={infoTitle}>접수안내</h4>
           <ul css={beforeAfterDateBox}>
-            <li>{`${startYear}. ${startMonth}. ${startDate}  ${startHour}:${startMinute}`}</li>
-            <li>~</li>
-            <li>{`${endYear}. ${endMonth}. ${endDate}  ${endHour}:${endMinute}`}</li>
+            {isEveryJob ? (
+              <p css={isEveryDate}>상시채용입니다.</p>
+            ) : (
+              <>
+                <li>{`${startYear}. ${startMonth}. ${startDate}  ${startHour}:${startMinute}`}</li>
+                <li>~</li>
+                <li>{`${endYear}. ${endMonth}. ${endDate}  ${endHour}:${endMinute}`}</li>
+              </>
+            )}
           </ul>
           <DdayBox endTime={jobDetailData.endTime} />
           {jobDetailData.cut && <div css={cutBox}>채용시마감</div>}
