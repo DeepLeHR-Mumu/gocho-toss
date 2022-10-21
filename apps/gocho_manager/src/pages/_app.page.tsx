@@ -3,6 +3,7 @@ import { Global } from "@emotion/react";
 import type { AppProps } from "next/app";
 import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { Header, SideBar } from "@component/global";
 import { Layout } from "@component/layout";
@@ -35,6 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               <Component {...pageProps} />
             </div>
           </Layout>
+          <ReactQueryDevtools initialIsOpen={false} />
         </Hydrate>
       </QueryClientProvider>
     </RecoilRoot>
