@@ -1,10 +1,13 @@
 import { NextPage } from "next";
+import { useRouter } from "next/router";
+import Head from "next/head";
 
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { META_PRIVACY } from "shared-constant/meta";
-import { Layout } from "@component/layout";
-
 import { executionDesc, privacyArr, CTOINFO } from "shared-constant/privacy";
+import { GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
+
+import { Layout } from "@component/layout";
 import {
   tosTitle,
   subTitle,
@@ -20,8 +23,12 @@ import {
 import { PrivacyDef } from "./type";
 
 const Privacy: NextPage = () => {
+  const router = useRouter();
   return (
     <main css={wrapper}>
+      <Head>
+        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
+      </Head>
       <section>
         <MetaHead metaData={META_PRIVACY} />
         <Layout>

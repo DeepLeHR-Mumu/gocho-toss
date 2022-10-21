@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { BsChevronRight } from "react-icons/bs";
+import Head from "next/head";
 
 import { useJobArr } from "shared-api/job";
 import { useCompanyArr } from "shared-api/company";
@@ -11,6 +12,7 @@ import { META_INDEX } from "shared-constant/meta";
 import { scrollToTop } from "shared-ui/common/atom/scrollTop";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { searchFunnelEvent } from "shared-ga/search";
+import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL } from "shared-constant/internalURL";
 
 import { Layout } from "@component/layout";
 import { searchMenuButtonArr } from "@pages/search/constant";
@@ -65,6 +67,14 @@ const UnifiedSearch: NextPage = () => {
   const totalCount = (jobDataArr?.count || 0) + (companyDataArr?.count || 0);
   return (
     <main css={mainContainer}>
+      <Head>
+        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
+        <link
+          rel="alternate"
+          media="only screen and (max-width: 640px)"
+          href={`${GOCHO_MOBILE_URL}${router.asPath.split("?")[0]}`}
+        />
+      </Head>
       <MetaHead metaData={META_INDEX} />
       <Layout>
         <nav>

@@ -2,10 +2,12 @@ import type { NextPage } from "next";
 import { ChromePicker } from "react-color";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { dateConverter } from "shared-util/date";
 import { useBannerArr } from "@api/banner/useBannerArr";
 import { useAddBanner } from "@api/banner/addBanner";
+import { useDeleteBanner } from "@api/banner/useDeleteBanner";
 
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
@@ -27,15 +29,33 @@ import {
 } from "./style";
 
 const TopBanner: NextPage = () => {
+  const queryClient = useQueryClient();
+
   const [color, setColor] = useState<string>("");
 
   const { data: BannerDataArr, isLoading, isError } = useBannerArr({ type: 1 });
-  const { mutate } = useAddBanner();
+  const { mutate: addMutate } = useAddBanner();
+  const { mutate: deleteMutate } = useDeleteBanner();
 
-  const { register, handleSubmit } = useForm<BannerFormValues>({});
+  const { register, setValue, handleSubmit } = useForm<BannerFormValues>({ defaultValues: { type: 1 } });
 
   const bannerSubmit: SubmitHandler<BannerFormValues> = (bannerObj) => {
-    mutate(bannerObj);
+    addMutate(bannerObj, {
+      onSuccess: () => {
+        queryClient.invalidateQueries();
+      },
+    });
+  };
+
+  const bannerDelete = (id: number) => {
+    deleteMutate(
+      { bannerId: id },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries();
+        },
+      }
+    );
   };
 
   if (!BannerDataArr || isLoading) {
@@ -88,6 +108,7 @@ const TopBanner: NextPage = () => {
             color={color}
             onChange={(colorChange) => {
               setColor(colorChange.hex);
+              setValue("color", colorChange.hex);
             }}
           />
           <button css={submitBannerButton} type="submit">
@@ -118,7 +139,13 @@ const TopBanner: NextPage = () => {
                   {endYear}-{endMonth}-{endDate}
                 </td>
                 <td>
-                  <button css={deleteBannerButton} type="button">
+                  <button
+                    css={deleteBannerButton}
+                    type="button"
+                    onClick={() => {
+                      bannerDelete(banner.id);
+                    }}
+                  >
                     배너 삭제
                   </button>
                 </td>

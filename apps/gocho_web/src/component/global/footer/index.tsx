@@ -36,27 +36,15 @@ export const Footer: FunctionComponent = () => {
               <li>
                 <Link href={MAIN_URL}>홈</Link>
               </li>
-              <li>
-                채용문의{" "}
-                <Link href={`mailto:${companyInfoObj.CSEmail}`}>
-                  <a>{companyInfoObj.CSEmail}</a>
-                </Link>
-              </li>
-            </ul>
-            <ul css={companyInfoListCSS}>
               <li>대표 : {companyInfoObj.CEOName}</li>
               <li>{companyInfoObj.address}</li>
               <li>
-                <Link href={`mailto:${companyInfoObj.email}`}>
-                  <a>EMAIL : {companyInfoObj.email}</a>
-                </Link>
+                <a href={`mailto:${companyInfoObj.email}`}>EMAIL : {companyInfoObj.email}</a>
               </li>
             </ul>
             <ul css={companyInfoListCSS}>
               <li>
-                <Link href={`tel:${companyInfoObj.phoneNumber}`}>
-                  <a>연락처 : {companyInfoObj.phoneVisualNumber}</a>
-                </Link>
+                <a href={`tel:${companyInfoObj.phoneNumber}`}>연락처 : {companyInfoObj.phoneVisualNumber}</a>
               </li>
               <li>법인 사업자 등록번호 : {companyInfoObj.corporationNumber}</li>
               <li>
@@ -72,22 +60,28 @@ export const Footer: FunctionComponent = () => {
             <div css={inquiryBox}>
               <strong css={inquiryTitle}>광고 문의</strong>
               <p css={inquiryText}>
-                <Link href={`mailto:${companyInfoObj.marketingEmail}`}>
+                <a href={`mailto:${companyInfoObj.marketingEmail}`}>
                   <a>채용공고 / 광고 등록 문의 {companyInfoObj.marketingEmail}</a>
-                </Link>
+                </a>
               </p>
             </div>
             <div css={inquiryBox}>
               <strong css={inquiryTitle}>고객센터</strong>
               <p css={notReadyText}>
-                <Link href={`mailto:${companyInfoObj.helpEmail}`}>help@deeplehr.com</Link>
-                <Link href={companyInfoObj.kakaoPlus} passHref>
-                  <a target="_blank">카카오톡 플러스친구</a>
-                </Link>
+                <a href={`mailto:${companyInfoObj.helpEmail}`}>help@deeplehr.com</a>
+                <a href={companyInfoObj.kakaoPlus} target="_blank" rel="noreferrer">
+                  카카오톡 플러스친구
+                </a>
 
                 <span css={kakaoBox}>
                   <Image src={kakaoMonoSrc} alt="카카오톡 플러스친구" layout="fill" objectFit="contain" />
                 </span>
+              </p>
+            </div>
+            <div css={inquiryBox}>
+              <strong css={inquiryTitle}>인재 채용</strong>
+              <p css={inquiryText}>
+                <a href={`mailto:${companyInfoObj.CSEmail}`}>{companyInfoObj.CSEmail}</a>
               </p>
             </div>
           </div>

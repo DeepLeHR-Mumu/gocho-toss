@@ -49,6 +49,7 @@ export const WriteComment: FunctionComponent<WriteCommentProps> = ({ postingId, 
       handleSubmit(commentSubmit)();
     }
   };
+
   return (
     <form css={formCSS} onSubmit={handleSubmit(commentSubmit)}>
       <div css={writeCommentWrapper}>

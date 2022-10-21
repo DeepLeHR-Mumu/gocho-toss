@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { css } from "@emotion/react";
 
-import { DetailPreferencePart } from "@pages/jd/detail/part/detailPreferencePart";
+import { DetailPreferencePart } from "@pages/jd/detail/[jobId]/part/detailPreferencePart";
 
 export default {
   title: "공고/detail/part/DetailPreferencePart",

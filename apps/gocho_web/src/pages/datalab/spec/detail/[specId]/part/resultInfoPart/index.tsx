@@ -4,7 +4,7 @@ import { BsChevronLeft } from "react-icons/bs";
 
 import { StarEvaluation } from "@component/common/molecule/starEvaluation";
 import { LinkButton } from "shared-ui/common/atom/button";
-import { SPEC_URL } from "shared-constant/internalURL";
+import { SPEC_LIST_URL } from "shared-constant/internalURL";
 import { COLORS } from "shared-style/color";
 
 import { ChipBox } from "./component/chipBox";
@@ -38,7 +38,7 @@ export const ResultInfoPart: FunctionComponent<ResultInfoPartProps> = ({ resultD
           <LinkButton
             variant="outlined"
             text="리스트로 돌아가기"
-            linkTo={SPEC_URL}
+            linkTo={SPEC_LIST_URL}
             iconObj={{
               icon: BsChevronLeft,
               color: COLORS.BLUE_FIRST40,
@@ -125,7 +125,7 @@ export const ResultInfoPart: FunctionComponent<ResultInfoPartProps> = ({ resultD
         <LinkButton
           variant="text"
           text="리스트로 돌아가기"
-          linkTo={SPEC_URL}
+          linkTo={SPEC_LIST_URL}
           iconObj={{
             icon: BsChevronLeft,
             color: COLORS.BLUE_FIRST40,

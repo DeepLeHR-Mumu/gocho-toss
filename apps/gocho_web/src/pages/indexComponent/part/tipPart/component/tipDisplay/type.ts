@@ -1,3 +1,9 @@
 export interface TipDisplayProps {
-  id: number;
+  currentTip: {
+    id: number;
+    title: string;
+    tag: string[];
+    description: string;
+    thumbnailSrc: string;
+  };
 }

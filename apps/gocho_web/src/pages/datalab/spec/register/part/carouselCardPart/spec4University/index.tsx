@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+import { NUMBER_REGEXP } from "shared-constant/regExp";
 import {
   SpecCardTitle,
   MoveCardButtons,
@@ -88,6 +89,10 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                     value: 0,
                     message: "최소 일수는 0입니다.",
                   },
+                  pattern: {
+                    value: NUMBER_REGEXP,
+                    message: "숫자만 기입할 수 있습니다.",
+                  },
                   max: {
                     value: 365,
                     message: "최대 일수는 365입니다.",
@@ -111,6 +116,10 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                     value: 365,
                     message: "최대 일수는 365입니다.",
                   },
+                  pattern: {
+                    value: NUMBER_REGEXP,
+                    message: "숫자만 기입할 수 있습니다.",
+                  },
                   required: "무단지각 일수를 입력해주세요.",
                 })}
                 placeholder="?"
@@ -130,6 +139,10 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                     value: 365,
                     message: "최대 일수는 365입니다.",
                   },
+                  pattern: {
+                    value: NUMBER_REGEXP,
+                    message: "숫자만 기입할 수 있습니다.",
+                  },
                   required: "무단 조퇴 일수를 입력해주세요.",
                 })}
                 placeholder="?"
@@ -148,6 +161,10 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                   max: {
                     value: 365,
                     message: "최대 일수는 365입니다.",
+                  },
+                  pattern: {
+                    value: NUMBER_REGEXP,
+                    message: "숫자만 기입할 수 있습니다.",
                   },
                   required: "무단결과 일수를 입력해주세요.",
                 })}

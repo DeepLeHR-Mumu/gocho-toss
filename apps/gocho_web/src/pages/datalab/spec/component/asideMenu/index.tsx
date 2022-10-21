@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useUserInfo } from "shared-api/auth";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
-import { SPEC_MY_URL, SPEC_URL, SPEC_REGISTER_URL } from "shared-constant/internalURL";
+import { SPEC_MY_URL, SPEC_LIST_URL, SPEC_REGISTER_URL } from "shared-constant/internalURL";
 
 import { AsideMenuProps } from "./type";
 import { wrapper, partContainer, asideProfile, loginNickname, pointLink, asideLink, activeLink } from "./style";
@@ -41,7 +41,7 @@ export const AsideMenu: FunctionComponent<AsideMenuProps> = ({ isFix = true }) =
         </a>
       </Link>
       {isSpecMyUrl && (
-        <Link href={SPEC_URL} passHref>
+        <Link href={SPEC_LIST_URL} passHref>
           <a css={asideLink}>
             전체 스펙
             <br />
