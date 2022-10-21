@@ -15,14 +15,14 @@ import { searchFunnelEvent } from "shared-ga/search";
 import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL } from "shared-constant/internalURL";
 
 import { Layout } from "@component/layout";
-import { searchMenuButtonArr } from "@pages/search/constant";
 
 import { JobPreviewPart } from "./part/jobPreviewPart";
 import { CompanyPreviewPart } from "./part/companyPreviewPart";
 import { JobListPart } from "./part/jobListPart";
 import { CompanyListPart } from "./part/companyListPart";
-import { mainContainer, menuList, menuElement, menuButton, title, buttonBox } from "./style";
+import { mainContainer, title, buttonBox } from "./style";
 import { searchMenuDef } from "./type";
+import { MenuListPart } from "./part/menuListPart";
 
 const UnifiedSearch: NextPage = () => {
   const router = useRouter();
@@ -64,7 +64,6 @@ const UnifiedSearch: NextPage = () => {
     offset: (companyPage - 1) * companyLimit,
   });
 
-  const totalCount = (jobDataArr?.count || 0) + (companyDataArr?.count || 0);
   return (
     <main css={mainContainer}>
       <Head>
@@ -77,39 +76,7 @@ const UnifiedSearch: NextPage = () => {
       </Head>
       <MetaHead metaData={META_INDEX} />
       <Layout>
-        <nav>
-          <ul css={menuList}>
-            {searchMenuButtonArr.map((menuText) => {
-              const isActive = menuText === menu;
-              return (
-                <li css={menuElement} key={menuText}>
-                  <button
-                    css={menuButton(isActive)}
-                    type="button"
-                    onClick={() => {
-                      if (menuText !== "전체") {
-                        router.push({
-                          pathname: "/search",
-                          query: { q: router.query.q, page: 1 },
-                        });
-                      } else {
-                        router.push({
-                          pathname: "/search",
-                          query: { q: router.query.q },
-                        });
-                      }
-                      setMenu(menuText);
-                    }}
-                  >
-                    {menuText} {menuText === "전체" && totalCount.toLocaleString("Ko-KR")}
-                    {menuText === "공고" && jobDataArr?.count.toLocaleString("Ko-KR")}
-                    {menuText === "기업" && companyDataArr?.count.toLocaleString("Ko-KR")}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
+        <MenuListPart setMenu={setMenu} menu={menu} />
 
         {menu === "전체" && (
           <div>
