@@ -38,6 +38,15 @@ export const inputTitle = css`
   margin-right: 1rem;
 `;
 
+export const getJobButton = css`
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  background-color: ${COLORS.BLUE_NEON50};
+  color: ${COLORS.GRAY100};
+  margin-right: 0.5rem;
+  border: 2px solid ${COLORS.GRAY10};
+`;
+
 export const submitBannerButton = css`
   font-size: 1.5rem;
   font-weight: 500;

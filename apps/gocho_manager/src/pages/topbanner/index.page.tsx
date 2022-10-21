@@ -8,6 +8,7 @@ import { dateConverter } from "shared-util/date";
 import { useBannerArr } from "@api/banner/useBannerArr";
 import { useAddBanner } from "@api/banner/addBanner";
 import { useDeleteBanner } from "@api/banner/useDeleteBanner";
+import { useJobDetail } from "@api/job/useJobDetail";
 
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
@@ -18,6 +19,7 @@ import {
   inputContainer,
   inputTitle,
   inputBox,
+  getJobButton,
   submitBannerButton,
   titleBox,
   bannerId,
@@ -32,12 +34,14 @@ const TopBanner: NextPage = () => {
   const queryClient = useQueryClient();
 
   const [color, setColor] = useState<string>("");
+  const [jobId, setJobId] = useState<number>(0);
 
-  const { data: BannerDataArr, isLoading, isError } = useBannerArr({ type: 1 });
+  const { data: jobData } = useJobDetail({ id: jobId });
+  const { data: bannerDataArr, isLoading, isError } = useBannerArr({ type: 1 });
   const { mutate: addMutate } = useAddBanner();
   const { mutate: deleteMutate } = useDeleteBanner();
 
-  const { register, setValue, handleSubmit } = useForm<BannerFormValues>({ defaultValues: { type: 1 } });
+  const { register, watch, setValue, handleSubmit } = useForm<BannerFormValues>({ defaultValues: { type: 1 } });
 
   const bannerSubmit: SubmitHandler<BannerFormValues> = (bannerObj) => {
     addMutate(bannerObj, {
@@ -58,7 +62,7 @@ const TopBanner: NextPage = () => {
     );
   };
 
-  if (!BannerDataArr || isLoading) {
+  if (!bannerDataArr || isLoading) {
     return <LoadingScreen />;
   }
 
@@ -80,6 +84,15 @@ const TopBanner: NextPage = () => {
                 required: true,
               })}
             />
+            <button
+              type="button"
+              css={getJobButton}
+              onClick={() => {
+                setJobId(watch("jd_id"));
+              }}
+            >
+              불러오기
+            </button>
             <strong css={inputTitle}>게시 기간</strong>
             <input
               type="date"
@@ -111,6 +124,7 @@ const TopBanner: NextPage = () => {
               setValue("color", colorChange.hex);
             }}
           />
+          <p>{jobData?.title}</p>
           <button css={submitBannerButton} type="submit">
             배너 제출
           </button>
@@ -127,7 +141,7 @@ const TopBanner: NextPage = () => {
             <th css={expireDate}>만료 날짜</th>
             <th> </th>
           </tr>
-          {BannerDataArr.bannerDataArr.map((banner) => {
+          {bannerDataArr.bannerDataArr.map((banner) => {
             const { year: endYear, month: endMonth, date: endDate } = dateConverter(banner.endTime);
 
             return (
