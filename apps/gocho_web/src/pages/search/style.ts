@@ -12,7 +12,3 @@ export const title = css`
   margin-top: 3rem;
 `;
 
-export const buttonBox = css`
-  display: flex;
-  justify-content: center;
-`;

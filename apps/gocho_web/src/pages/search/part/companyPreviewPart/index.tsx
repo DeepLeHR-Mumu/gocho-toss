@@ -1,18 +1,29 @@
 import { FunctionComponent } from "react";
+import { useRouter } from "next/router";
+import { BsChevronRight } from "react-icons/bs";
 
 import { useUserInfo } from "shared-api/auth";
 import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { CompanyCard } from "shared-ui/card/companyCard";
+import { NormalButton } from "shared-ui/common/atom/button";
+import { COLORS } from "shared-style/color";
+import { useCompanyArr } from "shared-api/company";
 
-import { listContainer, noDataText } from "./style";
-import { CompanyListPartProps } from "./type";
+import { buttonBox, listContainer, noDataText } from "./style";
 
-export const CompanyPreviewPart: FunctionComponent<CompanyListPartProps> = ({ companyDataArr, count, isLoading }) => {
+export const CompanyPreviewPart: FunctionComponent = () => {
+  const router = useRouter();
+
   const { data: userData } = useUserInfo();
+  const { data: companyDataArr, isLoading: isCompanyLoading } = useCompanyArr({
+    q: router.query.q as string,
+    order: "recent",
+    limit: 12,
+  });
   const { data: userCompanyBookmarkArr, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
 
-  if (!companyDataArr || isLoading) {
+  if (!companyDataArr || isCompanyLoading) {
     return (
       <div css={listContainer}>
         {dummyArrCreator(6).map((dummy) => {
@@ -22,7 +33,7 @@ export const CompanyPreviewPart: FunctionComponent<CompanyListPartProps> = ({ co
     );
   }
 
-  if (count === 0) {
+  if (companyDataArr.count === 0) {
     return (
       <div css={listContainer}>
         <p css={noDataText}>검색 결과가 없습니다.</p>
@@ -32,7 +43,7 @@ export const CompanyPreviewPart: FunctionComponent<CompanyListPartProps> = ({ co
 
   return (
     <section css={listContainer}>
-      {companyDataArr.slice(0, 6).map((companyData) => {
+      {companyDataArr.companyDataArr.slice(0, 6).map((companyData) => {
         const isBookmarked = Boolean(
           userCompanyBookmarkArr?.some((company) => {
             return company.id === companyData.id;
@@ -48,6 +59,27 @@ export const CompanyPreviewPart: FunctionComponent<CompanyListPartProps> = ({ co
           />
         );
       })}
+      {companyDataArr?.count !== 0 && (
+        <div css={buttonBox}>
+          <NormalButton
+            text="기업정보 더보기"
+            iconObj={{
+              icon: BsChevronRight,
+              color: COLORS.BLUE_FIRST40,
+              size: 0.75,
+              position: "right",
+            }}
+            variant="outlined"
+            buttonClick={() => {
+              router.push({
+                pathname: "/search",
+                query: { q: router.query.q, page: 1, menu: "기업" },
+              });
+            }}
+            wide={false}
+          />
+        </div>
+      )}
     </section>
   );
 };

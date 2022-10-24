@@ -36,7 +36,7 @@ export const CompanyCardList: FunctionComponent<CompanyCardListProps> = ({ compa
             isBookmarked={isBookmarked}
             userId={userData?.id}
             refetchUserBookmark={refetch}
-            key={`UnifiedSearchCompanyCard${companyData.id}`}
+            key={`UnifiedSearchCompanyCard - ${companyData.id}`}
           />
         );
       })}

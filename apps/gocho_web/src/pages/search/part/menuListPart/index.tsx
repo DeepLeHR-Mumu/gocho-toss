@@ -1,35 +1,26 @@
-import { searchMenuDef } from "@pages/search/type";
 import { useRouter } from "next/router";
-import { Dispatch, FunctionComponent, SetStateAction } from "react";
+import { FunctionComponent } from "react";
+
 import { useCompanyArr } from "shared-api/company";
-import { useJobArr } from "shared-api/job";
+import { useUnifiedJobSearchArr } from "shared-api/job";
+
+import { COMPANY_RESULT_LIMIT } from "@pages/search/constant";
 
 import { searchMenuButtonArr } from "./constant";
 import { menuButton, menuElement, menuList } from "./style";
 
-interface MenuListPartProps {
-  setMenu: Dispatch<SetStateAction<searchMenuDef>>;
-  menu: string;
-}
-
-export const MenuListPart: FunctionComponent<MenuListPartProps> = ({ setMenu, menu }) => {
+export const MenuListPart: FunctionComponent = () => {
   const router = useRouter();
-  const jobPage = Number(router.query.page);
-  const companyPage = Number(router.query.page);
 
-  const { data: jobDataArr } = useJobArr({
-    q: JSON.stringify({ searchWord: router.query.q }),
-    order: "recent",
-    filter: "valid",
-    limit: 10,
-    offset: (jobPage - 1) * 10,
+  const { data: jobDataArr } = useUnifiedJobSearchArr({
+    searchWord: router.query.q,
+    offset: router.query.page,
   });
 
   const { data: companyDataArr } = useCompanyArr({
     q: router.query.q as string,
     order: "recent",
-    limit: 12,
-    offset: (companyPage - 1) * 12,
+    limit: COMPANY_RESULT_LIMIT,
   });
 
   const totalCount = (jobDataArr?.count || 0) + (companyDataArr?.count || 0);
@@ -38,25 +29,17 @@ export const MenuListPart: FunctionComponent<MenuListPartProps> = ({ setMenu, me
     <nav>
       <ul css={menuList}>
         {searchMenuButtonArr.map((menuText) => {
-          const isActive = menuText === menu;
+          const isActive = menuText === router.query.menu;
           return (
             <li css={menuElement} key={menuText}>
               <button
                 css={menuButton(isActive)}
                 type="button"
                 onClick={() => {
-                  if (menuText !== "전체") {
-                    router.push({
-                      pathname: "/search",
-                      query: { q: router.query.q, page: 1 },
-                    });
-                  } else {
-                    router.push({
-                      pathname: "/search",
-                      query: { q: router.query.q },
-                    });
-                  }
-                  setMenu(menuText);
+                  router.push({
+                    pathname: "/search",
+                    query: { ...router.query, page: 1, menu: menuText },
+                  });
                 }}
               >
                 {menuText} {menuText === "전체" && totalCount.toLocaleString("Ko-KR")}

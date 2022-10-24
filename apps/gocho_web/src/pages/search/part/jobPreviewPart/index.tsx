@@ -1,25 +1,25 @@
 import { FunctionComponent } from "react";
 import { useRouter } from "next/router";
+import { BsChevronRight } from "react-icons/bs";
 
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
-import { useJobArr } from "shared-api/job";
+import { useUnifiedJobSearchArr } from "shared-api/job";
 import { useUserInfo } from "shared-api/auth";
+import { NormalButton } from "shared-ui/common/atom/button";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
+import { COLORS } from "shared-style/color";
 
 import { JobCard } from "@component/card/jobCard";
 
-import { listContainer, noDataText } from "./style";
+import { buttonBox, listContainer, noDataText } from "./style";
 
 export const JobPreviewPart: FunctionComponent = () => {
   const router = useRouter();
 
   const { data: userData } = useUserInfo();
-  const { data: jobDataArr, isLoading: isJobLoading } = useJobArr({
-    q: JSON.stringify({ searchWord: router.query.q as string }),
-    order: "recent",
-    filter: "valid",
-    limit: 10,
-    offset: (1 - 1) * 10,
+  const { data: jobDataArr, isLoading: isJobLoading } = useUnifiedJobSearchArr({
+    searchWord: router.query.q,
+    offset: router.query.page,
   });
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
@@ -58,6 +58,27 @@ export const JobPreviewPart: FunctionComponent = () => {
           />
         );
       })}
+      {jobDataArr?.count !== 0 && (
+        <div css={buttonBox}>
+          <NormalButton
+            text="채용공고 더보기"
+            variant="outlined"
+            iconObj={{
+              icon: BsChevronRight,
+              color: COLORS.BLUE_FIRST40,
+              size: 0.75,
+              position: "right",
+            }}
+            buttonClick={() => {
+              router.push({
+                pathname: "/search",
+                query: { q: router.query.q, page: 1, menu: "공고" },
+              });
+            }}
+            wide={false}
+          />
+        </div>
+      )}
     </section>
   );
 };
