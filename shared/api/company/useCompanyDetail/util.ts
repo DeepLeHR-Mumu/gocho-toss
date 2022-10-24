@@ -29,7 +29,7 @@ export const companyConverter = (data: CompanyObjDef): UseCompanyDetailResultDef
         facility: data.welfare.facility,
         vacation: data.welfare.vacation,
         growth: data.welfare.growth,
-        etc: data.welfare.growth,
+        etc: data.welfare.etc,
       },
       nozo: {
         exists: data.nozo.exists,

@@ -2,26 +2,22 @@ import { css } from "@emotion/react";
 
 import { shorten } from "shared-style/common";
 import { COLORS } from "shared-style/color";
-import { PC_HOVER, TABLET } from "shared-style/mediaQuery";
+import { TABLET } from "shared-style/mediaQuery";
 
-export const cardWrapper = css`
-  width: 32%;
-  padding-bottom: 0.875rem;
-  border-bottom: 2px solid ${COLORS.GRAY90};
-  transition: border 0.2s ease;
+export const cardWrapper = (isCurrentTip: boolean) => {
+  return css`
+    width: 32%;
+    padding-bottom: 0.875rem;
+    border-bottom: 2px solid ${COLORS.GRAY90};
+    transition: border-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: ${isCurrentTip && COLORS.GRAY10};
+  `;
+};
 
-  ${PC_HOVER} {
-    :hover {
-      border-color: ${COLORS.GRAY10};
-    }
-  }
-`;
-
-export const linkArea = css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+export const linkArea = css``;
 
 export const cardImageBox = css`
   width: 11.25rem;
@@ -57,6 +53,7 @@ export const cardTitle = css`
 `;
 
 export const cardDesc = css`
+  word-break: break-word;
   font-size: 0.875rem;
   color: ${COLORS.GRAY40};
   line-height: 1.6;

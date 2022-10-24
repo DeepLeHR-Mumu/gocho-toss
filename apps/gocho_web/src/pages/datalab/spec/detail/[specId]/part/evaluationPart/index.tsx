@@ -111,7 +111,7 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
         <p css={hookingMentSection}>
           데이터 뒤에 사람있어요!
           <br />
-          평가는 차갑게, 가슴은 따스하게
+          평가는 차갑게, 가슴은 따뜻하게
           <br />
           😉 부탁드립니다
         </p>

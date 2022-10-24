@@ -69,6 +69,7 @@ export const 비로그인상태 = Template.bind({});
 비로그인상태.args = {
   detailData: {
     companyId: 24,
+    title: "댓글제목",
     name: "companyName",
     logoUrl:
       "http://localhost:3000/_next/image?url=https%3A%2F%2Fd2nnzfahmszi6w.cloudfront.net%2Fcompany_images%2F213%2Flogo.png&w=1080&q=75",
@@ -89,6 +90,7 @@ export const 로그인상태 = Template.bind({});
 로그인상태.args = {
   detailData: {
     companyId: 24,
+    title: "댓글제목",
     name: "companyName",
     logoUrl:
       "http://localhost:3000/_next/image?url=https%3A%2F%2Fd2nnzfahmszi6w.cloudfront.net%2Fcompany_images%2F213%2Flogo.png&w=1080&q=75",

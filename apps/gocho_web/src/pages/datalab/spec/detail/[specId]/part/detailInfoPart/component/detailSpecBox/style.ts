@@ -24,6 +24,7 @@ export const specStrCSS = css`
   color: ${COLORS.GRAY10};
   font-weight: 400;
   word-break: break-all;
+  white-space: pre-line;
   font-size: 0.875rem;
   line-height: 1.8;
 `;

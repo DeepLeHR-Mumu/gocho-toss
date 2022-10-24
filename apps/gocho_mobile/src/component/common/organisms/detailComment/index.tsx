@@ -135,7 +135,7 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
       return commentArr;
     }
     return commentArr.filter((comment) => {
-      return comment.title !== null;
+      return comment.title === detailData.title;
     });
   };
 

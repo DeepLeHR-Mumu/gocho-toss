@@ -6,7 +6,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
-import { useJobDetail } from "shared-api/job";
 import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { useUserInfo } from "shared-api/auth";
@@ -54,10 +53,6 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   const { isSuccess } = useUserInfo();
   const { setCurrentModal } = useModal();
 
-  const { data: jobDetailData, isLoading: jobDetailIsLoading } = useJobDetail({
-    id: Number(jobData?.id),
-  });
-
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobData?.id as number,
     end_time: jobData?.endTime as number,
@@ -80,7 +75,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
     },
   });
 
-  if (isSkeleton || !jobData || !jobDetailData || jobDetailIsLoading) {
+  if (isSkeleton || !jobData) {
     return (
       <div css={jobCardSkeleton}>
         <SkeletonBox />
@@ -193,7 +188,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
 
           <div css={taskTitle}>
             <p css={taskSummary}>채용중인 직무</p>
-            <p css={taskNumber}>{jobDetailData.positionArr.length}</p>
+            <p css={taskNumber}>{jobData.taskArr.length}</p>
           </div>
           <ul css={taskContainer}>
             {jobData.taskArr.map((task) => {

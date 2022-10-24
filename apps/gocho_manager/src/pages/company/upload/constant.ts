@@ -1,7 +1,6 @@
 import { welfareArrDef } from "./type";
 
 export const industryArr = [
-  "전체",
   "제약",
   "바이오",
   "반도체",

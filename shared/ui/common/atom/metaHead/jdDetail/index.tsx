@@ -25,7 +25,7 @@ export const JdDetailMetaHead: FunctionComponent<JdDetailMetaHeadProps> = ({ met
         <meta property="og:title" content={`${jdDetail.companyName} ${metaData.ogTitle}`} />
         <meta property="og:description" content={`${jdTitleText} ${metaData.ogDesc}`} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${DOMAIN}${metaData.path}`} />
+        <meta property="og:url" content={`${DOMAIN}${metaData.path}/${jdDetail.id}`} />
         <meta property="og:site_name" content={`고초대졸닷컴 | ${jdDetail.companyName} ${metaData.pageName}`} />
         <meta property="og:image" content={metaData.ogImage} />
         <meta property="og:article:author" content={`[${jdDetail.companyName}]${jdTitleText} ${metaData.title}`} />

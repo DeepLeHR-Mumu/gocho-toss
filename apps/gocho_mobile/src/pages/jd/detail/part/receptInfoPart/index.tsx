@@ -19,6 +19,7 @@ import {
   processBox,
   restPoint,
   flexAlignBox,
+  isEveryDate,
 } from "./style";
 
 export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDetailData }) => {
@@ -38,16 +39,24 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
     minute: endMinute,
   } = dateConverter(jobDetailData.endTime);
 
-  const isJobEnd = dDayCalculator(jobDetailData.endTime) === "만료";
+  const isDdayEnd = dDayCalculator(jobDetailData.endTime) === "만료";
+  const isEveryJob = Boolean(endYear === 9999);
+
   return (
     <div>
       <section css={sectionWrapper}>
-        <div css={infoBox(isJobEnd)}>
+        <div css={infoBox(isDdayEnd)}>
           <h4 css={infoTitle}>접수안내</h4>
           <ul css={beforeAfterDateBox}>
-            <li>{`${startYear}. ${startMonth}. ${startDate}  ${startHour}:${startMinute}`}</li>
-            <li>~</li>
-            <li>{`${endYear}. ${endMonth}. ${endDate}  ${endHour}:${endMinute}`}</li>
+            {isEveryJob ? (
+              <p css={isEveryDate}>상시채용입니다.</p>
+            ) : (
+              <>
+                <li>{`${startYear}. ${startMonth}. ${startDate}  ${startHour}:${startMinute}`}</li>
+                <li>~</li>
+                <li>{`${endYear}. ${endMonth}. ${endDate}  ${endHour}:${endMinute}`}</li>
+              </>
+            )}
           </ul>
           <div css={flexAlignBox}>
             <DdayBox endTime={jobDetailData.endTime} />

@@ -99,6 +99,7 @@ const JobsDetail: NextPage = () => {
   const commentData = {
     companyId: jobDetailData.company.companyId,
     name: jobDetailData.company.name,
+    title: jobDetailData.title,
     logoUrl: jobDetailData.company.logoUrl,
   };
 
@@ -117,6 +118,7 @@ const JobsDetail: NextPage = () => {
       </Head>
       <MetaHead
         jdDetail={{
+          id: jobDetailData.id,
           companyName: jobDetailData.company.name,
           jdTitle: jobDetailData.title,
           rotation: jobDetailData.positionArr[0].rotationArr[0],

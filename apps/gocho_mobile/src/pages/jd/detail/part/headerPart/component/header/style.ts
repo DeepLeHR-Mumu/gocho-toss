@@ -62,7 +62,7 @@ export const applyEndButton = css`
 `;
 
 export const cutBox = css`
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   white-space: nowrap;
   font-weight: 700;
   display: flex;
@@ -71,6 +71,7 @@ export const cutBox = css`
   padding: 0 0.25rem;
   border-radius: 1rem;
   width: fit-content;
+  padding: 0 1rem;
   height: 1.625rem;
   background-color: #f2f2f2;
   color: ${COLORS.BLUE_FIRST40};
@@ -90,7 +91,7 @@ export const buttonCSS: ButtonCSSDef = (isBookmarked) => {
     width: 8.5rem;
     height: 2.5rem;
     border-radius: 2rem;
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-weight: 500;
     transition: all 0.2s ease;
   `;
@@ -111,26 +112,20 @@ export const youtubeButton = css`
 export const dateBox = css`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   margin-bottom: 1rem;
-
-  > li {
-    margin-right: 0.5rem;
-
-    :last-of-type {
-      margin-right: 0;
-    }
-  }
 `;
 
 export const date = css`
   background-color: ${COLORS.GRAY90};
-  padding: 0 0.5rem;
+  padding: 0 1rem;
   display: flex;
   align-items: center;
   white-space: nowrap;
   justify-content: center;
   color: ${COLORS.GRAY40};
-  font-size: 0.875rem;
+  font-size: 1rem;
   height: 1.625rem;
   font-weight: 400;
   border-radius: 1rem;
@@ -149,7 +144,7 @@ export const companyName = css`
 export const title = css`
   color: ${COLORS.GRAY10};
   font-weight: 500;
-  font-size: 1.25rem;
+  font-size: 1.42rem;
   line-height: 2rem;
   word-break: keep-all;
   ${shorten(2)}

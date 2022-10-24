@@ -18,19 +18,19 @@ export interface RequestObjDef {
   pay_start: number;
   pay_desc: string;
   welfare: {
-    money: string;
-    health: string;
-    life: string;
-    holiday: string;
-    facility: string;
-    vacation: string;
-    growth: string;
-    etc: string;
+    money: string | null;
+    health: string | null;
+    life: string | null;
+    holiday: string | null;
+    facility: string | null;
+    vacation: string | null;
+    growth: string | null;
+    etc: string | null;
   };
 
   nozo: {
     exists: boolean;
-    desc: string;
+    desc: string | null;
   };
 
   factories: {
@@ -40,9 +40,9 @@ export interface RequestObjDef {
     female_number: number;
     product: string;
     bus_bool: boolean;
-    bus_etc: string;
+    bus_etc: string | null;
     dormitory_bool: boolean;
-    dormitory_etc: string;
+    dormitory_etc: string | null;
   }[];
 }
 

@@ -18,7 +18,7 @@ import { AsideMenu } from "../component/asideMenu";
 import { SimpleCard } from "./component/simpleCard";
 import { Pagination } from "./component/pagination";
 
-import { flexBox, title, wrapper, container, tableHead, cardBox, noMySpecDesc } from "./style";
+import { flexBox, wrapper, container, tableHead, cardBox, noMySpecDesc, totalMySpecCSS } from "./style";
 
 export const MySpecHistory: NextPage = () => {
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
@@ -62,7 +62,6 @@ export const MySpecHistory: NextPage = () => {
         <MetaHead metaData={META_SPEC_MY} />
         <Layout>
           <section>
-            <strong css={title}>등록한 스펙 내역</strong>
             <div css={flexBox}>
               <AsideMenu isFix={false} />
 
@@ -94,18 +93,17 @@ export const MySpecHistory: NextPage = () => {
       <MetaHead metaData={META_SPEC_MY} />
       <Layout>
         <section>
-          <strong css={title}>등록한 스펙 내역</strong>
           <div css={flexBox}>
             <AsideMenu isFix={false} />
 
             <article css={container}>
+              <p css={totalMySpecCSS}>등록된 전체스펙 : {filterMySpecHistoryArr.length.toLocaleString("Ko-KR")}개</p>
               <ul css={tableHead}>
                 <li>날짜</li>
                 <li>평균 점수</li>
                 <li>총 평가 수</li>
                 <li>상세보기</li>
               </ul>
-
               <div css={cardBox}>
                 {filterMySpecHistoryArr.length === 0 && (
                   <p css={noMySpecDesc}>스펙을 등록하고 평가받아보시겠어요? 🧐</p>
@@ -123,7 +121,6 @@ export const MySpecHistory: NextPage = () => {
                   );
                 })}
               </div>
-
               {filterMySpecHistoryArr.length > activeCardCount && (
                 <Pagination totalPage={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
               )}
