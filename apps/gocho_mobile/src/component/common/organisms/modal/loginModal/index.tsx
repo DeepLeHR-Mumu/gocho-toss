@@ -77,7 +77,7 @@ export const LoginModal: FunctionComponent = () => {
   };
 
   const kakaoLogin = () => {
-    sessionStorage.setItem("kakaopath", router.pathname);
+    sessionStorage.setItem("kakaopath", router.asPath);
     window.Kakao.Auth.authorize({
       redirectUri: `${window.location.origin}/kakaologin`,
     });

@@ -81,7 +81,8 @@ const UnifiedSearch: NextPage = () => {
         {menu === "전체" && (
           <div>
             <p css={title}>채용 공고 📮</p>
-            <JobPreviewPart jobDataArr={jobDataArr?.jobDataArr} count={jobDataArr?.count} isLoading={isJobLoading} />
+            {/* <JobPreviewPart jobDataArr={jobDataArr?.jobDataArr} count={jobDataArr?.count} isLoading={isJobLoading} /> */}
+            <JobPreviewPart />
             {jobDataArr?.count !== 0 && (
               <div css={buttonBox}>
                 <NormalButton
