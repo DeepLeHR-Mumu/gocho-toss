@@ -1,10 +1,8 @@
 import { useRouter } from "next/router";
 import { FunctionComponent } from "react";
 
-import { useCompanyArr } from "shared-api/company";
 import { useUnifiedJobSearchArr } from "shared-api/job";
-
-import { COMPANY_RESULT_LIMIT } from "@pages/search/constant";
+import { useUnifiedCompanySearchArr } from "shared-api/company";
 
 import { searchMenuButtonArr } from "./constant";
 import { menuButton, menuElement, menuList } from "./style";
@@ -17,10 +15,9 @@ export const MenuListPart: FunctionComponent = () => {
     offset: router.query.page,
   });
 
-  const { data: companyDataArr } = useCompanyArr({
-    q: router.query.q as string,
-    order: "recent",
-    limit: COMPANY_RESULT_LIMIT,
+  const { data: companyDataArr } = useUnifiedCompanySearchArr({
+    searchWord: router.query.q,
+    offset: router.query.page,
   });
 
   const totalCount = (jobDataArr?.count || 0) + (companyDataArr?.count || 0);

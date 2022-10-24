@@ -8,7 +8,7 @@ import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { CompanyCard } from "shared-ui/card/companyCard";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { COLORS } from "shared-style/color";
-import { useCompanyArr } from "shared-api/company";
+import { useUnifiedCompanySearchArr } from "shared-api/company";
 
 import { buttonBox, listContainer, noDataText } from "./style";
 
@@ -16,14 +16,13 @@ export const CompanyPreviewPart: FunctionComponent = () => {
   const router = useRouter();
 
   const { data: userData } = useUserInfo();
-  const { data: companyDataArr, isLoading: isCompanyLoading } = useCompanyArr({
-    q: router.query.q as string,
-    order: "recent",
-    limit: 12,
+  const { data: companyDataArr, isLoading: isCompanyDataArrLoading } = useUnifiedCompanySearchArr({
+    searchWord: router.query.q,
+    offset: router.query.page,
   });
   const { data: userCompanyBookmarkArr, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
 
-  if (!companyDataArr || isCompanyLoading) {
+  if (!companyDataArr || isCompanyDataArrLoading) {
     return (
       <div css={listContainer}>
         {dummyArrCreator(6).map((dummy) => {

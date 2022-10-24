@@ -15,9 +15,9 @@ export const getUnifiedCompanySearchArr: GetSearchCompanyArrDef = async ({ query
     params: {
       order: "recent",
       filter: "valid",
-      limit: 10,
-      offset: (Number(requestObj.offset || 1) - 1) * 10,
-      q: JSON.stringify({ searchWord: requestObj.searchWord }),
+      limit: 12,
+      offset: (Number(requestObj.offset || 1) - 1) * 12,
+      q: requestObj.searchWord,
     },
   });
   return data;

@@ -6,6 +6,6 @@ export interface SearchCompanyArrRequestDef {
 export const searchCompanyArrKeyObj = {
   all: [{ data: "searchComapnyArr" }] as const,
   searchArr: (requestObj: SearchCompanyArrRequestDef) => {
-    return [{ data: "searchComapnyArr", requestObj }] as const;
+    return [{ data: "searchCompanyArr", requestObj }] as const;
   },
 };
