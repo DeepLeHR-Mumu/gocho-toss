@@ -1,16 +1,17 @@
 import { ChangeEvent, useState } from "react";
 import type { NextPage } from "next";
+import Image from "next/image";
 import { ChromePicker } from "react-color";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { dateConverter } from "shared-util/date";
-import { useAddBanner } from "@api/banner/addBanner";
+import { useAddBanner } from "@api/banner/addMainBanner";
 import { useBannerArr } from "@api/banner/useBannerArr";
+import { useDeleteBanner } from "@api/banner/useDeleteBanner";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
-import Image from "next/image";
-import { useUploadBanner } from "@api/upload/useUploadBanner";
 import { BannerFormValues } from "./type";
 import {
   sectionContainer,
@@ -31,25 +32,24 @@ import {
 } from "./style";
 
 const MainBanner: NextPage = () => {
+  const queryClient = useQueryClient();
+
   const [color, setColor] = useState<string>("");
   const [imageSrc, setImageSrc] = useState<string>();
-  const [bannerPicture, setBannerPicture] = useState<FormData>();
-  const [checkMsg, setCheckMsg] = useState<string>();
+  const [bannerPicture, setBannerPicture] = useState<File>();
 
-  const { data: BannerDataArr, isLoading, isError } = useBannerArr({ type: 0 });
-  const { mutate: mutatePicture } = useUploadBanner();
-  const { mutate: mutateBanner } = useAddBanner();
+  const { data: BannerDataArr, isLoading, isError } = useBannerArr({ type: "M" });
+  const { mutate: addMutate } = useAddBanner();
+  const { mutate: deleteMutate } = useDeleteBanner();
 
   const { register, handleSubmit, setValue } = useForm<BannerFormValues>({});
 
   const onUploadBannerPicture = async (e: ChangeEvent<HTMLInputElement>) => {
-    const formData = new FormData();
     const reader = new FileReader();
 
     if (e.target.files?.[0]) {
       const img = e.target.files[0];
-      formData.append("banner", img);
-      setBannerPicture(formData);
+      setBannerPicture(img);
 
       reader.onloadend = () => {
         setImageSrc(reader.result as string);
@@ -58,23 +58,36 @@ const MainBanner: NextPage = () => {
     }
   };
 
-  const bannerPictureSubmit = () => {
+  const bannerSubmit: SubmitHandler<BannerFormValues> = (bannerObj) => {
+    const formData = new FormData();
+    const json = JSON.stringify(bannerObj);
+    const blob = new Blob([json], { type: "application/json" });
+    formData.append("dto", blob);
+
     if (bannerPicture) {
-      mutatePicture(
-        { type: 0, banner: bannerPicture },
+      formData.append("img", bannerPicture);
+    }
+    if (bannerPicture) {
+      addMutate(
+        { dto: blob, image: bannerPicture },
         {
-          onSuccess: (response) => {
-            // console.log(response.data);
-            setValue("file_id", response.data);
-            setCheckMsg("업로드 되었습니다!");
+          onSuccess: () => {
+            queryClient.invalidateQueries();
           },
         }
       );
     }
   };
 
-  const bannerSubmit: SubmitHandler<BannerFormValues> = (bannerObj) => {
-    mutateBanner(bannerObj);
+  const bannerDelete = (id: number) => {
+    deleteMutate(
+      { bannerId: id },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries();
+        },
+      }
+    );
   };
 
   if (!BannerDataArr || isLoading) {
@@ -140,9 +153,6 @@ const MainBanner: NextPage = () => {
                   <Image layout="fill" objectFit="contain" src={imageSrc} alt="" />
                 </div>
               )}
-              <button type="button" css={imageUploadLabel} onClick={bannerPictureSubmit}>
-                {checkMsg || "서버에 올리기"}
-              </button>
             </div>
           </div>
           <ChromePicker
@@ -180,7 +190,13 @@ const MainBanner: NextPage = () => {
                   {endYear}-{endMonth}-{endDate}
                 </td>
                 <td>
-                  <button css={deleteBannerButton} type="button">
+                  <button
+                    css={deleteBannerButton}
+                    type="button"
+                    onClick={() => {
+                      bannerDelete(banner.id);
+                    }}
+                  >
                     배너 삭제
                   </button>
                 </td>
