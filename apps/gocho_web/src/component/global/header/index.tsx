@@ -58,16 +58,16 @@ export const Header: FunctionComponent = () => {
   };
 
   const handleSubmit = preventRefresh(() => {
-    globalSearchEvent(query);
     const regExp = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/g;
-
+    
     if (query.match(regExp)) {
       setCurrentToast("검색어에 특수문자는 포함될 수 없습니다.");
       return;
     }
+    globalSearchEvent(query);
     router.push({
       pathname: "/search",
-      query: { q: query, page: 1 },
+      query: { q: query },
     });
   });
 
@@ -163,7 +163,6 @@ export const Header: FunctionComponent = () => {
         </div>
       </Layout>
       <div css={searchDimmed(isUnifiedSearchOpened)} />
-      {/* TODO: 다른 페이지에서 검색창과 겹치는 부분 있는지 확인! */}
       <form onSubmit={handleSubmit} css={unifiedSearchWrapper(isUnifiedSearchOpened)}>
         <input css={unifiedSearch} placeholder="궁금한 기업명이나 공고를 검색해보세요" onChange={handleParam} />
         <button type="submit" css={searchButton} aria-label="통합검색 실행">
