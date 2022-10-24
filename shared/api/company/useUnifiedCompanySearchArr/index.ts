@@ -16,7 +16,7 @@ export const getUnifiedCompanySearchArr: GetSearchCompanyArrDef = async ({ query
       order: "recent",
       filter: "valid",
       limit: 12,
-      offset: (Number(requestObj.offset || 1) - 1) * 12,
+      offset: ((Number(requestObj.offset) || 1) - 1) * 12,
       q: requestObj.searchWord,
     },
   });

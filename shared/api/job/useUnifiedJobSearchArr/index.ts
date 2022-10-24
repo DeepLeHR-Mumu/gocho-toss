@@ -13,7 +13,7 @@ export const getUnifiedJobSearchArr: GetJobArrDef = async ({ queryKey: [{ reques
       order: "recent",
       filter: "valid",
       limit: 10,
-      offset: (Number(requestObj.offset || 1) - 1) * 10,
+      offset: ((Number(requestObj.offset) || 1) - 1) * 10,
       q: JSON.stringify({ searchWord: requestObj.searchWord }),
     },
   });
