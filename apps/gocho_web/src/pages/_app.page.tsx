@@ -71,7 +71,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       window.location.href = `${protocol}//m.${mobileHost}${pathname}${search}`;
       return;
     }
-    window.location.href = `${protocol}//m.${host}${pathname}`;
+    window.location.href = `${protocol}//m.${host}${pathname}${search}`;
   }, []);
 
   // host : localhost:3000
