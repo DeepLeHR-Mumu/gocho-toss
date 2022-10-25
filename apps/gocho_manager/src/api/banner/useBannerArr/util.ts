@@ -1,34 +1,32 @@
 import { BannerObjDef } from "../type";
 
-export const selector = (bannerArr: BannerObjDef[], count: number, type: number) => {
+export const selector = (bannerArr: BannerObjDef[], count: number, type: string) => {
   const bannerDataArr = bannerArr.map((banner) => {
-    if (type === 0)
+    if (type === "M")
       return {
         id: banner.id,
-        jdid: banner.jd_id,
-        image: banner.image,
-        companyName: banner.company_name,
-        title: banner.jd_title,
         color: banner.color,
         startTime: banner.start_time,
         endTime: banner.end_time,
+        imageUrl: banner.image_url,
+        companyName: banner.company.name,
+        title: banner.jd.title,
       };
 
-    if (type === 1)
+    if (type === "T")
       return {
         id: banner.id,
-        jdid: banner.jd_id,
-        companyLogo: banner.company_logo,
-        companyName: banner.company_name,
-        title: banner.jd_title,
         color: banner.color,
         startTime: banner.start_time,
         endTime: banner.end_time,
+        companyLogo: banner.company.logo_url,
+        companyName: banner.company.name,
+        title: banner.jd.title,
       };
 
     return {
       id: banner.id,
-      image: banner.image,
+      image: banner.image_url,
       startTime: banner.start_time,
       endTime: banner.end_time,
     };

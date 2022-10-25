@@ -3,13 +3,14 @@ import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
-  dto: FormData;
+  dto: Blob;
+  image: File;
 }
 
-export interface PostJobDef {
-  ({ dto }: RequestObjDef): Promise<AdminResponseDef>;
+export interface PostMainBannerDef {
+  ({ dto, image }: RequestObjDef): Promise<AdminResponseDef>;
 }
 
-export interface useAddJobProps {
+export interface useAddMainBannerProps {
   (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
 }

@@ -3,13 +3,15 @@ import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
-  dto: FormData;
+  url: string;
+  start_time: number;
+  end_time: number;
 }
 
-export interface PostJobDef {
-  ({ dto }: RequestObjDef): Promise<AdminResponseDef>;
+export interface PostSideBannerDef {
+  ({ url, start_time, end_time }: RequestObjDef): Promise<AdminResponseDef>;
 }
 
-export interface useAddJobProps {
+export interface useAddSideBannerProps {
   (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
 }

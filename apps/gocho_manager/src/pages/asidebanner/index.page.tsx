@@ -11,7 +11,7 @@ import { dateConverter } from "shared-util/date";
 import { bannerBox, bannerImgBox } from "./style";
 
 const AsideBanner: NextPage = () => {
-  const { data: BannerDataArr, isLoading, isError } = useBannerArr({ type: 2 });
+  const { data: BannerDataArr, isLoading, isError } = useBannerArr({ type: "S" });
 
   if (!BannerDataArr || isLoading) {
     return <LoadingScreen />;
