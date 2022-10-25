@@ -1,6 +1,7 @@
 export interface SearchCompanyArrRequestDef {
-  offset: string | string[] | undefined;
+  page: string | string[] | undefined;
   searchWord: string | string[] | undefined;
+  limit: number;
 }
 
 export const searchCompanyArrKeyObj = {

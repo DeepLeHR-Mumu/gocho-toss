@@ -21,3 +21,14 @@ const nextConfig = {
 };
 
 module.exports = withTM(nextConfig);
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const intercept = require("intercept-stdout");
+
+function interceptStdout(text) {
+  if (process.env.NODE_ENV === "development" && text.includes("Duplicate atom key")) {
+    return "";
+  }
+  return text;
+}
+intercept(interceptStdout);

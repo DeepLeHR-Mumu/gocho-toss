@@ -13,7 +13,8 @@ export const JobListPart: FunctionComponent = () => {
 
   const { data: jobDataArr, isLoading: isJobLoading } = useUnifiedJobSearchArr({
     searchWord: router.query.q,
-    offset: router.query.page,
+    page: router.query.page,
+    limit: 10,
   });
 
   const totalPage = Math.ceil((jobDataArr?.count || 0) / 10);

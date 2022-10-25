@@ -9,6 +9,7 @@ import { globalSearchEvent } from "shared-ga/search";
 import { MAIN_URL } from "shared-constant/internalURL";
 import { useUserInfo } from "shared-api/auth";
 
+import { useToast } from "@recoil/hook/toast";
 import { Layout } from "@component/layout";
 
 import { AuthorizedMenu } from "./component/authorizedMenu";
@@ -36,9 +37,11 @@ export const GNB: FunctionComponent = () => {
   const [openedElement, setOpenedElement] = useState<openedElementDef>(null);
   const [query, setQuery] = useState("");
 
-  const { isSuccess } = useUserInfo();
-
   const router = useRouter();
+
+  const { setCurrentToast } = useToast();
+
+  const { isSuccess } = useUserInfo();
 
   const handleParam = (typeKeyword: ChangeEvent<HTMLInputElement>) => {
     return setQuery(typeKeyword.target.value);
@@ -55,11 +58,17 @@ export const GNB: FunctionComponent = () => {
     };
   };
 
-  const handleSubmit = preventRefresh(() => {
+  const submitHandler = preventRefresh(() => {
+    const regExp = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/g;
+
+    if (query.match(regExp)) {
+      setCurrentToast("검색어에 특수문자는 포함될 수 없습니다.");
+      return;
+    }
     globalSearchEvent(query);
     router.push({
       pathname: "/search",
-      query: { q: query, page: 1 },
+      query: { q: query },
     });
   });
 
@@ -93,13 +102,12 @@ export const GNB: FunctionComponent = () => {
                 });
               }}
             >
-              {openedElement === "메뉴" && <FiX />}
-              {openedElement === null && <FiMenu />}
+              {openedElement === "메뉴" ? <FiX /> : <FiMenu />}
             </button>
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} css={unifiedSearchWrapper(openedElement)}>
+        <form onSubmit={submitHandler} css={unifiedSearchWrapper(openedElement)}>
           <button
             css={backIcon}
             type="button"
@@ -127,12 +135,7 @@ export const GNB: FunctionComponent = () => {
             {menuArr.map((menu) => {
               return (
                 <li key={`navMenu_${menu.menuTitle}`}>
-                  <Link
-                    href={{
-                      pathname: menu.menuLink,
-                      query: { order: "recent", page: 1 },
-                    }}
-                  >
+                  <Link href={menu.menuLink}>
                     <a css={menuCategory}>{menu.menuTitle}</a>
                   </Link>
                   <ul css={subMenuArr}>
