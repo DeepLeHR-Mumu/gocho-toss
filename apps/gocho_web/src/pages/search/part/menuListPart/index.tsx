@@ -13,11 +13,13 @@ export const MenuListPart: FunctionComponent = () => {
   const { data: jobDataArr } = useUnifiedJobSearchArr({
     searchWord: router.query.q,
     page: router.query.page,
+    limit: 0,
   });
 
   const { data: companyDataArr } = useUnifiedCompanySearchArr({
     searchWord: router.query.q,
     page: router.query.page,
+    limit: 0,
   });
 
   const totalCount = (jobDataArr?.count || 0) + (companyDataArr?.count || 0);

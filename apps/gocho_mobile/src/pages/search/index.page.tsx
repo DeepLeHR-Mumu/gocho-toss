@@ -29,11 +29,13 @@ const UnifiedSearch: NextPage = () => {
   const { data: jobDataArr, isLoading: isJobArrLoading } = useUnifiedJobSearchArr({
     searchWord: router.query.q,
     page: router.query.page,
+    limit: 0,
   });
 
   const { data: companyDataArr, isLoading: isCompanyArrLoading } = useUnifiedCompanySearchArr({
     searchWord: router.query.q,
     page: router.query.page,
+    limit: 0,
   });
 
   useEffect(() => {

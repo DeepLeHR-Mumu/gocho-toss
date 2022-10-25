@@ -14,6 +14,7 @@ export const CompanyListPart: FunctionComponent = () => {
   const { data: companyDataArr, isLoading: isCompanyDataArrLoading } = useUnifiedCompanySearchArr({
     searchWord: router.query.q,
     page: router.query.page,
+    limit: 6,
   });
 
   const totalPage = Math.ceil((companyDataArr?.count || 0) / 6);

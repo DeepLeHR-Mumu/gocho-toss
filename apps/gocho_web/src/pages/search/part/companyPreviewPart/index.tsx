@@ -19,6 +19,7 @@ export const CompanyPreviewPart: FunctionComponent = () => {
   const { data: companyDataArr, isLoading: isCompanyDataArrLoading } = useUnifiedCompanySearchArr({
     searchWord: router.query.q,
     page: router.query.page,
+    limit: 6,
   });
   const { data: userCompanyBookmarkArr, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
 
