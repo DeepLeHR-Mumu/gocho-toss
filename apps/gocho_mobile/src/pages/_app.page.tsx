@@ -29,7 +29,7 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
     site: "datadoghq.com",
     service: "gocho-mobile",
 
-    version: '0.0.1',
+    version: "0.0.1",
     sampleRate: 30,
     sessionReplaySampleRate: 10,
     trackInteractions: true,
@@ -84,9 +84,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       return;
     }
     if (isDesktop) {
-      const { host, pathname, protocol } = window.location;
+      const { host, pathname, protocol, search } = window.location;
       const desktopHost = host.slice(host.indexOf(".") + 1);
-      window.location.href = `${protocol}//${desktopHost}${pathname}`;
+      window.location.href = `${protocol}//${desktopHost}${pathname}${search}`;
     }
   }, []);
 
