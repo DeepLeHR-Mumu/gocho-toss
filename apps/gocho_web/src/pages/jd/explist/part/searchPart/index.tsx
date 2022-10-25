@@ -32,7 +32,7 @@ export const SearchPart: FunctionComponent = () => {
 
   const { setCurrentToast } = useToast();
 
-  const postingSearch: SubmitHandler<PostingValues> = (postingVal) => {
+  const jdSearchHandler: SubmitHandler<PostingValues> = (postingVal) => {
     const specialCharacterRegEx = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/g;
     if (postingVal.name?.match(specialCharacterRegEx)) {
       setCurrentToast("검색어에 특수문자는 포함될 수 없습니다.");
@@ -60,7 +60,7 @@ export const SearchPart: FunctionComponent = () => {
 
   return (
     <div css={container}>
-      <form css={wrapper} onSubmit={handleSubmit(postingSearch)}>
+      <form css={wrapper} onSubmit={handleSubmit(jdSearchHandler)}>
         <input
           {...register("name")}
           css={searchBox}
