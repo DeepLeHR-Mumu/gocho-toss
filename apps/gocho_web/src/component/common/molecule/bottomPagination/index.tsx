@@ -22,13 +22,17 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ lin
         type="button"
         aria-label="첫 페이지로 이동"
         onClick={() => {
-          router.push({
-            pathname: linkObj.pathname,
-            query: {
-              ...router.query,
-              page: 1,
+          router.push(
+            {
+              pathname: linkObj.pathname,
+              query: {
+                ...router.query,
+                page: 1,
+              },
             },
-          });
+            undefined,
+            { scroll: false }
+          );
         }}
       >
         <FiChevronsLeft />
@@ -40,13 +44,17 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ lin
         disabled={currentPageNumber === 1}
         aria-label="이전 페이지로 이동"
         onClick={() => {
-          router.push({
-            pathname: linkObj.pathname,
-            query: {
-              ...router.query,
-              page: currentPageNumber - 1,
+          router.push(
+            {
+              pathname: linkObj.pathname,
+              query: {
+                ...router.query,
+                page: currentPageNumber - 1,
+              },
             },
-          });
+            undefined,
+            { scroll: false }
+          );
         }}
       >
         <FiChevronLeft />
@@ -64,13 +72,17 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ lin
                   type="button"
                   aria-label={`${pageIndex}번 페이지로 이동`}
                   onClick={() => {
-                    router.push({
-                      pathname: linkObj.pathname,
-                      query: {
-                        ...router.query,
-                        page: pageIndex,
+                    router.push(
+                      {
+                        pathname: linkObj.pathname,
+                        query: {
+                          ...router.query,
+                          page: pageIndex,
+                        },
                       },
-                    });
+                      undefined,
+                      { scroll: false }
+                    );
                   }}
                 >
                   {pageIndex}
@@ -87,13 +99,17 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ lin
         disabled={currentPageNumber === totalPage}
         aria-label="다음 페이지로 이동"
         onClick={() => {
-          router.push({
-            pathname: linkObj.pathname,
-            query: {
-              ...router.query,
-              page: currentPageNumber + 1,
+          router.push(
+            {
+              pathname: linkObj.pathname,
+              query: {
+                ...router.query,
+                page: currentPageNumber + 1,
+              },
             },
-          });
+            undefined,
+            { scroll: false }
+          );
         }}
       >
         <FiChevronRight />
@@ -104,13 +120,17 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ lin
         type="button"
         aria-label="마지막 페이지로 이동"
         onClick={() => {
-          router.push({
-            pathname: linkObj.pathname,
-            query: {
-              ...router.query,
-              page: totalPage,
+          router.push(
+            {
+              pathname: linkObj.pathname,
+              query: {
+                ...router.query,
+                page: totalPage,
+              },
             },
-          });
+            undefined,
+            { scroll: false }
+          );
         }}
       >
         <FiChevronsRight />

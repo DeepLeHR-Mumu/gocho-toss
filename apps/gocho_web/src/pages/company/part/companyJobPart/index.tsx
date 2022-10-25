@@ -20,6 +20,7 @@ export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({ company
   } = useInfiniteJobArr({
     companyId,
     limit: 10,
+    order:"recent"
   });
 
   const { data: userData } = useUserInfo();

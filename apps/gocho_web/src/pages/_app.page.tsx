@@ -30,8 +30,7 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
     site: "datadoghq.com",
     service: "gocho-web",
 
-    // Specify a version number to identify the deployed version of your application in Datadog
-    // version: '1.0.0',
+    version: '0.0.1',
     sampleRate: 30,
     sessionReplaySampleRate: 10,
     trackInteractions: true,

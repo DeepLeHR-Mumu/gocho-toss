@@ -11,10 +11,6 @@ export type SearchQueryDef = {
   searchWord: string | null;
 };
 
-export interface changeOrderDef {
-  (order: OrderDef): void;
-}
-
 export interface SearchValues {
   possibleEdu: string[];
   place: string[];

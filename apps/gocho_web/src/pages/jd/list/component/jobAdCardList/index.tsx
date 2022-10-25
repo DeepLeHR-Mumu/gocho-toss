@@ -15,6 +15,7 @@ export const JobAdCardList: FunctionComponent = () => {
   const { data: jobDataArr, isLoading } = useJobArr({
     order: "view",
     filter: "valid",
+    offset: 0,
   });
 
   if (!jobDataArr || isLoading) {
