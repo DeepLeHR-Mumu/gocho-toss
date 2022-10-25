@@ -1,5 +1,5 @@
 export interface BannerArrRequestObjDef {
-  type: number;
+  type: "M" | "T" | "S";
 }
 
 export const bannerArrKeyObj = {

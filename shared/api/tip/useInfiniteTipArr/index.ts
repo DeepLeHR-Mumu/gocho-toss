@@ -1,8 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-
 import { tipArrKeyObj, TipArrRequestObjDef } from "shared-constant/queryKeyFactory/tip/arrKeyObj";
-import { axiosInstance } from "../../axiosInstance";
 
+import { axiosInstance } from "../../axiosInstance";
 import { GetInfiniteTipArrObjDef } from "./type";
 import { selector } from "./util";
 

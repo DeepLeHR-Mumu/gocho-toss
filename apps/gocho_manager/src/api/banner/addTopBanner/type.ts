@@ -6,10 +6,10 @@ export interface RequestObjDef {
   dto: FormData;
 }
 
-export interface PostJobDef {
+export interface PostTopBannerDef {
   ({ dto }: RequestObjDef): Promise<AdminResponseDef>;
 }
 
-export interface useAddJobProps {
+export interface useAddTopBannerProps {
   (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
 }
