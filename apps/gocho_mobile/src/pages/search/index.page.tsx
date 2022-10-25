@@ -1,16 +1,15 @@
 import { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { BsChevronRight } from "react-icons/bs";
 import Head from "next/head";
 
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { META_INDEX } from "shared-constant/meta";
-import { useJobArr } from "shared-api/job";
-import { useCompanyArr } from "shared-api/company";
+import { useUnifiedJobSearchArr } from "shared-api/job";
+import { useUnifiedCompanySearchArr } from "shared-api/company";
 import { COLORS } from "shared-style/color";
 import { NormalButton } from "shared-ui/common/atom/button";
-import { scrollToTop } from "shared-ui/common/atom/scrollTop";
 import { searchFunnelEvent } from "shared-ga/search";
 import { GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
 
@@ -23,47 +22,33 @@ import { JobListPart } from "./part/jobListPart";
 import { CompanyListPart } from "./part/companyListPart";
 
 import { mainContainer, menuList, menuElement, menuButton, title, buttonBox } from "./style";
-import { searchMenuDef } from "./type";
 
 const UnifiedSearch: NextPage = () => {
   const router = useRouter();
-  const searchWord = router.query.q as string;
 
-  const jobLimit = 6;
-  const companyLimit = 6;
-  const [menu, setMenu] = useState<searchMenuDef>("전체");
-  const [jobPage, setJobPage] = useState(Number(router.query.page) || 1);
-  const [companyPage, setCompanyPage] = useState(Number(router.query.page) || 1);
+  const { data: jobDataArr, isLoading: isJobArrLoading } = useUnifiedJobSearchArr({
+    searchWord: router.query.q,
+    page: router.query.page,
+  });
 
-  useEffect(() => {
-    setJobPage(1);
-    setCompanyPage(1);
-  }, [searchWord]);
+  const { data: companyDataArr, isLoading: isCompanyArrLoading } = useUnifiedCompanySearchArr({
+    searchWord: router.query.q,
+    page: router.query.page,
+  });
 
   useEffect(() => {
-    setJobPage(Number(router.query.page));
-    setCompanyPage(Number(router.query.page));
-    scrollToTop();
-  }, [router.query]);
+    if (!router.isReady) return;
+    if (!router.query.menu && !router.query.q) {
+      router.replace({ pathname: "/search", query: { menu: "전체", q: "", page: 0 } });
+    }
+    if (!router.query.menu && router.query.q) {
+      router.replace({ pathname: "/search", query: { q: router.query.q, menu: "전체", page: 0 } });
+    }
+  }, [router]);
 
   useEffect(() => {
     searchFunnelEvent();
   }, []);
-
-  const { data: jobDataArr, isLoading: isJobLoading } = useJobArr({
-    q: JSON.stringify({ searchWord }),
-    order: "recent",
-    filter: "valid",
-    limit: jobLimit,
-    offset: (jobPage - 1) * jobLimit,
-  });
-
-  const { data: companyDataArr, isLoading: isCompanyLoading } = useCompanyArr({
-    q: searchWord,
-    order: "recent",
-    limit: companyLimit,
-    offset: (companyPage - 1) * companyLimit,
-  });
 
   const totalCount = (jobDataArr?.count || 0) + (companyDataArr?.count || 0);
 
@@ -76,25 +61,17 @@ const UnifiedSearch: NextPage = () => {
       <nav>
         <ul css={menuList}>
           {searchMenuButtonArr.map((menuText) => {
-            const isActive = menuText === menu;
+            const isActive = menuText === router.query.menu;
             return (
               <li css={menuElement} key={menuText}>
                 <button
                   css={menuButton(isActive)}
                   type="button"
                   onClick={() => {
-                    if (menuText !== "전체") {
-                      router.push({
-                        pathname: "/search",
-                        query: { q: router.query.q, page: 1 },
-                      });
-                    } else {
-                      router.push({
-                        pathname: "/search",
-                        query: { q: router.query.q },
-                      });
-                    }
-                    setMenu(menuText);
+                    router.push({
+                      pathname: "/search",
+                      query: { ...router.query, page: 1, menu: menuText },
+                    });
                   }}
                 >
                   {menuText} {menuText === "전체" && totalCount.toLocaleString("Ko-KR")}
@@ -107,10 +84,10 @@ const UnifiedSearch: NextPage = () => {
         </ul>
       </nav>
       <Layout>
-        {menu === "전체" && (
+        {router.query.menu === "전체" && (
           <div>
             <p css={title}>채용 공고 📮</p>
-            <JobPreviewPart jobDataArr={jobDataArr?.jobDataArr} count={jobDataArr?.count} isLoading={isJobLoading} />
+            <JobPreviewPart jobDataArr={jobDataArr?.jobDataArr} count={jobDataArr?.count} isLoading={isJobArrLoading} />
             {jobDataArr?.count !== 0 && (
               <div css={buttonBox}>
                 <NormalButton
@@ -123,10 +100,9 @@ const UnifiedSearch: NextPage = () => {
                   }}
                   variant="outlined"
                   buttonClick={() => {
-                    setMenu("공고");
                     router.push({
                       pathname: "/search",
-                      query: { q: router.query.q, page: 1 },
+                      query: { q: router.query.q, page: 1, menu: "공고" },
                     });
                   }}
                   wide={false}
@@ -138,7 +114,7 @@ const UnifiedSearch: NextPage = () => {
             <CompanyPreviewPart
               companyDataArr={companyDataArr?.companyDataArr}
               count={companyDataArr?.count}
-              isLoading={isCompanyLoading}
+              isLoading={isCompanyArrLoading}
             />
             {companyDataArr?.count !== 0 && (
               <div css={buttonBox}>
@@ -152,10 +128,9 @@ const UnifiedSearch: NextPage = () => {
                   }}
                   variant="outlined"
                   buttonClick={() => {
-                    setMenu("기업");
                     router.push({
                       pathname: "/search",
-                      query: { q: router.query.q, page: 1 },
+                      query: { q: router.query.q, page: 1, menu: "기업" },
                     });
                   }}
                   wide={false}
@@ -164,26 +139,8 @@ const UnifiedSearch: NextPage = () => {
             )}
           </div>
         )}
-        {jobDataArr && menu === "공고" && (
-          <JobListPart
-            jobDataArr={jobDataArr?.jobDataArr}
-            isLoading={isJobLoading}
-            total={jobDataArr.count}
-            limit={jobLimit}
-            page={jobPage}
-            setPage={setJobPage}
-          />
-        )}
-        {companyDataArr && menu === "기업" && (
-          <CompanyListPart
-            companyDataArr={companyDataArr?.companyDataArr}
-            isLoading={isCompanyLoading}
-            total={companyDataArr.count}
-            limit={companyLimit}
-            page={companyPage}
-            setPage={setCompanyPage}
-          />
-        )}
+        {jobDataArr && router.query.menu === "공고" && <JobListPart />}
+        {companyDataArr && router.query.menu === "기업" && <CompanyListPart />}
       </Layout>
     </main>
   );

@@ -19,7 +19,7 @@ export const JobPreviewPart: FunctionComponent = () => {
   const { data: userData } = useUserInfo();
   const { data: jobDataArr, isLoading: isJobLoading } = useUnifiedJobSearchArr({
     searchWord: router.query.q,
-    offset: router.query.page,
+    page: router.query.page,
   });
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 

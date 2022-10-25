@@ -102,11 +102,7 @@ export const ListPart: FunctionComponent = () => {
       setTotal(jobDataArr.count);
     }
   }, [jobDataArr]);
-  useEffect(() => {
-    if (Object.keys(router.query).length === 0 && router.isReady) {
-      router.replace({ pathname: JOBS_LIST_URL, query: { page: 1, order: "recent" } });
-    }
-  }, [router]);
+
   useEffect(() => {
     if (router.query.page && firstRenderingRef.current) {
       firstRenderingRef.current = false;
