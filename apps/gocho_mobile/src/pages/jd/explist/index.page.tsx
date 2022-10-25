@@ -73,7 +73,7 @@ const JobsExpList: NextPage = () => {
     q: router.query.q as string,
     order: router.query.order as OrderDef,
     limit,
-    offset: (Number(router.query.page) - 1) * 10,
+    offset: (Number(router.query.page) - 1) * 5,
   });
 
   useEffect(() => {
