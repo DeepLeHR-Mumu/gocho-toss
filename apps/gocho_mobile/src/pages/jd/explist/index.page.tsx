@@ -13,6 +13,9 @@ import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { META_JD_EXPLIST } from "shared-constant/meta";
 import { GOCHO_DESKTOP_URL, JOBS_EXPLIST_URL } from "shared-constant/internalURL";
 import { expiredJdListFunnelEvent, expiredJdListSortingEvent } from "shared-ga/jd";
+
+import { useToast } from "@recoil/hook/toast";
+
 import { ExpJobCardList } from "./component/expJobCardList";
 import { setJobOrderButtonArr } from "./constant";
 import {
@@ -27,52 +30,51 @@ import {
   noDataBox,
   noDataDesc,
 } from "./style";
-import { changeOrderDef, PostingValues, OrderDef, SearchQueryDef } from "./type";
+import { changeOrderDef, PostingValues, OrderDef } from "./type";
 
 const JobsExpList: NextPage = () => {
   const router = useRouter();
   const limit = 6;
   const [total, setTotal] = useState<number>(0);
-  const [page, setPage] = useState<number>(Number(router.query.page));
-  const [activeOrder, setActiveOrder] = useState<OrderDef>(router.query.order as OrderDef);
-  const [searchQuery, setSearchQuery] = useState<SearchQueryDef>({
-    name: router.query.q || undefined,
-  } as SearchQueryDef);
 
   const { register, handleSubmit } = useForm<PostingValues>({
     defaultValues: {
-      name: searchQuery.name,
+      name: null,
     },
   });
 
-  const postingSearch: SubmitHandler<PostingValues> = (searchVal) => {
+  const { setCurrentToast } = useToast();
+
+  const jdSearchHandler: SubmitHandler<PostingValues> = (searchVal) => {
+    const specialCharacterRegEx = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/g;
+    if (searchVal.name?.match(specialCharacterRegEx)) {
+      setCurrentToast("검색어에 특수문자는 포함될 수 없습니다.");
+      return;
+    }
+
     router.push({
       pathname: JOBS_EXPLIST_URL,
-      query: { page: 1, order: activeOrder, q: searchVal.name },
-    });
-    setSearchQuery({
-      name: searchVal.name,
+      query: { ...router.query, page: 1, q: searchVal.name },
     });
   };
 
-  const changeOrder: changeOrderDef = (newId) => {
-    setActiveOrder(newId);
+  const changeOrderHandler: changeOrderDef = (orderStr) => {
+    router.push(
+      {
+        pathname: JOBS_EXPLIST_URL,
+        query: { ...router.query, page: 1, order: orderStr },
+      },
+      undefined,
+      { scroll: false }
+    );
   };
 
   const { data: companyDataArr, isLoading } = useCompanyArr({
     q: router.query.q as string,
-    order: activeOrder,
+    order: router.query.order as OrderDef,
     limit,
-    offset: (page - 1) * 5,
+    offset: (Number(router.query.page) - 1) * 5,
   });
-
-  useEffect(() => {
-    setPage(Number(router.query.page));
-  }, [router.query.page]);
-
-  useEffect(() => {
-    setActiveOrder(router.query.order as OrderDef);
-  }, [router.query.order]);
 
   useEffect(() => {
     if (companyDataArr) {
@@ -96,7 +98,7 @@ const JobsExpList: NextPage = () => {
         <InvisibleH2 title="기업별 만료 공고" />
         <strong css={title}>만료 공고</strong>
         <section css={sectionContainer}>
-          <form onSubmit={handleSubmit(postingSearch)}>
+          <form onSubmit={handleSubmit(jdSearchHandler)}>
             <div css={searchContainer}>
               <input {...register("name", {})} css={searchBox} placeholder="검색어를 입력해주세요" />
               <button type="submit" css={searchButton} aria-label="만료 공고 검색">
@@ -106,7 +108,7 @@ const JobsExpList: NextPage = () => {
           </form>
           <div css={buttonArrContainer}>
             {setJobOrderButtonArr.map((button) => {
-              const isActive = button.order === activeOrder;
+              const isActive = button.order === router.query.order;
               return (
                 <button
                   type="button"
@@ -114,11 +116,7 @@ const JobsExpList: NextPage = () => {
                   css={setJobOrderButton(isActive)}
                   onClick={() => {
                     expiredJdListSortingEvent(button.text);
-                    router.push({
-                      pathname: JOBS_EXPLIST_URL,
-                      query: { ...router.query, page: 1, order: button.order },
-                    });
-                    return changeOrder(button.order);
+                    changeOrderHandler(button.order);
                   }}
                 >
                   {button.text}

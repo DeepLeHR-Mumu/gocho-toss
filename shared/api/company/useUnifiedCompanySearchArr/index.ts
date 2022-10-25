@@ -15,8 +15,8 @@ export const getUnifiedCompanySearchArr: GetSearchCompanyArrDef = async ({ query
     params: {
       order: "recent",
       filter: "valid",
-      limit: 12,
-      offset: ((Number(requestObj.offset) || 1) - 1) * 12,
+      limit: requestObj.limit,
+      offset: ((Number(requestObj.page) || 1) - 1) * requestObj.limit,
       q: requestObj.searchWord,
     },
   });
@@ -28,7 +28,7 @@ export const useUnifiedCompanySearchArr = (requestObj: SearchCompanyArrRequestDe
     select: ({ data, count }) => {
       return selector(data, count);
     },
-    enabled: Number.isInteger(Number(requestObj.offset)) && typeof requestObj.searchWord !== "undefined",
+    enabled: Number.isInteger(Number(requestObj.page)) && typeof requestObj.searchWord !== "undefined",
   });
   return queryResult;
 };

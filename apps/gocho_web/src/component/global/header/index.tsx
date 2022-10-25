@@ -57,9 +57,9 @@ export const Header: FunctionComponent = () => {
     };
   };
 
-  const handleSubmit = preventRefresh(() => {
+  const submitHandler = preventRefresh(() => {
     const regExp = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/g;
-    
+
     if (query.match(regExp)) {
       setCurrentToast("검색어에 특수문자는 포함될 수 없습니다.");
       return;
@@ -163,7 +163,7 @@ export const Header: FunctionComponent = () => {
         </div>
       </Layout>
       <div css={searchDimmed(isUnifiedSearchOpened)} />
-      <form onSubmit={handleSubmit} css={unifiedSearchWrapper(isUnifiedSearchOpened)}>
+      <form onSubmit={submitHandler} css={unifiedSearchWrapper(isUnifiedSearchOpened)}>
         <input css={unifiedSearch} placeholder="궁금한 기업명이나 공고를 검색해보세요" onChange={handleParam} />
         <button type="submit" css={searchButton} aria-label="통합검색 실행">
           <FiSearch />

@@ -12,8 +12,8 @@ export const getUnifiedJobSearchArr: GetJobArrDef = async ({ queryKey: [{ reques
     params: {
       order: "recent",
       filter: "valid",
-      limit: 10,
-      offset: ((Number(requestObj.offset) || 1) - 1) * 10,
+      limit: requestObj.limit,
+      offset: ((Number(requestObj.page) || 1) - 1) * requestObj.limit,
       q: JSON.stringify({ searchWord: requestObj.searchWord }),
     },
   });
@@ -25,7 +25,7 @@ export const useUnifiedJobSearchArr = (requestObj: SearchJobRequestObj) => {
     select: ({ data, count }) => {
       return selector(data, count);
     },
-    enabled: Number.isInteger(Number(requestObj.offset)) && typeof requestObj.searchWord !== "undefined",
+    enabled: Number.isInteger(Number(requestObj.page)) && typeof requestObj.searchWord !== "undefined",
   });
   return queryResult;
 };
