@@ -21,3 +21,7 @@ export const setJobOrderButtonArr: {
     order: "popular",
   },
 ];
+
+export const limit = 10;
+
+export const specialCharacterRegExp = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/g;

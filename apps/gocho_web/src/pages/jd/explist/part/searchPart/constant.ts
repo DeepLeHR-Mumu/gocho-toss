@@ -1,4 +1,4 @@
-import { OrderDef, TextDef } from "./type";
+import { OrderDef, TextDef } from "../../type";
 
 export const setJobOrderButtonArr: {
   text: TextDef;

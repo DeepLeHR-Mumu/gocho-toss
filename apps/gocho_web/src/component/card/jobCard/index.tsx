@@ -105,7 +105,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         { userId, elemId: jobData.id },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(jobArrKeyObj.jobArr({}));
+            queryClient.invalidateQueries(jobArrKeyObj.all);
             jdBookmarkEvent(jobData.id);
           },
         }
@@ -118,7 +118,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         { userId, elemId: jobData.id },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(jobArrKeyObj.jobArr({}));
+            queryClient.invalidateQueries(jobArrKeyObj.all);
           },
         }
       );

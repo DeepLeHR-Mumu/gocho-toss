@@ -1,43 +1,45 @@
 import { FunctionComponent } from "react";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import Link from "next/link";
 import { useRouter } from "next/router";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 import { PaginationProps } from "./type";
 import { paginationContainer, movePageButton } from "./style";
 
 export const Pagination: FunctionComponent<PaginationProps> = ({ linkObj, totalPage }) => {
-  const { query } = useRouter();
-  const currentPageNumber = Number(query.page);
+  const router = useRouter();
+
+  const currentPageNumber = Number(router.query.page);
+
+  const routeBeforePageHandler = () => {
+    router.replace({
+      pathname: linkObj.pathname,
+      query: { ...router.query, page: currentPageNumber > 1 ? currentPageNumber - 1 : 1 },
+    });
+  };
+
+  const routeNextPagePageHandler = () => {
+    router.push({
+      pathname: linkObj.pathname,
+      query: {
+        ...router.query,
+        page: currentPageNumber !== totalPage ? currentPageNumber + 1 : totalPage,
+      },
+    });
+  };
 
   return (
     <div css={paginationContainer}>
-      <Link
-        href={{
-          pathname: linkObj.pathname,
-          query: { ...query, page: currentPageNumber > 1 ? currentPageNumber - 1 : 1 },
-        }}
-        passHref
-      >
-        <a css={movePageButton}>
+      <button type="button" onClick={routeBeforePageHandler}>
+        <div css={movePageButton}>
           <FiChevronLeft />
-        </a>
-      </Link>
+        </div>
+      </button>
       {currentPageNumber}/{totalPage}
-      <Link
-        href={{
-          pathname: linkObj.pathname,
-          query: {
-            ...query,
-            page: currentPageNumber !== totalPage ? currentPageNumber + 1 : totalPage,
-          },
-        }}
-        passHref
-      >
+      <button type="button" onClick={routeNextPagePageHandler}>
         <a css={movePageButton}>
           <FiChevronRight />
         </a>
-      </Link>
+      </button>
     </div>
   );
 };

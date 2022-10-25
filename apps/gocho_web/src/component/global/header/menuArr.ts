@@ -14,16 +14,13 @@ export const menuArr = [
     menuTitle: "채용공고",
     mainUrl: "jd",
     menuLink: JOBS_LIST_URL,
-    pageQuery: true,
     subMenuArr: [
       {
-        pageQuery: true,
         pageOrder: "recent",
         menuTitle: "최신채용공고",
         menuLink: JOBS_LIST_URL,
       },
       {
-        pageQuery: true,
         pageOrder: "recent",
         menuTitle: "만료채용공고",
         menuLink: JOBS_EXPLIST_URL,
@@ -36,12 +33,10 @@ export const menuArr = [
     menuLink: COMMUNITY_POSTINGS_LIST_URL,
     subMenuArr: [
       {
-        pageQuery: false,
         menuTitle: "자유게시판",
         menuLink: COMMUNITY_POSTINGS_LIST_URL,
       },
       {
-        pageQuery: false,
         menuTitle: "고수들의 취업꿀팁",
         menuLink: COMMUNITY_TIPS_LIST_URL,
       },
@@ -58,12 +53,10 @@ export const menuArr = [
     menuLink: SPEC_LIST_URL,
     subMenuArr: [
       {
-        pageQuery: false,
         menuTitle: "스펙평가",
         menuLink: SPEC_LIST_URL,
       },
       {
-        pageQuery: false,
         menuTitle: "합격데이터",
         menuLink: DATALAB_DETAIL,
       },
