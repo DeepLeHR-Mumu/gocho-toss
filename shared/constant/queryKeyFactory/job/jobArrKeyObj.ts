@@ -1,5 +1,5 @@
 export interface JobArrRequestObjDef {
-  order?: "recent" | "popular" | "rand" | "view" | "end" | "com";
+  order: "recent" | "popular" | "rand" | "view" | "end" | "com" | undefined;
   limit?: number;
   offset?: number;
   q?: string;

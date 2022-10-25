@@ -62,8 +62,8 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   const router = useRouter();
   const { isSuccess } = useUserInfo();
   const { setCurrentModal } = useModal();
-
   const { data: userInfoData } = useUserInfo();
+
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobData?.id as number,
     end_time: jobData?.endTime as number,
@@ -88,7 +88,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
 
   const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
 
-  if (isSkeleton || jobData === undefined) {
+  if (isSkeleton || !jobData) {
     return (
       <div css={jobCardSkeleton}>
         <SkeletonBox />
@@ -105,7 +105,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         { userId, elemId: jobData.id },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(jobArrKeyObj.jobArr({}));
+            queryClient.invalidateQueries(jobArrKeyObj.all);
             jdBookmarkEvent(jobData.id);
           },
         }
@@ -118,7 +118,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         { userId, elemId: jobData.id },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(jobArrKeyObj.jobArr({}));
+            queryClient.invalidateQueries(jobArrKeyObj.all);
           },
         }
       );
@@ -162,7 +162,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         >
           <p css={viewWrapper}>
             <FiEye />
-            <span css={viewNumber}>{jobData.view}</span>
+            <span css={viewNumber}>{jobData.view.toLocaleString("Ko-KR")}</span>
           </p>
 
           <div css={mainContainer}>
@@ -227,11 +227,14 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
             </p>
             <ul css={taskArrCSS}>
               {jobData.taskArr.map((task) => {
-                return (
-                  <li css={taskBox} key={`${jobData.id}${task}`}>
-                    {task}
-                  </li>
-                );
+                if (task !== null) {
+                  return (
+                    <li css={taskBox} key={`${jobData.id}${task}`}>
+                      {task}
+                    </li>
+                  );
+                }
+                return <li key={`${jobData.id}${task}`} />;
               })}
             </ul>
           </div>

@@ -10,13 +10,13 @@ import { JOBS_LIST_URL } from "shared-constant/internalURL";
 import { jdListFunnelEvent, jdSearchEvent } from "shared-ga/jd";
 // import { myFilterLoadEvent, myFilterSaveEvent } from "shared-ga/jd";
 
-
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
 import { BottomPopup } from "@component/bottomPopup";
+import { useToast } from "@recoil/hook/toast";
 
 import { JobCardList } from "../../component/jobCardList";
 import { Filter } from "../../component/filter";
-import { setJobOrderButtonArr } from "./constant";
+import { setJobOrderButtonArr, specialCharacterRegExp } from "./constant";
 import {
   partContainer,
   titleContainer,
@@ -32,13 +32,14 @@ import {
 import { OrderDef, SearchQueryDef, SearchValues } from "./type";
 
 export const ListPart: FunctionComponent = () => {
-  const router = useRouter();
   const limit = 6;
   const [total, setTotal] = useState<number>(0);
-  const [page, setPage] = useState<number>(Number(router.query.page));
-  const [activeOrder, setActiveOrder] = useState<OrderDef>((router.query.order as OrderDef) || "recent");
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
   const [showFilter, setShowFilter] = useState<boolean>(false);
+
+  const router = useRouter();
+
+  const { setCurrentToast } = useToast();
 
   const { register, handleSubmit, watch, setValue, getValues } = useForm<SearchValues>({
     defaultValues: {
@@ -52,11 +53,19 @@ export const ListPart: FunctionComponent = () => {
     },
   });
 
+  const { data: jobDataArr, isLoading } = useJobArr({
+    q: JSON.stringify(searchQuery),
+    order: router.query.order as OrderDef,
+    filter: "valid",
+    limit,
+    offset: (Number(router.query.page) - 1) * 10,
+  });
+
   const jdSearch: SubmitHandler<SearchValues> = (searchVal) => {
-    router.push({
-      pathname: JOBS_LIST_URL,
-      query: { page: 1, order: activeOrder },
-    });
+    if (searchVal.searchWord?.match(specialCharacterRegExp)) {
+      setCurrentToast("검색어에 특수문자는 포함될 수 없습니다.");
+      return;
+    }
     jdSearchEvent(searchVal.searchWord);
     setSearchQuery({
       contractType: searchVal.contractType,
@@ -71,21 +80,16 @@ export const ListPart: FunctionComponent = () => {
     setShowFilter(false);
   };
 
-  const { data: jobDataArr, isLoading } = useJobArr({
-    q: JSON.stringify(searchQuery),
-    order: activeOrder,
-    filter: "valid",
-    limit,
-    offset: (page - 1) * limit,
-  });
-
-  useEffect(() => {
-    setPage(Number(router.query.page));
-  }, [router.query.page]);
-
-  useEffect(() => {
-    setActiveOrder(router.query.order as OrderDef);
-  }, [router.query.order]);
+  const changeOrderHandler = (orderStr: OrderDef) => {
+    router.push(
+      {
+        pathname: JOBS_LIST_URL,
+        query: { ...router.query, page: 1, order: orderStr },
+      },
+      undefined,
+      { scroll: false }
+    );
+  };
 
   useEffect(() => {
     if (jobDataArr) {
@@ -138,18 +142,14 @@ export const ListPart: FunctionComponent = () => {
           </div>
           <div css={buttonArrContainer}>
             {setJobOrderButtonArr.map((button) => {
-              const isActive = button.order === activeOrder;
+              const isActive = button.order === (router.query.order as OrderDef);
               return (
                 <button
                   type="button"
                   key={`jobCardArr${button.text}`}
                   css={setJobOrderButton(isActive)}
                   onClick={() => {
-                    router.push({
-                      pathname: JOBS_LIST_URL,
-                      query: { page: 1, order: button.order },
-                    });
-                    return setActiveOrder(button.order);
+                    changeOrderHandler(button.order);
                   }}
                 >
                   {button.text}

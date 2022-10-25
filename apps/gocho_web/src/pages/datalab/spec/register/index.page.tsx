@@ -2,16 +2,19 @@ import { useEffect, useCallback } from "react";
 import { NextPage } from "next";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
+import { GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
 import { useUserInfo } from "shared-api/auth";
-import { useProgress } from "@recoil/hook/spec";
 import { META_SPEC_REGISTER } from "shared-constant/meta";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { specRegisterFunnelEvent } from "shared-ga/spec";
+import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
+import { useProgress } from "@recoil/hook/spec";
 import { useModal } from "@recoil/hook/modal";
 import { Layout } from "@component/layout";
-import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
+
 import { ProgressPart } from "./part/progressPart";
 import { SpecWritePart } from "./part/carouselCardPart";
 
@@ -65,6 +68,9 @@ const Register: NextPage = () => {
 
   return (
     <main css={wrapper}>
+      <Head>
+        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
+      </Head>
       <MetaHead metaData={META_SPEC_REGISTER} />
       <ProgressPart />
       <Layout>

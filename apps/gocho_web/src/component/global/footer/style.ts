@@ -99,6 +99,11 @@ export const inquiryContainer = css`
 `;
 
 export const inquiryBox = css`
+  margin-bottom: 2rem;
+
+  :last-of-type {
+    margin-bottom: 0;
+  }
   ${TABLET} {
     margin-right: 2rem;
   }
@@ -116,7 +121,7 @@ export const inquiryText = css`
   color: ${COLORS.GRAY60};
   line-height: 1.6;
   font-size: 0.875rem;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
 
   ${TABLET} {
     margin-bottom: 0;

@@ -1,5 +1,7 @@
 import { NextPage } from "next";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
+import Head from "next/head";
 
 // import { dehydrate, QueryClient } from "@tanstack/react-query";
 
@@ -11,6 +13,7 @@ import { useEffect } from "react";
 import { META_INDEX } from "shared-constant/meta";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { homeFunnelEvent } from "shared-ga/home";
+import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL } from "shared-constant/internalURL";
 
 import { CompanyCommentPart } from "@pages/indexComponent/part/companyCommentPart";
 
@@ -52,11 +55,21 @@ import { TipPart } from "./indexComponent/part/tipPart";
 // }
 
 const Home: NextPage = () => {
+  const router = useRouter();
+
   useEffect(() => {
     homeFunnelEvent();
   }, []);
   return (
     <main>
+      <Head>
+        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
+        <link
+          rel="alternate"
+          media="only screen and (max-width: 640px)"
+          href={`${GOCHO_MOBILE_URL}${router.asPath.split("?")[0]}`}
+        />
+      </Head>
       <MetaHead metaData={META_INDEX} />
       <MainCarouselPart />
       <JobPart />

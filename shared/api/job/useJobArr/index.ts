@@ -19,6 +19,7 @@ export const useJobArr = (requestObj: JobArrRequestObjDef) => {
     select: ({ data, count }) => {
       return selector(data, count);
     },
+    enabled: Boolean(requestObj.order),
   });
   return queryResult;
 };

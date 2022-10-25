@@ -5,6 +5,7 @@ import { COLORS } from "shared-style/color";
 export const buttonContainer = css`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   padding: 0.5rem 2rem;
   background-color: ${COLORS.GRAY90};
 `;
@@ -32,7 +33,7 @@ export const selectButton = (active = false) => {
     padding: 0 1rem;
     font-size: 0.875rem;
     white-space: nowrap;
-    margin-right: 1rem;
+    margin: 0.5rem 1rem 0.5rem 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -85,6 +86,7 @@ export const factoryName = css`
   color: ${COLORS.GRAY100};
   display: flex;
   align-items: center;
+  white-space: nowrap;
   justify-content: center;
   background-color: ${COLORS.BLUE_NEON30};
   width: fit-content;
@@ -132,6 +134,7 @@ export const infoBox = css`
 `;
 
 export const infoIcon = css`
+  margin: auto;
   width: 4.8rem;
   height: 4.8rem;
   position: relative;
@@ -170,12 +173,25 @@ export const info = css`
 
 export const flexBox = css`
   display: flex;
-  justify-content: space-between;
   margin-top: 2rem;
+`;
+
+export const infoChildBox = css`
+  width: 25%;
 `;
 
 export const booleanIcon = css`
   width: 1rem;
   height: 1rem;
   position: relative;
+`;
+
+export const subDesc = css`
+  font-size: 0.875rem;
+  word-break: keep-all;
+  line-height: 1.6;
+  text-align: center;
+  letter-spacing: -1px;
+  color: ${COLORS.GRAY20};
+  margin-top: 0.25rem;
 `;

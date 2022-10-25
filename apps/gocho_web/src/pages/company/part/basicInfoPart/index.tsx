@@ -3,14 +3,17 @@ import Image from "next/image";
 
 import nozoTrue from "shared-image/page/companyDetail/nozo_true_icon.svg";
 import nozoFalse from "shared-image/page/companyDetail/nozo_false_icon.svg";
+import { dateConverter } from "shared-util/date";
 
 import { KakaoMap } from "@pages/company/component/kakaoMap";
 import { InvisibleH3 } from "shared-ui/common/atom/invisibleH3";
 
 import { BasicInfoPartProps } from "./type";
-import { infoContainer, flexBox, infoTitle, info, nozoImage, infoBox } from "./style";
+import { infoContainer, flexBox, infoTitle, info, nozoImage, infoBox, pointInfo } from "./style";
 
 export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ companyData }) => {
+  const { year, month, date } = dateConverter(companyData.foundDate);
+
   return (
     <section css={infoContainer}>
       <InvisibleH3 title="일반 정보" />
@@ -24,8 +27,14 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ companyDa
           <p css={info}>{companyData.size}</p>
         </div>
         <div css={flexBox}>
+          <strong css={infoTitle}>설립연도</strong>
+          <p css={info}>{`${year}년 ${month}월 ${date}일`}</p>
+        </div>
+        <div css={flexBox}>
           <strong css={infoTitle}>사원수</strong>
-          <p css={info}>{companyData.employeeNumber.toLocaleString("ko-KR")}</p>
+          <p css={info}>
+            <span css={pointInfo}>{companyData.employeeNumber.toLocaleString("ko-KR")}</span>명
+          </p>
         </div>
         <div css={flexBox}>
           <strong css={infoTitle}>기업 한줄소개</strong>

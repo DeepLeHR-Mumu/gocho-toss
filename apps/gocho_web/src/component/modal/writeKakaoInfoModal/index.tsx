@@ -42,13 +42,13 @@ export const KakaoBox: FunctionComponent = () => {
   const queryClient = useQueryClient();
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors, dirtyFields },
   } = useForm<SignUpFormValues>({ mode: "onChange" });
   const { closeModal } = useModal();
 
   const TEST_FUNC: SubmitHandler<SignUpFormValues> = (submitObj) => {
-
     kakaoRegister(submitObj, {
       onError: (error) => {
         if (axios.isAxiosError(error)) {
@@ -91,6 +91,9 @@ export const KakaoBox: FunctionComponent = () => {
                 required: NICKNAME_ERROR_MESSAGE.REQUIRED,
                 validate: validateNickname,
               })}
+              setValue={() => {
+                setValue("nickname", "");
+              }}
               placeholder="닉네임을 입력해주세요"
               label="닉네임"
               errorObj={errors.nickname}

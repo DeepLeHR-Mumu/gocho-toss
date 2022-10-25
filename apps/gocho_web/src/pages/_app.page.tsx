@@ -30,10 +30,9 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
     site: "datadoghq.com",
     service: "gocho-web",
 
-    // Specify a version number to identify the deployed version of your application in Datadog
-    // version: '1.0.0',
-    sampleRate: 100,
-    sessionReplaySampleRate: 20,
+    version: "0.0.1",
+    sampleRate: 30,
+    sessionReplaySampleRate: 10,
     trackInteractions: true,
     trackResources: true,
     trackLongTasks: true,
@@ -59,11 +58,20 @@ function MyApp({ Component, pageProps }: AppProps) {
     ].some((toMatchItem) => {
       return navigator.userAgent.match(toMatchItem);
     });
-    if (isMobile) {
-      const { host, pathname, protocol } = window.location;
-      const mobileHost = host.slice(host.indexOf(".") + 1);
-      window.location.href = `${protocol}//m.${mobileHost}${pathname}`;
+    const isVercel = window.location.href.includes("vercel");
+    const isLocal = window.location.href.includes("localhost");
+
+    if (isVercel || isLocal || !isMobile) {
+      return;
     }
+
+    const { host, pathname, protocol, search } = window.location;
+    if (host.includes("www")) {
+      const mobileHost = host.slice(host.indexOf(".") + 1);
+      window.location.href = `${protocol}//m.${mobileHost}${pathname}${search}`;
+      return;
+    }
+    window.location.href = `${protocol}//m.${host}${pathname}${search}`;
   }, []);
 
   // host : localhost:3000

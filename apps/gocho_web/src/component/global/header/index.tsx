@@ -14,7 +14,7 @@ import { MAIN_URL } from "shared-constant/internalURL";
 import { Layout } from "@component/layout";
 import { Profile } from "@component/common/molecule/profile";
 import { UnAuthMenu } from "@component/common/molecule/unAuthMenu";
-import { menuArr } from "@constant/menuArr";
+import { menuArr } from "@component/global/header/menuArr";
 import { useToast } from "@recoil/hook/toast";
 import { useModal } from "@recoil/hook/modal";
 
@@ -38,7 +38,7 @@ import {
 
 export const Header: FunctionComponent = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [isUnifiedSearch, setIsUnifiedSearch] = useState<boolean>(false);
+  const [isUnifiedSearchOpened, setIsUnifiedSearchOpened] = useState<boolean>(false);
   const [query, setQuery] = useState("");
   const { closeModal } = useModal();
 
@@ -53,28 +53,27 @@ export const Header: FunctionComponent = () => {
   const preventRefresh = (goNewPage: (event: FormEvent) => void) => {
     return (submitForm: FormEvent) => {
       submitForm.preventDefault();
-
       goNewPage(submitForm);
     };
   };
 
-  const handleSubmit = preventRefresh(() => {
-    globalSearchEvent(query);
+  const submitHandler = preventRefresh(() => {
     const regExp = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/g;
 
     if (query.match(regExp)) {
       setCurrentToast("검색어에 특수문자는 포함될 수 없습니다.");
       return;
     }
+    globalSearchEvent(query);
     router.push({
       pathname: "/search",
-      query: { q: query, page: 1 },
+      query: { q: query },
     });
   });
 
   useEffect(() => {
     closeModal();
-    setIsUnifiedSearch(false);
+    setIsUnifiedSearchOpened(false);
   }, [closeModal, pathname]);
 
   const { isSuccess } = useUserInfo();
@@ -116,27 +115,12 @@ export const Header: FunctionComponent = () => {
                   >
                     {menu.subMenuArr ? (
                       <>
-                        {menu.pageQuery ? (
-                          <Link
-                            href={{
-                              pathname: menu.menuLink,
-                              query: { page: 1, order: "recent" },
-                            }}
-                            passHref
-                          >
-                            <a>
-                              {menu.menuTitle}
-                              <BsChevronDown css={downIconCSS} />
-                            </a>
-                          </Link>
-                        ) : (
-                          <Link href={menu.menuLink} passHref>
-                            <a>
-                              {menu.menuTitle}
-                              <BsChevronDown css={downIconCSS} />
-                            </a>
-                          </Link>
-                        )}
+                        <Link href={menu.menuLink} passHref>
+                          <a>
+                            {menu.menuTitle}
+                            <BsChevronDown css={downIconCSS} />
+                          </a>
+                        </Link>
 
                         <ul css={subMenuToggleWrapper(activeIndex === index)}>
                           {menu.subMenuArr.map((subMenu) => {
@@ -162,25 +146,24 @@ export const Header: FunctionComponent = () => {
 
             <div css={flexBox}>
               <button
-                aria-label={isUnifiedSearch ? "통합검색창 닫기" : "통합검색창 열기"}
+                aria-label={isUnifiedSearchOpened ? "통합검색창 닫기" : "통합검색창 열기"}
                 type="button"
                 css={searchIcon}
                 onClick={() => {
-                  setIsUnifiedSearch((prev) => {
+                  setIsUnifiedSearchOpened((prev) => {
                     return !prev;
                   });
                 }}
               >
-                {isUnifiedSearch ? <BsXLg /> : <FiSearch />}
+                {isUnifiedSearchOpened ? <BsXLg /> : <FiSearch />}
               </button>
               {isSuccess ? <Profile /> : <UnAuthMenu />}
             </div>
           </nav>
         </div>
       </Layout>
-      <div css={searchDimmed(isUnifiedSearch)} />
-      {/* TODO: 다른 페이지에서 검색창과 겹치는 부분 있는지 확인! */}
-      <form onSubmit={handleSubmit} css={unifiedSearchWrapper(isUnifiedSearch)}>
+      <div css={searchDimmed(isUnifiedSearchOpened)} />
+      <form onSubmit={submitHandler} css={unifiedSearchWrapper(isUnifiedSearchOpened)}>
         <input css={unifiedSearch} placeholder="궁금한 기업명이나 공고를 검색해보세요" onChange={handleParam} />
         <button type="submit" css={searchButton} aria-label="통합검색 실행">
           <FiSearch />

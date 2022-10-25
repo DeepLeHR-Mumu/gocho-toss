@@ -21,6 +21,7 @@ import {
   certificateCardBox,
   certificateCard,
   hideCertificateArrButton,
+  noCertiDesc,
 } from "./style";
 
 export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ moveNextCard, movePrevCard }) => {
@@ -37,8 +38,12 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
   const [searchCertificateArr, setSearchCertificateArr] = useState<string[]>([]);
   const textInputRef = useRef<HTMLInputElement>(null);
   const isCertificateWatch = watch("isCertificate");
+  const isPossibleMoveNextCard = isCertificateWatch && watch("certificate").length === 0;
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
+    if (isPossibleMoveNextCard) {
+      return;
+    }
     const { certificate } = formData;
 
     const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
@@ -156,6 +161,8 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
                   })}
                 </ul>
               </div>
+
+              {isPossibleMoveNextCard && <p css={noCertiDesc}>자격증을 선택해주세요</p>}
             </div>
 
             <div css={certificateCardBox}>

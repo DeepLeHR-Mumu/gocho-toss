@@ -52,7 +52,7 @@ const JdUpload: NextPage = () => {
   const [bigPlace, setBigPlace] = useState<string>();
   const [smallPlace, setSmallPlace] = useState<string>();
   const [checkMsg, setCheckMsg] = useState<string>();
-  const { data: companyDataArr, isLoading, isError, error } = useFindCompany({ word: searchWord });
+  const { data: companyDataArr, isLoading, isError, error } = useFindCompany({ word: searchWord, order: "recent" });
 
   const { mutate } = useAddJob();
   const { register, control, handleSubmit, watch, setValue } = useForm<JobFormValues>({

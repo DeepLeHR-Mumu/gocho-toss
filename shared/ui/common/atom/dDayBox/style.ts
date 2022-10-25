@@ -59,12 +59,14 @@ export const setDdayStyleCSS: setDdayStyleCSS = (endTime) => {
     align-items: center;
     justify-content: center;
     border-radius: 1rem;
-    width: 3.5rem;
+    min-width: 3.5rem;
+    width: fit-content;
+    padding: 0 1rem;
     height: 1.625rem;
     ${dateColor(endTime)}
 
     ${MOBILE} {
-      font-size: 10px;
+      font-size: 0.9rem;
     }
   `;
 };

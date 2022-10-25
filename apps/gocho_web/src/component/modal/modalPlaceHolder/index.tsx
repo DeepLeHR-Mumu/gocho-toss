@@ -12,6 +12,7 @@ import { ChangePostingModal } from "../changePostingModal";
 import { TipModal } from "../tipModal";
 import { FactoryModal } from "../factoryModal";
 import { WriteKakaoInfoModal } from "../writeKakaoInfoModal";
+import { DialogModal } from "../dialogModal";
 import { FindPasswordModal } from "../findPasswordModal";
 
 export const ModalPlaceholder: FunctionComponent = () => {
@@ -49,6 +50,9 @@ export const ModalPlaceholder: FunctionComponent = () => {
   }
   if (currentModal?.activatedModal === "findPasswordModal") {
     return <FindPasswordModal />;
+  }
+  if (currentModal?.activatedModal === "dialogModal") {
+    return <DialogModal />;
   }
 
   return null;

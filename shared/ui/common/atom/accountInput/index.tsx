@@ -9,6 +9,7 @@ export const AccountInput: FunctionComponent<AccountInputProps> = ({
   isDirty,
   registerObj,
   label,
+  setValue,
   placeholder,
   inputType,
 }) => {
@@ -47,14 +48,14 @@ export const AccountInput: FunctionComponent<AccountInputProps> = ({
           type={inputType}
         />
         {errorObj && (
-          <button css={buttonCSS(colorState)} type="button">
+          <button css={buttonCSS(colorState)} type="button" onClick={setValue} aria-label={`${label} 제거`}>
             <FiX />
           </button>
         )}
         {!errorObj && isDirty && (
-          <button css={buttonCSS(colorState)} type="button">
+          <p css={buttonCSS(colorState)}>
             <FiCheckCircle />
-          </button>
+          </p>
         )}
       </div>
       <div css={errorMessageBox}>

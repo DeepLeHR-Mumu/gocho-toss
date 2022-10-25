@@ -28,6 +28,7 @@ export const JobsPart: FunctionComponent = () => {
   const { data: jobDataArr, isLoading } = useJobArr({
     companyId: Number(companyId),
     limit,
+    order: "recent",
     offset: (page - 1) * limit,
   });
 
@@ -69,7 +70,7 @@ export const JobsPart: FunctionComponent = () => {
 
   return (
     <Layout>
-      <MetaHead metaData={META_COMPANY_RECRUIT} companyDetail={{ companyName: data.name }} />
+      <MetaHead metaData={META_COMPANY_RECRUIT} companyDetail={{ companyName: data.name, asPath: router.asPath }} />
       <InvisibleH2 title={`${data.name} 채용공고 모음`} />
       <strong css={totalText}>총 채용공고 {jobDataArr.count}개</strong>
       <section css={listContainer}>

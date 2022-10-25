@@ -47,6 +47,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, dirtyFields },
   } = useForm<LoginFormValues>({ mode: "onChange" });
   const queryClient = useQueryClient();
@@ -82,7 +83,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   };
 
   const kakaoLogin = () => {
-    sessionStorage.setItem("kakaopath", router.pathname);
+    sessionStorage.setItem("kakaopath", router.asPath);
     window.Kakao.Auth.authorize({
       redirectUri: `${window.location.origin}/kakaologin`,
     });
@@ -116,6 +117,9 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
                   message: EMAIL_ERROR_MESSAGE.REGEX,
                 },
               })}
+              setValue={() => {
+                setValue("email", "");
+              }}
               placeholder="이메일을 입력해주세요"
               label="이메일"
               errorObj={errors.email}
@@ -131,6 +135,9 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
                 maxLength: { value: 20, message: PWD_ERROR_MESSAGE.LOGIN_MIN_MAX },
                 pattern: PWD_REGEXP,
               })}
+              setValue={() => {
+                setValue("password", "");
+              }}
               placeholder="비밀번호를 입력해주세요"
               label="비밀번호"
               errorObj={errors.password}

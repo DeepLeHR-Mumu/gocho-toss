@@ -1,23 +1,6 @@
 import checkIconImage from "shared-image/global/common/yellow_check.png";
-import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 
 export const carouselArr = [
-  {
-    id: 0,
-    topDesc: "2022년",
-    middleDesc: "신보그룹",
-    title: "초대졸 신입사원 공개채용",
-    lastDesc: "2022.09.26(월)-10.16(일)",
-    iconImage: checkIconImage,
-    backgroundColor: "#089e66",
-    buttonObj: {
-      target: "_self" as const,
-      text: "자세히보기",
-      color: "#fff",
-      backgroundColor: "#88c3a8",
-      url: `${JOBS_DETAIL_URL}/10021`,
-    },
-  },
   {
     id: 1,
     topDesc: "OPEN",
@@ -36,6 +19,22 @@ export const carouselArr = [
   },
   {
     id: 2,
+    topDesc: "채용공고",
+    middleDesc: "한국알파라발(주)",
+    title: "열교환기조립 Production Engineer 채용",
+    lastDesc: "2022/10/18 ~ 2022/10/31",
+    iconImage: checkIconImage,
+    backgroundColor: "#073979",
+    buttonObj: {
+      target: "_blank" as const,
+      text: "공고 바로가기",
+      color: "#333",
+      backgroundColor: "#fff",
+      url: "/jd/detail/10443",
+    },
+  },
+  {
+    id: 3,
     topDesc: "OPEN",
     middleDesc: "고초대졸닷컴",
     title: "공고에서 근무할 공장 정보 바로보기 서비스 시작",
@@ -45,7 +44,7 @@ export const carouselArr = [
     buttonObj: null,
   },
   {
-    id: 3,
+    id: 4,
     topDesc: "OPEN",
     middleDesc: "고초대졸닷컴",
     title: "생산/기능직 관련 최대 규모 오픈카톡방",
