@@ -10,6 +10,8 @@ import { NormalButton } from "shared-ui/common/atom/button";
 import { COLORS } from "shared-style/color";
 import { useUnifiedCompanySearchArr } from "shared-api/company";
 
+import { COMPANY_PREVIEW_RESULT_LIMIT } from "@pages/search/constant";
+
 import { buttonBox, listContainer, noDataText } from "./style";
 
 export const CompanyPreviewPart: FunctionComponent = () => {
@@ -19,14 +21,14 @@ export const CompanyPreviewPart: FunctionComponent = () => {
   const { data: companyDataArr, isLoading: isCompanyDataArrLoading } = useUnifiedCompanySearchArr({
     searchWord: router.query.q,
     page: router.query.page,
-    limit: 6,
+    limit: COMPANY_PREVIEW_RESULT_LIMIT,
   });
   const { data: userCompanyBookmarkArr, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
 
   if (!companyDataArr || isCompanyDataArrLoading) {
     return (
       <div css={listContainer}>
-        {dummyArrCreator(6).map((dummy) => {
+        {dummyArrCreator(COMPANY_PREVIEW_RESULT_LIMIT).map((dummy) => {
           return <CompanyCard isSkeleton key={`UnifiedSearchCompanyCardSkeleton${dummy}`} />;
         })}
       </div>
@@ -43,7 +45,7 @@ export const CompanyPreviewPart: FunctionComponent = () => {
 
   return (
     <section css={listContainer}>
-      {companyDataArr.companyDataArr.slice(0, 6).map((companyData) => {
+      {companyDataArr.companyDataArr.map((companyData) => {
         const isBookmarked = Boolean(
           userCompanyBookmarkArr?.some((company) => {
             return company.id === companyData.id;

@@ -1,2 +1,4 @@
 export const JOB_RESULT_LIMIT = 10;
+export const JOB_PREVIEW_RESULT_LIMIT = 4;
 export const COMPANY_RESULT_LIMIT = 12;
+export const COMPANY_PREVIEW_RESULT_LIMIT = 6;

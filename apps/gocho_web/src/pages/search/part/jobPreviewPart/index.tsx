@@ -10,6 +10,7 @@ import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { COLORS } from "shared-style/color";
 
 import { JobCard } from "@component/card/jobCard";
+import { JOB_PREVIEW_RESULT_LIMIT } from "@pages/search/constant";
 
 import { buttonBox, listContainer, noDataText } from "./style";
 
@@ -20,14 +21,14 @@ export const JobPreviewPart: FunctionComponent = () => {
   const { data: jobDataArr, isLoading: isJobLoading } = useUnifiedJobSearchArr({
     searchWord: router.query.q,
     page: router.query.page,
-    limit: 4,
+    limit: JOB_PREVIEW_RESULT_LIMIT,
   });
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
   if (!jobDataArr || isJobLoading) {
     return (
       <div css={listContainer}>
-        {dummyArrCreator(4).map((dummy) => {
+        {dummyArrCreator(JOB_PREVIEW_RESULT_LIMIT).map((dummy) => {
           return <JobCard isSkeleton key={`UnifiedSearchJobPreviewSkeleton${dummy}`} />;
         })}
       </div>
@@ -44,7 +45,7 @@ export const JobPreviewPart: FunctionComponent = () => {
 
   return (
     <section css={listContainer}>
-      {jobDataArr.jobDataArr.slice(0, 4).map((jobData) => {
+      {jobDataArr.jobDataArr.map((jobData) => {
         const isBookmarked = Boolean(
           userJobBookmarkArr?.some((job) => {
             return job.id === jobData.id;

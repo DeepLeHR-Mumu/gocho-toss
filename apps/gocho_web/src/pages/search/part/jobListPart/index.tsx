@@ -5,6 +5,7 @@ import { useUnifiedJobSearchArr } from "shared-api/job";
 
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
 
+import { JOB_RESULT_LIMIT } from "@pages/search/constant";
 import { JobCardList } from "../../component/jobCardList";
 import { title } from "./style";
 
@@ -14,10 +15,10 @@ export const JobListPart: FunctionComponent = () => {
   const { data: jobDataArr, isLoading: isJobLoading } = useUnifiedJobSearchArr({
     searchWord: router.query.q,
     page: router.query.page,
-    limit: 10,
+    limit: JOB_RESULT_LIMIT,
   });
 
-  const totalPage = Math.ceil((jobDataArr?.count || 0) / 10);
+  const totalPage = Math.ceil((jobDataArr?.count || 0) / JOB_RESULT_LIMIT);
 
   return (
     <section>
