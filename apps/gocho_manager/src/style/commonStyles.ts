@@ -3,7 +3,7 @@ import { COLORS } from "shared-style/color";
 
 export const mainContainer = css`
   flex-grow: 1;
-  padding: 1.5rem;
+  padding: 1.5rem 0 0 1.5rem;
 `;
 
 export const pageTitle = css`

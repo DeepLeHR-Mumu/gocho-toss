@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Image from "next/image";
 import { ChromePicker } from "react-color";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -14,7 +15,6 @@ import { useJobDetail } from "@api/job/useJobDetail";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
-import Image from "next/image";
 import { BannerFormValues } from "./type";
 import {
   sectionContainer,
