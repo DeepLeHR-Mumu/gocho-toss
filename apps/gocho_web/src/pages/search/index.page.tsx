@@ -23,10 +23,10 @@ const UnifiedSearch: NextPage = () => {
   useEffect(() => {
     if (!router.isReady) return;
     if (!router.query.menu && !router.query.q) {
-      router.replace({ pathname: "/search", query: { menu: "전체", q: "", page: 0 } });
+      router.replace({ pathname: "/search", query: { menu: "전체", q: "", page: 1 } });
     }
     if (!router.query.menu && router.query.q) {
-      router.replace({ pathname: "/search", query: { q: router.query.q, menu: "전체", page: 0 } });
+      router.replace({ pathname: "/search", query: { q: router.query.q, menu: "전체", page: 1 } });
     }
   }, [router]);
 
