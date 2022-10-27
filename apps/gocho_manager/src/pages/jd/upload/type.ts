@@ -32,7 +32,7 @@ export interface JobFormValues {
     };
     hire_number: number | undefined;
     pay_arr: string[] | undefined;
-    preferred_certi_arr: string[] | undefined | null;
+    preferred_certi_arr: string[];
     preferred_etc_arr: string[] | undefined | null;
   }[];
 }
