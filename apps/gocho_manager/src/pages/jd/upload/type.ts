@@ -2,7 +2,7 @@ export interface JobFormValues {
   company_id: number;
   title: string;
   start_time: number;
-  end_time: number;
+  end_time: number | string;
   cut: boolean;
   process_arr: string[];
   apply_route_arr: string[];

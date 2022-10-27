@@ -199,6 +199,15 @@ const JdUpload: NextPage = () => {
                 })}
               />
             </div>
+            <button
+              css={searchCompanyButton}
+              type="button"
+              onClick={() => {
+                setValue(`end_time`, "9999-12-31T23:59");
+              }}
+            >
+              상시공고
+            </button>
             <label css={inputLabel} htmlFor="채용시마감">
               <input type="checkbox" id="채용시마감" {...register("cut")} />
               <CheckBox isChecked={watch("cut")} />
