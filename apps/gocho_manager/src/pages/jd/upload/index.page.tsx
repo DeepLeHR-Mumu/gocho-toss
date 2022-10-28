@@ -383,7 +383,6 @@ const JdUpload: NextPage = () => {
                   <div css={inputContainer}>
                     <strong css={inputTitle}>채용 직무 *</strong>
                     <select
-                      value=""
                       css={selectBox}
                       {...register(`position_arr.${index}.task_main`, {
                         required: true,
@@ -418,7 +417,7 @@ const JdUpload: NextPage = () => {
                               </option>
                             );
                           });
-                        return <> </>;
+                        return null;
                       })}
                     </select>
                     <p css={enterNotice}>
@@ -629,16 +628,6 @@ const JdUpload: NextPage = () => {
                           );
                         })}
                     </select>
-                    {/* <select css={selectBox} multiple {...register(`position_arr.${index}.preferred_certi_arr`, {})}> */}
-                    {/*  <option value="">자격증 선택 ▼</option> */}
-                    {/*  {certificateArr.map((certi) => { */}
-                    {/*    return ( */}
-                    {/*      <option key={`${item.id}${certi}`} value={certi}> */}
-                    {/*        {certi} */}
-                    {/*      </option> */}
-                    {/*    ); */}
-                    {/*  })} */}
-                    {/* </select> */}
                   </div>
                   <div css={flexBox}>
                     {watch("position_arr")[index].preferred_certi_arr.map((certi) => {

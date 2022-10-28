@@ -37,5 +37,10 @@ axiosInstance.interceptors.request.use(async (config) => {
     localStorage.setItem("refreshExp", String(refreshNewExp));
   }
 
-  return { ...config, headers: { "x-access-token": accessToken } };
+  const newConfig = config;
+
+  newConfig.headers = newConfig.headers ?? {};
+  newConfig.headers["x-access-token"] = accessToken;
+
+  return newConfig;
 });

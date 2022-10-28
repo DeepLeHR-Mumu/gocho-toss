@@ -72,8 +72,8 @@ const CompanyList: NextPage = () => {
     <main css={mainContainer}>
       <h2 css={pageTitle}>기업 목록</h2>
       <section css={sectionContainer}>
-        <table css={tableContainer}>
-          <tbody>
+        <table>
+          <tbody css={tableContainer}>
             {companyDataArr.companyDataArr.map((company) => {
               return (
                 <tr key={company.id} css={companyContainer}>
