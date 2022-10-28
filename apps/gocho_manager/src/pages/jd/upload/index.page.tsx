@@ -383,14 +383,13 @@ const JdUpload: NextPage = () => {
                   <div css={inputContainer}>
                     <strong css={inputTitle}>채용 직무 *</strong>
                     <select
+                      value=""
                       css={selectBox}
                       {...register(`position_arr.${index}.task_main`, {
                         required: true,
                       })}
                     >
-                      <option value="" selected disabled>
-                        1차직무 선택 ▼
-                      </option>
+                      <option disabled>1차직무 선택 ▼</option>
                       {taskArr.map((task) => {
                         return (
                           <option key={`${item.id}${task.mainTask}`} value={task.mainTask}>
@@ -468,14 +467,13 @@ const JdUpload: NextPage = () => {
                   <div css={inputContainer}>
                     <strong css={inputTitle}>근무지 종류 *</strong>
                     <select
+                      value=""
                       css={selectBox}
                       {...register(`position_arr.${index}.place.type`, {
                         required: true,
                       })}
                     >
-                      <option value="" selected disabled>
-                        근무지 종류 선택 ▼
-                      </option>
+                      <option disabled>근무지 종류 선택 ▼</option>
                       {placeTypeArr.map((placeType) => {
                         return (
                           <option key={`${item.id}${placeType}`} value={placeType}>
@@ -489,13 +487,12 @@ const JdUpload: NextPage = () => {
                     <strong css={inputTitle}>일반 근무지</strong>
                     <select
                       css={selectBox}
+                      value=""
                       onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                         setBigPlace(e.target.value);
                       }}
                     >
-                      <option value="" selected disabled>
-                        도/시 선택 ▼
-                      </option>
+                      <option disabled>도/시 선택 ▼</option>
                       {placeArr.map((place) => {
                         return (
                           <option key={`${item.id}${place}`} value={place}>

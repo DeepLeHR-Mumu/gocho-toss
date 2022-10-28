@@ -73,30 +73,32 @@ const CompanyList: NextPage = () => {
       <h2 css={pageTitle}>기업 목록</h2>
       <section css={sectionContainer}>
         <table css={tableContainer}>
-          {companyDataArr.companyDataArr.map((company) => {
-            return (
-              <tr key={company.id} css={companyContainer}>
-                <div css={flexBox}>
-                  <td css={companyIdBox}>{company.id}</td>
-                  <td css={companyNameBox}>{company.name}</td>
-                </div>
-                <div css={flexBox}>
-                  <button type="button" css={fixButton}>
-                    수정
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      return companyDelete(company.id);
-                    }}
-                    css={deleteButton}
-                  >
-                    삭제
-                  </button>
-                </div>
-              </tr>
-            );
-          })}
+          <tbody>
+            {companyDataArr.companyDataArr.map((company) => {
+              return (
+                <tr key={company.id} css={companyContainer}>
+                  <div css={flexBox}>
+                    <td css={companyIdBox}>{company.id}</td>
+                    <td css={companyNameBox}>{company.name}</td>
+                  </div>
+                  <div css={flexBox}>
+                    <button type="button" css={fixButton}>
+                      수정
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        return companyDelete(company.id);
+                      }}
+                      css={deleteButton}
+                    >
+                      삭제
+                    </button>
+                  </div>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </section>
       <BottomPagination totalPage={totalPage} url={COMPANY_LIST_URL} />

@@ -176,38 +176,42 @@ const TopBanner: NextPage = () => {
       <h2 css={pageTitle}>배너 리스트</h2>
       <section css={sectionContainer}>
         <table>
-          <tr css={tableTitle}>
-            <th css={bannerIdBox}>배너 ID</th>
-            <th css={companyNameBox}>회사 이름</th>
-            <th css={titleBox}>배너 제목</th>
-            <th css={expireDateBox}>만료 날짜</th>
-            <th> </th>
-          </tr>
-          {bannerDataArr.bannerDataArr.map((banner) => {
-            const { year: endYear, month: endMonth, date: endDate } = dateConverter(banner.endTime);
+          <thead>
+            <tr css={tableTitle}>
+              <th css={bannerIdBox}>배너 ID</th>
+              <th css={companyNameBox}>회사 이름</th>
+              <th css={titleBox}>배너 제목</th>
+              <th css={expireDateBox}>만료 날짜</th>
+              <th> </th>
+            </tr>
+          </thead>
+          <tbody>
+            {bannerDataArr.bannerDataArr.map((banner) => {
+              const { year: endYear, month: endMonth, date: endDate } = dateConverter(banner.endTime);
 
-            return (
-              <tr key={banner.id} css={bannerBox}>
-                <td css={bannerIdBox}>{banner.id}</td>
-                <td css={companyNameBox}>{banner.companyName}</td>
-                <td css={titleBox}>{banner.title}</td>
-                <td css={expireDateBox}>
-                  {endYear}-{endMonth}-{endDate}
-                </td>
-                <td>
-                  <button
-                    css={deleteBannerButton}
-                    type="button"
-                    onClick={() => {
-                      bannerDelete(banner.id);
-                    }}
-                  >
-                    배너 삭제
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+              return (
+                <tr key={banner.id} css={bannerBox}>
+                  <td css={bannerIdBox}>{banner.id}</td>
+                  <td css={companyNameBox}>{banner.companyName}</td>
+                  <td css={titleBox}>{banner.title}</td>
+                  <td css={expireDateBox}>
+                    {endYear}-{endMonth}-{endDate}
+                  </td>
+                  <td>
+                    <button
+                      css={deleteBannerButton}
+                      type="button"
+                      onClick={() => {
+                        bannerDelete(banner.id);
+                      }}
+                    >
+                      배너 삭제
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </section>
     </main>

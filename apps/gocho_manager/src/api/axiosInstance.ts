@@ -1,5 +1,6 @@
 import axios from "axios";
 import { MANAGER_BACKEND_URL } from "shared-constant/externalURL";
+import { tokenDecryptor } from "@util/tokenDecryptor";
 
 export const axiosInstance = axios.create({
   timeout: 100000,
@@ -12,7 +13,7 @@ axiosInstance.interceptors.request.use(async (config) => {
   const accessExp = localStorage.getItem("accessExp") as string;
   const refreshExp = localStorage.getItem("refreshExp") as string;
 
-  const date = new Date().getMilliseconds();
+  const date = Math.floor(new Date().getTime() / 1000);
 
   if (!refreshToken || refreshToken === "undefined" || parseInt(refreshExp, 10) < date) {
     localStorage.clear();
@@ -24,8 +25,16 @@ axiosInstance.interceptors.request.use(async (config) => {
       headers: { "x-refresh-token": refreshToken },
     });
 
-    localStorage.setItem("accessToken", `${data.access_token}`);
-    localStorage.setItem("refreshToken", `${data.refresh_token}`);
+    localStorage.setItem("accessToken", `${data.data.access_token}`);
+    localStorage.setItem("refreshToken", `${data.data.refresh_token}`);
+
+    const { email, role, exp: accessNewExp } = tokenDecryptor(data.data.access_token);
+    const { exp: refreshNewExp } = tokenDecryptor(data.data.refresh_token);
+
+    localStorage.setItem("email", email);
+    localStorage.setItem("role", role);
+    localStorage.setItem("accessExp", String(accessNewExp));
+    localStorage.setItem("refreshExp", String(refreshNewExp));
   }
 
   return { ...config, headers: { "x-access-token": accessToken } };
