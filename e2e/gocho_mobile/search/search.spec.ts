@@ -74,7 +74,7 @@ test.describe("통합 검색페이지 테스트", () => {
     await page.locator('input[name="password"]').fill(USER_PASSWORD);
     await page.locator('role=button[name="로그인"]').click();
     await page.waitForResponse((response) => response.url().includes("auth/login"));
-
+    await page.reload();
     const [responseJdBookmark] = await Promise.all([
       page.waitForResponse((response) => response.url().includes("jd-bookmarks") && response.status() === 201),
       page.click('button[aria-label="공고 북마크 하기"]'),
@@ -89,7 +89,6 @@ test.describe("통합 검색페이지 테스트", () => {
     expect(responseCompanyBookmark.ok()).toBeTruthy();
 
     await page.reload();
-
     const [responseJdBookmarkDelete] = await Promise.all([
       page.waitForResponse((response) => response.url().includes("jd-bookmarks") && response.status() === 204),
       page.click('button[aria-label="공고 북마크 해지"]'),
@@ -104,7 +103,7 @@ test.describe("통합 검색페이지 테스트", () => {
     expect(responseCompanyBookmarkDelete.ok()).toBeTruthy();
   });
 
-  test("더보기 버튼 및 페이지네이션 체크", async ({ page }) => {
+  test("더보기 버튼 체크", async ({ page }) => {
     // search페이지에서 메인 채용공고 버튼 클릭
     await page.goto(`${URL}/search`);
     await page.getByRole("button", { name: "채용공고 더보기" }).click();
@@ -117,40 +116,75 @@ test.describe("통합 검색페이지 테스트", () => {
 
     // search페이지에서 상단 nav 버튼 클릭
     await page.goto(`${URL}/search`);
-    await page.getByRole("button", { name: "공고" }).click();
     await page.getByRole("button", { name: "기업" }).click();
+    await page.getByRole("button", { name: "공고" }).click();
+  });
 
-    // 공고 페이지네이션 체크
-    const [jdResponse] = await Promise.all([
-      page.waitForResponse((response) => response.url().includes("jds") && response.status() === 200),
-      page.click("button:has-text('공고')"),
-    ]);
+  test("페이지네이션 체크", async ({ page }) => {
+    await page.goto(`${URL}/search`);
+    await page.getByRole("button", { name: "공고" }).click();
+    const jdResponse = await page.waitForResponse(
+      (response) => response.url().includes("jds") && response.status() === 200
+    );
 
-    console.log(await jdResponse.json());
+    const jdData = await jdResponse.json();
+    const jdLastPage = Math.ceil(jdData.count / 10);
 
-    // await page.locator('role=button[name="2번 페이지로 이동"]').click();
-    // await expect(page).toHaveURL(`${URL}/search?menu=공고&q=&page=2`);
-    // await page.locator('role=button[name="다음 페이지로 이동"]').click();
-    // await expect(page).toHaveURL(`${URL}/search?menu=공고&q=&page=3`);
-    // await page.locator('role=button[name="첫 페이지로 이동"]').click();
-    // await expect(page).toHaveURL(`${URL}/search?menu=공고&q=&page=1`);
+    await page.locator('role=button[name="2번 페이지로 이동"]').click();
+    await expect(page).toHaveURL(`${URL}/search?menu=공고&q=&page=2`);
+    await page.locator('role=button[name="다음 페이지로 이동"]').click();
+    await expect(page).toHaveURL(`${URL}/search?menu=공고&q=&page=3`);
+    await page.locator('role=button[name="첫 페이지로 이동"]').click();
+    await expect(page).toHaveURL(`${URL}/search?menu=공고&q=&page=1`);
+    await page.getByRole("button", { name: "마지막 페이지로 이동" }).click();
+    await expect(page).toHaveURL(`${URL}/search?menu=공고&q=&page=${jdLastPage}`);
+
+    await page.reload();
 
     // 기업 페이지네이션 체크
-    // await page.goto(`${URL}/search`);
-    // await page.getByRole("button", { name: "기업" }).click();
-    // await page.locator('role=button[name="2번 페이지로 이동"]').click();
-    // await expect(page).toHaveURL(`${URL}/search?menu=기업&q=&page=2`);
-    // await page.locator('role=button[name="다음 페이지로 이동"]').click();
-    // await expect(page).toHaveURL(`${URL}/search?menu=기업&q=&page=3`);
-    // await page.locator('role=button[name="첫 페이지로 이동"]').click();
-    // await expect(page).toHaveURL(`${URL}/search?menu=기업&q=&page=1`);
+    await page.getByRole("button", { name: "기업" }).click();
+    const companyResponse = await page.waitForResponse(
+      (response) => response.url().includes("companies") && response.status() === 200
+    );
+
+    const companyData = await companyResponse.json();
+    const companyLastPage = Math.ceil(companyData.count / 6);
+
+    await page.locator('role=button[name="2번 페이지로 이동"]').click();
+    await expect(page).toHaveURL(`${URL}/search?menu=기업&q=&page=2`);
+    await page.locator('role=button[name="다음 페이지로 이동"]').click();
+    await expect(page).toHaveURL(`${URL}/search?menu=기업&q=&page=3`);
+    await page.locator('role=button[name="첫 페이지로 이동"]').click();
+    await expect(page).toHaveURL(`${URL}/search?menu=기업&q=&page=1`);
+    await page.getByRole("button", { name: "마지막 페이지로 이동" }).click();
+    await expect(page).toHaveURL(`${URL}/search?menu=기업&q=&page=${companyLastPage}`);
   });
+
   test("쿼리값 없을시 기본 쿼리값 검사", async ({ page }) => {
     await page.goto(`${URL}/search`);
     await expect(page).toHaveURL(`${URL}/search?menu=전체&q=&page=1`);
   });
 
-  // test("페이지 닫기", async ({ page }) => {
-  //   await page.close();
-  // });
+  test("공고 디테일페이지 _blank 확인", async ({ page, context }) => {
+    await page.getByRole("button", { name: "공고" }).click();
+    const [jdDetailPage] = await Promise.all([
+      context.waitForEvent("page"),
+      page.locator("main > div > section > section > article").first().locator("a").click(),
+    ]);
+
+    await jdDetailPage.waitForLoadState("domcontentloaded");
+    await expect(jdDetailPage).toHaveURL(jdDetailPage.url());
+    await jdDetailPage.close();
+  });
+
+  test("기업 디테일페이지 확인", async ({ page, context }) => {
+    await page.getByRole("button", { name: "기업" }).click();
+    await page.locator("main > div > section > section > article").first().locator("a").click();
+    await page.waitForNavigation();
+    expect(page.url().includes("info=detail")).toBeTruthy();
+  });
+
+  test("페이지 닫기", async ({ page }) => {
+    await page.close();
+  });
 });

@@ -56,19 +56,19 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
 
   return (
     <article css={cardWrapper}>
+      <button
+        type="button"
+        css={bookmarkButtonWrapper(isBookmarked)}
+        onClick={(event) => {
+          event.preventDefault();
+          return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
+        }}
+        aria-label={isBookmarked ? "기업 북마크 해지" : "기업 북마크 하기"}
+      >
+        <BsFillBookmarkFill />
+      </button>
       <Link href={{ pathname: `${COMPANY_DETAIL_URL}/${companyData.id}`, query: { info: "detail" } }} passHref>
         <a>
-          <button
-            type="button"
-            css={bookmarkButtonWrapper(isBookmarked)}
-            onClick={(event) => {
-              event.preventDefault();
-              return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
-            }}
-            aria-label={isBookmarked ? "기업 북마크 해지" : "기업 북마크 하기"}
-          >
-            <BsFillBookmarkFill />
-          </button>
           <strong css={NameCSS}>{companyData.name}</strong>
           <div css={companyLogoBox}>
             <Image
