@@ -3,13 +3,13 @@ import { useRouter } from "next/router";
 import { BsChevronRight } from "react-icons/bs";
 
 import { useUserInfo } from "shared-api/auth";
+import { useUnifiedCompanySearchArr } from "shared-api/company";
 import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
-import { CompanyCard } from "shared-ui/card/companyCard";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { COLORS } from "shared-style/color";
-import { useUnifiedCompanySearchArr } from "shared-api/company";
 
+import { CompanyCard } from "@component/common/molecule/companyCard";
 import { COMPANY_PREVIEW_RESULT_LIMIT } from "@pages/search/constant";
 import { listContainer, noDataText, buttonBox } from "./style";
 
@@ -54,7 +54,6 @@ export const CompanyPreviewPart: FunctionComponent = () => {
           <CompanyCard
             companyData={companyData}
             isBookmarked={isBookmarked}
-            userId={userData?.id}
             refetchUserBookmark={refetch}
             key={`UnifiedSearchCompanyCard${companyData.id}`}
           />
