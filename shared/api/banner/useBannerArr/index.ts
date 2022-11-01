@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { bannerArrKeyObj, BannerArrRequestObjDef } from "@constant/queryKeyFactory/banner/bannerArrKeyObj";
-import { axiosInstance } from "@api/axiosInstance";
+import { bannerArrKeyObj, BannerArrRequestObjDef } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
+import { axiosManagerInstance } from "../../axiosInstance";
 import { GetBannerArrDef } from "./type";
 import { selector } from "./util";
 
 export const getBannerArr: GetBannerArrDef = async ({ queryKey: [{ requestObj }] }) => {
-  const { data } = await axiosInstance.get("/admin/banners", { params: requestObj });
+  const { data } = await axiosManagerInstance.get("/banners", { params: requestObj });
   return data;
 };
 

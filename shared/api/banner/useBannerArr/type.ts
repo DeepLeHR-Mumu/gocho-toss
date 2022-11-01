@@ -1,6 +1,6 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
-import { bannerArrKeyObj } from "@constant/queryKeyFactory/banner/bannerArrKeyObj";
-import { BannerObjDef } from "@api/banner/type";
+import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
+import { BannerObjDef } from "../type";
 
 export interface ResponseObjDef {
   data: BannerObjDef[];

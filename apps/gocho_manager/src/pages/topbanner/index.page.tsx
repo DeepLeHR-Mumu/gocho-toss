@@ -5,9 +5,10 @@ import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
+import { useBannerArr } from "shared-api/banner/useBannerArr";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { dateConverter } from "shared-util/date";
-import { useBannerArr } from "@api/banner/useBannerArr";
+
 import { useAddTopBanner } from "@api/banner/addTopBanner";
 import { useDeleteBanner } from "@api/banner/useDeleteBanner";
 import { useJobDetail } from "@api/job/useJobDetail";
