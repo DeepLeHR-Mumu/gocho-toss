@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -21,9 +21,7 @@ import {
   buttonBox,
 } from "./style";
 
-export const JobAdCard: FunctionComponent<SlideCardProps | SlideCardSkeleton> = ({ jobData, bgColor, isSkeleton }) => {
-  const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
-
+export const JobAdCard: FunctionComponent<SlideCardProps | SlideCardSkeleton> = ({ jobData, isSkeleton }) => {
   if (isSkeleton || !jobData) {
     return (
       <div css={cardSkeleton}>
@@ -42,21 +40,18 @@ export const JobAdCard: FunctionComponent<SlideCardProps | SlideCardSkeleton> = 
         }}
       >
         <div css={cardWrapper}>
-          <div css={slideInfo(bgColor)}>
+          <div css={slideInfo(jobData?.color || "#2284a5")}>
             <div css={companyLogoWrapper}>
               <div css={companyLogoBox}>
                 <Image
                   layout="fill"
                   objectFit="contain"
-                  src={imageSrc || jobData.companyLogo}
+                  src={jobData.companyLogo || defaultCompanyLogo}
                   alt={jobData.companyName}
-                  onError={() => {
-                    return setImageSrc(defaultCompanyLogo);
-                  }}
                 />
               </div>
             </div>
-            <p css={endTime}>{dDayCalculator(jobData.endTime)}</p>
+            <p css={endTime}>{dDayCalculator(jobData.jdEndTime)}</p>
             <p css={companyName}>{jobData.companyName}</p>
             <strong css={jdTitle}>{jobData.title}</strong>
           </div>
