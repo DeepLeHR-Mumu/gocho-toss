@@ -1,11 +1,15 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect } from "react";
 
 import { useProgress } from "@recoil/hook/spec";
 
 import { progressCSS, activeLine } from "./style";
 
 export const ProgressPart: FunctionComponent = () => {
-  const { currentProgress } = useProgress();
+  const { currentProgress, resetCurrentProgress } = useProgress();
+
+  useEffect(() => {
+    resetCurrentProgress();
+  }, [resetCurrentProgress]);
 
   return (
     <div css={progressCSS}>
