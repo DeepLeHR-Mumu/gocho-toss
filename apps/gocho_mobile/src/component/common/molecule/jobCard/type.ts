@@ -10,7 +10,7 @@ export interface JobCardProps {
     college: boolean;
     placeArr: string[];
     rotationArr: string[];
-    taskArr: string[];
+    taskArr: string[] | null[];
     bookmark: number;
     view: number;
     cut: boolean;
