@@ -6,7 +6,7 @@ import { axiosInstance } from "@api/axiosInstance";
 import { PostCompanyDef, useAddCompanyProps, RequestObjDef } from "./type";
 
 export const postCompany: PostCompanyDef = async (requestObj) => {
-  const { data } = await axiosInstance.post("/admin/companies", requestObj, {
+  const { data } = await axiosInstance.post("/companies", requestObj, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return data;

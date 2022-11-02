@@ -6,7 +6,7 @@ import { axiosInstance } from "@api/axiosInstance";
 import { PostJobDef, useAddJobProps, RequestObjDef } from "./type";
 
 export const postJob: PostJobDef = async (requestObj) => {
-  const { data } = await axiosInstance.post("/admin/jds", requestObj.dto);
+  const { data } = await axiosInstance.post("/jds", requestObj.dto);
   return data;
 };
 
