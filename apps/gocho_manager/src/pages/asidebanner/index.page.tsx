@@ -2,11 +2,11 @@ import type { NextPage } from "next";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import Image from "next/image";
 
+import { useBannerArr } from "shared-api/banner/useBannerArr";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-
-import { useBannerArr } from "@api/banner/useBannerArr";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
 import { dateConverter } from "shared-util/date";
+
+import { ErrorScreen, LoadingScreen } from "@component/screen";
 
 import { bannerBox, bannerImgBox } from "./style";
 
@@ -35,7 +35,7 @@ const AsideBanner: NextPage = () => {
             <li key={banner.id} css={bannerBox}>
               <div>{banner.id}</div>
               <div css={bannerImgBox}>
-                <Image src={banner.image || defaultCompanyLogo} alt="" layout="fill" objectFit="contain" />
+                <Image src={banner.imageUrl || defaultCompanyLogo} alt="" layout="fill" objectFit="contain" />
               </div>
               <div>
                 {startYear}-{startMonth}-{startDate} ~ {endYear}-{endMonth}-{endDate}

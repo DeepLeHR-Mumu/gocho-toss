@@ -2,7 +2,7 @@ export interface JobFormValues {
   company_id: number;
   title: string;
   start_time: number;
-  end_time: number;
+  end_time: number | string;
   cut: boolean;
   process_arr: string[];
   apply_route_arr: string[];
@@ -32,7 +32,7 @@ export interface JobFormValues {
     };
     hire_number: number | undefined;
     pay_arr: string[] | undefined;
-    preferred_certi_arr: string[] | undefined | null;
+    preferred_certi_arr: string[];
     preferred_etc_arr: string[] | undefined | null;
   }[];
 }

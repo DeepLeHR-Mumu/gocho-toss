@@ -3,7 +3,7 @@ import { FunctionComponent } from "react";
 import { useUserInfo } from "shared-api/auth";
 import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
-import { CompanyCard } from "shared-ui/card/companyCard";
+import { CompanyCard } from "@component/common/molecule/companyCard";
 
 import { listContainer } from "./style";
 import { CompanyCardListProps } from "./type";
@@ -34,7 +34,6 @@ export const CompanyCardList: FunctionComponent<CompanyCardListProps> = ({ compa
           <CompanyCard
             companyData={companyData}
             isBookmarked={isBookmarked}
-            userId={userData?.id}
             refetchUserBookmark={refetch}
             key={`UnifiedSearchCompanyCard${companyData.id}`}
           />

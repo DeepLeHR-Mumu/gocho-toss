@@ -15,3 +15,9 @@ export const noDataText = css`
   font-size: 0.875rem;
   text-align: center;
 `;
+
+export const buttonBox = css`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+`;
