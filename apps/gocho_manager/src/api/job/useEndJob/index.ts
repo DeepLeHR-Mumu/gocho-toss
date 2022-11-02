@@ -6,7 +6,7 @@ import { axiosInstance } from "@api/axiosInstance";
 import { useEndJobProps, EndJobDef, RequestObjDef } from "./type";
 
 export const endJob: EndJobDef = async (requestObj) => {
-  const { data } = await axiosInstance.patch(`/admin/jds/cut/${requestObj.jdId}`);
+  const { data } = await axiosInstance.patch(`/jds/cut/${requestObj.jdId}`);
   return data;
 };
 

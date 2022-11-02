@@ -6,7 +6,7 @@ import { axiosInstance } from "@api/axiosInstance";
 import { PostSideBannerDef, useAddSideBannerProps, RequestObjDef } from "./type";
 
 export const postSideBanner: PostSideBannerDef = async (requestObj) => {
-  const { data } = await axiosInstance.post("/admin/banners/side", requestObj);
+  const { data } = await axiosInstance.post("/banners/side", requestObj);
   return data;
 };
 

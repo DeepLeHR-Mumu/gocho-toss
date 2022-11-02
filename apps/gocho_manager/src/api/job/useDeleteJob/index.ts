@@ -6,7 +6,7 @@ import { axiosInstance } from "@api/axiosInstance";
 import { useDeleteJobProps, DeleteJobDef, RequestObjDef } from "./type";
 
 export const deleteJob: DeleteJobDef = async (requestObj) => {
-  const { data } = await axiosInstance.delete(`/admin/jds/${requestObj.jdId}`);
+  const { data } = await axiosInstance.delete(`/jds/${requestObj.jdId}`);
   return data;
 };
 

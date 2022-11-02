@@ -6,7 +6,7 @@ import { axiosInstance } from "@api/axiosInstance";
 import { useDeleteCompanyProps, DeleteCompanyDef, RequestObjDef } from "./type";
 
 export const deleteCompany: DeleteCompanyDef = async (requestObj) => {
-  const { data } = await axiosInstance.delete(`/admin/companies/${requestObj.companyId}`);
+  const { data } = await axiosInstance.delete(`/companies/${requestObj.companyId}`);
   return data;
 };
 
