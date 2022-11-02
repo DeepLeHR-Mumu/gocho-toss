@@ -1,7 +1,7 @@
 import { FunctionComponent, useRef } from "react";
 import Slider from "react-slick";
 
-import { useJobArr } from "shared-api/job";
+import { useBannerArr } from "shared-api/banner/useBannerArr";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
 import { setCarouselSetting } from "./util";
@@ -11,13 +11,9 @@ import { JobAdCard } from "../../component/jobAdCard";
 export const AdPart: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
 
-  const { data: jobDataArr, isLoading } = useJobArr({
-    order: "recent",
-    filter: "valid",
-    limit: 5,
-  });
+  const { data: bannerDataArr, isLoading } = useBannerArr({ type: "T" });
 
-  if (!jobDataArr || isLoading) {
+  if (!bannerDataArr || isLoading) {
     return (
       <div>
         <section css={carouselContainer}>
@@ -35,8 +31,8 @@ export const AdPart: FunctionComponent = () => {
     <div>
       <section css={carouselContainer}>
         <Slider {...setCarouselSetting} ref={sliderRef}>
-          {jobDataArr.jobDataArr.map((job) => {
-            return <JobAdCard jobData={job} bgColor="#1553CD" key={`jobAd${job.id}`} />;
+          {bannerDataArr.bannerDataArr.map((banner) => {
+            return <JobAdCard jobData={banner} key={`jobAd${banner.id}`} />;
           })}
         </Slider>
       </section>

@@ -49,6 +49,7 @@ import {
 const JdUpload: NextPage = () => {
   const [prevSearchWord, setPrevSearchWord] = useState<string>("");
   const [searchWord, setSearchWord] = useState<string>("");
+  const [certiSearchWord, setCertiSearchWord] = useState<string>("");
   const [bigPlace, setBigPlace] = useState<string>();
   const [smallPlace, setSmallPlace] = useState<string>();
   const [checkMsg, setCheckMsg] = useState<string>();
@@ -82,7 +83,7 @@ const JdUpload: NextPage = () => {
           },
           hire_number: undefined,
           pay_arr: undefined,
-          preferred_certi_arr: undefined,
+          preferred_certi_arr: [],
           preferred_etc_arr: undefined,
         },
       ],
@@ -198,6 +199,15 @@ const JdUpload: NextPage = () => {
                 })}
               />
             </div>
+            <button
+              css={searchCompanyButton}
+              type="button"
+              onClick={() => {
+                setValue(`end_time`, "9999-12-31T23:59");
+              }}
+            >
+              상시공고
+            </button>
             <label css={inputLabel} htmlFor="채용시마감">
               <input type="checkbox" id="채용시마감" {...register("cut")} />
               <CheckBox isChecked={watch("cut")} />
@@ -378,9 +388,7 @@ const JdUpload: NextPage = () => {
                         required: true,
                       })}
                     >
-                      <option value="" selected disabled>
-                        1차직무 선택 ▼
-                      </option>
+                      <option disabled>1차직무 선택 ▼</option>
                       {taskArr.map((task) => {
                         return (
                           <option key={`${item.id}${task.mainTask}`} value={task.mainTask}>
@@ -409,7 +417,7 @@ const JdUpload: NextPage = () => {
                               </option>
                             );
                           });
-                        return <> </>;
+                        return null;
                       })}
                     </select>
                     <p css={enterNotice}>
@@ -458,14 +466,13 @@ const JdUpload: NextPage = () => {
                   <div css={inputContainer}>
                     <strong css={inputTitle}>근무지 종류 *</strong>
                     <select
+                      value=""
                       css={selectBox}
                       {...register(`position_arr.${index}.place.type`, {
                         required: true,
                       })}
                     >
-                      <option value="" selected disabled>
-                        근무지 종류 선택 ▼
-                      </option>
+                      <option disabled>근무지 종류 선택 ▼</option>
                       {placeTypeArr.map((placeType) => {
                         return (
                           <option key={`${item.id}${placeType}`} value={placeType}>
@@ -479,13 +486,12 @@ const JdUpload: NextPage = () => {
                     <strong css={inputTitle}>일반 근무지</strong>
                     <select
                       css={selectBox}
+                      value=""
                       onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                         setBigPlace(e.target.value);
                       }}
                     >
-                      <option value="" selected disabled>
-                        도/시 선택 ▼
-                      </option>
+                      <option disabled>도/시 선택 ▼</option>
                       {placeArr.map((place) => {
                         return (
                           <option key={`${item.id}${place}`} value={place}>
@@ -592,17 +598,58 @@ const JdUpload: NextPage = () => {
                   </div>
                   <div css={inputContainer}>
                     <strong css={inputTitle}>우대 자격증</strong>
-                    <select css={selectBox} multiple {...register(`position_arr.${index}.preferred_certi_arr`, {})}>
+                    <input
+                      css={searchBox}
+                      type="text"
+                      onChange={(e) => {
+                        setCertiSearchWord(e.target.value);
+                      }}
+                    />
+                    <select
+                      css={selectBox}
+                      onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                        setValue(`position_arr.${index}.preferred_certi_arr`, [
+                          ...watch("position_arr")[index].preferred_certi_arr,
+                          e.target.value,
+                        ]);
+                        setCertiSearchWord("");
+                      }}
+                    >
                       <option value="">자격증 선택 ▼</option>
-                      {certificateArr.map((certi) => {
-                        return (
-                          <option key={`${item.id}${certi}`} value={certi}>
-                            {certi}
-                          </option>
-                        );
-                      })}
+                      {certificateArr
+                        .filter((prevCerti) => {
+                          return prevCerti.includes(certiSearchWord);
+                        })
+                        .map((certi) => {
+                          return (
+                            <option key={`${item.id}${certi}`} value={certi}>
+                              {certi}
+                            </option>
+                          );
+                        })}
                     </select>
-                    <p css={enterNotice}>Ctrl+F로 검색해서 찾으면 편리합니다.</p>
+                  </div>
+                  <div css={flexBox}>
+                    {watch("position_arr")[index].preferred_certi_arr.map((certi) => {
+                      return (
+                        <div key={`${item.id}${certi}`} css={inputContainer}>
+                          {certi}
+                          <button
+                            type="button"
+                            css={deletePlaceButton}
+                            onClick={() => {
+                              setValue(`position_arr.${index}.preferred_certi_arr`, [
+                                ...watch("position_arr")[index].preferred_certi_arr.filter((element) => {
+                                  return element !== certi;
+                                }),
+                              ]);
+                            }}
+                          >
+                            삭제
+                          </button>
+                        </div>
+                      );
+                    })}
                   </div>
                   <div css={inputContainer}>
                     <strong css={inputTitle}>기타 우대 사항</strong>
@@ -695,7 +742,7 @@ const JdUpload: NextPage = () => {
                 },
                 hire_number: undefined,
                 pay_arr: undefined,
-                preferred_certi_arr: undefined,
+                preferred_certi_arr: [],
                 preferred_etc_arr: undefined,
               });
             }}

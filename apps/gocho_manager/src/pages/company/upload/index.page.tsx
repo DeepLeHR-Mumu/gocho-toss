@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
 import { useAddCompany } from "@api/company/useAddCompany";
-import { useUploadLogo } from "@api/upload/useUploadLogo";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 
 import { ChangeEvent, useState } from "react";
@@ -40,15 +40,15 @@ import {
 } from "./style";
 
 const CompanyUpload: NextPage = () => {
+  const queryClient = useQueryClient();
+
+  const [logoPicture, setLogoPicture] = useState<File>();
   const [imageSrc, setImageSrc] = useState<string>();
-  const [logoData, setLogoData] = useState<FormData>();
-  const [logoMsg, setLogoMsg] = useState<string>();
   const [checkMsg, setCheckMsg] = useState<string>();
 
-  const { mutate: mutateCompany } = useAddCompany();
-  const { mutate: mutateLogo } = useUploadLogo();
+  const { mutate } = useAddCompany();
 
-  const { register, control, handleSubmit, watch, setValue } = useForm<CompanyFormValues>({
+  const { register, control, handleSubmit, watch } = useForm<CompanyFormValues>({
     defaultValues: {
       nozo: { exists: false, desc: null },
     },
@@ -60,13 +60,11 @@ const CompanyUpload: NextPage = () => {
   });
 
   const onUploadLogo = async (e: ChangeEvent<HTMLInputElement>) => {
-    const formData = new FormData();
     const reader = new FileReader();
 
     if (e.target.files?.[0]) {
       const img = e.target.files[0];
-      formData.append("logo", img);
-      setLogoData(formData);
+      setLogoPicture(img);
 
       reader.onloadend = () => {
         setImageSrc(reader.result as string);
@@ -75,31 +73,30 @@ const CompanyUpload: NextPage = () => {
     }
   };
 
-  const logoSubmit = () => {
-    if (logoData) {
-      mutateLogo(
-        { logo: logoData },
+  const companySubmit: SubmitHandler<CompanyFormValues> = (companyObj) => {
+    const formData = new FormData();
+    const json = JSON.stringify(companyObj);
+    const blob = new Blob([json], { type: "application/json" });
+    formData.append("dto", blob);
+
+    if (logoPicture) {
+      formData.append("img", logoPicture);
+    }
+    if (logoPicture) {
+      mutate(
+        { dto: blob, image: logoPicture },
         {
-          onSuccess: (response) => {
-            // console.log(response.data);
-            setValue("file_id", response.data);
-            setLogoMsg("업로드 완료");
+          onSuccess: () => {
+            queryClient.invalidateQueries();
+            setCheckMsg("기업이 업로드 되었습니다!");
+          },
+
+          onError: () => {
+            setCheckMsg("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
           },
         }
       );
     }
-  };
-
-  const companySubmit: SubmitHandler<CompanyFormValues> = (companyObj) => {
-    mutateCompany(companyObj, {
-      onSuccess: () => {
-        setCheckMsg("기업이 업로드 되었습니다!");
-      },
-
-      onError: () => {
-        setCheckMsg("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
-      },
-    });
   };
 
   return (
@@ -134,10 +131,6 @@ const CompanyUpload: NextPage = () => {
                 <Image layout="fill" objectFit="contain" src={imageSrc} alt="" />
               </div>
             )}
-            <button type="button" css={logoUploadLabel} onClick={logoSubmit}>
-              {logoMsg || "서버에 올리기"}
-            </button>
-            <p css={enterNotice}>로고 업로드 후 반드시 서버에 올리기 버튼을 눌러주세요!</p>
           </div>
           <div css={inputContainer}>
             <strong css={inputTitle}>사업자번호 *</strong>
