@@ -8,6 +8,7 @@ export interface SlideCardProps {
     endTime: number;
     jdStartTime: number;
     jdEndTime: number;
+    jdId?: number;
     title?: string;
   };
   isSkeleton?: never;

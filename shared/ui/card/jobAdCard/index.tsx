@@ -42,7 +42,7 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
     <>
       <a
         css={cardWrapper(isMobile)}
-        href={`${JOBS_DETAIL_URL}/${jobAdData.id}`}
+        href={`${JOBS_DETAIL_URL}/${jobAdData.jdId}`}
         target="_blank"
         rel="noreferrer noopener"
       >

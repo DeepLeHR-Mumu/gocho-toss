@@ -31,7 +31,7 @@ export const JobAdCard: FunctionComponent<SlideCardProps | SlideCardSkeleton> = 
   }
 
   return (
-    <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`}>
+    <Link href={`${JOBS_DETAIL_URL}/${jobData.jdId}`}>
       <button
         type="button"
         css={buttonBox}
