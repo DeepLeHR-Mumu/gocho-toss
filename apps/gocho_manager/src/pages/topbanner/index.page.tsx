@@ -215,6 +215,17 @@ const TopBanner: NextPage = () => {
           </tbody>
         </table>
       </section>
+
+      <h2 css={pageTitle}>배너 순서 변경</h2>
+      <section css={sectionContainer}>
+        <div css={inputContainer}>
+          <form>
+            <input css={inputBox(true)} />번 째를
+            <input css={inputBox(true)} />번 째 배너와 변경
+            <button type="submit">순서 변경</button>
+          </form>
+        </div>
+      </section>
     </main>
   );
 };
