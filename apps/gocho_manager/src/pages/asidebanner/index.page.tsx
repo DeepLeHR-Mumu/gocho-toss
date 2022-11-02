@@ -35,7 +35,7 @@ const AsideBanner: NextPage = () => {
             <li key={banner.id} css={bannerBox}>
               <div>{banner.id}</div>
               <div css={bannerImgBox}>
-                <Image src={banner.image || defaultCompanyLogo} alt="" layout="fill" objectFit="contain" />
+                <Image src={banner.imageUrl || defaultCompanyLogo} alt="" layout="fill" objectFit="contain" />
               </div>
               <div>
                 {startYear}-{startMonth}-{startDate} ~ {endYear}-{endMonth}-{endDate}
