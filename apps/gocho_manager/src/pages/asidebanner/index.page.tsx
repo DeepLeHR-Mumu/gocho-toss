@@ -11,9 +11,9 @@ import { ErrorScreen, LoadingScreen } from "@component/screen";
 import { bannerBox, bannerImgBox } from "./style";
 
 const AsideBanner: NextPage = () => {
-  const { data: BannerDataArr, isLoading, isError } = useBannerArr({ type: "S" });
+  const { data: bannerDataArr, isLoading, isError } = useBannerArr({ type: "S" });
 
-  if (!BannerDataArr || isLoading) {
+  if (!bannerDataArr || isLoading) {
     return <LoadingScreen />;
   }
 
@@ -27,7 +27,7 @@ const AsideBanner: NextPage = () => {
       <section>배너 업로드 영역</section>
       <h2 css={pageTitle}>배너 리스트</h2>
       <section>
-        {BannerDataArr.bannerDataArr.map((banner) => {
+        {bannerDataArr.bannerDataArr.map((banner) => {
           const { year: startYear, month: startMonth, date: startDate } = dateConverter(banner.startTime);
           const { year: endYear, month: endMonth, date: endDate } = dateConverter(banner.endTime);
 
