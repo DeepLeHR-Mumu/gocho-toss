@@ -8,6 +8,7 @@ export interface JobAdCardProps {
     endTime: number;
     jdStartTime: number;
     jdEndTime: number;
+    jdId?: number;
     title?: string;
   };
   isMobile: boolean;
