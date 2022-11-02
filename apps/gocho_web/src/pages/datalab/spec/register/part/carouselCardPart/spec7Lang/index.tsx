@@ -2,12 +2,12 @@ import { FunctionComponent, useState } from "react";
 import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
 import { FiX } from "react-icons/fi";
 
-import { SpecCardTitle, MoveCardButtons, TextInputForm, WarningText } from "../common/component";
+import { SpecCardTitle, MoveCardButtons, TextInputForm, WarningText } from "@pages/datalab/spec/register/component";
 import { SelectChipForm } from "./component/selectChipForm";
 
 import { Spec7LangProps, PostSubmitValues } from "./type";
 import { langArr, langTestArr } from "./constant";
-import { specCardWrapper, formCSS } from "../common/style";
+import { specCardWrapper, formCSS } from "../style";
 import { appendButton, errorBox, langContainer, removeButton, animationSlide, hideAllSelectBox } from "./style";
 
 export const Spec7Lang: FunctionComponent<Spec7LangProps> = ({ moveNextCard, movePrevCard }) => {

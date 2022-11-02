@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { SPEC_LIST_URL } from "shared-constant/internalURL";
 
-import { SpecCardTitle } from "../common/component";
+import { SpecCardTitle } from "@pages/datalab/spec/register/component";
 
 import { desc, successButton, specCardWrapper } from "./style";
 

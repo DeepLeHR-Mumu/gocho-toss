@@ -10,9 +10,9 @@ import { specRegisterEvent } from "shared-ga/spec";
 import { useModal } from "@recoil/hook/modal";
 import { useIsSpecPageBlocking } from "@recoil/hook/spec";
 
-import { SpecCardTitle, MoveCardButtons } from "../common/component";
+import { SpecCardTitle, MoveCardButtons } from "@pages/datalab/spec/register/component";
 import { Spec8AwardCareerEtcProps, PostSubmitValues } from "./type";
-import { specCardWrapper, formCSS } from "../common/style";
+import { specCardWrapper, formCSS } from "../style";
 import { textareaCSS } from "./style";
 
 export const Spec8AwardCareerEtc: FunctionComponent<Spec8AwardCareerEtcProps> = ({ moveNextCard, movePrevCard }) => {

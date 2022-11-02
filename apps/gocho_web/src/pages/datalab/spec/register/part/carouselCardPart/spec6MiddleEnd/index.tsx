@@ -11,9 +11,9 @@ import { specRegisterEvent } from "shared-ga/spec";
 import { useModal } from "@recoil/hook/modal";
 import { useIsSpecPageBlocking } from "@recoil/hook/spec";
 
-import { SpecCardTitle } from "../common/component";
+import { SpecCardTitle } from "@pages/datalab/spec/register/component";
 import { Spec6MiddleEndProps } from "./type";
-import { specCardWrapper } from "../common/style";
+import { specCardWrapper } from "../style";
 import { desc, animationBox, postButtonCSS, moveButtonContainer, prevButton, nextButton, colorPoint } from "./style";
 
 export const Spec6MiddleEnd: FunctionComponent<Spec6MiddleEndProps> = ({

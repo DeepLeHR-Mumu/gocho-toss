@@ -4,12 +4,12 @@ import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { FiX } from "react-icons/fi";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
-import { SpecCardTitle, Toggle, MoveCardButtons } from "../common/component";
+import { SpecCardTitle, Toggle, MoveCardButtons } from "@pages/datalab/spec/register/component";
 
 import { getResData, hasFieldsInIncludes } from "./util";
 import { Spec5CertificateProps, PostSubmitValues, ChangeSearchFilterArrDef } from "./type";
 import { certificateArr } from "./constant";
-import { specCardWrapper, formCSS } from "../common/style";
+import { specCardWrapper, formCSS } from "../style";
 import {
   certificateContainer,
   buttonContainer,

@@ -1,9 +1,9 @@
 import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { SpecCardTitle, MoveCardButtons, WarningText, ContainerBox } from "../common/component";
+import { SpecCardTitle, MoveCardButtons, WarningText, ContainerBox } from "@pages/datalab/spec/register/component";
 import { Spec2lastEducationProps, PostSubmitValues } from "./type";
-import { specCardWrapper, formCSS } from "../common/style";
+import { specCardWrapper, formCSS } from "../style";
 import { container, title, imageBox } from "./style";
 
 export const Spec2lastEducation: FunctionComponent<Spec2lastEducationProps> = ({

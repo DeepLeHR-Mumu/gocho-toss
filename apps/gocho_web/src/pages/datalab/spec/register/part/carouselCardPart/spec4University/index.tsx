@@ -12,12 +12,12 @@ import {
   Toggle,
   WarningText,
   ContainerBox,
-} from "../common/component";
+} from "@pages/datalab/spec/register/component";
 import { GradeInputForm } from "./component/gradeInputForm";
 
 import { highschoolType } from "./constant";
 import { Spec4UniversityProps, PostSubmitValues } from "./type";
-import { specCardWrapper, formCSS } from "../common/style";
+import { specCardWrapper, formCSS } from "../style";
 import { flex, arrContainer } from "./style";
 
 export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveNextCard, movePrevCard }) => {

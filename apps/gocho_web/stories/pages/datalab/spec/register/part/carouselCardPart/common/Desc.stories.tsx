@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Desc } from "@pages/datalab/spec/register/part/carouselCardPart/common/component";
+import { Desc } from "@pages/datalab/spec/register/component";
 
 export default {
   title: "datalab/spec/register/part/carouselCardPart/common/component/Desc",

@@ -5,11 +5,18 @@ import { useUserInfo } from "shared-api/auth";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { specRegisterStepEvent } from "shared-ga/spec";
 
-import { SpecCardTitle, MoveCardButtons, SelectRadioForm, Desc, WarningText, ContainerBox } from "../common/component";
+import {
+  SpecCardTitle,
+  MoveCardButtons,
+  SelectRadioForm,
+  Desc,
+  WarningText,
+  ContainerBox,
+} from "@pages/datalab/spec/register/component";
 import { MultiSelectRadioForm } from "./component/multiSelectRadioForm";
 import { genderArr, militaryArr, desiredTaskArr, desiredIndustryArr } from "./constant";
 import { Spec1BasicProps, PostSubmitValues } from "./type";
-import { specCardWrapper, formCSS } from "../common/style";
+import { specCardWrapper, formCSS } from "../style";
 import { disabledWrapper, inputTextCSS, labelCSS, hide, desc, ageFormBox } from "./style";
 
 export const Spec1Basic: FunctionComponent<Spec1BasicProps> = ({ moveNextCard }) => {

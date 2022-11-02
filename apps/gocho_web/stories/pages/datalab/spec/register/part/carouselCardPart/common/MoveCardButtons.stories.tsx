@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { MoveCardButtons } from "@pages/datalab/spec/register/part/carouselCardPart/common/component";
+import { MoveCardButtons } from "@pages/datalab/spec/register/component";
 
 export default {
   title: "datalab/spec/register/part/carouselCardPart/common/component/MoveCardButtons",

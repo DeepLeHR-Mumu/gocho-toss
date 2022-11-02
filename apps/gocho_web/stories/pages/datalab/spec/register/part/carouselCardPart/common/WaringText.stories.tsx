@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { css } from "@emotion/react";
 
-import { WarningText } from "@pages/datalab/spec/register/part/carouselCardPart/common/component";
+import { WarningText } from "@pages/datalab/spec/register/component";
 
 export default {
   title: "datalab/spec/register/part/carouselCardPart/common/component/WarningText",

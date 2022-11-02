@@ -9,9 +9,9 @@ export const PageBlockingPart: FunctionComponent = () => {
 
   const routeChangeStart = useCallback(
     (url: string) => {
-      const isCurrentSpecObj = Boolean(sessionStorage.getItem("specObj") !== null);
+      const isCurrentSpecObj = Boolean(sessionStorage.getItem("specObj") === null);
 
-      if (isCurrentSpecObj) {
+      if (!isCurrentSpecObj) {
         setCurrentModal("pageBlockModal", { url, text: "작성 중인 스펙이 초기화됩니다. 나가시겠습니까?" });
         router.events.emit("routeChangeError");
         // eslint-disable-next-line no-throw-literal

@@ -10,11 +10,11 @@ import {
   NumberInputForm,
   WarningText,
   ContainerBox,
-} from "../common/component";
+} from "@pages/datalab/spec/register/component";
 
 import { Spec3HighschoolProps, PostSubmitValues } from "./type";
 import { highSchoolTypeArr } from "./constant";
-import { specCardWrapper, formCSS } from "../common/style";
+import { specCardWrapper, formCSS } from "../style";
 import { arrContainer } from "./style";
 
 export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ movePrevCard, moveNextCard }) => {
