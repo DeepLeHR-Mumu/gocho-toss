@@ -10,3 +10,9 @@ export const sectionTitle = css`
   font-weight: 700;
   margin-bottom: 1rem;
 `;
+
+export const graphContainer = css`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
