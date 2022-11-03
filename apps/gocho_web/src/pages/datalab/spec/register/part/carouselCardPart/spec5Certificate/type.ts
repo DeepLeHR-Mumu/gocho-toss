@@ -10,7 +10,7 @@ export interface PostSubmitValues {
   certificate: { value: string }[];
 }
 
-export interface ChangeSearchFilterArrDef {
+export interface filterSearchKeywordArrHandlerDef {
   (onChangeEvent: ChangeEvent<HTMLInputElement>): void;
 }
 

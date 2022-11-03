@@ -6,17 +6,19 @@ import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { specRegisterStepEvent } from "shared-ga/spec";
 
 import {
-  SpecCardTitle,
-  MoveCardButtons,
-  SelectRadioForm,
+  TopTitle,
+  RadioForm,
   Desc,
-  WarningText,
-  ContainerBox,
+  WarningDesc,
+  MarginBox,
+  CheckboxForm,
+  BottomButton,
 } from "@pages/datalab/spec/register/component";
-import { MultiSelectRadioForm } from "./component/multiSelectRadioForm";
+
+import { specCardWrapper, formCSS } from "../style";
+
 import { genderArr, militaryArr, desiredTaskArr, desiredIndustryArr } from "./constant";
 import { Spec1BasicProps, PostSubmitValues } from "./type";
-import { specCardWrapper, formCSS } from "../style";
 import { disabledWrapper, inputTextCSS, labelCSS, hide, desc, ageFormBox } from "./style";
 
 export const Spec1Basic: FunctionComponent<Spec1BasicProps> = ({ moveNextCard }) => {
@@ -29,8 +31,8 @@ export const Spec1Basic: FunctionComponent<Spec1BasicProps> = ({ moveNextCard })
     mode: "onChange",
   });
 
-  const { data: userInfoData, isSuccess } = useUserInfo();
-  const secretWatch = watch("secret");
+  const { data: userInfoData } = useUserInfo();
+  const watchSecret = watch("secret");
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
     sessionStorage.setItem("specObj", JSON.stringify(formData));
@@ -41,35 +43,34 @@ export const Spec1Basic: FunctionComponent<Spec1BasicProps> = ({ moveNextCard })
     specRegisterStepEvent(1);
   }, []);
 
-  if (!isSuccess) {
-    return <div css={specCardWrapper} />;
-  }
-
   return (
     <div css={specCardWrapper}>
-      <SpecCardTitle title={userInfoData.nickname} desc="간단하게 스펙 등록하고 평가를 받아보세요" />
+      <TopTitle title={userInfoData?.nickname} desc="간단하게 스펙 등록하고 평가를 받아보세요" />
 
       <form css={formCSS}>
-        <ContainerBox optionObj={{ location: "bottom", marginValue: 1.7 }}>
+        <MarginBox optionObj={{ marginLocation: "bottom", marginValue: 1.7 }}>
           <div css={disabledWrapper}>
-            <input css={inputTextCSS} defaultValue={userInfoData.nickname} readOnly />
+            <input css={inputTextCSS} defaultValue={userInfoData?.nickname} readOnly />
             <label htmlFor="secret" css={labelCSS}>
               <input css={hide} type="checkbox" {...register("secret")} id="secret" />
-              <CheckBox isChecked={secretWatch} />
+              <CheckBox isChecked={watchSecret} />
               <p css={desc}>체크시 닉네임이 비공개됩니다</p>
             </label>
           </div>
-        </ContainerBox>
+        </MarginBox>
 
-        <ContainerBox
+        <MarginBox
           optionObj={{
-            location: "bottom",
+            marginLocation: "bottom",
             marginValue: 1.7,
           }}
         >
           <input
             css={ageFormBox}
             type="number"
+            onWheel={(event) => {
+              event.currentTarget.blur();
+            }}
             {...register("age", {
               required: "나이를 입력해주세요.",
               min: {
@@ -84,58 +85,59 @@ export const Spec1Basic: FunctionComponent<Spec1BasicProps> = ({ moveNextCard })
             placeholder="나이를 숫자로만 적어주세요 예시: 32"
           />
 
-          {errors.age?.message && <WarningText msg={errors.age.message} />}
-        </ContainerBox>
+          {errors.age?.message && <WarningDesc msg={errors.age.message} />}
+        </MarginBox>
 
-        <ContainerBox
+        <MarginBox
           optionObj={{
-            location: "bottom",
+            marginLocation: "bottom",
             marginValue: 1.7,
           }}
         >
-          <SelectRadioForm
+          <RadioForm
             registerObj={register("gender", {
               required: "성별을 선택해주세요.",
             })}
             backgroundStyle="blue02"
             itemArr={genderArr}
           />
-          {errors.gender?.message && <WarningText msg={errors.gender.message} />}
-        </ContainerBox>
+          {errors.gender?.message && <WarningDesc msg={errors.gender.message} />}
+        </MarginBox>
 
-        <ContainerBox optionObj={{ location: "bottom", marginValue: 4 }}>
-          <SelectRadioForm
+        <MarginBox optionObj={{ marginLocation: "bottom", marginValue: 4 }}>
+          <RadioForm
             registerObj={register("military", {
               required: "병역사항을 선택해주세요.",
             })}
             itemArr={militaryArr}
           />
-          {errors.military?.message && <WarningText msg={errors.military.message} />}
-        </ContainerBox>
+          {errors.military?.message && <WarningDesc msg={errors.military.message} />}
+        </MarginBox>
 
-        <ContainerBox optionObj={{ location: "bottom", marginValue: 4, maxWidth: 52 }}>
+        <MarginBox optionObj={{ marginLocation: "bottom", marginValue: 4, maxWidth: 52 }}>
           <Desc desc="희망하는 직무를 선택해주세요 (최대 3개)" />
-          <MultiSelectRadioForm
+          <CheckboxForm
             registerObj={register("desiredTask", {
               required: "하나 이상의 직무를 선택해주세요.",
             })}
             maxCount={3}
             itemArr={desiredTaskArr}
           />
-          {errors.desiredTask?.message && <WarningText msg={errors.desiredTask.message} />}
-        </ContainerBox>
+          {errors.desiredTask?.message && <WarningDesc msg={errors.desiredTask.message} />}
+        </MarginBox>
 
         <Desc desc="희망하는 업종을 선택해주세요 (최대 3개)" />
-        <MultiSelectRadioForm
+        <CheckboxForm
           registerObj={register("desiredIndustry", {
             required: "하나 이상의 업종을 선택해주세요.",
           })}
+          backgroundStyle="blue02"
           moreActive
           maxCount={3}
           itemArr={desiredIndustryArr}
         />
-        {errors.desiredIndustry?.message && <WarningText msg={errors.desiredIndustry.message} />}
-        <MoveCardButtons prev={false} postSubmit={handleSubmit(postSubmit)} />
+        {errors.desiredIndustry?.message && <WarningDesc msg={errors.desiredIndustry.message} />}
+        <BottomButton prev={false} postSubmit={handleSubmit(postSubmit)} />
       </form>
     </div>
   );

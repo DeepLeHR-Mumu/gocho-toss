@@ -1,7 +1,7 @@
 export interface Spec6MiddleEndProps {
   moveNextCard(percent: number): void;
   movePrevCard(): void;
-  handleKeepWriteSpec(): void;
+  writeMoreSpecHandler(): void;
 }
 
 export interface RequestObjDef {

@@ -1,11 +1,11 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { css } from "@emotion/react";
 
-import { GradeInputForm } from "@pages/datalab/spec/register/part/carouselCardPart/spec4University/component/gradeInputForm";
+import { UniversityGradeForm } from "@pages/datalab/spec/register/component/universityGradeForm";
 
 export default {
-  title: "datalab/spec/register/part/carouselCardPart/Spec4University/component/GradeInputForm",
-  component: GradeInputForm,
+  title: "datalab/spec/register/part/carouselCardPart/Spec4University/component/UniversityGradeForm",
+  component: UniversityGradeForm,
   argTypes: {
     gradeObj: {
       description: "react-hook-form grade(학점 점수) register",
@@ -29,9 +29,9 @@ export default {
     },
     componentSubtitle: "학점을 위한 입력폼 컴포넌트",
   },
-} as ComponentMeta<typeof GradeInputForm>;
+} as ComponentMeta<typeof UniversityGradeForm>;
 
-const Template: ComponentStory<typeof GradeInputForm> = (args) => {
+const Template: ComponentStory<typeof UniversityGradeForm> = (args) => {
   return (
     <div
       css={css`
@@ -41,7 +41,7 @@ const Template: ComponentStory<typeof GradeInputForm> = (args) => {
         margin: 5rem auto 0;
       `}
     >
-      <GradeInputForm {...args} />
+      <UniversityGradeForm {...args} />
     </div>
   );
 };

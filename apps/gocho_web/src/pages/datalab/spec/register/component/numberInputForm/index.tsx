@@ -24,7 +24,16 @@ export const NumberInputForm: FunctionComponent<NumberInputFormProps> = ({
       }}
     >
       <p css={labelFirstDesc(isFocus)}>{firstDesc}</p>
-      <input css={numberInputCSS(isFocus)} type="number" id={id} placeholder={placeholder} {...registerObj} />
+      <input
+        css={numberInputCSS(isFocus)}
+        type="number"
+        id={id}
+        placeholder={placeholder}
+        {...registerObj}
+        onWheel={(event) => {
+          event.currentTarget.blur();
+        }}
+      />
       <p css={labelLastDesc(isFocus)}>{lastDesc}</p>
     </label>
   );

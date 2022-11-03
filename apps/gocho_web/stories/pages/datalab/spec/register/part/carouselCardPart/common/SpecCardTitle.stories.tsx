@@ -1,10 +1,10 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { SpecCardTitle } from "@pages/datalab/spec/register/component";
+import { TopTitle } from "@pages/datalab/spec/register/component";
 
 export default {
-  title: "datalab/spec/register/part/carouselCardPart/common/component/SpecCardTitle",
-  component: SpecCardTitle,
+  title: "datalab/spec/register/part/carouselCardPart/common/component/TopTitle",
+  component: TopTitle,
   argTypes: {
     title: {
       description: "상단 타이틀",
@@ -16,10 +16,10 @@ export default {
   parameters: {
     componentSubtitle: "마이페이지 캐로셀 상단 타이틀 컴포넌트",
   },
-} as ComponentMeta<typeof SpecCardTitle>;
+} as ComponentMeta<typeof TopTitle>;
 
-const Template: ComponentStory<typeof SpecCardTitle> = (args) => {
-  return <SpecCardTitle {...args} />;
+const Template: ComponentStory<typeof TopTitle> = (args) => {
+  return <TopTitle {...args} />;
 };
 
 export const 일반 = Template.bind({});

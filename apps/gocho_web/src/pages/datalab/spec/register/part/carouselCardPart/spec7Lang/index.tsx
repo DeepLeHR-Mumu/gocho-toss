@@ -2,17 +2,17 @@ import { FunctionComponent, useState } from "react";
 import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
 import { FiX } from "react-icons/fi";
 
-import { SpecCardTitle, MoveCardButtons, TextInputForm, WarningText } from "@pages/datalab/spec/register/component";
-import { SelectChipForm } from "./component/selectChipForm";
+import { TopTitle, BottomButton, TextInputForm, WarningDesc, SelectForm } from "@pages/datalab/spec/register/component";
 
-import { Spec7LangProps, PostSubmitValues } from "./type";
-import { langArr, langTestArr } from "./constant";
 import { specCardWrapper, formCSS } from "../style";
-import { appendButton, errorBox, langContainer, removeButton, animationSlide, hideAllSelectBox } from "./style";
+
+import { langArr, langTestArr } from "./constant";
+import { Spec7LangProps, PostSubmitValues } from "./type";
+import { appendButton, langContainer, removeButton, animationSlide, hideAllSelectBox } from "./style";
 
 export const Spec7Lang: FunctionComponent<Spec7LangProps> = ({ moveNextCard, movePrevCard }) => {
   const [activeButtonDesc, setActiveButtonDesc] = useState<string | null>(null);
-  const [isShowActive, setIsShowActive] = useState(false);
+  const [isShowSelectForm, setIsShowSelectForm] = useState(false);
 
   const {
     handleSubmit,
@@ -41,61 +41,76 @@ export const Spec7Lang: FunctionComponent<Spec7LangProps> = ({ moveNextCard, mov
   return (
     <div css={animationSlide}>
       <div css={specCardWrapper}>
-        <SpecCardTitle title="어학" desc="혹시.. 외국어 능력자…?" />
+        <TopTitle title="어학" desc="혹시.. 외국어 능력자…?" />
 
         <form css={formCSS}>
           <ul css={langContainer}>
             {fields.map((field, index) => {
-              const languageWatch = watch(`language.${index}.language`);
-              const testWatch = watch(`language.${index}.test`);
+              const watchLanguage = watch(`language.${index}.language`);
+              const watchTest = watch(`language.${index}.test`);
 
               return (
                 <li key={field.id}>
-                  <SelectChipForm
-                    showActiveObj={{
-                      active: activeButtonDesc,
-                      setActive: setActiveButtonDesc,
-                      setIsShowActive,
-                    }}
-                    value={languageWatch}
-                    selectArr={langArr}
-                    index={index}
-                    desc="언어"
-                    registerObj={register(`language.${index}.language`, {
-                      required: "언어를 선택해주세요.",
-                    })}
-                  />
-
-                  {watch(`language.${index}.language`) === "기타" ? (
-                    <TextInputForm
-                      placeholder="시험명을 작성해주세요."
-                      registerObj={register(`language.${index}.test`, {
-                        required: "시험명을 작성해주세요.",
-                      })}
-                    />
-                  ) : (
-                    <SelectChipForm
+                  <div>
+                    <SelectForm
                       showActiveObj={{
                         active: activeButtonDesc,
                         setActive: setActiveButtonDesc,
-                        setIsShowActive,
+                        setIsShowSelectForm,
                       }}
-                      value={testWatch}
-                      selectArr={languageWatch ? langTestArr[languageWatch] : []}
-                      desc="시험명"
+                      value={watchLanguage}
+                      selectArr={langArr}
                       index={index}
-                      registerObj={register(`language.${index}.test`, {
-                        required: "시험명을 선택해주세요.",
+                      desc="언어"
+                      registerObj={register(`language.${index}.language`, {
+                        required: "언어를 선택해주세요.",
                       })}
                     />
-                  )}
+                    {errors.language?.[index]?.language?.message && (
+                      <WarningDesc msg={errors.language?.[index]?.language?.message} />
+                    )}
+                  </div>
 
-                  <TextInputForm
-                    placeholder="예시 점수/등급"
-                    registerObj={register(`language.${index}.score`, {
-                      required: "점수를 작성해주세요.",
-                    })}
-                  />
+                  <div>
+                    {watch(`language.${index}.language`) === "기타" ? (
+                      <TextInputForm
+                        placeholder="시험명을 작성해주세요."
+                        registerObj={register(`language.${index}.test`, {
+                          required: "시험명을 작성해주세요.",
+                        })}
+                      />
+                    ) : (
+                      <SelectForm
+                        showActiveObj={{
+                          active: activeButtonDesc,
+                          setActive: setActiveButtonDesc,
+                          setIsShowSelectForm,
+                        }}
+                        value={watchTest}
+                        selectArr={watchLanguage ? langTestArr[watchLanguage] : []}
+                        desc="시험명"
+                        index={index}
+                        registerObj={register(`language.${index}.test`, {
+                          required: "시험명을 선택해주세요.",
+                        })}
+                      />
+                    )}
+                    {errors.language?.[index]?.test?.message && (
+                      <WarningDesc msg={errors.language?.[index]?.test?.message} />
+                    )}
+                  </div>
+
+                  <div>
+                    <TextInputForm
+                      placeholder="예시 점수/등급"
+                      registerObj={register(`language.${index}.score`, {
+                        required: "점수를 작성해주세요.",
+                      })}
+                    />
+                    {errors.language?.[index]?.score?.message && (
+                      <WarningDesc msg={errors.language?.[index]?.score?.message} />
+                    )}
+                  </div>
 
                   <button
                     css={removeButton}
@@ -107,28 +122,16 @@ export const Spec7Lang: FunctionComponent<Spec7LangProps> = ({ moveNextCard, mov
                   >
                     <FiX />
                   </button>
-
-                  <div css={errorBox}>
-                    {errors.language?.[index]?.language?.message && (
-                      <WarningText msg={errors.language?.[index]?.language?.message} />
-                    )}
-                    {errors.language?.[index]?.test?.message && (
-                      <WarningText msg={errors.language?.[index]?.test?.message} />
-                    )}
-                    {errors.language?.[index]?.score?.message && (
-                      <WarningText msg={errors.language?.[index]?.score?.message} />
-                    )}
-                  </div>
                 </li>
               );
             })}
           </ul>
 
-          {isShowActive && (
+          {isShowSelectForm && (
             <button
               onClick={() => {
                 setActiveButtonDesc(null);
-                setIsShowActive(false);
+                setIsShowSelectForm(false);
               }}
               css={hideAllSelectBox}
               type="button"
@@ -150,7 +153,7 @@ export const Spec7Lang: FunctionComponent<Spec7LangProps> = ({ moveNextCard, mov
             어학 추가하기
           </button>
 
-          <MoveCardButtons movePrevCard={movePrevCard} postSubmit={handleSubmit(postSubmit)} />
+          <BottomButton movePrevCard={movePrevCard} postSubmit={handleSubmit(postSubmit)} />
         </form>
       </div>
     </div>

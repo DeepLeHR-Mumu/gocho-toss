@@ -54,7 +54,7 @@ export const 기본 = Template.bind({});
   moveNextCard: () => {
     return undefined;
   },
-  handleKeepWriteSpec: () => {
+  writeMoreSpecHandler: () => {
     return undefined;
   },
 };

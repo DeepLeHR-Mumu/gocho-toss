@@ -1,20 +1,20 @@
 import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { NUMBER_REGEXP } from "shared-constant/regExp";
 import {
-  SpecCardTitle,
-  MoveCardButtons,
-  SelectRadioForm,
+  TopTitle,
+  BottomButton,
+  RadioForm,
   Desc,
   NumberInputForm,
-  WarningText,
-  ContainerBox,
+  WarningDesc,
+  MarginBox,
 } from "@pages/datalab/spec/register/component";
+
+import { specCardWrapper, formCSS } from "../style";
 
 import { Spec3HighschoolProps, PostSubmitValues } from "./type";
 import { highSchoolTypeArr } from "./constant";
-import { specCardWrapper, formCSS } from "../style";
 import { arrContainer } from "./style";
 
 export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ movePrevCard, moveNextCard }) => {
@@ -35,21 +35,21 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
 
   return (
     <div css={specCardWrapper}>
-      <SpecCardTitle title="고등학교 학력정보" desc="정확하게 입력할 수록 스펙평가의 적중도는 올라갑니다." />
+      <TopTitle title="고등학교 학력정보" desc="정확하게 입력할 수록 스펙평가의 적중도는 올라갑니다." />
 
       <form css={formCSS}>
-        <ContainerBox optionObj={{ location: "bottom", marginValue: 3.5, maxWidth: 40 }}>
-          <SelectRadioForm
+        <MarginBox optionObj={{ marginLocation: "bottom", marginValue: 3.5, maxWidth: 40 }}>
+          <RadioForm
             registerObj={register("highschool.type", {
               required: "고등학교 정보를 선택해주세요.",
             })}
             backgroundStyle="blue02"
             itemArr={highSchoolTypeArr}
           />
-          {errors.highschool?.type && <WarningText msg="고등학교 정보를 선택해주세요." />}
-        </ContainerBox>
+          {errors.highschool?.type && <WarningDesc msg="고등학교 정보를 선택해주세요." />}
+        </MarginBox>
 
-        <ContainerBox optionObj={{ location: "bottom", marginValue: 4, maxWidth: 58 }}>
+        <MarginBox optionObj={{ marginLocation: "bottom", marginValue: 4, maxWidth: 58 }}>
           <Desc desc="출결사항도 중요하죠!" />
           <ul css={arrContainer}>
             <li>
@@ -63,10 +63,6 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
                     value: 365,
                     message: "최대 일수는 365입니다.",
                   },
-                  pattern: {
-                    value: NUMBER_REGEXP,
-                    message: "숫자만 기입할 수 있습니다.",
-                  },
                   required: "무단결석 일수를 입력해주세요.",
                 })}
                 id="absent"
@@ -74,6 +70,7 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
                 firstDesc="#무단 결석:"
                 lastDesc="/일"
               />
+              {errors.highschool?.absent?.message && <WarningDesc msg={errors.highschool.absent.message} />}
             </li>
             <li>
               <NumberInputForm
@@ -86,10 +83,6 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
                     value: 365,
                     message: "최대 일수는 365입니다.",
                   },
-                  pattern: {
-                    value: NUMBER_REGEXP,
-                    message: "숫자만 기입할 수 있습니다.",
-                  },
                   required: "무단지각 일수를 입력해주세요.",
                 })}
                 id="tardy"
@@ -97,6 +90,7 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
                 firstDesc="#무단 지각:"
                 lastDesc="/일"
               />
+              {errors.highschool?.tardy?.message && <WarningDesc msg={errors.highschool.tardy.message} />}
             </li>
             <li>
               <NumberInputForm
@@ -109,10 +103,6 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
                     value: 365,
                     message: "최대 일수는 365입니다.",
                   },
-                  pattern: {
-                    value: NUMBER_REGEXP,
-                    message: "숫자만 기입할 수 있습니다.",
-                  },
                   required: "무단 조퇴 일수를 입력해주세요.",
                 })}
                 id="leaveEarly"
@@ -120,6 +110,7 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
                 firstDesc="#무단 조퇴:"
                 lastDesc="/일"
               />
+              {errors.highschool?.leaveEarly?.message && <WarningDesc msg={errors.highschool.leaveEarly.message} />}
             </li>
             <li>
               <NumberInputForm
@@ -132,10 +123,6 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
                     value: 365,
                     message: "최대 일수는 365입니다.",
                   },
-                  pattern: {
-                    value: NUMBER_REGEXP,
-                    message: "숫자만 기입할 수 있습니다.",
-                  },
                   required: "무단결과 일수를 입력해주세요.",
                 })}
                 placeholder="?"
@@ -143,15 +130,12 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
                 firstDesc="#무단 결과:"
                 lastDesc="/일"
               />
+              {errors.highschool?.classMiss?.message && <WarningDesc msg={errors.highschool.classMiss.message} />}
             </li>
           </ul>
-          {errors.highschool?.absent?.message && <WarningText msg={errors.highschool.absent.message} />}
-          {errors.highschool?.tardy?.message && <WarningText msg={errors.highschool.tardy.message} />}
-          {errors.highschool?.leaveEarly?.message && <WarningText msg={errors.highschool.leaveEarly.message} />}
-          {errors.highschool?.classMiss?.message && <WarningText msg={errors.highschool.classMiss.message} />}
-        </ContainerBox>
+        </MarginBox>
 
-        <ContainerBox optionObj={{ location: "bottom", marginValue: 2, maxWidth: 23.75 }}>
+        <MarginBox optionObj={{ marginLocation: "bottom", marginValue: 2, maxWidth: 23.75 }}>
           <Desc desc="내신등급도 알려주시겠어요?" />
           <NumberInputForm
             registerObj={register("highschool.naesin", {
@@ -170,10 +154,10 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
             lastDesc="등급"
             placeholder="?"
           />
-          {errors.highschool?.naesin?.message && <WarningText msg={errors.highschool.naesin.message} />}
-        </ContainerBox>
+          {errors.highschool?.naesin?.message && <WarningDesc msg={errors.highschool.naesin.message} />}
+        </MarginBox>
 
-        <MoveCardButtons postSubmit={handleSubmit(postSubmit)} movePrevCard={movePrevCard} />
+        <BottomButton postSubmit={handleSubmit(postSubmit)} movePrevCard={movePrevCard} />
       </form>
     </div>
   );

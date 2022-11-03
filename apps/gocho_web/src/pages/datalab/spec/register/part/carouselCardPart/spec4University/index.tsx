@@ -1,23 +1,23 @@
 import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { NUMBER_REGEXP } from "shared-constant/regExp";
 import {
-  SpecCardTitle,
-  MoveCardButtons,
-  SelectRadioForm,
+  TopTitle,
+  BottomButton,
+  RadioForm,
   Desc,
   NumberInputForm,
   TextInputForm,
-  Toggle,
-  WarningText,
-  ContainerBox,
+  ToggleForm,
+  WarningDesc,
+  MarginBox,
+  UniversityGradeForm,
 } from "@pages/datalab/spec/register/component";
-import { GradeInputForm } from "./component/gradeInputForm";
+
+import { specCardWrapper, formCSS } from "../style";
 
 import { highschoolType } from "./constant";
 import { Spec4UniversityProps, PostSubmitValues } from "./type";
-import { specCardWrapper, formCSS } from "../style";
 import { flex, arrContainer } from "./style";
 
 export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveNextCard, movePrevCard }) => {
@@ -30,9 +30,9 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
     mode: "onChange",
   });
 
-  const uturnWatch = watch("college.uturn");
-  const maxGradeWatch = watch("college.maxGrade");
-  const gradeWatch = watch("college.grade");
+  const watchUturn = watch("college.uturn");
+  const watchMaxGrade = watch("college.maxGrade");
+  const watchGrade = watch("college.grade");
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
     const { department, uturn, grade, maxGrade } = formData.college;
@@ -53,29 +53,29 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
 
   return (
     <div css={specCardWrapper}>
-      <SpecCardTitle title="고등학교 학력정보" desc="정확하게 입력할 수록 스펙평가의 적중도는 올라갑니다." />
+      <TopTitle title="고등학교 학력정보" desc="정확하게 입력할 수록 스펙평가의 적중도는 올라갑니다." />
 
       <form css={formCSS}>
-        <ContainerBox
+        <MarginBox
           optionObj={{
-            location: "bottom",
+            marginLocation: "bottom",
             marginValue: 3.5,
             maxWidth: 40,
           }}
         >
-          <SelectRadioForm
+          <RadioForm
             registerObj={register("highschool.type", {
               required: "고등학교 정보를 선택해주세요.",
             })}
             backgroundStyle="blue02"
             itemArr={highschoolType}
           />
-          {errors.highschool?.type && <WarningText msg="고등학교 정보를 선택해주세요." />}
-        </ContainerBox>
+          {errors.highschool?.type && <WarningDesc msg="고등학교 정보를 선택해주세요." />}
+        </MarginBox>
 
-        <ContainerBox
+        <MarginBox
           optionObj={{
-            location: "bottom",
+            marginLocation: "bottom",
             marginValue: 4,
             maxWidth: 58,
           }}
@@ -89,10 +89,6 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                     value: 0,
                     message: "최소 일수는 0입니다.",
                   },
-                  pattern: {
-                    value: NUMBER_REGEXP,
-                    message: "숫자만 기입할 수 있습니다.",
-                  },
                   max: {
                     value: 365,
                     message: "최대 일수는 365입니다.",
@@ -104,6 +100,7 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                 firstDesc="#무단 결석:"
                 lastDesc="/일"
               />
+              {errors.highschool?.absent?.message && <WarningDesc msg={errors.highschool.absent.message} />}
             </li>
             <li>
               <NumberInputForm
@@ -116,10 +113,6 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                     value: 365,
                     message: "최대 일수는 365입니다.",
                   },
-                  pattern: {
-                    value: NUMBER_REGEXP,
-                    message: "숫자만 기입할 수 있습니다.",
-                  },
                   required: "무단지각 일수를 입력해주세요.",
                 })}
                 placeholder="?"
@@ -127,6 +120,7 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                 firstDesc="#무단 지각:"
                 lastDesc="/일"
               />
+              {errors.highschool?.tardy?.message && <WarningDesc msg={errors.highschool.tardy.message} />}
             </li>
             <li>
               <NumberInputForm
@@ -139,10 +133,6 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                     value: 365,
                     message: "최대 일수는 365입니다.",
                   },
-                  pattern: {
-                    value: NUMBER_REGEXP,
-                    message: "숫자만 기입할 수 있습니다.",
-                  },
                   required: "무단 조퇴 일수를 입력해주세요.",
                 })}
                 placeholder="?"
@@ -150,6 +140,7 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                 firstDesc="#무단 조퇴:"
                 lastDesc="/일"
               />
+              {errors.highschool?.leaveEarly?.message && <WarningDesc msg={errors.highschool.leaveEarly.message} />}
             </li>
             <li>
               <NumberInputForm
@@ -162,10 +153,6 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                     value: 365,
                     message: "최대 일수는 365입니다.",
                   },
-                  pattern: {
-                    value: NUMBER_REGEXP,
-                    message: "숫자만 기입할 수 있습니다.",
-                  },
                   required: "무단결과 일수를 입력해주세요.",
                 })}
                 placeholder="?"
@@ -173,17 +160,14 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                 firstDesc="#무단 결과:"
                 lastDesc="/일"
               />
+              {errors.highschool?.classMiss?.message && <WarningDesc msg={errors.highschool.classMiss.message} />}
             </li>
           </ul>
-          {errors.highschool?.absent?.message && <WarningText msg={errors.highschool.absent.message} />}
-          {errors.highschool?.tardy?.message && <WarningText msg={errors.highschool.tardy.message} />}
-          {errors.highschool?.leaveEarly?.message && <WarningText msg={errors.highschool.leaveEarly.message} />}
-          {errors.highschool?.classMiss?.message && <WarningText msg={errors.highschool.classMiss.message} />}
-        </ContainerBox>
+        </MarginBox>
 
-        <ContainerBox
+        <MarginBox
           optionObj={{
-            location: "bottom",
+            marginLocation: "bottom",
             marginValue: 2,
             maxWidth: 23.25,
           }}
@@ -206,62 +190,72 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
             lastDesc="등급"
             placeholder="?"
           />
-          {errors.highschool?.naesin?.message && <WarningText msg={errors.highschool.naesin.message} />}
-        </ContainerBox>
+          {errors.highschool?.naesin?.message && <WarningDesc msg={errors.highschool.naesin.message} />}
+        </MarginBox>
 
-        <ContainerBox
+        <MarginBox
           optionObj={{
-            location: "top",
+            marginLocation: "top",
             marginValue: 4.5,
             maxWidth: 35,
           }}
         >
-          <SpecCardTitle title="대학교 학력정보" />
+          <TopTitle title="대학교 학력정보" />
           <div css={flex}>
-            <TextInputForm
-              registerObj={register("college.department", {
-                required: "전공계열을 작성해주세요.",
-              })}
-              minWidth={20}
-              activeBorderStyle="blue"
-              placeholder="전공계열은 무엇이었나요?"
-            />
-            <GradeInputForm
-              selectArr={[4.3, 4.5]}
-              gradeValue={gradeWatch}
-              maxGradeValue={maxGradeWatch}
-              gradeObj={register("college.grade", {
-                min: {
-                  value: 1,
-                  message: "최소학점은 1입니다.",
-                },
-                max: {
-                  value: maxGradeWatch,
-                  message: `최대 학점은 ${maxGradeWatch}입니다.`,
-                },
-                required: "학점을 입력해주세요.",
-              })}
-              maxGradeObj={register("college.maxGrade", {
-                required: "학점 최대점수를 입력해주세요.",
-              })}
-            />
+            <div>
+              <TextInputForm
+                registerObj={register("college.department", {
+                  required: "전공계열을 작성해주세요.",
+                })}
+                minWidth={20}
+                activeBorderStyle="blue"
+                placeholder="전공계열은 무엇이었나요?"
+              />
+              {errors.college?.department?.message && <WarningDesc msg={errors.college?.department?.message} />}
+            </div>
+            <div>
+              <UniversityGradeForm
+                selectArr={[4.3, 4.5]}
+                gradeValue={watchGrade}
+                maxGradeValue={watchMaxGrade}
+                gradeObj={register("college.grade", {
+                  min: {
+                    value: 1,
+                    message: "최소학점은 1입니다.",
+                  },
+                  max: {
+                    value: watchMaxGrade,
+                    message: `최대 학점은 ${watchMaxGrade}입니다.`,
+                  },
+                  required: "학점을 입력해주세요.",
+                })}
+                maxGradeObj={register("college.maxGrade", {
+                  required: "학점 최대점수를 입력해주세요.",
+                })}
+              />
+              {errors.college?.grade?.message && <WarningDesc msg={errors.college?.grade?.message} />}
+              {errors.college?.maxGrade?.message && <WarningDesc msg={errors.college?.maxGrade?.message} />}
+            </div>
           </div>
-          {errors.college?.department?.message && <WarningText msg={errors.college?.department?.message} />}
-          {errors.college?.grade?.message && <WarningText msg={errors.college?.grade?.message} />}
-          {errors.college?.maxGrade?.message && <WarningText msg={errors.college?.maxGrade?.message} />}
-        </ContainerBox>
+        </MarginBox>
 
-        <ContainerBox
+        <MarginBox
           optionObj={{
-            location: "top",
+            marginLocation: "top",
             marginValue: 3.5,
           }}
         >
           <Desc desc="잠깐, 혹시 U - 턴 하셨나요?" />
-          <Toggle registerObj={register("college.uturn")} value={uturnWatch} id="uTurn" yesDesc="네" noDesc="아니오" />
-        </ContainerBox>
+          <ToggleForm
+            registerObj={register("college.uturn")}
+            value={watchUturn}
+            id="uTurn"
+            yesDesc="네"
+            noDesc="아니오"
+          />
+        </MarginBox>
 
-        <MoveCardButtons movePrevCard={movePrevCard} postSubmit={handleSubmit(postSubmit)} />
+        <BottomButton movePrevCard={movePrevCard} postSubmit={handleSubmit(postSubmit)} />
       </form>
     </div>
   );

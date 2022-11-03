@@ -1,11 +1,11 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { css } from "@emotion/react";
 
-import { SelectChipForm } from "@pages/datalab/spec/register/part/carouselCardPart/spec7Lang/component/selectChipForm";
+import { SelectForm } from "@pages/datalab/spec/register/component/selectForm";
 
 export default {
-  title: "datalab/spec/register/part/carouselCardPart/Spec7Lang/component/SelectChipForm",
-  component: SelectChipForm,
+  title: "datalab/spec/register/part/carouselCardPart/Spec7Lang/component/SelectForm",
+  component: SelectForm,
   argTypes: {
     value: {
       description: "selectArr에서 선택된 값",
@@ -29,9 +29,9 @@ export default {
     },
     componentSubtitle: "학점을 위한 입력폼 컴포넌트",
   },
-} as ComponentMeta<typeof SelectChipForm>;
+} as ComponentMeta<typeof SelectForm>;
 
-const Template: ComponentStory<typeof SelectChipForm> = (args) => {
+const Template: ComponentStory<typeof SelectForm> = (args) => {
   return (
     <div
       css={css`
@@ -41,7 +41,7 @@ const Template: ComponentStory<typeof SelectChipForm> = (args) => {
         margin: 5rem auto 0;
       `}
     >
-      <SelectChipForm {...args} />
+      <SelectForm {...args} />
     </div>
   );
 };

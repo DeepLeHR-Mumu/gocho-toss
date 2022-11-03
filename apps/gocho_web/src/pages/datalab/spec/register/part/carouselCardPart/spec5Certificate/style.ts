@@ -40,7 +40,7 @@ export const appendButton = css`
   border-radius: 2rem;
   position: relative;
 
-  > span {
+  > svg {
     line-height: 0;
     position: absolute;
     right: 1rem;

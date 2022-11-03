@@ -1,10 +1,10 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { MoveCardButtons } from "@pages/datalab/spec/register/component";
+import { BottomButton } from "@pages/datalab/spec/register/component";
 
 export default {
-  title: "datalab/spec/register/part/carouselCardPart/common/component/MoveCardButtons",
-  component: MoveCardButtons,
+  title: "datalab/spec/register/part/carouselCardPart/common/component/BottomButton",
+  component: BottomButton,
   argTypes: {
     movePrevCard: {
       description: "이전 버튼 클릭시 이전 카드로 이동하는 캐로셀 함수",
@@ -31,10 +31,10 @@ export default {
     },
     componentSubtitle: "스펙등록 각 카드에서 이전/다음으로 넘어가는 동작 + 작성된 데이터를 post하기위한 버튼",
   },
-} as ComponentMeta<typeof MoveCardButtons>;
+} as ComponentMeta<typeof BottomButton>;
 
-const Template: ComponentStory<typeof MoveCardButtons> = (args) => {
-  return <MoveCardButtons {...args} />;
+const Template: ComponentStory<typeof BottomButton> = (args) => {
+  return <BottomButton {...args} />;
 };
 
 export const 일반 = Template.bind({});

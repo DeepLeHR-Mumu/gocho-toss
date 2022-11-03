@@ -1,11 +1,11 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { css } from "@emotion/react";
 
-import { WarningText } from "@pages/datalab/spec/register/component";
+import { WarningDesc } from "@pages/datalab/spec/register/component";
 
 export default {
-  title: "datalab/spec/register/part/carouselCardPart/common/component/WarningText",
-  component: WarningText,
+  title: "datalab/spec/register/part/carouselCardPart/common/component/WarningDesc",
+  component: WarningDesc,
   argTypes: {
     msg: {
       description: "react-hook-form 에러 메시지",
@@ -14,9 +14,9 @@ export default {
   parameters: {
     componentSubtitle: "react-hook-form 사용시 에러 텍스트",
   },
-} as ComponentMeta<typeof WarningText>;
+} as ComponentMeta<typeof WarningDesc>;
 
-const Template: ComponentStory<typeof WarningText> = (args) => {
+const Template: ComponentStory<typeof WarningDesc> = (args) => {
   return (
     <div
       css={css`
@@ -25,7 +25,7 @@ const Template: ComponentStory<typeof WarningText> = (args) => {
         justify-content: center;
       `}
     >
-      <WarningText {...args} />
+      <WarningDesc {...args} />
     </div>
   );
 };

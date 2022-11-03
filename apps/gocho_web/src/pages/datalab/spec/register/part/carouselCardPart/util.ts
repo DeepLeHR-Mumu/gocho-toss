@@ -1,6 +1,4 @@
-import { setCarouselSettingDef } from "./type";
-
-export const setCarouselSetting: setCarouselSettingDef = {
+export const setCarouselSetting = {
   dots: false,
   autoplay: false,
   arrows: false,

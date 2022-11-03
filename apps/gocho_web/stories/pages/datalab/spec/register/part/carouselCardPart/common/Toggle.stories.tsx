@@ -1,11 +1,11 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { css } from "@emotion/react";
 
-import { Toggle } from "@pages/datalab/spec/register/component";
+import { ToggleForm } from "@pages/datalab/spec/register/component";
 
 export default {
-  title: "datalab/spec/register/part/carouselCardPart/common/component/Toggle",
-  component: Toggle,
+  title: "datalab/spec/register/part/carouselCardPart/common/component/ToggleForm",
+  component: ToggleForm,
   argTypes: {
     yesDesc: {
       description: "true인경우 안내글",
@@ -29,9 +29,9 @@ export default {
     },
     componentSubtitle: "마이페이지 캐로셀 예 아니오 토글버튼",
   },
-} as ComponentMeta<typeof Toggle>;
+} as ComponentMeta<typeof ToggleForm>;
 
-const Template: ComponentStory<typeof Toggle> = (args) => {
+const Template: ComponentStory<typeof ToggleForm> = (args) => {
   return (
     <div
       css={css`
@@ -40,7 +40,7 @@ const Template: ComponentStory<typeof Toggle> = (args) => {
         justify-content: center;
       `}
     >
-      <Toggle {...args} />
+      <ToggleForm {...args} />
     </div>
   );
 };
