@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { linkObj } from "../constant/internalURL";
 
 test.beforeEach(async ({ page, request, baseURL }) => {
-  await page.goto(linkObj.baseUrl);
+  await page.goto(linkObj.DESKTOP_BASE_URL);
 
   // login test
   const USER_EMAIL = "myTestId@deeplehr.com";
@@ -59,7 +59,7 @@ test.describe("메인페이지 테스트", () => {
   // 결과가 없다면 다음 대처방식의 대한 고민 만약 Header 컴포넌트가 없다면 다음으로 ...??
   test("Header component 테스트", async ({ page }) => {
     await page.locator("_react=Header").nth(0).locator("a").nth(0).click();
-    await expect(page).toHaveURL(`${linkObj.baseUrl}/`);
+    await expect(page).toHaveURL(`${linkObj.DESKTOP_BASE_URL}/`);
 
     const headerInNavLi = page.locator("_react=Header").nth(0).locator("nav > ul > li");
 
@@ -75,8 +75,8 @@ test.describe("메인페이지 테스트", () => {
 
   test("기능 테스트", async ({ page }) => {
     await page.locator("text=꿀팁보기").click();
-    await expect(page).toHaveURL(`${linkObj.baseUrl}${linkObj.COMMUNITY_TIPS_LIST_URL}`);
-    await page.goto(linkObj.baseUrl);
+    await expect(page).toHaveURL(`${linkObj.DESKTOP_BASE_URL}${linkObj.COMMUNITY_TIPS_LIST_URL}`);
+    await page.goto(linkObj.DESKTOP_BASE_URL);
     const jobCardArr = page.locator("_react=JobCardList").locator("_react=JobSmallCard");
     await page.locator(`button:has-text("실시간")`).click();
     await expect(jobCardArr).toHaveCount(9);
@@ -87,6 +87,6 @@ test.describe("메인페이지 테스트", () => {
     await page.locator(`button:has-text("인기")`).click();
     await expect(jobCardArr).toHaveCount(9);
     await page.locator("text=데이터랩 바로가기").click();
-    await expect(page).toHaveURL(`${linkObj.baseUrl}${linkObj.DATALAB_DETAIL}`);
+    await expect(page).toHaveURL(`${linkObj.DESKTOP_BASE_URL}${linkObj.DATALAB_DETAIL}`);
   });
 });

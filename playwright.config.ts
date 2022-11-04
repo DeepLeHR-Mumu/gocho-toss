@@ -3,7 +3,6 @@ import { devices } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
   testDir: "./e2e",
-  // timeout: 30 * 1000 * 60,
   timeout: 5000,
   expect: {
     timeout: 5000,
@@ -15,7 +14,7 @@ const config: PlaywrightTestConfig = {
   reporter: "html",
   use: {
     actionTimeout: 0,
-    baseURL: "https://gocho-back.com/v1",
+    baseURL: "https://dev.gocho-back.com/v1",
     trace: "on-first-retry",
   },
 

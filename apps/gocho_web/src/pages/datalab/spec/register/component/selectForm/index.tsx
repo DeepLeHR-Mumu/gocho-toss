@@ -42,12 +42,12 @@ export const SelectForm: FunctionComponent<SelectFormProps> = ({
         <BsChevronDown />
       </button>
       <div css={langArrBox(isShowLangArrBox)}>
-        <h4 css={langTitle}>
+        <strong css={langTitle}>
           {desc}
           <button type="button" onClick={handleHideBox}>
             <BsChevronUp />
           </button>
-        </h4>
+        </strong>
         <ul css={langArrContainer}>
           {selectArr?.length === 0 && <p css={noLangDesc}>언어를 먼저 선택해주세요</p>}
           {selectArr !== undefined &&

@@ -133,7 +133,7 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
                     value: 365,
                     message: "최대 일수는 365입니다.",
                   },
-                  required: "무단 조퇴 일수를 입력해주세요.",
+                  required: "무단조퇴 일수를 입력해주세요.",
                 })}
                 placeholder="?"
                 id="leaveEarly"
