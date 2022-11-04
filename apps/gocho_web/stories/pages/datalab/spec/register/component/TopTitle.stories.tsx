@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { TopTitle } from "@pages/datalab/spec/register/component";
 
 export default {
-  title: "datalab/spec/register/part/carouselCardPart/common/component/TopTitle",
+  title: "데이터랩/스펙등록/component/TopTitle",
   component: TopTitle,
   argTypes: {
     title: {

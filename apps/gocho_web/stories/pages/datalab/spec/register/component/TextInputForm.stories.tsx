@@ -4,11 +4,11 @@ import { css } from "@emotion/react";
 import { TextInputForm } from "@pages/datalab/spec/register/component";
 
 export default {
-  title: "datalab/spec/register/part/carouselCardPart/common/component/TextInputForm",
+  title: "데이터랩/스펙등록/component/TextInputForm",
   component: TextInputForm,
   argTypes: {
     placeholder: {
-      description: "폼의 placeholder를 위한 글",
+      description: "text input placeholder",
     },
     activeBorderStyle: {
       description: "focus시 보더 및 배경색상의 스타일",

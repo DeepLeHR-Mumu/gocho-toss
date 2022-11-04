@@ -4,7 +4,7 @@ import { css } from "@emotion/react";
 import { ToggleForm } from "@pages/datalab/spec/register/component";
 
 export default {
-  title: "datalab/spec/register/part/carouselCardPart/common/component/ToggleForm",
+  title: "데이터랩/스펙등록/component/ToggleForm",
   component: ToggleForm,
   argTypes: {
     yesDesc: {

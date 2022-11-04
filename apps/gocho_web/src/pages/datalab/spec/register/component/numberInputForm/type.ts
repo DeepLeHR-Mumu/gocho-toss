@@ -6,5 +6,4 @@ export interface NumberInputFormProps {
   lastDesc: string;
   id: string;
   placeholder?: string;
-  width?: number | "auto";
 }

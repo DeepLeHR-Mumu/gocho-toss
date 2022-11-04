@@ -4,7 +4,7 @@ import { css } from "@emotion/react";
 import { WarningDesc } from "@pages/datalab/spec/register/component";
 
 export default {
-  title: "datalab/spec/register/part/carouselCardPart/common/component/WarningDesc",
+  title: "데이터랩/스펙등록/component/WarningDesc",
   component: WarningDesc,
   argTypes: {
     msg: {
@@ -30,7 +30,7 @@ const Template: ComponentStory<typeof WarningDesc> = (args) => {
   );
 };
 
-export const 일반 = Template.bind({});
-일반.args = {
+export const 에러메세지 = Template.bind({});
+에러메세지.args = {
   msg: "에러 내용입니다.",
 };
