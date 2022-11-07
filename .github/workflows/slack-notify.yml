@@ -4,11 +4,11 @@ on:
   check_run:
     types: [completed]
   deployment_status:
-  pull_request:
-    types:
-      - opened
-    branches:
-      - [dev, main]
+    pull_request:
+      types:
+        - opened
+      branches:
+        - [dev, main]
 jobs:
   success_slack:
     if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
