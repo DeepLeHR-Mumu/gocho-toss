@@ -13,8 +13,12 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "16.x"
+      - name: setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7.9.5
       - name: Install dependencies
-        run: pnpm i
+        run: pnpm install
       - name: Install Playwright Browsers
         run: pnpx playwright install --with-deps
       - name: Run Playwright tests
