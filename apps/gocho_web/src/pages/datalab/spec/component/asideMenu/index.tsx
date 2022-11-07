@@ -26,7 +26,13 @@ export const AsideMenu: FunctionComponent<AsideMenuProps> = ({ isFix = true }) =
         <ProfileImg imageStr={userInfoData.image} size="M" />
         <p css={loginNickname}>{userInfoData.nickname}</p>
       </div>
-      <Link href={SPEC_REGISTER_URL} passHref>
+      <Link
+        href={{
+          pathname: SPEC_REGISTER_URL,
+          hash: "basic",
+        }}
+        passHref
+      >
         <a css={[asideLink, pointLink]}>
           스펙
           <br />

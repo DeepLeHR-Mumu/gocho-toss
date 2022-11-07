@@ -1,10 +1,11 @@
 import { FunctionComponent, useRef, useState, useEffect } from "react";
 import Slider from "react-slick";
+import { useRouter } from "next/router";
 
 import { scrollToTop } from "shared-ui/common/atom/scrollTop";
 import { specRegisterStepEvent } from "shared-ga/spec";
 
-import { useProgress } from "@recoil/hook/spec";
+// import { useProgress } from "@recoil/hook/spec";
 
 import { Spec1Basic } from "./spec1Basic";
 import { Spec2lastEducation } from "./spec2LastEducation";
@@ -25,16 +26,18 @@ export const SpecWritePart: FunctionComponent = () => {
   const [currentIndex, setCurrenIndex] = useState(1);
   const [maximumIndex, setMaximumIndex] = useState(1);
 
-  const { setCurrentProgress } = useProgress();
+  // const { setCurrentProgress } = useProgress();
+  const router = useRouter();
   const sliderRef = useRef<Slider>(null);
 
   const moveNextCard = (percent: number) => {
+    sliderRef.current?.slickNext();
     scrollToTop();
-    setCurrentProgress(percent);
+    sessionStorage.setItem("progressPercent", `${percent}`);
+    // setCurrentProgress(percent);
     setCurrenIndex((prev) => {
       return prev + 1;
     });
-    sliderRef.current?.slickNext();
   };
 
   const movePrevCard = () => {
@@ -47,6 +50,9 @@ export const SpecWritePart: FunctionComponent = () => {
 
   const writeMoreSpecHandler = () => {
     setIsWriteMoreSpec(false);
+    router.push({
+      hash: "lang",
+    });
     setCurrenIndex((prev) => {
       return prev + 1;
     });
@@ -69,13 +75,9 @@ export const SpecWritePart: FunctionComponent = () => {
     <section css={wrapper}>
       <Slider {...setCarouselSetting} ref={sliderRef}>
         <Spec1Basic moveNextCard={moveNextCard} />
-
         <Spec2lastEducation movePrevCard={movePrevCard} moveNextCard={moveNextCard} setUserLastEdu={setUserLastEdu} />
-
         {userLastEdu === "고졸" && <Spec3Highschool movePrevCard={movePrevCard} moveNextCard={moveNextCard} />}
-
         {userLastEdu === "초대졸" && <Spec4University movePrevCard={movePrevCard} moveNextCard={moveNextCard} />}
-
         <Spec5Certificate movePrevCard={movePrevCard} moveNextCard={moveNextCard} />
 
         {isWriteMoreSpec && (
@@ -85,11 +87,8 @@ export const SpecWritePart: FunctionComponent = () => {
             writeMoreSpecHandler={writeMoreSpecHandler}
           />
         )}
-
         {!isWriteMoreSpec && <Spec7Lang movePrevCard={movePrevCard} moveNextCard={moveNextCard} />}
-
         {!isWriteMoreSpec && <Spec8AwardCareerEtc movePrevCard={movePrevCard} moveNextCard={moveNextCard} />}
-
         <Spec9Success />
       </Slider>
     </section>

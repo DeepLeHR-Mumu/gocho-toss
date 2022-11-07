@@ -14,7 +14,6 @@ import { specRegisterFunnelEvent } from "shared-ga/spec";
 import { useModal } from "@recoil/hook/modal";
 import { Layout } from "@component/layout";
 
-import { PageBlockingPart } from "./part/pageBlockingPart";
 import { ProgressPart } from "./part/progressPart";
 import { SpecWritePart } from "./part/carouselCardPart";
 
@@ -24,6 +23,24 @@ const Register: NextPage = () => {
   const router = useRouter();
   const { setCurrentModal, currentModal } = useModal();
   const { error: userInfoError } = useUserInfo();
+
+  useEffect(() => {
+    const routeChangeStart = (url: string) => {
+      const isCurrentSpecObj = Boolean(sessionStorage.getItem("specObj") === null);
+
+      if (!isCurrentSpecObj) {
+        setCurrentModal("pageBlockModal", { url, text: "작성 중인 스펙이 초기화됩니다. 나가시겠습니까?" });
+        router.events.emit("routeChangeError");
+        // eslint-disable-next-line no-throw-literal
+        throw true;
+      }
+    };
+
+    router.events.on("routeChangeStart", routeChangeStart);
+    return () => {
+      router.events.off("routeChangeStart", routeChangeStart);
+    };
+  }, [router.events, setCurrentModal]);
 
   // 근본적인 고민을 해보자
   // currentModal.active에 null인 경우에
@@ -49,7 +66,6 @@ const Register: NextPage = () => {
       </Head>
       <MetaHead metaData={META_SPEC_REGISTER} />
 
-      <PageBlockingPart />
       <ProgressPart />
       <Layout>
         <InvisibleH2 title="생산직 스펙 평가 등록하기" />

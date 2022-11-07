@@ -1,4 +1,5 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
 import { SPEC_LIST_URL } from "shared-constant/internalURL";
@@ -8,6 +9,19 @@ import { TopTitle } from "@pages/datalab/spec/register/component";
 import { desc, successButton, specCardWrapper } from "./style";
 
 export const Spec9Success: FunctionComponent = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const routeChangeStart = () => {
+      sessionStorage.removeItem("progressPercent");
+    };
+
+    router.events.on("routeChangeStart", routeChangeStart);
+    return () => {
+      router.events.off("routeChangeStart", routeChangeStart);
+    };
+  }, [router.events]);
+
   return (
     <div css={specCardWrapper}>
       <TopTitle title="스펙등록 완료" desc="축하드립니다!" />
