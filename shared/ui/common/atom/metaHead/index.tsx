@@ -33,6 +33,7 @@ export const MetaHead: FunctionComponent<MetaHeadProps> = ({ metaData, jdDetail,
         <meta property="og:image" content={metaData.ogImage} />
         <meta property="og:article:author" content={metaData.title} />
       </Head>
+      {/* TODO : 분리 해야함 */}
       <InvisibleH1 title={metaData.title} />
     </>
   );

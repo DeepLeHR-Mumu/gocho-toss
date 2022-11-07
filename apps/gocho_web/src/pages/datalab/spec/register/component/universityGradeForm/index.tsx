@@ -23,19 +23,26 @@ export const UniversityGradeForm: FunctionComponent<UniversityGradeFormProps> = 
 }) => {
   const [isClick, setIsClick] = useState<boolean>(false);
 
-  const handleShowBox = () => {
-    setIsClick(true);
-  };
-
-  const handleHideBox = () => {
-    setIsClick(false);
-  };
-
   return (
     <div css={wrapper}>
-      {isClick && <button type="button" css={boxHideButton} onClick={handleHideBox} aria-label="학점 창닫기" />}
+      {isClick && (
+        <button
+          type="button"
+          css={boxHideButton}
+          onClick={() => {
+            setIsClick(false);
+          }}
+          aria-label="학점 창닫기"
+        />
+      )}
 
-      <button type="button" css={buttonCSS} onClick={handleShowBox}>
+      <button
+        type="button"
+        css={buttonCSS}
+        onClick={() => {
+          setIsClick(true);
+        }}
+      >
         평균학점 :<span css={isValueColor(gradeValue)}>{`${gradeValue || "학점"}`}/</span>
         <span css={isValueColor(maxGradeValue)}>{`${maxGradeValue || "기준선택"}`}</span>
       </button>
@@ -58,11 +65,11 @@ export const UniversityGradeForm: FunctionComponent<UniversityGradeFormProps> = 
           {...gradeObj}
           onKeyDown={(onKeyDownEvent) => {
             if (onKeyDownEvent.key === "Escape") {
-              handleHideBox();
+              setIsClick(false);
             }
             if (onKeyDownEvent.key === "Enter") {
               onKeyDownEvent.preventDefault();
-              handleHideBox();
+              setIsClick(false);
             }
           }}
         />
@@ -78,7 +85,13 @@ export const UniversityGradeForm: FunctionComponent<UniversityGradeFormProps> = 
             );
           })}
         </ul>
-        <button type="button" onClick={handleHideBox} css={appendButton}>
+        <button
+          type="button"
+          onClick={() => {
+            setIsClick(false);
+          }}
+          css={appendButton}
+        >
           학점 추가하기
         </button>
       </div>

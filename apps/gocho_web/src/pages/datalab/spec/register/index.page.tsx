@@ -23,15 +23,20 @@ import { wrapper, title } from "./style";
 const Register: NextPage = () => {
   const router = useRouter();
   const { setCurrentModal, currentModal } = useModal();
-  const { error } = useUserInfo();
+  const { error: userInfoError } = useUserInfo();
 
+  // 근본적인 고민을 해보자
+  // currentModal.active에 null인 경우에
   useEffect(() => {
-    if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
+    if (
+      axios.isAxiosError(userInfoError) &&
+      (userInfoError.response?.status === 401 || userInfoError.response?.status === 403)
+    ) {
       setCurrentModal("loginModal", { button: "home" });
     }
-    if (currentModal?.activatedModal === "signUpModal") setCurrentModal("signUpModal");
-    if (currentModal?.activatedModal === "findPasswordModal") setCurrentModal("findPasswordModal");
-  }, [currentModal?.activatedModal, error, setCurrentModal]);
+    // if (currentModal?.activatedModal === "signUpModal") setCurrentModal("signUpModal");
+    // if (currentModal?.activatedModal === "findPasswordModal") setCurrentModal("findPasswordModal");
+  }, [currentModal?.activatedModal, userInfoError, setCurrentModal]);
 
   useEffect(() => {
     specRegisterFunnelEvent();

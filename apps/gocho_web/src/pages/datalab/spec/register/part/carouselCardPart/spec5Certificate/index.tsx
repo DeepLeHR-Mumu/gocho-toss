@@ -56,12 +56,10 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
     moveNextCard(60);
   };
 
-  // 자격증 리스트 중복 제거
   const filterOverlapArr = certificateArr.filter((keyword, index) => {
     return certificateArr.indexOf(keyword) === index;
   });
 
-  // 자격증 검색시 검색 키워드로 필터링
   const filterSearchKeywordArrHandler: filterSearchKeywordArrHandlerDef = (onChangeEvent) => {
     const { value } = onChangeEvent.target;
 
@@ -73,10 +71,6 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
     });
 
     setFilterSearchCertiArr(filterArr);
-  };
-
-  const handleShowCertificateArrBox = () => {
-    setIsShowCertiBox(true);
   };
 
   const handleHideCertificateArrBox = () => {
@@ -109,7 +103,13 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
         {watchIsCerti && (
           <div css={certificateContainer}>
             <div css={buttonContainer}>
-              <button type="button" css={appendButton} onClick={handleShowCertificateArrBox}>
+              <button
+                type="button"
+                css={appendButton}
+                onClick={() => {
+                  setIsShowCertiBox(true);
+                }}
+              >
                 키워드를 입력하면 관련 자격증이 검색됩니다
                 <BsChevronDown />
               </button>
