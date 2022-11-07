@@ -62,7 +62,7 @@ export const BestUserList: FunctionComponent<BestUserArrProps | SkeletonProps> =
               <span css={setPointColor(isActive)}>{user.score?.toFixed(1)}</span> / 5
             </p>
 
-            <p css={recruitSectorCSS}>평가수 {user.score}</p>
+            <p css={recruitSectorCSS}>평가수 {user.scoreCount}</p>
           </button>
         );
       })}

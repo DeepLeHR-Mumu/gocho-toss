@@ -16,6 +16,7 @@ export interface BestUserArrProps {
       badge: "default" | "early_bird" | "admin";
     };
     score: number | null;
+    scoreCount: number;
     desiredTask: TaskType | null;
   }[];
 }
