@@ -4,7 +4,7 @@ import { useStatistics } from "@api/stat/useStatistics";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
-import { sectionTitle, graphContainer } from "./style";
+import { sectionTitle, graphContainer, dataWrapper, dataBox, dataTitle, dataTextPoint, dataText } from "./style";
 
 const Home: NextPage = () => {
   const { data: dashboardData, isLoading, isError } = useStatistics();
@@ -22,8 +22,17 @@ const Home: NextPage = () => {
       <h2 css={pageTitle}>대시보드</h2>
       <section>
         <h3 css={sectionTitle}>유저 관련</h3>
-        <p>총 유저 수: {dashboardData.allUsers}</p>
-        <p>오늘 가입한 수: {dashboardData.todayUser}</p>
+        <div css={dataWrapper}>
+          <div css={dataBox}>
+            <strong css={dataTitle}>총 유저 수</strong>
+            <p css={dataTextPoint}>{dashboardData.allUsers}</p>
+          </div>
+          <div css={dataBox}>
+            <strong css={dataTitle}>오늘 가입한 수</strong>
+            <p css={dataText}>{dashboardData.todayUser}</p>
+          </div>
+        </div>
+
         <ResponsiveContainer width="70%" height={300}>
           <LineChart data={dashboardData.userGraphData} margin={{ top: 20, bottom: 20 }}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -37,10 +46,24 @@ const Home: NextPage = () => {
       </section>
       <section>
         <h3 css={sectionTitle}>홈페이지 관련</h3>
-        <p>오늘 올라간 공고 수: {dashboardData.todayJds}</p>
-        <p>오늘 공고 북마크 수: {dashboardData.todayJdBookmarks}</p>
-        <p>오늘 회사 북마크 수: {dashboardData.todayCompanyBookmarks}</p>
-        <p>오늘 작성된 댓글 수: {dashboardData.todayComments}</p>
+        <div css={dataWrapper}>
+          <div css={dataBox}>
+            <strong css={dataTitle}>오늘 올라간 공고 수</strong>
+            <p css={dataText}>{dashboardData.todayJds}</p>
+          </div>
+          <div css={dataBox}>
+            <strong css={dataTitle}>오늘 공고 북마크 수</strong>
+            <p css={dataText}>{dashboardData.todayJdBookmarks}</p>
+          </div>
+          <div css={dataBox}>
+            <strong css={dataTitle}>오늘 회사 북마크 수</strong>
+            <p css={dataText}>{dashboardData.todayCompanyBookmarks}</p>
+          </div>
+          <div css={dataBox}>
+            <strong css={dataTitle}>오늘 작성된 댓글 수</strong>
+            <p css={dataText}>{dashboardData.todayComments}</p>
+          </div>
+        </div>
         <div css={graphContainer}>
           <ResponsiveContainer width="49%" height={300}>
             <LineChart data={dashboardData.commentGraphData} margin={{ top: 20, bottom: 20 }}>
