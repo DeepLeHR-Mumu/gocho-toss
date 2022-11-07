@@ -19,8 +19,6 @@ jobs:
           version: latest
       - name: Install dependencies
         run: pnpm install
-        with:
-          version: 7.9.5
       - name: Install Playwright Browsers
         run: pnpx playwright install --with-deps
       - name: Run Playwright tests
