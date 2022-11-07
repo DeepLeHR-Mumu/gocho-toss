@@ -1,27 +1,19 @@
 import { FunctionComponent, useRef } from "react";
 import Slider from "react-slick";
-import { useJobArr } from "shared-api/job";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { JobAdCard } from "shared-ui/card/jobAdCard";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
+import { useBannerArr } from "shared-api/banner/useBannerArr";
 import { setCarouselSetting } from "./util";
 import { listContainer, controlWrapper, buttonCSS } from "./style";
 
 export const SuggestedJobCardList: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
 
-  const {
-    data: jobDataArr,
-    isLoading,
-    isError,
-  } = useJobArr({
-    order: "view",
-    filter: "valid",
-    limit: 5,
-  });
+  const { data: bannerDataArr, isLoading, isError } = useBannerArr({ type: "T" });
 
-  if (!jobDataArr || isError || isLoading) {
+  if (!bannerDataArr || isError || isLoading) {
     return (
       <div css={listContainer}>
         <Slider {...setCarouselSetting()} ref={sliderRef}>
@@ -35,8 +27,8 @@ export const SuggestedJobCardList: FunctionComponent = () => {
   return (
     <div css={listContainer}>
       <Slider {...setCarouselSetting()} ref={sliderRef}>
-        {jobDataArr.jobDataArr.map((job) => {
-          return <JobAdCard jobAdData={job} isMobile key={`JobAdCard${job.id}`} />;
+        {bannerDataArr.bannerDataArr.map((banner) => {
+          return <JobAdCard jobAdData={banner} isMobile key={`JobAdCard${banner.id}`} />;
         })}
       </Slider>
 

@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import Image from "next/image";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
@@ -27,8 +27,6 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
   isSkeleton,
   isMobile,
 }) => {
-  const [imageSrc, setImageSrc] = useState(jobAdData?.companyLogo as string);
-
   if (isSkeleton || jobAdData === undefined) {
     return (
       <div css={jobAdCardSkeleton}>
@@ -37,8 +35,8 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
     );
   }
 
-  const { month: startMonth, date: startDate } = dateConverter(jobAdData.startTime);
-  const { month: endMonth, date: endDate } = dateConverter(jobAdData.endTime);
+  const { month: startMonth, date: startDate } = dateConverter(jobAdData.jdStartTime);
+  const { month: endMonth, date: endDate } = dateConverter(jobAdData.jdEndTime);
 
   return (
     <>
@@ -61,10 +59,7 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
                 <Image
                   layout="fill"
                   objectFit="contain"
-                  src={imageSrc || jobAdData.companyLogo}
-                  onError={() => {
-                    return setImageSrc(defaultCompanyLogo);
-                  }}
+                  src={jobAdData?.companyLogo || defaultCompanyLogo}
                   alt={jobAdData.companyName}
                 />
               </div>
@@ -80,7 +75,7 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
         </button>
       </a>
       {/* LATER : 관리자페이지 color 연결 */}
-      <div css={colorLine("#2284a5", isMobile)} />
+      <div css={colorLine(jobAdData?.color || "#2284a5", isMobile)} />
     </>
   );
 };

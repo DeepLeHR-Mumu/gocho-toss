@@ -15,6 +15,11 @@ export const headerWrapper = css`
 export const headerContainer = css`
   display: flex;
   align-items: center;
+  justify-content: space-between;
+`;
+
+export const flexBox = css`
+  display: flex;
 `;
 
 export const logoCSS = css`
@@ -29,4 +34,19 @@ export const logoCSS = css`
 export const title = css`
   font-size: 1.25rem;
   font-weight: 700;
+`;
+
+export const loginButton = css`
+  padding: 0.25rem 1rem;
+  border: 2px solid ${COLORS.GRAY10};
+  background-color: ${COLORS.BLUE_FIRST40};
+  color: ${COLORS.GRAY100};
+`;
+
+export const logoutButton = css`
+  margin-left: 1rem;
+  padding: 0.25rem 1rem;
+  border: 2px solid ${COLORS.GRAY10};
+  background-color: #b32100;
+  color: ${COLORS.GRAY100};
 `;

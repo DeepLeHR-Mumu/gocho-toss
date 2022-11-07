@@ -1,26 +1,54 @@
 import Link from "next/link";
-import { MAIN_URL } from "@constant/internalURL";
+import { MAIN_URL, LOGIN_URL } from "@constant/internalURL";
 import Image from "next/image";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 
 import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
 
 import { Layout } from "@component/layout";
-import { headerWrapper, headerContainer, logoCSS, title } from "./style";
+import { useQueryClient } from "@tanstack/react-query";
+import { headerWrapper, headerContainer, flexBox, logoCSS, title, loginButton, logoutButton } from "./style";
 
 export const Header: FunctionComponent = () => {
+  const queryClient = useQueryClient();
+  const [isLogined, setIsLogined] = useState<boolean>(false);
+
+  const doLogout = () => {
+    localStorage.clear();
+    queryClient.resetQueries();
+  };
+
+  useEffect(() => {
+    setIsLogined(!!localStorage.getItem("accessToken"));
+  }, [isLogined]);
+
   return (
     <header css={headerWrapper}>
       <Layout>
         <div css={headerContainer}>
-          <div css={logoCSS}>
-            <Link href={MAIN_URL} passHref>
-              <a>
-                <Image src={colorLogoSrc} alt="고초대졸닷컴" objectFit="contain" layout="fill" />
-              </a>
-            </Link>
+          <div css={flexBox}>
+            <div css={logoCSS}>
+              <Link href={MAIN_URL} passHref>
+                <a>
+                  <Image src={colorLogoSrc} alt="고초대졸닷컴" objectFit="contain" layout="fill" />
+                </a>
+              </Link>
+            </div>
+            <p css={title}>매니저 페이지</p>
           </div>
-          <p css={title}>매니저 페이지</p>
+          <div css={flexBox}>
+            {isLogined ? (
+              <button type="button" css={logoutButton} onClick={doLogout}>
+                로그아웃
+              </button>
+            ) : (
+              <Link href={LOGIN_URL}>
+                <button type="button" css={loginButton}>
+                  로그인
+                </button>
+              </Link>
+            )}
+          </div>
         </div>
       </Layout>
     </header>
