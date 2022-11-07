@@ -14,11 +14,11 @@ jobs:
         with:
           node-version: "16.x"
       - name: Install dependencies
-        run: pnpm i --frozen-lockfile
+        run: pnpm i
       - name: Install Playwright Browsers
         run: pnpx playwright install --with-deps
       - name: Run Playwright tests
-        run: pnpx playwright test
+        run: pnpx playwright test --trace on
       - uses: actions/upload-artifact@v2
         if: always()
         with:
