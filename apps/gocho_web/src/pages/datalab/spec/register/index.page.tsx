@@ -2,15 +2,14 @@ import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import axios from "axios";
 
-import { useUserInfo } from "shared-api/auth";
 import { META_SPEC_REGISTER } from "shared-constant/meta";
-import { GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
+import { GOCHO_DESKTOP_URL, SPEC_LIST_URL } from "shared-constant/internalURL";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { specRegisterFunnelEvent } from "shared-ga/spec";
 
+import { useShowUnLoginModal } from "@recoil/hook/unLoginModal";
 import { useModal } from "@recoil/hook/modal";
 import { Layout } from "@component/layout";
 
@@ -21,8 +20,8 @@ import { wrapper, title } from "./style";
 
 const Register: NextPage = () => {
   const router = useRouter();
-  const { setCurrentModal, currentModal } = useModal();
-  const { error: userInfoError } = useUserInfo();
+  const { setCurrentModal } = useModal();
+  useShowUnLoginModal();
 
   useEffect(() => {
     const routeChangeStart = (url: string) => {
@@ -37,23 +36,24 @@ const Register: NextPage = () => {
     };
 
     router.events.on("routeChangeStart", routeChangeStart);
+    window.addEventListener("beforeunload", () => {
+      routeChangeStart(SPEC_LIST_URL);
+    });
+    router.beforePopState(() => {
+      routeChangeStart(SPEC_LIST_URL);
+      return true;
+    });
     return () => {
       router.events.off("routeChangeStart", routeChangeStart);
-    };
-  }, [router.events, setCurrentModal]);
+      window.removeEventListener("beforeunload", () => {
+        routeChangeStart(SPEC_LIST_URL);
+      });
 
-  // 근본적인 고민을 해보자
-  // currentModal.active에 null인 경우에
-  useEffect(() => {
-    if (
-      axios.isAxiosError(userInfoError) &&
-      (userInfoError.response?.status === 401 || userInfoError.response?.status === 403)
-    ) {
-      setCurrentModal("loginModal", { button: "home" });
-    }
-    // if (currentModal?.activatedModal === "signUpModal") setCurrentModal("signUpModal");
-    // if (currentModal?.activatedModal === "findPasswordModal") setCurrentModal("findPasswordModal");
-  }, [currentModal?.activatedModal, userInfoError, setCurrentModal]);
+      router.beforePopState(() => {
+        return true;
+      });
+    };
+  }, [router, router.events, setCurrentModal]);
 
   useEffect(() => {
     specRegisterFunnelEvent();

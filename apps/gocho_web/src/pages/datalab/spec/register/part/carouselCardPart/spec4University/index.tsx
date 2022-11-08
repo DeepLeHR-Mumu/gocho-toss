@@ -10,7 +10,6 @@ import {
   TextInputForm,
   ToggleForm,
   WarningDesc,
-  MarginBox,
   UniversityGradeForm,
 } from "@pages/datalab/spec/register/component";
 
@@ -18,7 +17,7 @@ import { specCardWrapper, formCSS } from "../style";
 
 import { highschoolType } from "./constant";
 import { Spec4UniversityProps, PostSubmitValues } from "./type";
-import { flex, arrContainer } from "./style";
+import { flex, arrContainer, typeBox, classInfoBox, naesinBox, collegeBox, uturnBox } from "./style";
 
 export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveNextCard, movePrevCard }) => {
   const {
@@ -34,6 +33,10 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
   const watchMaxGrade = watch("college.maxGrade");
   const watchGrade = watch("college.grade");
 
+  const movePrevSlider = () => {
+    movePrevCard("2");
+  };
+
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
     const { department, uturn, grade, maxGrade } = formData.college;
 
@@ -48,7 +51,7 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
       },
     });
     sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
-    moveNextCard(40);
+    moveNextCard("4");
   };
 
   return (
@@ -56,13 +59,7 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
       <TopTitle title="고등학교 학력정보" desc="정확하게 입력할 수록 스펙평가의 적중도는 올라갑니다." />
 
       <form css={formCSS}>
-        <MarginBox
-          optionObj={{
-            marginLocation: "bottom",
-            marginValue: 3.5,
-            maxWidth: 40,
-          }}
-        >
+        <div css={typeBox}>
           <RadioForm
             registerObj={register("highschool.type", {
               required: "고등학교 정보를 선택해주세요.",
@@ -71,15 +68,9 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
             itemArr={highschoolType}
           />
           {errors.highschool?.type && <WarningDesc msg="고등학교 정보를 선택해주세요." />}
-        </MarginBox>
+        </div>
 
-        <MarginBox
-          optionObj={{
-            marginLocation: "bottom",
-            marginValue: 4,
-            maxWidth: 58,
-          }}
-        >
+        <div css={classInfoBox}>
           <Desc desc="출결사항도 중요하죠!" />
           <ul css={arrContainer}>
             <li>
@@ -163,15 +154,9 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
               {errors.highschool?.classMiss?.message && <WarningDesc msg={errors.highschool.classMiss.message} />}
             </li>
           </ul>
-        </MarginBox>
+        </div>
 
-        <MarginBox
-          optionObj={{
-            marginLocation: "bottom",
-            marginValue: 2,
-            maxWidth: 23.25,
-          }}
-        >
+        <div css={naesinBox}>
           <Desc desc="내신등급도 알려주시겠어요?" />
           <NumberInputForm
             registerObj={register("highschool.naesin", {
@@ -191,15 +176,9 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
             placeholder="?"
           />
           {errors.highschool?.naesin?.message && <WarningDesc msg={errors.highschool.naesin.message} />}
-        </MarginBox>
+        </div>
 
-        <MarginBox
-          optionObj={{
-            marginLocation: "top",
-            marginValue: 4.5,
-            maxWidth: 35,
-          }}
-        >
+        <div css={collegeBox}>
           <TopTitle title="대학교 학력정보" />
           <div css={flex}>
             <div>
@@ -237,14 +216,9 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
               {errors.college?.maxGrade?.message && <WarningDesc msg={errors.college?.maxGrade?.message} />}
             </div>
           </div>
-        </MarginBox>
+        </div>
 
-        <MarginBox
-          optionObj={{
-            marginLocation: "top",
-            marginValue: 3.5,
-          }}
-        >
+        <div css={uturnBox}>
           <Desc desc="잠깐, 혹시 U - 턴 하셨나요?" />
           <ToggleForm
             registerObj={register("college.uturn")}
@@ -253,9 +227,9 @@ export const Spec4University: FunctionComponent<Spec4UniversityProps> = ({ moveN
             yesDesc="네"
             noDesc="아니오"
           />
-        </MarginBox>
+        </div>
 
-        <BottomButton movePrevCard={movePrevCard} postSubmit={handleSubmit(postSubmit)} />
+        <BottomButton movePrevCard={movePrevSlider} postSubmit={handleSubmit(postSubmit)} />
       </form>
     </div>
   );

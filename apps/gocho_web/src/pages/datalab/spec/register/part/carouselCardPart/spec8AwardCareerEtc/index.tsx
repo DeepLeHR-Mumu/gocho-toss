@@ -24,6 +24,10 @@ export const Spec8AwardCareerEtc: FunctionComponent<Spec8AwardCareerEtcProps> = 
   const queryClient = useQueryClient();
   const { setCurrentModal } = useModal();
 
+  const movePrevSlider = () => {
+    movePrevCard("6");
+  };
+
   const postSubmit: SubmitHandler<PostSubmitValues> = async (formData) => {
     const prevSpecObj = await JSON.parse(sessionStorage.getItem("specObj") || "{}");
     const currentSpecObj = await Object.assign(prevSpecObj, { ...formData });
@@ -40,7 +44,7 @@ export const Spec8AwardCareerEtc: FunctionComponent<Spec8AwardCareerEtcProps> = 
       onSuccess: () => {
         specRegisterEvent(true);
         queryClient.invalidateQueries(specArrKeyObj.all);
-        moveNextCard(100);
+        moveNextCard("8");
         sessionStorage.removeItem("specObj");
       },
     });
@@ -67,7 +71,7 @@ export const Spec8AwardCareerEtc: FunctionComponent<Spec8AwardCareerEtcProps> = 
             {...register("etc")}
           />
 
-          <BottomButton nextTitle="완료" movePrevCard={movePrevCard} postSubmit={handleSubmit(postSubmit)} />
+          <BottomButton nextTitle="완료" movePrevCard={movePrevSlider} postSubmit={handleSubmit(postSubmit)} />
         </form>
       </div>
     </div>

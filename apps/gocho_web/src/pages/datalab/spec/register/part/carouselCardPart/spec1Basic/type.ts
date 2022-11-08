@@ -1,5 +1,5 @@
 export interface Spec1BasicProps {
-  moveNextCard(percent: number): void;
+  moveNextCard(hash: string): void;
 }
 export interface PostSubmitValues {
   age: number;

@@ -26,6 +26,10 @@ export const Spec6MiddleEnd: FunctionComponent<Spec6MiddleEndProps> = ({
   const { mutate } = useRegisterSpec();
   const queryClient = useQueryClient();
 
+  const movePrevSlider = () => {
+    movePrevCard("4");
+  };
+
   const specSubmit = () => {
     const userSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
     mutate(userSpecObj, {
@@ -38,7 +42,7 @@ export const Spec6MiddleEnd: FunctionComponent<Spec6MiddleEndProps> = ({
       },
       onSuccess: () => {
         specRegisterEvent(false);
-        moveNextCard(100);
+        moveNextCard("8");
         queryClient.invalidateQueries(specArrKeyObj.all);
         sessionStorage.removeItem("specObj");
       },
@@ -69,7 +73,7 @@ export const Spec6MiddleEnd: FunctionComponent<Spec6MiddleEndProps> = ({
       </div>
 
       <div css={moveButtonContainer}>
-        <button css={prevButton} type="button" onClick={movePrevCard}>
+        <button css={prevButton} type="button" onClick={movePrevSlider}>
           이전
         </button>
 

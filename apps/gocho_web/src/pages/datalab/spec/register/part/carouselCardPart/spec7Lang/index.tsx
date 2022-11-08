@@ -29,13 +29,17 @@ export const Spec7Lang: FunctionComponent<Spec7LangProps> = ({ moveNextCard, mov
     name: "language",
   });
 
+  const movePrevSlider = () => {
+    movePrevCard("4");
+  };
+
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
     const { language } = formData;
 
     const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
     const currentSpecObj = Object.assign(prevSpecObj, { language });
     sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
-    moveNextCard(80);
+    moveNextCard("7");
   };
 
   return (
@@ -153,7 +157,7 @@ export const Spec7Lang: FunctionComponent<Spec7LangProps> = ({ moveNextCard, mov
             어학 추가하기
           </button>
 
-          <BottomButton movePrevCard={movePrevCard} postSubmit={handleSubmit(postSubmit)} />
+          <BottomButton movePrevCard={movePrevSlider} postSubmit={handleSubmit(postSubmit)} />
         </form>
       </div>
     </div>

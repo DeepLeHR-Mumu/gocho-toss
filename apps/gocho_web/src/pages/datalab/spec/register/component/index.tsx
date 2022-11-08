@@ -6,7 +6,6 @@ export { WarningDesc } from "./warningDesc";
 export { TextInputForm } from "./textInputForm";
 export { RadioForm } from "./radioForm";
 export { NumberInputForm } from "./numberInputForm";
-export { MarginBox } from "./marginBox";
 export { CheckboxForm } from "./checkboxForm";
 export { UniversityGradeForm } from "./universityGradeForm";
 export { SelectForm } from "./selectForm";

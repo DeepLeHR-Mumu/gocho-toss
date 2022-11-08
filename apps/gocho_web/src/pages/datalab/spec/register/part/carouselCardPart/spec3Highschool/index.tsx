@@ -8,14 +8,13 @@ import {
   Desc,
   NumberInputForm,
   WarningDesc,
-  MarginBox,
 } from "@pages/datalab/spec/register/component";
 
 import { specCardWrapper, formCSS } from "../style";
 
 import { Spec3HighschoolProps, PostSubmitValues } from "./type";
 import { highSchoolTypeArr } from "./constant";
-import { arrContainer } from "./style";
+import { arrContainer, classInfoBox, naesinBox, typeBox } from "./style";
 
 export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ movePrevCard, moveNextCard }) => {
   const {
@@ -26,11 +25,15 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
     mode: "onChange",
   });
 
+  const movePrevSlider = () => {
+    movePrevCard("2");
+  };
+
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
     const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
     const currentSpecObj = Object.assign(prevSpecObj, { ...formData, college: null });
     sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
-    moveNextCard(35);
+    moveNextCard("4");
   };
 
   return (
@@ -38,7 +41,7 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
       <TopTitle title="고등학교 학력정보" desc="정확하게 입력할 수록 스펙평가의 적중도는 올라갑니다." />
 
       <form css={formCSS}>
-        <MarginBox optionObj={{ marginLocation: "bottom", marginValue: 3.5, maxWidth: 40 }}>
+        <div css={typeBox}>
           <RadioForm
             registerObj={register("highschool.type", {
               required: "고등학교 정보를 선택해주세요.",
@@ -47,9 +50,9 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
             itemArr={highSchoolTypeArr}
           />
           {errors.highschool?.type && <WarningDesc msg="고등학교 정보를 선택해주세요." />}
-        </MarginBox>
+        </div>
 
-        <MarginBox optionObj={{ marginLocation: "bottom", marginValue: 4, maxWidth: 58 }}>
+        <div css={classInfoBox}>
           <Desc desc="출결사항도 중요하죠!" />
           <ul css={arrContainer}>
             <li>
@@ -133,9 +136,9 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
               {errors.highschool?.classMiss?.message && <WarningDesc msg={errors.highschool.classMiss.message} />}
             </li>
           </ul>
-        </MarginBox>
+        </div>
 
-        <MarginBox optionObj={{ marginLocation: "bottom", marginValue: 2, maxWidth: 23.75 }}>
+        <div css={naesinBox}>
           <Desc desc="내신등급도 알려주시겠어요?" />
           <NumberInputForm
             registerObj={register("highschool.naesin", {
@@ -155,9 +158,9 @@ export const Spec3Highschool: FunctionComponent<Spec3HighschoolProps> = ({ moveP
             placeholder="?"
           />
           {errors.highschool?.naesin?.message && <WarningDesc msg={errors.highschool.naesin.message} />}
-        </MarginBox>
+        </div>
 
-        <BottomButton postSubmit={handleSubmit(postSubmit)} movePrevCard={movePrevCard} />
+        <BottomButton postSubmit={handleSubmit(postSubmit)} movePrevCard={movePrevSlider} />
       </form>
     </div>
   );

@@ -1,6 +1,6 @@
 export interface Spec6MiddleEndProps {
-  moveNextCard(percent: number): void;
-  movePrevCard(): void;
+  moveNextCard(hash: string): void;
+  movePrevCard(hash: string): void;
   writeMoreSpecHandler(): void;
 }
 

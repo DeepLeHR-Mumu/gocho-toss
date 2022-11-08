@@ -29,7 +29,7 @@ export const AsideMenu: FunctionComponent<AsideMenuProps> = ({ isFix = true }) =
       <Link
         href={{
           pathname: SPEC_REGISTER_URL,
-          hash: "basic",
+          hash: "1",
         }}
         passHref
       >

@@ -1,9 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { RecoilRoot } from "recoil";
-import { useEffect } from "react";
-
-import { useProgress } from "@recoil/hook/spec";
 
 import { ProgressPart } from "@pages/datalab/spec/register/part/progressPart";
 
@@ -25,26 +21,17 @@ const mockedQueryClient = new QueryClient({
   },
 });
 
-const MockPart = () => {
-  const { setCurrentProgress } = useProgress();
-
-  useEffect(() => {
-    setCurrentProgress(50);
-  }, [setCurrentProgress]);
-
-  return <ProgressPart />;
-};
-
 const Template: ComponentStory<typeof ProgressPart> = (arg) => {
   return (
-    <RecoilRoot>
-      <QueryClientProvider client={mockedQueryClient}>
-        <MockPart {...arg} />
-      </QueryClientProvider>
-    </RecoilRoot>
+    <QueryClientProvider client={mockedQueryClient}>
+      <ProgressPart {...arg} />
+    </QueryClientProvider>
   );
 };
 
 export const 기본 = Template.bind({});
 
 기본.args = {};
+기본.parameters = {
+  nextRouter: { hash: "1" },
+};

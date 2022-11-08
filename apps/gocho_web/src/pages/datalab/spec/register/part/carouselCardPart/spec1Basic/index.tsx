@@ -10,7 +10,6 @@ import {
   RadioForm,
   Desc,
   WarningDesc,
-  MarginBox,
   CheckboxForm,
   BottomButton,
 } from "@pages/datalab/spec/register/component";
@@ -19,7 +18,18 @@ import { specCardWrapper, formCSS } from "../style";
 
 import { genderArr, militaryArr, desiredTaskArr, desiredIndustryArr } from "./constant";
 import { Spec1BasicProps, PostSubmitValues } from "./type";
-import { disabledWrapper, inputTextCSS, labelCSS, hide, desc, ageFormBox } from "./style";
+import {
+  disabledWrapper,
+  inputTextCSS,
+  labelCSS,
+  hide,
+  desc,
+  ageFormBox,
+  ageBox,
+  genderBox,
+  militaryBox,
+  desiredTaskBox,
+} from "./style";
 
 export const Spec1Basic: FunctionComponent<Spec1BasicProps> = ({ moveNextCard }) => {
   const {
@@ -36,7 +46,7 @@ export const Spec1Basic: FunctionComponent<Spec1BasicProps> = ({ moveNextCard })
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
     sessionStorage.setItem("specObj", JSON.stringify(formData));
-    moveNextCard(15);
+    moveNextCard("2");
   };
 
   useEffect(() => {
@@ -48,23 +58,16 @@ export const Spec1Basic: FunctionComponent<Spec1BasicProps> = ({ moveNextCard })
       <TopTitle title={userInfoData?.nickname} desc="간단하게 스펙 등록하고 평가를 받아보세요" />
 
       <form css={formCSS}>
-        <MarginBox optionObj={{ marginLocation: "bottom", marginValue: 1.7 }}>
-          <div css={disabledWrapper}>
-            <input css={inputTextCSS} defaultValue={userInfoData?.nickname} readOnly />
-            <label htmlFor="secret" css={labelCSS}>
-              <input css={hide} type="checkbox" {...register("secret")} id="secret" />
-              <CheckBox isChecked={watchSecret} />
-              <p css={desc}>체크시 닉네임이 비공개됩니다</p>
-            </label>
-          </div>
-        </MarginBox>
+        <div css={disabledWrapper}>
+          <input css={inputTextCSS} defaultValue={userInfoData?.nickname} readOnly />
+          <label htmlFor="secret" css={labelCSS}>
+            <input css={hide} type="checkbox" {...register("secret")} id="secret" />
+            <CheckBox isChecked={watchSecret} />
+            <p css={desc}>체크시 닉네임이 비공개됩니다</p>
+          </label>
+        </div>
 
-        <MarginBox
-          optionObj={{
-            marginLocation: "bottom",
-            marginValue: 1.7,
-          }}
-        >
+        <div css={ageBox}>
           <input
             css={ageFormBox}
             type="number"
@@ -86,14 +89,9 @@ export const Spec1Basic: FunctionComponent<Spec1BasicProps> = ({ moveNextCard })
           />
 
           {errors.age?.message && <WarningDesc msg={errors.age.message} />}
-        </MarginBox>
+        </div>
 
-        <MarginBox
-          optionObj={{
-            marginLocation: "bottom",
-            marginValue: 1.7,
-          }}
-        >
+        <div css={genderBox}>
           <RadioForm
             registerObj={register("gender", {
               required: "성별을 선택해주세요.",
@@ -102,9 +100,9 @@ export const Spec1Basic: FunctionComponent<Spec1BasicProps> = ({ moveNextCard })
             itemArr={genderArr}
           />
           {errors.gender?.message && <WarningDesc msg={errors.gender.message} />}
-        </MarginBox>
+        </div>
 
-        <MarginBox optionObj={{ marginLocation: "bottom", marginValue: 4 }}>
+        <div css={militaryBox}>
           <RadioForm
             registerObj={register("military", {
               required: "병역사항을 선택해주세요.",
@@ -112,9 +110,9 @@ export const Spec1Basic: FunctionComponent<Spec1BasicProps> = ({ moveNextCard })
             itemArr={militaryArr}
           />
           {errors.military?.message && <WarningDesc msg={errors.military.message} />}
-        </MarginBox>
+        </div>
 
-        <MarginBox optionObj={{ marginLocation: "bottom", marginValue: 4, maxWidth: 52 }}>
+        <div css={desiredTaskBox}>
           <Desc desc="희망하는 직무를 선택해주세요 (최대 3개)" />
           <CheckboxForm
             registerObj={register("desiredTask", {
@@ -124,7 +122,7 @@ export const Spec1Basic: FunctionComponent<Spec1BasicProps> = ({ moveNextCard })
             itemArr={desiredTaskArr}
           />
           {errors.desiredTask?.message && <WarningDesc msg={errors.desiredTask.message} />}
-        </MarginBox>
+        </div>
 
         <Desc desc="희망하는 업종을 선택해주세요 (최대 3개)" />
         <CheckboxForm

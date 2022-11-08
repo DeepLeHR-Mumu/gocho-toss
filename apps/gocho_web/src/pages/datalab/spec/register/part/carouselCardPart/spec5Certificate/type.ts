@@ -1,8 +1,9 @@
 import { ChangeEvent } from "react";
 
 export interface Spec5CertificateProps {
-  moveNextCard(percent: number): void;
-  movePrevCard(): void;
+  isWriteMoreSpec: boolean;
+  moveNextCard(hash: string): void;
+  movePrevCard(hash: string): void;
 }
 
 export interface PostSubmitValues {

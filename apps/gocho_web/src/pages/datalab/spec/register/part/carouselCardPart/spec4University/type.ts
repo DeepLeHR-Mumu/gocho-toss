@@ -1,6 +1,6 @@
 export interface Spec4UniversityProps {
-  moveNextCard(percent: number): void;
-  movePrevCard(): void;
+  moveNextCard(hash: string): void;
+  movePrevCard(hash: string): void;
 }
 
 export interface PostSubmitValues {

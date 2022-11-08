@@ -74,3 +74,7 @@ export const imageBox: imageBoxDef = (isCheck, type) => {
       : `url("/images/global/spec/university.png")`};
   `;
 };
+
+export const highSchoolBox = css`
+  margin-bottom: 3rem;
+`;

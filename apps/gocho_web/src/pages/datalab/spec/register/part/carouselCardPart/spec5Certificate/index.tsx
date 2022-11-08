@@ -26,7 +26,11 @@ import {
   noCertiDesc,
 } from "./style";
 
-export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ moveNextCard, movePrevCard }) => {
+export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({
+  isWriteMoreSpec,
+  moveNextCard,
+  movePrevCard,
+}) => {
   const { handleSubmit, register, control, watch } = useForm<PostSubmitValues>({
     mode: "onChange",
   });
@@ -42,6 +46,10 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
   const watchIsCerti = watch("isCertificate");
   const isImpossibleNextMove = watchIsCerti && watch("certificate").length === 0;
 
+  const movePrevSlider = () => {
+    movePrevCard("3");
+  };
+
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
     if (isImpossibleNextMove) {
       return;
@@ -53,7 +61,7 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
       certificate: getCertiValue(certificate),
     });
     sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
-    moveNextCard(60);
+    moveNextCard(isWriteMoreSpec ? "5" : "6");
   };
 
   const filterOverlapArr = certificateArr.filter((keyword, index) => {
@@ -187,7 +195,7 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
           </div>
         )}
 
-        <BottomButton movePrevCard={movePrevCard} postSubmit={handleSubmit(postSubmit)} />
+        <BottomButton movePrevCard={movePrevSlider} postSubmit={handleSubmit(postSubmit)} />
       </form>
     </div>
   );
