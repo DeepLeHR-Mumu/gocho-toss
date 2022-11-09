@@ -2,7 +2,7 @@ import { QueryFunctionContext } from "@tanstack/react-query";
 import { statisticsKeyObj } from "shared-constant/queryKeyFactory/stat/statisticsKeyObj";
 
 export interface MonthlyDataObjDef {
-  date: string;
+  month: string;
   value: number;
 }
 
