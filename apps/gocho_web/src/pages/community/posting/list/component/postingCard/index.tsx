@@ -3,7 +3,7 @@ import Link from "next/link";
 import { AiOutlineLike, AiOutlineMessage, AiOutlineEye } from "react-icons/ai";
 
 // import { useModal } from "@recoil/hook/modal";
-import { COMMUNITY_POSTING_DETAIL } from "shared-constant/internalURL";
+import { COMMUNITY_POSTING_DETAIL_URL } from "shared-constant/internalURL";
 import { dateConverter } from "shared-util/date";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
@@ -53,7 +53,7 @@ export const PostingCard: FunctionComponent<PostingCardProps | PostingCardSkelet
   const isMyPosting = userInfoData?.nickname === postingData.nickname;
 
   return (
-    <Link href={`${COMMUNITY_POSTING_DETAIL}/${postingData.id}${window.location.search}`} passHref>
+    <Link href={`${COMMUNITY_POSTING_DETAIL_URL}/${postingData.id}${window.location.search}`} passHref>
       <a css={cardContainer}>
         <article>
           {isHotLikePostion ||

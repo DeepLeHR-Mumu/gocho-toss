@@ -7,7 +7,6 @@ export const container = () => {
     align-items: center;
     gap: 0.7rem;
     width: 100%;
-    margin-left: 1.5rem;
   `;
 };
 

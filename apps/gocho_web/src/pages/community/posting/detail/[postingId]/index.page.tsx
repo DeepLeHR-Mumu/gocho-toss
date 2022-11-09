@@ -29,13 +29,13 @@ const PostingDetailPage: NextPage = () => {
   const filteredCommentArr = commentArrData?.filter((commentData) => {
     return commentData.parentCommentId === null;
   });
-  
+
   return (
     <main>
       <Head>
         <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.pathname}`} />
       </Head>
-      <CommunityLayout>
+      <CommunityLayout isSidebar>
         <article css={wrapper}>
           <div css={overviewYBox}>
             <PostingPart />
@@ -72,7 +72,7 @@ const PostingDetailPage: NextPage = () => {
                 </div>
                 <WriteComment parentCommentId={null} />
               </>
-            )} 
+            )}
           </div>
         </article>
       </CommunityLayout>

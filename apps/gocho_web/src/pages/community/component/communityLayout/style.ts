@@ -5,6 +5,7 @@ import { hoverShadow } from "shared-style/common";
 
 export const partContainer = css`
   background-color: ${COLORS.GRAY90};
+  display: flex;
   padding: 4.125rem 0;
   border-radius: 2rem 2rem 0 0;
 `;
@@ -120,6 +121,7 @@ export const setPostingFilterButton = (active = false) => {
 };
 
 export const listContainer = css`
+  margin: 0 auto;
   width: calc(100% - 10rem);
 `;
 

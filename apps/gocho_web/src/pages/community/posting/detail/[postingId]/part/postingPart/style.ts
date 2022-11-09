@@ -149,7 +149,9 @@ export const settingButtonList = css`
 
 export const settingButton = css`
   color: ${COLORS.GRAY60};
-
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
   ${PC_HOVER} {
     &:hover {
       color: ${COLORS.BLUE_FIRST40};

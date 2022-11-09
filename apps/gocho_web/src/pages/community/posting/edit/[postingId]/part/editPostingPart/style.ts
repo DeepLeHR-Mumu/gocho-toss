@@ -3,23 +3,12 @@ import { COLORS } from "shared-style/color";
 import { PC_HOVER } from "shared-style/mediaQuery";
 import { shorten } from "shared-style/common";
 
-export const modalWrapper = css`
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 50;
+export const wrapper = css`
   width: 100%;
   max-width: 60rem;
   padding: 1.875rem 6.25rem;
   background-color: ${COLORS.GRAY100};
   border-radius: 2rem;
-`;
-
-export const closeButtonWrapper = css`
-  position: absolute;
-  top: -0.5rem;
-  right: -0.5rem;
 `;
 
 export const userProfile = css`
@@ -53,7 +42,6 @@ export const userNickname = css`
   ${shorten(1)};
 `;
 
-export const formContainer = css``;
 
 export const titleCSS = css`
   width: 100%;

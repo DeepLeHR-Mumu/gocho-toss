@@ -20,7 +20,7 @@ const PostingListPage: NextPage = () => {
       <Head>
         <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${pathname}`} />
       </Head>
-      <CommunityLayout>
+      <CommunityLayout isSidebar>
         <ListPart />
       </CommunityLayout>
     </main>

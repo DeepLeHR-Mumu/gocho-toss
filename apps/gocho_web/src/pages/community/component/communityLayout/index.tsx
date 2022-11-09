@@ -10,7 +10,7 @@ import { useUserInfo } from "shared-api/auth";
 import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { META_COMMUNITY_POSTING } from "shared-constant/meta";
-import { COMMUNITY_POSTINGS_LIST_URL } from "shared-constant/internalURL";
+import { COMMUNITY_POSTINGS_LIST_URL, COMMUNITY_POSTING_WRITE_URL } from "shared-constant/internalURL";
 
 import { FilterDef, HashtagDef } from "@pages/community/type";
 
@@ -34,7 +34,7 @@ import {
 import { CommunityLayoutProps, PostingValues } from "./type";
 import { setPostingFilterButtonArr, setPostingHashtagButtonArr } from "./constant";
 
-const CommunityLayout: FunctionComponent<CommunityLayoutProps> = ({ children }) => {
+const CommunityLayout: FunctionComponent<CommunityLayoutProps> = ({ children, isSidebar }) => {
   const router = useRouter();
 
   const { register, reset, handleSubmit } = useForm<PostingValues>({});
@@ -44,7 +44,7 @@ const CommunityLayout: FunctionComponent<CommunityLayoutProps> = ({ children }) 
 
   const openWritePostingModal = () => {
     if (userError) return setCurrentModal("loginModal", { button: "close" });
-    return setCurrentModal("writePostingModal", { title: "", description: "" });
+    return router.push(COMMUNITY_POSTING_WRITE_URL);
   };
 
   const postingSearch: SubmitHandler<PostingValues> = (postingVal) => {
@@ -74,60 +74,64 @@ const CommunityLayout: FunctionComponent<CommunityLayoutProps> = ({ children }) 
         </p>
 
         <div css={mainContainer}>
-          <div css={buttonArrContainer}>
-            <p css={buttonTitle}>💬 게시판</p>
-            {setPostingFilterButtonArr.map((button) => {
-              return (
-                <button
-                  type="button"
-                  key={button.text}
-                  css={setPostingFilterButton(button.filter === router.query.filter)}
-                  onClick={() => {
-                    window.scrollTo(0, 0);
-                    return changePostingFilter(button.filter);
-                  }}
-                >
-                  {button.text}
-                </button>
-              );
-            })}
-            <button type="button" css={writePostingButton} onClick={openWritePostingModal}>
-              글 남기기
-              <AiOutlineEdit />
-            </button>
-          </div>
-
-          <div css={listContainer}>
-            <div css={tempContainer}>
-              <form css={formCSS} onSubmit={handleSubmit(postingSearch)}>
-                <div css={searchWrapper}>
-                  <input
-                    {...register("keyword", {
-                      required: true,
-                    })}
-                    css={searchBox}
-                    placeholder="검색어를 입력해주세요"
-                  />
-                  <button type="submit" css={searchButton} aria-label="검색하기">
-                    <FiSearch />
-                  </button>
-                </div>
-              </form>
-              {setPostingHashtagButtonArr.map((button) => {
+          {isSidebar && (
+            <div css={buttonArrContainer}>
+              <p css={buttonTitle}>💬 게시판</p>
+              {setPostingFilterButtonArr.map((button) => {
                 return (
                   <button
                     type="button"
                     key={button.text}
-                    css={setPostingHashtagButton(button.hashtag === router.query.hashTag)}
+                    css={setPostingFilterButton(button.filter === router.query.filter)}
                     onClick={() => {
-                      changePostingHashtag(button.hashtag);
+                      window.scrollTo(0, 0);
+                      return changePostingFilter(button.filter);
                     }}
                   >
-                    #{button.text}
+                    {button.text}
                   </button>
                 );
               })}
+              <button type="button" css={writePostingButton} onClick={openWritePostingModal}>
+                글 남기기
+                <AiOutlineEdit />
+              </button>
             </div>
+          )}
+
+          <div css={listContainer}>
+            {isSidebar && (
+              <div css={tempContainer}>
+                <form css={formCSS} onSubmit={handleSubmit(postingSearch)}>
+                  <div css={searchWrapper}>
+                    <input
+                      {...register("keyword", {
+                        required: true,
+                      })}
+                      css={searchBox}
+                      placeholder="검색어를 입력해주세요"
+                    />
+                    <button type="submit" css={searchButton} aria-label="검색하기">
+                      <FiSearch />
+                    </button>
+                  </div>
+                </form>
+                {setPostingHashtagButtonArr.map((button) => {
+                  return (
+                    <button
+                      type="button"
+                      key={button.text}
+                      css={setPostingHashtagButton(button.hashtag === router.query.hashTag)}
+                      onClick={() => {
+                        changePostingHashtag(button.hashtag);
+                      }}
+                    >
+                      #{button.text}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
             {children}
           </div>
         </div>

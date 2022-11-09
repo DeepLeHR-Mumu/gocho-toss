@@ -1,4 +1,5 @@
 import { FunctionComponent, useEffect, useState } from "react";
+import Link from "next/link";
 import { useQueryClient } from "@tanstack/react-query";
 import { AiOutlineEye, AiOutlineLike, AiOutlineMessage } from "react-icons/ai";
 import { FiMoreVertical } from "react-icons/fi";
@@ -14,6 +15,7 @@ import { dateConverter } from "shared-util/date/dateConverter";
 import { useAddPostingBookmarkArr, useDeletePostingBookmarkArr, useUserPostingBookmarkArr } from "shared-api/bookmark";
 import { useAddPostingViewCount } from "shared-api/viewCount";
 import { usePostingDetail } from "shared-api/community/usePostingDetail";
+import { COMMUNITY_POSTING_EDIT_URL } from "shared-constant/internalURL";
 
 import { useToast } from "@recoil/hook/toast";
 
@@ -64,6 +66,8 @@ export const PostingPart: FunctionComponent = () => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries(communityPostingArrKeyObj.all);
+          router.back();
+          setCurrentToast("게시글이 삭제되었습니다.")
         },
       }
     );
@@ -149,9 +153,11 @@ export const PostingPart: FunctionComponent = () => {
         <div css={infoBox}>
           {openPostingSetting && (
             <div css={settingButtonList}>
-              <button type="button" css={settingButton}>
-                글 수정하기
-              </button>
+              <Link href={`${COMMUNITY_POSTING_EDIT_URL}/${router.query.postingId}`} passHref>
+                <a type="button" css={settingButton}>
+                  글 수정하기
+                </a>
+              </Link>
               <button
                 type="button"
                 css={settingButton}
