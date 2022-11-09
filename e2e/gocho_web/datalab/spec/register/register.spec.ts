@@ -1,10 +1,11 @@
 import { test, expect, Page, APIRequestContext, Response } from "@playwright/test";
 
 import { linkObj } from "../../../../constant/internalURL";
+import { BACKEND_URL } from "../../../../constant/externalURL";
 import { loginTester } from "../../../common/common.spec";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto(linkObj.DESKTOP_BASE_URL);
+  await page.goto("/");
   await page.getByRole("link", { name: "dataLab" }).click();
   await page.waitForNavigation();
 });
@@ -96,16 +97,11 @@ const basicSpecRegisterTester = async (page: Page) => {
   await page.getByRole("button", { name: "다음" }).click();
 };
 
-const specResponseCheckTester = async (
-  isDeepRegister: boolean,
-  response: Response,
-  request: APIRequestContext,
-  baseURL: string | undefined
-) => {
+const specResponseCheckTester = async (isDeepRegister: boolean, response: Response, request: APIRequestContext) => {
   const registerPostData = await response.json();
   const registerId = await registerPostData.data["insertId"];
 
-  const registerGetResponse = await request.get(`${baseURL}/specs/${registerId}`);
+  const registerGetResponse = await request.get(`${BACKEND_URL}/specs/${registerId}`);
   const registerGetData = await registerGetResponse.json();
 
   expect(registerGetData.data.secret).toBeTruthy();
@@ -137,14 +133,14 @@ const specResponseCheckTester = async (
 
 test.describe("스펙등록 테스트", () => {
   test("타이틀, heading 검사", async ({ page }) => {
-    await page.goto(`${linkObj.DESKTOP_BASE_URL}${linkObj.SPEC_REGISTER_URL}`);
+    await page.goto(linkObj.SPEC_REGISTER_URL);
     await page.waitForNavigation();
     await expect(page).toHaveTitle("내 스펙 등록하기 - 고초대졸닷컴");
     await expect(page.locator("h1")).toHaveText("내 스펙 등록하기 - 고초대졸닷컴");
   });
 
   test("비로그인 접속시 모달 확인", async ({ page }) => {
-    await page.goto(`${linkObj.DESKTOP_BASE_URL}${linkObj.SPEC_REGISTER_URL}`);
+    await page.goto(linkObj.SPEC_REGISTER_URL);
     await page.waitForNavigation();
     const response = await page.waitForResponse(
       (response) => response.url().includes("/auth/check") && response.status() === 401
@@ -163,7 +159,7 @@ test.describe("스펙등록 테스트", () => {
     await page.locator('button:has-text("아니오")').click();
   });
 
-  test("로그인 후 스펙 간단 등록 진행", async ({ page, request, baseURL }) => {
+  test("로그인 후 스펙 간단 등록 진행", async ({ page, request }) => {
     test.slow();
     // 로그인 하기
     await loginTester(page);
@@ -175,10 +171,10 @@ test.describe("스펙등록 테스트", () => {
       await page.locator('button:has-text("스펙 등록하기")').click(),
     ]);
 
-    await specResponseCheckTester(false, registerResponse[0], request, baseURL);
+    await specResponseCheckTester(false, registerResponse[0], request);
   });
 
-  test("로그인 후 스펙 상세 등록 진행", async ({ page, request, baseURL }) => {
+  test("로그인 후 스펙 상세 등록 진행", async ({ page, request }) => {
     test.slow();
     // 로그인 하기
     await loginTester(page);
@@ -222,10 +218,10 @@ test.describe("스펙등록 테스트", () => {
       await page.getByRole("button", { name: "완료" }).click(),
     ]);
 
-    await specResponseCheckTester(true, registerResponse[0], request, baseURL);
+    await specResponseCheckTester(true, registerResponse[0], request);
 
     await page.getByRole("link", { name: "스펙 리스트" }).click();
-    await expect(page).toHaveURL(`${linkObj.DESKTOP_BASE_URL}${linkObj.SPEC_LIST_URL}`);
+    await expect(page).toHaveURL(linkObj.SPEC_LIST_URL);
   });
 
   test("페이지 닫기", async ({ page }) => {

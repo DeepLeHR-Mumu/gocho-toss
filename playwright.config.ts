@@ -14,7 +14,7 @@ const config: PlaywrightTestConfig = {
   reporter: "html",
   use: {
     actionTimeout: 0,
-    baseURL: "https://dev.gocho-back.com/v1",
+    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3000",
     trace: "on-first-retry",
   },
 
@@ -26,12 +26,12 @@ const config: PlaywrightTestConfig = {
       },
     },
 
-    {
-      name: "firefox",
-      use: {
-        ...devices["Desktop Firefox"],
-      },
-    },
+    // {
+    //   name: "firefox",
+    //   use: {
+    //     ...devices["Desktop Firefox"],
+    //   },
+    // },
 
     {
       name: "webkit",
