@@ -5,7 +5,7 @@ import { MANAGER_BACKEND_URL } from "shared-constant/externalURL";
 import { PostLoginDef, RequestObjDef, ResponseObjDef, useDoLoginProps } from "./type";
 
 const postLogin: PostLoginDef = async (requestObj) => {
-  const { data } = await axios.post(`${MANAGER_BACKEND_URL}/auth/login/admin`, { ...requestObj });
+  const { data } = await axios.post(`${MANAGER_BACKEND_URL}/auth/login?member=admin`, { ...requestObj });
   return data;
 };
 

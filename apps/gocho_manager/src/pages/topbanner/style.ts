@@ -181,3 +181,19 @@ export const deleteBannerButton = css`
   background-color: #b32100;
   color: ${COLORS.GRAY100};
 `;
+
+export const flexBox = css`
+  display: flex;
+  align-items: center;
+  margin-right: 1.5rem;
+`;
+
+export const changeBannerButton = css`
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-left: auto;
+  padding: 0.25rem 3rem;
+  border: 2px solid ${COLORS.GRAY10};
+  background-color: ${COLORS.BLUE_NEON40};
+  color: ${COLORS.GRAY100};
+`;
