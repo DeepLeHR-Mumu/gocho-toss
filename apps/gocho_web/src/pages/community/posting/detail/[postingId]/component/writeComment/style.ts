@@ -1,6 +1,16 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
+export const container = () => {
+  return css`
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    width: 100%;
+    margin-left: 1.5rem;
+  `;
+};
+
 export const formCSS = css`
   width: 100%;
 `;

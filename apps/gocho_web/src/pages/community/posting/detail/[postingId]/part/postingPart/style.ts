@@ -4,38 +4,13 @@ import { COLORS } from "shared-style/color";
 import { shorten } from "shared-style/common";
 import { PC_HOVER } from "shared-style/mediaQuery";
 
-export const modalWrapper = css`
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 50;
-  width: 100%;
-  max-width: 60rem;
-  background-color: ${COLORS.GRAY100};
-  border-radius: 2rem;
-  text-align: left;
-`;
-
 export const modalWrapperSkeleton = css`
   min-height: 50vh;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 50;
   width: 100%;
   max-width: 60rem;
   padding: 1.875rem 6.25rem;
   background-color: ${COLORS.GRAY100};
   border-radius: 2rem;
-`;
-
-export const overviewYBox = css`
-  max-height: 70vh;
-  overflow: hidden;
-  overflow-y: scroll;
-  padding: 1.875rem 6.25rem;
 `;
 
 export const flexBox = css`
@@ -192,8 +167,4 @@ export const settingButton = css`
 
 export const settingMenu = css`
   color: ${COLORS.GRAY40};
-`;
-
-export const commentListWrapper = css`
-  margin-top: 2.5rem;
 `;

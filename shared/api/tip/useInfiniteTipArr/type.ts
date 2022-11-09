@@ -1,7 +1,8 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
-import { TipObjDef } from "../../tip/type/tipArr";
 import { tipArrKeyObj } from "shared-constant/queryKeyFactory/tip/arrKeyObj";
+
+import { TipObjDef } from "../type/tipArr";
 
 export interface ResponseObjDef {
   data: TipObjDef[];

@@ -1,7 +1,9 @@
 import { FunctionComponent } from "react";
+import Link from "next/link";
 import { AiOutlineLike, AiOutlineMessage, AiOutlineEye } from "react-icons/ai";
 
 // import { useModal } from "@recoil/hook/modal";
+import { COMMUNITY_POSTING_DETAIL } from "shared-constant/internalURL";
 import { dateConverter } from "shared-util/date";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
@@ -25,12 +27,9 @@ import {
 } from "./style";
 import { PostingCardProps, PostingCardSkeleton } from "./type";
 
-export const PostingCard: FunctionComponent<PostingCardProps | PostingCardSkeleton> = ({
-  postingData,
-  isSkeleton,
-  modalOpen,
-}) => {
+export const PostingCard: FunctionComponent<PostingCardProps | PostingCardSkeleton> = ({ postingData, isSkeleton }) => {
   const { data: userInfoData } = useUserInfo();
+
   if (isSkeleton || postingData === undefined) {
     return (
       <div css={postingCardSkeleton}>
@@ -54,44 +53,46 @@ export const PostingCard: FunctionComponent<PostingCardProps | PostingCardSkelet
   const isMyPosting = userInfoData?.nickname === postingData.nickname;
 
   return (
-    <button type="button" css={cardContainer} onClick={modalOpen}>
-      <article>
-        {isHotLikePostion ||
-          (isHotViewPosting && (
-            <ul css={badgeBox}>
-              {isHotLikePostion && <li css={popularBadge}>#추천폭발</li>}
-              {isHotViewPosting && <li css={viewBadge}>#조회수급상승</li>}
+    <Link href={`${COMMUNITY_POSTING_DETAIL}/${postingData.id}${window.location.search}`} passHref>
+      <a css={cardContainer}>
+        <article>
+          {isHotLikePostion ||
+            (isHotViewPosting && (
+              <ul css={badgeBox}>
+                {isHotLikePostion && <li css={popularBadge}>#추천폭발</li>}
+                {isHotViewPosting && <li css={viewBadge}>#조회수급상승</li>}
+              </ul>
+            ))}
+
+          <strong css={titleCSS}>{postingData.title}</strong>
+          <p css={bodyCSS}>{postingData.description}</p>
+          <div css={infoContainer}>
+            <ul css={infoBox}>
+              <li css={info}>{postingData.type}</li>
+              <li css={info}>{`${year}.${month}.${date}`}</li>
+
+              <li css={numInfo}>
+                <AiOutlineLike /> {postingData.like.toLocaleString("Ko-KR")}
+              </li>
+
+              <li css={numInfo}>
+                <AiOutlineMessage />
+                {postingData.commentCount.toLocaleString("Ko-KR")}
+              </li>
+
+              <li css={numInfo}>
+                <AiOutlineEye /> {postingData.view.toLocaleString("Ko-KR")}
+              </li>
             </ul>
-          ))}
-
-        <strong css={titleCSS}>{postingData.title}</strong>
-        <p css={bodyCSS}>{postingData.description}</p>
-        <div css={infoContainer}>
-          <ul css={infoBox}>
-            <li css={info}>{postingData.type}</li>
-            <li css={info}>{`${year}.${month}.${date}`}</li>
-
-            <li css={numInfo}>
-              <AiOutlineLike /> {postingData.like.toLocaleString("Ko-KR")}
-            </li>
-
-            <li css={numInfo}>
-              <AiOutlineMessage />
-              {postingData.commentCount.toLocaleString("Ko-KR")}
-            </li>
-
-            <li css={numInfo}>
-              <AiOutlineEye /> {postingData.view.toLocaleString("Ko-KR")}
-            </li>
-          </ul>
-          <div css={writerProfile}>
-            <div css={writerProfileImage}>
-              <ProfileImg imageStr={postingData.image} size="S" />
+            <div css={writerProfile}>
+              <div css={writerProfileImage}>
+                <ProfileImg imageStr={userInfoData ? userInfoData.image : "default"} size="S" />
+              </div>
+              <p css={writerNickname(isMyPosting)}>{postingData.nickname || "탈퇴한 회원"}</p>
             </div>
-            <p css={writerNickname(isMyPosting)}>{postingData.nickname || "탈퇴한 회원"}</p>
           </div>
-        </div>
-      </article>
-    </button>
+        </article>
+      </a>
+    </Link>
   );
 };

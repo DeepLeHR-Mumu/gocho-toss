@@ -5,6 +5,6 @@ export interface CommentFormValues {
 }
 
 export interface WriteCommentProps {
-  postingId: number;
   parentCommentId: null | number;
+  isWriteReComment?: true;
 }
