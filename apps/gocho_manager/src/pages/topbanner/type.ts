@@ -1,8 +1,13 @@
-export interface BannerFormValues {
+export interface BannerSubmitFormValues {
   color: string;
   file_id: string;
   jd_id: number;
-  type: 0 | 1 | 2;
+  type: "M" | "T" | "S";
   start_time: number;
   end_time: number;
+}
+
+export interface BannerMoveFormValues {
+  from: number;
+  to: number;
 }

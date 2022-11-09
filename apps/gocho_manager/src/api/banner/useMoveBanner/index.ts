@@ -7,7 +7,9 @@ import { axiosInstance } from "@api/axiosInstance";
 import { UseMoveBannerProps, MoveBannerDef, RequestObjDef } from "./type";
 
 const MoveBanner: MoveBannerDef = async (requestObj) => {
-  const { data } = await axiosInstance.patch("/banners/move", requestObj);
+  const { data } = await axiosInstance.patch(
+    `/banners/move?from=${requestObj.from}&to=${requestObj.to}&type=${requestObj.type}`
+  );
   return data;
 };
 

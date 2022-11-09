@@ -10,13 +10,14 @@ import defaultCompanyLogo from "shared-image/global/common/default_company_logo.
 import { dateConverter } from "shared-util/date";
 
 import { useAddTopBanner } from "@api/banner/addTopBanner";
+import { useMoveBanner } from "@api/banner/useMoveBanner";
 import { useDeleteBanner } from "@api/banner/useDeleteBanner";
 import { useJobDetail } from "@api/job/useJobDetail";
 
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
-import { BannerFormValues } from "./type";
+import { BannerSubmitFormValues, BannerMoveFormValues } from "./type";
 import {
   sectionContainer,
   inputContainer,
@@ -41,6 +42,8 @@ import {
   titleBox,
   expireDateBox,
   deleteBannerButton,
+  flexBox,
+  changeBannerButton,
 } from "./style";
 
 const TopBanner: NextPage = () => {
@@ -53,12 +56,14 @@ const TopBanner: NextPage = () => {
   const { data: bannerDataArr, isLoading, isError } = useBannerArr({ type: "T" });
   const { mutate: addMutate } = useAddTopBanner();
   const { mutate: deleteMutate } = useDeleteBanner();
+  const { mutate: moveMutate } = useMoveBanner();
 
-  const { register, watch, setValue, handleSubmit } = useForm<BannerFormValues>();
+  const { register, watch, setValue, handleSubmit } = useForm<BannerSubmitFormValues>();
+  const { register: moveRegister, handleSubmit: moveHandleSubmit } = useForm<BannerMoveFormValues>();
 
-  const bannerSubmit: SubmitHandler<BannerFormValues> = (bannerObj) => {
+  const bannerSubmit: SubmitHandler<BannerSubmitFormValues> = (bannerSubmitObj) => {
     const formData = new FormData();
-    const json = JSON.stringify(bannerObj);
+    const json = JSON.stringify(bannerSubmitObj);
     const blob = new Blob([json], { type: "application/json" });
     formData.append("dto", blob);
 
@@ -75,6 +80,17 @@ const TopBanner: NextPage = () => {
   const bannerDelete = (id: number) => {
     deleteMutate(
       { bannerId: id },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries();
+        },
+      }
+    );
+  };
+
+  const bannerMove: SubmitHandler<BannerMoveFormValues> = (bannerMoveObj) => {
+    moveMutate(
+      { ...bannerMoveObj, type: "T" },
       {
         onSuccess: () => {
           queryClient.invalidateQueries();
@@ -218,13 +234,33 @@ const TopBanner: NextPage = () => {
 
       <h2 css={pageTitle}>배너 순서 변경</h2>
       <section css={sectionContainer}>
-        <div css={inputContainer}>
-          <form>
-            <input css={inputBox(true)} />번 째를
-            <input css={inputBox(true)} />번 째 배너와 변경
-            <button type="submit">순서 변경</button>
-          </form>
-        </div>
+        <form css={flexBox} onSubmit={moveHandleSubmit(bannerMove)}>
+          <div css={flexBox}>
+            <input
+              type="number"
+              css={inputBox(true)}
+              {...moveRegister("from", {
+                valueAsNumber: true,
+                required: true,
+              })}
+            />
+            번 째를
+          </div>
+          <div css={flexBox}>
+            <input
+              type="number"
+              css={inputBox(true)}
+              {...moveRegister("to", {
+                valueAsNumber: true,
+                required: true,
+              })}
+            />
+            번 째 배너와 변경
+          </div>
+          <button css={changeBannerButton} type="submit">
+            순서 변경
+          </button>
+        </form>
       </section>
     </main>
   );
