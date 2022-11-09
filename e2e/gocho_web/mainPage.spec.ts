@@ -4,8 +4,9 @@ import { linkObj } from "../constant/internalURL";
 test.beforeEach(async ({ page, request, baseURL }) => {
   await page.goto(linkObj.baseUrl);
 
+  console.log(baseURL);
   // login test
-  const USER_EMAIL = "myTestId@deeplehr.com";
+  const USER_EMAIL = "testId@naver.com";
   const USER_PASSWORD = "12341234";
 
   await page.locator("text=로그인").click();
@@ -14,7 +15,7 @@ test.beforeEach(async ({ page, request, baseURL }) => {
   await page.click("text=로그인 하기");
 
   // login post
-  const loginPostData = await request.post(`${baseURL}/auth/login`, {
+  const loginPostData = await request.post(`/auth/login`, {
     data: {
       email: USER_EMAIL,
       password: USER_PASSWORD,
