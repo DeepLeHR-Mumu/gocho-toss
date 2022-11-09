@@ -2,9 +2,8 @@ import { test, expect } from "@playwright/test";
 import { linkObj } from "../constant/internalURL";
 
 test.beforeEach(async ({ page, request, baseURL }) => {
-  await page.goto(linkObj.baseUrl);
+  await page.goto("/");
 
-  console.log(baseURL);
   // login test
   const USER_EMAIL = "testId@naver.com";
   const USER_PASSWORD = "12341234";
