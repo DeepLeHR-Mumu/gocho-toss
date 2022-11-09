@@ -1,14 +1,14 @@
 name: Vercel deploy Slack Notification
-
+# 액션 페이지에 나오는 이름
 on:
   check_run:
     types: [completed]
   deployment_status:
-    pull_request:
-      types:
-        - opened
-      branches:
-        - [dev, main]
+  pull_request:
+    types:
+      - opened
+    branches:
+      - [dev, main]
 jobs:
   success_slack:
     if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
