@@ -1,6 +1,6 @@
 import { HasFieldsInIncludesDef } from "./type";
 
-export const getResData = (arrData: { value: string }[]) => {
+export const getCertiValue = (arrData: { value: string }[]) => {
   if (arrData.length === 0) {
     return null;
   }

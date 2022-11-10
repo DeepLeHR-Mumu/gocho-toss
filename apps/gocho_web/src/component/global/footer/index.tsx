@@ -61,7 +61,7 @@ export const Footer: FunctionComponent = () => {
               <strong css={inquiryTitle}>광고 문의</strong>
               <p css={inquiryText}>
                 <a href={`mailto:${companyInfoObj.marketingEmail}`}>
-                  <a>채용공고 / 광고 등록 문의 {companyInfoObj.marketingEmail}</a>
+                  채용공고 / 광고 등록 문의 {companyInfoObj.marketingEmail}
                 </a>
               </p>
             </div>

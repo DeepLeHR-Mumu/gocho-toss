@@ -1,6 +1,6 @@
 export interface Spec8AwardCareerEtcProps {
-  moveNextCard(percent: number): void;
-  movePrevCard(): void;
+  moveNextCard(hash: string): void;
+  movePrevCard(hash: string): void;
 }
 
 export interface PostSubmitValues {

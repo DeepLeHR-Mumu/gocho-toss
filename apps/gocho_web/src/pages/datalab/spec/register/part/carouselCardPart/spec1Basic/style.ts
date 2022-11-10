@@ -3,6 +3,8 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const disabledWrapper = css`
+  width: 100%;
+  margin-bottom: 1.7rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,6 +44,22 @@ export const desc = css`
   margin-left: 0.5rem;
   color: ${COLORS.GRAY60};
   font-weight: 500;
+`;
+
+export const ageBox = css`
+  margin-bottom: 1.7rem;
+`;
+
+export const genderBox = css`
+  margin-bottom: 1.7rem;
+`;
+
+export const militaryBox = css`
+  margin-bottom: 4rem;
+`;
+
+export const desiredTaskBox = css`
+  margin-bottom: 4rem;
 `;
 
 export const ageFormBox = css`

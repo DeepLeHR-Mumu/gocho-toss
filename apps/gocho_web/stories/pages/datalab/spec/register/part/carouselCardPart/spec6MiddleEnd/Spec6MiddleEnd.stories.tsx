@@ -5,7 +5,7 @@ import { RecoilRoot } from "recoil";
 import { Spec6MiddleEnd } from "@pages/datalab/spec/register/part/carouselCardPart/spec6MiddleEnd";
 
 export default {
-  title: "datalab/spec/register/part/carouselCardPart/Spec6MiddleEnd",
+  title: "데이터랩/스펙등록/part/carouselCardPart/Spec6MiddleEnd",
   component: Spec6MiddleEnd,
   argTypes: {
     moveNextCard: {
@@ -14,7 +14,7 @@ export default {
     movePrevCard: {
       description: "slick 이전이동 함수",
     },
-    handleKeepWriteSpec: {
+    writeMoreSpecHandler: {
       description: "스펙등록 하지않고 다음 추가 작성 함수",
     },
   },
@@ -45,16 +45,16 @@ const Template: ComponentStory<typeof Spec6MiddleEnd> = (args) => {
   );
 };
 
-export const 기본 = Template.bind({});
+export const card = Template.bind({});
 
-기본.args = {
+card.args = {
   movePrevCard: () => {
     return undefined;
   },
   moveNextCard: () => {
     return undefined;
   },
-  handleKeepWriteSpec: () => {
+  writeMoreSpecHandler: () => {
     return undefined;
   },
 };

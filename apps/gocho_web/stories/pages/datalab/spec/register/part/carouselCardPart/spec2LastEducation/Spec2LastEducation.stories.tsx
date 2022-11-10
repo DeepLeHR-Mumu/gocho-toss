@@ -5,7 +5,7 @@ import { RecoilRoot } from "recoil";
 import { Spec2lastEducation } from "@pages/datalab/spec/register/part/carouselCardPart/spec2LastEducation";
 
 export default {
-  title: "datalab/spec/register/part/carouselCardPart/Spec2lastEducation",
+  title: "데이터랩/스펙등록/part/carouselCardPart/Spec2lastEducation",
   component: Spec2lastEducation,
   argTypes: {
     moveNextCard: {
@@ -13,6 +13,9 @@ export default {
     },
     movePrevCard: {
       description: "slick 이전이동 함수",
+    },
+    setUserLastEdu: {
+      description: "선택된 최종학력을 저장하기 위한 setState",
     },
   },
   parameters: {
@@ -42,13 +45,16 @@ const Template: ComponentStory<typeof Spec2lastEducation> = (args) => {
   );
 };
 
-export const 기본 = Template.bind({});
+export const card = Template.bind({});
 
-기본.args = {
+card.args = {
   movePrevCard: () => {
     return undefined;
   },
   moveNextCard: () => {
     return undefined;
+  },
+  setUserLastEdu: () => {
+    return null;
   },
 };
