@@ -1,9 +1,7 @@
 import { test, expect } from "@playwright/test";
 
-const URL = "http://localhost:3001";
-
 test.beforeEach(async ({ page }) => {
-  await page.goto(URL);
+  await page.goto("/");
   await page.locator('button[aria-label="통합검색 열기"]').click();
   await page.locator('input[placeholder="궁금한 기업/공고를 검색해보세요"]').fill("현대");
   await page.locator('button[aria-label="통합 검색하기"]').click();
@@ -36,7 +34,7 @@ test.describe("통합 검색페이지 테스트", () => {
     const jdArrData = await jdData.data;
     const companyArrData = await companyData.data;
 
-    expect(jdArrData.length).toBe(4);
+    expect(jdArrData.length).toBe(2);
     expect(companyArrData.length).toBe(2);
     await expect(page.locator(`button:has-text("전체 ${jdData.count + companyData.count}")`)).toBeVisible();
     await expect(page.locator(`button:has-text("공고 ${jdData.count}")`)).toBeVisible();
@@ -105,23 +103,23 @@ test.describe("통합 검색페이지 테스트", () => {
 
   test("더보기 버튼 체크", async ({ page }) => {
     // search페이지에서 메인 채용공고 버튼 클릭
-    await page.goto(`${URL}/search`);
+    await page.goto(`/search`);
     await page.getByRole("button", { name: "채용공고 더보기" }).click();
-    await expect(page).toHaveURL(`${URL}/search?q=&page=1&menu=공고`);
+    await expect(page).toHaveURL(`/search?q=&page=1&menu=공고`);
 
     // search페이지에서 메인 기업정보 버튼 클릭
-    await page.goto(`${URL}/search`);
+    await page.goto(`/search`);
     await page.getByRole("button", { name: "기업정보 더보기" }).click();
-    await expect(page).toHaveURL(`${URL}/search?q=&page=1&menu=기업`);
+    await expect(page).toHaveURL(`/search?q=&page=1&menu=기업`);
 
     // search페이지에서 상단 nav 버튼 클릭
-    await page.goto(`${URL}/search`);
+    await page.goto(`/search`);
     await page.getByRole("button", { name: "기업" }).click();
     await page.getByRole("button", { name: "공고" }).click();
   });
 
   test("페이지네이션 체크", async ({ page }) => {
-    await page.goto(`${URL}/search`);
+    await page.goto(`/search`);
     await page.getByRole("button", { name: "공고" }).click();
     const jdResponse = await page.waitForResponse(
       (response) => response.url().includes("jds") && response.status() === 200
@@ -131,13 +129,13 @@ test.describe("통합 검색페이지 테스트", () => {
     const jdLastPage = Math.ceil(jdData.count / 10);
 
     await page.locator('role=button[name="2번 페이지로 이동"]').click();
-    await expect(page).toHaveURL(`${URL}/search?menu=공고&q=&page=2`);
+    await expect(page).toHaveURL(`/search?menu=공고&q=&page=2`);
     await page.locator('role=button[name="다음 페이지로 이동"]').click();
-    await expect(page).toHaveURL(`${URL}/search?menu=공고&q=&page=3`);
+    await expect(page).toHaveURL(`/search?menu=공고&q=&page=3`);
     await page.locator('role=button[name="첫 페이지로 이동"]').click();
-    await expect(page).toHaveURL(`${URL}/search?menu=공고&q=&page=1`);
+    await expect(page).toHaveURL(`/search?menu=공고&q=&page=1`);
     await page.getByRole("button", { name: "마지막 페이지로 이동" }).click();
-    await expect(page).toHaveURL(`${URL}/search?menu=공고&q=&page=${jdLastPage}`);
+    await expect(page).toHaveURL(`/search?menu=공고&q=&page=${jdLastPage}`);
 
     await page.reload();
 
@@ -151,18 +149,18 @@ test.describe("통합 검색페이지 테스트", () => {
     const companyLastPage = Math.ceil(companyData.count / 6);
 
     await page.locator('role=button[name="2번 페이지로 이동"]').click();
-    await expect(page).toHaveURL(`${URL}/search?menu=기업&q=&page=2`);
+    await expect(page).toHaveURL(`/search?menu=기업&q=&page=2`);
     await page.locator('role=button[name="다음 페이지로 이동"]').click();
-    await expect(page).toHaveURL(`${URL}/search?menu=기업&q=&page=3`);
+    await expect(page).toHaveURL(`/search?menu=기업&q=&page=3`);
     await page.locator('role=button[name="첫 페이지로 이동"]').click();
-    await expect(page).toHaveURL(`${URL}/search?menu=기업&q=&page=1`);
+    await expect(page).toHaveURL(`/search?menu=기업&q=&page=1`);
     await page.getByRole("button", { name: "마지막 페이지로 이동" }).click();
-    await expect(page).toHaveURL(`${URL}/search?menu=기업&q=&page=${companyLastPage}`);
+    await expect(page).toHaveURL(`/search?menu=기업&q=&page=${companyLastPage}`);
   });
 
   test("쿼리값 없을시 기본 쿼리값 검사", async ({ page }) => {
-    await page.goto(`${URL}/search`);
-    await expect(page).toHaveURL(`${URL}/search?menu=전체&q=&page=1`);
+    await page.goto(`/search`);
+    await expect(page).toHaveURL(`/search?menu=전체&q=&page=1`);
   });
 
   test("공고 디테일페이지 _blank 확인", async ({ page, context }) => {
