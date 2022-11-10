@@ -4,7 +4,7 @@ import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
   banner: FormData;
-  type: 0 | 1 | 2;
+  type: "M" | "T" | "S";
 }
 
 export interface PostBannerResponseDef extends ResponseDef {

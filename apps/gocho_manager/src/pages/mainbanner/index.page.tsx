@@ -40,7 +40,7 @@ const MainBanner: NextPage = () => {
   const [imageSrc, setImageSrc] = useState<string>();
   const [bannerPicture, setBannerPicture] = useState<File>();
 
-  const { data: BannerDataArr, isLoading, isError } = useBannerArr({ type: "M" });
+  const { data: bannerDataArr, isLoading, isError } = useBannerArr({ type: "M" });
   const { mutate: addMutate } = useAddBanner();
   const { mutate: deleteMutate } = useDeleteBanner();
 
@@ -92,7 +92,7 @@ const MainBanner: NextPage = () => {
     );
   };
 
-  if (!BannerDataArr || isLoading) {
+  if (!bannerDataArr || isLoading) {
     return <LoadingScreen />;
   }
 
@@ -184,7 +184,7 @@ const MainBanner: NextPage = () => {
           </thead>
 
           <tbody>
-            {BannerDataArr.bannerDataArr.map((banner) => {
+            {bannerDataArr.bannerDataArr.map((banner) => {
               const { year: endYear, month: endMonth, date: endDate } = dateConverter(banner.endTime);
 
               return (
