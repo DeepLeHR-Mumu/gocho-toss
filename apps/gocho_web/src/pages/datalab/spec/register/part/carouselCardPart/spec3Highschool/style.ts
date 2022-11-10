@@ -14,6 +14,7 @@ export const typeBox = css`
 
 export const classInfoBox = css`
   margin-bottom: 4rem;
+  width: 100%;
   max-width: 58rem;
 `;
 

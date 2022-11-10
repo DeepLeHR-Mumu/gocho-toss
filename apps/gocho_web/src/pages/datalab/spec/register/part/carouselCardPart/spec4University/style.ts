@@ -32,6 +32,7 @@ export const naesinBox = css`
 export const collegeBox = css`
   margin-top: 4.5rem;
   max-width: 35rem;
+  width: 100%;
 `;
 
 export const uturnBox = css`
