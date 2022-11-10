@@ -43,12 +43,22 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-      - name: playwright reports send to slack
-        uses: rtCamp/action-slack-notify@v2
+
+      - name: Send Slack notification of successful tests
+        uses: rtCamp/action-slack-notify@master
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_CHANNEL: 01-팀-dev
-          SLACK_COLOR: ${{ job.status }}
-          SLACK_MESSAGE: "Post Content :rocket:"
-          SLACK_TITLE: Post Title
-          SLACK_USERNAME: foo
+          SLACK_FOOTER: ""
+          SLACK_COLOR: "good"
+          SLACK_MESSAGE: ":dev::test_tube::done:"
+          SLACK_TITLE: "Smoke Tests"
+          SLACK_WEBHOOK: ${{ inputs.slack_url }}
+
+      - name: Send Slack notification of failed tests
+        if: failure()
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_FOOTER: ""
+          SLACK_COLOR: "danger"
+          SLACK_MESSAGE: ":dev::test_tube::failed:"
+          SLACK_TITLE: "Smoke Tests"
+          SLACK_WEBHOOK: ${{ inputs.slack_url }}
