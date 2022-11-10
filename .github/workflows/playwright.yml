@@ -43,27 +43,15 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-
-  slackNotification:
-    name: Slack Notification
-    runs-on: ubuntu-latest
+  sendE2EReportToSlack:
     needs: test_e2e
-    if: ${{ always() && !cancelled() }}
+    name: send playwright reports to slack
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - run: mkdir playwright-report
-      - name: Download Playwright report artifact
-        uses: actions/download-artifact@v3
+      - uses: 8398a7/action-slack@v3
         with:
-          name: playwright-report
-          path: client/playwright-report
-      - uses: actions/setup-node@v3
-        with:
-          cache: "pnpm"
-          node-version: 16
-      - name: Publish test results to Slack
-        id: slack
-        uses: slackapi/slack-github-action@v1.18.0
+          status: ${{ job.status }}
+          fields: playwright-report, message
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_TESTS_NOTIFICATION_WEBHOOK }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always()
