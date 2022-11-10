@@ -42,7 +42,7 @@ const CommunityLayout: FunctionComponent<CommunityLayoutProps> = ({ children, is
   const { setCurrentModal } = useModal();
   const { error: userError } = useUserInfo();
 
-  const openWritePostingModal = () => {
+  const postingWriteHandler = () => {
     if (userError) return setCurrentModal("loginModal", { button: "close" });
     return router.push(COMMUNITY_POSTING_WRITE_URL);
   };
@@ -92,7 +92,7 @@ const CommunityLayout: FunctionComponent<CommunityLayoutProps> = ({ children, is
                   </button>
                 );
               })}
-              <button type="button" css={writePostingButton} onClick={openWritePostingModal}>
+              <button type="button" css={writePostingButton} onClick={postingWriteHandler}>
                 글 남기기
                 <AiOutlineEdit />
               </button>
