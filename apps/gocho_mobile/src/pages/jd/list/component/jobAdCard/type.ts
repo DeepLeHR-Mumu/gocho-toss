@@ -1,12 +1,16 @@
 export interface SlideCardProps {
   jobData: {
     id: number;
+    color?: string;
+    companyName?: string;
+    companyLogo?: string;
+    startTime: number;
     endTime: number;
-    companyLogo: string;
-    companyName: string;
-    title: string;
+    jdStartTime: number;
+    jdEndTime: number;
+    jdId?: number;
+    title?: string;
   };
-  bgColor: string;
   isSkeleton?: never;
 }
 

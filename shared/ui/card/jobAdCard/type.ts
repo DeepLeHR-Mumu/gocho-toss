@@ -1,11 +1,15 @@
 export interface JobAdCardProps {
   jobAdData: {
     id: number;
-    companyName: string;
-    companyLogo: string;
+    color?: string;
+    companyName?: string;
+    companyLogo?: string;
     startTime: number;
     endTime: number;
-    title: string;
+    jdStartTime: number;
+    jdEndTime: number;
+    jdId?: number;
+    title?: string;
   };
   isMobile: boolean;
   isSkeleton?: never;

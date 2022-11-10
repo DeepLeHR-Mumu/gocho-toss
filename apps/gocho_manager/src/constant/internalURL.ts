@@ -1,4 +1,5 @@
 export const MAIN_URL = "/";
+export const LOGIN_URL = "/login";
 export const JD_UPLOAD_URL = "/jd/upload";
 export const JD_LIST_URL = "/jd/list";
 export const MAIN_BANNER_URL = "/mainbanner";

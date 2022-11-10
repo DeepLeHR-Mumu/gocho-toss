@@ -1,15 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 
-import { axiosInstance } from "@api/axiosInstance";
-
+import { MANAGER_BACKEND_URL } from "shared-constant/externalURL";
 import { PostLoginDef, RequestObjDef, ResponseObjDef, useDoLoginProps } from "./type";
 
 const postLogin: PostLoginDef = async (requestObj) => {
-  const { data } = await axiosInstance.post("/admin/login", { ...requestObj });
+  const { data } = await axios.post(`${MANAGER_BACKEND_URL}/auth/login?member=admin`, { ...requestObj });
   return data;
 };
 
-export const useLogin: useDoLoginProps = () => {
+export const useDoLogin: useDoLoginProps = () => {
   return useMutation<ResponseObjDef, AxiosError, RequestObjDef>(postLogin);
 };

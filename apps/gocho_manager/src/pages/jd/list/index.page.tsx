@@ -98,70 +98,73 @@ const JdList: NextPage = () => {
       <h2 css={pageTitle}>공고 목록</h2>
       <section css={sectionContainer}>
         <table css={tableContainer}>
-          <tr css={jobContainer}>
-            <th css={jobIdBox}>공고 ID</th>
-            <th css={mainInfoBox}>기업이름 / 공고제목</th>
-            <th css={taskContainer}>직무</th>
-            <th css={dateBox}>채용 날짜</th>
-            <th css={buttonContainer}> </th>
-          </tr>
+          <thead>
+            <tr css={jobContainer}>
+              <th css={jobIdBox}>공고 ID</th>
+              <th css={mainInfoBox}>기업이름 / 공고제목</th>
+              <th css={taskContainer}>직무</th>
+              <th css={dateBox}>채용 날짜</th>
+              <th css={buttonContainer}> </th>
+            </tr>
+          </thead>
+          <tbody>
+            {jobDataArr.jobDataArr.map((job) => {
+              const { year: startYear, month: startMonth, date: startDate } = dateConverter(job.startTime);
+              const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
 
-          {jobDataArr.jobDataArr.map((job) => {
-            const { year: startYear, month: startMonth, date: startDate } = dateConverter(job.startTime);
-            const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
-
-            return (
-              <tr key={job.id} css={jobContainer}>
-                <td css={jobIdBox}>{job.id}</td>
-                <td css={mainInfoBox}>
-                  <p css={companyName}>{job.companyName}</p>
-                  <p css={jobTitle}>{job.title}</p>
-                </td>
-                <td css={taskContainer}>
-                  {job.taskArr.map((task) => {
-                    return (
-                      <p key={`${job.id}${task}`} css={taskBox}>
-                        {task}
-                      </p>
-                    );
-                  })}
-                </td>
-                <td css={dateBox}>
-                  {startYear}-{startMonth}-{startDate}
-                  <br />
-                  {endYear}-{endMonth}-{endDate}
-                </td>
-                <td css={buttonContainer}>
-                  <button css={activeButton} type="button">
-                    <a href={job.applyUrl} target="_blank" rel="noopener noreferrer">
-                      채용 링크
-                    </a>
-                  </button>
-                  <button css={activeButton} type="button">
-                    수정
-                  </button>
-                  <button
-                    css={deleteButton}
-                    type="button"
-                    onClick={() => {
-                      return jobDelete(job.id);
-                    }}
-                  >
-                    삭제
-                  </button>
-                  <button
-                    css={activeButton}
-                    type="button"
-                    onClick={() => {
-                      return jobEnd(job.id);
-                    }}
-                  >
-                    마감하기
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+              return (
+                <tr key={job.id} css={jobContainer}>
+                  <td css={jobIdBox}>{job.id}</td>
+                  <td css={mainInfoBox}>
+                    <p css={companyName}>{job.companyName}</p>
+                    <p css={jobTitle}>{job.title}</p>
+                  </td>
+                  <td css={taskContainer}>
+                    {job.taskArr.map((task) => {
+                      return (
+                        <p key={`${job.id}${task}`} css={taskBox}>
+                          {task}
+                        </p>
+                      );
+                    })}
+                  </td>
+                  <td css={dateBox}>
+                    {startYear}-{startMonth}-{startDate}
+                    <br />
+                    {endYear}-{endMonth}-{endDate}
+                  </td>
+                  <td css={buttonContainer}>
+                    <button css={activeButton} type="button">
+                      <a href={job.applyUrl} target="_blank" rel="noopener noreferrer">
+                        채용 링크
+                      </a>
+                    </button>
+                    <button css={activeButton} type="button">
+                      수정
+                    </button>
+                    <button
+                      css={deleteButton}
+                      type="button"
+                      onClick={() => {
+                        return jobDelete(job.id);
+                      }}
+                    >
+                      삭제
+                    </button>
+                    <button
+                      css={activeButton}
+                      type="button"
+                      onClick={() => {
+                        return jobEnd(job.id);
+                      }}
+                    >
+                      마감하기
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </section>
       <BottomPagination totalPage={totalPage} url={JD_LIST_URL} />

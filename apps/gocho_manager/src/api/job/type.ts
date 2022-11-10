@@ -36,7 +36,7 @@ export interface PositionObjDef {
   };
   hire_number: number;
   pay_arr: number[] | null;
-  preferred_certi_arr: string[] | null;
+  preferred_certi_arr: string[];
   preferred_etc_arr: string[] | null;
 }
 
