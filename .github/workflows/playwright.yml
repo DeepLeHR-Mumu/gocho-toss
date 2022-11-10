@@ -50,8 +50,8 @@ jobs:
           SLACK_CHANNEL: 01-팀-dev
           SLACK_FOOTER: ""
           SLACK_COLOR: "good"
-          SLACK_MESSAGE: ":dev::test_tube::done:"
-          SLACK_TITLE: "Smoke Tests"
+          SLACK_MESSAGE: ":dev: 테스트 성공했습니다!:"
+          SLACK_TITLE: "테스트코드 결과"
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Send Slack notification of failed tests
@@ -61,6 +61,6 @@ jobs:
           SLACK_CHANNEL: 01-팀-dev
           SLACK_FOOTER: ""
           SLACK_COLOR: "danger"
-          SLACK_MESSAGE: ":dev::test_tube::failed:"
-          SLACK_TITLE: "Smoke Tests"
+          SLACK_MESSAGE: ":dev: 테스트 실패했습니다!:"
+          SLACK_TITLE: "테스트코드 결과"
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
