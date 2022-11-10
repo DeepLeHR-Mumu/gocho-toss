@@ -3,15 +3,15 @@ import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+
 import { useUserInfo } from "shared-api/auth";
 import { usePostingCommentArr } from "shared-api/community/usePostingCommentArr";
-import { usePostingDetail } from "shared-api/community/usePostingDetail";
-
+import { usePostingDetail } from "shared-api/community/usePostingDetail"
 import { GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
 import { postingListFunnelEvent } from "shared-ga/posting";
+
 import { WriteComment } from "./component/writeComment";
 import { CommentPart } from "./part/commentPart";
-
 import { PostingPart } from "./part/postingPart";
 import { commentListWrapper, overviewYBox, wrapper } from "./style";
 

@@ -39,7 +39,7 @@ export const userNickname = css`
   font-weight: 500;
   color: ${COLORS.GRAY10};
   width: calc(100% - 2.25rem);
-  ${shorten(1)};
+  ${shorten()};
 `;
 
 

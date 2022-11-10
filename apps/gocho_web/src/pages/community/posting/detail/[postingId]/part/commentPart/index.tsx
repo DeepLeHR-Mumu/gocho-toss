@@ -29,11 +29,11 @@ export const CommentPart: FunctionComponent<CommentProps> = ({ commentData, post
   const [isChangeComment, setIsChangeComment] = useState(false);
   const [showWriteComment, setShowWriteComment] = useState<boolean>(false);
 
-  const { mutate } = useDeleteComment();
+  const { mutate:deleteCommentMutate } = useDeleteComment();
   const queryClient = useQueryClient();
 
   const commentDelete = (commentPostingId: number, commentId: number) => {
-    mutate(
+    deleteCommentMutate(
       { postingId: commentPostingId, commentId },
       {
         onSuccess: () => {

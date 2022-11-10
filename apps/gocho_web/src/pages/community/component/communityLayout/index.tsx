@@ -1,5 +1,3 @@
-import { Layout } from "@component/layout";
-import { useModal } from "@recoil/hook/modal";
 import { FunctionComponent } from "react";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -12,6 +10,8 @@ import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { META_COMMUNITY_POSTING } from "shared-constant/meta";
 import { COMMUNITY_POSTINGS_LIST_URL, COMMUNITY_POSTING_WRITE_URL } from "shared-constant/internalURL";
 
+import { Layout } from "@component/layout";
+import { useModal } from "@recoil/hook/modal";
 import { FilterDef, HashtagDef } from "@pages/community/type";
 
 import {
@@ -78,11 +78,12 @@ const CommunityLayout: FunctionComponent<CommunityLayoutProps> = ({ children, is
             <div css={buttonArrContainer}>
               <p css={buttonTitle}>💬 게시판</p>
               {setPostingFilterButtonArr.map((button) => {
+                const isActivated = button.filter === router.query.filter;
                 return (
                   <button
                     type="button"
                     key={button.text}
-                    css={setPostingFilterButton(button.filter === router.query.filter)}
+                    css={setPostingFilterButton(isActivated)}
                     onClick={() => {
                       window.scrollTo(0, 0);
                       return changePostingFilter(button.filter);

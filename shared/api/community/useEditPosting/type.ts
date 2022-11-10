@@ -9,10 +9,10 @@ export interface RequestObjDef {
   type: number;
 }
 
-export interface PostChangePostingDef {
+export interface editPostingDef {
   ({ id, title, description, type }: RequestObjDef): Promise<ResponseDef>;
 }
 
-export interface useChangePostingProps {
+export interface useEditPostingProps {
   (): UseMutationResult<ResponseDef, AxiosError, RequestObjDef>;
 }

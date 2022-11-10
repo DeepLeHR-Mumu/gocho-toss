@@ -49,7 +49,7 @@ export const PostingPart: FunctionComponent = () => {
 
   const { data: userInfoData } = useUserInfo();
   const { data: postingDetailData } = usePostingDetail({ id: Number(router.query.postingId) });
-  const { mutate } = useDeletePosting();
+  const { mutate:deletePostingMutate } = useDeletePosting();
   const { mutate: addViewCount } = useAddPostingViewCount();
   const { mutate: addBookmarkMutate } = useAddPostingBookmarkArr({ id: Number(router.query.postingId) });
   const { mutate: deleteBookmarkMutate } = useDeletePostingBookmarkArr({ id: Number(router.query.postingId) });
@@ -61,7 +61,7 @@ export const PostingPart: FunctionComponent = () => {
   } = usePostingCommentArr({ postingId: Number(router.query.postingId) });
 
   const postingDelete = (postingId: number) => {
-    mutate(
+    deletePostingMutate(
       { id: postingId },
       {
         onSuccess: () => {

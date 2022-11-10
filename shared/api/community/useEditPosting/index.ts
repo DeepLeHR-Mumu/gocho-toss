@@ -3,9 +3,9 @@ import { AxiosError } from "axios";
 
 import { ResponseDef } from "shared-type/api/responseType";
 import { axiosInstance } from "../../axiosInstance";
-import { PostChangePostingDef, useChangePostingProps, RequestObjDef } from "./type";
+import { editPostingDef, useEditPostingProps, RequestObjDef } from "./type";
 
-const postChangePosting: PostChangePostingDef = async (requestObj) => {
+const editPosting: editPostingDef = async (requestObj) => {
   const token = localStorage.getItem("token") as string;
   const { data } = await axiosInstance.put(
     `/postings/${requestObj?.id}`,
@@ -24,7 +24,7 @@ const postChangePosting: PostChangePostingDef = async (requestObj) => {
   return data;
 };
 
-export const useChangePosting: useChangePostingProps = () => {
-  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(postChangePosting);
+export const useEditPosting: useEditPostingProps = () => {
+  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(editPosting);
   return mutationResult;
 };

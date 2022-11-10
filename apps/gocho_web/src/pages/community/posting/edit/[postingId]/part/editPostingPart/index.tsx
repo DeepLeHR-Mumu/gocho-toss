@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { usePostingDetail } from "shared-api/community/usePostingDetail";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { useUserInfo } from "shared-api/auth";
-import { useChangePosting } from "shared-api/community/useChangePosting";
+import { useEditPosting } from "shared-api/community/useEditPosting";
 import { communityPostingArrKeyObj } from "shared-constant/queryKeyFactory/community/postingArrKeyObj";
 import { COMMUNITY_POSTINGS_LIST_URL } from "shared-constant/internalURL";
 
@@ -33,7 +33,7 @@ export const EditPostingPart: FunctionComponent = () => {
 
   const { data: postingDetailData } = usePostingDetail({ id: Number(router.query.postingId) });
   const { data: userInfoData } = useUserInfo();
-  const { mutate } = useChangePosting();
+  const { mutate: editPostingMutate } = useEditPosting();
   const { setCurrentToast } = useToast();
 
   const { register, handleSubmit, setValue, watch } = useForm<PostingFormValues>({
@@ -47,7 +47,7 @@ export const EditPostingPart: FunctionComponent = () => {
   const typeIndex = watch("type");
 
   const postingSubmit: SubmitHandler<PostingFormValues> = (postingObj) => {
-    mutate(postingObj, {
+    editPostingMutate(postingObj, {
       onSuccess: () => {
         queryClient.invalidateQueries(communityPostingArrKeyObj.all);
         setCurrentToast("게시글이 수정되었습니다.");
