@@ -1,3 +1,4 @@
+import CommunityLayout from "@pages/community/component/communityLayout";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -5,10 +6,9 @@ import { useEffect } from "react";
 
 import { GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
 import { postingListFunnelEvent } from "shared-ga/posting";
-
 import { ListPart } from "./part/listPart";
 
-const Posting: NextPage = () => {
+const PostingListPage: NextPage = () => {
   const { pathname } = useRouter();
 
   useEffect(() => {
@@ -20,9 +20,11 @@ const Posting: NextPage = () => {
       <Head>
         <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${pathname}`} />
       </Head>
-      <ListPart />
+      <CommunityLayout isSidebar>
+        <ListPart />
+      </CommunityLayout>
     </main>
   );
 };
 
-export default Posting;
+export default PostingListPage;

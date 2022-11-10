@@ -1,146 +1,92 @@
-import { FunctionComponent, useState } from "react";
-import { AiOutlineEdit } from "react-icons/ai";
-import { FiSearch } from "react-icons/fi";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
 
-import { MetaHead } from "shared-ui/common/atom/metaHead";
-import { META_COMMUNITY_POSTING } from "shared-constant/meta";
-import { useUserInfo } from "shared-api/auth";
-import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
-import { useModal } from "@recoil/hook/modal";
-import { Layout } from "@component/layout";
+import { useInfiniteCommunityPostingArr } from "shared-api/community";
+import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { postingListInfinityScroll } from "shared-ga/posting";
 
-import { PostingCardList } from "../../component/postingCardList";
-import { changeFilterDef, changeHashtagDef, FilterDef, HashtagDef, PostingValues } from "./type";
-import { setPostingFilterButtonArr, setPostingHashtagButtonArr } from "./constant";
-import {
-  partContainer,
-  colorPoint,
-  title,
-  mainContainer,
-  listContainer,
-  tempContainer,
-  setPostingHashtagButton,
-  formCSS,
-  searchWrapper,
-  searchBox,
-  searchButton,
-  buttonArrContainer,
-  setPostingFilterButton,
-  writePostingButton,
-  buttonTitle,
-} from "./style";
+// import { useModal } from "@recoil/hook/modal";
+import { FilterDef, HashtagDef } from "@pages/community/type";
+
+import { PostingCard } from "../../component/postingCard";
+import { noSearchDataBox, noSearchDataDesc } from "./style";
 
 export const ListPart: FunctionComponent = () => {
-  const [activeButtonFilter, setActiveButtonFilter] = useState<FilterDef>();
-  const [activeButtonHashtag, setActiveButtonHashtag] = useState<HashtagDef>("recent");
-  const [keyword, setKeyword] = useState("");
+  const observerRef = useRef<IntersectionObserver>();
+  const boxRef = useRef<HTMLDivElement>(null);
+  const [scrollCount, setScrollCount] = useState(0);
 
-  const { setCurrentModal } = useModal();
-  const { error: userError } = useUserInfo();
+  const router = useRouter();
 
-  const changeFilter: changeFilterDef = (newFilter: FilterDef) => {
-    setActiveButtonFilter(newFilter);
-  };
+  // const { setCurrentModal } = useModal();
 
-  const changeHashtag: changeHashtagDef = (newHashtag: HashtagDef) => {
-    setActiveButtonHashtag(newHashtag);
-  };
+  const {
+    data: communityPostingArrData,
+    isLoading,
+    isError,
+    fetchNextPage,
+  } = useInfiniteCommunityPostingArr({
+    limit: 10,
+    filter: router.query.filter as FilterDef,
+    q: router.query.keyword as string,
+    hashTag: router.query.hashTag as HashtagDef,
+    order: router.query.hashTag as HashtagDef,
+  });
 
-  const openWritePostingModal = () => {
-    if (userError) return setCurrentModal("loginModal", { button: "close" });
-    return setCurrentModal("writePostingModal", { title: "", description: "" });
-  };
+  useEffect(() => {
+    const intersectionObserver = (entries: IntersectionObserverEntry[], io: IntersectionObserver) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // 관찰하고 있는 entry가 화면에 보여지는 경우
+          io.unobserve(entry.target); // entry 관찰 해제
+          setScrollCount((prev) => {
+            return prev + 1;
+          });
+          fetchNextPage(); // 다음 페이지 데이터 요청
+        }
+      });
+    };
 
-  const { register, reset, handleSubmit } = useForm<PostingValues>({});
-  const postingSearch: SubmitHandler<PostingValues> = (postingVal) => {
-    setKeyword(postingVal.keyword);
-  };
-
-  const changePostingFilter = (filter: FilterDef) => {
-    changeFilter(filter);
-    changeHashtag("recent");
-    setKeyword("");
-    reset();
-  };
-
-  const changePostingHashtag = (filter: HashtagDef) => {
-    if (filter === activeButtonHashtag) {
-      changeHashtag("recent");
-      return;
+    if (observerRef.current) {
+      observerRef.current.disconnect();
     }
-    changeHashtag(filter);
-  };
+
+    observerRef.current = new IntersectionObserver(intersectionObserver, {
+      threshold: 0.2,
+    });
+    if (boxRef.current) observerRef.current.observe(boxRef.current);
+  }, [fetchNextPage, communityPostingArrData]);
+
+  useEffect(() => {
+    if (scrollCount !== 0) postingListInfinityScroll(scrollCount);
+  }, [scrollCount]);
+
+  if (!communityPostingArrData || isError || isLoading) {
+    return (
+      <div>
+        {dummyArrCreator(9).map((dummy) => {
+          return <PostingCard isSkeleton key={`PostingCardSkeleton${dummy}`} />;
+        })}
+      </div>
+    );
+  }
+
+  if (communityPostingArrData.pages[0].length === 0) {
+    return (
+      <div css={noSearchDataBox}>
+        <p css={noSearchDataDesc}>일치하는 검색 결과가 없습니다</p>
+      </div>
+    );
+  }
 
   return (
-    <section css={partContainer}>
-      <MetaHead metaData={META_COMMUNITY_POSTING} />
-      <InvisibleH2 title="생산/기능직 자유게시판" />
-      <Layout>
-        <p css={title}>
-          커뮤니티 💬<span css={colorPoint}>게시판</span>
-        </p>
-
-        <div css={mainContainer}>
-          <div css={buttonArrContainer}>
-            <p css={buttonTitle}>💬 게시판</p>
-            {setPostingFilterButtonArr.map((button) => {
-              return (
-                <button
-                  type="button"
-                  key={button.text}
-                  css={setPostingFilterButton(button.filter === activeButtonFilter)}
-                  onClick={() => {
-                    window.scrollTo(0, 0);
-                    return changePostingFilter(button.filter);
-                  }}
-                >
-                  {button.text}
-                </button>
-              );
-            })}
-            <button type="button" css={writePostingButton} onClick={openWritePostingModal}>
-              글 남기기
-              <AiOutlineEdit />
-            </button>
-          </div>
-
-          <div css={listContainer}>
-            <div css={tempContainer}>
-              <form css={formCSS} onSubmit={handleSubmit(postingSearch)}>
-                <div css={searchWrapper}>
-                  <input
-                    {...register("keyword", {
-                      required: true,
-                    })}
-                    css={searchBox}
-                    placeholder="검색어를 입력해주세요"
-                  />
-                  <button type="submit" css={searchButton} aria-label="검색하기">
-                    <FiSearch />
-                  </button>
-                </div>
-              </form>
-              {setPostingHashtagButtonArr.map((button) => {
-                return (
-                  <button
-                    type="button"
-                    key={button.text}
-                    css={setPostingHashtagButton(button.hashtag === activeButtonHashtag)}
-                    onClick={() => {
-                      changePostingHashtag(button.hashtag);
-                    }}
-                  >
-                    #{button.text}
-                  </button>
-                );
-              })}
-            </div>
-
-            <PostingCardList keyword={keyword} hashTag={activeButtonHashtag} activeButtonFilter={activeButtonFilter} />
-          </div>
-        </div>
-      </Layout>
-    </section>
+    <div>
+      {communityPostingArrData.pages.map((page) => {
+        return page.map((postingData) => {
+          return <PostingCard postingData={postingData} key={postingData.id} />;
+        });
+      })}
+      <div ref={boxRef} />
+    </div>
   );
 };

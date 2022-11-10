@@ -6,9 +6,6 @@ import { SignUpModal } from "../signUpModal";
 import { LoginModal } from "../loginModal";
 import { PageBlockingModal } from "../pageBlockingModal";
 import { AccountSettingModal } from "../accountSettingModal";
-import { PostingModal } from "../postingModal";
-import { WritePostingModal } from "../writePostingModal";
-import { ChangePostingModal } from "../changePostingModal";
 import { TipModal } from "../tipModal";
 import { FactoryModal } from "../factoryModal";
 import { WriteKakaoInfoModal } from "../writeKakaoInfoModal";
@@ -26,15 +23,6 @@ export const ModalPlaceholder: FunctionComponent = () => {
   }
   if (currentModal?.activatedModal === "accountSettingModal") {
     return <AccountSettingModal />;
-  }
-  if (currentModal?.activatedModal === "postingModal") {
-    return <PostingModal />;
-  }
-  if (currentModal?.activatedModal === "writePostingModal") {
-    return <WritePostingModal />;
-  }
-  if (currentModal?.activatedModal === "changePostingModal") {
-    return <ChangePostingModal />;
   }
   if (currentModal?.activatedModal === "tipModal") {
     return <TipModal />;
