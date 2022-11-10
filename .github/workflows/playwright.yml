@@ -47,18 +47,20 @@ jobs:
       - name: Send Slack notification of successful tests
         uses: rtCamp/action-slack-notify@master
         env:
+          SLACK_CHANNEL: 01-팀-dev
           SLACK_FOOTER: ""
           SLACK_COLOR: "good"
           SLACK_MESSAGE: ":dev::test_tube::done:"
           SLACK_TITLE: "Smoke Tests"
-          SLACK_WEBHOOK: ${{ inputs.slack_url }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Send Slack notification of failed tests
         if: failure()
         uses: rtCamp/action-slack-notify@master
         env:
+          SLACK_CHANNEL: 01-팀-dev
           SLACK_FOOTER: ""
           SLACK_COLOR: "danger"
           SLACK_MESSAGE: ":dev::test_tube::failed:"
           SLACK_TITLE: "Smoke Tests"
-          SLACK_WEBHOOK: ${{ inputs.slack_url }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
