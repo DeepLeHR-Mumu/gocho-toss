@@ -5,7 +5,7 @@ import { RecoilRoot } from "recoil";
 import { Spec8AwardCareerEtc } from "@pages/datalab/spec/register/part/carouselCardPart/spec8AwardCareerEtc";
 
 export default {
-  title: "datalab/spec/register/part/carouselCardPart/Spec8AwardCareerEtc",
+  title: "데이터랩/스펙등록/part/carouselCardPart/Spec8AwardCareerEtc",
   component: Spec8AwardCareerEtc,
   argTypes: {
     moveNextCard: {
@@ -19,7 +19,7 @@ export default {
     backgrounds: {
       default: "dark",
     },
-    componentSubtitle: "스펙등록 최종학력 기입 캐로셀 카드",
+    componentSubtitle: "스펙등록 상장, 경력, 기타 텍스트 기입 캐로셀 카드",
   },
 } as ComponentMeta<typeof Spec8AwardCareerEtc>;
 
@@ -42,9 +42,9 @@ const Template: ComponentStory<typeof Spec8AwardCareerEtc> = (args) => {
   );
 };
 
-export const 기본 = Template.bind({});
+export const card = Template.bind({});
 
-기본.args = {
+card.args = {
   movePrevCard: () => {
     return undefined;
   },

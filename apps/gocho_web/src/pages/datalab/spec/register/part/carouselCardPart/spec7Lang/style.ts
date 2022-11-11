@@ -16,7 +16,7 @@ export const animationSlide = css`
 
 export const langContainer = css`
   width: 100%;
-  max-width: 720px;
+  max-width: 780px;
 
   > li {
     display: flex;
@@ -25,6 +25,7 @@ export const langContainer = css`
     margin-bottom: 1rem;
     position: relative;
     flex-wrap: wrap;
+    min-height: 6rem;
   }
 `;
 
@@ -44,10 +45,6 @@ export const removeButton = css`
   color: ${COLORS.GRAY60};
 `;
 
-export const errorBox = css`
-  width: 100%;
-`;
-
 export const appendButton = css`
   width: 100%;
   max-width: 12.5rem;
@@ -57,7 +54,6 @@ export const appendButton = css`
   justify-content: center;
   font-weight: 400;
   font-size: 0.875rem;
-  margin-top: 3rem;
   background-color: ${COLORS.GRAY100};
   border: 1px solid ${COLORS.GRAY60};
   border-radius: 2rem;

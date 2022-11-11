@@ -4,7 +4,7 @@ import { RecoilRoot } from "recoil";
 import { Spec9Success } from "@pages/datalab/spec/register/part/carouselCardPart/spec9Success";
 
 export default {
-  title: "datalab/spec/register/part/carouselCardPart/Spec9Success",
+  title: "데이터랩/스펙등록/part/carouselCardPart/Spec9Success",
   component: Spec9Success,
   parameters: {
     backgrounds: {
@@ -22,6 +22,6 @@ const Template: ComponentStory<typeof Spec9Success> = (args) => {
   );
 };
 
-export const 기본 = Template.bind({});
+export const card = Template.bind({});
 
-기본.args = {};
+card.args = {};

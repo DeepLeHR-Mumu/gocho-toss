@@ -1,51 +1,51 @@
 import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { SpecCardTitle, MoveCardButtons, WarningText, ContainerBox } from "../common/component";
+import { TopTitle, BottomButton, WarningDesc } from "@pages/datalab/spec/register/component";
+
+import { specCardWrapper, formCSS } from "../style";
+
 import { Spec2lastEducationProps, PostSubmitValues } from "./type";
-import { specCardWrapper, formCSS } from "../common/style";
-import { container, title, imageBox } from "./style";
+import { container, title, imageBox, highSchoolBox } from "./style";
 
 export const Spec2lastEducation: FunctionComponent<Spec2lastEducationProps> = ({
   movePrevCard,
   moveNextCard,
-  userLastEdu,
   setUserLastEdu,
 }) => {
   const {
     handleSubmit,
     register,
+    watch,
     formState: { errors },
   } = useForm<PostSubmitValues>({
     mode: "onChange",
   });
 
+  const watchLastEdu = watch("lastEducation");
+
+  const movePrevSlider = () => {
+    movePrevCard("1");
+  };
+
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
     const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
     const currentSpecObj = Object.assign(prevSpecObj, formData);
     sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
-    moveNextCard(25);
+    moveNextCard("3");
   };
 
   return (
     <div css={specCardWrapper}>
-      <SpecCardTitle
-        title="최종 학력이 어떻게 되시나요?"
-        desc="대학교 재학중이거나 졸업예정이라면 대학교를 선택해주세요"
-      />
+      <TopTitle title="최종 학력이 어떻게 되시나요?" desc="대학교 재학중이거나 졸업예정이라면 대학교를 선택해주세요" />
 
       <form css={formCSS}>
-        <ContainerBox
-          optionObj={{
-            location: "bottom",
-            marginValue: 3,
-          }}
-        >
+        <div css={highSchoolBox}>
           <ul css={container}>
             <li>
               <label htmlFor="highSchool">
-                <h3 css={title(userLastEdu === "고졸")}>고등학교</h3>
-                <div css={imageBox(userLastEdu === "고졸", "고졸")} />
+                <strong css={title(watchLastEdu === "고졸")}>고등학교</strong>
+                <div css={imageBox(watchLastEdu === "고졸", "고졸")} />
                 <input
                   type="radio"
                   value="고졸"
@@ -62,8 +62,8 @@ export const Spec2lastEducation: FunctionComponent<Spec2lastEducationProps> = ({
             </li>
             <li>
               <label htmlFor="university">
-                <h3 css={title(userLastEdu === "초대졸")}>대학교</h3>
-                <div css={imageBox(userLastEdu === "초대졸", "초대졸")} />
+                <strong css={title(watchLastEdu === "초대졸")}>대학교</strong>
+                <div css={imageBox(watchLastEdu === "초대졸", "초대졸")} />
                 <input
                   type="radio"
                   value="초대졸"
@@ -79,9 +79,9 @@ export const Spec2lastEducation: FunctionComponent<Spec2lastEducationProps> = ({
               </label>
             </li>
           </ul>
-          {errors.lastEducation?.message && <WarningText msg={errors.lastEducation.message} />}
-        </ContainerBox>
-        <MoveCardButtons postSubmit={handleSubmit(postSubmit)} movePrevCard={movePrevCard} />
+          {errors.lastEducation?.message && <WarningDesc msg={errors.lastEducation.message} />}
+        </div>
+        <BottomButton postSubmit={handleSubmit(postSubmit)} movePrevCard={movePrevSlider} />
       </form>
     </div>
   );

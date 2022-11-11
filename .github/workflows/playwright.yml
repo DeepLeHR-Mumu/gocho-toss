@@ -1,0 +1,66 @@
+name: Playwright Tests
+on:
+  pull_request:
+    branches: [main, dev]
+jobs:
+  test_setup:
+    name: Test setup
+    runs-on: ubuntu-latest
+    outputs:
+      preview_url: ${{ steps.waitForVercelPreviewDeployment.outputs.url }}
+    steps:
+      - name: Wait for Vercel preview deployment to be ready
+        uses: patrickedqvist/wait-for-vercel-preview@v1.2.0
+        id: waitForVercelPreviewDeployment
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          max_timeout: 600
+  test_e2e:
+    needs: test_setup
+    name: playwright tests
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16.x"
+      - name: setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+      - name: Install dependencies
+        run: pnpm install
+      - name: Install Playwright Browsers
+        run: pnpx playwright install --with-deps
+      - name: Run Playwright tests
+        run: pnpx playwright test --trace on
+        env:
+          PLAYWRIGHT_TEST_BASE_URL: ${{ needs.test_setup.outputs.preview_url }}
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Send Slack notification of successful tests
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_CHANNEL: 01-팀-dev
+          SLACK_FOOTER: ""
+          SLACK_COLOR: "good"
+          SLACK_MESSAGE: "dev 테스트 성공했습니다!:"
+          SLACK_TITLE: "테스트코드 결과"
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Send Slack notification of failed tests
+        if: failure()
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_CHANNEL: 01-팀-dev
+          SLACK_FOOTER: ""
+          SLACK_COLOR: "danger"
+          SLACK_MESSAGE: "dev 테스트 실패했습니다!:"
+          SLACK_TITLE: "테스트코드 결과"
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}

@@ -1,6 +1,8 @@
 import { Html, Head, Main, NextScript } from "next/document";
 import Script from "next/script";
 
+import { FB_PIXEL_ID } from "shared-constant/fbPixelKey";
+
 export default function Document() {
   return (
     <Html lang="ko">
@@ -32,6 +34,18 @@ export default function Document() {
           as="style"
         />
         <Script src="https://developers.kakao.com/sdk/js/kakao.js" strategy="beforeInteractive" />
+        {process.env.NODE_ENV === "development" && (
+          <noscript>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              alt="facebook pixel 이미지"
+              height="1"
+              width="1"
+              style={{ display: "none" }}
+              src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`}
+            />
+          </noscript>
+        )}
       </Head>
       <body>
         <div id="portal" />

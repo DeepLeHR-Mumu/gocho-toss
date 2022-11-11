@@ -11,7 +11,6 @@ import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/com
 import { useUserInfo } from "shared-api/auth";
 import { companyBookmarkEvent } from "shared-ga/company";
 
-
 import { useModal } from "@recoil/hook/modal";
 
 import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr } from "shared-api/bookmark";
@@ -119,14 +118,12 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData, is
       </div>
       {/* LATER null data들에대한 정확한 파악 필요 null 일 시 렌더링 안되는 것 확인 및 디자인 변경 확인 필요 */}
       {companyData.catchUrl && (
-        <Link href={companyData.catchUrl} passHref>
-          <a css={catchLinkButton}>
-            캐치 기업정보 더보기
-            <div css={catchLogoBox}>
-              <Image src={catchLogoSrc} alt="" layout="fill" objectFit="contain" />
-            </div>
-          </a>
-        </Link>
+        <a css={catchLinkButton} href="companyData.catchUrl">
+          캐치 기업정보 더보기
+          <div css={catchLogoBox}>
+            <Image src={catchLogoSrc} alt="" layout="fill" objectFit="contain" />
+          </div>
+        </a>
       )}
 
       {companyData.youtubeUrl && (
