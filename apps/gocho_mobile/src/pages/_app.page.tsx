@@ -40,6 +40,13 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
   datadogRum.startSessionReplayRecording();
 }
 
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    fbq: any;
+  }
+}
+
 function MyApp({ Component, pageProps }: AppProps) {
   ReactGA.initialize(KEY);
   const router = useRouter();
@@ -89,6 +96,22 @@ function MyApp({ Component, pageProps }: AppProps) {
       window.location.href = `${protocol}//${desktopHost}${pathname}${search}`;
     }
   }, []);
+
+  useEffect(() => {
+    const pageview = () => {
+      window.fbq("track", "PageView");
+    };
+    pageview();
+
+    const handleRouteChange = () => {
+      pageview();
+    };
+
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
 
   return (
     <RecoilRoot>

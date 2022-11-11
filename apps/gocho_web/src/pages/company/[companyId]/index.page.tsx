@@ -36,7 +36,7 @@ import {
   warningDesc,
 } from "./style";
 
-const CompaniesDetail: NextPage = () => {
+const CompanyDetailPage: NextPage = () => {
   const router = useRouter();
   const { companyId, info } = router.query;
 
@@ -57,6 +57,12 @@ const CompaniesDetail: NextPage = () => {
         query: { info: "detail" },
       });
   }, [companyId, info, router]);
+
+  useEffect(() => {
+    if (!router.isReady && !router.query.companyId) return;
+    if (Number(router.query.companyId)) return;
+    router.push("/404");
+  }, [router]);
 
   useEffect(() => {
     const companyViewStr = sessionStorage.getItem("companyViewArr");
@@ -250,4 +256,4 @@ const CompaniesDetail: NextPage = () => {
   );
 };
 
-export default CompaniesDetail;
+export default CompanyDetailPage;
