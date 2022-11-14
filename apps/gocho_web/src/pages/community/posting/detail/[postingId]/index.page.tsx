@@ -6,8 +6,8 @@ import { useEffect } from "react";
 
 import { useUserInfo } from "shared-api/auth";
 import { usePostingCommentArr } from "shared-api/community/usePostingCommentArr";
-import { usePostingDetail } from "shared-api/community/usePostingDetail"
-import { GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
+import { usePostingDetail } from "shared-api/community/usePostingDetail";
+import { ERROR_URL, GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
 import { postingListFunnelEvent } from "shared-ga/posting";
 
 import { WriteComment } from "./component/writeComment";
@@ -21,6 +21,12 @@ const PostingDetailPage: NextPage = () => {
   const { data: commentArrData } = usePostingCommentArr({ postingId: Number(router.query.postingId) });
   const { data: userInfoData } = useUserInfo();
   const { data: postingDetailData } = usePostingDetail({ id: Number(router.query.postingId) });
+
+  useEffect(() => {
+    if (!router.isReady && !router.query.postingId) return;
+    if (Number(router.query.postingId)) return;
+    router.push(ERROR_URL);
+  }, [router]);
 
   useEffect(() => {
     postingListFunnelEvent();
