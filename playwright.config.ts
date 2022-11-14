@@ -23,7 +23,7 @@ const config: PlaywrightTestConfig = {
       name: "chromium",
       testDir: "./e2e/gocho_web",
       use: {
-        baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3000",
+        baseURL: process.env.GOCHO_WEB_URL || "http://localhost:3000",
         ...devices["Desktop Chrome"],
       },
     },
@@ -39,7 +39,7 @@ const config: PlaywrightTestConfig = {
       name: "webkit",
       testDir: "./e2e/gocho_web",
       use: {
-        baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3000",
+        baseURL: process.env.GOCHO_WEB_URL || "http://localhost:3000",
         ...devices["Desktop Safari"],
       },
     },
@@ -49,7 +49,7 @@ const config: PlaywrightTestConfig = {
       name: "Mobile Chrome",
       testDir: "./e2e/gocho_mobile",
       use: {
-        baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3000",
+        baseURL: process.env.GOCHO_MOBILE_URL || "http://localhost:3000",
         ...devices["Galaxy S9+"],
       },
     },
@@ -57,7 +57,7 @@ const config: PlaywrightTestConfig = {
       name: "Mobile Safari",
       testDir: "./e2e/gocho_mobile",
       use: {
-        baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3000",
+        baseURL: process.env.GOCHO_MOBILE_URL || "http://localhost:3000",
         ...devices["iPhone 12"],
       },
     },
