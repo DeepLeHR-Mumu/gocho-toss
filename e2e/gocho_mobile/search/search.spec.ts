@@ -1,11 +1,12 @@
 import { test, expect } from "@playwright/test";
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ page, baseURL }) => {
+  console.log(baseURL);
   await page.goto("/");
   await page.locator('button[aria-label="통합검색 열기"]').click();
   await page.locator('input[placeholder="궁금한 기업/공고를 검색해보세요"]').fill("현대");
   await page.locator('button[aria-label="통합 검색하기"]').click();
-  await page.waitForNavigation();
+  await page.waitForLoadState("load");
 });
 
 test.describe("통합 검색페이지 테스트", () => {

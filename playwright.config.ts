@@ -12,13 +12,9 @@ const config: PlaywrightTestConfig = {
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? "github" : "list",
-  use: {
-    actionTimeout: 0,
-    // baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3000",
-    // trace: "on-first-retry",
-  },
 
   projects: [
+    // gocho_web
     {
       name: "chromium",
       testDir: "./e2e/gocho_web",
@@ -27,13 +23,6 @@ const config: PlaywrightTestConfig = {
         ...devices["Desktop Chrome"],
       },
     },
-
-    // {
-    //   name: "firefox",
-    //   use: {
-    //     ...devices["Desktop Firefox"],
-    //   },
-    // },
 
     {
       name: "webkit",
@@ -44,7 +33,7 @@ const config: PlaywrightTestConfig = {
       },
     },
 
-    /* Test against mobile viewports. */
+    /* gocho_mobile */
     {
       name: "Mobile Chrome",
       testDir: "./e2e/gocho_mobile",
