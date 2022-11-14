@@ -12,7 +12,7 @@ jobs:
         id: waitForGochoMobileURL
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          environment: "Preview - gocho-mobile"
+          environment: "Preview – gocho-mobile"
           max_timeout: 600
       - run: echo ${{steps.waitForGochoMobileURL.outputs.url}}
   test_e2e:
