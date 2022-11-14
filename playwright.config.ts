@@ -14,14 +14,16 @@ const config: PlaywrightTestConfig = {
   reporter: process.env.CI ? "github" : "list",
   use: {
     actionTimeout: 0,
-    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3000",
-    trace: "on-first-retry",
+    // baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3000",
+    // trace: "on-first-retry",
   },
 
   projects: [
     {
       name: "chromium",
+      testDir: "./e2e/gocho_web",
       use: {
+        baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3000",
         ...devices["Desktop Chrome"],
       },
     },
@@ -35,24 +37,30 @@ const config: PlaywrightTestConfig = {
 
     {
       name: "webkit",
+      testDir: "./e2e/gocho_web",
       use: {
+        baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3000",
         ...devices["Desktop Safari"],
       },
     },
 
     /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: {
-    //     ...devices['Pixel 5'],
-    //   },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: {
-    //     ...devices['iPhone 12'],
-    //   },
-    // },
+    {
+      name: "Mobile Chrome",
+      testDir: "./e2e/gocho_mobile",
+      use: {
+        baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3000",
+        ...devices["Galaxy S9+"],
+      },
+    },
+    {
+      name: "Mobile Safari",
+      testDir: "./e2e/gocho_mobile",
+      use: {
+        baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3000",
+        ...devices["iPhone 12"],
+      },
+    },
 
     /* Test against branded browsers. */
     // {
