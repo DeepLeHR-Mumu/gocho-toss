@@ -1,7 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test.beforeEach(async ({ page, baseURL }) => {
-  console.log(baseURL);
+test.beforeEach(async ({ page }) => {
   await page.goto("/");
   await page.locator('button[aria-label="통합검색 열기"]').click();
   await page.locator('input[placeholder="궁금한 기업/공고를 검색해보세요"]').fill("현대");
@@ -35,7 +34,7 @@ test.describe("통합 검색페이지 테스트", () => {
     const jdArrData = await jdData.data;
     const companyArrData = await companyData.data;
 
-    expect(jdArrData.length).toBe(2);
+    expect(jdArrData.length).toBe(4);
     expect(companyArrData.length).toBe(2);
     await expect(page.locator(`button:has-text("전체 ${jdData.count + companyData.count}")`)).toBeVisible();
     await expect(page.locator(`button:has-text("공고 ${jdData.count}")`)).toBeVisible();

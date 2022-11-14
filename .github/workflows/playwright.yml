@@ -7,9 +7,10 @@ jobs:
     name: wait for vercel url
     runs-on: ubuntu-latest
     outputs:
+      desktop_url: ${{ steps.waitForGochoDesktopURL.outputs.url }}
       mobile_url: ${{ steps.waitForGochoMobileURL.outputs.url }}
     steps:
-      - name: Wait for gocho mobile preview deployment to be ready
+      - name: Wait for gocho mobile preview url
         uses: patrickedqvist/wait-for-vercel-preview@v1.2.0
         id: waitForGochoMobileURL
         with:
@@ -17,6 +18,15 @@ jobs:
           environment: "Preview – gocho-mobile"
           max_timeout: 600
       - run: echo ${{steps.waitForGochoMobileURL.outputs.url}}
+
+      - name: Wait for gocho desktop preview url
+        uses: patrickedqvist/wait-for-vercel-preview@v1.2.0
+        id: waitForGochoDesktopURL
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: "Preview – gocho-web"
+          max_timeout: 600
+      - run: echo ${{steps.waitForGochoDesktopURL.outputs.url}}
   test_e2e:
     needs: wait_url
     name: playwright tests
@@ -38,6 +48,7 @@ jobs:
       - name: Run Playwright tests
         run: pnpx playwright test --trace on
         env:
+          GOCHO_WEB_URL: ${{ needs.wait_url.outputs.desktop_url }}
           GOCHO_MOBILE_URL: ${{ needs.wait_url.outputs.mobile_url }}
       - uses: actions/upload-artifact@v2
         if: always()
