@@ -3,11 +3,13 @@ on:
   pull_request:
     branches: [main, dev]
 jobs:
-  test_setup:
-    name: Test setup
+  wait_url:
+    name: wait for vercel url
     runs-on: ubuntu-latest
+    outputs:
+      mobile_url: ${{ steps.waitForGochoMobileURL.outputs.url }}
     steps:
-      - name: Wait for Vercel preview deployment to be ready
+      - name: Wait for gocho mobile preview deployment to be ready
         uses: patrickedqvist/wait-for-vercel-preview@v1.2.0
         id: waitForGochoMobileURL
         with:
@@ -16,7 +18,7 @@ jobs:
           max_timeout: 600
       - run: echo ${{steps.waitForGochoMobileURL.outputs.url}}
   test_e2e:
-    needs: test_setup
+    needs: wait_url
     name: playwright tests
     timeout-minutes: 60
     runs-on: ubuntu-latest
@@ -36,7 +38,7 @@ jobs:
       - name: Run Playwright tests
         run: pnpx playwright test --trace on
         env:
-          GOCHO_MOBILE_URL: ${{steps.gocho_mobile_url.outputs.url}}
+          GOCHO_MOBILE_URL: ${{ needs.wait_url.outputs.mobile_url }}
       - uses: actions/upload-artifact@v2
         if: always()
         with:
