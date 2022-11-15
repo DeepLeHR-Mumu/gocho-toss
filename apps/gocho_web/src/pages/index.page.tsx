@@ -1,7 +1,5 @@
 import { NextPage } from "next";
 import { useEffect } from "react";
-import { useRouter } from "next/router";
-import Head from "next/head";
 
 // import { dehydrate, QueryClient } from "@tanstack/react-query";
 
@@ -11,8 +9,8 @@ import Head from "next/head";
 // import { communityPostingArrKeyObj } from "@constant/queryKeyFactory/community/postingArrKeyObj";
 // import { tipArrKeyObj } from "@constant/queryKeyFactory/tip/arrKeyObj";
 import { MainPageMeta } from "shared-ui/common/meta";
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { homeFunnelEvent } from "shared-ga/home";
-import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL } from "shared-constant/internalURL";
 
 import { CompanyCommentPart } from "@pages/indexComponent/part/companyCommentPart";
 
@@ -54,22 +52,14 @@ import { TipPart } from "./indexComponent/part/tipPart";
 // }
 
 const Home: NextPage = () => {
-  const router = useRouter();
-
   useEffect(() => {
     homeFunnelEvent();
   }, []);
   return (
     <main>
-      <Head>
-        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
-        <link
-          rel="alternate"
-          media="only screen and (max-width: 640px)"
-          href={`${GOCHO_MOBILE_URL}${router.asPath.split("?")[0]}`}
-        />
-      </Head>
       <MainPageMeta />
+      <InvisibleH1 title="고초대졸닷컴 | 생산직 취업의 새로운 기준" />
+
       <MainCarouselPart />
       <JobPart />
       <CompanyCommentPart />
