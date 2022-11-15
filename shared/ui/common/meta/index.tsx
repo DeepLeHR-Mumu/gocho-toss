@@ -16,3 +16,4 @@ export { SpecListMeta } from "./specList";
 export { SpecMyMeta } from "./specMy";
 export { SpecRegisterMeta } from "./specRegister";
 export { TosMeta } from "./tos";
+export { SearchMeta } from "./search";

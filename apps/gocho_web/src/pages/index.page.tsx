@@ -10,8 +10,7 @@ import Head from "next/head";
 // import { jobArrKeyObj } from "@constant/queryKeyFactory/job/jobArrKeyObj";
 // import { communityPostingArrKeyObj } from "@constant/queryKeyFactory/community/postingArrKeyObj";
 // import { tipArrKeyObj } from "@constant/queryKeyFactory/tip/arrKeyObj";
-import { META_INDEX } from "shared-constant/meta";
-import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { MainPageMeta } from "shared-ui/common/meta";
 import { homeFunnelEvent } from "shared-ga/home";
 import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL } from "shared-constant/internalURL";
 
@@ -70,7 +69,7 @@ const Home: NextPage = () => {
           href={`${GOCHO_MOBILE_URL}${router.asPath.split("?")[0]}`}
         />
       </Head>
-      <MetaHead metaData={META_INDEX} />
+      <MainPageMeta />
       <MainCarouselPart />
       <JobPart />
       <CompanyCommentPart />

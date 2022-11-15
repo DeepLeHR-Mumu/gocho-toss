@@ -1,4 +1,5 @@
 export interface JdDetailMetaProps {
+  isMobile?: boolean;
   option: {
     id: number;
     title: string;

@@ -5,9 +5,9 @@ import { CDN_URL } from "shared-constant/externalURL";
 import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL } from "shared-constant/internalURL";
 import { defaultKeyword } from "shared-constant/meta";
 
-import { PrivacyMetaProps } from "./type";
+import { SearchMetaProps } from "./type";
 
-export const PrivacyMeta: FunctionComponent<PrivacyMetaProps> = ({ isMobile = false }) => {
+export const SearchMeta: FunctionComponent<SearchMetaProps> = ({ isMobile = false }) => {
   return (
     <Head>
       <title>고초대졸닷컴 | 생산직 취업의 새로운 기준</title>
@@ -19,15 +19,15 @@ export const PrivacyMeta: FunctionComponent<PrivacyMetaProps> = ({ isMobile = fa
       <meta property="og:title" content="고초대졸닷컴 | 생산직 취업의 새로운 기준" />
       <meta property="og:description" content="오직 고졸 초대졸 전문대졸만을 위한 전문 취업플랫폼" />
       <meta property="og:type" content="website" />
-      <meta property="og:url" content={`${isMobile ? GOCHO_MOBILE_URL : GOCHO_DESKTOP_URL}/event/privacy`} />
-      <meta property="og:site_name" content="고초대졸닷컴 | 개인정보 처리방침" />
+      <meta property="og:url" content={`${isMobile ? GOCHO_MOBILE_URL : GOCHO_DESKTOP_URL}/search`} />
+      <meta property="og:site_name" content="고초대졸닷컴 | 통합검색" />
       <meta property="og:image" content={`${CDN_URL}og_image/default.png`} />
       <meta property="og:image_secure" content={`${CDN_URL}og_image/default.png`} />
       <meta property="og:article:author" content="고초대졸닷컴 | 생산직 취업의 새로운 기준" />
-      <link rel="canonical" href={`${GOCHO_DESKTOP_URL}/event/privacy`} />
+      <link rel="canonical" href={`${GOCHO_DESKTOP_URL}/search`} />
 
       {!isMobile && (
-        <link rel="alternate" media="only screen and (max-width: 640px)" href={`${GOCHO_MOBILE_URL}/event/privacy`} />
+        <link rel="alternate" media="only screen and (max-width: 640px)" href={`${GOCHO_MOBILE_URL}/search`} />
       )}
     </Head>
   );

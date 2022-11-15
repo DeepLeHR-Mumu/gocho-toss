@@ -1,4 +1,5 @@
 export interface SpecDetailMetaProps {
+  isMobile?: boolean;
   option: {
     id: number;
     nickname: string;
