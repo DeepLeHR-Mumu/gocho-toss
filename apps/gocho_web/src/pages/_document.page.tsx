@@ -32,7 +32,7 @@ export default function Document() {
           as="style"
         />
         <Script src="https://developers.kakao.com/sdk/js/kakao.js" strategy="beforeInteractive" />
-        {process.env.NODE_ENV === "development" && (
+        {process.env.NODE_ENV === "production" && (
           <noscript>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
