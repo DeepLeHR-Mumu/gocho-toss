@@ -104,6 +104,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     <RecoilRoot>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
         <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-icon-57x57.png" />
         <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-icon-60x60.png" />
         <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-icon-72x72.png" />
