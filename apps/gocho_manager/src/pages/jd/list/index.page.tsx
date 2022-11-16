@@ -1,66 +1,32 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
 
-import { dateConverter } from "shared-util/date";
 import { useJobArr } from "@api/job/useJobArr";
-import { useDeleteJob } from "@api/job/useDeleteJob";
-import { useEndJob } from "@api/job/useEndJob";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 import { BottomPagination } from "@component/bottomPagination";
 import { JD_LIST_URL } from "@constant/internalURL";
 
 import { mainContainer, pageTitle } from "@style/commonStyles";
 
+import JobCard from "@pages/jd/list/component/jobCard";
 import {
   sectionContainer,
   tableContainer,
   jobContainer,
   jobIdBox,
   mainInfoBox,
-  companyName,
-  jobTitle,
   taskContainer,
-  taskBox,
   dateBox,
   buttonContainer,
-  activeButton,
-  deleteButton,
 } from "./style";
 
 const JdList: NextPage = () => {
-  const queryClient = useQueryClient();
   const router = useRouter();
 
   const limit = 10;
   const [total, setTotal] = useState<number>(0);
   const [page, setPage] = useState(Number(router.query.page));
-
-  const { mutate: mutateDelete } = useDeleteJob();
-  const { mutate: mutateEnd } = useEndJob();
-
-  const jobDelete = (jobId: number) => {
-    mutateDelete(
-      { jdId: jobId },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries();
-        },
-      }
-    );
-  };
-
-  const jobEnd = (jobId: number) => {
-    mutateEnd(
-      { jdId: jobId },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries();
-        },
-      }
-    );
-  };
 
   const {
     data: jobDataArr,
@@ -109,60 +75,7 @@ const JdList: NextPage = () => {
           </thead>
           <tbody>
             {jobDataArr.jobDataArr.map((job) => {
-              const { year: startYear, month: startMonth, date: startDate } = dateConverter(job.startTime);
-              const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
-
-              return (
-                <tr key={job.id} css={jobContainer}>
-                  <td css={jobIdBox}>{job.id}</td>
-                  <td css={mainInfoBox}>
-                    <p css={companyName}>{job.companyName}</p>
-                    <p css={jobTitle}>{job.title}</p>
-                  </td>
-                  <td css={taskContainer}>
-                    {job.taskArr.map((task) => {
-                      return (
-                        <p key={`${job.id}${task}`} css={taskBox}>
-                          {task}
-                        </p>
-                      );
-                    })}
-                  </td>
-                  <td css={dateBox}>
-                    {startYear}-{startMonth}-{startDate}
-                    <br />
-                    {endYear}-{endMonth}-{endDate}
-                  </td>
-                  <td css={buttonContainer}>
-                    <button css={activeButton} type="button">
-                      <a href={job.applyUrl} target="_blank" rel="noopener noreferrer">
-                        채용 링크
-                      </a>
-                    </button>
-                    <button css={activeButton} type="button">
-                      수정
-                    </button>
-                    <button
-                      css={deleteButton}
-                      type="button"
-                      onClick={() => {
-                        return jobDelete(job.id);
-                      }}
-                    >
-                      삭제
-                    </button>
-                    <button
-                      css={activeButton}
-                      type="button"
-                      onClick={() => {
-                        return jobEnd(job.id);
-                      }}
-                    >
-                      마감하기
-                    </button>
-                  </td>
-                </tr>
-              );
+              return <JobCard key={`ManagerJobCard${job.id}`} job={job} />;
             })}
           </tbody>
         </table>
