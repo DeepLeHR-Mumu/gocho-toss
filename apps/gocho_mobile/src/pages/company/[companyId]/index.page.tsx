@@ -1,10 +1,11 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import Head from "next/head";
 
+import { CompanyInfoMeta, CompanyRecruitMeta } from "shared-ui/common/meta";
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { useAddCompanyViewCount } from "shared-api/viewCount";
-import { COMPANY_DETAIL_URL, GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
+import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import { useCompanyDetail } from "shared-api/company";
 import { companyInfoFunnelEvent, companyJdFunnelEvent } from "shared-ga/company";
 
@@ -63,13 +64,23 @@ const CompanyDetail: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
-      </Head>
       <HeaderPart />
       <div css={container}>
         {info === "detail" && (
           <>
+            {companyDetailData && (
+              <>
+                <CompanyInfoMeta
+                  isMobile
+                  option={{
+                    companyName: companyDetailData.data.name,
+                    id: companyDetailData.data.id,
+                  }}
+                />
+                <InvisibleH1 title={`${companyDetailData.data.name} > 기업/공장 정보 - 고초대졸닷컴`} />
+              </>
+            )}
+
             <H2Title titleStr="일반 정보" />
             <BasicInfoPart />
             <H2Title titleStr="복지 정보" />
@@ -81,7 +92,24 @@ const CompanyDetail: NextPage = () => {
             <LinkPart />
           </>
         )}
-        {info === "jd" && <JobsPart />}
+        {info === "jd" && (
+          <>
+            {companyDetailData && (
+              <>
+                <CompanyRecruitMeta
+                  isMobile
+                  option={{
+                    id: companyDetailData.data.id,
+                    companyName: companyDetailData.data.name,
+                  }}
+                />
+                <InvisibleH1 title={`${companyDetailData.data.name} > 생산직 채용공고 - 고초대졸닷컴`} />
+              </>
+            )}
+
+            <JobsPart />
+          </>
+        )}
       </div>
 
       <CheckMorePart />

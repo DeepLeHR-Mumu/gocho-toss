@@ -8,8 +8,6 @@ import { useCompanyDetail } from "shared-api/company/useCompanyDetail";
 import { dateConverter } from "shared-util/date/index";
 import nozo_false from "shared-image/page/companyDetail/nozo_false_icon.svg";
 import nozo_true from "shared-image/page/companyDetail/nozo_true_icon.svg";
-import { META_COMPANY_RECRUIT } from "shared-constant/meta";
-import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
 import {
@@ -45,10 +43,6 @@ export const BasicInfoPart: FunctionComponent = () => {
   const { year: foundYear, month: foundMonth, date: foundDate } = dateConverter(companyDetailData.data.foundDate);
   return (
     <div css={wrapper}>
-      <MetaHead
-        metaData={META_COMPANY_RECRUIT}
-        companyDetail={{ companyName: companyDetailData.data.name, asPath: router.asPath }}
-      />
       <InvisibleH2 title={`${companyDetailData.data.name} 기업정보`} />
       <Layout>
         <section css={sectionContainer}>

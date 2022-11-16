@@ -17,7 +17,10 @@ export const JdDetailMeta: FunctionComponent<JdDetailMetaProps> = ({ option, isM
     <Head>
       <title>{`[${option.companyName}] ${title} - 고초대졸닷컴`}</title>
       <meta name="description" content={desc} />
-      <meta name="keywords" content={`${option.companyName}, ${option.place}, ${title}, ${defaultKeyword}`} />
+      <meta
+        name="keywords"
+        content={`${option.companyName}, ${option.place && option.place}, ${title}, ${defaultKeyword}`}
+      />
       <meta property="og:title" content={`${option.companyName} 생산직 채용공고 - 고초대졸닷컴`} />
       <meta property="og:description" content={title} />
       <meta property="og:type" content="website" />

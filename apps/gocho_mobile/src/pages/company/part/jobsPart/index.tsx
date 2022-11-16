@@ -10,8 +10,6 @@ import { useJobArr } from "shared-api/job";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { useCompanyDetail } from "shared-api/company";
-import { MetaHead } from "shared-ui/common/atom/metaHead";
-import { META_COMPANY_RECRUIT } from "shared-constant/meta";
 
 import { listContainer, totalText } from "./style";
 
@@ -70,7 +68,6 @@ export const JobsPart: FunctionComponent = () => {
 
   return (
     <Layout>
-      <MetaHead metaData={META_COMPANY_RECRUIT} companyDetail={{ companyName: data.name, asPath: router.asPath }} />
       <InvisibleH2 title={`${data.name} 채용공고 모음`} />
       <strong css={totalText}>총 채용공고 {jobDataArr.count}개</strong>
       <section css={listContainer}>

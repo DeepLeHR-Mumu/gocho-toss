@@ -1,11 +1,10 @@
 import { NextPage } from "next";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import Head from "next/head";
 
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
-import { META_JD_DETAIL } from "shared-constant/meta";
-import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
+import { JdDetailMeta } from "shared-ui/common/meta";
 import { useJobDetail } from "shared-api/job";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { Layout } from "@component/layout";
@@ -13,7 +12,6 @@ import { DetailComment } from "@component/global/detailComment";
 import { useUserInfo } from "shared-api/auth";
 import { useAddJobViewCount } from "shared-api/viewCount";
 import { jdDetailFunnelEvent } from "shared-ga/jd";
-import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL } from "shared-constant/internalURL";
 
 import { PositionObjDef } from "./type";
 import { HeaderPart, DetailSupportPart, DetailWorkPart, DetailPreferencePart, ReceptInfoPart } from "./part";
@@ -74,14 +72,6 @@ const JobsDetail: NextPage = () => {
   if (!jobDetailData || isLoading) {
     return (
       <main css={wrapper}>
-        <Head>
-          <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
-          <link
-            rel="alternate"
-            media="only screen and (max-width: 640px)"
-            href={`${GOCHO_MOBILE_URL}${router.asPath.split("?")[0]}`}
-          />
-        </Head>
         <Layout>
           <HeaderPart isSkeleton />
           <div css={flexBox}>
@@ -102,36 +92,21 @@ const JobsDetail: NextPage = () => {
     logoUrl: jobDetailData.company.logoUrl,
   };
 
-  const placeDetail = () => {
-    const addrObject = jobDetailData.positionArr[0].place;
-    if (addrObject.addressArr) return addrObject.addressArr[0];
-    if (addrObject.factoryArr) return addrObject.factoryArr[0].factoryName;
-    if (addrObject.etc) return addrObject.etc;
-    return addrObject.type;
-  };
   return (
     <main css={wrapper}>
-      <Head>
-        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
-        <link
-          rel="alternate"
-          media="only screen and (max-width: 640px)"
-          href={`${GOCHO_MOBILE_URL}${router.asPath.split("?")[0]}`}
-        />
-      </Head>
-      <MetaHead
-        jdDetail={{
-          companyName: jobDetailData.company.name,
-          jdTitle: jobDetailData.title,
+      <JdDetailMeta
+        option={{
           id: jobDetailData.id,
+          title: jobDetailData.title,
+          companyName: jobDetailData.company.name,
           rotation: jobDetailData.positionArr[0].rotationArr[0],
-          taskDetail: jobDetailData.positionArr[0].taskDetailArr[0],
           pay: jobDetailData.positionArr[0].payArr && jobDetailData.positionArr[0].payArr[0],
-          place: placeDetail(),
+          place: jobDetailData.positionArr[0].place.addressArr && jobDetailData.positionArr[0].place.addressArr[0],
           possibleEdu: jobDetailData.positionArr[0].possibleEdu.summary,
+          taskDetail: jobDetailData.positionArr[0].taskDetailArr[0],
         }}
-        metaData={META_JD_DETAIL}
       />
+      <InvisibleH1 title={`[${jobDetailData.company.name}]${jobDetailData.title} - 고초대졸닷컴`} />
 
       <Layout>
         <InvisibleH2 title={jobDetailData.title} />

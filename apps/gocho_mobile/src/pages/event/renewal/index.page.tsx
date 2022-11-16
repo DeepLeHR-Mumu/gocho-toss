@@ -2,9 +2,8 @@ import { NextPage } from "next";
 import { useEffect } from "react";
 
 import { eventFunnelEvent } from "shared-ga/event";
-
-import { MetaHead } from "shared-ui/common/atom/metaHead";
-import { META_EVENT } from "shared-constant/meta";
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
+import { EventMeta } from "shared-ui/common/meta";
 import { PartIntro } from "./part/partIntro";
 import { PartNotice } from "./part/partNotice";
 import { PartVideo } from "./part/partVideo";
@@ -22,7 +21,9 @@ const EventRenewal: NextPage = () => {
   return (
     // w
     <main css={wrapper}>
-      <MetaHead metaData={META_EVENT} />
+      <EventMeta isMobile />
+      <InvisibleH1 title="고초대졸닷컴 | 새로워진 고초대졸닷컴을 만나보세요" />
+
       <PartIntro />
       <PartNotice />
       <PartVideo />

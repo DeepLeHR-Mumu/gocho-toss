@@ -8,6 +8,6 @@ export interface JdDetailMetaProps {
     taskDetail: string;
     pay: number | null;
     possibleEdu: string;
-    place: string;
+    place: string | null;
   };
 }
