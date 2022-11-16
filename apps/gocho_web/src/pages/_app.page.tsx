@@ -2,17 +2,14 @@ import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import Script from "next/script";
 import axios from "axios";
 import type { AppProps } from "next/app";
 import { Global } from "@emotion/react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import ReactGA from "react-ga4";
-import { datadogRum } from "@datadog/browser-rum";
 
 import { KEY } from "shared-constant/gaKey";
-import { FB_PIXEL_ID } from "shared-constant/fbPixelKey";
 
 import { globalStyles } from "src/style/globalStyle";
 import { Header } from "@component/global/header";
@@ -23,6 +20,8 @@ import { ToastPlaceholder } from "@component/toast/toastPlaceholder";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+import { datadogRum } from "@datadog/browser-rum";
 
 if (typeof window !== "undefined" && !window.location.href.includes("localhost")) {
   datadogRum.init({
@@ -42,37 +41,9 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
   datadogRum.startSessionReplayRecording();
 }
 
-declare global {
-  interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    fbq: any;
-  }
-}
-
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   ReactGA.initialize(KEY);
-
-  const [queryClient] = useState(() => {
-    return new QueryClient({
-      defaultOptions: {
-        queries: {
-          staleTime: 15000,
-          refetchOnWindowFocus: false,
-          keepPreviousData: true,
-          retry: 0,
-          onError: (error) => {
-            if (axios.isAxiosError(error) && error.response?.status === 404) {
-              router.push("/404");
-            }
-            if (axios.isAxiosError(error) && error.response?.status === 500) {
-              router.push("/500");
-            }
-          },
-        },
-      },
-    });
-  });
 
   useEffect(() => {
     const isMobile = [
@@ -103,49 +74,51 @@ function MyApp({ Component, pageProps }: AppProps) {
     window.location.href = `${protocol}//m.${host}${pathname}${search}`;
   }, []);
 
-  useEffect(() => {
-    const pageview = () => {
-      window.fbq("track", "PageView");
-    };
-    pageview();
-
-    const handleRouteChange = () => {
-      pageview();
-    };
-
-    router.events.on("routeChangeComplete", handleRouteChange);
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [router.events]);
-
   // host : localhost:3000
   // origin : http://localhost:3000
   // pathname: /
   // protocol : http:
 
+  const [queryClient] = useState(() => {
+    return new QueryClient({
+      defaultOptions: {
+        queries: {
+          staleTime: 15000,
+          refetchOnWindowFocus: false,
+          keepPreviousData: true,
+          retry: 0,
+          onError: (error) => {
+            if (axios.isAxiosError(error) && error.response?.status === 404) {
+              router.push("/404");
+            }
+            if (axios.isAxiosError(error) && error.response?.status === 500) {
+              router.push("/500");
+            }
+          },
+        },
+      },
+    });
+  });
+
   return (
     <RecoilRoot>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-icon-60x60.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-icon-76x76.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-icon-114x114.png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-icon-120x120.png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-icon-144x144.png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-icon-152x152.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-icon-180x180.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icon/android-icon-192x192.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/icon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="96x96" href="/icon/favicon-96x96.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png" />
+        <link rel="manifest" href="/icon/manifest.json" />
       </Head>
-      <Script
-        id="fb-pixel"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', ${FB_PIXEL_ID});
-          `,
-        }}
-      />
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <Global styles={globalStyles} />
