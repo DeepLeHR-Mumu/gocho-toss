@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
-import { SearchMeta } from "shared-ui/common/meta";
 import { searchFunnelEvent } from "shared-ga/search";
 
 import { Layout } from "@component/layout";
@@ -13,6 +12,7 @@ import { JobPreviewPart } from "./part/jobPreviewPart";
 import { CompanyPreviewPart } from "./part/companyPreviewPart";
 import { JobListPart } from "./part/jobListPart";
 import { CompanyListPart } from "./part/companyListPart";
+import { PageHead } from "./component/pageHead";
 
 import { mainContainer, title } from "./style";
 
@@ -35,7 +35,7 @@ const UnifiedSearchPage: NextPage = () => {
 
   return (
     <main css={mainContainer}>
-      <SearchMeta isMobile />
+      <PageHead />
       <InvisibleH1 title="고초대졸닷컴 | 생산직 취업의 새로운 기준" />
 
       <MenuListPart />

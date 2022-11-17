@@ -6,12 +6,12 @@ import axios from "axios";
 import { useSpecDetail } from "shared-api/spec";
 import { useUserInfo } from "shared-api/auth";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
-import { SpecDetailMeta } from "shared-ui/common/meta";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 
 import { useModal } from "@recoil/hook/modal";
 import { Layout } from "@component/layout";
 
+import { PageHead } from "./component/pageHead";
 import { BasicInfoPart } from "./part/basicInfoPart";
 import { DetailInfoPart } from "./part/detailInfoPart";
 import { ResultInfoPart } from "./part/resultInfoPart";
@@ -52,7 +52,7 @@ const Detail: NextPage = () => {
   }
   return (
     <div css={wrapper}>
-      <SpecDetailMeta
+      <PageHead
         option={{
           id: Number(specId),
           age: specDetailData.age,

@@ -5,12 +5,12 @@ import axios from "axios";
 import { useMySpecHistory } from "shared-api/spec/useMySpecHistory";
 import { useUserInfo } from "shared-api/auth";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
-import { SpecMyMeta } from "shared-ui/common/meta";
 import { mySpecListFunnelEvent } from "shared-ga/spec";
 
 import { Layout } from "@component/layout";
 import { useModal } from "@recoil/hook/modal";
 
+import { PageHead } from "./component/pageHead";
 import { AsideMenu } from "../component/asideMenu";
 import { SimpleCard } from "./component/simpleCard";
 import { Pagination } from "./component/pagination";
@@ -51,7 +51,7 @@ export const MySpecHistory: NextPage = () => {
   if (!mySpecHistoryData || isLoading) {
     return (
       <div css={wrapper}>
-        <SpecMyMeta />
+        <PageHead />
         <InvisibleH1 title="내가 작성한 스펙 - 고초대졸닷컴" />
 
         <Layout>
@@ -81,7 +81,7 @@ export const MySpecHistory: NextPage = () => {
 
   return (
     <main css={wrapper}>
-      <SpecMyMeta />
+      <PageHead />
       <InvisibleH1 title="내가 작성한 스펙 - 고초대졸닷컴" />
 
       <Layout>

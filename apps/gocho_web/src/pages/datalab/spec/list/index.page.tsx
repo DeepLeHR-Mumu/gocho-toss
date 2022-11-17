@@ -3,7 +3,6 @@ import { useEffect } from "react";
 
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
-import { SpecListMeta } from "shared-ui/common/meta";
 import { specListFunnelEvent } from "shared-ga/spec";
 
 import { Layout } from "@component/layout";
@@ -11,6 +10,7 @@ import { Layout } from "@component/layout";
 import { AsideMenu } from "../component/asideMenu";
 import { CarouselPart } from "./part/carouselPart";
 import { ListPart } from "./part/listPart";
+import { PageHead } from "./component/pageHead";
 import { title, colorPoint, flexBox } from "./style";
 
 const MainList: NextPage = () => {
@@ -20,7 +20,7 @@ const MainList: NextPage = () => {
 
   return (
     <main>
-      <SpecListMeta />
+      <PageHead />
       <InvisibleH1 title="생산직 스펙평가 리스트 - 고초대졸닷컴" />
 
       <CarouselPart />

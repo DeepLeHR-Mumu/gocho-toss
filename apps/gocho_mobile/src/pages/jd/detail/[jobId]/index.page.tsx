@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
-import { JdDetailMeta } from "shared-ui/common/meta";
 import { useJobDetail } from "shared-api/job";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
@@ -15,6 +14,7 @@ import { jdDetailFunnelEvent } from "shared-ga/jd";
 import { DetailComment } from "@component/common/organisms/detailComment";
 import { TopMenu } from "../component/topMenu";
 import { BottomMenu } from "../component/bottomMenu";
+import { PageHead } from "../component/pageHead";
 import { PositionObjDef } from "./type";
 import { HeaderPart, DetailSupportPart, DetailWorkPart, DetailPreferencePart, ReceptInfoPart } from "../part";
 
@@ -100,8 +100,7 @@ const JobsDetail: NextPage = () => {
 
   return (
     <main css={wrapper}>
-      <JdDetailMeta
-        isMobile
+      <PageHead
         option={{
           id: jobDetailData.id,
           title: jobDetailData.title,

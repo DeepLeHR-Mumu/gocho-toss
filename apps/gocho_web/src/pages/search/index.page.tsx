@@ -3,17 +3,17 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { searchFunnelEvent } from "shared-ga/search";
-import { SearchMeta } from "shared-ui/common/meta";
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 
 import { Layout } from "@component/layout";
 
-import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { JobPreviewPart } from "./part/jobPreviewPart";
 import { CompanyPreviewPart } from "./part/companyPreviewPart";
 import { JobListPart } from "./part/jobListPart";
 import { CompanyListPart } from "./part/companyListPart";
 import { mainContainer, title } from "./style";
 import { MenuListPart } from "./part/menuListPart";
+import { PageHead } from "./component/pageHead";
 
 const UnifiedSearch: NextPage = () => {
   const router = useRouter();
@@ -34,7 +34,7 @@ const UnifiedSearch: NextPage = () => {
 
   return (
     <main css={mainContainer}>
-      <SearchMeta />
+      <PageHead />
       <InvisibleH1 title="고초대졸닷컴 | 생산직 취업의 새로운 기준" />
 
       <Layout>

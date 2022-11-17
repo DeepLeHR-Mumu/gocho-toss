@@ -1,17 +1,17 @@
 import { NextPage } from "next";
 
 import { Layout } from "@component/layout";
-import { TosMeta } from "shared-ui/common/meta";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { executionDesc, tosArr } from "shared-constant/TOS";
 
+import { PageHead } from "./component/pageHead";
 import { tosTitle, subTitle, container, executionDescCSS, wrapper, listTitle, listArr, desc } from "./style";
 import { tosArrDef } from "./type";
 
 const Tos: NextPage = () => {
   return (
     <main css={wrapper}>
-      <TosMeta isMobile />
+      <PageHead />
       <InvisibleH1 title="고초대졸닷컴 | 개인회원 이용약관" />
 
       <section>

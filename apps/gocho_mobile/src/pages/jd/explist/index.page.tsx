@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import { useCompanyArr } from "shared-api/company";
 import { Layout } from "@component/layout";
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
-import { JdExpListMeta } from "shared-ui/common/meta";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { JOBS_EXPLIST_URL } from "shared-constant/internalURL";
@@ -15,6 +14,7 @@ import { expiredJdListFunnelEvent, expiredJdListSortingEvent } from "shared-ga/j
 
 import { useToast } from "@recoil/hook/toast";
 
+import { PageHead } from "./component/pageHead";
 import { ExpJobCardList } from "./component/expJobCardList";
 import { setJobOrderButtonArr } from "./constant";
 import {
@@ -89,7 +89,7 @@ const JobsExpList: NextPage = () => {
 
   return (
     <main css={mainContainer}>
-      <JdExpListMeta isMobile />
+      <PageHead />
       <InvisibleH1 title="만료된 채용공고" />
       <Layout>
         <InvisibleH2 title="기업별 만료 공고" />

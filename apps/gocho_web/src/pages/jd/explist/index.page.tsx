@@ -3,15 +3,16 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { JOBS_EXPLIST_URL } from "shared-constant/internalURL";
-import { JdExpListMeta } from "shared-ui/common/meta";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { expiredJdListFunnelEvent } from "shared-ga/jd";
 
 import { Layout } from "@component/layout";
-import { mainContainer, title, colorPoint, listContainer } from "./style";
+
+import { PageHead } from "./component/pageHead";
 import { SearchPart } from "./part/searchPart";
 import { ResultPart } from "./part/resultPart";
+import { mainContainer, title, colorPoint, listContainer } from "./style";
 
 const JdExpListPage: NextPage = () => {
   const router = useRouter();
@@ -33,7 +34,7 @@ const JdExpListPage: NextPage = () => {
 
   return (
     <main css={mainContainer}>
-      <JdExpListMeta />
+      <PageHead />
       <InvisibleH1 title="만료된 채용공고" />
 
       <Layout>

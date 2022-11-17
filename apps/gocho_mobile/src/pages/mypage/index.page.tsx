@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import { useUserInfo } from "shared-api/auth";
-import { MyPageMeta } from "shared-ui/common/meta";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { myPageFunnelEvent } from "shared-ga/myPage";
 
@@ -12,6 +11,7 @@ import { useModal } from "@recoil/hook/modal";
 
 import { BookmarkCompanyPart } from "./part/bookmarkCompanyPart";
 import { BookmarkJobPart } from "./part/bookmarkJobPart";
+import { PageHead } from "./component/pageHead";
 
 import { setBookmarkViewButtonArr } from "./constant";
 import { mainContainer, headerContainer, title, buttonArrContainer, setBookmarkViewButton } from "./style";
@@ -39,7 +39,7 @@ const MyPage: NextPage = () => {
   }, []);
   return (
     <main css={mainContainer}>
-      <MyPageMeta isMobile />
+      <PageHead />
       <InvisibleH1 title="마이페이지 - 고초대졸닷컴" />
 
       <Layout>

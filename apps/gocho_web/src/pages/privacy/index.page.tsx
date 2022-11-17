@@ -1,10 +1,11 @@
 import { NextPage } from "next";
 
-import { PrivacyMeta } from "shared-ui/common/meta";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { executionDesc, privacyArr, CTOINFO } from "shared-constant/privacy";
 
 import { Layout } from "@component/layout";
+
+import { PageHead } from "./component/pageHead";
 
 import {
   tosTitle,
@@ -23,7 +24,7 @@ import { PrivacyDef } from "./type";
 const Privacy: NextPage = () => {
   return (
     <main css={wrapper}>
-      <PrivacyMeta />
+      <PageHead />
       <InvisibleH1 title="고초대졸닷컴 | 개인정보 처리방침" />
       <section>
         <Layout>

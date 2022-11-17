@@ -2,13 +2,14 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import { CompanyInfoMeta, CompanyRecruitMeta } from "shared-ui/common/meta";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { useAddCompanyViewCount } from "shared-api/viewCount";
 import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import { useCompanyDetail } from "shared-api/company";
 import { companyInfoFunnelEvent, companyJdFunnelEvent } from "shared-ga/company";
 
+import { PageInfoHead } from "../component/pageInfoHead";
+import { PageRecruitHead } from "../component/pageRecruitHead";
 import { HeaderPart } from "../part/headerPart";
 import { BasicInfoPart } from "../part/basicInfoPart";
 import { JobsPart } from "../part/jobsPart";
@@ -17,6 +18,7 @@ import { CheckMorePart } from "../part/checkMorePart";
 import { MoneyPart } from "../part/moneyPart";
 import { FactoryPart } from "../part/factoryInfoPart";
 import { H2Title } from "../component/h2Title";
+
 import { container } from "./style";
 import { LinkPart } from "../part/linkPart";
 
@@ -70,8 +72,7 @@ const CompanyDetail: NextPage = () => {
           <>
             {companyDetailData && (
               <>
-                <CompanyInfoMeta
-                  isMobile
+                <PageInfoHead
                   option={{
                     companyName: companyDetailData.data.name,
                     id: companyDetailData.data.id,
@@ -96,8 +97,7 @@ const CompanyDetail: NextPage = () => {
           <>
             {companyDetailData && (
               <>
-                <CompanyRecruitMeta
-                  isMobile
+                <PageRecruitHead
                   option={{
                     id: companyDetailData.data.id,
                     companyName: companyDetailData.data.name,

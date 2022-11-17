@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import axios from "axios";
 
 import { useUserInfo } from "shared-api/auth";
-import { MyPageMeta } from "shared-ui/common/meta";
 import { myPageFunnelEvent } from "shared-ga/myPage";
 
 import { useModal } from "@recoil/hook/modal";
@@ -13,6 +12,7 @@ import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { SettingPart } from "./part/settingPart";
 import { CalendarPart } from "./part/calendarPart";
 import { BookmarkPart } from "./part/bookmarkPart";
+import { PageHead } from "./component/pageHead";
 import { mainContainer, title, colorPoint, mypagePosition, mypageBody } from "./style";
 
 const MypageHome: NextPage = () => {
@@ -34,7 +34,7 @@ const MypageHome: NextPage = () => {
   }, []);
   return (
     <main css={mainContainer}>
-      <MyPageMeta />
+      <PageHead />
       <InvisibleH1 title="마이페이지 - 고초대졸닷컴" />
 
       <Layout>

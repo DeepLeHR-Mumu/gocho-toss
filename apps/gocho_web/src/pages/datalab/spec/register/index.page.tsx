@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 import { SPEC_LIST_URL } from "shared-constant/internalURL";
-import { SpecRegisterMeta } from "shared-ui/common/meta";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { specRegisterFunnelEvent } from "shared-ga/spec";
@@ -14,6 +13,7 @@ import { Layout } from "@component/layout";
 
 import { ProgressPart } from "./part/progressPart";
 import { SpecWritePart } from "./part/carouselCardPart";
+import { PageHead } from "./component/pageHead";
 
 import { wrapper, title } from "./style";
 
@@ -60,7 +60,7 @@ const Register: NextPage = () => {
 
   return (
     <main css={wrapper}>
-      <SpecRegisterMeta />
+      <PageHead />
       <InvisibleH1 title="내 스펙 등록하기 - 고초대졸닷컴" />
 
       <ProgressPart />

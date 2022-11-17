@@ -6,7 +6,6 @@ import { useUserInfo } from "shared-api/auth";
 import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { useAddCompanyViewCount } from "shared-api/viewCount";
 import { useCompanyDetail } from "shared-api/company";
-import { CompanyInfoMeta, CompanyRecruitMeta } from "shared-ui/common/meta";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { DetailComment } from "@component/global/detailComment";
@@ -24,6 +23,9 @@ import { WelfareInfoPart } from "../part/welfareInfoPart";
 import { FactoryInfoPart } from "../part/factoryInfoPart";
 import { PayInfoPart } from "../part/payInfoPart";
 import { CompanyJobPart } from "../part/companyJobPart";
+import { PageInfoHead } from "../component/pageInfoHead";
+import { PageRecruitHead } from "../component/pageRecruitHead";
+
 import {
   mainContainer,
   mainContainerSkeleton,
@@ -174,7 +176,7 @@ const CompanyDetailPage: NextPage = () => {
 
         {info === "detail" && (
           <section>
-            <CompanyInfoMeta
+            <PageInfoHead
               option={{
                 companyName: companyData.headerData.name,
                 id: companyData.headerData.id,
@@ -240,7 +242,7 @@ const CompanyDetailPage: NextPage = () => {
 
         {info === "jd" && (
           <section>
-            <CompanyRecruitMeta
+            <PageRecruitHead
               option={{
                 id: companyData.headerData.id,
                 companyName: companyData.headerData.name,
