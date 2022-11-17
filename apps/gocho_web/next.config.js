@@ -10,6 +10,11 @@ const withTM = require("next-transpile-modules")([
   "shared-ga",
 ]);
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -20,7 +25,7 @@ const nextConfig = {
   pageExtensions: ["page.tsx"],
 };
 
-module.exports = withTM(nextConfig);
+module.exports = withBundleAnalyzer(withTM(nextConfig));
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const intercept = require("intercept-stdout");
