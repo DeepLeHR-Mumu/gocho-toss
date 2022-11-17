@@ -1,5 +1,6 @@
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { FunctionComponent } from "react";
+
 import { GraphProps } from "./type";
 
 const Graph: FunctionComponent<GraphProps> = ({ data, name, domain }) => {

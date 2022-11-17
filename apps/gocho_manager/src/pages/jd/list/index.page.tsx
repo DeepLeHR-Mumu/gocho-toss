@@ -1,15 +1,14 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
 import { useJobArr } from "@api/job/useJobArr";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 import { BottomPagination } from "@component/bottomPagination";
 import { JD_LIST_URL } from "@constant/internalURL";
-
 import { mainContainer, pageTitle } from "@style/commonStyles";
 
-import JobCard from "@pages/jd/list/component/jobCard";
+import { JD_LIMIT } from "./constant";
+import JobCard from "./component/jobCard";
 import {
   sectionContainer,
   tableContainer,
@@ -24,40 +23,26 @@ import {
 const JdList: NextPage = () => {
   const router = useRouter();
 
-  const limit = 10;
-  const [total, setTotal] = useState<number>(0);
-  const [page, setPage] = useState(Number(router.query.page));
-
   const {
-    data: jobDataArr,
+    data: jobDataObj,
     isLoading,
     isError,
   } = useJobArr({
     order: "recent",
     filter: "valid",
-    limit,
-    offset: (page - 1) * limit,
+    limit: JD_LIMIT,
+    offset: (Number(router.query.page) - 1) * JD_LIMIT,
   });
 
-  useEffect(() => {
-    setPage(Number(router.query.page));
-  }, [router.query]);
-
-  useEffect(() => {
-    if (jobDataArr) {
-      setTotal(jobDataArr.count);
-    }
-  }, [jobDataArr]);
-
-  const totalPage = Math.ceil(total / limit);
-
-  if (!jobDataArr || isLoading) {
+  if (!jobDataObj || isLoading) {
     return <LoadingScreen />;
   }
 
   if (isError) {
     return <ErrorScreen />;
   }
+
+  const totalPage = Math.ceil(jobDataObj.count / JD_LIMIT);
 
   return (
     <main css={mainContainer}>
@@ -74,7 +59,7 @@ const JdList: NextPage = () => {
             </tr>
           </thead>
           <tbody>
-            {jobDataArr.jobDataArr.map((job) => {
+            {jobDataObj.jobDataArr.map((job) => {
               return <JobCard key={`ManagerJobCard${job.id}`} job={job} />;
             })}
           </tbody>

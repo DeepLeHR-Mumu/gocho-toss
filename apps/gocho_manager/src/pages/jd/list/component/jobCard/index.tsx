@@ -27,11 +27,11 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
   const { year: startYear, month: startMonth, date: startDate } = dateConverter(job.startTime);
   const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
 
-  const { mutate: mutateDelete } = useDeleteJob();
-  const { mutate: mutateEnd } = useEndJob();
+  const { mutate: deleteJobMutate } = useDeleteJob();
+  const { mutate: endJobMutate } = useEndJob();
 
-  const jobDelete = (jobId: number) => {
-    mutateDelete(
+  const deleteJobHandler = (jobId: number) => {
+    deleteJobMutate(
       { jdId: jobId },
       {
         onSuccess: () => {
@@ -41,8 +41,8 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
     );
   };
 
-  const jobEnd = (jobId: number) => {
-    mutateEnd(
+  const endJobHandler = (jobId: number) => {
+    endJobMutate(
       { jdId: jobId },
       {
         onSuccess: () => {
@@ -53,7 +53,7 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
   };
 
   return (
-    <tr key={job.id} css={jobContainer}>
+    <tr css={jobContainer}>
       <td css={jobIdBox}>{job.id}</td>
       <td css={mainInfoBox}>
         <p css={companyName}>{job.companyName}</p>
@@ -74,11 +74,9 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
         {endYear}-{endMonth}-{endDate}
       </td>
       <td css={buttonContainer}>
-        <button css={activeButton} type="button">
-          <a href={job.applyUrl} target="_blank" rel="noopener noreferrer">
-            채용 링크
-          </a>
-        </button>
+        <a css={activeButton} href={job.applyUrl} target="_blank" rel="noopener noreferrer">
+          채용 링크
+        </a>
         <button css={activeButton} type="button">
           수정
         </button>
@@ -86,7 +84,7 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
           css={deleteButton}
           type="button"
           onClick={() => {
-            return jobDelete(job.id);
+            return deleteJobHandler(job.id);
           }}
         >
           삭제
@@ -95,7 +93,7 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
           css={activeButton}
           type="button"
           onClick={() => {
-            return jobEnd(job.id);
+            return endJobHandler(job.id);
           }}
         >
           마감하기

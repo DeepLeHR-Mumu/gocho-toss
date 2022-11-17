@@ -79,6 +79,9 @@ export const deleteButton = css`
 `;
 
 export const activeButton = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 500;
   width: 48%;
   border: 2px solid ${COLORS.GRAY10};

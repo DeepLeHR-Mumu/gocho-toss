@@ -1,10 +1,17 @@
 import { FunctionComponent } from "react";
 
-import Graph from "../../component/Graph";
-import { dataBox, flexBox, dataText, dataTitle, dataWrapper, sectionTitle } from "./style";
-import { WebsiteDataPartProps } from "./type";
+import { useStatistics } from "@api/stat/useStatistics";
 
-const WebsiteDataPart: FunctionComponent<WebsiteDataPartProps> = ({ dashboardData }) => {
+import Graph from "../../component/graph";
+import { dataBox, flexBox, dataText, dataTitle, dataWrapper, sectionTitle } from "./style";
+
+const WebsiteDataPart: FunctionComponent = () => {
+  const { data: dashboardData, isLoading } = useStatistics();
+
+  if (!dashboardData || isLoading) {
+    return <div />;
+  }
+
   return (
     <section>
       <h3 css={sectionTitle}>홈페이지 관련</h3>
