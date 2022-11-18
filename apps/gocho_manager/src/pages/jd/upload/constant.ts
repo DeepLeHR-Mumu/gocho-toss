@@ -1,3 +1,31 @@
+export const blankPosition = {
+  middle: false,
+  high: false,
+  college: false,
+  four: false,
+  required_exp: "",
+  min_year: null,
+  max_year: null,
+  required_etc_arr: undefined,
+  contract_type: "",
+  conversion_rate: null,
+  task_main: "",
+  task_sub_arr: undefined,
+  task_detail_arr: undefined,
+  rotation_arr: undefined,
+  rotation_etc: null,
+  place: {
+    type: "",
+    address_arr: [],
+    factory_arr: [],
+    etc: "",
+  },
+  hire_number: undefined,
+  pay_arr: undefined,
+  preferred_certi_arr: [],
+  preferred_etc_arr: undefined,
+};
+
 export const requiredExpArr = ["신입", "경력", "신입/경력", "경력 무관"];
 export const contractTypeArr = ["정규직", "계약직", "계약>정규", "연수생", "인턴"];
 export const taskArr = [

@@ -21,6 +21,7 @@ import {
 } from "./style";
 
 const JdList: NextPage = () => {
+  // TODO: 코드 순서
   const router = useRouter();
 
   const {
