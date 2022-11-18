@@ -44,7 +44,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Install Playwright Browsers
-        run: pnpx playwright install --with-deps
+        run: pnpx playwright@1.27.1 install --with-deps
       - name: Run Playwright tests
         run: pnpx playwright test --trace on
         env:
