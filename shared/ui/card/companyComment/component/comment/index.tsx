@@ -3,13 +3,14 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { companyCommentArrKeyObj } from "shared-constant/queryKeyFactory/company/commentArrKeyObj";
 import { dateConverter } from "shared-util/date/dateConverter";
-import { CommentDislikeButton } from "shared-ui/common/atom/commentDislikeButton";
-import { CommentLikeButton } from "shared-ui/common/atom/commentLikeButton";
-import { UserBadge } from "shared-ui/common/atom/userBadge";
 import { useLikeComment } from "shared-api/company/useLikeComment";
 import { useDisLikeComment } from "shared-api/company/useDisLikeComment";
 import { useFakeComment } from "shared-api/company/useFakeComment";
 import { useDisFakeComment } from "shared-api/company/useDisFakeComment";
+
+import { CommentDislikeButton } from "../../../../common/atom/commentDislikeButton";
+import { CommentLikeButton } from "../../../../common/atom/commentLikeButton";
+import { UserBadge } from "../../../../common/atom/userBadge";
 
 import {
   container,

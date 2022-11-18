@@ -1,16 +1,15 @@
 import { FunctionComponent, useRef, useEffect } from "react";
 import Image from "next/image";
 
-import { LinkButton, NormalButton } from "shared-ui/common/atom/button";
 import { useCompanyCommentArr } from "shared-api/company";
 import { useUserInfo } from "shared-api/auth";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 
-import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
+import { LinkButton, NormalButton } from "../../common/atom/button";
+import { SkeletonBox } from "../../common/atom/skeletonBox";
 import { UnLoginComment } from "./component/unLoginComment";
 import { Comment } from "./component/comment";
-
 import {
   companyCommentCardSkeleton,
   cardWrapper,
