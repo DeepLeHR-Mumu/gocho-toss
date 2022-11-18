@@ -4,12 +4,14 @@ import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { FiX } from "react-icons/fi";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
-import { SpecCardTitle, Toggle, MoveCardButtons } from "../common/component";
 
-import { getResData, hasFieldsInIncludes } from "./util";
-import { Spec5CertificateProps, PostSubmitValues, ChangeSearchFilterArrDef } from "./type";
+import { TopTitle, ToggleForm, BottomButton } from "@pages/datalab/spec/register/component";
+
+import { specCardWrapper, formCSS } from "../style";
+
+import { getCertiValue, hasFieldsInIncludes } from "./util";
+import { Spec5CertificateProps, PostSubmitValues, filterSearchKeywordArrHandlerDef } from "./type";
 import { certificateArr } from "./constant";
-import { specCardWrapper, formCSS } from "../common/style";
 import {
   certificateContainer,
   buttonContainer,
@@ -24,7 +26,11 @@ import {
   noCertiDesc,
 } from "./style";
 
-export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ moveNextCard, movePrevCard }) => {
+export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({
+  isWriteMoreSpec,
+  moveNextCard,
+  movePrevCard,
+}) => {
   const { handleSubmit, register, control, watch } = useForm<PostSubmitValues>({
     mode: "onChange",
   });
@@ -34,33 +40,35 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
     name: "certificate",
   });
 
-  const [isClick, setIsClick] = useState(false);
-  const [searchCertificateArr, setSearchCertificateArr] = useState<string[]>([]);
-  const textInputRef = useRef<HTMLInputElement>(null);
-  const isCertificateWatch = watch("isCertificate");
-  const isPossibleMoveNextCard = isCertificateWatch && watch("certificate").length === 0;
+  const [isShowCertiBox, setIsShowCertiBox] = useState(false);
+  const [filterSearchCertiArr, setFilterSearchCertiArr] = useState<string[]>([]);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const watchIsCerti = watch("isCertificate");
+  const isImpossibleNextMove = watchIsCerti && watch("certificate").length === 0;
 
-  const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
-    if (isPossibleMoveNextCard) {
-      return;
-    }
-    const { certificate } = formData;
-
-    const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
-    const currentSpecObj = Object.assign(prevSpecObj, {
-      certificate: getResData(certificate),
-    });
-    sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
-    moveNextCard(60);
+  const movePrevSlider = () => {
+    movePrevCard("3");
   };
 
-  // 자격증 리스트 중복 제거
+  const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
+    if (isImpossibleNextMove) {
+      return;
+    }
+
+    const { certificate } = formData;
+    const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
+    const currentSpecObj = Object.assign(prevSpecObj, {
+      certificate: getCertiValue(certificate),
+    });
+    sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
+    moveNextCard(isWriteMoreSpec ? "5" : "6");
+  };
+
   const filterOverlapArr = certificateArr.filter((keyword, index) => {
     return certificateArr.indexOf(keyword) === index;
   });
 
-  // 자격증 검색시 검색 키워드로 필터링
-  const changeSearchFilterArr: ChangeSearchFilterArrDef = (onChangeEvent) => {
+  const filterSearchKeywordArrHandler: filterSearchKeywordArrHandlerDef = (onChangeEvent) => {
     const { value } = onChangeEvent.target;
 
     const filterArr = filterOverlapArr.filter((keyword) => {
@@ -70,56 +78,57 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
       return keyword.includes(value);
     });
 
-    setSearchCertificateArr(filterArr);
-  };
-
-  const handleShowCertificateArrBox = () => {
-    setIsClick(true);
+    setFilterSearchCertiArr(filterArr);
   };
 
   const handleHideCertificateArrBox = () => {
-    if (textInputRef.current) {
-      textInputRef.current.value = "";
+    if (searchInputRef.current) {
+      searchInputRef.current.value = "";
     }
-    setSearchCertificateArr([]);
-    setIsClick(false);
+    setFilterSearchCertiArr([]);
+    setIsShowCertiBox(false);
   };
 
   return (
     <div css={specCardWrapper}>
-      <SpecCardTitle title="자격증" desc="스펙의 꽃! 증 중의 증 자격증!" />
+      <TopTitle title="자격증" desc="스펙의 꽃! 증 중의 증 자격증!" />
       <button
         type="button"
         aria-label="자격증 검색창 닫기"
-        css={hideCertificateArrButton(isClick)}
+        css={hideCertificateArrButton(isShowCertiBox)}
         onClick={handleHideCertificateArrBox}
       />
 
       <form css={formCSS}>
-        <Toggle
+        <ToggleForm
           id="isCertificate"
-          value={isCertificateWatch}
+          value={watchIsCerti}
           yesDesc="있음"
           noDesc="없음"
           registerObj={register(`isCertificate`)}
         />
-        {isCertificateWatch && (
+
+        {watchIsCerti && (
           <div css={certificateContainer}>
             <div css={buttonContainer}>
-              <button type="button" css={appendButton} onClick={handleShowCertificateArrBox}>
+              <button
+                type="button"
+                css={appendButton}
+                onClick={() => {
+                  setIsShowCertiBox(true);
+                }}
+              >
                 키워드를 입력하면 관련 자격증이 검색됩니다
-                <span>
-                  <BsChevronDown />
-                </span>
+                <BsChevronDown />
               </button>
 
-              <div css={certificateArrBox(isClick)}>
+              <div css={certificateArrBox(isShowCertiBox)}>
                 <div css={inputTextCSS}>
                   <input
                     type="text"
                     placeholder="자격증 키워드를 검색해보세요."
-                    onChange={changeSearchFilterArr}
-                    ref={textInputRef}
+                    onChange={filterSearchKeywordArrHandler}
+                    ref={searchInputRef}
                     onKeyDown={(onKeyDownEvent) => {
                       if (onKeyDownEvent.key === "Escape") {
                         handleHideCertificateArrBox();
@@ -134,7 +143,7 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
                   </button>
                 </div>
                 <ul css={certificateArrCSS}>
-                  {searchCertificateArr.map((keyword) => {
+                  {filterSearchCertiArr.map((keyword) => {
                     const isOverCerti = fields.some((selectKeyword) => {
                       return selectKeyword.value === keyword;
                     });
@@ -162,7 +171,7 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
                 </ul>
               </div>
 
-              {isPossibleMoveNextCard && <p css={noCertiDesc}>자격증을 선택해주세요</p>}
+              {isImpossibleNextMove && <p css={noCertiDesc}>자격증을 선택해주세요</p>}
             </div>
 
             <div css={certificateCardBox}>
@@ -186,7 +195,7 @@ export const Spec5Certificate: FunctionComponent<Spec5CertificateProps> = ({ mov
           </div>
         )}
 
-        <MoveCardButtons movePrevCard={movePrevCard} postSubmit={handleSubmit(postSubmit)} />
+        <BottomButton movePrevCard={movePrevSlider} postSubmit={handleSubmit(postSubmit)} />
       </form>
     </div>
   );

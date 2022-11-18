@@ -1,24 +1,21 @@
 import { NextPage } from "next";
-import { useRouter } from "next/router";
-import Head from "next/head";
 import { useEffect } from "react";
 
-import { GOCHO_DESKTOP_URL  } from "shared-constant/internalURL";
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { tipListFunnelEvent } from "shared-ga/tip";
 
+import { PageHead } from "./component/pageHead";
 import { ListPart } from "./part/listPart";
 
 const Tip: NextPage = () => {
-  const { pathname } = useRouter();
-
   useEffect(() => {
     tipListFunnelEvent();
   }, []);
   return (
     <main>
-      <Head>
-        <link rel="canonical" href={`${GOCHO_DESKTOP_URL }${pathname}`} />
-      </Head>
+      <PageHead />
+      <InvisibleH1 title="생산직 취업꿀팁 - 고초대졸닷컴" />
+
       <ListPart />
     </main>
   );

@@ -11,7 +11,7 @@ export type JobListPartProps = {
         college: boolean;
         placeArr: string[];
         rotationArr: string[];
-        taskArr: string[];
+        taskArr: string[] | null[];
         bookmark: number;
         view: number;
         cut: boolean;

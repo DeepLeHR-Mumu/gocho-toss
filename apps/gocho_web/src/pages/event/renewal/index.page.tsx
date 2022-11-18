@@ -1,12 +1,8 @@
 import { NextPage } from "next";
 import { useEffect } from "react";
-import { useRouter } from "next/router";
-import Head from "next/head";
 
 import { eventFunnelEvent } from "shared-ga/event";
-import { MetaHead } from "shared-ui/common/atom/metaHead";
-import { META_EVENT } from "shared-constant/meta";
-import { GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 
 import { PartIntro } from "./part/partIntro";
 import { PartNotice } from "./part/partNotice";
@@ -14,22 +10,20 @@ import { PartVideo } from "./part/partVideo";
 import { PartJd } from "./part/partJd";
 import { PartVOC } from "./part/partVOC";
 import { PartRenewal } from "./part/partRenewal";
+import { PageHead } from "./component/pageHead";
 
 import { wrapper } from "./style";
 
 const EventRenewal: NextPage = () => {
-  const router = useRouter();
-
   useEffect(() => {
     eventFunnelEvent();
   }, []);
 
   return (
     <main css={wrapper}>
-      <Head>
-        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
-      </Head>
-      <MetaHead metaData={META_EVENT} />
+      <PageHead />
+      <InvisibleH1 title="고초대졸닷컴 | 새로워진 고초대졸닷컴을 만나보세요" />
+
       <PartIntro />
       <PartNotice />
       <PartVideo />

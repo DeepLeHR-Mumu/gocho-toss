@@ -4,10 +4,11 @@ import { RecoilRoot } from "recoil";
 import { rest } from "msw";
 
 import { Spec1Basic } from "@pages/datalab/spec/register/part/carouselCardPart/spec1Basic";
+import { BACKEND_URL } from "shared-constant/externalURL";
 import { authorizedResponse } from "./partMockData";
 
 export default {
-  title: "datalab/spec/register/part/carouselCardPart/Spec1Basic",
+  title: "데이터랩/스펙등록/part/carouselCardPart/Spec1Basic",
   component: Spec1Basic,
   argTypes: {
     moveNextCard: {
@@ -41,19 +42,19 @@ const Template: ComponentStory<typeof Spec1Basic> = (args) => {
   );
 };
 
-export const 기본 = Template.bind({});
+export const card = Template.bind({});
 
-기본.parameters = {
+card.parameters = {
   msw: {
     handlers: {
-      login: rest.post("https://gocho-back.com/v1/auth/check", (req, res, ctx) => {
+      login: rest.post(`${BACKEND_URL}/auth/check`, (req, res, ctx) => {
         return res(ctx.json(authorizedResponse));
       }),
     },
   },
 };
 
-기본.args = {
+card.args = {
   moveNextCard: () => {
     return undefined;
   },

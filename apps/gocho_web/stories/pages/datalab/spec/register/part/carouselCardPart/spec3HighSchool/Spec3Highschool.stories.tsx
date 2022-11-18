@@ -5,7 +5,7 @@ import { RecoilRoot } from "recoil";
 import { Spec3Highschool } from "@pages/datalab/spec/register/part/carouselCardPart/spec3Highschool";
 
 export default {
-  title: "datalab/spec/register/part/carouselCardPart/Spec3Highschool",
+  title: "데이터랩/스펙등록/part/carouselCardPart/Spec3Highschool",
   component: Spec3Highschool,
   argTypes: {
     moveNextCard: {
@@ -42,9 +42,9 @@ const Template: ComponentStory<typeof Spec3Highschool> = (args) => {
   );
 };
 
-export const 기본 = Template.bind({});
+export const card = Template.bind({});
 
-기본.args = {
+card.args = {
   movePrevCard: () => {
     return undefined;
   },

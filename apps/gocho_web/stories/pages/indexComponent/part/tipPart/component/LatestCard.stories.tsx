@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { LatestCard } from "@pages/indexComponent/part/tipPart/component/latestCard";
+import { LatestCard } from "@pages/index/part/tipPart/component/latestCard";
 
 export default {
   title: "메인페이지/tipPart/LatestCard",

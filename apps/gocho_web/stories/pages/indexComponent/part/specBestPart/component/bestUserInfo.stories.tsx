@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { BestUserBox } from "@pages/indexComponent/part/specBestPart/component/bestUserInfo";
+import { BestUserBox } from "@pages/index/part/specBestPart/component/bestUserInfo";
 
 export default {
   title: "메인페이지/specBestPart/BestUserBox",

@@ -5,7 +5,7 @@ import { RecoilRoot } from "recoil";
 import { Spec4University } from "@pages/datalab/spec/register/part/carouselCardPart/spec4University";
 
 export default {
-  title: "datalab/spec/register/part/carouselCardPart/Spec4University",
+  title: "데이터랩/스펙등록/part/carouselCardPart/Spec4University",
   component: Spec4University,
   argTypes: {
     moveNextCard: {
@@ -19,7 +19,7 @@ export default {
     backgrounds: {
       default: "dark",
     },
-    componentSubtitle: "스펙등록 고등학교 정보 기입 캐로셀 카드",
+    componentSubtitle: "스펙등록 고등학교 + 대학교 정보 기입 캐로셀 카드",
   },
 } as ComponentMeta<typeof Spec4University>;
 
@@ -42,9 +42,9 @@ const Template: ComponentStory<typeof Spec4University> = (args) => {
   );
 };
 
-export const 기본 = Template.bind({});
+export const card = Template.bind({});
 
-기본.args = {
+card.args = {
   movePrevCard: () => {
     return undefined;
   },

@@ -10,6 +10,7 @@ export const selector = (commentArr: PostingCommentObjDef[]) => {
       badge: comment.badge,
       nickname: comment.nickname,
       image: comment.image,
+      createdTime: comment.created_time,
     };
   });
 };

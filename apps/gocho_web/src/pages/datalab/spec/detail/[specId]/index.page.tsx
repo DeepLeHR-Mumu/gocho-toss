@@ -2,18 +2,16 @@ import { NextPage } from "next";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import Head from "next/head";
 
 import { useSpecDetail } from "shared-api/spec";
-import { META_SPEC_DETAIL } from "shared-constant/meta";
 import { useUserInfo } from "shared-api/auth";
-import { MetaHead } from "shared-ui/common/atom/metaHead";
-import { GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 
 import { useModal } from "@recoil/hook/modal";
 import { Layout } from "@component/layout";
 
+import { PageHead } from "./component/pageHead";
 import { BasicInfoPart } from "./part/basicInfoPart";
 import { DetailInfoPart } from "./part/detailInfoPart";
 import { ResultInfoPart } from "./part/resultInfoPart";
@@ -54,21 +52,18 @@ const Detail: NextPage = () => {
   }
   return (
     <div css={wrapper}>
-      <Head>
-        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
-      </Head>
-      <MetaHead
-        metaData={META_SPEC_DETAIL}
-        specDetail={{
+      <PageHead
+        option={{
           id: Number(specId),
-          nickName: specDetailData.user.nickname,
           age: specDetailData.age,
+          nickname: specDetailData.user.nickname,
           gender: specDetailData.gender,
           certificate: specDetailData.certificate?.data,
           desiredTask: specDetailData.desiredTask,
           desiredIndustry: specDetailData.desiredIndustry,
         }}
       />
+      <InvisibleH1 title={`[${specDetailData.user.nickname.slice(0, 1)}***]님의 생산직 스펙평가 - 고초대졸닷컴`} />
 
       <Layout>
         <div css={container}>

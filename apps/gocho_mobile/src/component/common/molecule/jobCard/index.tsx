@@ -6,17 +6,17 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
-import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
-import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { useUserInfo } from "shared-api/auth";
-import { useModal } from "@recoil/hook/modal";
+import { DdayBox } from "shared-ui/common/atom/dDayBox";
+import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
+import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import highTrue from "shared-image/global/common/go_color.svg";
 import highFalse from "shared-image/global/common/go_mono.svg";
 import collegeTrue from "shared-image/global/common/cho_color.svg";
 import collegeFalse from "shared-image/global/common/cho_mono.svg";
-import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { jdBookmarkEvent } from "shared-ga/jd";
+import { useModal } from "@recoil/hook/modal";
 
 import { dDayBooleanReturn } from "./util";
 import { JobCardProps, JobCardSkeleton } from "./type";
@@ -127,7 +127,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
           event.preventDefault();
           return isBookmarked ? deleteJobBookmark() : addJobBookmark();
         }}
-        aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
+        aria-label={isBookmarked ? "공고 북마크 해지" : "공고 북마크 하기"}
       >
         <BsFillBookmarkFill />
       </button>
@@ -192,11 +192,14 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
           </div>
           <ul css={taskContainer}>
             {jobData.taskArr.map((task) => {
-              return (
-                <li css={taskBox} key={`${jobData.id}${task}`}>
-                  {task}
-                </li>
-              );
+              if (task !== null) {
+                return (
+                  <li css={taskBox} key={`${jobData.id}${task}`}>
+                    {task}
+                  </li>
+                );
+              }
+              return <li key={`${jobData.id}${task}`} />;
             })}
           </ul>
         </a>

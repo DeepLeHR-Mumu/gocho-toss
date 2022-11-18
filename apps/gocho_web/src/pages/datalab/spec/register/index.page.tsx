@@ -1,66 +1,58 @@
-import { useEffect, useCallback } from "react";
 import { NextPage } from "next";
-import axios from "axios";
 import { useRouter } from "next/router";
-import Head from "next/head";
+import { useEffect } from "react";
 
-import { GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
-import { useUserInfo } from "shared-api/auth";
-import { META_SPEC_REGISTER } from "shared-constant/meta";
-import { MetaHead } from "shared-ui/common/atom/metaHead";
-import { specRegisterFunnelEvent } from "shared-ga/spec";
+import { SPEC_LIST_URL } from "shared-constant/internalURL";
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
+import { specRegisterFunnelEvent } from "shared-ga/spec";
 
-import { useProgress } from "@recoil/hook/spec";
+import { useShowUnLoginModal } from "@recoil/hook/unLoginModal";
 import { useModal } from "@recoil/hook/modal";
 import { Layout } from "@component/layout";
 
 import { ProgressPart } from "./part/progressPart";
 import { SpecWritePart } from "./part/carouselCardPart";
+import { PageHead } from "./component/pageHead";
 
 import { wrapper, title } from "./style";
 
 const Register: NextPage = () => {
   const router = useRouter();
-  const { setCurrentModal, currentModal } = useModal();
-
-  const { error } = useUserInfo();
-  const { resetCurrentProgress } = useProgress();
+  const { setCurrentModal } = useModal();
+  useShowUnLoginModal();
 
   useEffect(() => {
-    resetCurrentProgress();
-  }, [resetCurrentProgress]);
+    const routeChangeStart = (url: string) => {
+      const isCurrentSpecObj = Boolean(sessionStorage.getItem("specObj") === null);
 
-  useEffect(() => {
-    if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
-      setCurrentModal("loginModal", { button: "home" });
-    }
-    if (currentModal?.activatedModal === "signUpModal") {
-      setCurrentModal("signUpModal");
-    }
-  }, [currentModal?.activatedModal, error, setCurrentModal]);
-
-  const routeChangeStart = useCallback(
-    (url: string) => {
-      const isCurrentSpecObj = Boolean(sessionStorage.getItem("specObj") !== null);
-
-      if (isCurrentSpecObj) {
+      if (!isCurrentSpecObj) {
         setCurrentModal("pageBlockModal", { url, text: "작성 중인 스펙이 초기화됩니다. 나가시겠습니까?" });
         router.events.emit("routeChangeError");
-        // 모달을 멈추기 위한 disable
         // eslint-disable-next-line no-throw-literal
         throw true;
       }
-    },
-    [setCurrentModal, router]
-  );
+    };
 
-  useEffect(() => {
     router.events.on("routeChangeStart", routeChangeStart);
+    window.addEventListener("beforeunload", () => {
+      routeChangeStart(SPEC_LIST_URL);
+    });
+    router.beforePopState(() => {
+      routeChangeStart(SPEC_LIST_URL);
+      return true;
+    });
     return () => {
       router.events.off("routeChangeStart", routeChangeStart);
+      window.removeEventListener("beforeunload", () => {
+        routeChangeStart(SPEC_LIST_URL);
+      });
+
+      router.beforePopState(() => {
+        return true;
+      });
     };
-  }, [routeChangeStart, router.events]);
+  }, [router, router.events, setCurrentModal]);
 
   useEffect(() => {
     specRegisterFunnelEvent();
@@ -68,16 +60,15 @@ const Register: NextPage = () => {
 
   return (
     <main css={wrapper}>
-      <Head>
-        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
-      </Head>
-      <MetaHead metaData={META_SPEC_REGISTER} />
+      <PageHead />
+      <InvisibleH1 title="내 스펙 등록하기 - 고초대졸닷컴" />
+
       <ProgressPart />
       <Layout>
+        <InvisibleH2 title="생산직 스펙 평가 등록하기" />
         <strong css={title}>
           DataLab <span>스펙등록하기</span>
         </strong>
-        <InvisibleH2 title="생산직 스펙 평가 등록하기" />
         <SpecWritePart />
       </Layout>
     </main>

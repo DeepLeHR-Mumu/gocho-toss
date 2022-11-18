@@ -1,5 +1,6 @@
 export const linkObj = {
-  baseUrl: "http://localhost:3000",
+  DESKTOP_BASE_URL: "http://localhost:3000",
+  MOBILE_BASE_URL: "http://localhost:3001",
   COMMUNITY_TIPS_LIST_URL: "/community/tips",
   DATALAB_DETAIL: "/datalab/detail",
   JOBS_LIST_URL: "/jd/list",

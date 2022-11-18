@@ -3,8 +3,8 @@ import { css } from "@emotion/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { rest } from "msw";
 
-import { TipDisplay } from "@pages/indexComponent/part/tipPart/component/tipDisplay";
-import { TipDisplaySkeleton } from "@pages/indexComponent/part/tipPart/component/tipDisplaySkeleton";
+import { TipDisplay } from "@pages/index/part/tipPart/component/tipDisplay";
+import { TipDisplaySkeleton } from "@pages/index/part/tipPart/component/tipDisplaySkeleton";
 import { workingResponse } from "./mockData";
 
 export default {

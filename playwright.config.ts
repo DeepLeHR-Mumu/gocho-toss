@@ -3,8 +3,7 @@ import { devices } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
   testDir: "./e2e",
-  timeout: 30 * 1000 * 60,
-  // timeout: 3000,
+  timeout: 5000,
   expect: {
     timeout: 5000,
   },
@@ -12,48 +11,45 @@ const config: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: "html",
-  use: {
-    actionTimeout: 0,
-    baseURL: "https://gocho-back.com/v1",
-    trace: "on-first-retry",
-  },
+  reporter: process.env.CI ? "github" : "list",
 
   projects: [
+    // gocho_web
     {
       name: "chromium",
+      testDir: "./e2e/gocho_web",
       use: {
+        baseURL: process.env.GOCHO_WEB_URL || "http://localhost:3000",
         ...devices["Desktop Chrome"],
       },
     },
 
     {
-      name: "firefox",
-      use: {
-        ...devices["Desktop Firefox"],
-      },
-    },
-
-    {
       name: "webkit",
+      testDir: "./e2e/gocho_web",
       use: {
+        baseURL: process.env.GOCHO_WEB_URL || "http://localhost:3000",
         ...devices["Desktop Safari"],
       },
     },
 
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: {
-    //     ...devices['Pixel 5'],
-    //   },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: {
-    //     ...devices['iPhone 12'],
-    //   },
-    // },
+    /* gocho_mobile */
+    {
+      name: "Mobile Chrome",
+      testDir: "./e2e/gocho_mobile",
+      use: {
+        baseURL: process.env.GOCHO_MOBILE_URL || "http://localhost:3000",
+        ...devices["Galaxy S9+"],
+      },
+    },
+    {
+      name: "Mobile Safari",
+      testDir: "./e2e/gocho_mobile",
+      use: {
+        baseURL: process.env.GOCHO_MOBILE_URL || "http://localhost:3000",
+        ...devices["iPhone 12"],
+      },
+    },
 
     /* Test against branded browsers. */
     // {

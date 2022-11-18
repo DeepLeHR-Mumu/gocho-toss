@@ -1,30 +1,20 @@
 import { NextPage } from "next";
-import { useRouter } from "next/router";
-import Head from "next/head";
 
 import { Layout } from "@component/layout";
-import { MetaHead } from "shared-ui/common/atom/metaHead";
-import { META_TOS } from "shared-constant/meta";
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { executionDesc, tosArr } from "shared-constant/TOS";
-import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL } from "shared-constant/internalURL";
 
+import { PageHead } from "./component/pageHead";
 import { tosTitle, subTitle, container, executionDescCSS, wrapper, listTitle, listArr, desc } from "./style";
 
 import { tosArrDef } from "./type";
 
 const Tos: NextPage = () => {
-  const router = useRouter();
   return (
     <main css={wrapper}>
-      <Head>
-        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
-        <link
-          rel="alternate"
-          media="only screen and (max-width: 640px)"
-          href={`${GOCHO_MOBILE_URL}${router.asPath.split("?")[0]}`}
-        />
-      </Head>
-      <MetaHead metaData={META_TOS} />
+      <PageHead />
+      <InvisibleH1 title="고초대졸닷컴 | 개인회원 이용약관" />
+
       <section>
         <Layout>
           <strong css={tosTitle}>개인회원 이용약관</strong>
