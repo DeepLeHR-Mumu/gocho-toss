@@ -1,18 +1,18 @@
 import { useEffect, useRef } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import Head from "next/head";
 
-import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL, JOBS_EXPLIST_URL } from "shared-constant/internalURL";
-import { META_JD_EXPLIST } from "shared-constant/meta";
-import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { JOBS_EXPLIST_URL } from "shared-constant/internalURL";
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { expiredJdListFunnelEvent } from "shared-ga/jd";
 
 import { Layout } from "@component/layout";
-import { mainContainer, title, colorPoint, listContainer } from "./style";
+
+import { PageHead } from "./component/pageHead";
 import { SearchPart } from "./part/searchPart";
 import { ResultPart } from "./part/resultPart";
+import { mainContainer, title, colorPoint, listContainer } from "./style";
 
 const JdExpListPage: NextPage = () => {
   const router = useRouter();
@@ -34,15 +34,9 @@ const JdExpListPage: NextPage = () => {
 
   return (
     <main css={mainContainer}>
-      <Head>
-        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
-        <link
-          rel="alternate"
-          media="only screen and (max-width: 640px)"
-          href={`${GOCHO_MOBILE_URL}${router.asPath.split("?")[0]}`}
-        />
-      </Head>
-      <MetaHead metaData={META_JD_EXPLIST} />
+      <PageHead />
+      <InvisibleH1 title="만료된 채용공고" />
+
       <Layout>
         <div ref={scrollRef} />
         <InvisibleH2 title="기업별 만료 공고" />

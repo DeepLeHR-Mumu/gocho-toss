@@ -1,13 +1,12 @@
 import CommunityLayout from "@pages/community/component/communityLayout";
 import { NextPage } from "next";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 import { useUserInfo } from "shared-api/auth";
 import { usePostingCommentArr } from "shared-api/community/usePostingCommentArr";
 import { usePostingDetail } from "shared-api/community/usePostingDetail";
-import { ERROR_URL, GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
+import { ERROR_URL } from "shared-constant/internalURL";
 import { postingListFunnelEvent } from "shared-ga/posting";
 
 import { WriteComment } from "./component/writeComment";
@@ -38,9 +37,6 @@ const PostingDetailPage: NextPage = () => {
 
   return (
     <main>
-      <Head>
-        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.pathname}`} />
-      </Head>
       <CommunityLayout isSidebar>
         <article css={wrapper}>
           <div css={overviewYBox}>

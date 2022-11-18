@@ -9,6 +9,7 @@ import { useUserInfo } from "shared-api/auth";
 import { usePostingCommentArr } from "shared-api/community/usePostingCommentArr";
 import { useDeletePosting } from "shared-api/community/useDeletePosting";
 import { Spinner } from "shared-ui/common/atom/spinner";
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { communityPostingArrKeyObj } from "shared-constant/queryKeyFactory/community/postingArrKeyObj";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { dateConverter } from "shared-util/date/dateConverter";
@@ -20,6 +21,7 @@ import { COMMUNITY_POSTING_EDIT_URL } from "shared-constant/internalURL";
 import { useToast } from "@recoil/hook/toast";
 
 // import { changeTypeIndex } from "./util";
+import { PageHead } from "../../component/pageHead";
 import {
   modalWrapperSkeleton,
   writerProfile,
@@ -49,7 +51,7 @@ export const PostingPart: FunctionComponent = () => {
 
   const { data: userInfoData } = useUserInfo();
   const { data: postingDetailData } = usePostingDetail({ id: Number(router.query.postingId) });
-  const { mutate:deletePostingMutate } = useDeletePosting();
+  const { mutate: deletePostingMutate } = useDeletePosting();
   const { mutate: addViewCount } = useAddPostingViewCount();
   const { mutate: addBookmarkMutate } = useAddPostingBookmarkArr({ id: Number(router.query.postingId) });
   const { mutate: deleteBookmarkMutate } = useDeletePostingBookmarkArr({ id: Number(router.query.postingId) });
@@ -67,7 +69,7 @@ export const PostingPart: FunctionComponent = () => {
         onSuccess: () => {
           queryClient.invalidateQueries(communityPostingArrKeyObj.all);
           router.back();
-          setCurrentToast("게시글이 삭제되었습니다.")
+          setCurrentToast("게시글이 삭제되었습니다.");
         },
       }
     );
@@ -119,6 +121,15 @@ export const PostingPart: FunctionComponent = () => {
 
   return (
     <>
+      {/* LATER: 리팩토링시 page로 빼기 */}
+      <PageHead
+        option={{
+          title: postingDetailData.title,
+          id: postingDetailData.id,
+        }}
+      />
+      <InvisibleH1 title={`자유게시판 > ${postingDetailData.title} - 고초대졸닷컴`} />
+
       <div css={flexBox}>
         <div css={writerProfile}>
           <div css={writerProfileImage}>

@@ -1,13 +1,12 @@
 import { NextPage } from "next";
 import { useEffect } from "react";
-import Head from "next/head";
 import { useRouter } from "next/router";
 
-import { MetaHead } from "shared-ui/common/atom/metaHead";
-import { META_JD_LIST } from "shared-constant/meta";
-import { GOCHO_DESKTOP_URL, JOBS_LIST_URL } from "shared-constant/internalURL";
+import { JOBS_LIST_URL } from "shared-constant/internalURL";
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
+import { PageHead } from "./component/pageHead";
 import { AdPart } from "./part/adPart";
 import { ListPart } from "./part/listPart";
 
@@ -22,10 +21,9 @@ const JdList: NextPage = () => {
 
   return (
     <main>
-      <Head>
-        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
-      </Head>
-      <MetaHead metaData={META_JD_LIST} />
+      <PageHead />
+      <InvisibleH1 title="실시간 생산직 채용공고" />
+
       <InvisibleH2 title="오늘의 추천 공고" />
       <AdPart />
       <ListPart />

@@ -1,18 +1,16 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import Head from "next/head";
 import { useEffect } from "react";
 
 import { useUserInfo } from "shared-api/auth";
 import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { useAddCompanyViewCount } from "shared-api/viewCount";
 import { useCompanyDetail } from "shared-api/company";
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { DetailComment } from "@component/global/detailComment";
 import useMoveScroll from "@pages/company/[companyId]/util";
-import { COMPANY_DETAIL_URL, GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL } from "shared-constant/internalURL";
-import { META_COMPANY_INFO, META_COMPANY_RECRUIT } from "shared-constant/meta";
-import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import { companyInfoFunnelEvent, companyJdFunnelEvent } from "shared-ga/company";
 
 import { Layout } from "@component/layout";
@@ -25,6 +23,9 @@ import { WelfareInfoPart } from "../part/welfareInfoPart";
 import { FactoryInfoPart } from "../part/factoryInfoPart";
 import { PayInfoPart } from "../part/payInfoPart";
 import { CompanyJobPart } from "../part/companyJobPart";
+import { PageInfoHead } from "../component/pageInfoHead";
+import { PageRecruitHead } from "../component/pageRecruitHead";
+
 import {
   mainContainer,
   mainContainerSkeleton,
@@ -146,14 +147,6 @@ const CompanyDetailPage: NextPage = () => {
     <main css={mainContainer}>
       <Layout>
         <HeaderPart companyData={companyData.headerData} isBookmarked={isBookmarked} userId={userData?.id} />
-        <Head>
-          <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
-          <link
-            rel="alternate"
-            media="only screen and (max-width: 640px)"
-            href={`${GOCHO_MOBILE_URL}${router.asPath.split("?")[0]}`}
-          />
-        </Head>
         <div css={buttonContainer}>
           <button
             type="button"
@@ -183,7 +176,13 @@ const CompanyDetailPage: NextPage = () => {
 
         {info === "detail" && (
           <section>
-            <MetaHead companyDetail={{ companyName: data.name, asPath: router.asPath }} metaData={META_COMPANY_INFO} />
+            <PageInfoHead
+              option={{
+                companyName: companyData.headerData.name,
+                id: companyData.headerData.id,
+              }}
+            />
+            <InvisibleH1 title={`${companyData.headerData.name} > 기업/공장 정보 - 고초대졸닷컴`} />
             <InvisibleH2 title={`${companyData.headerData.name} 기업정보`} />
             <div css={flexBox}>
               <div css={partContainer}>
@@ -243,10 +242,13 @@ const CompanyDetailPage: NextPage = () => {
 
         {info === "jd" && (
           <section>
-            <MetaHead
-              companyDetail={{ companyName: data.name, asPath: router.asPath }}
-              metaData={META_COMPANY_RECRUIT}
+            <PageRecruitHead
+              option={{
+                id: companyData.headerData.id,
+                companyName: companyData.headerData.name,
+              }}
             />
+            <InvisibleH1 title={`${companyData.headerData.name} > 생산직 채용공고 - 고초대졸닷컴`} />
             <InvisibleH2 title={`${companyData.headerData.name} 채용공고 모음`} />
             <CompanyJobPart companyId={Number(companyId)} />
           </section>

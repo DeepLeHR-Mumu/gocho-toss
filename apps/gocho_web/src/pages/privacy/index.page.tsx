@@ -1,13 +1,11 @@
 import { NextPage } from "next";
-import Head from "next/head";
-import { useRouter } from "next/router";
 
-import { MetaHead } from "shared-ui/common/atom/metaHead";
-import { META_PRIVACY } from "shared-constant/meta";
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { executionDesc, privacyArr, CTOINFO } from "shared-constant/privacy";
-import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL } from "shared-constant/internalURL";
 
 import { Layout } from "@component/layout";
+
+import { PageHead } from "./component/pageHead";
 
 import {
   tosTitle,
@@ -24,19 +22,10 @@ import {
 import { PrivacyDef } from "./type";
 
 const Privacy: NextPage = () => {
-  const router = useRouter();
-
   return (
     <main css={wrapper}>
-      <Head>
-        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
-        <link
-          rel="alternate"
-          media="only screen and (max-width: 640px)"
-          href={`${GOCHO_MOBILE_URL}${router.asPath.split("?")[0]}`}
-        />
-      </Head>
-      <MetaHead metaData={META_PRIVACY} />
+      <PageHead />
+      <InvisibleH1 title="고초대졸닷컴 | 개인정보 처리방침" />
       <section>
         <Layout>
           <strong css={tosTitle}>개인정보 처리방침</strong>

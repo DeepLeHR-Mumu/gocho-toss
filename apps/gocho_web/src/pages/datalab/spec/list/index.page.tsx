@@ -1,12 +1,8 @@
 import { NextPage } from "next";
 import { useEffect } from "react";
-import Head from "next/head";
-import { useRouter } from "next/router";
 
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
-import { MetaHead } from "shared-ui/common/atom/metaHead";
-import { META_SPEC_LIST } from "shared-constant/meta";
-import { GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
 import { specListFunnelEvent } from "shared-ga/spec";
 
 import { Layout } from "@component/layout";
@@ -14,21 +10,19 @@ import { Layout } from "@component/layout";
 import { AsideMenu } from "../component/asideMenu";
 import { CarouselPart } from "./part/carouselPart";
 import { ListPart } from "./part/listPart";
+import { PageHead } from "./component/pageHead";
 import { title, colorPoint, flexBox } from "./style";
 
 const MainList: NextPage = () => {
-  const router = useRouter();
-
   useEffect(() => {
     specListFunnelEvent();
   }, []);
 
   return (
     <main>
-      <Head>
-        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
-      </Head>
-      <MetaHead metaData={META_SPEC_LIST} />
+      <PageHead />
+      <InvisibleH1 title="생산직 스펙평가 리스트 - 고초대졸닷컴" />
+
       <CarouselPart />
       <Layout>
         <InvisibleH2 title="전체 스펙 리스트" />

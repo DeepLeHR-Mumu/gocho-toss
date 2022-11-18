@@ -3,19 +3,18 @@ import { NextPage } from "next";
 import { FiSearch } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import Head from "next/head";
 
 import { useCompanyArr } from "shared-api/company";
 import { Layout } from "@component/layout";
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
-import { MetaHead } from "shared-ui/common/atom/metaHead";
-import { META_JD_EXPLIST } from "shared-constant/meta";
-import { GOCHO_DESKTOP_URL, JOBS_EXPLIST_URL } from "shared-constant/internalURL";
+import { JOBS_EXPLIST_URL } from "shared-constant/internalURL";
 import { expiredJdListFunnelEvent, expiredJdListSortingEvent } from "shared-ga/jd";
 
 import { useToast } from "@recoil/hook/toast";
 
+import { PageHead } from "./component/pageHead";
 import { ExpJobCardList } from "./component/expJobCardList";
 import { setJobOrderButtonArr } from "./constant";
 import {
@@ -90,10 +89,8 @@ const JobsExpList: NextPage = () => {
 
   return (
     <main css={mainContainer}>
-      <Head>
-        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
-      </Head>
-      <MetaHead metaData={META_JD_EXPLIST} />
+      <PageHead />
+      <InvisibleH1 title="만료된 채용공고" />
       <Layout>
         <InvisibleH2 title="기업별 만료 공고" />
         <strong css={title}>만료 공고</strong>

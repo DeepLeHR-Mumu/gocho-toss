@@ -5,9 +5,6 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
 
 import { useUserInfo } from "shared-api/auth";
-import { MetaHead } from "shared-ui/common/atom/metaHead";
-import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
-import { META_COMMUNITY_POSTING } from "shared-constant/meta";
 import { COMMUNITY_POSTINGS_LIST_URL, COMMUNITY_POSTING_WRITE_URL } from "shared-constant/internalURL";
 
 import { Layout } from "@component/layout";
@@ -66,8 +63,6 @@ const CommunityLayout: FunctionComponent<CommunityLayoutProps> = ({ children, is
 
   return (
     <section css={partContainer}>
-      <MetaHead metaData={META_COMMUNITY_POSTING} />
-      <InvisibleH2 title="생산/기능직 자유게시판" />
       <Layout>
         <p css={title}>
           커뮤니티 💬<span css={colorPoint}>게시판</span>
