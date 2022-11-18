@@ -47,3 +47,8 @@ axiosInstance.interceptors.request.use(async (config) => {
 
   return newConfig;
 });
+
+export const axiosNoTokenInstance = axios.create({
+  timeout: 10000,
+  baseURL: MANAGER_BACKEND_URL,
+});
