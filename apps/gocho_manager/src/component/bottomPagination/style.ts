@@ -6,6 +6,7 @@ export const paginationContainer = css`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 1rem;
 `;
 
 export const movePageButton = css`
