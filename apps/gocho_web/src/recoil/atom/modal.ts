@@ -99,7 +99,8 @@ export type modalNameDef =
   | "signUpModal"
   | "accountSettingModal"
   | "writeKakaoInfoModal"
-  | "findPasswordModal";
+  | "findPasswordModal"
+  | "noticeModal";
 
 export interface modalAtomDef {
   activatedModal: modalNameDef | contentModalNameDef;

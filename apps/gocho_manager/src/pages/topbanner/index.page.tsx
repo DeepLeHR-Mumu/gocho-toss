@@ -255,7 +255,7 @@ const TopBanner: NextPage = () => {
                 required: true,
               })}
             />
-            번 째 배너와 변경
+            번 째 배너로 올리기 / 내리기
           </div>
           <button css={changeBannerButton} type="submit">
             순서 변경

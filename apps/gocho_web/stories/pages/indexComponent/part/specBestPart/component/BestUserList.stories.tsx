@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { css } from "@emotion/react";
 
-import { BestUserList } from "@pages/indexComponent/part/specBestPart/component/bestUserList";
+import { BestUserList } from "@pages/index/part/specBestPart/component/bestUserList";
 
 export default {
   title: "메인페이지/specBestPart/BestUserList",

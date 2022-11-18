@@ -4,8 +4,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { Layout } from "@component/layout";
-import { META_COMMUNITY_TIP } from "shared-constant/meta";
-import { MetaHead } from "shared-ui/common/atom/metaHead";
 import { TipCardList } from "../../component/tipCardList";
 
 import { setTipCompanyButtonArr } from "./constant";
@@ -44,7 +42,6 @@ export const ListPart: FunctionComponent = () => {
 
   return (
     <section css={partContainer}>
-      <MetaHead metaData={META_COMMUNITY_TIP} />
       <Layout>
         <InvisibleH2 title="생산/기능직 취업 꿀팁" />
         <p css={title}>

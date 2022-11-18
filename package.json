@@ -46,7 +46,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.18.13",
-    "@playwright/test": "^1.27.1",
+    "@playwright/test": "1.28.0",
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-essentials": "^6.5.10",
     "@storybook/addon-interactions": "^6.5.10",
@@ -58,7 +58,7 @@
     "@types/node": "18.7.13",
     "babel-loader": "^8.2.5",
     "husky": "^8.0.0",
-    "turbo": "^1.4.6"
+    "turbo": "^1.6.3"
   },
   "dependencies": {
     "eslint-config-deeple": "workspace:^1.0.0",

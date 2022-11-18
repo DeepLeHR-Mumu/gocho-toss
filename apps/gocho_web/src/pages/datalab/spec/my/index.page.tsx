@@ -1,19 +1,16 @@
 import { NextPage } from "next";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Head from "next/head";
-import { useRouter } from "next/router";
 
 import { useMySpecHistory } from "shared-api/spec/useMySpecHistory";
 import { useUserInfo } from "shared-api/auth";
-import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { mySpecListFunnelEvent } from "shared-ga/spec";
-import { GOCHO_DESKTOP_URL } from "shared-constant/internalURL";
 
 import { Layout } from "@component/layout";
 import { useModal } from "@recoil/hook/modal";
 
-import { META_SPEC_MY } from "shared-constant/meta";
+import { PageHead } from "./component/pageHead";
 import { AsideMenu } from "../component/asideMenu";
 import { SimpleCard } from "./component/simpleCard";
 import { Pagination } from "./component/pagination";
@@ -25,8 +22,6 @@ export const MySpecHistory: NextPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { setCurrentModal, closeModal, currentModal } = useModal();
   const activeCardCount = 5;
-
-  const router = useRouter();
 
   const { data: userInfoData, error } = useUserInfo();
   const { data: mySpecHistoryData, isLoading } = useMySpecHistory({
@@ -56,10 +51,9 @@ export const MySpecHistory: NextPage = () => {
   if (!mySpecHistoryData || isLoading) {
     return (
       <div css={wrapper}>
-        <Head>
-          <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
-        </Head>
-        <MetaHead metaData={META_SPEC_MY} />
+        <PageHead />
+        <InvisibleH1 title="내가 작성한 스펙 - 고초대졸닷컴" />
+
         <Layout>
           <section>
             <div css={flexBox}>
@@ -87,10 +81,9 @@ export const MySpecHistory: NextPage = () => {
 
   return (
     <main css={wrapper}>
-      <Head>
-        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
-      </Head>
-      <MetaHead metaData={META_SPEC_MY} />
+      <PageHead />
+      <InvisibleH1 title="내가 작성한 스펙 - 고초대졸닷컴" />
+
       <Layout>
         <section>
           <div css={flexBox}>

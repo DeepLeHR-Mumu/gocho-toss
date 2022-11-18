@@ -1,11 +1,9 @@
 import { NextPage } from "next";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import { META_SPEC_REGISTER } from "shared-constant/meta";
-import { GOCHO_DESKTOP_URL, SPEC_LIST_URL } from "shared-constant/internalURL";
-import { MetaHead } from "shared-ui/common/atom/metaHead";
+import { SPEC_LIST_URL } from "shared-constant/internalURL";
+import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { specRegisterFunnelEvent } from "shared-ga/spec";
 
@@ -15,6 +13,7 @@ import { Layout } from "@component/layout";
 
 import { ProgressPart } from "./part/progressPart";
 import { SpecWritePart } from "./part/carouselCardPart";
+import { PageHead } from "./component/pageHead";
 
 import { wrapper, title } from "./style";
 
@@ -61,10 +60,8 @@ const Register: NextPage = () => {
 
   return (
     <main css={wrapper}>
-      <Head>
-        <link rel="canonical" href={`${GOCHO_DESKTOP_URL}${router.asPath.split("?")[0]}`} />
-      </Head>
-      <MetaHead metaData={META_SPEC_REGISTER} />
+      <PageHead />
+      <InvisibleH1 title="내 스펙 등록하기 - 고초대졸닷컴" />
 
       <ProgressPart />
       <Layout>

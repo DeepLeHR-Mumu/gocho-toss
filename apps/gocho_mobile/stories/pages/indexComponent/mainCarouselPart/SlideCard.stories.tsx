@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import checkIconImage from "shared-image/global/common/yellow_check.png";
 
-import { SlideCard } from "@pages/indexComponent/part/mainCarouselPart/component/sliderCard";
+import { SlideCard } from "@pages/index/part/mainCarouselPart/component/sliderCard";
 
 export default {
   title: "pages/indexComponent/SlideCard",
