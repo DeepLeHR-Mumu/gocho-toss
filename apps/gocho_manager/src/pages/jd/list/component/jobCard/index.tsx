@@ -24,9 +24,6 @@ import { JobCardProps } from "./type";
 const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
   const queryClient = useQueryClient();
 
-  const { year: startYear, month: startMonth, date: startDate } = dateConverter(job.startTime);
-  const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
-
   const { mutate: deleteJobMutate } = useDeleteJob();
   const { mutate: endJobMutate } = useEndJob();
 
@@ -51,6 +48,9 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
       }
     );
   };
+
+  const { year: startYear, month: startMonth, date: startDate } = dateConverter(job.startTime);
+  const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
 
   return (
     <tr css={jobContainer}>
