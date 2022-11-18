@@ -12,7 +12,8 @@ export type modalNameDef =
   | "accountSettingModal"
   | "pageBlockModal"
   | "writeKakaoInfoModal"
-  | "findPasswordModal";
+  | "findPasswordModal"
+  | "noticeModal";
 
 export type contentModalDef = loginObjDef;
 
