@@ -24,14 +24,14 @@ const config: PlaywrightTestConfig = {
       },
     },
 
-    {
-      name: "webkit",
-      testDir: "./e2e/gocho_web",
-      use: {
-        baseURL: process.env.GOCHO_WEB_URL || "http://localhost:3000",
-        ...devices["Desktop Safari"],
-      },
-    },
+    // {
+    //   name: "webkit",
+    //   testDir: "./e2e/gocho_web",
+    //   use: {
+    //     baseURL: process.env.GOCHO_WEB_URL || "http://localhost:3000",
+    //     ...devices["Desktop Safari"],
+    //   },
+    // },
 
     /* gocho_mobile */
     {
@@ -42,14 +42,14 @@ const config: PlaywrightTestConfig = {
         ...devices["Galaxy S9+"],
       },
     },
-    {
-      name: "Mobile Safari",
-      testDir: "./e2e/gocho_mobile",
-      use: {
-        baseURL: process.env.GOCHO_MOBILE_URL || "http://localhost:3000",
-        ...devices["iPhone 12"],
-      },
-    },
+    // {
+    //   name: "Mobile Safari",
+    //   testDir: "./e2e/gocho_mobile",
+    //   use: {
+    //     baseURL: process.env.GOCHO_MOBILE_URL || "http://localhost:3000",
+    //     ...devices["iPhone 12"],
+    //   },
+    // },
 
     /* Test against branded browsers. */
     // {
