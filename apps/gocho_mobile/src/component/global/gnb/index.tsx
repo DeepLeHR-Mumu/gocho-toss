@@ -9,7 +9,6 @@ import { globalSearchEvent } from "shared-ga/search";
 import { MAIN_URL } from "shared-constant/internalURL";
 import { useUserInfo } from "shared-api/auth";
 
-import { useModal } from "@recoil/hook/modal";
 import { useToast } from "@recoil/hook/toast";
 import { Layout } from "@component/layout";
 
@@ -37,7 +36,6 @@ import {
 export const GNB: FunctionComponent = () => {
   const [openedElement, setOpenedElement] = useState<openedElementDef>(null);
   const [query, setQuery] = useState("");
-  const { setCurrentModal } = useModal();
   const { setCurrentToast } = useToast();
 
   const router = useRouter();
@@ -71,15 +69,6 @@ export const GNB: FunctionComponent = () => {
       query: { q: query },
     });
   });
-
-  useEffect(() => {
-    const todayTime = new Date().getTime();
-    const storageNoticeModalDate = localStorage.getItem("hideNoticeModalCreateTime");
-    const noticeModalCloseTime = new Date(`${storageNoticeModalDate}`).getTime();
-    const differentDay = (todayTime - noticeModalCloseTime) / (1000 * 60 * 60 * 24);
-    const isFinishNoticeModalPendingTime = differentDay >= 24;
-    if (isFinishNoticeModalPendingTime || storageNoticeModalDate === null) setCurrentModal("noticeModal");
-  }, [setCurrentModal]);
 
   return (
     <header css={headerWrapper}>
