@@ -40,7 +40,7 @@ export const Header: FunctionComponent = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [isUnifiedSearchOpened, setIsUnifiedSearchOpened] = useState<boolean>(false);
   const [query, setQuery] = useState("");
-  const { closeModal } = useModal();
+  const { closeModal, setCurrentModal } = useModal();
 
   const router = useRouter();
   const { setCurrentToast } = useToast();
@@ -75,6 +75,15 @@ export const Header: FunctionComponent = () => {
     closeModal();
     setIsUnifiedSearchOpened(false);
   }, [closeModal, pathname]);
+
+  useEffect(() => {
+    const todayTime = new Date().getTime();
+    const storageNoticeModalDate = localStorage.getItem("hideNoticeModalCreateTime");
+    const noticeModalCloseTime = new Date(`${storageNoticeModalDate}`).getTime();
+    const differentDay = (todayTime - noticeModalCloseTime) / (1000 * 60 * 60 * 24);
+    const isFinishNoticeModalPendingTime = differentDay >= 24;
+    if (isFinishNoticeModalPendingTime || storageNoticeModalDate === null) setCurrentModal("noticeModal");
+  }, [setCurrentModal]);
 
   const { isSuccess } = useUserInfo();
   const menuMainUrl = pathname.split("/")[1];

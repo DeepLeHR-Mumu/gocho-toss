@@ -55,6 +55,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     homeFunnelEvent();
   }, []);
+
   return (
     <main>
       <PageHead />

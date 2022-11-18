@@ -6,6 +6,7 @@ import { SignUpModal } from "../signUpModal";
 import { LoginModal } from "../loginModal";
 import { WriteKakaoInfoModal } from "../writeKakaoInfoModal";
 import { FindPasswordModal } from "../findPasswordModal";
+import { NoticeModal } from "../noticeModal";
 
 export const ModalPlaceholder: FunctionComponent = () => {
   const { currentModal } = useModal();
@@ -24,6 +25,10 @@ export const ModalPlaceholder: FunctionComponent = () => {
 
   if (currentModal?.activatedModal === "findPasswordModal") {
     return <FindPasswordModal />;
+  }
+
+  if (currentModal?.activatedModal === "noticeModal") {
+    return <NoticeModal />;
   }
   return null;
 };
