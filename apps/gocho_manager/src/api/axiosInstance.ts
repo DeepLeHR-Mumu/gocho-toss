@@ -18,6 +18,7 @@ axiosInstance.interceptors.request.use(async (config) => {
   if (!refreshToken || refreshToken === "undefined" || parseInt(refreshExp, 10) - 10 < date) {
     localStorage.clear();
     window.location.href = "/login";
+    // TODO: router로 이동할 수 있을까? try-catch?
   }
 
   if (parseInt(accessExp, 10) - 10 < date) {
@@ -45,4 +46,9 @@ axiosInstance.interceptors.request.use(async (config) => {
   newConfig.headers["x-access-token"] = accessToken;
 
   return newConfig;
+});
+
+export const axiosNoTokenInstance = axios.create({
+  timeout: 10000,
+  baseURL: MANAGER_BACKEND_URL,
 });
