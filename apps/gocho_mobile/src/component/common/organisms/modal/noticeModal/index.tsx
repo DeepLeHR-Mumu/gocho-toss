@@ -38,7 +38,7 @@ const NoticeBox: FunctionComponent = () => {
           <br />
           회원분들께 더 나은 서비스를 제공해드리기 위해
           <br />
-          <span css={colorPoint}> 11월 19일 토요일 01:00AM 부터 02:00AM 까지 고초대졸닷컴이 일시 중단</span> 됩니다.
+          <span css={colorPoint}> 11월 19일 토요일 01:00AM 부터 04:00AM 까지 고초대졸닷컴이 일시 중단</span> 됩니다.
         </p>
         <p css={desc}>
           <span css={colorPoint}>서버점검 시간에는 사이트 이용이 불가한 점 양해 부탁드리며</span> 더 나은 서비스로
