@@ -178,14 +178,6 @@ const JdUpload: NextPage = () => {
           </div>
           <ul>
             {fields.map((item, index) => {
-              const yearDisable =
-                watch("position_arr")[index].required_exp !== "경력" &&
-                watch("position_arr")[index].required_exp !== "신입/경력";
-
-              const conversionDisable =
-                watch("position_arr")[index].contract_type !== "인턴" &&
-                watch("position_arr")[index].contract_type !== "계약>정규";
-
               return (
                 <PositionBox
                   key={item.id}
@@ -193,8 +185,6 @@ const JdUpload: NextPage = () => {
                   index={index}
                   register={register}
                   watch={watch}
-                  yearDisable={yearDisable}
-                  conversionDisable={conversionDisable}
                   setValue={setValue}
                   append={append}
                   remove={remove}

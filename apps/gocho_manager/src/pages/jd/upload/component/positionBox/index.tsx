@@ -39,8 +39,6 @@ export const PositionBox: FunctionComponent<PositionBoxProps> = ({
   index,
   register,
   watch,
-  yearDisable,
-  conversionDisable,
   setValue,
   append,
   remove,
@@ -48,6 +46,12 @@ export const PositionBox: FunctionComponent<PositionBoxProps> = ({
   const [certiSearchWord, setCertiSearchWord] = useState<string>("");
   const [bigPlace, setBigPlace] = useState<string>();
   const [smallPlace, setSmallPlace] = useState<string>();
+
+  const yearDisable =
+    watch("position_arr")[index].required_exp !== "경력" && watch("position_arr")[index].required_exp !== "신입/경력";
+
+  const conversionDisable =
+    watch("position_arr")[index].contract_type !== "인턴" && watch("position_arr")[index].contract_type !== "계약>정규";
 
   return (
     <li css={positionContainer}>

@@ -12,8 +12,6 @@ export interface PositionBoxProps {
   index: number;
   register: UseFormRegister<JobFormValues>;
   watch: UseFormWatch<JobFormValues>;
-  yearDisable: boolean;
-  conversionDisable: boolean;
   setValue: UseFormSetValue<JobFormValues>;
   append: UseFieldArrayAppend<JobFormValues, "position_arr">;
   remove: UseFieldArrayRemove;
