@@ -36,13 +36,6 @@ import {
 } from "./style";
 import { ButtonProps, LoginFormValues } from "./type";
 
-declare global {
-  interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    Kakao: any;
-  }
-}
-
 export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   const {
     register,
@@ -91,10 +84,6 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
 
   useEffect(() => {
     loginModalOpenEvent();
-    if (window.Kakao.isInitialized()) {
-      return;
-    }
-    window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
   }, []);
 
   return (
