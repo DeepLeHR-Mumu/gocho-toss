@@ -1,6 +1,8 @@
 import { NextPage } from "next";
 import { useEffect } from "react";
 
+// import { dehydrate, QueryClient } from "@tanstack/react-query";
+
 // import { specArrKeyObj } from "@constant/queryKeyFactory/spec/arrKeyObj";
 // import { companyCommentArrKeyObj } from "@constant/queryKeyFactory/company/commentArrKeyObj";
 // import { jobArrKeyObj } from "@constant/queryKeyFactory/job/jobArrKeyObj";
