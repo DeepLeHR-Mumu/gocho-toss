@@ -15,6 +15,9 @@
     "prepare": "husky install",
     "lint": "turbo run lint",
     "lint-fix": "eslint \"**/*.{ts,tsx}\" --ext .ts,.tsx --fix",
+    "web-dev": "cd apps/gocho_web && pnpm dev",
+    "mobile-dev": "cd apps/gocho_mobile && pnpm dev",
+    "manager-dev": "cd apps/gocho_manager && pnpm dev",
     "e2e": "pnpx playwright test --trace on",
     "e2e:report": "pnpx playwright show-report"
   },
