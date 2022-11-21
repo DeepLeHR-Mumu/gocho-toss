@@ -14,7 +14,7 @@
       "@util/*": ["src/util/*"],
       "@api/*": ["src/api/*"],
       "@recoil/*": ["src/recoil/*"],
-      "@hook/*": ["src/hook/*"]
+      "@hook/*": ["src/hook/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
