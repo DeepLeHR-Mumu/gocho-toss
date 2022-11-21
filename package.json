@@ -15,6 +15,12 @@
     "prepare": "husky install",
     "lint": "turbo run lint",
     "lint-fix": "eslint \"**/*.{ts,tsx}\" --ext .ts,.tsx --fix",
+    "dev-web": "cd apps/gocho_web && pnpm dev",
+    "build-web": "pnpm turbo build --scope=gocho_web --include-dependencies --no-deps",
+    "dev-mobile": "cd apps/gocho_mobile && pnpm dev",
+    "build-mobile": "pnpm turbo build --scope=gocho_mobile --include-dependencies --no-deps",
+    "dev-manager": "cd apps/gocho_manager && pnpm dev",
+    "build-manager": "pnpm turbo build --scope=gocho_manager --include-dependencies --no-deps",
     "e2e": "pnpx playwright test --trace on",
     "e2e:report": "pnpx playwright show-report"
   },
