@@ -31,8 +31,8 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
     site: "datadoghq.com",
     service: "gocho-web",
 
-    version: "0.0.1",
-    sampleRate: 30,
+    version: "0.0.2",
+    sampleRate: 20,
     sessionReplaySampleRate: 10,
     trackInteractions: true,
     trackResources: true,
