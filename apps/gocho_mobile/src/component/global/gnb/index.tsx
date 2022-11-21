@@ -36,11 +36,9 @@ import {
 export const GNB: FunctionComponent = () => {
   const [openedElement, setOpenedElement] = useState<openedElementDef>(null);
   const [query, setQuery] = useState("");
-
-  const router = useRouter();
-
   const { setCurrentToast } = useToast();
 
+  const router = useRouter();
   const { isSuccess } = useUserInfo();
 
   const handleParam = (typeKeyword: ChangeEvent<HTMLInputElement>) => {

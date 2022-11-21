@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
 
-import { CommentDislikeButton } from "shared-ui/common/atom/commentDislikeButton";
-import { CommentLikeButton } from "shared-ui/common/atom/commentLikeButton";
-import { UserBadge } from "shared-ui/common/atom/userBadge";
+import { CommentDislikeButton } from "../../../../common/atom/commentDislikeButton";
+import { CommentLikeButton } from "../../../../common/atom/commentLikeButton";
+import { UserBadge } from "../../../../common/atom/userBadge";
 
 import {
   container,

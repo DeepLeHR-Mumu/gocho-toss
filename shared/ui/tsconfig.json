@@ -4,9 +4,7 @@
     "types": ["@emotion/react/types/css-prop"],
     "jsxImportSource": "@emotion/react",
     "baseUrl": ".",
-    "paths": {
-      "shared-ui/*": ["*"]
-    }
+    "paths": {}
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

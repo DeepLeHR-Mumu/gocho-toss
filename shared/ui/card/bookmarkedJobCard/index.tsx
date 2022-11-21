@@ -2,14 +2,15 @@ import { FunctionComponent, useState } from "react";
 import Image from "next/image";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import Link from "next/link";
+import { useQueryClient } from "@tanstack/react-query";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 
-import { useQueryClient } from "@tanstack/react-query";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
-import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
+
+import { SkeletonBox } from "../../common/atom/skeletonBox";
+import { DdayBox } from "../../common/atom/dDayBox";
 import { BookmarkedJobCardSkeleton, BookmarkedJobCardProps } from "./type";
 import {
   jobCardSkeleton,
