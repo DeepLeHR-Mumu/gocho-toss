@@ -4,6 +4,10 @@ import Script from "next/script";
 import { FB_PIXEL_ID } from "shared-constant/fbPixelKey";
 
 export default function Document() {
+  const kakaoInitializer = () => {
+    window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
+  };
+
   return (
     <Html lang="ko">
       <Head>
@@ -32,7 +36,11 @@ export default function Document() {
         <link rel="icon" type="image/png" sizes="96x96" href="/icon/favicon-96x96.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png" />
         <link rel="manifest" href="/icon/manifest.json" />
-        <Script src="https://developers.kakao.com/sdk/js/kakao.js" strategy="beforeInteractive" />
+        <Script
+          src="https://developers.kakao.com/sdk/js/kakao.js"
+          strategy="beforeInteractive"
+          onLoad={kakaoInitializer}
+        />
         {process.env.NODE_ENV === "production" && (
           <noscript>
             {/* eslint-disable-next-line @next/next/no-img-element */}
