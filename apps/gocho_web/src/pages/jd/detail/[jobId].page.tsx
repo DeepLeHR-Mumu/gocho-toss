@@ -1,10 +1,12 @@
-import { NextPage } from "next";
+import { NextPage, GetStaticProps, GetStaticPropsContext } from "next";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { QueryClient, dehydrate } from "@tanstack/react-query";
 
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
-import { useJobDetail } from "shared-api/job";
+import { useJobDetail, getJobDetail } from "shared-api/job";
+import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { Layout } from "@component/layout";
 import { DetailComment } from "@component/global/detailComment";
@@ -69,7 +71,7 @@ const JobsDetail: NextPage = () => {
     if (jobDetailData) jdDetailFunnelEvent(jobDetailData.id);
   }, [jobDetailData]);
 
-  if (!jobDetailData || isLoading) {
+  if (!jobDetailData || isLoading || router.isFallback) {
     return (
       <main css={wrapper}>
         <Layout>
@@ -132,3 +134,24 @@ const JobsDetail: NextPage = () => {
 };
 
 export default JobsDetail;
+
+export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
+  const { params } = context;
+
+  const queryClient = new QueryClient();
+
+  if (params) await queryClient.prefetchQuery(jobDetailKeyObj.detail({ id: Number(params.jobId) }), getJobDetail);
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+};
+
+export const getStaticPaths = async () => {
+  return {
+    paths: [{ params: { jobId: "1" } }],
+    fallback: true,
+  };
+};

@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
 import { css } from "@emotion/react";
 
-import { DetailWorkPart } from "@pages/jd/detail/[jobId]/part/detailWorkPart";
+import { DetailWorkPart } from "@pages/jd/detail/part/detailWorkPart";
 
 export default {
   title: "공고/detail/part/DetailWorkPart",
