@@ -5,9 +5,10 @@ import { QueryClient, dehydrate } from "@tanstack/react-query";
 
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
-import { useJobDetail, getJobDetail } from "shared-api/job";
-import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
+import { getJobDetail, useJobDetail } from "shared-api/job";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
+import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
+
 import { Layout } from "@component/layout";
 import { DetailComment } from "@component/global/detailComment";
 import { useUserInfo } from "shared-api/auth";
@@ -137,9 +138,18 @@ export default JobsDetail;
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
   const { params } = context;
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: Infinity,
+      },
+    },
+  });
 
-  if (params) await queryClient.prefetchQuery(jobDetailKeyObj.detail({ id: Number(params.jobId) }), getJobDetail);
+  if (params) {
+    await queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: Number(params.jobId) }));
+    await queryClient.prefetchQuery(jobDetailKeyObj.detail({ id: Number(params.jobId) }), getJobDetail);
+  }
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
