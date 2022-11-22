@@ -1,3 +1,4 @@
+import { ChangeEvent, useState } from "react";
 import type { NextPage } from "next";
 import Image from "next/image";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
@@ -8,10 +9,9 @@ import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { useAddCompany } from "@api/company/useAddCompany";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 
-import { ChangeEvent, useState } from "react";
-import { checkMsgBox } from "@pages/jd/upload/style";
+import { FactoryBox } from "@pages/company/upload/component/factoryBox";
 import { CompanyFormValues } from "./type";
-import { industryArr, sizeArr, welfareArr } from "./constant";
+import { industryArr, sizeArr, welfareArr, blankFactory } from "./constant";
 
 import {
   formContainer,
@@ -29,14 +29,12 @@ import {
   welfareBox,
   welfareInputBox,
   inputLabel,
-  factoryContainer,
-  factoryTitle,
   booleanInputBox,
   checkboxText,
-  deleteFactoryButton,
   addFactoryButton,
   submitButton,
   welfareWrapper,
+  checkMsgBox,
 } from "./style";
 
 const CompanyUpload: NextPage = () => {
@@ -81,8 +79,6 @@ const CompanyUpload: NextPage = () => {
 
     if (logoPicture) {
       formData.append("img", logoPicture);
-    }
-    if (logoPicture) {
       mutate(
         { dto: blob, image: logoPicture },
         {
@@ -107,12 +103,7 @@ const CompanyUpload: NextPage = () => {
           <h3 css={sectionTitle}>일반 기업 정보</h3>
           <div css={inputContainer}>
             <strong css={inputTitle}>기업명 *</strong>
-            <input
-              css={inputBox}
-              {...register("name", {
-                required: true,
-              })}
-            />
+            <input css={inputBox} {...register("name", { required: true })} />
           </div>
           <div css={imageInput}>
             <strong css={inputTitle}>기업 로고</strong>
@@ -134,22 +125,11 @@ const CompanyUpload: NextPage = () => {
           </div>
           <div css={inputContainer}>
             <strong css={inputTitle}>사업자번호 *</strong>
-            <input
-              type="number"
-              css={inputBox}
-              {...register("business_number", {
-                required: true,
-              })}
-            />
+            <input type="number" css={inputBox} {...register("business_number", { required: true })} />
           </div>
           <div css={inputContainer}>
             <strong css={inputTitle}>업종 *</strong>
-            <select
-              css={selectBox}
-              {...register("industry", {
-                required: true,
-              })}
-            >
+            <select css={selectBox} {...register("industry", { required: true })}>
               <option value="">업종 선택 ▼</option>
               {industryArr.map((industry) => {
                 return (
@@ -162,12 +142,7 @@ const CompanyUpload: NextPage = () => {
           </div>
           <div css={inputContainer}>
             <strong css={inputTitle}>기업 형태 *</strong>
-            <select
-              css={selectBox}
-              {...register("size", {
-                required: true,
-              })}
-            >
+            <select css={selectBox} {...register("size", { required: true })}>
               <option value="">기업 규모 선택 ▼</option>
               {sizeArr.map((size) => {
                 return (
@@ -194,31 +169,15 @@ const CompanyUpload: NextPage = () => {
           </div>
           <div css={inputContainer}>
             <strong css={inputTitle}>사원수 *</strong>
-            <input
-              type="number"
-              css={inputBox}
-              {...register("employee_number", {
-                required: true,
-              })}
-            />
+            <input type="number" css={inputBox} {...register("employee_number", { required: true })} />
           </div>
           <div css={inputContainer}>
             <strong css={inputTitle}>한 줄 소개 *</strong>
-            <input
-              css={inputBox}
-              {...register("intro", {
-                required: true,
-              })}
-            />
+            <input css={inputBox} {...register("intro", { required: true })} />
           </div>
           <div css={inputContainer}>
             <strong css={inputTitle}>기업 주소 *</strong>
-            <input
-              css={inputBox}
-              {...register("address", {
-                required: true,
-              })}
-            />
+            <input css={inputBox} {...register("address", { required: true })} />
           </div>
           <div css={inputContainer}>
             <strong css={inputTitle}>노조 *</strong>
@@ -235,17 +194,11 @@ const CompanyUpload: NextPage = () => {
           </div>
           <div css={inputContainer}>
             <strong css={inputTitle}>캐치 URL *</strong>
-            <input
-              type="url"
-              css={inputBox}
-              {...register("catch_url", {
-                required: true,
-              })}
-            />
+            <input type="url" css={inputBox} {...register("catch_url", { required: true })} />
           </div>
           <div css={inputContainer}>
             <strong css={inputTitle}>유투브 URL</strong>
-            <input type="url" css={inputBox} {...register("youtube_url", {})} />
+            <input type="url" css={inputBox} {...register("youtube_url")} />
           </div>
         </section>
         <section css={sectionContainer}>
@@ -276,142 +229,28 @@ const CompanyUpload: NextPage = () => {
           <div css={inputContainer}>
             <div css={welfareBox}>
               <strong css={inputTitle}>평균 초봉 *</strong>
-              <input
-                type="number"
-                css={inputBox}
-                {...register("pay_start", {
-                  required: true,
-                })}
-              />
+              <input type="number" css={inputBox} {...register("pay_start", { required: true })} />
             </div>
             <div css={welfareBox}>
               <strong css={inputTitle}>평균 연봉 *</strong>
-              <input
-                type="number"
-                css={inputBox}
-                {...register("pay_avg", {
-                  required: true,
-                })}
-              />
+              <input type="number" css={inputBox} {...register("pay_avg", { required: true })} />
             </div>
           </div>
           <div css={inputContainer}>
             <strong css={inputTitle}>기타 연봉 정보</strong>
-            <input css={inputBox} {...register("pay_desc", {})} />
+            <input css={inputBox} {...register("pay_desc")} />
           </div>
         </section>
         <ul>
           {fields.map((item, index) => {
-            return (
-              <li css={factoryContainer} key={item.id}>
-                <h3 css={factoryTitle}>공장 정보</h3>
-                <div css={inputContainer}>
-                  <strong css={inputTitle}>공장 이름 *</strong>
-                  <input
-                    css={inputBox}
-                    {...register(`factories.${index}.factory_name`, {
-                      required: true,
-                    })}
-                  />
-                </div>
-                <div css={inputContainer}>
-                  <strong css={inputTitle}>공장 주소 *</strong>
-                  <input
-                    css={inputBox}
-                    {...register(`factories.${index}.address`, {
-                      required: true,
-                    })}
-                  />
-                </div>
-                <div css={inputContainer}>
-                  <div css={welfareBox}>
-                    <strong css={inputTitle}>남자 임직원 *</strong>
-                    <input
-                      type="number"
-                      css={inputBox}
-                      {...register(`factories.${index}.male_number`, {
-                        required: true,
-                      })}
-                    />
-                  </div>
-                  <div css={welfareBox}>
-                    <strong css={inputTitle}>여자 임직원 *</strong>
-                    <input
-                      type="number"
-                      css={inputBox}
-                      {...register(`factories.${index}.female_number`, {
-                        required: true,
-                      })}
-                    />
-                  </div>
-                </div>
-                <div css={inputContainer}>
-                  <strong css={inputTitle}>생산품 *</strong>
-                  <input
-                    css={inputBox}
-                    {...register(`factories.${index}.product`, {
-                      required: true,
-                    })}
-                  />
-                </div>
-                <div css={inputContainer}>
-                  <strong css={inputTitle}>통근버스 *</strong>
-                  <label css={inputLabel} htmlFor={`버스유무${index}`}>
-                    <input type="checkbox" id={`버스유무${index}`} {...register(`factories.${index}.bus_bool`, {})} />
-                    <CheckBox isChecked={watch("factories")[index].bus_bool} /> <p css={checkboxText}>있음</p>
-                    <CheckBox isChecked={!watch("factories")[index].bus_bool} /> <p css={checkboxText}>없음</p>
-                  </label>
-                  <input
-                    css={booleanInputBox(!watch("factories")[index].bus_bool)}
-                    disabled={!watch("factories")[index].bus_bool}
-                    {...register(`factories.${index}.bus_etc`, {})}
-                  />
-                </div>
-                <div css={inputContainer}>
-                  <strong css={inputTitle}>기숙사 *</strong>
-                  <label css={inputLabel} htmlFor={`기숙사유무${index}`}>
-                    <input
-                      type="checkbox"
-                      id={`기숙사유무${index}`}
-                      {...register(`factories.${index}.dormitory_bool`, {})}
-                    />
-                    <CheckBox isChecked={watch("factories")[index].dormitory_bool} /> <p css={checkboxText}>있음</p>
-                    <CheckBox isChecked={!watch("factories")[index].dormitory_bool} /> <p css={checkboxText}>없음</p>
-                  </label>
-                  <input
-                    css={booleanInputBox(!watch("factories")[index].dormitory_bool)}
-                    disabled={!watch("factories")[index].dormitory_bool}
-                    {...register(`factories.${index}.dormitory_etc`, {})}
-                  />
-                </div>
-                <button
-                  css={deleteFactoryButton}
-                  type="button"
-                  onClick={() => {
-                    return remove(index);
-                  }}
-                >
-                  공장 삭제
-                </button>
-              </li>
-            );
+            return <FactoryBox key={item.id} index={index} register={register} watch={watch} remove={remove} />;
           })}
         </ul>
         <button
           css={addFactoryButton}
           type="button"
           onClick={() => {
-            append({
-              factory_name: "",
-              address: "",
-              male_number: 0,
-              female_number: 0,
-              product: "",
-              bus_bool: false,
-              bus_etc: null,
-              dormitory_bool: false,
-              dormitory_etc: null,
-            });
+            append(blankFactory);
           }}
         >
           공장 추가
