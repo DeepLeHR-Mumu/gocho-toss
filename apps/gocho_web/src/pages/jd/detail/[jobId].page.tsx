@@ -1,4 +1,4 @@
-import { NextPage, GetStaticProps, GetStaticPropsContext } from "next";
+import { NextPage, GetStaticProps, GetStaticPropsContext, GetStaticPaths } from "next";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
@@ -137,11 +137,9 @@ export default JobsDetail;
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
   const { params } = context;
-
   const queryClient = new QueryClient();
 
   if (params) await queryClient.prefetchQuery(jobDetailKeyObj.detail({ id: Number(params.jobId) }), getJobDetail);
-
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
@@ -149,9 +147,9 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
   };
 };
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: [{ params: { jobId: "1" } }],
+    paths: [],
     fallback: true,
   };
 };
