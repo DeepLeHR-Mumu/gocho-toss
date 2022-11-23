@@ -6,7 +6,6 @@ import { loginTester } from "../../../common/common.spec";
 
 test.beforeEach(async ({ page }) => {
   await page.goto(linkObj.SPEC_LIST_URL);
-  // await page.waitForNavigation({ waitUntil: "load", timeout: 10000 });
 });
 
 const basicSpecRegisterTester = async (page: Page) => {
@@ -16,7 +15,6 @@ const basicSpecRegisterTester = async (page: Page) => {
     page.waitForNavigation(),
     await page.getByRole("link", { name: "스펙 등록하기" }).click(),
   ]);
-  // await page.waitForNavigation();
   const userData = await userCheckResponse.json();
   await expect(page.locator(`strong:has-text("${userData.data.nickname}")`)).toBeVisible();
 
@@ -183,7 +181,6 @@ test.describe("스펙등록 테스트", () => {
     await loginTester(page);
     // 기본 스펙 등록
     await basicSpecRegisterTester(page);
-
     // 어학 파트 경고창 확인
     await page.getByRole("button", { name: "상세 스펙 추가" }).click();
     await page.getByRole("button", { name: "어학 추가하기" }).click();
@@ -191,7 +188,6 @@ test.describe("스펙등록 테스트", () => {
     await expect(page.locator('p:has-text("언어를 선택해주세요.")')).toBeVisible();
     await expect(page.locator('p:has-text("시험명을 선택해주세요.")')).toBeVisible();
     await expect(page.locator('p:has-text("점수를 작성해주세요.")')).toBeVisible();
-
     // 어학 파트 작성
     await page.getByRole("button", { name: "시험명" }).click();
     await expect(page.locator('p:has-text("언어를 먼저 선택해주세요")')).toBeVisible();
