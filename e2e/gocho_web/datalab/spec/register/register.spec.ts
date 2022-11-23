@@ -5,7 +5,6 @@ import { BACKEND_URL } from "../../../../constant/externalURL";
 import { loginTester } from "../../../common/common.spec";
 
 test.beforeEach(async ({ page, baseURL }) => {
-  console.log(baseURL);
   await page.goto(`${baseURL}`);
   await page.getByRole("link", { name: "dataLab" }).click();
   await page.waitForNavigation({ waitUntil: "load", timeout: 1000 });
@@ -133,12 +132,12 @@ const specResponseCheckTester = async (isDeepRegister: boolean, response: Respon
 };
 
 test.describe("스펙등록 테스트", () => {
-  test("타이틀, heading 검사", async ({ page }) => {
-    await page.goto(linkObj.SPEC_REGISTER_URL);
-    await page.waitForNavigation();
-    await expect(page).toHaveTitle("내 스펙 등록하기 - 고초대졸닷컴");
-    await expect(page.locator("h1")).toHaveText("내 스펙 등록하기 - 고초대졸닷컴");
-  });
+  // test("타이틀, heading 검사", async ({ page }) => {
+  // await page.goto(linkObj.SPEC_REGISTER_URL);
+  // await page.waitForNavigation();
+  // await expect(page).toHaveTitle("내 스펙 등록하기 - 고초대졸닷컴");
+  // await expect(page.locator("h1")).toHaveText("내 스펙 등록하기 - 고초대졸닷컴");
+  // });
 
   test("비로그인 접속시 모달 확인", async ({ page }) => {
     await page.goto(linkObj.SPEC_REGISTER_URL);
