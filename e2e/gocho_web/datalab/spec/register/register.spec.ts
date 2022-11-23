@@ -13,9 +13,10 @@ const basicSpecRegisterTester = async (page: Page) => {
   // part1Basic
   const [userCheckResponse] = await Promise.all([
     page.waitForResponse((response) => response.url().includes("/auth/check") && response.status() === 200),
+    page.waitForNavigation(),
     await page.getByRole("link", { name: "스펙 등록하기" }).click(),
   ]);
-  await page.waitForNavigation();
+  // await page.waitForNavigation();
   const userData = await userCheckResponse.json();
   await expect(page.locator(`strong:has-text("${userData.data.nickname}")`)).toBeVisible();
 
@@ -132,15 +133,17 @@ const specResponseCheckTester = async (isDeepRegister: boolean, response: Respon
 
 test.describe("스펙등록 테스트", () => {
   test("타이틀, heading 검사", async ({ page }) => {
-    await page.goto(linkObj.SPEC_REGISTER_URL);
-    await page.waitForNavigation();
+    await page.goto(linkObj.SPEC_REGISTER_URL, {
+      waitUntil: "load",
+    });
     await expect(page).toHaveTitle("내 스펙 등록하기 - 고초대졸닷컴");
     await expect(page.locator("h1")).toHaveText("내 스펙 등록하기 - 고초대졸닷컴");
   });
 
   test("비로그인 접속시 모달 확인", async ({ page }) => {
-    await page.goto(linkObj.SPEC_REGISTER_URL);
-    await page.waitForNavigation();
+    await page.goto(linkObj.SPEC_REGISTER_URL, {
+      waitUntil: "load",
+    });
     const response = await page.waitForResponse(
       (response) => response.url().includes("/auth/check") && response.status() === 401
     );
