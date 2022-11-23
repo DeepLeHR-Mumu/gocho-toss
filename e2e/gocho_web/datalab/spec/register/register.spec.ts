@@ -7,7 +7,7 @@ import { loginTester } from "../../../common/common.spec";
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
   await page.getByRole("link", { name: "dataLab" }).click();
-  await page.waitForNavigation();
+  await page.waitForLoadState("domcontentloaded");
 });
 
 const basicSpecRegisterTester = async (page: Page) => {
