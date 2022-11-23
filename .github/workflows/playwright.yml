@@ -41,12 +41,10 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: latest
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
       - name: Install Playwright Browsers
         run: pnpx playwright install --with-deps
       - name: Run Playwright tests
-        run: pnpm turbo e2e:mobile && pnpm turbo e2e:web
+        run: cd .github/bash && ./playwright_check.sh e2e:web && ./playwright_check.sh e2e:mobile
         env:
           GOCHO_WEB_URL: ${{ needs.wait_url.outputs.desktop_url }}
           GOCHO_MOBILE_URL: ${{ needs.wait_url.outputs.mobile_url }}
