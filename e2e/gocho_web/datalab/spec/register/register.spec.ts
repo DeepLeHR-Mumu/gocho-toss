@@ -4,9 +4,9 @@ import { linkObj } from "../../../../constant/internalURL";
 import { BACKEND_URL } from "../../../../constant/externalURL";
 import { loginTester } from "../../../common/common.spec";
 
-test.beforeEach(async ({ page, baseURL }) => {
-  await page.goto(`${baseURL}`);
-  await page.getByRole("link", { name: "dataLab" }).click();
+test.beforeEach(async ({ page }) => {
+  await page.goto(linkObj.SPEC_LIST_URL);
+  // await page.getByRole("link", { name: "dataLab" }).click();
   await page.waitForNavigation({ waitUntil: "load", timeout: 10000 });
 });
 
@@ -132,32 +132,32 @@ const specResponseCheckTester = async (isDeepRegister: boolean, response: Respon
 };
 
 test.describe("스펙등록 테스트", () => {
-  // test("타이틀, heading 검사", async ({ page }) => {
-  // await page.goto(linkObj.SPEC_REGISTER_URL);
-  // await page.waitForNavigation();
-  // await expect(page).toHaveTitle("내 스펙 등록하기 - 고초대졸닷컴");
-  // await expect(page.locator("h1")).toHaveText("내 스펙 등록하기 - 고초대졸닷컴");
-  // });
+  test("타이틀, heading 검사", async ({ page }) => {
+    await page.goto(linkObj.SPEC_REGISTER_URL);
+    await page.waitForNavigation();
+    await expect(page).toHaveTitle("내 스펙 등록하기 - 고초대졸닷컴");
+    await expect(page.locator("h1")).toHaveText("내 스펙 등록하기 - 고초대졸닷컴");
+  });
 
-  // test("비로그인 접속시 모달 확인", async ({ page }) => {
-  //   await page.goto(linkObj.SPEC_REGISTER_URL);
-  //   await page.waitForNavigation();
-  //   const response = await page.waitForResponse(
-  //     (response) => response.url().includes("/auth/check") && response.status() === 401
-  //   );
-  //   expect(response.ok()).toBeFalsy();
-  //   await expect(page.locator('p:has-text("로그인이 필요한 서비스입니다.")')).toBeVisible();
-  // });
+  test("비로그인 접속시 모달 확인", async ({ page }) => {
+    await page.goto(linkObj.SPEC_REGISTER_URL);
+    await page.waitForNavigation();
+    const response = await page.waitForResponse(
+      (response) => response.url().includes("/auth/check") && response.status() === 401
+    );
+    expect(response.ok()).toBeFalsy();
+    await expect(page.locator('p:has-text("로그인이 필요한 서비스입니다.")')).toBeVisible();
+  });
 
-  // test("스펙작성중 페이지 이탈시 블로킹 모달 확인", async ({ page }) => {
-  //   test.slow();
-  //   await loginTester(page);
-  //   await basicSpecRegisterTester(page);
-  //   await page.getByRole("link", { name: "면접리뷰" }).click();
-  //   await expect(page.locator('strong:has-text("페이지를 나가시겠습니까?")')).toBeVisible();
-  //   await expect(page.locator('p:has-text("작성 중인 스펙이 초기화됩니다. 나가시겠습니까?")')).toBeVisible();
-  //   await page.locator('button:has-text("아니오")').click();
-  // });
+  test("스펙작성중 페이지 이탈시 블로킹 모달 확인", async ({ page }) => {
+    test.slow();
+    await loginTester(page);
+    await basicSpecRegisterTester(page);
+    await page.getByRole("link", { name: "면접리뷰" }).click();
+    await expect(page.locator('strong:has-text("페이지를 나가시겠습니까?")')).toBeVisible();
+    await expect(page.locator('p:has-text("작성 중인 스펙이 초기화됩니다. 나가시겠습니까?")')).toBeVisible();
+    await page.locator('button:has-text("아니오")').click();
+  });
 
   test("로그인 후 스펙 간단 등록 진행", async ({ page, request }) => {
     test.slow();
