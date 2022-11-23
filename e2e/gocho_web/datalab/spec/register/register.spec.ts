@@ -6,7 +6,6 @@ import { loginTester } from "../../../common/common.spec";
 
 test.beforeEach(async ({ page }) => {
   await page.goto(linkObj.SPEC_LIST_URL);
-  // await page.getByRole("link", { name: "dataLab" }).click();
   await page.waitForNavigation({ waitUntil: "load", timeout: 10000 });
 });
 
