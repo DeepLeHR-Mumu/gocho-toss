@@ -3,9 +3,9 @@ import { devices } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
   testDir: "./e2e",
-  timeout: 5000,
+  timeout: 60000,
   expect: {
-    timeout: 5000,
+    timeout: 10000,
   },
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
@@ -20,6 +20,7 @@ const config: PlaywrightTestConfig = {
       testDir: "./e2e/gocho_web",
       use: {
         baseURL: process.env.GOCHO_WEB_URL || "http://localhost:3000",
+        actionTimeout: 30000,
         ...devices["Desktop Chrome"],
       },
     },
@@ -39,6 +40,7 @@ const config: PlaywrightTestConfig = {
       testDir: "./e2e/gocho_mobile",
       use: {
         baseURL: process.env.GOCHO_MOBILE_URL || "http://localhost:3000",
+        actionTimeout: 30000,
         ...devices["Galaxy S9+"],
       },
     },
