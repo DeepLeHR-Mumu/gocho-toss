@@ -5,13 +5,16 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**"]
     },
-    "lint": {
-      "outputs": []
-    },
-    "test": {
-      "dependsOn": ["build"],
+    "//#e2e:web": {
       "outputs": [],
-      "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts", "test/**/*.tsx"]
+      "dependsOn": ["gocho_web#build"]
+    },
+    "//#e2e:mobile": {
+      "outputs": [],
+      "dependsOn": ["gocho_mobile#build"]
+    },
+    "//#e2e:manager": {
+      "dependsOn": ["gocho_manager#build"]
     }
   }
 }
