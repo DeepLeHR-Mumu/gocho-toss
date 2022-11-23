@@ -141,12 +141,13 @@ test.describe("스펙등록 테스트", () => {
   });
 
   test("비로그인 접속시 모달 확인", async ({ page }) => {
-    await page.goto(linkObj.SPEC_REGISTER_URL, {
-      waitUntil: "load",
-    });
-    const response = await page.waitForResponse(
-      (response) => response.url().includes("/auth/check") && response.status() === 401
-    );
+    const [response] = await Promise.all([
+      page.waitForResponse((response) => response.url().includes("/auth/check") && response.status() === 401),
+      page.goto(linkObj.SPEC_REGISTER_URL, {
+        waitUntil: "load",
+      }),
+    ]);
+
     expect(response.ok()).toBeFalsy();
     await expect(page.locator('p:has-text("로그인이 필요한 서비스입니다.")')).toBeVisible();
   });
