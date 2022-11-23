@@ -1,14 +1,12 @@
 import type { NextPage } from "next";
-import { mainContainer, pageTitle } from "@style/commonStyles";
-import Image from "next/image";
 
 import { useBannerArr } from "shared-api/banner/useBannerArr";
-import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-import { dateConverter } from "shared-util/date";
 
+import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
-import { bannerBox, bannerImgBox } from "./style";
+import { UploadBannerPart } from "./part/uploadBannerPart";
+import { BannerListPart } from "./part/bannerListPart";
 
 const AsideBanner: NextPage = () => {
   const { data: bannerDataArr, isLoading, isError } = useBannerArr({ type: "S" });
@@ -24,26 +22,9 @@ const AsideBanner: NextPage = () => {
   return (
     <main css={mainContainer}>
       <h2 css={pageTitle}>사이드 배너 업로드</h2>
-      <section>배너 업로드 영역</section>
+      <UploadBannerPart />
       <h2 css={pageTitle}>배너 리스트</h2>
-      <section>
-        {bannerDataArr.bannerDataArr.map((banner) => {
-          const { year: startYear, month: startMonth, date: startDate } = dateConverter(banner.startTime);
-          const { year: endYear, month: endMonth, date: endDate } = dateConverter(banner.endTime);
-
-          return (
-            <li key={banner.id} css={bannerBox}>
-              <div>{banner.id}</div>
-              <div css={bannerImgBox}>
-                <Image src={banner.imageUrl || defaultCompanyLogo} alt="" layout="fill" objectFit="contain" />
-              </div>
-              <div>
-                {startYear}-{startMonth}-{startDate} ~ {endYear}-{endMonth}-{endDate}
-              </div>
-            </li>
-          );
-        })}
-      </section>
+      <BannerListPart />
     </main>
   );
 };

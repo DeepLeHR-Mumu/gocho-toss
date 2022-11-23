@@ -1,7 +1,6 @@
 import { FunctionComponent } from "react";
-import { bannerId, companyName, expireDate, sectionContainer, title, titleBox } from "@pages/mainbanner/style";
-
 import { useBannerArr } from "shared-api/banner/useBannerArr";
+import { bannerId, companyName, expireDate, sectionContainer, title, titleBox } from "./style";
 
 import { BannerBox } from "../../component/bannerBox";
 
