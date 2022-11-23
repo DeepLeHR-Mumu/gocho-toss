@@ -6,15 +6,13 @@
       "outputs": [".next/**"]
     },
     "//#e2e:web": {
-      "outputs": [],
-      "dependsOn": ["gocho_web#build"]
+      "outputs": []
     },
     "//#e2e:mobile": {
-      "outputs": [],
-      "dependsOn": ["gocho_mobile#build"]
+      "outputs": []
     },
     "//#e2e:manager": {
-      "dependsOn": ["gocho_manager#build"]
+      "outputs": []
     }
   }
 }
