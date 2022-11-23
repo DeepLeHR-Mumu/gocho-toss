@@ -1,3 +1,6 @@
+// TODO: base interface 만들고 extends로 다른 두 interface 선언하기
+// TODO: undefined 없애고 null
+
 export interface JobFormValues {
   company_id: number;
   title: string;

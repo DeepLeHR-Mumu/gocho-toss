@@ -15,12 +15,12 @@ const CompanyList: NextPage = () => {
   const router = useRouter();
 
   const {
-    data: companyDataArr,
+    data: companyDataObj,
     isLoading,
     isError,
   } = useCompanyArr({ order: "recent", limit: COMPANY_LIMIT, offset: (Number(router.query.page) - 1) * COMPANY_LIMIT });
 
-  if (!companyDataArr || isLoading) {
+  if (!companyDataObj || isLoading) {
     return <LoadingScreen />;
   }
 
@@ -28,7 +28,7 @@ const CompanyList: NextPage = () => {
     return <ErrorScreen />;
   }
 
-  const totalPage = Math.ceil(companyDataArr.count / COMPANY_LIMIT);
+  const totalPage = Math.ceil(companyDataObj.count / COMPANY_LIMIT);
 
   return (
     <main css={mainContainer}>
@@ -36,7 +36,7 @@ const CompanyList: NextPage = () => {
       <section css={sectionContainer}>
         <table>
           <tbody css={tableContainer}>
-            {companyDataArr.companyDataArr.map((company) => {
+            {companyDataObj.companyDataArr.map((company) => {
               return <CompanyCard key={`ManagerCompanyCard${company.id}`} company={company} />;
             })}
           </tbody>

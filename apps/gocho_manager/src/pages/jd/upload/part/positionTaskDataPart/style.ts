@@ -12,16 +12,6 @@ export const inputTitle = css`
   margin-right: 1rem;
 `;
 
-export const searchBox = css`
-  width: 30%;
-  border-radius: 0.5rem;
-  border: 1px solid ${COLORS.GRAY70};
-  background-color: ${COLORS.GRAY100};
-  height: 2rem;
-  padding: 0.25rem 0.5rem;
-  margin-right: 1rem;
-`;
-
 export const selectBox = css`
   background-color: ${COLORS.GRAY100};
   border-radius: 0.5rem;
@@ -60,24 +50,6 @@ export const flexBox = css`
   display: flex;
 `;
 
-export const positionContainer = css`
-  margin: 1rem 0;
-  padding: 1rem;
-  border: 1px solid ${COLORS.GRAY10};
-  background-color: ${COLORS.BLUE_SECOND70};
-`;
-
-export const positionTitle = css`
-  font-size: 1.125rem;
-  margin-bottom: 1rem;
-`;
-
-export const inputLabel = css`
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-`;
-
 export const smallInputContainer = css`
   display: flex;
   align-items: center;
@@ -109,35 +81,5 @@ export const hireNumberButton = css`
   padding: 0.25rem 0.5rem;
   border: 2px solid ${COLORS.GRAY10};
   background-color: ${COLORS.BLUE_NEON40};
-  color: ${COLORS.GRAY100};
-`;
-
-export const buttonContainer = css`
-  display: flex;
-  gap: 0 0.5rem;
-  justify-content: flex-end;
-`;
-
-export const copyPositionButton = css`
-  padding: 0.25rem 1rem;
-  border: 2px solid ${COLORS.GRAY10};
-  background-color: ${COLORS.GRAY30};
-  color: ${COLORS.GRAY100};
-`;
-
-export const deletePositionButton = css`
-  padding: 0.25rem 1rem;
-  border: 2px solid ${COLORS.GRAY10};
-  background-color: #b32100;
-  color: ${COLORS.GRAY100};
-`;
-
-export const submitButton = css`
-  font-size: 1.75rem;
-  margin: 0 auto;
-  padding: 0.5rem 1rem;
-  width: 50%;
-  border: 2px solid ${COLORS.GRAY10};
-  background-color: ${COLORS.BLUE_FIRST40};
   color: ${COLORS.GRAY100};
 `;

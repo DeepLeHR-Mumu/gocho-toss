@@ -2,43 +2,22 @@ import { useState } from "react";
 import type { NextPage } from "next";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
-import { CheckBox } from "shared-ui/common/atom/checkbox";
-
 import { useFindCompany } from "@api/company/useFindCompany";
 import { useAddJob } from "@api/job/useAddJob";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
-import { PositionBox } from "./component/positionBox";
-import { DatetimeBox } from "./component/datetimeBox";
+import { CommonDataPart } from "./part/commonDataPart";
+import { PositionRequiredDataPart } from "./part/positionRequiredDataPart";
+import { PositionTaskDataPart } from "./part/positionTaskDataPart";
+import { PositionEtcDataPart } from "./part/positionEtcDataPart";
 import { JobFormValues, JobSubmitValues } from "./type";
-import {
-  formContainer,
-  sectionTitle,
-  inputContainer,
-  inputTitle,
-  searchBox,
-  searchCompanyButton,
-  selectBox,
-  inputBox,
-  textareaBox,
-  enterNotice,
-  flexBox,
-  inputLabel,
-  addPositionButton,
-  submitButton,
-  checkMsgBox,
-} from "./style";
+import { formContainer, positionContainer, addPositionButton, submitButton, checkMsgBox } from "./style";
 import { blankPosition } from "./constant";
 
 const JdUpload: NextPage = () => {
-  const [prevSearchWord, setPrevSearchWord] = useState<string>("");
   const [searchWord, setSearchWord] = useState<string>("");
-
   const [checkMsg, setCheckMsg] = useState<string>();
-
-  const { data: companyDataArr, isLoading, isError, error } = useFindCompany({ word: searchWord, order: "recent" });
-  const { mutate } = useAddJob();
 
   const { register, control, handleSubmit, watch, setValue } = useForm<JobFormValues>({
     defaultValues: {
@@ -51,15 +30,18 @@ const JdUpload: NextPage = () => {
     name: "position_arr",
   });
 
-  if (!companyDataArr || isLoading) {
+  const { data: companyDataObj, isLoading, isError } = useFindCompany({ word: searchWord, order: "recent" });
+  const { mutate: addJobMutate } = useAddJob();
+
+  if (!companyDataObj || isLoading) {
     return <LoadingScreen />;
   }
 
-  if (isError && error) {
+  if (isError) {
     return <ErrorScreen />;
   }
 
-  const jobSubmit: SubmitHandler<JobFormValues> = (jobObj) => {
+  const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
     const newJobObj: JobSubmitValues = {
       ...jobObj,
       process_arr: jobObj.process_arr?.split("\n"),
@@ -80,7 +62,7 @@ const JdUpload: NextPage = () => {
     const blob = new Blob([json], { type: "application/json" });
     formData.append("dto", blob);
 
-    mutate(
+    addJobMutate(
       { dto: formData },
       {
         onSuccess: () => {
@@ -98,97 +80,36 @@ const JdUpload: NextPage = () => {
     <main css={mainContainer}>
       <h2 css={pageTitle}>공고 업로드</h2>
       <section>
-        <form css={formContainer} onSubmit={handleSubmit(jobSubmit)}>
-          <h3 css={sectionTitle}>공통 공고 내용</h3>
-          <div css={inputContainer}>
-            <strong css={inputTitle}>기업 이름 *</strong>
-            <input
-              css={searchBox}
-              type="text"
-              onChange={(e) => {
-                setPrevSearchWord(e.target.value);
-              }}
-              // onBlur={(e) => {
-              //   console.log(e.target.value);
-              // }}
-            />
-            <button
-              css={searchCompanyButton}
-              type="button"
-              onClick={() => {
-                setSearchWord(prevSearchWord);
-              }}
-            >
-              검색
-            </button>
-            <select css={selectBox} {...register("company_id", { valueAsNumber: true, required: true })}>
-              <option value="">기업 선택 ▼</option>
-              {companyDataArr?.companyDataArr.map((company) => {
-                return (
-                  <option key={company.name} value={company.id}>
-                    {company.name}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-          <div css={inputContainer}>
-            <strong css={inputTitle}>공고 제목 *</strong>
-            <input css={inputBox} {...register("title", { required: true })} />
-          </div>
-          <div css={inputContainer}>
-            <strong css={inputTitle}>채용 기간 *</strong>
-            <div css={flexBox}>
-              <DatetimeBox register={register} valueName="start_time" />
-              <DatetimeBox register={register} valueName="end_time" />
-            </div>
-            <button
-              css={searchCompanyButton}
-              type="button"
-              onClick={() => {
-                setValue(`end_time`, "9999-12-31T23:59");
-              }}
-            >
-              상시공고
-            </button>
-            <label css={inputLabel} htmlFor="채용시마감">
-              <input type="checkbox" id="채용시마감" {...register("cut")} />
-              <CheckBox isChecked={watch("cut")} />
-              채용시 마감
-            </label>
-          </div>
-          <div css={inputContainer}>
-            <strong css={inputTitle}>채용 절차 *</strong>
-            <textarea css={textareaBox} {...register("process_arr", { required: true })} />
-            <p css={enterNotice}>엔터로 구분해주세요.</p>
-          </div>
-          <div css={inputContainer}>
-            <strong css={inputTitle}>지원 방법 *</strong>
-            <textarea css={textareaBox} {...register("apply_route_arr", { required: true })} />
-            <p css={enterNotice}>엔터로 구분해주세요.</p>
-          </div>
-          <div css={inputContainer}>
-            <strong css={inputTitle}>채용 링크 *</strong>
-            <input type="url" css={inputBox} {...register("apply_url", { required: true })} />
-          </div>
-          <div css={inputContainer}>
-            <strong css={inputTitle}>기타 사항</strong>
-            <textarea css={textareaBox} {...register("etc_arr")} />
-            <p css={enterNotice}>엔터로 구분해주세요.</p>
-          </div>
+        <form css={formContainer} onSubmit={handleSubmit(jobSubmitHandler)}>
+          <CommonDataPart
+            companyDataArr={companyDataObj.companyDataArr}
+            register={register}
+            watch={watch}
+            setValue={setValue}
+            setSearchWord={setSearchWord}
+          />
           <ul>
             {fields.map((item, index) => {
               return (
-                <PositionBox
-                  key={item.id}
-                  id={item.id}
-                  index={index}
-                  register={register}
-                  watch={watch}
-                  setValue={setValue}
-                  append={append}
-                  remove={remove}
-                />
+                <li css={positionContainer} key={item.id}>
+                  <PositionRequiredDataPart id={item.id} index={index} register={register} watch={watch} />
+                  <PositionTaskDataPart
+                    id={item.id}
+                    index={index}
+                    register={register}
+                    watch={watch}
+                    setValue={setValue}
+                  />
+                  <PositionEtcDataPart
+                    id={item.id}
+                    index={index}
+                    register={register}
+                    watch={watch}
+                    setValue={setValue}
+                    append={append}
+                    remove={remove}
+                  />
+                </li>
               );
             })}
           </ul>
