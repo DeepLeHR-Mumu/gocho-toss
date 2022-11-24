@@ -16,12 +16,13 @@ import {
 import { contractTypeArr, placeArr, placeTypeArr, rotationArr, taskArr } from "./constant";
 import { PositionBoxProps } from "./type";
 
-export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, index, register, watch, setValue }) => {
+export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, index, jobForm }) => {
   const [bigPlace, setBigPlace] = useState<string>();
   const [smallPlace, setSmallPlace] = useState<string>();
 
   const isConversionDisabled =
-    watch("position_arr")[index].contract_type !== "인턴" && watch("position_arr")[index].contract_type !== "계약>정규";
+    jobForm.watch("position_arr")[index].contract_type !== "인턴" &&
+    jobForm.watch("position_arr")[index].contract_type !== "계약>정규";
 
   return (
     <>
@@ -31,11 +32,11 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
           return (
             <CheckLabel
               key={`${contractName}${id}`}
-              register={register}
+              register={jobForm.register}
               index={index}
               field="contract_type"
               value={contractName}
-              watch={watch("position_arr")[index].contract_type}
+              watch={jobForm.watch("position_arr")[index].contract_type}
             />
           );
         })}
@@ -44,14 +45,14 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
           <input
             type="number"
             css={smallInputBox(isConversionDisabled)}
-            {...register(`position_arr.${index}.conversion_rate`)}
+            {...jobForm.register(`position_arr.${index}.conversion_rate`)}
             disabled={isConversionDisabled}
           />
         </div>
       </div>
       <div css={inputContainer}>
         <strong css={inputTitle}>채용 직무 *</strong>
-        <select css={selectBox} {...register(`position_arr.${index}.task_main`, { required: true })}>
+        <select css={selectBox} {...jobForm.register(`position_arr.${index}.task_main`, { required: true })}>
           <option value="">1차직무 선택 ▼</option>
           {taskArr.map((task) => {
             return (
@@ -61,12 +62,16 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
             );
           })}
         </select>
-        <select css={selectBox} multiple {...register(`position_arr.${index}.task_sub_arr`, { required: true })}>
+        <select
+          css={selectBox}
+          multiple
+          {...jobForm.register(`position_arr.${index}.task_sub_arr`, { required: true })}
+        >
           <option value="" disabled>
             2차직무 선택 ▼
           </option>
           {taskArr.map((task) => {
-            const isMainTask = watch("position_arr")[index].task_main === task.mainTask;
+            const isMainTask = jobForm.watch("position_arr")[index].task_main === task.mainTask;
             if (isMainTask)
               return task.subTaskArr.map((subTask) => {
                 return (
@@ -85,12 +90,15 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
       </div>
       <div css={inputContainer}>
         <strong css={inputTitle}>세부 직무 내용 *</strong>
-        <textarea css={textareaBox} {...register(`position_arr.${index}.task_detail_arr`, { required: true })} />
+        <textarea
+          css={textareaBox}
+          {...jobForm.register(`position_arr.${index}.task_detail_arr`, { required: true })}
+        />
         <p css={enterNotice}>엔터로 구분해주세요.</p>
       </div>
       <div css={inputContainer}>
         <strong css={inputTitle}>교대 형태</strong>
-        <select css={selectBox} multiple {...register(`position_arr.${index}.rotation_arr`)}>
+        <select css={selectBox} multiple {...jobForm.register(`position_arr.${index}.rotation_arr`)}>
           <option value="" disabled>
             교대형태 선택 ▼
           </option>
@@ -109,11 +117,11 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
       </div>
       <div css={inputContainer}>
         <strong css={inputTitle}>기타 교대 형태</strong>
-        <input css={inputBox} {...register(`position_arr.${index}.rotation_etc`)} />
+        <input css={inputBox} {...jobForm.register(`position_arr.${index}.rotation_etc`)} />
       </div>
       <div css={inputContainer}>
         <strong css={inputTitle}>근무지 종류 *</strong>
-        <select css={selectBox} {...register(`position_arr.${index}.place.type`, { required: true })}>
+        <select css={selectBox} {...jobForm.register(`position_arr.${index}.place.type`, { required: true })}>
           <option value="" disabled>
             근무지 종류 선택 ▼
           </option>
@@ -153,8 +161,8 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
           type="button"
           css={hireNumberButton}
           onClick={() => {
-            setValue(`position_arr.${index}.place.address_arr`, [
-              ...watch("position_arr")[index].place.address_arr,
+            jobForm.setValue(`position_arr.${index}.place.address_arr`, [
+              ...jobForm.watch("position_arr")[index].place.address_arr,
               `${bigPlace} ${smallPlace}`,
             ]);
           }}
@@ -163,7 +171,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
         </button>
       </div>
       <div css={flexBox}>
-        {watch("position_arr")[index].place.address_arr.map((place) => {
+        {jobForm.watch("position_arr")[index].place.address_arr.map((place) => {
           return (
             <div key={`${id}${place}`} css={inputContainer}>
               {place}
@@ -171,8 +179,8 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                 type="button"
                 css={deletePlaceButton}
                 onClick={() => {
-                  setValue(`position_arr.${index}.place.address_arr`, [
-                    ...watch("position_arr")[index].place.address_arr.filter((element) => {
+                  jobForm.setValue(`position_arr.${index}.place.address_arr`, [
+                    ...jobForm.watch("position_arr")[index].place.address_arr.filter((element) => {
                       return element !== place;
                     }),
                   ]);
@@ -186,7 +194,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
       </div>
       <div css={inputContainer}>
         <strong css={inputTitle}>기타 근무지</strong>
-        <input css={inputBox} {...register(`position_arr.${index}.place.etc`)} />
+        <input css={inputBox} {...jobForm.register(`position_arr.${index}.place.etc`)} />
         <p css={enterNotice}>전국/해외/기타일 경우 입력</p>
       </div>
     </>

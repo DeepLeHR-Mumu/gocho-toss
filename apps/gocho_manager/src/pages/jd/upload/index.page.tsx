@@ -19,13 +19,12 @@ const JdUpload: NextPage = () => {
   const [searchWord, setSearchWord] = useState<string>("");
   const [checkMsg, setCheckMsg] = useState<string>();
 
-  const asdf = useForm<JobFormValues>({
+  const jobForm = useForm<JobFormValues>({
     defaultValues: {
       position_arr: [blankPosition],
     },
   });
-  // TODO : 바꾸기
-  const { register, control, handleSubmit, watch, setValue } = asdf;
+  const { register, control, handleSubmit, watch, setValue } = jobForm;
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -94,23 +93,9 @@ const JdUpload: NextPage = () => {
             {fields.map((item, index) => {
               return (
                 <li css={positionContainer} key={item.id}>
-                  <PositionRequiredDataPart id={item.id} index={index} register={register} watch={watch} />
-                  <PositionTaskDataPart
-                    id={item.id}
-                    index={index}
-                    register={register}
-                    watch={watch}
-                    setValue={setValue}
-                  />
-                  <PositionEtcDataPart
-                    id={item.id}
-                    index={index}
-                    register={register}
-                    watch={watch}
-                    setValue={setValue}
-                    append={append}
-                    remove={remove}
-                  />
+                  <PositionRequiredDataPart id={item.id} index={index} jobForm={jobForm} />
+                  <PositionTaskDataPart id={item.id} index={index} jobForm={jobForm} />
+                  <PositionEtcDataPart id={item.id} index={index} jobForm={jobForm} append={append} remove={remove} />
                 </li>
               );
             })}

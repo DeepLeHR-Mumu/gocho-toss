@@ -16,9 +16,10 @@ import {
 import { requiredExpArr } from "./constant";
 import { PositionBoxProps } from "./type";
 
-export const PositionRequiredDataPart: FunctionComponent<PositionBoxProps> = ({ id, index, register, watch }) => {
+export const PositionRequiredDataPart: FunctionComponent<PositionBoxProps> = ({ id, index, jobForm }) => {
   const isDisabled =
-    watch("position_arr")[index].required_exp !== "경력" && watch("position_arr")[index].required_exp !== "신입/경력";
+    jobForm.watch("position_arr")[index].required_exp !== "경력" &&
+    jobForm.watch("position_arr")[index].required_exp !== "신입/경력";
 
   return (
     <>
@@ -26,23 +27,23 @@ export const PositionRequiredDataPart: FunctionComponent<PositionBoxProps> = ({ 
       <div css={inputContainer}>
         <strong css={inputTitle}>학력 조건 *</strong>
         <label css={inputLabel} htmlFor={`middle${index}`}>
-          <input type="checkbox" id={`middle${index}`} {...register(`position_arr.${index}.middle`)} />
-          <CheckBox isChecked={watch("position_arr")[index].middle} />
+          <input type="checkbox" id={`middle${index}`} {...jobForm.register(`position_arr.${index}.middle`)} />
+          <CheckBox isChecked={jobForm.watch("position_arr")[index].middle} />
           중졸
         </label>
         <label css={inputLabel} htmlFor={`high${index}`}>
-          <input type="checkbox" id={`high${index}`} {...register(`position_arr.${index}.high`)} />
-          <CheckBox isChecked={watch("position_arr")[index].high} />
+          <input type="checkbox" id={`high${index}`} {...jobForm.register(`position_arr.${index}.high`)} />
+          <CheckBox isChecked={jobForm.watch("position_arr")[index].high} />
           고졸
         </label>
         <label css={inputLabel} htmlFor={`college${index}`}>
-          <input type="checkbox" id={`college${index}`} {...register(`position_arr.${index}.college`)} />
-          <CheckBox isChecked={watch("position_arr")[index].college} />
+          <input type="checkbox" id={`college${index}`} {...jobForm.register(`position_arr.${index}.college`)} />
+          <CheckBox isChecked={jobForm.watch("position_arr")[index].college} />
           초대졸
         </label>
         <label css={inputLabel} htmlFor={`four${index}`}>
-          <input type="checkbox" id={`four${index}`} {...register(`position_arr.${index}.four`)} />
-          <CheckBox isChecked={watch("position_arr")[index].four} />
+          <input type="checkbox" id={`four${index}`} {...jobForm.register(`position_arr.${index}.four`)} />
+          <CheckBox isChecked={jobForm.watch("position_arr")[index].four} />
           4년제
         </label>
       </div>
@@ -52,11 +53,11 @@ export const PositionRequiredDataPart: FunctionComponent<PositionBoxProps> = ({ 
           return (
             <CheckLabel
               key={`${expName}${id}`}
-              register={register}
+              register={jobForm.register}
               index={index}
               field="required_exp"
               value={expName}
-              watch={watch("position_arr")[index].required_exp}
+              watch={jobForm.watch("position_arr")[index].required_exp}
             />
           );
         })}
@@ -65,14 +66,14 @@ export const PositionRequiredDataPart: FunctionComponent<PositionBoxProps> = ({ 
           <input
             type="number"
             css={smallInputBox(isDisabled)}
-            {...register(`position_arr.${index}.min_year`, { valueAsNumber: true })}
+            {...jobForm.register(`position_arr.${index}.min_year`, { valueAsNumber: true })}
             disabled={isDisabled}
           />
           년 이상
           <input
             type="number"
             css={smallInputBox(isDisabled)}
-            {...register(`position_arr.${index}.max_year`, { valueAsNumber: true })}
+            {...jobForm.register(`position_arr.${index}.max_year`, { valueAsNumber: true })}
             disabled={isDisabled}
           />
           년 이하
@@ -80,7 +81,7 @@ export const PositionRequiredDataPart: FunctionComponent<PositionBoxProps> = ({ 
       </div>
       <div css={inputContainer}>
         <strong css={inputTitle}>기타 조건</strong>
-        <textarea css={textareaBox} {...register(`position_arr.${index}.required_etc_arr`)} />
+        <textarea css={textareaBox} {...jobForm.register(`position_arr.${index}.required_etc_arr`)} />
         <p css={enterNotice}>엔터로 구분해주세요.</p>
       </div>
     </>
