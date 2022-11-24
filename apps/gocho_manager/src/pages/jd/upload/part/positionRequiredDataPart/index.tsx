@@ -17,7 +17,7 @@ import { requiredExpArr } from "./constant";
 import { PositionBoxProps } from "./type";
 
 export const PositionRequiredDataPart: FunctionComponent<PositionBoxProps> = ({ id, index, register, watch }) => {
-  const yearDisable =
+  const isDisabled =
     watch("position_arr")[index].required_exp !== "경력" && watch("position_arr")[index].required_exp !== "신입/경력";
 
   return (
@@ -64,16 +64,16 @@ export const PositionRequiredDataPart: FunctionComponent<PositionBoxProps> = ({ 
           <strong css={inputTitle}>경력 기간</strong>
           <input
             type="number"
-            css={smallInputBox(yearDisable)}
+            css={smallInputBox(isDisabled)}
             {...register(`position_arr.${index}.min_year`, { valueAsNumber: true })}
-            disabled={yearDisable}
+            disabled={isDisabled}
           />
           년 이상
           <input
             type="number"
-            css={smallInputBox(yearDisable)}
+            css={smallInputBox(isDisabled)}
             {...register(`position_arr.${index}.max_year`, { valueAsNumber: true })}
-            disabled={yearDisable}
+            disabled={isDisabled}
           />
           년 이하
         </div>

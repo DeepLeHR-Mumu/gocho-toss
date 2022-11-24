@@ -19,11 +19,13 @@ const JdUpload: NextPage = () => {
   const [searchWord, setSearchWord] = useState<string>("");
   const [checkMsg, setCheckMsg] = useState<string>();
 
-  const { register, control, handleSubmit, watch, setValue } = useForm<JobFormValues>({
+  const asdf = useForm<JobFormValues>({
     defaultValues: {
       position_arr: [blankPosition],
     },
   });
+  // TODO : 바꾸기
+  const { register, control, handleSubmit, watch, setValue } = asdf;
 
   const { fields, append, remove } = useFieldArray({
     control,

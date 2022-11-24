@@ -20,7 +20,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
   const [bigPlace, setBigPlace] = useState<string>();
   const [smallPlace, setSmallPlace] = useState<string>();
 
-  const conversionDisable =
+  const isConversionDisabled =
     watch("position_arr")[index].contract_type !== "인턴" && watch("position_arr")[index].contract_type !== "계약>정규";
 
   return (
@@ -43,9 +43,9 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
           <strong css={inputTitle}>전환율</strong>
           <input
             type="number"
-            css={smallInputBox(conversionDisable)}
+            css={smallInputBox(isConversionDisabled)}
             {...register(`position_arr.${index}.conversion_rate`)}
-            disabled={conversionDisable}
+            disabled={isConversionDisabled}
           />
         </div>
       </div>
