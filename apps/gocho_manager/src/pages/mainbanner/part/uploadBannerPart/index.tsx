@@ -1,5 +1,4 @@
 import { ChangeEvent, FunctionComponent, useState } from "react";
-import { ChromePicker } from "react-color";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
@@ -14,6 +13,8 @@ import {
   inputContainer,
   inputTitle,
   sectionContainer,
+  colorPickerButton,
+  colorPicker,
   submitBannerButton,
 } from "./style";
 import { BannerFormValues } from "./type";
@@ -21,7 +22,6 @@ import { BannerFormValues } from "./type";
 export const UploadBannerPart: FunctionComponent = () => {
   const queryClient = useQueryClient();
 
-  const [color, setColor] = useState<string>("");
   const [imageSrc, setImageSrc] = useState<string>();
   const [bannerPicture, setBannerPicture] = useState<File>();
 
@@ -99,6 +99,17 @@ export const UploadBannerPart: FunctionComponent = () => {
               },
             })}
           />
+          <label css={colorPickerButton} htmlFor="topBannerColor">
+            색 선택
+            <input
+              css={colorPicker}
+              type="color"
+              id="topBannerColor"
+              onChange={(e) => {
+                setValue("color", e.target.value);
+              }}
+            />
+          </label>
         </div>
         <div css={inputContainer}>
           <div css={imageInput}>
@@ -119,13 +130,7 @@ export const UploadBannerPart: FunctionComponent = () => {
             )}
           </div>
         </div>
-        <ChromePicker
-          color={color}
-          onChange={(colorChange) => {
-            setColor(colorChange.hex);
-            setValue("color", colorChange.hex);
-          }}
-        />
+
         <button css={submitBannerButton} type="submit">
           배너 제출
         </button>

@@ -1,6 +1,5 @@
 import { FunctionComponent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ChromePicker } from "react-color";
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -15,6 +14,7 @@ import {
   cardPadding,
   cardWrapper,
   colorLine,
+  colorPicker,
   companyLogoBox,
   companyLogoWrapper,
   companyName,
@@ -102,15 +102,20 @@ export const UploadBannerPart: FunctionComponent = () => {
               },
             })}
           />
+          <label css={getJobButton} htmlFor="topBannerColor">
+            색 선택
+            <input
+              css={colorPicker}
+              type="color"
+              id="topBannerColor"
+              onChange={(e) => {
+                setColor(e.target.value);
+                setValue("color", e.target.value);
+              }}
+            />
+          </label>
         </div>
         <div css={inputContainer}>
-          <ChromePicker
-            color={color}
-            onChange={(colorChange) => {
-              setColor(colorChange.hex);
-              setValue("color", colorChange.hex);
-            }}
-          />
           <div css={cardPadding}>
             <div css={cardWrapper}>
               <div css={cardContainer}>
