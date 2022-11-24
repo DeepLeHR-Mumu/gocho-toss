@@ -45,7 +45,7 @@ jobs:
       - name: Install Playwright Browsers
         run: pnpx playwright install --with-deps
       - name: Run Playwright tests
-        run: cd .github/bash && ./playwright_check.sh e2e:mobile
+        run: sh .github/bash/playwright_check.sh e2e:mobile
         env:
           GOCHO_WEB_URL: ${{ needs.wait_url.outputs.desktop_url }}
           GOCHO_MOBILE_URL: ${{ needs.wait_url.outputs.mobile_url }}
