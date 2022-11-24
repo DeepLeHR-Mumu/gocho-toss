@@ -214,7 +214,7 @@ test.describe("스펙등록 테스트", () => {
     // 상세 스펙 등록 후 데이터 검수
     const registerResponse = await Promise.all([
       page.waitForResponse((response) => response.url().includes("/specs") && response.status() === 201),
-      await page.getByRole("button", { name: "완료" }).click(),
+      page.getByRole("button", { name: "완료" }).click(),
     ]);
 
     await specResponseCheckTester(true, registerResponse[0], request);
