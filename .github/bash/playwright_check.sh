@@ -1,6 +1,7 @@
 #!/bin/bash
 
-if pnpm list | grep "turbo";
+if pnpm list | grep "turbo"
+    then :
     else pnpm add turbo && pnpm list | grep "turbo";
 fi
 
