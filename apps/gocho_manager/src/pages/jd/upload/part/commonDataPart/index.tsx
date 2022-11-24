@@ -66,7 +66,6 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({
           type="button"
           onClick={() => {
             setValue(`end_time`, "9999-12-31T23:59");
-            // TODO: 주는 value 값을 string -> number로 바꿔서 주기
           }}
         >
           상시공고

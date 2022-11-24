@@ -51,10 +51,10 @@ const JdUpload: NextPage = () => {
       position_arr: jobObj.position_arr.map((position) => {
         return {
           ...position,
-          required_etc_arr: position.required_etc_arr?.split("\n"),
+          required_etc_arr: position.required_etc_arr?.split("\n") || null,
           task_detail_arr: position.task_detail_arr?.split("\n"),
           pay_arr: position.pay_arr?.split("\n"),
-          preferred_etc_arr: position.preferred_etc_arr?.split("\n"),
+          preferred_etc_arr: position.preferred_etc_arr?.split("\n") || null,
         };
       }),
     };
