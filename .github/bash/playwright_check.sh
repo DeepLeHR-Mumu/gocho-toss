@@ -1,6 +1,11 @@
 #!/bin/bash
 
+if pnpm list | grep "turbo";
+    then ;
+    else pnpm add turbo && pnpm list | grep "turbo";
+fi
+
 if pnpm list | grep "playwright";
-    then cd ../.. && pnpm turbo $1;
-    else cd ../.. &&  pnpm add @playwright/test@1.28.0 && pnpm turbo $1;
+    then pnpm turbo $1;
+    else pnpm add @playwright/test@1.28.0 && pnpm turbo $1;
 fi
