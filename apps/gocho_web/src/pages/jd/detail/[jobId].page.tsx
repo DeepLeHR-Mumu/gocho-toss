@@ -138,22 +138,15 @@ export default JobsDetail;
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
   const { params } = context;
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: Infinity,
-      },
-    },
-  });
+  const queryClient = new QueryClient();
 
-  if (params) {
-    await queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: Number(params.jobId) }));
-    await queryClient.prefetchQuery(jobDetailKeyObj.detail({ id: Number(params.jobId) }), getJobDetail);
-  }
+  if (params) await queryClient.prefetchQuery(jobDetailKeyObj.detail({ id: Number(params.jobId) }), getJobDetail);
+
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
     },
+    revalidate: 600,
   };
 };
 
