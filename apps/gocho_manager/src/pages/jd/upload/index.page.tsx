@@ -19,11 +19,12 @@ const JdUpload: NextPage = () => {
   const [searchWord, setSearchWord] = useState<string>("");
   const [checkMsg, setCheckMsg] = useState<string>();
 
-  const { register, control, handleSubmit, watch, setValue } = useForm<JobFormValues>({
+  const jobForm = useForm<JobFormValues>({
     defaultValues: {
       position_arr: [blankPosition],
     },
   });
+  const { register, control, handleSubmit, watch, setValue } = jobForm;
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -50,10 +51,10 @@ const JdUpload: NextPage = () => {
       position_arr: jobObj.position_arr.map((position) => {
         return {
           ...position,
-          required_etc_arr: position.required_etc_arr?.split("\n"),
+          required_etc_arr: position.required_etc_arr?.split("\n") || null,
           task_detail_arr: position.task_detail_arr?.split("\n"),
           pay_arr: position.pay_arr?.split("\n"),
-          preferred_etc_arr: position.preferred_etc_arr?.split("\n"),
+          preferred_etc_arr: position.preferred_etc_arr?.split("\n") || null,
         };
       }),
     };
@@ -92,23 +93,9 @@ const JdUpload: NextPage = () => {
             {fields.map((item, index) => {
               return (
                 <li css={positionContainer} key={item.id}>
-                  <PositionRequiredDataPart id={item.id} index={index} register={register} watch={watch} />
-                  <PositionTaskDataPart
-                    id={item.id}
-                    index={index}
-                    register={register}
-                    watch={watch}
-                    setValue={setValue}
-                  />
-                  <PositionEtcDataPart
-                    id={item.id}
-                    index={index}
-                    register={register}
-                    watch={watch}
-                    setValue={setValue}
-                    append={append}
-                    remove={remove}
-                  />
+                  <PositionRequiredDataPart id={item.id} index={index} jobForm={jobForm} />
+                  <PositionTaskDataPart id={item.id} index={index} jobForm={jobForm} />
+                  <PositionEtcDataPart id={item.id} index={index} jobForm={jobForm} append={append} remove={remove} />
                 </li>
               );
             })}

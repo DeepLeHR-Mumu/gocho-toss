@@ -18,15 +18,7 @@ import {
 import { certificateArr } from "./constant";
 import { PositionBoxProps } from "./type";
 
-export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({
-  id,
-  index,
-  register,
-  watch,
-  setValue,
-  append,
-  remove,
-}) => {
+export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, index, jobForm, append, remove }) => {
   const [certiSearchWord, setCertiSearchWord] = useState<string>("");
 
   return (
@@ -37,7 +29,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({
           type="button"
           css={hireNumberButton}
           onClick={() => {
-            setValue(`position_arr.${index}.hire_number`, -1);
+            jobForm.setValue(`position_arr.${index}.hire_number`, -1);
           }}
         >
           0명 채용
@@ -46,7 +38,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({
           type="button"
           css={hireNumberButton}
           onClick={() => {
-            setValue(`position_arr.${index}.hire_number`, -2);
+            jobForm.setValue(`position_arr.${index}.hire_number`, -2);
           }}
         >
           00명 채용
@@ -55,7 +47,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({
           type="button"
           css={hireNumberButton}
           onClick={() => {
-            setValue(`position_arr.${index}.hire_number`, -3);
+            jobForm.setValue(`position_arr.${index}.hire_number`, -3);
           }}
         >
           000명 채용
@@ -63,12 +55,12 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({
         <input
           type="number"
           css={smallInputBox(false)}
-          {...register(`position_arr.${index}.hire_number`, { valueAsNumber: true, required: true })}
+          {...jobForm.register(`position_arr.${index}.hire_number`, { valueAsNumber: true, required: true })}
         />
       </div>
       <div css={inputContainer}>
         <strong css={inputTitle}>급여 *</strong>
-        <textarea css={textareaBox} {...register(`position_arr.${index}.pay_arr`, { required: true })} />
+        <textarea css={textareaBox} {...jobForm.register(`position_arr.${index}.pay_arr`, { required: true })} />
         <p css={enterNotice}>엔터로 구분해주세요.</p>
       </div>
       <div css={inputContainer}>
@@ -84,8 +76,8 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({
           value=""
           css={selectBox}
           onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-            setValue(`position_arr.${index}.preferred_certi_arr`, [
-              ...watch("position_arr")[index].preferred_certi_arr,
+            jobForm.setValue(`position_arr.${index}.preferred_certi_arr`, [
+              ...jobForm.watch("position_arr")[index].preferred_certi_arr,
               e.target.value,
             ]);
             setCertiSearchWord("");
@@ -108,7 +100,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({
         </select>
       </div>
       <div css={flexBox}>
-        {watch("position_arr")[index].preferred_certi_arr.map((certi) => {
+        {jobForm.watch("position_arr")[index].preferred_certi_arr.map((certi) => {
           return (
             <div key={`${id}${certi}`} css={inputContainer}>
               {certi}
@@ -116,8 +108,8 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({
                 type="button"
                 css={deletePlaceButton}
                 onClick={() => {
-                  setValue(`position_arr.${index}.preferred_certi_arr`, [
-                    ...watch("position_arr")[index].preferred_certi_arr.filter((element) => {
+                  jobForm.setValue(`position_arr.${index}.preferred_certi_arr`, [
+                    ...jobForm.watch("position_arr")[index].preferred_certi_arr.filter((element) => {
                       return element !== certi;
                     }),
                   ]);
@@ -131,7 +123,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({
       </div>
       <div css={inputContainer}>
         <strong css={inputTitle}>기타 우대 사항</strong>
-        <textarea css={textareaBox} {...register(`position_arr.${index}.preferred_etc_arr`)} />
+        <textarea css={textareaBox} {...jobForm.register(`position_arr.${index}.preferred_etc_arr`)} />
         <p css={enterNotice}>엔터로 구분해주세요.</p>
       </div>
 
@@ -140,7 +132,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({
           type="button"
           css={copyPositionButton}
           onClick={() => {
-            return append({ ...watch("position_arr")[index] });
+            return append({ ...jobForm.watch("position_arr")[index] });
           }}
         >
           해당 직무 복사
