@@ -1,6 +1,7 @@
 import { ResponseDef } from "shared-type/api/responseType";
 import { AxiosError } from "axios";
-import { UseQueryResult } from "@tanstack/react-query";
+import { UseQueryResult, QueryFunctionContext } from "@tanstack/react-query";
+import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { CompanyObjDef } from "../type/company";
 
 export interface WelfareProps {
@@ -72,7 +73,10 @@ export interface UseCompanyDetailResultDef {
 }
 
 export interface GetCompanyDetailDef {
-  ({ companyId }: RequestObjDef): Promise<CompanyDetailResponseDef>;
+  // ({ queryKey }: RequestObjDef): Promise<CompanyDetailResponseDef>;
+  ({
+    queryKey,
+  }: QueryFunctionContext<ReturnType<typeof companyDetailKeyObj.detail>>): Promise<CompanyDetailResponseDef>;
 }
 
 export interface UseCompanyDetailDef {
