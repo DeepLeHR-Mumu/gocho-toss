@@ -1,12 +1,14 @@
 import CommunityLayout from "@pages/community/component/communityLayout";
-import { NextPage } from "next";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 import { useUserInfo } from "shared-api/auth";
 import { usePostingCommentArr } from "shared-api/community/usePostingCommentArr";
-import { usePostingDetail } from "shared-api/community/usePostingDetail";
+import { usePostingDetail, getPostingDetail } from "shared-api/community/usePostingDetail";
 import { ERROR_URL } from "shared-constant/internalURL";
+import { communityPostingDetailKeyObj } from "shared-constant/queryKeyFactory/community/postingDetailKeyObj";
 import { postingListFunnelEvent } from "shared-ga/posting";
 
 import { WriteComment } from "./component/writeComment";
@@ -83,3 +85,28 @@ const PostingDetailPage: NextPage = () => {
 };
 
 export default PostingDetailPage;
+
+export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
+  const { params } = context;
+  const queryClient = new QueryClient();
+
+  if (params)
+    await queryClient.prefetchQuery(
+      communityPostingDetailKeyObj.postingDetail({ id: Number(params.postingId) }),
+      getPostingDetail
+    );
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+    revalidate: 600,
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: true,
+  };
+};

@@ -17,7 +17,8 @@ export const getPostingDetail: GetPostingDetailDef = async ({ queryKey: [{ reque
 
 export const usePostingDetail = (requestObj: CommunityPostingDetailRequestDef) => {
   const queryResult = useQuery(communityPostingDetailKeyObj.postingDetail(requestObj), getPostingDetail, {
-    select: ({data}) => {
+    staleTime: Infinity,
+    select: ({ data }) => {
       return selector(data);
     },
     enabled: Boolean(requestObj.id),

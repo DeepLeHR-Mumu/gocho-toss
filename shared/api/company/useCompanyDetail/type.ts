@@ -73,7 +73,6 @@ export interface UseCompanyDetailResultDef {
 }
 
 export interface GetCompanyDetailDef {
-  // ({ queryKey }: RequestObjDef): Promise<CompanyDetailResponseDef>;
   ({
     queryKey,
   }: QueryFunctionContext<ReturnType<typeof companyDetailKeyObj.detail>>): Promise<CompanyDetailResponseDef>;
