@@ -3,6 +3,19 @@ import { JobFormValues } from "@pages/jd/upload/type";
 import { Dispatch, SetStateAction } from "react";
 
 export interface CommonDataPartProps {
+  jobData: {
+    id: number;
+    startTime: number;
+    endTime: number;
+    processArr: string[];
+    applyRouteArr: string[];
+    applyUrl: string;
+    etcArr: string[];
+    title: string;
+    cut: boolean;
+    companyId: number;
+    companyName: string;
+  };
   companyDataArr: {
     id: number;
     name: string;

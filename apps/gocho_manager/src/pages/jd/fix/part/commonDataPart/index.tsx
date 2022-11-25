@@ -19,6 +19,7 @@ import {
 import { CommonDataPartProps } from "./type";
 
 export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({
+  jobData,
   companyDataArr,
   register,
   watch,
@@ -33,6 +34,7 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({
         <input
           css={searchBox}
           type="text"
+          value={jobData.companyName}
           onBlur={(e) => {
             setSearchWord(e.target.value);
           }}

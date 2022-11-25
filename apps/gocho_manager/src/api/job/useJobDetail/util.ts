@@ -71,11 +71,9 @@ export const selector = (jobDetailObj: JobDetailObjDef) => {
     title: jobDetailObj.title,
     cut: jobDetailObj.cut,
     positionArr: positionCamelArr,
-    company: {
-      companyId: jobDetailObj.company.id,
-      name: jobDetailObj.company.name,
-      logoUrl: jobDetailObj.company.logo_url,
-      factories: companyFactoryArr,
-    },
+    companyId: jobDetailObj.company.id,
+    companyName: jobDetailObj.company.name,
+    companyLogoUrl: jobDetailObj.company.logo_url,
+    companyFactories: companyFactoryArr,
   };
 };

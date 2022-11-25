@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
 import { useFindCompany } from "@api/company/useFindCompany";
 import { useAddJob } from "@api/job/useAddJob";
+import { useJobDetail } from "@api/job/useJobDetail";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
@@ -16,25 +18,73 @@ import { formContainer, positionContainer, addPositionButton, submitButton, chec
 import { blankPosition } from "./constant";
 
 const JdUpload: NextPage = () => {
+  const router = useRouter();
+  const jobId = Number(router.query.id);
+
   const [searchWord, setSearchWord] = useState<string>("");
   const [checkMsg, setCheckMsg] = useState<string>();
 
+  const { data: jobData } = useJobDetail({ id: jobId });
+  const { data: companyDataObj, isLoading, isError } = useFindCompany({ word: searchWord, order: "recent" });
+  const { mutate: addJobMutate } = useAddJob();
+
   const jobForm = useForm<JobFormValues>({
     defaultValues: {
+      company_id: jobData?.companyId,
       position_arr: [blankPosition],
     },
   });
-  const { register, control, handleSubmit, watch, setValue } = jobForm;
+
+  const { register, control, handleSubmit, watch, setValue, reset } = jobForm;
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: "position_arr",
   });
 
-  const { data: companyDataObj, isLoading, isError } = useFindCompany({ word: searchWord, order: "recent" });
-  const { mutate: addJobMutate } = useAddJob();
+  useEffect(() => {
+    const positionNewArr = jobData?.positionArr.map((position) => {
+      return {
+        middle: position.edu_summary.middle,
+        high: position.edu_summary.high,
+        college: position.edu_summary.college,
+        four: position.edu_summary.four,
+        required_exp: position.requiredExp.type,
+        min_year: position.requiredExp.minYear,
+        max_year: position.requiredExp.maxYear,
+        required_etc_arr: position.requiredEtcArr?.join("\n"),
+        contract_type: position.contractType.type,
+        conversion_rate: position.contractType.conversionRate,
+        task_main: position.task.mainTask,
+        task_sub_arr: position.task.subTaskArr,
+        task_detail_arr: position.taskDetailArr.join("\n"),
+        rotation_arr: position.rotationArr,
+        place: {
+          type: position.place.type,
+          address_arr: position.place.addressArr || [],
+          etc: position.place.etc || "",
+        },
+        hire_number: position.hireCount,
+        pay_arr: position.payArr?.join("\n"),
+        preferred_certi_arr: position.preferredCertiArr,
+        preferred_etc_arr: position.preferredEtcArr?.join("\n"),
+      };
+    });
+    reset({
+      company_id: jobData?.companyId,
+      title: jobData?.title,
+      start_time: jobData?.startTime,
+      end_time: jobData?.endTime,
+      cut: jobData?.cut,
+      process_arr: jobData?.processArr.join("\n"),
+      apply_route_arr: jobData?.applyRouteArr.join("\n"),
+      apply_url: jobData?.applyUrl,
+      etc_arr: jobData?.etcArr.join("\n"),
+      position_arr: positionNewArr,
+    });
+  }, [jobData, reset]);
 
-  if (!companyDataObj || isLoading) {
+  if (!companyDataObj || !jobData || isLoading) {
     return <LoadingScreen />;
   }
 
@@ -88,6 +138,7 @@ const JdUpload: NextPage = () => {
             watch={watch}
             setValue={setValue}
             setSearchWord={setSearchWord}
+            jobData={jobData}
           />
           <ul>
             {fields.map((item, index) => {
