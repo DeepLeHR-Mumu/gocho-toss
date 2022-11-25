@@ -7,7 +7,7 @@ export interface JobFormValues {
   process_arr: string;
   apply_route_arr: string;
   apply_url: string;
-  etc_arr: string;
+  etc_arr: string | null;
   position_arr: {
     middle: boolean;
     high: boolean;
@@ -26,13 +26,13 @@ export interface JobFormValues {
     rotation_etc: string | null;
     place: {
       type: string;
-      address_arr: string[];
-      factory_arr: number[];
-      etc: string;
+      address_arr: string[] | null;
+      factory_arr: number[] | null;
+      etc: string | null;
     };
     hire_number: number;
     pay_arr: string;
-    preferred_certi_arr: string[];
+    preferred_certi_arr: string[] | null;
     preferred_etc_arr: string | null;
   }[];
 }
@@ -46,7 +46,7 @@ export interface JobSubmitValues {
   process_arr: string[];
   apply_route_arr: string[];
   apply_url: string;
-  etc_arr: string[];
+  etc_arr: string[] | null;
   position_arr: {
     middle: boolean;
     high: boolean;
@@ -65,13 +65,13 @@ export interface JobSubmitValues {
     rotation_etc: string | null;
     place: {
       type: string;
-      address_arr: string[];
-      factory_arr: number[];
-      etc: string;
+      address_arr: string[] | null;
+      factory_arr: number[] | null;
+      etc: string | null;
     };
     hire_number: number;
     pay_arr: string[];
-    preferred_certi_arr: string[];
+    preferred_certi_arr: string[] | null;
     preferred_etc_arr: string[] | null;
   }[];
 }
