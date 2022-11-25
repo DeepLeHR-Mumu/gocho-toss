@@ -1,14 +1,14 @@
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage } from "next";
+import { NextPage } from "next";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { dehydrate, QueryClient } from "@tanstack/react-query";
+// import { dehydrate, QueryClient } from "@tanstack/react-query";
 
-import { useSpecDetail, getSpecDetail } from "shared-api/spec";
+import { useSpecDetail } from "shared-api/spec";
 import { useUserInfo } from "shared-api/auth";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
-import { specDetailKeyObj } from "shared-constant/queryKeyFactory/spec/detailKeyObj";
+// import { specDetailKeyObj } from "shared-constant/queryKeyFactory/spec/detailKeyObj";
 
 import { useModal } from "@recoil/hook/modal";
 import { Layout } from "@component/layout";
@@ -20,7 +20,7 @@ import { ResultInfoPart } from "./part/resultInfoPart";
 import { EvaluationPart } from "./part/evaluationPart";
 import { container, loadingBox, mainWrapper, wrapper } from "./style";
 
-const Detail: NextPage = () => {
+const SpecDetail: NextPage = () => {
   const router = useRouter();
   const { specId } = router.query;
   const { data: specDetailData, isLoading } = useSpecDetail({ specId: Number(specId) });
@@ -41,7 +41,7 @@ const Detail: NextPage = () => {
 
   if (isLoading || !specDetailData || router.isFallback) {
     return (
-      <div css={wrapper}>
+      <main css={wrapper}>
         <Layout>
           <div css={mainWrapper}>
             <div css={loadingBox}>
@@ -49,11 +49,12 @@ const Detail: NextPage = () => {
             </div>
           </div>
         </Layout>
-      </div>
+      </main>
     );
   }
+
   return (
-    <div css={wrapper}>
+    <main css={wrapper}>
       <PageHead
         option={{
           id: specDetailData.id,
@@ -81,30 +82,30 @@ const Detail: NextPage = () => {
           />
         </div>
       </Layout>
-    </div>
+    </main>
   );
 };
 
-export default Detail;
+export default SpecDetail;
 
-export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
-  const { params } = context;
-  const queryClient = new QueryClient();
+// export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
+//   const { params } = context;
+//   const queryClient = new QueryClient();
 
-  if (params)
-    await queryClient.prefetchQuery(specDetailKeyObj.detail({ specId: Number(params.specId) }), getSpecDetail);
+//   if (params)
+//     await queryClient.prefetchQuery(specDetailKeyObj.detail({ specId: Number(params.specId) }), getSpecDetail);
 
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-    revalidate: 600,
-  };
-};
+//   return {
+//     props: {
+//       dehydratedState: dehydrate(queryClient),
+//     },
+//     revalidate: 600,
+//   };
+// };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: true,
-  };
-};
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   return {
+//     paths: [],
+//     fallback: true,
+//   };
+// };

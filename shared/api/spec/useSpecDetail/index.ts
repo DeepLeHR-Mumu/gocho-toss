@@ -6,15 +6,9 @@ import { axiosInstance } from "../../axiosInstance";
 import { selector } from "./util";
 import { GetSpecDetailDef } from "./type";
 
-export const getSpecDetail: GetSpecDetailDef = async ({
-  queryKey: [
-    {
-      requestObj: { specId },
-    },
-  ],
-}) => {
+export const getSpecDetail: GetSpecDetailDef = async ({ queryKey: [{ requestObj }] }) => {
   const token = localStorage.getItem("token") as string;
-  const { data } = await axiosInstance.get(`/specs/${specId}`, {
+  const { data } = await axiosInstance.get(`/specs/${requestObj.specId}`, {
     headers: { "x-access-token": token },
   });
 
@@ -24,10 +18,10 @@ export const getSpecDetail: GetSpecDetailDef = async ({
 export const useSpecDetail = (requestObj: SpecDetailRequestDef) => {
   const queryResult = useQuery(specDetailKeyObj.detail(requestObj), getSpecDetail, {
     staleTime: Infinity,
+    enabled: Boolean(requestObj.specId),
     select: ({ data }) => {
       return selector(data);
     },
-    enabled: Boolean(requestObj.specId),
   });
   return queryResult;
 };
