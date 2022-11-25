@@ -146,7 +146,25 @@ const CompanyDetailPage: NextPage = () => {
 
   // TODO PART와 컴포넌트와 div, button들의 향연 -> 추상화 레벨을 최대한 하나로 유지하자
   return (
+    // TODO :
     <main css={mainContainer}>
+      {info === "detail" && (
+        <PageInfoHead
+          option={{
+            companyName: companyDetailData.data.name,
+            id: companyDetailData.data.id,
+          }}
+        />
+      )}
+      {info === "jd" && (
+        <PageRecruitHead
+          option={{
+            companyName: companyDetailData.data.name,
+            id: companyDetailData.data.id,
+          }}
+        />
+      )}
+
       <Layout>
         <HeaderPart companyData={companyData.headerData} isBookmarked={isBookmarked} userId={userData?.id} />
         <div css={buttonContainer}>
@@ -178,12 +196,6 @@ const CompanyDetailPage: NextPage = () => {
 
         {info === "detail" && (
           <section>
-            <PageInfoHead
-              option={{
-                companyName: companyData.headerData.name,
-                id: companyData.headerData.id,
-              }}
-            />
             <InvisibleH1 title={`${companyData.headerData.name} > 기업/공장 정보 - 고초대졸닷컴`} />
             <InvisibleH2 title={`${companyData.headerData.name} 기업정보`} />
             <div css={flexBox}>
@@ -244,12 +256,6 @@ const CompanyDetailPage: NextPage = () => {
 
         {info === "jd" && (
           <section>
-            <PageRecruitHead
-              option={{
-                id: companyData.headerData.id,
-                companyName: companyData.headerData.name,
-              }}
-            />
             <InvisibleH1 title={`${companyData.headerData.name} > 생산직 채용공고 - 고초대졸닷컴`} />
             <InvisibleH2 title={`${companyData.headerData.name} 채용공고 모음`} />
             <CompanyJobPart companyId={Number(companyId)} />

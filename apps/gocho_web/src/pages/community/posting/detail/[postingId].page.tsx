@@ -11,6 +11,7 @@ import { ERROR_URL } from "shared-constant/internalURL";
 import { communityPostingDetailKeyObj } from "shared-constant/queryKeyFactory/community/postingDetailKeyObj";
 import { postingListFunnelEvent } from "shared-ga/posting";
 
+import { PageHead } from "./component/pageHead";
 import { WriteComment } from "./component/writeComment";
 import { CommentPart } from "./part/commentPart";
 import { PostingPart } from "./part/postingPart";
@@ -39,6 +40,14 @@ const PostingDetailPage: NextPage = () => {
 
   return (
     <main>
+      {postingDetailData && (
+        <PageHead
+          option={{
+            title: postingDetailData.title,
+            id: postingDetailData.id,
+          }}
+        />
+      )}
       <CommunityLayout isSidebar>
         <article css={wrapper}>
           <div css={overviewYBox}>

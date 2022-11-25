@@ -56,7 +56,7 @@ const Detail: NextPage = () => {
     <div css={wrapper}>
       <PageHead
         option={{
-          id: Number(specId),
+          id: specDetailData.id,
           age: specDetailData.age,
           nickname: specDetailData.user.nickname,
           gender: specDetailData.gender,
