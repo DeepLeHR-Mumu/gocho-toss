@@ -82,7 +82,7 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
       {
         onSuccess: () => {
           setCurrentDidEval(true);
-          queryClient.invalidateQueries(specDetailKeyObj.spec({ specId: Number(specId) }));
+          queryClient.invalidateQueries(specDetailKeyObj.detail({ specId: Number(specId) }));
           setCurrentToast("평가를 완료하였습니다.");
         },
       }

@@ -22,7 +22,8 @@ export const getSpecDetail: GetSpecDetailDef = async ({
 };
 
 export const useSpecDetail = (requestObj: SpecDetailRequestDef) => {
-  const queryResult = useQuery(specDetailKeyObj.spec(requestObj), getSpecDetail, {
+  const queryResult = useQuery(specDetailKeyObj.detail(requestObj), getSpecDetail, {
+    staleTime: Infinity,
     select: ({ data }) => {
       return selector(data);
     },
