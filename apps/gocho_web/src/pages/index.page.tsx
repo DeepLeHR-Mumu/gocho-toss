@@ -56,6 +56,11 @@ const Home: NextPage = () => {
     homeFunnelEvent();
   }, []);
 
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log(process.env.API_URL);
+  }, []);
+
   return (
     <main>
       <PageHead />

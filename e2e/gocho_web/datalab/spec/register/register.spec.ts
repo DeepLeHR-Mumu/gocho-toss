@@ -100,7 +100,6 @@ const specResponseCheckTester = async (isDeepRegister: boolean, response: Respon
   const registerId = await registerPostData.data["insertId"];
 
   const registerGetResponse = await request.get(`${BACKEND_URL}/specs/${registerId}`);
-  console.log(BACKEND_URL);
   const registerGetData = await registerGetResponse.json();
 
   expect(registerGetData.data.secret).toEqual(true);
