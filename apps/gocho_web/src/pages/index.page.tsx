@@ -13,6 +13,7 @@ import { homeFunnelEvent } from "shared-ga/home";
 
 import { CompanyCommentPart } from "@pages/index/part/companyCommentPart";
 
+import { BACKEND_URL } from "shared-constant/externalURL";
 import { MainCarouselPart } from "./index/part/mainCarouselPart";
 import { JobPart } from "./index/part/jobPart";
 import { CommunityPostingPart } from "./index/part/communityPostingPart";
@@ -58,7 +59,9 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     // eslint-disable-next-line no-console
-    console.log(process.env.API_URL);
+    console.log(`e : ${process.env.API_URL}`);
+    // eslint-disable-next-line no-console
+    console.log(`b : ${BACKEND_URL}`);
   }, []);
 
   return (
