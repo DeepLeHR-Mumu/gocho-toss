@@ -6,6 +6,9 @@ jobs:
   wait_url:
     name: wait for vercel url
     runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
     outputs:
       desktop_url: ${{ steps.waitForGochoDesktopURL.outputs.url }}
       mobile_url: ${{ steps.waitForGochoMobileURL.outputs.url }}
@@ -26,6 +29,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: "Preview – gocho-web"
+          check_interval: 5
           max_timeout: 600
       - run: echo ${{steps.waitForGochoDesktopURL.outputs.url}}
   test_e2e:
@@ -45,7 +49,7 @@ jobs:
       - name: Install Playwright Browsers
         run: pnpx playwright install --with-deps
       - name: Run Playwright tests
-        run: sh .github/bash/playwright_check.sh e2e:mobile
+        run: sh .github/bash/playwright_check.sh e2e:mobile && sh .github/bash/playwright_check.sh e2e:web
         env:
           GOCHO_WEB_URL: ${{ needs.wait_url.outputs.desktop_url }}
           GOCHO_MOBILE_URL: ${{ needs.wait_url.outputs.mobile_url }}
