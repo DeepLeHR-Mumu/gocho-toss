@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
 import { useFindCompany } from "@api/company/useFindCompany";
-import { useAddJob } from "@api/job/useAddJob";
+import { useChangeJob } from "@api/job/useChangeJob";
 import { useJobDetail } from "@api/job/useJobDetail";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
@@ -26,7 +26,7 @@ const JdUpload: NextPage = () => {
 
   const { data: jobData } = useJobDetail({ id: jobId });
   const { data: companyDataObj, isLoading, isError } = useFindCompany({ word: searchWord, order: "recent" });
-  const { mutate: addJobMutate } = useAddJob();
+  const { mutate: changeJobMutate } = useChangeJob();
 
   const jobForm = useForm<JobFormValues>({
     defaultValues: {
@@ -43,6 +43,9 @@ const JdUpload: NextPage = () => {
   });
 
   useEffect(() => {
+    const newStartTime = jobData?.startTime ? jobData.startTime + 540000 * 60 : 0;
+    const newEndTime = jobData?.endTime ? jobData.endTime + 540000 * 60 : 0;
+
     const positionNewArr = jobData?.positionArr.map((position) => {
       return {
         middle: position.edu_summary.middle,
@@ -73,8 +76,8 @@ const JdUpload: NextPage = () => {
     reset({
       company_id: jobData?.companyId,
       title: jobData?.title,
-      start_time: jobData?.startTime,
-      end_time: jobData?.endTime,
+      start_time: new Date(newStartTime).toISOString().substring(0, 19),
+      end_time: new Date(newEndTime).toISOString().substring(0, 19),
       cut: jobData?.cut,
       process_arr: jobData?.processArr.join("\n"),
       apply_route_arr: jobData?.applyRouteArr.join("\n"),
@@ -113,11 +116,11 @@ const JdUpload: NextPage = () => {
     const blob = new Blob([json], { type: "application/json" });
     formData.append("dto", blob);
 
-    addJobMutate(
-      { dto: formData },
+    changeJobMutate(
+      { jdId: jobId, dto: formData },
       {
         onSuccess: () => {
-          setCheckMsg("서버에 공고가 업로드 되었습니다.");
+          setCheckMsg("공고가 수정 되었습니다.");
         },
 
         onError: () => {
@@ -161,7 +164,7 @@ const JdUpload: NextPage = () => {
             직무 추가
           </button>
           <button css={submitButton} type="submit">
-            공고 등록하기
+            공고 수정하기
           </button>
           {checkMsg && <p css={checkMsgBox}>{checkMsg}</p>}
         </form>

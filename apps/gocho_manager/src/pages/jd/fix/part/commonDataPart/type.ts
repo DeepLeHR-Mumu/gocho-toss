@@ -5,8 +5,8 @@ import { Dispatch, SetStateAction } from "react";
 export interface CommonDataPartProps {
   jobData: {
     id: number;
-    startTime: number;
-    endTime: number;
+    startTime: number | string;
+    endTime: number | string;
     processArr: string[];
     applyRouteArr: string[];
     applyUrl: string;

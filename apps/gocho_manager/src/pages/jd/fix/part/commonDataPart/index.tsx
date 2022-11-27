@@ -42,7 +42,7 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({
         <button css={searchCompanyButton} type="button">
           검색
         </button>
-        <select css={selectBox} {...register("company_id", { valueAsNumber: true, required: true })}>
+        <select css={selectBox} {...register("company_id", { valueAsNumber: true })}>
           <option value="">기업 선택 ▼</option>
           {companyDataArr.map((company) => {
             return (

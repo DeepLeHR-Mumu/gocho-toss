@@ -1,7 +1,7 @@
 export interface JobFormValues {
   company_id: number;
   title: string;
-  start_time: number;
+  start_time: number | string;
   end_time: number | string;
   cut: boolean;
   process_arr: string;
@@ -40,7 +40,7 @@ export interface JobFormValues {
 export interface JobSubmitValues {
   company_id: number;
   title: string;
-  start_time: number;
+  start_time: number | string;
   end_time: number | string;
   cut: boolean;
   process_arr: string[];
