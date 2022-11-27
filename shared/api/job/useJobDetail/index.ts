@@ -14,6 +14,7 @@ export const getJobDetail: GetJobDetailDef = async ({ queryKey: [{ requestObj }]
 
 export const useJobDetail = (requestObj: JobDetailRequestObjDef) => {
   const queryResult = useQuery(jobDetailKeyObj.detail(requestObj), getJobDetail, {
+    staleTime: Infinity,
     enabled: Boolean(requestObj.id),
     select: ({ data }) => {
       return selector(data);

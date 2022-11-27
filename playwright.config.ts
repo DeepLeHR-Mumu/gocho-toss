@@ -2,10 +2,9 @@ import type { PlaywrightTestConfig } from "@playwright/test";
 import { devices } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
-  testDir: "./e2e",
-  timeout: 5000,
+  timeout: 6000,
   expect: {
-    timeout: 5000,
+    timeout: 6000,
   },
   fullyParallel: true,
   forbidOnly: !!process.env.CI,

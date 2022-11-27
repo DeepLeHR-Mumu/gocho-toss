@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
 
-import { HeaderPart } from "@pages/jd/detail/[jobId]/part/headerPart";
+import { HeaderPart } from "@pages/jd/detail/part/headerPart";
 
 export default {
   title: "공고/detail/part/HeaderPart",
