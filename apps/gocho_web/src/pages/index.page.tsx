@@ -59,9 +59,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     // eslint-disable-next-line no-console
-    console.log(`dev : ${process.env.API_URL_TEST}`);
-    // eslint-disable-next-line no-console
-    console.log(`e : ${process.env.API_URL}`);
+    console.log(`e : ${process.env.VERCEL_ENV}`);
     // eslint-disable-next-line no-console
     console.log(`b : ${BACKEND_URL}`);
   }, []);
