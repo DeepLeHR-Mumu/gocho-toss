@@ -41,7 +41,16 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: latest
+      - name: Cache playwright binaries
+        uses: actions/cache@v2
+        id: playwright-cache
+        with:
+          path: |
+            ~/Library/Caches/ms-playwright
+            **/node_modules/playwright
+          key: cache-playwright-macos
       - name: Install dependencies
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: pnpm install
       - name: Install Playwright Browsers
         run: pnpx playwright install --with-deps
