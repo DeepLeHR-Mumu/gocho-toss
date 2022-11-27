@@ -47,7 +47,7 @@ jobs:
         with:
           version: latest
       - name: Install Playwright Browsers
-        run: pnpx playwright install --with-deps
+        run: pnpx playwright@1.28.1 install --with-deps
       - name: Run Playwright tests
         run: sh .github/bash/playwright_check.sh e2e:mobile && sh .github/bash/playwright_check.sh e2e:web
         env:
