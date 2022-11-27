@@ -4,7 +4,7 @@ on:
     branches: [main, dev]
 jobs:
   wait_url:
-    name: wait for vercel url
+    name: vercel URL 대기
     runs-on: ubuntu-latest
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -13,7 +13,7 @@ jobs:
       desktop_url: ${{ steps.waitForGochoDesktopURL.outputs.url }}
       mobile_url: ${{ steps.waitForGochoMobileURL.outputs.url }}
     steps:
-      - name: Wait for gocho mobile preview url
+      - name: 모바일 preview url 대기
         uses: patrickedqvist/wait-for-vercel-preview@v1.2.0
         id: waitForGochoMobileURL
         with:
@@ -23,7 +23,7 @@ jobs:
           max_timeout: 600
       - run: echo ${{steps.waitForGochoMobileURL.outputs.url}}
 
-      - name: Wait for gocho desktop preview url
+      - name: 데스크탑 preview url 대기
         uses: patrickedqvist/wait-for-vercel-preview@v1.2.0
         id: waitForGochoDesktopURL
         with:
@@ -34,7 +34,7 @@ jobs:
       - run: echo ${{steps.waitForGochoDesktopURL.outputs.url}}
   test_e2e:
     needs: wait_url
-    name: playwright tests
+    name: playwright 테스트
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -42,14 +42,14 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "16.x"
-      - name: setup pnpm
+      - name: pnpm 초기 설정
         uses: pnpm/action-setup@v2
         with:
           version: latest
-      - name: Install Playwright Browsers
-        run: pnpx playwright@1.28.0 install-deps chromium
-      - name: Run Playwright tests
-        run: sh .github/bash/playwright_check.sh e2e:mobile && sh .github/bash/playwright_check.sh e2e:web
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: playwright 브라우저 설치
+        run: pnpx playwright install-deps chromium
         env:
           GOCHO_WEB_URL: ${{ needs.wait_url.outputs.desktop_url }}
           GOCHO_MOBILE_URL: ${{ needs.wait_url.outputs.mobile_url }}
@@ -60,7 +60,7 @@ jobs:
           path: playwright-report/
           retention-days: 30
 
-      - name: Send Slack notification of successful tests
+      - name: 성공 시 테스트 결과 슬랙으로 전송
         uses: rtCamp/action-slack-notify@master
         env:
           SLACK_CHANNEL: 01-팀-dev
@@ -70,7 +70,7 @@ jobs:
           SLACK_TITLE: "테스트코드 결과"
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-      - name: Send Slack notification of failed tests
+      - name: 실패 시 테스트 결과 슬랙으로 전송
         if: failure()
         uses: rtCamp/action-slack-notify@master
         env:
