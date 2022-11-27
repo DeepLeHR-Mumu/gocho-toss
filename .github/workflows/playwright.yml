@@ -46,10 +46,10 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: latest
-      - name: Install dependencies
+      - name: dependency 설치
         run: pnpm install --frozen-lockfile
       - name: playwright 브라우저 설치
-        run: pnpx playwright install-deps chromium
+        run: pnpm playwright install-deps chromium
         env:
           GOCHO_WEB_URL: ${{ needs.wait_url.outputs.desktop_url }}
           GOCHO_MOBILE_URL: ${{ needs.wait_url.outputs.mobile_url }}
