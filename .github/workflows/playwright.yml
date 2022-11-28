@@ -19,7 +19,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: "Preview – gocho-mobile"
-          check_interval: 5
+          check_interval: 3
           max_timeout: 1200
       - run: echo ${{steps.waitForGochoMobileURL.outputs.url}}
 
