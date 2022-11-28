@@ -5,6 +5,7 @@ test.beforeEach(async ({ page }) => {
   await page.locator('button[aria-label="통합검색 열기"]').click();
   await page.locator('input[placeholder="궁금한 기업/공고를 검색해보세요"]').fill("현대");
   await page.locator('button[aria-label="통합 검색하기"]').click();
+  // ?ㅑ재덜
   await page.waitForLoadState("load");
 });
 

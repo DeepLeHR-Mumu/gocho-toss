@@ -21,7 +21,9 @@
     "build-mobile": "pnpm turbo build --scope=gocho_mobile --include-dependencies --no-deps",
     "dev-manager": "cd apps/gocho_manager && pnpm dev",
     "build-manager": "pnpm turbo build --scope=gocho_manager --include-dependencies --no-deps",
-    "e2e": "pnpx playwright test --trace on",
+    "e2e:web": "PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright pnpx playwright@1.28.0 test e2e/gocho_web --trace on",
+    "e2e:mobile": "PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright pnpx playwright@1.28.0 test e2e/gocho_mobile --trace on",
+    "e2e:manager": "PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright pnpx playwright@1.28.0 test e2e/gocho_mobile --trace on",
     "e2e:report": "pnpx playwright show-report"
   },
   "lint-staged": {
@@ -51,22 +53,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.18.13",
-    "@playwright/test": "^1.28.1",
-    "@storybook/addon-actions": "^6.5.10",
-    "@storybook/addon-essentials": "^6.5.10",
-    "@storybook/addon-interactions": "^6.5.10",
-    "@storybook/addon-links": "^6.5.10",
-    "@storybook/builder-webpack5": "^6.5.10",
-    "@storybook/manager-webpack5": "^6.5.10",
-    "@storybook/react": "^6.5.10",
-    "@storybook/testing-library": "^0.0.13",
     "@types/node": "18.7.13",
-    "babel-loader": "^8.2.5",
     "husky": "^8.0.0",
     "turbo": "^1.6.3"
   },
   "dependencies": {
+    "@playwright/test": "1.28.0",
     "eslint-config-deeple": "workspace:^1.0.0",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",

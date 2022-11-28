@@ -1,55 +1,94 @@
-name: Playwright Tests
+name: Playwright e2e 테스트
 on:
   pull_request:
     branches: [main, dev]
 jobs:
   wait_url:
-    name: wait for vercel url
+    name: vercel URL 대기
     runs-on: ubuntu-latest
+
     outputs:
       desktop_url: ${{ steps.waitForGochoDesktopURL.outputs.url }}
       mobile_url: ${{ steps.waitForGochoMobileURL.outputs.url }}
     steps:
-      - name: Wait for gocho mobile preview url
+      - name: 모바일 preview url 대기
         uses: patrickedqvist/wait-for-vercel-preview@v1.2.0
         id: waitForGochoMobileURL
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: "Preview – gocho-mobile"
-          max_timeout: 600
+          check_interval: 3
+          max_timeout: 1200
       - run: echo ${{steps.waitForGochoMobileURL.outputs.url}}
 
-      - name: Wait for gocho desktop preview url
+      - name: 데스크탑 preview url 대기
         uses: patrickedqvist/wait-for-vercel-preview@v1.2.0
         id: waitForGochoDesktopURL
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: "Preview – gocho-web"
-          max_timeout: 600
+          check_interval: 3
+          max_timeout: 1200
       - run: echo ${{steps.waitForGochoDesktopURL.outputs.url}}
+
   test_e2e:
     needs: wait_url
-    name: playwright tests
-    timeout-minutes: 60
+    name: playwright 테스트
+    timeout-minutes: 30
     runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+      GOCHO_WEB_URL: ${{ needs.wait_url.outputs.desktop_url }}
+      GOCHO_MOBILE_URL: ${{ needs.wait_url.outputs.mobile_url }}
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: "16.x"
-      - name: setup pnpm
+
+      - name: pnpm 초기 설정
         uses: pnpm/action-setup@v2
         with:
           version: latest
-      - name: Install dependencies
-        run: pnpm install
-      - name: Install Playwright Browsers
-        run: pnpx playwright install --with-deps
-      - name: Run Playwright tests
-        run: pnpx playwright test --trace on
-        env:
-          GOCHO_WEB_URL: ${{ needs.wait_url.outputs.desktop_url }}
-          GOCHO_MOBILE_URL: ${{ needs.wait_url.outputs.mobile_url }}
+
+      - name: pnpm 디렉터리 확인
+        id: pnpm-directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: pnpm 캐시 가져오기
+        with:
+          path: ${{ steps.pnpm-directory.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: dependency 설치
+        run: pnpm install --frozen-lockfile
+
+      - name: playwright 버전 확인
+        id: playwright-version
+        run: echo "PLAYWRIGHT_VERSION=$(pnpm list | grep playwright/test)" >> $GITHUB_ENV
+
+      - name: playwright 브라우저 캐시 확인
+        uses: actions/cache@v3
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+
+      - name: playwright 브라우저 설치
+        run: PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright pnpx playwright@1.28.0 install --with-deps chromium
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+
+      - name: playwright test 실행
+        run: pnpm turbo e2e:web && pnpm turbo e2e:mobile
+
       - uses: actions/upload-artifact@v2
         if: always()
         with:
@@ -57,7 +96,7 @@ jobs:
           path: playwright-report/
           retention-days: 30
 
-      - name: Send Slack notification of successful tests
+      - name: 성공 시 테스트 결과 슬랙으로 전송
         uses: rtCamp/action-slack-notify@master
         env:
           SLACK_CHANNEL: 01-팀-dev
@@ -67,7 +106,7 @@ jobs:
           SLACK_TITLE: "테스트코드 결과"
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-      - name: Send Slack notification of failed tests
+      - name: 실패 시 테스트 결과 슬랙으로 전송
         if: failure()
         uses: rtCamp/action-slack-notify@master
         env:
