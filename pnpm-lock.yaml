@@ -9,14 +9,12 @@ importers:
       eslint-config-deeple: workspace:^1.0.0
       husky: ^8.0.0
       lint-staged: ^13.0.3
-      playwright: 1.28.0
       prettier: ^2.7.1
       turbo: ^1.6.3
       typescript: 4.7.2
     dependencies:
       eslint-config-deeple: link:packages/eslint-config-deeple
       lint-staged: 13.0.3
-      playwright: 1.28.0
       prettier: 2.7.1
       typescript: 4.7.2
     devDependencies:
@@ -10971,15 +10969,7 @@ packages:
     resolution: {integrity: sha512-nJLknd28kPBiCNTbqpu6Wmkrh63OEqJSFw9xOfL9qxfNwody7h6/L3O2dZoWQ6Oxcm0VOHjWmGiCUGkc0X3VZA==}
     engines: {node: '>=14'}
     hasBin: true
-
-  /playwright/1.28.0:
-    resolution: {integrity: sha512-kyOXGc5y1mgi+hgEcCIyE1P1+JumLrxS09nFHo5sdJNzrucxPRAGwM4A2X3u3SDOfdgJqx61yIoR6Av+5plJPg==}
-    engines: {node: '>=14'}
-    hasBin: true
-    requiresBuild: true
-    dependencies:
-      playwright-core: 1.28.0
-    dev: false
+    dev: true
 
   /pnp-webpack-plugin/1.6.4_typescript@4.7.2:
     resolution: {integrity: sha512-7Wjy+9E3WwLOEL30D+m8TSTF7qJJUJLONBnwQp0518siuMxUQUbgZwssaFX+QKlZkjHZcw/IpZCt/H0srrntSg==}
