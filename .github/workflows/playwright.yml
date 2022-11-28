@@ -54,6 +54,7 @@ jobs:
           version: latest
 
       - name: pnpm 디렉터리 확인
+        id: pnpm-directory
         shell: bash
         run: |
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
@@ -62,7 +63,7 @@ jobs:
         name: pnpm 캐시 가져오기
         id: pnpm-cache
         with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          path: ${{ steps.pnpm-directory.outputs.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
