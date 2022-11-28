@@ -60,7 +60,7 @@ jobs:
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
       - uses: actions/cache@v3
-        name: pnpm 캐시 설정
+        name: pnpm 캐시 가져오기
         id: pnpm-cache
         with:
           path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
