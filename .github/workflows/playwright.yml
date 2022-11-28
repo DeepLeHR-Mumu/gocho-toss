@@ -1,4 +1,4 @@
-name: Playwright Tests
+name: Playwright e2e 테스트
 on:
   pull_request:
     branches: [main, dev]
@@ -27,9 +27,11 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: "Preview – gocho-web"
-          check_interval: 5
+          check_interval: 3
           max_timeout: 1200
       - run: echo ${{steps.waitForGochoDesktopURL.outputs.url}}
+
+
   test_e2e:
     needs: wait_url
     name: playwright 테스트
@@ -60,7 +62,6 @@ jobs:
 
       - name: playwright test 실행
         run: pnpm turbo e2e:web && pnpm turbo e2e:mobile
-        # env:
 
       - uses: actions/upload-artifact@v2
         if: always()
