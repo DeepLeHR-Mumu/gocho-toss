@@ -31,7 +31,6 @@ jobs:
           max_timeout: 1200
       - run: echo ${{steps.waitForGochoDesktopURL.outputs.url}}
 
-
   test_e2e:
     needs: wait_url
     name: playwright 테스트
@@ -53,6 +52,20 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: latest
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: dependency 설치
         run: pnpm install --frozen-lockfile
