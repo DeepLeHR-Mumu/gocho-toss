@@ -102,7 +102,7 @@ const specResponseCheckTester = async (isDeepRegister: boolean, response: Respon
   const registerGetResponse = await request.get(`${BACKEND_URL}/specs/${registerId}`);
   const registerGetData = await registerGetResponse.json();
 
-  expect(registerGetData.data.secret).toBeTruthy();
+  expect(registerGetData.data.secret).toEqual(true);
   expect(registerGetData.data.gender).toEqual("여");
   expect(registerGetData.data.age).toEqual(20);
   expect(registerGetData.data.military).toEqual("면제-해당없음");

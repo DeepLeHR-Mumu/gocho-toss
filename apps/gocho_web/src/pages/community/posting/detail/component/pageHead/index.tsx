@@ -7,7 +7,7 @@ import { POSTING_DETAIL_META } from "shared-constant/meta";
 import { PageHeadProps } from "./type";
 
 export const PageHead: FunctionComponent<PageHeadProps> = ({ option }) => {
-  const title = `자유게시판 > ${option.title} - 고초대졸닷컴`;
+  const title = `자유게시판 ${option.title} - 고초대졸닷컴`;
 
   return (
     <Head>

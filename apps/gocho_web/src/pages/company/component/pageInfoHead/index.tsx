@@ -18,16 +18,16 @@ export const PageInfoHead: FunctionComponent<PageInfoHeadProps> = ({ option }) =
       <meta property="og:title" content={`[${option.companyName}] ${COMPANY_INFO_META.ogTitle}`} />
       <meta property="og:description" content={`${option.companyName} ${COMPANY_INFO_META.ogDesc}`} />
       <meta property="og:type" content="website" />
-      <meta property="og:url" content={`${GOCHO_DESKTOP_URL}/company/${option.id}/info`} />
+      <meta property="og:url" content={`${GOCHO_DESKTOP_URL}/company/${option.id}?info=detail`} />
       <meta property="og:site_name" content={COMPANY_INFO_META.ogSiteName} />
       <meta property="og:image" content={COMPANY_INFO_META.ogImage} />
       <meta property="og:image_secure" content={COMPANY_INFO_META.ogImage} />
       <meta property="og:article:author" content={COMPANY_INFO_META.ogAuthor} />
-      <link rel="canonical" href={`${GOCHO_DESKTOP_URL}/company/${option.id}/info`} />
+      <link rel="canonical" href={`${GOCHO_DESKTOP_URL}/company/${option.id}?info=detail`} />
       <link
         rel="alternate"
         media="only screen and (max-width: 640px)"
-        href={`${GOCHO_MOBILE_URL}/company/${option.id}/info`}
+        href={`${GOCHO_MOBILE_URL}/company/${option.id}?info=detail`}
       />
     </Head>
   );

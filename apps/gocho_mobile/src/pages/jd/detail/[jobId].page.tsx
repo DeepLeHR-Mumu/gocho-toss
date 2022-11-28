@@ -1,23 +1,25 @@
-import { NextPage } from "next";
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
 
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
-import { useJobDetail } from "shared-api/job";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
+import { getJobDetail, useJobDetail } from "shared-api/job";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
 import { useAddJobViewCount } from "shared-api/viewCount";
+import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { jdDetailFunnelEvent } from "shared-ga/jd";
 
 import { DetailComment } from "@component/common/organisms/detailComment";
-import { TopMenu } from "../component/topMenu";
-import { BottomMenu } from "../component/bottomMenu";
-import { PageHead } from "../component/pageHead";
-import { PositionObjDef } from "./type";
-import { HeaderPart, DetailSupportPart, DetailWorkPart, DetailPreferencePart, ReceptInfoPart } from "../part";
 
+import { TopMenu } from "./component/topMenu";
+import { BottomMenu } from "./component/bottomMenu";
+import { PageHead } from "./component/pageHead";
+import { PositionObjDef } from "./type";
+import { HeaderPart, DetailSupportPart, DetailWorkPart, DetailPreferencePart, ReceptInfoPart } from "./part";
 import { wrapper, flexBox, container, containerSkeleton } from "./style";
 
 const JobsDetail: NextPage = () => {
@@ -72,7 +74,7 @@ const JobsDetail: NextPage = () => {
     if (jobDetailData) jdDetailFunnelEvent(jobDetailData.id);
   }, [jobDetailData]);
 
-  if (!jobDetailData || isLoading) {
+  if (!jobDetailData || isLoading || router.isFallback) {
     return (
       <main css={wrapper}>
         <HeaderPart isSkeleton />
@@ -147,3 +149,24 @@ const JobsDetail: NextPage = () => {
 };
 
 export default JobsDetail;
+
+export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
+  const { params } = context;
+  const queryClient = new QueryClient();
+
+  if (params) await queryClient.prefetchQuery(jobDetailKeyObj.detail({ id: Number(params.jobId) }), getJobDetail);
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+    revalidate: 600,
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: true,
+  };
+};

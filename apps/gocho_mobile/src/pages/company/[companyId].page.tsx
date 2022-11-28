@@ -1,26 +1,27 @@
-import { NextPage } from "next";
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
 
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { useAddCompanyViewCount } from "shared-api/viewCount";
+import { useCompanyDetail, getCompanyDetail } from "shared-api/company";
 import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
-import { useCompanyDetail } from "shared-api/company";
+import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { companyInfoFunnelEvent, companyJdFunnelEvent } from "shared-ga/company";
 
-import { PageInfoHead } from "../component/pageInfoHead";
-import { PageRecruitHead } from "../component/pageRecruitHead";
-import { HeaderPart } from "../part/headerPart";
-import { BasicInfoPart } from "../part/basicInfoPart";
-import { JobsPart } from "../part/jobsPart";
-import { WelfarePart } from "../part/welfarePart";
-import { CheckMorePart } from "../part/checkMorePart";
-import { MoneyPart } from "../part/moneyPart";
-import { FactoryPart } from "../part/factoryInfoPart";
-import { H2Title } from "../component/h2Title";
-
+import { PageInfoHead } from "./component/pageInfoHead";
+import { PageRecruitHead } from "./component/pageRecruitHead";
+import { H2Title } from "./component/h2Title";
+import { HeaderPart } from "./part/headerPart";
+import { BasicInfoPart } from "./part/basicInfoPart";
+import { JobsPart } from "./part/jobsPart";
+import { WelfarePart } from "./part/welfarePart";
+import { CheckMorePart } from "./part/checkMorePart";
+import { MoneyPart } from "./part/moneyPart";
+import { FactoryPart } from "./part/factoryInfoPart";
+import { LinkPart } from "./part/linkPart";
 import { container } from "./style";
-import { LinkPart } from "../part/linkPart";
 
 const CompanyDetail: NextPage = () => {
   const router = useRouter();
@@ -118,3 +119,28 @@ const CompanyDetail: NextPage = () => {
 };
 
 export default CompanyDetail;
+
+export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
+  const { params } = context;
+  const queryClient = new QueryClient();
+
+  if (params)
+    await queryClient.prefetchQuery(
+      companyDetailKeyObj.detail({ companyId: Number(params.companyId) }),
+      getCompanyDetail
+    );
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+    revalidate: 600,
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: true,
+  };
+};
