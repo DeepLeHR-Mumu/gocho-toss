@@ -6,9 +6,7 @@ jobs:
   wait_url:
     name: vercel URL 대기
     runs-on: ubuntu-latest
-    env:
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+
     outputs:
       desktop_url: ${{ steps.waitForGochoDesktopURL.outputs.url }}
       mobile_url: ${{ steps.waitForGochoMobileURL.outputs.url }}
@@ -37,24 +35,33 @@ jobs:
     name: playwright 테스트
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+      GOCHO_WEB_URL: ${{ needs.wait_url.outputs.desktop_url }}
+      GOCHO_MOBILE_URL: ${{ needs.wait_url.outputs.mobile_url }}
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: "16.x"
+
       - name: pnpm 초기 설정
         uses: pnpm/action-setup@v2
         with:
           version: latest
+
       - name: dependency 설치
         run: pnpm install --frozen-lockfile
+
       - name: playwright 브라우저 설치
         run: pnpm playwright install-deps chromium
+
       - name: playwright test 실행
         run: pnpm turbo e2e:web && pnpm turbo e2e:mobile
-        env:
-          GOCHO_WEB_URL: ${{ needs.wait_url.outputs.desktop_url }}
-          GOCHO_MOBILE_URL: ${{ needs.wait_url.outputs.mobile_url }}
+        # env:
+
       - uses: actions/upload-artifact@v2
         if: always()
         with:
