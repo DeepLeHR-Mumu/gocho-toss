@@ -72,7 +72,7 @@ jobs:
 
       - name: playwright 버전 확인
         id: playwright-version
-        run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
+        run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('../../../package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
 
       - name: playwright 브라우저 캐시 확인
         uses: actions/cache@v3
