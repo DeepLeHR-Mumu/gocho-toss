@@ -61,7 +61,6 @@ jobs:
 
       - uses: actions/cache@v3
         name: pnpm 캐시 가져오기
-        id: pnpm-cache
         with:
           path: ${{ steps.pnpm-directory.outputs.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -70,7 +69,6 @@ jobs:
 
       - name: dependency 설치
         run: pnpm install --frozen-lockfile
-        if: steps.pnpm-cache.outputs.cache-hit != 'true'
 
       - name: playwright 버전 확인
         id: playwright-version
