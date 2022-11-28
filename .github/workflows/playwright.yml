@@ -34,7 +34,7 @@ jobs:
   test_e2e:
     needs: wait_url
     name: playwright 테스트
-    timeout-minutes: 60
+    timeout-minutes: 30
     runs-on: ubuntu-latest
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
