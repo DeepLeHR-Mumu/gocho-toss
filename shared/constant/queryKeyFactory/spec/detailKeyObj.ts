@@ -4,7 +4,7 @@ export interface SpecDetailRequestDef {
 
 export const specDetailKeyObj = {
   all: [{ data: "specDetail" }] as const,
-  spec: (requestObj: SpecDetailRequestDef) => {
+  detail: (requestObj: SpecDetailRequestDef) => {
     return [{ data: "specDetail", requestObj }] as const;
   },
 };

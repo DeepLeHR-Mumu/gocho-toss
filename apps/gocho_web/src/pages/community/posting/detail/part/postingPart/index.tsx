@@ -21,7 +21,6 @@ import { COMMUNITY_POSTING_EDIT_URL } from "shared-constant/internalURL";
 import { useToast } from "@recoil/hook/toast";
 
 // import { changeTypeIndex } from "./util";
-import { PageHead } from "../../component/pageHead";
 import {
   modalWrapperSkeleton,
   writerProfile,
@@ -121,13 +120,6 @@ export const PostingPart: FunctionComponent = () => {
 
   return (
     <>
-      {/* LATER: 리팩토링시 page로 빼기 */}
-      <PageHead
-        option={{
-          title: postingDetailData.title,
-          id: postingDetailData.id,
-        }}
-      />
       <InvisibleH1 title={`자유게시판 > ${postingDetailData.title} - 고초대졸닷컴`} />
 
       <div css={flexBox}>

@@ -1,30 +1,32 @@
-import { NextPage } from "next";
+import { NextPage, GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { QueryClient, dehydrate } from "@tanstack/react-query";
 
 import { useUserInfo } from "shared-api/auth";
 import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { useAddCompanyViewCount } from "shared-api/viewCount";
-import { useCompanyDetail } from "shared-api/company";
+import { useCompanyDetail, getCompanyDetail } from "shared-api/company";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
+import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { DetailComment } from "@component/global/detailComment";
-import useMoveScroll from "@pages/company/[companyId]/util";
+import useMoveScroll from "@pages/company/util";
 import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import { companyInfoFunnelEvent, companyJdFunnelEvent } from "shared-ga/company";
 
 import { Layout } from "@component/layout";
 
-import { WorkingNotice } from "../component/workingNotice";
-import { MenuButtonList } from "../component/menuButtonList";
-import { HeaderPart } from "../part/headerPart";
-import { BasicInfoPart } from "../part/basicInfoPart";
-import { WelfareInfoPart } from "../part/welfareInfoPart";
-import { FactoryInfoPart } from "../part/factoryInfoPart";
-import { PayInfoPart } from "../part/payInfoPart";
-import { CompanyJobPart } from "../part/companyJobPart";
-import { PageInfoHead } from "../component/pageInfoHead";
-import { PageRecruitHead } from "../component/pageRecruitHead";
+import { WorkingNotice } from "./component/workingNotice";
+import { MenuButtonList } from "./component/menuButtonList";
+import { HeaderPart } from "./part/headerPart";
+import { BasicInfoPart } from "./part/basicInfoPart";
+import { WelfareInfoPart } from "./part/welfareInfoPart";
+import { FactoryInfoPart } from "./part/factoryInfoPart";
+import { PayInfoPart } from "./part/payInfoPart";
+import { CompanyJobPart } from "./part/companyJobPart";
+import { PageInfoHead } from "./component/pageInfoHead";
+import { PageRecruitHead } from "./component/pageRecruitHead";
 
 import {
   mainContainer,
@@ -144,7 +146,25 @@ const CompanyDetailPage: NextPage = () => {
 
   // TODO PART와 컴포넌트와 div, button들의 향연 -> 추상화 레벨을 최대한 하나로 유지하자
   return (
+    // TODO :
     <main css={mainContainer}>
+      {info === "detail" && (
+        <PageInfoHead
+          option={{
+            companyName: companyDetailData.data.name,
+            id: companyDetailData.data.id,
+          }}
+        />
+      )}
+      {info === "jd" && (
+        <PageRecruitHead
+          option={{
+            companyName: companyDetailData.data.name,
+            id: companyDetailData.data.id,
+          }}
+        />
+      )}
+
       <Layout>
         <HeaderPart companyData={companyData.headerData} isBookmarked={isBookmarked} userId={userData?.id} />
         <div css={buttonContainer}>
@@ -176,12 +196,6 @@ const CompanyDetailPage: NextPage = () => {
 
         {info === "detail" && (
           <section>
-            <PageInfoHead
-              option={{
-                companyName: companyData.headerData.name,
-                id: companyData.headerData.id,
-              }}
-            />
             <InvisibleH1 title={`${companyData.headerData.name} > 기업/공장 정보 - 고초대졸닷컴`} />
             <InvisibleH2 title={`${companyData.headerData.name} 기업정보`} />
             <div css={flexBox}>
@@ -242,12 +256,6 @@ const CompanyDetailPage: NextPage = () => {
 
         {info === "jd" && (
           <section>
-            <PageRecruitHead
-              option={{
-                id: companyData.headerData.id,
-                companyName: companyData.headerData.name,
-              }}
-            />
             <InvisibleH1 title={`${companyData.headerData.name} > 생산직 채용공고 - 고초대졸닷컴`} />
             <InvisibleH2 title={`${companyData.headerData.name} 채용공고 모음`} />
             <CompanyJobPart companyId={Number(companyId)} />
@@ -259,3 +267,28 @@ const CompanyDetailPage: NextPage = () => {
 };
 
 export default CompanyDetailPage;
+
+export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
+  const { params } = context;
+  const queryClient = new QueryClient();
+
+  if (params)
+    await queryClient.prefetchQuery(
+      companyDetailKeyObj.detail({ companyId: Number(params.companyId) }),
+      getCompanyDetail
+    );
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+    revalidate: 600,
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: true,
+  };
+};

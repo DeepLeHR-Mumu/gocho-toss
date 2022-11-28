@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { EvalPointBox } from "@pages/datalab/spec/detail/[specId]/part/evaluationPart/component/evalPointBox";
+import { EvalPointBox } from "@pages/datalab/spec/detail/part/evaluationPart/component/evalPointBox";
 
 export default {
   title: "데이터랩/스펙디테일/Part/EvaluationPart/EvalPointBox",
