@@ -13,12 +13,12 @@ importers:
       turbo: ^1.6.3
       typescript: 4.7.2
     dependencies:
+      '@playwright/test': 1.28.0
       eslint-config-deeple: link:packages/eslint-config-deeple
       lint-staged: 13.0.3
       prettier: 2.7.1
       typescript: 4.7.2
     devDependencies:
-      '@playwright/test': 1.28.0
       '@types/node': 18.7.13
       husky: 8.0.1
       turbo: 1.6.3
@@ -2586,7 +2586,7 @@ packages:
     dependencies:
       '@types/node': 18.7.18
       playwright-core: 1.28.0
-    dev: true
+    dev: false
 
   /@pmmmwh/react-refresh-webpack-plugin/0.5.7_metx475lqcp4j5c75za4zf7xbi:
     resolution: {integrity: sha512-bcKCAzF0DV2IIROp9ZHkRJa6O4jy7NlnHdWL3GmcUxYWNjLXkK5kfELELwEfSP5hXPfVL/qOGMAROuMQb9GG8Q==}
@@ -4299,7 +4299,6 @@ packages:
 
   /@types/node/18.7.18:
     resolution: {integrity: sha512-m+6nTEOadJZuTPkKR/SYK3A2d7FZrgElol9UP1Kae90VVU4a6mxnPuLiIW1m4Cq4gZ/nWb9GrdVXJCoCazDAbg==}
-    dev: true
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -10969,7 +10968,7 @@ packages:
     resolution: {integrity: sha512-nJLknd28kPBiCNTbqpu6Wmkrh63OEqJSFw9xOfL9qxfNwody7h6/L3O2dZoWQ6Oxcm0VOHjWmGiCUGkc0X3VZA==}
     engines: {node: '>=14'}
     hasBin: true
-    dev: true
+    dev: false
 
   /pnp-webpack-plugin/1.6.4_typescript@4.7.2:
     resolution: {integrity: sha512-7Wjy+9E3WwLOEL30D+m8TSTF7qJJUJLONBnwQp0518siuMxUQUbgZwssaFX+QKlZkjHZcw/IpZCt/H0srrntSg==}

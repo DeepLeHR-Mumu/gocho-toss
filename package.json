@@ -53,12 +53,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "1.28.0",
     "@types/node": "18.7.13",
     "husky": "^8.0.0",
     "turbo": "^1.6.3"
   },
   "dependencies": {
+    "@playwright/test": "1.28.0",
     "eslint-config-deeple": "workspace:^1.0.0",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
