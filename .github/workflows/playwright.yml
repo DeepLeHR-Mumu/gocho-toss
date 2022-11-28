@@ -61,6 +61,7 @@ jobs:
 
       - uses: actions/cache@v3
         name: pnpm 캐시 설정
+        id: pnpm-cache
         with:
           path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -69,15 +70,17 @@ jobs:
 
       - name: dependency 설치
         run: pnpm install --frozen-lockfile
+        if: steps.pnpm-cache.outputs.cache-hit != 'true'
 
-      - name: Get installed Playwright version
+      - name: playwright 버전 확인
         id: playwright-version
         run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
-      - name: Cache playwright binaries
+
+      - name: playwright 브라우저 캐시 확인
         uses: actions/cache@v3
         id: playwright-cache
         with:
-          path: | 
+          path: |
             ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
 
