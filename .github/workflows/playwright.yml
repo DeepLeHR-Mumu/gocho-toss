@@ -71,7 +71,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: playwright 브라우저 설치
-        run: pnpm playwright install-deps chromium
+        run: pnpx playwright@1.28.0 install-deps chromium
 
       - name: playwright test 실행
         run: pnpm turbo e2e:web && pnpm turbo e2e:mobile
