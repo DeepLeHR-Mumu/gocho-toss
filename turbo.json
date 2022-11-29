@@ -5,15 +5,7 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**"]
     },
-    "//#e2e:web": {
-      "inputs": ["./e2e/gocho_web/**,./e2e/constant"],
-      "outputs": []
-    },
-    "//#e2e:mobile": {
-      "outputs": []
-    },
-    "//#e2e:manager": {
-      "outputs": []
-    }
+    "e2e": { "outputs": [] },
+    "e2e:CICD": { "outputs": [] }
   }
 }
