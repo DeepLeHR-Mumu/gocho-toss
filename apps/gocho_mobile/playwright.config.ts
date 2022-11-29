@@ -20,28 +20,6 @@ const config: PlaywrightTestConfig = {
         ...devices["Galaxy S9+"],
       },
     },
-    // {
-    //   name: "Mobile Safari",
-    //   testDir: "./e2e/gocho_mobile",
-    //   use: {
-    //     baseURL: process.env.GOCHO_MOBILE_URL || "http://localhost:3000",
-    //     ...devices["iPhone 12"],
-    //   },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: {
-    //     channel: 'msedge',
-    //   },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: {
-    //     channel: 'chrome',
-    //   },
-    // },
   ],
 };
 
