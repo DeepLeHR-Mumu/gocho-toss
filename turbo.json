@@ -5,12 +5,7 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**"]
     },
-    "lint": {
-      "outputs": []
-    },
-    "deploy": {
-      "dependsOn": ["build", "lint"],
-      "outputs": []
-    }
+    "e2e": { "outputs": [] },
+    "e2e:CICD": { "outputs": [] }
   }
 }

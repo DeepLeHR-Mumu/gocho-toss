@@ -35,13 +35,6 @@ import {
 } from "./style";
 import { LoginFormValues } from "./type";
 
-declare global {
-  interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    Kakao: any;
-  }
-}
-
 export const LoginModal: FunctionComponent = () => {
   const {
     register,
@@ -86,10 +79,6 @@ export const LoginModal: FunctionComponent = () => {
 
   useEffect(() => {
     loginModalOpenEvent();
-    if (window.Kakao.isInitialized()) {
-      return;
-    }
-    window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
   }, []);
 
   return (

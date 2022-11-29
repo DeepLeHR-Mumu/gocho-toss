@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { NoDataDesc } from "@pages/jd/detail/[jobId]/part/common/component/noDataDesc";
+import { NoDataDesc } from "@pages/jd/detail/part/common/component/noDataDesc";
 
 export default {
   title: "공고/detail/part/common/component/NoDataDesc",

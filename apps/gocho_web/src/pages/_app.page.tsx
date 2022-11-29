@@ -31,8 +31,8 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
     site: "datadoghq.com",
     service: "gocho-web",
 
-    version: "0.0.1",
-    sampleRate: 30,
+    version: "0.0.2",
+    sampleRate: 20,
     sessionReplaySampleRate: 10,
     trackInteractions: true,
     trackResources: true,
@@ -119,10 +119,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     };
   }, [router.events]);
 
-  // host : localhost:3000
-  // origin : http://localhost:3000
-  // pathname: /
-  // protocol : http:
+  useEffect(() => {
+    window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
+  }, []);
 
   return (
     <RecoilRoot>
