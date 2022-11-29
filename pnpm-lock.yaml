@@ -111,6 +111,7 @@ importers:
       '@emotion/babel-preset-css-prop': ^11.10.0
       '@emotion/react': ^11.10.0
       '@next/bundle-analyzer': ^13.0.3
+      '@playwright/test': 1.28.0
       '@storybook/addon-actions': ^6.5.10
       '@storybook/addon-essentials': ^6.5.10
       '@storybook/addon-interactions': ^6.5.10
@@ -186,6 +187,7 @@ importers:
       '@babel/plugin-proposal-private-methods': 7.18.6_@babel+core@7.19.1
       '@babel/plugin-proposal-private-property-in-object': 7.18.6_@babel+core@7.19.1
       '@emotion/babel-preset-css-prop': 11.10.0_@babel+core@7.19.1
+      '@playwright/test': 1.28.0
       '@storybook/addon-actions': 6.5.12_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/addon-essentials': 6.5.12_hmn6dpyz5jsqa4i6xcwdei5ula
       '@storybook/addon-interactions': 6.5.12_lpddxej3z5bxm425elitzlwdva
@@ -216,6 +218,7 @@ importers:
       '@emotion/babel-preset-css-prop': ^11.10.0
       '@emotion/react': ^11.10.0
       '@next/bundle-analyzer': ^13.0.3
+      '@playwright/test': 1.28.0
       '@storybook/addon-actions': ^6.5.10
       '@storybook/addon-essentials': ^6.5.10
       '@storybook/addon-interactions': ^6.5.10
@@ -298,6 +301,7 @@ importers:
       '@babel/plugin-proposal-private-methods': 7.18.6_@babel+core@7.19.1
       '@babel/plugin-proposal-private-property-in-object': 7.18.6_@babel+core@7.19.1
       '@emotion/babel-preset-css-prop': 11.10.0_@babel+core@7.19.1
+      '@playwright/test': 1.28.0
       '@storybook/addon-actions': 6.5.12_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/addon-essentials': 6.5.12_hmn6dpyz5jsqa4i6xcwdei5ula
       '@storybook/addon-interactions': 6.5.12_lpddxej3z5bxm425elitzlwdva
@@ -2586,7 +2590,6 @@ packages:
     dependencies:
       '@types/node': 18.7.18
       playwright-core: 1.28.0
-    dev: false
 
   /@pmmmwh/react-refresh-webpack-plugin/0.5.7_metx475lqcp4j5c75za4zf7xbi:
     resolution: {integrity: sha512-bcKCAzF0DV2IIROp9ZHkRJa6O4jy7NlnHdWL3GmcUxYWNjLXkK5kfELELwEfSP5hXPfVL/qOGMAROuMQb9GG8Q==}
@@ -9295,7 +9298,7 @@ packages:
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
       '@jest/types': 27.5.1
-      '@types/node': 18.7.13
+      '@types/node': 18.7.18
     dev: true
 
   /jest-regex-util/26.0.0:
@@ -10968,7 +10971,6 @@ packages:
     resolution: {integrity: sha512-nJLknd28kPBiCNTbqpu6Wmkrh63OEqJSFw9xOfL9qxfNwody7h6/L3O2dZoWQ6Oxcm0VOHjWmGiCUGkc0X3VZA==}
     engines: {node: '>=14'}
     hasBin: true
-    dev: false
 
   /pnp-webpack-plugin/1.6.4_typescript@4.7.2:
     resolution: {integrity: sha512-7Wjy+9E3WwLOEL30D+m8TSTF7qJJUJLONBnwQp0518siuMxUQUbgZwssaFX+QKlZkjHZcw/IpZCt/H0srrntSg==}

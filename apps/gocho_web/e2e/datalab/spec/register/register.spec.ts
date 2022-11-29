@@ -1,7 +1,7 @@
 import { test, expect, Page, APIRequestContext, Response } from "@playwright/test";
 
-import { linkObj } from "../../../../constant/internalURL";
-import { BACKEND_URL } from "../../../../constant/externalURL";
+import { linkObj } from "shared-constant/e2e/internalURL";
+import { BACKEND_URL } from "shared-constant/e2e/externalURL";
 import { loginTester } from "../../../common/common.spec";
 
 test.beforeEach(async ({ page }) => {
@@ -17,7 +17,6 @@ const basicSpecRegisterTester = async (page: Page) => {
   ]);
   const userData = await userCheckResponse.json();
   await expect(page.locator(`strong:has-text("${userData.data.nickname}")`)).toBeVisible();
-
   // basic 경고창 확인
   await page.getByRole("button", { name: "다음" }).click();
   await expect(page.locator('p:has-text("나이를 입력해주세요.")')).toBeVisible();
