@@ -6,6 +6,7 @@
       "outputs": [".next/**"]
     },
     "//#e2e:web": {
+      "inputs": ["./e2e/gocho_web/**,./e2e/constant"],
       "outputs": []
     },
     "//#e2e:mobile": {
