@@ -128,13 +128,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
             </p>
           </li>
         </ul>{" "}
-        <Link
-          href={{
-            pathname: `${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`,
-            query: { info: "detail" },
-          }}
-          passHref
-        >
+        <Link href={`${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`} passHref>
           <a css={companyNameCSS}>{jobDetailData.company.name}</a>
         </Link>
         <p css={titleCSS}>{jobDetailData.title}</p>
@@ -164,13 +158,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
             </button>
           </li>
           <li>
-            <Link
-              href={{
-                pathname: `${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`,
-                query: { info: "detail" },
-              }}
-              passHref
-            >
+            <Link href={`${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`} passHref>
               <a css={buttonCSS(false)}>기업정보</a>
             </Link>
           </li>

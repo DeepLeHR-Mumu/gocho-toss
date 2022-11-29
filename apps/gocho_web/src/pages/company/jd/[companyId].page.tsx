@@ -11,22 +11,22 @@ import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { DetailComment } from "@component/global/detailComment";
-import useMoveScroll from "@pages/company/util";
-import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
+import useMoveScroll from "@pages/company/detail/util";
+import { COMPANY_DETAIL_URL, COMPANY_JD_URL } from "shared-constant/internalURL";
 import { companyInfoFunnelEvent, companyJdFunnelEvent } from "shared-ga/company";
 
 import { Layout } from "@component/layout";
 
-import { WorkingNotice } from "./component/workingNotice";
-import { MenuButtonList } from "./component/menuButtonList";
-import { HeaderPart } from "./part/headerPart";
-import { BasicInfoPart } from "./part/basicInfoPart";
-import { WelfareInfoPart } from "./part/welfareInfoPart";
-import { FactoryInfoPart } from "./part/factoryInfoPart";
-import { PayInfoPart } from "./part/payInfoPart";
+import { WorkingNotice } from "../component/workingNotice";
+import { MenuButtonList } from "../component/menuButtonList";
+import { HeaderPart } from "../component/header";
+import { BasicInfoPart } from "../detail/part/basicInfoPart";
+import { WelfareInfoPart } from "../part/welfareInfoPart";
+import { FactoryInfoPart } from "../part/factoryInfoPart";
+import { PayInfoPart } from "../part/payInfoPart";
 import { CompanyJobPart } from "./part/companyJobPart";
-import { PageInfoHead } from "./component/pageInfoHead";
-import { PageRecruitHead } from "./component/pageRecruitHead";
+import { PageInfoHead } from "../component/pageInfoHead";
+import { PageRecruitHead } from "../component/pageRecruitHead";
 
 import {
   mainContainer,
@@ -54,11 +54,7 @@ const CompanyDetailPage: NextPage = () => {
     if (info) {
       return;
     }
-    if (!info && companyId)
-      router.replace({
-        pathname: `${COMPANY_DETAIL_URL}/${companyId}`,
-        query: { info: "detail" },
-      });
+    if (!info && companyId) router.replace(`${COMPANY_DETAIL_URL}/${companyId}`);
   }, [companyId, info, router]);
 
   useEffect(() => {
@@ -171,10 +167,7 @@ const CompanyDetailPage: NextPage = () => {
           <button
             type="button"
             onClick={() => {
-              router.push({
-                pathname: `${COMPANY_DETAIL_URL}/${companyData.headerData.id}`,
-                query: { info: "detail" },
-              });
+              router.push(`${COMPANY_DETAIL_URL}/${companyData.headerData.id}`);
             }}
             css={changeDataButton(info === "detail")}
           >
@@ -183,10 +176,7 @@ const CompanyDetailPage: NextPage = () => {
           <button
             type="button"
             onClick={() => {
-              router.push({
-                pathname: `${COMPANY_DETAIL_URL}/${companyData.headerData.id}`,
-                query: { info: "jd" },
-              });
+              router.push(`${COMPANY_JD_URL}/${companyData.headerData.id}`);
             }}
             css={changeDataButton(info === "jd")}
           >

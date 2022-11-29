@@ -14,7 +14,7 @@ import { companyBookmarkEvent } from "shared-ga/company";
 import { useModal } from "@recoil/hook/modal";
 
 import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr } from "shared-api/bookmark";
-import { HeaderPartProps } from "./type";
+import { HeaderProps } from "./type";
 import {
   sectionContainer,
   companyLogoBox,
@@ -31,7 +31,7 @@ import {
   catchLogoBox,
 } from "./style";
 
-export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ companyData, isBookmarked, userId }) => {
+export const Header: FunctionComponent<HeaderProps> = ({ companyData, isBookmarked, userId }) => {
   const queryClient = useQueryClient();
   const { data: userInfoData } = useUserInfo();
   const { setCurrentModal } = useModal();

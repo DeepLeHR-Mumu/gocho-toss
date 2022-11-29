@@ -7,7 +7,8 @@ export const JOBS_LIST_URL = "/jd/list";
 export const JOBS_DETAIL_URL = "/jd/detail";
 export const JOBS_EXPLIST_URL = "/jd/explist";
 
-export const COMPANY_DETAIL_URL = "/company";
+export const COMPANY_DETAIL_URL = "/company/detail";
+export const COMPANY_JD_URL = "/company/jd";
 
 export const COMMUNITY_POSTINGS_LIST_URL = "/community/posting/list";
 export const COMMUNITY_POSTING_DETAIL_URL = "/community/posting/detail";

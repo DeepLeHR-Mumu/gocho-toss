@@ -48,32 +48,30 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
 
   return (
     <article css={cardWrapper}>
-      <Link href={{ pathname: `${COMPANY_DETAIL_URL}/${companyData.id}`, query: { info: "detail" } }} passHref>
-        <a>
-          <button
-            type="button"
-            css={bookmarkButtonWrapper(isBookmarked)}
-            onClick={(event) => {
-              event.preventDefault();
-              return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
+      <Link href={`${COMPANY_DETAIL_URL}/${companyData.id}`} passHref>
+        <button
+          type="button"
+          css={bookmarkButtonWrapper(isBookmarked)}
+          onClick={(event) => {
+            event.preventDefault();
+            return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
+          }}
+        >
+          <BsFillBookmarkFill />
+        </button>
+        {/* <p css={isRecruitingCSS}>#채용중</p> */}
+        <strong css={NameCSS}>{companyData.name}</strong>
+        <div css={companyLogoBox}>
+          <Image
+            layout="fill"
+            objectFit="contain"
+            src={imageSrc || companyData.logoUrl}
+            alt={companyData.name}
+            onError={() => {
+              return setImageSrc(defaultCompanyLogo);
             }}
-          >
-            <BsFillBookmarkFill />
-          </button>
-          {/* <p css={isRecruitingCSS}>#채용중</p> */}
-          <strong css={NameCSS}>{companyData.name}</strong>
-          <div css={companyLogoBox}>
-            <Image
-              layout="fill"
-              objectFit="contain"
-              src={imageSrc || companyData.logoUrl}
-              alt={companyData.name}
-              onError={() => {
-                return setImageSrc(defaultCompanyLogo);
-              }}
-            />
-          </div>
-        </a>
+          />
+        </div>
       </Link>
     </article>
   );

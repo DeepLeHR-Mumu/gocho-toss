@@ -67,7 +67,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
       >
         <BsFillBookmarkFill />
       </button>
-      <Link href={{ pathname: `${COMPANY_DETAIL_URL}/${companyData.id}`, query: { info: "detail" } }} passHref>
+      <Link href={`${COMPANY_DETAIL_URL}/${companyData.id}`} passHref>
         <a>
           <strong css={NameCSS}>{companyData.name}</strong>
           <div css={companyLogoBox}>
