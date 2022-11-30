@@ -272,6 +272,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
   const { params } = context;
   const queryClient = new QueryClient();
 
+
   if (params)
     await queryClient.prefetchQuery(
       companyDetailKeyObj.detail({ companyId: Number(params.companyId) }),
