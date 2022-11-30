@@ -74,13 +74,19 @@ export const ListPart: FunctionComponent = () => {
       return;
     }
     jdSearchEvent(searchVal.searchWord);
+
+    const filterRotationArr = searchVal.rotation.map((rotation) => {
+      if (rotation.includes("조")) return `${rotation[0]};${rotation[3]}`;
+      return rotation;
+    });
+
     setSearchQuery({
       contractType: searchVal.contractType,
       industry: searchVal.industry,
       place: searchVal.place,
       possibleEdu: searchVal.possibleEdu,
       requiredExp: searchVal.requiredExp,
-      rotation: searchVal.rotation,
+      rotation: filterRotationArr,
       task: searchVal.task,
       searchWord: searchVal.searchWord,
     });
