@@ -74,8 +74,16 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
             const isMainTask = jobForm.watch("position_arr")[index].task_main === task.mainTask;
             if (isMainTask)
               return task.subTaskArr.map((subTask) => {
+                // console.log(subTask);
+                // console.log(jobForm.watch("position_arr")[index].task_sub_arr);
+                // console.log(jobForm.watch("position_arr")[index].task_sub_arr.includes(subTask));
+
                 return (
-                  <option key={`${id}${subTask}`} value={subTask}>
+                  <option
+                    key={`${id}${subTask}`}
+                    value={subTask}
+                    // selected={jobForm.watch("position_arr")[index].task_sub_arr.includes(subTask)}
+                  >
                     {subTask}
                   </option>
                 );
@@ -162,7 +170,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
           css={hireNumberButton}
           onClick={() => {
             jobForm.setValue(`position_arr.${index}.place.address_arr`, [
-              ...jobForm.watch("position_arr")[index].place.address_arr,
+              ...(jobForm.watch("position_arr")[index].place.address_arr || []),
               `${bigPlace} ${smallPlace}`,
             ]);
           }}
@@ -171,7 +179,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
         </button>
       </div>
       <div css={flexBox}>
-        {jobForm.watch("position_arr")[index].place.address_arr.map((place) => {
+        {jobForm.watch("position_arr")[index].place.address_arr?.map((place) => {
           return (
             <div key={`${id}${place}`} css={inputContainer}>
               {place}
@@ -180,9 +188,9 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                 css={deletePlaceButton}
                 onClick={() => {
                   jobForm.setValue(`position_arr.${index}.place.address_arr`, [
-                    ...jobForm.watch("position_arr")[index].place.address_arr.filter((element) => {
+                    ...(jobForm.watch("position_arr")[index].place.address_arr?.filter((element) => {
                       return element !== place;
-                    }),
+                    }) || []),
                   ]);
                 }}
               >
