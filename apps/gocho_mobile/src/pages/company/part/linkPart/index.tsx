@@ -27,12 +27,12 @@ export const LinkPart: FunctionComponent = () => {
         <div css={container}>
           <div css={linkBox}>
             {companyDetailData.data.catchUrl && (
-              <a target="_blank" href={companyDetailData.data.catchUrl} rel="noreferrer">
+              <a href={companyDetailData.data.catchUrl} target="_blank" rel="noopener noreferrer">
                 캐치 기업정보 더보기
               </a>
             )}
             {companyDetailData.data.youtubeUrl && (
-              <a target="_blank" href={companyDetailData.data.youtubeUrl} rel="noreferrer">
+              <a href={companyDetailData.data.youtubeUrl} target="_blank" rel="noopener noreferrer">
                 <div css={youtubeIconBox}>
                   <FiYoutube />
                 </div>
