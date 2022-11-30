@@ -308,4 +308,4 @@ export const certificateArr = [
   "화훼장식",
   "환경",
   "환경위해관리",
-];
+] as const;

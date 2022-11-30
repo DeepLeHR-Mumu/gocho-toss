@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { DetailSpecBox } from "@pages/datalab/spec/detail/[specId]/part/detailInfoPart/component/detailSpecBox";
+import { DetailSpecBox } from "@pages/datalab/spec/detail/part/detailInfoPart/component/detailSpecBox";
 
 export default {
   title: "데이터랩/스펙디테일/part/DetailInfoPart/DetailSpecBox",

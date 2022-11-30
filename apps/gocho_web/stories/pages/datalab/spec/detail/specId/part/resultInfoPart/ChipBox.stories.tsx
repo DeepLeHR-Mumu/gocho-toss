@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { ChipBox } from "@pages/datalab/spec/detail/[specId]/part/resultInfoPart/component/chipBox";
+import { ChipBox } from "@pages/datalab/spec/detail/part/resultInfoPart/component/chipBox";
 
 export default {
   title: "데이터랩/스펙디테일/ChipBox",

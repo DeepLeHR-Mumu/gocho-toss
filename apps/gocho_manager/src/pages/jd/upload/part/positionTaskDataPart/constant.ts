@@ -1,4 +1,4 @@
-export const contractTypeArr = ["정규직", "계약직", "계약>정규", "연수생", "인턴"];
+export const contractTypeArr = ["정규직", "계약직", "계약>정규", "연수생", "인턴"] as const;
 export const taskArr = [
   {
     mainTask: "생산",
@@ -32,7 +32,7 @@ export const taskArr = [
   { mainTask: "설계/CAD/CAM", subTaskArr: ["없음"] },
   { mainTask: "시설관리", subTaskArr: ["전기시설", "기계시설", "영선"] },
   { mainTask: "기타", subTaskArr: ["없음"] },
-];
+] as const;
 
 export const rotationArr = [
   { data: "주간", name: "주간" },
@@ -47,13 +47,13 @@ export const rotationArr = [
   { data: "3;2", name: "3조 2교대" },
   { data: "3;3", name: "3조 3교대" },
   { data: "4;2", name: "4조 2교대" },
-  { data: "4:3", name: "4조 3교대" },
-  { data: "4:4", name: "4조 4교대" },
-  { data: "5:3", name: "5조 3교대" },
-  { data: "5:4", name: "5조 4교대" },
-];
+  { data: "4;3", name: "4조 3교대" },
+  { data: "4;4", name: "4조 4교대" },
+  { data: "5;3", name: "5조 3교대" },
+  { data: "5;4", name: "5조 4교대" },
+] as const;
 
-export const placeTypeArr = ["일반", "전국", "해외", "기타"];
+export const placeTypeArr = ["일반", "전국", "해외", "기타"] as const;
 
 export const placeArr = [
   "서울특별시",
@@ -73,4 +73,4 @@ export const placeArr = [
   "경상북도",
   "경상남도",
   "제주특별자치도",
-];
+] as const;

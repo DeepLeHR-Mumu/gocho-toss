@@ -77,7 +77,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
           css={selectBox}
           onChange={(e: ChangeEvent<HTMLSelectElement>) => {
             jobForm.setValue(`position_arr.${index}.preferred_certi_arr`, [
-              ...jobForm.watch("position_arr")[index].preferred_certi_arr,
+              ...(jobForm.watch("position_arr")[index].preferred_certi_arr || []),
               e.target.value,
             ]);
             setCertiSearchWord("");
@@ -100,7 +100,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
         </select>
       </div>
       <div css={flexBox}>
-        {jobForm.watch("position_arr")[index].preferred_certi_arr.map((certi) => {
+        {jobForm.watch("position_arr")[index].preferred_certi_arr?.map((certi) => {
           return (
             <div key={`${id}${certi}`} css={inputContainer}>
               {certi}
@@ -109,9 +109,9 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
                 css={deletePlaceButton}
                 onClick={() => {
                   jobForm.setValue(`position_arr.${index}.preferred_certi_arr`, [
-                    ...jobForm.watch("position_arr")[index].preferred_certi_arr.filter((element) => {
+                    ...(jobForm.watch("position_arr")[index].preferred_certi_arr?.filter((element) => {
                       return element !== certi;
-                    }),
+                    }) || []),
                   ]);
                 }}
               >

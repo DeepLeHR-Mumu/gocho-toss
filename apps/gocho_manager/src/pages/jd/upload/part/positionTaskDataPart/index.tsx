@@ -162,7 +162,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
           css={hireNumberButton}
           onClick={() => {
             jobForm.setValue(`position_arr.${index}.place.address_arr`, [
-              ...jobForm.watch("position_arr")[index].place.address_arr,
+              ...(jobForm.watch("position_arr")[index].place.address_arr || []),
               `${bigPlace} ${smallPlace}`,
             ]);
           }}
@@ -171,7 +171,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
         </button>
       </div>
       <div css={flexBox}>
-        {jobForm.watch("position_arr")[index].place.address_arr.map((place) => {
+        {jobForm.watch("position_arr")[index].place.address_arr?.map((place) => {
           return (
             <div key={`${id}${place}`} css={inputContainer}>
               {place}
@@ -180,9 +180,9 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                 css={deletePlaceButton}
                 onClick={() => {
                   jobForm.setValue(`position_arr.${index}.place.address_arr`, [
-                    ...jobForm.watch("position_arr")[index].place.address_arr.filter((element) => {
+                    ...(jobForm.watch("position_arr")[index].place.address_arr?.filter((element) => {
                       return element !== place;
-                    }),
+                    }) || []),
                   ]);
                 }}
               >

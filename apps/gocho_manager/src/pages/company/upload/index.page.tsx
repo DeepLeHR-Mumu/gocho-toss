@@ -1,7 +1,6 @@
 import { useState } from "react";
 import type { NextPage } from "next";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import { useQueryClient } from "@tanstack/react-query";
 
 import { useAddCompany } from "@api/company/useAddCompany";
 import { mainContainer, pageTitle } from "@style/commonStyles";
@@ -16,18 +15,17 @@ import { blankFactory } from "./constant";
 import { formContainer, addFactoryButton, submitButton, checkMsgBox } from "./style";
 
 const CompanyUpload: NextPage = () => {
-  const queryClient = useQueryClient();
-
   const [logoPicture, setLogoPicture] = useState<File>();
   const [checkMsg, setCheckMsg] = useState<string>();
 
   const { mutate } = useAddCompany();
 
-  const { register, control, handleSubmit, watch } = useForm<CompanyFormValues>({
+  const companyForm = useForm<CompanyFormValues>({
     defaultValues: {
       nozo: { exists: false, desc: null },
     },
   });
+  const { register, control, handleSubmit, watch } = companyForm;
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -46,7 +44,6 @@ const CompanyUpload: NextPage = () => {
         { dto: blob, image: logoPicture },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries();
             setCheckMsg("기업이 업로드 되었습니다!");
           },
 
@@ -67,7 +64,7 @@ const CompanyUpload: NextPage = () => {
         <PayInfoPart register={register} />
         <ul>
           {fields.map((item, index) => {
-            return <FactoryBox key={item.id} index={index} register={register} watch={watch} remove={remove} />;
+            return <FactoryBox key={item.id} index={index} companyForm={companyForm} remove={remove} />;
           })}
         </ul>
         <button

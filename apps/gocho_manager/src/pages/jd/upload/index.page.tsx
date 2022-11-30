@@ -47,7 +47,7 @@ const JdUpload: NextPage = () => {
       ...jobObj,
       process_arr: jobObj.process_arr?.split("\n"),
       apply_route_arr: jobObj.apply_route_arr?.split("\n"),
-      etc_arr: jobObj.etc_arr?.split("\n"),
+      etc_arr: jobObj.etc_arr?.split("\n") || null,
       position_arr: jobObj.position_arr.map((position) => {
         return {
           ...position,

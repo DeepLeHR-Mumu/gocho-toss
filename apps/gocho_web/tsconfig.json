@@ -14,9 +14,9 @@
       "@util/*": ["src/util/*"],
       "@api/*": ["src/api/*"],
       "@recoil/*": ["src/recoil/*"],
-      "@hook/*": ["src/hook/*"],
+      "@hook/*": ["src/hook/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "e2e"]
 }

@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { NotExistingBox } from "@pages/datalab/spec/detail/[specId]/part/component/notExistingBox";
+import { NotExistingBox } from "@pages/datalab/spec/detail/part/component/notExistingBox";
 
 export default {
   title: "데이터랩/스펙디테일/part/component/NotExistingBox",

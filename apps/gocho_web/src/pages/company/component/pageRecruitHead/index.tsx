@@ -18,16 +18,16 @@ export const PageRecruitHead: FunctionComponent<PageRecruitHeadProps> = ({ optio
       <meta property="og:title" content={`[${option.companyName}] ${COMPANY_RECRUIT_META.ogTitle}`} />
       <meta property="og:description" content={`${option.companyName} ${COMPANY_RECRUIT_META.ogDesc}`} />
       <meta property="og:type" content="website" />
-      <meta property="og:url" content={`${GOCHO_DESKTOP_URL}/company/${option.id}/recruit`} />
+      <meta property="og:url" content={`${GOCHO_DESKTOP_URL}/company/${option.id}?info=jd`} />
       <meta property="og:site_name" content={COMPANY_RECRUIT_META.ogSiteName} />
       <meta property="og:image" content={COMPANY_RECRUIT_META.ogImage} />
       <meta property="og:image_secure" content={COMPANY_RECRUIT_META.ogImage} />
       <meta property="og:article:author" content={COMPANY_RECRUIT_META.ogAuthor} />
-      <link rel="canonical" href={`${GOCHO_DESKTOP_URL}/company/${option.id}/recruit`} />
+      <link rel="canonical" href={`${GOCHO_DESKTOP_URL}/company/${option.id}?info=jd`} />
       <link
         rel="alternate"
         media="only screen and (max-width: 640px)"
-        href={`${GOCHO_MOBILE_URL}/company/${option.id}/recruit`}
+        href={`${GOCHO_MOBILE_URL}/company/${option.id}?info=jd`}
       />
     </Head>
   );
