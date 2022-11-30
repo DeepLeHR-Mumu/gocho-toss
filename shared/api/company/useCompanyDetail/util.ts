@@ -1,7 +1,5 @@
 import { CompanyObjDef } from "../type/company";
 
-// import { UseCompanyDetailResultDef } from "./type";
-
 export const selector = (data: CompanyObjDef) => {
   return {
     id: data.id,

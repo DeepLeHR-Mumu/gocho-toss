@@ -1,4 +1,5 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,12 +13,13 @@ import busFalseIcon from "shared-image/page/factory/bus_false_icon.svg";
 import dormitoryIcon from "shared-image/page/factory/dormitory_icon.svg";
 import xIcon from "shared-image/page/factory/x_icon.svg";
 import oIcon from "shared-image/page/factory/o_icon.svg";
+import { useCompanyDetail } from "shared-api/company";
 
 import { kakaoChannelUrl } from "shared-constant/help";
 // import { KakaoMap } from "@pages/companies/component/kakaoMap";
 import { InvisibleH3 } from "shared-ui/common/atom/invisibleH3";
 
-import { FactoryInfoPartProps } from "./type";
+import { MenuButtonList } from "../../../component/menuButtonList";
 import {
   buttonContainer,
   iconBox,
@@ -43,27 +45,43 @@ import {
   noFactoryButton,
   infoChildBox,
   subDesc,
+  wrapper,
 } from "./style";
 
-export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({ companyData }) => {
-  const [activeFactory, setActiveFactory] = useState<number>(companyData.factoryArr[0] && companyData.factoryArr[0].id);
+export const FactoryInfoPart: FunctionComponent = () => {
+  const router = useRouter();
+  const { companyId } = router.query;
+  const [activeFactory, setActiveFactory] = useState<null | number>(null);
+
+  const { data: companyDetailData, isLoading } = useCompanyDetail({ companyId: Number(companyId) });
+
+  useEffect(() => {
+    if (companyDetailData && companyDetailData.factoryArr.length !== 0) {
+      setActiveFactory(companyDetailData.factoryArr[0].id);
+    }
+  }, [companyDetailData]);
+
+  if (!companyDetailData || isLoading) {
+    return <section css={wrapper} />;
+  }
 
   return (
-    <div>
+    <section id="factoryInfo" css={wrapper}>
+      <MenuButtonList activeMenu="공장 정보" />
       <InvisibleH3 title="공장 정보" />
-      <div css={buttonContainer}>
+      <section css={buttonContainer}>
         <div css={iconBox}>
           <Image
             layout="fill"
             objectFit="contain"
-            src={companyData.factoryArr.length === 0 ? noData : yesData}
-            alt={companyData.factoryArr.length === 0 ? "공장정보가 없습니다." : "공장정보가 있습니다."}
+            src={companyDetailData.factoryArr.length === 0 ? noData : yesData}
+            alt={companyDetailData.factoryArr.length === 0 ? "공장정보가 없습니다." : "공장정보가 있습니다."}
           />
         </div>
 
-        {companyData.factoryArr.length === 0 && <p css={noFactoryWarning}>등록된 공장이 없습니다</p>}
+        {companyDetailData.factoryArr.length === 0 && <p css={noFactoryWarning}>등록된 공장이 없습니다</p>}
 
-        {companyData.factoryArr.map((factory) => {
+        {companyDetailData.factoryArr.map((factory) => {
           return (
             <button
               type="button"
@@ -78,9 +96,9 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({ compa
             </button>
           );
         })}
-      </div>
+      </section>
       <div>
-        {companyData.factoryArr.length === 0 && (
+        {companyDetailData.factoryArr.length === 0 && (
           <div css={noFactoryBox}>
             <p css={noFactoryDesc}>혹시 재직자/인사담당자 이신가요?</p>
             <Link href={kakaoChannelUrl} passHref>
@@ -91,7 +109,7 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({ compa
           </div>
         )}
 
-        {companyData.factoryArr.map((factory) => {
+        {companyDetailData.factoryArr.map((factory) => {
           const totalNumber = factory.maleNumber + factory.femaleNumber;
 
           return (
@@ -188,6 +206,6 @@ export const FactoryInfoPart: FunctionComponent<FactoryInfoPartProps> = ({ compa
           );
         })}
       </div>
-    </div>
+    </section>
   );
 };

@@ -4,14 +4,23 @@ import { menuButtonArr } from "./constant";
 import { MenuButtonListProps } from "./type";
 import { buttonContainer, menuButton } from "./style";
 
-export const MenuButtonList: FunctionComponent<MenuButtonListProps> = ({ activeMenu, tab, tabClick }) => {
+export const MenuButtonList: FunctionComponent<MenuButtonListProps> = ({ activeMenu }) => {
   return (
-    <div css={buttonContainer} ref={tabClick}>
-      {menuButtonArr.map((text, index) => {
-        const isActive = text === activeMenu;
+    <div css={buttonContainer}>
+      {menuButtonArr.map((menu) => {
+        const isActive = menu.title === activeMenu;
+        const scrollToPartHandler = () => {
+          document.getElementById(menu.id)?.scrollIntoView({ behavior: "smooth", block: "center" });
+        };
+
         return (
-          <button type="button" css={menuButton(isActive)} key={`companyDetailMenu${text}`} onClick={tab[index]}>
-            {text}
+          <button
+            type="button"
+            css={menuButton(isActive)}
+            key={`companyDetailMenu${menu.title}`}
+            onClick={scrollToPartHandler}
+          >
+            {menu.title}
           </button>
         );
       })}

@@ -1,4 +1,4 @@
-export interface HeaderProps {
+export interface HeaderPartProps {
   companyData: {
     id: number;
     logoUrl: string;

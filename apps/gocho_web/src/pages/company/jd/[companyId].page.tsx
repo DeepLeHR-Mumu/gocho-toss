@@ -19,7 +19,7 @@ import { Layout } from "@component/layout";
 
 import { WorkingNotice } from "../component/workingNotice";
 import { MenuButtonList } from "../component/menuButtonList";
-import { HeaderPart } from "../component/header";
+import { HeaderPart } from "../part/headerPart";
 import { BasicInfoPart } from "../detail/part/basicInfoPart";
 import { WelfareInfoPart } from "../part/welfareInfoPart";
 import { FactoryInfoPart } from "../part/factoryInfoPart";

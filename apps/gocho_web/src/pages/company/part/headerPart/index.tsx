@@ -3,18 +3,19 @@ import { FiEye, FiYoutube } from "react-icons/fi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useQueryClient } from "@tanstack/react-query";
 
+import { useCompanyDetail } from "shared-api/company";
+import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr, useUserCompanyBookmarkArr } from "shared-api/bookmark";
+import { useUserInfo } from "shared-api/auth";
+import { companyBookmarkEvent } from "shared-ga/company";
 import catchLogoSrc from "shared-image/global/common/catch_logo.png";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
-import { useUserInfo } from "shared-api/auth";
-import { companyBookmarkEvent } from "shared-ga/company";
 
 import { useModal } from "@recoil/hook/modal";
 
-import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr } from "shared-api/bookmark";
-import { HeaderProps } from "./type";
 import {
   sectionContainer,
   companyLogoBox,
@@ -31,33 +32,42 @@ import {
   catchLogoBox,
 } from "./style";
 
-export const Header: FunctionComponent<HeaderProps> = ({ companyData, isBookmarked, userId }) => {
+export const HeaderPart: FunctionComponent = () => {
   const queryClient = useQueryClient();
-  const { data: userInfoData } = useUserInfo();
+  const router = useRouter();
+  const { companyId } = router.query;
+
+  const { data: userData } = useUserInfo();
   const { setCurrentModal } = useModal();
 
+  const { data: companyDetailData, isLoading } = useCompanyDetail({ companyId: Number(companyId) });
+  const { data: userCompanyBookmarkArr } = useUserCompanyBookmarkArr({ userId: userData?.id });
   const { mutate: addMutate } = useAddCompanyBookmarkArr({
-    id: companyData?.id as number,
-    logo_url: companyData?.logoUrl as string,
-    name: companyData?.name as string,
+    id: companyDetailData?.id as number,
+    logo_url: companyDetailData?.logoUrl as string,
+    name: companyDetailData?.name as string,
   });
   const { mutate: deleteMutate } = useDeleteCompanyBookmarkArr({
-    id: companyData?.id as number,
-    logo_url: companyData?.logoUrl as string,
-    name: companyData?.name as string,
+    id: companyDetailData?.id as number,
+    logo_url: companyDetailData?.logoUrl as string,
+    name: companyDetailData?.name as string,
   });
 
-  const [imageSrc, setImageSrc] = useState(companyData?.logoUrl as string);
+  const [imageSrc, setImageSrc] = useState(companyDetailData?.logoUrl as string);
+
+  if (!companyDetailData || isLoading) {
+    return <div>..</div>;
+  }
 
   const addCompanyBookmark = () => {
     return (
-      userId &&
+      userData &&
       addMutate(
-        { userId, elemId: companyData.id },
+        { userId: userData.id, elemId: companyDetailData.id },
         {
           onSuccess: () => {
-            companyBookmarkEvent(companyData.id);
-            queryClient.invalidateQueries(companyDetailKeyObj.detail({ companyId: companyData.id }));
+            companyBookmarkEvent(companyDetailData.id);
+            queryClient.invalidateQueries(companyDetailKeyObj.detail({ companyId: companyDetailData.id }));
           },
         }
       )
@@ -66,17 +76,23 @@ export const Header: FunctionComponent<HeaderProps> = ({ companyData, isBookmark
 
   const deleteCompanyBookmark = () => {
     return (
-      userId &&
+      userData &&
       deleteMutate(
-        { userId, elemId: companyData.id },
+        { userId: userData.id, elemId: companyDetailData.id },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(companyDetailKeyObj.detail({ companyId: companyData.id }));
+            queryClient.invalidateQueries(companyDetailKeyObj.detail({ companyId: companyDetailData.id }));
           },
         }
       )
     );
   };
+
+  const isBookmarked = Boolean(
+    userCompanyBookmarkArr?.some((company) => {
+      return company.id === companyDetailData?.id;
+    })
+  );
 
   return (
     <section css={sectionContainer}>
@@ -84,8 +100,8 @@ export const Header: FunctionComponent<HeaderProps> = ({ companyData, isBookmark
         <Image
           layout="fill"
           objectFit="contain"
-          src={imageSrc || companyData.logoUrl}
-          alt={`${companyData.name} 기업 로고`}
+          src={imageSrc || companyDetailData.logoUrl}
+          alt={`${companyDetailData.name} 기업 로고`}
           onError={() => {
             return setImageSrc(defaultCompanyLogo);
           }}
@@ -97,28 +113,28 @@ export const Header: FunctionComponent<HeaderProps> = ({ companyData, isBookmark
             type="button"
             css={bookmarkButton(isBookmarked)}
             onClick={() => {
-              if (!userInfoData) {
+              if (!userData) {
                 return setCurrentModal("loginModal", { button: "close" });
               }
               return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
             }}
           >
             <BsFillBookmarkFill />
-            기업 북마크 {companyData.bookmark}
+            기업 북마크 {companyDetailData.bookmark}
           </button>
           <p css={viewBox}>
             <span css={icon}>
               <FiEye />
             </span>
-            조회수 <span css={viewColor}>{companyData.view.toLocaleString("ko-KR")}</span>
+            조회수 <span css={viewColor}>{companyDetailData.view.toLocaleString("ko-KR")}</span>
           </p>
         </div>
-        <p css={companyName}>{companyData.name}</p>
-        <p css={industry}>{companyData.industry}</p>
+        <p css={companyName}>{companyDetailData.name}</p>
+        <p css={industry}>{companyDetailData.industry}</p>
       </div>
       {/* LATER null data들에대한 정확한 파악 필요 null 일 시 렌더링 안되는 것 확인 및 디자인 변경 확인 필요 */}
-      {companyData.catchUrl && (
-        <a css={catchLinkButton} href="companyData.catchUrl">
+      {companyDetailData.catchUrl && (
+        <a css={catchLinkButton} href={companyDetailData.catchUrl}>
           캐치 기업정보 더보기
           <div css={catchLogoBox}>
             <Image src={catchLogoSrc} alt="" layout="fill" objectFit="contain" />
@@ -126,9 +142,9 @@ export const Header: FunctionComponent<HeaderProps> = ({ companyData, isBookmark
         </a>
       )}
 
-      {companyData.youtubeUrl && (
-        <Link href={companyData.youtubeUrl} passHref>
-          <a css={youtubeLinkButton} aria-label={`${companyData.name} 유튜브 바로가기`}>
+      {companyDetailData.youtubeUrl && (
+        <Link href={companyDetailData.youtubeUrl} passHref>
+          <a css={youtubeLinkButton} aria-label={`${companyDetailData.name} 유튜브 바로가기`}>
             <FiYoutube />
           </a>
         </Link>

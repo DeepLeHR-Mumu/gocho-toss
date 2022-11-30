@@ -1,5 +1,16 @@
 import { css } from "@emotion/react";
+
 import { COLORS } from "shared-style/color";
+
+export const wrapper = css`
+  background-color: ${COLORS.GRAY100};
+  border-radius: 2rem;
+  margin-bottom: 6rem;
+
+  :last-of-type {
+    margin-bottom: 2.25rem;
+  }
+`;
 
 export const infoContainer = css`
   display: flex;
