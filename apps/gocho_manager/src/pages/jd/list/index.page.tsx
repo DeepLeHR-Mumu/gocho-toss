@@ -7,7 +7,7 @@ import { BottomPagination } from "@component/bottomPagination";
 import { JD_LIST_URL } from "@constant/internalURL";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 
-import { JD_LIMIT } from "./constant";
+import { JD_SEARCH_LIMIT } from "./constant";
 import JobCard from "./component/jobCard";
 import {
   sectionContainer,
@@ -30,8 +30,8 @@ const JdList: NextPage = () => {
   } = useJobArr({
     order: "recent",
     filter: "valid",
-    limit: JD_LIMIT,
-    offset: (Number(router.query.page) - 1) * JD_LIMIT,
+    limit: JD_SEARCH_LIMIT,
+    offset: (Number(router.query.page) - 1) * JD_SEARCH_LIMIT,
   });
 
   if (!jobDataObj || isLoading) {
@@ -42,7 +42,7 @@ const JdList: NextPage = () => {
     return <ErrorScreen />;
   }
 
-  const totalPage = Math.ceil(jobDataObj.count / JD_LIMIT);
+  const totalPage = Math.ceil(jobDataObj.count / JD_SEARCH_LIMIT);
 
   return (
     <main css={mainContainer}>
