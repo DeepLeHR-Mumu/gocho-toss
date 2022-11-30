@@ -87,7 +87,7 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       - name: playwright test 실행
-        run: pnpm turbo e2e:web && pnpm turbo e2e:mobile
+        run: pnpm turbo e2e:CICD
 
       - uses: actions/upload-artifact@v2
         if: always()
