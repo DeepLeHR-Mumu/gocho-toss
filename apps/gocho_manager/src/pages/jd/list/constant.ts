@@ -1,1 +1,1 @@
-export const JD_LIMIT = 10;
+export const JD_SEARCH_LIMIT = 10;

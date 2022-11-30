@@ -1,20 +1,23 @@
 import { FunctionComponent } from "react";
 import { useDeleteCompany } from "@api/company/useDeleteCompany";
 import { useQueryClient } from "@tanstack/react-query";
+
+import { companyArrKeyObj } from "shared-constant/queryKeyFactory/company/arrKeyObj";
+
 import { companyContainer, companyIdBox, companyNameBox, deleteButton, fixButton, flexBox } from "./style";
 import { CompanyCardProps } from "./type";
 
 export const CompanyCard: FunctionComponent<CompanyCardProps> = ({ company }) => {
   const queryClient = useQueryClient();
 
-  const { mutate: mutateDelete } = useDeleteCompany();
+  const { mutate: mutateCompanyDelete } = useDeleteCompany();
 
-  const companyDelete = (companyId: number) => {
-    mutateDelete(
-      { companyId },
+  const companyDelete = () => {
+    mutateCompanyDelete(
+      { companyId: company.id },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries();
+          queryClient.invalidateQueries(companyArrKeyObj.all);
         },
       }
     );
@@ -32,7 +35,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps> = ({ company }) =>
         <button
           type="button"
           onClick={() => {
-            return companyDelete(company.id);
+            return companyDelete();
           }}
           css={deleteButton}
         >

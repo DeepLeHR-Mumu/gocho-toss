@@ -123,11 +123,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
   }, []);
 
-  // host : localhost:3000
-  // origin : http://localhost:3000
-  // pathname: /
-  // protocol : http:
-
   return (
     <RecoilRoot>
       <Head>

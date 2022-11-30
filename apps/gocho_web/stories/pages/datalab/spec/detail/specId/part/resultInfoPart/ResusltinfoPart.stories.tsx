@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { ResultInfoPart } from "@pages/datalab/spec/detail/[specId]/part/resultInfoPart";
+import { ResultInfoPart } from "@pages/datalab/spec/detail/part/resultInfoPart";
 
 export default {
   title: "데이터랩/스펙디테일/Part/ResultInfoPart/index",

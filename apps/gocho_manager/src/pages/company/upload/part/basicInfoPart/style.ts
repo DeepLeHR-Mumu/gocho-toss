@@ -42,6 +42,10 @@ export const logoUploadLabel = css`
   border: 2px solid ${COLORS.GRAY10};
 `;
 
+export const logoUploadInput = css`
+  display: none;
+`;
+
 export const imageInput = css`
   display: flex;
   align-items: center;
