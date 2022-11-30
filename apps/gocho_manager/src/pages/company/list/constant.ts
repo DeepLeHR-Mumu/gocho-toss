@@ -1,1 +1,1 @@
-export const COMPANY_LIMIT = 20;
+export const COMPANY_SEARCH_LIMIT = 20;

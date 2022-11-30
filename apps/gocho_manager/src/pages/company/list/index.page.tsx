@@ -7,7 +7,7 @@ import { BottomPagination } from "@component/bottomPagination";
 import { COMPANY_LIST_URL } from "@constant/internalURL";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 
-import { COMPANY_LIMIT } from "./constant";
+import { COMPANY_SEARCH_LIMIT } from "./constant";
 import { sectionContainer, tableContainer } from "./style";
 import { CompanyCard } from "./component/companyCard";
 
@@ -18,7 +18,11 @@ const CompanyList: NextPage = () => {
     data: companyDataObj,
     isLoading,
     isError,
-  } = useCompanyArr({ order: "recent", limit: COMPANY_LIMIT, offset: (Number(router.query.page) - 1) * COMPANY_LIMIT });
+  } = useCompanyArr({
+    order: "recent",
+    limit: COMPANY_SEARCH_LIMIT,
+    offset: (Number(router.query.page) - 1) * COMPANY_SEARCH_LIMIT,
+  });
 
   if (!companyDataObj || isLoading) {
     return <LoadingScreen />;
@@ -28,7 +32,7 @@ const CompanyList: NextPage = () => {
     return <ErrorScreen />;
   }
 
-  const totalPage = Math.ceil(companyDataObj.count / COMPANY_LIMIT);
+  const totalPage = Math.ceil(companyDataObj.count / COMPANY_SEARCH_LIMIT);
 
   return (
     <main css={mainContainer}>
