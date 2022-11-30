@@ -65,7 +65,7 @@ export const ListPart: FunctionComponent = () => {
     order: router.query.order as OrderDef,
     filter: "valid",
     limit,
-    offset: (Number(router.query.page) - 1) * 10,
+    offset: (Number(router.query.page) - 1) * limit,
   });
 
   const jdSearch: SubmitHandler<SearchValues> = (searchVal) => {
@@ -73,6 +73,7 @@ export const ListPart: FunctionComponent = () => {
       setCurrentToast("검색어에 특수문자는 포함될 수 없습니다.");
       return;
     }
+    router.push({ query: { ...router.query, page: 1 } });
     jdSearchEvent(searchVal.searchWord);
 
     const filterRotationArr = searchVal.rotation.map((rotation) => {

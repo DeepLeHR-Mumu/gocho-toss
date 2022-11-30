@@ -7,17 +7,18 @@ import { paginationContainer, movePageButton } from "./style";
 
 export const Pagination: FunctionComponent<PaginationProps> = ({ linkObj, totalPage }) => {
   const router = useRouter();
-
   const currentPageNumber = Number(router.query.page);
 
   const routeBeforePageHandler = () => {
-    router.replace({
+    router.push({
       pathname: linkObj.pathname,
       query: { ...router.query, page: currentPageNumber > 1 ? currentPageNumber - 1 : 1 },
     });
   };
 
   const routeNextPagePageHandler = () => {
+    if (totalPage === 0) return;
+
     router.push({
       pathname: linkObj.pathname,
       query: {
@@ -34,7 +35,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({ linkObj, totalP
           <FiChevronLeft />
         </div>
       </button>
-      {currentPageNumber}/{totalPage}
+      {totalPage === 0 ? "0" : currentPageNumber}/{totalPage}
       <button type="button" onClick={routeNextPagePageHandler}>
         <a css={movePageButton}>
           <FiChevronRight />
