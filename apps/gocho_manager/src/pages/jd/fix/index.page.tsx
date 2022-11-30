@@ -9,11 +9,11 @@ import { useJobDetail } from "@api/job/useJobDetail";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
+import { JobFormValues, JobSubmitValues } from "../type";
 import { CommonDataPart } from "./part/commonDataPart";
 import { PositionRequiredDataPart } from "./part/positionRequiredDataPart";
 import { PositionTaskDataPart } from "./part/positionTaskDataPart";
 import { PositionEtcDataPart } from "./part/positionEtcDataPart";
-import { JobFormValues, JobSubmitValues } from "./type";
 import { formContainer, positionContainer, addPositionButton, submitButton, checkMsgBox } from "./style";
 import { blankPosition } from "./constant";
 
@@ -99,7 +99,7 @@ const JdUpload: NextPage = () => {
       ...jobObj,
       process_arr: jobObj.process_arr?.split("\n"),
       apply_route_arr: jobObj.apply_route_arr?.split("\n"),
-      etc_arr: jobObj.etc_arr?.split("\n"),
+      etc_arr: jobObj.etc_arr?.split("\n") || null,
       position_arr: jobObj.position_arr.map((position) => {
         return {
           ...position,
