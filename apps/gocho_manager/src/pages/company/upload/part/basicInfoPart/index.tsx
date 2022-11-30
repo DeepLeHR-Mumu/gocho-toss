@@ -12,6 +12,7 @@ import {
   inputTitle,
   logoPreviewContainer,
   logoUploadLabel,
+  logoUploadInput,
   sectionContainer,
   sectionTitle,
   selectBox,
@@ -48,11 +49,11 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ register,
         <label css={logoUploadLabel} htmlFor="logoImg">
           로고 업로드
           <input
+            css={logoUploadInput}
             type="file"
             id="logoImg"
             accept="image/png, image/gif, image/jpeg, image/jpg"
             onChange={onUploadLogo}
-            style={{ display: "none" }}
           />
         </label>
         {imageSrc && (
@@ -119,8 +120,8 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ register,
       </div>
       <div css={inputContainer}>
         <strong css={inputTitle}>노조 *</strong>
-        <label css={inputLabel} htmlFor="노조유무">
-          <input type="checkbox" id="노조유무" {...register("nozo.exists", {})} />
+        <label css={inputLabel} htmlFor="nozo">
+          <input type="checkbox" id="nozo" {...register("nozo.exists", {})} />
           <CheckBox isChecked={watch("nozo.exists")} /> <p css={checkboxText}>있음</p>
           <CheckBox isChecked={!watch("nozo.exists")} /> <p css={checkboxText}>없음</p>
         </label>
