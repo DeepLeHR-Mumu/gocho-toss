@@ -14,9 +14,9 @@ import {
   textareaBox,
 } from "./style";
 import { requiredExpArr } from "./constant";
-import { PositionBoxProps } from "./type";
+import { PositionRequiredDataPartProps } from "./type";
 
-export const PositionRequiredDataPart: FunctionComponent<PositionBoxProps> = ({ id, index, jobForm }) => {
+export const PositionRequiredDataPart: FunctionComponent<PositionRequiredDataPartProps> = ({ id, index, jobForm }) => {
   const isDisabled =
     jobForm.watch("position_arr")[index].required_exp !== "경력" &&
     jobForm.watch("position_arr")[index].required_exp !== "신입/경력";

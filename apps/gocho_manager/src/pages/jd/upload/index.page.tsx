@@ -11,7 +11,7 @@ import { CommonDataPart } from "./part/commonDataPart";
 import { PositionRequiredDataPart } from "./part/positionRequiredDataPart";
 import { PositionTaskDataPart } from "./part/positionTaskDataPart";
 import { PositionEtcDataPart } from "./part/positionEtcDataPart";
-import { JobFormValues, JobSubmitValues } from "./type";
+import { JobFormValues, JobSubmitValues } from "../type";
 import { formContainer, positionContainer, addPositionButton, submitButton, checkMsgBox } from "./style";
 import { blankPosition } from "./constant";
 
@@ -24,7 +24,7 @@ const JdUpload: NextPage = () => {
       position_arr: [blankPosition],
     },
   });
-  const { register, control, handleSubmit, watch, setValue } = jobForm;
+  const { control, handleSubmit } = jobForm;
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -84,9 +84,7 @@ const JdUpload: NextPage = () => {
         <form css={formContainer} onSubmit={handleSubmit(jobSubmitHandler)}>
           <CommonDataPart
             companyDataArr={companyDataObj.companyDataArr}
-            register={register}
-            watch={watch}
-            setValue={setValue}
+            jobForm={jobForm}
             setSearchWord={setSearchWord}
           />
           <ul>

@@ -1,6 +1,6 @@
-import { UseFormRegister, UseFormSetValue, UseFormWatch } from "react-hook-form";
-import { JobFormValues } from "@pages/jd/upload/type";
+import { UseFormReturn } from "react-hook-form";
 import { Dispatch, SetStateAction } from "react";
+import { JobFormValues } from "@pages/jd/type";
 
 export interface CommonDataPartProps {
   jobData: {
@@ -20,8 +20,6 @@ export interface CommonDataPartProps {
     id: number;
     name: string;
   }[];
-  register: UseFormRegister<JobFormValues>;
-  watch: UseFormWatch<JobFormValues>;
-  setValue: UseFormSetValue<JobFormValues>;
+  jobForm: UseFormReturn<JobFormValues>;
   setSearchWord: Dispatch<SetStateAction<string>>;
 }

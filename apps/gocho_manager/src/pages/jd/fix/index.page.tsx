@@ -34,8 +34,7 @@ const JdUpload: NextPage = () => {
       position_arr: [blankPosition],
     },
   });
-
-  const { register, control, handleSubmit, watch, setValue, reset } = jobForm;
+  const { control, handleSubmit, reset } = jobForm;
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -137,9 +136,7 @@ const JdUpload: NextPage = () => {
         <form css={formContainer} onSubmit={handleSubmit(jobSubmitHandler)}>
           <CommonDataPart
             companyDataArr={companyDataObj.companyDataArr}
-            register={register}
-            watch={watch}
-            setValue={setValue}
+            jobForm={jobForm}
             setSearchWord={setSearchWord}
             jobData={jobData}
           />

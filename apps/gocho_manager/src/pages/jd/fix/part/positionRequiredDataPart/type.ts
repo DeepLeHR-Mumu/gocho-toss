@@ -1,7 +1,7 @@
 import { UseFormReturn } from "react-hook-form";
-import { JobFormValues } from "@pages/jd/upload/type";
+import { JobFormValues } from "@pages/jd/type";
 
-export interface PositionBoxProps {
+export interface PositionRequiredDataPartProps {
   id: string;
   index: number;
   jobForm: UseFormReturn<JobFormValues>;
