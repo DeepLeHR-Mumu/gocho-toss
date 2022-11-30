@@ -65,7 +65,7 @@ export const ListPart: FunctionComponent = () => {
     order: router.query.order as OrderDef,
     filter: "valid",
     limit,
-    offset: (Number(router.query.page) - 1) * 10,
+    offset: (Number(router.query.page) - 1) * limit,
   });
 
   const jdSearch: SubmitHandler<SearchValues> = (searchVal) => {
@@ -73,14 +73,21 @@ export const ListPart: FunctionComponent = () => {
       setCurrentToast("검색어에 특수문자는 포함될 수 없습니다.");
       return;
     }
+    router.push({ query: { ...router.query, page: 1 } });
     jdSearchEvent(searchVal.searchWord);
+
+    const filterRotationArr = searchVal.rotation.map((rotation) => {
+      if (rotation.includes("조")) return `${rotation[0]};${rotation[3]}`;
+      return rotation;
+    });
+
     setSearchQuery({
       contractType: searchVal.contractType,
       industry: searchVal.industry,
       place: searchVal.place,
       possibleEdu: searchVal.possibleEdu,
       requiredExp: searchVal.requiredExp,
-      rotation: searchVal.rotation,
+      rotation: filterRotationArr,
       task: searchVal.task,
       searchWord: searchVal.searchWord,
     });

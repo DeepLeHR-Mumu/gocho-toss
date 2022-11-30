@@ -16,7 +16,7 @@ import { useToast } from "@recoil/hook/toast";
 
 import { JobCardList } from "../../component/jobCardList";
 import { Filter } from "../../component/filter";
-import { setJobOrderButtonArr, specialCharacterRegExp } from "./constant";
+import { limit, setJobOrderButtonArr, specialCharacterRegExp } from "./constant";
 import {
   partContainer,
   titleContainer,
@@ -32,7 +32,6 @@ import {
 import { OrderDef, SearchQueryDef, SearchValues } from "./type";
 
 export const ListPart: FunctionComponent = () => {
-  const limit = 6;
   const [total, setTotal] = useState<number>(0);
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
   const [showFilter, setShowFilter] = useState<boolean>(false);
@@ -58,7 +57,7 @@ export const ListPart: FunctionComponent = () => {
     order: router.query.order as OrderDef,
     filter: "valid",
     limit,
-    offset: (Number(router.query.page) - 1) * 10,
+    offset: (Number(router.query.page) - 1) * limit,
   });
 
   const jdSearch: SubmitHandler<SearchValues> = (searchVal) => {
@@ -66,14 +65,21 @@ export const ListPart: FunctionComponent = () => {
       setCurrentToast("검색어에 특수문자는 포함될 수 없습니다.");
       return;
     }
+    router.push({ query: { ...router.query, page: 1 } });
     jdSearchEvent(searchVal.searchWord);
+
+    const filterRotationArr = searchVal.rotation.map((rotation) => {
+      if (rotation.includes("조")) return `${rotation[0]};${rotation[3]}`;
+      return rotation;
+    });
+
     setSearchQuery({
       contractType: searchVal.contractType,
       industry: searchVal.industry,
       place: searchVal.place,
       possibleEdu: searchVal.possibleEdu,
       requiredExp: searchVal.requiredExp,
-      rotation: searchVal.rotation,
+      rotation: filterRotationArr,
       task: searchVal.task,
       searchWord: searchVal.searchWord,
     });
