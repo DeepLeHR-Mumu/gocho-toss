@@ -16,9 +16,9 @@ export const BasicInfoPart: FunctionComponent = () => {
   const router = useRouter();
   const { companyId } = router.query;
 
-  const { data: companyDetailData, isLoading } = useCompanyDetail({ companyId: Number(companyId) });
+  const { data: companyDetailData } = useCompanyDetail({ companyId: Number(companyId) });
 
-  if (!companyDetailData || isLoading) {
+  if (!companyDetailData) {
     return <section css={wrapper} />;
   }
 

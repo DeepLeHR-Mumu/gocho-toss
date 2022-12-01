@@ -25,6 +25,7 @@ export interface DetailCommentProps {
           userId: number | null;
           createdTime: number;
           liked: boolean;
+          disLiked: boolean;
           disLikeCount: number;
           nickname: string;
           badge: "default" | "early_bird" | "admin";

@@ -3,16 +3,16 @@ import { AiOutlineSend } from "react-icons/ai";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { dateConverter } from "shared-util/date";
 import { UserBadge } from "shared-ui/common/atom/userBadge";
 import { CommentLikeButton } from "shared-ui/common/atom/commentLikeButton";
 import { CommentDislikeButton } from "shared-ui/common/atom/commentDislikeButton";
-import { useWriteCompanyComment } from "shared-api/company/useWriteCompanyComment";
 import { companyCommentArrKeyObj } from "shared-constant/queryKeyFactory/company/commentArrKeyObj";
+import { useWriteCompanyComment } from "shared-api/company/useWriteCompanyComment";
 import { useLikeComment } from "shared-api/company/useLikeComment";
 import { useDisLikeComment } from "shared-api/company/useDisLikeComment";
 import { useFakeComment } from "shared-api/company/useFakeComment";
 import { useDisFakeComment } from "shared-api/company/useDisFakeComment";
+import { dateConverter } from "shared-util/date";
 
 import { LoginCommentBoxProps, CommentFormValues } from "./type";
 import {
@@ -34,37 +34,23 @@ import {
   firstCommentAlert,
 } from "./style";
 
-export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
-  jdId,
-  companyData,
-  commentArr,
-  userData,
-}) => {
-  const commentBoxRef = useRef<HTMLDivElement | null>(null);
+export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ jdId, userData, companyId, commentArr }) => {
   const [textValue, setTextValue] = useState("");
-  const { nickname } = userData;
-  const { register, handleSubmit, setValue, watch } = useForm<CommentFormValues>({
+  const commentBoxRef = useRef<HTMLDivElement | null>(null);
+  const queryClient = useQueryClient();
+
+  const { register, handleSubmit } = useForm<CommentFormValues>({
     defaultValues: {
-      companyId: companyData.id,
+      companyId,
       jdId,
     },
   });
-
-  useEffect(() => {
-    const jdValue = watch("jdId");
-    if (jdValue) {
-      return setValue("jdId", jdId);
-    }
-    return setValue("jdId", null);
-  }, [jdId, setValue, watch]);
 
   const { mutate: postLikeComment } = useLikeComment();
   const { mutate: postDisLikeComment } = useDisLikeComment();
   const { mutate: postFakeComment } = useFakeComment();
   const { mutate: postDisFakeComment } = useDisFakeComment();
-
-  const { mutate: postWriteCompanyComment, isSuccess } = useWriteCompanyComment();
-  const queryClient = useQueryClient();
+  const { mutate: postWriteCompanyComment } = useWriteCompanyComment();
 
   const commentSubmit: SubmitHandler<CommentFormValues> = (commentObj) => {
     postWriteCompanyComment(commentObj, {
@@ -75,9 +61,9 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
     });
   };
 
-  const postLikeSubmit = (companyId: number, commentId: number) => {
+  const postLikeSubmit = (id: number, commentId: number) => {
     postLikeComment(
-      { companyId, commentId },
+      { companyId: id, commentId },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(companyCommentArrKeyObj.all);
@@ -86,9 +72,9 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
     );
   };
 
-  const postFakeSubmit = (companyId: number, commentId: number) => {
+  const postFakeSubmit = (id: number, commentId: number) => {
     postFakeComment(
-      { companyId, commentId },
+      { companyId: id, commentId },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(companyCommentArrKeyObj.all);
@@ -97,9 +83,9 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
     );
   };
 
-  const postDislikeSubmit = (companyId: number, commentId: number) => {
+  const postDislikeSubmit = (id: number, commentId: number) => {
     postDisLikeComment(
-      { companyId, commentId },
+      { companyId: id, commentId },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(companyCommentArrKeyObj.all);
@@ -108,9 +94,9 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
     );
   };
 
-  const postDisFakeSubmit = (companyId: number, commentId: number) => {
+  const postDisFakeSubmit = (id: number, commentId: number) => {
     postDisFakeComment(
-      { companyId, commentId },
+      { companyId: id, commentId },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(companyCommentArrKeyObj.all);
@@ -119,16 +105,18 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
     );
   };
 
-  const activeDownScroll = () => {
-    const bottomHeight = commentBoxRef.current?.scrollHeight;
-    commentBoxRef.current?.scrollTo(0, bottomHeight !== undefined ? bottomHeight : 0);
-  };
+  // useEffect(() => {
+  //   const jdValue = watch("jdId");
+  //   if (jdValue) {
+  //     return setValue("jdId", jdId);
+  //   }
+  //   return setValue("jdId", null);
+  // }, [jdId, setValue, watch]);
 
   useEffect(() => {
-    setTimeout(() => {
-      activeDownScroll();
-    }, 100);
-  }, [jdId, isSuccess]);
+    const bottomHeight = commentBoxRef.current?.scrollHeight;
+    commentBoxRef.current?.scrollTo(0, bottomHeight !== undefined ? bottomHeight : 0);
+  }, [commentArr]);
 
   return (
     <div>
@@ -141,9 +129,10 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
               첫번째 댓글을 작성해주세요 :)
             </li>
           )}
+
           {commentArr.map((comment) => {
             const { month, date } = dateConverter(comment.createdTime);
-            const isMyComment = Boolean(nickname === comment.nickname);
+            const isMyComment = Boolean(userData.nickname === comment.nickname);
             return (
               <li key={comment.id}>
                 <div css={commentHeader}>
@@ -209,7 +198,7 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
               if (onKeyDownEvent.key === "Enter") {
                 onKeyDownEvent.preventDefault();
                 commentSubmit({
-                  companyId: companyData.id,
+                  companyId,
                   jdId,
                   description: textValue,
                 });

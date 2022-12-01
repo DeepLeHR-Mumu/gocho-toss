@@ -28,7 +28,7 @@ const DetailPage: NextPage = () => {
   const { companyId } = router.query;
 
   const { data: userInfo } = useUserInfo();
-  const { data: companyDetailData, isLoading: isCompanyDetailLoading } = useCompanyDetail({
+  const { data: companyDetailData } = useCompanyDetail({
     companyId: Number(companyId),
   });
   const { data: companyCommentArrData } = useCompanyCommentArr({
@@ -64,7 +64,7 @@ const DetailPage: NextPage = () => {
     }
   }, [companyDetailData]);
 
-  if (!companyDetailData || isCompanyDetailLoading || router.isFallback) {
+  if (!companyDetailData || router.isFallback) {
     return <main css={mainContainerSkeleton} />;
   }
 

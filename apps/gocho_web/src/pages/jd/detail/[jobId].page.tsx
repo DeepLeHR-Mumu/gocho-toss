@@ -81,7 +81,7 @@ const JobsDetail: NextPage = () => {
             <section css={containerSkeleton}>
               <SkeletonBox />
             </section>
-            <DetailComment jdId={null} detailData={null} />
+            {/* <DetailComment jdId={null} detailData={null} /> */}
           </div>
         </Layout>
       </main>

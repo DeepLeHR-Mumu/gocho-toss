@@ -62,23 +62,10 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, use
     );
   }
 
-  // const getCompanyCommentHandler = (isTotal: boolean) => {
-  //   if (isTotal) {
-  //     return commentDataArr.commentArr;
-  //   }
-  //   return commentDataArr.commentArr.filter((comment) => {
-  //     return comment.title === null;
-  //   });
-  // };
-
-  // const getCurrentJobCommentHandler = (isTotal: boolean) => {
-  //   if (isTotal) {
-  //     return commentDataArr.commentArr;
-  //   }
-  //   return commentDataArr.commentArr.filter((comment) => {
-  //     return comment.title !== null;
-  //   });
-  // };
+  const filterComment = commentDataArr.commentArr.filter((comment) => {
+    if (jdId === null) return comment.title === null;
+    return comment.id === jdId;
+  });
 
   return (
     <aside css={wrapper}>
@@ -119,8 +106,8 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, use
                   setIsTotalComment(false);
                 }}
               >
-                {jdId === null ? "기업" : "공고"}정보 댓글
-                {/* <span>{getCurrentJobCommentHandler(false).length}</span> */}
+                {jdId === null ? "기업 정보" : "현재 공고"} 댓글
+                <span>{filterComment.length}</span>
               </button>
             </li>
           </ul>
@@ -130,12 +117,8 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, use
       <LoginCommentBox
         jdId={jdId}
         userData={userInfo}
-        // commentArr={
-        //   jdId === null ? getCompanyCommentHandler(isTotalComment) : getCurrentJobCommentHandler(isTotalComment)
-        // }
-        commentDataArr={commentDataArr}
-        isTotalComment={isTotalComment}
-        // companyData={company}
+        companyId={commentDataArr.company.id}
+        commentArr={isTotalComment ? commentDataArr.commentArr : filterComment}
       />
     </aside>
   );
