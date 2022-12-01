@@ -54,7 +54,7 @@ export const bodyBox = css`
 
 export const bodyCSS = (isRecomment: boolean) => {
   return css`
-    height: 2.5rem;
+    min-height: 2.5rem;
     font-size: 1rem;
     border-radius: 1.5rem;
     background-color: ${isRecomment ? COLORS.BLUE_SECOND90 : COLORS.GRAY90};
