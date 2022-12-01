@@ -74,16 +74,8 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
             const isMainTask = jobForm.watch("position_arr")[index].task_main === task.mainTask;
             if (isMainTask)
               return task.subTaskArr.map((subTask) => {
-                // console.log(subTask);
-                // console.log(jobForm.watch("position_arr")[index].task_sub_arr);
-                // console.log(jobForm.watch("position_arr")[index].task_sub_arr.includes(subTask));
-
                 return (
-                  <option
-                    key={`${id}${subTask}`}
-                    value={subTask}
-                    // selected={jobForm.watch("position_arr")[index].task_sub_arr.includes(subTask)}
-                  >
+                  <option key={`${id}${subTask}`} value={subTask}>
                     {subTask}
                   </option>
                 );
