@@ -2,8 +2,6 @@ import { FunctionComponent, useState } from "react";
 import { FiEye, FiYoutube } from "react-icons/fi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useCompanyDetail } from "shared-api/company";
@@ -133,8 +131,8 @@ export const HeaderPart: FunctionComponent = () => {
         <p css={industry}>{companyDetailData.industry}</p>
       </div>
       {/* LATER null data들에대한 정확한 파악 필요 null 일 시 렌더링 안되는 것 확인 및 디자인 변경 확인 필요 */}
-      {companyDetailData.catchUrl && (
-        <a css={catchLinkButton} href={companyDetailData.catchUrl}>
+      {companyData.catchUrl && (
+        <a css={catchLinkButton} href={companyData.catchUrl} target="_blank" rel="noopener noreferrer">
           캐치 기업정보 더보기
           <div css={catchLogoBox}>
             <Image src={catchLogoSrc} alt="" layout="fill" objectFit="contain" />
@@ -142,12 +140,16 @@ export const HeaderPart: FunctionComponent = () => {
         </a>
       )}
 
-      {companyDetailData.youtubeUrl && (
-        <Link href={companyDetailData.youtubeUrl} passHref>
-          <a css={youtubeLinkButton} aria-label={`${companyDetailData.name} 유튜브 바로가기`}>
-            <FiYoutube />
-          </a>
-        </Link>
+      {companyData.youtubeUrl && (
+        <a
+          css={youtubeLinkButton}
+          href={companyData.youtubeUrl}
+          aria-label={`${companyData.name} 유튜브 바로가기`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FiYoutube />
+        </a>
       )}
     </section>
   );
