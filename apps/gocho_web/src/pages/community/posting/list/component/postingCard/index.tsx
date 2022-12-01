@@ -86,7 +86,7 @@ export const PostingCard: FunctionComponent<PostingCardProps | PostingCardSkelet
             </ul>
             <div css={writerProfile}>
               <div css={writerProfileImage}>
-                <ProfileImg imageStr={userInfoData ? userInfoData.image : "default"} size="S" />
+                <ProfileImg imageStr={postingData.image} size="S" />
               </div>
               <p css={writerNickname(isMyPosting)}>{postingData.nickname || "탈퇴한 회원"}</p>
             </div>
