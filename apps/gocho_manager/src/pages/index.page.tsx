@@ -11,9 +11,6 @@ import WebsiteDataPart from "./index/part/websiteDataPart";
 const Home: NextPage = () => {
   const { data: dashboardData, isLoading, isError } = useStatistics();
 
-  // eslint-disable-next-line no-console
-  console.log(process.env.NEXT_PUBLIC_VERCEL_ENV);
-
   if (!dashboardData || isLoading) {
     return <LoadingScreen />;
   }
