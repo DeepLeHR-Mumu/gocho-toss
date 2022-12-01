@@ -53,7 +53,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
     );
   }
 
-  if (!companyCommentArrData || !isSuccess) {
+  if (!companyCommentArrData || !isSuccess || companyCommentArrData.commentArr === null) {
     return (
       <div css={cardWrapper(isMobile)} className="active">
         <header css={header}>

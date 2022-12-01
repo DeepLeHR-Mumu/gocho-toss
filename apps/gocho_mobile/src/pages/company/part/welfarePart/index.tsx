@@ -28,31 +28,31 @@ export const WelfarePart: FunctionComponent = () => {
     if (!companyDetailData) {
       return;
     }
-    if (companyDetailData.data.welfare.money) {
+    if (companyDetailData.welfare.money) {
       setActivatedTab("money");
       return;
     }
-    if (companyDetailData.data.welfare.health) {
+    if (companyDetailData.welfare.health) {
       setActivatedTab("health");
       return;
     }
-    if (companyDetailData.data.welfare.life) {
+    if (companyDetailData.welfare.life) {
       setActivatedTab("life");
       return;
     }
-    if (companyDetailData.data.welfare.holiday) {
+    if (companyDetailData.welfare.holiday) {
       setActivatedTab("holiday");
       return;
     }
-    if (companyDetailData.data.welfare.facility) {
+    if (companyDetailData.welfare.facility) {
       setActivatedTab("facility");
       return;
     }
-    if (companyDetailData.data.welfare.vacation) {
+    if (companyDetailData.welfare.vacation) {
       setActivatedTab("vacation");
       return;
     }
-    if (companyDetailData.data.welfare.growth) {
+    if (companyDetailData.welfare.growth) {
       setActivatedTab("growth");
       return;
     }
@@ -63,7 +63,7 @@ export const WelfarePart: FunctionComponent = () => {
     // TODO 스켈레톤 넣자
     return <>Loading</>;
   }
-  const { money, health, life, holiday, facility, vacation, growth, etc } = companyDetailData.data.welfare;
+  const { money, health, life, holiday, facility, vacation, growth, etc } = companyDetailData.welfare;
   if (!(money || health || life || holiday || facility || vacation || growth || etc)) {
     return (
       <section css={container}>
@@ -80,7 +80,7 @@ export const WelfarePart: FunctionComponent = () => {
 
         <div css={sliderBox}>
           <Slider {...setCarouselSetting()} ref={sliderRef}>
-            {companyDetailData.data.welfare.money && (
+            {companyDetailData.welfare.money && (
               <button
                 css={menu(activatedTab === "money")}
                 type="button"
@@ -91,7 +91,7 @@ export const WelfarePart: FunctionComponent = () => {
                 급여
               </button>
             )}
-            {companyDetailData.data.welfare.health && (
+            {companyDetailData.welfare.health && (
               <button
                 css={menu(activatedTab === "health")}
                 type="button"
@@ -102,7 +102,7 @@ export const WelfarePart: FunctionComponent = () => {
                 의료
               </button>
             )}
-            {companyDetailData.data.welfare.life && (
+            {companyDetailData.welfare.life && (
               <button
                 css={menu(activatedTab === "life")}
                 type="button"
@@ -113,7 +113,7 @@ export const WelfarePart: FunctionComponent = () => {
                 생활
               </button>
             )}
-            {companyDetailData.data.welfare.holiday && (
+            {companyDetailData.welfare.holiday && (
               <button
                 css={menu(activatedTab === "holiday")}
                 type="button"
@@ -124,7 +124,7 @@ export const WelfarePart: FunctionComponent = () => {
                 명절/경조사
               </button>
             )}
-            {companyDetailData.data.welfare.facility && (
+            {companyDetailData.welfare.facility && (
               <button
                 css={menu(activatedTab === "facility")}
                 type="button"
@@ -135,7 +135,7 @@ export const WelfarePart: FunctionComponent = () => {
                 시설
               </button>
             )}
-            {companyDetailData.data.welfare.vacation && (
+            {companyDetailData.welfare.vacation && (
               <button
                 css={menu(activatedTab === "vacation")}
                 type="button"
@@ -146,7 +146,7 @@ export const WelfarePart: FunctionComponent = () => {
                 휴일/휴가
               </button>
             )}
-            {companyDetailData.data.welfare.growth && (
+            {companyDetailData.welfare.growth && (
               <button
                 css={menu(activatedTab === "growth")}
                 type="button"
@@ -157,7 +157,7 @@ export const WelfarePart: FunctionComponent = () => {
                 자기계발
               </button>
             )}
-            {companyDetailData.data.welfare.etc && (
+            {companyDetailData.welfare.etc && (
               <button
                 css={menu(activatedTab === "etc")}
                 type="button"
@@ -179,7 +179,7 @@ export const WelfarePart: FunctionComponent = () => {
       <div css={informationWrapper}>
         <IconSelector activatedMenu={activatedTab} />
         <ul css={infoBox}>
-          {companyDetailData.data.welfare[activatedTab]?.map((welfare) => {
+          {companyDetailData.welfare[activatedTab]?.map((welfare) => {
             return <li key={`${activatedTab}+${welfare}`}>{welfare}</li>;
           })}
         </ul>

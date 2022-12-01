@@ -17,7 +17,7 @@ export const LinkPart: FunctionComponent = () => {
     return <>loading</>;
   }
 
-  if (!companyDetailData.data.catchUrl && !companyDetailData.data.youtubeUrl) {
+  if (!companyDetailData.catchUrl && !companyDetailData.youtubeUrl) {
     return null;
   }
 
@@ -26,13 +26,13 @@ export const LinkPart: FunctionComponent = () => {
       <Layout>
         <div css={container}>
           <div css={linkBox}>
-            {companyDetailData.data.catchUrl && (
-              <a href={companyDetailData.data.catchUrl} target="_blank" rel="noopener noreferrer">
+            {companyDetailData.catchUrl && (
+              <a href={companyDetailData.catchUrl} target="_blank" rel="noopener noreferrer">
                 캐치 기업정보 더보기
               </a>
             )}
-            {companyDetailData.data.youtubeUrl && (
-              <a href={companyDetailData.data.youtubeUrl} target="_blank" rel="noopener noreferrer">
+            {companyDetailData.youtubeUrl && (
+              <a href={companyDetailData.youtubeUrl} target="_blank" rel="noopener noreferrer">
                 <div css={youtubeIconBox}>
                   <FiYoutube />
                 </div>

@@ -1,5 +1,6 @@
 import { FunctionComponent, useEffect, useRef } from "react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import { useRouter } from "next/router";
 
 import { useInfiniteJobArr } from "shared-api/job/useInfiniteJobArr";
 import { useUserInfo } from "shared-api/auth";
@@ -8,49 +9,39 @@ import { dummyArrCreator } from "shared-util/dummyArrCreator";
 
 import { JobCard } from "@component/card/jobCard";
 import { Layout } from "@component/layout";
-import { CompanyJobPartProps } from "./type";
+
 import { partContainer, listContainer, totalCount, noJobListText } from "./style";
 
-export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({ companyId }) => {
+export const CompanyJobPart: FunctionComponent = () => {
+  const router = useRouter();
+  const observeRef = useRef<HTMLDivElement | null>(null);
+  const { companyId } = router.query;
+
   const {
     data: jobDataArr,
     isLoading,
-    isError,
     fetchNextPage,
   } = useInfiniteJobArr({
-    companyId,
+    companyId: Number(companyId),
     limit: 10,
-    order:"recent"
+    order: "recent",
   });
-
   const { data: userData } = useUserInfo();
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
-  const observerRef = useRef<IntersectionObserver>();
-  const boxRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    const intersectionObserver = (entries: IntersectionObserverEntry[], io: IntersectionObserver) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // 관찰하고 있는 entry가 화면에 보여지는 경우
-          io.unobserve(entry.target); // entry 관찰 해제
-          fetchNextPage(); // 다음 페이지 데이터 요청
-        }
-      });
-    };
-
-    if (observerRef.current) {
-      observerRef.current.disconnect();
+    if (observeRef.current) {
+      const observer = new IntersectionObserver(
+        (entry) => {
+          if (entry[0].isIntersecting) fetchNextPage();
+        },
+        { threshold: 0.2 }
+      );
+      observer.observe(observeRef.current);
     }
-
-    observerRef.current = new IntersectionObserver(intersectionObserver, {
-      threshold: 0.2,
-    });
-    if (boxRef.current) observerRef.current.observe(boxRef.current);
   }, [fetchNextPage, jobDataArr]);
 
-  if (!jobDataArr || isError || isLoading) {
+  if (!jobDataArr || isLoading || router.isFallback) {
     return (
       <Layout>
         <div css={listContainer}>
@@ -73,6 +64,7 @@ export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({ company
               현재 채용중인 공고가 없습니다.
             </p>
           )}
+
           {jobDataArr.pages.map((page) => {
             return page.jobDataArr.map((jobData) => {
               const isBookmarked = Boolean(
@@ -92,7 +84,7 @@ export const CompanyJobPart: FunctionComponent<CompanyJobPartProps> = ({ company
             });
           })}
         </section>
-        <div ref={boxRef} />
+        <div ref={observeRef} />
       </Layout>
     </div>
   );

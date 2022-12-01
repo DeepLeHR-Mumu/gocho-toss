@@ -63,12 +63,11 @@ export const JobsPart: FunctionComponent = () => {
     );
   }
 
-  const { data } = companyDetailData;
   const totalPage = Math.ceil(total / limit);
 
   return (
     <Layout>
-      <InvisibleH2 title={`${data.name} 채용공고 모음`} />
+      <InvisibleH2 title={`${companyDetailData.name} 채용공고 모음`} />
       <strong css={totalText}>총 채용공고 {jobDataArr.count}개</strong>
       <section css={listContainer}>
         {jobDataArr.jobDataArr.map((jobData) => {

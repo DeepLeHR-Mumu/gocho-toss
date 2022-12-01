@@ -64,7 +64,7 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, use
 
   const filterComment = commentDataArr.commentArr.filter((comment) => {
     if (jdId === null) return comment.title === null;
-    return comment.id === jdId;
+    return comment.jdId === jdId;
   });
 
   return (

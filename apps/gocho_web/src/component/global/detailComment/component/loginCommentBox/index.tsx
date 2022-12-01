@@ -6,12 +6,12 @@ import { useQueryClient } from "@tanstack/react-query";
 import { UserBadge } from "shared-ui/common/atom/userBadge";
 import { CommentLikeButton } from "shared-ui/common/atom/commentLikeButton";
 import { CommentDislikeButton } from "shared-ui/common/atom/commentDislikeButton";
-import { companyCommentArrKeyObj } from "shared-constant/queryKeyFactory/company/commentArrKeyObj";
 import { useWriteCompanyComment } from "shared-api/company/useWriteCompanyComment";
 import { useLikeComment } from "shared-api/company/useLikeComment";
 import { useDisLikeComment } from "shared-api/company/useDisLikeComment";
 import { useFakeComment } from "shared-api/company/useFakeComment";
 import { useDisFakeComment } from "shared-api/company/useDisFakeComment";
+import { companyCommentArrKeyObj } from "shared-constant/queryKeyFactory/company/commentArrKeyObj";
 import { dateConverter } from "shared-util/date";
 
 import { LoginCommentBoxProps, CommentFormValues } from "./type";

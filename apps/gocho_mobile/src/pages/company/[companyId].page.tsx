@@ -57,8 +57,8 @@ const CompanyDetail: NextPage = () => {
   }, [addViewCount, companyId]);
 
   useEffect(() => {
-    if (companyDetailData && info === "detail") companyInfoFunnelEvent(companyDetailData.data.id);
-    if (companyDetailData && info === "jd") companyJdFunnelEvent(companyDetailData.data.id);
+    if (companyDetailData && info === "detail") companyInfoFunnelEvent(companyDetailData.id);
+    if (companyDetailData && info === "jd") companyJdFunnelEvent(companyDetailData.id);
   }, [companyDetailData, info]);
 
   return (
@@ -71,11 +71,11 @@ const CompanyDetail: NextPage = () => {
               <>
                 <PageInfoHead
                   option={{
-                    companyName: companyDetailData.data.name,
-                    id: companyDetailData.data.id,
+                    companyName: companyDetailData.name,
+                    id: companyDetailData.id,
                   }}
                 />
-                <InvisibleH1 title={`${companyDetailData.data.name} > 기업/공장 정보 - 고초대졸닷컴`} />
+                <InvisibleH1 title={`${companyDetailData.name} > 기업/공장 정보 - 고초대졸닷컴`} />
               </>
             )}
 
@@ -96,11 +96,11 @@ const CompanyDetail: NextPage = () => {
               <>
                 <PageRecruitHead
                   option={{
-                    id: companyDetailData.data.id,
-                    companyName: companyDetailData.data.name,
+                    id: companyDetailData.id,
+                    companyName: companyDetailData.name,
                   }}
                 />
-                <InvisibleH1 title={`${companyDetailData.data.name} > 생산직 채용공고 - 고초대졸닷컴`} />
+                <InvisibleH1 title={`${companyDetailData.name} > 생산직 채용공고 - 고초대졸닷컴`} />
               </>
             )}
 

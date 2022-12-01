@@ -38,7 +38,7 @@ export const MoneyPart: FunctionComponent = () => {
     return <>loading</>;
   }
 
-  if (companyDetailData.data.payAvg === null && companyDetailData.data.payAvg === null) {
+  if (companyDetailData.payAvg === null && companyDetailData.payAvg === null) {
     return (
       <section css={container}>
         <NoRegisteredInfoBox infoName="연봉" />
@@ -50,7 +50,7 @@ export const MoneyPart: FunctionComponent = () => {
       <Layout>
         <div css={flexContainer}>
           <div>
-            {companyDetailData.data.payStart && (
+            {companyDetailData.payStart && (
               <div css={payContainer}>
                 <div css={asideContainer}>
                   <div css={payIconBox}>
@@ -62,13 +62,13 @@ export const MoneyPart: FunctionComponent = () => {
                 </div>
                 <div css={moneyInfoContainer}>
                   <p>
-                    <span>{companyDetailData.data.payStart.toLocaleString("Ko-KR")}</span>
+                    <span>{companyDetailData.payStart.toLocaleString("Ko-KR")}</span>
                     만원
                   </p>
                 </div>
               </div>
             )}
-            {companyDetailData.data.payAvg && (
+            {companyDetailData.payAvg && (
               <div css={payContainer}>
                 <div css={asideContainer}>
                   <div css={payIconBox}>
@@ -80,19 +80,19 @@ export const MoneyPart: FunctionComponent = () => {
                 </div>
                 <div css={moneyInfoContainer}>
                   <p>
-                    <span>{companyDetailData.data.payAvg.toLocaleString("Ko-KR")}</span>
+                    <span>{companyDetailData.payAvg.toLocaleString("Ko-KR")}</span>
                     만원
                   </p>
                 </div>
               </div>
             )}
-            {companyDetailData.data.payDesc && (
+            {companyDetailData.payDesc && (
               <div css={descContainer}>
                 <div css={descMenuBox}>
                   <p css={descMenuText}>기타 연봉 정보</p>
                 </div>
                 <div css={descText}>
-                  <p>{companyDetailData.data.payDesc}</p>
+                  <p>{companyDetailData.payDesc}</p>
                 </div>
               </div>
             )}

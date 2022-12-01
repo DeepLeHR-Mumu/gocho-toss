@@ -25,7 +25,7 @@ export const FactoryPart: FunctionComponent = () => {
       <Layout>
         <div css={cardContainer}>
           <div>
-            {companyDetailData.data.factoryArr.map((factory) => {
+            {companyDetailData.factoryArr.map((factory) => {
               return <FactoryCard key={factory.factoryName} factoryInfo={factory} />;
             })}
           </div>

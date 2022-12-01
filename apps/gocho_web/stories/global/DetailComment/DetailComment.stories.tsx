@@ -52,7 +52,9 @@ const Template: ComponentStory<typeof DetailComment> = (args) => {
 export const 데이터가없을때 = Template.bind({});
 
 데이터가없을때.args = {
-  detailData: null,
+  jdId: null,
+  userInfo: undefined,
+  commentDataArr: undefined,
 };
 
 export const 비로그인상태 = Template.bind({});
@@ -67,12 +69,15 @@ export const 비로그인상태 = Template.bind({});
 };
 
 비로그인상태.args = {
-  detailData: {
-    companyId: 24,
-    title: "댓글제목",
-    name: "companyName",
-    logoUrl:
-      "http://localhost:3000/_next/image?url=https%3A%2F%2Fd2nnzfahmszi6w.cloudfront.net%2Fcompany_images%2F213%2Flogo.png&w=1080&q=75",
+  userInfo: undefined,
+  jdId: 1212,
+  commentDataArr: {
+    company: {
+      name: "SK하이닉스",
+      id: 119,
+      logoUrl: "https://d2nnzfahmszi6w.cloudfront.net/company_images/119/logo.png",
+    },
+    commentArr: null,
   },
 };
 
@@ -88,11 +93,28 @@ export const 로그인상태 = Template.bind({});
 };
 
 로그인상태.args = {
-  detailData: {
-    companyId: 24,
-    title: "댓글제목",
-    name: "companyName",
-    logoUrl:
-      "http://localhost:3000/_next/image?url=https%3A%2F%2Fd2nnzfahmszi6w.cloudfront.net%2Fcompany_images%2F213%2Flogo.png&w=1080&q=75",
+  commentDataArr: {
+    company: {
+      name: "SK하이닉스",
+      id: 119,
+      logoUrl: "https://d2nnzfahmszi6w.cloudfront.net/company_images/119/logo.png",
+    },
+    commentArr: [
+      {
+        id: 198,
+        companyId: 119,
+        jdId: 1123,
+        title: "[Maintenance] 사원 000명 채용",
+        description: "하이헬로",
+        userId: 1123,
+        createdTime: 1631799102000,
+        liked: true,
+        disLiked: false,
+        likeCount: 12,
+        disLikeCount: 6,
+        nickname: "디플에코",
+        badge: "early_bird",
+      },
+    ],
   },
 };

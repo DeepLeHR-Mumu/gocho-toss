@@ -38,16 +38,6 @@ export const changeDataButton = (active = false) => {
   `;
 };
 
-export const flexBox = css`
-  display: flex;
-  align-items: flex-start;
-`;
-
-export const partContainer = css`
-  margin-right: 1rem;
-  flex-grow: 1;
-`;
-
 export const sectionContainer = css`
   background-color: ${COLORS.GRAY100};
   border-radius: 2rem;
@@ -56,10 +46,4 @@ export const sectionContainer = css`
   :last-of-type {
     margin-bottom: 2.25rem;
   }
-`;
-
-export const warningDesc = css`
-  font-size: 0.75rem;
-  color: ${COLORS.GRAY30};
-  font-weight: 400;
 `;

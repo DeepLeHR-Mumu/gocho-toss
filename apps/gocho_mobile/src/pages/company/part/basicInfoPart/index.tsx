@@ -40,20 +40,20 @@ export const BasicInfoPart: FunctionComponent = () => {
     return <>Loading</>;
   }
 
-  const { year: foundYear, month: foundMonth, date: foundDate } = dateConverter(companyDetailData.data.foundDate);
+  const { year: foundYear, month: foundMonth, date: foundDate } = dateConverter(companyDetailData.foundDate);
   return (
     <div css={wrapper}>
-      <InvisibleH2 title={`${companyDetailData.data.name} 기업정보`} />
+      <InvisibleH2 title={`${companyDetailData.name} 기업정보`} />
       <Layout>
         <section css={sectionContainer}>
           <div css={sizeContainer}>
             <div css={infoContainer}>
               <p>업종</p>
-              <p>{companyDetailData.data.industry}</p>
+              <p>{companyDetailData.industry}</p>
             </div>
             <div css={infoContainer}>
               <p>기업형태</p>
-              <p>{companyDetailData.data.size}</p>
+              <p>{companyDetailData.size}</p>
             </div>
             <div css={infoContainer}>
               <p>설립연도</p>
@@ -64,34 +64,34 @@ export const BasicInfoPart: FunctionComponent = () => {
             <div css={infoContainer}>
               <p>사원수</p>
               <p>
-                <span css={employeeNumberCSS}>{companyDetailData.data.employeeNumber.toLocaleString("Ko-KR")}</span>명
+                <span css={employeeNumberCSS}>{companyDetailData.employeeNumber.toLocaleString("Ko-KR")}</span>명
               </p>
             </div>
             <div css={infoContainer}>
               <p>기업한줄소개</p>
-              <p>{companyDetailData.data.intro}</p>
+              <p>{companyDetailData.intro}</p>
             </div>
             <div css={infoContainer}>
               <p>기업 주소</p>
-              <p>{companyDetailData.data.address}</p>
+              <p>{companyDetailData.address}</p>
             </div>
 
             <a
               css={mapButton}
-              href={`https://map.kakao.com/?q=${companyDetailData.data.address}`}
+              href={`https://map.kakao.com/?q=${companyDetailData.address}`}
               target="_blank"
               rel="noreferrer"
             >
               지도 보기
             </a>
 
-            {companyDetailData.data.factoryArr && (
+            {companyDetailData.factoryArr && (
               <div css={companyListContainer}>
                 <div css={companyLogo}>
                   <FiInfo />
                 </div>
                 <ul css={factoryBox}>
-                  {companyDetailData.data.factoryArr.map((factory) => {
+                  {companyDetailData.factoryArr.map((factory) => {
                     return (
                       <li css={factoryText} key={factory.id}>
                         {factory.factoryName}
@@ -105,11 +105,11 @@ export const BasicInfoPart: FunctionComponent = () => {
             <div css={infoContainer}>
               <p>노조 여부</p>
               <p css={iconText}>
-                {companyDetailData.data.nozo.exists ? "노조 있음" : "노조 없음"}
+                {companyDetailData.nozo.exists ? "노조 있음" : "노조 없음"}
 
                 <span css={nozoIconBox}>
                   <Image
-                    src={companyDetailData.data.nozo.exists ? nozo_true : nozo_false}
+                    src={companyDetailData.nozo.exists ? nozo_true : nozo_false}
                     layout="fixed"
                     objectFit="contain"
                   />
@@ -118,7 +118,7 @@ export const BasicInfoPart: FunctionComponent = () => {
             </div>
             <div css={infoContainer}>
               <p />
-              {companyDetailData.data.nozo.desc && <p css={nozoExplainText}>{companyDetailData.data.nozo.desc}</p>}
+              {companyDetailData.nozo.desc && <p css={nozoExplainText}>{companyDetailData.nozo.desc}</p>}
             </div>
           </div>
         </section>

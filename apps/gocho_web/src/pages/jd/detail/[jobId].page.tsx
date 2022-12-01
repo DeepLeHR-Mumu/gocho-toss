@@ -6,6 +6,7 @@ import { QueryClient, dehydrate } from "@tanstack/react-query";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { getJobDetail, useJobDetail } from "shared-api/job";
+import { useCompanyCommentArr } from "shared-api/company";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 
@@ -33,6 +34,9 @@ const JobsDetail: NextPage = () => {
 
   const { data: jobDetailData, isLoading } = useJobDetail({
     id: Number(jobId),
+  });
+  const { data: companyCommentDataArr } = useCompanyCommentArr({
+    companyId: Number(jobDetailData?.company.companyId),
   });
 
   useEffect(() => {
@@ -81,19 +85,14 @@ const JobsDetail: NextPage = () => {
             <section css={containerSkeleton}>
               <SkeletonBox />
             </section>
-            {/* <DetailComment jdId={null} detailData={null} /> */}
+            {companyCommentDataArr && (
+              <DetailComment jdId={null} commentDataArr={companyCommentDataArr} userInfo={userData} />
+            )}
           </div>
         </Layout>
       </main>
     );
   }
-
-  const commentData = {
-    companyId: jobDetailData.company.companyId,
-    name: jobDetailData.company.name,
-    title: jobDetailData.title,
-    logoUrl: jobDetailData.company.logoUrl,
-  };
 
   return (
     <main css={wrapper}>
@@ -126,7 +125,9 @@ const JobsDetail: NextPage = () => {
               <DetailPreferencePart freshPosition={freshPosition} />
             </section>
           )}
-          <DetailComment jdId={jobDetailData.id} detailData={commentData} />
+          {companyCommentDataArr && (
+            <DetailComment jdId={jobDetailData.id} commentDataArr={companyCommentDataArr} userInfo={userData} />
+          )}
         </div>
         <ReceptInfoPart jobDetailData={jobDetailData} />
       </Layout>

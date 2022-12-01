@@ -40,20 +40,20 @@ export const InfoBox: FunctionComponent = () => {
   } = useCompanyDetail({ companyId: Number(companyId) as number });
 
   const { mutate: addMutate } = useAddCompanyBookmarkArr({
-    id: companyDetailData?.data.id as number,
-    logo_url: companyDetailData?.data.logoUrl as string,
-    name: companyDetailData?.data.name as string,
+    id: companyDetailData?.id as number,
+    logo_url: companyDetailData?.logoUrl as string,
+    name: companyDetailData?.name as string,
   });
 
   const { mutate: deleteMutate } = useDeleteCompanyBookmarkArr({
-    id: companyDetailData?.data.id as number,
-    logo_url: companyDetailData?.data.logoUrl as string,
-    name: companyDetailData?.data.name as string,
+    id: companyDetailData?.id as number,
+    logo_url: companyDetailData?.logoUrl as string,
+    name: companyDetailData?.name as string,
   });
 
   const isBookmarked = Boolean(
     userCompanyBookmarkArr?.some((company) => {
-      return company.id === companyDetailData?.data.id;
+      return company.id === companyDetailData?.id;
     })
   );
 
@@ -64,12 +64,10 @@ export const InfoBox: FunctionComponent = () => {
     return (
       userData?.id &&
       addMutate(
-        { userId: userData?.id, elemId: companyDetailData?.data.id as number },
+        { userId: userData?.id, elemId: companyDetailData?.id as number },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(
-              companyDetailKeyObj.detail({ companyId: companyDetailData?.data.id as number })
-            );
+            queryClient.invalidateQueries(companyDetailKeyObj.detail({ companyId: companyDetailData?.id as number }));
           },
         }
       )
@@ -80,12 +78,10 @@ export const InfoBox: FunctionComponent = () => {
     return (
       userData?.id &&
       deleteMutate(
-        { userId: userData?.id, elemId: companyDetailData?.data.id as number },
+        { userId: userData?.id, elemId: companyDetailData?.id as number },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(
-              companyDetailKeyObj.detail({ companyId: companyDetailData?.data.id as number })
-            );
+            queryClient.invalidateQueries(companyDetailKeyObj.detail({ companyId: companyDetailData?.id as number }));
           },
         }
       )
@@ -104,7 +100,7 @@ export const InfoBox: FunctionComponent = () => {
     <section css={wrapper}>
       <div css={container}>
         <div css={logoBox}>
-          <Image src={companyDetailData.data.logoUrl} layout="fill" objectFit="contain" />
+          <Image src={companyDetailData.logoUrl} layout="fill" objectFit="contain" />
         </div>
         <div css={buttonBox}>
           <button
@@ -113,18 +109,18 @@ export const InfoBox: FunctionComponent = () => {
             onClick={isBookmarked ? deleteCompanyBookmark : addCompanyBookmark}
           >
             <BsFillBookmarkFill />
-            기업 북마크 <span css={countCSS}>{companyDetailData.data.bookmark.toLocaleString("Ko-KR")}</span>
+            기업 북마크 <span css={countCSS}>{companyDetailData.bookmark.toLocaleString("Ko-KR")}</span>
           </button>
 
           <p css={viewCountContainer}>
             <FiEye />
             조회수
-            <span css={viewCount}>{companyDetailData.data.view.toLocaleString("Ko-KR")}</span>
+            <span css={viewCount}>{companyDetailData.view.toLocaleString("Ko-KR")}</span>
           </p>
         </div>
       </div>
-      <strong css={companyName}>{companyDetailData.data.name}</strong>
-      <p css={industryText}>{companyDetailData.data.industry}</p>
+      <strong css={companyName}>{companyDetailData.name}</strong>
+      <p css={industryText}>{companyDetailData.industry}</p>
     </section>
   );
 };
