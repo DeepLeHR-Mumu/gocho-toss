@@ -154,6 +154,10 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
   const { params } = context;
   const queryClient = new QueryClient();
 
+  if (Number.isNaN(Number(params?.jobId))) {
+    return { notFound: true };
+  }
+
   if (params) await queryClient.prefetchQuery(jobDetailKeyObj.detail({ id: Number(params.jobId) }), getJobDetail);
 
   return {
