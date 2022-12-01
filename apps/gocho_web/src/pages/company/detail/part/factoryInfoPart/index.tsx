@@ -1,7 +1,6 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import Link from "next/link";
 
 import yesData from "shared-image/page/factory/yes_data.svg";
 import noData from "shared-image/page/factory/no_data.svg";
@@ -14,11 +13,10 @@ import dormitoryIcon from "shared-image/page/factory/dormitory_icon.svg";
 import xIcon from "shared-image/page/factory/x_icon.svg";
 import oIcon from "shared-image/page/factory/o_icon.svg";
 import { useCompanyDetail } from "shared-api/company";
-
 import { kakaoChannelUrl } from "shared-constant/help";
-// import { KakaoMap } from "@pages/companies/component/kakaoMap";
 import { InvisibleH3 } from "shared-ui/common/atom/invisibleH3";
 
+// import { KakaoMap } from "@pages/companies/component/kakaoMap";
 import { MenuButtonList } from "../../../component/menuButtonList";
 import {
   buttonContainer,
@@ -53,7 +51,7 @@ export const FactoryInfoPart: FunctionComponent = () => {
   const { companyId } = router.query;
   const [activeFactory, setActiveFactory] = useState<null | number>(null);
 
-  const { data: companyDetailData, isLoading } = useCompanyDetail({ companyId: Number(companyId) });
+  const { data: companyDetailData } = useCompanyDetail({ companyId: Number(companyId) });
 
   useEffect(() => {
     if (companyDetailData && companyDetailData.factoryArr.length !== 0) {
@@ -61,7 +59,7 @@ export const FactoryInfoPart: FunctionComponent = () => {
     }
   }, [companyDetailData]);
 
-  if (!companyDetailData || isLoading) {
+  if (!companyDetailData) {
     return <section css={wrapper} />;
   }
 
@@ -80,12 +78,11 @@ export const FactoryInfoPart: FunctionComponent = () => {
         </div>
 
         {companyDetailData.factoryArr.length === 0 && <p css={noFactoryWarning}>등록된 공장이 없습니다</p>}
-
         {companyDetailData.factoryArr.map((factory) => {
           return (
             <button
               type="button"
-              key={`companyFactoryDetailInfo${factory.id}`}
+              key={`companyFactoryDetailInfo${factory.factoryName}`}
               css={selectButton(activeFactory === factory.id)}
               onClick={() => {
                 return setActiveFactory(factory.id);
@@ -101,11 +98,9 @@ export const FactoryInfoPart: FunctionComponent = () => {
         {companyDetailData.factoryArr.length === 0 && (
           <div css={noFactoryBox}>
             <p css={noFactoryDesc}>혹시 재직자/인사담당자 이신가요?</p>
-            <Link href={kakaoChannelUrl} passHref>
-              <a css={noFactoryButton} target="_blank">
-                공장 정보 수정 요청하기 +
-              </a>
-            </Link>
+            <a css={noFactoryButton} target="_blank" href={kakaoChannelUrl} rel="noreferrer">
+              공장 정보 수정 요청하기 +
+            </a>
           </div>
         )}
 
@@ -114,7 +109,7 @@ export const FactoryInfoPart: FunctionComponent = () => {
 
           return (
             factory.id === activeFactory && (
-              <div css={infoContainer}>
+              <div css={infoContainer} key={`companyFactoryDetailInfo${factory.id}`}>
                 <div css={addressWrapper}>
                   <div css={factoryName}>{factory.factoryName}</div>
                   <div css={addressBox}>
@@ -152,10 +147,7 @@ export const FactoryInfoPart: FunctionComponent = () => {
                       </div>
                       <div css={infoText}>
                         <strong css={infoTitle}>남</strong>
-                        <div css={info}>
-                          {Math.round((factory.maleNumber / totalNumber) * 100)}
-                          %&nbsp;
-                        </div>
+                        <div css={info}>{Math.round((factory.maleNumber / totalNumber) * 100)}% </div>
                         <strong css={infoTitle}>여</strong>
                         <p css={info}>{Math.round((factory.femaleNumber / totalNumber) * 100)}%</p>
                       </div>

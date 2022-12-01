@@ -7,7 +7,7 @@ import { InvisibleH3 } from "shared-ui/common/atom/invisibleH3";
 
 import { WorkingNotice } from "../../../component/workingNotice";
 import { MenuButtonList } from "../../../component/menuButtonList";
-import { menuPictureList, menuNameList } from "./constant";
+import { setWelfareArr } from "./constant";
 import { wrapper, infoContainer, infoBox, infoPicture, infoTitle, textBox, infoText } from "./style";
 
 export const WelfareInfoPart: FunctionComponent = () => {
@@ -20,17 +20,6 @@ export const WelfareInfoPart: FunctionComponent = () => {
     return <section css={wrapper} />;
   }
 
-  const menuDescList = [
-    companyDetailData.welfare.money,
-    companyDetailData.welfare.health,
-    companyDetailData.welfare.life,
-    companyDetailData.welfare.holiday,
-    companyDetailData.welfare.facility,
-    companyDetailData.welfare.vacation,
-    companyDetailData.welfare.growth,
-    companyDetailData.welfare.etc,
-  ];
-
   return (
     <>
       <WorkingNotice info="복지" />
@@ -39,25 +28,28 @@ export const WelfareInfoPart: FunctionComponent = () => {
         <MenuButtonList activeMenu="복지 정보" />
 
         <div css={infoContainer}>
-          {menuPictureList.map((pic, index) => {
+          {setWelfareArr(companyDetailData.welfare).map((welfare) => {
             return (
-              menuDescList[index] && (
-                <div css={infoBox} key={`companyWelfareInfo${menuNameList[index]}`}>
-                  <div css={infoPicture}>
-                    <Image layout="fill" objectFit="contain" src={pic} alt="급여 복지 관련 로고" />
-                  </div>
-                  <strong css={infoTitle}>{menuNameList[index]}</strong>
-                  <ul css={textBox}>
-                    {menuDescList[index]?.map((data) => {
-                      return (
-                        <li key={data} css={infoText}>
-                          {data}
-                        </li>
-                      );
-                    })}
-                  </ul>
+              <div css={infoBox} key={`companyWelfareInfo${welfare.title}`}>
+                <div css={infoPicture}>
+                  <Image
+                    layout="fill"
+                    objectFit="contain"
+                    src={welfare.image}
+                    alt={`${companyDetailData.name} ${welfare.title} 복지`}
+                  />
                 </div>
-              )
+                <strong css={infoTitle}>{welfare.title}</strong>
+                <ul css={textBox}>
+                  {welfare.value?.map((data) => {
+                    return (
+                      <li key={data} css={infoText}>
+                        {data}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             );
           })}
         </div>
