@@ -32,7 +32,7 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({
         <input
           css={searchBox}
           type="text"
-          value={jobData.companyName}
+          defaultValue={jobData.companyName}
           onBlur={(e) => {
             setSearchWord(e.target.value);
           }}

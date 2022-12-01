@@ -47,10 +47,10 @@ export const rotationArr = [
   { data: "3;2", name: "3조 2교대" },
   { data: "3;3", name: "3조 3교대" },
   { data: "4;2", name: "4조 2교대" },
-  { data: "4:3", name: "4조 3교대" },
-  { data: "4:4", name: "4조 4교대" },
-  { data: "5:3", name: "5조 3교대" },
-  { data: "5:4", name: "5조 4교대" },
+  { data: "4;3", name: "4조 3교대" },
+  { data: "4;4", name: "4조 4교대" },
+  { data: "5;3", name: "5조 3교대" },
+  { data: "5;4", name: "5조 4교대" },
 ];
 
 export const placeTypeArr = ["일반", "전국", "해외", "기타"];
