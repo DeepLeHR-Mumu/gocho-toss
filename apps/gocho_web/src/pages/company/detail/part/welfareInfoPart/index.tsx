@@ -29,28 +29,31 @@ export const WelfareInfoPart: FunctionComponent = () => {
 
         <div css={infoContainer}>
           {setWelfareArr(companyDetailData.welfare).map((welfare) => {
-            return (
-              <div css={infoBox} key={`companyWelfareInfo${welfare.title}`}>
-                <div css={infoPicture}>
-                  <Image
-                    layout="fill"
-                    objectFit="contain"
-                    src={welfare.image}
-                    alt={`${companyDetailData.name} ${welfare.title} 복지`}
-                  />
+            if (welfare.value) {
+              return (
+                <div css={infoBox} key={`companyWelfareInfo${welfare.title}`}>
+                  <div css={infoPicture}>
+                    <Image
+                      layout="fill"
+                      objectFit="contain"
+                      src={welfare.image}
+                      alt={`${companyDetailData.name} ${welfare.title} 복지`}
+                    />
+                  </div>
+                  <strong css={infoTitle}>{welfare.title}</strong>
+                  <ul css={textBox}>
+                    {welfare.value?.map((data) => {
+                      return (
+                        <li key={data} css={infoText}>
+                          {data}
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
-                <strong css={infoTitle}>{welfare.title}</strong>
-                <ul css={textBox}>
-                  {welfare.value?.map((data) => {
-                    return (
-                      <li key={data} css={infoText}>
-                        {data}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            );
+              );
+            }
+            return null;
           })}
         </div>
       </section>
