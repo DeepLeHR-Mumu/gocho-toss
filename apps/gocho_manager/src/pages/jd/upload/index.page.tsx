@@ -43,7 +43,6 @@ const JdUpload: NextPage = () => {
   }
 
   const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
-    // console.log(jobObj.etc_arr);
     const newJobObj: JobSubmitValues = {
       ...jobObj,
       process_arr: jobObj.process_arr?.split("\n"),

@@ -6,7 +6,7 @@ import { axiosInstance } from "@api/axiosInstance";
 import { PostJobDef, useChangeJobProps, RequestObjDef } from "./type";
 
 export const postJob: PostJobDef = async (requestObj) => {
-  const { data } = await axiosInstance.patch(`/jds/${requestObj.jdId}`, requestObj.dto);
+  const { data } = await axiosInstance.put(`/jds/${requestObj.jdId}`, requestObj.dto);
   return data;
 };
 
