@@ -28,6 +28,7 @@ export interface PositionObjDef {
   };
   task_detail_arr: string[];
   rotation_arr: string[];
+  rotation_etc: string;
   place: {
     type: "일반" | "전국" | "해외" | "기타";
     address_arr: string[] | null;

@@ -26,6 +26,7 @@ export const selector = (jobDetailObj: JobDetailObjDef) => {
       },
       taskDetailArr: position.task_detail_arr,
       rotationArr: position.rotation_arr,
+      rotationEtc: position.rotation_etc,
       place: {
         addressArr: position.place.address_arr,
         factoryArr: positionFactoryArr,
