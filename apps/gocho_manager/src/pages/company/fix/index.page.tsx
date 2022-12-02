@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
 import { useChangeCompany } from "@api/company/useChangeCompany";
+// import { useCompanyDetail } from "@api/company/useCompanyDetail";
+
 import { mainContainer, pageTitle } from "@style/commonStyles";
 
 import { FactoryBox } from "@pages/company/upload/component/factoryBox";
@@ -22,6 +24,7 @@ const CompanyUpload: NextPage = () => {
   const [logoPicture, setLogoPicture] = useState<File>();
   const [checkMsg, setCheckMsg] = useState<string>();
 
+  // const { data: companyData } = useCompanyDetail({ companyId });
   const { mutate } = useChangeCompany();
 
   const companyForm = useForm<CompanyFormValues>({
