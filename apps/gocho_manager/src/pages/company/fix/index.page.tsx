@@ -1,0 +1,92 @@
+import { useState } from "react";
+import type { NextPage } from "next";
+import { useRouter } from "next/router";
+import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+
+import { useChangeCompany } from "@api/company/useChangeCompany";
+import { mainContainer, pageTitle } from "@style/commonStyles";
+
+import { FactoryBox } from "@pages/company/upload/component/factoryBox";
+import { BasicInfoPart } from "@pages/company/upload/part/basicInfoPart";
+import { WelfareInfoPart } from "@pages/company/upload/part/welfareInfoPart";
+import { PayInfoPart } from "@pages/company/upload/part/payInfoPart";
+import { CompanyFormValues } from "./type";
+import { blankFactory } from "./constant";
+
+import { formContainer, addFactoryButton, submitButton, checkMsgBox } from "./style";
+
+const CompanyUpload: NextPage = () => {
+  const router = useRouter();
+  const companyId = Number(router.query.id);
+
+  const [logoPicture, setLogoPicture] = useState<File>();
+  const [checkMsg, setCheckMsg] = useState<string>();
+
+  const { mutate } = useChangeCompany();
+
+  const companyForm = useForm<CompanyFormValues>({
+    defaultValues: {
+      nozo: { exists: false, desc: null },
+    },
+  });
+  const { register, control, handleSubmit, watch } = companyForm;
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "factories",
+  });
+
+  const companySubmit: SubmitHandler<CompanyFormValues> = (companyObj) => {
+    const formData = new FormData();
+    const json = JSON.stringify(companyObj);
+    const blob = new Blob([json], { type: "application/json" });
+    formData.append("dto", blob);
+
+    if (logoPicture) {
+      formData.append("img", logoPicture);
+      mutate(
+        { companyId, dto: blob, image: logoPicture },
+        {
+          onSuccess: () => {
+            setCheckMsg("기업이 업로드 되었습니다!");
+          },
+
+          onError: () => {
+            setCheckMsg("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
+          },
+        }
+      );
+    }
+  };
+
+  return (
+    <main css={mainContainer}>
+      <h2 css={pageTitle}>기업 등록</h2>
+      <form css={formContainer} onSubmit={handleSubmit(companySubmit)}>
+        <BasicInfoPart register={register} watch={watch} setLogoPicture={setLogoPicture} />
+        <WelfareInfoPart register={register} />
+        <PayInfoPart register={register} />
+        <ul>
+          {fields.map((item, index) => {
+            return <FactoryBox key={item.id} index={index} companyForm={companyForm} remove={remove} />;
+          })}
+        </ul>
+        <button
+          css={addFactoryButton}
+          type="button"
+          onClick={() => {
+            append(blankFactory);
+          }}
+        >
+          공장 추가
+        </button>
+        <button css={submitButton} type="submit">
+          기업 등록하기
+        </button>
+        {checkMsg && <p css={checkMsgBox}>{checkMsg}</p>}
+      </form>
+    </main>
+  );
+};
+
+export default CompanyUpload;
