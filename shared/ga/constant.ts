@@ -10,6 +10,7 @@ export const FUNNEL = {
   REGISTER_SPEC: "enter_spec_register",
   MYPAGE: "enter_mypage",
   POSTING_LIST: "enter_posting_list",
+  POSTING_DETAIL: "enter_posting_detail",
   HOME: "enter_home",
   SEARCH_PAGE: "enter_search_result",
   WELCOME: "enter_welcome",

@@ -5,8 +5,7 @@ import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { postingListFunnelEvent } from "shared-ga/posting";
 
-import CommunityLayout from "@pages/community/component/communityLayout";
-
+import { CommunityLayout } from "../../component/communityLayout";
 import { PageHead } from "./component/pageHead";
 import { ListPart } from "./part/listPart";
 
