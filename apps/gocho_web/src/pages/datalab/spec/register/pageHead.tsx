@@ -5,6 +5,8 @@ import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL } from "shared-constant/internalURL
 import { SPEC_REGISTER_META } from "shared-constant/meta";
 
 export const PageHead: FunctionComponent = () => {
+  // eslint-disable-next-line no-console
+  console.log("test");
   return (
     <Head>
       <title>{SPEC_REGISTER_META.title}</title>
