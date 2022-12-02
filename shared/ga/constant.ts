@@ -13,4 +13,6 @@ export const FUNNEL = {
   HOME: "enter_home",
   SEARCH_PAGE: "enter_search_result",
   WELCOME: "enter_welcome",
+  NOT_FOUND: "enter_404",
+  UNKNOWN_ERROR: "enter_500",
 };
