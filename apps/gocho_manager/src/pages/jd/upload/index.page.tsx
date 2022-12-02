@@ -43,21 +43,24 @@ const JdUpload: NextPage = () => {
   }
 
   const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
+    // console.log(jobObj.etc_arr);
     const newJobObj: JobSubmitValues = {
       ...jobObj,
       process_arr: jobObj.process_arr?.split("\n"),
       apply_route_arr: jobObj.apply_route_arr?.split("\n"),
-      etc_arr: jobObj.etc_arr?.split("\n") || null,
+      etc_arr: jobObj.etc_arr ? jobObj.etc_arr.split("\n") : null,
       position_arr: jobObj.position_arr.map((position) => {
         return {
           ...position,
-          required_etc_arr: position.required_etc_arr?.split("\n") || null,
-          task_detail_arr: position.task_detail_arr?.split("\n"),
+          required_etc_arr: position.required_etc_arr ? position.required_etc_arr.split("\n") : null,
+          task_detail_arr: position.task_detail_arr.split("\n"),
           pay_arr: position.pay_arr?.split("\n"),
-          preferred_etc_arr: position.preferred_etc_arr?.split("\n") || null,
+          preferred_etc_arr: position.preferred_etc_arr ? position.preferred_etc_arr.split("\n") : null,
         };
       }),
     };
+
+    // console.log(newJobObj);
     const formData = new FormData();
     const json = JSON.stringify(newJobObj);
     const blob = new Blob([json], { type: "application/json" });

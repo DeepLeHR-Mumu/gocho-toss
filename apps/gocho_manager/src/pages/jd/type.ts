@@ -22,7 +22,7 @@ export interface JobFormValues {
     task_main: string;
     task_sub_arr: string[];
     task_detail_arr: string;
-    rotation_arr: string[];
+    rotation_arr: string[] | null;
     rotation_etc: string | null;
     place: {
       type: string;
@@ -61,7 +61,7 @@ export interface JobSubmitValues {
     task_main: string;
     task_sub_arr: string[];
     task_detail_arr: string[];
-    rotation_arr: string[];
+    rotation_arr: string[] | null;
     rotation_etc: string | null;
     place: {
       type: string;
