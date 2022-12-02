@@ -11,7 +11,7 @@ import { communityPostingDetailKeyObj } from "shared-constant/queryKeyFactory/co
 import { postingDetailFunnelEvent } from "shared-ga/posting";
 import { CommunityLayout } from "../../component/communityLayout";
 
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 import { WriteComment } from "./component/writeComment";
 import { CommentPart } from "./part/commentPart";
 import { PostingPart } from "./part/postingPart";

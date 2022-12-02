@@ -10,7 +10,7 @@ import { Layout } from "@component/layout";
 import { AsideMenu } from "../component/asideMenu";
 import { CarouselPart } from "./part/carouselPart";
 import { ListPart } from "./part/listPart";
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 import { title, colorPoint, flexBox } from "./style";
 
 const MainList: NextPage = () => {

@@ -18,7 +18,7 @@ import { JobPart } from "./index/part/jobPart";
 import { CommunityPostingPart } from "./index/part/communityPostingPart";
 import { SpecBestPart } from "./index/part/specBestPart";
 import { TipPart } from "./index/part/tipPart";
-import { PageHead } from "./index/component/pageHead";
+import { PageHead } from "./index/pageHead";
 
 // export async function getStaticProps() {
 //   const queryClient = new QueryClient();

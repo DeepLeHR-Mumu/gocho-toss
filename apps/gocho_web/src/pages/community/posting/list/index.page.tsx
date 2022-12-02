@@ -6,7 +6,7 @@ import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { postingListFunnelEvent } from "shared-ga/posting";
 
 import { CommunityLayout } from "../../component/communityLayout";
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 import { ListPart } from "./part/listPart";
 
 const PostingListPage: NextPage = () => {
