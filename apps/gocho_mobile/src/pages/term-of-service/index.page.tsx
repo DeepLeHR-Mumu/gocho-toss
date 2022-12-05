@@ -4,7 +4,7 @@ import { Layout } from "@component/layout";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { executionDesc, tosArr } from "shared-constant/TOS";
 
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 import { tosTitle, subTitle, container, executionDescCSS, wrapper, listTitle, listArr, desc } from "./style";
 import { tosArrDef } from "./type";
 

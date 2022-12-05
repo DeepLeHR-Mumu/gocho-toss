@@ -1,16 +1,25 @@
 import { NextPage } from "next";
 import Image from "next/image";
+import { useEffect } from "react";
 
 import { LinkButton } from "shared-ui/common/atom/button";
 import smallMonoGochoLogo from "shared-image/global/deepLeLogo/smallMono.svg";
+import { unknownErrorEvent, unknownErrorFunnelEvent } from "shared-ga/error";
 
 import jobiError from "@public/image/page/errorpage/500_jobi.png";
 
 import { catchPhrase, errorMsgContainer, errorMsgWrapper, gochoLogoBox, jobiContainer, wrapper } from "./style";
+import { PageHead } from "./pageHead";
 
 const ErrorPage: NextPage = () => {
+  useEffect(() => {
+    unknownErrorFunnelEvent();
+    unknownErrorEvent();
+  }, []);
+
   return (
     <main css={wrapper}>
+      <PageHead />
       <div css={errorMsgWrapper}>
         <div css={errorMsgContainer}>
           <h1>열심히 고치고 있습니다</h1>

@@ -12,7 +12,7 @@ import { JobPreviewPart } from "./part/jobPreviewPart";
 import { CompanyPreviewPart } from "./part/companyPreviewPart";
 import { JobListPart } from "./part/jobListPart";
 import { CompanyListPart } from "./part/companyListPart";
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 
 import { mainContainer, title } from "./style";
 

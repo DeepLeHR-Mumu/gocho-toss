@@ -10,7 +10,7 @@ import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { companyInfoFunnelEvent, companyJdFunnelEvent } from "shared-ga/company";
 
-import { PageInfoHead } from "./component/pageInfoHead";
+import { PageHead } from "./pageHead";
 import { PageRecruitHead } from "./component/pageRecruitHead";
 import { H2Title } from "./component/h2Title";
 import { HeaderPart } from "./part/headerPart";
@@ -69,7 +69,7 @@ const CompanyDetail: NextPage = () => {
           <>
             {companyDetailData && (
               <>
-                <PageInfoHead
+                <PageHead
                   option={{
                     companyName: companyDetailData.name,
                     id: companyDetailData.id,

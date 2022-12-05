@@ -9,7 +9,7 @@ import { expiredJdListFunnelEvent } from "shared-ga/jd";
 
 import { Layout } from "@component/layout";
 
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 import { SearchPart } from "./part/searchPart";
 import { ResultPart } from "./part/resultPart";
 import { mainContainer, title, colorPoint, listContainer } from "./style";

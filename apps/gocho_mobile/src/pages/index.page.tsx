@@ -9,7 +9,7 @@ import { JobPart } from "./index/part/jobPart";
 import { SuggestedJobPart } from "./index/part/suggestedJobPart";
 import { BannerPart } from "./index/part/bannerPart";
 import { CompanyCommentPart } from "./index/part/companyCommentPart";
-import { PageHead } from "./index/component/pageHead";
+import { PageHead } from "./index/pageHead";
 
 const Home: NextPage = () => {
   useEffect(() => {
