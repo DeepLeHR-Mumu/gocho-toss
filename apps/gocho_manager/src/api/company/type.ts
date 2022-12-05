@@ -37,6 +37,7 @@ export interface FactoryObjDef {
 export interface CompanyDetailObjDef {
   id: number;
   name: string;
+  business_number: number;
   catch_url: string;
   youtube_url: string | null;
   industry: string;

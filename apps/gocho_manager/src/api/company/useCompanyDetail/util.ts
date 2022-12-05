@@ -4,6 +4,7 @@ export const companyConverter = (data: CompanyDetailObjDef) => {
   return {
     id: data.id,
     name: data.name,
+    businessNumber: data.business_number,
     industry: data.industry,
     size: data.size,
     catchUrl: data.catch_url,

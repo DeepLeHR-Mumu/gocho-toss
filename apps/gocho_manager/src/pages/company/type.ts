@@ -7,7 +7,7 @@ export interface CompanyFormValues {
   industry: string;
   size: string;
   employee_number: number;
-  found_date: number;
+  found_date: number | string;
   address: string;
   intro: string;
   pay_avg: number | null;
@@ -51,7 +51,7 @@ export interface CompanySubmitValues {
   industry: string;
   size: string;
   employee_number: number;
-  found_date: number;
+  found_date: number | string;
   address: string;
   intro: string;
   pay_avg: number | null;

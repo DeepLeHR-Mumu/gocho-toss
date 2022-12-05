@@ -74,6 +74,7 @@ const CompanyUpload: NextPage = () => {
   };
 
   useEffect(() => {
+    const newFoundDate = companyData?.foundDate ? companyData.foundDate + 540000 * 60 : 0;
     const FactoryNewArr = companyData?.factoryArr.map((factory) => {
       return {
         factory_name: factory.factoryName,
@@ -89,12 +90,13 @@ const CompanyUpload: NextPage = () => {
     });
     reset({
       name: companyData?.name,
+      business_number: companyData?.businessNumber,
       catch_url: companyData?.catchUrl,
       youtube_url: companyData?.youtubeUrl,
       industry: companyData?.industry,
       size: companyData?.size,
       employee_number: companyData?.employeeNumber,
-      found_date: companyData?.foundDate,
+      found_date: new Date(newFoundDate).toISOString().substring(0, 10),
       address: companyData?.address,
       intro: companyData?.intro,
       pay_avg: companyData?.payAvg,
@@ -122,7 +124,12 @@ const CompanyUpload: NextPage = () => {
     <main css={mainContainer}>
       <h2 css={pageTitle}>기업 등록</h2>
       <form css={formContainer} onSubmit={handleSubmit(companySubmit)}>
-        <BasicInfoPart register={register} watch={watch} setLogoPicture={setLogoPicture} />
+        <BasicInfoPart
+          register={register}
+          watch={watch}
+          companyLogo={companyData?.logoUrl || ""}
+          setLogoPicture={setLogoPicture}
+        />
         <WelfareInfoPart register={register} />
         <PayInfoPart register={register} />
         <ul>
