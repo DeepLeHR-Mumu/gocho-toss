@@ -64,9 +64,7 @@ const Home: NextPage = () => {
           font-size: 5rem;
         `}
       >
-        {(process.env.NODE_ENV === "development" && "노드 개발자모드") ||
-          (process.env.NEXT_PUBLIC_VERCEL_ENV !== "development" &&
-            `버셀 환경변수 : ${process.env.NEXT_PUBLIC_VERCEL_ENV}`)}
+        {process.env.NEXT_PUBLIC_VERCEL_ENV}
       </h1>
 
       <PageHead />
