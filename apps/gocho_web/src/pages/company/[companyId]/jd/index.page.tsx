@@ -12,7 +12,7 @@ import { companyJdFunnelEvent } from "shared-ga/company";
 
 import { Layout } from "@component/layout";
 
-import { PageRecruitHead } from "../component/pageRecruitHead";
+import { PageHead } from "./pageHead";
 import { TopButton } from "../component/topButton";
 import { HeaderPart } from "../part/headerPart";
 import { CompanyJobPart } from "../part/companyJobPart";
@@ -61,13 +61,7 @@ const JdPage: NextPage = () => {
 
   return (
     <main css={mainContainer}>
-      <PageRecruitHead
-        option={{
-          companyName: companyDetailData.name,
-          id: companyDetailData.id,
-        }}
-      />
-
+      <PageHead />
       <Layout>
         <HeaderPart />
         <InvisibleH1 title={`${companyDetailData.name} > 생산직 채용공고 - 고초대졸닷컴`} />
