@@ -1,7 +1,5 @@
 import { ChangeEvent, FunctionComponent, useState } from "react";
 import Image from "next/image";
-
-import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
 import {
@@ -12,7 +10,6 @@ import {
   inputContainer,
   inputLabel,
   inputTitle,
-  currentLogo,
   logoPreviewContainer,
   logoUploadLabel,
   logoUploadInput,
@@ -23,12 +20,7 @@ import {
 import { BasicInfoPartProps } from "./type";
 import { industryArr, sizeArr } from "./constant";
 
-export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
-  register,
-  watch,
-  companyLogo,
-  setLogoPicture,
-}) => {
+export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ register, watch, setLogoPicture }) => {
   const [imageSrc, setImageSrc] = useState<string>();
 
   const onUploadLogo = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -51,12 +43,6 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
       <div css={inputContainer}>
         <strong css={inputTitle}>기업명 *</strong>
         <input css={inputBox} {...register("name", { required: true })} />
-      </div>
-      <div css={imageInput}>
-        <strong css={inputTitle}>기존 로고</strong>
-        <div css={currentLogo}>
-          <Image layout="fill" objectFit="contain" src={companyLogo || defaultCompanyLogo} alt="" />
-        </div>
       </div>
       <div css={imageInput}>
         <strong css={inputTitle}>기업 로고</strong>

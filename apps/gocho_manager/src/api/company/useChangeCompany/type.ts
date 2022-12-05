@@ -5,7 +5,7 @@ import { UseMutationResult } from "@tanstack/react-query";
 export interface RequestObjDef {
   companyId: number;
   dto: Blob;
-  image: File;
+  image?: File;
 }
 
 export interface PostCompanyDef {

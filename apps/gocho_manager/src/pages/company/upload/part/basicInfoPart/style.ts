@@ -23,13 +23,6 @@ export const inputTitle = css`
   margin-right: 1rem;
 `;
 
-export const currentLogo = css`
-  width: 5rem;
-  height: 5rem;
-  position: relative;
-  margin-right: 1.5rem;
-`;
-
 export const inputBox = css`
   width: 50%;
   border-radius: 0.5rem;
@@ -60,8 +53,8 @@ export const imageInput = css`
 `;
 
 export const logoPreviewContainer = css`
-  width: 5rem;
-  height: 5rem;
+  width: 6rem;
+  height: 6rem;
   position: relative;
 `;
 

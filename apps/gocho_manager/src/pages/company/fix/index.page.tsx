@@ -6,11 +6,11 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { useChangeCompany } from "@api/company/useChangeCompany";
 import { useCompanyDetail } from "@api/company/useCompanyDetail";
 import { mainContainer, pageTitle } from "@style/commonStyles";
-import { FactoryBox } from "@pages/company/upload/component/factoryBox";
-import { BasicInfoPart } from "@pages/company/upload/part/basicInfoPart";
-import { WelfareInfoPart } from "@pages/company/upload/part/welfareInfoPart";
-import { PayInfoPart } from "@pages/company/upload/part/payInfoPart";
 
+import { FactoryBox } from "./component/factoryBox";
+import { BasicInfoPart } from "./part/basicInfoPart";
+import { WelfareInfoPart } from "./part/welfareInfoPart";
+import { PayInfoPart } from "./part/payInfoPart";
 import { CompanyFormValues, CompanySubmitValues } from "../type";
 import { blankFactory } from "./constant";
 import { formContainer, addFactoryButton, submitButton, checkMsgBox } from "./style";
@@ -51,15 +51,25 @@ const CompanyUpload: NextPage = () => {
         etc: companyObj.welfare.etc ? companyObj.welfare.etc.split("\n") : null,
       },
     };
-    const formData = new FormData();
     const json = JSON.stringify(newCompanyObj);
     const blob = new Blob([json], { type: "application/json" });
-    formData.append("dto", blob);
 
     if (logoPicture) {
-      formData.append("img", logoPicture);
       mutate(
         { companyId, dto: blob, image: logoPicture },
+        {
+          onSuccess: () => {
+            setCheckMsg("기업이 수정 되었습니다!");
+          },
+
+          onError: () => {
+            setCheckMsg("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
+          },
+        }
+      );
+    } else {
+      mutate(
+        { companyId, dto: blob },
         {
           onSuccess: () => {
             setCheckMsg("기업이 수정 되었습니다!");
