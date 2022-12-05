@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import { useEffect } from "react";
+import { css } from "@emotion/react";
 
 // import { dehydrate, QueryClient } from "@tanstack/react-query";
 
@@ -58,6 +59,14 @@ const Home: NextPage = () => {
 
   return (
     <main>
+      <h1
+        css={css`
+          font-size: 5rem;
+        `}
+      >
+        {process.env.NODE_ENV === "development" ? "DEVELOPMENT" : "PRODUCTION"}
+      </h1>
+
       <PageHead />
       <InvisibleH1 title="고초대졸닷컴 | 생산직 취업의 새로운 기준" />
 
