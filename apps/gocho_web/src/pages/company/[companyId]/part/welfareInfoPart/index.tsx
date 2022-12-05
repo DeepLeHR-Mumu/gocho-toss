@@ -5,8 +5,8 @@ import Image from "next/image";
 import { useCompanyDetail } from "shared-api/company";
 import { InvisibleH3 } from "shared-ui/common/atom/invisibleH3";
 
-import { WorkingNotice } from "../../../component/workingNotice";
-import { MenuButtonList } from "../../../component/menuButtonList";
+import { WorkingNotice } from "../../component/workingNotice";
+import { MenuButtonList } from "../../component/menuButtonList";
 import { setWelfareArr } from "./constant";
 import { wrapper, infoContainer, infoBox, infoPicture, infoTitle, textBox, infoText } from "./style";
 

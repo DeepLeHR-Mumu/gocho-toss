@@ -17,7 +17,7 @@ import { kakaoChannelUrl } from "shared-constant/help";
 import { InvisibleH3 } from "shared-ui/common/atom/invisibleH3";
 
 // import { KakaoMap } from "@pages/companies/component/kakaoMap";
-import { MenuButtonList } from "../../../component/menuButtonList";
+import { MenuButtonList } from "../../component/menuButtonList";
 import {
   buttonContainer,
   iconBox,

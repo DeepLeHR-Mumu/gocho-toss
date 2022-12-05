@@ -12,21 +12,22 @@ export const TopButton: FunctionComponent<TopButtonProps> = ({ id }) => {
 
   return (
     <div css={buttonContainer}>
+      {/* Link로 하기 */}
       <button
         type="button"
         onClick={() => {
-          router.replace(`${COMPANY_DETAIL_URL}/${id}`);
+          router.push(`${COMPANY_DETAIL_URL}/${id}`);
         }}
-        css={changeDataButton(Boolean(companyPartPath === "detail"))}
+        css={changeDataButton(companyPartPath === "detail")}
       >
         기업 정보
       </button>
       <button
         type="button"
         onClick={() => {
-          router.replace(`${COMPANY_JD_URL}/${id}`);
+          router.push(`${COMPANY_JD_URL}/${id}`);
         }}
-        css={changeDataButton(Boolean(companyPartPath === "jd"))}
+        css={changeDataButton(companyPartPath === "jd")}
       >
         채용공고 모음
       </button>

@@ -14,13 +14,13 @@ import { companyInfoFunnelEvent } from "shared-ga/company";
 import { DetailComment } from "@component/global/detailComment";
 import { Layout } from "@component/layout";
 
-import { PageInfoHead } from "../component/pageInfoHead";
 import { TopButton } from "../component/topButton";
 import { HeaderPart } from "../part/headerPart";
-import { BasicInfoPart } from "./part/basicInfoPart";
-import { WelfareInfoPart } from "./part/welfareInfoPart";
-import { FactoryInfoPart } from "./part/factoryInfoPart";
-import { PayInfoPart } from "./part/payInfoPart";
+import { BasicInfoPart } from "../part/basicInfoPart";
+import { WelfareInfoPart } from "../part/welfareInfoPart";
+import { FactoryInfoPart } from "../part/factoryInfoPart";
+import { PayInfoPart } from "../part/payInfoPart";
+import { PageHead } from "./pageHead";
 import { mainContainer, mainContainerSkeleton, flexBox, partContainer, warningDesc } from "./style";
 
 const DetailPage: NextPage = () => {
@@ -70,13 +70,7 @@ const DetailPage: NextPage = () => {
 
   return (
     <main css={mainContainer}>
-      <PageInfoHead
-        option={{
-          companyName: companyDetailData.name,
-          id: companyDetailData.id,
-        }}
-      />
-
+      <PageHead />
       <Layout>
         <HeaderPart />
         <InvisibleH1 title={`${companyDetailData.name} > 기업/공장 정보 - 고초대졸닷컴`} />

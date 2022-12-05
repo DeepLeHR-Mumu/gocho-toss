@@ -8,8 +8,8 @@ import { InvisibleH3 } from "shared-ui/common/atom/invisibleH3";
 import { dateConverter } from "shared-util/date";
 import { useCompanyDetail } from "shared-api/company";
 
-import { MenuButtonList } from "../../../component/menuButtonList";
-import { KakaoMap } from "../../../component/kakaoMap";
+import { MenuButtonList } from "../../component/menuButtonList";
+import { KakaoMap } from "../../component/kakaoMap";
 import { infoContainer, flexBox, infoTitle, info, nozoImage, infoBox, pointInfo, wrapper } from "./style";
 
 export const BasicInfoPart: FunctionComponent = () => {

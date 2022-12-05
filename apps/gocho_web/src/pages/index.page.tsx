@@ -56,19 +56,6 @@ const Home: NextPage = () => {
     homeFunnelEvent();
   }, []);
 
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(process.env.NEXT_PUBLIC_VERCEL_ENV);
-    // eslint-disable-next-line no-console
-    console.log(process.env.NEXT_PUBLIC_VERCEL_URL);
-    // eslint-disable-next-line no-console
-    console.log(process.env.NEXT_PUBLIC_VERCEL_GIT_PROVIDER);
-    // eslint-disable-next-line no-console
-    console.log(process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG);
-    // eslint-disable-next-line no-console
-    console.log(process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER);
-  }, []);
-
   return (
     <main>
       <PageHead />

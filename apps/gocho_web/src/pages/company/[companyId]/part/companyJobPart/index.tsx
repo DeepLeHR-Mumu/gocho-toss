@@ -15,14 +15,13 @@ import { partContainer, listContainer, totalCount, noJobListText } from "./style
 export const CompanyJobPart: FunctionComponent = () => {
   const router = useRouter();
   const observeRef = useRef<HTMLDivElement | null>(null);
-  const { companyId } = router.query;
 
   const {
     data: jobDataArr,
     isLoading,
     fetchNextPage,
   } = useInfiniteJobArr({
-    companyId: Number(companyId),
+    companyId: Number(router.query.companyId),
     limit: 10,
     order: "recent",
   });

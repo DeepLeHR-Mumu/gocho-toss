@@ -8,8 +8,8 @@ import payStart from "shared-image/page/companyDetail/payStart.svg";
 import { InvisibleH3 } from "shared-ui/common/atom/invisibleH3";
 import { useCompanyDetail } from "shared-api/company";
 
-import { WorkingNotice } from "../../../component/workingNotice";
-import { MenuButtonList } from "../../../component/menuButtonList";
+import { WorkingNotice } from "../../component/workingNotice";
+import { MenuButtonList } from "../../component/menuButtonList";
 import {
   wrapper,
   infoContainer,

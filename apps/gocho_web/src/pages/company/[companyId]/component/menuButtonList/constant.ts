@@ -1,4 +1,4 @@
-import { activeMenuDef } from "@pages/company/component/menuButtonList/type";
+import { activeMenuDef } from "@pages/company/[companyId]/component/menuButtonList/type";
 
 export const menuButtonArr: activeMenuDef[] = [
   {

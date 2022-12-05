@@ -9,7 +9,6 @@ import defaultCompanyLogo from "shared-image/global/common/default_company_logo.
 import { dateConverter } from "shared-util/date";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
-import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr, useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
 import { jdBookmarkEvent } from "shared-ga/jd";
@@ -128,7 +127,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
             </p>
           </li>
         </ul>{" "}
-        <Link href={`${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`} passHref>
+        <Link href={`/company/${jobDetailData.company.companyId}/detail`} passHref>
           <a css={companyNameCSS}>{jobDetailData.company.name}</a>
         </Link>
         <p css={titleCSS}>{jobDetailData.title}</p>
@@ -158,7 +157,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
             </button>
           </li>
           <li>
-            <Link href={`${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`} passHref>
+            <Link href={`/company/${jobDetailData.company.companyId}/detail`} passHref>
               <a css={buttonCSS(false)}>기업정보</a>
             </Link>
           </li>

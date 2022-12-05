@@ -12,6 +12,8 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, use
   const [imageSrc, setImageSrc] = useState(commentDataArr.company.logoUrl);
   const [isTotalComment, setIsTotalComment] = useState<boolean>(true);
 
+  // userinfo === 댓글정보가 null
+  // 출력되는 화면이 같음
   if (!userInfo || commentDataArr.commentArr === null) {
     return (
       <aside css={wrapper}>

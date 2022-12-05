@@ -15,7 +15,7 @@ import { Layout } from "@component/layout";
 import { PageRecruitHead } from "../component/pageRecruitHead";
 import { TopButton } from "../component/topButton";
 import { HeaderPart } from "../part/headerPart";
-import { CompanyJobPart } from "./part/companyJobPart";
+import { CompanyJobPart } from "../part/companyJobPart";
 import { mainContainer, mainContainerSkeleton } from "./style";
 
 const JdPage: NextPage = () => {
