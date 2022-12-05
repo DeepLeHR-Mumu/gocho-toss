@@ -15,9 +15,6 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const path = require("path");
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -26,7 +23,6 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   pageExtensions: ["page.tsx"],
-  outputFileTracingRoot: path.join(__dirname, "../.."),
 };
 
 module.exports = withBundleAnalyzer(withTM(nextConfig));
