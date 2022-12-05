@@ -3,10 +3,12 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 import { axiosInstance } from "@api/axiosInstance";
-import { PostCompanyDef, useChangeCompanyProps, RequestObjDef } from "./type";
+import { ChangeCompanyDef, useChangeCompanyProps, RequestObjDef } from "./type";
 
-export const changeCompany: PostCompanyDef = async (requestObj) => {
-  const { data } = await axiosInstance.put(`/companies/${requestObj.companyId}`, requestObj.dto);
+export const changeCompany: ChangeCompanyDef = async (requestObj) => {
+  const { data } = await axiosInstance.put(`/companies/${requestObj.companyId}`, requestObj, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
   return data;
 };
 

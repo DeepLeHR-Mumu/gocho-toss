@@ -8,7 +8,7 @@ export interface RequestObjDef {
   image?: File;
 }
 
-export interface PostCompanyDef {
+export interface ChangeCompanyDef {
   ({ companyId, dto, image }: RequestObjDef): Promise<AdminResponseDef>;
 }
 
