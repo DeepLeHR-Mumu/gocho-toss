@@ -13,7 +13,7 @@ import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { useModal } from "@recoil/hook/modal";
 import { Layout } from "@component/layout";
 
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 import { BasicInfoPart } from "./part/basicInfoPart";
 import { DetailInfoPart } from "./part/detailInfoPart";
 import { ResultInfoPart } from "./part/resultInfoPart";

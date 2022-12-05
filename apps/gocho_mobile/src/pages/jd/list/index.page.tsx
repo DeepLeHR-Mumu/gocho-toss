@@ -6,7 +6,7 @@ import { JOBS_LIST_URL } from "shared-constant/internalURL";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 import { AdPart } from "./part/adPart";
 import { ListPart } from "./part/listPart";
 
@@ -23,7 +23,6 @@ const JdList: NextPage = () => {
     <main>
       <PageHead />
       <InvisibleH1 title="실시간 생산직 채용공고" />
-
       <InvisibleH2 title="오늘의 추천 공고" />
       <AdPart />
       <ListPart />

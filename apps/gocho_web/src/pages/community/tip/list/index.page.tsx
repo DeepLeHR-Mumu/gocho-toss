@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { tipListFunnelEvent } from "shared-ga/tip";
 
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 import { ListPart } from "./part/listPart";
 
 const Tip: NextPage = () => {

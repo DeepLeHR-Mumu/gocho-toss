@@ -2,8 +2,8 @@ import { NextPage } from "next";
 
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 
-import CommunityLayout from "../../../component/communityLayout";
-import { PageHead } from "./component/pageHead";
+import { CommunityLayout } from "../../component/communityLayout";
+import { PageHead } from "./pageHead";
 import { EditPostingPart } from "./part/editPostingPart";
 
 const PostingEditPage: NextPage = () => {

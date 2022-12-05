@@ -1,18 +1,27 @@
 import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 
 import { LinkButton } from "shared-ui/common/atom/button";
-
 import deepLeLogo from "shared-image/global/deepLeLogo/smallMono.svg";
-import jobiError from "@public/images/global/errrorPage/jobi_500.png";
 import { MAIN_URL } from "shared-constant/internalURL";
+import { unknownErrorEvent, unknownErrorFunnelEvent } from "shared-ga/error";
+
+import jobiError from "@public/images/global/errrorPage/jobi_500.png";
 
 import { catchphrase, buttonBox, errorWrapper, jobiImageContainer, logoContainer, title, wrapper } from "./style";
+import { PageHead } from "./pageHead";
 
-const UnKnownError: NextPage = () => {
+const UnKnownErrorPage: NextPage = () => {
+  useEffect(() => {
+    unknownErrorFunnelEvent();
+    unknownErrorEvent();
+  }, []);
+
   return (
     <main css={wrapper}>
+      <PageHead />
       <article css={errorWrapper}>
         <h1 css={title}>열심히 고치고 있습니다.</h1>
         <div css={catchphrase}>
@@ -33,4 +42,4 @@ const UnKnownError: NextPage = () => {
   );
 };
 
-export default UnKnownError;
+export default UnKnownErrorPage;

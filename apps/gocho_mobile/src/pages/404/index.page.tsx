@@ -1,16 +1,25 @@
 import { NextPage } from "next";
 import Image from "next/image";
+import { useEffect } from "react";
 
 import { LinkButton } from "shared-ui/common/atom/button";
 import smallMonoGochoLogo from "shared-image/global/deepLeLogo/smallMono.svg";
+import { notFoundEvent, notFoundFunnelEvent } from "shared-ga/error";
 
 import jobi from "@public/image/page/errorpage/404_jobi.png";
 
 import { catchPhrase, errorMsgContainer, errorMsgWrapper, gochoLogoBox, jobiContainer, wrapper } from "./style";
+import { PageHead } from "./pageHead";
 
-const ErrorPage: NextPage = () => {
+const NotFoundPage: NextPage = () => {
+  useEffect(() => {
+    notFoundFunnelEvent();
+    notFoundEvent();
+  }, []);
+
   return (
     <main css={wrapper}>
+      <PageHead />
       <div css={errorMsgWrapper}>
         <div css={errorMsgContainer}>
           <h1>
@@ -37,4 +46,4 @@ const ErrorPage: NextPage = () => {
   );
 };
 
-export default ErrorPage;
+export default NotFoundPage;

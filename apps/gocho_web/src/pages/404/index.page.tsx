@@ -1,16 +1,26 @@
 import { NextPage } from "next";
+import { useEffect } from "react";
 import Image from "next/image";
 
 import deepLeLogo from "shared-image/global/deepLeLogo/smallMono.svg";
-import jobiError from "@public/images/global/errrorPage/jobi_404.png";
 import { LinkButton } from "shared-ui/common/atom/button";
 import { MAIN_URL } from "shared-constant/internalURL";
+import { notFoundEvent, notFoundFunnelEvent } from "shared-ga/error";
 
+import jobiError from "@public/images/global/errrorPage/jobi_404.png";
+
+import { PageHead } from "./pageHead";
 import { buttonBox, catchphrase, errorWrapper, jobiImageContainer, logoContainer, title, wrapper } from "./style";
 
-const NoutFound: NextPage = () => {
+const NotFoundPage: NextPage = () => {
+  useEffect(() => {
+    notFoundFunnelEvent();
+    notFoundEvent();
+  }, []);
+
   return (
     <main css={wrapper}>
+      <PageHead />
       <article css={errorWrapper}>
         <h1 css={title}>죄송합니다 해당 페이지를 띄울 수 없습니다.</h1>
         <div css={catchphrase}>
@@ -31,4 +41,4 @@ const NoutFound: NextPage = () => {
   );
 };
 
-export default NoutFound;
+export default NotFoundPage;
