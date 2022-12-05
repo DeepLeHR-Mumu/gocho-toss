@@ -13,7 +13,7 @@ import { JobListPart } from "./part/jobListPart";
 import { CompanyListPart } from "./part/companyListPart";
 import { mainContainer, title } from "./style";
 import { MenuListPart } from "./part/menuListPart";
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 
 const UnifiedSearch: NextPage = () => {
   const router = useRouter();

@@ -14,3 +14,12 @@ export const postingListFunnelEvent = () => {
 export const postingListInfinityScroll = (count: number) => {
   ReactGA.event(`request_posting_list_${count}`);
 };
+
+export const postingDetailFunnelEvent = (posting_id: number) => {
+  const funnel = sessionStorage.getItem("funnel");
+  if (funnel === FUNNEL.POSTING_DETAIL) {
+    return;
+  }
+  sessionStorage.setItem("funnel", FUNNEL.POSTING_DETAIL);
+  ReactGA.event("enter_posting_detail", { prev: funnel, posting_id });
+};

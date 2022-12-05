@@ -120,12 +120,12 @@ const specResponseCheckTester = async (isDeepRegister: boolean, response: Respon
   expect(registerGetData.data.college.uturn).toBeTruthy();
   expect(registerGetData.data.certificate.data).toEqual(["포장산업기사"]);
 
-  if (isDeepRegister) {
-    expect(registerGetData.data.language).toEqual([{ language: "중국어", test: "TSC", score: "2급" }]);
-    expect(registerGetData.data.award).toEqual("수상경력에 대한 서술...");
-    expect(registerGetData.data.career).toEqual("경력에 대한 서술...");
-    expect(registerGetData.data.etc).toEqual("기타사항에 대한 서술...");
-  }
+  // if (isDeepRegister) {
+  //   expect(registerGetData.data.language).toEqual([{ language: "중국어", test: "TSC", score: "2급" }]);
+  //   expect(registerGetData.data.award).toEqual("수상경력에 대한 서술...");
+  //   expect(registerGetData.data.career).toEqual("경력에 대한 서술...");
+  //   expect(registerGetData.data.etc).toEqual("기타사항에 대한 서술...");
+  // }
 };
 
 test.describe("스펙등록 테스트", () => {

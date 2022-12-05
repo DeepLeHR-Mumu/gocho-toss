@@ -17,7 +17,7 @@ import { jdDetailFunnelEvent } from "shared-ga/jd";
 
 import { PositionObjDef } from "./type";
 import { HeaderPart, DetailSupportPart, DetailWorkPart, DetailPreferencePart, ReceptInfoPart } from "./part";
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 
 import { wrapper, flexBox, container, containerSkeleton } from "./style";
 
@@ -139,6 +139,10 @@ export default JobsDetail;
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
   const { params } = context;
   const queryClient = new QueryClient();
+
+  if (Number.isNaN(Number(params?.jobId))) {
+    return { notFound: true };
+  }
 
   if (params) await queryClient.prefetchQuery(jobDetailKeyObj.detail({ id: Number(params.jobId) }), getJobDetail);
 

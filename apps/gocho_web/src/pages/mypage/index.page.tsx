@@ -12,7 +12,7 @@ import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { SettingPart } from "./part/settingPart";
 import { CalendarPart } from "./part/calendarPart";
 import { BookmarkPart } from "./part/bookmarkPart";
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 import { mainContainer, title, colorPoint, mypagePosition, mypageBody } from "./style";
 
 const MypageHome: NextPage = () => {

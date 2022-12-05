@@ -25,7 +25,7 @@ import { WelfareInfoPart } from "./part/welfareInfoPart";
 import { FactoryInfoPart } from "./part/factoryInfoPart";
 import { PayInfoPart } from "./part/payInfoPart";
 import { CompanyJobPart } from "./part/companyJobPart";
-import { PageInfoHead } from "./component/pageInfoHead";
+import { PageInfoHead } from "./pageHead";
 import { PageRecruitHead } from "./component/pageRecruitHead";
 
 import {
@@ -271,6 +271,10 @@ export default CompanyDetailPage;
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
   const { params } = context;
   const queryClient = new QueryClient();
+
+  if (Number.isNaN(Number(params?.companyId))) {
+    return { notFound: true };
+  }
 
   if (params)
     await queryClient.prefetchQuery(

@@ -2,9 +2,9 @@ import { NextPage } from "next";
 
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 
-import CommunityLayout from "../../component/communityLayout";
+import { CommunityLayout } from "../../component/communityLayout";
 import { WritePart } from "./part/writePart";
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 
 const WritePostingPage: NextPage = () => {
   return (

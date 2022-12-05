@@ -31,7 +31,7 @@ import {
 import { CommunityLayoutProps, PostingValues } from "./type";
 import { setPostingFilterButtonArr, setPostingHashtagButtonArr } from "./constant";
 
-const CommunityLayout: FunctionComponent<CommunityLayoutProps> = ({ children, isSidebar }) => {
+export const CommunityLayout: FunctionComponent<CommunityLayoutProps> = ({ children, isSidebar }) => {
   const router = useRouter();
 
   const { register, reset, handleSubmit } = useForm<PostingValues>({});
@@ -135,5 +135,3 @@ const CommunityLayout: FunctionComponent<CommunityLayoutProps> = ({ children, is
     </section>
   );
 };
-
-export default CommunityLayout;

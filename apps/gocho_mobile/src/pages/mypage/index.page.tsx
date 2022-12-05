@@ -11,7 +11,7 @@ import { useModal } from "@recoil/hook/modal";
 
 import { BookmarkCompanyPart } from "./part/bookmarkCompanyPart";
 import { BookmarkJobPart } from "./part/bookmarkJobPart";
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 
 import { setBookmarkViewButtonArr } from "./constant";
 import { mainContainer, headerContainer, title, buttonArrContainer, setBookmarkViewButton } from "./style";
