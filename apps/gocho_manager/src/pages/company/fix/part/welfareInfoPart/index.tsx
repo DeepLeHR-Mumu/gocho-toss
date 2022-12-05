@@ -24,14 +24,7 @@ export const WelfareInfoPart: FunctionComponent<WelfareInfoPartProps> = ({ regis
           return (
             <div key={welfare.title} css={welfareBox}>
               <strong css={inputTitle}>{welfare.title}</strong>
-              <textarea
-                css={welfareInputBox}
-                {...register(`${welfare.data}`, {
-                  setValueAs: (v: string) => {
-                    return v.split("\n");
-                  },
-                })}
-              />
+              <textarea css={welfareInputBox} {...register(`${welfare.data}`)} />
             </div>
           );
         })}

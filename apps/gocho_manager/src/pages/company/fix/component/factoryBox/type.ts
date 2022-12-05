@@ -1,5 +1,5 @@
 import { UseFieldArrayRemove, UseFormReturn } from "react-hook-form";
-import { CompanyFormValues } from "@pages/company/upload/type";
+import { CompanyFormValues } from "../../../type";
 
 export interface FactoryBoxProps {
   index: number;

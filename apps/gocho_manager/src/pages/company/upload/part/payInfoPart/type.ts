@@ -1,5 +1,5 @@
 import { UseFormRegister } from "react-hook-form";
-import { CompanyFormValues } from "@pages/company/upload/type";
+import { CompanyFormValues } from "../../../type";
 
 export interface PayInfoPartProps {
   register: UseFormRegister<CompanyFormValues>;
