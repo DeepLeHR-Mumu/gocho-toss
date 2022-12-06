@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
@@ -42,10 +42,10 @@ test.beforeEach(async ({ page }) => {
 //     await expect(page.locator(`button:has-text("기업 ${companyData.count}")`)).toBeVisible();
 //   });
 
-test("타이틀, heading 검사", async ({ page }) => {
-  await expect(page).toHaveTitle("고초대졸닷컴 | 생산직 취업의 새로운 기준");
-  await expect(page.locator("h1")).toHaveText("고초대졸닷컴 | 생산직 취업의 새로운 기준");
-});
+// test("타이틀, heading 검사", async ({ page }) => {
+//   await expect(page).toHaveTitle("고초대졸닷컴 | 생산직 취업의 새로운 기준");
+//   await expect(page.locator("h1")).toHaveText("고초대졸닷컴 | 생산직 취업의 새로운 기준");
+// });
 
 //   test("특수문자 검색시 토스트 작동여부", async ({ page }) => {
 //     await page.locator('button[aria-label="통합검색 열기"]').click();
