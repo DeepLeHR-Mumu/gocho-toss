@@ -32,14 +32,12 @@ const DetailPage: NextPage = () => {
   const payInfoRef = useRef<null | HTMLDivElement>(null);
   const welfareInfoRef = useRef<null | HTMLDivElement>(null);
 
-  const { companyId } = router.query;
-
   const { data: userInfo } = useUserInfo();
   const { data: companyDetailData } = useCompanyDetail({
-    companyId: Number(companyId),
+    companyId: Number(router.query.companyId),
   });
   const { data: companyCommentArrData } = useCompanyCommentArr({
-    companyId: Number(companyId),
+    companyId: Number(router.query.companyId),
   });
   const { mutate: addViewCount } = useAddCompanyViewCount();
 
@@ -75,6 +73,8 @@ const DetailPage: NextPage = () => {
     return <main css={mainContainerSkeleton} />;
   }
 
+  const refObj = { basicInfoRef, welfareInfoRef, payInfoRef, factoryInfoRef };
+
   return (
     <main css={mainContainer}>
       <PageHead />
@@ -88,56 +88,24 @@ const DetailPage: NextPage = () => {
           <div css={flexBox}>
             <div css={partContainer}>
               <div css={wrapper} ref={basicInfoRef}>
-                <MenuButtonList
-                  activeMenu="일반 정보"
-                  refObj={{
-                    basicInfo: basicInfoRef.current,
-                    welfareInfo: welfareInfoRef.current,
-                    payInfo: payInfoRef.current,
-                    factoryInfo: factoryInfoRef.current,
-                  }}
-                />
+                <MenuButtonList activeMenu="일반 정보" refObj={refObj} />
                 <BasicInfoPart />
               </div>
 
               <WorkingNotice info="복지" />
               <div css={wrapper} ref={welfareInfoRef}>
-                <MenuButtonList
-                  activeMenu="복지 정보"
-                  refObj={{
-                    basicInfo: basicInfoRef.current,
-                    welfareInfo: welfareInfoRef.current,
-                    payInfo: payInfoRef.current,
-                    factoryInfo: factoryInfoRef.current,
-                  }}
-                />
+                <MenuButtonList activeMenu="복지 정보" refObj={refObj} />
                 <WelfareInfoPart />
               </div>
 
               <WorkingNotice info="연봉" />
               <div css={wrapper} ref={payInfoRef}>
-                <MenuButtonList
-                  activeMenu="연봉 정보"
-                  refObj={{
-                    basicInfo: basicInfoRef.current,
-                    welfareInfo: welfareInfoRef.current,
-                    payInfo: payInfoRef.current,
-                    factoryInfo: factoryInfoRef.current,
-                  }}
-                />
+                <MenuButtonList activeMenu="연봉 정보" refObj={refObj} />
                 <PayInfoPart />
               </div>
 
               <div css={wrapper} ref={factoryInfoRef}>
-                <MenuButtonList
-                  activeMenu="공장 정보"
-                  refObj={{
-                    basicInfo: basicInfoRef.current,
-                    welfareInfo: welfareInfoRef.current,
-                    payInfo: payInfoRef.current,
-                    factoryInfo: factoryInfoRef.current,
-                  }}
-                />
+                <MenuButtonList activeMenu="공장 정보" refObj={refObj} />
                 <FactoryInfoPart />
               </div>
             </div>

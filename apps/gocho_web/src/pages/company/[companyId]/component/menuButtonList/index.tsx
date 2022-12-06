@@ -14,7 +14,7 @@ export const MenuButtonList: FunctionComponent<MenuButtonListProps> = ({ activeM
         type="button"
         css={menuButton(activeMenu === "일반 정보")}
         onClick={() => {
-          moveScrollHandler(refObj.basicInfo);
+          moveScrollHandler(refObj.basicInfoRef.current);
         }}
       >
         일반 정보
@@ -23,7 +23,7 @@ export const MenuButtonList: FunctionComponent<MenuButtonListProps> = ({ activeM
         type="button"
         css={menuButton(activeMenu === "복지 정보")}
         onClick={() => {
-          moveScrollHandler(refObj.welfareInfo);
+          moveScrollHandler(refObj.welfareInfoRef.current);
         }}
       >
         복지 정보
@@ -32,7 +32,7 @@ export const MenuButtonList: FunctionComponent<MenuButtonListProps> = ({ activeM
         type="button"
         css={menuButton(activeMenu === "연봉 정보")}
         onClick={() => {
-          moveScrollHandler(refObj.payInfo);
+          moveScrollHandler(refObj.payInfoRef.current);
         }}
       >
         연봉 정보
@@ -41,7 +41,7 @@ export const MenuButtonList: FunctionComponent<MenuButtonListProps> = ({ activeM
         type="button"
         css={menuButton(activeMenu === "공장 정보")}
         onClick={() => {
-          moveScrollHandler(refObj.factoryInfo);
+          moveScrollHandler(refObj.factoryInfoRef.current);
         }}
       >
         공장 정보
