@@ -13,13 +13,12 @@ import { datadogRum } from "@datadog/browser-rum";
 
 import { KEY } from "shared-constant/gaKey";
 import { FB_PIXEL_ID } from "shared-constant/fbPixelKey";
+import { globalStyle } from "shared-style/globalStyle";
 
 import { GNB } from "@component/global/gnb";
 import { Footer } from "@component/global/footer";
 import { ModalPlaceholder } from "@component/common/organisms/modal/modalPlaceHolder";
 import { ToastPlaceholder } from "@component/toast/toastPlaceholder";
-
-import { globalStyles } from "@style/globalStyles";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -144,7 +143,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       />
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <Global styles={globalStyles} />
+          <Global styles={globalStyle} />
           <ModalPlaceholder />
           <ToastPlaceholder />
           <GNB />

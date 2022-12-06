@@ -8,13 +8,13 @@ import type { AppProps } from "next/app";
 import { Global } from "@emotion/react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import ReactGA from "react-ga4";
 import { datadogRum } from "@datadog/browser-rum";
+import ReactGA from "react-ga4";
 
 import { KEY } from "shared-constant/gaKey";
 import { FB_PIXEL_ID } from "shared-constant/fbPixelKey";
+import { globalStyle } from "shared-style/globalStyle";
 
-import { globalStyles } from "src/style/globalStyle";
 import { Header } from "@component/global/header";
 import { Footer } from "@component/global/footer";
 import { Aside } from "@component/global/aside";
@@ -147,7 +147,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       />
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <Global styles={globalStyles} />
+          <Global styles={globalStyle} />
           <ModalPlaceholder />
           <ToastPlaceholder />
           <Header />

@@ -5,9 +5,11 @@ import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query
 import { RecoilRoot } from "recoil";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
+import { globalStyle } from "shared-style/globalStyle";
+
 import { Header, SideBar } from "@component/global";
 import { Layout } from "@component/layout";
-import { globalStyles } from "@style/globalStyles";
+
 import { flexBox } from "./style";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -29,7 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <Header />
-          <Global styles={globalStyles} />
+          <Global styles={globalStyle} />
           <Layout>
             <div css={flexBox}>
               <SideBar />
