@@ -10,17 +10,18 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
     "prepare": "husky install",
     "lint": "turbo run lint",
     "lint-fix": "eslint \"**/*.{ts,tsx}\" --ext .ts,.tsx --fix",
-    "dev-web": "cd apps/gocho_web && pnpm dev",
+    "dev-web": "» pnpm --filter gocho_web dev",
     "build-web": "pnpm turbo build --scope=gocho_web --include-dependencies --no-deps",
-    "dev-mobile": "cd apps/gocho_mobile && pnpm dev",
+    "start-web": "pnpm --filter gocho_web start",
+    "dev-mobile": "pnpm --filter gocho_mobile dev",
     "build-mobile": "pnpm turbo build --scope=gocho_mobile --include-dependencies --no-deps",
+    "start-mobile": "pnpm --filter gocho_mobile start",
     "dev-admin": "cd apps/gocho_admin && pnpm dev",
     "build-admin": "pnpm turbo build --scope=gocho_admin --include-dependencies --no-deps",
+    "start-admin": "pnpm --filter gocho_admin start",
     "e2e:report": "pnpx playwright show-report"
   },
   "lint-staged": {

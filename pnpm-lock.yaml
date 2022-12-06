@@ -23,25 +23,6 @@ importers:
       husky: 8.0.1
       turbo: 1.6.3
 
-  apps/enterprise:
-    specifiers:
-      '@types/node': 18.7.13
-      '@types/react': 18.0.17
-      '@types/react-dom': 18.0.6
-      next: 12.2.5
-      react: 17.0.2
-      react-dom: 17.0.2
-      typescript: 4.7.2
-    dependencies:
-      next: 12.2.5_sfoxds7t5ydpegc3knd667wn6m
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
-    devDependencies:
-      '@types/node': 18.7.13
-      '@types/react': 18.0.17
-      '@types/react-dom': 18.0.6
-      typescript: 4.7.2
-
   apps/gocho_admin:
     specifiers:
       '@emotion/react': ^11.10.0
@@ -97,6 +78,43 @@ importers:
       '@types/react-dom': 18.0.6
       eslint: 8.22.0
       eslint-config-next: 12.2.5_bhttdz2kviaiqdfc2p3x7ygkuy
+      typescript: 4.7.2
+
+  apps/gocho_business:
+    specifiers:
+      '@types/node': 18.7.13
+      '@types/react': 18.0.17
+      '@types/react-dom': 18.0.6
+      eslint-config-deeple: workspace:^1.0.0
+      next: 12.2.5
+      react: 17.0.2
+      react-dom: 17.0.2
+      shared-api: workspace:^0.0.0
+      shared-constant: workspace:^0.0.0
+      shared-ga: workspace:^0.0.0
+      shared-image: workspace:^0.0.0
+      shared-style: workspace:^0.0.0
+      shared-type: workspace:^0.0.0
+      shared-ui: workspace:^0.0.0
+      shared-util: workspace:^0.0.0
+      typescript: 4.7.2
+    dependencies:
+      next: 12.2.5_sfoxds7t5ydpegc3knd667wn6m
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      shared-api: link:../../shared/api
+      shared-constant: link:../../shared/constant
+      shared-ga: link:../../shared/ga
+      shared-image: link:../../shared/image
+      shared-style: link:../../shared/style
+      shared-type: link:../../shared/type
+      shared-ui: link:../../shared/ui
+      shared-util: link:../../shared/util
+    devDependencies:
+      '@types/node': 18.7.13
+      '@types/react': 18.0.17
+      '@types/react-dom': 18.0.6
+      eslint-config-deeple: link:../../packages/eslint-config-deeple
       typescript: 4.7.2
 
   apps/gocho_mobile:
@@ -5879,10 +5897,6 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /caniuse-lite/1.0.30001399:
-    resolution: {integrity: sha512-4vQ90tMKS+FkvuVWS5/QY1+d805ODxZiKFzsU8o/RsVJz49ZSRR8EjykLJbqhzdPgadbX6wB538wOzle3JniRA==}
-    dev: false
-
   /caniuse-lite/1.0.30001434:
     resolution: {integrity: sha512-aOBHrLmTQw//WFa2rcF1If9fa3ypkC1wzqqiKHgfdrXTWcU8C4gKVZT77eQAPWN1APys3+uQ0Df07rKauXGEYA==}
 
@@ -10284,7 +10298,7 @@ packages:
     dependencies:
       '@next/env': 12.2.5
       '@swc/helpers': 0.4.3
-      caniuse-lite: 1.0.30001399
+      caniuse-lite: 1.0.30001434
       postcss: 8.4.14
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
