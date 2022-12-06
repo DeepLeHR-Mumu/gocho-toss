@@ -25,7 +25,7 @@ import { WelfareInfoPart } from "./part/welfareInfoPart";
 import { FactoryInfoPart } from "./part/factoryInfoPart";
 import { PayInfoPart } from "./part/payInfoPart";
 import { CompanyJobPart } from "./part/companyJobPart";
-import { PageInfoHead } from "./component/pageInfoHead";
+import { PageInfoHead } from "./pageHead";
 import { PageRecruitHead } from "./component/pageRecruitHead";
 
 import {

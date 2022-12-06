@@ -6,7 +6,7 @@ import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerAr
 
 import { useDeleteBanner } from "@api/banner/useDeleteBanner";
 
-import { bannerBox, bannerId, companyName, deleteBannerButton, expireDate, title } from "./style";
+import { bannerBox, bannerIdBox, companyNameBox, deleteBannerButton, expireDateBox, titleBox } from "./style";
 import { BannerBoxProps } from "./type";
 
 export const BannerBox: FunctionComponent<BannerBoxProps> = ({ banner }) => {
@@ -19,7 +19,7 @@ export const BannerBox: FunctionComponent<BannerBoxProps> = ({ banner }) => {
       { bannerId: id },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries(bannerArrKeyObj.bannerArr({ type: "M" }));
+          queryClient.invalidateQueries(bannerArrKeyObj.bannerArr({ type: "T" }));
         },
       }
     );
@@ -29,10 +29,10 @@ export const BannerBox: FunctionComponent<BannerBoxProps> = ({ banner }) => {
 
   return (
     <tr css={bannerBox}>
-      <td css={bannerId}>{banner.id}</td>
-      <td css={companyName}>{banner.companyName}</td>
-      <td css={title}>{banner.title}</td>
-      <td css={expireDate}>
+      <td css={bannerIdBox}>{banner.id}</td>
+      <td css={companyNameBox}>{banner.companyName}</td>
+      <td css={titleBox}>{banner.title}</td>
+      <td css={expireDateBox}>
         {endYear}-{endMonth}-{endDate}
       </td>
       <td>

@@ -14,7 +14,7 @@ import { expiredJdListFunnelEvent, expiredJdListSortingEvent } from "shared-ga/j
 
 import { useToast } from "@recoil/hook/toast";
 
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 import { ExpJobCardList } from "./component/expJobCardList";
 import { setJobOrderButtonArr } from "./constant";
 import {

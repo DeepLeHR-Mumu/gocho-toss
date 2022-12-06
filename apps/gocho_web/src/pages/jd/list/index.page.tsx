@@ -6,7 +6,7 @@ import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { JOBS_LIST_URL } from "shared-constant/internalURL";
 
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 import { AdPart } from "./part/adPart";
 import { ListPart } from "./part/listPart";
 

@@ -10,7 +10,7 @@ import { PartVideo } from "./part/partVideo";
 import { PartJd } from "./part/partJd";
 import { PartVOC } from "./part/partVOC";
 import { PartRenewal } from "./part/partRenewal";
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 
 import { wrapper } from "./style";
 

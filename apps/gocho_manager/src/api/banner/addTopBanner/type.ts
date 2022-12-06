@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
-  dto: FormData;
+  dto: Blob;
 }
 
 export interface PostTopBannerDef {
