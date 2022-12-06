@@ -4,9 +4,9 @@ import Head from "next/head";
 import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL } from "shared-constant/internalURL";
 import { COMPANY_INFO_META } from "shared-constant/meta";
 
-import { PageInfoHeadProps } from "./type";
+import { PageHeadProps } from "./type";
 
-export const PageInfoHead: FunctionComponent<PageInfoHeadProps> = ({ option }) => {
+export const PageHead: FunctionComponent<PageHeadProps> = ({ option }) => {
   const title = `${option.companyName} > 기업/공장 정보 - 고초대졸닷컴`;
   const desc = `${option.companyName} 생산직의 연봉/복지 정보, 노조정보, 공장별 통근버스/기숙사에 대한 자세한 정보를 한눈에 확인해보세요! 생산직 취업의 새로운 기준, 고초대졸닷컴.`;
 

@@ -33,7 +33,7 @@ export default function Document() {
         <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png" />
         <link rel="manifest" href="/icon/manifest.json" />
         <Script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js" strategy="beforeInteractive" />
-        {process.env.NODE_ENV === "production" && (
+        {process.env.NEXT_PUBLIC_VERCEL_ENV === "production" && (
           <noscript>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

@@ -46,6 +46,10 @@ export const imageUploadLabel = css`
   border: 2px solid ${COLORS.GRAY10};
 `;
 
+export const imageUploadInput = css`
+  display: none;
+`;
+
 export const bannerPreviewContainer = css`
   width: 30.5rem;
   height: 12.5rem;
