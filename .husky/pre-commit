@@ -18,8 +18,8 @@ echo "PC Web 타입 검사 완료"
 cd ../gocho_mobile && tsc --noEmit
 echo "Mobile Web 타입 검사 완료"
 cd ../gocho_admin && tsc --noEmit
-echo "admin 타입 검사 완료"
+echo "Admin 타입 검사 완료"
 cd ../gocho_business && tsc --noEmit
-echo "business 타입 검사 완료"
+echo "Business 타입 검사 완료"
 
 cd ../../ && pnpm lint-staged
