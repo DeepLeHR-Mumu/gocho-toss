@@ -50,7 +50,7 @@ const CompanyUpload: NextPage = () => {
 
     if (logoPicture) {
       mutate(
-        { dto: blob, image: logoPicture },
+        { dto: blob, logo: logoPicture },
         {
           onSuccess: () => {
             setCheckMsg("기업이 업로드 되었습니다!");

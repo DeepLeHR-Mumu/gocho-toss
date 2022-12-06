@@ -23,26 +23,7 @@ importers:
       husky: 8.0.1
       turbo: 1.6.3
 
-  apps/enterprise:
-    specifiers:
-      '@types/node': 18.7.13
-      '@types/react': 18.0.17
-      '@types/react-dom': 18.0.6
-      next: 12.2.5
-      react: 17.0.2
-      react-dom: 17.0.2
-      typescript: 4.7.2
-    dependencies:
-      next: 12.2.5_sfoxds7t5ydpegc3knd667wn6m
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
-    devDependencies:
-      '@types/node': 18.7.13
-      '@types/react': 18.0.17
-      '@types/react-dom': 18.0.6
-      typescript: 4.7.2
-
-  apps/gocho_manager:
+  apps/gocho_admin:
     specifiers:
       '@emotion/react': ^11.10.0
       '@tanstack/react-query': ^4.2.3
@@ -97,6 +78,43 @@ importers:
       '@types/react-dom': 18.0.6
       eslint: 8.22.0
       eslint-config-next: 12.2.5_bhttdz2kviaiqdfc2p3x7ygkuy
+      typescript: 4.7.2
+
+  apps/gocho_business:
+    specifiers:
+      '@types/node': 18.7.13
+      '@types/react': 18.0.17
+      '@types/react-dom': 18.0.6
+      eslint-config-deeple: workspace:^1.0.0
+      next: 12.2.5
+      react: 17.0.2
+      react-dom: 17.0.2
+      shared-api: workspace:^0.0.0
+      shared-constant: workspace:^0.0.0
+      shared-ga: workspace:^0.0.0
+      shared-image: workspace:^0.0.0
+      shared-style: workspace:^0.0.0
+      shared-type: workspace:^0.0.0
+      shared-ui: workspace:^0.0.0
+      shared-util: workspace:^0.0.0
+      typescript: 4.7.2
+    dependencies:
+      next: 12.2.5_sfoxds7t5ydpegc3knd667wn6m
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      shared-api: link:../../shared/api
+      shared-constant: link:../../shared/constant
+      shared-ga: link:../../shared/ga
+      shared-image: link:../../shared/image
+      shared-style: link:../../shared/style
+      shared-type: link:../../shared/type
+      shared-ui: link:../../shared/ui
+      shared-util: link:../../shared/util
+    devDependencies:
+      '@types/node': 18.7.13
+      '@types/react': 18.0.17
+      '@types/react-dom': 18.0.6
+      eslint-config-deeple: link:../../packages/eslint-config-deeple
       typescript: 4.7.2
 
   apps/gocho_mobile:
@@ -980,7 +998,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.12.9
-      '@babel/helper-plugin-utils': 7.10.4
+      '@babel/helper-plugin-utils': 7.19.0
       '@babel/plugin-syntax-object-rest-spread': 7.8.3_@babel+core@7.12.9
       '@babel/plugin-transform-parameters': 7.18.8_@babel+core@7.12.9
     dev: true
@@ -4335,7 +4353,7 @@ packages:
   /@types/react-slick/0.23.10:
     resolution: {integrity: sha512-ZiqdencANDZy6sWOWJ54LDvebuXFEhDlHtXU9FFipQR2BcYU2QJxZhvJPW6YK7cocibUiNn+YvDTbt1HtCIBVA==}
     dependencies:
-      '@types/react': 18.0.17
+      '@types/react': 18.0.20
     dev: true
 
   /@types/react/18.0.17:
@@ -4876,12 +4894,12 @@ packages:
       acorn: 7.4.1
     dev: true
 
-  /acorn-jsx/5.3.2_acorn@8.8.0:
+  /acorn-jsx/5.3.2_acorn@8.8.1:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
     dependencies:
-      acorn: 8.8.0
+      acorn: 8.8.1
 
   /acorn-walk/7.2.0:
     resolution: {integrity: sha512-OPdCF6GsMIP+Az+aWfAAOEt2/+iVDKE7oy6lJ098aoe59oAmK76qV6Gw60SbZ8jHuG2wH058GF4pLFbYamYrVA==}
@@ -4914,7 +4932,6 @@ packages:
     resolution: {integrity: sha512-7zFpHzhnqYKrkYdUjF1HI1bzd0VygEGX8lFk4k5zVMqHEoES+P+7TKI+EvLO9WVMJ8eekdO0aDEK044xTXwPPA==}
     engines: {node: '>=0.4.0'}
     hasBin: true
-    dev: true
 
   /address/1.2.1:
     resolution: {integrity: sha512-B+6bi5D34+fDYENiH5qOlA0cV2rAGKuWZ9LeyUUehbXy8e0VS9e498yO0Jeeh+iM+6KbfudHTFjXw2MmJD4QRA==}
@@ -5187,7 +5204,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.2
+      es-abstract: 1.20.4
       es-array-method-boxes-properly: 1.0.0
       is-string: 1.0.7
     dev: true
@@ -5198,7 +5215,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.2
+      es-abstract: 1.20.4
       es-array-method-boxes-properly: 1.0.0
       is-string: 1.0.7
     dev: true
@@ -5268,7 +5285,7 @@ packages:
     hasBin: true
     dependencies:
       browserslist: 4.21.3
-      caniuse-lite: 1.0.30001399
+      caniuse-lite: 1.0.30001434
       normalize-range: 0.1.2
       num2fraction: 1.2.2
       picocolors: 0.2.1
@@ -5690,7 +5707,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001399
+      caniuse-lite: 1.0.30001434
       electron-to-chromium: 1.4.251
       node-releases: 2.0.6
       update-browserslist-db: 1.0.9_browserslist@4.21.3
@@ -5879,9 +5896,6 @@ packages:
     resolution: {integrity: sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==}
     engines: {node: '>=10'}
     dev: true
-
-  /caniuse-lite/1.0.30001399:
-    resolution: {integrity: sha512-4vQ90tMKS+FkvuVWS5/QY1+d805ODxZiKFzsU8o/RsVJz49ZSRR8EjykLJbqhzdPgadbX6wB538wOzle3JniRA==}
 
   /caniuse-lite/1.0.30001434:
     resolution: {integrity: sha512-aOBHrLmTQw//WFa2rcF1If9fa3ypkC1wzqqiKHgfdrXTWcU8C4gKVZT77eQAPWN1APys3+uQ0Df07rKauXGEYA==}
@@ -6986,7 +7000,6 @@ packages:
       string.prototype.trimend: 1.0.5
       string.prototype.trimstart: 1.0.5
       unbox-primitive: 1.0.2
-    dev: true
 
   /es-array-method-boxes-properly/1.0.0:
     resolution: {integrity: sha512-wd6JXUmyHmt8T5a2xreUwKcGPq6f1f+WwIJkijUqiGcJz1qqnZgP6XIK+QyIWU5lT7imeNxUll48bziG+TSYcA==}
@@ -7504,8 +7517,8 @@ packages:
     resolution: {integrity: sha512-DQmnRpLj7f6TgN/NYb0MTzJXL+vJF9h3pHy4JhCIs3zwcgez8xmGg3sXHcEO97BrmO2OSvCwMdfdlyl+E9KjOw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
-      acorn: 8.8.0
-      acorn-jsx: 5.3.2_acorn@8.8.0
+      acorn: 8.8.1
+      acorn-jsx: 5.3.2_acorn@8.8.1
       eslint-visitor-keys: 3.3.0
 
   /esprima/4.0.1:
@@ -8922,7 +8935,6 @@ packages:
   /is-callable/1.2.7:
     resolution: {integrity: sha512-1BC0BVFhS/p0qtw6enp8e+8OD0UrK0oFLztSjNzhcKA3WDuJxxAPXzPuPtKkjEY9UUoEWlX/8fgKeu2S8i9JTA==}
     engines: {node: '>= 0.4'}
-    dev: true
 
   /is-ci/2.0.0:
     resolution: {integrity: sha512-YfJT7rkpQB0updsdHLGWrvhBJfcfzNNawYDNIyQXJz0IViGf75O8EBPKSdvw2rF+LGCsX4FZ8tcr3b19LcZq4w==}
@@ -10242,7 +10254,7 @@ packages:
     dependencies:
       '@next/env': 12.2.5
       '@swc/helpers': 0.4.3
-      caniuse-lite: 1.0.30001399
+      caniuse-lite: 1.0.30001434
       postcss: 8.4.14
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -10286,7 +10298,7 @@ packages:
     dependencies:
       '@next/env': 12.2.5
       '@swc/helpers': 0.4.3
-      caniuse-lite: 1.0.30001399
+      caniuse-lite: 1.0.30001434
       postcss: 8.4.14
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -10500,7 +10512,7 @@ packages:
       array.prototype.reduce: 1.0.4
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.2
+      es-abstract: 1.20.4
     dev: true
 
   /object.hasown/1.1.1:
@@ -11252,7 +11264,7 @@ packages:
       array.prototype.map: 1.0.4
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.2
+      es-abstract: 1.20.4
       get-intrinsic: 1.1.3
       iterate-value: 1.0.2
     dev: true
@@ -11263,7 +11275,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.2
+      es-abstract: 1.20.4
     dev: true
 
   /prompts/2.4.2:
@@ -12067,7 +12079,6 @@ packages:
       call-bind: 1.0.2
       get-intrinsic: 1.1.3
       is-regex: 1.1.4
-    dev: true
 
   /safe-regex/1.1.0:
     resolution: {integrity: sha512-aJXcif4xnaNUzvUuC5gcb46oTS7zvg4jpMTnuqtrEPlR3vFr4pxtdTwaF1Qs3Enjn9HK+ZlwQui+a7z0SywIzg==}
@@ -12629,7 +12640,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.2
+      es-abstract: 1.20.4
       get-intrinsic: 1.1.3
       has-symbols: 1.0.3
       internal-slot: 1.0.3
@@ -12642,7 +12653,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.2
+      es-abstract: 1.20.4
     dev: true
 
   /string.prototype.padstart/3.1.3:
@@ -12651,7 +12662,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.2
+      es-abstract: 1.20.4
     dev: true
 
   /string.prototype.trimend/1.0.5:
@@ -12956,7 +12967,7 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
     dependencies:
-      acorn: 8.8.0
+      acorn: 8.8.1
       commander: 2.20.3
       source-map: 0.6.1
       source-map-support: 0.5.21
