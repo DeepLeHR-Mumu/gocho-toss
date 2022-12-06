@@ -23,6 +23,7 @@ const Home: NextPage = () => {
     <main css={mainContainer}>
       <h2 css={pageTitle}>대시보드</h2>
       <UserDataPart />
+
       <WebsiteDataPart />
     </main>
   );
