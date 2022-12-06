@@ -21,9 +21,6 @@
     "build-mobile": "pnpm turbo build --scope=gocho_mobile --include-dependencies --no-deps",
     "dev-manager": "cd apps/gocho_manager && pnpm dev",
     "build-manager": "pnpm turbo build --scope=gocho_manager --include-dependencies --no-deps",
-    "e2e:web": "pnpx playwright@1.28.0 test e2e/gocho_web --trace on",
-    "e2e:mobile": "PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright pnpx playwright@1.28.0 test e2e/gocho_mobile --trace on",
-    "e2e:manager": "PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright pnpx playwright@1.28.0 test e2e/gocho_mobile --trace on",
     "e2e:report": "pnpx playwright show-report"
   },
   "lint-staged": {
