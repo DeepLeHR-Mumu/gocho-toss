@@ -4,11 +4,11 @@ import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
   dto: Blob;
-  image: File;
+  logo: File;
 }
 
 export interface PostCompanyDef {
-  ({ dto, image }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ dto, logo }: RequestObjDef): Promise<AdminResponseDef>;
 }
 
 export interface useAddCompanyProps {
