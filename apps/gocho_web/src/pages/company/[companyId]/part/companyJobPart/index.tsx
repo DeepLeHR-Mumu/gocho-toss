@@ -13,8 +13,8 @@ import { Layout } from "@component/layout";
 import { partContainer, listContainer, totalCount, noJobListText } from "./style";
 
 export const CompanyJobPart: FunctionComponent = () => {
-  const router = useRouter();
   const observeRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter();
 
   const {
     data: jobDataArr,

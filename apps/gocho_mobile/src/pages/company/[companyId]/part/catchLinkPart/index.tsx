@@ -12,14 +12,10 @@ export const CatchLinkPart: FunctionComponent = () => {
   const router = useRouter();
 
   const { data: companyDetailData, isLoading } = useCompanyDetail({
-    companyId: Number(router.query.companyId) as number,
+    companyId: Number(router.query.companyId),
   });
 
-  if (isLoading || !companyDetailData) {
-    return <>loading</>;
-  }
-
-  if (!companyDetailData) {
+  if (!companyDetailData || isLoading) {
     return null;
   }
 

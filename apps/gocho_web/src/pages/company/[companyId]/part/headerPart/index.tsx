@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { FiEye, FiYoutube } from "react-icons/fi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import Image from "next/image";
@@ -32,8 +32,9 @@ import {
 } from "./style";
 
 export const HeaderPart: FunctionComponent = () => {
-  const queryClient = useQueryClient();
+  const [imageSrc, setImageSrc] = useState<string>("");
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const { setCurrentModal } = useModal();
   const { data: userData } = useUserInfo();
@@ -50,7 +51,9 @@ export const HeaderPart: FunctionComponent = () => {
     name: companyDetailData?.name as string,
   });
 
-  const [imageSrc, setImageSrc] = useState(companyDetailData?.logoUrl as string);
+  useEffect(() => {
+    setImageSrc(companyDetailData?.logoUrl as string);
+  }, [companyDetailData]);
 
   if (!companyDetailData || isLoading) {
     return <div>..</div>;

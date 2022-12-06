@@ -46,8 +46,8 @@ import {
 } from "./style";
 
 export const FactoryInfoPart: FunctionComponent = () => {
-  const router = useRouter();
   const [activeFactory, setActiveFactory] = useState<null | number>(null);
+  const router = useRouter();
 
   const { data: companyDetailData } = useCompanyDetail({ companyId: Number(router.query.companyId) });
 

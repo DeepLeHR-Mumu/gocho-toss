@@ -26,11 +26,11 @@ import { PageHead } from "./pageHead";
 import { mainContainer, mainContainerSkeleton, flexBox, partContainer, warningDesc, wrapper } from "./style";
 
 const DetailPage: NextPage = () => {
-  const router = useRouter();
   const basicInfoRef = useRef<null | HTMLDivElement>(null);
   const factoryInfoRef = useRef<null | HTMLDivElement>(null);
   const payInfoRef = useRef<null | HTMLDivElement>(null);
   const welfareInfoRef = useRef<null | HTMLDivElement>(null);
+  const router = useRouter();
 
   const { data: userInfo } = useUserInfo();
   const { data: companyDetailData } = useCompanyDetail({
