@@ -4,7 +4,6 @@ import Link from "next/link";
 import { BsFillBookmarkFill } from "react-icons/bs";
 
 import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr } from "shared-api/bookmark";
-import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
 import { SkeletonBox } from "../../common/atom/skeletonBox";
@@ -48,7 +47,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
 
   return (
     <article css={cardWrapper}>
-      <Link href={`${COMPANY_DETAIL_URL}/${companyData.id}`} passHref>
+      <Link href={`/company/${companyData.id}/detail`} passHref>
         <button
           type="button"
           css={bookmarkButtonWrapper(isBookmarked)}

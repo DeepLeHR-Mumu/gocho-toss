@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useCompanyCommentArr } from "shared-api/company";
 import { useUserInfo } from "shared-api/auth";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
-import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 
 import { LinkButton, NormalButton } from "../../common/atom/button";
 import { SkeletonBox } from "../../common/atom/skeletonBox";
@@ -97,7 +96,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
         <div css={linkBox}>
           <LinkButton
             text="실시간 댓글 보러가기"
-            linkTo={`${COMPANY_DETAIL_URL}/${companyData.id}`}
+            linkTo={`/company/${companyData.id}/detail`}
             wide
             variant="outlined"
           />
@@ -134,12 +133,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
       </section>
 
       <div css={linkBox}>
-        <LinkButton
-          text="실시간 댓글 보러가기"
-          linkTo={`${COMPANY_DETAIL_URL}/${companyData.id}`}
-          wide
-          variant="outlined"
-        />
+        <LinkButton text="실시간 댓글 보러가기" linkTo={`/company/${companyData.id}/detail`} wide variant="outlined" />
       </div>
     </div>
   );

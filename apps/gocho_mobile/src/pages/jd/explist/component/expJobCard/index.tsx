@@ -8,7 +8,7 @@ import { useJobArr } from "shared-api/job";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { dateConverter } from "shared-util/date";
-import { JOBS_DETAIL_URL, COMPANY_DETAIL_URL, COMPANY_JD_URL } from "shared-constant/internalURL";
+import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 
 import { ExpJobCardProps, ExpJobCardSkeleton } from "./type";
 import {
@@ -71,11 +71,19 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
         <div>
           <div css={companyName}>{companyData.name}</div>
           <div css={buttonContainer}>
-            <Link href={`${COMPANY_DETAIL_URL}/${companyData.id}`} passHref>
+            <Link href={`/company/${companyData.id}/detail`} passHref>
               <a css={companyDetailButton}>기업상세</a>
             </Link>
 
-            <Link href={`${COMPANY_JD_URL}/${companyData.id}`} passHref>
+            <Link
+              href={{
+                pathname: `/company/${companyData.id}/jd`,
+                query: {
+                  page: 1,
+                },
+              }}
+              passHref
+            >
               <a css={moreExpJobButton}>공고 더보기</a>
             </Link>
           </div>
