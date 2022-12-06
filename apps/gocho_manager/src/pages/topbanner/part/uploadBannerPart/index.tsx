@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { ChangeEvent, FunctionComponent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
@@ -56,6 +56,11 @@ export const UploadBannerPart: FunctionComponent = () => {
     );
   };
 
+  const changeColorHandler = (changeEvent: ChangeEvent<HTMLInputElement>) => {
+    setColor(changeEvent.target.value);
+    setValue("color", changeEvent.target.value);
+  };
+
   const { month: jobStartMonth, date: jobStartDate } = dateConverter(jobData?.startTime || 0);
   const { month: jobEndMonth, date: jobEndDate } = dateConverter(jobData?.endTime || 0);
 
@@ -110,8 +115,7 @@ export const UploadBannerPart: FunctionComponent = () => {
                 type="color"
                 id="topBannerColor"
                 onChange={(changeEvent) => {
-                  setColor(changeEvent.target.value);
-                  setValue("color", changeEvent.target.value);
+                  changeColorHandler(changeEvent);
                 }}
               />
             </label>

@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+
 import { pageTitle } from "@style/commonStyles";
 
 export const UploadBannerPart: FunctionComponent = () => {
