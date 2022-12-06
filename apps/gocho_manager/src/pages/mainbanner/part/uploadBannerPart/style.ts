@@ -1,6 +1,5 @@
 import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
-import { shorten } from "shared-style/common";
 
 export const sectionContainer = css`
   margin: 2rem 0;
@@ -8,15 +7,9 @@ export const sectionContainer = css`
   background-color: ${COLORS.BLUE_SECOND90};
 `;
 
-export const titleBox = css`
-  height: 2rem;
-  font-size: 1.25rem;
-  padding: 0.5rem;
-`;
-
 export const inputBox = (isSmall: boolean) => {
   return css`
-    width: ${isSmall ? "6rem" : "30%"};
+    width: ${isSmall ? "6rem" : "25%"};
     border-radius: 0.5rem;
     border: 1px solid ${COLORS.GRAY70};
     background-color: ${COLORS.GRAY100};
@@ -53,11 +46,29 @@ export const imageUploadLabel = css`
   border: 2px solid ${COLORS.GRAY10};
 `;
 
+export const imageUploadInput = css`
+  display: none;
+`;
+
 export const bannerPreviewContainer = css`
   width: 30.5rem;
   height: 12.5rem;
   margin: 0 1rem;
   position: relative;
+`;
+
+export const colorPickerButton = css`
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  background-color: ${COLORS.BLUE_NEON30};
+  color: ${COLORS.GRAY100};
+  margin-right: 0.5rem;
+  border: 2px solid ${COLORS.GRAY10};
+`;
+
+export const colorPicker = css`
+  opacity: 0;
+  height: 1px;
 `;
 
 export const submitBannerButton = css`
@@ -67,45 +78,5 @@ export const submitBannerButton = css`
   padding: 0.25rem 3rem;
   border: 2px solid ${COLORS.GRAY10};
   background-color: ${COLORS.BLUE_NEON40};
-  color: ${COLORS.GRAY100};
-`;
-
-export const bannerBox = css`
-  height: 3rem;
-  margin-top: 0.5rem;
-
-  :last-of-type {
-    height: auto;
-  }
-`;
-
-export const bannerId = css`
-  width: 10%;
-  text-align: center;
-`;
-
-export const companyName = css`
-  width: 20%;
-  text-align: center;
-  ${shorten()};
-`;
-
-export const title = css`
-  width: 40%;
-  text-align: center;
-  ${shorten()};
-`;
-
-export const expireDate = css`
-  width: 20%;
-  text-align: center;
-  ${shorten()};
-`;
-
-export const deleteBannerButton = css`
-  flex-grow: 1;
-  padding: 0.25rem 1rem;
-  border: 2px solid ${COLORS.GRAY10};
-  background-color: #b32100;
   color: ${COLORS.GRAY100};
 `;

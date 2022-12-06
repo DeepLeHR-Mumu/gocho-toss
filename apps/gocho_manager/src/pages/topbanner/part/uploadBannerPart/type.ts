@@ -6,8 +6,3 @@ export interface BannerSubmitFormValues {
   start_time: number;
   end_time: number;
 }
-
-export interface BannerMoveFormValues {
-  from: number;
-  to: number;
-}

@@ -6,7 +6,7 @@ import { axiosInstance } from "@api/axiosInstance";
 import { PostTopBannerDef, useAddTopBannerProps, RequestObjDef } from "./type";
 
 export const postTopBanner: PostTopBannerDef = async (requestObj) => {
-  const { data } = await axiosInstance.post("/banners/top", requestObj.dto, {
+  const { data } = await axiosInstance.post("/banners/top", requestObj, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return data;
