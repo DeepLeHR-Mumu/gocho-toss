@@ -17,7 +17,6 @@ import { kakaoChannelUrl } from "shared-constant/help";
 import { InvisibleH3 } from "shared-ui/common/atom/invisibleH3";
 
 // import { KakaoMap } from "@pages/companies/component/kakaoMap";
-import { MenuButtonList } from "../../component/menuButtonList";
 import {
   buttonContainer,
   iconBox,
@@ -48,10 +47,9 @@ import {
 
 export const FactoryInfoPart: FunctionComponent = () => {
   const router = useRouter();
-  const { companyId } = router.query;
   const [activeFactory, setActiveFactory] = useState<null | number>(null);
 
-  const { data: companyDetailData } = useCompanyDetail({ companyId: Number(companyId) });
+  const { data: companyDetailData } = useCompanyDetail({ companyId: Number(router.query.companyId) });
 
   useEffect(() => {
     if (companyDetailData && companyDetailData.factoryArr.length !== 0) {
@@ -64,8 +62,7 @@ export const FactoryInfoPart: FunctionComponent = () => {
   }
 
   return (
-    <section id="factoryInfo" css={wrapper}>
-      <MenuButtonList activeMenu="공장 정보" />
+    <>
       <InvisibleH3 title="공장 정보" />
       <section css={buttonContainer}>
         <div css={iconBox}>
@@ -198,6 +195,6 @@ export const FactoryInfoPart: FunctionComponent = () => {
           );
         })}
       </div>
-    </section>
+    </>
   );
 };

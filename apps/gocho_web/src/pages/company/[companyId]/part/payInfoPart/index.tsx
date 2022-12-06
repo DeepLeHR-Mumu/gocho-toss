@@ -8,8 +8,6 @@ import payStart from "shared-image/page/companyDetail/payStart.svg";
 import { InvisibleH3 } from "shared-ui/common/atom/invisibleH3";
 import { useCompanyDetail } from "shared-api/company";
 
-import { WorkingNotice } from "../../component/workingNotice";
-import { MenuButtonList } from "../../component/menuButtonList";
 import {
   wrapper,
   infoContainer,
@@ -25,66 +23,59 @@ import {
 
 export const PayInfoPart: FunctionComponent = () => {
   const router = useRouter();
-  const { companyId } = router.query;
 
-  const { data: companyDetailData, isLoading } = useCompanyDetail({ companyId: Number(companyId) });
+  const { data: companyDetailData, isLoading } = useCompanyDetail({ companyId: Number(router.query.companyId) });
 
   if (!companyDetailData || isLoading) {
     return <section css={wrapper} />;
   }
 
   return (
-    <>
-      <WorkingNotice info="연봉" />
-      <section css={wrapper} id="payInfo">
-        <MenuButtonList activeMenu="연봉 정보" />
-        <div css={infoContainer}>
-          <InvisibleH3 title="연봉 정보" />
-          <div css={flexBox}>
-            <div css={infoBox}>
-              <div>
-                <div css={infoPicture}>
-                  <Image layout="fill" objectFit="contain" src={payStart} alt="급여 복지 관련 로고" />
-                </div>
-                <p css={infoTitle}>평균 초봉</p>
-              </div>
-              {companyDetailData.payStart ? (
-                <p css={infoText}>
-                  <span css={colorPoint}>{companyDetailData.payStart.toLocaleString("ko-KR")}</span>
-                  만원
-                </p>
-              ) : (
-                <p css={noData}>정보가 없습니다</p>
-              )}
+    <div css={infoContainer}>
+      <InvisibleH3 title="연봉 정보" />
+      <div css={flexBox}>
+        <div css={infoBox}>
+          <div>
+            <div css={infoPicture}>
+              <Image layout="fill" objectFit="contain" src={payStart} alt="급여 복지 관련 로고" />
             </div>
-            <div css={infoBox}>
-              <div>
-                <div css={infoPicture}>
-                  <Image layout="fill" objectFit="contain" src={payAvg} alt="급여 복지 관련 로고" />
-                </div>
-                <p css={infoTitle}>평균 연봉</p>
-              </div>
-              {companyDetailData.payAvg ? (
-                <p css={infoText}>
-                  <span css={colorPoint}>{companyDetailData.payAvg.toLocaleString("ko-KR")}</span>
-                  만원
-                </p>
-              ) : (
-                <p css={noData}>정보가 없습니다</p>
-              )}
-            </div>
+            <p css={infoTitle}>평균 초봉</p>
           </div>
-
-          <div css={flexBox}>
-            <p css={etcTitle}>기타 연봉 정보</p>
-            {companyDetailData.payDesc ? (
-              <p css={infoText}>{companyDetailData.payDesc}</p>
-            ) : (
-              <p css={noData}>정보가 없습니다</p>
-            )}
-          </div>
+          {companyDetailData.payStart ? (
+            <p css={infoText}>
+              <span css={colorPoint}>{companyDetailData.payStart.toLocaleString("ko-KR")}</span>
+              만원
+            </p>
+          ) : (
+            <p css={noData}>정보가 없습니다</p>
+          )}
         </div>
-      </section>
-    </>
+        <div css={infoBox}>
+          <div>
+            <div css={infoPicture}>
+              <Image layout="fill" objectFit="contain" src={payAvg} alt="급여 복지 관련 로고" />
+            </div>
+            <p css={infoTitle}>평균 연봉</p>
+          </div>
+          {companyDetailData.payAvg ? (
+            <p css={infoText}>
+              <span css={colorPoint}>{companyDetailData.payAvg.toLocaleString("ko-KR")}</span>
+              만원
+            </p>
+          ) : (
+            <p css={noData}>정보가 없습니다</p>
+          )}
+        </div>
+      </div>
+
+      <div css={flexBox}>
+        <p css={etcTitle}>기타 연봉 정보</p>
+        {companyDetailData.payDesc ? (
+          <p css={infoText}>{companyDetailData.payDesc}</p>
+        ) : (
+          <p css={noData}>정보가 없습니다</p>
+        )}
+      </div>
+    </div>
   );
 };

@@ -34,12 +34,10 @@ import {
 export const HeaderPart: FunctionComponent = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
-  const { companyId } = router.query;
 
-  const { data: userData } = useUserInfo();
   const { setCurrentModal } = useModal();
-
-  const { data: companyDetailData, isLoading } = useCompanyDetail({ companyId: Number(companyId) });
+  const { data: userData } = useUserInfo();
+  const { data: companyDetailData, isLoading } = useCompanyDetail({ companyId: Number(router.query.companyId) });
   const { data: userCompanyBookmarkArr } = useUserCompanyBookmarkArr({ userId: userData?.id });
   const { mutate: addMutate } = useAddCompanyBookmarkArr({
     id: companyDetailData?.id as number,
@@ -93,6 +91,13 @@ export const HeaderPart: FunctionComponent = () => {
     })
   );
 
+  const setBookmarkHandler = () => {
+    if (!userData) {
+      return setCurrentModal("loginModal", { button: "close" });
+    }
+    return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
+  };
+
   return (
     <section css={sectionContainer}>
       <div css={companyLogoBox}>
@@ -108,16 +113,7 @@ export const HeaderPart: FunctionComponent = () => {
       </div>
       <div css={infoContainer}>
         <div css={infoBox}>
-          <button
-            type="button"
-            css={bookmarkButton(isBookmarked)}
-            onClick={() => {
-              if (!userData) {
-                return setCurrentModal("loginModal", { button: "close" });
-              }
-              return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
-            }}
-          >
+          <button type="button" css={bookmarkButton(isBookmarked)} onClick={setBookmarkHandler}>
             <BsFillBookmarkFill />
             기업 북마크 {companyDetailData.bookmark}
           </button>
@@ -131,7 +127,7 @@ export const HeaderPart: FunctionComponent = () => {
         <p css={companyName}>{companyDetailData.name}</p>
         <p css={industry}>{companyDetailData.industry}</p>
       </div>
-      {/* LATER null data들에대한 정확한 파악 필요 null 일 시 렌더링 안되는 것 확인 및 디자인 변경 확인 필요 */}
+      {/* LATER : null data들에대한 정확한 파악 필요 null 일 시 렌더링 안되는 것 확인 및 디자인 변경 확인 필요 */}
       {companyDetailData.catchUrl && (
         <a css={catchLinkButton} href={companyDetailData.catchUrl} target="_blank" rel="noopener noreferrer">
           캐치 기업정보 더보기

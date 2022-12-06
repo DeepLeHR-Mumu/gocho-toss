@@ -1,6 +1,6 @@
 import { NextPage, GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 
 import { useAddCompanyViewCount } from "shared-api/viewCount";
@@ -14,17 +14,24 @@ import { companyInfoFunnelEvent } from "shared-ga/company";
 import { DetailComment } from "@component/global/detailComment";
 import { Layout } from "@component/layout";
 
+import { MenuButtonList } from "../component/menuButtonList";
 import { TopButton } from "../component/topButton";
+import { WorkingNotice } from "../component/workingNotice";
 import { HeaderPart } from "../part/headerPart";
 import { BasicInfoPart } from "../part/basicInfoPart";
 import { WelfareInfoPart } from "../part/welfareInfoPart";
 import { FactoryInfoPart } from "../part/factoryInfoPart";
 import { PayInfoPart } from "../part/payInfoPart";
 import { PageHead } from "./pageHead";
-import { mainContainer, mainContainerSkeleton, flexBox, partContainer, warningDesc } from "./style";
+import { mainContainer, mainContainerSkeleton, flexBox, partContainer, warningDesc, wrapper } from "./style";
 
 const DetailPage: NextPage = () => {
   const router = useRouter();
+  const basicInfoRef = useRef<null | HTMLDivElement>(null);
+  const factoryInfoRef = useRef<null | HTMLDivElement>(null);
+  const payInfoRef = useRef<null | HTMLDivElement>(null);
+  const welfareInfoRef = useRef<null | HTMLDivElement>(null);
+
   const { companyId } = router.query;
 
   const { data: userInfo } = useUserInfo();
@@ -74,16 +81,65 @@ const DetailPage: NextPage = () => {
       <Layout>
         <HeaderPart />
         <InvisibleH1 title={`${companyDetailData.name} > 기업/공장 정보 - 고초대졸닷컴`} />
-        <TopButton id={companyDetailData.id} />
+        <TopButton id={companyDetailData.id} pathName="detail" />
 
         <section>
           <InvisibleH2 title={`${companyDetailData.name} 기업정보`} />
           <div css={flexBox}>
             <div css={partContainer}>
-              <BasicInfoPart />
-              <WelfareInfoPart />
-              <PayInfoPart />
-              <FactoryInfoPart />
+              <div css={wrapper} ref={basicInfoRef}>
+                <MenuButtonList
+                  activeMenu="일반 정보"
+                  refObj={{
+                    basicInfo: basicInfoRef.current,
+                    welfareInfo: welfareInfoRef.current,
+                    payInfo: payInfoRef.current,
+                    factoryInfo: factoryInfoRef.current,
+                  }}
+                />
+                <BasicInfoPart />
+              </div>
+
+              <WorkingNotice info="복지" />
+              <div css={wrapper} ref={welfareInfoRef}>
+                <MenuButtonList
+                  activeMenu="복지 정보"
+                  refObj={{
+                    basicInfo: basicInfoRef.current,
+                    welfareInfo: welfareInfoRef.current,
+                    payInfo: payInfoRef.current,
+                    factoryInfo: factoryInfoRef.current,
+                  }}
+                />
+                <WelfareInfoPart />
+              </div>
+
+              <WorkingNotice info="연봉" />
+              <div css={wrapper} ref={payInfoRef}>
+                <MenuButtonList
+                  activeMenu="연봉 정보"
+                  refObj={{
+                    basicInfo: basicInfoRef.current,
+                    welfareInfo: welfareInfoRef.current,
+                    payInfo: payInfoRef.current,
+                    factoryInfo: factoryInfoRef.current,
+                  }}
+                />
+                <PayInfoPart />
+              </div>
+
+              <div css={wrapper} ref={factoryInfoRef}>
+                <MenuButtonList
+                  activeMenu="공장 정보"
+                  refObj={{
+                    basicInfo: basicInfoRef.current,
+                    welfareInfo: welfareInfoRef.current,
+                    payInfo: payInfoRef.current,
+                    factoryInfo: factoryInfoRef.current,
+                  }}
+                />
+                <FactoryInfoPart />
+              </div>
             </div>
 
             {companyCommentArrData && (

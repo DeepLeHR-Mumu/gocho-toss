@@ -20,10 +20,9 @@ import { mainContainer, mainContainerSkeleton } from "./style";
 
 const JdPage: NextPage = () => {
   const router = useRouter();
-  const { companyId } = router.query;
 
   const { data: companyDetailData } = useCompanyDetail({
-    companyId: Number(companyId),
+    companyId: Number(router.query.companyId),
   });
   const { mutate: addViewCount } = useAddCompanyViewCount();
 
@@ -65,7 +64,7 @@ const JdPage: NextPage = () => {
       <Layout>
         <HeaderPart />
         <InvisibleH1 title={`${companyDetailData.name} > 생산직 채용공고 - 고초대졸닷컴`} />
-        <TopButton id={companyDetailData.id} />
+        <TopButton id={companyDetailData.id} pathName="jd" />
 
         <section>
           <InvisibleH2 title={`${companyDetailData.name} 채용공고 모음`} />
