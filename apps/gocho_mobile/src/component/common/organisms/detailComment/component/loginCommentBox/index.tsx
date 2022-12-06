@@ -44,14 +44,6 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ jdId,
     },
   });
 
-  // useEffect(() => {
-  //   const jdValue = watch("jdId");
-  //   if (jdValue) {
-  //     return setValue("jdId", jdId);
-  //   }
-  //   return setValue("jdId", null);
-  // }, [jdId, setValue, watch]);
-
   const { mutate: postLikeComment } = useLikeComment();
   const { mutate: postDisLikeComment } = useDisLikeComment();
   const { mutate: postFakeComment } = useFakeComment();

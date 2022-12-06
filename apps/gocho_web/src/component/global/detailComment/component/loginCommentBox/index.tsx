@@ -105,14 +105,6 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ jdId,
     );
   };
 
-  // useEffect(() => {
-  //   const jdValue = watch("jdId");
-  //   if (jdValue) {
-  //     return setValue("jdId", jdId);
-  //   }
-  //   return setValue("jdId", null);
-  // }, [jdId, setValue, watch]);
-
   useEffect(() => {
     const bottomHeight = commentBoxRef.current?.scrollHeight;
     commentBoxRef.current?.scrollTo(0, bottomHeight !== undefined ? bottomHeight : 0);
