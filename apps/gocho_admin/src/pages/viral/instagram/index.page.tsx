@@ -3,10 +3,11 @@ import Image from "next/image";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { dateConverter } from "shared-util/date";
+import { useJobArr } from "shared-api/admin/job/useJobArr";
 
 import { mainContainer, pageTitle } from "@style/commonStyles";
-import { useJobArr } from "@api/job/useJobArr";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
+
 import { JobDef } from "../type";
 
 import {
