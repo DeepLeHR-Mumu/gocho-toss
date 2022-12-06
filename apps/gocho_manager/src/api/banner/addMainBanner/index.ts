@@ -12,7 +12,7 @@ export const postMainBanner: PostMainBannerDef = async (requestObj) => {
   return data;
 };
 
-export const useAddBanner: useAddMainBannerProps = () => {
+export const useAddMainBanner: useAddMainBannerProps = () => {
   const mutationResult = useMutation<AdminResponseDef, AxiosError, RequestObjDef>(postMainBanner);
   return mutationResult;
 };

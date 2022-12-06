@@ -2,6 +2,7 @@ import { FunctionComponent } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { dateConverter } from "shared-util/date";
+import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
 
 import { useDeleteBanner } from "@api/banner/useDeleteBanner";
 
@@ -13,12 +14,12 @@ export const BannerBox: FunctionComponent<BannerBoxProps> = ({ banner }) => {
 
   const { mutate: deleteMutate } = useDeleteBanner();
 
-  const bannerDelete = (id: number) => {
+  const bannerDeleteHandler = (id: number) => {
     deleteMutate(
       { bannerId: id },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries();
+          queryClient.invalidateQueries(bannerArrKeyObj.bannerArr({ type: "M" }));
         },
       }
     );
@@ -27,7 +28,7 @@ export const BannerBox: FunctionComponent<BannerBoxProps> = ({ banner }) => {
   const { year: endYear, month: endMonth, date: endDate } = dateConverter(banner.endTime);
 
   return (
-    <tr key={banner.id} css={bannerBox}>
+    <tr css={bannerBox}>
       <td css={bannerId}>{banner.id}</td>
       <td css={companyName}>{banner.companyName}</td>
       <td css={title}>{banner.title}</td>
@@ -39,7 +40,7 @@ export const BannerBox: FunctionComponent<BannerBoxProps> = ({ banner }) => {
           css={deleteBannerButton}
           type="button"
           onClick={() => {
-            bannerDelete(banner.id);
+            bannerDeleteHandler(banner.id);
           }}
         >
           배너 삭제

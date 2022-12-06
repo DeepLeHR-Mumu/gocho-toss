@@ -3,12 +3,16 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useAddBanner } from "@api/banner/addMainBanner";
+import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
+
+import { useAddMainBanner } from "@api/banner/addMainBanner";
+import { pageTitle } from "@style/commonStyles";
 
 import {
   bannerPreviewContainer,
   imageInput,
   imageUploadLabel,
+  imageUploadInput,
   inputBox,
   inputContainer,
   inputTitle,
@@ -20,20 +24,19 @@ import {
 import { BannerFormValues } from "./type";
 
 export const UploadBannerPart: FunctionComponent = () => {
-  const queryClient = useQueryClient();
-
   const [imageSrc, setImageSrc] = useState<string>();
   const [bannerPicture, setBannerPicture] = useState<File>();
 
-  const { mutate: addMutate } = useAddBanner();
-
+  const queryClient = useQueryClient();
   const { register, handleSubmit, setValue } = useForm<BannerFormValues>({});
 
-  const onUploadBannerPicture = async (e: ChangeEvent<HTMLInputElement>) => {
+  const { mutate: addMutate } = useAddMainBanner();
+
+  const onUploadBannerPictureHandler = async (changeEvent: ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader();
 
-    if (e.target.files?.[0]) {
-      const img = e.target.files[0];
+    if (changeEvent.target.files?.[0]) {
+      const img = changeEvent.target.files[0];
       setBannerPicture(img);
 
       reader.onloadend = () => {
@@ -44,20 +47,15 @@ export const UploadBannerPart: FunctionComponent = () => {
   };
 
   const submitBannerHandler: SubmitHandler<BannerFormValues> = (bannerObj) => {
-    const formData = new FormData();
     const json = JSON.stringify(bannerObj);
     const blob = new Blob([json], { type: "application/json" });
-    formData.append("dto", blob);
 
-    if (bannerPicture) {
-      formData.append("img", bannerPicture);
-    }
     if (bannerPicture) {
       addMutate(
         { dto: blob, image: bannerPicture },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries();
+            queryClient.invalidateQueries(bannerArrKeyObj.bannerArr({ type: "M" }));
           },
         }
       );
@@ -65,76 +63,77 @@ export const UploadBannerPart: FunctionComponent = () => {
   };
 
   return (
-    <section css={sectionContainer}>
-      <form onSubmit={handleSubmit(submitBannerHandler)}>
-        <div css={inputContainer}>
-          <strong css={inputTitle}>공고 번호</strong>
-          <input
-            css={inputBox(true)}
-            {...register("jd_id", {
-              valueAsNumber: true,
-              required: true,
-            })}
-          />
-          <strong css={inputTitle}>게시 기간</strong>
-          <input
-            type="date"
-            css={inputBox(false)}
-            {...register("start_time", {
-              required: true,
-              setValueAs: (d: Date) => {
-                const date = new Date(d);
-                return date.getTime();
-              },
-            })}
-          />
-          <input
-            type="date"
-            css={inputBox(false)}
-            {...register("end_time", {
-              required: true,
-              setValueAs: (d: Date) => {
-                const date = new Date(d);
-                return date.getTime();
-              },
-            })}
-          />
-          <label css={colorPickerButton} htmlFor="topBannerColor">
-            색 선택
+    <>
+      <h2 css={pageTitle}>메인 배너 업로드</h2>
+      <section css={sectionContainer}>
+        <form onSubmit={handleSubmit(submitBannerHandler)}>
+          <div css={inputContainer}>
+            <strong css={inputTitle}>공고 번호</strong>
             <input
-              css={colorPicker}
-              type="color"
-              id="topBannerColor"
-              onChange={(e) => {
-                setValue("color", e.target.value);
-              }}
+              css={inputBox(true)}
+              {...register("jd_id", {
+                valueAsNumber: true,
+                required: true,
+              })}
             />
-          </label>
-        </div>
-        <div css={inputContainer}>
-          <div css={imageInput}>
-            <label css={imageUploadLabel} htmlFor="bannerImg">
-              사진 업로드
+            <strong css={inputTitle}>게시 기간</strong>
+            <input
+              type="date"
+              css={inputBox(false)}
+              {...register("start_time", {
+                required: true,
+                setValueAs: (startDate: Date) => {
+                  return new Date(startDate).getTime();
+                },
+              })}
+            />
+            <input
+              type="date"
+              css={inputBox(false)}
+              {...register("end_time", {
+                required: true,
+                setValueAs: (endDate: Date) => {
+                  return new Date(endDate).getTime();
+                },
+              })}
+            />
+            <label css={colorPickerButton} htmlFor="topBannerColor">
+              색 선택
               <input
-                type="file"
-                id="bannerImg"
-                accept="image/png, image/gif, image/jpeg, image/jpg"
-                onChange={onUploadBannerPicture}
-                style={{ display: "none" }}
+                css={colorPicker}
+                type="color"
+                id="topBannerColor"
+                onChange={(changeEvent) => {
+                  setValue("color", changeEvent.target.value);
+                }}
               />
             </label>
-            {imageSrc && (
-              <div css={bannerPreviewContainer}>
-                <Image layout="fill" objectFit="contain" src={imageSrc} alt="" />
-              </div>
-            )}
           </div>
-        </div>
+          <div css={inputContainer}>
+            <div css={imageInput}>
+              <label css={imageUploadLabel} htmlFor="bannerImg">
+                사진 업로드
+                <input
+                  type="file"
+                  id="bannerImg"
+                  accept="image/png, image/gif, image/jpeg, image/jpg"
+                  onChange={onUploadBannerPictureHandler}
+                  css={imageUploadInput}
+                />
+              </label>
+              {imageSrc && (
+                <div css={bannerPreviewContainer}>
+                  <Image layout="fill" objectFit="contain" src={imageSrc} alt="업로드된 기업 이미지" />
+                </div>
+              )}
+            </div>
+          </div>
 
-        <button css={submitBannerButton} type="submit">
-          배너 제출
-        </button>
-      </form>
-    </section>
+          <button css={submitBannerButton} type="submit">
+            배너 제출
+          </button>
+        </form>
+      </section>
+    </>
   );
 };
