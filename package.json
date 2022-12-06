@@ -13,7 +13,7 @@
     "prepare": "husky install",
     "lint": "turbo run lint",
     "lint-fix": "eslint \"**/*.{ts,tsx}\" --ext .ts,.tsx --fix",
-    "dev-web": "» pnpm --filter gocho_web dev",
+    "dev-web": "pnpm --filter gocho_web dev",
     "build-web": "pnpm turbo build --scope=gocho_web --include-dependencies --no-deps",
     "start-web": "pnpm --filter gocho_web start",
     "dev-mobile": "pnpm --filter gocho_mobile dev",

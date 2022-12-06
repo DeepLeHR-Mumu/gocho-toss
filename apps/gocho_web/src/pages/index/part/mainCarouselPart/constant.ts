@@ -2,7 +2,7 @@ import banner01 from "@public/images/global/MainCarousel/open_renewal_banner.jpg
 import banner02 from "@public/images/global/MainCarousel/factory_banner.jpg";
 import banner03 from "@public/images/global/MainCarousel/openTalk_banner.jpg";
 
-import checkIconImage from "shared-image/global/common/yellow_check.png";
+import checkIconImage from "shared-image/global/common/yellow_check.svg";
 
 export const carouselArr = [
   {
