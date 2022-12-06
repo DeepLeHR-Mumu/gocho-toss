@@ -4,15 +4,15 @@ import { rest } from "msw";
 
 import { BACKEND_URL } from "shared-constant/externalURL";
 
-import { FactoryPart } from "@pages/company/part/factoryInfoPart";
+import { FactoryInfoPart } from "@pages/company/[companyId]/part/factoryInfoPart";
 import { MockingMother } from "../mockingMother";
 
 export default {
   title: "pages/indexComponent/FactoryPart",
-  component: FactoryPart,
-} as ComponentMeta<typeof FactoryPart>;
+  component: FactoryInfoPart,
+} as ComponentMeta<typeof FactoryInfoPart>;
 
-const Template: ComponentStory<typeof FactoryPart> = (args) => {
+const Template: ComponentStory<typeof FactoryInfoPart> = (args) => {
   const mockedQueryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -23,7 +23,7 @@ const Template: ComponentStory<typeof FactoryPart> = (args) => {
   });
   return (
     <QueryClientProvider client={mockedQueryClient}>
-      <FactoryPart {...args} />
+      <FactoryInfoPart {...args} />
     </QueryClientProvider>
   );
 };
