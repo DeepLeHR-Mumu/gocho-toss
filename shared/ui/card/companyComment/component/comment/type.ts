@@ -10,7 +10,7 @@ export interface CommentProps {
     liked: boolean;
     disLiked: boolean;
     nickname: string;
-    title: string;
+    title: string | null;
     badge: "default" | "admin" | "early_bird";
     likeCount: number;
     disLikeCount: number;

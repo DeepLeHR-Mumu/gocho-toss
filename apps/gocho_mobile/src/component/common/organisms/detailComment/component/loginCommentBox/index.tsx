@@ -33,36 +33,23 @@ import {
   firstCommentAlert,
 } from "./style";
 
-export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
-  jdId,
-  companyData,
-  commentArr,
-  userData,
-}) => {
+export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ jdId, companyId, commentArr, userData }) => {
   const commentBoxRef = useRef<HTMLDivElement | null>(null);
   const [textValue, setTextValue] = useState("");
   const { nickname } = userData;
-  const { register, handleSubmit, setValue, watch } = useForm<CommentFormValues>({
+  const { register, handleSubmit } = useForm<CommentFormValues>({
     defaultValues: {
-      companyId: companyData.id,
+      companyId,
       jdId,
     },
   });
-
-  useEffect(() => {
-    const jdValue = watch("jdId");
-    if (jdValue) {
-      return setValue("jdId", jdId);
-    }
-    return setValue("jdId", null);
-  }, [jdId, setValue, watch]);
 
   const { mutate: postLikeComment } = useLikeComment();
   const { mutate: postDisLikeComment } = useDisLikeComment();
   const { mutate: postFakeComment } = useFakeComment();
   const { mutate: postDisFakeComment } = useDisFakeComment();
 
-  const { mutate: postWriteCompanyComment, isSuccess } = useWriteCompanyComment();
+  const { mutate: postWriteCompanyComment } = useWriteCompanyComment();
   const queryClient = useQueryClient();
 
   const commentSubmit: SubmitHandler<CommentFormValues> = (commentObj) => {
@@ -74,9 +61,9 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
     });
   };
 
-  const postLikeSubmit = (companyId: number, commentId: number) => {
+  const postLikeSubmit = (id: number, commentId: number) => {
     postLikeComment(
-      { companyId, commentId },
+      { companyId: id, commentId },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(companyCommentArrKeyObj.all);
@@ -85,9 +72,9 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
     );
   };
 
-  const postFakeSubmit = (companyId: number, commentId: number) => {
+  const postFakeSubmit = (id: number, commentId: number) => {
     postFakeComment(
-      { companyId, commentId },
+      { companyId: id, commentId },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(companyCommentArrKeyObj.all);
@@ -96,9 +83,9 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
     );
   };
 
-  const postDislikeSubmit = (companyId: number, commentId: number) => {
+  const postDislikeSubmit = (id: number, commentId: number) => {
     postDisLikeComment(
-      { companyId, commentId },
+      { companyId: id, commentId },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(companyCommentArrKeyObj.all);
@@ -107,27 +94,21 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
     );
   };
 
-  const postDisFakeSubmit = (companyId: number, commentId: number) => {
+  const postDisFakeSubmit = (id: number, commentId: number) => {
     postDisFakeComment(
-      { companyId, commentId },
+      { companyId: id, commentId },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(companyCommentArrKeyObj.all);
         },
       }
     );
-  };
-
-  const activeDownScroll = () => {
-    const bottomHeight = commentBoxRef.current?.scrollHeight;
-    commentBoxRef.current?.scrollTo(0, bottomHeight !== undefined ? bottomHeight : 0);
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      activeDownScroll();
-    }, 100);
-  }, [jdId, isSuccess]);
+    const bottomHeight = commentBoxRef.current?.scrollHeight;
+    commentBoxRef.current?.scrollTo(0, bottomHeight !== undefined ? bottomHeight : 0);
+  }, [commentArr]);
 
   return (
     <div>
@@ -209,7 +190,7 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({
               if (onKeyDownEvent.key === "Enter") {
                 onKeyDownEvent.preventDefault();
                 commentSubmit({
-                  companyId: companyData.id,
+                  companyId,
                   jdId,
                   description: textValue,
                 });
