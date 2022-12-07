@@ -4,9 +4,11 @@ import Image from "next/image";
 import { FiYoutube } from "react-icons/fi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { useUserInfo } from "shared-api/auth";
+import { useJdApplyClick } from "shared-api/job";
 import { useModal } from "@recoil/hook/modal";
 import { dateConverter, dDayCalculator } from "shared-util/date";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
@@ -37,6 +39,9 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
   const { setCurrentModal } = useModal();
   const { isSuccess } = useUserInfo();
   const [imageSrc, setImageSrc] = useState(jobDetailData.company.logoUrl as string);
+  const router = useRouter();
+
+  const { mutate: mutateJdApplyClick } = useJdApplyClick();
 
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobDetailData?.id as number,
@@ -119,7 +124,15 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
             {isDdayEnd ? (
               <p css={applyEndButton}>채용사이트</p>
             ) : (
-              <a href={jobDetailData.applyUrl} target="_blank" css={applyButton} rel="noopener noreferrer">
+              <a
+                href={jobDetailData.applyUrl}
+                target="_blank"
+                css={applyButton}
+                rel="noopener noreferrer"
+                onClick={() => {
+                  mutateJdApplyClick({ id: Number(router.query.jobId) });
+                }}
+              >
                 채용사이트
               </a>
             )}
