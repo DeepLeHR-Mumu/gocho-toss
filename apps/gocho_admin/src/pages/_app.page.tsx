@@ -5,11 +5,10 @@ import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query
 import { RecoilRoot } from "recoil";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-import { globalStyle } from "shared-style/globalStyle";
-
 import { Header, SideBar } from "@component/global";
 import { Layout } from "@component/layout";
 
+import { globalStyle } from "../style/globalStyle";
 import { flexBox } from "./style";
 
 function MyApp({ Component, pageProps }: AppProps) {
