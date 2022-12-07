@@ -13,13 +13,14 @@ import ReactGA from "react-ga4";
 
 import { KEY } from "shared-constant/gaKey";
 import { FB_PIXEL_ID } from "shared-constant/fbPixelKey";
-import { globalStyle } from "shared-style/globalStyle";
 
 import { Header } from "@component/global/header";
 import { Footer } from "@component/global/footer";
 import { Aside } from "@component/global/aside";
 import { ModalPlaceholder } from "@component/modal/modalPlaceHolder";
 import { ToastPlaceholder } from "@component/toast/toastPlaceholder";
+
+import { globalStyle } from "../style/globalStyle";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
