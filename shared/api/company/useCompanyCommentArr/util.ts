@@ -1,6 +1,12 @@
 import { CompanyCommentArrDef } from "../type/companyCommentArr";
 
 export const selector = ({ company, comment_arr }: CompanyCommentArrDef) => {
+  if (!comment_arr) {
+    return {
+      company: { name: company.name, logoUrl: company.logo_url, id: company.id },
+      commentArr: null,
+    };
+  }
   return {
     company: { name: company.name, logoUrl: company.logo_url, id: company.id },
     commentArr: comment_arr.map((comment) => {
