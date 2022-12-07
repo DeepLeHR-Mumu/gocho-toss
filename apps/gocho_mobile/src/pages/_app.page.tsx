@@ -49,7 +49,7 @@ declare global {
   }
 }
 
-function MyApp({ Component, pageProps }: AppProps) {
+function UserMobileService({ Component, pageProps }: AppProps) {
   ReactGA.initialize(KEY);
   const router = useRouter();
 
@@ -157,4 +157,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default UserMobileService;

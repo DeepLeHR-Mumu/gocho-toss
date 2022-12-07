@@ -50,7 +50,7 @@ declare global {
   }
 }
 
-function MyApp({ Component, pageProps }: AppProps) {
+function UserPCService({ Component, pageProps }: AppProps) {
   const router = useRouter();
   ReactGA.initialize(KEY);
 
@@ -162,4 +162,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default UserPCService;
