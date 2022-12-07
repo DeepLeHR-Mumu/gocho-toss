@@ -7,7 +7,7 @@ export const commentContainerBlur = css`
   min-height: 13rem;
   max-height: 15rem;
   overflow: hidden;
-  overflow-y: scroll;
+  overflow-y: hidden;
   filter: blur(3px);
   padding: 1rem;
 `;
