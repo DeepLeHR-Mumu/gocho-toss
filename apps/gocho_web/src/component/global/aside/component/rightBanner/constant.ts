@@ -1,6 +1,6 @@
-import instaIcon from "shared-image/global/sns/insta_logo.png";
-import tStoryIcon from "shared-image/global/sns/tistory_logo.png";
-import youtubeIcon from "shared-image/global/sns/youtube_logo.png";
+import instaIcon from "shared-image/global/sns/insta_logo.svg";
+import tStoryIcon from "shared-image/global/sns/tistory_logo.svg";
+import youtubeIcon from "shared-image/global/sns/youtube_logo.svg";
 
 export const bannerArr = [
   {

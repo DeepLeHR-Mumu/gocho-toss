@@ -6,7 +6,6 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
-import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import { useModal } from "@recoil/hook/modal";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
@@ -67,7 +66,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
       >
         <BsFillBookmarkFill />
       </button>
-      <Link href={{ pathname: `${COMPANY_DETAIL_URL}/${companyData.id}`, query: { info: "detail" } }} passHref>
+      <Link href={`/company/${companyData.id}/detail`} passHref>
         <a>
           <strong css={NameCSS}>{companyData.name}</strong>
           <div css={companyLogoBox}>
