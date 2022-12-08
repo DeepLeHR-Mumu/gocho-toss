@@ -12,7 +12,7 @@ import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKe
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr, useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
-import { useJdApplyClick } from "shared-api/job";
+import { useJdApplyClick, useJdCountInfo } from "shared-api/job";
 import { jdBookmarkEvent } from "shared-ga/jd";
 
 import { useModal } from "@recoil/hook/modal";
@@ -44,6 +44,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
   const [imageSrc, setImageSrc] = useState(jobDetailData.company.logoUrl as string);
 
   const { mutate: mutateJdApplyClick } = useJdApplyClick();
+  const { data: jdCountData } = useJdCountInfo({ id: Number(router.query.jobId) });
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobDetailData?.id as number,
     end_time: jobDetailData?.endTime as number,
@@ -165,7 +166,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
               }}
             >
               <BsFillBookmarkFill />
-              공고 북마크 {jobDetailData.bookmarkCount}
+              공고 북마크 {jdCountData?.bookmarkCount}
             </button>
           </li>
           <li>
@@ -182,7 +183,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
           )}
         </ul>
         <p css={viewCSS}>
-          <FiEye /> {jobDetailData.viewCount.toLocaleString("ko-KR")}
+          <FiEye /> {jdCountData?.viewCount.toLocaleString("ko-KR")}
         </p>
       </div>
     </header>
