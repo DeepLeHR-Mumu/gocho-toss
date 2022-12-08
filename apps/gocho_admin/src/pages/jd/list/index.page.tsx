@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { useJobArr } from "@api/job/useJobArr";
+import { useJobArr } from "shared-api/admin/job/useJobArr";
+
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 import { BottomPagination } from "@component/bottomPagination";
 import { JD_LIST_URL } from "@constant/internalURL";

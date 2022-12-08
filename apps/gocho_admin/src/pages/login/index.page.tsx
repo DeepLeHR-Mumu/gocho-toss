@@ -4,8 +4,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { mainContainer } from "@style/commonStyles";
 
-import { useDoLogin } from "@api/auth/useDoLogin";
-import { tokenDecryptor } from "@util/tokenDecryptor";
+import { useDoLogin } from "shared-api/admin/auth/useDoLogin";
+import { adminTokenDecryptor } from "shared-util/tokenDecryptor";
+
 import { inputBox, inputContainer, inputTitle, title, submitButton } from "./style";
 import { LoginFormValues } from "./type";
 
@@ -22,8 +23,8 @@ export const Login: NextPage = () => {
         localStorage.setItem("accessToken", `${response.data.access_token}`);
         localStorage.setItem("refreshToken", `${response.data.refresh_token}`);
 
-        const { email, role, exp: accessExp } = tokenDecryptor(response.data.access_token);
-        const { exp: refreshExp } = tokenDecryptor(response.data.refresh_token);
+        const { email, role, exp: accessExp } = adminTokenDecryptor(response.data.access_token);
+        const { exp: refreshExp } = adminTokenDecryptor(response.data.refresh_token);
 
         localStorage.setItem("email", email);
         localStorage.setItem("role", role);

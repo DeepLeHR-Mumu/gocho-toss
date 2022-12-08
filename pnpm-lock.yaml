@@ -383,6 +383,7 @@ importers:
       react-dom: 17.0.2
       shared-constant: workspace:^0.0.0
       shared-type: workspace:^0.0.0
+      shared-util: workspace:^0.0.0
       tsconfig-deeple: workspace:^0.0.0
       typescript: 4.7.2
     dependencies:
@@ -392,6 +393,7 @@ importers:
       react-dom: 17.0.2_react@17.0.2
       shared-constant: link:../constant
       shared-type: link:../type
+      shared-util: link:../util
     devDependencies:
       eslint-config-deeple: link:../../packages/eslint-config-deeple
       tsconfig-deeple: link:../../packages/tsconfig-deeple
