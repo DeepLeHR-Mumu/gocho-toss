@@ -2,8 +2,9 @@ import { useState } from "react";
 import type { NextPage } from "next";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
-import { useFindCompany } from "@api/company/useFindCompany";
-import { useAddJob } from "@api/job/useAddJob";
+import { useFindCompany } from "shared-api/admin/company/useFindCompany";
+import { useAddJob } from "shared-api/admin/job/useAddJob";
+
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
