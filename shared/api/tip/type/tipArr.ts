@@ -13,4 +13,5 @@ export interface TipObjDef {
   nickname: string;
   badge: string;
   thumbnail_url: string;
+  svg_thumbnail_url: string;
 }

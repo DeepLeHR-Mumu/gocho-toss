@@ -4,6 +4,6 @@ export interface TipDisplayProps {
     title: string;
     tag: string[];
     description: string;
-    thumbnailSrc: string;
+    thumbnailSvgSrc: string;
   };
 }

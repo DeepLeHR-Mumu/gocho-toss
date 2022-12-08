@@ -3,5 +3,5 @@ export interface TipDef {
   title: string;
   tag: string[];
   description: string;
-  thumbnailSrc: string;
+  thumbnailSvgSrc: string;
 }
