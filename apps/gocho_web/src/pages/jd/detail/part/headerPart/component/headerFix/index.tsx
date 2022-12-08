@@ -7,7 +7,7 @@ import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { useUserInfo } from "shared-api/auth";
 import { useUserJobBookmarkArr, useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
-import { useJdApplyClick } from "shared-api/job";
+import { useJdApplyClick, useJdCountInfo } from "shared-api/job";
 import { jdBookmarkEvent } from "shared-ga/jd";
 
 import { Layout } from "@component/layout";
@@ -36,6 +36,7 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, us
   const router = useRouter();
 
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userInfoData?.id });
+  const { data: jdCountData } = useJdCountInfo({ id: Number(router.query.jobId) });
 
   const { mutate: mutateJdApplyClick } = useJdApplyClick();
   const { mutate: addMutate } = useAddJobBookmarkArr({
@@ -116,7 +117,7 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, us
               aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
             >
               <BsFillBookmarkFill />
-              공고 북마크 <span> {jobDetailData.bookmarkCount}</span>
+              공고 북마크 <span> {jdCountData?.bookmarkCount}</span>
             </button>
             <div css={applyBox}>
               <div css={dDayContainer}>

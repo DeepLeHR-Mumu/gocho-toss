@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
 
 export interface HeaderPartProps {
-  setCurrentPositionId: Dispatch<SetStateAction<number | null>>;
-  currentPositionId: number | null;
+  setCurrentPositionId: Dispatch<SetStateAction<number>>;
+  currentPositionId: number;
   userId: number | undefined;
   isSkeleton?: never;
 }

@@ -8,11 +8,11 @@ import { useRouter } from "next/router";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { dateConverter } from "shared-util/date";
-import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
+import { jdCountInfoKeyObj } from "shared-constant/queryKeyFactory/job/jdCountInfoKeyObj";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr, useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
-import { useJdApplyClick } from "shared-api/job";
+import { useJdApplyClick, useJdCountInfo } from "shared-api/job";
 import { jdBookmarkEvent } from "shared-ga/jd";
 
 import { useModal } from "@recoil/hook/modal";
@@ -44,6 +44,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
   const [imageSrc, setImageSrc] = useState(jobDetailData.company.logoUrl as string);
 
   const { mutate: mutateJdApplyClick } = useJdApplyClick();
+  const { data: jdCountData } = useJdCountInfo({ id: Number(router.query.jobId) });
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobDetailData?.id as number,
     end_time: jobDetailData?.endTime as number,
@@ -74,7 +75,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
         {
           onSuccess: () => {
             jdBookmarkEvent(jobDetailData.id);
-            queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
+            queryClient.invalidateQueries(jdCountInfoKeyObj.countInfo({ id: jobDetailData.id }));
           },
         }
       )
@@ -88,7 +89,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
         { userId, elemId: jobDetailData.id },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
+            queryClient.invalidateQueries(jdCountInfoKeyObj.countInfo({ id: jobDetailData.id }));
           },
         }
       )
@@ -165,7 +166,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
               }}
             >
               <BsFillBookmarkFill />
-              공고 북마크 {jobDetailData.bookmarkCount}
+              공고 북마크 {jdCountData?.bookmarkCount}
             </button>
           </li>
           <li>
@@ -182,7 +183,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
           )}
         </ul>
         <p css={viewCSS}>
-          <FiEye /> {jobDetailData.viewCount.toLocaleString("ko-KR")}
+          <FiEye /> {jdCountData?.viewCount.toLocaleString("ko-KR")}
         </p>
       </div>
     </header>

@@ -40,7 +40,7 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, use
                     setIsTotalComment(true);
                   }}
                 >
-                  전체 댓글
+                  전체 댓글 <span>{commentDataArr?.commentArr?.length}</span>
                 </button>
               </li>
               <li>

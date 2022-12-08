@@ -2,8 +2,8 @@ import { Dispatch, SetStateAction } from "react";
 import { QueryObserverResult } from "@tanstack/react-query";
 
 export interface HeaderPartProps {
-  setCurrentPositionId: Dispatch<SetStateAction<number | null>>;
-  currentPositionId: number | null;
+  setCurrentPositionId: Dispatch<SetStateAction<number>>;
+  currentPositionId: number;
   isBookmarked: boolean;
   userId: number | undefined;
   refetchUserBookmark: () => Promise<QueryObserverResult>;

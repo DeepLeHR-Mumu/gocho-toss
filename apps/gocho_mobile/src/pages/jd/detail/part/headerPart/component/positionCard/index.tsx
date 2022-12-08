@@ -22,13 +22,7 @@ export const PositionCard: FunctionComponent<PositionCardProps> = ({
 
   const isCurrentPosition = position.id === currentPositionId;
   return (
-    <button
-      type="button"
-      css={container(isCurrentPosition)}
-      onClick={() => {
-        setCurrentPositionId(position.id);
-      }}
-    >
+    <button type="button" css={container(isCurrentPosition)} onClick={setCurrentPositionId}>
       <strong css={title(isCurrentPosition, isDdayEnd)}>
         {getJobTitleCreator(position)
           .split("|")
