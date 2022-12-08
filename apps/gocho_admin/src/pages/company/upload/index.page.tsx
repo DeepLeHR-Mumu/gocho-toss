@@ -2,7 +2,8 @@ import { useState } from "react";
 import type { NextPage } from "next";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
-import { useAddCompany } from "@api/company/useAddCompany";
+import { useAddCompany } from "shared-api/admin/company/useAddCompany";
+
 import { mainContainer, pageTitle } from "@style/commonStyles";
 
 import { FactoryBox } from "@pages/company/upload/component/factoryBox";

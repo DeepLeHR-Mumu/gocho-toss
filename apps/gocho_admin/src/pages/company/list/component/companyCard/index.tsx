@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
-import { useDeleteCompany } from "@api/company/useDeleteCompany";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { companyArrKeyObj } from "shared-constant/queryKeyFactory/company/arrKeyObj";
+import { useDeleteCompany } from "shared-api/admin/company/useDeleteCompany";
 
 import { companyContainer, companyIdBox, companyNameBox, deleteButton, fixButton, flexBox } from "./style";
 import { CompanyCardProps } from "./type";
