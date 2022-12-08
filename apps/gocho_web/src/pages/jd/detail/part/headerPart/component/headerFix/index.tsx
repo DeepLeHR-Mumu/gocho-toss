@@ -1,11 +1,13 @@
 import { FunctionComponent } from "react";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { useUserInfo } from "shared-api/auth";
 import { useUserJobBookmarkArr, useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
+import { useJdApplyClick } from "shared-api/job";
 import { jdBookmarkEvent } from "shared-ga/jd";
 
 import { Layout } from "@component/layout";
@@ -31,9 +33,11 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, us
   const queryClient = useQueryClient();
   const { data: userInfoData } = useUserInfo();
   const { setCurrentModal } = useModal();
+  const router = useRouter();
 
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userInfoData?.id });
 
+  const { mutate: mutateJdApplyClick } = useJdApplyClick();
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobDetailData?.id as number,
     end_time: jobDetailData?.endTime as number,
@@ -122,7 +126,15 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, us
               {isDdayEnd ? (
                 <p css={applyEndButton}>채용사이트</p>
               ) : (
-                <a href={jobDetailData.applyUrl} target="_blank" rel="noopener noreferrer" css={applyButton}>
+                <a
+                  href={jobDetailData.applyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  css={applyButton}
+                  onClick={() => {
+                    mutateJdApplyClick({ id: Number(router.query.jobId) });
+                  }}
+                >
                   채용사이트
                 </a>
               )}
