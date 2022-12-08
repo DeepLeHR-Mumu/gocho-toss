@@ -33,18 +33,18 @@ export default function Document() {
         <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png" />
         <link rel="manifest" href="/icon/manifest.json" />
         <Script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js" strategy="beforeInteractive" />
-        {/* {process.env.NEXT_PUBLIC_VERCEL_ENV === "production" && ( */}
-        <noscript>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt="facebook pixel 이미지"
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`}
-          />
-        </noscript>
-        {/* )} */}
+        {process.env.NEXT_PUBLIC_VERCEL_ENV === "production" && (
+          <noscript>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              alt="facebook pixel 이미지"
+              height="1"
+              width="1"
+              style={{ display: "none" }}
+              src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`}
+            />
+          </noscript>
+        )}
         <Script id="googleTagManager" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
