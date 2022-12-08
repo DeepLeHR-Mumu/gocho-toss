@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 
-import { useStatistics } from "@api/stat/useStatistics";
+import { useStatistics } from "shared-api/admin/stat/useStatistics";
 
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 import { mainContainer, pageTitle } from "@style/commonStyles";

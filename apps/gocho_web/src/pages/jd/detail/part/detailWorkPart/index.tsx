@@ -44,6 +44,7 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
               {freshPosition.task.subTaskArr && (
                 <ul css={productContainer}>
                   {freshPosition.task.subTaskArr.map((task) => {
+                    if (task === null) return null;
                     return <li key={`직무_${task}`}>{task}</li>;
                   })}
                 </ul>

@@ -18,13 +18,11 @@ import { DetailComment } from "@component/common/organisms/detailComment";
 import { TopMenu } from "./component/topMenu";
 import { BottomMenu } from "./component/bottomMenu";
 import { PageHead } from "./pageHead";
-import { PositionObjDef } from "./type";
 import { HeaderPart, DetailSupportPart, DetailWorkPart, DetailPreferencePart, ReceptInfoPart } from "./part";
 import { wrapper, flexBox, container, containerSkeleton } from "./style";
 
 const JobsDetail: NextPage = () => {
-  const [currentPositionId, setCurrentPositionId] = useState<number | null>(null);
-  const [freshPosition, setFreshPosition] = useState<PositionObjDef | null>(null);
+  const [currentPositionId, setCurrentPositionId] = useState<number>(0);
   const [openComment, setOpenComment] = useState<boolean>(false);
 
   const { data: userData } = useUserInfo();
@@ -56,19 +54,6 @@ const JobsDetail: NextPage = () => {
       addViewCount({ elemId: jobDetailData.id });
     }
   }, [jobDetailData, addViewCount]);
-
-  useEffect(() => {
-    if (!jobDetailData || !currentPositionId) {
-      return;
-    }
-    const filterPosition = jobDetailData.positionArr.find((position) => {
-      return position.id === currentPositionId;
-    });
-
-    if (filterPosition) {
-      setFreshPosition(filterPosition);
-    }
-  }, [currentPositionId, jobDetailData]);
 
   useEffect(() => {
     if (jobDetailData) jdDetailFunnelEvent(jobDetailData.id);
@@ -126,13 +111,11 @@ const JobsDetail: NextPage = () => {
         refetchUserBookmark={refetch}
       />
       <div css={flexBox}>
-        {freshPosition && (
-          <section css={container}>
-            <DetailSupportPart freshPosition={freshPosition} />
-            <DetailWorkPart freshPosition={freshPosition} />
-            <DetailPreferencePart freshPosition={freshPosition} />
-          </section>
-        )}
+        <section css={container}>
+          <DetailSupportPart freshPosition={jobDetailData.positionArr[currentPositionId]} />
+          <DetailWorkPart freshPosition={jobDetailData.positionArr[currentPositionId]} />
+          <DetailPreferencePart freshPosition={jobDetailData.positionArr[currentPositionId]} />
+        </section>
       </div>
       <ReceptInfoPart jobDetailData={jobDetailData} />
       {openComment && (
