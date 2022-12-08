@@ -4,10 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next-sitemap --config next-sitemap.config.js",
     "start": "next start",
     "lint": "next lint",
-    "sitemap": "next build && next-sitemap --config next-sitemap.config.js",
     "e2e": "pnpx playwright@1.28.0 test",
     "e2e:CICD": "PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright pnpx playwright@1.28.0 test e2e --trace on",
     "storybook": "start-storybook -p 6006",
