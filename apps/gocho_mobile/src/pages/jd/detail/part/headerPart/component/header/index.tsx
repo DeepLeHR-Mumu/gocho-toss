@@ -8,12 +8,13 @@ import { useRouter } from "next/router";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { useUserInfo } from "shared-api/auth";
-import { useJdApplyClick } from "shared-api/job";
+import { useJdApplyClick, useJdCountInfo } from "shared-api/job";
 import { useModal } from "@recoil/hook/modal";
 import { dateConverter, dDayCalculator } from "shared-util/date";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { jdBookmarkEvent } from "shared-ga/jd";
+import { jdCountInfoKeyObj } from "shared-constant/queryKeyFactory/job/jdCountInfoKeyObj";
 
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { HeaderProps } from "./type";
@@ -42,6 +43,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
   const router = useRouter();
 
   const { mutate: mutateJdApplyClick } = useJdApplyClick();
+  const { data: jdCountData } = useJdCountInfo({ id: Number(router.query.jobId) });
 
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobDetailData?.id as number,
@@ -78,6 +80,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
           onSuccess: () => {
             jdBookmarkEvent(jobDetailData.id);
             queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
+            queryClient.invalidateQueries(jdCountInfoKeyObj.countInfo({ id: jobDetailData.id }));
           },
         }
       )
@@ -92,6 +95,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
         {
           onSuccess: () => {
             queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
+            queryClient.invalidateQueries(jdCountInfoKeyObj.countInfo({ id: jobDetailData.id }));
           },
         }
       )
@@ -147,7 +151,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
               aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
             >
               <BsFillBookmarkFill />
-              공고 북마크 {jobDetailData.bookmarkCount}
+              공고 북마크 {jdCountData?.bookmarkCount}
             </button>
           </li>
           <li>
