@@ -1,4 +1,4 @@
-const siteUrl = "https://고초대졸.com";
+const siteUrl = process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000";
 
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
