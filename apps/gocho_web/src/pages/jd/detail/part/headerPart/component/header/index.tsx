@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { dateConverter } from "shared-util/date";
-import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
+import { jdCountInfoKeyObj } from "shared-constant/queryKeyFactory/job/jdCountInfoKeyObj";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr, useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
@@ -75,7 +75,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
         {
           onSuccess: () => {
             jdBookmarkEvent(jobDetailData.id);
-            queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
+            queryClient.invalidateQueries(jdCountInfoKeyObj.countInfo({ id: jobDetailData.id }));
           },
         }
       )
@@ -89,7 +89,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
         { userId, elemId: jobDetailData.id },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
+            queryClient.invalidateQueries(jdCountInfoKeyObj.countInfo({ id: jobDetailData.id }));
           },
         }
       )

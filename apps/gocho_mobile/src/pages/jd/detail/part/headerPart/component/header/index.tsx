@@ -11,7 +11,6 @@ import { useUserInfo } from "shared-api/auth";
 import { useJdApplyClick, useJdCountInfo } from "shared-api/job";
 import { useModal } from "@recoil/hook/modal";
 import { dateConverter, dDayCalculator } from "shared-util/date";
-import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { jdBookmarkEvent } from "shared-ga/jd";
 import { jdCountInfoKeyObj } from "shared-constant/queryKeyFactory/job/jdCountInfoKeyObj";
@@ -79,7 +78,6 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
         {
           onSuccess: () => {
             jdBookmarkEvent(jobDetailData.id);
-            queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
             queryClient.invalidateQueries(jdCountInfoKeyObj.countInfo({ id: jobDetailData.id }));
           },
         }
@@ -94,7 +92,6 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
         { userId, elemId: jobDetailData.id },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
             queryClient.invalidateQueries(jdCountInfoKeyObj.countInfo({ id: jobDetailData.id }));
           },
         }
