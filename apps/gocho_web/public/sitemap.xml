@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>http://localhost:3000</loc><lastmod>2022-12-08T02:47:02.948Z</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:3000/community/posting/list</loc><lastmod>2022-12-08T02:47:02.948Z</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:3000/community/posting/write</loc><lastmod>2022-12-08T02:47:02.948Z</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:3000/community/tip/list</loc><lastmod>2022-12-08T02:47:02.948Z</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:3000/datalab/detail</loc><lastmod>2022-12-08T02:47:02.948Z</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:3000/datalab/spec/list</loc><lastmod>2022-12-08T02:47:02.948Z</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:3000/datalab/spec/my</loc><lastmod>2022-12-08T02:47:02.948Z</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:3000/datalab/spec/register</loc><lastmod>2022-12-08T02:47:02.948Z</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:3000/event/renewal</loc><lastmod>2022-12-08T02:47:02.948Z</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:3000/jd/explist</loc><lastmod>2022-12-08T02:47:02.948Z</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:3000/jd/list</loc><lastmod>2022-12-08T02:47:02.948Z</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:3000/kakaologin</loc><lastmod>2022-12-08T02:47:02.948Z</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:3000/mypage</loc><lastmod>2022-12-08T02:47:02.948Z</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:3000/privacy</loc><lastmod>2022-12-08T02:47:02.948Z</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:3000/review</loc><lastmod>2022-12-08T02:47:02.948Z</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:3000/search</loc><lastmod>2022-12-08T02:47:02.948Z</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:3000/term-of-service</loc><lastmod>2022-12-08T02:47:02.948Z</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+</urlset>
