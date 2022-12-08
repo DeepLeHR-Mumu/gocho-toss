@@ -7,7 +7,9 @@ import { axiosInstance } from "../../axiosInstance";
 import { UseAcceptFactoryProps, AcceptFactoryDef, RequestObjDef } from "./type";
 
 const AcceptFactory: AcceptFactoryDef = async (requestObj) => {
-  const { data } = await axiosInstance.put(`/factories/${requestObj.factoryId}`, { type: requestObj.type });
+  const { data } = await axiosInstance.put(`/factories/${requestObj.factoryId}/requests/accept`, {
+    type: requestObj.type,
+  });
   return data;
 };
 

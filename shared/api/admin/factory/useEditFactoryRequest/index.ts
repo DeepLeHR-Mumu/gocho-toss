@@ -10,7 +10,7 @@ import { GetEditFactoryRequestDef } from "./type";
 import { selector } from "./util";
 
 export const getEditFactoryRequest: GetEditFactoryRequestDef = async ({ queryKey: [{ requestObj }] }) => {
-  const { data } = await axiosInstance.get("/factories", { params: requestObj });
+  const { data } = await axiosInstance.get(`/factories/${requestObj.factoryId}/requests`);
   return data;
 };
 

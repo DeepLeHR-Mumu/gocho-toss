@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 import { axiosInstance } from "../../axiosInstance";
-import { useDeleteFactoryProps, DeleteFactoryDef, RequestObjDef } from "./type";
+import { DeleteFactoryDef, RequestObjDef, useDeleteFactoryProps } from "./type";
 
 export const deleteFactory: DeleteFactoryDef = async (requestObj) => {
   const { data } = await axiosInstance.delete(`/companies/${requestObj.factoryId}`);
@@ -11,6 +11,5 @@ export const deleteFactory: DeleteFactoryDef = async (requestObj) => {
 };
 
 export const useDeleteFactory: useDeleteFactoryProps = () => {
-  const mutationResult = useMutation<AdminResponseDef, AxiosError, RequestObjDef>(deleteFactory);
-  return mutationResult;
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(deleteFactory);
 };

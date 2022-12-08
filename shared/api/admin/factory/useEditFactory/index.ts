@@ -4,14 +4,13 @@ import { AxiosError } from "axios";
 import { AdminResponseDef } from "shared-type/api/responseType";
 import { axiosInstance } from "../../axiosInstance";
 
-import { UseEditFactoryProps, EditFactoryDef, RequestObjDef } from "./type";
+import { EditFactoryDef, RequestObjDef, UseEditFactoryProps } from "./type";
 
 const EditFactory: EditFactoryDef = async (requestObj) => {
-  const { data } = await axiosInstance.put(`/factories/${requestObj.id}`, { ...requestObj });
+  const { data } = await axiosInstance.put(`/factories/${requestObj.factoryId}`, { ...requestObj.data });
   return data;
 };
 
 export const useEditFactory: UseEditFactoryProps = () => {
-  const mutationResult = useMutation<AdminResponseDef, AxiosError, RequestObjDef>(EditFactory);
-  return mutationResult;
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(EditFactory);
 };
