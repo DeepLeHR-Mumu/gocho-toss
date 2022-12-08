@@ -45,8 +45,30 @@ export default function Document() {
             />
           </noscript>
         )}
+        <Script id="googleTagManager" strategy="afterInteractive">
+          {`
+            <!-- Google Tag Manager -->
+            <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-T6WF546');</script>
+            <!-- End Google Tag Manager -->
+         `}
+        </Script>
       </Head>
       <body>
+        {process.env.NEXT_PUBLIC_VERCEL_ENV === "production" && (
+          <noscript>
+            <iframe
+              title="googleTagManager"
+              src="https://www.googletagmanager.com/ns.html?id=GTM-T6WF546"
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        )}
         <div id="portal" />
         <div id="toast" />
         <Main />
