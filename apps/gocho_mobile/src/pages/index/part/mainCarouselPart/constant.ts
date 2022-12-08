@@ -1,4 +1,4 @@
-import checkIconImage from "shared-image/global/common/yellow_check.png";
+import checkIconImage from "shared-image/global/common/yellow_check.svg";
 
 export const carouselArr = [
   {

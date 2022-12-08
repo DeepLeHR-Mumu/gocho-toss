@@ -13,7 +13,6 @@ import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKe
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { jdBookmarkEvent } from "shared-ga/jd";
 
-import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { HeaderProps } from "./type";
 import {
@@ -139,13 +138,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
             </button>
           </li>
           <li>
-            <Link
-              href={{
-                pathname: `${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`,
-                query: { info: "detail" },
-              }}
-              passHref
-            >
+            <Link href={`/company/${jobDetailData.company.companyId}/detail`} passHref>
               <a css={buttonCSS(false)}>기업정보</a>
             </Link>
           </li>
@@ -159,7 +152,6 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
         </ul>
       </div>
 
-      {/*  */}
       <div>
         <ul css={dateBox}>
           <li>
@@ -173,12 +165,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
             </p>
           </li>
         </ul>
-        <Link
-          href={{
-            pathname: `${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`,
-            query: { info: "detail" },
-          }}
-        >
+        <Link href={`/company/${jobDetailData.company.companyId}/detail`}>
           <a css={companyName}>{jobDetailData.company.name}</a>
         </Link>
         <p css={title}>{jobDetailData.title}</p>
