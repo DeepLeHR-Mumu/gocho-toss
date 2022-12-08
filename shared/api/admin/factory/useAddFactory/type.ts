@@ -1,19 +1,9 @@
-import { AdminResponseDef } from "shared-type/api/responseType";
 import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
-export interface RequestObjDef {
-  company_id: number;
-  factory_name: string;
-  address: string;
-  male_number: number;
-  female_number: number;
-  product: string;
-  bus_bool: boolean;
-  bus_etc: string;
-  dormitory_bool: boolean;
-  dormitory_etc: string;
-}
+import { AdminResponseDef } from "shared-type/api/responseType";
+
+import { FactoryRequestObjDef } from "../type";
 
 export interface PostFactoryDef {
   ({
@@ -27,9 +17,9 @@ export interface PostFactoryDef {
     bus_etc,
     dormitory_bool,
     dormitory_etc,
-  }: RequestObjDef): Promise<AdminResponseDef>;
+  }: FactoryRequestObjDef): Promise<AdminResponseDef>;
 }
 
 export interface useAddFactoryProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AdminResponseDef, AxiosError, FactoryRequestObjDef>;
 }

@@ -1,6 +1,6 @@
-import { FactoryObjDef } from "../type";
+import { FactoryResponseObjDef } from "../type";
 
-export const selector = (factoryArr: FactoryObjDef[]) => {
+export const selector = (factoryArr: FactoryResponseObjDef[]) => {
   const factoryDataArr = factoryArr.map((factory) => {
     return {
       id: factory.id,

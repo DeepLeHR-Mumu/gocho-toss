@@ -1,6 +1,6 @@
-import { FactoryObjDef } from "../type";
+import { FactoryResponseObjDef } from "../type";
 
-export const selector = (factory: FactoryObjDef) => {
+export const selector = (factory: FactoryResponseObjDef) => {
   return {
     id: factory.id,
     address: factory.address,

@@ -1,21 +1,11 @@
 import { AxiosError } from "axios";
 import { AdminResponseDef } from "shared-type/api/responseType";
 import { UseMutationResult } from "@tanstack/react-query";
+import { FactoryRequestObjDef } from "../type";
 
 export interface RequestObjDef {
   factoryId: number;
-  data: {
-    company_id: number;
-    factory_name: string;
-    address: string;
-    male_number: number;
-    female_number: number;
-    product: string;
-    bus_bool: boolean;
-    bus_etc: string;
-    dormitory_bool: boolean;
-    dormitory_etc: string;
-  };
+  data: FactoryRequestObjDef;
 }
 
 export interface EditFactoryDef {
