@@ -47,30 +47,31 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
 
   return (
     <article css={cardWrapper}>
+      <button
+        type="button"
+        css={bookmarkButtonWrapper(isBookmarked)}
+        onClick={(event) => {
+          event.preventDefault();
+          return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
+        }}
+      >
+        <BsFillBookmarkFill />
+      </button>
       <Link href={`/company/${companyData.id}/detail`} passHref>
-        <button
-          type="button"
-          css={bookmarkButtonWrapper(isBookmarked)}
-          onClick={(event) => {
-            event.preventDefault();
-            return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
-          }}
-        >
-          <BsFillBookmarkFill />
-        </button>
-        {/* <p css={isRecruitingCSS}>#채용중</p> */}
-        <strong css={NameCSS}>{companyData.name}</strong>
-        <div css={companyLogoBox}>
-          <Image
-            layout="fill"
-            objectFit="contain"
-            src={imageSrc || companyData.logoUrl}
-            alt={companyData.name}
-            onError={() => {
-              return setImageSrc(defaultCompanyLogo);
-            }}
-          />
-        </div>
+        <a>
+          <strong css={NameCSS}>{companyData.name}</strong>
+          <div css={companyLogoBox}>
+            <Image
+              layout="fill"
+              objectFit="contain"
+              src={imageSrc || companyData.logoUrl}
+              alt={companyData.name}
+              onError={() => {
+                return setImageSrc(defaultCompanyLogo);
+              }}
+            />
+          </div>
+        </a>
       </Link>
     </article>
   );
