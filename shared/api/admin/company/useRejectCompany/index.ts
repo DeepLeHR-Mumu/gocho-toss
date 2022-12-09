@@ -7,7 +7,7 @@ import { axiosInstance } from "../../axiosInstance";
 
 import { RejectCompanyDef, RequestObjDef, UseRejectCompanyProps } from "./type";
 
-const RejectCompany: RejectCompanyDef = async (requestObj) => {
+const rejectCompany: RejectCompanyDef = async (requestObj) => {
   const { data } = await axiosInstance.patch(`/companies/${requestObj.companyId}/requests/reject`, {
     type: requestObj.type,
   });
@@ -15,5 +15,5 @@ const RejectCompany: RejectCompanyDef = async (requestObj) => {
 };
 
 export const useRejectCompany: UseRejectCompanyProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(RejectCompany);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(rejectCompany);
 };
