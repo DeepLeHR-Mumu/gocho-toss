@@ -6,10 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "e2e": "pnpx playwright@1.28.0 test",
+    "e2e:CICD": "PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright pnpx playwright@1.28.0 test e2e --trace on"
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",
+    "@playwright/test": "1.28.0",
     "@tanstack/react-query": "^4.2.3",
     "@tanstack/react-query-devtools": "^4.2.3",
     "axios": "^0.27.2",
