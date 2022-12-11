@@ -2,6 +2,10 @@
 User-agent: *
 Disallow: /404
 Disallow: /500
+Disallow: /mypage
+Disallow: /term-of-service
+Disallow: /privacy
+Disallow: /kakaologin
 
 # *
 User-agent: *
@@ -9,7 +13,3 @@ Allow: /
 
 # Host
 Host: https://m.고초대졸.com
-
-# Sitemaps
-Sitemap: https://m.고초대졸.com/sitemap.xml
-Sitemap: https://m.고초대졸.com/server-sitemap.xml
