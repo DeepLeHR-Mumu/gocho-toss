@@ -1,7 +1,7 @@
 name: gocho_web 사이트맵 생성
 on:
   pull_request:
-    branches: [main]
+    branches: [main, dev]
 jobs:
   creator_sitemap:
     needs: wait_url
