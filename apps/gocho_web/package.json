@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "sitemap": "pnpm build && next-sitemap --config next-sitemap.config.js",
+    "sitemap": "next-sitemap --config next-sitemap.config.js",
     "start": "next start",
     "lint": "next lint",
     "e2e": "pnpx playwright@1.28.0 test",
