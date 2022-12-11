@@ -9,3 +9,6 @@ export const COMPANY_UPLOAD_URL = "/company/upload";
 export const COMPANY_LIST_URL = "/company/list";
 export const VIRAL_BLOG_URL = "/viral/blog";
 export const VIRAL_INSTA_URL = "/viral/instagram";
+export const BUSINESS_JD_LIST_URL = "/business/jd/list";
+export const BUSINESS_COMPANY_LIST_URL = "/business/company/list";
+export const BUSINESS_FACTORY_LIST_URL = "/business/factory/list";

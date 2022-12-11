@@ -8,6 +8,9 @@ import {
   COMPANY_LIST_URL,
   VIRAL_BLOG_URL,
   VIRAL_INSTA_URL,
+  BUSINESS_JD_LIST_URL,
+  BUSINESS_COMPANY_LIST_URL,
+  BUSINESS_FACTORY_LIST_URL,
 } from "@constant/internalURL";
 
 export const menuArr = [
@@ -65,6 +68,24 @@ export const menuArr = [
       {
         menuTitle: "인스타그램/카카오뷰",
         menuLink: VIRAL_INSTA_URL,
+      },
+    ],
+  },
+
+  {
+    menuTitle: "기업 서비스",
+    subMenuArr: [
+      {
+        menuTitle: "공고 검수 리스트",
+        menuLink: BUSINESS_JD_LIST_URL,
+      },
+      {
+        menuTitle: "기업 검수 리스트",
+        menuLink: BUSINESS_COMPANY_LIST_URL,
+      },
+      {
+        menuTitle: "공장 검수 리스트",
+        menuLink: BUSINESS_FACTORY_LIST_URL,
       },
     ],
   },
