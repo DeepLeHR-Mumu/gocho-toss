@@ -1,6 +1,0 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-echo "gocho_web 빌드 시작"
-cd apps/gocho_web && pnpm build
-echo "빌드된 기준으로 사이트맵 생성"
-pnpm sitemap
