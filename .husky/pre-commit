@@ -1,11 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
-echo "gocho_web 빌드 시작"
-cd apps/gocho_web && pnpm build
-echo "빌드된 기준으로 사이트맵 생성"
-pnpm sitemap
 echo "precommit hook 시작"
-cd ../../shared/ui && tsc --noEmit
+cd shared/ui && tsc --noEmit
 echo "shared ui 컴포넌트 타입 검사 완료"
 cd ../api && tsc --noEmit
 echo "shared api 컴포넌트 타입 검사 완료"
