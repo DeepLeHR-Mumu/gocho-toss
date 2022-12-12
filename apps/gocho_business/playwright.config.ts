@@ -15,7 +15,7 @@ const config: PlaywrightTestConfig = {
       name: "chromium",
       testDir: "./e2e",
       use: {
-        baseURL: process.env.GOCHO_WEB_URL || "http://localhost:3000",
+        baseURL: process.env.GOCHO_BUSINESS_URL || "http://localhost:3000",
         ...devices["Desktop Chrome"],
       },
     },
