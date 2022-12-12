@@ -8,7 +8,7 @@ import defaultCompanyLogo from "shared-image/global/common/default_company_logo.
 
 import { SkeletonBox } from "../../common/atom/skeletonBox";
 import { CompanyCardProps, CompanyCardSkeleton } from "./type";
-import { companyCardSkeleton, cardWrapper, bookmarkButtonWrapper, NameCSS, companyLogoBox } from "./style";
+import { companyCardSkeleton, cardWrapper, bookmarkButtonWrapper, nameCSS, companyLogoBox } from "./style";
 
 export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkeleton> = ({
   companyData,
@@ -47,30 +47,31 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
 
   return (
     <article css={cardWrapper}>
+      <button
+        type="button"
+        css={bookmarkButtonWrapper(isBookmarked)}
+        onClick={(event) => {
+          event.preventDefault();
+          return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
+        }}
+      >
+        <BsFillBookmarkFill />
+      </button>
       <Link href={`/company/${companyData.id}/detail`} passHref>
-        <button
-          type="button"
-          css={bookmarkButtonWrapper(isBookmarked)}
-          onClick={(event) => {
-            event.preventDefault();
-            return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
-          }}
-        >
-          <BsFillBookmarkFill />
-        </button>
-        {/* <p css={isRecruitingCSS}>#채용중</p> */}
-        <strong css={NameCSS}>{companyData.name}</strong>
-        <div css={companyLogoBox}>
-          <Image
-            layout="fill"
-            objectFit="contain"
-            src={imageSrc || companyData.logoUrl}
-            alt={companyData.name}
-            onError={() => {
-              return setImageSrc(defaultCompanyLogo);
-            }}
-          />
-        </div>
+        <a>
+          <strong css={nameCSS}>{companyData.name}</strong>
+          <div css={companyLogoBox}>
+            <Image
+              layout="fill"
+              objectFit="contain"
+              src={imageSrc || companyData.logoUrl}
+              alt={companyData.name}
+              onError={() => {
+                return setImageSrc(defaultCompanyLogo);
+              }}
+            />
+          </div>
+        </a>
       </Link>
     </article>
   );

@@ -3,17 +3,21 @@ import { COLORS } from "shared-style/color";
 import { shorten } from "shared-style/common";
 
 export const wrapper = css`
+  background-color: #f2f2f6;
+  padding-top: 2rem;
+`;
+
+export const container = css`
   border-radius: 2rem;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   background-color: ${COLORS.GRAY100};
-  margin-bottom: 2rem;
   box-shadow: 0px 0px 0.5rem rgba(43, 43, 43, 0.1);
 `;
 
-export const container = css`
+export const infoBox = css`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
