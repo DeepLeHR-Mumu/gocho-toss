@@ -7,10 +7,11 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { Header, SideBar } from "@component/global";
 import { Layout } from "@component/layout";
-import { globalStyles } from "@style/globalStyles";
+
+import { globalStyle } from "../style/globalStyle";
 import { flexBox } from "./style";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function AdminService({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => {
     return new QueryClient({
       defaultOptions: {
@@ -29,7 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <Header />
-          <Global styles={globalStyles} />
+          <Global styles={globalStyle} />
           <Layout>
             <div css={flexBox}>
               <SideBar />
@@ -43,4 +44,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default AdminService;

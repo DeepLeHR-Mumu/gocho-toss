@@ -1,5 +1,4 @@
 import { css } from "@emotion/react";
-import { DESKTOP, TABLET } from "shared-style/mediaQuery";
 
 export const globalStyle = css`
   * {
@@ -93,16 +92,9 @@ export const globalStyle = css`
     vertical-align: baseline;
   }
   html {
-    font-family: "Noto Sans KR", Verdana, sans-serif;
-    min-width: 768px;
-    /* overflow-x: hidden; */
+    font-family: Noto Sans KR, sans-serif;
     font-size: 16px;
-    ${DESKTOP} {
-      font-size: 14px;
-    }
-    ${TABLET} {
-      font-size: 12px;
-    }
+    min-width: 360px;
   }
   /* HTML5 display-role reset for older browsers */
   article,
@@ -144,16 +136,6 @@ export const globalStyle = css`
     text-decoration: none;
     color: inherit;
   }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p,
-  strong {
-    word-break: keep-all;
-  }
   input,
   select,
   button {
@@ -169,8 +151,5 @@ export const globalStyle = css`
     align-items: center;
     justify-content: center;
     appearance: none;
-  }
-  textarea {
-    font-family: "Noto Sans KR", Verdana, sans-serif;
   }
 `;

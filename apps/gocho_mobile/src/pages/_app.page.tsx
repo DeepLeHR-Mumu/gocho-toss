@@ -19,7 +19,7 @@ import { Footer } from "@component/global/footer";
 import { ModalPlaceholder } from "@component/common/organisms/modal/modalPlaceHolder";
 import { ToastPlaceholder } from "@component/toast/toastPlaceholder";
 
-import { globalStyles } from "@style/globalStyles";
+import { globalStyle } from "../style/globalStyle";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -49,7 +49,7 @@ declare global {
   }
 }
 
-function MyApp({ Component, pageProps }: AppProps) {
+function UserMobileService({ Component, pageProps }: AppProps) {
   ReactGA.initialize(KEY);
   const router = useRouter();
 
@@ -144,7 +144,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       />
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <Global styles={globalStyles} />
+          <Global styles={globalStyle} />
           <ModalPlaceholder />
           <ToastPlaceholder />
           <GNB />
@@ -157,4 +157,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default UserMobileService;
