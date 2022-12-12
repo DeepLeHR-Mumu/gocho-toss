@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && pnpm sitemap",
+    "build": "NEXT_PUBLIC_VERCEL_ENV=production next build && pnpm sitemap",
     "sitemap": "next-sitemap --config next-sitemap.config.js",
     "start": "next start",
     "lint": "next lint",
