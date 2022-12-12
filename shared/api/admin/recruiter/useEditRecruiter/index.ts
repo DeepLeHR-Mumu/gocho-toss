@@ -7,7 +7,7 @@ import { axiosInstance } from "../../axiosInstance";
 
 import { EditRecruiterDef, RequestObjDef, UseEditRecruiterProps } from "./type";
 
-const editRecruiter: EditRecruiterDef = async (requestObj) => {
+const patchEditRecruiter: EditRecruiterDef = async (requestObj) => {
   const { data } = await axiosInstance.patch(`/managers/${requestObj.managerId}`, {
     origin_password: requestObj.origin_password,
     new_password: requestObj.new_password,
@@ -16,5 +16,5 @@ const editRecruiter: EditRecruiterDef = async (requestObj) => {
 };
 
 export const useEditRecruiter: UseEditRecruiterProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(editRecruiter);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(patchEditRecruiter);
 };

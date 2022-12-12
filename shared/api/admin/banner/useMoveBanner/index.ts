@@ -6,7 +6,7 @@ import { axiosInstance } from "../../axiosInstance";
 
 import { UseMoveBannerProps, MoveBannerDef, RequestObjDef } from "./type";
 
-const MoveBanner: MoveBannerDef = async (requestObj) => {
+const patchMoveBanner: MoveBannerDef = async (requestObj) => {
   const { data } = await axiosInstance.patch(
     `/banners/move?from=${requestObj.from}&to=${requestObj.to}&type=${requestObj.type}`
   );
@@ -14,6 +14,6 @@ const MoveBanner: MoveBannerDef = async (requestObj) => {
 };
 
 export const useMoveBanner: UseMoveBannerProps = () => {
-  const mutationResult = useMutation<AdminResponseDef, AxiosError, RequestObjDef>(MoveBanner);
+  const mutationResult = useMutation<AdminResponseDef, AxiosError, RequestObjDef>(patchMoveBanner);
   return mutationResult;
 };

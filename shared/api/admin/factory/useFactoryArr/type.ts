@@ -1,5 +1,6 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
-import { factoryArrKeyObj } from "shared-constant/queryKeyFactory/factory/factoryArrKeyObj";
+
+import { factoryArrKeyObj } from "../keyFactory";
 import { FactoryResponseObjDef } from "../type";
 
 export interface ResponseObjDef {

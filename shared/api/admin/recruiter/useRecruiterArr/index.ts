@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { recruiterArrKeyObj } from "shared-constant/queryKeyFactory/recruiter/arrKeyObj";
 
+import { recruiterArrKeyObj } from "../keyFactory";
 import { axiosInstance } from "../../axiosInstance";
 
 import { GetRecruiterArrDef } from "./type";

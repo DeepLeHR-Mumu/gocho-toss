@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
+
 import { axiosInstance } from "../../axiosInstance";
 import { DeleteFactoryDef, RequestObjDef, useDeleteFactoryProps } from "./type";
 

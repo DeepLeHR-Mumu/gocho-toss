@@ -1,5 +1,6 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
-import { companyArrKeyObj } from "shared-constant/queryKeyFactory/company/arrKeyObj";
+
+import { companyArrKeyObj } from "../keyFactory";
 import { CompanyDef } from "../type";
 
 export interface JobArrResponseObjDef {

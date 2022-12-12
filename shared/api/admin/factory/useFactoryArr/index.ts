@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { factoryArrKeyObj, FactoryArrRequestObjDef } from "shared-constant/queryKeyFactory/factory/factoryArrKeyObj";
-
 import { axiosInstance } from "../../axiosInstance";
+import { factoryArrKeyObj, FactoryArrRequestObjDef } from "../keyFactory";
 import { GetFactoryArrDef } from "./type";
 import { selector } from "./util";
 

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
-import { useAddMainBanner } from "shared-api/admin/banner/addMainBanner";
+import { useAddMainBanner } from "shared-api/admin/banner/useAddMainBanner";
 
 import { pageTitle } from "@style/commonStyles";
 

@@ -7,7 +7,7 @@ import { axiosInstance } from "../../axiosInstance";
 
 import { RejectJdDef, RequestObjDef, UseRejectJdProps } from "./type";
 
-const rejectJd: RejectJdDef = async (requestObj) => {
+const patchRejectJd: RejectJdDef = async (requestObj) => {
   const { data } = await axiosInstance.patch(`/companies/${requestObj.jdId}/requests/reject`, {
     type: requestObj.type,
   });
@@ -15,5 +15,5 @@ const rejectJd: RejectJdDef = async (requestObj) => {
 };
 
 export const useRejectJd: UseRejectJdProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(rejectJd);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(patchRejectJd);
 };

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { statisticsKeyObj } from "shared-constant/queryKeyFactory/stat/statisticsKeyObj";
+import { statisticsKeyObj } from "../keyFactory";
 import { axiosInstance } from "../../axiosInstance";
 
 import { GetStatisticsDef } from "./type";

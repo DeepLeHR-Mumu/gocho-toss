@@ -7,7 +7,7 @@ import { axiosInstance } from "../../axiosInstance";
 
 import { UseAcceptCompanyProps, AcceptCompanyDef, RequestObjDef } from "./type";
 
-const acceptCompany: AcceptCompanyDef = async (requestObj) => {
+const putAcceptCompany: AcceptCompanyDef = async (requestObj) => {
   const { data } = await axiosInstance.put(`/companies/${requestObj.companyId}/requests/accept`, {
     type: requestObj.type,
   });
@@ -15,6 +15,6 @@ const acceptCompany: AcceptCompanyDef = async (requestObj) => {
 };
 
 export const useAcceptCompany: UseAcceptCompanyProps = () => {
-  const mutationResult = useMutation<AdminResponseDef, AxiosError, RequestObjDef>(acceptCompany);
+  const mutationResult = useMutation<AdminResponseDef, AxiosError, RequestObjDef>(putAcceptCompany);
   return mutationResult;
 };

@@ -1,5 +1,6 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
-import { statisticsKeyObj } from "shared-constant/queryKeyFactory/stat/statisticsKeyObj";
+
+import { statisticsKeyObj } from "../keyFactory";
 
 export interface MonthlyDataObjDef {
   month: string;

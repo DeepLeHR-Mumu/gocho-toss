@@ -6,7 +6,7 @@ import { axiosInstance } from "../../axiosInstance";
 
 import { RejectFactoryDef, RequestObjDef, UseRejectFactoryProps } from "./type";
 
-const RejectFactory: RejectFactoryDef = async (requestObj) => {
+const patchRejectFactory: RejectFactoryDef = async (requestObj) => {
   const { data } = await axiosInstance.patch(`/factories/${requestObj.factoryId}/requests/reject`, {
     type: requestObj.type,
   });
@@ -14,5 +14,5 @@ const RejectFactory: RejectFactoryDef = async (requestObj) => {
 };
 
 export const useRejectFactory: UseRejectFactoryProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(RejectFactory);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(patchRejectFactory);
 };
