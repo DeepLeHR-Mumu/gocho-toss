@@ -210,3 +210,9 @@ export const TOS_META = {
   ogImage: `${CDN_URL}og_image/default.png`,
   ogAuthor: "고초대졸닷컴 | 생산직 취업의 새로운 기준",
 };
+
+export const UNKNOWN_ERROR_META = {
+  title: "고초대졸닷컴 | 잘못된 접근입니다",
+};
+
+export const NOT_FOUND_META = { title: "고초대졸닷컴 | 유효하지 않은 주소입니다" };

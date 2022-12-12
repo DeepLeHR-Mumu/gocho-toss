@@ -1,4 +1,3 @@
-import CommunityLayout from "@pages/community/component/communityLayout";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { useRouter } from "next/router";
@@ -9,9 +8,10 @@ import { usePostingCommentArr } from "shared-api/community/usePostingCommentArr"
 import { usePostingDetail, getPostingDetail } from "shared-api/community/usePostingDetail";
 import { ERROR_URL } from "shared-constant/internalURL";
 import { communityPostingDetailKeyObj } from "shared-constant/queryKeyFactory/community/postingDetailKeyObj";
-import { postingListFunnelEvent } from "shared-ga/posting";
+import { postingDetailFunnelEvent } from "shared-ga/posting";
+import { CommunityLayout } from "../../component/communityLayout";
 
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 import { WriteComment } from "./component/writeComment";
 import { CommentPart } from "./part/commentPart";
 import { PostingPart } from "./part/postingPart";
@@ -31,8 +31,8 @@ const PostingDetailPage: NextPage = () => {
   }, [router]);
 
   useEffect(() => {
-    postingListFunnelEvent();
-  }, []);
+    if (router.isReady) postingDetailFunnelEvent(Number(router.query.postingId));
+  }, [router.isReady, router.query.postingId]);
 
   const filteredCommentArr = commentArrData?.filter((commentData) => {
     return commentData.parentCommentId === null;

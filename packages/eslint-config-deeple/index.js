@@ -1,6 +1,5 @@
 module.exports = {
   parser: "@typescript-eslint/parser",
-
   extends: [
     "next/core-web-vitals",
     "airbnb",
@@ -58,4 +57,6 @@ module.exports = {
       },
     },
   ],
+
+  ignorePatterns: ["next.config.js"],
 };

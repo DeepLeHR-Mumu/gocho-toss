@@ -13,7 +13,7 @@ import { Layout } from "@component/layout";
 
 import { ProgressPart } from "./part/progressPart";
 import { SpecWritePart } from "./part/carouselCardPart";
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 
 import { wrapper, title } from "./style";
 

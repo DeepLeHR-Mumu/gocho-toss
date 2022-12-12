@@ -10,7 +10,7 @@ import { mySpecListFunnelEvent } from "shared-ga/spec";
 import { Layout } from "@component/layout";
 import { useModal } from "@recoil/hook/modal";
 
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 import { AsideMenu } from "../component/asideMenu";
 import { SimpleCard } from "./component/simpleCard";
 import { Pagination } from "./component/pagination";

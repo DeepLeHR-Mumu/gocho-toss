@@ -5,7 +5,7 @@ import { executionDesc, privacyArr, CTOINFO } from "shared-constant/privacy";
 
 import { Layout } from "@component/layout";
 
-import { PageHead } from "./component/pageHead";
+import { PageHead } from "./pageHead";
 import {
   tosTitle,
   subTitle,

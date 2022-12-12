@@ -21,7 +21,7 @@ export const TipDisplay: FunctionComponent<TipDisplayProps> = ({ currentTip }) =
       <div css={tipFadeContainer}>
         <div css={tipImageBox}>
           <Image
-            src={currentTip.thumbnailSrc}
+            src={currentTip.thumbnailSvgSrc}
             alt={currentTip.title}
             layout="fill"
             objectFit="cover"

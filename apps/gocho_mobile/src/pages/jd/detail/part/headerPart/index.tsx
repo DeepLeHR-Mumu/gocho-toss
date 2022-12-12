@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useState } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useRouter } from "next/router";
 
@@ -31,12 +31,6 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
   const { data: jobDetailData } = useJobDetail({ id: Number(jobId) });
   const { data: userData } = useUserInfo();
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
-
-  useEffect(() => {
-    if (setCurrentPositionId) {
-      setCurrentPositionId(jobDetailData?.positionArr[0].id as number);
-    }
-  }, [setCurrentPositionId, jobDetailData]);
 
   const handleMoreCardCount = () => {
     if (jobDetailData) {
@@ -85,8 +79,10 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
               index < defaultCardCount && (
                 <PositionCard
                   isDdayEnd={isDdayEnd}
-                  currentPositionId={currentPositionId as number | null}
-                  setCurrentPositionId={setCurrentPositionId}
+                  currentPositionId={currentPositionId}
+                  setCurrentPositionId={() => {
+                    setCurrentPositionId(index);
+                  }}
                   position={position}
                   key={position.id}
                 />

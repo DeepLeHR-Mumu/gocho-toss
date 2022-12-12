@@ -1,0 +1,13 @@
+{
+  "extends": "tsconfig-deeple/nextjs.json",
+  "compilerOptions": {
+    "downlevelIteration": true,
+    "types": ["@emotion/react/types/css-prop"],
+    "jsxImportSource": "@emotion/react",
+    "baseUrl": ".",
+    "paths": { "@/*": ["src/*"], "@/public": ["public/*"] },
+    "jsx": "preserve"
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}

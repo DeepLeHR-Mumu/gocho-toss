@@ -33,7 +33,7 @@ export default function Document() {
         <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png" />
         <link rel="manifest" href="/icon/manifest.json" />
         <Script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js" strategy="beforeInteractive" />
-        {process.env.NODE_ENV === "production" && (
+        {process.env.NEXT_PUBLIC_VERCEL_ENV === "production" && (
           <noscript>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -45,8 +45,28 @@ export default function Document() {
             />
           </noscript>
         )}
+        <Script id="googleTagManager" strategy="afterInteractive">
+          {`
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-T6WF546');
+         `}
+        </Script>
       </Head>
       <body>
+        {process.env.NEXT_PUBLIC_VERCEL_ENV === "production" && (
+          <noscript>
+            <iframe
+              title="googleTagManager"
+              src="https://www.googletagmanager.com/ns.html?id=GTM-T6WF546"
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        )}
         <div id="portal" />
         <div id="toast" />
         <Main />

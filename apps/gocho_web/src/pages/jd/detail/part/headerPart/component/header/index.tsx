@@ -4,14 +4,15 @@ import Image from "next/image";
 import { FiYoutube, FiEye } from "react-icons/fi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { dateConverter } from "shared-util/date";
-import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
+import { jdCountInfoKeyObj } from "shared-constant/queryKeyFactory/job/jdCountInfoKeyObj";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
-import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr, useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
+import { useJdApplyClick, useJdCountInfo } from "shared-api/job";
 import { jdBookmarkEvent } from "shared-ga/jd";
 
 import { useModal } from "@recoil/hook/modal";
@@ -38,9 +39,12 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
   const { data: userInfoData } = useUserInfo();
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userInfoData?.id });
   const { setCurrentModal } = useModal();
+  const router = useRouter();
 
   const [imageSrc, setImageSrc] = useState(jobDetailData.company.logoUrl as string);
 
+  const { mutate: mutateJdApplyClick } = useJdApplyClick();
+  const { data: jdCountData } = useJdCountInfo({ id: Number(router.query.jobId) });
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobDetailData?.id as number,
     end_time: jobDetailData?.endTime as number,
@@ -71,7 +75,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
         {
           onSuccess: () => {
             jdBookmarkEvent(jobDetailData.id);
-            queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
+            queryClient.invalidateQueries(jdCountInfoKeyObj.countInfo({ id: jobDetailData.id }));
           },
         }
       )
@@ -85,7 +89,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
         { userId, elemId: jobDetailData.id },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
+            queryClient.invalidateQueries(jdCountInfoKeyObj.countInfo({ id: jobDetailData.id }));
           },
         }
       )
@@ -128,13 +132,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
             </p>
           </li>
         </ul>{" "}
-        <Link
-          href={{
-            pathname: `${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`,
-            query: { info: "detail" },
-          }}
-          passHref
-        >
+        <Link href={`/company/${jobDetailData.company.companyId}/detail`} passHref>
           <a css={companyNameCSS}>{jobDetailData.company.name}</a>
         </Link>
         <p css={titleCSS}>{jobDetailData.title}</p>
@@ -143,7 +141,15 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
             {isDdayEnd ? (
               <p css={applyEndButton}>채용사이트</p>
             ) : (
-              <a href={jobDetailData.applyUrl} target="_blank" css={applyButton} rel="noopener noreferrer">
+              <a
+                href={jobDetailData.applyUrl}
+                target="_blank"
+                css={applyButton}
+                rel="noopener noreferrer"
+                onClick={() => {
+                  mutateJdApplyClick({ id: Number(router.query.jobId) });
+                }}
+              >
                 채용사이트
               </a>
             )}
@@ -160,17 +166,11 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
               }}
             >
               <BsFillBookmarkFill />
-              공고 북마크 {jobDetailData.bookmarkCount}
+              공고 북마크 {jdCountData?.bookmarkCount}
             </button>
           </li>
           <li>
-            <Link
-              href={{
-                pathname: `${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`,
-                query: { info: "detail" },
-              }}
-              passHref
-            >
+            <Link href={`/company/${jobDetailData.company.companyId}/detail`} passHref>
               <a css={buttonCSS(false)}>기업정보</a>
             </Link>
           </li>
@@ -183,7 +183,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
           )}
         </ul>
         <p css={viewCSS}>
-          <FiEye /> {jobDetailData.viewCount.toLocaleString("ko-KR")}
+          <FiEye /> {jdCountData?.viewCount.toLocaleString("ko-KR")}
         </p>
       </div>
     </header>
