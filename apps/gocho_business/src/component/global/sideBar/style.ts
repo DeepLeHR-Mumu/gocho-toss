@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 
 export const wrapper = css`
   background-color: grey;
-  height: 100%;
+  width: 10rem;
   a {
     display: block;
   }

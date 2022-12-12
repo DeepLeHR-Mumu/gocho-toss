@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 
 import { globalStyle, sidebarContainer } from "@/styles/globalStyle";
 import { SideBar } from "@/component/global/sideBar";
+import { TopBar } from "@/component/global/topBar";
 
 function BusinessService({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -36,9 +37,13 @@ function BusinessService({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <Global styles={globalStyle} />
+
         <div css={sidebarContainer}>
           <SideBar />
-          <Component {...pageProps} />
+          <div>
+            <TopBar />
+            <Component {...pageProps} />
+          </div>
         </div>
         <ReactQueryDevtools initialIsOpen={false} />
       </Hydrate>
