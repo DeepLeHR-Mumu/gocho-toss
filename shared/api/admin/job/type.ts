@@ -62,6 +62,7 @@ export interface JobDetailObjDef {
 export interface JobObjDef {
   id: number;
   company: { id: number; name: string; logo_url: string };
+  status: string;
   title: string;
   cut: boolean;
   view: number;

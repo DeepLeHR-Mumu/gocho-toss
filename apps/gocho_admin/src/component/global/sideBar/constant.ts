@@ -77,15 +77,15 @@ export const menuArr = [
     subMenuArr: [
       {
         menuTitle: "공고 검수 리스트",
-        menuLink: BUSINESS_JD_LIST_URL,
+        menuLink: `${BUSINESS_JD_LIST_URL}?page=1`,
       },
       {
         menuTitle: "기업 검수 리스트",
-        menuLink: BUSINESS_COMPANY_LIST_URL,
+        menuLink: `${BUSINESS_COMPANY_LIST_URL}?page=1`,
       },
       {
         menuTitle: "공장 검수 리스트",
-        menuLink: BUSINESS_FACTORY_LIST_URL,
+        menuLink: `${BUSINESS_FACTORY_LIST_URL}?page=1`,
       },
     ],
   },

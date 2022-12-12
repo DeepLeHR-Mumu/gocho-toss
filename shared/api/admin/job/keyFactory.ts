@@ -5,6 +5,7 @@ export interface JobArrRequestObjDef {
   q?: string;
   userId?: string;
   filter?: "todayUpload" | "almostDeadline" | "deadline" | "expired" | "valid";
+  status?: "all" | "upload-waiting" | "modify-waiting" | "upload-reject" | "modify-reject";
   parsing?: "full" | "raw";
   companyId?: number;
 }

@@ -5,6 +5,7 @@ export const selector = (jobArr: JobObjDef[], count: number) => {
     return {
       id: job.id,
       applyUrl: job.apply_url,
+      status: job.status,
       companyName: job.company.name,
       companyId: job.company.id,
       companyLogo: job.company.logo_url,
