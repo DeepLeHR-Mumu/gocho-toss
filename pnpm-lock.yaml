@@ -83,11 +83,13 @@ importers:
   apps/gocho_business:
     specifiers:
       '@emotion/react': ^11.10.0
+      '@playwright/test': 1.28.0
       '@tanstack/react-query': ^4.2.3
       '@tanstack/react-query-devtools': ^4.2.3
       '@types/node': 18.7.13
       '@types/react': 18.0.17
       '@types/react-dom': 18.0.6
+      axios: ^0.27.2
       eslint-config-deeple: workspace:^1.0.0
       next: 12.2.5
       react: 17.0.2
@@ -105,8 +107,10 @@ importers:
       zustand: ^4.1.5
     dependencies:
       '@emotion/react': 11.10.4_v7wa3uncfa5agztyqirlhe5v34
+      '@playwright/test': 1.28.0
       '@tanstack/react-query': 4.3.4_sfoxds7t5ydpegc3knd667wn6m
       '@tanstack/react-query-devtools': 4.3.5_rc2nloshn5awlpljd7lgxlyskm
+      axios: 0.27.2
       next: 12.2.5_2f3qgkpmmpou2hyqrmueifddme
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
