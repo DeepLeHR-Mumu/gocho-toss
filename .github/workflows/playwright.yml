@@ -68,7 +68,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: dependency 설치
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --workspace-root --frozen-lockfile
 
       - name: playwright 버전 확인
         id: playwright-version
