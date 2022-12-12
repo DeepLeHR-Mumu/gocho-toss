@@ -6,11 +6,12 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
 
 import { useUserInfo } from "shared-api/auth";
-import { useCompanyDetail } from "shared-api/company";
+import { useCompanyDetail, useCompanyCountInfo } from "shared-api/company";
 import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr, useUserCompanyBookmarkArr } from "shared-api/bookmark";
-import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
+import { companyCountInfoKeyObj } from "shared-constant/queryKeyFactory/company/companyCountInfoKeyObj";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 
+import { Layout } from "@component/layout";
 import { useModal } from "@recoil/hook/modal";
 
 import {
@@ -24,14 +25,16 @@ import {
   industryText,
   buttonBox,
   countCSS,
+  infoBox,
 } from "./style";
 
-export const InfoBox: FunctionComponent = () => {
+export const HeaderPart: FunctionComponent = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
   const { setCurrentModal } = useModal();
   const { data: userData } = useUserInfo();
+  const { data: companyCountInfoData } = useCompanyCountInfo({ id: Number(router.query.companyId) });
   const { data: userCompanyBookmarkArr } = useUserCompanyBookmarkArr({ userId: userData?.id });
   const { data: companyDetailData, isLoading } = useCompanyDetail({ companyId: Number(router.query.companyId) });
 
@@ -57,7 +60,7 @@ export const InfoBox: FunctionComponent = () => {
         { userId: userData?.id, elemId: companyDetailData?.id as number },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(companyDetailKeyObj.detail({ companyId: companyDetailData?.id as number }));
+            queryClient.invalidateQueries(companyCountInfoKeyObj.countInfo({ id: Number(companyDetailData?.id) }));
           },
         }
       )
@@ -71,7 +74,7 @@ export const InfoBox: FunctionComponent = () => {
         { userId: userData?.id, elemId: companyDetailData?.id as number },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(companyDetailKeyObj.detail({ companyId: companyDetailData?.id as number }));
+            queryClient.invalidateQueries(companyCountInfoKeyObj.countInfo({ id: Number(companyDetailData?.id) }));
           },
         }
       )
@@ -94,29 +97,33 @@ export const InfoBox: FunctionComponent = () => {
 
   return (
     <section css={wrapper}>
-      <div css={container}>
-        <div css={logoBox}>
-          <Image src={companyDetailData.logoUrl} layout="fill" objectFit="contain" />
-        </div>
-        <div css={buttonBox}>
-          <button
-            type="button"
-            css={bookmarkButton(isBookmarked)}
-            onClick={isBookmarked ? deleteCompanyBookmark : addCompanyBookmark}
-          >
-            <BsFillBookmarkFill />
-            기업 북마크 <span css={countCSS}>{companyDetailData.bookmark.toLocaleString("Ko-KR")}</span>
-          </button>
+      <Layout>
+        <div css={container}>
+          <div css={infoBox}>
+            <div css={logoBox}>
+              <Image src={companyDetailData.logoUrl} layout="fill" objectFit="contain" />
+            </div>
+            <div css={buttonBox}>
+              <button
+                type="button"
+                css={bookmarkButton(isBookmarked)}
+                onClick={isBookmarked ? deleteCompanyBookmark : addCompanyBookmark}
+              >
+                <BsFillBookmarkFill />
+                기업 북마크 <span css={countCSS}>{companyCountInfoData?.bookmarkCount.toLocaleString("Ko-KR")}</span>
+              </button>
 
-          <p css={viewCountContainer}>
-            <FiEye />
-            조회수
-            <span css={viewCount}>{companyDetailData.view.toLocaleString("Ko-KR")}</span>
-          </p>
+              <p css={viewCountContainer}>
+                <FiEye />
+                조회수
+                <span css={viewCount}>{companyCountInfoData?.viewCount.toLocaleString("Ko-KR")}</span>
+              </p>
+            </div>
+          </div>
+          <strong css={companyName}>{companyDetailData.name}</strong>
+          <p css={industryText}>{companyDetailData.industry}</p>
         </div>
-      </div>
-      <strong css={companyName}>{companyDetailData.name}</strong>
-      <p css={industryText}>{companyDetailData.industry}</p>
+      </Layout>
     </section>
   );
 };

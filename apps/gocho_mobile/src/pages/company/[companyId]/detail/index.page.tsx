@@ -11,7 +11,8 @@ import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/com
 import { companyInfoFunnelEvent } from "shared-ga/company";
 
 import { PageHead } from "./pageHead";
-import { Header } from "../component/header";
+import { TopButton } from "../component/topButton";
+import { HeaderPart } from "../part/headerPart";
 import { BasicInfoPart } from "../part/basicInfoPart";
 import { WelfarePart } from "../part/welfarePart";
 import { WarningDescPart } from "../part/warningDescPart";
@@ -62,7 +63,8 @@ const DetailPage: NextPage = () => {
       <InvisibleH1 title={`${companyDetailData.name} > 기업/공장 정보 - 고초대졸닷컴`} />
       <InvisibleH2 title={`${companyDetailData.name} 기업정보`} />
 
-      <Header pathName="detail" />
+      <HeaderPart />
+      <TopButton pathName="detail" />
       <div css={container}>
         <BasicInfoPart />
         <WelfarePart />

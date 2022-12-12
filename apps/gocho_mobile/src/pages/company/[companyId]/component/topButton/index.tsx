@@ -4,17 +4,15 @@ import { useRouter } from "next/router";
 
 import { Layout } from "@component/layout";
 
-import { InfoBox } from "../infoCard";
-import { HeaderProps } from "./type";
+import { TopButtonProps } from "./type";
 import { buttonCSS, container, wrapper } from "./style";
 
-export const Header: FunctionComponent<HeaderProps> = ({ pathName }) => {
+export const TopButton: FunctionComponent<TopButtonProps> = ({ pathName }) => {
   const router = useRouter();
 
   return (
     <section css={wrapper}>
       <Layout>
-        <InfoBox />
         <div css={container}>
           <Link href={`/company/${router.query.companyId}/detail`} passHref>
             <a css={buttonCSS(pathName === "detail")}>기업 정보</a>
