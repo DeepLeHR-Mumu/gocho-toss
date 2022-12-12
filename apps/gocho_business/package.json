@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "e2e": "pnpx playwright@1.28.0 test",
-    "e2e:CICD": "PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright pnpx playwright@1.28.0 test e2e --trace on"
+    "lint": "next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",
