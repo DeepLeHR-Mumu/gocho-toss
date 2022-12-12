@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 
 export const sidebarContainer = css`
   display: flex;
+  height: 100vh;
   flex-direction: row;
 `;
 
