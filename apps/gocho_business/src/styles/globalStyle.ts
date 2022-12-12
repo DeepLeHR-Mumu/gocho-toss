@@ -1,5 +1,10 @@
 import { css } from "@emotion/react";
 
+export const sidebarContainer = css`
+  display: flex;
+  flex-direction: row;
+`;
+
 export const globalStyle = css`
   * {
     box-sizing: border-box;
