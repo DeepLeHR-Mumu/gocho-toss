@@ -17,7 +17,7 @@ import { PositionEtcDataPart } from "./part/positionEtcDataPart";
 import { formContainer, positionContainer, addPositionButton, submitButton, checkMsgBox } from "./style";
 import { blankPosition } from "./constant";
 
-const JdUpload: NextPage = () => {
+const JdEdit: NextPage = () => {
   const router = useRouter();
   const jobId = Number(router.query.id);
 
@@ -172,4 +172,4 @@ const JdUpload: NextPage = () => {
   );
 };
 
-export default JdUpload;
+export default JdEdit;
