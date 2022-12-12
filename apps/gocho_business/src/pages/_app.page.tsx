@@ -4,9 +4,10 @@ import { Global } from "@emotion/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query";
 import axios from "axios";
-
-import { globalStyle } from "style/globalStyle";
 import { useRouter } from "next/router";
+
+import { globalStyle } from "@/styles/globalStyle";
+import { SideBar } from "@/component/global/sideBar";
 
 function BusinessService({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -35,6 +36,7 @@ function BusinessService({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <Global styles={globalStyle} />
+        <SideBar />
         <Component {...pageProps} />
         <ReactQueryDevtools initialIsOpen={false} />
       </Hydrate>

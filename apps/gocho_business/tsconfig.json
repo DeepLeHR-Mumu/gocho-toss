@@ -4,8 +4,8 @@
     "downlevelIteration": true,
     "types": ["@emotion/react/types/css-prop"],
     "jsxImportSource": "@emotion/react",
-    "baseUrl": "./src",
-    "paths": {},
+    "baseUrl": ".",
+    "paths": { "@/*": ["src/*"], "@/public": ["public/*"] },
     "jsx": "preserve"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
