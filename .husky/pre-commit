@@ -14,8 +14,12 @@ echo "shared type 컴포넌트 타입 검사 완료"
 cd ../util && tsc --noEmit
 echo "shared util 컴포넌트 타입 검사 완료"
 cd ../../apps/gocho_web && tsc --noEmit
-echo "PC 버전 타입 검사 완료"
+echo "PC 타입 검사 완료"
 cd ../gocho_mobile && tsc --noEmit
-echo "모바일 버전 타입 검사 완료"
+echo "Mobile 타입 검사 완료"
+cd ../gocho_admin && tsc --noEmit
+echo "Admin 타입 검사 완료"
+cd ../gocho_business && tsc --noEmit
+echo "Business 타입 검사 완료"
 
 cd ../../ && pnpm lint-staged

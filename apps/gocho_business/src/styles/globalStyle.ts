@@ -1,8 +1,15 @@
 import { css } from "@emotion/react";
 
-const MOBILE = `@media (max-width:400px)`;
+export const sidebarContainer = css`
+  display: flex;
+  height: 100vh;
+  flex-direction: row;
+`;
+export const pageContainer = css`
+  width: 100%;
+`;
 
-export const globalStyles = css`
+export const globalStyle = css`
   * {
     box-sizing: border-box;
   }
@@ -94,12 +101,9 @@ export const globalStyles = css`
     vertical-align: baseline;
   }
   html {
-    font-family: Noto Sans KR, sans-serif;
+    font-family: "Noto Sans KR", Verdana, sans-serif;
     font-size: 16px;
-    min-width: 360px;
-    ${MOBILE} {
-      font-size: 14px;
-    }
+    min-width: 1440px;
   }
   /* HTML5 display-role reset for older browsers */
   article,
@@ -117,6 +121,20 @@ export const globalStyles = css`
   }
   body {
     line-height: 1;
+  }
+  p,
+  strong,
+  ul,
+  button,
+  a,
+  h1,
+  h2,
+  h3,
+  h4,
+  span,
+  h5 {
+    line-height: 1.6;
+    word-break: keep-all;
   }
   ol,
   ul {
@@ -156,5 +174,8 @@ export const globalStyles = css`
     align-items: center;
     justify-content: center;
     appearance: none;
+  }
+  textarea {
+    font-family: "Noto Sans KR", Verdana, sans-serif;
   }
 `;
