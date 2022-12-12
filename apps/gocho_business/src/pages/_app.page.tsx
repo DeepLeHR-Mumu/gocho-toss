@@ -6,12 +6,13 @@ import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query
 import axios from "axios";
 import { useRouter } from "next/router";
 
-import { globalStyle, sidebarContainer } from "@/styles/globalStyle";
+import { globalStyle, pageContainer, sidebarContainer } from "@/styles/globalStyle";
 import { SideBar } from "@/component/global/sideBar";
 import { TopBar } from "@/component/global/topBar";
 
 function BusinessService({ Component, pageProps }: AppProps) {
   const router = useRouter();
+
   const [queryClient] = useState(() => {
     return new QueryClient({
       defaultOptions: {
@@ -37,10 +38,9 @@ function BusinessService({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <Global styles={globalStyle} />
-
         <div css={sidebarContainer}>
           <SideBar />
-          <div>
+          <div css={pageContainer}>
             <TopBar />
             <Component {...pageProps} />
           </div>

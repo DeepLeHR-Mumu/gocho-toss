@@ -5,6 +5,9 @@ export const sidebarContainer = css`
   height: 100vh;
   flex-direction: row;
 `;
+export const pageContainer = css`
+  width: 100%;
+`;
 
 export const globalStyle = css`
   * {
