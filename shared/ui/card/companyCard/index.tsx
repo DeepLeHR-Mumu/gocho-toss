@@ -8,7 +8,7 @@ import defaultCompanyLogo from "shared-image/global/common/default_company_logo.
 
 import { SkeletonBox } from "../../common/atom/skeletonBox";
 import { CompanyCardProps, CompanyCardSkeleton } from "./type";
-import { companyCardSkeleton, cardWrapper, bookmarkButtonWrapper, NameCSS, companyLogoBox } from "./style";
+import { companyCardSkeleton, cardWrapper, bookmarkButtonWrapper, nameCSS, companyLogoBox } from "./style";
 
 export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkeleton> = ({
   companyData,
@@ -59,7 +59,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
       </button>
       <Link href={`/company/${companyData.id}/detail`} passHref>
         <a>
-          <strong css={NameCSS}>{companyData.name}</strong>
+          <strong css={nameCSS}>{companyData.name}</strong>
           <div css={companyLogoBox}>
             <Image
               layout="fill"
