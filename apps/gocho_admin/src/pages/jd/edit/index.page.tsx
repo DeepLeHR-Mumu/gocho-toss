@@ -3,9 +3,10 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
-import { useFindCompany } from "@api/company/useFindCompany";
-import { useChangeJob } from "@api/job/useChangeJob";
-import { useJobDetail } from "@api/job/useJobDetail";
+import { useFindCompany } from "shared-api/admin/company/useFindCompany";
+import { useEditJob } from "shared-api/admin/job/useEditJob";
+import { useJobDetail } from "shared-api/admin/job/useJobDetail";
+
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
@@ -26,7 +27,7 @@ const JdEdit: NextPage = () => {
 
   const { data: jobData } = useJobDetail({ id: jobId });
   const { data: companyDataObj, isLoading, isError } = useFindCompany({ word: searchWord, order: "recent" });
-  const { mutate: changeJobMutate } = useChangeJob();
+  const { mutate: editJobMutate } = useEditJob();
 
   const jobForm = useForm<JobFormValues>({
     defaultValues: {
@@ -117,7 +118,7 @@ const JdEdit: NextPage = () => {
     const blob = new Blob([json], { type: "application/json" });
     formData.append("dto", blob);
 
-    changeJobMutate(
+    editJobMutate(
       { jdId: jobId, dto: formData },
       {
         onSuccess: () => {

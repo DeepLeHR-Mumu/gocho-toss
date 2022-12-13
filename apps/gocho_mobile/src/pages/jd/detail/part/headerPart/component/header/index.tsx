@@ -4,16 +4,17 @@ import Image from "next/image";
 import { FiYoutube } from "react-icons/fi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { useUserInfo } from "shared-api/auth";
+import { useJdApplyClick, useJdCountInfo } from "shared-api/job";
 import { useModal } from "@recoil/hook/modal";
 import { dateConverter, dDayCalculator } from "shared-util/date";
-import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { jdBookmarkEvent } from "shared-ga/jd";
+import { jdCountInfoKeyObj } from "shared-constant/queryKeyFactory/job/jdCountInfoKeyObj";
 
-import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { HeaderProps } from "./type";
 import {
@@ -38,6 +39,10 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
   const { setCurrentModal } = useModal();
   const { isSuccess } = useUserInfo();
   const [imageSrc, setImageSrc] = useState(jobDetailData.company.logoUrl as string);
+  const router = useRouter();
+
+  const { mutate: mutateJdApplyClick } = useJdApplyClick();
+  const { data: jdCountData } = useJdCountInfo({ id: Number(router.query.jobId) });
 
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobDetailData?.id as number,
@@ -73,7 +78,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
         {
           onSuccess: () => {
             jdBookmarkEvent(jobDetailData.id);
-            queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
+            queryClient.invalidateQueries(jdCountInfoKeyObj.countInfo({ id: jobDetailData.id }));
           },
         }
       )
@@ -87,7 +92,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
         { userId, elemId: jobDetailData.id },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
+            queryClient.invalidateQueries(jdCountInfoKeyObj.countInfo({ id: jobDetailData.id }));
           },
         }
       )
@@ -120,7 +125,15 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
             {isDdayEnd ? (
               <p css={applyEndButton}>채용사이트</p>
             ) : (
-              <a href={jobDetailData.applyUrl} target="_blank" css={applyButton} rel="noopener noreferrer">
+              <a
+                href={jobDetailData.applyUrl}
+                target="_blank"
+                css={applyButton}
+                rel="noopener noreferrer"
+                onClick={() => {
+                  mutateJdApplyClick({ id: Number(router.query.jobId) });
+                }}
+              >
                 채용사이트
               </a>
             )}
@@ -135,17 +148,11 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
               aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
             >
               <BsFillBookmarkFill />
-              공고 북마크 {jobDetailData.bookmarkCount}
+              공고 북마크 {jdCountData?.bookmarkCount}
             </button>
           </li>
           <li>
-            <Link
-              href={{
-                pathname: `${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`,
-                query: { info: "detail" },
-              }}
-              passHref
-            >
+            <Link href={`/company/${jobDetailData.company.companyId}/detail`} passHref>
               <a css={buttonCSS(false)}>기업정보</a>
             </Link>
           </li>
@@ -159,7 +166,6 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
         </ul>
       </div>
 
-      {/*  */}
       <div>
         <ul css={dateBox}>
           <li>
@@ -173,12 +179,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
             </p>
           </li>
         </ul>
-        <Link
-          href={{
-            pathname: `${COMPANY_DETAIL_URL}/${jobDetailData.company.companyId}`,
-            query: { info: "detail" },
-          }}
-        >
+        <Link href={`/company/${jobDetailData.company.companyId}/detail`}>
           <a css={companyName}>{jobDetailData.company.name}</a>
         </Link>
         <p css={title}>{jobDetailData.title}</p>

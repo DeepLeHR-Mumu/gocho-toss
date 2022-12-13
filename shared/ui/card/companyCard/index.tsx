@@ -4,12 +4,11 @@ import Link from "next/link";
 import { BsFillBookmarkFill } from "react-icons/bs";
 
 import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr } from "shared-api/bookmark";
-import { COMPANY_DETAIL_URL } from "shared-constant/internalURL";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
 import { SkeletonBox } from "../../common/atom/skeletonBox";
 import { CompanyCardProps, CompanyCardSkeleton } from "./type";
-import { companyCardSkeleton, cardWrapper, bookmarkButtonWrapper, NameCSS, companyLogoBox } from "./style";
+import { companyCardSkeleton, cardWrapper, bookmarkButtonWrapper, nameCSS, companyLogoBox } from "./style";
 
 export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkeleton> = ({
   companyData,
@@ -48,20 +47,19 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
 
   return (
     <article css={cardWrapper}>
-      <Link href={{ pathname: `${COMPANY_DETAIL_URL}/${companyData.id}`, query: { info: "detail" } }} passHref>
+      <button
+        type="button"
+        css={bookmarkButtonWrapper(isBookmarked)}
+        onClick={(event) => {
+          event.preventDefault();
+          return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
+        }}
+      >
+        <BsFillBookmarkFill />
+      </button>
+      <Link href={`/company/${companyData.id}/detail`} passHref>
         <a>
-          <button
-            type="button"
-            css={bookmarkButtonWrapper(isBookmarked)}
-            onClick={(event) => {
-              event.preventDefault();
-              return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
-            }}
-          >
-            <BsFillBookmarkFill />
-          </button>
-          {/* <p css={isRecruitingCSS}>#채용중</p> */}
-          <strong css={NameCSS}>{companyData.name}</strong>
+          <strong css={nameCSS}>{companyData.name}</strong>
           <div css={companyLogoBox}>
             <Image
               layout="fill"

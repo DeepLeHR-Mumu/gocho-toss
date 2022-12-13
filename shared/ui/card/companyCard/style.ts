@@ -57,7 +57,7 @@ export const isRecruitingCSS = css`
   font-weight: 500;
 `;
 
-export const NameCSS = css`
+export const nameCSS = css`
   font-size: 1rem;
   display: block;
   margin: 0.5rem 0;

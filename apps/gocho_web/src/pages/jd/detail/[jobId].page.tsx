@@ -6,6 +6,7 @@ import { QueryClient, dehydrate } from "@tanstack/react-query";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { getJobDetail, useJobDetail } from "shared-api/job";
+import { useCompanyCommentArr } from "shared-api/company";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 
@@ -15,15 +16,13 @@ import { useUserInfo } from "shared-api/auth";
 import { useAddJobViewCount } from "shared-api/viewCount";
 import { jdDetailFunnelEvent } from "shared-ga/jd";
 
-import { PositionObjDef } from "./type";
 import { HeaderPart, DetailSupportPart, DetailWorkPart, DetailPreferencePart, ReceptInfoPart } from "./part";
 import { PageHead } from "./pageHead";
 
 import { wrapper, flexBox, container, containerSkeleton } from "./style";
 
 const JobsDetail: NextPage = () => {
-  const [currentPositionId, setCurrentPositionId] = useState<number | null>(null);
-  const [freshPosition, setFreshPosition] = useState<PositionObjDef | null>(null);
+  const [currentPositionId, setCurrentPositionId] = useState<number>(0);
 
   const { data: userData } = useUserInfo();
   const { mutate: addViewCount } = useAddJobViewCount();
@@ -33,6 +32,9 @@ const JobsDetail: NextPage = () => {
 
   const { data: jobDetailData, isLoading } = useJobDetail({
     id: Number(jobId),
+  });
+  const { data: companyCommentDataArr } = useCompanyCommentArr({
+    companyId: Number(jobDetailData?.company.companyId),
   });
 
   useEffect(() => {
@@ -56,19 +58,6 @@ const JobsDetail: NextPage = () => {
   }, [jobDetailData, addViewCount]);
 
   useEffect(() => {
-    if (!jobDetailData || !currentPositionId) {
-      return;
-    }
-    const filterPosition = jobDetailData.positionArr.find((position) => {
-      return position.id === currentPositionId;
-    });
-
-    if (filterPosition) {
-      setFreshPosition(filterPosition);
-    }
-  }, [currentPositionId, jobDetailData]);
-
-  useEffect(() => {
     if (jobDetailData) jdDetailFunnelEvent(jobDetailData.id);
   }, [jobDetailData]);
 
@@ -81,19 +70,14 @@ const JobsDetail: NextPage = () => {
             <section css={containerSkeleton}>
               <SkeletonBox />
             </section>
-            <DetailComment jdId={null} detailData={null} />
+            {companyCommentDataArr && (
+              <DetailComment jdId={null} commentDataArr={companyCommentDataArr} userInfo={userData} />
+            )}
           </div>
         </Layout>
       </main>
     );
   }
-
-  const commentData = {
-    companyId: jobDetailData.company.companyId,
-    name: jobDetailData.company.name,
-    title: jobDetailData.title,
-    logoUrl: jobDetailData.company.logoUrl,
-  };
 
   return (
     <main css={wrapper}>
@@ -119,14 +103,14 @@ const JobsDetail: NextPage = () => {
           userId={userData?.id}
         />
         <div css={flexBox}>
-          {freshPosition && (
-            <section css={container}>
-              <DetailSupportPart freshPosition={freshPosition} />
-              <DetailWorkPart freshPosition={freshPosition} />
-              <DetailPreferencePart freshPosition={freshPosition} />
-            </section>
+          <section css={container}>
+            <DetailSupportPart freshPosition={jobDetailData.positionArr[currentPositionId]} />
+            <DetailWorkPart freshPosition={jobDetailData.positionArr[currentPositionId]} />
+            <DetailPreferencePart freshPosition={jobDetailData.positionArr[currentPositionId]} />
+          </section>
+          {companyCommentDataArr && (
+            <DetailComment jdId={jobDetailData.id} commentDataArr={companyCommentDataArr} userInfo={userData} />
           )}
-          <DetailComment jdId={jobDetailData.id} detailData={commentData} />
         </div>
         <ReceptInfoPart jobDetailData={jobDetailData} />
       </Layout>

@@ -3,9 +3,8 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { jobArrKeyObj } from "shared-constant/queryKeyFactory/job/jobArrKeyObj";
 import { dateConverter } from "shared-util/date";
-
-import { useDeleteJob } from "@api/job/useDeleteJob";
-import { useEndJob } from "@api/job/useEndJob";
+import { useDeleteJob } from "shared-api/admin/job/useDeleteJob";
+import { useEndJob } from "shared-api/admin/job/useEndJob";
 
 import { JD_EDIT_URL } from "@constant/internalURL";
 import {
