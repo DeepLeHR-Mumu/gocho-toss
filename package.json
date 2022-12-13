@@ -19,7 +19,7 @@
     "dev-mobile": "pnpm --filter gocho_mobile dev",
     "build-mobile": "pnpm turbo build --scope=gocho_mobile --include-dependencies --no-deps",
     "start-mobile": "pnpm --filter gocho_mobile start",
-    "dev-admin": "pnpm --filter gocho_web dev",
+    "dev-admin": "pnpm --filter gocho_admin dev",
     "build-admin": "pnpm turbo build --scope=gocho_admin --include-dependencies --no-deps",
     "start-admin": "pnpm --filter gocho_admin start",
     "dev-biz": "pnpm --filter gocho_business dev",

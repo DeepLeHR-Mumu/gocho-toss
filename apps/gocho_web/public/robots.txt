@@ -2,6 +2,10 @@
 User-agent: *
 Disallow: /404
 Disallow: /500
+Disallow: /mypage
+Disallow: /term-of-service
+Disallow: /privacy
+Disallow: /kakaologin
 
 # *
 User-agent: *
