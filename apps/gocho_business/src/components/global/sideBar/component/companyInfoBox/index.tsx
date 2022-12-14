@@ -1,10 +1,11 @@
 import { FunctionComponent } from "react";
 
 import { imageBox, nameCSS, wrapper } from "./style";
+import { CompanyInfoBoxProps } from "./type";
 
-export const CompanyInfoBox: FunctionComponent = () => (
+export const CompanyInfoBox: FunctionComponent<CompanyInfoBoxProps> = ({ name }) => (
   <div css={wrapper}>
     <div css={imageBox} />
-    <p css={nameCSS}>회사명</p>
+    <p css={nameCSS}>{name}</p>
   </div>
 );
