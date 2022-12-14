@@ -40,10 +40,10 @@ export const UploadBannerPart: FunctionComponent = () => {
   const { register, watch, setValue, handleSubmit } = useForm<BannerSubmitFormValues>();
 
   const { data: jobData } = useJobDetail({ id: jobId });
-  const { mutate } = useAddTopBanner();
+  const { mutate: addMutate } = useAddTopBanner();
 
   const submitBannerHandler: SubmitHandler<BannerSubmitFormValues> = (bannerSubmitObj) => {
-    mutate(
+    addMutate(
       { dto: bannerSubmitObj },
       {
         onSuccess: () => {

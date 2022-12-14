@@ -46,7 +46,6 @@ const JdEdit: NextPage = () => {
     const newStartTime = jobData?.startTime ? jobData.startTime + 540000 * 60 : 0;
     const newEndTime = jobData?.endTime ? jobData.endTime + 540000 * 60 : 0;
 
-    // TODO: util.ts로 빼기
     const positionNewArr = jobData?.positionArr.map((position) => {
       return {
         middle: position.eduSummary.middle,

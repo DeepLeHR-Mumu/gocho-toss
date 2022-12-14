@@ -45,7 +45,7 @@ const JdUpload: NextPage = () => {
 
   const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
     addJobMutate(
-      { ...jobObj },
+      { dto: jobObj },
       {
         onSuccess: () => {
           setCheckMsg("서버에 공고가 업로드 되었습니다.");
