@@ -2,10 +2,11 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
-import { mainContainer } from "@style/commonStyles";
 
-import { useDoLogin } from "shared-api/admin/auth/useDoLogin";
 import { adminTokenDecryptor } from "shared-util/tokenDecryptor";
+
+import { useDoLogin } from "@api/auth/useDoLogin";
+import { mainContainer } from "@style/commonStyles";
 
 import { inputBox, inputContainer, inputTitle, title, submitButton } from "./style";
 import { LoginFormValues } from "./type";

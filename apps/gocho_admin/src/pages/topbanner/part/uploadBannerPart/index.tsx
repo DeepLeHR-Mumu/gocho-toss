@@ -6,9 +6,9 @@ import { useQueryClient } from "@tanstack/react-query";
 import { dateConverter } from "shared-util/date";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
-import { useJobDetail } from "shared-api/admin/job/useJobDetail";
-import { useAddTopBanner } from "shared-api/admin/banner/useAddTopBanner";
 
+import { useJobDetail } from "@api/job/useJobDetail";
+import { useAddTopBanner } from "@api/banner/useAddTopBanner";
 import { pageTitle } from "@style/commonStyles";
 
 import {

@@ -1,8 +1,7 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { useJobDetail } from "shared-api/admin/job/useJobDetail";
-
+import { useJobDetail } from "@api/job/useJobDetail";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 

@@ -1,10 +1,11 @@
 import type { NextPage } from "next";
 
 import { dateConverter } from "shared-util/date";
-import { useJobArr } from "shared-api/admin/job/useJobArr";
 
+import { useJobArr } from "@api/job/useJobArr";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { LoadingScreen, ErrorScreen } from "@component/screen";
+
 import { JobDef } from "../type";
 import { sectionContainer, sectionTitle, buttonContainer, naverButton, jdButton } from "./style";
 

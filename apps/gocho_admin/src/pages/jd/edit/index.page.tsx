@@ -3,10 +3,9 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
-import { useFindCompany } from "shared-api/admin/company/useFindCompany";
-import { useEditJob } from "shared-api/admin/job/useEditJob";
-import { useJobDetail } from "shared-api/admin/job/useJobDetail";
-
+import { useFindCompany } from "@api/company/useFindCompany";
+import { useEditJob } from "@api/job/useEditJob";
+import { useJobDetail } from "@api/job/useJobDetail";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 

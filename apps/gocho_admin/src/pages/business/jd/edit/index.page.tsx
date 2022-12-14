@@ -1,9 +1,8 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { useJobDetail } from "shared-api/admin/job/useJobDetail";
-import { useEditJdRequest } from "shared-api/admin/job/useEditJdRequest";
-
+import { useJobDetail } from "@api/job/useJobDetail";
+import { useEditJdRequest } from "@api/job/useEditJdRequest";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
