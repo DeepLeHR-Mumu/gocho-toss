@@ -24,6 +24,14 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
     jobForm.watch("position_arr")[index].contract_type !== "인턴" &&
     jobForm.watch("position_arr")[index].contract_type !== "계약>정규";
 
+  const deletePlaceHandler = (place: string) => {
+    jobForm.setValue(`position_arr.${index}.place.address_arr`, [
+      ...(jobForm.watch("position_arr")[index].place.address_arr?.filter((element) => {
+        return element !== place;
+      }) || []),
+    ]);
+  };
+
   return (
     <>
       <div css={inputContainer}>
@@ -179,11 +187,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                 type="button"
                 css={deletePlaceButton}
                 onClick={() => {
-                  jobForm.setValue(`position_arr.${index}.place.address_arr`, [
-                    ...(jobForm.watch("position_arr")[index].place.address_arr?.filter((element) => {
-                      return element !== place;
-                    }) || []),
-                  ]);
+                  return deletePlaceHandler(place);
                 }}
               >
                 삭제

@@ -21,7 +21,7 @@ export const putEditJob: PostEditJobDef = async (requestObj) => {
 export const useEditJob: useEditJobProps = () => {
   return useMutation<AdminResponseDef, AxiosError, RequestObjDef>((requestObj) => {
     const newRequestObj = {
-      jdId: requestObj.jdId,
+      ...requestObj,
       dto: {
         ...requestObj.dto,
         start_time: new Date(requestObj.dto.start_time).getTime(),
