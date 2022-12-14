@@ -4,16 +4,16 @@ const siteUrl = "https://고초대졸.com";
 module.exports = {
   siteUrl,
   changefreq: "daily",
-  priority: 0.7,
+  priority: 0.6,
   sitemapSize: 7000,
   generateIndexSitemap: false,
-  exclude: ["/404", "/500", "/server-sitemap.xml"],
+  exclude: ["/404", "/500", "/server-sitemap.xml", "/mypage", "/term-of-service", "/privacy", "/kakaologin"],
   generateRobotsTxt: true,
   robotsTxtOptions: {
     policies: [
       {
         userAgent: "*",
-        disallow: ["/404", "/500"],
+        disallow: ["/404", "/500", "/mypage", "/term-of-service", "/privacy", "/kakaologin"],
       },
       { userAgent: "*", allow: "/" },
     ],
