@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { axiosInstance } from "../../axiosInstance";
+import { axiosInstance } from "@api/axiosInstance";
+
 import { factoryArrKeyObj, FactoryArrRequestObjDef } from "../keyFactory";
 import { GetFactoryArrDef } from "./type";
 import { selector } from "./util";

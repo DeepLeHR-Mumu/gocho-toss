@@ -3,8 +3,9 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "../../axiosInstance";
-import { UseAcceptFactoryProps, AcceptFactoryDef, RequestObjDef } from "./type";
+import { axiosInstance } from "@api/axiosInstance";
+
+import { AcceptFactoryDef, RequestObjDef, UseAcceptFactoryProps } from "./type";
 
 const putAcceptFactory: AcceptFactoryDef = async (requestObj) => {
   const { data } = await axiosInstance.put(`/factories/${requestObj.factoryId}/requests/accept`, {
@@ -14,6 +15,5 @@ const putAcceptFactory: AcceptFactoryDef = async (requestObj) => {
 };
 
 export const useAcceptFactory: UseAcceptFactoryProps = () => {
-  const mutationResult = useMutation<AdminResponseDef, AxiosError, RequestObjDef>(putAcceptFactory);
-  return mutationResult;
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(putAcceptFactory);
 };

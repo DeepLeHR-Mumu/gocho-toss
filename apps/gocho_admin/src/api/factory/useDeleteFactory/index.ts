@@ -3,7 +3,8 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "../../axiosInstance";
+import { axiosInstance } from "@api/axiosInstance";
+
 import { DeleteFactoryDef, RequestObjDef, useDeleteFactoryProps } from "./type";
 
 export const deleteFactory: DeleteFactoryDef = async (requestObj) => {

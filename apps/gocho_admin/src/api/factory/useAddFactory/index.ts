@@ -3,15 +3,16 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "../../axiosInstance";
+import { axiosInstance } from "@api/axiosInstance";
+
 import { PostFactoryDef, useAddFactoryProps } from "./type";
 import { FactoryRequestObjDef } from "../type";
 
-export const postFactory: PostFactoryDef = async (requestObj) => {
+export const postAddFactory: PostFactoryDef = async (requestObj) => {
   const { data } = await axiosInstance.post("/factories", { ...requestObj });
   return data;
 };
 
 export const useAddFactory: useAddFactoryProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, FactoryRequestObjDef>(postFactory);
+  return useMutation<AdminResponseDef, AxiosError, FactoryRequestObjDef>(postAddFactory);
 };

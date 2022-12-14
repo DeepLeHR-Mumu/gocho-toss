@@ -2,8 +2,10 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
-import { axiosInstance } from "../../axiosInstance";
-import { useEndJobProps, EndJobDef, RequestObjDef } from "./type";
+
+import { axiosInstance } from "@api/axiosInstance";
+
+import { EndJobDef, RequestObjDef, useEndJobProps } from "./type";
 
 export const patchEndJob: EndJobDef = async (requestObj) => {
   const { data } = await axiosInstance.patch(`/jds/${requestObj.jdId}`);
@@ -11,6 +13,5 @@ export const patchEndJob: EndJobDef = async (requestObj) => {
 };
 
 export const useEndJob: useEndJobProps = () => {
-  const mutationResult = useMutation<AdminResponseDef, AxiosError, RequestObjDef>(patchEndJob);
-  return mutationResult;
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(patchEndJob);
 };

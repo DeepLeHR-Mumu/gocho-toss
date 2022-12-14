@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
+import { axiosInstance } from "@api/axiosInstance";
 import { statisticsKeyObj } from "../keyFactory";
-import { axiosInstance } from "../../axiosInstance";
 
 import { GetStatisticsDef } from "./type";
 import { selector } from "./util";

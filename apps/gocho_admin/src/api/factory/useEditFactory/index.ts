@@ -3,7 +3,8 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "../../axiosInstance";
+import { axiosInstance } from "@api/axiosInstance";
+
 import { EditFactoryDef, RequestObjDef, UseEditFactoryProps } from "./type";
 
 const putEditFactory: EditFactoryDef = async (requestObj) => {

@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { axiosInstance } from "../../axiosInstance";
+import { axiosInstance } from "@api/axiosInstance";
+
 import { jobDetailKeyObj, JobDetailRequestObjDef } from "../keyFactory";
 import { GetEditJdRequestDef } from "./type";
 import { selector } from "./util";

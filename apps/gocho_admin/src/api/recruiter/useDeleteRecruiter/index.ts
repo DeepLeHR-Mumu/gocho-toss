@@ -2,7 +2,9 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
-import { axiosInstance } from "../../axiosInstance";
+
+import { axiosInstance } from "@api/axiosInstance";
+
 import { DeleteRecruiterDef, RequestObjDef, useDeleteRecruiterProps } from "./type";
 
 export const deleteRecruiter: DeleteRecruiterDef = async (requestObj) => {

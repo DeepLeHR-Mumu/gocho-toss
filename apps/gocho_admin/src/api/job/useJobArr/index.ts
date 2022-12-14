@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { axiosNoTokenInstance } from "../../axiosInstance";
+import { axiosNoTokenInstance } from "@api/axiosInstance";
+
 import { jobArrKeyObj, JobArrRequestObjDef } from "../keyFactory";
 import { GetJobArrDef } from "./type";
 import { selector } from "./util";

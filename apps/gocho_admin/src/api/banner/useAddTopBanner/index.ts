@@ -2,10 +2,12 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
-import { axiosInstance } from "../../axiosInstance";
+
+import { axiosInstance } from "@api/axiosInstance";
+
 import { PostTopBannerDef, RequestObjDef, useAddTopBannerProps } from "./type";
 
-export const postTopBanner: PostTopBannerDef = async (requestObj) => {
+export const postAddTopBanner: PostTopBannerDef = async (requestObj) => {
   const formData = new FormData();
   const json = JSON.stringify(requestObj.dto);
   const blob = new Blob([json], { type: "application/json" });
@@ -18,5 +20,5 @@ export const postTopBanner: PostTopBannerDef = async (requestObj) => {
 };
 
 export const useAddTopBanner: useAddTopBannerProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(postTopBanner);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(postAddTopBanner);
 };

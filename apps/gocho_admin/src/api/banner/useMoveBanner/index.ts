@@ -2,9 +2,10 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
-import { axiosInstance } from "../../axiosInstance";
 
-import { UseMoveBannerProps, MoveBannerDef, RequestObjDef } from "./type";
+import { axiosInstance } from "@api/axiosInstance";
+
+import { MoveBannerDef, RequestObjDef, UseMoveBannerProps } from "./type";
 
 const patchMoveBanner: MoveBannerDef = async (requestObj) => {
   const { data } = await axiosInstance.patch(
@@ -14,6 +15,5 @@ const patchMoveBanner: MoveBannerDef = async (requestObj) => {
 };
 
 export const useMoveBanner: UseMoveBannerProps = () => {
-  const mutationResult = useMutation<AdminResponseDef, AxiosError, RequestObjDef>(patchMoveBanner);
-  return mutationResult;
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(patchMoveBanner);
 };

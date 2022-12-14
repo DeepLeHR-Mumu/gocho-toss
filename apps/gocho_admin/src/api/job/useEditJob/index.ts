@@ -3,7 +3,8 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "../../axiosInstance";
+import { axiosInstance } from "@api/axiosInstance";
+
 import { PostEditJobDef, RequestObjDef, useEditJobProps } from "./type";
 
 export const putEditJob: PostEditJobDef = async (requestObj) => {

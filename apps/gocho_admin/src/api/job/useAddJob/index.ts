@@ -2,10 +2,12 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
-import { axiosInstance } from "../../axiosInstance";
+
+import { axiosInstance } from "@api/axiosInstance";
+
 import { PostJobDef, RequestObjDef, useAddJobProps } from "./type";
 
-export const postJob: PostJobDef = async (requestObj) => {
+export const postAddJob: PostJobDef = async (requestObj) => {
   const formData = new FormData();
   const json = JSON.stringify(requestObj.dto);
   const blob = new Blob([json], { type: "application/json" });
@@ -38,6 +40,6 @@ export const useAddJob: useAddJobProps = () => {
         }),
       },
     };
-    return postJob(newRequestObj);
+    return postAddJob(newRequestObj);
   });
 };

@@ -3,9 +3,9 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "../../axiosInstance";
+import { axiosInstance } from "@api/axiosInstance";
 
-import { UseAcceptCompanyProps, AcceptCompanyDef, RequestObjDef } from "./type";
+import { AcceptCompanyDef, RequestObjDef, UseAcceptCompanyProps } from "./type";
 
 const putAcceptCompany: AcceptCompanyDef = async (requestObj) => {
   const { data } = await axiosInstance.put(`/companies/${requestObj.companyId}/requests/accept`, {
@@ -15,6 +15,5 @@ const putAcceptCompany: AcceptCompanyDef = async (requestObj) => {
 };
 
 export const useAcceptCompany: UseAcceptCompanyProps = () => {
-  const mutationResult = useMutation<AdminResponseDef, AxiosError, RequestObjDef>(putAcceptCompany);
-  return mutationResult;
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(putAcceptCompany);
 };

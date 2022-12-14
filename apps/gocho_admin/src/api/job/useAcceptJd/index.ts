@@ -3,9 +3,9 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "../../axiosInstance";
+import { axiosInstance } from "@api/axiosInstance";
 
-import { UseAcceptJdProps, AcceptJdDef, RequestObjDef } from "./type";
+import { AcceptJdDef, RequestObjDef, UseAcceptJdProps } from "./type";
 
 const putAcceptJd: AcceptJdDef = async (requestObj) => {
   const { data } = await axiosInstance.put(`/jds/${requestObj.jdId}/requests/accept`, {
@@ -15,6 +15,5 @@ const putAcceptJd: AcceptJdDef = async (requestObj) => {
 };
 
 export const useAcceptJd: UseAcceptJdProps = () => {
-  const mutationResult = useMutation<AdminResponseDef, AxiosError, RequestObjDef>(putAcceptJd);
-  return mutationResult;
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(putAcceptJd);
 };

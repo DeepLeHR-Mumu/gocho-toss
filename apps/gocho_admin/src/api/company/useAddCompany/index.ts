@@ -2,10 +2,12 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
-import { axiosInstance } from "../../axiosInstance";
-import { PostCompanyDef, useAddCompanyProps, RequestObjDef } from "./type";
 
-export const postCompany: PostCompanyDef = async (requestObj) => {
+import { axiosInstance } from "@api/axiosInstance";
+
+import { PostCompanyDef, RequestObjDef, useAddCompanyProps } from "./type";
+
+export const postAddCompany: PostCompanyDef = async (requestObj) => {
   const { data } = await axiosInstance.post("/companies", requestObj, {
     headers: { "Content-Type": "multipart/form-data" },
   });
@@ -13,6 +15,5 @@ export const postCompany: PostCompanyDef = async (requestObj) => {
 };
 
 export const useAddCompany: useAddCompanyProps = () => {
-  const mutationResult = useMutation<AdminResponseDef, AxiosError, RequestObjDef>(postCompany);
-  return mutationResult;
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(postAddCompany);
 };
