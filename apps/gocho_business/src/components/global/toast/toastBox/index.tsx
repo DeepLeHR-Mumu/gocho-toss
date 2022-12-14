@@ -3,12 +3,12 @@ import { FunctionComponent } from "react";
 
 import { wrapper, descCSS } from "./style";
 
-interface ToastComponentProps {
+interface ToastBoxProps {
   nickName?: string;
   activatedMsg?: string;
 }
 
-export const ToastComponent: FunctionComponent<ToastComponentProps> = ({ nickName, activatedMsg }) => {
+export const ToastBox: FunctionComponent<ToastBoxProps> = ({ nickName, activatedMsg }) => {
   return createPortal(
     <div css={wrapper} aria-hidden>
       <p css={descCSS}>

@@ -7,8 +7,9 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 import { globalStyle, pageContainer, sidebarContainer } from "@/styles/globalStyle";
-import { SideBar } from "@/component/global/sideBar";
-import { TopBar } from "@/component/global/topBar";
+import { SideBar } from "@/components/global/sideBar";
+import { TopBar } from "@/components/global/topBar";
+import { ToastPlaceholder } from "@/components/global/toast/toastPlaceHolder";
 
 function BusinessService({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -45,6 +46,7 @@ function BusinessService({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </div>
         </div>
+        <ToastPlaceholder />
         <ReactQueryDevtools initialIsOpen={false} />
       </Hydrate>
     </QueryClientProvider>
