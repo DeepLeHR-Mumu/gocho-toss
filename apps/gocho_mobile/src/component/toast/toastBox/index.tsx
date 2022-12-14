@@ -16,6 +16,6 @@ export const ToastComponent: FunctionComponent<ToastComponentProps> = ({ nickNam
         {activatedMsg}
       </p>
     </div>,
-    document.getElementById("toast") as HTMLElement
+    document.getElementById("toastPortal") as HTMLElement
   );
 };

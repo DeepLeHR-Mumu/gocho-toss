@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import Link from "next/link";
 
-import { INTERNAL_URL } from "@/constant";
+import { INTERNAL_URL } from "@/constants";
 
 import { wrapper } from "./style";
 

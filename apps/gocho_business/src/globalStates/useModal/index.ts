@@ -1,16 +1,16 @@
 import create from "zustand";
 
 interface UseModalProps {
-  isOpen: boolean;
-  controlModal: (status: boolean) => void;
+  currentModal: string | null;
+  setModal: (status: string | null) => void;
 }
 
 export const useModal = create<UseModalProps>((set) => {
   return {
-    isOpen: false,
-    controlModal: (status) => {
+    currentModal: null,
+    setModal: (status) => {
       return set(() => {
-        return { isOpen: status };
+        return { currentModal: status };
       });
     },
   };
