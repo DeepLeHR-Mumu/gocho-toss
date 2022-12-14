@@ -26,6 +26,7 @@ export const selector = (jobDetailObj: JobDetailObjDef) => {
       },
       taskDetailArr: position.task_detail_arr,
       rotationArr: position.rotation_arr,
+      rotationEtc: position.rotation_etc,
       place: {
         addressArr: position.place.address_arr,
         factoryArr: positionFactoryArr,
@@ -36,7 +37,7 @@ export const selector = (jobDetailObj: JobDetailObjDef) => {
       payArr: position.pay_arr,
       preferredCertiArr: position.preferred_certi_arr,
       preferredEtcArr: position.preferred_etc_arr,
-      edu_summary: {
+      eduSummary: {
         middle: position.edu_summary.middle,
         high: position.edu_summary.high,
         college: position.edu_summary.college,
@@ -71,11 +72,9 @@ export const selector = (jobDetailObj: JobDetailObjDef) => {
     title: jobDetailObj.title,
     cut: jobDetailObj.cut,
     positionArr: positionCamelArr,
-    company: {
-      companyId: jobDetailObj.company.id,
-      name: jobDetailObj.company.name,
-      logoUrl: jobDetailObj.company.logo_url,
-      factories: companyFactoryArr,
-    },
+    companyId: jobDetailObj.company.id,
+    companyName: jobDetailObj.company.name,
+    companyLogoUrl: jobDetailObj.company.logo_url,
+    companyFactories: companyFactoryArr,
   };
 };

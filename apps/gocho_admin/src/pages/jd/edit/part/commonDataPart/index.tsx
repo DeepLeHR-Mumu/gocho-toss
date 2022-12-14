@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
-import { DatetimeBox } from "@pages/jd/upload/component/datetimeBox";
+import { DatetimeBox } from "../../component/datetimeBox";
 import {
   enterNotice,
   flexBox,
@@ -18,7 +18,12 @@ import {
 } from "./style";
 import { CommonDataPartProps } from "./type";
 
-export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ companyDataArr, jobForm, setSearchWord }) => {
+export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({
+  jobData,
+  companyDataArr,
+  jobForm,
+  setSearchWord,
+}) => {
   return (
     <>
       <h3 css={sectionTitle}>공통 공고 내용</h3>
@@ -27,6 +32,7 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ company
         <input
           css={searchBox}
           type="text"
+          defaultValue={jobData.companyName}
           onBlur={(e) => {
             setSearchWord(e.target.value);
           }}
@@ -34,7 +40,7 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ company
         <button css={searchCompanyButton} type="button">
           검색
         </button>
-        <select css={selectBox} {...jobForm.register("company_id", { valueAsNumber: true, required: true })}>
+        <select css={selectBox} {...jobForm.register("company_id", { valueAsNumber: true })}>
           <option value="">기업 선택 ▼</option>
           {companyDataArr.map((company) => {
             return (

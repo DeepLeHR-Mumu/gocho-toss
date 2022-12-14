@@ -2,24 +2,26 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
-import { axiosInstance } from "../../axiosInstance";
-import { PostJobDef, RequestObjDef, useAddJobProps } from "./type";
 
-export const postJob: PostJobDef = async (requestObj) => {
+import { axiosInstance } from "../../axiosInstance";
+import { PostEditJobDef, RequestObjDef, useEditJobProps } from "./type";
+
+export const putEditJob: PostEditJobDef = async (requestObj) => {
   const formData = new FormData();
   const json = JSON.stringify(requestObj.dto);
   const blob = new Blob([json], { type: "application/json" });
   formData.append("dto", blob);
 
-  const { data } = await axiosInstance.post("/jds", formData, {
+  const { data } = await axiosInstance.put(`/jds/${requestObj.jdId}`, formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return data;
 };
 
-export const useAddJob: useAddJobProps = () => {
+export const useEditJob: useEditJobProps = () => {
   return useMutation<AdminResponseDef, AxiosError, RequestObjDef>((requestObj) => {
     const newRequestObj = {
+      ...requestObj,
       dto: {
         ...requestObj.dto,
         start_time: new Date(requestObj.dto.start_time).getTime(),
@@ -38,6 +40,6 @@ export const useAddJob: useAddJobProps = () => {
         }),
       },
     };
-    return postJob(newRequestObj);
+    return putEditJob(newRequestObj);
   });
 };

@@ -3,7 +3,12 @@ import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
-  dto: Blob;
+  dto: {
+    color: string;
+    jd_id: number;
+    start_time: number;
+    end_time: number;
+  };
 }
 
 export interface PostTopBannerDef {
