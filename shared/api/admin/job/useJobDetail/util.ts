@@ -37,7 +37,7 @@ export const selector = (jobDetailObj: JobDetailObjDef) => {
       payArr: position.pay_arr,
       preferredCertiArr: position.preferred_certi_arr,
       preferredEtcArr: position.preferred_etc_arr,
-      edu_summary: {
+      eduSummary: {
         middle: position.edu_summary.middle,
         high: position.edu_summary.high,
         college: position.edu_summary.college,

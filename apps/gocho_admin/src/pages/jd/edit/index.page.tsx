@@ -10,7 +10,7 @@ import { useJobDetail } from "shared-api/admin/job/useJobDetail";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
-import { JobFormValues, JobSubmitValues } from "../type";
+import { JobFormValues } from "../type";
 import { CommonDataPart } from "./part/commonDataPart";
 import { PositionRequiredDataPart } from "./part/positionRequiredDataPart";
 import { PositionTaskDataPart } from "./part/positionTaskDataPart";
@@ -46,12 +46,13 @@ const JdEdit: NextPage = () => {
     const newStartTime = jobData?.startTime ? jobData.startTime + 540000 * 60 : 0;
     const newEndTime = jobData?.endTime ? jobData.endTime + 540000 * 60 : 0;
 
+    // TODO: util.ts로 빼기
     const positionNewArr = jobData?.positionArr.map((position) => {
       return {
-        middle: position.edu_summary.middle,
-        high: position.edu_summary.high,
-        college: position.edu_summary.college,
-        four: position.edu_summary.four,
+        middle: position.eduSummary.middle,
+        high: position.eduSummary.high,
+        college: position.eduSummary.college,
+        four: position.eduSummary.four,
         required_exp: position.requiredExp.type,
         min_year: position.requiredExp.minYear,
         max_year: position.requiredExp.maxYear,
@@ -74,6 +75,7 @@ const JdEdit: NextPage = () => {
         preferred_etc_arr: position.preferredEtcArr?.join("\n"),
       };
     });
+
     reset({
       company_id: jobData?.companyId,
       title: jobData?.title,
@@ -97,29 +99,8 @@ const JdEdit: NextPage = () => {
   }
 
   const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
-    const newJobObj: JobSubmitValues = {
-      ...jobObj,
-      process_arr: jobObj.process_arr?.split("\n"),
-      apply_route_arr: jobObj.apply_route_arr?.split("\n"),
-      etc_arr: jobObj.etc_arr ? jobObj.etc_arr.split("\n") : null,
-      position_arr: jobObj.position_arr.map((position) => {
-        return {
-          ...position,
-          required_etc_arr: position.required_etc_arr ? position.required_etc_arr.split("\n") : null,
-          task_detail_arr: position.task_detail_arr.split("\n"),
-          pay_arr: position.pay_arr?.split("\n"),
-          preferred_etc_arr: position.preferred_etc_arr ? position.preferred_etc_arr.split("\n") : null,
-        };
-      }),
-    };
-
-    const formData = new FormData();
-    const json = JSON.stringify(newJobObj);
-    const blob = new Blob([json], { type: "application/json" });
-    formData.append("dto", blob);
-
     editJobMutate(
-      { jdId: jobId, dto: formData },
+      { jdId: jobId, dto: jobObj },
       {
         onSuccess: () => {
           setCheckMsg("공고가 수정 되었습니다.");

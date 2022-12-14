@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
-import { DatetimeBox } from "@pages/jd/upload/component/datetimeBox";
+import { DatetimeBox } from "../../component/datetimeBox";
 import {
   enterNotice,
   flexBox,
