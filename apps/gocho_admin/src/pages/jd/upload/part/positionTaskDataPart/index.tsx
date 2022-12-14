@@ -32,6 +32,10 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
     ]);
   };
 
+  const mainTask = taskArr.find((task) => {
+    return jobForm.watch("position_arr")[index].task_main === task.mainTask;
+  });
+
   return (
     <>
       <div css={inputContainer}>
@@ -78,17 +82,12 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
           <option value="" disabled>
             2차직무 선택 ▼
           </option>
-          {taskArr.map((task) => {
-            const isMainTask = jobForm.watch("position_arr")[index].task_main === task.mainTask;
-            if (isMainTask)
-              return task.subTaskArr.map((subTask) => {
-                return (
-                  <option key={`${id}${subTask}`} value={subTask}>
-                    {subTask}
-                  </option>
-                );
-              });
-            return null;
+          {mainTask?.subTaskArr.map((subTask) => {
+            return (
+              <option key={`${id}${subTask}`} value={subTask}>
+                {subTask}
+              </option>
+            );
           })}
         </select>
         <p css={enterNotice}>
