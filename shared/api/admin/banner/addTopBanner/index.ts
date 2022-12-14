@@ -3,16 +3,20 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 import { axiosInstance } from "../../axiosInstance";
-import { PostTopBannerDef, useAddTopBannerProps, RequestObjDef } from "./type";
+import { PostTopBannerDef, RequestObjDef, useAddTopBannerProps } from "./type";
 
 export const postTopBanner: PostTopBannerDef = async (requestObj) => {
-  const { data } = await axiosInstance.post("/banners/top", requestObj, {
+  const formData = new FormData();
+  const json = JSON.stringify(requestObj.dto);
+  const blob = new Blob([json], { type: "application/json" });
+  formData.append("dto", blob);
+
+  const { data } = await axiosInstance.post("/banners/top", formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return data;
 };
 
 export const useAddTopBanner: useAddTopBannerProps = () => {
-  const mutationResult = useMutation<AdminResponseDef, AxiosError, RequestObjDef>(postTopBanner);
-  return mutationResult;
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(postTopBanner);
 };

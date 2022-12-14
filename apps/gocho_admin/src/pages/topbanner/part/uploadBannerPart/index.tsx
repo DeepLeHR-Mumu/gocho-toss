@@ -42,12 +42,9 @@ export const UploadBannerPart: FunctionComponent = () => {
   const { data: jobData } = useJobDetail({ id: jobId });
   const { mutate } = useAddTopBanner();
 
-  const bannerSubmitHandler: SubmitHandler<BannerSubmitFormValues> = (bannerSubmitObj) => {
-    const json = JSON.stringify(bannerSubmitObj);
-    const blob = new Blob([json], { type: "application/json" });
-
+  const submitBannerHandler: SubmitHandler<BannerSubmitFormValues> = (bannerSubmitObj) => {
     mutate(
-      { dto: blob },
+      { dto: bannerSubmitObj },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(bannerArrKeyObj.bannerArr({ type: "T" }));
@@ -68,7 +65,7 @@ export const UploadBannerPart: FunctionComponent = () => {
     <>
       <h2 css={pageTitle}>공고 상단 배너 업로드</h2>
       <section css={sectionContainer}>
-        <form onSubmit={handleSubmit(bannerSubmitHandler)}>
+        <form onSubmit={handleSubmit(submitBannerHandler)}>
           <div css={inputContainer}>
             <strong css={inputTitle}>공고 번호</strong>
             <input
