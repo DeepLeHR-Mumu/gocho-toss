@@ -16,15 +16,13 @@ import { useUserInfo } from "shared-api/auth";
 import { useAddJobViewCount } from "shared-api/viewCount";
 import { jdDetailFunnelEvent } from "shared-ga/jd";
 
-import { PositionObjDef } from "./type";
 import { HeaderPart, DetailSupportPart, DetailWorkPart, DetailPreferencePart, ReceptInfoPart } from "./part";
 import { PageHead } from "./pageHead";
 
 import { wrapper, flexBox, container, containerSkeleton } from "./style";
 
 const JobsDetail: NextPage = () => {
-  const [currentPositionId, setCurrentPositionId] = useState<number | null>(null);
-  const [freshPosition, setFreshPosition] = useState<PositionObjDef | null>(null);
+  const [currentPositionId, setCurrentPositionId] = useState<number>(0);
 
   const { data: userData } = useUserInfo();
   const { mutate: addViewCount } = useAddJobViewCount();
@@ -58,19 +56,6 @@ const JobsDetail: NextPage = () => {
       addViewCount({ elemId: jobDetailData.id });
     }
   }, [jobDetailData, addViewCount]);
-
-  useEffect(() => {
-    if (!jobDetailData || !currentPositionId) {
-      return;
-    }
-    const filterPosition = jobDetailData.positionArr.find((position) => {
-      return position.id === currentPositionId;
-    });
-
-    if (filterPosition) {
-      setFreshPosition(filterPosition);
-    }
-  }, [currentPositionId, jobDetailData]);
 
   useEffect(() => {
     if (jobDetailData) jdDetailFunnelEvent(jobDetailData.id);
@@ -118,13 +103,11 @@ const JobsDetail: NextPage = () => {
           userId={userData?.id}
         />
         <div css={flexBox}>
-          {freshPosition && (
-            <section css={container}>
-              <DetailSupportPart freshPosition={freshPosition} />
-              <DetailWorkPart freshPosition={freshPosition} />
-              <DetailPreferencePart freshPosition={freshPosition} />
-            </section>
-          )}
+          <section css={container}>
+            <DetailSupportPart freshPosition={jobDetailData.positionArr[currentPositionId]} />
+            <DetailWorkPart freshPosition={jobDetailData.positionArr[currentPositionId]} />
+            <DetailPreferencePart freshPosition={jobDetailData.positionArr[currentPositionId]} />
+          </section>
           {companyCommentDataArr && (
             <DetailComment jdId={jobDetailData.id} commentDataArr={companyCommentDataArr} userInfo={userData} />
           )}

@@ -5,7 +5,7 @@ type TipDataDef = {
   title: string;
   tag: string[];
   description: string;
-  thumbnailSrc: string;
+  thumbnailSvgSrc: string;
 };
 export interface LatestCardProps {
   currentTipObj: {

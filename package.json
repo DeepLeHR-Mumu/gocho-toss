@@ -19,9 +19,12 @@
     "dev-mobile": "pnpm --filter gocho_mobile dev",
     "build-mobile": "pnpm turbo build --scope=gocho_mobile --include-dependencies --no-deps",
     "start-mobile": "pnpm --filter gocho_mobile start",
-    "dev-admin": "cd apps/gocho_admin && pnpm dev",
+    "dev-admin": "pnpm --filter gocho_admin dev",
     "build-admin": "pnpm turbo build --scope=gocho_admin --include-dependencies --no-deps",
     "start-admin": "pnpm --filter gocho_admin start",
+    "dev-biz": "pnpm --filter gocho_business dev",
+    "build-biz": "pnpm turbo build --scope=gocho_business --include-dependencies --no-deps",
+    "start-biz": "pnpm --filter gocho_business start",
     "e2e:report": "pnpx playwright show-report"
   },
   "lint-staged": {

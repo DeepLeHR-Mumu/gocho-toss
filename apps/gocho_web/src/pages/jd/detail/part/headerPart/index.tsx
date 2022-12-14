@@ -37,12 +37,6 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
   const { data: userData } = useUserInfo();
 
   useEffect(() => {
-    if (setCurrentPositionId) {
-      setCurrentPositionId(jobDetailData?.positionArr[0].id as number);
-    }
-  }, [setCurrentPositionId, jobDetailData]);
-
-  useEffect(() => {
     if (observeRef.current) {
       const observer = new IntersectionObserver(
         (entry) => {
@@ -101,8 +95,10 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
               index < defaultCardCount && (
                 <PositionCard
                   isDdayEnd={isDdayEnd}
-                  currentPositionId={currentPositionId as number | null}
-                  setCurrentPositionId={setCurrentPositionId}
+                  currentPositionId={currentPositionId}
+                  setCurrentPositionId={() => {
+                    setCurrentPositionId(index);
+                  }}
                   position={position}
                   key={position.id}
                 />

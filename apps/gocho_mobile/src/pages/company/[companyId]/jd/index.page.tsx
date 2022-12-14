@@ -11,10 +11,11 @@ import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/com
 import { companyJdFunnelEvent } from "shared-ga/company";
 
 import { PageHead } from "./pageHead";
-import { Header } from "../component/header";
+import { TopButton } from "../component/topButton";
 import { WarningDescPart } from "../part/warningDescPart";
 import { CompanyJobPart } from "../part/companyJobPart";
 import { container, loadingBox } from "./style";
+import { HeaderPart } from "../part/headerPart";
 
 const DetailPage: NextPage = () => {
   const router = useRouter();
@@ -58,7 +59,8 @@ const DetailPage: NextPage = () => {
       <InvisibleH1 title={`${companyDetailData.name}> 생산직 채용공고 - 고초대졸닷컴`} />
       <InvisibleH2 title={`${companyDetailData.name} 생산직 채용공고`} />
 
-      <Header pathName="jd" />
+      <HeaderPart />
+      <TopButton pathName="jd" />
       <div css={container}>
         <CompanyJobPart />
       </div>

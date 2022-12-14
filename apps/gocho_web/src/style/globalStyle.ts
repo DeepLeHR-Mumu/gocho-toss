@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { DESKTOP, TABLET } from "shared-style/mediaQuery";
 
-export const globalStyles = css`
+export const globalStyle = css`
   * {
     box-sizing: border-box;
   }

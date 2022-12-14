@@ -2,6 +2,7 @@ export const MAIN_URL = "/";
 export const LOGIN_URL = "/login";
 export const JD_UPLOAD_URL = "/jd/upload";
 export const JD_LIST_URL = "/jd/list";
+export const JD_EDIT_URL = "/jd/edit";
 export const MAIN_BANNER_URL = "/mainbanner";
 export const JD_TOP_BANNER_URL = "/topbanner";
 export const ASIDE_BANNER_URL = "/asidebanner";

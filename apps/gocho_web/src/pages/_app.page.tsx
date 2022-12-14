@@ -8,18 +8,19 @@ import type { AppProps } from "next/app";
 import { Global } from "@emotion/react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import ReactGA from "react-ga4";
 import { datadogRum } from "@datadog/browser-rum";
+import ReactGA from "react-ga4";
 
 import { KEY } from "shared-constant/gaKey";
 import { FB_PIXEL_ID } from "shared-constant/fbPixelKey";
 
-import { globalStyles } from "src/style/globalStyle";
 import { Header } from "@component/global/header";
 import { Footer } from "@component/global/footer";
 import { Aside } from "@component/global/aside";
 import { ModalPlaceholder } from "@component/modal/modalPlaceHolder";
 import { ToastPlaceholder } from "@component/toast/toastPlaceholder";
+
+import { globalStyle } from "../style/globalStyle";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -49,7 +50,7 @@ declare global {
   }
 }
 
-function MyApp({ Component, pageProps }: AppProps) {
+function UserPCService({ Component, pageProps }: AppProps) {
   const router = useRouter();
   ReactGA.initialize(KEY);
 
@@ -147,7 +148,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       />
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <Global styles={globalStyles} />
+          <Global styles={globalStyle} />
           <ModalPlaceholder />
           <ToastPlaceholder />
           <Header />
@@ -161,4 +162,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default UserPCService;

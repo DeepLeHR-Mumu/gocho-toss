@@ -24,10 +24,11 @@ export interface PositionObjDef {
   };
   task: {
     main_task: string;
-    sub_task_arr: string[] | null;
+    sub_task_arr: string[];
   };
   task_detail_arr: string[];
   rotation_arr: string[];
+  rotation_etc: string;
   place: {
     type: "일반" | "전국" | "해외" | "기타";
     address_arr: string[] | null;

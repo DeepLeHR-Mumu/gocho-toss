@@ -40,14 +40,11 @@ export const UploadBannerPart: FunctionComponent = () => {
   const { register, watch, setValue, handleSubmit } = useForm<BannerSubmitFormValues>();
 
   const { data: jobData } = useJobDetail({ id: jobId });
-  const { mutate } = useAddTopBanner();
+  const { mutate: addMutate } = useAddTopBanner();
 
-  const bannerSubmitHandler: SubmitHandler<BannerSubmitFormValues> = (bannerSubmitObj) => {
-    const json = JSON.stringify(bannerSubmitObj);
-    const blob = new Blob([json], { type: "application/json" });
-
-    mutate(
-      { dto: blob },
+  const submitBannerHandler: SubmitHandler<BannerSubmitFormValues> = (bannerSubmitObj) => {
+    addMutate(
+      { dto: bannerSubmitObj },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(bannerArrKeyObj.bannerArr({ type: "T" }));
@@ -68,7 +65,7 @@ export const UploadBannerPart: FunctionComponent = () => {
     <>
       <h2 css={pageTitle}>공고 상단 배너 업로드</h2>
       <section css={sectionContainer}>
-        <form onSubmit={handleSubmit(bannerSubmitHandler)}>
+        <form onSubmit={handleSubmit(submitBannerHandler)}>
           <div css={inputContainer}>
             <strong css={inputTitle}>공고 번호</strong>
             <input
@@ -126,11 +123,11 @@ export const UploadBannerPart: FunctionComponent = () => {
                 <div css={cardContainer}>
                   <div css={companyLogoWrapper}>
                     <div css={companyLogoBox}>
-                      <Image layout="fill" objectFit="contain" src={jobData?.company.logoUrl || defaultCompanyLogo} />
+                      <Image layout="fill" objectFit="contain" src={jobData?.companyLogoUrl || defaultCompanyLogo} />
                     </div>
                   </div>
                   <div css={infoContainer}>
-                    <p css={companyName}>{jobData?.company.name}</p>
+                    <p css={companyName}>{jobData?.companyName}</p>
                     <p css={date}>
                       {`${jobStartMonth}/${jobStartDate}`}~{`${jobEndMonth}/${jobEndDate}`}
                     </p>

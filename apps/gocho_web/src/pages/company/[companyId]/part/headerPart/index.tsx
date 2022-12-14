@@ -5,13 +5,13 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useCompanyDetail } from "shared-api/company";
+import { useCompanyDetail, useCompanyCountInfo } from "shared-api/company";
 import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr, useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
 import { companyBookmarkEvent } from "shared-ga/company";
 import catchLogoSrc from "shared-image/global/common/catch_logo.png";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
+import { companyCountInfoKeyObj } from "shared-constant/queryKeyFactory/company/companyCountInfoKeyObj";
 
 import { useModal } from "@recoil/hook/modal";
 
@@ -38,6 +38,9 @@ export const HeaderPart: FunctionComponent = () => {
 
   const { setCurrentModal } = useModal();
   const { data: userData } = useUserInfo();
+  const { data: companyCountInfoData } = useCompanyCountInfo({
+    id: Number(router.query.companyId),
+  });
   const { data: companyDetailData, isLoading } = useCompanyDetail({ companyId: Number(router.query.companyId) });
   const { data: userCompanyBookmarkArr } = useUserCompanyBookmarkArr({ userId: userData?.id });
   const { mutate: addMutate } = useAddCompanyBookmarkArr({
@@ -67,7 +70,7 @@ export const HeaderPart: FunctionComponent = () => {
         {
           onSuccess: () => {
             companyBookmarkEvent(companyDetailData.id);
-            queryClient.invalidateQueries(companyDetailKeyObj.detail({ companyId: companyDetailData.id }));
+            queryClient.invalidateQueries(companyCountInfoKeyObj.countInfo({ id: companyDetailData.id }));
           },
         }
       )
@@ -81,7 +84,7 @@ export const HeaderPart: FunctionComponent = () => {
         { userId: userData.id, elemId: companyDetailData.id },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(companyDetailKeyObj.detail({ companyId: companyDetailData.id }));
+            queryClient.invalidateQueries(companyCountInfoKeyObj.countInfo({ id: companyDetailData.id }));
           },
         }
       )
@@ -118,13 +121,13 @@ export const HeaderPart: FunctionComponent = () => {
         <div css={infoBox}>
           <button type="button" css={bookmarkButton(isBookmarked)} onClick={setBookmarkHandler}>
             <BsFillBookmarkFill />
-            기업 북마크 {companyDetailData.bookmark}
+            기업 북마크 {companyCountInfoData?.bookmarkCount.toLocaleString("ko-KR")}
           </button>
           <p css={viewBox}>
             <span css={icon}>
               <FiEye />
             </span>
-            조회수 <span css={viewColor}>{companyDetailData.view.toLocaleString("ko-KR")}</span>
+            조회수 <span css={viewColor}>{companyCountInfoData?.viewCount.toLocaleString("ko-KR")}</span>
           </p>
         </div>
         <p css={companyName}>{companyDetailData.name}</p>
