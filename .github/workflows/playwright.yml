@@ -52,6 +52,7 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: latest
+          run_install: false
 
       - name: pnpm 디렉터리 확인
         id: pnpm-directory
