@@ -5,13 +5,7 @@ interface UseModalProps {
   setModal: (status: string | null) => void;
 }
 
-export const useModal = create<UseModalProps>((set) => {
-  return {
+export const useModal = create<UseModalProps>((set) => ({
     currentModal: null,
-    setModal: (status) => {
-      return set(() => {
-        return { currentModal: status };
-      });
-    },
-  };
-});
+    setModal: (status) => set(() => ({ currentModal: status })),
+  }));

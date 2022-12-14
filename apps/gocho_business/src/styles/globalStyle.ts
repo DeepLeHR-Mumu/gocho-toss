@@ -6,7 +6,7 @@ export const sidebarContainer = css`
   flex-direction: row;
 `;
 export const pageContainer = css`
-  width: 100%;
+  width: calc(100% - 18rem);
 `;
 
 export const globalStyle = css`

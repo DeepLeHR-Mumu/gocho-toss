@@ -8,8 +8,7 @@ interface ToastBoxProps {
   activatedMsg?: string;
 }
 
-export const ToastBox: FunctionComponent<ToastBoxProps> = ({ nickName, activatedMsg }) => {
-  return createPortal(
+export const ToastBox: FunctionComponent<ToastBoxProps> = ({ nickName, activatedMsg }) => createPortal(
     <div css={wrapper} aria-hidden>
       <p css={descCSS}>
         {nickName}
@@ -18,4 +17,3 @@ export const ToastBox: FunctionComponent<ToastBoxProps> = ({ nickName, activated
     </div>,
     document.getElementById("toastPortal") as HTMLElement
   );
-};

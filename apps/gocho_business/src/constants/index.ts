@@ -3,9 +3,7 @@ export const INTERNAL_URL = {
   MY_PAGE: "/mypage",
   JD_LIST: "/jd/list",
   JD_UPLOAD: "/jd/upload",
-  JD_EDIT: (jdIndex: number) => {
-    return `/jd/${jdIndex}/edit`;
-  },
+  JD_EDIT: (jdIndex: number) => `/jd/${jdIndex}/edit`,
   FACTORY_LIST: "/factory/list",
   COMPANY_EDIT: "/company/edit",
   RECRUITER_LIST: "/recruiter/list",

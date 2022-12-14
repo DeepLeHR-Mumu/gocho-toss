@@ -9,7 +9,7 @@ import { UserInfoBox } from "./component/userInfoBox";
 export const SideBar: FunctionComponent = () => (
   <nav css={wrapper}>
     <div css={container}>
-      <CompanyInfoBox name="긴이름입니다, 긴이름입니다긴이름입니다긴이름입니" />
+      <CompanyInfoBox name="긴이름입니다 긴이름입니다 긴이름입니다긴 이름입니" />
       {linkArr.map((linkObj) => (
         <Link href={linkObj.url} key={linkObj.url} passHref>
           <a css={linkCSS}>

@@ -1,7 +1,5 @@
 import { NextPage } from "next";
 
-const MyPage: NextPage = () => {
-  return <>MyPage</>;
-};
+const MyPage: NextPage = () => <>MyPage</>;
 
 export default MyPage;

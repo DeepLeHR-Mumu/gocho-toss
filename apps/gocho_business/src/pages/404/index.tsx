@@ -1,7 +1,5 @@
 import { NextPage } from "next";
 
-const NotFoundPage: NextPage = () => {
-  return <>404page</>;
-};
+const NotFoundPage: NextPage = () => <>404page</>;
 
 export default NotFoundPage;
