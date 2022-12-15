@@ -6,10 +6,10 @@ export interface RequestObjDef {
   jdId: number;
 }
 
-export interface DeleteJobDef {
+export interface DeleteJdDef {
   ({ jdId }: RequestObjDef): Promise<AdminResponseDef>;
 }
 
-export interface useDeleteJobProps {
+export interface useDeleteJdProps {
   (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
 }

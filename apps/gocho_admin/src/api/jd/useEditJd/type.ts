@@ -86,10 +86,10 @@ interface axiosRequestObjDef {
   };
 }
 
-export interface PostEditJobDef {
+export interface PostEditJdDef {
   ({ jdId, dto }: axiosRequestObjDef): Promise<AdminResponseDef>;
 }
 
-export interface useEditJobProps {
+export interface useEditJdProps {
   (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
 }

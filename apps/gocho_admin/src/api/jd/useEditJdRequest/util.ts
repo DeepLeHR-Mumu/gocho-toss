@@ -1,7 +1,7 @@
-import { JobDetailObjDef } from "./type";
+import { ResponseObjDef } from "./type";
 
-export const jobDetailSelector = (job: JobDetailObjDef) => {
-  const positionCamelArr = job.position_arr.map((position) => {
+export const jdDetailSelector = ({ data: jd }: ResponseObjDef) => {
+  const positionCamelArr = jd.position_arr.map((position) => {
     const positionFactoryArr =
       position.place.factory_arr === null
         ? null
@@ -51,9 +51,9 @@ export const jobDetailSelector = (job: JobDetailObjDef) => {
   });
 
   const companyFactoryArr =
-    job.company.factories === null
+    jd.company.factories === null
       ? null
-      : job.company.factories?.map((factory) => {
+      : jd.company.factories?.map((factory) => {
           return {
             id: factory.id,
             address: factory.address,
@@ -62,20 +62,20 @@ export const jobDetailSelector = (job: JobDetailObjDef) => {
         });
 
   return {
-    id: job.id,
-    startTime: job.start_time,
-    endTime: job.end_time,
-    processArr: job.process_arr,
-    applyRouteArr: job.apply_route_arr,
-    applyUrl: job.apply_url,
-    etcArr: job.etc_arr,
-    title: job.title,
-    cut: job.cut,
+    id: jd.id,
+    startTime: jd.start_time,
+    endTime: jd.end_time,
+    processArr: jd.process_arr,
+    applyRouteArr: jd.apply_route_arr,
+    applyUrl: jd.apply_url,
+    etcArr: jd.etc_arr,
+    title: jd.title,
+    cut: jd.cut,
     positionArr: positionCamelArr,
     company: {
-      companyId: job.company.id,
-      name: job.company.name,
-      logoUrl: job.company.logo_url,
+      companyId: jd.company.id,
+      name: jd.company.name,
+      logoUrl: jd.company.logo_url,
       factories: companyFactoryArr,
     },
   };

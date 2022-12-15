@@ -5,13 +5,13 @@ import { AdminResponseDef } from "shared-type/api/responseType";
 
 import { axiosInstance } from "@api/axiosInstance";
 
-import { DeleteJobDef, RequestObjDef, useDeleteJobProps } from "./type";
+import { DeleteJdDef, RequestObjDef, useDeleteJdProps } from "./type";
 
-export const deleteJob: DeleteJobDef = async (requestObj) => {
+export const deleteJd: DeleteJdDef = async (requestObj) => {
   const { data } = await axiosInstance.delete(`/jds/${requestObj.jdId}`);
   return data;
 };
 
-export const useDeleteJob: useDeleteJobProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(deleteJob);
+export const useDeleteJd: useDeleteJdProps = () => {
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(deleteJd);
 };

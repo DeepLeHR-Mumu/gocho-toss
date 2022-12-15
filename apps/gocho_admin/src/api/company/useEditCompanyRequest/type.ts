@@ -1,8 +1,10 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
-import { companyDetailKeyObj } from "../keyFactory";
+export interface RequestObjDef {
+  companyId: number;
+}
 
-export interface CompanyObjDef {
+interface CompanyObjDef {
   id: number;
   name: string;
   business_number: number;
@@ -58,6 +60,13 @@ export interface CompanyObjDef {
 export interface ResponseObjDef {
   data: CompanyObjDef;
 }
+
+export const companyDetailKeyObj = {
+  all: [{ data: "companyDetail" }] as const,
+  detail: (requestObj: RequestObjDef) => {
+    return [{ data: "companyDetail", requestObj }] as const;
+  },
+};
 
 export interface GetEditCompanyRequestDef {
   ({ queryKey }: QueryFunctionContext<ReturnType<typeof companyDetailKeyObj.detail>>): Promise<ResponseObjDef>;

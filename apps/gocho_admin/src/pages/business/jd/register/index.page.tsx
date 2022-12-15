@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { useJobDetail } from "@api/job/useJobDetail";
+import { useJdDetail } from "@api/jd/useJdDetail";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
@@ -9,7 +9,7 @@ const JdRegisterDetail: NextPage = () => {
   const router = useRouter();
   const jdId = Number(router.query.id);
 
-  const { data: jobDataObj, isLoading, isError } = useJobDetail({ id: jdId });
+  const { data: jobDataObj, isLoading, isError } = useJdDetail({ id: jdId });
 
   if (!jobDataObj || isLoading) {
     return <LoadingScreen />;

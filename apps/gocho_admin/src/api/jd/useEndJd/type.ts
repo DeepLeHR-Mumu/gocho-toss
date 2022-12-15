@@ -6,10 +6,10 @@ export interface RequestObjDef {
   jdId: number;
 }
 
-export interface EndJobDef {
+export interface EndJdDef {
   ({ jdId }: RequestObjDef): Promise<AdminResponseDef>;
 }
 
-export interface useEndJobProps {
+export interface useEndJdProps {
   (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
 }

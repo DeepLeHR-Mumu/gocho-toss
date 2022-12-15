@@ -84,10 +84,10 @@ interface axiosRequestObjDef {
   };
 }
 
-export interface PostJobDef {
+export interface PostJdDef {
   (dto: axiosRequestObjDef): Promise<AdminResponseDef>;
 }
 
-export interface useAddJobProps {
+export interface useAddJdProps {
   (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
 }

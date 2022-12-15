@@ -1,18 +1,23 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
-import { recruiterArrKeyObj } from "../keyFactory";
-
-export interface RecruiterDef {
+interface RecruiterDef {
   email: string;
   name: string;
   department: string;
 }
 
-export interface RecruiterArrResponseObjDef {
+export interface ResponseObjDef {
   data: RecruiterDef[];
   count: number;
 }
 
+export const recruiterArrKeyObj = {
+  all: [{ data: "recruiterArr" }] as const,
+  arr: () => {
+    return [{ data: "recruiterArr" }] as const;
+  },
+};
+
 export interface GetRecruiterArrDef {
-  ({ queryKey }: QueryFunctionContext<ReturnType<typeof recruiterArrKeyObj.arr>>): Promise<RecruiterArrResponseObjDef>;
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof recruiterArrKeyObj.arr>>): Promise<ResponseObjDef>;
 }

@@ -5,23 +5,24 @@ import { AdminResponseDef } from "shared-type/api/responseType";
 
 import { axiosInstance } from "@api/axiosInstance";
 
-import { PostJobDef, RequestObjDef, useAddJobProps } from "./type";
+import { PostEditJdDef, RequestObjDef, useEditJdProps } from "./type";
 
-export const postAddJob: PostJobDef = async (requestObj) => {
+export const putEditJd: PostEditJdDef = async (requestObj) => {
   const formData = new FormData();
   const json = JSON.stringify(requestObj.dto);
   const blob = new Blob([json], { type: "application/json" });
   formData.append("dto", blob);
 
-  const { data } = await axiosInstance.post("/jds", formData, {
+  const { data } = await axiosInstance.put(`/jds/${requestObj.jdId}`, formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return data;
 };
 
-export const useAddJob: useAddJobProps = () => {
+export const useEditJd: useEditJdProps = () => {
   return useMutation<AdminResponseDef, AxiosError, RequestObjDef>((requestObj) => {
     const newRequestObj = {
+      ...requestObj,
       dto: {
         ...requestObj.dto,
         start_time: new Date(requestObj.dto.start_time).getTime(),
@@ -40,6 +41,6 @@ export const useAddJob: useAddJobProps = () => {
         }),
       },
     };
-    return postAddJob(newRequestObj);
+    return putEditJd(newRequestObj);
   });
 };

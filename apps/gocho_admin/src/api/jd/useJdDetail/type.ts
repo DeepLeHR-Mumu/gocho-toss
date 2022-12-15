@@ -1,6 +1,8 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
-import { jobDetailKeyObj } from "../keyFactory";
+export interface RequestObjDef {
+  id: number | null;
+}
 
 interface FactoryObjDef {
   id: number;
@@ -45,7 +47,7 @@ interface PositionObjDef {
   preferred_etc_arr: string[] | null;
 }
 
-export interface JobDetailObjDef {
+interface JdDetailObjDef {
   id: number;
   title: string;
   cut: boolean;
@@ -64,10 +66,17 @@ export interface JobDetailObjDef {
   };
 }
 
-interface ResponseObjDef {
-  data: JobDetailObjDef;
+export interface ResponseObjDef {
+  data: JdDetailObjDef;
 }
 
-export interface GetJobDetailDef {
-  ({ queryKey }: QueryFunctionContext<ReturnType<typeof jobDetailKeyObj.detail>>): Promise<ResponseObjDef>;
+export const jdDetailKeyObj = {
+  all: [{ data: "jdDetail" }] as const,
+  detail: (requestObj: RequestObjDef) => {
+    return [{ data: "jdDetail", requestObj }] as const;
+  },
+};
+
+export interface GetJdDetailDef {
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof jdDetailKeyObj.detail>>): Promise<ResponseObjDef>;
 }

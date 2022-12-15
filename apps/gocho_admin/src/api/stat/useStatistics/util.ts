@@ -1,6 +1,6 @@
-import { StatisticsObjDef } from "./type";
+import { ResponseObjDef } from "./type";
 
-export const statSelector = (statistics: StatisticsObjDef) => {
+export const statSelector = ({ data: statistics }: ResponseObjDef) => {
   return {
     allUsers: statistics.user.all_users,
     todayUser: statistics.user.today_user,

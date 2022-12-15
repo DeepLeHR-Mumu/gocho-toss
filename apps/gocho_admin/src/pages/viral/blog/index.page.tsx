@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 
 import { dateConverter } from "shared-util/date";
 
-import { useJobArr } from "@api/job/useJobArr";
+import { useJdArr } from "@api/jd/useJdArr";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { LoadingScreen, ErrorScreen } from "@component/screen";
 
@@ -11,10 +11,10 @@ import { sectionContainer, sectionTitle, buttonContainer, naverButton, jdButton 
 
 const Blog: NextPage = () => {
   const {
-    data: jobDataArr,
+    data: jdDataArr,
     isLoading,
     isError,
-  } = useJobArr({
+  } = useJdArr({
     order: "popular",
     filter: "todayUpload",
     limit: 0,
@@ -110,7 +110,7 @@ const Blog: NextPage = () => {
     }
   };
 
-  if (!jobDataArr || isLoading) {
+  if (!jdDataArr || isLoading) {
     return <LoadingScreen />;
   }
 
@@ -128,7 +128,7 @@ const Blog: NextPage = () => {
             css={jdButton}
             type="button"
             onClick={() => {
-              return copyViral(jobDataArr.jobDataArr);
+              return copyViral(jdDataArr.jdDataArr);
             }}
           >
             오늘의 공고 복사하기
@@ -143,7 +143,7 @@ const Blog: NextPage = () => {
             css={naverButton}
             type="button"
             onClick={() => {
-              return copyBlogTodayJob(jobDataArr.jobDataArr);
+              return copyBlogTodayJob(jdDataArr.jdDataArr);
             }}
           >
             오늘의 채용공고 복사하기
@@ -152,7 +152,7 @@ const Blog: NextPage = () => {
             css={naverButton}
             type="button"
             onClick={() => {
-              return copyBlogTag(jobDataArr.jobDataArr);
+              return copyBlogTag(jdDataArr.jdDataArr);
             }}
           >
             태그 복사하기

@@ -7,7 +7,7 @@ import { dateConverter } from "shared-util/date";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
 
-import { useJobDetail } from "@api/job/useJobDetail";
+import { useJdDetail } from "@api/jd/useJdDetail";
 import { useAddTopBanner } from "@api/banner/useAddTopBanner";
 import { pageTitle } from "@style/commonStyles";
 
@@ -39,7 +39,7 @@ export const UploadBannerPart: FunctionComponent = () => {
   const queryClient = useQueryClient();
   const { register, watch, setValue, handleSubmit } = useForm<BannerSubmitFormValues>();
 
-  const { data: jobData } = useJobDetail({ id: jobId });
+  const { data: jobData } = useJdDetail({ id: jobId });
   const { mutate: addMutate } = useAddTopBanner();
 
   const submitBannerHandler: SubmitHandler<BannerSubmitFormValues> = (bannerSubmitObj) => {

@@ -5,13 +5,13 @@ import { AdminResponseDef } from "shared-type/api/responseType";
 
 import { axiosInstance } from "@api/axiosInstance";
 
-import { EndJobDef, RequestObjDef, useEndJobProps } from "./type";
+import { EndJdDef, RequestObjDef, useEndJdProps } from "./type";
 
-export const patchEndJob: EndJobDef = async (requestObj) => {
+export const patchEndJd: EndJdDef = async (requestObj) => {
   const { data } = await axiosInstance.patch(`/jds/${requestObj.jdId}`);
   return data;
 };
 
-export const useEndJob: useEndJobProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(patchEndJob);
+export const useEndJd: useEndJdProps = () => {
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(patchEndJd);
 };

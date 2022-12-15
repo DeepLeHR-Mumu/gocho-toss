@@ -1,8 +1,14 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
-import { companyArrKeyObj } from "../keyFactory";
+export interface RequestObjDef {
+  q?: string;
+  limit?: number;
+  offset?: number;
+  order: "recent" | "comment" | "name" | "popular" | "rand" | "view" | undefined;
+  word?: string;
+}
 
-export interface CompanyObjDef {
+interface CompanyObjDef {
   id: number;
   name: string;
   logo_url: string;
@@ -14,6 +20,13 @@ export interface ResponseObjDef {
   count: number;
 }
 
+export const companyArrKeyObj = {
+  all: [{ data: "companyArr" }] as const,
+  arr: (requestObj: RequestObjDef) => {
+    return [{ data: "companyArr", requestObj }] as const;
+  },
+};
+
 export interface GetCompanyArrDef {
-  ({ queryKey }: QueryFunctionContext<ReturnType<typeof companyArrKeyObj.companyArr>>): Promise<ResponseObjDef>;
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof companyArrKeyObj.arr>>): Promise<ResponseObjDef>;
 }

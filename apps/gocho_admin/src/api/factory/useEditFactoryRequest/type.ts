@@ -1,8 +1,10 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
-import { factoryDetailKeyObj } from "../keyFactory";
+export interface RequestObjDef {
+  factoryId: number;
+}
 
-export interface FactoryObjDef {
+interface FactoryObjDef {
   id: number;
   name: string;
   address: string;
@@ -23,6 +25,13 @@ export interface ResponseObjDef {
   data: FactoryObjDef;
 }
 
+export const factoryEditKeyObj = {
+  all: [{ data: "factoryEdit" }] as const,
+  edit: (requestObj: RequestObjDef) => {
+    return [{ data: "factoryEdit", requestObj }] as const;
+  },
+};
+
 export interface GetEditFactoryRequestDef {
-  ({ queryKey }: QueryFunctionContext<ReturnType<typeof factoryDetailKeyObj.edit>>): Promise<ResponseObjDef>;
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof factoryEditKeyObj.edit>>): Promise<ResponseObjDef>;
 }

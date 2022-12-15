@@ -1,8 +1,10 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
-import { factoryArrKeyObj } from "../keyFactory";
+export interface RequestObjDef {
+  companyId: number;
+}
 
-export interface FactoryObjDef {
+interface FactoryObjDef {
   id: number;
   name: string;
   address: string;
@@ -22,6 +24,13 @@ export interface FactoryObjDef {
 export interface ResponseObjDef {
   data: FactoryObjDef[];
 }
+
+export const factoryArrKeyObj = {
+  all: [{ data: "factoryArr" }] as const,
+  arr: (requestObj: RequestObjDef) => {
+    return [{ data: "factoryArr", requestObj }] as const;
+  },
+};
 
 export interface GetFactoryArrDef {
   ({ queryKey }: QueryFunctionContext<ReturnType<typeof factoryArrKeyObj.arr>>): Promise<ResponseObjDef>;

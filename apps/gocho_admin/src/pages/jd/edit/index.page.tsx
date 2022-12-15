@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
 import { useFindCompany } from "@api/company/useFindCompany";
-import { useEditJob } from "@api/job/useEditJob";
-import { useJobDetail } from "@api/job/useJobDetail";
+import { useEditJd } from "@api/jd/useEditJd";
+import { useJdDetail } from "@api/jd/useJdDetail";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
@@ -24,9 +24,9 @@ const JdEdit: NextPage = () => {
   const [searchWord, setSearchWord] = useState<string>("");
   const [checkMsg, setCheckMsg] = useState<string>();
 
-  const { data: jobData } = useJobDetail({ id: jobId });
+  const { data: jobData } = useJdDetail({ id: jobId });
   const { data: companyDataObj, isLoading, isError } = useFindCompany({ word: searchWord, order: "recent" });
-  const { mutate: editJobMutate } = useEditJob();
+  const { mutate: editJobMutate } = useEditJd();
 
   const jobForm = useForm<JobFormValues>({
     defaultValues: {

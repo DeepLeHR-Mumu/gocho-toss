@@ -1,13 +1,11 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
-import { statisticsKeyObj } from "../keyFactory";
-
 export interface MonthlyDataObjDef {
   month: string;
   value: number;
 }
 
-export interface StatisticsObjDef {
+interface StatisticsObjDef {
   user: {
     all_users: number;
     today_user: number;
@@ -29,6 +27,10 @@ export interface ResponseObjDef {
   data: StatisticsObjDef;
   count: number;
 }
+
+export const statisticsKeyObj = {
+  all: [{ data: "statistics" }] as const,
+};
 
 export interface GetStatisticsDef {
   ({ queryKey }: QueryFunctionContext<typeof statisticsKeyObj.all>): Promise<ResponseObjDef>;

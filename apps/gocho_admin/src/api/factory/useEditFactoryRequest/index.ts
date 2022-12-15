@@ -2,8 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { axiosInstance } from "@api/axiosInstance";
 
-import { factoryDetailKeyObj, FactoryDetailRequestObjDef } from "../keyFactory";
-import { GetEditFactoryRequestDef } from "./type";
+import { factoryEditKeyObj, GetEditFactoryRequestDef, RequestObjDef } from "./type";
 import { factoryDetailSelector } from "./util";
 
 export const getEditFactoryRequest: GetEditFactoryRequestDef = async ({ queryKey: [{ requestObj }] }) => {
@@ -11,9 +10,9 @@ export const getEditFactoryRequest: GetEditFactoryRequestDef = async ({ queryKey
   return data;
 };
 
-export const useEditFactoryRequest = (requestObj: FactoryDetailRequestObjDef) => {
-  return useQuery(factoryDetailKeyObj.edit(requestObj), getEditFactoryRequest, {
-    select: ({ data }) => {
+export const useEditFactoryRequest = (requestObj: RequestObjDef) => {
+  return useQuery(factoryEditKeyObj.edit(requestObj), getEditFactoryRequest, {
+    select: (data) => {
       return factoryDetailSelector(data);
     },
   });

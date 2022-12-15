@@ -1,6 +1,6 @@
-import { CompanyObjDef } from "./type";
+import { ResponseObjDef } from "./type";
 
-export const companyArrSelector = (companyArr: CompanyObjDef[], count: number) => {
+export const companyArrSelector = ({ data: companyArr, count }: ResponseObjDef) => {
   const companyDataArr = companyArr.map((company) => {
     return {
       id: company.id,
