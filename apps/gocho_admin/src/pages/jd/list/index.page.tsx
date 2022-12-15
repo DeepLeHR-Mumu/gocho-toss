@@ -1,8 +1,7 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { useJobArr } from "shared-api/admin/job/useJobArr";
-
+import { useJdArr } from "@api/jd/useJdArr";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 import { BottomPagination } from "@component/bottomPagination";
 import { JD_LIST_URL } from "@constant/internalURL";
@@ -28,7 +27,7 @@ const JdList: NextPage = () => {
     data: jobDataObj,
     isLoading,
     isError,
-  } = useJobArr({
+  } = useJdArr({
     order: "recent",
     filter: "valid",
     limit: JD_SEARCH_LIMIT,
@@ -60,7 +59,7 @@ const JdList: NextPage = () => {
             </tr>
           </thead>
           <tbody>
-            {jobDataObj.jobDataArr.map((job) => {
+            {jobDataObj.jdDataArr.map((job) => {
               return <JobCard key={`ManagerJobCard${job.id}`} job={job} />;
             })}
           </tbody>

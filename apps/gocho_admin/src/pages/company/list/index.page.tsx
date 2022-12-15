@@ -1,8 +1,7 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { useCompanyArr } from "shared-api/admin/company/useCompanyArr";
-
+import { useCompanyArr } from "@api/company/useCompanyArr";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 import { BottomPagination } from "@component/bottomPagination";
 import { COMPANY_LIST_URL } from "@constant/internalURL";
