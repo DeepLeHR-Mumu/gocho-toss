@@ -8,15 +8,13 @@ export interface RequestObjDef {
   word?: string;
 }
 
-interface CompanyObjDef {
-  id: number;
-  name: string;
-  logo_url: string;
-  comment_count: number;
-}
-
 export interface ResponseObjDef {
-  data: CompanyObjDef[];
+  data: {
+    id: number;
+    name: string;
+    logo_url: string;
+    comment_count: number;
+  }[];
   count: number;
 }
 

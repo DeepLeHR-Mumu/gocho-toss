@@ -12,26 +12,24 @@ export interface RequestObjDef {
   companyId?: number;
 }
 
-interface JdObjDef {
-  id: number;
-  company: { id: number; name: string; logo_url: string };
-  status: string;
-  title: string;
-  cut: boolean;
-  view: number;
-  start_time: number;
-  end_time: number;
-  apply_url: string;
-  task_arr: string[];
-  edu_summary: string[];
-  place_arr: string[];
-  rotation_arr: string[];
-  contract_type: string[];
-  required_exp_arr: string[];
-}
-
 export interface ResponseObjDef {
-  data: JdObjDef[];
+  data: {
+    id: number;
+    company: { id: number; name: string; logo_url: string };
+    status: string;
+    title: string;
+    cut: boolean;
+    view: number;
+    start_time: number;
+    end_time: number;
+    apply_url: string;
+    task_arr: string[];
+    edu_summary: string[];
+    place_arr: string[];
+    rotation_arr: string[];
+    contract_type: string[];
+    required_exp_arr: string[];
+  }[];
   count: number;
 }
 

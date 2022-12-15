@@ -1,13 +1,11 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
-interface RecruiterDef {
-  email: string;
-  name: string;
-  department: string;
-}
-
 export interface ResponseObjDef {
-  data: RecruiterDef[];
+  data: {
+    email: string;
+    name: string;
+    department: string;
+  }[];
   count: number;
 }
 
