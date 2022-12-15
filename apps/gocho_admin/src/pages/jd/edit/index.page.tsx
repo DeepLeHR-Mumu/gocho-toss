@@ -30,7 +30,7 @@ const JdEdit: NextPage = () => {
 
   const jobForm = useForm<JobFormValues>({
     defaultValues: {
-      company_id: jobData?.companyId,
+      company_id: jobData?.company.id,
       position_arr: [blankPosition],
     },
   });
@@ -75,7 +75,7 @@ const JdEdit: NextPage = () => {
     });
 
     reset({
-      company_id: jobData?.companyId,
+      company_id: jobData?.company.id,
       title: jobData?.title,
       start_time: new Date(newStartTime).toISOString().substring(0, 19),
       end_time: new Date(newEndTime).toISOString().substring(0, 19),

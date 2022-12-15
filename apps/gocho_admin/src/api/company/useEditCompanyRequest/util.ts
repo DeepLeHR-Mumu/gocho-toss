@@ -1,6 +1,6 @@
-import { CompanyResponseObjDef } from "../type";
+import { CompanyObjDef } from "./type";
 
-export const selector = (company: CompanyResponseObjDef) => {
+export const companyDetailSelector = (company: CompanyObjDef) => {
   return {
     id: company.id,
     name: company.name,

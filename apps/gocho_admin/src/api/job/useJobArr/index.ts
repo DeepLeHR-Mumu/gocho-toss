@@ -4,7 +4,7 @@ import { axiosNoTokenInstance } from "@api/axiosInstance";
 
 import { jobArrKeyObj, JobArrRequestObjDef } from "../keyFactory";
 import { GetJobArrDef } from "./type";
-import { selector } from "./util";
+import { jobArrSelector } from "./util";
 
 export const getJobArr: GetJobArrDef = async ({ queryKey: [{ requestObj }] }) => {
   const { data } = await axiosNoTokenInstance.get("/jds", { params: requestObj });
@@ -14,7 +14,7 @@ export const getJobArr: GetJobArrDef = async ({ queryKey: [{ requestObj }] }) =>
 export const useJobArr = (requestObj: JobArrRequestObjDef) => {
   return useQuery(jobArrKeyObj.jobArr(requestObj), getJobArr, {
     select: ({ data, count }) => {
-      return selector(data, count);
+      return jobArrSelector(data, count);
     },
   });
 };

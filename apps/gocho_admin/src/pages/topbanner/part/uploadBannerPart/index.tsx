@@ -123,11 +123,11 @@ export const UploadBannerPart: FunctionComponent = () => {
                 <div css={cardContainer}>
                   <div css={companyLogoWrapper}>
                     <div css={companyLogoBox}>
-                      <Image layout="fill" objectFit="contain" src={jobData?.companyLogoUrl || defaultCompanyLogo} />
+                      <Image layout="fill" objectFit="contain" src={jobData?.company.logoUrl || defaultCompanyLogo} />
                     </div>
                   </div>
                   <div css={infoContainer}>
-                    <p css={companyName}>{jobData?.companyName}</p>
+                    <p css={companyName}>{jobData?.company.name}</p>
                     <p css={date}>
                       {`${jobStartMonth}/${jobStartDate}`}~{`${jobEndMonth}/${jobEndDate}`}
                     </p>

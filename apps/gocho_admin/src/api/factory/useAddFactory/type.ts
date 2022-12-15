@@ -3,7 +3,18 @@ import { UseMutationResult } from "@tanstack/react-query";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { FactoryRequestObjDef } from "../type";
+export interface RequestObjDef {
+  company_id: number;
+  factory_name: string;
+  address: string;
+  male_number: number;
+  female_number: number;
+  product: string;
+  bus_bool: boolean;
+  bus_etc: string;
+  dormitory_bool: boolean;
+  dormitory_etc: string;
+}
 
 export interface PostFactoryDef {
   ({
@@ -17,9 +28,9 @@ export interface PostFactoryDef {
     bus_etc,
     dormitory_bool,
     dormitory_etc,
-  }: FactoryRequestObjDef): Promise<AdminResponseDef>;
+  }: RequestObjDef): Promise<AdminResponseDef>;
 }
 
 export interface useAddFactoryProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError, FactoryRequestObjDef>;
+  (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
 }

@@ -1,13 +1,19 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
 import { companyArrKeyObj } from "../keyFactory";
-import { CompanyDef } from "../type";
 
-export interface JobArrResponseObjDef {
-  data: CompanyDef[];
+export interface CompanyObjDef {
+  id: number;
+  name: string;
+  logo_url: string;
+  comment_count: number;
+}
+
+export interface ResponseObjDef {
+  data: CompanyObjDef[];
   count: number;
 }
 
 export interface GetCompanyArrDef {
-  ({ queryKey }: QueryFunctionContext<ReturnType<typeof companyArrKeyObj.companyArr>>): Promise<JobArrResponseObjDef>;
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof companyArrKeyObj.companyArr>>): Promise<ResponseObjDef>;
 }

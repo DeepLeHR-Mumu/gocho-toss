@@ -4,7 +4,7 @@ import { axiosInstance } from "@api/axiosInstance";
 
 import { factoryArrKeyObj, FactoryArrRequestObjDef } from "../keyFactory";
 import { GetFactoryArrDef } from "./type";
-import { selector } from "./util";
+import { factoryArrSelector } from "./util";
 
 export const getFactoryArr: GetFactoryArrDef = async ({ queryKey: [{ requestObj }] }) => {
   const { data } = await axiosInstance.get("/factories", { params: requestObj });
@@ -14,7 +14,7 @@ export const getFactoryArr: GetFactoryArrDef = async ({ queryKey: [{ requestObj 
 export const useFactoryArr = (requestObj: FactoryArrRequestObjDef) => {
   return useQuery(factoryArrKeyObj.arr(requestObj), getFactoryArr, {
     select: ({ data }) => {
-      return selector(data);
+      return factoryArrSelector(data);
     },
   });
 };

@@ -1,6 +1,6 @@
-import { JobObjDef } from "../type";
+import { JobObjDef } from "./type";
 
-export const selector = (jobArr: JobObjDef[], count: number) => {
+export const jobArrSelector = (jobArr: JobObjDef[], count: number) => {
   const jobDataArr = jobArr.map((job) => {
     return {
       id: job.id,

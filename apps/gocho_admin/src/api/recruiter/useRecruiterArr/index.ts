@@ -4,7 +4,7 @@ import { axiosInstance } from "@api/axiosInstance";
 
 import { recruiterArrKeyObj } from "../keyFactory";
 import { GetRecruiterArrDef } from "./type";
-import { selector } from "./util";
+import { recruiterArrSelector } from "./util";
 
 export const getRecruiterArr: GetRecruiterArrDef = async () => {
   const { data } = await axiosInstance.get(`/managers`);
@@ -14,7 +14,7 @@ export const getRecruiterArr: GetRecruiterArrDef = async () => {
 export const useRecruiterArr = () => {
   return useQuery(recruiterArrKeyObj.arr(), getRecruiterArr, {
     select: ({ data, count }) => {
-      return selector(data, count);
+      return recruiterArrSelector(data, count);
     },
   });
 };

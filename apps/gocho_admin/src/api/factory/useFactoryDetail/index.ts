@@ -4,7 +4,7 @@ import { axiosInstance } from "@api/axiosInstance";
 
 import { factoryDetailKeyObj, FactoryDetailRequestObjDef } from "../keyFactory";
 import { GetFactoryDetailDef } from "./type";
-import { selector } from "./util";
+import { factoryDetailSelector } from "./util";
 
 export const getFactoryDetail: GetFactoryDetailDef = async ({ queryKey: [{ requestObj }] }) => {
   const { data } = await axiosInstance.get(`/factories/${requestObj.factoryId}`);
@@ -14,7 +14,7 @@ export const getFactoryDetail: GetFactoryDetailDef = async ({ queryKey: [{ reque
 export const useFactoryDetail = (requestObj: FactoryDetailRequestObjDef) => {
   return useQuery(factoryDetailKeyObj.detail(requestObj), getFactoryDetail, {
     select: ({ data }) => {
-      return selector(data);
+      return factoryDetailSelector(data);
     },
   });
 };

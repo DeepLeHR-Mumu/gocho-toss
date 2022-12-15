@@ -4,7 +4,7 @@ import { axiosInstance } from "@api/axiosInstance";
 
 import { companyDetailKeyObj, CompanyDetailRequestObjDef } from "../keyFactory";
 import { GetEditCompanyRequestDef } from "./type";
-import { selector } from "./util";
+import { companyDetailSelector } from "./util";
 
 export const getEditCompanyRequest: GetEditCompanyRequestDef = async ({ queryKey: [{ requestObj }] }) => {
   const { data } = await axiosInstance.get(`/companies/${requestObj.companyId}/requests`);
@@ -14,7 +14,7 @@ export const getEditCompanyRequest: GetEditCompanyRequestDef = async ({ queryKey
 export const useEditCompanyRequest = (requestObj: CompanyDetailRequestObjDef) => {
   return useQuery(companyDetailKeyObj.detail(requestObj), getEditCompanyRequest, {
     select: ({ data }) => {
-      return selector(data);
+      return companyDetailSelector(data);
     },
   });
 };

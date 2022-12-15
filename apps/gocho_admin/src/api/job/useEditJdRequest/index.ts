@@ -4,7 +4,7 @@ import { axiosInstance } from "@api/axiosInstance";
 
 import { jobDetailKeyObj, JobDetailRequestObjDef } from "../keyFactory";
 import { GetEditJdRequestDef } from "./type";
-import { selector } from "./util";
+import { jobDetailSelector } from "./util";
 
 export const getEditJdRequest: GetEditJdRequestDef = async ({ queryKey: [{ requestObj }] }) => {
   const { data } = await axiosInstance.get(`/jds/${requestObj.id}/requests`);
@@ -14,7 +14,7 @@ export const getEditJdRequest: GetEditJdRequestDef = async ({ queryKey: [{ reque
 export const useEditJdRequest = (requestObj: JobDetailRequestObjDef) => {
   return useQuery(jobDetailKeyObj.detail(requestObj), getEditJdRequest, {
     select: ({ data }) => {
-      return selector(data);
+      return jobDetailSelector(data);
     },
   });
 };

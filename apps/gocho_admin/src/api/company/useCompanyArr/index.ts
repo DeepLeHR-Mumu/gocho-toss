@@ -4,7 +4,7 @@ import { axiosNoTokenInstance } from "@api/axiosInstance";
 
 import { companyArrKeyObj, CompanyArrRequestObjDef } from "../keyFactory";
 import { GetCompanyArrDef } from "./type";
-import { selector } from "./util";
+import { companyArrSelector } from "./util";
 
 export const getCompanyArr: GetCompanyArrDef = async ({ queryKey: [{ requestObj }] }) => {
   const { data } = await axiosNoTokenInstance.get(`/companies`, { params: requestObj });
@@ -14,7 +14,7 @@ export const getCompanyArr: GetCompanyArrDef = async ({ queryKey: [{ requestObj 
 export const useCompanyArr = (requestObj: CompanyArrRequestObjDef) => {
   return useQuery(companyArrKeyObj.companyArr(requestObj), getCompanyArr, {
     select: ({ data, count }) => {
-      return selector(data, count);
+      return companyArrSelector(data, count);
     },
   });
 };

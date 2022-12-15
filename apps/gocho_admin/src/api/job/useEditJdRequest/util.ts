@@ -1,7 +1,7 @@
-import { JobDetailObjDef } from "../type";
+import { JobDetailObjDef } from "./type";
 
-export const selector = (jobDetailObj: JobDetailObjDef) => {
-  const positionCamelArr = jobDetailObj.position_arr.map((position) => {
+export const jobDetailSelector = (job: JobDetailObjDef) => {
+  const positionCamelArr = job.position_arr.map((position) => {
     const positionFactoryArr =
       position.place.factory_arr === null
         ? null
@@ -26,6 +26,7 @@ export const selector = (jobDetailObj: JobDetailObjDef) => {
       },
       taskDetailArr: position.task_detail_arr,
       rotationArr: position.rotation_arr,
+      rotationEtc: position.rotation_etc,
       place: {
         addressArr: position.place.address_arr,
         factoryArr: positionFactoryArr,
@@ -36,7 +37,7 @@ export const selector = (jobDetailObj: JobDetailObjDef) => {
       payArr: position.pay_arr,
       preferredCertiArr: position.preferred_certi_arr,
       preferredEtcArr: position.preferred_etc_arr,
-      edu_summary: {
+      eduSummary: {
         middle: position.edu_summary.middle,
         high: position.edu_summary.high,
         college: position.edu_summary.college,
@@ -50,9 +51,9 @@ export const selector = (jobDetailObj: JobDetailObjDef) => {
   });
 
   const companyFactoryArr =
-    jobDetailObj.company.factories === null
+    job.company.factories === null
       ? null
-      : jobDetailObj.company.factories?.map((factory) => {
+      : job.company.factories?.map((factory) => {
           return {
             id: factory.id,
             address: factory.address,
@@ -61,20 +62,20 @@ export const selector = (jobDetailObj: JobDetailObjDef) => {
         });
 
   return {
-    id: jobDetailObj.id,
-    startTime: jobDetailObj.start_time,
-    endTime: jobDetailObj.end_time,
-    processArr: jobDetailObj.process_arr,
-    applyRouteArr: jobDetailObj.apply_route_arr,
-    applyUrl: jobDetailObj.apply_url,
-    etcArr: jobDetailObj.etc_arr,
-    title: jobDetailObj.title,
-    cut: jobDetailObj.cut,
+    id: job.id,
+    startTime: job.start_time,
+    endTime: job.end_time,
+    processArr: job.process_arr,
+    applyRouteArr: job.apply_route_arr,
+    applyUrl: job.apply_url,
+    etcArr: job.etc_arr,
+    title: job.title,
+    cut: job.cut,
     positionArr: positionCamelArr,
     company: {
-      companyId: jobDetailObj.company.id,
-      name: jobDetailObj.company.name,
-      logoUrl: jobDetailObj.company.logo_url,
+      companyId: job.company.id,
+      name: job.company.name,
+      logoUrl: job.company.logo_url,
       factories: companyFactoryArr,
     },
   };

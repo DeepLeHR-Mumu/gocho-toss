@@ -1,10 +1,26 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
 import { factoryDetailKeyObj } from "../keyFactory";
-import { FactoryResponseObjDef } from "../type";
+
+export interface FactoryObjDef {
+  id: number;
+  name: string;
+  address: string;
+  male_number: number;
+  female_number: number;
+  product: string;
+  bus: {
+    exists: boolean;
+    desc: string | null;
+  };
+  dormitory: {
+    exists: boolean;
+    desc: string | null;
+  };
+}
 
 export interface ResponseObjDef {
-  data: FactoryResponseObjDef;
+  data: FactoryObjDef;
 }
 
 export interface GetEditFactoryRequestDef {

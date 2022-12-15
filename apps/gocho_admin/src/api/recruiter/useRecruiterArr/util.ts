@@ -1,6 +1,6 @@
-import { RecruiterDef } from "../type";
+import { RecruiterDef } from "./type";
 
-export const selector = (recruiterArr: RecruiterDef[], count: number) => {
+export const recruiterArrSelector = (recruiterArr: RecruiterDef[], count: number) => {
   const recruiterDataArr = recruiterArr.map((recruiter) => {
     return {
       email: recruiter.email,

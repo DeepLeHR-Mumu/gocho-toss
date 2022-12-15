@@ -13,8 +13,10 @@ export interface CommonDataPartProps {
     etcArr: string[];
     title: string;
     cut: boolean;
-    companyId: number;
-    companyName: string;
+    company: {
+      id: number;
+      name: string;
+    };
   };
   companyDataArr: {
     id: number;

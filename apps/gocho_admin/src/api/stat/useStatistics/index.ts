@@ -4,7 +4,7 @@ import { axiosInstance } from "@api/axiosInstance";
 import { statisticsKeyObj } from "../keyFactory";
 
 import { GetStatisticsDef } from "./type";
-import { selector } from "./util";
+import { statSelector } from "./util";
 
 export const getStatistics: GetStatisticsDef = async () => {
   const { data } = await axiosInstance.get("/admin/dashboard");
@@ -14,7 +14,7 @@ export const getStatistics: GetStatisticsDef = async () => {
 export const useStatistics = () => {
   return useQuery(statisticsKeyObj.all, getStatistics, {
     select: ({ data }) => {
-      return selector(data);
+      return statSelector(data);
     },
   });
 };
