@@ -3,6 +3,7 @@ import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
+  jdId: number;
   dto: {
     company_id: number;
     title: string;
@@ -44,11 +45,12 @@ export interface RequestObjDef {
 }
 
 interface axiosRequestObjDef {
+  jdId: number;
   dto: {
     company_id: number;
     title: string;
-    start_time: number;
-    end_time: number;
+    start_time: number | string;
+    end_time: number | string;
     cut: boolean;
     process_arr: string[];
     apply_route_arr: string[];
@@ -84,10 +86,10 @@ interface axiosRequestObjDef {
   };
 }
 
-export interface PostJobDef {
-  (dto: axiosRequestObjDef): Promise<AdminResponseDef>;
+export interface PostEditJobDef {
+  ({ jdId, dto }: axiosRequestObjDef): Promise<AdminResponseDef>;
 }
 
-export interface useAddJobProps {
+export interface useEditJobProps {
   (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
 }

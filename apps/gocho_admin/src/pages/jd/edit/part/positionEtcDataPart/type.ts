@@ -5,7 +5,6 @@ export interface PositionBoxProps {
   id: string;
   index: number;
   jobForm: UseFormReturn<JobFormValues>;
-
   append: UseFieldArrayAppend<JobFormValues, "position_arr">;
   remove: UseFieldArrayRemove;
 }

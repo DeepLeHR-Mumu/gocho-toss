@@ -3,16 +3,21 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 import { axiosInstance } from "../../axiosInstance";
-import { PostMainBannerDef, useAddMainBannerProps, RequestObjDef } from "./type";
+import { PostMainBannerDef, RequestObjDef, useAddMainBannerProps } from "./type";
 
 export const postMainBanner: PostMainBannerDef = async (requestObj) => {
-  const { data } = await axiosInstance.post("/banners/main", requestObj, {
+  const formData = new FormData();
+  const json = JSON.stringify(requestObj.dto);
+  const blob = new Blob([json], { type: "application/json" });
+  formData.append("dto", blob);
+  formData.append("image", requestObj.image);
+
+  const { data } = await axiosInstance.post("/banners/main", formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return data;
 };
 
 export const useAddMainBanner: useAddMainBannerProps = () => {
-  const mutationResult = useMutation<AdminResponseDef, AxiosError, RequestObjDef>(postMainBanner);
-  return mutationResult;
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(postMainBanner);
 };

@@ -6,6 +6,7 @@ import { dateConverter } from "shared-util/date";
 import { useDeleteJob } from "shared-api/admin/job/useDeleteJob";
 import { useEndJob } from "shared-api/admin/job/useEndJob";
 
+import { JD_EDIT_URL } from "@constant/internalURL";
 import {
   activeButton,
   buttonContainer,
@@ -77,9 +78,9 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
         <a css={activeButton} href={job.applyUrl} target="_blank" rel="noopener noreferrer">
           채용 링크
         </a>
-        <button css={activeButton} type="button">
+        <a css={activeButton} type="button" href={`${JD_EDIT_URL}/?id=${job.id}`}>
           수정
-        </button>
+        </a>
         <button
           css={deleteButton}
           type="button"
