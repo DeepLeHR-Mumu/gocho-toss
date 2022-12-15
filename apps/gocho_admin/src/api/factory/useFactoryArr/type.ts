@@ -1,12 +1,16 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
 export interface RequestObjDef {
-  companyId: number;
+  companyId?: number;
+  limit?: number;
+  offset?: number;
+  status?: "all" | "upload-waiting" | "modify-waiting" | "upload-reject" | "modify-reject";
 }
 
 export interface ResponseObjDef {
   data: {
     id: number;
+    status: string;
     name: string;
     address: string;
     male_number: number;

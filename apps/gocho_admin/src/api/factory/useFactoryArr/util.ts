@@ -4,6 +4,7 @@ export const factoryArrSelector = ({ data: factoryArr }: ResponseObjDef) => {
   const factoryDataArr = factoryArr.map((factory) => {
     return {
       id: factory.id,
+      status: factory.status,
       address: factory.address,
       name: factory.name,
       maleNumber: factory.male_number,

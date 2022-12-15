@@ -53,7 +53,7 @@ const BusinessCompanyList: NextPage = () => {
 
   return (
     <main css={mainContainer}>
-      <h2 css={pageTitle}>{companyStatus === "upload-waiting" ? "공고 등록 요청 목록" : "공고 수정 요청 목록"}</h2>
+      <h2 css={pageTitle}>{companyStatus === "upload-waiting" ? "기업 등록 요청 목록" : "기업 수정 요청 목록"}</h2>
       <section css={sectionContainer}>
         <button
           type="button"
