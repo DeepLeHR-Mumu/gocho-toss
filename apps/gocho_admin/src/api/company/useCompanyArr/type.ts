@@ -4,6 +4,7 @@ export interface RequestObjDef {
   q?: string;
   limit?: number;
   offset?: number;
+  status?: "all" | "upload-waiting" | "modify-waiting" | "upload-reject" | "modify-reject";
   order: "recent" | "comment" | "name" | "popular" | "rand" | "view" | undefined;
   word?: string;
 }
@@ -11,6 +12,7 @@ export interface RequestObjDef {
 export interface ResponseObjDef {
   data: {
     id: number;
+    status: string;
     name: string;
     logo_url: string;
     comment_count: number;
