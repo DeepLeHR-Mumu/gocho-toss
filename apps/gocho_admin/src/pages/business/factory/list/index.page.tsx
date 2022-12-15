@@ -2,11 +2,14 @@ import type { NextPage } from "next";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-import { ErrorScreen, LoadingScreen } from "@component/screen";
-import { mainContainer, pageTitle } from "@style/commonStyles";
 import { useFactoryArr } from "@api/factory/useFactoryArr";
+import { ErrorScreen, LoadingScreen } from "@component/screen";
+import { BottomPagination } from "@component/bottomPagination";
+import { BUSINESS_FACTORY_LIST_URL } from "@constant/internalURL";
+import { mainContainer, pageTitle } from "@style/commonStyles";
 
 import FactoryCard from "./component/factoryCard";
+import { FACTORY_SEARCH_LIMIT } from "./constant";
 import {
   sectionContainer,
   listChangeButton,
@@ -16,7 +19,6 @@ import {
   factoryNameBox,
   buttonContainer,
 } from "./style";
-import { FACTORY_SEARCH_LIMIT } from "./constant";
 
 const BusinessFactoryList: NextPage = () => {
   const [factoryStatus, setFactoryStatus] = useState<"upload-waiting" | "modify-waiting">("upload-waiting");
@@ -46,6 +48,8 @@ const BusinessFactoryList: NextPage = () => {
     });
   };
 
+  const totalPage = Math.ceil(factoryDataObj.count / FACTORY_SEARCH_LIMIT);
+
   return (
     <main css={mainContainer}>
       <h2 css={pageTitle}>{factoryStatus === "upload-waiting" ? "공장 등록 요청 목록" : "공장 수정 요청 목록"}</h2>
@@ -74,6 +78,7 @@ const BusinessFactoryList: NextPage = () => {
           </tbody>
         </table>
       </section>
+      <BottomPagination totalPage={totalPage} url={BUSINESS_FACTORY_LIST_URL} />
     </main>
   );
 };

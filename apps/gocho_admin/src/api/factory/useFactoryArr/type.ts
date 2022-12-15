@@ -25,6 +25,7 @@ export interface ResponseObjDef {
       desc: string | null;
     };
   }[];
+  count: number;
 }
 
 export const factoryArrKeyObj = {

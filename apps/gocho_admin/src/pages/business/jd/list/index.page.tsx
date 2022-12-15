@@ -1,15 +1,15 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 import { useJdArr } from "@api/jd/useJdArr";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 import { BottomPagination } from "@component/bottomPagination";
-import { JD_LIST_URL } from "@constant/internalURL";
+import { BUSINESS_JD_LIST_URL } from "@constant/internalURL";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 
-import { useState } from "react";
-import { JD_SEARCH_LIMIT } from "./constant";
 import JobCard from "./component/jobCard";
+import { JD_SEARCH_LIMIT } from "./constant";
 import {
   sectionContainer,
   listChangeButton,
@@ -83,7 +83,7 @@ const BusinessJdList: NextPage = () => {
           </tbody>
         </table>
       </section>
-      <BottomPagination totalPage={totalPage} url={JD_LIST_URL} />
+      <BottomPagination totalPage={totalPage} url={BUSINESS_JD_LIST_URL} />
     </main>
   );
 };

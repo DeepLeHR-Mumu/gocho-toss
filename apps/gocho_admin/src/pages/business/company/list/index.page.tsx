@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useCompanyArr } from "@api/company/useCompanyArr";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 import { BottomPagination } from "@component/bottomPagination";
-import { COMPANY_LIST_URL } from "@constant/internalURL";
+import { BUSINESS_COMPANY_LIST_URL } from "@constant/internalURL";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 
 import CompanyCard from "./component/companyCard";
@@ -79,7 +79,7 @@ const BusinessCompanyList: NextPage = () => {
           </tbody>
         </table>
       </section>
-      <BottomPagination totalPage={totalPage} url={COMPANY_LIST_URL} />
+      <BottomPagination totalPage={totalPage} url={BUSINESS_COMPANY_LIST_URL} />
     </main>
   );
 };
