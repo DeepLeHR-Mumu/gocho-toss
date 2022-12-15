@@ -1,28 +1,26 @@
 import { FunctionComponent } from "react";
 import Link from "next/link";
 
-import { INTERNAL_URL } from "@/constants";
+import { container, iconCSS, linkCSS, wrapper } from "./style";
+import { linkArr } from "./constant";
+import { CompanyInfoBox } from "./component/companyInfoBox";
+import { UserInfoBox } from "./component/userInfoBox";
 
-import { wrapper } from "./style";
-
-export const SideBar: FunctionComponent = () => {
-  return (
-    <nav css={wrapper}>
-      <Link href={INTERNAL_URL.JD_LIST}>
-        <a>공고</a>
-      </Link>
-      <Link href={INTERNAL_URL.FACTORY_LIST}>
-        <a>공장</a>
-      </Link>
-      <Link href={INTERNAL_URL.COMPANY_EDIT}>
-        <a>기업 정보 수정</a>
-      </Link>
-      <Link href={INTERNAL_URL.RECRUITER_LIST}>
-        <a>기업 계정 목록</a>
-      </Link>
-      <Link href={INTERNAL_URL.MY_PAGE}>
-        <a>회원 정보</a>
-      </Link>
-    </nav>
-  );
-};
+export const SideBar: FunctionComponent = () => (
+  <nav css={wrapper}>
+    <div css={container}>
+      <CompanyInfoBox name="긴이름입니다 긴이름입니다 긴이름입니다긴 이름입니" />
+      {linkArr.map((linkObj) => (
+        <Link href={linkObj.url} key={linkObj.url} passHref>
+          <a css={linkCSS}>
+            <div css={iconCSS}>
+              <linkObj.icon />
+            </div>
+            {linkObj.name}
+          </a>
+        </Link>
+      ))}
+    </div>
+    <UserInfoBox name="담당자이름" />
+  </nav>
+);
