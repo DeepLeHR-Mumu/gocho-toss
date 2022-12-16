@@ -31,3 +31,9 @@ export const logoutButton = css`
   border: 1px solid #000000;
   font-weight: 400;
 `;
+
+export const signUpButton = css`
+  padding: 0.75rem 1rem;
+  border: 1px solid #000000;
+  font-weight: 400;
+`;

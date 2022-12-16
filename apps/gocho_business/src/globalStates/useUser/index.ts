@@ -1,42 +1,24 @@
 import create from "zustand";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
-import { UserStatusZustandlProps, UserStatusObjType } from "./type";
+import { IsUserZustandlProps } from "./type";
 
-const userStatusZustand = create<UserStatusZustandlProps>((set) => ({
-  currentUserStatus: {
-    accessToken: null,
-    accessExp: null,
-    refreshToken: null,
-    refreshExp: null,
-  },
-  setUserStatus: (status) =>
-    set(() => ({
-      currentUserStatus: {
-        accessToken: status.accessToken,
-        accessExp: status.accessExp,
-        refreshToken: status.refreshToken,
-        refreshExp: status.refreshExp,
-      },
-    })),
+const userStatusZustand = create<IsUserZustandlProps>((set) => ({
+  isLogined: false,
+  setIsLogined: (status) => set(() => ({ isLogined: status })),
 }));
 
 export const useUserStatus = () => {
-  const { currentUserStatus, setUserStatus: _setUserStatus } = userStatusZustand();
+  const { isLogined, setIsLogined } = userStatusZustand();
+  const router = useRouter();
 
-  const resetUserStatus = () => {
-    _setUserStatus({ accessToken: null, accessExp: null, refreshExp: null, refreshToken: null });
-  };
+  useEffect(() => {
+    const isAccessToken = localStorage.getItem("accessToken") !== null;
+    if (isAccessToken) {
+      setIsLogined(true);
+    }
+  }, [setIsLogined, router]);
 
-  const isLogined = currentUserStatus.accessToken !== null;
-
-  const setUserStatus = (userStatus: UserStatusObjType) => {
-    _setUserStatus({
-      accessToken: userStatus.accessToken,
-      accessExp: userStatus.accessExp,
-      refreshToken: userStatus.refreshToken,
-      refreshExp: userStatus.refreshExp,
-    });
-  };
-
-  return { resetUserStatus, setUserStatus, isLogined, currentUserStatus };
+  return { setIsLogined, isLogined };
 };

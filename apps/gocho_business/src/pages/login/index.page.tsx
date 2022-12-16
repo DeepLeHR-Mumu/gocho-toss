@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -12,6 +12,7 @@ import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
 import { adminTokenDecryptor } from "shared-util/tokenDecryptor";
 import gochoColorSrc from "shared-image/global/deepLeLogo/smallColor.svg";
 
+import { useUserStatus } from "@/globalStates/useUser";
 import { useDoLogin } from "@/api/auth/useDoLogin";
 
 import { LoginFormValues } from "./type";
@@ -23,6 +24,7 @@ const LoginPage: NextPage = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
+  const { isLogined } = useUserStatus();
   const { mutate } = useDoLogin();
   const { register, handleSubmit } = useForm<LoginFormValues>({ mode: "onChange" });
 
@@ -44,6 +46,12 @@ const LoginPage: NextPage = () => {
       },
     });
   };
+
+  useEffect(() => {
+    if (isLogined) {
+      router.push("/");
+    }
+  }, [isLogined, router]);
 
   return (
     <main css={cssObj.wrapper}>
@@ -69,13 +77,17 @@ const LoginPage: NextPage = () => {
               />
             </li>
             <li>
-              <input type={isShowPassword ? "text" : "password"} placeholder="비밀번호" css={cssObj.inputCSS} />
-              <button
-                type="button"
-                aria-label="비밀번호 확인"
+              <input
+                type={isShowPassword ? "text" : "password"}
+                placeholder="비밀번호"
+                css={cssObj.inputCSS}
                 {...register("password", {
                   required: "비밀번호 입력해라!",
                 })}
+              />
+              <button
+                type="button"
+                aria-label="비밀번호 확인"
                 css={cssObj.eyeButtonCSS}
                 onClick={() => {
                   setIsShowPassword((prev) => !prev);

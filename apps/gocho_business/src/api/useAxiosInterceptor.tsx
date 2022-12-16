@@ -5,6 +5,8 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { BUSINESS_BACKEND_URL } from "shared-constant/externalURL";
 import { adminTokenDecryptor } from "shared-util/tokenDecryptor";
 
+import { useUserStatus } from "@/globalStates/useUser";
+
 export interface ErrorStatus {
   error: {
     error_code:
@@ -40,9 +42,11 @@ export const axiosInstance = axios.create({
 
 export const useAxiosInterceptor = () => {
   const router = useRouter();
+  const { setIsLogined } = useUserStatus();
 
   const goToLoginPage = () => {
     localStorage.clear();
+    setIsLogined(false);
     router.push("/login", undefined, { shallow: true });
   };
 
