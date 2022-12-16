@@ -5,7 +5,7 @@ import { AdminResponseDef } from "shared-type/api/responseType";
 
 export interface RequestObjDef {
   jdId: number;
-  type: string;
+  type: "upload" | "update";
 }
 
 export interface AcceptJdDef {
