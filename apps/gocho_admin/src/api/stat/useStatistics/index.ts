@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { axiosInstance } from "@api/axiosInstance";
+import { axiosInstance } from "@api/useAxiosInterceptor";
 
 import { GetStatisticsDef, statisticsKeyObj } from "./type";
 import { statSelector } from "./util";
