@@ -1,10 +1,10 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
@@ -55,6 +55,7 @@ const LoginPage: NextPage = () => {
           </div>
           <strong css={cssObj.title}>생산직 채용의 새로운 기준</strong>
         </div>
+
         <form css={cssObj.formCSS} onSubmit={handleSubmit(loginSubmit)}>
           <ul css={cssObj.inputBox}>
             <li>
