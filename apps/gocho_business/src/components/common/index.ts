@@ -1,2 +1,2 @@
-export { CommonStatusChip } from "./statusChip";
-export { CommonInfoBox } from "./infoBox";
+export { CommonStatusChip } from "./commonStatusChip";
+export { CommonInfoBox } from "./commonInfoBox";
