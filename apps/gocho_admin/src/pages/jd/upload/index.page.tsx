@@ -2,9 +2,8 @@ import { useState } from "react";
 import type { NextPage } from "next";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
-import { useFindCompany } from "shared-api/admin/company/useFindCompany";
-import { useAddJob } from "shared-api/admin/job/useAddJob";
-
+import { useFindCompany } from "@api/company/useFindCompany";
+import { useAddJd } from "@api/jd/useAddJd";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
@@ -33,7 +32,7 @@ const JdUpload: NextPage = () => {
   });
 
   const { data: companyDataObj, isLoading, isError } = useFindCompany({ word: searchWord, order: "recent" });
-  const { mutate: addJobMutate } = useAddJob();
+  const { mutate: addJobMutate } = useAddJd();
 
   if (!companyDataObj || isLoading) {
     return <LoadingScreen />;

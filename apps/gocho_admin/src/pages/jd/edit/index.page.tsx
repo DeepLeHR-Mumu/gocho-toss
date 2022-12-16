@@ -3,10 +3,9 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
-import { useFindCompany } from "shared-api/admin/company/useFindCompany";
-import { useEditJob } from "shared-api/admin/job/useEditJob";
-import { useJobDetail } from "shared-api/admin/job/useJobDetail";
-
+import { useFindCompany } from "@api/company/useFindCompany";
+import { useEditJd } from "@api/jd/useEditJd";
+import { useJdDetail } from "@api/jd/useJdDetail";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
@@ -25,13 +24,13 @@ const JdEdit: NextPage = () => {
   const [searchWord, setSearchWord] = useState<string>("");
   const [checkMsg, setCheckMsg] = useState<string>();
 
-  const { data: jobData } = useJobDetail({ id: jobId });
+  const { data: jobData } = useJdDetail({ id: jobId });
   const { data: companyDataObj, isLoading, isError } = useFindCompany({ word: searchWord, order: "recent" });
-  const { mutate: editJobMutate } = useEditJob();
+  const { mutate: editJobMutate } = useEditJd();
 
   const jobForm = useForm<JobFormValues>({
     defaultValues: {
-      company_id: jobData?.companyId,
+      company_id: jobData?.company.id,
       position_arr: [blankPosition],
     },
   });
@@ -76,7 +75,7 @@ const JdEdit: NextPage = () => {
     });
 
     reset({
-      company_id: jobData?.companyId,
+      company_id: jobData?.company.id,
       title: jobData?.title,
       start_time: new Date(newStartTime).toISOString().substring(0, 19),
       end_time: new Date(newEndTime).toISOString().substring(0, 19),

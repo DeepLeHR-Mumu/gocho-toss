@@ -2,14 +2,13 @@ import { useState } from "react";
 import type { NextPage } from "next";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
-import { useAddCompany } from "shared-api/admin/company/useAddCompany";
-
+import { useAddCompany } from "@api/company/useAddCompany";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 
-import { FactoryBox } from "@pages/company/upload/component/factoryBox";
-import { BasicInfoPart } from "@pages/company/upload/part/basicInfoPart";
-import { WelfareInfoPart } from "@pages/company/upload/part/welfareInfoPart";
-import { PayInfoPart } from "@pages/company/upload/part/payInfoPart";
+import { FactoryBox } from "./component/factoryBox";
+import { BasicInfoPart } from "./part/basicInfoPart";
+import { WelfareInfoPart } from "./part/welfareInfoPart";
+import { PayInfoPart } from "./part/payInfoPart";
 import { CompanyFormValues } from "./type";
 import { blankFactory } from "./constant";
 

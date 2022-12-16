@@ -3,7 +3,8 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { dateConverter } from "shared-util/date";
 import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
-import { useDeleteBanner } from "shared-api/admin/banner/useDeleteBanner";
+
+import { useDeleteBanner } from "@api/banner/useDeleteBanner";
 
 import { bannerBox, bannerIdBox, companyNameBox, deleteBannerButton, expireDateBox, titleBox } from "./style";
 import { BannerBoxProps } from "./type";

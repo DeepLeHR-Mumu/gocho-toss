@@ -19,6 +19,21 @@ export const carouselArr = [
   },
   {
     id: 2,
+    topDesc: " ",
+    middleDesc: "코닝정밀소재",
+    title: "2023년 코닝정밀소재 제조직[기간제] 채용",
+    lastDesc: "2022.12.16~2023.01.01",
+    backgroundColor: "#030f16",
+    buttonObj: {
+      target: "_self" as const,
+      text: "자세히보기",
+      color: "#fff",
+      backgroundColor: "#333",
+      url: "/jd/detail/12127",
+    },
+  },
+  {
+    id: 3,
     topDesc: "OPEN",
     middleDesc: "고초대졸닷컴",
     title: "공고에서 근무할 공장 정보 바로보기 서비스 시작",
@@ -28,7 +43,7 @@ export const carouselArr = [
     buttonObj: null,
   },
   {
-    id: 3,
+    id: 4,
     topDesc: "OPEN",
     middleDesc: "고초대졸닷컴",
     title: "생산/기능직 관련 최대 규모 오픈카톡방",
