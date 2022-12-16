@@ -4,6 +4,7 @@ import { UseMutationResult } from "@tanstack/react-query";
 export interface RequestObjDef {
   email: string;
   password: string;
+  auto_login: boolean;
 }
 
 export interface ResponseObjDef {
@@ -11,7 +12,7 @@ export interface ResponseObjDef {
 }
 
 export interface PostLoginDef {
-  ({ email, password }: RequestObjDef): Promise<ResponseObjDef>;
+  ({ email, password, auto_login }: RequestObjDef): Promise<ResponseObjDef>;
 }
 
 export interface useDoLoginProps {

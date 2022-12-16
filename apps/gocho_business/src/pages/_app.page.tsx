@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query
 import axios from "axios";
 import { useRouter } from "next/router";
 
+import { useAxiosInterceptor } from "@/api/useAxiosInterceptor";
 import { globalStyle, pageContainer, sidebarContainer } from "@/styles/globalStyle";
 import { SideBar } from "@/components/global/sideBar";
 import { TopBar } from "@/components/global/topBar";
@@ -13,7 +14,6 @@ import { ToastPlaceholder } from "@/components/global/toast/toastPlaceHolder";
 
 function BusinessService({ Component, pageProps }: AppProps) {
   const router = useRouter();
-
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -35,6 +35,8 @@ function BusinessService({ Component, pageProps }: AppProps) {
         },
       })
   );
+
+  useAxiosInterceptor();
 
   return (
     <QueryClientProvider client={queryClient}>
