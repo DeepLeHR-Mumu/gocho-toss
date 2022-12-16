@@ -6,9 +6,9 @@ import { useQueryClient } from "@tanstack/react-query";
 import { dateConverter } from "shared-util/date";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
-import { useAddTopBanner } from "shared-api/admin/banner/addTopBanner";
-import { useJobDetail } from "shared-api/admin/job/useJobDetail";
 
+import { useJdDetail } from "@api/jd/useJdDetail";
+import { useAddTopBanner } from "@api/banner/useAddTopBanner";
 import { pageTitle } from "@style/commonStyles";
 
 import {
@@ -39,7 +39,7 @@ export const UploadBannerPart: FunctionComponent = () => {
   const queryClient = useQueryClient();
   const { register, watch, setValue, handleSubmit } = useForm<BannerSubmitFormValues>();
 
-  const { data: jobData } = useJobDetail({ id: jobId });
+  const { data: jobData } = useJdDetail({ id: jobId });
   const { mutate: addMutate } = useAddTopBanner();
 
   const submitBannerHandler: SubmitHandler<BannerSubmitFormValues> = (bannerSubmitObj) => {
@@ -123,11 +123,11 @@ export const UploadBannerPart: FunctionComponent = () => {
                 <div css={cardContainer}>
                   <div css={companyLogoWrapper}>
                     <div css={companyLogoBox}>
-                      <Image layout="fill" objectFit="contain" src={jobData?.companyLogoUrl || defaultCompanyLogo} />
+                      <Image layout="fill" objectFit="contain" src={jobData?.company.logoUrl || defaultCompanyLogo} />
                     </div>
                   </div>
                   <div css={infoContainer}>
-                    <p css={companyName}>{jobData?.companyName}</p>
+                    <p css={companyName}>{jobData?.company.name}</p>
                     <p css={date}>
                       {`${jobStartMonth}/${jobStartDate}`}~{`${jobEndMonth}/${jobEndDate}`}
                     </p>

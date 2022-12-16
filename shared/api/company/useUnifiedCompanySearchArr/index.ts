@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-// import { CompanyArrRequestDef, companyArrKeyObj } from "shared-constant/queryKeyFactory/company/arrKeyObj";
 import {
   SearchCompanyArrRequestDef,
   searchCompanyArrKeyObj,
-} from "shared-constant/queryKeyFactory/company/serachCompanyArrKeyObj";
+} from "shared-constant/queryKeyFactory/company/searchCompanyArrKeyObj";
 
 import { axiosInstance } from "../../axiosInstance";
 
