@@ -10,17 +10,7 @@ import { mainContainer, pageTitle } from "@style/commonStyles";
 
 import JobCard from "./component/jobCard";
 import { JD_SEARCH_LIMIT } from "./constant";
-import {
-  sectionContainer,
-  listChangeButton,
-  tableContainer,
-  jobContainer,
-  jobIdBox,
-  mainInfoBox,
-  taskContainer,
-  dateBox,
-  buttonContainer,
-} from "./style";
+import { cssObj } from "./style";
 
 const BusinessJdList: NextPage = () => {
   const [jdStatus, setjdStatus] = useState<"upload-waiting" | "modify-waiting">("upload-waiting");
@@ -56,24 +46,24 @@ const BusinessJdList: NextPage = () => {
   return (
     <main css={mainContainer}>
       <h2 css={pageTitle}>{jdStatus === "upload-waiting" ? "공고 등록 요청 목록" : "공고 수정 요청 목록"}</h2>
-      <section css={sectionContainer}>
+      <section css={cssObj.sectionContainer}>
         <button
           type="button"
-          css={listChangeButton}
+          css={cssObj.listChangeButton}
           onClick={() => {
             changeJdStatusHandler();
           }}
         >
           {jdStatus === "upload-waiting" ? "수정 요청 목록 보기" : "등록 요청 목록 보기"}
         </button>
-        <table css={tableContainer}>
+        <table css={cssObj.tableContainer}>
           <thead>
-            <tr css={jobContainer}>
-              <th css={jobIdBox}>공고 ID</th>
-              <th css={mainInfoBox}>기업이름 / 공고제목</th>
-              <th css={taskContainer}>직무</th>
-              <th css={dateBox}>채용 날짜</th>
-              <th css={buttonContainer}> </th>
+            <tr css={cssObj.jobContainer}>
+              <th css={cssObj.jobIdBox}>공고 ID</th>
+              <th css={cssObj.mainInfoBox}>기업이름 / 공고제목</th>
+              <th css={cssObj.taskContainer}>직무</th>
+              <th css={cssObj.dateBox}>채용 날짜</th>
+              <th css={cssObj.buttonContainer}> </th>
             </tr>
           </thead>
           <tbody>

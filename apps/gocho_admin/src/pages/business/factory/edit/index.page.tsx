@@ -10,7 +10,7 @@ import { factoryArrKeyObj } from "@api/factory/useFactoryArr/type";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
-import { acceptButton, buttonContainer, rejectButton } from "./style";
+import { cssObj } from "./style";
 
 const FactoryEditDetail: NextPage = () => {
   const queryClient = useQueryClient();
@@ -65,10 +65,10 @@ const FactoryEditDetail: NextPage = () => {
   return (
     <main css={mainContainer}>
       <h2 css={pageTitle}>공장 변경 요청 확인</h2>
-      <div css={buttonContainer}>
+      <div css={cssObj.buttonContainer}>
         <button
           type="submit"
-          css={acceptButton}
+          css={cssObj.acceptButton}
           onClick={() => {
             return acceptFactoryHandler;
           }}
@@ -77,7 +77,7 @@ const FactoryEditDetail: NextPage = () => {
         </button>
         <button
           type="submit"
-          css={rejectButton}
+          css={cssObj.rejectButton}
           onClick={() => {
             return rejectFactoryHandler;
           }}

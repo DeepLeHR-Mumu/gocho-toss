@@ -9,7 +9,7 @@ import { useRejectJd } from "@api/jd/useRejectJd";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
-import { buttonContainer, acceptButton, rejectButton } from "./style";
+import { cssObj } from "./style";
 
 const JdRegisterDetail: NextPage = () => {
   const queryClient = useQueryClient();
@@ -53,10 +53,10 @@ const JdRegisterDetail: NextPage = () => {
   return (
     <main css={mainContainer}>
       <h2 css={pageTitle}>공고 등록 요청 확인</h2>
-      <div css={buttonContainer}>
+      <div css={cssObj.buttonContainer}>
         <button
           type="submit"
-          css={acceptButton}
+          css={cssObj.acceptButton}
           onClick={() => {
             return acceptJdHandler;
           }}
@@ -65,7 +65,7 @@ const JdRegisterDetail: NextPage = () => {
         </button>
         <button
           type="submit"
-          css={rejectButton}
+          css={cssObj.rejectButton}
           onClick={() => {
             return rejectJdHandler;
           }}

@@ -10,15 +10,8 @@ import { mainContainer, pageTitle } from "@style/commonStyles";
 
 import FactoryCard from "./component/factoryCard";
 import { FACTORY_SEARCH_LIMIT } from "./constant";
-import {
-  sectionContainer,
-  listChangeButton,
-  tableContainer,
-  factoryContainer,
-  factoryIdBox,
-  factoryNameBox,
-  buttonContainer,
-} from "./style";
+
+import { cssObj } from "./style";
 
 const BusinessFactoryList: NextPage = () => {
   const [factoryStatus, setFactoryStatus] = useState<"upload-waiting" | "modify-waiting">("upload-waiting");
@@ -53,22 +46,22 @@ const BusinessFactoryList: NextPage = () => {
   return (
     <main css={mainContainer}>
       <h2 css={pageTitle}>{factoryStatus === "upload-waiting" ? "공장 등록 요청 목록" : "공장 수정 요청 목록"}</h2>
-      <section css={sectionContainer}>
+      <section css={cssObj.sectionContainer}>
         <button
           type="button"
-          css={listChangeButton}
+          css={cssObj.listChangeButton}
           onClick={() => {
             changeFactoryStatusHandler();
           }}
         >
           {factoryStatus === "upload-waiting" ? "수정 요청 목록 보기" : "등록 요청 목록 보기"}
         </button>
-        <table css={tableContainer}>
+        <table css={cssObj.tableContainer}>
           <thead>
-            <tr css={factoryContainer}>
-              <th css={factoryIdBox}>공장 ID</th>
-              <th css={factoryNameBox}>공장 이름</th>
-              <th css={buttonContainer}> </th>
+            <tr css={cssObj.factoryContainer}>
+              <th css={cssObj.factoryIdBox}>공장 ID</th>
+              <th css={cssObj.factoryNameBox}>공장 이름</th>
+              <th css={cssObj.buttonContainer}> </th>
             </tr>
           </thead>
           <tbody>

@@ -3,14 +3,14 @@ import Link from "next/link";
 
 import { BUSINESS_FACTORY_EDIT_URL, BUSINESS_FACTORY_REGISTER_URL } from "@constant/internalURL";
 
-import { factoryContainer, factoryIdBox, factoryNameBox, activeButton } from "./style";
 import { FactoryCardProps } from "./type";
+import { cssObj } from "./style";
 
 const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factory }) => {
   return (
-    <tr css={factoryContainer}>
-      <td css={factoryIdBox}>{factory.id}</td>
-      <td css={factoryNameBox}>{factory.name}</td>
+    <tr css={cssObj.factoryContainer}>
+      <td css={cssObj.factoryIdBox}>{factory.id}</td>
+      <td css={cssObj.factoryNameBox}>{factory.name}</td>
       <Link
         passHref
         href={
@@ -19,7 +19,7 @@ const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factory }) => {
             : `${BUSINESS_FACTORY_EDIT_URL}/?id=${factory.id}`
         }
       >
-        <a css={activeButton}>상세보기</a>
+        <a css={cssObj.activeButton}>상세보기</a>
       </Link>
     </tr>
   );
