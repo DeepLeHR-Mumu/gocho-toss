@@ -1,16 +1,16 @@
 import { FunctionComponent } from "react";
 
-import { countCSS, countName, iconBox, infoBoxContainer, viewInfoBox } from "./style";
+import { cssObj } from "./style";
 import { CommonInfoBoxProps } from "./type";
 
 export const CommonInfoBox: FunctionComponent<CommonInfoBoxProps> = ({ infoName, Icon, infoData }) => (
-  <div css={viewInfoBox}>
-    <p css={countName}>{infoName}</p>
-    <div css={infoBoxContainer}>
-      <div css={iconBox}>
+  <div css={cssObj.viewInfoBox}>
+    <p css={cssObj.countName}>{infoName}</p>
+    <div css={cssObj.infoBoxContainer}>
+      <div css={cssObj.iconBox}>
         <Icon />
       </div>
-      <p css={countCSS}>{infoData}</p>
+      <p css={cssObj.countCSS}>{infoData}</p>
     </div>
   </div>
 );
