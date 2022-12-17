@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { jdArrKeyObj } from "@api/jd/useJdArr/type";
@@ -10,11 +11,14 @@ import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
 import { cssObj } from "./style";
+import { RejectFormValues } from "./type";
 
 const JdRegisterDetail: NextPage = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
   const jdId = Number(router.query.id);
+
+  const { register, handleSubmit } = useForm<RejectFormValues>();
 
   const { data: jobDataObj, isLoading, isError } = useJdDetail({ id: jdId });
   const { mutate: acceptJdMutate } = useAcceptJd();
@@ -31,9 +35,9 @@ const JdRegisterDetail: NextPage = () => {
     );
   };
 
-  const rejectJdHandler = () => {
+  const rejectJdHandler: SubmitHandler<RejectFormValues> = (formData) => {
     rejectJdMutate(
-      { jdId, type: "upload" },
+      { jdId, reason: formData.reason, type: "upload" },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(jdArrKeyObj.all);
@@ -63,15 +67,16 @@ const JdRegisterDetail: NextPage = () => {
         >
           등록 승인
         </button>
-        <button
-          type="submit"
-          css={cssObj.rejectButton}
-          onClick={() => {
-            return rejectJdHandler;
-          }}
-        >
-          등록 반려
-        </button>
+        <form css={cssObj.rejectForm} onSubmit={handleSubmit(rejectJdHandler)}>
+          <textarea
+            css={cssObj.rejectReasonBox}
+            placeholder="반려사유를 입력해주세요."
+            {...register("reason", { required: true })}
+          />
+          <button type="submit" css={cssObj.rejectButton}>
+            등록 반려
+          </button>
+        </form>
       </div>
     </main>
   );

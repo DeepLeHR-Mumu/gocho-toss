@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useFactoryDetail } from "@api/factory/useFactoryDetail";
@@ -10,11 +11,14 @@ import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
 import { cssObj } from "./style";
+import { RejectFormValues } from "./type";
 
 const FactoryRegisterDetail: NextPage = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
   const factoryId = Number(router.query.id);
+
+  const { register, handleSubmit } = useForm<RejectFormValues>();
 
   const { data: factoryDataObj, isLoading, isError } = useFactoryDetail({ factoryId });
   const { mutate: acceptFactoryMutate } = useAcceptFactory();
@@ -31,9 +35,9 @@ const FactoryRegisterDetail: NextPage = () => {
     );
   };
 
-  const rejectFactoryHandler = () => {
+  const rejectFactoryHandler: SubmitHandler<RejectFormValues> = (formData) => {
     rejectFactoryMutate(
-      { factoryId, type: "upload" },
+      { factoryId, reason: formData.reason, type: "upload" },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(factoryArrKeyObj.all);
@@ -63,15 +67,16 @@ const FactoryRegisterDetail: NextPage = () => {
         >
           등록 승인
         </button>
-        <button
-          type="submit"
-          css={cssObj.rejectButton}
-          onClick={() => {
-            return rejectFactoryHandler;
-          }}
-        >
-          등록 반려
-        </button>
+        <form css={cssObj.rejectForm} onSubmit={handleSubmit(rejectFactoryHandler)}>
+          <textarea
+            css={cssObj.rejectReasonBox}
+            placeholder="반려사유를 입력해주세요."
+            {...register("reason", { required: true })}
+          />
+          <button type="submit" css={cssObj.rejectButton}>
+            등록 반려
+          </button>
+        </form>
       </div>
     </main>
   );

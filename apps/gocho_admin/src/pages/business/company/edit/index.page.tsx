@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useCompanyDetail } from "@api/company/useCompanyDetail";
@@ -11,23 +12,26 @@ import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
 import { cssObj } from "./style";
+import { RejectFormValues } from "./type";
 
 const CompanyEditDetail: NextPage = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
   const companyId = Number(router.query.id);
 
+  const { register, handleSubmit } = useForm<RejectFormValues>();
+
   const {
     data: companyBeforeData,
     isLoading: isBeforeLoading,
     isError: isBeforeError,
-  } = useCompanyDetail({ companyId });
+  } = useCompanyDetail({ companyId: Number(router.query.id) });
 
   const {
     data: companyAfterData,
     isLoading: isAfterLoading,
     isError: isAfterError,
-  } = useEditCompanyRequest({ companyId });
+  } = useEditCompanyRequest({ companyId: Number(router.query.id) });
 
   const { mutate: acceptCompanyMutate } = useAcceptCompany();
   const { mutate: rejectCompanyMutate } = useRejectCompany();
@@ -43,9 +47,9 @@ const CompanyEditDetail: NextPage = () => {
     );
   };
 
-  const rejectCompanyHandler = () => {
+  const rejectCompanyHandler: SubmitHandler<RejectFormValues> = (formData) => {
     rejectCompanyMutate(
-      { companyId, type: "update" },
+      { companyId, reason: formData.reason, type: "update" },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(companyArrKeyObj.all);
@@ -75,15 +79,16 @@ const CompanyEditDetail: NextPage = () => {
         >
           수정 승인
         </button>
-        <button
-          type="submit"
-          css={cssObj.rejectButton}
-          onClick={() => {
-            return rejectCompanyHandler;
-          }}
-        >
-          수정 반려
-        </button>
+        <form css={cssObj.rejectForm} onSubmit={handleSubmit(rejectCompanyHandler)}>
+          <textarea
+            css={cssObj.rejectReasonBox}
+            placeholder="반려사유를 입력해주세요."
+            {...register("reason", { required: true })}
+          />
+          <button type="submit" css={cssObj.rejectButton}>
+            수정 반려
+          </button>
+        </form>
       </div>
     </main>
   );

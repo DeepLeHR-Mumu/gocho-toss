@@ -8,9 +8,7 @@ import { axiosInstance } from "@api/axiosInstance";
 import { AcceptCompanyDef, RequestObjDef, UseAcceptCompanyProps } from "./type";
 
 const putAcceptCompany: AcceptCompanyDef = async (requestObj) => {
-  const { data } = await axiosInstance.put(`/companies/${requestObj.companyId}/requests/accept`, {
-    type: requestObj.type,
-  });
+  const { data } = await axiosInstance.put(`/companies/${requestObj.companyId}/requests/accept`);
   return data;
 };
 

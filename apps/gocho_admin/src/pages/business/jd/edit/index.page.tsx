@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useQueryClient } from "@tanstack/react-query";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 import { jdArrKeyObj } from "@api/jd/useJdArr/type";
 import { useJdDetail } from "@api/jd/useJdDetail";
@@ -11,11 +12,14 @@ import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
 import { cssObj } from "./style";
+import { RejectFormValues } from "./type";
 
 const JdEditDetail: NextPage = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
   const jdId = Number(router.query.id);
+
+  const { register, handleSubmit } = useForm<RejectFormValues>();
 
   const { data: jdBeforeData, isLoading: isBeforeLoading, isError: isBeforeError } = useJdDetail({ id: jdId });
   const { data: jdAfterData, isLoading: isAfterLoading, isError: isAfterError } = useEditJdRequest({ id: jdId });
@@ -33,9 +37,9 @@ const JdEditDetail: NextPage = () => {
     );
   };
 
-  const rejectJdHandler = () => {
+  const rejectJdHandler: SubmitHandler<RejectFormValues> = (formData) => {
     rejectJdMutate(
-      { jdId, type: "update" },
+      { jdId, reason: formData.reason, type: "update" },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(jdArrKeyObj.all);
@@ -65,15 +69,16 @@ const JdEditDetail: NextPage = () => {
         >
           수정 승인
         </button>
-        <button
-          type="submit"
-          css={cssObj.rejectButton}
-          onClick={() => {
-            return rejectJdHandler;
-          }}
-        >
-          수정 반려
-        </button>
+        <form css={cssObj.rejectForm} onSubmit={handleSubmit(rejectJdHandler)}>
+          <textarea
+            css={cssObj.rejectReasonBox}
+            placeholder="반려사유를 입력해주세요."
+            {...register("reason", { required: true })}
+          />
+          <button type="submit" css={cssObj.rejectButton}>
+            수정 반려
+          </button>
+        </form>
       </div>
     </main>
   );
