@@ -25,13 +25,13 @@ const CompanyEditDetail: NextPage = () => {
     data: companyBeforeData,
     isLoading: isBeforeLoading,
     isError: isBeforeError,
-  } = useCompanyDetail({ companyId: Number(router.query.id) });
+  } = useCompanyDetail({ companyId });
 
   const {
     data: companyAfterData,
     isLoading: isAfterLoading,
     isError: isAfterError,
-  } = useEditCompanyRequest({ companyId: Number(router.query.id) });
+  } = useEditCompanyRequest({ companyId });
 
   const { mutate: acceptCompanyMutate } = useAcceptCompany();
   const { mutate: rejectCompanyMutate } = useRejectCompany();

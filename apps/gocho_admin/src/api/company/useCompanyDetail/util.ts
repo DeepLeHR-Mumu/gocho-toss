@@ -33,7 +33,7 @@ export const companyDetailConverter = ({ data: company }: ResponseObjDef) => {
       exists: company.nozo.exists,
       desc: company.nozo.desc,
     },
-    factoryArr: company.factory_arr.map((factory) => {
+    factoryArr: company.factory_arr?.map((factory) => {
       return {
         factoryName: factory.name,
         id: factory.id,

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
@@ -13,7 +12,6 @@ import { COMPANY_SEARCH_LIMIT } from "./constant";
 import { cssObj } from "./style";
 
 const BusinessCompanyList: NextPage = () => {
-  const [companyStatus, setCompanyStatus] = useState<"upload-waiting" | "modify-waiting">("upload-waiting");
   const router = useRouter();
 
   const {
@@ -22,7 +20,7 @@ const BusinessCompanyList: NextPage = () => {
     isError,
   } = useCompanyArr({
     order: "recent",
-    status: companyStatus,
+    status: "modify-waiting",
     limit: COMPANY_SEARCH_LIMIT,
     offset: (Number(router.query.page) - 1) * COMPANY_SEARCH_LIMIT,
   });
@@ -35,27 +33,12 @@ const BusinessCompanyList: NextPage = () => {
     return <ErrorScreen />;
   }
 
-  const changeCompanyStatusHandler = () => {
-    setCompanyStatus((prev) => {
-      return prev === "upload-waiting" ? "modify-waiting" : "upload-waiting";
-    });
-  };
-
   const totalPage = Math.ceil(companyDataObj.count / COMPANY_SEARCH_LIMIT);
 
   return (
     <main css={mainContainer}>
-      <h2 css={pageTitle}>{companyStatus === "upload-waiting" ? "기업 등록 요청 목록" : "기업 수정 요청 목록"}</h2>
+      <h2 css={pageTitle}>기업 수정 요청 목록</h2>
       <section css={cssObj.sectionContainer}>
-        <button
-          type="button"
-          css={cssObj.listChangeButton}
-          onClick={() => {
-            changeCompanyStatusHandler();
-          }}
-        >
-          {companyStatus === "upload-waiting" ? "수정 요청 목록 보기" : "등록 요청 목록 보기"}
-        </button>
         <table css={cssObj.tableContainer}>
           <thead>
             <tr css={cssObj.companyContainer}>

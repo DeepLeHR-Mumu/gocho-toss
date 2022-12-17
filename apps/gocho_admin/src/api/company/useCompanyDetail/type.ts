@@ -57,7 +57,7 @@ export interface ResponseObjDef {
       exists: boolean;
       desc: string | null;
     };
-    factory_arr: FactoryObjDef[];
+    factory_arr: FactoryObjDef[] | null;
   };
 }
 
