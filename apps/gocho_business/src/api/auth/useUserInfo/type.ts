@@ -1,11 +1,11 @@
 export interface UserInfoObjDef {
-  sub: string | undefined;
+  sub: string;
   id: number;
+  company_id: number;
+  company_name: string;
   email: string;
-  nickname: string;
-  badge: string;
-  isKakao: boolean;
-  image: string;
+  name: string;
+  department: string;
   role: string;
   type: number;
   iat: number;
