@@ -10,6 +10,7 @@ import { useRejectJd } from "@api/jd/useRejectJd";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
+import { JdPart } from "@pages/business/jd/register/part/jdPart";
 import { cssObj } from "./style";
 import { RejectFormValues } from "./type";
 
@@ -20,7 +21,7 @@ const JdRegisterDetail: NextPage = () => {
 
   const { register, handleSubmit } = useForm<RejectFormValues>();
 
-  const { data: jobDataObj, isLoading, isError } = useJdDetail({ id: jdId });
+  const { data: jdDataObj, isLoading, isError } = useJdDetail({ id: jdId });
   const { mutate: acceptJdMutate } = useAcceptJd();
   const { mutate: rejectJdMutate } = useRejectJd();
 
@@ -46,7 +47,7 @@ const JdRegisterDetail: NextPage = () => {
     );
   };
 
-  if (!jobDataObj || isLoading) {
+  if (!jdDataObj || isLoading) {
     return <LoadingScreen />;
   }
 
@@ -57,6 +58,7 @@ const JdRegisterDetail: NextPage = () => {
   return (
     <main css={mainContainer}>
       <h2 css={pageTitle}>공고 등록 요청 확인</h2>
+      <JdPart jd={jdDataObj} />
       <div css={cssObj.buttonContainer}>
         <button
           type="submit"
