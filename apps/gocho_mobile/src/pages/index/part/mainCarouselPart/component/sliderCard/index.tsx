@@ -33,7 +33,7 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({ carouselData }) =
       {carouselData.buttonObj && carouselData.buttonObj.target === "_blank" && (
         <a
           onClick={
-            carouselData.id === 2
+            carouselData.id === 1
               ? () => {
                   conningAddClickEvent();
                 }

@@ -45,7 +45,7 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({ slideData }) => {
         {slideData.buttonObj && slideData.buttonObj.target === "_blank" && (
           <a
             onClick={
-              slideData.id === 2
+              slideData.id === 1
                 ? () => {
                     conningAddClickEvent();
                   }
