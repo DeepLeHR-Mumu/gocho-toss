@@ -6,18 +6,13 @@ export default {
   title: "CommonTextLink",
   component: CommonTextLink,
   argTypes: {
-    iconObj: {
-      description: "아이콘 설정을 위한 객체 - icon:ReactIcon, location: 아이콘 위치",
-    },
-    text: {
-      description: "버튼에 삽입되는 문자열",
-    },
-    backgroundColor: { description: "버튼 배경색, shared-styles/COLORS 값 " },
-    borderColor: { description: "버튼 테두리 색, shared-styles/COLORS 값 " },
-    onClickHandler: { description: "버튼 클릭시 실행될 함수" },
+    text: { description: "링크 버튼에 표시되는 텍스트" },
+    type: { description: "버튼의 변형형태" },
+    url: { description: "externalLink, internalLink 베리에이션의 경우 필요한 연결 링크" },
+    onClick: { description: "button variation의 경우 필요한 onClick 함수" },
   },
   parameters: {
-    componentSubtitle: "각종 정보 출력을 위한 박스",
+    componentSubtitle: "텍스트 링크",
   },
 } as ComponentMeta<typeof CommonTextLink>;
 
