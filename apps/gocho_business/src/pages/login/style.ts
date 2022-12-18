@@ -65,15 +65,24 @@ export const cssObj = {
     font-size: 1.5rem;
     color: ${COLORS.GRAY40};
   `,
+  errorMsg: css`
+    font-size: 1rem;
+    height: 1rem;
+    margin: 2rem 0;
+    text-align: center;
+    line-height: 0;
+    display: block;
+    color: ${COLORS.GRAY10};
+    font-weight: 400;
+  `,
   bottomBox: css`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 2rem;
   `,
   findPasswordButton: css`
     font-size: ${COLORS.GRAY10};
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-weight: 400;
     text-decoration: underline;
   `,

@@ -7,7 +7,6 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 import { useAxiosInterceptor } from "@/api/useAxiosInterceptor";
-import { useUserStatus } from "@/globalStates/useUser";
 import { globalStyle, pageContainer, sidebarContainer } from "@/styles/globalStyle";
 import { SideBar } from "@/components/global/sideBar";
 import { TopBar } from "@/components/global/topBar";
@@ -15,7 +14,6 @@ import { ToastPlaceholder } from "@/components/global/toast/toastPlaceHolder";
 
 function BusinessService({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const { isLogined } = useUserStatus();
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -45,8 +43,8 @@ function BusinessService({ Component, pageProps }: AppProps) {
       <Hydrate state={pageProps.dehydratedState}>
         <Global styles={globalStyle} />
         <div css={sidebarContainer}>
-          {isLogined && <SideBar />}
-          <div css={pageContainer(isLogined)}>
+          <SideBar />
+          <div css={pageContainer}>
             <TopBar />
             <Component {...pageProps} />
           </div>

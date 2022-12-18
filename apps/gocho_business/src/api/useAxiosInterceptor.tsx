@@ -5,10 +5,11 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { BUSINESS_BACKEND_URL } from "shared-constant/externalURL";
 import { adminTokenDecryptor } from "shared-util/tokenDecryptor";
 
-import { useUserStatus } from "@/globalStates/useUser";
+import { INTERNAL_URL } from "@/constants/index";
 
 export interface ErrorStatus {
   error: {
+    status: number;
     error_code:
       | "UNAUTHORIZED"
       | "EMPTY_JWT"
@@ -42,15 +43,8 @@ export const axiosInstance = axios.create({
 
 export const useAxiosInterceptor = () => {
   const router = useRouter();
-  const { setIsLogined } = useUserStatus();
 
-  const goToLoginPage = () => {
-    localStorage.clear();
-    setIsLogined(false);
-    router.push("/login", undefined, { shallow: true });
-  };
-
-  const axiosRequestInterCeptorHandler = async (config: AxiosRequestConfig) => {
+  const axiosRequestInterceptorHandler = async (config: AxiosRequestConfig) => {
     let accessToken = localStorage.getItem("accessToken");
     const refreshToken = localStorage.getItem("refreshToken");
     const accessExp = localStorage.getItem("accessExp");
@@ -60,8 +54,9 @@ export const useAxiosInterceptor = () => {
     const accessCreateTime = new Date(Number(accessExp) * 1000).getTime();
     const currentTime = new Date().getTime();
 
-    if (!refreshToken || refreshCreateTime <= currentTime) {
-      goToLoginPage();
+    if (refreshCreateTime !== 0 && refreshCreateTime <= currentTime) {
+      localStorage.clear();
+      router.push(INTERNAL_URL.LOGIN, undefined, { shallow: true });
     }
 
     if (accessToken && accessCreateTime <= currentTime) {
@@ -88,33 +83,31 @@ export const useAxiosInterceptor = () => {
     return newConfig;
   };
 
-  const tokenErrorHandler = async (error: AxiosError<ErrorStatus>) => {
+  const errorHandler = async (error: AxiosError<ErrorStatus>) => {
     const errorStatus = {
       errorCode: error?.response?.data.error[0].error_code,
       errorMsg: error?.response?.data.error[0].error_message,
     };
 
-    if (errorStatus.errorCode === "MALFORMED_JWT") {
-      // 손상된 토큰
-      goToLoginPage();
-    }
-    if (errorStatus.errorCode === "UNAUTHORIZED") {
-      // 인증되지 않음
-      goToLoginPage();
-    }
-    if (errorStatus.errorCode === "EXPIRED_JWT") {
-      // 만료된 토큰
-      goToLoginPage();
+    if (
+      errorStatus.errorCode === "EMPTY_JWT" ||
+      errorStatus.errorCode === "MALFORMED_JWT" ||
+      errorStatus.errorCode === "UNAUTHORIZED" ||
+      errorStatus.errorCode === "EXPIRED_JWT"
+    ) {
+      localStorage.clear();
+      router.push(INTERNAL_URL.LOGIN, undefined, { shallow: true });
+      return Promise.reject(errorStatus.errorCode);
     }
 
     return Promise.reject(error);
   };
 
-  const requestInterceptor = axiosInstance.interceptors.request.use((config) => axiosRequestInterCeptorHandler(config));
+  const requestInterceptor = axiosInstance.interceptors.request.use((config) => axiosRequestInterceptorHandler(config));
 
   const responseInterceptor = axiosInstance.interceptors.response.use(
     (response) => response,
-    (error) => tokenErrorHandler(error)
+    (error) => errorHandler(error)
   );
 
   useEffect(

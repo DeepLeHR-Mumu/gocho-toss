@@ -1,4 +1,4 @@
-export interface IsUserZustandlProps {
+export interface IsLoginZustandlProps {
   isLogined: boolean;
   setIsLogined: (status: boolean) => void;
 }

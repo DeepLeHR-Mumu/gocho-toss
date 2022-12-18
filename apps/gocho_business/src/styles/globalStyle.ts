@@ -5,8 +5,8 @@ export const sidebarContainer = css`
   height: 100vh;
   flex-direction: row;
 `;
-export const pageContainer = (isLogined: boolean) => css`
-  width: ${isLogined ? "calc(100% - 18rem)" : "100%"};
+export const pageContainer = css`
+  width: 100%;
 `;
 
 export const globalStyle = css`

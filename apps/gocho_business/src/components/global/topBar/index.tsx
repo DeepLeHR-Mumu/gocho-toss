@@ -1,18 +1,18 @@
 import { FunctionComponent } from "react";
-import { useRouter } from "next/router";
+import { useQueryClient } from "@tanstack/react-query";
 
-import { useUserStatus } from "@/globalStates/useUser";
+import { useUserInfo } from "@/api/auth/useUserInfo";
+import { userInfoKeyObj } from "@/constants/queryKeyFactory/user/infoKeyObj";
 
 import { container, logo, logoutButton, signUpButton, title, wrapper } from "./style";
 
 export const TopBar: FunctionComponent = () => {
-  const router = useRouter();
-  const { isLogined, setIsLogined } = useUserStatus();
+  const queryClient = useQueryClient();
+  const { isSuccess } = useUserInfo();
 
   const doLogoutHandler = () => {
     localStorage.clear();
-    setIsLogined(false);
-    router.push("/login");
+    queryClient.invalidateQueries(userInfoKeyObj.userInfo);
   };
 
   return (
@@ -21,7 +21,7 @@ export const TopBar: FunctionComponent = () => {
         <div css={logo} />
         <h1 css={title}>고초대졸.business</h1>
       </div>
-      {isLogined ? (
+      {isSuccess ? (
         <button type="button" css={logoutButton} onClick={doLogoutHandler}>
           로그아웃
         </button>

@@ -6,33 +6,37 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
 import { adminTokenDecryptor } from "shared-util/tokenDecryptor";
-import gochoColorSrc from "shared-image/global/deepLeLogo/smallColor.svg";
+import gochoColorSrc from "shared-image/global/deepLeLogo/largeColor.svg";
 
-import { useUserStatus } from "@/globalStates/useUser";
+import { INTERNAL_URL } from "@/constants/index";
 import { useDoLogin } from "@/api/auth/useDoLogin";
+import { useUserInfo } from "@/api/auth/useUserInfo";
 
 import { LoginFormValues } from "./type";
 import { cssObj } from "./style";
 
 const LoginPage: NextPage = () => {
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
-  const [errorMsg, setErrorMsg] = useState<string>("");
+  const [errorMsg, setErrorMsg] = useState<string | undefined>("");
   const router = useRouter();
-  const queryClient = useQueryClient();
 
-  const { isLogined } = useUserStatus();
-  const { mutate } = useDoLogin();
-  const { register, handleSubmit } = useForm<LoginFormValues>({ mode: "onChange" });
+  const queryClient = useQueryClient();
+  const { isSuccess } = useUserInfo();
+  const { mutate: postLogin } = useDoLogin();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormValues>({ mode: "onChange" });
 
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
-    mutate(loginObj, {
+    postLogin(loginObj, {
       onError: (error) => {
-        const errorResponse = error.response?.data as ErrorResponse;
-        setErrorMsg(errorResponse.error.errorMessage);
+        const errorResponse = error.response?.data.error[0];
+        setErrorMsg(errorResponse?.error_message);
       },
       onSuccess: (response) => {
         const { exp: accessExp } = adminTokenDecryptor(response.data.access_token);
@@ -48,10 +52,21 @@ const LoginPage: NextPage = () => {
   };
 
   useEffect(() => {
-    if (isLogined) {
-      router.push("/");
-    }
-  }, [isLogined, router]);
+    if (isSuccess) router.push("/");
+
+    const routeChangeStart = (url: string) => {
+      if (url !== INTERNAL_URL.LOGIN && !isSuccess) {
+        router.events.emit("routeChangeError");
+        // eslint-disable-next-line no-throw-literal
+        throw true;
+      }
+    };
+    router.events.on("routeChangeStart", routeChangeStart);
+
+    return () => {
+      router.events.off("routeChangeStart", routeChangeStart);
+    };
+  }, [isSuccess, router]);
 
   return (
     <main css={cssObj.wrapper}>
@@ -72,7 +87,7 @@ const LoginPage: NextPage = () => {
                 placeholder="아이디(이메일)"
                 css={cssObj.inputCSS}
                 {...register("email", {
-                  required: "아이디 입력해라!",
+                  required: "이메일을 입력해주세요.",
                 })}
               />
             </li>
@@ -82,7 +97,7 @@ const LoginPage: NextPage = () => {
                 placeholder="비밀번호"
                 css={cssObj.inputCSS}
                 {...register("password", {
-                  required: "비밀번호 입력해라!",
+                  required: "비밀번호를 입력해주세요.",
                 })}
               />
               <button
@@ -104,9 +119,7 @@ const LoginPage: NextPage = () => {
               비밀번호 찾기
             </button>
           </div>
-
-          <p>{errorMsg && errorMsg}</p>
-
+          <p css={cssObj.errorMsg}>{errors.email?.message || errors.password?.message || errorMsg}</p>
           <button css={cssObj.loginButton} type="submit">
             로그인
           </button>
