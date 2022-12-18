@@ -2,6 +2,7 @@ import { FunctionComponent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
+import { conningAddClickEvent } from "shared-ga/home";
 
 import { SlideCardProps } from "./type";
 import { wrapper, logo, title, desc, iconBox, linkButton, middleDescCSS, topDescCSS } from "./style";
@@ -31,6 +32,13 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({ carouselData }) =
       )}
       {carouselData.buttonObj && carouselData.buttonObj.target === "_blank" && (
         <a
+          onClick={
+            carouselData.id === 2
+              ? () => {
+                  conningAddClickEvent();
+                }
+              : undefined
+          }
           href={carouselData.buttonObj.url}
           target={carouselData.buttonObj.target}
           css={linkButton(carouselData.buttonObj.backgroundColor, carouselData.buttonObj.color)}

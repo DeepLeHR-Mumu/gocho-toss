@@ -32,7 +32,7 @@ export const carouselArr = [
     backgroundImage: conningCommercial,
     backgroundColor: "#030f16",
     buttonObj: {
-      target: "_self" as const,
+      target: "_blank" as const,
       text: "자세히보기",
       color: "#fff",
       backgroundColor: "#333",

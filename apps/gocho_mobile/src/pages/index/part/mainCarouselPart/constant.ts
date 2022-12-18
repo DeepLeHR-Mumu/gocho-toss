@@ -25,7 +25,7 @@ export const carouselArr = [
     lastDesc: "2022.12.16~2023.01.01",
     backgroundColor: "#030f16",
     buttonObj: {
-      target: "_self" as const,
+      target: "_blank" as const,
       text: "자세히보기",
       color: "#fff",
       backgroundColor: "#333",
