@@ -15,18 +15,16 @@ export interface PostLoginDef {
   ({ email, password, auto_login }: RequestObjDef): Promise<ResponseObjDef>;
 }
 
-export interface LoginErrorValuesDef {
-  error: [
-    {
-      status: number;
-      status_name: string;
-      error_code: string;
-      error_message: string;
-      path: string;
-    }
-  ];
+export interface LoginErrorValuesDef extends AxiosError {
+  error: {
+    status: number;
+    status_name: string;
+    error_code: string;
+    error_message: string;
+    path: string;
+  }[];
 }
 
 export interface useDoLoginProps {
-  (): UseMutationResult<ResponseObjDef, AxiosError<LoginErrorValuesDef>, RequestObjDef>;
+  (): UseMutationResult<ResponseObjDef, LoginErrorValuesDef, RequestObjDef>;
 }

@@ -8,23 +8,23 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
-import { adminTokenDecryptor } from "shared-util/tokenDecryptor";
 import gochoColorSrc from "shared-image/global/deepLeLogo/largeColor.svg";
 
 import { INTERNAL_URL } from "@/constants/index";
 import { useDoLogin } from "@/api/auth/useDoLogin";
-import { useUserInfo } from "@/api/auth/useUserInfo";
+import { useUserState } from "@/globalStates/useUserState";
+import { LoginErrorValuesDef } from "@/api/auth/useDoLogin/type";
 
 import { LoginFormValues } from "./type";
 import { cssObj } from "./style";
 
 const LoginPage: NextPage = () => {
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
-  const [errorMsg, setErrorMsg] = useState<string | undefined>("");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const router = useRouter();
 
   const queryClient = useQueryClient();
-  const { isSuccess } = useUserInfo();
+  const { useInfoData } = useUserState();
   const { mutate: postLogin } = useDoLogin();
   const {
     register,
@@ -35,27 +35,23 @@ const LoginPage: NextPage = () => {
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     postLogin(loginObj, {
       onError: (error) => {
-        const errorResponse = error.response?.data.error[0];
-        setErrorMsg(errorResponse?.error_message);
+        const errorResponse = error.response?.data as LoginErrorValuesDef;
+        setErrorMsg(errorResponse.error[0].error_message);
       },
       onSuccess: (response) => {
-        const { exp: accessExp } = adminTokenDecryptor(response.data.access_token);
-        const { exp: refreshExp } = adminTokenDecryptor(response.data.refresh_token);
         localStorage.setItem("accessToken", `${response.data.access_token}`);
         localStorage.setItem("refreshToken", `${response.data.refresh_token}`);
-        localStorage.setItem("accessExp", `${accessExp}`);
-        localStorage.setItem("refreshExp", `${refreshExp}`);
+        router.push("/", undefined, { shallow: true });
         queryClient.invalidateQueries();
-        router.push("/");
       },
     });
   };
 
   useEffect(() => {
-    if (isSuccess) router.push("/");
+    if (useInfoData) router.push("/");
 
     const routeChangeStart = (url: string) => {
-      if (url !== INTERNAL_URL.LOGIN && !isSuccess) {
+      if (url !== INTERNAL_URL.LOGIN && !useInfoData) {
         router.events.emit("routeChangeError");
         // eslint-disable-next-line no-throw-literal
         throw true;
@@ -66,7 +62,7 @@ const LoginPage: NextPage = () => {
     return () => {
       router.events.off("routeChangeStart", routeChangeStart);
     };
-  }, [isSuccess, router]);
+  }, [useInfoData, router]);
 
   return (
     <main css={cssObj.wrapper}>

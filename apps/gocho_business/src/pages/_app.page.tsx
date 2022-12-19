@@ -1,5 +1,5 @@
 import type { AppProps } from "next/app";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Global } from "@emotion/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query";
@@ -7,10 +7,12 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 import { useAxiosInterceptor } from "@/api/useAxiosInterceptor";
+// import { INTERNAL_URL } from "@/constants";
 import { globalStyle, pageContainer, sidebarContainer } from "@/styles/globalStyle";
 import { SideBar } from "@/components/global/sideBar";
 import { TopBar } from "@/components/global/topBar";
 import { ToastPlaceholder } from "@/components/global/toast/toastPlaceHolder";
+import { INTERNAL_URL } from "@/constants";
 
 function BusinessService({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -37,6 +39,12 @@ function BusinessService({ Component, pageProps }: AppProps) {
   );
 
   useAxiosInterceptor();
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    const currentUrl = router.pathname;
+    if (!token && currentUrl !== INTERNAL_URL.LOGIN) router.push(INTERNAL_URL.LOGIN);
+  }, [router]);
 
   return (
     <QueryClientProvider client={queryClient}>

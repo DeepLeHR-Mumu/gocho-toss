@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 import { BUSINESS_BACKEND_URL } from "shared-constant/externalURL";
-import { adminTokenDecryptor } from "shared-util/tokenDecryptor";
+import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 
 import { INTERNAL_URL } from "@/constants/index";
 
@@ -47,8 +47,14 @@ export const useAxiosInterceptor = () => {
   const axiosRequestInterceptorHandler = async (config: AxiosRequestConfig) => {
     let accessToken = localStorage.getItem("accessToken");
     const refreshToken = localStorage.getItem("refreshToken");
-    const accessExp = localStorage.getItem("accessExp");
-    const refreshExp = localStorage.getItem("refreshExp");
+
+    // if (!accessToken || !refreshToken) {
+    //   router.push(INTERNAL_URL.LOGIN, undefined, { shallow: true });
+    //   return config;
+    // }
+
+    const { exp: accessExp } = managerTokenDecryptor(accessToken as string);
+    const { exp: refreshExp } = managerTokenDecryptor(refreshToken as string);
 
     const refreshCreateTime = new Date(Number(refreshExp) * 1000).getTime();
     const accessCreateTime = new Date(Number(accessExp) * 1000).getTime();
@@ -64,12 +70,8 @@ export const useAxiosInterceptor = () => {
         headers: { "x-refresh-token": `${refreshToken}` },
       });
 
-      const { exp: accessNewExp } = adminTokenDecryptor(refreshData.data.access_token);
-      const { exp: refreshNewExp } = adminTokenDecryptor(refreshData.data.refresh_token);
       localStorage.setItem("accessToken", `${refreshData.data.access_token}`);
       localStorage.setItem("refreshToken", `${refreshData.data.refresh_token}`);
-      localStorage.setItem("accessExp", `${accessNewExp}`);
-      localStorage.setItem("refreshExp", `${refreshNewExp}`);
       accessToken = localStorage.getItem("accessToken");
     }
 
@@ -103,7 +105,10 @@ export const useAxiosInterceptor = () => {
     return Promise.reject(error);
   };
 
-  const requestInterceptor = axiosInstance.interceptors.request.use((config) => axiosRequestInterceptorHandler(config));
+  const requestInterceptor = axiosInstance.interceptors.request.use(
+    (config) => axiosRequestInterceptorHandler(config),
+    (error) => errorHandler(error)
+  );
 
   const responseInterceptor = axiosInstance.interceptors.response.use(
     (response) => response,

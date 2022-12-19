@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-export const wrapper = (isLogined: boolean) => css`
-  display: ${isLogined ? "flex" : "none"};
+export const wrapper = css`
+  display: "flex";
   width: 18rem;
   padding: 1.5rem 0 0 0;
   flex-direction: column;
