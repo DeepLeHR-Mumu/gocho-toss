@@ -26,8 +26,6 @@ const FactoryListPage: NextPageWithLayout = () => (
   </main>
 );
 
-FactoryListPage.getLayout = function getLayout(page: ReactElement) {
-  return <GlobalLayout>{page}</GlobalLayout>;
-};
+FactoryListPage.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default FactoryListPage;
