@@ -11,6 +11,7 @@ import { useRejectJd } from "@api/jd/useRejectJd";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
+import { JdPart } from "./part/jdPart";
 import { cssObj } from "./style";
 import { RejectFormValues } from "./type";
 
@@ -59,6 +60,16 @@ const JdEditDetail: NextPage = () => {
   return (
     <main css={mainContainer}>
       <h2 css={pageTitle}>공고 변경 요청 확인</h2>
+      <div css={cssObj.jdCompareContainer}>
+        <div css={cssObj.jdContainer}>
+          <strong css={cssObj.label}>BEFORE</strong>
+          <JdPart jd={jdBeforeData} />
+        </div>
+        <div css={cssObj.jdContainer}>
+          <strong css={cssObj.label}>AFTER</strong>
+          <JdPart jd={jdAfterData} />
+        </div>
+      </div>
       <div css={cssObj.buttonContainer}>
         <button
           type="submit"
