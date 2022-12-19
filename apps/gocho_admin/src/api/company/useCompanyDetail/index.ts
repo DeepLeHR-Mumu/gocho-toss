@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { axiosNoTokenInstance } from "@api/axiosInstance";
+import { axiosNoTokenInstance } from "@api/useAxiosInterceptor";
 
 import { companyDetailKeyObj, GetCompanyDetailDef, RequestObjDef } from "./type";
 import { companyDetailConverter } from "./util";
