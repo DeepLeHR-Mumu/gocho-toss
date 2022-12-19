@@ -1,12 +1,12 @@
-import { CompanyDef } from "../type";
+import { ResponseObjDef } from "./type";
 
-export const selector = (companyArr: CompanyDef[], count: number) => {
-  const companyDataArr = companyArr.map((data) => {
+export const companyArrSelector = ({ data: companyArr, count }: ResponseObjDef) => {
+  const companyDataArr = companyArr.map((company) => {
     return {
-      id: data.id,
-      name: data.name,
-      logoUrl: data.logo_url,
-      commentCount: data.comment_count,
+      id: company.id,
+      name: company.name,
+      logoUrl: company.logo_url,
+      commentCount: company.comment_count,
     };
   });
   return { companyDataArr, count };

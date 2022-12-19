@@ -2,8 +2,10 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
-import { axiosInstance } from "@api/axiosInstance";
-import { useDeleteCompanyProps, DeleteCompanyDef, RequestObjDef } from "./type";
+
+import { axiosInstance } from "@api/useAxiosInterceptor";
+
+import { DeleteCompanyDef, RequestObjDef, useDeleteCompanyProps } from "./type";
 
 export const deleteCompany: DeleteCompanyDef = async (requestObj) => {
   const { data } = await axiosInstance.delete(`/companies/${requestObj.companyId}`);
@@ -11,6 +13,5 @@ export const deleteCompany: DeleteCompanyDef = async (requestObj) => {
 };
 
 export const useDeleteCompany: useDeleteCompanyProps = () => {
-  const mutationResult = useMutation<AdminResponseDef, AxiosError, RequestObjDef>(deleteCompany);
-  return mutationResult;
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(deleteCompany);
 };

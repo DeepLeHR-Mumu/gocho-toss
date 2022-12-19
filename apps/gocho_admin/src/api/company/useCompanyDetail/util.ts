@@ -1,6 +1,6 @@
-import { CompanyDetailObjDef } from "../type";
+import { ResponseObjDef } from "./type";
 
-export const companyConverter = (data: CompanyDetailObjDef) => {
+export const companyConverter = ({ data }: ResponseObjDef) => {
   return {
     id: data.id,
     name: data.name,

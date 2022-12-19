@@ -9,8 +9,9 @@ import { FactoryBox } from "./component/factoryBox";
 import { BasicInfoPart } from "./part/basicInfoPart";
 import { WelfareInfoPart } from "./part/welfareInfoPart";
 import { PayInfoPart } from "./part/payInfoPart";
-import { CompanyFormValues, CompanySubmitValues } from "../type";
+import { CompanyFormValues } from "../type";
 import { blankFactory } from "./constant";
+
 import { formContainer, addFactoryButton, submitButton, checkMsgBox } from "./style";
 
 const CompanyUpload: NextPage = () => {
@@ -32,23 +33,13 @@ const CompanyUpload: NextPage = () => {
   });
 
   const companySubmit: SubmitHandler<CompanyFormValues> = (companyObj) => {
-    const newCompanyObj: CompanySubmitValues = {
-      ...companyObj,
-      welfare: {
-        money: companyObj.welfare.money ? companyObj.welfare.money.split("\n") : null,
-        health: companyObj.welfare.health ? companyObj.welfare.health.split("\n") : null,
-        life: companyObj.welfare.life ? companyObj.welfare.life.split("\n") : null,
-        holiday: companyObj.welfare.holiday ? companyObj.welfare.holiday.split("\n") : null,
-        facility: companyObj.welfare.facility ? companyObj.welfare.facility.split("\n") : null,
-        vacation: companyObj.welfare.vacation ? companyObj.welfare.vacation.split("\n") : null,
-        growth: companyObj.welfare.growth ? companyObj.welfare.growth.split("\n") : null,
-        etc: companyObj.welfare.etc ? companyObj.welfare.etc.split("\n") : null,
-      },
-    };
-    const json = JSON.stringify(newCompanyObj);
+    const formData = new FormData();
+    const json = JSON.stringify(companyObj);
     const blob = new Blob([json], { type: "application/json" });
+    formData.append("dto", blob);
 
     if (logoPicture) {
+      formData.append("img", logoPicture);
       mutate(
         { dto: blob, logo: logoPicture },
         {

@@ -7,8 +7,8 @@ import { dateConverter } from "shared-util/date";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
 
-import { useAddTopBanner } from "@api/banner/addTopBanner";
-import { useJobDetail } from "@api/job/useJobDetail";
+import { useJdDetail } from "@api/jd/useJdDetail";
+import { useAddTopBanner } from "@api/banner/useAddTopBanner";
 import { pageTitle } from "@style/commonStyles";
 
 import {
@@ -39,15 +39,12 @@ export const UploadBannerPart: FunctionComponent = () => {
   const queryClient = useQueryClient();
   const { register, watch, setValue, handleSubmit } = useForm<BannerSubmitFormValues>();
 
-  const { data: jobData } = useJobDetail({ id: jobId });
-  const { mutate } = useAddTopBanner();
+  const { data: jobData } = useJdDetail({ id: jobId });
+  const { mutate: addMutate } = useAddTopBanner();
 
-  const bannerSubmitHandler: SubmitHandler<BannerSubmitFormValues> = (bannerSubmitObj) => {
-    const json = JSON.stringify(bannerSubmitObj);
-    const blob = new Blob([json], { type: "application/json" });
-
-    mutate(
-      { dto: blob },
+  const submitBannerHandler: SubmitHandler<BannerSubmitFormValues> = (bannerSubmitObj) => {
+    addMutate(
+      { dto: bannerSubmitObj },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(bannerArrKeyObj.bannerArr({ type: "T" }));
@@ -68,7 +65,7 @@ export const UploadBannerPart: FunctionComponent = () => {
     <>
       <h2 css={pageTitle}>공고 상단 배너 업로드</h2>
       <section css={sectionContainer}>
-        <form onSubmit={handleSubmit(bannerSubmitHandler)}>
+        <form onSubmit={handleSubmit(submitBannerHandler)}>
           <div css={inputContainer}>
             <strong css={inputTitle}>공고 번호</strong>
             <input

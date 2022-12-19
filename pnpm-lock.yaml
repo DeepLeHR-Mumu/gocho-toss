@@ -82,13 +82,33 @@ importers:
 
   apps/gocho_business:
     specifiers:
+      '@babel/plugin-proposal-class-properties': ^7.18.6
+      '@babel/plugin-proposal-private-methods': ^7.18.6
+      '@babel/plugin-proposal-private-property-in-object': ^7.18.6
+      '@emotion/babel-preset-css-prop': ^11.10.0
+      '@emotion/react': ^11.10.0
+      '@playwright/test': 1.28.0
+      '@storybook/addon-actions': ^6.5.10
+      '@storybook/addon-essentials': ^6.5.10
+      '@storybook/addon-interactions': ^6.5.10
+      '@storybook/addon-links': ^6.5.10
+      '@storybook/builder-webpack5': ^6.5.10
+      '@storybook/manager-webpack5': ^6.5.10
+      '@storybook/react': ^6.5.10
+      '@storybook/testing-library': ^0.0.13
+      '@tanstack/react-query': ^4.2.3
+      '@tanstack/react-query-devtools': ^4.2.3
       '@types/node': 18.7.13
       '@types/react': 18.0.17
       '@types/react-dom': 18.0.6
+      axios: ^0.27.2
+      babel-loader: ^8.2.5
       eslint-config-deeple: workspace:^1.0.0
       next: 12.2.5
+      next-transpile-modules: ^9.0.0
       react: 17.0.2
       react-dom: 17.0.2
+      react-icons: ^4.4.0
       shared-api: workspace:^0.0.0
       shared-constant: workspace:^0.0.0
       shared-ga: workspace:^0.0.0
@@ -97,11 +117,20 @@ importers:
       shared-type: workspace:^0.0.0
       shared-ui: workspace:^0.0.0
       shared-util: workspace:^0.0.0
+      tsconfig-deeple: workspace:^0.0.0
       typescript: 4.7.2
+      zustand: ^4.1.5
     dependencies:
-      next: 12.2.5_sfoxds7t5ydpegc3knd667wn6m
+      '@emotion/react': 11.10.4_v7wa3uncfa5agztyqirlhe5v34
+      '@playwright/test': 1.28.0
+      '@tanstack/react-query': 4.3.4_sfoxds7t5ydpegc3knd667wn6m
+      '@tanstack/react-query-devtools': 4.3.5_rc2nloshn5awlpljd7lgxlyskm
+      axios: 0.27.2
+      next: 12.2.5_2f3qgkpmmpou2hyqrmueifddme
+      next-transpile-modules: 9.0.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
+      react-icons: 4.4.0_react@17.0.2
       shared-api: link:../../shared/api
       shared-constant: link:../../shared/constant
       shared-ga: link:../../shared/ga
@@ -110,11 +139,26 @@ importers:
       shared-type: link:../../shared/type
       shared-ui: link:../../shared/ui
       shared-util: link:../../shared/util
+      zustand: 4.1.5_react@17.0.2
     devDependencies:
+      '@babel/plugin-proposal-class-properties': 7.18.6_@babel+core@7.19.1
+      '@babel/plugin-proposal-private-methods': 7.18.6_@babel+core@7.19.1
+      '@babel/plugin-proposal-private-property-in-object': 7.18.6_@babel+core@7.19.1
+      '@emotion/babel-preset-css-prop': 11.10.0_@babel+core@7.19.1
+      '@storybook/addon-actions': 6.5.12_sfoxds7t5ydpegc3knd667wn6m
+      '@storybook/addon-essentials': 6.5.12_hmn6dpyz5jsqa4i6xcwdei5ula
+      '@storybook/addon-interactions': 6.5.12_lpddxej3z5bxm425elitzlwdva
+      '@storybook/addon-links': 6.5.12_sfoxds7t5ydpegc3knd667wn6m
+      '@storybook/builder-webpack5': 6.5.12_k26rfrdk2uh2ao3d3jcmn6wejm
+      '@storybook/manager-webpack5': 6.5.12_k26rfrdk2uh2ao3d3jcmn6wejm
+      '@storybook/react': 6.5.12_gqggrcjydhwzdw7gkdyr5xn2eq
+      '@storybook/testing-library': 0.0.13_sfoxds7t5ydpegc3knd667wn6m
       '@types/node': 18.7.13
       '@types/react': 18.0.17
       '@types/react-dom': 18.0.6
+      babel-loader: 8.2.5_rhsdbzevgb5tizdhlla5jsbgyu
       eslint-config-deeple: link:../../packages/eslint-config-deeple
+      tsconfig-deeple: link:../../packages/tsconfig-deeple
       typescript: 4.7.2
 
   apps/gocho_mobile:
@@ -258,6 +302,7 @@ importers:
       msw: ^0.47.0
       msw-storybook-addon: ^1.6.3
       next: 12.2.5
+      next-sitemap: ^3.1.32
       next-transpile-modules: ^9.0.0
       postcss-loader: ^7.0.1
       react: 17.0.2
@@ -335,6 +380,7 @@ importers:
       babel-preset-react-app: 10.0.1
       msw: 0.47.2_typescript@4.7.2
       msw-storybook-addon: 1.6.3_l2pmwcptcohg7zplkl3y4ecpyy
+      next-sitemap: 3.1.32_gzpnnaylvtfluxe3m63vhk6hhm
       postcss-loader: 7.0.1_qjv4cptcpse3y5hrjkrbb7drda
       storybook-addon-next: 1.6.9_25uypreafjqiuttdtik5ktde4y
       tsconfig-paths-webpack-plugin: 4.0.0
@@ -381,6 +427,7 @@ importers:
       react-dom: 17.0.2
       shared-constant: workspace:^0.0.0
       shared-type: workspace:^0.0.0
+      shared-util: workspace:^0.0.0
       tsconfig-deeple: workspace:^0.0.0
       typescript: 4.7.2
     dependencies:
@@ -390,6 +437,7 @@ importers:
       react-dom: 17.0.2_react@17.0.2
       shared-constant: link:../constant
       shared-type: link:../type
+      shared-util: link:../util
     devDependencies:
       eslint-config-deeple: link:../../packages/eslint-config-deeple
       tsconfig-deeple: link:../../packages/tsconfig-deeple
@@ -1980,6 +2028,10 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@corex/deepmerge/4.0.29:
+    resolution: {integrity: sha512-q/yVUnqckA8Do+EvAfpy7RLdumnBy9ZsducMUtZTvpdbJC7azEf1hGtnYYxm0QfphYxjwggv6XtH64prvS1W+A==}
+    dev: true
 
   /@datadog/browser-core/4.21.1:
     resolution: {integrity: sha512-irw4h2PcHazvcuZljZHXa1mf4smpCh0bvujAJHhrkdCdRB2hZSH5gCk6/hIUGl/CTZKBkaOYCwEH5Jmlm5Pksw==}
@@ -4878,12 +4930,12 @@ packages:
       negotiator: 0.6.3
     dev: true
 
-  /acorn-import-assertions/1.8.0_acorn@8.8.0:
+  /acorn-import-assertions/1.8.0_acorn@8.8.1:
     resolution: {integrity: sha512-m7VZ3jwz4eK6A4Vtt8Ew1/mNbP24u0FhdyfA7fSvnJR6LMdfOYnmuIrrJAgrYfYJ10F/otaHTtrtrtmHdMNzEw==}
     peerDependencies:
       acorn: ^8
     dependencies:
-      acorn: 8.8.0
+      acorn: 8.8.1
     dev: true
 
   /acorn-jsx/5.3.2_acorn@7.4.1:
@@ -4927,6 +4979,7 @@ packages:
     resolution: {integrity: sha512-QOxyigPVrpZ2GXT+PFyZTl6TtOFc5egxHIP9IlQ+RbupQuX4RkT/Bee4/kQuC02Xkzg84JcT7oLYtDIQxp+v7w==}
     engines: {node: '>=0.4.0'}
     hasBin: true
+    dev: false
 
   /acorn/8.8.1:
     resolution: {integrity: sha512-7zFpHzhnqYKrkYdUjF1HI1bzd0VygEGX8lFk4k5zVMqHEoES+P+7TKI+EvLO9WVMJ8eekdO0aDEK044xTXwPPA==}
@@ -5284,7 +5337,7 @@ packages:
     resolution: {integrity: sha512-eM9d/swFopRt5gdJ7jrpCwgvEMIayITpojhkkSMRsFHYuH5bkSQ4p/9qTEHtmNudUZh22Tehu7I6CxAW0IXTKA==}
     hasBin: true
     dependencies:
-      browserslist: 4.21.3
+      browserslist: 4.21.4
       caniuse-lite: 1.0.30001434
       normalize-range: 0.1.2
       num2fraction: 1.2.2
@@ -10227,6 +10280,20 @@ packages:
     resolution: {integrity: sha512-9iN1ka/9zmX1ZvLV9ewJYEk9h7RyRRtqdK0woXcqohu8EWIerfPUjYJPg0ULy0UqP7cslmdGc8xKDJcojlKiaw==}
     dev: true
 
+  /next-sitemap/3.1.32_gzpnnaylvtfluxe3m63vhk6hhm:
+    resolution: {integrity: sha512-jkIKpwLXpWWTPfmDO46+6nu4+qpar4CjvUwCR9rYZHWtzE/wFfaCVFKpGtFMl6MFjpu8GjiE6kWFEa7uF3bzzg==}
+    engines: {node: '>=14.18'}
+    hasBin: true
+    peerDependencies:
+      '@next/env': '*'
+      next: '*'
+    dependencies:
+      '@corex/deepmerge': 4.0.29
+      '@next/env': 12.2.5
+      minimist: 1.2.6
+      next: 12.2.5_2f3qgkpmmpou2hyqrmueifddme
+    dev: true
+
   /next-transpile-modules/9.0.0:
     resolution: {integrity: sha512-VCNFOazIAnXn1hvgYYSTYMnoWgKgwlYh4lm1pKbSfiB3kj5ZYLcKVhfh3jkPOg1cnd9DP+pte9yCUocdPEUBTQ==}
     dependencies:
@@ -10277,51 +10344,6 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
-
-  /next/12.2.5_sfoxds7t5ydpegc3knd667wn6m:
-    resolution: {integrity: sha512-tBdjqX5XC/oFs/6gxrZhjmiq90YWizUYU6qOWAfat7zJwrwapJ+BYgX2PmiacunXMaRpeVT4vz5MSPSLgNkrpA==}
-    engines: {node: '>=12.22.0'}
-    hasBin: true
-    peerDependencies:
-      fibers: '>= 3.1.0'
-      node-sass: ^6.0.0 || ^7.0.0
-      react: ^17.0.2 || ^18.0.0-0
-      react-dom: ^17.0.2 || ^18.0.0-0
-      sass: ^1.3.0
-    peerDependenciesMeta:
-      fibers:
-        optional: true
-      node-sass:
-        optional: true
-      sass:
-        optional: true
-    dependencies:
-      '@next/env': 12.2.5
-      '@swc/helpers': 0.4.3
-      caniuse-lite: 1.0.30001434
-      postcss: 8.4.14
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
-      styled-jsx: 5.0.4_react@17.0.2
-      use-sync-external-store: 1.2.0_react@17.0.2
-    optionalDependencies:
-      '@next/swc-android-arm-eabi': 12.2.5
-      '@next/swc-android-arm64': 12.2.5
-      '@next/swc-darwin-arm64': 12.2.5
-      '@next/swc-darwin-x64': 12.2.5
-      '@next/swc-freebsd-x64': 12.2.5
-      '@next/swc-linux-arm-gnueabihf': 12.2.5
-      '@next/swc-linux-arm64-gnu': 12.2.5
-      '@next/swc-linux-arm64-musl': 12.2.5
-      '@next/swc-linux-x64-gnu': 12.2.5
-      '@next/swc-linux-x64-musl': 12.2.5
-      '@next/swc-win32-arm64-msvc': 12.2.5
-      '@next/swc-win32-ia32-msvc': 12.2.5
-      '@next/swc-win32-x64-msvc': 12.2.5
-    transitivePeerDependencies:
-      - '@babel/core'
-      - babel-plugin-macros
-    dev: false
 
   /nice-try/1.0.5:
     resolution: {integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==}
@@ -12786,22 +12808,6 @@ packages:
       inline-style-parser: 0.1.1
     dev: true
 
-  /styled-jsx/5.0.4_react@17.0.2:
-    resolution: {integrity: sha512-sDFWLbg4zR+UkNzfk5lPilyIgtpddfxXEULxhujorr5jtePTUqiPDc5BC0v1NRqTr/WaFBGQQUoYToGlF4B2KQ==}
-    engines: {node: '>= 12.0.0'}
-    peerDependencies:
-      '@babel/core': '*'
-      babel-plugin-macros: '*'
-      react: '>= 16.8.0 || 17.x.x || ^18.0.0-0'
-    peerDependenciesMeta:
-      '@babel/core':
-        optional: true
-      babel-plugin-macros:
-        optional: true
-    dependencies:
-      react: 17.0.2
-    dev: false
-
   /styled-jsx/5.0.4_vgklzpw26sk7qscmpz3w5iuxmy:
     resolution: {integrity: sha512-sDFWLbg4zR+UkNzfk5lPilyIgtpddfxXEULxhujorr5jtePTUqiPDc5BC0v1NRqTr/WaFBGQQUoYToGlF4B2KQ==}
     engines: {node: '>= 12.0.0'}
@@ -13877,9 +13883,9 @@ packages:
       '@webassemblyjs/ast': 1.11.1
       '@webassemblyjs/wasm-edit': 1.11.1
       '@webassemblyjs/wasm-parser': 1.11.1
-      acorn: 8.8.0
-      acorn-import-assertions: 1.8.0_acorn@8.8.0
-      browserslist: 4.21.3
+      acorn: 8.8.1
+      acorn-import-assertions: 1.8.0_acorn@8.8.1
+      browserslist: 4.21.4
       chrome-trace-event: 1.0.3
       enhanced-resolve: 5.10.0
       es-module-lexer: 0.9.3
@@ -14108,6 +14114,22 @@ packages:
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+  /zustand/4.1.5_react@17.0.2:
+    resolution: {integrity: sha512-PsdRT8Bvq22Yyh1tvpgdHNE7OAeFKqJXUxtJvj1Ixw2B9O2YZ1M34ImQ+xyZah4wZrR4lENMoDUutKPpyXCQ/Q==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      immer: '>=9.0'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      immer:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      react: 17.0.2
+      use-sync-external-store: 1.2.0_react@17.0.2
+    dev: false
 
   /zwitch/1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}

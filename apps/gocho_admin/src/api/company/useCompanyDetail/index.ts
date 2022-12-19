@@ -4,7 +4,7 @@ import {
   companyDetailKeyObj,
   CompanyDetailRequestDef,
 } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
-import { axiosNoTokenInstance } from "@api/axiosInstance";
+import { axiosNoTokenInstance } from "@api/useAxiosInterceptor";
 
 import { GetCompanyDetailDef } from "./type";
 import { companyConverter } from "./util";
@@ -17,7 +17,7 @@ export const getCompanyDetail: GetCompanyDetailDef = async ({ queryKey: [{ reque
 export const useCompanyDetail = (requestObj: CompanyDetailRequestDef) => {
   const queryResult = useQuery(companyDetailKeyObj.detail(requestObj), getCompanyDetail, {
     enabled: Boolean(requestObj.companyId),
-    select: ({ data }) => {
+    select: (data) => {
       return companyConverter(data);
     },
   });

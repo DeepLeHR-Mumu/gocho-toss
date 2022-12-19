@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 
 import { useToast } from "@recoil/hook/toast";
 
-import { ToastComponent } from "../toastComponent";
+import { ToastComponent } from "../toastBox";
 
 export const ToastPlaceholder: FunctionComponent = () => {
   const { currentToast } = useToast();

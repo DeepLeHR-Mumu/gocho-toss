@@ -4,9 +4,10 @@ import Image from "next/image";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { dateConverter } from "shared-util/date";
 
+import { useJdArr } from "@api/jd/useJdArr";
 import { mainContainer, pageTitle } from "@style/commonStyles";
-import { useJobArr } from "@api/job/useJobArr";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
+
 import { JobDef } from "../type";
 
 import {
@@ -31,10 +32,10 @@ import {
 
 const Instagram: NextPage = () => {
   const {
-    data: jobDataArr,
+    data: jdDataArr,
     isLoading,
     isError,
-  } = useJobArr({
+  } = useJdArr({
     order: "popular",
     filter: "todayUpload",
     limit: 10,
@@ -90,7 +91,7 @@ const Instagram: NextPage = () => {
     navigator.clipboard.writeText(text);
   };
 
-  if (!jobDataArr || isLoading) {
+  if (!jdDataArr || isLoading) {
     return <LoadingScreen />;
   }
 
@@ -113,7 +114,7 @@ const Instagram: NextPage = () => {
         </div>
 
         <ul>
-          {jobDataArr.jobDataArr.map((job) => {
+          {jdDataArr.jdDataArr.map((job) => {
             const { year: startYear, month: startMonth, date: startDate } = dateConverter(job.startTime);
             const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
 

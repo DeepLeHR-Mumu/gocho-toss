@@ -1,10 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { statisticsKeyObj } from "shared-constant/queryKeyFactory/stat/statisticsKeyObj";
-import { axiosInstance } from "@api/axiosInstance";
+import { axiosInstance } from "@api/useAxiosInterceptor";
 
-import { GetStatisticsDef } from "./type";
-import { selector } from "./util";
+import { GetStatisticsDef, statisticsKeyObj } from "./type";
+import { statSelector } from "./util";
 
 export const getStatistics: GetStatisticsDef = async () => {
   const { data } = await axiosInstance.get("/admin/dashboard");
@@ -13,8 +12,8 @@ export const getStatistics: GetStatisticsDef = async () => {
 
 export const useStatistics = () => {
   return useQuery(statisticsKeyObj.all, getStatistics, {
-    select: ({ data }) => {
-      return selector(data);
+    select: (data) => {
+      return statSelector(data);
     },
   });
 };

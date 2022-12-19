@@ -55,7 +55,7 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
     );
   }
 
-  if (!companyCommentArrData || !isSuccess) {
+  if (!companyCommentArrData || !isSuccess || companyCommentArrData.commentArr === null) {
     return (
       <>
         <section css={sectionWrapper}>
@@ -93,7 +93,7 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
                       setIsTotalComment(true);
                     }}
                   >
-                    전체 댓글
+                    전체 댓글 <span>{companyCommentArrData?.commentArr?.length}</span>
                   </button>
                 </li>
                 {jdId !== null && (
@@ -119,25 +119,10 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
     );
   }
 
-  const { commentArr, company } = companyCommentArrData;
-
-  const getCompanyComment = (isTotal: boolean) => {
-    if (isTotal) {
-      return commentArr;
-    }
-    return commentArr.filter((comment) => {
-      return comment.title === null;
-    });
-  };
-
-  const getJobComment = (isTotal: boolean) => {
-    if (isTotal) {
-      return commentArr;
-    }
-    return commentArr.filter((comment) => {
-      return comment.title === detailData.title;
-    });
-  };
+  const filterComment = companyCommentArrData.commentArr.filter((comment) => {
+    if (jdId === null) return comment.title === null;
+    return comment.jdId === jdId;
+  });
 
   return (
     <>
@@ -159,13 +144,13 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
                 onError={() => {
                   return setImageSrc(defaultCompanyLogo);
                 }}
-                src={imageSrc || company.logoUrl}
-                alt={company.name}
+                src={imageSrc || companyCommentArrData.company.logoUrl}
+                alt={companyCommentArrData.company.name}
                 objectFit="contain"
                 layout="fill"
               />
             </div>
-            <p css={companyName}>{company.name}</p>
+            <p css={companyName}>{companyCommentArrData.company.name}</p>
           </div>
           <nav css={commentButtonContainer}>
             <ul>
@@ -177,7 +162,7 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
                     setIsTotalComment(true);
                   }}
                 >
-                  전체 댓글 <span>{commentArr.length}</span>
+                  전체 댓글 <span>{companyCommentArrData.commentArr.length}</span>
                 </button>
               </li>
               {jdId !== null && (
@@ -189,7 +174,8 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
                       setIsTotalComment(false);
                     }}
                   >
-                    현재 공고 댓글 <span>{getJobComment(false).length}</span>
+                    {jdId === null ? "기업 정보" : "현재 공고"} 댓글
+                    <span>{filterComment.length}</span>
                   </button>
                 </li>
               )}
@@ -199,8 +185,8 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
         <LoginCommentBox
           jdId={jdId}
           userData={userData}
-          companyData={company}
-          commentArr={jdId === null ? getCompanyComment(isTotalComment) : getJobComment(isTotalComment)}
+          companyId={companyCommentArrData.company.id}
+          commentArr={isTotalComment ? companyCommentArrData.commentArr : filterComment}
         />
       </section>
       <div css={dimmed} />

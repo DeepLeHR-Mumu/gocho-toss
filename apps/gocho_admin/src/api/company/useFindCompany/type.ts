@@ -1,12 +1,30 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
-import { companyArrKeyObj } from "shared-constant/queryKeyFactory/company/arrKeyObj";
-import { CompanyDef } from "../type";
 
-export interface JobArrResponseObjDef {
-  data: CompanyDef[];
+export interface RequestObjDef {
+  q?: string;
+  limit?: number;
+  offset?: number;
+  order: "recent" | "comment" | "name" | "popular" | "rand" | "view" | undefined;
+  word?: string;
+}
+
+export interface ResponseObjDef {
+  data: {
+    id: number;
+    name: string;
+    logo_url: string;
+    comment_count: number;
+  }[];
   count: number;
 }
 
+export const companyArrFindKeyObj = {
+  all: [{ data: "companyArrFind" }] as const,
+  find: (requestObj: RequestObjDef) => {
+    return [{ data: "companyArrFind", requestObj }] as const;
+  },
+};
+
 export interface GetCompanyArrDef {
-  ({ queryKey }: QueryFunctionContext<ReturnType<typeof companyArrKeyObj.companyArr>>): Promise<JobArrResponseObjDef>;
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof companyArrFindKeyObj.find>>): Promise<ResponseObjDef>;
 }

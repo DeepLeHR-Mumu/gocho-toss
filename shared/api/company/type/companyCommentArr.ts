@@ -8,7 +8,7 @@ interface CompanyCommentDef {
   liked: boolean;
   disliked: boolean;
   nickname: string;
-  title: string;
+  title: string | null;
   badge: "default" | "admin" | "early_bird";
   like_count: number;
   dislike_count: number;
@@ -20,5 +20,5 @@ export interface CompanyCommentArrDef {
     id: number;
     logo_url: string;
   };
-  comment_arr: CompanyCommentDef[];
+  comment_arr: CompanyCommentDef[] | null;
 }

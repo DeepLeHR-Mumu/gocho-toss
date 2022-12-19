@@ -2,8 +2,10 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
-import { axiosInstance } from "@api/axiosInstance";
-import { useDeleteBannerProps, DeleteBannerDef, RequestObjDef } from "./type";
+
+import { axiosInstance } from "@api/useAxiosInterceptor";
+
+import { DeleteBannerDef, RequestObjDef, useDeleteBannerProps } from "./type";
 
 export const deleteBanner: DeleteBannerDef = async (requestObj) => {
   const { data } = await axiosInstance.delete(`/banners/${requestObj.bannerId}`);
@@ -11,6 +13,5 @@ export const deleteBanner: DeleteBannerDef = async (requestObj) => {
 };
 
 export const useDeleteBanner: useDeleteBannerProps = () => {
-  const mutationResult = useMutation<AdminResponseDef, AxiosError, RequestObjDef>(deleteBanner);
-  return mutationResult;
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(deleteBanner);
 };

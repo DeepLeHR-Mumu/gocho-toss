@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
-import { axiosInstance } from "@api/axiosInstance";
+import { axiosInstance } from "@api/useAxiosInterceptor";
 import { ChangeCompanyDef, useChangeCompanyProps, RequestObjDef } from "./type";
 
 export const changeCompany: ChangeCompanyDef = async (requestObj) => {

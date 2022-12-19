@@ -3,11 +3,11 @@ import type { NextPage } from "next";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
 import { useFindCompany } from "@api/company/useFindCompany";
-import { useAddJob } from "@api/job/useAddJob";
+import { useAddJd } from "@api/jd/useAddJd";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
-import { JobFormValues, JobSubmitValues } from "../type";
+import { JobFormValues } from "../type";
 import { CommonDataPart } from "./part/commonDataPart";
 import { PositionRequiredDataPart } from "./part/positionRequiredDataPart";
 import { PositionTaskDataPart } from "./part/positionTaskDataPart";
@@ -32,7 +32,7 @@ const JdUpload: NextPage = () => {
   });
 
   const { data: companyDataObj, isLoading, isError } = useFindCompany({ word: searchWord, order: "recent" });
-  const { mutate: addJobMutate } = useAddJob();
+  const { mutate: addJobMutate } = useAddJd();
 
   if (!companyDataObj || isLoading) {
     return <LoadingScreen />;
@@ -43,30 +43,8 @@ const JdUpload: NextPage = () => {
   }
 
   const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
-    const newJobObj: JobSubmitValues = {
-      ...jobObj,
-      process_arr: jobObj.process_arr?.split("\n"),
-      apply_route_arr: jobObj.apply_route_arr?.split("\n"),
-      etc_arr: jobObj.etc_arr ? jobObj.etc_arr.split("\n") : null,
-      position_arr: jobObj.position_arr.map((position) => {
-        return {
-          ...position,
-          required_etc_arr: position.required_etc_arr ? position.required_etc_arr.split("\n") : null,
-          task_detail_arr: position.task_detail_arr.split("\n"),
-          pay_arr: position.pay_arr?.split("\n"),
-          preferred_etc_arr: position.preferred_etc_arr ? position.preferred_etc_arr.split("\n") : null,
-        };
-      }),
-    };
-
-    // console.log(newJobObj);
-    const formData = new FormData();
-    const json = JSON.stringify(newJobObj);
-    const blob = new Blob([json], { type: "application/json" });
-    formData.append("dto", blob);
-
     addJobMutate(
-      { dto: formData },
+      { dto: jobObj },
       {
         onSuccess: () => {
           setCheckMsg("서버에 공고가 업로드 되었습니다.");

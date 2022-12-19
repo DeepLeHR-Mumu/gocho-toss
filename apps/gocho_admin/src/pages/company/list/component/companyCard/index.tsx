@@ -1,10 +1,10 @@
 import { FunctionComponent } from "react";
-import { useDeleteCompany } from "@api/company/useDeleteCompany";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { companyArrKeyObj } from "shared-constant/queryKeyFactory/company/arrKeyObj";
 
-import { COMPANY_FIX_URL } from "@constant/internalURL";
+import { useDeleteCompany } from "@api/company/useDeleteCompany";
+
 import { companyContainer, companyIdBox, companyNameBox, deleteButton, fixButton, flexBox } from "./style";
 import { CompanyCardProps } from "./type";
 
@@ -25,12 +25,14 @@ export const CompanyCard: FunctionComponent<CompanyCardProps> = ({ company }) =>
   };
   return (
     <tr key={company.id} css={companyContainer}>
-      <td css={companyIdBox}>{company.id}</td>
-      <td css={companyNameBox}>{company.name}</td>
-      <td css={flexBox}>
-        <a type="button" css={fixButton} href={`${COMPANY_FIX_URL}/?id=${company.id}`}>
+      <div css={flexBox}>
+        <td css={companyIdBox}>{company.id}</td>
+        <td css={companyNameBox}>{company.name}</td>
+      </div>
+      <div css={flexBox}>
+        <button type="button" css={fixButton}>
           수정
-        </a>
+        </button>
         <button
           type="button"
           onClick={() => {
@@ -40,7 +42,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps> = ({ company }) =>
         >
           삭제
         </button>
-      </td>
+      </div>
     </tr>
   );
 };

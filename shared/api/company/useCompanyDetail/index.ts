@@ -7,7 +7,7 @@ import {
 
 import { axiosInstance } from "../../axiosInstance";
 import { GetCompanyDetailDef } from "./type";
-import { companyConverter } from "./util";
+import { selector } from "./util";
 
 export const getCompanyDetail: GetCompanyDetailDef = async ({ queryKey: [{ requestObj }] }) => {
   const { data } = await axiosInstance.get(`/companies/${requestObj.companyId}`);
@@ -19,7 +19,7 @@ export const useCompanyDetail = (requestObj: CompanyDetailRequestDef) => {
     staleTime: Infinity,
     enabled: Boolean(requestObj.companyId),
     select: ({ data }) => {
-      return companyConverter(data);
+      return selector(data);
     },
   });
   return queryResult;

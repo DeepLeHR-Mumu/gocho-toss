@@ -1,10 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { CompanyArrRequestDef, companyArrKeyObj } from "shared-constant/queryKeyFactory/company/arrKeyObj";
 
-import { axiosNoTokenInstance } from "@api/axiosInstance";
+import { axiosNoTokenInstance } from "@api/useAxiosInterceptor";
 
-import { GetCompanyArrDef } from "./type";
-import { selector } from "./util";
+import { companyArrFindKeyObj, GetCompanyArrDef, RequestObjDef } from "./type";
+import { companyArrSelector } from "./util";
 
 export const getFindCompany: GetCompanyArrDef = async ({ queryKey: [{ requestObj }] }) => {
   const { data } = await axiosNoTokenInstance.get(`/companies/find/name`, {
@@ -13,11 +12,10 @@ export const getFindCompany: GetCompanyArrDef = async ({ queryKey: [{ requestObj
   return data;
 };
 
-export const useFindCompany = (requestObj: CompanyArrRequestDef) => {
-  const queryResult = useQuery(companyArrKeyObj.companyArr(requestObj), getFindCompany, {
-    select: ({ data, count }) => {
-      return selector(data, count);
+export const useFindCompany = (requestObj: RequestObjDef) => {
+  return useQuery(companyArrFindKeyObj.find(requestObj), getFindCompany, {
+    select: (data) => {
+      return companyArrSelector(data);
     },
   });
-  return queryResult;
 };
