@@ -1,20 +1,26 @@
 import type { AppProps } from "next/app";
-import { useEffect, useState } from "react";
+import { ReactElement, ReactNode, useEffect, useState } from "react";
 import { Global } from "@emotion/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { NextPage } from "next";
 
+import { globalStyle } from "@/styles/globalStyle";
 import { useAxiosInterceptor } from "@/api/useAxiosInterceptor";
-// import { INTERNAL_URL } from "@/constants";
-import { globalStyle, pageContainer, sidebarContainer } from "@/styles/globalStyle";
-import { SideBar } from "@/components/global/sideBar";
-import { TopBar } from "@/components/global/topBar";
 import { ToastPlaceholder } from "@/components/global/toast/toastPlaceHolder";
 import { INTERNAL_URL } from "@/constants";
 
-function BusinessService({ Component, pageProps }: AppProps) {
+export type NextPageWithLayout<P = Record<string, never>, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
   const [queryClient] = useState(
     () =>
@@ -38,6 +44,8 @@ function BusinessService({ Component, pageProps }: AppProps) {
       })
   );
 
+  const getLayout = Component.getLayout || ((page) => page);
+
   useAxiosInterceptor();
 
   useEffect(() => {
@@ -50,13 +58,7 @@ function BusinessService({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <Global styles={globalStyle} />
-        <div css={sidebarContainer}>
-          <SideBar />
-          <div css={pageContainer}>
-            <TopBar />
-            <Component {...pageProps} />
-          </div>
-        </div>
+        {getLayout(<Component {...pageProps} />)}
         <ToastPlaceholder />
         <ReactQueryDevtools initialIsOpen={false} />
       </Hydrate>
