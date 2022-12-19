@@ -3,8 +3,9 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { jobArrKeyObj } from "shared-constant/queryKeyFactory/job/jobArrKeyObj";
 import { dateConverter } from "shared-util/date";
-import { useDeleteJob } from "shared-api/admin/job/useDeleteJob";
-import { useEndJob } from "shared-api/admin/job/useEndJob";
+
+import { useDeleteJd } from "@api/jd/useDeleteJd";
+import { useEndJd } from "@api/jd/useEndJd";
 
 import { JD_EDIT_URL } from "@constant/internalURL";
 import {
@@ -25,8 +26,8 @@ import { JobCardProps } from "./type";
 const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
   const queryClient = useQueryClient();
 
-  const { mutate: deleteJobMutate } = useDeleteJob();
-  const { mutate: endJobMutate } = useEndJob();
+  const { mutate: deleteJobMutate } = useDeleteJd();
+  const { mutate: endJobMutate } = useEndJd();
 
   const deleteJobHandler = (jobId: number) => {
     deleteJobMutate(

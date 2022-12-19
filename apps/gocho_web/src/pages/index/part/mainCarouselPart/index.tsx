@@ -18,7 +18,7 @@ export const MainCarouselPart: FunctionComponent = () => {
       <Layout>
         <section css={carouselContainer}>
           <Slider {...setCarouselSetting(setActiveIndex)} ref={sliderRef}>
-            {carouselArr.map((slide) => {
+            {carouselArr.map((slide) => { 
               return <SlideCard key={`mainCarousel_${slide.id}`} slideData={slide} />;
             })}
           </Slider>
