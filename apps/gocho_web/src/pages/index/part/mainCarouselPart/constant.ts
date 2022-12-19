@@ -1,4 +1,5 @@
 import banner01 from "@public/images/global/MainCarousel/open_renewal_banner.jpg";
+import conningCommercial from "@public/images/global/MainCarousel/conning_commercial.jpg";
 import banner02 from "@public/images/global/MainCarousel/factory_banner.jpg";
 import banner03 from "@public/images/global/MainCarousel/openTalk_banner.jpg";
 
@@ -7,6 +8,22 @@ import checkIconImage from "shared-image/global/common/yellow_check.svg";
 export const carouselArr = [
   {
     id: 1,
+    topDesc: " ",
+    middleDesc: "코닝정밀소재",
+    title: "2023년 코닝정밀소재 제조직[기간제] 채용",
+    lastDesc: "2022.12.16~2023.01.01",
+    backgroundImage: conningCommercial,
+    backgroundColor: "#030f16",
+    buttonObj: {
+      target: "_blank" as const,
+      text: "자세히보기",
+      color: "#fff",
+      backgroundColor: "#333",
+      url: "/jd/detail/12127",
+    },
+  },
+  {
+    id: 2,
     topDesc: "OPEN",
     middleDesc: "고초대졸닷컴",
     title: "웹사이트 전체 리뉴얼",
@@ -22,8 +39,9 @@ export const carouselArr = [
       url: "/event/renewal",
     },
   },
+  
   {
-    id: 2,
+    id: 3,
     topDesc: "OPEN",
     middleDesc: "고초대졸닷컴",
     title: "공고에서 근무할 공장 정보 바로보기 서비스 시작",
@@ -34,7 +52,7 @@ export const carouselArr = [
     buttonObj: null,
   },
   {
-    id: 3,
+    id: 4,
     topDesc: "OPEN",
     middleDesc: "고초대졸닷컴",
     title: "생산/기능직 관련 최대 규모 오픈카톡방",

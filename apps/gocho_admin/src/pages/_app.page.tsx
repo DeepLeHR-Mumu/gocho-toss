@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { Header, SideBar } from "@component/global";
 import { Layout } from "@component/layout";
+import { useAxiosInterceptor } from "@api/useAxiosInterceptor";
 
 import { globalStyle } from "../style/globalStyle";
 import { flexBox } from "./style";
@@ -24,6 +25,8 @@ function AdminService({ Component, pageProps }: AppProps) {
       },
     });
   });
+
+  useAxiosInterceptor();
 
   return (
     <RecoilRoot>
