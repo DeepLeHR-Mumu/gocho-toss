@@ -11,6 +11,7 @@ import { companyArrKeyObj } from "@api/company/useCompanyArr/type";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
+import { CompanyPart } from "@pages/business/company/edit/part";
 import { cssObj } from "./style";
 import { RejectFormValues } from "./type";
 
@@ -69,6 +70,16 @@ const CompanyEditDetail: NextPage = () => {
   return (
     <main css={mainContainer}>
       <h2 css={pageTitle}>기업 변경 요청 확인</h2>
+      <div css={cssObj.companyCompareContainer}>
+        <div css={cssObj.companyContainer}>
+          <strong css={cssObj.label}>BEFORE</strong>
+          <CompanyPart company={companyBeforeData} />
+        </div>
+        <div css={cssObj.companyContainer}>
+          <strong css={cssObj.label}>AFTER</strong>
+          <CompanyPart company={companyAfterData} />
+        </div>
+      </div>
       <div css={cssObj.buttonContainer}>
         <button
           type="submit"

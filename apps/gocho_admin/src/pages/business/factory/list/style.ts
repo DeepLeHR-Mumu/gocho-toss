@@ -7,12 +7,18 @@ export const cssObj = {
     margin: 0 2rem;
   `,
 
+  titleContainer: css`
+    display: flex;
+    justify-content: space-between;
+  `,
+
   listChangeButton: css`
     font-size: 1.125rem;
     padding: 0.25rem 1rem;
     border: 2px solid ${COLORS.GRAY10};
     background-color: ${COLORS.GRAY30};
     color: ${COLORS.GRAY100};
+    margin-bottom: 2rem;
   `,
 
   tableContainer: css`

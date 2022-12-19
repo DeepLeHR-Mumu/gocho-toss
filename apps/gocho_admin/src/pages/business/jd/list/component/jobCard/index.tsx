@@ -34,9 +34,6 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
         {endYear}-{endMonth}-{endDate}
       </td>
       <td css={cssObj.buttonContainer}>
-        <a css={cssObj.activeButton} href={job.applyUrl} target="_blank" rel="noopener noreferrer">
-          채용 링크
-        </a>
         <Link
           passHref
           href={

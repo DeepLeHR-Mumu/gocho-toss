@@ -66,6 +66,7 @@ export const cssObj = {
   buttonContainer: css`
     width: 20%;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 0.25rem;
   `,

@@ -45,8 +45,8 @@ const BusinessJdList: NextPage = () => {
 
   return (
     <main css={mainContainer}>
-      <h2 css={pageTitle}>{jdStatus === "upload-waiting" ? "공고 등록 요청 목록" : "공고 수정 요청 목록"}</h2>
-      <section css={cssObj.sectionContainer}>
+      <div css={cssObj.titleContainer}>
+        <h2 css={pageTitle}>{jdStatus === "upload-waiting" ? "공고 등록 요청 목록" : "공고 수정 요청 목록"}</h2>
         <button
           type="button"
           css={cssObj.listChangeButton}
@@ -56,6 +56,8 @@ const BusinessJdList: NextPage = () => {
         >
           {jdStatus === "upload-waiting" ? "수정 요청 목록 보기" : "등록 요청 목록 보기"}
         </button>
+      </div>
+      <section css={cssObj.sectionContainer}>
         <table css={cssObj.tableContainer}>
           <thead>
             <tr css={cssObj.jobContainer}>

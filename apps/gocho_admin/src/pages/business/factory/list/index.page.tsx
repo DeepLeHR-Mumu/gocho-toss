@@ -45,8 +45,8 @@ const BusinessFactoryList: NextPage = () => {
 
   return (
     <main css={mainContainer}>
-      <h2 css={pageTitle}>{factoryStatus === "upload-waiting" ? "공장 등록 요청 목록" : "공장 수정 요청 목록"}</h2>
-      <section css={cssObj.sectionContainer}>
+      <div css={cssObj.titleContainer}>
+        <h2 css={pageTitle}>{factoryStatus === "upload-waiting" ? "공장 등록 요청 목록" : "공장 수정 요청 목록"}</h2>
         <button
           type="button"
           css={cssObj.listChangeButton}
@@ -56,6 +56,8 @@ const BusinessFactoryList: NextPage = () => {
         >
           {factoryStatus === "upload-waiting" ? "수정 요청 목록 보기" : "등록 요청 목록 보기"}
         </button>
+      </div>
+      <section css={cssObj.sectionContainer}>
         <table css={cssObj.tableContainer}>
           <thead>
             <tr css={cssObj.factoryContainer}>
