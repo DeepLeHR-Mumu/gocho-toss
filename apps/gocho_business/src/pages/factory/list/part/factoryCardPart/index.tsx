@@ -1,13 +1,19 @@
 import { FunctionComponent } from "react";
 
+import { useFactoryArr } from "@/api/factory/useFactoryArr";
+
 import { nameCSS, wrapper } from "./style";
 
-interface Props {
-  name: string;
+interface FactoryCardPartProps {
+  index: number;
 }
 
-export const FactoryCardPart: FunctionComponent<Props> = ({ name }) => (
-  <div css={wrapper}>
-    <p css={nameCSS}>{name}</p>
-  </div>
-);
+export const FactoryCardPart: FunctionComponent<FactoryCardPartProps> = ({ index }) => {
+  const { data: factoryDataArr } = useFactoryArr();
+
+  return (
+    <div css={wrapper}>
+      <p css={nameCSS}>{factoryDataArr?.[index].name}</p>
+    </div>
+  );
+};
