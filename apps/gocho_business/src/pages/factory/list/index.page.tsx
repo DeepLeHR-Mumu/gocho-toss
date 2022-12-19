@@ -2,8 +2,8 @@ import { ReactElement } from "react";
 
 import type { NextPageWithLayout } from "@/pages/_app.page";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
+import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 
-import { CompanyInfoPart } from "../../../components/global/companyInfoPart";
 import { RegisterPart } from "./part/registerPart";
 import { FactoryCardPart } from "./part/factoryCardPart";
 import { cardContainer, factoryPartContainer } from "./style";
