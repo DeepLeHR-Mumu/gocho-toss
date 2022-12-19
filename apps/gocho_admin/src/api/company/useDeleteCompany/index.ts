@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "@api/axiosInstance";
+import { axiosInstance } from "@api/useAxiosInterceptor";
 
 import { DeleteCompanyDef, RequestObjDef, useDeleteCompanyProps } from "./type";
 

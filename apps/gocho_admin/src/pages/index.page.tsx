@@ -10,12 +10,12 @@ import WebsiteDataPart from "./index/part/websiteDataPart";
 const Home: NextPage = () => {
   const { data: dashboardData, isLoading, isError } = useStatistics();
 
-  if (!dashboardData || isLoading) {
-    return <LoadingScreen />;
-  }
-
   if (isError) {
     return <ErrorScreen />;
+  }
+
+  if (!dashboardData || isLoading) {
+    return <LoadingScreen />;
   }
 
   return (

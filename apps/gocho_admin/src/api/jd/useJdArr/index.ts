@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { axiosNoTokenInstance } from "@api/axiosInstance";
+import { axiosNoTokenInstance } from "@api/useAxiosInterceptor";
 
 import { GetJdArrDef, jdArrKeyObj, RequestObjDef } from "./type";
 import { jdArrSelector } from "./util";
