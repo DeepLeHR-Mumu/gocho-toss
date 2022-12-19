@@ -1,15 +1,17 @@
-import type { NextPage } from "next";
+import { ReactElement } from "react";
 
-import { Layout } from "@/components/global/layout";
-import { CompanyInfoPart } from "./part/companyInfoPart";
+import type { NextPageWithLayout } from "@/pages/_app.page";
+import { PageLayout, GlobalLayout } from "@/components/global/layout";
+
+import { CompanyInfoPart } from "../../../components/global/companyInfoPart";
 import { RegisterPart } from "./part/registerPart";
 import { FactoryCardPart } from "./part/factoryCardPart";
 import { cardContainer, factoryPartContainer } from "./style";
 
-const FactoryListPage: NextPage = () => (
+const FactoryListPage: NextPageWithLayout = () => (
   <main>
     <CompanyInfoPart />
-    <Layout>
+    <PageLayout>
       <RegisterPart />
       <h2>공장 목록</h2>
       <div css={factoryPartContainer}>
@@ -20,8 +22,12 @@ const FactoryListPage: NextPage = () => (
           <FactoryCardPart name="823fyp98q3h4fgi;ohqaw;oiergjha;iowejg;oaiwjegioaewj;oigjawei;ogjaio;w" />
         </section>
       </div>
-    </Layout>
+    </PageLayout>
   </main>
 );
+
+FactoryListPage.getLayout = function getLayout(page: ReactElement) {
+  return <GlobalLayout>{page}</GlobalLayout>;
+};
 
 export default FactoryListPage;
