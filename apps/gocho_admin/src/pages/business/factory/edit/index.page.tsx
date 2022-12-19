@@ -11,6 +11,7 @@ import { factoryArrKeyObj } from "@api/factory/useFactoryArr/type";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
+import { FactoryPart } from "./part/factoryPart";
 import { cssObj } from "./style";
 import { RejectFormValues } from "./type";
 
@@ -69,6 +70,16 @@ const FactoryEditDetail: NextPage = () => {
   return (
     <main css={mainContainer}>
       <h2 css={pageTitle}>공장 변경 요청 확인</h2>
+      <div css={cssObj.factoryCompareContainer}>
+        <div css={cssObj.factoryContainer}>
+          <strong css={cssObj.label}>BEFORE</strong>
+          <FactoryPart factory={factoryBeforeData} />
+        </div>
+        <div css={cssObj.factoryContainer}>
+          <strong css={cssObj.label}>AFTER</strong>
+          <FactoryPart factory={factoryAfterData} />
+        </div>
+      </div>
       <div css={cssObj.buttonContainer}>
         <button
           type="submit"

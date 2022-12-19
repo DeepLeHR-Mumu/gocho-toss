@@ -10,6 +10,7 @@ import { factoryArrKeyObj } from "@api/factory/useFactoryArr/type";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
+import { FactoryPart } from "@pages/business/factory/register/part/factoryPart";
 import { cssObj } from "./style";
 import { RejectFormValues } from "./type";
 
@@ -57,6 +58,7 @@ const FactoryRegisterDetail: NextPage = () => {
   return (
     <main css={mainContainer}>
       <h2 css={pageTitle}>공장 등록 요청 확인</h2>
+      <FactoryPart factory={factoryDataObj} />
       <div css={cssObj.buttonContainer}>
         <button
           type="submit"

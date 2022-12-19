@@ -2,6 +2,23 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
+  factoryCompareContainer: css`
+    display: flex;
+  `,
+
+  factoryContainer: css`
+    width: 50%;
+    padding: 0.5rem;
+  `,
+
+  label: css`
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+  `,
+
   buttonContainer: css`
     display: flex;
     align-items: flex-end;
