@@ -16,10 +16,11 @@ export default {
     },
     backgroundColor: { description: "버튼 배경색, shared-styles/COLORS 값 " },
     borderColor: { description: "버튼 테두리 색, shared-styles/COLORS 값 " },
+    fontColor: { description: "버튼 테두리 색, shared-styles/COLORS 값 " },
     onClickHandler: { description: "버튼 클릭시 실행될 함수" },
   },
   parameters: {
-    componentSubtitle: "각종 정보 출력을 위한 박스",
+    componentSubtitle: "모서리가 네모난 버튼",
   },
 } as ComponentMeta<typeof CommonSquareButton>;
 
@@ -31,6 +32,7 @@ export const 왼쪽_아이콘_버튼 = Template.bind({});
   text: "내용",
   backgroundColor: COLORS.GRAY100,
   borderColor: COLORS.GRAY20,
+  fontColor: COLORS.BLUE_FIRST30,
 };
 
 export const 오른쪽_아이콘_버튼 = Template.bind({});
@@ -38,5 +40,6 @@ export const 오른쪽_아이콘_버튼 = Template.bind({});
   iconObj: { Icon: FiAirplay, location: "right" },
   backgroundColor: COLORS.BLUE_SECOND30,
   borderColor: COLORS.GRAY20,
+  fontColor: COLORS.BLUE_FIRST50,
   text: "내용",
 };

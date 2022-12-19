@@ -8,9 +8,10 @@ export const CommonSquareButton: FunctionComponent<CommonSquareButtonProps> = ({
   iconObj,
   onClickHandler,
   backgroundColor,
+  fontColor,
   borderColor,
 }) => (
-  <button type="button" onClick={onClickHandler} css={cssObj.wrapper(backgroundColor, borderColor)}>
+  <button type="button" onClick={onClickHandler} css={cssObj.wrapper(backgroundColor, borderColor, fontColor)}>
     {iconObj?.location === "left" && (
       <div css={cssObj.icon("left")}>
         <iconObj.Icon />

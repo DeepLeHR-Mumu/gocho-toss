@@ -36,7 +36,7 @@ export const 버튼 = Template.bind({});
 버튼.args = {
   text: "weoflnkweknlf",
   type: "button",
-  onClick: () => {
+  onClickHandler: () => {
     alert("버튼 클릭");
   },
 };

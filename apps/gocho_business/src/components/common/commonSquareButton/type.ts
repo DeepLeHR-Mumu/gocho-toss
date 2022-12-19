@@ -6,6 +6,7 @@ export interface CommonSquareButtonProps {
   text: string;
   iconObj?: { Icon: IconType; location: "right" | "left" };
   backgroundColor: ColorDef;
+  fontColor: ColorDef;
   borderColor: ColorDef;
   onClickHandler: () => void;
 }

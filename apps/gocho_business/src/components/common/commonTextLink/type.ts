@@ -2,12 +2,12 @@ export interface LinkProps {
   text: string;
   type: "externalLink" | "internalLink";
   url: string;
-  onClick?: never;
+  onClickHandler?: never;
 }
 
 export interface ButtonProps {
   text: string;
   type: "button";
   url?: never;
-  onClick: () => void;
+  onClickHandler: () => void;
 }
