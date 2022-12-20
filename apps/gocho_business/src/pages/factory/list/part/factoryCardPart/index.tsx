@@ -13,6 +13,7 @@ export const FactoryCardPart: FunctionComponent<FactoryCardPartProps> = ({ index
 
   return (
     <div css={wrapper}>
+      
       <p css={nameCSS}>{factoryDataArr?.[index].name}</p>
     </div>
   );
