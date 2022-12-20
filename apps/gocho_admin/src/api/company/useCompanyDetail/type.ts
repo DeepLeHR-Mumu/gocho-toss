@@ -36,23 +36,25 @@ export interface ResponseObjDef {
       desc: string | null;
     };
 
-    factory_arr: {
-      id: number;
-      company_id: number;
-      name: string;
-      address: string;
-      male_number: number;
-      female_number: number;
-      product: string;
-      bus: {
-        exists: boolean;
-        desc: string | null;
-      };
-      dormitory: {
-        exists: boolean;
-        desc: string | null;
-      };
-    }[];
+    factory_arr:
+      | {
+          id: number;
+          company_id: number;
+          name: string;
+          address: string;
+          male_number: number;
+          female_number: number;
+          product: string;
+          bus: {
+            exists: boolean;
+            desc: string | null;
+          };
+          dormitory: {
+            exists: boolean;
+            desc: string | null;
+          };
+        }[]
+      | null;
   };
 }
 

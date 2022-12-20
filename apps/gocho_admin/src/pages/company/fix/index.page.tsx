@@ -7,6 +7,7 @@ import { useChangeCompany } from "@api/company/useChangeCompany";
 import { useCompanyDetail } from "@api/company/useCompanyDetail";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 
+import { ErrorScreen, LoadingScreen } from "@component/screen";
 import { CompanyFormValues } from "../type";
 import { FactoryBox } from "./component/factoryBox";
 import { BasicInfoPart } from "./part/basicInfoPart";
@@ -22,7 +23,7 @@ const CompanyUpload: NextPage = () => {
   const [logoPicture, setLogoPicture] = useState<File>();
   const [checkMsg, setCheckMsg] = useState<string>();
 
-  const { data: companyData } = useCompanyDetail({ companyId });
+  const { data: companyData, isLoading, isError } = useCompanyDetail({ companyId });
   const { mutate } = useChangeCompany();
 
   const companyForm = useForm<CompanyFormValues>({
@@ -69,7 +70,7 @@ const CompanyUpload: NextPage = () => {
 
   useEffect(() => {
     const newFoundDate = companyData?.foundDate ? companyData.foundDate + 540000 * 60 : 0;
-    const FactoryNewArr = companyData?.factoryArr.map((factory) => {
+    const FactoryNewArr = companyData?.factoryArr?.map((factory) => {
       return {
         factory_name: factory.factoryName,
         address: factory.address,
@@ -97,14 +98,14 @@ const CompanyUpload: NextPage = () => {
       pay_start: companyData?.payStart,
       pay_desc: companyData?.payDesc,
       welfare: {
-        money: companyData?.welfare.money ? companyData?.welfare.money.join("\n") : "",
-        health: companyData?.welfare.health ? companyData?.welfare.health.join("\n") : "",
-        life: companyData?.welfare.life ? companyData?.welfare.life.join("\n") : "",
-        holiday: companyData?.welfare.holiday ? companyData?.welfare.holiday.join("\n") : "",
-        facility: companyData?.welfare.facility ? companyData?.welfare.facility.join("\n") : "",
-        vacation: companyData?.welfare.vacation ? companyData?.welfare.vacation.join("\n") : "",
-        growth: companyData?.welfare.growth ? companyData?.welfare.growth.join("\n") : "",
-        etc: companyData?.welfare.etc ? companyData?.welfare.etc.join("\n") : "",
+        money: companyData?.welfare.money ? companyData?.welfare.money.join("\n") : null,
+        health: companyData?.welfare.health ? companyData?.welfare.health.join("\n") : null,
+        life: companyData?.welfare.life ? companyData?.welfare.life.join("\n") : null,
+        holiday: companyData?.welfare.holiday ? companyData?.welfare.holiday.join("\n") : null,
+        facility: companyData?.welfare.facility ? companyData?.welfare.facility.join("\n") : null,
+        vacation: companyData?.welfare.vacation ? companyData?.welfare.vacation.join("\n") : null,
+        growth: companyData?.welfare.growth ? companyData?.welfare.growth.join("\n") : null,
+        etc: companyData?.welfare.etc ? companyData?.welfare.etc.join("\n") : null,
       },
       nozo: {
         exists: companyData?.nozo.exists,
@@ -113,6 +114,14 @@ const CompanyUpload: NextPage = () => {
       factories: FactoryNewArr,
     });
   }, [companyData, reset]);
+
+  if (!companyData || isLoading) {
+    return <LoadingScreen />;
+  }
+
+  if (isError) {
+    return <ErrorScreen />;
+  }
 
   return (
     <main css={mainContainer}>
