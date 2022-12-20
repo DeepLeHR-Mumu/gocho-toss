@@ -9,7 +9,7 @@ interface FactoryCardPartProps {
 }
 
 export const FactoryCardPart: FunctionComponent<FactoryCardPartProps> = ({ index }) => {
-  const { data: factoryDataArr } = useFactoryArr();
+  const { data: factoryDataArr } = useFactoryArr(true);
 
   return (
     <div css={wrapper}>

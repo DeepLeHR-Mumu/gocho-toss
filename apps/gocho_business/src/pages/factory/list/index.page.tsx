@@ -10,10 +10,9 @@ import { FactoryCardPart } from "./part/factoryCardPart";
 import { cardContainer, factoryPartContainer } from "./style";
 
 const FactoryListPage: NextPageWithLayout = () => {
-  const { data: factoryDataArr } = useFactoryArr(false);
+  const { data: factoryDataArr } = useFactoryArr(true);
   return (
     <main>
-      <CompanyInfoPart />
       <PageLayout>
         <RegisterPart />
         <h2>공장 목록</h2>
@@ -29,6 +28,11 @@ const FactoryListPage: NextPageWithLayout = () => {
   );
 };
 
-FactoryListPage.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
+FactoryListPage.getLayout = (page: ReactElement) => (
+  <GlobalLayout>
+    <CompanyInfoPart />
+    {page}
+  </GlobalLayout>
+);
 
 export default FactoryListPage;
