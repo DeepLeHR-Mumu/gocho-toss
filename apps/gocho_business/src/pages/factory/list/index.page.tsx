@@ -10,7 +10,7 @@ import { FactoryCardPart } from "./part/factoryCardPart";
 import { cardContainer, factoryPartContainer } from "./style";
 
 const FactoryListPage: NextPageWithLayout = () => {
-  const { data:factoryDataArr } = useFactoryArr();
+  const { data: factoryDataArr } = useFactoryArr(false);
   return (
     <main>
       <CompanyInfoPart />

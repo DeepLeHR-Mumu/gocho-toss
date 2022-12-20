@@ -16,8 +16,9 @@ export const getFactoryArr: GetFactoryArrDef = async () => {
   return data;
 };
 
-export const useFactoryArr = () =>
+export const useFactoryArr = (isLogin: boolean) =>
   // 에러 내부에 body를 추적해야하는 경우 AxiosError<타입>으로 지정하기
   useQuery<ResponseObjDef, AxiosError, ReturnType<typeof factoryArrSelector>>(factoryArrKeyObj.all, getFactoryArr, {
     select: (data) => factoryArrSelector(data),
+    enabled: isLogin,
   });
