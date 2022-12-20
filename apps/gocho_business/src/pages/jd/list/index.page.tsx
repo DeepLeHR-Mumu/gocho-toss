@@ -4,14 +4,15 @@ import type { NextPageWithLayout } from "@/pages/_app.page";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
 import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 
+import { ListPart } from "./part/listPart";
+import { HeaderPart } from "./part/headerPart";
+
 const JdListPage: NextPageWithLayout = () => (
   <main>
     <CompanyInfoPart />
     <PageLayout>
-      <section>
-        This is JdListPage!!
-        <div>lol</div>
-      </section>
+      <HeaderPart />
+      <ListPart />
     </PageLayout>
   </main>
 );
