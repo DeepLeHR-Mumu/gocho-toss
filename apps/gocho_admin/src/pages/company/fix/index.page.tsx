@@ -7,11 +7,11 @@ import { useChangeCompany } from "@api/company/useChangeCompany";
 import { useCompanyDetail } from "@api/company/useCompanyDetail";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 
+import { CompanyFormValues } from "../type";
 import { FactoryBox } from "./component/factoryBox";
 import { BasicInfoPart } from "./part/basicInfoPart";
 import { WelfareInfoPart } from "./part/welfareInfoPart";
 import { PayInfoPart } from "./part/payInfoPart";
-import { CompanyFormValues, CompanySubmitValues } from "../type";
 import { blankFactory } from "./constant";
 import { formContainer, addFactoryButton, submitButton, checkMsgBox } from "./style";
 
@@ -38,25 +38,9 @@ const CompanyUpload: NextPage = () => {
   });
 
   const companySubmit: SubmitHandler<CompanyFormValues> = (companyObj) => {
-    const newCompanyObj: CompanySubmitValues = {
-      ...companyObj,
-      welfare: {
-        money: companyObj.welfare.money ? companyObj.welfare.money.split("\n") : null,
-        health: companyObj.welfare.health ? companyObj.welfare.health.split("\n") : null,
-        life: companyObj.welfare.life ? companyObj.welfare.life.split("\n") : null,
-        holiday: companyObj.welfare.holiday ? companyObj.welfare.holiday.split("\n") : null,
-        facility: companyObj.welfare.facility ? companyObj.welfare.facility.split("\n") : null,
-        vacation: companyObj.welfare.vacation ? companyObj.welfare.vacation.split("\n") : null,
-        growth: companyObj.welfare.growth ? companyObj.welfare.growth.split("\n") : null,
-        etc: companyObj.welfare.etc ? companyObj.welfare.etc.split("\n") : null,
-      },
-    };
-    const json = JSON.stringify(newCompanyObj);
-    const blob = new Blob([json], { type: "application/json" });
-
     if (logoPicture) {
       mutate(
-        { companyId, dto: blob, image: logoPicture },
+        { companyId, dto: companyObj, logo: logoPicture },
         {
           onSuccess: () => {
             setCheckMsg("기업이 수정 되었습니다!");
@@ -69,7 +53,7 @@ const CompanyUpload: NextPage = () => {
       );
     } else {
       mutate(
-        { companyId, dto: blob },
+        { companyId, dto: companyObj },
         {
           onSuccess: () => {
             setCheckMsg("기업이 수정 되었습니다!");
