@@ -22,7 +22,7 @@ export interface LoginErrorValuesDef extends AxiosError {
     error_code: string;
     error_message: string;
     path: string;
-  }[];
+  };
 }
 
 export interface useDoLoginProps {

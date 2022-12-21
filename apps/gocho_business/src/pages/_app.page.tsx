@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { NextPage } from "next";
 
 import { globalStyle } from "@/styles/globalStyle";
-import { useAxiosInterceptor } from "@/api/useAxiosInterceptor";
+import { useAxiosInterceptor } from "@/api/useIsRefreshLock";
 import { ToastPlaceholder } from "@/components/global/toast/toastPlaceHolder";
 import { INTERNAL_URL } from "@/constants";
 
@@ -51,7 +51,9 @@ function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     const currentUrl = router.pathname;
-    if (!token && currentUrl !== INTERNAL_URL.LOGIN) router.push(INTERNAL_URL.LOGIN);
+    if (token && currentUrl === INTERNAL_URL.LOGIN) {
+      router.push(INTERNAL_URL.HOME);
+    }
   }, [router]);
 
   return (

@@ -3,24 +3,26 @@ import { useEffect } from "react";
 
 import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 
-import { UserStateZustandlProps } from "./type";
+import { tokenService } from "@/util/tokenService";
 
-const userStateInfo = create<UserStateZustandlProps>((set) => ({
+import { UserStateInfoProps } from "./type";
+
+const userStateInfo = create<UserStateInfoProps>((set) => ({
   userState: null,
   setUserState: (status) => set(() => ({ userState: status })),
 }));
 
 export const useUserState = () => {
-  const { userState: useInfoData, setUserState: setUseInfoData } = userStateInfo();
+  const { userState: userInfoData, setUserState: setUserInfoData } = userStateInfo();
 
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
+    const token = tokenService.getAccessToken();
 
-    if (useInfoData === null && token) {
+    if (userInfoData === null && token) {
       const { id, company_id, company_name, company_logo, iat, exp, email, name, department } =
         managerTokenDecryptor(token);
 
-      setUseInfoData({
+      setUserInfoData({
         id,
         companyId: company_id,
         companyName: company_name,
@@ -33,10 +35,10 @@ export const useUserState = () => {
       });
     }
 
-    if (useInfoData === null && !token) {
-      setUseInfoData(false);
+    if (userInfoData === null && !token) {
+      setUserInfoData(false);
     }
-  }, [useInfoData, setUseInfoData]);
+  }, [userInfoData, setUserInfoData]);
 
-  return { useInfoData, setUseInfoData };
+  return { userInfoData, setUserInfoData };
 };

@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { axiosNoTokenInstance } from "../../useAxiosInterceptor";
+import { axiosNoTokenInstance } from "../../useIsRefreshLock";
 
 import { PostLoginDef, RequestObjDef, ResponseObjDef, useDoLoginProps, LoginErrorValuesDef } from "./type";
 

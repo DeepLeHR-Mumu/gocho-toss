@@ -6,7 +6,7 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: calc(100% - 64px);
+    height: calc(100vh - 64px);
   `,
   container: css`
     width: 28rem;

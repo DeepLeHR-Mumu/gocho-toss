@@ -1,32 +1,36 @@
 import { FunctionComponent } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
+import { tokenService } from "@/util/tokenService";
 import { useUserState } from "@/globalStates/useUserState";
 
-import { container, logo, logoutButton, signUpButton, title, wrapper } from "./style";
+import { cssObj } from "./style";
 
 export const TopBar: FunctionComponent = () => {
-  const { useInfoData, setUseInfoData } = useUserState();
+  const { userInfoData, setUserInfoData } = useUserState();
+  const queryClient = useQueryClient();
 
   const doLogoutHandler = () => {
-    localStorage.clear();
-    setUseInfoData(null);
+    tokenService.removeAllToken();
+    setUserInfoData(null);
+    queryClient.invalidateQueries();
   };
 
   return (
-    <header css={wrapper}>
-      <div css={container}>
-        <div css={logo} />
-        <h1 css={title}>고초대졸.business</h1>
+    <header css={cssObj.wrapper}>
+      <div css={cssObj.container}>
+        <div css={cssObj.logo} />
+        <h1 css={cssObj.title}>고초대졸.business</h1>
       </div>
-      {useInfoData ? (
-        <button type="button" css={logoutButton} onClick={doLogoutHandler}>
+      {userInfoData ? (
+        <button type="button" css={cssObj.logoutButton} onClick={doLogoutHandler}>
           로그아웃
         </button>
       ) : (
         <a
           target="_blank"
           href="https://docs.google.com/forms/d/e/1FAIpQLSfYgeAv0BREQSPEtgjHO6-1rHh-srF3EDnRHAWL2e2g1PL_Pw/viewform"
-          css={signUpButton}
+          css={cssObj.signUpButton}
           rel="noreferrer"
         >
           기업회원 가입하기

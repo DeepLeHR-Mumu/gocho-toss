@@ -10,7 +10,7 @@ export type UserStateObjDef = {
   exp: number;
 };
 
-export interface UserStateZustandlProps {
+export interface UserStateInfoProps {
   userState: UserStateObjDef | null | false;
   setUserState: (status: UserStateObjDef | null | false) => void;
 }
