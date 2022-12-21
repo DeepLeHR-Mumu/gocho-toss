@@ -7,15 +7,14 @@ export const CommonRoundButton: FunctionComponent<CommonRoundButtonProps> = ({
   text,
   Icon,
   backgoundColor,
-  fontColor,
   onClickHandler,
 }) => (
   <button type="button" css={cssObj.wrapper(backgoundColor)} onClick={onClickHandler}>
     {Icon && (
-      <div css={cssObj.icon(fontColor)}>
+      <div css={cssObj.icon}>
         <Icon />
       </div>
     )}
-    <p css={cssObj.text(fontColor)}>{text}</p>
+    <p css={cssObj.text}>{text}</p>
   </button>
 );

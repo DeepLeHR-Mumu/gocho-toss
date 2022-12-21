@@ -16,9 +16,7 @@ const FactoryListPage: NextPageWithLayout = () => {
       <PageLayout>
         <RegisterPart />
         <h2>공장 목록</h2>
-        {/* 에러 파싱이 필요할 경우 */}
         {factoryDataArrError?.response?.data.error_code}
-        {/* {factoryDataArrError?.response?.data.error_message} */}
         <div css={factoryPartContainer}>
           <section css={cardContainer}>
             {factoryDataArr?.map((factory, index) => (

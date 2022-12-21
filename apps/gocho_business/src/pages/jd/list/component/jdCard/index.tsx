@@ -52,7 +52,6 @@ export const JdCard: FunctionComponent = () => {
             text="공고마감"
             Icon={AiOutlinePause}
             backgoundColor={COLORS.GRAY80}
-            fontColor={COLORS.GRAY10}
             onClickHandler={() => {
               router.push({
                 pathname: INTERNAL_URL.JD_UPLOAD,
@@ -63,7 +62,6 @@ export const JdCard: FunctionComponent = () => {
             text="공고삭제"
             Icon={BiMinus}
             backgoundColor={COLORS.GRAY80}
-            fontColor={COLORS.GRAY10}
             onClickHandler={() => {
               router.push({
                 pathname: INTERNAL_URL.JD_UPLOAD,
@@ -74,7 +72,6 @@ export const JdCard: FunctionComponent = () => {
             text="공고수정"
             Icon={FiEdit}
             backgoundColor={COLORS.GRAY80}
-            fontColor={COLORS.GRAY10}
             onClickHandler={() => {
               router.push({
                 pathname: INTERNAL_URL.JD_UPLOAD,
