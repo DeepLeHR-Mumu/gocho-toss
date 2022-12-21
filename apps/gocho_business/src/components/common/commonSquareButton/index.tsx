@@ -15,7 +15,7 @@ export const CommonSquareButton: FunctionComponent<CommonSquareButtonProps | Com
 }) => {
   if (link) {
     return (
-      <Link href={link}>
+      <Link href={link} passHref>
         <a css={cssObj.wrapper(backgroundColor, borderColor, fontColor)}>
           {iconObj?.location === "left" && (
             <div css={cssObj.icon("left")}>

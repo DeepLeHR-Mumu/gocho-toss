@@ -5,7 +5,6 @@ import { ColorDef } from "shared-type/style/color";
 export const cssObj = {
   wrapper: (backgroundColor: ColorDef, borderColor: ColorDef, fontColor: ColorDef) => css`
     display: flex;
-    cursor: pointer;
     align-items: center;
     width: fit-content;
     height: 2.5rem;
