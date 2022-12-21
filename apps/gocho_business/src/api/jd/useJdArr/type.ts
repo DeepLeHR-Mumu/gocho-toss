@@ -11,20 +11,18 @@ export interface RequestObjDef {
 export interface ResponseObjDef {
   data: {
     id: number;
+    uploader: { name: string; department: string; is_mine: boolean };
     company: { id: number; name: string; logo_url: string };
-    status: string;
+    status: "등록전" | "승인됨" | "반려됨" | "검수중";
     title: string;
     cut: boolean;
     view: number;
+    bookmark: number;
+    click: number;
     start_time: number;
     end_time: number;
     apply_url: string;
     task_arr: string[];
-    edu_summary: string[];
-    place_arr: string[];
-    rotation_arr: string[];
-    contract_type: string[];
-    required_exp_arr: string[];
   }[];
   count: number;
 }

@@ -4,81 +4,95 @@ import { BiBookmark, BiMinus } from "react-icons/bi";
 import { FiUser, FiCalendar, FiEdit } from "react-icons/fi";
 import { MdAdsClick } from "react-icons/md";
 import { useRouter } from "next/router";
+import dayjs from "dayjs";
 
 import { COLORS } from "shared-style/color";
 
 import { CommonInfoBox, CommonRoundButton, CommonStatusChip } from "@/components/common";
 import { INTERNAL_URL } from "@/constants";
-import { cssObj } from "./style";
 
-export const JdCard: FunctionComponent = () => {
+import { cssObj } from "./style";
+import { JdCardProps } from "./type";
+
+export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
   const router = useRouter();
+
+  const numberFormat = Intl.NumberFormat("ko-KR", { notation: "compact" });
+  const viewData = numberFormat.format(jd.view);
+  const bookmarkData = numberFormat.format(jd.bookmark);
+  const clickData = numberFormat.format(jd.click);
 
   return (
     <div css={cssObj.cardContainer}>
       <div css={cssObj.topContainer}>
         <div css={cssObj.titleBox}>
           <div>
-            <CommonInfoBox Icon={FiCalendar} infoData="21.11.25 ~ 23.01.30" infoName="제품검수/재고관리 사원 채용" />
-            <p>채용시 마감</p>
+            <CommonInfoBox
+              Icon={FiCalendar}
+              infoData={`${dayjs(jd.startTime).format("YY.MM.DD")}~${dayjs(jd.endTime).format("YY.MM.DD")}`}
+              infoName={jd.title}
+            />
+            {jd.cut && <p>채용시 마감</p>}
           </div>
-          <CommonStatusChip status="검수중" />
+          <CommonStatusChip status={jd.status} />
         </div>
-        <CommonInfoBox Icon={AiOutlineEye} infoData="1000" infoName="조회수" />
-        <CommonInfoBox Icon={BiBookmark} infoData="1000" infoName="북마크" />
-        <CommonInfoBox Icon={MdAdsClick} infoData="1000" infoName="지원 현황" />
-        <CommonInfoBox Icon={FiUser} infoData="박아무개 (경남 박팀장)" infoName="등록자" />
+        <CommonInfoBox Icon={AiOutlineEye} infoData={viewData} infoName="조회수" />
+        <CommonInfoBox Icon={BiBookmark} infoData={bookmarkData} infoName="북마크" />
+        <CommonInfoBox Icon={MdAdsClick} infoData={clickData} infoName="지원 현황" />
+        <CommonInfoBox Icon={FiUser} infoData={`${jd.uploader.name} (${jd.uploader.department})`} infoName="등록자" />
       </div>
       <div css={cssObj.bottomContainer}>
         <div css={cssObj.bottomInfoContainer}>
           <div css={cssObj.infoBox}>
             <AiOutlineNumber />
             <strong css={cssObj.infoTitle}>식별번호</strong>
-            <p>9724</p>
+            <p>{jd.id}</p>
           </div>
           <div css={cssObj.infoBox}>
             <FiCalendar />
             <strong css={cssObj.infoTitle}>공고등록일</strong>
-            <p>21.11.13 13:20 </p>
+            <p>{dayjs(jd.startTime).format("YY.MM.DD HH:mm")}</p>
           </div>
           <div css={cssObj.infoBox}>
             <FiCalendar />
             <strong css={cssObj.infoTitle}>최종수정일</strong>
-            <p>21.11.29 21:34 </p>
+            <p>{dayjs(jd.endTime).format("YY.MM.DD HH:mm")}</p>
           </div>
         </div>
-        <div css={cssObj.buttonContainer}>
-          <CommonRoundButton
-            text="공고마감"
-            Icon={AiOutlinePause}
-            backgoundColor={COLORS.GRAY80}
-            onClickHandler={() => {
-              router.push({
-                pathname: INTERNAL_URL.JD_UPLOAD,
-              });
-            }}
-          />
-          <CommonRoundButton
-            text="공고삭제"
-            Icon={BiMinus}
-            backgoundColor={COLORS.GRAY80}
-            onClickHandler={() => {
-              router.push({
-                pathname: INTERNAL_URL.JD_UPLOAD,
-              });
-            }}
-          />
-          <CommonRoundButton
-            text="공고수정"
-            Icon={FiEdit}
-            backgoundColor={COLORS.GRAY80}
-            onClickHandler={() => {
-              router.push({
-                pathname: INTERNAL_URL.JD_UPLOAD,
-              });
-            }}
-          />
-        </div>
+        {jd.uploader.is_mine && (
+          <div css={cssObj.buttonContainer}>
+            <CommonRoundButton
+              text="공고마감"
+              Icon={AiOutlinePause}
+              backgoundColor={COLORS.GRAY80}
+              onClickHandler={() => {
+                router.push({
+                  pathname: INTERNAL_URL.JD_UPLOAD,
+                });
+              }}
+            />
+            <CommonRoundButton
+              text="공고삭제"
+              Icon={BiMinus}
+              backgoundColor={COLORS.GRAY80}
+              onClickHandler={() => {
+                router.push({
+                  pathname: INTERNAL_URL.JD_UPLOAD,
+                });
+              }}
+            />
+            <CommonRoundButton
+              text="공고수정"
+              Icon={FiEdit}
+              backgoundColor={COLORS.GRAY80}
+              onClickHandler={() => {
+                router.push({
+                  pathname: INTERNAL_URL.JD_EDIT(123),
+                });
+              }}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

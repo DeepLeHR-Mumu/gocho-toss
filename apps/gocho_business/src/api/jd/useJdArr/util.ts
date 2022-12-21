@@ -5,20 +5,18 @@ export const jdArrSelector = ({ data: jdArr, count }: ResponseObjDef) => {
     id: jd.id,
     applyUrl: jd.apply_url,
     status: jd.status,
+    uploader: { name: jd.uploader.name, department: jd.uploader.department, is_mine: jd.uploader.is_mine },
     companyName: jd.company.name,
     companyId: jd.company.id,
     companyLogo: jd.company.logo_url,
     title: jd.title,
     cut: jd.cut,
     view: jd.view,
+    bookmark: jd.bookmark,
+    click: jd.click,
     startTime: jd.start_time,
     endTime: jd.end_time,
     taskArr: jd.task_arr,
-    eduArr: jd.edu_summary,
-    placeArr: jd.place_arr,
-    rotationArr: jd.rotation_arr,
-    contractArr: jd.contract_type,
-    requiredExpArr: jd.required_exp_arr,
   }));
   return { jdDataArr, count };
 };
