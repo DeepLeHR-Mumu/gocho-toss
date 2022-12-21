@@ -18,3 +18,21 @@ export const linkObj = {
   TOS_URL: "/term-of-service",
   PRIVACY_URL: "/privacy",
 };
+
+export const businessLinkObj = {
+  BASE_URL: "http://localhost:3000",
+  HOME: "/",
+  MY_PAGE: "/mypage",
+  JD_LIST: "/jd/list",
+  JD_UPLOAD: "/jd/upload",
+  JD_EDIT: (jdIndex: number) => {
+    return `/jd/${jdIndex}/edit`;
+  },
+  FACTORY_LIST: "/factory/list",
+  COMPANY_EDIT: "/company/edit",
+  RECRUITER_LIST: "/recruiter/list",
+  HELP: "/help",
+  NOT_FOUND: "/404",
+  UNKNOWN_ERROR: "/500",
+  LOGIN: "/login",
+};
