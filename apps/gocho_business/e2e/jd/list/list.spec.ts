@@ -7,7 +7,12 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe("공고 리스트 테스트", () => {
+  test("공고 등록하기 버튼 테스트", async ({ page }) => {
+    await page.getByText("공고 등록").click();
+    expect(page.url().includes("jd/upload"));
+  });
+
   test("타이틀, heading 검사", async ({ page }) => {
-    await expect(page.locator("h1")).toHaveText("고초대졸닷컴 | 생산직 취업의 새로운 기준");
+    await expect(page.locator("h1")).toHaveText("고초대졸.business");
   });
 });
