@@ -9,15 +9,16 @@ export const cssObj = {
     padding: 0.75rem 0.5rem;
     display: flex;
     align-items: center;
+    width: fit-content;
   `,
-  icon: (color: ColorDef) => css`
+  icon: css`
     display: flex;
-    color: ${color};
+    color: black;
     align-items: center;
     margin-right: 0.75rem;
   `,
-  text: (color: ColorDef) => css`
+  text: css`
     font-weight: 400;
-    color: ${color};
+    color: black;
   `,
 };

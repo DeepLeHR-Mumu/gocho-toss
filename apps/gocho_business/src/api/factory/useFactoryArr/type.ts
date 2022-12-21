@@ -3,7 +3,7 @@ import { QueryFunctionContext } from "@tanstack/react-query";
 export interface ResponseObjDef {
   data: {
     id: number;
-    status: string;
+    status: "등록전" | "승인됨" | "반려됨" | "검수중";
     uploader: { name: string; department: string };
     name: string;
     employee_number: number;
