@@ -24,7 +24,7 @@ export const PrivateRouteLayout: FunctionComponent<PrivateRouteProps> = ({ prote
 
   if ((isLoading || !isSuccess) && isPathProtected) {
     // LATER : 추후 스피넛? 완성되면 집어넣기
-    return <div style={{ backgroundColor: "red", width: "100vw", height: "100vh" }}>loading...</div>;
+    return <div style={{ backgroundColor: "green", width: "100vw", height: "100vh" }}>loading...</div>;
   }
 
   return <div>{children}</div>;
