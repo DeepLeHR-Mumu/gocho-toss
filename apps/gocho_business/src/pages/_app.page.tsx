@@ -1,5 +1,5 @@
 import type { AppProps } from "next/app";
-import { ReactElement, ReactNode, useEffect, useState } from "react";
+import { ReactElement, ReactNode, useState } from "react";
 import { Global } from "@emotion/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query";
@@ -10,6 +10,7 @@ import { NextPage } from "next";
 import { globalStyle } from "@/styles/globalStyle";
 import { useAxiosInterceptor } from "@/api/useIsRefreshLock";
 import { ToastPlaceholder } from "@/components/global/toast/toastPlaceHolder";
+import { PrivateRoute } from "@/components/global/layout/privateRoute";
 import { INTERNAL_URL } from "@/constants";
 
 export type NextPageWithLayout<P = Record<string, never>, IP = P> = NextPage<P, IP> & {
@@ -48,19 +49,22 @@ function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
 
   useAxiosInterceptor();
 
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    const currentUrl = router.pathname;
-    if (token && currentUrl === INTERNAL_URL.LOGIN) {
-      router.push(INTERNAL_URL.HOME);
-    }
-  }, [router]);
+  const protectedRoutes = [
+    INTERNAL_URL.HOME,
+    INTERNAL_URL.MY_PAGE,
+    INTERNAL_URL.JD_LIST,
+    INTERNAL_URL.JD_UPLOAD,
+    INTERNAL_URL.FACTORY_LIST,
+    INTERNAL_URL.COMPANY_EDIT,
+    INTERNAL_URL.RECRUITER_LIST,
+    INTERNAL_URL.HELP,
+  ];
 
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <Global styles={globalStyle} />
-        {getLayout(<Component {...pageProps} />)}
+        <PrivateRoute protectedRoutes={protectedRoutes}>{getLayout(<Component {...pageProps} />)}</PrivateRoute>
         <ToastPlaceholder />
         <ReactQueryDevtools initialIsOpen={false} />
       </Hydrate>

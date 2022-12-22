@@ -27,7 +27,7 @@ export const useAxiosInterceptor = () => {
 
   const goToLoginPage = () => {
     tokenService.removeAllToken();
-    router.push(INTERNAL_URL.LOGIN, undefined, { shallow: true });
+    router.push(INTERNAL_URL.LOGIN);
   };
 
   const subscribeTokenRefresh = (callback: (token: string) => void) => {

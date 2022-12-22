@@ -1,11 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { userStateKeyObj } from "@/constants/queryKeyFactory/user/userStateKeyObj";
+import { tokenService } from "@/util/tokenService";
 
-import { axiosInstance } from "../../useIsRefreshLock";
+import { axiosNoTokenInstance } from "../../useIsRefreshLock";
 
 export const getHealthCheck = async () => {
-  const { data } = await axiosInstance.get(`/auth/health-check`);
+  const token = tokenService.getAccessToken();
+
+  const { data } = await axiosNoTokenInstance.get(`/auth/health-check`, {
+    headers: { "x-access-token": token },
+  });
   return data;
 };
 

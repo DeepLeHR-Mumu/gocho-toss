@@ -11,6 +11,7 @@ import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
 import gochoColorSrc from "shared-image/global/deepLeLogo/largeColor.svg";
 
+import { INTERNAL_URL } from "@/constants";
 import { useUserState } from "@/globalStates/useUserState";
 import { TopBar } from "@/components/global/layout/topBar";
 import { useDoLogin } from "@/api/auth/useDoLogin";
@@ -56,7 +57,7 @@ const LoginPage: NextPage = () => {
           exp,
         });
         queryClient.invalidateQueries();
-        router.push("/");
+        router.push(INTERNAL_URL.HOME);
       },
     });
   };
