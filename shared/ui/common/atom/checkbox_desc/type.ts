@@ -1,9 +1,8 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 
-export interface CheckBoxProps {
-  type: "checkbox" | "radio";
+export interface CheckBoxWithDescProps {
   registerObj: UseFormRegisterReturn;
-  value: string;
-  text: string;
+  id: string;
+  desc: string;
   checked?: boolean;
 }

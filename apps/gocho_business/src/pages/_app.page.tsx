@@ -1,5 +1,5 @@
 import type { AppProps } from "next/app";
-import { ReactElement, ReactNode, useState } from "react";
+import { ReactElement, ReactNode, useEffect, useState } from "react";
 import { Global } from "@emotion/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query";
@@ -8,7 +8,9 @@ import { useRouter } from "next/router";
 import { NextPage } from "next";
 
 import { globalStyle } from "@/styles/globalStyle";
+import { useAxiosInterceptor } from "@/api/useIsRefreshLock";
 import { ToastPlaceholder } from "@/components/global/toast/toastPlaceHolder";
+import { INTERNAL_URL } from "@/constants";
 
 export type NextPageWithLayout<P = Record<string, never>, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -20,7 +22,6 @@ type AppPropsWithLayout = AppProps & {
 
 function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
-
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -44,6 +45,16 @@ function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
   );
 
   const getLayout = Component.getLayout || ((page) => page);
+
+  useAxiosInterceptor();
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    const currentUrl = router.pathname;
+    if (token && currentUrl === INTERNAL_URL.LOGIN) {
+      router.push(INTERNAL_URL.HOME);
+    }
+  }, [router]);
 
   return (
     <QueryClientProvider client={queryClient}>

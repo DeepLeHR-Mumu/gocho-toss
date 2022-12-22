@@ -24,14 +24,14 @@ export interface ResponseObjDef {
     pay_start: number;
     pay_desc: string;
     welfare: {
-      money: string | null;
-      health: string | null;
-      life: string | null;
-      holiday: string | null;
-      facility: string | null;
-      vacation: string | null;
-      growth: string | null;
-      etc: string | null;
+      money: string[] | null;
+      health: string[] | null;
+      life: string[] | null;
+      holiday: string[] | null;
+      facility: string[] | null;
+      vacation: string[] | null;
+      growth: string[] | null;
+      etc: string[] | null;
     };
 
     nozo: {
