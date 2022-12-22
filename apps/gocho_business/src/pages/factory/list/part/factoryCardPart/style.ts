@@ -27,12 +27,12 @@ export const cssObj = {
   addressContainer: css`
     display: flex;
     align-items: flex-start;
-    /* align-items: center; */
 
     gap: 0 0.5rem;
     > svg {
-      margin-top: 0.3rem;
+      /* margin-top: 0.3rem; */
       flex-shrink: 0;
+      font-size: 1.5rem;
     }
   `,
   name: css`
@@ -59,7 +59,7 @@ export const cssObj = {
   buttonContainer: css`
     width: 25%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     gap: 1rem 0;
     flex-direction: column;
     flex-shrink: 0;
@@ -71,12 +71,25 @@ export const cssObj = {
     flex-wrap: wrap;
     justify-content: space-between;
   `,
-
   infoItem: css`
     width: 47%;
+    margin-right: 0.5rem;
+  `,
+  percentageContainer: css`
+    display: flex;
+    align-items: center;
+    > div {
+      :first-of-type {
+        margin-right: 1rem;
+      }
+    }
   `,
   percentageBox: css`
     display: flex;
+    align-items: center;
+  `,
+  iconBox: css`
+    font-size: 1.5rem;
   `,
   etcInfo: css`
     font-weight: 400;
@@ -97,6 +110,7 @@ export const cssObj = {
   dateName: css`
     color: ${COLORS.GRAY60};
     font-weight: 400;
+    margin-right: 0.25rem;
   `,
   date: css`
     font-weight: 400;

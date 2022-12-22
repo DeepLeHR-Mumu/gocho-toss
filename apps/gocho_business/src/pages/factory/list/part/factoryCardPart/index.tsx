@@ -1,5 +1,6 @@
 import { FunctionComponent } from "react";
-import { AiOutlineEnvironment } from "react-icons/ai";
+import dayjs from "dayjs";
+import { AiOutlineEnvironment, AiOutlineMan, AiOutlineWoman } from "react-icons/ai";
 import { FiEdit, FiUser, FiUsers } from "react-icons/fi";
 import { BiMinus, BiBus, BiBuildingHouse } from "react-icons/bi";
 
@@ -10,10 +11,15 @@ import { CommonInfoBox, CommonRoundButton, CommonStatusChip } from "@/components
 
 import { cssObj } from "./style";
 import { FactoryCardPartProps } from "./type";
+import { useDeleteFactory } from "@/api/factory/useDeleteFactory";
 
 export const FactoryCardPart: FunctionComponent<FactoryCardPartProps> = ({ index }) => {
   const { data: factoryDataArr, isSuccess: factoryDataArrSuccess } = useFactoryArr(true);
+  const { mutate: deleteFactoryMutation } = useDeleteFactory();
 
+  const deleteOnclickHandler = (factoryId: number) => {
+    deleteFactoryMutation({ factoryId });
+  };
   if (!factoryDataArrSuccess) return null;
 
   return (
@@ -21,18 +27,16 @@ export const FactoryCardPart: FunctionComponent<FactoryCardPartProps> = ({ index
       <div css={cssObj.topContainer}>
         <div css={cssObj.container}>
           <div css={cssObj.nameContainer}>
-            <p css={cssObj.name}>{factoryDataArr?.[index].name}</p>
-            <CommonStatusChip status={factoryDataArr?.[index].status} />
+            <p css={cssObj.name}>{factoryDataArr[index].name}</p>
+            <CommonStatusChip status={factoryDataArr[index].status} />
           </div>
           <div css={cssObj.addressContainer}>
             <AiOutlineEnvironment />
-            {/* <p css={cssObj.name}>{factoryDataArr?.[index].address}</p> */}
-            <p css={cssObj.address}>weuifohawoiefj;aoiwjef;oiawje;ofijaw;oiejf;aoiwejfioajweo;ifja;owiefjaoiwjef</p>
+            <p css={cssObj.address}>{factoryDataArr[index].address}</p>
           </div>
           <div css={cssObj.productContainer}>
             <p css={cssObj.infoName}>생산품</p>
-            {/* <p css={cssObj.product}>{factoryDataArr?.[index].product}</p> */}
-            <p css={cssObj.product}>;oaawefaw9e8jfpoaiwejfopiawjefoiawje;ofijawoeifjiwjef;</p>
+            <p css={cssObj.product}>{factoryDataArr[index].product}</p>
           </div>
         </div>
         <div css={cssObj.buttonContainer}>
@@ -46,7 +50,9 @@ export const FactoryCardPart: FunctionComponent<FactoryCardPartProps> = ({ index
             text="공장삭제"
             Icon={BiMinus}
             backgoundColor={COLORS.BLUE_FIRST50}
-            onClickHandler={() => null}
+            onClickHandler={() => {
+              deleteOnclickHandler(factoryDataArr[index].id);
+            }}
           />
         </div>
       </div>
@@ -55,17 +61,19 @@ export const FactoryCardPart: FunctionComponent<FactoryCardPartProps> = ({ index
           <CommonInfoBox infoName="임직원" infoData={`${factoryDataArr[index].employeeNumber} 명`} Icon={FiUsers} />
         </div>
         <div css={cssObj.infoItem}>
-          <p>남녀 비율</p>
-          <div css={cssObj.percentageBox}>
-            <div>
-              <p>남</p>
-              <div>icon</div>
-              <p>{factoryDataArr[index].maleNumber}</p>
+          <p css={cssObj.infoName}>남녀 비율</p>
+          <div css={cssObj.percentageContainer}>
+            <div css={cssObj.percentageBox}>
+              <div css={cssObj.iconBox}>
+                <AiOutlineMan />
+              </div>
+              <p>{factoryDataArr[index].maleNumber}%</p>
             </div>
-            <div>
-              <p>여</p>
-              <div>icon</div>
-              <p>{factoryDataArr[index].femaleNumber}</p>
+            <div css={cssObj.percentageBox}>
+              <div css={cssObj.iconBox}>
+                <AiOutlineWoman />
+              </div>
+              <p>{factoryDataArr[index].femaleNumber}%</p>
             </div>
           </div>
         </div>
@@ -79,14 +87,11 @@ export const FactoryCardPart: FunctionComponent<FactoryCardPartProps> = ({ index
         </div>
         <div css={cssObj.infoItem}>
           <CommonInfoBox
-            infoName="통근버스"
+            infoName="기숙사"
             infoData={`${factoryDataArr[index].dormitory.exists ? "O" : "X"}`}
             Icon={BiBuildingHouse}
           />
-          {/* {factoryDataArr[index].bus.desc && <p css={cssObj.etcInfo}>{factoryDataArr[index].bus.desc} </p>} */}
-          <p css={cssObj.etcInfo}>
-            wei[fjaoiejfpioawei[fjaoiejfpioawei[fjaoiejfpioawei[fjaoiejfpioawei[fjaoiejfpioawei[fjaoiejfpioawei[fjaoiejfpioa
-          </p>
+          {factoryDataArr[index].bus.desc && <p css={cssObj.etcInfo}>{factoryDataArr[index].bus.desc} </p>}
         </div>
       </div>
       <div css={cssObj.uploadInfoContainer}>
@@ -100,11 +105,15 @@ export const FactoryCardPart: FunctionComponent<FactoryCardPartProps> = ({ index
         <div css={cssObj.infoItem}>
           <div css={cssObj.dateContainer}>
             <p css={cssObj.dateName}>공장등록일</p>
-            <p css={cssObj.date}>{factoryDataArr[index].createdTime}</p>
+            <p css={cssObj.date}>{dayjs(factoryDataArr[index].createdTime).format("YY.MM.DD HH:mm")}</p>
           </div>
           <div css={cssObj.dateContainer}>
             <p css={cssObj.dateName}>최종수정일</p>
-            <p css={cssObj.date}>{factoryDataArr[index].updatedTime ? factoryDataArr[index].updatedTime : "-"}</p>
+            <p css={cssObj.date}>
+              {factoryDataArr[index].updatedTime
+                ? dayjs(factoryDataArr[index].updatedTime).format("YY.MM.DD HH:mm")
+                : "-"}
+            </p>
           </div>
         </div>
       </div>

@@ -10,13 +10,12 @@ import { FactoryCardPart } from "./part/factoryCardPart";
 import { cardContainer, factoryPartContainer } from "./style";
 
 const FactoryListPage: NextPageWithLayout = () => {
-  const { data: factoryDataArr, error: factoryDataArrError } = useFactoryArr(true);
+  const { data: factoryDataArr } = useFactoryArr(true);
   return (
     <main>
       <PageLayout>
         <RegisterPart />
         <h2>공장 목록</h2>
-        {factoryDataArrError?.response?.data.error_code}
         <div css={factoryPartContainer}>
           <section css={cardContainer}>
             {factoryDataArr?.map((factory, index) => (
