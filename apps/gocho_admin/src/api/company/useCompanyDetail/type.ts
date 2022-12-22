@@ -1,8 +1,5 @@
+import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { QueryFunctionContext } from "@tanstack/react-query";
-
-export interface RequestObjDef {
-  companyId: number;
-}
 
 export interface ResponseObjDef {
   data: {
@@ -39,33 +36,28 @@ export interface ResponseObjDef {
       desc: string | null;
     };
 
-    factory_arr: {
-      id: number;
-      company_id: number;
-      name: string;
-      address: string;
-      male_number: number;
-      female_number: number;
-      product: string;
-      bus: {
-        exists: boolean;
-        desc: string | null;
-      };
-      dormitory: {
-        exists: boolean;
-        desc: string | null;
-      };
-    }[];
+    factory_arr:
+      | {
+          id: number;
+          company_id: number;
+          name: string;
+          address: string;
+          male_number: number;
+          female_number: number;
+          product: string;
+          bus: {
+            exists: boolean;
+            desc: string | null;
+          };
+          dormitory: {
+            exists: boolean;
+            desc: string | null;
+          };
+        }[]
+      | null;
   };
 }
 
-export const companyDetailKeyObj = {
-  all: [{ data: "companyDetail" }] as const,
-  detail: (requestObj: RequestObjDef) => {
-    return [{ data: "companyDetail", requestObj }] as const;
-  },
-};
-
-export interface GetEditCompanyRequestDef {
+export interface GetCompanyDetailDef {
   ({ queryKey }: QueryFunctionContext<ReturnType<typeof companyDetailKeyObj.detail>>): Promise<ResponseObjDef>;
 }

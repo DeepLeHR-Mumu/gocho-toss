@@ -2,27 +2,26 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
-
 import { axiosInstance } from "@api/useAxiosInterceptor";
+import { ChangeCompanyDef, RequestObjDef, useChangeCompanyProps } from "./type";
 
-import { PostCompanyDef, RequestObjDef, useAddCompanyProps } from "./type";
-
-export const postAddCompany: PostCompanyDef = async (requestObj) => {
+export const changeCompany: ChangeCompanyDef = async (requestObj) => {
   const formData = new FormData();
   const json = JSON.stringify(requestObj.dto);
   const blob = new Blob([json], { type: "application/json" });
   formData.append("dto", blob);
-  formData.append("img", requestObj.logo);
+  if (requestObj.logo) formData.append("img", requestObj.logo);
 
-  const { data } = await axiosInstance.post("/companies", requestObj, {
+  const { data } = await axiosInstance.put(`/companies/${requestObj.companyId}`, requestObj, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return data;
 };
 
-export const useAddCompany: useAddCompanyProps = () => {
+export const useChangeCompany: useChangeCompanyProps = () => {
   return useMutation<AdminResponseDef, AxiosError, RequestObjDef>((requestObj) => {
     const newRequestObj = {
+      companyId: requestObj.companyId,
       dto: {
         ...requestObj.dto,
         welfare: {
@@ -38,6 +37,6 @@ export const useAddCompany: useAddCompanyProps = () => {
       },
       logo: requestObj.logo,
     };
-    return postAddCompany(newRequestObj);
+    return changeCompany(newRequestObj);
   });
 };

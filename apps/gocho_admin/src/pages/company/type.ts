@@ -3,16 +3,16 @@ export interface CompanyFormValues {
   file_id: string;
   business_number: number;
   catch_url: string;
-  youtube_url: string;
+  youtube_url: string | null;
   industry: string;
   size: string;
   employee_number: number;
-  found_date: number;
+  found_date: number | string;
   address: string;
   intro: string;
-  pay_avg: number;
-  pay_start: number;
-  pay_desc: string;
+  pay_avg: number | null;
+  pay_start: number | null;
+  pay_desc: string | null;
   welfare: {
     money: string | null;
     health: string | null;
@@ -41,16 +41,3 @@ export interface CompanyFormValues {
     dormitory_etc: string | null;
   }[];
 }
-
-export type welfareArrDef = {
-  title: string;
-  data:
-    | "welfare.money"
-    | "welfare.health"
-    | "welfare.life"
-    | "welfare.holiday"
-    | "welfare.facility"
-    | "welfare.vacation"
-    | "welfare.growth"
-    | "welfare.etc";
-}[];
