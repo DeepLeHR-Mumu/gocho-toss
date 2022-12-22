@@ -57,7 +57,7 @@ const LoginPage: NextPage = () => {
           exp,
         });
         queryClient.invalidateQueries();
-        router.push(INTERNAL_URL.HOME);
+        router.push(INTERNAL_URL.JD_LIST);
       },
     });
   };

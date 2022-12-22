@@ -10,7 +10,7 @@ interface PrivateRouteProps {
   children: ReactNode;
 }
 
-export const PrivateRoute: FunctionComponent<PrivateRouteProps> = ({ protectedRoutes, children }) => {
+export const PrivateRouteLayout: FunctionComponent<PrivateRouteProps> = ({ protectedRoutes, children }) => {
   const router = useRouter();
   const { isSuccess, isLoading } = useHealthCheck();
   const isPathProtected = protectedRoutes.indexOf(router.pathname) !== -1;

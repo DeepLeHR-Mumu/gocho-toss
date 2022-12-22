@@ -10,7 +10,7 @@ import { NextPage } from "next";
 import { globalStyle } from "@/styles/globalStyle";
 import { useAxiosInterceptor } from "@/apis/useIsRefreshLock";
 import { ToastPlaceholder } from "@/components/global/toast/toastPlaceHolder";
-import { PrivateRoute } from "@/components/global/layout/privateRoute";
+import { PrivateRouteLayout } from "@/components/global/layout/privateRouteLayout";
 import { INTERNAL_URL } from "@/constants";
 
 export type NextPageWithLayout<P = Record<string, never>, IP = P> = NextPage<P, IP> & {
@@ -63,7 +63,9 @@ function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <Global styles={globalStyle} />
-        <PrivateRoute protectedRoutes={protectedRoutes}>{getLayout(<Component {...pageProps} />)}</PrivateRoute>
+        <PrivateRouteLayout protectedRoutes={protectedRoutes}>
+          {getLayout(<Component {...pageProps} />)}
+        </PrivateRouteLayout>
         <ToastPlaceholder />
         <ReactQueryDevtools initialIsOpen={false} />
       </Hydrate>
