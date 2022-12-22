@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 
-import { tokenService } from "@/util/tokenService";
+import { tokenService } from "@/utils/tokenService";
 
 import { UserStateInfoProps } from "./type";
 
