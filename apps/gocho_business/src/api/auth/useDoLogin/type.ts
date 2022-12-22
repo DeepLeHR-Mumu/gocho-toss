@@ -1,5 +1,4 @@
-import { AxiosError } from "axios";
-import { UseMutationResult } from "@tanstack/react-query";
+import { AxiosResponse } from "axios";
 
 export interface RequestObjDef {
   email: string;
@@ -8,23 +7,10 @@ export interface RequestObjDef {
 }
 
 export interface ResponseObjDef {
-  data: { access_token: string; refresh_token: string };
+  access_token: string;
+  refresh_token: string;
 }
 
 export interface PostLoginDef {
-  ({ email, password, auto_login }: RequestObjDef): Promise<ResponseObjDef>;
-}
-
-export interface LoginErrorValuesDef extends AxiosError {
-  error: {
-    status: number;
-    status_name: string;
-    error_code: string;
-    error_message: string;
-    path: string;
-  };
-}
-
-export interface useDoLoginProps {
-  (): UseMutationResult<ResponseObjDef, LoginErrorValuesDef, RequestObjDef>;
+  ({ email, password, auto_login }: RequestObjDef): Promise<AxiosResponse<ResponseObjDef>>;
 }

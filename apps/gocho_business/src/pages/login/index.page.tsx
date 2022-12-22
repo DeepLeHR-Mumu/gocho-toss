@@ -14,7 +14,6 @@ import gochoColorSrc from "shared-image/global/deepLeLogo/largeColor.svg";
 import { useUserState } from "@/globalStates/useUserState";
 import { TopBar } from "@/components/global/layout/topBar";
 import { useDoLogin } from "@/api/auth/useDoLogin";
-import { LoginErrorValuesDef } from "@/api/auth/useDoLogin/type";
 import { tokenService } from "@/util/tokenService";
 
 import { LoginFormValues } from "./type";
@@ -37,8 +36,8 @@ const LoginPage: NextPage = () => {
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     postLogin(loginObj, {
       onError: (error) => {
-        const errorResponse = error.response?.data as LoginErrorValuesDef;
-        setErrorMsg(errorResponse.error.error_message);
+        const errorResponse = error.response?.data;
+        setErrorMsg(errorResponse?.error_message as string);
       },
       onSuccess: (response) => {
         tokenService.updateAllToken(`${response.data.access_token}`, `${response.data.refresh_token}`);
