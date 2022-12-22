@@ -16,6 +16,15 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   pageExtensions: ["page.tsx"],
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/jd/list",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = withTM(nextConfig);

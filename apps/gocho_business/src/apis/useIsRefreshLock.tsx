@@ -7,7 +7,7 @@ import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 
 import { INTERNAL_URL } from "@/constants/index";
 
-import { tokenService } from "@/util/tokenService";
+import { tokenService } from "@/utils/tokenService";
 import { ResponseErrorStatus } from "./type";
 
 export const axiosNoTokenInstance = axios.create({

@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { tokenService } from "@/util/tokenService";
+import { tokenService } from "@/utils/tokenService";
 import { useUserState } from "@/globalStates/useUserState";
 
 import { cssObj } from "./style";

@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import { axiosInstance } from "@/api/axiosInteceptor";
-import { ErrorResponseDef } from "@/type/errorType";
+import { axiosInstance } from "@/apis/axiosInteceptor";
+import { ErrorResponseDef } from "@/types/errorType";
 
 import { factoryArrKeyObj, GetFactoryArrDef, ResponseObjDef } from "./type";
 import { factoryArrSelector } from "./util";
