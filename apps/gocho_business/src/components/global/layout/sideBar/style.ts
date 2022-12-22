@@ -1,9 +1,9 @@
 import { css } from "@emotion/react";
 
 export const wrapper = css`
+  display: "flex";
   width: 18rem;
   padding: 1.5rem 0 0 0;
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
   border-right: 1px solid #cccccc;

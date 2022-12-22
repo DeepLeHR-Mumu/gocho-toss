@@ -13,4 +13,5 @@ export const MANAGER_BACKEND_URL = `${
     ? "https://admin.gocho-back.com"
     : "https://dev.admin.gocho-back.com"
 }`;
+
 export const CDN_URL = "http://cdn.gocho-back.com/";
