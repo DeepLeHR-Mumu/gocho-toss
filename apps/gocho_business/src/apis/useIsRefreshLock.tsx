@@ -7,8 +7,8 @@ import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 
 import { INTERNAL_URL } from "@/constants/index";
 
-import { tokenService } from "@/util/tokenService";
-import { ResponseErrorStatus } from "./type";
+import { tokenService } from "@/utils/tokenService";
+import { ErrorResponseDef } from "@/types/errorType";
 
 export const axiosNoTokenInstance = axios.create({
   timeout: 10000,
@@ -86,7 +86,7 @@ export const useAxiosInterceptor = () => {
 
   const responseConfigHandler = (response: AxiosResponse) => response;
 
-  const responseErrorHandler = async (error: AxiosError<ResponseErrorStatus>) => {
+  const responseErrorHandler = async (error: AxiosError<ErrorResponseDef>) => {
     const { config } = error;
     const originalRequest = config;
 
@@ -131,7 +131,7 @@ export const useAxiosInterceptor = () => {
 
   const responseInterceptor = axiosInstance.interceptors.response.use(
     (response) => responseConfigHandler(response),
-    (error: AxiosError<ResponseErrorStatus>) => responseErrorHandler(error)
+    (error: AxiosError<ErrorResponseDef>) => responseErrorHandler(error)
   );
 
   useEffect(

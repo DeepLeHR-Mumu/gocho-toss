@@ -14,8 +14,8 @@ import gochoColorSrc from "shared-image/global/deepLeLogo/largeColor.svg";
 import { INTERNAL_URL } from "@/constants";
 import { useUserState } from "@/globalStates/useUserState";
 import { TopBar } from "@/components/global/layout/topBar";
-import { useDoLogin } from "@/api/auth/useDoLogin";
-import { tokenService } from "@/util/tokenService";
+import { useDoLogin } from "@/apis/auth/useDoLogin";
+import { tokenService } from "@/utils/tokenService";
 
 import { LoginFormValues } from "./type";
 import { cssObj } from "./style";

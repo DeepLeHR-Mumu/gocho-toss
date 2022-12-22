@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { NextPage } from "next";
 
 import { globalStyle } from "@/styles/globalStyle";
-import { useAxiosInterceptor } from "@/api/useIsRefreshLock";
+import { useAxiosInterceptor } from "@/apis/useIsRefreshLock";
 import { ToastPlaceholder } from "@/components/global/toast/toastPlaceHolder";
 import { PrivateRoute } from "@/components/global/layout/privateRoute";
 import { INTERNAL_URL } from "@/constants";
