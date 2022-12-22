@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { useJdArr } from "@/api/jd/useJdArr";
+import { useJdArr } from "@/apis/jd/useJdArr";
 
 import { JdCard } from "../../component/jdCard";
 

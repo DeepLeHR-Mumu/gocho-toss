@@ -9,7 +9,6 @@ import { HeaderPart } from "./part/headerPart";
 
 const JdListPage: NextPageWithLayout = () => (
   <main>
-    <CompanyInfoPart />
     <PageLayout>
       <HeaderPart />
       <ListPart />
@@ -17,6 +16,11 @@ const JdListPage: NextPageWithLayout = () => (
   </main>
 );
 
-JdListPage.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
+JdListPage.getLayout = (page: ReactElement) => (
+  <GlobalLayout>
+    <CompanyInfoPart />
+    {page}
+  </GlobalLayout>
+);
 
 export default JdListPage;
