@@ -1,14 +1,12 @@
-import { FunctionComponent, ReactNode, useEffect } from "react";
+import { FunctionComponent, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { useHealthCheck } from "@/apis/auth/useHealthCheck";
 import { INTERNAL_URL } from "@/constants";
 import { tokenService } from "@/utils/tokenService";
 
-interface PrivateRouteProps {
-  protectedRoutes: string[];
-  children: ReactNode;
-}
+import { PrivateRouteProps } from "./type";
+import { cssObj } from "./style";
 
 export const PrivateRouteLayout: FunctionComponent<PrivateRouteProps> = ({ protectedRoutes, children }) => {
   const router = useRouter();
@@ -23,8 +21,7 @@ export const PrivateRouteLayout: FunctionComponent<PrivateRouteProps> = ({ prote
   }, [isLoading, isPathProtected, isSuccess, router]);
 
   if ((isLoading || !isSuccess) && isPathProtected) {
-    // LATER : 추후 스피넛? 완성되면 집어넣기
-    return <div style={{ backgroundColor: "green", width: "100vw", height: "100vh" }}>loading...</div>;
+    return <div css={cssObj.loadingBox} />;
   }
 
   return <div>{children}</div>;
