@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
-import { ErrorResponseDef } from "@/type/errorType";
+import { ErrorResponseDef } from "@/types/errorType";
 
 import { axiosInstance } from "../../useIsRefreshLock";
 import { RequestObjDef, DeleteFactoryDef } from "./type";

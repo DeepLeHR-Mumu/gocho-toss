@@ -6,12 +6,12 @@ import { BiMinus, BiBus, BiBuildingHouse } from "react-icons/bi";
 
 import { COLORS } from "shared-style/color";
 
-import { useFactoryArr } from "@/api/factory/useFactoryArr";
+import { useFactoryArr } from "@/apis/factory/useFactoryArr";
 import { CommonInfoBox, CommonRoundButton, CommonStatusChip } from "@/components/common";
 
 import { cssObj } from "./style";
 import { FactoryCardPartProps } from "./type";
-import { useDeleteFactory } from "@/api/factory/useDeleteFactory";
+import { useDeleteFactory } from "@/apis/factory/useDeleteFactory";
 
 export const FactoryCardPart: FunctionComponent<FactoryCardPartProps> = ({ index }) => {
   const { data: factoryDataArr, isSuccess: factoryDataArrSuccess } = useFactoryArr(true);

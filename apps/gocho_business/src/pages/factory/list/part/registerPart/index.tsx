@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { useForm } from "react-hook-form";
 
-import { useAddFactory } from "@/api/factory/useAddFactory";
+import { useAddFactory } from "@/apis/factory/useAddFactory";
 
 import { cssObj } from "./style";
 import { FactoryRegisterDef } from "./type";

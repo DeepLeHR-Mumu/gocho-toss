@@ -109,7 +109,7 @@ jobs:
         if: failure()
         uses: rtCamp/action-slack-notify@master
         env:
-          SLACK_CHANNEL: 01-팀-dev
+          SLACK_CHANNEL: 02-팀-frontend
           SLACK_FOOTER: ""
           SLACK_COLOR: "danger"
           SLACK_MESSAGE: "dev 테스트 실패했습니다!:"

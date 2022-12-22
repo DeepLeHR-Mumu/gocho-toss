@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 import type { NextPageWithLayout } from "@/pages/_app.page";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
 import { CompanyInfoPart } from "@/components/global/companyInfoPart";
-import { useFactoryArr } from "@/api/factory/useFactoryArr";
+import { useFactoryArr } from "@/apis/factory/useFactoryArr";
 
 import { RegisterPart } from "./part/registerPart";
 import { FactoryCardPart } from "./part/factoryCardPart";

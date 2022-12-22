@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
-import { ErrorResponseDef } from "@/type/errorType";
+import { ErrorResponseDef } from "@/types/errorType";
 
-import { axiosInstance } from "../../axiosInteceptor";
+import { axiosInstance } from "../../useIsRefreshLock";
 import { RequestObjDef, PostFactoryDef } from "./type";
 
 export const postAddFactory: PostFactoryDef = async (requestObj) => {
