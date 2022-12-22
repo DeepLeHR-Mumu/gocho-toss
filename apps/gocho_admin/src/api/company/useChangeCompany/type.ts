@@ -3,6 +3,7 @@ import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
+  companyId: number;
   dto: {
     name: string;
     file_id: string;
@@ -46,10 +47,11 @@ export interface RequestObjDef {
       dormitory_etc: string | null;
     }[];
   };
-  logo: File;
+  logo?: File;
 }
 
-interface axiosRequestObjDef {
+export interface axiosRequestObjDef {
+  companyId: number;
   dto: {
     name: string;
     file_id: string;
@@ -93,13 +95,13 @@ interface axiosRequestObjDef {
       dormitory_etc: string | null;
     }[];
   };
-  logo: File;
+  logo?: File;
 }
 
-export interface PostCompanyDef {
-  ({ dto, logo }: axiosRequestObjDef): Promise<AdminResponseDef>;
+export interface ChangeCompanyDef {
+  ({ companyId, dto, logo }: axiosRequestObjDef): Promise<AdminResponseDef>;
 }
 
-export interface useAddCompanyProps {
+export interface useChangeCompanyProps {
   (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
 }

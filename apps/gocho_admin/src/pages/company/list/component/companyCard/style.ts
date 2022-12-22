@@ -32,9 +32,13 @@ export const flexBox = css`
 `;
 
 export const fixButton = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 500;
   border: 2px solid ${COLORS.GRAY10};
   padding: 0.25rem 1rem;
+  height: 2.25rem;
   background-color: ${COLORS.BLUE_NEON40};
   color: ${COLORS.GRAY100};
 `;
@@ -43,6 +47,7 @@ export const deleteButton = css`
   font-weight: 500;
   border: 2px solid ${COLORS.GRAY10};
   padding: 0.25rem 1rem;
+  height: 2.25rem;
   background-color: #b32100;
   color: ${COLORS.GRAY100};
 `;
