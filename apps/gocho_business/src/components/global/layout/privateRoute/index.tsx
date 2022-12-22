@@ -1,9 +1,9 @@
 import { FunctionComponent, ReactNode, useEffect } from "react";
 import { useRouter } from "next/router";
 
-import { useHealthCheck } from "@/api/auth/useHealthCheck";
+import { useHealthCheck } from "@/apis/auth/useHealthCheck";
 import { INTERNAL_URL } from "@/constants";
-import { tokenService } from "@/util/tokenService";
+import { tokenService } from "@/utils/tokenService";
 
 interface PrivateRouteProps {
   protectedRoutes: string[];

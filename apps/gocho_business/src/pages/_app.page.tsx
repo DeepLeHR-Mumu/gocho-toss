@@ -50,7 +50,6 @@ function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
   useAxiosInterceptor();
 
   const protectedRoutes = [
-    INTERNAL_URL.HOME,
     INTERNAL_URL.MY_PAGE,
     INTERNAL_URL.JD_LIST,
     INTERNAL_URL.JD_UPLOAD,

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { userStateKeyObj } from "@/constants/queryKeyFactory/user/userStateKeyObj";
-import { tokenService } from "@/util/tokenService";
+import { tokenService } from "@/utils/tokenService";
 
 import { axiosNoTokenInstance } from "../../useIsRefreshLock";
 
