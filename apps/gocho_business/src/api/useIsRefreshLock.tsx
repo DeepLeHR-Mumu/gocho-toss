@@ -21,6 +21,7 @@ export const axiosInstance = axios.create({
 });
 
 export const useAxiosInterceptor = () => {
+  console.log("heiuf");
   const router = useRouter();
   let lock = false;
   let subscribers: ((token: string) => void)[] = [];
