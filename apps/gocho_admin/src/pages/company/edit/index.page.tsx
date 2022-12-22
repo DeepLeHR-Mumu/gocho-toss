@@ -16,7 +16,7 @@ import { PayInfoPart } from "./part/payInfoPart";
 import { blankFactory } from "./constant";
 import { formContainer, addFactoryButton, submitButton, checkMsgBox } from "./style";
 
-const CompanyUpload: NextPage = () => {
+const CompanyEdit: NextPage = () => {
   const router = useRouter();
   const companyId = Number(router.query.id);
 
@@ -83,6 +83,7 @@ const CompanyUpload: NextPage = () => {
         dormitory_etc: factory.dormitory.desc,
       };
     });
+
     reset({
       name: companyData?.name,
       business_number: companyData?.businessNumber,
@@ -130,7 +131,7 @@ const CompanyUpload: NextPage = () => {
         <BasicInfoPart
           register={register}
           watch={watch}
-          companyLogo={companyData?.logoUrl || ""}
+          companyLogo={companyData?.logoUrl}
           setLogoPicture={setLogoPicture}
         />
         <WelfareInfoPart register={register} />
@@ -158,4 +159,4 @@ const CompanyUpload: NextPage = () => {
   );
 };
 
-export default CompanyUpload;
+export default CompanyEdit;
