@@ -4,7 +4,10 @@ export const jdArrSelector = ({ data: jdArr, count }: ResponseObjDef) => {
   const jdDataArr = jdArr.map((jd) => ({
     id: jd.id,
     applyUrl: jd.apply_url,
-    status: jd.status,
+    status: {
+      name: jd.status.name,
+      reason: jd.status.reason,
+    },
     uploader: { name: jd.uploader.name, department: jd.uploader.department, is_mine: jd.uploader.is_mine },
     companyName: jd.company.name,
     companyId: jd.company.id,

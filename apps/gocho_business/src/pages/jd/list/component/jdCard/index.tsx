@@ -34,7 +34,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
             />
             {jd.cut && <p>채용시 마감</p>}
           </div>
-          <CommonStatusChip status={jd.status} />
+          <CommonStatusChip status={jd.status.name} />
         </div>
         <CommonInfoBox Icon={AiOutlineEye} infoData={viewData} infoName="조회수" />
         <CommonInfoBox Icon={BiBookmark} infoData={bookmarkData} infoName="북마크" />

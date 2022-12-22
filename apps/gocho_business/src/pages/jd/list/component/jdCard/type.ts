@@ -3,7 +3,10 @@ export interface JdCardProps {
     id: number;
     applyUrl: string;
     uploader: { name: string; department: string; is_mine: boolean };
-    status: "등록전" | "승인됨" | "반려됨" | "검수중";
+    status: {
+      name: "등록전" | "승인됨" | "반려됨" | "검수중";
+      reason: string;
+    };
     companyName: string;
     companyId: number;
     companyLogo: string;

@@ -15,7 +15,7 @@ export const HeaderPart: FunctionComponent = () => {
   return (
     <section css={cssObj.partContainer}>
       <div>
-        <strong css={cssObj.title}>공고 목록</strong>
+        <h2 css={cssObj.title}>공고 목록</h2>
         <p>공고를 수정하면 승인기간이 늘어날 수 있습니다</p>
       </div>
       <CommonSquareButton

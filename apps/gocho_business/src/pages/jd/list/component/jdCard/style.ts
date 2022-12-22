@@ -39,7 +39,7 @@ export const cssObj = {
   infoBox: css`
     display: flex;
     align-items: center;
-    gap: 0 0.25rem;
+    gap: 0 0.375rem;
   `,
 
   infoTitle: css`

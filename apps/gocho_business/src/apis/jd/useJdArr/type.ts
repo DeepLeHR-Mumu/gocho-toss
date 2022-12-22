@@ -13,7 +13,10 @@ export interface ResponseObjDef {
     id: number;
     uploader: { name: string; department: string; is_mine: boolean };
     company: { id: number; name: string; logo_url: string };
-    status: "등록전" | "승인됨" | "반려됨" | "검수중";
+    status: {
+      name: "등록전" | "승인됨" | "반려됨" | "검수중";
+      reason: string;
+    };
     title: string;
     cut: boolean;
     view: number;
