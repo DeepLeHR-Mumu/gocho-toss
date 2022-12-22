@@ -1,5 +1,16 @@
-import type { NextPage } from "next";
+import { ReactElement } from "react";
 
-const JdListPage: NextPage = () => <div>Jd List Page</div>;
+import { NextPageWithLayout } from "@/pages/_app.page";
+import { GlobalLayout } from "@/components/global/layout";
+import { CompanyInfoPart } from "@/components/global/companyInfoPart";
+
+const JdListPage: NextPageWithLayout = () => <div>Jd List Page</div>;
+
+JdListPage.getLayout = (page: ReactElement) => (
+  <GlobalLayout>
+    <CompanyInfoPart />
+    {page}
+  </GlobalLayout>
+);
 
 export default JdListPage;
