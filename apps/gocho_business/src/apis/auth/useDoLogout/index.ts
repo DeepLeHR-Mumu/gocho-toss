@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
-
 import { AxiosError, AxiosResponse } from "axios";
+
 import { tokenService } from "@/utils/tokenService";
+import { ErrorResponseDef } from "@/types/errorType";
 
 import { axiosNoTokenInstance } from "../../useIsRefreshLock";
 import { PostLogoutDef } from "./type";
-import { ErrorResponseDef } from "@/types/errorType";
 
 const postLogout: PostLogoutDef = async () => {
   const refreshToken = tokenService.getRefreshToken();
