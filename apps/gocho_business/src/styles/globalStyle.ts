@@ -168,4 +168,10 @@ export const globalStyle = css`
   textarea {
     font-family: "Noto Sans KR", Verdana, sans-serif;
   }
+  input[type="number"] {
+    ::-webkit-outer-spin-button,
+    ::-webkit-inner-spin-button {
+      appearance: none;
+    }
+  }
 `;
