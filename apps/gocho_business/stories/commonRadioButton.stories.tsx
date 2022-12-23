@@ -1,14 +1,11 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { CommonRadioButton } from "@/components/common";
+import { CommonRadioButton } from "shared-ui/common/atom/commonRadioButton";
 
 export default {
   title: "CommonRadioButton",
   component: CommonRadioButton,
   argTypes: {
-    id: {
-      description: "radio htmlFor사용을 위한 id",
-    },
     desc: {
       description: "radio 안내 문구",
     },
@@ -24,4 +21,4 @@ export default {
 const Template: ComponentStory<typeof CommonRadioButton> = (args) => <CommonRadioButton {...args} />;
 
 export const Default = Template.bind({});
-Default.args = { id: "isBus", desc: "있음", registerObj: undefined };
+Default.args = { desc: "있음", registerObj: undefined };
