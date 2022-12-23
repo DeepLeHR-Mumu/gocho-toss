@@ -3,17 +3,23 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { tokenService } from "@/utils/tokenService";
 import { useUserState } from "@/globalStates/useUserState";
+import { useDoLogout } from "@/apis/auth/useDoLogout";
 
 import { cssObj } from "./style";
 
 export const TopBar: FunctionComponent = () => {
   const { userInfoData, setUserInfoData } = useUserState();
+  const { mutate: postLogout } = useDoLogout();
   const queryClient = useQueryClient();
 
   const doLogoutHandler = () => {
-    tokenService.removeAllToken();
-    setUserInfoData(null);
-    queryClient.invalidateQueries();
+    postLogout(undefined, {
+      onSuccess: () => {
+        tokenService.removeAllToken();
+        setUserInfoData(null);
+        queryClient.invalidateQueries();
+      },
+    });
   };
 
   return (
