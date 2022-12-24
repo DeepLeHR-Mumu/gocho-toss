@@ -2,6 +2,7 @@ import type { PlaywrightTestConfig } from "@playwright/test";
 import { devices } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
+  globalSetup: require.resolve("./global-setup"),
   timeout: 6000,
   expect: {
     timeout: 6000,
@@ -9,7 +10,6 @@ const config: PlaywrightTestConfig = {
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   reporter: process.env.CI ? "github" : "list",
-
   projects: [
     {
       name: "chromium",
@@ -17,6 +17,7 @@ const config: PlaywrightTestConfig = {
       use: {
         baseURL: process.env.GOCHO_BUSINESS_URL || "http://localhost:3000",
         ...devices["Desktop Chrome"],
+        storageState: "storageState.json",
       },
     },
   ],

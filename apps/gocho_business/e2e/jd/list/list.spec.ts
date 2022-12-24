@@ -1,11 +1,8 @@
 import { test, expect } from "@playwright/test";
 
 import { businessLinkObj } from "shared-constant/e2e/internalURL";
-import { loginTester } from "../../common/common.spec";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto(businessLinkObj.BASE_URL);
-  await loginTester(page);
   await page.goto(businessLinkObj.JD_LIST);
 });
 
@@ -23,9 +20,7 @@ test.describe("공고 리스트 테스트", () => {
     const [jdListResponse] = await Promise.all([
       page.waitForResponse((response) => response.url().includes("/jds") && response.status() === 200),
     ]);
-
     const jdListData = await jdListResponse.json();
-
     await expect(page.locator("main>div>section").nth(1).locator(">div")).toHaveCount(jdListData.count);
   });
 });
