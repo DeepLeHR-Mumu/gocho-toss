@@ -7,7 +7,7 @@ import { cssObj } from "./style";
 import { FactoryDetailInfoProps } from "./type";
 
 export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ register, totalWorkerNumber }) => (
-  <>
+  <div css={cssObj.gapContainer}>
     <div css={cssObj.container}>
       <div css={cssObj.box}>
         <p css={cssObj.infoText}>임직원</p>
@@ -21,11 +21,11 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ r
       <div css={cssObj.box}>
         <p css={cssObj.infoText}>남녀비율</p>
         <div css={cssObj.manWomanContainer}>
-          <div css={cssObj.container}>
+          <div css={cssObj.flexContainer}>
             <div css={cssObj.iconBox}>
               <AiOutlineMan />
             </div>
-            <div css={cssObj.container}>
+            <div css={cssObj.flexContainer}>
               <input
                 {...register("male_number", { required: true, valueAsNumber: true })}
                 placeholder="남성"
@@ -34,11 +34,11 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ r
               명
             </div>
           </div>
-          <div css={cssObj.container}>
+          <div css={cssObj.flexContainer}>
             <div css={cssObj.womanIconBox}>
               <AiOutlineWoman />
             </div>
-            <div css={cssObj.container}>
+            <div css={cssObj.flexContainer}>
               <input
                 {...register("female_number", { required: true, valueAsNumber: true })}
                 placeholder="여성"
@@ -58,17 +58,17 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ r
             <BiBus />
           </div>
           <div css={cssObj.trueFalseContainer}>
-            <label htmlFor="busTrue" css={cssObj.trueFalseContainer}>
+            <label htmlFor="busTrue" css={cssObj.labelContainer}>
               <input type="radio" id="busTrue" {...register("bus_bool")} value="true" />
               <p>있음</p>
             </label>
-            <label htmlFor="busFalse" css={cssObj.trueFalseContainer}>
+            <label htmlFor="busFalse" css={cssObj.labelContainer}>
               <input type="radio" id="busFalse" {...register("bus_bool")} value="false" />
               <p>없음</p>
             </label>
-            <input {...register("dormitory_etc")} />
           </div>
         </div>
+        <input {...register("bus_etc", { maxLength: 70 })} css={cssObj.etcInfoBox} placeholder="보충 설명(선택)" />
       </div>
       <div css={cssObj.box}>
         <p css={cssObj.infoText}>기숙사</p>
@@ -77,18 +77,22 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ r
             <BiBuildingHouse />
           </div>
           <div css={cssObj.trueFalseContainer}>
-            <label htmlFor="dormitoryTrue" css={cssObj.trueFalseContainer}>
-              <input type="radio" id="dormitoryTrue" {...register("dormitory_etc")} value="true" />
+            <label htmlFor="dormitoryTrue" css={cssObj.labelContainer}>
+              <input type="radio" id="dormitoryTrue" {...register("dormitory_bool")} value="true" />
               <p>있음</p>
             </label>
-            <label htmlFor="dormitoryFalse" css={cssObj.trueFalseContainer}>
-              <input type="radio" id="dormitoryFalse" {...register("dormitory_etc")} value="false" />
+            <label htmlFor="dormitoryFalse" css={cssObj.labelContainer}>
+              <input type="radio" id="dormitoryFalse" {...register("dormitory_bool")} value="false" />
               <p>없음</p>
             </label>
-            <input {...register("dormitory_etc")} />
           </div>
         </div>
+        <input
+          {...register("dormitory_etc", { maxLength: 70 })}
+          css={cssObj.etcInfoBox}
+          placeholder="보충 설명(선택)"
+        />
       </div>
     </div>
-  </>
+  </div>
 );

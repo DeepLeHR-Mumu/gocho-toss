@@ -19,6 +19,10 @@ export const cssObj = {
     gap: 0.5rem;
     margin-bottom: 0.5rem;
   `,
+
+  addrOpener: css`
+    width: 100%;
+  `,
   statusChip: css`
     flex-shrink: 0;
   `,

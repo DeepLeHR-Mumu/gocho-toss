@@ -12,12 +12,11 @@ export const getFactoryArr: GetFactoryArrDef = async () => {
   return data;
 };
 
-export const useFactoryArr = (isLogin: boolean) =>
+export const useFactoryArr = () =>
   useQuery<ResponseObjDef, AxiosError<ErrorResponseDef>, ReturnType<typeof factoryArrSelector>>(
     factoryArrKeyObj.all,
     getFactoryArr,
     {
       select: (data) => factoryArrSelector(data),
-      enabled: isLogin,
     }
   );

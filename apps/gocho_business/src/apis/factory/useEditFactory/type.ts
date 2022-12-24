@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 
 export interface RequestObjDef {
+  id: number;
   factory_name: string;
   address: string;
   male_number: number;
@@ -10,7 +11,6 @@ export interface RequestObjDef {
   bus_etc?: string;
   dormitory_bool: boolean;
   dormitory_etc?: string;
-  id: false | number | undefined;
 }
 
 export interface PostFactoryDef {

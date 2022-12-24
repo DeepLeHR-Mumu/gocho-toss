@@ -9,6 +9,20 @@ export const cssObj = {
     border: 1px solid #e9e9e9;
     border-radius: 1.5rem;
     padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  `,
+  editingBox: css`
+    margin: -1.5rem;
+    width: 100%;
+    height: 100%;
+    background-color: gray;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p {
+    }
   `,
   topContainer: css`
     display: flex;

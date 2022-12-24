@@ -1,26 +1,25 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 
 import type { NextPageWithLayout } from "@/pages/_app.page";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
 import { CompanyInfoPart } from "@/components/global/companyInfoPart";
-import { useFactoryArr } from "@/apis/factory/useFactoryArr";
 
 import { RegisterPart } from "./part/registerPart";
-import { FactoryCardPart } from "./part/factoryCardPart";
+import { FactoryCardListPart } from "./part/factoryCardPart";
 import { cardContainer, factoryPartContainer } from "./style";
 
 const FactoryListPage: NextPageWithLayout = () => {
-  const { data: factoryDataArr } = useFactoryArr(true);
+  const [isEditing, setIsEditing] = useState<false | number>(false);
+
   return (
     <main>
       <PageLayout>
-        <RegisterPart />
+        <h2>{isEditing === false ? "공장 등록" : "공장 수정"}</h2>
+        <RegisterPart isEditing={isEditing} setIsEditing={setIsEditing} />
         <h2>공장 목록</h2>
         <div css={factoryPartContainer}>
           <section css={cardContainer}>
-            {factoryDataArr?.map((factory, index) => (
-              <FactoryCardPart key={factory.id} index={index} />
-            ))}
+            <FactoryCardListPart setIsEditing={setIsEditing} isEditing={isEditing} />
           </section>
         </div>
       </PageLayout>
