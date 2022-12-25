@@ -7,7 +7,9 @@ import { useAddJd } from "@/apis/jd/useAddJd";
 
 import { HeaderPart } from "./part/headerPart";
 import { BasicInfoPart } from "./part/basicInfoPart";
-import { PositionInfoPart } from "./part/positionInfoPart";
+import { PositionTitleInfoPart } from "./part/positionTitleInfoPart";
+import { PositionRequiredInfoPart } from "./part/positionRequiredInfoPart";
+import { PositionWorkInfoPart } from "./part/positionWorkInfoPart";
 import { JobFormValues } from "./type";
 import { blankPosition } from "./constant";
 
@@ -48,9 +50,15 @@ const JdUploadPage: NextPageWithLayout = () => {
           <form onSubmit={handleSubmit(jobSubmitHandler)}>
             <HeaderPart />
             <BasicInfoPart />
-            {fields.map((item) => (
-              <PositionInfoPart key={`${item.id}`} />
-            ))}
+            <ul>
+              {fields.map((item, index) => (
+                <li key={`${item.id}`}>
+                  <PositionTitleInfoPart id={item.id} index={index} jobForm={jobForm} />
+                  <PositionRequiredInfoPart id={item.id} index={index} jobForm={jobForm} />
+                  <PositionWorkInfoPart id={item.id} index={index} jobForm={jobForm} />
+                </li>
+              ))}
+            </ul>
             <button
               type="button"
               onClick={() => {
