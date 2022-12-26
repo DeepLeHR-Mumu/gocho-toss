@@ -1,3 +1,1 @@
-export const PageHead = () => {
-  return <>hi</>;
-};
+export const PageHead = () => <>hi</>;

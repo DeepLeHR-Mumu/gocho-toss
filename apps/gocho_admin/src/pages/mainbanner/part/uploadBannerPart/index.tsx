@@ -4,8 +4,8 @@ import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
-import { useAddMainBanner } from "shared-api/admin/banner/addMainBanner";
 
+import { useAddMainBanner } from "@api/banner/useAddMainBanner";
 import { pageTitle } from "@style/commonStyles";
 
 import {
@@ -46,13 +46,10 @@ export const UploadBannerPart: FunctionComponent = () => {
     }
   };
 
-  const submitBannerHandler: SubmitHandler<BannerFormValues> = (bannerObj) => {
-    const json = JSON.stringify(bannerObj);
-    const blob = new Blob([json], { type: "application/json" });
-
+  const submitBannerHandler: SubmitHandler<BannerFormValues> = (bannerSubmitObj) => {
     if (bannerPicture) {
       addMutate(
-        { dto: blob, image: bannerPicture },
+        { dto: bannerSubmitObj, image: bannerPicture },
         {
           onSuccess: () => {
             queryClient.invalidateQueries(bannerArrKeyObj.bannerArr({ type: "M" }));

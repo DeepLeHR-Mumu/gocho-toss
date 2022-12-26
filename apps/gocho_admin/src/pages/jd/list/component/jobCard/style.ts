@@ -73,6 +73,7 @@ export const deleteButton = css`
   font-weight: 500;
   width: 48%;
   border: 2px solid ${COLORS.GRAY10};
+  height: 2rem;
   padding: 0.125rem 0.25rem;
   background-color: #b32100;
   color: ${COLORS.GRAY100};
@@ -85,6 +86,7 @@ export const activeButton = css`
   font-weight: 500;
   width: 48%;
   border: 2px solid ${COLORS.GRAY10};
+  height: 2rem;
   padding: 0.125rem 0.25rem;
   background-color: ${COLORS.BLUE_NEON40};
   color: ${COLORS.GRAY100};

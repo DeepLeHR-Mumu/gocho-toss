@@ -52,6 +52,7 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: latest
+          run_install: false
 
       - name: pnpm 디렉터리 확인
         id: pnpm-directory
@@ -64,8 +65,6 @@ jobs:
         with:
           path: ${{ steps.pnpm-directory.outputs.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
 
       - name: dependency 설치
         run: pnpm install --frozen-lockfile
@@ -83,8 +82,8 @@ jobs:
           key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
 
       - name: playwright 브라우저 설치
-        run: PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright pnpx playwright@1.28.0 install --with-deps chromium
         if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright pnpx playwright@1.28.0 install --with-deps chromium
 
       - name: playwright test 실행
         run: pnpm turbo e2e:CICD
@@ -110,7 +109,7 @@ jobs:
         if: failure()
         uses: rtCamp/action-slack-notify@master
         env:
-          SLACK_CHANNEL: 01-팀-dev
+          SLACK_CHANNEL: 02-팀-frontend
           SLACK_FOOTER: ""
           SLACK_COLOR: "danger"
           SLACK_MESSAGE: "dev 테스트 실패했습니다!:"

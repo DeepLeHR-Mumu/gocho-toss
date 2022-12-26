@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { MAIN_URL, LOGIN_URL } from "@constant/internalURL";
 import Image from "next/image";
 import { FunctionComponent, useEffect, useState } from "react";
@@ -10,17 +11,20 @@ import { useQueryClient } from "@tanstack/react-query";
 import { headerWrapper, headerContainer, flexBox, logoCSS, title, loginButton, logoutButton } from "./style";
 
 export const Header: FunctionComponent = () => {
+  const router = useRouter();
   const queryClient = useQueryClient();
   const [isLogined, setIsLogined] = useState<boolean>(false);
 
   const doLogout = () => {
     localStorage.clear();
+    setIsLogined(false);
     queryClient.resetQueries();
   };
 
   useEffect(() => {
-    setIsLogined(!!localStorage.getItem("accessToken"));
-  }, [isLogined]);
+    const isAccessToken = localStorage.getItem("accessToken") !== null;
+    setIsLogined(isAccessToken);
+  }, [isLogined, router]);
 
   return (
     <header css={headerWrapper}>

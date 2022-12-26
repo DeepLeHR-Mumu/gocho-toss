@@ -2,15 +2,14 @@ import { useState } from "react";
 import type { NextPage } from "next";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
-import { useAddCompany } from "shared-api/admin/company/useAddCompany";
-
+import { useAddCompany } from "@api/company/useAddCompany";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 
-import { FactoryBox } from "@pages/company/upload/component/factoryBox";
-import { BasicInfoPart } from "@pages/company/upload/part/basicInfoPart";
-import { WelfareInfoPart } from "@pages/company/upload/part/welfareInfoPart";
-import { PayInfoPart } from "@pages/company/upload/part/payInfoPart";
-import { CompanyFormValues } from "./type";
+import { CompanyFormValues } from "../type";
+import { FactoryBox } from "./component/factoryBox";
+import { BasicInfoPart } from "./part/basicInfoPart";
+import { WelfareInfoPart } from "./part/welfareInfoPart";
+import { PayInfoPart } from "./part/payInfoPart";
 import { blankFactory } from "./constant";
 
 import { formContainer, addFactoryButton, submitButton, checkMsgBox } from "./style";
@@ -34,15 +33,9 @@ const CompanyUpload: NextPage = () => {
   });
 
   const companySubmit: SubmitHandler<CompanyFormValues> = (companyObj) => {
-    const formData = new FormData();
-    const json = JSON.stringify(companyObj);
-    const blob = new Blob([json], { type: "application/json" });
-    formData.append("dto", blob);
-
     if (logoPicture) {
-      formData.append("img", logoPicture);
       mutate(
-        { dto: blob, logo: logoPicture },
+        { dto: companyObj, logo: logoPicture },
         {
           onSuccess: () => {
             setCheckMsg("기업이 업로드 되었습니다!");

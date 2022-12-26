@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 
 import { useToast } from "@recoil/hook/toast";
 
-import { ToastComponent } from "shared-ui/common/atom/toastBox";
+import { ToastComponent } from "../toastBox";
 
 export const ToastPlaceholder: FunctionComponent = () => {
   const { currentToast } = useToast();
