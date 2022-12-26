@@ -111,7 +111,7 @@ export const PostingPart: FunctionComponent = () => {
   if (!commentArrData || !postingDetailData || isError || isLoading) {
     return (
       <div css={modalWrapperSkeleton}>
-        <Spinner backgroundColor="#fff" />
+        <Spinner />
       </div>
     );
   }
