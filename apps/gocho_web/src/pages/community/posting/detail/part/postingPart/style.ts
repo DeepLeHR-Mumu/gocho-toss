@@ -6,6 +6,7 @@ import { PC_HOVER } from "shared-style/mediaQuery";
 
 export const modalWrapperSkeleton = css`
   min-height: 50vh;
+  position: relative;
   width: 100%;
   max-width: 60rem;
   padding: 1.875rem 6.25rem;
