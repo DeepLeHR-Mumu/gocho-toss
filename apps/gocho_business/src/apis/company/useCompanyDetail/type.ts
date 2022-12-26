@@ -11,25 +11,40 @@ export interface RequestObjDef {
 export interface ResponseObjDef {
   data: {
     id: number;
-    status: "등록전" | "승인됨" | "반려됨" | "검수중";
-    uploader: { name: string; department: string };
+    status: {
+      name: string;
+      reason: string;
+    };
+    logo_url: string;
     name: string;
+    catch_url: string;
+    youtube_url: string;
+    industry: string;
+    size: string;
     employee_number: number;
+    found_date: number;
     address: string;
-    male_number: number;
-    female_number: number;
-    product: string;
-    bus: {
-      exists: boolean;
-      desc: string | null;
+    intro: string;
+    pay_avg: number;
+    pay_start: number;
+    pay_desc: string;
+    bookmark: number;
+    view: number;
+    welfare: {
+      money: string[];
+      health: string[];
+      life: string[];
+      holiday: string[];
+      facility: string[];
+      vacation: string[];
+      growth: string[];
+      etc: string[];
     };
-    dormitory: {
+    nozo: {
       exists: boolean;
-      desc: string | null;
+      desc: string;
     };
-    created_time: number;
-    updated_time: number | null;
-  }[];
+  };
 }
 
 export const companyDetailKeyObj = {

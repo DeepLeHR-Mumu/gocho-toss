@@ -1,24 +1,23 @@
 import { ResponseObjDef } from "./type";
 
-export const companyDetailSelector = ({ data }: ResponseObjDef) =>
-  data.map((factory) => ({
-    id: factory.id,
-    status: factory.status,
-    uploader: factory.uploader,
-    name: factory.name,
-    employeeNumber: factory.employee_number,
-    address: factory.address,
-    maleNumber: factory.male_number,
-    femaleNumber: factory.female_number,
-    product: factory.product,
-    bus: {
-      exists: factory.bus.exists,
-      desc: factory.bus.desc,
-    },
-    dormitory: {
-      exists: factory.dormitory.exists,
-      desc: factory.dormitory.desc,
-    },
-    createdTime: factory.created_time,
-    updatedTime: factory.updated_time,
-  }));
+export const companyDetailSelector = ({ data }: ResponseObjDef) => ({
+  id: data.id,
+  status: data.status,
+  logoUrl: data.logo_url,
+  name: data.name,
+  catchUrl: data.catch_url,
+  youtubeUrl: data.youtube_url,
+  industry: data.industry,
+  size: data.size,
+  employeeNumber: data.employee_number,
+  foundNumber: data.found_date,
+  address: data.address,
+  intro: data.intro,
+  payAvg: data.pay_avg,
+  payStart: data.pay_start,
+  payDesc: data.pay_desc,
+  bookmark: data.bookmark,
+  view: data.view,
+  welfare: data.welfare,
+  nozo: data.nozo,
+});

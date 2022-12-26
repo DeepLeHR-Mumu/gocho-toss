@@ -15,9 +15,9 @@ export const getCompanyDetail: GetCompanyDetailDef = async ({ queryKey: [{ reque
 export const useCompanyDetail = (isLogin: boolean, requestObj: RequestObjDef) =>
   useQuery<ResponseObjDef, AxiosError<ErrorResponseDef>, ReturnType<typeof companyDetailSelector>>(
     companyDetailKeyObj.detail(requestObj),
-    // getCompanyDetail,
+    getCompanyDetail,
     {
-      enabled: Boolean(isLogin),
       select: (data) => companyDetailSelector(data),
+      enabled: Boolean(isLogin),
     }
   );
