@@ -1,6 +1,6 @@
 import { ResponseObjDef } from "./type";
 
-export const companySelector = ({ data }: ResponseObjDef) =>
+export const companyDetailSelector = ({ data }: ResponseObjDef) =>
   data.map((factory) => ({
     id: factory.id,
     status: factory.status,
