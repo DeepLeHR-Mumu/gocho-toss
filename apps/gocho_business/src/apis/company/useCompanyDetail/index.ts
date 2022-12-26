@@ -4,20 +4,20 @@ import { AxiosError } from "axios";
 import { axiosInstance } from "@/apis/useIsRefreshLock";
 import { ErrorResponseDef } from "@/types/errorType";
 
-import { companyDetailKeyObj, GetCompanyDetailDef, ResponseObjDef } from "./type";
+import { companyDetailKeyObj, GetCompanyDetailDef, RequestObjDef, ResponseObjDef } from "./type";
 import { companyDetailSelector } from "./util";
 
-export const getCompanyDetail: GetCompanyDetailDef = async () => {
-  const { data } = await axiosInstance.get("/companies/${}");
+export const getCompanyDetail: GetCompanyDetailDef = async ({ queryKey: [{ requestObj }] }) => {
+  const { data } = await axiosInstance.get(`/companies/${requestObj.companyId}`);
   return data;
 };
 
-export const useCompanyDetail = (isLogin: boolean) =>
+export const useCompanyDetail = (isLogin: boolean, requestObj: RequestObjDef) =>
   useQuery<ResponseObjDef, AxiosError<ErrorResponseDef>, ReturnType<typeof companyDetailSelector>>(
-    companyDetailKeyObj.all,
-    getCompanyDetail,
+    companyDetailKeyObj.detail(requestObj),
+    // getCompanyDetail,
     {
+      enabled: Boolean(isLogin),
       select: (data) => companyDetailSelector(data),
-      enabled: isLogin,
     }
   );
