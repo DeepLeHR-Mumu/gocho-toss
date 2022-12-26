@@ -139,7 +139,6 @@ export const globalStyle = css`
   blockquote:after,
   q:before,
   q:after {
-    content: "";
     content: none;
   }
   table {
@@ -164,6 +163,7 @@ export const globalStyle = css`
     display: flex;
     align-items: center;
     justify-content: center;
+    appearance: none;
   }
   textarea {
     font-family: "Noto Sans KR", Verdana, sans-serif;

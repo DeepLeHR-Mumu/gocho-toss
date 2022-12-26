@@ -7,11 +7,13 @@ import { useAddJd } from "@/apis/jd/useAddJd";
 
 import { HeaderPart } from "./part/headerPart";
 import { BasicInfoPart } from "./part/basicInfoPart";
+import { PositionHeaderPart } from "./part/positionHeaderPart";
 import { PositionTitleInfoPart } from "./part/positionTitleInfoPart";
 import { PositionRequiredInfoPart } from "./part/positionRequiredInfoPart";
 import { PositionWorkInfoPart } from "./part/positionWorkInfoPart";
 import { JobFormValues } from "./type";
 import { blankPosition } from "./constant";
+import { cssObj } from "./style";
 
 const JdUploadPage: NextPageWithLayout = () => {
   const jobForm = useForm<JobFormValues>({
@@ -21,7 +23,7 @@ const JdUploadPage: NextPageWithLayout = () => {
   });
   const { control, handleSubmit } = jobForm;
 
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: "position_arr",
   });
@@ -49,24 +51,17 @@ const JdUploadPage: NextPageWithLayout = () => {
         <section>
           <form onSubmit={handleSubmit(jobSubmitHandler)}>
             <HeaderPart />
-            <BasicInfoPart />
+            <BasicInfoPart jobForm={jobForm} />
+            <PositionHeaderPart append={append} />
             <ul>
               {fields.map((item, index) => (
-                <li key={`${item.id}`}>
-                  <PositionTitleInfoPart id={item.id} index={index} jobForm={jobForm} />
+                <li key={`${item.id}`} css={cssObj.cardContainer}>
+                  <PositionTitleInfoPart id={item.id} index={index} jobForm={jobForm} append={append} remove={remove} />
                   <PositionRequiredInfoPart id={item.id} index={index} jobForm={jobForm} />
                   <PositionWorkInfoPart id={item.id} index={index} jobForm={jobForm} />
                 </li>
               ))}
             </ul>
-            <button
-              type="button"
-              onClick={() => {
-                append(blankPosition);
-              }}
-            >
-              직무 추가
-            </button>
           </form>
         </section>
       </PageLayout>
