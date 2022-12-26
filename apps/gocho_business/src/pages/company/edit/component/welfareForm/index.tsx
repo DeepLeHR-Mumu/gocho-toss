@@ -1,9 +1,17 @@
 import { FunctionComponent } from "react";
+import { UseFormRegisterReturn } from "react-hook-form";
 import { FiCornerDownLeft, FiMinus } from "react-icons/fi";
 
 import { cssObj } from "./style";
 
-export const WelfareForm: FunctionComponent = () => (
+interface WelfareFormProps {
+  title: string;
+  desc: string;
+  registerObj: UseFormRegisterReturn;
+  valueArr: string[];
+}
+
+export const WelfareForm: FunctionComponent<WelfareFormProps> = () => (
   <div css={cssObj.wrapper}>
     <strong css={cssObj.title}>급여</strong>
     <div css={cssObj.writeBox}>

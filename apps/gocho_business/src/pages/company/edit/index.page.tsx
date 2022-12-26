@@ -9,7 +9,7 @@ import { CommonStatusChip } from "@/components/common";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
 import { NextPageWithLayout } from "@/pages/_app.page";
 
-import { WelfareForm } from "./component/welfareForm";
+// import { WelfareForm } from "./component/welfareForm";
 import { cssObj } from "./style";
 
 const CompanyEditPage: NextPageWithLayout = () => (
@@ -108,17 +108,18 @@ const CompanyEditPage: NextPageWithLayout = () => (
               <input type="text" placeholder="상여금, 성과급 등의 정보를 적어주세요" css={cssObj.inputLine} />
             </div>
           </div>
+          {/* 복지 정보 시작 */}
           <div css={cssObj.lineBox()}>
             <strong css={cssObj.subTitle}>복지(선택)</strong>
             <div css={cssObj.welfareBox}>
+              {/* <WelfareForm />
               <WelfareForm />
               <WelfareForm />
               <WelfareForm />
               <WelfareForm />
               <WelfareForm />
               <WelfareForm />
-              <WelfareForm />
-              <WelfareForm />
+              <WelfareForm /> */}
             </div>
           </div>
         </section>
