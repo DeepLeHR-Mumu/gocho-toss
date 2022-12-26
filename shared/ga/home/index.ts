@@ -14,7 +14,3 @@ export const homeFunnelEvent = () => {
 export const changeHomeJdListSortingEvent = (keyword: string) => {
   ReactGA.event("change_home_jd_order", { order: keyword });
 };
-
-export const conningAddClickEvent = () => {
-  ReactGA.event(`conningAddClickEvent`);
-};
