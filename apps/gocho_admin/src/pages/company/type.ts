@@ -2,7 +2,6 @@ export interface CompanyFormValues {
   name: string;
   file_id: string;
   business_number: number;
-  catch_url: string;
   youtube_url: string | null;
   industry: string;
   size: string;

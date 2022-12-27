@@ -132,10 +132,6 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ register,
         />
       </div>
       <div css={inputContainer}>
-        <strong css={inputTitle}>캐치 URL *</strong>
-        <input type="url" css={inputBox} {...register("catch_url", { required: true })} />
-      </div>
-      <div css={inputContainer}>
         <strong css={inputTitle}>유투브 URL</strong>
         <input type="url" css={inputBox} {...register("youtube_url")} />
       </div>

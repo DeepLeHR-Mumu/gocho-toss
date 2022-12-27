@@ -87,7 +87,6 @@ const CompanyEdit: NextPage = () => {
     reset({
       name: companyData?.name,
       business_number: companyData?.businessNumber,
-      catch_url: companyData?.catchUrl,
       youtube_url: companyData?.youtubeUrl,
       industry: companyData?.industry,
       size: companyData?.size,
