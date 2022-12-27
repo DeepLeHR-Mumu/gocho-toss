@@ -15,6 +15,7 @@ export interface ResponseObjDef {
       name: string;
       reason: string;
     };
+    business_number: number;
     logo_url: string;
     name: string;
     catch_url: string;

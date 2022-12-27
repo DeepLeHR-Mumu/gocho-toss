@@ -31,20 +31,22 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ userInfoData }) =
     return null;
   }
 
+  const foundDate = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
+
   return (
     <div css={cssObj.wrapper}>
       <div css={cssObj.lineBox()}>
         <strong css={cssObj.subTitle}>기업 형태</strong>
-        <p css={cssObj.textValue}>대기업</p>
+        <p css={cssObj.textValue}>{companyData.size}</p>
       </div>
       <div css={cssObj.flexStartBox}>
         <div css={cssObj.lineBox(30)}>
           <strong css={cssObj.subTitle}>설립일</strong>
-          <p css={cssObj.textValue}>2022년 10월 22일</p>
+          <p css={cssObj.textValue}>{foundDate.format(new Date(companyData.foundNumber))}</p>
         </div>
         <div css={cssObj.lineBox()}>
           <strong css={cssObj.subTitle}>사업자 번호</strong>
-          <p css={cssObj.textValue}>000-00-00000</p>
+          <p css={cssObj.textValue}>{companyData.businessNumber}</p>
         </div>
       </div>
       <div css={cssObj.flexStartBox}>

@@ -9,6 +9,7 @@ export const companyDetailSelector = ({ data }: ResponseObjDef) => ({
   youtubeUrl: data.youtube_url,
   industry: data.industry,
   size: data.size,
+  businessNumber: data.business_number,
   employeeNumber: data.employee_number,
   foundNumber: data.found_date,
   address: data.address,
