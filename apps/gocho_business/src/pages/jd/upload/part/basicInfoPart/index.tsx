@@ -9,8 +9,8 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jobForm }
   const [linkType, setLinkType] = useState<"website" | "email">("website");
 
   return (
-    <div css={cssObj.partContainer}>
-      <div>
+    <>
+      <div css={cssObj.inputContainer}>
         <p>공고 제목</p>
         <input css={cssObj.inputLine} placeholder="공고 제목" {...jobForm.register("title", { required: true })} />
       </div>
@@ -41,7 +41,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jobForm }
           <CheckBox isChecked={jobForm.watch("cut")} />
         </label>
       </div>
-      <div>
+      <div css={cssObj.inputContainer}>
         <p>채용 절차</p>
         <input
           css={cssObj.inputLine}
@@ -49,7 +49,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jobForm }
           {...jobForm.register("process_arr", { required: true })}
         />
       </div>
-      <div>
+      <div css={cssObj.inputContainer}>
         <p>지원 방법/제출 서류</p>
         <input
           css={cssObj.inputLine}
@@ -57,7 +57,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jobForm }
           {...jobForm.register("process_arr", { required: true })}
         />
       </div>
-      <div>
+      <div css={cssObj.inputContainer}>
         <div css={cssObj.labelContainer}>
           <label css={cssObj.label} htmlFor="website">
             <CheckBox isChecked={linkType === "website"} />
@@ -87,7 +87,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jobForm }
           <input css={cssObj.inputLine} placeholder="https://" {...jobForm.register("apply_url", { required: true })} />
         </div>
       </div>
-      <div>
+      <div css={cssObj.inputContainer}>
         <p>기타 사항 (선택)</p>
         <input
           css={cssObj.inputLine}
@@ -95,6 +95,6 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jobForm }
           {...jobForm.register("process_arr", { required: true })}
         />
       </div>
-    </div>
+    </>
   );
 };

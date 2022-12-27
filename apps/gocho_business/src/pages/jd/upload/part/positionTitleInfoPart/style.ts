@@ -5,7 +5,6 @@ export const cssObj = {
   titleContainer: css`
     display: flex;
     justify-content: space-between;
-    margin-bottom: 2rem;
   `,
 
   positionTitle: css`
@@ -13,7 +12,7 @@ export const cssObj = {
     font-weight: 700;
   `,
 
-  buttonContainer: css`
+  positionButtonContainer: css`
     display: flex;
     gap: 0 1rem;
   `,
@@ -40,19 +39,20 @@ export const cssObj = {
   `,
 
   inputContainer: css`
-    display: flex;
-    align-items: flex-start;
-    gap: 0 2rem;
+    margin-top: 2rem;
   `,
 
-  flexBox: css`
+  taskInputContainer: css`
     display: flex;
+    align-items: center;
+    gap: 0 2rem;
   `,
 
   inputLine: css`
     border: 1px solid ${COLORS.GRAY10};
     height: 2.5rem;
     padding: 0 1rem;
+    margin-top: 0.5rem;
     font-size: 1rem;
     width: 100%;
     font-weight: 400;
@@ -60,5 +60,19 @@ export const cssObj = {
     ::placeholder {
       color: ${COLORS.GRAY30};
     }
+  `,
+
+  hireNumberContainer: css`
+    display: flex;
+    align-items: center;
+    gap: 0 2rem;
+  `,
+
+  hireNumberButton: css`
+    height: 2.25rem;
+    padding: 0 1rem;
+    margin-top: 0.5rem;
+    border: 1px solid ${COLORS.GRAY70};
+    border-radius: 0.5rem;
   `,
 };

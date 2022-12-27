@@ -2,18 +2,20 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
-  partContainer: css`
+  inputContainer: css`
     margin-top: 2rem;
   `,
 
   dateInputContainer: css`
     display: flex;
     gap: 0 2rem;
+    margin-top: 2rem;
   `,
 
   inputLine: css`
     border: 1px solid ${COLORS.GRAY10};
     height: 2.5rem;
+    margin-top: 0.5rem;
     padding: 0 1rem;
     font-size: 1rem;
     width: 100%;

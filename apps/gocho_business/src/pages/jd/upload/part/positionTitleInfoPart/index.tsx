@@ -16,10 +16,10 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
   const mainTask = taskArr.find((task) => jobForm.watch("position_arr")[index].task_main === task.mainTask);
 
   return (
-    <div>
+    <>
       <div css={cssObj.titleContainer}>
         <strong css={cssObj.positionTitle}>모집할 직무 카드 제목</strong>
-        <div css={cssObj.buttonContainer}>
+        <div css={cssObj.positionButtonContainer}>
           <button
             css={cssObj.openCardButton}
             type="button"
@@ -51,9 +51,9 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
           </button>
         </div>
       </div>
-      <div>
+      <div css={cssObj.inputContainer}>
         <p>채용 직무</p>
-        <div css={cssObj.inputContainer}>
+        <div css={cssObj.taskInputContainer}>
           <div>
             <select css={cssObj.inputLine} {...jobForm.register(`position_arr.${index}.task_main`, { required: true })}>
               <option value="">1차직무 선택</option>
@@ -84,7 +84,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
           </div>
         </div>
       </div>
-      <div>
+      <div css={cssObj.inputContainer}>
         <p>세부 직무 내용</p>
         <input
           css={cssObj.inputLine}
@@ -92,6 +92,43 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
           {...jobForm.register(`position_arr.${index}.task_detail_arr`)}
         />
       </div>
-    </div>
+      <div css={cssObj.inputContainer}>
+        <p>채용 인원</p>
+        <div css={cssObj.hireNumberContainer}>
+          <button
+            type="button"
+            css={cssObj.hireNumberButton}
+            onClick={() => {
+              jobForm.setValue(`position_arr.${index}.hire_number`, -1);
+            }}
+          >
+            0명
+          </button>
+          <button
+            type="button"
+            css={cssObj.hireNumberButton}
+            onClick={() => {
+              jobForm.setValue(`position_arr.${index}.hire_number`, -2);
+            }}
+          >
+            00명
+          </button>
+          <button
+            type="button"
+            css={cssObj.hireNumberButton}
+            onClick={() => {
+              jobForm.setValue(`position_arr.${index}.hire_number`, -3);
+            }}
+          >
+            000명
+          </button>
+          <input
+            type="number"
+            css={cssObj.inputLine}
+            {...jobForm.register(`position_arr.${index}.hire_number`, { valueAsNumber: true, required: true })}
+          />
+        </div>
+      </div>
+    </>
   );
 };
