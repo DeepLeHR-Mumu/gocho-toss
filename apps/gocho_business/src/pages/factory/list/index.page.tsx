@@ -6,7 +6,7 @@ import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 
 import { RegisterPart } from "./part/registerPart";
 import { FactoryCardListPart } from "./part/factoryCardPart";
-import { cardContainer, factoryPartContainer } from "./style";
+import { cssObj } from "./style";
 
 const FactoryListPage: NextPageWithLayout = () => {
   const [isEditing, setIsEditing] = useState<false | number>(false);
@@ -14,11 +14,13 @@ const FactoryListPage: NextPageWithLayout = () => {
   return (
     <main>
       <PageLayout>
-        <h2>{isEditing === false ? "공장 등록" : "공장 수정"}</h2>
+        <h2 css={cssObj.registerTitle}>{isEditing === false ? "공장 등록" : "공장 수정"}</h2>
+        <p css={cssObj.pageDescription}>간단히 공장을 등록해보세요.</p>
         <RegisterPart isEditing={isEditing} setIsEditing={setIsEditing} />
-        <h2>공장 목록</h2>
-        <div css={factoryPartContainer}>
-          <section css={cardContainer}>
+        <h2 css={cssObj.listTitle}>공장 목록</h2>
+        <p css={cssObj.pageDescription}>이건 뭐에요?</p>
+        <div css={cssObj.factoryPartContainer}>
+          <section css={cssObj.cardContainer}>
             <FactoryCardListPart setIsEditing={setIsEditing} isEditing={isEditing} />
           </section>
         </div>

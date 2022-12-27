@@ -15,7 +15,6 @@ export const container = css`
 
 export const linkCSS = css`
   display: block;
-  font-weight: 400;
   height: 2.5rem;
   display: flex;
   align-items: center;

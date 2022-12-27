@@ -11,9 +11,9 @@ export interface FactoryRegisterDef {
   male_number: number;
   female_number: number;
   product: string;
-  bus_bool: "true" | "false" | null;
+  bus_bool: "true" | "false";
   bus_etc?: string;
-  dormitory_bool: "true" | "false" | null;
+  dormitory_bool: "true" | "false";
   dormitory_etc?: string;
 }
 

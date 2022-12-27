@@ -2,11 +2,11 @@ export const defaultInput = {
   factory_name: "",
   address: "",
   product: "",
-  male_number: 0,
-  female_number: 0,
-  bus_bool: null,
+  male_number: "" as unknown as number,
+  female_number: "" as unknown as number,
+  bus_bool: null as unknown as "true" | "false",
   bus_etc: "",
-  dormitory_bool: null,
+  dormitory_bool: null as unknown as "true" | "false",
   dormitory_etc: "",
 };
 

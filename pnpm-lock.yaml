@@ -108,6 +108,7 @@ importers:
       next: 12.2.5
       next-transpile-modules: ^9.0.0
       react: 17.0.2
+      react-daum-postcode: ^3.1.1
       react-dom: 17.0.2
       react-hook-form: ^7.34.2
       react-icons: ^4.4.0
@@ -132,6 +133,7 @@ importers:
       next: 12.2.5_2f3qgkpmmpou2hyqrmueifddme
       next-transpile-modules: 9.0.0
       react: 17.0.2
+      react-daum-postcode: 3.1.1_react@17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-hook-form: 7.35.0_react@17.0.2
       react-icons: 4.4.0_react@17.0.2
@@ -11462,6 +11464,14 @@ packages:
       schema-utils: 3.1.1
       webpack: 4.46.0
     dev: true
+
+  /react-daum-postcode/3.1.1_react@17.0.2:
+    resolution: {integrity: sha512-IFlC8XBSK+uobSIBHaWlxeecYpv9RhCFNu4YJ3+CrfGyEVdc4+yaaUH6BIfJbTZOybVx0V3s4nUeAEsssXBNJg==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 17.0.2
+    dev: false
 
   /react-docgen-typescript/2.2.2_typescript@4.7.2:
     resolution: {integrity: sha512-tvg2ZtOpOi6QDwsb3GZhOjDkkX0h8Z2gipvTg6OVMUyoYoURhEiRNePT8NZItTVCDh39JJHnLdfCOkzoLbFnTg==}

@@ -2,11 +2,24 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
+  noDataWrapper: css`
+    width: 100%;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${COLORS.GRAY60};
+    border-radius: 1.5rem;
+  `,
+  noDataMessage: css`
+    font-weight: 700;
+    color: ${COLORS.GRAY10};
+  `,
   wrapper: css`
     margin-bottom: 4.5rem;
     width: 30rem;
     word-break: break-all;
-    border: 1px solid #e9e9e9;
+    border: 1px solid ${COLORS.GRAY80};
     border-radius: 1.5rem;
     padding: 1.5rem;
     position: relative;
@@ -16,17 +29,19 @@ export const cssObj = {
     margin: -1.5rem;
     width: 100%;
     height: 100%;
-    background-color: gray;
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
-    p {
-    }
+    background: rgba(173, 173, 173, 0.8);
+    backdrop-filter: blur(2px);
   `,
+
   topContainer: css`
     display: flex;
     justify-content: space-between;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #cccccc;
   `,
   container: css`
     width: 75%;
@@ -52,9 +67,10 @@ export const cssObj = {
   name: css`
     word-break: break-all;
     font-weight: 700;
+    color: ${COLORS.GRAY10};
   `,
   address: css`
-    font-weight: 400;
+    color: ${COLORS.GRAY10};
     word-break: break-all;
   `,
   productContainer: css`
@@ -66,10 +82,13 @@ export const cssObj = {
   `,
   infoName: css`
     font-weight: 700;
+    color: ${COLORS.GRAY10};
   `,
   product: css`
     word-break: break-all;
+    color: ${COLORS.GRAY10};
   `,
+
   buttonContainer: css`
     width: 25%;
     display: flex;
@@ -78,12 +97,15 @@ export const cssObj = {
     flex-direction: column;
     flex-shrink: 0;
   `,
+
   middleContainer: css`
     display: flex;
-    margin: 2rem 0;
+    margin: 1rem 0;
     gap: 2rem 0;
     flex-wrap: wrap;
     justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #cccccc;
   `,
   infoItem: css`
     width: 47%;
@@ -105,8 +127,12 @@ export const cssObj = {
   iconBox: css`
     font-size: 1.5rem;
   `,
+
+  percentage: css`
+    color: ${COLORS.GRAY10};
+  `,
+
   etcInfo: css`
-    font-weight: 400;
     margin-top: 0.75rem;
     color: ${COLORS.GRAY30};
     word-break: break-all;
@@ -123,10 +149,9 @@ export const cssObj = {
 
   dateName: css`
     color: ${COLORS.GRAY60};
-    font-weight: 400;
     margin-right: 0.25rem;
   `,
   date: css`
-    font-weight: 400;
+    color: ${COLORS.GRAY10};
   `,
 };

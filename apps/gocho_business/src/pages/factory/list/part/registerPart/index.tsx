@@ -11,7 +11,7 @@ import { FactoryDetailInfo } from "../../component/factoryDetailInfo";
 import { defaultInput, FACTORY_MESSSAGE_OBJ } from "./constant";
 
 export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ isEditing, setIsEditing }) => {
-  const { register, handleSubmit, watch, reset, setValue } = useForm<FactoryRegisterDef>();
+  const { register, handleSubmit, watch, reset, setValue, formState } = useForm<FactoryRegisterDef>();
 
   const { data: factoryDataArr } = useFactoryArr();
   const { mutate: addFactoryMutation } = useAddFactory();
@@ -22,9 +22,10 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ isEditing, 
         ...factoryRequestObj,
         bus_bool: factoryRequestObj.bus_bool === "true",
         dormitory_bool: factoryRequestObj.dormitory_bool === "true",
-        id: Boolean(factoryDataArr?.[Number(isEditing)]?.id) && factoryDataArr?.[Number(isEditing)]?.id,
+        id: isEditing && factoryDataArr?.[Number(isEditing)]?.id,
       });
       reset(defaultInput);
+      setIsEditing(false);
     }
   };
 
@@ -52,20 +53,20 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ isEditing, 
   const totalWorkerNumber = Number(watch("male_number") || 0) + Number(watch("female_number") || 0);
 
   return (
-    <section>
-      <div>간단히 공장을 등록해보세요.</div>
-      <div css={cssObj.container}>
-        <form onSubmit={handleSubmit(factoryPostSubmitHandler)}>
+    <section data-testid="factory/list/RegisterPart">
+      <form onSubmit={handleSubmit(factoryPostSubmitHandler)}>
+        <div css={cssObj.container}>
           <section css={cssObj.wrapper}>
-            <FactoryBaseInfo register={register} setValue={setValue} />
+            <FactoryBaseInfo register={register} setValue={setValue} formState={formState} />
             <hr />
-            <FactoryDetailInfo register={register} totalWorkerNumber={totalWorkerNumber} />
+            <FactoryDetailInfo register={register} totalWorkerNumber={totalWorkerNumber} formState={formState} />
           </section>
-          <hr />
+        </div>
+        <div css={cssObj.buttonCenterContainer}>
           {isEditing === false ? (
             <button type="submit">공장 등록</button>
           ) : (
-            <div>
+            <div css={cssObj.buttonContainer}>
               <button
                 type="button"
                 onClick={() => {
@@ -77,8 +78,8 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ isEditing, 
               <button type="submit">공장 수정</button>
             </div>
           )}
-        </form>
-      </div>
+        </div>
+      </form>
     </section>
   );
 };

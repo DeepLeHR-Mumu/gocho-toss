@@ -12,13 +12,20 @@ import { CommonInfoBox, CommonRoundButton, CommonStatusChip } from "@/components
 import { cssObj } from "./style";
 import { useDeleteFactory } from "@/apis/factory/useDeleteFactory";
 import { FactoryCardListPartProps } from "./type";
+import { FACTORY_MESSSAGE_OBJ } from "../registerPart/constant";
 
 export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = ({ setIsEditing, isEditing }) => {
-  const { data: factoryDataArr, isSuccess: factoryDataArrSuccess } = useFactoryArr();
+  const { data: factoryDataArr, isSuccess: factoryDataArrSuccess, isLoading: factoryDataArrLoading } = useFactoryArr();
   const { mutate: deleteFactoryMutation } = useDeleteFactory();
 
-  if (!factoryDataArrSuccess) return null;
+  if (!factoryDataArrSuccess || factoryDataArrLoading) return null;
 
+  if (factoryDataArr.length === 0)
+    return (
+      <div css={cssObj.noDataWrapper}>
+        <p css={cssObj.noDataMessage}>등록된 공고가 없습니다</p>
+      </div>
+    );
   return (
     <>
       {factoryDataArr.map((factoryData, index) => {
@@ -27,7 +34,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
         const femalePercentage = Math.round((100 * factoryData.femaleNumber) / totalEmployeeCount);
 
         return (
-          <div css={cssObj.wrapper} key={factoryData.id}>
+          <div css={cssObj.wrapper} key={factoryData.id} data-testid="factory/list/factoryCardListPart">
             {isEditing === index && (
               <div css={cssObj.editingBox}>
                 <p>수정중</p>
@@ -60,11 +67,14 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                   Icon={BiMinus}
                   backgoundColor={COLORS.BLUE_FIRST50}
                   onClickHandler={() => {
-                    deleteFactoryMutation({ factoryId: factoryData.id });
+                    if (window.confirm(FACTORY_MESSSAGE_OBJ.DELETE)) {
+                      deleteFactoryMutation({ factoryId: factoryData.id });
+                    }
                   }}
                 />
               </div>
             </div>
+
             <div css={cssObj.middleContainer}>
               <div css={cssObj.infoItem}>
                 <CommonInfoBox
@@ -80,13 +90,13 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                     <div css={cssObj.iconBox}>
                       <AiOutlineMan />
                     </div>
-                    <p>{malePercentage}%</p>
+                    <p css={cssObj.percentage}>{malePercentage}%</p>
                   </div>
                   <div css={cssObj.percentageBox}>
                     <div css={cssObj.iconBox}>
                       <AiOutlineWoman />
                     </div>
-                    <p>{femalePercentage}%</p>
+                    <p css={cssObj.percentage}>{femalePercentage}%</p>
                   </div>
                 </div>
               </div>
