@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import Image from "next/image";
 
 import gochoTextMono from "shared-image/global/deepLeLogo/textMono.svg";
-import kakaoPlusMono from "shared-image/global/sns/kakaoMono.svg";
+import kakaoPlusMono from "shared-image/global/sns/kakaoMono_soft.svg";
 
 import { FOOTER_INFO } from "./constants";
 import { cssObj } from "./style";
