@@ -6,7 +6,6 @@ export interface RequestObjDef {
   companyId: number;
   dto: {
     name: string;
-    file_id: string;
     business_number: number;
     youtube_url: string | null;
     industry: string;
@@ -53,7 +52,6 @@ export interface axiosRequestObjDef {
   companyId: number;
   dto: {
     name: string;
-    file_id: string;
     business_number: number;
     youtube_url: string | null;
     industry: string;

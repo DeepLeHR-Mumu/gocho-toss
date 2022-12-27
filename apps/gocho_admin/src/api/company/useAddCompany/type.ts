@@ -5,7 +5,6 @@ import { UseMutationResult } from "@tanstack/react-query";
 export interface RequestObjDef {
   dto: {
     name: string;
-    file_id: string;
     business_number: number;
     youtube_url: string | null;
     industry: string;
@@ -33,25 +32,26 @@ export interface RequestObjDef {
       desc: string | null;
     };
 
-    factories: {
-      factory_name: string;
-      address: string;
-      male_number: number;
-      female_number: number;
-      product: string;
-      bus_bool: boolean;
-      bus_etc: string | null;
-      dormitory_bool: boolean;
-      dormitory_etc: string | null;
-    }[];
+    factories:
+      | {
+          factory_name: string;
+          address: string;
+          male_number: number;
+          female_number: number;
+          product: string;
+          bus_bool: boolean;
+          bus_etc: string | null;
+          dormitory_bool: boolean;
+          dormitory_etc: string | null;
+        }[];
   };
-  logo: File;
+
+  logo?: File;
 }
 
 interface axiosRequestObjDef {
   dto: {
     name: string;
-    file_id: string;
     business_number: number;
     youtube_url: string | null;
     industry: string;
@@ -79,19 +79,21 @@ interface axiosRequestObjDef {
       desc: string | null;
     };
 
-    factories: {
-      factory_name: string;
-      address: string;
-      male_number: number;
-      female_number: number;
-      product: string;
-      bus_bool: boolean;
-      bus_etc: string | null;
-      dormitory_bool: boolean;
-      dormitory_etc: string | null;
-    }[];
+    factories:
+      | {
+          factory_name: string;
+          address: string;
+          male_number: number;
+          female_number: number;
+          product: string;
+          bus_bool: boolean;
+          bus_etc: string | null;
+          dormitory_bool: boolean;
+          dormitory_etc: string | null;
+        }[];
   };
-  logo: File;
+
+  logo?: File;
 }
 
 export interface PostCompanyDef {

@@ -64,7 +64,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ register,
       </div>
       <div css={inputContainer}>
         <strong css={inputTitle}>사업자번호 *</strong>
-        <input type="number" css={inputBox} {...register("business_number", { required: true })} />
+        <input css={inputBox} {...register("business_number", { required: true })} />
       </div>
       <div css={inputContainer}>
         <strong css={inputTitle}>업종 *</strong>

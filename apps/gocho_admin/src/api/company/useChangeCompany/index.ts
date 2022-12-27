@@ -12,7 +12,7 @@ export const changeCompany: ChangeCompanyDef = async (requestObj) => {
   formData.append("dto", blob);
   if (requestObj.logo) formData.append("img", requestObj.logo);
 
-  const { data } = await axiosInstance.put(`/companies/${requestObj.companyId}`, requestObj, {
+  const { data } = await axiosInstance.put(`/companies/${requestObj.companyId}`, formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return data;

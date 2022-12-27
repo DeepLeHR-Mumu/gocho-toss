@@ -125,7 +125,7 @@ const CompanyEdit: NextPage = () => {
 
   return (
     <main css={mainContainer}>
-      <h2 css={pageTitle}>기업 등록</h2>
+      <h2 css={pageTitle}>기업 수정</h2>
       <form css={formContainer} onSubmit={handleSubmit(companySubmit)}>
         <BasicInfoPart
           register={register}
@@ -150,7 +150,7 @@ const CompanyEdit: NextPage = () => {
           공장 추가
         </button>
         <button css={submitButton} type="submit">
-          기업 등록하기
+          기업 수정하기
         </button>
         {checkMsg && <p css={checkMsgBox}>{checkMsg}</p>}
       </form>

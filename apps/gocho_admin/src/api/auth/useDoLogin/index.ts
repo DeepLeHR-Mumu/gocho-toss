@@ -6,7 +6,7 @@ import { axiosNoTokenInstance } from "@api/useAxiosInterceptor";
 import { PostLoginDef, RequestObjDef, ResponseObjDef, useDoLoginProps } from "./type";
 
 const postLogin: PostLoginDef = async (requestObj) => {
-  const { data } = await axiosNoTokenInstance.post("/auth/login?member=admin", { ...requestObj });
+  const { data } = await axiosNoTokenInstance.post("/auth/login", { ...requestObj });
   return data;
 };
 
