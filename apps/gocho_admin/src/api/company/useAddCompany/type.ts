@@ -7,7 +7,6 @@ export interface RequestObjDef {
     name: string;
     file_id: string;
     business_number: number;
-    catch_url: string;
     youtube_url: string | null;
     industry: string;
     size: string;
@@ -54,7 +53,6 @@ interface axiosRequestObjDef {
     name: string;
     file_id: string;
     business_number: number;
-    catch_url: string;
     youtube_url: string | null;
     industry: string;
     size: string;
