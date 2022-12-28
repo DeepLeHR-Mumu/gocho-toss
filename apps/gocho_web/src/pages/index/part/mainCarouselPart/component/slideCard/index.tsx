@@ -3,8 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 
-import { conningAddClickEvent } from "shared-ga/home";
-
 import {
   slideWrapper,
   slideInfo,
@@ -44,13 +42,6 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({ slideData }) => {
         )}
         {slideData.buttonObj && slideData.buttonObj.target === "_blank" && (
           <a
-            onClick={
-              slideData.id === 1
-                ? () => {
-                    conningAddClickEvent();
-                  }
-                : undefined
-            }
             href={slideData.buttonObj.url}
             target={slideData.buttonObj.target}
             css={linkButton(slideData.buttonObj.backgroundColor, slideData.buttonObj.color)}
