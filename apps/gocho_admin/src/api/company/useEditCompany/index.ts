@@ -3,22 +3,22 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 import { axiosInstance } from "@api/useAxiosInterceptor";
-import { ChangeCompanyDef, RequestObjDef, useChangeCompanyProps } from "./type";
+import { EditCompanyDef, RequestObjDef, useEditCompanyProps } from "./type";
 
-export const changeCompany: ChangeCompanyDef = async (requestObj) => {
+export const editCompany: EditCompanyDef = async (requestObj) => {
   const formData = new FormData();
   const json = JSON.stringify(requestObj.dto);
   const blob = new Blob([json], { type: "application/json" });
   formData.append("dto", blob);
   if (requestObj.logo) formData.append("img", requestObj.logo);
 
-  const { data } = await axiosInstance.put(`/companies/${requestObj.companyId}`, requestObj, {
+  const { data } = await axiosInstance.put(`/companies/${requestObj.companyId}`, formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return data;
 };
 
-export const useChangeCompany: useChangeCompanyProps = () => {
+export const useEditCompany: useEditCompanyProps = () => {
   return useMutation<AdminResponseDef, AxiosError, RequestObjDef>((requestObj) => {
     const newRequestObj = {
       companyId: requestObj.companyId,
@@ -37,6 +37,6 @@ export const useChangeCompany: useChangeCompanyProps = () => {
       },
       logo: requestObj.logo,
     };
-    return changeCompany(newRequestObj);
+    return editCompany(newRequestObj);
   });
 };
