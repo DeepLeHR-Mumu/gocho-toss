@@ -5,7 +5,6 @@ import { UseMutationResult } from "@tanstack/react-query";
 export interface RequestObjDef {
   dto: {
     name: string;
-    file_id: string;
     business_number: number;
     youtube_url: string | null;
     industry: string;
@@ -45,13 +44,13 @@ export interface RequestObjDef {
       dormitory_etc: string | null;
     }[];
   };
-  logo: File;
+
+  logo?: File;
 }
 
 interface axiosRequestObjDef {
   dto: {
     name: string;
-    file_id: string;
     business_number: number;
     youtube_url: string | null;
     industry: string;
@@ -91,7 +90,8 @@ interface axiosRequestObjDef {
       dormitory_etc: string | null;
     }[];
   };
-  logo: File;
+
+  logo?: File;
 }
 
 export interface PostCompanyDef {

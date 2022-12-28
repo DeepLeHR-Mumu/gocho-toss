@@ -12,9 +12,9 @@ export const postAddCompany: PostCompanyDef = async (requestObj) => {
   const json = JSON.stringify(requestObj.dto);
   const blob = new Blob([json], { type: "application/json" });
   formData.append("dto", blob);
-  formData.append("img", requestObj.logo);
+  if (requestObj.logo) formData.append("img", requestObj.logo);
 
-  const { data } = await axiosInstance.post("/companies", requestObj, {
+  const { data } = await axiosInstance.post("/companies", formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return data;
