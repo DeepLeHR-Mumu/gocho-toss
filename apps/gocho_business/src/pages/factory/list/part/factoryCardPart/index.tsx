@@ -6,11 +6,11 @@ import { BiMinus, BiBus, BiBuildingHouse } from "react-icons/bi";
 
 import { COLORS } from "shared-style/color";
 
+import { useDeleteFactory } from "@/apis/factory/useDeleteFactory";
 import { useFactoryArr } from "@/apis/factory/useFactoryArr";
 import { CommonInfoBox, CommonRoundButton, CommonStatusChip } from "@/components/common";
 
 import { cssObj } from "./style";
-import { useDeleteFactory } from "@/apis/factory/useDeleteFactory";
 import { FactoryCardListPartProps } from "./type";
 import { FACTORY_MESSSAGE_OBJ } from "../registerPart/constant";
 
