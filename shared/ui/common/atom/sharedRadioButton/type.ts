@@ -1,7 +1,9 @@
+import React from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 export interface SharedRadioButtonProps {
   value: string;
-  desc: string;
+  id: string;
   registerObj: UseFormRegisterReturn;
+  children: React.ReactNode;
 }

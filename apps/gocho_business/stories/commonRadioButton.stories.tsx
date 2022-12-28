@@ -6,8 +6,14 @@ export default {
   title: "SharedRadioButton",
   component: SharedRadioButton,
   argTypes: {
-    desc: {
-      description: "radio 안내 문구",
+    value: {
+      description: "radio value",
+    },
+    id: {
+      description: "label + input의 공통 for을 위한 id",
+    },
+    children: {
+      description: "React Node 구조",
     },
     registerObj: {
       description: "React hook form register 함수",
@@ -21,4 +27,4 @@ export default {
 const Template: ComponentStory<typeof SharedRadioButton> = (args) => <SharedRadioButton {...args} />;
 
 export const Default = Template.bind({});
-Default.args = { desc: "있음", registerObj: undefined };
+Default.args = { value: "yes", id: "id", children: "", registerObj: undefined };

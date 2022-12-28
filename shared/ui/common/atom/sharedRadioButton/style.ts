@@ -26,18 +26,12 @@ export const cssObj = {
       }
     }
   `,
-  checkBox: css`
+  radioBox: css`
     border: 2px solid ${COLORS.GRAY10};
     width: 1.125rem;
     position: relative;
     height: 1.125rem;
     background-color: ${COLORS.GRAY100};
     border-radius: 50%;
-  `,
-  desc: css`
-    font-size: 1rem;
-    font-weight: 400;
-    color: ${COLORS.GRAY10};
-    padding-left: 0.5rem;
   `,
 };
