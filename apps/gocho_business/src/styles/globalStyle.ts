@@ -1,5 +1,7 @@
 import { css } from "@emotion/react";
 
+import { COLORS } from "shared-style/color";
+
 export const globalStyle = css`
   * {
     box-sizing: border-box;
@@ -146,9 +148,19 @@ export const globalStyle = css`
     border-collapse: collapse;
     border-spacing: 0;
   }
+  p,
+  strong,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: ${COLORS.GRAY10};
+  }
   a {
     text-decoration: none;
-    color: inherit;
+    color: ${COLORS.GRAY10};
   }
   input,
   select,
@@ -164,8 +176,15 @@ export const globalStyle = css`
     display: flex;
     align-items: center;
     justify-content: center;
+    appearance: none;
   }
   textarea {
     font-family: "Noto Sans KR", Verdana, sans-serif;
+  }
+  input[type="number"] {
+    ::-webkit-outer-spin-button,
+    ::-webkit-inner-spin-button {
+      appearance: none;
+    }
   }
 `;

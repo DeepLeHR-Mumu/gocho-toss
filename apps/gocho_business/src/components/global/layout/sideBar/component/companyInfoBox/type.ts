@@ -1,4 +1,4 @@
 export interface CompanyInfoBoxProps {
-  img?: string;
+  img: string;
   name: string;
 }
