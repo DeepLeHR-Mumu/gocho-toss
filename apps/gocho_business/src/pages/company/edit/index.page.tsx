@@ -1,6 +1,8 @@
 import { ReactElement } from "react";
 import { FiEdit } from "react-icons/fi";
+import { SubmitHandler, useForm } from "react-hook-form";
 
+import { useAddCompanyDetail } from "@/apis/company/useAddCompany";
 import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 import { CommonStatusChip } from "@/components/common";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
@@ -9,10 +11,28 @@ import { useUserState } from "@/globalStates/useUserState";
 
 import { BasicPart } from "./part/basicPart";
 import { WelfalePart } from "./part/welfarePart";
+import { PostSubmitValues } from "./type";
 import { cssObj } from "./style";
 
 const CompanyEditPage: NextPageWithLayout = () => {
   const { userInfoData } = useUserState();
+  const { mutate: putCompanyDetail } = useAddCompanyDetail();
+
+  const { handleSubmit } = useForm<PostSubmitValues>({
+    mode: "onChange",
+  });
+
+  const postSubmit: SubmitHandler<PostSubmitValues> = async (formData) => {
+    console.log(formData);
+    console.log("실행했다!");
+    putCompanyDetail(
+      { companyId: Number(userInfoData?.companyId), dto: { ...formData } },
+      {
+        // onError: (error) => {},
+        // onSuccess: () => {},
+      }
+    );
+  };
 
   if (!userInfoData) {
     return null;
@@ -29,7 +49,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
             </div>
             <div css={cssObj.flexBox}>
               <CommonStatusChip status="승인됨" />
-              <button type="submit">
+              <button type="submit" onClick={handleSubmit(postSubmit)}>
                 <FiEdit /> 기업 정보 수정완료
               </button>
             </div>
@@ -38,7 +58,9 @@ const CompanyEditPage: NextPageWithLayout = () => {
             <BasicPart userInfoData={userInfoData} />
             <WelfalePart userInfoData={userInfoData} />
           </section>
-          <button type="submit">기업 정보 수정완료</button>
+          <button type="submit" onClick={handleSubmit(postSubmit)}>
+            기업 정보 수정완료
+          </button>
         </form>
       </PageLayout>
     </main>

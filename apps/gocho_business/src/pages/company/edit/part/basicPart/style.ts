@@ -3,6 +3,11 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
+  spinnerBox: css`
+    position: relative;
+    width: 100%;
+    min-height: 30vh;
+  `,
   wrapper: css`
     position: relative;
   `,
@@ -127,11 +132,15 @@ export const cssObj = {
     height: 15rem;
   `,
   nozoBox: css`
+    display: flex;
     margin-bottom: 0.5rem;
     > svg {
       font-size: 2rem;
       color: ${COLORS.GRAY10};
       margin-right: 0.75rem;
+    }
+    > label {
+      margin-right: 0.5rem;
     }
   `,
   payBox: css`

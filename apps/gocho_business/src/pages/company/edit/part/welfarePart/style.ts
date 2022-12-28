@@ -3,6 +3,11 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
+  spinnerBox: css`
+    width: 100%;
+    min-height: 30vh;
+    position: relative;
+  `,
   lineBox: (width?: number) => {
     if (width) {
       return css`

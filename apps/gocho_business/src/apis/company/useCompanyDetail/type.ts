@@ -13,12 +13,11 @@ export interface ResponseObjDef {
     id: number;
     status: {
       name: string;
-      reason: string;
+      reason: string | null;
     };
-    business_number: number;
+    business_number: string;
     logo_url: string;
     name: string;
-    catch_url: string;
     youtube_url: string;
     industry: string;
     size: string;
@@ -32,18 +31,18 @@ export interface ResponseObjDef {
     bookmark: number;
     view: number;
     welfare: {
-      money: string[];
-      health: string[];
-      life: string[];
-      holiday: string[];
-      facility: string[];
-      vacation: string[];
-      growth: string[];
-      etc: string[];
+      money: string[] | null;
+      health: string[] | null;
+      life: string[] | null;
+      holiday: string[] | null;
+      facility: string[] | null;
+      vacation: string[] | null;
+      growth: string[] | null;
+      etc: string[] | null;
     };
     nozo: {
       exists: boolean;
-      desc: string;
+      desc: string | null;
     };
   };
 }

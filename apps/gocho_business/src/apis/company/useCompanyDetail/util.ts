@@ -5,7 +5,6 @@ export const companyDetailSelector = ({ data }: ResponseObjDef) => ({
   status: data.status,
   logoUrl: data.logo_url,
   name: data.name,
-  catchUrl: data.catch_url,
   youtubeUrl: data.youtube_url,
   industry: data.industry,
   size: data.size,

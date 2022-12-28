@@ -17,7 +17,7 @@ export interface UserStateInfoProps {
 
 export interface UseUserStateDef {
   (): {
-    userInfoData: UserStateObjDef | null | false;
+    userInfoData?: UserStateObjDef;
     setUserInfoData: (status: UserStateObjDef | null | false) => void;
   };
 }

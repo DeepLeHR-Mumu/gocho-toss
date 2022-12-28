@@ -1,34 +1,31 @@
 import { FunctionComponent } from "react";
 import { BiUserVoice } from "react-icons/bi";
+import { useForm } from "react-hook-form";
 import { FiMap, FiMapPin, FiUsers } from "react-icons/fi";
 
-// import { CommonRadioButton } from "shared-ui/common/atom/commonRadioButton";
+import { Spinner } from "shared-ui/common/atom/spinner";
+import { CommonRadioButton } from "shared-ui/common/atom/commonRadioButton";
 
 import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
 
+import { PostBasicSubmitValues, BasicPartProps } from "./type";
 import { cssObj } from "./style";
-
-interface BasicPartProps {
-  userInfoData: {
-    id: number;
-    companyId: number;
-    companyName: string;
-    companyLogo: string;
-    email: string;
-    name: string;
-    department: string;
-    iat: number;
-    exp: number;
-  };
-}
 
 export const BasicPart: FunctionComponent<BasicPartProps> = ({ userInfoData }) => {
   const { data: companyData, isLoading: isCompanyDataLoading } = useCompanyDetail(true, {
     companyId: userInfoData.companyId,
   });
 
+  const { register } = useForm<PostBasicSubmitValues>({
+    mode: "onChange",
+  });
+
   if (!companyData || isCompanyDataLoading) {
-    return null;
+    return (
+      <div css={cssObj.spinnerBox}>
+        <Spinner />
+      </div>
+    );
   }
 
   const foundDate = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
@@ -56,9 +53,11 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ userInfoData }) =
             <FiUsers />
             <input
               type="number"
+              defaultValue={companyData.employeeNumber}
               onWheel={(event) => {
                 event.currentTarget.blur();
               }}
+              {...register("employee_number")}
               css={cssObj.inputLine}
             />
             <p css={cssObj.unit}>명</p>
@@ -66,7 +65,13 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ userInfoData }) =
         </div>
         <div css={cssObj.lineBox(70)}>
           <strong css={cssObj.subTitle}>기업 한줄 소개</strong>
-          <input type="text" placeholder="기업 한줄 소개" css={cssObj.inputLine} />
+          <input
+            type="text"
+            {...register("intro")}
+            defaultValue={companyData.intro}
+            placeholder="기업 한줄 소개"
+            css={cssObj.inputLine}
+          />
         </div>
       </div>
       <div css={cssObj.lineBox()}>
@@ -77,7 +82,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ userInfoData }) =
           </button>
           <div css={cssObj.inputLineBox}>
             <FiMapPin />
-            <input type="text" placeholder="placeHolder" />
+            <input type="text" {...register("address")} placeholder="placeHolder" defaultValue={companyData.address} />
           </div>
         </label>
         <div css={cssObj.mapBox}>map</div>
@@ -86,8 +91,8 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ userInfoData }) =
         <strong css={cssObj.subTitle}>노조</strong>
         <div css={cssObj.nozoBox}>
           <BiUserVoice />
-          {/* <CommonRadioButton registerObj={} desc='있음' /> */}
-          {/* <CommonRadioButton registerObj={} desc='없음' /> */}
+          <CommonRadioButton registerObj={register("nozo.exists")} desc="있음" />
+          <CommonRadioButton registerObj={register("nozo.exists")} desc="없음" />
         </div>
         <input type="text" placeholder="보충설명(선택)" css={cssObj.inputLine} />
       </div>
@@ -97,21 +102,39 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ userInfoData }) =
           <div css={cssObj.payBox}>
             <strong css={cssObj.infoTitle}>평균 초봉</strong>
             <div css={cssObj.flexCenterBox}>
-              <input type="number" placeholder="평균 초봉" css={cssObj.inputLine} />
+              <input
+                type="number"
+                {...register("pay_start")}
+                placeholder="평균 초봉"
+                css={cssObj.inputLine}
+                defaultValue={companyData.payStart}
+              />
               <p css={cssObj.textValue}>만원</p>
             </div>
           </div>
           <div css={cssObj.payBox}>
             <strong css={cssObj.infoTitle}>평균 연봉</strong>
             <div css={cssObj.flexCenterBox}>
-              <input type="number" placeholder="평균 연봉" css={cssObj.inputLine} />
+              <input
+                type="number"
+                {...register("pay_avg")}
+                placeholder="평균 연봉"
+                css={cssObj.inputLine}
+                defaultValue={companyData.payAvg}
+              />
               <p css={cssObj.textValue}>만원</p>
             </div>
           </div>
         </div>
         <div css={cssObj.lineBox()}>
           <strong css={cssObj.infoTitle}>기타 연봉 정보</strong>
-          <input type="text" placeholder="상여금, 성과급 등의 정보를 적어주세요" css={cssObj.inputLine} />
+          <input
+            type="text"
+            {...register("pay_desc")}
+            placeholder="상여금, 성과급 등의 정보를 적어주세요"
+            css={cssObj.inputLine}
+            defaultValue={companyData.payDesc && companyData.payDesc}
+          />
         </div>
       </div>
     </div>

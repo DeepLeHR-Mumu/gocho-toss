@@ -48,6 +48,8 @@ export const cssObj = {
     font-size: 0.875rem;
     color: ${COLORS.GRAY10};
     font-weight: 400;
+    height: 3.75rem;
+    ${shorten(2)};
   `,
   listBox: css`
     height: 21.25rem;
@@ -60,6 +62,14 @@ export const cssObj = {
       padding: 0.75rem 1rem;
       border-bottom: 1px solid ${COLORS.GRAY70};
     }
+  `,
+  noData: css`
+    font-size: 1rem;
+    height: 21.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${COLORS.GRAY10};
   `,
   valueDesc: css`
     font-size: 1rem;
