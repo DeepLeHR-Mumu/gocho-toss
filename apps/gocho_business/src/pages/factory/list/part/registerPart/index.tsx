@@ -11,7 +11,8 @@ import { FactoryDetailInfo } from "../../component/factoryDetailInfo";
 import { defaultInput, FACTORY_MESSSAGE_OBJ } from "./constant";
 
 export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ isEditing, setIsEditing }) => {
-  const { register, handleSubmit, watch, reset, setValue, formState } = useForm<FactoryRegisterDef>();
+  const formObj = useForm<FactoryRegisterDef>();
+  const { handleSubmit, watch, reset } = formObj;
 
   const { data: factoryDataArr } = useFactoryArr();
   const { mutate: addFactoryMutation } = useAddFactory();
@@ -57,9 +58,8 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ isEditing, 
       <form onSubmit={handleSubmit(factoryPostSubmitHandler)}>
         <div css={cssObj.container}>
           <section css={cssObj.wrapper}>
-            <FactoryBaseInfo register={register} setValue={setValue} formState={formState} />
-            <hr />
-            <FactoryDetailInfo register={register} totalWorkerNumber={totalWorkerNumber} formState={formState} />
+            <FactoryBaseInfo formObj={formObj} />
+            <FactoryDetailInfo formObj={formObj} totalWorkerNumber={totalWorkerNumber} />
           </section>
         </div>
         <div css={cssObj.buttonCenterContainer}>

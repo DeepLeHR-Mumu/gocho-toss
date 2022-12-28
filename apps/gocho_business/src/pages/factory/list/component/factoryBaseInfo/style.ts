@@ -3,9 +3,7 @@ import { COLORS } from "shared-style/color";
 
 export const cssObj = {
   container: css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    border-bottom: 1px solid #cccccc;
   `,
   wrapper: css`
     width: 57.5rem;

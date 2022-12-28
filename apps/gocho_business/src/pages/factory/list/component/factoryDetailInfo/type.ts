@@ -1,9 +1,8 @@
-import { FormState, UseFormRegister } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 
 import { FactoryRegisterDef } from "../../part/registerPart/type";
 
 export interface FactoryDetailInfoProps {
-  register: UseFormRegister<FactoryRegisterDef>;
+  formObj: UseFormReturn<FactoryRegisterDef>;
   totalWorkerNumber: number;
-  formState: FormState<FactoryRegisterDef>;
 }

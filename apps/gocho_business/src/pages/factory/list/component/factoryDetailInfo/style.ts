@@ -87,14 +87,11 @@ export const cssObj = {
   `,
   trueFalseContainer: css`
     display: flex;
-  `,
-  labelContainer: css`
-    display: flex;
-    gap: 0 0.5rem;
-    margin-right: 1rem;
+    gap: 0 1rem;
   `,
 
   radioText: css`
+    margin-left: 0.5rem;
     color: ${COLORS.GRAY10};
   `,
 

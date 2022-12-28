@@ -11,11 +11,13 @@ import { cssObj } from "./style";
 import { FactoryBaseInfoProps } from "./type";
 import { ADDRESS_SCRIPT_URL } from "./constant";
 
-export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ register, setValue, formState }) => {
+export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formObj }) => {
+  const { register, formState, setValue } = formObj;
+
   const open = useDaumPostcodePopup(ADDRESS_SCRIPT_URL);
 
   return (
-    <div data-testid="factory/list/FactoryBaseInfo">
+    <div css={cssObj.container} data-testid="factory/list/FactoryBaseInfo">
       <div css={cssObj.inputContainer}>
         <input
           {...register("factory_name", { maxLength: 30, required: true })}
@@ -46,8 +48,8 @@ export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ regis
           onClick={(buttonClickEvent) => {
             buttonClickEvent.stopPropagation();
             open({
-              onComplete: (t: Address) => {
-                setValue("address", t.address);
+              onComplete: (addressObj: Address) => {
+                setValue("address", addressObj.address);
               },
             });
           }}

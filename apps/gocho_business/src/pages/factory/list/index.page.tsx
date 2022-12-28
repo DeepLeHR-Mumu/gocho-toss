@@ -1,14 +1,15 @@
 import { ReactElement, useState } from "react";
 
 import type { NextPageWithLayout } from "@/pages/_app.page";
-import { PageLayout, GlobalLayout } from "@/components/global/layout";
+import { PageLayout, GlobalLayout, Footer } from "@/components/global/layout";
 import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 
 import { RegisterPart } from "./part/registerPart";
-import { FactoryCardListPart } from "./part/factoryCardPart";
+import { FactoryCardListPart } from "./part/factoryCardListPart";
 import { cssObj } from "./style";
 
 const FactoryListPage: NextPageWithLayout = () => {
+  // TODO isEditing 이름 변경하기
   const [isEditing, setIsEditing] = useState<false | number>(false);
 
   return (
@@ -34,6 +35,7 @@ FactoryListPage.getLayout = (page: ReactElement) => (
   <GlobalLayout>
     <CompanyInfoPart />
     {page}
+    <Footer />
   </GlobalLayout>
 );
 
