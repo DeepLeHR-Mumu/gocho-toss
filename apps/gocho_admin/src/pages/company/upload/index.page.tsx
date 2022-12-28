@@ -46,6 +46,19 @@ const CompanyUpload: NextPage = () => {
           },
         }
       );
+    } else {
+      mutate(
+        { dto: companyObj },
+        {
+          onSuccess: () => {
+            setCheckMsg("기업이 업로드 되었습니다!");
+          },
+
+          onError: () => {
+            setCheckMsg("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
+          },
+        }
+      );
     }
   };
 

@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
-import { useChangeCompany } from "@api/company/useChangeCompany";
+import { useEditCompany } from "@api/company/useEditCompany";
 import { useCompanyDetail } from "@api/company/useCompanyDetail";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 
@@ -24,7 +24,7 @@ const CompanyEdit: NextPage = () => {
   const [checkMsg, setCheckMsg] = useState<string>();
 
   const { data: companyData, isLoading, isError } = useCompanyDetail({ companyId });
-  const { mutate } = useChangeCompany();
+  const { mutate } = useEditCompany();
 
   const companyForm = useForm<CompanyFormValues>({
     defaultValues: {
@@ -87,7 +87,6 @@ const CompanyEdit: NextPage = () => {
     reset({
       name: companyData?.name,
       business_number: companyData?.businessNumber,
-      catch_url: companyData?.catchUrl,
       youtube_url: companyData?.youtubeUrl,
       industry: companyData?.industry,
       size: companyData?.size,
@@ -126,7 +125,7 @@ const CompanyEdit: NextPage = () => {
 
   return (
     <main css={mainContainer}>
-      <h2 css={pageTitle}>기업 등록</h2>
+      <h2 css={pageTitle}>기업 수정</h2>
       <form css={formContainer} onSubmit={handleSubmit(companySubmit)}>
         <BasicInfoPart
           register={register}
@@ -151,7 +150,7 @@ const CompanyEdit: NextPage = () => {
           공장 추가
         </button>
         <button css={submitButton} type="submit">
-          기업 등록하기
+          기업 수정하기
         </button>
         {checkMsg && <p css={checkMsgBox}>{checkMsg}</p>}
       </form>
