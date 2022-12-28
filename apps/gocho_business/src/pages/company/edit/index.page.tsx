@@ -18,12 +18,12 @@ const CompanyEditPage: NextPageWithLayout = () => {
   const { userInfoData } = useUserState();
   const { mutate: putCompanyDetail } = useAddCompanyDetail();
 
-  const { handleSubmit } = useForm<PostSubmitValues>({
+  const companyForm = useForm<PostSubmitValues>({
     mode: "onChange",
   });
+  const { handleSubmit } = companyForm;
 
-  const postSubmit: SubmitHandler<PostSubmitValues> = async (formData) => {
-    console.log(formData);
+  const addCompanyDetail: SubmitHandler<PostSubmitValues> = async (formData) => {
     console.log("실행했다!");
     putCompanyDetail(
       { companyId: Number(userInfoData?.companyId), dto: { ...formData } },
@@ -41,7 +41,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
   return (
     <main css={cssObj.wrapper}>
       <PageLayout>
-        <form css={cssObj.container}>
+        <form css={cssObj.container} onSubmit={handleSubmit(addCompanyDetail)}>
           <header css={cssObj.header}>
             <div>
               <h2 css={cssObj.title}>기업정보</h2>
@@ -49,18 +49,16 @@ const CompanyEditPage: NextPageWithLayout = () => {
             </div>
             <div css={cssObj.flexBox}>
               <CommonStatusChip status="승인됨" />
-              <button type="submit" onClick={handleSubmit(postSubmit)}>
+              <button type="submit">
                 <FiEdit /> 기업 정보 수정완료
               </button>
             </div>
           </header>
           <section css={cssObj.companyInfoBox}>
-            <BasicPart userInfoData={userInfoData} />
-            <WelfalePart userInfoData={userInfoData} />
+            <BasicPart userInfoData={userInfoData} companyForm={companyForm} />
+            <WelfalePart userInfoData={userInfoData} companyForm={companyForm} />
           </section>
-          <button type="submit" onClick={handleSubmit(postSubmit)}>
-            기업 정보 수정완료
-          </button>
+          <button type="submit">기업 정보 수정완료</button>
         </form>
       </PageLayout>
     </main>
