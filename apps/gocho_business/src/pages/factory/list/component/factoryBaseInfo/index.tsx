@@ -24,7 +24,7 @@ export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ regis
           maxLength={30}
         />
         <div css={cssObj.statusChip}>
-          <CommonStatusChip status="등록전" />
+          <CommonStatusChip />
         </div>
       </div>
       <div css={cssObj.inputContainer}>
