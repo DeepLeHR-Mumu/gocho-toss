@@ -1,3 +1,6 @@
+import { UseFormReturn } from "react-hook-form";
+import { PostSubmitValues } from "../../type";
+
 export interface PostWelfaleSubmitValues {
   welfare: {
     money: string[] | null;
@@ -11,7 +14,8 @@ export interface PostWelfaleSubmitValues {
   };
 }
 
-export interface BasicPartProps {
+export interface WelfarePartProps {
+  companyForm: UseFormReturn<PostSubmitValues>;
   userInfoData: {
     id: number;
     companyId: number;

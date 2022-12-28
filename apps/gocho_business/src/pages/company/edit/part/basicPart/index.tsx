@@ -24,7 +24,10 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, user
   }
 
   const foundDate = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
+  const nozoDesc = companyData.nozo.desc ? companyData.nozo.desc : "";
 
+  console.log(companyForm.watch("nozo.exists"));
+  console.log(companyData.nozo.exists);
   return (
     <div css={cssObj.wrapper}>
       <div css={cssObj.lineBox()}>
@@ -91,10 +94,18 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, user
         <strong css={cssObj.subTitle}>노조</strong>
         <div css={cssObj.nozoBox}>
           <BiUserVoice />
-          <CommonRadioButton registerObj={companyForm.register("nozo.exists")} desc="있음" />
-          <CommonRadioButton registerObj={companyForm.register("nozo.exists")} desc="없음" />
+          <CommonRadioButton
+            registerObj={companyForm.register("nozo.exists")}
+            desc="있음"
+            checked={companyData.nozo.exists}
+          />
+          <CommonRadioButton
+            registerObj={companyForm.register("nozo.exists")}
+            desc="없음"
+            checked={!companyData.nozo.exists}
+          />
         </div>
-        <input type="text" placeholder="보충설명(선택)" css={cssObj.inputLine} />
+        <input type="text" placeholder="보충설명(선택)" css={cssObj.inputLine} defaultValue={nozoDesc} />
       </div>
       <div css={cssObj.lineBox(80)}>
         <strong css={cssObj.subTitle}>연봉 정보</strong>

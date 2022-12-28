@@ -5,7 +5,7 @@ import { WelfareFormProps } from "./type";
 import { cssObj } from "./style";
 
 export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
-  setValue,
+  companyForm,
   keyName,
   title,
   desc,
@@ -26,10 +26,10 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
   const deleteKeyHandler = (index: number) => {
     setListArr((prevListArr) => {
       const filterArr = prevListArr && prevListArr.filter((_, filterIndex) => filterIndex !== index);
-      setValue(keyName, listArr);
+      companyForm.setValue(keyName, listArr);
 
       if (filterArr.length === 0) {
-        setValue(keyName, null);
+        companyForm.setValue(keyName, null);
       }
       return filterArr;
     });

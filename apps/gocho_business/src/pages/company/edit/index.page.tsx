@@ -24,9 +24,10 @@ const CompanyEditPage: NextPageWithLayout = () => {
   const { handleSubmit } = companyForm;
 
   const addCompanyDetail: SubmitHandler<PostSubmitValues> = async (formData) => {
-    console.log("실행했다!");
+    // eslint-disable-next-line no-console
+    console.log(formData);
     putCompanyDetail(
-      { companyId: Number(userInfoData?.companyId), dto: { ...formData } },
+      { companyId: Number(userInfoData?.companyId), dto: formData },
       {
         // onError: (error) => {},
         // onSuccess: () => {},

@@ -19,12 +19,4 @@ export const putCompanyDetail: PutCompanyDetailDef = async (requestObj) => {
 };
 
 export const useAddCompanyDetail: useCompanyDetailProps = () =>
-  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>((requestObj) => {
-    const newRequestObj = {
-      companyId: requestObj.companyId,
-      dto: {
-        ...requestObj.dto,
-      },
-    };
-    return putCompanyDetail(newRequestObj);
-  });
+  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>((requestObj) => putCompanyDetail(requestObj));
