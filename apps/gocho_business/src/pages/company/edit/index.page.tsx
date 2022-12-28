@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useAddCompanyDetail } from "@/apis/company/useAddCompany";
 import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 import { CommonStatusChip } from "@/components/common";
-import { PageLayout, GlobalLayout } from "@/components/global/layout";
+import { PageLayout, GlobalLayout, Footer } from "@/components/global/layout";
 import { NextPageWithLayout } from "@/pages/_app.page";
 import { useUserState } from "@/globalStates/useUserState";
 
@@ -71,6 +71,7 @@ CompanyEditPage.getLayout = (page: ReactElement) => (
   <GlobalLayout>
     <CompanyInfoPart />
     {page}
+    <Footer />
   </GlobalLayout>
 );
 
