@@ -27,16 +27,15 @@ export interface CompanyFormValues {
     desc: string | null;
   };
 
-  factories:
-    | {
-        factory_name: string;
-        address: string;
-        male_number: number;
-        female_number: number;
-        product: string;
-        bus_bool: boolean;
-        bus_etc: string | null;
-        dormitory_bool: boolean;
-        dormitory_etc: string | null;
-      }[];
+  factories: {
+    factory_name: string;
+    address: string;
+    male_number: number;
+    female_number: number;
+    product: string;
+    bus_bool: boolean;
+    bus_etc: string | null;
+    dormitory_bool: boolean;
+    dormitory_etc: string | null;
+  }[];
 }

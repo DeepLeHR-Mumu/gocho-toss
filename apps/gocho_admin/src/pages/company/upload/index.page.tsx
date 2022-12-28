@@ -51,7 +51,7 @@ const CompanyUpload: NextPage = () => {
         { dto: companyObj },
         {
           onSuccess: () => {
-            setCheckMsg("기업이 수정 되었습니다!");
+            setCheckMsg("기업이 업로드 되었습니다!");
           },
 
           onError: () => {
