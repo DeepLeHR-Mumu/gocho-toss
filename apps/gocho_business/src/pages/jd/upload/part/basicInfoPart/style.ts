@@ -36,6 +36,9 @@ export const cssObj = {
   `,
 
   isAlwaysBlock: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 15.375rem;
     height: 2.5rem;
     margin-top: 0.5rem;
@@ -55,6 +58,34 @@ export const cssObj = {
     cursor: pointer;
     display: flex;
     align-items: center;
+  `,
+
+  processArrContainer: css`
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 2rem;
+  `,
+
+  smallInputLine: css`
+    border: 1px solid ${COLORS.GRAY10};
+    height: 2.5rem;
+    margin-top: 0.5rem;
+    padding: 0 1rem;
+    font-size: 1rem;
+    width: 20%;
+    font-weight: 400;
+
+    ::placeholder {
+      color: ${COLORS.GRAY30};
+    }
+  `,
+
+  applyRouteArrContainer: css`
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 2rem;
   `,
 
   linkLabelContainer: css`

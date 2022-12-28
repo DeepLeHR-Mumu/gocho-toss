@@ -14,11 +14,15 @@ import { PositionRequiredInfoPart } from "./part/positionRequiredInfoPart";
 import { PositionWorkInfoPart } from "./part/positionWorkInfoPart";
 import { JobFormValues } from "./type";
 import { blankPosition } from "./constant";
+import { getFieldArrayValue } from "./util";
 import { cssObj } from "./style";
 
 const JdUploadPage: NextPageWithLayout = () => {
   const jobForm = useForm<JobFormValues>({
     defaultValues: {
+      process_arr: [{ value: "" }, { value: "" }],
+      apply_route_arr: [{ value: "" }],
+      etc_arr: [{ value: "" }],
       position_arr: [blankPosition],
     },
   });
@@ -29,11 +33,35 @@ const JdUploadPage: NextPageWithLayout = () => {
     name: "position_arr",
   });
 
+  const processArr = useFieldArray({
+    control,
+    name: "process_arr",
+  });
+
+  const applyRouteArr = useFieldArray({
+    control,
+    name: "apply_route_arr",
+  });
+
+  const etcArr = useFieldArray({
+    control,
+    name: "etc_arr",
+  });
+
   const { mutate: addJobMutate } = useAddJd();
 
   const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
     addJobMutate(
-      { dto: jobObj },
+      {
+        dto: {
+          ...jobObj,
+          start_time: new Date(jobObj.start_time).getTime(),
+          end_time: new Date(jobObj.end_time).getTime(),
+          process_arr: getFieldArrayValue(jobObj.process_arr),
+          apply_route_arr: getFieldArrayValue(jobObj.apply_route_arr),
+          etc_arr: getFieldArrayValue(jobObj.etc_arr || []),
+        },
+      },
       {
         onSuccess: () => {
           alert("서버에 공고가 업로드 되었습니다.");
@@ -52,7 +80,7 @@ const JdUploadPage: NextPageWithLayout = () => {
         <section>
           <form onSubmit={handleSubmit(jobSubmitHandler)}>
             <HeaderPart />
-            <BasicInfoPart jobForm={jobForm} />
+            <BasicInfoPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
             <PositionHeaderPart append={append} />
             <ul>
               {fields.map((item, index) => (

@@ -11,7 +11,7 @@ export const blankPosition = {
   conversion_rate: null,
   task_main: "",
   task_sub_arr: [],
-  task_detail_arr: "",
+  task_detail_arr: [],
   rotation_arr: [],
   rotation_etc: null,
   place: {
@@ -21,7 +21,7 @@ export const blankPosition = {
     etc: "",
   },
   hire_number: 0,
-  pay_arr: "",
+  pay_arr: [],
   preferred_certi_arr: [],
   preferred_etc_arr: null,
 };

@@ -4,9 +4,24 @@ import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { cssObj } from "./style";
 import { BasicInfoPartProps } from "./type";
 
-export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jobForm }) => {
+export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
+  jobForm,
+  processArr,
+  applyRouteArr,
+  etcArr,
+}) => {
   const [isAlways, setIsAlways] = useState<boolean>(false);
   const [linkType, setLinkType] = useState<"website" | "email">("website");
+
+  const alwaysButtonClickHandler = () => {
+    if (isAlways) {
+      jobForm.reset({ end_time: "" });
+    } else {
+      jobForm.setValue(`end_time`, "9999-12-31T23:59");
+    }
+
+    setIsAlways((prev) => !prev);
+  };
 
   return (
     <div css={cssObj.partContainer}>
@@ -24,7 +39,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jobForm }
         <div>
           <p>채용마감 일시</p>
           {isAlways ? (
-            <div css={cssObj.isAlwaysBlock}>상시 모집 선택 시 채용시 마감 필수체크 됩니다</div>
+            <div css={cssObj.isAlwaysBlock}>상시 모집</div>
           ) : (
             <input css={cssObj.inputLine} type="datetime-local" {...jobForm.register("end_time", { required: true })} />
           )}
@@ -36,8 +51,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jobForm }
               type="checkbox"
               id="always"
               onClick={() => {
-                jobForm.setValue(`end_time`, "9999-12-31T23:59");
-                setIsAlways((prev) => !prev);
+                alwaysButtonClickHandler();
               }}
             />
             <CheckBox isChecked={isAlways} />
@@ -51,19 +65,45 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jobForm }
       </div>
       <div css={cssObj.inputContainer}>
         <p>채용 절차</p>
-        <input
-          css={cssObj.inputLine}
-          placeholder="채용 절차"
-          {...jobForm.register("process_arr", { required: true })}
-        />
+        <div css={cssObj.processArrContainer}>
+          {processArr.fields.map((item, index) => (
+            <input
+              key={`processArr${item.id}`}
+              css={cssObj.smallInputLine}
+              placeholder="채용 절차"
+              {...jobForm.register(`process_arr.${index}.value`, { required: true })}
+            />
+          ))}
+          <button
+            type="button"
+            onClick={() => {
+              processArr.append({ value: "" });
+            }}
+          >
+            + 입력칸 추가
+          </button>
+        </div>
       </div>
       <div css={cssObj.inputContainer}>
         <p>지원 방법/제출 서류</p>
-        <input
-          css={cssObj.inputLine}
-          placeholder="지원 방법/제출 서류"
-          {...jobForm.register("process_arr", { required: true })}
-        />
+        <div css={cssObj.applyRouteArrContainer}>
+          {applyRouteArr.fields.map((item, index) => (
+            <input
+              key={`applyRouteArr${item.id}`}
+              css={cssObj.smallInputLine}
+              placeholder="지원 방법/제출 서류"
+              {...jobForm.register(`apply_route_arr.${index}.value`, { required: true })}
+            />
+          ))}
+          <button
+            type="button"
+            onClick={() => {
+              applyRouteArr.append({ value: "" });
+            }}
+          >
+            + 입력칸 추가
+          </button>
+        </div>
       </div>
       <div css={cssObj.inputContainer}>
         <div css={cssObj.linkLabelContainer}>
@@ -97,11 +137,23 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jobForm }
       </div>
       <div css={cssObj.inputContainer}>
         <p>기타 사항 (선택)</p>
-        <input
-          css={cssObj.inputLine}
-          placeholder="기타 사항 (선택)"
-          {...jobForm.register("process_arr", { required: true })}
-        />
+        {etcArr.fields.map((item, index) => (
+          <input
+            key={`etcArr${item.id}`}
+            css={cssObj.inputLine}
+            placeholder="기타 사항 (선택)"
+            {...jobForm.register(`etc_arr.${index}.value`, { required: true })}
+          />
+        ))}
+        <button
+          type="button"
+          onClick={() => {
+            etcArr.append({ value: "" });
+          }}
+        >
+          + 입력칸 추가
+        </button>
+        <input />
       </div>
     </div>
   );
