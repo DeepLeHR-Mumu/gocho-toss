@@ -1,9 +1,9 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect } from "react";
 import { BiUserVoice } from "react-icons/bi";
 import { FiMap, FiMapPin, FiUsers } from "react-icons/fi";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
-import { CommonRadioButton } from "shared-ui/common/atom/commonRadioButton";
+import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 
 import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
 
@@ -14,6 +14,22 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, user
   const { data: companyData, isLoading: isCompanyDataLoading } = useCompanyDetail(true, {
     companyId: userInfoData.companyId,
   });
+  const { register, reset } = companyForm;
+
+  useEffect(() => {
+    reset({
+      employee_number: companyData?.employeeNumber,
+      intro: companyData?.intro,
+      address: companyData?.address,
+      nozo: {
+        exists: companyData?.nozo.exists,
+        desc: companyData?.nozo.desc,
+      },
+      pay_avg: companyData?.payAvg,
+      pay_start: companyData?.payStart,
+      pay_desc: companyData?.payDesc,
+    });
+  }, [companyData, reset]);
 
   if (!companyData || isCompanyDataLoading) {
     return (
@@ -24,10 +40,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, user
   }
 
   const foundDate = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
-  const nozoDesc = companyData.nozo.desc ? companyData.nozo.desc : "";
 
-  console.log(companyForm.watch("nozo.exists"));
-  console.log(companyData.nozo.exists);
   return (
     <div css={cssObj.wrapper}>
       <div css={cssObj.lineBox()}>
@@ -51,11 +64,10 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, user
             <FiUsers />
             <input
               type="number"
-              defaultValue={companyData.employeeNumber}
               onWheel={(event) => {
                 event.currentTarget.blur();
               }}
-              {...companyForm.register("employee_number")}
+              {...register("employee_number")}
               css={cssObj.inputLine}
             />
             <p css={cssObj.unit}>명</p>
@@ -63,13 +75,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, user
         </div>
         <div css={cssObj.lineBox(70)}>
           <strong css={cssObj.subTitle}>기업 한줄 소개</strong>
-          <input
-            type="text"
-            {...companyForm.register("intro")}
-            defaultValue={companyData.intro}
-            placeholder="기업 한줄 소개"
-            css={cssObj.inputLine}
-          />
+          <input type="text" {...register("intro")} placeholder="기업 한줄 소개" css={cssObj.inputLine} />
         </div>
       </div>
       <div css={cssObj.lineBox()}>
@@ -80,12 +86,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, user
           </button>
           <div css={cssObj.inputLineBox}>
             <FiMapPin />
-            <input
-              type="text"
-              {...companyForm.register("address")}
-              placeholder="placeHolder"
-              defaultValue={companyData.address}
-            />
+            <input type="text" {...register("address")} placeholder="placeHolder" />
           </div>
         </label>
         <div css={cssObj.mapBox}>map</div>
@@ -94,18 +95,14 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, user
         <strong css={cssObj.subTitle}>노조</strong>
         <div css={cssObj.nozoBox}>
           <BiUserVoice />
-          <CommonRadioButton
-            registerObj={companyForm.register("nozo.exists")}
-            desc="있음"
-            checked={companyData.nozo.exists}
-          />
-          <CommonRadioButton
-            registerObj={companyForm.register("nozo.exists")}
-            desc="없음"
-            checked={!companyData.nozo.exists}
-          />
+          <SharedRadioButton registerObj={register("nozo.exists", { required: true })} value="true" id="nozoTrue">
+            <p css={cssObj.unit}>있음</p>
+          </SharedRadioButton>
+          <SharedRadioButton registerObj={register("nozo.exists", { required: true })} value="false" id="nozoFalse">
+            <p css={cssObj.unit}>없음</p>
+          </SharedRadioButton>
         </div>
-        <input type="text" placeholder="보충설명(선택)" css={cssObj.inputLine} defaultValue={nozoDesc} />
+        <input type="text" placeholder="보충설명(선택)" css={cssObj.inputLine} />
       </div>
       <div css={cssObj.lineBox(80)}>
         <strong css={cssObj.subTitle}>연봉 정보</strong>
@@ -113,26 +110,14 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, user
           <div css={cssObj.payBox}>
             <strong css={cssObj.infoTitle}>평균 초봉</strong>
             <div css={cssObj.flexCenterBox}>
-              <input
-                type="number"
-                {...companyForm.register("pay_start")}
-                placeholder="평균 초봉"
-                css={cssObj.inputLine}
-                defaultValue={companyData.payStart}
-              />
+              <input type="number" {...register("pay_start")} placeholder="평균 초봉" css={cssObj.inputLine} />
               <p css={cssObj.textValue}>만원</p>
             </div>
           </div>
           <div css={cssObj.payBox}>
             <strong css={cssObj.infoTitle}>평균 연봉</strong>
             <div css={cssObj.flexCenterBox}>
-              <input
-                type="number"
-                {...companyForm.register("pay_avg")}
-                placeholder="평균 연봉"
-                css={cssObj.inputLine}
-                defaultValue={companyData.payAvg}
-              />
+              <input type="number" {...register("pay_avg")} placeholder="평균 연봉" css={cssObj.inputLine} />
               <p css={cssObj.textValue}>만원</p>
             </div>
           </div>
@@ -141,10 +126,9 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, user
           <strong css={cssObj.infoTitle}>기타 연봉 정보</strong>
           <input
             type="text"
-            {...companyForm.register("pay_desc")}
+            {...register("pay_desc")}
             placeholder="상여금, 성과급 등의 정보를 적어주세요"
             css={cssObj.inputLine}
-            defaultValue={companyData.payDesc && companyData.payDesc}
           />
         </div>
       </div>

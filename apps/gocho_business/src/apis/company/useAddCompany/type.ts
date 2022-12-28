@@ -27,6 +27,10 @@ export interface RequestObjDef {
   };
 }
 
+export const companyDetailKeyObj = {
+  all: [{ data: "companyDetail" }] as const,
+};
+
 export interface PutCompanyDetailDef {
   (requestObj: RequestObjDef): Promise<AxiosResponse>;
 }

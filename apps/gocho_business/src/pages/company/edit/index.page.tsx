@@ -24,14 +24,12 @@ const CompanyEditPage: NextPageWithLayout = () => {
   const { handleSubmit } = companyForm;
 
   const addCompanyDetail: SubmitHandler<PostSubmitValues> = async (formData) => {
-    // eslint-disable-next-line no-console
-    console.log(formData);
     putCompanyDetail(
-      { companyId: Number(userInfoData?.companyId), dto: formData },
-      {
-        // onError: (error) => {},
-        // onSuccess: () => {},
-      }
+      { companyId: Number(userInfoData?.companyId), dto: formData }
+      // {
+      // onError: (error) => {},
+      // onSuccess: () => {},
+      // }
     );
   };
 

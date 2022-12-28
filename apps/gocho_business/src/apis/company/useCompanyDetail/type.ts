@@ -16,10 +16,7 @@ export interface ResponseObjDef {
       reason: string | null;
     };
     business_number: string;
-    logo_url: string;
     name: string;
-    youtube_url: string;
-    industry: string;
     size: string;
     employee_number: number;
     found_date: number;

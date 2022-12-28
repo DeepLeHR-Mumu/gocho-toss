@@ -3,7 +3,7 @@ export interface PostSubmitValues {
   address: string;
   nozo: {
     exists: boolean;
-    desc: string;
+    desc: string | null;
   };
   employee_number: number;
   welfare: {
@@ -18,5 +18,5 @@ export interface PostSubmitValues {
   };
   pay_avg: number;
   pay_start: number;
-  pay_desc: string;
+  pay_desc: string | null;
 }

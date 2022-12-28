@@ -1,10 +1,10 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
 import { ErrorResponseDef } from "@/types/errorType";
 import { axiosInstance } from "@/apis/useIsRefreshLock";
 
-import { PutCompanyDetailDef, RequestObjDef, useCompanyDetailProps } from "./type";
+import { companyDetailKeyObj, PutCompanyDetailDef, RequestObjDef, useCompanyDetailProps } from "./type";
 
 export const putCompanyDetail: PutCompanyDetailDef = async (requestObj) => {
   const formData = new FormData();
@@ -18,5 +18,15 @@ export const putCompanyDetail: PutCompanyDetailDef = async (requestObj) => {
   return data;
 };
 
-export const useAddCompanyDetail: useCompanyDetailProps = () =>
-  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>((requestObj) => putCompanyDetail(requestObj));
+export const useAddCompanyDetail: useCompanyDetailProps = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>(
+    (requestObj) => putCompanyDetail(requestObj),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(companyDetailKeyObj.all);
+      },
+    }
+  );
+};
