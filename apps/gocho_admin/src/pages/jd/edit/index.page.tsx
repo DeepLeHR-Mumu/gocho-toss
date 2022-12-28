@@ -113,7 +113,7 @@ const JdEdit: NextPage = () => {
 
   return (
     <main css={mainContainer}>
-      <h2 css={pageTitle}>공고 업로드</h2>
+      <h2 css={pageTitle}>공고 수정</h2>
       <section>
         <form css={formContainer} onSubmit={handleSubmit(jobSubmitHandler)}>
           <CommonDataPart
