@@ -3,7 +3,7 @@ import { COLORS } from "shared-style/color";
 
 export const cssObj = {
   partContainer: css`
-    margin-top: 5rem;
+    margin: 5rem 2rem 0;
     display: flex;
     justify-content: space-between;
   `,

@@ -18,7 +18,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
   return (
     <>
       <div css={cssObj.titleContainer}>
-        <strong css={cssObj.positionTitle}>모집할 직무 카드 제목</strong>
+        <strong css={cssObj.positionTitle}>직무 카드</strong>
         <div css={cssObj.positionButtonContainer}>
           <button
             css={cssObj.openCardButton}

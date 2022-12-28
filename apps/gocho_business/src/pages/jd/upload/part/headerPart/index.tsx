@@ -16,7 +16,7 @@ export const HeaderPart: FunctionComponent = () => {
     <section css={cssObj.partContainer}>
       <div>
         <h2 css={cssObj.title}>공고 등록</h2>
-        <p>고초대졸닷컴에 공고를 올려보세요</p>
+        <p>등록된 공고는 검수 이후 바로 업로드 됩니다</p>
       </div>
       <CommonSquareButton
         text="공고 등록하기"

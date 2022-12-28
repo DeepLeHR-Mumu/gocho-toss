@@ -9,7 +9,9 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jobForm }
   const [linkType, setLinkType] = useState<"website" | "email">("website");
 
   return (
-    <>
+    <div css={cssObj.partContainer}>
+      <h2 css={cssObj.title}>접수 정보</h2>
+      <p>공고 접수와 관련된 공통 정보들 입니다</p>
       <div css={cssObj.inputContainer}>
         <p>공고 제목</p>
         <input css={cssObj.inputLine} placeholder="공고 제목" {...jobForm.register("title", { required: true })} />
@@ -95,6 +97,6 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jobForm }
           {...jobForm.register("process_arr", { required: true })}
         />
       </div>
-    </>
+    </div>
   );
 };

@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { BiRocket } from "react-icons/bi";
 
 import type { NextPageWithLayout } from "@/pages/_app.page";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
@@ -62,6 +63,10 @@ const JdUploadPage: NextPageWithLayout = () => {
                 </li>
               ))}
             </ul>
+            <button type="submit" css={cssObj.submitButton}>
+              <BiRocket />
+              공고 등록
+            </button>
           </form>
         </section>
       </PageLayout>

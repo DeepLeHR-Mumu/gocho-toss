@@ -7,10 +7,10 @@ import { cssObj } from "./style";
 export const PositionHeaderPart: FunctionComponent<PositionHeaderPartProps> = ({ append }) => (
   <section css={cssObj.partContainer}>
     <div>
-      <h3 css={cssObj.title}>직무 내용</h3>
+      <h3 css={cssObj.title}>직무별 상세정보</h3>
       <p>
-        금번 공고에서 모집할 직무별로 작성해주세요. 작성 후 직무 복제하기 버튼으로 동일 조건의 다른 직무를 편하게 입력할
-        수도 있습니다
+        직무별로 상세 정보를 입력해주세요. 작성 후 직무카드 복사 버튼으로 동일 조건의 다른 직무를 편하게 입력할 수
+        있습니다
       </p>
     </div>
     <button

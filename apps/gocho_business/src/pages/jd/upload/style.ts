@@ -9,4 +9,13 @@ export const cssObj = {
     border-top: 1px solid ${COLORS.GRAY70};
     border-bottom: 1px solid ${COLORS.GRAY70};
   `,
+
+  submitButton: css`
+    height: 3rem;
+    margin: 0 auto;
+    width: 30%;
+    background-color: ${COLORS.BLUE_FIRST40};
+    border-radius: 0.5rem;
+    color: ${COLORS.GRAY100};
+  `,
 };

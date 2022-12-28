@@ -2,6 +2,14 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
+  partContainer: css`
+    margin: 2rem 2rem 0;
+  `,
+
+  title: css`
+    font-size: 1.25rem;
+  `,
+
   inputContainer: css`
     margin-top: 2rem;
   `,
