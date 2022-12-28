@@ -1,9 +1,9 @@
 import { FunctionComponent } from "react";
 
-import { CommonRadioButtonProps } from "./type";
+import { SharedRadioButtonProps } from "./type";
 import { cssObj } from "./style";
 
-export const SharedRadioButton: FunctionComponent<CommonRadioButtonProps> = ({ value, registerObj, desc }) => {
+export const SharedRadioButton: FunctionComponent<SharedRadioButtonProps> = ({ value, registerObj, desc }) => {
   const id = `${registerObj.name}_${desc.replace(/\s/g, "")}`;
 
   return (
