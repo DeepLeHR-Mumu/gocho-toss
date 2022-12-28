@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
-import { useChangeCompany } from "@api/company/useChangeCompany";
+import { useEditCompany } from "@api/company/useEditCompany";
 import { useCompanyDetail } from "@api/company/useCompanyDetail";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 
@@ -24,7 +24,7 @@ const CompanyEdit: NextPage = () => {
   const [checkMsg, setCheckMsg] = useState<string>();
 
   const { data: companyData, isLoading, isError } = useCompanyDetail({ companyId });
-  const { mutate } = useChangeCompany();
+  const { mutate } = useEditCompany();
 
   const companyForm = useForm<CompanyFormValues>({
     defaultValues: {

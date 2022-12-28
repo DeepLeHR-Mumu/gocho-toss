@@ -94,10 +94,10 @@ export interface axiosRequestObjDef {
   logo?: File;
 }
 
-export interface ChangeCompanyDef {
+export interface EditCompanyDef {
   ({ companyId, dto, logo }: axiosRequestObjDef): Promise<AdminResponseDef>;
 }
 
-export interface useChangeCompanyProps {
+export interface useEditCompanyProps {
   (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
 }
