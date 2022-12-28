@@ -23,25 +23,31 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jobForm }
         </div>
         <div>
           <p>채용마감 일시</p>
-          <input css={cssObj.inputLine} type="datetime-local" {...jobForm.register("end_time", { required: true })} />
+          {isAlways ? (
+            <div css={cssObj.isAlwaysBlock}>상시 모집 선택 시 채용시 마감 필수체크 됩니다</div>
+          ) : (
+            <input css={cssObj.inputLine} type="datetime-local" {...jobForm.register("end_time", { required: true })} />
+          )}
         </div>
-        <label css={cssObj.label} htmlFor="always">
-          상시공고
-          <input
-            type="checkbox"
-            id="always"
-            onClick={() => {
-              jobForm.setValue(`end_time`, "9999-12-31T23:59");
-              setIsAlways((prev) => !prev);
-            }}
-          />
-          <CheckBox isChecked={isAlways} />
-        </label>
-        <label css={cssObj.label} htmlFor="cut">
-          채용시 마감
-          <input type="checkbox" id="cut" {...jobForm.register("cut")} />
-          <CheckBox isChecked={jobForm.watch("cut")} />
-        </label>
+        <div css={cssObj.dateLabelContainer}>
+          <label css={cssObj.label} htmlFor="always">
+            상시공고
+            <input
+              type="checkbox"
+              id="always"
+              onClick={() => {
+                jobForm.setValue(`end_time`, "9999-12-31T23:59");
+                setIsAlways((prev) => !prev);
+              }}
+            />
+            <CheckBox isChecked={isAlways} />
+          </label>
+          <label css={cssObj.label} htmlFor="cut">
+            채용시 마감
+            <input type="checkbox" id="cut" {...jobForm.register("cut")} />
+            <CheckBox isChecked={jobForm.watch("cut") || isAlways} />
+          </label>
+        </div>
       </div>
       <div css={cssObj.inputContainer}>
         <p>채용 절차</p>
@@ -60,7 +66,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jobForm }
         />
       </div>
       <div css={cssObj.inputContainer}>
-        <div css={cssObj.labelContainer}>
+        <div css={cssObj.linkLabelContainer}>
           <label css={cssObj.label} htmlFor="website">
             <CheckBox isChecked={linkType === "website"} />
             채용 링크

@@ -3,7 +3,7 @@ import { COLORS } from "shared-style/color";
 
 export const cssObj = {
   partContainer: css`
-    margin: 2rem 2rem 0;
+    margin: 3rem 2rem 0;
   `,
 
   title: css`
@@ -11,12 +11,6 @@ export const cssObj = {
   `,
 
   inputContainer: css`
-    margin-top: 2rem;
-  `,
-
-  dateInputContainer: css`
-    display: flex;
-    gap: 0 2rem;
     margin-top: 2rem;
   `,
 
@@ -34,13 +28,36 @@ export const cssObj = {
     }
   `,
 
+  dateInputContainer: css`
+    display: flex;
+    align-items: flex-end;
+    gap: 0 3rem;
+    margin-top: 2rem;
+  `,
+
+  isAlwaysBlock: css`
+    width: 15.375rem;
+    height: 2.5rem;
+    margin-top: 0.5rem;
+    text-align: center;
+    background-color: ${COLORS.GRAY70};
+    color: ${COLORS.GRAY30};
+    border-bottom: 1px solid ${COLORS.GRAY10};
+  `,
+
+  dateLabelContainer: css`
+    display: flex;
+    height: 2.5rem;
+    gap: 0 3rem;
+  `,
+
   label: css`
     cursor: pointer;
     display: flex;
     align-items: center;
   `,
 
-  labelContainer: css`
+  linkLabelContainer: css`
     display: flex;
     gap: 0 1rem;
   `,
