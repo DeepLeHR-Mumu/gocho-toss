@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { FiEdit } from "react-icons/fi";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import { useAddCompanyDetail } from "@/apis/company/useAddCompany";
 import { CompanyInfoPart } from "@/components/global/companyInfoPart";
@@ -23,14 +23,19 @@ const CompanyEditPage: NextPageWithLayout = () => {
   });
   const { handleSubmit } = companyForm;
 
-  const addCompanyDetail: SubmitHandler<PostSubmitValues> = async (formData) => {
-    putCompanyDetail(
-      { companyId: Number(userInfoData?.companyId), dto: formData }
-      // {
-      // onError: (error) => {},
-      // onSuccess: () => {},
-      // }
-    );
+  const addCompanyDetail = (formData: PostSubmitValues) => {
+    if (window.confirm("수정하쉴?")) {
+      putCompanyDetail({
+        companyId: Number(userInfoData?.companyId),
+        dto: {
+          ...formData,
+          nozo: {
+            exists: formData.nozo.exists === "true",
+            desc: formData.nozo.desc,
+          },
+        },
+      });
+    }
   };
 
   if (!userInfoData) {

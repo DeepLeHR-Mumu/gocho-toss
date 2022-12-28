@@ -2,7 +2,7 @@ export interface PostSubmitValues {
   intro: string;
   address: string;
   nozo: {
-    exists: boolean;
+    exists: "true" | "false";
     desc: string | null;
   };
   employee_number: number;

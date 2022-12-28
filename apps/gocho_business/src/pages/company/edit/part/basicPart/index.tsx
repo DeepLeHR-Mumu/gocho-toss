@@ -19,15 +19,15 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, user
   useEffect(() => {
     reset({
       employee_number: companyData?.employeeNumber,
-      intro: companyData?.intro,
+      intro: companyData?.intro || "",
       address: companyData?.address,
       nozo: {
-        exists: companyData?.nozo.exists,
-        desc: companyData?.nozo.desc,
+        exists: companyData?.nozo.exists ? "true" : "false",
+        desc: companyData?.nozo.desc || "",
       },
       pay_avg: companyData?.payAvg,
       pay_start: companyData?.payStart,
-      pay_desc: companyData?.payDesc,
+      pay_desc: companyData?.payDesc || "",
     });
   }, [companyData, reset]);
 
@@ -95,10 +95,10 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, user
         <strong css={cssObj.subTitle}>노조</strong>
         <div css={cssObj.nozoBox}>
           <BiUserVoice />
-          <SharedRadioButton registerObj={register("nozo.exists", { required: true })} value="true" id="nozoTrue">
+          <SharedRadioButton registerObj={register("nozo.exists")} value="true" id="nozoTrue">
             <p css={cssObj.unit}>있음</p>
           </SharedRadioButton>
-          <SharedRadioButton registerObj={register("nozo.exists", { required: true })} value="false" id="nozoFalse">
+          <SharedRadioButton registerObj={register("nozo.exists")} value="false" id="nozoFalse">
             <p css={cssObj.unit}>없음</p>
           </SharedRadioButton>
         </div>
