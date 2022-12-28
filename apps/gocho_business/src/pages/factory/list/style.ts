@@ -21,6 +21,7 @@ export const cssObj = {
     margin-bottom: 2.5rem;
   `,
   factoryPartContainer: css`
+    margin-top: 3rem;
     display: flex;
     justify-content: center;
   `,
