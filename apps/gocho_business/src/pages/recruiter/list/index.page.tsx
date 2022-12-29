@@ -1,5 +1,7 @@
 import { ReactElement } from "react";
 
+import { Spinner } from "shared-ui/common/atom/spinner";
+
 import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 import { Footer, GlobalLayout, PageLayout } from "@/components/global/layout";
 import { NextPageWithLayout } from "@/pages/_app.page";
@@ -8,7 +10,15 @@ import { useRecruiterArr } from "@/apis/recruiter/useRecruiterArr";
 import { cssObj } from "./style";
 
 const RecruiterListPage: NextPageWithLayout = () => {
-  const { data: recruiterArrData } = useRecruiterArr();
+  const { data: recruiterDataArr } = useRecruiterArr();
+
+  if (!recruiterDataArr) {
+    return (
+      <div css={cssObj.spinner}>
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <main>
@@ -23,7 +33,7 @@ const RecruiterListPage: NextPageWithLayout = () => {
           </div>
 
           <ul>
-            {recruiterArrData?.map((recruiterData) => (
+            {recruiterDataArr.map((recruiterData) => (
               <li key={recruiterData.email} css={cssObj.rowContainer}>
                 <p css={cssObj.data}>{recruiterData.name}</p>
                 <p css={cssObj.data}>{recruiterData.email}</p>

@@ -5,6 +5,7 @@ import { FiEdit, FiUser, FiUsers } from "react-icons/fi";
 import { BiMinus, BiBus, BiBuildingHouse } from "react-icons/bi";
 
 import { COLORS } from "shared-style/color";
+import { Spinner } from "shared-ui/common/atom/spinner";
 
 import { useDeleteFactory } from "@/apis/factory/useDeleteFactory";
 import { useFactoryArr } from "@/apis/factory/useFactoryArr";
@@ -15,10 +16,15 @@ import { FactoryCardListPartProps } from "./type";
 import { FACTORY_MESSSAGE_OBJ } from "../registerPart/constant";
 
 export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = ({ setEditingIndex, editingIndex }) => {
-  const { data: factoryDataArr, isSuccess: factoryDataArrSuccess, isLoading: factoryDataArrLoading } = useFactoryArr();
+  const { data: factoryDataArr } = useFactoryArr();
   const { mutate: deleteFactoryMutation } = useDeleteFactory();
 
-  if (!factoryDataArrSuccess || factoryDataArrLoading) return null;
+  if (!factoryDataArr)
+    return (
+      <div css={cssObj.spinner}>
+        <Spinner />
+      </div>
+    );
 
   if (factoryDataArr.length === 0)
     return (
