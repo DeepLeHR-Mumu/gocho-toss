@@ -16,6 +16,7 @@ export const cssObj = {
   tableWrapper: css`
     width: 100%;
     padding: 0.75rem 2rem;
+    margin-bottom: 3rem;
   `,
   tableHeader: css`
     display: flex;
