@@ -42,5 +42,4 @@ export const wrapper = css`
 export const descCSS = css`
   color: ${COLORS.GRAY100};
   font-size: 1rem;
-  font-weight: 400;
 `;

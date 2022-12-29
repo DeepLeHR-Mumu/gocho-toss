@@ -16,6 +16,5 @@ export const cssObj = {
     font-weight: 700;
   `,
   countCSS: css`
-    font-weight: 400;
   `,
 };
