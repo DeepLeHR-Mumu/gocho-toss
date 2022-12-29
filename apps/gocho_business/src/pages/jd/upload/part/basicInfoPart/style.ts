@@ -10,17 +10,19 @@ export const cssObj = {
     font-size: 1.25rem;
   `,
 
-  inputContainer: css`
+  container: css`
     margin-top: 2rem;
+    p {
+      line-height: 2;
+    }
   `,
 
-  inputLine: css`
+  input: (width: number) => css`
     border: 1px solid ${COLORS.GRAY10};
     height: 2.5rem;
-    margin-top: 0.5rem;
     padding: 0 1rem;
     font-size: 1rem;
-    width: 100%;
+    width: ${width}rem;
     font-weight: 400;
 
     ::placeholder {
@@ -39,9 +41,8 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 15.375rem;
+    width: 20rem;
     height: 2.5rem;
-    margin-top: 0.5rem;
     text-align: center;
     background-color: ${COLORS.GRAY70};
     color: ${COLORS.GRAY30};
@@ -60,36 +61,108 @@ export const cssObj = {
     align-items: center;
   `,
 
-  processArrContainer: css`
+  inputContainer: css`
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 1rem 2rem;
   `,
 
-  smallInputLine: css`
+  inputLabel: (width: number) => css`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: ${width}rem;
     border: 1px solid ${COLORS.GRAY10};
     height: 2.5rem;
-    margin-top: 0.5rem;
-    padding: 0 1rem;
-    font-size: 1rem;
-    width: 20%;
-    font-weight: 400;
+    padding: 0 0.5rem 0 1rem;
+  `,
 
+  erasableInput: css`
+    font-size: 1rem;
+    width: calc(100% - 3rem);
+    font-weight: 400;
     ::placeholder {
       color: ${COLORS.GRAY30};
     }
   `,
 
-  applyRouteArrContainer: css`
+  deleteCertiButton: css`
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    gap: 1rem 2rem;
+    justify-content: center;
+    border-radius: 50%;
+    width: 1.75rem;
+    height: 1.75rem;
+    color: ${COLORS.GRAY10};
+    background-color: ${COLORS.GRAY70};
   `,
 
   linkLabelContainer: css`
     display: flex;
     gap: 0 1rem;
+  `,
+
+  radio: css`
+    margin: 0;
+    display: none;
+    appearance: auto;
+    :checked ~ div {
+      :after {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 0.625rem;
+        height: 0.625rem;
+        background-color: ${COLORS.GRAY10};
+        border-radius: 50%;
+        content: "";
+      }
+    }
+  `,
+
+  radioBox: css`
+    border: 2px solid ${COLORS.GRAY10};
+    width: 1.125rem;
+    height: 1.125rem;
+    position: relative;
+    background-color: ${COLORS.GRAY100};
+    border-radius: 50%;
+    margin-right: 0.25rem;
+  `,
+
+  applyUrlInputContainer: css`
+    display: flex;
+    gap: 0 1rem;
+    align-items: center;
+  `,
+
+  applyUrlInput: css`
+    font-size: 1rem;
+    width: calc(100% - 1.5rem);
+    font-weight: 400;
+    ::placeholder {
+      color: ${COLORS.GRAY30};
+    }
+  `,
+
+  linkButtonContainer: css`
+    display: flex;
+    align-items: center;
+    gap: 0 1rem;
+    margin-top: 1rem;
+  `,
+
+  outerLinkButton: css`
+    display: flex;
+    align-items: center;
+    gap: 0 0.5rem;
+    background-color: ${COLORS.GRAY80};
+    color: ${COLORS.GRAY30};
+    border-radius: 0.25rem;
+    width: fit-content;
+    padding: 0 1rem;
+    height: 2.5rem;
   `,
 };
