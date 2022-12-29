@@ -19,7 +19,6 @@ export const cssObj = {
     margin-right: 0.75rem;
   `,
   text: css`
-    font-weight: 400;
     color: black;
   `,
 };

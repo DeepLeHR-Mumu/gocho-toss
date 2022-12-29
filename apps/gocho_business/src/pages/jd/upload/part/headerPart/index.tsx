@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import { COLORS } from "shared-style/color";
 
-import { INTERNAL_URL } from "@/constants";
+import { INTERNAL_URL } from "@/constants/url";
 import { CommonSquareButton } from "@/components/common";
 
 import { cssObj } from "./style";

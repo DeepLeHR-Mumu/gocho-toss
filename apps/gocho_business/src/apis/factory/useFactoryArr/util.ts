@@ -6,7 +6,6 @@ export const factoryArrSelector = ({ data }: ResponseObjDef) =>
     status: factory.status,
     uploader: factory.uploader,
     name: factory.name,
-    employeeNumber: factory.employee_number,
     address: factory.address,
     maleNumber: factory.male_number,
     femaleNumber: factory.female_number,

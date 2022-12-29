@@ -9,7 +9,7 @@ import dayjs from "dayjs";
 import { COLORS } from "shared-style/color";
 
 import { CommonInfoBox, CommonRoundButton, CommonStatusChip } from "@/components/common";
-import { INTERNAL_URL } from "@/constants";
+import { INTERNAL_URL } from "@/constants/url";
 
 import { cssObj } from "./style";
 import { JdCardProps } from "./type";

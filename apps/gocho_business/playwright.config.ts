@@ -3,7 +3,7 @@ import { devices } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
   globalSetup: require.resolve("./global-setup"),
-  timeout: 6000,
+  timeout: 15000,
   expect: {
     timeout: 6000,
   },

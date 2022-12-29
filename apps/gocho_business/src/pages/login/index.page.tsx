@@ -11,7 +11,7 @@ import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
 import gochoColorSrc from "shared-image/global/deepLeLogo/largeColor.svg";
 
-import { INTERNAL_URL } from "@/constants";
+import { INTERNAL_URL } from "@/constants/url";
 import { useUserState } from "@/globalStates/useUserState";
 import { TopBar } from "@/components/global/layout/topBar";
 import { useDoLogin } from "@/apis/auth/useDoLogin";

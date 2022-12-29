@@ -2,7 +2,7 @@ import { BiRocket, BiBuildings } from "react-icons/bi";
 import { TbBuildingFactory } from "react-icons/tb";
 import { FiUsers, FiUser, FiHeadphones } from "react-icons/fi";
 
-import { INTERNAL_URL } from "@/constants";
+import { INTERNAL_URL } from "@/constants/url";
 
 export const linkArr = [
   { name: "공고", url: INTERNAL_URL.JD_LIST, icon: BiRocket },
