@@ -1,40 +1,30 @@
 import { FunctionComponent } from "react";
+import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { BiUserVoice } from "react-icons/bi";
 import { FiMap, FiMapPin, FiUsers } from "react-icons/fi";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 
+import { COLORS } from "shared-style/color";
+import { CommonRoundButton } from "@/components/common";
 import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
 import { useUserState } from "@/globalStates/useUserState";
+import { POSTCODE_SCRIPT_URL } from "@/constants/url";
 
+import { KakaoMap } from "../../component/kakaoMap";
 import { BasicPartProps } from "./type";
 import { cssObj } from "./style";
 
 export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) => {
-  const { register } = companyForm;
+  const { register, setValue } = companyForm;
   const { userInfoData } = useUserState();
 
   const { data: companyData, isLoading: isCompanyDataLoading } = useCompanyDetail({
     companyId: userInfoData?.companyId,
   });
 
-  // useEffect(() => {
-  //   if (companyData) {
-  //     reset({
-  //       // employee_number: companyData.employeeNumber,
-  //       intro: companyData.intro || "",
-  //       address: companyData.address,
-  //       nozo: {
-  //         exists: companyData.nozo.exists ? "true" : "false",
-  //         desc: companyData.nozo.desc || "",
-  //       },
-  //       pay_avg: companyData.payAvg,
-  //       pay_start: companyData.payStart,
-  //       pay_desc: companyData.payDesc || "",
-  //     });
-  //   }
-  // }, [companyData, reset, router]);
+  const openPostCodePopup = useDaumPostcodePopup(POSTCODE_SCRIPT_URL);
 
   if (!companyData || isCompanyDataLoading) {
     return (
@@ -86,15 +76,27 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
       <div css={cssObj.lineBox()}>
         <strong css={cssObj.subTitle}>기업 본사 주소</strong>
         <label htmlFor="address" css={cssObj.address}>
-          <button type="button" css={cssObj.findAddressButton}>
+          <CommonRoundButton
+            Icon={FiMap}
+            text="주소찾기"
+            onClickHandler={() =>
+              openPostCodePopup({
+                onComplete: (addressObj: Address) => {
+                  setValue("address", addressObj.address);
+                },
+              })
+            }
+            backgoundColor={COLORS.BLUE_FIRST30}
+          />
+          {/* <button type="button" css={cssObj.findAddressButton}>
             <FiMap /> 주소찾기
-          </button>
+          </button> */}
           <div css={cssObj.inputLineBox}>
             <FiMapPin />
             <input type="text" {...register("address")} placeholder="placeHolder" />
           </div>
         </label>
-        <div css={cssObj.mapBox}>map</div>
+        <KakaoMap address={companyData.address} />
       </div>
       <div css={cssObj.lineBox(80)}>
         <strong css={cssObj.subTitle}>노조</strong>

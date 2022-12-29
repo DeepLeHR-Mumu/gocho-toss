@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useState } from "react";
 import { FiCornerDownLeft, FiMinus } from "react-icons/fi";
 
 import { WelfareFormProps, KeyName } from "./type";
@@ -8,12 +8,6 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({ setValue, tit
   const [listArr, setListArr] = useState<string[] | null>(valueArr || []);
   const [valueText, setValueText] = useState<string>("");
 
-  useEffect(() => {
-    if (!listArr || listArr.length === 0) {
-      setValue(registerObj.name as KeyName, null);
-    }
-  }, [listArr, registerObj.name, setValue]);
-
   const deleteKeyHandler = (index: number) => {
     setListArr((prevListArr) => {
       const filterArr = prevListArr && prevListArr.filter((_, filterIndex) => filterIndex !== index);
@@ -21,6 +15,7 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({ setValue, tit
         setValue(registerObj.name as KeyName, null);
         return null;
       }
+      setValue(registerObj.name as KeyName, filterArr);
       return filterArr;
     });
   };
@@ -77,21 +72,25 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({ setValue, tit
           <p css={cssObj.noData}>입력한 복지가 없습니다</p>
         ) : (
           <ul css={cssObj.listBox}>
-            {listArr?.map((data, index) => (
-              <li key={`${title}_${data}`}>
-                <p css={cssObj.valueDesc}>{data}</p>
-                <button
-                  type="button"
-                  aria-label="입력한 복지 제거하기"
-                  css={cssObj.deleteButton}
-                  onClick={() => {
-                    deleteKeyHandler(index);
-                  }}
-                >
-                  <FiMinus />
-                </button>
-              </li>
-            ))}
+            {listArr?.map((data, index) => {
+              const random = Math.floor(Math.random() * 10000);
+
+              return (
+                <li key={`${title}_${data}_${random}`}>
+                  <p css={cssObj.valueDesc}>{data}</p>
+                  <button
+                    type="button"
+                    aria-label="입력한 복지 제거하기"
+                    css={cssObj.deleteButton}
+                    onClick={() => {
+                      deleteKeyHandler(index);
+                    }}
+                  >
+                    <FiMinus />
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         )}
       </div>

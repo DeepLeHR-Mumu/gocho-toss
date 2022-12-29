@@ -3,6 +3,11 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
+  spinner: css`
+    position: relative;
+    width: 100%;
+    height: 100vh;
+  `,
   wrapper: css`
     margin-top: 2rem;
   `,

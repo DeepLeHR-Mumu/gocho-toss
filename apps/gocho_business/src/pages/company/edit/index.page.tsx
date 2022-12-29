@@ -2,6 +2,8 @@ import { ReactElement, useEffect } from "react";
 import { FiEdit } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 
+import { Spinner } from "shared-ui/common/atom/spinner";
+
 import { useAddCompanyDetail } from "@/apis/company/useAddCompany";
 import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 import { CommonStatusChip } from "@/components/common";
@@ -74,12 +76,26 @@ const CompanyEditPage: NextPageWithLayout = () => {
         pay_avg: companyData.payAvg,
         pay_start: companyData.payStart,
         pay_desc: companyData.payDesc || "",
+        welfare: {
+          money: companyData.welfare.money,
+          health: companyData.welfare.health,
+          life: companyData.welfare.life,
+          holiday: companyData.welfare.holiday,
+          facility: companyData.welfare.facility,
+          vacation: companyData.welfare.vacation,
+          growth: companyData.welfare.growth,
+          etc: companyData.welfare.etc,
+        },
       });
     }
   }, [companyData, reset]);
 
   if (isCompanyDataLoading || !companyData) {
-    return null;
+    return (
+      <div css={cssObj.spinner}>
+        <Spinner />
+      </div>
+    );
   }
 
   return (

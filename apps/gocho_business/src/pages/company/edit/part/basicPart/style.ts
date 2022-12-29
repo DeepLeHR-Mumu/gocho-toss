@@ -121,16 +121,6 @@ export const cssObj = {
       }
     }
   `,
-  mapBox: css`
-    background-color: #666;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 0.5rem;
-    width: 25rem;
-    height: 15rem;
-  `,
   nozoBox: css`
     display: flex;
     margin-bottom: 0.5rem;
