@@ -4,7 +4,7 @@ import { AxiosError } from "axios";
 import { axiosInstance } from "@/apis/useIsRefreshLock";
 import { ErrorResponseDef } from "@/types/errorType";
 
-import { factoryArrKeyObj, GetRecruiterArrDef, ResponseObjDef } from "./type";
+import { recruiterArrKeyObj, GetRecruiterArrDef, ResponseObjDef } from "./type";
 import { recruiterArrSelector } from "./util";
 
 export const getRecruiterArr: GetRecruiterArrDef = async () => {
@@ -14,7 +14,7 @@ export const getRecruiterArr: GetRecruiterArrDef = async () => {
 
 export const useRecruiterArr = () =>
   useQuery<ResponseObjDef, AxiosError<ErrorResponseDef>, ReturnType<typeof recruiterArrSelector>>(
-    factoryArrKeyObj.all,
+    recruiterArrKeyObj.all,
     getRecruiterArr,
     {
       select: (data) => recruiterArrSelector(data),

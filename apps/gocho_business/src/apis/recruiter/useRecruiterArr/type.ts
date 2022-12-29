@@ -8,7 +8,7 @@ export interface ResponseObjDef {
   }[];
 }
 
-export const factoryArrKeyObj = {
+export const recruiterArrKeyObj = {
   all: [{ data: "recruiterArr" }] as const,
 };
 
