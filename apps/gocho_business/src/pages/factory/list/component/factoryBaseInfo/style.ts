@@ -64,7 +64,7 @@ export const cssObj = {
           border: 1px solid ${COLORS.ERROR_RED40};
         `
       : css`
-          border: 1px solid #777777;
+          border: 1px solid ${COLORS.GRAY35};
         `;
 
     return css`
@@ -72,7 +72,7 @@ export const cssObj = {
       padding: 0.5rem 1rem;
       width: 100%;
       ::placeholder {
-        color: #777777;
+        color: ${COLORS.GRAY35};
       }
     `;
   },

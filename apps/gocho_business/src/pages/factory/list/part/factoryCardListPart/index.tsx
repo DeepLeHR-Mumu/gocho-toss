@@ -14,7 +14,7 @@ import { cssObj } from "./style";
 import { FactoryCardListPartProps } from "./type";
 import { FACTORY_MESSSAGE_OBJ } from "../registerPart/constant";
 
-export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = ({ setIsEditing, isEditing }) => {
+export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = ({ setEditingIndex, editingIndex }) => {
   const { data: factoryDataArr, isSuccess: factoryDataArrSuccess, isLoading: factoryDataArrLoading } = useFactoryArr();
   const { mutate: deleteFactoryMutation } = useDeleteFactory();
 
@@ -35,7 +35,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
 
         return (
           <div css={cssObj.wrapper} key={factoryData.id} data-testid="factory/list/factoryCardListPart">
-            {isEditing === index && (
+            {editingIndex === index && (
               <div css={cssObj.editingBox}>
                 <p>수정중</p>
               </div>
@@ -60,7 +60,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                   text="공장수정"
                   Icon={FiEdit}
                   backgoundColor={COLORS.BLUE_FIRST50}
-                  onClickHandler={() => setIsEditing(index)}
+                  onClickHandler={() => setEditingIndex(index)}
                 />
                 <CommonRoundButton
                   text="공장삭제"

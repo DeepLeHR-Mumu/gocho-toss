@@ -11,7 +11,7 @@ import { globalStyle } from "@/styles/globalStyle";
 import { useAxiosInterceptor } from "@/apis/useIsRefreshLock";
 import { ToastPlaceholder } from "@/components/global/toast/toastPlaceHolder";
 import { PrivateRouteLayout } from "@/components/global/layout/privateRouteLayout";
-import { INTERNAL_URL } from "@/constants";
+import { INTERNAL_URL } from "@/constants/url";
 
 export type NextPageWithLayout<P = Record<string, never>, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;

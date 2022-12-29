@@ -10,7 +10,7 @@ import { FactoryBaseInfo } from "../../component/factoryBaseInfo";
 import { FactoryDetailInfo } from "../../component/factoryDetailInfo";
 import { defaultInput, FACTORY_MESSSAGE_OBJ } from "./constant";
 
-export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ isEditing, setIsEditing }) => {
+export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingIndex, setEditingIndex }) => {
   const formObj = useForm<FactoryRegisterDef>();
   const { handleSubmit, watch, reset } = formObj;
 
@@ -23,15 +23,15 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ isEditing, 
         ...factoryRequestObj,
         bus_bool: factoryRequestObj.bus_bool === "true",
         dormitory_bool: factoryRequestObj.dormitory_bool === "true",
-        id: isEditing && factoryDataArr?.[Number(isEditing)]?.id,
+        id: editingIndex === null ? undefined : factoryDataArr?.[Number(editingIndex)]?.id,
       });
       reset(defaultInput);
-      setIsEditing(false);
+      setEditingIndex(null);
     }
   };
 
   useEffect(() => {
-    if (isEditing === false) {
+    if (editingIndex === null) {
       reset(defaultInput);
       return;
     }
@@ -39,17 +39,17 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ isEditing, 
       return;
     }
     reset({
-      factory_name: factoryDataArr[isEditing].name,
-      address: factoryDataArr[isEditing].address,
-      product: factoryDataArr[isEditing].product,
-      male_number: factoryDataArr[isEditing].maleNumber,
-      female_number: factoryDataArr[isEditing].femaleNumber,
-      bus_bool: factoryDataArr[isEditing].bus.exists ? "true" : "false",
-      bus_etc: factoryDataArr[isEditing].bus.desc || "",
-      dormitory_bool: factoryDataArr[isEditing].dormitory.exists ? "true" : "false",
-      dormitory_etc: factoryDataArr[isEditing].dormitory.desc || "",
+      factory_name: factoryDataArr[editingIndex].name,
+      address: factoryDataArr[editingIndex].address,
+      product: factoryDataArr[editingIndex].product,
+      male_number: factoryDataArr[editingIndex].maleNumber,
+      female_number: factoryDataArr[editingIndex].femaleNumber,
+      bus_bool: factoryDataArr[editingIndex].bus.exists ? "true" : "false",
+      bus_etc: factoryDataArr[editingIndex].bus.desc || "",
+      dormitory_bool: factoryDataArr[editingIndex].dormitory.exists ? "true" : "false",
+      dormitory_etc: factoryDataArr[editingIndex].dormitory.desc || "",
     });
-  }, [factoryDataArr, isEditing, reset]);
+  }, [factoryDataArr, editingIndex, reset]);
 
   const totalWorkerNumber = Number(watch("male_number") || 0) + Number(watch("female_number") || 0);
 
@@ -63,14 +63,14 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ isEditing, 
           </section>
         </div>
         <div css={cssObj.buttonCenterContainer}>
-          {isEditing === false ? (
+          {editingIndex === null ? (
             <button type="submit">공장 등록</button>
           ) : (
             <div css={cssObj.buttonContainer}>
               <button
                 type="button"
                 onClick={() => {
-                  setIsEditing(false);
+                  setEditingIndex(null);
                 }}
               >
                 수정 취소

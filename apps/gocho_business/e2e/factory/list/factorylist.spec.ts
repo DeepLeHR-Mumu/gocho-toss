@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import { INTERNAL_URL } from "@/constants";
+import { INTERNAL_URL } from "@/constants/url";
 
 test.beforeEach(async ({ page }) => {
   await page.goto(INTERNAL_URL.LOGIN);

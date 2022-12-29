@@ -6,15 +6,15 @@ import { AiOutlineEnvironment } from "react-icons/ai";
 import { COLORS } from "shared-style/color";
 
 import { CommonRoundButton, CommonStatusChip } from "@/components/common";
+import { POSTCODE_SCRIPT_URL } from "@/constants/url";
 
 import { cssObj } from "./style";
 import { FactoryBaseInfoProps } from "./type";
-import { ADDRESS_SCRIPT_URL } from "./constant";
 
 export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formObj }) => {
   const { register, formState, setValue } = formObj;
 
-  const open = useDaumPostcodePopup(ADDRESS_SCRIPT_URL);
+  const openPostCodePopup = useDaumPostcodePopup(POSTCODE_SCRIPT_URL);
 
   return (
     <div css={cssObj.container} data-testid="factory/list/FactoryBaseInfo">
@@ -34,7 +34,7 @@ export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formO
           Icon={FiMap}
           text="주소찾기"
           onClickHandler={() =>
-            open({
+            openPostCodePopup({
               onComplete: (addressObj: Address) => {
                 setValue("address", addressObj.address);
               },
@@ -47,7 +47,7 @@ export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formO
           css={cssObj.addrOpener}
           onClick={(buttonClickEvent) => {
             buttonClickEvent.stopPropagation();
-            open({
+            openPostCodePopup({
               onComplete: (addressObj: Address) => {
                 setValue("address", addressObj.address);
               },

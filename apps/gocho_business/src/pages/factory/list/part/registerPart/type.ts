@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
 
 export interface RegisterPartProps {
-  isEditing: false | number;
-  setIsEditing: Dispatch<SetStateAction<number | false>>;
+  editingIndex: null | number;
+  setEditingIndex: Dispatch<SetStateAction<number | null>>;
 }
 
 export interface FactoryRegisterDef {
