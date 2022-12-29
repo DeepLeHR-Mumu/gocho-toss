@@ -7,7 +7,7 @@ export interface ResponseObjDef {
   data: {
     id: number;
     status: {
-      name: "등록전" | "승인됨" | "반려됨" | "검수중" | "수정대기";
+      name: "진행중" | "등록대기" | "수정대기" | "등록반려" | "수정반려";
       reason: string | null;
     };
     business_number: string;
