@@ -30,7 +30,6 @@ export const cssObj = {
   `,
 
   companyGenreCSS: css`
-    font-weight: 400;
   `,
 
   countingInfoBox: css`

@@ -29,6 +29,5 @@ export const cssObj = {
     `;
   },
   text: css`
-    font-weight: 400;
   `,
 };

@@ -18,5 +18,4 @@ export const userImg = css`
 `;
 
 export const nameCSS = css`
-  font-weight: 400;
 `;
