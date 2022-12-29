@@ -1,4 +1,4 @@
-import { UseFormRegisterReturn, UseFormReturn } from "react-hook-form";
+import { UseFormRegisterReturn, UseFormSetValue } from "react-hook-form";
 import { PostSubmitValues } from "../../type";
 
 // interface SetValueDef {
@@ -14,19 +14,20 @@ import { PostSubmitValues } from "../../type";
 //   };
 // }
 
+export type KeyName =
+  | "welfare.money"
+  | "welfare.health"
+  | "welfare.life"
+  | "welfare.holiday"
+  | "welfare.facility"
+  | "welfare.vacation"
+  | "welfare.growth"
+  | "welfare.etc";
+
 export interface WelfareFormProps {
-  companyForm: UseFormReturn<PostSubmitValues>;
+  setValue: UseFormSetValue<PostSubmitValues>;
   title: string;
   desc: string;
-  keyName:
-    | "welfare.money"
-    | "welfare.health"
-    | "welfare.life"
-    | "welfare.holiday"
-    | "welfare.facility"
-    | "welfare.vacation"
-    | "welfare.growth"
-    | "welfare.etc";
   registerObj: UseFormRegisterReturn;
   valueArr: string[] | null;
 }

@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import { FiEdit } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 
@@ -8,6 +8,8 @@ import { CommonStatusChip } from "@/components/common";
 import { PageLayout, GlobalLayout, Footer } from "@/components/global/layout";
 import { NextPageWithLayout } from "@/pages/_app.page";
 import { useUserState } from "@/globalStates/useUserState";
+import { useToast } from "@/globalStates/useToast";
+import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
 
 import { BasicPart } from "./part/basicPart";
 import { WelfalePart } from "./part/welfarePart";
@@ -16,29 +18,67 @@ import { cssObj } from "./style";
 
 const CompanyEditPage: NextPageWithLayout = () => {
   const { userInfoData } = useUserState();
+  const { setToast } = useToast();
+  const { data: companyData, isLoading: isCompanyDataLoading } = useCompanyDetail({
+    companyId: userInfoData?.companyId,
+  });
   const { mutate: putCompanyDetail } = useAddCompanyDetail();
 
   const companyForm = useForm<PostSubmitValues>({
     mode: "onChange",
   });
-  const { handleSubmit } = companyForm;
 
+  const { handleSubmit, reset } = companyForm;
   const addCompanyDetail = (formData: PostSubmitValues) => {
     if (window.confirm("수정하쉴?")) {
-      putCompanyDetail({
-        companyId: Number(userInfoData?.companyId),
-        dto: {
-          ...formData,
-          nozo: {
-            exists: formData.nozo.exists === "true",
-            desc: formData.nozo.desc,
+      putCompanyDetail(
+        {
+          companyId: userInfoData?.companyId as number,
+          dto: {
+            ...formData,
+            welfare: {
+              money: formData.welfare.money || null,
+              health: formData.welfare.health || null,
+              life: formData.welfare.life || null,
+              holiday: formData.welfare.holiday || null,
+              facility: formData.welfare.facility || null,
+              etc: formData.welfare.etc || null,
+              growth: formData.welfare.growth || null,
+              vacation: formData.welfare.vacation || null,
+            },
+            nozo: {
+              exists: formData.nozo.exists === "true",
+              desc: formData.nozo.desc || null,
+            },
           },
         },
-      });
+        {
+          onSuccess: () => {
+            setToast("토스트 메시지");
+          },
+        }
+      );
     }
   };
 
-  if (!userInfoData) {
+  useEffect(() => {
+    if (companyData) {
+      reset({
+        employee_number: companyData.employeeNumber,
+        intro: companyData.intro || "",
+        address: companyData.address,
+        nozo: {
+          exists: companyData.nozo.exists ? "true" : "false",
+          desc: companyData.nozo.desc || "",
+        },
+        pay_avg: companyData.payAvg,
+        pay_start: companyData.payStart,
+        pay_desc: companyData.payDesc || "",
+      });
+    }
+  }, [companyData, reset]);
+
+  if (isCompanyDataLoading || !companyData) {
     return null;
   }
 
@@ -52,15 +92,15 @@ const CompanyEditPage: NextPageWithLayout = () => {
               <p css={cssObj.desc}>기업 정보에 변화가 있다면 작성 후 수정완료를 눌러주세요</p>
             </div>
             <div css={cssObj.flexBox}>
-              <CommonStatusChip status="승인됨" />
+              <CommonStatusChip status={companyData.status.name} />
               <button type="submit">
                 <FiEdit /> 기업 정보 수정완료
               </button>
             </div>
           </header>
           <section css={cssObj.companyInfoBox}>
-            <BasicPart userInfoData={userInfoData} companyForm={companyForm} />
-            <WelfalePart userInfoData={userInfoData} companyForm={companyForm} />
+            <BasicPart companyForm={companyForm} />
+            <WelfalePart companyForm={companyForm} />
           </section>
           <button type="submit">기업 정보 수정완료</button>
         </form>

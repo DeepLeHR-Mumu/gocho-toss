@@ -1,10 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { AxiosError } from "axios";
 
 import { axiosInstance } from "@/apis/useIsRefreshLock";
-import { ErrorResponseDef } from "@/types/errorType";
 
-import { companyDetailKeyObj, GetCompanyDetailDef, RequestObjDef, ResponseObjDef } from "./type";
+import { companyDetailKeyObj, GetCompanyDetailDef, RequestObjDef } from "./type";
 import { companyDetailSelector } from "./util";
 
 export const getCompanyDetail: GetCompanyDetailDef = async ({ queryKey: [{ requestObj }] }) => {
@@ -12,12 +10,10 @@ export const getCompanyDetail: GetCompanyDetailDef = async ({ queryKey: [{ reque
   return data;
 };
 
-export const useCompanyDetail = (isLogin: boolean, requestObj: RequestObjDef) =>
-  useQuery<ResponseObjDef, AxiosError<ErrorResponseDef>, ReturnType<typeof companyDetailSelector>>(
-    companyDetailKeyObj.detail(requestObj),
-    getCompanyDetail,
-    {
-      select: (data) => companyDetailSelector(data),
-      enabled: Boolean(isLogin),
-    }
-  );
+export const useCompanyDetail = (requestObj: RequestObjDef) =>
+  useQuery(companyDetailKeyObj.detail(requestObj), getCompanyDetail, {
+    enabled: Boolean(requestObj.companyId),
+    select: (data) => companyDetailSelector(data),
+  });
+
+// <ResponseObjDef, AxiosError<ErrorResponseDef>, ReturnType<typeof companyDetailSelector>>

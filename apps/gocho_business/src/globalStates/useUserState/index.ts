@@ -40,9 +40,9 @@ export const useUserState: UseUserStateDef = () => {
     }
   }, [userInfoData, setUserInfoData]);
 
-  if (!userInfoData) {
-    return { setUserInfoData };
+  if (userInfoData) {
+    return { userInfoData, setUserInfoData };
   }
 
-  return { userInfoData, setUserInfoData };
+  return { setUserInfoData };
 };

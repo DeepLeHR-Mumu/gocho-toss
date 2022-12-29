@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent } from "react";
 import { BiUserVoice } from "react-icons/bi";
 import { FiMap, FiMapPin, FiUsers } from "react-icons/fi";
 
@@ -6,30 +6,35 @@ import { Spinner } from "shared-ui/common/atom/spinner";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 
 import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
+import { useUserState } from "@/globalStates/useUserState";
 
 import { BasicPartProps } from "./type";
 import { cssObj } from "./style";
 
-export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, userInfoData }) => {
-  const { data: companyData, isLoading: isCompanyDataLoading } = useCompanyDetail(true, {
-    companyId: userInfoData.companyId,
-  });
-  const { register, reset } = companyForm;
+export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) => {
+  const { register } = companyForm;
+  const { userInfoData } = useUserState();
 
-  useEffect(() => {
-    reset({
-      employee_number: companyData?.employeeNumber,
-      intro: companyData?.intro || "",
-      address: companyData?.address,
-      nozo: {
-        exists: companyData?.nozo.exists ? "true" : "false",
-        desc: companyData?.nozo.desc || "",
-      },
-      pay_avg: companyData?.payAvg,
-      pay_start: companyData?.payStart,
-      pay_desc: companyData?.payDesc || "",
-    });
-  }, [companyData, reset]);
+  const { data: companyData, isLoading: isCompanyDataLoading } = useCompanyDetail({
+    companyId: userInfoData?.companyId,
+  });
+
+  // useEffect(() => {
+  //   if (companyData) {
+  //     reset({
+  //       // employee_number: companyData.employeeNumber,
+  //       intro: companyData.intro || "",
+  //       address: companyData.address,
+  //       nozo: {
+  //         exists: companyData.nozo.exists ? "true" : "false",
+  //         desc: companyData.nozo.desc || "",
+  //       },
+  //       pay_avg: companyData.payAvg,
+  //       pay_start: companyData.payStart,
+  //       pay_desc: companyData.payDesc || "",
+  //     });
+  //   }
+  // }, [companyData, reset, router]);
 
   if (!companyData || isCompanyDataLoading) {
     return (
@@ -102,7 +107,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, user
             <p css={cssObj.unit}>없음</p>
           </SharedRadioButton>
         </div>
-        <input type="text" placeholder="보충설명(선택)" css={cssObj.inputLine} />
+        <input type="text" {...register("nozo.desc")} placeholder="보충설명(선택)" css={cssObj.inputLine} />
       </div>
       <div css={cssObj.lineBox(80)}>
         <strong css={cssObj.subTitle}>연봉 정보</strong>

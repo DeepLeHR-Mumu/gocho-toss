@@ -1,35 +1,25 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { FiCornerDownLeft, FiMinus } from "react-icons/fi";
 
-import { WelfareFormProps } from "./type";
+import { WelfareFormProps, KeyName } from "./type";
 import { cssObj } from "./style";
 
-export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
-  companyForm,
-  keyName,
-  title,
-  desc,
-  registerObj,
-  valueArr,
-}) => {
-  const [listArr, setListArr] = useState<string[]>([]);
+export const WelfareForm: FunctionComponent<WelfareFormProps> = ({ setValue, title, desc, registerObj, valueArr }) => {
+  const [listArr, setListArr] = useState<string[] | null>(valueArr || []);
   const [valueText, setValueText] = useState<string>("");
 
   useEffect(() => {
-    if (valueArr === null) {
-      setListArr([]);
-      return;
+    if (!listArr || listArr.length === 0) {
+      setValue(registerObj.name as KeyName, null);
     }
-    setListArr(valueArr);
-  }, [valueArr]);
+  }, [listArr, registerObj.name, setValue]);
 
   const deleteKeyHandler = (index: number) => {
     setListArr((prevListArr) => {
       const filterArr = prevListArr && prevListArr.filter((_, filterIndex) => filterIndex !== index);
-      companyForm.setValue(keyName, listArr);
-
-      if (filterArr.length === 0) {
-        companyForm.setValue(keyName, null);
+      if (filterArr?.length === 0) {
+        setValue(registerObj.name as KeyName, null);
+        return null;
       }
       return filterArr;
     });
@@ -37,7 +27,14 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
 
   const addValueHandler = (text: string) => {
     if (valueText !== "") {
-      setListArr((prevListArr) => [...prevListArr, text]);
+      setListArr((prevListArr) => {
+        if (!prevListArr) {
+          setValue(registerObj.name as KeyName, [text]);
+          return [text];
+        }
+        setValue(registerObj.name as KeyName, [...prevListArr, text]);
+        return [...prevListArr, text];
+      });
       setValueText("");
     }
   };
@@ -50,7 +47,6 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
           type="text"
           placeholder="직접 입력하여 추가"
           css={cssObj.inputLine}
-          {...registerObj}
           value={valueText}
           onChange={(onChangeEvent) => {
             setValueText(onChangeEvent.target.value);
@@ -59,6 +55,7 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
             if (onKeyDownEvent.keyCode === 229) return;
 
             if (onKeyDownEvent.key === "Enter") {
+              onKeyDownEvent.preventDefault();
               addValueHandler(valueText);
             }
           }}
@@ -76,11 +73,11 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
       </div>
       <div css={cssObj.container}>
         <p css={cssObj.desc}>{desc}</p>
-        {listArr.length === 0 ? (
+        {listArr?.length === 0 ? (
           <p css={cssObj.noData}>입력한 복지가 없습니다</p>
         ) : (
           <ul css={cssObj.listBox}>
-            {listArr.map((data, index) => (
+            {listArr?.map((data, index) => (
               <li key={`${title}_${data}`}>
                 <p css={cssObj.valueDesc}>{data}</p>
                 <button

@@ -3,10 +3,7 @@ import { ResponseObjDef } from "./type";
 export const companyDetailSelector = ({ data }: ResponseObjDef) => ({
   id: data.id,
   status: data.status,
-  logoUrl: data.logo_url,
   name: data.name,
-  youtubeUrl: data.youtube_url,
-  industry: data.industry,
   size: data.size,
   businessNumber: data.business_number,
   employeeNumber: data.employee_number,

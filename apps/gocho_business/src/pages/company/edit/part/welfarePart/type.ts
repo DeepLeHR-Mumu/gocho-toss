@@ -16,15 +16,4 @@ export interface PostWelfaleSubmitValues {
 
 export interface WelfarePartProps {
   companyForm: UseFormReturn<PostSubmitValues>;
-  userInfoData: {
-    id: number;
-    companyId: number;
-    companyName: string;
-    companyLogo: string;
-    email: string;
-    name: string;
-    department: string;
-    iat: number;
-    exp: number;
-  };
 }

@@ -1,18 +1,13 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
-import { AxiosError, AxiosResponse } from "axios";
-import { ErrorResponseDef } from "@/types/errorType";
-// import { AxiosError, AxiosResponse } from "axios";
-
-// import { ErrorResponseDef } from "@/types/errorType";
 
 export interface RequestObjDef {
-  companyId: number;
+  companyId: number | undefined;
 }
 export interface ResponseObjDef {
   data: {
     id: number;
     status: {
-      name: string;
+      name: "등록전" | "승인됨" | "반려됨" | "검수중" | "수정대기";
       reason: string | null;
     };
     business_number: string;
@@ -50,7 +45,5 @@ export const companyDetailKeyObj = {
 };
 
 export interface GetCompanyDetailDef {
-  ({ queryKey }: QueryFunctionContext<ReturnType<typeof companyDetailKeyObj.detail>>): Promise<
-    AxiosResponse<ResponseObjDef> | AxiosError<ErrorResponseDef>
-  >;
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof companyDetailKeyObj.detail>>): Promise<ResponseObjDef>;
 }

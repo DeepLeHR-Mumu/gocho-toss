@@ -3,7 +3,4 @@ import { PostSubmitValues } from "../../type";
 
 export interface BasicPartProps {
   companyForm: UseFormReturn<PostSubmitValues>;
-  userInfoData: {
-    companyId: number;
-  };
 }
