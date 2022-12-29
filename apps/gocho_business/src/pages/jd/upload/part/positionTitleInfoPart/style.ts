@@ -51,7 +51,43 @@ export const cssObj = {
     gap: 0 2rem;
   `,
 
+  taskContainer: css`
+    position: relative;
+    width: 20rem;
+    height: 2.5rem;
+    cursor: pointer;
+  `,
+
+  taskList: (isOpen: boolean) => css`
+    position: absolute;
+    top: 2.75rem;
+    left: 0;
+    width: 100%;
+    max-height: ${isOpen ? "500px" : 0};
+    border: ${isOpen ? `1px solid ${COLORS.GRAY30}` : 0};
+    overflow: hidden;
+  `,
+
+  option: css`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 20rem;
+    height: 2.5rem;
+    padding: 0 1rem;
+    background-color: ${COLORS.GRAY100};
+    color: ${COLORS.GRAY30};
+    transition: 0.1s;
+
+    :hover {
+      background-color: ${COLORS.GRAY80};
+    }
+  `,
+
   input: (width: number) => css`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     border: 1px solid ${COLORS.GRAY10};
     width: ${width}rem;
     height: 2.5rem;
