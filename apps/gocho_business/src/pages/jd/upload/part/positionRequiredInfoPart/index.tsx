@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
-import { CheckLabel } from "../../component/checkLabel";
+import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { PositionRequiredInfoPartProps } from "./type";
 import { contractTypeArr, requiredExpArr } from "./constant";
 import { cssObj } from "./style";
@@ -18,14 +18,16 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           <p>계약 형태</p>
           <div css={cssObj.labelContainer}>
             {contractTypeArr.map((contractName) => (
-              <CheckLabel
+              <SharedRadioButton
                 key={`${contractName}${id}`}
-                register={jobForm.register}
-                index={index}
-                field="contract_type"
                 value={contractName}
-                watch={jobForm.watch("position_arr")[index].contract_type}
-              />
+                id={`${contractName}${id}`}
+                registerObj={jobForm.register(`position_arr.${index}.contract_type`, {
+                  required: true,
+                })}
+              >
+                {contractName}
+              </SharedRadioButton>
             ))}
           </div>
         </div>
@@ -69,14 +71,16 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           <p>경력 조건</p>
           <div css={cssObj.labelContainer}>
             {requiredExpArr.map((expName) => (
-              <CheckLabel
+              <SharedRadioButton
                 key={`${expName}${id}`}
-                register={jobForm.register}
-                index={index}
-                field="contract_type"
                 value={expName}
-                watch={jobForm.watch("position_arr")[index].required_exp}
-              />
+                id={`${expName}${id}`}
+                registerObj={jobForm.register(`position_arr.${index}.required_exp`, {
+                  required: true,
+                })}
+              >
+                {expName}
+              </SharedRadioButton>
             ))}
           </div>
         </div>
