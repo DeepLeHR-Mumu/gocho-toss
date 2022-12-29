@@ -11,7 +11,7 @@ export const blankPosition = {
   conversion_rate: null,
   task_main: "",
   task_sub_arr: [],
-  task_detail_arr: [],
+  task_detail_arr: [{ value: "" }],
   rotation_arr: [],
   rotation_etc: null,
   place: {

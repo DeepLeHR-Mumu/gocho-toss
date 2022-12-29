@@ -87,7 +87,7 @@ export const cssObj = {
     }
   `,
 
-  deleteCertiButton: css`
+  deleteInputButton: css`
     display: flex;
     align-items: center;
     justify-content: center;

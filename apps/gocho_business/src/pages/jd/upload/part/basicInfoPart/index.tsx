@@ -87,7 +87,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               />
               <button
                 type="button"
-                css={cssObj.deleteCertiButton}
+                css={cssObj.deleteInputButton}
                 onClick={() => {
                   processArr.remove(index);
                 }}
@@ -119,7 +119,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               />
               <button
                 type="button"
-                css={cssObj.deleteCertiButton}
+                css={cssObj.deleteInputButton}
                 onClick={() => {
                   applyRouteArr.remove(index);
                 }}
@@ -236,7 +236,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               />
               <button
                 type="button"
-                css={cssObj.deleteCertiButton}
+                css={cssObj.deleteInputButton}
                 onClick={() => {
                   etcArr.remove(index);
                 }}

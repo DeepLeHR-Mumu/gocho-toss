@@ -5,9 +5,9 @@ export const cssObj = {
   cardContainer: css`
     padding: 2rem;
     margin: 2.5rem 0;
-    background-color: ${COLORS.GRAY90};
-    border-top: 1px solid ${COLORS.GRAY70};
-    border-bottom: 1px solid ${COLORS.GRAY70};
+    background-color: ${COLORS.GRAY95};
+    border-left: 1px solid ${COLORS.GRAY70};
+    border-right: 1px solid ${COLORS.GRAY70};
   `,
 
   submitButton: css`

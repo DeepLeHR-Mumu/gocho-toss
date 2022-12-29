@@ -1,10 +1,11 @@
-import { UseFieldArrayAppend, UseFieldArrayRemove, UseFormReturn } from "react-hook-form";
+import { Control, UseFieldArrayAppend, UseFieldArrayRemove, UseFormReturn } from "react-hook-form";
 import { JobFormValues } from "../../type";
 
 export interface PositionTitleInfoPartProps {
   id: string;
-  index: number;
+  positionIndex: number;
   jobForm: UseFormReturn<JobFormValues>;
-  append: UseFieldArrayAppend<JobFormValues, "position_arr">;
-  remove: UseFieldArrayRemove;
+  appendPosition: UseFieldArrayAppend<JobFormValues, "position_arr">;
+  removePosition: UseFieldArrayRemove;
+  control: Control<JobFormValues>;
 }

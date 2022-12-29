@@ -38,8 +38,11 @@ export const cssObj = {
     padding: 0 1rem;
   `,
 
-  inputContainer: css`
+  container: css`
     margin-top: 2rem;
+    p {
+      line-height: 2;
+    }
   `,
 
   taskInputContainer: css`
@@ -48,18 +51,60 @@ export const cssObj = {
     gap: 0 2rem;
   `,
 
-  inputLine: css`
+  input: (width: number) => css`
     border: 1px solid ${COLORS.GRAY10};
+    width: ${width}rem;
     height: 2.5rem;
     padding: 0 1rem;
-    margin-top: 0.5rem;
     font-size: 1rem;
-    width: 100%;
+    background-color: ${COLORS.GRAY100};
     font-weight: 400;
 
     ::placeholder {
       color: ${COLORS.GRAY30};
     }
+  `,
+
+  desc: css`
+    font-size: 0.75rem;
+  `,
+
+  inputContainer: css`
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 2rem;
+  `,
+
+  inputLabel: (width: number) => css`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: ${width}rem;
+    height: 2.5rem;
+    border: 1px solid ${COLORS.GRAY10};
+    background-color: ${COLORS.GRAY100};
+    padding: 0 0.5rem 0 1rem;
+  `,
+
+  inputWithButton: css`
+    font-size: 1rem;
+    width: calc(100% - 3rem);
+    font-weight: 400;
+    ::placeholder {
+      color: ${COLORS.GRAY30};
+    }
+  `,
+
+  deleteInputButton: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 1.75rem;
+    height: 1.75rem;
+    color: ${COLORS.GRAY10};
+    background-color: ${COLORS.GRAY70};
   `,
 
   hireNumberContainer: css`
@@ -71,8 +116,14 @@ export const cssObj = {
   hireNumberButton: css`
     height: 2.25rem;
     padding: 0 1rem;
-    margin-top: 0.5rem;
     border: 1px solid ${COLORS.GRAY70};
+    background-color: ${COLORS.GRAY100};
     border-radius: 0.5rem;
+  `,
+
+  hireNumberInputContainer: css`
+    display: flex;
+    align-items: center;
+    gap: 0 0.55rem;
   `,
 };

@@ -60,6 +60,10 @@ const JdUploadPage: NextPageWithLayout = () => {
           process_arr: getFieldArrayValue(jobObj.process_arr),
           apply_route_arr: getFieldArrayValue(jobObj.apply_route_arr),
           etc_arr: getFieldArrayValue(jobObj.etc_arr || []),
+          position_arr: jobObj.position_arr.map((position) => ({
+            ...position,
+            task_detail_arr: getFieldArrayValue(position.task_detail_arr),
+          })),
         },
       },
       {
@@ -85,7 +89,14 @@ const JdUploadPage: NextPageWithLayout = () => {
             <ul>
               {fields.map((item, index) => (
                 <li key={`${item.id}`} css={cssObj.cardContainer}>
-                  <PositionTitleInfoPart id={item.id} index={index} jobForm={jobForm} append={append} remove={remove} />
+                  <PositionTitleInfoPart
+                    id={item.id}
+                    positionIndex={index}
+                    jobForm={jobForm}
+                    appendPosition={append}
+                    removePosition={remove}
+                    control={control}
+                  />
                   <PositionRequiredInfoPart id={item.id} index={index} jobForm={jobForm} />
                   <PositionWorkInfoPart id={item.id} index={index} jobForm={jobForm} />
                 </li>
