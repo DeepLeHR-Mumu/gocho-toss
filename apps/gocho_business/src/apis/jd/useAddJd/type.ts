@@ -26,8 +26,7 @@ export interface RequestObjDef {
       task_main: string;
       task_sub_arr: string[];
       task_detail_arr: string[];
-      rotation_arr: string[] | null;
-      rotation_etc: string | null;
+      rotation_arr: string[];
       place: {
         type: string;
         address_arr: string[] | null;

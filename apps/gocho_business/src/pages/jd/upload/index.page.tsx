@@ -64,6 +64,8 @@ const JdUploadPage: NextPageWithLayout = () => {
             ...position,
             task_detail_arr: getFieldArrayValue(position.task_detail_arr),
             required_etc_arr: getFieldArrayValueWithNull(position.required_etc_arr),
+            pay_arr: getFieldArrayValue(position.pay_arr),
+            preferred_etc_arr: getFieldArrayValueWithNull(position.preferred_etc_arr),
           })),
         },
       },
@@ -99,7 +101,7 @@ const JdUploadPage: NextPageWithLayout = () => {
                     control={control}
                   />
                   <PositionRequiredInfoPart id={item.id} positionIndex={index} jobForm={jobForm} control={control} />
-                  <PositionWorkInfoPart id={item.id} index={index} jobForm={jobForm} />
+                  <PositionWorkInfoPart id={item.id} positionIndex={index} jobForm={jobForm} control={control} />
                 </li>
               ))}
             </ul>

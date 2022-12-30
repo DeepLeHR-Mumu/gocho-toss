@@ -21,7 +21,7 @@ export const blankPosition = {
     etc: "",
   },
   hire_number: 0,
-  pay_arr: [],
+  pay_arr: [{ value: "" }],
   preferred_certi_arr: [],
-  preferred_etc_arr: null,
+  preferred_etc_arr: [{ value: "" }],
 };

@@ -14,23 +14,6 @@ export const cssObj = {
     }
   `,
 
-  input: (width: number) => css`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px solid ${COLORS.GRAY10};
-    width: ${width}rem;
-    height: 2.5rem;
-    padding: 0 1rem;
-    font-size: 1rem;
-    background-color: ${COLORS.GRAY100};
-    font-weight: 400;
-
-    ::placeholder {
-      color: ${COLORS.GRAY30};
-    }
-  `,
-
   labelContainer: css`
     display: flex;
     gap: 0 2.5rem;

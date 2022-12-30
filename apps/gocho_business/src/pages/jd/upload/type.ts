@@ -22,8 +22,7 @@ export interface JobFormValues {
     task_main: string;
     task_sub_arr: string[];
     task_detail_arr: { value: string }[];
-    rotation_arr: string[] | null;
-    rotation_etc: string | null;
+    rotation_arr: string[];
     place: {
       type: string;
       address_arr: string[] | null;
@@ -31,8 +30,8 @@ export interface JobFormValues {
       etc: string | null;
     };
     hire_number: number;
-    pay_arr: string[];
+    pay_arr: { value: string }[];
     preferred_certi_arr: string[] | null;
-    preferred_etc_arr: string[] | null;
+    preferred_etc_arr: { value: string }[];
   }[];
 }
