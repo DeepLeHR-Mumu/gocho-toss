@@ -14,7 +14,7 @@ import { PositionRequiredInfoPart } from "./part/positionRequiredInfoPart";
 import { PositionWorkInfoPart } from "./part/positionWorkInfoPart";
 import { JobFormValues } from "./type";
 import { blankPosition } from "./constant";
-import { getFieldArrayValue } from "./util";
+import { getFieldArrayValue, getFieldArrayValueWithNull } from "./util";
 import { cssObj } from "./style";
 
 const JdUploadPage: NextPageWithLayout = () => {
@@ -59,10 +59,11 @@ const JdUploadPage: NextPageWithLayout = () => {
           end_time: new Date(jobObj.end_time).getTime(),
           process_arr: getFieldArrayValue(jobObj.process_arr),
           apply_route_arr: getFieldArrayValue(jobObj.apply_route_arr),
-          etc_arr: getFieldArrayValue(jobObj.etc_arr || []),
+          etc_arr: getFieldArrayValueWithNull(jobObj.etc_arr),
           position_arr: jobObj.position_arr.map((position) => ({
             ...position,
             task_detail_arr: getFieldArrayValue(position.task_detail_arr),
+            required_etc_arr: getFieldArrayValueWithNull(position.required_etc_arr),
           })),
         },
       },
@@ -97,7 +98,7 @@ const JdUploadPage: NextPageWithLayout = () => {
                     removePosition={remove}
                     control={control}
                   />
-                  <PositionRequiredInfoPart id={item.id} index={index} jobForm={jobForm} />
+                  <PositionRequiredInfoPart id={item.id} positionIndex={index} jobForm={jobForm} control={control} />
                   <PositionWorkInfoPart id={item.id} index={index} jobForm={jobForm} />
                 </li>
               ))}

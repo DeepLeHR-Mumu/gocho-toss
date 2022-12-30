@@ -6,7 +6,7 @@ export const blankPosition = {
   required_exp: "",
   min_year: null,
   max_year: null,
-  required_etc_arr: null,
+  required_etc_arr: [{ value: "" }],
   contract_type: "",
   conversion_rate: null,
   task_main: "",

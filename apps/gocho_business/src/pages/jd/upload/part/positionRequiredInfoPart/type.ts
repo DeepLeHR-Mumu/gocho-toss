@@ -1,8 +1,9 @@
-import { UseFormReturn } from "react-hook-form";
+import { Control, UseFormReturn } from "react-hook-form";
 import { JobFormValues } from "../../type";
 
 export interface PositionRequiredInfoPartProps {
   id: string;
-  index: number;
+  positionIndex: number;
   jobForm: UseFormReturn<JobFormValues>;
+  control: Control<JobFormValues>;
 }

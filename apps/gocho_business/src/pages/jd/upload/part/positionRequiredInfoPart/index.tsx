@@ -1,20 +1,53 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
+import { AiOutlineExclamationCircle } from "react-icons/ai";
+import { useFieldArray } from "react-hook-form";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
+import { FiMinus } from "react-icons/fi";
 import { PositionRequiredInfoPartProps } from "./type";
 import { contractTypeArr, requiredExpArr } from "./constant";
 import { cssObj } from "./style";
 
-export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPartProps> = ({ id, index, jobForm }) => {
+export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPartProps> = ({
+  id,
+  positionIndex,
+  jobForm,
+  control,
+}) => {
+  const [conversionRate, setConversionRate] = useState<number>(0);
+  const [isMinYear, setIsMinYear] = useState<boolean>(false);
+  const [isMaxYear, setIsMaxYear] = useState<boolean>(false);
+
+  const requiredEtcArr = useFieldArray({
+    control,
+    name: `position_arr.${positionIndex}.required_etc_arr`,
+  });
+
   const isConversionDisabled =
-    jobForm.watch("position_arr")[index].contract_type !== "인턴" &&
-    jobForm.watch("position_arr")[index].contract_type !== "계약>정규";
+    jobForm.watch("position_arr")[positionIndex].contract_type !== "인턴" &&
+    jobForm.watch("position_arr")[positionIndex].contract_type !== "계약>정규";
+
+  const isYearDisabled =
+    jobForm.watch("position_arr")[positionIndex].required_exp !== "경력" &&
+    jobForm.watch("position_arr")[positionIndex].required_exp !== "신입/경력";
+
+  useEffect(() => {
+    if (isYearDisabled || isMinYear) {
+      jobForm.setValue(`position_arr.${positionIndex}.min_year`, null);
+    }
+  }, [isYearDisabled, isMinYear, jobForm, positionIndex]);
+
+  useEffect(() => {
+    if (isYearDisabled || isMaxYear) {
+      jobForm.setValue(`position_arr.${positionIndex}.max_year`, null);
+    }
+  }, [isYearDisabled, isMaxYear, jobForm, positionIndex]);
 
   return (
     <>
       <div css={cssObj.contractTypeWrapper}>
-        <div css={cssObj.inputContainer}>
+        <div css={cssObj.container}>
           <p>계약 형태</p>
           <div css={cssObj.labelContainer}>
             {contractTypeArr.map((contractName) => (
@@ -22,52 +55,99 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                 key={`${contractName}${id}`}
                 value={contractName}
                 id={`${contractName}${id}`}
-                registerObj={jobForm.register(`position_arr.${index}.contract_type`, {
+                registerObj={jobForm.register(`position_arr.${positionIndex}.contract_type`, {
                   required: true,
                 })}
               >
-                {contractName}
+                <p css={cssObj.radioLabel}>{contractName}</p>
               </SharedRadioButton>
             ))}
           </div>
         </div>
-        <div css={cssObj.inputContainer}>
+        <div css={cssObj.container}>
           <p>전환율</p>
-          <input
-            type="number"
-            css={cssObj.inputLine}
-            {...jobForm.register(`position_arr.${index}.conversion_rate`)}
-            disabled={isConversionDisabled}
-          />
+          <div css={cssObj.conversionRateContainer}>
+            <div css={cssObj.conversionRateSliderBox}>
+              <input
+                css={cssObj.rangeSlider(isConversionDisabled)}
+                type="range"
+                min="0"
+                max="100"
+                step="5"
+                value={conversionRate}
+                onChange={(e) => {
+                  setConversionRate(Number(e.target.value));
+                  jobForm.setValue(`position_arr.${positionIndex}.conversion_rate`, conversionRate);
+                }}
+                disabled={isConversionDisabled}
+              />
+              <p css={cssObj.conversionRateLabel(conversionRate)}>{conversionRate}%</p>
+            </div>
+            <div css={cssObj.conversionRateInputContainer}>
+              <input
+                css={cssObj.activatableInput(isConversionDisabled)}
+                type="number"
+                min="0"
+                max="100"
+                value={conversionRate}
+                disabled={isConversionDisabled}
+                // TODO: 다 지웠을 때 0 남는 버그 해결
+                onChange={(e) => {
+                  setConversionRate(Number(e.target.value));
+                  jobForm.setValue(`position_arr.${positionIndex}.conversion_rate`, conversionRate);
+                }}
+              />
+              %
+            </div>
+          </div>
         </div>
       </div>
-      <div css={cssObj.inputContainer}>
+      <div css={cssObj.container}>
         <p>학력 조건 *</p>
         <div css={cssObj.labelContainer}>
-          <label css={cssObj.label} htmlFor={`middle${index}`}>
-            <input type="checkbox" id={`middle${index}`} {...jobForm.register(`position_arr.${index}.middle`)} />
-            <CheckBox isChecked={jobForm.watch("position_arr")[index].middle} />
+          <label css={cssObj.label} htmlFor={`middle${positionIndex}`}>
+            <input
+              type="checkbox"
+              id={`middle${positionIndex}`}
+              {...jobForm.register(`position_arr.${positionIndex}.middle`)}
+            />
+            <CheckBox isChecked={jobForm.watch("position_arr")[positionIndex].middle} />
             중졸
           </label>
-          <label css={cssObj.label} htmlFor={`high${index}`}>
-            <input type="checkbox" id={`high${index}`} {...jobForm.register(`position_arr.${index}.high`)} />
-            <CheckBox isChecked={jobForm.watch("position_arr")[index].high} />
+          <label css={cssObj.label} htmlFor={`high${positionIndex}`}>
+            <input
+              type="checkbox"
+              id={`high${positionIndex}`}
+              {...jobForm.register(`position_arr.${positionIndex}.high`)}
+            />
+            <CheckBox isChecked={jobForm.watch("position_arr")[positionIndex].high} />
             고졸
           </label>
-          <label css={cssObj.label} htmlFor={`college${index}`}>
-            <input type="checkbox" id={`college${index}`} {...jobForm.register(`position_arr.${index}.college`)} />
-            <CheckBox isChecked={jobForm.watch("position_arr")[index].college} />
+          <label css={cssObj.label} htmlFor={`college${positionIndex}`}>
+            <input
+              type="checkbox"
+              id={`college${positionIndex}`}
+              {...jobForm.register(`position_arr.${positionIndex}.college`)}
+            />
+            <CheckBox isChecked={jobForm.watch("position_arr")[positionIndex].college} />
             초대졸
           </label>
-          <label css={cssObj.label} htmlFor={`four${index}`}>
-            <input type="checkbox" id={`four${index}`} {...jobForm.register(`position_arr.${index}.four`)} />
-            <CheckBox isChecked={jobForm.watch("position_arr")[index].four} />
+          <label css={cssObj.label} htmlFor={`four${positionIndex}`}>
+            <input
+              type="checkbox"
+              id={`four${positionIndex}`}
+              {...jobForm.register(`position_arr.${positionIndex}.four`)}
+            />
+            <CheckBox isChecked={jobForm.watch("position_arr")[positionIndex].four} />
             4년제
           </label>
+          <p css={cssObj.desc}>
+            <AiOutlineExclamationCircle /> 중복 체크 가능
+          </p>
         </div>
       </div>
       <div css={cssObj.contractTypeWrapper}>
-        <div css={cssObj.inputContainer}>
+        <div css={cssObj.container}>
           <p>경력 조건</p>
           <div css={cssObj.labelContainer}>
             {requiredExpArr.map((expName) => (
@@ -75,39 +155,95 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                 key={`${expName}${id}`}
                 value={expName}
                 id={`${expName}${id}`}
-                registerObj={jobForm.register(`position_arr.${index}.required_exp`, {
+                registerObj={jobForm.register(`position_arr.${positionIndex}.required_exp`, {
                   required: true,
                 })}
               >
-                {expName}
+                <p css={cssObj.radioLabel}>{expName}</p>
               </SharedRadioButton>
             ))}
           </div>
         </div>
-        <div css={cssObj.inputContainer}>
+        <div css={cssObj.container}>
           <p>최소경력(연)</p>
-          <input
-            type="number"
-            css={cssObj.inputLine}
-            {...jobForm.register(`position_arr.${index}.min_year`, { valueAsNumber: true })}
-          />
+          <div css={cssObj.yearInputContainer}>
+            <input
+              type="number"
+              css={cssObj.activatableInput(isYearDisabled || isMinYear)}
+              disabled={isYearDisabled || isMinYear}
+              {...jobForm.register(`position_arr.${positionIndex}.min_year`, { valueAsNumber: true })}
+            />
+            <label htmlFor="isMinYear" css={cssObj.toggleSwitch(isMinYear, isYearDisabled)}>
+              <input
+                type="checkbox"
+                id="isMinYear"
+                hidden
+                disabled={isYearDisabled}
+                onClick={() => {
+                  setIsMinYear((prev) => !prev);
+                }}
+              />
+              <span css={cssObj.toggleButton(isMinYear)} />
+            </label>
+            <p>무관</p>
+          </div>
         </div>
-        <div css={cssObj.inputContainer}>
+        <div css={cssObj.container}>
           <p>최대경력(연)</p>
-          <input
-            type="number"
-            css={cssObj.inputLine}
-            {...jobForm.register(`position_arr.${index}.max_year`, { valueAsNumber: true })}
-          />
+          <div css={cssObj.yearInputContainer}>
+            <input
+              type="number"
+              css={cssObj.activatableInput(isYearDisabled || isMaxYear)}
+              disabled={isYearDisabled || isMaxYear}
+              {...jobForm.register(`position_arr.${positionIndex}.max_year`, { valueAsNumber: true })}
+            />
+            <label htmlFor="isMaxYear" css={cssObj.toggleSwitch(isMaxYear, isYearDisabled)}>
+              <input
+                type="checkbox"
+                id="isMaxYear"
+                hidden
+                disabled={isYearDisabled}
+                onClick={() => {
+                  setIsMaxYear((prev) => !prev);
+                }}
+              />
+              <span css={cssObj.toggleButton(isMaxYear)} />
+            </label>
+            <p>무관</p>
+          </div>
         </div>
       </div>
-      <div css={cssObj.inputContainer}>
+      <div css={cssObj.container}>
         <p>기타 지원 조건</p>
-        <input
-          css={cssObj.inputLine}
-          placeholder="기타 지원자격 조건"
-          {...jobForm.register(`position_arr.${index}.required_etc_arr`, { required: true })}
-        />
+        <div css={cssObj.inputContainer}>
+          {requiredEtcArr.fields.map((item, index) => (
+            <label css={cssObj.inputLabel(47)} key={`requiredEtcArr${item.id}`} htmlFor={`requiredEtcArr${item.id}`}>
+              <input
+                id={`requiredEtcArr${item.id}`}
+                css={cssObj.inputWithButton}
+                placeholder="합격시 구체적으로 어떤 일을 하게 되는지 명시해주세요"
+                {...jobForm.register(`position_arr.${positionIndex}.required_etc_arr.${index}.value`)}
+              />
+              <button
+                type="button"
+                css={cssObj.deleteInputButton}
+                onClick={() => {
+                  requiredEtcArr.remove(positionIndex);
+                }}
+              >
+                <FiMinus />
+              </button>
+            </label>
+          ))}
+          <button
+            type="button"
+            onClick={() => {
+              requiredEtcArr.append({ value: "" });
+            }}
+          >
+            + 입력칸 추가
+          </button>
+        </div>
       </div>
     </>
   );

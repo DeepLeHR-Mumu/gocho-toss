@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 
 import { PositionHeaderPartProps } from "./type";
-import { blankPosition } from "./constant";
+import { blankPosition } from "../../constant";
 import { cssObj } from "./style";
 
 export const PositionHeaderPart: FunctionComponent<PositionHeaderPartProps> = ({ append }) => (
