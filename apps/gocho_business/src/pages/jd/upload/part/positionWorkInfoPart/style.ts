@@ -9,7 +9,7 @@ export const cssObj = {
     }
   `,
 
-  rotationContainer: css`
+  optionContainer: css`
     position: relative;
     width: 20rem;
     height: 2.5rem;
@@ -33,7 +33,7 @@ export const cssObj = {
     }
   `,
 
-  rotationList: (isOpen: boolean) => css`
+  optionList: (isOpen: boolean) => css`
     position: absolute;
     top: 2.75rem;
     left: 0;
@@ -62,6 +62,7 @@ export const cssObj = {
 
   labelContainer: css`
     display: flex;
+    align-items: center;
     gap: 0 0.5rem;
   `,
 
@@ -82,10 +83,30 @@ export const cssObj = {
     font-size: 1.25rem;
   `,
 
+  desc: css`
+    color: ${COLORS.GRAY35};
+    margin-left: 2rem;
+  `,
+
   placeInputContainer: css`
     margin-top: 0.5rem;
     padding: 1.5rem;
     background-color: ${COLORS.GRAY100};
+  `,
+
+  factoryInputWrapper: css`
+    display: flex;
+    align-items: center;
+    gap: 0 0.5rem;
+  `,
+
+  uploadFactoryDesc: css`
+    margin-left: 1rem;
+  `,
+
+  uploadFactoryButton: css`
+    color: ${COLORS.BLUE_FIRST40};
+    margin-left: 0.5rem;
   `,
 
   inputContainer: css`

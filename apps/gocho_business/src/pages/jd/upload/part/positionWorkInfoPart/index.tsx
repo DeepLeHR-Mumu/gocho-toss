@@ -1,9 +1,16 @@
 import { FunctionComponent, useState } from "react";
-import { FiChevronUp, FiMinus, FiX } from "react-icons/fi";
+import { AiOutlineExclamationCircle } from "react-icons/ai";
+import { FiChevronUp, FiMinus, FiX, FiRotateCw, FiExternalLink } from "react-icons/fi";
 import { useFieldArray } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
+
+import { useFactoryArr } from "@/apis/factory/useFactoryArr";
+import { factoryArrKeyObj } from "@/apis/factory/useFactoryArr/type";
+import { INTERNAL_URL } from "@/constants/url";
 import { PositionWorkInfoPartProps } from "./type";
 import { rotationArr, placeTypeArr, certificateArr } from "./constant";
 import { cssObj } from "./style";
@@ -16,6 +23,11 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
 }) => {
   const [certiSearchWord, setCertiSearchWord] = useState<string>("");
   const [isRotationOpen, setIsRotationOpen] = useState<boolean>(false);
+  const [isFactoryListOpen, setIsFactoryListOpen] = useState<boolean>(false);
+
+  const queryClient = useQueryClient();
+
+  const { data: factoryDataArr } = useFactoryArr();
 
   const payArr = useFieldArray({
     control,
@@ -41,6 +53,21 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
     }
   };
 
+  const factoryClickHandler = (factory: number) => {
+    const isInList = jobForm.watch("position_arr")[positionIndex].place.factory_arr?.includes(factory);
+    if (isInList) {
+      jobForm.setValue(`position_arr.${positionIndex}.place.factory_arr`, [
+        ...(jobForm.watch("position_arr")[positionIndex].place.factory_arr?.filter((element) => element !== factory) ||
+          []),
+      ]);
+    } else {
+      jobForm.setValue(`position_arr.${positionIndex}.place.factory_arr`, [
+        ...(jobForm.watch("position_arr")[positionIndex].place.factory_arr || []),
+        factory,
+      ]);
+    }
+  };
+
   const certiClickHandler = (certi: string) => {
     const isInList = jobForm.watch("position_arr")[positionIndex].preferred_certi_arr?.includes(certi);
     if (isInList) {
@@ -60,7 +87,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
     <>
       <div css={cssObj.container}>
         <p>교대 형태</p>
-        <div css={cssObj.rotationContainer}>
+        <div css={cssObj.optionContainer}>
           <button
             css={cssObj.input(20)}
             type="button"
@@ -71,7 +98,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
             교대형태 선택
             <FiChevronUp />
           </button>
-          <div css={cssObj.rotationList(isRotationOpen)}>
+          <div css={cssObj.optionList(isRotationOpen)}>
             {rotationArr.map((rotation) => (
               <button
                 type="button"
@@ -116,12 +143,64 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
               </SharedRadioButton>
             </div>
           ))}
+          <p css={cssObj.desc}>
+            <AiOutlineExclamationCircle /> 중복 체크 가능
+          </p>
         </div>
         <div css={cssObj.placeInputContainer}>
           {jobForm.watch("position_arr")[positionIndex].place.type === "공장 근무지" && (
+            // TODO: 현재는 등록 대기중인 공장도 전부 출력되는데 이게 맞나??
             <>
               <p>공장 근무지</p>
-              <div>asdf</div>
+              <div css={cssObj.factoryInputWrapper}>
+                <div css={cssObj.optionContainer}>
+                  <button
+                    css={cssObj.input(20)}
+                    type="button"
+                    onClick={() => {
+                      setIsFactoryListOpen((prev) => !prev);
+                    }}
+                  >
+                    해당하는 공장을 모두 선택해주세요
+                    <FiChevronUp />
+                  </button>
+                  <div css={cssObj.optionList(isFactoryListOpen)}>
+                    {factoryDataArr?.map((factory) => (
+                      <button
+                        type="button"
+                        css={cssObj.option}
+                        key={`${factory.id}`}
+                        value={factory.id}
+                        onClick={() => {
+                          factoryClickHandler(factory.id);
+                        }}
+                      >
+                        <CheckBox
+                          isChecked={
+                            jobForm.watch("position_arr")[positionIndex].place.factory_arr?.includes(factory.id) ||
+                            false
+                          }
+                        />
+                        {factory.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    queryClient.invalidateQueries(factoryArrKeyObj.all);
+                  }}
+                >
+                  <FiRotateCw /> 공장 목록 새로고침
+                </button>
+                <p css={cssObj.uploadFactoryDesc}>잠깐, 미등록 공장이 있나요</p>
+                <Link href={INTERNAL_URL.FACTORY_LIST} passHref target="_blank">
+                  <a css={cssObj.uploadFactoryButton} target="_blank">
+                    공장 등록하러 가기 <FiExternalLink />
+                  </a>
+                </Link>
+              </div>
             </>
           )}
           {jobForm.watch("position_arr")[positionIndex].place.type === "해외 근무지" && (
@@ -180,7 +259,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
       </div>
       <div css={cssObj.container}>
         <p>우대 자격증</p>
-        <div css={cssObj.rotationContainer}>
+        <div css={cssObj.optionContainer}>
           <input
             css={cssObj.input(20)}
             type="text"
@@ -189,7 +268,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
               setCertiSearchWord(e.target.value);
             }}
           />
-          <div css={cssObj.rotationList(certiSearchWord !== "")}>
+          <div css={cssObj.optionList(certiSearchWord !== "")}>
             {certificateArr
               .filter((prevCerti) => prevCerti.includes(certiSearchWord))
               .map((certi) => (
