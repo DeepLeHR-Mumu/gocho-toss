@@ -1,3 +1,7 @@
+import { FiGlobe } from "react-icons/fi";
+import { BiMap } from "react-icons/bi";
+import { MdTravelExplore } from "react-icons/md";
+
 export const rotationArr = [
   { data: "주간", name: "주간" },
   { data: "야간", name: "야간" },
@@ -17,7 +21,11 @@ export const rotationArr = [
   { data: "5;4", name: "5조 4교대" },
 ] as const;
 
-export const placeTypeArr = ["공장 근무지", "해외 근무지", "기타 근무지"] as const;
+export const placeTypeArr = [
+  { name: "공장 근무지", icon: BiMap },
+  { name: "해외 근무지", icon: FiGlobe },
+  { name: "기타 근무지", icon: MdTravelExplore },
+] as const;
 
 export const certificateArr = [
   "3D프린터개발",

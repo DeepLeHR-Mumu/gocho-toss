@@ -63,9 +63,10 @@ export const cssObj = {
     top: 2.75rem;
     left: 0;
     width: 100%;
-    max-height: ${isOpen ? "500px" : 0};
+    max-height: ${isOpen ? "20rem" : 0};
+    overflow-y: scroll;
+    z-index: 20;
     border: ${isOpen ? `1px solid ${COLORS.GRAY30}` : 0};
-    overflow: hidden;
   `,
 
   option: css`

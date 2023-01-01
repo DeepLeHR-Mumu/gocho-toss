@@ -1,9 +1,9 @@
-import { ChangeEvent, FunctionComponent, useState } from "react";
+import { FunctionComponent, useState } from "react";
 import { FiChevronUp, FiMinus, FiX } from "react-icons/fi";
 import { useFieldArray } from "react-hook-form";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
-import { CheckLabel } from "../../component/checkLabel";
+import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { PositionWorkInfoPartProps } from "./type";
 import { rotationArr, placeTypeArr, certificateArr } from "./constant";
 import { cssObj } from "./style";
@@ -37,6 +37,21 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
       jobForm.setValue(`position_arr.${positionIndex}.rotation_arr`, [
         ...jobForm.watch("position_arr")[positionIndex].rotation_arr,
         rotation,
+      ]);
+    }
+  };
+
+  const certiClickHandler = (certi: string) => {
+    const isInList = jobForm.watch("position_arr")[positionIndex].preferred_certi_arr?.includes(certi);
+    if (isInList) {
+      jobForm.setValue(`position_arr.${positionIndex}.preferred_certi_arr`, [
+        ...(jobForm.watch("position_arr")[positionIndex].preferred_certi_arr?.filter((element) => element !== certi) ||
+          []),
+      ]);
+    } else {
+      jobForm.setValue(`position_arr.${positionIndex}.preferred_certi_arr`, [
+        ...(jobForm.watch("position_arr")[positionIndex].preferred_certi_arr || []),
+        certi,
       ]);
     }
   };
@@ -82,15 +97,53 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
         <p>근무지 종류</p>
         <div css={cssObj.labelContainer}>
           {placeTypeArr.map((placeType) => (
-            <CheckLabel
-              key={`${placeType}${id}`}
-              register={jobForm.register}
-              index={positionIndex}
-              field="place.type"
-              value={placeType}
-              watch={jobForm.watch("position_arr")[positionIndex].place.type}
-            />
+            // TODO: 밖에 padding을 씌워서 가장자리는 클릭이 되지 않음
+            <div
+              key={`${placeType.name}${positionIndex}`}
+              css={cssObj.placeTypeLabel(placeType.name === jobForm.watch("position_arr")[positionIndex].place.type)}
+            >
+              <SharedRadioButton
+                value={placeType.name}
+                id={`${placeType.name}${positionIndex}`}
+                registerObj={jobForm.register(`position_arr.${positionIndex}.place.type`)}
+              >
+                <p css={cssObj.placeTypeLabelData}>
+                  {placeType.name}
+                  <span css={cssObj.placeTypeLabelIcon}>
+                    <placeType.icon />
+                  </span>
+                </p>
+              </SharedRadioButton>
+            </div>
           ))}
+        </div>
+        <div css={cssObj.placeInputContainer}>
+          {jobForm.watch("position_arr")[positionIndex].place.type === "공장 근무지" && (
+            <>
+              <p>공장 근무지</p>
+              <div>asdf</div>
+            </>
+          )}
+          {jobForm.watch("position_arr")[positionIndex].place.type === "해외 근무지" && (
+            <>
+              <p>해외 근무지</p>
+              <input
+                css={cssObj.input(47)}
+                placeholder="근무지를 작성해주세요"
+                {...jobForm.register(`position_arr.${positionIndex}.place.etc`, { required: true })}
+              />
+            </>
+          )}
+          {jobForm.watch("position_arr")[positionIndex].place.type === "기타 근무지" && (
+            <>
+              <p>기타 근무지</p>
+              <input
+                css={cssObj.input(47)}
+                placeholder="전국 순환, 입사 후 근무지 배정 등 특수 근무지를 작성해주세요"
+                {...jobForm.register(`position_arr.${positionIndex}.place.etc`, { required: true })}
+              />
+            </>
+          )}
         </div>
       </div>
       <div css={cssObj.container}>
@@ -127,35 +180,39 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
       </div>
       <div css={cssObj.container}>
         <p>우대 자격증</p>
-        <input
-          css={cssObj.input(10)}
-          type="text"
-          onChange={(e) => {
-            setCertiSearchWord(e.target.value);
-          }}
-        />
-        <select
-          value=""
-          css={cssObj.input(47)}
-          onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-            jobForm.setValue(`position_arr.${positionIndex}.preferred_certi_arr`, [
-              ...(jobForm.watch("position_arr")[positionIndex].preferred_certi_arr || []),
-              e.target.value,
-            ]);
-            setCertiSearchWord("");
-          }}
-        >
-          <option value="" disabled>
-            자격증 선택 ▼
-          </option>
-          {certificateArr
-            .filter((prevCerti) => prevCerti.includes(certiSearchWord))
-            .map((certi) => (
-              <option key={`${id}${certi}`} value={certi}>
-                {certi}
-              </option>
-            ))}
-        </select>
+        <div css={cssObj.rotationContainer}>
+          <input
+            css={cssObj.input(20)}
+            type="text"
+            placeholder="자격증 검색"
+            onChange={(e) => {
+              setCertiSearchWord(e.target.value);
+            }}
+          />
+          <div css={cssObj.rotationList(certiSearchWord !== "")}>
+            {certificateArr
+              .filter((prevCerti) => prevCerti.includes(certiSearchWord))
+              .map((certi) => (
+                <button
+                  type="button"
+                  css={cssObj.option}
+                  key={`${id}${certi}`}
+                  value={certi}
+                  onClick={() => {
+                    certiClickHandler(certi);
+                  }}
+                >
+                  <CheckBox
+                    isChecked={
+                      jobForm.watch("position_arr")[positionIndex].preferred_certi_arr?.includes(certi) || false
+                    }
+                  />
+                  {certi}
+                </button>
+              ))}
+          </div>
+        </div>
+
         <div css={cssObj.selectedCertiContainer}>
           {jobForm.watch("position_arr")[positionIndex].preferred_certi_arr?.map((certi) => (
             <div key={`${id}${certi}`} css={cssObj.certiLabel}>
