@@ -35,11 +35,11 @@ export const cssObj = {
       margin-bottom: 1.5rem;
     `;
   },
-  subTitle: css`
+  subTitle: (isError?: boolean) => css`
     font-size: 1rem;
     font-weight: 700;
-    color: ${COLORS.GRAY10};
-    margin-bottom: 0.5rem;
+    color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+    margin-bottom: 1rem;
     display: inline-block;
   `,
   textValue: css`
@@ -58,9 +58,10 @@ export const cssObj = {
       color: ${COLORS.GRAY10};
     }
   `,
-  inputLine: css`
-    border: 1px solid ${COLORS.GRAY10};
-    padding: 0.75rem 1rem;
+  inputLine: (isError?: boolean) => css`
+    border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+    padding: 0rem 1rem;
+    height: 2.5rem;
     font-size: 1rem;
     width: 100%;
     font-weight: 400;
@@ -94,8 +95,9 @@ export const cssObj = {
       margin-right: 0.5rem;
     }
   `,
-  inputLineBox: css`
+  inputLineBox: (isError?: boolean) => css`
     display: flex;
+    margin-left: 1rem;
     align-items: center;
     position: relative;
     width: 100%;
@@ -109,8 +111,9 @@ export const cssObj = {
       transform: translate(0, -50%);
     }
     > input[type="text"] {
-      border: 1px solid ${COLORS.GRAY10};
-      padding: 0.75rem 1rem 0.75rem 2.75rem;
+      border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+      height: 2.5rem;
+      padding: 0rem 1rem 0rem 2.75rem;
       font-size: 1rem;
       width: 100%;
       font-weight: 400;
@@ -137,9 +140,9 @@ export const cssObj = {
     width: 45%;
     margin-bottom: 0.5rem;
   `,
-  infoTitle: css`
+  infoTitle: (isError?: boolean) => css`
     font-size: 1rem;
     font-weight: 400;
-    color: ${COLORS.GRAY10};
+    color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
   `,
 };

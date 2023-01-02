@@ -5,8 +5,8 @@ import { FiMap, FiMapPin, FiUsers } from "react-icons/fi";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
-
 import { COLORS } from "shared-style/color";
+
 import { CommonRoundButton } from "@/components/common";
 import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
 import { useUserState } from "@/globalStates/useUserState";
@@ -17,7 +17,12 @@ import { BasicPartProps } from "./type";
 import { cssObj } from "./style";
 
 export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) => {
-  const { register, setValue } = companyForm;
+  const {
+    register,
+    setValue,
+    watch,
+    formState: { errors },
+  } = companyForm;
   const { userInfoData } = useUserState();
 
   const { data: companyData, isLoading: isCompanyDataLoading } = useCompanyDetail({
@@ -39,22 +44,22 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
   return (
     <div css={cssObj.wrapper}>
       <div css={cssObj.lineBox()}>
-        <strong css={cssObj.subTitle}>기업 형태</strong>
+        <strong css={cssObj.subTitle()}>기업 형태</strong>
         <p css={cssObj.textValue}>{companyData.size}</p>
       </div>
       <div css={cssObj.flexStartBox}>
         <div css={cssObj.lineBox(30)}>
-          <strong css={cssObj.subTitle}>설립일</strong>
+          <strong css={cssObj.subTitle()}>설립일</strong>
           <p css={cssObj.textValue}>{foundDate.format(new Date(companyData.foundNumber))}</p>
         </div>
         <div css={cssObj.lineBox()}>
-          <strong css={cssObj.subTitle}>사업자 번호</strong>
+          <strong css={cssObj.subTitle()}>사업자 번호</strong>
           <p css={cssObj.textValue}>{companyData.businessNumber}</p>
         </div>
       </div>
       <div css={cssObj.flexStartBox}>
         <div css={cssObj.lineBox(30)}>
-          <strong css={cssObj.subTitle}>사원수</strong>
+          <strong css={cssObj.subTitle(errors.employee_number?.type === "required")}>사원수</strong>
           <label htmlFor="employee_number" css={cssObj.employeeNumber}>
             <FiUsers />
             <input
@@ -62,19 +67,24 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
               onWheel={(event) => {
                 event.currentTarget.blur();
               }}
-              {...register("employee_number")}
-              css={cssObj.inputLine}
+              {...register("employee_number", { required: true })}
+              css={cssObj.inputLine(errors.employee_number?.type === "required")}
             />
             <p css={cssObj.unit}>명</p>
           </label>
         </div>
         <div css={cssObj.lineBox(70)}>
-          <strong css={cssObj.subTitle}>기업 한줄 소개</strong>
-          <input type="text" {...register("intro")} placeholder="기업 한줄 소개" css={cssObj.inputLine} />
+          <strong css={cssObj.subTitle(errors.intro?.type === "required")}>기업 한줄 소개</strong>
+          <input
+            type="text"
+            {...register("intro", { required: true })}
+            placeholder="기업 한줄 소개"
+            css={cssObj.inputLine(errors.intro?.type === "required")}
+          />
         </div>
       </div>
       <div css={cssObj.lineBox()}>
-        <strong css={cssObj.subTitle}>기업 본사 주소</strong>
+        <strong css={cssObj.subTitle(errors.address?.type === "required")}>기업 본사 주소</strong>
         <label htmlFor="address" css={cssObj.address}>
           <CommonRoundButton
             Icon={FiMap}
@@ -86,56 +96,67 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
                 },
               })
             }
-            backgoundColor={COLORS.BLUE_FIRST30}
+            backgoundColor={COLORS.GRAY80}
           />
-          {/* <button type="button" css={cssObj.findAddressButton}>
-            <FiMap /> 주소찾기
-          </button> */}
-          <div css={cssObj.inputLineBox}>
+          <div css={cssObj.inputLineBox(errors.address?.type === "required")}>
             <FiMapPin />
-            <input type="text" {...register("address")} placeholder="placeHolder" />
+            <input
+              type="text"
+              {...register("address", { required: true })}
+              placeholder="좌측 버튼을 눌러 기업 주소를 입력해주세요"
+            />
           </div>
         </label>
-        <KakaoMap address={companyData.address} />
+        <KakaoMap address={watch("address")} />
       </div>
       <div css={cssObj.lineBox(80)}>
-        <strong css={cssObj.subTitle}>노조</strong>
+        <strong css={cssObj.subTitle(errors.nozo?.exists?.type === "required")}>노조</strong>
         <div css={cssObj.nozoBox}>
           <BiUserVoice />
-          <SharedRadioButton registerObj={register("nozo.exists")} value="true" id="nozoTrue">
+          <SharedRadioButton registerObj={register("nozo.exists", { required: true })} value="true" id="nozoTrue">
             <p css={cssObj.unit}>있음</p>
           </SharedRadioButton>
-          <SharedRadioButton registerObj={register("nozo.exists")} value="false" id="nozoFalse">
+          <SharedRadioButton registerObj={register("nozo.exists", { required: true })} value="false" id="nozoFalse">
             <p css={cssObj.unit}>없음</p>
           </SharedRadioButton>
         </div>
-        <input type="text" {...register("nozo.desc")} placeholder="보충설명(선택)" css={cssObj.inputLine} />
+        <input type="text" {...register("nozo.desc")} placeholder="보충설명(선택)" css={cssObj.inputLine()} />
       </div>
       <div css={cssObj.lineBox(80)}>
-        <strong css={cssObj.subTitle}>연봉 정보</strong>
+        <strong css={cssObj.subTitle()}>연봉 정보</strong>
         <div css={cssObj.flexBox}>
           <div css={cssObj.payBox}>
-            <strong css={cssObj.infoTitle}>평균 초봉</strong>
+            <strong css={cssObj.infoTitle(errors.pay_start?.type === "required")}>평균 초봉</strong>
             <div css={cssObj.flexCenterBox}>
-              <input type="number" {...register("pay_start")} placeholder="평균 초봉" css={cssObj.inputLine} />
+              <input
+                type="number"
+                {...register("pay_start", { required: true })}
+                placeholder="평균 초봉"
+                css={cssObj.inputLine(errors.pay_start?.type === "required")}
+              />
               <p css={cssObj.textValue}>만원</p>
             </div>
           </div>
           <div css={cssObj.payBox}>
-            <strong css={cssObj.infoTitle}>평균 연봉</strong>
+            <strong css={cssObj.infoTitle(errors.pay_avg?.type === "required")}>평균 연봉</strong>
             <div css={cssObj.flexCenterBox}>
-              <input type="number" {...register("pay_avg")} placeholder="평균 연봉" css={cssObj.inputLine} />
+              <input
+                type="number"
+                {...register("pay_avg", { required: true })}
+                placeholder="평균 연봉"
+                css={cssObj.inputLine(errors.pay_avg?.type === "required")}
+              />
               <p css={cssObj.textValue}>만원</p>
             </div>
           </div>
         </div>
         <div css={cssObj.lineBox()}>
-          <strong css={cssObj.infoTitle}>기타 연봉 정보</strong>
+          <strong css={cssObj.infoTitle()}>기타 연봉 정보</strong>
           <input
             type="text"
             {...register("pay_desc")}
             placeholder="상여금, 성과급 등의 정보를 적어주세요"
-            css={cssObj.inputLine}
+            css={cssObj.inputLine()}
           />
         </div>
       </div>

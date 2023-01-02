@@ -15,6 +15,7 @@ import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
 
 import { BasicPart } from "./part/basicPart";
 import { WelfalePart } from "./part/welfarePart";
+import { COMPANY_MESSSAGE_OBJ } from "./constants";
 import { PostSubmitValues } from "./type";
 import { cssObj } from "./style";
 
@@ -32,7 +33,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
 
   const { handleSubmit, reset } = companyForm;
   const addCompanyDetail = (formData: PostSubmitValues) => {
-    if (window.confirm("수정하쉴?")) {
+    if (window.confirm(COMPANY_MESSSAGE_OBJ.EDIT)) {
       putCompanyDetail(
         {
           companyId: userInfoData?.companyId as number,
@@ -56,7 +57,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
         },
         {
           onSuccess: () => {
-            setToast("토스트 메시지");
+            setToast("등록되었습니다");
           },
         }
       );
