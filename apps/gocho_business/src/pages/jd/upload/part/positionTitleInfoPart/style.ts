@@ -64,9 +64,20 @@ export const cssObj = {
     left: 0;
     width: 100%;
     max-height: ${isOpen ? "20rem" : 0};
+    overflow-x: hidden;
     overflow-y: scroll;
     z-index: 20;
     border: ${isOpen ? `1px solid ${COLORS.GRAY30}` : 0};
+
+    ::-webkit-scrollbar {
+      width: 0.5rem;
+      background-color: ${COLORS.GRAY90};
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: ${COLORS.GRAY60};
+    }
   `,
 
   option: css`

@@ -102,7 +102,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
           <button
             type="button"
             onClick={() => {
-              processArr.append({ value: "" });
+              if (processArr.fields.length < 8) processArr.append({ value: "" });
             }}
           >
             + 입력칸 추가

@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
-import { FiChevronUp, FiMinus, FiX, FiRotateCw, FiExternalLink } from "react-icons/fi";
+import { FiChevronUp, FiMinus, FiX, FiRotateCw, FiExternalLink, FiChevronDown } from "react-icons/fi";
 import { TbBuildingFactory2 } from "react-icons/tb";
 import { useFieldArray } from "react-hook-form";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
@@ -99,8 +99,9 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
               setIsRotationOpen((prev) => !prev);
             }}
           >
-            교대형태 선택
-            <FiChevronUp />
+            {/* TODO: 디자인처럼 교대 형태 보일 수 있도록 제작 */}
+            교대 형태 선택
+            {isRotationOpen ? <FiChevronUp /> : <FiChevronDown />}
           </button>
           <div css={cssObj.optionList(isRotationOpen)}>
             {rotationArr.map((rotation) => (
@@ -166,7 +167,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                     }}
                   >
                     해당하는 공장을 모두 선택해주세요
-                    <FiChevronUp />
+                    {isFactoryListOpen ? <FiChevronUp /> : <FiChevronDown />}
                   </button>
                   <div css={cssObj.optionList(isFactoryListOpen)}>
                     {factoryDataArr?.map((factory) => (

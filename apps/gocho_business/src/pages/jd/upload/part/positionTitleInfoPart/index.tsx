@@ -120,7 +120,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 }}
               >
                 {selectedSubTaskObj ? `${selectedSubTaskObj.mainTask}` : "1차직무 선택"}
-                <FiChevronUp />
+                {isMainTaskOpen ? <FiChevronUp /> : <FiChevronDown />}
               </button>
               <div css={cssObj.taskList(isMainTaskOpen)}>
                 {taskArr.map((task) => (
@@ -150,7 +150,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 }}
               >
                 2차직무 선택
-                <FiChevronUp />
+                {isSubTaskOpen ? <FiChevronUp /> : <FiChevronDown />}
               </button>
               <div css={cssObj.taskList(isSubTaskOpen)}>
                 {selectedSubTaskObj?.subTaskArr.map((subTask) => (
