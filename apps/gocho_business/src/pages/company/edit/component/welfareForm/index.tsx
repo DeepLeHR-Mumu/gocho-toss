@@ -80,7 +80,7 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({ setValue, tit
                   <p css={cssObj.valueDesc}>{data}</p>
                   <button
                     type="button"
-                    aria-label="입력한 복지 제거하기"
+                    aria-label={`${data} 제거하기`}
                     css={cssObj.deleteButton}
                     onClick={() => {
                       deleteKeyHandler(index);
