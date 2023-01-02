@@ -1,21 +1,25 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { FiCornerDownLeft, FiMinus } from "react-icons/fi";
 
-import { WelfareFormProps, WelfareKey } from "./type";
+import { WelfareFormProps } from "./type";
 import { cssObj } from "./style";
 
-export const WelfareForm: FunctionComponent<WelfareFormProps> = ({ setValue, title, desc, registerObj, valueArr }) => {
-  const [listArr, setListArr] = useState<string[] | null>(valueArr || []);
+export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
+  title,
+  desc,
+  valueArr,
+  registerKey,
+  companyForm,
+}) => {
+  const [listArr, setListArr] = useState<string[] | null>(valueArr);
   const [valueText, setValueText] = useState<string>("");
 
-  const deleteKeyHandler = (index: number) => {
+  const { setValue } = companyForm;
+
+  const deleteKeyHandler = (welfareIndex: number) => {
     setListArr((prevListArr) => {
-      const filterArr = prevListArr && prevListArr.filter((_, filterIndex) => filterIndex !== index);
-      if (filterArr?.length === 0) {
-        setValue(registerObj.name as WelfareKey, null);
-        return null;
-      }
-      setValue(registerObj.name as WelfareKey, filterArr);
+      const filterArr = prevListArr && prevListArr.filter((_, filterIndex) => filterIndex !== welfareIndex);
+      if (filterArr?.length === 0) return null;
       return filterArr;
     });
   };
@@ -23,16 +27,16 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({ setValue, tit
   const addValueHandler = (text: string) => {
     if (valueText !== "") {
       setListArr((prevListArr) => {
-        if (!prevListArr) {
-          setValue(registerObj.name as WelfareKey, [text]);
-          return [text];
-        }
-        setValue(registerObj.name as WelfareKey, [...prevListArr, text]);
+        if (!prevListArr) return [text];
         return [...prevListArr, text];
       });
       setValueText("");
     }
   };
+
+  useEffect(() => {
+    setValue(registerKey, listArr, { shouldDirty: true });
+  }, [listArr, registerKey, setListArr, setValue]);
 
   return (
     <div css={cssObj.wrapper}>
@@ -68,11 +72,11 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({ setValue, tit
       </div>
       <div css={cssObj.container}>
         <p css={cssObj.desc}>{desc}</p>
-        {listArr?.length === 0 ? (
+        {!listArr ? (
           <p css={cssObj.noData}>입력한 복지가 없습니다</p>
         ) : (
           <ul css={cssObj.listBox}>
-            {listArr?.map((data, index) => {
+            {listArr.map((data, index) => {
               const random = Math.floor(Math.random() * 10000);
 
               return (

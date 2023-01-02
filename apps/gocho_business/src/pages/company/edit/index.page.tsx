@@ -5,13 +5,13 @@ import { useForm } from "react-hook-form";
 import { Spinner } from "shared-ui/common/atom/spinner";
 
 import { useAddCompanyDetail } from "@/apis/company/useAddCompany";
+import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
 import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 import { CommonStatusChip } from "@/components/common";
-import { PageLayout, GlobalLayout, Footer } from "@/components/global/layout";
-import { NextPageWithLayout } from "@/pages/_app.page";
 import { useUserState } from "@/globalStates/useUserState";
 import { useToast } from "@/globalStates/useToast";
-import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
+import { PageLayout, GlobalLayout, Footer } from "@/components/global/layout";
+import { NextPageWithLayout } from "@/pages/_app.page";
 
 import { BasicPart } from "./part/basicPart";
 import { WelfalePart } from "./part/welfarePart";
@@ -38,10 +38,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
   } = companyForm;
 
   const addCompanyDetail = (formData: PostSubmitValues) => {
-    if (!isDirty) {
-      window.alert(COMPANY_MESSSAGE_OBJ.ISDIRTY);
-      return;
-    }
+    if (!isDirty) return window.alert(COMPANY_MESSSAGE_OBJ.ISDIRTY);
     if (window.confirm(COMPANY_MESSSAGE_OBJ.EDIT)) {
       putCompanyDetail(
         {
@@ -49,14 +46,14 @@ const CompanyEditPage: NextPageWithLayout = () => {
           dto: {
             ...formData,
             welfare: {
-              money: formData.welfare.money || null,
-              health: formData.welfare.health || null,
-              life: formData.welfare.life || null,
-              holiday: formData.welfare.holiday || null,
-              facility: formData.welfare.facility || null,
-              etc: formData.welfare.etc || null,
-              growth: formData.welfare.growth || null,
-              vacation: formData.welfare.vacation || null,
+              money: formData.welfare.money,
+              health: formData.welfare.health,
+              life: formData.welfare.life,
+              holiday: formData.welfare.holiday,
+              facility: formData.welfare.facility,
+              etc: formData.welfare.etc,
+              growth: formData.welfare.growth,
+              vacation: formData.welfare.vacation,
             },
             nozo: {
               exists: formData.nozo.exists === "true",
@@ -71,6 +68,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
         }
       );
     }
+    return null;
   };
 
   useEffect(() => {

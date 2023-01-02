@@ -1,4 +1,4 @@
-import { UseFormRegisterReturn, UseFormSetValue } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import { PostSubmitValues } from "../../type";
 
 export type WelfareKey =
@@ -12,9 +12,9 @@ export type WelfareKey =
   | "welfare.etc";
 
 export interface WelfareFormProps {
-  setValue: UseFormSetValue<PostSubmitValues>;
   title: string;
   desc: string;
-  registerObj: UseFormRegisterReturn;
+  registerKey: WelfareKey;
   valueArr: string[] | null;
+  companyForm: UseFormReturn<PostSubmitValues>;
 }

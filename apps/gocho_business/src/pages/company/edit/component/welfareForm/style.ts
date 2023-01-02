@@ -12,6 +12,9 @@ export const cssObj = {
     font-weight: 400;
     color: ${COLORS.GRAY10};
   `,
+  hidden: css`
+    display: none;
+  `,
   writeBox: css`
     position: relative;
     margin-bottom: 0.25rem;
