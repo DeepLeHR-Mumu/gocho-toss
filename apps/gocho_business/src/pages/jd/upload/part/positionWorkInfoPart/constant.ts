@@ -22,9 +22,9 @@ export const rotationArr = [
 ] as const;
 
 export const placeTypeArr = [
-  { name: "공장 근무지", icon: BiMap },
-  { name: "해외 근무지", icon: FiGlobe },
-  { name: "기타 근무지", icon: MdTravelExplore },
+  { name: "공장 근무지", data: "일반", icon: BiMap },
+  { name: "해외 근무지", data: "해외", icon: FiGlobe },
+  { name: "기타 근무지", data: "기타", icon: MdTravelExplore },
 ] as const;
 
 export const certificateArr = [

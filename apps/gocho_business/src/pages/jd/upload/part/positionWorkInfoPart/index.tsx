@@ -1,7 +1,9 @@
 import { FunctionComponent, useState } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { FiChevronUp, FiMinus, FiX, FiRotateCw, FiExternalLink } from "react-icons/fi";
+import { TbBuildingFactory2 } from "react-icons/tb";
 import { useFieldArray } from "react-hook-form";
+import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 
@@ -10,7 +12,8 @@ import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 
 import { useFactoryArr } from "@/apis/factory/useFactoryArr";
 import { factoryArrKeyObj } from "@/apis/factory/useFactoryArr/type";
-import { INTERNAL_URL } from "@/constants/url";
+import { INTERNAL_URL, POSTCODE_SCRIPT_URL } from "@/constants/url";
+
 import { PositionWorkInfoPartProps } from "./type";
 import { rotationArr, placeTypeArr, certificateArr } from "./constant";
 import { cssObj } from "./style";
@@ -26,6 +29,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
   const [isFactoryListOpen, setIsFactoryListOpen] = useState<boolean>(false);
 
   const queryClient = useQueryClient();
+  const openPostCodePopup = useDaumPostcodePopup(POSTCODE_SCRIPT_URL);
 
   const { data: factoryDataArr } = useFactoryArr();
 
@@ -127,10 +131,10 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
             // TODO: 밖에 padding을 씌워서 가장자리는 클릭이 되지 않음
             <div
               key={`${placeType.name}${positionIndex}`}
-              css={cssObj.placeTypeLabel(placeType.name === jobForm.watch("position_arr")[positionIndex].place.type)}
+              css={cssObj.placeTypeLabel(placeType.data === jobForm.watch("position_arr")[positionIndex].place.type)}
             >
               <SharedRadioButton
-                value={placeType.name}
+                value={placeType.data}
                 id={`${placeType.name}${positionIndex}`}
                 registerObj={jobForm.register(`position_arr.${positionIndex}.place.type`)}
               >
@@ -144,11 +148,11 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
             </div>
           ))}
           <p css={cssObj.desc}>
-            <AiOutlineExclamationCircle /> 중복 체크 가능
+            <AiOutlineExclamationCircle /> 근무지 종류는 하나만 선택 가능 합니다
           </p>
         </div>
         <div css={cssObj.placeInputContainer}>
-          {jobForm.watch("position_arr")[positionIndex].place.type === "공장 근무지" && (
+          {jobForm.watch("position_arr")[positionIndex].place.type === "일반" && (
             // TODO: 현재는 등록 대기중인 공장도 전부 출력되는데 이게 맞나??
             <>
               <p>공장 근무지</p>
@@ -195,15 +199,74 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   <FiRotateCw /> 공장 목록 새로고침
                 </button>
                 <p css={cssObj.uploadFactoryDesc}>잠깐, 미등록 공장이 있나요</p>
-                <Link href={INTERNAL_URL.FACTORY_LIST} passHref target="_blank">
+                <Link href={INTERNAL_URL.FACTORY_LIST} passHref>
                   <a css={cssObj.uploadFactoryButton} target="_blank">
                     공장 등록하러 가기 <FiExternalLink />
                   </a>
                 </Link>
               </div>
+              <div css={cssObj.placeContainer}>
+                {jobForm.watch("position_arr")[positionIndex].place.factory_arr?.map((factory) => (
+                  <div key={`${factory}${id}`} css={cssObj.factoryBox}>
+                    <TbBuildingFactory2 />
+                    {factory}
+                    <button
+                      type="button"
+                      css={cssObj.smallDeleteButton}
+                      onClick={() => {
+                        jobForm.setValue(`position_arr.${positionIndex}.place.factory_arr`, [
+                          ...(jobForm
+                            .watch("position_arr")
+                            [positionIndex].place.factory_arr?.filter((element) => element !== factory) || []),
+                        ]);
+                      }}
+                    >
+                      <FiX />
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={() =>
+                  openPostCodePopup({
+                    onComplete: (addressObj: Address) => {
+                      jobForm.setValue(`position_arr.${positionIndex}.place.address_arr`, [
+                        ...(jobForm.watch("position_arr")[positionIndex].place.address_arr || []),
+                        addressObj.address,
+                      ]);
+                    },
+                  })
+                }
+              >
+                + 공장 외 일반 근무지 추가하기
+              </button>
+              <div css={cssObj.placeContainer}>
+                {jobForm.watch("position_arr")[positionIndex].place.address_arr?.map((address) => (
+                  <div key={`${address}${id}`}>
+                    <span>일반 근무지</span>
+                    <div css={cssObj.addressBox}>
+                      {address}
+                      <button
+                        type="button"
+                        css={cssObj.deleteInputButton}
+                        onClick={() => {
+                          jobForm.setValue(`position_arr.${positionIndex}.place.address_arr`, [
+                            ...(jobForm
+                              .watch("position_arr")
+                              [positionIndex].place.address_arr?.filter((element) => element !== address) || []),
+                          ]);
+                        }}
+                      >
+                        <FiMinus />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </>
           )}
-          {jobForm.watch("position_arr")[positionIndex].place.type === "해외 근무지" && (
+          {jobForm.watch("position_arr")[positionIndex].place.type === "해외" && (
             <>
               <p>해외 근무지</p>
               <input
@@ -213,7 +276,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
               />
             </>
           )}
-          {jobForm.watch("position_arr")[positionIndex].place.type === "기타 근무지" && (
+          {jobForm.watch("position_arr")[positionIndex].place.type === "기타" && (
             <>
               <p>기타 근무지</p>
               <input
@@ -298,7 +361,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
               {certi}
               <button
                 type="button"
-                css={cssObj.deleteCertiButton}
+                css={cssObj.smallDeleteButton}
                 onClick={() => {
                   jobForm.setValue(`position_arr.${positionIndex}.preferred_certi_arr`, [
                     ...(jobForm

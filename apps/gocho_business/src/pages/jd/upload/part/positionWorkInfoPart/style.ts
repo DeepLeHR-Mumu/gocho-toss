@@ -109,6 +109,34 @@ export const cssObj = {
     margin-left: 0.5rem;
   `,
 
+  placeContainer: css`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+  `,
+
+  factoryBox: css`
+    display: flex;
+    align-items: center;
+    gap: 0 0.5rem;
+    border-radius: 2rem;
+    border: 1px solid ${COLORS.GRAY70};
+    background-color: ${COLORS.GRAY100};
+    height: 2.25rem;
+    padding: 0 0.5rem 0 1rem;
+  `,
+
+  addressBox: css`
+    display: flex;
+    align-items: center;
+    gap: 0 1rem;
+    border-radius: 2rem;
+    background-color: ${COLORS.GRAY90};
+    height: 2.5rem;
+    padding: 0 0.5rem 0 1rem;
+  `,
+
   inputContainer: css`
     display: flex;
     flex-wrap: wrap;
@@ -165,13 +193,13 @@ export const cssObj = {
     padding: 0 0.5rem;
   `,
 
-  deleteCertiButton: css`
+  smallDeleteButton: css`
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.75rem;
+    height: 1.75rem;
     color: ${COLORS.GRAY10};
     background-color: ${COLORS.GRAY70};
   `,

@@ -15,7 +15,7 @@ export const blankPosition = {
   rotation_arr: [],
   rotation_etc: null,
   place: {
-    type: "",
+    type: "일반",
     address_arr: [],
     factory_arr: [],
     etc: "",
