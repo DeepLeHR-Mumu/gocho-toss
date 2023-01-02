@@ -107,7 +107,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
               <button
                 type="button"
                 css={cssObj.option}
-                key={`${id}${rotation}`}
+                key={`${id}${rotation.data}`}
                 value={rotation.data}
                 onClick={() => {
                   rotationClickHandler(rotation.data);
@@ -173,7 +173,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                       <button
                         type="button"
                         css={cssObj.option}
-                        key={`${factory.id}`}
+                        key={`${factory.id}${id}`}
                         value={factory.id}
                         onClick={() => {
                           factoryClickHandler(factory.id);

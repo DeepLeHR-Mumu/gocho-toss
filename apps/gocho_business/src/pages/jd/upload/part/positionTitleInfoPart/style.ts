@@ -158,9 +158,22 @@ export const cssObj = {
     border-radius: 0.5rem;
   `,
 
+  hireNumberCover: css`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid ${COLORS.GRAY10};
+    width: 6rem;
+    height: 2.5rem;
+    padding: 0 1rem;
+    font-size: 1rem;
+    background-color: ${COLORS.GRAY100};
+    font-weight: 400;
+  `,
+
   hireNumberInputContainer: css`
     display: flex;
     align-items: center;
-    gap: 0 0.55rem;
+    gap: 0 0.5rem;
   `,
 };

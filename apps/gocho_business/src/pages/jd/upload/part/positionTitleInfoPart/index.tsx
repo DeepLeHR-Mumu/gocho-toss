@@ -17,6 +17,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
   const [isCardOpen, setIsCardOpen] = useState<boolean>(false);
   const [isMainTaskOpen, setIsMainTaskOpen] = useState<boolean>(false);
   const [isSubTaskOpen, setIsSubTaskOpen] = useState<boolean>(false);
+  const [hireNumberLabel, setHireNumberLabel] = useState<string>("");
 
   const taskDetailArr = useFieldArray({
     control,
@@ -47,10 +48,32 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
     }
   };
 
+  const titleMaker = (task: string, contract: string, hire: number) => {
+    const taskPart = task ? `[${task}]` : "1차직무";
+    const contractPart = contract ? `${contract}` : "{계약형태}";
+    let hireNumberPart;
+
+    if (hire) {
+      if (hire < 0) hireNumberPart = hireNumberLabel;
+      else hireNumberPart = hire;
+    } else {
+      hireNumberPart = "{명수}";
+    }
+
+    if (!(!!task || !!contract || !!hire)) return "직무 카드";
+    return `${taskPart} ${contractPart} ${hireNumberPart}명 채용`;
+  };
+
   return (
     <>
       <div css={cssObj.titleContainer}>
-        <strong css={cssObj.positionTitle}>직무 카드</strong>
+        <strong css={cssObj.positionTitle}>
+          {titleMaker(
+            jobForm.watch("position_arr")[positionIndex].task_main,
+            jobForm.watch("position_arr")[positionIndex].contract_type,
+            jobForm.watch("position_arr")[positionIndex].hire_number
+          )}
+        </strong>
         <div css={cssObj.positionButtonContainer}>
           <button
             css={cssObj.openCardButton}
@@ -59,6 +82,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
               setIsCardOpen((prev) => !prev);
             }}
           >
+            {/* TODO: 카드 열고 접기 아직 안됨 */}
             {isCardOpen ? (
               <>
                 <FiChevronUp />
@@ -189,6 +213,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
             css={cssObj.hireNumberButton}
             onClick={() => {
               jobForm.setValue(`position_arr.${positionIndex}.hire_number`, -1);
+              setHireNumberLabel("0");
             }}
           >
             0명
@@ -198,6 +223,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
             css={cssObj.hireNumberButton}
             onClick={() => {
               jobForm.setValue(`position_arr.${positionIndex}.hire_number`, -2);
+              setHireNumberLabel("00");
             }}
           >
             00명
@@ -207,21 +233,39 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
             css={cssObj.hireNumberButton}
             onClick={() => {
               jobForm.setValue(`position_arr.${positionIndex}.hire_number`, -3);
+              setHireNumberLabel("000");
             }}
           >
             000명
           </button>
           <div css={cssObj.hireNumberInputContainer}>
-            <input
-              type="number"
-              css={cssObj.input(6)}
-              placeholder="0"
-              {...jobForm.register(`position_arr.${positionIndex}.hire_number`, {
-                valueAsNumber: true,
-                required: true,
-              })}
-            />
-            명
+            {/* TODO: 0, 00, 000명 버튼 누른 다음, 위에 클릭 하고 한번 더 눌러야 input에 포커싱이 됨 */}
+            {jobForm.watch("position_arr")[positionIndex].hire_number < 0 ? (
+              <>
+                <button
+                  css={cssObj.hireNumberCover}
+                  type="button"
+                  onClick={() => {
+                    jobForm.setValue(`position_arr.${positionIndex}.hire_number`, 0);
+                  }}
+                >
+                  {hireNumberLabel}
+                </button>
+                명
+              </>
+            ) : (
+              <>
+                <input
+                  type="number"
+                  css={cssObj.input(6)}
+                  {...jobForm.register(`position_arr.${positionIndex}.hire_number`, {
+                    valueAsNumber: true,
+                    required: true,
+                  })}
+                />
+                명
+              </>
+            )}
           </div>
         </div>
       </div>

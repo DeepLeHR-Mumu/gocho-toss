@@ -68,6 +68,12 @@ export const cssObj = {
     gap: 1rem 1rem;
   `,
 
+  processBox: css`
+    display: flex;
+    align-items: center;
+    gap: 0 1rem;
+  `,
+
   inputLabel: (width: number) => css`
     display: flex;
     align-items: center;

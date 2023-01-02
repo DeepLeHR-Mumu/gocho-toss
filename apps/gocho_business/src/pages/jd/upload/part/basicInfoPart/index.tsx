@@ -74,8 +74,8 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
         <p>채용 절차</p>
         <div css={cssObj.inputContainer}>
           {processArr.fields.map((item, index) => (
-            <>
-              <label css={cssObj.inputLabel(12)} key={`processArr${item.id}`} htmlFor={`processArr${item.id}`}>
+            <div key={`processArr${item.id}`} css={cssObj.processBox}>
+              <label css={cssObj.inputLabel(12)} htmlFor={`processArr${item.id}`}>
                 <input
                   id={`processArr${item.id}`}
                   css={cssObj.erasableInput}
@@ -97,7 +97,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                   <MdOutlineNavigateNext />
                 </div>
               )}
-            </>
+            </div>
           ))}
           <button
             type="button"
@@ -145,7 +145,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
         <div css={cssObj.linkLabelContainer}>
           <label css={cssObj.label} htmlFor="website">
             <input
-              checked={linkType === "website"}
+              defaultChecked={linkType === "website"}
               type="radio"
               name="link"
               id="website"
@@ -159,8 +159,9 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
           </label>
           <p>또는</p>
           <label css={cssObj.label} htmlFor="email">
+            {/* TODO: 이메일 선택 시 맨 앞에 자동으로 mailto: 추가 */}
             <input
-              checked={linkType === "email"}
+              defaultChecked={linkType === "email"}
               type="radio"
               name="link"
               id="email"
