@@ -31,8 +31,17 @@ const CompanyEditPage: NextPageWithLayout = () => {
     mode: "onChange",
   });
 
-  const { handleSubmit, reset } = companyForm;
+  const {
+    handleSubmit,
+    reset,
+    formState: { isDirty },
+  } = companyForm;
+
   const addCompanyDetail = (formData: PostSubmitValues) => {
+    if (!isDirty) {
+      window.alert(COMPANY_MESSSAGE_OBJ.ISDIRTY);
+      return;
+    }
     if (window.confirm(COMPANY_MESSSAGE_OBJ.EDIT)) {
       putCompanyDetail(
         {
@@ -102,7 +111,16 @@ const CompanyEditPage: NextPageWithLayout = () => {
   return (
     <main css={cssObj.wrapper}>
       <PageLayout>
-        <form css={cssObj.container} onSubmit={handleSubmit(addCompanyDetail)}>
+        <form
+          css={cssObj.container}
+          onSubmit={handleSubmit(addCompanyDetail)}
+          onKeyDown={(onKeyDownEvent) => {
+            if (onKeyDownEvent.key === "Enter") {
+              onKeyDownEvent.preventDefault();
+            }
+          }}
+          role="presentation"
+        >
           <header css={cssObj.header}>
             <div>
               <h2 css={cssObj.title}>기업정보</h2>

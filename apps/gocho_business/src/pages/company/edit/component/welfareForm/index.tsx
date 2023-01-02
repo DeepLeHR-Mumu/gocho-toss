@@ -1,7 +1,7 @@
 import { FunctionComponent, useState } from "react";
 import { FiCornerDownLeft, FiMinus } from "react-icons/fi";
 
-import { WelfareFormProps, KeyName } from "./type";
+import { WelfareFormProps, WelfareKey } from "./type";
 import { cssObj } from "./style";
 
 export const WelfareForm: FunctionComponent<WelfareFormProps> = ({ setValue, title, desc, registerObj, valueArr }) => {
@@ -12,10 +12,10 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({ setValue, tit
     setListArr((prevListArr) => {
       const filterArr = prevListArr && prevListArr.filter((_, filterIndex) => filterIndex !== index);
       if (filterArr?.length === 0) {
-        setValue(registerObj.name as KeyName, null);
+        setValue(registerObj.name as WelfareKey, null);
         return null;
       }
-      setValue(registerObj.name as KeyName, filterArr);
+      setValue(registerObj.name as WelfareKey, filterArr);
       return filterArr;
     });
   };
@@ -24,10 +24,10 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({ setValue, tit
     if (valueText !== "") {
       setListArr((prevListArr) => {
         if (!prevListArr) {
-          setValue(registerObj.name as KeyName, [text]);
+          setValue(registerObj.name as WelfareKey, [text]);
           return [text];
         }
-        setValue(registerObj.name as KeyName, [...prevListArr, text]);
+        setValue(registerObj.name as WelfareKey, [...prevListArr, text]);
         return [...prevListArr, text];
       });
       setValueText("");

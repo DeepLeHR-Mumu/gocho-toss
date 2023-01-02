@@ -1,7 +1,7 @@
 import { UseFormRegisterReturn, UseFormSetValue } from "react-hook-form";
 import { PostSubmitValues } from "../../type";
 
-export type KeyName =
+export type WelfareKey =
   | "welfare.money"
   | "welfare.health"
   | "welfare.life"
