@@ -65,7 +65,7 @@ export const cssObj = {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 1rem 2rem;
+    gap: 1rem 1rem;
   `,
 
   inputLabel: (width: number) => css`
@@ -82,6 +82,7 @@ export const cssObj = {
     font-size: 1rem;
     width: calc(100% - 3rem);
     font-weight: 400;
+
     ::placeholder {
       color: ${COLORS.GRAY30};
     }
@@ -96,6 +97,11 @@ export const cssObj = {
     height: 1.75rem;
     color: ${COLORS.GRAY10};
     background-color: ${COLORS.GRAY70};
+  `,
+
+  icon: css`
+    font-size: 1.5rem;
+    color: ${COLORS.GRAY35};
   `,
 
   linkLabelContainer: css`

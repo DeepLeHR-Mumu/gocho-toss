@@ -2,6 +2,7 @@ import { FunctionComponent, useState } from "react";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { FiMinus, FiLink, FiAtSign, FiExternalLink } from "react-icons/fi";
+import { MdOutlineNavigateNext } from "react-icons/md";
 import { cssObj } from "./style";
 import { BasicInfoPartProps } from "./type";
 
@@ -24,14 +25,9 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
     setIsAlways((prev) => !prev);
   };
 
-  const linkButtonClickHandler = () => {
-    if (linkType === "website") {
-      setLinkType("email");
-      jobForm.setValue(`apply_url`, "");
-    } else {
-      setLinkType("website");
-      jobForm.setValue(`apply_url`, "");
-    }
+  const linkButtonClickHandler = (type: typeof linkType) => {
+    setLinkType(type);
+    jobForm.setValue(`apply_url`, "");
   };
 
   return (
@@ -78,23 +74,30 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
         <p>채용 절차</p>
         <div css={cssObj.inputContainer}>
           {processArr.fields.map((item, index) => (
-            <label css={cssObj.inputLabel(13)} key={`processArr${item.id}`} htmlFor={`processArr${item.id}`}>
-              <input
-                id={`processArr${item.id}`}
-                css={cssObj.erasableInput}
-                placeholder="채용 절차"
-                {...jobForm.register(`process_arr.${index}.value`, { required: true })}
-              />
-              <button
-                type="button"
-                css={cssObj.deleteInputButton}
-                onClick={() => {
-                  processArr.remove(index);
-                }}
-              >
-                <FiMinus />
-              </button>
-            </label>
+            <>
+              <label css={cssObj.inputLabel(12)} key={`processArr${item.id}`} htmlFor={`processArr${item.id}`}>
+                <input
+                  id={`processArr${item.id}`}
+                  css={cssObj.erasableInput}
+                  placeholder={`${index + 1}차`}
+                  {...jobForm.register(`process_arr.${index}.value`, { required: true })}
+                />
+                <button
+                  type="button"
+                  css={cssObj.deleteInputButton}
+                  onClick={() => {
+                    processArr.remove(index);
+                  }}
+                >
+                  <FiMinus />
+                </button>
+              </label>
+              {index + 1 !== processArr.fields.length && (
+                <div css={cssObj.icon}>
+                  <MdOutlineNavigateNext />
+                </div>
+              )}
+            </>
           ))}
           <button
             type="button"
@@ -142,12 +145,13 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
         <div css={cssObj.linkLabelContainer}>
           <label css={cssObj.label} htmlFor="website">
             <input
+              checked={linkType === "website"}
               type="radio"
               name="link"
               id="website"
               css={cssObj.radio}
               onClick={() => {
-                linkButtonClickHandler();
+                linkButtonClickHandler("website");
               }}
             />
             <div css={cssObj.radioBox} />
@@ -156,12 +160,13 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
           <p>또는</p>
           <label css={cssObj.label} htmlFor="email">
             <input
+              checked={linkType === "email"}
               type="radio"
               name="link"
               id="email"
               css={cssObj.radio}
               onClick={() => {
-                linkButtonClickHandler();
+                linkButtonClickHandler("email");
               }}
             />
             <div css={cssObj.radioBox} />

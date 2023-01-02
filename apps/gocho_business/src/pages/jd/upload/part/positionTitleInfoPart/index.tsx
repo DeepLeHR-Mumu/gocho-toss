@@ -46,6 +46,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
       ]);
     }
   };
+
   return (
     <>
       <div css={cssObj.titleContainer}>
