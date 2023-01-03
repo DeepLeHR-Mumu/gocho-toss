@@ -79,18 +79,17 @@ export const cssObj = {
   labelContainer: css`
     display: flex;
     align-items: center;
+    margin-left: 1rem;
     gap: 0 0.5rem;
   `,
 
-  placeTypeLabel: (isSelected: boolean) => css`
-    padding: 0.75rem 1rem;
-    background-color: ${isSelected ? `${COLORS.GRAY100}` : `${COLORS.GRAY80}`};
-  `,
-
-  placeTypeLabelData: css`
+  placeTypeLabelData: (isSelected: boolean) => css`
     display: flex;
+    background-color: ${isSelected ? `${COLORS.GRAY100}` : `${COLORS.GRAY80}`};
+    padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+    margin-left: -2rem;
+    margin-right: 0.75rem;
     align-items: center;
-    margin-left: 0.5rem;
     gap: 0 0.25rem;
   `,
 

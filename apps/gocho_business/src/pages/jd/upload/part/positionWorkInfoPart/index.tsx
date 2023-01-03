@@ -136,17 +136,17 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
         <p>근무지 종류</p>
         <div css={cssObj.labelContainer}>
           {placeTypeArr.map((placeType) => (
-            // TODO: 밖에 padding을 씌워서 가장자리는 클릭이 되지 않음
-            <div
-              key={`${placeType.name}${positionIndex}`}
-              css={cssObj.placeTypeLabel(placeType.data === jobForm.watch("position_arr")[positionIndex].place.type)}
-            >
+            <div key={`${placeType.name}${positionIndex}`}>
               <SharedRadioButton
                 value={placeType.data}
                 id={`${placeType.name}${positionIndex}`}
                 registerObj={jobForm.register(`position_arr.${positionIndex}.place.type`)}
               >
-                <p css={cssObj.placeTypeLabelData}>
+                <p
+                  css={cssObj.placeTypeLabelData(
+                    placeType.data === jobForm.watch("position_arr")[positionIndex].place.type
+                  )}
+                >
                   {placeType.name}
                   <span css={cssObj.placeTypeLabelIcon}>
                     <placeType.icon />
