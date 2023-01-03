@@ -13,8 +13,9 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
   appendPosition,
   removePosition,
   control,
+  isCardOpen,
+  setIsCardOpen,
 }) => {
-  const [isCardOpen, setIsCardOpen] = useState<boolean>(false);
   const [isMainTaskOpen, setIsMainTaskOpen] = useState<boolean>(false);
   const [isSubTaskOpen, setIsSubTaskOpen] = useState<boolean>(false);
   const [hireNumberLabel, setHireNumberLabel] = useState<string>("");
@@ -79,10 +80,16 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
             css={cssObj.openCardButton}
             type="button"
             onClick={() => {
-              setIsCardOpen((prev) => !prev);
+              setIsCardOpen((prev) =>
+                prev.map((item, index) => {
+                  if (index === positionIndex) {
+                    return !prev[positionIndex];
+                  }
+                  return item;
+                })
+              );
             }}
           >
-            {/* TODO: 카드 열고 접기 아직 안됨 */}
             {isCardOpen ? (
               <>
                 <FiChevronUp />
@@ -98,11 +105,21 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
           <button
             type="button"
             css={cssObj.copyPositionButton}
-            onClick={() => appendPosition({ ...jobForm.watch("position_arr")[positionIndex] })}
+            onClick={() => {
+              appendPosition({ ...jobForm.watch("position_arr")[positionIndex] });
+              setIsCardOpen((prev) => [...prev.slice(0, positionIndex + 1), false, ...prev.slice(positionIndex + 1)]);
+            }}
           >
             직무 카드 복사
           </button>
-          <button type="button" css={cssObj.deletePositionButton} onClick={() => removePosition(positionIndex)}>
+          <button
+            type="button"
+            css={cssObj.deletePositionButton}
+            onClick={() => {
+              removePosition(positionIndex);
+              setIsCardOpen((prev) => prev.filter((item, index) => index !== positionIndex));
+            }}
+          >
             직무 삭제
           </button>
         </div>
@@ -173,102 +190,106 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
           </div>
         </div>
       </div>
-      <div css={cssObj.container}>
-        <p>세부 직무 내용</p>
-        <div css={cssObj.inputContainer}>
-          {taskDetailArr.fields.map((item, index) => (
-            <label css={cssObj.inputLabel(47)} key={`taskDetailArr${item.id}`} htmlFor={`taskDetailArr${item.id}`}>
-              <input
-                id={`taskDetailArr${item.id}`}
-                css={cssObj.inputWithButton}
-                placeholder="합격시 구체적으로 어떤 일을 하게 되는지 명시해주세요"
-                {...jobForm.register(`position_arr.${positionIndex}.task_detail_arr.${index}.value`)}
-              />
+      {isCardOpen && (
+        <>
+          <div css={cssObj.container}>
+            <p>세부 직무 내용</p>
+            <div css={cssObj.inputContainer}>
+              {taskDetailArr.fields.map((item, index) => (
+                <label css={cssObj.inputLabel(47)} key={`taskDetailArr${item.id}`} htmlFor={`taskDetailArr${item.id}`}>
+                  <input
+                    id={`taskDetailArr${item.id}`}
+                    css={cssObj.inputWithButton}
+                    placeholder="합격시 구체적으로 어떤 일을 하게 되는지 명시해주세요"
+                    {...jobForm.register(`position_arr.${positionIndex}.task_detail_arr.${index}.value`)}
+                  />
+                  <button
+                    type="button"
+                    css={cssObj.deleteInputButton}
+                    onClick={() => {
+                      taskDetailArr.remove(positionIndex);
+                    }}
+                  >
+                    <FiMinus />
+                  </button>
+                </label>
+              ))}
               <button
                 type="button"
-                css={cssObj.deleteInputButton}
                 onClick={() => {
-                  taskDetailArr.remove(positionIndex);
+                  taskDetailArr.append({ value: "" });
                 }}
               >
-                <FiMinus />
+                + 입력칸 추가
               </button>
-            </label>
-          ))}
-          <button
-            type="button"
-            onClick={() => {
-              taskDetailArr.append({ value: "" });
-            }}
-          >
-            + 입력칸 추가
-          </button>
-        </div>
-      </div>
-      <div css={cssObj.container}>
-        <p>채용 인원</p>
-        <div css={cssObj.hireNumberContainer}>
-          <button
-            type="button"
-            css={cssObj.hireNumberButton}
-            onClick={() => {
-              jobForm.setValue(`position_arr.${positionIndex}.hire_number`, -1);
-              setHireNumberLabel("0");
-            }}
-          >
-            0명
-          </button>
-          <button
-            type="button"
-            css={cssObj.hireNumberButton}
-            onClick={() => {
-              jobForm.setValue(`position_arr.${positionIndex}.hire_number`, -2);
-              setHireNumberLabel("00");
-            }}
-          >
-            00명
-          </button>
-          <button
-            type="button"
-            css={cssObj.hireNumberButton}
-            onClick={() => {
-              jobForm.setValue(`position_arr.${positionIndex}.hire_number`, -3);
-              setHireNumberLabel("000");
-            }}
-          >
-            000명
-          </button>
-          <div css={cssObj.hireNumberInputContainer}>
-            {/* TODO: 0, 00, 000명 버튼 누른 다음, 위에 클릭 하고 한번 더 눌러야 input에 포커싱이 됨 */}
-            {jobForm.watch("position_arr")[positionIndex].hire_number < 0 ? (
-              <>
-                <button
-                  css={cssObj.hireNumberCover}
-                  type="button"
-                  onClick={() => {
-                    jobForm.setValue(`position_arr.${positionIndex}.hire_number`, 0);
-                  }}
-                >
-                  {hireNumberLabel}
-                </button>
-                명
-              </>
-            ) : (
-              <>
-                <input
-                  type="number"
-                  css={cssObj.input(6)}
-                  {...jobForm.register(`position_arr.${positionIndex}.hire_number`, {
-                    valueAsNumber: true,
-                    required: true,
-                  })}
-                />
-                명
-              </>
-            )}
+            </div>
           </div>
-        </div>
-      </div>
+          <div css={cssObj.container}>
+            <p>채용 인원</p>
+            <div css={cssObj.hireNumberContainer}>
+              <button
+                type="button"
+                css={cssObj.hireNumberButton}
+                onClick={() => {
+                  jobForm.setValue(`position_arr.${positionIndex}.hire_number`, -1);
+                  setHireNumberLabel("0");
+                }}
+              >
+                0명
+              </button>
+              <button
+                type="button"
+                css={cssObj.hireNumberButton}
+                onClick={() => {
+                  jobForm.setValue(`position_arr.${positionIndex}.hire_number`, -2);
+                  setHireNumberLabel("00");
+                }}
+              >
+                00명
+              </button>
+              <button
+                type="button"
+                css={cssObj.hireNumberButton}
+                onClick={() => {
+                  jobForm.setValue(`position_arr.${positionIndex}.hire_number`, -3);
+                  setHireNumberLabel("000");
+                }}
+              >
+                000명
+              </button>
+              <div css={cssObj.hireNumberInputContainer}>
+                {/* TODO: 0, 00, 000명 버튼 누른 다음, 위에 클릭 하고 한번 더 눌러야 input에 포커싱이 됨 */}
+                {jobForm.watch("position_arr")[positionIndex].hire_number < 0 ? (
+                  <>
+                    <button
+                      css={cssObj.hireNumberCover}
+                      type="button"
+                      onClick={() => {
+                        jobForm.setValue(`position_arr.${positionIndex}.hire_number`, 0);
+                      }}
+                    >
+                      {hireNumberLabel}
+                    </button>
+                    명
+                  </>
+                ) : (
+                  <>
+                    <input
+                      type="number"
+                      css={cssObj.input(6)}
+                      {...jobForm.register(`position_arr.${positionIndex}.hire_number`, {
+                        valueAsNumber: true,
+                        required: true,
+                      })}
+                    />
+                    명
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };

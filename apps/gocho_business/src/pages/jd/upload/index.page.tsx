@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { BiRocket } from "react-icons/bi";
 
@@ -18,6 +18,8 @@ import { getFieldArrayValue, getFieldArrayValueWithNull } from "./util";
 import { cssObj } from "./style";
 
 const JdUploadPage: NextPageWithLayout = () => {
+  const [isCardOpenArr, setIsCardOpenArr] = useState<boolean[]>([false]);
+
   const jobForm = useForm<JobFormValues>({
     defaultValues: {
       process_arr: [{ value: "" }, { value: "" }],
@@ -90,7 +92,7 @@ const JdUploadPage: NextPageWithLayout = () => {
           <form onSubmit={handleSubmit(jobSubmitHandler)}>
             <HeaderPart />
             <BasicInfoPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
-            <PositionHeaderPart append={append} />
+            <PositionHeaderPart append={append} setIsCardOpen={setIsCardOpenArr} />
             <ul>
               {fields.map((item, index) => (
                 <li key={`${item.id}`} css={cssObj.cardContainer}>
@@ -101,9 +103,20 @@ const JdUploadPage: NextPageWithLayout = () => {
                     appendPosition={append}
                     removePosition={remove}
                     control={control}
+                    isCardOpen={isCardOpenArr[index]}
+                    setIsCardOpen={setIsCardOpenArr}
                   />
-                  <PositionRequiredInfoPart id={item.id} positionIndex={index} jobForm={jobForm} control={control} />
-                  <PositionWorkInfoPart id={item.id} positionIndex={index} jobForm={jobForm} control={control} />
+                  {isCardOpenArr[index] && (
+                    <>
+                      <PositionRequiredInfoPart
+                        id={item.id}
+                        positionIndex={index}
+                        jobForm={jobForm}
+                        control={control}
+                      />
+                      <PositionWorkInfoPart id={item.id} positionIndex={index} jobForm={jobForm} control={control} />
+                    </>
+                  )}
                 </li>
               ))}
             </ul>
