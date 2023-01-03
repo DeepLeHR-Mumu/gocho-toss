@@ -33,6 +33,11 @@ export const cssObj = {
     }
   `,
 
+  rotationInnerText: css`
+    white-space: nowrap;
+    overflow: hidden;
+  `,
+
   optionList: (isOpen: boolean) => css`
     position: absolute;
     top: 2.75rem;

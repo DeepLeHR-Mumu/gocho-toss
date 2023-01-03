@@ -87,6 +87,11 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
     }
   };
 
+  const rotationTextMaker = (selectedRotation: string[]) => {
+    if (selectedRotation.length === 0) return "교대 형태 선택";
+    return selectedRotation.join(", ");
+  };
+
   return (
     <>
       <div css={cssObj.container}>
@@ -99,8 +104,9 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
               setIsRotationOpen((prev) => !prev);
             }}
           >
-            {/* TODO: 디자인처럼 교대 형태 보일 수 있도록 제작 */}
-            교대 형태 선택
+            <p css={cssObj.rotationInnerText}>
+              {rotationTextMaker(jobForm.watch("position_arr")[positionIndex].rotation_arr)}
+            </p>
             {isRotationOpen ? <FiChevronUp /> : <FiChevronDown />}
           </button>
           <div css={cssObj.optionList(isRotationOpen)}>
