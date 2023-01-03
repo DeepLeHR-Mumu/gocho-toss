@@ -59,6 +59,7 @@ const JdUploadPage: NextPageWithLayout = () => {
           ...jobObj,
           start_time: new Date(jobObj.start_time).getTime(),
           end_time: new Date(jobObj.end_time).getTime(),
+          apply_url: jobObj.apply_url.includes("@") ? `mailto: ${jobObj.apply_url}` : jobObj.apply_url,
           process_arr: getFieldArrayValue(jobObj.process_arr),
           apply_route_arr: getFieldArrayValue(jobObj.apply_route_arr),
           etc_arr: getFieldArrayValueWithNull(jobObj.etc_arr),

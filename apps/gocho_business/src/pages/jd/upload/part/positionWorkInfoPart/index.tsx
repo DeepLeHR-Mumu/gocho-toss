@@ -31,6 +31,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
   const queryClient = useQueryClient();
   const openPostCodePopup = useDaumPostcodePopup(POSTCODE_SCRIPT_URL);
 
+  // TODO: factories/find로 변경하기, params 추가
   const { data: factoryDataArr } = useFactoryArr();
 
   const payArr = useFieldArray({
@@ -160,7 +161,6 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
         </div>
         <div css={cssObj.placeInputContainer}>
           {jobForm.watch("position_arr")[positionIndex].place.type === "일반" && (
-            // TODO: 현재는 등록 대기중인 공장도 전부 출력되는데 이게 맞나??
             <>
               <p>공장 근무지</p>
               <div css={cssObj.factoryInputWrapper}>

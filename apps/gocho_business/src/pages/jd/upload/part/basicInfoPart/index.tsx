@@ -159,7 +159,6 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
           </label>
           <p>또는</p>
           <label css={cssObj.label} htmlFor="email">
-            {/* TODO: 이메일 선택 시 맨 앞에 자동으로 mailto: 추가 */}
             <input
               defaultChecked={linkType === "email"}
               type="radio"
