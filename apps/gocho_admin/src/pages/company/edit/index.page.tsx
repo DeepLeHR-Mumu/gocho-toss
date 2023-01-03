@@ -69,6 +69,7 @@ const CompanyEdit: NextPage = () => {
   };
 
   useEffect(() => {
+    const businessNumber = companyData?.businessNumber;
     const newFoundDate = companyData?.foundDate ? companyData.foundDate + 540000 * 60 : 0;
     const FactoryNewArr = companyData?.factoryArr?.map((factory) => {
       return {
@@ -86,7 +87,9 @@ const CompanyEdit: NextPage = () => {
 
     reset({
       name: companyData?.name,
-      business_number: companyData?.businessNumber,
+      business_number: businessNumber
+        ? Number(businessNumber.slice(0, 3) + businessNumber.slice(4, 6) + businessNumber.slice(7))
+        : 0,
       youtube_url: companyData?.youtubeUrl,
       industry: companyData?.industry,
       size: companyData?.size,
