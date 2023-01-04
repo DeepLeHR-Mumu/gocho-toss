@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
@@ -38,17 +39,15 @@ export const cssObj = {
   formCSS: css`
     width: 100%;
   `,
-  inputBox: css`
-    > li {
-      margin-bottom: 1.75rem;
-      width: 100%;
-      background-color: ${COLORS.GRAY100};
-      border: 1px solid ${COLORS.GRAY10};
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.75rem 1rem;
-    }
+  inputBox: (isError?: boolean) => css`
+    margin-bottom: 1.75rem;
+    width: 100%;
+    background-color: ${COLORS.GRAY100};
+    border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
   `,
   inputCSS: css`
     font-size: 1rem;

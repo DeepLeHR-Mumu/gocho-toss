@@ -1,5 +1,9 @@
 import { FunctionComponent } from "react";
+import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
+
+import colorLogo from "shared-image/global/deepLeLogo/logoIconColor.svg";
+import monoLogo from "shared-image/global/deepLeLogo/logoIconMono.svg";
 
 import { tokenService } from "@/utils/tokenService";
 import { useUserState } from "@/globalStates/useUserState";
@@ -22,11 +26,15 @@ export const TopBar: FunctionComponent = () => {
     });
   };
 
+  const isLogined = userInfoData !== false && userInfoData !== null;
+
   return (
-    <header css={cssObj.wrapper}>
+    <header css={cssObj.wrapper(isLogined)}>
       <div css={cssObj.container}>
-        <div css={cssObj.logo} />
-        <h1 css={cssObj.title}>고초대졸.business</h1>
+        <div css={cssObj.logo}>
+          <Image src={isLogined ? colorLogo : monoLogo} alt="고초대졸닷컴 비즈니스" layout="fill" objectFit="contain" />
+        </div>
+        <h1 css={cssObj.title(isLogined)}>고초대졸.business</h1>
       </div>
       {userInfoData ? (
         <button type="button" css={cssObj.logoutButton} onClick={doLogoutHandler}>
