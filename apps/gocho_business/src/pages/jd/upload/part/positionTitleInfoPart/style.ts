@@ -45,6 +45,10 @@ export const cssObj = {
     }
   `,
 
+  inputTitle: (isError: boolean) => css`
+    color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+  `,
+
   taskInputContainer: css`
     display: flex;
     align-items: center;

@@ -304,7 +304,10 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                 id={`payArr${item.id}`}
                 css={cssObj.inputWithButton}
                 placeholder="급여 정보"
-                {...jobForm.register(`position_arr.${positionIndex}.pay_arr.${index}.value`)}
+                {...jobForm.register(`position_arr.${positionIndex}.pay_arr.${index}.value`, {
+                  required: true,
+                  maxLength: 70,
+                })}
               />
               <button
                 type="button"
@@ -392,7 +395,9 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                 id={`preferredEtcArr${item.id}`}
                 css={cssObj.inputWithButton}
                 placeholder="기타 우대 사항"
-                {...jobForm.register(`position_arr.${positionIndex}.preferred_etc_arr.${index}.value`)}
+                {...jobForm.register(`position_arr.${positionIndex}.preferred_etc_arr.${index}.value`, {
+                  maxLength: 70,
+                })}
               />
               <button
                 type="button"

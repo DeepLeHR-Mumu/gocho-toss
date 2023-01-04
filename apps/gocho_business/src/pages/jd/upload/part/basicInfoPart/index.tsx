@@ -35,16 +35,20 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
       <h2 css={cssObj.title}>접수 정보</h2>
       <p>공고 접수와 관련된 공통 정보들 입니다</p>
       <div css={cssObj.container}>
-        <p>공고 제목</p>
-        <input css={cssObj.input(47)} placeholder="공고 제목" {...jobForm.register("title", { required: true })} />
+        <p css={cssObj.inputTitle(!!jobForm.formState.errors.title)}>공고 제목</p>
+        <input
+          css={cssObj.input(47)}
+          placeholder="공고 제목"
+          {...jobForm.register("title", { required: true, maxLength: 50 })}
+        />
       </div>
       <div css={cssObj.dateInputContainer}>
         <div>
-          <p>채용시작 일시</p>
+          <p css={cssObj.inputTitle(jobForm.formState.errors.start_time?.type === "required")}>채용시작 일시</p>
           <input css={cssObj.input(20)} type="datetime-local" {...jobForm.register("start_time", { required: true })} />
         </div>
         <div>
-          <p>채용마감 일시</p>
+          <p css={cssObj.inputTitle(jobForm.formState.errors.end_time?.type === "required")}>채용마감 일시</p>
           {isAlways ? (
             <div css={cssObj.isAlwaysBlock}>상시 모집</div>
           ) : (
@@ -71,7 +75,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
         </div>
       </div>
       <div css={cssObj.container}>
-        <p>채용 절차</p>
+        <p css={cssObj.inputTitle(jobForm.formState.errors.process_arr?.type === "required")}>채용 절차</p>
         <div css={cssObj.inputContainer}>
           {processArr.fields.map((item, index) => (
             <div key={`processArr${item.id}`} css={cssObj.processBox}>
@@ -80,7 +84,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                   id={`processArr${item.id}`}
                   css={cssObj.erasableInput}
                   placeholder={`${index + 1}차`}
-                  {...jobForm.register(`process_arr.${index}.value`, { required: true })}
+                  {...jobForm.register(`process_arr.${index}.value`, { required: true, maxLength: 20 })}
                 />
                 <button
                   type="button"
@@ -118,7 +122,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                 id={`applyRouteArr${item.id}`}
                 css={cssObj.erasableInput}
                 placeholder="지원 방법/제출 서류"
-                {...jobForm.register(`apply_route_arr.${index}.value`, { required: true })}
+                {...jobForm.register(`apply_route_arr.${index}.value`, { required: true, maxLength: 30 })}
               />
               <button
                 type="button"
@@ -155,7 +159,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               }}
             />
             <div css={cssObj.radioBox} />
-            채용 링크
+            <p css={cssObj.inputTitle(jobForm.formState.errors.apply_url?.message === "error")}>채용 링크</p>
           </label>
           <p>또는</p>
           <label css={cssObj.label} htmlFor="email">
@@ -170,7 +174,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               }}
             />
             <div css={cssObj.radioBox} />
-            이메일 링크
+            <p css={cssObj.inputTitle(jobForm.formState.errors.apply_url?.type === "required")}>이메일 링크</p>
           </label>
         </div>
         <div>
@@ -237,7 +241,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                 id={`etcArr${item.id}`}
                 css={cssObj.erasableInput}
                 placeholder="기타 사항 (선택)"
-                {...jobForm.register(`etc_arr.${index}.value`, { required: true })}
+                {...jobForm.register(`etc_arr.${index}.value`, { required: true, maxLength: 70 })}
               />
               <button
                 type="button"

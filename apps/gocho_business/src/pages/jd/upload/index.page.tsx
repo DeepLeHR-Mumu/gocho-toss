@@ -14,13 +14,15 @@ import { PositionRequiredInfoPart } from "./part/positionRequiredInfoPart";
 import { PositionWorkInfoPart } from "./part/positionWorkInfoPart";
 import { JobFormValues } from "./type";
 import { blankPosition } from "./constant";
-import { getFieldArrayValue, getFieldArrayValueWithNull } from "./util";
+import { getFieldArrayValue, getFieldArrayValueWithNull, customResolver } from "./util";
 import { cssObj } from "./style";
 
 const JdUploadPage: NextPageWithLayout = () => {
   const [isCardOpenArr, setIsCardOpenArr] = useState<boolean[]>([false]);
 
   const jobForm = useForm<JobFormValues>({
+    mode: "onBlur",
+    resolver: customResolver,
     defaultValues: {
       process_arr: [{ value: "" }, { value: "" }],
       apply_route_arr: [{ value: "" }],

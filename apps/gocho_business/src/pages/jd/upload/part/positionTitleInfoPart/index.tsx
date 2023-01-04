@@ -201,7 +201,10 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                     id={`taskDetailArr${item.id}`}
                     css={cssObj.inputWithButton}
                     placeholder="합격시 구체적으로 어떤 일을 하게 되는지 명시해주세요"
-                    {...jobForm.register(`position_arr.${positionIndex}.task_detail_arr.${index}.value`)}
+                    {...jobForm.register(`position_arr.${positionIndex}.task_detail_arr.${index}.value`, {
+                      required: true,
+                      maxLength: 70,
+                    })}
                   />
                   <button
                     type="button"
@@ -225,7 +228,13 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
             </div>
           </div>
           <div css={cssObj.container}>
-            <p>채용 인원</p>
+            <p
+              css={cssObj.inputTitle(
+                jobForm.formState.errors.position_arr?.[positionIndex]?.hire_number?.type === "required"
+              )}
+            >
+              채용 인원
+            </p>
             <div css={cssObj.hireNumberContainer}>
               <button
                 type="button"

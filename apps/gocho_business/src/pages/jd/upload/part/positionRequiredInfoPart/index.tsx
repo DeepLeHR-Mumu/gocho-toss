@@ -169,6 +169,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           <div css={cssObj.yearInputContainer}>
             <input
               type="number"
+              min="1"
               css={cssObj.activatableInput(isYearDisabled || isMinYear)}
               disabled={isYearDisabled || isMinYear}
               {...jobForm.register(`position_arr.${positionIndex}.min_year`, { valueAsNumber: true })}
@@ -221,8 +222,11 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
               <input
                 id={`requiredEtcArr${item.id}`}
                 css={cssObj.inputWithButton}
-                placeholder="합격시 구체적으로 어떤 일을 하게 되는지 명시해주세요"
-                {...jobForm.register(`position_arr.${positionIndex}.required_etc_arr.${index}.value`)}
+                placeholder="군필 여부, 나이, 성별 등의 기타 조건을 적어주세요"
+                {...jobForm.register(`position_arr.${positionIndex}.required_etc_arr.${index}.value`, {
+                  required: true,
+                  maxLength: 70,
+                })}
               />
               <button
                 type="button"

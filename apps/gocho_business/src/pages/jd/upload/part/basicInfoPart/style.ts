@@ -17,6 +17,10 @@ export const cssObj = {
     }
   `,
 
+  inputTitle: (isError: boolean) => css`
+    color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+  `,
+
   input: (width: number) => css`
     border: 1px solid ${COLORS.GRAY10};
     height: 2.5rem;
