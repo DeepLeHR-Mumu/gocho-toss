@@ -56,4 +56,4 @@ cypress/screenshots
 .idea
 
 # storybook
-/storybook-static/
+**/storybook-static/
