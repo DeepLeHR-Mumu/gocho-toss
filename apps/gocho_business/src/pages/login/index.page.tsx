@@ -9,7 +9,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
-import gochoColorSrc from "shared-image/global/deepLeLogo/largeColor.svg";
+import gochoColorSrc from "shared-image/global/deepLeLogo/logoIconColor.svg";
 
 import { INTERNAL_URL } from "@/constants/url";
 import { useUserState } from "@/globalStates/useUserState";

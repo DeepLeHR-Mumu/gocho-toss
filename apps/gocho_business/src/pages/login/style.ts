@@ -68,11 +68,11 @@ export const cssObj = {
   errorMsg: css`
     font-size: 1rem;
     height: 1rem;
-    margin: 2rem 0;
+    margin: 1rem 0;
     text-align: center;
     line-height: 0;
     display: block;
-    color: ${COLORS.GRAY10};
+    color: ${COLORS.ERROR_RED40};
     font-weight: 400;
   `,
   bottomBox: css`
@@ -95,7 +95,7 @@ export const cssObj = {
     font-size: 1rem;
     font-weight: 400;
     color: ${COLORS.GRAY100};
-    background-color: ${COLORS.GRAY40};
-    height: 2.5rem;
+    background-color: #ccc;
+    height: 3rem;
   `,
 };
