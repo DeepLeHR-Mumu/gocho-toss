@@ -3,13 +3,14 @@ import { COLORS } from "shared-style/color";
 
 export const cssObj = {
   wrapper: css`
-    /* background-image: url("image/help/help_background.jpg"); */
-    background-color: green;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center bottom;
+    overflow: hidden;
+    background-image: linear-gradient(to bottom, ${COLORS.GRAY100}, #61adff);
     min-height: calc(100vh - 25rem);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
   `,
   title: css`
     padding-top: 2rem;
@@ -57,9 +58,20 @@ export const cssObj = {
       top: -0.625rem;
       width: 5rem;
       height: 3.75rem;
-      background-image: url("image/help/arrow_left.svg");
+      background-image: url("image/help/stars.svg");
       background-repeat: no-repeat;
       background-size: contain;
+    }
+  `,
+  backgroundBox: css`
+    position: relative;
+    width: 100%;
+    min-width: 23.25rem;
+    max-width: 25vw;
+    margin-bottom: -2px;
+
+    img {
+      object-position: center bottom;
     }
   `,
 };
