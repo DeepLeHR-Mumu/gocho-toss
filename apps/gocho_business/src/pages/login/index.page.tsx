@@ -11,6 +11,7 @@ import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
 import gochoColorSrc from "shared-image/global/deepLeLogo/logoIconColor.svg";
 
+import { useModal } from "@/globalStates/useModal";
 import { INTERNAL_URL } from "@/constants/url";
 import { useUserState } from "@/globalStates/useUserState";
 import { TopBar } from "@/components/global/layout/topBar";
@@ -28,6 +29,7 @@ const LoginPage: NextPage = () => {
   const queryClient = useQueryClient();
   const { setUserInfoData } = useUserState();
   const { mutate: postLogin } = useDoLogin();
+  const { setCurrentModal } = useModal();
   const {
     register,
     handleSubmit,
@@ -111,7 +113,13 @@ const LoginPage: NextPage = () => {
             <div css={cssObj.bottomBox}>
               <CheckBoxWithDesc desc="자동 로그인" id="auto_login" registerObj={register("auto_login")} />
 
-              <button type="button" css={cssObj.findPasswordButton}>
+              <button
+                type="button"
+                css={cssObj.findPasswordButton}
+                onClick={() => {
+                  setCurrentModal("findPasswordModal");
+                }}
+              >
                 비밀번호 찾기
               </button>
             </div>
