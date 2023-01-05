@@ -20,7 +20,7 @@ function validate(
 
   const positionIndex = Number(name.split(".")[1]);
 
-  const singleInputName = ["title", "start_time", "end_time", "apply_url", "task_main"];
+  const singleInputName = ["title", "start_time", "end_time", "apply_url", "task_main", "place.etc"];
   const fieldArrayName = ["process_arr", "apply_route_arr", "task_detail_arr", "required_etc_arr", "pay_arr"];
 
   if (singleInputName.some((element) => name.includes(element)) && value === "") {

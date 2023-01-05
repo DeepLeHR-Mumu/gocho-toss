@@ -8,7 +8,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
-import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 
 import { useFactoryArr } from "@/apis/factory/useFactoryArr";
 import { factoryArrKeyObj } from "@/apis/factory/useFactoryArr/type";
@@ -46,6 +45,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
 
   const rotationClickHandler = (rotation: string) => {
     const isInList = jobForm.watch("position_arr")[positionIndex].rotation_arr.includes(rotation);
+    jobForm.clearErrors(`position_arr.${positionIndex}.rotation_arr`);
     if (isInList) {
       jobForm.setValue(`position_arr.${positionIndex}.rotation_arr`, [
         ...jobForm.watch("position_arr")[positionIndex].rotation_arr.filter((element) => element !== rotation),
@@ -96,12 +96,18 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
   return (
     <>
       <div css={cssObj.container}>
-        <p>교대 형태</p>
+        <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.rotation_arr)}>교대 형태</p>
         <div css={cssObj.optionContainer}>
           <button
             css={cssObj.input(20)}
             type="button"
             onClick={() => {
+              if (isRotationOpen && jobForm.watch("position_arr")[positionIndex].rotation_arr.length === 0) {
+                jobForm.setError(`position_arr.${positionIndex}.rotation_arr`, {
+                  type: "required",
+                  message: "no rotation",
+                });
+              }
               setIsRotationOpen((prev) => !prev);
             }}
           >
@@ -137,11 +143,22 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
         <div css={cssObj.labelContainer}>
           {placeTypeArr.map((placeType) => (
             <div key={`${placeType.name}${positionIndex}`}>
-              <SharedRadioButton
-                value={placeType.data}
-                id={`${placeType.name}${positionIndex}`}
-                registerObj={jobForm.register(`position_arr.${positionIndex}.place.type`)}
-              >
+              <label key={`${placeType.name}${id}`} htmlFor={`${placeType.name}${id}`} css={cssObj.label}>
+                <input
+                  type="radio"
+                  id={`${placeType.name}${id}`}
+                  css={cssObj.radio}
+                  {...jobForm.register(`position_arr.${positionIndex}.place.type`, {
+                    required: true,
+                  })}
+                  value={placeType.data}
+                  onClick={() => {
+                    if (jobForm.watch("position_arr")[positionIndex].place.type !== placeType.data) {
+                      jobForm.clearErrors(`position_arr.${positionIndex}.place.etc`);
+                    }
+                  }}
+                />
+                <div css={cssObj.radioBox} />
                 <p
                   css={cssObj.placeTypeLabelData(
                     placeType.data === jobForm.watch("position_arr")[positionIndex].place.type
@@ -152,7 +169,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                     <placeType.icon />
                   </span>
                 </p>
-              </SharedRadioButton>
+              </label>
             </div>
           ))}
           <p css={cssObj.desc}>
@@ -275,7 +292,14 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
           )}
           {jobForm.watch("position_arr")[positionIndex].place.type === "해외" && (
             <>
-              <p>해외 근무지</p>
+              <p
+                css={cssObj.inputTitle(
+                  jobForm.watch("position_arr")[positionIndex].place.type === "해외" &&
+                    !!jobForm.formState.errors.position_arr?.[positionIndex]?.place?.etc
+                )}
+              >
+                해외 근무지
+              </p>
               <input
                 css={cssObj.input(47)}
                 placeholder="근무지를 작성해주세요"
@@ -285,7 +309,14 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
           )}
           {jobForm.watch("position_arr")[positionIndex].place.type === "기타" && (
             <>
-              <p>기타 근무지</p>
+              <p
+                css={cssObj.inputTitle(
+                  jobForm.watch("position_arr")[positionIndex].place.type === "기타" &&
+                    !!jobForm.formState.errors.position_arr?.[positionIndex]?.place?.etc
+                )}
+              >
+                기타 근무지
+              </p>
               <input
                 css={cssObj.input(47)}
                 placeholder="전국 순환, 입사 후 근무지 배정 등 특수 근무지를 작성해주세요"

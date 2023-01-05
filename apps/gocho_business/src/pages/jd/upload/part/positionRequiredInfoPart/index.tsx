@@ -153,16 +153,25 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           <p>경력 조건</p>
           <div css={cssObj.labelContainer}>
             {requiredExpArr.map((expName) => (
-              <SharedRadioButton
-                key={`${expName}${id}`}
-                value={expName}
-                id={`${expName}${id}`}
-                registerObj={jobForm.register(`position_arr.${positionIndex}.required_exp`, {
-                  required: true,
-                })}
-              >
+              <label key={`${expName}${id}`} htmlFor={`${expName}${id}`} css={cssObj.label}>
+                <input
+                  type="radio"
+                  id={`${expName}${id}`}
+                  css={cssObj.radio}
+                  {...jobForm.register(`position_arr.${positionIndex}.required_exp`, {
+                    required: true,
+                  })}
+                  value={expName}
+                  onClick={() => {
+                    if (expName === "신입" || expName === "경력 무관") {
+                      jobForm.clearErrors(`position_arr.${positionIndex}.min_year`);
+                      jobForm.clearErrors(`position_arr.${positionIndex}.max_year`);
+                    }
+                  }}
+                />
+                <div css={cssObj.radioBox} />
                 <p css={cssObj.radioLabel}>{expName}</p>
-              </SharedRadioButton>
+              </label>
             ))}
           </div>
         </div>
@@ -185,6 +194,9 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                 hidden
                 disabled={isYearDisabled}
                 onClick={() => {
+                  if (!isMinYear) {
+                    jobForm.clearErrors(`position_arr.${positionIndex}.min_year`);
+                  }
                   setIsMinYear((prev) => !prev);
                 }}
               />
@@ -211,6 +223,9 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                 hidden
                 disabled={isYearDisabled}
                 onClick={() => {
+                  if (!isMaxYear) {
+                    jobForm.clearErrors(`position_arr.${positionIndex}.max_year`);
+                  }
                   setIsMaxYear((prev) => !prev);
                 }}
               />
