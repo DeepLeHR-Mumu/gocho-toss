@@ -8,7 +8,7 @@ export const cssObj = {
   `,
 
   container: css`
-    margin-top: 2rem;
+    margin-top: 1rem;
     p {
       line-height: 2;
     }

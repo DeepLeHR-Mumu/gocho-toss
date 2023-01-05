@@ -41,18 +41,33 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
           placeholder="공고 제목"
           {...jobForm.register("title", { required: true, maxLength: 50 })}
         />
+        <p css={cssObj.errorMessage}>
+          {!!jobForm.formState.errors.title && `${jobForm.formState.errors.title.message}`}
+        </p>
       </div>
       <div css={cssObj.dateInputContainer}>
         <div>
           <p css={cssObj.inputTitle(!!jobForm.formState.errors.start_time)}>채용시작 일시</p>
           <input css={cssObj.input(20)} type="datetime-local" {...jobForm.register("start_time", { required: true })} />
+          <p css={cssObj.errorMessage}>
+            {!!jobForm.formState.errors.start_time && `${jobForm.formState.errors.start_time.message}`}
+          </p>
         </div>
         <div>
           <p css={cssObj.inputTitle(!!jobForm.formState.errors.end_time)}>채용마감 일시</p>
           {isAlways ? (
             <div css={cssObj.isAlwaysBlock}>상시 모집</div>
           ) : (
-            <input css={cssObj.input(20)} type="datetime-local" {...jobForm.register("end_time", { required: true })} />
+            <>
+              <input
+                css={cssObj.input(20)}
+                type="datetime-local"
+                {...jobForm.register("end_time", { required: true })}
+              />
+              <p css={cssObj.errorMessage}>
+                {!!jobForm.formState.errors.end_time && `${jobForm.formState.errors.end_time.message}`}
+              </p>
+            </>
           )}
         </div>
         <div css={cssObj.dateLabelContainer}>
@@ -90,7 +105,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                   type="button"
                   css={cssObj.deleteInputButton}
                   onClick={() => {
-                    processArr.remove(index);
+                    if (processArr.fields.length > 1) processArr.remove(index);
                   }}
                 >
                   <FiMinus />
@@ -112,6 +127,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
             + 입력칸 추가
           </button>
         </div>
+        <p css={cssObj.errorMessage}>{!!jobForm.formState.errors.process_arr && "추가한 모든 칸이 채워져야 합니다"}</p>
       </div>
       <div css={cssObj.container}>
         <p css={cssObj.inputTitle(!!jobForm.formState.errors.apply_route_arr)}>지원 방법/제출 서류</p>
@@ -144,6 +160,9 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
             + 입력칸 추가
           </button>
         </div>
+        <p css={cssObj.errorMessage}>
+          {!!jobForm.formState.errors.apply_route_arr && "추가한 모든 칸이 채워져야 합니다"}
+        </p>
       </div>
       <div css={cssObj.container}>
         <div css={cssObj.linkLabelContainer}>
@@ -193,6 +212,9 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                   링크 미리보기 <FiExternalLink />
                 </a>
               </div>
+              <p css={cssObj.errorMessage}>
+                {!!jobForm.formState.errors.apply_url && jobForm.formState.errors.apply_url.message}
+              </p>
               <div css={cssObj.linkButtonContainer}>
                 <p>링크 복사하러 가기</p>
                 <a
@@ -225,10 +247,15 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               </div>
             </div>
           ) : (
-            <label css={cssObj.inputLabel(47)} key="applyUrlWebsite" htmlFor="applyUrlWebsite">
-              <FiAtSign />
-              <input css={cssObj.applyUrlInput} {...jobForm.register("apply_url", { required: true })} />
-            </label>
+            <>
+              <label css={cssObj.inputLabel(47)} key="applyUrlWebsite" htmlFor="applyUrlWebsite">
+                <FiAtSign />
+                <input css={cssObj.applyUrlInput} {...jobForm.register("apply_url", { required: true })} />
+              </label>
+              <p css={cssObj.errorMessage}>
+                {!!jobForm.formState.errors.apply_url && jobForm.formState.errors.apply_url.message}
+              </p>
+            </>
           )}
         </div>
       </div>

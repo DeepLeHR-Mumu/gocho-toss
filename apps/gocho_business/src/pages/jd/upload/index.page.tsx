@@ -81,7 +81,6 @@ const JdUploadPage: NextPageWithLayout = () => {
         },
 
         onError: () => {
-          // TODO: 입력 안 했을 시 라벨 빨간색으로 해 주는 것
           // TODO: 가이드칩 추가
           alert("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
         },

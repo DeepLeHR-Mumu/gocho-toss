@@ -11,7 +11,7 @@ export const cssObj = {
   `,
 
   container: css`
-    margin-top: 2rem;
+    margin-top: 1rem;
     p {
       line-height: 2;
     }
@@ -32,6 +32,12 @@ export const cssObj = {
     ::placeholder {
       color: ${COLORS.GRAY30};
     }
+  `,
+
+  errorMessage: css`
+    height: 0.75rem;
+    font-size: 0.75rem;
+    color: ${COLORS.ERROR_RED40};
   `,
 
   dateInputContainer: css`
