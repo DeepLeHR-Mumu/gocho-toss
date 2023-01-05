@@ -44,11 +44,11 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
       </div>
       <div css={cssObj.dateInputContainer}>
         <div>
-          <p css={cssObj.inputTitle(jobForm.formState.errors.start_time?.type === "required")}>채용시작 일시</p>
+          <p css={cssObj.inputTitle(!!jobForm.formState.errors.start_time)}>채용시작 일시</p>
           <input css={cssObj.input(20)} type="datetime-local" {...jobForm.register("start_time", { required: true })} />
         </div>
         <div>
-          <p css={cssObj.inputTitle(jobForm.formState.errors.end_time?.type === "required")}>채용마감 일시</p>
+          <p css={cssObj.inputTitle(!!jobForm.formState.errors.end_time)}>채용마감 일시</p>
           {isAlways ? (
             <div css={cssObj.isAlwaysBlock}>상시 모집</div>
           ) : (
@@ -75,7 +75,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
         </div>
       </div>
       <div css={cssObj.container}>
-        <p css={cssObj.inputTitle(jobForm.formState.errors.process_arr?.type === "required")}>채용 절차</p>
+        <p css={cssObj.inputTitle(!!jobForm.formState.errors.process_arr)}>채용 절차</p>
         <div css={cssObj.inputContainer}>
           {processArr.fields.map((item, index) => (
             <div key={`processArr${item.id}`} css={cssObj.processBox}>
@@ -114,7 +114,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
         </div>
       </div>
       <div css={cssObj.container}>
-        <p>지원 방법/제출 서류</p>
+        <p css={cssObj.inputTitle(!!jobForm.formState.errors.apply_route_arr)}>지원 방법/제출 서류</p>
         <div css={cssObj.inputContainer}>
           {applyRouteArr.fields.map((item, index) => (
             <label css={cssObj.inputLabel(18)} key={`applyRouteArr${item.id}`} htmlFor={`applyRouteArr${item.id}`}>
@@ -159,7 +159,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               }}
             />
             <div css={cssObj.radioBox} />
-            <p css={cssObj.inputTitle(jobForm.formState.errors.apply_url?.message === "error")}>채용 링크</p>
+            <p css={cssObj.inputTitle(!!jobForm.formState.errors.apply_url)}>채용 링크</p>
           </label>
           <p>또는</p>
           <label css={cssObj.label} htmlFor="email">
@@ -174,7 +174,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               }}
             />
             <div css={cssObj.radioBox} />
-            <p css={cssObj.inputTitle(jobForm.formState.errors.apply_url?.type === "required")}>이메일 링크</p>
+            <p css={cssObj.inputTitle(!!jobForm.formState.errors.apply_url)}>이메일 링크</p>
           </label>
         </div>
         <div>

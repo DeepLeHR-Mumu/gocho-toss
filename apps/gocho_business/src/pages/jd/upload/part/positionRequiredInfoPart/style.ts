@@ -14,6 +14,10 @@ export const cssObj = {
     }
   `,
 
+  inputTitle: (isError: boolean) => css`
+    color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+  `,
+
   labelContainer: css`
     display: flex;
     gap: 0 2.5rem;

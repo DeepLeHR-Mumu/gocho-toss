@@ -48,7 +48,9 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
     <>
       <div css={cssObj.contractTypeWrapper}>
         <div css={cssObj.container}>
-          <p>계약 형태</p>
+          <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.contract_type)}>
+            계약 형태
+          </p>
           <div css={cssObj.labelContainer}>
             {contractTypeArr.map((contractName) => (
               <SharedRadioButton
@@ -165,7 +167,9 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           </div>
         </div>
         <div css={cssObj.container}>
-          <p>최소경력(연)</p>
+          <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.min_year)}>
+            최소경력(연)
+          </p>
           <div css={cssObj.yearInputContainer}>
             <input
               type="number"
@@ -190,7 +194,9 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           </div>
         </div>
         <div css={cssObj.container}>
-          <p>최대경력(연)</p>
+          <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.max_year)}>
+            최대경력(연)
+          </p>
           <div css={cssObj.yearInputContainer}>
             <input
               type="number"
@@ -215,7 +221,9 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
         </div>
       </div>
       <div css={cssObj.container}>
-        <p>기타 지원 조건</p>
+        <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.required_etc_arr)}>
+          기타 지원 조건
+        </p>
         <div css={cssObj.inputContainer}>
           {requiredEtcArr.fields.map((item, index) => (
             <label css={cssObj.inputLabel(47)} key={`requiredEtcArr${item.id}`} htmlFor={`requiredEtcArr${item.id}`}>

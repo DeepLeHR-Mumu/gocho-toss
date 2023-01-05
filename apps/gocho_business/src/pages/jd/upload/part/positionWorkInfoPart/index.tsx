@@ -296,7 +296,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
         </div>
       </div>
       <div css={cssObj.container}>
-        <p>급여</p>
+        <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.pay_arr)}>급여</p>
         <div css={cssObj.inputContainer}>
           {payArr.fields.map((item, index) => (
             <label css={cssObj.inputLabel(47)} key={`payArr${item.id}`} htmlFor={`payArr${item.id}`}>

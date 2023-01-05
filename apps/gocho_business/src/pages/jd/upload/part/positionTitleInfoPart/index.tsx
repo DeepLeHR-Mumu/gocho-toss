@@ -31,12 +31,14 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
 
   const mainTaskClickHandler = (task: string) => {
     jobForm.setValue(`position_arr.${positionIndex}.task_main`, task);
+    jobForm.clearErrors(`position_arr.${positionIndex}.task_main`);
     jobForm.setValue(`position_arr.${positionIndex}.task_sub_arr`, []);
     setIsMainTaskOpen(false);
   };
 
   const subTaskClickHandler = (subTask: string) => {
     const isInList = jobForm.watch("position_arr")[positionIndex].task_sub_arr.includes(subTask);
+    jobForm.clearErrors(`position_arr.${positionIndex}.task_sub_arr`);
     if (isInList) {
       jobForm.setValue(`position_arr.${positionIndex}.task_sub_arr`, [
         ...jobForm.watch("position_arr")[positionIndex].task_sub_arr.filter((element) => element !== subTask),
@@ -125,7 +127,14 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
         </div>
       </div>
       <div css={cssObj.container}>
-        <p>채용 직무</p>
+        <p
+          css={cssObj.inputTitle(
+            !!jobForm.formState.errors.position_arr?.[positionIndex]?.task_main ||
+              !!jobForm.formState.errors.position_arr?.[positionIndex]?.task_sub_arr
+          )}
+        >
+          채용 직무
+        </p>
         <div css={cssObj.taskInputContainer}>
           <div>
             <div css={cssObj.taskContainer}>
@@ -133,6 +142,12 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 css={cssObj.input(20)}
                 type="button"
                 onClick={() => {
+                  if (isMainTaskOpen && jobForm.watch("position_arr")[positionIndex].task_main === "") {
+                    jobForm.setError(`position_arr.${positionIndex}.task_main`, {
+                      type: "required",
+                      message: "no main task",
+                    });
+                  }
                   setIsMainTaskOpen((prev) => !prev);
                 }}
               >
@@ -163,6 +178,12 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 css={cssObj.input(20)}
                 type="button"
                 onClick={() => {
+                  if (isSubTaskOpen && jobForm.watch("position_arr")[positionIndex].task_sub_arr.length === 0) {
+                    jobForm.setError(`position_arr.${positionIndex}.task_sub_arr`, {
+                      type: "required",
+                      message: "no sub task",
+                    });
+                  }
                   setIsSubTaskOpen((prev) => !prev);
                 }}
               >
@@ -193,7 +214,9 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
       {isCardOpen && (
         <>
           <div css={cssObj.container}>
-            <p>세부 직무 내용</p>
+            <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.task_detail_arr)}>
+              세부 직무 내용
+            </p>
             <div css={cssObj.inputContainer}>
               {taskDetailArr.fields.map((item, index) => (
                 <label css={cssObj.inputLabel(47)} key={`taskDetailArr${item.id}`} htmlFor={`taskDetailArr${item.id}`}>
@@ -228,11 +251,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
             </div>
           </div>
           <div css={cssObj.container}>
-            <p
-              css={cssObj.inputTitle(
-                jobForm.formState.errors.position_arr?.[positionIndex]?.hire_number?.type === "required"
-              )}
-            >
+            <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.hire_number)}>
               채용 인원
             </p>
             <div css={cssObj.hireNumberContainer}>
@@ -241,6 +260,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 css={cssObj.hireNumberButton}
                 onClick={() => {
                   jobForm.setValue(`position_arr.${positionIndex}.hire_number`, -1);
+                  jobForm.trigger(`position_arr.${positionIndex}.hire_number`);
                   setHireNumberLabel("0");
                 }}
               >
@@ -251,6 +271,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 css={cssObj.hireNumberButton}
                 onClick={() => {
                   jobForm.setValue(`position_arr.${positionIndex}.hire_number`, -2);
+                  jobForm.trigger(`position_arr.${positionIndex}.hire_number`);
                   setHireNumberLabel("00");
                 }}
               >
@@ -261,6 +282,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 css={cssObj.hireNumberButton}
                 onClick={() => {
                   jobForm.setValue(`position_arr.${positionIndex}.hire_number`, -3);
+                  jobForm.trigger(`position_arr.${positionIndex}.hire_number`);
                   setHireNumberLabel("000");
                 }}
               >

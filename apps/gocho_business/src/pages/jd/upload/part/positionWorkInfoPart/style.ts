@@ -152,6 +152,10 @@ export const cssObj = {
     padding: 0 0.5rem 0 1rem;
   `,
 
+  inputTitle: (isError: boolean) => css`
+    color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+  `,
+
   inputContainer: css`
     display: flex;
     flex-wrap: wrap;
