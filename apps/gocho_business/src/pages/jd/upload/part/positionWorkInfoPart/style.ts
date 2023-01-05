@@ -76,6 +76,12 @@ export const cssObj = {
     }
   `,
 
+  errorMessage: css`
+    height: 0.75rem;
+    font-size: 0.75rem;
+    color: ${COLORS.ERROR_RED40};
+  `,
+
   labelContainer: css`
     display: flex;
     align-items: center;

@@ -117,8 +117,15 @@ export const cssObj = {
     }
   `,
 
-  desc: css`
+  desc: (isErrorMessage: boolean) => css`
     font-size: 0.75rem;
+    color: ${isErrorMessage ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+  `,
+
+  errorMessage: css`
+    height: 0.75rem;
+    font-size: 0.75rem;
+    color: ${COLORS.ERROR_RED40};
   `,
 
   inputContainer: css`

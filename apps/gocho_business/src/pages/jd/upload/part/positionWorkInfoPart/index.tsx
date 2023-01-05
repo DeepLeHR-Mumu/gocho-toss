@@ -105,7 +105,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
               if (isRotationOpen && jobForm.watch("position_arr")[positionIndex].rotation_arr.length === 0) {
                 jobForm.setError(`position_arr.${positionIndex}.rotation_arr`, {
                   type: "required",
-                  message: "no rotation",
+                  message: "필수 입력 사항입니다",
                 });
               }
               setIsRotationOpen((prev) => !prev);
@@ -137,6 +137,10 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
             ))}
           </div>
         </div>
+        <p css={cssObj.errorMessage}>
+          {!!jobForm.formState.errors.position_arr?.[positionIndex]?.rotation_arr &&
+            `${jobForm.formState.errors.position_arr?.[positionIndex]?.rotation_arr?.message}`}
+        </p>
       </div>
       <div css={cssObj.container}>
         <p>근무지 종류</p>
@@ -305,6 +309,10 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                 placeholder="근무지를 작성해주세요"
                 {...jobForm.register(`position_arr.${positionIndex}.place.etc`, { required: true })}
               />
+              <p css={cssObj.errorMessage}>
+                {!!jobForm.formState.errors.position_arr?.[positionIndex]?.place?.etc &&
+                  `${jobForm.formState.errors.position_arr?.[positionIndex]?.place?.etc?.message}`}
+              </p>
             </>
           )}
           {jobForm.watch("position_arr")[positionIndex].place.type === "기타" && (
@@ -322,6 +330,10 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                 placeholder="전국 순환, 입사 후 근무지 배정 등 특수 근무지를 작성해주세요"
                 {...jobForm.register(`position_arr.${positionIndex}.place.etc`, { required: true })}
               />
+              <p css={cssObj.errorMessage}>
+                {!!jobForm.formState.errors.position_arr?.[positionIndex]?.place?.etc &&
+                  `${jobForm.formState.errors.position_arr?.[positionIndex]?.place?.etc?.message}`}
+              </p>
             </>
           )}
         </div>
@@ -360,6 +372,9 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
             + 입력칸 추가
           </button>
         </div>
+        <p css={cssObj.errorMessage}>
+          {!!jobForm.formState.errors.position_arr?.[positionIndex]?.pay_arr && "추가한 모든 칸이 채워져야 합니다"}
+        </p>
       </div>
       <div css={cssObj.container}>
         <p>우대 자격증</p>

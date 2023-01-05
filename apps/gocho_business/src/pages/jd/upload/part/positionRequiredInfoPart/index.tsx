@@ -48,9 +48,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
     <>
       <div css={cssObj.contractTypeWrapper}>
         <div css={cssObj.container}>
-          <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.contract_type)}>
-            계약 형태
-          </p>
+          <p>계약 형태</p>
           <div css={cssObj.labelContainer}>
             {contractTypeArr.map((contractName) => (
               <SharedRadioButton
@@ -147,6 +145,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             <AiOutlineExclamationCircle /> 중복 체크 가능
           </p>
         </div>
+        <p css={cssObj.errorMessage} />
       </div>
       <div css={cssObj.contractTypeWrapper}>
         <div css={cssObj.container}>
@@ -204,6 +203,10 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             </label>
             <p>무관</p>
           </div>
+          <p css={cssObj.errorMessage}>
+            {!!jobForm.formState.errors.position_arr?.[positionIndex]?.min_year &&
+              `${jobForm.formState.errors.position_arr?.[positionIndex]?.min_year?.message}`}
+          </p>
         </div>
         <div css={cssObj.container}>
           <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.max_year)}>
@@ -233,6 +236,10 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             </label>
             <p>무관</p>
           </div>
+          <p css={cssObj.errorMessage}>
+            {!!jobForm.formState.errors.position_arr?.[positionIndex]?.max_year &&
+              `${jobForm.formState.errors.position_arr?.[positionIndex]?.max_year?.message}`}
+          </p>
         </div>
       </div>
       <div css={cssObj.container}>
@@ -271,6 +278,10 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             + 입력칸 추가
           </button>
         </div>
+        <p css={cssObj.errorMessage}>
+          {!!jobForm.formState.errors.position_arr?.[positionIndex]?.required_etc_arr &&
+            "추가한 모든 칸이 채워져야 합니다"}
+        </p>
       </div>
     </>
   );

@@ -64,6 +64,12 @@ export const cssObj = {
     align-items: center;
   `,
 
+  errorMessage: css`
+    height: 0.75rem;
+    font-size: 0.75rem;
+    color: ${COLORS.ERROR_RED40};
+  `,
+
   radio: css`
     margin: 0;
     display: none;

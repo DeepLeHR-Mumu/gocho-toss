@@ -170,7 +170,11 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 ))}
               </div>
             </div>
-            <p css={cssObj.desc}>1차 직무 선택 후 2차 직무가 표시됩니다</p>
+            <p css={cssObj.desc(!!jobForm.formState.errors.position_arr?.[positionIndex]?.task_main)}>
+              {jobForm.formState.errors.position_arr?.[positionIndex]?.task_main
+                ? "1차 직무는 필수 선택 사항입니다"
+                : "1차 직무 선택 후 2차 직무가 표시됩니다"}
+            </p>
           </div>
           <div>
             <div css={cssObj.taskContainer}>
@@ -207,7 +211,11 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 ))}
               </div>
             </div>
-            <p css={cssObj.desc}>2차 직무는 중복 선택 가능합니다</p>
+            <p css={cssObj.desc(!!jobForm.formState.errors.position_arr?.[positionIndex]?.task_sub_arr)}>
+              {jobForm.formState.errors.position_arr?.[positionIndex]?.task_sub_arr
+                ? "2차 직무는 필수 선택 사항입니다"
+                : "2차 직무는 중복 선택이 가능합니다"}
+            </p>
           </div>
         </div>
       </div>
@@ -249,6 +257,10 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 + 입력칸 추가
               </button>
             </div>
+            <p css={cssObj.errorMessage}>
+              {jobForm.formState.errors.position_arr?.[positionIndex]?.task_detail_arr &&
+                "추가한 모든 칸이 채워져야 합니다"}
+            </p>
           </div>
           <div css={cssObj.container}>
             <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.hire_number)}>
@@ -289,7 +301,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 000명
               </button>
               <div css={cssObj.hireNumberInputContainer}>
-                {/* TODO: 0, 00, 000명 버튼 누른 다음, 위에 클릭 하고 한번 더 눌러야 input에 포커싱이 됨 */}
+                {/* TODO: 0, 00, 000명 버튼 누른 다음, 위에 클릭 하고 한번 더 눌러야 input에 포커싱이 됨 // 0 기본값으로 안 주고 싶은데,, */}
                 {jobForm.watch("position_arr")[positionIndex].hire_number < 0 ? (
                   <>
                     <button
@@ -318,6 +330,10 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 )}
               </div>
             </div>
+            <p css={cssObj.errorMessage}>
+              {jobForm.formState.errors.position_arr?.[positionIndex]?.hire_number &&
+                jobForm.formState.errors.position_arr?.[positionIndex]?.hire_number?.message}
+            </p>
           </div>
         </>
       )}
