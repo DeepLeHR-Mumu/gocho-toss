@@ -12,7 +12,10 @@ export interface RequestObjDef {
 export interface ResponseObjDef {
   data: {
     id: number;
-    status: string;
+    status: {
+      name: string;
+      reason: string | null;
+    };
     name: string;
     logo_url: string;
     comment_count: number;

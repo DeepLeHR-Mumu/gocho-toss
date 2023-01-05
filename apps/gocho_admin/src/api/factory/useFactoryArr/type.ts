@@ -10,7 +10,10 @@ export interface RequestObjDef {
 export interface ResponseObjDef {
   data: {
     id: number;
-    status: string;
+    status: {
+      name: string;
+      reason: string | null;
+    };
     name: string;
     address: string;
     male_number: number;

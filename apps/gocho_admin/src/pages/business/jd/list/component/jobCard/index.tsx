@@ -37,7 +37,7 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
         <Link
           passHref
           href={
-            job.status === "등록대기"
+            job.status.name === "등록대기"
               ? `${BUSINESS_JD_REGISTER_URL}/?id=${job.id}`
               : `${BUSINESS_JD_EDIT_URL}/?id=${job.id}`
           }

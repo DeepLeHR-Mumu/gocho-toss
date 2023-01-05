@@ -15,7 +15,7 @@ const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factory }) => {
         <Link
           passHref
           href={
-            factory.status === "등록대기"
+            factory.status.name === "등록대기"
               ? `${BUSINESS_FACTORY_REGISTER_URL}/?id=${factory.id}`
               : `${BUSINESS_FACTORY_EDIT_URL}/?id=${factory.id}`
           }
