@@ -10,7 +10,7 @@ import { factoryArrKeyObj } from "@api/factory/useFactoryArr/type";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
-import { FactoryPart } from "@pages/business/factory/register/part/factoryPart";
+import { FactoryPart } from "./part/factoryPart";
 import { cssObj } from "./style";
 import { RejectFormValues } from "./type";
 

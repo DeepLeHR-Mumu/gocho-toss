@@ -9,7 +9,7 @@ import { RejectCompanyDef, RequestObjDef, UseRejectCompanyProps } from "./type";
 
 const patchRejectCompany: RejectCompanyDef = async (requestObj) => {
   const { data } = await axiosInstance.patch(
-    `/companies/${requestObj.companyId}/requests/reject&type=${requestObj.type}`,
+    `/companies/${requestObj.companyId}/requests/reject?type=${requestObj.type}`,
     {
       reason: requestObj.reason,
     }

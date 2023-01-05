@@ -9,7 +9,7 @@ import { RejectFactoryDef, RequestObjDef, UseRejectFactoryProps } from "./type";
 
 const patchRejectFactory: RejectFactoryDef = async (requestObj) => {
   const { data } = await axiosInstance.patch(
-    `/factories/${requestObj.factoryId}/requests/reject&type=${requestObj.type}`,
+    `/factories/${requestObj.factoryId}/requests/reject?type=${requestObj.type}`,
     {
       reason: requestObj.reason,
     }
