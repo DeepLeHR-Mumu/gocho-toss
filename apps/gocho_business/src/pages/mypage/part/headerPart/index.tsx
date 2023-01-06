@@ -18,7 +18,7 @@ export const HeaderPart: FunctionComponent = () => {
   }
 
   return (
-    <section css={cssObj.wrapper}>
+    <section css={cssObj.wrapper} data-testid="company/edit/headerPart">
       <p css={cssObj.name}>
         <span css={cssObj.profile}>{userInfoData.name[0]}</span>
         {`${userInfoData.name}(${userInfoData.department})`}

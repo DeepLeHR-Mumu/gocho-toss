@@ -79,7 +79,7 @@ export const EditPart: FunctionComponent = () => {
   }, []);
 
   return (
-    <section css={cssObj.wrapper}>
+    <section css={cssObj.wrapper} data-testid="company/edit/editPart">
       <h2 css={cssObj.title}>회원정보</h2>
       <ul css={cssObj.basicInfo}>
         <li>
