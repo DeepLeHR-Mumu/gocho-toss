@@ -207,8 +207,17 @@ export const EditPart: FunctionComponent = () => {
           </li>
         </ul>
 
-        <SharedButton radius="round" fontColor={COLORS.GRAY100} />
-        <button type="submit">회원정보 변경 저장</button>
+        <div css={cssObj.submitButtonBox}>
+          <SharedButton
+            radius="round"
+            fontColor={COLORS.GRAY100}
+            onClickHandler="submit"
+            size="medium"
+            isFullWidth
+            text="회원정보 변경 저장"
+            backgroundColor="#ccc"
+          />
+        </div>
       </form>
     </section>
   );

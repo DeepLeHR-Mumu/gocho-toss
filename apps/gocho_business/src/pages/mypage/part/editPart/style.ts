@@ -66,4 +66,9 @@ export const cssObj = {
     font-size: 0.75rem;
     color: ${COLORS.ERROR_RED40};
   `,
+  submitButtonBox: css`
+    width: 100%;
+    max-width: 25rem;
+    margin: auto;
+  `,
 };

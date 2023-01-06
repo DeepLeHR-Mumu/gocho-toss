@@ -34,5 +34,9 @@ export const cssObj = {
     font-weight: 400;
     font-size: 1rem;
   `,
-  deleteUserButton: css``,
+  deleteUserButton: css`
+    font-size: 1rem;
+    color: ${COLORS.GRAY30};
+    text-decoration: underline;
+  `,
 };
