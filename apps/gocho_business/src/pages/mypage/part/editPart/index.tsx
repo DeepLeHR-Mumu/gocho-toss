@@ -1,12 +1,12 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { PWD_REGEXP } from "shared-constant/regExp";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
-import { useQueryClient } from "@tanstack/react-query";
 import { useEditUserInfo } from "@/apis/auth/useEditUserInfo";
 import { useUserState } from "@/globalStates/useUserState";
 import { useToast } from "@/globalStates/useToast";
@@ -62,6 +62,22 @@ export const EditPart: FunctionComponent = () => {
     );
   };
 
+  useEffect(() => {
+    window.addEventListener("keydown", (keyDownEvent) => {
+      if (keyDownEvent.key === "Enter") {
+        keyDownEvent.preventDefault();
+      }
+    });
+
+    return () => {
+      window.removeEventListener("keydown", (keyDownEvent) => {
+        if (keyDownEvent.key === "Enter") {
+          keyDownEvent.preventDefault();
+        }
+      });
+    };
+  }, []);
+
   return (
     <section css={cssObj.wrapper}>
       <h2 css={cssObj.title}>회원정보</h2>
@@ -76,10 +92,7 @@ export const EditPart: FunctionComponent = () => {
         </li>
       </ul>
 
-      <form
-        onSubmit={handleSubmit(editSubmit)}
-        // role말고 다른 케이스를 좀 알아보자!
-      >
+      <form onSubmit={handleSubmit(editSubmit)}>
         <ul css={cssObj.formBox}>
           <li>
             <strong css={cssObj.formTitle(errors.origin_password !== undefined || errorMsg !== null)}>
