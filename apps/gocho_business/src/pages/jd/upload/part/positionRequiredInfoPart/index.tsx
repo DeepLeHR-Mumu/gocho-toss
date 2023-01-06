@@ -4,7 +4,9 @@ import { useFieldArray } from "react-hook-form";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
-import { FiMinus } from "react-icons/fi";
+import { FiMinus, FiPlus } from "react-icons/fi";
+import { COLORS } from "shared-style/color";
+import { SharedButton } from "shared-ui/business/sharedButton";
 import { PositionRequiredInfoPartProps } from "./type";
 import { contractTypeArr, requiredExpArr } from "./constant";
 import { cssObj } from "./style";
@@ -269,14 +271,18 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
               </button>
             </label>
           ))}
-          <button
-            type="button"
-            onClick={() => {
+          <SharedButton
+            radius="round"
+            fontColor={`${COLORS.GRAY10}`}
+            backgroundColor={`${COLORS.GRAY100}`}
+            borderColor={`${COLORS.GRAY70}`}
+            size="medium"
+            iconObj={{ icon: FiPlus, location: "left" }}
+            text="입력칸 추가"
+            onClickHandler={() => {
               requiredEtcArr.append({ value: "" });
             }}
-          >
-            + 입력칸 추가
-          </button>
+          />
         </div>
         <p css={cssObj.errorMessage}>
           {!!jobForm.formState.errors.position_arr?.[positionIndex]?.required_etc_arr &&

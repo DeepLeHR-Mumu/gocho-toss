@@ -2,6 +2,9 @@ import { ReactElement, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { BiRocket } from "react-icons/bi";
 
+import { SharedButton } from "shared-ui/business/sharedButton";
+import { COLORS } from "shared-style/color";
+
 import type { NextPageWithLayout } from "@/pages/_app.page";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
 import { useAddJd } from "@/apis/jd/useAddJd";
@@ -123,10 +126,18 @@ const JdUploadPage: NextPageWithLayout = () => {
                 </li>
               ))}
             </ul>
-            <button type="submit" css={cssObj.submitButton}>
-              <BiRocket />
-              공고 등록
-            </button>
+            <div css={cssObj.buttonWrapper}>
+              <SharedButton
+                radius="round"
+                fontColor={`${COLORS.GRAY100}`}
+                backgroundColor={`${COLORS.BLUE_FIRST40}`}
+                isFullWidth
+                size="medium"
+                text="공고 등록하기"
+                iconObj={{ icon: BiRocket, location: "left" }}
+                onClickHandler="submit"
+              />
+            </div>
           </form>
         </section>
       </PageLayout>

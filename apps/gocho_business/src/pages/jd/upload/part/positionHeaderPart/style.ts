@@ -5,6 +5,7 @@ export const cssObj = {
   partContainer: css`
     margin: 5rem 2rem 0;
     display: flex;
+    align-items: center;
     justify-content: space-between;
   `,
 
@@ -16,5 +17,9 @@ export const cssObj = {
     height: 2.5rem;
     border: 1px solid ${COLORS.GRAY10};
     padding: 0 1rem;
+  `,
+
+  buttonWrapper: css`
+    height: fit-content;
   `,
 };

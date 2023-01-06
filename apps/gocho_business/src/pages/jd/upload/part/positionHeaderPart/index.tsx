@@ -1,5 +1,8 @@
 import { FunctionComponent } from "react";
 
+import { COLORS } from "shared-style/color";
+import { SharedButton } from "shared-ui/business/sharedButton";
+
 import { PositionHeaderPartProps } from "./type";
 import { blankPosition } from "../../constant";
 import { cssObj } from "./style";
@@ -13,15 +16,19 @@ export const PositionHeaderPart: FunctionComponent<PositionHeaderPartProps> = ({
         있습니다
       </p>
     </div>
-    <button
-      css={cssObj.addPositionButton}
-      type="button"
-      onClick={() => {
-        append(blankPosition);
-        setIsCardOpen((prev) => [...prev, false]);
-      }}
-    >
-      직무 카드 추가
-    </button>
+    <div css={cssObj.buttonWrapper}>
+      <SharedButton
+        radius="round"
+        fontColor={`${COLORS.BLUE_FIRST40}`}
+        borderColor={`${COLORS.BLUE_FIRST40}`}
+        backgroundColor={`${COLORS.GRAY100}`}
+        size="medium"
+        text="직무 카드 추가"
+        onClickHandler={() => {
+          append(blankPosition);
+          setIsCardOpen((prev) => [...prev, false]);
+        }}
+      />
+    </div>
   </section>
 );

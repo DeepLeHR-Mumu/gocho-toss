@@ -33,8 +33,8 @@ export const cssObj = {
 
   deletePositionButton: css`
     height: 2.5rem;
-    background-color: ${COLORS.GRAY30};
-    color: ${COLORS.GRAY100};
+    background-color: #ffc8c8;
+    color: ${COLORS.GRAY10};
     padding: 0 1rem;
   `,
 
@@ -164,6 +164,10 @@ export const cssObj = {
     height: 1.75rem;
     color: ${COLORS.GRAY10};
     background-color: ${COLORS.GRAY70};
+  `,
+
+  addButtonWrapper: css`
+    margin-left: 0.5rem;
   `,
 
   hireNumberContainer: css`

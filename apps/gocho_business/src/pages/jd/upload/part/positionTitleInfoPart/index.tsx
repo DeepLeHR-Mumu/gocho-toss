@@ -1,7 +1,11 @@
 import { FunctionComponent, useState } from "react";
-import { FiChevronDown, FiChevronUp, FiMinus } from "react-icons/fi";
+import { FiChevronDown, FiChevronUp, FiMinus, FiPlus } from "react-icons/fi";
 import { useFieldArray } from "react-hook-form";
+
 import { CheckBox } from "shared-ui/common/atom/checkbox";
+import { SharedButton } from "shared-ui/business/sharedButton";
+import { COLORS } from "shared-style/color";
+
 import { PositionTitleInfoPartProps } from "./type";
 import { taskArr } from "./constant";
 import { cssObj } from "./style";
@@ -78,10 +82,14 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
           )}
         </strong>
         <div css={cssObj.positionButtonContainer}>
-          <button
-            css={cssObj.openCardButton}
-            type="button"
-            onClick={() => {
+          <SharedButton
+            radius="circle"
+            fontColor={COLORS.GRAY30}
+            backgroundColor={COLORS.GRAY80}
+            size="medium"
+            text={isCardOpen ? "카드접기" : "카드열기"}
+            iconObj={{ icon: isCardOpen ? FiChevronUp : FiChevronDown, location: "left" }}
+            onClickHandler={() => {
               setIsCardOpen((prev) =>
                 prev.map((item, index) => {
                   if (index === positionIndex) {
@@ -91,39 +99,30 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 })
               );
             }}
-          >
-            {isCardOpen ? (
-              <>
-                <FiChevronUp />
-                카드접기
-              </>
-            ) : (
-              <>
-                <FiChevronDown />
-                카드열기
-              </>
-            )}
-          </button>
-          <button
-            type="button"
-            css={cssObj.copyPositionButton}
-            onClick={() => {
+          />
+          <SharedButton
+            radius="round"
+            fontColor={`${COLORS.GRAY10}`}
+            borderColor={`${COLORS.GRAY70}`}
+            backgroundColor={`${COLORS.GRAY100}`}
+            size="medium"
+            text="직무 카드 복사"
+            onClickHandler={() => {
               appendPosition({ ...jobForm.watch("position_arr")[positionIndex] });
               setIsCardOpen((prev) => [...prev.slice(0, positionIndex + 1), false, ...prev.slice(positionIndex + 1)]);
             }}
-          >
-            직무 카드 복사
-          </button>
-          <button
-            type="button"
-            css={cssObj.deletePositionButton}
-            onClick={() => {
+          />
+          <SharedButton
+            radius="round"
+            fontColor={`${COLORS.GRAY10}`}
+            backgroundColor="#FFC8C8"
+            size="medium"
+            text="직무 삭제"
+            onClickHandler={() => {
               removePosition(positionIndex);
               setIsCardOpen((prev) => prev.filter((item, index) => index !== positionIndex));
             }}
-          >
-            직무 삭제
-          </button>
+          />
         </div>
       </div>
       <div css={cssObj.container}>
@@ -248,14 +247,18 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                   </button>
                 </label>
               ))}
-              <button
-                type="button"
-                onClick={() => {
+              <SharedButton
+                radius="round"
+                fontColor={`${COLORS.GRAY10}`}
+                backgroundColor={`${COLORS.GRAY100}`}
+                borderColor={`${COLORS.GRAY70}`}
+                size="medium"
+                iconObj={{ icon: FiPlus, location: "left" }}
+                text="입력칸 추가"
+                onClickHandler={() => {
                   taskDetailArr.append({ value: "" });
                 }}
-              >
-                + 입력칸 추가
-              </button>
+              />
             </div>
             <p css={cssObj.errorMessage}>
               {jobForm.formState.errors.position_arr?.[positionIndex]?.task_detail_arr &&

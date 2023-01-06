@@ -18,4 +18,10 @@ export const cssObj = {
     border-radius: 0.5rem;
     color: ${COLORS.GRAY100};
   `,
+
+  buttonWrapper: css`
+    margin: 0 auto;
+    width: 40%;
+    height: fit-content;
+  `,
 };

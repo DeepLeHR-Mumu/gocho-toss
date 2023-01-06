@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
-import { FiChevronUp, FiMinus, FiX, FiRotateCw, FiExternalLink, FiChevronDown } from "react-icons/fi";
+import { FiChevronUp, FiMinus, FiX, FiRotateCw, FiExternalLink, FiChevronDown, FiPlus } from "react-icons/fi";
 import { TbBuildingFactory2 } from "react-icons/tb";
 import { useFieldArray } from "react-hook-form";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
@@ -8,6 +8,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
+import { SharedButton } from "shared-ui/business/sharedButton";
+import { COLORS } from "shared-style/color";
 
 import { useFactoryArr } from "@/apis/factory/useFactoryArr";
 import { factoryArrKeyObj } from "@/apis/factory/useFactoryArr/type";
@@ -363,14 +365,18 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
               </button>
             </label>
           ))}
-          <button
-            type="button"
-            onClick={() => {
+          <SharedButton
+            radius="round"
+            fontColor={`${COLORS.GRAY10}`}
+            backgroundColor={`${COLORS.GRAY100}`}
+            borderColor={`${COLORS.GRAY70}`}
+            size="medium"
+            iconObj={{ icon: FiPlus, location: "left" }}
+            text="입력칸 추가"
+            onClickHandler={() => {
               payArr.append({ value: "" });
             }}
-          >
-            + 입력칸 추가
-          </button>
+          />
         </div>
         <p css={cssObj.errorMessage}>
           {!!jobForm.formState.errors.position_arr?.[positionIndex]?.pay_arr && "추가한 모든 칸이 채워져야 합니다"}
@@ -456,14 +462,18 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
               </button>
             </label>
           ))}
-          <button
-            type="button"
-            onClick={() => {
+          <SharedButton
+            radius="round"
+            fontColor={`${COLORS.GRAY10}`}
+            backgroundColor={`${COLORS.GRAY100}`}
+            borderColor={`${COLORS.GRAY70}`}
+            size="medium"
+            iconObj={{ icon: FiPlus, location: "left" }}
+            text="입력칸 추가"
+            onClickHandler={() => {
               preferredEtcArr.append({ value: "" });
             }}
-          >
-            + 입력칸 추가
-          </button>
+          />
         </div>
       </div>
     </>

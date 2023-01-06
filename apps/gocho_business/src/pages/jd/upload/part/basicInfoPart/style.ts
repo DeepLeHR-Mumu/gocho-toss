@@ -12,7 +12,7 @@ export const cssObj = {
 
   container: css`
     margin-top: 1rem;
-    p {
+    > p {
       line-height: 2;
     }
   `,
@@ -44,7 +44,7 @@ export const cssObj = {
     display: flex;
     align-items: flex-end;
     gap: 0 3rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
   `,
 
   isAlwaysBlock: css`
@@ -63,6 +63,7 @@ export const cssObj = {
     display: flex;
     height: 2.5rem;
     gap: 0 3rem;
+    margin-bottom: 0.75rem;
   `,
 
   label: css`
@@ -118,6 +119,10 @@ export const cssObj = {
   icon: css`
     font-size: 1.5rem;
     color: ${COLORS.GRAY35};
+  `,
+
+  addButtonWrapper: css`
+    margin-left: 0.5rem;
   `,
 
   linkLabelContainer: css`

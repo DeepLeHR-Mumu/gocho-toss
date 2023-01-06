@@ -1,8 +1,13 @@
 import { FunctionComponent, useState } from "react";
+import { FiPlus, FiMinus, FiLink, FiAtSign } from "react-icons/fi";
+import { MdOutlineNavigateNext } from "react-icons/md";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
-import { FiMinus, FiLink, FiAtSign, FiExternalLink } from "react-icons/fi";
-import { MdOutlineNavigateNext } from "react-icons/md";
+import { SharedButton } from "shared-ui/business/sharedButton";
+import { COLORS } from "shared-style/color";
+import { SharedTextLink } from "shared-ui/business/sharedTextLink";
+import { SharedBoxLink } from "shared-ui/business/sharedBoxLink";
+
 import { cssObj } from "./style";
 import { BasicInfoPartProps } from "./type";
 
@@ -118,14 +123,20 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               )}
             </div>
           ))}
-          <button
-            type="button"
-            onClick={() => {
-              if (processArr.fields.length < 8) processArr.append({ value: "" });
-            }}
-          >
-            + 입력칸 추가
-          </button>
+          <div css={cssObj.addButtonWrapper}>
+            <SharedButton
+              radius="round"
+              fontColor={`${COLORS.GRAY10}`}
+              backgroundColor={`${COLORS.GRAY100}`}
+              borderColor={`${COLORS.GRAY70}`}
+              size="medium"
+              iconObj={{ icon: FiPlus, location: "left" }}
+              text="입력칸 추가"
+              onClickHandler={() => {
+                if (processArr.fields.length < 8) processArr.append({ value: "" });
+              }}
+            />
+          </div>
         </div>
         <p css={cssObj.errorMessage}>{!!jobForm.formState.errors.process_arr && "추가한 모든 칸이 채워져야 합니다"}</p>
       </div>
@@ -151,14 +162,20 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               </button>
             </label>
           ))}
-          <button
-            type="button"
-            onClick={() => {
-              applyRouteArr.append({ value: "" });
-            }}
-          >
-            + 입력칸 추가
-          </button>
+          <div css={cssObj.addButtonWrapper}>
+            <SharedButton
+              radius="round"
+              fontColor={`${COLORS.GRAY10}`}
+              backgroundColor={`${COLORS.GRAY100}`}
+              borderColor={`${COLORS.GRAY70}`}
+              size="medium"
+              iconObj={{ icon: FiPlus, location: "left" }}
+              text="입력칸 추가"
+              onClickHandler={() => {
+                applyRouteArr.append({ value: "" });
+              }}
+            />
+          </div>
         </div>
         <p css={cssObj.errorMessage}>
           {!!jobForm.formState.errors.apply_route_arr && "추가한 모든 칸이 채워져야 합니다"}
@@ -208,42 +225,28 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                     {...jobForm.register("apply_url", { required: true })}
                   />
                 </label>
-                <a href={`${jobForm.watch("apply_url")}`} target="_blank" rel="noreferrer noopener">
-                  링크 미리보기 <FiExternalLink />
-                </a>
+                <SharedTextLink externalUrl={`${jobForm.watch("apply_url")}`} fontColor="blue" text="링크 미리보기" />
               </div>
               <p css={cssObj.errorMessage}>
                 {!!jobForm.formState.errors.apply_url && jobForm.formState.errors.apply_url.message}
               </p>
               <div css={cssObj.linkButtonContainer}>
                 <p>링크 복사하러 가기</p>
-                <a
-                  css={cssObj.outerLinkButton}
-                  href="https://www.jobkorea.co.kr/Corp/Index"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  잡코리아
-                  <FiExternalLink />
-                </a>
-                <a
-                  css={cssObj.outerLinkButton}
-                  href="https://www.saramin.co.kr/zf_user/auth?ut=c"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  사람인
-                  <FiExternalLink />
-                </a>
-                <a
-                  css={cssObj.outerLinkButton}
-                  href="https://www.work.go.kr/member/bodyLogin.do?redirectEncodeYn=Y&redirectUrl=L2NvTWVtYmVyU3J2L3dhbnRlZEluZm9BZG1pbi93YW50ZWRBZG1pbi5kbz9wYWdlSW5kZXg9MQ=="
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  워크넷
-                  <FiExternalLink />
-                </a>
+                <SharedBoxLink
+                  colorVariation="gray"
+                  text="잡코리아"
+                  externalUrl="https://www.jobkorea.co.kr/Corp/Index"
+                />
+                <SharedBoxLink
+                  colorVariation="gray"
+                  text="사람인"
+                  externalUrl="https://www.saramin.co.kr/zf_user/auth?ut=c"
+                />
+                <SharedBoxLink
+                  colorVariation="gray"
+                  text="워크넷"
+                  externalUrl="https://www.work.go.kr/member/bodyLogin.do?redirectEncodeYn=Y&redirectUrl=L2NvTWVtYmVyU3J2L3dhbnRlZEluZm9BZG1pbi93YW50ZWRBZG1pbi5kbz9wYWdlSW5kZXg9MQ=="
+                />
               </div>
             </div>
           ) : (
@@ -281,14 +284,20 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               </button>
             </label>
           ))}
-          <button
-            type="button"
-            onClick={() => {
-              etcArr.append({ value: "" });
-            }}
-          >
-            + 입력칸 추가
-          </button>
+          <div css={cssObj.addButtonWrapper}>
+            <SharedButton
+              radius="round"
+              fontColor={`${COLORS.GRAY10}`}
+              backgroundColor={`${COLORS.GRAY100}`}
+              borderColor={`${COLORS.GRAY70}`}
+              size="medium"
+              iconObj={{ icon: FiPlus, location: "left" }}
+              text="입력칸 추가"
+              onClickHandler={() => {
+                etcArr.append({ value: "" });
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>
