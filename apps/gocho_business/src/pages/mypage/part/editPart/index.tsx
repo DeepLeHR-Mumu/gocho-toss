@@ -215,7 +215,7 @@ export const EditPart: FunctionComponent = () => {
             size="medium"
             isFullWidth
             text="회원정보 변경 저장"
-            backgroundColor="#ccc"
+            backgroundColor={COLORS.GRAY65}
           />
         </div>
       </form>

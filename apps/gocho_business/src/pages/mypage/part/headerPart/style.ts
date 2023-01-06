@@ -6,7 +6,7 @@ export const cssObj = {
   spinner: css`
     position: relative;
     padding: 1.5rem 2rem;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid ${COLORS.GRAY65};
     height: 6.0625rem;
   `,
   wrapper: css`
@@ -14,7 +14,7 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid ${COLORS.GRAY65};
   `,
   name: css`
     display: flex;
