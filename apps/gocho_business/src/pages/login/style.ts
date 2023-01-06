@@ -41,18 +41,19 @@ export const cssObj = {
   `,
   inputBox: (isError?: boolean) => css`
     margin-bottom: 1.75rem;
+    position: relative;
     width: 100%;
     background-color: ${COLORS.GRAY100};
     border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.75rem 1rem;
   `,
   inputCSS: css`
     font-size: 1rem;
+    padding: 0.75rem 1rem;
     font-weight: 400;
-    width: 90%;
+    width: 100%;
     box-shadow: 0 0 0 1000px ${COLORS.GRAY100} inset;
 
     ::placeholder {
@@ -61,8 +62,11 @@ export const cssObj = {
     }
   `,
   eyeButtonCSS: css`
+    z-index: 10;
     font-size: 1.5rem;
     color: ${COLORS.GRAY40};
+    position: absolute;
+    right: 1rem;
   `,
   errorMsg: css`
     font-size: 1rem;
@@ -94,7 +98,7 @@ export const cssObj = {
     font-size: 1rem;
     font-weight: 400;
     color: ${COLORS.GRAY100};
-    background-color: #ccc;
+    background-color: ${COLORS.GRAY65};
     height: 3rem;
   `,
 };

@@ -9,8 +9,10 @@ import { useQueryClient } from "@tanstack/react-query";
 import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
+import { SharedButton } from "shared-ui/business/sharedButton";
 import gochoColorSrc from "shared-image/global/deepLeLogo/logoIconColor.svg";
 
+import { COLORS } from "shared-style/color";
 import { useModal } from "@/globalStates/useModal";
 import { INTERNAL_URL } from "@/constants/url";
 import { useUserState } from "@/globalStates/useUserState";
@@ -124,9 +126,16 @@ const LoginPage: NextPage = () => {
               </button>
             </div>
             <p css={cssObj.errorMsg}>{errors.email?.message || errors.password?.message || errorMsg}</p>
-            <button css={cssObj.loginButton} type="submit">
-              로그인
-            </button>
+
+            <SharedButton
+              onClickHandler="submit"
+              text="로그인"
+              fontColor={COLORS.GRAY100}
+              backgroundColor={COLORS.GRAY65}
+              radius="round"
+              isFullWidth
+              size="medium"
+            />
           </form>
         </div>
       </main>
