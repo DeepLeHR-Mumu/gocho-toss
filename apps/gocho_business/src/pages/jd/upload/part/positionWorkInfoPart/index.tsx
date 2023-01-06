@@ -1,15 +1,15 @@
 import { FunctionComponent, useState } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
-import { FiChevronUp, FiMinus, FiX, FiRotateCw, FiExternalLink, FiChevronDown, FiPlus } from "react-icons/fi";
+import { FiChevronUp, FiMinus, FiX, FiRotateCw, FiChevronDown, FiPlus } from "react-icons/fi";
 import { TbBuildingFactory2 } from "react-icons/tb";
 import { useFieldArray } from "react-hook-form";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { useQueryClient } from "@tanstack/react-query";
-import Link from "next/link";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
+import { SharedTextLink } from "shared-ui/business/sharedTextLink";
 
 import { useFactoryArr } from "@/apis/factory/useFactoryArr";
 import { factoryArrKeyObj } from "@/apis/factory/useFactoryArr/type";
@@ -229,11 +229,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   <FiRotateCw /> 공장 목록 새로고침
                 </button>
                 <p css={cssObj.uploadFactoryDesc}>잠깐, 미등록 공장이 있나요</p>
-                <Link href={INTERNAL_URL.FACTORY_LIST} passHref>
-                  <a css={cssObj.uploadFactoryButton} target="_blank">
-                    공장 등록하러 가기 <FiExternalLink />
-                  </a>
-                </Link>
+                <SharedTextLink externalUrl={INTERNAL_URL.FACTORY_LIST} fontColor="blue" text="공장 등록하러 가기" />
               </div>
               <div css={cssObj.placeContainer}>
                 {jobForm.watch("position_arr")[positionIndex].place.factory_arr?.map((factory) => (
