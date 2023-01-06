@@ -4,7 +4,6 @@ import { Spinner } from "shared-ui/common/atom/spinner";
 
 import { useUserState } from "@/globalStates/useUserState";
 
-import { MANAGER_MESSSAGE_OBJ } from "./constants";
 import { cssObj } from "./style";
 
 export const HeaderPart: FunctionComponent = () => {
@@ -28,7 +27,7 @@ export const HeaderPart: FunctionComponent = () => {
         css={cssObj.deleteUserButton}
         type="button"
         onClick={() => {
-          window.alert(MANAGER_MESSSAGE_OBJ.DELETE);
+          window.alert("홈페이지 우측 하단 채널톡을 이용해 문의해주세요.");
         }}
       >
         회원탈퇴

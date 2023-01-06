@@ -4,9 +4,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import { PWD_REGEXP } from "shared-constant/regExp";
 import { SharedButton } from "shared-ui/business/sharedButton";
+import { COLORS } from "shared-style/color";
 
 import { useQueryClient } from "@tanstack/react-query";
-import { COLORS } from "shared-style/color";
 import { useEditUserInfo } from "@/apis/auth/useEditUserInfo";
 import { useUserState } from "@/globalStates/useUserState";
 import { useToast } from "@/globalStates/useToast";
@@ -83,6 +83,8 @@ export const EditPart: FunctionComponent = () => {
             onKeyDownEvent.preventDefault();
           }
         }}
+        // 페이지 코드를 좀더 줄여보자
+        // role말고 다른 케이스를 좀 알아보자!
         role="presentation"
       >
         <ul css={cssObj.formBox}>
@@ -127,6 +129,8 @@ export const EditPart: FunctionComponent = () => {
             </div>
           </li>
           <li>
+            {/* 에러메세지 각 레지스터안에 넣기 */}
+            {/* aria-label 수정 */}
             <strong css={cssObj.formTitle(errors.new_password !== undefined)}>새 비밀번호</strong>
             <label htmlFor="new_password" css={cssObj.label(errors.new_password !== undefined)}>
               <input
