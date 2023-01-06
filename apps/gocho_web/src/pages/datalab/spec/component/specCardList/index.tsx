@@ -62,7 +62,3 @@ export const SpecCardList: FunctionComponent<SpecCardListProps> = ({ order }) =>
     </div>
   );
 };
-
-// return page.data.map((spec) => {
-//   return <SpecCard specData={spec} isSkeleton={false} key={spec.id} />;
-// });

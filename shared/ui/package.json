@@ -3,9 +3,11 @@
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
-  "main": "./index.tsx",
   "scripts": {
-    "lint": "next lint"
+    "lint": "next lint",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "serve-storybook": "pnpx serve storybook-static"
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",
@@ -24,10 +26,25 @@
     "shared-util": "workspace:^0.0.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-private-methods": "^7.18.6",
+    "@babel/plugin-proposal-private-property-in-object": "^7.18.6",
+    "@emotion/babel-preset-css-prop": "^11.10.0",
+    "@storybook/addon-actions": "^6.5.12",
+    "@storybook/addon-essentials": "^6.5.10",
+    "@storybook/addon-interactions": "^6.5.10",
+    "@storybook/addon-links": "^6.5.10",
+    "@storybook/builder-webpack5": "^6.5.10",
+    "@storybook/manager-webpack5": "^6.5.10",
+    "@storybook/react": "^6.5.10",
+    "@storybook/testing-library": "^0.0.13",
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",
+    "babel-loader": "^8.2.5",
+    "babel-plugin-react-require": "^3.1.3",
     "eslint-config-deeple": "workspace:^1.0.0",
     "tsconfig-deeple": "workspace:^0.0.0",
+    "tsconfig-paths-webpack-plugin": "^4.0.0",
     "typescript": "4.7.2"
   }
 }
