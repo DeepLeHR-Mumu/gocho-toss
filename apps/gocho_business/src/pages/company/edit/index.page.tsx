@@ -14,6 +14,7 @@ import { PageLayout, GlobalLayout, Footer } from "@/components/global/layout";
 import { NextPageWithLayout } from "@/pages/_app.page";
 
 import { BasicPart } from "./part/basicPart";
+// 오타
 import { WelfalePart } from "./part/welfarePart";
 import { COMPANY_MESSSAGE_OBJ } from "./constants";
 import { PostSubmitValues } from "./type";
@@ -22,11 +23,12 @@ import { cssObj } from "./style";
 const CompanyEditPage: NextPageWithLayout = () => {
   const { userInfoData } = useUserState();
   const { setToast } = useToast();
-  const { data: companyData, isLoading: isCompanyDataLoading } = useCompanyDetail({
+  const { data: companyData } = useCompanyDetail({
     companyId: userInfoData?.companyId,
   });
   const { mutate: putCompanyDetail } = useAddCompanyDetail();
 
+  // onBlur인지 change인지 체크하기
   const companyForm = useForm<PostSubmitValues>({
     mode: "onChange",
   });
@@ -98,7 +100,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
     }
   }, [companyData, reset]);
 
-  if (isCompanyDataLoading || !companyData) {
+  if (!companyData) {
     return (
       <div css={cssObj.spinner}>
         <Spinner />

@@ -25,13 +25,14 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
   } = companyForm;
   const { userInfoData } = useUserState();
 
-  const { data: companyData, isLoading: isCompanyDataLoading } = useCompanyDetail({
+  // api 주석제거
+  const { data: companyData } = useCompanyDetail({
     companyId: userInfoData?.companyId,
   });
 
   const openPostCodePopup = useDaumPostcodePopup(POSTCODE_SCRIPT_URL);
 
-  if (!companyData || isCompanyDataLoading) {
+  if (!companyData) {
     return (
       <div css={cssObj.spinnerBox}>
         <Spinner />
@@ -41,6 +42,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
 
   const foundDate = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
 
+  // css lineBox => inputContainer 네임 변경
   return (
     <div css={cssObj.wrapper}>
       <div css={cssObj.lineBox()}>
@@ -96,6 +98,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
                 },
               })
             }
+            // 오타
             backgoundColor={COLORS.GRAY80}
           />
           <div css={cssObj.inputLineBox(errors.address?.type === "required")}>
@@ -107,6 +110,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             />
           </div>
         </label>
+        {/* 주소창 눌러도 팝업뜨고 주소창 disable */}
         <KakaoMap address={watch("address")} />
       </div>
       <div css={cssObj.lineBox(80)}>
@@ -124,9 +128,11 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
       </div>
       <div css={cssObj.lineBox(80)}>
         <strong css={cssObj.subTitle()}>연봉 정보</strong>
+        {/* 이것도 css네임 재고려 */}
         <div css={cssObj.flexBox}>
           <div css={cssObj.payBox}>
             <strong css={cssObj.infoTitle(errors.pay_start?.type === "required")}>평균 초봉</strong>
+            {/* 콘텐츠에 맞는 이름으로 변경 */}
             <div css={cssObj.flexCenterBox}>
               <input
                 type="number"

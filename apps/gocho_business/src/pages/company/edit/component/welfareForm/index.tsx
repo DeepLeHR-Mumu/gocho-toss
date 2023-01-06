@@ -72,30 +72,27 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
       </div>
       <div css={cssObj.container}>
         <p css={cssObj.desc}>{desc}</p>
-        {!listArr ? (
-          <p css={cssObj.noData}>입력한 복지가 없습니다</p>
-        ) : (
+        {listArr ? (
           <ul css={cssObj.listBox}>
-            {listArr.map((data, index) => {
-              const random = Math.floor(Math.random() * 10000);
-
-              return (
-                <li key={`${title}_${data}_${random}`}>
-                  <p css={cssObj.valueDesc}>{data}</p>
-                  <button
-                    type="button"
-                    aria-label={`${data} 제거하기`}
-                    css={cssObj.deleteButton}
-                    onClick={() => {
-                      deleteKeyHandler(index);
-                    }}
-                  >
-                    <FiMinus />
-                  </button>
-                </li>
-              );
-            })}
+            {listArr.map((data, index) => (
+              // index 문자열로 key만들기
+              <li key={`${title}_${data}`}>
+                <p css={cssObj.valueDesc}>{data}</p>
+                <button
+                  type="button"
+                  aria-label={`${data} 제거하기`}
+                  css={cssObj.deleteButton}
+                  onClick={() => {
+                    deleteKeyHandler(index);
+                  }}
+                >
+                  <FiMinus />
+                </button>
+              </li>
+            ))}
           </ul>
+        ) : (
+          <p css={cssObj.noData}>입력한 복지가 없습니다</p>
         )}
       </div>
     </div>
