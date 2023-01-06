@@ -40,13 +40,14 @@ export const cssObj = {
     justify-content: space-between;
     width: 100%;
     max-width: 28rem;
-    padding: 0 1rem;
-    height: 2.5rem;
+    position: relative;
   `,
   input: css`
     font-size: 1rem;
     font-weight: 400;
-    width: 90%;
+    width: 100%;
+    padding: 0 1rem;
+    height: 2.5rem;
     box-shadow: 0 0 0 1000px ${COLORS.GRAY100} inset;
 
     ::placeholder {
@@ -55,6 +56,9 @@ export const cssObj = {
     }
   `,
   showButton: css`
+    right: 1rem;
+    position: absolute;
+    z-index: 10;
     font-size: 1.5rem;
     color: ${COLORS.GRAY10};
   `,

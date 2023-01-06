@@ -17,16 +17,16 @@ import { EditFormValues, PasswordShowObjDef } from "./type";
 import { cssObj } from "./style";
 
 export const EditPart: FunctionComponent = () => {
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [passwordShowObj, setPasswordShowObj] = useState<PasswordShowObjDef>({
     isOriginPassword: false,
     isNewPassword: false,
     isCheckPassword: false,
   });
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const { setToast } = useToast();
-  const { mutate: editUserInfo } = useEditUserInfo();
   const { userInfoData } = useUserState();
+  const { mutate: editUserInfo } = useEditUserInfo();
 
   const queryClient = useQueryClient();
   const {
@@ -78,14 +78,7 @@ export const EditPart: FunctionComponent = () => {
 
       <form
         onSubmit={handleSubmit(editSubmit)}
-        onKeyDown={(onKeyDownEvent) => {
-          if (onKeyDownEvent.key === "Enter") {
-            onKeyDownEvent.preventDefault();
-          }
-        }}
-        // 페이지 코드를 좀더 줄여보자
         // role말고 다른 케이스를 좀 알아보자!
-        role="presentation"
       >
         <ul css={cssObj.formBox}>
           <li>
@@ -101,13 +94,27 @@ export const EditPart: FunctionComponent = () => {
                 type={passwordShowObj.isOriginPassword ? "text" : "password"}
                 placeholder="현재 비밀번호를 입력해주세요"
                 id="origin_password"
-                {...register("origin_password", { required: true, minLength: 8, maxLength: 20, pattern: PWD_REGEXP })}
+                {...register("origin_password", {
+                  required: EDIT_PASSWORD_MESSAGE.ORIGIN_REQUIRED,
+                  minLength: {
+                    value: 8,
+                    message: EDIT_PASSWORD_MESSAGE.PATTERN,
+                  },
+                  maxLength: {
+                    value: 20,
+                    message: EDIT_PASSWORD_MESSAGE.PATTERN,
+                  },
+                  pattern: {
+                    value: PWD_REGEXP,
+                    message: EDIT_PASSWORD_MESSAGE.PATTERN,
+                  },
+                })}
                 onFocus={() => setErrorMsg(null)}
               />
               <button
                 css={cssObj.showButton}
                 type="button"
-                aria-label="현재 비밀번호 확인"
+                aria-label={passwordShowObj.isOriginPassword ? "현재 비밀번호 가리기" : "현재 비밀번호 보기"}
                 onClick={() => {
                   setPasswordShowObj((prevObj) => ({
                     ...prevObj,
@@ -119,18 +126,12 @@ export const EditPart: FunctionComponent = () => {
               </button>
             </label>
             <div css={cssObj.errorBox}>
-              {errors.origin_password?.type === "required" && (
-                <p css={cssObj.errorDesc}>{EDIT_PASSWORD_MESSAGE.ORIGIN_REQUIRED}</p>
+              {(errors.origin_password?.message || errorMsg) && (
+                <p css={cssObj.errorDesc}>{errors.origin_password?.message || errorMsg}</p>
               )}
-              {(errors.origin_password?.type === "minLength" || errors.origin_password?.type === "maxLength") && (
-                <p css={cssObj.errorDesc}>{EDIT_PASSWORD_MESSAGE.PATTERN}</p>
-              )}
-              {errorMsg && <p css={cssObj.errorDesc}>{errorMsg}</p>}
             </div>
           </li>
           <li>
-            {/* 에러메세지 각 레지스터안에 넣기 */}
-            {/* aria-label 수정 */}
             <strong css={cssObj.formTitle(errors.new_password !== undefined)}>새 비밀번호</strong>
             <label htmlFor="new_password" css={cssObj.label(errors.new_password !== undefined)}>
               <input
@@ -138,12 +139,26 @@ export const EditPart: FunctionComponent = () => {
                 type={passwordShowObj.isNewPassword ? "text" : "password"}
                 id="new_password"
                 placeholder="8~20자, 띄어쓰기 불가능"
-                {...register("new_password", { required: true, minLength: 8, maxLength: 20, pattern: PWD_REGEXP })}
+                {...register("new_password", {
+                  required: EDIT_PASSWORD_MESSAGE.NEW_REQUIRED,
+                  minLength: {
+                    value: 8,
+                    message: EDIT_PASSWORD_MESSAGE.PATTERN,
+                  },
+                  maxLength: {
+                    value: 20,
+                    message: EDIT_PASSWORD_MESSAGE.PATTERN,
+                  },
+                  pattern: {
+                    value: PWD_REGEXP,
+                    message: EDIT_PASSWORD_MESSAGE.PATTERN,
+                  },
+                })}
               />
               <button
                 css={cssObj.showButton}
                 type="button"
-                aria-label="새 비밀번호 확인"
+                aria-label={passwordShowObj.isNewPassword ? "새로운 비밀번호 가리기" : "새로운 비밀번호 보기"}
                 onClick={() => {
                   setPasswordShowObj((prevObj) => ({
                     ...prevObj,
@@ -155,14 +170,7 @@ export const EditPart: FunctionComponent = () => {
               </button>
             </label>
             <div css={cssObj.errorBox}>
-              {errors.new_password?.type === "required" && (
-                <p css={cssObj.errorDesc}>{EDIT_PASSWORD_MESSAGE.NEW_REQUIRED}</p>
-              )}
-              {(errors.new_password?.type === "minLength" ||
-                errors.new_password?.type === "maxLength" ||
-                errors.new_password?.type === "pattern") && (
-                <p css={cssObj.errorDesc}>{EDIT_PASSWORD_MESSAGE.PATTERN}</p>
-              )}
+              {errors.new_password?.message && <p css={cssObj.errorDesc}>{errors.new_password?.message}</p>}
             </div>
           </li>
           <li>
@@ -174,17 +182,26 @@ export const EditPart: FunctionComponent = () => {
                 id="check_password"
                 placeholder="새 비밀번호와 동일하게 작성해주세요"
                 {...register("check_password", {
-                  required: true,
-                  minLength: 8,
-                  maxLength: 20,
-                  pattern: PWD_REGEXP,
+                  required: EDIT_PASSWORD_MESSAGE.CHECK_NEW_REQUIRED,
+                  minLength: {
+                    value: 8,
+                    message: EDIT_PASSWORD_MESSAGE.PATTERN,
+                  },
+                  maxLength: {
+                    value: 20,
+                    message: EDIT_PASSWORD_MESSAGE.PATTERN,
+                  },
+                  pattern: {
+                    value: PWD_REGEXP,
+                    message: EDIT_PASSWORD_MESSAGE.PATTERN,
+                  },
                   validate: (value) => watch("new_password") === value,
                 })}
               />
               <button
                 css={cssObj.showButton}
                 type="button"
-                aria-label="체크 비밀번호 확인"
+                aria-label={passwordShowObj.isCheckPassword ? "확인용 비밀번호 가리기" : "확인용 비밀번호 보기"}
                 onClick={() => {
                   setPasswordShowObj((prevObj) => ({
                     ...prevObj,
@@ -196,16 +213,8 @@ export const EditPart: FunctionComponent = () => {
               </button>
             </label>
             <div css={cssObj.errorBox}>
-              {errors.check_password?.type === "required" && (
-                <p css={cssObj.errorDesc}>{EDIT_PASSWORD_MESSAGE.CHECK_NEW_REQUIRED}</p>
-              )}
-              {(errors.check_password?.type === "minLength" ||
-                errors.check_password?.type === "maxLength" ||
-                errors.check_password?.type === "pattern") && (
-                <p css={cssObj.errorDesc}>{EDIT_PASSWORD_MESSAGE.PATTERN}</p>
-              )}
-              {errors.check_password?.type === "validate" && (
-                <p css={cssObj.errorDesc}>{EDIT_PASSWORD_MESSAGE.VALIDATE}</p>
+              {(errors.check_password?.message || errors.check_password?.type === "validate") && (
+                <p css={cssObj.errorDesc}>{errors.check_password.message || EDIT_PASSWORD_MESSAGE.VALIDATE}</p>
               )}
             </div>
           </li>
