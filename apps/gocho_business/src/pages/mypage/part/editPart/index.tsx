@@ -3,8 +3,10 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { PWD_REGEXP } from "shared-constant/regExp";
+import { SharedButton } from "shared-ui/business/sharedButton";
 
 import { useQueryClient } from "@tanstack/react-query";
+import { COLORS } from "shared-style/color";
 import { useEditUserInfo } from "@/apis/auth/useEditUserInfo";
 import { useUserState } from "@/globalStates/useUserState";
 import { useToast } from "@/globalStates/useToast";
@@ -205,6 +207,7 @@ export const EditPart: FunctionComponent = () => {
           </li>
         </ul>
 
+        <SharedButton radius="round" fontColor={COLORS.GRAY100} />
         <button type="submit">회원정보 변경 저장</button>
       </form>
     </section>
