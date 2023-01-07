@@ -11,20 +11,20 @@ export const cssObj = {
   wrapper: css`
     position: relative;
   `,
-  flexBox: css`
+  payContainer: css`
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
   `,
-  flexStartBox: css`
+  rowBox: css`
     display: flex;
     align-items: flex-start;
   `,
-  flexCenterBox: css`
+  payLabel: css`
     display: flex;
     align-items: center;
   `,
-  lineBox: (width?: number) => {
+  container: (width?: number) => {
     if (width) {
       return css`
         width: ${width}%;
@@ -58,7 +58,7 @@ export const cssObj = {
       color: ${COLORS.GRAY10};
     }
   `,
-  inputLine: (isError?: boolean) => css`
+  input: (isError?: boolean) => css`
     border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
     padding: 0rem 1rem;
     height: 2.5rem;
@@ -95,7 +95,7 @@ export const cssObj = {
       margin-right: 0.5rem;
     }
   `,
-  inputLineBox: (isError?: boolean) => css`
+  inputBox: (isError?: boolean) => css`
     display: flex;
     margin-left: 1rem;
     align-items: center;
@@ -110,13 +110,15 @@ export const cssObj = {
       top: 50%;
       transform: translate(0, -50%);
     }
-    > input[type="text"] {
+    > input {
       border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+      text-align: left;
       height: 2.5rem;
       padding: 0rem 1rem 0rem 2.75rem;
       font-size: 1rem;
       width: 100%;
       font-weight: 400;
+      justify-content: flex-start;
       color: ${COLORS.GRAY10};
 
       ::placeholder {

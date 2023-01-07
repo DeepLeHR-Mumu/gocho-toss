@@ -8,17 +8,9 @@ export const cssObj = {
     min-height: 30vh;
     position: relative;
   `,
-  lineBox: (width?: number) => {
-    if (width) {
-      return css`
-        width: ${width}%;
-        margin-bottom: 1.5rem;
-      `;
-    }
-    return css`
-      margin-bottom: 1.5rem;
-    `;
-  },
+  wrapper: css`
+    margin-bottom: 1.5rem;
+  `,
   subTitle: css`
     font-size: 1rem;
     font-weight: 700;

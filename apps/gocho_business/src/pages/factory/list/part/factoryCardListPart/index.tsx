@@ -65,13 +65,13 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                 <CommonRoundButton
                   text="공장수정"
                   Icon={FiEdit}
-                  backgoundColor={COLORS.BLUE_FIRST50}
+                  backgroundColor={COLORS.BLUE_FIRST50}
                   onClickHandler={() => setEditingIndex(index)}
                 />
                 <CommonRoundButton
                   text="공장삭제"
                   Icon={BiMinus}
-                  backgoundColor={COLORS.BLUE_FIRST50}
+                  backgroundColor={COLORS.BLUE_FIRST50}
                   onClickHandler={() => {
                     if (window.confirm(FACTORY_MESSSAGE_OBJ.DELETE)) {
                       deleteFactoryMutation({ factoryId: factoryData.id });

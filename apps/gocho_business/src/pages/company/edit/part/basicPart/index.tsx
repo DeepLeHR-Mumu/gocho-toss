@@ -25,7 +25,6 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
   } = companyForm;
   const { userInfoData } = useUserState();
 
-  // api 주석제거
   const { data: companyData } = useCompanyDetail({
     companyId: userInfoData?.companyId,
   });
@@ -42,25 +41,24 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
 
   const foundDate = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
 
-  // css lineBox => inputContainer 네임 변경
   return (
-    <div css={cssObj.wrapper}>
-      <div css={cssObj.lineBox()}>
+    <div css={cssObj.wrapper} data-testid="company/edit/basicPart">
+      <div css={cssObj.container()}>
         <strong css={cssObj.subTitle()}>기업 형태</strong>
         <p css={cssObj.textValue}>{companyData.size}</p>
       </div>
-      <div css={cssObj.flexStartBox}>
-        <div css={cssObj.lineBox(30)}>
+      <div css={cssObj.rowBox}>
+        <div css={cssObj.container(30)}>
           <strong css={cssObj.subTitle()}>설립일</strong>
           <p css={cssObj.textValue}>{foundDate.format(new Date(companyData.foundNumber))}</p>
         </div>
-        <div css={cssObj.lineBox()}>
+        <div css={cssObj.container()}>
           <strong css={cssObj.subTitle()}>사업자 번호</strong>
           <p css={cssObj.textValue}>{companyData.businessNumber}</p>
         </div>
       </div>
-      <div css={cssObj.flexStartBox}>
-        <div css={cssObj.lineBox(30)}>
+      <div css={cssObj.rowBox}>
+        <div css={cssObj.container(30)}>
           <strong css={cssObj.subTitle(errors.employee_number?.type === "required")}>사원수</strong>
           <label htmlFor="employee_number" css={cssObj.employeeNumber}>
             <FiUsers />
@@ -70,22 +68,22 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
                 event.currentTarget.blur();
               }}
               {...register("employee_number", { required: true })}
-              css={cssObj.inputLine(errors.employee_number?.type === "required")}
+              css={cssObj.input(errors.employee_number?.type === "required")}
             />
             <p css={cssObj.unit}>명</p>
           </label>
         </div>
-        <div css={cssObj.lineBox(70)}>
+        <div css={cssObj.container(70)}>
           <strong css={cssObj.subTitle(errors.intro?.type === "required")}>기업 한줄 소개</strong>
           <input
             type="text"
             {...register("intro", { required: true })}
             placeholder="기업 한줄 소개"
-            css={cssObj.inputLine(errors.intro?.type === "required")}
+            css={cssObj.input(errors.intro?.type === "required")}
           />
         </div>
       </div>
-      <div css={cssObj.lineBox()}>
+      <div css={cssObj.container()}>
         <strong css={cssObj.subTitle(errors.address?.type === "required")}>기업 본사 주소</strong>
         <label htmlFor="address" css={cssObj.address}>
           <CommonRoundButton
@@ -98,22 +96,27 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
                 },
               })
             }
-            // 오타
-            backgoundColor={COLORS.GRAY80}
+            backgroundColor={COLORS.GRAY80}
           />
-          <div css={cssObj.inputLineBox(errors.address?.type === "required")}>
+          <div css={cssObj.inputBox(errors.address?.type === "required")}>
             <FiMapPin />
             <input
-              type="text"
+              type="button"
               {...register("address", { required: true })}
               placeholder="좌측 버튼을 눌러 기업 주소를 입력해주세요"
+              onClick={() =>
+                openPostCodePopup({
+                  onComplete: (addressObj: Address) => {
+                    setValue("address", addressObj.address);
+                  },
+                })
+              }
             />
           </div>
         </label>
-        {/* 주소창 눌러도 팝업뜨고 주소창 disable */}
         <KakaoMap address={watch("address")} />
       </div>
-      <div css={cssObj.lineBox(80)}>
+      <div css={cssObj.container(80)}>
         <strong css={cssObj.subTitle(errors.nozo?.exists?.type === "required")}>노조</strong>
         <div css={cssObj.nozoBox}>
           <BiUserVoice />
@@ -124,45 +127,43 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             <p css={cssObj.unit}>없음</p>
           </SharedRadioButton>
         </div>
-        <input type="text" {...register("nozo.desc")} placeholder="보충설명(선택)" css={cssObj.inputLine()} />
+        <input type="text" {...register("nozo.desc")} placeholder="보충설명(선택)" css={cssObj.input()} />
       </div>
-      <div css={cssObj.lineBox(80)}>
+      <div css={cssObj.container(80)}>
         <strong css={cssObj.subTitle()}>연봉 정보</strong>
-        {/* 이것도 css네임 재고려 */}
-        <div css={cssObj.flexBox}>
+        <div css={cssObj.payContainer}>
           <div css={cssObj.payBox}>
             <strong css={cssObj.infoTitle(errors.pay_start?.type === "required")}>평균 초봉</strong>
-            {/* 콘텐츠에 맞는 이름으로 변경 */}
-            <div css={cssObj.flexCenterBox}>
+            <div css={cssObj.payLabel}>
               <input
                 type="number"
                 {...register("pay_start", { required: true })}
                 placeholder="평균 초봉"
-                css={cssObj.inputLine(errors.pay_start?.type === "required")}
+                css={cssObj.input(errors.pay_start?.type === "required")}
               />
               <p css={cssObj.textValue}>만원</p>
             </div>
           </div>
           <div css={cssObj.payBox}>
             <strong css={cssObj.infoTitle(errors.pay_avg?.type === "required")}>평균 연봉</strong>
-            <div css={cssObj.flexCenterBox}>
+            <div css={cssObj.payLabel}>
               <input
                 type="number"
                 {...register("pay_avg", { required: true })}
                 placeholder="평균 연봉"
-                css={cssObj.inputLine(errors.pay_avg?.type === "required")}
+                css={cssObj.input(errors.pay_avg?.type === "required")}
               />
               <p css={cssObj.textValue}>만원</p>
             </div>
           </div>
         </div>
-        <div css={cssObj.lineBox()}>
+        <div css={cssObj.container()}>
           <strong css={cssObj.infoTitle()}>기타 연봉 정보</strong>
           <input
             type="text"
             {...register("pay_desc")}
             placeholder="상여금, 성과급 등의 정보를 적어주세요"
-            css={cssObj.inputLine()}
+            css={cssObj.input()}
           />
         </div>
       </div>

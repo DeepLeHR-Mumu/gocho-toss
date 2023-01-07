@@ -27,10 +27,17 @@ export const cssObj = {
     font-weight: 400;
     color: ${COLORS.GRAY10};
   `,
-  flexBox: css`
+  topButtonBox: css`
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    width: 100%;
+    max-width: 28.625rem;
+  `,
+  sharedButtonBox: css`
+    margin: auto;
+    width: 100%;
+    max-width: 25rem;
   `,
   companyInfoBox: css`
     padding: 2rem;

@@ -40,7 +40,7 @@ export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formO
               },
             })
           }
-          backgoundColor={COLORS.BLUE_FIRST30}
+          backgroundColor={COLORS.BLUE_FIRST30}
         />
         <button
           type="button"
