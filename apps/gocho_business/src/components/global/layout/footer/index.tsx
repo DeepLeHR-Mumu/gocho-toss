@@ -2,7 +2,6 @@ import { FunctionComponent } from "react";
 import Image from "next/image";
 
 import gochoTextMono from "shared-image/global/deepLeLogo/textMono.svg";
-import kakaoPlusMono from "shared-image/global/sns/kakaoMono_soft.svg";
 
 import { FOOTER_INFO } from "./constants";
 import { cssObj } from "./style";
@@ -31,14 +30,6 @@ export const Footer: FunctionComponent = () => (
           <li>
             <a css={cssObj.linkCSS} href={`mailto:${FOOTER_INFO.helpEmail}`}>
               {FOOTER_INFO.helpEmail}
-            </a>
-          </li>
-          <li>
-            <a href={FOOTER_INFO.kakaoPlus} css={cssObj.linkCSS}>
-              카카오톡 플러스 친구{" "}
-              <span css={cssObj.kakaoLogoBox}>
-                <Image src={kakaoPlusMono} alt="카카오톡 플러스 친구" layout="fill" objectFit="contain" />
-              </span>
             </a>
           </li>
         </ul>

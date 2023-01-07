@@ -71,22 +71,6 @@ export const cssObj = {
     display: flex;
     width: 100%;
     align-items: center;
-    > li {
-      position: relative;
-      :first-of-type {
-        margin-right: 1rem;
-        :after {
-          content: "";
-          width: 1px;
-          height: 0.75rem;
-          background-color: ${COLORS.GRAY40};
-          position: absolute;
-          right: -0.5rem;
-          top: 50%;
-          transform: translate(0, -50%);
-        }
-      }
-    }
   `,
   linkCSS: css`
     font-size: 0.75rem;
@@ -94,12 +78,5 @@ export const cssObj = {
     display: flex;
     align-items: center;
     color: ${COLORS.GRAY40};
-  `,
-  kakaoLogoBox: css`
-    margin-left: 0.25rem;
-    position: relative;
-    width: 0.75rem;
-    height: 0.75rem;
-    display: inline-block;
   `,
 };

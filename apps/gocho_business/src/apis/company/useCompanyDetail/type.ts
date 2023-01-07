@@ -10,6 +10,8 @@ export interface ResponseObjDef {
       name: "진행중" | "등록대기" | "수정대기" | "등록반려" | "수정반려";
       reason: string | null;
     };
+    logo_url: string;
+    industry: string;
     business_number: string;
     name: string;
     size: string;
