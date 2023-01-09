@@ -12,14 +12,14 @@ test.beforeEach(async ({ page }) => {
 
 test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
   await page.getByRole("link", { name: "공장" }).click();
-  await expect(page.getByText("고초대졸.business")).toBeVisible();
+  const beforeFactoryListDataObj = await (
+    await page.waitForResponse((response) => response.url().includes("factories") && response.status() === 200)
+  ).json();
   await expect(page.getByRole("heading", { name: "공장 등록" })).toHaveText("공장 등록");
   await expect(page.getByRole("heading", { name: "공장 목록" })).toHaveText("공장 목록");
 
   await page.getByRole("link", { name: "공장" }).click();
-  const beforeFactoryListDataObj = await (
-    await page.waitForResponse((response) => response.url().includes("factories") && response.status() === 200)
-  ).json();
+
   await page.waitForLoadState("networkidle");
   await page.waitForTimeout(400);
 
@@ -94,12 +94,12 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
 
   await page.getByRole("button", { name: "공장 수정" }).click();
 
-  await expect(page.getByTestId("factory/list/factoryCardListPart").last().getByText("바뀐공장이름")).toBeVisible();
-  await expect(page.getByTestId("factory/list/factoryCardListPart").last().getByText("새로운 dormitory")).toBeVisible();
-  await expect(page.getByTestId("factory/list/factoryCardListPart").last().getByText("새로운 버스")).toBeVisible();
+  await expect(page.getByTestId("factory/list/factoryCardListPart").first().getByText("바뀐공장이름")).toBeVisible();
+  await expect(page.getByTestId("factory/list/factoryCardListPart").first().getByText("새로운 dormitory")).toBeVisible();
+  await expect(page.getByTestId("factory/list/factoryCardListPart").first().getByText("새로운 버스")).toBeVisible();
 
   const beforeDeleteCardCount = await page.getByTestId("factory/list/factoryCardListPart").count();
-  await page.getByTestId("factory/list/factoryCardListPart").last().getByRole("button", { name: "공장삭제" }).click();
+  await page.getByTestId("factory/list/factoryCardListPart").first().getByRole("button", { name: "공장삭제" }).click();
   await page.waitForLoadState("networkidle");
 
   const afterDeleteCardCount = await page.getByTestId("factory/list/factoryCardListPart").count();

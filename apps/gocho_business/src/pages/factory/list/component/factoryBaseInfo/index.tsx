@@ -4,14 +4,15 @@ import { FiMap } from "react-icons/fi";
 import { AiOutlineEnvironment } from "react-icons/ai";
 
 import { COLORS } from "shared-style/color";
+import { SharedButton } from "shared-ui/business/sharedButton";
 
-import { CommonRoundButton, CommonStatusChip } from "@/components/common";
+import { CommonStatusChip } from "@/components/common";
 import { POSTCODE_SCRIPT_URL } from "@/constants/url";
 
 import { cssObj } from "./style";
 import { FactoryBaseInfoProps } from "./type";
 
-export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formObj }) => {
+export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formObj, reqeustStatus }) => {
   const { register, formState, setValue } = formObj;
 
   const openPostCodePopup = useDaumPostcodePopup(POSTCODE_SCRIPT_URL);
@@ -26,12 +27,15 @@ export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formO
           maxLength={30}
         />
         <div css={cssObj.statusChip}>
-          <CommonStatusChip />
+          <CommonStatusChip status={reqeustStatus} />
         </div>
       </div>
       <div css={cssObj.inputContainer}>
-        <CommonRoundButton
-          Icon={FiMap}
+        <SharedButton
+          radius="circle"
+          fontColor={COLORS.GRAY10}
+          backgroundColor={COLORS.GRAY80}
+          size="medium"
           text="주소찾기"
           onClickHandler={() =>
             openPostCodePopup({
@@ -40,7 +44,7 @@ export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formO
               },
             })
           }
-          backgoundColor={COLORS.BLUE_FIRST30}
+          iconObj={{ icon: FiMap, location: "left" }}
         />
         <button
           type="button"

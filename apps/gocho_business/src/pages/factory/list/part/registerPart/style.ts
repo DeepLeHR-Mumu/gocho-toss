@@ -22,7 +22,54 @@ export const cssObj = {
     margin: 4rem 0;
   `,
 
-  buttonContainer: css`
+  suibmitButtonContainer: css`
+    ::before {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translate(0, -50%);
+      width: calc(40%);
+      height: 1px;
+      content: "";
+      background-color: #cccccc;
+    }
+    ::after {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translate(0, -50%);
+      width: calc(40%);
+      height: 1px;
+      content: "";
+      background-color: #cccccc;
+    }
+  `,
+  editButtonContainer: css`
     display: flex;
+    gap: 0 1.5rem;
+    position: relative;
+    width: 100%;
+    justify-content: center;
+
+    ::before {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translate(0, -50%);
+      width: calc(35%);
+      height: 1px;
+      content: "";
+      background-color: #cccccc;
+    }
+    ::after {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translate(0, -50%);
+      width: calc(35%);
+      height: 1px;
+      content: "";
+      background-color: #cccccc;
+    }
   `,
 };
