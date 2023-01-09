@@ -11,6 +11,21 @@ export const cssObj = {
   wrapper: css`
     margin-top: 2rem;
   `,
+  confirmBox: css`
+    background-color: ${COLORS.GRAY95};
+    padding: 0.5rem 2rem;
+    border-bottom: 1px solid ${COLORS.GRAY70};
+    margin-bottom: 3rem;
+  `,
+  confirmTitle: css`
+    font-size: 1.25rem;
+    font-weight: 700;
+  `,
+  confirmDesc: css`
+    font-size: 1rem;
+    line-height: 1.8;
+    word-break: keep-all;
+  `,
   container: css``,
   header: css`
     display: flex;
@@ -20,12 +35,10 @@ export const cssObj = {
   title: css`
     font-size: 1.25rem;
     font-weight: 700;
-    color: ${COLORS.GRAY10};
   `,
   desc: css`
     font-size: 1rem;
     font-weight: 400;
-    color: ${COLORS.GRAY10};
   `,
   topButtonBox: css`
     display: flex;

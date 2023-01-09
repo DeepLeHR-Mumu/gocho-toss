@@ -65,19 +65,15 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
           maxLength={120}
           placeholder="직접 입력하여 추가"
           css={cssObj.inputLine}
-          onKeyDown={(onKeyDownEvent) => {
-            // 파악후 전달
-            if (onKeyDownEvent.keyCode === 229) return;
-
-            if (onKeyDownEvent.key === "Enter") {
-              onKeyDownEvent.preventDefault();
+          onKeyUp={(onKeyEvent) => {
+            if (onKeyEvent.key === "Enter") {
               addValueHandler(inputRef.current?.value || "");
             }
           }}
         />
         <button
           type="button"
-          aria-label="추가하기"
+          aria-label={`복지 ${inputRef.current?.value} 추가하기`}
           css={cssObj.enterButton}
           onClick={() => {
             addValueHandler(inputRef.current?.value || "");

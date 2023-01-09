@@ -128,6 +128,13 @@ const CompanyEditPage: NextPageWithLayout = () => {
   return (
     <main css={cssObj.wrapper}>
       <PageLayout>
+        {(companyData.status.name === "수정반려" || companyData.status.name === "등록반려") && (
+          <div css={cssObj.confirmBox}>
+            <h2 css={cssObj.confirmTitle}>반려사유</h2>
+            <p css={cssObj.confirmDesc}>{companyData.status.reason}</p>
+          </div>
+        )}
+
         <form css={cssObj.container} onSubmit={handleSubmit(addCompanyDetail)}>
           <header css={cssObj.header}>
             <div>
