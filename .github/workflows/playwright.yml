@@ -40,7 +40,7 @@ jobs:
           environment: "Preview – gocho-web"
           check_interval: 3
           max_timeout: 1200
-      - run: echo ${{steps.waitForGochoDesktopURL.outputs.url}}
+      - run: echo ${{steps.waitForGochoBusinessURL.outputs.url}}
 
   test_e2e:
     needs: wait_url
