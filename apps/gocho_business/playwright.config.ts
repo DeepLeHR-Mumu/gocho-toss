@@ -7,6 +7,7 @@ const config: PlaywrightTestConfig = {
     timeout: 6000,
   },
   fullyParallel: true,
+  workers: process.env.CI ? 4 : undefined,
   projects: [
     {
       name: "chromium",

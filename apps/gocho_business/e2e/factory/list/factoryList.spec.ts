@@ -76,7 +76,8 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
 
   await page.getByRole("button", { name: "주소찾기" }).click();
   const secondPopup = await anotherPopupPromise;
-  await secondPopup.waitForLoadState("networkidle");
+  await page.waitForTimeout(500);
+
   await secondPopup.keyboard.insertText("부산");
   await secondPopup.keyboard.press("Enter");
   await page.waitForTimeout(1000);
