@@ -7,26 +7,25 @@ test.beforeEach(async ({ page }) => {
   await page.getByPlaceholder("아이디(이메일)").fill("ahri@deeplehr.com");
   await page.getByPlaceholder("비밀번호").fill("deeple1!");
   await page.getByRole("button", { name: "로그인" }).click();
-  await page.waitForLoadState("networkidle");
-  // eslint-disable-next-line no-console
-  console.log("hi");
+  await page.waitForNavigation();
 });
 
 test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
   await page.getByRole("link", { name: "공장" }).click();
-  const beforeFactoryListDataObj = await (
-    await page.waitForResponse((response) => response.url().includes("factories") && response.status() === 200)
-  ).json();
+
+  const beforeFactoryPromise = page.waitForResponse(
+    (response) => response.url().includes("factories") && response.status() === 200
+  );
+  const popupPromise = page.waitForEvent("popup");
+
+  const beforeFactoryListDataObj = await (await beforeFactoryPromise).json();
+
   await expect(page.getByRole("heading", { name: "공장 등록" })).toHaveText("공장 등록");
   await expect(page.getByRole("heading", { name: "공장 목록" })).toHaveText("공장 목록");
 
   await page.getByRole("link", { name: "공장" }).click();
 
-  await page.waitForLoadState("networkidle");
-  await page.waitForTimeout(400);
-
-  await page.locator("input[name='factory_name']").type("테스트 공장 1");
-  const popupPromise = page.waitForEvent("popup");
+  await page.locator("input[name='factory_name']").type("테스트 공장 1", { delay: 100 });
 
   await page.getByRole("button", { name: "주소찾기" }).click();
   const popup = await popupPromise;
@@ -96,16 +95,14 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
 
   await page.getByRole("button", { name: "공장 수정" }).click();
 
-  await expect(page.getByTestId("factory/list/factoryCardListPart").first().getByText("바뀐공장이름")).toBeVisible();
-  await expect(
-    page.getByTestId("factory/list/factoryCardListPart").first().getByText("새로운 dormitory")
-  ).toBeVisible();
-  await expect(page.getByTestId("factory/list/factoryCardListPart").first().getByText("새로운 버스")).toBeVisible();
+  await expect(page.getByTestId("factory/list/factoryCardListPart").nth(1).getByText("바뀐공장이름")).toBeVisible();
+  await expect(page.getByTestId("factory/list/factoryCardListPart").nth(1).getByText("새로운 dormitory")).toBeVisible();
+  await expect(page.getByTestId("factory/list/factoryCardListPart").nth(1).getByText("새로운 버스")).toBeVisible();
 
   const beforeDeleteCardCount = await page.getByTestId("factory/list/factoryCardListPart").count();
-  await page.getByTestId("factory/list/factoryCardListPart").first().getByRole("button", { name: "공장삭제" }).click();
+  await page.getByTestId("factory/list/factoryCardListPart").nth(1).getByRole("button", { name: "공장삭제" }).click();
   await page.waitForLoadState("networkidle");
 
   const afterDeleteCardCount = await page.getByTestId("factory/list/factoryCardListPart").count();
-  expect(beforeDeleteCardCount - 1).toBe(afterDeleteCardCount);
+  await expect(beforeDeleteCardCount - 1).toBe(afterDeleteCardCount);
 });
