@@ -28,7 +28,7 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
   await page.locator("input[name='factory_name']").type("테스트 공장 1", { delay: 100 });
 
   await page.getByRole("button", { name: "주소찾기" }).click();
-  await page.waitForLoadState("networkidle");
+  await page.waitForTimeout(500);
   const popup = await popupPromise;
 
   await page.waitForTimeout(1000);
