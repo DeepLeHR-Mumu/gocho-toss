@@ -60,13 +60,6 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
     page.getByRole("button", { name: "공장 등록" }).click(),
   ]);
 
-  // const afterFactoryListPromise = page.waitForResponse(
-  //   (response) => response.url().includes("factories") && response.status() === 200
-  // );
-
-  // page.on("dialog", (dialog) => dialog.accept());
-  // await page.getByRole("button", { name: "공장 등록" }).click();
-
   const afterFactoryListDataObj = await afterPostResponse.json();
 
   expect(beforeFactoryListDataObj.count + 1).toBe(afterFactoryListDataObj.count);
@@ -115,5 +108,6 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
   await page.getByTestId("factory/list/factoryCardListPart").nth(1).getByRole("button", { name: "공장삭제" }).click();
 
   const afterDeleteCardCount = await page.getByTestId("factory/list/factoryCardListPart").count();
+  expect(beforeDeleteCardCount - 1).toBe(afterDeleteCardCount);
   expect(beforeDeleteCardCount - 1).toBe(afterDeleteCardCount);
 });
