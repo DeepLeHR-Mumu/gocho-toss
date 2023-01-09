@@ -73,9 +73,13 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
   ).toBeVisible();
 
   await page.locator("input[name='factory_name']").fill("바뀐공장이름");
+
   const anotherPopupPromise = page.waitForEvent("popup");
+  await page.waitForTimeout(500);
 
   await page.getByRole("button", { name: "주소찾기" }).click();
+  await page.waitForTimeout(1000);
+
   const secondPopup = await anotherPopupPromise;
   await page.waitForTimeout(500);
 
