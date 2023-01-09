@@ -71,9 +71,11 @@ const JdUploadPage: NextPageWithLayout = () => {
           etc_arr: getFieldArrayValueWithNull(jobObj.etc_arr),
           position_arr: jobObj.position_arr.map((position) => ({
             ...position,
+            task_sub_arr: position.task_sub_arr ? position.task_sub_arr : null,
             task_detail_arr: getFieldArrayValue(position.task_detail_arr),
             required_etc_arr: getFieldArrayValueWithNull(position.required_etc_arr),
             pay_arr: getFieldArrayValue(position.pay_arr),
+            preferred_certi_arr: position.preferred_certi_arr ? position.preferred_certi_arr : null,
             preferred_etc_arr: getFieldArrayValueWithNull(position.preferred_etc_arr),
           })),
         },

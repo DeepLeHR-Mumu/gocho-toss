@@ -20,7 +20,7 @@ export interface JobFormValues {
     contract_type: string;
     conversion_rate: number | null;
     task_main: string;
-    task_sub_arr: string[];
+    task_sub_arr: string[] | null;
     task_detail_arr: { value: string }[];
     rotation_arr: string[];
     place: {

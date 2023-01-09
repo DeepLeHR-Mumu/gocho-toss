@@ -41,18 +41,23 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
   };
 
   const subTaskClickHandler = (subTask: string) => {
-    const isInList = jobForm.watch("position_arr")[positionIndex].task_sub_arr.includes(subTask);
+    const isInList = jobForm.watch("position_arr")[positionIndex].task_sub_arr?.includes(subTask);
     jobForm.clearErrors(`position_arr.${positionIndex}.task_sub_arr`);
     if (isInList) {
       jobForm.setValue(`position_arr.${positionIndex}.task_sub_arr`, [
-        ...jobForm.watch("position_arr")[positionIndex].task_sub_arr.filter((element) => element !== subTask),
+        ...(jobForm.watch("position_arr")[positionIndex].task_sub_arr?.filter((element) => element !== subTask) || []),
       ]);
     } else {
       jobForm.setValue(`position_arr.${positionIndex}.task_sub_arr`, [
-        ...jobForm.watch("position_arr")[positionIndex].task_sub_arr,
+        ...(jobForm.watch("position_arr")[positionIndex].task_sub_arr || []),
         subTask,
       ]);
     }
+  };
+
+  const subTaskTextMaker = (selectedSubTask: string[]) => {
+    if (selectedSubTask.length === 0) return "2차직무 선택";
+    return selectedSubTask.join(", ");
   };
 
   const titleMaker = (task: string, contract: string, hire: number) => {
@@ -126,14 +131,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
         </div>
       </div>
       <div css={cssObj.container}>
-        <p
-          css={cssObj.inputTitle(
-            !!jobForm.formState.errors.position_arr?.[positionIndex]?.task_main ||
-              !!jobForm.formState.errors.position_arr?.[positionIndex]?.task_sub_arr
-          )}
-        >
-          채용 직무
-        </p>
+        <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.task_main)}>채용 직무</p>
         <div css={cssObj.taskInputContainer}>
           <div>
             <div css={cssObj.taskContainer}>
@@ -181,16 +179,10 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 css={cssObj.input(20)}
                 type="button"
                 onClick={() => {
-                  if (isSubTaskOpen && jobForm.watch("position_arr")[positionIndex].task_sub_arr.length === 0) {
-                    jobForm.setError(`position_arr.${positionIndex}.task_sub_arr`, {
-                      type: "required",
-                      message: "no sub task",
-                    });
-                  }
                   setIsSubTaskOpen((prev) => !prev);
                 }}
               >
-                2차직무 선택
+                {subTaskTextMaker(jobForm.watch("position_arr")[positionIndex].task_sub_arr || [])}
                 {isSubTaskOpen ? <FiChevronUp /> : <FiChevronDown />}
               </button>
               <div css={cssObj.taskList(isSubTaskOpen)}>
@@ -204,17 +196,15 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                       subTaskClickHandler(subTask);
                     }}
                   >
-                    <CheckBox isChecked={jobForm.watch("position_arr")[positionIndex].task_sub_arr.includes(subTask)} />
+                    <CheckBox
+                      isChecked={jobForm.watch("position_arr")[positionIndex].task_sub_arr?.includes(subTask) || false}
+                    />
                     {subTask}
                   </button>
                 ))}
               </div>
             </div>
-            <p css={cssObj.desc(!!jobForm.formState.errors.position_arr?.[positionIndex]?.task_sub_arr)}>
-              {jobForm.formState.errors.position_arr?.[positionIndex]?.task_sub_arr
-                ? "2차 직무는 필수 선택 사항입니다"
-                : "2차 직무는 중복 선택이 가능합니다"}
-            </p>
+            <p css={cssObj.desc(false)}>2차 직무는 중복 선택이 가능합니다</p>
           </div>
         </div>
       </div>

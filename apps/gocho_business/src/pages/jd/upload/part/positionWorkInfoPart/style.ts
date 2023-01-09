@@ -4,7 +4,7 @@ import { COLORS } from "shared-style/color";
 export const cssObj = {
   container: css`
     margin-top: 1rem;
-    p {
+    > p {
       line-height: 2;
     }
   `,
