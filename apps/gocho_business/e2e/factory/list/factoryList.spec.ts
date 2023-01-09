@@ -11,11 +11,11 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
-  await page.getByRole("link", { name: "공장" }).click();
-
   const beforeFactoryPromise = page.waitForResponse(
     (response) => response.url().includes("factories") && response.status() === 200
   );
+  await page.getByRole("link", { name: "공장" }).click();
+
   const popupPromise = page.waitForEvent("popup");
 
   const beforeFactoryListDataObj = await (await beforeFactoryPromise).json();
@@ -28,9 +28,13 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
   await page.locator("input[name='factory_name']").type("테스트 공장 1", { delay: 100 });
 
   await page.getByRole("button", { name: "주소찾기" }).click();
+  await page.waitForLoadState("networkidle");
   const popup = await popupPromise;
-  await popup.keyboard.insertText("서울");
+
+  await page.waitForTimeout(1000);
+  await popup.keyboard.type("서울", { delay: 20 });
   await popup.keyboard.press("Enter");
+
   await page.waitForTimeout(1000);
   await popup.keyboard.press("Tab");
   await popup.keyboard.press("Tab");
@@ -47,14 +51,23 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
 
   await page.getByText("있음").first().click();
   await page.getByText("있음").nth(1).click();
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(100);
 
   page.on("dialog", (dialog) => dialog.accept());
-  await page.getByRole("button", { name: "공장 등록" }).click();
 
-  const afterFactoryListDataObj = await (
-    await page.waitForResponse((response) => response.url().includes("factories") && response.status() === 200)
-  ).json();
+  const [afterPostResponse] = await Promise.all([
+    page.waitForResponse((res) => res.url().includes("factories") && res.request().method() === "GET"),
+    page.getByRole("button", { name: "공장 등록" }).click(),
+  ]);
+
+  // const afterFactoryListPromise = page.waitForResponse(
+  //   (response) => response.url().includes("factories") && response.status() === 200
+  // );
+
+  // page.on("dialog", (dialog) => dialog.accept());
+  // await page.getByRole("button", { name: "공장 등록" }).click();
+
+  const afterFactoryListDataObj = await afterPostResponse.json();
 
   expect(beforeFactoryListDataObj.count + 1).toBe(afterFactoryListDataObj.count);
 

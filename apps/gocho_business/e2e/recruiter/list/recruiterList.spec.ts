@@ -7,7 +7,7 @@ test.beforeEach(async ({ page }) => {
   await page.getByPlaceholder("아이디(이메일)").fill("ahri@deeplehr.com");
   await page.getByPlaceholder("비밀번호").fill("deeple1!");
   await page.getByRole("button", { name: "로그인" }).click();
-  await page.waitForLoadState();
+  await page.waitForNavigation();
 });
 
 test("기업 계정 목록 갯수 테스트", async ({ page }) => {
