@@ -8,6 +8,8 @@ test.beforeEach(async ({ page }) => {
   await page.getByPlaceholder("비밀번호").fill("deeple1!");
   await page.getByRole("button", { name: "로그인" }).click();
   await page.waitForLoadState("networkidle");
+  // eslint-disable-next-line no-console
+  console.log("hi");
 });
 
 test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
@@ -95,7 +97,9 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
   await page.getByRole("button", { name: "공장 수정" }).click();
 
   await expect(page.getByTestId("factory/list/factoryCardListPart").first().getByText("바뀐공장이름")).toBeVisible();
-  await expect(page.getByTestId("factory/list/factoryCardListPart").first().getByText("새로운 dormitory")).toBeVisible();
+  await expect(
+    page.getByTestId("factory/list/factoryCardListPart").first().getByText("새로운 dormitory")
+  ).toBeVisible();
   await expect(page.getByTestId("factory/list/factoryCardListPart").first().getByText("새로운 버스")).toBeVisible();
 
   const beforeDeleteCardCount = await page.getByTestId("factory/list/factoryCardListPart").count();
