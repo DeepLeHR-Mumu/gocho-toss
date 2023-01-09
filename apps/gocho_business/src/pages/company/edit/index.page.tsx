@@ -47,6 +47,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
           companyId: userInfoData?.companyId as number,
           dto: {
             ...formData,
+            manager_id: userInfoData?.id as number,
             welfare: {
               money: formData.welfare.money,
               health: formData.welfare.health,

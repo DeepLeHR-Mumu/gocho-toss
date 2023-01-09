@@ -42,7 +42,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
   const foundDate = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
 
   return (
-    <div css={cssObj.wrapper} data-testid="company/edit/basicPart">
+    <div css={cssObj.wrapper} data-testid="company/edit/BasicPart">
       <div css={cssObj.container()}>
         <strong css={cssObj.subTitle()}>기업 형태</strong>
         <p css={cssObj.textValue}>{companyData.size}</p>
@@ -77,7 +77,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
           <strong css={cssObj.subTitle(errors.intro?.type === "required")}>기업 한줄 소개</strong>
           <input
             type="text"
-            {...register("intro", { required: true })}
+            {...register("intro", { required: true, maxLength: 120 })}
             placeholder="기업 한줄 소개"
             css={cssObj.input(errors.intro?.type === "required")}
           />
@@ -127,7 +127,12 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             <p css={cssObj.unit}>없음</p>
           </SharedRadioButton>
         </div>
-        <input type="text" {...register("nozo.desc")} placeholder="보충설명(선택)" css={cssObj.input()} />
+        <input
+          type="text"
+          {...register("nozo.desc", { maxLength: 70 })}
+          placeholder="보충설명(선택)"
+          css={cssObj.input(errors.nozo?.desc?.type === "maxLength")}
+        />
       </div>
       <div css={cssObj.container(80)}>
         <strong css={cssObj.subTitle()}>연봉 정보</strong>
@@ -161,9 +166,9 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
           <strong css={cssObj.infoTitle()}>기타 연봉 정보</strong>
           <input
             type="text"
-            {...register("pay_desc")}
+            {...register("pay_desc", { maxLength: 120 })}
             placeholder="상여금, 성과급 등의 정보를 적어주세요"
-            css={cssObj.input()}
+            css={cssObj.input(errors.pay_desc?.type === "maxLength")}
           />
         </div>
       </div>

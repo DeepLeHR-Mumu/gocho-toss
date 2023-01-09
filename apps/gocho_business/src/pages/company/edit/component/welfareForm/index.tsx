@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useRef, useState } from "react";
 import { FiCornerDownLeft, FiMinus } from "react-icons/fi";
 
 import { WelfareFormProps } from "./type";
@@ -7,64 +7,80 @@ import { cssObj } from "./style";
 export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
   title,
   desc,
-  valueArr,
+  welfareValueArr,
   registerKey,
-  companyForm,
+  companyFormObj,
 }) => {
-  const [listArr, setListArr] = useState<string[] | null>(valueArr);
-  const [valueText, setValueText] = useState<string>("");
+  const [welfareArr, setWelfareArr] = useState<string[] | null>(welfareValueArr);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const welfareBoxRef = useRef<HTMLUListElement | null>(null);
+  const { setValue } = companyFormObj;
 
-  const { setValue } = companyForm;
+  const setValueCreator = (value: string[] | null) => {
+    setValue(registerKey, value, { shouldDirty: true });
+  };
+
+  const clearInputValue = () => {
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
+  };
 
   const deleteKeyHandler = (welfareIndex: number) => {
-    setListArr((prevListArr) => {
+    setWelfareArr((prevListArr) => {
       const filterArr = prevListArr && prevListArr.filter((_, filterIndex) => filterIndex !== welfareIndex);
-      if (filterArr?.length === 0) return null;
+      if (filterArr?.length === 0) {
+        setValueCreator(null);
+        return null;
+      }
+      setValueCreator(filterArr);
       return filterArr;
     });
   };
 
-  const addValueHandler = (text: string) => {
-    if (valueText !== "") {
-      setListArr((prevListArr) => {
-        if (!prevListArr) return [text];
-        return [...prevListArr, text];
+  const addValueHandler = (value: string) => {
+    if (value !== "") {
+      setWelfareArr((prevListArr) => {
+        if (!prevListArr) {
+          setValueCreator([value]);
+          return [value];
+        }
+        setValueCreator([...prevListArr, value]);
+        return [...prevListArr, value];
       });
-      setValueText("");
+      clearInputValue();
+      setTimeout(() => {
+        welfareBoxRef.current?.scrollTo(0, welfareBoxRef.current.scrollHeight);
+      }, 100);
     }
   };
-
-  useEffect(() => {
-    setValue(registerKey, listArr, { shouldDirty: true });
-  }, [listArr, registerKey, setListArr, setValue]);
 
   return (
     <div css={cssObj.wrapper}>
       <strong css={cssObj.title}>{title}</strong>
       <div css={cssObj.writeBox}>
         <input
+          ref={inputRef}
           type="text"
+          maxLength={120}
           placeholder="직접 입력하여 추가"
           css={cssObj.inputLine}
-          value={valueText}
-          onChange={(onChangeEvent) => {
-            setValueText(onChangeEvent.target.value);
-          }}
           onKeyDown={(onKeyDownEvent) => {
+            // 파악후 전달
             if (onKeyDownEvent.keyCode === 229) return;
 
             if (onKeyDownEvent.key === "Enter") {
               onKeyDownEvent.preventDefault();
-              addValueHandler(valueText);
+              addValueHandler(inputRef.current?.value || "");
             }
           }}
         />
         <button
           type="button"
-          aria-label={`${valueText} 추가하기`}
+          aria-label="추가하기"
           css={cssObj.enterButton}
           onClick={() => {
-            addValueHandler(valueText);
+            addValueHandler(inputRef.current?.value || "");
           }}
         >
           <FiCornerDownLeft />
@@ -72,9 +88,9 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
       </div>
       <div css={cssObj.container}>
         <p css={cssObj.desc}>{desc}</p>
-        {listArr ? (
-          <ul css={cssObj.listBox}>
-            {listArr.map((data, index) => {
+        {welfareArr ? (
+          <ul css={cssObj.listBox} ref={welfareBoxRef}>
+            {welfareArr.map((data, index) => {
               const key = `${title}_${data}${index}`;
 
               return (
@@ -82,7 +98,7 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
                   <p css={cssObj.valueDesc}>{data}</p>
                   <button
                     type="button"
-                    aria-label={`${data} 제거하기`}
+                    aria-label={`복지 ${data} 제거하기`}
                     css={cssObj.deleteButton}
                     onClick={() => {
                       deleteKeyHandler(index);

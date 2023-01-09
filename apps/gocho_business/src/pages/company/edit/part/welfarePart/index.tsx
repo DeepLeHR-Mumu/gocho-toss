@@ -1,4 +1,4 @@
-import { Fragment, FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
@@ -27,19 +27,18 @@ export const WelfarePart: FunctionComponent<WelfarePartProps> = ({ companyForm }
   const { welfareArr } = welfareArrCreator(companyData.welfare);
 
   return (
-    <div css={cssObj.wrapper} data-testid="company/edit/welfarePart">
+    <div css={cssObj.wrapper} data-testid="company/edit/WelfarePart">
       <strong css={cssObj.subTitle}>복지(선택)</strong>
       <div css={cssObj.welfareBox}>
         {welfareArr.map((welfare) => (
-          <Fragment key={welfare.title}>
-            <WelfareForm
-              valueArr={welfare.valueArr}
-              companyForm={companyForm}
-              registerKey={welfare.registerKey}
-              title={welfare.title}
-              desc={welfare.desc}
-            />
-          </Fragment>
+          <WelfareForm
+            key={welfare.title}
+            welfareValueArr={welfare.welfareValueArr}
+            companyFormObj={companyForm}
+            registerKey={welfare.registerKey}
+            title={welfare.title}
+            desc={welfare.desc}
+          />
         ))}
       </div>
     </div>
