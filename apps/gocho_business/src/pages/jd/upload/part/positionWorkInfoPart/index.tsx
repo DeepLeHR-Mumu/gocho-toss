@@ -15,8 +15,9 @@ import { useFactoryArr } from "@/apis/factory/useFactoryArr";
 import { factoryArrKeyObj } from "@/apis/factory/useFactoryArr/type";
 import { INTERNAL_URL, POSTCODE_SCRIPT_URL } from "@/constants/url";
 
+import { GuideChip } from "@/pages/jd/upload/component/guideChip";
 import { PositionWorkInfoPartProps } from "./type";
-import { rotationArr, placeTypeArr, certificateArr } from "./constant";
+import { rotationArr, placeTypeArr, certificateArr, preferredEtcGuideArr } from "./constant";
 import { cssObj } from "./style";
 
 export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> = ({
@@ -25,6 +26,8 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
   jobForm,
   control,
 }) => {
+  const [payIsFocusedArr, setPayIsFocusedArr] = useState<boolean[]>([false]);
+  const [preferredEtcIsFocusedArr, setPreferredEtcIsFocusedArr] = useState<boolean[]>([false]);
   const [certiSearchWord, setCertiSearchWord] = useState<string>("");
   const [isRotationOpen, setIsRotationOpen] = useState<boolean>(false);
   const [isFactoryListOpen, setIsFactoryListOpen] = useState<boolean>(false);
@@ -336,30 +339,63 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
           )}
         </div>
       </div>
-      <div css={cssObj.container}>
+      <div css={cssObj.containerWithGuide}>
         <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.pay_arr)}>급여</p>
-        <div css={cssObj.inputContainer}>
+        <div css={cssObj.inputContainerWithGuide}>
           {payArr.fields.map((item, index) => (
-            <label css={cssObj.inputLabel(47)} key={`payArr${item.id}`} htmlFor={`payArr${item.id}`}>
-              <input
-                id={`payArr${item.id}`}
-                css={cssObj.inputWithButton}
-                placeholder="급여 정보"
-                {...jobForm.register(`position_arr.${positionIndex}.pay_arr.${index}.value`, {
-                  required: true,
-                  maxLength: 70,
-                })}
-              />
-              <button
-                type="button"
-                css={cssObj.deleteInputButton}
-                onClick={() => {
-                  payArr.remove(positionIndex);
-                }}
-              >
-                <FiMinus />
-              </button>
-            </label>
+            <div key={`payArr${item.id}`}>
+              <label css={cssObj.inputLabel(47)} htmlFor={`payArr${item.id}`}>
+                <input
+                  id={`payArr${item.id}`}
+                  css={cssObj.inputWithButton}
+                  placeholder="급여 정보"
+                  onFocus={() => {
+                    setPayIsFocusedArr((prev) =>
+                      prev.map((stateItem, stateIndex) => {
+                        if (stateIndex === index) {
+                          return true;
+                        }
+                        return stateItem;
+                      })
+                    );
+                  }}
+                  {...jobForm.register(`position_arr.${positionIndex}.pay_arr.${index}.value`, {
+                    required: true,
+                    maxLength: 70,
+                  })}
+                  onBlur={() => {
+                    setPayIsFocusedArr((prev) =>
+                      prev.map((stateItem, stateIndex) => {
+                        if (stateIndex === index) {
+                          return false;
+                        }
+                        return stateItem;
+                      })
+                    );
+                  }}
+                />
+                <button
+                  type="button"
+                  css={cssObj.deleteInputButton}
+                  onClick={() => {
+                    payArr.remove(positionIndex);
+                    setPayIsFocusedArr((prev) => prev.filter((stateItem, stateIndex) => stateIndex !== index));
+                  }}
+                >
+                  <FiMinus />
+                </button>
+              </label>
+              <div css={cssObj.guideChipContainer}>
+                {payIsFocusedArr[index] && (
+                  <GuideChip
+                    text="회사 내규에 따름"
+                    onClickHandler={() => {
+                      jobForm.setValue(`position_arr.${positionIndex}.pay_arr.${index}.value`, "회사 내규에 따름");
+                    }}
+                  />
+                )}
+              </div>
+            </div>
           ))}
           <SharedButton
             radius="round"
@@ -371,6 +407,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
             text="입력칸 추가"
             onClickHandler={() => {
               payArr.append({ value: "" });
+              setPayIsFocusedArr((prev) => [...prev, false]);
             }}
           />
         </div>
@@ -434,29 +471,67 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
           ))}
         </div>
       </div>
-      <div css={cssObj.container}>
+      <div css={cssObj.containerWithGuide}>
         <p>기타 우대 사항(선택)</p>
-        <div css={cssObj.inputContainer}>
+        <div css={cssObj.inputContainerWithGuide}>
           {preferredEtcArr.fields.map((item, index) => (
-            <label css={cssObj.inputLabel(47)} key={`preferredEtcArr${item.id}`} htmlFor={`preferredEtcArr${item.id}`}>
-              <input
-                id={`preferredEtcArr${item.id}`}
-                css={cssObj.inputWithButton}
-                placeholder="기타 우대 사항"
-                {...jobForm.register(`position_arr.${positionIndex}.preferred_etc_arr.${index}.value`, {
-                  maxLength: 70,
-                })}
-              />
-              <button
-                type="button"
-                css={cssObj.deleteInputButton}
-                onClick={() => {
-                  preferredEtcArr.remove(positionIndex);
-                }}
-              >
-                <FiMinus />
-              </button>
-            </label>
+            <div key={`preferredEtcArr${item.id}`}>
+              <label css={cssObj.inputLabel(47)} htmlFor={`preferredEtcArr${item.id}`}>
+                <input
+                  id={`preferredEtcArr${item.id}`}
+                  css={cssObj.inputWithButton}
+                  placeholder="기타 우대 사항"
+                  onFocus={() => {
+                    setPreferredEtcIsFocusedArr((prev) =>
+                      prev.map((stateItem, stateIndex) => {
+                        if (stateIndex === index) {
+                          return true;
+                        }
+                        return stateItem;
+                      })
+                    );
+                  }}
+                  {...jobForm.register(`position_arr.${positionIndex}.preferred_etc_arr.${index}.value`, {
+                    maxLength: 70,
+                  })}
+                  onBlur={() => {
+                    setPreferredEtcIsFocusedArr((prev) =>
+                      prev.map((stateItem, stateIndex) => {
+                        if (stateIndex === index) {
+                          return false;
+                        }
+                        return stateItem;
+                      })
+                    );
+                  }}
+                />
+                <button
+                  type="button"
+                  css={cssObj.deleteInputButton}
+                  onClick={() => {
+                    preferredEtcArr.remove(positionIndex);
+                    setPreferredEtcIsFocusedArr((prev) => prev.filter((stateItem, stateIndex) => stateIndex !== index));
+                  }}
+                >
+                  <FiMinus />
+                </button>
+              </label>
+              <div css={cssObj.guideChipContainer}>
+                {preferredEtcIsFocusedArr[index] &&
+                  preferredEtcGuideArr.map((preferrecEtcGuide) => (
+                    <GuideChip
+                      key={`${preferrecEtcGuide}${item.id}`}
+                      text={preferrecEtcGuide}
+                      onClickHandler={() => {
+                        jobForm.setValue(
+                          `position_arr.${positionIndex}.preferred_etc_arr.${index}.value`,
+                          preferrecEtcGuide
+                        );
+                      }}
+                    />
+                  ))}
+              </div>
+            </div>
           ))}
           <SharedButton
             radius="round"
@@ -468,6 +543,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
             text="입력칸 추가"
             onClickHandler={() => {
               preferredEtcArr.append({ value: "" });
+              setPreferredEtcIsFocusedArr((prev) => [...prev, false]);
             }}
           />
         </div>

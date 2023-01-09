@@ -11,7 +11,14 @@ export const cssObj = {
   `,
 
   container: css`
-    margin-top: 1rem;
+    margin-bottom: 1rem;
+    > p {
+      line-height: 2;
+    }
+  `,
+
+  containerWithGuide: css`
+    margin-bottom: 2rem;
     > p {
       line-height: 2;
     }
@@ -74,15 +81,31 @@ export const cssObj = {
 
   inputContainer: css`
     display: flex;
+    align-items: flex-start;
     flex-wrap: wrap;
-    align-items: center;
     gap: 1rem 0.5rem;
+  `,
+
+  inputContainerWithGuide: css`
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 3.25rem 0.5rem;
   `,
 
   processBox: css`
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0 0.5rem;
+  `,
+
+  guideChipContainer: css`
+    position: absolute;
+    display: flex;
+    overflow-y: visible;
+    word-break: keep-all;
+    margin-top: 0.5rem;
+    gap: 0.5rem;
   `,
 
   inputLabel: (width: number) => css`
@@ -117,6 +140,7 @@ export const cssObj = {
   `,
 
   icon: css`
+    margin-top: 0.5rem;
     font-size: 1.5rem;
     color: ${COLORS.GRAY35};
   `,

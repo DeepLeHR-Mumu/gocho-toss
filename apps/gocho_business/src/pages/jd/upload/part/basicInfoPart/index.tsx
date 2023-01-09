@@ -8,8 +8,10 @@ import { COLORS } from "shared-style/color";
 import { SharedTextLink } from "shared-ui/business/sharedTextLink";
 import { SharedBoxLink } from "shared-ui/business/sharedBoxLink";
 
-import { cssObj } from "./style";
+import { GuideChip } from "@/pages/jd/upload/component/guideChip";
 import { BasicInfoPartProps } from "./type";
+import { processGuideArr, applyRouteGuideArr } from "./constant";
+import { cssObj } from "./style";
 
 export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
   jobForm,
@@ -17,6 +19,17 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
   applyRouteArr,
   etcArr,
 }) => {
+  const [processIsFocusedArr, setProcessIsFocusedArr] = useState<boolean[]>([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
+  const [applyRouteIsFocusedArr, setApplyRouteIsFocusedArr] = useState<boolean[]>([false]);
   const [isAlways, setIsAlways] = useState<boolean>(false);
   const [linkType, setLinkType] = useState<"website" | "email">("website");
 
@@ -34,6 +47,8 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
     setLinkType(type);
     jobForm.setValue(`apply_url`, "");
   };
+
+  const randomApplyRouteGuideArr = applyRouteGuideArr.sort(() => Math.random() - 0.5);
 
   return (
     <div css={cssObj.partContainer}>
@@ -94,28 +109,62 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
           </label>
         </div>
       </div>
-      <div css={cssObj.container}>
+      <div css={cssObj.containerWithGuide}>
         <p css={cssObj.inputTitle(!!jobForm.formState.errors.process_arr)}>채용 절차</p>
-        <div css={cssObj.inputContainer}>
+        <div css={cssObj.inputContainerWithGuide}>
           {processArr.fields.map((item, index) => (
             <div key={`processArr${item.id}`} css={cssObj.processBox}>
-              <label css={cssObj.inputLabel(12)} htmlFor={`processArr${item.id}`}>
-                <input
-                  id={`processArr${item.id}`}
-                  css={cssObj.erasableInput}
-                  placeholder={`${index + 1}차`}
-                  {...jobForm.register(`process_arr.${index}.value`, { required: true, maxLength: 20 })}
-                />
-                <button
-                  type="button"
-                  css={cssObj.deleteInputButton}
-                  onClick={() => {
-                    if (processArr.fields.length > 1) processArr.remove(index);
-                  }}
-                >
-                  <FiMinus />
-                </button>
-              </label>
+              <div>
+                <label css={cssObj.inputLabel(11.5)} htmlFor={`processArr${item.id}`}>
+                  <input
+                    id={`processArr${item.id}`}
+                    css={cssObj.erasableInput}
+                    placeholder={`${index + 1}차`}
+                    onFocus={() => {
+                      setProcessIsFocusedArr((prev) =>
+                        prev.map((stateItem, stateIndex) => {
+                          if (stateIndex === index) {
+                            return true;
+                          }
+                          return stateItem;
+                        })
+                      );
+                    }}
+                    {...jobForm.register(`process_arr.${index}.value`, { required: true, maxLength: 20 })}
+                    onBlur={() => {
+                      setProcessIsFocusedArr((prev) =>
+                        prev.map((stateItem, stateIndex) => {
+                          if (stateIndex === index) {
+                            return false;
+                          }
+                          return stateItem;
+                        })
+                      );
+                    }}
+                  />
+                  <button
+                    type="button"
+                    css={cssObj.deleteInputButton}
+                    onClick={() => {
+                      if (processArr.fields.length > 1) processArr.remove(index);
+                    }}
+                  >
+                    <FiMinus />
+                  </button>
+                </label>
+                <div css={cssObj.guideChipContainer}>
+                  {processIsFocusedArr[index] &&
+                    processGuideArr[index].map((processGuide) => (
+                      <GuideChip
+                        key={`${processGuide}${item.id}`}
+                        text={processGuide}
+                        onClickHandler={() => {
+                          jobForm.setValue(`process_arr.${index}.value`, processGuide);
+                        }}
+                      />
+                    ))}
+                </div>
+              </div>
               {index + 1 !== processArr.fields.length && (
                 <div css={cssObj.icon}>
                   <MdOutlineNavigateNext />
@@ -140,27 +189,62 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
         </div>
         <p css={cssObj.errorMessage}>{!!jobForm.formState.errors.process_arr && "추가한 모든 칸이 채워져야 합니다"}</p>
       </div>
-      <div css={cssObj.container}>
+      <div css={cssObj.containerWithGuide}>
         <p css={cssObj.inputTitle(!!jobForm.formState.errors.apply_route_arr)}>지원 방법/제출 서류</p>
-        <div css={cssObj.inputContainer}>
+        <div css={cssObj.inputContainerWithGuide}>
           {applyRouteArr.fields.map((item, index) => (
-            <label css={cssObj.inputLabel(18)} key={`applyRouteArr${item.id}`} htmlFor={`applyRouteArr${item.id}`}>
-              <input
-                id={`applyRouteArr${item.id}`}
-                css={cssObj.erasableInput}
-                placeholder="지원 방법/제출 서류"
-                {...jobForm.register(`apply_route_arr.${index}.value`, { required: true, maxLength: 30 })}
-              />
-              <button
-                type="button"
-                css={cssObj.deleteInputButton}
-                onClick={() => {
-                  applyRouteArr.remove(index);
-                }}
-              >
-                <FiMinus />
-              </button>
-            </label>
+            <div key={`applyRouteArr${item.id}`}>
+              <label css={cssObj.inputLabel(18)} htmlFor={`applyRouteArr${item.id}`}>
+                <input
+                  id={`applyRouteArr${item.id}`}
+                  css={cssObj.erasableInput}
+                  placeholder="지원 방법/제출 서류"
+                  onFocus={() => {
+                    setApplyRouteIsFocusedArr((prev) =>
+                      prev.map((stateItem, stateIndex) => {
+                        if (stateIndex === index) {
+                          return true;
+                        }
+                        return stateItem;
+                      })
+                    );
+                  }}
+                  {...jobForm.register(`apply_route_arr.${index}.value`, { required: true, maxLength: 30 })}
+                  onBlur={() => {
+                    setApplyRouteIsFocusedArr((prev) =>
+                      prev.map((stateItem, stateIndex) => {
+                        if (stateIndex === index) {
+                          return false;
+                        }
+                        return stateItem;
+                      })
+                    );
+                  }}
+                />
+                <button
+                  type="button"
+                  css={cssObj.deleteInputButton}
+                  onClick={() => {
+                    applyRouteArr.remove(index);
+                    setApplyRouteIsFocusedArr((prev) => prev.filter((stateItem, stateIndex) => stateIndex !== index));
+                  }}
+                >
+                  <FiMinus />
+                </button>
+              </label>
+              <div css={cssObj.guideChipContainer}>
+                {applyRouteIsFocusedArr[index] &&
+                  randomApplyRouteGuideArr.map((applyRouteGuide) => (
+                    <GuideChip
+                      key={`${applyRouteGuide}${item.id}`}
+                      text={applyRouteGuide}
+                      onClickHandler={() => {
+                        jobForm.setValue(`apply_route_arr.${index}.value`, applyRouteGuide);
+                      }}
+                    />
+                  ))}
+              </div>
+            </div>
           ))}
           <div css={cssObj.addButtonWrapper}>
             <SharedButton
@@ -173,6 +257,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               text="입력칸 추가"
               onClickHandler={() => {
                 applyRouteArr.append({ value: "" });
+                setApplyRouteIsFocusedArr((prev) => [...prev, false]);
               }}
             />
           </div>

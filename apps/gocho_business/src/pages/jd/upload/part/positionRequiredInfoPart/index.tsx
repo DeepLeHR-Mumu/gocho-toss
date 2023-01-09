@@ -7,8 +7,9 @@ import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { COLORS } from "shared-style/color";
 import { SharedButton } from "shared-ui/business/sharedButton";
+import { GuideChip } from "@/pages/jd/upload/component/guideChip";
 import { PositionRequiredInfoPartProps } from "./type";
-import { contractTypeArr, requiredExpArr } from "./constant";
+import { contractTypeArr, requiredExpArr, requiredEtcGuideArr } from "./constant";
 import { cssObj } from "./style";
 
 export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPartProps> = ({
@@ -17,6 +18,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
   jobForm,
   control,
 }) => {
+  const [requiredEtcIsFocusedArr, setRequiredEtcIsFocusedArr] = useState<boolean[]>([false]);
   const [conversionRate, setConversionRate] = useState<number>(0);
   const [isMinYear, setIsMinYear] = useState<boolean>(false);
   const [isMaxYear, setIsMaxYear] = useState<boolean>(false);
@@ -45,6 +47,8 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
       jobForm.setValue(`position_arr.${positionIndex}.max_year`, null);
     }
   }, [isYearDisabled, isMaxYear, jobForm, positionIndex]);
+
+  const randomRequiredEtcGuideArr = requiredEtcGuideArr.slice(0, 3);
 
   return (
     <>
@@ -244,32 +248,70 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           </p>
         </div>
       </div>
-      <div css={cssObj.container}>
+      <div css={cssObj.containerWithGuide}>
         <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.required_etc_arr)}>
           기타 지원 조건
         </p>
-        <div css={cssObj.inputContainer}>
+        <div css={cssObj.inputContainerWithGuide}>
           {requiredEtcArr.fields.map((item, index) => (
-            <label css={cssObj.inputLabel(47)} key={`requiredEtcArr${item.id}`} htmlFor={`requiredEtcArr${item.id}`}>
-              <input
-                id={`requiredEtcArr${item.id}`}
-                css={cssObj.inputWithButton}
-                placeholder="군필 여부, 나이, 성별 등의 기타 조건을 적어주세요"
-                {...jobForm.register(`position_arr.${positionIndex}.required_etc_arr.${index}.value`, {
-                  required: true,
-                  maxLength: 70,
-                })}
-              />
-              <button
-                type="button"
-                css={cssObj.deleteInputButton}
-                onClick={() => {
-                  requiredEtcArr.remove(positionIndex);
-                }}
-              >
-                <FiMinus />
-              </button>
-            </label>
+            <div key={`requiredEtcArr${item.id}`}>
+              <label css={cssObj.inputLabel(47)} htmlFor={`requiredEtcArr${item.id}`}>
+                <input
+                  id={`requiredEtcArr${item.id}`}
+                  css={cssObj.inputWithButton}
+                  placeholder="군필 여부, 나이, 성별 등의 기타 조건을 적어주세요"
+                  onFocus={() => {
+                    setRequiredEtcIsFocusedArr((prev) =>
+                      prev.map((stateItem, stateIndex) => {
+                        if (stateIndex === index) {
+                          return true;
+                        }
+                        return stateItem;
+                      })
+                    );
+                  }}
+                  {...jobForm.register(`position_arr.${positionIndex}.required_etc_arr.${index}.value`, {
+                    required: true,
+                    maxLength: 70,
+                  })}
+                  onBlur={() => {
+                    setRequiredEtcIsFocusedArr((prev) =>
+                      prev.map((stateItem, stateIndex) => {
+                        if (stateIndex === index) {
+                          return false;
+                        }
+                        return stateItem;
+                      })
+                    );
+                  }}
+                />
+                <button
+                  type="button"
+                  css={cssObj.deleteInputButton}
+                  onClick={() => {
+                    requiredEtcArr.remove(positionIndex);
+                    setRequiredEtcIsFocusedArr((prev) => prev.filter((stateItem, stateIndex) => stateIndex !== index));
+                  }}
+                >
+                  <FiMinus />
+                </button>
+              </label>
+              <div css={cssObj.guideChipContainer}>
+                {requiredEtcIsFocusedArr[index] &&
+                  randomRequiredEtcGuideArr.map((requiredEtcGuide) => (
+                    <GuideChip
+                      key={`${requiredEtcGuide}${item.id}`}
+                      text={requiredEtcGuide}
+                      onClickHandler={() => {
+                        jobForm.setValue(
+                          `position_arr.${positionIndex}.required_etc_arr.${index}.value`,
+                          requiredEtcGuide
+                        );
+                      }}
+                    />
+                  ))}
+              </div>
+            </div>
           ))}
           <SharedButton
             radius="round"
@@ -281,6 +323,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             text="입력칸 추가"
             onClickHandler={() => {
               requiredEtcArr.append({ value: "" });
+              setRequiredEtcIsFocusedArr((prev) => [...prev, false]);
             }}
           />
         </div>

@@ -8,7 +8,14 @@ export const cssObj = {
   `,
 
   container: css`
-    margin-top: 1rem;
+    margin-bottom: 1rem;
+    > p {
+      line-height: 2;
+    }
+  `,
+
+  containerWithGuide: css`
+    margin-bottom: 2rem;
     > p {
       line-height: 2;
     }
@@ -167,6 +174,13 @@ export const cssObj = {
     gap: 1rem 2rem;
   `,
 
+  inputContainerWithGuide: css`
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 3.25rem 0.5rem;
+  `,
+
   inputWithButton: css`
     font-size: 1rem;
     width: calc(100% - 3rem);
@@ -185,5 +199,14 @@ export const cssObj = {
     height: 1.75rem;
     color: ${COLORS.GRAY10};
     background-color: ${COLORS.GRAY70};
+  `,
+
+  guideChipContainer: css`
+    position: absolute;
+    display: flex;
+    overflow-y: visible;
+    word-break: keep-all;
+    margin-top: 0.5rem;
+    gap: 0.5rem;
   `,
 };
