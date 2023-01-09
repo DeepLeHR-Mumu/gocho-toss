@@ -35,7 +35,7 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
   await popup.keyboard.type("서울", { delay: 20 });
   await popup.keyboard.press("Enter");
 
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(1500);
   await popup.keyboard.press("Tab");
   await popup.keyboard.press("Tab");
   await popup.keyboard.press("Tab");
