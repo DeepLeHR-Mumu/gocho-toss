@@ -45,15 +45,13 @@ const sizeController: sizeControllerDef = (size) => {
   `;
 };
 
-export const closeButtonWrapper: closeButtonWrapper = (size) => {
-  return css`
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
-    border-radius: 50%;
-    background-color: ${COLORS.GRAY100};
-    color: ${COLORS.GRAY60};
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    ${sizeController(size)}
-  `;
-};
+export const closeButtonWrapper: closeButtonWrapper = (size) => css`
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  background-color: ${COLORS.GRAY100};
+  color: ${COLORS.GRAY60};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ${sizeController(size)}
+`;
