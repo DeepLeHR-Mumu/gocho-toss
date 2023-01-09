@@ -30,12 +30,13 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
   await page.getByRole("button", { name: "주소찾기" }).click();
   await page.waitForTimeout(500);
   const popup = await popupPromise;
+  await page.waitForLoadState();
 
   await page.waitForTimeout(1000);
   await popup.keyboard.type("서울", { delay: 20 });
   await popup.keyboard.press("Enter");
 
-  await page.waitForTimeout(1500);
+  await page.waitForTimeout(1000);
   await popup.keyboard.press("Tab");
   await popup.keyboard.press("Tab");
   await popup.keyboard.press("Tab");
