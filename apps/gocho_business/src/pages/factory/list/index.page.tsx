@@ -27,10 +27,6 @@ const FactoryListPage: NextPageWithLayout = () => {
             <p css={cssObj.rejectedReason}>{rejectedMessage}</p>
           </div>
         )}
-        {/* <div css={cssObj.rejectedBox}>
-          <p css={cssObj.rejectedTitle}>반려사유</p>
-          <p css={cssObj.rejectedReason}>{"반려사유인데\n 반려사유인데\n반려사유인데\n반려사유인데\n"}</p>
-        </div> */}
         <h2 css={cssObj.title}>{editingIndex === null ? "공장 등록" : "공장 수정"}</h2>
         <p css={cssObj.pageDescription}>
           간단히 공장을 등록해보세요! 등록한 공장은 공고 업로드시 불러와 사용할 수 있습니다
