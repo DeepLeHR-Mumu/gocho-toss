@@ -29,7 +29,6 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
 
   await page.getByRole("button", { name: "주소찾기" }).click();
   const popup = await popupPromise;
-  await popup.waitForLoadState("networkidle");
   await popup.keyboard.insertText("서울");
   await popup.keyboard.press("Enter");
   await page.waitForTimeout(1000);
@@ -101,8 +100,7 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
 
   const beforeDeleteCardCount = await page.getByTestId("factory/list/factoryCardListPart").count();
   await page.getByTestId("factory/list/factoryCardListPart").nth(1).getByRole("button", { name: "공장삭제" }).click();
-  await page.waitForLoadState("networkidle");
 
   const afterDeleteCardCount = await page.getByTestId("factory/list/factoryCardListPart").count();
-  await expect(beforeDeleteCardCount - 1).toBe(afterDeleteCardCount);
+  expect(beforeDeleteCardCount - 1).toBe(afterDeleteCardCount);
 });
