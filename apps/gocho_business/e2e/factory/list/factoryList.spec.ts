@@ -111,4 +111,5 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
 
   const afterDeleteCardCount = await page.getByTestId("factory/list/factoryCardListPart").count();
   expect(beforeDeleteCardCount - 1).toBe(afterDeleteCardCount);
+  expect(beforeDeleteCardCount - 1).toBe(afterDeleteCardCount);
 });
