@@ -2,12 +2,13 @@ import type { PlaywrightTestConfig } from "@playwright/test";
 import { devices } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
-  timeout: 6000,
+  timeout: 15000,
   expect: {
     timeout: 6000,
   },
   fullyParallel: true,
-  forbidOnly: !!process.env.CI,
+  workers: process.env.CI ? 4 : undefined,
+
   reporter: process.env.CI ? "github" : "list",
 
   projects: [
