@@ -7,6 +7,7 @@ import { Footer, GlobalLayout, PageLayout } from "@/components/global/layout";
 import { NextPageWithLayout } from "@/pages/_app.page";
 import { useRecruiterArr } from "@/apis/recruiter/useRecruiterArr";
 
+import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
 const RecruiterListPage: NextPageWithLayout = () => {
@@ -47,11 +48,14 @@ const RecruiterListPage: NextPageWithLayout = () => {
 };
 
 RecruiterListPage.getLayout = (page: ReactElement) => (
-  <GlobalLayout>
-    <CompanyInfoPart />
-    {page}
-    <Footer />
-  </GlobalLayout>
+  <>
+    <PageHead />
+    <GlobalLayout>
+      <CompanyInfoPart />
+      {page}
+      <Footer />
+    </GlobalLayout>
+  </>
 );
 
 export default RecruiterListPage;
