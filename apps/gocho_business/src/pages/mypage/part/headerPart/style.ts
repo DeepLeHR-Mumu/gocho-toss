@@ -3,18 +3,24 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
+  spinner: css`
+    position: relative;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid ${COLORS.GRAY65};
+    height: 6.0625rem;
+  `,
   wrapper: css`
-    width: 100%;
-    padding: 1rem;
-    background-color: white;
+    padding: 1.5rem 2rem;
     display: flex;
     align-items: center;
-    border-top: 1px solid ${COLORS.GRAY65};
+    justify-content: space-between;
+    border-bottom: 1px solid ${COLORS.GRAY65};
   `,
   name: css`
     display: flex;
     align-items: center;
-    font-size: 1rem;
+    font-size: 1.25rem;
+    font-weight: 700;
   `,
   profile: css`
     width: 3rem;
@@ -27,5 +33,10 @@ export const cssObj = {
     border-radius: 50%;
     font-weight: 400;
     font-size: 1rem;
+  `,
+  deleteUserButton: css`
+    font-size: 1rem;
+    color: ${COLORS.GRAY30};
+    text-decoration: underline;
   `,
 };
