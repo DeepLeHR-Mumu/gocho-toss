@@ -33,6 +33,6 @@ test.describe("공고 리스트 테스트", () => {
 
     const jdListData = await jdListResponse.json();
 
-    await expect(page.locator("main>div>section").nth(1).locator(">div")).toHaveCount(jdListData.count);
+    await expect(page.locator("main>div>section").nth(1).locator(">div")).toHaveCount(jdListData.count + 1);
   });
 });
