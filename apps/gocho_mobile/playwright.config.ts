@@ -11,7 +11,6 @@ const config: PlaywrightTestConfig = {
   reporter: process.env.CI ? "github" : "list",
 
   projects: [
-    /* gocho_mobile */
     {
       name: "Mobile Chrome",
       testDir: "./e2e",
