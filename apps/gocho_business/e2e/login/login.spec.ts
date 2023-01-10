@@ -2,6 +2,8 @@ import { expect, test } from "@playwright/test";
 
 import { INTERNAL_URL } from "@/constants/url";
 
+test.use({ storageState: { cookies: [], origins: [] } });
+
 test.beforeEach(async ({ page }) => {
   await page.goto(INTERNAL_URL.HOME);
 });

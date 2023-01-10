@@ -3,24 +3,21 @@ import { expect, test } from "@playwright/test";
 import { BUSINESS_BACKEND_URL } from "shared-constant/externalURL";
 import { INTERNAL_URL } from "@/constants/url";
 
-test.beforeEach(async ({ page }) => {
-  await page.goto(INTERNAL_URL.LOGIN);
-  await page.getByPlaceholder("아이디(이메일)").fill("vi@deeplehr.com");
-  await page.getByPlaceholder("비밀번호").fill("deeple1!");
-  await page.getByRole("button", { name: "로그인" }).click();
-  await page.waitForLoadState("networkidle");
-});
-
 test("기업 정보 get 및 expect 테스트", async ({ page, request }) => {
-  const myCompanyId = 968;
+  await page.goto(INTERNAL_URL.HOME);
   const [companyResponse] = await Promise.all([
-    page.waitForResponse((response) => response.url().includes("companies") && response.status() === 200),
-    page.waitForNavigation(),
-    await page.getByRole("link", { name: "기업 정보 수정" }).click(),
+    page.waitForResponse(
+      (response) =>
+        response.url().includes(`${BUSINESS_BACKEND_URL}/companies`) &&
+        response.status() === 200 &&
+        response.request().method() === "GET"
+    ),
+    page.getByRole("link", { name: "기업 정보 수정" }).click(),
   ]);
+
   const companyData = await companyResponse.json();
 
-  const companyRequestResponse = await request.get(`${BUSINESS_BACKEND_URL}/companies/${myCompanyId}`);
+  const companyRequestResponse = await request.get(`${BUSINESS_BACKEND_URL}/companies/968`);
   const companyRequestData = await companyRequestResponse.json();
 
   expect(companyData.data.size).toEqual(companyRequestData.data.size);
@@ -45,6 +42,7 @@ test("기업 정보 get 및 expect 테스트", async ({ page, request }) => {
 });
 
 test("기업 정보 수정 테스트", async ({ page }) => {
+  await page.goto(INTERNAL_URL.HOME);
   await page.getByRole("link", { name: "기업 정보 수정" }).click();
   await page.locator('input[name="employee_number"]').fill("55");
   await page.locator('input[name="intro"]').fill("가짜 회사소개입니다");
@@ -74,7 +72,7 @@ test("기업 정보 수정 테스트", async ({ page }) => {
   await page.locator('strong:has-text("의료") ~ div > input ~ button').click();
   await page.locator('strong:has-text("생활") ~ div > input').fill("생활 복지를 추가하자");
   await page.locator('strong:has-text("생활") ~ div > input ~ button').click();
-  await page.locator('button[aria-label="의료 복지를 추가하자 제거하기"]').click();
+  await page.locator('button[aria-label="복지 의료 복지를 추가하자 제거하기"]').click();
 
   const [companyRequest] = await Promise.all([
     page.waitForRequest((putRequest) => putRequest.url().includes("companies")),

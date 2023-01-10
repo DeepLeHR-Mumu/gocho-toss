@@ -5,7 +5,7 @@ export interface ResponseObjDef {
     | {
         id: number;
         status: { name: "진행중" | "등록대기" | "수정대기" | "등록반려" | "수정반려"; reason: null | "string" };
-        uploader: { name: string; department: string };
+        uploader: { name: string; department: string; is_mine: boolean };
         name: string;
         address: string;
         male_number: number;

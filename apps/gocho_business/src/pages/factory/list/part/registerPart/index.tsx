@@ -1,5 +1,9 @@
 import { FunctionComponent, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { FiEdit, FiPlus, FiX } from "react-icons/fi";
+
+import { SharedButton } from "shared-ui/business/sharedButton";
+import { COLORS } from "shared-style/color";
 
 import { useAddFactory } from "@/apis/factory/useAddFactory";
 import { useFactoryArr } from "@/apis/factory/useFactoryArr";
@@ -25,7 +29,6 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingInde
         dormitory_bool: factoryRequestObj.dormitory_bool === "true",
         id: editingIndex === null ? undefined : factoryDataArr?.[Number(editingIndex)]?.id,
       });
-      reset(defaultInput);
       setEditingIndex(null);
     }
   };
@@ -35,9 +38,11 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingInde
       reset(defaultInput);
       return;
     }
+
     if (!factoryDataArr) {
       return;
     }
+
     reset({
       factory_name: factoryDataArr[editingIndex].name,
       address: factoryDataArr[editingIndex].address,
@@ -58,24 +63,48 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingInde
       <form onSubmit={handleSubmit(factoryPostSubmitHandler)}>
         <div css={cssObj.container}>
           <section css={cssObj.wrapper}>
-            <FactoryBaseInfo formObj={formObj} />
+            <FactoryBaseInfo
+              formObj={formObj}
+              reqeustStatus={editingIndex !== null ? factoryDataArr?.[editingIndex].status.name : undefined}
+            />
             <FactoryDetailInfo formObj={formObj} totalWorkerNumber={totalWorkerNumber} />
           </section>
         </div>
         <div css={cssObj.buttonCenterContainer}>
           {editingIndex === null ? (
-            <button type="submit">공장 등록</button>
+            <div css={cssObj.suibmitButtonContainer} key="factoryRegisterContainer">
+              <SharedButton
+                radius="round"
+                fontColor={COLORS.GRAY100}
+                backgroundColor={COLORS.BLUE_FIRST40}
+                size="xLarge"
+                text="공장 등록"
+                onClickHandler="submit"
+                iconObj={{ icon: FiPlus, location: "left" }}
+              />
+            </div>
           ) : (
-            <div css={cssObj.buttonContainer}>
-              <button
-                type="button"
-                onClick={() => {
+            <div css={cssObj.editButtonContainer} key="factoryEditContainer">
+              <SharedButton
+                radius="round"
+                fontColor={COLORS.GRAY10}
+                backgroundColor={COLORS.GRAY80}
+                size="xLarge"
+                text="수정 취소"
+                onClickHandler={() => {
                   setEditingIndex(null);
                 }}
-              >
-                수정 취소
-              </button>
-              <button type="submit">공장 수정</button>
+                iconObj={{ icon: FiX, location: "left" }}
+              />
+              <SharedButton
+                radius="round"
+                fontColor={COLORS.GRAY100}
+                backgroundColor={COLORS.BLUE_FIRST40}
+                size="xLarge"
+                text="공장 수정"
+                onClickHandler="submit"
+                iconObj={{ icon: FiEdit, location: "left" }}
+              />
             </div>
           )}
         </div>
