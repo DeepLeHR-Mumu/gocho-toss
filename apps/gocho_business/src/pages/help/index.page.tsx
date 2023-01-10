@@ -4,7 +4,6 @@ import Image from "next/image";
 import type { NextPageWithLayout } from "@/pages/_app.page";
 import { GlobalLayout, Footer } from "@/components/global/layout";
 import { CompanyInfoPart } from "@/components/global/companyInfoPart";
-
 import chatIcon from "@/public/image/help/chat.svg";
 import helpBackground from "@/public/image/help/help_background.svg";
 

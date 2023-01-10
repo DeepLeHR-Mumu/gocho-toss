@@ -16,8 +16,8 @@ import { useToast } from "@/globalStates/useToast";
 
 import { ModalComponent } from "../modalBackground";
 
-import { wrapper, desc, formCSS, formArr, closeBtn, loginButton, logoContainer } from "./style";
 import { LoginFormValues } from "./type";
+import { cssObj } from "./style";
 
 export const FindPasswordBox: FunctionComponent = () => {
   const {
@@ -52,16 +52,16 @@ export const FindPasswordBox: FunctionComponent = () => {
   };
 
   return (
-    <div css={wrapper}>
-      <div css={closeBtn}>
+    <div css={cssObj.wrapper}>
+      <div css={cssObj.closeBtn}>
         <CommonCloseButton size="S" buttonClick={closeFindPasswordModal} />
       </div>
-      <div css={logoContainer}>
+      <div css={cssObj.logoContainer}>
         <Image objectFit="contain" src={smallMono} alt="고초대졸닷컴" />
       </div>
-      <p css={desc}>가입한 이메일에서 비밀번호를 확인하세요</p>
-      <form css={formCSS} onSubmit={handleSubmit(loginSubmit)}>
-        <ul css={formArr}>
+      <p css={cssObj.desc}>가입한 이메일에서 비밀번호를 확인하세요</p>
+      <form css={cssObj.formCSS} onSubmit={handleSubmit(loginSubmit)}>
+        <ul css={cssObj.formArr}>
           <li>
             <AccountInput
               registerObj={register("email", {
@@ -82,7 +82,7 @@ export const FindPasswordBox: FunctionComponent = () => {
             />
           </li>
         </ul>
-        <div css={loginButton}>
+        <div css={cssObj.loginButton}>
           <NormalButton wide variant="filled" text="비밀번호 찾기" isSubmit />
         </div>
       </form>
