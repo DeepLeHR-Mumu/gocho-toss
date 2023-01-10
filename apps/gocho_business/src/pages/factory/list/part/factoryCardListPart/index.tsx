@@ -6,16 +6,21 @@ import { BiMinus, BiBus, BiBuildingHouse } from "react-icons/bi";
 
 import { COLORS } from "shared-style/color";
 import { Spinner } from "shared-ui/common/atom/spinner";
+import { SharedButton } from "shared-ui/business/sharedButton";
 
 import { useDeleteFactory } from "@/apis/factory/useDeleteFactory";
 import { useFactoryArr } from "@/apis/factory/useFactoryArr";
-import { CommonInfoBox, CommonRoundButton, CommonStatusChip } from "@/components/common";
+import { CommonInfoBox, CommonStatusChip } from "@/components/common";
 
 import { cssObj } from "./style";
 import { FactoryCardListPartProps } from "./type";
 import { FACTORY_MESSSAGE_OBJ } from "../registerPart/constant";
 
-export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = ({ setEditingIndex, editingIndex }) => {
+export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = ({
+  setEditingIndex,
+  editingIndex,
+  setRejectedMessage,
+}) => {
   const { data: factoryDataArr } = useFactoryArr();
   const { mutate: deleteFactoryMutation } = useDeleteFactory();
 
@@ -61,24 +66,35 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                   <p css={cssObj.product}>{factoryData.product}</p>
                 </div>
               </div>
-              <div css={cssObj.buttonContainer}>
-                <CommonRoundButton
-                  text="공장수정"
-                  Icon={FiEdit}
-                  backgroundColor={COLORS.BLUE_FIRST50}
-                  onClickHandler={() => setEditingIndex(index)}
-                />
-                <CommonRoundButton
-                  text="공장삭제"
-                  Icon={BiMinus}
-                  backgroundColor={COLORS.BLUE_FIRST50}
-                  onClickHandler={() => {
-                    if (window.confirm(FACTORY_MESSSAGE_OBJ.DELETE)) {
-                      deleteFactoryMutation({ factoryId: factoryData.id });
-                    }
-                  }}
-                />
-              </div>
+              {factoryData.uploader.isMine && (
+                <div css={cssObj.buttonContainer}>
+                  <SharedButton
+                    text="공장수정"
+                    iconObj={{ icon: FiEdit, location: "left" }}
+                    backgroundColor={COLORS.GRAY80}
+                    onClickHandler={() => {
+                      setEditingIndex(index);
+                      setRejectedMessage(factoryData.status.reason);
+                    }}
+                    radius="circle"
+                    fontColor={COLORS.GRAY10}
+                    size="medium"
+                  />
+                  <SharedButton
+                    text="공장삭제"
+                    iconObj={{ icon: BiMinus, location: "left" }}
+                    backgroundColor={COLORS.GRAY80}
+                    onClickHandler={() => {
+                      if (window.confirm(FACTORY_MESSSAGE_OBJ.DELETE)) {
+                        deleteFactoryMutation({ factoryId: factoryData.id });
+                      }
+                    }}
+                    radius="circle"
+                    fontColor={COLORS.GRAY10}
+                    size="medium"
+                  />
+                </div>
+              )}
             </div>
 
             <div css={cssObj.middleContainer}>
