@@ -4,15 +4,8 @@ import { INTERNAL_URL } from "@/constants/url";
 
 import { EDIT_PASSWORD_MESSAGE } from "./constants";
 
-test.beforeEach(async ({ page }) => {
-  await page.goto(INTERNAL_URL.LOGIN);
-  await page.getByPlaceholder("아이디(이메일)").fill("vi@deeplehr.com");
-  await page.getByPlaceholder("비밀번호").fill("deeple1!");
-  await page.getByRole("button", { name: "로그인" }).click();
-  await page.waitForLoadState("networkidle");
-});
-
 test("비밀번호 변경 및 잘못된 정보 입력시 에러 테스트", async ({ page }) => {
+  await page.goto(INTERNAL_URL.HOME);
   await page.getByRole("link", { name: "회원정보" }).click();
   await page.waitForNavigation();
   await page.getByPlaceholder("현재 비밀번호를 입력해주세요").fill("deeple1!");
