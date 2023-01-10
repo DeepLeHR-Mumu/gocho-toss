@@ -26,7 +26,7 @@ export const FindPasswordBox: FunctionComponent = () => {
     setError,
     setValue,
     formState: { errors, dirtyFields },
-  } = useForm<LoginFormValues>({ mode: "onChange" });
+  } = useForm<LoginFormValues>({ mode: "onBlur" });
 
   const { setToast } = useToast();
   const { mutate: postFindPassword } = useFindPassword();
@@ -59,7 +59,7 @@ export const FindPasswordBox: FunctionComponent = () => {
       <div css={logoContainer}>
         <Image objectFit="contain" src={smallMono} alt="고초대졸닷컴" />
       </div>
-      <p css={desc}>로그인이 필요한 서비스입니다.</p>
+      <p css={desc}>가입한 이메일에서 비밀번호를 확인하세요</p>
       <form css={formCSS} onSubmit={handleSubmit(loginSubmit)}>
         <ul css={formArr}>
           <li>

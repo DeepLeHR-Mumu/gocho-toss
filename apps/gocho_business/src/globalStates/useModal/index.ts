@@ -1,16 +1,7 @@
 import { useCallback } from "react";
 import create from "zustand";
 
-import { modalNameDef } from "./type";
-
-interface UseModalProps {
-  currentModal: modalNameDef | null;
-  setModal: (status: modalNameDef | null) => void;
-}
-
-export interface setCurrentModalDef {
-  (currentModal: modalNameDef): void;
-}
+import { setCurrentModalDef, UseModalProps } from "./type";
 
 export const modalZustand = create<UseModalProps>((set) => ({
   currentModal: null,

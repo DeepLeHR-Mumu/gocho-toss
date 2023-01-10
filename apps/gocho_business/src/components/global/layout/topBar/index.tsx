@@ -29,15 +29,15 @@ export const TopBar: FunctionComponent = () => {
     });
   };
 
-  const isLogined = Boolean(userInfoData);
+  const isLogin = Boolean(userInfoData);
 
   return (
-    <header css={cssObj.wrapper(isLogined)}>
+    <header css={cssObj.wrapper(isLogin)}>
       <div css={cssObj.container}>
         <div css={cssObj.logo}>
-          <Image src={isLogined ? colorLogo : monoLogo} alt="고초대졸닷컴 비즈니스" layout="fill" objectFit="contain" />
+          <Image src={isLogin ? colorLogo : monoLogo} alt="고초대졸닷컴 비즈니스" layout="fill" objectFit="contain" />
         </div>
-        <h1 css={cssObj.title(isLogined)}>고초대졸.business</h1>
+        <h1 css={cssObj.title(isLogin)}>고초대졸.business</h1>
       </div>
       {userInfoData ? (
         <SharedButton

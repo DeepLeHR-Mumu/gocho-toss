@@ -1,18 +1,8 @@
-import { css, SerializedStyles } from "@emotion/react";
+import { css } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
 
-import { CloseButtonType } from "./type";
-
-interface sizeControllerDef {
-  (size: CloseButtonType): SerializedStyles;
-}
-
-interface closeButtonWrapper {
-  (size: CloseButtonType): SerializedStyles;
-}
-
-const sizeController: sizeControllerDef = (size) => {
+const sizeController = (size: "S" | "M" | "L" | "XL") => {
   if (size === "S") {
     return css`
       font-size: 0.8rem;
@@ -45,7 +35,7 @@ const sizeController: sizeControllerDef = (size) => {
   `;
 };
 
-export const closeButtonWrapper: closeButtonWrapper = (size) => css`
+export const closeButtonWrapper = (size: "S" | "M" | "L" | "XL") => css`
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
   border-radius: 50%;
   background-color: ${COLORS.GRAY100};
