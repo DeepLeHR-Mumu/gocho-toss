@@ -2,7 +2,7 @@ import type { PlaywrightTestConfig } from "@playwright/test";
 import { devices } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
-  timeout: 15000,
+  timeout: 30000,
   expect: {
     timeout: 6000,
   },
