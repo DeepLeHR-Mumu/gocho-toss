@@ -1,8 +1,8 @@
-import { chromium, FullConfig } from "@playwright/test";
+import { chromium } from "@playwright/test";
 
 import { INTERNAL_URL } from "@/constants/url";
 
-async function globalSetup(config: FullConfig) {
+async function globalSetup() {
   const browser = await chromium.launch();
   const page = await browser.newPage();
   const serverUrl = process.env.GOCHO_BUSINESS_URL || "http://localhost:3000";
