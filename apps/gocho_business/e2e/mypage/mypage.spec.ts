@@ -7,7 +7,6 @@ import { EDIT_PASSWORD_MESSAGE } from "./constants";
 test("비밀번호 변경 및 잘못된 정보 입력시 에러 테스트", async ({ page }) => {
   await page.goto(INTERNAL_URL.HOME);
   await page.getByRole("link", { name: "회원정보" }).click();
-  await page.waitForNavigation();
   await page.getByPlaceholder("현재 비밀번호를 입력해주세요").fill("deeple1!");
   await page.getByPlaceholder("8~20자, 띄어쓰기 불가능").fill("deeple123");
   await page.getByPlaceholder("새 비밀번호와 동일하게 작성해주세요").fill("deeple123");
