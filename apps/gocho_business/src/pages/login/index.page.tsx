@@ -9,8 +9,11 @@ import { useQueryClient } from "@tanstack/react-query";
 import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
-import gochoColorSrc from "shared-image/global/deepLeLogo/largeColor.svg";
+import { SharedButton } from "shared-ui/business/sharedButton";
+import gochoColorSrc from "shared-image/global/deepLeLogo/logoIconColor.svg";
 
+import { COLORS } from "shared-style/color";
+import { useModal } from "@/globalStates/useModal";
 import { INTERNAL_URL } from "@/constants/url";
 import { useUserState } from "@/globalStates/useUserState";
 import { TopBar } from "@/components/global/layout/topBar";
@@ -29,6 +32,7 @@ const LoginPage: NextPage = () => {
   const queryClient = useQueryClient();
   const { setUserInfoData } = useUserState();
   const { mutate: postLogin } = useDoLogin();
+  const { setCurrentModal } = useModal();
   const {
     register,
     handleSubmit,
@@ -78,8 +82,8 @@ const LoginPage: NextPage = () => {
           </div>
 
           <form css={cssObj.formCSS} onSubmit={handleSubmit(loginSubmit)}>
-            <ul css={cssObj.inputBox}>
-              <li>
+            <ul>
+              <li css={cssObj.inputBox(errors.email?.type === "required")}>
                 <input
                   type="email"
                   placeholder="아이디(이메일)"
@@ -89,7 +93,7 @@ const LoginPage: NextPage = () => {
                   })}
                 />
               </li>
-              <li>
+              <li css={cssObj.inputBox(errors.password?.type === "required")}>
                 <input
                   type={isShowPassword ? "text" : "password"}
                   placeholder="비밀번호"
@@ -113,14 +117,27 @@ const LoginPage: NextPage = () => {
             <div css={cssObj.bottomBox}>
               <CheckBoxWithDesc desc="자동 로그인" id="auto_login" registerObj={register("auto_login")} />
 
-              <button type="button" css={cssObj.findPasswordButton}>
+              <button
+                type="button"
+                css={cssObj.findPasswordButton}
+                onClick={() => {
+                  setCurrentModal("findPasswordModal");
+                }}
+              >
                 비밀번호 찾기
               </button>
             </div>
             <p css={cssObj.errorMsg}>{errors.email?.message || errors.password?.message || errorMsg}</p>
-            <button css={cssObj.loginButton} type="submit">
-              로그인
-            </button>
+
+            <SharedButton
+              onClickHandler="submit"
+              text="로그인"
+              fontColor={COLORS.GRAY100}
+              backgroundColor={COLORS.GRAY65}
+              radius="round"
+              isFullWidth
+              size="medium"
+            />
           </form>
         </div>
       </main>

@@ -18,7 +18,7 @@ export const cssObj = {
   `,
   basicInfoBox: css`
     display: flex;
-    align-items: center;
+    align-items: flex-start;
   `,
   logo: css`
     height: 5rem;
@@ -38,12 +38,31 @@ export const cssObj = {
     max-width: 40rem;
     ${shorten()};
   `,
-
   companyGenreCSS: css`
     font-size: 1rem;
   `,
   countingInfoBox: css`
     display: flex;
     align-items: center;
+  `,
+  countBox: css`
+    margin-left: 2rem;
+  `,
+  countTitle: css`
+    font-size: 1rem;
+    font-weight: 700;
+    color: ${COLORS.GRAY60};
+    margin-bottom: 0.5rem;
+  `,
+  countDesc: css`
+    display: flex;
+    align-items: center;
+    color: ${COLORS.GRAY60};
+    font-size: 1.125rem;
+  `,
+  colorPoint: css`
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    color: ${COLORS.BLUE_FIRST30};
   `,
 };
