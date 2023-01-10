@@ -8,4 +8,4 @@ export const requiredEtcGuideArr = [
   "교대 근무 가능자",
   "고졸 ~ 대졸(2, 3년)",
   "방진복 착용 가능자",
-] as const;
+];

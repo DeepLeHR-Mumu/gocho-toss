@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { FiPlus, FiMinus, FiLink, FiAtSign } from "react-icons/fi";
 import { MdOutlineNavigateNext } from "react-icons/md";
 
@@ -32,6 +32,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
   const [applyRouteIsFocusedArr, setApplyRouteIsFocusedArr] = useState<boolean[]>([false]);
   const [isAlways, setIsAlways] = useState<boolean>(false);
   const [linkType, setLinkType] = useState<"website" | "email">("website");
+  const [randomApplyRouteGuideArr, setRandomApplyRouteGuideArr] = useState<string[]>([]);
 
   const alwaysButtonClickHandler = () => {
     if (isAlways) {
@@ -48,7 +49,9 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
     jobForm.setValue(`apply_url`, "");
   };
 
-  const randomApplyRouteGuideArr = applyRouteGuideArr.sort(() => Math.random() - 0.5);
+  useEffect(() => {
+    setRandomApplyRouteGuideArr(applyRouteGuideArr.sort(() => Math.random() - 0.5).slice(0, 3));
+  }, []);
 
   return (
     <div css={cssObj.partContainer}>
@@ -240,6 +243,23 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                       text={applyRouteGuide}
                       onClickHandler={() => {
                         jobForm.setValue(`apply_route_arr.${index}.value`, applyRouteGuide);
+                        const filteredArr = applyRouteGuideArr.filter(
+                          (element) =>
+                            !randomApplyRouteGuideArr.includes(element) &&
+                            !jobForm
+                              .watch("apply_route_arr")
+                              .some((elem) => JSON.stringify({ value: element }) === JSON.stringify(elem))
+                        )[0];
+                        if (filteredArr) {
+                          setRandomApplyRouteGuideArr((prev) => [
+                            ...prev.filter((element) => element !== applyRouteGuide),
+                            filteredArr,
+                          ]);
+                        } else {
+                          setRandomApplyRouteGuideArr((prev) => [
+                            ...prev.filter((element) => element !== applyRouteGuide),
+                          ]);
+                        }
                       }}
                     />
                   ))}

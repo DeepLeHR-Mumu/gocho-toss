@@ -7,7 +7,8 @@ import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { COLORS } from "shared-style/color";
 import { SharedButton } from "shared-ui/business/sharedButton";
-import { GuideChip } from "@/pages/jd/upload/component/guideChip";
+
+import { GuideChip } from "../../component/guideChip";
 import { PositionRequiredInfoPartProps } from "./type";
 import { contractTypeArr, requiredExpArr, requiredEtcGuideArr } from "./constant";
 import { cssObj } from "./style";
@@ -22,11 +23,16 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
   const [conversionRate, setConversionRate] = useState<number>(0);
   const [isMinYear, setIsMinYear] = useState<boolean>(false);
   const [isMaxYear, setIsMaxYear] = useState<boolean>(false);
+  const [randomRequiredEtcGuideArr, setRandomRequiredEtcGuideArr] = useState<string[]>([]);
 
   const requiredEtcArr = useFieldArray({
     control,
     name: `position_arr.${positionIndex}.required_etc_arr`,
   });
+
+  useEffect(() => {
+    setRandomRequiredEtcGuideArr(requiredEtcGuideArr.sort(() => Math.random() - 0.5).slice(0, 3));
+  }, []);
 
   const isConversionDisabled =
     jobForm.watch("position_arr")[positionIndex].contract_type !== "인턴" &&
@@ -47,8 +53,6 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
       jobForm.setValue(`position_arr.${positionIndex}.max_year`, null);
     }
   }, [isYearDisabled, isMaxYear, jobForm, positionIndex]);
-
-  const randomRequiredEtcGuideArr = requiredEtcGuideArr.slice(0, 3);
 
   return (
     <>
@@ -307,6 +311,25 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                           `position_arr.${positionIndex}.required_etc_arr.${index}.value`,
                           requiredEtcGuide
                         );
+                        const filteredArr = requiredEtcGuideArr.filter(
+                          (element) =>
+                            !randomRequiredEtcGuideArr.includes(element) &&
+                            !jobForm
+                              .watch("position_arr")
+                              [positionIndex].required_etc_arr.some(
+                                (elem) => JSON.stringify({ value: element }) === JSON.stringify(elem)
+                              )
+                        )[0];
+                        if (filteredArr) {
+                          setRandomRequiredEtcGuideArr((prev) => [
+                            ...prev.filter((element) => element !== requiredEtcGuide),
+                            filteredArr,
+                          ]);
+                        } else {
+                          setRandomRequiredEtcGuideArr((prev) => [
+                            ...prev.filter((element) => element !== requiredEtcGuide),
+                          ]);
+                        }
                       }}
                     />
                   ))}

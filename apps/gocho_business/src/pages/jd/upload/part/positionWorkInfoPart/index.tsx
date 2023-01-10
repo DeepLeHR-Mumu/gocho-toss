@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { FiChevronUp, FiMinus, FiX, FiRotateCw, FiChevronDown, FiPlus } from "react-icons/fi";
 import { TbBuildingFactory2 } from "react-icons/tb";
@@ -15,7 +15,7 @@ import { useFactoryArr } from "@/apis/factory/useFactoryArr";
 import { factoryArrKeyObj } from "@/apis/factory/useFactoryArr/type";
 import { INTERNAL_URL, POSTCODE_SCRIPT_URL } from "@/constants/url";
 
-import { GuideChip } from "@/pages/jd/upload/component/guideChip";
+import { GuideChip } from "../../component/guideChip";
 import { PositionWorkInfoPartProps } from "./type";
 import { rotationArr, placeTypeArr, certificateArr, preferredEtcGuideArr } from "./constant";
 import { cssObj } from "./style";
@@ -31,6 +31,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
   const [certiSearchWord, setCertiSearchWord] = useState<string>("");
   const [isRotationOpen, setIsRotationOpen] = useState<boolean>(false);
   const [isFactoryListOpen, setIsFactoryListOpen] = useState<boolean>(false);
+  const [randomPreferredEtcGuideArr, setRandomPreferredEtcGuideArr] = useState<string[]>([]);
 
   const queryClient = useQueryClient();
   const openPostCodePopup = useDaumPostcodePopup(POSTCODE_SCRIPT_URL);
@@ -97,6 +98,10 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
     if (selectedRotation.length === 0) return "교대 형태 선택";
     return selectedRotation.join(", ");
   };
+
+  useEffect(() => {
+    setRandomPreferredEtcGuideArr(preferredEtcGuideArr.sort(() => Math.random() - 0.5).slice(0, 3));
+  }, []);
 
   return (
     <>
@@ -518,15 +523,34 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
               </label>
               <div css={cssObj.guideChipContainer}>
                 {preferredEtcIsFocusedArr[index] &&
-                  preferredEtcGuideArr.map((preferrecEtcGuide) => (
+                  randomPreferredEtcGuideArr.map((preferredEtcGuide) => (
                     <GuideChip
-                      key={`${preferrecEtcGuide}${item.id}`}
-                      text={preferrecEtcGuide}
+                      key={`${preferredEtcGuide}${item.id}`}
+                      text={preferredEtcGuide}
                       onClickHandler={() => {
                         jobForm.setValue(
                           `position_arr.${positionIndex}.preferred_etc_arr.${index}.value`,
-                          preferrecEtcGuide
+                          preferredEtcGuide
                         );
+                        const filteredArr = preferredEtcGuideArr.filter(
+                          (element) =>
+                            !randomPreferredEtcGuideArr.includes(element) &&
+                            !jobForm
+                              .watch("position_arr")
+                              [positionIndex].preferred_etc_arr.some(
+                                (elem) => JSON.stringify({ value: element }) === JSON.stringify(elem)
+                              )
+                        )[0];
+                        if (filteredArr) {
+                          setRandomPreferredEtcGuideArr((prev) => [
+                            ...prev.filter((element) => element !== preferredEtcGuide),
+                            filteredArr,
+                          ]);
+                        } else {
+                          setRandomPreferredEtcGuideArr((prev) => [
+                            ...prev.filter((element) => element !== preferredEtcGuide),
+                          ]);
+                        }
                       }}
                     />
                   ))}
