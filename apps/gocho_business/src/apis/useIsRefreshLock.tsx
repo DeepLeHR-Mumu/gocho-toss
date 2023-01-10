@@ -5,7 +5,7 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { BUSINESS_BACKEND_URL } from "shared-constant/externalURL";
 import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 
-import { INTERNAL_URL } from "@/constants/index";
+import { INTERNAL_URL } from "@/constants/url";
 
 import { tokenService } from "@/utils/tokenService";
 import { ErrorResponseDef } from "@/types/errorType";
@@ -118,6 +118,10 @@ export const useAxiosInterceptor = () => {
 
     if (errorStatus.errorCode === "MALFORMED_JWT" || errorStatus.errorCode === "UNAUTHORIZED") {
       goToLoginPage();
+      return null;
+    }
+
+    if (errorStatus.errorCode === "BAD_REQUEST") {
       return null;
     }
 

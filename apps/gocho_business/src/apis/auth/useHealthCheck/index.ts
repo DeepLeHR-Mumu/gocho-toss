@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { userStateKeyObj } from "@/constants/queryKeyFactory/user/userStateKeyObj";
+import { userStateKeyObj } from "./type";
 
 import { axiosInstance } from "../../useIsRefreshLock";
 
@@ -9,4 +9,4 @@ export const getHealthCheck = async () => {
   return data;
 };
 
-export const useHealthCheck = () => useQuery(userStateKeyObj.userState, getHealthCheck);
+export const useHealthCheck = () => useQuery(userStateKeyObj.all, getHealthCheck);

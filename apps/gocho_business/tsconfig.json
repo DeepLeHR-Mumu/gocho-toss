@@ -5,9 +5,9 @@
     "types": ["@emotion/react/types/css-prop"],
     "jsxImportSource": "@emotion/react",
     "baseUrl": ".",
-    "paths": { "@/*": ["src/*"], "@/public": ["public/*"] },
+    "paths": { "@/*": ["src/*"], "@/public/*": ["public/*"] },
     "jsx": "preserve"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules",".storybook/**"]
+  "exclude": ["node_modules", ".storybook/**"]
 }

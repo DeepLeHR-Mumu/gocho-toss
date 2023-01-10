@@ -29,6 +29,7 @@ export const COLORS = {
   GRAY35: "#777777",
   GRAY40: "#999999",
   GRAY60: "#BBBBBB",
+  GRAY65: "#CCCCCC",
   GRAY70: "#DDDDDD",
   GRAY80: "#E9E9E9",
   GRAY90: "#F6F6F6",

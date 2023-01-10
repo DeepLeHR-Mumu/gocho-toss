@@ -1,22 +1,31 @@
 import { css } from "@emotion/react";
 
-export const wrapper = css`
-  width: 100%;
-  padding: 1rem;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  border-top: 1px solid #cccccc;
-`;
+import { COLORS } from "shared-style/color";
 
-export const userImg = css`
-  height: 3rem;
-  width: 3rem;
-  border-radius: 1rem;
-  background-color: pink;
-  margin-right: 1rem;
-`;
-
-export const nameCSS = css`
-  font-weight: 400;
-`;
+export const cssObj = {
+  wrapper: css`
+    width: 100%;
+    padding: 1rem;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid ${COLORS.GRAY65};
+  `,
+  name: css`
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+  `,
+  profile: css`
+    width: 3rem;
+    height: 3rem;
+    background-color: ${COLORS.GRAY70};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.75rem;
+    border-radius: 50%;
+    font-weight: 400;
+    font-size: 1rem;
+  `,
+};

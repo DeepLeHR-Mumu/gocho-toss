@@ -1,13 +1,19 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { CommonRadioButton } from "shared-ui/common/atom/commonRadioButton";
+import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 
 export default {
-  title: "CommonRadioButton",
-  component: CommonRadioButton,
+  title: "SharedRadioButton",
+  component: SharedRadioButton,
   argTypes: {
-    desc: {
-      description: "radio 안내 문구",
+    value: {
+      description: "radio value",
+    },
+    id: {
+      description: "label + input의 공통 for을 위한 id",
+    },
+    children: {
+      description: "React Node 구조",
     },
     registerObj: {
       description: "React hook form register 함수",
@@ -16,9 +22,9 @@ export default {
   parameters: {
     componentSubtitle: "각종 정보 출력을 위한 박스",
   },
-} as ComponentMeta<typeof CommonRadioButton>;
+} as ComponentMeta<typeof SharedRadioButton>;
 
-const Template: ComponentStory<typeof CommonRadioButton> = (args) => <CommonRadioButton {...args} />;
+const Template: ComponentStory<typeof SharedRadioButton> = (args) => <SharedRadioButton {...args} />;
 
 export const Default = Template.bind({});
-Default.args = { desc: "있음", registerObj: undefined };
+Default.args = { value: "yes", id: "id", children: "", registerObj: undefined };
