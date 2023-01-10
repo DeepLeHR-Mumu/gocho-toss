@@ -1,13 +1,13 @@
 import { test, expect } from "@playwright/test";
 
-import { businessLinkObj } from "shared-constant/e2e/internalURL";
-import { loginTester } from "../../common/common.spec";
+// import { businessLinkObj } from "shared-constant/e2e/internalURL";
+// import { loginTester } from "../../common/common.spec";
 
-test.beforeEach(async ({ page }) => {
-  await page.goto(businessLinkObj.BASE_URL);
-  await loginTester(page);
-  await page.goto(businessLinkObj.JD_LIST);
-});
+// test.beforeEach(async ({ page }) => {
+//   await page.goto(businessLinkObj.BASE_URL);
+//   await loginTester(page);
+//   await page.goto(businessLinkObj.JD_LIST);
+// });
 
 test.describe("공고 리스트 테스트", () => {
   test("공고 등록하기 버튼 테스트", async ({ page }) => {
