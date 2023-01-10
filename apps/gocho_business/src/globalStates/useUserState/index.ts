@@ -5,14 +5,14 @@ import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 
 import { tokenService } from "@/utils/tokenService";
 
-import { UserStateInfoProps } from "./type";
+import { UserStateInfoProps, UseUserStateDef } from "./type";
 
 const userStateInfo = create<UserStateInfoProps>((set) => ({
   userState: null,
   setUserState: (status) => set(() => ({ userState: status })),
 }));
 
-export const useUserState = () => {
+export const useUserState: UseUserStateDef = () => {
   const { userState: userInfoData, setUserState: setUserInfoData } = userStateInfo();
 
   useEffect(() => {
@@ -40,5 +40,9 @@ export const useUserState = () => {
     }
   }, [userInfoData, setUserInfoData]);
 
-  return { userInfoData, setUserInfoData };
+  if (userInfoData) {
+    return { userInfoData, setUserInfoData };
+  }
+
+  return { setUserInfoData };
 };

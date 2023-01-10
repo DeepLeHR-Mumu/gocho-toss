@@ -29,13 +29,13 @@ export const 아이콘_존재버튼 = Template.bind({});
 아이콘_존재버튼.args = {
   Icon: FiAirplay,
   text: "내용",
-  backgoundColor: COLORS.GRAY60,
+  backgroundColor: COLORS.GRAY60,
   onClickHandler: () => alert("클릭됨"),
 };
 
 export const 아이콘_미존재버튼 = Template.bind({});
 아이콘_미존재버튼.args = {
   text: "공고수정",
-  backgoundColor: COLORS.GRAY60,
+  backgroundColor: COLORS.GRAY60,
   onClickHandler: () => alert("클릭됨"),
 };
