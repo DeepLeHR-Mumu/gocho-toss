@@ -15,7 +15,6 @@ export const cssObj = {
   `,
   buttonCenterContainer: css`
     position: relative;
-    /* background-color: pink; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,7 +30,7 @@ export const cssObj = {
       width: calc(40%);
       height: 1px;
       content: "";
-      background-color: #cccccc;
+      background-color: ${COLORS.GRAY65};
     }
     ::after {
       position: absolute;
@@ -41,7 +40,7 @@ export const cssObj = {
       width: calc(40%);
       height: 1px;
       content: "";
-      background-color: #cccccc;
+      background-color: ${COLORS.GRAY65};
     }
   `,
   editButtonContainer: css`
