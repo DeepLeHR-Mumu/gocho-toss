@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
@@ -38,22 +39,21 @@ export const cssObj = {
   formCSS: css`
     width: 100%;
   `,
-  inputBox: css`
-    > li {
-      margin-bottom: 1.75rem;
-      width: 100%;
-      background-color: ${COLORS.GRAY100};
-      border: 1px solid ${COLORS.GRAY10};
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.75rem 1rem;
-    }
+  inputBox: (isError?: boolean) => css`
+    margin-bottom: 1.75rem;
+    position: relative;
+    width: 100%;
+    background-color: ${COLORS.GRAY100};
+    border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   `,
   inputCSS: css`
     font-size: 1rem;
+    padding: 0.75rem 1rem;
     font-weight: 400;
-    width: 90%;
+    width: 100%;
     box-shadow: 0 0 0 1000px ${COLORS.GRAY100} inset;
 
     ::placeholder {
@@ -62,17 +62,20 @@ export const cssObj = {
     }
   `,
   eyeButtonCSS: css`
+    z-index: 10;
     font-size: 1.5rem;
     color: ${COLORS.GRAY40};
+    position: absolute;
+    right: 1rem;
   `,
   errorMsg: css`
     font-size: 1rem;
     height: 1rem;
-    margin: 2rem 0;
+    margin: 1rem 0;
     text-align: center;
     line-height: 0;
     display: block;
-    color: ${COLORS.GRAY10};
+    color: ${COLORS.ERROR_RED40};
     font-weight: 400;
   `,
   bottomBox: css`
@@ -95,7 +98,7 @@ export const cssObj = {
     font-size: 1rem;
     font-weight: 400;
     color: ${COLORS.GRAY100};
-    background-color: ${COLORS.GRAY40};
-    height: 2.5rem;
+    background-color: ${COLORS.GRAY65};
+    height: 3rem;
   `,
 };

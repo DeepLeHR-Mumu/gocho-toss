@@ -1,20 +1,10 @@
 import { expect, test } from "@playwright/test";
 
 import { INTERNAL_URL } from "@/constants/url";
-//
-// test.beforeEach(async ({ page }) => {
-//   await page.goto(INTERNAL_URL.LOGIN);
-//   await page.getByPlaceholder("아이디(이메일)").fill("ahri@deeplehr.com");
-//   await page.getByPlaceholder("비밀번호").fill("deeple1!");
-//   await page.getByRole("button", { name: "로그인" }).click();
-//   await page.waitForNavigation();
-// });
 
 test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
-  await page.goto(INTERNAL_URL.FACTORY_LIST);
-  // const beforeFactoryPromise = page.waitForResponse(
-  //   (response) => response.url().includes("factories") && response.status() === 200
-  // );
+  await page.goto(INTERNAL_URL.HOME);
+
   const [beforeFactoryPromise] = await Promise.all([
     page.waitForResponse(
       (res) => res.url().includes("factories") && res.request().method() === "GET" && res.status() === 200
@@ -23,6 +13,7 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
       (res) =>
         res.url().includes("/postcode/prod/postcode.v2.js") && res.request().method() === "GET" && res.status() === 200
     ),
+    page.getByRole("link", { name: "공장" }).click(),
   ]);
 
   await page.waitForTimeout(5000);

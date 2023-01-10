@@ -1,14 +1,17 @@
 import { css } from "@emotion/react";
 
+import { COLORS } from "shared-style/color";
+
 export const cssObj = {
-  wrapper: css`
+  wrapper: (isLogin: boolean) => css`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 2rem 1rem 2rem;
+    padding: 1rem 2rem;
     height: 4rem;
     width: 100%;
-    border-bottom: 1px solid #cccccc;
+    background-color: ${isLogin ? COLORS.GRAY100 : COLORS.GRAY10};
+    border-bottom: 1px solid ${COLORS.GRAY65};
   `,
   container: css`
     display: flex;
@@ -17,19 +20,12 @@ export const cssObj = {
   logo: css`
     height: 2rem;
     width: 2rem;
-    background-color: pink;
+    position: relative;
     margin-right: 1rem;
   `,
-  title: css`
+  title: (isLogin: boolean) => css`
     font-size: 1.25rem;
     font-weight: 700;
-  `,
-  logoutButton: css`
-    padding: 0.75rem 1rem;
-    border: 1px solid #000000;
-  `,
-  signUpButton: css`
-    padding: 0.75rem 1rem;
-    border: 1px solid #000000;
+    color: ${isLogin ? COLORS.GRAY10 : COLORS.GRAY100};
   `,
 };

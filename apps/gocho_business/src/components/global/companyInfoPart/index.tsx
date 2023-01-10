@@ -5,7 +5,6 @@ import { MdBookmarkBorder } from "react-icons/md";
 import { Spinner } from "shared-ui/common/atom/spinner";
 
 import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
-import { CommonInfoBox } from "@/components/common";
 import { useUserState } from "@/globalStates/useUserState";
 
 import { cssObj } from "./style";
@@ -36,12 +35,18 @@ export const CompanyInfoPart = () => {
         </div>
       </div>
       <div css={cssObj.countingInfoBox}>
-        <CommonInfoBox infoName="기업 조회수" Icon={FiEye} infoData={countFormat.format(companyData.view)} />
-        <CommonInfoBox
-          infoName="기업 북마크"
-          Icon={MdBookmarkBorder}
-          infoData={countFormat.format(companyData.bookmark)}
-        />
+        <div css={cssObj.countBox}>
+          <strong css={cssObj.countTitle}>기업 조회수</strong>
+          <p css={cssObj.countDesc}>
+            <FiEye /> <span css={cssObj.colorPoint}>{countFormat.format(companyData.view)}</span>
+          </p>
+        </div>
+        <div css={cssObj.countBox}>
+          <strong css={cssObj.countTitle}>기업 북마크수</strong>
+          <p css={cssObj.countDesc}>
+            <MdBookmarkBorder /> <span css={cssObj.colorPoint}>{countFormat.format(companyData.bookmark)}</span>
+          </p>
+        </div>
       </div>
     </section>
   );
