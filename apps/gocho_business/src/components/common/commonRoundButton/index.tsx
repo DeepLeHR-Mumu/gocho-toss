@@ -6,10 +6,10 @@ import { CommonRoundButtonProps } from "./type";
 export const CommonRoundButton: FunctionComponent<CommonRoundButtonProps> = ({
   text,
   Icon,
-  backgoundColor,
+  backgroundColor,
   onClickHandler,
 }) => (
-  <button type="button" css={cssObj.wrapper(backgoundColor)} onClick={onClickHandler}>
+  <button type="button" css={cssObj.wrapper(backgroundColor)} onClick={onClickHandler}>
     {Icon && (
       <div css={cssObj.icon}>
         <Icon />

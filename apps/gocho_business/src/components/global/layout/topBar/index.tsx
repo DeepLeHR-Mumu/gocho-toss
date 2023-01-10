@@ -6,8 +6,8 @@ import colorLogo from "shared-image/global/deepLeLogo/logoIconColor.svg";
 import monoLogo from "shared-image/global/deepLeLogo/logoIconMono.svg";
 import { SharedBoxLink } from "shared-ui/business/sharedBoxLink";
 import { SharedButton } from "shared-ui/business/sharedButton";
-
 import { COLORS } from "shared-style/color";
+
 import { tokenService } from "@/utils/tokenService";
 import { useUserState } from "@/globalStates/useUserState";
 import { useDoLogout } from "@/apis/auth/useDoLogout";
@@ -29,7 +29,7 @@ export const TopBar: FunctionComponent = () => {
     });
   };
 
-  const isLogined = userInfoData !== false && userInfoData !== null;
+  const isLogined = Boolean(userInfoData);
 
   return (
     <header css={cssObj.wrapper(isLogined)}>

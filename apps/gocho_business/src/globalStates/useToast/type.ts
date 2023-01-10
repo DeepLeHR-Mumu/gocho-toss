@@ -3,4 +3,4 @@ export interface ToastZustandlProps {
   setToast: (status: string | null) => void;
 }
 
-export type ToastStringType = "메일이 전송됐습니다. 이메일을 확인해주세요.";
+export type ToastStringType = "변경되었습니다" | "토스트 메시지" | "등록되었습니다" | "메일이 전송됐습니다. 이메일을 확인해주세요.";
