@@ -23,6 +23,11 @@ const nextConfig = {
         destination: "/jd/list",
         permanent: true,
       },
+      {
+        source: "/login",
+        destination: "/jd/list",
+        permanent: true,
+      },
     ];
   },
 };

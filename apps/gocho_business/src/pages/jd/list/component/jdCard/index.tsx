@@ -3,24 +3,44 @@ import { AiOutlineEye, AiOutlineNumber, AiOutlinePause } from "react-icons/ai";
 import { BiBookmark, BiMinus } from "react-icons/bi";
 import { FiUser, FiCalendar, FiEdit } from "react-icons/fi";
 import { MdAdsClick } from "react-icons/md";
+import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
 import { COLORS } from "shared-style/color";
+import { SharedButton } from "shared-ui/business/sharedButton";
 
-import { CommonInfoBox, CommonRoundButton, CommonStatusChip } from "@/components/common";
+import { CommonInfoBox, CommonStatusChip } from "@/components/common";
 import { INTERNAL_URL } from "@/constants/url";
+import { useDeleteJd } from "@/apis/jd/useDeleteJd";
+import { jdArrKeyObj } from "@/apis/jd/useJdArr/type";
 
+import { useEndJd } from "@/apis/jd/useEndJd";
 import { cssObj } from "./style";
 import { JdCardProps } from "./type";
 
 export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
+  const { mutate: deleteJdMutation } = useDeleteJd();
+  const { mutate: endJdMutation } = useEndJd();
+
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const numberFormat = Intl.NumberFormat("ko-KR", { notation: "compact" });
   const viewData = numberFormat.format(jd.view);
   const bookmarkData = numberFormat.format(jd.bookmark);
   const clickData = numberFormat.format(jd.click);
+
+  const endJdHandler = (id: number) => {
+    endJdMutation(
+      { jdId: id },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries(jdArrKeyObj.all);
+        },
+      }
+    );
+  };
 
   return (
     <div css={cssObj.cardContainer}>
@@ -59,35 +79,40 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
             <p>{dayjs(jd.endTime).format("YY.MM.DD HH:mm")}</p>
           </div>
         </div>
-        {jd.uploader.is_mine && (
+        {!jd.uploader.is_mine && (
           <div css={cssObj.buttonContainer}>
-            <CommonRoundButton
+            <SharedButton
+              radius="circle"
+              fontColor={COLORS.GRAY10}
+              backgroundColor={COLORS.GRAY80}
+              size="medium"
+              iconObj={{ icon: AiOutlinePause, location: "left" }}
               text="공고마감"
-              Icon={AiOutlinePause}
-              backgoundColor={COLORS.GRAY80}
               onClickHandler={() => {
-                router.push({
-                  pathname: INTERNAL_URL.JD_UPLOAD,
-                });
+                deleteJdMutation({ jdId: jd.id });
               }}
             />
-            <CommonRoundButton
+            <SharedButton
+              radius="circle"
+              fontColor={COLORS.GRAY10}
+              backgroundColor={COLORS.GRAY80}
+              size="medium"
+              iconObj={{ icon: BiMinus, location: "left" }}
               text="공고삭제"
-              Icon={BiMinus}
-              backgoundColor={COLORS.GRAY80}
               onClickHandler={() => {
-                router.push({
-                  pathname: INTERNAL_URL.JD_UPLOAD,
-                });
+                endJdHandler(jd.id);
               }}
             />
-            <CommonRoundButton
+            <SharedButton
+              radius="circle"
+              fontColor={COLORS.GRAY10}
+              backgroundColor={COLORS.GRAY80}
+              size="medium"
+              iconObj={{ icon: FiEdit, location: "left" }}
               text="공고수정"
-              Icon={FiEdit}
-              backgoundColor={COLORS.GRAY80}
               onClickHandler={() => {
                 router.push({
-                  pathname: INTERNAL_URL.JD_EDIT(123),
+                  pathname: INTERNAL_URL.JD_EDIT(jd.id),
                 });
               }}
             />

@@ -7,6 +7,7 @@ import jobi_500 from "@/public/image/jobi_500.svg";
 import { NextPageWithLayout } from "@/pages/_app.page";
 import { Footer, GlobalLayout } from "@/components/global/layout";
 
+import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
 const NotFoundPage: NextPageWithLayout = () => (
@@ -23,9 +24,12 @@ const NotFoundPage: NextPageWithLayout = () => (
 );
 
 NotFoundPage.getLayout = (page: ReactElement) => (
-  <GlobalLayout>
-    {page}
-    <Footer />
-  </GlobalLayout>
+  <>
+    <PageHead />
+    <GlobalLayout>
+      {page}
+      <Footer />
+    </GlobalLayout>
+  </>
 );
 export default NotFoundPage;

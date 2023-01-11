@@ -3,9 +3,9 @@ import create from "zustand";
 import { ToastStringType, ToastZustandlProps } from "./type";
 
 const toastZustand = create<ToastZustandlProps>((set) => ({
-    currentToast: null,
-    setToast: (status) => set(() => ({ currentToast: status })),
-  }));
+  currentToast: null,
+  setToast: (status) => set(() => ({ currentToast: status })),
+}));
 
 export const useToast = () => {
   const { currentToast, setToast: _setToast } = toastZustand();

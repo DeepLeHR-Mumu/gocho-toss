@@ -11,4 +11,9 @@ export const cssObj = {
   noDataDesc: css`
     font-weight: 700;
   `,
+
+  buttonWrapper: css`
+    width: 400px;
+    margin: 4.5rem auto;
+  `,
 };

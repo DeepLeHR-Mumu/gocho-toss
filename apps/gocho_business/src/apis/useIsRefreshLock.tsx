@@ -121,6 +121,10 @@ export const useAxiosInterceptor = () => {
       return null;
     }
 
+    if (errorStatus.errorCode === "BAD_REQUEST") {
+      return null;
+    }
+
     return Promise.reject(error);
   };
 

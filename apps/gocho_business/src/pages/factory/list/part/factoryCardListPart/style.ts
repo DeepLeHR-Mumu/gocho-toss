@@ -49,7 +49,7 @@ export const cssObj = {
     border-bottom: 1px solid #cccccc;
   `,
   container: css`
-    width: 75%;
+    width: 100%;
     margin-right: 1rem;
   `,
   nameContainer: css`
