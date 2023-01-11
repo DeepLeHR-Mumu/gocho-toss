@@ -17,7 +17,7 @@ import { defaultInput, FACTORY_MESSSAGE_OBJ } from "./constant";
 export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingIndex, setEditingIndex }) => {
   const formObj = useForm<FactoryRegisterDef>();
   const { handleSubmit, watch, reset } = formObj;
-
+  
   const { data: factoryDataArr } = useFactoryArr();
   const { mutate: addFactoryMutation } = useAddFactory();
 
