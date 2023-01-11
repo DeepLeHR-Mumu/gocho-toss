@@ -121,6 +121,9 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
               }
               setIsRotationOpen((prev) => !prev);
             }}
+            onBlur={() => {
+              setIsRotationOpen(false);
+            }}
           >
             <p css={cssObj.rotationInnerText}>
               {rotationTextMaker(jobForm.watch("position_arr")[positionIndex].rotation_arr)}
@@ -134,7 +137,8 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                 css={cssObj.option}
                 key={`${id}${rotation.data}`}
                 value={rotation.data}
-                onClick={() => {
+                onMouseDown={(event) => {
+                  event.preventDefault();
                   rotationClickHandler(rotation.data);
                 }}
               >
@@ -190,7 +194,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
           <p css={cssObj.desc}>
             <span css={cssObj.icon}>
               <AiOutlineExclamationCircle />
-            </span>{" "}
+            </span>
             근무지 종류는 하나만 선택 가능 합니다
           </p>
         </div>
@@ -206,6 +210,9 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                     onClick={() => {
                       setIsFactoryListOpen((prev) => !prev);
                     }}
+                    onBlur={() => {
+                      setIsFactoryListOpen(false);
+                    }}
                   >
                     해당하는 공장을 모두 선택해주세요
                     {isFactoryListOpen ? <FiChevronUp /> : <FiChevronDown />}
@@ -217,7 +224,8 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                         css={cssObj.option}
                         key={`${factory.id}${id}`}
                         value={factory.id}
-                        onClick={() => {
+                        onMouseDown={(event) => {
+                          event.preventDefault();
                           factoryClickHandler(factory.id);
                         }}
                       >
@@ -450,7 +458,6 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
             }}
           />
           <div css={cssObj.optionList(isCertiSearchFocused)}>
-            {/* TODO: 클릭되도 검색 창 안꺼지게 */}
             {certificateArr
               .filter((prevCerti) => prevCerti.includes(certiSearchWord))
               .map((certi) => (
@@ -459,7 +466,8 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   css={cssObj.option}
                   key={`${id}${certi}`}
                   value={certi}
-                  onMouseDown={() => {
+                  onMouseDown={(event) => {
+                    event.preventDefault();
                     certiClickHandler(certi);
                   }}
                 >
@@ -534,7 +542,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   css={cssObj.deleteInputButton}
                   onClick={() => {
                     preferredEtcArr.remove(positionIndex);
-                    setPreferredEtcIsFocusedArr((prev) => prev.filter((stateItem, stateIndex) => stateIndex !== index));
+                    setPreferredEtcIsFocusedArr((prev) => prev.filter((_, stateIndex) => stateIndex !== index));
                   }}
                 >
                   <FiMinus />
