@@ -4,7 +4,7 @@ import { Spinner } from "shared-ui/common/atom/spinner";
 
 import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 import { Footer, GlobalLayout, PageLayout } from "@/components/global/layout";
-import { NextPageWithLayout } from "@/pages/_app.page";
+import { NextPageWithLayout } from "@/pages/index/type";
 import { useRecruiterArr } from "@/apis/recruiter/useRecruiterArr";
 
 import { PageHead } from "./pageHead";

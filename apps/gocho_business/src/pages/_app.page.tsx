@@ -1,26 +1,38 @@
-import type { AppProps } from "next/app";
-import { ReactElement, ReactNode, useState } from "react";
+import { useState } from "react";
 import { Global } from "@emotion/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { NextPage } from "next";
+import { datadogRum } from "@datadog/browser-rum";
 
 import { globalStyle } from "@/styles/globalStyle";
 import { useAxiosInterceptor } from "@/apis/useIsRefreshLock";
 import { ToastPlaceholder } from "@/components/global/toast/toastPlaceHolder";
 import { ModalPlaceholder } from "@/components/global/modal/modalPlaceHolder";
 import { PrivateRouteLayout } from "@/components/global/layout/privateRouteLayout";
-import { INTERNAL_URL } from "@/constants/url";
 
-export type NextPageWithLayout<P = Record<string, never>, IP = P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement) => ReactNode;
-};
+import { AppPropsWithLayout } from "./index/type";
+import { PROTECTED_ROUTE_ARR } from "./index/constant";
 
-type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout;
-};
+if (typeof window !== "undefined" && !window.location.href.includes("localhost")) {
+  datadogRum.init({
+    applicationId: "ae36adeb-77ea-4c17-8d46-e239927462e4",
+    clientToken: "pub1d76d0d423237f4598a55e6205dbc303",
+    site: "datadoghq.com",
+    service: "gocho-business",
+
+    version: "0.0.2",
+    sampleRate: 80,
+    sessionReplaySampleRate: 20,
+    trackInteractions: true,
+    trackResources: true,
+    trackLongTasks: true,
+    defaultPrivacyLevel: "mask-user-input",
+  });
+
+  datadogRum.startSessionReplayRecording();
+}
 
 function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
@@ -50,21 +62,11 @@ function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
 
   useAxiosInterceptor();
 
-  const protectedRoutes = [
-    INTERNAL_URL.MY_PAGE,
-    INTERNAL_URL.JD_LIST,
-    INTERNAL_URL.JD_UPLOAD,
-    INTERNAL_URL.FACTORY_LIST,
-    INTERNAL_URL.COMPANY_EDIT,
-    INTERNAL_URL.RECRUITER_LIST,
-    INTERNAL_URL.HELP,
-  ];
-
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <Global styles={globalStyle} />
-        <PrivateRouteLayout protectedRoutes={protectedRoutes}>
+        <PrivateRouteLayout protectedRoutes={PROTECTED_ROUTE_ARR}>
           {getLayout(<Component {...pageProps} />)}
         </PrivateRouteLayout>
         <ModalPlaceholder />
