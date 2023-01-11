@@ -39,38 +39,38 @@ export class ErrorBoundary extends Component<Props, State> {
     const { state, props } = this;
     if (state.hasError) {
       return (
-          <main css={cssObj.container}>
-            <InvisibleH2 title="없는 페이지" />
-            <div css={cssObj.jobiImage}>
-              <Image src={jobi_500} alt="" objectFit="fill" layout="fill" />
-            </div>
-            <p css={cssObj.title}>열심히 고치고 있습니다</p>
-            <div css={cssObj.catchPhraseContainer}>
-              <p css={cssObj.catchPhrase}>고장, 불편 사항은 아래 채널톡에서 신고 부탁드려요 😢</p>
-            </div>
-            <div css={cssObj.linkContainer}>
-              <SharedButton
-                radius="round"
-                fontColor={COLORS.GRAY100}
-                backgroundColor={COLORS.BLUE_NEON40}
-                size="medium"
-                text="새로고침"
-                onClickHandler={() => {
-                  window.location.reload();
-                }}
-              />
-              <SharedButton
-                radius="round"
-                fontColor={COLORS.GRAY100}
-                backgroundColor={COLORS.BLUE_NEON40}
-                size="medium"
-                text="홈으로"
-                onClickHandler={() => {
-                  window.location.href = INTERNAL_URL.JD_LIST;
-                }}
-              />
-            </div>
-          </main>
+        <main css={cssObj.container}>
+          <InvisibleH2 title="없는 페이지" />
+          <div css={cssObj.jobiImage}>
+            <Image src={jobi_500} alt="" objectFit="fill" layout="fill" />
+          </div>
+          <p css={cssObj.title}>열심히 고치고 있습니다</p>
+          <div css={cssObj.catchPhraseContainer}>
+            <p css={cssObj.catchPhrase}>고장, 불편 사항은 아래 채널톡에서 신고 부탁드려요 😢</p>
+          </div>
+          <div css={cssObj.linkContainer}>
+            <SharedButton
+              radius="round"
+              fontColor={COLORS.GRAY10}
+              backgroundColor={COLORS.GRAY80}
+              size="medium"
+              text="새로고침"
+              onClickHandler={() => {
+                window.location.reload();
+              }}
+            />
+            <SharedButton
+              radius="round"
+              fontColor={COLORS.GRAY100}
+              backgroundColor={COLORS.BLUE_NEON40}
+              size="medium"
+              text="홈으로"
+              onClickHandler={() => {
+                window.location.href = INTERNAL_URL.JD_LIST;
+              }}
+            />
+          </div>
+        </main>
       );
     }
 
