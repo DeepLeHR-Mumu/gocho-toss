@@ -3,7 +3,11 @@ import { COLORS } from "shared-style/color";
 
 export const cssObj = {
   partContainer: css`
-    margin: 3rem 2rem 0;
+    margin: 2.5rem 2rem 0;
+  `,
+
+  titleWrapper: css`
+    margin-bottom: 2rem;
   `,
 
   title: css`
@@ -12,19 +16,18 @@ export const cssObj = {
 
   container: css`
     margin-bottom: 1rem;
-    > p {
-      line-height: 2;
-    }
   `,
 
   containerWithGuide: css`
     margin-bottom: 2rem;
-    > p {
-      line-height: 2;
-    }
   `,
 
   inputTitle: (isError: boolean) => css`
+    color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+    margin-bottom: 0.25rem;
+  `,
+
+  labelTitle: (isError: boolean) => css`
     color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
   `,
 
@@ -51,7 +54,7 @@ export const cssObj = {
     display: flex;
     align-items: flex-end;
     gap: 0 3rem;
-    margin-top: 1rem;
+    margin-bottom: 1rem;
   `,
 
   isAlwaysBlock: css`
@@ -152,6 +155,7 @@ export const cssObj = {
   linkLabelContainer: css`
     display: flex;
     gap: 0 1rem;
+    margin-bottom: 0.25rem;
   `,
 
   radio: css`

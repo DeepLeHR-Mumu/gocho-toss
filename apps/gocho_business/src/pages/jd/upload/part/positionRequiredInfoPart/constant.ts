@@ -1,5 +1,5 @@
-export const contractTypeArr = ["정규직", "계약직", "계약>정규", "연수생", "인턴"] as const;
-export const requiredExpArr = ["신입", "경력", "신입/경력", "경력 무관"] as const;
+export const contractTypeArr = ["정규직", "계약>정규", "계약직", "인턴", "연수생"] as const;
+export const requiredExpArr = ["경력 무관", "신입/경력", "신입", "경력"] as const;
 export const requiredEtcGuideArr = [
   "해외여행에 결격사유가 없는 자",
   "병역필 또는 면제자",

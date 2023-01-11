@@ -29,6 +29,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
   const [payIsFocusedArr, setPayIsFocusedArr] = useState<boolean[]>([false]);
   const [preferredEtcIsFocusedArr, setPreferredEtcIsFocusedArr] = useState<boolean[]>([false]);
   const [certiSearchWord, setCertiSearchWord] = useState<string>("");
+  const [isCertiSearchFocused, setIsCertiSearchFocused] = useState<boolean>(false);
   const [isRotationOpen, setIsRotationOpen] = useState<boolean>(false);
   const [isFactoryListOpen, setIsFactoryListOpen] = useState<boolean>(false);
   const [randomPreferredEtcGuideArr, setRandomPreferredEtcGuideArr] = useState<string[]>([]);
@@ -153,7 +154,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
         </p>
       </div>
       <div css={cssObj.container}>
-        <p>근무지 종류</p>
+        <p css={cssObj.inputTitle(false)}>근무지 종류</p>
         <div css={cssObj.labelContainer}>
           {placeTypeArr.map((placeType) => (
             <div key={`${placeType.name}${positionIndex}`}>
@@ -187,13 +188,16 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
             </div>
           ))}
           <p css={cssObj.desc}>
-            <AiOutlineExclamationCircle /> 근무지 종류는 하나만 선택 가능 합니다
+            <span css={cssObj.icon}>
+              <AiOutlineExclamationCircle />
+            </span>{" "}
+            근무지 종류는 하나만 선택 가능 합니다
           </p>
         </div>
         <div css={cssObj.placeInputContainer}>
           {jobForm.watch("position_arr")[positionIndex].place.type === "일반" && (
             <>
-              <p>공장 근무지</p>
+              <p css={cssObj.inputTitle(false)}>공장 근무지</p>
               <div css={cssObj.factoryInputWrapper}>
                 <div css={cssObj.optionContainer}>
                   <button
@@ -228,14 +232,18 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                     ))}
                   </div>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => {
+                <SharedButton
+                  radius="round"
+                  fontColor={COLORS.GRAY10}
+                  backgroundColor={COLORS.GRAY100}
+                  borderColor={COLORS.GRAY70}
+                  size="medium"
+                  iconObj={{ icon: FiRotateCw, location: "left" }}
+                  text="목록 새로고침"
+                  onClickHandler={() => {
                     queryClient.invalidateQueries(factoryArrKeyObj.all);
                   }}
-                >
-                  <FiRotateCw /> 공장 목록 새로고침
-                </button>
+                />
                 <p css={cssObj.uploadFactoryDesc}>잠깐, 미등록 공장이 있나요</p>
                 <SharedTextLink externalUrl={INTERNAL_URL.FACTORY_LIST} fontColor="blue" text="공장 등록하러 가기" />
               </div>
@@ -260,9 +268,15 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   </div>
                 ))}
               </div>
-              <button
-                type="button"
-                onClick={() =>
+              <SharedButton
+                radius="round"
+                fontColor={COLORS.GRAY10}
+                backgroundColor={COLORS.GRAY100}
+                borderColor={COLORS.GRAY70}
+                size="medium"
+                iconObj={{ icon: FiPlus, location: "left" }}
+                text="공장 외 일반 근무지 추가하기"
+                onClickHandler={() =>
                   openPostCodePopup({
                     onComplete: (addressObj: Address) => {
                       jobForm.setValue(`position_arr.${positionIndex}.place.address_arr`, [
@@ -272,9 +286,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                     },
                   })
                 }
-              >
-                + 공장 외 일반 근무지 추가하기
-              </button>
+              />
               <div css={cssObj.placeContainer}>
                 {jobForm.watch("position_arr")[positionIndex].place.address_arr?.map((address) => (
                   <div key={`${address}${id}`}>
@@ -421,17 +433,24 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
         </p>
       </div>
       <div css={cssObj.container}>
-        <p>우대 자격증</p>
+        <p css={cssObj.inputTitle(false)}>우대 자격증</p>
         <div css={cssObj.optionContainer}>
           <input
             css={cssObj.input(20)}
             type="text"
+            onFocus={() => {
+              setIsCertiSearchFocused(true);
+            }}
+            onBlur={() => {
+              setIsCertiSearchFocused(false);
+            }}
             placeholder="자격증 검색"
             onChange={(e) => {
               setCertiSearchWord(e.target.value);
             }}
           />
-          <div css={cssObj.optionList(certiSearchWord !== "")}>
+          <div css={cssObj.optionList(isCertiSearchFocused)}>
+            {/* TODO: 클릭되도 검색 창 안꺼지게 */}
             {certificateArr
               .filter((prevCerti) => prevCerti.includes(certiSearchWord))
               .map((certi) => (
@@ -440,7 +459,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   css={cssObj.option}
                   key={`${id}${certi}`}
                   value={certi}
-                  onClick={() => {
+                  onMouseDown={() => {
                     certiClickHandler(certi);
                   }}
                 >
@@ -477,7 +496,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
         </div>
       </div>
       <div css={cssObj.containerWithGuide}>
-        <p>기타 우대 사항(선택)</p>
+        <p css={cssObj.inputTitle(false)}>기타 우대 사항(선택)</p>
         <div css={cssObj.inputContainerWithGuide}>
           {preferredEtcArr.fields.map((item, index) => (
             <div key={`preferredEtcArr${item.id}`}>

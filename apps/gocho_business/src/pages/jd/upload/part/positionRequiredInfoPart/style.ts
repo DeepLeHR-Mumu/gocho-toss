@@ -9,25 +9,21 @@ export const cssObj = {
 
   container: css`
     margin-bottom: 1rem;
-    > p {
-      line-height: 2;
-    }
   `,
 
   containerWithGuide: css`
     margin-bottom: 2rem;
-    > p {
-      line-height: 2;
-    }
   `,
 
   inputTitle: (isError: boolean) => css`
     color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+    margin-bottom: 0.25rem;
   `,
 
   labelContainer: css`
     display: flex;
     gap: 0 2.5rem;
+    margin: 0.5rem 0 0.75rem;
   `,
 
   radioLabel: css`
@@ -55,7 +51,7 @@ export const cssObj = {
   `,
 
   conversionRateLabel: (value: number) => css`
-    line-height: 1;
+    margin-top: 0.25rem;
     margin-left: ${value < 100 ? (6.5 * value) / 100 : 0}rem;
   `,
 
@@ -130,7 +126,14 @@ export const cssObj = {
   `,
 
   desc: css`
+    display: flex;
     color: ${COLORS.GRAY35};
+  `,
+
+  icon: css`
+    font-size: 1.5rem;
+    margin-top: 0.25rem;
+    margin-right: 0.5rem;
   `,
 
   toggleSwitch: (isClicked: boolean, isDisabled: boolean) => css`

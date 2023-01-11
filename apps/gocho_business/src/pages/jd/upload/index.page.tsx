@@ -96,52 +96,45 @@ const JdUploadPage: NextPageWithLayout = () => {
   return (
     <main>
       <PageLayout>
-        <section>
-          <form onSubmit={handleSubmit(jobSubmitHandler)}>
-            <HeaderPart />
-            <BasicInfoPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
-            <PositionHeaderPart append={append} setIsCardOpen={setIsCardOpenArr} />
-            <ul>
-              {fields.map((item, index) => (
-                <li key={`${item.id}`} css={cssObj.cardContainer}>
-                  <PositionTitleInfoPart
-                    id={item.id}
-                    positionIndex={index}
-                    jobForm={jobForm}
-                    appendPosition={append}
-                    removePosition={remove}
-                    control={control}
-                    isCardOpen={isCardOpenArr[index]}
-                    setIsCardOpen={setIsCardOpenArr}
-                  />
-                  {isCardOpenArr[index] && (
-                    <>
-                      <PositionRequiredInfoPart
-                        id={item.id}
-                        positionIndex={index}
-                        jobForm={jobForm}
-                        control={control}
-                      />
-                      <PositionWorkInfoPart id={item.id} positionIndex={index} jobForm={jobForm} control={control} />
-                    </>
-                  )}
-                </li>
-              ))}
-            </ul>
-            <div css={cssObj.buttonWrapper}>
-              <SharedButton
-                radius="round"
-                fontColor={`${COLORS.GRAY100}`}
-                backgroundColor={`${COLORS.BLUE_FIRST40}`}
-                isFullWidth
-                size="medium"
-                text="공고 등록하기"
-                iconObj={{ icon: BiRocket, location: "left" }}
-                onClickHandler="submit"
-              />
-            </div>
-          </form>
-        </section>
+        <form onSubmit={handleSubmit(jobSubmitHandler)}>
+          <HeaderPart />
+          <BasicInfoPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
+          <PositionHeaderPart append={append} setIsCardOpen={setIsCardOpenArr} />
+          <ul>
+            {fields.map((item, index) => (
+              <li key={`${item.id}`} css={cssObj.cardContainer}>
+                <PositionTitleInfoPart
+                  id={item.id}
+                  positionIndex={index}
+                  jobForm={jobForm}
+                  appendPosition={append}
+                  removePosition={remove}
+                  control={control}
+                  isCardOpen={isCardOpenArr[index]}
+                  setIsCardOpen={setIsCardOpenArr}
+                />
+                {isCardOpenArr[index] && (
+                  <>
+                    <PositionRequiredInfoPart id={item.id} positionIndex={index} jobForm={jobForm} control={control} />
+                    <PositionWorkInfoPart id={item.id} positionIndex={index} jobForm={jobForm} control={control} />
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+          <div css={cssObj.buttonWrapper}>
+            <SharedButton
+              radius="round"
+              fontColor={`${COLORS.GRAY100}`}
+              backgroundColor={`${COLORS.BLUE_FIRST40}`}
+              isFullWidth
+              size="medium"
+              text="공고 등록하기"
+              iconObj={{ icon: BiRocket, location: "left" }}
+              onClickHandler="submit"
+            />
+          </div>
+        </form>
       </PageLayout>
     </main>
   );

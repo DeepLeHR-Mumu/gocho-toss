@@ -5,6 +5,7 @@ export const cssObj = {
   titleContainer: css`
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1.5rem;
   `,
 
   positionTitle: css`
@@ -39,14 +40,12 @@ export const cssObj = {
   `,
 
   container: css`
-    margin-top: 1rem;
-    > p {
-      line-height: 2;
-    }
+    margin-bottom: 1rem;
   `,
 
   inputTitle: (isError: boolean) => css`
     color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+    margin-bottom: 0.25rem;
   `,
 
   taskInputContainer: css`

@@ -54,9 +54,11 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
   }, []);
 
   return (
-    <div css={cssObj.partContainer}>
-      <h2 css={cssObj.title}>접수 정보</h2>
-      <p>공고 접수와 관련된 공통 정보들 입니다</p>
+    <section css={cssObj.partContainer}>
+      <div css={cssObj.titleWrapper}>
+        <h2 css={cssObj.title}>접수 정보</h2>
+        <p>공고 접수와 관련된 공통 정보들 입니다</p>
+      </div>
       <div css={cssObj.container}>
         <p css={cssObj.inputTitle(!!jobForm.formState.errors.title)}>공고 제목</p>
         <input
@@ -300,7 +302,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               }}
             />
             <div css={cssObj.radioBox} />
-            <p css={cssObj.inputTitle(!!jobForm.formState.errors.apply_url)}>채용 링크</p>
+            <p css={cssObj.labelTitle(!!jobForm.formState.errors.apply_url)}>채용 링크</p>
           </label>
           <p>또는</p>
           <label css={cssObj.label} htmlFor="email">
@@ -315,7 +317,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               }}
             />
             <div css={cssObj.radioBox} />
-            <p css={cssObj.inputTitle(!!jobForm.formState.errors.apply_url)}>이메일 링크</p>
+            <p css={cssObj.labelTitle(!!jobForm.formState.errors.apply_url)}>이메일 링크</p>
           </label>
         </div>
         <div>
@@ -368,7 +370,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
         </div>
       </div>
       <div css={cssObj.container}>
-        <p>기타 사항 (선택)</p>
+        <p css={cssObj.inputTitle(false)}>기타 사항 (선택)</p>
         <div css={cssObj.inputContainer}>
           {etcArr.fields.map((item, index) => (
             <label css={cssObj.inputLabel(47)} key={`etcArr${item.id}`} htmlFor={`etcArr${item.id}`}>
@@ -405,6 +407,6 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };

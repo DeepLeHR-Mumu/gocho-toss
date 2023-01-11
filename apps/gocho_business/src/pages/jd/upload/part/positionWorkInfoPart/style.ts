@@ -4,16 +4,10 @@ import { COLORS } from "shared-style/color";
 export const cssObj = {
   container: css`
     margin-bottom: 1rem;
-    > p {
-      line-height: 2;
-    }
   `,
 
   containerWithGuide: css`
     margin-bottom: 2rem;
-    > p {
-      line-height: 2;
-    }
   `,
 
   optionContainer: css`
@@ -146,12 +140,20 @@ export const cssObj = {
   `,
 
   desc: css`
-    color: ${COLORS.GRAY35};
+    display: flex;
+    align-items: center;
     margin-left: 2rem;
+    color: ${COLORS.GRAY35};
+  `,
+
+  icon: css`
+    font-size: 1.5rem;
+    margin-top: 0.25rem;
+    margin-right: 0.5rem;
   `,
 
   placeInputContainer: css`
-    margin-top: 0.5rem;
+    margin: 0.5rem 0 2rem;
     padding: 1.5rem;
     background-color: ${COLORS.GRAY100};
   `,
@@ -201,6 +203,7 @@ export const cssObj = {
 
   inputTitle: (isError: boolean) => css`
     color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+    margin-bottom: 0.25rem;
   `,
 
   inputContainer: css`

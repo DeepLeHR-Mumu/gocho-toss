@@ -152,7 +152,10 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             4년제
           </label>
           <p css={cssObj.desc}>
-            <AiOutlineExclamationCircle /> 중복 체크 가능
+            <span css={cssObj.icon}>
+              <AiOutlineExclamationCircle />
+            </span>
+            중복 체크 가능
           </p>
         </div>
         <p css={cssObj.errorMessage} />
