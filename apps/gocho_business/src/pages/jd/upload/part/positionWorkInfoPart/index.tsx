@@ -361,10 +361,10 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
         <div css={cssObj.inputContainerWithGuide}>
           {payArr.fields.map((item, index) => (
             <div key={`payArr${item.id}`}>
-              <label css={cssObj.inputLabel(47)} htmlFor={`payArr${item.id}`}>
+              <label css={cssObj.inputLabel} htmlFor={`payArr${item.id}`}>
                 <input
                   id={`payArr${item.id}`}
-                  css={cssObj.inputWithButton}
+                  css={cssObj.erasableInput(47)}
                   placeholder="급여 정보"
                   onFocus={() => {
                     setPayIsFocusedArr((prev) =>
@@ -500,10 +500,10 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
         <div css={cssObj.inputContainerWithGuide}>
           {preferredEtcArr.fields.map((item, index) => (
             <div key={`preferredEtcArr${item.id}`}>
-              <label css={cssObj.inputLabel(47)} htmlFor={`preferredEtcArr${item.id}`}>
+              <label css={cssObj.inputLabel} htmlFor={`preferredEtcArr${item.id}`}>
                 <input
                   id={`preferredEtcArr${item.id}`}
-                  css={cssObj.inputWithButton}
+                  css={cssObj.erasableInput(47)}
                   placeholder="기타 우대 사항"
                   onFocus={() => {
                     setPreferredEtcIsFocusedArr((prev) =>

@@ -120,10 +120,10 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
           {processArr.fields.map((item, index) => (
             <div key={`processArr${item.id}`} css={cssObj.processBox}>
               <div>
-                <label css={cssObj.inputLabel(11.5)} htmlFor={`processArr${item.id}`}>
+                <label css={cssObj.inputLabel} htmlFor={`processArr${item.id}`}>
                   <input
                     id={`processArr${item.id}`}
-                    css={cssObj.erasableInput}
+                    css={cssObj.erasableInput(11.5)}
                     placeholder={`${index + 1}차`}
                     onFocus={() => {
                       setProcessIsFocusedArr((prev) =>
@@ -199,10 +199,10 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
         <div css={cssObj.inputContainerWithGuide}>
           {applyRouteArr.fields.map((item, index) => (
             <div key={`applyRouteArr${item.id}`}>
-              <label css={cssObj.inputLabel(18)} htmlFor={`applyRouteArr${item.id}`}>
+              <label css={cssObj.inputLabel} htmlFor={`applyRouteArr${item.id}`}>
                 <input
                   id={`applyRouteArr${item.id}`}
-                  css={cssObj.erasableInput}
+                  css={cssObj.erasableInput(18)}
                   placeholder="지원 방법/제출 서류"
                   onFocus={() => {
                     setApplyRouteIsFocusedArr((prev) =>
@@ -324,10 +324,12 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
           {linkType === "website" ? (
             <div>
               <div css={cssObj.applyUrlInputContainer}>
-                <label css={cssObj.inputLabel(47)} key="applyUrlWebsite" htmlFor="applyUrlWebsite">
-                  <FiLink />
+                <label css={cssObj.inputLabel} key="applyUrlWebsite" htmlFor="applyUrlWebsite">
+                  <span css={cssObj.inputLogo}>
+                    <FiLink />
+                  </span>
                   <input
-                    css={cssObj.applyUrlInput}
+                    css={cssObj.applyUrlInput(47)}
                     placeholder="http"
                     {...jobForm.register("apply_url", { required: true })}
                   />
@@ -358,9 +360,11 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
             </div>
           ) : (
             <>
-              <label css={cssObj.inputLabel(47)} key="applyUrlWebsite" htmlFor="applyUrlWebsite">
-                <FiAtSign />
-                <input css={cssObj.applyUrlInput} {...jobForm.register("apply_url", { required: true })} />
+              <label css={cssObj.inputLabel} key="applyUrlWebsite" htmlFor="applyUrlWebsite">
+                <span css={cssObj.inputLogo}>
+                  <FiAtSign />
+                </span>
+                <input css={cssObj.applyUrlInput(47)} {...jobForm.register("apply_url", { required: true })} />
               </label>
               <p css={cssObj.errorMessage}>
                 {!!jobForm.formState.errors.apply_url && jobForm.formState.errors.apply_url.message}
@@ -373,10 +377,10 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
         <p css={cssObj.inputTitle(false)}>기타 사항 (선택)</p>
         <div css={cssObj.inputContainer}>
           {etcArr.fields.map((item, index) => (
-            <label css={cssObj.inputLabel(47)} key={`etcArr${item.id}`} htmlFor={`etcArr${item.id}`}>
+            <label css={cssObj.inputLabel} key={`etcArr${item.id}`} htmlFor={`etcArr${item.id}`}>
               <input
                 id={`etcArr${item.id}`}
-                css={cssObj.erasableInput}
+                css={cssObj.erasableInput(47)}
                 placeholder="기타 사항 (선택)"
                 {...jobForm.register(`etc_arr.${index}.value`, { required: true, maxLength: 70 })}
               />

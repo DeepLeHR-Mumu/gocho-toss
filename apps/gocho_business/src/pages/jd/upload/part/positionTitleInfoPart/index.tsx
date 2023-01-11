@@ -216,10 +216,10 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
             </p>
             <div css={cssObj.inputContainer}>
               {taskDetailArr.fields.map((item, index) => (
-                <label css={cssObj.inputLabel(47)} key={`taskDetailArr${item.id}`} htmlFor={`taskDetailArr${item.id}`}>
+                <label css={cssObj.inputLabel} key={`taskDetailArr${item.id}`} htmlFor={`taskDetailArr${item.id}`}>
                   <input
                     id={`taskDetailArr${item.id}`}
-                    css={cssObj.inputWithButton}
+                    css={cssObj.erasableInput(47)}
                     placeholder="합격시 구체적으로 어떤 일을 하게 되는지 명시해주세요"
                     {...jobForm.register(`position_arr.${positionIndex}.task_detail_arr.${index}.value`, {
                       required: true,

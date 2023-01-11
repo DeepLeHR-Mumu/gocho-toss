@@ -262,10 +262,10 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
         <div css={cssObj.inputContainerWithGuide}>
           {requiredEtcArr.fields.map((item, index) => (
             <div key={`requiredEtcArr${item.id}`}>
-              <label css={cssObj.inputLabel(47)} htmlFor={`requiredEtcArr${item.id}`}>
+              <label css={cssObj.inputLabel} htmlFor={`requiredEtcArr${item.id}`}>
                 <input
                   id={`requiredEtcArr${item.id}`}
-                  css={cssObj.inputWithButton}
+                  css={cssObj.erasableInput(47)}
                   placeholder="군필 여부, 나이, 성별 등의 기타 조건을 적어주세요"
                   onFocus={() => {
                     setRequiredEtcIsFocusedArr((prev) =>

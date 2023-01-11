@@ -32,6 +32,9 @@ export const cssObj = {
   `,
 
   input: (width: number) => css`
+    position: relative;
+    display: flex;
+    align-items: center;
     border: 1px solid ${COLORS.GRAY10};
     height: 2.5rem;
     padding: 0 1rem;
@@ -111,20 +114,21 @@ export const cssObj = {
     gap: 0.5rem;
   `,
 
-  inputLabel: (width: number) => css`
+  inputLabel: css`
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: ${width}rem;
-    border: 1px solid ${COLORS.GRAY10};
     height: 2.5rem;
-    padding: 0 0.5rem 0 1rem;
   `,
 
-  erasableInput: css`
+  erasableInput: (width: number) => css`
     font-size: 1rem;
-    width: calc(100% - 3rem);
     font-weight: 400;
+    border: 1px solid ${COLORS.GRAY10};
+    background-color: ${COLORS.GRAY100};
+    width: ${width}rem;
+    padding: 0.5rem 1rem;
 
     ::placeholder {
       color: ${COLORS.GRAY30};
@@ -132,9 +136,9 @@ export const cssObj = {
   `,
 
   deleteInputButton: css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: absolute;
+    right: 0;
+    margin-right: 0.5rem;
     border-radius: 50%;
     width: 1.75rem;
     height: 1.75rem;
@@ -193,9 +197,16 @@ export const cssObj = {
     align-items: center;
   `,
 
-  applyUrlInput: css`
+  inputLogo: css`
+    position: absolute;
+    left: 1rem;
+  `,
+
+  applyUrlInput: (width: number) => css`
     font-size: 1rem;
-    width: calc(100% - 1.5rem);
+    border: 1px solid ${COLORS.GRAY10};
+    width: ${width}rem;
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
     font-weight: 400;
     ::placeholder {
       color: ${COLORS.GRAY30};
