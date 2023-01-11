@@ -9,6 +9,7 @@ import { INTERNAL_URL } from "@/constants/url";
 
 import { tokenService } from "@/utils/tokenService";
 import { ErrorResponseDef } from "@/types/errorType";
+import { useModal } from "@/globalStates/useModal";
 
 export const axiosNoTokenInstance = axios.create({
   timeout: 10000,
@@ -22,39 +23,40 @@ export const axiosInstance = axios.create({
 
 export const useAxiosInterceptor = () => {
   const router = useRouter();
-  let lock = false;
-  let subscribers: ((token: string) => void)[] = [];
+  let isLock = false;
+  let readyQueueArr: ((token: string) => void)[] = [];
+  const { setCurrentModal } = useModal();
 
-  const goToLoginPage = () => {
-    tokenService.removeAllToken();
-    router.push(INTERNAL_URL.LOGIN);
+  const saveQueue = (callback: (token: string) => void) => {
+    readyQueueArr.push(callback);
   };
 
-  const subscribeTokenRefresh = (callback: (token: string) => void) => {
-    subscribers.push(callback);
+  const activeQueue = (token: string) => {
+    readyQueueArr.forEach((callback) => callback(token));
   };
 
-  const onRefreshed = (token: string) => {
-    subscribers.forEach((callback) => callback(token));
-  };
-
-  const getRefreshToken = async (): Promise<string | void> => {
+  const getRefreshTokenCreator = async (): Promise<string | void> => {
     try {
       const refreshToken = tokenService.getRefreshToken();
       const { data: newTokenData } = await axios.get(`${BUSINESS_BACKEND_URL}/auth/refresh`, {
         headers: { "x-refresh-token": refreshToken },
       });
-      lock = false;
-      onRefreshed(newTokenData.data.access_token);
-      subscribers = [];
-      tokenService.updateAllToken(`${newTokenData.data.access_token}`, `${newTokenData.data.refresh_token}`);
+      activeQueue(newTokenData.data.access_token);
+      isLock = false;
+      readyQueueArr = [];
+      tokenService.updateAllToken(newTokenData.data.access_token, newTokenData.data.refresh_token);
       return newTokenData.data.access_token;
     } catch (error) {
-      lock = false;
-      subscribers = [];
+      isLock = false;
+      readyQueueArr = [];
       tokenService.removeAllToken();
     }
     return undefined;
+  };
+
+  const goToLoginPage = () => {
+    tokenService.removeAllToken();
+    router.push(INTERNAL_URL.LOGIN);
   };
 
   const requestConfigHandler = async (config: AxiosRequestConfig) => {
@@ -66,12 +68,13 @@ export const useAxiosInterceptor = () => {
       return null;
     }
 
-    const { exp: refreshExp } = managerTokenDecryptor(refreshToken);
-    const refreshCreateTime = new Date(Number(refreshExp) * 1000).getTime();
+    const { exp: refreshTokenExp } = managerTokenDecryptor(refreshToken);
+    const refreshCreateTime = new Date(Number(refreshTokenExp) * 1000).getTime();
     const currentTime = new Date().getTime();
 
-    if (refreshCreateTime !== 0 && refreshCreateTime <= currentTime) {
-      goToLoginPage();
+    if (refreshCreateTime <= currentTime) {
+      tokenService.removeAllToken();
+      setCurrentModal("loginModal");
       return null;
     }
 
@@ -96,32 +99,25 @@ export const useAxiosInterceptor = () => {
       path: error.response?.data.path,
     };
 
-    if (errorStatus.path === "/auth/refresh") return Promise.reject(error);
-
-    if (lock) {
+    if (isLock) {
       return new Promise((resolve) => {
-        subscribeTokenRefresh((token: string) => {
+        saveQueue((token) => {
           if (originalRequest.headers) originalRequest.headers["x-access-token"] = token;
-          resolve(axiosInstance(originalRequest));
+          return resolve(axiosInstance(originalRequest));
         });
       });
     }
 
-    lock = true;
+    isLock = true;
+    const newAccessToken = await getRefreshTokenCreator();
 
-    const accessToken = await getRefreshToken();
-
-    if (accessToken) {
-      if (originalRequest.headers) originalRequest.headers["x-access-token"] = accessToken;
-      return axios(config);
+    if (newAccessToken && errorStatus.errorCode === "EXPIRED_JWT") {
+      if (originalRequest.headers) originalRequest.headers["x-access-token"] = newAccessToken;
+      return axiosInstance(originalRequest);
     }
 
-    if (errorStatus.errorCode === "MALFORMED_JWT" || errorStatus.errorCode === "UNAUTHORIZED") {
-      goToLoginPage();
-      return null;
-    }
-
-    if (errorStatus.errorCode === "BAD_REQUEST") {
+    if (errorStatus.errorCode === "MALFORMED_JWT") {
+      setCurrentModal("loginModal");
       return null;
     }
 

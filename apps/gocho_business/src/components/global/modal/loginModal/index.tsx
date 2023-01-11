@@ -15,10 +15,10 @@ import { ModalComponent } from "@/components/global/modal/modalBackground";
 import { useModal } from "@/globalStates/useModal";
 import { useToast } from "@/globalStates/useToast";
 import { useUserState } from "@/globalStates/useUserState";
+import { tokenService } from "@/utils/tokenService";
 
 import { LoginFormValues } from "./type";
 import { cssObj } from "./style";
-import { tokenService } from "@/utils/tokenService";
 
 export const LoginBox: FunctionComponent = () => {
   const [errorMsg, setErrorMsg] = useState<null | string>(null);
