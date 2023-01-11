@@ -44,7 +44,7 @@ export class ErrorBoundary extends Component<Props, State> {
           <div css={cssObj.jobiImage}>
             <Image src={jobi_500} alt="" objectFit="fill" layout="fill" />
           </div>
-          <p css={cssObj.title}>열심히 고치고 있습니다</p>
+          <p css={cssObj.title}>예기치 못한 오류가 발생했습니다</p>
           <div css={cssObj.catchPhraseContainer}>
             <p css={cssObj.catchPhrase}>고장, 불편 사항은 아래 채널톡에서 신고 부탁드려요 😢</p>
           </div>

@@ -1,5 +1,19 @@
-import type { NextPage } from "next";
+import { ReactElement } from "react";
 
-const JdUploadPage: NextPage = () => <div>Jd List Page</div>;
+import type { NextPageWithLayout } from "@/pages/_app.page";
+import { PageLayout, GlobalLayout } from "@/components/global/layout";
+
+const JdUploadPage: NextPageWithLayout = () => (
+  <main>
+    <PageLayout>
+      <section>
+        This is JdUploadPage!!
+        <div>lol</div>
+      </section>
+    </PageLayout>
+  </main>
+);
+
+JdUploadPage.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default JdUploadPage;
