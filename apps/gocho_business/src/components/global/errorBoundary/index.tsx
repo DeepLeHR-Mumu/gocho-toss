@@ -1,4 +1,4 @@
-import { Component, ReactNode } from "react";
+import { Component } from "react";
 import Image from "next/image";
 
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
