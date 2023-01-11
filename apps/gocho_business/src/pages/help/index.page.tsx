@@ -7,6 +7,7 @@ import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 import chatIcon from "@/public/image/help/chat.svg";
 import helpBackground from "@/public/image/help/help_background.svg";
 
+import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
 const HelpPage: NextPageWithLayout = () => (
@@ -31,11 +32,14 @@ const HelpPage: NextPageWithLayout = () => (
 );
 
 HelpPage.getLayout = (page: ReactElement) => (
-  <GlobalLayout>
-    <CompanyInfoPart />
-    {page}
-    <Footer />
-  </GlobalLayout>
+  <>
+    <PageHead />
+    <GlobalLayout>
+      <CompanyInfoPart />
+      {page}
+      <Footer />
+    </GlobalLayout>
+  </>
 );
 
 export default HelpPage;

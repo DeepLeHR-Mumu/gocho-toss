@@ -15,6 +15,7 @@ import { useToast } from "@/globalStates/useToast";
 import { PageLayout, GlobalLayout, Footer } from "@/components/global/layout";
 import { NextPageWithLayout } from "@/pages/_app.page";
 
+import { PageHead } from "./pageHead";
 import { BasicPart } from "./part/basicPart";
 import { WelfarePart } from "./part/welfarePart";
 import { COMPANY_MESSAGE_OBJ } from "./constants";
@@ -187,11 +188,14 @@ const CompanyEditPage: NextPageWithLayout = () => {
 };
 
 CompanyEditPage.getLayout = (page: ReactElement) => (
-  <GlobalLayout>
-    <CompanyInfoPart />
-    {page}
-    <Footer />
-  </GlobalLayout>
+  <>
+    <PageHead />
+    <GlobalLayout>
+      <CompanyInfoPart />
+      {page}
+      <Footer />
+    </GlobalLayout>
+  </>
 );
 
 export default CompanyEditPage;

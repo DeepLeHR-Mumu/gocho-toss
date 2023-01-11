@@ -20,6 +20,7 @@ import { TopBar } from "@/components/global/layout/topBar";
 import { useDoLogin } from "@/apis/auth/useDoLogin";
 import { tokenService } from "@/utils/tokenService";
 
+import { PageHead } from "./pageHead";
 import { LoginFormValues } from "./type";
 import { cssObj } from "./style";
 
@@ -68,6 +69,7 @@ const LoginPage: NextPage = () => {
 
   return (
     <>
+      <PageHead />
       <TopBar />
       <main css={cssObj.wrapper}>
         <InvisibleH2 title="고초대졸닷컴 로그인하기" />
