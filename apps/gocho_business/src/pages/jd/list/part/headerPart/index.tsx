@@ -13,7 +13,7 @@ export const HeaderPart: FunctionComponent = () => {
   const router = useRouter();
 
   return (
-    <section css={cssObj.partContainer}>
+    <section css={cssObj.partContainer} data-testid="jd/list/headerPart">
       <div>
         <h2 css={cssObj.title}>공고 목록</h2>
         <p>공고를 수정하면 승인기간이 늘어날 수 있습니다</p>
@@ -25,8 +25,8 @@ export const HeaderPart: FunctionComponent = () => {
           text="공고 등록하러 가기"
           isFullWidth
           iconObj={{ icon: FiArrowRight, location: "right" }}
-          backgroundColor="#E9EEF9"
-          fontColor={`${COLORS.BLUE_FIRST40}`}
+          backgroundColor={COLORS.STATE_SUCCESS}
+          fontColor={COLORS.BLUE_FIRST40}
           onClickHandler={() => {
             router.push({
               pathname: INTERNAL_URL.JD_UPLOAD,

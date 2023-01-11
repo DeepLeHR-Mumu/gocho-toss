@@ -21,7 +21,7 @@ export const ListPart: FunctionComponent = () => {
   }
 
   return (
-    <section>
+    <section data-testid="jd/list/listPart">
       {jdDataObj.jdDataArr.map((jd) => (
         <JdCard key={`BusinessJdCard${jd.id}`} jd={jd} />
       ))}

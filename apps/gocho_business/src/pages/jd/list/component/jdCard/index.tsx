@@ -7,8 +7,9 @@ import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
 import { COLORS } from "shared-style/color";
+import { SharedButton } from "shared-ui/business/sharedButton";
 
-import { CommonInfoBox, CommonRoundButton, CommonStatusChip } from "@/components/common";
+import { CommonInfoBox, CommonStatusChip } from "@/components/common";
 import { INTERNAL_URL } from "@/constants/url";
 
 import { cssObj } from "./style";
@@ -59,35 +60,44 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
             <p>{dayjs(jd.endTime).format("YY.MM.DD HH:mm")}</p>
           </div>
         </div>
-        {jd.uploader.is_mine && (
+        {!jd.uploader.is_mine && (
           <div css={cssObj.buttonContainer}>
-            <CommonRoundButton
+            <SharedButton
+              radius="circle"
+              fontColor={COLORS.GRAY10}
+              backgroundColor={COLORS.GRAY80}
+              size="medium"
+              iconObj={{ icon: AiOutlinePause, location: "left" }}
               text="공고마감"
-              Icon={AiOutlinePause}
-              backgroundColor={COLORS.GRAY80}
               onClickHandler={() => {
                 router.push({
                   pathname: INTERNAL_URL.JD_UPLOAD,
                 });
               }}
             />
-            <CommonRoundButton
+            <SharedButton
+              radius="circle"
+              fontColor={COLORS.GRAY10}
+              backgroundColor={COLORS.GRAY80}
+              size="medium"
+              iconObj={{ icon: BiMinus, location: "left" }}
               text="공고삭제"
-              Icon={BiMinus}
-              backgroundColor={COLORS.GRAY80}
               onClickHandler={() => {
                 router.push({
                   pathname: INTERNAL_URL.JD_UPLOAD,
                 });
               }}
             />
-            <CommonRoundButton
-              text="공고수정"
-              Icon={FiEdit}
+            <SharedButton
+              radius="circle"
+              fontColor={COLORS.GRAY10}
               backgroundColor={COLORS.GRAY80}
+              size="medium"
+              iconObj={{ icon: FiEdit, location: "left" }}
+              text="공고수정"
               onClickHandler={() => {
                 router.push({
-                  pathname: INTERNAL_URL.JD_EDIT(123),
+                  pathname: INTERNAL_URL.JD_EDIT(jd.id),
                 });
               }}
             />
