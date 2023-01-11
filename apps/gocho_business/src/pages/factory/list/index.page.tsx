@@ -4,6 +4,7 @@ import type { NextPageWithLayout } from "@/pages/_app.page";
 import { PageLayout, GlobalLayout, Footer } from "@/components/global/layout";
 import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 
+import { PageHead } from "./pageHead";
 import { RegisterPart } from "./part/registerPart";
 import { FactoryCardListPart } from "./part/factoryCardListPart";
 import { cssObj } from "./style";
@@ -49,11 +50,14 @@ const FactoryListPage: NextPageWithLayout = () => {
 };
 
 FactoryListPage.getLayout = (page: ReactElement) => (
-  <GlobalLayout>
-    <CompanyInfoPart />
-    {page}
-    <Footer />
-  </GlobalLayout>
+  <>
+    <PageHead />
+    <GlobalLayout>
+      <CompanyInfoPart />
+      {page}
+      <Footer />
+    </GlobalLayout>
+  </>
 );
 
 export default FactoryListPage;
