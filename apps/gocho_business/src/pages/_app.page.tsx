@@ -10,6 +10,7 @@ import { NextPage } from "next";
 import { globalStyle } from "@/styles/globalStyle";
 import { useAxiosInterceptor } from "@/apis/useIsRefreshLock";
 import { ToastPlaceholder } from "@/components/global/toast/toastPlaceHolder";
+import { ModalPlaceholder } from "@/components/global/modal/modalPlaceHolder";
 import { PrivateRouteLayout } from "@/components/global/layout/privateRouteLayout";
 import { INTERNAL_URL } from "@/constants/url";
 import { ErrorBoundary } from "@/components/global/errorBoundary";
@@ -69,7 +70,9 @@ function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
             {getLayout(<Component {...pageProps} />)}
           </PrivateRouteLayout>
           <ToastPlaceholder />
+          <ModalPlaceholder />
         </ErrorBoundary>
+        <ToastPlaceholder />
         <ReactQueryDevtools initialIsOpen={false} />
       </Hydrate>
     </QueryClientProvider>

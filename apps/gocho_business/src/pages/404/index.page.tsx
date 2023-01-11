@@ -8,6 +8,7 @@ import { NextPageWithLayout } from "@/pages/_app.page";
 import { Footer, GlobalLayout } from "@/components/global/layout";
 
 import { cssObj } from "./style";
+import { PageHead } from "./pageHead";
 
 const NotFoundPage: NextPageWithLayout = () => (
   <main css={cssObj.container}>
@@ -24,9 +25,12 @@ const NotFoundPage: NextPageWithLayout = () => (
 );
 
 NotFoundPage.getLayout = (page: ReactElement) => (
-  <GlobalLayout>
-    {page}
-    <Footer />
-  </GlobalLayout>
+  <>
+    <PageHead />
+    <GlobalLayout>
+      {page}
+      <Footer />
+    </GlobalLayout>
+  </>
 );
 export default NotFoundPage;
