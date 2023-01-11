@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 const JdEditPage: NextPage = () => {
   const router = useRouter();
+
   return (
     <main>
       <p>{router.query.jdId}</p>

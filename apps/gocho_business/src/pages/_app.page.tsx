@@ -12,6 +12,7 @@ import { useAxiosInterceptor } from "@/apis/useIsRefreshLock";
 import { ToastPlaceholder } from "@/components/global/toast/toastPlaceHolder";
 import { PrivateRouteLayout } from "@/components/global/layout/privateRouteLayout";
 import { INTERNAL_URL } from "@/constants/url";
+import { ErrorBoundary } from "@/components/global/errorBoundary";
 
 export type NextPageWithLayout<P = Record<string, never>, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -63,10 +64,12 @@ function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <Global styles={globalStyle} />
-        <PrivateRouteLayout protectedRoutes={protectedRoutes}>
-          {getLayout(<Component {...pageProps} />)}
-        </PrivateRouteLayout>
-        <ToastPlaceholder />
+        <ErrorBoundary>
+          <PrivateRouteLayout protectedRoutes={protectedRoutes}>
+            {getLayout(<Component {...pageProps} />)}
+          </PrivateRouteLayout>
+          <ToastPlaceholder />
+        </ErrorBoundary>
         <ReactQueryDevtools initialIsOpen={false} />
       </Hydrate>
     </QueryClientProvider>
