@@ -11,6 +11,7 @@ import { useAxiosInterceptor } from "@/apis/useIsRefreshLock";
 import { ToastPlaceholder } from "@/components/global/toast/toastPlaceHolder";
 import { ModalPlaceholder } from "@/components/global/modal/modalPlaceHolder";
 import { PrivateRouteLayout } from "@/components/global/layout/privateRouteLayout";
+import { ErrorBoundary } from "@/components/global/errorBoundary";
 
 import { AppPropsWithLayout } from "./index/type";
 import { PROTECTED_ROUTE_ARR } from "./index/constant";
@@ -66,11 +67,13 @@ function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <Global styles={globalStyle} />
-        <PrivateRouteLayout protectedRoutes={PROTECTED_ROUTE_ARR}>
-          {getLayout(<Component {...pageProps} />)}
-        </PrivateRouteLayout>
-        <ModalPlaceholder />
-        <ToastPlaceholder />
+        <ErrorBoundary>
+          <PrivateRouteLayout protectedRoutes={PROTECTED_ROUTE_ARR}>
+            {getLayout(<Component {...pageProps} />)}
+          </PrivateRouteLayout>
+          <ModalPlaceholder />
+          <ToastPlaceholder />
+        </ErrorBoundary>
         <ReactQueryDevtools initialIsOpen={false} />
       </Hydrate>
     </QueryClientProvider>
