@@ -26,14 +26,14 @@ test("로그인 체크 및 로그인 이후 로그인페이지 블로킹", async
 });
 
 test("정보가 틀렸을 때", async ({ page }) => {
-  await page.getByPlaceholder("아이디(이메일)").fill("");
   await page.getByPlaceholder("비밀번호").fill("deeple1!");
-  await page.getByRole("button", { name: "로그인" }).click();
+  await page.getByPlaceholder("아이디(이메일)").fill("");
+  await page.getByPlaceholder("아이디(이메일)").blur();
   await expect(page.getByText("이메일을 입력해주세요.")).toBeVisible();
 
   await page.getByPlaceholder("아이디(이메일)").fill("vi@deeplehr.com");
   await page.getByPlaceholder("비밀번호").fill("");
-  await page.getByRole("button", { name: "로그인" }).click();
+  await page.getByPlaceholder("비밀번호").blur();
   await expect(page.getByText("비밀번호를 입력해주세요.")).toBeVisible();
 
   await page.getByPlaceholder("아이디(이메일)").fill("noId@deeplehr.com");
