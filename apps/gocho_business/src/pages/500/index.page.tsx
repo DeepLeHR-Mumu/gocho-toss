@@ -10,7 +10,7 @@ import { Footer, GlobalLayout } from "@/components/global/layout";
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
-const NotFoundPage: NextPageWithLayout = () => (
+const UnknwonErrorPage: NextPageWithLayout = () => (
   <main css={cssObj.container}>
     <InvisibleH2 title="없는 페이지" />
     <div css={cssObj.jobiImage}>
@@ -23,7 +23,7 @@ const NotFoundPage: NextPageWithLayout = () => (
   </main>
 );
 
-NotFoundPage.getLayout = (page: ReactElement) => (
+UnknwonErrorPage.getLayout = (page: ReactElement) => (
   <>
     <PageHead />
     <GlobalLayout>
@@ -32,4 +32,4 @@ NotFoundPage.getLayout = (page: ReactElement) => (
     </GlobalLayout>
   </>
 );
-export default NotFoundPage;
+export default UnknwonErrorPage;
