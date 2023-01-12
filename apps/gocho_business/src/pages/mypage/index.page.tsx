@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 
 import { Footer, GlobalLayout, PageLayout } from "@/components/global/layout";
 
-import { NextPageWithLayout } from "../_app.page";
+import { NextPageWithLayout } from "@/pages/index/type";
 import { PageHead } from "./pageHead";
 import { HeaderPart } from "./part/headerPart";
 import { EditPart } from "./part/editPart";

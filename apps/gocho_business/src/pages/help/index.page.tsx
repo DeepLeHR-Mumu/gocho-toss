@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import Image from "next/image";
 
-import type { NextPageWithLayout } from "@/pages/_app.page";
+import { NextPageWithLayout } from "@/pages/index/type";
 import { GlobalLayout, Footer } from "@/components/global/layout";
 import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 import chatIcon from "@/public/image/help/chat.svg";

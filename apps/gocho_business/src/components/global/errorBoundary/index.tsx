@@ -1,4 +1,4 @@
-import { Component, ReactNode } from "react";
+import { Component } from "react";
 import Image from "next/image";
 
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
@@ -9,17 +9,10 @@ import jobi_500 from "@/public/image/jobi_500.svg";
 import { INTERNAL_URL } from "@/constants/url";
 
 import { cssObj } from "./style";
+import { PropsDef, StateDef } from "./type";
 
-interface Props {
-  children?: ReactNode;
-}
-
-interface State {
-  hasError: boolean;
-}
-
-export class ErrorBoundary extends Component<Props, State> {
-  constructor(props: Props) {
+export class ErrorBoundary extends Component<PropsDef, StateDef> {
+  constructor(props: PropsDef) {
     super(props);
     this.state = { hasError: false };
   }

@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-import type { NextPageWithLayout } from "@/pages/_app.page";
+import type { NextPageWithLayout } from "@/pages/index/type";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
 
 const JdUploadPage: NextPageWithLayout = () => (

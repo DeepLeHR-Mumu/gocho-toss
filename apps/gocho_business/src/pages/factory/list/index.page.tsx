@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useState } from "react";
 
-import type { NextPageWithLayout } from "@/pages/_app.page";
+import { NextPageWithLayout } from "@/pages/index/type";
 import { PageLayout, GlobalLayout, Footer } from "@/components/global/layout";
 import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 
