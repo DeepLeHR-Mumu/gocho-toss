@@ -101,4 +101,16 @@ export const cssObj = {
     background-color: ${COLORS.GRAY65};
     height: 3rem;
   `,
+  submitButton: (isActive: boolean) => css`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ${isActive ? COLORS.BLUE_FIRST40 : COLORS.GRAY65};
+    color: ${COLORS.GRAY100};
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 1rem 0;
+  `,
 };

@@ -4,7 +4,6 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import colorLogo from "shared-image/global/deepLeLogo/logoIconColor.svg";
 import monoLogo from "shared-image/global/deepLeLogo/logoIconMono.svg";
-import { SharedBoxLink } from "shared-ui/business/sharedBoxLink";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
@@ -50,11 +49,12 @@ export const TopBar: FunctionComponent = () => {
           radius="round"
         />
       ) : (
-        <SharedBoxLink
-          text="기업회원 가입하기"
-          colorVariation="lightGray"
-          externalUrl="https://docs.google.com/forms/d/e/1FAIpQLSfYgeAv0BREQSPEtgjHO6-1rHh-srF3EDnRHAWL2e2g1PL_Pw/viewform"
-        />
+        <a
+          css={cssObj.linkButton}
+          href="https://docs.google.com/forms/d/e/1FAIpQLSfYgeAv0BREQSPEtgjHO6-1rHh-srF3EDnRHAWL2e2g1PL_Pw/viewform"
+        >
+          기업회원 가입하기
+        </a>
       )}
     </header>
   );
