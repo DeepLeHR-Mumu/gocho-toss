@@ -5,7 +5,8 @@ export const cssObj = {
   container: css`
     display: flex;
     align-items: center;
-    height: 2.25rem;
+    height: 2rem;
+    font-size: 0.875rem;
     border-radius: 2rem;
     background-color: ${COLORS.GRAY30};
     width: fit-content;

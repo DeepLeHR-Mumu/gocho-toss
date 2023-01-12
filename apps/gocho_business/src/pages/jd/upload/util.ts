@@ -17,7 +17,6 @@ function validate(
   allValues: JobFormValues
 ) {
   // Perform a custom validation depending on field name
-
   const positionIndex = Number(name.split(".")[1]);
 
   const singleInputName = ["title", "start_time", "end_time", "apply_url", "task_main", "place.etc"];
@@ -34,10 +33,25 @@ function validate(
   }
 
   if (fieldArrayName.some((element) => name.includes(element)) && value === "") {
+    const errorField = fieldArrayName.find((element) => element.includes(name));
+    if (errorField) {
+      return {
+        ...errors,
+        [errorField]: {
+          type: "required",
+          message: "추가한 모든 칸이 채워져야 합니다",
+        },
+        [name]: {
+          type: "asdf",
+          message: "추가한 모든 칸이 채워져야 합니다",
+        },
+      };
+    }
+
     return {
       ...errors,
       [name]: {
-        type: "required",
+        type: "asdf",
         message: "추가한 모든 칸이 채워져야 합니다",
       },
     };
@@ -73,7 +87,7 @@ function validate(
       ...errors,
       [name]: {
         type: "required",
-        message: "채용 인원은 필수 입력 사항입니다",
+        message: "전환률은 필수 입력 사항입니다",
       },
     };
   }
