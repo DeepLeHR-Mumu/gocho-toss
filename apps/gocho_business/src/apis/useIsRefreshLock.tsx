@@ -88,7 +88,6 @@ export const useAxiosInterceptor = () => {
   const requestErrorHandler = async (error: AxiosError) => Promise.reject(error);
 
   const responseConfigHandler = (response: AxiosResponse) => response;
-
   const responseErrorHandler = async (error: AxiosError<ErrorResponseDef>) => {
     const { config } = error;
     const originalRequest = config;
