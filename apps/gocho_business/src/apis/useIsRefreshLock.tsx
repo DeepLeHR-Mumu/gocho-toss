@@ -94,6 +94,7 @@ export const useAxiosInterceptor = () => {
     const originalRequest = config;
 
     const errorStatus = {
+      status: error.response?.data.status,
       errorCode: error.response?.data.error_code,
       errorMsg: error.response?.data.error_message,
       path: error.response?.data.path,
@@ -109,14 +110,15 @@ export const useAxiosInterceptor = () => {
     }
 
     isLock = true;
-    const newAccessToken = await getRefreshTokenCreator();
 
-    if (newAccessToken && errorStatus.errorCode === "EXPIRED_JWT") {
-      if (originalRequest.headers) originalRequest.headers["x-access-token"] = newAccessToken;
+    if (errorStatus.errorCode === "EXPIRED_JWT") {
+      const newAccessToken = await getRefreshTokenCreator();
+
+      if (originalRequest.headers) originalRequest.headers["x-access-token"] = newAccessToken as string;
       return axiosInstance(originalRequest);
     }
 
-    if (errorStatus.errorCode === "MALFORMED_JWT") {
+    if (errorStatus.errorCode === "MALFORMED_JWT" && errorStatus.status === 401) {
       setCurrentModal("loginModal");
       return null;
     }
