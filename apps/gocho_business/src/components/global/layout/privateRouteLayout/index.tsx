@@ -20,21 +20,6 @@ export const PrivateRouteLayout: FunctionComponent<PrivateRouteProps> = ({ prote
     }
   }, [isLoading, isPathProtected, isSuccess, router]);
 
-  useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      if (url === INTERNAL_URL.LOGIN && !isLoading && isSuccess) {
-        router.events.emit("routeChangeError");
-        // eslint-disable-next-line no-throw-literal
-        throw true;
-      }
-    };
-
-    router.events.on("routeChangeStart", handleRouteChange);
-    return () => {
-      router.events.off("routeChangeStart", handleRouteChange);
-    };
-  }, [isLoading, isSuccess, router]);
-
   if ((isLoading || !isSuccess) && isPathProtected) {
     return <div css={cssObj.loadingBox} />;
   }
