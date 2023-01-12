@@ -280,17 +280,17 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                   {...jobForm.register(`position_arr.${positionIndex}.required_etc_arr.${index}.value`, {
                     required: true,
                     maxLength: 70,
+                    onBlur: () => {
+                      setRequiredEtcIsFocusedArr((prev) =>
+                        prev.map((stateItem, stateIndex) => {
+                          if (stateIndex === index) {
+                            return false;
+                          }
+                          return stateItem;
+                        })
+                      );
+                    },
                   })}
-                  onBlur={() => {
-                    setRequiredEtcIsFocusedArr((prev) =>
-                      prev.map((stateItem, stateIndex) => {
-                        if (stateIndex === index) {
-                          return false;
-                        }
-                        return stateItem;
-                      })
-                    );
-                  }}
                 />
                 <button
                   type="button"

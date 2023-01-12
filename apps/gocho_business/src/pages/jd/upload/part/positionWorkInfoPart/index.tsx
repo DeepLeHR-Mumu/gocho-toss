@@ -387,17 +387,17 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   {...jobForm.register(`position_arr.${positionIndex}.pay_arr.${index}.value`, {
                     required: true,
                     maxLength: 70,
+                    onBlur: () => {
+                      setPayIsFocusedArr((prev) =>
+                        prev.map((stateItem, stateIndex) => {
+                          if (stateIndex === index) {
+                            return false;
+                          }
+                          return stateItem;
+                        })
+                      );
+                    },
                   })}
-                  onBlur={() => {
-                    setPayIsFocusedArr((prev) =>
-                      prev.map((stateItem, stateIndex) => {
-                        if (stateIndex === index) {
-                          return false;
-                        }
-                        return stateItem;
-                      })
-                    );
-                  }}
                 />
                 <button
                   type="button"
@@ -525,17 +525,17 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   }}
                   {...jobForm.register(`position_arr.${positionIndex}.preferred_etc_arr.${index}.value`, {
                     maxLength: 70,
+                    onBlur: () => {
+                      setPreferredEtcIsFocusedArr((prev) =>
+                        prev.map((stateItem, stateIndex) => {
+                          if (stateIndex === index) {
+                            return false;
+                          }
+                          return stateItem;
+                        })
+                      );
+                    },
                   })}
-                  onBlur={() => {
-                    setPreferredEtcIsFocusedArr((prev) =>
-                      prev.map((stateItem, stateIndex) => {
-                        if (stateIndex === index) {
-                          return false;
-                        }
-                        return stateItem;
-                      })
-                    );
-                  }}
                 />
                 <button
                   type="button"

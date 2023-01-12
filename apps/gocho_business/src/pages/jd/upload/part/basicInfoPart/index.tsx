@@ -135,17 +135,20 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                         })
                       );
                     }}
-                    {...jobForm.register(`process_arr.${index}.value`, { required: true, maxLength: 20 })}
-                    onBlur={() => {
-                      setProcessIsFocusedArr((prev) =>
-                        prev.map((stateItem, stateIndex) => {
-                          if (stateIndex === index) {
-                            return false;
-                          }
-                          return stateItem;
-                        })
-                      );
-                    }}
+                    {...jobForm.register(`process_arr.${index}.value`, {
+                      required: true,
+                      maxLength: 20,
+                      onBlur: () => {
+                        setProcessIsFocusedArr((prev) =>
+                          prev.map((stateItem, stateIndex) => {
+                            if (stateIndex === index) {
+                              return false;
+                            }
+                            return stateItem;
+                          })
+                        );
+                      },
+                    })}
                   />
                   <button
                     type="button"
@@ -214,17 +217,20 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                       })
                     );
                   }}
-                  {...jobForm.register(`apply_route_arr.${index}.value`, { required: true, maxLength: 30 })}
-                  onBlur={() => {
-                    setApplyRouteIsFocusedArr((prev) =>
-                      prev.map((stateItem, stateIndex) => {
-                        if (stateIndex === index) {
-                          return false;
-                        }
-                        return stateItem;
-                      })
-                    );
-                  }}
+                  {...jobForm.register(`apply_route_arr.${index}.value`, {
+                    required: true,
+                    maxLength: 30,
+                    onBlur: () => {
+                      setApplyRouteIsFocusedArr((prev) =>
+                        prev.map((stateItem, stateIndex) => {
+                          if (stateIndex === index) {
+                            return false;
+                          }
+                          return stateItem;
+                        })
+                      );
+                    },
+                  })}
                 />
                 <button
                   type="button"
