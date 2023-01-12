@@ -25,9 +25,9 @@ export const TopBar: FunctionComponent = () => {
     postLogout(undefined, {
       onSuccess: () => {
         tokenService.removeAllToken();
-        router.push(INTERNAL_URL.LOGIN);
         setUserInfoData(null);
         queryClient.invalidateQueries();
+        router.push(INTERNAL_URL.LOGIN);
       },
     });
   };

@@ -15,6 +15,9 @@ export const PrivateRouteLayout: FunctionComponent<PrivateRouteProps> = ({ prote
 
   useEffect(() => {
     const token = tokenService.getAccessToken();
+    if (router.pathname === INTERNAL_URL.LOGIN) {
+      return;
+    }
     if (!isLoading && !isSuccess && isPathProtected && !token) {
       router.push(INTERNAL_URL.LOGIN);
     }

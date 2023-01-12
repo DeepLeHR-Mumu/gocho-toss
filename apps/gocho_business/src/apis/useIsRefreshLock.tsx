@@ -1,11 +1,8 @@
-import { useRouter } from "next/router";
 import { useEffect } from "react";
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
 import { BUSINESS_BACKEND_URL } from "shared-constant/externalURL";
 import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
-
-import { INTERNAL_URL } from "@/constants/url";
 
 import { tokenService } from "@/utils/tokenService";
 import { ErrorResponseDef } from "@/types/errorType";
@@ -22,7 +19,6 @@ export const axiosInstance = axios.create({
 });
 
 export const useAxiosInterceptor = () => {
-  const router = useRouter();
   let isLock = false;
   let readyQueueArr: ((token: string) => void)[] = [];
   const { setCurrentModal } = useModal();
@@ -54,19 +50,11 @@ export const useAxiosInterceptor = () => {
     return undefined;
   };
 
-  const goToLoginPage = () => {
-    tokenService.removeAllToken();
-    router.push(INTERNAL_URL.LOGIN);
-  };
-
   const requestConfigHandler = async (config: AxiosRequestConfig) => {
     const accessToken = tokenService.getAccessToken();
     const refreshToken = tokenService.getRefreshToken();
 
-    if (!accessToken || !refreshToken) {
-      goToLoginPage();
-      return null;
-    }
+    if (!accessToken || !refreshToken) return null;
 
     const { exp: refreshTokenExp } = managerTokenDecryptor(refreshToken);
     const refreshCreateTime = new Date(Number(refreshTokenExp) * 1000).getTime();
@@ -88,6 +76,7 @@ export const useAxiosInterceptor = () => {
   const requestErrorHandler = async (error: AxiosError) => Promise.reject(error);
 
   const responseConfigHandler = (response: AxiosResponse) => response;
+
   const responseErrorHandler = async (error: AxiosError<ErrorResponseDef>) => {
     const { config } = error;
     const originalRequest = config;
@@ -118,6 +107,7 @@ export const useAxiosInterceptor = () => {
     }
 
     if (errorStatus.errorCode === "MALFORMED_JWT" && errorStatus.status === 401) {
+      tokenService.removeAllToken();
       setCurrentModal("loginModal");
       return null;
     }
