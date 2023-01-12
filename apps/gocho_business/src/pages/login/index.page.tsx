@@ -9,10 +9,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
-import { SharedButton } from "shared-ui/business/sharedButton";
 import gochoColorSrc from "shared-image/global/deepLeLogo/logoIconColor.svg";
 
-import { COLORS } from "shared-style/color";
 import { useModal } from "@/globalStates/useModal";
 import { INTERNAL_URL } from "@/constants/url";
 import { useUserState } from "@/globalStates/useUserState";
@@ -35,9 +33,10 @@ const LoginPage: NextPage = () => {
   const { setCurrentModal } = useModal();
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormValues>({ mode: "onChange" });
+  } = useForm<LoginFormValues>({ mode: "onBlur" });
 
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     postLogin(loginObj, {
@@ -67,6 +66,8 @@ const LoginPage: NextPage = () => {
     });
   };
 
+  const isEmail = Boolean(watch("email"));
+  const isPassword = Boolean(watch("password"));
   return (
     <>
       <PageHead />
@@ -129,15 +130,9 @@ const LoginPage: NextPage = () => {
             </div>
             <p css={cssObj.errorMsg}>{errors.email?.message || errors.password?.message || errorMsg}</p>
 
-            <SharedButton
-              onClickHandler="submit"
-              text="로그인"
-              fontColor={COLORS.GRAY100}
-              backgroundColor={COLORS.GRAY65}
-              radius="round"
-              isFullWidth
-              size="medium"
-            />
+            <button type="submit" css={cssObj.submitButton(isEmail && isPassword)} disabled={!isEmail || !isPassword}>
+              로그인
+            </button>
           </form>
         </div>
       </main>
