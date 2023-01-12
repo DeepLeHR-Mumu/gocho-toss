@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 
-import type { NextPageWithLayout } from "@/pages/_app.page";
-import { PageLayout, GlobalLayout } from "@/components/global/layout";
+import { NextPageWithLayout } from "@/pages/index/type";
+import { GlobalLayout, PageLayout } from "@/components/global/layout";
 import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 
 import { ListPart } from "./part/listPart";

@@ -13,7 +13,7 @@ import { CommonStatusChip } from "@/components/common";
 import { useUserState } from "@/globalStates/useUserState";
 import { useToast } from "@/globalStates/useToast";
 import { PageLayout, GlobalLayout, Footer } from "@/components/global/layout";
-import { NextPageWithLayout } from "@/pages/_app.page";
+import { NextPageWithLayout } from "@/pages/index/type";
 
 import { PageHead } from "./pageHead";
 import { BasicPart } from "./part/basicPart";
