@@ -7,7 +7,12 @@ import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
 import { useAddCompanyDetail } from "@/apis/company/useAddCompany";
-import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
+import {
+  useCompanyDetail,
+  useCompanyDetail2,
+  useCompanyDetail3,
+  useCompanyDetail4,
+} from "@/apis/company/useCompanyDetail";
 import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 import { CommonStatusChip } from "@/components/common";
 import { useUserState } from "@/globalStates/useUserState";
@@ -28,11 +33,23 @@ const CompanyEditPage: NextPageWithLayout = () => {
   const { data: companyData } = useCompanyDetail({
     companyId: userInfoData?.companyId,
   });
+  const { data: companyData2 } = useCompanyDetail2({
+    companyId: userInfoData?.companyId,
+  });
+  const { data: companyData3 } = useCompanyDetail3({
+    companyId: userInfoData?.companyId,
+  });
+  const { data: companyData4 } = useCompanyDetail4({
+    companyId: userInfoData?.companyId,
+  });
+
   const { mutate: putCompanyDetail } = useAddCompanyDetail();
 
   const companyForm = useForm<PostSubmitValues>({
     mode: "onBlur",
   });
+
+  console.log(companyData2, companyData3, companyData4);
 
   const {
     handleSubmit,
