@@ -3,11 +3,9 @@ import { FUNNEL } from "../constant";
 
 export const myPageFunnelEvent = () => {
   const funnel = sessionStorage.getItem("funnel");
-  if (funnel === FUNNEL.MYPAGE) {
+  if (funnel === FUNNEL.MAIN_PAGE) {
     return;
   }
-  sessionStorage.setItem("funnel", FUNNEL.MYPAGE);
   ReactGA.event("enter_mypage", { prev: funnel });
+  sessionStorage.setItem("funnel", FUNNEL.MAIN_PAGE);
 };
-
-

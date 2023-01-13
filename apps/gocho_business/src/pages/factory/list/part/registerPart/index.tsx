@@ -16,8 +16,13 @@ import { defaultInput, FACTORY_MESSSAGE_OBJ } from "./constant";
 
 export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingIndex, setEditingIndex }) => {
   const formObj = useForm<FactoryRegisterDef>();
-  const { handleSubmit, watch, reset } = formObj;
-  
+  const {
+    handleSubmit,
+    watch,
+    reset,
+    // formState: { submitCount },
+  } = formObj;
+
   const { data: factoryDataArr } = useFactoryArr();
   const { mutate: addFactoryMutation } = useAddFactory();
 
@@ -73,15 +78,15 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingInde
         <div css={cssObj.buttonCenterContainer}>
           {editingIndex === null ? (
             <div css={cssObj.suibmitButtonContainer} key="factoryRegisterContainer">
-              <SharedButton
-                radius="round"
-                fontColor={COLORS.GRAY100}
-                backgroundColor={COLORS.BLUE_FIRST40}
-                size="xLarge"
-                text="공장 등록"
-                onClickHandler="submit"
-                iconObj={{ icon: FiPlus, location: "left" }}
-              />
+                <SharedButton
+                  radius="round"
+                  fontColor={COLORS.GRAY100}
+                  backgroundColor={COLORS.BLUE_FIRST40}
+                  size="xLarge"
+                  text="공장 등록"
+                  onClickHandler="submit"
+                  iconObj={{ icon: FiPlus, location: "left" }}
+                />
             </div>
           ) : (
             <div css={cssObj.editButtonContainer} key="factoryEditContainer">
