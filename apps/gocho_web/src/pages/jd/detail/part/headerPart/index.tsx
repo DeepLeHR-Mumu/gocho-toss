@@ -96,6 +96,7 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
                 <PositionCard
                   isDdayEnd={isDdayEnd}
                   currentPositionId={currentPositionId}
+                  currentPositionIndex={index}
                   setCurrentPositionId={() => {
                     setCurrentPositionId(index);
                   }}
