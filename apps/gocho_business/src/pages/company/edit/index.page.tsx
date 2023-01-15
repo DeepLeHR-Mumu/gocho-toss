@@ -49,7 +49,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
     mode: "onBlur",
   });
 
-  console.log(companyData2, companyData3, companyData4);
+  // console.log(companyData2, companyData3, companyData4);
 
   const {
     handleSubmit,

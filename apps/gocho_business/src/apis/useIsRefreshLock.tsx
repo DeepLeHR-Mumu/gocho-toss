@@ -20,35 +20,15 @@ export const axiosInstance = axios.create({
 
 export const useAxiosInterceptor = () => {
   let isLock = false;
-  let readyQueueArr: ((token: string) => void)[] = [];
+  let isErrorLock = false;
+  const readyQueueArr: ((token: string) => void)[] = [];
+  const saveQueue = (callback: (token: string) => void) => readyQueueArr.push(callback);
+  const activeQueue = (token: string) => readyQueueArr.forEach((callback) => callback(token));
+  const readyErrorArr: ((token: string) => void)[] = [];
+  const saveErrorQueue = (callback: (token: string) => void) => readyErrorArr.push(callback);
+  const activeErrorQueue = (token: string) => readyErrorArr.forEach((callback) => callback(token));
+
   const { setCurrentModal } = useModal();
-
-  const saveQueue = (callback: (token: string) => void) => {
-    readyQueueArr.push(callback);
-  };
-
-  const activeQueue = (token: string) => {
-    readyQueueArr.forEach((callback) => callback(token));
-  };
-
-  const getRefreshTokenCreator = async (): Promise<string | void> => {
-    try {
-      const refreshToken = tokenService.getRefreshToken();
-      const { data: newTokenData } = await axios.get(`${BUSINESS_BACKEND_URL}/auth/refresh`, {
-        headers: { "x-refresh-token": refreshToken },
-      });
-      activeQueue(newTokenData.data.access_token);
-      isLock = false;
-      readyQueueArr = [];
-      tokenService.updateAllToken(newTokenData.data.access_token, newTokenData.data.refresh_token);
-      return newTokenData.data.access_token;
-    } catch (error) {
-      isLock = false;
-      readyQueueArr = [];
-      tokenService.removeAllToken();
-    }
-    return undefined;
-  };
 
   const requestConfigHandler = async (config: AxiosRequestConfig) => {
     const accessToken = tokenService.getAccessToken();
@@ -59,6 +39,9 @@ export const useAxiosInterceptor = () => {
     const { exp: refreshTokenExp } = managerTokenDecryptor(refreshToken);
     const refreshCreateTime = new Date(Number(refreshTokenExp) * 1000).getTime();
     const currentTime = new Date().getTime();
+
+    // eslint-disable-next-line no-console
+    console.log(new Date(refreshCreateTime - currentTime).getSeconds());
 
     if (refreshCreateTime <= currentTime) {
       tokenService.removeAllToken();
@@ -88,30 +71,62 @@ export const useAxiosInterceptor = () => {
       path: error.response?.data.path,
     };
 
-    if (isLock) {
+    if (errorStatus.status === 401) {
+      console.log("401");
+
+      if (errorStatus.errorCode === "EXPIRED_JWT" && !isErrorLock) {
+        isErrorLock = true;
+      }
+
+      if (!isLock) {
+        console.log("isLock");
+        isLock = true;
+        const refreshToken = tokenService.getRefreshToken();
+        const { data: newTokenData } = await axios.get(`${BUSINESS_BACKEND_URL}/auth/refresh`, {
+          headers: { "x-refresh-token": refreshToken },
+        });
+        tokenService.updateAllToken(newTokenData.data.access_token, newTokenData.data.refresh_token);
+        isLock = false;
+        if (originalRequest.headers) originalRequest.headers["x-access-token"] = newTokenData.data.access_token;
+        console.log("엑티브 실행");
+        activeQueue(newTokenData.data.access_token);
+        // activeErrorQueue(newTokenData.data.access_token)
+      }
+
       return new Promise((resolve) => {
-        saveQueue((token) => {
-          if (originalRequest.headers) originalRequest.headers["x-access-token"] = token;
-          return resolve(axiosInstance(originalRequest));
+        console.log("last saveQueue");
+        saveQueue((accessToken) => {
+          console.log("저장함");
+          if (originalRequest.headers) originalRequest.headers["x-access-token"] = accessToken;
+          resolve(axiosInstance(originalRequest));
         });
       });
     }
 
-    isLock = true;
-
-    if (errorStatus.errorCode === "EXPIRED_JWT") {
-      const newAccessToken = await getRefreshTokenCreator();
-      if (originalRequest.headers) originalRequest.headers["x-access-token"] = newAccessToken as string;
-      return axiosInstance(originalRequest);
-    }
-
-    if (errorStatus.errorCode === "MALFORMED_JWT" && errorStatus.status === 401) {
-      tokenService.removeAllToken();
-      setCurrentModal("loginModal");
-      return null;
-    }
-
     return Promise.reject(error);
+
+    // if (isLock) {
+    //   return new Promise((resolve) => {
+    //     saveQueue((token) => {
+    //       if (originalRequest.headers) originalRequest.headers["x-access-token"] = token;
+    //       return resolve(axiosInstance(originalRequest));
+    //     });
+    //   });
+    // }
+
+    // isLock = true;
+
+    // if (errorStatus.errorCode === "EXPIRED_JWT") {
+    //   const newAccessToken = await getRefreshTokenCreator();
+    //   if (originalRequest.headers) originalRequest.headers["x-access-token"] = newAccessToken as string;
+    //   return axiosInstance(originalRequest);
+    // }
+
+    // if (errorStatus.errorCode === "MALFORMED_JWT" && errorStatus.status === 401) {
+    //   tokenService.removeAllToken();
+    //   setCurrentModal("loginModal");
+    //   return null;
+    // }
   };
 
   const requestInterceptor = axiosInstance.interceptors.request.use(
