@@ -21,6 +21,7 @@ import {
 export const PositionCard: FunctionComponent<PositionCardProps> = ({
   isDdayEnd,
   currentPositionId,
+  currentPositionIndex,
   setCurrentPositionId,
   position,
 }) => {
@@ -41,7 +42,7 @@ export const PositionCard: FunctionComponent<PositionCardProps> = ({
     );
   }
 
-  const isCurrentPosition = position.id === currentPositionId;
+  const isCurrentPosition = currentPositionIndex === currentPositionId;
   return (
     <article css={wrapper} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       <button
