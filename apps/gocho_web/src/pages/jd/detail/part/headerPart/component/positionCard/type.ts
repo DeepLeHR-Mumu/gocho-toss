@@ -1,6 +1,6 @@
-
 export interface PositionCardProps {
   isDdayEnd: boolean;
+  currentPositionIndex: number;
   currentPositionId: number;
   setCurrentPositionId(): void;
   position:

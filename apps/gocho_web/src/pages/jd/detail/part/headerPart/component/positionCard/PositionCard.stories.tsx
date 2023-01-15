@@ -10,6 +10,9 @@ export default {
     isSkeleton: {
       description: "로딩중 상태",
     },
+    currentPositionIndex: {
+      description: "현재 선택된 포지션의 index",
+    },
     position: {
       description: "카드에 사용될 position배열의 단일 obj",
     },
