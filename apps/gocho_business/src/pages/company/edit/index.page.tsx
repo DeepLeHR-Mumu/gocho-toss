@@ -34,13 +34,13 @@ const CompanyEditPage: NextPageWithLayout = () => {
     companyId: userInfoData?.companyId,
   });
   const { data: companyData2 } = useCompanyDetail2({
-    companyId: userInfoData?.companyId,
+    companyId: 896,
   });
   const { data: companyData3 } = useCompanyDetail3({
-    companyId: userInfoData?.companyId,
+    companyId: 856,
   });
   const { data: companyData4 } = useCompanyDetail4({
-    companyId: userInfoData?.companyId,
+    companyId: 321,
   });
 
   const { mutate: putCompanyDetail } = useAddCompanyDetail();
@@ -48,8 +48,6 @@ const CompanyEditPage: NextPageWithLayout = () => {
   const companyForm = useForm<PostSubmitValues>({
     mode: "onBlur",
   });
-
-  // console.log(companyData2, companyData3, companyData4);
 
   const {
     handleSubmit,

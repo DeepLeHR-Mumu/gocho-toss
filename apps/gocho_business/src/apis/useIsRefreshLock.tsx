@@ -24,21 +24,26 @@ export const useAxiosInterceptor = () => {
   const router = useRouter();
   const { setCurrentModal } = useModal();
 
-  const timeout = 55000;
+  const time = 55000;
   let isLock = false;
   let readyQueueArr: ((token: string) => void)[] = [];
   const saveQueue = (callback: (token: string) => void) => readyQueueArr.push(callback);
-  const activeQueue = (token: string) => readyQueueArr.forEach((callback) => callback(token));
+  // const activeQueue = (token: string) => readyQueueArr.map((callback) => callback(token));
 
   const getRefreshTokenCreator = async () => {
     const refreshToken = tokenService.getRefreshToken();
-    const { data: newTokenData } = await axios.get(`${BUSINESS_BACKEND_URL}/auth/refresh`, {
+    // TODO : 해당 에러에 대한 catch 잡아주기;
+    const { data: newTokenData } = await axiosNoTokenInstance.get("/auth/refresh", {
       headers: { "x-refresh-token": refreshToken },
     });
-    tokenService.updateAllToken(newTokenData.data.access_token, newTokenData.data.refresh_token);
+    const newToken = (await newTokenData.data.access_token) as string;
+    tokenService.updateAllToken(await newTokenData.data.access_token, await newTokenData.data.refresh_token);
+    // activeQueue(await newTokenData.data.access_token);
+    // readyQueue안에는 저장되어야 할 resolve함수가 있어야한느데 지금 undefinder이다
+    readyQueueArr.forEach((callback) => {
+      callback(newTokenData.data.access_token);
+    });
     isLock = false;
-    activeQueue(newTokenData.data.access_token);
-    const newToken = newTokenData.data.access_token as string;
     readyQueueArr = [];
     return { newToken };
   };
@@ -47,17 +52,12 @@ export const useAxiosInterceptor = () => {
     const accessTokenData = tokenService.getAccessToken();
     const refreshTokenData = tokenService.getRefreshToken();
     // TODO : cancel check
-    const controls = new AbortController();
+    // const controls = new AbortController();
 
     if (!accessTokenData || !refreshTokenData) {
       router.push(INTERNAL_URL.LOGIN);
-      controls.abort();
+      // controls.abort();
     }
-
-    const newConfig = config;
-    newConfig.headers = {
-      "x-access-token": accessTokenData,
-    };
 
     const { exp: accessTokenExp } = managerTokenDecryptor(accessTokenData);
     const { exp: refreshTokenExp } = managerTokenDecryptor(refreshTokenData);
@@ -72,21 +72,29 @@ export const useAxiosInterceptor = () => {
       setCurrentModal("loginModal");
     }
 
-    if (accessCreateTime - currentTime <= timeout && !isLock) {
-      isLock = true;
-      const { newToken } = await getRefreshTokenCreator();
-      newConfig.headers["x-access-token"] = newToken;
-      return newConfig;
-    }
+    if (accessCreateTime - currentTime <= time) {
+      if (!isLock) {
+        isLock = true;
+        const { newToken } = await getRefreshTokenCreator();
+        return {
+          ...config,
+          headers: {
+            "x-access-token": newToken,
+          },
+        };
+      }
 
-    if (isLock) {
-      return new Promise((resolve) => {
-        saveQueue((accessToken) => {
-          if (newConfig.headers) newConfig.headers["x-access-token"] = accessToken;
-          resolve(axiosInstance(newConfig));
-        });
+      return new Promise(() => {
+        saveQueue((accessToken) => axiosInstance({ ...config, headers: { "x-access-token": accessToken } }));
       });
     }
+
+    const newConfig = {
+      ...config,
+      headers: {
+        "x-access-token": accessTokenData,
+      },
+    };
 
     return newConfig;
   };
@@ -105,7 +113,7 @@ export const useAxiosInterceptor = () => {
 
     if (errorStatus.errorCode === "MALFORMED_JWT" && errorStatus.status === 401) {
       tokenService.removeAllToken();
-      setCurrentModal("loginModal");
+      return null;
     }
 
     return Promise.reject(error);

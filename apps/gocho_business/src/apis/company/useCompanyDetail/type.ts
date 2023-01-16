@@ -44,8 +44,23 @@ export interface ResponseObjDef {
 export const companyDetailKeyObj = {
   all: [{ data: "companyDetail" }] as const,
   detail: (requestObj: RequestObjDef) => [{ data: "companyDetail", requestObj }] as const,
+  detail2: (requestObj: RequestObjDef) => [{ data: "companyDetail2", requestObj }] as const,
+  detail3: (requestObj: RequestObjDef) => [{ data: "companyDetail3", requestObj }] as const,
+  detail4: (requestObj: RequestObjDef) => [{ data: "companyDetail4", requestObj }] as const,
 };
 
 export interface GetCompanyDetailDef {
   ({ queryKey }: QueryFunctionContext<ReturnType<typeof companyDetailKeyObj.detail>>): Promise<ResponseObjDef>;
+}
+
+export interface GetCompanyDetailDef2 {
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof companyDetailKeyObj.detail2>>): Promise<ResponseObjDef>;
+}
+
+export interface GetCompanyDetailDef3 {
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof companyDetailKeyObj.detail3>>): Promise<ResponseObjDef>;
+}
+
+export interface GetCompanyDetailDef4 {
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof companyDetailKeyObj.detail4>>): Promise<ResponseObjDef>;
 }
