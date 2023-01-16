@@ -52,7 +52,7 @@ export const cssObj = {
 
   conversionRateLabel: (value: number) => css`
     margin-top: 0.25rem;
-    margin-left: ${value < 100 ? (6.5 * value) / 100 : 0}rem;
+    margin-left: ${value <= 100 ? (6.5 * value) / 100 : 0}rem;
   `,
 
   conversionRateInputContainer: css`

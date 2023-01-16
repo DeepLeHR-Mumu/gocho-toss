@@ -20,7 +20,6 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
   control,
 }) => {
   const [requiredEtcIsFocusedArr, setRequiredEtcIsFocusedArr] = useState<boolean[]>([false]);
-  const [conversionRate, setConversionRate] = useState<number>(0);
   const [isMinYear, setIsMinYear] = useState<boolean>(false);
   const [isMaxYear, setIsMaxYear] = useState<boolean>(false);
   const [randomRequiredEtcGuideArr, setRandomRequiredEtcGuideArr] = useState<string[]>([]);
@@ -31,15 +30,11 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
   });
 
   const conversionRateHandler = (event: ChangeEvent<HTMLInputElement>, isError: boolean) => {
-    setConversionRate(Number(event.target.value));
-    jobForm.setValue(`position_arr.${positionIndex}.conversion_rate`, conversionRate);
     if (isError && Number(event.target.value) === 0) {
       jobForm.setError(`position_arr.${positionIndex}.conversion_rate`, {
         type: "required",
         message: "전환율은 필수 입력 값입니다",
       });
-    } else {
-      jobForm.clearErrors(`position_arr.${positionIndex}.conversion_rate`);
     }
   };
 
@@ -67,17 +62,20 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
     jobForm.watch("position_arr")[positionIndex].required_exp !== "경력" &&
     jobForm.watch("position_arr")[positionIndex].required_exp !== "신입/경력";
 
-  useEffect(() => {
-    if (isYearDisabled || isMinYear) {
-      jobForm.setValue(`position_arr.${positionIndex}.min_year`, null);
-    }
-  }, [isYearDisabled, isMinYear, jobForm, positionIndex]);
+  const isMinYearDisabled = isYearDisabled || isMinYear;
+  const isMaxYearDisabled = isYearDisabled || isMaxYear;
 
   useEffect(() => {
-    if (isYearDisabled || isMaxYear) {
-      jobForm.setValue(`position_arr.${positionIndex}.max_year`, null);
+    if (isMinYearDisabled) {
+      jobForm.setValue(`position_arr.${positionIndex}.min_year`, null);
+      jobForm.clearErrors(`position_arr.${positionIndex}.min_year`);
     }
-  }, [isYearDisabled, isMaxYear, jobForm, positionIndex]);
+
+    if (isMaxYearDisabled) {
+      jobForm.setValue(`position_arr.${positionIndex}.max_year`, null);
+      jobForm.clearErrors(`position_arr.${positionIndex}.max_year`);
+    }
+  }, [jobForm, positionIndex, isMinYearDisabled, isMaxYearDisabled]);
 
   return (
     <>
@@ -116,24 +114,25 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                 max="100"
                 step="5"
                 {...jobForm.register(`position_arr.${positionIndex}.conversion_rate`, {
+                  required: !isConversionDisabled,
                   disabled: isConversionDisabled,
                   onChange: (e) => conversionRateHandler(e, !isConversionDisabled),
-                  validate: (v) => v !== 0,
                 })}
               />
-              <p css={cssObj.conversionRateLabel(conversionRate)}>{conversionRate}%</p>
+              <p css={cssObj.conversionRateLabel(jobForm.watch("position_arr")[positionIndex].conversion_rate || 0)}>
+                {jobForm.watch("position_arr")[positionIndex].conversion_rate || 0}%
+              </p>
             </div>
             <div css={cssObj.conversionRateInputContainer}>
               <input
                 css={cssObj.activatableInput(isConversionDisabled)}
                 type="number"
+                min="0"
                 max="100"
-                value={conversionRate}
-                // TODO: 다 지웠을 때 0 남는 버그 해결
                 {...jobForm.register(`position_arr.${positionIndex}.conversion_rate`, {
+                  required: !isConversionDisabled,
                   disabled: isConversionDisabled,
                   onChange: (e) => conversionRateHandler(e, !isConversionDisabled),
-                  validate: (v) => v !== 0,
                 })}
               />
               %
@@ -206,12 +205,6 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                     required: true,
                   })}
                   value={expName}
-                  onClick={() => {
-                    if (expName === "신입" || expName === "경력 무관") {
-                      jobForm.clearErrors(`position_arr.${positionIndex}.min_year`);
-                      jobForm.clearErrors(`position_arr.${positionIndex}.max_year`);
-                    }
-                  }}
                 />
                 <div css={cssObj.radioBox} />
                 <p css={cssObj.radioLabel}>{expName}</p>
@@ -227,9 +220,12 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             <input
               type="number"
               min="1"
-              css={cssObj.activatableInput(isYearDisabled || isMinYear)}
-              disabled={isYearDisabled || isMinYear}
-              {...jobForm.register(`position_arr.${positionIndex}.min_year`, { valueAsNumber: true })}
+              css={cssObj.activatableInput(isMinYearDisabled)}
+              {...jobForm.register(`position_arr.${positionIndex}.min_year`, {
+                required: !isMinYearDisabled,
+                disabled: isMinYearDisabled,
+                valueAsNumber: true,
+              })}
             />
             <label htmlFor="isMinYear" css={cssObj.toggleSwitch(isMinYear, isYearDisabled)}>
               <input
@@ -249,8 +245,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             <p>무관</p>
           </div>
           <p css={cssObj.errorMessage}>
-            {!!jobForm.formState.errors.position_arr?.[positionIndex]?.min_year &&
-              `${jobForm.formState.errors.position_arr?.[positionIndex]?.min_year?.message}`}
+            {!!jobForm.formState.errors.position_arr?.[positionIndex]?.min_year && "최소 경력은 필수 입력 사항입니다"}
           </p>
         </div>
         <div css={cssObj.container}>
@@ -260,9 +255,12 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           <div css={cssObj.yearInputContainer}>
             <input
               type="number"
-              css={cssObj.activatableInput(isYearDisabled || isMaxYear)}
-              disabled={isYearDisabled || isMaxYear}
-              {...jobForm.register(`position_arr.${positionIndex}.max_year`, { valueAsNumber: true })}
+              css={cssObj.activatableInput(isMaxYearDisabled)}
+              {...jobForm.register(`position_arr.${positionIndex}.max_year`, {
+                required: !isMaxYearDisabled,
+                disabled: isMaxYearDisabled,
+                valueAsNumber: true,
+              })}
             />
             <label htmlFor="isMaxYear" css={cssObj.toggleSwitch(isMaxYear, isYearDisabled)}>
               <input
@@ -282,8 +280,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             <p>무관</p>
           </div>
           <p css={cssObj.errorMessage}>
-            {!!jobForm.formState.errors.position_arr?.[positionIndex]?.max_year &&
-              `${jobForm.formState.errors.position_arr?.[positionIndex]?.max_year?.message}`}
+            {!!jobForm.formState.errors.position_arr?.[positionIndex]?.max_year && "최대 경력은 필수 입력 사항입니다"}
           </p>
         </div>
       </div>
