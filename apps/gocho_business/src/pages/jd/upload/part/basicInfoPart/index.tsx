@@ -11,7 +11,7 @@ import { SharedBoxLink } from "shared-ui/business/sharedBoxLink";
 import { GuideChip } from "@/pages/jd/upload/component/guideChip";
 
 import { BasicInfoPartProps } from "./type";
-import { processGuideArr, applyRouteGuideArr } from "./constant";
+import { processGuideArr, applyRouteGuideArr, applyExternalLinkArr } from "./constant";
 import { cssObj } from "./style";
 
 export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
@@ -20,28 +20,14 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
   applyRouteArr,
   etcArr,
 }) => {
-  const [processIsFocusedArr, setProcessIsFocusedArr] = useState<boolean[]>([
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [processIsFocusedArr, setProcessIsFocusedArr] = useState<boolean[]>(new Array(8).fill(false));
   const [applyRouteIsFocusedArr, setApplyRouteIsFocusedArr] = useState<boolean[]>([false]);
   const [isAlways, setIsAlways] = useState<boolean>(false);
   const [linkType, setLinkType] = useState<"website" | "email">("website");
   const [randomApplyRouteGuideArr, setRandomApplyRouteGuideArr] = useState<string[]>([]);
 
   const alwaysButtonClickHandler = () => {
-    if (isAlways) {
-      jobForm.setValue(`end_time`, "");
-    } else {
-      jobForm.setValue(`end_time`, "9999-12-31T23:59");
-    }
-
+    jobForm.setValue(`end_time`, isAlways ? "" : "9999-12-31T23:59");
     setIsAlways((prev) => !prev);
   };
 
@@ -93,8 +79,9 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
           {...jobForm.register("title", { required: true, maxLength: 50 })}
         />
         <p css={cssObj.errorMessage}>
-          {jobForm.formState.errors.title?.type === "required" && "공고 제목은 필수 입력 사항입니다"}
-          {jobForm.formState.errors.title?.type === "maxLength" && "공고 제목의 최대 길이는 50자입니다"}
+          {jobForm.formState.errors.title?.type === "required"
+            ? "공고 제목은 필수 입력 사항입니다"
+            : "공고 제목의 최대 길이는 50자입니다"}
         </p>
       </div>
       <div css={cssObj.dateInputContainer}>
@@ -370,21 +357,14 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               <p css={cssObj.errorMessage}>{!!jobForm.formState.errors.apply_url && "링크는 필수 입력 사항입니다"}</p>
               <div css={cssObj.linkButtonContainer}>
                 <p>링크 복사하러 가기</p>
-                <SharedBoxLink
-                  colorVariation="gray"
-                  text="잡코리아"
-                  externalUrl="https://www.jobkorea.co.kr/Corp/Index"
-                />
-                <SharedBoxLink
-                  colorVariation="gray"
-                  text="사람인"
-                  externalUrl="https://www.saramin.co.kr/zf_user/auth?ut=c"
-                />
-                <SharedBoxLink
-                  colorVariation="gray"
-                  text="워크넷"
-                  externalUrl="https://www.work.go.kr/member/bodyLogin.do?redirectEncodeYn=Y&redirectUrl=L2NvTWVtYmVyU3J2L3dhbnRlZEluZm9BZG1pbi93YW50ZWRBZG1pbi5kbz9wYWdlSW5kZXg9MQ=="
-                />
+                {applyExternalLinkArr.map((linkObj) => (
+                  <SharedBoxLink
+                    key={`${linkObj.url}`}
+                    colorVariation="gray"
+                    text={linkObj.text}
+                    externalUrl={linkObj.url}
+                  />
+                ))}
               </div>
             </div>
           ) : (

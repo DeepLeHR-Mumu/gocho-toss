@@ -66,6 +66,7 @@ export const cssObj = {
     justify-content: center;
     width: 20rem;
     height: 2.5rem;
+    margin-bottom: 0.75rem;
     text-align: center;
     background-color: ${COLORS.GRAY70};
     color: ${COLORS.GRAY30};
