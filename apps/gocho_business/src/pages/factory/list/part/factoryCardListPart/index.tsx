@@ -11,11 +11,11 @@ import { SharedButton } from "shared-ui/business/sharedButton";
 import { useDeleteFactory } from "@/apis/factory/useDeleteFactory";
 import { useFactoryArr } from "@/apis/factory/useFactoryArr";
 import { CommonInfoBox, CommonStatusChip } from "@/components/common";
+import { factoryDeleteConfirmEvent, factoryDeleteDoneEvent } from "@/ga/factoryList";
 
 import { cssObj } from "./style";
 import { FactoryCardListPartProps } from "./type";
 import { FACTORY_MESSSAGE_OBJ } from "../registerPart/constant";
-import { factoryDeleteConfirmEvent, factoryDeleteDoneEvent } from "@/ga/factoryList";
 
 export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = ({
   setEditingIndex,
