@@ -55,6 +55,12 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
     }
   };
 
+  const hireNumberClickHandler = (value: number, label: string) => {
+    jobForm.setValue(`position_arr.${positionIndex}.hire_number`, value);
+    jobForm.trigger(`position_arr.${positionIndex}.hire_number`);
+    setHireNumberLabel(label);
+  };
+
   const subTaskTextMaker = (selectedSubTask: string[]) => {
     if (selectedSubTask.length === 0) return "2차직무 선택";
     return selectedSubTask.join(", ");
@@ -152,10 +158,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 type="button"
                 onClick={() => {
                   if (isMainTaskOpen && jobForm.watch("position_arr")[positionIndex].task_main === "") {
-                    jobForm.setError(`position_arr.${positionIndex}.task_main`, {
-                      type: "required",
-                      message: "no main task",
-                    });
+                    jobForm.setError(`position_arr.${positionIndex}.task_main`, { type: "required" });
                   }
                   setIsMainTaskOpen((prev) => !prev);
                 }}
@@ -271,37 +274,13 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
               채용 인원
             </p>
             <div css={cssObj.hireNumberContainer}>
-              <button
-                type="button"
-                css={cssObj.hireNumberButton}
-                onClick={() => {
-                  jobForm.setValue(`position_arr.${positionIndex}.hire_number`, -1);
-                  jobForm.trigger(`position_arr.${positionIndex}.hire_number`);
-                  setHireNumberLabel("0");
-                }}
-              >
+              <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-1, "0")}>
                 0명
               </button>
-              <button
-                type="button"
-                css={cssObj.hireNumberButton}
-                onClick={() => {
-                  jobForm.setValue(`position_arr.${positionIndex}.hire_number`, -2);
-                  jobForm.trigger(`position_arr.${positionIndex}.hire_number`);
-                  setHireNumberLabel("00");
-                }}
-              >
+              <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-2, "00")}>
                 00명
               </button>
-              <button
-                type="button"
-                css={cssObj.hireNumberButton}
-                onClick={() => {
-                  jobForm.setValue(`position_arr.${positionIndex}.hire_number`, -3);
-                  jobForm.trigger(`position_arr.${positionIndex}.hire_number`);
-                  setHireNumberLabel("000");
-                }}
-              >
+              <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-3, "000")}>
                 000명
               </button>
               <div css={cssObj.hireNumberInputContainer}>
@@ -335,8 +314,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
               </div>
             </div>
             <p css={cssObj.errorMessage}>
-              {jobForm.formState.errors.position_arr?.[positionIndex]?.hire_number &&
-                jobForm.formState.errors.position_arr?.[positionIndex]?.hire_number?.message}
+              {jobForm.formState.errors.position_arr?.[positionIndex]?.hire_number && "채용 인원은 필수 입력 값입니다"}
             </p>
           </div>
         </>

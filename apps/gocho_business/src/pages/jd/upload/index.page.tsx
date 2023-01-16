@@ -26,7 +26,6 @@ const JdUploadPage: NextPageWithLayout = () => {
   const jobForm = useForm<JobFormValues>({
     mode: "onBlur",
     reValidateMode: "onChange",
-    // resolver: customResolver,
     defaultValues: {
       process_arr: [{ value: "" }, { value: "" }],
       apply_route_arr: [{ value: "" }],
