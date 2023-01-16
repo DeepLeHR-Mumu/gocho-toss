@@ -17,10 +17,11 @@ function validate(
   allValues: JobFormValues
 ) {
   // Perform a custom validation depending on field name
-  const positionIndex = Number(name.split(".")[1]);
+  const index = Number(name.split(".")[1]);
 
   const singleInputName = ["title", "start_time", "end_time", "apply_url", "task_main", "place.etc"];
-  const fieldArrayName = ["process_arr", "apply_route_arr", "task_detail_arr", "required_etc_arr", "pay_arr"];
+  const fieldArrayName = ["process_arr", "apply_route_arr"];
+  const positionFieldArrayName = ["task_detail_arr", "required_etc_arr", "pay_arr"];
 
   if (singleInputName.some((element) => name.includes(element)) && value === "") {
     return {
@@ -33,7 +34,8 @@ function validate(
   }
 
   if (fieldArrayName.some((element) => name.includes(element)) && value === "") {
-    const errorField = fieldArrayName.find((element) => element.includes(name));
+    const errorField = fieldArrayName.find((element) => name.includes(element));
+
     if (errorField) {
       return {
         ...errors,
@@ -42,19 +44,34 @@ function validate(
           message: "추가한 모든 칸이 채워져야 합니다",
         },
         [name]: {
-          type: "asdf",
+          type: "required",
           message: "추가한 모든 칸이 채워져야 합니다",
         },
       };
     }
+  }
 
-    return {
-      ...errors,
-      [name]: {
-        type: "asdf",
-        message: "추가한 모든 칸이 채워져야 합니다",
-      },
-    };
+  if (positionFieldArrayName.some((element) => name.includes(element)) && value === "") {
+    const errorField = positionFieldArrayName.find((element) => name.includes(element));
+
+    if (errorField) {
+      return {
+        ...errors,
+        position_arr: {
+          ...errors.position_arr,
+          [`${index}`]: {
+            [`${errorField}`]: {
+              type: "required",
+              message: "추가한 모든 칸이 채워져야 합니다",
+            },
+          },
+        },
+        [name]: {
+          type: "required",
+          message: "추가한 모든 칸이 채워져야 합니다",
+        },
+      };
+    }
   }
 
   if (name === "title" && typeof value === "string" && value.length > 20) {
@@ -80,8 +97,8 @@ function validate(
   if (
     name.includes("conversion_rate") &&
     value === 0 &&
-    (allValues.position_arr[positionIndex].contract_type === "계약>정규" ||
-      allValues.position_arr[positionIndex].contract_type === "인턴")
+    (allValues.position_arr[index].contract_type === "계약>정규" ||
+      allValues.position_arr[index].contract_type === "인턴")
   ) {
     return {
       ...errors,
@@ -95,8 +112,8 @@ function validate(
   if (
     (name.includes("min_year") || name.includes("max_year")) &&
     !value &&
-    (allValues.position_arr[positionIndex].required_exp === "경력" ||
-      allValues.position_arr[positionIndex].required_exp === "신입/경력")
+    (allValues.position_arr[index].required_exp === "경력" ||
+      allValues.position_arr[index].required_exp === "신입/경력")
   ) {
     return {
       ...errors,

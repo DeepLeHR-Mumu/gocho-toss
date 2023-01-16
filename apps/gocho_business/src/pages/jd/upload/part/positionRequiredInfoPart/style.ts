@@ -127,6 +127,7 @@ export const cssObj = {
 
   desc: css`
     display: flex;
+    align-items: center;
     color: ${COLORS.GRAY35};
   `,
 

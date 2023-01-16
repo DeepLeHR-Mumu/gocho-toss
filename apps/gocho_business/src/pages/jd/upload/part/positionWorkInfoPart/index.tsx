@@ -100,6 +100,18 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
     return selectedRotation.join(", ");
   };
 
+  const payErrorMsgMaker = () => {
+    const errorArray = jobForm.formState.errors.position_arr?.[positionIndex]?.pay_arr;
+    if (errorArray) {
+      const values = Object.keys(errorArray).map((key) => errorArray?.[Number(key)]);
+      if (values.some((element) => element?.value?.type === "maxLength")) {
+        return "각 칸의 최대 입력 길이는 70자입니다";
+      }
+      return "추가한 모든 칸이 채워져야 합니다";
+    }
+    return null;
+  };
+
   useEffect(() => {
     setRandomPreferredEtcGuideArr(preferredEtcGuideArr.sort(() => Math.random() - 0.5).slice(0, 3));
   }, []);
@@ -388,6 +400,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                     required: true,
                     maxLength: 70,
                     onBlur: () => {
+                      jobForm.trigger(`position_arr.${positionIndex}.pay_arr`);
                       setPayIsFocusedArr((prev) =>
                         prev.map((stateItem, stateIndex) => {
                           if (stateIndex === index) {
@@ -437,7 +450,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
           />
         </div>
         <p css={cssObj.errorMessage}>
-          {!!jobForm.formState.errors.position_arr?.[positionIndex]?.pay_arr && "추가한 모든 칸이 채워져야 합니다"}
+          {!!jobForm.formState.errors.position_arr?.[positionIndex]?.pay_arr && payErrorMsgMaker()}
         </p>
       </div>
       <div css={cssObj.container}>
@@ -526,6 +539,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   {...jobForm.register(`position_arr.${positionIndex}.preferred_etc_arr.${index}.value`, {
                     maxLength: 70,
                     onBlur: () => {
+                      jobForm.trigger(`position_arr.${positionIndex}.preferred_etc_arr`);
                       setPreferredEtcIsFocusedArr((prev) =>
                         prev.map((stateItem, stateIndex) => {
                           if (stateIndex === index) {

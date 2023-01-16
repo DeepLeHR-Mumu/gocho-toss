@@ -17,7 +17,7 @@ import { PositionRequiredInfoPart } from "./part/positionRequiredInfoPart";
 import { PositionWorkInfoPart } from "./part/positionWorkInfoPart";
 import { JobFormValues } from "./type";
 import { blankPosition } from "./constant";
-import { getFieldArrayValue, getFieldArrayValueWithNull, customResolver } from "./util";
+import { getFieldArrayValue, getFieldArrayValueWithNull } from "./util";
 import { cssObj } from "./style";
 
 const JdUploadPage: NextPageWithLayout = () => {
@@ -26,7 +26,7 @@ const JdUploadPage: NextPageWithLayout = () => {
   const jobForm = useForm<JobFormValues>({
     mode: "onBlur",
     reValidateMode: "onChange",
-    resolver: customResolver,
+    // resolver: customResolver,
     defaultValues: {
       process_arr: [{ value: "" }, { value: "" }],
       apply_route_arr: [{ value: "" }],
@@ -86,7 +86,6 @@ const JdUploadPage: NextPageWithLayout = () => {
         },
 
         onError: () => {
-          // TODO: 가이드칩 추가
           alert("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
         },
       }
@@ -96,45 +95,52 @@ const JdUploadPage: NextPageWithLayout = () => {
   return (
     <main>
       <PageLayout>
-        <form onSubmit={handleSubmit(jobSubmitHandler)}>
-          <HeaderPart />
-          <BasicInfoPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
-          <PositionHeaderPart append={append} setIsCardOpen={setIsCardOpenArr} />
-          <ul>
-            {fields.map((item, index) => (
-              <li key={`${item.id}`} css={cssObj.cardContainer}>
-                <PositionTitleInfoPart
-                  id={item.id}
-                  positionIndex={index}
-                  jobForm={jobForm}
-                  appendPosition={append}
-                  removePosition={remove}
-                  control={control}
-                  isCardOpen={isCardOpenArr[index]}
-                  setIsCardOpen={setIsCardOpenArr}
-                />
-                {isCardOpenArr[index] && (
-                  <>
-                    <PositionRequiredInfoPart id={item.id} positionIndex={index} jobForm={jobForm} control={control} />
-                    <PositionWorkInfoPart id={item.id} positionIndex={index} jobForm={jobForm} control={control} />
-                  </>
-                )}
-              </li>
-            ))}
-          </ul>
-          <div css={cssObj.buttonWrapper}>
-            <SharedButton
-              radius="round"
-              fontColor={`${COLORS.GRAY100}`}
-              backgroundColor={`${COLORS.BLUE_FIRST40}`}
-              isFullWidth
-              size="medium"
-              text="공고 등록하기"
-              iconObj={{ icon: BiRocket, location: "left" }}
-              onClickHandler="submit"
-            />
-          </div>
-        </form>
+        <div css={cssObj.pageContainer}>
+          <form onSubmit={handleSubmit(jobSubmitHandler)}>
+            <HeaderPart />
+            <BasicInfoPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
+            <PositionHeaderPart append={append} setIsCardOpen={setIsCardOpenArr} />
+            <ul>
+              {fields.map((item, index) => (
+                <li key={`${item.id}`} css={cssObj.cardContainer}>
+                  <PositionTitleInfoPart
+                    id={item.id}
+                    positionIndex={index}
+                    jobForm={jobForm}
+                    appendPosition={append}
+                    removePosition={remove}
+                    control={control}
+                    isCardOpen={isCardOpenArr[index]}
+                    setIsCardOpen={setIsCardOpenArr}
+                  />
+                  {isCardOpenArr[index] && (
+                    <>
+                      <PositionRequiredInfoPart
+                        id={item.id}
+                        positionIndex={index}
+                        jobForm={jobForm}
+                        control={control}
+                      />
+                      <PositionWorkInfoPart id={item.id} positionIndex={index} jobForm={jobForm} control={control} />
+                    </>
+                  )}
+                </li>
+              ))}
+            </ul>
+            <div css={cssObj.buttonWrapper}>
+              <SharedButton
+                radius="round"
+                fontColor={`${COLORS.GRAY100}`}
+                backgroundColor={`${COLORS.BLUE_FIRST40}`}
+                isFullWidth
+                size="medium"
+                text="공고 등록하기"
+                iconObj={{ icon: BiRocket, location: "left" }}
+                onClickHandler="submit"
+              />
+            </div>
+          </form>
+        </div>
       </PageLayout>
     </main>
   );

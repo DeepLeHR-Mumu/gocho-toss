@@ -76,6 +76,18 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
     return `${taskPart} ${contractPart} ${hireNumberPart}명 채용`;
   };
 
+  const taskDetailErrorMsgMaker = () => {
+    const errorArray = jobForm.formState.errors.position_arr?.[positionIndex]?.task_detail_arr;
+    if (errorArray) {
+      const values = Object.keys(errorArray).map((key) => errorArray?.[Number(key)]);
+      if (values.some((element) => element?.value?.type === "maxLength")) {
+        return "각 칸의 최대 입력 길이는 70자입니다";
+      }
+      return "추가한 모든 칸이 채워져야 합니다";
+    }
+    return null;
+  };
+
   return (
     <>
       <div css={cssObj.titleContainer}>
@@ -251,8 +263,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
               />
             </div>
             <p css={cssObj.errorMessage}>
-              {jobForm.formState.errors.position_arr?.[positionIndex]?.task_detail_arr &&
-                "추가한 모든 칸이 채워져야 합니다"}
+              {jobForm.formState.errors.position_arr?.[positionIndex]?.task_detail_arr && taskDetailErrorMsgMaker()}
             </p>
           </div>
           <div css={cssObj.container}>

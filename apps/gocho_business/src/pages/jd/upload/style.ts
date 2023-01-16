@@ -2,6 +2,10 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
+  pageContainer: css`
+    position: relative;
+  `,
+
   cardContainer: css`
     padding: 2rem;
     margin: 2.5rem 0;

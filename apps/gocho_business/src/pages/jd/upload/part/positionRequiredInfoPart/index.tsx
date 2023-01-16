@@ -30,6 +30,18 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
     name: `position_arr.${positionIndex}.required_etc_arr`,
   });
 
+  const requiredEtcErrorMsgMaker = () => {
+    const errorArray = jobForm.formState.errors.position_arr?.[positionIndex]?.required_etc_arr;
+    if (errorArray) {
+      const values = Object.keys(errorArray).map((key) => errorArray?.[Number(key)]);
+      if (values.some((element) => element?.value?.type === "maxLength")) {
+        return "각 칸의 최대 입력 길이는 70자입니다";
+      }
+      return "추가한 모든 칸이 채워져야 합니다";
+    }
+    return null;
+  };
+
   useEffect(() => {
     setRandomRequiredEtcGuideArr(requiredEtcGuideArr.sort(() => Math.random() - 0.5).slice(0, 3));
   }, []);
@@ -281,6 +293,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                     required: true,
                     maxLength: 70,
                     onBlur: () => {
+                      jobForm.trigger(`position_arr.${positionIndex}.required_etc_arr`);
                       setRequiredEtcIsFocusedArr((prev) =>
                         prev.map((stateItem, stateIndex) => {
                           if (stateIndex === index) {
@@ -354,8 +367,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           />
         </div>
         <p css={cssObj.errorMessage}>
-          {!!jobForm.formState.errors.position_arr?.[positionIndex]?.required_etc_arr &&
-            "추가한 모든 칸이 채워져야 합니다"}
+          {!!jobForm.formState.errors.position_arr?.[positionIndex]?.required_etc_arr && requiredEtcErrorMsgMaker()}
         </p>
       </div>
     </>

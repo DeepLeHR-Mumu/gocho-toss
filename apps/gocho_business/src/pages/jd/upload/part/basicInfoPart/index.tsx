@@ -9,6 +9,7 @@ import { SharedTextLink } from "shared-ui/business/sharedTextLink";
 import { SharedBoxLink } from "shared-ui/business/sharedBoxLink";
 
 import { GuideChip } from "@/pages/jd/upload/component/guideChip";
+
 import { BasicInfoPartProps } from "./type";
 import { processGuideArr, applyRouteGuideArr } from "./constant";
 import { cssObj } from "./style";
@@ -49,6 +50,31 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
     jobForm.setValue(`apply_url`, "");
   };
 
+  const processArrErrorMsgMaker = () => {
+    // TODO: FieldArray에 대해서 하나의 함수로,, 하지만 type checking이 안 되어서 힘들지도
+    const errorArray = jobForm.formState.errors.process_arr;
+    if (errorArray) {
+      const values = Object.keys(errorArray).map((key) => errorArray?.[Number(key)]);
+      if (values.some((element) => element?.value?.type === "maxLength")) {
+        return "각 칸의 최대 입력 길이는 20자입니다";
+      }
+      return "추가한 모든 칸이 채워져야 합니다";
+    }
+    return null;
+  };
+
+  const applyRouteArrErrorMsgMaker = () => {
+    const errorArray = jobForm.formState.errors.apply_route_arr;
+    if (errorArray) {
+      const values = Object.keys(errorArray).map((key) => errorArray?.[Number(key)]);
+      if (values.some((element) => element?.value?.type === "maxLength")) {
+        return "각 칸의 최대 입력 길이는 30자입니다";
+      }
+      return "추가한 모든 칸이 채워져야 합니다";
+    }
+    return null;
+  };
+
   useEffect(() => {
     setRandomApplyRouteGuideArr(applyRouteGuideArr.sort(() => Math.random() - 0.5).slice(0, 3));
   }, []);
@@ -67,16 +93,15 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
           {...jobForm.register("title", { required: true, maxLength: 50 })}
         />
         <p css={cssObj.errorMessage}>
-          {!!jobForm.formState.errors.title && `${jobForm.formState.errors.title.message}`}
+          {jobForm.formState.errors.title?.type === "required" && "공고 제목은 필수 입력 사항입니다"}
+          {jobForm.formState.errors.title?.type === "maxLength" && "공고 제목의 최대 길이는 50자입니다"}
         </p>
       </div>
       <div css={cssObj.dateInputContainer}>
         <div>
           <p css={cssObj.inputTitle(!!jobForm.formState.errors.start_time)}>채용시작 일시</p>
           <input css={cssObj.input(20)} type="datetime-local" {...jobForm.register("start_time", { required: true })} />
-          <p css={cssObj.errorMessage}>
-            {!!jobForm.formState.errors.start_time && `${jobForm.formState.errors.start_time.message}`}
-          </p>
+          <p css={cssObj.errorMessage}>{!!jobForm.formState.errors.start_time && "시작 일시는 필수 입력 사항입니다"}</p>
         </div>
         <div>
           <p css={cssObj.inputTitle(!!jobForm.formState.errors.end_time)}>채용마감 일시</p>
@@ -90,7 +115,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                 {...jobForm.register("end_time", { required: true })}
               />
               <p css={cssObj.errorMessage}>
-                {!!jobForm.formState.errors.end_time && `${jobForm.formState.errors.end_time.message}`}
+                {!!jobForm.formState.errors.end_time && "마감 일시는 필수 입력 사항입니다"}
               </p>
             </>
           )}
@@ -139,6 +164,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                       required: true,
                       maxLength: 20,
                       onBlur: () => {
+                        jobForm.trigger(`process_arr`);
                         setProcessIsFocusedArr((prev) =>
                           prev.map((stateItem, stateIndex) => {
                             if (stateIndex === index) {
@@ -195,7 +221,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
             />
           </div>
         </div>
-        <p css={cssObj.errorMessage}>{!!jobForm.formState.errors.process_arr && "추가한 모든 칸이 채워져야 합니다"}</p>
+        <p css={cssObj.errorMessage}>{!!jobForm.formState.errors.process_arr && processArrErrorMsgMaker()}</p>
       </div>
       <div css={cssObj.containerWithGuide}>
         <p css={cssObj.inputTitle(!!jobForm.formState.errors.apply_route_arr)}>지원 방법/제출 서류</p>
@@ -221,6 +247,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                     required: true,
                     maxLength: 30,
                     onBlur: () => {
+                      jobForm.trigger(`apply_route_arr`);
                       setApplyRouteIsFocusedArr((prev) =>
                         prev.map((stateItem, stateIndex) => {
                           if (stateIndex === index) {
@@ -290,9 +317,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
             />
           </div>
         </div>
-        <p css={cssObj.errorMessage}>
-          {!!jobForm.formState.errors.apply_route_arr && "추가한 모든 칸이 채워져야 합니다"}
-        </p>
+        <p css={cssObj.errorMessage}>{!!jobForm.formState.errors.apply_route_arr && applyRouteArrErrorMsgMaker()}</p>
       </div>
       <div css={cssObj.container}>
         <div css={cssObj.linkLabelContainer}>
@@ -342,9 +367,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                 </label>
                 <SharedTextLink externalUrl={`${jobForm.watch("apply_url")}`} fontColor="blue" text="링크 미리보기" />
               </div>
-              <p css={cssObj.errorMessage}>
-                {!!jobForm.formState.errors.apply_url && jobForm.formState.errors.apply_url.message}
-              </p>
+              <p css={cssObj.errorMessage}>{!!jobForm.formState.errors.apply_url && "링크는 필수 입력 사항입니다"}</p>
               <div css={cssObj.linkButtonContainer}>
                 <p>링크 복사하러 가기</p>
                 <SharedBoxLink
