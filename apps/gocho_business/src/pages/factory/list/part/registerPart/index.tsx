@@ -7,6 +7,14 @@ import { COLORS } from "shared-style/color";
 
 import { useAddFactory } from "@/apis/factory/useAddFactory";
 import { useFactoryArr } from "@/apis/factory/useFactoryArr";
+import {
+  factoryEditConfirmEvent,
+  factoryEditDoneEvent,
+  factoryEditFailEvent,
+  factoryUploadConfirmEvent,
+  factoryUploadDoneEvent,
+  factoryUploadFailEvent,
+} from "@/ga/factoryList";
 
 import { cssObj } from "./style";
 import { FactoryRegisterDef, RegisterPartProps } from "./type";
@@ -16,22 +24,53 @@ import { defaultInput, FACTORY_MESSSAGE_OBJ } from "./constant";
 
 export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingIndex, setEditingIndex }) => {
   const formObj = useForm<FactoryRegisterDef>();
-  const { handleSubmit, watch, reset } = formObj;
-  
+  const {
+    handleSubmit,
+    watch,
+    reset,
+    formState: { submitCount },
+  } = formObj;
+
   const { data: factoryDataArr } = useFactoryArr();
   const { mutate: addFactoryMutation } = useAddFactory();
 
   const factoryPostSubmitHandler = (factoryRequestObj: FactoryRegisterDef) => {
+    if (editingIndex === null) {
+      factoryUploadConfirmEvent();
+    }
+    factoryEditConfirmEvent();
     if (window.confirm(FACTORY_MESSSAGE_OBJ.REGISTER)) {
-      addFactoryMutation({
-        ...factoryRequestObj,
-        bus_bool: factoryRequestObj.bus_bool === "true",
-        dormitory_bool: factoryRequestObj.dormitory_bool === "true",
-        id: editingIndex === null ? undefined : factoryDataArr?.[Number(editingIndex)]?.id,
-      });
+      addFactoryMutation(
+        {
+          ...factoryRequestObj,
+          bus_bool: factoryRequestObj.bus_bool === "true",
+          dormitory_bool: factoryRequestObj.dormitory_bool === "true",
+          id: editingIndex === null ? undefined : factoryDataArr?.[Number(editingIndex)]?.id,
+        },
+        {
+          onSuccess: () => {
+            if (editingIndex === null) {
+              factoryUploadDoneEvent();
+              return;
+            }
+            factoryEditDoneEvent();
+          },
+        }
+      );
       setEditingIndex(null);
     }
   };
+
+  useEffect(() => {
+    if (submitCount === 0) return;
+    if (editingIndex === null) {
+      factoryUploadFailEvent(submitCount);
+      return;
+    }
+    factoryEditFailEvent(submitCount);
+    // submitCount의 이전 값 비교하여 submitCount만 바뀔 때 리렌더링하는 로직이 오히려 더 복잡하므로 라인 추가
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [submitCount]);
 
   useEffect(() => {
     if (editingIndex === null) {

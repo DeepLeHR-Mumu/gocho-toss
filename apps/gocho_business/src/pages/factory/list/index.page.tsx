@@ -3,6 +3,7 @@ import { ReactElement, useEffect, useState } from "react";
 import { NextPageWithLayout } from "@/pages/index/type";
 import { PageLayout, GlobalLayout, Footer } from "@/components/global/layout";
 import { CompanyInfoPart } from "@/components/global/companyInfoPart";
+import { factoryListPageFunnelEvent } from "@/ga/factoryList";
 
 import { PageHead } from "./pageHead";
 import { RegisterPart } from "./part/registerPart";
@@ -18,6 +19,9 @@ const FactoryListPage: NextPageWithLayout = () => {
       setRejectedMessage(null);
     }
   }, [editingIndex]);
+  useEffect(() => {
+    factoryListPageFunnelEvent();
+  }, []);
 
   return (
     <main>

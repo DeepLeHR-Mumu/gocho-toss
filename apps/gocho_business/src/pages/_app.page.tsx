@@ -4,7 +4,10 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/router";
+import ReactGA from "react-ga4";
 import { datadogRum } from "@datadog/browser-rum";
+
+import { KEY } from "shared-constant/gaKey";
 
 import { globalStyle } from "@/styles/globalStyle";
 import { useAxiosInterceptor } from "@/apis/useIsRefreshLock";
@@ -36,6 +39,8 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
 }
 
 function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
+  ReactGA.initialize(KEY);
+
   const router = useRouter();
   const [queryClient] = useState(
     () =>

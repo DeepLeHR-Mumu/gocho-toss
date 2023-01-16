@@ -11,6 +11,7 @@ import { SharedButton } from "shared-ui/business/sharedButton";
 import { useDeleteFactory } from "@/apis/factory/useDeleteFactory";
 import { useFactoryArr } from "@/apis/factory/useFactoryArr";
 import { CommonInfoBox, CommonStatusChip } from "@/components/common";
+import { factoryDeleteConfirmEvent, factoryDeleteDoneEvent } from "@/ga/factoryList";
 
 import { cssObj } from "./style";
 import { FactoryCardListPartProps } from "./type";
@@ -85,8 +86,16 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                     iconObj={{ icon: BiMinus, location: "left" }}
                     backgroundColor={COLORS.GRAY80}
                     onClickHandler={() => {
+                      factoryDeleteConfirmEvent();
                       if (window.confirm(FACTORY_MESSSAGE_OBJ.DELETE)) {
-                        deleteFactoryMutation({ factoryId: factoryData.id });
+                        deleteFactoryMutation(
+                          { factoryId: factoryData.id },
+                          {
+                            onSuccess: () => {
+                              factoryDeleteDoneEvent();
+                            },
+                          }
+                        );
                       }
                     }}
                     radius="circle"
