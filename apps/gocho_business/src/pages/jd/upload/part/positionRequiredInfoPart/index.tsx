@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { ChangeEvent, FunctionComponent, useEffect, useState } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { useFieldArray } from "react-hook-form";
 
@@ -29,6 +29,19 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
     control,
     name: `position_arr.${positionIndex}.required_etc_arr`,
   });
+
+  const conversionRateHandler = (event: ChangeEvent<HTMLInputElement>, isError: boolean) => {
+    setConversionRate(Number(event.target.value));
+    jobForm.setValue(`position_arr.${positionIndex}.conversion_rate`, conversionRate);
+    if (isError && Number(event.target.value) === 0) {
+      jobForm.setError(`position_arr.${positionIndex}.conversion_rate`, {
+        type: "required",
+        message: "전환율은 필수 입력 값입니다",
+      });
+    } else {
+      jobForm.clearErrors(`position_arr.${positionIndex}.conversion_rate`);
+    }
+  };
 
   const requiredEtcErrorMsgMaker = () => {
     const errorArray = jobForm.formState.errors.position_arr?.[positionIndex]?.required_etc_arr;
@@ -79,6 +92,12 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                 id={`${contractName}${id}`}
                 registerObj={jobForm.register(`position_arr.${positionIndex}.contract_type`, {
                   required: true,
+                  onChange: () => {
+                    if (!isConversionDisabled) {
+                      jobForm.clearErrors(`position_arr.${positionIndex}.conversion_rate`);
+                      jobForm.setValue(`position_arr.${positionIndex}.conversion_rate`, null);
+                    }
+                  },
                 })}
               >
                 <p css={cssObj.radioLabel}>{contractName}</p>
@@ -96,12 +115,11 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                 min="0"
                 max="100"
                 step="5"
-                value={conversionRate}
-                onChange={(e) => {
-                  setConversionRate(Number(e.target.value));
-                  jobForm.setValue(`position_arr.${positionIndex}.conversion_rate`, conversionRate);
-                }}
-                disabled={isConversionDisabled}
+                {...jobForm.register(`position_arr.${positionIndex}.conversion_rate`, {
+                  disabled: isConversionDisabled,
+                  onChange: (e) => conversionRateHandler(e, !isConversionDisabled),
+                  validate: (v) => v !== 0,
+                })}
               />
               <p css={cssObj.conversionRateLabel(conversionRate)}>{conversionRate}%</p>
             </div>
@@ -109,19 +127,21 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
               <input
                 css={cssObj.activatableInput(isConversionDisabled)}
                 type="number"
-                min="0"
                 max="100"
                 value={conversionRate}
-                disabled={isConversionDisabled}
                 // TODO: 다 지웠을 때 0 남는 버그 해결
-                onChange={(e) => {
-                  setConversionRate(Number(e.target.value));
-                  jobForm.setValue(`position_arr.${positionIndex}.conversion_rate`, conversionRate);
-                }}
+                {...jobForm.register(`position_arr.${positionIndex}.conversion_rate`, {
+                  disabled: isConversionDisabled,
+                  onChange: (e) => conversionRateHandler(e, !isConversionDisabled),
+                  validate: (v) => v !== 0,
+                })}
               />
               %
             </div>
           </div>
+          <p css={cssObj.errorMessage}>
+            {!!jobForm.formState.errors.position_arr?.[positionIndex]?.conversion_rate && "전환율은 필수 입력 값입니다"}
+          </p>
         </div>
       </div>
       <div css={cssObj.container}>

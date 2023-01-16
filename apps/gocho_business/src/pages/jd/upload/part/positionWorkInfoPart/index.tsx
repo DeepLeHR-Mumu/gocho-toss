@@ -517,7 +517,9 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
         </div>
       </div>
       <div css={cssObj.containerWithGuide}>
-        <p css={cssObj.inputTitle(false)}>기타 우대 사항(선택)</p>
+        <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.preferred_etc_arr)}>
+          기타 우대 사항(선택)
+        </p>
         <div css={cssObj.inputContainerWithGuide}>
           {preferredEtcArr.fields.map((item, index) => (
             <div key={`preferredEtcArr${item.id}`}>
@@ -612,6 +614,10 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
             }}
           />
         </div>
+        <p css={cssObj.errorMessage}>
+          {!!jobForm.formState.errors.position_arr?.[positionIndex]?.preferred_etc_arr &&
+            "각 칸의 최대 입력 길이는 70자입니다"}
+        </p>
       </div>
     </>
   );
