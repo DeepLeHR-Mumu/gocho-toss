@@ -15,6 +15,7 @@ import { CommonInfoBox, CommonStatusChip } from "@/components/common";
 import { cssObj } from "./style";
 import { FactoryCardListPartProps } from "./type";
 import { FACTORY_MESSSAGE_OBJ } from "../registerPart/constant";
+import { factoryDeleteConfirmEvent, factoryDeleteDoneEvent } from "@/ga/factoryList";
 
 export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = ({
   setEditingIndex,
@@ -85,8 +86,16 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                     iconObj={{ icon: BiMinus, location: "left" }}
                     backgroundColor={COLORS.GRAY80}
                     onClickHandler={() => {
+                      factoryDeleteConfirmEvent();
                       if (window.confirm(FACTORY_MESSSAGE_OBJ.DELETE)) {
-                        deleteFactoryMutation({ factoryId: factoryData.id });
+                        deleteFactoryMutation(
+                          { factoryId: factoryData.id },
+                          {
+                            onSuccess: () => {
+                              factoryDeleteDoneEvent();
+                            },
+                          }
+                        );
                       }
                     }}
                     radius="circle"
