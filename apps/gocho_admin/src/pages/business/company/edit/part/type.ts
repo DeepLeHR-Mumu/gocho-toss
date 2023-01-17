@@ -13,7 +13,7 @@ export interface CompanyPartProps {
   company: {
     id: number;
     name: string;
-    businessNumber: number;
+    businessNumber: string;
     catchUrl: string;
     youtubeUrl: string | null;
     industry: string;

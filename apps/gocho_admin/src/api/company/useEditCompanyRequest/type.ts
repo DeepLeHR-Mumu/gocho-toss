@@ -37,7 +37,7 @@ export interface ResponseObjDef {
   data: {
     id: number;
     name: string;
-    business_number: number;
+    business_number: string;
     catch_url: string;
     youtube_url: string | null;
     industry: string;

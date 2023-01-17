@@ -6,18 +6,19 @@ export const cssObj = {
   wrapper: (color: ColorDef) => css`
     background-color: ${color};
     border-radius: 1.5rem;
-    padding: 0.75rem 0.5rem;
+    height: 2.5rem;
+    padding: 0 0.75rem;
     display: flex;
     align-items: center;
+    width: fit-content;
   `,
-  icon: (color: ColorDef) => css`
+  icon: css`
     display: flex;
-    color: ${color};
+    color: black;
     align-items: center;
     margin-right: 0.75rem;
   `,
-  text: (color: ColorDef) => css`
-    font-weight: 400;
-    color: ${color};
+  text: css`
+    color: black;
   `,
 };

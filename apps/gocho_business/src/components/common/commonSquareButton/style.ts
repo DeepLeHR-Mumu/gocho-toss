@@ -4,7 +4,11 @@ import { ColorDef } from "shared-type/style/color";
 
 export const cssObj = {
   wrapper: (backgroundColor: ColorDef, borderColor: ColorDef, fontColor: ColorDef) => css`
-    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: 2.5rem;
+    padding: 0 1rem;
     border: 1px solid ${borderColor};
     background-color: ${backgroundColor};
     color: ${fontColor};
@@ -25,6 +29,5 @@ export const cssObj = {
     `;
   },
   text: css`
-    font-weight: 400;
   `,
 };

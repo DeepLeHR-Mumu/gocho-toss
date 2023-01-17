@@ -1,14 +1,19 @@
-import type { NextPage } from "next";
-import { useRouter } from "next/router";
+import { ReactElement } from "react";
 
-const JdEditPage: NextPage = () => {
-  const router = useRouter();
-  return (
-    <main>
-      <p>{router.query.jdId}</p>
-      <p>Jd Edit Page</p>
-    </main>
-  );
-};
+import type { NextPageWithLayout } from "@/pages/index/type";
+import { PageLayout, GlobalLayout } from "@/components/global/layout";
+
+const JdEditPage: NextPageWithLayout = () => (
+  <main>
+    <PageLayout>
+      <section>
+        This is JdEditPage!!
+        <div>lol</div>
+      </section>
+    </PageLayout>
+  </main>
+);
+
+JdEditPage.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default JdEditPage;

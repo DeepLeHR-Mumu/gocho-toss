@@ -8,6 +8,7 @@ export const JD_TOP_BANNER_URL = "/topbanner";
 export const ASIDE_BANNER_URL = "/asidebanner";
 export const COMPANY_UPLOAD_URL = "/company/upload";
 export const COMPANY_LIST_URL = "/company/list";
+export const COMPANY_EDIT_URL = "/company/edit";
 export const VIRAL_BLOG_URL = "/viral/blog";
 export const VIRAL_INSTA_URL = "/viral/instagram";
 export const BUSINESS_JD_LIST_URL = "/business/jd/list";

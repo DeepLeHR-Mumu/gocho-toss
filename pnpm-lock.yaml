@@ -85,6 +85,7 @@ importers:
       '@babel/plugin-proposal-class-properties': ^7.18.6
       '@babel/plugin-proposal-private-methods': ^7.18.6
       '@babel/plugin-proposal-private-property-in-object': ^7.18.6
+      '@datadog/browser-rum': ^4.21.1
       '@emotion/babel-preset-css-prop': ^11.10.0
       '@emotion/react': ^11.10.0
       '@playwright/test': 1.28.0
@@ -103,11 +104,15 @@ importers:
       '@types/react-dom': 18.0.6
       axios: ^0.27.2
       babel-loader: ^8.2.5
+      dayjs: ^1.11.7
       eslint-config-deeple: workspace:^1.0.0
       next: 12.2.5
       next-transpile-modules: ^9.0.0
       react: 17.0.2
+      react-daum-postcode: ^3.1.1
       react-dom: 17.0.2
+      react-ga4: ^1.4.1
+      react-hook-form: ^7.34.2
       react-icons: ^4.4.0
       shared-api: workspace:^0.0.0
       shared-constant: workspace:^0.0.0
@@ -121,15 +126,20 @@ importers:
       typescript: 4.7.2
       zustand: ^4.1.5
     dependencies:
+      '@datadog/browser-rum': 4.21.1
       '@emotion/react': 11.10.4_v7wa3uncfa5agztyqirlhe5v34
       '@playwright/test': 1.28.0
       '@tanstack/react-query': 4.3.4_sfoxds7t5ydpegc3knd667wn6m
       '@tanstack/react-query-devtools': 4.3.5_rc2nloshn5awlpljd7lgxlyskm
       axios: 0.27.2
+      dayjs: 1.11.7
       next: 12.2.5_2f3qgkpmmpou2hyqrmueifddme
       next-transpile-modules: 9.0.0
       react: 17.0.2
+      react-daum-postcode: 3.1.1_react@17.0.2
       react-dom: 17.0.2_react@17.0.2
+      react-ga4: 1.4.1
+      react-hook-form: 7.35.0_react@17.0.2
       react-icons: 4.4.0_react@17.0.2
       shared-api: link:../../shared/api
       shared-constant: link:../../shared/constant
@@ -506,10 +516,24 @@ importers:
 
   shared/ui:
     specifiers:
+      '@babel/plugin-proposal-class-properties': ^7.18.6
+      '@babel/plugin-proposal-private-methods': ^7.18.6
+      '@babel/plugin-proposal-private-property-in-object': ^7.18.6
+      '@emotion/babel-preset-css-prop': ^11.10.0
       '@emotion/react': ^11.10.0
+      '@storybook/addon-actions': ^6.5.12
+      '@storybook/addon-essentials': ^6.5.10
+      '@storybook/addon-interactions': ^6.5.10
+      '@storybook/addon-links': ^6.5.10
+      '@storybook/builder-webpack5': ^6.5.10
+      '@storybook/manager-webpack5': ^6.5.10
+      '@storybook/react': ^6.5.10
+      '@storybook/testing-library': ^0.0.13
       '@tanstack/react-query': ^4.2.3
       '@types/react': 18.0.17
       '@types/react-dom': 18.0.6
+      babel-loader: ^8.2.5
+      babel-plugin-react-require: ^3.1.3
       eslint-config-deeple: workspace:^1.0.0
       next: 12.2.5
       react: 17.0.2
@@ -524,6 +548,7 @@ importers:
       shared-type: workspace:^0.0.0
       shared-util: workspace:^0.0.0
       tsconfig-deeple: workspace:^0.0.0
+      tsconfig-paths-webpack-plugin: ^4.0.0
       typescript: 4.7.2
     dependencies:
       '@emotion/react': 11.10.4_v7wa3uncfa5agztyqirlhe5v34
@@ -541,10 +566,25 @@ importers:
       shared-type: link:../type
       shared-util: link:../util
     devDependencies:
+      '@babel/plugin-proposal-class-properties': 7.18.6_@babel+core@7.19.1
+      '@babel/plugin-proposal-private-methods': 7.18.6_@babel+core@7.19.1
+      '@babel/plugin-proposal-private-property-in-object': 7.18.6_@babel+core@7.19.1
+      '@emotion/babel-preset-css-prop': 11.10.0_@babel+core@7.19.1
+      '@storybook/addon-actions': 6.5.12_sfoxds7t5ydpegc3knd667wn6m
+      '@storybook/addon-essentials': 6.5.12_hmn6dpyz5jsqa4i6xcwdei5ula
+      '@storybook/addon-interactions': 6.5.12_lpddxej3z5bxm425elitzlwdva
+      '@storybook/addon-links': 6.5.12_sfoxds7t5ydpegc3knd667wn6m
+      '@storybook/builder-webpack5': 6.5.12_k26rfrdk2uh2ao3d3jcmn6wejm
+      '@storybook/manager-webpack5': 6.5.12_k26rfrdk2uh2ao3d3jcmn6wejm
+      '@storybook/react': 6.5.12_gqggrcjydhwzdw7gkdyr5xn2eq
+      '@storybook/testing-library': 0.0.13_sfoxds7t5ydpegc3knd667wn6m
       '@types/react': 18.0.17
       '@types/react-dom': 18.0.6
+      babel-loader: 8.2.5_rhsdbzevgb5tizdhlla5jsbgyu
+      babel-plugin-react-require: 3.1.3
       eslint-config-deeple: link:../../packages/eslint-config-deeple
       tsconfig-deeple: link:../../packages/tsconfig-deeple
+      tsconfig-paths-webpack-plugin: 4.0.0
       typescript: 4.7.2
 
   shared/util:
@@ -2622,6 +2662,7 @@ packages:
   /@npmcli/move-file/1.1.2:
     resolution: {integrity: sha512-1SUf/Cg2GzGDyaf15aR9St9TWlb+XvbZXWpDx8YKs7MLzMH/BCeopv+y9vzrzgkfykCGuWOlSu3mZhj2+FQcrg==}
     engines: {node: '>=10'}
+    deprecated: This functionality has been moved to @npmcli/fs
     dependencies:
       mkdirp: 1.0.4
       rimraf: 3.0.2
@@ -5208,7 +5249,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.2
+      es-abstract: 1.20.4
       get-intrinsic: 1.1.3
       is-string: 1.0.7
 
@@ -5239,7 +5280,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.2
+      es-abstract: 1.20.4
       es-shim-unscopables: 1.0.0
 
   /array.prototype.flatmap/1.3.0:
@@ -5248,7 +5289,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.2
+      es-abstract: 1.20.4
       es-shim-unscopables: 1.0.0
 
   /array.prototype.map/1.0.4:
@@ -5753,17 +5794,6 @@ packages:
     resolution: {integrity: sha512-Z942RysHXmJrhqk88FmKBVq/v5tqmSkDz7p54G/MGyjMnCFFnC79XWNbg+Vta8W6Wb2qtSZTSxIGkJrRpCFEiA==}
     dependencies:
       pako: 1.0.11
-    dev: true
-
-  /browserslist/4.21.3:
-    resolution: {integrity: sha512-898rgRXLAyRkM1GryrrBHGkqA5hlpkV5MhtZwg9QXeiyLUYs2k00Un05aX5l2/yJIOObYKOpS2JNo8nJDE7fWQ==}
-    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
-    hasBin: true
-    dependencies:
-      caniuse-lite: 1.0.30001434
-      electron-to-chromium: 1.4.251
-      node-releases: 2.0.6
-      update-browserslist-db: 1.0.9_browserslist@4.21.3
     dev: true
 
   /browserslist/4.21.4:
@@ -6363,7 +6393,7 @@ packages:
   /core-js-compat/3.25.1:
     resolution: {integrity: sha512-pOHS7O0i8Qt4zlPW/eIFjwp+NrTPx+wTL0ctgI2fHn31sZOq89rDsmtc/A2vAX7r6shl+bmVI+678He46jgBlw==}
     dependencies:
-      browserslist: 4.21.3
+      browserslist: 4.21.4
     dev: true
 
   /core-js-pure/3.25.1:
@@ -6625,6 +6655,10 @@ packages:
 
   /damerau-levenshtein/1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
+
+  /dayjs/1.11.7:
+    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
+    dev: false
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -6906,10 +6940,6 @@ packages:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
     dev: true
 
-  /electron-to-chromium/1.4.251:
-    resolution: {integrity: sha512-k4o4cFrWPv4SoJGGAydd07GmlRVzmeDIJ6MaEChTUjk4Dmomn189tCicSzil2oyvbPoGgg2suwPDNWq4gWRhoQ==}
-    dev: true
-
   /electron-to-chromium/1.4.284:
     resolution: {integrity: sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==}
 
@@ -7084,7 +7114,7 @@ packages:
     resolution: {integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==}
     engines: {node: '>= 0.4'}
     dependencies:
-      is-callable: 1.2.5
+      is-callable: 1.2.7
       is-date-object: 1.0.5
       is-symbol: 1.0.4
 
@@ -8215,7 +8245,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.2
+      es-abstract: 1.20.4
       functions-have-names: 1.2.3
 
   /functional-red-black-tree/1.0.1:
@@ -10517,7 +10547,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.2
+      es-abstract: 1.20.4
 
   /object.fromentries/2.0.5:
     resolution: {integrity: sha512-CAyG5mWQRRiBU57Re4FKoTBjXfDoNwdFVH2Y1tS9PqCsfUTymAohOkEMSG3aRNKmv4lV3O7p1et7c187q6bynw==}
@@ -10525,7 +10555,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.2
+      es-abstract: 1.20.4
 
   /object.getownpropertydescriptors/2.1.4:
     resolution: {integrity: sha512-sccv3L/pMModT6dJAYF3fzGMVcb38ysQ0tEE6ixv2yXJDtEIPph268OlAdJj5/qZMZDq2g/jqvwppt36uS/uQQ==}
@@ -10556,7 +10586,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.2
+      es-abstract: 1.20.4
 
   /objectorarray/1.0.5:
     resolution: {integrity: sha512-eJJDYkhJFFbBBAxeh8xW+weHlkI28n2ZdQV/J/DNfWfSKlGEf2xcfAbZTv3riEXHAhL9SVOTs2pRmXiSTf78xg==}
@@ -11454,6 +11484,14 @@ packages:
       schema-utils: 3.1.1
       webpack: 4.46.0
     dev: true
+
+  /react-daum-postcode/3.1.1_react@17.0.2:
+    resolution: {integrity: sha512-IFlC8XBSK+uobSIBHaWlxeecYpv9RhCFNu4YJ3+CrfGyEVdc4+yaaUH6BIfJbTZOybVx0V3s4nUeAEsssXBNJg==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 17.0.2
+    dev: false
 
   /react-docgen-typescript/2.2.2_typescript@4.7.2:
     resolution: {integrity: sha512-tvg2ZtOpOi6QDwsb3GZhOjDkkX0h8Z2gipvTg6OVMUyoYoURhEiRNePT8NZItTVCDh39JJHnLdfCOkzoLbFnTg==}
@@ -12692,14 +12730,14 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.2
+      es-abstract: 1.20.4
 
   /string.prototype.trimstart/1.0.5:
     resolution: {integrity: sha512-THx16TJCGlsN0o6dl2o6ncWUsdgnLRSA23rRE5pyGBw/mLr3Ej/R2LaqCtgP8VNMGZsvMWnf9ooZPyY2bHvUFg==}
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.2
+      es-abstract: 1.20.4
 
   /string_decoder/1.1.1:
     resolution: {integrity: sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg==}
@@ -13479,17 +13517,6 @@ packages:
       browserslist: 4.21.4
       escalade: 3.1.1
       picocolors: 1.0.0
-
-  /update-browserslist-db/1.0.9_browserslist@4.21.3:
-    resolution: {integrity: sha512-/xsqn21EGVdXI3EXSum1Yckj3ZVZugqyOZQ/CxYPBD/R+ko9NSUScf8tFF4dOKY+2pvSSJA/S+5B8s4Zr4kyvg==}
-    hasBin: true
-    peerDependencies:
-      browserslist: '>= 4.21.0'
-    dependencies:
-      browserslist: 4.21.3
-      escalade: 3.1.1
-      picocolors: 1.0.0
-    dev: true
 
   /uri-js/4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}

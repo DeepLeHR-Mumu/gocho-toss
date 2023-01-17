@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import {
   companyDetailKeyObj,
-  CompanyDetailKeyObjDef,
+  CompanyDetailRequestDef,
 } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 
 import { axiosInstance } from "../../axiosInstance";
@@ -14,7 +14,7 @@ export const getCompanyDetail: GetCompanyDetailDef = async ({ queryKey: [{ reque
   return data;
 };
 
-export const useCompanyDetail = (requestObj: CompanyDetailKeyObjDef) => {
+export const useCompanyDetail = (requestObj: CompanyDetailRequestDef) => {
   const queryResult = useQuery(companyDetailKeyObj.detail(requestObj), getCompanyDetail, {
     staleTime: Infinity,
     enabled: Boolean(requestObj.companyId),
