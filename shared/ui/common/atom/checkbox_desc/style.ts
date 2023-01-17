@@ -11,19 +11,22 @@ export const cssObj = {
     margin: 0;
     display: none;
     :checked ~ div {
+      background-color: ${COLORS.BLUE_FIRST40};
+      border: 0;
       > svg {
-        color: ${COLORS.BLUE_FIRST40};
+        color: ${COLORS.GRAY100};
         display: block;
       }
     }
   `,
-  checkBox: css`
+  checkBox: (isDisabled: boolean) => css`
     display: flex;
     align-items: center;
     justify-content: center;
     width: 1.125rem;
     height: 1.125rem;
     border: 1px solid ${COLORS.GRAY60};
+    background-color: ${isDisabled ? COLORS.GRAY90 : COLORS.GRAY100};
     border-radius: 5px;
     margin-right: 0.5rem;
 
