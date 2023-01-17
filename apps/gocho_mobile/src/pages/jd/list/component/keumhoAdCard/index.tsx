@@ -36,6 +36,7 @@ export const KeumhoAdCard: FunctionComponent = () => {
                   objectFit="contain"
                   src="https://cdn.gocho-back.com/companies/663/logo.png"
                   alt=""
+                  unoptimized
                 />
               </div>
             </div>
