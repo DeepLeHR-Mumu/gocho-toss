@@ -21,7 +21,6 @@ const nextConfig = {
   images: {
     domains: [`cdn.gocho-back.com`, "devcdn.gocho-back.com"],
     formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 600,
   },
   pageExtensions: ["page.tsx"],
 };
