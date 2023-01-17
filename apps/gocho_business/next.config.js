@@ -14,6 +14,7 @@ const nextConfig = {
   images: {
     domains: [`d2nnzfahmszi6w.cloudfront.net`, `cdn.gocho-back.com`],
     formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 60,
   },
   pageExtensions: ["page.tsx"],
   async redirects() {
