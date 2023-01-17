@@ -1,11 +1,12 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { FiMinus, FiLink, FiAtSign } from "react-icons/fi";
+import { FiLink, FiAtSign } from "react-icons/fi";
 import { MdOutlineNavigateNext } from "react-icons/md";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { SharedTextLink } from "shared-ui/business/sharedTextLink";
 import { SharedBoxLink } from "shared-ui/business/sharedBoxLink";
 
+import { DeleteInputButton } from "@/pages/jd/upload/component/deleteInputButton";
 import { GuideChip } from "../../component/guideChip";
 import { AddFieldButton } from "../../component/addFieldButton";
 import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
@@ -143,15 +144,11 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                       },
                     })}
                   />
-                  <button
-                    type="button"
-                    css={cssObj.deleteInputButton}
-                    onClick={() => {
+                  <DeleteInputButton
+                    onClickHandler={() => {
                       if (processArr.fields.length > 1) processArr.remove(index);
                     }}
-                  >
-                    <FiMinus />
-                  </button>
+                  />
                 </label>
                 <div css={cssObj.guideChipContainer}>
                   {processIsFocusedArr[index] &&
@@ -205,16 +202,12 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                     },
                   })}
                 />
-                <button
-                  type="button"
-                  css={cssObj.deleteInputButton}
-                  onClick={() => {
+                <DeleteInputButton
+                  onClickHandler={() => {
                     applyRouteArr.remove(index);
                     setApplyRouteIsFocusedArr((prev) => prev.filter((stateItem, stateIndex) => stateIndex !== index));
                   }}
-                >
-                  <FiMinus />
-                </button>
+                />
               </label>
               <div css={cssObj.guideChipContainer}>
                 {applyRouteIsFocusedArr[index] &&
@@ -343,15 +336,11 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                 placeholder="기타 사항 (선택)"
                 {...register(`etc_arr.${index}.value`, { required: true, maxLength: 70 })}
               />
-              <button
-                type="button"
-                css={cssObj.deleteInputButton}
-                onClick={() => {
+              <DeleteInputButton
+                onClickHandler={() => {
                   etcArr.remove(index);
                 }}
-              >
-                <FiMinus />
-              </button>
+              />
             </label>
           ))}
           <div css={cssObj.addButtonWrapper}>

@@ -1,6 +1,6 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
-import { FiChevronUp, FiMinus, FiX, FiRotateCw, FiChevronDown, FiPlus } from "react-icons/fi";
+import { FiChevronUp, FiX, FiRotateCw, FiChevronDown, FiPlus } from "react-icons/fi";
 import { TbBuildingFactory2 } from "react-icons/tb";
 import { useFieldArray } from "react-hook-form";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
@@ -15,6 +15,7 @@ import { useFactoryArr } from "@/apis/factory/useFactoryArr";
 import { factoryArrKeyObj } from "@/apis/factory/useFactoryArr/type";
 import { INTERNAL_URL, POSTCODE_SCRIPT_URL } from "@/constants/url";
 
+import { DeleteInputButton } from "@/pages/jd/upload/component/deleteInputButton";
 import { AddFieldButton } from "../../component/addFieldButton";
 import { GuideChip } from "../../component/guideChip";
 import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
@@ -306,19 +307,15 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                     <span>일반 근무지</span>
                     <div css={cssObj.addressBox}>
                       {address}
-                      <button
-                        type="button"
-                        css={cssObj.deleteInputButton}
-                        onClick={() => {
+                      <DeleteInputButton
+                        onClickHandler={() => {
                           setValue(`position_arr.${positionIndex}.place.address_arr`, [
                             ...(jobForm
                               .watch("position_arr")
                               [positionIndex].place.address_arr?.filter((element) => element !== address) || []),
                           ]);
                         }}
-                      >
-                        <FiMinus />
-                      </button>
+                      />
                     </div>
                   </div>
                 ))}
@@ -391,16 +388,12 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                     },
                   })}
                 />
-                <button
-                  type="button"
-                  css={cssObj.deleteInputButton}
-                  onClick={() => {
-                    payArr.remove(positionIndex);
+                <DeleteInputButton
+                  onClickHandler={() => {
+                    payArr.remove(index);
                     setPayIsFocusedArr((prev) => prev.filter((stateItem, stateIndex) => stateIndex !== index));
                   }}
-                >
-                  <FiMinus />
-                </button>
+                />
               </label>
               <div css={cssObj.guideChipContainer}>
                 {payIsFocusedArr[index] && (
@@ -509,16 +502,12 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                     },
                   })}
                 />
-                <button
-                  type="button"
-                  css={cssObj.deleteInputButton}
-                  onClick={() => {
-                    preferredEtcArr.remove(positionIndex);
+                <DeleteInputButton
+                  onClickHandler={() => {
+                    preferredEtcArr.remove(index);
                     setPreferredEtcIsFocusedArr((prev) => prev.filter((_, stateIndex) => stateIndex !== index));
                   }}
-                >
-                  <FiMinus />
-                </button>
+                />
               </label>
               <div css={cssObj.guideChipContainer}>
                 {preferredEtcIsFocusedArr[index] &&

@@ -1,11 +1,12 @@
 import { FunctionComponent, useState } from "react";
-import { FiChevronDown, FiChevronUp, FiMinus } from "react-icons/fi";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useFieldArray } from "react-hook-form";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
+import { DeleteInputButton } from "@/pages/jd/upload/component/deleteInputButton";
 import { AddFieldButton } from "../../component/addFieldButton";
 import { PositionTitleInfoPartProps } from "./type";
 import { taskArr } from "./constant";
@@ -242,15 +243,11 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                       maxLength: 70,
                     })}
                   />
-                  <button
-                    type="button"
-                    css={cssObj.deleteInputButton}
-                    onClick={() => {
-                      taskDetailArr.remove(positionIndex);
+                  <DeleteInputButton
+                    onClickHandler={() => {
+                      taskDetailArr.remove(index);
                     }}
-                  >
-                    <FiMinus />
-                  </button>
+                  />
                 </label>
               ))}
               <AddFieldButton

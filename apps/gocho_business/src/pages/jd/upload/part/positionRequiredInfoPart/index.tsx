@@ -1,11 +1,11 @@
 import { ChangeEvent, FunctionComponent, useEffect, useState } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
-import { FiMinus } from "react-icons/fi";
 import { useFieldArray } from "react-hook-form";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 
+import { DeleteInputButton } from "@/pages/jd/upload/component/deleteInputButton";
 import { AddFieldButton } from "../../component/addFieldButton";
 import { GuideChip } from "../../component/guideChip";
 import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
@@ -298,16 +298,12 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                     },
                   })}
                 />
-                <button
-                  type="button"
-                  css={cssObj.deleteInputButton}
-                  onClick={() => {
-                    requiredEtcArr.remove(positionIndex);
+                <DeleteInputButton
+                  onClickHandler={() => {
+                    requiredEtcArr.remove(index);
                     setRequiredEtcIsFocusedArr((prev) => prev.filter((stateItem, stateIndex) => stateIndex !== index));
                   }}
-                >
-                  <FiMinus />
-                </button>
+                />
               </label>
               <div css={cssObj.guideChipContainer}>
                 {requiredEtcIsFocusedArr[index] &&
