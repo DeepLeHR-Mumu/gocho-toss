@@ -200,6 +200,7 @@ export const cssObj = {
 
   inputLogo: css`
     position: absolute;
+    top: 0.525rem;
     left: 1rem;
   `,
 

@@ -103,7 +103,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
           {titleMaker(
             watch("position_arr")[positionIndex].task_main,
             watch("position_arr")[positionIndex].contract_type,
-            watch("position_arr")[positionIndex].hire_number
+            watch("position_arr")[positionIndex].hire_number || 0
           )}
         </strong>
         <div css={cssObj.positionButtonContainer}>
@@ -169,17 +169,17 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 {isMainTaskOpen ? <FiChevronUp /> : <FiChevronDown />}
               </button>
               <div css={cssObj.taskList(isMainTaskOpen)}>
-                {taskArr.map((task) => (
+                {taskArr.map((taskObj) => (
                   <button
                     type="button"
                     css={cssObj.option}
-                    key={`${id}${task.mainTask}`}
-                    value={task.mainTask}
+                    key={`${id}${taskObj.mainTask}`}
+                    value={taskObj.mainTask}
                     onClick={() => {
-                      mainTaskClickHandler(task.mainTask);
+                      mainTaskClickHandler(taskObj.mainTask);
                     }}
                   >
-                    {task.mainTask}
+                    {taskObj.mainTask}
                   </button>
                 ))}
               </div>
@@ -273,19 +273,18 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 000명
               </button>
               <div css={cssObj.hireNumberInputContainer}>
-                {/* TODO: 0, 00, 000명 버튼 누른 다음, 위에 클릭 하고 한번 더 눌러야 input에 포커싱이 됨 // 0 기본값으로 안 주고 싶은데,, */}
-                {watch("position_arr")[positionIndex].hire_number < 0 ? (
+                {(watch("position_arr")[positionIndex].hire_number || 1) < 0 ? (
                   <>
+                    <div css={cssObj.hireNumberCover}>{hireNumberLabel}</div>명
                     <button
-                      css={cssObj.hireNumberCover}
+                      css={cssObj.hireNumberResetButton}
                       type="button"
                       onClick={() => {
-                        setValue(`position_arr.${positionIndex}.hire_number`, 0);
+                        setValue(`position_arr.${positionIndex}.hire_number`, null);
                       }}
                     >
-                      {hireNumberLabel}
+                      값 다시 입력하기
                     </button>
-                    명
                   </>
                 ) : (
                   <>

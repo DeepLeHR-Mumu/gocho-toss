@@ -16,7 +16,7 @@ import { PositionTitleInfoPart } from "./part/positionTitleInfoPart";
 import { PositionRequiredInfoPart } from "./part/positionRequiredInfoPart";
 import { PositionWorkInfoPart } from "./part/positionWorkInfoPart";
 import { JobFormValues } from "./type";
-import { blankPosition } from "./constant";
+import { BLANK_POSITION } from "./constant";
 import { getFieldArrayValue, getFieldArrayValueWithNull } from "./util";
 import { cssObj } from "./style";
 
@@ -30,7 +30,7 @@ const JdUploadPage: NextPageWithLayout = () => {
       process_arr: [{ value: "" }, { value: "" }],
       apply_route_arr: [{ value: "" }],
       etc_arr: [{ value: "" }],
-      position_arr: [blankPosition],
+      position_arr: [BLANK_POSITION],
     },
   });
   const { control, handleSubmit } = jobForm;
@@ -70,6 +70,7 @@ const JdUploadPage: NextPageWithLayout = () => {
           etc_arr: getFieldArrayValueWithNull(jobObj.etc_arr),
           position_arr: jobObj.position_arr.map((position) => ({
             ...position,
+            hire_number: position.hire_number ? position.hire_number : 0,
             task_sub_arr: position.task_sub_arr ? position.task_sub_arr : null,
             task_detail_arr: getFieldArrayValue(position.task_detail_arr),
             required_etc_arr: getFieldArrayValueWithNull(position.required_etc_arr),

@@ -297,6 +297,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                       focusedArrOnBlurHandler(setRequiredEtcIsFocusedArr, index);
                     },
                   })}
+                  autoComplete="off"
                 />
                 <DeleteInputButton
                   onClickHandler={() => {

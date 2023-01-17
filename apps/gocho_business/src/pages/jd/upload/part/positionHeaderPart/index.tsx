@@ -4,7 +4,7 @@ import { COLORS } from "shared-style/color";
 import { SharedButton } from "shared-ui/business/sharedButton";
 
 import { PositionHeaderPartProps } from "./type";
-import { blankPosition } from "../../constant";
+import { BLANK_POSITION } from "../../constant";
 import { cssObj } from "./style";
 
 export const PositionHeaderPart: FunctionComponent<PositionHeaderPartProps> = ({ append, setIsCardOpen }) => (
@@ -25,7 +25,7 @@ export const PositionHeaderPart: FunctionComponent<PositionHeaderPartProps> = ({
         size="medium"
         text="직무 카드 추가"
         onClickHandler={() => {
-          append(blankPosition);
+          append(BLANK_POSITION);
           setIsCardOpen((prev) => [...prev, false]);
         }}
       />

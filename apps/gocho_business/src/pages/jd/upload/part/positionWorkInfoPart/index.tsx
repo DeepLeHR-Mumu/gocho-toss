@@ -501,6 +501,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                       focusedArrOnBlurHandler(setPreferredEtcIsFocusedArr, index);
                     },
                   })}
+                  autoComplete="off"
                 />
                 <DeleteInputButton
                   onClickHandler={() => {

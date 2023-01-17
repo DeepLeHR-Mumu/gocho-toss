@@ -30,6 +30,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
 
   const alwaysButtonClickHandler = () => {
     setValue(`end_time`, isAlways ? "" : "9999-12-31T23:59");
+    setValue(`cut`, !isAlways);
     setIsAlways((prev) => !prev);
   };
 
@@ -39,7 +40,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
   };
 
   const processArrErrorMsgMaker = () => {
-    // TODO: FieldArray에 대해서 하나의 함수로,, 하지만 type checking이 안 되어서 힘들지도
+    // TODO: FieldArray에 대해서 하나의 함수로
     const errorArray = formState.errors.process_arr;
     if (errorArray) {
       const values = Object.keys(errorArray).map((key) => errorArray?.[Number(key)]);
@@ -116,7 +117,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
           </label>
           <label css={cssObj.label} htmlFor="cut">
             <input type="checkbox" id="cut" {...register("cut")} />
-            <CheckBox isChecked={watch("cut") || isAlways} />
+            <CheckBox isChecked={watch("cut")} />
             채용시 마감
           </label>
         </div>
@@ -143,6 +144,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                         focusedArrOnBlurHandler(setProcessIsFocusedArr, index);
                       },
                     })}
+                    autoComplete="off"
                   />
                   <DeleteInputButton
                     onClickHandler={() => {
@@ -201,6 +203,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                       focusedArrOnBlurHandler(setApplyRouteIsFocusedArr, index);
                     },
                   })}
+                  autoComplete="off"
                 />
                 <DeleteInputButton
                   onClickHandler={() => {
@@ -217,17 +220,17 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                       text={applyRouteGuide}
                       onClickHandler={() => {
                         setValue(`apply_route_arr.${index}.value`, applyRouteGuide);
-                        const filteredArr = applyRouteGuideArr.filter(
+                        const filteredElement = applyRouteGuideArr.filter(
                           (element) =>
                             !randomApplyRouteGuideArr.includes(element) &&
                             !jobForm
                               .watch("apply_route_arr")
                               .some((elem) => JSON.stringify({ value: element }) === JSON.stringify(elem))
                         )[0];
-                        if (filteredArr) {
+                        if (filteredElement) {
                           setRandomApplyRouteGuideArr((prev) => [
                             ...prev.filter((element) => element !== applyRouteGuide),
-                            filteredArr,
+                            filteredElement,
                           ]);
                         } else {
                           setRandomApplyRouteGuideArr((prev) => [
@@ -313,7 +316,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               </div>
             </div>
           ) : (
-            <>
+            <div>
               <label css={cssObj.inputLabel} key="applyUrlWebsite" htmlFor="applyUrlWebsite">
                 <span css={cssObj.inputLogo}>
                   <FiAtSign />
@@ -321,7 +324,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                 <input css={cssObj.applyUrlInput(47)} {...register("apply_url", { required: true })} />
               </label>
               <p css={cssObj.errorMessage}>{!!formState.errors.apply_url && formState.errors.apply_url.message}</p>
-            </>
+            </div>
           )}
         </div>
       </div>

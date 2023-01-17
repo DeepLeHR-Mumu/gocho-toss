@@ -1,4 +1,4 @@
-export const blankPosition = {
+export const BLANK_POSITION = {
   middle: false,
   high: false,
   college: false,
@@ -20,7 +20,7 @@ export const blankPosition = {
     factory_arr: [],
     etc: "",
   },
-  hire_number: 0,
+  hire_number: null,
   pay_arr: [{ value: "" }],
   preferred_certi_arr: [],
   preferred_etc_arr: [{ value: "" }],
