@@ -5,7 +5,7 @@ import { BiRocket } from "react-icons/bi";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
-import type { NextPageWithLayout } from "@/pages/_app.page";
+import type { NextPageWithLayout } from "@/pages/index/type";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
 import { useAddJd } from "@/apis/jd/useAddJd";
 

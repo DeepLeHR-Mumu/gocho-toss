@@ -28,4 +28,12 @@ export const cssObj = {
     font-weight: 700;
     color: ${isLogin ? COLORS.GRAY10 : COLORS.GRAY100};
   `,
+  linkButton: css`
+    background-color: ${COLORS.GRAY100};
+    border: 1px solid ${COLORS.BLUE_FIRST40};
+    color: ${COLORS.BLUE_FIRST40};
+    padding: 0.875rem 1rem;
+    border-radius: 0.375rem;
+    line-height: 1;
+  `,
 };

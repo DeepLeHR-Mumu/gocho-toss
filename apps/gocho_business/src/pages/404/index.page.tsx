@@ -4,7 +4,7 @@ import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
 import jobi_404 from "@/public/image/jobi_404.svg";
 
-import { NextPageWithLayout } from "@/pages/_app.page";
+import { NextPageWithLayout } from "@/pages/index/type";
 import { Footer, GlobalLayout } from "@/components/global/layout";
 
 import { cssObj } from "./style";
