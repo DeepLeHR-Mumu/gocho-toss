@@ -7,12 +7,7 @@ import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
 import { useAddCompanyDetail } from "@/apis/company/useAddCompany";
-import {
-  useCompanyDetail,
-  useCompanyDetail2,
-  useCompanyDetail3,
-  useCompanyDetail4,
-} from "@/apis/company/useCompanyDetail";
+import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
 import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 import { CommonStatusChip } from "@/components/common";
 import { useUserState } from "@/globalStates/useUserState";
@@ -32,15 +27,6 @@ const CompanyEditPage: NextPageWithLayout = () => {
   const { setToast } = useToast();
   const { data: companyData } = useCompanyDetail({
     companyId: userInfoData?.companyId,
-  });
-  const { data: companyData2 } = useCompanyDetail2({
-    companyId: 896,
-  });
-  const { data: companyData3 } = useCompanyDetail3({
-    companyId: 856,
-  });
-  const { data: companyData4 } = useCompanyDetail4({
-    companyId: 321,
   });
 
   const { mutate: putCompanyDetail } = useAddCompanyDetail();

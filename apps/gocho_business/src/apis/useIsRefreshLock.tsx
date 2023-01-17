@@ -3,12 +3,13 @@ import { useRouter } from "next/router";
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
 import { BUSINESS_BACKEND_URL } from "shared-constant/externalURL";
-import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 
 import { tokenService } from "@/utils/tokenService";
 import { ErrorResponseDef } from "@/types/errorType";
 import { useModal } from "@/globalStates/useModal";
 import { INTERNAL_URL } from "@/constants/url";
+
+import { getTokenDateInfoCreator } from "./util";
 
 export const axiosNoTokenInstance = axios.create({
   timeout: 10000,
@@ -24,58 +25,51 @@ export const useAxiosInterceptor = () => {
   const router = useRouter();
   const { setCurrentModal } = useModal();
 
-  const time = 55000;
+  const accessTokenLimitMs = 55000;
+  const refreshTokenOverLimitMs = -1.8e6;
   let isLock = false;
   let readyQueueArr: ((token: string) => void)[] = [];
   const saveQueue = (callback: (token: string) => void) => readyQueueArr.push(callback);
-  // const activeQueue = (token: string) => readyQueueArr.map((callback) => callback(token));
+  const activeQueue = (token: string) => readyQueueArr.forEach((callback) => callback(token));
 
-  const getRefreshTokenCreator = async () => {
+  const getRefreshTokenCreator = async (): Promise<{ newToken: string } | void> => {
     const refreshToken = tokenService.getRefreshToken();
-    // TODO : 해당 에러에 대한 catch 잡아주기;
-    const { data: newTokenData } = await axiosNoTokenInstance.get("/auth/refresh", {
-      headers: { "x-refresh-token": refreshToken },
-    });
-    const newToken = (await newTokenData.data.access_token) as string;
-    tokenService.updateAllToken(await newTokenData.data.access_token, await newTokenData.data.refresh_token);
-    // activeQueue(await newTokenData.data.access_token);
-    // readyQueue안에는 저장되어야 할 resolve함수가 있어야한느데 지금 undefinder이다
-    readyQueueArr.forEach((callback) => {
-      callback(newTokenData.data.access_token);
-    });
-    isLock = false;
-    readyQueueArr = [];
-    return { newToken };
+    const refreshResults = await axios
+      .get(`${BUSINESS_BACKEND_URL}/auth/refresh`, {
+        headers: { "x-refresh-token": refreshToken },
+      })
+      .then(({ data }) => {
+        const newToken = data.data.access_token as string;
+        tokenService.updateAllToken(data.data.access_token, data.data.refresh_token);
+        activeQueue(data.access_token);
+        return { newToken };
+      })
+      .finally(() => {
+        isLock = false;
+        readyQueueArr = [];
+      });
+
+    return refreshResults;
   };
 
   const requestConfigHandler = async (config: AxiosRequestConfig) => {
-    const accessTokenData = tokenService.getAccessToken();
-    const refreshTokenData = tokenService.getRefreshToken();
-    // TODO : cancel check
-    // const controls = new AbortController();
+    const { accessTokenData, refreshTokenData, accessCreateTime, refreshCreateTime, currentTime } =
+      getTokenDateInfoCreator();
 
-    if (!accessTokenData || !refreshTokenData) {
-      router.push(INTERNAL_URL.LOGIN);
-      // controls.abort();
-    }
+    if (!accessTokenData || !refreshTokenData) router.replace(INTERNAL_URL.LOGIN);
 
-    const { exp: accessTokenExp } = managerTokenDecryptor(accessTokenData);
-    const { exp: refreshTokenExp } = managerTokenDecryptor(refreshTokenData);
-    const accessCreateTime = new Date(accessTokenExp * 1000).getTime();
-    const refreshCreateTime = new Date(refreshTokenExp * 1000).getTime();
-    const currentTime = new Date().getTime();
+    if (
+      refreshCreateTime <= currentTime &&
+      new Date(refreshCreateTime - currentTime).getTime() <= refreshTokenOverLimitMs
+    )
+      router.replace(INTERNAL_URL.LOGIN);
 
-    // console.log(new Date(accessCreateTime - currentTime).getTime());
+    if (refreshCreateTime <= currentTime && router.pathname !== INTERNAL_URL.LOGIN) setCurrentModal("loginModal");
 
-    if (refreshCreateTime <= currentTime) {
-      tokenService.removeAllToken();
-      setCurrentModal("loginModal");
-    }
-
-    if (accessCreateTime - currentTime <= time) {
+    if (accessCreateTime - currentTime <= accessTokenLimitMs) {
       if (!isLock) {
         isLock = true;
-        const { newToken } = await getRefreshTokenCreator();
+        const newToken = await getRefreshTokenCreator();
         return {
           ...config,
           headers: {
@@ -89,14 +83,12 @@ export const useAxiosInterceptor = () => {
       });
     }
 
-    const newConfig = {
+    return {
       ...config,
       headers: {
         "x-access-token": accessTokenData,
       },
     };
-
-    return newConfig;
   };
 
   const requestErrorHandler = async (error: AxiosError) => Promise.reject(error);
@@ -111,8 +103,7 @@ export const useAxiosInterceptor = () => {
       path: error.response?.data.path,
     };
 
-    if (errorStatus.errorCode === "MALFORMED_JWT" && errorStatus.status === 401) {
-      tokenService.removeAllToken();
+    if (errorStatus.errorCode === "EXPIRED_JWT" && errorStatus.status === 401 && errorStatus.path === "/auth/refresh") {
       return null;
     }
 

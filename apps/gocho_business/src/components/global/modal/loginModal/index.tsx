@@ -1,6 +1,7 @@
 import { FunctionComponent, useState } from "react";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
@@ -21,6 +22,7 @@ import { cssObj } from "./style";
 
 export const LoginBox: FunctionComponent = () => {
   const [errorMsg, setErrorMsg] = useState<null | string>(null);
+  const queryClient = useQueryClient();
 
   const { setUserInfoData } = useUserState();
   const { setToast } = useToast();
@@ -56,6 +58,7 @@ export const LoginBox: FunctionComponent = () => {
           iat,
           exp,
         });
+        queryClient.invalidateQueries();
         setToast("재접속되었습니다");
       },
     });

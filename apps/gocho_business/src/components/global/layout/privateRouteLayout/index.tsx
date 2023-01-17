@@ -15,10 +15,13 @@ export const PrivateRouteLayout: FunctionComponent<PrivateRouteProps> = ({ prote
 
   useEffect(() => {
     const token = tokenService.getAccessToken();
-    if (!isLoading && !isSuccess && isPathProtected && !token) {
+    if (!isSuccess && isPathProtected && token) {
+      return;
+    }
+    if (!isSuccess && isPathProtected && !token) {
       router.push(INTERNAL_URL.LOGIN);
     }
-  }, [isLoading, isPathProtected, isSuccess, router]);
+  }, [isPathProtected, isSuccess, router]);
 
   if ((isLoading || !isSuccess) && isPathProtected) {
     return <div css={cssObj.loadingBox} />;
