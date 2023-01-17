@@ -1,11 +1,12 @@
 import { FunctionComponent, useState } from "react";
-import { FiChevronDown, FiChevronUp, FiMinus, FiPlus } from "react-icons/fi";
+import { FiChevronDown, FiChevronUp, FiMinus } from "react-icons/fi";
 import { useFieldArray } from "react-hook-form";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
+import { AddFieldButton } from "../../component/addFieldButton";
 import { PositionTitleInfoPartProps } from "./type";
 import { taskArr } from "./constant";
 import { cssObj } from "./style";
@@ -24,40 +25,40 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
   const [isSubTaskOpen, setIsSubTaskOpen] = useState<boolean>(false);
   const [hireNumberLabel, setHireNumberLabel] = useState<string>("");
 
+  const { watch, setValue, clearErrors, trigger, formState, register, setError } = jobForm;
+
   const taskDetailArr = useFieldArray({
     control,
     name: `position_arr.${positionIndex}.task_detail_arr`,
   });
 
-  const selectedSubTaskObj = taskArr.find(
-    (task) => jobForm.watch("position_arr")[positionIndex].task_main === task.mainTask
-  );
+  const selectedSubTaskObj = taskArr.find((task) => watch("position_arr")[positionIndex].task_main === task.mainTask);
 
   const mainTaskClickHandler = (task: string) => {
-    jobForm.setValue(`position_arr.${positionIndex}.task_main`, task);
-    jobForm.clearErrors(`position_arr.${positionIndex}.task_main`);
-    jobForm.setValue(`position_arr.${positionIndex}.task_sub_arr`, []);
+    setValue(`position_arr.${positionIndex}.task_main`, task);
+    setValue(`position_arr.${positionIndex}.task_sub_arr`, []);
+    clearErrors(`position_arr.${positionIndex}.task_main`);
     setIsMainTaskOpen(false);
   };
 
   const subTaskClickHandler = (subTask: string) => {
-    const isInList = jobForm.watch("position_arr")[positionIndex].task_sub_arr?.includes(subTask);
-    jobForm.clearErrors(`position_arr.${positionIndex}.task_sub_arr`);
+    const isInList = watch("position_arr")[positionIndex].task_sub_arr?.includes(subTask);
+    clearErrors(`position_arr.${positionIndex}.task_sub_arr`);
     if (isInList) {
-      jobForm.setValue(`position_arr.${positionIndex}.task_sub_arr`, [
-        ...(jobForm.watch("position_arr")[positionIndex].task_sub_arr?.filter((element) => element !== subTask) || []),
+      setValue(`position_arr.${positionIndex}.task_sub_arr`, [
+        ...(watch("position_arr")[positionIndex].task_sub_arr?.filter((element) => element !== subTask) || []),
       ]);
     } else {
-      jobForm.setValue(`position_arr.${positionIndex}.task_sub_arr`, [
-        ...(jobForm.watch("position_arr")[positionIndex].task_sub_arr || []),
+      setValue(`position_arr.${positionIndex}.task_sub_arr`, [
+        ...(watch("position_arr")[positionIndex].task_sub_arr || []),
         subTask,
       ]);
     }
   };
 
   const hireNumberClickHandler = (value: number, label: string) => {
-    jobForm.setValue(`position_arr.${positionIndex}.hire_number`, value);
-    jobForm.trigger(`position_arr.${positionIndex}.hire_number`);
+    setValue(`position_arr.${positionIndex}.hire_number`, value);
+    trigger(`position_arr.${positionIndex}.hire_number`);
     setHireNumberLabel(label);
   };
 
@@ -83,7 +84,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
   };
 
   const taskDetailErrorMsgMaker = () => {
-    const errorArray = jobForm.formState.errors.position_arr?.[positionIndex]?.task_detail_arr;
+    const errorArray = formState.errors.position_arr?.[positionIndex]?.task_detail_arr;
     if (errorArray) {
       const values = Object.keys(errorArray).map((key) => errorArray?.[Number(key)]);
       if (values.some((element) => element?.value?.type === "maxLength")) {
@@ -99,9 +100,9 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
       <div css={cssObj.titleContainer}>
         <strong css={cssObj.positionTitle}>
           {titleMaker(
-            jobForm.watch("position_arr")[positionIndex].task_main,
-            jobForm.watch("position_arr")[positionIndex].contract_type,
-            jobForm.watch("position_arr")[positionIndex].hire_number
+            watch("position_arr")[positionIndex].task_main,
+            watch("position_arr")[positionIndex].contract_type,
+            watch("position_arr")[positionIndex].hire_number
           )}
         </strong>
         <div css={cssObj.positionButtonContainer}>
@@ -131,7 +132,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
             size="medium"
             text="직무 카드 복사"
             onClickHandler={() => {
-              appendPosition({ ...jobForm.watch("position_arr")[positionIndex] });
+              appendPosition({ ...watch("position_arr")[positionIndex] });
               setIsCardOpen((prev) => [...prev.slice(0, positionIndex + 1), false, ...prev.slice(positionIndex + 1)]);
             }}
           />
@@ -149,7 +150,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
         </div>
       </div>
       <div css={cssObj.container}>
-        <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.task_main)}>채용 직무</p>
+        <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.task_main)}>채용 직무</p>
         <div css={cssObj.taskInputContainer}>
           <div>
             <div css={cssObj.taskContainer}>
@@ -157,8 +158,8 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 css={cssObj.input(20)}
                 type="button"
                 onClick={() => {
-                  if (isMainTaskOpen && jobForm.watch("position_arr")[positionIndex].task_main === "") {
-                    jobForm.setError(`position_arr.${positionIndex}.task_main`, { type: "required" });
+                  if (isMainTaskOpen && watch("position_arr")[positionIndex].task_main === "") {
+                    setError(`position_arr.${positionIndex}.task_main`, { type: "required" });
                   }
                   setIsMainTaskOpen((prev) => !prev);
                 }}
@@ -182,8 +183,8 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 ))}
               </div>
             </div>
-            <p css={cssObj.desc(!!jobForm.formState.errors.position_arr?.[positionIndex]?.task_main)}>
-              {jobForm.formState.errors.position_arr?.[positionIndex]?.task_main
+            <p css={cssObj.desc(!!formState.errors.position_arr?.[positionIndex]?.task_main)}>
+              {formState.errors.position_arr?.[positionIndex]?.task_main
                 ? "1차 직무는 필수 선택 사항입니다"
                 : "1차 직무 선택 후 2차 직무가 표시됩니다"}
             </p>
@@ -197,7 +198,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                   setIsSubTaskOpen((prev) => !prev);
                 }}
               >
-                {subTaskTextMaker(jobForm.watch("position_arr")[positionIndex].task_sub_arr || [])}
+                {subTaskTextMaker(watch("position_arr")[positionIndex].task_sub_arr || [])}
                 {isSubTaskOpen ? <FiChevronUp /> : <FiChevronDown />}
               </button>
               <div css={cssObj.taskList(isSubTaskOpen)}>
@@ -212,7 +213,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                     }}
                   >
                     <CheckBox
-                      isChecked={jobForm.watch("position_arr")[positionIndex].task_sub_arr?.includes(subTask) || false}
+                      isChecked={watch("position_arr")[positionIndex].task_sub_arr?.includes(subTask) || false}
                     />
                     {subTask}
                   </button>
@@ -226,7 +227,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
       {isCardOpen && (
         <>
           <div css={cssObj.container}>
-            <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.task_detail_arr)}>
+            <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.task_detail_arr)}>
               세부 직무 내용
             </p>
             <div css={cssObj.inputContainer}>
@@ -236,7 +237,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                     id={`taskDetailArr${item.id}`}
                     css={cssObj.erasableInput(47)}
                     placeholder="합격시 구체적으로 어떤 일을 하게 되는지 명시해주세요"
-                    {...jobForm.register(`position_arr.${positionIndex}.task_detail_arr.${index}.value`, {
+                    {...register(`position_arr.${positionIndex}.task_detail_arr.${index}.value`, {
                       required: true,
                       maxLength: 70,
                     })}
@@ -252,27 +253,18 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                   </button>
                 </label>
               ))}
-              <SharedButton
-                radius="round"
-                fontColor={`${COLORS.GRAY10}`}
-                backgroundColor={`${COLORS.GRAY100}`}
-                borderColor={`${COLORS.GRAY70}`}
-                size="medium"
-                iconObj={{ icon: FiPlus, location: "left" }}
-                text="입력칸 추가"
+              <AddFieldButton
                 onClickHandler={() => {
                   taskDetailArr.append({ value: "" });
                 }}
               />
             </div>
             <p css={cssObj.errorMessage}>
-              {jobForm.formState.errors.position_arr?.[positionIndex]?.task_detail_arr && taskDetailErrorMsgMaker()}
+              {formState.errors.position_arr?.[positionIndex]?.task_detail_arr && taskDetailErrorMsgMaker()}
             </p>
           </div>
           <div css={cssObj.container}>
-            <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.hire_number)}>
-              채용 인원
-            </p>
+            <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.hire_number)}>채용 인원</p>
             <div css={cssObj.hireNumberContainer}>
               <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-1, "0")}>
                 0명
@@ -285,13 +277,13 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
               </button>
               <div css={cssObj.hireNumberInputContainer}>
                 {/* TODO: 0, 00, 000명 버튼 누른 다음, 위에 클릭 하고 한번 더 눌러야 input에 포커싱이 됨 // 0 기본값으로 안 주고 싶은데,, */}
-                {jobForm.watch("position_arr")[positionIndex].hire_number < 0 ? (
+                {watch("position_arr")[positionIndex].hire_number < 0 ? (
                   <>
                     <button
                       css={cssObj.hireNumberCover}
                       type="button"
                       onClick={() => {
-                        jobForm.setValue(`position_arr.${positionIndex}.hire_number`, 0);
+                        setValue(`position_arr.${positionIndex}.hire_number`, 0);
                       }}
                     >
                       {hireNumberLabel}
@@ -303,7 +295,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                     <input
                       type="number"
                       css={cssObj.input(6)}
-                      {...jobForm.register(`position_arr.${positionIndex}.hire_number`, {
+                      {...register(`position_arr.${positionIndex}.hire_number`, {
                         valueAsNumber: true,
                         required: true,
                       })}
@@ -314,7 +306,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
               </div>
             </div>
             <p css={cssObj.errorMessage}>
-              {jobForm.formState.errors.position_arr?.[positionIndex]?.hire_number && "채용 인원은 필수 입력 값입니다"}
+              {formState.errors.position_arr?.[positionIndex]?.hire_number && "채용 인원은 필수 입력 값입니다"}
             </p>
           </div>
         </>

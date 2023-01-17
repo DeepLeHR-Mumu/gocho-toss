@@ -1,14 +1,14 @@
 import { ChangeEvent, FunctionComponent, useEffect, useState } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
+import { FiMinus } from "react-icons/fi";
 import { useFieldArray } from "react-hook-form";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
-import { FiMinus, FiPlus } from "react-icons/fi";
-import { COLORS } from "shared-style/color";
-import { SharedButton } from "shared-ui/business/sharedButton";
 
+import { AddFieldButton } from "../../component/addFieldButton";
 import { GuideChip } from "../../component/guideChip";
+import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
 import { PositionRequiredInfoPartProps } from "./type";
 import { contractTypeArr, requiredExpArr, requiredEtcGuideArr } from "./constant";
 import { cssObj } from "./style";
@@ -24,6 +24,8 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
   const [isMaxYear, setIsMaxYear] = useState<boolean>(false);
   const [randomRequiredEtcGuideArr, setRandomRequiredEtcGuideArr] = useState<string[]>([]);
 
+  const { watch, setValue, clearErrors, trigger, formState, register, setError } = jobForm;
+
   const requiredEtcArr = useFieldArray({
     control,
     name: `position_arr.${positionIndex}.required_etc_arr`,
@@ -31,7 +33,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
 
   const conversionRateHandler = (event: ChangeEvent<HTMLInputElement>, isError: boolean) => {
     if (isError && Number(event.target.value) === 0) {
-      jobForm.setError(`position_arr.${positionIndex}.conversion_rate`, {
+      setError(`position_arr.${positionIndex}.conversion_rate`, {
         type: "required",
         message: "전환율은 필수 입력 값입니다",
       });
@@ -39,7 +41,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
   };
 
   const requiredEtcErrorMsgMaker = () => {
-    const errorArray = jobForm.formState.errors.position_arr?.[positionIndex]?.required_etc_arr;
+    const errorArray = formState.errors.position_arr?.[positionIndex]?.required_etc_arr;
     if (errorArray) {
       const values = Object.keys(errorArray).map((key) => errorArray?.[Number(key)]);
       if (values.some((element) => element?.value?.type === "maxLength")) {
@@ -55,27 +57,27 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
   }, []);
 
   const isConversionDisabled =
-    jobForm.watch("position_arr")[positionIndex].contract_type !== "인턴" &&
-    jobForm.watch("position_arr")[positionIndex].contract_type !== "계약>정규";
+    watch("position_arr")[positionIndex].contract_type !== "인턴" &&
+    watch("position_arr")[positionIndex].contract_type !== "계약>정규";
 
   const isYearDisabled =
-    jobForm.watch("position_arr")[positionIndex].required_exp !== "경력" &&
-    jobForm.watch("position_arr")[positionIndex].required_exp !== "신입/경력";
+    watch("position_arr")[positionIndex].required_exp !== "경력" &&
+    watch("position_arr")[positionIndex].required_exp !== "신입/경력";
 
   const isMinYearDisabled = isYearDisabled || isMinYear;
   const isMaxYearDisabled = isYearDisabled || isMaxYear;
 
   useEffect(() => {
     if (isMinYearDisabled) {
-      jobForm.setValue(`position_arr.${positionIndex}.min_year`, null);
-      jobForm.clearErrors(`position_arr.${positionIndex}.min_year`);
+      setValue(`position_arr.${positionIndex}.min_year`, null);
+      clearErrors(`position_arr.${positionIndex}.min_year`);
     }
 
     if (isMaxYearDisabled) {
-      jobForm.setValue(`position_arr.${positionIndex}.max_year`, null);
-      jobForm.clearErrors(`position_arr.${positionIndex}.max_year`);
+      setValue(`position_arr.${positionIndex}.max_year`, null);
+      clearErrors(`position_arr.${positionIndex}.max_year`);
     }
-  }, [jobForm, positionIndex, isMinYearDisabled, isMaxYearDisabled]);
+  }, [jobForm, positionIndex, isMinYearDisabled, isMaxYearDisabled, setValue, clearErrors]);
 
   return (
     <>
@@ -88,12 +90,12 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                 key={`${contractName}${id}`}
                 value={contractName}
                 id={`${contractName}${id}`}
-                registerObj={jobForm.register(`position_arr.${positionIndex}.contract_type`, {
+                registerObj={register(`position_arr.${positionIndex}.contract_type`, {
                   required: true,
                   onChange: () => {
                     if (!isConversionDisabled) {
-                      jobForm.clearErrors(`position_arr.${positionIndex}.conversion_rate`);
-                      jobForm.setValue(`position_arr.${positionIndex}.conversion_rate`, null);
+                      clearErrors(`position_arr.${positionIndex}.conversion_rate`);
+                      setValue(`position_arr.${positionIndex}.conversion_rate`, null);
                     }
                   },
                 })}
@@ -113,14 +115,14 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                 min="0"
                 max="100"
                 step="5"
-                {...jobForm.register(`position_arr.${positionIndex}.conversion_rate`, {
+                {...register(`position_arr.${positionIndex}.conversion_rate`, {
                   required: !isConversionDisabled,
                   disabled: isConversionDisabled,
                   onChange: (e) => conversionRateHandler(e, !isConversionDisabled),
                 })}
               />
-              <p css={cssObj.conversionRateLabel(jobForm.watch("position_arr")[positionIndex].conversion_rate || 0)}>
-                {jobForm.watch("position_arr")[positionIndex].conversion_rate || 0}%
+              <p css={cssObj.conversionRateLabel(watch("position_arr")[positionIndex].conversion_rate || 0)}>
+                {watch("position_arr")[positionIndex].conversion_rate || 0}%
               </p>
             </div>
             <div css={cssObj.conversionRateInputContainer}>
@@ -129,7 +131,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                 type="number"
                 min="0"
                 max="100"
-                {...jobForm.register(`position_arr.${positionIndex}.conversion_rate`, {
+                {...register(`position_arr.${positionIndex}.conversion_rate`, {
                   required: !isConversionDisabled,
                   disabled: isConversionDisabled,
                   onChange: (e) => conversionRateHandler(e, !isConversionDisabled),
@@ -139,7 +141,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             </div>
           </div>
           <p css={cssObj.errorMessage}>
-            {!!jobForm.formState.errors.position_arr?.[positionIndex]?.conversion_rate && "전환율은 필수 입력 값입니다"}
+            {!!formState.errors.position_arr?.[positionIndex]?.conversion_rate && "전환율은 필수 입력 값입니다"}
           </p>
         </div>
       </div>
@@ -150,36 +152,28 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             <input
               type="checkbox"
               id={`middle${positionIndex}`}
-              {...jobForm.register(`position_arr.${positionIndex}.middle`)}
+              {...register(`position_arr.${positionIndex}.middle`)}
             />
-            <CheckBox isChecked={jobForm.watch("position_arr")[positionIndex].middle} />
+            <CheckBox isChecked={watch("position_arr")[positionIndex].middle} />
             중졸
           </label>
           <label css={cssObj.label} htmlFor={`high${positionIndex}`}>
-            <input
-              type="checkbox"
-              id={`high${positionIndex}`}
-              {...jobForm.register(`position_arr.${positionIndex}.high`)}
-            />
-            <CheckBox isChecked={jobForm.watch("position_arr")[positionIndex].high} />
+            <input type="checkbox" id={`high${positionIndex}`} {...register(`position_arr.${positionIndex}.high`)} />
+            <CheckBox isChecked={watch("position_arr")[positionIndex].high} />
             고졸
           </label>
           <label css={cssObj.label} htmlFor={`college${positionIndex}`}>
             <input
               type="checkbox"
               id={`college${positionIndex}`}
-              {...jobForm.register(`position_arr.${positionIndex}.college`)}
+              {...register(`position_arr.${positionIndex}.college`)}
             />
-            <CheckBox isChecked={jobForm.watch("position_arr")[positionIndex].college} />
+            <CheckBox isChecked={watch("position_arr")[positionIndex].college} />
             초대졸
           </label>
           <label css={cssObj.label} htmlFor={`four${positionIndex}`}>
-            <input
-              type="checkbox"
-              id={`four${positionIndex}`}
-              {...jobForm.register(`position_arr.${positionIndex}.four`)}
-            />
-            <CheckBox isChecked={jobForm.watch("position_arr")[positionIndex].four} />
+            <input type="checkbox" id={`four${positionIndex}`} {...register(`position_arr.${positionIndex}.four`)} />
+            <CheckBox isChecked={watch("position_arr")[positionIndex].four} />
             4년제
           </label>
           <p css={cssObj.desc}>
@@ -201,7 +195,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                   type="radio"
                   id={`${expName}${id}`}
                   css={cssObj.radio}
-                  {...jobForm.register(`position_arr.${positionIndex}.required_exp`, {
+                  {...register(`position_arr.${positionIndex}.required_exp`, {
                     required: true,
                   })}
                   value={expName}
@@ -213,15 +207,13 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           </div>
         </div>
         <div css={cssObj.container}>
-          <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.min_year)}>
-            최소경력(연)
-          </p>
+          <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.min_year)}>최소경력(연)</p>
           <div css={cssObj.yearInputContainer}>
             <input
               type="number"
               min="1"
               css={cssObj.activatableInput(isMinYearDisabled)}
-              {...jobForm.register(`position_arr.${positionIndex}.min_year`, {
+              {...register(`position_arr.${positionIndex}.min_year`, {
                 required: !isMinYearDisabled,
                 disabled: isMinYearDisabled,
                 valueAsNumber: true,
@@ -235,7 +227,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                 disabled={isYearDisabled}
                 onClick={() => {
                   if (!isMinYear) {
-                    jobForm.clearErrors(`position_arr.${positionIndex}.min_year`);
+                    clearErrors(`position_arr.${positionIndex}.min_year`);
                   }
                   setIsMinYear((prev) => !prev);
                 }}
@@ -245,18 +237,16 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             <p>무관</p>
           </div>
           <p css={cssObj.errorMessage}>
-            {!!jobForm.formState.errors.position_arr?.[positionIndex]?.min_year && "최소 경력은 필수 입력 사항입니다"}
+            {!!formState.errors.position_arr?.[positionIndex]?.min_year && "최소 경력은 필수 입력 사항입니다"}
           </p>
         </div>
         <div css={cssObj.container}>
-          <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.max_year)}>
-            최대경력(연)
-          </p>
+          <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.max_year)}>최대경력(연)</p>
           <div css={cssObj.yearInputContainer}>
             <input
               type="number"
               css={cssObj.activatableInput(isMaxYearDisabled)}
-              {...jobForm.register(`position_arr.${positionIndex}.max_year`, {
+              {...register(`position_arr.${positionIndex}.max_year`, {
                 required: !isMaxYearDisabled,
                 disabled: isMaxYearDisabled,
                 valueAsNumber: true,
@@ -270,7 +260,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                 disabled={isYearDisabled}
                 onClick={() => {
                   if (!isMaxYear) {
-                    jobForm.clearErrors(`position_arr.${positionIndex}.max_year`);
+                    clearErrors(`position_arr.${positionIndex}.max_year`);
                   }
                   setIsMaxYear((prev) => !prev);
                 }}
@@ -280,12 +270,12 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             <p>무관</p>
           </div>
           <p css={cssObj.errorMessage}>
-            {!!jobForm.formState.errors.position_arr?.[positionIndex]?.max_year && "최대 경력은 필수 입력 사항입니다"}
+            {!!formState.errors.position_arr?.[positionIndex]?.max_year && "최대 경력은 필수 입력 사항입니다"}
           </p>
         </div>
       </div>
       <div css={cssObj.containerWithGuide}>
-        <p css={cssObj.inputTitle(!!jobForm.formState.errors.position_arr?.[positionIndex]?.required_etc_arr)}>
+        <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.required_etc_arr)}>
           기타 지원 조건
         </p>
         <div css={cssObj.inputContainerWithGuide}>
@@ -297,28 +287,14 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                   css={cssObj.erasableInput(47)}
                   placeholder="군필 여부, 나이, 성별 등의 기타 조건을 적어주세요"
                   onFocus={() => {
-                    setRequiredEtcIsFocusedArr((prev) =>
-                      prev.map((stateItem, stateIndex) => {
-                        if (stateIndex === index) {
-                          return true;
-                        }
-                        return stateItem;
-                      })
-                    );
+                    focusedArrOnFocusHandler(setRequiredEtcIsFocusedArr, index);
                   }}
-                  {...jobForm.register(`position_arr.${positionIndex}.required_etc_arr.${index}.value`, {
+                  {...register(`position_arr.${positionIndex}.required_etc_arr.${index}.value`, {
                     required: true,
                     maxLength: 70,
                     onBlur: () => {
-                      jobForm.trigger(`position_arr.${positionIndex}.required_etc_arr`);
-                      setRequiredEtcIsFocusedArr((prev) =>
-                        prev.map((stateItem, stateIndex) => {
-                          if (stateIndex === index) {
-                            return false;
-                          }
-                          return stateItem;
-                        })
-                      );
+                      trigger(`position_arr.${positionIndex}.required_etc_arr`);
+                      focusedArrOnBlurHandler(setRequiredEtcIsFocusedArr, index);
                     },
                   })}
                 />
@@ -340,10 +316,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                       key={`${requiredEtcGuide}${item.id}`}
                       text={requiredEtcGuide}
                       onClickHandler={() => {
-                        jobForm.setValue(
-                          `position_arr.${positionIndex}.required_etc_arr.${index}.value`,
-                          requiredEtcGuide
-                        );
+                        setValue(`position_arr.${positionIndex}.required_etc_arr.${index}.value`, requiredEtcGuide);
                         const filteredArr = requiredEtcGuideArr.filter(
                           (element) =>
                             !randomRequiredEtcGuideArr.includes(element) &&
@@ -369,14 +342,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
               </div>
             </div>
           ))}
-          <SharedButton
-            radius="round"
-            fontColor={`${COLORS.GRAY10}`}
-            backgroundColor={`${COLORS.GRAY100}`}
-            borderColor={`${COLORS.GRAY70}`}
-            size="medium"
-            iconObj={{ icon: FiPlus, location: "left" }}
-            text="입력칸 추가"
+          <AddFieldButton
             onClickHandler={() => {
               requiredEtcArr.append({ value: "" });
               setRequiredEtcIsFocusedArr((prev) => [...prev, false]);
@@ -384,7 +350,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           />
         </div>
         <p css={cssObj.errorMessage}>
-          {!!jobForm.formState.errors.position_arr?.[positionIndex]?.required_etc_arr && requiredEtcErrorMsgMaker()}
+          {!!formState.errors.position_arr?.[positionIndex]?.required_etc_arr && requiredEtcErrorMsgMaker()}
         </p>
       </div>
     </>
