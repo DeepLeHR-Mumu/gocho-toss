@@ -23,12 +23,12 @@ export const axiosInstance = axios.create({
 
 export const useAxiosInterceptor = () => {
   const router = useRouter();
-  const { setCurrentModal } = useModal();
-
   const accessTokenLimitMs = 55000;
   const refreshTokenOverLimitMs = -1.8e6;
   let isLock = false;
   let readyQueueArr: ((token: string) => void)[] = [];
+
+  const { setCurrentModal } = useModal();
   const saveQueue = (callback: (token: string) => void) => readyQueueArr.push(callback);
   const activeQueue = (token: string) => readyQueueArr.forEach((callback) => callback(token));
 
@@ -95,20 +95,20 @@ export const useAxiosInterceptor = () => {
 
   const responseConfigHandler = (response: AxiosResponse) => response;
 
-  const responseErrorHandler = async (error: AxiosError<ErrorResponseDef>) => {
-    const errorStatus = {
-      status: error.response?.data.status,
-      errorCode: error.response?.data.error_code,
-      errorMsg: error.response?.data.error_message,
-      path: error.response?.data.path,
-    };
+  const responseErrorHandler = async (error: AxiosError<ErrorResponseDef>) =>
+    // 내일 코드 리뷰를 위해 남겨둔 부분
+    // const errorStatus = {
+    //   status: error.response?.data.status,
+    //   errorCode: error.response?.data.error_code,
+    //   errorMsg: error.response?.data.error_message,
+    //   path: error.response?.data.path,
+    // };
 
-    if (errorStatus.errorCode === "EXPIRED_JWT" && errorStatus.status === 401 && errorStatus.path === "/auth/refresh") {
-      return null;
-    }
+    // if (errorStatus.errorCode === "EXPIRED_JWT" && errorStatus.status === 401 && errorStatus.path === "/auth/refresh") {
+    //   return null;
+    // }
 
-    return Promise.reject(error);
-  };
+    Promise.reject(error);
 
   const requestInterceptor = axiosInstance.interceptors.request.use(
     (config: AxiosRequestConfig) => requestConfigHandler(config),
