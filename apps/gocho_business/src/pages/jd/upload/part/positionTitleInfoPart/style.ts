@@ -197,6 +197,10 @@ export const cssObj = {
     font-weight: 400;
   `,
 
+  hireNumberResetButton: css`
+    margin-left: 1rem;
+  `,
+
   hireNumberInputContainer: css`
     display: flex;
     align-items: center;

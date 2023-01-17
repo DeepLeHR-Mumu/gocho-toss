@@ -29,7 +29,7 @@ export interface JobFormValues {
       factory_arr: number[] | null;
       etc: string | null;
     };
-    hire_number: number;
+    hire_number: number | null;
     pay_arr: { value: string }[];
     preferred_certi_arr: string[] | null;
     preferred_etc_arr: { value: string }[];

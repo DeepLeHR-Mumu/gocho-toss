@@ -115,11 +115,13 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                 min="0"
                 max="100"
                 step="5"
-                {...register(`position_arr.${positionIndex}.conversion_rate`, {
-                  required: !isConversionDisabled,
-                  disabled: isConversionDisabled,
-                  onChange: (e) => conversionRateHandler(e, !isConversionDisabled),
-                })}
+                disabled={isConversionDisabled}
+                value={watch("position_arr")[positionIndex].conversion_rate || 0}
+                onChange={(e) => {
+                  setValue(`position_arr.${positionIndex}.conversion_rate`, Number(e.target.value));
+                  conversionRateHandler(e, !isConversionDisabled);
+                  if (Number(e.target.value) !== 0) clearErrors(`position_arr.${positionIndex}.conversion_rate`);
+                }}
               />
               <p css={cssObj.conversionRateLabel(watch("position_arr")[positionIndex].conversion_rate || 0)}>
                 {watch("position_arr")[positionIndex].conversion_rate || 0}%
