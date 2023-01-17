@@ -178,7 +178,7 @@ export const cssObj = {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin: 1rem 0;
+    margin: 0.75rem 0;
   `,
 
   factoryBox: css`
@@ -193,13 +193,14 @@ export const cssObj = {
   `,
 
   addressBox: css`
+    position: relative;
     display: flex;
     align-items: center;
     gap: 0 1rem;
     border-radius: 2rem;
     background-color: ${COLORS.GRAY90};
     height: 2.5rem;
-    padding: 0 0.5rem 0 1rem;
+    padding: 0 2.5rem 0 1rem;
   `,
 
   inputTitle: (isError: boolean) => css`

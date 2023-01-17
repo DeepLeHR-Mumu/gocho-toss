@@ -301,10 +301,13 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   })
                 }
               />
+              <br />
+              {(watch("position_arr")[positionIndex].place.address_arr?.length || -1) > 0 && (
+                <p css={cssObj.inputTitle(false)}>일반 근무지</p>
+              )}
               <div css={cssObj.placeContainer}>
                 {watch("position_arr")[positionIndex].place.address_arr?.map((address) => (
                   <div key={`${address}${id}`}>
-                    <span>일반 근무지</span>
                     <div css={cssObj.addressBox}>
                       {address}
                       <DeleteInputButton
@@ -387,6 +390,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                       focusedArrOnBlurHandler(setPayIsFocusedArr, index);
                     },
                   })}
+                  autoComplete="off"
                 />
                 <DeleteInputButton
                   onClickHandler={() => {
