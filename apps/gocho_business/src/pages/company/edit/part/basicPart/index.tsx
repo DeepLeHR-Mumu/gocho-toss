@@ -39,24 +39,8 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
     );
   }
 
-  const foundDate = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
-
   return (
     <div css={cssObj.wrapper} data-testid="company/edit/BasicPart">
-      <div css={cssObj.container()}>
-        <strong css={cssObj.subTitle()}>기업 형태</strong>
-        <p css={cssObj.textValue}>{companyData.size}</p>
-      </div>
-      <div css={cssObj.rowBox}>
-        <div css={cssObj.container(30)}>
-          <strong css={cssObj.subTitle()}>설립일</strong>
-          <p css={cssObj.textValue}>{foundDate.format(new Date(companyData.foundNumber))}</p>
-        </div>
-        <div css={cssObj.container()}>
-          <strong css={cssObj.subTitle()}>사업자 번호</strong>
-          <p css={cssObj.textValue}>{companyData.businessNumber}</p>
-        </div>
-      </div>
       <div css={cssObj.rowBox}>
         <div css={cssObj.container(30)}>
           <strong css={cssObj.subTitle(errors.employee_number?.type === "required")}>사원수</strong>

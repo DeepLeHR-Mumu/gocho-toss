@@ -10,9 +10,11 @@ import { linkArr } from "./constant";
 import { CompanyInfoBox } from "./component/companyInfoBox";
 import { UserInfoBox } from "./component/userInfoBox";
 import { cssObj } from "./style";
+import { INTERNAL_URL } from "@/constants/url";
 
 export const SideBar: FunctionComponent = () => {
   const router = useRouter();
+  const { id } = router.query;
   const { userInfoData } = useUserState();
 
   if (!userInfoData) {
@@ -28,11 +30,13 @@ export const SideBar: FunctionComponent = () => {
       <div css={cssObj.container}>
         <CompanyInfoBox name={userInfoData.companyName} img={userInfoData.companyLogo} />
         {linkArr.map((linkObj) => {
-          const isCurrentRoute = router.pathname === linkObj.url;
+          const isRoute = router.pathname === linkObj.url;
+          const isUpload = linkObj.name === "공고" && router.pathname === INTERNAL_URL.JD_UPLOAD;
+          const isEdit = linkObj.name === "공고" && router.pathname === INTERNAL_URL.JD_EDIT(Number(id));
 
           return (
             <Link href={linkObj.url} key={linkObj.url} passHref>
-              <a css={cssObj.linkCSS(isCurrentRoute)}>
+              <a css={cssObj.linkCSS(isRoute || isUpload || isEdit)}>
                 <linkObj.icon />
                 {linkObj.name}
               </a>
