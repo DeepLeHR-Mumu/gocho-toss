@@ -12,8 +12,8 @@ export const cssObj = {
     font-size: 1.25rem;
   `,
 
-  buttonWrapper: css`
-    width: 40%;
-    height: fit-content;
+  buttonContainer: css`
+    display: flex;
+    gap: 0 0.5rem;
   `,
 };

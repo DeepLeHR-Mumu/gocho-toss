@@ -23,9 +23,9 @@ export const cssObj = {
     color: ${COLORS.GRAY100};
   `,
 
-  buttonWrapper: css`
-    margin: 0 auto;
-    width: 40%;
-    height: fit-content;
+  buttonContainer: css`
+    display: flex;
+    justify-content: flex-end;
+    gap: 0 0.5rem;
   `,
 };

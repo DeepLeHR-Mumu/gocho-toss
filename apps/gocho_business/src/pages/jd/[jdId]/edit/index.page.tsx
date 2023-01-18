@@ -2,6 +2,7 @@ import { ReactElement, useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { BiRocket } from "react-icons/bi";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
@@ -10,6 +11,9 @@ import type { NextPageWithLayout } from "@/pages/index/type";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
 import { useJdDetail } from "@/apis/jd/useJdDetail";
 import { useEditJd } from "@/apis/jd/useEditJd";
+import { useDeleteJd } from "@/apis/jd/useDeleteJd";
+import { useEndJd } from "@/apis/jd/useEndJd";
+import { jdArrKeyObj } from "@/apis/jd/useJdArr/type";
 
 import { HeaderPart } from "./part/headerPart";
 import { BasicInfoPart } from "./part/basicInfoPart";
@@ -26,6 +30,7 @@ const JdEditPage: NextPageWithLayout = () => {
   const [isCardOpenArr, setIsCardOpenArr] = useState<boolean[]>([false]);
 
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const jobForm = useForm<JobFormValues>({
     mode: "onBlur",
@@ -61,6 +66,19 @@ const JdEditPage: NextPageWithLayout = () => {
 
   const { data: jobData } = useJdDetail(true, { id: Number(router.query.jdId) });
   const { mutate: editJobMutate } = useEditJd();
+  const { mutate: deleteJdMutation } = useDeleteJd();
+  const { mutate: endJdMutation } = useEndJd();
+
+  const endJdHandler = (id: number) => {
+    endJdMutation(
+      { jdId: id },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries(jdArrKeyObj.all);
+        },
+      }
+    );
+  };
 
   useEffect(() => {
     const newStartTime = jobData?.startTime ? jobData.startTime + 540000 * 60 : 0;
@@ -178,16 +196,39 @@ const JdEditPage: NextPageWithLayout = () => {
                 </li>
               ))}
             </ul>
-            <div css={cssObj.buttonWrapper}>
+            <div css={cssObj.buttonContainer}>
+              <SharedButton
+                radius="round"
+                fontColor={`${COLORS.BLUE_FIRST40}`}
+                borderColor={`${COLORS.BLUE_FIRST40}`}
+                backgroundColor={`${COLORS.GRAY100}`}
+                size="xLarge"
+                text="공고 마감"
+                onClickHandler={() => {
+                  endJdHandler(Number(router.query.jdId));
+                }}
+                iconObj={{ icon: BiRocket, location: "left" }}
+              />
+              <SharedButton
+                radius="round"
+                fontColor={`${COLORS.BLUE_FIRST40}`}
+                borderColor={`${COLORS.BLUE_FIRST40}`}
+                backgroundColor={`${COLORS.GRAY100}`}
+                size="xLarge"
+                text="공고 삭제"
+                onClickHandler={() => {
+                  deleteJdMutation({ jdId: Number(router.query.jdId) });
+                }}
+                iconObj={{ icon: BiRocket, location: "left" }}
+              />
               <SharedButton
                 radius="round"
                 fontColor={`${COLORS.GRAY100}`}
                 backgroundColor={`${COLORS.BLUE_FIRST40}`}
-                isFullWidth
-                size="medium"
-                text="공고 등록하기"
-                iconObj={{ icon: BiRocket, location: "left" }}
+                size="xLarge"
+                text="수정 완료"
                 onClickHandler="submit"
+                iconObj={{ icon: BiRocket, location: "left" }}
               />
             </div>
           </form>

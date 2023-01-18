@@ -89,7 +89,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
               iconObj={{ icon: AiOutlinePause, location: "left" }}
               text="공고마감"
               onClickHandler={() => {
-                deleteJdMutation({ jdId: jd.id });
+                endJdHandler(jd.id);
               }}
             />
             <SharedButton
@@ -100,7 +100,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
               iconObj={{ icon: BiMinus, location: "left" }}
               text="공고삭제"
               onClickHandler={() => {
-                endJdHandler(jd.id);
+                deleteJdMutation({ jdId: jd.id });
               }}
             />
             <SharedButton
