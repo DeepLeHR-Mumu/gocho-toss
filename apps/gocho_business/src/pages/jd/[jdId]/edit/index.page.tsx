@@ -6,6 +6,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
+import { Spinner } from "shared-ui/common/atom/spinner";
 
 import type { NextPageWithLayout } from "@/pages/index/type";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
@@ -21,7 +22,7 @@ import { PositionHeaderPart } from "./part/positionHeaderPart";
 import { PositionTitleInfoPart } from "./part/positionTitleInfoPart";
 import { PositionRequiredInfoPart } from "./part/positionRequiredInfoPart";
 import { PositionWorkInfoPart } from "./part/positionWorkInfoPart";
-import { JobFormValues } from "./type";
+import { JdFormValues } from "./type";
 import { BLANK_POSITION } from "./constant";
 import { getFieldArrayValue, getFieldArrayValueWithNull, setFieldArray } from "./util";
 import { cssObj } from "./style";
@@ -32,7 +33,7 @@ const JdEditPage: NextPageWithLayout = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const jobForm = useForm<JobFormValues>({
+  const jdForm = useForm<JdFormValues>({
     mode: "onBlur",
     reValidateMode: "onChange",
     defaultValues: {
@@ -42,7 +43,7 @@ const JdEditPage: NextPageWithLayout = () => {
       position_arr: [BLANK_POSITION],
     },
   });
-  const { control, handleSubmit, reset } = jobForm;
+  const { control, handleSubmit, reset } = jdForm;
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -64,8 +65,8 @@ const JdEditPage: NextPageWithLayout = () => {
     name: "etc_arr",
   });
 
-  const { data: jobData } = useJdDetail(true, { id: Number(router.query.jdId) });
-  const { mutate: editJobMutate } = useEditJd();
+  const { data: jdData } = useJdDetail(true, { id: Number(router.query.jdId) });
+  const { mutate: editJdMutate } = useEditJd();
   const { mutate: deleteJdMutation } = useDeleteJd();
   const { mutate: endJdMutation } = useEndJd();
 
@@ -81,10 +82,10 @@ const JdEditPage: NextPageWithLayout = () => {
   };
 
   useEffect(() => {
-    const newStartTime = jobData?.startTime ? jobData.startTime + 540000 * 60 : 0;
-    const newEndTime = jobData?.endTime ? jobData.endTime + 540000 * 60 : 0;
+    const newStartTime = jdData?.startTime ? jdData.startTime + 540000 * 60 : 0;
+    const newEndTime = jdData?.endTime ? jdData.endTime + 540000 * 60 : 0;
 
-    const positionNewArr = jobData?.positionArr.map((position) => ({
+    const positionNewArr = jdData?.positionArr.map((position) => ({
       middle: position.eduSummary.middle,
       high: position.eduSummary.high,
       college: position.eduSummary.college,
@@ -112,32 +113,32 @@ const JdEditPage: NextPageWithLayout = () => {
     }));
 
     reset({
-      company_id: jobData?.company.id,
-      title: jobData?.title,
+      company_id: jdData?.company.id,
+      title: jdData?.title,
       start_time: new Date(newStartTime).toISOString().substring(0, 19),
       end_time: new Date(newEndTime).toISOString().substring(0, 19),
-      cut: jobData?.cut,
-      process_arr: setFieldArray(jobData?.processArr || []),
-      apply_route_arr: setFieldArray(jobData?.applyRouteArr || []),
-      apply_url: jobData?.applyUrl,
-      etc_arr: setFieldArray(jobData?.etcArr || []),
+      cut: jdData?.cut,
+      process_arr: setFieldArray(jdData?.processArr || []),
+      apply_route_arr: setFieldArray(jdData?.applyRouteArr || []),
+      apply_url: jdData?.applyUrl,
+      etc_arr: setFieldArray(jdData?.etcArr || []),
       position_arr: positionNewArr,
     });
-  }, [jobData, reset]);
+  }, [jdData, reset]);
 
-  const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
-    editJobMutate(
+  const jdSubmitHandler: SubmitHandler<JdFormValues> = (jdObj) => {
+    editJdMutate(
       {
         jdId: Number(router.query.jdId),
         dto: {
-          ...jobObj,
-          start_time: new Date(jobObj.start_time).getTime(),
-          end_time: new Date(jobObj.end_time).getTime(),
-          apply_url: jobObj.apply_url.includes("@") ? `mailto: ${jobObj.apply_url}` : jobObj.apply_url,
-          process_arr: getFieldArrayValue(jobObj.process_arr),
-          apply_route_arr: getFieldArrayValue(jobObj.apply_route_arr),
-          etc_arr: getFieldArrayValueWithNull(jobObj.etc_arr),
-          position_arr: jobObj.position_arr.map((position) => ({
+          ...jdObj,
+          start_time: new Date(jdObj.start_time).getTime(),
+          end_time: new Date(jdObj.end_time).getTime(),
+          apply_url: jdObj.apply_url.includes("@") ? `mailto: ${jdObj.apply_url}` : jdObj.apply_url,
+          process_arr: getFieldArrayValue(jdObj.process_arr),
+          apply_route_arr: getFieldArrayValue(jdObj.apply_route_arr),
+          etc_arr: getFieldArrayValueWithNull(jdObj.etc_arr),
+          position_arr: jdObj.position_arr.map((position) => ({
             ...position,
             hire_number: position.hire_number ? position.hire_number : 0,
             task_sub_arr: position.task_sub_arr ? position.task_sub_arr : null,
@@ -161,13 +162,21 @@ const JdEditPage: NextPageWithLayout = () => {
     );
   };
 
+  if (!jdData) {
+    return (
+      <div css={cssObj.spinnerBox}>
+        <Spinner />
+      </div>
+    );
+  }
+
   return (
     <main>
       <PageLayout>
         <div css={cssObj.pageContainer}>
-          <form onSubmit={handleSubmit(jobSubmitHandler)}>
-            <HeaderPart />
-            <BasicInfoPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
+          <form onSubmit={handleSubmit(jdSubmitHandler)}>
+            <HeaderPart jdData={jdData} />
+            <BasicInfoPart jdForm={jdForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
             <PositionHeaderPart append={append} setIsCardOpen={setIsCardOpenArr} />
             <ul>
               {fields.map((item, index) => (
@@ -175,7 +184,7 @@ const JdEditPage: NextPageWithLayout = () => {
                   <PositionTitleInfoPart
                     id={item.id}
                     positionIndex={index}
-                    jobForm={jobForm}
+                    jdForm={jdForm}
                     appendPosition={append}
                     removePosition={remove}
                     control={control}
@@ -184,13 +193,8 @@ const JdEditPage: NextPageWithLayout = () => {
                   />
                   {isCardOpenArr[index] && (
                     <>
-                      <PositionRequiredInfoPart
-                        id={item.id}
-                        positionIndex={index}
-                        jobForm={jobForm}
-                        control={control}
-                      />
-                      <PositionWorkInfoPart id={item.id} positionIndex={index} jobForm={jobForm} control={control} />
+                      <PositionRequiredInfoPart id={item.id} positionIndex={index} jdForm={jdForm} control={control} />
+                      <PositionWorkInfoPart id={item.id} positionIndex={index} jdForm={jdForm} control={control} />
                     </>
                   )}
                 </li>

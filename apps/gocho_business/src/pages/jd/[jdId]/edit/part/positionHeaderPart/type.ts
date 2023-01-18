@@ -1,8 +1,8 @@
 import { UseFieldArrayAppend } from "react-hook-form";
 import { Dispatch, SetStateAction } from "react";
-import { JobFormValues } from "../../type";
+import { JdFormValues } from "../../type";
 
 export interface PositionHeaderPartProps {
-  append: UseFieldArrayAppend<JobFormValues, "position_arr">;
+  append: UseFieldArrayAppend<JdFormValues, "position_arr">;
   setIsCardOpen: Dispatch<SetStateAction<boolean[]>>;
 }

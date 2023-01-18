@@ -1,14 +1,14 @@
 import { Control, UseFieldArrayAppend, UseFieldArrayRemove, UseFormReturn } from "react-hook-form";
 import { Dispatch, SetStateAction } from "react";
-import { JobFormValues } from "../../type";
+import { JdFormValues } from "../../type";
 
 export interface PositionTitleInfoPartProps {
   id: string;
   positionIndex: number;
-  jobForm: UseFormReturn<JobFormValues>;
-  appendPosition: UseFieldArrayAppend<JobFormValues, "position_arr">;
+  jdForm: UseFormReturn<JdFormValues>;
+  appendPosition: UseFieldArrayAppend<JdFormValues, "position_arr">;
   removePosition: UseFieldArrayRemove;
-  control: Control<JobFormValues>;
+  control: Control<JdFormValues>;
   isCardOpen: boolean;
   setIsCardOpen: Dispatch<SetStateAction<boolean[]>>;
 }

@@ -9,6 +9,9 @@ export interface ResponseObjDef {
     id: number;
     title: string;
     cut: boolean;
+    view: number;
+    bookmark: number;
+    click: number;
     start_time: number;
     end_time: number;
     process_arr: string[];

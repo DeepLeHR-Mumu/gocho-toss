@@ -14,19 +14,14 @@ import { BasicInfoPartProps } from "./type";
 import { processGuideArr, applyRouteGuideArr, applyExternalLinkArr } from "./constant";
 import { cssObj } from "./style";
 
-export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
-  jobForm,
-  processArr,
-  applyRouteArr,
-  etcArr,
-}) => {
+export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, processArr, applyRouteArr, etcArr }) => {
   const [processIsFocusedArr, setProcessIsFocusedArr] = useState<boolean[]>(new Array(8).fill(false));
   const [applyRouteIsFocusedArr, setApplyRouteIsFocusedArr] = useState<boolean[]>([false]);
   const [isAlways, setIsAlways] = useState<boolean>(false);
   const [linkType, setLinkType] = useState<"website" | "email">("website");
   const [randomApplyRouteGuideArr, setRandomApplyRouteGuideArr] = useState<string[]>([]);
 
-  const { watch, setValue, trigger, formState, register } = jobForm;
+  const { watch, setValue, trigger, formState, register } = jdForm;
 
   const alwaysButtonClickHandler = () => {
     setValue(`end_time`, isAlways ? "" : "9999-12-31T23:59");
@@ -223,7 +218,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                         const filteredElement = applyRouteGuideArr.filter(
                           (element) =>
                             !randomApplyRouteGuideArr.includes(element) &&
-                            !jobForm
+                            !jdForm
                               .watch("apply_route_arr")
                               .some((elem) => JSON.stringify({ value: element }) === JSON.stringify(elem))
                         )[0];

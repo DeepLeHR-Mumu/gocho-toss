@@ -26,7 +26,7 @@ import { cssObj } from "./style";
 export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> = ({
   id,
   positionIndex,
-  jobForm,
+  jdForm,
   control,
 }) => {
   const [payIsFocusedArr, setPayIsFocusedArr] = useState<boolean[]>([false]);
@@ -37,7 +37,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
   const [isFactoryListOpen, setIsFactoryListOpen] = useState<boolean>(false);
   const [randomPreferredEtcGuideArr, setRandomPreferredEtcGuideArr] = useState<string[]>([]);
 
-  const { watch, setValue, clearErrors, trigger, formState, register, setError } = jobForm;
+  const { watch, setValue, clearErrors, trigger, formState, register, setError } = jdForm;
 
   const queryClient = useQueryClient();
   const openPostCodePopup = useDaumPostcodePopup(POSTCODE_SCRIPT_URL);
@@ -271,7 +271,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                       css={cssObj.smallDeleteButton}
                       onClick={() => {
                         setValue(`position_arr.${positionIndex}.place.factory_arr`, [
-                          ...(jobForm
+                          ...(jdForm
                             .watch("position_arr")
                             [positionIndex].place.factory_arr?.filter((element) => element !== factory) || []),
                         ]);
@@ -313,7 +313,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                       <DeleteInputButton
                         onClickHandler={() => {
                           setValue(`position_arr.${positionIndex}.place.address_arr`, [
-                            ...(jobForm
+                            ...(jdForm
                               .watch("position_arr")
                               [positionIndex].place.address_arr?.filter((element) => element !== address) || []),
                           ]);
@@ -471,7 +471,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                 css={cssObj.smallDeleteButton}
                 onClick={() => {
                   setValue(`position_arr.${positionIndex}.preferred_certi_arr`, [
-                    ...(jobForm
+                    ...(jdForm
                       .watch("position_arr")
                       [positionIndex].preferred_certi_arr?.filter((element) => element !== certi) || []),
                   ]);
@@ -525,7 +525,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                         const filteredArr = preferredEtcGuideArr.filter(
                           (element) =>
                             !randomPreferredEtcGuideArr.includes(element) &&
-                            !jobForm
+                            !jdForm
                               .watch("position_arr")
                               [positionIndex].preferred_etc_arr.some(
                                 (elem) => JSON.stringify({ value: element }) === JSON.stringify(elem)

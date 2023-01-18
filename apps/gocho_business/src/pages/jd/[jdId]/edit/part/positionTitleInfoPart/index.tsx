@@ -15,7 +15,7 @@ import { cssObj } from "./style";
 export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps> = ({
   id,
   positionIndex,
-  jobForm,
+  jdForm,
   appendPosition,
   removePosition,
   control,
@@ -26,7 +26,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
   const [isSubTaskOpen, setIsSubTaskOpen] = useState<boolean>(false);
   const [hireNumberLabel, setHireNumberLabel] = useState<string>("");
 
-  const { watch, setValue, clearErrors, trigger, formState, register, setError } = jobForm;
+  const { watch, setValue, clearErrors, trigger, formState, register, setError } = jdForm;
 
   const taskDetailArr = useFieldArray({
     control,

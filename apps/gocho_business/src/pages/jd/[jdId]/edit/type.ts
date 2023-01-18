@@ -1,4 +1,4 @@
-export interface JobFormValues {
+export interface JdFormValues {
   company_id: number;
   title: string;
   start_time: string;

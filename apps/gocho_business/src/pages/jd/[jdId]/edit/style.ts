@@ -2,6 +2,12 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
+  spinnerBox: css`
+    position: relative;
+    width: 100%;
+    min-height: 30vh;
+  `,
+
   pageContainer: css`
     position: relative;
   `,

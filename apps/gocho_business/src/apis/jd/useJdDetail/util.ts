@@ -5,13 +5,11 @@ export const jdDetailSelector = ({ data: jd }: ResponseObjDef) => {
     const positionFactoryArr =
       position.place.factory_arr === null
         ? null
-        : position.place.factory_arr?.map((factory) => {
-            return {
-              id: factory.id,
-              address: factory.address,
-              factoryName: factory.name,
-            };
-          });
+        : position.place.factory_arr?.map((factory) => ({
+            id: factory.id,
+            address: factory.address,
+            factoryName: factory.name,
+          }));
     return {
       id: position.id,
       requiredExp: {
@@ -53,13 +51,11 @@ export const jdDetailSelector = ({ data: jd }: ResponseObjDef) => {
   const companyFactoryArr =
     jd.company.factories === null
       ? null
-      : jd.company.factories?.map((factory) => {
-          return {
-            id: factory.id,
-            address: factory.address,
-            factoryName: factory.name,
-          };
-        });
+      : jd.company.factories?.map((factory) => ({
+          id: factory.id,
+          address: factory.address,
+          factoryName: factory.name,
+        }));
 
   return {
     id: jd.id,
@@ -71,6 +67,9 @@ export const jdDetailSelector = ({ data: jd }: ResponseObjDef) => {
     etcArr: jd.etc_arr,
     title: jd.title,
     cut: jd.cut,
+    view: jd.view,
+    bookmark: jd.bookmark,
+    click: jd.click,
     positionArr: positionCamelArr,
     company: {
       id: jd.company.id,

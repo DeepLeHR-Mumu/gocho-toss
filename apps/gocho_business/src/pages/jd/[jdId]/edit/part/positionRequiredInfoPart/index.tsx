@@ -16,7 +16,7 @@ import { cssObj } from "./style";
 export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPartProps> = ({
   id,
   positionIndex,
-  jobForm,
+  jdForm,
   control,
 }) => {
   const [requiredEtcIsFocusedArr, setRequiredEtcIsFocusedArr] = useState<boolean[]>([false]);
@@ -24,7 +24,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
   const [isMaxYear, setIsMaxYear] = useState<boolean>(false);
   const [randomRequiredEtcGuideArr, setRandomRequiredEtcGuideArr] = useState<string[]>([]);
 
-  const { watch, setValue, clearErrors, trigger, formState, register, setError } = jobForm;
+  const { watch, setValue, clearErrors, trigger, formState, register, setError } = jdForm;
 
   const requiredEtcArr = useFieldArray({
     control,
@@ -77,7 +77,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
       setValue(`position_arr.${positionIndex}.max_year`, null);
       clearErrors(`position_arr.${positionIndex}.max_year`);
     }
-  }, [jobForm, positionIndex, isMinYearDisabled, isMaxYearDisabled, setValue, clearErrors]);
+  }, [jdForm, positionIndex, isMinYearDisabled, isMaxYearDisabled, setValue, clearErrors]);
 
   return (
     <>
@@ -319,7 +319,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                         const filteredArr = requiredEtcGuideArr.filter(
                           (element) =>
                             !randomRequiredEtcGuideArr.includes(element) &&
-                            !jobForm
+                            !jdForm
                               .watch("position_arr")
                               [positionIndex].required_etc_arr.some(
                                 (elem) => JSON.stringify({ value: element }) === JSON.stringify(elem)
