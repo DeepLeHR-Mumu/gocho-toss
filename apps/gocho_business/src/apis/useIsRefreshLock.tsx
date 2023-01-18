@@ -88,7 +88,7 @@ export const useAxiosInterceptor = () => {
 
   const responseInterceptor = axiosInstance.interceptors.response.use(
     (response) => response,
-    (error) => error
+    (error) => Promise.reject(error)
   );
 
   useEffect(
