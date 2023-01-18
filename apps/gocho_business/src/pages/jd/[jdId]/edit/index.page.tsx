@@ -1,5 +1,6 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 import { BiRocket } from "react-icons/bi";
 
 import { SharedButton } from "shared-ui/business/sharedButton";
@@ -7,7 +8,8 @@ import { COLORS } from "shared-style/color";
 
 import type { NextPageWithLayout } from "@/pages/index/type";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
-import { useAddJd } from "@/apis/jd/useAddJd";
+import { useJdDetail } from "@/apis/jd/useJdDetail";
+import { useEditJd } from "@/apis/jd/useEditJd";
 
 import { HeaderPart } from "./part/headerPart";
 import { BasicInfoPart } from "./part/basicInfoPart";
@@ -17,11 +19,13 @@ import { PositionRequiredInfoPart } from "./part/positionRequiredInfoPart";
 import { PositionWorkInfoPart } from "./part/positionWorkInfoPart";
 import { JobFormValues } from "./type";
 import { BLANK_POSITION } from "./constant";
-import { getFieldArrayValue, getFieldArrayValueWithNull } from "./util";
+import { getFieldArrayValue, getFieldArrayValueWithNull, setFieldArray } from "./util";
 import { cssObj } from "./style";
 
 const JdEditPage: NextPageWithLayout = () => {
   const [isCardOpenArr, setIsCardOpenArr] = useState<boolean[]>([false]);
+
+  const router = useRouter();
 
   const jobForm = useForm<JobFormValues>({
     mode: "onBlur",
@@ -33,7 +37,7 @@ const JdEditPage: NextPageWithLayout = () => {
       position_arr: [BLANK_POSITION],
     },
   });
-  const { control, handleSubmit } = jobForm;
+  const { control, handleSubmit, reset } = jobForm;
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -55,11 +59,58 @@ const JdEditPage: NextPageWithLayout = () => {
     name: "etc_arr",
   });
 
-  const { mutate: addJobMutate } = useAddJd();
+  const { data: jobData } = useJdDetail(true, { id: Number(router.query.jdId) });
+  const { mutate: editJobMutate } = useEditJd();
+
+  useEffect(() => {
+    const newStartTime = jobData?.startTime ? jobData.startTime + 540000 * 60 : 0;
+    const newEndTime = jobData?.endTime ? jobData.endTime + 540000 * 60 : 0;
+
+    const positionNewArr = jobData?.positionArr.map((position) => ({
+      middle: position.eduSummary.middle,
+      high: position.eduSummary.high,
+      college: position.eduSummary.college,
+      four: position.eduSummary.four,
+      required_exp: position.requiredExp.type,
+      min_year: position.requiredExp.minYear,
+      max_year: position.requiredExp.maxYear,
+      required_etc_arr: setFieldArray(position.requiredEtcArr || []),
+      contract_type: position.contractType.type,
+      conversion_rate: position.contractType.conversionRate,
+      task_main: position.task.mainTask,
+      task_sub_arr: position.task.subTaskArr,
+      task_detail_arr: setFieldArray(position.taskDetailArr || []),
+      rotation_arr: position.rotationArr,
+      rotation_etc: position.rotationEtc,
+      place: {
+        type: position.place.type,
+        address_arr: position.place.addressArr || [],
+        etc: position.place.etc || "",
+      },
+      hire_number: position.hireCount,
+      pay_arr: setFieldArray(position.payArr || []),
+      preferred_certi_arr: position.preferredCertiArr,
+      preferred_etc_arr: setFieldArray(position.preferredEtcArr || []),
+    }));
+
+    reset({
+      company_id: jobData?.company.id,
+      title: jobData?.title,
+      start_time: new Date(newStartTime).toISOString().substring(0, 19),
+      end_time: new Date(newEndTime).toISOString().substring(0, 19),
+      cut: jobData?.cut,
+      process_arr: setFieldArray(jobData?.processArr || []),
+      apply_route_arr: setFieldArray(jobData?.applyRouteArr || []),
+      apply_url: jobData?.applyUrl,
+      etc_arr: setFieldArray(jobData?.etcArr || []),
+      position_arr: positionNewArr,
+    });
+  }, [jobData, reset]);
 
   const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
-    addJobMutate(
+    editJobMutate(
       {
+        jdId: Number(router.query.jdId),
         dto: {
           ...jobObj,
           start_time: new Date(jobObj.start_time).getTime(),
