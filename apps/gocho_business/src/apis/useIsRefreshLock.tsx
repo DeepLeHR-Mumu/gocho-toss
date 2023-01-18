@@ -1,15 +1,12 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 import { BUSINESS_BACKEND_URL } from "shared-constant/externalURL";
 
-import { tokenService } from "@/utils/tokenService";
-import { ErrorResponseDef } from "@/types/errorType";
+import { tokenService, getTokenDateInfoCreator } from "@/utils/tokenService";
 import { useModal } from "@/globalStates/useModal";
 import { INTERNAL_URL } from "@/constants/url";
-
-import { getTokenDateInfoCreator } from "./util";
 
 export const axiosNoTokenInstance = axios.create({
   timeout: 10000,
@@ -24,7 +21,6 @@ export const axiosInstance = axios.create({
 export const useAxiosInterceptor = () => {
   const router = useRouter();
   const accessTokenLimitMs = 10000;
-  const refreshTokenOverLimitMs = -1.8e6;
   let isLock = false;
   let readyQueueArr: ((token: string) => void)[] = [];
 
@@ -58,26 +54,20 @@ export const useAxiosInterceptor = () => {
 
     if (!accessTokenData || !refreshTokenData) router.replace(INTERNAL_URL.LOGIN);
 
-    if (
-      refreshCreateTime <= currentTime &&
-      new Date(refreshCreateTime - currentTime).getTime() <= refreshTokenOverLimitMs
-    )
-      router.replace(INTERNAL_URL.LOGIN);
-
     if (refreshCreateTime <= currentTime && router.pathname !== INTERNAL_URL.LOGIN) setCurrentModal("loginModal");
 
-    if (accessCreateTime - currentTime <= accessTokenLimitMs) {
-      if (!isLock) {
-        isLock = true;
-        const newToken = await getRefreshTokenCreator();
-        return {
-          ...config,
-          headers: {
-            "x-access-token": newToken,
-          },
-        };
-      }
+    if (accessCreateTime - currentTime <= accessTokenLimitMs && !isLock) {
+      isLock = true;
+      const newToken = await getRefreshTokenCreator();
+      return {
+        ...config,
+        headers: {
+          "x-access-token": newToken,
+        },
+      };
+    }
 
+    if (accessCreateTime - currentTime <= accessTokenLimitMs && isLock) {
       return new Promise(() => {
         saveQueue((accessToken) => axiosInstance({ ...config, headers: { "x-access-token": accessToken } }));
       });
@@ -91,33 +81,14 @@ export const useAxiosInterceptor = () => {
     };
   };
 
-  const requestErrorHandler = async (error: AxiosError) => Promise.reject(error);
-
-  const responseConfigHandler = (response: AxiosResponse) => response;
-
-  const responseErrorHandler = async (error: AxiosError<ErrorResponseDef>) =>
-    // 내일 코드 리뷰를 위해 남겨둔 부분
-    // const errorStatus = {
-    //   status: error.response?.data.status,
-    //   errorCode: error.response?.data.error_code,
-    //   errorMsg: error.response?.data.error_message,
-    //   path: error.response?.data.path,
-    // };
-
-    // if (errorStatus.errorCode === "EXPIRED_JWT" && errorStatus.status === 401 && errorStatus.path === "/auth/refresh") {
-    //   return null;
-    // }
-
-    Promise.reject(error);
-
   const requestInterceptor = axiosInstance.interceptors.request.use(
     (config: AxiosRequestConfig) => requestConfigHandler(config),
-    (error) => requestErrorHandler(error)
+    (error) => Promise.reject(error)
   );
 
   const responseInterceptor = axiosInstance.interceptors.response.use(
-    (response) => responseConfigHandler(response),
-    (error: AxiosError<ErrorResponseDef>) => responseErrorHandler(error)
+    (response) => response,
+    (error) => error
   );
 
   useEffect(
