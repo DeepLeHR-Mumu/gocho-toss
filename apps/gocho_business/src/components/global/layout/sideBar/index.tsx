@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
@@ -11,6 +12,7 @@ import { UserInfoBox } from "./component/userInfoBox";
 import { cssObj } from "./style";
 
 export const SideBar: FunctionComponent = () => {
+  const router = useRouter();
   const { userInfoData } = useUserState();
 
   if (!userInfoData) {
@@ -25,16 +27,18 @@ export const SideBar: FunctionComponent = () => {
     <nav css={cssObj.wrapper}>
       <div css={cssObj.container}>
         <CompanyInfoBox name={userInfoData.companyName} img={userInfoData.companyLogo} />
-        {linkArr.map((linkObj) => (
-          <Link href={linkObj.url} key={linkObj.url} passHref>
-            <a css={cssObj.linkCSS}>
-              <div css={cssObj.iconCSS}>
+        {linkArr.map((linkObj) => {
+          const isCurrentRoute = router.pathname === linkObj.url;
+
+          return (
+            <Link href={linkObj.url} key={linkObj.url} passHref>
+              <a css={cssObj.linkCSS(isCurrentRoute)}>
                 <linkObj.icon />
-              </div>
-              {linkObj.name}
-            </a>
-          </Link>
-        ))}
+                {linkObj.name}
+              </a>
+            </Link>
+          );
+        })}
       </div>
       <UserInfoBox name={`${userInfoData.name}(${userInfoData.department})`} />
     </nav>
