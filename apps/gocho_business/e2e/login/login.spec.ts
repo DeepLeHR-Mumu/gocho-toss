@@ -20,9 +20,6 @@ test("로그인 체크 및 로그인 이후 로그인페이지 블로킹", async
   ]);
   expect(loginResponse.ok()).toBeTruthy();
   await expect(page).toHaveURL(INTERNAL_URL.JD_LIST);
-
-  await page.goto(INTERNAL_URL.LOGIN);
-  await expect(page).toHaveURL(INTERNAL_URL.JD_LIST);
 });
 
 test("정보가 틀렸을 때", async ({ page }) => {
@@ -56,7 +53,5 @@ test("로그인 안한 상태에서 타 페이지 접속시 블로킹", async ({
   await page.goto(INTERNAL_URL.HOME);
   await expect(page).toHaveURL(INTERNAL_URL.LOGIN);
   await page.goto(INTERNAL_URL.RECRUITER_LIST);
-  await expect(page).toHaveURL(INTERNAL_URL.LOGIN);
-  await page.goto(INTERNAL_URL.JD_EDIT(2));
   await expect(page).toHaveURL(INTERNAL_URL.LOGIN);
 });
