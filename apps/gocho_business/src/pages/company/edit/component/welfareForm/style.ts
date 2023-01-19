@@ -66,12 +66,12 @@ export const cssObj = {
     width: 100%;
     justify-content: space-between;
     display: flex;
-    padding: 0.75rem 1rem;
     border-bottom: 1px solid ${COLORS.GRAY70};
     background-color: ${COLORS.GRAY100};
   `,
   welfareButton: css`
     width: 80%;
+    padding: 0.75rem 1rem;
   `,
   noData: css`
     font-size: 1rem;
@@ -90,6 +90,7 @@ export const cssObj = {
     ${shorten()};
   `,
   deleteButton: css`
+    margin-right: 1rem;
     width: 2rem;
     height: 2rem;
     background-color: ${COLORS.GRAY80};

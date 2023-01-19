@@ -97,15 +97,13 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
                     css={cssObj.welfareButton}
                     type="button"
                     // onDragStart={(onDragStartEvent) => {
-                    //   console.log(onDragStartEvent);
+                    //   setIsDragging(true);
                     // }}
-                    // onDragEnter={(onDragEnterEvent) => {
-                    //   console.log(onDragEnterEvent);
-                    // }}
+                    // onDragEnter={(onDragEnterEvent) => {}}
                     // onDragEnd={(onDragEndEvent) => {
-                    //   console.log(onDragEndEvent);
+                    //   setIsDragging(false);
                     // }}
-                    // draggable
+                    draggable
                   >
                     <p css={cssObj.valueDesc}>{data}</p>
                   </button>
