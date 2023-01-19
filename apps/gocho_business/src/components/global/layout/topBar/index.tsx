@@ -3,11 +3,11 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 
-import monoTextLogo from "shared-image/global/deepLeLogo/textKoMono.svg";
-import colorTextLogo from "shared-image/global/deepLeLogo/textKoColor.svg";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
+import monoTextLogo from "@/public/image/deepleLogo/textKoMono.svg";
+import colorTextLogo from "@/public/image/deepleLogo/textKoColor.svg";
 import { tokenService } from "@/utils/tokenService";
 import { useUserState } from "@/globalStates/useUserState";
 import { useDoLogout } from "@/apis/auth/useDoLogout";
