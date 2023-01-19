@@ -12,6 +12,7 @@ export const cssObj = {
   wrapper: css`
     padding: 1.5rem 2rem;
     display: flex;
+    background-color: ${COLORS.GRAY100};
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid ${COLORS.GRAY65};

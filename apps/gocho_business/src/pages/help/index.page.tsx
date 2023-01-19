@@ -3,7 +3,6 @@ import Image from "next/image";
 
 import { NextPageWithLayout } from "@/pages/index/type";
 import { GlobalLayout, Footer } from "@/components/global/layout";
-import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 import chatIcon from "@/public/image/help/chat.svg";
 import helpBackground from "@/public/image/help/help_background.svg";
 
@@ -35,7 +34,6 @@ HelpPage.getLayout = (page: ReactElement) => (
   <>
     <PageHead />
     <GlobalLayout>
-      <CompanyInfoPart />
       {page}
       <Footer />
     </GlobalLayout>

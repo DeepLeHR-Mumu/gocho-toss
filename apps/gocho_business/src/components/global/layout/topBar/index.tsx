@@ -3,11 +3,11 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 
-import colorLogo from "shared-image/global/deepLeLogo/logoIconColor.svg";
-import monoLogo from "shared-image/global/deepLeLogo/logoIconMono.svg";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
+import monoTextLogo from "@/public/image/deepleLogo/textKoMono.svg";
+import colorTextLogo from "@/public/image/deepleLogo/textKoColor.svg";
 import { tokenService } from "@/utils/tokenService";
 import { useUserState } from "@/globalStates/useUserState";
 import { useDoLogout } from "@/apis/auth/useDoLogout";
@@ -37,10 +37,15 @@ export const TopBar: FunctionComponent = () => {
   return (
     <header css={cssObj.wrapper(isLogin)}>
       <div css={cssObj.container}>
-        <div css={cssObj.logo}>
-          <Image src={isLogin ? colorLogo : monoLogo} alt="고초대졸닷컴 비즈니스" layout="fill" objectFit="contain" />
-        </div>
-        <h1 css={cssObj.title(isLogin)}>고초대졸.business</h1>
+        <h1 css={cssObj.title}>
+          <Image
+            src={isLogin ? colorTextLogo : monoTextLogo}
+            alt="고초대졸닷컴 비즈니스"
+            layout="fill"
+            objectFit="contain"
+            draggable={false}
+          />
+        </h1>
       </div>
       {userInfoData ? (
         <SharedButton
