@@ -15,25 +15,13 @@ export const PrivateRouteLayout: FunctionComponent<PrivateRouteProps> = ({ prote
 
   useEffect(() => {
     const token = tokenService.getAccessToken();
-    if (!isLoading && !isSuccess && isPathProtected && !token) {
+    if (!isSuccess && isPathProtected && token) {
+      return;
+    }
+    if (!isSuccess && isPathProtected && !token) {
       router.push(INTERNAL_URL.LOGIN);
     }
-  }, [isLoading, isPathProtected, isSuccess, router]);
-
-  useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      if (url === INTERNAL_URL.LOGIN && !isLoading && isSuccess) {
-        router.events.emit("routeChangeError");
-        // eslint-disable-next-line no-throw-literal
-        throw true;
-      }
-    };
-
-    router.events.on("routeChangeStart", handleRouteChange);
-    return () => {
-      router.events.off("routeChangeStart", handleRouteChange);
-    };
-  }, [isLoading, isSuccess, router]);
+  }, [isPathProtected, isSuccess, router]);
 
   if ((isLoading || !isSuccess) && isPathProtected) {
     return <div css={cssObj.loadingBox} />;
