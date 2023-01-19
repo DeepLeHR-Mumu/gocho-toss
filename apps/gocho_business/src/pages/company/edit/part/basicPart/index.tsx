@@ -62,7 +62,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
           <input
             type="text"
             {...register("intro", { required: true, maxLength: 120 })}
-            placeholder="기업 한줄 소개"
+            placeholder="한 줄로 기업을 소개해주세요"
             css={cssObj.input(errors.intro?.type === "required")}
           />
         </div>
@@ -127,7 +127,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
               <input
                 type="number"
                 {...register("pay_start", { required: true })}
-                placeholder="평균 초봉"
+                placeholder="숫자만 입력해주세요"
                 css={cssObj.input(errors.pay_start?.type === "required")}
               />
               <p css={cssObj.textValue}>만원</p>
@@ -139,7 +139,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
               <input
                 type="number"
                 {...register("pay_avg", { required: true })}
-                placeholder="평균 연봉"
+                placeholder="숫자만 입력해주세요"
                 css={cssObj.input(errors.pay_avg?.type === "required")}
               />
               <p css={cssObj.textValue}>만원</p>

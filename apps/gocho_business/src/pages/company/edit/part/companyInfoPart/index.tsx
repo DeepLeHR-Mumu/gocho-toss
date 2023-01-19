@@ -29,11 +29,11 @@ export const CompanyInfoPart: FunctionComponent = () => {
     <section css={cssObj.wrapper} data-testid="company/edit/CompanyInfoPart">
       <div css={cssObj.topBox}>
         <div css={cssObj.logoBox}>
-          <Image src={companyData.logo} alt={companyData.name} layout="fill" objectFit="contain" />
+          <Image src={companyData.logo} alt={companyData.name} layout="fill" objectFit="contain" draggable={false} />
         </div>
         <div css={cssObj.titleBox}>
-          <strong>{companyData.name}</strong>
-          <p>{companyData.industry}</p>
+          <strong css={cssObj.companyTitle}>{companyData.name}</strong>
+          <p css={cssObj.companyIndustry}>{companyData.industry}</p>
         </div>
         <div css={cssObj.countBox}>
           <div css={cssObj.countLine}>
@@ -42,7 +42,7 @@ export const CompanyInfoPart: FunctionComponent = () => {
               <FiEye /> <span css={cssObj.colorPoint}>{countFormat.format(companyData.view)}</span>
             </p>
           </div>
-          <div css={cssObj.countBox}>
+          <div css={cssObj.countLine}>
             <strong css={cssObj.countTitle}>기업 북마크수</strong>
             <p css={cssObj.countDesc}>
               <MdBookmarkBorder /> <span css={cssObj.colorPoint}>{countFormat.format(companyData.bookmark)}</span>

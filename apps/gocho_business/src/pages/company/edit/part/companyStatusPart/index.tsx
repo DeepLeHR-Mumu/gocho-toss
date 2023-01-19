@@ -1,6 +1,8 @@
 import { FunctionComponent } from "react";
+
 import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
 import { useUserState } from "@/globalStates/useUserState";
+
 import { cssObj } from "./style";
 
 export const CompanyStatusPart: FunctionComponent = () => {

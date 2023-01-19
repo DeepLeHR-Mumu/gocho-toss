@@ -34,6 +34,7 @@ export const cssObj = {
   inputLine: css`
     border: 1px solid ${COLORS.GRAY10};
     padding: 0.75rem 2.5rem 0.75rem 1rem;
+    border-radius: 0.3125rem;
     font-size: 1rem;
     width: 100%;
     font-weight: 400;
@@ -47,9 +48,9 @@ export const cssObj = {
   `,
   desc: css`
     padding: 0.5rem 1rem;
-    background-color: ${COLORS.GRAY70};
+    background-color: ${COLORS.GRAY95};
     font-size: 0.875rem;
-    color: ${COLORS.GRAY10};
+    color: ${COLORS.GRAY30};
     font-weight: 400;
     height: 3.75rem;
     ${shorten(2)};
@@ -58,12 +59,14 @@ export const cssObj = {
     height: 21.25rem;
     overflow: hidden;
     overflow-y: scroll;
+    background-color: ${COLORS.GRAY90};
     > li {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0.75rem 1rem;
       border-bottom: 1px solid ${COLORS.GRAY70};
+      background-color: ${COLORS.GRAY100};
     }
   `,
   noData: css`
@@ -84,7 +87,7 @@ export const cssObj = {
   deleteButton: css`
     width: 2rem;
     height: 2rem;
-    background-color: ${COLORS.GRAY60};
+    background-color: ${COLORS.GRAY80};
     border-radius: 50%;
     color: ${COLORS.GRAY10};
   `,
