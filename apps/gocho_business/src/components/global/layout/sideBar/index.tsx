@@ -14,7 +14,7 @@ import { INTERNAL_URL } from "@/constants/url";
 
 export const SideBar: FunctionComponent = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const { jdId } = router.query;
   const { userInfoData } = useUserState();
 
   if (!userInfoData) {
@@ -32,7 +32,7 @@ export const SideBar: FunctionComponent = () => {
         {linkArr.map((linkObj) => {
           const isRoute = router.pathname === linkObj.url;
           const isUpload = linkObj.name === "공고" && router.pathname === INTERNAL_URL.JD_UPLOAD;
-          const isEdit = linkObj.name === "공고" && router.pathname === INTERNAL_URL.JD_EDIT(Number(id));
+          const isEdit = linkObj.name === "공고" && router.asPath === INTERNAL_URL.JD_EDIT(Number(jdId));
 
           return (
             <Link href={linkObj.url} key={linkObj.url} passHref>
