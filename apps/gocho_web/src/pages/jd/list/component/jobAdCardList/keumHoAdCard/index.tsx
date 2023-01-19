@@ -18,18 +18,10 @@ import {
   buttonBox,
 } from "./style";
 
-export const KeumhoEventCard: FunctionComponent<JobAdCardProps > = ({
-  isMobile,
-}) => {
-
+export const KeumhoEventCard: FunctionComponent<JobAdCardProps> = ({ isMobile }) => {
   return (
     <>
-      <a
-        css={cardWrapper(isMobile)}
-        href={`${JOBS_DETAIL_URL}/${12766}`}
-        target="_blank"
-        rel="noreferrer noopener"
-      >
+      <a css={cardWrapper(isMobile)} href={`${JOBS_DETAIL_URL}/${12766}`} target="_blank" rel="noreferrer noopener">
         <button
           type="button"
           css={buttonBox}
@@ -40,7 +32,13 @@ export const KeumhoEventCard: FunctionComponent<JobAdCardProps > = ({
           <div css={mainContainer}>
             <div css={companyLogoWrapper}>
               <div css={companyLogoBox}>
-                <Image layout="fill" objectFit="contain" src="https://cdn.gocho-back.com/companies/663/logo.png" alt="" />
+                <Image
+                  layout="fill"
+                  objectFit="contain"
+                  src="https://cdn.gocho-back.com/companies/663/logo.png"
+                  alt=""
+                  unoptimized
+                />
               </div>
             </div>
             <div css={infoContainer}>
