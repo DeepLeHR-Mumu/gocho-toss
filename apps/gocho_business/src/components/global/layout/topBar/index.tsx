@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -10,10 +11,12 @@ import { COLORS } from "shared-style/color";
 import { tokenService } from "@/utils/tokenService";
 import { useUserState } from "@/globalStates/useUserState";
 import { useDoLogout } from "@/apis/auth/useDoLogout";
+import { INTERNAL_URL } from "@/constants/url";
 
 import { cssObj } from "./style";
 
 export const TopBar: FunctionComponent = () => {
+  const router = useRouter();
   const { userInfoData, setUserInfoData } = useUserState();
   const { mutate: postLogout } = useDoLogout();
   const queryClient = useQueryClient();
@@ -24,6 +27,7 @@ export const TopBar: FunctionComponent = () => {
         tokenService.removeAllToken();
         setUserInfoData(null);
         queryClient.invalidateQueries();
+        router.push(INTERNAL_URL.LOGIN);
       },
     });
   };

@@ -19,12 +19,6 @@ export const cssObj = {
     justify-content: space-between;
     align-items: center;
   `,
-  closeBtn: css`
-    position: absolute;
-    right: -0.5rem;
-    top: -0.5rem;
-    border-radius: 50%;
-  `,
   logoContainer: css`
     width: 7.5rem;
     position: relative;
@@ -43,7 +37,6 @@ export const cssObj = {
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 2.5rem;
 
     > li {
       margin-bottom: 1.25rem;
@@ -53,7 +46,6 @@ export const cssObj = {
       }
     }
   `,
-
   errorBox: css`
     margin-top: 0.2rem;
     min-height: 0.75rem;
