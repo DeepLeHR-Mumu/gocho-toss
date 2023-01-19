@@ -60,14 +60,18 @@ export const cssObj = {
     overflow: hidden;
     overflow-y: scroll;
     background-color: ${COLORS.GRAY90};
-    > li {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid ${COLORS.GRAY70};
-      background-color: ${COLORS.GRAY100};
-    }
+  `,
+  buttonLine: css`
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid ${COLORS.GRAY70};
+    background-color: ${COLORS.GRAY100};
+  `,
+  welfareButton: css`
+    width: 80%;
   `,
   noData: css`
     font-size: 1rem;
@@ -75,13 +79,14 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${COLORS.GRAY10};
+    color: ${COLORS.GRAY30};
+    background-color: ${COLORS.GRAY90};
   `,
   valueDesc: css`
     font-size: 1rem;
-    font-weight: 400;
-    width: 80%;
     color: ${COLORS.GRAY10};
+    text-align: left;
+    width: 100%;
     ${shorten()};
   `,
   deleteButton: css`

@@ -6,7 +6,7 @@ import { shorten } from "shared-style/common";
 export const cssObj = {
   spinner: css``,
   wrapper: css`
-    background-color: #edf1f4;
+    background-color: #edf1fb;
     padding: 2rem;
     border-radius: 1.5rem;
     margin-bottom: 2.5rem;
