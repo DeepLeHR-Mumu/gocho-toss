@@ -4,8 +4,8 @@ import { COLORS } from "shared-style/color";
 export const cssObj = {
   wrapper: css`
     overflow: hidden;
-    background-image: linear-gradient(to bottom, ${COLORS.GRAY100}, #61adff);
-    min-height: calc(100vh - 25rem);
+    min-height: calc(100vh - 19rem);
+    background-color: #f4f7ff;
     text-align: center;
     display: flex;
     flex-direction: column;
