@@ -29,6 +29,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
   const { data: companyData } = useCompanyDetail({
     companyId: userInfoData?.companyId,
   });
+
   const { mutate: putCompanyDetail } = useAddCompanyDetail();
 
   const companyForm = useForm<PostSubmitValues>({
