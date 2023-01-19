@@ -12,6 +12,10 @@ export const cssObj = {
   `,
   basicInfo: css`
     padding: 1.75rem;
+
+    > li {
+      margin-bottom: 2rem;
+    }
   `,
   infoTitle: css`
     margin-bottom: 0.5rem;
@@ -37,6 +41,8 @@ export const cssObj = {
     border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
     display: flex;
     align-items: center;
+    border-radius: 0.3125rem;
+    overflow: hidden;
     justify-content: space-between;
     width: 100%;
     max-width: 28rem;
@@ -70,9 +76,18 @@ export const cssObj = {
     font-size: 0.75rem;
     color: ${COLORS.ERROR_RED40};
   `,
-  submitButtonBox: css`
+  submitButton: (isActive: boolean) => css`
     width: 100%;
+    font-size: 1rem;
+    color: ${COLORS.GRAY100};
+    border-radius: 0.3125rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.875rem 0;
+    line-height: 1;
     max-width: 25rem;
     margin: auto;
+    background-color: ${isActive ? COLORS.BLUE_FIRST40 : COLORS.GRAY65};
   `,
 };
