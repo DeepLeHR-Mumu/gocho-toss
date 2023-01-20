@@ -71,9 +71,9 @@ export const cssObj = {
   errorMsg: css`
     font-size: 1rem;
     height: 1rem;
-    margin: 1rem 0;
+    margin: 2rem 0;
     text-align: center;
-    line-height: 0;
+    line-height: 1;
     display: block;
     color: ${COLORS.ERROR_RED40};
     font-weight: 400;
@@ -112,5 +112,11 @@ export const cssObj = {
     font-size: 1rem;
     font-weight: 700;
     padding: 1rem 0;
+  `,
+  signupButton: css`
+    display: block;
+    text-align: center;
+    margin-top: 2rem;
+    color: ${COLORS.BLUE_NEON30};
   `,
 };

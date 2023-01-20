@@ -133,6 +133,14 @@ const LoginPage: NextPage = () => {
             <button type="submit" css={cssObj.submitButton(isEmail && isPassword)} disabled={!isEmail || !isPassword}>
               로그인
             </button>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfYgeAv0BREQSPEtgjHO6-1rHh-srF3EDnRHAWL2e2g1PL_Pw/viewform"
+              css={cssObj.signupButton}
+              target="_blank"
+              rel="noreferrer"
+            >
+              기업회원 가입하기
+            </a>
           </form>
         </div>
       </main>

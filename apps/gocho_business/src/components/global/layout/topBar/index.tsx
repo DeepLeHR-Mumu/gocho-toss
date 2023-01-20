@@ -61,6 +61,8 @@ export const TopBar: FunctionComponent = () => {
         <a
           css={cssObj.linkButton}
           href="https://docs.google.com/forms/d/e/1FAIpQLSfYgeAv0BREQSPEtgjHO6-1rHh-srF3EDnRHAWL2e2g1PL_Pw/viewform"
+          target="_blank"
+          rel="noreferrer"
         >
           기업회원 가입하기
         </a>
