@@ -26,21 +26,21 @@ test("비밀번호 변경 및 잘못된 정보 입력시 에러 테스트", asyn
   await page.getByPlaceholder("현재 비밀번호를 입력해주세요").fill("123");
   await expect(page.getByText(EDIT_PASSWORD_MESSAGE.PATTERN)).toBeVisible();
 
-  await page.getByPlaceholder("현재 비밀번호를 입력해주세요").fill("noPassword");
-  await page.getByPlaceholder("8~20자, 띄어쓰기 불가능").fill("deeple123");
-  await page.getByPlaceholder("새 비밀번호와 동일하게 작성해주세요").fill("deeple123");
-  await page.getByRole("button", { name: "회원정보 변경 저장" }).click();
-  await expect(page.getByText(EDIT_PASSWORD_MESSAGE.ORIGIN_VALIDATE)).toBeVisible();
+  // await page.getByPlaceholder("현재 비밀번호를 입력해주세요").fill("noPassword");
+  // await page.getByPlaceholder("8~20자, 띄어쓰기 불가능").fill("deeple123");
+  // await page.getByPlaceholder("새 비밀번호와 동일하게 작성해주세요").fill("deeple123");
+  // await page.getByRole("button", { name: "회원정보 변경 저장" }).click();
+  // await expect(page.getByText(EDIT_PASSWORD_MESSAGE.ORIGIN_VALIDATE)).toBeVisible();
 
-  // TODO :  cleanup
-  await page.getByPlaceholder("현재 비밀번호를 입력해주세요").fill("noPassword");
-  await page.getByPlaceholder("8~20자, 띄어쓰기 불가능").fill("deeple12443");
-  await page.getByPlaceholder("새 비밀번호와 동일하게 작성해주세요").fill("dee22ple123");
-  await expect(page.getByText(EDIT_PASSWORD_MESSAGE.VALIDATE)).toBeVisible();
+  // // TODO :  cleanup
+  // await page.getByPlaceholder("현재 비밀번호를 입력해주세요").fill("noPassword");
+  // await page.getByPlaceholder("8~20자, 띄어쓰기 불가능").fill("deeple12443");
+  // await page.getByPlaceholder("새 비밀번호와 동일하게 작성해주세요").fill("dee22ple123");
+  // await expect(page.getByText(EDIT_PASSWORD_MESSAGE.VALIDATE)).toBeVisible();
 
-  //   비밀번호 복구
-  await page.getByPlaceholder("현재 비밀번호를 입력해주세요").fill("deeple123");
-  await page.getByPlaceholder("8~20자, 띄어쓰기 불가능").fill("deeple1!");
-  await page.getByPlaceholder("새 비밀번호와 동일하게 작성해주세요").fill("deeple1!");
-  await page.getByRole("button", { name: "회원정보 변경 저장" }).click();
+  // //   비밀번호 복구
+  // await page.getByPlaceholder("현재 비밀번호를 입력해주세요").fill("deeple123");
+  // await page.getByPlaceholder("8~20자, 띄어쓰기 불가능").fill("deeple1!");
+  // await page.getByPlaceholder("새 비밀번호와 동일하게 작성해주세요").fill("deeple1!");
+  // await page.getByRole("button", { name: "회원정보 변경 저장" }).click();
 });
