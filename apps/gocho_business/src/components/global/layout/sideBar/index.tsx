@@ -5,12 +5,12 @@ import Link from "next/link";
 import { Spinner } from "shared-ui/common/atom/spinner";
 
 import { useUserState } from "@/globalStates/useUserState";
+import { INTERNAL_URL } from "@/constants/url";
 
 import { linkArr } from "./constant";
 import { CompanyInfoBox } from "./component/companyInfoBox";
 import { UserInfoBox } from "./component/userInfoBox";
 import { cssObj } from "./style";
-import { INTERNAL_URL } from "@/constants/url";
 
 export const SideBar: FunctionComponent = () => {
   const router = useRouter();
