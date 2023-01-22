@@ -1,4 +1,5 @@
-name: Playwright e2e 테스트
+name: business e2e 테스트
+
 on:
   pull_request:
     branches:
