@@ -6,8 +6,6 @@ on:
       - main
       - dev
 
-    
-
 jobs:
   # waiting_environment:
   #   name: 테스트 환경 미리 설치
@@ -61,7 +59,7 @@ jobs:
   gocho_web:
     name: 웹 페이지 테스트
     runs-on: ubuntu-latest
-    env: 
+    env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
 
@@ -115,30 +113,30 @@ jobs:
       - name: playwright test 실행
         run: pnpm turbo --filter=gocho_business e2e:CICD
 
-      # - uses: actions/upload-artifact@v2
-      #   if: always()
-      #   with:
-      #     name: playwright-report
-      #     path: playwright-report/
-      #     retention-days: 20
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 20
 
-      # - name: 성공 시 테스트 결과 슬랙으로 전송
-      #   uses: rtCamp/action-slack-notify@master
-      #   env:
-      #     SLACK_CHANNEL: 02-팀-frontend
-      #     SLACK_FOOTER: ""
-      #     SLACK_COLOR: "good"
-      #     SLACK_MESSAGE: "dev 테스트 성공했습니다!:"
-      #     SLACK_TITLE: "테스트코드 결과"
-      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: 성공 시 테스트 결과 슬랙으로 전송
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_CHANNEL: 02-팀-frontend
+          SLACK_FOOTER: ""
+          SLACK_COLOR: "good"
+          SLACK_MESSAGE: "dev 테스트 성공했습니다!:"
+          SLACK_TITLE: "테스트코드 결과"
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-      # - name: 실패 시 테스트 결과 슬랙으로 전송
-      #   if: failure()
-      #   uses: rtCamp/action-slack-notify@master
-      #   env:
-      #     SLACK_CHANNEL: 02-팀-frontend
-      #     SLACK_FOOTER: ""
-      #     SLACK_COLOR: "danger"
-      #     SLACK_MESSAGE: "dev 테스트 실패했습니다!:"
-      #     SLACK_TITLE: "테스트코드 결과"
-      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: 실패 시 테스트 결과 슬랙으로 전송
+        if: failure()
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_CHANNEL: 02-팀-frontend
+          SLACK_FOOTER: ""
+          SLACK_COLOR: "danger"
+          SLACK_MESSAGE: "dev 테스트 실패했습니다!:"
+          SLACK_TITLE: "테스트코드 결과"
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
