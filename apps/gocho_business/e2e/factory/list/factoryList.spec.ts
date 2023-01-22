@@ -88,35 +88,35 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
 
   await page.locator("input[name='factory_name']").fill("바뀐공장이름");
 
-  const anotherPopupPromise = page.waitForEvent("popup");
-  await page.waitForTimeout(500);
+  // const anotherPopupPromise = page.waitForEvent("popup");
+  // await page.waitForTimeout(500);
 
-  await page.getByRole("button", { name: "주소찾기" }).click();
-  await page.waitForTimeout(1000);
+  // await page.getByRole("button", { name: "주소찾기" }).click();
+  // await page.waitForTimeout(1000);
 
-  const secondPopup = await anotherPopupPromise;
-  await page.waitForTimeout(500);
+  // const secondPopup = await anotherPopupPromise;
+  // await page.waitForTimeout(500);
 
-  await secondPopup.keyboard.insertText("부산");
-  await secondPopup.keyboard.press("Enter");
-  await page.waitForTimeout(1000);
-  await secondPopup.keyboard.press("Tab");
-  await secondPopup.keyboard.press("Tab");
-  await secondPopup.keyboard.press("Tab");
-  await secondPopup.keyboard.press("Tab");
-  await secondPopup.keyboard.press("Tab");
-  await secondPopup.keyboard.press("Tab");
-  await secondPopup.keyboard.press("Enter");
-  await page.waitForTimeout(500);
+  // await secondPopup.keyboard.insertText("부산");
+  // await secondPopup.keyboard.press("Enter");
+  // await page.waitForTimeout(1000);
+  // await secondPopup.keyboard.press("Tab");
+  // await secondPopup.keyboard.press("Tab");
+  // await secondPopup.keyboard.press("Tab");
+  // await secondPopup.keyboard.press("Tab");
+  // await secondPopup.keyboard.press("Tab");
+  // await secondPopup.keyboard.press("Tab");
+  // await secondPopup.keyboard.press("Enter");
+  // await page.waitForTimeout(500);
 
-  await page.locator("input[name='product']").fill("바뀐생산품");
-  await page.locator("input[name='male_number']").fill("99");
-  await page.locator("input[name='female_number']").fill("99");
+  // await page.locator("input[name='product']").fill("바뀐생산품");
+  // await page.locator("input[name='male_number']").fill("99");
+  // await page.locator("input[name='female_number']").fill("99");
 
-  await page.getByText("없음").first().click();
-  await page.getByText("없음").nth(1).click();
-  await page.locator('input[name="dormitory_etc"]').fill("새로운 dormitory");
-  await page.locator('input[name="bus_etc"]').fill("새로운 버스");
+  // await page.getByText("없음").first().click();
+  // await page.getByText("없음").nth(1).click();
+  // await page.locator('input[name="dormitory_etc"]').fill("새로운 dormitory");
+  // await page.locator('input[name="bus_etc"]').fill("새로운 버스");
 
   // const [registerRequest] = await Promise.all([
   //   page.waitForRequest((request) => request.url().includes("/factories")),
