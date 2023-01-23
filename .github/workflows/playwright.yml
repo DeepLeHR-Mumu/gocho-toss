@@ -7,56 +7,62 @@ on:
       - dev
 
 jobs:
-  # waiting_environment:
-  #   name: 테스트 환경 미리 설치
-  #   timeout-minutes: 30
-  #   runs-on: ubuntu-latest
+  waiting_environment:
+    name: 테스트 환경 미리 설치
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #       name: 코드가져오기 checkout
-  #     - uses: actions/setup-node@v2
-  #       with:
-  #         node-version: "16.x"
+    steps:
+      - uses: actions/checkout@v3
+        name: 코드가져오기 checkout
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16.x"
 
-  #     - name: pnpm 초기 설정
-  #       uses: pnpm/action-setup@v2
-  #       with:
-  #         version: latest
-  #         run_install: false
+      - name: pnpm 초기 설정
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+          run_install: false
 
-  #     - name: pnpm 디렉터리 확인
-  #       id: pnpm-directory
-  #       shell: bash
-  #       run: |
-  #         echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - name: pnpm 디렉터리 확인
+        id: pnpm-directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-  #     - uses: actions/cache@v3
-  #       name: pnpm 캐시 가져오기
-  #       with:
-  #         path: ${{ steps.pnpm-directory.outputs.STORE_PATH }}
-  #         key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - uses: actions/cache@v3
+        name: pnpm 캐시 가져오기
+        with:
+          path: ${{ steps.pnpm-directory.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
 
-  #     - name: dependency 설치
-  #       run: pnpm install --frozen-lockfile
+      - name: dependency 설치
+        run: pnpm install --frozen-lockfile
 
-  #     - name: playwright 버전 확인
-  #       id: playwright-version
-  #       run: echo "PLAYWRIGHT_VERSION=$(pnpm list | grep playwright/test)" >> $GITHUB_ENV
+      - name: playwright 버전 확인
+        id: playwright-version
+        run: echo "PLAYWRIGHT_VERSION=$(pnpm list | grep playwright/test)" >> $GITHUB_ENV
 
-  #     - name: playwright 브라우저 캐시 확인
-  #       uses: actions/cache@v3
-  #       id: playwright-cache
-  #       with:
-  #         path: |
-  #           ~/.cache/ms-playwright
-  #         key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+      - name: playwright 브라우저 캐시 확인
+        uses: actions/cache@v3
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
 
-  #     - name: playwright 브라우저 설치
-  #       if: steps.playwright-cache.outputs.cache-hit != 'true'
-  #       run: PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright pnpx playwright@1.28.0 install --with-deps chromium
+      - name: playwright 브라우저 설치
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright pnpx playwright@1.28.0 install --with-deps chromium
 
-  gocho_web:
+  playwright_e2e_test:
+    strategy:
+      matrix:
+        command:
+          - dev_server_command: pnpm dev-biz &
+            test_command: pnpm turbo --filter=gocho_business e2e:CICD
+      fail-fast: true
     name: 웹 페이지 테스트
     runs-on: ubuntu-latest
     env:
@@ -108,10 +114,10 @@ jobs:
         run: PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright pnpx playwright@1.28.0 install --with-deps chromium
 
       - name: 개발 서버 실행
-        run: pnpm dev-biz &
+        run: ${{matrix.command.dev_server_command}}
 
       - name: playwright test 실행
-        run: pnpm turbo --filter=gocho_business e2e:CICD
+        run: ${{matrix.command.test_command}}
 
       - uses: actions/upload-artifact@v2
         if: always()
