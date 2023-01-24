@@ -155,7 +155,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{success()}}
     steps:
-      - uses: rtCamp/action-slack-notify@masterg
+      - uses: rtCamp/action-slack-notify@master
         env:
           SLACK_CHANNEL: 02-팀-frontend
           SLACK_FOOTER: ""
