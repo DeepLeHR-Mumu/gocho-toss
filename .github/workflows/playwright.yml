@@ -134,8 +134,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 성공 시 테스트 결과 슬랙으로 전송
-        # if: needs.playwright_e2e_test.result == "success"
-        run: echo"성공 ${{needs.playwright_e2e_test.result}}"
+        if: ${{needs.playwright_e2e_test.result == "success"}}
+        run: echo"성공"
         # uses: rtCamp/action-slack-notify@masterg
         # env:
         #   SLACK_CHANNEL: 02-팀-frontend
