@@ -128,23 +128,30 @@ jobs:
           path: playwright-report/
           retention-days: 20
 
-      # - name: 성공 시 테스트 결과 슬랙으로 전송
-      #   uses: rtCamp/action-slack-notify@master
-      #   env:
-      #     SLACK_CHANNEL: 02-팀-frontend
-      #     SLACK_FOOTER: ""
-      #     SLACK_COLOR: "good"
-      #     SLACK_MESSAGE: "dev 테스트 성공했습니다!:"
-      #     SLACK_TITLE: "테스트코드 결과"
-      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-
-      # - name: 실패 시 테스트 결과 슬랙으로 전송
-      #   if: failure()
-      #   uses: rtCamp/action-slack-notify@master
-      #   env:
-      #     SLACK_CHANNEL: 02-팀-frontend
-      #     SLACK_FOOTER: ""
-      #     SLACK_COLOR: "danger"
-      #     SLACK_MESSAGE: "dev 테스트 실패했습니다!:"
-      #     SLACK_TITLE: "테스트코드 결과"
-      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+  result:
+    needs: playwright_e2e_test
+    name: 결과 슬랙으로 전송
+    runs-on: ubuntu-latest
+    steps:
+      - name: 성공 시 테스트 결과 슬랙으로 전송
+        if: jobs.playwright_e2e_test.result==success
+        run: echo"성공"
+        # uses: rtCamp/action-slack-notify@master
+        # env:
+        #   SLACK_CHANNEL: 02-팀-frontend
+        #   SLACK_FOOTER: ""
+        #   SLACK_COLOR: "good"
+        #   SLACK_MESSAGE: "dev 테스트 성공했습니다!:"
+        #   SLACK_TITLE: "테스트코드 결과"
+        #   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: 실패 시 테스트 결과 슬랙으로 전송
+        if: jobs.playwright_e2e_test.result==failed
+        # uses: rtCamp/action-slack-notify@master
+        run: echo"실패"
+        # env:
+        #   SLACK_CHANNEL: 02-팀-frontend
+        #   SLACK_FOOTER: ""
+        #   SLACK_COLOR: "danger"
+        #   SLACK_MESSAGE: "dev 테스트 실패했습니다!:"
+        #   SLACK_TITLE: "테스트코드 결과"
+        #   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
