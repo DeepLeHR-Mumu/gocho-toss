@@ -78,6 +78,9 @@ jobs:
         with:
           node-version: "16.x"
 
+      - name: error
+        run: exit 1
+
       - name: pnpm 초기 설정
         uses: pnpm/action-setup@v2
         with:
@@ -135,7 +138,7 @@ jobs:
     if: ${{failure()}}
     steps:
       - name: 실패 시 테스트 결과 슬랙으로 전송
-        run: echo"실패"
+        run: echo "실패"
   failure_result:
     needs: playwright_e2e_test
     name: 성공 슬랙으로 전송
@@ -143,7 +146,7 @@ jobs:
     if: ${{success()}}
     steps:
       - name: 성공 시 테스트 결과 슬랙으로 전송
-        run: echo"성공"
+        run: echo "성공"
         # uses: rtCamp/action-slack-notify@masterg
         # env:
         #   SLACK_CHANNEL: 02-팀-frontend
