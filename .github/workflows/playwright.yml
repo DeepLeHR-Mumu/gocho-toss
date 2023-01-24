@@ -59,12 +59,12 @@ jobs:
   playwright_e2e_test:
     needs: waiting_environment
     strategy:
+      fail-fast: true
       matrix:
         command:
           - service_name: business
             dev_server: pnpm dev-biz &
             test: pnpm turbo --filter=gocho_business e2e:CICD
-      fail-fast: true
     name: ${{matrix.command.service_name}} 테스트
     runs-on: ubuntu-latest
     env:
@@ -134,7 +134,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 성공 시 테스트 결과 슬랙으로 전송
-        if: jobs.playwright_e2e_test.result==success
+        if: ${{jobs.playwright_e2e_test.result==success}}
         run: echo"성공"
         # uses: rtCamp/action-slack-notify@master
         # env:
@@ -145,7 +145,7 @@ jobs:
         #   SLACK_TITLE: "테스트코드 결과"
         #   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: 실패 시 테스트 결과 슬랙으로 전송
-        if: jobs.playwright_e2e_test.result==failed
+        if: ${{jobs.playwright_e2e_test.result==failed}}
         # uses: rtCamp/action-slack-notify@master
         run: echo"실패"
         # env:
