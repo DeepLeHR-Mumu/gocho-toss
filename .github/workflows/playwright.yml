@@ -57,13 +57,15 @@ jobs:
         run: PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright pnpx playwright@1.28.0 install --with-deps chromium
 
   playwright_e2e_test:
+    needs: waiting_environment
     strategy:
       matrix:
         command:
-          - dev_server_command: pnpm dev-biz &
-            test_command: pnpm turbo --filter=gocho_business e2e:CICD
+          - service_name: business
+            dev_server: pnpm dev-biz &
+            test: pnpm turbo --filter=gocho_business e2e:CICD
       fail-fast: true
-    name: 웹 페이지 테스트
+    name: ${{matrix.command.service_name}} 테스트
     runs-on: ubuntu-latest
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -114,10 +116,10 @@ jobs:
         run: PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright pnpx playwright@1.28.0 install --with-deps chromium
 
       - name: 개발 서버 실행
-        run: ${{matrix.command.dev_server_command}}
+        run: ${{matrix.command.dev_server}}
 
       - name: playwright test 실행
-        run: ${{matrix.command.test_command}}
+        run: ${{matrix.command.test}}
 
       - uses: actions/upload-artifact@v2
         if: always()
@@ -126,23 +128,23 @@ jobs:
           path: playwright-report/
           retention-days: 20
 
-      - name: 성공 시 테스트 결과 슬랙으로 전송
-        uses: rtCamp/action-slack-notify@master
-        env:
-          SLACK_CHANNEL: 02-팀-frontend
-          SLACK_FOOTER: ""
-          SLACK_COLOR: "good"
-          SLACK_MESSAGE: "dev 테스트 성공했습니다!:"
-          SLACK_TITLE: "테스트코드 결과"
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+      # - name: 성공 시 테스트 결과 슬랙으로 전송
+      #   uses: rtCamp/action-slack-notify@master
+      #   env:
+      #     SLACK_CHANNEL: 02-팀-frontend
+      #     SLACK_FOOTER: ""
+      #     SLACK_COLOR: "good"
+      #     SLACK_MESSAGE: "dev 테스트 성공했습니다!:"
+      #     SLACK_TITLE: "테스트코드 결과"
+      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-      - name: 실패 시 테스트 결과 슬랙으로 전송
-        if: failure()
-        uses: rtCamp/action-slack-notify@master
-        env:
-          SLACK_CHANNEL: 02-팀-frontend
-          SLACK_FOOTER: ""
-          SLACK_COLOR: "danger"
-          SLACK_MESSAGE: "dev 테스트 실패했습니다!:"
-          SLACK_TITLE: "테스트코드 결과"
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+      # - name: 실패 시 테스트 결과 슬랙으로 전송
+      #   if: failure()
+      #   uses: rtCamp/action-slack-notify@master
+      #   env:
+      #     SLACK_CHANNEL: 02-팀-frontend
+      #     SLACK_FOOTER: ""
+      #     SLACK_COLOR: "danger"
+      #     SLACK_MESSAGE: "dev 테스트 실패했습니다!:"
+      #     SLACK_TITLE: "테스트코드 결과"
+      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
