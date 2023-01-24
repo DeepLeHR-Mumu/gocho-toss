@@ -134,9 +134,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 성공 시 테스트 결과 슬랙으로 전송
-        if: needs.playwright_e2e_test.result == "success"
-        run: echo"성공"
-        # uses: rtCamp/action-slack-notify@master
+        # if: needs.playwright_e2e_test.result == "success"
+        run: echo"성공 ${{needs.playwright_e2e_test.result}}"
+        # uses: rtCamp/action-slack-notify@masterg
         # env:
         #   SLACK_CHANNEL: 02-팀-frontend
         #   SLACK_FOOTER: ""
@@ -144,10 +144,10 @@ jobs:
         #   SLACK_MESSAGE: "dev 테스트 성공했습니다!:"
         #   SLACK_TITLE: "테스트코드 결과"
         #   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-      - name: 실패 시 테스트 결과 슬랙으로 전송
-        if: needs.playwright_e2e_test.result == "fail"
-        # uses: rtCamp/action-slack-notify@master
-        run: echo"실패"
+      # - name: 실패 시 테스트 결과 슬랙으로 전송
+      #   if: needs.playwright_e2e_test.result == "fail"
+      #   uses: rtCamp/action-slack-notify@master
+      #   run: echo"실패"
         # env:
         #   SLACK_CHANNEL: 02-팀-frontend
         #   SLACK_FOOTER: ""
