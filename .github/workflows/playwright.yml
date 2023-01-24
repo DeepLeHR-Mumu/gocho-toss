@@ -78,9 +78,6 @@ jobs:
         with:
           node-version: "16.x"
 
-      - name: error
-        run: exit 1
-
       - name: pnpm 초기 설정
         uses: pnpm/action-setup@v2
         with:
@@ -133,36 +130,30 @@ jobs:
 
   success_result:
     needs: playwright_e2e_test
-    name: 실패 슬랙으로 전송
+    name: 테스트 실패
     runs-on: ubuntu-latest
     if: ${{failure()}}
     steps:
-      - name: 실패 시 테스트 결과 슬랙으로 전송
-        run: echo "실패"
+      - uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_CHANNEL: 02-팀-frontend
+          SLACK_FOOTER: ""
+          SLACK_COLOR: "danger"
+          SLACK_MESSAGE: "dev 테스트 실패했습니다!:"
+          SLACK_TITLE: "테스트코드 결과"
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+
   failure_result:
     needs: playwright_e2e_test
-    name: 성공 슬랙으로 전송
+    name: 테스트 성공
     runs-on: ubuntu-latest
     if: ${{success()}}
     steps:
-      - name: 성공 시 테스트 결과 슬랙으로 전송
-        run: echo "성공"
-        # uses: rtCamp/action-slack-notify@masterg
-        # env:
-        #   SLACK_CHANNEL: 02-팀-frontend
-        #   SLACK_FOOTER: ""
-        #   SLACK_COLOR: "good"
-        #   SLACK_MESSAGE: "dev 테스트 성공했습니다!:"
-        #   SLACK_TITLE: "테스트코드 결과"
-        #   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-      # - name: 실패 시 테스트 결과 슬랙으로 전송
-      #   if: needs.playwright_e2e_test.result == "fail"
-      #   uses: rtCamp/action-slack-notify@master
-      #   run: echo"실패"
-      # env:
-      #   SLACK_CHANNEL: 02-팀-frontend
-      #   SLACK_FOOTER: ""
-      #   SLACK_COLOR: "danger"
-      #   SLACK_MESSAGE: "dev 테스트 실패했습니다!:"
-      #   SLACK_TITLE: "테스트코드 결과"
-      #   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - uses: rtCamp/action-slack-notify@masterg
+        env:
+          SLACK_CHANNEL: 02-팀-frontend
+          SLACK_FOOTER: ""
+          SLACK_COLOR: "good"
+          SLACK_MESSAGE: "dev 테스트 성공했습니다!:"
+          SLACK_TITLE: "테스트코드 결과"
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
