@@ -7,6 +7,6 @@ test("기업 계정 목록 갯수 테스트", async ({ page }) => {
   const recruiterDataObj = await (
     await page.waitForResponse((response) => response.url().includes("managers") && response.status() === 200)
   ).json();
-  const count = (await page.locator("li > p").count()) / 2;
+  const count = await page.locator("li").count();
   expect(count).toBe(recruiterDataObj.count);
 });
