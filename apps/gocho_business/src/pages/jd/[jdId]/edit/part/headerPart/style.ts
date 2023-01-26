@@ -24,4 +24,21 @@ export const cssObj = {
     display: flex;
     gap: 0 0.5rem;
   `,
+
+  rejectWrapper: css`
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    background-color: #ffefef;
+    border-radius: 1.5rem;
+  `,
+
+  rejectTitle: css`
+    color: #ff6b6c;
+    font-size: 1.125rem;
+  `,
+
+  rejectReason: css`
+    color: #ff6b6c;
+    word-break: break-all;
+  `,
 };

@@ -59,6 +59,10 @@ export const jdDetailSelector = ({ data: jd }: ResponseObjDef) => {
 
   return {
     id: jd.id,
+    status: {
+      name: jd.status.name,
+      reason: jd.status.reason,
+    },
     startTime: jd.start_time,
     endTime: jd.end_time,
     processArr: jd.process_arr,

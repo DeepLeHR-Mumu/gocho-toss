@@ -11,8 +11,9 @@ import { useEndJd } from "@/apis/jd/useEndJd";
 import { jdArrKeyObj } from "@/apis/jd/useJdArr/type";
 
 import { cssObj } from "./style";
+import { HeaderPartProps } from "./type";
 
-export const HeaderPart: FunctionComponent = () => {
+export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ jdData }) => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
@@ -73,6 +74,12 @@ export const HeaderPart: FunctionComponent = () => {
           />
         </div>
       </div>
+      {jdData.status.name.includes("반려") && (
+        <div css={cssObj.rejectWrapper}>
+          <h2 css={cssObj.rejectTitle}>반려 사유</h2>
+          <p css={cssObj.rejectReason}>{jdData.status.reason}</p>
+        </div>
+      )}
     </section>
   );
 };

@@ -22,8 +22,3 @@ export const useJdDetail = (isLogin: boolean, requestObj: RequestObjDef) =>
     select: (data) => jdDetailSelector(data),
     enabled: isLogin,
   });
-//
-// useQuery(jdDetailKeyObj.detail(requestObj), getJdDetail, {
-//   enabled: Boolean(requestObj.id),
-//   select: (data) => jdDetailSelector(data),
-// });

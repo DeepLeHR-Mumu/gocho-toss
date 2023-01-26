@@ -175,7 +175,7 @@ const JdEditPage: NextPageWithLayout = () => {
       <PageLayout>
         <div css={cssObj.pageContainer}>
           <form onSubmit={handleSubmit(jdSubmitHandler)}>
-            <HeaderPart />
+            <HeaderPart jdData={jdData} />
             <BasicInfoPart jdForm={jdForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
             <PositionHeaderPart append={append} setIsCardOpen={setIsCardOpenArr} />
             <ul>
