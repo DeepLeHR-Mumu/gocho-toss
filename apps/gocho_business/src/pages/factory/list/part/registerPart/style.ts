@@ -10,6 +10,7 @@ export const cssObj = {
   wrapper: css`
     width: 57.5rem;
     padding: 1.5rem;
+    background-color: ${COLORS.GRAY100};
     border: 1px solid ${COLORS.GRAY80};
     border-radius: 1.5rem;
   `,

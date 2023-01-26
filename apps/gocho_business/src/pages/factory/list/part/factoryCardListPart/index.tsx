@@ -49,7 +49,14 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
           <div css={cssObj.wrapper} key={factoryData.id} data-testid="factory/list/factoryCardListPart">
             {editingIndex === index && (
               <div css={cssObj.editingBox}>
-                <p>수정중</p>
+                <p css={cssObj.editingText}>현재 선택됨</p>
+                <p css={cssObj.editingText}>수정중</p>
+              </div>
+            )}
+            {(factoryData.status.name === "등록반려" || factoryData.status.name === "수정반려") && (
+              <div css={cssObj.rejectedBox}>
+                <strong css={cssObj.rejectedTitle}>반려 사유</strong>
+                <p css={cssObj.rejectedMessage}>{factoryData.status.reason}</p>
               </div>
             )}
             <div css={cssObj.topContainer}>
