@@ -30,6 +30,7 @@ export const cssObj = {
   `,
 
   buttonContainer: css`
+    margin-top: 3rem;
     display: flex;
     justify-content: flex-end;
     gap: 0 0.5rem;

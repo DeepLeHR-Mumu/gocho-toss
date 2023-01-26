@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useFieldArray } from "react-hook-form";
 
@@ -95,6 +95,15 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
     }
     return null;
   };
+
+  useEffect(() => {
+    const hireNumber = watch("position_arr")[positionIndex].hire_number;
+
+    if (hireNumber === -1) setHireNumberLabel("0");
+    else if (hireNumber === -2) setHireNumberLabel("0");
+    else if (hireNumber === -3) setHireNumberLabel("0");
+    else setHireNumberLabel(String(hireNumber));
+  }, [watch, positionIndex]);
 
   return (
     <>

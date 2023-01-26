@@ -191,6 +191,7 @@ export const cssObj = {
     align-items: center;
     justify-content: space-between;
     border: 1px solid ${COLORS.GRAY10};
+    border-radius: 5px;
     width: 6rem;
     height: 2.5rem;
     padding: 0 1rem;
