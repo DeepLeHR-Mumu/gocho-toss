@@ -20,6 +20,14 @@ export const ListPart: FunctionComponent = () => {
     return null;
   }
 
+  if (jdDataObj.count === 0) {
+    return (
+      <section css={cssObj.noDataSectionContainer}>
+        <p css={cssObj.noDataDesc}>등록된 공고가 없습니다.</p>
+      </section>
+    );
+  }
+
   return (
     <section data-testid="jd/list/listPart">
       {jdDataObj.jdDataArr.map((jd) => (

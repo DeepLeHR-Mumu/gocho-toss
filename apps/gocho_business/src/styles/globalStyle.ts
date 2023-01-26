@@ -141,7 +141,6 @@ export const globalStyle = css`
   blockquote:after,
   q:before,
   q:after {
-    content: "";
     content: none;
   }
   table {

@@ -53,7 +53,7 @@ export interface ResponseObjDef {
         etc: string | null;
       };
       hire_number: number;
-      pay_arr: number[] | null;
+      pay_arr: string[] | null;
       preferred_certi_arr: string[];
       preferred_etc_arr: string[] | null;
     }[];
