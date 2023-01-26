@@ -70,7 +70,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                   <p css={cssObj.address}>{factoryData.address}</p>
                 </div>
                 <div css={cssObj.productContainer}>
-                  <p css={cssObj.infoName}>생산품</p>
+                  <p css={cssObj.productTitle}>생산품</p>
                   <p css={cssObj.product}>{factoryData.product}</p>
                 </div>
               </div>
@@ -83,6 +83,10 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                     onClickHandler={() => {
                       setEditingIndex(index);
                       setRejectedMessage(factoryData.status.reason);
+                      window.scrollTo({
+                        top: 0,
+                        behavior: "smooth",
+                      });
                     }}
                     radius="circle"
                     fontColor={COLORS.GRAY10}

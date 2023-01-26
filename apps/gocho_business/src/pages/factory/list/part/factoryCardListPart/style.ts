@@ -102,10 +102,12 @@ export const cssObj = {
     font-weight: 700;
     color: ${COLORS.GRAY10};
   `,
+
   address: css`
     color: ${COLORS.GRAY10};
     word-break: break-all;
   `,
+
   productContainer: css`
     display: flex;
     flex-direction: row;
@@ -113,13 +115,20 @@ export const cssObj = {
     flex-shrink: 0;
     gap: 0 0.5rem;
   `,
+
+  productTitle: css`
+    font-weight: 700;
+    color: ${COLORS.GRAY40};
+  `,
+
   infoName: css`
     font-weight: 700;
     color: ${COLORS.GRAY10};
   `,
+
   product: css`
     word-break: break-all;
-    color: ${COLORS.GRAY10};
+    color: ${COLORS.GRAY40};
   `,
 
   buttonContainer: css`
@@ -186,5 +195,11 @@ export const cssObj = {
   `,
   date: css`
     color: ${COLORS.GRAY40};
+  `,
+  top: css`
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: block;
   `,
 };
