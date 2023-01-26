@@ -243,11 +243,13 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                       maxLength: 70,
                     })}
                   />
-                  <DeleteInputButton
-                    onClickHandler={() => {
-                      taskDetailArr.remove(index);
-                    }}
-                  />
+                  {index !== 0 && (
+                    <DeleteInputButton
+                      onClickHandler={() => {
+                        taskDetailArr.remove(index);
+                      }}
+                    />
+                  )}
                 </label>
               ))}
               <AddFieldButton

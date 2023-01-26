@@ -392,12 +392,14 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   })}
                   autoComplete="off"
                 />
-                <DeleteInputButton
-                  onClickHandler={() => {
-                    payArr.remove(index);
-                    setPayIsFocusedArr((prev) => prev.filter((stateItem, stateIndex) => stateIndex !== index));
-                  }}
-                />
+                {index !== 0 && (
+                  <DeleteInputButton
+                    onClickHandler={() => {
+                      payArr.remove(index);
+                      setPayIsFocusedArr((prev) => prev.filter((stateItem, stateIndex) => stateIndex !== index));
+                    }}
+                  />
+                )}
               </label>
               <div css={cssObj.guideChipContainer}>
                 {payIsFocusedArr[index] && (

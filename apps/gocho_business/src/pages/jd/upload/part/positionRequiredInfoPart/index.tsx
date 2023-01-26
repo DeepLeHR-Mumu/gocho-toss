@@ -301,12 +301,16 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                   })}
                   autoComplete="off"
                 />
-                <DeleteInputButton
-                  onClickHandler={() => {
-                    requiredEtcArr.remove(index);
-                    setRequiredEtcIsFocusedArr((prev) => prev.filter((stateItem, stateIndex) => stateIndex !== index));
-                  }}
-                />
+                {index !== 0 && (
+                  <DeleteInputButton
+                    onClickHandler={() => {
+                      requiredEtcArr.remove(index);
+                      setRequiredEtcIsFocusedArr((prev) =>
+                        prev.filter((stateItem, stateIndex) => stateIndex !== index)
+                      );
+                    }}
+                  />
+                )}
               </label>
               <div css={cssObj.guideChipContainer}>
                 {requiredEtcIsFocusedArr[index] &&

@@ -111,6 +111,7 @@ export const cssObj = {
     align-items: center;
     justify-content: space-between;
     border: 1px solid ${isDisabled ? `${COLORS.GRAY70}` : `${COLORS.GRAY10}`};
+    border-radius: 5px;
     color: ${isDisabled ? `${COLORS.GRAY70}` : `${COLORS.GRAY10}`};
     width: 6rem;
     height: 2.5rem;
@@ -186,6 +187,7 @@ export const cssObj = {
     font-size: 1rem;
     font-weight: 400;
     border: 1px solid ${COLORS.GRAY10};
+    border-radius: 5px;
     width: ${width}rem;
     padding: 0.5rem 1rem;
     background-color: ${COLORS.GRAY100};

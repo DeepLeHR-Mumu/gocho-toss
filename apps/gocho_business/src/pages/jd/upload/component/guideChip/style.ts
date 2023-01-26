@@ -8,12 +8,12 @@ export const cssObj = {
     height: 2rem;
     font-size: 0.875rem;
     border-radius: 2rem;
-    background-color: ${COLORS.GRAY30};
+    background-color: ${COLORS.BLUE_SECOND90};
     width: fit-content;
     padding: 0 0.5rem;
 
     > span {
-      color: ${COLORS.GRAY100};
+      color: ${COLORS.BLUE_NEON30};
       word-break: keep-all;
     }
   `,

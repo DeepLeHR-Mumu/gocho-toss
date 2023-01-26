@@ -23,6 +23,7 @@ export const cssObj = {
     align-items: center;
     justify-content: space-between;
     border: 1px solid ${COLORS.GRAY10};
+    border-radius: 5px;
     width: ${width}rem;
     height: 2.5rem;
     padding: 0 1rem;
@@ -234,6 +235,7 @@ export const cssObj = {
     font-size: 1rem;
     font-weight: 400;
     border: 1px solid ${COLORS.GRAY10};
+    border-radius: 5px;
     background-color: ${COLORS.GRAY100};
     width: ${width}rem;
     padding: 0.5rem 1rem;
