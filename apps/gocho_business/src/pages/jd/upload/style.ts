@@ -24,7 +24,7 @@ export const cssObj = {
   `,
 
   buttonWrapper: css`
-    margin: 0 auto;
+    margin: 3rem auto 0;
     width: 40%;
     height: fit-content;
   `,

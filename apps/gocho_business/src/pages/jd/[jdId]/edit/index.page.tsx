@@ -8,6 +8,7 @@ import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 import { Spinner } from "shared-ui/common/atom/spinner";
 
+import { useToast } from "@/globalStates/useToast";
 import type { NextPageWithLayout } from "@/pages/index/type";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
 import { useJdDetail } from "@/apis/jd/useJdDetail";
@@ -22,8 +23,9 @@ import { PositionHeaderPart } from "./part/positionHeaderPart";
 import { PositionTitleInfoPart } from "./part/positionTitleInfoPart";
 import { PositionRequiredInfoPart } from "./part/positionRequiredInfoPart";
 import { PositionWorkInfoPart } from "./part/positionWorkInfoPart";
+
 import { JdFormValues } from "./type";
-import { BLANK_POSITION } from "./constant";
+import { BLANK_POSITION, JD_EDIT_MESSAGE_OBJ } from "./constant";
 import { getFieldArrayValue, getFieldArrayValueWithNull, setFieldArray } from "./util";
 import { cssObj } from "./style";
 
@@ -32,6 +34,7 @@ const JdEditPage: NextPageWithLayout = () => {
 
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { setToast } = useToast();
 
   const jdForm = useForm<JdFormValues>({
     mode: "onBlur",
@@ -71,14 +74,69 @@ const JdEditPage: NextPageWithLayout = () => {
   const { mutate: endJdMutation } = useEndJd();
 
   const endJdHandler = (id: number) => {
-    endJdMutation(
-      { jdId: id },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries(jdArrKeyObj.all);
+    if (window.confirm(JD_EDIT_MESSAGE_OBJ.END)) {
+      endJdMutation(
+        { jdId: id },
+        {
+          onSuccess: () => {
+            setToast("마감되었습니다");
+            queryClient.invalidateQueries(jdArrKeyObj.all);
+          },
+        }
+      );
+    }
+  };
+
+  const deleteJdHandler = (id: number) => {
+    if (window.confirm(JD_EDIT_MESSAGE_OBJ.DELETE)) {
+      deleteJdMutation(
+        { jdId: id },
+        {
+          onSuccess: () => {
+            setToast("삭제되었습니다");
+            queryClient.invalidateQueries(jdArrKeyObj.all);
+          },
+        }
+      );
+    }
+  };
+
+  const jdEditHandler: SubmitHandler<JdFormValues> = (jdObj) => {
+    if (window.confirm(JD_EDIT_MESSAGE_OBJ.EDIT)) {
+      editJdMutate(
+        {
+          jdId: Number(router.query.jdId),
+          dto: {
+            ...jdObj,
+            start_time: new Date(jdObj.start_time).getTime(),
+            end_time: new Date(jdObj.end_time).getTime(),
+            apply_url: jdObj.apply_url.includes("@") ? `mailto: ${jdObj.apply_url}` : jdObj.apply_url,
+            process_arr: getFieldArrayValue(jdObj.process_arr),
+            apply_route_arr: getFieldArrayValue(jdObj.apply_route_arr),
+            etc_arr: getFieldArrayValueWithNull(jdObj.etc_arr),
+            position_arr: jdObj.position_arr.map((position) => ({
+              ...position,
+              hire_number: position.hire_number ? position.hire_number : 0,
+              task_sub_arr: position.task_sub_arr ? position.task_sub_arr : null,
+              task_detail_arr: getFieldArrayValue(position.task_detail_arr),
+              required_etc_arr: getFieldArrayValueWithNull(position.required_etc_arr),
+              pay_arr: getFieldArrayValue(position.pay_arr),
+              preferred_certi_arr: position.preferred_certi_arr ? position.preferred_certi_arr : null,
+              preferred_etc_arr: getFieldArrayValueWithNull(position.preferred_etc_arr),
+            })),
+          },
         },
-      }
-    );
+        {
+          onSuccess: () => {
+            setToast("등록되었습니다");
+          },
+
+          onError: () => {
+            alert("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
+          },
+        }
+      );
+    }
   };
 
   useEffect(() => {
@@ -126,42 +184,6 @@ const JdEditPage: NextPageWithLayout = () => {
     });
   }, [jdData, reset]);
 
-  const jdSubmitHandler: SubmitHandler<JdFormValues> = (jdObj) => {
-    editJdMutate(
-      {
-        jdId: Number(router.query.jdId),
-        dto: {
-          ...jdObj,
-          start_time: new Date(jdObj.start_time).getTime(),
-          end_time: new Date(jdObj.end_time).getTime(),
-          apply_url: jdObj.apply_url.includes("@") ? `mailto: ${jdObj.apply_url}` : jdObj.apply_url,
-          process_arr: getFieldArrayValue(jdObj.process_arr),
-          apply_route_arr: getFieldArrayValue(jdObj.apply_route_arr),
-          etc_arr: getFieldArrayValueWithNull(jdObj.etc_arr),
-          position_arr: jdObj.position_arr.map((position) => ({
-            ...position,
-            hire_number: position.hire_number ? position.hire_number : 0,
-            task_sub_arr: position.task_sub_arr ? position.task_sub_arr : null,
-            task_detail_arr: getFieldArrayValue(position.task_detail_arr),
-            required_etc_arr: getFieldArrayValueWithNull(position.required_etc_arr),
-            pay_arr: getFieldArrayValue(position.pay_arr),
-            preferred_certi_arr: position.preferred_certi_arr ? position.preferred_certi_arr : null,
-            preferred_etc_arr: getFieldArrayValueWithNull(position.preferred_etc_arr),
-          })),
-        },
-      },
-      {
-        onSuccess: () => {
-          alert("서버에 공고가 업로드 되었습니다.");
-        },
-
-        onError: () => {
-          alert("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
-        },
-      }
-    );
-  };
-
   if (!jdData) {
     return (
       <div css={cssObj.spinnerBox}>
@@ -174,7 +196,7 @@ const JdEditPage: NextPageWithLayout = () => {
     <main>
       <PageLayout>
         <div css={cssObj.pageContainer}>
-          <form onSubmit={handleSubmit(jdSubmitHandler)}>
+          <form onSubmit={handleSubmit(jdEditHandler)}>
             <HeaderPart jdData={jdData} />
             <BasicInfoPart jdForm={jdForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
             <PositionHeaderPart append={append} setIsCardOpen={setIsCardOpenArr} />
@@ -221,7 +243,7 @@ const JdEditPage: NextPageWithLayout = () => {
                 size="xLarge"
                 text="공고 삭제"
                 onClickHandler={() => {
-                  deleteJdMutation({ jdId: Number(router.query.jdId) });
+                  deleteJdHandler(Number(router.query.jdId));
                 }}
                 iconObj={{ icon: BiRocket, location: "left" }}
               />

@@ -82,7 +82,7 @@ const JdUploadPage: NextPageWithLayout = () => {
       },
       {
         onSuccess: () => {
-          alert("서버에 공고가 업로드 되었습니다.");
+          alert("공고가 업로드 되었습니다.");
         },
 
         onError: () => {
@@ -133,8 +133,8 @@ const JdUploadPage: NextPageWithLayout = () => {
                 fontColor={`${COLORS.GRAY100}`}
                 backgroundColor={`${COLORS.BLUE_FIRST40}`}
                 isFullWidth
-                size="medium"
-                text="공고 등록하기"
+                size="xLarge"
+                text="공고 등록"
                 iconObj={{ icon: BiRocket, location: "left" }}
                 onClickHandler="submit"
               />

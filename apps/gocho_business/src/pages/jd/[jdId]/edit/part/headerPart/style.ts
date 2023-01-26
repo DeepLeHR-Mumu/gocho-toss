@@ -34,7 +34,7 @@ export const cssObj = {
 
   rejectTitle: css`
     color: #ff6b6c;
-    font-size: 1.125rem;
+    font-size: 1.25rem;
   `,
 
   rejectReason: css`

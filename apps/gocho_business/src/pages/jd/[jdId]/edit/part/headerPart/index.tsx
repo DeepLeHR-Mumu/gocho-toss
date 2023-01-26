@@ -6,29 +6,49 @@ import { useRouter } from "next/router";
 import { COLORS } from "shared-style/color";
 import { SharedButton } from "shared-ui/business/sharedButton";
 
+import { useToast } from "@/globalStates/useToast";
 import { useDeleteJd } from "@/apis/jd/useDeleteJd";
 import { useEndJd } from "@/apis/jd/useEndJd";
 import { jdArrKeyObj } from "@/apis/jd/useJdArr/type";
 
+import { JD_EDIT_MESSAGE_OBJ } from "../../constant";
 import { cssObj } from "./style";
 import { HeaderPartProps } from "./type";
 
 export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ jdData }) => {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { setToast } = useToast();
 
   const { mutate: deleteJdMutation } = useDeleteJd();
   const { mutate: endJdMutation } = useEndJd();
 
   const endJdHandler = (id: number) => {
-    endJdMutation(
-      { jdId: id },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries(jdArrKeyObj.all);
-        },
-      }
-    );
+    if (window.confirm(JD_EDIT_MESSAGE_OBJ.END)) {
+      endJdMutation(
+        { jdId: id },
+        {
+          onSuccess: () => {
+            setToast("마감되었습니다");
+            queryClient.invalidateQueries(jdArrKeyObj.all);
+          },
+        }
+      );
+    }
+  };
+
+  const deleteJdHandler = (id: number) => {
+    if (window.confirm(JD_EDIT_MESSAGE_OBJ.DELETE)) {
+      deleteJdMutation(
+        { jdId: id },
+        {
+          onSuccess: () => {
+            setToast("삭제되었습니다");
+            queryClient.invalidateQueries(jdArrKeyObj.all);
+          },
+        }
+      );
+    }
   };
 
   return (
@@ -59,7 +79,7 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ jdData }) => {
             size="xLarge"
             text="공고 삭제"
             onClickHandler={() => {
-              deleteJdMutation({ jdId: Number(router.query.jdId) });
+              deleteJdHandler(Number(router.query.jdId));
             }}
             iconObj={{ icon: BiRocket, location: "left" }}
           />
