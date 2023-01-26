@@ -3,15 +3,24 @@ import { COLORS } from "shared-style/color";
 
 export const cssObj = {
   partContainer: css`
-    margin: 2.5rem 2rem 0;
+    margin-top: 2.5rem;
   `,
 
   titleWrapper: css`
-    margin-bottom: 2rem;
+    padding: 1rem 2rem;
+    background-color: #e9f6ff;
+    border-radius: 1.5rem;
+    margin-bottom: 1rem;
   `,
 
   title: css`
     font-size: 1.25rem;
+  `,
+
+  dataWrapper: css`
+    padding: 2rem;
+    box-shadow: 0 0 8px rgba(85, 85, 85, 0.25);
+    border-radius: 5px;
   `,
 
   container: css`
@@ -36,6 +45,7 @@ export const cssObj = {
     display: flex;
     align-items: center;
     border: 1px solid ${COLORS.GRAY10};
+    border-radius: 5px;
     height: 2.5rem;
     padding: 0 1rem;
     font-size: 1rem;
@@ -127,6 +137,7 @@ export const cssObj = {
     font-size: 1rem;
     font-weight: 400;
     border: 1px solid ${COLORS.GRAY10};
+    border-radius: 5px;
     background-color: ${COLORS.GRAY100};
     width: ${width}rem;
     padding: 0.5rem 1rem;
@@ -207,6 +218,7 @@ export const cssObj = {
   applyUrlInput: (width: number) => css`
     font-size: 1rem;
     border: 1px solid ${COLORS.GRAY10};
+    border-radius: 5px;
     width: ${width}rem;
     padding: 0.5rem 1rem 0.5rem 2.5rem;
     font-weight: 400;

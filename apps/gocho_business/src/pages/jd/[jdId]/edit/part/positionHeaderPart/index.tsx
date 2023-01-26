@@ -21,7 +21,7 @@ export const PositionHeaderPart: FunctionComponent<PositionHeaderPartProps> = ({
         radius="round"
         fontColor={`${COLORS.BLUE_FIRST40}`}
         borderColor={`${COLORS.BLUE_FIRST40}`}
-        backgroundColor={`${COLORS.GRAY100}`}
+        backgroundColor="#e9f6ff"
         size="medium"
         text="직무 카드 추가"
         onClickHandler={() => {

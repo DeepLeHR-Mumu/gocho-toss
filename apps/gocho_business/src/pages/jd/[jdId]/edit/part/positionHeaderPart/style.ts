@@ -3,10 +3,14 @@ import { COLORS } from "shared-style/color";
 
 export const cssObj = {
   partContainer: css`
-    margin: 5rem 2rem 0;
+    margin-top: 2.5rem;
+    padding: 1rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: #e9f6ff;
+    border-radius: 1.5rem;
+    margin-bottom: 1rem;
   `,
 
   title: css`
