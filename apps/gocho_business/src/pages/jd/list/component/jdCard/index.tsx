@@ -10,21 +10,24 @@ import dayjs from "dayjs";
 import { COLORS } from "shared-style/color";
 import { SharedButton } from "shared-ui/business/sharedButton";
 
+import { useToast } from "@/globalStates/useToast";
 import { CommonInfoBox, CommonStatusChip } from "@/components/common";
 import { INTERNAL_URL } from "@/constants/url";
+import { useEndJd } from "@/apis/jd/useEndJd";
 import { useDeleteJd } from "@/apis/jd/useDeleteJd";
 import { jdArrKeyObj } from "@/apis/jd/useJdArr/type";
 
-import { useEndJd } from "@/apis/jd/useEndJd";
+import { JD_MESSAGE_OBJ } from "./constant";
 import { cssObj } from "./style";
 import { JdCardProps } from "./type";
 
 export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
-  const { mutate: deleteJdMutation } = useDeleteJd();
-  const { mutate: endJdMutation } = useEndJd();
-
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { setToast } = useToast();
+
+  const { mutate: deleteJdMutation } = useDeleteJd();
+  const { mutate: endJdMutation } = useEndJd();
 
   const numberFormat = Intl.NumberFormat("ko-KR", { notation: "compact" });
   const viewData = numberFormat.format(jd.view);
@@ -32,14 +35,31 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
   const clickData = numberFormat.format(jd.click);
 
   const endJdHandler = (id: number) => {
-    endJdMutation(
-      { jdId: id },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries(jdArrKeyObj.all);
-        },
-      }
-    );
+    if (window.confirm(JD_MESSAGE_OBJ.END)) {
+      endJdMutation(
+        { jdId: id },
+        {
+          onSuccess: () => {
+            setToast("마감되었습니다");
+            queryClient.invalidateQueries(jdArrKeyObj.all);
+          },
+        }
+      );
+    }
+  };
+
+  const deleteJdHandler = (id: number) => {
+    if (window.confirm(JD_MESSAGE_OBJ.DELETE)) {
+      deleteJdMutation(
+        { jdId: id },
+        {
+          onSuccess: () => {
+            setToast("삭제되었습니다");
+            queryClient.invalidateQueries(jdArrKeyObj.all);
+          },
+        }
+      );
+    }
   };
 
   return (
@@ -100,7 +120,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
               iconObj={{ icon: BiMinus, location: "left" }}
               text="공고삭제"
               onClickHandler={() => {
-                deleteJdMutation({ jdId: jd.id });
+                deleteJdHandler(jd.id);
               }}
             />
             <SharedButton

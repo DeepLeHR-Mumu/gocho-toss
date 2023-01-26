@@ -25,3 +25,7 @@ export const BLANK_POSITION = {
   preferred_certi_arr: [],
   preferred_etc_arr: [{ value: "" }],
 };
+
+export const JD_UPLOAD_MESSAGE_OBJ = {
+  UPLOAD: "최종 공고 업로드 요청 하시겠습니까? 영업일 기준 검수 완료까지 1시간 정도 소요됩니다.",
+};

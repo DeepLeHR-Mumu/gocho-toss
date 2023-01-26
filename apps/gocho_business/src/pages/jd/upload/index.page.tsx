@@ -5,6 +5,7 @@ import { BiRocket } from "react-icons/bi";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
+import { useToast } from "@/globalStates/useToast";
 import type { NextPageWithLayout } from "@/pages/index/type";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
 import { useAddJd } from "@/apis/jd/useAddJd";
@@ -15,13 +16,17 @@ import { PositionHeaderPart } from "./part/positionHeaderPart";
 import { PositionTitleInfoPart } from "./part/positionTitleInfoPart";
 import { PositionRequiredInfoPart } from "./part/positionRequiredInfoPart";
 import { PositionWorkInfoPart } from "./part/positionWorkInfoPart";
+
 import { JobFormValues } from "./type";
-import { BLANK_POSITION } from "./constant";
+import { BLANK_POSITION, JD_UPLOAD_MESSAGE_OBJ } from "./constant";
 import { getFieldArrayValue, getFieldArrayValueWithNull } from "./util";
 import { cssObj } from "./style";
 
 const JdUploadPage: NextPageWithLayout = () => {
   const [isCardOpenArr, setIsCardOpenArr] = useState<boolean[]>([false]);
+
+  const { mutate: addJobMutate } = useAddJd();
+  const { setToast } = useToast();
 
   const jobForm = useForm<JobFormValues>({
     mode: "onBlur",
@@ -55,41 +60,41 @@ const JdUploadPage: NextPageWithLayout = () => {
     name: "etc_arr",
   });
 
-  const { mutate: addJobMutate } = useAddJd();
-
   const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
-    addJobMutate(
-      {
-        dto: {
-          ...jobObj,
-          start_time: new Date(jobObj.start_time).getTime(),
-          end_time: new Date(jobObj.end_time).getTime(),
-          apply_url: jobObj.apply_url.includes("@") ? `mailto: ${jobObj.apply_url}` : jobObj.apply_url,
-          process_arr: getFieldArrayValue(jobObj.process_arr),
-          apply_route_arr: getFieldArrayValue(jobObj.apply_route_arr),
-          etc_arr: getFieldArrayValueWithNull(jobObj.etc_arr),
-          position_arr: jobObj.position_arr.map((position) => ({
-            ...position,
-            hire_number: position.hire_number ? position.hire_number : 0,
-            task_sub_arr: position.task_sub_arr ? position.task_sub_arr : null,
-            task_detail_arr: getFieldArrayValue(position.task_detail_arr),
-            required_etc_arr: getFieldArrayValueWithNull(position.required_etc_arr),
-            pay_arr: getFieldArrayValue(position.pay_arr),
-            preferred_certi_arr: position.preferred_certi_arr ? position.preferred_certi_arr : null,
-            preferred_etc_arr: getFieldArrayValueWithNull(position.preferred_etc_arr),
-          })),
+    if (window.confirm(JD_UPLOAD_MESSAGE_OBJ.UPLOAD)) {
+      addJobMutate(
+        {
+          dto: {
+            ...jobObj,
+            start_time: new Date(jobObj.start_time).getTime(),
+            end_time: new Date(jobObj.end_time).getTime(),
+            apply_url: jobObj.apply_url.includes("@") ? `mailto: ${jobObj.apply_url}` : jobObj.apply_url,
+            process_arr: getFieldArrayValue(jobObj.process_arr),
+            apply_route_arr: getFieldArrayValue(jobObj.apply_route_arr),
+            etc_arr: getFieldArrayValueWithNull(jobObj.etc_arr),
+            position_arr: jobObj.position_arr.map((position) => ({
+              ...position,
+              hire_number: position.hire_number ? position.hire_number : 0,
+              task_sub_arr: position.task_sub_arr ? position.task_sub_arr : null,
+              task_detail_arr: getFieldArrayValue(position.task_detail_arr),
+              required_etc_arr: getFieldArrayValueWithNull(position.required_etc_arr),
+              pay_arr: getFieldArrayValue(position.pay_arr),
+              preferred_certi_arr: position.preferred_certi_arr ? position.preferred_certi_arr : null,
+              preferred_etc_arr: getFieldArrayValueWithNull(position.preferred_etc_arr),
+            })),
+          },
         },
-      },
-      {
-        onSuccess: () => {
-          alert("공고가 업로드 되었습니다.");
-        },
+        {
+          onSuccess: () => {
+            setToast("등록되었습니다");
+          },
 
-        onError: () => {
-          alert("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
-        },
-      }
-    );
+          onError: () => {
+            alert("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
+          },
+        }
+      );
+    }
   };
 
   return (
