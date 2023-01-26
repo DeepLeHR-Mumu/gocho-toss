@@ -6,9 +6,10 @@ import { NextPageWithLayout } from "@/pages/index/type";
 import { PageHead } from "./pageHead";
 import { HeaderPart } from "./part/headerPart";
 import { EditPart } from "./part/editPart";
+import { cssObj } from "./style";
 
 const MyPage: NextPageWithLayout = () => (
-  <main>
+  <main css={cssObj.wrapper}>
     <HeaderPart />
     <PageLayout>
       <EditPart />

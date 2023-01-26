@@ -13,7 +13,7 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
 }) => {
   const [welfareArr, setWelfareArr] = useState<string[] | null>(welfareValueArr);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const welfareBoxRef = useRef<HTMLUListElement | null>(null);
+  const welfareBoxRef = useRef<HTMLDivElement | null>(null);
   const { setValue } = companyFormObj;
 
   const setValueCreator = (value: string[] | null) => {
@@ -84,14 +84,18 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
       </div>
       <div css={cssObj.container}>
         <p css={cssObj.desc}>{desc}</p>
-        {welfareArr ? (
-          <ul css={cssObj.listBox} ref={welfareBoxRef}>
+        {!welfareArr && <p css={cssObj.noData}>입력한 복지가 없습니다</p>}
+
+        {welfareArr && (
+          <div css={cssObj.listBox} ref={welfareBoxRef}>
             {welfareArr.map((data, index) => {
               const key = `${title}_${data}${index}`;
 
               return (
-                <li key={key}>
-                  <p css={cssObj.valueDesc}>{data}</p>
+                <div key={key} css={cssObj.buttonLine}>
+                  <button css={cssObj.welfareButton} type="button">
+                    <p css={cssObj.valueDesc}>{data}</p>
+                  </button>
                   <button
                     type="button"
                     aria-label={`복지 ${data} 제거하기`}
@@ -102,12 +106,10 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
                   >
                     <FiMinus />
                   </button>
-                </li>
+                </div>
               );
             })}
-          </ul>
-        ) : (
-          <p css={cssObj.noData}>입력한 복지가 없습니다</p>
+          </div>
         )}
       </div>
     </div>

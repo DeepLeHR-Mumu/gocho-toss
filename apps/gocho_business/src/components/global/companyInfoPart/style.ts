@@ -6,36 +6,30 @@ import { shorten } from "shared-style/common";
 export const cssObj = {
   spinner: css`
     position: relative;
-    height: 6.0625rem;
+    height: 6.125rem;
     border-bottom: 1px solid ${COLORS.GRAY65};
   `,
   wrapper: css`
     padding: 0.5rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 8rem 1fr auto;
+    align-items: center;
     border-bottom: 1px solid ${COLORS.GRAY65};
-  `,
-  basicInfoBox: css`
-    display: flex;
-    align-items: flex-start;
   `,
   logo: css`
     height: 5rem;
     width: 5rem;
     border-radius: 0.75rem;
     position: relative;
-    margin-right: 3rem;
   `,
   companyInfoBox: css`
-    display: flex;
-    flex-direction: column;
+    overflow: hidden;
+    padding-right: 1rem;
   `,
   companyNameCSS: css`
     font-size: 1.25rem;
     font-weight: 700;
-    width: 100%;
-    max-width: 40rem;
+    display: block;
     ${shorten()};
   `,
   companyGenreCSS: css`
@@ -44,6 +38,7 @@ export const cssObj = {
   countingInfoBox: css`
     display: flex;
     align-items: center;
+    justify-content: center;
   `,
   countBox: css`
     margin-left: 2rem;
@@ -53,16 +48,22 @@ export const cssObj = {
     font-weight: 700;
     color: ${COLORS.GRAY60};
     margin-bottom: 0.5rem;
+    display: block;
   `,
   countDesc: css`
     display: flex;
     align-items: center;
     color: ${COLORS.GRAY60};
-    font-size: 1.125rem;
+    font-size: 0.875rem;
+    line-height: 1;
+
+    > svg {
+      font-size: 1.125rem;
+      margin-right: 0.5rem;
+    }
   `,
   colorPoint: css`
-    font-size: 1rem;
-    margin-left: 0.5rem;
+    line-height: 1;
     color: ${COLORS.BLUE_FIRST30};
   `,
 };

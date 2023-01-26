@@ -4,8 +4,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { PWD_REGEXP } from "shared-constant/regExp";
-import { SharedButton } from "shared-ui/business/sharedButton";
-import { COLORS } from "shared-style/color";
 
 import { useEditUserInfo } from "@/apis/auth/useEditUserInfo";
 import { useUserState } from "@/globalStates/useUserState";
@@ -77,6 +75,10 @@ export const EditPart: FunctionComponent = () => {
       });
     };
   }, []);
+
+  const isOriginPassword = Boolean(watch("origin_password"));
+  const isNewPassword = Boolean(watch("new_password"));
+  const isCheckPassword = Boolean(watch("check_password"));
 
   return (
     <section css={cssObj.wrapper} data-testid="company/edit/editPart">
@@ -233,17 +235,13 @@ export const EditPart: FunctionComponent = () => {
           </li>
         </ul>
 
-        <div css={cssObj.submitButtonBox}>
-          <SharedButton
-            radius="round"
-            fontColor={COLORS.GRAY100}
-            onClickHandler="submit"
-            size="medium"
-            isFullWidth
-            text="회원정보 변경 저장"
-            backgroundColor={COLORS.GRAY65}
-          />
-        </div>
+        <button
+          css={cssObj.submitButton(isOriginPassword && isNewPassword && isCheckPassword)}
+          type="button"
+          disabled={!isOriginPassword || !isNewPassword || !isCheckPassword}
+        >
+          회원정보 변경 저장
+        </button>
       </form>
     </section>
   );

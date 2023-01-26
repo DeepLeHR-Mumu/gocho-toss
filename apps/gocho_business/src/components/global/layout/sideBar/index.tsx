@@ -1,9 +1,11 @@
 import { FunctionComponent } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
 import { useUserState } from "@/globalStates/useUserState";
+import { INTERNAL_URL } from "@/constants/url";
 
 import { linkArr } from "./constant";
 import { CompanyInfoBox } from "./component/companyInfoBox";
@@ -11,6 +13,8 @@ import { UserInfoBox } from "./component/userInfoBox";
 import { cssObj } from "./style";
 
 export const SideBar: FunctionComponent = () => {
+  const router = useRouter();
+  const { id } = router.query;
   const { userInfoData } = useUserState();
 
   if (!userInfoData) {
@@ -25,16 +29,20 @@ export const SideBar: FunctionComponent = () => {
     <nav css={cssObj.wrapper}>
       <div css={cssObj.container}>
         <CompanyInfoBox name={userInfoData.companyName} img={userInfoData.companyLogo} />
-        {linkArr.map((linkObj) => (
-          <Link href={linkObj.url} key={linkObj.url} passHref>
-            <a css={cssObj.linkCSS}>
-              <div css={cssObj.iconCSS}>
+        {linkArr.map((linkObj) => {
+          const isRoute = router.pathname === linkObj.url;
+          const isUpload = linkObj.name === "공고" && router.pathname === INTERNAL_URL.JD_UPLOAD;
+          const isEdit = linkObj.name === "공고" && router.pathname === INTERNAL_URL.JD_EDIT(Number(id));
+
+          return (
+            <Link href={linkObj.url} key={linkObj.url} passHref>
+              <a css={cssObj.linkCSS(isRoute || isUpload || isEdit)}>
                 <linkObj.icon />
-              </div>
-              {linkObj.name}
-            </a>
-          </Link>
-        ))}
+                {linkObj.name}
+              </a>
+            </Link>
+          );
+        })}
       </div>
       <UserInfoBox name={`${userInfoData.name}(${userInfoData.department})`} />
     </nav>
