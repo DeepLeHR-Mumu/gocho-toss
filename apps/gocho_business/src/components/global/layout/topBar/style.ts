@@ -23,10 +23,11 @@ export const cssObj = {
     position: relative;
     margin-right: 1rem;
   `,
-  title: (isLogin: boolean) => css`
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: ${isLogin ? COLORS.GRAY10 : COLORS.GRAY100};
+  title: css`
+    display: block;
+    width: 9.375rem;
+    height: 1.25rem;
+    position: relative;
   `,
   linkButton: css`
     background-color: ${COLORS.GRAY100};

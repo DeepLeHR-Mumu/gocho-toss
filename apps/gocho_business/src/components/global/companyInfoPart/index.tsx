@@ -25,14 +25,12 @@ export const CompanyInfoPart = () => {
 
   return (
     <section css={cssObj.wrapper}>
-      <div css={cssObj.basicInfoBox}>
-        <div css={cssObj.logo}>
-          <Image src={companyData.logo} alt={companyData.name} layout="fill" objectFit="contain" />
-        </div>
-        <div css={cssObj.companyInfoBox}>
-          <p css={cssObj.companyNameCSS}>{companyData.name}</p>
-          <p css={cssObj.companyGenreCSS}>{companyData.industry}</p>
-        </div>
+      <div css={cssObj.logo}>
+        <Image src={companyData.logo} alt={companyData.name} layout="fill" objectFit="contain" />
+      </div>
+      <div css={cssObj.companyInfoBox}>
+        <strong css={cssObj.companyNameCSS}>{companyData.name}</strong>
+        <p css={cssObj.companyGenreCSS}>{companyData.industry}</p>
       </div>
       <div css={cssObj.countingInfoBox}>
         <div css={cssObj.countBox}>

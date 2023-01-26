@@ -28,7 +28,7 @@ export const cssObj = {
     if (width) {
       return css`
         width: ${width}%;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.75rem;
       `;
     }
     return css`
@@ -61,6 +61,7 @@ export const cssObj = {
   input: (isError?: boolean) => css`
     border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
     padding: 0rem 1rem;
+    border-radius: 0.3125rem;
     height: 2.5rem;
     font-size: 1rem;
     width: 100%;
@@ -116,6 +117,7 @@ export const cssObj = {
       height: 2.5rem;
       padding: 0rem 1rem 0rem 2.75rem;
       font-size: 1rem;
+      border-radius: 0.3125rem;
       width: 100%;
       font-weight: 400;
       justify-content: flex-start;

@@ -26,13 +26,11 @@ export const Footer: FunctionComponent = () => (
       </div>
       <div css={cssObj.customBox}>
         <strong css={cssObj.title}>고객센터</strong>
-        <ul css={cssObj.helpBox}>
-          <li>
-            <a css={cssObj.linkCSS} href={`mailto:${FOOTER_INFO.helpEmail}`}>
-              {FOOTER_INFO.helpEmail}
-            </a>
-          </li>
-        </ul>
+        <div css={cssObj.helpBox}>
+          <a css={cssObj.linkCSS} href={`mailto:${FOOTER_INFO.helpEmail}`}>
+            {FOOTER_INFO.helpEmail}
+          </a>
+        </div>
       </div>
     </div>
   </footer>

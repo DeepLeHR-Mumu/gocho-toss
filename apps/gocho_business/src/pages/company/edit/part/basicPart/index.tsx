@@ -39,24 +39,8 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
     );
   }
 
-  const foundDate = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
-
   return (
     <div css={cssObj.wrapper} data-testid="company/edit/BasicPart">
-      <div css={cssObj.container()}>
-        <strong css={cssObj.subTitle()}>기업 형태</strong>
-        <p css={cssObj.textValue}>{companyData.size}</p>
-      </div>
-      <div css={cssObj.rowBox}>
-        <div css={cssObj.container(30)}>
-          <strong css={cssObj.subTitle()}>설립일</strong>
-          <p css={cssObj.textValue}>{foundDate.format(new Date(companyData.foundNumber))}</p>
-        </div>
-        <div css={cssObj.container()}>
-          <strong css={cssObj.subTitle()}>사업자 번호</strong>
-          <p css={cssObj.textValue}>{companyData.businessNumber}</p>
-        </div>
-      </div>
       <div css={cssObj.rowBox}>
         <div css={cssObj.container(30)}>
           <strong css={cssObj.subTitle(errors.employee_number?.type === "required")}>사원수</strong>
@@ -78,7 +62,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
           <input
             type="text"
             {...register("intro", { required: true, maxLength: 120 })}
-            placeholder="기업 한줄 소개"
+            placeholder="한 줄로 기업을 소개해주세요"
             css={cssObj.input(errors.intro?.type === "required")}
           />
         </div>
@@ -143,7 +127,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
               <input
                 type="number"
                 {...register("pay_start", { required: true })}
-                placeholder="평균 초봉"
+                placeholder="숫자만 입력해주세요"
                 css={cssObj.input(errors.pay_start?.type === "required")}
               />
               <p css={cssObj.textValue}>만원</p>
@@ -155,7 +139,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
               <input
                 type="number"
                 {...register("pay_avg", { required: true })}
-                placeholder="평균 연봉"
+                placeholder="숫자만 입력해주세요"
                 css={cssObj.input(errors.pay_avg?.type === "required")}
               />
               <p css={cssObj.textValue}>만원</p>

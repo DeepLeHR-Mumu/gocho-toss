@@ -1,7 +1,5 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
-
 export const cssObj = {
   spinner: css`
     position: relative;
@@ -11,26 +9,12 @@ export const cssObj = {
   wrapper: css`
     margin-top: 2rem;
   `,
-  confirmBox: css`
-    background-color: ${COLORS.GRAY95};
-    padding: 0.5rem 2rem;
-    border-bottom: 1px solid ${COLORS.GRAY70};
-    margin-bottom: 3rem;
-  `,
-  confirmTitle: css`
-    font-size: 1.25rem;
-    font-weight: 700;
-  `,
-  confirmDesc: css`
-    font-size: 1rem;
-    line-height: 1.8;
-    word-break: keep-all;
-  `,
   container: css``,
   header: css`
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    margin-bottom: 5.5rem;
   `,
   title: css`
     font-size: 1.25rem;

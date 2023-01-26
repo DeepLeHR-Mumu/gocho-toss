@@ -8,7 +8,6 @@ import { COLORS } from "shared-style/color";
 
 import { useAddCompanyDetail } from "@/apis/company/useAddCompany";
 import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
-import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 import { CommonStatusChip } from "@/components/common";
 import { useUserState } from "@/globalStates/useUserState";
 import { useToast } from "@/globalStates/useToast";
@@ -16,6 +15,8 @@ import { PageLayout, GlobalLayout, Footer } from "@/components/global/layout";
 import { NextPageWithLayout } from "@/pages/index/type";
 
 import { PageHead } from "./pageHead";
+import { CompanyInfoPart } from "./part/companyInfoPart";
+import { CompanyStatusPart } from "./part/companyStatusPart";
 import { BasicPart } from "./part/basicPart";
 import { WelfarePart } from "./part/welfarePart";
 import { COMPANY_MESSAGE_OBJ } from "./constants";
@@ -28,6 +29,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
   const { data: companyData } = useCompanyDetail({
     companyId: userInfoData?.companyId,
   });
+
   const { mutate: putCompanyDetail } = useAddCompanyDetail();
 
   const companyForm = useForm<PostSubmitValues>({
@@ -129,18 +131,11 @@ const CompanyEditPage: NextPageWithLayout = () => {
   return (
     <main css={cssObj.wrapper}>
       <PageLayout>
-        {(companyData.status.name === "수정반려" || companyData.status.name === "등록반려") && (
-          <div css={cssObj.confirmBox}>
-            <h2 css={cssObj.confirmTitle}>반려사유</h2>
-            <p css={cssObj.confirmDesc}>{companyData.status.reason}</p>
-          </div>
-        )}
-
         <form css={cssObj.container} onSubmit={handleSubmit(addCompanyDetail)}>
           <header css={cssObj.header}>
             <div>
               <h2 css={cssObj.title}>기업정보</h2>
-              <p css={cssObj.desc}>기업 정보에 변화가 있다면 작성 후 수정완료를 눌러주세요</p>
+              <p css={cssObj.desc}>변경사항이 있다면 작성 후 수정완료 버튼을 꼭 눌러주세요</p>
             </div>
             <div css={cssObj.topButtonBox}>
               <CommonStatusChip status={companyData.status.name} />
@@ -161,6 +156,10 @@ const CompanyEditPage: NextPageWithLayout = () => {
               </div>
             </div>
           </header>
+
+          <CompanyInfoPart />
+          {companyData.status.reason && <CompanyStatusPart />}
+
           <section css={cssObj.companyInfoBox}>
             <BasicPart companyForm={companyForm} />
             <WelfarePart companyForm={companyForm} />
@@ -191,7 +190,6 @@ CompanyEditPage.getLayout = (page: ReactElement) => (
   <>
     <PageHead />
     <GlobalLayout>
-      <CompanyInfoPart />
       {page}
       <Footer />
     </GlobalLayout>
