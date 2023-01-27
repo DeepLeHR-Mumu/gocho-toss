@@ -237,7 +237,7 @@ export const EditPart: FunctionComponent = () => {
 
         <button
           css={cssObj.submitButton(isOriginPassword && isNewPassword && isCheckPassword)}
-          type="button"
+          type="submit"
           disabled={!isOriginPassword || !isNewPassword || !isCheckPassword}
         >
           회원정보 변경 저장
