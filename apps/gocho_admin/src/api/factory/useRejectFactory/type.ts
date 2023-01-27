@@ -5,6 +5,7 @@ import { UseMutationResult } from "@tanstack/react-query";
 export interface RequestObjDef {
   factoryId: number;
   type: string;
+  reason: string;
 }
 
 export interface RejectFactoryDef {

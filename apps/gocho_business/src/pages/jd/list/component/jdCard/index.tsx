@@ -79,7 +79,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
             <p>{dayjs(jd.endTime).format("YY.MM.DD HH:mm")}</p>
           </div>
         </div>
-        {!jd.uploader.is_mine && (
+        {jd.uploader.is_mine && (
           <div css={cssObj.buttonContainer}>
             <SharedButton
               radius="circle"

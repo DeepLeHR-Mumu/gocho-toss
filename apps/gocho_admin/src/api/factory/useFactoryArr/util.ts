@@ -1,9 +1,10 @@
 import { ResponseObjDef } from "./type";
 
-export const factoryArrSelector = ({ data: factoryArr }: ResponseObjDef) => {
+export const factoryArrSelector = ({ data: factoryArr, count }: ResponseObjDef) => {
   const factoryDataArr = factoryArr.map((factory) => {
     return {
       id: factory.id,
+      status: factory.status,
       address: factory.address,
       name: factory.name,
       maleNumber: factory.male_number,
@@ -19,5 +20,5 @@ export const factoryArrSelector = ({ data: factoryArr }: ResponseObjDef) => {
       },
     };
   });
-  return { factoryDataArr };
+  return { factoryDataArr, count };
 };

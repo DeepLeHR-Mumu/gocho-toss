@@ -4,14 +4,20 @@ import { COLORS } from "shared-style/color";
 
 export const cssObj = {
   wrapper: css`
-    display: flex;
     width: 18rem;
     padding: 1.5rem 0 0 0;
+    border-right: 1px solid ${COLORS.GRAY65};
+    position: fixed;
+    height: 100vh;
+  `,
+
+  marginContainer: css`
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-right: 1px solid ${COLORS.GRAY65};
-    position: relative;
+    height: 100%;
   `,
+
   container: css`
     margin: 0 1rem;
   `,

@@ -32,13 +32,16 @@ export const cssObj = {
       }
     `;
   },
-  
+
   container: (heightPadding: number) => css`
     padding: ${heightPadding}rem 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
+    p {
+      line-height: 1;
+    }
   `,
 
   icon: (fontColor?: string, iconLocation?: "left" | "right") => css`

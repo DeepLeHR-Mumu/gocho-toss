@@ -6,6 +6,7 @@ import { AdminResponseDef } from "shared-type/api/responseType";
 export interface RequestObjDef {
   companyId: number;
   type: string;
+  reason: string;
 }
 
 export interface RejectCompanyDef {

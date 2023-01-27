@@ -101,14 +101,14 @@ const CompanyEdit: NextPage = () => {
       pay_start: companyData?.payStart,
       pay_desc: companyData?.payDesc,
       welfare: {
-        money: companyData?.welfare.money ? companyData?.welfare.money.join("\n") : null,
-        health: companyData?.welfare.health ? companyData?.welfare.health.join("\n") : null,
-        life: companyData?.welfare.life ? companyData?.welfare.life.join("\n") : null,
-        holiday: companyData?.welfare.holiday ? companyData?.welfare.holiday.join("\n") : null,
-        facility: companyData?.welfare.facility ? companyData?.welfare.facility.join("\n") : null,
-        vacation: companyData?.welfare.vacation ? companyData?.welfare.vacation.join("\n") : null,
-        growth: companyData?.welfare.growth ? companyData?.welfare.growth.join("\n") : null,
-        etc: companyData?.welfare.etc ? companyData?.welfare.etc.join("\n") : null,
+        money: companyData?.welfare?.money ? companyData?.welfare.money.join("\n") : null,
+        health: companyData?.welfare?.health ? companyData?.welfare.health.join("\n") : null,
+        life: companyData?.welfare?.life ? companyData?.welfare.life.join("\n") : null,
+        holiday: companyData?.welfare?.holiday ? companyData?.welfare.holiday.join("\n") : null,
+        facility: companyData?.welfare?.facility ? companyData?.welfare.facility.join("\n") : null,
+        vacation: companyData?.welfare?.vacation ? companyData?.welfare.vacation.join("\n") : null,
+        growth: companyData?.welfare?.growth ? companyData?.welfare.growth.join("\n") : null,
+        etc: companyData?.welfare?.etc ? companyData?.welfare.etc.join("\n") : null,
       },
       nozo: {
         exists: companyData?.nozo.exists,
@@ -133,7 +133,7 @@ const CompanyEdit: NextPage = () => {
         <BasicInfoPart
           register={register}
           watch={watch}
-          companyLogo={companyData?.logoUrl}
+          companyLogo={companyData?.logoUrl || ""}
           setLogoPicture={setLogoPicture}
         />
         <WelfareInfoPart register={register} />

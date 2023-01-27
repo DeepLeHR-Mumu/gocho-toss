@@ -5,12 +5,12 @@ import Link from "next/link";
 import { Spinner } from "shared-ui/common/atom/spinner";
 
 import { useUserState } from "@/globalStates/useUserState";
+import { INTERNAL_URL } from "@/constants/url";
 
 import { linkArr } from "./constant";
 import { CompanyInfoBox } from "./component/companyInfoBox";
 import { UserInfoBox } from "./component/userInfoBox";
 import { cssObj } from "./style";
-import { INTERNAL_URL } from "@/constants/url";
 
 export const SideBar: FunctionComponent = () => {
   const router = useRouter();
@@ -27,24 +27,26 @@ export const SideBar: FunctionComponent = () => {
 
   return (
     <nav css={cssObj.wrapper}>
-      <div css={cssObj.container}>
-        <CompanyInfoBox name={userInfoData.companyName} img={userInfoData.companyLogo} />
-        {linkArr.map((linkObj) => {
-          const isRoute = router.pathname === linkObj.url;
-          const isUpload = linkObj.name === "공고" && router.pathname === INTERNAL_URL.JD_UPLOAD;
-          const isEdit = linkObj.name === "공고" && router.asPath === INTERNAL_URL.JD_EDIT(Number(jdId));
+      <div css={cssObj.marginContainer}>
+        <div css={cssObj.container}>
+          <CompanyInfoBox name={userInfoData.companyName} img={userInfoData.companyLogo} />
+          {linkArr.map((linkObj) => {
+            const isRoute = router.pathname === linkObj.url;
+            const isUpload = linkObj.name === "공고" && router.pathname === INTERNAL_URL.JD_UPLOAD;
+            const isEdit = linkObj.name === "공고" && router.pathname === INTERNAL_URL.JD_EDIT(Number(jdId));
 
-          return (
-            <Link href={linkObj.url} key={linkObj.url} passHref>
-              <a css={cssObj.linkCSS(isRoute || isUpload || isEdit)}>
-                <linkObj.icon />
-                {linkObj.name}
-              </a>
-            </Link>
-          );
-        })}
+            return (
+              <Link href={linkObj.url} key={linkObj.url} passHref>
+                <a css={cssObj.linkCSS(isRoute || isUpload || isEdit)}>
+                  <linkObj.icon />
+                  {linkObj.name}
+                </a>
+              </Link>
+            );
+          })}
+        </div>
+        <UserInfoBox name={`${userInfoData.name}(${userInfoData.department})`} />
       </div>
-      <UserInfoBox name={`${userInfoData.name}(${userInfoData.department})`} />
     </nav>
   );
 };

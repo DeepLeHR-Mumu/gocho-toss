@@ -30,6 +30,7 @@ const JdList: NextPage = () => {
   } = useJdArr({
     order: "recent",
     filter: "valid",
+    status: "all",
     limit: JD_SEARCH_LIMIT,
     offset: (Number(router.query.page) - 1) * JD_SEARCH_LIMIT,
   });

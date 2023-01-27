@@ -9,7 +9,7 @@ const config: PlaywrightTestConfig = {
   fullyParallel: true,
   globalSetup: require.resolve("./e2e/global-setup"),
   use: { storageState: "storageState.json" },
-  // workers: process.env.CI ? 2 : undefined,
+  // workers: 2,
   projects: [
     {
       name: "chromium",

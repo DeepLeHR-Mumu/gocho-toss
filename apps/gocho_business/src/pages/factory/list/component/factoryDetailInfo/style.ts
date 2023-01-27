@@ -62,16 +62,17 @@ export const cssObj = {
           border: 1px solid ${COLORS.ERROR_RED40};
         `
       : css`
-          border: 1px solid #777777;
+          border: 1px solid ${COLORS.GRAY35};
         `;
 
     return css`
       ${border}
+      border-radius: 0.3125rem;
       width: 5rem;
       padding: 0.5rem 1rem;
       margin-right: 0.25rem;
       ::placeholder {
-        color: #777777;
+        color: ${COLORS.GRAY35};
       }
     `;
   },
@@ -96,11 +97,12 @@ export const cssObj = {
   `,
 
   etcInfoBox: css`
-    border: 1px solid #777777;
+    border-radius: 0.3125rem;
+    border: 1px solid ${COLORS.GRAY35};
     padding: 0.5rem 1rem;
     margin-top: 0.5rem;
     ::placeholder {
-      color: #777777;
+      color: ${COLORS.GRAY35};
     }
   `,
   trueFalseBox: css`
