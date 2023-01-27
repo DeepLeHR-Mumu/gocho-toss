@@ -1,12 +1,9 @@
-import { FunctionComponent, ReactNode } from "react";
+import { FunctionComponent } from "react";
 
 import { SideBar } from "../sideBar";
 import { TopBar } from "../topBar";
 import { cssObj } from "./style";
-
-interface GlobalLayoutProps {
-  children: ReactNode;
-}
+import { GlobalLayoutProps } from "./type";
 
 export const GlobalLayout: FunctionComponent<GlobalLayoutProps> = ({ children }) => (
   <div css={cssObj.sidebarContainer}>

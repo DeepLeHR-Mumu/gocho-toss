@@ -186,6 +186,7 @@ export const cssObj = {
   uploadInfoContainer: css`
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
   `,
   dateContainer: css`

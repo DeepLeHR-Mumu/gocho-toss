@@ -18,5 +18,7 @@ export const cssObj = {
   countName: css`
     font-weight: 700;
   `,
-  countCSS: css``,
+  countCSS: css`
+    word-break: break-all;
+  `,
 };
