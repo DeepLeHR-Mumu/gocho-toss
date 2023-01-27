@@ -1,6 +1,7 @@
 import { ReactElement, useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { BiRocket } from "react-icons/bi";
+import { useRouter } from "next/router";
 
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
@@ -28,6 +29,7 @@ const JdUploadPage: NextPageWithLayout = () => {
 
   const { mutate: addJobMutate } = useAddJd();
   const { setToast } = useToast();
+  const router = useRouter();
 
   const jobForm = useForm<JobFormValues>({
     mode: "onBlur",
@@ -39,10 +41,11 @@ const JdUploadPage: NextPageWithLayout = () => {
       position_arr: [BLANK_POSITION],
     },
   });
+
   const {
     control,
     handleSubmit,
-    formState: { submitCount },
+    formState: { isDirty, submitCount },
   } = jobForm;
 
   const { fields, append, remove } = useFieldArray({
@@ -108,6 +111,36 @@ const JdUploadPage: NextPageWithLayout = () => {
     if (submitCount === 0) return;
     jdUploadFailEvent(submitCount);
   }, [submitCount]);
+
+  useEffect(() => {
+    // const handleUnload = () => {
+    //   if (isDirty) {
+    //     if (!window.confirm(JD_UPLOAD_MESSAGE_OBJ.LEAVE)) {
+    //       router.back();
+    //     }
+    //   }
+    // };
+
+    // Blocks direct link click
+    // router.events.on("routeChangeStart", handleUnload);
+
+    // Block page refresh or close
+    if (isDirty) window.onbeforeunload = () => true;
+
+    // Blocks going back
+    router.beforePopState(() => {
+      if (isDirty) {
+        return window.confirm(JD_UPLOAD_MESSAGE_OBJ.LEAVE);
+      }
+      return false;
+    });
+
+    return () => {
+      // router.events.off("routeChangeStart", handleUnload);
+      window.onbeforeunload = () => null;
+      router.beforePopState(() => true);
+    };
+  }, [isDirty, router, router.events]);
 
   useEffect(() => {
     jdUploadPageFunnelEvent();

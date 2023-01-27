@@ -9,6 +9,7 @@ import { COLORS } from "shared-style/color";
 import { Spinner } from "shared-ui/common/atom/spinner";
 
 import { useToast } from "@/globalStates/useToast";
+import { jdEditConfirmEvent, jdEditDoneEvent, jdEditFailEvent, jdEditPageFunnelEvent } from "@/ga/jdEdit";
 import type { NextPageWithLayout } from "@/pages/index/type";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
 import { useJdDetail } from "@/apis/jd/useJdDetail";
@@ -17,7 +18,7 @@ import { useDeleteJd } from "@/apis/jd/useDeleteJd";
 import { useEndJd } from "@/apis/jd/useEndJd";
 import { jdArrKeyObj } from "@/apis/jd/useJdArr/type";
 
-import { jdEditConfirmEvent, jdEditDoneEvent, jdEditFailEvent, jdEditPageFunnelEvent } from "@/ga/jdEdit";
+import { JD_UPLOAD_MESSAGE_OBJ } from "@/pages/jd/upload/constant";
 import { HeaderPart } from "./part/headerPart";
 import { BasicInfoPart } from "./part/basicInfoPart";
 import { PositionHeaderPart } from "./part/positionHeaderPart";
@@ -51,7 +52,7 @@ const JdEditPage: NextPageWithLayout = () => {
     control,
     handleSubmit,
     reset,
-    formState: { submitCount },
+    formState: { isDirty, submitCount },
   } = jdForm;
 
   const { fields, append, remove } = useFieldArray({
@@ -191,6 +192,35 @@ const JdEditPage: NextPageWithLayout = () => {
       position_arr: positionNewArr,
     });
   }, [jdData, reset]);
+
+  useEffect(() => {
+    // const handleUnload = () => {
+    //   if (isDirty) {
+    //     return window.confirm(JD_UPLOAD_MESSAGE_OBJ.LEAVE);
+    //   }
+    //   return true;
+    // };
+
+    // Blocks direct link click
+    // router.events.on("routeChangeStart", handleUnload);
+
+    // Block page refresh or close
+    if (isDirty) window.onbeforeunload = () => true;
+
+    // Blocks going back
+    router.beforePopState(() => {
+      if (isDirty) {
+        return window.confirm(JD_UPLOAD_MESSAGE_OBJ.LEAVE);
+      }
+      return true;
+    });
+
+    return () => {
+      // router.events.off("routeChangeStart", handleUnload);
+      window.onbeforeunload = () => null;
+      router.beforePopState(() => true);
+    };
+  }, [isDirty, router, router.events]);
 
   useEffect(() => {
     if (submitCount === 0) return;
