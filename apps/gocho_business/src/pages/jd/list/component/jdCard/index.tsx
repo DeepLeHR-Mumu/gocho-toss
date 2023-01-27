@@ -11,6 +11,13 @@ import { COLORS } from "shared-style/color";
 import { SharedButton } from "shared-ui/business/sharedButton";
 
 import { useToast } from "@/globalStates/useToast";
+import {
+  jdDeleteButtonEvent,
+  jdCloseButtonEvent,
+  jdEditButtonEvent,
+  jdCloseDoneEvent,
+  jdDeleteDoneEvent,
+} from "@/ga/jdList";
 import { CommonInfoBox, CommonStatusChip } from "@/components/common";
 import { INTERNAL_URL } from "@/constants/url";
 import { useEndJd } from "@/apis/jd/useEndJd";
@@ -35,12 +42,14 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
   const clickData = numberFormat.format(jd.click);
 
   const endJdHandler = (id: number) => {
+    jdCloseButtonEvent(id);
     if (window.confirm(JD_MESSAGE_OBJ.END)) {
       endJdMutation(
         { jdId: id },
         {
           onSuccess: () => {
             setToast("마감되었습니다");
+            jdCloseDoneEvent(id);
             queryClient.invalidateQueries(jdArrKeyObj.all);
           },
         }
@@ -49,12 +58,14 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
   };
 
   const deleteJdHandler = (id: number) => {
+    jdDeleteButtonEvent(id);
     if (window.confirm(JD_MESSAGE_OBJ.DELETE)) {
       deleteJdMutation(
         { jdId: id },
         {
           onSuccess: () => {
             setToast("삭제되었습니다");
+            jdDeleteDoneEvent(id);
             queryClient.invalidateQueries(jdArrKeyObj.all);
           },
         }
@@ -131,6 +142,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
               iconObj={{ icon: FiEdit, location: "left" }}
               text="공고수정"
               onClickHandler={() => {
+                jdEditButtonEvent(jd.id);
                 router.push({
                   pathname: INTERNAL_URL.JD_EDIT(jd.id),
                 });

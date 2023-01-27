@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { BiRocket } from "react-icons/bi";
 
@@ -6,6 +6,7 @@ import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
 import { useToast } from "@/globalStates/useToast";
+import { jdUploadConfirmEvent, jdUploadDoneEvent, jdUploadFailEvent, jdUploadPageFunnelEvent } from "@/ga/jdUpload";
 import type { NextPageWithLayout } from "@/pages/index/type";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
 import { useAddJd } from "@/apis/jd/useAddJd";
@@ -38,7 +39,11 @@ const JdUploadPage: NextPageWithLayout = () => {
       position_arr: [BLANK_POSITION],
     },
   });
-  const { control, handleSubmit } = jobForm;
+  const {
+    control,
+    handleSubmit,
+    formState: { submitCount },
+  } = jobForm;
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -61,6 +66,7 @@ const JdUploadPage: NextPageWithLayout = () => {
   });
 
   const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
+    jdUploadConfirmEvent();
     if (window.confirm(JD_UPLOAD_MESSAGE_OBJ.UPLOAD)) {
       addJobMutate(
         {
@@ -86,6 +92,7 @@ const JdUploadPage: NextPageWithLayout = () => {
         },
         {
           onSuccess: () => {
+            jdUploadDoneEvent();
             setToast("등록되었습니다");
           },
 
@@ -96,6 +103,15 @@ const JdUploadPage: NextPageWithLayout = () => {
       );
     }
   };
+
+  useEffect(() => {
+    if (submitCount === 0) return;
+    jdUploadFailEvent(submitCount);
+  }, [submitCount]);
+
+  useEffect(() => {
+    jdUploadPageFunnelEvent();
+  }, []);
 
   return (
     <main>

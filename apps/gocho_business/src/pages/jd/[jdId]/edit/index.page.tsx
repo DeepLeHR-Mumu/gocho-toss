@@ -17,6 +17,7 @@ import { useDeleteJd } from "@/apis/jd/useDeleteJd";
 import { useEndJd } from "@/apis/jd/useEndJd";
 import { jdArrKeyObj } from "@/apis/jd/useJdArr/type";
 
+import { jdEditConfirmEvent, jdEditDoneEvent, jdEditFailEvent, jdEditPageFunnelEvent } from "@/ga/jdEdit";
 import { HeaderPart } from "./part/headerPart";
 import { BasicInfoPart } from "./part/basicInfoPart";
 import { PositionHeaderPart } from "./part/positionHeaderPart";
@@ -46,7 +47,12 @@ const JdEditPage: NextPageWithLayout = () => {
       position_arr: [BLANK_POSITION],
     },
   });
-  const { control, handleSubmit, reset } = jdForm;
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { submitCount },
+  } = jdForm;
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -102,6 +108,7 @@ const JdEditPage: NextPageWithLayout = () => {
   };
 
   const jdEditHandler: SubmitHandler<JdFormValues> = (jdObj) => {
+    jdEditConfirmEvent();
     if (window.confirm(JD_EDIT_MESSAGE_OBJ.EDIT)) {
       editJdMutate(
         {
@@ -128,6 +135,7 @@ const JdEditPage: NextPageWithLayout = () => {
         },
         {
           onSuccess: () => {
+            jdEditDoneEvent();
             setToast("등록되었습니다");
           },
 
@@ -183,6 +191,15 @@ const JdEditPage: NextPageWithLayout = () => {
       position_arr: positionNewArr,
     });
   }, [jdData, reset]);
+
+  useEffect(() => {
+    if (submitCount === 0) return;
+    jdEditFailEvent(submitCount);
+  }, [submitCount]);
+
+  useEffect(() => {
+    jdEditPageFunnelEvent();
+  }, []);
 
   if (!jdData) {
     return (
