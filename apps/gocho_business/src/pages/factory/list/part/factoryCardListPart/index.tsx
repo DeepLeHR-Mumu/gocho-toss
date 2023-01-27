@@ -144,7 +144,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
               </div>
               <div css={cssObj.infoItem}>
                 <CommonInfoBox infoName="통근버스" infoData={`${factoryData.bus.exists ? "O" : "X"}`} Icon={BiBus} />
-                {factoryData.dormitory.desc && <p css={cssObj.etcInfo}>{factoryData.dormitory.desc}</p>}
+                {factoryData.dormitory.desc && <p css={cssObj.etcInfo}>{factoryData.bus.desc}</p>}
               </div>
               <div css={cssObj.infoItem}>
                 <CommonInfoBox
@@ -152,7 +152,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                   infoData={`${factoryData.dormitory.exists ? "O" : "X"}`}
                   Icon={BiBuildingHouse}
                 />
-                {factoryData.bus.desc && <p css={cssObj.etcInfo}>{factoryData.bus.desc} </p>}
+                {factoryData.bus.desc && <p css={cssObj.etcInfo}>{factoryData.dormitory.desc} </p>}
               </div>
             </div>
             <div css={cssObj.uploadInfoContainer}>

@@ -75,6 +75,7 @@ export const cssObj = {
     display: flex;
     justify-content: space-between;
     padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
     border-bottom: 1px solid #cccccc;
   `,
   container: css`
@@ -90,6 +91,7 @@ export const cssObj = {
   addressContainer: css`
     display: flex;
     align-items: flex-start;
+    margin-bottom: 0.625rem;
 
     gap: 0 0.5rem;
     > svg {
@@ -118,17 +120,19 @@ export const cssObj = {
 
   productTitle: css`
     font-weight: 700;
-    color: ${COLORS.GRAY40};
+    color: ${COLORS.GRAY10};
+    line-height: 150%;
+  `,
+
+  product: css`
+    word-break: break-all;
+    color: ${COLORS.GRAY10};
+    line-height: 150%;
   `,
 
   infoName: css`
     font-weight: 700;
     color: ${COLORS.GRAY10};
-  `,
-
-  product: css`
-    word-break: break-all;
-    color: ${COLORS.GRAY40};
   `,
 
   buttonContainer: css`
@@ -142,7 +146,7 @@ export const cssObj = {
 
   middleContainer: css`
     display: flex;
-    margin: 1rem 0;
+    margin-bottom: 1rem;
     gap: 2rem 0;
     flex-wrap: wrap;
     justify-content: space-between;

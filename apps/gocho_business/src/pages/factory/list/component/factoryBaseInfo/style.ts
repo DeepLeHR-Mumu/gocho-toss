@@ -4,13 +4,9 @@ import { COLORS } from "shared-style/color";
 export const cssObj = {
   container: css`
     border-bottom: 1px solid #cccccc;
+    margin-bottom: 2rem;
   `,
-  wrapper: css`
-    width: 57.5rem;
-    padding: 1.5rem;
-    border: 1px solid ${COLORS.GRAY80};
-    border-radius: 1.5rem;
-  `,
+
   inputContainer: css`
     display: flex;
     align-items: center;
