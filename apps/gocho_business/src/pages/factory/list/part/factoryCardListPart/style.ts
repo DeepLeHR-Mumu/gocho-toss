@@ -180,7 +180,7 @@ export const cssObj = {
 
   etcInfo: css`
     margin-top: 0.75rem;
-    color: ${COLORS.GRAY30};
+    color: ${COLORS.GRAY40};
     word-break: break-all;
   `,
   uploadInfoContainer: css`
