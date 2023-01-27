@@ -31,9 +31,9 @@ export const SideBar: FunctionComponent = () => {
         <div css={cssObj.container}>
           <CompanyInfoBox name={userInfoData.companyName} img={userInfoData.companyLogo} />
           {linkArr.map((linkObj) => {
-            const isRoute = router.pathname === linkObj.url;
-            const isUpload = linkObj.name === "공고" && router.pathname === INTERNAL_URL.JD_UPLOAD;
-            const isEdit = linkObj.name === "공고" && router.pathname === INTERNAL_URL.JD_EDIT(Number(jdId));
+            const isRoute = router.asPath === linkObj.url;
+            const isUpload = linkObj.name === "공고" && router.asPath === INTERNAL_URL.JD_UPLOAD;
+            const isEdit = linkObj.name === "공고" && router.asPath === INTERNAL_URL.JD_EDIT(Number(jdId));
 
             return (
               <Link href={linkObj.url} key={linkObj.url} passHref>
