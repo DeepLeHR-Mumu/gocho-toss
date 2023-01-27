@@ -14,5 +14,6 @@ export interface JdCardProps {
     startTime: number;
     endTime: number;
     updatedTime: number;
+    createdTime: number;
   };
 }
