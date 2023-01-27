@@ -15,6 +15,7 @@ const JdListPage: NextPageWithLayout = () => (
     </PageLayout>
   </main>
 );
+
 JdListPage.getLayout = (page: ReactElement) => (
   <GlobalLayout>
     <CompanyInfoPart />

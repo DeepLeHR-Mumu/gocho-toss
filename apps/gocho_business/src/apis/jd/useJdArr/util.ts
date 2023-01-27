@@ -19,6 +19,7 @@ export const jdArrSelector = ({ data: jdArr, count }: ResponseObjDef) => {
     click: jd.click,
     startTime: jd.start_time,
     endTime: jd.end_time,
+    updatedTime: jd.updated_time,
     taskArr: jd.task_arr,
   }));
   return { jdDataArr, count };

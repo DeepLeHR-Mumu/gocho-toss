@@ -13,5 +13,6 @@ export interface JdCardProps {
     click: number;
     startTime: number;
     endTime: number;
+    updatedTime: number;
   };
 }

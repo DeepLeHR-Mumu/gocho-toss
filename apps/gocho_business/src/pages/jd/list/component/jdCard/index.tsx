@@ -96,7 +96,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
           <div css={cssObj.infoBox}>
             <FiCalendar />
             <strong css={cssObj.infoTitle}>최종수정일</strong>
-            <p>{dayjs(jd.endTime).format("YY.MM.DD HH:mm")}</p>
+            <p>{dayjs(jd.updatedTime).format("YY.MM.DD HH:mm")}</p>
           </div>
         </div>
         {jd.uploader.is_mine && (
