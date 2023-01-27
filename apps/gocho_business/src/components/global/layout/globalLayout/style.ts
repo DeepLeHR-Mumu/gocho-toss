@@ -7,5 +7,6 @@ export const cssObj = {
   `,
   pageContainer: css`
     width: calc(100% - 18rem);
+    margin-left: 18rem;
   `,
 };

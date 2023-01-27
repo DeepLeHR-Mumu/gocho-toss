@@ -23,6 +23,7 @@ export const cssObj = {
   wrapper: css`
     margin-bottom: 4.5rem;
     width: 30rem;
+    background-color: ${COLORS.GRAY100};
     word-break: break-all;
     border: 1px solid ${COLORS.GRAY80};
     border-radius: 1.5rem;
@@ -36,16 +37,45 @@ export const cssObj = {
     height: 100%;
     position: absolute;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(173, 173, 173, 0.8);
+    background: rgba(82, 124, 205, 0.4);
     backdrop-filter: blur(2px);
+  `,
+
+  editingText: css`
+    color: #1553cd;
+    font-size: 1.5rem;
+    font-weight: 700;
+  `,
+
+  rejectedBox: css`
+    background-color: #ffefef;
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  `,
+  rejectedTitle: css`
+    color: #ff6b6c;
+    font-weight: 700;
+    margin-bottom: 8px;
+  `,
+  rejectedMessage: css`
+    color: #ff6b6c;
+    font-size: 14px;
+    white-space: pre-line;
+    text-align: center;
   `,
 
   topContainer: css`
     display: flex;
     justify-content: space-between;
     padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
     border-bottom: 1px solid #cccccc;
   `,
   container: css`
@@ -61,10 +91,10 @@ export const cssObj = {
   addressContainer: css`
     display: flex;
     align-items: flex-start;
+    margin-bottom: 0.625rem;
 
     gap: 0 0.5rem;
     > svg {
-      /* margin-top: 0.3rem; */
       flex-shrink: 0;
       font-size: 1.5rem;
     }
@@ -74,10 +104,12 @@ export const cssObj = {
     font-weight: 700;
     color: ${COLORS.GRAY10};
   `,
+
   address: css`
     color: ${COLORS.GRAY10};
     word-break: break-all;
   `,
+
   productContainer: css`
     display: flex;
     flex-direction: row;
@@ -85,12 +117,21 @@ export const cssObj = {
     flex-shrink: 0;
     gap: 0 0.5rem;
   `,
-  infoName: css`
+
+  productTitle: css`
     font-weight: 700;
     color: ${COLORS.GRAY10};
+    line-height: 150%;
   `,
+
   product: css`
     word-break: break-all;
+    color: ${COLORS.GRAY10};
+    line-height: 150%;
+  `,
+
+  infoName: css`
+    font-weight: 700;
     color: ${COLORS.GRAY10};
   `,
 
@@ -105,7 +146,7 @@ export const cssObj = {
 
   middleContainer: css`
     display: flex;
-    margin: 1rem 0;
+    margin-bottom: 1rem;
     gap: 2rem 0;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -139,12 +180,13 @@ export const cssObj = {
 
   etcInfo: css`
     margin-top: 0.75rem;
-    color: ${COLORS.GRAY30};
+    color: ${COLORS.GRAY40};
     word-break: break-all;
   `,
   uploadInfoContainer: css`
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
   `,
   dateContainer: css`
@@ -157,6 +199,12 @@ export const cssObj = {
     margin-right: 0.25rem;
   `,
   date: css`
-    color: ${COLORS.GRAY10};
+    color: ${COLORS.GRAY40};
+  `,
+  top: css`
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: block;
   `,
 };

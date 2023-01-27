@@ -27,24 +27,26 @@ export const SideBar: FunctionComponent = () => {
 
   return (
     <nav css={cssObj.wrapper}>
-      <div css={cssObj.container}>
-        <CompanyInfoBox name={userInfoData.companyName} img={userInfoData.companyLogo} />
-        {linkArr.map((linkObj) => {
-          const isRoute = router.pathname === linkObj.url;
-          const isUpload = linkObj.name === "공고" && router.pathname === INTERNAL_URL.JD_UPLOAD;
-          const isEdit = linkObj.name === "공고" && router.pathname === INTERNAL_URL.JD_EDIT(Number(id));
+      <div css={cssObj.marginContainer}>
+        <div css={cssObj.container}>
+          <CompanyInfoBox name={userInfoData.companyName} img={userInfoData.companyLogo} />
+          {linkArr.map((linkObj) => {
+            const isRoute = router.pathname === linkObj.url;
+            const isUpload = linkObj.name === "공고" && router.pathname === INTERNAL_URL.JD_UPLOAD;
+            const isEdit = linkObj.name === "공고" && router.pathname === INTERNAL_URL.JD_EDIT(Number(id));
 
-          return (
-            <Link href={linkObj.url} key={linkObj.url} passHref>
-              <a css={cssObj.linkCSS(isRoute || isUpload || isEdit)}>
-                <linkObj.icon />
-                {linkObj.name}
-              </a>
-            </Link>
-          );
-        })}
+            return (
+              <Link href={linkObj.url} key={linkObj.url} passHref>
+                <a css={cssObj.linkCSS(isRoute || isUpload || isEdit)}>
+                  <linkObj.icon />
+                  {linkObj.name}
+                </a>
+              </Link>
+            );
+          })}
+        </div>
+        <UserInfoBox name={`${userInfoData.name}(${userInfoData.department})`} />
       </div>
-      <UserInfoBox name={`${userInfoData.name}(${userInfoData.department})`} />
     </nav>
   );
 };

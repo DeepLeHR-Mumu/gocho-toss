@@ -4,12 +4,8 @@ import { COLORS } from "shared-style/color";
 
 export const cssObj = {
   wrapper: css`
-    position: sticky;
-    bottom: 0;
-    left: 0;
     width: 100%;
     padding: 1rem;
-    background-color: ${COLORS.GRAY100};
     display: flex;
     align-items: center;
     border-top: 1px solid ${COLORS.GRAY65};

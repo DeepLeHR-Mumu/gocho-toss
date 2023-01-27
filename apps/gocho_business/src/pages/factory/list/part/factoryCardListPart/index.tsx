@@ -49,7 +49,14 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
           <div css={cssObj.wrapper} key={factoryData.id} data-testid="factory/list/factoryCardListPart">
             {editingIndex === index && (
               <div css={cssObj.editingBox}>
-                <p>수정중</p>
+                <p css={cssObj.editingText}>현재 선택됨</p>
+                <p css={cssObj.editingText}>수정중</p>
+              </div>
+            )}
+            {(factoryData.status.name === "등록반려" || factoryData.status.name === "수정반려") && (
+              <div css={cssObj.rejectedBox}>
+                <strong css={cssObj.rejectedTitle}>반려 사유</strong>
+                <p css={cssObj.rejectedMessage}>{factoryData.status.reason}</p>
               </div>
             )}
             <div css={cssObj.topContainer}>
@@ -63,7 +70,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                   <p css={cssObj.address}>{factoryData.address}</p>
                 </div>
                 <div css={cssObj.productContainer}>
-                  <p css={cssObj.infoName}>생산품</p>
+                  <p css={cssObj.productTitle}>생산품</p>
                   <p css={cssObj.product}>{factoryData.product}</p>
                 </div>
               </div>
@@ -76,6 +83,10 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                     onClickHandler={() => {
                       setEditingIndex(index);
                       setRejectedMessage(factoryData.status.reason);
+                      window.scrollTo({
+                        top: 0,
+                        behavior: "smooth",
+                      });
                     }}
                     radius="circle"
                     fontColor={COLORS.GRAY10}
@@ -133,7 +144,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
               </div>
               <div css={cssObj.infoItem}>
                 <CommonInfoBox infoName="통근버스" infoData={`${factoryData.bus.exists ? "O" : "X"}`} Icon={BiBus} />
-                {factoryData.dormitory.desc && <p css={cssObj.etcInfo}>{factoryData.dormitory.desc}</p>}
+                {factoryData.dormitory.desc && <p css={cssObj.etcInfo}>{factoryData.bus.desc}</p>}
               </div>
               <div css={cssObj.infoItem}>
                 <CommonInfoBox
@@ -141,7 +152,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                   infoData={`${factoryData.dormitory.exists ? "O" : "X"}`}
                   Icon={BiBuildingHouse}
                 />
-                {factoryData.bus.desc && <p css={cssObj.etcInfo}>{factoryData.bus.desc} </p>}
+                {factoryData.bus.desc && <p css={cssObj.etcInfo}>{factoryData.dormitory.desc} </p>}
               </div>
             </div>
             <div css={cssObj.uploadInfoContainer}>
