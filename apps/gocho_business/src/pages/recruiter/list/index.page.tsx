@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
@@ -6,12 +6,17 @@ import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 import { Footer, GlobalLayout, PageLayout } from "@/components/global/layout";
 import { NextPageWithLayout } from "@/pages/index/type";
 import { useRecruiterArr } from "@/apis/recruiter/useRecruiterArr";
+import { recruiterListPageFunnelEvent } from "@/ga/recruiterList";
 
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
 const RecruiterListPage: NextPageWithLayout = () => {
   const { data: recruiterDataArr } = useRecruiterArr();
+
+  useEffect(() => {
+    recruiterListPageFunnelEvent();
+  }, []);
 
   if (!recruiterDataArr) {
     return (

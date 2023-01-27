@@ -12,6 +12,7 @@ import { tokenService } from "@/utils/tokenService";
 import { useUserState } from "@/globalStates/useUserState";
 import { useDoLogout } from "@/apis/auth/useDoLogout";
 import { INTERNAL_URL } from "@/constants/url";
+import { signupButtonClickEvent } from "@/ga/auth";
 
 import { cssObj } from "./style";
 
@@ -63,6 +64,9 @@ export const TopBar: FunctionComponent = () => {
           href="https://docs.google.com/forms/d/e/1FAIpQLSfYgeAv0BREQSPEtgjHO6-1rHh-srF3EDnRHAWL2e2g1PL_Pw/viewform"
           target="_blank"
           rel="noreferrer"
+          onClick={() => {
+            signupButtonClickEvent();
+          }}
         >
           기업회원 가입하기
         </a>

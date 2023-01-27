@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -17,6 +17,7 @@ import { useUserState } from "@/globalStates/useUserState";
 import { TopBar } from "@/components/global/layout/topBar";
 import { useDoLogin } from "@/apis/auth/useDoLogin";
 import { tokenService } from "@/utils/tokenService";
+import { loginPageFunnelEvent, loginSuccessEvent, signupButtonClickEvent } from "@/ga/auth";
 
 import { PageHead } from "./pageHead";
 import { LoginFormValues } from "./type";
@@ -45,6 +46,7 @@ const LoginPage: NextPage = () => {
         setErrorMsg(errorResponse?.error_message as string);
       },
       onSuccess: (response) => {
+        loginSuccessEvent(watch("auto_login"));
         tokenService.updateAllToken(`${response.data.access_token}`, `${response.data.refresh_token}`);
         const { id, company_id, company_name, company_logo, iat, exp, email, name, department } = managerTokenDecryptor(
           response.data.access_token
@@ -65,6 +67,10 @@ const LoginPage: NextPage = () => {
       },
     });
   };
+
+  useEffect(() => {
+    loginPageFunnelEvent();
+  }, []);
 
   const isEmail = Boolean(watch("email"));
   const isPassword = Boolean(watch("password"));
@@ -138,6 +144,9 @@ const LoginPage: NextPage = () => {
               css={cssObj.signupButton}
               target="_blank"
               rel="noreferrer"
+              onClick={() => {
+                signupButtonClickEvent();
+              }}
             >
               기업회원 가입하기
             </a>

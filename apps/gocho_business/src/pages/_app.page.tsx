@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Global } from "@emotion/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query";
@@ -63,6 +63,12 @@ function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
         },
       })
   );
+
+  useEffect(() => {
+    const prevUrl = sessionStorage.getItem("currentUrl");
+    sessionStorage.setItem("prevUrl", prevUrl || router.asPath);
+    sessionStorage.setItem("currentUrl", router.asPath);
+  }, [router.asPath]);
 
   const getLayout = Component.getLayout || ((page) => page);
 
