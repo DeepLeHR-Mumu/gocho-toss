@@ -40,6 +40,13 @@ export const useAxiosInterceptor = () => {
         activeQueue(data.access_token);
         return { newToken };
       })
+      // .catch((error) => {
+      //   const { error_code } = error.response.data;
+      //   if (error_code === "EMPTY_JWT") {
+      //     tokenService.removeAllToken();
+      //     router.replace(INTERNAL_URL.LOGIN);
+      //   }
+      // })
       .finally(() => {
         isLock = false;
         readyQueueArr = [];
@@ -54,7 +61,7 @@ export const useAxiosInterceptor = () => {
 
     if (!accessTokenData || !refreshTokenData) router.replace(INTERNAL_URL.LOGIN);
 
-    if (refreshCreateTime <= currentTime && router.pathname !== INTERNAL_URL.LOGIN) setCurrentModal("loginModal");
+    if (refreshCreateTime <= currentTime && router.asPath !== INTERNAL_URL.LOGIN) setCurrentModal("loginModal");
 
     if (accessCreateTime - currentTime <= accessTokenLimitMs && !isLock) {
       isLock = true;
