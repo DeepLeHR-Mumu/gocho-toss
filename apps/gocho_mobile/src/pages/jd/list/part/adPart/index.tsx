@@ -7,7 +7,6 @@ import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { setCarouselSetting } from "./util";
 import { carouselContainer } from "./style";
 import { JobAdCard } from "../../component/jobAdCard";
-import { KeumhoAdCard } from "../../component/keumhoAdCard";
 
 export const AdPart: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
@@ -32,7 +31,6 @@ export const AdPart: FunctionComponent = () => {
     <div>
       <section css={carouselContainer}>
         <Slider {...setCarouselSetting} ref={sliderRef}>
-          <KeumhoAdCard />
           {bannerDataArr.bannerDataArr.map((banner) => {
             return <JobAdCard jobData={banner} key={`jobAd${banner.id}`} />;
           })}

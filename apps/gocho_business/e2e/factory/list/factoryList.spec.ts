@@ -4,6 +4,7 @@ import { INTERNAL_URL } from "@/constants/url";
 
 test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
   await page.goto(INTERNAL_URL.HOME);
+  await page.waitForTimeout(5000);
 
   const [beforeFactoryPromise] = await Promise.all([
     page.waitForResponse(

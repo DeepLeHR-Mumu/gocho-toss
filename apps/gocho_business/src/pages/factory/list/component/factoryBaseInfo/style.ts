@@ -4,13 +4,9 @@ import { COLORS } from "shared-style/color";
 export const cssObj = {
   container: css`
     border-bottom: 1px solid #cccccc;
+    margin-bottom: 2rem;
   `,
-  wrapper: css`
-    width: 57.5rem;
-    padding: 1.5rem;
-    border: 1px solid ${COLORS.GRAY80};
-    border-radius: 1.5rem;
-  `,
+
   inputContainer: css`
     display: flex;
     align-items: center;
@@ -43,16 +39,17 @@ export const cssObj = {
           border: 1px solid ${COLORS.ERROR_RED40};
         `
       : css`
-          border: 1px solid #cccccc;
+          border: 1px solid ${COLORS.GRAY65};
         `;
 
     return css`
       ${border}
+      border-radius: 0.3125rem;
       padding: 0.5rem 0;
       padding-left: 3rem;
       width: 100%;
       ::placeholder {
-        color: #cccccc;
+        color: ${COLORS.GRAY65};
         font-weight: lighter;
       }
     `;
@@ -68,6 +65,7 @@ export const cssObj = {
         `;
 
     return css`
+      border-radius: 0.3125rem;
       ${border}
       padding: 0.5rem 1rem;
       width: 100%;
