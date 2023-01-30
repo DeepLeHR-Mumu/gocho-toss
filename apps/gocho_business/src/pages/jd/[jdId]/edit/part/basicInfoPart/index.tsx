@@ -339,7 +339,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                   id={`etcArr${item.id}`}
                   css={cssObj.erasableInput(47)}
                   placeholder="기타 사항 (선택)"
-                  {...register(`etc_arr.${index}.value`, { required: true, maxLength: 70 })}
+                  {...register(`etc_arr.${index}.value`, { maxLength: 70 })}
                 />
                 <DeleteInputButton
                   onClickHandler={() => {
