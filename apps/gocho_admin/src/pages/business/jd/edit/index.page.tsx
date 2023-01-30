@@ -11,6 +11,7 @@ import { useRejectJd } from "@api/jd/useRejectJd";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
+import { BUSINESS_JD_LIST_URL } from "@constant/internalURL";
 import { JdPart } from "./part/jdPart";
 import { cssObj } from "./style";
 import { RejectFormValues } from "./type";
@@ -33,6 +34,7 @@ const JdEditDetail: NextPage = () => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries(jdArrKeyObj.all);
+          router.push(`${BUSINESS_JD_LIST_URL}?page=1`);
         },
       }
     );
@@ -44,6 +46,7 @@ const JdEditDetail: NextPage = () => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries(jdArrKeyObj.all);
+          router.push(`${BUSINESS_JD_LIST_URL}?page=1`);
         },
       }
     );

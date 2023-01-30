@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
+import { BUSINESS_JD_LIST_URL } from "@constant/internalURL";
 import { jdArrKeyObj } from "@api/jd/useJdArr/type";
 import { useJdDetail } from "@api/jd/useJdDetail";
 import { useAcceptJd } from "@api/jd/useAcceptJd";
@@ -10,7 +11,7 @@ import { useRejectJd } from "@api/jd/useRejectJd";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
-import { JdPart } from "@pages/business/jd/register/part/jdPart";
+import { JdPart } from "./part/jdPart";
 import { cssObj } from "./style";
 import { RejectFormValues } from "./type";
 
@@ -31,6 +32,7 @@ const JdRegisterDetail: NextPage = () => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries(jdArrKeyObj.all);
+          router.push(`${BUSINESS_JD_LIST_URL}?page=1`);
         },
       }
     );
@@ -42,6 +44,7 @@ const JdRegisterDetail: NextPage = () => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries(jdArrKeyObj.all);
+          router.push(`${BUSINESS_JD_LIST_URL}?page=1`);
         },
       }
     );
@@ -64,7 +67,7 @@ const JdRegisterDetail: NextPage = () => {
           type="submit"
           css={cssObj.acceptButton}
           onClick={() => {
-            return acceptJdHandler;
+            acceptJdHandler();
           }}
         >
           등록 승인
