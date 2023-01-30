@@ -9,7 +9,14 @@ import { COLORS } from "shared-style/color";
 import { Spinner } from "shared-ui/common/atom/spinner";
 
 import { useToast } from "@/globalStates/useToast";
-import { jdEditConfirmEvent, jdEditDoneEvent, jdEditFailEvent, jdEditPageFunnelEvent } from "@/ga/jdEdit";
+import {
+  jdEditConfirmEvent,
+  jdEditDoneEvent,
+  jdEditExitDoneEvent,
+  jdEditExitEvent,
+  jdEditFailEvent,
+  jdEditPageFunnelEvent,
+} from "@/ga/jdEdit";
 import type { NextPageWithLayout } from "@/pages/index/type";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
 import { useJdDetail } from "@/apis/jd/useJdDetail";
@@ -199,8 +206,11 @@ const JdEditPage: NextPageWithLayout = () => {
 
     const handleUnload = () => {
       if (isDirty) {
+        jdEditExitEvent();
         if (!window.confirm(JD_UPLOAD_MESSAGE_OBJ.LEAVE)) {
           throw router.events.emit("routeChangeError");
+        } else {
+          jdEditExitDoneEvent();
         }
       }
     };

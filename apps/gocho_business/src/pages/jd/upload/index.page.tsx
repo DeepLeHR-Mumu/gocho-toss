@@ -7,7 +7,14 @@ import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
 import { useToast } from "@/globalStates/useToast";
-import { jdUploadConfirmEvent, jdUploadDoneEvent, jdUploadFailEvent, jdUploadPageFunnelEvent } from "@/ga/jdUpload";
+import {
+  jdUploadConfirmEvent,
+  jdUploadDoneEvent,
+  jdUploadExitDoneEvent,
+  jdUploadExitEvent,
+  jdUploadFailEvent,
+  jdUploadPageFunnelEvent,
+} from "@/ga/jdUpload";
 import type { NextPageWithLayout } from "@/pages/index/type";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
 import { useAddJd } from "@/apis/jd/useAddJd";
@@ -113,13 +120,15 @@ const JdUploadPage: NextPageWithLayout = () => {
   }, [submitCount]);
 
   useEffect(() => {
-    // Block page refresh or close
     window.onbeforeunload = () => isDirty;
 
     const handleUnload = () => {
       if (isDirty) {
+        jdUploadExitEvent();
         if (!window.confirm(JD_UPLOAD_MESSAGE_OBJ.LEAVE)) {
           throw router.events.emit("routeChangeError");
+        } else {
+          jdUploadExitDoneEvent();
         }
       }
     };
@@ -127,8 +136,8 @@ const JdUploadPage: NextPageWithLayout = () => {
     router.events.on("routeChangeStart", handleUnload);
 
     return () => {
-      router.events.off("routeChangeStart", handleUnload);
       window.onbeforeunload = () => null;
+      router.events.off("routeChangeStart", handleUnload);
     };
   }, [isDirty, router, router.events]);
 
