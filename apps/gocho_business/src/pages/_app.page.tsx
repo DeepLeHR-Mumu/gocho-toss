@@ -66,13 +66,13 @@ function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
 
   useEffect(() => {
     const prevUrl = sessionStorage.getItem("currentUrl");
-    sessionStorage.setItem("prevUrl", prevUrl || router.asPath);
+    sessionStorage.setItem("prevUrl", prevUrl || "none");
     sessionStorage.setItem("currentUrl", router.asPath);
   }, [router.asPath]);
 
-  const getLayout = Component.getLayout || ((page) => page);
-
   useAxiosInterceptor();
+
+  const getLayout = Component.getLayout || ((page) => page);
 
   return (
     <QueryClientProvider client={queryClient}>

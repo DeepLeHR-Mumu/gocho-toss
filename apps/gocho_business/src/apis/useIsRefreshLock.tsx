@@ -4,7 +4,7 @@ import axios, { AxiosRequestConfig } from "axios";
 
 import { BUSINESS_BACKEND_URL } from "shared-constant/externalURL";
 
-import { tokenService, getTokenDateInfoCreator } from "@/utils/tokenService";
+import { getTokenDateInfoCreator } from "@/utils/tokenService";
 import { useModal } from "@/globalStates/useModal";
 import { INTERNAL_URL } from "@/constants/url";
 
@@ -20,7 +20,7 @@ export const axiosInstance = axios.create({
 
 export const useAxiosInterceptor = () => {
   const router = useRouter();
-  const accessTokenLimitMs = 10000;
+  const accessTokenLimitMs = 580000;
   let isLock = false;
   let readyQueueArr: ((token: string) => void)[] = [];
 
@@ -29,24 +29,27 @@ export const useAxiosInterceptor = () => {
   const activeQueue = (token: string) => readyQueueArr.forEach((callback) => callback(token));
 
   const getRefreshTokenCreator = async (): Promise<{ newToken: string } | void> => {
-    const refreshToken = tokenService.getRefreshToken();
+    const refreshToken = localStorage.getItem("refreshToken");
+
+    if (!refreshToken) throw new axios.Cancel("요청 취소");
+
     const refreshResults = await axios
       .get(`${BUSINESS_BACKEND_URL}/auth/refresh`, {
         headers: { "x-refresh-token": refreshToken },
       })
       .then(({ data }) => {
-        const newToken = data.data.access_token as string;
-        tokenService.updateAllToken(data.data.access_token, data.data.refresh_token);
+        const newToken = data.data.access_token;
+        localStorage.setItem("accessToken", data.data.access_token);
+        localStorage.setItem("refreshToken", data.data.refresh_token);
         activeQueue(data.access_token);
         return { newToken };
       })
-      // .catch((error) => {
-      //   const { error_code } = error.response.data;
-      //   if (error_code === "EMPTY_JWT") {
-      //     tokenService.removeAllToken();
-      //     router.replace(INTERNAL_URL.LOGIN);
-      //   }
-      // })
+      .catch((error) => {
+        const { error_code } = error.response.data;
+        if (error_code === "EMPTY_JWT") {
+          throw new axios.Cancel("재요청 취소");
+        }
+      })
       .finally(() => {
         isLock = false;
         readyQueueArr = [];
@@ -58,10 +61,17 @@ export const useAxiosInterceptor = () => {
   const requestConfigHandler = async (config: AxiosRequestConfig) => {
     const { accessTokenData, refreshTokenData, accessCreateTime, refreshCreateTime, currentTime } =
       getTokenDateInfoCreator();
+    const prevUrl = sessionStorage.getItem("prevUrl");
 
     if (!accessTokenData || !refreshTokenData) router.replace(INTERNAL_URL.LOGIN);
 
-    if (refreshCreateTime <= currentTime && router.asPath !== INTERNAL_URL.LOGIN) setCurrentModal("loginModal");
+    if (refreshCreateTime <= currentTime && prevUrl === "none") {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      router.replace(INTERNAL_URL.LOGIN);
+    }
+
+    if (refreshCreateTime <= currentTime && prevUrl !== "none") setCurrentModal("loginModal");
 
     if (accessCreateTime - currentTime <= accessTokenLimitMs && !isLock) {
       isLock = true;
