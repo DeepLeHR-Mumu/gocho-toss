@@ -113,32 +113,22 @@ const JdUploadPage: NextPageWithLayout = () => {
   }, [submitCount]);
 
   useEffect(() => {
-    // const handleUnload = () => {
-    //   if (isDirty) {
-    //     if (!window.confirm(JD_UPLOAD_MESSAGE_OBJ.LEAVE)) {
-    //       router.back();
-    //     }
-    //   }
-    // };
-
-    // Blocks direct link click
-    // router.events.on("routeChangeStart", handleUnload);
-
     // Block page refresh or close
-    if (isDirty) window.onbeforeunload = () => true;
+    window.onbeforeunload = () => isDirty;
 
-    // Blocks going back
-    router.beforePopState(() => {
+    const handleUnload = () => {
       if (isDirty) {
-        return window.confirm(JD_UPLOAD_MESSAGE_OBJ.LEAVE);
+        if (!window.confirm(JD_UPLOAD_MESSAGE_OBJ.LEAVE)) {
+          throw router.events.emit("routeChangeError");
+        }
       }
-      return false;
-    });
+    };
+
+    router.events.on("routeChangeStart", handleUnload);
 
     return () => {
-      // router.events.off("routeChangeStart", handleUnload);
+      router.events.off("routeChangeStart", handleUnload);
       window.onbeforeunload = () => null;
-      router.beforePopState(() => true);
     };
   }, [isDirty, router, router.events]);
 
