@@ -15,7 +15,7 @@ import { useFactoryArr } from "@/apis/factory/useFactoryArr";
 import { factoryArrKeyObj } from "@/apis/factory/useFactoryArr/type";
 import { INTERNAL_URL, POSTCODE_SCRIPT_URL } from "@/constants/url";
 
-import { DeleteInputButton } from "@/pages/jd/upload/component/deleteInputButton";
+import { DeleteInputButton } from "../../component/deleteInputButton";
 import { AddFieldButton } from "../../component/addFieldButton";
 import { GuideChip } from "../../component/guideChip";
 import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
@@ -392,12 +392,14 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   })}
                   autoComplete="off"
                 />
-                <DeleteInputButton
-                  onClickHandler={() => {
-                    payArr.remove(index);
-                    setPayIsFocusedArr((prev) => prev.filter((stateItem, stateIndex) => stateIndex !== index));
-                  }}
-                />
+                {index !== 0 && (
+                  <DeleteInputButton
+                    onClickHandler={() => {
+                      payArr.remove(index);
+                      setPayIsFocusedArr((prev) => prev.filter((stateItem, stateIndex) => stateIndex !== index));
+                    }}
+                  />
+                )}
               </label>
               <div css={cssObj.guideChipContainer}>
                 {payIsFocusedArr[index] && (

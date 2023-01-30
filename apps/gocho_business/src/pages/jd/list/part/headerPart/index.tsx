@@ -15,8 +15,8 @@ export const HeaderPart: FunctionComponent = () => {
   return (
     <section css={cssObj.partContainer} data-testid="jd/list/headerPart">
       <div>
-        <h2 css={cssObj.title}>공고 목록</h2>
-        <p>공고를 수정하면 승인기간이 늘어날 수 있습니다</p>
+        <h2 css={cssObj.title}>등록된 공고 목록</h2>
+        <p>자신이 등록한 공고의 경우에만 수정, 삭제, 마감이 가능합니다</p>
       </div>
       <div css={cssObj.buttonWrapper}>
         <SharedButton
@@ -25,8 +25,8 @@ export const HeaderPart: FunctionComponent = () => {
           text="공고 등록하러 가기"
           isFullWidth
           iconObj={{ icon: FiArrowRight, location: "right" }}
-          backgroundColor={COLORS.STATE_SUCCESS}
-          fontColor={COLORS.BLUE_FIRST40}
+          backgroundColor={COLORS.BLUE_NEON30}
+          fontColor={COLORS.GRAY100}
           onClickHandler={() => {
             router.push({
               pathname: INTERNAL_URL.JD_UPLOAD,

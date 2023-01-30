@@ -8,10 +8,10 @@ export const cssObj = {
 
   cardContainer: css`
     padding: 2rem;
-    margin: 2.5rem 0;
+    margin: 1rem 0;
     background-color: ${COLORS.GRAY95};
-    border-left: 1px solid ${COLORS.GRAY70};
-    border-right: 1px solid ${COLORS.GRAY70};
+    box-shadow: 0 0 8px rgba(85, 85, 85, 0.25);
+    border-radius: 5px;
   `,
 
   submitButton: css`
@@ -24,7 +24,7 @@ export const cssObj = {
   `,
 
   buttonWrapper: css`
-    margin: 0 auto;
+    margin: 3rem auto 0;
     width: 40%;
     height: fit-content;
   `,

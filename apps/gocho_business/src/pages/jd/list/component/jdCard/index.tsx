@@ -10,21 +10,31 @@ import dayjs from "dayjs";
 import { COLORS } from "shared-style/color";
 import { SharedButton } from "shared-ui/business/sharedButton";
 
+import { useToast } from "@/globalStates/useToast";
+import {
+  jdDeleteButtonEvent,
+  jdCloseButtonEvent,
+  jdEditButtonEvent,
+  jdCloseDoneEvent,
+  jdDeleteDoneEvent,
+} from "@/ga/jdList";
 import { CommonInfoBox, CommonStatusChip } from "@/components/common";
 import { INTERNAL_URL } from "@/constants/url";
+import { useEndJd } from "@/apis/jd/useEndJd";
 import { useDeleteJd } from "@/apis/jd/useDeleteJd";
 import { jdArrKeyObj } from "@/apis/jd/useJdArr/type";
 
-import { useEndJd } from "@/apis/jd/useEndJd";
+import { JD_MESSAGE_OBJ } from "./constant";
 import { cssObj } from "./style";
 import { JdCardProps } from "./type";
 
 export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
-  const { mutate: deleteJdMutation } = useDeleteJd();
-  const { mutate: endJdMutation } = useEndJd();
-
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { setToast } = useToast();
+
+  const { mutate: deleteJdMutation } = useDeleteJd();
+  const { mutate: endJdMutation } = useEndJd();
 
   const numberFormat = Intl.NumberFormat("ko-KR", { notation: "compact" });
   const viewData = numberFormat.format(jd.view);
@@ -32,14 +42,35 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
   const clickData = numberFormat.format(jd.click);
 
   const endJdHandler = (id: number) => {
-    endJdMutation(
-      { jdId: id },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries(jdArrKeyObj.all);
-        },
-      }
-    );
+    jdCloseButtonEvent(id);
+    if (window.confirm(JD_MESSAGE_OBJ.END)) {
+      endJdMutation(
+        { jdId: id },
+        {
+          onSuccess: () => {
+            setToast("마감되었습니다");
+            jdCloseDoneEvent(id);
+            queryClient.invalidateQueries(jdArrKeyObj.all);
+          },
+        }
+      );
+    }
+  };
+
+  const deleteJdHandler = (id: number) => {
+    jdDeleteButtonEvent(id);
+    if (window.confirm(JD_MESSAGE_OBJ.DELETE)) {
+      deleteJdMutation(
+        { jdId: id },
+        {
+          onSuccess: () => {
+            setToast("삭제되었습니다");
+            jdDeleteDoneEvent(id);
+            queryClient.invalidateQueries(jdArrKeyObj.all);
+          },
+        }
+      );
+    }
   };
 
   return (
@@ -71,12 +102,12 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
           <div css={cssObj.infoBox}>
             <FiCalendar />
             <strong css={cssObj.infoTitle}>공고등록일</strong>
-            <p>{dayjs(jd.startTime).format("YY.MM.DD HH:mm")}</p>
+            <p>{dayjs(jd.createdTime).format("YY.MM.DD HH:mm")}</p>
           </div>
           <div css={cssObj.infoBox}>
             <FiCalendar />
             <strong css={cssObj.infoTitle}>최종수정일</strong>
-            <p>{dayjs(jd.endTime).format("YY.MM.DD HH:mm")}</p>
+            <p>{jd.updatedTime ? dayjs(jd.updatedTime).format("YY.MM.DD HH:mm") : "-"}</p>
           </div>
         </div>
         {jd.uploader.is_mine && (
@@ -89,7 +120,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
               iconObj={{ icon: AiOutlinePause, location: "left" }}
               text="공고마감"
               onClickHandler={() => {
-                deleteJdMutation({ jdId: jd.id });
+                endJdHandler(jd.id);
               }}
             />
             <SharedButton
@@ -100,7 +131,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
               iconObj={{ icon: BiMinus, location: "left" }}
               text="공고삭제"
               onClickHandler={() => {
-                endJdHandler(jd.id);
+                deleteJdHandler(jd.id);
               }}
             />
             <SharedButton
@@ -111,6 +142,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
               iconObj={{ icon: FiEdit, location: "left" }}
               text="공고수정"
               onClickHandler={() => {
+                jdEditButtonEvent(jd.id);
                 router.push({
                   pathname: INTERNAL_URL.JD_EDIT(jd.id),
                 });

@@ -6,7 +6,7 @@ import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
-import { DeleteInputButton } from "@/pages/jd/upload/component/deleteInputButton";
+import { DeleteInputButton } from "../../component/deleteInputButton";
 import { AddFieldButton } from "../../component/addFieldButton";
 import { PositionTitleInfoPartProps } from "./type";
 import { taskArr } from "./constant";
@@ -243,11 +243,13 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                       maxLength: 70,
                     })}
                   />
-                  <DeleteInputButton
-                    onClickHandler={() => {
-                      taskDetailArr.remove(index);
-                    }}
-                  />
+                  {index !== 0 && (
+                    <DeleteInputButton
+                      onClickHandler={() => {
+                        taskDetailArr.remove(index);
+                      }}
+                    />
+                  )}
                 </label>
               ))}
               <AddFieldButton

@@ -5,7 +5,7 @@ import { useFieldArray } from "react-hook-form";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 
-import { DeleteInputButton } from "@/pages/jd/upload/component/deleteInputButton";
+import { DeleteInputButton } from "../../component/deleteInputButton";
 import { AddFieldButton } from "../../component/addFieldButton";
 import { GuideChip } from "../../component/guideChip";
 import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
@@ -301,12 +301,16 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                   })}
                   autoComplete="off"
                 />
-                <DeleteInputButton
-                  onClickHandler={() => {
-                    requiredEtcArr.remove(index);
-                    setRequiredEtcIsFocusedArr((prev) => prev.filter((stateItem, stateIndex) => stateIndex !== index));
-                  }}
-                />
+                {index !== 0 && (
+                  <DeleteInputButton
+                    onClickHandler={() => {
+                      requiredEtcArr.remove(index);
+                      setRequiredEtcIsFocusedArr((prev) =>
+                        prev.filter((stateItem, stateIndex) => stateIndex !== index)
+                      );
+                    }}
+                  />
+                )}
               </label>
               <div css={cssObj.guideChipContainer}>
                 {requiredEtcIsFocusedArr[index] &&

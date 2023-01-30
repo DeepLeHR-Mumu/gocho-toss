@@ -9,11 +9,14 @@ export const cssObj = {
   `,
 
   title: css`
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+  `,
+
+  desc: css`
+    font-size: 1.125rem;
   `,
 
   buttonWrapper: css`
     width: 40%;
-    height: fit-content;
   `,
 };

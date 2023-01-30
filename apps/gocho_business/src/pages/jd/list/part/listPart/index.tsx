@@ -40,8 +40,8 @@ export const ListPart: FunctionComponent = () => {
           text="공고 등록하러 가기"
           isFullWidth
           iconObj={{ icon: FiArrowRight, location: "right" }}
-          backgroundColor="#E9EEF9"
-          fontColor={`${COLORS.BLUE_FIRST40}`}
+          backgroundColor={COLORS.BLUE_NEON30}
+          fontColor={COLORS.GRAY100}
           onClickHandler={() => {
             router.push({
               pathname: INTERNAL_URL.JD_UPLOAD,
