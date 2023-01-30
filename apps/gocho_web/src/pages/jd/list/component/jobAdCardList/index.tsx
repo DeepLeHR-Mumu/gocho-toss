@@ -5,7 +5,6 @@ import Slider from "react-slick";
 import { useBannerArr } from "shared-api/banner/useBannerArr";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
 import { JobAdCard } from "shared-ui/card/jobAdCard";
-import { KeumhoEventCard } from "./keumHoAdCard";
 
 import { setCarouselSetting } from "./util";
 import { listContainer, sliderButton, sliderButtonContainer } from "./style";
@@ -30,7 +29,6 @@ export const JobAdCardList: FunctionComponent = () => {
   return (
     <div css={listContainer}>
       <Slider {...setCarouselSetting()} ref={sliderRef}>
-        <KeumhoEventCard isMobile={false} />
         {bannerDataArr.bannerDataArr.map((banner) => {
           return <JobAdCard jobAdData={banner} isMobile={false} key={`JobAdCard${banner.id}`} />;
         })}
