@@ -24,6 +24,8 @@ export interface ResponseObjDef {
     click: number;
     start_time: number;
     end_time: number;
+    created_time: number;
+    updated_time: number;
     apply_url: string;
     task_arr: string[];
   }[];

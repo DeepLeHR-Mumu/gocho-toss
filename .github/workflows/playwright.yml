@@ -70,7 +70,7 @@ jobs:
             dev_server: pnpm dev-web &
             test: pnpm turbo --filter=gocho_web e2e:CICD
           - service_name: mobile
-            dev_server: pnpm dev-moible &
+            dev_server: pnpm dev-mobile &
             test: pnpm turbo --filter=gocho_mobile e2e:CICD
     name: ${{matrix.command.service_name}} 테스트
     runs-on: ubuntu-latest

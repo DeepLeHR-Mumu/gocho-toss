@@ -10,7 +10,7 @@ export const HeaderPart: FunctionComponent = () => (
   <section css={cssObj.partContainer}>
     <div>
       <h2 css={cssObj.title}>공고 등록</h2>
-      <p>등록된 공고는 검수 이후 바로 업로드 됩니다</p>
+      <p css={cssObj.desc}>등록된 공고는 검수 이후 바로 업로드 됩니다</p>
     </div>
 
     <div css={cssObj.buttonWrapper}>
@@ -19,8 +19,8 @@ export const HeaderPart: FunctionComponent = () => (
         fontColor={`${COLORS.GRAY100}`}
         backgroundColor={`${COLORS.BLUE_FIRST40}`}
         isFullWidth
-        size="medium"
-        text="공고 등록하기"
+        size="xLarge"
+        text="공고 등록"
         onClickHandler="submit"
         iconObj={{ icon: BiRocket, location: "left" }}
       />
