@@ -11,7 +11,7 @@ import { unknownPageErrorEvent } from "@/ga/500";
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
-const UnknwonErrorPage: NextPageWithLayout = () => {
+const UnknownErrorPage: NextPageWithLayout = () => {
   useEffect(() => {
     const prevUrl = sessionStorage.getItem("prevUrl");
     unknownPageErrorEvent(prevUrl || "/");
@@ -31,7 +31,7 @@ const UnknwonErrorPage: NextPageWithLayout = () => {
   );
 };
 
-UnknwonErrorPage.getLayout = (page: ReactElement) => (
+UnknownErrorPage.getLayout = (page: ReactElement) => (
   <>
     <PageHead />
     <GlobalLayout>
@@ -40,4 +40,4 @@ UnknwonErrorPage.getLayout = (page: ReactElement) => (
     </GlobalLayout>
   </>
 );
-export default UnknwonErrorPage;
+export default UnknownErrorPage;
