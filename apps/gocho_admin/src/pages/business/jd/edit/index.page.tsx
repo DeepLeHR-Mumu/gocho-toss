@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { useQueryClient } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -11,12 +12,13 @@ import { useRejectJd } from "@api/jd/useRejectJd";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
-import { BUSINESS_JD_LIST_URL } from "@constant/internalURL";
 import { JdPart } from "./part/jdPart";
 import { cssObj } from "./style";
 import { RejectFormValues } from "./type";
 
 const JdEditDetail: NextPage = () => {
+  const [checkMsg, setCheckMsg] = useState<string>();
+
   const queryClient = useQueryClient();
   const router = useRouter();
   const jdId = Number(router.query.id);
@@ -34,7 +36,10 @@ const JdEditDetail: NextPage = () => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries(jdArrKeyObj.all);
-          router.push(`${BUSINESS_JD_LIST_URL}?page=1`);
+          setCheckMsg("공고 수정 요청이 승인되었습니다!");
+        },
+        onError: () => {
+          setCheckMsg("에러입니다. 조건을 한번 더 확인하거나 관계자에게 문의해주세요.");
         },
       }
     );
@@ -46,7 +51,10 @@ const JdEditDetail: NextPage = () => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries(jdArrKeyObj.all);
-          router.push(`${BUSINESS_JD_LIST_URL}?page=1`);
+          setCheckMsg("공고 수정 요청이 반려되었습니다!");
+        },
+        onError: () => {
+          setCheckMsg("에러입니다. 조건을 한번 더 확인하거나 관계자에게 문의해주세요.");
         },
       }
     );
@@ -94,6 +102,7 @@ const JdEditDetail: NextPage = () => {
           </button>
         </form>
       </div>
+      <p css={cssObj.checkMessage}>{checkMsg}</p>
     </main>
   );
 };

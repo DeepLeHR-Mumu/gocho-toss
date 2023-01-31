@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -15,6 +16,8 @@ import { cssObj } from "./style";
 import { RejectFormValues } from "./type";
 
 const FactoryRegisterDetail: NextPage = () => {
+  const [checkMsg, setCheckMsg] = useState<string>();
+
   const queryClient = useQueryClient();
   const router = useRouter();
   const factoryId = Number(router.query.id);
@@ -31,6 +34,10 @@ const FactoryRegisterDetail: NextPage = () => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries(factoryArrKeyObj.all);
+          setCheckMsg("공장 등록 요청이 승인되었습니다!");
+        },
+        onError: () => {
+          setCheckMsg("에러입니다. 조건을 한번 더 확인하거나 관계자에게 문의해주세요.");
         },
       }
     );
@@ -42,6 +49,10 @@ const FactoryRegisterDetail: NextPage = () => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries(factoryArrKeyObj.all);
+          setCheckMsg("공장 등록 요청이 반려되었습니다!");
+        },
+        onError: () => {
+          setCheckMsg("에러입니다. 조건을 한번 더 확인하거나 관계자에게 문의해주세요.");
         },
       }
     );
@@ -80,6 +91,7 @@ const FactoryRegisterDetail: NextPage = () => {
           </button>
         </form>
       </div>
+      <p css={cssObj.checkMessage}>{checkMsg}</p>
     </main>
   );
 };

@@ -59,4 +59,11 @@ export const cssObj = {
     background-color: #b32100;
     color: ${COLORS.GRAY100};
   `,
+
+  checkMessage: css`
+    width: fit-content;
+    margin: 1rem auto 0;
+    color: ${COLORS.BLUE_NEON40};
+    font-weight: 700;
+  `,
 };
