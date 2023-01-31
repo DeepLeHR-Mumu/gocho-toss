@@ -20,7 +20,7 @@ export const axiosInstance = axios.create({
 
 export const useAxiosInterceptor = () => {
   const router = useRouter();
-  const accessTokenLimitMs = 580000;
+  const accessTokenLimitMs = 10000;
   let isLock = false;
   let readyQueueArr: ((token: string) => void)[] = [];
 
