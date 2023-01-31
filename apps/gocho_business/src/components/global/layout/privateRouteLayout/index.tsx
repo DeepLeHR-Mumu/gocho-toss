@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 
 import { useHealthCheck } from "@/apis/auth/useHealthCheck";
 import { INTERNAL_URL } from "@/constants/url";
-import { tokenService } from "@/utils/tokenService";
 
 import { PrivateRouteProps } from "./type";
 import { cssObj } from "./style";
@@ -14,7 +13,7 @@ export const PrivateRouteLayout: FunctionComponent<PrivateRouteProps> = ({ prote
   const isPathProtected = protectedRoutes.indexOf(router.pathname) !== -1;
 
   useEffect(() => {
-    const token = tokenService.getAccessToken();
+    const token = localStorage.getItem("accessToken");
     if (!isSuccess && isPathProtected && token) {
       return;
     }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Global } from "@emotion/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query";
@@ -64,9 +64,15 @@ function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
       })
   );
 
-  const getLayout = Component.getLayout || ((page) => page);
+  useEffect(() => {
+    const prevUrl = sessionStorage.getItem("currentUrl");
+    sessionStorage.setItem("prevUrl", prevUrl || "none");
+    sessionStorage.setItem("currentUrl", router.asPath);
+  }, [router.asPath]);
 
   useAxiosInterceptor();
+
+  const getLayout = Component.getLayout || ((page) => page);
 
   return (
     <QueryClientProvider client={queryClient}>

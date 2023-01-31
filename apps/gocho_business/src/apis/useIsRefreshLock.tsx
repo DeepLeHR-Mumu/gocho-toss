@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import axios, { AxiosRequestConfig } from "axios";
 
 import { BUSINESS_BACKEND_URL } from "shared-constant/externalURL";
+import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 
-import { tokenService, getTokenDateInfoCreator } from "@/utils/tokenService";
 import { useModal } from "@/globalStates/useModal";
 import { INTERNAL_URL } from "@/constants/url";
 
@@ -21,7 +21,7 @@ export const axiosInstance = axios.create({
 export const useAxiosInterceptor = () => {
   const router = useRouter();
   const accessTokenLimitMs = 10000;
-  let isLock = false;
+  let isRequestLock = false;
   let readyQueueArr: ((token: string) => void)[] = [];
 
   const { setCurrentModal } = useModal();
@@ -29,19 +29,29 @@ export const useAxiosInterceptor = () => {
   const activeQueue = (token: string) => readyQueueArr.forEach((callback) => callback(token));
 
   const getRefreshTokenCreator = async (): Promise<{ newToken: string } | void> => {
-    const refreshToken = tokenService.getRefreshToken();
+    const refreshToken = localStorage.getItem("refreshToken");
+
+    if (!refreshToken) throw new axios.Cancel("요청 취소");
+
     const refreshResults = await axios
       .get(`${BUSINESS_BACKEND_URL}/auth/refresh`, {
         headers: { "x-refresh-token": refreshToken },
       })
       .then(({ data }) => {
-        const newToken = data.data.access_token as string;
-        tokenService.updateAllToken(data.data.access_token, data.data.refresh_token);
+        const newToken = data.data.access_token;
+        localStorage.setItem("accessToken", data.data.access_token);
+        localStorage.setItem("refreshToken", data.data.refresh_token);
         activeQueue(data.access_token);
         return { newToken };
       })
+      .catch((error) => {
+        const { error_code } = error.response.data;
+        if (error_code === "EMPTY_JWT") {
+          throw new axios.Cancel("재요청 취소");
+        }
+      })
       .finally(() => {
-        isLock = false;
+        isRequestLock = false;
         readyQueueArr = [];
       });
 
@@ -49,15 +59,28 @@ export const useAxiosInterceptor = () => {
   };
 
   const requestConfigHandler = async (config: AxiosRequestConfig) => {
-    const { accessTokenData, refreshTokenData, accessCreateTime, refreshCreateTime, currentTime } =
-      getTokenDateInfoCreator();
+    const accessTokenData = localStorage.getItem("accessToken");
+    const refreshTokenData = localStorage.getItem("refreshToken");
+    const prevUrl = sessionStorage.getItem("prevUrl");
 
-    if (!accessTokenData || !refreshTokenData) router.replace(INTERNAL_URL.LOGIN);
+    if (!accessTokenData || !refreshTokenData) return router.replace(INTERNAL_URL.LOGIN);
 
-    if (refreshCreateTime <= currentTime && router.pathname !== INTERNAL_URL.LOGIN) setCurrentModal("loginModal");
+    const { exp: accessTokenExp } = managerTokenDecryptor(accessTokenData);
+    const { exp: refreshTokenExp } = managerTokenDecryptor(refreshTokenData);
+    const accessCreateTime = new Date(accessTokenExp * 1000).getTime();
+    const refreshCreateTime = new Date(refreshTokenExp * 1000).getTime();
+    const currentTime = new Date().getTime();
 
-    if (accessCreateTime - currentTime <= accessTokenLimitMs && !isLock) {
-      isLock = true;
+    if (refreshCreateTime <= currentTime && prevUrl === "none") {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      router.replace(INTERNAL_URL.LOGIN);
+    }
+
+    if (refreshCreateTime <= currentTime && prevUrl !== "none") setCurrentModal("loginModal");
+
+    if (accessCreateTime - currentTime <= accessTokenLimitMs && !isRequestLock) {
+      isRequestLock = true;
       const newToken = await getRefreshTokenCreator();
       return {
         ...config,
@@ -67,7 +90,7 @@ export const useAxiosInterceptor = () => {
       };
     }
 
-    if (accessCreateTime - currentTime <= accessTokenLimitMs && isLock) {
+    if (accessCreateTime - currentTime <= accessTokenLimitMs && isRequestLock) {
       return new Promise(() => {
         saveQueue((accessToken) => axiosInstance({ ...config, headers: { "x-access-token": accessToken } }));
       });
