@@ -16,7 +16,6 @@ import { INTERNAL_URL } from "@/constants/url";
 import { useUserState } from "@/globalStates/useUserState";
 import { TopBar } from "@/components/global/layout/topBar";
 import { useDoLogin } from "@/apis/auth/useDoLogin";
-import { tokenService } from "@/utils/tokenService";
 import { loginPageFunnelEvent, loginSuccessEvent, signupButtonClickEvent } from "@/ga/auth";
 
 import { PageHead } from "./pageHead";
@@ -47,7 +46,8 @@ const LoginPage: NextPage = () => {
       },
       onSuccess: (response) => {
         loginSuccessEvent(watch("auto_login"));
-        tokenService.updateAllToken(`${response.data.access_token}`, `${response.data.refresh_token}`);
+        localStorage.setItem("accessToken", response.data.access_token);
+        localStorage.setItem("refreshToken", response.data.refresh_token);
         const { id, company_id, company_name, company_logo, iat, exp, email, name, department } = managerTokenDecryptor(
           response.data.access_token
         );

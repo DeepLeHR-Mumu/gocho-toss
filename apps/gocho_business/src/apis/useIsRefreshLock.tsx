@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import axios, { AxiosRequestConfig } from "axios";
 
 import { BUSINESS_BACKEND_URL } from "shared-constant/externalURL";
+import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 
-import { getTokenDateInfoCreator } from "@/utils/tokenService";
 import { useModal } from "@/globalStates/useModal";
 import { INTERNAL_URL } from "@/constants/url";
 
@@ -20,7 +20,7 @@ export const axiosInstance = axios.create({
 
 export const useAxiosInterceptor = () => {
   const router = useRouter();
-  const accessTokenLimitMs = 590000;
+  const accessTokenLimitMs = 10000;
   let isRequestLock = false;
   let readyQueueArr: ((token: string) => void)[] = [];
 
@@ -59,11 +59,17 @@ export const useAxiosInterceptor = () => {
   };
 
   const requestConfigHandler = async (config: AxiosRequestConfig) => {
-    const { accessTokenData, refreshTokenData, accessCreateTime, refreshCreateTime, currentTime } =
-      getTokenDateInfoCreator();
+    const accessTokenData = localStorage.getItem("accessToken");
+    const refreshTokenData = localStorage.getItem("refreshToken");
     const prevUrl = sessionStorage.getItem("prevUrl");
 
-    if (!accessTokenData || !refreshTokenData) router.replace(INTERNAL_URL.LOGIN);
+    if (!accessTokenData || !refreshTokenData) return router.replace(INTERNAL_URL.LOGIN);
+
+    const { exp: accessTokenExp } = managerTokenDecryptor(accessTokenData);
+    const { exp: refreshTokenExp } = managerTokenDecryptor(refreshTokenData);
+    const accessCreateTime = new Date(accessTokenExp * 1000).getTime();
+    const refreshCreateTime = new Date(refreshTokenExp * 1000).getTime();
+    const currentTime = new Date().getTime();
 
     if (refreshCreateTime <= currentTime && prevUrl === "none") {
       localStorage.removeItem("accessToken");

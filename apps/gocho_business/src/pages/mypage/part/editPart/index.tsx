@@ -8,7 +8,6 @@ import { PWD_REGEXP } from "shared-constant/regExp";
 import { useEditUserInfo } from "@/apis/auth/useEditUserInfo";
 import { useUserState } from "@/globalStates/useUserState";
 import { useToast } from "@/globalStates/useToast";
-import { tokenService } from "@/utils/tokenService";
 
 import { EDIT_PASSWORD_MESSAGE } from "./constants";
 import { EditFormValues, PasswordShowObjDef } from "./type";
@@ -52,7 +51,8 @@ export const EditPart: FunctionComponent = () => {
             new_password: "",
             check_password: "",
           });
-          tokenService.updateAllToken(`${response.data.access_token}`, `${response.data.refresh_token}`);
+          localStorage.setItem("accessToken", response.data.access_token);
+          localStorage.setItem("refreshToken", response.data.refresh_token);
           queryClient.invalidateQueries();
           setToast("변경되었습니다");
         },

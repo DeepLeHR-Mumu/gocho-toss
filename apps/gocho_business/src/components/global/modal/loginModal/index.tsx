@@ -15,7 +15,6 @@ import { ModalComponent } from "@/components/global/modal/modalBackground";
 import { useModal } from "@/globalStates/useModal";
 import { useToast } from "@/globalStates/useToast";
 import { useUserState } from "@/globalStates/useUserState";
-import { tokenService } from "@/utils/tokenService";
 import { loginSuccessEvent } from "@/ga/auth";
 
 import { LoginFormValues } from "./type";
@@ -46,7 +45,8 @@ export const LoginBox: FunctionComponent = () => {
       onSuccess: (response) => {
         loginSuccessEvent(watch("auto_login"));
         closeModal();
-        tokenService.updateAllToken(`${response.data.access_token}`, `${response.data.refresh_token}`);
+        localStorage.setItem("accessToken", response.data.access_token);
+        localStorage.setItem("refreshToken", response.data.refresh_token);
         const { id, company_id, company_name, company_logo, iat, exp, email, name, department } = managerTokenDecryptor(
           response.data.access_token
         );

@@ -8,7 +8,6 @@ import { COLORS } from "shared-style/color";
 
 import monoTextLogo from "@/public/image/deepleLogo/textKoMono.svg";
 import colorTextLogo from "@/public/image/deepleLogo/textKoColor.svg";
-import { tokenService } from "@/utils/tokenService";
 import { useUserState } from "@/globalStates/useUserState";
 import { useDoLogout } from "@/apis/auth/useDoLogout";
 import { INTERNAL_URL } from "@/constants/url";
@@ -25,7 +24,8 @@ export const TopBar: FunctionComponent = () => {
   const doLogoutHandler = () => {
     postLogout(undefined, {
       onSuccess: () => {
-        tokenService.removeAllToken();
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
         setUserInfoData(null);
         queryClient.invalidateQueries();
         router.push(INTERNAL_URL.LOGIN);
