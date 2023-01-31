@@ -20,8 +20,8 @@ export const axiosInstance = axios.create({
 
 export const useAxiosInterceptor = () => {
   const router = useRouter();
-  const accessTokenLimitMs = 10000;
-  let isLock = false;
+  const accessTokenLimitMs = 590000;
+  let isRequestLock = false;
   let readyQueueArr: ((token: string) => void)[] = [];
 
   const { setCurrentModal } = useModal();
@@ -51,7 +51,7 @@ export const useAxiosInterceptor = () => {
         }
       })
       .finally(() => {
-        isLock = false;
+        isRequestLock = false;
         readyQueueArr = [];
       });
 
@@ -73,8 +73,8 @@ export const useAxiosInterceptor = () => {
 
     if (refreshCreateTime <= currentTime && prevUrl !== "none") setCurrentModal("loginModal");
 
-    if (accessCreateTime - currentTime <= accessTokenLimitMs && !isLock) {
-      isLock = true;
+    if (accessCreateTime - currentTime <= accessTokenLimitMs && !isRequestLock) {
+      isRequestLock = true;
       const newToken = await getRefreshTokenCreator();
       return {
         ...config,
@@ -84,7 +84,7 @@ export const useAxiosInterceptor = () => {
       };
     }
 
-    if (accessCreateTime - currentTime <= accessTokenLimitMs && isLock) {
+    if (accessCreateTime - currentTime <= accessTokenLimitMs && isRequestLock) {
       return new Promise(() => {
         saveQueue((accessToken) => axiosInstance({ ...config, headers: { "x-access-token": accessToken } }));
       });
