@@ -85,7 +85,7 @@ const CompanyEditDetail: NextPage = () => {
           type="submit"
           css={cssObj.acceptButton}
           onClick={() => {
-            return acceptCompanyHandler;
+            acceptCompanyHandler();
           }}
         >
           수정 승인

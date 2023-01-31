@@ -78,7 +78,7 @@ const JdEditDetail: NextPage = () => {
           type="submit"
           css={cssObj.acceptButton}
           onClick={() => {
-            return acceptJdHandler;
+            acceptJdHandler();
           }}
         >
           수정 승인

@@ -85,7 +85,7 @@ const FactoryEditDetail: NextPage = () => {
           type="submit"
           css={cssObj.acceptButton}
           onClick={() => {
-            return acceptFactoryHandler;
+            acceptFactoryHandler();
           }}
         >
           수정 승인

@@ -8,6 +8,7 @@ import {
   COMPANY_LIST_URL,
   VIRAL_BLOG_URL,
   VIRAL_INSTA_URL,
+  BUSINESS_USER,
   BUSINESS_JD_LIST_URL,
   BUSINESS_COMPANY_LIST_URL,
   BUSINESS_FACTORY_LIST_URL,
@@ -75,6 +76,10 @@ export const menuArr = [
   {
     menuTitle: "기업 서비스",
     subMenuArr: [
+      {
+        menuTitle: "기업회원 등록",
+        menuLink: BUSINESS_USER,
+      },
       {
         menuTitle: "공고 검수 리스트",
         menuLink: `${BUSINESS_JD_LIST_URL}?page=1`,

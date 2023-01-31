@@ -64,7 +64,7 @@ const FactoryRegisterDetail: NextPage = () => {
           type="submit"
           css={cssObj.acceptButton}
           onClick={() => {
-            return acceptFactoryHandler;
+            acceptFactoryHandler();
           }}
         >
           등록 승인
