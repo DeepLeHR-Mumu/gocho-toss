@@ -3,8 +3,6 @@ import { useEffect } from "react";
 
 import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 
-import { tokenService } from "@/utils/tokenService";
-
 import { UserStateInfoProps, UseUserStateDef } from "./type";
 
 const userStateInfo = create<UserStateInfoProps>((set) => ({
@@ -16,7 +14,7 @@ export const useUserState: UseUserStateDef = () => {
   const { userState: userInfoData, setUserState: setUserInfoData } = userStateInfo();
 
   useEffect(() => {
-    const token = tokenService.getAccessToken();
+    const token = localStorage.getItem("accessToken");
 
     if (userInfoData === null && token) {
       const { id, company_id, company_name, company_logo, iat, exp, email, name, department } =

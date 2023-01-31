@@ -13,6 +13,12 @@ import { useUserState } from "@/globalStates/useUserState";
 import { useToast } from "@/globalStates/useToast";
 import { PageLayout, GlobalLayout, Footer } from "@/components/global/layout";
 import { NextPageWithLayout } from "@/pages/index/type";
+import {
+  companyEditConfirmEvent,
+  companyEditDoneEvent,
+  companyEditFailEvent,
+  companyEditPageFunnelEvent,
+} from "@/ga/companyEdit";
 
 import { PageHead } from "./pageHead";
 import { CompanyInfoPart } from "./part/companyInfoPart";
@@ -39,11 +45,12 @@ const CompanyEditPage: NextPageWithLayout = () => {
   const {
     handleSubmit,
     reset,
-    formState: { isDirty },
+    formState: { isDirty, submitCount },
   } = companyForm;
 
   const addCompanyDetail = (formData: PostSubmitValues) => {
     if (!isDirty) return window.alert(COMPANY_MESSAGE_OBJ.ISDIRTY);
+    companyEditConfirmEvent();
     if (window.confirm(COMPANY_MESSAGE_OBJ.EDIT)) {
       putCompanyDetail(
         {
@@ -70,6 +77,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
         {
           onSuccess: () => {
             setToast("등록되었습니다");
+            companyEditDoneEvent();
           },
         }
       );
@@ -119,6 +127,15 @@ const CompanyEditPage: NextPageWithLayout = () => {
       });
     };
   }, []);
+
+  useEffect(() => {
+    companyEditPageFunnelEvent();
+  }, []);
+
+  useEffect(() => {
+    if (submitCount === 0) return;
+    companyEditFailEvent(submitCount);
+  }, [submitCount]);
 
   if (!companyData) {
     return (

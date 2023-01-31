@@ -7,7 +7,9 @@ export const cssObj = {
     width: 18rem;
     padding: 1.5rem 0 0 0;
     border-right: 1px solid ${COLORS.GRAY65};
+    background-color: ${COLORS.GRAY100};
     position: fixed;
+    z-index: 10;
     height: 100vh;
   `,
 
