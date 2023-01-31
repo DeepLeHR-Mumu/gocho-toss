@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -11,11 +12,13 @@ import { companyArrKeyObj } from "@api/company/useCompanyArr/type";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
-import { CompanyPart } from "@pages/business/company/edit/part";
+import { CompanyPart } from "./part/companyPart";
 import { cssObj } from "./style";
 import { RejectFormValues } from "./type";
 
 const CompanyEditDetail: NextPage = () => {
+  const [checkMsg, setCheckMsg] = useState<string>();
+
   const queryClient = useQueryClient();
   const router = useRouter();
   const companyId = Number(router.query.id);
@@ -43,6 +46,10 @@ const CompanyEditDetail: NextPage = () => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries(companyArrKeyObj.all);
+          setCheckMsg("기업 수정 요청이 승인되었습니다!");
+        },
+        onError: () => {
+          setCheckMsg("에러입니다. 조건을 한번 더 확인하거나 관계자에게 문의해주세요.");
         },
       }
     );
@@ -54,6 +61,10 @@ const CompanyEditDetail: NextPage = () => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries(companyArrKeyObj.all);
+          setCheckMsg("기업 수정 요청이 반려되었습니다!");
+        },
+        onError: () => {
+          setCheckMsg("에러입니다. 조건을 한번 더 확인하거나 관계자에게 문의해주세요.");
         },
       }
     );
@@ -85,7 +96,7 @@ const CompanyEditDetail: NextPage = () => {
           type="submit"
           css={cssObj.acceptButton}
           onClick={() => {
-            return acceptCompanyHandler;
+            acceptCompanyHandler();
           }}
         >
           수정 승인
@@ -101,6 +112,7 @@ const CompanyEditDetail: NextPage = () => {
           </button>
         </form>
       </div>
+      <p css={cssObj.checkMessage}>{checkMsg}</p>
     </main>
   );
 };

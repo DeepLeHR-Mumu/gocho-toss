@@ -13,7 +13,7 @@ import { JD_SEARCH_LIMIT } from "./constant";
 import { cssObj } from "./style";
 
 const BusinessJdList: NextPage = () => {
-  const [jdStatus, setjdStatus] = useState<"upload-waiting" | "modify-waiting">("upload-waiting");
+  const [jdStatus, setJdStatus] = useState<"upload-waiting" | "modify-waiting">("upload-waiting");
   const router = useRouter();
 
   const {
@@ -36,7 +36,7 @@ const BusinessJdList: NextPage = () => {
   }
 
   const changeJdStatusHandler = () => {
-    setjdStatus((prev) => {
+    setJdStatus((prev) => {
       return prev === "upload-waiting" ? "modify-waiting" : "upload-waiting";
     });
   };

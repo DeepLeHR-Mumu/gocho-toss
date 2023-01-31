@@ -5,13 +5,12 @@ import { UseMutationResult } from "@tanstack/react-query";
 export interface RequestObjDef {
   company_id: number;
   email: string;
-  password: string;
   name: string;
   department: string;
 }
 
 export interface PostRecruiterDef {
-  ({ company_id, email, password, name, department }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ company_id, email, name, department }: RequestObjDef): Promise<AdminResponseDef>;
 }
 
 export interface useAddRecruiterProps {
