@@ -38,5 +38,5 @@ export const jdArrKeyObj = {
 };
 
 export interface GetJdArrDef {
-  ({ queryKey }: QueryFunctionContext): Promise<ResponseObjDef>;
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof jdArrKeyObj.arr>>): Promise<ResponseObjDef>;
 }
