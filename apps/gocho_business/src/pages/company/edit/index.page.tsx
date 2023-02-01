@@ -45,11 +45,10 @@ const CompanyEditPage: NextPageWithLayout = () => {
   const {
     handleSubmit,
     reset,
-    formState: { isDirty, submitCount },
+    formState: { submitCount },
   } = companyForm;
 
   const addCompanyDetail = (formData: PostSubmitValues) => {
-    if (!isDirty) return window.alert(COMPANY_MESSAGE_OBJ.ISDIRTY);
     companyEditConfirmEvent();
     if (window.confirm(COMPANY_MESSAGE_OBJ.EDIT)) {
       putCompanyDetail(
