@@ -265,7 +265,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                 {watch("position_arr")[positionIndex].place.factory_arr?.map((factory) => (
                   <div key={`${factory}${id}`} css={cssObj.factoryBox}>
                     <TbBuildingFactory2 />
-                    {factory}
+                    {factoryDataArr?.find((factoryObj) => factoryObj.id === factory)?.name}
                     <button
                       type="button"
                       css={cssObj.smallDeleteButton}
