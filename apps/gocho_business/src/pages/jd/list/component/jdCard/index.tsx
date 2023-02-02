@@ -73,8 +73,10 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
     }
   };
 
+  const isExpired = jd.endTime - new Date().getTime() < 0;
+
   return (
-    <div css={cssObj.cardContainer}>
+    <div css={cssObj.cardContainer(isExpired)}>
       <div css={cssObj.topContainer}>
         <div css={cssObj.titleBox}>
           <div>
@@ -150,6 +152,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
             />
           </div>
         )}
+        {/* {isExpired && <div css={cssObj.inactiveLabel}>마감된 공고입니다</div>} */}
       </div>
     </div>
   );

@@ -130,11 +130,15 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             <div css={cssObj.conversionRateInputContainer}>
               <input
                 css={cssObj.activatableInput(isConversionDisabled)}
-                type="number"
+                type="range"
                 min="0"
                 max="100"
+                step="1"
                 {...register(`position_arr.${positionIndex}.conversion_rate`, {
                   required: !isConversionDisabled,
+                  min: 0,
+                  max: 100,
+                  valueAsNumber: true,
                   disabled: isConversionDisabled,
                   onChange: (e) => conversionRateHandler(e, !isConversionDisabled),
                 })}
@@ -143,7 +147,11 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             </div>
           </div>
           <p css={cssObj.errorMessage}>
-            {!!formState.errors.position_arr?.[positionIndex]?.conversion_rate && "전환율은 필수 입력 값입니다"}
+            {formState.errors.position_arr?.[positionIndex]?.conversion_rate?.type === "required" &&
+              "전환율은 필수 입력 값입니다"}
+            {(formState.errors.position_arr?.[positionIndex]?.conversion_rate?.type === "min" ||
+              formState.errors.position_arr?.[positionIndex]?.conversion_rate?.type === "max") &&
+              "전환율의 값은 1~100 사이여야 합니다"}
           </p>
         </div>
       </div>

@@ -61,13 +61,13 @@ export interface ResponseObjDef {
   };
 }
 
-export const companyDetailKeyObj = {
-  all: [{ data: "companyDetail" }] as const,
+export const companyDetailRequestKeyObj = {
+  all: [{ data: "companyDetailRequest" }] as const,
   detail: (requestObj: RequestObjDef) => {
-    return [{ data: "companyDetail", requestObj }] as const;
+    return [{ data: "companyDetailRequest", requestObj }] as const;
   },
 };
 
 export interface GetEditCompanyRequestDef {
-  ({ queryKey }: QueryFunctionContext<ReturnType<typeof companyDetailKeyObj.detail>>): Promise<ResponseObjDef>;
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof companyDetailRequestKeyObj.detail>>): Promise<ResponseObjDef>;
 }
