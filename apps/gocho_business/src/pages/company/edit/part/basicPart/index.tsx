@@ -43,7 +43,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
     <div css={cssObj.wrapper} data-testid="company/edit/BasicPart">
       <div css={cssObj.rowBox}>
         <div css={cssObj.container(30)}>
-          <strong css={cssObj.subTitle(errors.employee_number?.type === "required")}>사원수</strong>
+          <strong css={cssObj.subTitle(errors.employee_number)}>사원수</strong>
           <label htmlFor="employee_number" css={cssObj.employeeNumber}>
             <FiUsers />
             <input
@@ -51,24 +51,29 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
               onWheel={(event) => {
                 event.currentTarget.blur();
               }}
-              {...register("employee_number", { required: true })}
-              css={cssObj.input(errors.employee_number?.type === "required")}
+              {...register("employee_number", { required: true, min: 0 })}
+              css={cssObj.input(errors.employee_number)}
             />
             <p css={cssObj.unit}>명</p>
           </label>
         </div>
         <div css={cssObj.container(70)}>
-          <strong css={cssObj.subTitle(errors.intro?.type === "required")}>기업 한줄 소개</strong>
+          <strong css={cssObj.subTitle(errors.intro)}>기업 한줄 소개</strong>
           <input
             type="text"
             {...register("intro", { required: true, maxLength: 120 })}
+            onBlur={(onBlurEvent) => {
+              if (onBlurEvent.target.value.trim().length === 0) {
+                setValue("intro", "");
+              }
+            }}
             placeholder="한 줄로 기업을 소개해주세요"
-            css={cssObj.input(errors.intro?.type === "required")}
+            css={cssObj.input(errors.intro)}
           />
         </div>
       </div>
       <div css={cssObj.container()}>
-        <strong css={cssObj.subTitle(errors.address?.type === "required")}>기업 본사 주소</strong>
+        <strong css={cssObj.subTitle(errors.address)}>기업 본사 주소</strong>
         <label htmlFor="address" css={cssObj.address}>
           <CommonRoundButton
             Icon={FiMap}
@@ -82,7 +87,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             }
             backgroundColor={COLORS.GRAY80}
           />
-          <div css={cssObj.inputBox(errors.address?.type === "required")}>
+          <div css={cssObj.inputBox(errors.address)}>
             <FiMapPin />
             <input
               type="button"
@@ -101,7 +106,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
         <KakaoMap address={watch("address")} />
       </div>
       <div css={cssObj.container(80)}>
-        <strong css={cssObj.subTitle(errors.nozo?.exists?.type === "required")}>노조</strong>
+        <strong css={cssObj.subTitle(errors.nozo?.exists)}>노조</strong>
         <div css={cssObj.nozoBox}>
           <BiUserVoice />
           <SharedRadioButton registerObj={register("nozo.exists", { required: true })} value="true" id="nozoTrue">
@@ -115,7 +120,12 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
           type="text"
           {...register("nozo.desc", { maxLength: 70 })}
           placeholder="보충설명(선택)"
-          css={cssObj.input(errors.nozo?.desc?.type === "maxLength")}
+          css={cssObj.input(errors.nozo?.desc)}
+          onBlur={(onBlurEvent) => {
+            if (onBlurEvent.target.value.trim().length === 0) {
+              setValue("nozo.desc", "");
+            }
+          }}
         />
       </div>
       <div css={cssObj.container(80)}>
@@ -126,9 +136,9 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             <div css={cssObj.payLabel}>
               <input
                 type="number"
-                {...register("pay_start", { required: true })}
+                {...register("pay_start", { required: true, min: 0 })}
                 placeholder="숫자만 입력해주세요"
-                css={cssObj.input(errors.pay_start?.type === "required")}
+                css={cssObj.input(errors.pay_start)}
               />
               <p css={cssObj.textValue}>만원</p>
             </div>
@@ -138,9 +148,9 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             <div css={cssObj.payLabel}>
               <input
                 type="number"
-                {...register("pay_avg", { required: true })}
+                {...register("pay_avg", { required: true, min: 0 })}
                 placeholder="숫자만 입력해주세요"
-                css={cssObj.input(errors.pay_avg?.type === "required")}
+                css={cssObj.input(errors.pay_avg)}
               />
               <p css={cssObj.textValue}>만원</p>
             </div>
@@ -152,7 +162,12 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             type="text"
             {...register("pay_desc", { maxLength: 120 })}
             placeholder="상여금, 성과급 등의 정보를 적어주세요"
-            css={cssObj.input(errors.pay_desc?.type === "maxLength")}
+            css={cssObj.input(errors.pay_desc)}
+            onBlur={(onBlurEvent) => {
+              if (onBlurEvent.target.value.trim().length === 0) {
+                setValue("pay_desc", "");
+              }
+            }}
           />
         </div>
       </div>

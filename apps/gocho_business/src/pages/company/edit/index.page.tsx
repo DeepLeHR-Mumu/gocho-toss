@@ -50,6 +50,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
 
   const addCompanyDetail = (formData: PostSubmitValues) => {
     companyEditConfirmEvent();
+
     if (window.confirm(COMPANY_MESSAGE_OBJ.EDIT)) {
       putCompanyDetail(
         {
