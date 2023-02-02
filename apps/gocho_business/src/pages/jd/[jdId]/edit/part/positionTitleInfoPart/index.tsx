@@ -84,18 +84,6 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
     return `${taskPart} ${contractPart} ${hireNumberPart}명 채용`;
   };
 
-  const taskDetailErrorMsgMaker = () => {
-    const errorArray = formState.errors.position_arr?.[positionIndex]?.task_detail_arr;
-    if (errorArray) {
-      const values = Object.keys(errorArray).map((key) => errorArray?.[Number(key)]);
-      if (values.some((element) => element?.value?.type === "maxLength")) {
-        return "각 칸의 최대 입력 길이는 70자입니다";
-      }
-      return "추가한 모든 칸이 채워져야 합니다";
-    }
-    return null;
-  };
-
   useEffect(() => {
     const hireNumber = watch("position_arr")[positionIndex].hire_number;
 
@@ -242,22 +230,33 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
             </p>
             <div css={cssObj.inputContainer}>
               {taskDetailArr.fields.map((item, index) => (
-                <label css={cssObj.inputLabel} key={`taskDetailArr${item.id}`} htmlFor={`taskDetailArr${item.id}`}>
-                  <input
-                    id={`taskDetailArr${item.id}`}
-                    css={cssObj.erasableInput(47)}
-                    placeholder="합격시 구체적으로 어떤 일을 하게 되는지 명시해주세요"
-                    {...register(`position_arr.${positionIndex}.task_detail_arr.${index}.value`, {
-                      required: true,
-                      maxLength: 70,
-                    })}
-                  />
-                  <DeleteInputButton
-                    onClickHandler={() => {
-                      taskDetailArr.remove(index);
-                    }}
-                  />
-                </label>
+                <div key={`taskDetailArr${item.id}`}>
+                  <label css={cssObj.inputLabel} htmlFor={`taskDetailArr${item.id}`}>
+                    <input
+                      id={`taskDetailArr${item.id}`}
+                      css={cssObj.erasableInput(47)}
+                      onFocus={() => {
+                        clearErrors(`position_arr.${positionIndex}.task_detail_arr.${index}`);
+                      }}
+                      placeholder="합격시 구체적으로 어떤 일을 하게 되는지 명시해주세요"
+                      {...register(`position_arr.${positionIndex}.task_detail_arr.${index}.value`, {
+                        required: { value: true, message: "모든 칸이 채워져야 합니다" },
+                        maxLength: { value: 70, message: "최대 입력 길이는 70자입니다" },
+                      })}
+                    />
+                    {index !== 0 && (
+                      <DeleteInputButton
+                        onClickHandler={() => {
+                          taskDetailArr.remove(index);
+                        }}
+                      />
+                    )}
+                  </label>
+                  <p css={cssObj.arrayErrorMessage}>
+                    {formState?.errors?.position_arr?.[positionIndex]?.task_detail_arr?.[index] &&
+                      formState?.errors?.position_arr?.[positionIndex]?.task_detail_arr?.[index]?.value?.message}
+                  </p>
+                </div>
               ))}
               <AddFieldButton
                 onClickHandler={() => {
@@ -265,9 +264,6 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 }}
               />
             </div>
-            <p css={cssObj.errorMessage}>
-              {formState.errors.position_arr?.[positionIndex]?.task_detail_arr && taskDetailErrorMsgMaker()}
-            </p>
           </div>
           <div css={cssObj.container}>
             <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.hire_number)}>채용 인원</p>

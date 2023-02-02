@@ -40,18 +40,6 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
     }
   };
 
-  const requiredEtcErrorMsgMaker = () => {
-    const errorArray = formState.errors.position_arr?.[positionIndex]?.required_etc_arr;
-    if (errorArray) {
-      const values = Object.keys(errorArray).map((key) => errorArray?.[Number(key)]);
-      if (values.some((element) => element?.value?.type === "maxLength")) {
-        return "각 칸의 최대 입력 길이는 70자입니다";
-      }
-      return "추가한 모든 칸이 채워져야 합니다";
-    }
-    return null;
-  };
-
   useEffect(() => {
     setRandomRequiredEtcGuideArr(requiredEtcGuideArr.sort(() => Math.random() - 0.5).slice(0, 3));
   }, []);
@@ -219,6 +207,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             <input
               type="number"
               min="1"
+              max="100"
               css={cssObj.activatableInput(isMinYearDisabled)}
               {...register(`position_arr.${positionIndex}.min_year`, {
                 required: { value: !isMinYearDisabled, message: "최소 경력은 필수 입력 사항입니다" },
@@ -253,6 +242,8 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           <div css={cssObj.yearInputContainer}>
             <input
               type="number"
+              min="1"
+              max="100"
               css={cssObj.activatableInput(isMaxYearDisabled)}
               {...register(`position_arr.${positionIndex}.max_year`, {
                 required: { value: !isMaxYearDisabled, message: "최대 경력은 필수 입력 사항입니다" },
@@ -296,11 +287,12 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                   css={cssObj.erasableInput(47)}
                   placeholder="군필 여부, 나이, 성별 등의 기타 조건을 적어주세요"
                   onFocus={() => {
+                    clearErrors(`position_arr.${positionIndex}.required_etc_arr.${index}`);
                     focusedArrOnFocusHandler(setRequiredEtcIsFocusedArr, index);
                   }}
                   {...register(`position_arr.${positionIndex}.required_etc_arr.${index}.value`, {
-                    required: true,
-                    maxLength: 70,
+                    required: { value: true, message: "모든 칸이 채워져야 합니다" },
+                    maxLength: { value: 70, message: "최대 입력 길이는 70자입니다" },
                     onBlur: () => {
                       trigger(`position_arr.${positionIndex}.required_etc_arr`);
                       focusedArrOnBlurHandler(setRequiredEtcIsFocusedArr, index);
@@ -319,6 +311,10 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                   />
                 )}
               </label>
+              <p css={cssObj.arrayErrorMessage}>
+                {formState?.errors?.position_arr?.[positionIndex]?.required_etc_arr?.[index] &&
+                  formState?.errors?.position_arr?.[positionIndex]?.required_etc_arr?.[index]?.value?.message}
+              </p>
               <div css={cssObj.guideChipContainer}>
                 {requiredEtcIsFocusedArr[index] &&
                   randomRequiredEtcGuideArr.map((requiredEtcGuide) => (
@@ -359,9 +355,6 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             }}
           />
         </div>
-        <p css={cssObj.errorMessage}>
-          {!!formState.errors.position_arr?.[positionIndex]?.required_etc_arr && requiredEtcErrorMsgMaker()}
-        </p>
       </div>
     </>
   );

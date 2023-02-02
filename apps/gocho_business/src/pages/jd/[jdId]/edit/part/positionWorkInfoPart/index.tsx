@@ -103,18 +103,6 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
     return selectedRotation.join(", ");
   };
 
-  const payErrorMsgMaker = () => {
-    const errorArray = formState.errors.position_arr?.[positionIndex]?.pay_arr;
-    if (errorArray) {
-      const values = Object.keys(errorArray).map((key) => errorArray?.[Number(key)]);
-      if (values.some((element) => element?.value?.type === "maxLength")) {
-        return "각 칸의 최대 입력 길이는 70자입니다";
-      }
-      return "추가한 모든 칸이 채워져야 합니다";
-    }
-    return null;
-  };
-
   useEffect(() => {
     setRandomPreferredEtcGuideArr(preferredEtcGuideArr.sort(() => Math.random() - 0.5).slice(0, 3));
   }, []);
@@ -380,11 +368,12 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   css={cssObj.erasableInput(47)}
                   placeholder="급여 정보"
                   onFocus={() => {
+                    clearErrors(`position_arr.${positionIndex}.pay_arr.${index}`);
                     focusedArrOnFocusHandler(setPayIsFocusedArr, index);
                   }}
                   {...register(`position_arr.${positionIndex}.pay_arr.${index}.value`, {
-                    required: true,
-                    maxLength: 70,
+                    required: { value: true, message: "모든 칸이 채워져야 합니다" },
+                    maxLength: { value: 70, message: "최대 입력 길이는 70자입니다" },
                     onBlur: () => {
                       trigger(`position_arr.${positionIndex}.pay_arr`);
                       focusedArrOnBlurHandler(setPayIsFocusedArr, index);
@@ -399,6 +388,10 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   }}
                 />
               </label>
+              <p css={cssObj.arrayErrorMessage}>
+                {formState?.errors?.position_arr?.[positionIndex]?.pay_arr?.[index] &&
+                  formState?.errors?.position_arr?.[positionIndex]?.pay_arr?.[index]?.value?.message}
+              </p>
               <div css={cssObj.guideChipContainer}>
                 {payIsFocusedArr[index] && (
                   <GuideChip
@@ -418,9 +411,6 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
             }}
           />
         </div>
-        <p css={cssObj.errorMessage}>
-          {!!formState.errors.position_arr?.[positionIndex]?.pay_arr && payErrorMsgMaker()}
-        </p>
       </div>
       <div css={cssObj.container}>
         <p css={cssObj.inputTitle(false)}>우대 자격증</p>
