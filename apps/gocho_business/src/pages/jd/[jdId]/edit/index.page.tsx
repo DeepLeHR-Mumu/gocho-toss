@@ -46,7 +46,7 @@ const JdEditPage: NextPageWithLayout = () => {
   const { setToast } = useToast();
 
   const jdForm = useForm<JdFormValues>({
-    mode: "onBlur",
+    mode: "onTouched",
     reValidateMode: "onChange",
     defaultValues: {
       process_arr: [{ value: "" }, { value: "" }],
@@ -201,7 +201,6 @@ const JdEditPage: NextPageWithLayout = () => {
   }, [jdData, reset]);
 
   useEffect(() => {
-    // Block page refresh or close
     window.onbeforeunload = () => isDirty;
 
     const handleUnload = () => {

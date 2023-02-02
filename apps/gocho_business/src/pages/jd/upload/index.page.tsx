@@ -39,7 +39,7 @@ const JdUploadPage: NextPageWithLayout = () => {
   const router = useRouter();
 
   const jobForm = useForm<JobFormValues>({
-    mode: "onBlur",
+    mode: "onTouched",
     reValidateMode: "onChange",
     defaultValues: {
       process_arr: [{ value: "" }, { value: "" }],

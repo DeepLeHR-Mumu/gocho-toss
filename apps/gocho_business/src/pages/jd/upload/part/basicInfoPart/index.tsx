@@ -26,7 +26,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
   const [linkType, setLinkType] = useState<"website" | "email">("website");
   const [randomApplyRouteGuideArr, setRandomApplyRouteGuideArr] = useState<string[]>([]);
 
-  const { watch, setValue, trigger, formState, register } = jobForm;
+  const { watch, setValue, trigger, formState, register, clearErrors } = jobForm;
 
   const alwaysButtonClickHandler = () => {
     setValue(`end_time`, isAlways ? "" : "9999-12-31T23:59");
@@ -37,31 +37,6 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
   const linkButtonClickHandler = (type: typeof linkType) => {
     setLinkType(type);
     setValue(`apply_url`, "");
-  };
-
-  const processArrErrorMsgMaker = () => {
-    // TODO: FieldArray에 대해서 하나의 함수로
-    const errorArray = formState.errors.process_arr;
-    if (errorArray) {
-      const values = Object.keys(errorArray).map((key) => errorArray?.[Number(key)]);
-      if (values.some((element) => element?.value?.type === "maxLength")) {
-        return "각 칸의 최대 입력 길이는 20자입니다";
-      }
-      return "추가한 모든 칸이 채워져야 합니다";
-    }
-    return null;
-  };
-
-  const applyRouteArrErrorMsgMaker = () => {
-    const errorArray = formState.errors.apply_route_arr;
-    if (errorArray) {
-      const values = Object.keys(errorArray).map((key) => errorArray?.[Number(key)]);
-      if (values.some((element) => element?.value?.type === "maxLength")) {
-        return "각 칸의 최대 입력 길이는 30자입니다";
-      }
-      return "추가한 모든 칸이 채워져야 합니다";
-    }
-    return null;
   };
 
   useEffect(() => {
@@ -80,6 +55,9 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
           <input
             css={cssObj.input(47)}
             placeholder="공고 제목"
+            onFocus={() => {
+              clearErrors("title");
+            }}
             {...register("title", {
               required: { value: true, message: "공고 제목은 필수 입력 사항입니다" },
               maxLength: { value: 50, message: "공고 제목의 최대 길이는 50자입니다" },
@@ -93,6 +71,9 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
             <input
               css={cssObj.input(20)}
               type="datetime-local"
+              onFocus={() => {
+                clearErrors("start_time");
+              }}
               {...register("start_time", { required: { value: true, message: "시작 일시는 필수 입력 사항입니다" } })}
             />
             <p css={cssObj.errorMessage}>{formState.errors.start_time && formState.errors.start_time.message}</p>
@@ -106,6 +87,9 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                 <input
                   css={cssObj.input(20)}
                   type="datetime-local"
+                  onFocus={() => {
+                    clearErrors("end_time");
+                  }}
                   {...register("end_time", { required: { value: true, message: "마감 일시는 필수 입력 사항입니다" } })}
                 />
                 <p css={cssObj.errorMessage}>{formState.errors.end_time && formState.errors.end_time.message}</p>
@@ -143,11 +127,12 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                       css={cssObj.erasableInput(11.5)}
                       placeholder={`${index + 1}차`}
                       onFocus={() => {
+                        clearErrors(`process_arr.${index}`);
                         focusedArrOnFocusHandler(setProcessIsFocusedArr, index);
                       }}
                       {...register(`process_arr.${index}.value`, {
-                        required: true,
-                        maxLength: 20,
+                        required: { value: true, message: "모든 칸이 채워져야 합니다" },
+                        maxLength: { value: 20, message: "최대 입력 길이는 20자입니다" },
                         onBlur: () => {
                           trigger(`process_arr`);
                           focusedArrOnBlurHandler(setProcessIsFocusedArr, index);
@@ -163,6 +148,9 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                       />
                     )}
                   </label>
+                  <p css={cssObj.arrayErrorMessage}>
+                    {formState?.errors?.process_arr?.[index] && formState?.errors?.process_arr?.[index]?.value?.message}
+                  </p>
                   <div css={cssObj.guideChipContainer}>
                     {processIsFocusedArr[index] &&
                       processGuideArr[index].map((processGuide) => (
@@ -191,7 +179,6 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               />
             </div>
           </div>
-          <p css={cssObj.errorMessage}>{!!formState.errors.process_arr && processArrErrorMsgMaker()}</p>
         </div>
         <div css={cssObj.containerWithGuide}>
           <p css={cssObj.inputTitle(!!formState.errors.apply_route_arr)}>지원 방법/제출 서류</p>
@@ -204,11 +191,12 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                     css={cssObj.erasableInput(18)}
                     placeholder="지원 방법/제출 서류"
                     onFocus={() => {
+                      clearErrors(`apply_route_arr.${index}`);
                       focusedArrOnFocusHandler(setApplyRouteIsFocusedArr, index);
                     }}
                     {...register(`apply_route_arr.${index}.value`, {
-                      required: true,
-                      maxLength: 30,
+                      required: { value: true, message: "모든 칸이 채워져야 합니다" },
+                      maxLength: { value: 30, message: "최대 입력 길이는 30자입니다" },
                       onBlur: () => {
                         trigger(`apply_route_arr`);
                         focusedArrOnBlurHandler(setApplyRouteIsFocusedArr, index);
@@ -227,6 +215,10 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                     />
                   )}
                 </label>
+                <p css={cssObj.arrayErrorMessage}>
+                  {formState?.errors?.apply_route_arr?.[index] &&
+                    formState?.errors?.apply_route_arr?.[index]?.value?.message}
+                </p>
                 <div css={cssObj.guideChipContainer}>
                   {applyRouteIsFocusedArr[index] &&
                     randomApplyRouteGuideArr.map((applyRouteGuide) => (
@@ -267,7 +259,6 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               />
             </div>
           </div>
-          <p css={cssObj.errorMessage}>{!!formState.errors.apply_route_arr && applyRouteArrErrorMsgMaker()}</p>
         </div>
         <div css={cssObj.container}>
           <div css={cssObj.linkLabelContainer}>
