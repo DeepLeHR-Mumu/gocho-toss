@@ -57,7 +57,7 @@ const FactoryEditDetail: NextPage = () => {
 
   const rejectFactoryHandler: SubmitHandler<RejectFormValues> = (formData) => {
     rejectFactoryMutate(
-      { factoryId, reason: formData.reason, type: "upload" },
+      { factoryId, reason: formData.reason, type: "update" },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(factoryArrKeyObj.all);
