@@ -14,7 +14,7 @@ import { cssObj } from "./style";
 export const ListPart: FunctionComponent = () => {
   const router = useRouter();
 
-  const { data: jdDataObj, isSuccess } = useJdArr(true, { order: "recent" });
+  const { data: jdDataObj, isSuccess } = useJdArr(true, { order: "recent", limit: 0 });
 
   if (!isSuccess) {
     return null;
