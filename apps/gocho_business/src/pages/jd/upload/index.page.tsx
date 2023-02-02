@@ -139,7 +139,7 @@ const JdUploadPage: NextPageWithLayout = () => {
       window.onbeforeunload = () => null;
       router.events.off("routeChangeStart", handleUnload);
     };
-  }, [isDirty, router, router.events]);
+  }, [isDirty, router.events]);
 
   useEffect(() => {
     jdUploadPageFunnelEvent();

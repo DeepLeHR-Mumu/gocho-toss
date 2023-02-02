@@ -135,9 +135,9 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                 max="100"
                 step="1"
                 {...register(`position_arr.${positionIndex}.conversion_rate`, {
-                  required: !isConversionDisabled,
-                  min: 0,
-                  max: 100,
+                  required: { value: !isConversionDisabled, message: "전환율은 필수 입력 값입니다" },
+                  min: { value: 0, message: "최소값은 1입니다" },
+                  max: { value: 100, message: "최대값은 100입니다" },
                   valueAsNumber: true,
                   disabled: isConversionDisabled,
                   onChange: (e) => conversionRateHandler(e, !isConversionDisabled),
@@ -147,11 +147,8 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             </div>
           </div>
           <p css={cssObj.errorMessage}>
-            {formState.errors.position_arr?.[positionIndex]?.conversion_rate?.type === "required" &&
-              "전환율은 필수 입력 값입니다"}
-            {(formState.errors.position_arr?.[positionIndex]?.conversion_rate?.type === "min" ||
-              formState.errors.position_arr?.[positionIndex]?.conversion_rate?.type === "max") &&
-              "전환율의 값은 1~100 사이여야 합니다"}
+            {formState.errors.position_arr?.[positionIndex]?.conversion_rate &&
+              formState.errors.position_arr?.[positionIndex]?.conversion_rate?.message}
           </p>
         </div>
       </div>
@@ -224,7 +221,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
               min="1"
               css={cssObj.activatableInput(isMinYearDisabled)}
               {...register(`position_arr.${positionIndex}.min_year`, {
-                required: !isMinYearDisabled,
+                required: { value: !isMinYearDisabled, message: "최소 경력은 필수 입력 사항입니다" },
                 disabled: isMinYearDisabled,
                 valueAsNumber: true,
               })}
@@ -247,7 +244,8 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             <p>무관</p>
           </div>
           <p css={cssObj.errorMessage}>
-            {!!formState.errors.position_arr?.[positionIndex]?.min_year && "최소 경력은 필수 입력 사항입니다"}
+            {formState.errors.position_arr?.[positionIndex]?.min_year &&
+              formState.errors.position_arr?.[positionIndex]?.min_year?.message}
           </p>
         </div>
         <div css={cssObj.container}>
@@ -257,7 +255,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
               type="number"
               css={cssObj.activatableInput(isMaxYearDisabled)}
               {...register(`position_arr.${positionIndex}.max_year`, {
-                required: !isMaxYearDisabled,
+                required: { value: !isMaxYearDisabled, message: "최대 경력은 필수 입력 사항입니다" },
                 disabled: isMaxYearDisabled,
                 valueAsNumber: true,
               })}
@@ -280,7 +278,8 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             <p>무관</p>
           </div>
           <p css={cssObj.errorMessage}>
-            {!!formState.errors.position_arr?.[positionIndex]?.max_year && "최대 경력은 필수 입력 사항입니다"}
+            {formState.errors.position_arr?.[positionIndex]?.max_year &&
+              formState.errors.position_arr?.[positionIndex]?.max_year?.message}
           </p>
         </div>
       </div>

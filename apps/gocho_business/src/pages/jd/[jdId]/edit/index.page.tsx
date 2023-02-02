@@ -221,7 +221,7 @@ const JdEditPage: NextPageWithLayout = () => {
       router.events.off("routeChangeStart", handleUnload);
       window.onbeforeunload = () => null;
     };
-  }, [isDirty, router, router.events]);
+  }, [isDirty, router.events]);
 
   useEffect(() => {
     if (submitCount === 0) return;

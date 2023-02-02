@@ -295,7 +295,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                       css={cssObj.input(6)}
                       {...register(`position_arr.${positionIndex}.hire_number`, {
                         valueAsNumber: true,
-                        required: true,
+                        required: { value: true, message: "채용 인원은 필수 입력 값입니다" },
                       })}
                     />
                     명
@@ -304,7 +304,8 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
               </div>
             </div>
             <p css={cssObj.errorMessage}>
-              {formState.errors.position_arr?.[positionIndex]?.hire_number && "채용 인원은 필수 입력 값입니다"}
+              {formState.errors.position_arr?.[positionIndex]?.hire_number &&
+                formState.errors.position_arr?.[positionIndex]?.hire_number?.message}
             </p>
           </div>
         </>

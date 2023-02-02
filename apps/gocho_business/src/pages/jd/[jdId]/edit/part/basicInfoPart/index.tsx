@@ -75,18 +75,22 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
           <input
             css={cssObj.input(47)}
             placeholder="공고 제목"
-            {...register("title", { required: true, maxLength: 50 })}
+            {...register("title", {
+              required: { value: true, message: "공고 제목은 필수 입력 사항입니다" },
+              maxLength: { value: 50, message: "공고 제목의 최대 길이는 50자입니다" },
+            })}
           />
-          <p css={cssObj.errorMessage}>
-            {formState.errors.title?.type === "required" && "공고 제목은 필수 입력 사항입니다"}
-            {formState.errors.title?.type === "maxLength" && "공고 제목의 최대 길이는 50자입니다"}
-          </p>
+          <p css={cssObj.errorMessage}>{formState.errors.title && formState.errors.title.message}</p>
         </div>
         <div css={cssObj.dateInputContainer}>
           <div>
             <p css={cssObj.inputTitle(!!formState.errors.start_time)}>채용시작 일시</p>
-            <input css={cssObj.input(20)} type="datetime-local" {...register("start_time", { required: true })} />
-            <p css={cssObj.errorMessage}>{!!formState.errors.start_time && "시작 일시는 필수 입력 사항입니다"}</p>
+            <input
+              css={cssObj.input(20)}
+              type="datetime-local"
+              {...register("start_time", { required: { value: true, message: "시작 일시는 필수 입력 사항입니다" } })}
+            />
+            <p css={cssObj.errorMessage}>{formState.errors.start_time && formState.errors.start_time.message}</p>
           </div>
           <div>
             <p css={cssObj.inputTitle(!!formState.errors.end_time)}>채용마감 일시</p>
@@ -94,8 +98,12 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
               <div css={cssObj.isAlwaysBlock}>상시 모집</div>
             ) : (
               <>
-                <input css={cssObj.input(20)} type="datetime-local" {...register("end_time", { required: true })} />
-                <p css={cssObj.errorMessage}>{!!formState.errors.end_time && "마감 일시는 필수 입력 사항입니다"}</p>
+                <input
+                  css={cssObj.input(20)}
+                  type="datetime-local"
+                  {...register("end_time", { required: { value: true, message: "마감 일시는 필수 입력 사항입니다" } })}
+                />
+                <p css={cssObj.errorMessage}>{formState.errors.end_time && formState.errors.end_time.message}</p>
               </>
             )}
           </div>
@@ -299,7 +307,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                     <input
                       css={cssObj.applyUrlInput(47)}
                       placeholder="http"
-                      {...register("apply_url", { required: true })}
+                      {...register("apply_url", { required: { value: true, message: "링크는 필수 입력 사항입니다" } })}
                     />
                   </label>
                   <SharedTextLink externalUrl={`${watch("apply_url")}`} fontColor="blue" text="링크 미리보기" />
@@ -323,9 +331,12 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                   <span css={cssObj.inputLogo}>
                     <FiAtSign />
                   </span>
-                  <input css={cssObj.applyUrlInput(47)} {...register("apply_url", { required: true })} />
+                  <input
+                    css={cssObj.applyUrlInput(47)}
+                    {...register("apply_url", { required: { value: true, message: "링크는 필수 입력 사항입니다" } })}
+                  />
                 </label>
-                <p css={cssObj.errorMessage}>{!!formState.errors.apply_url && formState.errors.apply_url.message}</p>
+                <p css={cssObj.errorMessage}>{formState.errors.apply_url && formState.errors.apply_url.message}</p>
               </div>
             )}
           </div>
