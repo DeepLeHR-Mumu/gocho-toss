@@ -56,6 +56,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
             {...register("title", {
               required: { value: true, message: "공고 제목은 필수 입력 사항입니다" },
               maxLength: { value: 50, message: "공고 제목의 최대 길이는 50자입니다" },
+              validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
             })}
           />
           <p css={cssObj.errorMessage}>{formState.errors.title && formState.errors.title.message}</p>
@@ -128,6 +129,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                       {...register(`process_arr.${index}.value`, {
                         required: { value: true, message: "모든 칸이 채워져야 합니다" },
                         maxLength: { value: 20, message: "최대 입력 길이는 20자입니다" },
+                        validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
                         onBlur: () => {
                           trigger(`process_arr`);
                           focusedArrOnBlurHandler(setProcessIsFocusedArr, index);
@@ -192,6 +194,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                     {...register(`apply_route_arr.${index}.value`, {
                       required: { value: true, message: "모든 칸이 채워져야 합니다" },
                       maxLength: { value: 30, message: "최대 입력 길이는 30자입니다" },
+                      validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
                       onBlur: () => {
                         trigger(`apply_route_arr`);
                         focusedArrOnBlurHandler(setApplyRouteIsFocusedArr, index);
@@ -298,7 +301,10 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                     <input
                       css={cssObj.applyUrlInput(47)}
                       placeholder="http"
-                      {...register("apply_url", { required: { value: true, message: "링크는 필수 입력 사항입니다" } })}
+                      {...register("apply_url", {
+                        required: { value: true, message: "링크는 필수 입력 사항입니다" },
+                        validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
+                      })}
                     />
                   </label>
                   <SharedTextLink externalUrl={`${watch("apply_url")}`} fontColor="blue" text="링크 미리보기" />
@@ -324,7 +330,10 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                   </span>
                   <input
                     css={cssObj.applyUrlInput(47)}
-                    {...register("apply_url", { required: { value: true, message: "링크는 필수 입력 사항입니다" } })}
+                    {...register("apply_url", {
+                      required: { value: true, message: "링크는 필수 입력 사항입니다" },
+                      validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
+                    })}
                   />
                 </label>
                 <p css={cssObj.errorMessage}>{formState.errors.apply_url && formState.errors.apply_url.message}</p>

@@ -233,6 +233,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                       {...register(`position_arr.${positionIndex}.task_detail_arr.${index}.value`, {
                         required: { value: true, message: "모든 칸이 채워져야 합니다" },
                         maxLength: { value: 70, message: "최대 입력 길이는 70자입니다" },
+                        validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
                       })}
                     />
                     {index !== 0 && (
@@ -290,6 +291,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                       {...register(`position_arr.${positionIndex}.hire_number`, {
                         valueAsNumber: true,
                         required: { value: true, message: "채용 인원은 필수 입력 값입니다" },
+                        max: { value: 9999, message: "최대값은 9999명입니다" },
                       })}
                     />
                     명
