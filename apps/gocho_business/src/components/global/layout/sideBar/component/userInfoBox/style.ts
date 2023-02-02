@@ -8,7 +8,7 @@ export const cssObj = {
     padding: 1rem;
     display: flex;
     align-items: center;
-    border-top: 1px solid ${COLORS.GRAY65};
+    border-top: 1px solid ${COLORS.GRAY80};
   `,
   name: css`
     display: flex;

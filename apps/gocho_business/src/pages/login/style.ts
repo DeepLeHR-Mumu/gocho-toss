@@ -46,6 +46,8 @@ export const cssObj = {
     background-color: ${COLORS.GRAY100};
     border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
     display: flex;
+    border-radius: 5px;
+    overflow: hidden;
     align-items: center;
     justify-content: space-between;
   `,
@@ -84,7 +86,7 @@ export const cssObj = {
     justify-content: space-between;
   `,
   findPasswordButton: css`
-    font-size: ${COLORS.GRAY10};
+    color: ${COLORS.GRAY30};
     font-size: 0.875rem;
     font-weight: 400;
     text-decoration: underline;

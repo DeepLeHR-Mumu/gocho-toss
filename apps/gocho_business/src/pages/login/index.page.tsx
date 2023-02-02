@@ -28,7 +28,7 @@ const LoginPage: NextPage = () => {
   const router = useRouter();
 
   const queryClient = useQueryClient();
-  const { setUserInfoData } = useUserState();
+  const { setUserInfoData, userInfoData } = useUserState();
   const { mutate: postLogin } = useDoLogin();
   const { setCurrentModal } = useModal();
   const {
@@ -36,7 +36,7 @@ const LoginPage: NextPage = () => {
     watch,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormValues>({ mode: "onBlur" });
+  } = useForm<LoginFormValues>({ mode: "onChange" });
 
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     postLogin(loginObj, {
@@ -69,11 +69,17 @@ const LoginPage: NextPage = () => {
   };
 
   useEffect(() => {
+    const isLogin = Boolean(userInfoData);
+    if (isLogin) router.replace(INTERNAL_URL.JD_LIST);
+  }, [router, userInfoData]);
+
+  useEffect(() => {
     loginPageFunnelEvent();
   }, []);
 
   const isEmail = Boolean(watch("email"));
   const isPassword = Boolean(watch("password"));
+
   return (
     <>
       <PageHead />
@@ -98,6 +104,10 @@ const LoginPage: NextPage = () => {
                   {...register("email", {
                     required: "이메일을 입력해주세요.",
                   })}
+                  onChange={(onChangeEvent) => {
+                    register("email").onChange(onChangeEvent);
+                    setErrorMsg(null);
+                  }}
                 />
               </li>
               <li css={cssObj.inputBox(errors.password?.type === "required")}>
@@ -108,6 +118,10 @@ const LoginPage: NextPage = () => {
                   {...register("password", {
                     required: "비밀번호를 입력해주세요.",
                   })}
+                  onChange={(onChangeEvent) => {
+                    register("password").onChange(onChangeEvent);
+                    setErrorMsg(null);
+                  }}
                 />
                 <button
                   type="button"
@@ -134,6 +148,7 @@ const LoginPage: NextPage = () => {
                 비밀번호 찾기
               </button>
             </div>
+
             <p css={cssObj.errorMsg}>{errors.email?.message || errors.password?.message || errorMsg}</p>
 
             <button type="submit" css={cssObj.submitButton(isEmail && isPassword)} disabled={!isEmail || !isPassword}>

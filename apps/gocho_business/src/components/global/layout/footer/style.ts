@@ -4,7 +4,7 @@ import { COLORS } from "shared-style/color";
 
 export const cssObj = {
   wrapper: css`
-    background-color: ${COLORS.GRAY95};
+    background-color: #f6f7fa;
     width: 100%;
   `,
   container: css`
