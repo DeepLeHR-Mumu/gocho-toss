@@ -246,7 +246,7 @@ const JdEditPage: NextPageWithLayout = () => {
           <form onSubmit={handleSubmit(jdEditHandler)}>
             <HeaderPart jdData={jdData} />
             <BasicInfoPart jdForm={jdForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
-            <PositionHeaderPart append={append} setIsCardOpen={setIsCardOpenArr} />
+            <PositionHeaderPart fields={fields} append={append} setIsCardOpen={setIsCardOpenArr} />
             <ul>
               {fields.map((item, index) => (
                 <li key={`${item.id}`} css={cssObj.cardContainer}>

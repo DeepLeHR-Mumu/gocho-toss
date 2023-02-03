@@ -261,7 +261,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
               ))}
               <AddFieldButton
                 onClickHandler={() => {
-                  taskDetailArr.append({ value: "" });
+                  if (taskDetailArr.fields.length < 10) taskDetailArr.append({ value: "" });
                 }}
               />
             </div>

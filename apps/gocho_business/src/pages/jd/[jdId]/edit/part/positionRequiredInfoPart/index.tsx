@@ -347,8 +347,10 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           ))}
           <AddFieldButton
             onClickHandler={() => {
-              requiredEtcArr.append({ value: "" });
-              setRequiredEtcIsFocusedArr((prev) => [...prev, false]);
+              if (requiredEtcArr.fields.length < 10) {
+                requiredEtcArr.append({ value: "" });
+                setRequiredEtcIsFocusedArr((prev) => [...prev, false]);
+              }
             }}
           />
         </div>

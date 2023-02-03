@@ -256,8 +256,10 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
             <div css={cssObj.addButtonWrapper}>
               <AddFieldButton
                 onClickHandler={() => {
-                  applyRouteArr.append({ value: "" });
-                  setApplyRouteIsFocusedArr((prev) => [...prev, false]);
+                  if (applyRouteArr.fields.length < 10) {
+                    applyRouteArr.append({ value: "" });
+                    setApplyRouteIsFocusedArr((prev) => [...prev, false]);
+                  }
                 }}
               />
             </div>
@@ -367,7 +369,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
             <div css={cssObj.addButtonWrapper}>
               <AddFieldButton
                 onClickHandler={() => {
-                  etcArr.append({ value: "" });
+                  if (etcArr.fields.length < 10) etcArr.append({ value: "" });
                 }}
               />
             </div>
