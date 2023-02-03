@@ -189,7 +189,7 @@ export const cssObj = {
     border: 1px solid ${COLORS.GRAY10};
     border-radius: 5px;
     width: ${width}rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
     background-color: ${COLORS.GRAY100};
 
     ::placeholder {
