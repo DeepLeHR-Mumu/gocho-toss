@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -20,8 +20,57 @@ import { loginSuccessEvent } from "@/ga/auth";
 import { LoginFormValues } from "./type";
 import { cssObj } from "./style";
 
+// function Modal({ isOpen, onClose }) {
+//   const modalRef = useRef(null);
+
+//   useEffect(() => {
+//     if (!isOpen) {
+//       return;
+//     }
+
+//     const handleTab = e => {
+//       if (e.key === "Tab") {
+//         const focusableElements = modalRef.current.querySelectorAll(
+//           "button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"
+//         );
+//         const firstFocusableElement = focusableElements[0];
+//         const lastFocusableElement =
+//           focusableElements[focusableElements.length - 1];
+
+//         if (e.shiftKey) {
+//           if (document.activeElement === firstFocusableElement) {
+//             e.preventDefault();
+//             lastFocusableElement.focus();
+//           }
+//         } else {
+//           if (document.activeElement === lastFocusableElement) {
+//             e.preventDefault();
+//             firstFocusableElement.focus();
+//           }
+//         }
+//       }
+//     };
+
+//     modalRef.current.focus();
+//     document.addEventListener("keydown", handleTab);
+
+//     return () => {
+//       document.removeEventListener("keydown", handleTab);
+//     };
+//   }, [isOpen]);
+
+//   return (
+//     <div ref={modalRef} tabIndex={-1}>
+//       <button onClick={onClose}>Close</button>
+//       {/* ...modal content... */}
+//     </div>
+//   );
+// }
+
 export const LoginBox: FunctionComponent = () => {
   const [errorMsg, setErrorMsg] = useState<null | string>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+
   const queryClient = useQueryClient();
 
   const { setUserInfoData } = useUserState();
@@ -67,8 +116,43 @@ export const LoginBox: FunctionComponent = () => {
     });
   };
 
+  useEffect(() => {
+    const handleTab = (keyBoardEvent: KeyboardEvent) => {
+      if (modalRef.current === null) return;
+      // 탭 눌렀을 때
+      if (keyBoardEvent.key === "Tab") {
+        // 해당 모달에서 사용가능한 모든 HTML 요소들 가져오기
+        const focusableElements = modalRef.current.querySelectorAll(
+          "button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"
+        ) as NodeListOf<HTMLElement>;
+        // 첫번째 포커스 가능한 요소
+        const firstFocusableElement = focusableElements[0];
+        // 마지막 포커스 가능한 요소
+        const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+        if (keyBoardEvent.shiftKey) {
+          // 현 document에서 포커스된 것이 첫 element일 경우
+          if (document.activeElement === firstFocusableElement) {
+            keyBoardEvent.preventDefault();
+            lastFocusableElement.focus();
+          }
+        } else if (document.activeElement === lastFocusableElement) {
+          keyBoardEvent.preventDefault();
+          firstFocusableElement.focus();
+        }
+      }
+    };
+
+    if (modalRef.current !== null) {
+      document.addEventListener("keydown", handleTab);
+    }
+    return () => {
+      document.removeEventListener("keydown", handleTab);
+    };
+  }, []);
+
   return (
-    <div css={cssObj.wrapper}>
+    <div css={cssObj.wrapper} ref={modalRef}>
       <div css={cssObj.logoContainer}>
         <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" />
       </div>

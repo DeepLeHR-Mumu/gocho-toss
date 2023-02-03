@@ -8,7 +8,7 @@ import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { cssObj } from "./style";
 import { FactoryDetailInfoProps } from "./type";
 
-export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ formObj, totalWorkerNumber }) => {
+export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ formObj,  totalWorkerNumber }) => {
   const { register, formState } = formObj;
   return (
     <div css={cssObj.gapContainer} data-testid="factory/list/FactoryDetailInfo">
@@ -41,6 +41,7 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ f
                     required: true,
                     valueAsNumber: true,
                   })}
+                  type="number"
                   placeholder="남성"
                   css={cssObj.manWomanInput(formState.errors.male_number?.type === "required")}
                 />
@@ -55,6 +56,7 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ f
                 <input
                   {...register("female_number", { required: true, valueAsNumber: true })}
                   placeholder="여성"
+                  type="number"
                   css={cssObj.manWomanInput(formState.errors.female_number?.type === "required")}
                 />
                 <p css={cssObj.number}>명</p>
@@ -80,7 +82,20 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ f
             </div>
           </div>
           <input
-            {...register("bus_etc", { maxLength: 70 })}
+            {...register("bus_etc", {
+              maxLength: 70,
+              validate: (value) => {
+                if (value) {
+                  return value.trim().length !== 0;
+                }
+                return true;
+              },
+            })}
+            onBlur={(blurEvent) => {
+              if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                formObj.setValue("bus_etc", "");
+              }
+            }}
             css={cssObj.etcInfoBox}
             placeholder="보충 설명(선택)"
             maxLength={70}
@@ -112,6 +127,11 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ f
           <input
             {...register("dormitory_etc", { maxLength: 70 })}
             css={cssObj.etcInfoBox}
+            onBlur={(blurEvent) => {
+              if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                formObj.setValue("dormitory_etc", "");
+              }
+            }}
             placeholder="보충 설명(선택)"
             maxLength={70}
           />

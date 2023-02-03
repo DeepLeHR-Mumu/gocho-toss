@@ -24,6 +24,11 @@ export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formO
           {...register("factory_name", { maxLength: 30, required: true })}
           css={cssObj.textInput(formState.errors.factory_name?.type === "required")}
           placeholder="공장이름"
+          onBlur={(blurEvent) => {
+            if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+              formObj.setValue("factory_name", "");
+            }
+          }}
           maxLength={30}
         />
         <div css={cssObj.statusChip}>
@@ -78,6 +83,11 @@ export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formO
           css={cssObj.textInput(formState.errors.product?.type === "required")}
           placeholder="공장 주 생산품"
           maxLength={100}
+          onBlur={(blurEvent) => {
+            if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+              formObj.setValue("product", "");
+            }
+          }}
         />
       </div>
     </div>

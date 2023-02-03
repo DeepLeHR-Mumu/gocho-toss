@@ -35,7 +35,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
   if (factoryDataArr.length === 0)
     return (
       <div css={cssObj.noDataWrapper}>
-        <p css={cssObj.noDataMessage}>등록된 공고가 없습니다</p>
+        <p css={cssObj.noDataMessage}>등록된 공장이 없습니다</p>
       </div>
     );
   return (
@@ -125,7 +125,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                   Icon={FiUsers}
                 />
               </div>
-              <div css={cssObj.infoItem}>
+              <div css={cssObj.genderRatioInfoBox}>
                 <p css={cssObj.infoName}>남녀 비율</p>
                 <div css={cssObj.percentageContainer}>
                   <div css={cssObj.percentageBox}>

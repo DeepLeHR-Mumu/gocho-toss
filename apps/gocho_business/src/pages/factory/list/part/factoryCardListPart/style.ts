@@ -87,7 +87,15 @@ export const cssObj = {
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 1rem;
+    align-items: flex-start;
   `,
+  name: css`
+    word-break: break-all;
+    font-weight: 700;
+    color: ${COLORS.GRAY10};
+    width: 70%;
+  `,
+
   addressContainer: css`
     display: flex;
     align-items: flex-start;
@@ -98,11 +106,6 @@ export const cssObj = {
       flex-shrink: 0;
       font-size: 1.5rem;
     }
-  `,
-  name: css`
-    word-break: break-all;
-    font-weight: 700;
-    color: ${COLORS.GRAY10};
   `,
 
   address: css`
@@ -156,6 +159,13 @@ export const cssObj = {
   infoItem: css`
     width: 47%;
     margin-right: 0.5rem;
+  `,
+  genderRatioInfoBox: css`
+    width: 47%;
+    margin-right: 0.5rem;
+    gap: 0.4rem 0;
+    display: flex;
+    flex-direction: column;
   `,
   percentageContainer: css`
     display: flex;

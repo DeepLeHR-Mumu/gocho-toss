@@ -1,6 +1,7 @@
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { FiEdit, FiPlus, FiX } from "react-icons/fi";
+import { useRouter } from "next/router";
 
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
@@ -20,45 +21,58 @@ import { cssObj } from "./style";
 import { FactoryRegisterDef, RegisterPartProps } from "./type";
 import { FactoryBaseInfo } from "../../component/factoryBaseInfo";
 import { FactoryDetailInfo } from "../../component/factoryDetailInfo";
-import { defaultInput, FACTORY_MESSSAGE_OBJ } from "./constant";
+import { defaultInput } from "./constant";
+// import { defaultInput, FACTORY_MESSSAGE_OBJ } from "./constant";
 
 export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingIndex, setEditingIndex }) => {
+  const isLoading = useRef(false);
+
+  const router = useRouter();
   const formObj = useForm<FactoryRegisterDef>();
   const {
     handleSubmit,
     watch,
     reset,
-    formState: { submitCount },
+    formState: { submitCount, isDirty },
   } = formObj;
 
   const { data: factoryDataArr } = useFactoryArr();
   const { mutate: addFactoryMutation } = useAddFactory();
 
   const factoryPostSubmitHandler = (factoryRequestObj: FactoryRegisterDef) => {
+    // console.log("시도");
+    if (isLoading.current) {
+      return;
+    }
+    // console.log("실제요청");
+    isLoading.current = true;
     if (editingIndex === null) {
       factoryUploadConfirmEvent();
     }
     factoryEditConfirmEvent();
-    if (window.confirm(FACTORY_MESSSAGE_OBJ.REGISTER)) {
-      addFactoryMutation(
-        {
-          ...factoryRequestObj,
-          bus_bool: factoryRequestObj.bus_bool === "true",
-          dormitory_bool: factoryRequestObj.dormitory_bool === "true",
-          id: editingIndex === null ? undefined : factoryDataArr?.[Number(editingIndex)]?.id,
+    // if (window.confirm(FACTORY_MESSSAGE_OBJ.REGISTER)) {
+    addFactoryMutation(
+      {
+        ...factoryRequestObj,
+        bus_bool: factoryRequestObj.bus_bool === "true",
+        dormitory_bool: factoryRequestObj.dormitory_bool === "true",
+        id: editingIndex === null ? undefined : factoryDataArr?.[Number(editingIndex)]?.id,
+      },
+      {
+        onSuccess: () => {
+          if (editingIndex === null) {
+            factoryUploadDoneEvent();
+            return;
+          }
+          factoryEditDoneEvent();
         },
-        {
-          onSuccess: () => {
-            if (editingIndex === null) {
-              factoryUploadDoneEvent();
-              return;
-            }
-            factoryEditDoneEvent();
-          },
-        }
-      );
-      setEditingIndex(null);
-    }
+        onSettled: () => {
+          isLoading.current = false;
+        },
+      }
+    );
+    setEditingIndex(null);
+    // }
   };
 
   useEffect(() => {
@@ -82,18 +96,40 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingInde
       return;
     }
 
-    reset({
-      factory_name: factoryDataArr[editingIndex].name,
-      address: factoryDataArr[editingIndex].address,
-      product: factoryDataArr[editingIndex].product,
-      male_number: factoryDataArr[editingIndex].maleNumber,
-      female_number: factoryDataArr[editingIndex].femaleNumber,
-      bus_bool: factoryDataArr[editingIndex].bus.exists ? "true" : "false",
-      bus_etc: factoryDataArr[editingIndex].bus.desc || "",
-      dormitory_bool: factoryDataArr[editingIndex].dormitory.exists ? "true" : "false",
-      dormitory_etc: factoryDataArr[editingIndex].dormitory.desc || "",
-    });
+    reset(
+      {
+        factory_name: factoryDataArr[editingIndex].name,
+        address: factoryDataArr[editingIndex].address,
+        product: factoryDataArr[editingIndex].product,
+        male_number: factoryDataArr[editingIndex].maleNumber,
+        female_number: factoryDataArr[editingIndex].femaleNumber,
+        bus_bool: factoryDataArr[editingIndex].bus.exists ? "true" : "false",
+        bus_etc: factoryDataArr[editingIndex].bus.desc || "",
+        dormitory_bool: factoryDataArr[editingIndex].dormitory.exists ? "true" : "false",
+        dormitory_etc: factoryDataArr[editingIndex].dormitory.desc || "",
+      },
+      { keepDefaultValues: true }
+    );
   }, [factoryDataArr, editingIndex, reset]);
+
+  useEffect(() => {
+    window.onbeforeunload = () => isDirty;
+    const pageExitHandler = () => {
+      if (!isDirty) {
+        return;
+      }
+      if (!window.confirm("나가시겠어요?") && isDirty) {
+        throw router.events.emit("routeChangeError");
+      }
+    };
+
+    router.events.on("routeChangeStart", pageExitHandler);
+
+    return () => {
+      router.events.off("routeChangeStart", pageExitHandler);
+      window.onbeforeunload = () => null;
+    };
+  }, [isDirty, router]);
 
   const totalWorkerNumber = Number(watch("male_number") || 0) + Number(watch("female_number") || 0);
 

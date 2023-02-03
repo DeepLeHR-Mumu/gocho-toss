@@ -9,10 +9,12 @@ import { PageHead } from "./pageHead";
 import { RegisterPart } from "./part/registerPart";
 import { FactoryCardListPart } from "./part/factoryCardListPart";
 import { cssObj } from "./style";
+// import { useModal } from "@/globalStates/useModal";
 
 const FactoryListPage: NextPageWithLayout = () => {
   const [editingIndex, setEditingIndex] = useState<null | number>(null);
   const [rejectedMessage, setRejectedMessage] = useState<null | string>(null);
+  // const { setCurrentModal } = useModal();
 
   useEffect(() => {
     if (editingIndex === null) {
@@ -21,6 +23,8 @@ const FactoryListPage: NextPageWithLayout = () => {
   }, [editingIndex]);
   useEffect(() => {
     factoryListPageFunnelEvent();
+    // setCurrentModal("loginModal");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
