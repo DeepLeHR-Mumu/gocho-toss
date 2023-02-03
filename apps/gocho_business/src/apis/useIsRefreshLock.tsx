@@ -63,6 +63,9 @@ export const useAxiosInterceptor = () => {
     const refreshTokenData = localStorage.getItem("refreshToken");
     const prevUrl = sessionStorage.getItem("prevUrl");
 
+    if ((!accessTokenData || !refreshTokenData) && config.url === "/auth/health-check") {
+      throw new axios.Cancel("비로그인 health-check 취소");
+    }
     if (!accessTokenData || !refreshTokenData) return router.replace(INTERNAL_URL.LOGIN);
 
     const { exp: accessTokenExp } = managerTokenDecryptor(accessTokenData);
@@ -70,14 +73,17 @@ export const useAxiosInterceptor = () => {
     const accessCreateTime = new Date(accessTokenExp * 1000).getTime();
     const refreshCreateTime = new Date(refreshTokenExp * 1000).getTime();
     const currentTime = new Date().getTime();
+    // const firstEntryTime = sessionStorage.getItem("firstEntryTime");
+
+    // 최초 접속시간 10:00 > 토큰만료시간 12:00
 
     if (refreshCreateTime <= currentTime && prevUrl === "none") {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      router.replace(INTERNAL_URL.LOGIN);
+      return router.replace(INTERNAL_URL.LOGIN);
     }
 
-    if (refreshCreateTime <= currentTime && prevUrl !== "none") setCurrentModal("loginModal");
+    if (refreshCreateTime <= currentTime && prevUrl !== "none") return setCurrentModal("loginModal");
 
     if (accessCreateTime - currentTime <= accessTokenLimitMs && !isRequestLock) {
       isRequestLock = true;
