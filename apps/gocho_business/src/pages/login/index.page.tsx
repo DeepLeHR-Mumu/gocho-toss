@@ -10,6 +10,7 @@ import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
 import gochoColorSrc from "shared-image/global/deepLeLogo/logoIconColor.svg";
+import { EMAIL_REGEXP } from "shared-constant/regExp";
 
 import { useModal } from "@/globalStates/useModal";
 import { INTERNAL_URL } from "@/constants/url";
@@ -96,13 +97,21 @@ const LoginPage: NextPage = () => {
 
           <form css={cssObj.formCSS} onSubmit={handleSubmit(loginSubmit)}>
             <ul>
-              <li css={cssObj.inputBox(errors.email?.type === "required")}>
+              <li css={cssObj.inputBox(errors.email)}>
                 <input
                   type="email"
                   placeholder="아이디(이메일)"
                   css={cssObj.inputCSS}
                   {...register("email", {
                     required: "이메일을 입력해주세요.",
+                    maxLength: {
+                      value: 30,
+                      message: "최대길이",
+                    },
+                    pattern: {
+                      value: EMAIL_REGEXP,
+                      message: "패턴에 관한 에러",
+                    },
                   })}
                   onChange={(onChangeEvent) => {
                     register("email").onChange(onChangeEvent);
@@ -110,7 +119,7 @@ const LoginPage: NextPage = () => {
                   }}
                 />
               </li>
-              <li css={cssObj.inputBox(errors.password?.type === "required")}>
+              <li css={cssObj.inputBox(errors.password)}>
                 <input
                   type={isShowPassword ? "text" : "password"}
                   placeholder="비밀번호"
