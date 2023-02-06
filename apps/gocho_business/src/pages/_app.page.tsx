@@ -70,11 +70,6 @@ function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
     sessionStorage.setItem("currentUrl", router.asPath);
   }, [router.asPath]);
 
-  useEffect(() => {
-    const firstEntryTime = new Date().getTime();
-    sessionStorage.setItem("firstEntryTime", JSON.stringify(firstEntryTime));
-  }, []);
-
   useAxiosInterceptor();
 
   const getLayout = Component.getLayout || ((page) => page);

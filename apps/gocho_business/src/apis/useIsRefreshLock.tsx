@@ -73,16 +73,21 @@ export const useAxiosInterceptor = () => {
     const accessCreateTime = new Date(accessTokenExp * 1000).getTime();
     const refreshCreateTime = new Date(refreshTokenExp * 1000).getTime();
     const currentTime = new Date().getTime();
-    // const firstEntryTime = sessionStorage.getItem("firstEntryTime");
+    const firstEntryDate = sessionStorage.getItem("firstEntryDate");
+    const firstEntryTime = new Date(Number(firstEntryDate));
+    const BetweenRefreshAndEntryHour = (refreshCreateTime - Number(firstEntryTime)) / (1000 * 60 * 60);
 
-    // 최초 접속시간 10:00 > 토큰만료시간 12:00
-
-    if (refreshCreateTime <= currentTime && prevUrl === "none") {
+    // 1. 전페이지가 없고(최초접속) 토큰이 만료된경우
+    // 2. 리프래시토큰만료시간이 최초접속시간을 넘어선 경우 (그냥 화면켜놓고 12시간 아무것도 안한 경우)
+    if ((refreshCreateTime <= currentTime && prevUrl === "none") || BetweenRefreshAndEntryHour <= 0) {
+      window.alert("토큰이 만료되어 로그인 페이지로 이동합니다.");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      return router.replace(INTERNAL_URL.LOGIN);
+      sessionStorage.removeItem("firstEntryDate");
+      window.location.href = "/";
     }
 
+    // 3. 전페이지가 있고 토큰이 만료된 경우
     if (refreshCreateTime <= currentTime && prevUrl !== "none") return setCurrentModal("loginModal");
 
     if (accessCreateTime - currentTime <= accessTokenLimitMs && !isRequestLock) {

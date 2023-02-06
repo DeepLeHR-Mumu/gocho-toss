@@ -51,6 +51,7 @@ export const LoginBox: FunctionComponent = () => {
         closeModal();
         localStorage.setItem("accessToken", response.data.access_token);
         localStorage.setItem("refreshToken", response.data.refresh_token);
+        sessionStorage.setItem("firstEntryDate", JSON.stringify(new Date().getTime()));
         const { id, company_id, company_name, company_logo, iat, exp, email, name, department } = managerTokenDecryptor(
           response.data.access_token
         );
