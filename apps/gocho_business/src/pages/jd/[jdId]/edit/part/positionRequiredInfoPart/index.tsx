@@ -202,7 +202,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           </div>
         </div>
         <div css={cssObj.container}>
-          <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.min_year)}>최소경력(연)</p>
+          <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.min_year))}>최소경력(연)</p>
           <div css={cssObj.yearInputContainer}>
             <input
               type="number"
@@ -238,7 +238,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           </p>
         </div>
         <div css={cssObj.container}>
-          <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.max_year)}>최대경력(연)</p>
+          <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.max_year))}>최대경력(연)</p>
           <div css={cssObj.yearInputContainer}>
             <input
               type="number"
@@ -275,7 +275,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
         </div>
       </div>
       <div css={cssObj.containerWithGuide}>
-        <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.required_etc_arr)}>
+        <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.required_etc_arr))}>
           기타 지원 조건
         </p>
         <div css={cssObj.inputContainerWithGuide}>

@@ -51,7 +51,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
       </div>
       <div css={cssObj.dataWrapper}>
         <div css={cssObj.container}>
-          <p css={cssObj.inputTitle(!!formState.errors.title)}>공고 제목</p>
+          <p css={cssObj.inputTitle(Boolean(formState.errors.title))}>공고 제목</p>
           <input
             css={cssObj.input(47)}
             placeholder="공고 제목 (최대 50자)"
@@ -68,7 +68,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
         </div>
         <div css={cssObj.dateInputContainer}>
           <div>
-            <p css={cssObj.inputTitle(!!formState.errors.start_time)}>채용시작 일시</p>
+            <p css={cssObj.inputTitle(Boolean(formState.errors.start_time))}>채용시작 일시</p>
             <input
               css={cssObj.input(20)}
               type="datetime-local"
@@ -80,7 +80,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
             <p css={cssObj.errorMessage}>{formState.errors.start_time && formState.errors.start_time.message}</p>
           </div>
           <div>
-            <p css={cssObj.inputTitle(!!formState.errors.end_time)}>채용마감 일시</p>
+            <p css={cssObj.inputTitle(Boolean(formState.errors.end_time))}>채용마감 일시</p>
             {isAlways ? (
               <div css={cssObj.isAlwaysBlock}>상시 모집</div>
             ) : (
@@ -117,7 +117,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
           </div>
         </div>
         <div css={cssObj.containerWithGuide}>
-          <p css={cssObj.inputTitle(!!formState.errors.process_arr)}>채용 절차</p>
+          <p css={cssObj.inputTitle(Boolean(formState.errors.process_arr))}>채용 절차</p>
           <div css={cssObj.inputContainerWithGuide}>
             {processArr.fields.map((item, index) => (
               <div key={`processArr${item.id}`} css={cssObj.processBox}>
@@ -183,7 +183,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
           </div>
         </div>
         <div css={cssObj.containerWithGuide}>
-          <p css={cssObj.inputTitle(!!formState.errors.apply_route_arr)}>지원 방법/제출 서류</p>
+          <p css={cssObj.inputTitle(Boolean(formState.errors.apply_route_arr))}>지원 방법/제출 서류</p>
           <div css={cssObj.inputContainerWithGuide}>
             {applyRouteArr.fields.map((item, index) => (
               <div key={`applyRouteArr${item.id}`}>
@@ -279,7 +279,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                 }}
               />
               <div css={cssObj.radioBox} />
-              <p css={cssObj.labelTitle(!!formState.errors.apply_url)}>채용 링크</p>
+              <p css={cssObj.labelTitle(Boolean(formState.errors.apply_url))}>채용 링크</p>
             </label>
             <p>또는</p>
             <label css={cssObj.label} htmlFor="email">
@@ -294,7 +294,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                 }}
               />
               <div css={cssObj.radioBox} />
-              <p css={cssObj.labelTitle(!!formState.errors.apply_url)}>이메일 링크</p>
+              <p css={cssObj.labelTitle(Boolean(formState.errors.apply_url))}>이메일 링크</p>
             </label>
           </div>
           <div>

@@ -148,7 +148,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
         </div>
       </div>
       <div css={cssObj.container}>
-        <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.task_main)}>채용 직무</p>
+        <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.task_main))}>채용 직무</p>
         <div css={cssObj.taskInputContainer}>
           <div>
             <div css={cssObj.taskContainer}>
@@ -181,7 +181,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 ))}
               </div>
             </div>
-            <p css={cssObj.desc(!!formState.errors.position_arr?.[positionIndex]?.task_main)}>
+            <p css={cssObj.desc(Boolean(formState.errors.position_arr?.[positionIndex]?.task_main))}>
               {formState.errors.position_arr?.[positionIndex]?.task_main
                 ? "1차 직무는 필수 선택 사항입니다"
                 : "1차 직무 선택 후 2차 직무가 표시됩니다"}
@@ -225,7 +225,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
       {isCardOpen && (
         <>
           <div css={cssObj.container}>
-            <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.task_detail_arr)}>
+            <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.task_detail_arr))}>
               세부 직무 내용
             </p>
             <div css={cssObj.inputContainer}>
@@ -267,7 +267,9 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
             </div>
           </div>
           <div css={cssObj.container}>
-            <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.hire_number)}>채용 인원</p>
+            <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.hire_number))}>
+              채용 인원
+            </p>
             <div css={cssObj.hireNumberContainer}>
               <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-1, "0")}>
                 0명

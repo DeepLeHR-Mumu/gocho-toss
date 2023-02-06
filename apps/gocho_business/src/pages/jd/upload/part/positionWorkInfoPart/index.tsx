@@ -121,7 +121,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
   return (
     <>
       <div css={cssObj.container}>
-        <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.rotation_arr)}>교대 형태</p>
+        <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.rotation_arr))}>교대 형태</p>
         <div css={cssObj.optionContainer}>
           <button
             css={cssObj.input(20)}
@@ -163,8 +163,10 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
           </div>
         </div>
         <p css={cssObj.errorMessage}>
-          {!!formState.errors.position_arr?.[positionIndex]?.rotation_arr &&
-            `${formState.errors.position_arr?.[positionIndex]?.rotation_arr?.message}`}
+          {Boolean(
+            formState.errors.position_arr?.[positionIndex]?.rotation_arr &&
+              `${formState.errors.position_arr?.[positionIndex]?.rotation_arr?.message}`
+          )}
         </p>
       </div>
       <div css={cssObj.container}>
@@ -207,7 +209,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
         <div css={cssObj.placeInputContainer}>
           {watch("position_arr")[positionIndex].place.type === "일반" && (
             <>
-              <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.place)}>공장 근무지</p>
+              <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.place))}>공장 근무지</p>
               <div css={cssObj.factoryInputWrapper}>
                 <div css={cssObj.optionContainer}>
                   <button
@@ -371,7 +373,9 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
           )}
           {watch("position_arr")[positionIndex].place.type === "해외" && (
             <>
-              <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.place?.etc)}>해외 근무지</p>
+              <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.place?.etc))}>
+                해외 근무지
+              </p>
               <input
                 css={cssObj.input(47)}
                 placeholder="근무지를 작성해주세요"
@@ -388,7 +392,9 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
           )}
           {watch("position_arr")[positionIndex].place.type === "기타" && (
             <>
-              <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.place?.etc)}>기타 근무지</p>
+              <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.place?.etc))}>
+                기타 근무지
+              </p>
               <input
                 css={cssObj.input(47)}
                 placeholder="전국 순환, 입사 후 근무지 배정 등 특수 근무지를 작성해주세요"
@@ -406,7 +412,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
         </div>
       </div>
       <div css={cssObj.containerWithGuide}>
-        <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.pay_arr)}>급여</p>
+        <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.pay_arr))}>급여</p>
         <div css={cssObj.inputContainerWithGuide}>
           {payArr.fields.map((item, index) => (
             <div key={`payArr${item.id}`}>
@@ -525,7 +531,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
         </div>
       </div>
       <div css={cssObj.containerWithGuide}>
-        <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.preferred_etc_arr)}>
+        <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.preferred_etc_arr))}>
           기타 우대 사항(선택)
         </p>
         <div css={cssObj.inputContainerWithGuide}>
