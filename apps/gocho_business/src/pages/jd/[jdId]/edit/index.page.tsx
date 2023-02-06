@@ -26,6 +26,7 @@ import { useEndJd } from "@/apis/jd/useEndJd";
 import { jdArrKeyObj } from "@/apis/jd/useJdArr/type";
 
 import { JD_UPLOAD_MESSAGE_OBJ } from "@/pages/jd/upload/constant";
+import { INTERNAL_URL } from "@/constants/url";
 import { HeaderPart } from "./part/headerPart";
 import { BasicInfoPart } from "./part/basicInfoPart";
 import { PositionHeaderPart } from "./part/positionHeaderPart";
@@ -144,7 +145,8 @@ const JdEditPage: NextPageWithLayout = () => {
         {
           onSuccess: () => {
             jdEditDoneEvent();
-            setToast("등록되었습니다");
+            router.push(INTERNAL_URL.JD_LIST);
+            setToast("수정되었습니다");
           },
 
           onError: () => {

@@ -25,6 +25,10 @@ export const cssObj = {
     gap: 0 1.5rem;
   `,
 
+  date: css`
+    color: ${COLORS.GRAY35};
+  `,
+
   bottomContainer: css`
     display: flex;
     justify-content: space-between;
@@ -43,9 +47,18 @@ export const cssObj = {
     gap: 0 0.375rem;
   `,
 
+  infoIcon: css`
+    font-size: 1.25rem;
+    color: ${COLORS.GRAY65};
+  `,
+
   infoTitle: css`
     font-weight: 400;
     color: ${COLORS.GRAY60};
+  `,
+
+  info: css`
+    color: ${COLORS.GRAY40};
   `,
 
   buttonContainer: css`

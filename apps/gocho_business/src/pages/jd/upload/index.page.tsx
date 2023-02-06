@@ -19,6 +19,7 @@ import type { NextPageWithLayout } from "@/pages/index/type";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
 import { useAddJd } from "@/apis/jd/useAddJd";
 
+import { INTERNAL_URL } from "@/constants/url";
 import { HeaderPart } from "./part/headerPart";
 import { BasicInfoPart } from "./part/basicInfoPart";
 import { PositionHeaderPart } from "./part/positionHeaderPart";
@@ -103,6 +104,7 @@ const JdUploadPage: NextPageWithLayout = () => {
         {
           onSuccess: () => {
             jdUploadDoneEvent();
+            router.push(INTERNAL_URL.JD_LIST);
             setToast("등록되었습니다");
           },
 

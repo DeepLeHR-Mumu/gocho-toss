@@ -80,12 +80,11 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
       <div css={cssObj.topContainer}>
         <div css={cssObj.titleBox}>
           <div>
-            <CommonInfoBox
-              Icon={FiCalendar}
-              infoData={`${dayjs(jd.startTime).format("YY.MM.DD")}~${dayjs(jd.endTime).format("YY.MM.DD")}`}
-              infoName={jd.title}
-            />
-            {jd.cut && <p>채용시 마감</p>}
+            <strong>{jd.title}</strong>
+            <p css={cssObj.date}>{`${dayjs(jd.startTime).format("YY.MM.DD")}~${dayjs(jd.endTime).format(
+              "YY.MM.DD"
+            )}`}</p>
+            {jd.cut && <p css={cssObj.date}>채용시 마감</p>}
           </div>
           <CommonStatusChip status={jd.status.name} />
         </div>
@@ -97,22 +96,28 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
       <div css={cssObj.bottomContainer}>
         <div css={cssObj.bottomInfoContainer}>
           <div css={cssObj.infoBox}>
-            <AiOutlineNumber />
+            <div css={cssObj.infoIcon}>
+              <AiOutlineNumber />
+            </div>
             <strong css={cssObj.infoTitle}>식별번호</strong>
-            <p>{jd.id}</p>
+            <p css={cssObj.info}>{jd.id}</p>
           </div>
           <div css={cssObj.infoBox}>
-            <FiCalendar />
+            <div css={cssObj.infoIcon}>
+              <FiCalendar />
+            </div>
             <strong css={cssObj.infoTitle}>공고등록일</strong>
-            <p>{dayjs(jd.createdTime).format("YY.MM.DD HH:mm")}</p>
+            <p css={cssObj.info}>{dayjs(jd.createdTime).format("YY.MM.DD HH:mm")}</p>
           </div>
           <div css={cssObj.infoBox}>
-            <FiCalendar />
+            <div css={cssObj.infoIcon}>
+              <FiCalendar />
+            </div>
             <strong css={cssObj.infoTitle}>최종수정일</strong>
-            <p>{jd.updatedTime ? dayjs(jd.updatedTime).format("YY.MM.DD HH:mm") : "-"}</p>
+            <p css={cssObj.info}>{jd.updatedTime ? dayjs(jd.updatedTime).format("YY.MM.DD HH:mm") : "-"}</p>
           </div>
         </div>
-        {jd.uploader.is_mine && (
+        {jd.uploader.is_mine && !isExpired && (
           <div css={cssObj.buttonContainer}>
             <SharedButton
               radius="circle"
@@ -152,7 +157,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
             />
           </div>
         )}
-        {/* {isExpired && <div css={cssObj.inactiveLabel}>마감된 공고입니다</div>} */}
+        {isExpired && <div css={cssObj.inactiveLabel}>마감된 공고입니다</div>}
       </div>
     </div>
   );
