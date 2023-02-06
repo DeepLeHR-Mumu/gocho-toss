@@ -67,13 +67,15 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
 
   await page.getByText("있음").first().click();
   await page.getByText("있음").nth(1).click();
+  await page.locator("input[name='bus_etc']").fill("테스트를 위한 버스 기타정보입니다.");
+  await page.locator("input[name='dormitory_etc']").fill("테스트를 위한 기숙사 기타정보입니다.");
   await page.waitForTimeout(100);
 
   page.on("dialog", (dialog) => dialog.accept());
 
   const [afterPostResponse] = await Promise.all([
     page.waitForResponse((res) => res.url().includes("factories") && res.request().method() === "GET"),
-    page.getByRole("button", { name: "공장 등록" }).click(),
+    await page.getByRole("button", { name: "공장 등록" }).click(),
   ]);
 
   const afterFactoryListDataObj = await afterPostResponse.json();
