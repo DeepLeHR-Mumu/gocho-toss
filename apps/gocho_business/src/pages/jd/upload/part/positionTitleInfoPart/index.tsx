@@ -233,7 +233,11 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                       maxLength={70}
                       {...register(`position_arr.${positionIndex}.task_detail_arr.${index}.value`, {
                         required: "모든 칸이 채워져야 합니다",
-                        validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
+                        onBlur: (blurEvent) => {
+                          if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                            setValue(`position_arr.${positionIndex}.task_detail_arr.${index}.value`, "");
+                          }
+                        },
                       })}
                     />
                     {index !== 0 && (

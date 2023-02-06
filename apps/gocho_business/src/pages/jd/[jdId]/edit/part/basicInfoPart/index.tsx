@@ -56,7 +56,11 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
             }}
             {...register("title", {
               required: "공고 제목은 필수 입력 사항입니다",
-              validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
+              onBlur: (blurEvent) => {
+                if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                  setValue("title", "");
+                }
+              },
             })}
           />
           <p css={cssObj.errorMessage}>{formState.errors.title && formState.errors.title.message}</p>
@@ -129,8 +133,10 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                       }}
                       {...register(`process_arr.${index}.value`, {
                         required: "모든 칸이 채워져야 합니다",
-                        validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
-                        onBlur: () => {
+                        onBlur: (blurEvent) => {
+                          if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                            setValue(`process_arr.${index}.value`, "");
+                          }
                           trigger(`process_arr`);
                           focusedArrOnBlurHandler(setProcessIsFocusedArr, index);
                         },
@@ -194,8 +200,10 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                     }}
                     {...register(`apply_route_arr.${index}.value`, {
                       required: "모든 칸이 채워져야 합니다",
-                      validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
-                      onBlur: () => {
+                      onBlur: (blurEvent) => {
+                        if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                          setValue(`apply_route_arr.${index}.value`, "");
+                        }
                         trigger(`apply_route_arr`);
                         focusedArrOnBlurHandler(setApplyRouteIsFocusedArr, index);
                       },
@@ -305,7 +313,11 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                       placeholder="http"
                       {...register("apply_url", {
                         required: "링크는 필수 입력 사항입니다",
-                        validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
+                        onBlur: (blurEvent) => {
+                          if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                            setValue("apply_url", "");
+                          }
+                        },
                       })}
                     />
                   </label>
@@ -334,7 +346,11 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                     css={cssObj.applyUrlInput(47)}
                     {...register("apply_url", {
                       required: "링크는 필수 입력 사항입니다",
-                      validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
+                      onBlur: (blurEvent) => {
+                        if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                          setValue("apply_url", "");
+                        }
+                      },
                     })}
                   />
                 </label>
