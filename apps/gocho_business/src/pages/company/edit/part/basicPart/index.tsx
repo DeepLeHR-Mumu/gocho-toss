@@ -64,13 +64,16 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
           <strong css={cssObj.subTitle(errors.intro)}>기업 한줄 소개</strong>
           <input
             type="text"
-            {...register("intro", { required: true, maxLength: 120 })}
-            onBlur={(onBlurEvent) => {
-              if (onBlurEvent.target.value.trim().length === 0) {
-                setValue("intro", "");
-                setError("intro", { type: "required" });
-              }
-            }}
+            {...register("intro", {
+              required: true,
+              maxLength: 120,
+              onBlur: (onBlurEvent) => {
+                if (onBlurEvent.target.value.trim().length === 0) {
+                  setValue("intro", "");
+                  setError("intro", { type: "required" });
+                }
+              },
+            })}
             placeholder="한 줄로 기업을 소개해주세요"
             css={cssObj.input(errors.intro)}
           />
@@ -122,14 +125,16 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
         </div>
         <input
           type="text"
-          {...register("nozo.desc", { maxLength: 70 })}
+          {...register("nozo.desc", {
+            maxLength: 70,
+            onBlur: (onBlurEvent) => {
+              if (onBlurEvent.target.value.trim().length === 0) {
+                setValue("nozo.desc", "");
+              }
+            },
+          })}
           placeholder="보충설명(선택)"
           css={cssObj.input(errors.nozo?.desc)}
-          onBlur={(onBlurEvent) => {
-            if (onBlurEvent.target.value.trim().length === 0) {
-              setValue("nozo.desc", "");
-            }
-          }}
         />
       </div>
       <div css={cssObj.container(80)}>
@@ -152,14 +157,18 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             <div css={cssObj.payLabel}>
               <input
                 type="number"
-                {...register("pay_avg", { required: true, min: 1000, pattern: NUMBER_REGEXP })}
+                {...register("pay_avg", {
+                  required: true,
+                  min: 1000,
+                  pattern: NUMBER_REGEXP,
+                  onBlur: (onBlurEvent) => {
+                    if (Number(onBlurEvent.target.value) < 1000) {
+                      window.alert("월급이 아닌 연봉 기준입니다. 입력하신 정보가 맞나요?");
+                    }
+                  },
+                })}
                 placeholder="숫자만 입력해주세요"
                 css={cssObj.input(errors.pay_avg)}
-                onBlur={(onBlurEvent) => {
-                  if (Number(onBlurEvent.target.value) < 1000) {
-                    window.alert("월급이 아닌 연봉 기준입니다. 입력하신 정보가 맞나요?");
-                  }
-                }}
               />
               <p css={cssObj.textValue}>만원</p>
             </div>
@@ -169,14 +178,16 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
           <strong css={cssObj.infoTitle()}>기타 연봉 정보</strong>
           <input
             type="text"
-            {...register("pay_desc", { maxLength: 120 })}
+            {...register("pay_desc", {
+              maxLength: 120,
+              onBlur: (onBlurEvent) => {
+                if (onBlurEvent.target.value.trim().length === 0) {
+                  setValue("pay_desc", "");
+                }
+              },
+            })}
             placeholder="상여금, 성과급 등의 정보를 적어주세요"
             css={cssObj.input(errors.pay_desc)}
-            onBlur={(onBlurEvent) => {
-              if (onBlurEvent.target.value.trim().length === 0) {
-                setValue("pay_desc", "");
-              }
-            }}
           />
         </div>
       </div>
