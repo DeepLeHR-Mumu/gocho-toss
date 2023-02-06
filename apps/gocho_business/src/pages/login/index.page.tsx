@@ -26,7 +26,6 @@ import { cssObj } from "./style";
 
 const LoginPage: NextPage = () => {
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const router = useRouter();
 
   const queryClient = useQueryClient();
@@ -36,6 +35,8 @@ const LoginPage: NextPage = () => {
   const {
     register,
     watch,
+    setError,
+    clearErrors,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormValues>({ mode: "onChange" });
@@ -44,11 +45,9 @@ const LoginPage: NextPage = () => {
     postLogin(loginObj, {
       onError: (error) => {
         const errorResponse = error.response?.data;
-        if (errorResponse?.error_code === "BLANK_MEMBER") {
-          setErrorMsg(LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO);
-        }
-        if (errorResponse?.error_code === "NOT_MATCHED_INFO") {
-          setErrorMsg(LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO);
+        if (errorResponse?.error_code === "BLANK_MEMBER" || errorResponse?.error_code === "NOT_MATCHED_INFO") {
+          setError("email", { type: "custom", message: LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO });
+          setError("password", { type: "custom", message: LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO });
         }
       },
       onSuccess: (response) => {
@@ -103,7 +102,7 @@ const LoginPage: NextPage = () => {
 
           <form css={cssObj.formCSS} onSubmit={handleSubmit(loginSubmit)}>
             <ul>
-              <li css={cssObj.inputBox(errors.email?.message || errorMsg)}>
+              <li css={cssObj.inputBox(errors.email?.message)}>
                 <input
                   type="email"
                   placeholder="아이디(이메일)"
@@ -120,11 +119,15 @@ const LoginPage: NextPage = () => {
                     },
                   })}
                   onFocus={() => {
-                    setErrorMsg(null);
+                    if (errors.email?.message === LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO) {
+                      clearErrors("email");
+                      clearErrors("password");
+                    }
+                    clearErrors("email");
                   }}
                 />
               </li>
-              <li css={cssObj.inputBox(errors.password?.message || errorMsg)}>
+              <li css={cssObj.inputBox(errors.password?.message)}>
                 <input
                   type={isShowPassword ? "text" : "password"}
                   placeholder="비밀번호"
@@ -145,7 +148,11 @@ const LoginPage: NextPage = () => {
                     },
                   })}
                   onFocus={() => {
-                    setErrorMsg(null);
+                    if (errors.password?.message === LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO) {
+                      clearErrors("email");
+                      clearErrors("password");
+                    }
+                    clearErrors("password");
                   }}
                 />
                 <button
@@ -174,7 +181,7 @@ const LoginPage: NextPage = () => {
               </button>
             </div>
 
-            <p css={cssObj.errorMsg}>{errors.email?.message || errors.password?.message || errorMsg}</p>
+            <p css={cssObj.errorMsg}>{errors.email?.message || errors.password?.message}</p>
 
             <button type="submit" css={cssObj.submitButton(isEmail && isPassword)} disabled={!isEmail || !isPassword}>
               로그인

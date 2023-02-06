@@ -1,5 +1,4 @@
 import { FunctionComponent } from "react";
-import axios from "axios";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -24,9 +23,13 @@ export const FindPasswordBox: FunctionComponent = () => {
     register,
     handleSubmit,
     setError,
+    clearErrors,
     setValue,
-    formState: { errors, dirtyFields },
-  } = useForm<LoginFormValues>({ mode: "onBlur" });
+    watch,
+    formState: { errors },
+  } = useForm<LoginFormValues>({
+    mode: "onChange",
+  });
 
   const { setToast } = useToast();
   const { mutate: postFindPassword } = useFindPassword();
@@ -35,7 +38,7 @@ export const FindPasswordBox: FunctionComponent = () => {
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     postFindPassword(loginObj, {
       onError: (error) => {
-        if (axios.isAxiosError(error) && error.response?.status === 404)
+        if (error.response?.status === 404 && error.response?.data.error_code === "BLANK_MEMBER")
           return setError("email", { type: "custom", message: "가입되지 않은 이메일 입니다." });
 
         return null;
@@ -50,8 +53,6 @@ export const FindPasswordBox: FunctionComponent = () => {
   const closeFindPasswordModal = () => {
     closeModal();
   };
-
-  console.log(errors.email);
 
   return (
     <div css={cssObj.wrapper}>
@@ -80,13 +81,13 @@ export const FindPasswordBox: FunctionComponent = () => {
               setValue={() => {
                 setValue("email", "");
               }}
-              setError={() => {
-                setError("email", {});
+              watch={watch("email")}
+              clearError={() => {
+                clearErrors("email");
               }}
+              errorMsg={errors.email?.message}
               placeholder="이메일을 입력해주세요"
               label="이메일"
-              errorObj={errors.email}
-              isDirty={dirtyFields.email}
               inputType="email"
             />
           </li>

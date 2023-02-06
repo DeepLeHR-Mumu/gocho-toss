@@ -1,17 +1,13 @@
-import { FieldError, UseFormRegisterReturn } from "react-hook-form";
-
-export interface LoginFormValues {
-  email: string;
-}
+import { UseFormRegisterReturn } from "react-hook-form";
 
 export interface AccountInputProps {
   placeholder: string;
   label: string;
-  setError: () => void;
   setValue: () => void;
+  clearError: () => void;
+  watch: string | number | undefined;
   registerObj: UseFormRegisterReturn;
-  errorObj: FieldError | undefined;
-  isDirty: boolean | undefined;
+  errorMsg: string | undefined;
   inputType: "text" | "password" | "email";
 }
 

@@ -5,45 +5,30 @@ import { buttonCSS, container, errorMessage, errorMessageBox, inputCSS, labelCSS
 import { AccountInputProps, ColorStateDef } from "./type";
 
 export const AccountInput2: FunctionComponent<AccountInputProps> = ({
-  errorObj,
-  isDirty,
+  errorMsg,
   registerObj,
   label,
-  setError,
   setValue,
+  clearError,
+  watch,
   placeholder,
   inputType,
 }) => {
   const [isFocus, setIsFocus] = useState(false);
-  const [colorState, setColorState] = useState<ColorStateDef>("error");
-
-  const focusFunction = () => {
-    setError();
-    setColorState("focus");
-    setIsFocus(true);
-  };
-
-  const blurFunction = () => {
-    setIsFocus(false);
-  };
-
-  const resetValue = () => {
-    setValue();
-    setError();
-  };
+  const [colorState, setColorState] = useState<ColorStateDef>("default");
 
   useEffect(() => {
-    if (errorObj) {
+    if (errorMsg) {
       return setColorState("error");
+    }
+    if (!errorMsg && watch) {
+      return setColorState("success");
     }
     if (isFocus) {
       return setColorState("focus");
     }
-    if (!errorObj && isDirty) {
-      return setColorState("success");
-    }
     return setColorState("default");
-  }, [isFocus, errorObj, setColorState, isDirty]);
+  }, [isFocus, errorMsg, setColorState, watch]);
 
   return (
     <>
@@ -53,23 +38,35 @@ export const AccountInput2: FunctionComponent<AccountInputProps> = ({
           {...registerObj}
           css={inputCSS(colorState)}
           placeholder={placeholder}
-          onFocus={focusFunction}
-          onBlur={blurFunction}
+          onFocus={() => {
+            setIsFocus(true);
+          }}
+          onBlur={() => {
+            setIsFocus(false);
+          }}
           type={inputType}
         />
-        {errorObj && (
-          <button css={buttonCSS(colorState)} type="button" onClick={resetValue} aria-label={`${label} 제거`}>
+        {errorMsg && (
+          <button
+            css={buttonCSS(colorState)}
+            type="button"
+            onClick={() => {
+              setValue();
+              clearError();
+            }}
+            aria-label={`${label} 제거`}
+          >
             <FiX />
           </button>
         )}
-        {!errorObj && isDirty && (
+        {colorState === "success" && (
           <p css={buttonCSS(colorState)}>
             <FiCheckCircle />
           </p>
         )}
       </div>
       <div css={errorMessageBox}>
-        <p css={errorMessage}>{errorObj?.message}</p>
+        <p css={errorMessage}>{errorMsg}</p>
       </div>
     </>
   );

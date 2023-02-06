@@ -98,7 +98,7 @@ export const buttonCSS: buttonCSSDef = (colorState) => {
 };
 
 export const errorMessageBox = css`
-  min-height: 0.75rem;
+  min-height: 1.25rem;
   line-height: 1.6;
   margin-top: 0.2rem;
 `;

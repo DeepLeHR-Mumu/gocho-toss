@@ -1,11 +1,11 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
-import { AccountInput } from "shared-ui/common/atom/accountInput";
+import { AccountInput2 } from "shared-ui/common/atom/accountInput2";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 
@@ -21,7 +21,6 @@ import { LoginFormValues } from "./type";
 import { cssObj } from "./style";
 
 export const LoginBox: FunctionComponent = () => {
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const queryClient = useQueryClient();
 
   const { setUserInfoData } = useUserState();
@@ -32,19 +31,19 @@ export const LoginBox: FunctionComponent = () => {
     register,
     handleSubmit,
     setValue,
+    setError,
+    clearErrors,
     watch,
-    formState: { errors, dirtyFields },
+    formState: { errors },
   } = useForm<LoginFormValues>({ mode: "onChange" });
 
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     postLogin(loginObj, {
       onError: (error) => {
         const errorResponse = error.response?.data;
-        if (errorResponse?.error_code === "BLANK_MEMBER") {
-          setErrorMsg(LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO);
-        }
-        if (errorResponse?.error_code === "NOT_MATCHED_INFO") {
-          setErrorMsg(LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO);
+        if (errorResponse?.error_code === "BLANK_MEMBER" || errorResponse?.error_code === "NOT_MATCHED_INFO") {
+          setError("email", { type: "custom", message: LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO });
+          setError("password", { type: "custom", message: LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO });
         }
       },
       onSuccess: (response) => {
@@ -81,7 +80,7 @@ export const LoginBox: FunctionComponent = () => {
       <form css={cssObj.formCSS} onSubmit={handleSubmit(loginSubmit)}>
         <ul css={cssObj.formArr}>
           <li>
-            <AccountInput
+            <AccountInput2
               registerObj={register("email", {
                 required: LOGIN_ERROR_MESSAGES.BLANK_EMAIL,
                 pattern: {
@@ -96,15 +95,18 @@ export const LoginBox: FunctionComponent = () => {
               setValue={() => {
                 setValue("email", "");
               }}
+              clearError={() => {
+                clearErrors("email");
+              }}
+              watch={watch("email")}
               placeholder="이메일을 입력해주세요"
               label="이메일"
-              errorObj={errors.email}
-              isDirty={dirtyFields.email}
+              errorMsg={errors.email?.message}
               inputType="email"
             />
           </li>
           <li>
-            <AccountInput
+            <AccountInput2
               registerObj={register("password", {
                 required: LOGIN_ERROR_MESSAGES.BLANK_PWD,
                 minLength: { value: 8, message: LOGIN_ERROR_MESSAGES.MIN_PASSWORD },
@@ -117,16 +119,19 @@ export const LoginBox: FunctionComponent = () => {
               setValue={() => {
                 setValue("password", "");
               }}
+              clearError={() => {
+                clearErrors("password");
+              }}
+              watch={watch("password")}
+              errorMsg={errors.password?.message}
               placeholder="비밀번호를 입력해주세요"
               label="비밀번호"
-              errorObj={errors.password}
-              isDirty={dirtyFields.password}
               inputType="password"
             />
           </li>
         </ul>
         <div css={cssObj.errorBox}>
-          <p css={cssObj.errorMsgCSS}>{errorMsg}</p>
+          <p css={cssObj.errorMsgCSS}>{errors.email?.message || errors.password?.message}</p>
         </div>
 
         <div css={cssObj.loginButton}>

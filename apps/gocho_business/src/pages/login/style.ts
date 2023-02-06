@@ -39,7 +39,7 @@ export const cssObj = {
   formCSS: css`
     width: 100%;
   `,
-  inputBox: (isError?: undefined | null | string) => css`
+  inputBox: (isError: undefined | string) => css`
     margin-bottom: 1.75rem;
     position: relative;
     width: 100%;
