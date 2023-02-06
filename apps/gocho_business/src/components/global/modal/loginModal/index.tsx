@@ -5,7 +5,6 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
-import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant/errorMessage";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
@@ -17,11 +16,12 @@ import { useToast } from "@/globalStates/useToast";
 import { useUserState } from "@/globalStates/useUserState";
 import { loginSuccessEvent } from "@/ga/auth";
 
+import { LOGIN_ERROR_MESSAGES } from "./constant";
 import { LoginFormValues } from "./type";
 import { cssObj } from "./style";
 
 export const LoginBox: FunctionComponent = () => {
-  const [errorMsg, setErrorMsg] = useState<null | string>(null);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const queryClient = useQueryClient();
 
   const { setUserInfoData } = useUserState();
@@ -40,7 +40,12 @@ export const LoginBox: FunctionComponent = () => {
     postLogin(loginObj, {
       onError: (error) => {
         const errorResponse = error.response?.data;
-        setErrorMsg(errorResponse?.error_message as string);
+        if (errorResponse?.error_code === "BLANK_MEMBER") {
+          setErrorMsg(LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO);
+        }
+        if (errorResponse?.error_code === "NOT_MATCHED_INFO") {
+          setErrorMsg(LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO);
+        }
       },
       onSuccess: (response) => {
         loginSuccessEvent(watch("auto_login"));
@@ -78,10 +83,14 @@ export const LoginBox: FunctionComponent = () => {
           <li>
             <AccountInput
               registerObj={register("email", {
-                required: EMAIL_ERROR_MESSAGE.REQUIRED,
+                required: LOGIN_ERROR_MESSAGES.BLANK_EMAIL,
                 pattern: {
                   value: EMAIL_REGEXP,
-                  message: EMAIL_ERROR_MESSAGE.REGEX,
+                  message: LOGIN_ERROR_MESSAGES.WRONG_EMAIL,
+                },
+                maxLength: {
+                  value: 30,
+                  message: LOGIN_ERROR_MESSAGES.EXCEED_LENGTH_EMAIL,
                 },
               })}
               setValue={() => {
@@ -97,10 +106,13 @@ export const LoginBox: FunctionComponent = () => {
           <li>
             <AccountInput
               registerObj={register("password", {
-                required: PWD_ERROR_MESSAGE.REQUIRED,
-                minLength: { value: 8, message: PWD_ERROR_MESSAGE.LOGIN_MIN_MAX },
-                maxLength: { value: 20, message: PWD_ERROR_MESSAGE.LOGIN_MIN_MAX },
-                pattern: PWD_REGEXP,
+                required: LOGIN_ERROR_MESSAGES.BLANK_PWD,
+                minLength: { value: 8, message: LOGIN_ERROR_MESSAGES.MIN_PASSWORD },
+                maxLength: { value: 20, message: LOGIN_ERROR_MESSAGES.MAX_PASSWORD },
+                pattern: {
+                  value: PWD_REGEXP,
+                  message: LOGIN_ERROR_MESSAGES.NO_SPACE,
+                },
               })}
               setValue={() => {
                 setValue("password", "");
@@ -113,7 +125,9 @@ export const LoginBox: FunctionComponent = () => {
             />
           </li>
         </ul>
-        <div css={cssObj.errorBox}>{errorMsg && <p css={cssObj.errorMsgCSS}>{errorMsg}</p>}</div>
+        <div css={cssObj.errorBox}>
+          <p css={cssObj.errorMsgCSS}>{errorMsg}</p>
+        </div>
 
         <div css={cssObj.loginButton}>
           <NormalButton wide variant="filled" text="로그인 하기" isSubmit />

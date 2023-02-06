@@ -10,7 +10,7 @@ import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
 import gochoColorSrc from "shared-image/global/deepLeLogo/logoIconColor.svg";
-import { EMAIL_REGEXP } from "shared-constant/regExp";
+import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
 
 import { useModal } from "@/globalStates/useModal";
 import { INTERNAL_URL } from "@/constants/url";
@@ -19,6 +19,7 @@ import { TopBar } from "@/components/global/layout/topBar";
 import { useDoLogin } from "@/apis/auth/useDoLogin";
 import { loginPageFunnelEvent, loginSuccessEvent, signupButtonClickEvent } from "@/ga/auth";
 
+import { LOGIN_ERROR_MESSAGES } from "./constant";
 import { PageHead } from "./pageHead";
 import { LoginFormValues } from "./type";
 import { cssObj } from "./style";
@@ -43,7 +44,12 @@ const LoginPage: NextPage = () => {
     postLogin(loginObj, {
       onError: (error) => {
         const errorResponse = error.response?.data;
-        setErrorMsg(errorResponse?.error_message as string);
+        if (errorResponse?.error_code === "BLANK_MEMBER") {
+          setErrorMsg(LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO);
+        }
+        if (errorResponse?.error_code === "NOT_MATCHED_INFO") {
+          setErrorMsg(LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO);
+        }
       },
       onSuccess: (response) => {
         loginSuccessEvent(watch("auto_login"));
@@ -97,38 +103,48 @@ const LoginPage: NextPage = () => {
 
           <form css={cssObj.formCSS} onSubmit={handleSubmit(loginSubmit)}>
             <ul>
-              <li css={cssObj.inputBox(errors.email)}>
+              <li css={cssObj.inputBox(errors.email?.message || errorMsg)}>
                 <input
                   type="email"
                   placeholder="아이디(이메일)"
                   css={cssObj.inputCSS}
                   {...register("email", {
-                    required: "이메일을 입력해주세요.",
+                    required: LOGIN_ERROR_MESSAGES.BLANK_EMAIL,
                     maxLength: {
                       value: 30,
-                      message: "최대길이",
+                      message: LOGIN_ERROR_MESSAGES.EXCEED_LENGTH_EMAIL,
                     },
                     pattern: {
                       value: EMAIL_REGEXP,
-                      message: "패턴에 관한 에러",
+                      message: LOGIN_ERROR_MESSAGES.WRONG_EMAIL,
                     },
                   })}
-                  onChange={(onChangeEvent) => {
-                    register("email").onChange(onChangeEvent);
+                  onFocus={() => {
                     setErrorMsg(null);
                   }}
                 />
               </li>
-              <li css={cssObj.inputBox(errors.password)}>
+              <li css={cssObj.inputBox(errors.password?.message || errorMsg)}>
                 <input
                   type={isShowPassword ? "text" : "password"}
                   placeholder="비밀번호"
                   css={cssObj.inputCSS}
                   {...register("password", {
-                    required: "비밀번호를 입력해주세요.",
+                    required: LOGIN_ERROR_MESSAGES.BLANK_PWD,
+                    pattern: {
+                      value: PWD_REGEXP,
+                      message: LOGIN_ERROR_MESSAGES.NO_SPACE,
+                    },
+                    minLength: {
+                      value: 8,
+                      message: LOGIN_ERROR_MESSAGES.MIN_PASSWORD,
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: LOGIN_ERROR_MESSAGES.MAX_PASSWORD,
+                    },
                   })}
-                  onChange={(onChangeEvent) => {
-                    register("password").onChange(onChangeEvent);
+                  onFocus={() => {
                     setErrorMsg(null);
                   }}
                 />

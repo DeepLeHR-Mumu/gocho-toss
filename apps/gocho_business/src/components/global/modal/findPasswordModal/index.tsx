@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { EMAIL_REGEXP } from "shared-constant/regExp";
 import { EMAIL_ERROR_MESSAGE } from "shared-constant/errorMessage";
-import { AccountInput } from "shared-ui/common/atom/accountInput";
+import { AccountInput2 } from "shared-ui/common/atom/accountInput2";
 import { NormalButton } from "shared-ui/common/atom/button";
 
 import { useFindPassword } from "@/apis/auth/usefindPassword";
@@ -51,6 +51,8 @@ export const FindPasswordBox: FunctionComponent = () => {
     closeModal();
   };
 
+  console.log(errors.email);
+
   return (
     <div css={cssObj.wrapper}>
       <div css={cssObj.closeBtn}>
@@ -63,16 +65,23 @@ export const FindPasswordBox: FunctionComponent = () => {
       <form css={cssObj.formCSS} onSubmit={handleSubmit(loginSubmit)}>
         <ul css={cssObj.formArr}>
           <li>
-            <AccountInput
+            <AccountInput2
               registerObj={register("email", {
                 required: EMAIL_ERROR_MESSAGE.REQUIRED,
                 pattern: {
                   value: EMAIL_REGEXP,
                   message: EMAIL_ERROR_MESSAGE.REGEX,
                 },
+                maxLength: {
+                  value: 30,
+                  message: EMAIL_ERROR_MESSAGE.LOGIN_MIN_MAX,
+                },
               })}
               setValue={() => {
                 setValue("email", "");
+              }}
+              setError={() => {
+                setError("email", {});
               }}
               placeholder="이메일을 입력해주세요"
               label="이메일"
