@@ -141,8 +141,10 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
             size="medium"
             text="직무 삭제"
             onClickHandler={() => {
-              removePosition(positionIndex);
-              setIsCardOpen((prev) => prev.filter((item, index) => index !== positionIndex));
+              if (watch("position_arr").length > 1) {
+                removePosition(positionIndex);
+                setIsCardOpen((prev) => prev.filter((item, index) => index !== positionIndex));
+              }
             }}
           />
         </div>
