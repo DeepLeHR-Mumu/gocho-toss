@@ -7,6 +7,10 @@ export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ factory }) =>
   return (
     <section css={cssObj.sectionContainer}>
       <div css={cssObj.dataContainer}>
+        <strong css={cssObj.dataTitle}>회사 이름</strong>
+        <p css={cssObj.dataBox}>{factory.company.name}</p>
+      </div>
+      <div css={cssObj.dataContainer}>
         <strong css={cssObj.dataTitle}>공장 이름</strong>
         <p css={cssObj.dataBox}>{factory.name}</p>
       </div>

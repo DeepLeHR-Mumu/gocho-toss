@@ -25,6 +25,7 @@ export const cssObj = {
 
   dataBox: css`
     line-height: 1.5;
+    word-break: break-all;
   `,
 
   positionContainer: css`

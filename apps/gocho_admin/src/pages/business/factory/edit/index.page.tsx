@@ -81,6 +81,10 @@ const FactoryEditDetail: NextPage = () => {
   return (
     <main css={mainContainer}>
       <h2 css={pageTitle}>공장 변경 요청 확인</h2>
+      <div css={cssObj.companyNameContainer}>
+        <strong css={cssObj.companyTitle}>회사 이름</strong>
+        <p css={cssObj.companyName}>{factoryBeforeData.company.name}</p>
+      </div>
       <div css={cssObj.factoryCompareContainer}>
         <div css={cssObj.factoryContainer}>
           <strong css={cssObj.label}>BEFORE</strong>
