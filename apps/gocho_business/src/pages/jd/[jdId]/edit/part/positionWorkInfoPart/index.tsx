@@ -462,7 +462,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
         </div>
       </div>
       <div css={cssObj.container}>
-        <p css={cssObj.inputTitle(false)}>우대 자격증</p>
+        <p css={cssObj.inputTitle(false)}>우대 자격증(선택)</p>
         <div css={cssObj.optionContainer}>
           <input
             css={cssObj.input(20)}

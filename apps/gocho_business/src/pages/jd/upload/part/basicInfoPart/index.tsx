@@ -110,7 +110,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               상시공고
             </label>
             <label css={cssObj.label} htmlFor="cut">
-              <input type="checkbox" id="cut" {...register("cut")} />
+              <input type="checkbox" id="cut" {...register("cut")} disabled={isAlways} />
               <CheckBox isChecked={watch("cut")} />
               채용시 마감
             </label>

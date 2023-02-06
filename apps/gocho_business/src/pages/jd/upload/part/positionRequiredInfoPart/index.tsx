@@ -141,7 +141,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
         </div>
       </div>
       <div css={cssObj.container}>
-        <p>학력 조건</p>
+        <p>지원 가능 학력</p>
         <div css={cssObj.labelContainer}>
           <label css={cssObj.label} htmlFor={`middle${positionIndex}`}>
             <input
