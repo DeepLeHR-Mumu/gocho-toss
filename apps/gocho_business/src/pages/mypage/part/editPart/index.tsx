@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useRef, useEffect, useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -19,6 +19,7 @@ export const EditPart: FunctionComponent = () => {
     isNewPassword: false,
     isCheckPassword: false,
   });
+  const isLoading = useRef(false);
 
   const { setToast } = useToast();
   const { userInfoData } = useUserState();
@@ -35,6 +36,8 @@ export const EditPart: FunctionComponent = () => {
   } = useForm<EditFormValues>({ mode: "onChange" });
 
   const editSubmit: SubmitHandler<EditFormValues> = (editObj) => {
+    if (isLoading.current) return;
+    isLoading.current = true;
     editUserInfo(
       {
         ...editObj,
