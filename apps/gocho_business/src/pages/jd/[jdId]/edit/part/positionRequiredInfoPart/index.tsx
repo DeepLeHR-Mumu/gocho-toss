@@ -285,14 +285,14 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                 <input
                   id={`requiredEtcArr${item.id}`}
                   css={cssObj.erasableInput(47)}
-                  placeholder="군필 여부, 나이, 성별 등의 기타 조건을 적어주세요"
+                  placeholder="군필 여부, 나이, 성별 등의 기타 조건을 적어주세요 (최대 70자)"
+                  maxLength={70}
                   onFocus={() => {
                     clearErrors(`position_arr.${positionIndex}.required_etc_arr.${index}`);
                     focusedArrOnFocusHandler(setRequiredEtcIsFocusedArr, index);
                   }}
                   {...register(`position_arr.${positionIndex}.required_etc_arr.${index}.value`, {
                     required: { value: true, message: "모든 칸이 채워져야 합니다" },
-                    maxLength: { value: 70, message: "최대 입력 길이는 70자입니다" },
                     validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
                     onBlur: () => {
                       trigger(`position_arr.${positionIndex}.required_etc_arr`);

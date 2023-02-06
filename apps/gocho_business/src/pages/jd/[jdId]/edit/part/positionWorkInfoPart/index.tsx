@@ -414,14 +414,14 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                 <input
                   id={`payArr${item.id}`}
                   css={cssObj.erasableInput(47)}
-                  placeholder="급여 정보"
+                  placeholder="급여 정보 (최대 70자)"
+                  maxLength={70}
                   onFocus={() => {
                     clearErrors(`position_arr.${positionIndex}.pay_arr.${index}`);
                     focusedArrOnFocusHandler(setPayIsFocusedArr, index);
                   }}
                   {...register(`position_arr.${positionIndex}.pay_arr.${index}.value`, {
                     required: { value: true, message: "모든 칸이 채워져야 합니다" },
-                    maxLength: { value: 70, message: "최대 입력 길이는 70자입니다" },
                     validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
                     onBlur: () => {
                       trigger(`position_arr.${positionIndex}.pay_arr`);
@@ -533,12 +533,12 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                 <input
                   id={`preferredEtcArr${item.id}`}
                   css={cssObj.erasableInput(47)}
-                  placeholder="기타 우대 사항"
+                  placeholder="기타 우대 사항 (최대 70자)"
+                  maxLength={70}
                   onFocus={() => {
                     focusedArrOnFocusHandler(setPreferredEtcIsFocusedArr, index);
                   }}
                   {...register(`position_arr.${positionIndex}.preferred_etc_arr.${index}.value`, {
-                    maxLength: { value: 70, message: "최대 입력 길이는 70자입니다" },
                     onBlur: () => {
                       trigger(`position_arr.${positionIndex}.preferred_etc_arr`);
                       focusedArrOnBlurHandler(setPreferredEtcIsFocusedArr, index);

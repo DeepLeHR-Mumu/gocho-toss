@@ -49,13 +49,13 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
           <p css={cssObj.inputTitle(!!formState.errors.title)}>공고 제목</p>
           <input
             css={cssObj.input(47)}
-            placeholder="공고 제목"
+            placeholder="공고 제목 (최대 50자)"
+            maxLength={50}
             onFocus={() => {
               clearErrors("title");
             }}
             {...register("title", {
               required: { value: true, message: "공고 제목은 필수 입력 사항입니다" },
-              maxLength: { value: 50, message: "공고 제목의 최대 길이는 50자입니다" },
               validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
             })}
           />
@@ -121,14 +121,14 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                     <input
                       id={`processArr${item.id}`}
                       css={cssObj.erasableInput(11.5)}
-                      placeholder={`${index + 1}차`}
+                      placeholder={`${index + 1}차 (최대 20자)`}
+                      maxLength={20}
                       onFocus={() => {
                         clearErrors(`process_arr.${index}`);
                         focusedArrOnFocusHandler(setProcessIsFocusedArr, index);
                       }}
                       {...register(`process_arr.${index}.value`, {
                         required: { value: true, message: "모든 칸이 채워져야 합니다" },
-                        maxLength: { value: 20, message: "최대 입력 길이는 20자입니다" },
                         validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
                         onBlur: () => {
                           trigger(`process_arr`);
@@ -186,14 +186,14 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                   <input
                     id={`applyRouteArr${item.id}`}
                     css={cssObj.erasableInput(18)}
-                    placeholder="지원 방법/제출 서류"
+                    placeholder="지원 방법/제출 서류 (최대 30자)"
+                    maxLength={30}
                     onFocus={() => {
                       clearErrors(`apply_route_arr.${index}`);
                       focusedArrOnFocusHandler(setApplyRouteIsFocusedArr, index);
                     }}
                     {...register(`apply_route_arr.${index}.value`, {
                       required: { value: true, message: "모든 칸이 채워져야 합니다" },
-                      maxLength: { value: 30, message: "최대 입력 길이는 30자입니다" },
                       validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
                       onBlur: () => {
                         trigger(`apply_route_arr`);
@@ -351,8 +351,9 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                 <input
                   id={`etcArr${item.id}`}
                   css={cssObj.erasableInput(47)}
-                  placeholder="기타 사항 (선택)"
-                  {...register(`etc_arr.${index}.value`, { maxLength: 70 })}
+                  placeholder="기타 사항 (선택, 최대 70자)"
+                  maxLength={70}
+                  {...register(`etc_arr.${index}.value`)}
                 />
                 <DeleteInputButton
                   onClickHandler={() => {

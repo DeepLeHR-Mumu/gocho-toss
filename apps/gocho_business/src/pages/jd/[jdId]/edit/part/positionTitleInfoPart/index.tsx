@@ -238,10 +238,10 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                       onFocus={() => {
                         clearErrors(`position_arr.${positionIndex}.task_detail_arr.${index}`);
                       }}
-                      placeholder="합격시 구체적으로 어떤 일을 하게 되는지 명시해주세요"
+                      placeholder="합격시 구체적으로 어떤 일을 하게 되는지 명시해주세요 (최대 70자)"
+                      maxLength={70}
                       {...register(`position_arr.${positionIndex}.task_detail_arr.${index}.value`, {
                         required: { value: true, message: "모든 칸이 채워져야 합니다" },
-                        maxLength: { value: 70, message: "최대 입력 길이는 70자입니다" },
                         validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
                       })}
                     />
