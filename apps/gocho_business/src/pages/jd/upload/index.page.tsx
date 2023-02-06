@@ -39,7 +39,7 @@ const JdUploadPage: NextPageWithLayout = () => {
   const router = useRouter();
 
   const jobForm = useForm<JobFormValues>({
-    mode: "onBlur",
+    mode: "onTouched",
     reValidateMode: "onChange",
     defaultValues: {
       process_arr: [{ value: "" }, { value: "" }],
@@ -139,7 +139,7 @@ const JdUploadPage: NextPageWithLayout = () => {
       window.onbeforeunload = () => null;
       router.events.off("routeChangeStart", handleUnload);
     };
-  }, [isDirty, router, router.events]);
+  }, [isDirty, router.events]);
 
   useEffect(() => {
     jdUploadPageFunnelEvent();
@@ -152,7 +152,7 @@ const JdUploadPage: NextPageWithLayout = () => {
           <form onSubmit={handleSubmit(jobSubmitHandler)}>
             <HeaderPart />
             <BasicInfoPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
-            <PositionHeaderPart append={append} setIsCardOpen={setIsCardOpenArr} />
+            <PositionHeaderPart fields={fields} append={append} setIsCardOpen={setIsCardOpenArr} />
             <ul>
               {fields.map((item, index) => (
                 <li key={`${item.id}`} css={cssObj.cardContainer}>

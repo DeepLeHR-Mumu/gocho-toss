@@ -7,7 +7,7 @@ import { PositionHeaderPartProps } from "./type";
 import { BLANK_POSITION } from "../../constant";
 import { cssObj } from "./style";
 
-export const PositionHeaderPart: FunctionComponent<PositionHeaderPartProps> = ({ append, setIsCardOpen }) => (
+export const PositionHeaderPart: FunctionComponent<PositionHeaderPartProps> = ({ fields, append, setIsCardOpen }) => (
   <section css={cssObj.partContainer}>
     <div>
       <h3 css={cssObj.title}>직무별 상세정보</h3>
@@ -25,8 +25,10 @@ export const PositionHeaderPart: FunctionComponent<PositionHeaderPartProps> = ({
         size="medium"
         text="직무 카드 추가"
         onClickHandler={() => {
-          append(BLANK_POSITION);
-          setIsCardOpen((prev) => [...prev, false]);
+          if (fields.length < 10) {
+            append(BLANK_POSITION);
+            setIsCardOpen((prev) => [...prev, false]);
+          }
         }}
       />
     </div>
