@@ -21,7 +21,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
   const [linkType, setLinkType] = useState<"website" | "email">("website");
   const [randomApplyRouteGuideArr, setRandomApplyRouteGuideArr] = useState<string[]>([]);
 
-  const { watch, setValue, trigger, formState, register } = jdForm;
+  const { watch, setValue, trigger, formState, register, clearErrors } = jdForm;
 
   const alwaysButtonClickHandler = () => {
     setValue(`end_time`, isAlways ? "" : "9999-12-31T23:59");
@@ -32,31 +32,6 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
   const linkButtonClickHandler = (type: typeof linkType) => {
     setLinkType(type);
     setValue(`apply_url`, "");
-  };
-
-  const processArrErrorMsgMaker = () => {
-    // TODO: FieldArray에 대해서 하나의 함수로
-    const errorArray = formState.errors.process_arr;
-    if (errorArray) {
-      const values = Object.keys(errorArray).map((key) => errorArray?.[Number(key)]);
-      if (values.some((element) => element?.value?.type === "maxLength")) {
-        return "각 칸의 최대 입력 길이는 20자입니다";
-      }
-      return "추가한 모든 칸이 채워져야 합니다";
-    }
-    return null;
-  };
-
-  const applyRouteArrErrorMsgMaker = () => {
-    const errorArray = formState.errors.apply_route_arr;
-    if (errorArray) {
-      const values = Object.keys(errorArray).map((key) => errorArray?.[Number(key)]);
-      if (values.some((element) => element?.value?.type === "maxLength")) {
-        return "각 칸의 최대 입력 길이는 30자입니다";
-      }
-      return "추가한 모든 칸이 채워져야 합니다";
-    }
-    return null;
   };
 
   useEffect(() => {
@@ -71,31 +46,53 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
       </div>
       <div css={cssObj.dataWrapper}>
         <div css={cssObj.container}>
-          <p css={cssObj.inputTitle(!!formState.errors.title)}>공고 제목</p>
+          <p css={cssObj.inputTitle(Boolean(formState.errors.title))}>공고 제목</p>
           <input
             css={cssObj.input(47)}
-            placeholder="공고 제목"
-            {...register("title", { required: true, maxLength: 50 })}
+            placeholder="공고 제목 (최대 50자)"
+            maxLength={50}
+            onFocus={() => {
+              clearErrors("title");
+            }}
+            {...register("title", {
+              required: "공고 제목은 필수 입력 사항입니다",
+              onBlur: (blurEvent) => {
+                if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                  setValue("title", "");
+                }
+              },
+            })}
           />
-          <p css={cssObj.errorMessage}>
-            {formState.errors.title?.type === "required" && "공고 제목은 필수 입력 사항입니다"}
-            {formState.errors.title?.type === "maxLength" && "공고 제목의 최대 길이는 50자입니다"}
-          </p>
+          <p css={cssObj.errorMessage}>{formState.errors.title && formState.errors.title.message}</p>
         </div>
         <div css={cssObj.dateInputContainer}>
           <div>
-            <p css={cssObj.inputTitle(!!formState.errors.start_time)}>채용시작 일시</p>
-            <input css={cssObj.input(20)} type="datetime-local" {...register("start_time", { required: true })} />
-            <p css={cssObj.errorMessage}>{!!formState.errors.start_time && "시작 일시는 필수 입력 사항입니다"}</p>
+            <p css={cssObj.inputTitle(Boolean(formState.errors.start_time))}>채용시작 일시</p>
+            <input
+              css={cssObj.input(20)}
+              type="datetime-local"
+              onFocus={() => {
+                clearErrors("start_time");
+              }}
+              {...register("start_time", { required: "시작 일시는 필수 입력 사항입니다" })}
+            />
+            <p css={cssObj.errorMessage}>{formState.errors.start_time && formState.errors.start_time.message}</p>
           </div>
           <div>
-            <p css={cssObj.inputTitle(!!formState.errors.end_time)}>채용마감 일시</p>
+            <p css={cssObj.inputTitle(Boolean(formState.errors.end_time))}>채용마감 일시</p>
             {isAlways ? (
               <div css={cssObj.isAlwaysBlock}>상시 모집</div>
             ) : (
               <>
-                <input css={cssObj.input(20)} type="datetime-local" {...register("end_time", { required: true })} />
-                <p css={cssObj.errorMessage}>{!!formState.errors.end_time && "마감 일시는 필수 입력 사항입니다"}</p>
+                <input
+                  css={cssObj.input(20)}
+                  type="datetime-local"
+                  onFocus={() => {
+                    clearErrors("end_time");
+                  }}
+                  {...register("end_time", { required: "마감 일시는 필수 입력 사항입니다" })}
+                />
+                <p css={cssObj.errorMessage}>{formState.errors.end_time && formState.errors.end_time.message}</p>
               </>
             )}
           </div>
@@ -112,14 +109,14 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
               상시공고
             </label>
             <label css={cssObj.label} htmlFor="cut">
-              <input type="checkbox" id="cut" {...register("cut")} />
+              <input type="checkbox" id="cut" {...register("cut")} disabled={isAlways} />
               <CheckBox isChecked={watch("cut")} />
               채용시 마감
             </label>
           </div>
         </div>
         <div css={cssObj.containerWithGuide}>
-          <p css={cssObj.inputTitle(!!formState.errors.process_arr)}>채용 절차</p>
+          <p css={cssObj.inputTitle(Boolean(formState.errors.process_arr))}>채용 절차</p>
           <div css={cssObj.inputContainerWithGuide}>
             {processArr.fields.map((item, index) => (
               <div key={`processArr${item.id}`} css={cssObj.processBox}>
@@ -128,14 +125,18 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                     <input
                       id={`processArr${item.id}`}
                       css={cssObj.erasableInput(11.5)}
-                      placeholder={`${index + 1}차`}
+                      placeholder={`${index + 1}차 (최대 20자)`}
+                      maxLength={20}
                       onFocus={() => {
+                        clearErrors(`process_arr.${index}`);
                         focusedArrOnFocusHandler(setProcessIsFocusedArr, index);
                       }}
                       {...register(`process_arr.${index}.value`, {
-                        required: true,
-                        maxLength: 20,
-                        onBlur: () => {
+                        required: "모든 칸이 채워져야 합니다",
+                        onBlur: (blurEvent) => {
+                          if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                            setValue(`process_arr.${index}.value`, "");
+                          }
                           trigger(`process_arr`);
                           focusedArrOnBlurHandler(setProcessIsFocusedArr, index);
                         },
@@ -150,6 +151,9 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                       />
                     )}
                   </label>
+                  <p css={cssObj.arrayErrorMessage}>
+                    {formState?.errors?.process_arr?.[index] && formState?.errors?.process_arr?.[index]?.value?.message}
+                  </p>
                   <div css={cssObj.guideChipContainer}>
                     {processIsFocusedArr[index] &&
                       processGuideArr[index].map((processGuide) => (
@@ -178,10 +182,9 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
               />
             </div>
           </div>
-          <p css={cssObj.errorMessage}>{!!formState.errors.process_arr && processArrErrorMsgMaker()}</p>
         </div>
         <div css={cssObj.containerWithGuide}>
-          <p css={cssObj.inputTitle(!!formState.errors.apply_route_arr)}>지원 방법/제출 서류</p>
+          <p css={cssObj.inputTitle(Boolean(formState.errors.apply_route_arr))}>지원 방법/제출 서류</p>
           <div css={cssObj.inputContainerWithGuide}>
             {applyRouteArr.fields.map((item, index) => (
               <div key={`applyRouteArr${item.id}`}>
@@ -189,14 +192,18 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                   <input
                     id={`applyRouteArr${item.id}`}
                     css={cssObj.erasableInput(18)}
-                    placeholder="지원 방법/제출 서류"
+                    placeholder="지원 방법/제출 서류 (최대 30자)"
+                    maxLength={30}
                     onFocus={() => {
+                      clearErrors(`apply_route_arr.${index}`);
                       focusedArrOnFocusHandler(setApplyRouteIsFocusedArr, index);
                     }}
                     {...register(`apply_route_arr.${index}.value`, {
-                      required: true,
-                      maxLength: 30,
-                      onBlur: () => {
+                      required: "모든 칸이 채워져야 합니다",
+                      onBlur: (blurEvent) => {
+                        if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                          setValue(`apply_route_arr.${index}.value`, "");
+                        }
                         trigger(`apply_route_arr`);
                         focusedArrOnBlurHandler(setApplyRouteIsFocusedArr, index);
                       },
@@ -214,6 +221,10 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                     />
                   )}
                 </label>
+                <p css={cssObj.arrayErrorMessage}>
+                  {formState?.errors?.apply_route_arr?.[index] &&
+                    formState?.errors?.apply_route_arr?.[index]?.value?.message}
+                </p>
                 <div css={cssObj.guideChipContainer}>
                   {applyRouteIsFocusedArr[index] &&
                     randomApplyRouteGuideArr.map((applyRouteGuide) => (
@@ -248,13 +259,14 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
             <div css={cssObj.addButtonWrapper}>
               <AddFieldButton
                 onClickHandler={() => {
-                  applyRouteArr.append({ value: "" });
-                  setApplyRouteIsFocusedArr((prev) => [...prev, false]);
+                  if (applyRouteArr.fields.length < 10) {
+                    applyRouteArr.append({ value: "" });
+                    setApplyRouteIsFocusedArr((prev) => [...prev, false]);
+                  }
                 }}
               />
             </div>
           </div>
-          <p css={cssObj.errorMessage}>{!!formState.errors.apply_route_arr && applyRouteArrErrorMsgMaker()}</p>
         </div>
         <div css={cssObj.container}>
           <div css={cssObj.linkLabelContainer}>
@@ -270,7 +282,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                 }}
               />
               <div css={cssObj.radioBox} />
-              <p css={cssObj.labelTitle(!!formState.errors.apply_url)}>채용 링크</p>
+              <p css={cssObj.labelTitle(Boolean(formState.errors.apply_url))}>채용 링크</p>
             </label>
             <p>또는</p>
             <label css={cssObj.label} htmlFor="email">
@@ -285,7 +297,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                 }}
               />
               <div css={cssObj.radioBox} />
-              <p css={cssObj.labelTitle(!!formState.errors.apply_url)}>이메일 링크</p>
+              <p css={cssObj.labelTitle(Boolean(formState.errors.apply_url))}>이메일 링크</p>
             </label>
           </div>
           <div>
@@ -299,12 +311,19 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                     <input
                       css={cssObj.applyUrlInput(47)}
                       placeholder="http"
-                      {...register("apply_url", { required: true })}
+                      {...register("apply_url", {
+                        required: "링크는 필수 입력 사항입니다",
+                        onBlur: (blurEvent) => {
+                          if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                            setValue("apply_url", "");
+                          }
+                        },
+                      })}
                     />
                   </label>
                   <SharedTextLink externalUrl={`${watch("apply_url")}`} fontColor="blue" text="링크 미리보기" />
                 </div>
-                <p css={cssObj.errorMessage}>{!!formState.errors.apply_url && "링크는 필수 입력 사항입니다"}</p>
+                <p css={cssObj.errorMessage}>{Boolean(formState.errors.apply_url && "링크는 필수 입력 사항입니다")}</p>
                 <div css={cssObj.linkButtonContainer}>
                   <p>링크 복사하러 가기</p>
                   {applyExternalLinkArr.map((linkObj) => (
@@ -323,9 +342,19 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                   <span css={cssObj.inputLogo}>
                     <FiAtSign />
                   </span>
-                  <input css={cssObj.applyUrlInput(47)} {...register("apply_url", { required: true })} />
+                  <input
+                    css={cssObj.applyUrlInput(47)}
+                    {...register("apply_url", {
+                      required: "링크는 필수 입력 사항입니다",
+                      onBlur: (blurEvent) => {
+                        if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                          setValue("apply_url", "");
+                        }
+                      },
+                    })}
+                  />
                 </label>
-                <p css={cssObj.errorMessage}>{!!formState.errors.apply_url && formState.errors.apply_url.message}</p>
+                <p css={cssObj.errorMessage}>{formState.errors.apply_url && formState.errors.apply_url.message}</p>
               </div>
             )}
           </div>
@@ -338,8 +367,9 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                 <input
                   id={`etcArr${item.id}`}
                   css={cssObj.erasableInput(47)}
-                  placeholder="기타 사항 (선택)"
-                  {...register(`etc_arr.${index}.value`, { maxLength: 70 })}
+                  placeholder="기타 사항 (선택, 최대 70자)"
+                  maxLength={70}
+                  {...register(`etc_arr.${index}.value`)}
                 />
                 <DeleteInputButton
                   onClickHandler={() => {
@@ -351,7 +381,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
             <div css={cssObj.addButtonWrapper}>
               <AddFieldButton
                 onClickHandler={() => {
-                  etcArr.append({ value: "" });
+                  if (etcArr.fields.length < 10) etcArr.append({ value: "" });
                 }}
               />
             </div>

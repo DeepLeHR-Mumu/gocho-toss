@@ -46,7 +46,7 @@ const JdEditPage: NextPageWithLayout = () => {
   const { setToast } = useToast();
 
   const jdForm = useForm<JdFormValues>({
-    mode: "onBlur",
+    mode: "onTouched",
     reValidateMode: "onChange",
     defaultValues: {
       process_arr: [{ value: "" }, { value: "" }],
@@ -201,7 +201,6 @@ const JdEditPage: NextPageWithLayout = () => {
   }, [jdData, reset]);
 
   useEffect(() => {
-    // Block page refresh or close
     window.onbeforeunload = () => isDirty;
 
     const handleUnload = () => {
@@ -221,7 +220,7 @@ const JdEditPage: NextPageWithLayout = () => {
       router.events.off("routeChangeStart", handleUnload);
       window.onbeforeunload = () => null;
     };
-  }, [isDirty, router, router.events]);
+  }, [isDirty, router.events]);
 
   useEffect(() => {
     if (submitCount === 0) return;
@@ -247,7 +246,7 @@ const JdEditPage: NextPageWithLayout = () => {
           <form onSubmit={handleSubmit(jdEditHandler)}>
             <HeaderPart jdData={jdData} />
             <BasicInfoPart jdForm={jdForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
-            <PositionHeaderPart append={append} setIsCardOpen={setIsCardOpenArr} />
+            <PositionHeaderPart fields={fields} append={append} setIsCardOpen={setIsCardOpenArr} />
             <ul>
               {fields.map((item, index) => (
                 <li key={`${item.id}`} css={cssObj.cardContainer}>
