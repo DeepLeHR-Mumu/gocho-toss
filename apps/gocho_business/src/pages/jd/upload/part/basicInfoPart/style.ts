@@ -28,7 +28,7 @@ export const cssObj = {
   `,
 
   containerWithGuide: css`
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
   `,
 
   inputTitle: (isError: boolean) => css`
@@ -58,6 +58,15 @@ export const cssObj = {
   `,
 
   errorMessage: css`
+    margin-top: 0.25rem;
+    height: 0.75rem;
+    font-size: 0.75rem;
+    color: ${COLORS.ERROR_RED40};
+  `,
+
+  arrayErrorMessage: css`
+    position: absolute;
+    margin-top: 0.25rem;
     height: 0.75rem;
     font-size: 0.75rem;
     color: ${COLORS.ERROR_RED40};
@@ -76,7 +85,7 @@ export const cssObj = {
     justify-content: center;
     width: 20rem;
     height: 2.5rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
     text-align: center;
     background-color: ${COLORS.GRAY70};
     color: ${COLORS.GRAY30};
@@ -121,7 +130,7 @@ export const cssObj = {
     display: flex;
     overflow-y: visible;
     word-break: keep-all;
-    margin-top: 0.5rem;
+    margin-top: 0.375rem;
     gap: 0.5rem;
   `,
 
