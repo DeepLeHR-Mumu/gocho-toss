@@ -39,7 +39,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
   const { mutate: putCompanyDetail } = useAddCompanyDetail();
 
   const companyForm = useForm<PostSubmitValues>({
-    mode: "onBlur",
+    mode: "onChange",
   });
 
   const {
@@ -68,6 +68,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
               growth: formData.welfare.growth,
               vacation: formData.welfare.vacation,
             },
+            pay_desc: formData.pay_desc || null,
             nozo: {
               exists: formData.nozo.exists === "true",
               desc: formData.nozo.desc || null,

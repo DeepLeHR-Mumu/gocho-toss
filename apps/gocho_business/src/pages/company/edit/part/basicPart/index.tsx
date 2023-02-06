@@ -6,6 +6,7 @@ import { FiMap, FiMapPin, FiUsers } from "react-icons/fi";
 import { Spinner } from "shared-ui/common/atom/spinner";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { COLORS } from "shared-style/color";
+import { NUMBER_REGEXP } from "shared-constant/regExp";
 
 import { CommonRoundButton } from "@/components/common";
 import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
@@ -21,6 +22,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
     register,
     setValue,
     watch,
+    setError,
     formState: { errors },
   } = companyForm;
   const { userInfoData } = useUserState();
@@ -48,10 +50,11 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             <FiUsers />
             <input
               type="number"
+              step={1}
               onWheel={(event) => {
                 event.currentTarget.blur();
               }}
-              {...register("employee_number", { required: true, min: 0 })}
+              {...register("employee_number", { required: true, min: 1, pattern: NUMBER_REGEXP })}
               css={cssObj.input(errors.employee_number)}
             />
             <p css={cssObj.unit}>명</p>
@@ -65,6 +68,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             onBlur={(onBlurEvent) => {
               if (onBlurEvent.target.value.trim().length === 0) {
                 setValue("intro", "");
+                setError("intro", { type: "required" });
               }
             }}
             placeholder="한 줄로 기업을 소개해주세요"
@@ -148,9 +152,14 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             <div css={cssObj.payLabel}>
               <input
                 type="number"
-                {...register("pay_avg", { required: true, min: 0 })}
+                {...register("pay_avg", { required: true, min: 1000, pattern: NUMBER_REGEXP })}
                 placeholder="숫자만 입력해주세요"
                 css={cssObj.input(errors.pay_avg)}
+                onBlur={(onBlurEvent) => {
+                  if (Number(onBlurEvent.target.value) < 1000) {
+                    window.alert("월급이 아닌 연봉 기준입니다. 입력하신 정보가 맞나요?");
+                  }
+                }}
               />
               <p css={cssObj.textValue}>만원</p>
             </div>
