@@ -36,7 +36,7 @@ test("정보가 틀렸을 때", async ({ page }) => {
   await page.getByPlaceholder("아이디(이메일)").fill("noId@deeplehr.com");
   await page.getByPlaceholder("비밀번호").fill("1234");
   await page.getByRole("button", { name: "로그인" }).click();
-  await expect(page.getByText("해당 유저가 존재하지 않습니다.")).toBeVisible();
+  await expect(page.getByText("안전한 비밀번호를 위해 8~20자로 설정해주세요.")).toBeVisible();
 });
 
 test("로그인 안한 상태에서 타 페이지 접속시 블로킹", async ({ page }) => {
