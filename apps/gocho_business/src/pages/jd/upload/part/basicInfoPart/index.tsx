@@ -60,7 +60,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               clearErrors("title");
             }}
             {...register("title", {
-              required: { value: true, message: "공고 제목은 필수 입력 사항입니다" },
+              required: "공고 제목은 필수 입력 사항입니다",
               validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
             })}
           />
@@ -75,7 +75,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               onFocus={() => {
                 clearErrors("start_time");
               }}
-              {...register("start_time", { required: { value: true, message: "시작 일시는 필수 입력 사항입니다" } })}
+              {...register("start_time", { required: "시작 일시는 필수 입력 사항입니다" })}
             />
             <p css={cssObj.errorMessage}>{formState.errors.start_time && formState.errors.start_time.message}</p>
           </div>
@@ -91,7 +91,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                   onFocus={() => {
                     clearErrors("end_time");
                   }}
-                  {...register("end_time", { required: { value: true, message: "마감 일시는 필수 입력 사항입니다" } })}
+                  {...register("end_time", { required: "마감 일시는 필수 입력 사항입니다" })}
                 />
                 <p css={cssObj.errorMessage}>{formState.errors.end_time && formState.errors.end_time.message}</p>
               </>
@@ -133,7 +133,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                         focusedArrOnFocusHandler(setProcessIsFocusedArr, index);
                       }}
                       {...register(`process_arr.${index}.value`, {
-                        required: { value: true, message: "모든 칸이 채워져야 합니다" },
+                        required: "모든 칸이 채워져야 합니다",
                         validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
                         onBlur: () => {
                           trigger(`process_arr`);
@@ -198,7 +198,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                       focusedArrOnFocusHandler(setApplyRouteIsFocusedArr, index);
                     }}
                     {...register(`apply_route_arr.${index}.value`, {
-                      required: { value: true, message: "모든 칸이 채워져야 합니다" },
+                      required: "모든 칸이 채워져야 합니다",
                       validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
                       onBlur: () => {
                         trigger(`apply_route_arr`);
@@ -309,7 +309,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                       css={cssObj.applyUrlInput(47)}
                       placeholder="http"
                       {...register("apply_url", {
-                        required: { value: true, message: "링크는 필수 입력 사항입니다" },
+                        required: "링크는 필수 입력 사항입니다",
                         validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
                       })}
                     />
@@ -338,7 +338,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                   <input
                     css={cssObj.applyUrlInput(47)}
                     {...register("apply_url", {
-                      required: { value: true, message: "링크는 필수 입력 사항입니다" },
+                      required: "링크는 필수 입력 사항입니다",
                       validate: (value) => !!value.trim() || "빈 칸을 입력할 수 없습니다",
                     })}
                   />
