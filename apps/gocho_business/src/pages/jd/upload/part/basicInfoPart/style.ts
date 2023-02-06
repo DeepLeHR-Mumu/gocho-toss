@@ -85,7 +85,7 @@ export const cssObj = {
     justify-content: center;
     width: 20rem;
     height: 2.5rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
     text-align: center;
     background-color: ${COLORS.GRAY70};
     color: ${COLORS.GRAY30};
@@ -149,7 +149,7 @@ export const cssObj = {
     border-radius: 5px;
     background-color: ${COLORS.GRAY100};
     width: ${width}rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
 
     ::placeholder {
       color: ${COLORS.GRAY30};

@@ -71,48 +71,47 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
   };
 
   const factoryClickHandler = (factory: number) => {
+    const totalNumber =
+      (watch("position_arr")[positionIndex].place.factory_arr?.length || 0) +
+      (watch("position_arr")[positionIndex].place.address_arr?.length || 0);
     const isInList = watch("position_arr")[positionIndex].place.factory_arr?.includes(factory);
-    if (isInList) {
-      setValue(`position_arr.${positionIndex}.place.factory_arr`, [
-        ...(watch("position_arr")[positionIndex].place.factory_arr?.filter((element) => element !== factory) || []),
-      ]);
-    } else {
-      setValue(`position_arr.${positionIndex}.place.factory_arr`, [
-        ...(watch("position_arr")[positionIndex].place.factory_arr || []),
-        factory,
-      ]);
+    clearErrors(`position_arr.${positionIndex}.place`);
+
+    if (totalNumber < 10) {
+      if (isInList) {
+        setValue(`position_arr.${positionIndex}.place.factory_arr`, [
+          ...(watch("position_arr")[positionIndex].place.factory_arr?.filter((element) => element !== factory) || []),
+        ]);
+      } else {
+        setValue(`position_arr.${positionIndex}.place.factory_arr`, [
+          ...(watch("position_arr")[positionIndex].place.factory_arr || []),
+          factory,
+        ]);
+      }
     }
   };
 
   const certiClickHandler = (certi: string) => {
+    const totalNumber = watch("position_arr")[positionIndex].preferred_certi_arr?.length || 0;
     const isInList = watch("position_arr")[positionIndex].preferred_certi_arr?.includes(certi);
-    if (isInList) {
-      setValue(`position_arr.${positionIndex}.preferred_certi_arr`, [
-        ...(watch("position_arr")[positionIndex].preferred_certi_arr?.filter((element) => element !== certi) || []),
-      ]);
-    } else {
-      setValue(`position_arr.${positionIndex}.preferred_certi_arr`, [
-        ...(watch("position_arr")[positionIndex].preferred_certi_arr || []),
-        certi,
-      ]);
+
+    if (totalNumber < 10) {
+      if (isInList) {
+        setValue(`position_arr.${positionIndex}.preferred_certi_arr`, [
+          ...(watch("position_arr")[positionIndex].preferred_certi_arr?.filter((element) => element !== certi) || []),
+        ]);
+      } else {
+        setValue(`position_arr.${positionIndex}.preferred_certi_arr`, [
+          ...(watch("position_arr")[positionIndex].preferred_certi_arr || []),
+          certi,
+        ]);
+      }
     }
   };
 
   const rotationTextMaker = (selectedRotation: string[]) => {
     if (selectedRotation.length === 0) return "교대 형태 선택";
     return selectedRotation.join(", ");
-  };
-
-  const payErrorMsgMaker = () => {
-    const errorArray = formState.errors.position_arr?.[positionIndex]?.pay_arr;
-    if (errorArray) {
-      const values = Object.keys(errorArray).map((key) => errorArray?.[Number(key)]);
-      if (values.some((element) => element?.value?.type === "maxLength")) {
-        return "각 칸의 최대 입력 길이는 70자입니다";
-      }
-      return "추가한 모든 칸이 채워져야 합니다";
-    }
-    return null;
   };
 
   useEffect(() => {
@@ -122,7 +121,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
   return (
     <>
       <div css={cssObj.container}>
-        <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.rotation_arr)}>교대 형태</p>
+        <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.rotation_arr))}>교대 형태</p>
         <div css={cssObj.optionContainer}>
           <button
             css={cssObj.input(20)}
@@ -131,7 +130,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
               if (isRotationOpen && watch("position_arr")[positionIndex].rotation_arr.length === 0) {
                 setError(`position_arr.${positionIndex}.rotation_arr`, {
                   type: "required",
-                  message: "필수 입력 사항입니다",
+                  message: "교대 형태는 필수 입력 사항입니다",
                 });
               }
               setIsRotationOpen((prev) => !prev);
@@ -164,8 +163,10 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
           </div>
         </div>
         <p css={cssObj.errorMessage}>
-          {!!formState.errors.position_arr?.[positionIndex]?.rotation_arr &&
-            `${formState.errors.position_arr?.[positionIndex]?.rotation_arr?.message}`}
+          {Boolean(
+            formState.errors.position_arr?.[positionIndex]?.rotation_arr &&
+              `${formState.errors.position_arr?.[positionIndex]?.rotation_arr?.message}`
+          )}
         </p>
       </div>
       <div css={cssObj.container}>
@@ -208,13 +209,24 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
         <div css={cssObj.placeInputContainer}>
           {watch("position_arr")[positionIndex].place.type === "일반" && (
             <>
-              <p css={cssObj.inputTitle(false)}>공장 근무지</p>
+              <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.place))}>공장 근무지</p>
               <div css={cssObj.factoryInputWrapper}>
                 <div css={cssObj.optionContainer}>
                   <button
                     css={cssObj.input(20)}
                     type="button"
                     onClick={() => {
+                      if (
+                        isFactoryListOpen &&
+                        (watch("position_arr")[positionIndex].place.factory_arr?.length || 0) +
+                          (watch("position_arr")[positionIndex].place.address_arr?.length || 0) ===
+                          0
+                      ) {
+                        setError(`position_arr.${positionIndex}.place`, {
+                          type: "required",
+                          message: "공장과 일반 근무지 중 적어도 하나 이상의 근무지를 입력해야 합니다",
+                        });
+                      }
                       setIsFactoryListOpen((prev) => !prev);
                     }}
                     onBlur={() => {
@@ -270,6 +282,14 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                       type="button"
                       css={cssObj.smallDeleteButton}
                       onClick={() => {
+                        const totalNumber =
+                          (watch("position_arr")[positionIndex].place.factory_arr?.length || 0) +
+                          (watch("position_arr")[positionIndex].place.address_arr?.length || 0);
+                        if (totalNumber === 1)
+                          setError(`position_arr.${positionIndex}.place`, {
+                            type: "required",
+                            message: "공장과 일반 근무지 중 적어도 하나 이상의 근무지를 입력해야 합니다",
+                          });
                         setValue(`position_arr.${positionIndex}.place.factory_arr`, [
                           ...(jdForm
                             .watch("position_arr")
@@ -293,84 +313,106 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                 onClickHandler={() =>
                   openPostCodePopup({
                     onComplete: (addressObj: Address) => {
+                      clearErrors(`position_arr.${positionIndex}.place`);
                       setValue(`position_arr.${positionIndex}.place.address_arr`, [
                         ...(watch("position_arr")[positionIndex].place.address_arr || []),
                         addressObj.address,
                       ]);
                     },
+
+                    onClose: () => {
+                      const totalNumber =
+                        (watch("position_arr")[positionIndex].place.factory_arr?.length || 0) +
+                        (watch("position_arr")[positionIndex].place.address_arr?.length || 0);
+                      if (totalNumber === 0)
+                        setError(`position_arr.${positionIndex}.place`, {
+                          type: "required",
+                          message: "공장과 일반 근무지 중 적어도 하나 이상의 근무지를 입력해야 합니다",
+                        });
+                    },
                   })
                 }
               />
               <br />
-              {(watch("position_arr")[positionIndex].place.address_arr?.length || -1) > 0 && (
-                <p css={cssObj.inputTitle(false)}>일반 근무지</p>
-              )}
-              <div css={cssObj.placeContainer}>
-                {watch("position_arr")[positionIndex].place.address_arr?.map((address) => (
-                  <div key={`${address}${id}`}>
-                    <div css={cssObj.addressBox}>
-                      {address}
-                      <DeleteInputButton
-                        onClickHandler={() => {
-                          setValue(`position_arr.${positionIndex}.place.address_arr`, [
-                            ...(jdForm
-                              .watch("position_arr")
-                              [positionIndex].place.address_arr?.filter((element) => element !== address) || []),
-                          ]);
-                        }}
-                      />
-                    </div>
+              {watch("position_arr")[positionIndex].place.address_arr?.length !== 0 && (
+                <>
+                  <p css={cssObj.inputTitle(false)}>일반 근무지</p>
+                  <div css={cssObj.placeContainer}>
+                    {watch("position_arr")[positionIndex].place.address_arr?.map((address) => (
+                      <div key={`${address}${id}`}>
+                        <div css={cssObj.addressBox}>
+                          {address}
+                          <DeleteInputButton
+                            onClickHandler={() => {
+                              const totalNumber =
+                                (watch("position_arr")[positionIndex].place.factory_arr?.length || 0) +
+                                (watch("position_arr")[positionIndex].place.address_arr?.length || 0);
+                              if (totalNumber === 1)
+                                setError(`position_arr.${positionIndex}.place`, {
+                                  type: "required",
+                                  message: "공장과 일반 근무지 중 적어도 하나 이상의 근무지를 입력해야 합니다",
+                                });
+                              setValue(`position_arr.${positionIndex}.place.address_arr`, [
+                                ...(jdForm
+                                  .watch("position_arr")
+                                  [positionIndex].place.address_arr?.filter((element) => element !== address) || []),
+                              ]);
+                            }}
+                          />
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </>
+              )}
+              <p css={cssObj.errorMessage}>
+                {formState.errors.position_arr?.[positionIndex]?.place &&
+                  formState.errors.position_arr?.[positionIndex]?.place?.message}
+              </p>
             </>
           )}
           {watch("position_arr")[positionIndex].place.type === "해외" && (
             <>
-              <p
-                css={cssObj.inputTitle(
-                  watch("position_arr")[positionIndex].place.type === "해외" &&
-                    !!formState.errors.position_arr?.[positionIndex]?.place?.etc
-                )}
-              >
+              <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.place?.etc))}>
                 해외 근무지
               </p>
               <input
                 css={cssObj.input(47)}
                 placeholder="근무지를 작성해주세요"
-                {...register(`position_arr.${positionIndex}.place.etc`, { required: true })}
+                {...register(`position_arr.${positionIndex}.place.etc`, {
+                  required: "근무지는 필수 입력 사항입니다",
+                  validate: (value) => !!value?.trim() || "빈 칸을 입력할 수 없습니다",
+                })}
               />
               <p css={cssObj.errorMessage}>
-                {!!formState.errors.position_arr?.[positionIndex]?.place?.etc &&
-                  `${formState.errors.position_arr?.[positionIndex]?.place?.etc?.message}`}
+                {formState.errors.position_arr?.[positionIndex]?.place?.etc &&
+                  formState.errors.position_arr?.[positionIndex]?.place?.etc?.message}
               </p>
             </>
           )}
           {watch("position_arr")[positionIndex].place.type === "기타" && (
             <>
-              <p
-                css={cssObj.inputTitle(
-                  watch("position_arr")[positionIndex].place.type === "기타" &&
-                    !!formState.errors.position_arr?.[positionIndex]?.place?.etc
-                )}
-              >
+              <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.place?.etc))}>
                 기타 근무지
               </p>
               <input
                 css={cssObj.input(47)}
                 placeholder="전국 순환, 입사 후 근무지 배정 등 특수 근무지를 작성해주세요"
-                {...register(`position_arr.${positionIndex}.place.etc`, { required: true })}
+                {...register(`position_arr.${positionIndex}.place.etc`, {
+                  required: "근무지는 필수 입력 사항입니다",
+                  validate: (value) => !!value?.trim() || "빈 칸을 입력할 수 없습니다",
+                })}
               />
               <p css={cssObj.errorMessage}>
-                {!!formState.errors.position_arr?.[positionIndex]?.place?.etc &&
-                  `${formState.errors.position_arr?.[positionIndex]?.place?.etc?.message}`}
+                {formState.errors.position_arr?.[positionIndex]?.place?.etc &&
+                  formState.errors.position_arr?.[positionIndex]?.place?.etc?.message}
               </p>
             </>
           )}
         </div>
       </div>
       <div css={cssObj.containerWithGuide}>
-        <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.pay_arr)}>급여</p>
+        <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.pay_arr))}>급여</p>
         <div css={cssObj.inputContainerWithGuide}>
           {payArr.fields.map((item, index) => (
             <div key={`payArr${item.id}`}>
@@ -378,14 +420,18 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                 <input
                   id={`payArr${item.id}`}
                   css={cssObj.erasableInput(47)}
-                  placeholder="급여 정보"
+                  placeholder="급여 정보 (최대 70자)"
+                  maxLength={70}
                   onFocus={() => {
+                    clearErrors(`position_arr.${positionIndex}.pay_arr.${index}`);
                     focusedArrOnFocusHandler(setPayIsFocusedArr, index);
                   }}
                   {...register(`position_arr.${positionIndex}.pay_arr.${index}.value`, {
-                    required: true,
-                    maxLength: 70,
-                    onBlur: () => {
+                    required: "모든 칸이 채워져야 합니다",
+                    onBlur: (blurEvent) => {
+                      if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                        setValue(`position_arr.${positionIndex}.pay_arr.${index}.value`, "");
+                      }
                       trigger(`position_arr.${positionIndex}.pay_arr`);
                       focusedArrOnBlurHandler(setPayIsFocusedArr, index);
                     },
@@ -399,6 +445,10 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   }}
                 />
               </label>
+              <p css={cssObj.arrayErrorMessage}>
+                {formState?.errors?.position_arr?.[positionIndex]?.pay_arr?.[index] &&
+                  formState?.errors?.position_arr?.[positionIndex]?.pay_arr?.[index]?.value?.message}
+              </p>
               <div css={cssObj.guideChipContainer}>
                 {payIsFocusedArr[index] && (
                   <GuideChip
@@ -418,12 +468,9 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
             }}
           />
         </div>
-        <p css={cssObj.errorMessage}>
-          {!!formState.errors.position_arr?.[positionIndex]?.pay_arr && payErrorMsgMaker()}
-        </p>
       </div>
       <div css={cssObj.container}>
-        <p css={cssObj.inputTitle(false)}>우대 자격증</p>
+        <p css={cssObj.inputTitle(false)}>우대 자격증(선택)</p>
         <div css={cssObj.optionContainer}>
           <input
             css={cssObj.input(20)}
@@ -484,7 +531,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
         </div>
       </div>
       <div css={cssObj.containerWithGuide}>
-        <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.preferred_etc_arr)}>
+        <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.preferred_etc_arr))}>
           기타 우대 사항(선택)
         </p>
         <div css={cssObj.inputContainerWithGuide}>
@@ -494,12 +541,12 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                 <input
                   id={`preferredEtcArr${item.id}`}
                   css={cssObj.erasableInput(47)}
-                  placeholder="기타 우대 사항"
+                  placeholder="기타 우대 사항 (최대 70자)"
+                  maxLength={70}
                   onFocus={() => {
                     focusedArrOnFocusHandler(setPreferredEtcIsFocusedArr, index);
                   }}
                   {...register(`position_arr.${positionIndex}.preferred_etc_arr.${index}.value`, {
-                    maxLength: 70,
                     onBlur: () => {
                       trigger(`position_arr.${positionIndex}.preferred_etc_arr`);
                       focusedArrOnBlurHandler(setPreferredEtcIsFocusedArr, index);
@@ -514,6 +561,10 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   }}
                 />
               </label>
+              <p css={cssObj.arrayErrorMessage}>
+                {formState?.errors?.position_arr?.[positionIndex]?.preferred_etc_arr?.[index] &&
+                  formState?.errors?.position_arr?.[positionIndex]?.preferred_etc_arr?.[index]?.value?.message}
+              </p>
               <div css={cssObj.guideChipContainer}>
                 {preferredEtcIsFocusedArr[index] &&
                   randomPreferredEtcGuideArr.map((preferredEtcGuide) => (
@@ -554,9 +605,6 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
             }}
           />
         </div>
-        <p css={cssObj.errorMessage}>
-          {!!formState.errors.position_arr?.[positionIndex]?.preferred_etc_arr && "각 칸의 최대 입력 길이는 70자입니다"}
-        </p>
       </div>
     </>
   );

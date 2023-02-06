@@ -40,18 +40,6 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
     }
   };
 
-  const requiredEtcErrorMsgMaker = () => {
-    const errorArray = formState.errors.position_arr?.[positionIndex]?.required_etc_arr;
-    if (errorArray) {
-      const values = Object.keys(errorArray).map((key) => errorArray?.[Number(key)]);
-      if (values.some((element) => element?.value?.type === "maxLength")) {
-        return "각 칸의 최대 입력 길이는 70자입니다";
-      }
-      return "추가한 모든 칸이 채워져야 합니다";
-    }
-    return null;
-  };
-
   useEffect(() => {
     setRandomRequiredEtcGuideArr(requiredEtcGuideArr.sort(() => Math.random() - 0.5).slice(0, 3));
   }, []);
@@ -153,7 +141,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
         </div>
       </div>
       <div css={cssObj.container}>
-        <p>학력 조건</p>
+        <p>지원 가능 학력</p>
         <div css={cssObj.labelContainer}>
           <label css={cssObj.label} htmlFor={`middle${positionIndex}`}>
             <input
@@ -214,11 +202,12 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           </div>
         </div>
         <div css={cssObj.container}>
-          <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.min_year)}>최소경력(연)</p>
+          <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.min_year))}>최소경력(연)</p>
           <div css={cssObj.yearInputContainer}>
             <input
               type="number"
               min="1"
+              max="100"
               css={cssObj.activatableInput(isMinYearDisabled)}
               {...register(`position_arr.${positionIndex}.min_year`, {
                 required: { value: !isMinYearDisabled, message: "최소 경력은 필수 입력 사항입니다" },
@@ -249,10 +238,12 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           </p>
         </div>
         <div css={cssObj.container}>
-          <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.max_year)}>최대경력(연)</p>
+          <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.max_year))}>최대경력(연)</p>
           <div css={cssObj.yearInputContainer}>
             <input
               type="number"
+              min="1"
+              max="100"
               css={cssObj.activatableInput(isMaxYearDisabled)}
               {...register(`position_arr.${positionIndex}.max_year`, {
                 required: { value: !isMaxYearDisabled, message: "최대 경력은 필수 입력 사항입니다" },
@@ -284,7 +275,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
         </div>
       </div>
       <div css={cssObj.containerWithGuide}>
-        <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.required_etc_arr)}>
+        <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.required_etc_arr))}>
           기타 지원 조건
         </p>
         <div css={cssObj.inputContainerWithGuide}>
@@ -294,14 +285,18 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                 <input
                   id={`requiredEtcArr${item.id}`}
                   css={cssObj.erasableInput(47)}
-                  placeholder="군필 여부, 나이, 성별 등의 기타 조건을 적어주세요"
+                  placeholder="군필 여부, 나이, 성별 등의 기타 조건을 적어주세요 (최대 70자)"
+                  maxLength={70}
                   onFocus={() => {
+                    clearErrors(`position_arr.${positionIndex}.required_etc_arr.${index}`);
                     focusedArrOnFocusHandler(setRequiredEtcIsFocusedArr, index);
                   }}
                   {...register(`position_arr.${positionIndex}.required_etc_arr.${index}.value`, {
-                    required: true,
-                    maxLength: 70,
-                    onBlur: () => {
+                    required: "모든 칸이 채워져야 합니다",
+                    onBlur: (blurEvent) => {
+                      if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                        setValue("title", "");
+                      }
                       trigger(`position_arr.${positionIndex}.required_etc_arr`);
                       focusedArrOnBlurHandler(setRequiredEtcIsFocusedArr, index);
                     },
@@ -315,6 +310,10 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                   }}
                 />
               </label>
+              <p css={cssObj.arrayErrorMessage}>
+                {formState?.errors?.position_arr?.[positionIndex]?.required_etc_arr?.[index] &&
+                  formState?.errors?.position_arr?.[positionIndex]?.required_etc_arr?.[index]?.value?.message}
+              </p>
               <div css={cssObj.guideChipContainer}>
                 {requiredEtcIsFocusedArr[index] &&
                   randomRequiredEtcGuideArr.map((requiredEtcGuide) => (
@@ -350,14 +349,13 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           ))}
           <AddFieldButton
             onClickHandler={() => {
-              requiredEtcArr.append({ value: "" });
-              setRequiredEtcIsFocusedArr((prev) => [...prev, false]);
+              if (requiredEtcArr.fields.length < 10) {
+                requiredEtcArr.append({ value: "" });
+                setRequiredEtcIsFocusedArr((prev) => [...prev, false]);
+              }
             }}
           />
         </div>
-        <p css={cssObj.errorMessage}>
-          {!!formState.errors.position_arr?.[positionIndex]?.required_etc_arr && requiredEtcErrorMsgMaker()}
-        </p>
       </div>
     </>
   );

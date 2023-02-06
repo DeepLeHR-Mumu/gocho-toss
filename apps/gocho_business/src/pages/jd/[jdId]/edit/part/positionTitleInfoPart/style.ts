@@ -40,7 +40,7 @@ export const cssObj = {
   `,
 
   container: css`
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   `,
 
   inputTitle: (isError: boolean) => css`
@@ -118,11 +118,21 @@ export const cssObj = {
   `,
 
   desc: (isErrorMessage: boolean) => css`
+    margin-top: 0.25rem;
     font-size: 0.75rem;
     color: ${isErrorMessage ? COLORS.ERROR_RED40 : COLORS.GRAY10};
   `,
 
   errorMessage: css`
+    margin-top: 0.25rem;
+    height: 0.75rem;
+    font-size: 0.75rem;
+    color: ${COLORS.ERROR_RED40};
+  `,
+
+  arrayErrorMessage: css`
+    position: absolute;
+    margin-top: 0.25rem;
     height: 0.75rem;
     font-size: 0.75rem;
     color: ${COLORS.ERROR_RED40};
@@ -132,7 +142,7 @@ export const cssObj = {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 1rem 2rem;
+    gap: 1.75rem 2rem;
   `,
 
   inputLabel: css`
@@ -149,7 +159,7 @@ export const cssObj = {
     border: 1px solid ${COLORS.GRAY10};
     border-radius: 5px;
     width: ${width}rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
     background-color: ${COLORS.GRAY100};
 
     ::placeholder {
