@@ -14,7 +14,6 @@ import { EditFormValues, PasswordShowObjDef } from "./type";
 import { cssObj } from "./style";
 
 export const EditPart: FunctionComponent = () => {
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [passwordShowObj, setPasswordShowObj] = useState<PasswordShowObjDef>({
     isOriginPassword: false,
     isNewPassword: false,
@@ -31,6 +30,7 @@ export const EditPart: FunctionComponent = () => {
     watch,
     reset,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<EditFormValues>({ mode: "onChange" });
 
@@ -43,7 +43,9 @@ export const EditPart: FunctionComponent = () => {
       {
         onError: (error) => {
           const errorResponse = error.response?.data;
-          setErrorMsg(errorResponse?.error_message as string);
+          if (errorResponse?.error_code === "NOT_MATCHED_PWD") {
+            setError("origin_password", { type: "custom", message: EDIT_PASSWORD_MESSAGE.ORIGIN_VALIDATE });
+          }
         },
         onSuccess: (response) => {
           reset({
@@ -97,13 +99,8 @@ export const EditPart: FunctionComponent = () => {
       <form onSubmit={handleSubmit(editSubmit)}>
         <ul css={cssObj.formBox}>
           <li>
-            <strong css={cssObj.formTitle(errors.origin_password !== undefined || errorMsg !== null)}>
-              현재 비밀번호
-            </strong>
-            <label
-              htmlFor="origin_password"
-              css={cssObj.label(errors.origin_password !== undefined || errorMsg !== null)}
-            >
+            <strong css={cssObj.formTitle(errors.origin_password?.message)}>현재 비밀번호</strong>
+            <label htmlFor="origin_password" css={cssObj.label(errors.origin_password?.message)}>
               <input
                 css={cssObj.input}
                 type={passwordShowObj.isOriginPassword ? "text" : "password"}
@@ -124,7 +121,6 @@ export const EditPart: FunctionComponent = () => {
                     message: EDIT_PASSWORD_MESSAGE.PATTERN,
                   },
                 })}
-                onFocus={() => setErrorMsg(null)}
               />
               <button
                 css={cssObj.showButton}
@@ -141,14 +137,12 @@ export const EditPart: FunctionComponent = () => {
               </button>
             </label>
             <div css={cssObj.errorBox}>
-              {(errors.origin_password?.message || errorMsg) && (
-                <p css={cssObj.errorDesc}>{errors.origin_password?.message || errorMsg}</p>
-              )}
+              <p css={cssObj.errorDesc}>{errors.origin_password?.message}</p>
             </div>
           </li>
           <li>
-            <strong css={cssObj.formTitle(errors.new_password !== undefined)}>새 비밀번호</strong>
-            <label htmlFor="new_password" css={cssObj.label(errors.new_password !== undefined)}>
+            <strong css={cssObj.formTitle(errors.new_password?.message)}>새 비밀번호</strong>
+            <label htmlFor="new_password" css={cssObj.label(errors.new_password?.message)}>
               <input
                 css={cssObj.input}
                 type={passwordShowObj.isNewPassword ? "text" : "password"}
@@ -185,12 +179,12 @@ export const EditPart: FunctionComponent = () => {
               </button>
             </label>
             <div css={cssObj.errorBox}>
-              {errors.new_password?.message && <p css={cssObj.errorDesc}>{errors.new_password?.message}</p>}
+              <p css={cssObj.errorDesc}>{errors.new_password?.message}</p>
             </div>
           </li>
           <li>
-            <strong css={cssObj.formTitle(errors.check_password !== undefined)}>비밀번호 확인</strong>
-            <label htmlFor="check_password" css={cssObj.label(errors.check_password !== undefined)}>
+            <strong css={cssObj.formTitle(errors.check_password?.message)}>비밀번호 확인</strong>
+            <label htmlFor="check_password" css={cssObj.label(errors.check_password?.message)}>
               <input
                 css={cssObj.input}
                 type={passwordShowObj.isCheckPassword ? "text" : "password"}
@@ -210,7 +204,7 @@ export const EditPart: FunctionComponent = () => {
                     value: PWD_REGEXP,
                     message: EDIT_PASSWORD_MESSAGE.PATTERN,
                   },
-                  validate: (value) => watch("new_password") === value,
+                  validate: (value) => watch("new_password") === value || EDIT_PASSWORD_MESSAGE.VALIDATE,
                 })}
               />
               <button
@@ -228,17 +222,17 @@ export const EditPart: FunctionComponent = () => {
               </button>
             </label>
             <div css={cssObj.errorBox}>
-              {(errors.check_password?.message || errors.check_password?.type === "validate") && (
-                <p css={cssObj.errorDesc}>{errors.check_password.message || EDIT_PASSWORD_MESSAGE.VALIDATE}</p>
-              )}
+              <p css={cssObj.errorDesc}>{errors.check_password?.message}</p>
             </div>
           </li>
         </ul>
 
         <button
-          css={cssObj.submitButton(isOriginPassword && isNewPassword && isCheckPassword)}
+          css={cssObj.submitButton(
+            isOriginPassword && isNewPassword && isCheckPassword && Object.keys(errors).length === 0
+          )}
           type="submit"
-          disabled={!isOriginPassword || !isNewPassword || !isCheckPassword}
+          disabled={!isOriginPassword || !isNewPassword || !isCheckPassword || Object.keys(errors).length !== 0}
         >
           회원정보 변경 저장
         </button>
