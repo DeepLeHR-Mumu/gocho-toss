@@ -62,6 +62,7 @@ const BusinessFactoryList: NextPage = () => {
           <thead>
             <tr css={cssObj.factoryContainer}>
               <th css={cssObj.factoryIdBox}>공장 ID</th>
+              <th css={cssObj.companyNameBox}>회사</th>
               <th css={cssObj.factoryNameBox}>공장 이름</th>
               <th css={cssObj.buttonContainer}> </th>
             </tr>

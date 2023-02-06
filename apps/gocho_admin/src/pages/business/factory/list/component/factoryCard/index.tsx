@@ -10,6 +10,7 @@ const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factory }) => {
   return (
     <tr css={cssObj.factoryContainer}>
       <td css={cssObj.factoryIdBox}>{factory.id}</td>
+      <td css={cssObj.companyNameBox}>{factory.company.name}</td>
       <td css={cssObj.factoryNameBox}>{factory.name}</td>
       <td css={cssObj.activeButton}>
         <Link
