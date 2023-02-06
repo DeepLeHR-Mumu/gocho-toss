@@ -42,8 +42,10 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
     <>
       {factoryDataArr.map((factoryData, index) => {
         const totalEmployeeCount = factoryData.maleNumber + factoryData.femaleNumber;
-        const malePercentage = Math.round((100 * factoryData.maleNumber) / totalEmployeeCount);
-        const femalePercentage = Math.round((100 * factoryData.femaleNumber) / totalEmployeeCount);
+        const malePercentage =
+          factoryData.maleNumber === 0 ? 0 : Math.round((100 * factoryData.maleNumber) / totalEmployeeCount);
+        const femalePercentage =
+          factoryData.femaleNumber === 0 ? 0 : Math.round((100 * factoryData.femaleNumber) / totalEmployeeCount);
 
         return (
           <div css={cssObj.wrapper} key={factoryData.id} data-testid="factory/list/factoryCardListPart">
@@ -121,7 +123,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
               <div css={cssObj.infoItem}>
                 <CommonInfoBox
                   infoName="임직원"
-                  infoData={`${factoryData.maleNumber + factoryData.femaleNumber} 명`}
+                  infoData={`${Intl.NumberFormat("kr").format(factoryData.maleNumber + factoryData.femaleNumber)} 명`}
                   Icon={FiUsers}
                 />
               </div>

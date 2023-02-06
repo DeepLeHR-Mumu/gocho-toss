@@ -8,7 +8,7 @@ import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { cssObj } from "./style";
 import { FactoryDetailInfoProps } from "./type";
 
-export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ formObj,  totalWorkerNumber }) => {
+export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ formObj, totalWorkerNumber }) => {
   const { register, formState } = formObj;
   return (
     <div css={cssObj.gapContainer} data-testid="factory/list/FactoryDetailInfo">
@@ -19,7 +19,9 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ f
             <div css={cssObj.iconBox}>
               <FiUsers />
             </div>
-            <p css={cssObj.totalWorkerNumber}>{totalWorkerNumber === 0 ? "자동계산" : `${totalWorkerNumber} 명`}</p>
+            <p css={cssObj.totalWorkerNumber}>
+              {totalWorkerNumber === 0 ? "자동계산" : `${Intl.NumberFormat("kr").format(totalWorkerNumber)} 명`}
+            </p>
           </div>
         </div>
         <div css={cssObj.box}>
@@ -42,6 +44,7 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ f
                     valueAsNumber: true,
                   })}
                   type="number"
+                  min="0"
                   placeholder="남성"
                   css={cssObj.manWomanInput(formState.errors.male_number?.type === "required")}
                 />
@@ -57,6 +60,7 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ f
                   {...register("female_number", { required: true, valueAsNumber: true })}
                   placeholder="여성"
                   type="number"
+                  min="0"
                   css={cssObj.manWomanInput(formState.errors.female_number?.type === "required")}
                 />
                 <p css={cssObj.number}>명</p>

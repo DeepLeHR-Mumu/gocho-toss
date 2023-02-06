@@ -21,8 +21,7 @@ import { cssObj } from "./style";
 import { FactoryRegisterDef, RegisterPartProps } from "./type";
 import { FactoryBaseInfo } from "../../component/factoryBaseInfo";
 import { FactoryDetailInfo } from "../../component/factoryDetailInfo";
-import { defaultInput } from "./constant";
-// import { defaultInput, FACTORY_MESSSAGE_OBJ } from "./constant";
+import { defaultInput, FACTORY_MESSSAGE_OBJ } from "./constant";
 
 export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingIndex, setEditingIndex }) => {
   const isLoading = useRef(false);
@@ -40,39 +39,37 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingInde
   const { mutate: addFactoryMutation } = useAddFactory();
 
   const factoryPostSubmitHandler = (factoryRequestObj: FactoryRegisterDef) => {
-    // console.log("시도");
     if (isLoading.current) {
       return;
     }
-    // console.log("실제요청");
     isLoading.current = true;
     if (editingIndex === null) {
       factoryUploadConfirmEvent();
     }
     factoryEditConfirmEvent();
-    // if (window.confirm(FACTORY_MESSSAGE_OBJ.REGISTER)) {
-    addFactoryMutation(
-      {
-        ...factoryRequestObj,
-        bus_bool: factoryRequestObj.bus_bool === "true",
-        dormitory_bool: factoryRequestObj.dormitory_bool === "true",
-        id: editingIndex === null ? undefined : factoryDataArr?.[Number(editingIndex)]?.id,
-      },
-      {
-        onSuccess: () => {
-          if (editingIndex === null) {
-            factoryUploadDoneEvent();
-            return;
-          }
-          factoryEditDoneEvent();
+    if (window.confirm(FACTORY_MESSSAGE_OBJ.REGISTER)) {
+      addFactoryMutation(
+        {
+          ...factoryRequestObj,
+          bus_bool: factoryRequestObj.bus_bool === "true",
+          dormitory_bool: factoryRequestObj.dormitory_bool === "true",
+          id: editingIndex === null ? undefined : factoryDataArr?.[Number(editingIndex)]?.id,
         },
-        onSettled: () => {
-          isLoading.current = false;
-        },
-      }
-    );
-    setEditingIndex(null);
-    // }
+        {
+          onSuccess: () => {
+            if (editingIndex === null) {
+              factoryUploadDoneEvent();
+              return;
+            }
+            factoryEditDoneEvent();
+          },
+          onSettled: () => {
+            isLoading.current = false;
+          },
+        }
+      );
+      setEditingIndex(null);
+    }
   };
 
   useEffect(() => {
