@@ -263,11 +263,13 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                   </p>
                 </div>
               ))}
-              <AddFieldButton
-                onClickHandler={() => {
-                  if (taskDetailArr.fields.length < 10) taskDetailArr.append({ value: "" });
-                }}
-              />
+              {taskDetailArr.fields.length < 10 && (
+                <AddFieldButton
+                  onClickHandler={() => {
+                    taskDetailArr.append({ value: "" });
+                  }}
+                />
+              )}
             </div>
           </div>
           <div css={cssObj.container}>
@@ -275,15 +277,6 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
               채용 인원
             </p>
             <div css={cssObj.hireNumberContainer}>
-              <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-1, "0")}>
-                0명
-              </button>
-              <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-2, "00")}>
-                00명
-              </button>
-              <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-3, "000")}>
-                000명
-              </button>
               <div css={cssObj.hireNumberInputContainer}>
                 {(watch("position_arr")[positionIndex].hire_number || 1) < 0 ? (
                   <>
@@ -313,6 +306,15 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                   </>
                 )}
               </div>
+              <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-1, "0")}>
+                0명
+              </button>
+              <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-2, "00")}>
+                00명
+              </button>
+              <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-3, "000")}>
+                000명
+              </button>
             </div>
             <p css={cssObj.errorMessage}>
               {formState.errors.position_arr?.[positionIndex]?.hire_number &&

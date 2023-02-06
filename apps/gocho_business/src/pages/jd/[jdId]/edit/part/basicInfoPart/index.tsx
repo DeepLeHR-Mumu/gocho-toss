@@ -175,11 +175,13 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
               </div>
             ))}
             <div css={cssObj.addButtonWrapper}>
-              <AddFieldButton
-                onClickHandler={() => {
-                  if (processArr.fields.length < 8) processArr.append({ value: "" });
-                }}
-              />
+              {processArr.fields.length < 8 && (
+                <AddFieldButton
+                  onClickHandler={() => {
+                    processArr.append({ value: "" });
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>

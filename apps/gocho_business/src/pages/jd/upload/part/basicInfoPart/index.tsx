@@ -180,11 +180,13 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               </div>
             ))}
             <div css={cssObj.addButtonWrapper}>
-              <AddFieldButton
-                onClickHandler={() => {
-                  if (processArr.fields.length < 8) processArr.append({ value: "" });
-                }}
-              />
+              {processArr.fields.length < 8 && (
+                <AddFieldButton
+                  onClickHandler={() => {
+                    processArr.append({ value: "" });
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -262,14 +264,14 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               </div>
             ))}
             <div css={cssObj.addButtonWrapper}>
-              <AddFieldButton
-                onClickHandler={() => {
-                  if (applyRouteArr.fields.length < 10) {
+              {applyRouteArr.fields.length < 9 && (
+                <AddFieldButton
+                  onClickHandler={() => {
                     applyRouteArr.append({ value: "" });
                     setApplyRouteIsFocusedArr((prev) => [...prev, false]);
-                  }
-                }}
-              />
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -384,11 +386,13 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               </label>
             ))}
             <div css={cssObj.addButtonWrapper}>
-              <AddFieldButton
-                onClickHandler={() => {
-                  if (etcArr.fields.length < 10) etcArr.append({ value: "" });
-                }}
-              />
+              {etcArr.fields.length < 10 && (
+                <AddFieldButton
+                  onClickHandler={() => {
+                    etcArr.append({ value: "" });
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>
