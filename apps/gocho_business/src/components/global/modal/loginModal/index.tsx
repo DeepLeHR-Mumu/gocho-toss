@@ -1,14 +1,14 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
-import { AccountInput2 } from "shared-ui/common/atom/accountInput2";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 
+import { FiCheckCircle, FiX } from "react-icons/fi";
 import { useDoLogin } from "@/apis/auth/useDoLogin";
 import { ModalComponent } from "@/components/global/modal/modalBackground";
 import { useModal } from "@/globalStates/useModal";
@@ -21,6 +21,10 @@ import { LoginFormValues } from "./type";
 import { cssObj } from "./style";
 
 export const LoginBox: FunctionComponent = () => {
+  const [isFocusObj, setIsFocusObj] = useState({
+    email: false,
+    password: false,
+  });
   const queryClient = useQueryClient();
 
   const { setUserInfoData } = useUserState();
@@ -72,6 +76,18 @@ export const LoginBox: FunctionComponent = () => {
     });
   };
 
+  const emailCSSObj = {
+    isError: Boolean(errors.email),
+    isFocus: isFocusObj.email,
+    isSuccess: Boolean(watch("email")) && Boolean(!errors.email),
+  };
+
+  const passwordCSSObj = {
+    isError: Boolean(errors.password),
+    isFocus: isFocusObj.password,
+    isSuccess: Boolean(watch("password")) && Boolean(!errors.password),
+  };
+
   return (
     <div css={cssObj.wrapper}>
       <div css={cssObj.logoContainer}>
@@ -81,8 +97,12 @@ export const LoginBox: FunctionComponent = () => {
       <form css={cssObj.formCSS} onSubmit={handleSubmit(loginSubmit)}>
         <ul css={cssObj.formArr}>
           <li>
-            <AccountInput2
-              registerObj={register("email", {
+            <p css={cssObj.label(emailCSSObj)}>이메일</p>
+            <input
+              css={cssObj.input(emailCSSObj)}
+              type="email"
+              placeholder="이메일을 입력해주세요"
+              {...register("email", {
                 required: LOGIN_ERROR_MESSAGES.BLANK_EMAIL,
                 pattern: {
                   value: EMAIL_REGEXP,
@@ -92,23 +112,50 @@ export const LoginBox: FunctionComponent = () => {
                   value: 30,
                   message: LOGIN_ERROR_MESSAGES.EXCEED_LENGTH_EMAIL,
                 },
+                onBlur: () => {
+                  setIsFocusObj({
+                    email: false,
+                    password: false,
+                  });
+                },
               })}
-              setValue={() => {
-                setValue("email", "");
-              }}
-              clearError={() => {
+              onFocus={() => {
+                if (errors.email?.message === LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO) {
+                  clearErrors("password");
+                }
                 clearErrors("email");
+                setIsFocusObj({
+                  email: true,
+                  password: false,
+                });
               }}
-              watch={watch("email")}
-              placeholder="이메일을 입력해주세요"
-              label="이메일"
-              errorMsg={errors.email?.message}
-              inputType="email"
             />
+            {errors.email && (
+              <button
+                css={cssObj.deleteButton}
+                type="button"
+                aria-label="이메일 제거"
+                onClick={() => {
+                  setValue("email", "");
+                  clearErrors("email");
+                }}
+              >
+                <FiX />
+              </button>
+            )}
+            {watch("email") && !errors.email && (
+              <p css={cssObj.successIconBox}>
+                <FiCheckCircle />
+              </p>
+            )}
           </li>
           <li>
-            <AccountInput2
-              registerObj={register("password", {
+            <p css={cssObj.label(passwordCSSObj)}>비밀번호</p>
+            <input
+              css={cssObj.input(passwordCSSObj)}
+              type="password"
+              placeholder="비밀번호를 입력해주세요"
+              {...register("password", {
                 required: LOGIN_ERROR_MESSAGES.BLANK_PWD,
                 minLength: { value: 8, message: LOGIN_ERROR_MESSAGES.MIN_PASSWORD },
                 maxLength: { value: 20, message: LOGIN_ERROR_MESSAGES.MAX_PASSWORD },
@@ -116,21 +163,45 @@ export const LoginBox: FunctionComponent = () => {
                   value: PWD_REGEXP,
                   message: LOGIN_ERROR_MESSAGES.NO_SPACE,
                 },
+                onBlur: () => {
+                  setIsFocusObj({
+                    email: false,
+                    password: false,
+                  });
+                },
               })}
-              setValue={() => {
-                setValue("password", "");
-              }}
-              clearError={() => {
+              onFocus={() => {
+                if (errors.password?.message === LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO) {
+                  clearErrors("email");
+                }
                 clearErrors("password");
+                setIsFocusObj({
+                  email: false,
+                  password: true,
+                });
               }}
-              watch={watch("password")}
-              errorMsg={errors.password?.message}
-              placeholder="비밀번호를 입력해주세요"
-              label="비밀번호"
-              inputType="password"
             />
+            {errors.password && (
+              <button
+                css={cssObj.deleteButton}
+                type="button"
+                aria-label="비밀번호 제거"
+                onClick={() => {
+                  setValue("password", "");
+                  clearErrors("password");
+                }}
+              >
+                <FiX />
+              </button>
+            )}
+            {watch("password") && !errors.password && (
+              <p css={cssObj.successIconBox}>
+                <FiCheckCircle />
+              </p>
+            )}
           </li>
         </ul>
+
         <div css={cssObj.errorBox}>
           <p css={cssObj.errorMsgCSS}>{errors.email?.message || errors.password?.message}</p>
         </div>
