@@ -35,7 +35,7 @@ export const cssObj = {
       margin-bottom: 1.5rem;
     `;
   },
-  subTitle: (isError: string | undefined) => css`
+  subTitle: (isError: boolean) => css`
     font-size: 1rem;
     font-weight: 700;
     color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
@@ -58,7 +58,7 @@ export const cssObj = {
       color: ${COLORS.GRAY10};
     }
   `,
-  input: (isError: string | undefined) => css`
+  input: (isError: boolean) => css`
     border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
     padding: 0rem 1rem;
     border-radius: 0.3125rem;
@@ -96,7 +96,7 @@ export const cssObj = {
       margin-right: 0.5rem;
     }
   `,
-  inputBox: (isError: undefined | object) => css`
+  inputBox: (isError: boolean) => css`
     display: flex;
     margin-left: 1rem;
     align-items: center;
@@ -144,7 +144,7 @@ export const cssObj = {
     width: 45%;
     margin-bottom: 0.5rem;
   `,
-  infoTitle: (isError: undefined | string) => css`
+  infoTitle: (isError: boolean) => css`
     font-size: 1rem;
     font-weight: 400;
     color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
