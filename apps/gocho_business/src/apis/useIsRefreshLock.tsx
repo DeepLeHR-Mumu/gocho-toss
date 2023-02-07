@@ -7,6 +7,7 @@ import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 
 import { useModal } from "@/globalStates/useModal";
 import { INTERNAL_URL } from "@/constants/url";
+import { useUserState } from "@/globalStates/useUserState";
 
 export const axiosNoTokenInstance = axios.create({
   timeout: 10000,
@@ -27,6 +28,8 @@ export const useAxiosInterceptor = () => {
   const { setCurrentModal } = useModal();
   const saveQueue = (callback: (token: string) => void) => readyQueueArr.push(callback);
   const activeQueue = (token: string) => readyQueueArr.forEach((callback) => callback(token));
+
+  const { setUserInfoData } = useUserState();
 
   const getRefreshTokenCreator = async (): Promise<{ newToken: string } | void> => {
     const refreshToken = localStorage.getItem("refreshToken");
@@ -84,7 +87,9 @@ export const useAxiosInterceptor = () => {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       sessionStorage.removeItem("firstEntryDate");
-      window.location.href = "/";
+      setUserInfoData(null);
+      router.push(INTERNAL_URL.LOGIN);
+      throw new axios.Cancel("토큰만료 강제페이지 이동");
     }
 
     // 3. 전페이지가 있고 토큰이 만료된 경우
