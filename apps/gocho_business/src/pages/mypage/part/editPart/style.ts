@@ -30,14 +30,14 @@ export const cssObj = {
     padding-left: 1.75rem;
     margin-bottom: 2.5rem;
   `,
-  formTitle: (isError: undefined | string) => css`
+  formTitle: (isError: boolean) => css`
     font-size: 1rem;
     margin-bottom: 0.5rem;
     font-weight: 400;
     color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
     display: block;
   `,
-  label: (isError: undefined | string) => css`
+  label: (isError: boolean) => css`
     border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
     display: flex;
     align-items: center;

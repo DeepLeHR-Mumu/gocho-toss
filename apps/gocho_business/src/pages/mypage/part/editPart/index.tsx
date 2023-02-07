@@ -60,6 +60,7 @@ export const EditPart: FunctionComponent = () => {
           localStorage.setItem("refreshToken", response.data.refresh_token);
           queryClient.invalidateQueries();
           setToast("변경되었습니다");
+          isLoading.current = false;
         },
       }
     );
@@ -102,8 +103,8 @@ export const EditPart: FunctionComponent = () => {
       <form onSubmit={handleSubmit(editSubmit)}>
         <ul css={cssObj.formBox}>
           <li>
-            <strong css={cssObj.formTitle(errors.origin_password?.message)}>현재 비밀번호</strong>
-            <label htmlFor="origin_password" css={cssObj.label(errors.origin_password?.message)}>
+            <strong css={cssObj.formTitle(Boolean(errors.origin_password))}>현재 비밀번호</strong>
+            <label htmlFor="origin_password" css={cssObj.label(Boolean(errors.origin_password))}>
               <input
                 css={cssObj.input}
                 type={passwordShowObj.isOriginPassword ? "text" : "password"}
@@ -144,8 +145,8 @@ export const EditPart: FunctionComponent = () => {
             </div>
           </li>
           <li>
-            <strong css={cssObj.formTitle(errors.new_password?.message)}>새 비밀번호</strong>
-            <label htmlFor="new_password" css={cssObj.label(errors.new_password?.message)}>
+            <strong css={cssObj.formTitle(Boolean(errors.new_password))}>새 비밀번호</strong>
+            <label htmlFor="new_password" css={cssObj.label(Boolean(errors.new_password))}>
               <input
                 css={cssObj.input}
                 type={passwordShowObj.isNewPassword ? "text" : "password"}
@@ -186,8 +187,8 @@ export const EditPart: FunctionComponent = () => {
             </div>
           </li>
           <li>
-            <strong css={cssObj.formTitle(errors.check_password?.message)}>비밀번호 확인</strong>
-            <label htmlFor="check_password" css={cssObj.label(errors.check_password?.message)}>
+            <strong css={cssObj.formTitle(Boolean(errors.check_password))}>비밀번호 확인</strong>
+            <label htmlFor="check_password" css={cssObj.label(Boolean(errors.check_password))}>
               <input
                 css={cssObj.input}
                 type={passwordShowObj.isCheckPassword ? "text" : "password"}
