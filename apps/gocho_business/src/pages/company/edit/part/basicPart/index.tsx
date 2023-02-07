@@ -22,7 +22,6 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
     register,
     setValue,
     watch,
-    setError,
     formState: { errors },
   } = companyForm;
   const { userInfoData } = useUserState();
@@ -69,7 +68,6 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
               onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
                 if (onBlurEvent.target.value.trim().length === 0) {
                   setValue("intro", "");
-                  setError("intro", { type: "required" });
                 }
               },
             })}

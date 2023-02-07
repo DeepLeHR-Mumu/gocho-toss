@@ -39,8 +39,8 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
   };
 
   const addValueHandler = (value: string) => {
-    const isContainSpaceString = value.trim().length !== 0;
-    if (isContainSpaceString) {
+    const isNoSpaceString = value.trim().length !== 0;
+    if (isNoSpaceString) {
       setWelfareArr((prevListArr) => {
         if (!prevListArr) {
           setValueCreator([value]);

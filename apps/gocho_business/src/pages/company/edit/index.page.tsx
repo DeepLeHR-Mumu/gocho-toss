@@ -39,7 +39,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
   const { mutate: putCompanyDetail } = useAddCompanyDetail();
 
   const companyForm = useForm<PostSubmitValues>({
-    mode: "onChange",
+    mode: "onBlur",
   });
 
   const {
