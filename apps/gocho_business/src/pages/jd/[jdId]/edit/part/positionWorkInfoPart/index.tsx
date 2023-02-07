@@ -187,6 +187,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   value={placeType.data}
                   onClick={() => {
                     if (watch("position_arr")[positionIndex].place.type !== placeType.data) {
+                      clearErrors(`position_arr.${positionIndex}.place`);
                       clearErrors(`position_arr.${positionIndex}.place.etc`);
                     }
                   }}

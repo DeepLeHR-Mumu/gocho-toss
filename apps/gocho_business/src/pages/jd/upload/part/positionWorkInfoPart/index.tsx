@@ -187,6 +187,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   value={placeType.data}
                   onClick={() => {
                     if (watch("position_arr")[positionIndex].place.type !== placeType.data) {
+                      clearErrors(`position_arr.${positionIndex}.place`);
                       clearErrors(`position_arr.${positionIndex}.place.etc`);
                     }
                   }}
@@ -259,9 +260,6 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                         {factory.name}
                       </button>
                     ))}
-                    {/* <button type="button" css={cssObj.option} disabled> */}
-                    {/*  등록된 공장이 없습니다. */}
-                    {/* </button> */}
                   </div>
                 </div>
                 <SharedButton
