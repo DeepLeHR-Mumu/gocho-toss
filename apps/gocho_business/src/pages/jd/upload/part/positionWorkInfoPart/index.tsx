@@ -111,7 +111,9 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
 
   const rotationTextMaker = (selectedRotation: string[]) => {
     if (selectedRotation.length === 0) return "교대 형태 선택";
-    return selectedRotation.join(", ");
+    return selectedRotation
+      .map((rotation) => rotationArr.find((rotationObj) => rotationObj.data === rotation)?.name)
+      .join(", ");
   };
 
   useEffect(() => {
@@ -215,6 +217,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   <button
                     css={cssObj.input(20)}
                     type="button"
+                    disabled={factoryDataArr?.length === 0}
                     onClick={() => {
                       if (
                         isFactoryListOpen &&
@@ -233,7 +236,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                       setIsFactoryListOpen(false);
                     }}
                   >
-                    해당하는 공장을 모두 선택해주세요
+                    {factoryDataArr?.length === 0 ? "등록된 공장이 없습니다" : "해당하는 공장을 모두 선택해주세요"}
                     {isFactoryListOpen ? <FiChevronUp /> : <FiChevronDown />}
                   </button>
                   <div css={cssObj.optionList(isFactoryListOpen)}>
@@ -256,6 +259,9 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                         {factory.name}
                       </button>
                     ))}
+                    {/* <button type="button" css={cssObj.option} disabled> */}
+                    {/*  등록된 공장이 없습니다. */}
+                    {/* </button> */}
                   </div>
                 </div>
                 <SharedButton
