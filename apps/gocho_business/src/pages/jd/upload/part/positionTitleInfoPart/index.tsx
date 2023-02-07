@@ -154,6 +154,9 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                   }
                   setIsMainTaskOpen((prev) => !prev);
                 }}
+                onBlur={() => {
+                  setIsMainTaskOpen(false);
+                }}
               >
                 {selectedSubTaskObj ? `${selectedSubTaskObj.mainTask}` : "1차직무 선택"}
                 {isMainTaskOpen ? <FiChevronUp /> : <FiChevronDown />}
@@ -165,7 +168,8 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                     css={cssObj.option}
                     key={`${id}${taskObj.mainTask}`}
                     value={taskObj.mainTask}
-                    onClick={() => {
+                    onMouseDown={(mouseEvent) => {
+                      mouseEvent.preventDefault();
                       mainTaskClickHandler(taskObj.mainTask);
                     }}
                   >
@@ -188,6 +192,9 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 onClick={() => {
                   setIsSubTaskOpen((prev) => !prev);
                 }}
+                onBlur={() => {
+                  setIsSubTaskOpen(false);
+                }}
               >
                 {subTaskTextMaker(watch("position_arr")[positionIndex].task_sub_arr || [])}
                 {isSubTaskOpen ? <FiChevronUp /> : <FiChevronDown />}
@@ -199,7 +206,8 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                     css={cssObj.option}
                     key={`${id}${subTask}`}
                     value={subTask}
-                    onClick={() => {
+                    onMouseDown={(mouseEvent) => {
+                      mouseEvent.preventDefault();
                       subTaskClickHandler(subTask);
                     }}
                   >
