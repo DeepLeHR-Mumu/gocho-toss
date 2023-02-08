@@ -50,8 +50,8 @@ const JdUpload: NextPage = () => {
           setCheckMsg("서버에 공고가 업로드 되었습니다.");
         },
 
-        onError: () => {
-          setCheckMsg("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
+        onError: (addJobError) => {
+          setCheckMsg(addJobError.response?.data.error_message);
         },
       }
     );

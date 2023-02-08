@@ -70,6 +70,19 @@ export const CompanyPart: FunctionComponent<CompanyPartProps> = ({ company }) =>
         <strong css={cssObj.dataTitle}>유투브 URL</strong>
         <p css={cssObj.dataBox}>{company.youtubeUrl}</p>
       </div>
+      <div css={cssObj.dataContainer}>
+        <strong css={cssObj.dataTitle}>평균 연봉</strong>
+        <p css={cssObj.dataBox}>{company.payAvg}</p>
+      </div>
+      <div css={cssObj.dataContainer}>
+        <strong css={cssObj.dataTitle}>초봉</strong>
+        <p css={cssObj.dataBox}>{company.payStart}</p>
+      </div>
+      <div css={cssObj.dataContainer}>
+        <strong css={cssObj.dataTitle}>연봉 기타</strong>
+        <p css={cssObj.dataBox}>{company.payDesc}</p>
+      </div>
+
       <div css={cssObj.welfareContainer}>
         {welfareArr.map((welfare) => {
           return <WelfareBox key={`WelfareBox${welfare.name}`} welfare={welfare} />;

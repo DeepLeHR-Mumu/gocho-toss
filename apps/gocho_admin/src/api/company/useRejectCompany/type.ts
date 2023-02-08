@@ -10,7 +10,7 @@ export interface RequestObjDef {
 }
 
 export interface RejectCompanyDef {
-  ({ companyId, type }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ companyId, type, reason }: RequestObjDef): Promise<AdminResponseDef>;
 }
 
 export interface UseRejectCompanyProps {

@@ -2,6 +2,23 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
+  companyNameContainer: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `,
+
+  companyTitle: css`
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
+  `,
+
+  companyName: css`
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: ${COLORS.BLUE_FIRST40};
+  `,
+
   factoryCompareContainer: css`
     display: flex;
   `,
