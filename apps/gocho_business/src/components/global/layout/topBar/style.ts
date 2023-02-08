@@ -11,7 +11,7 @@ export const cssObj = {
     height: 4rem;
     width: 100%;
     background-color: ${isLogin ? COLORS.GRAY100 : COLORS.GRAY10};
-    border-bottom: 1px solid ${COLORS.GRAY65};
+    border-bottom: 1px solid ${COLORS.GRAY80};
   `,
   container: css`
     display: flex;

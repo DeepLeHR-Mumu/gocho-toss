@@ -45,12 +45,12 @@ const CompanyEditPage: NextPageWithLayout = () => {
   const {
     handleSubmit,
     reset,
-    formState: { isDirty, submitCount },
+    formState: { submitCount },
   } = companyForm;
 
   const addCompanyDetail = (formData: PostSubmitValues) => {
-    if (!isDirty) return window.alert(COMPANY_MESSAGE_OBJ.ISDIRTY);
     companyEditConfirmEvent();
+
     if (window.confirm(COMPANY_MESSAGE_OBJ.EDIT)) {
       putCompanyDetail(
         {
@@ -68,6 +68,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
               growth: formData.welfare.growth,
               vacation: formData.welfare.vacation,
             },
+            pay_desc: formData.pay_desc || null,
             nozo: {
               exists: formData.nozo.exists === "true",
               desc: formData.nozo.desc || null,

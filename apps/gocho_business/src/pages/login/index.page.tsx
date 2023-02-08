@@ -10,6 +10,7 @@ import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
 import gochoColorSrc from "shared-image/global/deepLeLogo/logoIconColor.svg";
+import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
 
 import { useModal } from "@/globalStates/useModal";
 import { INTERNAL_URL } from "@/constants/url";
@@ -18,34 +19,40 @@ import { TopBar } from "@/components/global/layout/topBar";
 import { useDoLogin } from "@/apis/auth/useDoLogin";
 import { loginPageFunnelEvent, loginSuccessEvent, signupButtonClickEvent } from "@/ga/auth";
 
+import { LOGIN_ERROR_MESSAGES } from "./constant";
 import { PageHead } from "./pageHead";
 import { LoginFormValues } from "./type";
 import { cssObj } from "./style";
 
 const LoginPage: NextPage = () => {
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const router = useRouter();
 
   const queryClient = useQueryClient();
-  const { setUserInfoData } = useUserState();
+  const { setUserInfoData, userInfoData } = useUserState();
   const { mutate: postLogin } = useDoLogin();
   const { setCurrentModal } = useModal();
   const {
     register,
     watch,
+    setError,
+    clearErrors,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormValues>({ mode: "onBlur" });
+  } = useForm<LoginFormValues>({ mode: "onChange" });
 
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     postLogin(loginObj, {
       onError: (error) => {
         const errorResponse = error.response?.data;
-        setErrorMsg(errorResponse?.error_message as string);
+        if (errorResponse?.error_code === "BLANK_MEMBER" || errorResponse?.error_code === "NOT_MATCHED_INFO") {
+          setError("email", { type: "custom", message: LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO });
+          setError("password", { type: "custom", message: LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO });
+        }
       },
       onSuccess: (response) => {
         loginSuccessEvent(watch("auto_login"));
+        sessionStorage.setItem("firstEntryDate", JSON.stringify(new Date().getTime()));
         localStorage.setItem("accessToken", response.data.access_token);
         localStorage.setItem("refreshToken", response.data.refresh_token);
         const { id, company_id, company_name, company_logo, iat, exp, email, name, department } = managerTokenDecryptor(
@@ -69,11 +76,17 @@ const LoginPage: NextPage = () => {
   };
 
   useEffect(() => {
+    const isLogin = Boolean(userInfoData);
+    if (isLogin) router.replace(INTERNAL_URL.JD_LIST);
+  }, [router, userInfoData]);
+
+  useEffect(() => {
     loginPageFunnelEvent();
   }, []);
 
   const isEmail = Boolean(watch("email"));
   const isPassword = Boolean(watch("password"));
+
   return (
     <>
       <PageHead />
@@ -90,24 +103,58 @@ const LoginPage: NextPage = () => {
 
           <form css={cssObj.formCSS} onSubmit={handleSubmit(loginSubmit)}>
             <ul>
-              <li css={cssObj.inputBox(errors.email?.type === "required")}>
+              <li css={cssObj.inputBox(Boolean(errors.email))}>
                 <input
                   type="email"
                   placeholder="아이디(이메일)"
                   css={cssObj.inputCSS}
                   {...register("email", {
-                    required: "이메일을 입력해주세요.",
+                    required: LOGIN_ERROR_MESSAGES.BLANK_EMAIL,
+                    maxLength: {
+                      value: 30,
+                      message: LOGIN_ERROR_MESSAGES.EXCEED_LENGTH_EMAIL,
+                    },
+                    pattern: {
+                      value: EMAIL_REGEXP,
+                      message: LOGIN_ERROR_MESSAGES.WRONG_EMAIL,
+                    },
                   })}
+                  onFocus={() => {
+                    if (errors.email?.message === LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO) {
+                      clearErrors("email");
+                      clearErrors("password");
+                    }
+                    clearErrors("email");
+                  }}
                 />
               </li>
-              <li css={cssObj.inputBox(errors.password?.type === "required")}>
+              <li css={cssObj.inputBox(Boolean(errors.password))}>
                 <input
                   type={isShowPassword ? "text" : "password"}
                   placeholder="비밀번호"
                   css={cssObj.inputCSS}
                   {...register("password", {
-                    required: "비밀번호를 입력해주세요.",
+                    required: LOGIN_ERROR_MESSAGES.BLANK_PWD,
+                    pattern: {
+                      value: PWD_REGEXP,
+                      message: LOGIN_ERROR_MESSAGES.NO_SPACE,
+                    },
+                    minLength: {
+                      value: 8,
+                      message: LOGIN_ERROR_MESSAGES.MIN_PASSWORD,
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: LOGIN_ERROR_MESSAGES.MAX_PASSWORD,
+                    },
                   })}
+                  onFocus={() => {
+                    if (errors.password?.message === LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO) {
+                      clearErrors("email");
+                      clearErrors("password");
+                    }
+                    clearErrors("password");
+                  }}
                 />
                 <button
                   type="button"
@@ -134,7 +181,8 @@ const LoginPage: NextPage = () => {
                 비밀번호 찾기
               </button>
             </div>
-            <p css={cssObj.errorMsg}>{errors.email?.message || errors.password?.message || errorMsg}</p>
+
+            <p css={cssObj.errorMsg}>{errors.email?.message || errors.password?.message}</p>
 
             <button type="submit" css={cssObj.submitButton(isEmail && isPassword)} disabled={!isEmail || !isPassword}>
               로그인

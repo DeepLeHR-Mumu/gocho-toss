@@ -1,14 +1,13 @@
-import { FunctionComponent } from "react";
-import axios from "axios";
+import { FunctionComponent, useState } from "react";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { EMAIL_REGEXP } from "shared-constant/regExp";
 import { EMAIL_ERROR_MESSAGE } from "shared-constant/errorMessage";
-import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 
+import { FiCheckCircle, FiX } from "react-icons/fi";
 import { useFindPassword } from "@/apis/auth/usefindPassword";
 import { CommonCloseButton } from "@/components/common/commonCloseButton";
 import { useModal } from "@/globalStates/useModal";
@@ -20,13 +19,18 @@ import { LoginFormValues } from "./type";
 import { cssObj } from "./style";
 
 export const FindPasswordBox: FunctionComponent = () => {
+  const [isFocus, setIsFocus] = useState(false);
   const {
     register,
     handleSubmit,
     setError,
+    clearErrors,
     setValue,
-    formState: { errors, dirtyFields },
-  } = useForm<LoginFormValues>({ mode: "onBlur" });
+    watch,
+    formState: { errors },
+  } = useForm<LoginFormValues>({
+    mode: "onChange",
+  });
 
   const { setToast } = useToast();
   const { mutate: postFindPassword } = useFindPassword();
@@ -35,7 +39,7 @@ export const FindPasswordBox: FunctionComponent = () => {
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     postFindPassword(loginObj, {
       onError: (error) => {
-        if (axios.isAxiosError(error) && error.response?.status === 404)
+        if (error.response?.status === 404 && error.response?.data.error_code === "BLANK_MEMBER")
           return setError("email", { type: "custom", message: "가입되지 않은 이메일 입니다." });
 
         return null;
@@ -51,6 +55,12 @@ export const FindPasswordBox: FunctionComponent = () => {
     closeModal();
   };
 
+  const emailCSSObj = {
+    isError: Boolean(errors.email),
+    isFocus,
+    isSuccess: Boolean(watch("email")) && Boolean(!errors.email),
+  };
+
   return (
     <div css={cssObj.wrapper}>
       <div css={cssObj.closeBtn}>
@@ -63,25 +73,55 @@ export const FindPasswordBox: FunctionComponent = () => {
       <form css={cssObj.formCSS} onSubmit={handleSubmit(loginSubmit)}>
         <ul css={cssObj.formArr}>
           <li>
-            <AccountInput
-              registerObj={register("email", {
+            <p css={cssObj.label(emailCSSObj)}>이메일</p>
+            <input
+              css={cssObj.input(emailCSSObj)}
+              type="email"
+              placeholder="이메일을 입력해주세요"
+              {...register("email", {
                 required: EMAIL_ERROR_MESSAGE.REQUIRED,
                 pattern: {
                   value: EMAIL_REGEXP,
                   message: EMAIL_ERROR_MESSAGE.REGEX,
                 },
+                maxLength: {
+                  value: 30,
+                  message: EMAIL_ERROR_MESSAGE.LOGIN_MIN_MAX,
+                },
+                onBlur: () => {
+                  setIsFocus(false);
+                },
               })}
-              setValue={() => {
-                setValue("email", "");
+              onFocus={() => {
+                clearErrors("email");
+                setIsFocus(true);
               }}
-              placeholder="이메일을 입력해주세요"
-              label="이메일"
-              errorObj={errors.email}
-              isDirty={dirtyFields.email}
-              inputType="email"
             />
+            {errors.email && (
+              <button
+                css={cssObj.deleteButton}
+                type="button"
+                aria-label="이메일 제거"
+                onClick={() => {
+                  setValue("email", "");
+                  clearErrors("email");
+                }}
+              >
+                <FiX />
+              </button>
+            )}
+            {watch("email") && !errors.email && (
+              <p css={cssObj.successIconBox}>
+                <FiCheckCircle />
+              </p>
+            )}
           </li>
         </ul>
+
+        <div css={cssObj.errorBox}>
+          <p css={cssObj.errorMsgCSS}>{errors.email?.message}</p>
+        </div>
+
         <div css={cssObj.loginButton}>
           <NormalButton wide variant="filled" text="비밀번호 찾기" isSubmit />
         </div>

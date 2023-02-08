@@ -7,14 +7,14 @@ export const cssObj = {
   spinner: css`
     position: relative;
     height: 6.125rem;
-    border-bottom: 1px solid ${COLORS.GRAY65};
+    border-bottom: 1px solid ${COLORS.GRAY80};
   `,
   wrapper: css`
     padding: 0.5rem 2rem;
     display: grid;
     grid-template-columns: 8rem 1fr auto;
     align-items: center;
-    border-bottom: 1px solid ${COLORS.GRAY65};
+    border-bottom: 1px solid ${COLORS.GRAY80};
   `,
   logo: css`
     height: 5rem;

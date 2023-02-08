@@ -6,7 +6,7 @@ export const cssObj = {
   wrapper: css`
     width: 18rem;
     padding: 1.5rem 0 0 0;
-    border-right: 1px solid ${COLORS.GRAY65};
+    border-right: 1px solid ${COLORS.GRAY80};
     background-color: ${COLORS.GRAY100};
     position: fixed;
     z-index: 10;
@@ -32,8 +32,7 @@ export const cssObj = {
     border-radius: 0.375rem;
     background-color: ${isCurrentRoute && COLORS.BLUE_SECOND70};
     :hover {
-      background-color: ${COLORS.BLUE_SECOND70};
-      font-weight: 700;
+      background-color: ${COLORS.GRAY80};
     }
     > svg {
       height: 1.25rem;

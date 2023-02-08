@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import axios, { AxiosRequestConfig } from "axios";
+import dayjs from "dayjs";
 
 import { BUSINESS_BACKEND_URL } from "shared-constant/externalURL";
 import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 
 import { useModal } from "@/globalStates/useModal";
 import { INTERNAL_URL } from "@/constants/url";
+import { useUserState } from "@/globalStates/useUserState";
 
 export const axiosNoTokenInstance = axios.create({
   timeout: 10000,
@@ -27,6 +29,8 @@ export const useAxiosInterceptor = () => {
   const { setCurrentModal } = useModal();
   const saveQueue = (callback: (token: string) => void) => readyQueueArr.push(callback);
   const activeQueue = (token: string) => readyQueueArr.forEach((callback) => callback(token));
+
+  const { setUserInfoData } = useUserState();
 
   const getRefreshTokenCreator = async (): Promise<{ newToken: string } | void> => {
     const refreshToken = localStorage.getItem("refreshToken");
@@ -62,24 +66,36 @@ export const useAxiosInterceptor = () => {
     const accessTokenData = localStorage.getItem("accessToken");
     const refreshTokenData = localStorage.getItem("refreshToken");
     const prevUrl = sessionStorage.getItem("prevUrl");
+    const firstEntryDate = sessionStorage.getItem("firstEntryDate");
 
+    if ((!accessTokenData || !refreshTokenData) && config.url === "/auth/health-check") {
+      throw new axios.Cancel("비로그인 health-check 취소");
+    }
     if (!accessTokenData || !refreshTokenData) return router.replace(INTERNAL_URL.LOGIN);
 
     const { exp: accessTokenExp } = managerTokenDecryptor(accessTokenData);
     const { exp: refreshTokenExp } = managerTokenDecryptor(refreshTokenData);
-    const accessCreateTime = new Date(accessTokenExp * 1000).getTime();
-    const refreshCreateTime = new Date(refreshTokenExp * 1000).getTime();
-    const currentTime = new Date().getTime();
+    const accessCreateTime = dayjs(new Date(accessTokenExp * 1000), "YYYY-MM-DD HH:mm:ss.SSS");
+    const refreshCreateTime = dayjs(new Date(refreshTokenExp * 1000), "YYYY-MM-DD HH:mm:ss.SSS");
+    const currentTime = dayjs(new Date(), "YYYY-MM-DD HH:mm:ss.SSS");
+    const firstEntryTime = dayjs(new Date(Number(firstEntryDate)), "YYYY-MM-DD HH:mm:ss.SSS");
+    const accessBetweenCurrentDiffTime = accessCreateTime.diff(currentTime, "ms");
+    const isRefreshAfterCurrentTime = currentTime.isAfter(refreshCreateTime);
+    const isRefreshAfterFirstEntryTime = firstEntryTime.isAfter(refreshCreateTime);
 
-    if (refreshCreateTime <= currentTime && prevUrl === "none") {
+    if ((isRefreshAfterCurrentTime && prevUrl === "none") || isRefreshAfterFirstEntryTime) {
+      window.alert("토큰이 만료되어 로그인 페이지로 이동합니다.");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      router.replace(INTERNAL_URL.LOGIN);
+      sessionStorage.removeItem("firstEntryDate");
+      setUserInfoData(null);
+      router.push(INTERNAL_URL.LOGIN);
+      throw new axios.Cancel("토큰만료 강제페이지 이동");
     }
 
-    if (refreshCreateTime <= currentTime && prevUrl !== "none") setCurrentModal("loginModal");
+    if (isRefreshAfterCurrentTime && prevUrl !== "none") return setCurrentModal("loginModal");
 
-    if (accessCreateTime - currentTime <= accessTokenLimitMs && !isRequestLock) {
+    if (accessBetweenCurrentDiffTime <= accessTokenLimitMs && !isRequestLock) {
       isRequestLock = true;
       const newToken = await getRefreshTokenCreator();
       return {
@@ -90,7 +106,7 @@ export const useAxiosInterceptor = () => {
       };
     }
 
-    if (accessCreateTime - currentTime <= accessTokenLimitMs && isRequestLock) {
+    if (accessBetweenCurrentDiffTime <= accessTokenLimitMs && isRequestLock) {
       return new Promise(() => {
         saveQueue((accessToken) => axiosInstance({ ...config, headers: { "x-access-token": accessToken } }));
       });
