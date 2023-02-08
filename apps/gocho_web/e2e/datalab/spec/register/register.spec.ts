@@ -153,7 +153,7 @@ test.describe("스펙등록 테스트", () => {
     test.slow();
     await loginTester(page);
     await basicSpecRegisterTester(page);
-    await page.getByRole("link", { name: "채용공고" }).click();
+    await page.getByRole('link', { name: '채용공고' }).first().click();
     await expect(page.locator('strong:has-text("페이지를 나가시겠습니까?")')).toBeVisible();
     await expect(page.locator('p:has-text("작성 중인 스펙이 초기화됩니다. 나가시겠습니까?")')).toBeVisible();
     await page.locator('button:has-text("아니오")').click();
