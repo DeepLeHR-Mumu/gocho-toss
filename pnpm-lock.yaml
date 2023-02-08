@@ -117,6 +117,7 @@ importers:
       shared-api: workspace:^0.0.0
       shared-constant: workspace:^0.0.0
       shared-ga: workspace:^0.0.0
+      shared-hooks: workspace:^1.0.0
       shared-image: workspace:^0.0.0
       shared-style: workspace:^0.0.0
       shared-type: workspace:^0.0.0
@@ -144,6 +145,7 @@ importers:
       shared-api: link:../../shared/api
       shared-constant: link:../../shared/constant
       shared-ga: link:../../shared/ga
+      shared-hooks: link:../../shared/hooks
       shared-image: link:../../shared/image
       shared-style: link:../../shared/style
       shared-type: link:../../shared/type
@@ -477,6 +479,21 @@ importers:
       eslint-config-deeple: link:../../packages/eslint-config-deeple
       tsconfig-deeple: link:../../packages/tsconfig-deeple
       typescript: 4.7.2
+
+  shared/hooks:
+    specifiers:
+      '@types/react': 18.0.17
+      eslint-config-deeple: workspace:^1.0.0
+      react: 17.0.2
+      react-dom: 17.0.2
+      tsconfig-deeple: workspace:^0.0.0
+    dependencies:
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    devDependencies:
+      '@types/react': 18.0.17
+      eslint-config-deeple: link:../../packages/eslint-config-deeple
+      tsconfig-deeple: link:../../packages/tsconfig-deeple
 
   shared/image:
     specifiers:

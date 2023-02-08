@@ -62,7 +62,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
               </div>
             )}
             <div css={cssObj.topContainer}>
-              <div css={cssObj.container}>
+              <div css={cssObj.container(factoryData.uploader.isMine)}>
                 <div css={cssObj.nameContainer}>
                   <p css={cssObj.name}>{factoryData.name}</p>
                   <CommonStatusChip status={factoryData.status.name} />
@@ -165,7 +165,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                   Icon={FiUser}
                 />
               </div>
-              <div css={cssObj.infoItem}>
+              <div css={cssObj.uploadedDateContainer}>
                 <div css={cssObj.dateContainer}>
                   <p css={cssObj.dateName}>공장등록일</p>
                   <p css={cssObj.date}>{dayjs(factoryData.createdTime).format("YY.MM.DD HH:mm")}</p>

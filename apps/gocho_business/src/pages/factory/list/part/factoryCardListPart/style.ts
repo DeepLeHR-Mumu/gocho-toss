@@ -78,9 +78,12 @@ export const cssObj = {
     margin-bottom: 2rem;
     border-bottom: 1px solid #cccccc;
   `,
-  container: css`
+  container: (isMine: boolean) => css`
     width: 100%;
-    margin-right: 1rem;
+    ${isMine &&
+    css`
+      margin-right: 1rem;
+    `}
   `,
   nameContainer: css`
     display: flex;
@@ -156,6 +159,7 @@ export const cssObj = {
     padding-bottom: 1rem;
     border-bottom: 1px solid #cccccc;
   `,
+
   infoItem: css`
     width: 47%;
     margin-right: 0.5rem;
@@ -199,18 +203,27 @@ export const cssObj = {
     align-items: center;
     flex-wrap: wrap;
   `,
+
   dateContainer: css`
     display: flex;
     flex-direction: row;
   `,
 
+  uploadedDateContainer: css`
+    width: 47%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  `,
   dateName: css`
     color: ${COLORS.GRAY60};
     margin-right: 0.25rem;
   `,
+  
   date: css`
     color: ${COLORS.GRAY40};
   `,
+
   top: css`
     position: fixed;
     bottom: 20px;

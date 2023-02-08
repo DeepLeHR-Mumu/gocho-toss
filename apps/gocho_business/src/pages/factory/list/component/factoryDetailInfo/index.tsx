@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, FocusEvent } from "react";
 import { FiUsers } from "react-icons/fi";
 import { AiOutlineMan, AiOutlineWoman } from "react-icons/ai";
 import { BiBuildingHouse, BiBus } from "react-icons/bi";
@@ -95,11 +95,6 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ f
                 return true;
               },
             })}
-            onBlur={(blurEvent) => {
-              if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                formObj.setValue("bus_etc", "");
-              }
-            }}
             css={cssObj.etcInfoBox}
             placeholder="보충 설명(선택)"
             maxLength={70}
@@ -129,13 +124,15 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ f
             </div>
           </div>
           <input
-            {...register("dormitory_etc", { maxLength: 70 })}
+            {...register("dormitory_etc", {
+              maxLength: 70,
+              onBlur: (blurEvent: FocusEvent<HTMLInputElement>) => {
+                if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                  formObj.setValue("dormitory_etc", "");
+                }
+              },
+            })}
             css={cssObj.etcInfoBox}
-            onBlur={(blurEvent) => {
-              if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                formObj.setValue("dormitory_etc", "");
-              }
-            }}
             placeholder="보충 설명(선택)"
             maxLength={70}
           />

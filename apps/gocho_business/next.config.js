@@ -6,6 +6,7 @@ const withTM = require("next-transpile-modules")([
   "shared-style",
   "shared-image",
   "shared-ui",
+  "shared-hooks",
 ]);
 
 /** @type {import('next').NextConfig} */

@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useRef } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -8,6 +8,7 @@ import { EMAIL_REGEXP } from "shared-constant/regExp";
 import { EMAIL_ERROR_MESSAGE } from "shared-constant/errorMessage";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
+import { useFocusTrap } from "shared-hooks/useFocusTrap";
 
 import { useFindPassword } from "@/apis/auth/usefindPassword";
 import { CommonCloseButton } from "@/components/common/commonCloseButton";
@@ -20,6 +21,8 @@ import { LoginFormValues } from "./type";
 import { cssObj } from "./style";
 
 export const FindPasswordBox: FunctionComponent = () => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
   const {
     register,
     handleSubmit,
@@ -32,6 +35,7 @@ export const FindPasswordBox: FunctionComponent = () => {
   const { mutate: postFindPassword } = useFindPassword();
   const { closeModal } = useModal();
 
+  useFocusTrap(modalRef);
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     postFindPassword(loginObj, {
       onError: (error) => {
@@ -52,7 +56,7 @@ export const FindPasswordBox: FunctionComponent = () => {
   };
 
   return (
-    <div css={cssObj.wrapper}>
+    <div css={cssObj.wrapper} ref={modalRef} tabIndex={-1}>
       <div css={cssObj.closeBtn}>
         <CommonCloseButton size="S" buttonClick={closeFindPasswordModal} />
       </div>
@@ -82,6 +86,7 @@ export const FindPasswordBox: FunctionComponent = () => {
             />
           </li>
         </ul>
+        <input type="text" placeholder="hi" />
         <div css={cssObj.loginButton}>
           <NormalButton wide variant="filled" text="비밀번호 찾기" isSubmit />
         </div>

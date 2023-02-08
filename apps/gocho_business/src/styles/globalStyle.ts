@@ -186,4 +186,7 @@ export const globalStyle = css`
       appearance: none;
     }
   }
+  :focus {
+    outline-offset: 0.3rem;
+  }
 `;

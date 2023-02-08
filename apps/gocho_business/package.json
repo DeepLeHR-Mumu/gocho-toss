@@ -31,6 +31,7 @@
     "shared-api": "workspace:^0.0.0",
     "shared-constant": "workspace:^0.0.0",
     "shared-ga": "workspace:^0.0.0",
+    "shared-hooks": "workspace:^1.0.0",
     "shared-image": "workspace:^0.0.0",
     "shared-style": "workspace:^0.0.0",
     "shared-type": "workspace:^0.0.0",

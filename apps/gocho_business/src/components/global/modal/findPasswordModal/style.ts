@@ -18,6 +18,7 @@ export const cssObj = {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    outline: none;
   `,
   closeBtn: css`
     position: absolute;
