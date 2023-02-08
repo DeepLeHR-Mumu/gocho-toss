@@ -21,6 +21,7 @@ export const axiosInstance = axios.create({
 });
 
 export const useAxiosInterceptor = () => {
+  console.count("useAxiosStart");
   const router = useRouter();
   const accessTokenLimitMs = 10000;
   let isRequestLock = false;
@@ -63,6 +64,7 @@ export const useAxiosInterceptor = () => {
   };
 
   const requestConfigHandler = async (config: AxiosRequestConfig) => {
+    console.count("requestStart");
     const accessTokenData = localStorage.getItem("accessToken");
     const refreshTokenData = localStorage.getItem("refreshToken");
     const prevUrl = sessionStorage.getItem("prevUrl");
