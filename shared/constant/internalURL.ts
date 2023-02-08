@@ -7,14 +7,11 @@ export const JOBS_LIST_URL = "/jd/list";
 export const JOBS_DETAIL_URL = "/jd/detail";
 export const JOBS_EXPLIST_URL = "/jd/explist";
 
-export const COMMUNITY_POSTINGS_LIST_URL = "/community/posting/list";
 export const COMMUNITY_POSTING_DETAIL_URL = "/community/posting/detail";
 export const COMMUNITY_POSTING_WRITE_URL = "/community/posting/write";
 export const COMMUNITY_POSTING_EDIT_URL = "/community/posting/edit";
 
 export const COMMUNITY_TIPS_LIST_URL = "/community/tip/list";
-
-export const INTERVIEW_REVIEW = "/review";
 
 export const SPEC_LIST_URL = "/datalab/spec/list";
 export const SPEC_DETAIL_URL = "/datalab/spec/detail";

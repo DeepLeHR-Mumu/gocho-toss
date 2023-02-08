@@ -14,7 +14,7 @@ import { MAIN_URL } from "shared-constant/internalURL";
 import { Layout } from "@component/layout";
 import { Profile } from "@component/common/molecule/profile";
 import { UnAuthMenu } from "@component/common/molecule/unAuthMenu";
-import { menuArr } from "@component/global/header/menuArr";
+import { menuArr } from "@component/global/header/constant";
 import { useToast } from "@recoil/hook/toast";
 import { useModal } from "@recoil/hook/modal";
 
