@@ -201,19 +201,22 @@ export const cssObj = {
     align-items: center;
     justify-content: space-between;
     border: 1px solid ${COLORS.GRAY10};
-    border-radius: 5px;
     width: 6rem;
     height: 2.5rem;
     padding: 0 1rem;
     font-size: 1rem;
-    background-color: ${COLORS.GRAY100};
+    background-color: ${COLORS.GRAY90};
     font-weight: 400;
   `,
 
   hireNumberResetButton: css`
     margin-left: 1rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    border-radius: 5px;
+    border: 1px solid ${COLORS.GRAY65};
+    background-color: ${COLORS.GRAY90};
   `,
-
   hireNumberInputContainer: css`
     display: flex;
     align-items: center;

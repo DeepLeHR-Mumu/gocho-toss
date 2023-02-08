@@ -141,7 +141,16 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
         </div>
       </div>
       <div css={cssObj.container}>
-        <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.task_main))}>채용 직무</p>
+        <p
+          css={cssObj.inputTitle(
+            Boolean(
+              formState.errors.position_arr?.[positionIndex]?.task_main ||
+                formState.errors.position_arr?.[positionIndex]?.task_sub_arr
+            )
+          )}
+        >
+          채용 직무
+        </p>
         <div css={cssObj.taskInputContainer}>
           <div>
             <div css={cssObj.taskContainer}>
@@ -155,6 +164,9 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                   setIsMainTaskOpen((prev) => !prev);
                 }}
                 onBlur={() => {
+                  if (isMainTaskOpen && watch("position_arr")[positionIndex].task_main === "") {
+                    setError(`position_arr.${positionIndex}.task_main`, { type: "required" });
+                  }
                   setIsMainTaskOpen(false);
                 }}
               >
@@ -190,9 +202,15 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 css={cssObj.input(20)}
                 type="button"
                 onClick={() => {
+                  if (isSubTaskOpen && watch("position_arr")[positionIndex].task_sub_arr?.length === 0) {
+                    setError(`position_arr.${positionIndex}.task_sub_arr`, { type: "required" });
+                  }
                   setIsSubTaskOpen((prev) => !prev);
                 }}
                 onBlur={() => {
+                  if (isSubTaskOpen && watch("position_arr")[positionIndex].task_sub_arr?.length === 0) {
+                    setError(`position_arr.${positionIndex}.task_sub_arr`, { type: "required" });
+                  }
                   setIsSubTaskOpen(false);
                 }}
               >
@@ -219,7 +237,11 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 ))}
               </div>
             </div>
-            <p css={cssObj.desc(false)}>2차 직무는 중복 선택이 가능합니다</p>
+            <p css={cssObj.desc(Boolean(formState.errors.position_arr?.[positionIndex]?.task_sub_arr))}>
+              {formState.errors.position_arr?.[positionIndex]?.task_sub_arr
+                ? "2차 직무는 필수 선택 사항입니다. 해당 사항이 없으면 없음을 선택해주세요"
+                : "2차 직무는 중복 선택이 가능합니다"}
+            </p>
           </div>
         </div>
       </div>
