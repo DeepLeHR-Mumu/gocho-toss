@@ -47,7 +47,7 @@ function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
       new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: 0,
+            staleTime: 15000,
             refetchOnWindowFocus: false,
             keepPreviousData: true,
             retry: 0,
@@ -70,7 +70,6 @@ function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
     sessionStorage.setItem("currentUrl", router.asPath);
   }, [router.asPath]);
 
-  console.count("_app start");
   useAxiosInterceptor();
 
   const getLayout = Component.getLayout || ((page) => page);

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import dayjs from "dayjs";
 
 import { BUSINESS_BACKEND_URL } from "shared-constant/externalURL";
@@ -9,6 +9,7 @@ import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 import { useModal } from "@/globalStates/useModal";
 import { INTERNAL_URL } from "@/constants/url";
 import { useUserState } from "@/globalStates/useUserState";
+import { ErrorResponseDef } from "@/types/errorType";
 
 export const axiosNoTokenInstance = axios.create({
   timeout: 10000,
@@ -21,7 +22,6 @@ export const axiosInstance = axios.create({
 });
 
 export const useAxiosInterceptor = () => {
-  console.count("useAxiosStart");
   const router = useRouter();
   const accessTokenLimitMs = 10000;
   let isRequestLock = false;
@@ -43,11 +43,9 @@ export const useAxiosInterceptor = () => {
         headers: { "x-refresh-token": refreshToken },
       })
       .then(({ data }) => {
-        const newToken = data.data.access_token;
         localStorage.setItem("accessToken", data.data.access_token);
         localStorage.setItem("refreshToken", data.data.refresh_token);
-        activeQueue(data.access_token);
-        return { newToken };
+        activeQueue(data.data.access_token);
       })
       .catch((error) => {
         const { error_code } = error.response.data;
@@ -64,7 +62,6 @@ export const useAxiosInterceptor = () => {
   };
 
   const requestConfigHandler = async (config: AxiosRequestConfig) => {
-    console.count("requestStart");
     const accessTokenData = localStorage.getItem("accessToken");
     const refreshTokenData = localStorage.getItem("refreshToken");
     const prevUrl = sessionStorage.getItem("prevUrl");
@@ -85,32 +82,47 @@ export const useAxiosInterceptor = () => {
     const isRefreshAfterCurrentTime = currentTime.isAfter(refreshCreateTime);
     const isRefreshAfterFirstEntryTime = firstEntryTime.isAfter(refreshCreateTime);
 
+    console.log("out", isRefreshAfterFirstEntryTime);
+    console.log(refreshCreateTime);
+
+    setInterval(() => {
+      console.log("sss", isRefreshAfterFirstEntryTime);
+    }, 1000);
+
     if ((isRefreshAfterCurrentTime && prevUrl === "none") || isRefreshAfterFirstEntryTime) {
+      console.log("in", isRefreshAfterFirstEntryTime);
       window.alert("토큰이 만료되어 로그인 페이지로 이동합니다.");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       sessionStorage.removeItem("firstEntryDate");
       setUserInfoData(null);
       router.push(INTERNAL_URL.LOGIN);
-      throw new axios.Cancel("토큰만료 강제페이지 이동");
+      throw new axios.Cancel("리프래시 토큰 만료로 인한 강제 로그인페이지 이동");
     }
 
-    if (isRefreshAfterCurrentTime && prevUrl !== "none") return setCurrentModal("loginModal");
+    if (isRefreshAfterCurrentTime && prevUrl !== "none" && router.pathname !== INTERNAL_URL.LOGIN) {
+      console.log("none", isRefreshAfterFirstEntryTime);
+      setCurrentModal("loginModal");
+      throw new axios.Cancel("리프래시 토큰 만료로 인한 요청취소");
+    }
 
     if (accessBetweenCurrentDiffTime <= accessTokenLimitMs && !isRequestLock) {
       isRequestLock = true;
-      const newToken = await getRefreshTokenCreator();
+      await getRefreshTokenCreator();
+      const accessToken = localStorage.getItem("accessToken");
       return {
         ...config,
         headers: {
-          "x-access-token": newToken,
+          "x-access-token": accessToken,
         },
       };
     }
 
     if (accessBetweenCurrentDiffTime <= accessTokenLimitMs && isRequestLock) {
       return new Promise(() => {
-        saveQueue((accessToken) => axiosInstance({ ...config, headers: { "x-access-token": accessToken } }));
+        saveQueue((accessToken) => {
+          axiosInstance({ ...config, headers: { "x-access-token": accessToken } });
+        });
       });
     }
 
@@ -122,6 +134,16 @@ export const useAxiosInterceptor = () => {
     };
   };
 
+  const responseErrorHandler = async (error: AxiosError<ErrorResponseDef>) => {
+    if (error.response?.data.error_code === "MALFORMED_JWT" && error.config.url === "/auth/health-check") {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      router.push(INTERNAL_URL.LOGIN);
+    }
+
+    return Promise.reject(error);
+  };
+
   const requestInterceptor = axiosInstance.interceptors.request.use(
     (config: AxiosRequestConfig) => requestConfigHandler(config),
     (error) => Promise.reject(error)
@@ -129,14 +151,16 @@ export const useAxiosInterceptor = () => {
 
   const responseInterceptor = axiosInstance.interceptors.response.use(
     (response) => response,
-    (error) => Promise.reject(error)
+    (error) => responseErrorHandler(error)
   );
 
-  useEffect(
-    () => () => {
-      axiosInstance.interceptors.request.eject(requestInterceptor);
-      axiosInstance.interceptors.response.eject(responseInterceptor);
-    },
-    [requestInterceptor, responseInterceptor]
-  );
+  useEffect(() => {
+    console.log("axios start");
+    axiosInstance.interceptors.request.eject(requestInterceptor);
+    axiosInstance.interceptors.response.eject(responseInterceptor);
+
+    return () => {
+      console.log("axios end");
+    };
+  }, [requestInterceptor, responseInterceptor]);
 };

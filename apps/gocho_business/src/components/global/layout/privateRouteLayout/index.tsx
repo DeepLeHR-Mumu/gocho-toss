@@ -13,10 +13,6 @@ export const PrivateRouteLayout: FunctionComponent<PrivateRouteProps> = ({ prote
   const isPathProtected = protectedRoutes.indexOf(router.pathname) !== -1;
 
   useEffect(() => {
-    console.count("routerLayout");
-  }, []);
-
-  useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (!isSuccess && isPathProtected && token) {
       return;
@@ -27,7 +23,7 @@ export const PrivateRouteLayout: FunctionComponent<PrivateRouteProps> = ({ prote
   }, [isPathProtected, isSuccess, router]);
 
   if ((isLoading || !isSuccess) && isPathProtected) {
-    return <div css={cssObj.loadingBox} />;
+    return <div css={cssObj.loadingBox}>ss</div>;
   }
 
   return <div>{children}</div>;

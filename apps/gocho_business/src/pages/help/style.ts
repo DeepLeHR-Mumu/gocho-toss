@@ -47,7 +47,7 @@ export const cssObj = {
       top: -0.625rem;
       width: 5rem;
       height: 3.75rem;
-      background-image: url("image/help/arrow_left.svg");
+      background-image: url("/image/help/arrow_left.svg");
       background-repeat: no-repeat;
       background-size: contain;
     }
@@ -58,7 +58,7 @@ export const cssObj = {
       top: -0.625rem;
       width: 5rem;
       height: 3.75rem;
-      background-image: url("image/help/stars.svg");
+      background-image: url("/image/help/stars.svg");
       background-repeat: no-repeat;
       background-size: contain;
     }
