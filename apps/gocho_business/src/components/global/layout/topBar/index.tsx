@@ -26,6 +26,7 @@ export const TopBar: FunctionComponent = () => {
       onSuccess: () => {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
+        sessionStorage.removeItem("firstEntryDate");
         setUserInfoData(null);
         queryClient.invalidateQueries();
         router.push(INTERNAL_URL.LOGIN);
@@ -51,7 +52,7 @@ export const TopBar: FunctionComponent = () => {
       {userInfoData ? (
         <SharedButton
           onClickHandler={doLogoutHandler}
-          size="small"
+          size="medium"
           backgroundColor={COLORS.GRAY100}
           borderColor={COLORS.GRAY70}
           text="로그아웃"
