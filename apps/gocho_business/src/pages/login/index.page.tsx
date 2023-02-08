@@ -103,7 +103,7 @@ const LoginPage: NextPage = () => {
 
           <form css={cssObj.formCSS} onSubmit={handleSubmit(loginSubmit)}>
             <ul>
-              <li css={cssObj.inputBox(errors.email?.message)}>
+              <li css={cssObj.inputBox(Boolean(errors.email))}>
                 <input
                   type="email"
                   placeholder="아이디(이메일)"
@@ -128,7 +128,7 @@ const LoginPage: NextPage = () => {
                   }}
                 />
               </li>
-              <li css={cssObj.inputBox(errors.password?.message)}>
+              <li css={cssObj.inputBox(Boolean(errors.password))}>
                 <input
                   type={isShowPassword ? "text" : "password"}
                   placeholder="비밀번호"
