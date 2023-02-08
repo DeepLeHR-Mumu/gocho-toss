@@ -35,11 +35,22 @@ export const useAddJd: useAddJdProps = () => {
             required_etc_arr: position.required_etc_arr ? position.required_etc_arr.split("\n") : null,
             task_detail_arr: position.task_detail_arr.split("\n"),
             pay_arr: position.pay_arr?.split("\n"),
-            preferred_etc_arr: position.preferred_etc_arr ? position.preferred_etc_arr.split("\n") : null,
+            place: {
+              type: position.place.type,
+              address_arr: position.place.address_arr?.length === 0 ? null : position.place.address_arr,
+              factory_arr: position.place.factory_arr?.length === 0 ? null : position.place.factory_arr,
+              etc: position.place.etc?.length === 0 ? null : position.place.etc,
+            },
+            preferred_certi_arr: position.preferred_certi_arr?.length !== 0 ? position.preferred_certi_arr : null,
+            preferred_etc_arr:
+              position.preferred_etc_arr && position.preferred_etc_arr?.length !== 0
+                ? position.preferred_etc_arr?.split("\n")
+                : null,
           };
         }),
       },
     };
+    console.log(newRequestObj);
     return postAddJd(newRequestObj);
   });
 };
