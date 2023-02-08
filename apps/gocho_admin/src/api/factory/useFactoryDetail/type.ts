@@ -20,6 +20,9 @@ export interface ResponseObjDef {
       exists: boolean;
       desc: string | null;
     };
+    company: {
+      name: string;
+    };
   };
 }
 

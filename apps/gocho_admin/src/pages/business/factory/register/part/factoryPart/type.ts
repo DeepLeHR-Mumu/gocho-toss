@@ -14,5 +14,8 @@ export interface FactoryPartProps {
       exists: boolean;
       desc: string | null;
     };
+    company: {
+      name: string;
+    };
   };
 }
