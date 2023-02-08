@@ -378,11 +378,13 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                   maxLength={70}
                   {...register(`etc_arr.${index}.value`)}
                 />
-                <DeleteInputButton
-                  onClickHandler={() => {
-                    etcArr.remove(index);
-                  }}
-                />
+                {index !== 0 && (
+                  <DeleteInputButton
+                    onClickHandler={() => {
+                      if (etcArr.fields.length > 1) etcArr.remove(index);
+                    }}
+                  />
+                )}
               </label>
             ))}
             <div css={cssObj.addButtonWrapper}>

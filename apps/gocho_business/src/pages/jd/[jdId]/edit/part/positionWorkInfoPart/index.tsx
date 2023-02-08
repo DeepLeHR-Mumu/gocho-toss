@@ -165,10 +165,8 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
           </div>
         </div>
         <p css={cssObj.errorMessage}>
-          {Boolean(
-            formState.errors.position_arr?.[positionIndex]?.rotation_arr &&
-              `${formState.errors.position_arr?.[positionIndex]?.rotation_arr?.message}`
-          )}
+          {formState.errors.position_arr?.[positionIndex]?.rotation_arr &&
+            `${formState.errors.position_arr?.[positionIndex]?.rotation_arr?.message}`}
         </p>
       </div>
       <div css={cssObj.container}>
@@ -558,12 +556,16 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   })}
                   autoComplete="off"
                 />
-                <DeleteInputButton
-                  onClickHandler={() => {
-                    preferredEtcArr.remove(index);
-                    setPreferredEtcIsFocusedArr((prev) => prev.filter((_, stateIndex) => stateIndex !== index));
-                  }}
-                />
+                {index !== 0 && (
+                  <DeleteInputButton
+                    onClickHandler={() => {
+                      if (preferredEtcArr.fields.length > 1) {
+                        preferredEtcArr.remove(index);
+                        setPreferredEtcIsFocusedArr((prev) => prev.filter((_, stateIndex) => stateIndex !== index));
+                      }
+                    }}
+                  />
+                )}
               </label>
               <p css={cssObj.arrayErrorMessage}>
                 {formState?.errors?.position_arr?.[positionIndex]?.preferred_etc_arr?.[index] &&

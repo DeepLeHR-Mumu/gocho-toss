@@ -91,6 +91,9 @@ const JdUploadPage: NextPageWithLayout = () => {
             etc_arr: getFieldArrayValueWithNull(jobObj.etc_arr),
             position_arr: jobObj.position_arr.map((position) => ({
               ...position,
+              conversion_rate: position.conversion_rate ? position.conversion_rate : null,
+              min_year: position.min_year ? position.min_year : null,
+              max_year: position.max_year ? position.max_year : null,
               hire_number: position.hire_number ? position.hire_number : 0,
               task_sub_arr: position.task_sub_arr ? position.task_sub_arr : null,
               task_detail_arr: getFieldArrayValue(position.task_detail_arr),
