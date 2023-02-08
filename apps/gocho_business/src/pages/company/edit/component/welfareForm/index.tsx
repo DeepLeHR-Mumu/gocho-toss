@@ -39,7 +39,8 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
   };
 
   const addValueHandler = (value: string) => {
-    if (value !== "") {
+    const isNoSpaceString = value.trim().length !== 0;
+    if (isNoSpaceString) {
       setWelfareArr((prevListArr) => {
         if (!prevListArr) {
           setValueCreator([value]);
@@ -62,7 +63,7 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
         <input
           ref={inputRef}
           type="text"
-          maxLength={120}
+          maxLength={30}
           placeholder="직접 입력하여 추가"
           css={cssObj.inputLine}
           onKeyUp={(onKeyEvent) => {
