@@ -12,9 +12,9 @@ export interface FactoryRegisterDef {
   female_number: number;
   product: string;
   bus_bool: "true" | "false";
-  bus_etc?: string;
+  bus_etc: string;
   dormitory_bool: "true" | "false";
-  dormitory_etc?: string;
+  dormitory_etc: string;
 }
 
 export interface FactoryEditDef extends FactoryRegisterDef {

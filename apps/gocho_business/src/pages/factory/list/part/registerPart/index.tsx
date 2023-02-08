@@ -52,6 +52,8 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingInde
         {
           ...factoryRequestObj,
           bus_bool: factoryRequestObj.bus_bool === "true",
+          bus_etc: factoryRequestObj.bus_etc === "" ? null : factoryRequestObj.bus_etc,
+          dormitory_etc: factoryRequestObj.dormitory_etc === "" ? null : factoryRequestObj.dormitory_etc,
           dormitory_bool: factoryRequestObj.dormitory_bool === "true",
           id: editingIndex === null ? undefined : factoryDataArr?.[Number(editingIndex)]?.id,
         },
