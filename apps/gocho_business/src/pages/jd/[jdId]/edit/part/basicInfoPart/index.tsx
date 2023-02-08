@@ -34,6 +34,11 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
     setValue(`apply_url`, "");
   };
 
+  const externalLinkMaker = (link: string) => {
+    if (/^http/.test(link)) return link;
+    return `https://${link}`;
+  };
+
   useEffect(() => {
     setRandomApplyRouteGuideArr(applyRouteGuideArr.sort(() => Math.random() - 0.5).slice(0, 3));
   }, []);
@@ -323,7 +328,11 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                       })}
                     />
                   </label>
-                  <SharedTextLink externalUrl={`${watch("apply_url")}`} fontColor="blue" text="링크 미리보기" />
+                  <SharedTextLink
+                    externalUrl={externalLinkMaker(watch("apply_url"))}
+                    fontColor="blue"
+                    text="링크 미리보기"
+                  />
                 </div>
                 <p css={cssObj.errorMessage}>{Boolean(formState.errors.apply_url && "링크는 필수 입력 사항입니다")}</p>
                 <div css={cssObj.linkButtonContainer}>

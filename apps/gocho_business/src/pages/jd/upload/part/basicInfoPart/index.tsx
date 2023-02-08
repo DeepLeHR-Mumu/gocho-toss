@@ -39,6 +39,11 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
     setValue(`apply_url`, "");
   };
 
+  const externalLinkMaker = (link: string) => {
+    if (/^http/.test(link)) return link;
+    return `https://${link}`;
+  };
+
   useEffect(() => {
     setRandomApplyRouteGuideArr(applyRouteGuideArr.sort(() => Math.random() - 0.5).slice(0, 3));
   }, []);
@@ -328,7 +333,12 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                       })}
                     />
                   </label>
-                  <SharedTextLink externalUrl={`${watch("apply_url")}`} fontColor="blue" text="링크 미리보기" />
+                  <SharedTextLink
+                    // TODO: apply_url을 입력할 때 마다 버튼이 계속 리랜더링 될 수 있다?
+                    externalUrl={externalLinkMaker(watch("apply_url"))}
+                    fontColor="blue"
+                    text="링크 미리보기"
+                  />
                 </div>
                 <p css={cssObj.errorMessage}>{formState.errors.apply_url && formState.errors.apply_url.message}</p>
                 <div css={cssObj.linkButtonContainer}>
