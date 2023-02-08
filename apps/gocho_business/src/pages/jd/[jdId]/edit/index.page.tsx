@@ -60,7 +60,7 @@ const JdEditPage: NextPageWithLayout = () => {
     control,
     handleSubmit,
     reset,
-    formState: { isDirty, submitCount },
+    formState: { isDirty, isSubmitSuccessful, submitCount },
   } = jdForm;
 
   const { fields, append, remove } = useFieldArray({
@@ -206,10 +206,12 @@ const JdEditPage: NextPageWithLayout = () => {
   }, [jdData, reset]);
 
   useEffect(() => {
-    window.onbeforeunload = () => isDirty;
+    const escapeWithoutSubmit = isDirty && !isSubmitSuccessful;
+
+    if (escapeWithoutSubmit) window.onbeforeunload = () => true;
 
     const handleUnload = () => {
-      if (isDirty) {
+      if (escapeWithoutSubmit) {
         jdEditExitEvent();
         if (!window.confirm(JD_UPLOAD_MESSAGE_OBJ.LEAVE)) {
           throw router.events.emit("routeChangeError");
@@ -225,7 +227,7 @@ const JdEditPage: NextPageWithLayout = () => {
       router.events.off("routeChangeStart", handleUnload);
       window.onbeforeunload = () => null;
     };
-  }, [isDirty, router.events]);
+  }, [isDirty, isSubmitSuccessful, router.events]);
 
   useEffect(() => {
     if (submitCount === 0) return;

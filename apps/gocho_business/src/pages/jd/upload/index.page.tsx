@@ -53,7 +53,7 @@ const JdUploadPage: NextPageWithLayout = () => {
   const {
     control,
     handleSubmit,
-    formState: { isDirty, submitCount },
+    formState: { isDirty, isSubmitSuccessful, submitCount },
   } = jobForm;
 
   const { fields, append, remove } = useFieldArray({
@@ -131,10 +131,12 @@ const JdUploadPage: NextPageWithLayout = () => {
   }, [submitCount]);
 
   useEffect(() => {
-    window.onbeforeunload = () => isDirty;
+    const escapeWithoutSubmit = isDirty && !isSubmitSuccessful;
+
+    if (escapeWithoutSubmit) window.onbeforeunload = () => true;
 
     const handleUnload = () => {
-      if (isDirty) {
+      if (escapeWithoutSubmit) {
         jdUploadExitEvent();
         if (!window.confirm(JD_UPLOAD_MESSAGE_OBJ.LEAVE)) {
           throw router.events.emit("routeChangeError");
@@ -150,7 +152,7 @@ const JdUploadPage: NextPageWithLayout = () => {
       window.onbeforeunload = () => null;
       router.events.off("routeChangeStart", handleUnload);
     };
-  }, [isDirty, router.events]);
+  }, [isDirty, isSubmitSuccessful, router.events]);
 
   useEffect(() => {
     jdUploadPageFunnelEvent();
