@@ -50,7 +50,6 @@ export const useAddJd: useAddJdProps = () => {
         }),
       },
     };
-    console.log(newRequestObj);
     return postAddJd(newRequestObj);
   });
 };
