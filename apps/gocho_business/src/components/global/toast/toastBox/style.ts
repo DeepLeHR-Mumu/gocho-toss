@@ -7,7 +7,7 @@ export const wrapper = css`
   width: fit-content;
   padding: 1rem 3rem;
   position: fixed;
-  z-index: 70;
+  z-index: 120;
   border-radius: 2rem;
   display: flex;
   align-items: center;

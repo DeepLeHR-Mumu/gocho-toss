@@ -16,5 +16,8 @@ export const factoryDetailSelector = ({ data: factory }: ResponseObjDef) => {
       exists: factory.dormitory.exists,
       desc: factory.dormitory.desc,
     },
+    company: {
+      name: factory.company.name,
+    },
   };
 };

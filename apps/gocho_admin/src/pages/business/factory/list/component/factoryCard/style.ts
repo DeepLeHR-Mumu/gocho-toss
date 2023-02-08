@@ -16,6 +16,11 @@ export const cssObj = {
   `,
 
   factoryIdBox: css`
+    width: 10%;
+    text-align: center;
+  `,
+
+  companyNameBox: css`
     width: 20%;
     text-align: center;
   `,

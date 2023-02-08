@@ -11,6 +11,7 @@ export const cssObj = {
     background-color: ${COLORS.BLUE_SECOND90};
     width: fit-content;
     padding: 0 0.5rem;
+    z-index: 20;
 
     > span {
       color: ${COLORS.BLUE_NEON30};

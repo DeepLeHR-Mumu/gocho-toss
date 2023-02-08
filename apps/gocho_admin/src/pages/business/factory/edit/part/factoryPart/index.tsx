@@ -40,7 +40,7 @@ export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ factory }) =>
         <strong css={cssObj.dataTitle}>기숙사</strong>
         <div>
           <p css={cssObj.dataBox}>{factory.dormitory.exists ? "O" : "X"}</p>
-          {factory.dormitory.desc && <p css={cssObj.dataBox}>{factory.bus.desc}</p>}
+          {factory.dormitory.desc && <p css={cssObj.dataBox}>{factory.dormitory.desc}</p>}
         </div>
       </div>
     </section>

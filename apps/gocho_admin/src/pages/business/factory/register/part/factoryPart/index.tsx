@@ -7,6 +7,10 @@ export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ factory }) =>
   return (
     <section css={cssObj.sectionContainer}>
       <div css={cssObj.dataContainer}>
+        <strong css={cssObj.dataTitle}>회사 이름</strong>
+        <p css={cssObj.dataBox}>{factory.company.name}</p>
+      </div>
+      <div css={cssObj.dataContainer}>
         <strong css={cssObj.dataTitle}>공장 이름</strong>
         <p css={cssObj.dataBox}>{factory.name}</p>
       </div>
@@ -40,7 +44,7 @@ export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ factory }) =>
         <strong css={cssObj.dataTitle}>기숙사</strong>
         <div>
           <p css={cssObj.dataBox}>{factory.dormitory.exists ? "O" : "X"}</p>
-          {factory.dormitory.desc && <p css={cssObj.dataBox}>{factory.bus.desc}</p>}
+          {factory.dormitory.desc && <p css={cssObj.dataBox}>{factory.dormitory.desc}</p>}
         </div>
       </div>
     </section>

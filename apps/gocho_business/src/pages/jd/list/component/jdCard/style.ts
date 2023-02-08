@@ -3,10 +3,11 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
-  cardContainer: css`
+  cardContainer: (isExpired: boolean) => css`
     margin-top: 2rem;
     padding: 1.5rem 1.5rem 1rem 1.5rem;
     border: 1px solid ${COLORS.GRAY80};
+    background-color: ${isExpired ? COLORS.GRAY80 : COLORS.GRAY100};
   `,
 
   topContainer: css`
@@ -50,5 +51,17 @@ export const cssObj = {
   buttonContainer: css`
     display: flex;
     gap: 0 1rem;
+  `,
+
+  inactiveLabel: css`
+    font-size: 0.875rem;
+    height: 2.25rem;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${COLORS.GRAY100};
+    background-color: ${COLORS.GRAY65};
+    border-radius: 50rem;
   `,
 };

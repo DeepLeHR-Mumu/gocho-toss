@@ -84,18 +84,6 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
     return `${taskPart} ${contractPart} ${hireNumberPart}명 채용`;
   };
 
-  const taskDetailErrorMsgMaker = () => {
-    const errorArray = formState.errors.position_arr?.[positionIndex]?.task_detail_arr;
-    if (errorArray) {
-      const values = Object.keys(errorArray).map((key) => errorArray?.[Number(key)]);
-      if (values.some((element) => element?.value?.type === "maxLength")) {
-        return "각 칸의 최대 입력 길이는 70자입니다";
-      }
-      return "추가한 모든 칸이 채워져야 합니다";
-    }
-    return null;
-  };
-
   return (
     <>
       <div css={cssObj.titleContainer}>
@@ -151,7 +139,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
         </div>
       </div>
       <div css={cssObj.container}>
-        <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.task_main)}>채용 직무</p>
+        <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.task_main))}>채용 직무</p>
         <div css={cssObj.taskInputContainer}>
           <div>
             <div css={cssObj.taskContainer}>
@@ -184,7 +172,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 ))}
               </div>
             </div>
-            <p css={cssObj.desc(!!formState.errors.position_arr?.[positionIndex]?.task_main)}>
+            <p css={cssObj.desc(Boolean(formState.errors.position_arr?.[positionIndex]?.task_main))}>
               {formState.errors.position_arr?.[positionIndex]?.task_main
                 ? "1차 직무는 필수 선택 사항입니다"
                 : "1차 직무 선택 후 2차 직무가 표시됩니다"}
@@ -228,42 +216,55 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
       {isCardOpen && (
         <>
           <div css={cssObj.container}>
-            <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.task_detail_arr)}>
+            <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.task_detail_arr))}>
               세부 직무 내용
             </p>
             <div css={cssObj.inputContainer}>
               {taskDetailArr.fields.map((item, index) => (
-                <label css={cssObj.inputLabel} key={`taskDetailArr${item.id}`} htmlFor={`taskDetailArr${item.id}`}>
-                  <input
-                    id={`taskDetailArr${item.id}`}
-                    css={cssObj.erasableInput(47)}
-                    placeholder="합격시 구체적으로 어떤 일을 하게 되는지 명시해주세요"
-                    {...register(`position_arr.${positionIndex}.task_detail_arr.${index}.value`, {
-                      required: true,
-                      maxLength: 70,
-                    })}
-                  />
-                  {index !== 0 && (
-                    <DeleteInputButton
-                      onClickHandler={() => {
-                        taskDetailArr.remove(index);
+                <div key={`taskDetailArr${item.id}`}>
+                  <label css={cssObj.inputLabel} htmlFor={`taskDetailArr${item.id}`}>
+                    <input
+                      id={`taskDetailArr${item.id}`}
+                      css={cssObj.erasableInput(47)}
+                      onFocus={() => {
+                        clearErrors(`position_arr.${positionIndex}.task_detail_arr.${index}`);
                       }}
+                      placeholder="합격시 구체적으로 어떤 일을 하게 되는지 명시해주세요 (최대 70자)"
+                      maxLength={70}
+                      {...register(`position_arr.${positionIndex}.task_detail_arr.${index}.value`, {
+                        required: "모든 칸이 채워져야 합니다",
+                        onBlur: (blurEvent) => {
+                          if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                            setValue(`position_arr.${positionIndex}.task_detail_arr.${index}.value`, "");
+                          }
+                        },
+                      })}
                     />
-                  )}
-                </label>
+                    {index !== 0 && (
+                      <DeleteInputButton
+                        onClickHandler={() => {
+                          taskDetailArr.remove(index);
+                        }}
+                      />
+                    )}
+                  </label>
+                  <p css={cssObj.arrayErrorMessage}>
+                    {formState?.errors?.position_arr?.[positionIndex]?.task_detail_arr?.[index] &&
+                      formState?.errors?.position_arr?.[positionIndex]?.task_detail_arr?.[index]?.value?.message}
+                  </p>
+                </div>
               ))}
               <AddFieldButton
                 onClickHandler={() => {
-                  taskDetailArr.append({ value: "" });
+                  if (taskDetailArr.fields.length < 10) taskDetailArr.append({ value: "" });
                 }}
               />
             </div>
-            <p css={cssObj.errorMessage}>
-              {formState.errors.position_arr?.[positionIndex]?.task_detail_arr && taskDetailErrorMsgMaker()}
-            </p>
           </div>
           <div css={cssObj.container}>
-            <p css={cssObj.inputTitle(!!formState.errors.position_arr?.[positionIndex]?.hire_number)}>채용 인원</p>
+            <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.hire_number))}>
+              채용 인원
+            </p>
             <div css={cssObj.hireNumberContainer}>
               <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-1, "0")}>
                 0명
@@ -295,7 +296,8 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                       css={cssObj.input(6)}
                       {...register(`position_arr.${positionIndex}.hire_number`, {
                         valueAsNumber: true,
-                        required: true,
+                        required: "채용 인원은 필수 입력 값입니다",
+                        max: { value: 9999, message: "최대값은 9999명입니다" },
                       })}
                     />
                     명
@@ -304,7 +306,8 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
               </div>
             </div>
             <p css={cssObj.errorMessage}>
-              {formState.errors.position_arr?.[positionIndex]?.hire_number && "채용 인원은 필수 입력 값입니다"}
+              {formState.errors.position_arr?.[positionIndex]?.hire_number &&
+                formState.errors.position_arr?.[positionIndex]?.hire_number?.message}
             </p>
           </div>
         </>

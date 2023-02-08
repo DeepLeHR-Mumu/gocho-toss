@@ -9,7 +9,7 @@ export interface RequestObjDef {
 }
 
 export interface AcceptCompanyDef {
-  ({ companyId }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ companyId, type }: RequestObjDef): Promise<AdminResponseDef>;
 }
 
 export interface UseAcceptCompanyProps {

@@ -41,15 +41,86 @@ export const cssObj = {
 
     > li {
       margin-bottom: 1.25rem;
-
-      :last-of-type {
-        margin-bottom: 0;
-      }
+      position: relative;
     }
+  `,
+  label: ({ isError, isFocus, isSuccess }: { isError: boolean; isFocus: boolean; isSuccess: boolean }) => {
+    const defaultCSS = css`
+      font-size: 0.75rem;
+      position: absolute;
+      left: 0;
+      top: 0;
+      margin-left: 1.75rem;
+      transform: translate(0%, -50%);
+      background-color: ${COLORS.GRAY100};
+      padding: 0 0.25rem;
+      height: 1rem;
+      text-align: center;
+    `;
+
+    if (isError) {
+      return css`
+        ${defaultCSS};
+        color: ${COLORS.ERROR_RED30};
+      `;
+    }
+    if (isFocus || isSuccess) {
+      return css`
+        ${defaultCSS};
+        color: ${COLORS.BLUE_FIRST40};
+      `;
+    }
+    return css`
+      ${defaultCSS};
+      color: ${COLORS.GRAY60};
+    `;
+  },
+  input: ({ isError, isFocus, isSuccess }: { isError: boolean; isFocus: boolean; isSuccess: boolean }) => {
+    const defaultCSS = css`
+      width: 100%;
+      border-radius: 2rem;
+      font-size: 1rem;
+      border: 1px solid;
+      height: 3.25rem;
+      padding: 0 2.6rem 0 1.75rem;
+    `;
+
+    if (isError) {
+      return css`
+        ${defaultCSS};
+        border-color: ${COLORS.ERROR_RED30};
+      `;
+    }
+    if (isFocus || isSuccess) {
+      return css`
+        ${defaultCSS};
+        border-color: ${COLORS.BLUE_FIRST40};
+      `;
+    }
+    return css`
+      ${defaultCSS};
+      border-color: ${COLORS.GRAY60};
+    `;
+  },
+  deleteButton: css`
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 1.2rem;
+    color: ${COLORS.ERROR_RED30};
+  `,
+  successIconBox: css`
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 1.2rem;
+    color: ${COLORS.BLUE_FIRST40};
   `,
   errorBox: css`
     margin-top: 0.2rem;
-    min-height: 0.75rem;
+    height: 1.5rem;
     margin-bottom: 1.25rem;
   `,
   errorMsgCSS: css`
