@@ -32,7 +32,7 @@ const JdUpload: NextPage = () => {
   });
 
   const { data: companyDataObj, isLoading, isError } = useFindCompany({ word: searchWord, order: "recent" });
-  const { mutate: addJobMutate } = useAddJd();
+  const { mutate: addJobMutate, error: addJobError } = useAddJd();
 
   if (!companyDataObj || isLoading) {
     return <LoadingScreen />;
@@ -51,7 +51,7 @@ const JdUpload: NextPage = () => {
         },
 
         onError: () => {
-          setCheckMsg("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
+          setCheckMsg(addJobError?.message);
         },
       }
     );
