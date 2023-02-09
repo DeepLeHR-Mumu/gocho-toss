@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { BiRocket } from "react-icons/bi";
@@ -41,6 +41,9 @@ import { cssObj } from "./style";
 
 const JdEditPage: NextPageWithLayout = () => {
   const [isCardOpenArr, setIsCardOpenArr] = useState<boolean[]>([false]);
+  const isEditLoading = useRef(false);
+  const isDeleteLoading = useRef(false);
+  const isEndLoading = useRef(false);
 
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -89,6 +92,9 @@ const JdEditPage: NextPageWithLayout = () => {
   const { mutate: endJdMutation } = useEndJd();
 
   const endJdHandler = (id: number) => {
+    if (isEndLoading.current) return;
+    isEndLoading.current = true;
+
     if (window.confirm(JD_EDIT_MESSAGE_OBJ.END)) {
       endJdMutation(
         { jdId: id },
@@ -97,12 +103,19 @@ const JdEditPage: NextPageWithLayout = () => {
             setToast("마감되었습니다");
             queryClient.invalidateQueries(jdArrKeyObj.all);
           },
+
+          onSettled: () => {
+            isEndLoading.current = false;
+          },
         }
       );
     }
   };
 
   const deleteJdHandler = (id: number) => {
+    if (isDeleteLoading.current) return;
+    isDeleteLoading.current = true;
+
     if (window.confirm(JD_EDIT_MESSAGE_OBJ.DELETE)) {
       deleteJdMutation(
         { jdId: id },
@@ -111,12 +124,19 @@ const JdEditPage: NextPageWithLayout = () => {
             setToast("삭제되었습니다");
             queryClient.invalidateQueries(jdArrKeyObj.all);
           },
+
+          onSettled: () => {
+            isDeleteLoading.current = false;
+          },
         }
       );
     }
   };
 
   const jdEditHandler: SubmitHandler<JdFormValues> = (jdObj) => {
+    if (isEditLoading.current) return;
+    isEditLoading.current = true;
+
     jdEditConfirmEvent();
     if (window.confirm(JD_EDIT_MESSAGE_OBJ.EDIT)) {
       editJdMutate(
@@ -154,6 +174,10 @@ const JdEditPage: NextPageWithLayout = () => {
 
           onError: () => {
             alert("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
+          },
+
+          onSettled: () => {
+            isEditLoading.current = false;
           },
         }
       );

@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useRef } from "react";
 import { AiOutlineEye, AiOutlineNumber, AiOutlinePause } from "react-icons/ai";
 import { BiBookmark, BiMinus } from "react-icons/bi";
 import { FiUser, FiCalendar, FiEdit } from "react-icons/fi";
@@ -29,6 +29,9 @@ import { cssObj } from "./style";
 import { JdCardProps } from "./type";
 
 export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
+  const isDeleteLoading = useRef(false);
+  const isEndLoading = useRef(false);
+
   const router = useRouter();
   const queryClient = useQueryClient();
   const { setToast } = useToast();
@@ -42,6 +45,9 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
   const clickData = numberFormat.format(jd.click);
 
   const endJdHandler = (id: number) => {
+    if (isEndLoading.current) return;
+    isEndLoading.current = true;
+
     jdCloseButtonEvent(id);
     if (window.confirm(JD_MESSAGE_OBJ.END)) {
       endJdMutation(
@@ -52,12 +58,19 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
             jdCloseDoneEvent(id);
             queryClient.invalidateQueries(jdArrKeyObj.all);
           },
+
+          onSettled: () => {
+            isEndLoading.current = false;
+          },
         }
       );
     }
   };
 
   const deleteJdHandler = (id: number) => {
+    if (isDeleteLoading.current) return;
+    isDeleteLoading.current = true;
+
     jdDeleteButtonEvent(id);
     if (window.confirm(JD_MESSAGE_OBJ.DELETE)) {
       deleteJdMutation(
@@ -67,6 +80,10 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
             setToast("삭제되었습니다");
             jdDeleteDoneEvent(id);
             queryClient.invalidateQueries(jdArrKeyObj.all);
+          },
+
+          onSettled: () => {
+            isDeleteLoading.current = false;
           },
         }
       );

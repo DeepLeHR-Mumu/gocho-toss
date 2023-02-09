@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState, useRef } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { BiRocket } from "react-icons/bi";
 import { useRouter } from "next/router";
@@ -34,6 +34,7 @@ import { cssObj } from "./style";
 
 const JdUploadPage: NextPageWithLayout = () => {
   const [isCardOpenArr, setIsCardOpenArr] = useState<boolean[]>([false]);
+  const isLoading = useRef(false);
 
   const { mutate: addJobMutate } = useAddJd();
   const { setToast } = useToast();
@@ -77,6 +78,9 @@ const JdUploadPage: NextPageWithLayout = () => {
   });
 
   const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
+    if (isLoading.current) return;
+    isLoading.current = true;
+
     jdUploadConfirmEvent();
     if (window.confirm(JD_UPLOAD_MESSAGE_OBJ.UPLOAD)) {
       addJobMutate(
@@ -119,6 +123,10 @@ const JdUploadPage: NextPageWithLayout = () => {
 
           onError: () => {
             alert("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
+          },
+
+          onSettled: () => {
+            isLoading.current = false;
           },
         }
       );
