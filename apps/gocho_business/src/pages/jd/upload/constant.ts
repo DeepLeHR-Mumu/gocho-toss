@@ -16,13 +16,13 @@ export const BLANK_POSITION = {
   rotation_etc: null,
   place: {
     type: "일반",
-    address_arr: [],
-    factory_arr: [],
-    etc: "",
+    address_arr: null,
+    factory_arr: null,
+    etc: null,
   },
   hire_number: null,
   pay_arr: [{ value: "" }],
-  preferred_certi_arr: [],
+  preferred_certi_arr: null,
   preferred_etc_arr: [{ value: "" }],
 };
 

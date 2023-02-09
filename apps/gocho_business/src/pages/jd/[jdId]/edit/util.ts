@@ -1,10 +1,9 @@
 export const getFieldArrayValue = (arrData: { value: string }[]) => arrData.map((item) => item.value);
 
 export const getFieldArrayValueWithNull = (arrData: { value: string }[]) => {
-  if (arrData.length === 0) {
-    return null;
-  }
-  return arrData.map((item) => item.value);
+  const returnArr = arrData.map((item) => item.value);
+  if (returnArr.every((element) => element === "")) return null;
+  return returnArr;
 };
 
 export const setFieldArray = (arrData: string[]) => arrData.map((item) => ({ value: item || "" }));

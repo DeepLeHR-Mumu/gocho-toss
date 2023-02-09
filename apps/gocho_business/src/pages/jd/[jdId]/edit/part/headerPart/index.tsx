@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useRef } from "react";
 import { BiRocket } from "react-icons/bi";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
@@ -16,6 +16,9 @@ import { cssObj } from "./style";
 import { HeaderPartProps } from "./type";
 
 export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ jdData }) => {
+  const isDeleteLoading = useRef(false);
+  const isEndLoading = useRef(false);
+
   const router = useRouter();
   const queryClient = useQueryClient();
   const { setToast } = useToast();
@@ -24,6 +27,9 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ jdData }) => {
   const { mutate: endJdMutation } = useEndJd();
 
   const endJdHandler = (id: number) => {
+    if (isEndLoading.current) return;
+    isEndLoading.current = true;
+
     if (window.confirm(JD_EDIT_MESSAGE_OBJ.END)) {
       endJdMutation(
         { jdId: id },
@@ -32,12 +38,19 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ jdData }) => {
             setToast("마감되었습니다");
             queryClient.invalidateQueries(jdArrKeyObj.all);
           },
+
+          onSettled: () => {
+            isEndLoading.current = false;
+          },
         }
       );
     }
   };
 
   const deleteJdHandler = (id: number) => {
+    if (isDeleteLoading.current) return;
+    isDeleteLoading.current = true;
+
     if (window.confirm(JD_EDIT_MESSAGE_OBJ.DELETE)) {
       deleteJdMutation(
         { jdId: id },
@@ -45,6 +58,10 @@ export const HeaderPart: FunctionComponent<HeaderPartProps> = ({ jdData }) => {
           onSuccess: () => {
             setToast("삭제되었습니다");
             queryClient.invalidateQueries(jdArrKeyObj.all);
+          },
+
+          onSettled: () => {
+            isDeleteLoading.current = false;
           },
         }
       );
