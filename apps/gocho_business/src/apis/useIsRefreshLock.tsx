@@ -65,7 +65,6 @@ export const useAxiosInterceptor = () => {
     const accessTokenData = localStorage.getItem("accessToken");
     const refreshTokenData = localStorage.getItem("refreshToken");
     const prevUrl = sessionStorage.getItem("prevUrl");
-    const firstEntryDate = sessionStorage.getItem("firstEntryDate");
 
     if ((!accessTokenData || !refreshTokenData) && config.url === "/auth/health-check") {
       throw new axios.Cancel("비로그인 health-check 취소");
@@ -77,31 +76,20 @@ export const useAxiosInterceptor = () => {
     const accessCreateTime = dayjs(new Date(accessTokenExp * 1000), "YYYY-MM-DD HH:mm:ss.SSS");
     const refreshCreateTime = dayjs(new Date(refreshTokenExp * 1000), "YYYY-MM-DD HH:mm:ss.SSS");
     const currentTime = dayjs(new Date(), "YYYY-MM-DD HH:mm:ss.SSS");
-    const firstEntryTime = dayjs(new Date(Number(firstEntryDate)), "YYYY-MM-DD HH:mm:ss.SSS");
     const accessBetweenCurrentDiffTime = accessCreateTime.diff(currentTime, "ms");
     const isRefreshAfterCurrentTime = currentTime.isAfter(refreshCreateTime);
-    const isRefreshAfterFirstEntryTime = firstEntryTime.isAfter(refreshCreateTime);
 
-    console.log("out", isRefreshAfterFirstEntryTime);
-    console.log(refreshCreateTime);
-
-    setInterval(() => {
-      console.log("sss", isRefreshAfterFirstEntryTime);
-    }, 1000);
-
-    if ((isRefreshAfterCurrentTime && prevUrl === "none") || isRefreshAfterFirstEntryTime) {
-      console.log("in", isRefreshAfterFirstEntryTime);
+    if (isRefreshAfterCurrentTime && prevUrl === "none") {
       window.alert("토큰이 만료되어 로그인 페이지로 이동합니다.");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      sessionStorage.removeItem("firstEntryDate");
       setUserInfoData(null);
       router.push(INTERNAL_URL.LOGIN);
       throw new axios.Cancel("리프래시 토큰 만료로 인한 강제 로그인페이지 이동");
     }
 
     if (isRefreshAfterCurrentTime && prevUrl !== "none" && router.pathname !== INTERNAL_URL.LOGIN) {
-      console.log("none", isRefreshAfterFirstEntryTime);
+      // 라우팅 이동 취소
       setCurrentModal("loginModal");
       throw new axios.Cancel("리프래시 토큰 만료로 인한 요청취소");
     }
@@ -155,12 +143,7 @@ export const useAxiosInterceptor = () => {
   );
 
   useEffect(() => {
-    console.log("axios start");
     axiosInstance.interceptors.request.eject(requestInterceptor);
     axiosInstance.interceptors.response.eject(responseInterceptor);
-
-    return () => {
-      console.log("axios end");
-    };
   }, [requestInterceptor, responseInterceptor]);
 };

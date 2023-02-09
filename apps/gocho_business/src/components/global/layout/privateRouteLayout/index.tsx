@@ -23,7 +23,7 @@ export const PrivateRouteLayout: FunctionComponent<PrivateRouteProps> = ({ prote
   }, [isPathProtected, isSuccess, router]);
 
   if ((isLoading || !isSuccess) && isPathProtected) {
-    return <div css={cssObj.loadingBox}>ss</div>;
+    return <div css={cssObj.loadingBox} />;
   }
 
   return <div>{children}</div>;
