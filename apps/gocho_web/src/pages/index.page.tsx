@@ -1,13 +1,6 @@
 import { NextPage } from "next";
 import { useEffect } from "react";
 
-// import { dehydrate, QueryClient } from "@tanstack/react-query";
-
-// import { specArrKeyObj } from "@constant/queryKeyFactory/spec/arrKeyObj";
-// import { companyCommentArrKeyObj } from "@constant/queryKeyFactory/company/commentArrKeyObj";
-// import { jobArrKeyObj } from "@constant/queryKeyFactory/job/jobArrKeyObj";
-// import { communityPostingArrKeyObj } from "@constant/queryKeyFactory/community/postingArrKeyObj";
-// import { tipArrKeyObj } from "@constant/queryKeyFactory/tip/arrKeyObj";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { homeFunnelEvent } from "shared-ga/home";
 
@@ -15,7 +8,6 @@ import { CompanyCommentPart } from "@pages/index/part/companyCommentPart";
 
 import { MainCarouselPart } from "./index/part/mainCarouselPart";
 import { JobPart } from "./index/part/jobPart";
-import { CommunityPostingPart } from "./index/part/communityPostingPart";
 import { SpecBestPart } from "./index/part/specBestPart";
 import { TipPart } from "./index/part/tipPart";
 import { PageHead } from "./index/pageHead";
@@ -34,7 +26,6 @@ const Home: NextPage = () => {
       <JobPart />
       <CompanyCommentPart />
       <TipPart />
-      <CommunityPostingPart />
       <SpecBestPart />
     </main>
   );
