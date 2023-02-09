@@ -25,7 +25,7 @@ const HelpPage: NextPageWithLayout = () => (
     </div>
 
     <div css={cssObj.backgroundBox}>
-      <Image src={helpBackground} alt="" objectFit="contain" layout="responsive" draggable={false} />
+      <Image src={helpBackground} alt="" objectFit="contain" layout="responsive" draggable={false} priority />
     </div>
   </main>
 );
