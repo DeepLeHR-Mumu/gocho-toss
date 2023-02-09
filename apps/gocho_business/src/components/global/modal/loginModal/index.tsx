@@ -1,4 +1,4 @@
-import { FunctionComponent, useRef,useEffect, useState } from "react";
+import { FunctionComponent, useState, useRef } from "react";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -59,7 +59,6 @@ export const LoginBox: FunctionComponent = () => {
         loginSuccessEvent(watch("auto_login"));
         localStorage.setItem("accessToken", response.data.access_token);
         localStorage.setItem("refreshToken", response.data.refresh_token);
-        sessionStorage.setItem("firstEntryDate", JSON.stringify(new Date().getTime()));
         const { id, company_id, company_name, company_logo, iat, exp, email, name, department } = managerTokenDecryptor(
           response.data.access_token
         );
@@ -79,12 +78,6 @@ export const LoginBox: FunctionComponent = () => {
       },
     });
   };
-
-  useEffect(() => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    sessionStorage.removeItem("firstEntryDate");
-  }, []);
 
   const emailCSSObj = {
     isError: Boolean(errors.email),

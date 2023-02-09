@@ -1,10 +1,10 @@
 import { FunctionComponent, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { FiEdit, FiPlus, FiX } from "react-icons/fi";
-import { useRouter } from "next/router";
 
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
+import { usePreventRouting } from "shared-hooks";
 
 import { useAddFactory } from "@/apis/factory/useAddFactory";
 import { useFactoryArr } from "@/apis/factory/useFactoryArr";
@@ -26,14 +26,10 @@ import { defaultInput, FACTORY_MESSSAGE_OBJ } from "./constant";
 export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingIndex, setEditingIndex }) => {
   const isLoading = useRef(false);
 
-  const router = useRouter();
   const formObj = useForm<FactoryRegisterDef>();
-  const {
-    handleSubmit,
-    watch,
-    reset,
-    formState: { submitCount, isDirty },
-  } = formObj;
+  const { handleSubmit, watch, reset, formState } = formObj;
+
+  usePreventRouting(Boolean(Object.keys(formState.dirtyFields).length));
 
   const { data: factoryDataArr } = useFactoryArr();
   const { mutate: addFactoryMutation } = useAddFactory();
@@ -75,15 +71,15 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingInde
   };
 
   useEffect(() => {
-    if (submitCount === 0) return;
+    if (formState.submitCount === 0) return;
     if (editingIndex === null) {
-      factoryUploadFailEvent(submitCount);
+      factoryUploadFailEvent(formState.submitCount);
       return;
     }
-    factoryEditFailEvent(submitCount);
+    factoryEditFailEvent(formState.submitCount);
     // submitCount의 이전 값 비교하여 submitCount만 바뀔 때 리렌더링하는 로직이 오히려 더 복잡하므로 라인 추가
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [submitCount]);
+  }, [formState]);
 
   useEffect(() => {
     if (editingIndex === null) {
@@ -107,28 +103,9 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingInde
         dormitory_bool: factoryDataArr[editingIndex].dormitory.exists ? "true" : "false",
         dormitory_etc: factoryDataArr[editingIndex].dormitory.desc || "",
       },
-      { keepDefaultValues: true }
+      { keepDirtyValues: true }
     );
   }, [factoryDataArr, editingIndex, reset]);
-
-  useEffect(() => {
-    window.onbeforeunload = () => isDirty;
-    const pageExitHandler = () => {
-      if (!isDirty) {
-        return;
-      }
-      if (!window.confirm("나가시겠어요?") && isDirty) {
-        throw router.events.emit("routeChangeError");
-      }
-    };
-
-    router.events.on("routeChangeStart", pageExitHandler);
-
-    return () => {
-      router.events.off("routeChangeStart", pageExitHandler);
-      window.onbeforeunload = () => null;
-    };
-  }, [isDirty, router]);
 
   const totalWorkerNumber = Number(watch("male_number") || 0) + Number(watch("female_number") || 0);
 

@@ -9,9 +9,12 @@ export const ModalComponent: FunctionComponent<modalComponentProps> = ({ childre
     // TODO: body css로 옮기기
     document.body.style.cssText = `
       position: fixed; 
-      top: -${window.scrollY}px;
-      overflow-y: scroll;
-      width: 100%;`;
+      top: 0;
+      left:0;
+      min-width:1440px;
+      overflow-x:hidden;
+      overflow-y: hidden;
+      `;
     return () => {
       const scrollY = document.body.style.top;
       document.body.style.cssText = "";
