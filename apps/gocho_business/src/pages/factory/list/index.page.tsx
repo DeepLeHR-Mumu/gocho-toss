@@ -9,12 +9,10 @@ import { PageHead } from "./pageHead";
 import { RegisterPart } from "./part/registerPart";
 import { FactoryCardListPart } from "./part/factoryCardListPart";
 import { cssObj } from "./style";
-import { useModal } from "@/globalStates/useModal";
 
 const FactoryListPage: NextPageWithLayout = () => {
   const [editingIndex, setEditingIndex] = useState<null | number>(null);
   const [rejectedMessage, setRejectedMessage] = useState<null | string>(null);
-  const { setCurrentModal } = useModal();
 
   useEffect(() => {
     if (editingIndex === null) {
@@ -32,14 +30,6 @@ const FactoryListPage: NextPageWithLayout = () => {
         <p css={cssObj.pageDescription}>
           간단히 공장을 등록해보세요! 등록한 공장은 공고 업로드시 불러와 사용할 수 있습니다
         </p>
-        <button
-          onClick={() => {
-            setCurrentModal("findPasswordModal");
-          }}
-          type="button"
-        >
-          로그인 모달 열기
-        </button>
 
         {rejectedMessage && (
           <div css={cssObj.rejectedBox}>
