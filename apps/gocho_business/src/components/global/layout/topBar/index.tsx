@@ -26,7 +26,6 @@ export const TopBar: FunctionComponent = () => {
       onSuccess: () => {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
-        sessionStorage.removeItem("firstEntryDate");
         setUserInfoData(null);
         queryClient.invalidateQueries();
         router.push(INTERNAL_URL.LOGIN);
