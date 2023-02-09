@@ -32,7 +32,7 @@ const JdUpload: NextPage = () => {
   });
 
   const { data: companyDataObj, isLoading, isError } = useFindCompany({ word: searchWord, order: "recent" });
-  const { mutate: addJobMutate, error: addJobError } = useAddJd();
+  const { mutate: addJobMutate } = useAddJd();
 
   if (!companyDataObj || isLoading) {
     return <LoadingScreen />;
@@ -50,8 +50,8 @@ const JdUpload: NextPage = () => {
           setCheckMsg("서버에 공고가 업로드 되었습니다.");
         },
 
-        onError: () => {
-          setCheckMsg(addJobError?.message);
+        onError: (addJobError) => {
+          setCheckMsg(addJobError.response?.data.error_message);
         },
       }
     );
