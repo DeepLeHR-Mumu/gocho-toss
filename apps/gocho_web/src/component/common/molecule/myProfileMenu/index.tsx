@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect } from "react";
 import Link from "next/link";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { profileMenuArr } from "@component/global/header/menuArr";
+import { profileMenuArr } from "@component/global/header/constant";
 
 import { myProfileMenuWrapper, myProfileTitle, myProfileMenuCSS, logoutCSS } from "./style";
 import { MyProfileMenuProps } from "./type";
