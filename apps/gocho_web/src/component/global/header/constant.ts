@@ -2,10 +2,8 @@ import {
   JOBS_LIST_URL,
   JOBS_EXPLIST_URL,
   MYPAGE_URL,
-  COMMUNITY_POSTINGS_LIST_URL,
   COMMUNITY_TIPS_LIST_URL,
   SPEC_LIST_URL,
-  INTERVIEW_REVIEW,
   DATALAB_DETAIL,
 } from "shared-constant/internalURL";
 
@@ -28,25 +26,11 @@ export const menuArr = [
     ],
   },
   {
-    menuTitle: "커뮤니티",
-    mainUrl: "community",
-    menuLink: COMMUNITY_POSTINGS_LIST_URL,
-    subMenuArr: [
-      {
-        menuTitle: "자유게시판",
-        menuLink: COMMUNITY_POSTINGS_LIST_URL,
-      },
-      {
-        menuTitle: "고수들의 취업꿀팁",
-        menuLink: COMMUNITY_TIPS_LIST_URL,
-      },
-    ],
+    menuTitle: "취업꿀팁",
+    mainUrl: "/community/tip/list",
+    menuLink: COMMUNITY_TIPS_LIST_URL,
   },
-  {
-    menuTitle: "면접리뷰",
-    mainUrl: "review",
-    menuLink: INTERVIEW_REVIEW,
-  },
+
   {
     menuTitle: "dataLab",
     mainUrl: "datalab",
