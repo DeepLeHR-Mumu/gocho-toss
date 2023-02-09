@@ -111,7 +111,9 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
 
   const rotationTextMaker = (selectedRotation: string[]) => {
     if (selectedRotation.length === 0) return "교대 형태 선택";
-    return selectedRotation.join(", ");
+    return selectedRotation
+      .map((rotation) => rotationArr.find((rotationObj) => rotationObj.data === rotation)?.name)
+      .join(", ");
   };
 
   useEffect(() => {
@@ -163,10 +165,8 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
           </div>
         </div>
         <p css={cssObj.errorMessage}>
-          {Boolean(
-            formState.errors.position_arr?.[positionIndex]?.rotation_arr &&
-              `${formState.errors.position_arr?.[positionIndex]?.rotation_arr?.message}`
-          )}
+          {formState.errors.position_arr?.[positionIndex]?.rotation_arr &&
+            `${formState.errors.position_arr?.[positionIndex]?.rotation_arr?.message}`}
         </p>
       </div>
       <div css={cssObj.container}>
@@ -185,6 +185,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   value={placeType.data}
                   onClick={() => {
                     if (watch("position_arr")[positionIndex].place.type !== placeType.data) {
+                      clearErrors(`position_arr.${positionIndex}.place`);
                       clearErrors(`position_arr.${positionIndex}.place.etc`);
                     }
                   }}
@@ -215,6 +216,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   <button
                     css={cssObj.input(20)}
                     type="button"
+                    disabled={factoryDataArr?.length === 0}
                     onClick={() => {
                       if (
                         isFactoryListOpen &&
@@ -233,7 +235,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                       setIsFactoryListOpen(false);
                     }}
                   >
-                    해당하는 공장을 모두 선택해주세요
+                    {factoryDataArr?.length === 0 ? "등록된 공장이 없습니다" : "해당하는 공장을 모두 선택해주세요"}
                     {isFactoryListOpen ? <FiChevronUp /> : <FiChevronDown />}
                   </button>
                   <div css={cssObj.optionList(isFactoryListOpen)}>
@@ -554,12 +556,16 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   })}
                   autoComplete="off"
                 />
-                <DeleteInputButton
-                  onClickHandler={() => {
-                    preferredEtcArr.remove(index);
-                    setPreferredEtcIsFocusedArr((prev) => prev.filter((_, stateIndex) => stateIndex !== index));
-                  }}
-                />
+                {index !== 0 && (
+                  <DeleteInputButton
+                    onClickHandler={() => {
+                      if (preferredEtcArr.fields.length > 1) {
+                        preferredEtcArr.remove(index);
+                        setPreferredEtcIsFocusedArr((prev) => prev.filter((_, stateIndex) => stateIndex !== index));
+                      }
+                    }}
+                  />
+                )}
               </label>
               <p css={cssObj.arrayErrorMessage}>
                 {formState?.errors?.position_arr?.[positionIndex]?.preferred_etc_arr?.[index] &&

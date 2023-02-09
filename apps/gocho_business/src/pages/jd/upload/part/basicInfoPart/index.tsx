@@ -39,6 +39,11 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
     setValue(`apply_url`, "");
   };
 
+  const externalLinkMaker = (link: string) => {
+    if (/^http/.test(link)) return link;
+    return `https://${link}`;
+  };
+
   useEffect(() => {
     setRandomApplyRouteGuideArr(applyRouteGuideArr.sort(() => Math.random() - 0.5).slice(0, 3));
   }, []);
@@ -180,11 +185,13 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               </div>
             ))}
             <div css={cssObj.addButtonWrapper}>
-              <AddFieldButton
-                onClickHandler={() => {
-                  if (processArr.fields.length < 8) processArr.append({ value: "" });
-                }}
-              />
+              {processArr.fields.length < 8 && (
+                <AddFieldButton
+                  onClickHandler={() => {
+                    processArr.append({ value: "" });
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -262,14 +269,14 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
               </div>
             ))}
             <div css={cssObj.addButtonWrapper}>
-              <AddFieldButton
-                onClickHandler={() => {
-                  if (applyRouteArr.fields.length < 10) {
+              {applyRouteArr.fields.length < 9 && (
+                <AddFieldButton
+                  onClickHandler={() => {
                     applyRouteArr.append({ value: "" });
                     setApplyRouteIsFocusedArr((prev) => [...prev, false]);
-                  }
-                }}
-              />
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -326,7 +333,12 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                       })}
                     />
                   </label>
-                  <SharedTextLink externalUrl={`${watch("apply_url")}`} fontColor="blue" text="링크 미리보기" />
+                  <SharedTextLink
+                    // TODO: apply_url을 입력할 때 마다 버튼이 계속 리랜더링 될 수 있다?
+                    externalUrl={externalLinkMaker(watch("apply_url"))}
+                    fontColor="blue"
+                    text="링크 미리보기"
+                  />
                 </div>
                 <p css={cssObj.errorMessage}>{formState.errors.apply_url && formState.errors.apply_url.message}</p>
                 <div css={cssObj.linkButtonContainer}>
@@ -376,19 +388,23 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                   maxLength={70}
                   {...register(`etc_arr.${index}.value`)}
                 />
-                <DeleteInputButton
-                  onClickHandler={() => {
-                    etcArr.remove(index);
-                  }}
-                />
+                {index !== 0 && (
+                  <DeleteInputButton
+                    onClickHandler={() => {
+                      if (etcArr.fields.length > 1) etcArr.remove(index);
+                    }}
+                  />
+                )}
               </label>
             ))}
             <div css={cssObj.addButtonWrapper}>
-              <AddFieldButton
-                onClickHandler={() => {
-                  if (etcArr.fields.length < 10) etcArr.append({ value: "" });
-                }}
-              />
+              {etcArr.fields.length < 10 && (
+                <AddFieldButton
+                  onClickHandler={() => {
+                    etcArr.append({ value: "" });
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>

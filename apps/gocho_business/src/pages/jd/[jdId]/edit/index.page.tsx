@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { BiRocket } from "react-icons/bi";
@@ -26,6 +26,7 @@ import { useEndJd } from "@/apis/jd/useEndJd";
 import { jdArrKeyObj } from "@/apis/jd/useJdArr/type";
 
 import { JD_UPLOAD_MESSAGE_OBJ } from "@/pages/jd/upload/constant";
+import { INTERNAL_URL } from "@/constants/url";
 import { HeaderPart } from "./part/headerPart";
 import { BasicInfoPart } from "./part/basicInfoPart";
 import { PositionHeaderPart } from "./part/positionHeaderPart";
@@ -40,6 +41,9 @@ import { cssObj } from "./style";
 
 const JdEditPage: NextPageWithLayout = () => {
   const [isCardOpenArr, setIsCardOpenArr] = useState<boolean[]>([false]);
+  const isEditLoading = useRef(false);
+  const isDeleteLoading = useRef(false);
+  const isEndLoading = useRef(false);
 
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -59,7 +63,7 @@ const JdEditPage: NextPageWithLayout = () => {
     control,
     handleSubmit,
     reset,
-    formState: { isDirty, submitCount },
+    formState: { isDirty, isSubmitSuccessful, submitCount },
   } = jdForm;
 
   const { fields, append, remove } = useFieldArray({
@@ -88,6 +92,9 @@ const JdEditPage: NextPageWithLayout = () => {
   const { mutate: endJdMutation } = useEndJd();
 
   const endJdHandler = (id: number) => {
+    if (isEndLoading.current) return;
+    isEndLoading.current = true;
+
     if (window.confirm(JD_EDIT_MESSAGE_OBJ.END)) {
       endJdMutation(
         { jdId: id },
@@ -96,12 +103,19 @@ const JdEditPage: NextPageWithLayout = () => {
             setToast("마감되었습니다");
             queryClient.invalidateQueries(jdArrKeyObj.all);
           },
+
+          onSettled: () => {
+            isEndLoading.current = false;
+          },
         }
       );
     }
   };
 
   const deleteJdHandler = (id: number) => {
+    if (isDeleteLoading.current) return;
+    isDeleteLoading.current = true;
+
     if (window.confirm(JD_EDIT_MESSAGE_OBJ.DELETE)) {
       deleteJdMutation(
         { jdId: id },
@@ -110,12 +124,19 @@ const JdEditPage: NextPageWithLayout = () => {
             setToast("삭제되었습니다");
             queryClient.invalidateQueries(jdArrKeyObj.all);
           },
+
+          onSettled: () => {
+            isDeleteLoading.current = false;
+          },
         }
       );
     }
   };
 
   const jdEditHandler: SubmitHandler<JdFormValues> = (jdObj) => {
+    if (isEditLoading.current) return;
+    isEditLoading.current = true;
+
     jdEditConfirmEvent();
     if (window.confirm(JD_EDIT_MESSAGE_OBJ.EDIT)) {
       editJdMutate(
@@ -131,6 +152,9 @@ const JdEditPage: NextPageWithLayout = () => {
             etc_arr: getFieldArrayValueWithNull(jdObj.etc_arr),
             position_arr: jdObj.position_arr.map((position) => ({
               ...position,
+              conversion_rate: position.conversion_rate ? position.conversion_rate : null,
+              min_year: position.min_year ? position.min_year : null,
+              max_year: position.max_year ? position.max_year : null,
               hire_number: position.hire_number ? position.hire_number : 0,
               task_sub_arr: position.task_sub_arr ? position.task_sub_arr : null,
               task_detail_arr: getFieldArrayValue(position.task_detail_arr),
@@ -144,11 +168,16 @@ const JdEditPage: NextPageWithLayout = () => {
         {
           onSuccess: () => {
             jdEditDoneEvent();
-            setToast("등록되었습니다");
+            router.push(INTERNAL_URL.JD_LIST);
+            setToast("수정되었습니다");
           },
 
           onError: () => {
             alert("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
+          },
+
+          onSettled: () => {
+            isEditLoading.current = false;
           },
         }
       );
@@ -201,10 +230,12 @@ const JdEditPage: NextPageWithLayout = () => {
   }, [jdData, reset]);
 
   useEffect(() => {
-    window.onbeforeunload = () => isDirty;
+    const escapeWithoutSubmit = isDirty && !isSubmitSuccessful;
+
+    if (escapeWithoutSubmit) window.onbeforeunload = () => true;
 
     const handleUnload = () => {
-      if (isDirty) {
+      if (escapeWithoutSubmit) {
         jdEditExitEvent();
         if (!window.confirm(JD_UPLOAD_MESSAGE_OBJ.LEAVE)) {
           throw router.events.emit("routeChangeError");
@@ -220,7 +251,7 @@ const JdEditPage: NextPageWithLayout = () => {
       router.events.off("routeChangeStart", handleUnload);
       window.onbeforeunload = () => null;
     };
-  }, [isDirty, router.events]);
+  }, [isDirty, isSubmitSuccessful, router.events]);
 
   useEffect(() => {
     if (submitCount === 0) return;

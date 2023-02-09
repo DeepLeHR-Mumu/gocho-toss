@@ -7,6 +7,7 @@ import { CompanyInfoPart } from "@/components/global/companyInfoPart";
 import { jdListPageFunnelEvent } from "@/ga/jdList";
 import { ListPart } from "./part/listPart";
 import { HeaderPart } from "./part/headerPart";
+import { cssObj } from "./style";
 
 const JdListPage: NextPageWithLayout = () => {
   useEffect(() => {
@@ -14,7 +15,7 @@ const JdListPage: NextPageWithLayout = () => {
   }, []);
 
   return (
-    <main>
+    <main css={cssObj.mainContainer}>
       <PageLayout>
         <HeaderPart />
         <ListPart />
