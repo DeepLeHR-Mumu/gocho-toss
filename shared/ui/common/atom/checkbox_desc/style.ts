@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
@@ -8,8 +9,8 @@ export const cssObj = {
     align-items: center;
   `,
   input: css`
-    margin: 0;
-    display: none;
+    width: 0;
+    height: 0;
     :checked ~ div {
       background-color: ${COLORS.BLUE_FIRST40};
       border: 0;
@@ -17,6 +18,10 @@ export const cssObj = {
         color: ${COLORS.GRAY100};
         display: block;
       }
+    }
+    :focus ~ div {
+      outline: 0.125rem solid ${COLORS.BLUE_FIRST40};
+      outline-offset: 0.125rem;
     }
   `,
   checkBox: (isDisabled: boolean) => css`
