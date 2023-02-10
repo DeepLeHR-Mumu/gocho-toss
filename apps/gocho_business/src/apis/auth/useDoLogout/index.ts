@@ -21,4 +21,4 @@ const postLogout: PostLogoutDef = async () => {
   return data;
 };
 
-export const useDoLogout = () => useMutation<AxiosResponse | AxiosError<ErrorResponseDef>>(postLogout);
+export const useDoLogout = () => useMutation<AxiosResponse, AxiosError<ErrorResponseDef>>(postLogout);

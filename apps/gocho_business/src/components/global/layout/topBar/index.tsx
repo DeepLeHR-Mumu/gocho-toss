@@ -22,13 +22,22 @@ export const TopBar: FunctionComponent = () => {
   const queryClient = useQueryClient();
 
   const doLogoutHandler = () => {
+    const afterLogoutActiveFunction = () => {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      setUserInfoData(null);
+      queryClient.invalidateQueries();
+      router.push(INTERNAL_URL.LOGIN);
+    };
+
     postLogout(undefined, {
+      onError(error) {
+        if (error.response?.data.error_code === "EXPIRED_JWT") {
+          afterLogoutActiveFunction();
+        }
+      },
       onSuccess: () => {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        setUserInfoData(null);
-        queryClient.invalidateQueries();
-        router.push(INTERNAL_URL.LOGIN);
+        afterLogoutActiveFunction();
       },
     });
   };
