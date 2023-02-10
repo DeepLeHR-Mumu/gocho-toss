@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { Spinner } from "shared-ui/common/atom/spinner";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
+import { usePreventRouting } from "shared-hooks";
 
 import { useAddCompanyDetail } from "@/apis/company/useAddCompany";
 import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
@@ -45,8 +46,10 @@ const CompanyEditPage: NextPageWithLayout = () => {
   const {
     handleSubmit,
     reset,
-    formState: { submitCount },
+    formState: { submitCount, dirtyFields },
   } = companyForm;
+
+  usePreventRouting(Boolean(Object.keys(dirtyFields).length));
 
   const addCompanyDetail = (formData: PostSubmitValues) => {
     companyEditConfirmEvent();

@@ -32,7 +32,7 @@ export const cssObj = {
       `;
     }
     return css`
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
     `;
   },
   subTitle: (isError: boolean) => css`
