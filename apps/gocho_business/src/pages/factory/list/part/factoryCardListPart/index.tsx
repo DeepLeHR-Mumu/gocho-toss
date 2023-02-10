@@ -76,8 +76,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                   <p css={cssObj.product}>{factoryData.product}</p>
                 </div>
               </div>
-              {/* {factoryData.uploader.isMine && ( */}
-              {true && (
+              {factoryData.uploader.isMine && (
                 <div css={cssObj.buttonContainer}>
                   <SharedButton
                     text="공장수정"
