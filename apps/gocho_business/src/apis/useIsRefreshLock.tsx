@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import dayjs from "dayjs";
@@ -24,14 +24,14 @@ export const axiosInstance = axios.create({
 export const useAxiosInterceptor = () => {
   const router = useRouter();
   const accessTokenLimitMs = 10000;
+  const isLoginModal = useRef(false);
   let isRequestLock = false;
   let readyQueueArr: ((token: string) => void)[] = [];
 
   const { setCurrentModal } = useModal();
+  const { setUserInfoData } = useUserState();
   const saveQueue = (callback: (token: string) => void) => readyQueueArr.push(callback);
   const activeQueue = (token: string) => readyQueueArr.forEach((callback) => callback(token));
-
-  const { setUserInfoData } = useUserState();
 
   const getRefreshTokenCreator = async (): Promise<{ newToken: string } | void> => {
     const refreshToken = localStorage.getItem("refreshToken");
@@ -89,7 +89,7 @@ export const useAxiosInterceptor = () => {
     }
 
     if (isRefreshAfterCurrentTime && prevUrl !== "none" && router.pathname !== INTERNAL_URL.LOGIN) {
-      // 라우팅 이동 취소
+      isLoginModal.current = true;
       setCurrentModal("loginModal");
       throw new axios.Cancel("리프래시 토큰 만료로 인한 요청취소");
     }
@@ -142,8 +142,28 @@ export const useAxiosInterceptor = () => {
     (error) => responseErrorHandler(error)
   );
 
-  useEffect(() => {
-    axiosInstance.interceptors.request.eject(requestInterceptor);
-    axiosInstance.interceptors.response.eject(responseInterceptor);
-  }, [requestInterceptor, responseInterceptor]);
+  useEffect(
+    () => () => {
+      console.log("sss");
+      router.events.off("routeChangeStart", () => {
+        if (isLoginModal.current) {
+          // eslint-disable-next-line no-console
+          console.log("안됨");
+          setCurrentModal("loginModal");
+          router.events.emit("routeChangeError");
+          // eslint-disable-next-line no-throw-literal
+          throw true;
+        }
+      });
+    },
+    [router, router.events, isLoginModal, setCurrentModal]
+  );
+
+  useEffect(
+    () => () => {
+      axiosInstance.interceptors.request.eject(requestInterceptor);
+      axiosInstance.interceptors.response.eject(responseInterceptor);
+    },
+    [requestInterceptor, responseInterceptor]
+  );
 };
