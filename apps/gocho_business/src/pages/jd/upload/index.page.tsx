@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState, useRef } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { BiRocket } from "react-icons/bi";
 import { useRouter } from "next/router";
@@ -19,6 +19,7 @@ import type { NextPageWithLayout } from "@/pages/index/type";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
 import { useAddJd } from "@/apis/jd/useAddJd";
 
+import { INTERNAL_URL } from "@/constants/url";
 import { HeaderPart } from "./part/headerPart";
 import { BasicInfoPart } from "./part/basicInfoPart";
 import { PositionHeaderPart } from "./part/positionHeaderPart";
@@ -33,6 +34,7 @@ import { cssObj } from "./style";
 
 const JdUploadPage: NextPageWithLayout = () => {
   const [isCardOpenArr, setIsCardOpenArr] = useState<boolean[]>([false]);
+  const isLoading = useRef(false);
 
   const { mutate: addJobMutate } = useAddJd();
   const { setToast } = useToast();
@@ -52,7 +54,7 @@ const JdUploadPage: NextPageWithLayout = () => {
   const {
     control,
     handleSubmit,
-    formState: { isDirty, submitCount },
+    formState: { isDirty, isSubmitSuccessful, submitCount },
   } = jobForm;
 
   const { fields, append, remove } = useFieldArray({
@@ -76,6 +78,9 @@ const JdUploadPage: NextPageWithLayout = () => {
   });
 
   const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
+    if (isLoading.current) return;
+    isLoading.current = true;
+
     jdUploadConfirmEvent();
     if (window.confirm(JD_UPLOAD_MESSAGE_OBJ.UPLOAD)) {
       addJobMutate(
@@ -90,12 +95,21 @@ const JdUploadPage: NextPageWithLayout = () => {
             etc_arr: getFieldArrayValueWithNull(jobObj.etc_arr),
             position_arr: jobObj.position_arr.map((position) => ({
               ...position,
+              conversion_rate: position.conversion_rate ? position.conversion_rate : null,
+              min_year: position.min_year ? position.min_year : null,
+              max_year: position.max_year ? position.max_year : null,
               hire_number: position.hire_number ? position.hire_number : 0,
               task_sub_arr: position.task_sub_arr ? position.task_sub_arr : null,
               task_detail_arr: getFieldArrayValue(position.task_detail_arr),
               required_etc_arr: getFieldArrayValueWithNull(position.required_etc_arr),
               pay_arr: getFieldArrayValue(position.pay_arr),
-              preferred_certi_arr: position.preferred_certi_arr ? position.preferred_certi_arr : null,
+              place: {
+                type: position.place.type,
+                address_arr: position.place.address_arr?.length === 0 ? null : position.place.address_arr,
+                factory_arr: position.place.factory_arr?.length === 0 ? null : position.place.factory_arr,
+                etc: position.place.etc?.length === 0 ? null : position.place.etc,
+              },
+              preferred_certi_arr: position.preferred_certi_arr?.length === 0 ? null : position.preferred_certi_arr,
               preferred_etc_arr: getFieldArrayValueWithNull(position.preferred_etc_arr),
             })),
           },
@@ -103,11 +117,16 @@ const JdUploadPage: NextPageWithLayout = () => {
         {
           onSuccess: () => {
             jdUploadDoneEvent();
+            router.push(INTERNAL_URL.JD_LIST);
             setToast("등록되었습니다");
           },
 
           onError: () => {
             alert("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
+          },
+
+          onSettled: () => {
+            isLoading.current = false;
           },
         }
       );
@@ -120,10 +139,12 @@ const JdUploadPage: NextPageWithLayout = () => {
   }, [submitCount]);
 
   useEffect(() => {
-    window.onbeforeunload = () => isDirty;
+    const escapeWithoutSubmit = isDirty && !isSubmitSuccessful;
+
+    if (escapeWithoutSubmit) window.onbeforeunload = () => true;
 
     const handleUnload = () => {
-      if (isDirty) {
+      if (escapeWithoutSubmit) {
         jdUploadExitEvent();
         if (!window.confirm(JD_UPLOAD_MESSAGE_OBJ.LEAVE)) {
           throw router.events.emit("routeChangeError");
@@ -139,7 +160,7 @@ const JdUploadPage: NextPageWithLayout = () => {
       window.onbeforeunload = () => null;
       router.events.off("routeChangeStart", handleUnload);
     };
-  }, [isDirty, router.events]);
+  }, [isDirty, isSubmitSuccessful, router.events]);
 
   useEffect(() => {
     jdUploadPageFunnelEvent();
