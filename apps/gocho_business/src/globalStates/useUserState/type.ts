@@ -6,8 +6,8 @@ export type UserStateObjDef = {
   email: string;
   name: string;
   department: string;
-  iat: number;
   exp: number;
+  companyIndustry: string;
 };
 
 export interface UserStateInfoProps {

@@ -81,7 +81,7 @@ export const useAxiosInterceptor = () => {
 
     // 1. 리프래시토큰이 만료된 경우
     if (isRefreshAfterCurrentTime) {
-      window.alert("토큰이 만료되어 로그인 페이지로 이동합니다.");
+      window.alert("세션이 만료되었습니다. 재로그인 후 이용해주세요");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       setUserInfoData(null);
