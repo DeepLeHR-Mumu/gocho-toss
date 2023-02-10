@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, FocusEvent } from "react";
 import { FiUsers } from "react-icons/fi";
 import { AiOutlineMan, AiOutlineWoman } from "react-icons/ai";
 import { BiBuildingHouse, BiBus } from "react-icons/bi";
@@ -19,7 +19,9 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ f
             <div css={cssObj.iconBox}>
               <FiUsers />
             </div>
-            <p css={cssObj.totalWorkerNumber}>{totalWorkerNumber === 0 ? "자동계산" : `${totalWorkerNumber} 명`}</p>
+            <p css={cssObj.totalWorkerNumber}>
+              {totalWorkerNumber === 0 ? "자동계산" : `${Intl.NumberFormat("kr").format(totalWorkerNumber)} 명`}
+            </p>
           </div>
         </div>
         <div css={cssObj.box}>
@@ -41,6 +43,8 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ f
                     required: true,
                     valueAsNumber: true,
                   })}
+                  type="number"
+                  min="0"
                   placeholder="남성"
                   css={cssObj.manWomanInput(formState.errors.male_number?.type === "required")}
                 />
@@ -55,6 +59,8 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ f
                 <input
                   {...register("female_number", { required: true, valueAsNumber: true })}
                   placeholder="여성"
+                  type="number"
+                  min="0"
                   css={cssObj.manWomanInput(formState.errors.female_number?.type === "required")}
                 />
                 <p css={cssObj.number}>명</p>
@@ -80,7 +86,15 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ f
             </div>
           </div>
           <input
-            {...register("bus_etc", { maxLength: 70 })}
+            {...register("bus_etc", {
+              maxLength: 70,
+              validate: (value) => {
+                if (value) {
+                  return value.trim().length !== 0;
+                }
+                return true;
+              },
+            })}
             css={cssObj.etcInfoBox}
             placeholder="보충 설명(선택)"
             maxLength={70}
@@ -110,7 +124,14 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ f
             </div>
           </div>
           <input
-            {...register("dormitory_etc", { maxLength: 70 })}
+            {...register("dormitory_etc", {
+              maxLength: 70,
+              onBlur: (blurEvent: FocusEvent<HTMLInputElement>) => {
+                if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                  formObj.setValue("dormitory_etc", "");
+                }
+              },
+            })}
             css={cssObj.etcInfoBox}
             placeholder="보충 설명(선택)"
             maxLength={70}
