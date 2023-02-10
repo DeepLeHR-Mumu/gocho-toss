@@ -1,7 +1,5 @@
-import { AxiosError, AxiosResponse } from "axios";
-
-import { ErrorResponseDef } from "@/types/errorType";
+import { AxiosResponse } from "axios";
 
 export interface PostLogoutDef {
-  (): Promise<AxiosResponse | AxiosError<ErrorResponseDef>>;
+  (): Promise<AxiosResponse>;
 }
