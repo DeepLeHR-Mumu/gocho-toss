@@ -186,4 +186,10 @@ export const globalStyle = css`
       appearance: none;
     }
   }
+  input:focus {
+    outline-offset: 0.3rem;
+  }
+  button:focus {
+    outline-offset: 0.3rem;
+  }
 `;

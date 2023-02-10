@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useState, useRef } from "react";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -7,6 +7,7 @@ import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
+import { useFocusTrap } from "shared-hooks/useFocusTrap";
 
 import { FiCheckCircle, FiX } from "react-icons/fi";
 import { useDoLogin } from "@/apis/auth/useDoLogin";
@@ -25,6 +26,9 @@ export const LoginBox: FunctionComponent = () => {
     email: false,
     password: false,
   });
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useFocusTrap(modalRef);
   const queryClient = useQueryClient();
 
   const { setUserInfoData } = useUserState();
@@ -88,7 +92,7 @@ export const LoginBox: FunctionComponent = () => {
   };
 
   return (
-    <div css={cssObj.wrapper}>
+    <div css={cssObj.wrapper} ref={modalRef} tabIndex={-1}>
       <div css={cssObj.logoContainer}>
         <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" />
       </div>

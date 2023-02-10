@@ -78,16 +78,27 @@ export const cssObj = {
     margin-bottom: 2rem;
     border-bottom: 1px solid #cccccc;
   `,
-  container: css`
+  container: (isMine: boolean) => css`
     width: 100%;
-    margin-right: 1rem;
+    ${isMine &&
+    css`
+      margin-right: 1rem;
+    `}
   `,
   nameContainer: css`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 1rem;
+    align-items: flex-start;
   `,
+  name: css`
+    word-break: break-all;
+    font-weight: 700;
+    color: ${COLORS.GRAY10};
+    width: 70%;
+  `,
+
   addressContainer: css`
     display: flex;
     align-items: flex-start;
@@ -98,11 +109,6 @@ export const cssObj = {
       flex-shrink: 0;
       font-size: 1.5rem;
     }
-  `,
-  name: css`
-    word-break: break-all;
-    font-weight: 700;
-    color: ${COLORS.GRAY10};
   `,
 
   address: css`
@@ -153,9 +159,17 @@ export const cssObj = {
     padding-bottom: 1rem;
     border-bottom: 1px solid #cccccc;
   `,
+
   infoItem: css`
     width: 47%;
     margin-right: 0.5rem;
+  `,
+  genderRatioInfoBox: css`
+    width: 47%;
+    margin-right: 0.5rem;
+    gap: 0.4rem 0;
+    display: flex;
+    flex-direction: column;
   `,
   percentageContainer: css`
     display: flex;
@@ -189,18 +203,27 @@ export const cssObj = {
     align-items: center;
     flex-wrap: wrap;
   `,
+
   dateContainer: css`
     display: flex;
     flex-direction: row;
   `,
 
+  uploadedDateContainer: css`
+    width: 47%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  `,
   dateName: css`
     color: ${COLORS.GRAY60};
     margin-right: 0.25rem;
   `,
+  
   date: css`
     color: ${COLORS.GRAY40};
   `,
+
   top: css`
     position: fixed;
     bottom: 20px;
