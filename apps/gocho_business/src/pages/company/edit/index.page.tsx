@@ -26,14 +26,14 @@ import { CompanyInfoPart } from "./part/companyInfoPart";
 import { CompanyStatusPart } from "./part/companyStatusPart";
 import { BasicPart } from "./part/basicPart";
 import { WelfarePart } from "./part/welfarePart";
-import { COMPANY_MESSAGE_OBJ } from "./constants";
+import { COMPANY_MESSAGE_OBJ, ALREADY_DONE_EDIT_MESSAGE } from "./constants";
 import { PostSubmitValues } from "./type";
 import { cssObj } from "./style";
 
 const CompanyEditPage: NextPageWithLayout = () => {
   const { userInfoData } = useUserState();
   const { setToast } = useToast();
-  const { data: companyData } = useCompanyDetail({
+  const { data: companyDetailData, refetch: companyDetailRefetch } = useCompanyDetail({
     companyId: userInfoData?.companyId,
   });
 
@@ -53,68 +53,74 @@ const CompanyEditPage: NextPageWithLayout = () => {
 
   const addCompanyDetail = (formData: PostSubmitValues) => {
     companyEditConfirmEvent();
+    companyDetailRefetch().then((response) => {
+      if (!response.data?.isMine) {
+        window.alert(ALREADY_DONE_EDIT_MESSAGE);
+        return;
+      }
+      if (response.data?.isMine && window.confirm(COMPANY_MESSAGE_OBJ.EDIT)) {
+        putCompanyDetail(
+          {
+            companyId: userInfoData?.companyId as number,
+            dto: {
+              ...formData,
+              manager_id: userInfoData?.id as number,
+              welfare: {
+                money: formData.welfare.money,
+                health: formData.welfare.health,
+                life: formData.welfare.life,
+                holiday: formData.welfare.holiday,
+                facility: formData.welfare.facility,
+                etc: formData.welfare.etc,
+                growth: formData.welfare.growth,
+                vacation: formData.welfare.vacation,
+              },
+              pay_desc: formData.pay_desc || null,
+              nozo: {
+                exists: formData.nozo.exists === "true",
+                desc: formData.nozo.desc || null,
+              },
+            },
+          },
+          {
+            onSuccess: () => {
+              setToast("등록되었습니다");
+              companyEditDoneEvent();
+            },
+          }
+        );
+      }
+    });
 
-    if (window.confirm(COMPANY_MESSAGE_OBJ.EDIT)) {
-      putCompanyDetail(
-        {
-          companyId: userInfoData?.companyId as number,
-          dto: {
-            ...formData,
-            manager_id: userInfoData?.id as number,
-            welfare: {
-              money: formData.welfare.money,
-              health: formData.welfare.health,
-              life: formData.welfare.life,
-              holiday: formData.welfare.holiday,
-              facility: formData.welfare.facility,
-              etc: formData.welfare.etc,
-              growth: formData.welfare.growth,
-              vacation: formData.welfare.vacation,
-            },
-            pay_desc: formData.pay_desc || null,
-            nozo: {
-              exists: formData.nozo.exists === "true",
-              desc: formData.nozo.desc || null,
-            },
-          },
-        },
-        {
-          onSuccess: () => {
-            setToast("등록되었습니다");
-            companyEditDoneEvent();
-          },
-        }
-      );
-    }
     return null;
   };
 
   useEffect(() => {
-    if (companyData) {
+    if (companyDetailData) {
       reset({
-        employee_number: companyData.employeeNumber,
-        intro: companyData.intro || "",
-        address: companyData.address,
+        employee_number: companyDetailData.employeeNumber,
+        intro: companyDetailData.intro || "",
+        address: companyDetailData.address,
         nozo: {
-          exists: companyData.nozo.exists ? "true" : "false",
-          desc: companyData.nozo.desc || "",
+          exists: companyDetailData.nozo.exists ? "true" : "false",
+          desc: companyDetailData.nozo.desc || "",
         },
-        pay_avg: companyData.payAvg,
-        pay_start: companyData.payStart,
-        pay_desc: companyData.payDesc || "",
+        pay_avg: companyDetailData.payAvg,
+        pay_start: companyDetailData.payStart,
+        pay_desc: companyDetailData.payDesc || "",
         welfare: {
-          money: companyData.welfare.money,
-          health: companyData.welfare.health,
-          life: companyData.welfare.life,
-          holiday: companyData.welfare.holiday,
-          facility: companyData.welfare.facility,
-          vacation: companyData.welfare.vacation,
-          growth: companyData.welfare.growth,
-          etc: companyData.welfare.etc,
+          money: companyDetailData.welfare.money,
+          health: companyDetailData.welfare.health,
+          life: companyDetailData.welfare.life,
+          holiday: companyDetailData.welfare.holiday,
+          facility: companyDetailData.welfare.facility,
+          vacation: companyDetailData.welfare.vacation,
+          growth: companyDetailData.welfare.growth,
+          etc: companyDetailData.welfare.etc,
         },
       });
     }
-  }, [companyData, reset]);
+  }, [companyDetailData, reset]);
 
   useEffect(() => {
     window.addEventListener("keydown", (keyDownEvent) => {
@@ -141,7 +147,13 @@ const CompanyEditPage: NextPageWithLayout = () => {
     companyEditFailEvent(submitCount);
   }, [submitCount]);
 
-  if (!companyData) {
+  useEffect(() => {
+    if (!companyDetailData?.isMine) window.alert(ALREADY_DONE_EDIT_MESSAGE);
+    // 최초 한번만 불러온 후 안내를 띄우기 위한 disable
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (!companyDetailData) {
     return (
       <div css={cssObj.spinner}>
         <Spinner />
@@ -159,8 +171,9 @@ const CompanyEditPage: NextPageWithLayout = () => {
               <p css={cssObj.desc}>변경사항이 있다면 작성 후 수정완료 버튼을 꼭 눌러주세요</p>
             </div>
             <div css={cssObj.topButtonBox}>
-              <CommonStatusChip status={companyData.status.name} />
+              <CommonStatusChip status={companyDetailData.status.name} />
               <div css={cssObj.sharedButtonBox}>
+                {/* disabled 의논 후 추가하기 */}
                 <SharedButton
                   onClickHandler="submit"
                   text="기업 정보 수정완료"
@@ -179,7 +192,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
           </header>
 
           <CompanyInfoPart />
-          {companyData.status.reason && <CompanyStatusPart />}
+          {companyDetailData.status.reason && <CompanyStatusPart />}
 
           <section css={cssObj.companyInfoBox}>
             <BasicPart companyForm={companyForm} />

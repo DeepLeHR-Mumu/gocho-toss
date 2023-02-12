@@ -58,19 +58,31 @@ export const cssObj = {
       color: ${COLORS.GRAY10};
     }
   `,
-  input: (isError: boolean) => css`
-    border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
-    padding: 0rem 1rem;
-    border-radius: 0.3125rem;
-    height: 2.5rem;
-    font-size: 1rem;
-    width: 100%;
-    font-weight: 400;
+  input: (isError: boolean, isDisabled: boolean) => {
+    const defaultCSS = css`
+      border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+      padding: 0rem 1rem;
+      border-radius: 0.3125rem;
+      height: 2.5rem;
+      font-size: 1rem;
+      width: 100%;
+      font-weight: 400;
 
-    ::placeholder {
-      color: ${COLORS.GRAY30};
+      ::placeholder {
+        color: ${COLORS.GRAY30};
+      }
+    `;
+    if (isDisabled) {
+      return css`
+        ${defaultCSS};
+        border-color: ${COLORS.GRAY65};
+        color: ${COLORS.GRAY65};
+      `;
     }
-  `,
+    return css`
+      ${defaultCSS};
+    `;
+  },
   unit: css`
     font-size: 1rem;
     font-weight: 400;
@@ -96,7 +108,7 @@ export const cssObj = {
       margin-right: 0.5rem;
     }
   `,
-  inputBox: (isError: boolean) => css`
+  inputBox: css`
     display: flex;
     margin-left: 1rem;
     align-items: center;
@@ -111,7 +123,9 @@ export const cssObj = {
       top: 50%;
       transform: translate(0, -50%);
     }
-    > input {
+  `,
+  inputAddress: (isError: boolean, isDisabled: boolean) => {
+    const defaultCSS = css`
       border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
       text-align: left;
       height: 2.5rem;
@@ -126,8 +140,18 @@ export const cssObj = {
       ::placeholder {
         color: ${COLORS.GRAY30};
       }
+    `;
+    if (isDisabled) {
+      return css`
+        ${defaultCSS}
+        border-color: ${COLORS.GRAY65};
+        color: ${COLORS.GRAY65};
+      `;
     }
-  `,
+    return css`
+      ${defaultCSS}
+    `;
+  },
   nozoBox: css`
     display: flex;
     margin-bottom: 0.5rem;

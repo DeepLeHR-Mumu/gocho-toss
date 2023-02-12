@@ -52,8 +52,13 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
               onWheel={(event) => {
                 event.currentTarget.blur();
               }}
-              {...register("employee_number", { required: true, min: 1, pattern: NUMBER_REGEXP })}
-              css={cssObj.input(Boolean(errors.employee_number))}
+              {...register("employee_number", {
+                required: true,
+                min: 1,
+                pattern: NUMBER_REGEXP,
+                disabled: !companyData.isMine,
+              })}
+              css={cssObj.input(Boolean(errors.employee_number), !companyData.isMine)}
             />
             <p css={cssObj.unit}>명</p>
           </label>
@@ -65,6 +70,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             {...register("intro", {
               required: true,
               maxLength: 120,
+              disabled: !companyData.isMine,
               onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
                 if (onBlurEvent.target.value.trim().length === 0) {
                   setValue("intro", "");
@@ -72,13 +78,14 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
               },
             })}
             placeholder="한 줄로 기업을 소개해주세요"
-            css={cssObj.input(Boolean(errors.intro))}
+            css={cssObj.input(Boolean(errors.intro), !companyData.isMine)}
           />
         </div>
       </div>
       <div css={cssObj.container()}>
         <strong css={cssObj.subTitle(Boolean(errors.address))}>기업 본사 주소</strong>
         <label htmlFor="address" css={cssObj.address}>
+          {/* 버튼 disabled */}
           <CommonRoundButton
             Icon={FiMap}
             text="주소찾기"
@@ -91,11 +98,11 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             }
             backgroundColor={COLORS.GRAY80}
           />
-          <div css={cssObj.inputBox(Boolean(errors.address))}>
+          <div css={cssObj.inputBox}>
             <FiMapPin />
             <input
               type="button"
-              {...register("address", { required: true })}
+              {...register("address", { required: true, disabled: !companyData.isMine })}
               placeholder="좌측 버튼을 눌러 기업 주소를 입력해주세요"
               onClick={() =>
                 openPostCodePopup({
@@ -104,6 +111,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
                   },
                 })
               }
+              css={cssObj.inputAddress(Boolean(errors.address), !companyData.isMine)}
             />
           </div>
         </label>
@@ -113,10 +121,20 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
         <strong css={cssObj.subTitle(Boolean(errors.nozo?.exists))}>노조</strong>
         <div css={cssObj.nozoBox}>
           <BiUserVoice />
-          <SharedRadioButton registerObj={register("nozo.exists", { required: true })} value="true" id="nozoTrue">
+          <SharedRadioButton
+            registerObj={register("nozo.exists", { required: true })}
+            isDisabled={!companyData.isMine}
+            value="true"
+            id="nozoTrue"
+          >
             <p css={cssObj.unit}>있음</p>
           </SharedRadioButton>
-          <SharedRadioButton registerObj={register("nozo.exists", { required: true })} value="false" id="nozoFalse">
+          <SharedRadioButton
+            registerObj={register("nozo.exists", { disabled: !companyData.isMine, required: true })}
+            isDisabled={!companyData.isMine}
+            value="false"
+            id="nozoFalse"
+          >
             <p css={cssObj.unit}>없음</p>
           </SharedRadioButton>
         </div>
@@ -124,6 +142,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
           type="text"
           {...register("nozo.desc", {
             maxLength: 70,
+            disabled: !companyData.isMine,
             onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
               if (onBlurEvent.target.value.trim().length === 0) {
                 setValue("nozo.desc", "");
@@ -131,7 +150,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             },
           })}
           placeholder="보충설명(선택)"
-          css={cssObj.input(Boolean(errors.nozo?.desc))}
+          css={cssObj.input(Boolean(errors.nozo?.desc), !companyData.isMine)}
         />
       </div>
       <div css={cssObj.container(80)}>
@@ -142,9 +161,9 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             <div css={cssObj.payLabel}>
               <input
                 type="number"
-                {...register("pay_start", { required: true, min: 0 })}
+                {...register("pay_start", { required: true, min: 0, disabled: !companyData.isMine })}
                 placeholder="숫자만 입력해주세요"
-                css={cssObj.input(Boolean(errors.pay_start))}
+                css={cssObj.input(Boolean(errors.pay_start), !companyData.isMine)}
               />
               <p css={cssObj.textValue}>만원</p>
             </div>
@@ -158,6 +177,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
                   required: true,
                   min: 1000,
                   pattern: NUMBER_REGEXP,
+                  disabled: !companyData.isMine,
                   onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
                     if (Number(onBlurEvent.target.value) <= 1000) {
                       window.alert("월급이 아닌 연봉 기준입니다. 입력하신 정보가 맞나요?");
@@ -165,7 +185,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
                   },
                 })}
                 placeholder="숫자만 입력해주세요"
-                css={cssObj.input(Boolean(errors.pay_avg))}
+                css={cssObj.input(Boolean(errors.pay_avg), !companyData.isMine)}
               />
               <p css={cssObj.textValue}>만원</p>
             </div>
@@ -177,6 +197,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             type="text"
             {...register("pay_desc", {
               maxLength: 120,
+              disabled: !companyData.isMine,
               onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
                 if (onBlurEvent.target.value.trim().length === 0) {
                   setValue("pay_desc", "");
@@ -184,7 +205,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
               },
             })}
             placeholder="상여금, 성과급 등의 정보를 적어주세요"
-            css={cssObj.input(Boolean(errors.pay_desc))}
+            css={cssObj.input(Boolean(errors.pay_desc), !companyData.isMine)}
           />
         </div>
       </div>
