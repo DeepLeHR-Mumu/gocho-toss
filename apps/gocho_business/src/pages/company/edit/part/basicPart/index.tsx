@@ -13,6 +13,7 @@ import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
 import { useUserState } from "@/globalStates/useUserState";
 
 import { KakaoMap } from "../../component/kakaoMap";
+import { MAX_LENGTH_ERROR_TEXT, ONLY_INT_ERROR_TEXT } from "./constant";
 import { BasicPartProps } from "./type";
 import { cssObj } from "./style";
 
@@ -68,7 +69,10 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             type="text"
             {...register("intro", {
               required: true,
-              maxLength: 120,
+              maxLength: {
+                value: 120,
+                message: MAX_LENGTH_ERROR_TEXT,
+              },
               disabled: !companyData.isMine,
               onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
                 if (onBlurEvent.target.value.trim().length === 0) {
@@ -79,6 +83,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             placeholder="한 줄로 기업을 소개해주세요"
             css={cssObj.input(Boolean(errors.intro), !companyData.isMine)}
           />
+          <p css={cssObj.errorMsg}>{errors.intro?.message}</p>
         </div>
       </div>
       <div css={cssObj.container()}>
@@ -144,7 +149,10 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
         <input
           type="text"
           {...register("nozo.desc", {
-            maxLength: 70,
+            maxLength: {
+              value: 70,
+              message: MAX_LENGTH_ERROR_TEXT,
+            },
             disabled: !companyData.isMine,
             onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
               if (onBlurEvent.target.value.trim().length === 0) {
@@ -155,6 +163,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
           placeholder="보충설명(선택)"
           css={cssObj.input(Boolean(errors.nozo?.desc), !companyData.isMine)}
         />
+        <p css={cssObj.errorMsg}>{errors.nozo?.desc?.message}</p>
       </div>
       <div css={cssObj.container(80)}>
         <strong css={cssObj.subTitle(Boolean(errors.pay_start))}>연봉 정보</strong>
@@ -167,6 +176,10 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
                 {...register("pay_start", {
                   required: true,
                   min: 1000,
+                  pattern: {
+                    value: NUMBER_REGEXP,
+                    message: ONLY_INT_ERROR_TEXT,
+                  },
                   disabled: !companyData.isMine,
                   onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
                     if (Number(onBlurEvent.target.value) <= 999) {
@@ -179,6 +192,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
               />
               <p css={cssObj.textValue}>만원</p>
             </div>
+            <p css={cssObj.errorMsg}>{errors.pay_start?.message}</p>
           </div>
           <div css={cssObj.payBox}>
             <strong css={cssObj.infoTitle(Boolean(errors.pay_avg))}>평균 연봉</strong>
@@ -201,6 +215,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
               />
               <p css={cssObj.textValue}>만원</p>
             </div>
+            <p css={cssObj.errorMsg}>{errors.pay_avg?.message}</p>
           </div>
         </div>
         <div css={cssObj.container()}>
@@ -208,7 +223,10 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
           <input
             type="text"
             {...register("pay_desc", {
-              maxLength: 120,
+              maxLength: {
+                value: 120,
+                message: MAX_LENGTH_ERROR_TEXT,
+              },
               disabled: !companyData.isMine,
               onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
                 if (onBlurEvent.target.value.trim().length === 0) {
@@ -219,6 +237,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             placeholder="상여금, 성과급 등의 정보를 적어주세요"
             css={cssObj.input(Boolean(errors.pay_desc), !companyData.isMine)}
           />
+          <p css={cssObj.errorMsg}>{errors.pay_desc?.message}</p>
         </div>
       </div>
     </div>

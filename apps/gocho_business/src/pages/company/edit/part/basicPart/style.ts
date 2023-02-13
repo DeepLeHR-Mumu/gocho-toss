@@ -175,4 +175,10 @@ export const cssObj = {
     display: block;
     color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
   `,
+  errorMsg: css`
+    color: ${COLORS.ERROR_RED40};
+    font-size: 0.75rem;
+    margin: 0.25rem 0 0 0;
+    height: 1.25rem;
+  `,
 };
