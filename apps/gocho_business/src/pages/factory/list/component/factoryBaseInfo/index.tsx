@@ -7,7 +7,6 @@ import { COLORS } from "shared-style/color";
 import { SharedButton } from "shared-ui/business/sharedButton";
 
 import { CommonStatusChip } from "@/components/common";
-import { POSTCODE_SCRIPT_URL } from "@/constants/url";
 
 import { cssObj } from "./style";
 import { FactoryBaseInfoProps } from "./type";
@@ -15,7 +14,7 @@ import { FactoryBaseInfoProps } from "./type";
 export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formObj, reqeustStatus }) => {
   const { register, formState, setValue } = formObj;
 
-  const openPostCodePopup = useDaumPostcodePopup(POSTCODE_SCRIPT_URL);
+  const openPostCodePopup = useDaumPostcodePopup();
 
   return (
     <div css={cssObj.container} data-testid="factory/list/FactoryBaseInfo">
