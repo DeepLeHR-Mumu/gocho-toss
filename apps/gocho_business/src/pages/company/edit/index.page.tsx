@@ -58,11 +58,11 @@ const CompanyEditPage: NextPageWithLayout = () => {
         window.alert("변경사항이 없습니다.");
         return;
       }
-      if (!response.data?.isMine) {
+      if (!response.data?.uploader.isMine) {
         window.alert(ALREADY_DONE_EDIT_MESSAGE);
         return;
       }
-      if (response.data?.isMine && window.confirm(COMPANY_MESSAGE_OBJ.EDIT)) {
+      if (response.data?.uploader.isMine && window.confirm(COMPANY_MESSAGE_OBJ.EDIT)) {
         putCompanyDetail(
           {
             companyId: userInfoData?.companyId as number,
@@ -152,8 +152,8 @@ const CompanyEditPage: NextPageWithLayout = () => {
   }, [submitCount]);
 
   useEffect(() => {
-    if (companyDetailData?.isMine === false) window.alert(ALREADY_DONE_EDIT_MESSAGE);
-  }, [companyDetailData?.isMine]);
+    if (companyDetailData?.uploader.isMine === false) window.alert(ALREADY_DONE_EDIT_MESSAGE);
+  }, [companyDetailData?.uploader.isMine]);
 
   if (!companyDetailData) {
     return (
@@ -180,7 +180,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
                   text="기업 정보 수정완료"
                   radius="round"
                   isFullWidth
-                  isDisabled={!companyDetailData?.isMine}
+                  isDisabled={!companyDetailData?.uploader.isMine}
                   fontColor={COLORS.GRAY100}
                   iconObj={{
                     icon: FiEdit,
@@ -207,7 +207,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
               text="기업 정보 수정완료"
               radius="round"
               isFullWidth
-              isDisabled={!companyDetailData?.isMine}
+              isDisabled={!companyDetailData?.uploader.isMine}
               fontColor={COLORS.GRAY100}
               iconObj={{
                 icon: FiEdit,
