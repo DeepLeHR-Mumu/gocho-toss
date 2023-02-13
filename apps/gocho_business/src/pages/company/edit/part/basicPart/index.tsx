@@ -1,4 +1,4 @@
-import { FocusEvent, FunctionComponent } from "react";
+import { FocusEvent, MouseEvent, FunctionComponent } from "react";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { BiUserVoice } from "react-icons/bi";
 import { FiMap, FiMapPin, FiUsers } from "react-icons/fi";
@@ -102,15 +102,19 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             <FiMapPin />
             <input
               type="button"
-              {...register("address", { required: true, disabled: !companyData.isMine })}
+              {...register("address", { required: true })}
               placeholder="좌측 버튼을 눌러 기업 주소를 입력해주세요"
-              onClick={() =>
+              onClick={(onClickEvent: MouseEvent<HTMLInputElement>) => {
+                if (!companyData.isMine) {
+                  onClickEvent.preventDefault();
+                  return;
+                }
                 openPostCodePopup({
                   onComplete: (addressObj: Address) => {
                     setValue("address", addressObj.address);
                   },
-                })
-              }
+                });
+              }}
               css={cssObj.inputAddress(Boolean(errors.address), !companyData.isMine)}
             />
           </div>
@@ -161,7 +165,16 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             <div css={cssObj.payLabel}>
               <input
                 type="number"
-                {...register("pay_start", { required: true, min: 0, disabled: !companyData.isMine })}
+                {...register("pay_start", {
+                  required: true,
+                  min: 1000,
+                  disabled: !companyData.isMine,
+                  onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
+                    if (Number(onBlurEvent.target.value) <= 999) {
+                      window.alert("월급이 아닌 연봉 기준입니다. 입력하신 정보가 맞나요?");
+                    }
+                  },
+                })}
                 placeholder="숫자만 입력해주세요"
                 css={cssObj.input(Boolean(errors.pay_start), !companyData.isMine)}
               />
@@ -179,7 +192,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
                   pattern: NUMBER_REGEXP,
                   disabled: !companyData.isMine,
                   onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
-                    if (Number(onBlurEvent.target.value) <= 1000) {
+                    if (Number(onBlurEvent.target.value) <= 999) {
                       window.alert("월급이 아닌 연봉 기준입니다. 입력하신 정보가 맞나요?");
                     }
                   },

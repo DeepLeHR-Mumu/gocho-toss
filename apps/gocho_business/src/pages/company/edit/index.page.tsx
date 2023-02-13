@@ -46,7 +46,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
   const {
     handleSubmit,
     reset,
-    formState: { submitCount, dirtyFields },
+    formState: { submitCount, dirtyFields, isDirty },
   } = companyForm;
 
   usePreventRouting(Boolean(Object.keys(dirtyFields).length));
@@ -54,6 +54,10 @@ const CompanyEditPage: NextPageWithLayout = () => {
   const addCompanyDetail = (formData: PostSubmitValues) => {
     companyEditConfirmEvent();
     companyDetailRefetch().then((response) => {
+      if (!isDirty) {
+        window.alert("변경사항이 없습니다.");
+        return;
+      }
       if (!response.data?.isMine) {
         window.alert(ALREADY_DONE_EDIT_MESSAGE);
         return;
