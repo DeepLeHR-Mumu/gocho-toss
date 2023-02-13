@@ -181,6 +181,8 @@ const JdEditPage: NextPageWithLayout = () => {
           },
         }
       );
+    } else {
+      isEditLoading.current = false;
     }
   };
 

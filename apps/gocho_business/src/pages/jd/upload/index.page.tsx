@@ -130,6 +130,8 @@ const JdUploadPage: NextPageWithLayout = () => {
           },
         }
       );
+    } else {
+      isLoading.current = false;
     }
   };
 
