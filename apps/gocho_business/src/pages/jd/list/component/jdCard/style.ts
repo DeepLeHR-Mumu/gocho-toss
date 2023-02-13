@@ -20,12 +20,26 @@ export const cssObj = {
   `,
 
   titleBox: css`
+    max-width: 50%;
     display: flex;
     align-items: flex-start;
     gap: 0 1.5rem;
   `,
 
+  title: css`
+    max-width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  `,
+
   date: css`
+    display: block;
+    width: fit-content;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     color: ${COLORS.GRAY35};
   `,
 
