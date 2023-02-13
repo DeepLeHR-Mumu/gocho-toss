@@ -4,7 +4,10 @@ import { COLORS } from "shared-style/color";
 
 export const cssObj = {
   viewInfoBox: css`
+    display: flex;
+    flex-direction: column;
     margin-right: 2rem;
+    gap: 0.5rem 0;
   `,
   infoBoxContainer: css`
     display: flex;

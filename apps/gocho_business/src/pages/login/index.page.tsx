@@ -102,11 +102,11 @@ const LoginPage: NextPage = () => {
 
           <form css={cssObj.formCSS} onSubmit={handleSubmit(loginSubmit)}>
             <ul>
-              <li css={cssObj.inputBox(Boolean(errors.email))}>
+              <li css={cssObj.inputBox}>
                 <input
                   type="email"
                   placeholder="아이디(이메일)"
-                  css={cssObj.inputCSS}
+                  css={cssObj.inputCSS(Boolean(errors.email))}
                   {...register("email", {
                     required: LOGIN_ERROR_MESSAGES.BLANK_EMAIL,
                     maxLength: {
@@ -127,11 +127,11 @@ const LoginPage: NextPage = () => {
                   }}
                 />
               </li>
-              <li css={cssObj.inputBox(Boolean(errors.password))}>
+              <li css={cssObj.inputBox}>
                 <input
                   type={isShowPassword ? "text" : "password"}
                   placeholder="비밀번호"
-                  css={cssObj.inputCSS}
+                  css={cssObj.inputCSS(Boolean(errors.password))}
                   {...register("password", {
                     required: LOGIN_ERROR_MESSAGES.BLANK_PWD,
                     pattern: {

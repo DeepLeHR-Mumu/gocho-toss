@@ -22,6 +22,7 @@ export const cssObj = {
     width: 47%;
     display: flex;
     flex-direction: column;
+    gap: 0.4rem 0;
   `,
 
   infoText: (isError?: boolean) => {

@@ -7,9 +7,9 @@ export interface RequestObjDef {
   female_number: number;
   product: string;
   bus_bool: boolean;
-  bus_etc?: string;
+  bus_etc: string | null;
   dormitory_bool: boolean;
-  dormitory_etc?: string;
+  dormitory_etc: string | null;
   id?: number;
 }
 
