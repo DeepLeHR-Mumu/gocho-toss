@@ -1,15 +1,23 @@
 import { css } from "@emotion/react";
+
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
-  label: css`
+  label: (isFocus: boolean) => css`
     display: flex;
     cursor: pointer;
     align-items: center;
+    box-sizing: border-box;
+    padding: 0 3px;
+    height: 1.875rem;
+    width: fit-content;
+    border: 0.13rem solid ${isFocus ? COLORS.BLUE_FIRST40 : "transparent"};
+    border-radius: 0.3125rem;
   `,
   input: css`
+    width: 0;
+    height: 0;
     margin: 0;
-    display: none;
     :checked ~ div {
       background-color: ${COLORS.BLUE_FIRST40};
       border: 0;

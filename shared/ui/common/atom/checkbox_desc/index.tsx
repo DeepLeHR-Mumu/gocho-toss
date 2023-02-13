@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import { FiCheck } from "react-icons/fi";
 
 import { CheckBoxWithDescProps } from "./type";
@@ -10,12 +10,29 @@ export const CheckBoxWithDesc: FunctionComponent<CheckBoxWithDescProps> = ({
   desc,
   id,
   checked,
-}) => (
-  <label htmlFor={id} css={cssObj.label}>
-    <input type="checkbox" css={cssObj.input} {...registerObj} checked={checked} id={id} disabled={isDisabled} />
-    <div css={cssObj.checkBox(isDisabled)}>
-      <FiCheck />
-    </div>
-    <p css={cssObj.desc}>{desc}</p>
-  </label>
-);
+}) => {
+  const [isFocus, setIsFocus] = useState(false);
+
+  return (
+    <label htmlFor={id} css={cssObj.label(isFocus)}>
+      <input
+        type="checkbox"
+        css={cssObj.input}
+        {...registerObj}
+        checked={checked}
+        id={id}
+        disabled={isDisabled}
+        onFocus={() => {
+          setIsFocus(true);
+        }}
+        onBlur={() => {
+          setIsFocus(false);
+        }}
+      />
+      <div css={cssObj.checkBox(isDisabled)}>
+        <FiCheck />
+      </div>
+      <p css={cssObj.desc}>{desc}</p>
+    </label>
+  );
+};

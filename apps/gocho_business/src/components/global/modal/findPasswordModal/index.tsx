@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useState, useRef } from "react";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -6,6 +6,7 @@ import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { EMAIL_REGEXP } from "shared-constant/regExp";
 import { EMAIL_ERROR_MESSAGE } from "shared-constant/errorMessage";
 import { NormalButton } from "shared-ui/common/atom/button";
+import { useFocusTrap } from "shared-hooks/useFocusTrap";
 
 import { FiCheckCircle, FiX } from "react-icons/fi";
 import { useFindPassword } from "@/apis/auth/usefindPassword";
@@ -19,6 +20,8 @@ import { LoginFormValues } from "./type";
 import { cssObj } from "./style";
 
 export const FindPasswordBox: FunctionComponent = () => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
   const [isFocus, setIsFocus] = useState(false);
   const {
     register,
@@ -36,6 +39,7 @@ export const FindPasswordBox: FunctionComponent = () => {
   const { mutate: postFindPassword } = useFindPassword();
   const { closeModal } = useModal();
 
+  useFocusTrap(modalRef);
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     postFindPassword(loginObj, {
       onError: (error) => {
@@ -62,7 +66,7 @@ export const FindPasswordBox: FunctionComponent = () => {
   };
 
   return (
-    <div css={cssObj.wrapper}>
+    <div css={cssObj.wrapper} ref={modalRef} tabIndex={-1}>
       <div css={cssObj.closeBtn}>
         <CommonCloseButton size="S" buttonClick={closeFindPasswordModal} />
       </div>

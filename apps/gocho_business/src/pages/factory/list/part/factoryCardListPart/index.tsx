@@ -35,15 +35,17 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
   if (factoryDataArr.length === 0)
     return (
       <div css={cssObj.noDataWrapper}>
-        <p css={cssObj.noDataMessage}>등록된 공고가 없습니다</p>
+        <p css={cssObj.noDataMessage}>등록된 공장이 없습니다</p>
       </div>
     );
   return (
     <>
       {factoryDataArr.map((factoryData, index) => {
         const totalEmployeeCount = factoryData.maleNumber + factoryData.femaleNumber;
-        const malePercentage = Math.round((100 * factoryData.maleNumber) / totalEmployeeCount);
-        const femalePercentage = Math.round((100 * factoryData.femaleNumber) / totalEmployeeCount);
+        const malePercentage =
+          factoryData.maleNumber === 0 ? 0 : Math.round((100 * factoryData.maleNumber) / totalEmployeeCount);
+        const femalePercentage =
+          factoryData.femaleNumber === 0 ? 0 : Math.round((100 * factoryData.femaleNumber) / totalEmployeeCount);
 
         return (
           <div css={cssObj.wrapper} key={factoryData.id} data-testid="factory/list/factoryCardListPart">
@@ -60,7 +62,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
               </div>
             )}
             <div css={cssObj.topContainer}>
-              <div css={cssObj.container}>
+              <div css={cssObj.container(factoryData.uploader.isMine)}>
                 <div css={cssObj.nameContainer}>
                   <p css={cssObj.name}>{factoryData.name}</p>
                   <CommonStatusChip status={factoryData.status.name} />
@@ -121,11 +123,11 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
               <div css={cssObj.infoItem}>
                 <CommonInfoBox
                   infoName="임직원"
-                  infoData={`${factoryData.maleNumber + factoryData.femaleNumber} 명`}
+                  infoData={`${Intl.NumberFormat("kr").format(factoryData.maleNumber + factoryData.femaleNumber)} 명`}
                   Icon={FiUsers}
                 />
               </div>
-              <div css={cssObj.infoItem}>
+              <div css={cssObj.genderRatioInfoBox}>
                 <p css={cssObj.infoName}>남녀 비율</p>
                 <div css={cssObj.percentageContainer}>
                   <div css={cssObj.percentageBox}>
@@ -163,7 +165,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                   Icon={FiUser}
                 />
               </div>
-              <div css={cssObj.infoItem}>
+              <div css={cssObj.uploadedDateContainer}>
                 <div css={cssObj.dateContainer}>
                   <p css={cssObj.dateName}>공장등록일</p>
                   <p css={cssObj.date}>{dayjs(factoryData.createdTime).format("YY.MM.DD HH:mm")}</p>

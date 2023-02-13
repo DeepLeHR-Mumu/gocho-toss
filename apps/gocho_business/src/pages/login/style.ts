@@ -39,24 +39,27 @@ export const cssObj = {
   formCSS: css`
     width: 100%;
   `,
-  inputBox: (isError: boolean) => css`
+  inputBox: css`
     margin-bottom: 1.75rem;
     position: relative;
     width: 100%;
     background-color: ${COLORS.GRAY100};
-    border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
     display: flex;
-    border-radius: 5px;
-    overflow: hidden;
     align-items: center;
     justify-content: space-between;
   `,
-  inputCSS: css`
+  inputCSS: (isError: boolean) => css`
     font-size: 1rem;
     padding: 0.75rem 4rem 0.75rem 1rem;
     font-weight: 400;
     width: 100%;
+    border-radius: 5px;
     box-shadow: 0 0 0 1000px ${COLORS.GRAY100} inset;
+    border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+
+    :focus {
+      border-color: ${COLORS.BLUE_FIRST40};
+    }
 
     ::placeholder {
       font-size: 1rem;
