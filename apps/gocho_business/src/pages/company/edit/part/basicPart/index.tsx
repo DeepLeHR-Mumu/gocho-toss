@@ -11,7 +11,6 @@ import { NUMBER_REGEXP } from "shared-constant/regExp";
 import { CommonRoundButton } from "@/components/common";
 import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
 import { useUserState } from "@/globalStates/useUserState";
-import { POSTCODE_SCRIPT_URL } from "@/constants/url";
 
 import { KakaoMap } from "../../component/kakaoMap";
 import { BasicPartProps } from "./type";
@@ -30,7 +29,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
     companyId: userInfoData?.companyId,
   });
 
-  const openPostCodePopup = useDaumPostcodePopup(POSTCODE_SCRIPT_URL);
+  const openPostCodePopup = useDaumPostcodePopup();
 
   if (!companyData) {
     return (
