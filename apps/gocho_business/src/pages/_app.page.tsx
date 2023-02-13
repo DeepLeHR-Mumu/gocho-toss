@@ -7,8 +7,7 @@ import { useRouter } from "next/router";
 import ReactGA from "react-ga4";
 import { datadogRum } from "@datadog/browser-rum";
 
-import { KEY } from "shared-constant/gaKey";
-
+import { GA_KEY } from "@/constants/keys";
 import { globalStyle } from "@/styles/globalStyle";
 import { useAxiosInterceptor } from "@/apis/useIsRefreshLock";
 import { ToastPlaceholder } from "@/components/global/toast/toastPlaceHolder";
@@ -39,7 +38,7 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
 }
 
 function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
-  ReactGA.initialize(KEY);
+  ReactGA.initialize(GA_KEY);
 
   const router = useRouter();
   const [queryClient] = useState(
