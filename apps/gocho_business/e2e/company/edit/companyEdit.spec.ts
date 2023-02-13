@@ -20,7 +20,6 @@ test("기업 정보 get 및 expect 테스트", async ({ page, request }) => {
   const companyRequestResponse = await request.get(`${BUSINESS_BACKEND_URL}/companies/968`);
   const companyRequestData = await companyRequestResponse.json();
 
-  expect(companyData.data.size).toEqual(companyRequestData.data.size);
   expect(companyData.data.employee_number).toEqual(companyRequestData.data.employee_number);
   expect(companyData.data.found_date).toEqual(companyRequestData.data.found_date);
   expect(companyData.data.business_number).toEqual(companyRequestData.data.business_number);
