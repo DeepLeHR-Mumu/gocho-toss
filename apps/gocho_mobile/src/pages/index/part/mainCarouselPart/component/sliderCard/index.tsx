@@ -22,7 +22,12 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({ carouselData }) =
       <p css={desc}>{carouselData.lastDesc}</p>
 
       {carouselData.buttonObj && carouselData.buttonObj.target === "_self" && (
-        <Link href={carouselData.buttonObj.url} passHref target={carouselData.buttonObj.target}>
+        <Link
+          href={carouselData.buttonObj.url}
+          passHref
+          target={carouselData.buttonObj.target}
+          onClick={carouselData.buttonObj.onClick}
+        >
           <a css={linkButton(carouselData.buttonObj.backgroundColor, carouselData.buttonObj.color)}>
             <FiArrowRight />
             {carouselData.buttonObj.text}
@@ -34,6 +39,7 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({ carouselData }) =
           href={carouselData.buttonObj.url}
           target={carouselData.buttonObj.target}
           css={linkButton(carouselData.buttonObj.backgroundColor, carouselData.buttonObj.color)}
+          onClick={carouselData.buttonObj.onClick}
         >
           <FiArrowRight />
           {carouselData.buttonObj.text}
