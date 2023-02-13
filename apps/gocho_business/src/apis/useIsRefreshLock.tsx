@@ -51,6 +51,10 @@ export const useAxiosInterceptor = () => {
       .catch((error) => {
         const { error_code } = error.response.data;
         if (error_code === "EMPTY_JWT") {
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          setUserInfoData(null);
+          router.push(INTERNAL_URL.LOGIN);
           throw new axios.Cancel("재요청 취소");
         }
       })

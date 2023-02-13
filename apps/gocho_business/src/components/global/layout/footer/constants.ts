@@ -1,5 +1,5 @@
 export const FOOTER_INFO = {
-  address: "06142 서울 강남구 테헤란로 217 오렌지플래닛 601호",
+  address: "06628 서울특별시 서초구 강남대로 311 한화드림플러스 1203호",
   ceo: "박중우",
   telView: "010-8545-7161",
   telNumber: "01085457161",

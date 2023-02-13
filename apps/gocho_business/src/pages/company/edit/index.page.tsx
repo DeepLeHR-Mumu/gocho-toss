@@ -148,10 +148,8 @@ const CompanyEditPage: NextPageWithLayout = () => {
   }, [submitCount]);
 
   useEffect(() => {
-    if (!companyDetailData?.isMine) window.alert(ALREADY_DONE_EDIT_MESSAGE);
-    // 최초 한번만 불러온 후 안내를 띄우기 위한 disable
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (companyDetailData?.isMine === false) window.alert(ALREADY_DONE_EDIT_MESSAGE);
+  }, [companyDetailData?.isMine]);
 
   if (!companyDetailData) {
     return (
@@ -173,12 +171,12 @@ const CompanyEditPage: NextPageWithLayout = () => {
             <div css={cssObj.topButtonBox}>
               <CommonStatusChip status={companyDetailData.status.name} />
               <div css={cssObj.sharedButtonBox}>
-                {/* disabled 의논 후 추가하기 */}
                 <SharedButton
                   onClickHandler="submit"
                   text="기업 정보 수정완료"
                   radius="round"
                   isFullWidth
+                  isDisabled={!companyDetailData?.isMine}
                   fontColor={COLORS.GRAY100}
                   iconObj={{
                     icon: FiEdit,
@@ -205,6 +203,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
               text="기업 정보 수정완료"
               radius="round"
               isFullWidth
+              isDisabled={!companyDetailData?.isMine}
               fontColor={COLORS.GRAY100}
               iconObj={{
                 icon: FiEdit,

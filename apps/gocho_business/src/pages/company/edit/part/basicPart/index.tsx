@@ -85,9 +85,9 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
       <div css={cssObj.container()}>
         <strong css={cssObj.subTitle(Boolean(errors.address))}>기업 본사 주소</strong>
         <label htmlFor="address" css={cssObj.address}>
-          {/* 버튼 disabled */}
           <CommonRoundButton
             Icon={FiMap}
+            isDisabled={!companyData?.isMine}
             text="주소찾기"
             onClickHandler={() =>
               openPostCodePopup({
@@ -98,7 +98,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             }
             backgroundColor={COLORS.GRAY80}
           />
-          <div css={cssObj.inputBox}>
+          <div css={cssObj.inputBox(!companyData.isMine)}>
             <FiMapPin />
             <input
               type="button"

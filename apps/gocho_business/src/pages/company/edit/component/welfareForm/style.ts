@@ -11,6 +11,8 @@ export const cssObj = {
     font-size: 1rem;
     font-weight: 400;
     color: ${COLORS.GRAY10};
+    margin-bottom: 0.5rem;
+    display: block;
   `,
   hidden: css`
     display: none;

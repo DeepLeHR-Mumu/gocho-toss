@@ -45,7 +45,7 @@ export const cssObj = {
   textValue: css`
     font-size: 1rem;
     font-weight: 400;
-    padding: 0.75rem 1rem;
+    padding: 0 1rem;
     color: ${COLORS.GRAY10};
   `,
   employeeNumber: css`
@@ -108,7 +108,7 @@ export const cssObj = {
       margin-right: 0.5rem;
     }
   `,
-  inputBox: css`
+  inputBox: (isDisabled?: boolean) => css`
     display: flex;
     margin-left: 1rem;
     align-items: center;
@@ -117,7 +117,7 @@ export const cssObj = {
 
     > svg {
       font-size: 1.25rem;
-      color: ${COLORS.GRAY10};
+      color: ${isDisabled ? COLORS.GRAY65 : COLORS.GRAY10};
       position: absolute;
       left: 1rem;
       top: 50%;
@@ -171,6 +171,8 @@ export const cssObj = {
   infoTitle: (isError: boolean) => css`
     font-size: 1rem;
     font-weight: 400;
+    margin-bottom: 0.5rem;
+    display: block;
     color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
   `,
 };
