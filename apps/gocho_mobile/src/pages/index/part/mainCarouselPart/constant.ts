@@ -2,6 +2,21 @@ import checkIconImage from "shared-image/global/common/yellow_check.svg";
 
 export const carouselArr = [
   {
+    id: 0,
+    topDesc: "S-OIL",
+    middleDesc: " ",
+    title: "2023년 생산직 신입사원 채용",
+    lastDesc: "2023.02.13 ~ 2023.02.24 16시까지",
+    backgroundColor: "#3492cf",
+    buttonObj: {
+      target: "_self" as const,
+      text: "공고 보러가기",
+      color: "#fff",
+      backgroundColor: "#333",
+      url: "/jd/detail/13346",
+    },
+  },
+  {
     id: 1,
     topDesc: "OPEN",
     middleDesc: "고초대졸닷컴",

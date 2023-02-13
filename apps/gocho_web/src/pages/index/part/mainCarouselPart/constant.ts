@@ -1,3 +1,4 @@
+import banner00 from "@public/images/global/MainCarousel/s-oil.jpg";
 import banner01 from "@public/images/global/MainCarousel/open_renewal_banner.jpg";
 import banner02 from "@public/images/global/MainCarousel/factory_banner.jpg";
 import banner03 from "@public/images/global/MainCarousel/openTalk_banner.jpg";
@@ -5,6 +6,22 @@ import banner03 from "@public/images/global/MainCarousel/openTalk_banner.jpg";
 import checkIconImage from "shared-image/global/common/yellow_check.svg";
 
 export const carouselArr = [
+  {
+    id: 0,
+    topDesc: "S-OIL",
+    middleDesc: " ",
+    title: "2023년 생산직 신입사원 채용",
+    lastDesc: "2023.02.13 ~ 2023.02.24 16시까지",
+    backgroundImage: banner00,
+    backgroundColor: "transparent",
+    buttonObj: {
+      target: "_self" as const,
+      text: "공고 보러가기",
+      color: "#fff",
+      backgroundColor: "#333",
+      url: "/jd/detail/13346",
+    },
+  },
   {
     id: 1,
     topDesc: "OPEN",
