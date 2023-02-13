@@ -1,4 +1,5 @@
 import checkIconImage from "shared-image/global/common/yellow_check.svg";
+import { adClickEvent } from "shared-ga/home";
 
 export const carouselArr = [
   {
@@ -14,6 +15,7 @@ export const carouselArr = [
       color: "#fff",
       backgroundColor: "#333",
       url: "/jd/detail/13346",
+      onClick: adClickEvent,
     },
   },
   {

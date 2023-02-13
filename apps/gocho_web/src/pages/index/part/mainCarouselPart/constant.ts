@@ -4,6 +4,7 @@ import banner02 from "@public/images/global/MainCarousel/factory_banner.jpg";
 import banner03 from "@public/images/global/MainCarousel/openTalk_banner.jpg";
 
 import checkIconImage from "shared-image/global/common/yellow_check.svg";
+import { adClickEvent } from "shared-ga/home";
 
 export const carouselArr = [
   {
@@ -15,11 +16,12 @@ export const carouselArr = [
     backgroundImage: banner00,
     backgroundColor: "transparent",
     buttonObj: {
-      target: "_self" as const,
+      target: "_blank" as const,
       text: "공고 보러가기",
       color: "#fff",
       backgroundColor: "#333",
       url: "/jd/detail/13346",
+      onClick: adClickEvent,
     },
   },
   {
