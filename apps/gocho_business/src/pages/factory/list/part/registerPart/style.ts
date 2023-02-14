@@ -22,7 +22,7 @@ export const cssObj = {
     margin: 4rem 0;
   `,
 
-  suibmitButtonContainer: css`
+  submitButtonContainer: css`
     ::before {
       position: absolute;
       left: 0;

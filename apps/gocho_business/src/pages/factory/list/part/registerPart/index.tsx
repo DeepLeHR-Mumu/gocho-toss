@@ -21,7 +21,7 @@ import { cssObj } from "./style";
 import { FactoryRegisterDef, RegisterPartProps } from "./type";
 import { FactoryBaseInfo } from "../../component/factoryBaseInfo";
 import { FactoryDetailInfo } from "../../component/factoryDetailInfo";
-import { defaultInput, FACTORY_MESSSAGE_OBJ } from "./constant";
+import { defaultInput, FACTORY_MESSAGE_OBJ } from "./constant";
 
 export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingIndex, setEditingIndex }) => {
   const isLoading = useRef(false);
@@ -43,7 +43,7 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingInde
       factoryUploadConfirmEvent();
     }
     factoryEditConfirmEvent();
-    if (window.confirm(FACTORY_MESSSAGE_OBJ.REGISTER)) {
+    if (window.confirm(FACTORY_MESSAGE_OBJ.REGISTER)) {
       addFactoryMutation(
         {
           ...factoryRequestObj,
@@ -117,14 +117,14 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingInde
           <section css={cssObj.wrapper}>
             <FactoryBaseInfo
               formObj={formObj}
-              reqeustStatus={editingIndex !== null ? factoryDataArr?.[editingIndex].status.name : undefined}
+              requestStatus={editingIndex !== null ? factoryDataArr?.[editingIndex].status.name : undefined}
             />
             <FactoryDetailInfo formObj={formObj} totalWorkerNumber={totalWorkerNumber} />
           </section>
         </div>
         <div css={cssObj.buttonCenterContainer}>
           {editingIndex === null ? (
-            <div css={cssObj.suibmitButtonContainer} key="factoryRegisterContainer">
+            <div css={cssObj.submitButtonContainer} key="factoryRegisterContainer">
               <SharedButton
                 radius="round"
                 fontColor={COLORS.GRAY100}
