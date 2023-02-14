@@ -6,8 +6,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
-import monoTextLogo from "@/public/image/deepleLogo/textKoMono.svg";
-import colorTextLogo from "@/public/image/deepleLogo/textKoColor.svg";
+import monoTextLogo from "@/public/images/deepleLogo/bizTextMono.svg";
+import colorTextLogo from "@/public/images/deepleLogo/bizTextColor.svg";
 import { useUserState } from "@/globalStates/useUserState";
 import { useDoLogout } from "@/apis/auth/useDoLogout";
 import { INTERNAL_URL } from "@/constants/url";
@@ -53,8 +53,6 @@ export const TopBar: FunctionComponent = () => {
             alt="고초대졸닷컴 비즈니스"
             layout="fill"
             objectFit="contain"
-            draggable={false}
-            priority
           />
         </h1>
       </div>

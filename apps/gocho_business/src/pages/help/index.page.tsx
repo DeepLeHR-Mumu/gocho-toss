@@ -3,8 +3,8 @@ import Image from "next/image";
 
 import { NextPageWithLayout } from "@/pages/index/type";
 import { GlobalLayout, Footer } from "@/components/global/layout";
-import chatIcon from "@/public/image/help/chat.svg";
-import helpBackground from "@/public/image/help/help_background.svg";
+import chatIcon from "@/public/images/help/chat.svg";
+import helpBackground from "@/public/images/help/help_background.svg";
 
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
