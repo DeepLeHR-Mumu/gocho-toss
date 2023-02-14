@@ -5,7 +5,7 @@ import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
-import jobi_500 from "@/public/images/jobi_500.svg";
+import jobi_500 from "@/public/image/jobi_500.svg";
 import { INTERNAL_URL } from "@/constants/url";
 
 import { cssObj } from "./style";

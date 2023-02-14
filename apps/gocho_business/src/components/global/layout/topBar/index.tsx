@@ -6,8 +6,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
-import bizTextMono from "@/public/images/deepleLogo/bizTextMono.svg";
-import bizTextColor from "@/public/images/deepleLogo/bizTextColor.svg";
+import bizTextMono from "@/public/image/deepleLogo/bizTextMono.svg";
+import bizTextColor from "@/public/image/deepleLogo/bizTextColor.svg";
 import { useUserState } from "@/globalStates/useUserState";
 import { useDoLogout } from "@/apis/auth/useDoLogout";
 import { INTERNAL_URL } from "@/constants/url";
