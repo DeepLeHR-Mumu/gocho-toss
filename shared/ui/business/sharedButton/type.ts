@@ -7,6 +7,7 @@ export interface SharedButtonProps {
   radius: RadiusType;
   borderColor?: string;
   fontColor: string;
+  isDisabled?: boolean;
   iconObj?: { icon: IconType; location?: "left" | "right" };
   backgroundColor: string;
   isFullWidth?: boolean;

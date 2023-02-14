@@ -4,16 +4,16 @@ import { MdBookmarkBorder } from "react-icons/md";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
-import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
+import { useCountInfo } from "@/apis/company/useCountInfo";
 import { useUserState } from "@/globalStates/useUserState";
 
 import { cssObj } from "./style";
 
 export const CompanyInfoPart = () => {
   const { userInfoData } = useUserState();
-  const { data: companyData } = useCompanyDetail({ companyId: userInfoData?.companyId });
+  const { data: countInfoData } = useCountInfo({ companyId: userInfoData?.companyId });
 
-  if (!userInfoData || !companyData) {
+  if (!userInfoData || !countInfoData) {
     return (
       <div css={cssObj.spinner}>
         <Spinner />
@@ -26,23 +26,23 @@ export const CompanyInfoPart = () => {
   return (
     <section css={cssObj.wrapper}>
       <div css={cssObj.logo}>
-        <Image src={companyData.logo} alt={companyData.name} layout="fill" objectFit="contain" />
+        <Image src={userInfoData.companyLogo} alt={userInfoData.companyName} layout="fill" objectFit="contain" />
       </div>
       <div css={cssObj.companyInfoBox}>
-        <strong css={cssObj.companyNameCSS}>{companyData.name}</strong>
-        <p css={cssObj.companyGenreCSS}>{companyData.industry}</p>
+        <strong css={cssObj.companyNameCSS}>{userInfoData.companyName}</strong>
+        <p css={cssObj.companyGenreCSS}>{userInfoData.companyIndustry}</p>
       </div>
       <div css={cssObj.countingInfoBox}>
         <div css={cssObj.countBox}>
           <strong css={cssObj.countTitle}>기업 조회수</strong>
           <p css={cssObj.countDesc}>
-            <FiEye /> <span css={cssObj.colorPoint}>{countFormat.format(companyData.view)}</span>
+            <FiEye /> <span css={cssObj.colorPoint}>{countFormat.format(countInfoData.view)}</span>
           </p>
         </div>
         <div css={cssObj.countBox}>
           <strong css={cssObj.countTitle}>기업 북마크수</strong>
           <p css={cssObj.countDesc}>
-            <MdBookmarkBorder /> <span css={cssObj.colorPoint}>{countFormat.format(companyData.bookmark)}</span>
+            <MdBookmarkBorder /> <span css={cssObj.colorPoint}>{countFormat.format(countInfoData.bookmark)}</span>
           </p>
         </div>
       </div>
