@@ -4,5 +4,6 @@ export const cssObj = {
   mainContainer: css`
     padding-top: 2rem;
     background-color: #f6f7fa;
+    min-height: 90vh;
   `,
 };
