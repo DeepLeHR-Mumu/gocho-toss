@@ -6,6 +6,7 @@ import { FiEye } from "react-icons/fi";
 import { Spinner } from "shared-ui/common/atom/spinner";
 
 import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
+import { useCountInfo } from "@/apis/company/useCountInfo";
 import { useUserState } from "@/globalStates/useUserState";
 
 import { cssObj } from "./style";
@@ -13,8 +14,9 @@ import { cssObj } from "./style";
 export const CompanyInfoPart: FunctionComponent = () => {
   const { userInfoData } = useUserState();
   const { data: companyData } = useCompanyDetail({ companyId: userInfoData?.companyId });
+  const { data: countInfoData } = useCountInfo({ companyId: userInfoData?.companyId });
 
-  if (!userInfoData || !companyData) {
+  if (!userInfoData || !companyData || !countInfoData) {
     return (
       <div css={cssObj.spinner}>
         <Spinner />
@@ -39,13 +41,13 @@ export const CompanyInfoPart: FunctionComponent = () => {
           <div css={cssObj.countLine}>
             <strong css={cssObj.countTitle}>기업 조회수</strong>
             <p css={cssObj.countDesc}>
-              <FiEye /> <span css={cssObj.colorPoint}>{countFormat.format(companyData.view)}</span>
+              <FiEye /> <span css={cssObj.colorPoint}>{countFormat.format(countInfoData.view)}</span>
             </p>
           </div>
           <div css={cssObj.countLine}>
             <strong css={cssObj.countTitle}>기업 북마크수</strong>
             <p css={cssObj.countDesc}>
-              <MdBookmarkBorder /> <span css={cssObj.colorPoint}>{countFormat.format(companyData.bookmark)}</span>
+              <MdBookmarkBorder /> <span css={cssObj.colorPoint}>{countFormat.format(countInfoData.bookmark)}</span>
             </p>
           </div>
         </div>

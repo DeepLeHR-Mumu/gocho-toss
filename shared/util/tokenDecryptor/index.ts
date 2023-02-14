@@ -23,6 +23,7 @@ interface ManagerDecryptedTokenObj {
   department: string;
   iat: number;
   exp: number;
+  company_industry: string;
 }
 
 export const tokenDecryptor = (token: string) => {

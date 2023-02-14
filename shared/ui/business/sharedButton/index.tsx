@@ -11,6 +11,7 @@ export const SharedButton: FunctionComponent<SharedButtonProps> = ({
   iconObj,
   backgroundColor,
   isFullWidth,
+  isDisabled,
   size,
   text,
   onClickHandler,
@@ -21,17 +22,18 @@ export const SharedButton: FunctionComponent<SharedButtonProps> = ({
     <button
       type={onClickHandler !== "submit" ? "button" : "submit"}
       onClick={onClickHandler === "submit" ? undefined : onClickHandler}
-      css={cssObj.wrapper(radius, backgroundColor, borderColor, isFullWidth)}
+      css={cssObj.wrapper(radius, backgroundColor, borderColor, isFullWidth, isDisabled)}
+      disabled={isDisabled}
     >
       <div css={cssObj.container(heightPadding)}>
         {iconObj && iconObj.location === "left" && (
-          <div css={cssObj.icon(fontColor, "left")}>
+          <div css={cssObj.icon(fontColor, "left", isDisabled)}>
             <iconObj.icon />
           </div>
         )}
-        {text && <p css={cssObj.text(labelFontWeight, fontColor, labelFontSize)}>{text}</p>}
+        {text && <p css={cssObj.text(labelFontWeight, fontColor, labelFontSize, isDisabled)}>{text}</p>}
         {iconObj && iconObj.location === "right" && (
-          <div css={cssObj.icon(fontColor, "right")}>
+          <div css={cssObj.icon(fontColor, "right", isDisabled)}>
             <iconObj.icon />
           </div>
         )}

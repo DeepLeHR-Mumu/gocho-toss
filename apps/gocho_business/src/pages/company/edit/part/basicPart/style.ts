@@ -32,49 +32,74 @@ export const cssObj = {
       `;
     }
     return css`
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
     `;
   },
-  subTitle: (isError: boolean) => css`
-    font-size: 1rem;
-    font-weight: 700;
-    color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
-    margin-bottom: 1rem;
-    display: inline-block;
-  `,
-  textValue: css`
+  subTitle: (isError: boolean, isDisabled: boolean) => {
+    const defaultCSS = css`
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: inline-block;
+    `;
+    if (isDisabled) {
+      return css`
+        ${defaultCSS};
+        color: ${COLORS.GRAY65};
+      `;
+    }
+
+    return css`
+      ${defaultCSS};
+      color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+    `;
+  },
+  textValue: (isDisabled: boolean) => css`
     font-size: 1rem;
     font-weight: 400;
-    padding: 0.75rem 1rem;
-    color: ${COLORS.GRAY10};
+    padding: 0 1rem;
+    color: ${isDisabled ? COLORS.GRAY65 : COLORS.GRAY10};
   `,
-  employeeNumber: css`
+  employeeNumber: (isDisabled: boolean) => css`
     display: flex;
     align-items: center;
     width: 90%;
     > svg {
       font-size: 2rem;
       margin-right: 0.5rem;
-      color: ${COLORS.GRAY10};
+      color: ${isDisabled ? COLORS.GRAY65 : COLORS.GRAY10};
     }
   `,
-  input: (isError: boolean) => css`
-    border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
-    padding: 0rem 1rem;
-    border-radius: 0.3125rem;
-    height: 2.5rem;
-    font-size: 1rem;
-    width: 100%;
-    font-weight: 400;
+  input: (isError: boolean, isDisabled: boolean) => {
+    const defaultCSS = css`
+      border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+      padding: 0rem 1rem;
+      border-radius: 0.3125rem;
+      height: 2.5rem;
+      font-size: 1rem;
+      width: 100%;
+      font-weight: 400;
 
-    ::placeholder {
-      color: ${COLORS.GRAY30};
+      ::placeholder {
+        color: ${COLORS.GRAY30};
+      }
+    `;
+    if (isDisabled) {
+      return css`
+        ${defaultCSS};
+        border-color: ${COLORS.GRAY65};
+        color: ${COLORS.GRAY65};
+      `;
     }
-  `,
-  unit: css`
+    return css`
+      ${defaultCSS};
+    `;
+  },
+  unit: (isDisabled: boolean) => css`
     font-size: 1rem;
     font-weight: 400;
     padding: 0.25rem;
+    color: ${isDisabled ? COLORS.GRAY65 : COLORS.GRAY10};
   `,
   address: css`
     display: flex;
@@ -96,7 +121,7 @@ export const cssObj = {
       margin-right: 0.5rem;
     }
   `,
-  inputBox: (isError: boolean) => css`
+  inputBox: (isDisabled: boolean) => css`
     display: flex;
     margin-left: 1rem;
     align-items: center;
@@ -105,13 +130,15 @@ export const cssObj = {
 
     > svg {
       font-size: 1.25rem;
-      color: ${COLORS.GRAY10};
+      color: ${isDisabled ? COLORS.GRAY65 : COLORS.GRAY10};
       position: absolute;
       left: 1rem;
       top: 50%;
       transform: translate(0, -50%);
     }
-    > input {
+  `,
+  inputAddress: (isError: boolean, isDisabled: boolean) => {
+    const defaultCSS = css`
       border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
       text-align: left;
       height: 2.5rem;
@@ -126,14 +153,24 @@ export const cssObj = {
       ::placeholder {
         color: ${COLORS.GRAY30};
       }
+    `;
+    if (isDisabled) {
+      return css`
+        ${defaultCSS}
+        border-color: ${COLORS.GRAY65};
+        color: ${COLORS.GRAY65};
+      `;
     }
-  `,
-  nozoBox: css`
+    return css`
+      ${defaultCSS}
+    `;
+  },
+  nozoBox: (isDisabled: boolean) => css`
     display: flex;
     margin-bottom: 0.5rem;
     > svg {
       font-size: 2rem;
-      color: ${COLORS.GRAY10};
+      color: ${isDisabled ? COLORS.GRAY65 : COLORS.GRAY10};
       margin-right: 0.75rem;
     }
     > label {
@@ -144,9 +181,29 @@ export const cssObj = {
     width: 45%;
     margin-bottom: 0.5rem;
   `,
-  infoTitle: (isError: boolean) => css`
-    font-size: 1rem;
-    font-weight: 400;
-    color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+  infoTitle: (isError: boolean, isDisabled: boolean) => {
+    const defaultCSS = css`
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      display: block;
+    `;
+    if (isDisabled) {
+      return css`
+        ${defaultCSS};
+        color: ${COLORS.GRAY65};
+      `;
+    }
+
+    return css`
+      ${defaultCSS};
+      color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+    `;
+  },
+  errorMsg: css`
+    color: ${COLORS.ERROR_RED40};
+    font-size: 0.75rem;
+    margin: 0.25rem 0 0 0;
+    height: 1.25rem;
   `,
 };

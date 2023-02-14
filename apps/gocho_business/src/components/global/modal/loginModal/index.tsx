@@ -59,9 +59,8 @@ export const LoginBox: FunctionComponent = () => {
         loginSuccessEvent(watch("auto_login"));
         localStorage.setItem("accessToken", response.data.access_token);
         localStorage.setItem("refreshToken", response.data.refresh_token);
-        const { id, company_id, company_name, company_logo, iat, exp, email, name, department } = managerTokenDecryptor(
-          response.data.access_token
-        );
+        const { id, company_id, company_name, company_logo, company_industry, exp, email, name, department } =
+          managerTokenDecryptor(response.data.access_token);
         setUserInfoData({
           id,
           companyId: company_id,
@@ -70,7 +69,7 @@ export const LoginBox: FunctionComponent = () => {
           email,
           name,
           department,
-          iat,
+          companyIndustry: company_industry,
           exp,
         });
         queryClient.invalidateQueries();

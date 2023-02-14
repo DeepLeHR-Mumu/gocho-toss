@@ -54,6 +54,7 @@ export const TopBar: FunctionComponent = () => {
             layout="fill"
             objectFit="contain"
             draggable={false}
+            priority
           />
         </h1>
       </div>
