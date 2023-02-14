@@ -15,7 +15,7 @@ import { factoryDeleteConfirmEvent, factoryDeleteDoneEvent } from "@/ga/factoryL
 
 import { cssObj } from "./style";
 import { FactoryCardListPartProps } from "./type";
-import { FACTORY_MESSSAGE_OBJ } from "../registerPart/constant";
+import { FACTORY_MESSAGE_OBJ } from "../registerPart/constant";
 
 export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = ({
   setEditingIndex,
@@ -100,7 +100,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                     backgroundColor={COLORS.GRAY80}
                     onClickHandler={() => {
                       factoryDeleteConfirmEvent();
-                      if (window.confirm(FACTORY_MESSSAGE_OBJ.DELETE)) {
+                      if (window.confirm(FACTORY_MESSAGE_OBJ.DELETE)) {
                         deleteFactoryMutation(
                           { factoryId: factoryData.id },
                           {

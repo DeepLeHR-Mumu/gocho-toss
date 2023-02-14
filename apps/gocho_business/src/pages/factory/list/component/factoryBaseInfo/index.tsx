@@ -11,7 +11,7 @@ import { CommonStatusChip } from "@/components/common";
 import { cssObj } from "./style";
 import { FactoryBaseInfoProps } from "./type";
 
-export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formObj, reqeustStatus }) => {
+export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formObj, requestStatus }) => {
   const { register, formState, setValue } = formObj;
 
   const openPostCodePopup = useDaumPostcodePopup();
@@ -31,7 +31,7 @@ export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formO
           maxLength={30}
         />
         <div css={cssObj.statusChip}>
-          <CommonStatusChip status={reqeustStatus} />
+          <CommonStatusChip status={requestStatus} />
         </div>
       </div>
       <div css={cssObj.inputContainer}>
