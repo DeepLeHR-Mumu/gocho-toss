@@ -61,6 +61,7 @@ export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formO
               },
             });
           }}
+          tabIndex={-1}
         >
           <div css={cssObj.addressContainer}>
             <input

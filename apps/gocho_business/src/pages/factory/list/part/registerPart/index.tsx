@@ -68,6 +68,7 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingInde
       );
       setEditingIndex(null);
     }
+    isLoading.current = false;
   };
 
   useEffect(() => {
