@@ -79,7 +79,10 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
               onFocus={() => {
                 clearErrors("start_time");
               }}
-              {...register("start_time", { required: "시작 일시는 필수 입력 사항입니다" })}
+              {...register("start_time", {
+                required: "시작 일시는 필수 입력 사항입니다",
+                onBlur: () => trigger("end_time"),
+              })}
             />
             <p css={cssObj.errorMessage}>{formState.errors.start_time && formState.errors.start_time.message}</p>
           </div>
@@ -95,7 +98,18 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                   onFocus={() => {
                     clearErrors("end_time");
                   }}
-                  {...register("end_time", { required: "마감 일시는 필수 입력 사항입니다" })}
+                  {...register("end_time", {
+                    required: "마감 일시는 필수 입력 사항입니다",
+                    validate: {
+                      isFasterThanStart: (value) =>
+                        !new Date(watch("start_time")).getTime() ||
+                        new Date(watch("start_time")).getTime() < new Date(value).getTime() ||
+                        "시작 일시가 마감 일시보다 느릴 수 없습니다.",
+                      isFasterThanNow: (value) =>
+                        new Date(value).getTime() > new Date().getTime() ||
+                        "마감 일시가 현재 시각보다 빠를 수 없습니다.",
+                    },
+                  })}
                 />
                 <p css={cssObj.errorMessage}>{formState.errors.end_time && formState.errors.end_time.message}</p>
               </>
