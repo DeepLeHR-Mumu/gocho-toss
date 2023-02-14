@@ -88,8 +88,8 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
     const hireNumber = watch("position_arr")[positionIndex].hire_number;
 
     if (hireNumber === -1) setHireNumberLabel("0");
-    else if (hireNumber === -2) setHireNumberLabel("0");
-    else if (hireNumber === -3) setHireNumberLabel("0");
+    else if (hireNumber === -2) setHireNumberLabel("00");
+    else if (hireNumber === -3) setHireNumberLabel("000");
     else setHireNumberLabel(String(hireNumber));
   }, [watch, positionIndex]);
 

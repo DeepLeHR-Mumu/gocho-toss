@@ -118,7 +118,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             <div css={cssObj.conversionRateInputContainer}>
               <input
                 css={cssObj.activatableInput(isConversionDisabled)}
-                type="range"
+                type="number"
                 min="0"
                 max="100"
                 step="1"
