@@ -153,7 +153,9 @@ const CompanyEditPage: NextPageWithLayout = () => {
 
   useEffect(() => {
     if (companyDetailData?.uploader.isMine === false) window.alert(ALREADY_DONE_EDIT_MESSAGE);
-  }, [companyDetailData?.uploader.isMine]);
+    // 초기 한번만 alert를 위한 disabled 또한 만약 refetch된 후 정보가 변경되었을 때 이미 출력을 하기때문에 또한번의 출력 방지
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!companyDetailData) {
     return (
