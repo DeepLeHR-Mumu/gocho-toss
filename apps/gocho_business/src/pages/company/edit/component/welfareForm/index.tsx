@@ -8,6 +8,7 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
   title,
   desc,
   welfareValueArr,
+  isMine,
   registerKey,
   companyFormObj,
 }) => {
@@ -58,14 +59,15 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
 
   return (
     <div css={cssObj.wrapper}>
-      <strong css={cssObj.title}>{title}</strong>
+      <strong css={cssObj.title(isMine)}>{title}</strong>
       <div css={cssObj.writeBox}>
         <input
           ref={inputRef}
           type="text"
+          disabled={isMine}
           maxLength={30}
           placeholder="직접 입력하여 추가"
-          css={cssObj.inputLine}
+          css={cssObj.inputLine(isMine)}
           onKeyUp={(onKeyEvent) => {
             if (onKeyEvent.key === "Enter") {
               addValueHandler(inputRef.current?.value || "");
@@ -74,8 +76,9 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
         />
         <button
           type="button"
+          disabled={isMine}
           aria-label={`복지 ${inputRef.current?.value} 추가하기`}
-          css={cssObj.enterButton}
+          css={cssObj.enterButton(isMine)}
           onClick={() => {
             addValueHandler(inputRef.current?.value || "");
           }}
@@ -83,9 +86,9 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
           <FiCornerDownLeft />
         </button>
       </div>
-      <div css={cssObj.container}>
-        <p css={cssObj.desc}>{desc}</p>
-        {!welfareArr && <p css={cssObj.noData}>입력한 복지가 없습니다</p>}
+      <div css={cssObj.container(isMine)}>
+        <p css={cssObj.desc(isMine)}>{desc}</p>
+        {!welfareArr && <p css={cssObj.noData(isMine)}>입력한 복지가 없습니다</p>}
 
         {welfareArr && (
           <div css={cssObj.listBox} ref={welfareBoxRef}>
@@ -94,13 +97,12 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
 
               return (
                 <div key={key} css={cssObj.buttonLine}>
-                  <button css={cssObj.welfareButton} type="button">
-                    <p css={cssObj.valueDesc}>{data}</p>
-                  </button>
+                  <p css={cssObj.valueDesc(isMine)}>{data}</p>
                   <button
+                    disabled={isMine}
                     type="button"
                     aria-label={`복지 ${data} 제거하기`}
-                    css={cssObj.deleteButton}
+                    css={cssObj.deleteButton(isMine)}
                     onClick={() => {
                       deleteKeyHandler(index);
                     }}
