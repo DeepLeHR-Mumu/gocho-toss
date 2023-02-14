@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { FiEdit, FiPlus, FiX } from "react-icons/fi";
 
@@ -24,6 +24,8 @@ import { FactoryDetailInfo } from "../../component/factoryDetailInfo";
 import { defaultInput, FACTORY_MESSSAGE_OBJ } from "./constant";
 
 export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingIndex, setEditingIndex }) => {
+  const isLoading = useRef(false);
+
   const formObj = useForm<FactoryRegisterDef>();
   const { handleSubmit, watch, reset, formState } = formObj;
 
@@ -33,6 +35,10 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingInde
   const { mutate: addFactoryMutation } = useAddFactory();
 
   const factoryPostSubmitHandler = (factoryRequestObj: FactoryRegisterDef) => {
+    if (isLoading.current) {
+      return;
+    }
+    isLoading.current = true;
     if (editingIndex === null) {
       factoryUploadConfirmEvent();
     }
@@ -55,10 +61,14 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingInde
             }
             factoryEditDoneEvent();
           },
+          onSettled: () => {
+            isLoading.current = false;
+          },
         }
       );
       setEditingIndex(null);
     }
+    isLoading.current = false;
   };
 
   useEffect(() => {
