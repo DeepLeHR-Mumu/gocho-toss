@@ -9,7 +9,7 @@ export const cssObj = {
   title: (isMine: boolean) => css`
     font-size: 1rem;
     font-weight: 400;
-    color: ${isMine ? COLORS.GRAY60 : COLORS.GRAY10};
+    color: ${isMine ? COLORS.GRAY65 : COLORS.GRAY10};
     margin-bottom: 0.5rem;
     display: block;
   `,
@@ -30,10 +30,10 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${isMine ? COLORS.GRAY60 : COLORS.GRAY10};
+    color: ${isMine ? COLORS.GRAY65 : COLORS.GRAY10};
   `,
   inputLine: (isMine: boolean) => css`
-    border: 1px solid ${isMine ? COLORS.GRAY60 : COLORS.GRAY10};
+    border: 1px solid ${isMine ? COLORS.GRAY65 : COLORS.GRAY10};
     padding: 0.75rem 2.5rem 0.75rem 1rem;
     border-radius: 0.3125rem;
     font-size: 1rem;
@@ -41,7 +41,7 @@ export const cssObj = {
     font-weight: 400;
 
     ::placeholder {
-      color: ${isMine ? COLORS.GRAY60 : COLORS.GRAY30};
+      color: ${isMine ? COLORS.GRAY65 : COLORS.GRAY30};
     }
   `,
   container: (isMine: boolean) => css`
@@ -51,7 +51,7 @@ export const cssObj = {
     padding: 0.5rem 1rem;
     background-color: ${COLORS.GRAY95};
     font-size: 0.875rem;
-    color: ${isMine ? COLORS.GRAY60 : COLORS.GRAY30};
+    color: ${isMine ? COLORS.GRAY65 : COLORS.GRAY30};
     font-weight: 400;
     height: 3.75rem;
   `,
@@ -75,12 +75,12 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${isMine ? COLORS.GRAY60 : COLORS.GRAY30};
+    color: ${isMine ? COLORS.GRAY65 : COLORS.GRAY30};
     background-color: ${COLORS.GRAY90};
   `,
   valueDesc: (isMine: boolean) => css`
     font-size: 1rem;
-    color: ${isMine ? COLORS.GRAY60 : COLORS.GRAY10};
+    color: ${isMine ? COLORS.GRAY65 : COLORS.GRAY10};
     text-align: left;
     width: 100%;
     overflow-wrap: anywhere;
@@ -93,6 +93,6 @@ export const cssObj = {
     height: 2rem;
     background-color: ${COLORS.GRAY80};
     border-radius: 50%;
-    color: ${isMine ? COLORS.GRAY60 : COLORS.GRAY10};
+    color: ${isMine ? COLORS.GRAY65 : COLORS.GRAY10};
   `,
 };

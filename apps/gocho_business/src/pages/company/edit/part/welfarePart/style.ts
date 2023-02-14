@@ -14,7 +14,7 @@ export const cssObj = {
   subTitle: (isMine: boolean) => css`
     font-size: 1rem;
     font-weight: 700;
-    color: ${isMine ? COLORS.GRAY60 : COLORS.GRAY10};
+    color: ${isMine ? COLORS.GRAY65 : COLORS.GRAY10};
     margin-bottom: 0.5rem;
     display: inline-block;
   `,

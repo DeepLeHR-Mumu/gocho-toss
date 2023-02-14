@@ -35,27 +35,39 @@ export const cssObj = {
       margin-bottom: 1.75rem;
     `;
   },
-  subTitle: (isError: boolean) => css`
-    font-size: 1rem;
-    font-weight: 700;
-    color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
-    margin-bottom: 1rem;
-    display: inline-block;
-  `,
-  textValue: css`
+  subTitle: (isError: boolean, isDisabled: boolean) => {
+    const defaultCSS = css`
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: inline-block;
+    `;
+    if (isDisabled) {
+      return css`
+        ${defaultCSS};
+        color: ${COLORS.GRAY65};
+      `;
+    }
+
+    return css`
+      ${defaultCSS};
+      color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+    `;
+  },
+  textValue: (isDisabled: boolean) => css`
     font-size: 1rem;
     font-weight: 400;
     padding: 0 1rem;
-    color: ${COLORS.GRAY10};
+    color: ${isDisabled ? COLORS.GRAY65 : COLORS.GRAY10};
   `,
-  employeeNumber: css`
+  employeeNumber: (isDisabled: boolean) => css`
     display: flex;
     align-items: center;
     width: 90%;
     > svg {
       font-size: 2rem;
       margin-right: 0.5rem;
-      color: ${COLORS.GRAY10};
+      color: ${isDisabled ? COLORS.GRAY65 : COLORS.GRAY10};
     }
   `,
   input: (isError: boolean, isDisabled: boolean) => {
@@ -83,10 +95,11 @@ export const cssObj = {
       ${defaultCSS};
     `;
   },
-  unit: css`
+  unit: (isDisabled: boolean) => css`
     font-size: 1rem;
     font-weight: 400;
     padding: 0.25rem;
+    color: ${isDisabled ? COLORS.GRAY65 : COLORS.GRAY10};
   `,
   address: css`
     display: flex;
@@ -108,7 +121,7 @@ export const cssObj = {
       margin-right: 0.5rem;
     }
   `,
-  inputBox: (isDisabled?: boolean) => css`
+  inputBox: (isDisabled: boolean) => css`
     display: flex;
     margin-left: 1rem;
     align-items: center;
@@ -152,12 +165,12 @@ export const cssObj = {
       ${defaultCSS}
     `;
   },
-  nozoBox: css`
+  nozoBox: (isDisabled: boolean) => css`
     display: flex;
     margin-bottom: 0.5rem;
     > svg {
       font-size: 2rem;
-      color: ${COLORS.GRAY10};
+      color: ${isDisabled ? COLORS.GRAY65 : COLORS.GRAY10};
       margin-right: 0.75rem;
     }
     > label {
@@ -168,13 +181,25 @@ export const cssObj = {
     width: 45%;
     margin-bottom: 0.5rem;
   `,
-  infoTitle: (isError: boolean) => css`
-    font-size: 1rem;
-    font-weight: 400;
-    margin-bottom: 0.5rem;
-    display: block;
-    color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
-  `,
+  infoTitle: (isError: boolean, isDisabled: boolean) => {
+    const defaultCSS = css`
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      display: block;
+    `;
+    if (isDisabled) {
+      return css`
+        ${defaultCSS};
+        color: ${COLORS.GRAY65};
+      `;
+    }
+
+    return css`
+      ${defaultCSS};
+      color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+    `;
+  },
   errorMsg: css`
     color: ${COLORS.ERROR_RED40};
     font-size: 0.75rem;
