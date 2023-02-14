@@ -1,4 +1,4 @@
-import { ReactElement, useEffect } from "react";
+import { ReactElement, useEffect, useRef } from "react";
 import { FiEdit } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 
@@ -31,6 +31,7 @@ import { PostSubmitValues } from "./type";
 import { cssObj } from "./style";
 
 const CompanyEditPage: NextPageWithLayout = () => {
+  const isRefetching = useRef(false);
   const { userInfoData } = useUserState();
   const { setToast } = useToast();
   const { data: companyDetailData, refetch: companyDetailRefetch } = useCompanyDetail({
@@ -53,6 +54,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
 
   const addCompanyDetail = (formData: PostSubmitValues) => {
     companyEditConfirmEvent();
+    isRefetching.current = true;
     companyDetailRefetch().then((response) => {
       if (!isDirty) {
         window.alert("변경사항이 없습니다.");
@@ -152,10 +154,9 @@ const CompanyEditPage: NextPageWithLayout = () => {
   }, [submitCount]);
 
   useEffect(() => {
-    if (companyDetailData?.uploader.isMine === false) window.alert(ALREADY_DONE_EDIT_MESSAGE);
-    // 초기 한번만 alert를 위한 disabled 또한 만약 refetch된 후 정보가 변경되었을 때 이미 출력을 하기때문에 또한번의 출력 방지
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (!companyDetailData || isRefetching.current === true) return;
+    if (companyDetailData.uploader.isMine === false) window.alert(ALREADY_DONE_EDIT_MESSAGE);
+  }, [companyDetailData]);
 
   if (!companyDetailData) {
     return (
