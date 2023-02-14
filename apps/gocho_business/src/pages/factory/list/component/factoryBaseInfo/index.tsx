@@ -61,11 +61,13 @@ export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formO
               },
             });
           }}
+          tabIndex={-1}
         >
           <div css={cssObj.addressContainer}>
             <input
               {...register("address", { required: true })}
               disabled
+              tabIndex={-1}
               css={cssObj.addressTextInput(formState.errors.address?.type === "required")}
               placeholder="공장주소"
             />
