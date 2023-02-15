@@ -7,6 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 import { Spinner } from "shared-ui/common/atom/spinner";
+import { usePreventRouting } from "shared-hooks";
 
 import { useToast } from "@/globalStates/useToast";
 import {
@@ -25,7 +26,6 @@ import { useDeleteJd } from "@/apis/jd/useDeleteJd";
 import { useEndJd } from "@/apis/jd/useEndJd";
 import { jdArrKeyObj } from "@/apis/jd/useJdArr/type";
 
-import { JD_UPLOAD_MESSAGE_OBJ } from "@/pages/jd/upload/constant";
 import { INTERNAL_URL } from "@/constants/url";
 import { HeaderPart } from "./part/headerPart";
 import { BasicInfoPart } from "./part/basicInfoPart";
@@ -63,7 +63,7 @@ const JdEditPage: NextPageWithLayout = () => {
     control,
     handleSubmit,
     reset,
-    formState: { isDirty, isSubmitSuccessful, submitCount },
+    formState: { dirtyFields, submitCount },
   } = jdForm;
 
   const { fields, append, remove } = useFieldArray({
@@ -231,29 +231,7 @@ const JdEditPage: NextPageWithLayout = () => {
     });
   }, [jdData, reset]);
 
-  useEffect(() => {
-    const escapeWithoutSubmit = isDirty && !isSubmitSuccessful;
-
-    if (escapeWithoutSubmit) window.onbeforeunload = () => true;
-
-    const handleUnload = () => {
-      if (escapeWithoutSubmit) {
-        jdEditExitEvent();
-        if (!window.confirm(JD_UPLOAD_MESSAGE_OBJ.LEAVE)) {
-          throw router.events.emit("routeChangeError");
-        } else {
-          jdEditExitDoneEvent();
-        }
-      }
-    };
-
-    router.events.on("routeChangeStart", handleUnload);
-
-    return () => {
-      router.events.off("routeChangeStart", handleUnload);
-      window.onbeforeunload = () => null;
-    };
-  }, [isDirty, isSubmitSuccessful, router.events]);
+  usePreventRouting(Boolean(Object.keys(dirtyFields).length), jdEditExitEvent, jdEditExitDoneEvent);
 
   useEffect(() => {
     if (submitCount === 0) return;
