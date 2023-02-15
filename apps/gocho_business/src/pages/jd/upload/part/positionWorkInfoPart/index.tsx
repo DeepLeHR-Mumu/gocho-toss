@@ -13,7 +13,7 @@ import { SharedTextLink } from "shared-ui/business/sharedTextLink";
 
 import { useFactoryArr } from "@/apis/factory/useFactoryArr";
 import { factoryArrKeyObj } from "@/apis/factory/useFactoryArr/type";
-import { INTERNAL_URL, POSTCODE_SCRIPT_URL } from "@/constants/url";
+import { INTERNAL_URL } from "@/constants/url";
 
 import { DeleteInputButton } from "../../component/deleteInputButton";
 import { AddFieldButton } from "../../component/addFieldButton";
@@ -40,7 +40,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
   const { watch, setValue, clearErrors, trigger, formState, register, setError } = jobForm;
 
   const queryClient = useQueryClient();
-  const openPostCodePopup = useDaumPostcodePopup(POSTCODE_SCRIPT_URL);
+  const openPostCodePopup = useDaumPostcodePopup();
 
   // TODO: factories/find로 변경하기, params 추가
   const { data: factoryDataArr } = useFactoryArr();

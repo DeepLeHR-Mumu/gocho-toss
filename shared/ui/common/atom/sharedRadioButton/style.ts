@@ -3,15 +3,18 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
-  label: css`
+  label: (isFocus: boolean) => css`
     display: flex;
     cursor: pointer;
     align-items: center;
+    border: 0.13rem solid ${isFocus ? COLORS.BLUE_FIRST40 : "transparent"};
+    border-radius: 0.3125rem;
+    padding: 0 0.25rem;
   `,
   radio: css`
+    width: 0;
+    height: 0;
     margin: 0;
-    display: none;
-    appearance: auto;
     :checked ~ div {
       border-color: ${COLORS.BLUE_FIRST40};
 

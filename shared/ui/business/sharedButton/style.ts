@@ -1,8 +1,15 @@
 import { css } from "@emotion/react";
+import { COLORS } from "shared-style/color";
 import { RadiusType } from "./type";
 
 export const cssObj = {
-  wrapper: (radius: RadiusType, backgroundColor: string, borderColor?: string, isFullWidth?: boolean) => {
+  wrapper: (
+    radius: RadiusType,
+    backgroundColor: string,
+    borderColor?: string,
+    isFullWidth?: boolean,
+    isDisabled?: boolean
+  ) => {
     let radiusValue;
     if (radius === "rect") radiusValue = 0;
     if (radius === "round") radiusValue = 0.4;
@@ -15,6 +22,10 @@ export const cssObj = {
       ${borderColor &&
       css`
         border: 1px solid ${borderColor};
+      `}
+      ${isDisabled &&
+      css`
+        background-color: ${COLORS.GRAY65};
       `}
       ${isFullWidth &&
       css`
@@ -44,7 +55,7 @@ export const cssObj = {
     }
   `,
 
-  icon: (fontColor?: string, iconLocation?: "left" | "right") => css`
+  icon: (fontColor?: string, iconLocation?: "left" | "right", isDisabled?: boolean) => css`
     font-size: 1rem;
     display: flex;
     justify-content: center;
@@ -57,10 +68,14 @@ export const cssObj = {
     css`
       margin-left: 0.5rem;
     `}
+    ${isDisabled &&
+    css`
+      color: ${COLORS.GRAY100};
+    `}
   `,
-  text: (fontweight: number, color: string, size: number) => css`
-    font-weight: ${fontweight};
-    color: ${color};
+  text: (fontWeight: number, color: string, size: number, isDisabled?: boolean) => css`
+    font-weight: ${fontWeight};
+    color: ${isDisabled ? COLORS.GRAY100 : color};
     font-size: ${size}rem;
   `,
 };
