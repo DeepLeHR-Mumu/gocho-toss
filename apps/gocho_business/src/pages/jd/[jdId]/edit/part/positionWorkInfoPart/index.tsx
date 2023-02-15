@@ -380,6 +380,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
               </p>
               <input
                 css={cssObj.input(47)}
+                maxLength={100}
                 placeholder="근무지를 작성해주세요"
                 {...register(`position_arr.${positionIndex}.place.etc`, {
                   required: "근무지는 필수 입력 사항입니다",
@@ -399,6 +400,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
               </p>
               <input
                 css={cssObj.input(47)}
+                maxLength={100}
                 placeholder="전국 순환, 입사 후 근무지 배정 등 특수 근무지를 작성해주세요"
                 {...register(`position_arr.${positionIndex}.place.etc`, {
                   required: "근무지는 필수 입력 사항입니다",
