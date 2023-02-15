@@ -4,7 +4,7 @@ import { INTERNAL_URL } from "@/constants/url";
 
 test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
   await page.goto(INTERNAL_URL.HOME);
-  // await page.waitForTimeout(5000);
+  await page.waitForTimeout(5000);
 
   const [beforeFactoryPromise] = await Promise.all([
     page.waitForResponse(
@@ -17,7 +17,7 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
     page.getByRole("link", { name: "공장" }).click(),
   ]);
 
-  // await page.waitForTimeout(5000);
+  await page.waitForTimeout(5000);
   const popupPromise = page.waitForEvent("popup");
 
   const beforeFactoryListDataObj = await (await beforeFactoryPromise).json();
@@ -33,9 +33,9 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
   await page.waitForTimeout(500);
   const popup = await popupPromise;
 
-  // await page.waitForTimeout(2000);
+  await page.waitForTimeout(2000);
   await popup.keyboard.type("서울", { delay: 20 });
-  // await page.waitForTimeout(1000);
+  await page.waitForTimeout(1000);
 
   await popup.keyboard.press("Enter");
 
