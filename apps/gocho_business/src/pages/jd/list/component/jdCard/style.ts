@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
+import { shorten } from "shared-style/common";
 
 export const cssObj = {
   cardContainer: (isExpired: boolean) => css`
@@ -11,7 +12,7 @@ export const cssObj = {
   `,
 
   topContainer: css`
-    height: 6rem;
+    height: 6.5rem;
     display: flex;
     align-items: center;
     gap: 0 2rem;
@@ -27,10 +28,10 @@ export const cssObj = {
   `,
 
   title: css`
-    max-width: 80%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    line-height: 1.2;
+    width: 15rem;
+    word-break: break-all;
+    ${shorten(3)};
   `,
 
   date: css`

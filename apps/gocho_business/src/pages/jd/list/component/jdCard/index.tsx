@@ -96,8 +96,8 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
     <div css={cssObj.cardContainer(isExpired)}>
       <div css={cssObj.topContainer}>
         <div css={cssObj.titleBox}>
-          <div css={cssObj.title}>
-            <strong>{jd.title}</strong>
+          <div>
+            <strong css={cssObj.title}>{jd.title}</strong>
             <p css={cssObj.date}>{`${dayjs(jd.startTime).format("YY.MM.DD")}~${dayjs(jd.endTime).format(
               "YY.MM.DD"
             )}`}</p>
