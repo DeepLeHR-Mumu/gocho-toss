@@ -35,7 +35,7 @@ import { PositionRequiredInfoPart } from "./part/positionRequiredInfoPart";
 import { PositionWorkInfoPart } from "./part/positionWorkInfoPart";
 
 import { JdFormValues } from "./type";
-import { BLANK_POSITION, JD_EDIT_MESSAGE_OBJ } from "./constant";
+import { BLANK_POSITION, JD_EDIT_MESSAGE_OBJ, ROTATION_ARR } from "./constant";
 import { getFieldArrayValue, getFieldArrayValueWithNull, setFieldArray } from "./util";
 import { cssObj } from "./style";
 
@@ -205,11 +205,14 @@ const JdEditPage: NextPageWithLayout = () => {
       task_main: position.task.mainTask,
       task_sub_arr: position.task.subTaskArr,
       task_detail_arr: setFieldArray(position.taskDetailArr || []),
-      rotation_arr: position.rotationArr,
+      rotation_arr: position.rotationArr.map(
+        (rotation) => ROTATION_ARR.find((rotationObj) => rotationObj.name === rotation)?.data
+      ),
       rotation_etc: position.rotationEtc,
       place: {
         type: position.place.type,
-        address_arr: position.place.addressArr || [],
+        address_arr: position.place.addressArr || null,
+        factory_arr: position.place.factoryArr?.map((factory) => factory.id) || null,
         etc: position.place.etc || "",
       },
       hire_number: position.hireCount,
@@ -230,6 +233,8 @@ const JdEditPage: NextPageWithLayout = () => {
       etc_arr: setFieldArray(jdData?.etcArr || []),
       position_arr: positionNewArr,
     });
+
+    setIsCardOpenArr(Array.from({ length: positionNewArr?.length || 0 }, () => false));
   }, [jdData, reset]);
 
   usePreventRouting(Boolean(Object.keys(dirtyFields).length), jdEditExitEvent, jdEditExitDoneEvent);
