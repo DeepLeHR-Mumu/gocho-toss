@@ -162,6 +162,13 @@ export const JdPart: FunctionComponent<JdPartProps> = ({ jd }) => {
                       {address}
                     </p>
                   );
+                }) &&
+                position.place.factoryArr?.map((factory) => {
+                  return (
+                    <p key={`FactoryArr${factory.factoryName}`} css={cssObj.dataBox}>
+                      {factory.factoryName},
+                    </p>
+                  );
                 })
               )}
             </div>
