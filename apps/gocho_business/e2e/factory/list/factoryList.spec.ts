@@ -2,9 +2,8 @@ import { expect, test } from "@playwright/test";
 
 import { INTERNAL_URL } from "@/constants/url";
 
-test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
+test("공장 정보 등록 및 삭제 테스트", async ({ page, context }) => {
   await page.goto(INTERNAL_URL.HOME);
-  await page.waitForTimeout(5000);
 
   const [beforeFactoryPromise] = await Promise.all([
     page.waitForResponse(
@@ -17,65 +16,39 @@ test("공장 정보 등록 및 삭제 테스트", async ({ page }) => {
     page.getByRole("link", { name: "공장" }).click(),
   ]);
 
-  await page.waitForTimeout(5000);
-  const popupPromise = page.waitForEvent("popup");
-
-  const beforeFactoryListDataObj = await (await beforeFactoryPromise).json();
+  const beforeFactoryListDataObj = await beforeFactoryPromise.json();
 
   await expect(page.getByRole("heading", { name: "공장 등록" })).toHaveText("공장 등록");
   await expect(page.getByRole("heading", { name: "공장 목록" })).toHaveText("공장 목록");
 
-  await page.getByRole("link", { name: "공장" }).click();
+  await page.locator("input[name='factory_name']").fill("테스트 공장 1");
 
-  await page.locator("input[name='factory_name']").type("테스트 공장 1", { delay: 100 });
-
+  const popupPromise = context.waitForEvent("page");
   await page.getByRole("button", { name: "주소찾기" }).click();
-  await page.waitForTimeout(500);
   const popup = await popupPromise;
-
-  await page.waitForTimeout(2000);
-  await popup.keyboard.type("서울", { delay: 20 });
-  await page.waitForTimeout(1000);
-
+  await popup.waitForLoadState();
+  await popup.keyboard.type("서울", { delay: 500 });
+  await popup.keyboard.press("Enter", { delay: 1000 });
+  await popup.keyboard.press("Tab");
+  await popup.keyboard.press("Tab");
+  await popup.keyboard.press("Tab");
+  await popup.keyboard.press("Tab");
+  await popup.keyboard.press("Tab");
+  await popup.keyboard.press("Tab");
   await popup.keyboard.press("Enter");
-
-  await Promise.all([
-    popup.waitForResponse(
-      (res) => res.url().includes("t/search?region_name") && res.request().method() === "GET" && res.status() === 200
-    ),
-  ]);
-
-  await popup.waitForTimeout(1000);
-  await popup.keyboard.press("Tab");
-  await popup.waitForTimeout(100);
-  await popup.keyboard.press("Tab");
-  await popup.waitForTimeout(100);
-  await popup.keyboard.press("Tab");
-  await popup.waitForTimeout(100);
-  await popup.keyboard.press("Tab");
-  await popup.waitForTimeout(100);
-  await popup.keyboard.press("Tab");
-  await popup.waitForTimeout(100);
-  await popup.keyboard.press("Tab");
-  await popup.waitForTimeout(100);
-  await popup.keyboard.press("Enter");
-  await popup.waitForTimeout(500);
 
   await page.locator("input[name='product']").fill("생산품 입니다 생산품이요 생산품");
   await page.locator("input[name='male_number']").fill("33");
   await page.locator("input[name='female_number']").fill("55");
-
   await page.getByText("있음").first().click();
   await page.getByText("있음").nth(1).click();
   await page.locator("input[name='bus_etc']").fill("테스트를 위한 버스 기타정보입니다.");
   await page.locator("input[name='dormitory_etc']").fill("테스트를 위한 기숙사 기타정보입니다.");
-  await page.waitForTimeout(100);
-
-  page.on("dialog", (dialog) => dialog.accept());
 
   const [afterPostResponse] = await Promise.all([
     page.waitForResponse((res) => res.url().includes("factories") && res.request().method() === "GET"),
-    await page.getByRole("button", { name: "공장 등록" }).click(),
+    page.getByRole("button", { name: "공장 등록" }).click(),
+    page.on("dialog", (dialog) => dialog.accept()),
   ]);
 
   const afterFactoryListDataObj = await afterPostResponse.json();

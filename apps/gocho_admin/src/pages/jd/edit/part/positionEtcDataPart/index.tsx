@@ -132,7 +132,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
           type="button"
           css={copyPositionButton}
           onClick={() => {
-            return append({ ...jobForm.watch("position_arr")[index] });
+            return append({ ...jobForm.watch("position_arr")[index], id: null });
           }}
         >
           해당 직무 복사
