@@ -63,7 +63,7 @@ const JdEditPage: NextPageWithLayout = () => {
     control,
     handleSubmit,
     reset,
-    formState: { dirtyFields, submitCount },
+    formState: { dirtyFields, submitCount, isSubmitSuccessful },
   } = jdForm;
 
   const { fields, append, remove } = useFieldArray({
@@ -237,7 +237,11 @@ const JdEditPage: NextPageWithLayout = () => {
     setIsCardOpenArr(Array.from({ length: positionNewArr?.length || 0 }, () => false));
   }, [jdData, reset]);
 
-  usePreventRouting(Boolean(Object.keys(dirtyFields).length), jdEditExitEvent, jdEditExitDoneEvent);
+  usePreventRouting(
+    Boolean(Object.keys(dirtyFields).length) && !isSubmitSuccessful,
+    jdEditExitEvent,
+    jdEditExitDoneEvent
+  );
 
   useEffect(() => {
     if (submitCount === 0) return;

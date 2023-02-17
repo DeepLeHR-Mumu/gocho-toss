@@ -55,7 +55,7 @@ const JdUploadPage: NextPageWithLayout = () => {
   const {
     control,
     handleSubmit,
-    formState: { submitCount, dirtyFields },
+    formState: { submitCount, dirtyFields, isSubmitSuccessful },
   } = jobForm;
 
   const { fields, append, remove } = useFieldArray({
@@ -141,7 +141,11 @@ const JdUploadPage: NextPageWithLayout = () => {
     jdUploadFailEvent(submitCount);
   }, [submitCount]);
 
-  usePreventRouting(Boolean(Object.keys(dirtyFields).length), jdUploadExitEvent, jdUploadExitDoneEvent);
+  usePreventRouting(
+    Boolean(Object.keys(dirtyFields).length) && !isSubmitSuccessful,
+    jdUploadExitEvent,
+    jdUploadExitDoneEvent
+  );
 
   // useEffect(() => {
   //   const escapeWithoutSubmit = isDirty && !isSubmitSuccessful;
