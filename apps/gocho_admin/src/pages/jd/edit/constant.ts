@@ -1,4 +1,5 @@
 export const blankPosition = {
+  id: null,
   middle: false,
   high: false,
   college: false,

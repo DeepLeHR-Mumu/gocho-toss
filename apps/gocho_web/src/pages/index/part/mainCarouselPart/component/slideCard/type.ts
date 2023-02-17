@@ -16,6 +16,7 @@ export interface SlideCardProps {
       color: string;
       backgroundColor: string;
       url: string;
+      onClick?: () => void;
     } | null;
   };
 }

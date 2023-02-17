@@ -33,7 +33,12 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({ slideData }) => {
         <strong css={titleCSS}>{slideData.title}</strong>
         <em css={lastDescCSS}>{slideData.lastDesc}</em>
         {slideData.buttonObj && slideData.buttonObj.target === "_self" && (
-          <Link href={slideData.buttonObj.url} passHref target={slideData.buttonObj.target}>
+          <Link
+            href={slideData.buttonObj.url}
+            passHref
+            target={slideData.buttonObj.target}
+            onClick={slideData.buttonObj.onClick}
+          >
             <a css={linkButton(slideData.buttonObj.backgroundColor, slideData.buttonObj.color)}>
               <FiArrowRight />
               {slideData.buttonObj.text}
@@ -45,6 +50,7 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({ slideData }) => {
             href={slideData.buttonObj.url}
             target={slideData.buttonObj.target}
             css={linkButton(slideData.buttonObj.backgroundColor, slideData.buttonObj.color)}
+            onClick={slideData.buttonObj.onClick}
           >
             <FiArrowRight />
             {slideData.buttonObj.text}
