@@ -5,11 +5,11 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { useAddCompany } from "@api/company/useAddCompany";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 
-import { CompanyFormValues } from "../type";
 import { FactoryBox } from "./component/factoryBox";
 import { BasicInfoPart } from "./part/basicInfoPart";
 import { WelfareInfoPart } from "./part/welfareInfoPart";
 import { PayInfoPart } from "./part/payInfoPart";
+import { CompanyFormValues } from "./type";
 import { blankFactory } from "./constant";
 
 import { formContainer, addFactoryButton, submitButton, checkMsgBox } from "./style";
@@ -29,7 +29,7 @@ const CompanyUpload: NextPage = () => {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "factories",
+    name: "factory_arr",
   });
 
   const companySubmit: SubmitHandler<CompanyFormValues> = (companyObj) => {

@@ -8,11 +8,11 @@ import { useCompanyDetail } from "@api/company/useCompanyDetail";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 
 import { ErrorScreen, LoadingScreen } from "@component/screen";
-import { CompanyFormValues } from "../type";
 import { FactoryBox } from "./component/factoryBox";
 import { BasicInfoPart } from "./part/basicInfoPart";
 import { WelfareInfoPart } from "./part/welfareInfoPart";
 import { PayInfoPart } from "./part/payInfoPart";
+import { CompanyFormValues } from "./type";
 import { blankFactory } from "./constant";
 import { formContainer, addFactoryButton, submitButton, checkMsgBox } from "./style";
 
@@ -35,7 +35,7 @@ const CompanyEdit: NextPage = () => {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "factories",
+    name: "factory_arr",
   });
 
   const companySubmit: SubmitHandler<CompanyFormValues> = (companyObj) => {
@@ -73,6 +73,7 @@ const CompanyEdit: NextPage = () => {
     const newFoundDate = companyData?.foundDate ? companyData.foundDate + 540000 * 60 : 0;
     const FactoryNewArr = companyData?.factoryArr?.map((factory) => {
       return {
+        id: factory.id,
         factory_name: factory.factoryName,
         address: factory.address,
         male_number: factory.maleNumber,
@@ -114,7 +115,7 @@ const CompanyEdit: NextPage = () => {
         exists: companyData?.nozo.exists,
         desc: companyData?.nozo.desc,
       },
-      factories: FactoryNewArr,
+      factory_arr: FactoryNewArr,
     });
   }, [companyData, reset]);
 

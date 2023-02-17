@@ -1,6 +1,6 @@
 import { UseFormReturn } from "react-hook-form";
 import { Dispatch, SetStateAction } from "react";
-import { JobFormValues } from "@pages/jd/type";
+import { JobFormValues } from "../../type";
 
 export interface CommonDataPartProps {
   jobData: {
