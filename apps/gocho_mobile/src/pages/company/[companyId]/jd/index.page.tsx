@@ -89,7 +89,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
     props: {
       dehydratedState: dehydrate(queryClient),
     },
-    revalidate: 600,
+    revalidate: process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? 600 : 10,
   };
 };
 

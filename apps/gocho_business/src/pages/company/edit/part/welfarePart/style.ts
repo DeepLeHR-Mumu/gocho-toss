@@ -11,10 +11,10 @@ export const cssObj = {
   wrapper: css`
     margin-bottom: 1.5rem;
   `,
-  subTitle: css`
+  subTitle: (isMine: boolean) => css`
     font-size: 1rem;
     font-weight: 700;
-    color: ${COLORS.GRAY10};
+    color: ${isMine ? COLORS.GRAY65 : COLORS.GRAY10};
     margin-bottom: 0.5rem;
     display: inline-block;
   `,

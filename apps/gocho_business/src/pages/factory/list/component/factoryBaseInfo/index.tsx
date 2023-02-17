@@ -7,15 +7,14 @@ import { COLORS } from "shared-style/color";
 import { SharedButton } from "shared-ui/business/sharedButton";
 
 import { CommonStatusChip } from "@/components/common";
-import { POSTCODE_SCRIPT_URL } from "@/constants/url";
 
 import { cssObj } from "./style";
 import { FactoryBaseInfoProps } from "./type";
 
-export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formObj, reqeustStatus }) => {
+export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formObj, requestStatus }) => {
   const { register, formState, setValue } = formObj;
 
-  const openPostCodePopup = useDaumPostcodePopup(POSTCODE_SCRIPT_URL);
+  const openPostCodePopup = useDaumPostcodePopup();
 
   return (
     <div css={cssObj.container} data-testid="factory/list/FactoryBaseInfo">
@@ -32,7 +31,7 @@ export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formO
           maxLength={30}
         />
         <div css={cssObj.statusChip}>
-          <CommonStatusChip status={reqeustStatus} />
+          <CommonStatusChip status={requestStatus} />
         </div>
       </div>
       <div css={cssObj.inputContainer}>
@@ -62,6 +61,7 @@ export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formO
               },
             });
           }}
+          tabIndex={-1}
         >
           <div css={cssObj.addressContainer}>
             <input

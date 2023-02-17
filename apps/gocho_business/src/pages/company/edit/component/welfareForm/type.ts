@@ -14,6 +14,7 @@ export type WelfareKey =
 export interface WelfareFormProps {
   title: string;
   desc: string;
+  isMine: boolean;
   registerKey: WelfareKey;
   welfareValueArr: string[] | null;
   companyFormObj: UseFormReturn<PostSubmitValues>;

@@ -17,7 +17,7 @@ export const useUserState: UseUserStateDef = () => {
     const token = localStorage.getItem("accessToken");
 
     if (userInfoData === null && token) {
-      const { id, company_id, company_name, company_logo, iat, exp, email, name, department } =
+      const { id, company_id, company_name, company_logo, company_industry, exp, email, name, department } =
         managerTokenDecryptor(token);
 
       setUserInfoData({
@@ -28,8 +28,8 @@ export const useUserState: UseUserStateDef = () => {
         email,
         name,
         department,
-        iat,
         exp,
+        companyIndustry: company_industry,
       });
     }
 

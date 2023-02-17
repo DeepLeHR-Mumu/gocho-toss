@@ -9,11 +9,11 @@ import { useJdDetail } from "@api/jd/useJdDetail";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
-import { JobFormValues } from "../type";
 import { CommonDataPart } from "./part/commonDataPart";
 import { PositionRequiredDataPart } from "./part/positionRequiredDataPart";
 import { PositionTaskDataPart } from "./part/positionTaskDataPart";
 import { PositionEtcDataPart } from "./part/positionEtcDataPart";
+import { JobFormValues } from "./type";
 import { formContainer, positionContainer, addPositionButton, submitButton, checkMsgBox } from "./style";
 import { blankPosition } from "./constant";
 
@@ -47,6 +47,7 @@ const JdEdit: NextPage = () => {
 
     const positionNewArr = jobData?.positionArr.map((position) => {
       return {
+        id: position.id,
         middle: position.eduSummary.middle,
         high: position.eduSummary.high,
         college: position.eduSummary.college,

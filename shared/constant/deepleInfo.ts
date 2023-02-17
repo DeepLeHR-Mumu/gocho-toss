@@ -3,7 +3,7 @@ import { kakaoChannelUrl } from "./help";
 export const companyInfoObj = {
   CSEmail: "contact@deeplehr.com",
   CEOName: "박중우",
-  address: "06142 서울 강남구 테헤란로 217 오렌지플래닛 503호",
+  address: "06628 서울특별시 서초구 강남대로 311 한화드림플러스 1203호",
   email: "wnddn2206@deeplehr.com",
   marketingEmail: "register@deeplehr.com",
   phoneNumber: "01085457161",

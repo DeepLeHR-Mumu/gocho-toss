@@ -32,7 +32,7 @@ export interface RequestObjDef {
       desc: string | null;
     };
 
-    factories: {
+    factory_arr: {
       factory_name: string;
       address: string;
       male_number: number;
@@ -78,7 +78,7 @@ interface axiosRequestObjDef {
       desc: string | null;
     };
 
-    factories: {
+    factory_arr: {
       factory_name: string;
       address: string;
       male_number: number;
