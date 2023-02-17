@@ -11,7 +11,7 @@ import { GuideChip } from "../../component/guideChip";
 import { AddFieldButton } from "../../component/addFieldButton";
 import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
 import { BasicInfoPartProps } from "./type";
-import { processGuideArr, applyRouteGuideArr, applyExternalLinkArr } from "./constant";
+import { PROCESS_GUIDE_ARR, APPLY_ROUTE_GUIDE_ARR, APPLY_EXTERNAL_LINK_ARR } from "./constant";
 import { cssObj } from "./style";
 
 export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, processArr, applyRouteArr, etcArr }) => {
@@ -40,7 +40,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
   };
 
   useEffect(() => {
-    setRandomApplyRouteGuideArr(applyRouteGuideArr.sort(() => Math.random() - 0.5).slice(0, 3));
+    setRandomApplyRouteGuideArr(APPLY_ROUTE_GUIDE_ARR.sort(() => Math.random() - 0.5).slice(0, 3));
   }, []);
 
   return (
@@ -175,7 +175,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                   </p>
                   <div css={cssObj.guideChipContainer}>
                     {processIsFocusedArr[index] &&
-                      processGuideArr[index].map((processGuide) => (
+                      PROCESS_GUIDE_ARR[index].map((processGuide) => (
                         <GuideChip
                           key={`${processGuide}${item.id}`}
                           text={processGuide}
@@ -254,7 +254,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                         text={applyRouteGuide}
                         onClickHandler={() => {
                           setValue(`apply_route_arr.${index}.value`, applyRouteGuide);
-                          const filteredElement = applyRouteGuideArr.filter(
+                          const filteredElement = APPLY_ROUTE_GUIDE_ARR.filter(
                             (element) =>
                               !randomApplyRouteGuideArr.includes(element) &&
                               !jdForm
@@ -351,7 +351,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                 <p css={cssObj.errorMessage}>{Boolean(formState.errors.apply_url && "링크는 필수 입력 사항입니다")}</p>
                 <div css={cssObj.linkButtonContainer}>
                   <p>링크 복사하러 가기</p>
-                  {applyExternalLinkArr.map((linkObj) => (
+                  {APPLY_EXTERNAL_LINK_ARR.map((linkObj) => (
                     <SharedBoxLink
                       key={`${linkObj.url}`}
                       colorVariation="gray"

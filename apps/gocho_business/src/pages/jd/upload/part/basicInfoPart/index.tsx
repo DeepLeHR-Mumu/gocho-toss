@@ -11,7 +11,7 @@ import { GuideChip } from "../../component/guideChip";
 import { AddFieldButton } from "../../component/addFieldButton";
 import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
 import { BasicInfoPartProps } from "./type";
-import { processGuideArr, applyRouteGuideArr, applyExternalLinkArr } from "./constant";
+import { PROCESS_GUIDE_ARR, APPLY_ROUTE_GUIDE_ARR, APPLY_EXTERNAL_LINK_ARR } from "./constant";
 import { cssObj } from "./style";
 
 export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
@@ -45,7 +45,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
   };
 
   useEffect(() => {
-    setRandomApplyRouteGuideArr(applyRouteGuideArr.sort(() => Math.random() - 0.5).slice(0, 3));
+    setRandomApplyRouteGuideArr(APPLY_ROUTE_GUIDE_ARR.sort(() => Math.random() - 0.5).slice(0, 3));
   }, []);
 
   return (
@@ -180,7 +180,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                   </p>
                   <div css={cssObj.guideChipContainer}>
                     {processIsFocusedArr[index] &&
-                      processGuideArr[index].map((processGuide) => (
+                      PROCESS_GUIDE_ARR[index].map((processGuide) => (
                         <GuideChip
                           key={`${processGuide}${item.id}`}
                           text={processGuide}
@@ -259,7 +259,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                         text={applyRouteGuide}
                         onClickHandler={() => {
                           setValue(`apply_route_arr.${index}.value`, applyRouteGuide);
-                          const filteredElement = applyRouteGuideArr.filter(
+                          const filteredElement = APPLY_ROUTE_GUIDE_ARR.filter(
                             (element) =>
                               !randomApplyRouteGuideArr.includes(element) &&
                               !jobForm
@@ -357,7 +357,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                 <p css={cssObj.errorMessage}>{formState.errors.apply_url && formState.errors.apply_url.message}</p>
                 <div css={cssObj.linkButtonContainer}>
                   <p>링크 복사하러 가기</p>
-                  {applyExternalLinkArr.map((linkObj) => (
+                  {APPLY_EXTERNAL_LINK_ARR.map((linkObj) => (
                     <SharedBoxLink
                       key={`${linkObj.url}`}
                       colorVariation="gray"

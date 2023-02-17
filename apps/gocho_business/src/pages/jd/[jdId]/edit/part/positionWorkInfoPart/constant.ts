@@ -2,7 +2,7 @@ import { FiGlobe } from "react-icons/fi";
 import { BiMap } from "react-icons/bi";
 import { MdTravelExplore } from "react-icons/md";
 
-export const rotationArr = [
+export const ROTATION_ARR = [
   { data: "주간", name: "주간" },
   { data: "야간", name: "야간" },
   { data: "교대", name: "교대" },
@@ -22,13 +22,13 @@ export const rotationArr = [
   { data: "5;4", name: "5조 4교대" },
 ] as const;
 
-export const placeTypeArr = [
+export const PLACE_TYPE_ARR = [
   { name: "공장 근무지", data: "일반", icon: BiMap },
   { name: "해외 근무지", data: "해외", icon: FiGlobe },
   { name: "기타 근무지", data: "기타", icon: MdTravelExplore },
 ] as const;
 
-export const certificateArr = [
+export const CERTI_ARR = [
   "기타",
   "전기",
   "지게차운전",
@@ -151,7 +151,7 @@ export const certificateArr = [
   "신재생에너지발전설비",
 ];
 
-export const preferredEtcGuideArr = [
+export const PREFERRED_ETC_GUIDE_ARR = [
   "인근거주자",
   "해당 직무 근무 경험",
   "국가보훈대상자 및 장애인",

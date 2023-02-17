@@ -10,7 +10,7 @@ import { AddFieldButton } from "../../component/addFieldButton";
 import { GuideChip } from "../../component/guideChip";
 import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
 import { PositionRequiredInfoPartProps } from "./type";
-import { contractTypeArr, requiredExpArr, requiredEtcGuideArr } from "./constant";
+import { CONTRACT_TYPE_ARR, REQUIRED_EXP_ARR, REQUIRED_ETC_GUIDE_ARR } from "./constant";
 import { cssObj } from "./style";
 
 export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPartProps> = ({
@@ -41,7 +41,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
   };
 
   useEffect(() => {
-    setRandomRequiredEtcGuideArr(requiredEtcGuideArr.sort(() => Math.random() - 0.5).slice(0, 3));
+    setRandomRequiredEtcGuideArr(REQUIRED_ETC_GUIDE_ARR.sort(() => Math.random() - 0.5).slice(0, 3));
   }, []);
 
   const isConversionDisabled =
@@ -73,7 +73,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
         <div css={cssObj.container}>
           <p>계약 형태</p>
           <div css={cssObj.labelContainer}>
-            {contractTypeArr.map((contractName) => (
+            {CONTRACT_TYPE_ARR.map((contractName) => (
               <SharedRadioButton
                 key={`${contractName}${id}`}
                 value={contractName}
@@ -184,7 +184,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
         <div css={cssObj.container}>
           <p>경력 조건</p>
           <div css={cssObj.labelContainer}>
-            {requiredExpArr.map((expName) => (
+            {REQUIRED_EXP_ARR.map((expName) => (
               <label key={`${expName}${id}`} htmlFor={`${expName}${id}`} css={cssObj.label}>
                 <input
                   type="radio"
@@ -327,7 +327,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                       text={requiredEtcGuide}
                       onClickHandler={() => {
                         setValue(`position_arr.${positionIndex}.required_etc_arr.${index}.value`, requiredEtcGuide);
-                        const filteredArr = requiredEtcGuideArr.filter(
+                        const filteredArr = REQUIRED_ETC_GUIDE_ARR.filter(
                           (element) =>
                             !randomRequiredEtcGuideArr.includes(element) &&
                             !jdForm

@@ -9,7 +9,7 @@ import { COLORS } from "shared-style/color";
 import { DeleteInputButton } from "../../component/deleteInputButton";
 import { AddFieldButton } from "../../component/addFieldButton";
 import { PositionTitleInfoPartProps } from "./type";
-import { taskArr } from "./constant";
+import { TASK_ARR } from "./constant";
 import { cssObj } from "./style";
 
 export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps> = ({
@@ -33,7 +33,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
     name: `position_arr.${positionIndex}.task_detail_arr`,
   });
 
-  const selectedSubTaskObj = taskArr.find((task) => watch("position_arr")[positionIndex].task_main === task.mainTask);
+  const selectedSubTaskObj = TASK_ARR.find((task) => watch("position_arr")[positionIndex].task_main === task.mainTask);
 
   const mainTaskClickHandler = (task: string) => {
     setValue(`position_arr.${positionIndex}.task_main`, task);
@@ -183,7 +183,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
                 {isMainTaskOpen ? <FiChevronUp /> : <FiChevronDown />}
               </button>
               <div css={cssObj.taskList(isMainTaskOpen)}>
-                {taskArr.map((taskObj) => (
+                {TASK_ARR.map((taskObj) => (
                   <button
                     type="button"
                     css={cssObj.option}
