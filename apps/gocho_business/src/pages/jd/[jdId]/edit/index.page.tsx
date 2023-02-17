@@ -191,6 +191,7 @@ const JdEditPage: NextPageWithLayout = () => {
     const newEndTime = jdData?.endTime ? jdData.endTime + 540000 * 60 : 0;
 
     const positionNewArr = jdData?.positionArr.map((position) => ({
+      id: position.id,
       middle: position.eduSummary.middle,
       high: position.eduSummary.high,
       college: position.eduSummary.college,

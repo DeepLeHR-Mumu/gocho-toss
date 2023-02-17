@@ -1,4 +1,5 @@
 export const BLANK_POSITION = {
+  id: null,
   middle: false,
   high: false,
   college: false,
