@@ -1,4 +1,5 @@
 export const blankFactory = {
+  id: null,
   factory_name: "",
   address: "",
   male_number: 0,

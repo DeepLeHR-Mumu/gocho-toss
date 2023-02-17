@@ -27,7 +27,8 @@ export interface CompanyFormValues {
     desc: string | null;
   };
 
-  factories: {
+  factory_arr: {
+    id: number | null;
     factory_name: string;
     address: string;
     male_number: number;

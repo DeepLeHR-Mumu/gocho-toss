@@ -1,5 +1,5 @@
 import { UseFieldArrayAppend, UseFieldArrayRemove, UseFormReturn } from "react-hook-form";
-import { JobFormValues } from "@pages/jd/type";
+import { JobFormValues } from "../../type";
 
 export interface PositionBoxProps {
   id: string;
