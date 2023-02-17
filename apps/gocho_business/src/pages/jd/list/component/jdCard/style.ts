@@ -8,7 +8,7 @@ export const cssObj = {
     margin-top: 2rem;
     padding: 1.5rem 1.5rem 1rem 1.5rem;
     border: 1px solid ${COLORS.GRAY80};
-    background-color: ${isExpired ? COLORS.GRAY80 : COLORS.GRAY100};
+    background-color: ${isExpired ? COLORS.GRAY90 : COLORS.GRAY100};
   `,
 
   topContainer: css`
