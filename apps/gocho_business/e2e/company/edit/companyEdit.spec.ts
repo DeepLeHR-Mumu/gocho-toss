@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 import { BUSINESS_BACKEND_URL } from "shared-constant/externalURL";
 import { INTERNAL_URL } from "@/constants/url";
 
-test("기업 정보 변경 페이지 테스트", async ({ page }) => {
+test("기업 정보 변경 페이지 테스트", async ({ page, context }) => {
   await page.goto(INTERNAL_URL.HOME);
 
   await Promise.all([page.waitForNavigation(), page.getByRole("link", { name: "기업 정보 수정" }).click()]);
@@ -71,10 +71,69 @@ test("기업 정보 변경 페이지 테스트", async ({ page }) => {
 
     await page.locator('input[name="employee_number"]').fill("-1");
     await expect(page.locator('input[name="employee_number"]')).toHaveCSS("border-color", ERROR_COLOR);
+
     await page.locator('input[name="intro"]').fill(MAX_TEXT_LOREM);
+    await page.getByText("최대 글자수에 도달하였습니다").isVisible();
+    await page.locator('input[name="intro"]').clear();
+
+    await page.locator('input[name="nozo.desc"]').fill(MAX_TEXT_LOREM);
+    await expect(page.locator('input[name="nozo.desc"]')).toHaveCSS("border-color", ERROR_COLOR);
+    await page.getByText("최대 글자수에 도달하였습니다").isVisible();
+    await page.locator('input[name="nozo.desc"]').clear();
+
+    await page.locator('input[name="pay_start"]').clear();
+    await page.locator('input[name="pay_start"]').fill("999");
+
+    const [payStartAlert] = await Promise.all([
+      page.waitForEvent("dialog").then((res) => {
+        res.accept();
+        return res;
+      }),
+      page.keyboard.press("Tab"),
+    ]);
+
+    // 연봉기준 alert 경고 확인
+    expect(payStartAlert.type() === "alert");
+    expect(payStartAlert.message()).toEqual("월급이 아닌 연봉 기준입니다. 입력하신 정보가 맞나요?");
+    await expect(page.locator('input[name="pay_start"]')).toHaveCSS("border-color", ERROR_COLOR);
+
+    await page.locator('input[name="pay_desc"]').fill(MAX_TEXT_LOREM);
+    await expect(page.locator('input[name="pay_desc"]')).toHaveCSS("border-color", ERROR_COLOR);
     await page.getByText("최대 글자수에 도달하였습니다").isVisible();
 
     // post 정상 작동 여부
+    await page.locator('input[name="employee_number"]').fill("182");
+    await page.locator('input[name="intro"]').fill("테스트 기업소개 글입니다.");
+
+    const kakaoAddressPagePromise = context.waitForEvent("page");
+    await page.getByRole("button", { name: "주소찾기" }).click();
+    const kakaoAddressPage = await kakaoAddressPagePromise;
+    await kakaoAddressPage.waitForLoadState();
+    await kakaoAddressPage.keyboard.type("서울", { delay: 500 });
+    await kakaoAddressPage.keyboard.press("Enter", { delay: 1000 });
+    await kakaoAddressPage.keyboard.press("Tab");
+    await kakaoAddressPage.keyboard.press("Tab");
+    await kakaoAddressPage.keyboard.press("Tab");
+    await kakaoAddressPage.keyboard.press("Tab");
+    await kakaoAddressPage.keyboard.press("Tab");
+    await kakaoAddressPage.keyboard.press("Tab");
+    await kakaoAddressPage.keyboard.press("Enter");
+
+    await page.getByText("없음").click();
+    await page.locator('input[name="pay_start"]').clear();
     await page.locator('input[name="pay_start"]').fill("2000");
+    await page.locator('input[name="pay_avg"]').clear();
+    await page.locator('input[name="pay_avg"]').fill("2100");
+    await page.locator('input[name="pay_desc"]').fill("기타 연봉 테스트정보입니다.");
+    await page.getByTestId("company/edit/welfareForm").locator("input").nth(1).fill("의료 복지정보 테스트");
+    await page.keyboard.press("Enter");
+
+    const [submitRequest] = await Promise.all([
+      page.waitForResponse((res) => res.url().includes("companies") && res.request().method() === "PUT"),
+      page.getByRole("button", { name: "기업 정보 수정완료" }).nth(1).click(),
+      page.on("dialog", (dialog) => dialog.accept()),
+    ]);
+
+    expect(submitRequest.ok()).toBeTruthy();
   }
 });
