@@ -7,7 +7,8 @@ async function globalSetup() {
   const page = await browser.newPage();
   const serverUrl = process.env.GOCHO_BUSINESS_URL || "http://localhost:3000";
   await page.goto(`${serverUrl}${INTERNAL_URL.LOGIN}`);
-  await page.getByPlaceholder("아이디(이메일)").fill("yuyukgh@deeplehr.com");
+  // 0ch._.n
+  await page.getByPlaceholder("아이디(이메일)").fill("0ch._.n@deeplehr.com");
   await page.getByPlaceholder("비밀번호").fill("deeple1!");
   await page.getByRole("button", { name: "로그인" }).click();
   await page.waitForLoadState("networkidle");
