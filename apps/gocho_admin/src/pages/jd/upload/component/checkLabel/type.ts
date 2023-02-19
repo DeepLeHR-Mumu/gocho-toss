@@ -1,5 +1,5 @@
 import { UseFormRegister } from "react-hook-form";
-import { JobFormValues } from "@pages/jd/type";
+import { JobFormValues } from "../../type";
 
 export interface CheckLabelProps {
   register: UseFormRegister<JobFormValues>;

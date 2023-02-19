@@ -7,11 +7,11 @@ import { useAddJd } from "@api/jd/useAddJd";
 import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
 
-import { JobFormValues } from "../type";
 import { CommonDataPart } from "./part/commonDataPart";
 import { PositionRequiredDataPart } from "./part/positionRequiredDataPart";
 import { PositionTaskDataPart } from "./part/positionTaskDataPart";
 import { PositionEtcDataPart } from "./part/positionEtcDataPart";
+import { JobFormValues } from "./type";
 import { formContainer, positionContainer, addPositionButton, submitButton, checkMsgBox } from "./style";
 import { blankPosition } from "./constant";
 
