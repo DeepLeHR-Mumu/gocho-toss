@@ -153,23 +153,30 @@ export const JdPart: FunctionComponent<JdPartProps> = ({ jd }) => {
             </div>
             <div css={cssObj.dataContainer}>
               <strong css={cssObj.dataTitle}>근무지</strong>
-              {position.place.type === "기타" ? (
-                <p css={cssObj.dataBox}>{position.place.etc}</p>
-              ) : (
-                position.place.addressArr?.map((address) => {
-                  return (
-                    <p key={`AddressArr${address}`} css={cssObj.dataBox}>
-                      {address}
-                    </p>
-                  );
-                }) &&
-                position.place.factoryArr?.map((factory) => {
-                  return (
-                    <p key={`FactoryArr${factory.factoryName}`} css={cssObj.dataBox}>
-                      {factory.factoryName},
-                    </p>
-                  );
-                })
+              {position.place.type !== "일반" && <p css={cssObj.dataBox}>{position.place.etc}</p>}
+              {position.place.type === "일반" && (
+                <>
+                  <div css={cssObj.placeContainer}>
+                    <p>일반 근무지:</p>
+                    {position.place.addressArr?.map((address) => {
+                      return (
+                        <p key={`AddressArr${address}`} css={cssObj.placeBox}>
+                          {address}
+                        </p>
+                      );
+                    })}
+                  </div>
+                  <div css={cssObj.placeContainer}>
+                    <p>공장 근무지:</p>
+                    {position.place.factoryArr?.map((factory) => {
+                      return (
+                        <p key={`FactoryArr${factory}`} css={cssObj.placeBox}>
+                          {factory.factoryName}
+                        </p>
+                      );
+                    })}
+                  </div>
+                </>
               )}
             </div>
             <div css={cssObj.dataContainer}>
