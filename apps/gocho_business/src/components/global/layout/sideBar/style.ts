@@ -9,7 +9,7 @@ export const cssObj = {
     border-right: 1px solid ${COLORS.GRAY80};
     background-color: ${COLORS.GRAY100};
     position: fixed;
-    z-index: 10;
+    z-index: 50;
     height: 100vh;
   `,
 

@@ -20,7 +20,7 @@ import { AddFieldButton } from "../../component/addFieldButton";
 import { GuideChip } from "../../component/guideChip";
 import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
 import { PositionWorkInfoPartProps } from "./type";
-import { rotationArr, placeTypeArr, certificateArr, preferredEtcGuideArr } from "./constant";
+import { ROTATION_ARR, PLACE_TYPE_ARR, CERTI_ARR, PREFERRED_ETC_GUIDE_ARR } from "./constant";
 import { cssObj } from "./style";
 
 export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> = ({
@@ -112,12 +112,12 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
   const rotationTextMaker = (selectedRotation: string[]) => {
     if (selectedRotation.length === 0) return "교대 형태 선택";
     return selectedRotation
-      .map((rotation) => rotationArr.find((rotationObj) => rotationObj.data === rotation)?.name)
+      .map((rotation) => ROTATION_ARR.find((rotationObj) => rotationObj.data === rotation)?.name)
       .join(", ");
   };
 
   useEffect(() => {
-    setRandomPreferredEtcGuideArr(preferredEtcGuideArr.sort(() => Math.random() - 0.5).slice(0, 3));
+    setRandomPreferredEtcGuideArr(PREFERRED_ETC_GUIDE_ARR.sort(() => Math.random() - 0.5).slice(0, 3));
   }, []);
 
   return (
@@ -145,7 +145,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
             {isRotationOpen ? <FiChevronUp /> : <FiChevronDown />}
           </button>
           <div css={cssObj.optionList(isRotationOpen)}>
-            {rotationArr.map((rotation) => (
+            {ROTATION_ARR.map((rotation) => (
               <button
                 type="button"
                 css={cssObj.option}
@@ -172,7 +172,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
       <div css={cssObj.container}>
         <p css={cssObj.inputTitle(false)}>근무지 종류</p>
         <div css={cssObj.labelContainer}>
-          {placeTypeArr.map((placeType) => (
+          {PLACE_TYPE_ARR.map((placeType) => (
             <div key={`${placeType.name}${positionIndex}`}>
               <label key={`${placeType.name}${id}`} htmlFor={`${placeType.name}${id}`} css={cssObj.label}>
                 <input
@@ -380,6 +380,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
               </p>
               <input
                 css={cssObj.input(47)}
+                maxLength={100}
                 placeholder="근무지를 작성해주세요"
                 {...register(`position_arr.${positionIndex}.place.etc`, {
                   required: "근무지는 필수 입력 사항입니다",
@@ -399,6 +400,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
               </p>
               <input
                 css={cssObj.input(47)}
+                maxLength={100}
                 placeholder="전국 순환, 입사 후 근무지 배정 등 특수 근무지를 작성해주세요"
                 {...register(`position_arr.${positionIndex}.place.etc`, {
                   required: "근무지는 필수 입력 사항입니다",
@@ -489,25 +491,23 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
             }}
           />
           <div css={cssObj.optionList(isCertiSearchFocused)}>
-            {certificateArr
-              .filter((prevCerti) => prevCerti.includes(certiSearchWord))
-              .map((certi) => (
-                <button
-                  type="button"
-                  css={cssObj.option}
-                  key={`${id}${certi}`}
-                  value={certi}
-                  onMouseDown={(event) => {
-                    event.preventDefault();
-                    certiClickHandler(certi);
-                  }}
-                >
-                  <CheckBox
-                    isChecked={watch("position_arr")[positionIndex].preferred_certi_arr?.includes(certi) || false}
-                  />
-                  {certi}
-                </button>
-              ))}
+            {CERTI_ARR.filter((prevCerti) => prevCerti.includes(certiSearchWord)).map((certi) => (
+              <button
+                type="button"
+                css={cssObj.option}
+                key={`${id}${certi}`}
+                value={certi}
+                onMouseDown={(event) => {
+                  event.preventDefault();
+                  certiClickHandler(certi);
+                }}
+              >
+                <CheckBox
+                  isChecked={watch("position_arr")[positionIndex].preferred_certi_arr?.includes(certi) || false}
+                />
+                {certi}
+              </button>
+            ))}
           </div>
         </div>
 
@@ -579,7 +579,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                       text={preferredEtcGuide}
                       onClickHandler={() => {
                         setValue(`position_arr.${positionIndex}.preferred_etc_arr.${index}.value`, preferredEtcGuide);
-                        const filteredArr = preferredEtcGuideArr.filter(
+                        const filteredArr = PREFERRED_ETC_GUIDE_ARR.filter(
                           (element) =>
                             !randomPreferredEtcGuideArr.includes(element) &&
                             !jdForm

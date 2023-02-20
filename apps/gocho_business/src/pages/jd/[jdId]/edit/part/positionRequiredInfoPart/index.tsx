@@ -10,7 +10,7 @@ import { AddFieldButton } from "../../component/addFieldButton";
 import { GuideChip } from "../../component/guideChip";
 import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
 import { PositionRequiredInfoPartProps } from "./type";
-import { contractTypeArr, requiredExpArr, requiredEtcGuideArr } from "./constant";
+import { CONTRACT_TYPE_ARR, REQUIRED_EXP_ARR, REQUIRED_ETC_GUIDE_ARR } from "./constant";
 import { cssObj } from "./style";
 
 export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPartProps> = ({
@@ -41,7 +41,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
   };
 
   useEffect(() => {
-    setRandomRequiredEtcGuideArr(requiredEtcGuideArr.sort(() => Math.random() - 0.5).slice(0, 3));
+    setRandomRequiredEtcGuideArr(REQUIRED_ETC_GUIDE_ARR.sort(() => Math.random() - 0.5).slice(0, 3));
   }, []);
 
   const isConversionDisabled =
@@ -73,7 +73,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
         <div css={cssObj.container}>
           <p>계약 형태</p>
           <div css={cssObj.labelContainer}>
-            {contractTypeArr.map((contractName) => (
+            {CONTRACT_TYPE_ARR.map((contractName) => (
               <SharedRadioButton
                 key={`${contractName}${id}`}
                 value={contractName}
@@ -118,7 +118,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             <div css={cssObj.conversionRateInputContainer}>
               <input
                 css={cssObj.activatableInput(isConversionDisabled)}
-                type="range"
+                type="number"
                 min="0"
                 max="100"
                 step="1"
@@ -184,7 +184,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
         <div css={cssObj.container}>
           <p>경력 조건</p>
           <div css={cssObj.labelContainer}>
-            {requiredExpArr.map((expName) => (
+            {REQUIRED_EXP_ARR.map((expName) => (
               <label key={`${expName}${id}`} htmlFor={`${expName}${id}`} css={cssObj.label}>
                 <input
                   type="radio"
@@ -212,6 +212,8 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
               {...register(`position_arr.${positionIndex}.min_year`, {
                 required: { value: !isMinYearDisabled, message: "최소 경력은 필수 입력 사항입니다" },
                 disabled: isMinYearDisabled,
+                onBlur: () => trigger(`position_arr.${positionIndex}.max_year`),
+                validate: (value) => (value && value > 0) || "최소 경력은 1년 이상이어야 합니다.",
                 valueAsNumber: true,
               })}
             />
@@ -248,6 +250,9 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
               {...register(`position_arr.${positionIndex}.max_year`, {
                 required: { value: !isMaxYearDisabled, message: "최대 경력은 필수 입력 사항입니다" },
                 disabled: isMaxYearDisabled,
+                validate: (value) =>
+                  (value || 1) > (watch("position_arr")[positionIndex].min_year || 0) ||
+                  "최소 경력 조건이 최대보다 작거나 같을 수 없습니다.",
                 valueAsNumber: true,
               })}
             />
@@ -322,7 +327,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                       text={requiredEtcGuide}
                       onClickHandler={() => {
                         setValue(`position_arr.${positionIndex}.required_etc_arr.${index}.value`, requiredEtcGuide);
-                        const filteredArr = requiredEtcGuideArr.filter(
+                        const filteredArr = REQUIRED_ETC_GUIDE_ARR.filter(
                           (element) =>
                             !randomRequiredEtcGuideArr.includes(element) &&
                             !jdForm

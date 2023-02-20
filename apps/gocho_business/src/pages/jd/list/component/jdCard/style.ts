@@ -1,17 +1,18 @@
 import { css } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
+import { shorten } from "shared-style/common";
 
 export const cssObj = {
   cardContainer: (isExpired: boolean) => css`
     margin-top: 2rem;
     padding: 1.5rem 1.5rem 1rem 1.5rem;
     border: 1px solid ${COLORS.GRAY80};
-    background-color: ${isExpired ? COLORS.GRAY80 : COLORS.GRAY100};
+    background-color: ${isExpired ? COLORS.GRAY90 : COLORS.GRAY100};
   `,
 
   topContainer: css`
-    height: 6rem;
+    height: 6.5rem;
     display: flex;
     align-items: center;
     gap: 0 2rem;
@@ -20,12 +21,26 @@ export const cssObj = {
   `,
 
   titleBox: css`
+    max-width: 50%;
     display: flex;
     align-items: flex-start;
     gap: 0 1.5rem;
   `,
 
+  title: css`
+    line-height: 1.2;
+    width: 15rem;
+    word-break: break-all;
+    ${shorten(3)};
+  `,
+
   date: css`
+    display: block;
+    width: fit-content;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     color: ${COLORS.GRAY35};
   `,
 
