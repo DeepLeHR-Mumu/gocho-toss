@@ -16,6 +16,6 @@ export interface WelfareFormProps {
   desc: string;
   isMine: boolean;
   registerKey: WelfareKey;
-  welfareValueArr: string[] | [] | null;
+  welfareValueArr: string[] | null;
   companyFormObj: UseFormReturn<PostSubmitValues>;
 }
