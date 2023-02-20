@@ -58,7 +58,7 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
   };
 
   return (
-    <div css={cssObj.wrapper}>
+    <div css={cssObj.wrapper} data-testid="company/edit/welfareForm">
       <strong css={cssObj.title(isMine)}>{title}</strong>
       <div css={cssObj.writeBox}>
         <input
