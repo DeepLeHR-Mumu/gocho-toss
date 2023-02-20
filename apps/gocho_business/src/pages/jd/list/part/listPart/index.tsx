@@ -2,6 +2,7 @@ import { FunctionComponent } from "react";
 import { FiArrowRight } from "react-icons/fi";
 import { useRouter } from "next/router";
 
+import { Spinner } from "shared-ui/common/atom/spinner";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
@@ -14,10 +15,14 @@ import { cssObj } from "./style";
 export const ListPart: FunctionComponent = () => {
   const router = useRouter();
 
-  const { data: jdDataObj, isSuccess } = useJdArr(true, { order: "recent", limit: 0 });
+  const { data: jdDataObj } = useJdArr(true, { order: "recent", limit: 0 });
 
-  if (!isSuccess) {
-    return null;
+  if (!jdDataObj) {
+    return (
+      <div css={cssObj.spinner}>
+        <Spinner />
+      </div>
+    );
   }
 
   if (jdDataObj.count === 0) {

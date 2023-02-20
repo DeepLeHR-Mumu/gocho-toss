@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
+import { usePreventRouting } from "shared-hooks";
 
 import { useToast } from "@/globalStates/useToast";
 import {
@@ -54,7 +55,7 @@ const JdUploadPage: NextPageWithLayout = () => {
   const {
     control,
     handleSubmit,
-    formState: { isDirty, isSubmitSuccessful, submitCount },
+    formState: { submitCount, dirtyFields, isSubmitSuccessful },
   } = jobForm;
 
   const { fields, append, remove } = useFieldArray({
@@ -130,6 +131,8 @@ const JdUploadPage: NextPageWithLayout = () => {
           },
         }
       );
+    } else {
+      isLoading.current = false;
     }
   };
 
@@ -138,29 +141,35 @@ const JdUploadPage: NextPageWithLayout = () => {
     jdUploadFailEvent(submitCount);
   }, [submitCount]);
 
-  useEffect(() => {
-    const escapeWithoutSubmit = isDirty && !isSubmitSuccessful;
+  usePreventRouting(
+    Boolean(Object.keys(dirtyFields).length) && !isSubmitSuccessful,
+    jdUploadExitEvent,
+    jdUploadExitDoneEvent
+  );
 
-    if (escapeWithoutSubmit) window.onbeforeunload = () => true;
-
-    const handleUnload = () => {
-      if (escapeWithoutSubmit) {
-        jdUploadExitEvent();
-        if (!window.confirm(JD_UPLOAD_MESSAGE_OBJ.LEAVE)) {
-          throw router.events.emit("routeChangeError");
-        } else {
-          jdUploadExitDoneEvent();
-        }
-      }
-    };
-
-    router.events.on("routeChangeStart", handleUnload);
-
-    return () => {
-      window.onbeforeunload = () => null;
-      router.events.off("routeChangeStart", handleUnload);
-    };
-  }, [isDirty, isSubmitSuccessful, router.events]);
+  // useEffect(() => {
+  //   const escapeWithoutSubmit = isDirty && !isSubmitSuccessful;
+  //
+  //   if (escapeWithoutSubmit) window.onbeforeunload = () => true;
+  //
+  //   const handleUnload = () => {
+  //     if (escapeWithoutSubmit) {
+  //       jdUploadExitEvent();
+  //       if (!window.confirm(JD_UPLOAD_MESSAGE_OBJ.LEAVE)) {
+  //         throw router.events.emit("routeChangeError");
+  //       } else {
+  //         jdUploadExitDoneEvent();
+  //       }
+  //     }
+  //   };
+  //
+  //   router.events.on("routeChangeStart", handleUnload);
+  //
+  //   return () => {
+  //     window.onbeforeunload = () => null;
+  //     router.events.off("routeChangeStart", handleUnload);
+  //   };
+  // }, [isDirty, isSubmitSuccessful, router.events]);
 
   useEffect(() => {
     jdUploadPageFunnelEvent();
