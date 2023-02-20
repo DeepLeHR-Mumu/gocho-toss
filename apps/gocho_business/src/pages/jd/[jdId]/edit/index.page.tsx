@@ -7,6 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 import { Spinner } from "shared-ui/common/atom/spinner";
+import { usePreventRouting } from "shared-hooks";
 
 import { useToast } from "@/globalStates/useToast";
 import {
@@ -25,7 +26,6 @@ import { useDeleteJd } from "@/apis/jd/useDeleteJd";
 import { useEndJd } from "@/apis/jd/useEndJd";
 import { jdArrKeyObj } from "@/apis/jd/useJdArr/type";
 
-import { JD_UPLOAD_MESSAGE_OBJ } from "@/pages/jd/upload/constant";
 import { INTERNAL_URL } from "@/constants/url";
 import { HeaderPart } from "./part/headerPart";
 import { BasicInfoPart } from "./part/basicInfoPart";
@@ -35,7 +35,7 @@ import { PositionRequiredInfoPart } from "./part/positionRequiredInfoPart";
 import { PositionWorkInfoPart } from "./part/positionWorkInfoPart";
 
 import { JdFormValues } from "./type";
-import { BLANK_POSITION, JD_EDIT_MESSAGE_OBJ } from "./constant";
+import { BLANK_POSITION, JD_EDIT_MESSAGE_OBJ, ROTATION_ARR } from "./constant";
 import { getFieldArrayValue, getFieldArrayValueWithNull, setFieldArray } from "./util";
 import { cssObj } from "./style";
 
@@ -63,7 +63,7 @@ const JdEditPage: NextPageWithLayout = () => {
     control,
     handleSubmit,
     reset,
-    formState: { isDirty, isSubmitSuccessful, submitCount },
+    formState: { dirtyFields, submitCount, isSubmitSuccessful },
   } = jdForm;
 
   const { fields, append, remove } = useFieldArray({
@@ -181,6 +181,8 @@ const JdEditPage: NextPageWithLayout = () => {
           },
         }
       );
+    } else {
+      isEditLoading.current = false;
     }
   };
 
@@ -189,6 +191,7 @@ const JdEditPage: NextPageWithLayout = () => {
     const newEndTime = jdData?.endTime ? jdData.endTime + 540000 * 60 : 0;
 
     const positionNewArr = jdData?.positionArr.map((position) => ({
+      id: position.id,
       middle: position.eduSummary.middle,
       high: position.eduSummary.high,
       college: position.eduSummary.college,
@@ -202,11 +205,14 @@ const JdEditPage: NextPageWithLayout = () => {
       task_main: position.task.mainTask,
       task_sub_arr: position.task.subTaskArr,
       task_detail_arr: setFieldArray(position.taskDetailArr || []),
-      rotation_arr: position.rotationArr,
+      rotation_arr: position.rotationArr.map(
+        (rotation) => ROTATION_ARR.find((rotationObj) => rotationObj.name === rotation)?.data
+      ),
       rotation_etc: position.rotationEtc,
       place: {
         type: position.place.type,
-        address_arr: position.place.addressArr || [],
+        address_arr: position.place.addressArr || null,
+        factory_arr: position.place.factoryArr?.map((factory) => factory.id) || null,
         etc: position.place.etc || "",
       },
       hire_number: position.hireCount,
@@ -227,31 +233,15 @@ const JdEditPage: NextPageWithLayout = () => {
       etc_arr: setFieldArray(jdData?.etcArr || []),
       position_arr: positionNewArr,
     });
+
+    setIsCardOpenArr(Array.from({ length: positionNewArr?.length || 0 }, () => false));
   }, [jdData, reset]);
 
-  useEffect(() => {
-    const escapeWithoutSubmit = isDirty && !isSubmitSuccessful;
-
-    if (escapeWithoutSubmit) window.onbeforeunload = () => true;
-
-    const handleUnload = () => {
-      if (escapeWithoutSubmit) {
-        jdEditExitEvent();
-        if (!window.confirm(JD_UPLOAD_MESSAGE_OBJ.LEAVE)) {
-          throw router.events.emit("routeChangeError");
-        } else {
-          jdEditExitDoneEvent();
-        }
-      }
-    };
-
-    router.events.on("routeChangeStart", handleUnload);
-
-    return () => {
-      router.events.off("routeChangeStart", handleUnload);
-      window.onbeforeunload = () => null;
-    };
-  }, [isDirty, isSubmitSuccessful, router.events]);
+  usePreventRouting(
+    Boolean(Object.keys(dirtyFields).length) && !isSubmitSuccessful,
+    jdEditExitEvent,
+    jdEditExitDoneEvent
+  );
 
   useEffect(() => {
     if (submitCount === 0) return;

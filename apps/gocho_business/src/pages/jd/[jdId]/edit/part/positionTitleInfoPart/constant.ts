@@ -1,4 +1,4 @@
-export const taskArr = [
+export const TASK_ARR = [
   {
     mainTask: "생산",
     subTaskArr: [

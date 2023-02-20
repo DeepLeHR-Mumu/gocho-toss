@@ -9,6 +9,7 @@ export interface JdFormValues {
   apply_url: string;
   etc_arr: { value: string }[];
   position_arr: {
+    id: number | null;
     middle: boolean;
     high: boolean;
     college: boolean;

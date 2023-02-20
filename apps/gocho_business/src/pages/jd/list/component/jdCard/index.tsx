@@ -97,7 +97,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
       <div css={cssObj.topContainer}>
         <div css={cssObj.titleBox}>
           <div>
-            <strong>{jd.title}</strong>
+            <strong css={cssObj.title}>{jd.title}</strong>
             <p css={cssObj.date}>{`${dayjs(jd.startTime).format("YY.MM.DD")}~${dayjs(jd.endTime).format(
               "YY.MM.DD"
             )}`}</p>

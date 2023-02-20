@@ -1,4 +1,4 @@
-export const processGuideArr = [
+export const PROCESS_GUIDE_ARR = [
   ["서류전형"],
   ["면접전형", "1차면접", "인적성검사", "인성검사"],
   ["2차면접", "채용검진", "면접전형", "최종합격"],
@@ -10,7 +10,7 @@ export const processGuideArr = [
   ["최종합격"],
 ] as const;
 
-export const applyRouteGuideArr = [
+export const APPLY_ROUTE_GUIDE_ARR = [
   "이력서 제출",
   "자기소개서 제출",
   "온라인 지원서 제출",
@@ -23,7 +23,7 @@ export const applyRouteGuideArr = [
   "주민등록등본 제출",
 ];
 
-export const applyExternalLinkArr = [
+export const APPLY_EXTERNAL_LINK_ARR = [
   { text: "잡코리아", url: "https://www.jobkorea.co.kr/Corp/Index" },
   { text: "사람인", url: "https://www.saramin.co.kr/zf_user/auth?ut=c" },
   {
