@@ -1,16 +1,16 @@
 import { FunctionComponent } from "react";
+import { FiCornerDownLeft } from "react-icons/fi";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
-import { FiCornerDownLeft } from "react-icons/fi";
 import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
 import { useUserState } from "@/globalStates/useUserState";
 
+import { InformDesc } from "../../component/informDesc";
 import { WelfareForm } from "../../component/welfareForm";
 import { welfareArrCreator } from "./util";
 import { WelfarePartProps } from "./type";
 import { cssObj } from "./style";
-import { InformDesc } from "../../component/informDesc";
 
 export const WelfarePart: FunctionComponent<WelfarePartProps> = ({ companyForm }) => {
   const { userInfoData } = useUserState();
