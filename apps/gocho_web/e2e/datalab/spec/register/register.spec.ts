@@ -130,9 +130,7 @@ const specResponseCheckTester = async (isDeepRegister: boolean, response: Respon
 
 test.describe("스펙등록 테스트", () => {
   test("타이틀, heading 검사", async ({ page }) => {
-    await page.goto(linkObj.SPEC_REGISTER_URL, {
-      waitUntil: "load",
-    });
+    await page.goto(linkObj.SPEC_REGISTER_URL);
     await expect(page).toHaveTitle("내 스펙 등록하기 - 고초대졸닷컴");
     await expect(page.locator("h1")).toHaveText("내 스펙 등록하기 - 고초대졸닷컴");
   });
@@ -153,7 +151,7 @@ test.describe("스펙등록 테스트", () => {
     test.slow();
     await loginTester(page);
     await basicSpecRegisterTester(page);
-    await page.getByRole('link', { name: '채용공고' }).first().click();
+    await page.getByRole("link", { name: "채용공고" }).first().click();
     await expect(page.locator('strong:has-text("페이지를 나가시겠습니까?")')).toBeVisible();
     await expect(page.locator('p:has-text("작성 중인 스펙이 초기화됩니다. 나가시겠습니까?")')).toBeVisible();
     await page.locator('button:has-text("아니오")').click();
