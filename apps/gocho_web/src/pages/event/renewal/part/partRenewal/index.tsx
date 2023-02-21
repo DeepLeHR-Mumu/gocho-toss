@@ -51,13 +51,13 @@ export const PartRenewal: FunctionComponent = () => {
 
         <ul css={listCSS}>
           <li>
-            <Image src={renewal01Src} layout="responsive" objectFit="cover" />
+            <Image src={renewal01Src} alt="" layout="responsive" objectFit="cover" />
           </li>
           <li>
-            <Image src={renewal02Src} layout="responsive" objectFit="cover" />
+            <Image src={renewal02Src} alt="" layout="responsive" objectFit="cover" />
           </li>
           <li>
-            <Image src={renewal03Src} layout="responsive" objectFit="cover" />
+            <Image src={renewal03Src} alt="" layout="responsive" objectFit="cover" />
           </li>
         </ul>
 

@@ -111,6 +111,7 @@ export const BasicInfoPart: FunctionComponent = () => {
                     src={companyDetailData.nozo.exists ? nozo_true : nozo_false}
                     layout="fixed"
                     objectFit="contain"
+                    alt=""
                   />
                 </span>
               </p>

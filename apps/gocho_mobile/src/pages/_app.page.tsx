@@ -117,7 +117,9 @@ function UserMobileService({ Component, pageProps }: AppProps) {
   }, [router.events]);
 
   useEffect(() => {
-    window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
+    if (!window.Kakao.isInitialized()) {
+      window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
+    }
   }, []);
 
   return (

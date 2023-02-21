@@ -1,13 +1,3 @@
-const withTM = require("next-transpile-modules")([
-  "shared-api",
-  "shared-constant",
-  "shared-util",
-  "shared-type",
-  "shared-style",
-  "shared-image",
-  "shared-ui",
-]);
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -16,6 +6,15 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   pageExtensions: ["page.tsx"],
+  transpilePackages: [
+    "shared-api",
+    "shared-constant",
+    "shared-util",
+    "shared-type",
+    "shared-style",
+    "shared-image",
+    "shared-ui",
+  ],
 };
 
-module.exports = withTM(nextConfig);
+module.exports = nextConfig;

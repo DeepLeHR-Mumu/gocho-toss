@@ -28,10 +28,8 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({ carouselData }) =
           target={carouselData.buttonObj.target}
           onClick={carouselData.buttonObj.onClick}
         >
-          <a css={linkButton(carouselData.buttonObj.backgroundColor, carouselData.buttonObj.color)}>
             <FiArrowRight />
             {carouselData.buttonObj.text}
-          </a>
         </Link>
       )}
       {carouselData.buttonObj && carouselData.buttonObj.target === "_blank" && (

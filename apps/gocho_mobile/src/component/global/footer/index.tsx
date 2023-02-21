@@ -21,11 +21,11 @@ export const Footer: FunctionComponent = () => {
         </li>
       </ul>
       <strong css={title}>광고문의</strong>
-      <p css={emailText}>
+      <div css={emailText}>
         <a href={`mailto:${companyInfoObj.marketingEmail}`}>채용공고 / 광고등록 문의 {companyInfoObj.marketingEmail}</a>
-      </p>
+      </div>
       <strong css={title}>고객센터</strong>
-      <p css={emailText}>
+      <div css={emailText}>
         <a href={`mailto:${companyInfoObj.helpEmail}`} target="_blank" rel="noreferrer">
           {companyInfoObj.helpEmail}
         </a>
@@ -33,11 +33,9 @@ export const Footer: FunctionComponent = () => {
         <a href={companyInfoObj.kakaoPlus} target="_blank" rel="noreferrer">
           카카오톡 플러스친구
         </a>
-      </p>
-      <Link href={MAIN_URL} passHref>
-        <a css={logo}>
-          <Image layout="fill" objectFit="contain" src={GDtitleSrc} alt="고초대졸닷컴" />
-        </a>
+      </div>
+      <Link href={MAIN_URL} passHref css={logo}>
+        <Image layout="fill" objectFit="contain" src={GDtitleSrc} alt="고초대졸닷컴" />
       </Link>
       <ul css={infoContainer}>
         <li>{companyInfoObj.address}</li>

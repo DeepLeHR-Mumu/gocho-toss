@@ -100,8 +100,12 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
   };
 
   return (
-    <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
-      <a css={cardWrapper(isMobile)} aria-label={`${jobData.title} 채용 공고로 이동`}>
+    <Link
+      href={`${JOBS_DETAIL_URL}/${jobData.id}`}
+      passHref
+      css={cardWrapper(isMobile)}
+      aria-label={`${jobData.title} 채용 공고로 이동`}
+    >
         <button
           type="button"
           css={bookmarkButton(isBookmarked)}
@@ -129,9 +133,7 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
               objectFit="contain"
               src={imageSrc || jobData.companyLogo}
               alt=""
-              onError={() => {
-                return setImageSrc(defaultCompanyLogo);
-              }}
+              onError={() => setImageSrc(defaultCompanyLogo)}
             />
           </div>
 
@@ -163,7 +165,6 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
             {jobData.rotationArr[0]} {jobData.rotationArr.length !== 1 && `외 ${jobData.rotationArr.length - 1}형태`}
           </li>
         </ul>
-      </a>
     </Link>
   );
 };

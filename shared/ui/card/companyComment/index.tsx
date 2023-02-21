@@ -87,9 +87,9 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
           </div>
 
           <div css={unLoginContainer} ref={commentContainerRef}>
-            {dummyArrCreator(6).map((_) => {
-              return <UnLoginComment key={_} />;
-            })}
+            {dummyArrCreator(6).map((_) => (
+              <UnLoginComment key={_} />
+            ))}
           </div>
         </section>
 
@@ -126,9 +126,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
 
       <section css={commentBodyContainer}>
         <div css={commentContainer} ref={commentContainerRef}>
-          {companyCommentArrData.commentArr.map((comment) => {
-            return <Comment nickname={userInfoData.nickname} commentData={comment} key={comment.id} />;
-          })}
+          {companyCommentArrData.commentArr.map((comment) => <Comment nickname={userInfoData.nickname} commentData={comment} key={comment.id} />)}
         </div>
       </section>
 

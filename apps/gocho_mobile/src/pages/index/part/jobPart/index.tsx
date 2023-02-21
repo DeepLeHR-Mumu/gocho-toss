@@ -21,17 +21,14 @@ export const JobPart: FunctionComponent = () => {
               pathname: JOBS_LIST_URL,
               query: { page: 1, order: "recent" },
             }}
+            css={linkButton}
             passHref
           >
-            <a css={linkButton}>
-              전체 보기 <FiChevronRight />
-            </a>
+            전체 보기 <FiChevronRight />
           </Link>
         </div>
       </Layout>
-      <div css={cardContainer}>
-        <JobCardList />
-      </div>
+      <div css={cardContainer}><JobCardList /></div>
     </section>
   );
 };

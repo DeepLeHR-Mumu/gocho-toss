@@ -60,13 +60,13 @@ export const PartRenewal: FunctionComponent = () => {
 
         <ul css={listCSS}>
           <li>
-            <Image src={renewal01Src} layout="responsive" objectFit="cover" />
+            <Image alt="" src={renewal01Src} layout="responsive" objectFit="cover" />
           </li>
           <li>
-            <Image src={renewal02Src} layout="responsive" objectFit="cover" />
+            <Image alt="" src={renewal02Src} layout="responsive" objectFit="cover" />
           </li>
           <li>
-            <Image src={renewal03Src} layout="responsive" objectFit="cover" />
+            <Image alt="" src={renewal03Src} layout="responsive" objectFit="cover" />
           </li>
         </ul>
 
@@ -77,7 +77,7 @@ export const PartRenewal: FunctionComponent = () => {
         </p>
 
         <div css={logoBox}>
-          <Image src={gochoLogoColor} alt="고초대졸닷컴" layout="fixed" objectFit="contain" />
+          <Image alt="" src={gochoLogoColor} layout="fixed" objectFit="contain" />
         </div>
 
         {!isSuccess && (

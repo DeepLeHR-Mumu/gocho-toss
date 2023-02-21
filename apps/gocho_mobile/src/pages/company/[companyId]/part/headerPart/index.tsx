@@ -101,7 +101,7 @@ export const HeaderPart: FunctionComponent = () => {
         <div css={container}>
           <div css={infoBox}>
             <div css={logoBox}>
-              <Image src={companyDetailData.logoUrl} layout="fill" objectFit="contain" />
+              <Image alt="" src={companyDetailData.logoUrl} layout="fill" objectFit="contain" />
             </div>
             <div css={buttonBox}>
               <button
