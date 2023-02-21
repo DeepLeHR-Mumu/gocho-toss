@@ -17,7 +17,7 @@ export const usePreventRouting = (customizedIsDirty: boolean, exitEvent?: () => 
         return;
       }
       // eslint-disable-next-line no-alert
-      if (!window.confirm("변경사항이 있습니다. 페이지를 나가시겠습니까?") && customizedIsDirty) {
+      if (!window.confirm("변경사항이 있습니다. 페이지를 나가시겠습니까?") && !customizedIsDirty) {
         throw router.events.emit("routeChangeError");
       } else if (exitDoneEvent) exitDoneEvent();
     };
@@ -28,5 +28,5 @@ export const usePreventRouting = (customizedIsDirty: boolean, exitEvent?: () => 
       router.events.off("routeChangeStart", pageExitHandler);
       window.onbeforeunload = () => null;
     };
-  }, [customizedIsDirty, router.events]);
+  }, [customizedIsDirty, exitDoneEvent, exitEvent, router.events]);
 };
