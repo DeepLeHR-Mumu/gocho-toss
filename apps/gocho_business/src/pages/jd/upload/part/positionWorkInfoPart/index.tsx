@@ -185,6 +185,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   value={placeType.data}
                   onClick={() => {
                     if (watch("position_arr")[positionIndex].place.type !== placeType.data) {
+                      setValue(`position_arr.${positionIndex}.place.etc`, null);
                       clearErrors(`position_arr.${positionIndex}.place`);
                       clearErrors(`position_arr.${positionIndex}.place.etc`);
                     }
@@ -467,12 +468,14 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
               </div>
             </div>
           ))}
-          <AddFieldButton
-            onClickHandler={() => {
-              payArr.append({ value: "" });
-              setPayIsFocusedArr((prev) => [...prev, false]);
-            }}
-          />
+          {payArr.fields.length < 10 && (
+            <AddFieldButton
+              onClickHandler={() => {
+                payArr.append({ value: "" });
+                setPayIsFocusedArr((prev) => [...prev, false]);
+              }}
+            />
+          )}
         </div>
       </div>
       <div css={cssObj.container}>

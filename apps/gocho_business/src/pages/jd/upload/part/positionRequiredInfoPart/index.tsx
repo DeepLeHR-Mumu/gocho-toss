@@ -219,13 +219,14 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             <input
               type="number"
               min="1"
-              max="100"
+              max="50"
               css={cssObj.activatableInput(isMinYearDisabled)}
               {...register(`position_arr.${positionIndex}.min_year`, {
                 required: { value: !isMinYearDisabled, message: "최소 경력은 필수 입력 사항입니다" },
                 disabled: isMinYearDisabled,
+                min: { value: 1, message: "최소 경력은 1년 이상이어야 합니다" },
+                max: { value: 50, message: "최소 경력은 50년 이하이어야 합니다" },
                 onBlur: () => trigger(`position_arr.${positionIndex}.max_year`),
-                validate: (value) => (value && value > 0) || "최소 경력은 1년 이상이어야 합니다.",
                 valueAsNumber: true,
               })}
             />
@@ -262,6 +263,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
               {...register(`position_arr.${positionIndex}.max_year`, {
                 required: { value: !isMaxYearDisabled, message: "최대 경력은 필수 입력 사항입니다" },
                 disabled: isMaxYearDisabled,
+                max: { value: 50, message: "최소 경력은 50년 이하이어야 합니다" },
                 validate: (value) =>
                   (value || 1) > (watch("position_arr")[positionIndex].min_year || 0) ||
                   "최소 경력 조건이 최대보다 작거나 같을 수 없습니다.",
