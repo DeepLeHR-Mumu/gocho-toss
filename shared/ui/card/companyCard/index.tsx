@@ -58,20 +58,16 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
         <BsFillBookmarkFill />
       </button>
       <Link href={`/company/${companyData.id}/detail`} passHref>
-        <a>
-          <strong css={nameCSS}>{companyData.name}</strong>
-          <div css={companyLogoBox}>
-            <Image
-              layout="fill"
-              objectFit="contain"
-              src={imageSrc || companyData.logoUrl}
-              alt={companyData.name}
-              onError={() => {
-                return setImageSrc(defaultCompanyLogo);
-              }}
-            />
-          </div>
-        </a>
+        <strong css={nameCSS}>{companyData.name}</strong>
+        <div css={companyLogoBox}>
+          <Image
+            layout="fill"
+            objectFit="contain"
+            src={imageSrc || companyData.logoUrl}
+            alt={companyData.name}
+            onError={() => setImageSrc(defaultCompanyLogo)}
+          />
+        </div>
       </Link>
     </article>
   );
