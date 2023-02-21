@@ -125,6 +125,7 @@ export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSke
           </li>
           <li>
             <Image
+              fill
               src={jobData.college ? collegeTrue : collegeFalse}
               alt={jobData.college ? "초대졸 지원 가능" : "초대졸 지원 불가능"}
             />

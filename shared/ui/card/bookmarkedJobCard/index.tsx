@@ -102,8 +102,7 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
       <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref css={linkButtonCSS(isMobile)}>
         <div css={companyLogoBox}>
           <Image
-            layout="fill"
-            objectFit="contain"
+            fill
             src={imageSrc}
             onError={() => {
               setImageSrc(defaultCompanyLogo);

@@ -48,39 +48,35 @@ export const variantModifier: VariantModifierDef = (variant) => {
 interface ButtonCSSDef {
   (variant: ButtonVariant, wide: boolean | undefined, iconDirection?: "left" | "right"): SerializedStyles;
 }
-export const buttonCSS: ButtonCSSDef = (variant, wide, iconDirection) => {
-  return css`
-    ${wide &&
-    css`
-      width: 100%;
-    `}
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.875rem 1.5rem;
-    border-radius: 1.5rem;
-    font-size: 0.875rem;
-    ${variantModifier(variant)}
-    display: flex;
+export const buttonCSS: ButtonCSSDef = (variant, wide, iconDirection) => css`
+  ${wide &&
+  css`
+    width: 100%;
+  `}
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 1.5rem;
+  border-radius: 1.5rem;
+  font-size: 0.875rem;
+  ${variantModifier(variant)}
+  display: flex;
 
-    ${iconDirection === "right" &&
-    css`
-      flex-direction: row-reverse;
-    `};
-    > span {
-      margin-left: 0.2rem;
-      margin-right: 0.1rem;
-    }
-  `;
-};
+  ${iconDirection === "right" &&
+  css`
+    flex-direction: row-reverse;
+  `};
+  > span {
+    margin-left: 0.2rem;
+    margin-right: 0.1rem;
+  }
+`;
 
 interface iconCSSDef {
   (size: number, color: ColorDef): SerializedStyles;
 }
-export const iconCSS: iconCSSDef = (size, color) => {
-  return css`
-    font-size: ${size}rem;
-    color: ${color};
-    margin-left: 0.2rem;
-  `;
-};
+export const iconCSS: iconCSSDef = (size, color) => css`
+  font-size: ${size}rem;
+  color: ${color};
+  margin-left: 0.2rem;
+`;

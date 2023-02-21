@@ -61,8 +61,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
         <strong css={nameCSS}>{companyData.name}</strong>
         <div css={companyLogoBox}>
           <Image
-            layout="fill"
-            objectFit="contain"
+            fill
             src={imageSrc || companyData.logoUrl}
             alt={companyData.name}
             onError={() => setImageSrc(defaultCompanyLogo)}
