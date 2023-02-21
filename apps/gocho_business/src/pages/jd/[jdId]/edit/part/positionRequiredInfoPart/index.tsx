@@ -71,7 +71,9 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
     <>
       <div css={cssObj.contractTypeWrapper}>
         <div css={cssObj.container}>
-          <p>계약 형태</p>
+          <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.contract_type))}>
+            계약 형태
+          </p>
           <div css={cssObj.labelContainer}>
             {CONTRACT_TYPE_ARR.map((contractName) => (
               <SharedRadioButton
@@ -79,7 +81,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                 value={contractName}
                 id={`${contractName}${id}`}
                 registerObj={register(`position_arr.${positionIndex}.contract_type`, {
-                  required: true,
+                  required: "계약 형태는 필수 입력 값입니다",
                   onChange: () => {
                     if (!isConversionDisabled) {
                       clearErrors(`position_arr.${positionIndex}.conversion_rate`);
@@ -92,6 +94,10 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
               </SharedRadioButton>
             ))}
           </div>
+          <p css={cssObj.errorMessage}>
+            {formState.errors.position_arr?.[positionIndex]?.contract_type &&
+              formState.errors.position_arr?.[positionIndex]?.contract_type?.message}
+          </p>
         </div>
         <div css={cssObj.container}>
           <p>전환율</p>
@@ -182,7 +188,9 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
       </div>
       <div css={cssObj.contractTypeWrapper}>
         <div css={cssObj.container}>
-          <p>경력 조건</p>
+          <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.required_exp))}>
+            경력 조건
+          </p>
           <div css={cssObj.labelContainer}>
             {REQUIRED_EXP_ARR.map((expName) => (
               <label key={`${expName}${id}`} htmlFor={`${expName}${id}`} css={cssObj.label}>
@@ -191,7 +199,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                   id={`${expName}${id}`}
                   css={cssObj.radio}
                   {...register(`position_arr.${positionIndex}.required_exp`, {
-                    required: true,
+                    required: "경력 조건은 필수 입력 사항입니다",
                   })}
                   value={expName}
                 />
@@ -200,6 +208,10 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
               </label>
             ))}
           </div>
+          <p css={cssObj.errorMessage}>
+            {formState.errors.position_arr?.[positionIndex]?.required_exp &&
+              formState.errors.position_arr?.[positionIndex]?.required_exp?.message}
+          </p>
         </div>
         <div css={cssObj.container}>
           <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.min_year))}>최소경력(연)</p>

@@ -101,6 +101,7 @@ const JdEditPage: NextPageWithLayout = () => {
         {
           onSuccess: () => {
             setToast("마감되었습니다");
+            router.push(INTERNAL_URL.JD_LIST);
             queryClient.invalidateQueries(jdArrKeyObj.all);
           },
 
@@ -122,6 +123,7 @@ const JdEditPage: NextPageWithLayout = () => {
         {
           onSuccess: () => {
             setToast("삭제되었습니다");
+            router.push(INTERNAL_URL.JD_LIST);
             queryClient.invalidateQueries(jdArrKeyObj.all);
           },
 

@@ -147,30 +147,6 @@ const JdUploadPage: NextPageWithLayout = () => {
     jdUploadExitDoneEvent
   );
 
-  // useEffect(() => {
-  //   const escapeWithoutSubmit = isDirty && !isSubmitSuccessful;
-  //
-  //   if (escapeWithoutSubmit) window.onbeforeunload = () => true;
-  //
-  //   const handleUnload = () => {
-  //     if (escapeWithoutSubmit) {
-  //       jdUploadExitEvent();
-  //       if (!window.confirm(JD_UPLOAD_MESSAGE_OBJ.LEAVE)) {
-  //         throw router.events.emit("routeChangeError");
-  //       } else {
-  //         jdUploadExitDoneEvent();
-  //       }
-  //     }
-  //   };
-  //
-  //   router.events.on("routeChangeStart", handleUnload);
-  //
-  //   return () => {
-  //     window.onbeforeunload = () => null;
-  //     router.events.off("routeChangeStart", handleUnload);
-  //   };
-  // }, [isDirty, isSubmitSuccessful, router.events]);
-
   useEffect(() => {
     jdUploadPageFunnelEvent();
   }, []);

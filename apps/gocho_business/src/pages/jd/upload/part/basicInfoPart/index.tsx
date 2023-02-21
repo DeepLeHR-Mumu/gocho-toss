@@ -37,6 +37,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
   const linkButtonClickHandler = (type: typeof linkType) => {
     setLinkType(type);
     setValue(`apply_url`, "");
+    clearErrors("apply_url");
   };
 
   const externalLinkMaker = (link: string) => {
@@ -339,6 +340,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                       placeholder="http"
                       {...register("apply_url", {
                         required: "링크는 필수 입력 사항입니다",
+                        validate: () => true,
                         onBlur: (blurEvent) => {
                           if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                             setValue("apply_url", "");
@@ -377,6 +379,8 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
                     css={cssObj.applyUrlInput(47)}
                     {...register("apply_url", {
                       required: "링크는 필수 입력 사항입니다",
+                      validate: (value) =>
+                        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || "이메일 형식이 올바르지 않습니다",
                       onBlur: (blurEvent) => {
                         if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                           setValue("apply_url", "");

@@ -272,7 +272,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                     queryClient.invalidateQueries(factoryArrKeyObj.all);
                   }}
                 />
-                <p css={cssObj.uploadFactoryDesc}>잠깐, 미등록 공장이 있나요</p>
+                <p css={cssObj.uploadFactoryDesc}>잠깐, 미등록 공장이 있나요?</p>
                 <SharedTextLink externalUrl={INTERNAL_URL.FACTORY_LIST} fontColor="blue" text="공장 등록하러 가기" />
               </div>
               <div css={cssObj.placeContainer}>
