@@ -24,6 +24,7 @@ import {
 import { PageHead } from "./pageHead";
 import { CompanyInfoPart } from "./part/companyInfoPart";
 import { CompanyStatusPart } from "./part/companyStatusPart";
+import { LastEditInfoPart } from "./part/lastEditInfoPart";
 import { BasicPart } from "./part/basicPart";
 import { WelfarePart } from "./part/welfarePart";
 import { COMPANY_MESSAGE_OBJ, ALREADY_DONE_EDIT_MESSAGE } from "./constants";
@@ -103,6 +104,29 @@ const CompanyEditPage: NextPageWithLayout = () => {
 
   useEffect(() => {
     if (companyDetailData) {
+      const welfareObj =
+        companyDetailData.welfare === null
+          ? {
+              money: null,
+              health: null,
+              life: null,
+              holiday: null,
+              facility: null,
+              vacation: null,
+              growth: null,
+              etc: null,
+            }
+          : {
+              money: companyDetailData.welfare.money,
+              health: companyDetailData.welfare.health,
+              life: companyDetailData.welfare.life,
+              holiday: companyDetailData.welfare.holiday,
+              facility: companyDetailData.welfare.facility,
+              vacation: companyDetailData.welfare.vacation,
+              growth: companyDetailData.welfare.growth,
+              etc: companyDetailData.welfare.etc,
+            };
+
       reset({
         employee_number: companyDetailData.employeeNumber,
         intro: companyDetailData.intro || "",
@@ -114,16 +138,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
         pay_avg: companyDetailData.payAvg,
         pay_start: companyDetailData.payStart,
         pay_desc: companyDetailData.payDesc || "",
-        welfare: {
-          money: companyDetailData.welfare.money,
-          health: companyDetailData.welfare.health,
-          life: companyDetailData.welfare.life,
-          holiday: companyDetailData.welfare.holiday,
-          facility: companyDetailData.welfare.facility,
-          vacation: companyDetailData.welfare.vacation,
-          growth: companyDetailData.welfare.growth,
-          etc: companyDetailData.welfare.etc,
-        },
+        welfare: welfareObj,
       });
     }
   }, [companyDetailData, reset]);
@@ -197,6 +212,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
           </header>
 
           <CompanyInfoPart />
+          <LastEditInfoPart />
           {companyDetailData.status.reason && <CompanyStatusPart />}
 
           <section css={cssObj.companyInfoBox}>

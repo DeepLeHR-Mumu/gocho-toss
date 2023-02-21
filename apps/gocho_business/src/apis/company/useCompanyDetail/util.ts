@@ -10,6 +10,7 @@ export const companyDetailSelector = ({ data }: ResponseObjDef) => ({
     name: data.uploader.name,
     department: data.uploader.department,
     isMine: data.uploader.is_mine,
+    updatedTime: data.uploader.updated_time,
   },
   industry: data.industry,
   businessNumber: data.business_number,
