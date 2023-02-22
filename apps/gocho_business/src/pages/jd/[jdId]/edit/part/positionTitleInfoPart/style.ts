@@ -43,6 +43,10 @@ export const cssObj = {
     margin-bottom: 1.5rem;
   `,
 
+  hiddenInput: css`
+    display: none;
+  `,
+
   inputTitle: (isError: boolean) => css`
     color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
     margin-bottom: 0.25rem;

@@ -141,6 +141,18 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
         </div>
       </div>
       <div css={cssObj.container}>
+        <input
+          css={cssObj.hiddenInput}
+          {...register(`position_arr.${positionIndex}.task_main`, {
+            required: "1차 직무는 필수 입력 사항입니다",
+          })}
+        />
+        <input
+          css={cssObj.hiddenInput}
+          {...register(`position_arr.${positionIndex}.task_sub_arr`, {
+            required: "2차 직무는 필수 입력 사항입니다",
+          })}
+        />
         <p
           css={cssObj.inputTitle(
             Boolean(
