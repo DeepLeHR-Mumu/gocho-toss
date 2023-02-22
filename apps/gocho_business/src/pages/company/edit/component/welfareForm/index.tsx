@@ -65,7 +65,7 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
           ref={inputRef}
           type="text"
           disabled={isMine}
-          maxLength={30}
+          maxLength={50}
           placeholder="직접 입력하여 추가"
           css={cssObj.inputLine(isMine)}
           onKeyUp={(onKeyEvent) => {
