@@ -28,7 +28,14 @@ export const infoBox = css`
 
 export const flexBox = css`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+`;
+
+export const nozoFlexBox = css`
+  display: flex;
+  align-items: baseline;
   margin-bottom: 1.5rem;
   line-height: 1.6;
 `;
@@ -51,6 +58,25 @@ export const info = css`
   color: ${COLORS.GRAY10};
   font-weight: 400;
   width: calc(100% - 6rem);
+`;
+
+export const nozoInfo = css`
+  word-break: break-all;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 0.875rem;
+  color: ${COLORS.GRAY10};
+  font-weight: 400;
+  width: calc(100% - 6rem);
+`;
+
+export const nozoDesc = css`
+  color: ${COLORS.GRAY40};
+  font-weight: 400;
+  word-break: break-all;
+  font-size: 0.875rem;
+  width: 100%;
 `;
 
 export const pointInfo = css`

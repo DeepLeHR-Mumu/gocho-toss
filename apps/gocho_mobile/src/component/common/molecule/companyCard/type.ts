@@ -4,7 +4,7 @@ export interface CompanyCardProps {
   companyData: {
     id: number;
     name: string;
-    logoUrl: string;
+    logoUrl: string | null;
   };
   isBookmarked: boolean;
   refetchUserBookmark: () => Promise<QueryObserverResult>;

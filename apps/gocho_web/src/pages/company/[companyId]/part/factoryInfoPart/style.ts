@@ -184,7 +184,7 @@ export const info = css`
   line-height: 1.6;
   font-weight: 400;
   color: ${COLORS.BLUE_NEON40};
-  word-break: keep-all;
+  word-break: break-all;
 `;
 
 export const flexBox = css`
