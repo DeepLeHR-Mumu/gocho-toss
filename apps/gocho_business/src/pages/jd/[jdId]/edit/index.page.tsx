@@ -40,7 +40,7 @@ import { getFieldArrayValue, getFieldArrayValueWithNull, setFieldArray } from ".
 import { cssObj } from "./style";
 
 const JdEditPage: NextPageWithLayout = () => {
-  const [isCardOpenArr, setIsCardOpenArr] = useState<boolean[]>([false]);
+  const [isCardOpenArr, setIsCardOpenArr] = useState<boolean[]>([true]);
   const isEditLoading = useRef(false);
   const isDeleteLoading = useRef(false);
   const isEndLoading = useRef(false);

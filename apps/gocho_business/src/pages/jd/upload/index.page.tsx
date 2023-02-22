@@ -34,7 +34,7 @@ import { getFieldArrayValue, getFieldArrayValueWithNull } from "./util";
 import { cssObj } from "./style";
 
 const JdUploadPage: NextPageWithLayout = () => {
-  const [isCardOpenArr, setIsCardOpenArr] = useState<boolean[]>([false]);
+  const [isCardOpenArr, setIsCardOpenArr] = useState<boolean[]>([true]);
   const isLoading = useRef(false);
 
   const { mutate: addJobMutate } = useAddJd();

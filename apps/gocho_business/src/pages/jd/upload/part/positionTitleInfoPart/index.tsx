@@ -122,7 +122,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
             text="직무 카드 복사"
             onClickHandler={() => {
               appendPosition({ ...watch("position_arr")[positionIndex] });
-              setIsCardOpen((prev) => [...prev.slice(0, positionIndex + 1), false, ...prev.slice(positionIndex + 1)]);
+              setIsCardOpen((prev) => [...prev.slice(0, positionIndex + 1), true, ...prev.slice(positionIndex + 1)]);
             }}
           />
           <SharedButton
