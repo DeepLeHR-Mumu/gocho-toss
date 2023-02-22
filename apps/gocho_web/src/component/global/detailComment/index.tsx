@@ -24,8 +24,7 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, use
                 }}
                 src={imageSrc || commentDataArr.company.logoUrl}
                 alt={commentDataArr.company.name}
-                objectFit="contain"
-                layout="fill"
+                fill
               />
             </div>
             <p css={companyName}>{commentDataArr.company.name}</p>
@@ -78,8 +77,7 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, use
               }}
               src={imageSrc || commentDataArr.company.logoUrl}
               alt={commentDataArr.company.name}
-              objectFit="contain"
-              layout="fill"
+              fill
             />
           </div>
           <p css={companyName}>{commentDataArr.company.name}</p>

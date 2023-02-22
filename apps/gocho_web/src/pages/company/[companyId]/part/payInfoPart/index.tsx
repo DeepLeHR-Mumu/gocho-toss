@@ -37,7 +37,7 @@ export const PayInfoPart: FunctionComponent = () => {
         <div css={infoBox}>
           <div>
             <div css={infoPicture}>
-              <Image layout="fill" objectFit="contain" src={payStart} alt="급여 복지 관련 로고" />
+              <Image fill src={payStart} alt="" />
             </div>
             <p css={infoTitle}>평균 초봉</p>
           </div>
@@ -53,7 +53,7 @@ export const PayInfoPart: FunctionComponent = () => {
         <div css={infoBox}>
           <div>
             <div css={infoPicture}>
-              <Image layout="fill" objectFit="contain" src={payAvg} alt="급여 복지 관련 로고" />
+              <Image fill src={payAvg} alt="" />
             </div>
             <p css={infoTitle}>평균 연봉</p>
           </div>

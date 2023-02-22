@@ -58,8 +58,7 @@ export const BasicInfoPart: FunctionComponent = () => {
               <Image
                 src={companyDetailData.nozo.exists ? nozoTrue : nozoFalse}
                 alt={companyDetailData.nozo.exists ? "노조 있음" : "노조 없음"}
-                objectFit="contain"
-                layout="fill"
+                fill
               />
             </span>
           </p>

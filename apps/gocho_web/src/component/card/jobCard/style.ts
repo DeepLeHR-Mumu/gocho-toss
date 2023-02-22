@@ -120,6 +120,9 @@ export const companyLogoBox = css`
   border-radius: 1.5rem;
   position: relative;
   transition: all 0.3s ease;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const infoBox = css`
@@ -192,6 +195,9 @@ export const eduQual = css`
   justify-content: center;
   background-color: ${COLORS.GRAY90};
   border-radius: 50%;
+  > img {
+    object-fit: cover;
+  }
 `;
 
 export const detailInfo = css`

@@ -33,6 +33,9 @@ export const infoPicture = css`
   height: 7rem;
   margin: 0 auto;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const infoTitle = css`

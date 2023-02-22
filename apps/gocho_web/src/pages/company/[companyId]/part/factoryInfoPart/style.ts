@@ -25,6 +25,9 @@ export const iconBox = css`
   height: 1.5rem;
   position: relative;
   margin-right: 1rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const noFactoryWarning = css`
@@ -148,6 +151,9 @@ export const infoIcon = css`
   width: 4.8rem;
   height: 4.8rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const infoText = css`
@@ -194,6 +200,9 @@ export const booleanIcon = css`
   width: 1rem;
   height: 1rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const subDesc = css`

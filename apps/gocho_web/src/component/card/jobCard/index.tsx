@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
 import { useQueryClient } from "@tanstack/react-query";
-import Link from "next/link";
 
 import { jobArrKeyObj } from "shared-constant/queryKeyFactory/job/jobArrKeyObj";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
@@ -152,7 +151,6 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         <span css={bookmarkNumber}>{jobData.bookmark}</span>
       </button>
 
-      <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
         <a
           target="_blank"
           css={jobDetailLink}
@@ -169,8 +167,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
             <div css={companyLogoWrapper} className="Logo">
               <div css={companyLogoBox}>
                 <Image
-                  layout="fill"
-                  objectFit="contain"
+                  fill
                   src={imageSrc || jobData.companyLogo}
                   alt={jobData.companyName}
                   onError={() => {
@@ -196,16 +193,12 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
                   <Image
                     src={jobData.high ? highTrue : highFalse}
                     alt={jobData.high ? "고졸 지원 가능" : "고졸 지원 불가능"}
-                    layout="fixed"
-                    objectFit="cover"
                   />
                 </li>
                 <li css={eduQual}>
                   <Image
                     src={jobData.college ? collegeTrue : collegeFalse}
                     alt={jobData.college ? "초대졸 지원 가능" : "초대졸 지원 불가능"}
-                    layout="fixed"
-                    objectFit="cover"
                   />
                 </li>
                 <li css={detailInfo}>
@@ -243,7 +236,6 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
             공고보기
           </p>
         </a>
-      </Link>
     </article>
   );
 };
