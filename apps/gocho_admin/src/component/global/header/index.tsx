@@ -31,11 +31,9 @@ export const Header: FunctionComponent = () => {
       <Layout>
         <div css={headerContainer}>
           <div css={flexBox}>
-            <div css={logoCSS}>
-              <Link href={MAIN_URL} passHref>
-                <Image src={colorLogoSrc} alt="고초대졸닷컴" fill />
-              </Link>
-            </div>
+            <Link href={MAIN_URL} passHref css={logoCSS}>
+              <Image src={colorLogoSrc} alt="고초대졸닷컴" fill />
+            </Link>
             <p css={title}>매니저 페이지</p>
           </div>
           <div css={flexBox}>
