@@ -20,6 +20,7 @@ export const cssObj = {
     height: 3rem;
     background-color: ${COLORS.GRAY70};
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
     margin-right: 0.75rem;
