@@ -1,7 +1,7 @@
 export interface CommentCardProps {
   companyData: {
     id: number;
-    logoUrl: string;
+    logoUrl: string | null;
     name: string;
     commentCount: number;
   };

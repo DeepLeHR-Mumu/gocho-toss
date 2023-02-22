@@ -78,7 +78,7 @@ export const subDesc = css`
 
 export const restPoint = css`
   line-height: 1.8;
-  word-break: keep-all;
+  word-break: break-all;
   display: inline-block;
   white-space: pre-line;
   ::after {

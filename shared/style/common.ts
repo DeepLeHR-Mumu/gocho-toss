@@ -10,6 +10,7 @@ export const shorten: shortenDef = (line = 1) => {
   return css`
     overflow: hidden;
     text-overflow: ellipsis;
+    word-break: break-all;
     white-space: ${line >= 2 ? "normal" : "nowrap"};
     ${line >= 2 &&
     `
