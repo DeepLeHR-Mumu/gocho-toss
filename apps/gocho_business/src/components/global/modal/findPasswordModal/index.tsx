@@ -16,11 +16,12 @@ import { useToast } from "@/globalStates/useToast";
 
 import { ModalComponent } from "../modalBackground";
 
-import { LoginFormValues } from "./type";
+import { FindEmailFormValues } from "./type";
 import { cssObj } from "./style";
 
 export const FindPasswordBox: FunctionComponent = () => {
   const modalRef = useRef<HTMLDivElement>(null);
+  const isSubmit = useRef(true);
 
   const [isFocus, setIsFocus] = useState(false);
   const {
@@ -31,7 +32,7 @@ export const FindPasswordBox: FunctionComponent = () => {
     setValue,
     watch,
     formState: { errors },
-  } = useForm<LoginFormValues>({
+  } = useForm<FindEmailFormValues>({
     mode: "onChange",
   });
 
@@ -40,19 +41,24 @@ export const FindPasswordBox: FunctionComponent = () => {
   const { closeModal } = useModal();
 
   useFocusTrap(modalRef);
-  const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
-    postFindPassword(loginObj, {
-      onError: (error) => {
-        if (error.response?.status === 404 && error.response?.data.error_code === "BLANK_MEMBER")
-          return setError("email", { type: "custom", message: "가입되지 않은 이메일 입니다." });
+  const findEmailSubmit: SubmitHandler<FindEmailFormValues> = (loginObj) => {
+    if (isSubmit.current) {
+      isSubmit.current = false;
+      postFindPassword(loginObj, {
+        onError: (error) => {
+          if (error.response?.status === 404 && error.response?.data.error_code === "BLANK_MEMBER")
+            return setError("email", { type: "custom", message: "가입되지 않은 이메일 입니다." });
 
-        return null;
-      },
-
-      onSuccess: () => {
-        setToast("메일이 전송됐습니다. 이메일을 확인해주세요.");
-      },
-    });
+          return null;
+        },
+        onSuccess: () => {
+          setToast("메일이 전송됐습니다. 이메일을 확인해주세요.");
+        },
+        onSettled: () => {
+          isSubmit.current = true;
+        },
+      });
+    }
   };
 
   const closeFindPasswordModal = () => {
@@ -74,7 +80,7 @@ export const FindPasswordBox: FunctionComponent = () => {
         <Image objectFit="contain" src={smallMono} alt="고초대졸닷컴" />
       </div>
       <p css={cssObj.desc}>가입한 이메일에서 비밀번호를 확인하세요</p>
-      <form css={cssObj.formCSS} onSubmit={handleSubmit(loginSubmit)}>
+      <form css={cssObj.formCSS} onSubmit={handleSubmit(findEmailSubmit)}>
         <ul css={cssObj.formArr}>
           <li>
             <p css={cssObj.label(emailCSSObj)}>이메일</p>

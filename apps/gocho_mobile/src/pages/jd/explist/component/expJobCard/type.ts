@@ -2,7 +2,7 @@ export interface ExpJobCardProps {
   companyData: {
     id: number;
     name: string;
-    logoUrl: string;
+    logoUrl: string | null;
   };
   isSkeleton?: never;
 }

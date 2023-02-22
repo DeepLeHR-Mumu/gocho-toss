@@ -10,6 +10,7 @@ export interface ResponseObjDef {
       name: string;
       department: string;
       is_mine: boolean;
+      updated_time: number | null;
     };
     status: {
       name: "진행중" | "등록대기" | "수정대기" | "등록반려" | "수정반려";
@@ -38,7 +39,7 @@ export interface ResponseObjDef {
       vacation: string[] | null;
       growth: string[] | null;
       etc: string[] | null;
-    };
+    } | null;
     nozo: {
       exists: boolean;
       desc: string | null;

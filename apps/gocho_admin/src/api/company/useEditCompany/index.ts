@@ -10,7 +10,7 @@ export const editCompany: EditCompanyDef = async (requestObj) => {
   const json = JSON.stringify(requestObj.dto);
   const blob = new Blob([json], { type: "application/json" });
   formData.append("dto", blob);
-  if (requestObj.logo) formData.append("img", requestObj.logo);
+  if (requestObj.logo) formData.append("logo", requestObj.logo);
 
   const { data } = await axiosInstance.put(`/companies/${requestObj.companyId}`, formData, {
     headers: { "Content-Type": "multipart/form-data" },
