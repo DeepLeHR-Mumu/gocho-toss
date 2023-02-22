@@ -55,7 +55,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
       <div css={imageInput}>
         <strong css={inputTitle}>기존 로고</strong>
         <div css={currentLogo}>
-          <Image layout="fill" objectFit="contain" src={companyLogo || defaultCompanyLogo} alt="" />
+          <Image fill src={companyLogo || defaultCompanyLogo} alt="" />
         </div>
       </div>
       <div css={imageInput}>

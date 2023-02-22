@@ -29,6 +29,10 @@ export const logoCSS = css`
   margin-right: 0.5rem;
   position: relative;
   cursor: pointer;
+
+  img {
+    object-fit: contain;
+  }
 `;
 
 export const title = css`

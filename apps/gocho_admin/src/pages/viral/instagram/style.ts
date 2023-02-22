@@ -29,6 +29,10 @@ export const companyLogo = css`
   height: 4rem;
   position: relative;
   margin-right: 1.5rem;
+
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const companyInfo = css`
