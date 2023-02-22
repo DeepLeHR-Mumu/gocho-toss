@@ -28,28 +28,26 @@ export const cardWrapper = css`
   }
 `;
 
-export const bookmarkButtonWrapper = (isBookmarked = false) => {
-  return css`
-    display: flex;
-    align-items: center;
-    background-color: ${isBookmarked ? COLORS.STATE_SUCCESS : `${COLORS.GRAY90}`};
-    color: ${isBookmarked ? COLORS.BLUE_FIRST40 : `${COLORS.GRAY60}`};
-    border-radius: 0 1rem 0 1rem;
-    padding: 1rem;
-    margin: 0;
-    position: absolute;
-    top: 0;
-    right: 0;
-    transition: all 0.3s ease;
+export const bookmarkButtonWrapper = (isBookmarked = false) => css`
+  display: flex;
+  align-items: center;
+  background-color: ${isBookmarked ? COLORS.STATE_SUCCESS : `${COLORS.GRAY90}`};
+  color: ${isBookmarked ? COLORS.BLUE_FIRST40 : `${COLORS.GRAY60}`};
+  border-radius: 0 1rem 0 1rem;
+  padding: 1rem;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: all 0.3s ease;
 
-    ${PC_HOVER} {
-      :hover {
-        background-color: ${COLORS.GRAY80};
-        color: ${COLORS.GRAY40};
-      }
+  ${PC_HOVER} {
+    :hover {
+      background-color: ${COLORS.GRAY80};
+      color: ${COLORS.GRAY40};
     }
-  `;
-};
+  }
+`;
 
 export const isRecruitingCSS = css`
   color: ${COLORS.BLUE_FIRST40};

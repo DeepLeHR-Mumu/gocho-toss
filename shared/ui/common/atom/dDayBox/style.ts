@@ -50,23 +50,21 @@ const dateColor = (endTime: number) => {
   `;
 };
 
-export const setDdayStyleCSS: setDdayStyleCSS = (endTime) => {
-  return css`
-    font-size: 0.75rem;
-    white-space: nowrap;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 1rem;
-    min-width: 3.5rem;
-    width: fit-content;
-    padding: 0 1rem;
-    height: 1.625rem;
-    ${dateColor(endTime)}
+export const setDdayStyleCSS: setDdayStyleCSS = (endTime) => css`
+  font-size: 0.75rem;
+  white-space: nowrap;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  min-width: 3.5rem;
+  width: fit-content;
+  padding: 0 1rem;
+  height: 1.625rem;
+  ${dateColor(endTime)}
 
-    ${MOBILE} {
-      font-size: 0.9rem;
-    }
-  `;
-};
+  ${MOBILE} {
+    font-size: 0.9rem;
+  }
+`;

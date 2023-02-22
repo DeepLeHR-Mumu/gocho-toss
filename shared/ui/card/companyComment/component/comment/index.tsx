@@ -97,20 +97,20 @@ export const Comment: FunctionComponent<CommentProps> = ({ nickname, commentData
           <CommentLikeButton
             count={commentData.likeCount}
             isLiked={commentData.liked}
-            setLikeSubmit={() => {
-              return commentData.liked
+            setLikeSubmit={() =>
+              commentData.liked
                 ? postDislikeSubmit(commentData.companyId, commentData.id)
-                : postLikeSubmit(commentData.companyId, commentData.id);
-            }}
+                : postLikeSubmit(commentData.companyId, commentData.id)
+            }
           />
           <CommentDislikeButton
             count={commentData.disLikeCount}
             isDisLiked={commentData.disLiked}
-            setDislikeSubmit={() => {
-              return commentData.disLiked
+            setDislikeSubmit={() =>
+              commentData.disLiked
                 ? postDisFakeSubmit(commentData.companyId, commentData.id)
-                : postFakeSubmit(commentData.companyId, commentData.id);
-            }}
+                : postFakeSubmit(commentData.companyId, commentData.id)
+            }
           />
         </div>
       </div>

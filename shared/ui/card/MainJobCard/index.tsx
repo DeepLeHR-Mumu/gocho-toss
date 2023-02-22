@@ -106,65 +106,54 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
       css={cardWrapper(isMobile)}
       aria-label={`${jobData.title} 채용 공고로 이동`}
     >
-        <button
-          type="button"
-          css={bookmarkButton(isBookmarked)}
-          onClick={(event) => {
-            event.preventDefault();
-            if (useUserInfoError) {
-              return loginOpener();
-            }
-            return isBookmarked ? deleteJobBookmark() : addJobBookmark();
-          }}
-          aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
-        >
-          <BsFillBookmarkFill />
-        </button>
+      <button
+        type="button"
+        css={bookmarkButton(isBookmarked)}
+        onClick={(event) => {
+          event.preventDefault();
+          if (useUserInfoError) {
+            return loginOpener();
+          }
+          return isBookmarked ? deleteJobBookmark() : addJobBookmark();
+        }}
+        aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
+      >
+        <BsFillBookmarkFill />
+      </button>
 
-        <div css={labelContainer}>
-          <DdayBox endTime={jobData.endTime} />
-          {jobData.cut && <div css={cutBox}>채용시마감</div>}
+      <div css={labelContainer}>
+        <DdayBox endTime={jobData.endTime} />
+        {jobData.cut && <div css={cutBox}>채용시마감</div>}
+      </div>
+
+      <div css={flexBox}>
+        <div css={companyLogoBox}>
+          <Image fill src={imageSrc || jobData.companyLogo} alt="" onError={() => setImageSrc(defaultCompanyLogo)} />
         </div>
 
-        <div css={flexBox}>
-          <div css={companyLogoBox}>
-            <Image
-              layout="fill"
-              objectFit="contain"
-              src={imageSrc || jobData.companyLogo}
-              alt=""
-              onError={() => setImageSrc(defaultCompanyLogo)}
-            />
-          </div>
-
-          <div css={infoBox}>
-            <p css={companyNameCSS}>{jobData.companyName}</p>
-            <p css={titleCSS}>{jobData.title}</p>
-          </div>
+        <div css={infoBox}>
+          <p css={companyNameCSS}>{jobData.companyName}</p>
+          <p css={titleCSS}>{jobData.title}</p>
         </div>
+      </div>
 
-        <ul css={bottomInfo}>
-          <li>
-            <Image
-              layout="fixed"
-              objectFit="contain"
-              src={jobData.high ? highTrue : highFalse}
-              alt={jobData.high ? "고졸 지원 가능" : "고졸 지원 불가능"}
-            />
-          </li>
-          <li>
-            <Image
-              src={jobData.college ? collegeTrue : collegeFalse}
-              alt={jobData.college ? "초대졸 지원 가능" : "초대졸 지원 불가능"}
-            />
-          </li>
-          <li>
-            {jobData.placeArr[0]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
-          </li>
-          <li>
-            {jobData.rotationArr[0]} {jobData.rotationArr.length !== 1 && `외 ${jobData.rotationArr.length - 1}형태`}
-          </li>
-        </ul>
+      <ul css={bottomInfo}>
+        <li>
+          <Image src={jobData.high ? highTrue : highFalse} alt={jobData.high ? "고졸 지원 가능" : "고졸 지원 불가능"} />
+        </li>
+        <li>
+          <Image
+            src={jobData.college ? collegeTrue : collegeFalse}
+            alt={jobData.college ? "초대졸 지원 가능" : "초대졸 지원 불가능"}
+          />
+        </li>
+        <li>
+          {jobData.placeArr[0]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
+        </li>
+        <li>
+          {jobData.rotationArr[0]} {jobData.rotationArr.length !== 1 && `외 ${jobData.rotationArr.length - 1}형태`}
+        </li>
+      </ul>
     </Link>
   );
 };

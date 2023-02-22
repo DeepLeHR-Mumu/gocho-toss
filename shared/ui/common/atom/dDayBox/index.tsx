@@ -5,6 +5,6 @@ import { dDayCalculator } from "shared-util/date";
 import { DdayBoxProps } from "./type";
 import { setDdayStyleCSS } from "./style";
 
-export const DdayBox: FunctionComponent<DdayBoxProps> = ({ endTime }) => {
-  return <div css={setDdayStyleCSS(endTime)}>{dDayCalculator(endTime)}</div>;
-};
+export const DdayBox: FunctionComponent<DdayBoxProps> = ({ endTime }) => (
+  <div css={setDdayStyleCSS(endTime)}>{dDayCalculator(endTime)}</div>
+);

@@ -94,35 +94,30 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
       <button
         type="button"
         css={bookmarkButton(isBookmarked)}
-        onClick={() => {
-          return isBookmarked ? deleteJobBookmark() : addJobBookmark();
-        }}
+        onClick={() => (isBookmarked ? deleteJobBookmark() : addJobBookmark())}
         aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
       >
         <BsFillBookmarkFill />
       </button>
-      <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
-        <a css={linkButtonCSS(isMobile)}>
-          <div css={companyLogoBox}>
-            <Image
-              layout="fill"
-              objectFit="contain"
-              src={imageSrc}
-              onError={() => {
-                setImageSrc(defaultCompanyLogo);
-              }}
-              alt={`${jobData.companyName}의 로고`}
-            />
+      <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref css={linkButtonCSS(isMobile)}>
+        <div css={companyLogoBox}>
+          <Image
+            fill
+            src={imageSrc}
+            onError={() => {
+              setImageSrc(defaultCompanyLogo);
+            }}
+            alt={`${jobData.companyName}의 로고`}
+          />
+        </div>
+        <div css={jobInfoBox(isMobile)}>
+          <div css={flexBox}>
+            <DdayBox endTime={jobData.endTime} />
+            {jobData.cut && <div css={cutBox}>채용시마감</div>}
           </div>
-          <div css={jobInfoBox(isMobile)}>
-            <div css={flexBox}>
-              <DdayBox endTime={jobData.endTime} />
-              {jobData.cut && <div css={cutBox}>채용시마감</div>}
-            </div>
-            <p css={companyName}>{jobData.companyName}</p>
-            <p css={title}>{jobData.title}</p>
-          </div>
-        </a>
+          <p css={companyName}>{jobData.companyName}</p>
+          <p css={title}>{jobData.title}</p>
+        </div>
       </Link>
     </article>
   );
