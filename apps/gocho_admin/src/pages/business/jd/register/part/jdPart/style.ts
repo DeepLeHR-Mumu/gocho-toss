@@ -33,4 +33,22 @@ export const cssObj = {
     padding: 1rem;
     margin: 1rem 0;
   `,
+
+  placeContainer: css`
+    display: flex;
+    width: 50%;
+    flex-wrap: wrap;
+  `,
+
+  placeBox: css`
+    :after {
+      content: ", ";
+    }
+
+    :last-of-type {
+      :after {
+        content: "";
+      }
+    }
+  `,
 };

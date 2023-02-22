@@ -1,4 +1,4 @@
-import { FunctionComponent, FocusEvent } from "react";
+import { FunctionComponent, FocusEvent, ChangeEvent } from "react";
 import { FiUsers } from "react-icons/fi";
 import { AiOutlineMan, AiOutlineWoman } from "react-icons/ai";
 import { BiBuildingHouse, BiBus } from "react-icons/bi";
@@ -9,7 +9,7 @@ import { cssObj } from "./style";
 import { FactoryDetailInfoProps } from "./type";
 
 export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ formObj, totalWorkerNumber }) => {
-  const { register, formState } = formObj;
+  const { register, formState, setValue } = formObj;
   return (
     <div css={cssObj.gapContainer} data-testid="factory/list/FactoryDetailInfo">
       <div css={cssObj.container}>
@@ -42,6 +42,9 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ f
                   {...register("male_number", {
                     required: true,
                     valueAsNumber: true,
+                    onChange: (value: ChangeEvent<HTMLInputElement>) => {
+                      if (Number(value?.target?.value) > 1000000) setValue("male_number", 1000000);
+                    },
                   })}
                   type="number"
                   min="0"
@@ -57,7 +60,13 @@ export const FactoryDetailInfo: FunctionComponent<FactoryDetailInfoProps> = ({ f
               </div>
               <div css={cssObj.flexContainer}>
                 <input
-                  {...register("female_number", { required: true, valueAsNumber: true })}
+                  {...register("female_number", {
+                    required: true,
+                    valueAsNumber: true,
+                    onChange: (value: ChangeEvent<HTMLInputElement>) => {
+                      if (Number(value?.target?.value) > 1000000) setValue("female_number", 1000000);
+                    },
+                  })}
                   placeholder="여성"
                   type="number"
                   min="0"
