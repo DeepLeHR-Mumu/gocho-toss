@@ -3,7 +3,7 @@ export interface ExpJobCardListProps {
     | {
         id: number;
         name: string;
-        logoUrl: string;
+        logoUrl: string | null;
       }[]
     | undefined;
   isLoading: boolean;

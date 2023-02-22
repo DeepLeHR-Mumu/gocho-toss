@@ -48,10 +48,11 @@ export const cutBox = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 0.25rem;
+  padding: 0 1rem;
   border-radius: 1rem;
   width: fit-content;
   height: 1.625rem;
+  margin-top: 0.5rem;
   background-color: #f2f2f2;
   color: #1553cd;
 `;

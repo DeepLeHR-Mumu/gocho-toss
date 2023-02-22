@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useCompanyCommentArr } from "shared-api/company";
 import { useUserInfo } from "shared-api/auth";
 import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
 import { LinkButton, NormalButton } from "../../common/atom/button";
 import { SkeletonBox } from "../../common/atom/skeletonBox";
@@ -59,7 +60,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
           <div css={companyInfoContainer}>
             {!isMobile && (
               <div css={companyLogoBox}>
-                <Image fill src={companyData.logoUrl} alt={`${companyData.name} 기업 로고`} />
+                <Image fill src={companyData.logoUrl || defaultCompanyLogo} alt={`${companyData.name} 기업 로고`} />
               </div>
             )}
 
@@ -106,7 +107,11 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
         <div css={companyInfoContainer}>
           {!isMobile && (
             <div css={companyLogoBox}>
-              <Image fill src={companyData.logoUrl} alt={`${companyCommentArrData.company.name} 기업 로고`} />
+              <Image
+                fill
+                src={companyData.logoUrl || defaultCompanyLogo}
+                alt={`${companyCommentArrData.company.name} 기업 로고`}
+              />
             </div>
           )}
           <strong css={companyName}>{companyCommentArrData.company.name}</strong>

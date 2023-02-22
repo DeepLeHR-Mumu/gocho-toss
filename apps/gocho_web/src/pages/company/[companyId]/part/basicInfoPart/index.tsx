@@ -9,7 +9,19 @@ import { dateConverter } from "shared-util/date";
 import { useCompanyDetail } from "shared-api/company";
 
 import { KakaoMap } from "../../component/kakaoMap";
-import { infoContainer, flexBox, infoTitle, info, nozoImage, infoBox, pointInfo, wrapper } from "./style";
+import {
+  infoContainer,
+  flexBox,
+  infoTitle,
+  info,
+  nozoImage,
+  infoBox,
+  pointInfo,
+  wrapper,
+  nozoFlexBox,
+  nozoInfo,
+  nozoDesc,
+} from "./style";
 
 export const BasicInfoPart: FunctionComponent = () => {
   const router = useRouter();
@@ -50,9 +62,9 @@ export const BasicInfoPart: FunctionComponent = () => {
           <strong css={infoTitle}>기업 주소</strong>
           <p css={info}>{companyDetailData.address}</p>
         </div>
-        <div css={flexBox}>
+        <div css={nozoFlexBox}>
           <strong css={infoTitle}>노조여부</strong>
-          <p css={info}>
+          <p css={nozoInfo}>
             {companyDetailData.nozo.exists ? "노조 있음" : "노조 없음"}
             <span css={nozoImage}>
               <Image
@@ -62,6 +74,7 @@ export const BasicInfoPart: FunctionComponent = () => {
                 layout="fill"
               />
             </span>
+            {companyDetailData.nozo.desc && <span css={nozoDesc}>{companyDetailData.nozo.desc}</span>}
           </p>
         </div>
       </div>
