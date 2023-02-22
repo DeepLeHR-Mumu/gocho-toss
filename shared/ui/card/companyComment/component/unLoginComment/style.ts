@@ -45,15 +45,13 @@ interface BodyWrapperDef {
   (isSameUserNickname: boolean): SerializedStyles;
 }
 
-export const bodyWrapper: BodyWrapperDef = (isSameUserNickname) => {
-  return css`
-    width: 70%;
-    margin: 1rem 1rem 0 0;
-    padding: 1rem;
-    background-color: ${isSameUserNickname ? COLORS.BLUE_SECOND70 : COLORS.GRAY100};
-    border-radius: 0 1rem 1rem 1rem;
-  `;
-};
+export const bodyWrapper: BodyWrapperDef = (isSameUserNickname) => css`
+  width: 70%;
+  margin: 1rem 1rem 0 0;
+  padding: 1rem;
+  background-color: ${isSameUserNickname ? COLORS.BLUE_SECOND70 : COLORS.GRAY100};
+  border-radius: 0 1rem 1rem 1rem;
+`;
 
 export const locationCSS = css`
   font-size: 0.75rem;

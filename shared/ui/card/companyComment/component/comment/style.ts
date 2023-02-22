@@ -25,37 +25,33 @@ export const dateCSS = css`
   color: ${COLORS.GRAY40};
 `;
 
-export const bodyContainer = (isSameUserNickname: boolean) => {
-  return css`
-    display: flex;
-    align-items: flex-end;
-    position: relative;
-    margin-bottom: 2rem;
+export const bodyContainer = (isSameUserNickname: boolean) => css`
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  margin-bottom: 2rem;
 
-    ::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      border-left: 1rem solid ${isSameUserNickname ? COLORS.BLUE_SECOND70 : COLORS.GRAY100};
-      border-top: 1rem solid transparent;
-    }
-  `;
-};
+  ::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-left: 1rem solid ${isSameUserNickname ? COLORS.BLUE_SECOND70 : COLORS.GRAY100};
+    border-top: 1rem solid transparent;
+  }
+`;
 
 interface BodyWrapperDef {
   (isSameUserNickname: boolean): SerializedStyles;
 }
 
-export const bodyWrapper: BodyWrapperDef = (isSameUserNickname) => {
-  return css`
-    width: 70%;
-    margin: 1rem 1rem 0 0;
-    padding: 1rem;
-    background-color: ${isSameUserNickname ? COLORS.BLUE_SECOND70 : COLORS.GRAY100};
-    border-radius: 0 1rem 1rem 1rem;
-  `;
-};
+export const bodyWrapper: BodyWrapperDef = (isSameUserNickname) => css`
+  width: 70%;
+  margin: 1rem 1rem 0 0;
+  padding: 1rem;
+  background-color: ${isSameUserNickname ? COLORS.BLUE_SECOND70 : COLORS.GRAY100};
+  border-radius: 0 1rem 1rem 1rem;
+`;
 
 export const locationCSS = css`
   font-size: 0.75rem;

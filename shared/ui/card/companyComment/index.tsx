@@ -59,12 +59,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
           <div css={companyInfoContainer}>
             {!isMobile && (
               <div css={companyLogoBox}>
-                <Image
-                  layout="fill"
-                  objectFit="contain"
-                  src={companyData.logoUrl}
-                  alt={`${companyData.name} 기업 로고`}
-                />
+                <Image fill src={companyData.logoUrl} alt={`${companyData.name} 기업 로고`} />
               </div>
             )}
 
@@ -111,12 +106,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
         <div css={companyInfoContainer}>
           {!isMobile && (
             <div css={companyLogoBox}>
-              <Image
-                layout="fill"
-                objectFit="contain"
-                src={companyData.logoUrl}
-                alt={`${companyCommentArrData.company.name} 기업 로고`}
-              />
+              <Image fill src={companyData.logoUrl} alt={`${companyCommentArrData.company.name} 기업 로고`} />
             </div>
           )}
           <strong css={companyName}>{companyCommentArrData.company.name}</strong>
@@ -126,7 +116,9 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
 
       <section css={commentBodyContainer}>
         <div css={commentContainer} ref={commentContainerRef}>
-          {companyCommentArrData.commentArr.map((comment) => <Comment nickname={userInfoData.nickname} commentData={comment} key={comment.id} />)}
+          {companyCommentArrData.commentArr.map((comment) => (
+            <Comment nickname={userInfoData.nickname} commentData={comment} key={comment.id} />
+          ))}
         </div>
       </section>
 

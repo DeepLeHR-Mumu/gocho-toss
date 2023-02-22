@@ -16,38 +16,24 @@ import {
   reactionContainer,
 } from "./style";
 
-export const UnLoginComment: FunctionComponent = () => {
-  return (
-    <div css={container}>
-      <div css={writerContainer}>
-        <p css={usernameCSS}>userName</p>
-        <UserBadge badge="default" />
-        <p css={dateCSS}>07.15</p>
+export const UnLoginComment: FunctionComponent = () => (
+  <div css={container}>
+    <div css={writerContainer}>
+      <p css={usernameCSS}>userName</p>
+      <UserBadge badge="default" />
+      <p css={dateCSS}>07.15</p>
+    </div>
+
+    <div css={bodyContainer}>
+      <div css={bodyWrapper(false)}>
+        <p css={locationCSS}>기업정보</p>
+        <p css={bodyCSS}>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
       </div>
 
-      <div css={bodyContainer}>
-        <div css={bodyWrapper(false)}>
-          <p css={locationCSS}>기업정보</p>
-          <p css={bodyCSS}>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-        </div>
-
-        <div css={reactionContainer}>
-          <CommentLikeButton
-            isLiked={false}
-            count={0}
-            setLikeSubmit={() => {
-              return undefined;
-            }}
-          />
-          <CommentDislikeButton
-            isDisLiked={false}
-            count={0}
-            setDislikeSubmit={() => {
-              return undefined;
-            }}
-          />
-        </div>
+      <div css={reactionContainer}>
+        <CommentLikeButton isLiked={false} count={0} setLikeSubmit={() => undefined} />
+        <CommentDislikeButton isDisLiked={false} count={0} setDislikeSubmit={() => undefined} />
       </div>
     </div>
-  );
-};
+  </div>
+);

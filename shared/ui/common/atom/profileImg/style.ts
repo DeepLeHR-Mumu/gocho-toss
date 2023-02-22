@@ -13,11 +13,9 @@ export const sizeCreator: sizeCreatorDef = (size) => {
 interface WrapperDef {
   (size: "S" | "M" | "L" | "XL"): SerializedStyles;
 }
-export const wrapper: WrapperDef = (size) => {
-  return css`
-    border-radius: 50%;
-    overflow: hidden;
-    width: ${sizeCreator(size)};
-    height: ${sizeCreator(size)};
-  `;
-};
+export const wrapper: WrapperDef = (size) => css`
+  border-radius: 50%;
+  overflow: hidden;
+  width: ${sizeCreator(size)};
+  height: ${sizeCreator(size)};
+`;
