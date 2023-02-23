@@ -1,5 +1,14 @@
 import { css } from "@emotion/react";
 
+import { Noto_Sans_KR } from "@next/font/google";
+
+const currentFont = Noto_Sans_KR({
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  fallback: ["Verdana", "sans-serif"],
+});
+
 const MOBILE = `@media (max-width:400px)`;
 
 export const globalStyle = css`
@@ -94,7 +103,7 @@ export const globalStyle = css`
     vertical-align: baseline;
   }
   html {
-    font-family: Noto Sans KR, sans-serif;
+    font-family: ${currentFont.style.fontFamily};
     font-size: 16px;
     min-width: 360px;
     ${MOBILE} {
