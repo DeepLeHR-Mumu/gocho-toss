@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent } from "react";
 import { FiEye, FiYoutube } from "react-icons/fi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import Image from "next/image";
@@ -32,7 +32,6 @@ import {
 } from "./style";
 
 export const HeaderPart: FunctionComponent = () => {
-  const [imageSrc, setImageSrc] = useState<string>("");
   const router = useRouter();
   const queryClient = useQueryClient();
 
@@ -53,10 +52,6 @@ export const HeaderPart: FunctionComponent = () => {
     logo_url: companyDetailData?.logoUrl as string,
     name: companyDetailData?.name as string,
   });
-
-  useEffect(() => {
-    setImageSrc(companyDetailData?.logoUrl as string);
-  }, [companyDetailData]);
 
   if (!companyDetailData || isLoading) {
     return <div>..</div>;
@@ -110,11 +105,8 @@ export const HeaderPart: FunctionComponent = () => {
         <Image
           layout="fill"
           objectFit="contain"
-          src={imageSrc || companyDetailData.logoUrl}
+          src={companyDetailData.logoUrl || defaultCompanyLogo}
           alt={`${companyDetailData.name} 기업 로고`}
-          onError={() => {
-            return setImageSrc(defaultCompanyLogo);
-          }}
         />
       </div>
       <div css={infoContainer}>
