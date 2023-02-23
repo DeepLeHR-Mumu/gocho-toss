@@ -1,3 +1,3 @@
-export interface LoginFormValues {
+export interface FindEmailFormValues {
   email: string;
 }

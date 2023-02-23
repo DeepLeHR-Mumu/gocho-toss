@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { mainContainer, pageTitle } from "@style/commonStyles";
@@ -13,12 +13,16 @@ import { RecruiterFormValues } from "./type";
 const BusinessUser: NextPage = () => {
   const [searchWord, setSearchWord] = useState<string>("");
   const [checkMsg, setCheckMsg] = useState<string>();
+  const isSubmitting = useRef(false);
 
   const { register, handleSubmit, formState } = useForm<RecruiterFormValues>();
   const { mutate: addRecruiterMutate } = useAddRecruiter();
   const { data: companyDataObj, isLoading, isError } = useFindCompany({ word: searchWord, order: "recent" });
 
   const addRecruiterHandler: SubmitHandler<RecruiterFormValues> = (recruiterObj) => {
+    if (isSubmitting.current) return;
+    isSubmitting.current = true;
+
     addRecruiterMutate(recruiterObj, {
       onSuccess: () => {
         setCheckMsg("새로운 기업 계정이 추가되었습니다.");
@@ -26,6 +30,10 @@ const BusinessUser: NextPage = () => {
 
       onError: () => {
         setCheckMsg("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
+      },
+
+      onSettled: () => {
+        isSubmitting.current = false;
       },
     });
   };

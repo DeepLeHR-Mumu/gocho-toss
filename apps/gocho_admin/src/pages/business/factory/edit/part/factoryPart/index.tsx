@@ -26,10 +26,6 @@ export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ factory }) =>
         </div>
       </div>
       <div css={cssObj.dataContainer}>
-        <strong css={cssObj.dataTitle}>공장 이름</strong>
-        <p css={cssObj.dataBox}>{factory.product}</p>
-      </div>
-      <div css={cssObj.dataContainer}>
         <strong css={cssObj.dataTitle}>버스</strong>
         <div>
           <p css={cssObj.dataBox}>{factory.bus.exists ? "O" : "X"}</p>

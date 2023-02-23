@@ -25,6 +25,9 @@ export const SideBar: FunctionComponent = () => {
     );
   }
 
+  const userInfo =
+    userInfoData.name && userInfoData.department ? `${userInfoData.name}(${userInfoData.department})` : "-";
+
   return (
     <nav css={cssObj.wrapper}>
       <div css={cssObj.marginContainer}>
@@ -45,7 +48,7 @@ export const SideBar: FunctionComponent = () => {
             );
           })}
         </div>
-        <UserInfoBox name={`${userInfoData.name}(${userInfoData.department})`} />
+        <UserInfoBox name={userInfo} />
       </div>
     </nav>
   );

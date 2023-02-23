@@ -3,7 +3,7 @@ export type CompanyCardListProps = {
     | {
         id: number;
         name: string;
-        logoUrl: string;
+        logoUrl: string | null;
       }[]
     | undefined;
   isLoading: boolean;

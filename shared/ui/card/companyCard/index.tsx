@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BsFillBookmarkFill } from "react-icons/bs";
@@ -16,8 +16,6 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
   userId,
   isSkeleton,
 }) => {
-  const [imageSrc, setImageSrc] = useState(companyData?.logoUrl as string);
-
   const { mutate: addMutate } = useAddCompanyBookmarkArr({
     id: companyData?.id as number,
     logo_url: companyData?.logoUrl as string,
@@ -64,11 +62,8 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
             <Image
               layout="fill"
               objectFit="contain"
-              src={imageSrc || companyData.logoUrl}
+              src={companyData.logoUrl || defaultCompanyLogo}
               alt={companyData.name}
-              onError={() => {
-                return setImageSrc(defaultCompanyLogo);
-              }}
             />
           </div>
         </a>

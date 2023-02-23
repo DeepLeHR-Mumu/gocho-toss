@@ -102,7 +102,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             onClickHandler={() =>
               openPostCodePopup({
                 onComplete: (addressObj: Address) => {
-                  setValue("address", addressObj.address);
+                  setValue("address", addressObj.address, { shouldDirty: true });
                 },
               })
             }
@@ -121,7 +121,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
                 }
                 openPostCodePopup({
                   onComplete: (addressObj: Address) => {
-                    setValue("address", addressObj.address);
+                    setValue("address", addressObj.address, { shouldDirty: true });
                   },
                 });
               }}

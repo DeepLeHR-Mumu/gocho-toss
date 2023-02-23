@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BsChevronRight } from "react-icons/bs";
@@ -36,8 +36,6 @@ import {
 } from "./style";
 
 export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton> = ({ companyData, isSkeleton }) => {
-  const [imageSrc, setImageSrc] = useState(companyData?.logoUrl as string);
-
   const { data: jobDataArr } = useJobArr({
     companyId: companyData?.id,
     filter: "expired",
@@ -61,11 +59,8 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
           <Image
             layout="fill"
             objectFit="contain"
-            src={imageSrc || companyData.logoUrl}
+            src={companyData.logoUrl || defaultCompanyLogo}
             alt={companyData.name}
-            onError={() => {
-              return setImageSrc(defaultCompanyLogo);
-            }}
           />
         </div>
         <div>
