@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FiYoutube } from "react-icons/fi";
@@ -38,7 +38,6 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
   const queryClient = useQueryClient();
   const { setCurrentModal } = useModal();
   const { isSuccess } = useUserInfo();
-  const [imageSrc, setImageSrc] = useState(jobDetailData.company.logoUrl as string);
   const router = useRouter();
 
   const { mutate: mutateJdApplyClick } = useJdApplyClick();
@@ -110,10 +109,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
         <div css={logoContainer}>
           <div css={logoBox}>
             <Image
-              onError={() => {
-                return setImageSrc(defaultCompanyLogo);
-              }}
-              src={imageSrc || jobDetailData.company.logoUrl}
+              src={jobDetailData.company.logoUrl || defaultCompanyLogo}
               alt={jobDetailData.company.name}
               layout="fill"
               objectFit="contain"

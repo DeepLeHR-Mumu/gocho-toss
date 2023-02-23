@@ -11,6 +11,7 @@ export const ModalComponent: FunctionComponent<modalComponentProps> = ({ childre
       position: fixed; 
       top: 0;
       left:0;
+      width:100%;
       min-width:1440px;
       overflow-x:hidden;
       overflow-y: hidden;

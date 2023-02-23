@@ -61,7 +61,7 @@ export interface ResponseObjDef {
       };
       hire_number: number;
       pay_arr: string[] | null;
-      preferred_certi_arr: string[];
+      preferred_certi_arr: string[] | null;
       preferred_etc_arr: string[] | null;
     }[];
     company: {

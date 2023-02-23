@@ -17,6 +17,10 @@ export const cssObj = {
     cursor: pointer;
   `,
 
+  hiddenInput: css`
+    display: none;
+  `,
+
   input: (width: number) => css`
     position: relative;
     display: flex;
