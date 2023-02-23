@@ -122,7 +122,7 @@ const Instagram: NextPage = () => {
               <li key={job.id} css={jobContainer}>
                 <div css={jobInfoContainer}>
                   <div css={companyLogo}>
-                    <Image src={job.companyLogo || defaultCompanyLogo} fill alt="" />
+                    <Image src={job.companyLogo || defaultCompanyLogo} fill alt="" sizes="1" />
                   </div>
                   <div css={companyInfo}>
                     <div css={infoName}>{job.companyName}</div>
