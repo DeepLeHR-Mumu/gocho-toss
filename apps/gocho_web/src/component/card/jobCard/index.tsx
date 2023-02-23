@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { BsFillBookmarkFill } from "react-icons/bs";
@@ -86,8 +86,6 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
     },
   });
 
-  const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
-
   if (isSkeleton || !jobData) {
     return (
       <div css={jobCardSkeleton}>
@@ -171,11 +169,8 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
                 <Image
                   layout="fill"
                   objectFit="contain"
-                  src={imageSrc || jobData.companyLogo}
+                  src={jobData.companyLogo || defaultCompanyLogo}
                   alt={jobData.companyName}
-                  onError={() => {
-                    return setImageSrc(defaultCompanyLogo);
-                  }}
                 />
               </div>
             </div>
