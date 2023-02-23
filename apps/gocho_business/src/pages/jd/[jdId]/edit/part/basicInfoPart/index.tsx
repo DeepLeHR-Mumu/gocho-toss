@@ -145,8 +145,8 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                     <input
                       id={`processArr${item.id}`}
                       css={cssObj.erasableInput(11.5)}
-                      placeholder={`${index + 1}차 (최대 20자)`}
-                      maxLength={20}
+                      placeholder={`${index + 1}차 (최대 30자)`}
+                      maxLength={30}
                       onFocus={() => {
                         clearErrors(`process_arr.${index}`);
                         focusedArrOnFocusHandler(setProcessIsFocusedArr, index);
@@ -214,8 +214,8 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                   <input
                     id={`applyRouteArr${item.id}`}
                     css={cssObj.erasableInput(18)}
-                    placeholder="지원 방법/제출 서류 (최대 30자)"
-                    maxLength={30}
+                    placeholder="지원 방법/제출 서류 (최대 50자)"
+                    maxLength={50}
                     onFocus={() => {
                       clearErrors(`apply_route_arr.${index}`);
                       focusedArrOnFocusHandler(setApplyRouteIsFocusedArr, index);
@@ -281,7 +281,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
             <div css={cssObj.addButtonWrapper}>
               <AddFieldButton
                 onClickHandler={() => {
-                  if (applyRouteArr.fields.length < 10) {
+                  if (applyRouteArr.fields.length < 15) {
                     applyRouteArr.append({ value: "" });
                     setApplyRouteIsFocusedArr((prev) => [...prev, false]);
                   }
