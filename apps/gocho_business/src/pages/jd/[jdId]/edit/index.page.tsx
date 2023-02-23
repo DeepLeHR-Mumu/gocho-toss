@@ -168,7 +168,7 @@ const JdEditPage: NextPageWithLayout = () => {
                 factory_arr: position.place.factory_arr?.length === 0 ? null : position.place.factory_arr,
                 etc: position.place.etc?.length === 0 ? null : position.place.etc,
               },
-              preferred_certi_arr: position.preferred_certi_arr?.length === 0 ? [] : position.preferred_certi_arr,
+              preferred_certi_arr: position.preferred_certi_arr?.length === 0 ? null : position.preferred_certi_arr,
               preferred_etc_arr: getFieldArrayValueWithNull(position.preferred_etc_arr),
             })),
           },
