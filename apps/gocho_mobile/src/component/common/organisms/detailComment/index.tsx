@@ -30,7 +30,6 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
     companyId: Number(detailData?.companyId),
   });
 
-  const [imageSrc, setImageSrc] = useState(detailData?.logoUrl as string);
   const [isTotalComment, setIsTotalComment] = useState<boolean>(true);
 
   useEffect(() => {
@@ -72,10 +71,7 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
               </button>
               <div css={imageBox}>
                 <Image
-                  onError={() => {
-                    return setImageSrc(defaultCompanyLogo);
-                  }}
-                  src={imageSrc || detailData?.logoUrl}
+                  src={detailData?.logoUrl || defaultCompanyLogo}
                   alt={detailData?.name}
                   objectFit="contain"
                   layout="fill"
@@ -141,10 +137,7 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
             </button>
             <div css={imageBox}>
               <Image
-                onError={() => {
-                  return setImageSrc(defaultCompanyLogo);
-                }}
-                src={imageSrc || companyCommentArrData.company.logoUrl}
+                src={companyCommentArrData.company.logoUrl || defaultCompanyLogo}
                 alt={companyCommentArrData.company.name}
                 objectFit="contain"
                 layout="fill"
