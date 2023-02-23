@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { BsFillBookmarkFill } from "react-icons/bs";
@@ -34,8 +34,6 @@ export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSke
   jobData,
   isSkeleton,
 }) => {
-  const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
-
   const queryClient = useQueryClient();
 
   const { mutate: addMutate } = useAddJobBookmarkArr({
@@ -107,15 +105,7 @@ export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSke
         <a aria-label={`${jobData.title} 채용 공고로 이동`}>
           <div css={flexBox}>
             <div css={companyLogoBox}>
-              <Image
-                layout="fill"
-                objectFit="contain"
-                src={imageSrc}
-                alt=""
-                onError={() => {
-                  return setImageSrc(defaultCompanyLogo);
-                }}
-              />
+              <Image layout="fill" objectFit="contain" src={jobData.companyLogo || defaultCompanyLogo} alt="" />
             </div>
 
             <div css={infoBox}>

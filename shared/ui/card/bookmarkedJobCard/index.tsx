@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import Image from "next/image";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import Link from "next/link";
@@ -32,7 +32,6 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
   userId,
   isSkeleton,
 }) => {
-  const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
   const queryClient = useQueryClient();
 
   const { mutate: addMutate } = useAddJobBookmarkArr({
@@ -94,9 +93,7 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
       <button
         type="button"
         css={bookmarkButton(isBookmarked)}
-        onClick={() => {
-          return isBookmarked ? deleteJobBookmark() : addJobBookmark();
-        }}
+        onClick={() => (isBookmarked ? deleteJobBookmark() : addJobBookmark())}
         aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
       >
         <BsFillBookmarkFill />
@@ -107,10 +104,7 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
             <Image
               layout="fill"
               objectFit="contain"
-              src={imageSrc}
-              onError={() => {
-                setImageSrc(defaultCompanyLogo);
-              }}
+              src={jobData.companyLogo || defaultCompanyLogo}
               alt={`${jobData.companyName}의 로고`}
             />
           </div>
