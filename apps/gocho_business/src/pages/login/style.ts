@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
@@ -39,22 +40,26 @@ export const cssObj = {
     width: 100%;
   `,
   inputBox: css`
-    > li {
-      margin-bottom: 1.75rem;
-      width: 100%;
-      background-color: ${COLORS.GRAY100};
-      border: 1px solid ${COLORS.GRAY10};
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.75rem 1rem;
-    }
+    margin-bottom: 1.75rem;
+    position: relative;
+    width: 100%;
+    background-color: ${COLORS.GRAY100};
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   `,
-  inputCSS: css`
+  inputCSS: (isError: boolean) => css`
     font-size: 1rem;
+    padding: 0.75rem 4rem 0.75rem 1rem;
     font-weight: 400;
-    width: 90%;
+    width: 100%;
+    border-radius: 5px;
     box-shadow: 0 0 0 1000px ${COLORS.GRAY100} inset;
+    border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+
+    :focus {
+      border-color: ${COLORS.BLUE_FIRST40};
+    }
 
     ::placeholder {
       font-size: 1rem;
@@ -62,17 +67,20 @@ export const cssObj = {
     }
   `,
   eyeButtonCSS: css`
+    z-index: 10;
     font-size: 1.5rem;
     color: ${COLORS.GRAY40};
+    position: absolute;
+    right: 1rem;
   `,
   errorMsg: css`
     font-size: 1rem;
     height: 1rem;
     margin: 2rem 0;
     text-align: center;
-    line-height: 0;
+    line-height: 1;
     display: block;
-    color: ${COLORS.GRAY10};
+    color: ${COLORS.ERROR_RED40};
     font-weight: 400;
   `,
   bottomBox: css`
@@ -81,7 +89,7 @@ export const cssObj = {
     justify-content: space-between;
   `,
   findPasswordButton: css`
-    font-size: ${COLORS.GRAY10};
+    color: ${COLORS.GRAY30};
     font-size: 0.875rem;
     font-weight: 400;
     text-decoration: underline;
@@ -95,7 +103,25 @@ export const cssObj = {
     font-size: 1rem;
     font-weight: 400;
     color: ${COLORS.GRAY100};
-    background-color: ${COLORS.GRAY40};
-    height: 2.5rem;
+    background-color: ${COLORS.GRAY65};
+    height: 3rem;
+  `,
+  submitButton: (isActive: boolean) => css`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ${isActive ? COLORS.BLUE_FIRST40 : COLORS.GRAY65};
+    color: ${COLORS.GRAY100};
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 1rem 0;
+  `,
+  signupButton: css`
+    display: block;
+    text-align: center;
+    margin-top: 2rem;
+    color: ${COLORS.BLUE_NEON30};
   `,
 };

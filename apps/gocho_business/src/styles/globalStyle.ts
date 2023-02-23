@@ -1,5 +1,7 @@
 import { css } from "@emotion/react";
 
+import { COLORS } from "shared-style/color";
+
 export const globalStyle = css`
   * {
     box-sizing: border-box;
@@ -139,16 +141,25 @@ export const globalStyle = css`
   blockquote:after,
   q:before,
   q:after {
-    content: "";
     content: none;
   }
   table {
     border-collapse: collapse;
     border-spacing: 0;
   }
+  p,
+  strong,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: ${COLORS.GRAY10};
+  }
   a {
     text-decoration: none;
-    color: inherit;
+    color: ${COLORS.GRAY10};
   }
   input,
   select,
@@ -164,6 +175,7 @@ export const globalStyle = css`
     display: flex;
     align-items: center;
     justify-content: center;
+    appearance: none;
   }
   textarea {
     font-family: "Noto Sans KR", Verdana, sans-serif;
@@ -173,5 +185,11 @@ export const globalStyle = css`
     ::-webkit-inner-spin-button {
       appearance: none;
     }
+  }
+  input:focus {
+    outline-offset: 0.3rem;
+  }
+  button:focus {
+    outline-offset: 0.3rem;
   }
 `;

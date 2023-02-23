@@ -5,7 +5,7 @@ import { AdminResponseDef } from "shared-type/api/responseType";
 
 export interface RequestObjDef {
   companyId: number;
-  type: string;
+  type: "update";
 }
 
 export interface AcceptCompanyDef {

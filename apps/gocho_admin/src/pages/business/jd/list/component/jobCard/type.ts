@@ -2,7 +2,10 @@ export interface JobCardProps {
   job: {
     id: number;
     applyUrl: string;
-    status: string;
+    status: {
+      name: string;
+      reason: string | null;
+    };
     companyName: string;
     companyId: number;
     title: string;

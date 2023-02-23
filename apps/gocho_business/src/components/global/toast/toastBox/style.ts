@@ -7,7 +7,7 @@ export const wrapper = css`
   width: fit-content;
   padding: 1rem 3rem;
   position: fixed;
-  z-index: 70;
+  z-index: 120;
   border-radius: 2rem;
   display: flex;
   align-items: center;
@@ -42,5 +42,4 @@ export const wrapper = css`
 export const descCSS = css`
   color: ${COLORS.GRAY100};
   font-size: 1rem;
-  font-weight: 400;
 `;

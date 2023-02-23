@@ -1,13 +1,14 @@
-import { useRouter } from "next/router";
 import { useEffect } from "react";
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import { useRouter } from "next/router";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
+import dayjs from "dayjs";
 
 import { BUSINESS_BACKEND_URL } from "shared-constant/externalURL";
 import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 
-import { INTERNAL_URL } from "@/constants/index";
-
-import { tokenService } from "@/utils/tokenService";
+import { useModal } from "@/globalStates/useModal";
+import { INTERNAL_URL } from "@/constants/url";
+import { useUserState } from "@/globalStates/useUserState";
 import { ErrorResponseDef } from "@/types/errorType";
 
 export const axiosNoTokenInstance = axios.create({
@@ -22,103 +23,114 @@ export const axiosInstance = axios.create({
 
 export const useAxiosInterceptor = () => {
   const router = useRouter();
-  let lock = false;
-  let subscribers: ((token: string) => void)[] = [];
+  const accessTokenLimitMs = 10000;
+  let isRequestLock = false;
+  let readyQueueArr: ((token: string) => void)[] = [];
 
-  const goToLoginPage = () => {
-    tokenService.removeAllToken();
-    router.push(INTERNAL_URL.LOGIN);
-  };
+  const { setCurrentModal } = useModal();
+  const { setUserInfoData } = useUserState();
+  const saveQueue = (callback: (token: string) => void) => readyQueueArr.push(callback);
+  const activeQueue = (token: string) => readyQueueArr.forEach((callback) => callback(token));
 
-  const subscribeTokenRefresh = (callback: (token: string) => void) => {
-    subscribers.push(callback);
-  };
+  // 어세스토큰이 만료 된 경우 refresh api를 호출하여 access, refresh 토큰을 재발급 받는 함수
+  const getRefreshTokenCreator = async (): Promise<{ newToken: string } | void> => {
+    const refreshToken = localStorage.getItem("refreshToken");
 
-  const onRefreshed = (token: string) => {
-    subscribers.forEach((callback) => callback(token));
-  };
+    if (!refreshToken) throw new axios.Cancel("요청 취소");
 
-  const getRefreshToken = async (): Promise<string | void> => {
-    try {
-      const refreshToken = tokenService.getRefreshToken();
-      const { data: newTokenData } = await axios.get(`${BUSINESS_BACKEND_URL}/auth/refresh`, {
+    const refreshResults = await axios
+      .get(`${BUSINESS_BACKEND_URL}/auth/refresh`, {
         headers: { "x-refresh-token": refreshToken },
+      })
+      .then(({ data }) => {
+        localStorage.setItem("accessToken", data.data.access_token);
+        localStorage.setItem("refreshToken", data.data.refresh_token);
+        // interceptor request안에서 어세스토큰이 만료된 이후 저장된 api 큐를 실행
+        activeQueue(data.data.access_token);
+      })
+      .catch((error) => {
+        const { error_code } = error.response.data;
+        if (error_code === "EMPTY_JWT") {
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          setUserInfoData(null);
+          router.push(INTERNAL_URL.LOGIN);
+          throw new axios.Cancel("재요청 취소");
+        }
+      })
+      .finally(() => {
+        isRequestLock = false;
+        readyQueueArr = [];
       });
-      lock = false;
-      onRefreshed(newTokenData.data.access_token);
-      subscribers = [];
-      tokenService.updateAllToken(`${newTokenData.data.access_token}`, `${newTokenData.data.refresh_token}`);
-      return newTokenData.data.access_token;
-    } catch (error) {
-      lock = false;
-      subscribers = [];
-      tokenService.removeAllToken();
-    }
-    return undefined;
+
+    return refreshResults;
   };
 
   const requestConfigHandler = async (config: AxiosRequestConfig) => {
-    const accessToken = tokenService.getAccessToken();
-    const refreshToken = tokenService.getRefreshToken();
+    const accessTokenData = localStorage.getItem("accessToken");
+    const refreshTokenData = localStorage.getItem("refreshToken");
 
-    if (!accessToken || !refreshToken) {
-      goToLoginPage();
-      return null;
+    if (!accessTokenData || !refreshTokenData) {
+      router.replace(INTERNAL_URL.LOGIN);
+      throw new axios.Cancel("토큰이 존재하지 않으므로 요청취소");
     }
 
-    const { exp: refreshExp } = managerTokenDecryptor(refreshToken);
-    const refreshCreateTime = new Date(Number(refreshExp) * 1000).getTime();
-    const currentTime = new Date().getTime();
+    const { exp: accessTokenExp } = managerTokenDecryptor(accessTokenData);
+    const { exp: refreshTokenExp } = managerTokenDecryptor(refreshTokenData);
+    const accessCreateTime = dayjs(new Date(accessTokenExp * 1000), "YYYY-MM-DD HH:mm:ss.SSS");
+    const refreshCreateTime = dayjs(new Date(refreshTokenExp * 1000), "YYYY-MM-DD HH:mm:ss.SSS");
+    const currentTime = dayjs(new Date(), "YYYY-MM-DD HH:mm:ss.SSS");
+    const accessBetweenCurrentDiffTime = accessCreateTime.diff(currentTime, "ms");
+    const isRefreshAfterCurrentTime = currentTime.isAfter(refreshCreateTime);
 
-    if (refreshCreateTime !== 0 && refreshCreateTime <= currentTime) {
-      goToLoginPage();
-      return null;
+    // 1. 리프래시토큰이 만료된 경우
+    if (isRefreshAfterCurrentTime) {
+      window.alert("세션이 만료되었습니다. 재로그인 후 이용해주세요");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      setUserInfoData(null);
+      router.push(INTERNAL_URL.LOGIN);
+      throw new axios.Cancel("리프래시 토큰 만료로 인한 강제 로그인페이지 이동");
     }
 
-    const newConfig = config;
-    newConfig.headers = newConfig.headers ?? {};
-    newConfig.headers["x-access-token"] = accessToken as string;
+    // 2. 어세스토큰이 만료된 이후 처음으로 실행될 코드
+    if (accessBetweenCurrentDiffTime <= accessTokenLimitMs && !isRequestLock) {
+      isRequestLock = true;
+      await getRefreshTokenCreator();
+      const accessToken = localStorage.getItem("accessToken");
+      return {
+        ...config,
+        headers: {
+          "x-access-token": accessToken,
+        },
+      };
+    }
 
-    return newConfig;
-  };
-
-  const requestErrorHandler = async (error: AxiosError) => Promise.reject(error);
-
-  const responseConfigHandler = (response: AxiosResponse) => response;
-
-  const responseErrorHandler = async (error: AxiosError<ErrorResponseDef>) => {
-    const { config } = error;
-    const originalRequest = config;
-
-    const errorStatus = {
-      errorCode: error.response?.data.error_code,
-      errorMsg: error.response?.data.error_message,
-      path: error.response?.data.path,
-    };
-
-    if (errorStatus.path === "/auth/refresh") return Promise.reject(error);
-
-    if (lock) {
-      return new Promise((resolve) => {
-        subscribeTokenRefresh((token: string) => {
-          if (originalRequest.headers) originalRequest.headers["x-access-token"] = token;
-          resolve(axiosInstance(originalRequest));
+    // 어세스토큰이 만료된 이후 2번 call 이후 다음 진행될 api들을 saveQueue에 저장
+    if (accessBetweenCurrentDiffTime <= accessTokenLimitMs && isRequestLock) {
+      return new Promise(() => {
+        saveQueue((accessToken) => {
+          axiosInstance({ ...config, headers: { "x-access-token": accessToken } });
         });
       });
     }
 
-    lock = true;
+    // 그 외 아무이상 없는 경우 리턴값
+    return {
+      ...config,
+      headers: {
+        "x-access-token": accessTokenData,
+      },
+    };
+  };
 
-    const accessToken = await getRefreshToken();
-
-    if (accessToken) {
-      if (originalRequest.headers) originalRequest.headers["x-access-token"] = accessToken;
-      return axios(config);
-    }
-
-    if (errorStatus.errorCode === "MALFORMED_JWT" || errorStatus.errorCode === "UNAUTHORIZED") {
-      goToLoginPage();
-      return null;
+  const responseErrorHandler = async (error: AxiosError<ErrorResponseDef>) => {
+    // privateRouteLayout 컴포넌트에서 유저 토큰을 확인 하여 만약 손상된 토큰이라면 기존 토큰 삭제 후 로그인 페이지로 이동
+    if (error.response?.data.error_code === "MALFORMED_JWT" && error.config.url === "/auth/health-check") {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      router.push(INTERNAL_URL.LOGIN);
+      return Promise.resolve();
     }
 
     return Promise.reject(error);
@@ -126,13 +138,38 @@ export const useAxiosInterceptor = () => {
 
   const requestInterceptor = axiosInstance.interceptors.request.use(
     (config: AxiosRequestConfig) => requestConfigHandler(config),
-    (error) => requestErrorHandler(error)
+    (error) => Promise.reject(error)
   );
 
   const responseInterceptor = axiosInstance.interceptors.response.use(
-    (response) => responseConfigHandler(response),
-    (error: AxiosError<ErrorResponseDef>) => responseErrorHandler(error)
+    (response) => response,
+    (error) => responseErrorHandler(error)
   );
+
+  useEffect(() => {
+    const blockingRouter = () => {
+      const refreshTokenData = localStorage.getItem("refreshToken");
+      const prevUrl = sessionStorage.getItem("prevUrl");
+      if (!refreshTokenData) return null;
+
+      const { exp: refreshTokenExp } = managerTokenDecryptor(refreshTokenData);
+      const refreshCreateTime = dayjs(new Date(refreshTokenExp * 1000), "YYYY-MM-DD HH:mm:ss.SSS");
+      const currentTime = dayjs(new Date(), "YYYY-MM-DD HH:mm:ss.SSS");
+      const isRefreshAfterCurrentTime = currentTime.isAfter(refreshCreateTime);
+
+      // 이전페이지가 존재하고(사이트 사용중) 리프래시 토큰이 만료된 경우 route를 캔슬하고 로그인 모달을 출력한다.
+      if (isRefreshAfterCurrentTime && prevUrl !== "none" && router.pathname !== INTERNAL_URL.LOGIN) {
+        setCurrentModal("loginModal");
+        throw router.events.emit("routeChangeError");
+      }
+      return null;
+    };
+
+    router.events.on("routeChangeStart", blockingRouter);
+    return () => {
+      router.events.off("routeChangeStart", blockingRouter);
+    };
+  }, [setCurrentModal, router]);
 
   useEffect(
     () => () => {

@@ -6,10 +6,11 @@ import { AdminResponseDef } from "shared-type/api/responseType";
 export interface RequestObjDef {
   companyId: number;
   type: string;
+  reason: string;
 }
 
 export interface RejectCompanyDef {
-  ({ companyId, type }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ companyId, type, reason }: RequestObjDef): Promise<AdminResponseDef>;
 }
 
 export interface UseRejectCompanyProps {

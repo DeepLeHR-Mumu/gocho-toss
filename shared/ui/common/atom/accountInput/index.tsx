@@ -17,9 +17,7 @@ export const AccountInput: FunctionComponent<AccountInputProps> = ({
   const [colorState, setColorState] = useState<ColorStateDef>("error");
 
   const focusFunction = () => {
-    setIsFocus((prev) => {
-      return !prev;
-    });
+    setIsFocus((prev) => !prev);
   };
 
   useEffect(() => {

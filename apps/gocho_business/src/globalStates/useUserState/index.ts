@@ -3,23 +3,21 @@ import { useEffect } from "react";
 
 import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
 
-import { tokenService } from "@/utils/tokenService";
-
-import { UserStateInfoProps } from "./type";
+import { UserStateInfoProps, UseUserStateDef } from "./type";
 
 const userStateInfo = create<UserStateInfoProps>((set) => ({
   userState: null,
   setUserState: (status) => set(() => ({ userState: status })),
 }));
 
-export const useUserState = () => {
+export const useUserState: UseUserStateDef = () => {
   const { userState: userInfoData, setUserState: setUserInfoData } = userStateInfo();
 
   useEffect(() => {
-    const token = tokenService.getAccessToken();
+    const token = localStorage.getItem("accessToken");
 
     if (userInfoData === null && token) {
-      const { id, company_id, company_name, company_logo, iat, exp, email, name, department } =
+      const { id, company_id, company_name, company_logo, company_industry, exp, email, name, department } =
         managerTokenDecryptor(token);
 
       setUserInfoData({
@@ -30,8 +28,8 @@ export const useUserState = () => {
         email,
         name,
         department,
-        iat,
         exp,
+        companyIndustry: company_industry,
       });
     }
 
@@ -40,5 +38,9 @@ export const useUserState = () => {
     }
   }, [userInfoData, setUserInfoData]);
 
-  return { userInfoData, setUserInfoData };
+  if (userInfoData) {
+    return { userInfoData, setUserInfoData };
+  }
+
+  return { setUserInfoData };
 };

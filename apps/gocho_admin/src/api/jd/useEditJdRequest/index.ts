@@ -12,6 +12,7 @@ export const getEditJdRequest: GetEditJdRequestDef = async ({ queryKey: [{ reque
 
 export const useEditJdRequest = (requestObj: RequestObjDef) => {
   return useQuery(jdDetailRequestKeyObj.detail(requestObj), getEditJdRequest, {
+    enabled: Boolean(requestObj.id),
     select: (data) => {
       return jdDetailSelector(data);
     },

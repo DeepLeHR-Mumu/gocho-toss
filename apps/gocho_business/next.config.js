@@ -6,13 +6,14 @@ const withTM = require("next-transpile-modules")([
   "shared-style",
   "shared-image",
   "shared-ui",
+  "shared-hooks",
 ]);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [`d2nnzfahmszi6w.cloudfront.net`, `cdn.gocho-back.com`],
+    domains: [`cdn.gocho-back.com`, `devcdn.gocho-back.com`],
     formats: ["image/avif", "image/webp"],
   },
   pageExtensions: ["page.tsx"],

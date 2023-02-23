@@ -1,35 +1,43 @@
 import { css } from "@emotion/react";
 
-export const wrapper = css`
-  display: "flex";
-  width: 18rem;
-  padding: 1.5rem 0 0 0;
-  flex-direction: column;
-  justify-content: space-between;
-  border-right: 1px solid #cccccc;
-`;
+import { COLORS } from "shared-style/color";
 
-export const container = css`
-  margin: 0 1rem;
-`;
+export const cssObj = {
+  wrapper: css`
+    width: 18rem;
+    padding: 1.5rem 0 0 0;
+    border-right: 1px solid ${COLORS.GRAY80};
+    background-color: ${COLORS.GRAY100};
+    position: fixed;
+    z-index: 50;
+    height: 100vh;
+  `,
 
-export const linkCSS = css`
-  display: block;
-  font-weight: 400;
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-  padding: 0.5rem;
-  :hover {
-    background-color: pink;
-    color: white;
-    font-weight: 700;
-  }
-`;
+  marginContainer: css`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  `,
 
-export const iconCSS = css`
-  width: 1.5rem;
-  height: 1.5rem;
-  display: flex;
-  align-items: center;
-`;
+  container: css`
+    margin: 0 1rem;
+  `,
+  linkCSS: (isCurrentRoute: boolean) => css`
+    font-weight: ${isCurrentRoute ? 700 : 400};
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    background-color: ${isCurrentRoute && COLORS.BLUE_SECOND70};
+    :hover {
+      background-color: ${COLORS.GRAY80};
+    }
+    > svg {
+      height: 1.25rem;
+      width: auto;
+      margin-right: 0.75rem;
+    }
+  `,
+};

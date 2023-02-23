@@ -1,43 +1,80 @@
 import { FunctionComponent } from "react";
+import { useRouter } from "next/router";
+import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { tokenService } from "@/utils/tokenService";
+import { SharedButton } from "shared-ui/business/sharedButton";
+import { COLORS } from "shared-style/color";
+
+import bizTextMono from "@/public/image/deepleLogo/bizTextMono.svg";
+import bizTextColor from "@/public/image/deepleLogo/bizTextColor.svg";
 import { useUserState } from "@/globalStates/useUserState";
 import { useDoLogout } from "@/apis/auth/useDoLogout";
+import { INTERNAL_URL } from "@/constants/url";
+import { signupButtonClickEvent } from "@/ga/auth";
 
 import { cssObj } from "./style";
 
 export const TopBar: FunctionComponent = () => {
+  const router = useRouter();
   const { userInfoData, setUserInfoData } = useUserState();
   const { mutate: postLogout } = useDoLogout();
   const queryClient = useQueryClient();
 
   const doLogoutHandler = () => {
+    const afterLogoutActiveFunction = () => {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      setUserInfoData(null);
+      queryClient.invalidateQueries();
+      router.push(INTERNAL_URL.LOGIN);
+    };
+
     postLogout(undefined, {
+      onError(error) {
+        if (error.response?.data.error_code === "EXPIRED_JWT") {
+          afterLogoutActiveFunction();
+        }
+      },
       onSuccess: () => {
-        tokenService.removeAllToken();
-        setUserInfoData(null);
-        queryClient.invalidateQueries();
+        afterLogoutActiveFunction();
       },
     });
   };
 
+  const isLogin = Boolean(userInfoData);
+
   return (
-    <header css={cssObj.wrapper}>
+    <header css={cssObj.wrapper(isLogin)}>
       <div css={cssObj.container}>
-        <div css={cssObj.logo} />
-        <h1 css={cssObj.title}>고초대졸.business</h1>
+        <h1 css={cssObj.title}>
+          <Image
+            src={isLogin ? bizTextColor : bizTextMono}
+            alt="고초대졸닷컴 비즈니스"
+            layout="fill"
+            objectFit="contain"
+          />
+        </h1>
       </div>
       {userInfoData ? (
-        <button type="button" css={cssObj.logoutButton} onClick={doLogoutHandler}>
-          로그아웃
-        </button>
+        <SharedButton
+          onClickHandler={doLogoutHandler}
+          size="medium"
+          backgroundColor={COLORS.GRAY100}
+          borderColor={COLORS.GRAY70}
+          text="로그아웃"
+          fontColor={COLORS.GRAY10}
+          radius="round"
+        />
       ) : (
         <a
-          target="_blank"
+          css={cssObj.linkButton}
           href="https://docs.google.com/forms/d/e/1FAIpQLSfYgeAv0BREQSPEtgjHO6-1rHh-srF3EDnRHAWL2e2g1PL_Pw/viewform"
-          css={cssObj.signUpButton}
+          target="_blank"
           rel="noreferrer"
+          onClick={() => {
+            signupButtonClickEvent();
+          }}
         >
           기업회원 가입하기
         </a>

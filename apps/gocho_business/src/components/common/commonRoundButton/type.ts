@@ -4,6 +4,7 @@ import { ColorDef } from "shared-type/style/color";
 export interface CommonRoundButtonProps {
   text: string;
   onClickHandler: () => void;
-  backgoundColor: ColorDef;
+  isDisabled?: boolean;
+  backgroundColor: ColorDef;
   Icon?: IconType;
 }

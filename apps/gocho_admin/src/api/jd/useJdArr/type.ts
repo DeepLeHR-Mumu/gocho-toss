@@ -16,7 +16,10 @@ export interface ResponseObjDef {
   data: {
     id: number;
     company: { id: number; name: string; logo_url: string };
-    status: string;
+    status: {
+      name: string;
+      reason: string | null;
+    };
     title: string;
     cut: boolean;
     view: number;

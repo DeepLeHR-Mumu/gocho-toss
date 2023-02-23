@@ -48,8 +48,14 @@ cypress/screenshots
 /test-results/
 /playwright-report/
 /playwright/.cache/
+**/storageState.json
+
 # vscode
 .vscode
 
 # jetbrain
 .idea
+
+# storybook
+storybook-static/
+
