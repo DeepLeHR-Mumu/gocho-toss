@@ -9,7 +9,6 @@ import { DetailCommentProps } from "./type";
 import { commentButton, commentButtonContainer, companyName, flexBox, headerCSS, imageBox, wrapper } from "./style";
 
 export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, userInfo, commentDataArr }) => {
-  const [imageSrc, setImageSrc] = useState(commentDataArr.company.logoUrl);
   const [isTotalComment, setIsTotalComment] = useState<boolean>(true);
 
   if (!userInfo || commentDataArr.commentArr === null) {
@@ -19,10 +18,7 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, use
           <div css={flexBox}>
             <div css={imageBox}>
               <Image
-                onError={() => {
-                  return setImageSrc(defaultCompanyLogo);
-                }}
-                src={imageSrc || commentDataArr.company.logoUrl}
+                src={commentDataArr.company.logoUrl || defaultCompanyLogo}
                 alt={commentDataArr.company.name}
                 objectFit="contain"
                 layout="fill"
@@ -73,10 +69,7 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, use
         <div css={flexBox}>
           <div css={imageBox}>
             <Image
-              onError={() => {
-                return setImageSrc(defaultCompanyLogo);
-              }}
-              src={imageSrc || commentDataArr.company.logoUrl}
+              src={commentDataArr.company.logoUrl || defaultCompanyLogo}
               alt={commentDataArr.company.name}
               objectFit="contain"
               layout="fill"

@@ -71,7 +71,9 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
     <>
       <div css={cssObj.contractTypeWrapper}>
         <div css={cssObj.container}>
-          <p>계약 형태</p>
+          <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.contract_type))}>
+            계약 형태
+          </p>
           <div css={cssObj.labelContainer}>
             {CONTRACT_TYPE_ARR.map((contractName) => (
               <SharedRadioButton
@@ -79,7 +81,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                 value={contractName}
                 id={`${contractName}${id}`}
                 registerObj={register(`position_arr.${positionIndex}.contract_type`, {
-                  required: true,
+                  required: "계약 형태는 필수 입력 값입니다",
                   onChange: () => {
                     if (!isConversionDisabled) {
                       clearErrors(`position_arr.${positionIndex}.conversion_rate`);
@@ -92,6 +94,10 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
               </SharedRadioButton>
             ))}
           </div>
+          <p css={cssObj.errorMessage}>
+            {formState.errors.position_arr?.[positionIndex]?.contract_type &&
+              formState.errors.position_arr?.[positionIndex]?.contract_type?.message}
+          </p>
         </div>
         <div css={cssObj.container}>
           <p>전환율</p>
@@ -182,7 +188,9 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
       </div>
       <div css={cssObj.contractTypeWrapper}>
         <div css={cssObj.container}>
-          <p>경력 조건</p>
+          <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.required_exp))}>
+            경력 조건
+          </p>
           <div css={cssObj.labelContainer}>
             {REQUIRED_EXP_ARR.map((expName) => (
               <label key={`${expName}${id}`} htmlFor={`${expName}${id}`} css={cssObj.label}>
@@ -191,7 +199,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
                   id={`${expName}${id}`}
                   css={cssObj.radio}
                   {...register(`position_arr.${positionIndex}.required_exp`, {
-                    required: true,
+                    required: "경력 조건은 필수 입력 사항입니다",
                   })}
                   value={expName}
                 />
@@ -200,6 +208,10 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
               </label>
             ))}
           </div>
+          <p css={cssObj.errorMessage}>
+            {formState.errors.position_arr?.[positionIndex]?.required_exp &&
+              formState.errors.position_arr?.[positionIndex]?.required_exp?.message}
+          </p>
         </div>
         <div css={cssObj.container}>
           <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.min_year))}>최소경력(연)</p>
@@ -207,13 +219,14 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
             <input
               type="number"
               min="1"
-              max="100"
+              max="50"
               css={cssObj.activatableInput(isMinYearDisabled)}
               {...register(`position_arr.${positionIndex}.min_year`, {
                 required: { value: !isMinYearDisabled, message: "최소 경력은 필수 입력 사항입니다" },
                 disabled: isMinYearDisabled,
+                min: { value: 1, message: "최소 경력은 1년 이상이어야 합니다" },
+                max: { value: 50, message: "최소 경력은 50년 이하이어야 합니다" },
                 onBlur: () => trigger(`position_arr.${positionIndex}.max_year`),
-                validate: (value) => (value && value > 0) || "최소 경력은 1년 이상이어야 합니다.",
                 valueAsNumber: true,
               })}
             />
@@ -250,6 +263,7 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
               {...register(`position_arr.${positionIndex}.max_year`, {
                 required: { value: !isMaxYearDisabled, message: "최대 경력은 필수 입력 사항입니다" },
                 disabled: isMaxYearDisabled,
+                max: { value: 50, message: "최소 경력은 50년 이하이어야 합니다" },
                 validate: (value) =>
                   (value || 1) > (watch("position_arr")[positionIndex].min_year || 0) ||
                   "최소 경력 조건이 최대보다 작거나 같을 수 없습니다.",

@@ -40,7 +40,7 @@ import { getFieldArrayValue, getFieldArrayValueWithNull, setFieldArray } from ".
 import { cssObj } from "./style";
 
 const JdEditPage: NextPageWithLayout = () => {
-  const [isCardOpenArr, setIsCardOpenArr] = useState<boolean[]>([false]);
+  const [isCardOpenArr, setIsCardOpenArr] = useState<boolean[]>([true]);
   const isEditLoading = useRef(false);
   const isDeleteLoading = useRef(false);
   const isEndLoading = useRef(false);
@@ -101,6 +101,7 @@ const JdEditPage: NextPageWithLayout = () => {
         {
           onSuccess: () => {
             setToast("마감되었습니다");
+            router.push(INTERNAL_URL.JD_LIST);
             queryClient.invalidateQueries(jdArrKeyObj.all);
           },
 
@@ -122,6 +123,7 @@ const JdEditPage: NextPageWithLayout = () => {
         {
           onSuccess: () => {
             setToast("삭제되었습니다");
+            router.push(INTERNAL_URL.JD_LIST);
             queryClient.invalidateQueries(jdArrKeyObj.all);
           },
 
@@ -160,7 +162,13 @@ const JdEditPage: NextPageWithLayout = () => {
               task_detail_arr: getFieldArrayValue(position.task_detail_arr),
               required_etc_arr: getFieldArrayValueWithNull(position.required_etc_arr),
               pay_arr: getFieldArrayValue(position.pay_arr),
-              preferred_certi_arr: position.preferred_certi_arr ? position.preferred_certi_arr : null,
+              place: {
+                type: position.place.type,
+                address_arr: position.place.address_arr?.length === 0 ? null : position.place.address_arr,
+                factory_arr: position.place.factory_arr?.length === 0 ? null : position.place.factory_arr,
+                etc: position.place.etc?.length === 0 ? null : position.place.etc,
+              },
+              preferred_certi_arr: position.preferred_certi_arr?.length === 0 ? null : position.preferred_certi_arr,
               preferred_etc_arr: getFieldArrayValueWithNull(position.preferred_etc_arr),
             })),
           },
