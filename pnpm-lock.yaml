@@ -24,7 +24,6 @@ importers:
   apps/gocho_admin:
     specifiers:
       '@emotion/react': ^11.10.0
-      '@next/font': ^13.1.6
       '@tanstack/react-query': ^4.2.3
       '@tanstack/react-query-devtools': ^4.2.3
       '@types/node': 18.7.13
@@ -54,7 +53,6 @@ importers:
       '@emotion/react': 11.10.6_ug65io7jkbhmo4fihdmbrh3ina
       '@tanstack/react-query': 4.24.10_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-query-devtools': 4.24.10_636dldj5wfr5vkyyqzs5k363kq
-      '@next/font': 13.1.6
       '@types/react-color': 3.0.6
       axios: 0.27.2
       next: 13.1.6_biqbaboplfbrettd7655fr4n2y
@@ -2520,6 +2518,7 @@ packages:
 
   /@next/font/13.1.6:
     resolution: {integrity: sha512-AITjmeb1RgX1HKMCiA39ztx2mxeAyxl4ljv2UoSBUGAbFFMg8MO7YAvjHCgFhD39hL7YTbFjol04e/BPBH5RzQ==}
+    dev: true
 
   /@next/swc-android-arm-eabi/13.1.6:
     resolution: {integrity: sha512-F3/6Z8LH/pGlPzR1AcjPFxx35mPqjE5xZcf+IL+KgbW9tMkp7CYi1y7qKrEWU7W4AumxX/8OINnDQWLiwLasLQ==}
