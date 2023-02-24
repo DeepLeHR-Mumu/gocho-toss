@@ -72,7 +72,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
         </label>
         {imageSrc && (
           <div css={logoPreviewContainer}>
-            <Image layout="fill" objectFit="contain" src={imageSrc} alt="" />
+            <Image fill src={imageSrc} alt="" />
           </div>
         )}
       </div>
