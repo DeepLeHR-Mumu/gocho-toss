@@ -1,14 +1,6 @@
 import { css } from "@emotion/react";
-import { Noto_Sans_KR } from "@next/font/google";
 
 import { COLORS } from "shared-style/color";
-
-const currentFont = Noto_Sans_KR({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  fallback: ["Verdana", "sans-serif"],
-});
 
 export const globalStyle = css`
   * {
@@ -102,7 +94,7 @@ export const globalStyle = css`
     vertical-align: baseline;
   }
   html {
-    font-family: ${currentFont.style.fontFamily};
+    font-family: "Noto Sans KR", Verdana, sans-serif;
     font-size: 16px;
     min-width: 1440px;
   }
@@ -186,7 +178,7 @@ export const globalStyle = css`
     appearance: none;
   }
   textarea {
-    font-family: ${currentFont.style.fontFamily};
+    font-family: "Noto Sans KR", Verdana, sans-serif;
   }
   input[type="number"] {
     ::-webkit-outer-spin-button,
