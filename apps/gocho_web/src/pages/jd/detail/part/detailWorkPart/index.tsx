@@ -95,10 +95,10 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
             })}
 
             {!freshPosition.place.addressArr && !freshPosition.place.factoryArr && (
-              <div css={placeContainer} key={`지역_${freshPosition.place.etc}`}>
-                <div css={typeText}>{freshPosition.place.type}</div>
-                <p css={restPoint}>{freshPosition.place.etc}</p>
-              </div>
+              <p css={placeContainer} key={`지역_${freshPosition.place.etc}`}>
+                <span css={typeText}>{freshPosition.place.type}</span>
+                <span css={restPoint}>{freshPosition.place.etc}</span>
+              </p>
             )}
 
             {freshPosition.place.factoryArr?.map((factory) => {
