@@ -17,6 +17,8 @@ import {
   flexDesc,
   typeText,
   placeContainer,
+  placeDesc,
+  factoryAddressDesc,
 } from "./style";
 
 export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPosition }) => {
@@ -84,21 +86,21 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
         <div css={flexBetweenBox}>
           <p css={subTitle}>근무지</p>
           <div>
-            <p css={flexDesc}>
-              {freshPosition.place.addressArr?.map((place) => {
-                return (
-                  <div key={`지역_${place}`}>
-                    <p css={restPoint}>{place}</p>
-                  </div>
-                );
-              })}
-              {!freshPosition.place.addressArr && !freshPosition.place.factoryArr && (
-                <div css={placeContainer} key={`지역_${freshPosition.place.etc}`}>
-                  <div css={typeText}>{freshPosition.place.type}</div>
-                  <p css={restPoint}>{freshPosition.place.etc}</p>
-                </div>
-              )}
-            </p>
+            {freshPosition.place.addressArr?.map((place) => {
+              return (
+                <p css={placeDesc} key={`지역_${place}`}>
+                  {place}
+                </p>
+              );
+            })}
+
+            {!freshPosition.place.addressArr && !freshPosition.place.factoryArr && (
+              <div css={placeContainer} key={`지역_${freshPosition.place.etc}`}>
+                <div css={typeText}>{freshPosition.place.type}</div>
+                <p css={restPoint}>{freshPosition.place.etc}</p>
+              </div>
+            )}
+
             {freshPosition.place.factoryArr?.map((factory) => {
               return (
                 <div css={flexDesc} key={`${factory.factoryName}_${factory.id}`}>
@@ -112,7 +114,7 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
                     <Image src={factoryIcon} alt="" objectFit="contain" />
                     {factory.factoryName}
                   </button>
-                  {factory.address}
+                  <p css={factoryAddressDesc}>{factory.address}</p>
                 </div>
               );
             })}
