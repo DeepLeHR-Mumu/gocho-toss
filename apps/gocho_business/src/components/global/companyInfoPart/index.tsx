@@ -26,7 +26,7 @@ export const CompanyInfoPart = () => {
   return (
     <section css={cssObj.wrapper}>
       <div css={cssObj.logo}>
-        <Image src={userInfoData.companyLogo} alt={userInfoData.companyName} fill />
+        <Image src={userInfoData.companyLogo} alt={userInfoData.companyName} fill sizes="1" />
       </div>
       <div css={cssObj.companyInfoBox}>
         <strong css={cssObj.companyNameCSS}>{userInfoData.companyName}</strong>
