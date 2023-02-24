@@ -14,6 +14,10 @@ export const cssObj = {
     position: relative;
     width: 11.875rem;
     height: 17.5rem;
+
+    > img {
+      object-fit: contain;
+    }
   `,
   title: css`
     color: ${COLORS.GRAY10};

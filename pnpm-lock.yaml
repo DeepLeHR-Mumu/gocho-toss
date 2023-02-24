@@ -86,6 +86,7 @@ importers:
       '@datadog/browser-rum': ^4.21.1
       '@emotion/babel-preset-css-prop': ^11.10.0
       '@emotion/react': ^11.10.0
+      '@next/font': ^13.2.1
       '@playwright/test': 1.28.0
       '@storybook/addon-actions': ^7.0.0-beta.50
       '@storybook/addon-essentials': ^7.0.0-beta.50
@@ -127,6 +128,7 @@ importers:
     dependencies:
       '@datadog/browser-rum': 4.34.1
       '@emotion/react': 11.10.6_ug65io7jkbhmo4fihdmbrh3ina
+      '@next/font': 13.2.1
       '@playwright/test': 1.28.0
       '@tanstack/react-query': 4.24.10_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-query-devtools': 4.24.10_636dldj5wfr5vkyyqzs5k363kq
@@ -2516,9 +2518,8 @@ packages:
       glob: 7.1.7
     dev: true
 
-  /@next/font/13.1.6:
-    resolution: {integrity: sha512-AITjmeb1RgX1HKMCiA39ztx2mxeAyxl4ljv2UoSBUGAbFFMg8MO7YAvjHCgFhD39hL7YTbFjol04e/BPBH5RzQ==}
-    dev: true
+  /@next/font/13.2.1:
+    resolution: {integrity: sha512-4sergLt7xp9+mZuKME/xM4tLlHGTcmL7naCq0qCTcAlof6NnttshYgiLOdhSiy0NcI+/yM3BjvdEk++O96UzTg==}
 
   /@next/swc-android-arm-eabi/13.1.6:
     resolution: {integrity: sha512-F3/6Z8LH/pGlPzR1AcjPFxx35mPqjE5xZcf+IL+KgbW9tMkp7CYi1y7qKrEWU7W4AumxX/8OINnDQWLiwLasLQ==}
@@ -3805,7 +3806,7 @@ packages:
         optional: true
     dependencies:
       '@babel/core': 7.21.0
-      '@next/font': 13.1.6
+      '@next/font': 13.2.1
       '@storybook/addon-actions': 7.0.0-beta.53_biqbaboplfbrettd7655fr4n2y
       '@storybook/builder-webpack5': 7.0.0-beta.53_oagufmyw5l5xsvhirlcy6x7ihu
       '@storybook/core-common': 7.0.0-beta.53

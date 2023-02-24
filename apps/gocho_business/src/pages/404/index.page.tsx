@@ -21,7 +21,7 @@ const NotFoundPage: NextPageWithLayout = () => {
     <main css={cssObj.container}>
       <InvisibleH2 title="없는 페이지" />
       <div css={cssObj.jobiImage}>
-        <Image src={jobi_404} alt="" objectFit="fill" layout="fill" />
+        <Image src={jobi_404} alt="" fill priority />
       </div>
       <p css={cssObj.title}>죄송합니다. 해당 페이지를 찾을 수 없습니다.</p>
       <div css={cssObj.catchPhraseContainer}>

@@ -31,7 +31,7 @@ export const CompanyInfoPart: FunctionComponent = () => {
     <section css={cssObj.wrapper} data-testid="company/edit/CompanyInfoPart">
       <div css={cssObj.topBox}>
         <div css={cssObj.logoBox}>
-          <Image src={companyData.logo} alt={companyData.name} layout="fill" objectFit="contain" draggable={false} />
+          <Image src={companyData.logo} alt={companyData.name} fill />
         </div>
         <div css={cssObj.titleBox}>
           <strong css={cssObj.companyTitle}>{companyData.name}</strong>

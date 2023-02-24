@@ -94,7 +94,7 @@ const LoginPage: NextPage = () => {
         <div css={cssObj.container}>
           <div css={cssObj.titleBox}>
             <div css={cssObj.gochoLogoBox}>
-              <Image src={gochoColorSrc} alt="고초대졸닷컴" layout="fill" objectFit="contain" />
+              <Image src={gochoColorSrc} alt="고초대졸닷컴" fill />
             </div>
             <strong css={cssObj.title}>생산직 채용의 새로운 기준</strong>
           </div>

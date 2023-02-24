@@ -20,12 +20,12 @@ const HelpPage: NextPageWithLayout = () => (
       </p>
       <strong css={cssObj.strongDesc}>무엇이든 문의해주세요!</strong>
       <div css={cssObj.chatIconBox}>
-        <Image src={chatIcon} alt="" layout="fill" objectFit="contain" />
+        <Image src={chatIcon} alt="" fill />
       </div>
     </div>
 
     <div css={cssObj.backgroundBox}>
-      <Image src={helpBackground} alt="" objectFit="contain" layout="responsive" draggable={false} priority />
+      <Image src={helpBackground} alt="" fill priority />
     </div>
   </main>
 );

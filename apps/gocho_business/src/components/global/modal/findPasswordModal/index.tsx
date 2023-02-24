@@ -77,7 +77,7 @@ export const FindPasswordBox: FunctionComponent = () => {
         <CommonCloseButton size="S" buttonClick={closeFindPasswordModal} />
       </div>
       <div css={cssObj.logoContainer}>
-        <Image objectFit="contain" src={smallMono} alt="고초대졸닷컴" />
+        <Image src={smallMono} alt="고초대졸닷컴" />
       </div>
       <p css={cssObj.desc}>가입한 이메일에서 비밀번호를 확인하세요</p>
       <form css={cssObj.formCSS} onSubmit={handleSubmit(findEmailSubmit)}>

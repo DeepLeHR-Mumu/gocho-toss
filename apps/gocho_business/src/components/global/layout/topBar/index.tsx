@@ -48,12 +48,7 @@ export const TopBar: FunctionComponent = () => {
     <header css={cssObj.wrapper(isLogin)}>
       <div css={cssObj.container}>
         <h1 css={cssObj.title}>
-          <Image
-            src={isLogin ? bizTextColor : bizTextMono}
-            alt="고초대졸닷컴 비즈니스"
-            layout="fill"
-            objectFit="contain"
-          />
+          <Image src={isLogin ? bizTextColor : bizTextMono} alt="고초대졸닷컴 비즈니스" fill />
         </h1>
       </div>
       {userInfoData ? (
