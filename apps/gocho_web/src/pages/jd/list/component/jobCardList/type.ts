@@ -3,7 +3,7 @@ export interface JobCardListProps {
     | {
         id: number;
         companyName: string;
-        companyLogo: string;
+        companyLogo: string | null;
         companyId: number;
         startTime: number;
         endTime: number;

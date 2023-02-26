@@ -108,6 +108,7 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
               setImageSrc(defaultCompanyLogo);
             }}
             alt={`${jobData.companyName}의 로고`}
+            sizes="1"
           />
         </div>
         <div css={jobInfoBox(isMobile)}>

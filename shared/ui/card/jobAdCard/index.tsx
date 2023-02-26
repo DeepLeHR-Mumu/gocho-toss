@@ -56,7 +56,7 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
           <div css={mainContainer}>
             <div css={companyLogoWrapper}>
               <div css={companyLogoBox}>
-                <Image fill src={jobAdData?.companyLogo || defaultCompanyLogo} alt="" />
+                <Image fill src={jobAdData?.companyLogo || defaultCompanyLogo} alt="" sizes="1" />
               </div>
             </div>
             <div css={infoContainer}>

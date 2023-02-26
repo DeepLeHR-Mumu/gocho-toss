@@ -94,7 +94,7 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
 
       <article css={contentContainer}>
         <div css={logoBox}>
-          <Image src={gochoLogoMono} alt="고초대졸닷컴" objectFit="contain" layout="fill" />
+          <Image src={gochoLogoMono} alt="고초대졸닷컴" fill />
         </div>
         <strong css={titleCSS}>{tipData.title}</strong>
         <ul css={tagListCSS}>

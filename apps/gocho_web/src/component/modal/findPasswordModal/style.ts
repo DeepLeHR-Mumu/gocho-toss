@@ -48,9 +48,14 @@ export const closeBtn = css`
 `;
 
 export const logoContainer = css`
+  position: relative;
   width: 7.5rem;
+  height: 1rem;
   position: relative;
   margin-bottom: 1rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const desc = css`

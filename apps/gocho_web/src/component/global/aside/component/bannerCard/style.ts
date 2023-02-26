@@ -45,4 +45,7 @@ export const iconBox = css`
   width: 1.5rem;
   height: 1.5rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;

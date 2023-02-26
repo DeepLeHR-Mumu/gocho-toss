@@ -178,10 +178,10 @@ export const ListPart: FunctionComponent = () => {
         <div css={infoContainer}>
           <FiInfo />
           <div css={infoImage}>
-            <Image src={highTrue} alt="고졸 지원가능" layout="fill" objectFit="contain" />
+            <Image src={highTrue} alt="고졸 지원가능" fill />
           </div>
           <div css={infoImage}>
-            <Image src={collegeTrue} alt="초대졸 지원가능" layout="fill" objectFit="contain" />
+            <Image src={collegeTrue} alt="초대졸 지원가능" fill />
           </div>
           <p>고는 고졸지원가능 초는 초대졸 지원 가능합니다</p>
         </div>

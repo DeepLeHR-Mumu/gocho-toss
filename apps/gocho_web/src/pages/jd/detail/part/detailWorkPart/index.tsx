@@ -17,6 +17,7 @@ import {
   flexDesc,
   typeText,
   placeContainer,
+  factoryIconCSS,
 } from "./style";
 
 export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPosition }) => {
@@ -84,7 +85,7 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
         <div css={flexBetweenBox}>
           <p css={subTitle}>근무지</p>
           <div>
-            <p css={flexDesc}>
+            <div css={flexDesc}>
               {freshPosition.place.addressArr?.map((place) => {
                 return (
                   <div key={`지역_${place}`}>
@@ -98,7 +99,7 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
                   <p css={restPoint}>{freshPosition.place.etc}</p>
                 </div>
               )}
-            </p>
+            </div>
             {freshPosition.place.factoryArr?.map((factory) => {
               return (
                 <div css={flexDesc} key={`${factory.factoryName}_${factory.id}`}>
@@ -109,7 +110,9 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
                       showFactoryModal(factory);
                     }}
                   >
-                    <Image src={factoryIcon} alt="" objectFit="contain" />
+                    <div css={factoryIconCSS}>
+                      <Image src={factoryIcon} alt="" fill />
+                    </div>
                     {factory.factoryName}
                   </button>
                   {factory.address}

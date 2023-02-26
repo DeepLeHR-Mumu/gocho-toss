@@ -18,4 +18,8 @@ export const wrapper: WrapperDef = (size) => css`
   overflow: hidden;
   width: ${sizeCreator(size)};
   height: ${sizeCreator(size)};
+  position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;

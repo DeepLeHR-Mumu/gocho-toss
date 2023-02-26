@@ -37,7 +37,7 @@ export const MyProfileMenu: FunctionComponent<MyProfileMenuProps> = ({ active })
           return (
             <li key={profileMenu.title}>
               <Link href={profileMenu.link} passHref>
-                <a>{profileMenu.title}</a>
+                {profileMenu.title}
               </Link>
             </li>
           );

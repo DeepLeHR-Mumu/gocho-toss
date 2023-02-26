@@ -30,7 +30,7 @@ export const Footer: FunctionComponent = () => {
         <div css={footerContainer}>
           <div css={companyInfoWrapper}>
             <div css={GDtitleBox}>
-              <Image layout="fill" objectFit="cover" src={GDtitleSrc} alt="고초대졸닷컴" />
+              <Image src={GDtitleSrc} alt="고초대졸닷컴" fill sizes="1" />
             </div>
             <ul css={companyInfoListCSS}>
               <li>
@@ -74,7 +74,7 @@ export const Footer: FunctionComponent = () => {
                 </a>
 
                 <span css={kakaoBox}>
-                  <Image src={kakaoMonoSrc} alt="카카오톡 플러스친구" layout="fill" objectFit="contain" />
+                  <Image src={kakaoMonoSrc} alt="카카오톡 플러스친구" fill />
                 </span>
               </p>
             </div>

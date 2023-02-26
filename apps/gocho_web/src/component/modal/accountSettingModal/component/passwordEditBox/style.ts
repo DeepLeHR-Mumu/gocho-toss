@@ -20,6 +20,9 @@ export const imageContainer = css`
   width: 9rem;
   height: 1rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const menuName = css`

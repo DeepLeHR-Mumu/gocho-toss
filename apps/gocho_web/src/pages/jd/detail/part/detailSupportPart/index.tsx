@@ -37,7 +37,7 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
   return (
     <section css={wrapper}>
       <div css={logoImageBox}>
-        <Image src={logoSrc} alt="고초대졸닷컴" objectFit="contain" />
+        <Image src={logoSrc} alt="" fill />
       </div>
       <h3 css={title}>{getJobTitleCreator(freshPosition)}</h3>
 
@@ -48,13 +48,13 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
             <FiInfo />
             <span css={isColorPoint(true)}>
               <strong css={isPossibleEduIcon}>
-                <Image src={graduateColor} alt="" />
+                <Image src={graduateColor} alt="" fill />
               </strong>
               지원가능
             </span>
             <span css={isColorPoint(false)}>
               <strong css={isPossibleEduIcon}>
-                <Image src={graduateGray} alt="" />
+                <Image src={graduateGray} alt="" fill />
               </strong>
               지원불가
             </span>
@@ -70,8 +70,8 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
                 {getPossibleEduArr(freshPosition.possibleEdu).map((edu) => {
                   return (
                     <li key={edu.desc}>
-                      <div css={eduImageBox(edu.isPossible)}>
-                        <Image src={edu.isPossible ? graduateColor : graduateGray} alt="" />
+                      <div css={eduImageBox}>
+                        <Image src={edu.isPossible ? graduateColor : graduateGray} alt="" fill />
                       </div>
                       <p css={isPossibleEduDesc(edu.isPossible)}>{edu.desc}</p>
                     </li>

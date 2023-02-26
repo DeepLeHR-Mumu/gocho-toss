@@ -75,6 +75,11 @@ export const flexDesc = css`
   align-items: center;
 `;
 
+export const factoryIconCSS = css`
+  > img {
+    object-fit: contain;
+  }
+`;
 export const factoryButton = css`
   color: ${COLORS.BLUE_FIRST40};
   font-size: 0.875rem;

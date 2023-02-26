@@ -6,6 +6,7 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
 
 import { useUserInfo } from "shared-api/auth";
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { useCompanyDetail, useCompanyCountInfo } from "shared-api/company";
 import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr, useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { companyCountInfoKeyObj } from "shared-constant/queryKeyFactory/company/companyCountInfoKeyObj";
@@ -101,7 +102,7 @@ export const HeaderPart: FunctionComponent = () => {
         <div css={container}>
           <div css={infoBox}>
             <div css={logoBox}>
-              <Image alt="" src={companyDetailData.logoUrl} layout="fill" objectFit="contain" />
+              <Image alt="" src={companyDetailData.logoUrl || defaultCompanyLogo} layout="fill" objectFit="contain" />
             </div>
             <div css={buttonBox}>
               <button

@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent } from "react";
 import { FiEye, FiYoutube } from "react-icons/fi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import Image from "next/image";
@@ -32,7 +32,6 @@ import {
 } from "./style";
 
 export const HeaderPart: FunctionComponent = () => {
-  const [imageSrc, setImageSrc] = useState<string>("");
   const router = useRouter();
   const queryClient = useQueryClient();
 
@@ -53,10 +52,6 @@ export const HeaderPart: FunctionComponent = () => {
     logo_url: companyDetailData?.logoUrl as string,
     name: companyDetailData?.name as string,
   });
-
-  useEffect(() => {
-    setImageSrc(companyDetailData?.logoUrl as string);
-  }, [companyDetailData]);
 
   if (!companyDetailData || isLoading) {
     return <div>..</div>;
@@ -108,13 +103,10 @@ export const HeaderPart: FunctionComponent = () => {
     <section css={sectionContainer}>
       <div css={companyLogoBox}>
         <Image
-          layout="fill"
-          objectFit="contain"
-          src={imageSrc || companyDetailData.logoUrl}
+          src={companyDetailData.logoUrl || defaultCompanyLogo}
           alt={`${companyDetailData.name} 기업 로고`}
-          onError={() => {
-            return setImageSrc(defaultCompanyLogo);
-          }}
+          fill
+          sizes="1"
         />
       </div>
       <div css={infoContainer}>
@@ -133,12 +125,11 @@ export const HeaderPart: FunctionComponent = () => {
         <p css={companyName}>{companyDetailData.name}</p>
         <p css={industry}>{companyDetailData.industry}</p>
       </div>
-      {/* LATER : null data들에대한 정확한 파악 필요 null 일 시 렌더링 안되는 것 확인 및 디자인 변경 확인 필요 */}
       {companyDetailData.catchUrl && (
         <a css={catchLinkButton} href={companyDetailData.catchUrl} target="_blank" rel="noopener noreferrer">
           캐치 기업정보 더보기
           <div css={catchLogoBox}>
-            <Image src={catchLogoSrc} alt="" layout="fill" objectFit="contain" />
+            <Image src={catchLogoSrc} alt="" fill />
           </div>
         </a>
       )}

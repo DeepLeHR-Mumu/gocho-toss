@@ -4,7 +4,7 @@ export type JobListPartProps = {
         id: number;
         companyId: number;
         companyName: string;
-        companyLogo: string;
+        companyLogo: string | null;
         startTime: number;
         endTime: number;
         title: string;

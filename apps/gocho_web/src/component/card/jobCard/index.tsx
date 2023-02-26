@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { BsFillBookmarkFill } from "react-icons/bs";
@@ -85,8 +85,6 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
     },
   });
 
-  const [imageSrc, setImageSrc] = useState(jobData?.companyLogo as string);
-
   if (isSkeleton || !jobData) {
     return (
       <div css={jobCardSkeleton}>
@@ -151,91 +149,84 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         <span css={bookmarkNumber}>{jobData.bookmark}</span>
       </button>
 
-        <a
-          target="_blank"
-          css={jobDetailLink}
-          href={`${JOBS_DETAIL_URL}/${jobData.id}`}
-          onClick={savePaginationNumber}
-          rel="noreferrer"
-        >
-          <p css={viewWrapper}>
-            <FiEye />
-            <span css={viewNumber}>{jobData.view.toLocaleString("Ko-KR")}</span>
-          </p>
+      <a
+        target="_blank"
+        css={jobDetailLink}
+        href={`${JOBS_DETAIL_URL}/${jobData.id}`}
+        onClick={savePaginationNumber}
+        rel="noreferrer"
+      >
+        <p css={viewWrapper}>
+          <FiEye />
+          <span css={viewNumber}>{jobData.view.toLocaleString("Ko-KR")}</span>
+        </p>
 
-          <div css={mainContainer}>
-            <div css={companyLogoWrapper} className="Logo">
-              <div css={companyLogoBox}>
-                <Image
-                  fill
-                  src={imageSrc || jobData.companyLogo}
-                  alt={jobData.companyName}
-                  onError={() => {
-                    return setImageSrc(defaultCompanyLogo);
-                  }}
-                />
-              </div>
-            </div>
-            <div css={infoBox}>
-              <div css={dateInfoContainer}>
-                <p css={date}>
-                  {endYear === 9999
-                    ? `${startYear}.${startMonth}.${startDate}`
-                    : `${startYear}.${startMonth}.${startDate}~${endYear}.${endMonth}.${endDate}`}
-                </p>
-                <DdayBox endTime={jobData.endTime} />
-                {jobData.cut && <div css={cutBox}>채용시마감</div>}
-              </div>
-              <p css={companyName}>{jobData.companyName}</p>
-              <strong css={titleCSS}>{jobData.title}</strong>
-              <ul css={detailInfoContainer}>
-                <li css={eduQual}>
-                  <Image
-                    src={jobData.high ? highTrue : highFalse}
-                    alt={jobData.high ? "고졸 지원 가능" : "고졸 지원 불가능"}
-                  />
-                </li>
-                <li css={eduQual}>
-                  <Image
-                    src={jobData.college ? collegeTrue : collegeFalse}
-                    alt={jobData.college ? "초대졸 지원 가능" : "초대졸 지원 불가능"}
-                  />
-                </li>
-                <li css={detailInfo}>
-                  {jobData.placeArr[0]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
-                </li>
-
-                <li css={detailInfo}>
-                  {jobData.rotationArr[0]}{" "}
-                  {jobData.rotationArr.length !== 1 && `외 ${jobData.rotationArr.length - 1}형태`}
-                </li>
-              </ul>
+        <div css={mainContainer}>
+          <div css={companyLogoWrapper} className="Logo">
+            <div css={companyLogoBox}>
+              <Image fill src={jobData.companyLogo || defaultCompanyLogo} alt={jobData.companyName} sizes="1" />
             </div>
           </div>
+          <div css={infoBox}>
+            <div css={dateInfoContainer}>
+              <p css={date}>
+                {endYear === 9999
+                  ? `${startYear}.${startMonth}.${startDate}`
+                  : `${startYear}.${startMonth}.${startDate}~${endYear}.${endMonth}.${endDate}`}
+              </p>
+              <DdayBox endTime={jobData.endTime} />
+              {jobData.cut && <div css={cutBox}>채용시마감</div>}
+            </div>
+            <p css={companyName}>{jobData.companyName}</p>
+            <strong css={titleCSS}>{jobData.title}</strong>
+            <ul css={detailInfoContainer}>
+              <li css={eduQual}>
+                <Image
+                  src={jobData.high ? highTrue : highFalse}
+                  alt={jobData.high ? "고졸 지원 가능" : "고졸 지원 불가능"}
+                />
+              </li>
+              <li css={eduQual}>
+                <Image
+                  src={jobData.college ? collegeTrue : collegeFalse}
+                  alt={jobData.college ? "초대졸 지원 가능" : "초대졸 지원 불가능"}
+                />
+              </li>
+              <li css={detailInfo}>
+                {jobData.placeArr[0]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
+              </li>
 
-          <div css={taskContainer}>
-            <p css={taskSummary(isExpired)}>
-              채용중인 직무
-              <span css={taskNumber(isExpired)}>{jobData.taskArr.length}</span>
-            </p>
-            <ul css={taskArrCSS}>
-              {jobData.taskArr.map((task) => {
-                if (task !== null) {
-                  return (
-                    <li css={taskBox} key={`${jobData.id}${task}`}>
-                      {task}
-                    </li>
-                  );
-                }
-                return <li key={`${jobData.id}${task}`} />;
-              })}
+              <li css={detailInfo}>
+                {jobData.rotationArr[0]}{" "}
+                {jobData.rotationArr.length !== 1 && `외 ${jobData.rotationArr.length - 1}형태`}
+              </li>
             </ul>
           </div>
+        </div>
 
-          <p css={hoverButton} className="hoverButton">
-            공고보기
+        <div css={taskContainer}>
+          <p css={taskSummary(isExpired)}>
+            채용중인 직무
+            <span css={taskNumber(isExpired)}>{jobData.taskArr.length}</span>
           </p>
-        </a>
+          <ul css={taskArrCSS}>
+            {jobData.taskArr.map((task) => {
+              if (task !== null) {
+                return (
+                  <li css={taskBox} key={`${jobData.id}${task}`}>
+                    {task}
+                  </li>
+                );
+              }
+              return <li key={`${jobData.id}${task}`} />;
+            })}
+          </ul>
+        </div>
+
+        <p css={hoverButton} className="hoverButton">
+          공고보기
+        </p>
+      </a>
     </article>
   );
 };

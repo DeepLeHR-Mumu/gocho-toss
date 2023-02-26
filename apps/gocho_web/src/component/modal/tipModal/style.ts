@@ -39,6 +39,9 @@ export const logoBox = css`
   height: 1.5rem;
   position: relative;
   margin: 0 0 3rem auto;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const closeButtonWrapper = css`

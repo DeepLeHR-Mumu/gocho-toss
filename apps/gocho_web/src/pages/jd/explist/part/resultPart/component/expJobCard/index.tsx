@@ -57,7 +57,7 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
     <article css={cardWrapper}>
       <div css={companyInfoContainer}>
         <div css={companyLogo}>
-          <Image layout="fill" objectFit="contain" src={companyData.logoUrl || defaultCompanyLogo} alt="" />
+          <Image fill src={companyData.logoUrl || defaultCompanyLogo} alt="" />
         </div>
         <div css={companyInfoBox}>
           <div css={companyName}>{companyData.name}</div>
