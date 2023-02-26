@@ -125,6 +125,12 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
       <div css={cssObj.container}>
         <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.rotation_arr))}>교대 형태</p>
         <div css={cssObj.optionContainer}>
+          <input
+            css={cssObj.hiddenInput}
+            {...register(`position_arr.${positionIndex}.rotation_arr`, {
+              required: "교대 형태는 필수 입력 사항입니다",
+            })}
+          />
           <button
             css={cssObj.input(20)}
             type="button"
@@ -185,6 +191,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   value={placeType.data}
                   onClick={() => {
                     if (watch("position_arr")[positionIndex].place.type !== placeType.data) {
+                      setValue(`position_arr.${positionIndex}.place.etc`, null);
                       clearErrors(`position_arr.${positionIndex}.place`);
                       clearErrors(`position_arr.${positionIndex}.place.etc`);
                     }
@@ -210,7 +217,18 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
         <div css={cssObj.placeInputContainer}>
           {watch("position_arr")[positionIndex].place.type === "일반" && (
             <>
-              <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.place))}>공장 근무지</p>
+              <input
+                css={cssObj.hiddenInput}
+                {...register(`position_arr.${positionIndex}.place.factory_arr`, {
+                  validate: (value) =>
+                    (value?.length || 0) + (watch("position_arr")[positionIndex].place.address_arr?.length || 0) !==
+                      0 || "공장과 일반 근무지 중 적어도 하나 이상의 근무지를 입력해야 합니다",
+                })}
+              />
+              <input css={cssObj.hiddenInput} {...register(`position_arr.${positionIndex}.place.address_arr`)} />
+              <p css={cssObj.inputTitle(Boolean(formState.errors.position_arr?.[positionIndex]?.place?.factory_arr))}>
+                공장 근무지
+              </p>
               <div css={cssObj.factoryInputWrapper}>
                 <div css={cssObj.optionContainer}>
                   <button
@@ -224,7 +242,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                           (watch("position_arr")[positionIndex].place.address_arr?.length || 0) ===
                           0
                       ) {
-                        setError(`position_arr.${positionIndex}.place`, {
+                        setError(`position_arr.${positionIndex}.place.factory_arr`, {
                           type: "required",
                           message: "공장과 일반 근무지 중 적어도 하나 이상의 근무지를 입력해야 합니다",
                         });
@@ -272,7 +290,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                     queryClient.invalidateQueries(factoryArrKeyObj.all);
                   }}
                 />
-                <p css={cssObj.uploadFactoryDesc}>잠깐, 미등록 공장이 있나요</p>
+                <p css={cssObj.uploadFactoryDesc}>잠깐, 미등록 공장이 있나요?</p>
                 <SharedTextLink externalUrl={INTERNAL_URL.FACTORY_LIST} fontColor="blue" text="공장 등록하러 가기" />
               </div>
               <div css={cssObj.placeContainer}>
@@ -288,7 +306,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                           (watch("position_arr")[positionIndex].place.factory_arr?.length || 0) +
                           (watch("position_arr")[positionIndex].place.address_arr?.length || 0);
                         if (totalNumber === 1)
-                          setError(`position_arr.${positionIndex}.place`, {
+                          setError(`position_arr.${positionIndex}.place.factory_arr`, {
                             type: "required",
                             message: "공장과 일반 근무지 중 적어도 하나 이상의 근무지를 입력해야 합니다",
                           });
@@ -315,7 +333,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                 onClickHandler={() =>
                   openPostCodePopup({
                     onComplete: (addressObj: Address) => {
-                      clearErrors(`position_arr.${positionIndex}.place`);
+                      clearErrors(`position_arr.${positionIndex}.place.factory_arr`);
                       setValue(`position_arr.${positionIndex}.place.address_arr`, [
                         ...(watch("position_arr")[positionIndex].place.address_arr || []),
                         addressObj.address,
@@ -327,7 +345,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                         (watch("position_arr")[positionIndex].place.factory_arr?.length || 0) +
                         (watch("position_arr")[positionIndex].place.address_arr?.length || 0);
                       if (totalNumber === 0)
-                        setError(`position_arr.${positionIndex}.place`, {
+                        setError(`position_arr.${positionIndex}.place.factory_arr`, {
                           type: "required",
                           message: "공장과 일반 근무지 중 적어도 하나 이상의 근무지를 입력해야 합니다",
                         });
@@ -350,7 +368,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                                 (watch("position_arr")[positionIndex].place.factory_arr?.length || 0) +
                                 (watch("position_arr")[positionIndex].place.address_arr?.length || 0);
                               if (totalNumber === 1)
-                                setError(`position_arr.${positionIndex}.place`, {
+                                setError(`position_arr.${positionIndex}.place.factory_arr`, {
                                   type: "required",
                                   message: "공장과 일반 근무지 중 적어도 하나 이상의 근무지를 입력해야 합니다",
                                 });
@@ -368,8 +386,8 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                 </>
               )}
               <p css={cssObj.errorMessage}>
-                {formState.errors.position_arr?.[positionIndex]?.place &&
-                  formState.errors.position_arr?.[positionIndex]?.place?.message}
+                {formState.errors.position_arr?.[positionIndex]?.place?.factory_arr &&
+                  formState.errors.position_arr?.[positionIndex]?.place?.factory_arr?.message}
               </p>
             </>
           )}
@@ -465,12 +483,14 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
               </div>
             </div>
           ))}
-          <AddFieldButton
-            onClickHandler={() => {
-              payArr.append({ value: "" });
-              setPayIsFocusedArr((prev) => [...prev, false]);
-            }}
-          />
+          {payArr.fields.length < 10 && (
+            <AddFieldButton
+              onClickHandler={() => {
+                payArr.append({ value: "" });
+                setPayIsFocusedArr((prev) => [...prev, false]);
+              }}
+            />
+          )}
         </div>
       </div>
       <div css={cssObj.container}>

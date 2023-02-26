@@ -102,12 +102,7 @@ export const HeaderPart: FunctionComponent = () => {
   return (
     <section css={sectionContainer}>
       <div css={companyLogoBox}>
-        <Image
-          src={companyDetailData.logoUrl || defaultCompanyLogo}
-          alt={`${companyDetailData.name} 기업 로고`}
-          fill
-          sizes="1"
-        />
+        <Image src={companyDetailData.logoUrl || defaultCompanyLogo} alt="" fill sizes="1" />
       </div>
       <div css={infoContainer}>
         <div css={infoBox}>

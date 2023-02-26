@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FiYoutube, FiEye } from "react-icons/fi";
@@ -40,8 +40,6 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userInfoData?.id });
   const { setCurrentModal } = useModal();
   const router = useRouter();
-
-  const [imageSrc, setImageSrc] = useState(jobDetailData.company.logoUrl as string);
 
   const { mutate: mutateJdApplyClick } = useJdApplyClick();
   const { data: jdCountData } = useJdCountInfo({ id: Number(router.query.jobId) });
@@ -109,15 +107,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
   return (
     <header css={headerCSS}>
       <div css={imageBox}>
-        <Image
-          onError={() => {
-            return setImageSrc(defaultCompanyLogo);
-          }}
-          src={imageSrc || jobDetailData.company.logoUrl}
-          alt=""
-          fill
-          sizes="1"
-        />
+        <Image alt="" fill sizes="1" src={jobDetailData.company.logoUrl || defaultCompanyLogo} />
       </div>
       <div>
         <ul css={dateBox}>

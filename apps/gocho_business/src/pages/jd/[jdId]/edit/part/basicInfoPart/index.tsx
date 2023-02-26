@@ -32,6 +32,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
   const linkButtonClickHandler = (type: typeof linkType) => {
     setLinkType(type);
     setValue(`apply_url`, "");
+    clearErrors("apply_url");
   };
 
   const externalLinkMaker = (link: string) => {
@@ -144,8 +145,8 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                     <input
                       id={`processArr${item.id}`}
                       css={cssObj.erasableInput(11.5)}
-                      placeholder={`${index + 1}차 (최대 20자)`}
-                      maxLength={20}
+                      placeholder={`${index + 1}차 (최대 30자)`}
+                      maxLength={30}
                       onFocus={() => {
                         clearErrors(`process_arr.${index}`);
                         focusedArrOnFocusHandler(setProcessIsFocusedArr, index);
@@ -213,8 +214,8 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                   <input
                     id={`applyRouteArr${item.id}`}
                     css={cssObj.erasableInput(18)}
-                    placeholder="지원 방법/제출 서류 (최대 30자)"
-                    maxLength={30}
+                    placeholder="지원 방법/제출 서류 (최대 50자)"
+                    maxLength={50}
                     onFocus={() => {
                       clearErrors(`apply_route_arr.${index}`);
                       focusedArrOnFocusHandler(setApplyRouteIsFocusedArr, index);
@@ -280,7 +281,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
             <div css={cssObj.addButtonWrapper}>
               <AddFieldButton
                 onClickHandler={() => {
-                  if (applyRouteArr.fields.length < 10) {
+                  if (applyRouteArr.fields.length < 15) {
                     applyRouteArr.append({ value: "" });
                     setApplyRouteIsFocusedArr((prev) => [...prev, false]);
                   }
@@ -334,6 +335,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                       placeholder="http"
                       {...register("apply_url", {
                         required: "링크는 필수 입력 사항입니다",
+                        validate: () => true,
                         onBlur: (blurEvent) => {
                           if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                             setValue("apply_url", "");
@@ -371,6 +373,8 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
                     css={cssObj.applyUrlInput(47)}
                     {...register("apply_url", {
                       required: "링크는 필수 입력 사항입니다",
+                      validate: (value) =>
+                        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || "이메일 형식이 올바르지 않습니다",
                       onBlur: (blurEvent) => {
                         if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                           setValue("apply_url", "");
