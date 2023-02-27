@@ -70,6 +70,11 @@ export const flexDesc = css`
   align-items: center;
 `;
 
+export const factoryIconCSS = css`
+  > img {
+    object-fit: contain;
+  }
+`;
 export const factoryAddressDesc = css`
   font-size: 0.875rem;
   font-weight: 400;

@@ -63,7 +63,7 @@ export const FindPasswordBox: FunctionComponent = () => {
         <CloseButton size="S" buttonClick={closeFindPasswordModal} />
       </div>
       <div css={logoContainer}>
-        <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" />
+        <Image fill src={smallMono} alt="고초대졸 로고" />
       </div>
       <p css={desc}>로그인이 필요한 서비스입니다.</p>
       <form css={formCSS} onSubmit={handleSubmit(loginSubmit)}>

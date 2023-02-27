@@ -51,7 +51,9 @@ export const middleDescIconBox = css`
   width: 2.1875rem;
   height: 3.25rem;
   position: relative;
-  margin-left: 0.5rem;
+  margin-left: 0.5rem >img {
+    object-fit: contain;
+  } ;
 `;
 
 export const titleCSS = css`
@@ -103,3 +105,12 @@ export const linkButton: LinkButtonDef = (backgroundColor, color) => {
     bottom: 2rem;
   `;
 };
+
+export const imageCss = css`
+  position: relative;
+  width: 100%;
+  height: 25rem;
+  > img {
+    object-fit: cover;
+  }
+`;

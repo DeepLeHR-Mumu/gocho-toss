@@ -40,6 +40,9 @@ export const companyLogo = css`
   width: 7.5rem;
   height: 7.5rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const buttonContainer = css`

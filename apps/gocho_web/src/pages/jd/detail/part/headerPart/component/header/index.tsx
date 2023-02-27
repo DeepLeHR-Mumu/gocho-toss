@@ -107,12 +107,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
   return (
     <header css={headerCSS}>
       <div css={imageBox}>
-        <Image
-          src={jobDetailData.company.logoUrl || defaultCompanyLogo}
-          alt={jobDetailData.company.name}
-          layout="fill"
-          objectFit="contain"
-        />
+        <Image alt="" fill sizes="1" src={jobDetailData.company.logoUrl || defaultCompanyLogo} />
       </div>
       <div>
         <ul css={dateBox}>
@@ -127,8 +122,8 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
             </p>
           </li>
         </ul>{" "}
-        <Link href={`/company/${jobDetailData.company.companyId}/detail`} passHref>
-          <a css={companyNameCSS}>{jobDetailData.company.name}</a>
+        <Link href={`/company/${jobDetailData.company.companyId}/detail`} passHref css={companyNameCSS}>
+          {jobDetailData.company.name}
         </Link>
         <p css={titleCSS}>{jobDetailData.title}</p>
         <ul css={linksCSS}>
@@ -165,8 +160,8 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
             </button>
           </li>
           <li>
-            <Link href={`/company/${jobDetailData.company.companyId}/detail`} passHref>
-              <a css={buttonCSS(false)}>기업정보</a>
+            <Link href={`/company/${jobDetailData.company.companyId}/detail`} passHref css={buttonCSS(false)}>
+              기업정보
             </Link>
           </li>
           {jobDetailData.company.youtubeUrl && (

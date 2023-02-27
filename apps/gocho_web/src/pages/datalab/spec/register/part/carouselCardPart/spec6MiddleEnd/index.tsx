@@ -64,7 +64,7 @@ export const Spec6MiddleEnd: FunctionComponent<Spec6MiddleEndProps> = ({
         </p>
 
         <div css={animationBox}>
-          <Image src={jobiFighting} alt="" layout="fill" objectFit="contain" draggable={false} />
+          <Image src={jobiFighting} alt="" fill />
         </div>
 
         <button type="button" css={postButtonCSS} onClick={specSubmit}>

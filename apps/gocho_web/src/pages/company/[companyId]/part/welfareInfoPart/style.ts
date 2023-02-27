@@ -21,6 +21,9 @@ export const infoPicture = css`
   width: 7rem;
   height: 7rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const infoTitle = css`

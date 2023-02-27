@@ -27,8 +27,12 @@ export const logoCSS = css`
   width: 8.75rem;
   height: 1.125rem;
   margin-right: 0.5rem;
-  position: relative;
   cursor: pointer;
+  position: relative;
+
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const title = css`

@@ -66,7 +66,7 @@ export const PasswordEditBox: FunctionComponent = () => {
         <CloseButton size="M" buttonClick={closeModal} />
       </div>
       <div css={imageContainer}>
-        <Image src={GDTitleSrc} layout="responsive" objectFit="contain" alt="고초대졸닷컴 로고" />
+        <Image src={GDTitleSrc} fill alt="" />
       </div>
       <form css={formContainer} onSubmit={handleSubmit(passwordSubmit)}>
         <p css={menuName}>비밀번호 변경</p>

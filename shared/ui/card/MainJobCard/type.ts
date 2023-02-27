@@ -2,7 +2,7 @@ export type MainJobCardProps = {
   jobData: {
     id: number;
     companyName: string;
-    companyLogo: string;
+    companyLogo: string | null;
     title: string;
     endTime: number;
     cut: boolean;

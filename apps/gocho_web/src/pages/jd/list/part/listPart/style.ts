@@ -98,6 +98,9 @@ export const infoImage = css`
   width: 0.75rem;
   height: 0.75rem;
 
+  > img {
+    object-fit: contain;
+  }
   &:last-of-type {
     margin-left: 0;
   }

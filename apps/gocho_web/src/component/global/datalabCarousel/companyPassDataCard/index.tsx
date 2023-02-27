@@ -8,7 +8,7 @@ import { CompanyPassDataCardProps } from "./type";
 export const CompanyPassDataCard: FunctionComponent<CompanyPassDataCardProps> = ({ companyName, companyLogo }) => {
   return (
     <div css={companyLogoBox}>
-      <Image src={companyLogo} alt={companyName} layout="fill" objectFit="contain" />
+      <Image src={companyLogo} alt={companyName} fill sizes="1" />
     </div>
   );
 };
