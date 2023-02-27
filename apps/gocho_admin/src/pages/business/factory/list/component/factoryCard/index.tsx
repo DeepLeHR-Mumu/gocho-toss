@@ -21,7 +21,7 @@ const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factory }) => {
               : `${BUSINESS_FACTORY_EDIT_URL}/?id=${factory.id}`
           }
         >
-          <a>상세보기</a>
+          상세보기
         </Link>
       </td>
     </tr>

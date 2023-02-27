@@ -28,6 +28,10 @@ export const currentLogo = css`
   height: 5rem;
   position: relative;
   margin-right: 1.5rem;
+
+  img {
+    object-fit: contain;
+  }
 `;
 
 export const inputBox = css`
@@ -63,6 +67,10 @@ export const logoPreviewContainer = css`
   width: 5rem;
   height: 5rem;
   position: relative;
+
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const selectBox = css`
