@@ -127,18 +127,12 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
 
       <div css={flexBox}>
         <div css={companyLogoBox}>
-          <Image fill src={jobData.companyLogo || defaultCompanyLogo} alt="" />
+          <Image fill src={jobData.companyLogo || defaultCompanyLogo} alt="" sizes="1" />
         </div>
 
-        <div css={flexBox}>
-          <div css={companyLogoBox}>
-            <Image fill src={jobData.companyLogo || defaultCompanyLogo} alt="" />
-          </div>
-
-          <div css={infoBox}>
-            <p css={companyNameCSS}>{jobData.companyName}</p>
-            <p css={titleCSS}>{jobData.title}</p>
-          </div>
+        <div css={infoBox}>
+          <p css={companyNameCSS}>{jobData.companyName}</p>
+          <p css={titleCSS}>{jobData.title}</p>
         </div>
       </div>
 

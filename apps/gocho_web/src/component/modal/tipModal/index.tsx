@@ -111,12 +111,12 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
                 <div key={`${tipData.title + index}`}>
                   <div css={tipImageBox}>
                     <Image
-                      layout="fill"
-                      objectFit="contain"
+                      fill
                       src={`${srcURL + (index + 1)}.png`}
                       alt={`${tipData.title} 본문`}
                       loading="eager"
                       unoptimized
+                      sizes="1"
                     />
                   </div>
                 </div>

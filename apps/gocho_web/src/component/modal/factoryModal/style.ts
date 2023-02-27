@@ -127,7 +127,7 @@ export const infoDesc = css`
 `;
 
 export const copyButton = css`
-  margin-top: 0.5rem;
+  margin: 0.5rem 0 0 0.5rem;
   color: ${COLORS.BLUE_NEON50};
   font-size: 1rem;
 `;

@@ -31,10 +31,8 @@ import {
 export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ basicData }) => {
   return (
     <div css={container}>
-      <Link href={SPEC_LIST_URL} passHref>
-        <a css={backButton}>
-          <FiChevronLeft /> 리스트로 돌아가기
-        </a>
+      <Link href={SPEC_LIST_URL} passHref css={backButton}>
+        <FiChevronLeft /> 리스트로 돌아가기
       </Link>
 
       <div css={imageContainer}>

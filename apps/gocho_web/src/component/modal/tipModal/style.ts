@@ -106,6 +106,9 @@ export const tipImageBox = css`
   width: 100%;
   height: 25rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const controlWrapper = css`

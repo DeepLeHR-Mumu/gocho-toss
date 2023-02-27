@@ -41,7 +41,7 @@ export const TipCard: FunctionComponent<TipCardProps | TipCardSkeleton> = ({ tip
     <button type="button" onClick={openTipModal} aria-label={`${tipData.title} 자세히보기`}>
       <article css={cardContainer}>
         <div css={thumbnailBox}>
-          <Image src={tipData.thumbnailSrc} alt="" fill />
+          <Image src={tipData.thumbnailSrc} alt="" fill sizes="1" quality={50}/>
         </div>
         <div css={contentContainer}>
           <div>

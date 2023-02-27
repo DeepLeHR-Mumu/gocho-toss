@@ -17,6 +17,8 @@ import {
   flexDesc,
   typeText,
   placeContainer,
+  placeDesc,
+  factoryAddressDesc,
   factoryIconCSS,
 } from "./style";
 
@@ -85,21 +87,21 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
         <div css={flexBetweenBox}>
           <p css={subTitle}>근무지</p>
           <div>
-            <div css={flexDesc}>
-              {freshPosition.place.addressArr?.map((place) => {
-                return (
-                  <div key={`지역_${place}`}>
-                    <p css={restPoint}>{place}</p>
-                  </div>
-                );
-              })}
-              {!freshPosition.place.addressArr && !freshPosition.place.factoryArr && (
-                <div css={placeContainer} key={`지역_${freshPosition.place.etc}`}>
-                  <div css={typeText}>{freshPosition.place.type}</div>
-                  <p css={restPoint}>{freshPosition.place.etc}</p>
-                </div>
-              )}
-            </div>
+            {freshPosition.place.addressArr?.map((place) => {
+              return (
+                <p css={placeDesc} key={`지역_${place}`}>
+                  {place}
+                </p>
+              );
+            })}
+
+            {!freshPosition.place.addressArr && !freshPosition.place.factoryArr && (
+              <p css={placeContainer} key={`지역_${freshPosition.place.etc}`}>
+                <span css={typeText}>{freshPosition.place.type}</span>
+                <span css={restPoint}>{freshPosition.place.etc}</span>
+              </p>
+            )}
+
             {freshPosition.place.factoryArr?.map((factory) => {
               return (
                 <div css={flexDesc} key={`${factory.factoryName}_${factory.id}`}>
@@ -115,7 +117,7 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
                     </div>
                     {factory.factoryName}
                   </button>
-                  {factory.address}
+                  <p css={factoryAddressDesc}>{factory.address}</p>
                 </div>
               );
             })}
