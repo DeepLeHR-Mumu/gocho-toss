@@ -66,18 +66,33 @@ export const container = css`
 `;
 
 export const flexDesc = css`
-  color: ${COLORS.GRAY10};
-  font-size: 0.875rem;
-  line-height: 1.8;
-  font-weight: 400;
-  word-break: keep-all;
   display: flex;
   align-items: center;
+`;
+
+export const factoryAddressDesc = css`
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: ${COLORS.GRAY10};
+  word-break: keep-all;
+  line-height: 1.8;
+`;
+
+export const placeDesc = css`
+  display: block;
+  line-height: 1.8;
+  width: 100%;
+  font-size: 0.875rem;
+  font-weight: 400;
+  word-break: break-all;
+  color: ${COLORS.GRAY10};
+  white-space: pre-line;
 `;
 
 export const factoryButton = css`
   color: ${COLORS.BLUE_FIRST40};
   font-size: 0.875rem;
+  line-height: 1.8;
   display: inline-flex;
   align-items: center;
   justify-content: center;
