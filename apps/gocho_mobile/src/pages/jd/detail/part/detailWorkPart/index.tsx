@@ -20,7 +20,7 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
         <div css={flexBox}>
           <p css={mainProductDesc}>{freshPosition.task.mainTask}</p>
 
-          {freshPosition.task.subTaskArr && (
+          {freshPosition.task.subTaskArr && freshPosition.task.subTaskArr[0] !== null && (
             <ul css={productContainer}>
               {freshPosition.task.subTaskArr.map((task) => {
                 return <li key={`직무_${task}`}>{task}</li>;
