@@ -13,7 +13,7 @@ const CompanyCard: FunctionComponent<CompanyCardProps> = ({ company }) => {
       <td css={cssObj.companyNameBox}>{company.name}</td>
       <td css={cssObj.activeButton}>
         <Link passHref href={`${BUSINESS_COMPANY_EDIT_URL}/?id=${company.id}`}>
-          <a>상세보기</a>
+          상세보기
         </Link>
       </td>
     </tr>

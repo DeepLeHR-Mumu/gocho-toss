@@ -94,7 +94,7 @@ export const globalStyle = css`
     vertical-align: baseline;
   }
   html {
-    font-family: Noto Sans KR, sans-serif;
+    font-family: "Noto Sans KR", Verdana, sans-serif;
     font-size: 16px;
     min-width: 360px;
     ${MOBILE} {
