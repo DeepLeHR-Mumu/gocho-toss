@@ -119,7 +119,7 @@ test("기업 정보 변경 페이지 테스트", async ({ page, context }) => {
     await kakaoAddressPage.keyboard.press("Tab");
     await kakaoAddressPage.keyboard.press("Enter");
 
-    await page.getByText("없음").click();
+    await page.getByTestId("company/edit/BasicPart").getByText("없음").click();
     await page.locator('input[name="pay_start"]').clear();
     await page.locator('input[name="pay_start"]').fill("2000");
     await page.locator('input[name="pay_avg"]').clear();
