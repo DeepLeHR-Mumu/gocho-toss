@@ -120,7 +120,7 @@ export const UploadBannerPart: FunctionComponent = () => {
               </label>
               {imageSrc && (
                 <div css={bannerPreviewContainer}>
-                  <Image layout="fill" objectFit="contain" src={imageSrc} alt="업로드된 기업 이미지" />
+                  <Image fill src={imageSrc} alt="업로드된 기업 이미지" />
                 </div>
               )}
             </div>

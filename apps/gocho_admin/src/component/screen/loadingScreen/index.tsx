@@ -9,7 +9,7 @@ export const LoadingScreen: FunctionComponent = () => {
     <div css={screenContainer}>
       <h2 css={title}>데이터 불러오는중...</h2>
       <div css={jobiContainer}>
-        <Image src={Jobi} alt="" />
+        <Image src={Jobi} alt="" priority />
       </div>
     </div>
   );
