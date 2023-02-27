@@ -73,7 +73,7 @@ export const SignUpBox: FunctionComponent = () => {
         />
       </div>
       <div css={logoContainer}>
-        <Image objectFit="contain" src={smallMono} alt="고초대졸 닷컴" layout="fill" />
+        <Image src={smallMono} alt="고초대졸 닷컴" fill />
       </div>
       <p css={desc}>가입은 5초면 가능!</p>
 

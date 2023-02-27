@@ -60,6 +60,9 @@ export const tipImageBox = css`
     width: 30.25rem;
     height: 18rem;
   }
+  > img {
+    object-fit: cover;
+  }
 `;
 
 export const currentTipContainer = css`

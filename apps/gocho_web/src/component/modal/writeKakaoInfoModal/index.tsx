@@ -74,7 +74,7 @@ export const KakaoBox: FunctionComponent = () => {
         <CloseButton size="M" buttonClick={closeModal} />
       </div>
       <div css={logoContainer}>
-        <Image src={smallMono} layout="fill" objectFit="contain" alt="고초대졸 닷컴" />
+        <Image src={smallMono} fill alt="" />
       </div>
 
       <p css={desc}>카카오톡 계정으로 간편하게 사용해보세요</p>
@@ -105,7 +105,7 @@ export const KakaoBox: FunctionComponent = () => {
 
         <button type="submit" css={submitButtonCSS}>
           <div css={kakaoLogoBox}>
-            <Image src={kakaoMono} alt="" layout="fill" objectFit="contain" />
+            <Image src={kakaoMono} alt="" fill />
           </div>
           카카오로 가입완료하기
         </button>

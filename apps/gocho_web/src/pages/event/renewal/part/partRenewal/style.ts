@@ -33,6 +33,9 @@ export const pointImgBox1 = css`
   position: absolute;
   bottom: 20%;
   right: 20%;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const pointImgBox2 = css`
@@ -41,6 +44,9 @@ export const pointImgBox2 = css`
   position: absolute;
   bottom: 0;
   left: 20%;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const listCSS = css`
@@ -51,6 +57,10 @@ export const listCSS = css`
   > li {
     position: relative;
     width: 32%;
+    height: 15rem;
+    > img {
+      object-fit: contain;
+    }
   }
 `;
 
@@ -62,10 +72,14 @@ export const subDesc = css`
 `;
 
 export const logoBox = css`
-  width: 11.5rem;
+  position: relative;
+  width: 8rem;
   height: 1.5rem;
   position: relative;
   margin: 0 auto 1.25rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const buttonBox = css`

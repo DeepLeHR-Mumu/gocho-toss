@@ -75,6 +75,9 @@ export const logoBox = css`
   max-width: 7.5rem;
   height: 1rem;
   margin: 2rem auto 0;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const jobiBox = css`
@@ -82,4 +85,7 @@ export const jobiBox = css`
   width: 40%;
   height: 100px;
   margin-left: 1rem;
+  > img {
+    object-fit: contain;
+  }
 `;

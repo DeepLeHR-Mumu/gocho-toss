@@ -172,8 +172,8 @@ export const bounceIcon = css`
   left: 0;
   top: -1.75rem;
   display: block;
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.6rem;
+  height: 1.6rem;
   animation: bounceAnimation 1s ease infinite;
 
   @keyframes bounceAnimation {

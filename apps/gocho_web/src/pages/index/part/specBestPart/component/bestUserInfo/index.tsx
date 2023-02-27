@@ -111,7 +111,7 @@ export const BestUserBox: FunctionComponent<BestUserInfoProps | skeletonProps> =
               <span css={bestUserNickName}>
                 {bestUserData.user.nickname}
                 <span css={bounceIcon}>
-                  <Image src={headerIcon} alt="" layout="fixed" />
+                  <Image src={headerIcon} alt="" fill />
                 </span>
               </span>
               님

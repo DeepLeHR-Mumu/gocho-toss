@@ -5,4 +5,7 @@ export const companyLogoBox = css`
   max-width: 6.25rem;
   height: 4rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
