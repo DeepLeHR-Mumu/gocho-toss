@@ -7,10 +7,10 @@ export interface ResponseObjDef {
   data: {
     insertId: number;
     userId: number;
-    Id: number;
+    id: number;
   };
 }
 
-export interface AddCompanyBookamrkArrDef {
+export interface AddCompanyBookmarkArrDef {
   ({ userId, id }: RequestObjDef): Promise<ResponseObjDef>;
 }
