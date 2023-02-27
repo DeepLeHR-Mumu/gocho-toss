@@ -1,6 +1,6 @@
 export interface RequestObjDef {
   userId: number;
-  elemId: number;
+  id: number;
 }
 
 export interface ResponseObjDef {
@@ -12,5 +12,5 @@ export interface ResponseObjDef {
 }
 
 export interface AddJobBookmarkDef {
-  ({ userId, elemId }: RequestObjDef): Promise<ResponseObjDef>;
+  ({ userId, id }: RequestObjDef): Promise<ResponseObjDef>;
 }

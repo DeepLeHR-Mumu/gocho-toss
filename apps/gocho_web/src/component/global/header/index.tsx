@@ -77,7 +77,7 @@ export const Header: FunctionComponent = () => {
     setIsUnifiedSearchOpened(false);
   }, [closeModal, pathname]);
 
-  const { isSuccess } = useUserInfo();
+  // const { isSuccess } = useUserInfo();
   const menuMainUrl = pathname.split("/")[1];
 
   return (
@@ -151,7 +151,7 @@ export const Header: FunctionComponent = () => {
               >
                 {isUnifiedSearchOpened ? <BsXLg /> : <FiSearch />}
               </button>
-              {isSuccess ? <Profile /> : <UnAuthMenu />}
+              <UnAuthMenu />
             </div>
           </nav>
         </div>

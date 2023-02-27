@@ -41,8 +41,8 @@ export const PasswordEditBox: FunctionComponent = () => {
       mutate(
         {
           userId: userInfoData.id,
-          originPassword,
-          password,
+          origin_password: originPassword,
+          new_password: password,
         },
         {
           onError: () => {
@@ -52,7 +52,7 @@ export const PasswordEditBox: FunctionComponent = () => {
             setFailCurrentPw(false);
             setCurrentToast("비밀번호가 변경되었습니다.");
             closeModal();
-            localStorage.setItem("token", `${data?.data.token}`);
+            localStorage.setItem("access_token", `${data?.data.access_token}`);
             refetch();
           },
         }

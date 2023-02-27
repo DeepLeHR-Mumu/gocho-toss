@@ -137,11 +137,7 @@ export const SpecRecommendCard: FunctionComponent<SpecRecommendCardProps | Skele
       </div>
 
       <div css={buttonContainer}>
-        <LinkButton
-          text={specData.isMine ? "평가 내역 보기" : "평가하기"}
-          variant="filled"
-          linkTo={`${SPEC_DETAIL_URL}/${specData.id}`}
-        />
+        <LinkButton text="평가하기" variant="filled" linkTo={`${SPEC_DETAIL_URL}/${specData.id}`} />
       </div>
     </article>
   );

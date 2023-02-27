@@ -17,8 +17,8 @@ interface JobObjDef {
 }
 
 const deleteJobBookmarkArr: DeleteJobBookmarkArrDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
-  const { data } = await axiosInstance.delete(`/users/${requestObj?.userId}/jd-bookmarks/${requestObj.elemId}`, {
+  const token = localStorage.getItem("accessToken") as string;
+  const { data } = await axiosInstance.delete(`/users/${requestObj?.userId}/jd-bookmarks/${requestObj.id}`, {
     headers: {
       "x-access-token": token,
     },

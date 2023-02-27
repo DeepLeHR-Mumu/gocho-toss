@@ -67,7 +67,7 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
   const addJobBookmark = () => {
     if (userId)
       addMutate(
-        { userId, elemId: jobData.id },
+        { userId, id: jobData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries([{ data: "jobArr" }]);
@@ -79,7 +79,7 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
   const deleteJobBookmark = () => {
     if (userId)
       deleteMutate(
-        { userId, elemId: jobData.id },
+        { userId, id: jobData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries([{ data: "jobArr" }]);

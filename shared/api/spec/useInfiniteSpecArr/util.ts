@@ -4,11 +4,10 @@ export const selector = (specDataArr: SpecObjDef[]) => {
   return specDataArr.map((specData) => {
     return {
       id: specData.id,
-      isMine: specData.isMine,
       user: {
-        nickname: specData.user.nickname,
-        image: specData.user.image,
-        badge: specData.user.badge,
+        nickname: specData.uploader.nickname,
+        image: specData.uploader.image,
+        badge: specData.uploader.badge,
       },
       score: specData.score,
       scoreCount: specData.score_count,

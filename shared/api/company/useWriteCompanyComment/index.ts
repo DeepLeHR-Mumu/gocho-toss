@@ -6,7 +6,7 @@ import { axiosInstance } from "../../axiosInstance";
 import { PostWriteCompanyCommentDef, useWriteCompanyCommentProps, RequestObjDef } from "./type";
 
 const postWriteCompanyComment: PostWriteCompanyCommentDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
+  const token = localStorage.getItem("accessToken") as string;
   const { data } = await axiosInstance.post(
     `/companies/${requestObj.companyId}/comments`,
     {

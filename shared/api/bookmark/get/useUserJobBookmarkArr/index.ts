@@ -7,7 +7,7 @@ import { GetUserJobBookmarkArrDef } from "./type";
 import { selector } from "./util";
 
 export const getUserJobBookmarkArr: GetUserJobBookmarkArrDef = async ({ queryKey: [{ requestObj }] }) => {
-  const token = localStorage.getItem("token") as string;
+  const token = localStorage.getItem("accessToken") as string;
   const { data } = await axiosInstance.get(`/users/${requestObj?.userId}/jd-bookmarks`, {
     headers: {
       "x-access-token": token,

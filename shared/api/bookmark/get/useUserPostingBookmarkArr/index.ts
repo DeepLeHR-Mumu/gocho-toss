@@ -6,7 +6,7 @@ import { GetUserPostingBookmarkArrDef } from "./type";
 import { selector } from "./util";
 
 export const getUserPostingBookmarkArr: GetUserPostingBookmarkArrDef = async ({ queryKey: [{ requestObj }] }) => {
-  const token = localStorage.getItem("token") as string;
+  const token = localStorage.getItem("accessToken") as string;
 
   const { data } = await axiosInstance.get(`/users/${requestObj?.userId}/posting-likes`, {
     headers: {
@@ -24,4 +24,4 @@ export const useUserPostingBookmarkArr = (requestObj: UserBookmarkArrRequestDef)
     },
   });
   return queryResult;
-}; 
+};

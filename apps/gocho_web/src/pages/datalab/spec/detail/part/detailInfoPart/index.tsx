@@ -33,21 +33,40 @@ export const DetailInfoPart: FunctionComponent<DetailInfoPartProps> = ({ detailD
         <p css={title}>
           <BsStars /> 수상
         </p>
-        {detailData.award ? <DetailSpecBox specStr={detailData.award} wide /> : <NotExistingBox />}
+        {/* TODO: 추후 출력보고 코드 수정 필요 (award, career, etc) */}
+        {detailData.award ? (
+          detailData.award.map((element) => {
+            return <DetailSpecBox key={`AwardDetail${element}`} specStr={element} wide />;
+          })
+        ) : (
+          <NotExistingBox />
+        )}
       </div>
 
       <div css={infoBox}>
         <p css={title}>
           <BsStars /> 경력
         </p>
-        {detailData.career ? <DetailSpecBox specStr={detailData.career} wide /> : <NotExistingBox />}
+        {detailData.career ? (
+          detailData.career.map((element) => {
+            return <DetailSpecBox key={`CareerDetail${element}`} specStr={element} wide />;
+          })
+        ) : (
+          <NotExistingBox />
+        )}
       </div>
 
       <div css={infoBox}>
         <p css={title}>
           <AiOutlineEdit /> 기타
         </p>
-        {detailData.etc ? <DetailSpecBox specStr={detailData.etc} wide /> : <NotExistingBox />}
+        {detailData.etc ? (
+          detailData.etc.map((element) => {
+            return <DetailSpecBox key={`EtcDetail${element}`} specStr={element} wide />;
+          })
+        ) : (
+          <NotExistingBox />
+        )}
       </div>
     </section>
   );

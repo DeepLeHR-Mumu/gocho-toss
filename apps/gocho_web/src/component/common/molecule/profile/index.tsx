@@ -2,7 +2,6 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { BsChevronUp } from "react-icons/bs";
 import { useRouter } from "next/router";
 
-import { useUserInfo } from "shared-api/auth";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
 import { MyProfileMenu } from "../myProfileMenu";
@@ -11,7 +10,6 @@ import { profileWrapper, greetingMsg, iconCSS, wrapper } from "./style";
 export const Profile: FunctionComponent = () => {
   const { pathname } = useRouter();
   const [isActive, setIsActive] = useState<boolean>(false);
-  const { data: userInfoData } = useUserInfo();
 
   useEffect(() => {
     setIsActive(false);
@@ -29,9 +27,9 @@ export const Profile: FunctionComponent = () => {
           });
         }}
       >
-        {userInfoData && <ProfileImg imageStr={userInfoData?.image} size="S" />}
+        {/* {userInfoData && <ProfileImg imageStr={userInfoData?.image} size="S" />} */}
 
-        <p css={greetingMsg}>{userInfoData?.nickname}</p>
+        {/* <p css={greetingMsg}>{userInfoData?.nickname}</p> */}
         <BsChevronUp css={iconCSS(isActive)} />
       </button>
       <MyProfileMenu active={isActive} />

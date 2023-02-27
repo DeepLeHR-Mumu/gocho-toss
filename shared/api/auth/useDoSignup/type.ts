@@ -8,7 +8,7 @@ export interface RequestObjDef {
 }
 
 export interface SignUpResponseDef {
-  data: { token: string };
+  data: { access_token: string; refresh_token: string };
 }
 
 export interface PostSignUpDef {

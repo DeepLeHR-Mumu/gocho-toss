@@ -6,7 +6,7 @@ import { axiosInstance } from "../../axiosInstance";
 import { RequestObjDef, DeleteUserInfoDef, UseDeleteUserInfoDef } from "./type";
 
 const deleteUserInfo: DeleteUserInfoDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
+  const token = localStorage.getItem("accessToken") as string;
   const { data } = await axiosInstance.delete(`/users/${requestObj?.id}`, {
     headers: {
       "x-access-token": token,

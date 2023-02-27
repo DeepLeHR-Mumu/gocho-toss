@@ -6,7 +6,7 @@ import { axiosInstance } from "../../axiosInstance";
 import { PostLikeCommentDef, UseLikeCommentProps, RequestObjDef } from "./type";
 
 const postLikeComment: PostLikeCommentDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
+  const token = localStorage.getItem("accessToken") as string;
   const { data } = await axiosInstance.post(
     `/companies/${requestObj.companyId}/comments/${requestObj.commentId}/likes`,
     {

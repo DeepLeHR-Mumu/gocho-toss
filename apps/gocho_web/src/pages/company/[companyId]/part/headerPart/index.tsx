@@ -61,7 +61,7 @@ export const HeaderPart: FunctionComponent = () => {
     return (
       userData &&
       addMutate(
-        { userId: userData.id, elemId: companyDetailData.id },
+        { userId: userData.id, id: companyDetailData.id },
         {
           onSuccess: () => {
             companyBookmarkEvent(companyDetailData.id);
@@ -76,7 +76,7 @@ export const HeaderPart: FunctionComponent = () => {
     return (
       userData &&
       deleteMutate(
-        { userId: userData.id, elemId: companyDetailData.id },
+        { userId: userData.id, id: companyDetailData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries(companyCountInfoKeyObj.countInfo({ id: companyDetailData.id }));

@@ -6,7 +6,7 @@ import { axiosInstance } from "../../axiosInstance";
 import { PostSignUpDef, RequestObjDef, SignUpResponseDef, UseDoSignUpProps } from "./type";
 
 const postSignUp: PostSignUpDef = async (requestObj) => {
-  const { data } = await axiosInstance.post("/auth/register", {
+  const { data } = await axiosInstance.post("/users/register", {
     ...requestObj,
   });
   return data;

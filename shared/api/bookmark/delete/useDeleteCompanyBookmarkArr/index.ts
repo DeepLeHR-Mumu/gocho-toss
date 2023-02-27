@@ -13,8 +13,8 @@ interface CompanyObjDef {
 }
 
 const deleteCompanyBoookmarkArr: DeleteCompanyBoookmarkArrDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
-  const { data } = await axiosInstance.delete(`/users/${requestObj?.userId}/company-bookmarks/${requestObj.elemId}`, {
+  const token = localStorage.getItem("accessToken") as string;
+  const { data } = await axiosInstance.delete(`/users/${requestObj?.userId}/company-bookmarks/${requestObj.id}`, {
     headers: {
       "x-access-token": token,
     },

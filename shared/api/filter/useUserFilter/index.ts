@@ -8,7 +8,7 @@ import { GetUserFilterDef } from "./type";
 import { selector } from "./util";
 
 const getUserFilter: GetUserFilterDef = async ({ queryKey: [{ requestObj }] }) => {
-  const token = localStorage.getItem("token") as string;
+  const token = localStorage.getItem("accessToken") as string;
   const { data } = await axiosInstance.get(`/users/${requestObj?.userId}/filter`, {
     headers: {
       "x-access-token": token,

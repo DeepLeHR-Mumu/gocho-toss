@@ -44,7 +44,7 @@ export const SignUpBox: FunctionComponent = () => {
         signupAttempt.current += 1;
       },
       onSuccess: (response) => {
-        localStorage.setItem("token", `${response?.data.token}`);
+        localStorage.setItem("accessToken", `${response?.data.access_token}`);
         signupSuccessEvent();
         refetch();
         closeModal();

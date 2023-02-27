@@ -5,7 +5,7 @@ import { axiosInstance } from "../../axiosInstance";
 import { selector } from "./util";
 
 export const postUserAuth = async () => {
-  const token = localStorage.getItem("token") as string;
+  const token = localStorage.getItem("accessToken") as string;
   const { data } = await axiosInstance.post(
     `/auth/check`,
     {},

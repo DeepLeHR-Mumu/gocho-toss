@@ -57,8 +57,8 @@ export const selector = (data: SpecDetailObjDef) => {
             weakPointArr: data.evals.weakness_count_arr,
             feedbackArr: data.evals.feedback_arr,
           },
-    isMine: data.isMine,
-    didEval: data.didEval,
-    evalCount: data.evalCount,
+    isMine: data.is_mine,
+    didEval: data.did_eval,
+    evalCount: data.eval_count,
   };
 };
