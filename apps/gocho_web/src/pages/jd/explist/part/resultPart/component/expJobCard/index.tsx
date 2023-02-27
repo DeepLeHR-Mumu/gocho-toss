@@ -57,16 +57,16 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
     <article css={cardWrapper}>
       <div css={companyInfoContainer}>
         <div css={companyLogo}>
-          <Image layout="fill" objectFit="contain" src={companyData.logoUrl || defaultCompanyLogo} alt="" />
+          <Image fill src={companyData.logoUrl || defaultCompanyLogo} alt="" sizes="1" />
         </div>
         <div css={companyInfoBox}>
           <div css={companyName}>{companyData.name}</div>
           <div css={buttonContainer}>
-            <Link href={`/company/${companyData.id}/detail`} passHref>
-              <a css={companyDetailButton}>기업상세</a>
+            <Link href={`/company/${companyData.id}/detail`} passHref css={companyDetailButton}>
+              기업상세
             </Link>
-            <Link href={`/company/${companyData.id}/jd`} passHref>
-              <a css={moreExpJobButton}>공고 더보기</a>
+            <Link href={`/company/${companyData.id}/jd`} passHref css={moreExpJobButton}>
+              공고 더보기
             </Link>
           </div>
         </div>
@@ -110,10 +110,8 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
                       );
                     })}
                   </div>
-                  <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
-                    <a css={jobDetailButton}>
-                      상세보기 <BsChevronRight />
-                    </a>
+                  <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref css={jobDetailButton}>
+                    상세보기 <BsChevronRight />
                   </Link>
                 </div>
               </div>

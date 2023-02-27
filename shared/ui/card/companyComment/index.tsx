@@ -111,6 +111,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
                 fill
                 src={companyData.logoUrl || defaultCompanyLogo}
                 alt={`${companyCommentArrData.company.name} 기업 로고`}
+                sizes="1"
               />
             </div>
           )}

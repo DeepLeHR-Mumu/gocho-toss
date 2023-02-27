@@ -32,4 +32,7 @@ export const imgBox = css`
   max-width: 56.25rem;
   height: 37.5rem;
   bottom: -8rem;
+  > img {
+    object-fit: contain;
+  }
 `;

@@ -58,7 +58,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
       <Link href={`/company/${companyData.id}/detail`} passHref>
         <strong css={nameCSS}>{companyData.name}</strong>
         <div css={companyLogoBox}>
-          <Image fill src={companyData.logoUrl || defaultCompanyLogo} alt={companyData.name} />
+          <Image fill sizes="1" src={companyData.logoUrl || defaultCompanyLogo} alt="" />
         </div>
       </Link>
     </article>

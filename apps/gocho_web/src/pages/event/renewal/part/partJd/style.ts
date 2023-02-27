@@ -31,8 +31,12 @@ export const flexBox = css`
 `;
 
 export const imgBox = css`
-  width: 38.75rem;
-  height: 16.85rem;
+  position: relative;
+  width: 38em;
+  height: 25rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const infoBox = css`

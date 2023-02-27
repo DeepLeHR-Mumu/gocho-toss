@@ -30,11 +30,11 @@ const NotFound: NextPage = () => {
           <LinkButton text="스펙페이지로 이동" variant="filled" linkTo={SPEC_LIST_URL} />
         </div>
         <div css={logoContainer}>
-          <Image src={deepLeLogo} alt="디플 회사 로고" objectFit="contain" layout="fill" draggable="false" />
+          <Image src={deepLeLogo} alt="디플 회사 로고" fill />
         </div>
       </article>
       <div css={jobiImageContainer}>
-        <Image src={jobiAttention} objectFit="contain" alt="" layout="fill" draggable="false" />
+        <Image src={jobiAttention} alt="" />
       </div>
     </main>
   );

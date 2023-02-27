@@ -40,6 +40,9 @@ export const imageBox = css`
   width: 3.5rem;
   height: 3.5rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const companyName = css`

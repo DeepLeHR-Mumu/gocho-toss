@@ -88,4 +88,7 @@ export const nozoImage = css`
   height: 2.5rem;
   margin-left: 1rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;

@@ -39,12 +39,15 @@ export const tagCSS = css`
 `;
 
 export const thumbnailBox = css`
+  position: relative;
   border-radius: 2rem;
   overflow: hidden;
   margin-right: 3.75rem;
   min-width: 16rem;
   height: 12rem;
-  position: relative;
+  > img {
+    object-fit: cover;
+  }
 `;
 
 export const contentContainer = css`

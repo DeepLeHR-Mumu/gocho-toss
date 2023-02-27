@@ -34,6 +34,7 @@ import {
   searchButton,
   flexBox,
   searchDimmed,
+  logoLink,
 } from "./style";
 
 export const Header: FunctionComponent = () => {
@@ -85,12 +86,9 @@ export const Header: FunctionComponent = () => {
         <div css={headerContainer}>
           <div css={logoCSS}>
             <Link href={MAIN_URL} passHref>
-              <Image
-                src={pathname === MAIN_URL ? colorLogoSrc : grayLogoSrc}
-                alt="고초대졸닷컴"
-                objectFit="contain"
-                layout="fill"
-              />
+              <div css={logoLink}>
+                <Image src={pathname === MAIN_URL ? colorLogoSrc : grayLogoSrc} alt="" fill />
+              </div>
             </Link>
           </div>
 

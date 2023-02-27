@@ -7,6 +7,6 @@ import { selectImage } from "./utils";
 
 export const ProfileImg: FunctionComponent<ProfileImgProps> = ({ imageStr = "default", size }) => (
   <div css={wrapper(size)}>
-    <Image src={selectImage(imageStr)} alt="유저 프로필" />
+    <Image src={selectImage(imageStr)} alt="유저 프로필" fill sizes="1" />
   </div>
 );

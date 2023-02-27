@@ -13,6 +13,7 @@ import {
   titleCSS,
   dimmed,
   linkButton,
+  imageCss,
 } from "./style";
 
 import { SlideCardProps } from "./type";
@@ -26,7 +27,7 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({ slideData }) => {
           {slideData.middleDesc}
           {slideData.iconImage && (
             <span css={middleDescIconBox}>
-              <Image src={slideData.iconImage} alt="" objectFit="contain" layout="fill" />
+              <Image src={slideData.iconImage} alt="" fill />
             </span>
           )}
         </p>
@@ -57,7 +58,9 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({ slideData }) => {
         )}
       </div>
       <div css={dimmed} />
-      <Image priority src={slideData.backgroundImage} alt={slideData.title} layout="responsive" />
+      <div css={imageCss}>
+        <Image priority src={slideData.backgroundImage} alt={slideData.title} fill />
+      </div>
     </div>
   );
 };

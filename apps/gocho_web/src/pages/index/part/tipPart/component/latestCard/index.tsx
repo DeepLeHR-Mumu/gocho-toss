@@ -13,7 +13,7 @@ export const LatestCard: FunctionComponent<LatestCardProps> = ({ tipData, curren
   return (
     <button css={cardWrapper(isCurrentTip)} type="button" onClick={changeCurrentTipHandler}>
       <div css={cardImageBox}>
-        <Image src={tipData.thumbnailSvgSrc} alt={tipData.title} layout="fill" objectFit="cover" />
+        <Image src={tipData.thumbnailSvgSrc} alt={tipData.title} fill  />
       </div>
       <div css={cardInfo}>
         <strong css={cardTitle}>{tipData.title}</strong>

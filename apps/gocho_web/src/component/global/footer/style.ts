@@ -30,6 +30,9 @@ export const GDtitleBox = css`
   height: 1.5rem;
   position: relative;
   margin-bottom: 2.5rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const companyInfoListCSS = css`
@@ -151,4 +154,7 @@ export const kakaoBox = css`
   position: relative;
   width: 0.75rem;
   height: 0.75rem;
+  > img {
+    object-fit: contain;
+  }
 `;

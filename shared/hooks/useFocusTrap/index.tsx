@@ -21,18 +21,14 @@ export const useFocusTrap = (modalRef: RefObject<HTMLElement>) => {
       }
     };
 
-    modalRef?.current?.focus();
-    const element = document.getElementById("__next");
-    if (element) {
-      element.ariaHidden = "true";
-    }
+    modalRef.current?.focus();
+    const element = document.getElementById("__next") as HTMLElement;
+    element.ariaHidden = "true";
     document.addEventListener("keydown", handleTab);
 
     return () => {
       document.removeEventListener("keydown", handleTab);
-      if (element) {
-        element.ariaHidden = "false";
-      }
+      element.ariaHidden = "false";
     };
   }, [modalRef]);
 };

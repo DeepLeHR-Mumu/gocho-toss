@@ -19,6 +19,7 @@ import {
   placeContainer,
   placeDesc,
   factoryAddressDesc,
+  factoryIconCSS,
 } from "./style";
 
 export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPosition }) => {
@@ -111,7 +112,9 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
                       showFactoryModal(factory);
                     }}
                   >
-                    <Image src={factoryIcon} alt="" objectFit="contain" />
+                    <div css={factoryIconCSS}>
+                      <Image src={factoryIcon} alt="" fill />
+                    </div>
                     {factory.factoryName}
                   </button>
                   <p css={factoryAddressDesc}>{factory.address}</p>
