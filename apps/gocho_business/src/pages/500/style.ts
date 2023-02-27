@@ -7,8 +7,10 @@ export const cssObj = {
     margin-bottom: 3.5rem;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     gap: 2rem 0;
+    min-height: calc(100vh - 25rem);
   `,
   jobiImage: css`
     position: relative;
