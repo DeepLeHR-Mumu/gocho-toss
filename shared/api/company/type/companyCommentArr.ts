@@ -1,15 +1,17 @@
 interface CompanyCommentDef {
+  uploader: {
+    user_id: number | null;
+    nickname: string;
+    badge: "default" | "admin" | "early_bird";
+  };
   id: number;
   company_id: number;
   jd_id: number;
   description: string;
-  user_id: number | null;
   created_time: number;
   liked: boolean;
   disliked: boolean;
-  nickname: string;
   title: string | null;
-  badge: "default" | "admin" | "early_bird";
   like_count: number;
   dislike_count: number;
 }

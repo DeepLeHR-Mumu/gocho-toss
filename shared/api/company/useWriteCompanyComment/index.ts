@@ -11,7 +11,7 @@ const postWriteCompanyComment: PostWriteCompanyCommentDef = async (requestObj) =
     `/companies/${requestObj.companyId}/comments`,
     {
       description: `${requestObj.description}`,
-      jdId: `${requestObj.jdId}`,
+      jd_id: `${requestObj.jdId}`,
     },
     {
       headers: {
