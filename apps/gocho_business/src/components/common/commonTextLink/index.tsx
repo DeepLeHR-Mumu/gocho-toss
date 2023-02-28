@@ -7,8 +7,8 @@ import { ButtonProps, LinkProps } from "./type";
 export const CommonTextLink: FunctionComponent<LinkProps | ButtonProps> = ({ type, url, onClickHandler, text }) => {
   if (type === "internalLink" && url) {
     return (
-      <Link href={url} passHref>
-        <a css={cssObj.link}>{text}</a>
+      <Link href={url} passHref css={cssObj.link}>
+        {text}
       </Link>
     );
   }

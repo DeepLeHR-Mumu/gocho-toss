@@ -39,11 +39,9 @@ export const SideBar: FunctionComponent = () => {
             const isEdit = linkObj.name === "공고" && router.asPath === INTERNAL_URL.JD_EDIT(Number(jdId));
 
             return (
-              <Link href={linkObj.url} key={linkObj.url} passHref>
-                <a css={cssObj.linkCSS(isRoute || isUpload || isEdit)}>
-                  <linkObj.icon />
-                  {linkObj.name}
-                </a>
+              <Link href={linkObj.url} key={linkObj.url} passHref css={cssObj.linkCSS(isRoute || isUpload || isEdit)}>
+                <linkObj.icon />
+                {linkObj.name}
               </Link>
             );
           })}

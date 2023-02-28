@@ -24,6 +24,10 @@ export const cssObj = {
     border-radius: 0.75rem;
     background-color: ${COLORS.GRAY100};
     border: 8px solid ${COLORS.GRAY100};
+
+    > img {
+      object-fit: contain;
+    }
   `,
   titleBox: css`
     padding-right: 1rem;

@@ -62,15 +62,20 @@ export const cssObj = {
       background-repeat: no-repeat;
       background-size: contain;
     }
+    > img {
+      object-fit: contain;
+    }
   `,
   backgroundBox: css`
     position: relative;
     width: 100%;
+    height: 40vh;
     min-width: 23.25rem;
-    max-width: 25vw;
+    max-width: 35vw;
     margin-bottom: -2px;
 
-    img {
+    > img {
+      object-fit: contain;
       object-position: center bottom;
     }
   `,

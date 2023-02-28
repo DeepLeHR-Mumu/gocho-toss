@@ -29,6 +29,10 @@ export const cssObj = {
     height: 3rem;
     border-radius: 50%;
     margin-bottom: 2rem;
+
+    > img {
+      object-fit: contain;
+    }
   `,
   title: css`
     font-size: 1.5rem;
