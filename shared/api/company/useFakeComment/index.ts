@@ -24,6 +24,6 @@ const postFakeComment: PostFakeCommentDef = async (requestObj) => {
 };
 
 export const useFakeComment: UseFakeCommentProps = () => {
-  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(postFakeComment);
+  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>({ mutationFn: postFakeComment });
   return mutationResult;
 };

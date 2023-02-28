@@ -19,7 +19,9 @@ export const useJdArr = (isLogin: boolean, requestObj: RequestObjDef) =>
     AxiosError<ErrorResponseDef>,
     ReturnType<typeof jdArrSelector>,
     ReturnType<typeof jdArrKeyObj.arr>
-  >(jdArrKeyObj.arr(requestObj), getJdArr, {
+  >({
+    queryKey: jdArrKeyObj.arr(requestObj),
+    queryFn: getJdArr,
     select: (data) => jdArrSelector(data),
     enabled: isLogin,
   });

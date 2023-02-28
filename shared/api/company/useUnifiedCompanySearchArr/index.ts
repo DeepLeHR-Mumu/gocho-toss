@@ -23,7 +23,9 @@ export const getUnifiedCompanySearchArr: GetSearchCompanyArrDef = async ({ query
 };
 
 export const useUnifiedCompanySearchArr = (requestObj: SearchCompanyArrRequestDef) => {
-  const queryResult = useQuery(searchCompanyArrKeyObj.searchArr(requestObj), getUnifiedCompanySearchArr, {
+  const queryResult = useQuery({
+    queryKey: searchCompanyArrKeyObj.searchArr(requestObj),
+    queryFn: getUnifiedCompanySearchArr,
     select: ({ data, count }) => {
       return selector(data, count);
     },

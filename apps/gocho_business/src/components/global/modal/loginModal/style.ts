@@ -24,6 +24,10 @@ export const cssObj = {
     width: 7.5rem;
     position: relative;
     margin-bottom: 1rem;
+
+    > img {
+      object-fit: contain;
+    }
   `,
   desc: css`
     color: ${COLORS.BLUE_FIRST40};

@@ -13,5 +13,5 @@ export const postAddFactory: PostFactoryDef = async (requestObj) => {
 };
 
 export const useAddFactory: useAddFactoryProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(postAddFactory);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: postAddFactory });
 };

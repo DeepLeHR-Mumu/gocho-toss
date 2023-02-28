@@ -15,20 +15,18 @@ export const CommonSquareButton: FunctionComponent<CommonSquareButtonProps | Com
 }) => {
   if (link) {
     return (
-      <Link href={link} passHref>
-        <a css={cssObj.wrapper(backgroundColor, borderColor, fontColor)}>
-          {iconObj?.location === "left" && (
-            <div css={cssObj.icon("left")}>
-              <iconObj.Icon />
-            </div>
-          )}
-          <p css={cssObj.text}>{text}</p>
-          {iconObj?.location === "right" && (
-            <div css={cssObj.icon("right")}>
-              <iconObj.Icon />
-            </div>
-          )}
-        </a>
+      <Link href={link} passHref css={cssObj.wrapper(backgroundColor, borderColor, fontColor)}>
+        {iconObj?.location === "left" && (
+          <div css={cssObj.icon("left")}>
+            <iconObj.Icon />
+          </div>
+        )}
+        <p css={cssObj.text}>{text}</p>
+        {iconObj?.location === "right" && (
+          <div css={cssObj.icon("right")}>
+            <iconObj.Icon />
+          </div>
+        )}
       </Link>
     );
   }

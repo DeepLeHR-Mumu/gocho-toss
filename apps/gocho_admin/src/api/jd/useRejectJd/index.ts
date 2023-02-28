@@ -15,5 +15,5 @@ const patchRejectJd: RejectJdDef = async (requestObj) => {
 };
 
 export const useRejectJd: UseRejectJdProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(patchRejectJd);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: patchRejectJd });
 };

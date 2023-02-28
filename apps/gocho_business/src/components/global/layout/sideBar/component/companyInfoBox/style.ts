@@ -15,6 +15,10 @@ export const cssObj = {
     width: 3rem;
     margin-right: 1rem;
     flex-shrink: 0;
+
+    > img {
+      object-fit: contain;
+    }
   `,
   nameCSS: css`
     font-weight: 700;

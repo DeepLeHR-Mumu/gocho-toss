@@ -8,11 +8,9 @@ import { cssObj } from "./style";
 
 export const UserInfoBox: FunctionComponent<UserInfoBoxProps> = ({ name }) => (
   <div css={cssObj.wrapper}>
-    <Link href={INTERNAL_URL.RECRUITER_LIST} passHref>
-      <a css={cssObj.name}>
-        <span css={cssObj.profile}>{name[0]}</span>
-        {name}
-      </a>
+    <Link href={INTERNAL_URL.RECRUITER_LIST} passHref css={cssObj.name}>
+      <span css={cssObj.profile}>{name[0]}</span>
+      {name}
     </Link>
   </div>
 );

@@ -14,7 +14,8 @@ export const deleteFactory: DeleteFactoryDef = async (requestObj) => {
 
 export const useDeleteFactory = () => {
   const queryClient = useQueryClient();
-  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>(deleteFactory, {
+  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
+    mutationFn: deleteFactory,
     onMutate: async (requestObj) => {
       await queryClient.cancelQueries(factoryArrKeyObj.all);
       const previousData = queryClient.getQueryData(factoryArrKeyObj.all);

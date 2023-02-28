@@ -13,10 +13,8 @@ export const getFactoryArr: GetFactoryArrDef = async () => {
 };
 
 export const useFactoryArr = () =>
-  useQuery<ResponseObjDef, AxiosError<ErrorResponseDef>, ReturnType<typeof factoryArrSelector>>(
-    factoryArrKeyObj.all,
-    getFactoryArr,
-    {
-      select: (data) => factoryArrSelector(data),
-    }
-  );
+  useQuery<ResponseObjDef, AxiosError<ErrorResponseDef>, ReturnType<typeof factoryArrSelector>>({
+    queryKey: factoryArrKeyObj.all,
+    queryFn: getFactoryArr,
+    select: (data) => factoryArrSelector(data),
+  });

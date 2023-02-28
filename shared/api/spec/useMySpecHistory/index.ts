@@ -18,7 +18,9 @@ export const getMySpecHistoryArr: GetMySpecHistoryArrDef = async ({ queryKey: [{
 };
 
 export const useMySpecHistory = (requestObj: mySpecHistoryRequestObjDef) => {
-  const queryResult = useQuery(mySpecHistoryKeyObj.list(requestObj), getMySpecHistoryArr, {
+  const queryResult = useQuery({
+    queryKey: mySpecHistoryKeyObj.list(requestObj),
+    queryFn: getMySpecHistoryArr,
     enabled: Boolean(requestObj.id),
     select: ({ data }) => {
       return selector(data);

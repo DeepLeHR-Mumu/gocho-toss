@@ -10,10 +10,8 @@ import { ButtonProps } from "./type";
 export const CommonCloseButton: FunctionComponent<ButtonProps> = ({ size, buttonClick, isHome }) => {
   if (isHome) {
     return (
-      <Link href={MAIN_URL} passHref>
-        <a css={closeButtonWrapper(size)}>
-          <FiHome />
-        </a>
+      <Link href={MAIN_URL} passHref css={closeButtonWrapper(size)}>
+        <FiHome />
       </Link>
     );
   }

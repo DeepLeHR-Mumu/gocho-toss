@@ -26,7 +26,8 @@ const addTipBookmarkArr: AddTipBookmarkArrDef = async (requestObj) => {
 
 export const useAddTipBookmarkArr = (tipObj: TipObjDef | undefined) => {
   const queryClient = useQueryClient();
-  const mutationResult = useMutation(addTipBookmarkArr, {
+  const mutationResult = useMutation({
+    mutationFn: addTipBookmarkArr,
     onMutate: async (requestObj) => {
       await queryClient.cancelQueries(userBookmarkKeyObj.tipBookmarkArr({ userId: requestObj.userId }));
       const previousTodos = queryClient.getQueryData(userBookmarkKeyObj.tipBookmarkArr({ userId: requestObj.userId }));

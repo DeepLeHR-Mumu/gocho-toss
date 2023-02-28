@@ -15,7 +15,9 @@ export const getInfiniteTipArr: GetInfiniteTipArrObjDef = async ({ queryKey: [{ 
 };
 
 export const useInfiniteTipArr = (requestObj: TipArrRequestObjDef) => {
-  const queryResult = useInfiniteQuery(tipArrKeyObj.infinite(requestObj), getInfiniteTipArr, {
+  const queryResult = useInfiniteQuery({
+    queryKey: tipArrKeyObj.infinite(requestObj),
+    queryFn: getInfiniteTipArr,
     getNextPageParam: (responseObj) => {
       return responseObj.data.length !== 0 ? responseObj.nextPage : undefined;
     },

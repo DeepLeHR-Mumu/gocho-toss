@@ -17,7 +17,9 @@ export const getInfiniteSpecArr: GetInifiniteSpecArrDef = async ({ queryKey: [{ 
 };
 
 export const useInfiniteSpecArr = (requestObj: SpecArrInfinityRequestDef) => {
-  const queryResult = useInfiniteQuery(specArrKeyObj.infinite(requestObj), getInfiniteSpecArr, {
+  const queryResult = useInfiniteQuery({
+    queryKey: specArrKeyObj.infinite(requestObj),
+    queryFn: getInfiniteSpecArr,
     getNextPageParam: (responseObj) => {
       return responseObj.data.length !== 0 ? responseObj.nextPage : undefined;
     },

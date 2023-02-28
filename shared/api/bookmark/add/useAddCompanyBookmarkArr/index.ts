@@ -29,7 +29,8 @@ const addCompanyBookmarkArr: AddCompanyBookamrkArrDef = async (requestObj) => {
 
 export const useAddCompanyBookmarkArr = (companyObj: CompanyObjDef | undefined) => {
   const queryClient = useQueryClient();
-  const mutationResult = useMutation<ResponseObjDef, AxiosError, RequestObjDef>(addCompanyBookmarkArr, {
+  const mutationResult = useMutation<ResponseObjDef, AxiosError, RequestObjDef>({
+    mutationFn: addCompanyBookmarkArr,
     onMutate: async (requestObj) => {
       await queryClient.cancelQueries(userBookmarkKeyObj.companyBookmarkArr({ userId: requestObj.userId }));
       const previousTodos = queryClient.getQueryData(
