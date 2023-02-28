@@ -13,5 +13,5 @@ export const deleteCompany: DeleteCompanyDef = async (requestObj) => {
 };
 
 export const useDeleteCompany: useDeleteCompanyProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(deleteCompany);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: deleteCompany });
 };

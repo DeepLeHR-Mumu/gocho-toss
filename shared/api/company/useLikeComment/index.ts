@@ -24,6 +24,6 @@ const postLikeComment: PostLikeCommentDef = async (requestObj) => {
 };
 
 export const useLikeComment: UseLikeCommentProps = () => {
-  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(postLikeComment);
+  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>({ mutationFn: postLikeComment });
   return mutationResult;
 };

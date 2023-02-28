@@ -12,6 +12,6 @@ const postFindPassword: PostFindPasswordDef = async (requestObj) => {
 };
 
 export const useFindPassword: UseFindPasswordProps = () => {
-  const mutationResult = useMutation<ResponseObjDef, AxiosError, RequestObjDef>(postFindPassword);
+  const mutationResult = useMutation<ResponseObjDef, AxiosError, RequestObjDef>({ mutationFn: postFindPassword });
   return mutationResult;
 };

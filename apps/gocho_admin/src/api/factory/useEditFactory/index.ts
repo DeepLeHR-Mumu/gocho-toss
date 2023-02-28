@@ -13,5 +13,5 @@ const putEditFactory: EditFactoryDef = async (requestObj) => {
 };
 
 export const useEditFactory: UseEditFactoryProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(putEditFactory);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: putEditFactory });
 };

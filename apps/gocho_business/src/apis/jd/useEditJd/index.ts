@@ -19,4 +19,4 @@ export const putEditJd: PostEditJdDef = async (requestObj) => {
 };
 
 export const useEditJd: useEditJdProps = () =>
-  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>(putEditJd);
+  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({ mutationFn: putEditJd });

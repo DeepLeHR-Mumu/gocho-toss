@@ -13,10 +13,8 @@ export const getRecruiterArr: GetRecruiterArrDef = async () => {
 };
 
 export const useRecruiterArr = () =>
-  useQuery<ResponseObjDef, AxiosError<ErrorResponseDef>, ReturnType<typeof recruiterArrSelector>>(
-    recruiterArrKeyObj.all,
-    getRecruiterArr,
-    {
-      select: (data) => recruiterArrSelector(data),
-    }
-  );
+  useQuery<ResponseObjDef, AxiosError<ErrorResponseDef>, ReturnType<typeof recruiterArrSelector>>({
+    queryKey: recruiterArrKeyObj.all,
+    queryFn: getRecruiterArr,
+    select: (data) => recruiterArrSelector(data),
+  });

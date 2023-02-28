@@ -11,7 +11,9 @@ export const getEditCompanyRequest: GetEditCompanyRequestDef = async ({ queryKey
 };
 
 export const useEditCompanyRequest = (requestObj: RequestObjDef) => {
-  return useQuery(companyDetailRequestKeyObj.detail(requestObj), getEditCompanyRequest, {
+  return useQuery({
+    queryKey: companyDetailRequestKeyObj.detail(requestObj),
+    queryFn: getEditCompanyRequest,
     enabled: Boolean(requestObj.companyId),
     select: (data) => {
       return companyDetailEditSelector(data);

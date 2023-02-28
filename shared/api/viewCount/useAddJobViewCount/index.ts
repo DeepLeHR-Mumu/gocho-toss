@@ -15,6 +15,6 @@ const addJobViewCount = async (requestObj: RequestObjDef) => {
 };
 
 export const useAddJobViewCount = () => {
-  const mutationResult = useMutation(addJobViewCount);
+  const mutationResult = useMutation({ mutationFn: addJobViewCount });
   return mutationResult;
 };

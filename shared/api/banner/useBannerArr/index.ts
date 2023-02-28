@@ -11,7 +11,9 @@ export const getBannerArr: GetBannerArrDef = async ({ queryKey: [{ requestObj }]
 };
 
 export const useBannerArr = (requestObj: BannerArrRequestObjDef) => {
-  return useQuery(bannerArrKeyObj.bannerArr(requestObj), getBannerArr, {
+  return useQuery({
+    queryKey: bannerArrKeyObj.bannerArr(requestObj),
+    queryFn: getBannerArr,
     select: ({ data, count }) => {
       return selector(data, count, requestObj.type);
     },

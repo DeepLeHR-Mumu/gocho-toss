@@ -17,7 +17,9 @@ export const getInfiniteJobArr: GetInfiniteJobArrDef = async ({ queryKey: [{ req
 };
 
 export const useInfiniteJobArr = (requestObj: JobArrRequestObjDef) => {
-  const queryResult = useInfiniteQuery(jobArrKeyObj.infinite(requestObj), getInfiniteJobArr, {
+  const queryResult = useInfiniteQuery({
+    queryKey: jobArrKeyObj.infinite(requestObj),
+    queryFn: getInfiniteJobArr,
     getNextPageParam: (responseObj) => {
       return responseObj.data.length !== 0 ? responseObj.nextPage : undefined;
     },

@@ -24,7 +24,8 @@ const deleteCompanyBoookmarkArr: DeleteCompanyBoookmarkArrDef = async (requestOb
 
 export const useDeleteCompanyBookmarkArr = (companyObj: CompanyObjDef | undefined) => {
   const queryClient = useQueryClient();
-  const mutationResult = useMutation(deleteCompanyBoookmarkArr, {
+  const mutationResult = useMutation({
+    mutationFn: deleteCompanyBoookmarkArr,
     onMutate: async (requestObj) => {
       await queryClient.cancelQueries(userBookmarkKeyObj.companyBookmarkArr({ userId: requestObj.userId }));
       const previousTodos = queryClient.getQueryData(

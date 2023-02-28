@@ -21,12 +21,10 @@ export const putCompanyDetail: PutCompanyDetailDef = async (requestObj) => {
 export const useAddCompanyDetail: useCompanyDetailProps = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>(
-    (requestObj) => putCompanyDetail(requestObj),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(companyDetailKeyObj.all);
-      },
-    }
-  );
+  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
+    mutationFn: (requestObj) => putCompanyDetail(requestObj),
+    onSuccess: () => {
+      queryClient.invalidateQueries(companyDetailKeyObj.all);
+    },
+  });
 };

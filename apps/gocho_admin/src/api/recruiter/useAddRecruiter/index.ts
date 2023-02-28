@@ -13,5 +13,5 @@ export const postAddRecruiter: PostRecruiterDef = async (requestObj) => {
 };
 
 export const useAddRecruiter: useAddRecruiterProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(postAddRecruiter);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: postAddRecruiter });
 };
