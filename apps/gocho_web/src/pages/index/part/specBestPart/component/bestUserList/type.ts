@@ -10,7 +10,7 @@ export interface BestUserArrProps {
   bestUserDataArr: {
     id: number;
     profileImg: ImageType;
-    user: {
+    uploader: {
       nickname: string;
       image: "default" | "default_work" | "jobi" | "jobi_safety" | "jobi_chat" | "jobi_play" | "jobi_teach";
       badge: "default" | "early_bird" | "admin";

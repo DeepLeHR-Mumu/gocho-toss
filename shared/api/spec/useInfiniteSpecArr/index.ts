@@ -7,7 +7,7 @@ import { GetInifiniteSpecArrDef } from "./type";
 import { selector } from "./util";
 
 export const getInfiniteSpecArr: GetInifiniteSpecArrDef = async ({ queryKey: [{ requestObj }], pageParam }) => {
-  const { data } = await axiosNewInstance.get(`/specs`, {
+  const { data } = await axiosNewInstance.get("/specs", {
     params: { ...requestObj, offset: pageParam },
   });
 

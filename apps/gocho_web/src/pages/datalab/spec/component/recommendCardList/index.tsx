@@ -11,7 +11,6 @@ import { sliderButtonContainer, sliderButton } from "./style";
 
 export const RecommendCardList: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
-  // LATER : eval로 해야함 지금은 데이터가 없어서 임시로 기본값지정
   const { data: selectedSpecArr, isLoading } = useSpecArr({ order: "recent", limit: 12 });
 
   if (!selectedSpecArr || isLoading) {

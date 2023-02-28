@@ -6,9 +6,8 @@ export interface SpecObjDef {
   image: ImageType;
   gender: "남" | "여";
   age: number;
-  isMine: boolean;
   military: "군필" | "미필" | "면제-해당없음";
-  user: {
+  uploader: {
     nickname: string;
     image: "default" | "default_work" | "jobi" | "jobi_safety" | "jobi_chat" | "jobi_play" | "jobi_teach";
     badge: "default" | "early_bird" | "admin";
@@ -48,7 +47,7 @@ export interface SpecObjDef {
     | null
     | undefined;
   language: LanguageType[] | null; // 언어
-  award: string | null;
-  career: string | null;
-  etc: string | null;
+  award: string[] | null;
+  career: string[] | null;
+  etc: string[] | null;
 }

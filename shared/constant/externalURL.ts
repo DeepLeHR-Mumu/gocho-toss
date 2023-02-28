@@ -4,8 +4,8 @@ export const BACKEND_URL = `${
 
 export const NEW_BACKEND_URL = `${
   process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
-    ? "https://user.gocho-back.com/v1"
-    : "https://dev.user.gocho-back.com/v1"
+    ? "https://user.gocho-back.com"
+    : "https://dev.user.gocho-back.com"
 }`;
 
 export const BUSINESS_BACKEND_URL = `${
