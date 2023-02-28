@@ -11,7 +11,9 @@ export const getEditFactoryRequest: GetEditFactoryRequestDef = async ({ queryKey
 };
 
 export const useEditFactoryRequest = (requestObj: RequestObjDef) => {
-  return useQuery(factoryEditKeyObj.edit(requestObj), getEditFactoryRequest, {
+  return useQuery({
+    queryKey: factoryEditKeyObj.edit(requestObj),
+    queryFn: getEditFactoryRequest,
     select: (data) => {
       return factoryDetailSelector(data);
     },

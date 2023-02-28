@@ -21,38 +21,40 @@ export const postAddJd: PostJdDef = async (requestObj) => {
 };
 
 export const useAddJd: useAddJdProps = () => {
-  return useMutation<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>((requestObj) => {
-    const newRequestObj = {
-      dto: {
-        ...requestObj.dto,
-        start_time: new Date(requestObj.dto.start_time).getTime(),
-        end_time: new Date(requestObj.dto.end_time).getTime(),
-        process_arr: requestObj.dto.process_arr?.split("\n"),
-        apply_route_arr: requestObj.dto.apply_route_arr?.split("\n"),
-        etc_arr: requestObj.dto.etc_arr ? requestObj.dto.etc_arr.split("\n") : null,
-        position_arr: requestObj.dto.position_arr.map((position) => {
-          return {
-            ...position,
-            rotation_arr: position.rotation_arr?.length !== 0 ? position.rotation_arr : null,
-            rotation_etc: position.rotation_etc?.length !== 0 ? position.rotation_etc : null,
-            required_etc_arr: position.required_etc_arr ? position.required_etc_arr.split("\n") : null,
-            task_detail_arr: position.task_detail_arr.split("\n"),
-            pay_arr: position.pay_arr?.split("\n"),
-            place: {
-              type: position.place.type,
-              address_arr: position.place.address_arr?.length === 0 ? null : position.place.address_arr,
-              factory_arr: position.place.factory_arr?.length === 0 ? null : position.place.factory_arr,
-              etc: position.place.etc?.length === 0 ? null : position.place.etc,
-            },
-            preferred_certi_arr: position.preferred_certi_arr?.length !== 0 ? position.preferred_certi_arr : null,
-            preferred_etc_arr:
-              position.preferred_etc_arr && position.preferred_etc_arr?.length !== 0
-                ? position.preferred_etc_arr?.split("\n")
-                : null,
-          };
-        }),
-      },
-    };
-    return postAddJd(newRequestObj);
+  return useMutation<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>({
+    mutationFn: (requestObj) => {
+      const newRequestObj = {
+        dto: {
+          ...requestObj.dto,
+          start_time: new Date(requestObj.dto.start_time).getTime(),
+          end_time: new Date(requestObj.dto.end_time).getTime(),
+          process_arr: requestObj.dto.process_arr?.split("\n"),
+          apply_route_arr: requestObj.dto.apply_route_arr?.split("\n"),
+          etc_arr: requestObj.dto.etc_arr ? requestObj.dto.etc_arr.split("\n") : null,
+          position_arr: requestObj.dto.position_arr.map((position) => {
+            return {
+              ...position,
+              rotation_arr: position.rotation_arr?.length !== 0 ? position.rotation_arr : null,
+              rotation_etc: position.rotation_etc?.length !== 0 ? position.rotation_etc : null,
+              required_etc_arr: position.required_etc_arr ? position.required_etc_arr.split("\n") : null,
+              task_detail_arr: position.task_detail_arr.split("\n"),
+              pay_arr: position.pay_arr?.split("\n"),
+              place: {
+                type: position.place.type,
+                address_arr: position.place.address_arr?.length === 0 ? null : position.place.address_arr,
+                factory_arr: position.place.factory_arr?.length === 0 ? null : position.place.factory_arr,
+                etc: position.place.etc?.length === 0 ? null : position.place.etc,
+              },
+              preferred_certi_arr: position.preferred_certi_arr?.length !== 0 ? position.preferred_certi_arr : null,
+              preferred_etc_arr:
+                position.preferred_etc_arr && position.preferred_etc_arr?.length !== 0
+                  ? position.preferred_etc_arr?.split("\n")
+                  : null,
+            };
+          }),
+        },
+      };
+      return postAddJd(newRequestObj);
+    },
   });
 };

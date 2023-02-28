@@ -14,7 +14,8 @@ export const deleteJd: DeleteJdDef = async (requestObj) => {
 
 export const useDeleteJd = () => {
   const queryClient = useQueryClient();
-  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>(deleteJd, {
+  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
+    mutationFn: deleteJd,
     onMutate: async (requestObj) => {
       await queryClient.cancelQueries(jdArrKeyObj.all);
       const previousData = queryClient.getQueryData(jdArrKeyObj.all);

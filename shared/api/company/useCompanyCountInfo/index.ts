@@ -15,7 +15,9 @@ export const getCompanyCountInfo: GetCompanyCountInfoDef = async ({ queryKey: [{
 };
 
 export const useCompanyCountInfo = (requestObj: CompanyCountInfoRequestObjDef) => {
-  const queryResult = useQuery(companyCountInfoKeyObj.countInfo(requestObj), getCompanyCountInfo, {
+  const queryResult = useQuery({
+    queryKey: companyCountInfoKeyObj.countInfo(requestObj),
+    queryFn: getCompanyCountInfo,
     enabled: Boolean(requestObj.id),
     select: (data) => {
       return selector(data);

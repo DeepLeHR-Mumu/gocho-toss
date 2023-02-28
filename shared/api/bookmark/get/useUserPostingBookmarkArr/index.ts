@@ -17,11 +17,13 @@ export const getUserPostingBookmarkArr: GetUserPostingBookmarkArrDef = async ({ 
 };
 
 export const useUserPostingBookmarkArr = (requestObj: UserBookmarkArrRequestDef) => {
-  const queryResult = useQuery(userBookmarkKeyObj.postingBookmarkArr(requestObj), getUserPostingBookmarkArr, {
+  const queryResult = useQuery({
+    queryKey: userBookmarkKeyObj.postingBookmarkArr(requestObj),
+    queryFn: getUserPostingBookmarkArr,
     enabled: Boolean(requestObj.userId),
     select: (data) => {
       return selector(data);
     },
   });
   return queryResult;
-}; 
+};

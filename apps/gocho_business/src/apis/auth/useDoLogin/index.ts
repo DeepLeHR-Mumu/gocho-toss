@@ -12,4 +12,4 @@ const postLogin: PostLoginDef = async (requestObj) => {
 };
 
 export const useDoLogin = () =>
-  useMutation<AxiosResponse<ResponseObjDef>, AxiosError<ErrorResponseDef>, RequestObjDef>(postLogin);
+  useMutation<AxiosResponse<ResponseObjDef>, AxiosError<ErrorResponseDef>, RequestObjDef>({ mutationFn: postLogin });

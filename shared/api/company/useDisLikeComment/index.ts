@@ -20,6 +20,6 @@ const postDisLikeComment: PostDisLikeCommentDef = async (requestObj) => {
 };
 
 export const useDisLikeComment: UseDisLikeCommentProps = () => {
-  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(postDisLikeComment);
+  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>({ mutationFn: postDisLikeComment });
   return mutationResult;
 };

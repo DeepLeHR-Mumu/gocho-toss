@@ -20,5 +20,5 @@ export const postAddTopBanner: PostTopBannerDef = async (requestObj) => {
 };
 
 export const useAddTopBanner: useAddTopBannerProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(postAddTopBanner);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: postAddTopBanner });
 };

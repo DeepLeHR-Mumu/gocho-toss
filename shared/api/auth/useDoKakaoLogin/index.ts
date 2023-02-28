@@ -12,6 +12,6 @@ const postKakaoLogin: PostKakaoLoginDef = async (requestObj) => {
 };
 
 export const useDoKakaoLogin: useDoLoginProps = () => {
-  const mutationResult = useMutation<ResponseObjDef, AxiosError, RequestObjDef>(postKakaoLogin);
+  const mutationResult = useMutation<ResponseObjDef, AxiosError, RequestObjDef>({ mutationFn: postKakaoLogin });
   return mutationResult;
 };

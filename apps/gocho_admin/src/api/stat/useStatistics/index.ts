@@ -11,7 +11,9 @@ export const getStatistics: GetStatisticsDef = async () => {
 };
 
 export const useStatistics = () => {
-  return useQuery(statisticsKeyObj.all, getStatistics, {
+  return useQuery({
+    queryKey: statisticsKeyObj.all,
+    queryFn: getStatistics,
     select: (data) => {
       return statSelector(data);
     },

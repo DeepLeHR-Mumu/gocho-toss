@@ -46,7 +46,9 @@ export const LastEditInfoPart: FunctionComponent = () => {
         <p css={cssObj.userInfo}>
           등록자
           <FiUser />
-          {companyDetailData.uploader.name}({companyDetailData.uploader.department})
+          {companyDetailData.uploader.name === "없음"
+            ? "없음"
+            : `${companyDetailData.uploader.name}(${companyDetailData.uploader.department})`}
         </p>
       </div>
     );

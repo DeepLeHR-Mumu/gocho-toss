@@ -22,7 +22,8 @@ const deletePostingBookmarkArr: DeletePostingBookmarkArrDef = async (requestObj)
 
 export const useDeletePostingBookmarkArr = (postingObj: PostingObjDef | undefined) => {
   const queryClient = useQueryClient();
-  const mutationResult = useMutation(deletePostingBookmarkArr, {
+  const mutationResult = useMutation({
+    mutationFn: deletePostingBookmarkArr,
     onMutate: async (requestObj) => {
       await queryClient.cancelQueries(userBookmarkKeyObj.postingBookmarkArr({ userId: requestObj.userId }));
       const previousTodos = queryClient.getQueryData(userBookmarkKeyObj.jobBookmarkArr({ userId: requestObj.userId }));

@@ -81,7 +81,7 @@ export const cssObj = {
       font-weight: 400;
 
       ::placeholder {
-        color: ${COLORS.GRAY30};
+        color: ${isDisabled ? COLORS.GRAY65 : COLORS.GRAY30};
       }
     `;
     if (isDisabled) {

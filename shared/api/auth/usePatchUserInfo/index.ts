@@ -20,6 +20,6 @@ const patchUserInfo: PatchUserInfoDef = async (requestObj) => {
 };
 
 export const usePatchUserInfo: UsePatchUserInfoProps = () => {
-  const mutationResult = useMutation<UserInfoResponse, ErrorResponse, RequestObjDef>(patchUserInfo);
+  const mutationResult = useMutation<UserInfoResponse, ErrorResponse, RequestObjDef>({ mutationFn: patchUserInfo });
   return mutationResult;
 };

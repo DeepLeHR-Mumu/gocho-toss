@@ -17,7 +17,9 @@ export const getUserJobBookmarkArr: GetUserJobBookmarkArrDef = async ({ queryKey
 };
 
 export const useUserJobBookmarkArr = (requestObj: UserBookmarkArrRequestDef) => {
-  const queryResult = useQuery(oldBookmarkKeyObj.jobBookmarkArr(requestObj), getUserJobBookmarkArr, {
+  const queryResult = useQuery({
+    queryKey: oldBookmarkKeyObj.jobBookmarkArr(requestObj),
+    queryFn: getUserJobBookmarkArr,
     enabled: Boolean(requestObj.userId),
     select: (data) => {
       return selector(data);

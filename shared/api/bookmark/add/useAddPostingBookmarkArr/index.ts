@@ -26,7 +26,8 @@ const addPostingBookmarkArr: AddPostingBookmarkArrDef = async (requestObj) => {
 
 export const useAddPostingBookmarkArr = (postingObj: PostingObjDef | undefined) => {
   const queryClient = useQueryClient();
-  const mutationResult = useMutation(addPostingBookmarkArr, {
+  const mutationResult = useMutation({
+    mutationFn: addPostingBookmarkArr,
     onMutate: async (requestObj) => {
       await queryClient.cancelQueries(userBookmarkKeyObj.postingBookmarkArr({ userId: requestObj.userId }));
       const previousTodos = queryClient.getQueryData(userBookmarkKeyObj.jobBookmarkArr({ userId: requestObj.userId }));

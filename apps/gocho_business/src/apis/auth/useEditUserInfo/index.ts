@@ -15,4 +15,6 @@ const patchUserInfo: PatchUserInfoDef = async (requestObj) => {
 };
 
 export const useEditUserInfo = () =>
-  useMutation<AxiosResponse<ResponseObjDef>, AxiosError<ErrorResponseDef>, RequestObjDef>(patchUserInfo);
+  useMutation<AxiosResponse<ResponseObjDef>, AxiosError<ErrorResponseDef>, RequestObjDef>({
+    mutationFn: patchUserInfo,
+  });

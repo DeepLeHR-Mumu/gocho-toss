@@ -13,5 +13,5 @@ export const deleteFactory: DeleteFactoryDef = async (requestObj) => {
 };
 
 export const useDeleteFactory: useDeleteFactoryProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(deleteFactory);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: deleteFactory });
 };
