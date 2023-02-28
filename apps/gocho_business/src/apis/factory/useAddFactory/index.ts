@@ -19,7 +19,8 @@ export const postAddFactory: PostFactoryDef = async (requestObj) => {
 export const useAddFactory = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>(postAddFactory, {
+  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
+    mutationFn: postAddFactory,
     onSuccess: () => {
       queryClient.invalidateQueries(factoryArrKeyObj.all);
     },

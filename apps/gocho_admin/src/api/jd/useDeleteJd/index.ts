@@ -13,5 +13,5 @@ export const deleteJd: DeleteJdDef = async (requestObj) => {
 };
 
 export const useDeleteJd: useDeleteJdProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(deleteJd);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: deleteJd });
 };

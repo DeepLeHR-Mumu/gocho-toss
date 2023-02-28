@@ -13,5 +13,5 @@ export const deleteRecruiter: DeleteRecruiterDef = async (requestObj) => {
 };
 
 export const useDeleteRecruiter: useDeleteRecruiterProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(deleteRecruiter);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: deleteRecruiter });
 };

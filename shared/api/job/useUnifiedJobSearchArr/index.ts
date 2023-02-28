@@ -21,7 +21,9 @@ export const getUnifiedJobSearchArr: GetJobArrDef = async ({ queryKey: [{ reques
 };
 
 export const useUnifiedJobSearchArr = (requestObj: SearchJobRequestObj) => {
-  const queryResult = useQuery(searchJobArrKeyObj.searchArr(requestObj), getUnifiedJobSearchArr, {
+  const queryResult = useQuery({
+    queryKey: searchJobArrKeyObj.searchArr(requestObj),
+    queryFn: getUnifiedJobSearchArr,
     select: ({ data, count }) => {
       return selector(data, count);
     },

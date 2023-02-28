@@ -18,7 +18,9 @@ export const useCompanyDetail = (requestObj: RequestObjDef) =>
     AxiosError<ErrorResponseDef>,
     ReturnType<typeof companyDetailSelector>,
     ReturnType<typeof companyDetailKeyObj.detail>
-  >(companyDetailKeyObj.detail(requestObj), getCompanyDetail, {
+  >({
+    queryKey: companyDetailKeyObj.detail(requestObj),
+    queryFn: getCompanyDetail,
     enabled: Boolean(requestObj.companyId),
     select: (data) => companyDetailSelector(data),
   });

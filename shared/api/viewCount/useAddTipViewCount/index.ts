@@ -15,6 +15,6 @@ const addTipViewCount = async (requestObj: RequestObjDef) => {
 };
 
 export const useAddTipViewCount = () => {
-  const mutationResult = useMutation(addTipViewCount);
+  const mutationResult = useMutation({ mutationFn: addTipViewCount });
   return mutationResult;
 };

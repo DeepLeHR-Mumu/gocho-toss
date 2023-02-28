@@ -12,4 +12,4 @@ const postFindPassword: PostFindPasswordDef = async (requestObj) => {
 };
 
 export const useFindPassword = () =>
-  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>(postFindPassword);
+  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({ mutationFn: postFindPassword });

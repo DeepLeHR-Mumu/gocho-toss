@@ -22,6 +22,6 @@ const postDoUserFilter: PostDoUserFilterDef = async (requestObj) => {
 };
 
 export const useDoUserFilter: useDoUserFilterProps = () => {
-  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(postDoUserFilter);
+  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>({ mutationFn: postDoUserFilter });
   return mutationResult;
 };

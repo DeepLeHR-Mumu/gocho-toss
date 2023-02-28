@@ -13,5 +13,5 @@ export const deleteBanner: DeleteBannerDef = async (requestObj) => {
 };
 
 export const useDeleteBanner: useDeleteBannerProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(deleteBanner);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: deleteBanner });
 };

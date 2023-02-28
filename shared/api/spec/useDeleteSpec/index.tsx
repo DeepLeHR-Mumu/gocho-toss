@@ -17,6 +17,6 @@ const postDeleteMySpec: PostDeleteMySpecDef = async (requestObj) => {
 };
 
 export const useDeleteMySpec: useDeleteMySpecProps = () => {
-  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(postDeleteMySpec);
+  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>({ mutationFn: postDeleteMySpec });
   return mutationResult;
 };

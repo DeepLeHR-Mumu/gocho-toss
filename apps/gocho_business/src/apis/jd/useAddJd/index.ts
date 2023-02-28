@@ -19,4 +19,4 @@ export const postAddJd: PostJdDef = async (requestObj) => {
 };
 
 export const useAddJd: useAddJdProps = () =>
-  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>(postAddJd);
+  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({ mutationFn: postAddJd });

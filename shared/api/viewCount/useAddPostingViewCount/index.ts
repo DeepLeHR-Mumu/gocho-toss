@@ -15,6 +15,6 @@ const addPostingViewCount = async (requestObj: RequestObjDef) => {
 };
 
 export const useAddPostingViewCount = () => {
-  const mutationResult = useMutation(addPostingViewCount);
+  const mutationResult = useMutation({ mutationFn: addPostingViewCount });
   return mutationResult;
 };
