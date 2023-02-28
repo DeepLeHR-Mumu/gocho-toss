@@ -11,7 +11,9 @@ export const getJdDetail: GetJdDetailDef = async ({ queryKey: [{ requestObj }] }
 };
 
 export const useJdDetail = (requestObj: RequestObjDef) => {
-  return useQuery(jdDetailKeyObj.detail(requestObj), getJdDetail, {
+  return useQuery({
+    queryKey: jdDetailKeyObj.detail(requestObj),
+    queryFn: getJdDetail,
     enabled: Boolean(requestObj.id),
     select: (data) => {
       return jdDetailSelector(data);

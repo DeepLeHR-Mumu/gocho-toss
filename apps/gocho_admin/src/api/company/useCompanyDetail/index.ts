@@ -11,7 +11,9 @@ export const getCompanyDetail: GetCompanyDetailDef = async ({ queryKey: [{ reque
 };
 
 export const useCompanyDetail = (requestObj: RequestObjDef) => {
-  return useQuery(companyDetailKeyObj.detail(requestObj), getCompanyDetail, {
+  return useQuery({
+    queryKey: companyDetailKeyObj.detail(requestObj),
+    queryFn: getCompanyDetail,
     enabled: Boolean(requestObj.companyId),
     select: (data) => {
       return companyDetailConverter(data);

@@ -14,6 +14,6 @@ export const postRegisterSpec: postRegisterSpecDef = async (requestObj) => {
 };
 
 export const useRegisterSpec: useRegisterSpecProps = () => {
-  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(postRegisterSpec);
+  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>({ mutationFn: postRegisterSpec });
   return mutationResult;
 };

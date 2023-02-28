@@ -18,5 +18,5 @@ const patchRejectCompany: RejectCompanyDef = async (requestObj) => {
 };
 
 export const useRejectCompany: UseRejectCompanyProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(patchRejectCompany);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: patchRejectCompany });
 };

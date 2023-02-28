@@ -31,7 +31,8 @@ const addJobBookmark: AddJobBookmarkDef = async (requestObj) => {
 
 export const useAddJobBookmarkArr = (jobObj: JobObjDef | undefined) => {
   const queryClient = useQueryClient();
-  const mutationResult = useMutation<ResponseObjDef, AxiosError, RequestObjDef>(addJobBookmark, {
+  const mutationResult = useMutation<ResponseObjDef, AxiosError, RequestObjDef>({
+    mutationFn: addJobBookmark,
     onMutate: async (requestObj) => {
       await queryClient.cancelQueries(userBookmarkKeyObj.jobBookmarkArr({ userId: requestObj.userId }));
       const previousTodos = queryClient.getQueryData(userBookmarkKeyObj.jobBookmarkArr({ userId: requestObj.userId }));
