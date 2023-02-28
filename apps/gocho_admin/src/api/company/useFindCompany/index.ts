@@ -13,7 +13,9 @@ export const getFindCompany: GetCompanyArrDef = async ({ queryKey: [{ requestObj
 };
 
 export const useFindCompany = (requestObj: RequestObjDef) => {
-  return useQuery(companyArrFindKeyObj.find(requestObj), getFindCompany, {
+  return useQuery({
+    queryKey: companyArrFindKeyObj.find(requestObj),
+    queryFn: getFindCompany,
     select: (data) => {
       return companyArrSelector(data);
     },

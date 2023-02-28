@@ -11,7 +11,9 @@ export const getFactoryArr: GetFactoryArrDef = async ({ queryKey: [{ requestObj 
 };
 
 export const useFactoryArr = (requestObj: RequestObjDef) => {
-  return useQuery(factoryArrKeyObj.arr(requestObj), getFactoryArr, {
+  return useQuery({
+    queryKey: factoryArrKeyObj.arr(requestObj),
+    queryFn: getFactoryArr,
     select: (data) => {
       return factoryArrSelector(data);
     },

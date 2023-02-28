@@ -17,7 +17,9 @@ export const postUserAuth = async () => {
 };
 
 export const useUserInfo = () => {
-  const queryResult = useQuery(userInfoKeyObj.userInfo, postUserAuth, {
+  const queryResult = useQuery({
+    queryKey: userInfoKeyObj.userInfo,
+    queryFn: postUserAuth,
     select: ({ data }) => {
       return selector(data);
     },

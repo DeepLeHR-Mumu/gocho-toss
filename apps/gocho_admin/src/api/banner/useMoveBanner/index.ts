@@ -15,5 +15,5 @@ const patchMoveBanner: MoveBannerDef = async (requestObj) => {
 };
 
 export const useMoveBanner: UseMoveBannerProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(patchMoveBanner);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: patchMoveBanner });
 };

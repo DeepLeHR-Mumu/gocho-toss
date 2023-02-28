@@ -15,7 +15,7 @@ const addCompanyViewCount = async (requestObj: RequestObjDef) => {
 };
 
 export const useAddCompanyViewCount = () => {
-  const mutationResult = useMutation(addCompanyViewCount,);
-  
+  const mutationResult = useMutation({ mutationFn: addCompanyViewCount });
+
   return mutationResult;
 };

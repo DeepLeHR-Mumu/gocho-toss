@@ -18,7 +18,9 @@ export const getUserCompanyBookmarkArr: GetUserCompanyBookmarkArrDef = async ({ 
 };
 
 export const useUserCompanyBookmarkArr = (requestObj: UserBookmarkArrRequestDef) => {
-  const queryResult = useQuery(oldBookmarkKeyObj.companyBookmarkArr(requestObj), getUserCompanyBookmarkArr, {
+  const queryResult = useQuery({
+    queryKey: oldBookmarkKeyObj.companyBookmarkArr(requestObj),
+    queryFn: getUserCompanyBookmarkArr,
     enabled: Boolean(requestObj.userId),
     select: ({ data }) => {
       return selector(data);

@@ -11,4 +11,5 @@ export const patchJd: EndJdDef = async (requestObj) => {
   return data;
 };
 
-export const useEndJd = () => useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>(patchJd);
+export const useEndJd = () =>
+  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({ mutationFn: patchJd });

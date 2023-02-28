@@ -19,7 +19,9 @@ export const getUserTipBookmarkArr: GetUserTipBookmarkArrDef = async ({ queryKey
 };
 
 export const useUserTipBookmarkArr = (requestObj: UserBookmarkArrRequestDef) => {
-  const queryResult = useQuery(oldBookmarkKeyObj.tipBookmarkArr(requestObj), getUserTipBookmarkArr, {
+  const queryResult = useQuery({
+    queryKey: oldBookmarkKeyObj.tipBookmarkArr(requestObj),
+    queryFn: getUserTipBookmarkArr,
     enabled: Boolean(requestObj.userId),
     select: (data) => {
       return selector(data);

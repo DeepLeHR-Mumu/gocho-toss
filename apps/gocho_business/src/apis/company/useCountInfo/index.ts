@@ -18,7 +18,9 @@ export const useCountInfo = (requestObj: RequestObjDef) =>
     AxiosError<ErrorResponseDef>,
     ReturnType<typeof countInfoSelector>,
     ReturnType<typeof countInfoKeyObj.detail>
-  >(countInfoKeyObj.detail(requestObj), getCountInfo, {
+  >({
+    queryKey: countInfoKeyObj.detail(requestObj),
+    queryFn: getCountInfo,
     enabled: Boolean(requestObj.companyId),
     select: (data) => countInfoSelector(data),
   });

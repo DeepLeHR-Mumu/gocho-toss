@@ -20,6 +20,6 @@ const postDisFakeComment: PostDisFakeCommentDef = async (requestObj) => {
 };
 
 export const useDisFakeComment: UseDisFakeCommentProps = () => {
-  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>(postDisFakeComment);
+  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>({ mutationFn: postDisFakeComment });
   return mutationResult;
 };

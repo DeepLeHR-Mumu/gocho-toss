@@ -18,7 +18,9 @@ const getUserFilter: GetUserFilterDef = async ({ queryKey: [{ requestObj }] }) =
 };
 
 export const useUserFilter = (requestObj: FilterRequestObjDef) => {
-  const queryResult = useQuery(filterKeyObj.all(requestObj), getUserFilter, {
+  const queryResult = useQuery({
+    queryKey: filterKeyObj.all(requestObj),
+    queryFn: getUserFilter,
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response?.status === 404) {
         return null;

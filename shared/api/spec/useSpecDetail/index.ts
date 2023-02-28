@@ -16,7 +16,9 @@ export const getSpecDetail: GetSpecDetailDef = async ({ queryKey: [{ requestObj 
 };
 
 export const useSpecDetail = (requestObj: SpecDetailRequestDef) => {
-  const queryResult = useQuery(specDetailKeyObj.detail(requestObj), getSpecDetail, {
+  const queryResult = useQuery({
+    queryKey: specDetailKeyObj.detail(requestObj),
+    queryFn: getSpecDetail,
     staleTime: Infinity,
     enabled: Boolean(requestObj.specId),
     select: ({ data }) => {

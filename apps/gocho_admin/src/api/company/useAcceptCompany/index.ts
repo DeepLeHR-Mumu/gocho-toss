@@ -15,5 +15,5 @@ const putAcceptCompany: AcceptCompanyDef = async (requestObj) => {
 };
 
 export const useAcceptCompany: UseAcceptCompanyProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(putAcceptCompany);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: putAcceptCompany });
 };

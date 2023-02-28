@@ -18,7 +18,9 @@ export const useJdDetail = (isLogin: boolean, requestObj: RequestObjDef) =>
     AxiosError<ErrorResponseDef>,
     ReturnType<typeof jdDetailSelector>,
     ReturnType<typeof jdDetailKeyObj.detail>
-  >(jdDetailKeyObj.detail(requestObj), getJdDetail, {
+  >({
+    queryKey: jdDetailKeyObj.detail(requestObj),
+    queryFn: getJdDetail,
     select: (data) => jdDetailSelector(data),
     enabled: isLogin,
   });

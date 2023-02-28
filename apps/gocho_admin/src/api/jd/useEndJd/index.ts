@@ -13,5 +13,5 @@ export const patchEndJd: EndJdDef = async (requestObj) => {
 };
 
 export const useEndJd: useEndJdProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(patchEndJd);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: patchEndJd });
 };
