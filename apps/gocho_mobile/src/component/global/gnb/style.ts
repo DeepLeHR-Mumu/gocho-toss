@@ -26,6 +26,9 @@ export const MainLogoBox = css`
   height: 1.125rem;
   width: 7.5rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const iconBox = css`

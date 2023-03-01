@@ -111,8 +111,8 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
             <Image
               src={jobDetailData.company.logoUrl || defaultCompanyLogo}
               alt={jobDetailData.company.name}
-              layout="fill"
-              objectFit="contain"
+              fill
+              sizes="1"
             />
           </div>
         </div>
@@ -148,8 +148,8 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
             </button>
           </li>
           <li>
-            <Link href={`/company/${jobDetailData.company.companyId}/detail`} passHref>
-              <a css={buttonCSS(false)}>기업정보</a>
+            <Link href={`/company/${jobDetailData.company.companyId}/detail`} passHref css={buttonCSS(false)}>
+              기업정보
             </Link>
           </li>
           {jobDetailData.company.youtubeUrl && (
@@ -175,8 +175,8 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
             </p>
           </li>
         </ul>
-        <Link href={`/company/${jobDetailData.company.companyId}/detail`}>
-          <a css={companyName}>{jobDetailData.company.name}</a>
+        <Link href={`/company/${jobDetailData.company.companyId}/detail`} css={companyName}>
+          {jobDetailData.company.name}
         </Link>
         <p css={title}>{jobDetailData.title}</p>
       </div>

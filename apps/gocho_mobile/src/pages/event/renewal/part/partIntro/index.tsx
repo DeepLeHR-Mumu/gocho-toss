@@ -24,7 +24,7 @@ export const PartIntro: FunctionComponent = () => {
         <div css={topLayoutCSS}>
           <div css={infoBox}>
             <div css={logoBox}>
-              <Image src={gochoLogoColor} alt="고초대졸닷컴" layout="fixed" objectFit="contain" />
+              <Image src={gochoLogoColor} alt="고초대졸닷컴" fill />
             </div>
             <strong css={titleCSS}>더욱 편하게 돌아왔습니다.</strong>
             <p css={desc}>
@@ -33,7 +33,7 @@ export const PartIntro: FunctionComponent = () => {
           </div>
 
           <div css={backgroundBox}>
-            <Image src={mainBackground01} alt="" layout="fill" objectFit="cover" />
+            <Image src={mainBackground01} alt="" fill />
           </div>
         </div>
       </section>

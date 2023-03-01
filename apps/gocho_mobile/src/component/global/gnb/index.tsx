@@ -75,7 +75,7 @@ export const GNB: FunctionComponent = () => {
       <Layout>
         <div css={headerContainer(openedElement)}>
           <Link href={MAIN_URL} passHref css={MainLogoBox}>
-            <Image src={colorLogoSrc} alt="고초대졸닷컴" objectFit="contain" layout="fill" />
+            <Image src={colorLogoSrc} alt="고초대졸닷컴" fill />
           </Link>
           <div css={iconBox}>
             <button
