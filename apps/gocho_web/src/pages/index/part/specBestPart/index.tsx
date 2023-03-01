@@ -27,10 +27,8 @@ export const SpecBestPart: FunctionComponent = () => {
           <p css={title}>
             <span css={colorPoint}>BEST</span> 스펙평가 ✨
           </p>
-          <Link href={SPEC_LIST_URL} passHref>
-            <a css={linkButton}>
-              전체보기 <BsChevronRight />
-            </a>
+          <Link href={SPEC_LIST_URL} passHref css={linkButton}>
+            전체보기 <BsChevronRight />
           </Link>
 
           <div css={bestUserWrapper}>
@@ -49,10 +47,8 @@ export const SpecBestPart: FunctionComponent = () => {
         <p css={title}>
           <span css={colorPoint}>BEST</span> 스펙평가 ✨
         </p>
-        <Link href={SPEC_LIST_URL} passHref>
-          <a css={linkButton}>
-            전체보기 <BsChevronRight />
-          </a>
+        <Link href={SPEC_LIST_URL} passHref css={linkButton}>
+          전체보기 <BsChevronRight />
         </Link>
 
         <div css={bestUserWrapper}>

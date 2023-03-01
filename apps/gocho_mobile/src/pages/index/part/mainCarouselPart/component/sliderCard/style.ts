@@ -32,6 +32,9 @@ export const iconBox = css`
   height: 3.25rem;
   position: relative;
   margin-left: 0.5rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const title = css`

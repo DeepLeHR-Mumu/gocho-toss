@@ -30,6 +30,9 @@ export const cardImageBox = css`
     width: 7.5rem;
     height: 5rem;
   }
+  > img {
+    object-fit: cover;
+  }
 `;
 
 export const cardInfo = css`

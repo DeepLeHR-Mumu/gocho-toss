@@ -133,6 +133,9 @@ export const imageBox = css`
   width: 7.5rem;
   height: 7.5rem;
   margin-right: 1.5rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const dateBox = css`

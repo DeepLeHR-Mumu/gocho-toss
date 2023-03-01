@@ -122,7 +122,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
           <div css={companyInfoContainer}>
             <div css={companyLogoWrapper}>
               <div className="Logo" css={companyLogoBox}>
-                <Image layout="fill" objectFit="contain" src={jobData.companyLogo || defaultCompanyLogo} alt="" />
+                <Image src={jobData.companyLogo || defaultCompanyLogo} alt="" sizes="1" />
               </div>
             </div>
             <div css={companyName}>{jobData.companyName}</div>

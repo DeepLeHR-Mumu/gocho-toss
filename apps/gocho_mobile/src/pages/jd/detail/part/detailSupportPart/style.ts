@@ -12,6 +12,9 @@ export const logoImageBox = css`
   height: 1.5rem;
   position: relative;
   margin: 0 auto 2.5rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const title = css`
@@ -52,6 +55,10 @@ export const isPossibleEduIcon = css`
   width: 2rem;
   height: 2rem;
   display: inline-block;
+  position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const eduContainer = css`

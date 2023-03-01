@@ -32,27 +32,22 @@ export const AsideMenu: FunctionComponent<AsideMenuProps> = ({ isFix = true }) =
           hash: "1",
         }}
         passHref
+        css={[asideLink, pointLink]}
       >
-        <a css={[asideLink, pointLink]}>
-          스펙
-          <br />
-          등록하기
-        </a>
+        스펙
+        <br />
+        등록하기
       </Link>
-      <Link href={SPEC_MY_URL} passHref>
-        <a css={[asideLink, isSpecMyUrl && activeLink]}>
-          등록한
-          <br />
-          스펙 내역
-        </a>
+      <Link href={SPEC_MY_URL} passHref css={[asideLink, isSpecMyUrl && activeLink]}>
+        등록한
+        <br />
+        스펙 내역
       </Link>
       {isSpecMyUrl && (
-        <Link href={SPEC_LIST_URL} passHref>
-          <a css={asideLink}>
-            전체 스펙
-            <br />
-            리스트
-          </a>
+        <Link href={SPEC_LIST_URL} passHref css={asideLink}>
+          전체 스펙
+          <br />
+          리스트
         </Link>
       )}
     </aside>

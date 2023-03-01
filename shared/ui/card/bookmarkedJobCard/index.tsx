@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
-import Image from "next/image";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import Link from "next/link";
+import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
@@ -98,25 +98,18 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
       >
         <BsFillBookmarkFill />
       </button>
-      <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
-        <a css={linkButtonCSS(isMobile)}>
-          <div css={companyLogoBox}>
-            <Image
-              layout="fill"
-              objectFit="contain"
-              src={jobData.companyLogo || defaultCompanyLogo}
-              alt={`${jobData.companyName}의 로고`}
-            />
+      <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref css={linkButtonCSS(isMobile)}>
+        <div css={companyLogoBox}>
+          <Image src={jobData.companyLogo || defaultCompanyLogo} alt={`${jobData.companyName}의 로고`} fill sizes="1" />
+        </div>
+        <div css={jobInfoBox(isMobile)}>
+          <div css={flexBox}>
+            <DdayBox endTime={jobData.endTime} />
+            {jobData.cut && <div css={cutBox}>채용시마감</div>}
           </div>
-          <div css={jobInfoBox(isMobile)}>
-            <div css={flexBox}>
-              <DdayBox endTime={jobData.endTime} />
-              {jobData.cut && <div css={cutBox}>채용시마감</div>}
-            </div>
-            <p css={companyName}>{jobData.companyName}</p>
-            <p css={title}>{jobData.title}</p>
-          </div>
-        </a>
+          <p css={companyName}>{jobData.companyName}</p>
+          <p css={title}>{jobData.title}</p>
+        </div>
       </Link>
     </article>
   );

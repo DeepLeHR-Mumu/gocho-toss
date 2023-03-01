@@ -94,7 +94,7 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
 
       <article css={contentContainer}>
         <div css={logoBox}>
-          <Image src={gochoLogoMono} alt="고초대졸닷컴" objectFit="contain" layout="fill" />
+          <Image src={gochoLogoMono} alt="고초대졸닷컴" fill />
         </div>
         <strong css={titleCSS}>{tipData.title}</strong>
         <ul css={tagListCSS}>
@@ -111,12 +111,12 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
                 <div key={`${tipData.title + index}`}>
                   <div css={tipImageBox}>
                     <Image
-                      layout="fill"
-                      objectFit="contain"
+                      fill
                       src={`${srcURL + (index + 1)}.png`}
                       alt={`${tipData.title} 본문`}
                       loading="eager"
                       unoptimized
+                      sizes="1"
                     />
                   </div>
                 </div>

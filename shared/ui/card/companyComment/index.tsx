@@ -60,12 +60,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
           <div css={companyInfoContainer}>
             {!isMobile && (
               <div css={companyLogoBox}>
-                <Image
-                  layout="fill"
-                  objectFit="contain"
-                  src={companyData.logoUrl || defaultCompanyLogo}
-                  alt={`${companyData.name} 기업 로고`}
-                />
+                <Image fill src={companyData.logoUrl || defaultCompanyLogo} alt={`${companyData.name} 기업 로고`} />
               </div>
             )}
 
@@ -113,10 +108,10 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
           {!isMobile && (
             <div css={companyLogoBox}>
               <Image
-                layout="fill"
-                objectFit="contain"
+                fill
                 src={companyData.logoUrl || defaultCompanyLogo}
                 alt={`${companyCommentArrData.company.name} 기업 로고`}
+                sizes="1"
               />
             </div>
           )}

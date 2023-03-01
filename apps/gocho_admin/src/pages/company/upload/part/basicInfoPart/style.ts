@@ -56,6 +56,10 @@ export const logoPreviewContainer = css`
   width: 6rem;
   height: 6rem;
   position: relative;
+
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const selectBox = css`

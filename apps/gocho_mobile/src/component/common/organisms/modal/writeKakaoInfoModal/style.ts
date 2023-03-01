@@ -16,6 +16,9 @@ export const logoContainer = css`
   height: 1.25rem;
   position: relative;
   margin-bottom: 1rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const desc = css`
@@ -63,6 +66,9 @@ export const kakaoLogoBox = css`
   height: 1rem;
   position: relative;
   margin-right: 1rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const closeBtn = css`

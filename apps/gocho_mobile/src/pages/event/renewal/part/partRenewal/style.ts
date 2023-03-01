@@ -41,6 +41,9 @@ export const pointImgBox1 = css`
   position: absolute;
   bottom: 20%;
   right: 20%;
+  > img {
+    object-fit: cover;
+  }
 `;
 
 export const pointImgBox2 = css`
@@ -49,6 +52,9 @@ export const pointImgBox2 = css`
   position: absolute;
   bottom: 0;
   left: 0;
+  > img {
+    object-fit: cover;
+  }
 `;
 
 export const listCSS = css`
@@ -60,8 +66,13 @@ export const listCSS = css`
 
   > li {
     width: 100%;
-    margin-bottom: 1rem;
+    height: 26rem;
 
+    margin-bottom: 1rem;
+    position: relative;
+    > img {
+      object-fit: cover;
+    }
     :last-of-type {
       margin-bottom: 0;
     }
@@ -81,6 +92,9 @@ export const logoBox = css`
   height: 1.5rem;
   position: relative;
   margin: 0 auto 1.25rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const buttonBox = css`

@@ -104,7 +104,7 @@ export const LoginModal: FunctionComponent = () => {
         )}
 
         <div css={logoContainer}>
-          <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" layout="fill" />
+          <Image src={smallMono} alt="고초대졸 로고" fill />
         </div>
 
         <p css={desc}>로그인이 필요한 서비스입니다.</p>
@@ -155,7 +155,7 @@ export const LoginModal: FunctionComponent = () => {
 
             <button type="button" css={kakaoLoginBox} onClick={kakaoLogin}>
               <div css={kakaoLogoBox}>
-                <Image src={kakaoMono} alt="카카오 로그인" layout="fill" objectFit="contain" />
+                <Image src={kakaoMono} alt="" fill />
               </div>
               카카오톡으로 로그인하기
             </button>

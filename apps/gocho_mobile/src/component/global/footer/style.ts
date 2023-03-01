@@ -40,6 +40,9 @@ export const logo = css`
   display: block;
   position: relative;
   margin: 2.5rem 0 1rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const infoContainer = css`

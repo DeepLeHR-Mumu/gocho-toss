@@ -93,7 +93,7 @@ export const LoginBox: FunctionComponent = () => {
   return (
     <div css={cssObj.wrapper} ref={modalRef} tabIndex={-1}>
       <div css={cssObj.logoContainer}>
-        <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" />
+        <Image src={smallMono} alt="고초대졸 로고" />
       </div>
       <p css={cssObj.desc}>재로그인이 필요합니다</p>
       <form css={cssObj.formCSS} onSubmit={handleSubmit(loginSubmit)}>

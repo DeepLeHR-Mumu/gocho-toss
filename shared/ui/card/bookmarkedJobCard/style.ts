@@ -24,40 +24,37 @@ export const cardWrapper = css`
   overflow: hidden;
 `;
 
-export const linkButtonCSS = (isMobile: boolean) => {
-  return css`
-    display: flex;
-    align-items: flex-start;
-    flex-direction: ${isMobile ? "column" : "row"};
-  `;
-};
+export const linkButtonCSS = (isMobile: boolean) => css`
+  display: flex;
+  align-items: flex-start;
+  flex-direction: ${isMobile ? "column" : "row"};
+`;
 
-export const bookmarkButton = (isBookmarked: boolean) => {
-  return css`
-    color: ${isBookmarked ? COLORS.BLUE_FIRST40 : COLORS.GRAY60};
-    background-color: ${isBookmarked ? COLORS.STATE_SUCCESS : `${COLORS.GRAY90}`};
-    position: absolute;
-    right: 0;
-    z-index: 10;
-    top: 0;
-    margin: 0;
-    border-radius: 0 0 0 1rem;
-    padding: 1rem;
-    font-size: 0.875rem;
-  `;
-};
+export const bookmarkButton = (isBookmarked: boolean) => css`
+  color: ${isBookmarked ? COLORS.BLUE_FIRST40 : COLORS.GRAY60};
+  background-color: ${isBookmarked ? COLORS.STATE_SUCCESS : `${COLORS.GRAY90}`};
+  position: absolute;
+  right: 0;
+  z-index: 10;
+  top: 0;
+  margin: 0;
+  border-radius: 0 0 0 1rem;
+  padding: 1rem;
+  font-size: 0.875rem;
+`;
 
 export const companyLogoBox = css`
   min-width: 5.5rem;
   height: 5.5rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
-export const jobInfoBox = (isMobile: boolean) => {
-  return css`
-    margin-left: ${!isMobile && "1rem"};
-  `;
-};
+export const jobInfoBox = (isMobile: boolean) => css`
+  margin-left: ${!isMobile && "1rem"};
+`;
 
 export const flexBox = css`
   display: flex;

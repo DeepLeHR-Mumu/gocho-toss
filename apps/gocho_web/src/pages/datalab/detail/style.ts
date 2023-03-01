@@ -64,17 +64,18 @@ export const logoContainer = css`
   width: 7.5rem;
   height: 1rem;
   margin-top: 2.5rem;
+  > img {
+    object-position: contain;
+  }
 `;
 
 export const jobiImageContainer = css`
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 100%;
-  max-width: 50vw;
-  height: 50vh;
-
   img {
     object-position: bottom;
+    width: 30rem;
+    object-fit: contain;
   }
 `;

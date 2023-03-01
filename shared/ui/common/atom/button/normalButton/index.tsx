@@ -10,8 +10,7 @@ export const NormalButton: FunctionComponent<PlainButtonProps> = ({
   buttonClick,
   isSubmit = false,
   iconObj,
-}) => {
-  return (
+}) => (
     <BaseButton
       text={text}
       variant={variant}
@@ -21,4 +20,3 @@ export const NormalButton: FunctionComponent<PlainButtonProps> = ({
       wide={wide}
     />
   );
-};

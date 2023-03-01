@@ -34,7 +34,12 @@ export const flexBox = css`
 `;
 
 export const imgBox = css`
+  position: relative;
   width: 90%;
+  height: 40rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const infoBox = css`

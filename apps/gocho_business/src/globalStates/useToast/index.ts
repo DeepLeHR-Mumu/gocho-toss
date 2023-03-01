@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import create from "zustand";
+import { create } from "zustand";
 import { ToastStringType, ToastZustandlProps } from "./type";
 
 const toastZustand = create<ToastZustandlProps>((set) => ({

@@ -11,7 +11,7 @@ export const Footer: FunctionComponent = () => (
     <div css={cssObj.container}>
       <div css={cssObj.infoBox}>
         <strong css={cssObj.titleBox}>
-          <Image src={gochoTextMono} alt="고초대졸닷컴" layout="fill" objectFit="contain" />
+          <Image src={gochoTextMono} alt="고초대졸닷컴" fill />
         </strong>
         <p css={cssObj.desc}>{FOOTER_INFO.address}</p>
         <p css={cssObj.desc}>

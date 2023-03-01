@@ -34,6 +34,7 @@ import {
   searchButton,
   flexBox,
   searchDimmed,
+  logoLink,
 } from "./style";
 
 export const Header: FunctionComponent = () => {
@@ -85,14 +86,9 @@ export const Header: FunctionComponent = () => {
         <div css={headerContainer}>
           <div css={logoCSS}>
             <Link href={MAIN_URL} passHref>
-              <a>
-                <Image
-                  src={pathname === MAIN_URL ? colorLogoSrc : grayLogoSrc}
-                  alt="고초대졸닷컴"
-                  objectFit="contain"
-                  layout="fill"
-                />
-              </a>
+              <div css={logoLink}>
+                <Image src={pathname === MAIN_URL ? colorLogoSrc : grayLogoSrc} alt="" fill />
+              </div>
             </Link>
           </div>
 
@@ -116,10 +112,8 @@ export const Header: FunctionComponent = () => {
                     {menu.subMenuArr ? (
                       <>
                         <Link href={menu.menuLink} passHref>
-                          <a>
-                            {menu.menuTitle}
-                            <BsChevronDown css={downIconCSS} />
-                          </a>
+                          {menu.menuTitle}
+                          <BsChevronDown css={downIconCSS} />
                         </Link>
 
                         <ul css={subMenuToggleWrapper(activeIndex === index)}>

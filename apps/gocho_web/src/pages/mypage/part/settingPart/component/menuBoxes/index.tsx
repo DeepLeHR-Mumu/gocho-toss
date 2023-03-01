@@ -23,12 +23,10 @@ export const MenuBoxes: FunctionComponent = () => {
   return (
     <>
       <Link href={MYPAGE_URL} passHref>
-        <a>
           <div css={buttonWrapper(!isCurrentModal)}>
             <FiHome />
             <p>MY 홈</p>
           </div>
-        </a>
       </Link>
 
       <button css={buttonWrapper(isCurrentModal)} type="button" onClick={handleSettingModal}>

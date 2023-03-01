@@ -21,7 +21,7 @@ const UnknownErrorPage: NextPageWithLayout = () => {
     <main css={cssObj.container}>
       <InvisibleH2 title="없는 페이지" />
       <div css={cssObj.jobiImage}>
-        <Image src={jobi_500} alt="" objectFit="fill" layout="fill" />
+        <Image src={jobi_500} alt="" priority fill />
       </div>
       <p css={cssObj.title}>열심히 고치고 있습니다</p>
       <div css={cssObj.catchPhraseContainer}>

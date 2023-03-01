@@ -21,6 +21,10 @@ export const cssObj = {
     width: 5rem;
     border-radius: 0.75rem;
     position: relative;
+
+    > img {
+      object-fit: contain;
+    }
   `,
   companyInfoBox: css`
     overflow: hidden;

@@ -123,7 +123,7 @@ export const UploadBannerPart: FunctionComponent = () => {
                 <div css={cardContainer}>
                   <div css={companyLogoWrapper}>
                     <div css={companyLogoBox}>
-                      <Image layout="fill" objectFit="contain" src={jobData?.company.logoUrl || defaultCompanyLogo} />
+                      <Image fill src={jobData?.company.logoUrl || defaultCompanyLogo} alt="" />
                     </div>
                   </div>
                   <div css={infoContainer}>

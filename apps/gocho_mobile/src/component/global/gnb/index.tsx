@@ -74,10 +74,8 @@ export const GNB: FunctionComponent = () => {
     <header css={headerWrapper}>
       <Layout>
         <div css={headerContainer(openedElement)}>
-          <Link href={MAIN_URL} passHref>
-            <a css={MainLogoBox}>
-              <Image src={colorLogoSrc} alt="고초대졸닷컴" objectFit="contain" layout="fill" />
-            </a>
+          <Link href={MAIN_URL} passHref css={MainLogoBox}>
+            <Image src={colorLogoSrc} alt="고초대졸닷컴" fill />
           </Link>
           <div css={iconBox}>
             <button
@@ -133,8 +131,8 @@ export const GNB: FunctionComponent = () => {
             {menuArr.map((menu) => {
               return (
                 <li key={`navMenu_${menu.menuTitle}`}>
-                  <Link href={menu.menuLink}>
-                    <a css={menuCategory}>{menu.menuTitle}</a>
+                  <Link href={menu.menuLink} css={menuCategory}>
+                    {menu.menuTitle}
                   </Link>
                   <ul css={subMenuArr}>
                     {menu.subMenuArr.map((subMenu) => {

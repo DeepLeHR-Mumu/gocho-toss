@@ -45,7 +45,7 @@ export interface CompanyObjDef {
   pay_desc: string | null;
   bookmark: number;
   view: number;
-  logo_url: string;
+  logo_url: string | null;
   welfare: WelfareDef;
   nozo: {
     exists: boolean;

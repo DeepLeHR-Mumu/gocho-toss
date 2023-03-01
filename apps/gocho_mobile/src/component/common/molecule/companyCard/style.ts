@@ -72,6 +72,9 @@ export const companyLogoBox = css`
   height: 4rem;
   position: relative;
   margin: 0 0 0 auto;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const sizeCSS = css`

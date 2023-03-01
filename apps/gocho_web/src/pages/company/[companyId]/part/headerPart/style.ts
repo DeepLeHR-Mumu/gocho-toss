@@ -17,6 +17,9 @@ export const companyLogoBox = css`
   height: 7.5rem;
   margin-right: 3.5rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const infoContainer = css`
@@ -98,6 +101,9 @@ export const catchLogoBox = css`
   width: 1rem;
   height: 1rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const youtubeLinkButton = css`

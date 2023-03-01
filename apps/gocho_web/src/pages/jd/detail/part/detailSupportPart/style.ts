@@ -15,6 +15,9 @@ export const logoImageBox = css`
   height: 1.5rem;
   position: relative;
   margin: 0 auto 2.5rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const title = css`
@@ -54,6 +57,10 @@ export const isPossibleEduIcon = css`
   width: 2rem;
   height: 2rem;
   display: inline-block;
+  position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const eduContainer = css`
@@ -78,21 +85,22 @@ export const isPossibleEduDesc = (isPossibleEdu: boolean) => {
   `;
 };
 
-export const eduImageBox = (isPossibleEdu: boolean) => {
+export const eduImageBox = () => {
   return css`
     width: 3.5rem;
     height: 3.5rem;
+    position: relative;
     margin-bottom: 0.5rem;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-    background-image: ${isPossibleEdu
-      ? `url("/images/global/jdDetail/graduate_color.svg")`
-      : `url("/images/global/jdDetail/graduate_gray.svg")`};
 
     ${TABLET} {
       width: 2.5rem;
       height: 2.5rem;
+    }
+    > img {
+      object-fit: contain;
     }
   `;
 };

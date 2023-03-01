@@ -53,7 +53,7 @@ export const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factoryInfo }
       <header css={headerContainer}>
         <div css={flexBox}>
           <div css={iconBox}>
-            <Image src={factoryIcon} layout="fill" objectFit="contain" />
+            <Image src={factoryIcon} alt="" fill />
           </div>
           <button
             type="button"
@@ -76,7 +76,7 @@ export const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factoryInfo }
           <section css={menuContainer}>
             <div css={titleBox}>
               <div css={menuIconBox}>
-                <Image src={locationIcon} layout="fill" objectFit="contain" />
+                <Image src={locationIcon} alt="" fill />
               </div>
               <p css={menuNameBox}>위치</p>
             </div>
@@ -105,7 +105,7 @@ export const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factoryInfo }
           <section css={menuContainer}>
             <div css={titleBox}>
               <div css={menuIconBox}>
-                <Image src={productIcon} layout="fill" objectFit="contain" />
+                <Image src={productIcon} alt="" fill />
               </div>
               <p css={menuNameBox}>생산품</p>
             </div>
@@ -115,7 +115,7 @@ export const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factoryInfo }
           <section css={infoContainer}>
             <div css={contentBox}>
               <div css={menuIconBox}>
-                <Image src={hireNumberIcon} layout="fill" objectFit="contain" />
+                <Image src={hireNumberIcon} alt="" fill />
               </div>
               <p css={largeMenuNameBox}>
                 임직원 <span css={numberCSS}>{totalNumber}명</span>
@@ -123,7 +123,7 @@ export const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factoryInfo }
             </div>
             <div css={contentBox}>
               <div css={menuIconBox}>
-                <Image src={genderIcon} layout="fill" objectFit="contain" />
+                <Image src={genderIcon} alt="" fill />
               </div>
               <p css={largeMenuNameBox}>
                 남 <span css={numberCSS}>{maleRatio}% </span> 여 <span css={numberCSS}>{femaleRatio}%</span>
@@ -131,12 +131,12 @@ export const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factoryInfo }
             </div>
             <div css={contentBox}>
               <div css={menuIconBox}>
-                <Image src={factoryInfo.bus.exists ? busTrueIcon : busFalseIcon} layout="fill" objectFit="contain" />
+                <Image src={factoryInfo.bus.exists ? busTrueIcon : busFalseIcon} alt="" fill />
               </div>
               <div css={xoBox}>
                 <p>통근버스</p>
                 <div css={xoIcons}>
-                  <Image src={factoryInfo.bus.exists ? oIcon : xIcon} layout="fill" objectFit="contain" />
+                  <Image src={factoryInfo.bus.exists ? oIcon : xIcon} alt="" fill />
                 </div>
               </div>
               {factoryInfo.dormitory.desc && (
@@ -150,12 +150,12 @@ export const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factoryInfo }
             </div>
             <div css={contentBox}>
               <div css={menuIconBox}>
-                <Image src={dormitoryIcon} layout="fill" objectFit="contain" />
+                <Image src={dormitoryIcon} alt="" fill />
               </div>
               <div css={xoBox}>
                 <p>기숙사</p>
                 <div css={xoIcons}>
-                  <Image src={factoryInfo.bus.exists ? oIcon : xIcon} layout="fill" objectFit="contain" />
+                  <Image src={factoryInfo.bus.exists ? oIcon : xIcon} alt="" fill />
                 </div>
               </div>
               {factoryInfo.dormitory.desc && (

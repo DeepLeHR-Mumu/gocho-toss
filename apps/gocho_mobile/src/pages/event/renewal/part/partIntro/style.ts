@@ -35,6 +35,9 @@ export const backgroundBox = css`
   top: 0;
   width: 100%;
   height: 100%;
+  > img {
+    object-fit: cover;
+  }
 `;
 
 export const infoBox = css`
@@ -58,6 +61,9 @@ export const logoBox = css`
   height: 1.5rem;
   position: relative;
   text-align: center;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const titleCSS = css`

@@ -28,6 +28,10 @@ export const cssObj = {
     width: 9.375rem;
     height: 1.25rem;
     position: relative;
+
+    > img {
+      object-fit: contain;
+    }
   `,
   linkButton: css`
     background-color: ${COLORS.GRAY100};

@@ -92,7 +92,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
         {button === "home" ? <CloseButton size="S" isHome /> : <CloseButton size="S" buttonClick={closeLoginModal} />}
       </div>
       <div css={logoContainer}>
-        <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" />
+        <Image src={smallMono} alt="고초대졸 로고" fill />
       </div>
       <p css={desc}>로그인이 필요한 서비스입니다.</p>
       <form css={formCSS} onSubmit={handleSubmit(loginSubmit)}>
@@ -141,7 +141,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
 
           <button type="button" css={kakaoLoginBox} onClick={kakaoLogin}>
             <div css={kakaoLogoBox}>
-              <Image src={kakaoMono} alt="카카오 로그인" layout="fill" objectFit="contain" />
+              <Image src={kakaoMono} alt="카카오 로그인" fill />
             </div>
             카카오톡으로 로그인하기
           </button>

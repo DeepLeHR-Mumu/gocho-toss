@@ -26,7 +26,6 @@ import {
 export const ListPart: FunctionComponent = () => {
   const [companyId, setCompanyId] = useState<number>();
 
-  // LATER 좀더 명시적인 변수명으로 변경
   const [q, setQ] = useState("");
 
   const { register, reset, handleSubmit } = useForm<TipValues>({});
