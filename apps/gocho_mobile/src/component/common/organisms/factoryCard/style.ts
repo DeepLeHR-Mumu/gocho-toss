@@ -64,7 +64,9 @@ export const menuContainer = css`
   align-items: center;
 `;
 
-export const infoBox = css``;
+export const infoBox = css`
+  width: 100%;
+`;
 
 export const titleBox = css`
   margin-right: 1rem;
