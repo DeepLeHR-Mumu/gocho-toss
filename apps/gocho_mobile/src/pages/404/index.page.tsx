@@ -34,12 +34,12 @@ const NotFoundPage: NextPage = () => {
         </div>
         <LinkButton text="메인 페이지로 이동" variant="filled" linkTo="/" />
         <div css={gochoLogoBox}>
-          <Image alt="" src={smallMonoGochoLogo} layout="fill" objectFit="contain" />
+          <Image alt="" src={smallMonoGochoLogo} fill sizes="1" />
         </div>
       </div>
       <div css={jobiContainer}>
         <div>
-          <Image alt="" src={jobi} layout="fill" objectFit="contain" />
+          <Image alt="" src={jobi} fill />
         </div>
       </div>
     </main>

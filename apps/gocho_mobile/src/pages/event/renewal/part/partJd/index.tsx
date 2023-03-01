@@ -22,7 +22,7 @@ export const PartJd: FunctionComponent = () => {
         <p css={desc}>공고 한번에 채용직무와 지역, 교대정보까지 한눈에 훑어보세요</p>
         <div css={flexBox}>
           <div css={imgBox}>
-            <Image src={jdCardMobile} alt="" objectFit="contain" layout="responsive" />
+            <Image src={jdCardMobile} alt="" fill />
           </div>
           <div css={infoBox}>
             <p css={infoDesc}>
@@ -36,11 +36,10 @@ export const PartJd: FunctionComponent = () => {
                   order: "recent",
                 },
               }}
+              css={linkCSS}
               passHref
             >
-              <a css={linkCSS}>
-                <FiArrowRight /> 채용공고 보러가기
-              </a>
+              <FiArrowRight /> 채용공고 보러가기
             </Link>
           </div>
         </div>

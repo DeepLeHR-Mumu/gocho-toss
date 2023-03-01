@@ -70,12 +70,7 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
                 <FiChevronLeft />
               </button>
               <div css={imageBox}>
-                <Image
-                  src={detailData?.logoUrl || defaultCompanyLogo}
-                  alt={detailData?.name}
-                  objectFit="contain"
-                  layout="fill"
-                />
+                <Image src={detailData?.logoUrl || defaultCompanyLogo} alt={detailData?.name} fill />
               </div>
               <p css={companyName}>{detailData?.name}</p>
             </div>
@@ -139,8 +134,7 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
               <Image
                 src={companyCommentArrData.company.logoUrl || defaultCompanyLogo}
                 alt={companyCommentArrData.company.name}
-                objectFit="contain"
-                layout="fill"
+                fill
               />
             </div>
             <p css={companyName}>{companyCommentArrData.company.name}</p>

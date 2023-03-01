@@ -58,6 +58,9 @@ export const imageBox = css`
   height: 2rem;
   border-radius: 50%;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const companyName = css`

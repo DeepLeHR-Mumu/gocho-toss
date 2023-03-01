@@ -30,6 +30,9 @@ export const iconBox = css`
   width: 1.5rem;
   height: 1.5rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const factoryNameCSS = css`
@@ -76,6 +79,9 @@ export const menuIconBox = css`
   width: 5rem;
   height: 5rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const menuNameBox = css`
@@ -192,6 +198,9 @@ export const xoIcons = css`
   width: 0.8rem;
   height: 0.8rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const additionalContainer = css`

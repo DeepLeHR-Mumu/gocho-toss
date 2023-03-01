@@ -14,8 +14,8 @@ export const TopButton: FunctionComponent<TopButtonProps> = ({ pathName }) => {
     <section css={wrapper}>
       <Layout>
         <div css={container}>
-          <Link href={`/company/${router.query.companyId}/detail`} passHref>
-            <a css={buttonCSS(pathName === "detail")}>기업 정보</a>
+          <Link href={`/company/${router.query.companyId}/detail`} passHref css={buttonCSS(pathName === "detail")}>
+            기업 정보
           </Link>
 
           <Link
@@ -26,8 +26,9 @@ export const TopButton: FunctionComponent<TopButtonProps> = ({ pathName }) => {
               },
             }}
             passHref
+            css={buttonCSS(pathName === "jd")}
           >
-            <a css={buttonCSS(pathName === "jd")}>채용공고 모음</a>
+            채용공고 모음
           </Link>
         </div>
       </Layout>

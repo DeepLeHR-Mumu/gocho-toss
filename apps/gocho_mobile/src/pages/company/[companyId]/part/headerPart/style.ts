@@ -35,6 +35,7 @@ export const logoBox = css`
   img {
     min-width: 90% !important;
     min-height: 90% !important;
+    object-fit: contain;
   }
 `;
 
