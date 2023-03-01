@@ -67,6 +67,9 @@ export const payIconBox = css`
   width: 5rem;
   height: 5rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const descContainer = css`

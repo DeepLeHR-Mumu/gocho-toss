@@ -5,4 +5,7 @@ export const wrapper = css`
   width: 7rem;
   height: 7rem;
   margin-bottom: 1.5rem;
+  > img {
+    object-fit: contain;
+  }
 `;

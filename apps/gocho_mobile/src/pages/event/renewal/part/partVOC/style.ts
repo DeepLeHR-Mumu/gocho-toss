@@ -34,6 +34,23 @@ export const desc = css`
 
 export const imgBox = css`
   width: 100%;
+  height: 20rem;
   margin: auto;
   margin-top: 1.5rem;
+  position: relative;
+  > img {
+    object-fit: contain;
+  }
+`;
+
+
+export const lastImgBox = css`
+  width: 100%;
+  height: 60rem;
+  margin: auto;
+  margin-top: 1.5rem;
+  position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;

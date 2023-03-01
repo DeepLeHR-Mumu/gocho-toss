@@ -35,7 +35,7 @@ export const Footer: FunctionComponent = () => {
         </a>
       </div>
       <Link href={MAIN_URL} passHref css={logo}>
-        <Image layout="fill" objectFit="contain" src={GDtitleSrc} alt="고초대졸닷컴" />
+        <Image fill src={GDtitleSrc} alt="" />
       </Link>
       <ul css={infoContainer}>
         <li>{companyInfoObj.address}</li>

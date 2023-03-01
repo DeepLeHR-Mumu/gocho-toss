@@ -54,11 +54,11 @@ const NoticeBox: FunctionComponent = () => {
             <span css={colorPoint}>항상 고초대졸닷컴을 사랑해주셔서 감사합니다.</span>
           </p>
           <div css={jobiBox}>
-            <Image src={constructionSrc} alt="" objectFit="contain" layout="fill" />
+            <Image src={constructionSrc} alt="" fill />
           </div>
         </div>
         <div css={logoBox}>
-          <Image src={gochoMonoSrc} alt="" objectFit="contain" layout="fill" />
+          <Image src={gochoMonoSrc} alt="" fill />
         </div>
       </div>
       <div css={bottomContainer}>
