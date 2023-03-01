@@ -47,6 +47,9 @@ export const companyLogoBox = css`
   min-width: 5.5rem;
   height: 5.5rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const jobInfoBox = (isMobile: boolean) => css`
