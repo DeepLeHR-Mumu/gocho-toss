@@ -27,6 +27,7 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({ carouselData }) =
           passHref
           target={carouselData.buttonObj.target}
           onClick={carouselData.buttonObj.onClick}
+          css={linkButton(carouselData.buttonObj.backgroundColor, carouselData.buttonObj.color)}
         >
           <FiArrowRight />
           {carouselData.buttonObj.text}
