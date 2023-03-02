@@ -73,9 +73,11 @@ export const jobiImageContainer = css`
   position: absolute;
   right: 0;
   bottom: 0;
+  max-width: 50vw;
+  height: 50vh;
+  width: 100%;
   img {
-    object-position: bottom;
-    width: 30rem;
+    object-position : center bottom;
     object-fit: contain;
   }
 `;

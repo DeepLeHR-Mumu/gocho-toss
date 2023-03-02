@@ -34,7 +34,7 @@ const NotFound: NextPage = () => {
         </div>
       </article>
       <div css={jobiImageContainer}>
-        <Image src={jobiAttention} alt="" />
+        <Image src={jobiAttention} alt="" fill />
       </div>
     </main>
   );

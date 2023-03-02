@@ -71,6 +71,9 @@ export const flexDesc = css`
 `;
 
 export const factoryIconCSS = css`
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
   > img {
     object-fit: contain;
   }
