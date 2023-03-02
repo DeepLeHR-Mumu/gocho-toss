@@ -154,7 +154,7 @@ export const ListPart: FunctionComponent = () => {
                 const isActive = button.order === router.query.order;
                 return (
                   <button
-                    type="submit"
+                    type="button"
                     key={`jobCardArr${button.text}`}
                     css={setJobOrderButton(isActive)}
                     onClick={() => {
