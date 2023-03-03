@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { EMAIL_REGEXP, EMAIL_ERROR_MESSAGE } from "shared-constant";
 import { NormalButton } from "shared-ui/common/atom/button";
-import { useFocusTrap } from "shared-hooks/useFocusTrap";
+import { useFocusTrap } from "shared-hooks";
 
 import { FiCheckCircle, FiX } from "react-icons/fi";
 import { useFindPassword } from "@/apis/auth/usefindPassword";
