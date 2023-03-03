@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import Link from "next/link";
 
-import { SPEC_LIST_URL } from "shared-constant/internalURL";
+import { SPEC_LIST_URL } from "shared-constant";
 
 import { TopTitle } from "@pages/datalab/spec/register/component";
 

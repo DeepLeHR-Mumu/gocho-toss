@@ -10,7 +10,7 @@ import kakaoMono from "shared-image/global/sns/kakaoLogo.svg";
 import { tokenDecryptor } from "shared-util";
 import { loginSuccessEvent } from "shared-ga/auth";
 
-import { NICKNAME_ERROR_MESSAGE } from "shared-constant/errorMessage";
+import { NICKNAME_ERROR_MESSAGE } from "shared-constant";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { useDoKakaoRegister } from "shared-api/auth/useDoKakaoRegister";
 

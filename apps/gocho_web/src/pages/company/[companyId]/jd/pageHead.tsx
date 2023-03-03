@@ -3,8 +3,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 
 import { useCompanyDetail } from "shared-api/company";
-import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL } from "shared-constant/internalURL";
-import { COMPANY_RECRUIT_META } from "shared-constant/meta";
+import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL, COMPANY_RECRUIT_META } from "shared-constant";
 
 export const PageHead: FunctionComponent = () => {
   const router = useRouter();

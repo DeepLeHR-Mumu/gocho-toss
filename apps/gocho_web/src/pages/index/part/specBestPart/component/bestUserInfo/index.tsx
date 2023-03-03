@@ -6,7 +6,7 @@ import { LinkButton } from "shared-ui/common/atom/button";
 import headerIcon from "shared-image/global/common/box_heart.svg";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { UserBadge } from "shared-ui/common/atom/userBadge";
-import { SPEC_DETAIL_URL } from "shared-constant/internalURL";
+import { SPEC_DETAIL_URL } from "shared-constant";
 import { StarEvaluation } from "@component/common/molecule/starEvaluation";
 
 import {

@@ -1,8 +1,7 @@
 import { FunctionComponent } from "react";
 import Head from "next/head";
 
-import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL } from "shared-constant/internalURL";
-import { EVENT_RENEWAL_META } from "shared-constant/meta";
+import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL, EVENT_RENEWAL_META } from "shared-constant";
 
 export const PageHead: FunctionComponent = () => {
   return (

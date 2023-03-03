@@ -8,7 +8,7 @@ import highTrue from "shared-image/global/common/go_color.svg";
 import collegeTrue from "shared-image/global/common/cho_color.svg";
 import { useJobArr } from "shared-api/job";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
-import { JOBS_LIST_URL } from "shared-constant/internalURL";
+import { JOBS_LIST_URL } from "shared-constant";
 import { jdListFunnelEvent, jdSearchEvent } from "shared-ga/jd";
 
 import { Layout } from "@component/layout";

@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
-import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
+import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { managerTokenDecryptor } from "shared-util";
 import { useFocusTrap } from "shared-hooks/useFocusTrap";

@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
-import { executionDesc, privacyArr, CTOINFO } from "shared-constant/privacy";
+import { privacyExecutionDesc, privacyArr, CTOINFO } from "shared-constant";
 
 import { Layout } from "@component/layout";
 
@@ -65,7 +65,7 @@ const Privacy: NextPage = () => {
             <span>
               {"<"} 부칙 {">"}
             </span>
-            {executionDesc}
+            {privacyExecutionDesc}
           </p>
         </Layout>
       </section>

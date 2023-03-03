@@ -6,7 +6,7 @@ import { dDayCalculator } from "shared-util";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { jdAdClickEvent } from "shared-ga/jd";
-import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
+import { JOBS_DETAIL_URL } from "shared-constant";
 
 import { SlideCardProps, SlideCardSkeleton } from "./type";
 import {

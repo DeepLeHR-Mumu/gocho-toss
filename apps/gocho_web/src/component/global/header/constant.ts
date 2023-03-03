@@ -5,7 +5,7 @@ import {
   COMMUNITY_TIPS_LIST_URL,
   SPEC_LIST_URL,
   DATALAB_DETAIL,
-} from "shared-constant/internalURL";
+} from "shared-constant";
 
 export const menuArr = [
   {

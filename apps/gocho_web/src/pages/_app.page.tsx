@@ -11,8 +11,7 @@ import Head from "next/head";
 import { datadogRum } from "@datadog/browser-rum";
 import ReactGA from "react-ga4";
 
-import { KEY } from "shared-constant/gaKey";
-import { FB_PIXEL_ID } from "shared-constant/fbPixelKey";
+import { KEY, FB_PIXEL_ID } from "shared-constant";
 
 import { Header } from "@component/global/header";
 import { Footer } from "@component/global/footer";

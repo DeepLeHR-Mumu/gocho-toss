@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
-import { SPEC_DETAIL_URL } from "shared-constant/internalURL";
+import { SPEC_DETAIL_URL } from "shared-constant";
 import { LinkButton } from "shared-ui/common/atom/button";
 
 import { SpecRecommendCardProps, SkeletonCardProps } from "./type";

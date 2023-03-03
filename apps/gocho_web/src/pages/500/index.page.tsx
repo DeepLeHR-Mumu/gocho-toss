@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 import { LinkButton } from "shared-ui/common/atom/button";
 import deepLeLogo from "shared-image/global/deepLeLogo/smallMono.svg";
-import { MAIN_URL } from "shared-constant/internalURL";
+import { MAIN_URL } from "shared-constant";
 import { unknownErrorEvent, unknownErrorFunnelEvent } from "shared-ga/error";
 
 import jobiError from "@public/images/global/errrorPage/jobi_500.png";

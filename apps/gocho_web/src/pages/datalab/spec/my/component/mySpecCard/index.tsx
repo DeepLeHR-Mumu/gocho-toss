@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { LinkButton, NormalButton } from "shared-ui/common/atom/button";
-import { SPEC_DETAIL_URL } from "shared-constant/internalURL";
+import { SPEC_DETAIL_URL } from "shared-constant";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { useDeleteMySpec } from "shared-api/spec";
 import { mySpecHistoryKeyObj } from "shared-constant/queryKeyFactory/spec/userHistoryKeyObj";

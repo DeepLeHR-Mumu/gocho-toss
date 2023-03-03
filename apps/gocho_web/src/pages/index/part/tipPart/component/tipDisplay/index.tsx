@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
 
-import { COMMUNITY_TIPS_LIST_URL } from "shared-constant/internalURL";
+import { COMMUNITY_TIPS_LIST_URL } from "shared-constant";
 import { LinkButton } from "shared-ui/common/atom/button";
 
 import {

@@ -13,7 +13,7 @@ import dormitoryIcon from "shared-image/page/factory/dormitory_icon.svg";
 import xIcon from "shared-image/page/factory/x_icon.svg";
 import oIcon from "shared-image/page/factory/o_icon.svg";
 import { useCompanyDetail } from "shared-api/company";
-import { kakaoChannelUrl } from "shared-constant/help";
+import { kakaoChannelUrl } from "shared-constant";
 import { InvisibleH3 } from "shared-ui/common/atom/invisibleH3";
 
 // import { KakaoMap } from "@pages/companies/component/kakaoMap";

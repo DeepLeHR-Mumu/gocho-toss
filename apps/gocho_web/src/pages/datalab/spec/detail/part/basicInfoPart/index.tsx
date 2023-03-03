@@ -3,7 +3,7 @@ import { BsStars } from "react-icons/bs";
 import { FiChevronLeft } from "react-icons/fi";
 import Link from "next/link";
 
-import { SPEC_LIST_URL } from "shared-constant/internalURL";
+import { SPEC_LIST_URL } from "shared-constant";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { BasicInfoPartProps } from "./type";
 

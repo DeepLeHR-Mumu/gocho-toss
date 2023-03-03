@@ -11,8 +11,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Global } from "@emotion/react";
 import { datadogRum } from "@datadog/browser-rum";
 
-import { KEY } from "shared-constant/gaKey";
-import { FB_PIXEL_ID } from "shared-constant/fbPixelKey";
+import { KEY, FB_PIXEL_ID } from "shared-constant";
 
 import { GNB } from "@component/global/gnb";
 import { Footer } from "@component/global/footer";

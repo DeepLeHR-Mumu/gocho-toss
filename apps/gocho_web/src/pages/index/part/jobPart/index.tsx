@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from "react";
 
-import { JOBS_LIST_URL } from "shared-constant/internalURL";
+import { JOBS_LIST_URL } from "shared-constant";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { LinkButton } from "shared-ui/common/atom/button";
 import { changeHomeJdListSortingEvent } from "shared-ga/home";

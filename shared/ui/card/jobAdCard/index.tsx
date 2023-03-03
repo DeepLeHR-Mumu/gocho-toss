@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import Image from "next/image";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
+import { JOBS_DETAIL_URL } from "shared-constant";
 import { dateConverter } from "shared-util";
 import { jdAdClickEvent } from "shared-ga/jd";
 
