@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { jobArrKeyObj } from "shared-constant/queryKeyFactory/job/jobArrKeyObj";
-import { dateConverter } from "shared-util/date";
+import { dateConverter } from "shared-util";
 
 import { useDeleteJd } from "@api/jd/useDeleteJd";
 import { useEndJd } from "@api/jd/useEndJd";

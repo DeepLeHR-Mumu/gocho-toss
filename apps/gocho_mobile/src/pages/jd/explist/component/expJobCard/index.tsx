@@ -7,7 +7,7 @@ import { AiOutlineInfoCircle } from "react-icons/ai";
 import { useJobArr } from "shared-api/job";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-import { dateConverter } from "shared-util/date";
+import { dateConverter } from "shared-util";
 import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
 
 import { ExpJobCardProps, ExpJobCardSkeleton } from "./type";

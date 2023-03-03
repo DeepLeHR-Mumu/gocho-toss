@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { dateConverter } from "shared-util/date";
+import { dateConverter } from "shared-util";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
 

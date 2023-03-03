@@ -4,7 +4,7 @@ import { FiInfo } from "react-icons/fi";
 import Image from "next/image";
 
 import { useCompanyDetail } from "shared-api/company/useCompanyDetail";
-import { dateConverter } from "shared-util/date/index";
+import { dateConverter } from "shared-util";
 import nozo_false from "shared-image/page/companyDetail/nozo_false_icon.svg";
 import nozo_true from "shared-image/page/companyDetail/nozo_true_icon.svg";
 

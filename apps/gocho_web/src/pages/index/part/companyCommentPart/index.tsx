@@ -9,7 +9,7 @@ import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { useModal } from "@recoil/hook/modal";
 import { Layout } from "@component/layout";
 
-import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util";
 import { partContainer, title, colorPoint, cardListContainer, sliderContainer, buttonCSSCreator } from "./style";
 import { setCarouselSetting } from "./util";
 

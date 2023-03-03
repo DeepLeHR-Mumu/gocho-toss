@@ -4,7 +4,7 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import dayjs from "dayjs";
 
 import { BUSINESS_BACKEND_URL } from "shared-constant/externalURL";
-import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
+import { managerTokenDecryptor } from "shared-util";
 
 import { useModal } from "@/globalStates/useModal";
 import { INTERNAL_URL } from "@/constants/url";

@@ -3,7 +3,7 @@ import { AiOutlineSend } from "react-icons/ai";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { dateConverter } from "shared-util/date";
+import { dateConverter } from "shared-util";
 import { UserBadge } from "shared-ui/common/atom/userBadge";
 import { CommentLikeButton } from "shared-ui/common/atom/commentLikeButton";
 import { CommentDislikeButton } from "shared-ui/common/atom/commentDislikeButton";

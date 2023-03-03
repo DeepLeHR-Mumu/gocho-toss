@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import { useCompanyCommentArr } from "shared-api/company";
 import { useUserInfo } from "shared-api/auth";
-import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
 import { LinkButton, NormalButton } from "../../common/atom/button";

@@ -25,12 +25,6 @@ module.exports = {
     "react/jsx-filename-extension": ["warn", { extensions: [".ts", ".tsx"] }],
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        devDependencies: true,
-      },
-    ],
     "react/jsx-key": "error",
     "import/extensions": ["off"],
     "import/prefer-default-export": "off",
@@ -47,6 +41,19 @@ module.exports = {
     "no-console": "error",
     "@next/next/no-img-element": "error",
     camelcase: "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        devDependencies: [
+          "test.{ts,tsx}",
+          "test-*.{ts,tsx}",
+          "**/*{.,_}{test,spec}.{ts,tsx}",
+          "**/jest.config.ts", // jest config
+          "**/jest.setup.ts", // jest setup
+        ],
+        optionalDependencies: false,
+      },
+    ],
   },
   overrides: [
     {

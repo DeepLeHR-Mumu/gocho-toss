@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { adminTokenDecryptor } from "shared-util/tokenDecryptor";
+import { adminTokenDecryptor } from "shared-util";
 
 import { useDoLogin } from "@api/auth/useDoLogin";
 import { mainContainer } from "@style/commonStyles";

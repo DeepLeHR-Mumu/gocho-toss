@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { dateConverter } from "shared-util/date";
+import { dateConverter } from "shared-util";
 import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
 
 import { useDeleteBanner } from "@api/banner/useDeleteBanner";

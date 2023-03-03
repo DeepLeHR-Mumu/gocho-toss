@@ -18,7 +18,7 @@ import { loginObjDef } from "@recoil/atom/modal";
 import { useModal } from "@recoil/hook/modal";
 import { useToast } from "@recoil/hook/toast";
 
-import { tokenDecryptor } from "shared-util/tokenDecryptor";
+import { tokenDecryptor } from "shared-util";
 import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
 import {
   wrapper,

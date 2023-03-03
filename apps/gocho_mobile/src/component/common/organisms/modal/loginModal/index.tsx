@@ -17,7 +17,7 @@ import { useToast } from "@recoil/hook/toast";
 import { useModal } from "@recoil/hook/modal";
 import { BottomPopup } from "@component/bottomPopup";
 import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
-import { tokenDecryptor } from "shared-util/tokenDecryptor";
+import { tokenDecryptor } from "shared-util";
 import { MAIN_URL } from "shared-constant/internalURL";
 
 import {

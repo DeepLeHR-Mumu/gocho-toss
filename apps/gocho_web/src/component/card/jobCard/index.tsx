@@ -15,7 +15,7 @@ import collegeTrue from "shared-image/global/common/cho_color.svg";
 import collegeFalse from "shared-image/global/common/cho_mono.svg";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
-import { dateConverter } from "shared-util/date";
+import { dateConverter } from "shared-util";
 import { jdBookmarkEvent } from "shared-ga/jd";
 import { useUserInfo } from "shared-api/auth";
 

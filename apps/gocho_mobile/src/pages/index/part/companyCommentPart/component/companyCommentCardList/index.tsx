@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 import { useModal } from "@recoil/hook/modal/useModal";
-import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util";
 import { useCompanyArr } from "shared-api/company";
 import { CompanyCommentCard } from "shared-ui/card/companyComment";
 

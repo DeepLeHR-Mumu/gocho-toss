@@ -6,7 +6,7 @@ import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { useUserInfo } from "shared-api/auth";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useJobDetail } from "shared-api/job";
-import { dDayCalculator } from "shared-util/date";
+import { dDayCalculator } from "shared-util";
 import { PositionCard } from "./component/positionCard";
 import { Header } from "./component/header";
 

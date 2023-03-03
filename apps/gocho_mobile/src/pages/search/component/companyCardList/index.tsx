@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 
 import { useUserInfo } from "shared-api/auth";
 import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
-import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util";
 import { CompanyCard } from "@component/common/molecule/companyCard";
 
 import { listContainer } from "./style";

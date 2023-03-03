@@ -10,7 +10,7 @@ import defaultCompanyLogo from "shared-image/global/common/default_company_logo.
 import { useUserInfo } from "shared-api/auth";
 import { useJdApplyClick, useJdCountInfo } from "shared-api/job";
 import { useModal } from "@recoil/hook/modal";
-import { dateConverter, dDayCalculator } from "shared-util/date";
+import { dateConverter, dDayCalculator } from "shared-util";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { jdBookmarkEvent } from "shared-ga/jd";
 import { jdCountInfoKeyObj } from "shared-constant/queryKeyFactory/job/jdCountInfoKeyObj";
