@@ -76,6 +76,8 @@ export const applyBox = css`
 export const dDayContainer = css`
   z-index: 10;
   position: relative;
+  display: flex;
+  align-items: center;
 `;
 
 export const cutBox = css`
@@ -85,12 +87,15 @@ export const cutBox = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 0.25rem;
+  padding: 0 1rem;
   border-radius: 1rem;
   width: fit-content;
   height: 1.625rem;
   background-color: #f2f2f2;
   color: #1553cd;
+  margin-left: 0.5rem;
+
+  
 `;
 
 export const applyButton = css`
