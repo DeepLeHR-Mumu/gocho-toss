@@ -7,7 +7,7 @@ import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { managerTokenDecryptor } from "shared-util";
-import { useFocusTrap } from "shared-hooks/useFocusTrap";
+import { useFocusTrap } from "shared-hooks";
 
 import { FiCheckCircle, FiX } from "react-icons/fi";
 import { useDoLogin } from "@/apis/auth/useDoLogin";
