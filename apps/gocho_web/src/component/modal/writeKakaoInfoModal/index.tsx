@@ -7,10 +7,10 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import kakaoMono from "shared-image/global/sns/kakaoLogo.svg";
-import { tokenDecryptor } from "shared-util/tokenDecryptor";
+import { tokenDecryptor } from "shared-util";
 import { loginSuccessEvent } from "shared-ga/auth";
 
-import { NICKNAME_ERROR_MESSAGE } from "shared-constant/errorMessage";
+import { NICKNAME_ERROR_MESSAGE } from "shared-constant";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { useDoKakaoRegister } from "shared-api/auth/useDoKakaoRegister";
 

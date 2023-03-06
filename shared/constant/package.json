@@ -2,8 +2,7 @@
   "name": "shared-constant",
   "version": "0.0.0",
   "license": "MIT",
-  "main": "./index.tsx",
-  "types": "./index.tsx",
+  "main": "./src",
   "devDependencies": {
     "eslint-config-deeple": "workspace:^1.0.0",
     "tsconfig-deeple": "workspace:^0.0.0",

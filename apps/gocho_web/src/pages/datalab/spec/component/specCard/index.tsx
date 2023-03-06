@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
-import { SPEC_DETAIL_URL } from "shared-constant/internalURL";
+import { SPEC_DETAIL_URL } from "shared-constant";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { LinkButton } from "shared-ui/common/atom/button";
 

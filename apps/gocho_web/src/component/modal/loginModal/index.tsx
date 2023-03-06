@@ -8,8 +8,7 @@ import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import kakaoMono from "shared-image/global/sns/kakaoLogo.svg";
 import { loginModalCloseEvent, loginModalOpenEvent, loginSuccessEvent } from "shared-ga/auth";
 import { useDoLogin } from "shared-api/auth";
-import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
-import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant/errorMessage";
+import { EMAIL_REGEXP, PWD_REGEXP, EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { ModalComponent } from "@component/modal/modalBackground";
@@ -18,7 +17,7 @@ import { loginObjDef } from "@recoil/atom/modal";
 import { useModal } from "@recoil/hook/modal";
 import { useToast } from "@recoil/hook/toast";
 
-import { tokenDecryptor } from "shared-util/tokenDecryptor";
+import { tokenDecryptor } from "shared-util";
 import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
 import {
   wrapper,

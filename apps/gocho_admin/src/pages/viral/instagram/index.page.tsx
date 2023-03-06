@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Image from "next/image";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-import { dateConverter } from "shared-util/date";
+import { dateConverter } from "shared-util";
 
 import { useJdArr } from "@api/jd/useJdArr";
 import { mainContainer, pageTitle } from "@style/commonStyles";

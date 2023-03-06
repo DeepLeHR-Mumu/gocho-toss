@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { dDayCalculator } from "shared-util/date";
+import { dDayCalculator } from "shared-util";
 import { getBetweenDate, getDateHours } from "./util";
 
 import { container, desc } from "./style";

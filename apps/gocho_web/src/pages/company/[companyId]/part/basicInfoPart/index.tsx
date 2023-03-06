@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import nozoTrue from "shared-image/page/companyDetail/nozo_true_icon.svg";
 import nozoFalse from "shared-image/page/companyDetail/nozo_false_icon.svg";
 import { InvisibleH3 } from "shared-ui/common/atom/invisibleH3";
-import { dateConverter } from "shared-util/date";
+import { dateConverter } from "shared-util";
 import { useCompanyDetail } from "shared-api/company";
 
 import { KakaoMap } from "../../component/kakaoMap";

@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import Link from "next/link";
 import { FiChevronRight } from "react-icons/fi";
 
-import { JOBS_LIST_URL } from "shared-constant/internalURL";
+import { JOBS_LIST_URL } from "shared-constant";
 import { Layout } from "@component/layout";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { JobCardList } from "./component/jobCardList";

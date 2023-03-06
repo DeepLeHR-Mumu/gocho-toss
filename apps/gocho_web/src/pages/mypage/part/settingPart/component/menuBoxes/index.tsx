@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FiHome, FiSettings } from "react-icons/fi";
 
 import { useModal } from "@recoil/hook/modal";
-import { MYPAGE_URL } from "shared-constant/internalURL";
+import { MYPAGE_URL } from "shared-constant";
 import { buttonWrapper } from "./style";
 
 export const MenuBoxes: FunctionComponent = () => {

@@ -3,7 +3,7 @@ import { FunctionComponent } from "react";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { UserBadge } from "shared-ui/common/atom/userBadge";
-import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util";
 
 import {
   bestUserArrWrapper,

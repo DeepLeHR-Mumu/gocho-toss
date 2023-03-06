@@ -6,11 +6,11 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
+import { managerTokenDecryptor } from "shared-util";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
 import gochoColorSrc from "shared-image/global/deepLeLogo/logoIconColor.svg";
-import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
+import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 
 import { useModal } from "@/globalStates/useModal";
 import { INTERNAL_URL } from "@/constants/url";

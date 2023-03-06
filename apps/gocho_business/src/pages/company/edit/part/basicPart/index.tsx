@@ -6,7 +6,7 @@ import { FiMap, FiMapPin, FiUsers } from "react-icons/fi";
 import { Spinner } from "shared-ui/common/atom/spinner";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { COLORS } from "shared-style/color";
-import { NUMBER_REGEXP } from "shared-constant/regExp";
+import { NUMBER_REGEXP } from "shared-constant";
 
 import { CommonRoundButton } from "@/components/common";
 import { useCompanyDetail } from "@/apis/company/useCompanyDetail";

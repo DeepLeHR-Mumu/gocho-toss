@@ -5,8 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { useFindPassword } from "shared-api/auth";
-import { EMAIL_REGEXP } from "shared-constant/regExp";
-import { EMAIL_ERROR_MESSAGE } from "shared-constant/errorMessage";
+import { EMAIL_REGEXP, EMAIL_ERROR_MESSAGE } from "shared-constant";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { ModalComponent } from "@component/modal/modalBackground";

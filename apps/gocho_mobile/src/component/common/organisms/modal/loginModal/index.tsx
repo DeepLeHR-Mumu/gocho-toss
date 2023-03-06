@@ -9,16 +9,14 @@ import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import kakaoMono from "shared-image/global/sns/kakaoLogo.svg";
 import { useDoLogin } from "shared-api/auth";
 import { loginModalCloseEvent, loginModalOpenEvent, loginSuccessEvent } from "shared-ga/auth";
-import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
-import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant/errorMessage";
+import { EMAIL_REGEXP, PWD_REGEXP, MAIN_URL, EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { useToast } from "@recoil/hook/toast";
 import { useModal } from "@recoil/hook/modal";
 import { BottomPopup } from "@component/bottomPopup";
 import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
-import { tokenDecryptor } from "shared-util/tokenDecryptor";
-import { MAIN_URL } from "shared-constant/internalURL";
+import { tokenDecryptor } from "shared-util";
 
 import {
   wrapper,

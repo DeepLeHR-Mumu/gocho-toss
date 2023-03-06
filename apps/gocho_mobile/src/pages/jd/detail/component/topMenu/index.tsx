@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { FiChevronLeft, FiLink } from "react-icons/fi";
 
-import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
+import { JOBS_DETAIL_URL } from "shared-constant";
 import { useToast } from "@recoil/hook/toast";
 
 import { menuWrapper, flexBox, backButton, jobTitle, shareIcon } from "./style";

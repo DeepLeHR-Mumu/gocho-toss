@@ -5,7 +5,7 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
-import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
+import { JOBS_DETAIL_URL } from "shared-constant";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";

@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { dateConverter, dDayCalculator } from "shared-util/date";
+import { dateConverter, dDayCalculator } from "shared-util";
 
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { NoDataDesc } from "../common/component/noDataDesc";

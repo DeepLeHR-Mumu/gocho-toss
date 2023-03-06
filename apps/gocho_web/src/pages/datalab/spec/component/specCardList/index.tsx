@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useRef } from "react";
 
 import { useInfiniteSpecArr } from "shared-api/spec/useInfiniteSpecArr";
-import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util";
 
 import { SpecCardListProps } from "./type";
 import { SpecCard } from "../specCard";

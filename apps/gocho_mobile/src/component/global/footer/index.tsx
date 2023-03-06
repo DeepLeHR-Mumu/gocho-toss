@@ -3,9 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 import GDtitleSrc from "shared-image/global/deepLeLogo/smallMono.svg";
-import { MAIN_URL, PRIVACY_URL, TOS_URL } from "shared-constant/internalURL";
+import { MAIN_URL, PRIVACY_URL, TOS_URL, companyInfoObj } from "shared-constant";
 
-import { companyInfoObj } from "shared-constant/deepleInfo";
 import { footerWrapper, linkContainer, linkText, title, emailText, logo, infoContainer, text } from "./style";
 
 export const Footer: FunctionComponent = () => {

@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { companyCommentArrKeyObj } from "shared-constant/queryKeyFactory/company/commentArrKeyObj";
-import { dateConverter } from "shared-util/date/dateConverter";
+import { dateConverter } from "shared-util";
 import { useLikeComment } from "shared-api/company/useLikeComment";
 import { useDisLikeComment } from "shared-api/company/useDisLikeComment";
 import { useFakeComment } from "shared-api/company/useFakeComment";

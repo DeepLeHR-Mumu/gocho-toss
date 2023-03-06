@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { UNKNOWN_ERROR_META } from "shared-constant/meta";
+import { UNKNOWN_ERROR_META } from "shared-constant";
 
 export const PageHead = () => {
   return (

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { BsChevronRight } from "react-icons/bs";
 
 import { useSpecArr } from "shared-api/spec";
-import { SPEC_LIST_URL } from "shared-constant/internalURL";
+import { SPEC_LIST_URL } from "shared-constant";
 import { Layout } from "@component/layout";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 

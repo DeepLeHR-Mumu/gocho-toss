@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import deepLeLogo from "shared-image/global/deepLeLogo/smallMono.svg";
 import { LinkButton } from "shared-ui/common/atom/button";
-import { MAIN_URL } from "shared-constant/internalURL";
+import { MAIN_URL } from "shared-constant";
 import { notFoundEvent, notFoundFunnelEvent } from "shared-ga/error";
 
 import jobiError from "@public/images/global/errrorPage/jobi_404.png";

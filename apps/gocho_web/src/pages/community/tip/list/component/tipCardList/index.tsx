@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useRef } from "react";
 
 import { useInfiniteTipArr } from "shared-api/tip";
-import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util";
 import { TipCard } from "../tipCard";
 
 import { TipCardListProps } from "./type";

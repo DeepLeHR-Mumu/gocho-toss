@@ -3,8 +3,13 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 
 import { useDoSignUp, useUserInfo } from "shared-api/auth";
-import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
-import { EMAIL_ERROR_MESSAGE, NICKNAME_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant/errorMessage";
+import {
+  EMAIL_ERROR_MESSAGE,
+  NICKNAME_ERROR_MESSAGE,
+  PWD_ERROR_MESSAGE,
+  EMAIL_REGEXP,
+  PWD_REGEXP,
+} from "shared-constant";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";

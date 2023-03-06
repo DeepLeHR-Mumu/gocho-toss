@@ -7,7 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-import { dateConverter } from "shared-util/date";
+import { dateConverter } from "shared-util";
 import { jdCountInfoKeyObj } from "shared-constant/queryKeyFactory/job/jdCountInfoKeyObj";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr, useUserJobBookmarkArr } from "shared-api/bookmark";

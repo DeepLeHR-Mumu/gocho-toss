@@ -3,7 +3,7 @@ import Link from "next/link";
 import { BsChevronRight } from "react-icons/bs";
 import Slider from "react-slick";
 
-import { DATALAB_DETAIL } from "shared-constant/internalURL";
+import { DATALAB_DETAIL } from "shared-constant";
 import { CompanyPassDataCard } from "../companyPassDataCard";
 import { dataLabCompanyArr, settings } from "./contant";
 import { textPoint, dataLabContainer, companyLogoBox, dataLabDesc, dataLabLayout, linkButton } from "./style";

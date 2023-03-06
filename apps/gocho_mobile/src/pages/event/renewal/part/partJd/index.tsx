@@ -7,7 +7,7 @@ import jdCardMobile from "shared-image/event/renewal/jd_card_mobile.png";
 
 import { Layout } from "@component/layout";
 
-import { JOBS_LIST_URL } from "shared-constant/internalURL";
+import { JOBS_LIST_URL } from "shared-constant";
 import { desc, flexBox, imgBox, infoBox, infoDesc, linkCSS, title, wrapper } from "./style";
 
 export const PartJd: FunctionComponent = () => {

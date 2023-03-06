@@ -1,7 +1,7 @@
 import axios from "axios";
 
-import { MANAGER_BACKEND_URL } from "shared-constant/externalURL";
-import { adminTokenDecryptor } from "shared-util/tokenDecryptor";
+import { MANAGER_BACKEND_URL } from "shared-constant";
+import { adminTokenDecryptor } from "shared-util";
 
 export const axiosInstance = axios.create({
   timeout: 10000,

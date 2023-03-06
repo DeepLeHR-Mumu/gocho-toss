@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { kakaoChannelUrl } from "shared-constant/help";
+import { kakaoChannelUrl } from "shared-constant";
 import { flexBox, workingInfo, requestChangeButton } from "./style";
 import { WorkingNoticeProps } from "./type";
 

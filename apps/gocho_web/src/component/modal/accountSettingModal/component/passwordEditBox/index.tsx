@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import { CloseButton } from "@component/common/atom/closeButton";
 import GDTitleSrc from "shared-image/global/deepLeLogo/smallMono.svg";
-import { PWD_REGEXP } from "shared-constant/regExp";
+import { PWD_REGEXP } from "shared-constant";
 import { usePatchUserInfo } from "shared-api/auth/usePatchUserInfo";
 import { useUserInfo } from "shared-api/auth";
 import { useToast } from "@recoil/hook/toast";
