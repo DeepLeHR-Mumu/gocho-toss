@@ -16,7 +16,6 @@ export const BannerBox: FunctionComponent<BannerBoxProps> = ({ banner }) => {
       <div>{banner.id}</div>
       <div css={bannerImgBox}>
         <Image src={banner.imageUrl || defaultCompanyLogo} alt="" fill />
-        dsdfdsdfdsdfdsdfdsdfdsdfdsdfdsdfdsdfdsdfdsdfdsdfdsdfdsdfdsdfdsdfdsdfdsdfdsdfdsdfdsdfdsdf
       </div>
       <div>
         {startYear}-{startMonth}-{startDate} ~ {endYear}-{endMonth}-{endDate}
