@@ -48,9 +48,9 @@ export const SpecCard: FunctionComponent<SpecCardProps | SpecCardSkeleton> = ({ 
   return (
     <article css={cardWrapper}>
       <div css={userInfoContainer}>
-        <ProfileImg imageStr={specData.user.image} size="S" />
+        <ProfileImg imageStr={specData.uploader.image} size="S" />
         <div css={userInfoBox}>
-          <p css={nicknameCSS}>{specData.user.nickname}</p>
+          <p css={nicknameCSS}>{specData.uploader.nickname}</p>
           <p css={genderCSS}>
             {specData.gender} {specData.age}살
           </p>

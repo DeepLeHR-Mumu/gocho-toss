@@ -1,5 +1,10 @@
 export interface TipObjDef {
   id: number;
+  uploader: {
+    user_id: number;
+    nickname: string;
+    badge: string;
+  };
   title: string;
   tag: string[];
   description: string;
@@ -7,11 +12,8 @@ export interface TipObjDef {
   created_time: number;
   related_com: number;
   related_job: number[];
-  user_id: number;
   like: number;
   view: number;
-  nickname: string;
-  badge: string;
   thumbnail_url: string;
   svg_thumbnail_url: string;
 }

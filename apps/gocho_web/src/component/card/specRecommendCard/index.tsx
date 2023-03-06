@@ -48,9 +48,9 @@ export const SpecRecommendCard: FunctionComponent<SpecRecommendCardProps | Skele
   return (
     <article css={cardWrapper}>
       <div css={userInfoContainer}>
-        <ProfileImg imageStr={specData.user.image} size="M" />
+        <ProfileImg imageStr={specData.uploader.image} size="M" />
         <div css={userInfoBox}>
-          <p css={nicknameCSS}>{specData.user.nickname}</p>
+          <p css={nicknameCSS}>{specData.uploader.nickname}</p>
           <p css={genderCSS}>
             {specData.gender} {specData.age}살
           </p>
@@ -137,11 +137,7 @@ export const SpecRecommendCard: FunctionComponent<SpecRecommendCardProps | Skele
       </div>
 
       <div css={buttonContainer}>
-        <LinkButton
-          text={specData.isMine ? "평가 내역 보기" : "평가하기"}
-          variant="filled"
-          linkTo={`${SPEC_DETAIL_URL}/${specData.id}`}
-        />
+        <LinkButton text="평가하기" variant="filled" linkTo={`${SPEC_DETAIL_URL}/${specData.id}`} />
       </div>
     </article>
   );

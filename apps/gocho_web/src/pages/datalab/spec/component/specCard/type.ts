@@ -1,12 +1,11 @@
 export interface SpecCardProps {
   specData: {
     id: number;
-    user: {
+    uploader: {
       nickname: string;
       image: "default" | "default_work" | "jobi" | "jobi_safety" | "jobi_chat" | "jobi_play" | "jobi_teach";
       badge: "default" | "early_bird" | "admin";
     };
-    isMine: boolean;
     gender: "남" | "여";
     age: number;
     lastEducation: "고졸" | "초대졸";

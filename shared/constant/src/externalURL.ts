@@ -2,6 +2,12 @@ export const BACKEND_URL = `${
   process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? "https://gocho-back.com/v1" : "https://dev.gocho-back.com/v1"
 }`;
 
+export const NEW_BACKEND_URL = `${
+  process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
+    ? "https://user.gocho-back.com"
+    : "https://dev.user.gocho-back.com"
+}`;
+
 export const BUSINESS_BACKEND_URL = `${
   process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
     ? "https://business.gocho-back.com"

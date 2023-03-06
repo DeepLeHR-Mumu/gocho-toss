@@ -51,8 +51,8 @@ export interface SpecDetailObjDef {
   award: string | null;
   career: string | null;
   etc: string | null;
-  isMine: boolean;
   evals: EvalDef;
-  didEval: boolean;
-  evalCount: number;
+  is_mine: boolean;
+  did_eval: boolean;
+  eval_count: number;
 }

@@ -1,13 +1,13 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { SpecArrInfinityRequestDef, specArrKeyObj } from "shared-constant/queryKeyFactory/spec/arrKeyObj";
-import { axiosInstance } from "../../axiosInstance";
+import { axiosNewInstance } from "../../axiosInstance";
 
 import { GetInifiniteSpecArrDef } from "./type";
 import { selector } from "./util";
 
 export const getInfiniteSpecArr: GetInifiniteSpecArrDef = async ({ queryKey: [{ requestObj }], pageParam }) => {
-  const { data } = await axiosInstance.get(`/specs`, {
+  const { data } = await axiosNewInstance.get("/specs", {
     params: { ...requestObj, offset: pageParam },
   });
 

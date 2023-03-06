@@ -52,7 +52,7 @@ export const BestUserBox: FunctionComponent<BestUserInfoProps | skeletonProps> =
           <ProfileImg imageStr={bestUserData.profileImg} size="XL" />
           <div css={cardHeaderInfo}>
             <strong css={userNickname}>
-              {bestUserData.user.nickname} <UserBadge badge={bestUserData.user.badge} />
+              {bestUserData.uploader.nickname} <UserBadge badge={bestUserData.uploader.badge} />
             </strong>
             <p css={scoreDesc}>
               <span css={scoreTitle}>총 점</span>
@@ -109,7 +109,7 @@ export const BestUserBox: FunctionComponent<BestUserInfoProps | skeletonProps> =
             <p css={bestUserDesc}>
               화제의 스펙
               <span css={bestUserNickName}>
-                {bestUserData.user.nickname}
+                {bestUserData.uploader.nickname}
                 <span css={bounceIcon}>
                   <Image src={headerIcon} alt="" fill />
                 </span>
