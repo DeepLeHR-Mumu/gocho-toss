@@ -5,7 +5,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useUserInfo, useDeleteUserInfo } from "shared-api/auth";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { userInfoKeyObj } from "shared-constant/queryKeyFactory/user/infoKeyObj";
-import { MAIN_URL } from "shared-constant/internalURL";
+import { MAIN_URL } from "shared-constant";
 
 import { useToast } from "@recoil/hook/toast";
 import { useModal } from "@recoil/hook/modal";

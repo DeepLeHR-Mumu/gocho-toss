@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 import { useDoKakaoLogin } from "shared-api/auth/useDoKakaoLogin";
 import { loginSuccessEvent } from "shared-ga/auth";
-import { tokenDecryptor } from "shared-util/tokenDecryptor";
+import { tokenDecryptor } from "shared-util";
 
 const KakaoLogin: NextPage = () => {
   const queryClient = useQueryClient();

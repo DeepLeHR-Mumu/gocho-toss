@@ -6,7 +6,7 @@ import Image from "next/image";
 
 import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
 import { globalSearchEvent } from "shared-ga/search";
-import { MAIN_URL } from "shared-constant/internalURL";
+import { MAIN_URL } from "shared-constant";
 import { useUserInfo } from "shared-api/auth";
 
 import { useToast } from "@recoil/hook/toast";

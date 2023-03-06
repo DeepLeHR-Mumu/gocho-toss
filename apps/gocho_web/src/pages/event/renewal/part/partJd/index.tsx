@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 
 import jdCardWeb from "shared-image/event/renewal/jd_card_web.png";
-import { JOBS_LIST_URL } from "shared-constant/internalURL";
+import { JOBS_LIST_URL } from "shared-constant";
 import { Layout } from "@component/layout";
 
 import { desc, flexBox, imgBox, infoBox, infoDesc, linkCSS, title, wrapper } from "./style";

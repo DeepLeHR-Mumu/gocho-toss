@@ -1,4 +1,4 @@
-export const executionDesc = "<부칙> 본 약관은 2022년 10월 14일부터 적용한다.";
+export const tosExecutionDesc = "<부칙> 본 약관은 2022년 10월 14일부터 적용한다.";
 
 export const tosArr = [
   {

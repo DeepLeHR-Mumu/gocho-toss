@@ -6,7 +6,7 @@ import { FiArrowRight, FiCheck } from "react-icons/fi";
 import mainBackground02 from "shared-image/event/renewal/main_background_02.jpg";
 import drawLine from "shared-image/event/renewal/draw_line.svg";
 import drawPoint from "shared-image/event/renewal/draw_point.svg";
-import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
+import { JOBS_DETAIL_URL } from "shared-constant";
 
 import {
   backgroundBox,

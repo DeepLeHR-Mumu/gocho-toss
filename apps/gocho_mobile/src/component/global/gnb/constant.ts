@@ -1,4 +1,4 @@
-import { JOBS_LIST_URL, JOBS_EXPLIST_URL, MYPAGE_URL } from "shared-constant/internalURL";
+import { JOBS_LIST_URL, JOBS_EXPLIST_URL, MYPAGE_URL } from "shared-constant";
 
 export const menuArr = [
   {

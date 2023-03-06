@@ -8,7 +8,7 @@ import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookma
 import { useUserInfo } from "shared-api/auth";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
-import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
+import { JOBS_DETAIL_URL } from "shared-constant";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import highTrue from "shared-image/global/common/go_color.svg";
 import highFalse from "shared-image/global/common/go_mono.svg";

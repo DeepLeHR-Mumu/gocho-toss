@@ -11,7 +11,7 @@ import collegeTrue from "shared-image/global/common/cho_color.svg";
 import collegeFalse from "shared-image/global/common/cho_mono.svg";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
-import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
+import { JOBS_DETAIL_URL } from "shared-constant";
 import { SkeletonBox } from "../../../common/atom/skeletonBox";
 import { DdayBox } from "../../../common/atom/dDayBox";
 

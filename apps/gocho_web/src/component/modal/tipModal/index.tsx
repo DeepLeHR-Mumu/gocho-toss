@@ -7,7 +7,7 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import gochoLogoMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { useAddTipBookmarkArr, useDeleteTipBookmarkArr, useUserTipBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
-import { dateConverter } from "shared-util/date/dateConverter";
+import { dateConverter } from "shared-util";
 import { useAddTipViewCount } from "shared-api/viewCount";
 
 import { useToast } from "@recoil/hook/toast";

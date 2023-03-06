@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { dateConverter } from "shared-util/date";
+import { dateConverter } from "shared-util";
 
 import { JdPartProps } from "./type";
 import { cssObj } from "./style";

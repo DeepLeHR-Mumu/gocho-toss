@@ -9,7 +9,7 @@ import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
 import grayLogoSrc from "shared-image/global/deepLeLogo/smallMono.svg";
 import { useUserInfo } from "shared-api/auth";
 import { globalSearchEvent } from "shared-ga/search";
-import { MAIN_URL } from "shared-constant/internalURL";
+import { MAIN_URL } from "shared-constant";
 
 import { Layout } from "@component/layout";
 import { Profile } from "@component/common/molecule/profile";

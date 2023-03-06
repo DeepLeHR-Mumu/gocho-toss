@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import Link from "next/link";
 
-import { dateConverter } from "shared-util/date";
+import { dateConverter } from "shared-util";
 
 import { BUSINESS_JD_EDIT_URL, BUSINESS_JD_REGISTER_URL } from "@constant/internalURL";
 

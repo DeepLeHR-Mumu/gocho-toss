@@ -4,7 +4,7 @@ import { BsChevronLeft } from "react-icons/bs";
 
 import { StarEvaluation } from "@component/common/molecule/starEvaluation";
 import { LinkButton } from "shared-ui/common/atom/button";
-import { SPEC_LIST_URL } from "shared-constant/internalURL";
+import { SPEC_LIST_URL } from "shared-constant";
 import { COLORS } from "shared-style/color";
 
 import { ChipBox } from "./component/chipBox";

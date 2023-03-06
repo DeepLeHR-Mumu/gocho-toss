@@ -1,4 +1,4 @@
-export const executionDesc = "제1조 본 방침은 2022. 10. 15.부터 시행된다.";
+export const privacyExecutionDesc = "제1조 본 방침은 2022. 10. 15.부터 시행된다.";
 
 export const privacyArr = [
   {

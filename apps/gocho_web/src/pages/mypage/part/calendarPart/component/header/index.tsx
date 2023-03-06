@@ -1,8 +1,7 @@
 import { FunctionComponent, useEffect } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
-import { dateConverter } from "shared-util/date";
-import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { dateConverter, dummyArrCreator } from "shared-util";
 
 import { container, titleCSS, button } from "./style";
 import { HeaderProps, changeWeekDef } from "./type";

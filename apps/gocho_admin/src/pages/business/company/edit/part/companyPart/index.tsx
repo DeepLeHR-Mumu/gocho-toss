@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { dateConverter } from "shared-util/date";
+import { dateConverter } from "shared-util";
 
 import { WelfareBox } from "@pages/business/company/edit/component/welfareBox";
 import { cssObj } from "./style";

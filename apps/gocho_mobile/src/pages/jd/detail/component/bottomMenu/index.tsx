@@ -6,7 +6,7 @@ import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookma
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { useModal } from "@recoil/hook/modal";
 import { useUserInfo } from "shared-api/auth";
-import { dDayCalculator } from "shared-util/date";
+import { dDayCalculator } from "shared-util";
 
 import { NormalButton } from "shared-ui/common/atom/button";
 import { BottomMenuProps } from "./type";

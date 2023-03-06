@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { dDayCalculator } from "shared-util/date";
+import { dDayCalculator } from "shared-util";
 
 import { DdayBoxProps } from "./type";
 import { setDdayStyleCSS } from "./style";

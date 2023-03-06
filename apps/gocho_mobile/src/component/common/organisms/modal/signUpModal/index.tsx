@@ -4,10 +4,16 @@ import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-import { TOS_URL, PRIVACY_URL } from "shared-constant/internalURL";
 import { useDoSignUp, useUserInfo } from "shared-api/auth";
-import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
-import { EMAIL_ERROR_MESSAGE, NICKNAME_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant/errorMessage";
+import {
+  EMAIL_REGEXP,
+  PWD_REGEXP,
+  TOS_URL,
+  PRIVACY_URL,
+  EMAIL_ERROR_MESSAGE,
+  NICKNAME_ERROR_MESSAGE,
+  PWD_ERROR_MESSAGE,
+} from "shared-constant";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";

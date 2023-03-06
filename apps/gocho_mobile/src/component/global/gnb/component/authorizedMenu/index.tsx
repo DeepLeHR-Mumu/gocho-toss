@@ -4,7 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useUserInfo } from "shared-api/auth";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
-import { MYPAGE_URL } from "shared-constant/internalURL";
+import { MYPAGE_URL } from "shared-constant";
 import Link from "next/link";
 import { profileWrapper, menuCategory, flexBox, nickname } from "./style";
 import { AuthorizedMenuProps } from "./type";

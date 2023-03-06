@@ -4,10 +4,9 @@ import Image from "next/image";
 
 import GDtitleSrc from "shared-image/global/deepLeLogo/textMono.png";
 import kakaoMonoSrc from "shared-image/global/sns/kakaoMono.svg";
-import { MAIN_URL, PRIVACY_URL, TOS_URL } from "shared-constant/internalURL";
 import { Layout } from "@component/layout";
 
-import { companyInfoObj } from "shared-constant/deepleInfo";
+import { companyInfoObj, MAIN_URL, PRIVACY_URL, TOS_URL } from "shared-constant";
 import {
   footerWrapper,
   footerContainer,

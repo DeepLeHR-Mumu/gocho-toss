@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import deepLeLogo from "shared-image/global/deepLeLogo/smallMono.svg";
 import jobiAttention from "shared-image/global/jobi/attention.png";
 import { LinkButton } from "shared-ui/common/atom/button";
-import { GOCHO_DESKTOP_URL, SPEC_LIST_URL } from "shared-constant/internalURL";
+import { GOCHO_DESKTOP_URL, SPEC_LIST_URL } from "shared-constant";
 
 import { buttonBox, catchphrase, errorWrapper, jobiImageContainer, logoContainer, title, wrapper } from "./style";
 

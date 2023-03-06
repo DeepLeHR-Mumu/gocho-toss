@@ -7,7 +7,7 @@ import { Layout } from "@component/layout";
 import { useUserInfo } from "shared-api/auth";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useJobArr } from "shared-api/job";
-import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { useCompanyDetail } from "shared-api/company";
 
