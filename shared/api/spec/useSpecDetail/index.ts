@@ -7,7 +7,7 @@ import { selector } from "./util";
 import { GetSpecDetailDef } from "./type";
 
 export const getSpecDetail: GetSpecDetailDef = async ({ queryKey: [{ requestObj }] }) => {
-  const token = localStorage.getItem("token") as string;
+  const token = localStorage.getItem("accessToken") as string;
   const { data } = await axiosInstance.get(`/specs/${requestObj.specId}`, {
     headers: { "x-access-token": token },
   });

@@ -11,8 +11,8 @@ interface TipObjDef {
 }
 
 const deleteTipBookmarkArr: DeleteTipBookmarkArrDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
-  const { data } = await axiosInstance.delete(`/users/${requestObj?.userId}/tip-likes/${requestObj.elemId}`, {
+  const token = localStorage.getItem("accessToken") as string;
+  const { data } = await axiosInstance.delete(`/users/${requestObj?.userId}/tip-likes/${requestObj.id}`, {
     headers: {
       "x-access-token": token,
     },

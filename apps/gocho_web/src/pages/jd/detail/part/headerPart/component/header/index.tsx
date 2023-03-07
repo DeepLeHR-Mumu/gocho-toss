@@ -69,7 +69,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
     return (
       userId &&
       addMutate(
-        { userId, elemId: jobDetailData.id },
+        { userId, id: jobDetailData.id },
         {
           onSuccess: () => {
             jdBookmarkEvent(jobDetailData.id);
@@ -84,7 +84,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
     return (
       userId &&
       deleteMutate(
-        { userId, elemId: jobDetailData.id },
+        { userId, id: jobDetailData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries(jdCountInfoKeyObj.countInfo({ id: jobDetailData.id }));

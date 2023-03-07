@@ -58,8 +58,8 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
     if (!userInfoData) {
       return setCurrentToast("로그인이 필요한 서비스입니다.");
     }
-    if (isBookmarked) return deleteBookmarkMutate({ userId: userInfoData?.id as number, elemId: tipData.id });
-    return addBookmarkMutate({ userId: userInfoData?.id as number, elemId: tipData.id });
+    if (isBookmarked) return deleteBookmarkMutate({ userId: userInfoData?.id as number, id: tipData.id });
+    return addBookmarkMutate({ userId: userInfoData?.id as number, id: tipData.id });
   };
 
   useEffect(() => {

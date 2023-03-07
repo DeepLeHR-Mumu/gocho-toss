@@ -36,11 +36,11 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
   }
 
   const addCompanyBookmark = () => {
-    if (userId) addMutate({ userId, elemId: companyData.id });
+    if (userId) addMutate({ userId, id: companyData.id });
   };
 
   const deleteCompanyBookmark = () => {
-    if (userId) deleteMutate({ userId, elemId: companyData.id });
+    if (userId) deleteMutate({ userId, id: companyData.id });
   };
 
   return (

@@ -8,7 +8,7 @@ import { axiosInstance } from "../../axiosInstance";
 import { PostDoUserFilterDef, useDoUserFilterProps, RequestObjDef } from "./type";
 
 const postDoUserFilter: PostDoUserFilterDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
+  const token = localStorage.getItem("accessToken") as string;
   const { data } = await axiosInstance.put(
     `/users/${requestObj?.userId}/filter`,
     {

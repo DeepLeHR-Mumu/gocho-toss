@@ -6,7 +6,7 @@ import { axiosInstance } from "../../axiosInstance";
 import { PostDeleteMySpecDef, useDeleteMySpecProps, RequestObjDef } from "./type";
 
 const postDeleteMySpec: PostDeleteMySpecDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
+  const token = localStorage.getItem("accessToken") as string;
   const { data } = await axiosInstance.delete(`/specs/${requestObj?.id}`, {
     headers: {
       "x-access-token": token,

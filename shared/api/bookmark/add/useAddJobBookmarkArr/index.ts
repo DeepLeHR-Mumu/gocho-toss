@@ -16,10 +16,10 @@ interface JobObjDef {
 }
 
 const addJobBookmark: AddJobBookmarkDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
+  const token = localStorage.getItem("accessToken") as string;
   const { data } = await axiosInstance.post(
     `/users/${requestObj.userId}/jd-bookmarks/`,
-    { elemId: requestObj.elemId },
+    { id: requestObj.id },
     {
       headers: {
         "x-access-token": token,

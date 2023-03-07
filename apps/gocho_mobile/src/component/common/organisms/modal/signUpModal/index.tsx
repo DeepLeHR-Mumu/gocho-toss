@@ -55,7 +55,7 @@ export const SignUpModal: FunctionComponent = () => {
         setErrorMsg(errorResponse.error.errorMessage);
       },
       onSuccess: (response) => {
-        localStorage.setItem("token", `${response?.data.token}`);
+        localStorage.setItem("accessToken", `${response?.data.access_token}`);
         signupSuccessEvent();
         queryClient.invalidateQueries();
         closeModal();

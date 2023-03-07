@@ -5,7 +5,7 @@ import { userBookmarkKeyObj } from "shared-constant/queryKeyFactory/bookmark/boo
 
 import { axiosInstance } from "../../../axiosInstance";
 import { CompanyBookmarkResObjDef } from "../../type/bookmark";
-import { ResponseObjDef, AddCompanyBookamrkArrDef, RequestObjDef } from "./type";
+import { ResponseObjDef, AddCompanyBookmarkArrDef, RequestObjDef } from "./type";
 
 interface CompanyObjDef {
   id: number;
@@ -13,11 +13,11 @@ interface CompanyObjDef {
   logo_url: string;
 }
 
-const addCompanyBookmarkArr: AddCompanyBookamrkArrDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
+const addCompanyBookmarkArr: AddCompanyBookmarkArrDef = async (requestObj) => {
+  const token = localStorage.getItem("accessToken") as string;
   const { data } = await axiosInstance.post(
     `/users/${requestObj?.userId}/company-bookmarks/`,
-    { elemId: requestObj.elemId },
+    { id: requestObj.id },
     {
       headers: {
         "x-access-token": token,

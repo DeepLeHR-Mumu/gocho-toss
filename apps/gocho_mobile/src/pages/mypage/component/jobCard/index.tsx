@@ -75,7 +75,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   const addJobBookmark = () => {
     if (userId)
       addMutate(
-        { userId, elemId: jobData.id },
+        { userId, id: jobData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries([{ data: "jobArr" }]);
@@ -87,7 +87,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   const deleteJobBookmark = () => {
     if (userId)
       deleteMutate(
-        { userId, elemId: jobData.id },
+        { userId, id: jobData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries([{ data: "jobArr" }]);

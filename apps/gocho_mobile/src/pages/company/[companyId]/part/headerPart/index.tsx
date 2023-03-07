@@ -58,7 +58,7 @@ export const HeaderPart: FunctionComponent = () => {
     return (
       userData?.id &&
       addMutate(
-        { userId: userData?.id, elemId: companyDetailData?.id as number },
+        { userId: userData?.id, id: companyDetailData?.id as number },
         {
           onSuccess: () => {
             queryClient.invalidateQueries(companyCountInfoKeyObj.countInfo({ id: Number(companyDetailData?.id) }));
@@ -72,7 +72,7 @@ export const HeaderPart: FunctionComponent = () => {
     return (
       userData?.id &&
       deleteMutate(
-        { userId: userData?.id, elemId: companyDetailData?.id as number },
+        { userId: userData?.id, id: companyDetailData?.id as number },
         {
           onSuccess: () => {
             queryClient.invalidateQueries(companyCountInfoKeyObj.countInfo({ id: Number(companyDetailData?.id) }));

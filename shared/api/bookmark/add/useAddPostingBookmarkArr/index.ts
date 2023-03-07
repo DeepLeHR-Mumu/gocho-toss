@@ -11,10 +11,10 @@ interface PostingObjDef {
 }
 
 const addPostingBookmarkArr: AddPostingBookmarkArrDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
+  const token = localStorage.getItem("accessToken") as string;
   const { data } = await axiosInstance.post(
     `/users/${requestObj.userId}/posting-likes/`,
-    { elemId: requestObj.elemId },
+    { id: requestObj.id },
     {
       headers: {
         "x-access-token": token,

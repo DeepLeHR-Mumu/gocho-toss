@@ -48,11 +48,11 @@ export interface SpecDetailObjDef {
     | null
     | undefined;
   language: LanguageType | null;
-  award: string | null;
-  career: string | null;
-  etc: string | null;
-  evals: EvalDef;
+  award: string[] | null;
+  career: string[] | null;
+  etc: string[] | null;
   is_mine: boolean;
+  evals: EvalDef;
   did_eval: boolean;
   eval_count: number;
 }

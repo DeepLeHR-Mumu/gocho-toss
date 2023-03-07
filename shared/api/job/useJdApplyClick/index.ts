@@ -5,7 +5,7 @@ import { axiosInstance } from "../../axiosInstance";
 import { PostJdApplyClickDef, RequestObjDef } from "./type";
 
 const postJdApplyClick: PostJdApplyClickDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
+  const token = localStorage.getItem("accessToken") as string;
   const { data } = await axiosInstance.post(`jds/${requestObj.id}/clicks`, null, {
     headers: {
       "x-access-token": token,

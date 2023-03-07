@@ -6,7 +6,7 @@ import { axiosInstance } from "../../axiosInstance";
 import { PostDisFakeCommentDef, UseDisFakeCommentProps, RequestObjDef } from "./type";
 
 const postDisFakeComment: PostDisFakeCommentDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
+  const token = localStorage.getItem("accessToken") as string;
   const { data } = await axiosInstance.delete(
     `/companies/${requestObj.companyId}/comments/${requestObj.commentId}/dislikes`,
     {

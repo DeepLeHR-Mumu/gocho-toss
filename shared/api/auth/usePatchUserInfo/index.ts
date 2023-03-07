@@ -5,7 +5,7 @@ import { axiosInstance } from "../../axiosInstance";
 import { PatchUserInfoDef, RequestObjDef, UserInfoResponse, UsePatchUserInfoProps, ErrorResponse } from "./type";
 
 const patchUserInfo: PatchUserInfoDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
+  const token = localStorage.getItem("accessToken") as string;
 
   const { data } = await axiosInstance.patch(
     `/users/${requestObj.userId}`,
