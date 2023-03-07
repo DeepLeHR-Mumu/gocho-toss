@@ -7,15 +7,15 @@ on:
       - dev
 
 jobs:
-  waiting_environment:
+  creating_environment:
     name: 테스트 환경 미리 설치
     timeout-minutes: 30
     runs-on: ubuntu-latest
-
+    if: ${{ github.event_name == 'pull_request'}}
     steps:
       - uses: actions/checkout@v3
         name: 코드가져오기 checkout
-      
+
       - uses: actions/setup-node@v2
         with:
           node-version: "16.x"
@@ -58,7 +58,7 @@ jobs:
         run: PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright pnpx playwright@1.28.0 install --with-deps chromium
 
   playwright_e2e_test:
-    needs: waiting_environment
+    needs: creating_environment
     strategy:
       fail-fast: true
       matrix:

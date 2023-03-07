@@ -6,6 +6,7 @@
       "outputs": [".next/**"]
     },
     "e2e": { "outputs": [] },
+    "componentTest": { "outputs": [] },
     "e2e:CICD": { "outputs": [] }
   },
   "globalEnv": ["NEXT_PUBLIC_VERCEL_ENV", "NODE_ENV"]
