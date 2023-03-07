@@ -1,4 +1,4 @@
-name: business e2e 테스트
+name: e2e / unit / component testing
 
 on:
   pull_request:
