@@ -2,5 +2,5 @@
   "extends": "tsconfig-deeple/react-library.json",
   "compilerOptions": {},
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "jest.config.js"]
 }
