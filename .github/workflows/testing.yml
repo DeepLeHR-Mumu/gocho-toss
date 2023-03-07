@@ -2,8 +2,7 @@ name: testing
 
 on:
   workflow_run:
-    workflows:
-      - Environment
+    workflows: [Environment]
     types:
       - completed
 
