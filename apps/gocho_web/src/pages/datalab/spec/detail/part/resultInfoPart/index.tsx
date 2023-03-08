@@ -73,8 +73,7 @@ export const ResultInfoPart: FunctionComponent<ResultInfoPartProps> = ({ resultD
           <p css={title}>
             <FiSmile /> 획득한 강점 칩
           </p>
-          {/* TODO === null */}
-          {resultData.evals === null ? (
+          {resultData.evals?.strongPointArr.length === 0 ? (
             <p css={noChipContainer}>획득한 칩이 없습니다.</p>
           ) : (
             <ul css={chipList}>
@@ -90,7 +89,7 @@ export const ResultInfoPart: FunctionComponent<ResultInfoPartProps> = ({ resultD
           </p>
 
           <div css={chipList}>
-            {resultData.evals === null ? (
+            {resultData.evals?.weakPointArr.length === 0 ? (
               <p css={noChipContainer}>획득한 칩이 없습니다.</p>
             ) : (
               <ul css={chipList}>

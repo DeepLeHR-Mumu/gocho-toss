@@ -4,7 +4,7 @@ import { EvalDef, IndustryType, LanguageType, TaskType } from "./common";
 export interface SpecDetailObjDef {
   id: number;
   image: ImageType;
-  user: {
+  uploader: {
     nickname: string;
     image: "default" | "default_work" | "jobi" | "jobi_safety" | "jobi_chat" | "jobi_play" | "jobi_teach";
     badge: "default" | "early_bird" | "admin";
