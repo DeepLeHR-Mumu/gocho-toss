@@ -1,9 +1,7 @@
 interface CompanyCommentDef {
-  uploader: {
-    user_id: number | null;
-    nickname: string;
-    badge: "default" | "admin" | "early_bird";
-  };
+  user_id: number | null;
+  nickname: string;
+  badge: "default" | "admin" | "early_bird";
   id: number;
   company_id: number;
   jd_id: number;

@@ -23,8 +23,8 @@ const JobsList: NextPage = () => {
     <main>
       <PageHead />
       <InvisibleH1 title="실시간 생산직 채용공고" />
-
       <InvisibleH2 title="오늘의 추천 공고" />
+
       <AdPart />
       <ListPart />
     </main>

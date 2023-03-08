@@ -14,6 +14,7 @@ const getUserFilter: GetUserFilterDef = async ({ queryKey: [{ requestObj }] }) =
       "x-access-token": token,
     },
   });
+
   return data;
 };
 

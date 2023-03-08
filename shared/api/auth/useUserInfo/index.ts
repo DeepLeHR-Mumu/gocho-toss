@@ -6,13 +6,9 @@ import { selector } from "./util";
 
 export const postUserAuth = async () => {
   const token = localStorage.getItem("accessToken") as string;
-  const { data } = await axiosInstance.post(
-    `/auth/check`,
-    {},
-    {
-      headers: { "x-access-token": token },
-    }
-  );
+  const { data } = await axiosInstance.get(`/auth/detokenize`, {
+    headers: { "x-access-token": token },
+  });
   return data;
 };
 
