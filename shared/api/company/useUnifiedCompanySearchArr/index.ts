@@ -4,13 +4,13 @@ import {
   searchCompanyArrKeyObj,
 } from "shared-constant/queryKeyFactory/company/searchCompanyArrKeyObj";
 
-import { axiosNewInstance } from "../../axiosInstance";
+import { axiosInstance } from "../../axiosInstance";
 
 import { GetSearchCompanyArrDef } from "./type";
 import { selector } from "./util";
 
 export const getUnifiedCompanySearchArr: GetSearchCompanyArrDef = async ({ queryKey: [{ requestObj }] }) => {
-  const { data } = await axiosNewInstance.get("/companies", {
+  const { data } = await axiosInstance.get("/companies", {
     params: {
       order: "recent",
       filter: "valid",

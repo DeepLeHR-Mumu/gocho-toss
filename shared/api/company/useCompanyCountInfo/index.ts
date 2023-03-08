@@ -5,12 +5,12 @@ import {
   companyCountInfoKeyObj,
 } from "shared-constant/queryKeyFactory/company/companyCountInfoKeyObj";
 
-import { axiosNewInstance } from "../../axiosInstance";
+import { axiosInstance } from "../../axiosInstance";
 import { selector } from "./util";
 import { GetCompanyCountInfoDef } from "./type";
 
 export const getCompanyCountInfo: GetCompanyCountInfoDef = async ({ queryKey: [{ requestObj }] }) => {
-  const { data } = await axiosNewInstance.get(`/companies/${requestObj.id}/count-info`);
+  const { data } = await axiosInstance.get(`/companies/${requestObj.id}/count-info`);
   return data;
 };
 

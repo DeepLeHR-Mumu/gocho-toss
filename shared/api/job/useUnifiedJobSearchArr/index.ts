@@ -2,13 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 
 import { searchJobArrKeyObj, SearchJobRequestObj } from "shared-constant/queryKeyFactory/job/searchJobArrKeyObj";
 
-import { axiosNewInstance } from "../../axiosInstance";
+import { axiosInstance } from "../../axiosInstance";
 
 import { GetJobArrDef } from "./type";
 import { selector } from "./util";
 
 export const getUnifiedJobSearchArr: GetJobArrDef = async ({ queryKey: [{ requestObj }] }) => {
-  const { data } = await axiosNewInstance.get("/jds", {
+  const { data } = await axiosInstance.get("/jds", {
     params: {
       order: "recent",
       filter: "valid",
