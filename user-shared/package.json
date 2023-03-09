@@ -1,0 +1,26 @@
+{
+  "name": "user-shared",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "componentTest": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.21.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "eslint-config-deeple": "workspace:^1.0.0",
+    "jest": "^29.4.3",
+    "tsconfig-deeple": "workspace:^0.0.0"
+  },
+  "dependencies": {
+    "@types/react": "18.0.17",
+    "next": "13.1.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  }
+}
