@@ -57,10 +57,11 @@ export const KakaoBox: FunctionComponent = () => {
       },
       onSuccess: (response) => {
         queryClient.invalidateQueries();
-        const { id, nickname: accountNickname } = tokenDecryptor(response.data.token as string);
+        localStorage.setItem("accessToken", `${response.data.access_token}`);
+        localStorage.setItem("refreshToken", `${response.data.refresh_token}`);
+        const { id, nickname: accountNickname } = tokenDecryptor(response.data.access_token as string);
         const kakaopath = sessionStorage.getItem("kakaopath");
         loginSuccessEvent(id, "kakao", kakaopath);
-        localStorage.setItem("token", `${response.data.token}`);
         router.push(kakaopath as string);
         setCurrentToast("님 환영합니다.", accountNickname);
         router.back();

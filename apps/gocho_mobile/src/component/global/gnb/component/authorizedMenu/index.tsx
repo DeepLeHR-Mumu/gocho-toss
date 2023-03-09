@@ -14,7 +14,8 @@ export const AuthorizedMenu: FunctionComponent<AuthorizedMenuProps> = ({ setOpen
 
   const doLogout = () => {
     setOpenedElement(null);
-    localStorage.removeItem("token");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
     queryClient.resetQueries();
   };
 

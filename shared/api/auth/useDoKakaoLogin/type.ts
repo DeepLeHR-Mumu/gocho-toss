@@ -8,7 +8,8 @@ export interface RequestObjDef {
 export interface ResponseObjDef {
   data: {
     result: "NEW_USER" | "GOCHO_USER" | "KAKAO_LOGIN_OK";
-    token: string | undefined;
+    access_token: string | undefined;
+    refresh_token: string | undefined;
   };
 }
 

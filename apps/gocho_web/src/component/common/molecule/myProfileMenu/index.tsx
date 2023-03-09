@@ -25,7 +25,8 @@ export const MyProfileMenu: FunctionComponent<MyProfileMenuProps> = ({ active })
   }, []);
 
   const doLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
     queryClient.resetQueries();
   };
 
