@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { CompanyArrRequestDef, companyArrKeyObj } from "shared-constant/queryKeyFactory/company/arrKeyObj";
 
-import { axiosInstance } from "../../axiosInstance";
+import { axiosNoTokenInstance } from "../../axiosInstance";
 
 import { GetCompanyArrDef } from "./type";
 import { selector } from "./util";
 
 export const getCompanyArr: GetCompanyArrDef = async ({ queryKey: [{ requestObj }] }) => {
-  const { data } = await axiosInstance.get("/companies", {
+  const { data } = await axiosNoTokenInstance.get("/companies", {
     params: requestObj,
   });
   return data;

@@ -2,12 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 
 import { jdCountInfoKeyObj, JdCountInfoRequestObjDef } from "shared-constant/queryKeyFactory/job/jdCountInfoKeyObj";
 
-import { axiosInstance } from "../../axiosInstance";
+import { axiosNoTokenInstance } from "../../axiosInstance";
 import { selector } from "./util";
 import { GetJdCountInfoDef } from "./type";
 
 export const getJdCountInfo: GetJdCountInfoDef = async ({ queryKey: [{ requestObj }] }) => {
-  const { data } = await axiosInstance.get(`/jds/${requestObj.id}/count-info`);
+  const { data } = await axiosNoTokenInstance.get(`/jds/${requestObj.id}/count-info`);
   return data;
 };
 

@@ -3,10 +3,15 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
-import { BACKEND_URL, BUSINESS_BACKEND_URL, MANAGER_BACKEND_URL } from "shared-constant";
-import { managerTokenDecryptor } from "shared-util";
+import { BACKEND_URL, MANAGER_BACKEND_URL } from "shared-constant";
+import { tokenDecryptor } from "shared-util";
 
 import { ErrorResponseDef } from "./errorType";
+
+export const axiosNoTokenInstance = axios.create({
+  timeout: 10000,
+  baseURL: BACKEND_URL,
+});
 
 export const axiosInstance = axios.create({
   timeout: 10000,
@@ -35,7 +40,7 @@ export const useAxiosInterceptor = () => {
     if (!refreshToken) throw new axios.Cancel("요청 취소");
 
     const refreshResults = await axios
-      .get(`${BUSINESS_BACKEND_URL}/auth/refresh`, {
+      .get(`${BACKEND_URL}/auth/refresh`, {
         headers: { "x-refresh-token": refreshToken },
       })
       .then(({ data }) => {
@@ -49,8 +54,6 @@ export const useAxiosInterceptor = () => {
         if (error_code === "EMPTY_JWT") {
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
-          // setUserInfoData(null);
-          router.push("/login");
           throw new axios.Cancel("재요청 취소");
         }
       })
@@ -71,25 +74,23 @@ export const useAxiosInterceptor = () => {
       throw new axios.Cancel("토큰이 존재하지 않으므로 요청취소");
     }
 
-    const { exp: accessTokenExp } = managerTokenDecryptor(accessTokenData);
-    const { exp: refreshTokenExp } = managerTokenDecryptor(refreshTokenData);
+    const { exp: accessTokenExp } = tokenDecryptor(accessTokenData);
+    const { exp: refreshTokenExp } = tokenDecryptor(refreshTokenData);
     const accessCreateTime = dayjs(new Date(accessTokenExp * 1000), "YYYY-MM-DD HH:mm:ss.SSS");
     const refreshCreateTime = dayjs(new Date(refreshTokenExp * 1000), "YYYY-MM-DD HH:mm:ss.SSS");
     const currentTime = dayjs(new Date(), "YYYY-MM-DD HH:mm:ss.SSS");
     const accessBetweenCurrentDiffTime = accessCreateTime.diff(currentTime, "ms");
     const isRefreshAfterCurrentTime = currentTime.isAfter(refreshCreateTime);
 
-    // 1. 리프래시토큰이 만료된 경우
+    // 1. refreshToken 만료된 경우
     if (isRefreshAfterCurrentTime) {
-      window.alert("세션이 만료되었습니다. 재로그인 후 이용해주세요");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       // setUserInfoData(null);
-      router.push("/login");
       throw new axios.Cancel("리프래시 토큰 만료로 인한 강제 로그인페이지 이동");
     }
 
-    // 2. 어세스토큰이 만료된 이후 처음으로 실행될 코드
+    // 2. accessToken 만료된 이후 처음으로 실행될 코드
     if (accessBetweenCurrentDiffTime <= accessTokenLimitMs && !isRequestLock) {
       isRequestLock = true;
       await getRefreshTokenCreator();
@@ -102,7 +103,7 @@ export const useAxiosInterceptor = () => {
       };
     }
 
-    // 어세스토큰이 만료된 이후 2번 call 이후 다음 진행될 api들을 saveQueue에 저장
+    // accessToken 만료된 이후 2번 call 이후 다음 진행될 api들을 saveQueue에 저장
     if (accessBetweenCurrentDiffTime <= accessTokenLimitMs && isRequestLock) {
       return new Promise(() => {
         saveQueue((accessToken) => {
@@ -111,7 +112,7 @@ export const useAxiosInterceptor = () => {
       });
     }
 
-    // 그 외 아무이상 없는 경우 리턴값
+    // 그 외 아무 이상 없는 경우 리턴값
     return {
       ...config,
       headers: {

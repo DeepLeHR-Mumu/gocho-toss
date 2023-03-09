@@ -1,12 +1,12 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { tipArrKeyObj, TipArrRequestObjDef } from "shared-constant/queryKeyFactory/tip/arrKeyObj";
 
-import { axiosInstance } from "../../axiosInstance";
+import { axiosNoTokenInstance } from "../../axiosInstance";
 import { GetInfiniteTipArrObjDef } from "./type";
 import { selector } from "./util";
 
 export const getInfiniteTipArr: GetInfiniteTipArrObjDef = async ({ queryKey: [{ requestObj }], pageParam }) => {
-  const { data } = await axiosInstance.get("/tips", {
+  const { data } = await axiosNoTokenInstance.get("/tips", {
     params: { ...requestObj, offset: pageParam },
   });
 

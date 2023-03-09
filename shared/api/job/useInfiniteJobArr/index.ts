@@ -2,13 +2,13 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { jobArrKeyObj, JobArrRequestObjDef } from "shared-constant/queryKeyFactory/job/jobArrKeyObj";
 
-import { axiosInstance } from "../../axiosInstance";
+import { axiosNoTokenInstance } from "../../axiosInstance";
 
 import { GetInfiniteJobArrDef } from "./type";
 import { selector } from "./util";
 
 export const getInfiniteJobArr: GetInfiniteJobArrDef = async ({ queryKey: [{ requestObj }], pageParam }) => {
-  const { data } = await axiosInstance.get("/jds", {
+  const { data } = await axiosNoTokenInstance.get("/jds", {
     params: { ...requestObj, offset: pageParam },
   });
 

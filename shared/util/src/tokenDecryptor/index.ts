@@ -5,6 +5,8 @@ interface DecryptedTokenObj {
   nickname: string;
   isKakao: boolean;
   image: string;
+  iat: number;
+  exp: number;
 }
 
 interface AdminDecryptedTokenObj {
