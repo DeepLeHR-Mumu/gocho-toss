@@ -9,7 +9,6 @@
     "@tanstack/react-query": "^4.2.3",
     "axios": "^0.27.2",
     "dayjs": "^1.11.7",
-    "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "shared-constant": "workspace:^0.0.0",
