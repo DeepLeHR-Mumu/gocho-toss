@@ -191,6 +191,12 @@ export const globalStyle = css`
       outline-width: 3px;
     }
   }
+  input[type="checkbox"],
+  input[type="radio"] {
+    :focus {
+      outline: none;
+    }
+  }
   textarea {
     font-family: "Noto Sans KR", Verdana, sans-serif;
   }

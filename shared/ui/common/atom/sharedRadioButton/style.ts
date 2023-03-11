@@ -16,9 +16,6 @@ export const cssObj = {
     height: 0;
     margin: 0;
 
-    :focus {
-      outline: none;
-    }
     :checked ~ div {
       border-color: ${COLORS.BLUE_FIRST40};
 

@@ -103,12 +103,6 @@ export const cssObj = {
     cursor: pointer;
     display: flex;
     align-items: center;
-
-    > input {
-      :focus {
-        outline: none;
-      }
-    }
   `,
 
   inputContainer: css`

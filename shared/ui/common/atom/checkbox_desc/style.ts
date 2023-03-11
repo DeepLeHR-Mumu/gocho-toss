@@ -18,9 +18,7 @@ export const cssObj = {
     width: 0;
     height: 0;
     margin: 0;
-    :focus {
-      outline: none;
-    }
+
     :checked ~ div {
       background-color: ${COLORS.BLUE_FIRST40};
       border: 0;

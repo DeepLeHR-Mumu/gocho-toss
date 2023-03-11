@@ -65,12 +65,6 @@ export const cssObj = {
     display: flex;
     cursor: pointer;
     align-items: center;
-
-    > input {
-      :focus {
-        outline: none;
-      }
-    }
   `,
 
   errorMessage: css`
