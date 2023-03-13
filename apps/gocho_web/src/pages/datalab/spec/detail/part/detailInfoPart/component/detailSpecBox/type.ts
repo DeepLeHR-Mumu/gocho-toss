@@ -1,4 +1,3 @@
 export interface DetailSpecBoxProps {
-  specStr: string;
-  wide?: boolean;
+  dataArr?: string[] | null;
 }

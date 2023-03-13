@@ -16,6 +16,7 @@
     "shared-util": "workspace:^0.0.0"
   },
   "devDependencies": {
+    "@types/react": "18.0.17",
     "eslint-config-deeple": "workspace:^1.0.0",
     "tsconfig-deeple": "workspace:^0.0.0",
     "typescript": "4.7.2"

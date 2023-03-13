@@ -30,7 +30,25 @@ export const Spec8AwardCareerEtc: FunctionComponent<Spec8AwardCareerEtcProps> = 
 
   const postSubmit: SubmitHandler<PostSubmitValues> = async (formData) => {
     const prevSpecObj = await JSON.parse(sessionStorage.getItem("specObj") || "{}");
-    const currentSpecObj = await Object.assign(prevSpecObj, { ...formData });
+    const etcData = formData.etc.split("\n").filter((text) => {
+      if (text === "") return false;
+      return text;
+    });
+    const awardData = formData.award.split("\n").filter((text) => {
+      if (text === "") return false;
+      return text;
+    });
+    const careerData = formData.career.split("\n").filter((text) => {
+      if (text === "") return false;
+      return text;
+    });
+
+    const currentSpecObj = await {
+      ...prevSpecObj,
+      etc: etcData.length === 0 ? null : etcData,
+      award: awardData.length === 0 ? null : awardData,
+      career: careerData.length === 0 ? null : careerData,
+    };
 
     postMySpecRegister(currentSpecObj, {
       onError: (error) => {
