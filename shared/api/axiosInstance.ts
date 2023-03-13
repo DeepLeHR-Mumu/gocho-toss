@@ -1,10 +1,8 @@
 import { useEffect } from "react";
-import axios, { AxiosError, AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import dayjs from "dayjs";
 import { BACKEND_URL, MANAGER_BACKEND_URL } from "shared-constant";
 import { tokenDecryptor } from "shared-util";
-
-import { ErrorResponseDef } from "./errorType";
 
 export const axiosNoTokenInstance = axios.create({
   timeout: 10000,
@@ -118,17 +116,6 @@ export const useAxiosInterceptor = () => {
     };
   };
 
-  const responseErrorHandler = async (error: AxiosError<ErrorResponseDef>) => {
-    // privateRouteLayout 컴포넌트에서 유저 토큰을 확인 하여 만약 손상된 토큰이라면 기존 토큰 삭제 후 로그인 페이지로 이동
-    if (error.response?.data.error_code === "MALFORMED_JWT" && error.config.url === "/auth/health-check") {
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      return Promise.resolve();
-    }
-
-    return Promise.reject(error);
-  };
-
   const requestInterceptor = axiosInstance.interceptors.request.use(
     (config: AxiosRequestConfig) => {
       return requestConfigHandler(config);
@@ -138,21 +125,11 @@ export const useAxiosInterceptor = () => {
     }
   );
 
-  const responseInterceptor = axiosInstance.interceptors.response.use(
-    (response) => {
-      return response;
-    },
-    (error) => {
-      return responseErrorHandler(error);
-    }
-  );
-
   useEffect(() => {
     return () => {
       axiosInstance.interceptors.request.eject(requestInterceptor);
-      axiosInstance.interceptors.response.eject(responseInterceptor);
     };
-  }, [requestInterceptor, responseInterceptor]);
+  }, [requestInterceptor]);
 };
 
 export const axiosManagerInstance = axios.create({

@@ -108,9 +108,16 @@ const JobsDetail: NextPage = () => {
             <DetailWorkPart freshPosition={jobDetailData.positionArr[currentPositionId]} />
             <DetailPreferencePart freshPosition={jobDetailData.positionArr[currentPositionId]} />
           </section>
-          {companyCommentDataArr && (
-            <DetailComment jdId={jobDetailData.id} commentDataArr={companyCommentDataArr} userInfo={userData} />
-          )}
+          <DetailComment
+            jdId={jobDetailData.id}
+            commentDataArr={
+              companyCommentDataArr || {
+                company: { ...jobDetailData.company, id: jobDetailData.company.companyId },
+                commentArr: null,
+              }
+            }
+            userInfo={userData}
+          />
         </div>
         <ReceptInfoPart jobDetailData={jobDetailData} />
       </Layout>
