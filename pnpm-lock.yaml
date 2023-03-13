@@ -426,6 +426,7 @@ importers:
   shared/api:
     specifiers:
       '@tanstack/react-query': ^4.2.3
+      '@types/react': 18.0.17
       axios: ^0.27.2
       dayjs: ^1.11.7
       eslint-config-deeple: workspace:^1.0.0
@@ -446,6 +447,7 @@ importers:
       shared-type: link:../type
       shared-util: link:../util
     devDependencies:
+      '@types/react': 18.0.17
       eslint-config-deeple: link:../../packages/eslint-config-deeple
       tsconfig-deeple: link:../../packages/tsconfig-deeple
       typescript: 4.7.2
