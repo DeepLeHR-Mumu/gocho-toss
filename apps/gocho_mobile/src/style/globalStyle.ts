@@ -1,5 +1,7 @@
 import { css } from "@emotion/react";
 
+import { COLORS } from "shared-style/color";
+
 export const globalStyle = css`
   * {
     box-sizing: border-box;
@@ -92,7 +94,7 @@ export const globalStyle = css`
     vertical-align: baseline;
   }
   html {
-    font-family: Noto Sans KR, sans-serif;
+    font-family: "Noto Sans KR", Verdana, sans-serif;
     font-size: 16px;
     min-width: 360px;
   }
@@ -151,5 +153,21 @@ export const globalStyle = css`
     align-items: center;
     justify-content: center;
     appearance: none;
+
+    :focus {
+      outline-color: ${COLORS.BLUE_FIRST40};
+      outline-offset: 0.3rem;
+      outline-style: solid;
+      outline-width: 3px;
+    }
+  }
+  input[type="checkbox"],
+  input[type="radio"] {
+    :focus {
+      outline: none;
+    }
+  }
+  textarea {
+    font-family: "Noto Sans KR", Verdana, sans-serif;
   }
 `;

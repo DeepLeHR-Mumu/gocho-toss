@@ -1,32 +1,33 @@
-import { css, SerializedStyles } from "@emotion/react";
 import { PC_HOVER } from "./mediaQuery";
 import { COLORS } from "./color";
 
 interface shortenDef {
-  (line?: number): SerializedStyles;
+  (line?: number): string;
 }
 
 export const shorten: shortenDef = (line = 1) => {
-  return css`
+  return `
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-all;
     white-space: ${line >= 2 ? "normal" : "nowrap"};
-    ${line >= 2 &&
-    `
+    ${
+      line >= 2 &&
+      `
   display: -webkit-box;
   -webkit-line-clamp: ${line};
   -webkit-box-orient: vertical;    
-  `}
+  `
+    }
   `;
 };
 
 interface skeletonCreatorCSS {
-  (minWidth?: string): SerializedStyles;
+  (minWidth?: string): string;
 }
 
 export const skeletonCreatorCSS: skeletonCreatorCSS = (minWidth = "100%") => {
-  return css`
+  return `
     background-color: ${COLORS.GRAY90};
     border-radius: 3px;
     text-indent: -9999px;
@@ -36,7 +37,7 @@ export const skeletonCreatorCSS: skeletonCreatorCSS = (minWidth = "100%") => {
   `;
 };
 
-export const hoverShadow = css`
+export const hoverShadow = `
   ${PC_HOVER} {
     &:hover {
       transform: translateY(-2px);

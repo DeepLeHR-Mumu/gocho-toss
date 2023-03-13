@@ -160,6 +160,13 @@ export const globalStyle = css`
   a {
     text-decoration: none;
     color: ${COLORS.GRAY10};
+
+    :focus {
+      outline-color: ${COLORS.BLUE_FIRST40};
+      outline-offset: 0.3rem;
+      outline-style: solid;
+      outline-width: 3px;
+    }
   }
   input,
   select,
@@ -176,6 +183,19 @@ export const globalStyle = css`
     align-items: center;
     justify-content: center;
     appearance: none;
+
+    :focus {
+      outline-color: ${COLORS.BLUE_FIRST40};
+      outline-offset: 0.3rem;
+      outline-style: solid;
+      outline-width: 3px;
+    }
+  }
+  input[type="checkbox"],
+  input[type="radio"] {
+    :focus {
+      outline: none;
+    }
   }
   textarea {
     font-family: "Noto Sans KR", Verdana, sans-serif;
@@ -185,11 +205,5 @@ export const globalStyle = css`
     ::-webkit-inner-spin-button {
       appearance: none;
     }
-  }
-  input:focus {
-    outline-offset: 0.3rem;
-  }
-  button:focus {
-    outline-offset: 0.3rem;
   }
 `;
