@@ -427,6 +427,37 @@ importers:
   packages/tsconfig-deeple:
     specifiers: {}
 
+  shared-user:
+    specifiers:
+      '@babel/preset-typescript': ^7.21.0
+      '@testing-library/jest-dom': ^5.16.5
+      '@testing-library/react': ^14.0.0
+      '@types/jest': ^29.4.0
+      '@types/react': 18.0.17
+      dayjs: ^1.11.7
+      eslint-config-deeple: workspace:^1.0.0
+      jest: ^29.4.3
+      next: 13.1.6
+      react: 18.2.0
+      react-dom: 18.2.0
+      shared-util: workspace:^0.0.0
+      tsconfig-deeple: workspace:^0.0.0
+    dependencies:
+      '@types/react': 18.0.17
+      dayjs: 1.11.7
+      next: 13.1.6_6m24vuloj5ihw4zc5lbsktc4fu
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      shared-util: link:../shared/util
+    devDependencies:
+      '@babel/preset-typescript': 7.21.0_@babel+core@7.21.0
+      '@testing-library/jest-dom': 5.16.5
+      '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
+      '@types/jest': 29.4.0
+      eslint-config-deeple: link:../packages/eslint-config-deeple
+      jest: 29.4.3
+      tsconfig-deeple: link:../packages/tsconfig-deeple
+
   shared/api:
     specifiers:
       '@tanstack/react-query': ^4.2.3
@@ -639,66 +670,6 @@ importers:
       jest: 29.4.3
       tsconfig-deeple: link:../../packages/tsconfig-deeple
       typescript: 4.7.2
-
-  user-shared:
-    specifiers:
-      '@babel/preset-typescript': ^7.21.0
-      '@testing-library/jest-dom': ^5.16.5
-      '@testing-library/react': ^14.0.0
-      '@types/jest': ^29.4.0
-      '@types/react': 18.0.17
-      eslint-config-deeple: workspace:^1.0.0
-      jest: ^29.4.3
-      next: 13.1.6
-      react: 18.2.0
-      react-dom: 18.2.0
-      shared-util: workspace:^0.0.0
-      tsconfig-deeple: workspace:^0.0.0
-    dependencies:
-      '@types/react': 18.0.17
-      next: 13.1.6_6m24vuloj5ihw4zc5lbsktc4fu
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      shared-util: link:../shared/util
-    devDependencies:
-      '@babel/preset-typescript': 7.21.0_@babel+core@7.21.0
-      '@testing-library/jest-dom': 5.16.5
-      '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
-      '@types/jest': 29.4.0
-      eslint-config-deeple: link:../packages/eslint-config-deeple
-      jest: 29.4.3
-      tsconfig-deeple: link:../packages/tsconfig-deeple
-
-  userCommon:
-    specifiers:
-      '@babel/preset-typescript': ^7.21.0
-      '@testing-library/jest-dom': ^5.16.5
-      '@testing-library/react': ^14.0.0
-      '@types/jest': ^29.4.0
-      '@types/react': 18.0.17
-      dayjs: ^1.11.7
-      eslint-config-deeple: workspace:^1.0.0
-      jest: ^29.4.3
-      next: 13.1.6
-      react: 18.2.0
-      react-dom: 18.2.0
-      shared-util: workspace:^0.0.0
-      tsconfig-deeple: workspace:^0.0.0
-    dependencies:
-      '@types/react': 18.0.17
-      dayjs: 1.11.7
-      next: 13.1.6_6m24vuloj5ihw4zc5lbsktc4fu
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      shared-util: link:../shared/util
-    devDependencies:
-      '@babel/preset-typescript': 7.21.0_@babel+core@7.21.0
-      '@testing-library/jest-dom': 5.16.5
-      '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
-      '@types/jest': 29.4.0
-      eslint-config-deeple: link:../packages/eslint-config-deeple
-      jest: 29.4.3
-      tsconfig-deeple: link:../packages/tsconfig-deeple
 
 packages:
 
