@@ -16,6 +16,7 @@ const rightNow = () => {
 describe("viewCount 테스트", () => {
   afterEach(() => {
     localStorage.clear();
+    localStorage.clear();
   });
 
   test("job - viewArr 자체가 undefined일 때", () => {
