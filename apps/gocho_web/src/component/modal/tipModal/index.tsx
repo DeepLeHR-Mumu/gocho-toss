@@ -65,7 +65,7 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
 
   useViewCount({
     id: tipData.id,
-    target: "job",
+    target: "tip",
     viewMutation: () => {
       addViewCount({ elemId: tipData.id });
     },
