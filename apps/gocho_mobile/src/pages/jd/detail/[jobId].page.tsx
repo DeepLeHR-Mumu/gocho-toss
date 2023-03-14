@@ -12,7 +12,7 @@ import { useUserInfo } from "shared-api/auth";
 import { useAddJobViewCount } from "shared-api/viewCount";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { jdDetailFunnelEvent } from "shared-ga/jd";
-import { useViewCount } from "gocho-user-common";
+import { useViewCount } from "gocho-shared-user";
 
 import { DetailComment } from "@component/common/organisms/detailComment";
 

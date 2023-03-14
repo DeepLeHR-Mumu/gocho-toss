@@ -9,7 +9,7 @@ import { useAddCompanyViewCount } from "shared-api/viewCount";
 import { useCompanyDetail, getCompanyDetail } from "shared-api/company";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { companyInfoFunnelEvent } from "shared-ga/company";
-import { useViewCount } from "gocho-user-common";
+import { useViewCount } from "gocho-shared-user";
 
 import { PageHead } from "./pageHead";
 import { TopButton } from "../component/topButton";
