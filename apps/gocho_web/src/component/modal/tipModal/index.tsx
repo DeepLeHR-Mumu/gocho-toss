@@ -9,7 +9,7 @@ import { useAddTipBookmarkArr, useDeleteTipBookmarkArr, useUserTipBookmarkArr } 
 import { useUserInfo } from "shared-api/auth";
 import { dateConverter } from "shared-util";
 import { useAddTipViewCount } from "shared-api/viewCount";
-import { useViewCount } from "gocho-user-common";
+import { useViewCount } from "gocho-shared-user";
 
 import { useToast } from "@recoil/hook/toast";
 import { ModalComponent } from "@component/modal/modalBackground";

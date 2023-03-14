@@ -10,7 +10,7 @@ import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { companyInfoFunnelEvent } from "shared-ga/company";
-import { useViewCount } from "gocho-user-common";
+import { useViewCount } from "gocho-shared-user";
 
 import { DetailComment } from "@component/global/detailComment";
 import { Layout } from "@component/layout";
