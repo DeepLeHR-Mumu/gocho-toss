@@ -15,6 +15,7 @@ export const cssObj = {
     width: 0;
     height: 0;
     margin: 0;
+
     :checked ~ div {
       border-color: ${COLORS.BLUE_FIRST40};
 

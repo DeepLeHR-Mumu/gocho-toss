@@ -19,8 +19,8 @@ export const Spec9Success: FunctionComponent = () => {
         </p>
       </div>
 
-      <Link href={SPEC_LIST_URL} passHref>
-        <a css={successButton}>스펙 리스트</a>
+      <Link href={SPEC_LIST_URL} css={successButton} passHref>
+        스펙 리스트
       </Link>
     </div>
   );
