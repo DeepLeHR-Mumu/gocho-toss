@@ -162,6 +162,9 @@ export const globalStyle = css`
     color: ${COLORS.GRAY10};
 
     :focus {
+      outline: none;
+    }
+    :focus-visible {
       outline-color: ${COLORS.BLUE_FIRST40};
       outline-offset: 0.3rem;
       outline-style: solid;
@@ -185,6 +188,9 @@ export const globalStyle = css`
     appearance: none;
 
     :focus {
+      outline: none;
+    }
+    :focus-visible {
       outline-color: ${COLORS.BLUE_FIRST40};
       outline-offset: 0.3rem;
       outline-style: solid;
@@ -194,6 +200,9 @@ export const globalStyle = css`
   input[type="checkbox"],
   input[type="radio"] {
     :focus {
+      outline: none;
+    }
+    :focus-visible {
       outline: none;
     }
   }
