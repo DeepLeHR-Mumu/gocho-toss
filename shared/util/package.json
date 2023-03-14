@@ -4,7 +4,7 @@
   "license": "MIT",
   "main": "./src",
   "scripts": {
-    "unitTest": "jest"
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.21.0",
