@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useRef, useState } from "react";
+import { FunctionComponent, useRef, useState } from "react";
 import Slider from "react-slick";
 import Image from "next/image";
 import { AiOutlineEye, AiOutlineLike } from "react-icons/ai";
@@ -9,6 +9,7 @@ import { useAddTipBookmarkArr, useDeleteTipBookmarkArr, useUserTipBookmarkArr } 
 import { useUserInfo } from "shared-api/auth";
 import { dateConverter } from "shared-util";
 import { useAddTipViewCount } from "shared-api/viewCount";
+import { useViewCount } from "gocho-user-common";
 
 import { useToast } from "@recoil/hook/toast";
 import { ModalComponent } from "@component/modal/modalBackground";
@@ -62,27 +63,20 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
     return addBookmarkMutate({ userId: userInfoData?.id as number, elemId: tipData.id });
   };
 
-  useEffect(() => {
-    const tipViewStr = sessionStorage.getItem("tipViewArr");
-
-    const isViewed = tipViewStr?.includes(String(tipData.id));
-    if (isViewed) return;
-
-    if (tipViewStr) {
-      const tipViewArr: number[] = JSON.parse(tipViewStr);
-      tipViewArr.push(tipData.id);
-      sessionStorage.setItem("tipViewArr", JSON.stringify(tipViewArr));
+  useViewCount({
+    id: tipData.id,
+    target: "job",
+    viewMutation: () => {
       addViewCount({ elemId: tipData.id });
-      return;
-    }
-    if (!isViewed) {
-      sessionStorage.setItem("tipViewArr", JSON.stringify([tipData.id]));
-      addViewCount({ elemId: tipData.id });
-    }
-  }, [tipData, addViewCount]);
+    },
+  });
 
   if (currentModal?.modalContentObj === undefined) {
-    return <div>error!!</div>;
+    return (
+      <div>
+        <p>의도치 않은 에러가 발생했습니다.</p>
+      </div>
+    );
   }
 
   const { year, month, date } = dateConverter(tipData.createdTime);

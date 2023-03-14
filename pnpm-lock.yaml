@@ -202,6 +202,7 @@ importers:
       babel-plugin-react-require: ^3.1.3
       babel-preset-react-app: ^10.0.1
       eslint-config-deeple: workspace:^1.0.0
+      gocho-user-common: workspace:^1.0.0
       jest: ^29.4.3
       msw-storybook-addon: ^1.6.3
       next: 13.1.6
@@ -232,6 +233,7 @@ importers:
       '@tanstack/react-query-devtools': 4.24.10_636dldj5wfr5vkyyqzs5k363kq
       axios: 0.27.2
       eslint-config-deeple: link:../../packages/eslint-config-deeple
+      gocho-user-common: link:../../userCommon
       next: 13.1.6_6m24vuloj5ihw4zc5lbsktc4fu
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -307,6 +309,7 @@ importers:
       babel-plugin-react-require: ^3.1.3
       babel-preset-react-app: ^10.0.1
       eslint-config-deeple: workspace:^1.0.0
+      gocho-user-common: workspace:^1.0.0
       intercept-stdout: ^0.1.2
       msw-storybook-addon: ^1.6.3
       next: 13.1.6
@@ -342,6 +345,7 @@ importers:
       '@tanstack/react-query-devtools': 4.24.10_636dldj5wfr5vkyyqzs5k363kq
       axios: 0.27.2
       eslint-config-deeple: link:../../packages/eslint-config-deeple
+      gocho-user-common: link:../../userCommon
       intercept-stdout: 0.1.2
       next: 13.1.6_6m24vuloj5ihw4zc5lbsktc4fu
       react: 18.2.0
@@ -635,6 +639,66 @@ importers:
       jest: 29.4.3
       tsconfig-deeple: link:../../packages/tsconfig-deeple
       typescript: 4.7.2
+
+  user-shared:
+    specifiers:
+      '@babel/preset-typescript': ^7.21.0
+      '@testing-library/jest-dom': ^5.16.5
+      '@testing-library/react': ^14.0.0
+      '@types/jest': ^29.4.0
+      '@types/react': 18.0.17
+      eslint-config-deeple: workspace:^1.0.0
+      jest: ^29.4.3
+      next: 13.1.6
+      react: 18.2.0
+      react-dom: 18.2.0
+      shared-util: workspace:^0.0.0
+      tsconfig-deeple: workspace:^0.0.0
+    dependencies:
+      '@types/react': 18.0.17
+      next: 13.1.6_6m24vuloj5ihw4zc5lbsktc4fu
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      shared-util: link:../shared/util
+    devDependencies:
+      '@babel/preset-typescript': 7.21.0_@babel+core@7.21.0
+      '@testing-library/jest-dom': 5.16.5
+      '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
+      '@types/jest': 29.4.0
+      eslint-config-deeple: link:../packages/eslint-config-deeple
+      jest: 29.4.3
+      tsconfig-deeple: link:../packages/tsconfig-deeple
+
+  userCommon:
+    specifiers:
+      '@babel/preset-typescript': ^7.21.0
+      '@testing-library/jest-dom': ^5.16.5
+      '@testing-library/react': ^14.0.0
+      '@types/jest': ^29.4.0
+      '@types/react': 18.0.17
+      dayjs: ^1.11.7
+      eslint-config-deeple: workspace:^1.0.0
+      jest: ^29.4.3
+      next: 13.1.6
+      react: 18.2.0
+      react-dom: 18.2.0
+      shared-util: workspace:^0.0.0
+      tsconfig-deeple: workspace:^0.0.0
+    dependencies:
+      '@types/react': 18.0.17
+      dayjs: 1.11.7
+      next: 13.1.6_6m24vuloj5ihw4zc5lbsktc4fu
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      shared-util: link:../shared/util
+    devDependencies:
+      '@babel/preset-typescript': 7.21.0_@babel+core@7.21.0
+      '@testing-library/jest-dom': 5.16.5
+      '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
+      '@types/jest': 29.4.0
+      eslint-config-deeple: link:../packages/eslint-config-deeple
+      jest: 29.4.3
+      tsconfig-deeple: link:../packages/tsconfig-deeple
 
 packages:
 
@@ -3504,12 +3568,12 @@ packages:
       telejson: 7.0.4
     dev: true
 
-  /@storybook/channel-postmessage/7.0.0-beta.60:
-    resolution: {integrity: sha512-/a8LueG0XL6Yt6O6y9zryRb3UbiUkeY2TLXNCY9AHa3KrcZOusw42e00HxXCN13VSLQ2AcojkFZZgifOuUyspg==}
+  /@storybook/channel-postmessage/7.0.0-rc.1:
+    resolution: {integrity: sha512-lIj0oDecEOSy6ZSNXBgWs0hqnjKudrDxuRyR0gAC5w5lZ8sMaj6er9caqaii61S4HRAcT5312RpA0V1J746hZw==}
     dependencies:
-      '@storybook/channels': 7.0.0-beta.60
-      '@storybook/client-logger': 7.0.0-beta.60
-      '@storybook/core-events': 7.0.0-beta.60
+      '@storybook/channels': 7.0.0-rc.1
+      '@storybook/client-logger': 7.0.0-rc.1
+      '@storybook/core-events': 7.0.0-rc.1
       '@storybook/global': 5.0.0
       qs: 6.11.0
       telejson: 7.0.4
@@ -3540,8 +3604,8 @@ packages:
     resolution: {integrity: sha512-UnMRoVzUe1jUnlcbraSLjFA3B+Nmui6S2ShNr/9Hc7vcOyFisJuFK7HDqTRS8Z6kvHFa7mVMoZ+LHTPJd5WkEA==}
     dev: true
 
-  /@storybook/channels/7.0.0-beta.60:
-    resolution: {integrity: sha512-87PC1xvGHV2/XxxaxYP6nfmBfvlgzC5rQCr1fFhYcEJURrgscNLQXjS3C0wYIHdd568Wqb/ZKD7ToM8bzY0VcA==}
+  /@storybook/channels/7.0.0-rc.1:
+    resolution: {integrity: sha512-hBER6gliJxsrYEbWlXNljf0/1ybIlYCtaK0Vcgqdw/zmTLG6hEbBpVnxJh56T3mD0Beng8ro9D4EkcLZGQ1LlA==}
     dev: true
 
   /@storybook/cli/7.0.0-beta.50:
@@ -3666,8 +3730,8 @@ packages:
       '@storybook/global': 5.0.0
     dev: true
 
-  /@storybook/client-logger/7.0.0-beta.60:
-    resolution: {integrity: sha512-L9aT6KnbIwZ9MuH77YpkIOtf2vTDeDvVe+8jUm59ov5L0XKZ6RTKdyKonAvp+CBuyp2XQS8+E3A/lnezACIzLQ==}
+  /@storybook/client-logger/7.0.0-rc.1:
+    resolution: {integrity: sha512-ltdDjd5wwq1xyFmA7Q7PT0Rx4Jrd0u8m0hnjnlou7qjKd7J+tqi8019oC4t5CSWRhl8lDg0QbI11LUM2SmkRMA==}
     dependencies:
       '@storybook/global': 5.0.0
     dev: true
@@ -3807,8 +3871,8 @@ packages:
     resolution: {integrity: sha512-ODFto8BXVenukVrEfOHvlqBP0YjWoC/OSO2lOmkgJeOApa66wsgwzNDeGn9938Nc6n1fyQg8sOPm4n9Pd90pCA==}
     dev: true
 
-  /@storybook/core-events/7.0.0-beta.60:
-    resolution: {integrity: sha512-DjQAUH88oe7kRac/6fdhgD2xoJUn+przJcfJd1DFKJ+Hgpysmnjg9RTDpqhANWE+MPjengZpJxx4jfWzZDmadw==}
+  /@storybook/core-events/7.0.0-rc.1:
+    resolution: {integrity: sha512-kp5p7U8H4X+XnJwzm3S9UM1vOREZ/bziQ34882FevPq7HaAQ5JI7p9gQO50JdTbDoe8gtn8cgfzxSkqO6FlY1w==}
     dev: true
 
   /@storybook/core-server/7.0.0-beta.50:
@@ -4008,14 +4072,14 @@ packages:
       '@storybook/preview-api': 7.0.0-beta.53
     dev: true
 
-  /@storybook/instrumenter/7.0.0-beta.60:
-    resolution: {integrity: sha512-dbRM2Me7EDmUai8LthfzHRqEYBzMKc/ZOH5owhbIjHcpqOHpzgqb9lt4mWL6zJcDKQ8LfJjiWKUIzX7ES69g4g==}
+  /@storybook/instrumenter/7.0.0-rc.1:
+    resolution: {integrity: sha512-spihMm1Xb+lw1Vac5Uo+06m2jdDEhGGkM/nesXO3ZkYyNatC0IGXgU9NyELI6YCkhEprwK3MIXoo8in97Kjk+w==}
     dependencies:
-      '@storybook/channels': 7.0.0-beta.60
-      '@storybook/client-logger': 7.0.0-beta.60
-      '@storybook/core-events': 7.0.0-beta.60
+      '@storybook/channels': 7.0.0-rc.1
+      '@storybook/client-logger': 7.0.0-rc.1
+      '@storybook/core-events': 7.0.0-rc.1
       '@storybook/global': 5.0.0
-      '@storybook/preview-api': 7.0.0-beta.60
+      '@storybook/preview-api': 7.0.0-rc.1
     dev: true
 
   /@storybook/manager-api/7.0.0-beta.53_biqbaboplfbrettd7655fr4n2y:
@@ -4233,16 +4297,16 @@ packages:
       util-deprecate: 1.0.2
     dev: true
 
-  /@storybook/preview-api/7.0.0-beta.60:
-    resolution: {integrity: sha512-F9Mc9VaPor7RHKfl8yWCCnpjuEv8NMdEpI+DXkmfHBdxB5yjdbjqO8e8UIK+B6vpZ9dIjlaa/3vYOp1KjzMzKw==}
+  /@storybook/preview-api/7.0.0-rc.1:
+    resolution: {integrity: sha512-KrXMxCffKsXLsWb8ptXmLcbetZOPLbPpnKU43S1iHnvc5Jp89lrJBpztHZsUnuwGMJ1K5ajdZd+l/kGs75ru6Q==}
     dependencies:
-      '@storybook/channel-postmessage': 7.0.0-beta.60
-      '@storybook/channels': 7.0.0-beta.60
-      '@storybook/client-logger': 7.0.0-beta.60
-      '@storybook/core-events': 7.0.0-beta.60
+      '@storybook/channel-postmessage': 7.0.0-rc.1
+      '@storybook/channels': 7.0.0-rc.1
+      '@storybook/client-logger': 7.0.0-rc.1
+      '@storybook/core-events': 7.0.0-rc.1
       '@storybook/csf': 0.0.2-next.10
       '@storybook/global': 5.0.0
-      '@storybook/types': 7.0.0-beta.60
+      '@storybook/types': 7.0.0-rc.1
       '@types/qs': 6.9.7
       dequal: 2.0.3
       lodash: 4.17.21
@@ -4396,8 +4460,8 @@ packages:
   /@storybook/testing-library/0.0.14-next.1:
     resolution: {integrity: sha512-1CAl40IKIhcPaCC4pYCG0b9IiYNymktfV/jTrX7ctquRY3akaN7f4A1SippVHosksft0M+rQTFE0ccfWW581fw==}
     dependencies:
-      '@storybook/client-logger': 7.0.0-beta.60
-      '@storybook/instrumenter': 7.0.0-beta.60
+      '@storybook/client-logger': 7.0.0-rc.1
+      '@storybook/instrumenter': 7.0.0-rc.1
       '@testing-library/dom': 8.20.0
       '@testing-library/user-event': 13.5.0_yxlyej73nftwmh2fiao7paxmlm
       ts-dedent: 2.2.0
@@ -4449,10 +4513,10 @@ packages:
       file-system-cache: 2.0.2
     dev: true
 
-  /@storybook/types/7.0.0-beta.60:
-    resolution: {integrity: sha512-zzJq1i0/I4Ll8voNZcxCz5dlDl9zd2RhNhqlkBaRAQZIwRnsnT4McYQOlal0THwXfoHo96UkjqJvOR/GpEjkxg==}
+  /@storybook/types/7.0.0-rc.1:
+    resolution: {integrity: sha512-wWFGKzXXD04j52iHTE7mxCz0zkJH0J/wh7pSsYAxUgyQaYHIIqLZUb9PLWVWf1v6RiSSa5k0HXhFWnfBOJeVIQ==}
     dependencies:
-      '@storybook/channels': 7.0.0-beta.60
+      '@storybook/channels': 7.0.0-rc.1
       '@types/babel__core': 7.20.0
       '@types/express': 4.17.17
       file-system-cache: 2.0.2

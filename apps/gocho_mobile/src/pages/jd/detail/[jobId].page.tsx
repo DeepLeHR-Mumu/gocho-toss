@@ -12,6 +12,7 @@ import { useUserInfo } from "shared-api/auth";
 import { useAddJobViewCount } from "shared-api/viewCount";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { jdDetailFunnelEvent } from "shared-ga/jd";
+import { useViewCount } from "gocho-user-common";
 
 import { DetailComment } from "@component/common/organisms/detailComment";
 
@@ -35,25 +36,14 @@ const JobsDetail: NextPage = () => {
   const { data: jobDetailData, isLoading } = useJobDetail({
     id: Number(jobId),
   });
-  useEffect(() => {
-    const jobViewStr = sessionStorage.getItem("jobViewArr");
-    if (!jobDetailData) return;
 
-    const isViewed = jobViewStr?.includes(String(jobDetailData?.id));
-    if (isViewed) return;
-
-    if (jobViewStr) {
-      const jobViewArr: number[] = JSON.parse(jobViewStr);
-      jobViewArr.push(jobDetailData.id);
-      sessionStorage.setItem("jobViewArr", JSON.stringify(jobViewArr));
-      addViewCount({ elemId: jobDetailData.id });
-      return;
-    }
-    if (!isViewed) {
-      sessionStorage.setItem("jobViewArr", JSON.stringify([jobDetailData.id]));
-      addViewCount({ elemId: jobDetailData.id });
-    }
-  }, [jobDetailData, addViewCount]);
+  useViewCount({
+    id: Number(jobId),
+    target: "job",
+    viewMutation: () => {
+      addViewCount({ elemId: Number(jobId) });
+    },
+  });
 
   useEffect(() => {
     if (jobDetailData) jdDetailFunnelEvent(jobDetailData.id);

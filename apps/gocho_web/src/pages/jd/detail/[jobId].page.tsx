@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 
+import { useViewCount } from "gocho-user-common";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { getJobDetail, useJobDetail } from "shared-api/job";
@@ -29,6 +30,13 @@ const JobsDetail: NextPage = () => {
 
   const router = useRouter();
   const { jobId } = router.query;
+  useViewCount({
+    id: Number(jobId),
+    target: "job",
+    viewMutation: () => {
+      addViewCount({ elemId: Number(jobId) });
+    },
+  });
 
   const { data: jobDetailData, isLoading } = useJobDetail({
     id: Number(jobId),
@@ -36,26 +44,6 @@ const JobsDetail: NextPage = () => {
   const { data: companyCommentDataArr } = useCompanyCommentArr({
     companyId: Number(jobDetailData?.company.companyId),
   });
-
-  useEffect(() => {
-    const jobViewStr = sessionStorage.getItem("jobViewArr");
-    if (!jobDetailData) return;
-
-    const isViewed = jobViewStr?.includes(String(jobDetailData?.id));
-    if (isViewed) return;
-
-    if (jobViewStr) {
-      const jobViewArr: number[] = JSON.parse(jobViewStr);
-      jobViewArr.push(jobDetailData.id);
-      sessionStorage.setItem("jobViewArr", JSON.stringify(jobViewArr));
-      addViewCount({ elemId: jobDetailData.id });
-      return;
-    }
-    if (!isViewed) {
-      sessionStorage.setItem("jobViewArr", JSON.stringify([jobDetailData.id]));
-      addViewCount({ elemId: jobDetailData.id });
-    }
-  }, [jobDetailData, addViewCount]);
 
   useEffect(() => {
     if (jobDetailData) jdDetailFunnelEvent(jobDetailData.id);

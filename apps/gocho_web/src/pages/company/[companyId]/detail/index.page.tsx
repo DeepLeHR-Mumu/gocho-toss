@@ -10,6 +10,7 @@ import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { companyInfoFunnelEvent } from "shared-ga/company";
+import { useViewCount } from "gocho-user-common";
 
 import { DetailComment } from "@component/global/detailComment";
 import { Layout } from "@component/layout";
@@ -41,27 +42,13 @@ const DetailPage: NextPage = () => {
   });
   const { mutate: addViewCount } = useAddCompanyViewCount();
 
-  useEffect(() => {
-    const companyViewStr = sessionStorage.getItem("companyViewArr");
-
-    if (!companyDetailData) return;
-
-    const isViewed = companyViewStr?.includes(String(companyDetailData?.id));
-    if (isViewed) return;
-
-    if (companyViewStr) {
-      const companyViewArr: number[] = JSON.parse(companyViewStr);
-      companyViewArr.push(companyDetailData.id);
-      sessionStorage.setItem("companyViewArr", JSON.stringify(companyViewArr));
-      addViewCount({ elemId: companyDetailData.id });
-      return;
-    }
-
-    if (!isViewed) {
-      sessionStorage.setItem("companyViewArr", JSON.stringify([companyDetailData.id]));
-      addViewCount({ elemId: companyDetailData.id });
-    }
-  }, [companyDetailData, addViewCount]);
+  useViewCount({
+    id: Number(router.query.companyId),
+    target: "job",
+    viewMutation: () => {
+      addViewCount({ elemId: Number(router.query.companyId) });
+    },
+  });
 
   useEffect(() => {
     if (companyDetailData) {
