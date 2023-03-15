@@ -32,15 +32,15 @@ export const jdBookmarkEvent = (jdId: number) => {
   ReactGA.event("bookmark_jd", { jd_id: jdId });
 };
 
-export const jdAdClickEvent = (id: number) => {
-  ReactGA.event("click_jd_card_banner", { id: id });
+export const jdAdClickEvent = (id: number, jdId: number) => {
+  ReactGA.event(`ad_jd_list_${{ jdId }}_click`, { banner_id: id });
 };
 
 export const jdSearchEvent = (q: string | null) => {
   ReactGA.event("search_jd_list", { q: q });
 };
 
-export const expiredJdListSortingEvent = (keyword:string) => {
+export const expiredJdListSortingEvent = (keyword: string) => {
   ReactGA.event("change_jd_explist_order", { order: keyword });
 };
 

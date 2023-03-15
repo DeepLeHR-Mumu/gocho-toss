@@ -36,7 +36,7 @@ export const JobAdCard: FunctionComponent<SlideCardProps | SlideCardSkeleton> = 
         type="button"
         css={buttonBox}
         onClick={() => {
-          jdAdClickEvent(jobData.id);
+          if (jobData.jdId) jdAdClickEvent(jobData.id, jobData.jdId);
         }}
       >
         <div css={cardWrapper}>
