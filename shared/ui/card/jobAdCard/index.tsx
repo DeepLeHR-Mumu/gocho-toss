@@ -50,7 +50,7 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
           type="button"
           css={buttonBox}
           onClick={() => {
-            jdAdClickEvent(jobAdData.id);
+            if (jobAdData.jdId) jdAdClickEvent(jobAdData.id, jobAdData.jdId);
           }}
         >
           <div css={mainContainer}>
