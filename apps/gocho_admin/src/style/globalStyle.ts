@@ -157,4 +157,7 @@ export const globalStyle = css`
     justify-content: center;
     appearance: none;
   }
+  textarea {
+    font-family: "Noto Sans KR", Verdana, sans-serif;
+  }
 `;

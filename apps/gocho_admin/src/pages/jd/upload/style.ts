@@ -1,39 +1,42 @@
 import { css } from "@emotion/react";
+
+import { subPageTitle } from "@style/commonStyles";
 import { COLORS } from "shared-style/color";
 
-export const formContainer = css`
-  background-color: ${COLORS.BLUE_SECOND90};
-  padding: 1rem;
-`;
+export const cssObj = {
+  wrapper: css``,
+  title: css`
+    ${subPageTitle};
+  `,
+  formContainer: css``,
+  fieldArrCSS: css`
+    margin-bottom: 3rem;
 
-export const positionContainer = css`
-  margin: 1rem 0;
-  padding: 1rem;
-  border: 1px solid ${COLORS.GRAY10};
-  background-color: ${COLORS.BLUE_SECOND70};
-`;
-
-export const addPositionButton = css`
-  margin: 0 0 1.5rem auto;
-  padding: 0.25rem 1rem;
-  border: 2px solid ${COLORS.GRAY10};
-  background-color: ${COLORS.BLUE_NEON40};
-  color: ${COLORS.GRAY100};
-`;
-
-export const submitButton = css`
-  font-size: 1.75rem;
-  margin: 0 auto;
-  padding: 0.5rem 1rem;
-  width: 50%;
-  border: 2px solid ${COLORS.GRAY10};
-  background-color: ${COLORS.BLUE_FIRST40};
-  color: ${COLORS.GRAY100};
-`;
-
-export const checkMsgBox = css`
-  color: ${COLORS.BLUE_FIRST40};
-  font-weight: 500;
-  text-align: center;
-  margin-top: 1rem;
-`;
+    > li {
+      border: 1px solid ${COLORS.GRAY70};
+      padding: 2rem;
+      background-color: ${COLORS.GRAY90};
+    }
+  `,
+  buttonBox: css`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    min-height: 8rem;
+    margin-bottom: 3.75rem;
+  `,
+  warning: css`
+    width: 100%;
+    border: 1px solid ${COLORS.ERROR_YELLOW50};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${COLORS.ERROR_RED30};
+    background-color: ${COLORS.ERROR_YELLOW70};
+    padding: 1.25rem;
+    margin: 1.25rem 0;
+    font-size: 1rem;
+    font-weight: 400;
+  `,
+};
