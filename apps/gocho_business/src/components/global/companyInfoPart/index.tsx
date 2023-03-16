@@ -4,7 +4,7 @@ import { MdBookmarkBorder } from "react-icons/md";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
-import { useCountInfo } from "@/apis/company/useCountInfo";
+import { useCountInfo } from "@/apis";
 import { useUserState } from "@/globalStates/useUserState";
 
 import { cssObj } from "./style";

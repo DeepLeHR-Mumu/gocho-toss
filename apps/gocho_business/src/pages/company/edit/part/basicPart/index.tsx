@@ -8,7 +8,7 @@ import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { COLORS } from "shared-style/color";
 import { NUMBER_REGEXP } from "shared-constant";
 
-import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
+import { useCompanyDetail } from "@/apis";
 import { useUserState } from "@/globalStates/useUserState";
 
 import { FindAddressButton } from "../../component/findAddressButton";

@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
 import { ErrorResponseDef } from "@/types/errorType";
-import { axiosInstance } from "@/apis/useIsRefreshLock";
+import { axiosInstance } from "@/apis";
 
 import { PostEditJdDef, RequestObjDef, useEditJdProps } from "./type";
 

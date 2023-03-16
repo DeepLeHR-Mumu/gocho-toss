@@ -3,7 +3,7 @@ import { FiCornerDownLeft } from "react-icons/fi";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
-import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
+import { useCompanyDetail } from "@/apis";
 import { useUserState } from "@/globalStates/useUserState";
 
 import { InformDesc } from "../../component/informDesc";
