@@ -16,7 +16,7 @@ import { useModal } from "@/globalStates/useModal";
 import { INTERNAL_URL } from "@/constants/url";
 import { useUserState } from "@/globalStates/useUserState";
 import { TopBar } from "@/components/global/layout/topBar";
-import { useDoLogin } from "@/apis/auth/useDoLogin";
+import { useDoLogin } from "@/apis";
 import { loginPageFunnelEvent, loginSuccessEvent, signupButtonClickEvent } from "@/ga/auth";
 
 import { LOGIN_ERROR_MESSAGES } from "./constant";

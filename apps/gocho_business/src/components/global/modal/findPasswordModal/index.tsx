@@ -8,7 +8,7 @@ import { EMAIL_REGEXP, EMAIL_ERROR_MESSAGE } from "shared-constant";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { useFocusTrap } from "shared-hooks";
 
-import { useFindPassword } from "@/apis/auth/usefindPassword";
+import { useFindPassword } from "@/apis";
 import { useModal } from "@/globalStates/useModal";
 import { useToast } from "@/globalStates/useToast";
 
