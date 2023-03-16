@@ -1,52 +1,35 @@
 import { css } from "@emotion/react";
-import { shorten } from "shared-style/common";
 
-export const sectionContainer = css`
-  margin: 0 2rem;
-`;
+import { subPageTitle } from "@style/commonStyles";
+import { COLORS } from "shared-style/color";
 
-export const tableContainer = css`
-  width: 100%;
-`;
+export const cssObj = {
+  wrapper: css``,
+  title: css`
+    ${subPageTitle};
+  `,
+  container: css`
+    margin-bottom: 3rem;
+  `,
+  thead: css`
+    display: grid;
+    grid-template-columns: 10% 40% 10% 15% 25%;
+    text-align: center;
+    padding: 1rem 0;
+    background-color: ${COLORS.GRAY90};
 
-export const jobContainer = css`
-  height: 5rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  > th {
-    font-size: 1.25rem;
-  }
-`;
-
-export const jobIdBox = css`
-  width: 10%;
-  text-align: center;
-`;
-
-export const mainInfoBox = css`
-  width: 30%;
-  text-align: center;
-  ${shorten()};
-`;
-
-export const taskContainer = css`
-  width: 20%;
-  display: flex;
-  justify-content: center;
-  ${shorten()};
-`;
-
-export const dateBox = css`
-  width: 10%;
-  text-align: center;
-`;
-
-export const buttonContainer = css`
-  width: 20%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem;
-`;
+    > li {
+      border-right: 1px solid ${COLORS.GRAY70};
+      white-space: nowrap;
+      font-size: 1rem;
+      font-weight: 400;
+      color: ${COLORS.GRAY30};
+    }
+  `,
+  tbody: css`
+    display: flex;
+    flex-direction: column;
+    background-color: ${COLORS.GRAY100};
+    padding-top: 1rem;
+  `,
+};

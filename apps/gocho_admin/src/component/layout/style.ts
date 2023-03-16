@@ -1,9 +1,7 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
-  width: 100%;
-  max-width: 1440px;
-  padding: 0 2rem;
-  margin: auto;
+  width: 80rem;
+  padding: 1rem 2rem;
   transition: padding 0.2s ease;
 `;

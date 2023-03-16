@@ -6,7 +6,6 @@ import { RecoilRoot } from "recoil";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { Header, SideBar } from "@component/global";
-import { Layout } from "@component/layout";
 import { globalStyle } from "@style/globalStyle";
 
 import { flexBox } from "./style";
@@ -29,14 +28,12 @@ function AdminService({ Component, pageProps }: AppProps) {
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <Header />
           <Global styles={globalStyle} />
-          <Layout>
-            <div css={flexBox}>
-              <SideBar />
-              <Component {...pageProps} />
-            </div>
-          </Layout>
+          <Header />
+          <div css={flexBox}>
+            <SideBar />
+            <Component {...pageProps} />
+          </div>
           <ReactQueryDevtools initialIsOpen={false} />
         </Hydrate>
       </QueryClientProvider>
