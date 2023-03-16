@@ -1,23 +1,23 @@
-import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 
 export interface RequestObjDef {
-  access_token: string;
-  refresh_token: string;
+  APIKey: string;
+  uri: string;
+  code: string;
 }
 
 export interface ResponseObjDef {
   data: {
-    result: "NEW_USER" | "GOCHO_USER" | "KAKAO_LOGIN_OK";
     access_token: string | undefined;
     refresh_token: string | undefined;
   };
 }
 
-export interface PostKakaoLoginDef {
-  ({ access_token, refresh_token }: RequestObjDef): Promise<ResponseObjDef>;
+export interface getKakaoCodeDef {
+  ({ code }: RequestObjDef): Promise<ResponseObjDef>;
 }
 
-export interface useDoLoginProps {
+export interface useGetKakaoCodeProps {
   (): UseMutationResult<ResponseObjDef, AxiosError, RequestObjDef>;
 }

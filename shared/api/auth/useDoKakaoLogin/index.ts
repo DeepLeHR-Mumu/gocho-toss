@@ -6,7 +6,7 @@ import { axiosInstance } from "../../axiosInstance";
 import { ResponseObjDef, useDoLoginProps, PostKakaoLoginDef, RequestObjDef } from "./type";
 
 const postKakaoLogin: PostKakaoLoginDef = async (requestObj) => {
-  const { data } = await axiosInstance.post("/auth/kakao-login", { ...requestObj });
+  const { data } = await axiosInstance.post("/auth/kakao", { ...requestObj });
 
   return data;
 };
