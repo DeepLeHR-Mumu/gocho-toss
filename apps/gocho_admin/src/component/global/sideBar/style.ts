@@ -10,6 +10,7 @@ const linkButtonCSS = css`
 
 export const cssObj = {
   wrapper: css`
+    flex-shrink: 0;
     width: 17.5rem;
     background-color: ${COLORS.GRAY90};
     padding: 1rem;
