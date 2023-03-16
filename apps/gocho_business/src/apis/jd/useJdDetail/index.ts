@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { ErrorResponseDef } from "@/types/errorType";
-import { axiosInstance } from "@/apis";
+import { axiosInstance } from "@/apis/useIsRefreshLock";
 
 import { ResponseObjDef, RequestObjDef, GetJdDetailDef, jdDetailKeyObj } from "./type";
 import { jdDetailSelector } from "./util";

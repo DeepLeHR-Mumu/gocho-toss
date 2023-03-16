@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
 import { ErrorResponseDef } from "@/types/errorType";
-import { axiosInstance } from "@/apis";
+import { axiosInstance } from "@/apis/useIsRefreshLock";
 
 import { companyDetailKeyObj, PutCompanyDetailDef, RequestObjDef, useCompanyDetailProps } from "./type";
 

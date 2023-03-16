@@ -10,7 +10,7 @@ import { managerTokenDecryptor } from "shared-util";
 import { useFocusTrap } from "shared-hooks";
 
 import { FiCheckCircle, FiX } from "react-icons/fi";
-import { useDoLogin } from "@/apis";
+import { useDoLogin } from "@/apis/auth/useDoLogin";
 import { ModalComponent } from "@/components/global/modal/modalBackground";
 import { useModal } from "@/globalStates/useModal";
 import { useToast } from "@/globalStates/useToast";

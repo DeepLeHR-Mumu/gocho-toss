@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import { axiosInstance } from "@/apis";
+import { axiosInstance } from "@/apis/useIsRefreshLock";
 import { ErrorResponseDef } from "@/types/errorType";
 
 import { factoryArrKeyObj, GetFactoryArrDef, ResponseObjDef } from "./type";
