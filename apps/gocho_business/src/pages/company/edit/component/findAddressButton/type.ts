@@ -1,7 +1,7 @@
 import { IconType } from "react-icons";
 import { ColorDef } from "shared-type/style/color";
 
-export interface CommonRoundButtonProps {
+export interface FindAddresButtonProps {
   text: string;
   onClickHandler: () => void;
   isDisabled?: boolean;

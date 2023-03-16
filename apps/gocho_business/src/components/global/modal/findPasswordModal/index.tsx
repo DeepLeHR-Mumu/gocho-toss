@@ -1,19 +1,19 @@
 import { FunctionComponent, useState, useRef } from "react";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { FiCheckCircle, FiX } from "react-icons/fi";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { EMAIL_REGEXP, EMAIL_ERROR_MESSAGE } from "shared-constant";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { useFocusTrap } from "shared-hooks";
 
-import { FiCheckCircle, FiX } from "react-icons/fi";
 import { useFindPassword } from "@/apis/auth/usefindPassword";
-import { CommonCloseButton } from "@/components/common/commonCloseButton";
 import { useModal } from "@/globalStates/useModal";
 import { useToast } from "@/globalStates/useToast";
 
 import { ModalComponent } from "../modalBackground";
+import { CommonCloseButton } from "./component/commonCloseButton";
 
 import { FindEmailFormValues } from "./type";
 import { cssObj } from "./style";

@@ -8,11 +8,12 @@ import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { COLORS } from "shared-style/color";
 import { NUMBER_REGEXP } from "shared-constant";
 
-import { CommonRoundButton } from "@/components/common";
 import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
 import { useUserState } from "@/globalStates/useUserState";
 
+import { FindAddressButton } from "../../component/findAddressButton";
 import { KakaoMap } from "../../component/kakaoMap";
+
 import { MAX_LENGTH_ERROR_TEXT, ONLY_INT_ERROR_TEXT } from "./constant";
 import { BasicPartProps } from "./type";
 import { cssObj } from "./style";
@@ -95,7 +96,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
           기업 본사 주소
         </strong>
         <label htmlFor="address" css={cssObj.address}>
-          <CommonRoundButton
+          <FindAddressButton
             Icon={FiMap}
             isDisabled={!companyDetailData?.uploader.isMine}
             text="주소찾기"
