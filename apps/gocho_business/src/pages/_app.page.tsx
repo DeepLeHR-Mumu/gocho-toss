@@ -10,10 +10,7 @@ import { datadogRum } from "@datadog/browser-rum";
 import { GA_KEY } from "@/constants";
 import { globalStyle } from "@/styles/globalStyle";
 import { useAxiosInterceptor } from "@/apis";
-import { ToastPlaceholder } from "@/components/global/toast/toastPlaceHolder";
-import { ModalPlaceholder } from "@/components/global/modal/modalPlaceHolder";
-import { PrivateRouteLayout } from "@/components/global/layout/privateRouteLayout";
-import { ErrorBoundary } from "@/components/global/errorBoundary";
+import { ToastPlaceholder, PrivateRouteLayout, ModalPlaceholder, ErrorBoundary } from "@/components";
 
 import { AppPropsWithLayout } from "./index/type";
 import { PROTECTED_ROUTE_ARR } from "./index/constant";

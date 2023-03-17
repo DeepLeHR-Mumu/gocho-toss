@@ -19,7 +19,7 @@ import {
   jdEditPageFunnelEvent,
 } from "@/ga/jdEdit";
 import type { NextPageWithLayout } from "@/pages/index/type";
-import { PageLayout, GlobalLayout } from "@/components/global/layout";
+import { PageLayout, GlobalLayout } from "@/components";
 import { useJdDetail, useEditJd, useDeleteJd, useEndJd, jdArrKeyObj } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 

@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import Image from "next/image";
 
 import { NextPageWithLayout } from "@/pages/index/type";
-import { GlobalLayout, Footer } from "@/components/global/layout";
+import { GlobalLayout, Footer } from "@/components";
 import chatIcon from "@/public/image/help/chat.svg";
 import helpBackground from "@/public/image/help/help_background.svg";
 

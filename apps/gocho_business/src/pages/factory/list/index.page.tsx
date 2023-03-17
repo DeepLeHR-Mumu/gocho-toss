@@ -1,8 +1,7 @@
 import { ReactElement, useEffect, useState } from "react";
 
 import { NextPageWithLayout } from "@/pages/index/type";
-import { PageLayout, GlobalLayout, Footer } from "@/components/global/layout";
-import { CompanyInfoPart } from "@/components/global/companyInfoPart";
+import { CompanyInfoPart, PageLayout, GlobalLayout, Footer } from "@/components";
 import { factoryListPageFunnelEvent } from "@/ga/factoryList";
 
 import { PageHead } from "./pageHead";

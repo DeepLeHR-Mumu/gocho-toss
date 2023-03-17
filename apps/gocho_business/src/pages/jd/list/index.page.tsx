@@ -1,8 +1,7 @@
 import { ReactElement, useEffect } from "react";
 
 import { NextPageWithLayout } from "@/pages/index/type";
-import { GlobalLayout, PageLayout } from "@/components/global/layout";
-import { CompanyInfoPart } from "@/components/global/companyInfoPart";
+import { GlobalLayout, PageLayout, CompanyInfoPart } from "@/components";
 
 import { jdListPageFunnelEvent } from "@/ga/jdList";
 import { ListPart } from "./part/listPart";

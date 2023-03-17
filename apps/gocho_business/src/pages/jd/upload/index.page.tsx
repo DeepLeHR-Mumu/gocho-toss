@@ -17,7 +17,7 @@ import {
   jdUploadPageFunnelEvent,
 } from "@/ga/jdUpload";
 import type { NextPageWithLayout } from "@/pages/index/type";
-import { PageLayout, GlobalLayout } from "@/components/global/layout";
+import { PageLayout, GlobalLayout } from "@/components";
 import { useAddJd } from "@/apis";
 
 import { INTERNAL_URL } from "@/constants";

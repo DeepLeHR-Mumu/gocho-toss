@@ -11,10 +11,10 @@ import { useFocusTrap } from "shared-hooks";
 
 import { FiCheckCircle, FiX } from "react-icons/fi";
 import { useDoLogin } from "@/apis";
-import { ModalComponent } from "@/components/global/modal/modalBackground";
 import { useModal, useToast, useUserState } from "@/globalStates";
 import { loginSuccessEvent } from "@/ga/auth";
 
+import { ModalComponent } from "../modalBackground";
 import { LOGIN_ERROR_MESSAGES } from "./constant";
 import { LoginFormValues } from "./type";
 import { cssObj } from "./style";

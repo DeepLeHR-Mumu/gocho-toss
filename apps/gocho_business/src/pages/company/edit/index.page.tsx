@@ -8,9 +8,8 @@ import { COLORS } from "shared-style/color";
 import { usePreventRouting } from "shared-hooks";
 
 import { useAddCompanyDetail, useCompanyDetail } from "@/apis";
-import { CommonStatusChip } from "@/components";
+import { CommonStatusChip, PageLayout, GlobalLayout, Footer } from "@/components";
 import { useUserState, useToast } from "@/globalStates";
-import { PageLayout, GlobalLayout, Footer } from "@/components/global/layout";
 import { NextPageWithLayout } from "@/pages/index/type";
 import {
   companyEditConfirmEvent,

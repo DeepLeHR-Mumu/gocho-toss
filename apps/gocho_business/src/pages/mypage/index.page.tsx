@@ -1,6 +1,6 @@
 import { ReactElement, useEffect } from "react";
 
-import { Footer, GlobalLayout, PageLayout } from "@/components/global/layout";
+import { Footer, GlobalLayout, PageLayout } from "@/components";
 
 import { NextPageWithLayout } from "@/pages/index/type";
 import { myPageFunnelEvent } from "@/ga/myPage";

@@ -14,7 +14,7 @@ import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 
 import { useModal, useUserState } from "@/globalStates";
 import { INTERNAL_URL } from "@/constants";
-import { TopBar } from "@/components/global/layout/topBar";
+import { TopBar } from "@/components";
 import { useDoLogin } from "@/apis";
 import { loginPageFunnelEvent, loginSuccessEvent, signupButtonClickEvent } from "@/ga/auth";
 

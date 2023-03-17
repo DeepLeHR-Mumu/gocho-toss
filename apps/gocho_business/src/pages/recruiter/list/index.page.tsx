@@ -2,8 +2,7 @@ import { ReactElement, useEffect } from "react";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
-import { CompanyInfoPart } from "@/components/global/companyInfoPart";
-import { Footer, GlobalLayout, PageLayout } from "@/components/global/layout";
+import { CompanyInfoPart, Footer, GlobalLayout, PageLayout } from "@/components";
 import { NextPageWithLayout } from "@/pages/index/type";
 import { useRecruiterArr } from "@/apis";
 import { recruiterListPageFunnelEvent } from "@/ga/recruiterList";
