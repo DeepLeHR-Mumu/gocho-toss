@@ -37,7 +37,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
   });
 
   return (
-    <>
+    <div>
       <div css={inputContainer}>
         <strong css={inputTitle}>계약 형태 *</strong>
         {contractTypeArr.map((contractName) => {
@@ -200,6 +200,6 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
         <input css={inputBox} {...jobForm.register(`position_arr.${index}.place.etc`)} />
         <p css={enterNotice}>전국/해외/기타일 경우 입력</p>
       </div>
-    </>
+    </div>
   );
 };
