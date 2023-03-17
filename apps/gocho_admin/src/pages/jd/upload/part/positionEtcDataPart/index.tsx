@@ -1,20 +1,10 @@
 import { ChangeEvent, FunctionComponent, useState } from "react";
+import { RiCloseFill } from "react-icons/ri";
 
-import {
-  buttonContainer,
-  copyPositionButton,
-  deletePlaceButton,
-  deletePositionButton,
-  enterNotice,
-  flexBox,
-  hireNumberButton,
-  inputContainer,
-  inputTitle,
-  searchBox,
-  selectBox,
-  smallInputBox,
-  textareaBox,
-} from "./style";
+import { NormalButton } from "shared-ui/common/atom/button/normalButton";
+import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
+
+import { cssObj } from "./style";
 import { certificateArr } from "./constant";
 import { PositionBoxProps } from "./type";
 
@@ -22,131 +12,134 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
   const [certiSearchWord, setCertiSearchWord] = useState<string>("");
 
   return (
-    <>
-      <div css={inputContainer}>
-        <strong css={inputTitle}>명수 *</strong>
-        <button
-          type="button"
-          css={hireNumberButton}
-          onClick={() => {
-            jobForm.setValue(`position_arr.${index}.hire_number`, -1);
-          }}
-        >
-          0명 채용
-        </button>
-        <button
-          type="button"
-          css={hireNumberButton}
-          onClick={() => {
-            jobForm.setValue(`position_arr.${index}.hire_number`, -2);
-          }}
-        >
-          00명 채용
-        </button>
-        <button
-          type="button"
-          css={hireNumberButton}
-          onClick={() => {
-            jobForm.setValue(`position_arr.${index}.hire_number`, -3);
-          }}
-        >
-          000명 채용
-        </button>
-        <input
-          type="number"
-          css={smallInputBox(false)}
-          {...jobForm.register(`position_arr.${index}.hire_number`, { valueAsNumber: true, required: true })}
-        />
-      </div>
-      <div css={inputContainer}>
-        <strong css={inputTitle}>급여 *</strong>
-        <textarea css={textareaBox} {...jobForm.register(`position_arr.${index}.pay_arr`, { required: true })} />
-        <p css={enterNotice}>엔터로 구분해주세요.</p>
-      </div>
-      <div css={inputContainer}>
-        <strong css={inputTitle}>우대 자격증</strong>
-        <input
-          css={searchBox}
-          type="text"
-          onChange={(e) => {
-            setCertiSearchWord(e.target.value);
-          }}
-        />
-        <select
-          value=""
-          css={selectBox}
-          onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-            jobForm.setValue(`position_arr.${index}.preferred_certi_arr`, [
-              ...(jobForm.watch("position_arr")[index].preferred_certi_arr || []),
-              e.target.value,
-            ]);
-            setCertiSearchWord("");
-          }}
-        >
-          <option value="" disabled>
-            자격증 선택 ▼
-          </option>
-          {certificateArr
-            .filter((prevCerti) => {
-              return prevCerti.includes(certiSearchWord);
-            })
-            .map((certi) => {
-              return (
-                <option key={`${id}${certi}`} value={certi}>
-                  {certi}
-                </option>
-              );
-            })}
-        </select>
-      </div>
-      <div css={flexBox}>
-        {jobForm.watch("position_arr")[index].preferred_certi_arr?.map((certi) => {
-          return (
-            <div key={`${id}${certi}`} css={inputContainer}>
-              {certi}
-              <button
-                type="button"
-                css={deletePlaceButton}
-                onClick={() => {
-                  jobForm.setValue(`position_arr.${index}.preferred_certi_arr`, [
-                    ...(jobForm.watch("position_arr")[index].preferred_certi_arr?.filter((element) => {
-                      return element !== certi;
-                    }) || []),
-                  ]);
+    <div css={cssObj.wrapper}>
+      <div css={cssObj.container}>
+        <ul css={cssObj.formBox}>
+          <li>
+            <strong css={cssObj.requiredTitle}>채용 인원</strong>
+            <div css={cssObj.gridBox}>
+              <NormalButton
+                buttonClick={() => {
+                  jobForm.setValue(`position_arr.${index}.hire_number`, -1);
                 }}
-              >
-                삭제
-              </button>
+                text="0명 채용"
+                wide={false}
+                variant="text"
+              />
+              <NormalButton
+                buttonClick={() => {
+                  jobForm.setValue(`position_arr.${index}.hire_number`, -2);
+                }}
+                text="00명 채용"
+                wide={false}
+                variant="text"
+              />
+              <NormalButton
+                buttonClick={() => {
+                  jobForm.setValue(`position_arr.${index}.hire_number`, -3);
+                }}
+                text="000명 채용"
+                wide={false}
+                variant="text"
+              />
+              {/* TODO : 표기 정상화 */}
+              <input
+                css={cssObj.inputCSS}
+                type="number"
+                {...jobForm.register(`position_arr.${index}.hire_number`, { valueAsNumber: true, required: true })}
+              />
             </div>
-          );
-        })}
+          </li>
+          <li>
+            <strong css={cssObj.requiredTitle}>급여</strong>
+            <p css={cssObj.textareaWarning}>엔터로 구분해주세요.</p>
+            <div css={cssObj.textareaBox}>
+              <textarea
+                css={cssObj.textarea}
+                {...jobForm.register(`position_arr.${index}.pay_arr`, { required: true })}
+              />
+            </div>
+          </li>
+          <li>
+            <strong css={cssObj.noRequiredTitle}>기타 우대사항</strong>
+            <p css={cssObj.textareaWarning}>엔터로 구분해주세요.</p>
+            <div css={cssObj.textareaBox}>
+              <textarea css={cssObj.textarea} {...jobForm.register(`position_arr.${index}.preferred_etc_arr`)} />
+            </div>
+          </li>
+        </ul>
+        <ul css={cssObj.formBox}>
+          <li>
+            <strong css={cssObj.noRequiredTitle}>우대 자격증</strong>
+            <div css={cssObj.flexBox}>
+              <input
+                css={cssObj.inputCSS}
+                type="text"
+                onChange={(onChangeEvent: ChangeEvent<HTMLInputElement>) => {
+                  setCertiSearchWord(onChangeEvent.target.value);
+                }}
+              />
+            </div>
+            <div css={cssObj.flexBox}>
+              {certificateArr
+                .filter((prevCerti) => {
+                  return prevCerti.includes(certiSearchWord);
+                })
+                .map((certi) => {
+                  if (certiSearchWord === "") return null;
+                  return (
+                    <CheckBoxWithDesc
+                      key={`${id}${certi}`}
+                      registerObj={{ ...jobForm.register(`position_arr.${index}.preferred_certi_arr`) }}
+                      desc={certi}
+                      value={certi}
+                      id={`${id}${certi}`}
+                    />
+                  );
+                })}
+            </div>
+            <div css={cssObj.flexBox}>
+              {jobForm.watch("position_arr")[index].preferred_certi_arr?.map((certi) => {
+                return (
+                  <button
+                    key={`${id}${certi}`}
+                    css={cssObj.deleteButton}
+                    type="button"
+                    aria-label={`${certi} 삭제`}
+                    onClick={() => {
+                      jobForm.setValue(`position_arr.${index}.preferred_certi_arr`, [
+                        ...(jobForm.watch("position_arr")[index].preferred_certi_arr?.filter((element) => {
+                          return element !== certi;
+                        }) || []),
+                      ]);
+                    }}
+                  >
+                    {certi} <RiCloseFill />
+                  </button>
+                );
+              })}
+            </div>
+          </li>
+        </ul>
       </div>
-      <div css={inputContainer}>
-        <strong css={inputTitle}>기타 우대 사항</strong>
-        <textarea css={textareaBox} {...jobForm.register(`position_arr.${index}.preferred_etc_arr`)} />
-        <p css={enterNotice}>엔터로 구분해주세요.</p>
-      </div>
-
-      <div css={buttonContainer}>
-        <button
-          type="button"
-          css={copyPositionButton}
-          onClick={() => {
+      <div css={cssObj.buttonBox}>
+        <NormalButton
+          buttonClick={() => {
             return append({ ...jobForm.watch("position_arr")[index] });
           }}
-        >
-          해당 직무 복사
-        </button>
-        <button
-          css={deletePositionButton}
-          type="button"
-          onClick={() => {
+          text="해당 직무 복사"
+          wide={false}
+          variant="outlined"
+        />
+        <NormalButton
+          buttonClick={() => {
             return remove(index);
           }}
-        >
-          직무 삭제
-        </button>
+          text="해당 직무 제거"
+          wide={false}
+          variant="filled"
+        />
       </div>
-    </>
+    </div>
   );
 };

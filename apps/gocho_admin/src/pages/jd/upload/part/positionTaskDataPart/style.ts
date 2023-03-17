@@ -1,85 +1,217 @@
 import { css } from "@emotion/react";
+
 import { COLORS } from "shared-style/color";
 
-export const inputContainer = css`
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.5rem;
-`;
-
-export const inputTitle = css`
-  color: ${COLORS.GRAY30};
-  margin-right: 1rem;
-`;
-
-export const selectBox = css`
+const defaultConversionCSS = css`
+  width: 5rem;
+  padding: 0 1rem;
+  border-radius: 0.625rem;
+  height: 2.5rem;
   background-color: ${COLORS.GRAY100};
-  border-radius: 0.5rem;
-  padding: 0.25rem 0.5rem;
-  margin-right: 1rem;
+  border: 1px solid ${COLORS.GRAY10};
+  font-size: 1rem;
+  color: ${COLORS.GRAY10};
 `;
 
-export const inputBox = css`
-  width: 50%;
-  border-radius: 0.5rem;
-  border: 1px solid ${COLORS.GRAY70};
-  background-color: ${COLORS.GRAY100};
-  height: 2rem;
-  padding: 0.25rem 0.5rem;
-  margin-right: 1rem;
-`;
+export const cssObj = {
+  wrapper: css`
+    border-bottom: 1px solid ${COLORS.GRAY70};
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  `,
+  title: css`
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: ${COLORS.GRAY10};
+    margin-bottom: 1rem;
+    display: block;
+  `,
+  container: css`
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0 3rem;
+  `,
+  formBox: css`
+    width: 50%;
 
-export const textareaBox = css`
-  font-family: Noto Sans KR, sans-serif;
-  font-size: 16px;
-  height: 5rem;
-  width: 50%;
-  border-radius: 0.5rem;
-  border: 1px solid ${COLORS.GRAY70};
-  padding: 0.25rem 0.5rem;
-  margin-right: 1rem;
-`;
+    > li {
+      margin-bottom: 2rem;
+    }
+  `,
+  requiredTitle: css`
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: ${COLORS.GRAY20};
+    margin-bottom: 1rem;
+    display: block;
+    padding-left: 0.5rem;
+    border-left: 3px solid ${COLORS.BLUE_SECOND70};
+  `,
+  noRequiredTitle: css`
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: ${COLORS.GRAY20};
+    margin-bottom: 1rem;
+    display: block;
+    padding-left: 0.5rem;
+    border-left: 3px solid ${COLORS.ERROR_YELLOW50};
+  `,
+  subTitle: css`
+    font-size: 1rem;
+    font-weight: 500;
+    color: ${COLORS.GRAY10};
+    display: block;
+    margin: 2rem 0 1rem;
+  `,
+  warningDesc: css`
+    display: block;
+    color: ${COLORS.BLUE_FIRST40};
+    font-size: 0.875rem;
+    font-weight: 400;
+    padding: 0.5rem 0;
+  `,
+  flexBox: css`
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 0.5rem;
+  `,
+  radioDesc: css`
+    font-size: 0.875rem;
+    color: ${COLORS.GRAY10};
+    font-weight: 400;
+    padding-left: 0.5rem;
+  `,
+  textareaBox: css`
+    display: flex;
+    flex-direction: column;
+  `,
+  textareaWarning: css`
+    background-color: ${COLORS.BLUE_SECOND70};
+    padding: 0.25rem 1rem;
+    font-size: 0.875rem;
+    color: ${COLORS.BLUE_FIRST40};
+    width: fit-content;
+    margin: 0.25rem 0;
+  `,
+  textarea: css`
+    width: 100%;
+    padding: 1rem;
+    max-width: 40rem;
+    border-radius: 0.625rem;
+    border: 1px solid ${COLORS.GRAY10};
+    font-size: 1rem;
+    color: ${COLORS.GRAY10};
+    min-height: 8rem;
+  `,
+  inputCSS: css`
+    width: 100%;
+    max-width: 40rem;
+    border: 1px solid ${COLORS.GRAY10};
+    background-color: ${COLORS.GRAY100};
+    padding: 0 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    border-radius: 0.625rem;
+    height: 2.5rem;
+    color: ${COLORS.GRAY10};
+    margin-right: 1rem;
+  `,
+  conversionLabel: css`
+    display: flex;
+    align-items: center;
+  `,
+  conversionInput: css`
+    ${defaultConversionCSS};
+  `,
+  disabledConversionInput: css`
+    ${defaultConversionCSS};
+    background-color: ${COLORS.GRAY80};
+    border: 0;
+  `,
+  conversionDesc: css`
+    font-size: 0.875rem;
+    padding: 0 1rem;
+    color: ${COLORS.GRAY10};
+  `,
+  selectCSS: css`
+    width: 100%;
+    max-width: 40rem;
+    border: 1px solid ${COLORS.GRAY10};
+    background-color: ${COLORS.GRAY100};
+    padding: 0 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    border-radius: 0.625rem;
+    height: 2.5rem;
+    color: ${COLORS.GRAY10};
+    margin-right: 1rem;
+  `,
+  selectBox: css`
+    display: grid;
+    align-items: center;
+    grid-template-columns: 30% 50% 10%;
+    justify-content: space-between;
+  `,
+  disableAddButton: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    background-color: ${COLORS.GRAY80};
+    color: ${COLORS.GRAY100};
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+  `,
+  addButton: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    background-color: ${COLORS.BLUE_FIRST40};
+    color: ${COLORS.GRAY100};
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+  `,
+  placeBox: css`
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin: 1rem 0;
+  `,
+  placeButtonCSS: css`
+    display: flex;
+    width: 100%;
+    padding: 0.25rem 0 0.25rem 1rem;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
 
-export const enterNotice = css`
-  font-size: 0.875rem;
-  color: ${COLORS.BLUE_NEON40};
-  line-height: 1.5;
-`;
+    :hover {
+      text-decoration: underline;
+    }
 
-export const flexBox = css`
-  display: flex;
-`;
+    ::before {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translate(0, -50%);
+      content: "";
+      width: 0.5rem;
+      height: 0.5rem;
+      background-color: ${COLORS.GRAY10};
+      border-radius: 50%;
+    }
 
-export const smallInputContainer = css`
-  display: flex;
-  align-items: center;
-  margin-left: 2rem;
-`;
-
-export const smallInputBox = (disabled: boolean) => {
-  return css`
-    width: 5rem;
-    background-color: ${disabled ? COLORS.GRAY70 : COLORS.GRAY100};
-    border-radius: 0.5rem;
-    border: 1px solid ${COLORS.GRAY70};
-    height: 2rem;
-    padding: 0.25rem 0.5rem;
-    margin: 0 0.5rem;
-  `;
+    > svg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+  `,
 };
-
-export const deletePlaceButton = css`
-  margin: 0 1rem;
-  padding: 0.25rem 0.5rem;
-  border: 2px solid ${COLORS.GRAY10};
-  background-color: ${COLORS.ERROR_RED30};
-  color: ${COLORS.GRAY100};
-`;
-
-export const hireNumberButton = css`
-  margin-right: 1rem;
-  padding: 0.25rem 0.5rem;
-  border: 2px solid ${COLORS.GRAY10};
-  background-color: ${COLORS.BLUE_NEON40};
-  color: ${COLORS.GRAY100};
-`;

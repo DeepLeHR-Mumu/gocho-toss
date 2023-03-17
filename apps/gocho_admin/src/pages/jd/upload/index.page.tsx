@@ -2,18 +2,21 @@ import { useState } from "react";
 import type { NextPage } from "next";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
+import { NormalButton } from "shared-ui/common/atom/button/normalButton";
+
 import { useFindCompany } from "@api/company/useFindCompany";
 import { useAddJd } from "@api/jd/useAddJd";
-import { mainContainer, pageTitle } from "@style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@component/screen";
+import { Layout } from "@component/layout";
 
 import { CommonDataPart } from "./part/commonDataPart";
 import { PositionRequiredDataPart } from "./part/positionRequiredDataPart";
 import { PositionTaskDataPart } from "./part/positionTaskDataPart";
 import { PositionEtcDataPart } from "./part/positionEtcDataPart";
-import { JobFormValues } from "./type";
-import { formContainer, positionContainer, addPositionButton, submitButton, checkMsgBox } from "./style";
+
 import { blankPosition } from "./constant";
+import { JobFormValues } from "./type";
+import { cssObj } from "./style";
 
 const JdUpload: NextPage = () => {
   const [searchWord, setSearchWord] = useState<string>("");
@@ -58,19 +61,22 @@ const JdUpload: NextPage = () => {
   };
 
   return (
-    <main css={mainContainer}>
-      <h2 css={pageTitle}>공고 업로드</h2>
-      <section>
-        <form css={formContainer} onSubmit={handleSubmit(jobSubmitHandler)}>
+    <main css={cssObj.wrapper}>
+      <Layout>
+        <h2 css={cssObj.title}>공고 업로드</h2>
+        <p css={cssObj.infoDesc}>
+          <span>필수 작성칸</span> <span>필수 작성아님</span>
+        </p>
+        <form css={cssObj.formContainer} onSubmit={handleSubmit(jobSubmitHandler)}>
           <CommonDataPart
             companyDataArr={companyDataObj.companyDataArr}
             jobForm={jobForm}
             setSearchWord={setSearchWord}
           />
-          <ul>
+          <ul css={cssObj.fieldArrCSS}>
             {fields.map((item, index) => {
               return (
-                <li css={positionContainer} key={item.id}>
+                <li key={item.id}>
                   <PositionRequiredDataPart id={item.id} index={index} jobForm={jobForm} />
                   <PositionTaskDataPart id={item.id} index={index} jobForm={jobForm} />
                   <PositionEtcDataPart id={item.id} index={index} jobForm={jobForm} append={append} remove={remove} />
@@ -78,21 +84,21 @@ const JdUpload: NextPage = () => {
               );
             })}
           </ul>
-          <button
-            css={addPositionButton}
-            type="button"
-            onClick={() => {
-              append(blankPosition);
-            }}
-          >
-            직무 추가
-          </button>
-          <button css={submitButton} type="submit">
-            공고 등록하기
-          </button>
-          {checkMsg && <p css={checkMsgBox}>{checkMsg}</p>}
+          {checkMsg && <p css={cssObj.warning}>{checkMsg}</p>}
+          <div css={cssObj.buttonBox}>
+            <NormalButton
+              buttonClick={() => {
+                append(blankPosition);
+              }}
+              wide={false}
+              text="직무 추가"
+              variant="outlined"
+            />
+
+            <NormalButton isSubmit wide={false} text="공고 등록하기" variant="filled" />
+          </div>
         </form>
-      </section>
+      </Layout>
     </main>
   );
 };
