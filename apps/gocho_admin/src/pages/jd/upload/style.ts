@@ -8,6 +8,20 @@ export const cssObj = {
   title: css`
     ${subPageTitle};
   `,
+  infoDesc: css`
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    > span {
+      padding-left: 1rem;
+      margin-right: 2rem;
+      :first-of-type {
+        border-left: 3px solid ${COLORS.BLUE_SECOND70};
+      }
+      :last-child {
+        border-left: 3px solid ${COLORS.ERROR_YELLOW50};
+      }
+    }
+  `,
   formContainer: css``,
   fieldArrCSS: css`
     margin-bottom: 3rem;

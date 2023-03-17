@@ -64,6 +64,9 @@ const JdUpload: NextPage = () => {
     <main css={cssObj.wrapper}>
       <Layout>
         <h2 css={cssObj.title}>공고 업로드</h2>
+        <p css={cssObj.infoDesc}>
+          <span>필수 작성칸</span> <span>필수 작성아님</span>
+        </p>
         <form css={cssObj.formContainer} onSubmit={handleSubmit(jobSubmitHandler)}>
           <CommonDataPart
             companyDataArr={companyDataObj.companyDataArr}
