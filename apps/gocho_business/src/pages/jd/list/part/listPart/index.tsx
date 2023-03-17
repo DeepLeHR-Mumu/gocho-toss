@@ -7,7 +7,7 @@ import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
 import { useJdArr } from "@/apis";
-import { INTERNAL_URL } from "@/constants/url";
+import { INTERNAL_URL } from "@/constants";
 
 import { JdCard } from "../../component/jdCard";
 import { cssObj } from "./style";

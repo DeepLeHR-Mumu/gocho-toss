@@ -9,8 +9,8 @@ import { Spinner } from "shared-ui/common/atom/spinner";
 import { SharedButton } from "shared-ui/business/sharedButton";
 
 import { useDeleteFactory, useFactoryArr } from "@/apis";
-import { CommonInfoBox, CommonStatusChip } from "@/components/common";
 import { factoryDeleteConfirmEvent, factoryDeleteDoneEvent } from "@/ga/factoryList";
+import { CommonInfoBox, CommonStatusChip } from "@/components";
 
 import { cssObj } from "./style";
 import { FactoryCardListPartProps } from "./type";

@@ -12,7 +12,7 @@ import { COLORS } from "shared-style/color";
 import { SharedTextLink } from "shared-ui/business/sharedTextLink";
 
 import { useFactoryArr, factoryArrKeyObj } from "@/apis";
-import { INTERNAL_URL } from "@/constants/url";
+import { INTERNAL_URL } from "@/constants";
 
 import { DeleteInputButton } from "../../component/deleteInputButton";
 import { AddFieldButton } from "../../component/addFieldButton";

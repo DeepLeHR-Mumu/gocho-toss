@@ -13,7 +13,7 @@ import gochoColorSrc from "shared-image/global/deepLeLogo/logoIconColor.svg";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 
 import { useModal } from "@/globalStates/useModal";
-import { INTERNAL_URL } from "@/constants/url";
+import { INTERNAL_URL } from "@/constants";
 import { useUserState } from "@/globalStates/useUserState";
 import { TopBar } from "@/components/global/layout/topBar";
 import { useDoLogin } from "@/apis";

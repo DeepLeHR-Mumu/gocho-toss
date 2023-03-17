@@ -8,7 +8,7 @@ import { COLORS } from "shared-style/color";
 import { usePreventRouting } from "shared-hooks";
 
 import { useAddCompanyDetail, useCompanyDetail } from "@/apis";
-import { CommonStatusChip } from "@/components/common";
+import { CommonStatusChip } from "@/components";
 import { useUserState } from "@/globalStates/useUserState";
 import { useToast } from "@/globalStates/useToast";
 import { PageLayout, GlobalLayout, Footer } from "@/components/global/layout";

@@ -10,7 +10,7 @@ import bizTextMono from "@/public/image/deepleLogo/bizTextMono.svg";
 import bizTextColor from "@/public/image/deepleLogo/bizTextColor.svg";
 import { useUserState } from "@/globalStates/useUserState";
 import { useDoLogout } from "@/apis";
-import { INTERNAL_URL } from "@/constants/url";
+import { INTERNAL_URL } from "@/constants";
 import { signupButtonClickEvent } from "@/ga/auth";
 
 import { cssObj } from "./style";

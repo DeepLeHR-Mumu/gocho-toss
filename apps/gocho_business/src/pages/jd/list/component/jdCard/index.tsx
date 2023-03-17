@@ -18,8 +18,8 @@ import {
   jdCloseDoneEvent,
   jdDeleteDoneEvent,
 } from "@/ga/jdList";
-import { CommonInfoBox, CommonStatusChip } from "@/components/common";
-import { INTERNAL_URL } from "@/constants/url";
+import { CommonInfoBox, CommonStatusChip } from "@/components";
+import { INTERNAL_URL } from "@/constants";
 import { useEndJd, useDeleteJd, jdArrKeyObj } from "@/apis";
 
 import { JD_MESSAGE_OBJ } from "./constant";

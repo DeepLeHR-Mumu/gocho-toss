@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import { INTERNAL_URL } from "@/constants/url";
+import { INTERNAL_URL } from "@/constants";
 
 test("기업 계정 목록 갯수 테스트", async ({ page }) => {
   await page.goto(INTERNAL_URL.RECRUITER_LIST);

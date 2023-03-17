@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import ReactGA from "react-ga4";
 import { datadogRum } from "@datadog/browser-rum";
 
-import { GA_KEY } from "@/constants/keys";
+import { GA_KEY } from "@/constants";
 import { globalStyle } from "@/styles/globalStyle";
 import { useAxiosInterceptor } from "@/apis";
 import { ToastPlaceholder } from "@/components/global/toast/toastPlaceHolder";

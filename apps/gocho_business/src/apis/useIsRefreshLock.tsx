@@ -7,7 +7,7 @@ import { BUSINESS_BACKEND_URL } from "shared-constant";
 import { managerTokenDecryptor } from "shared-util";
 
 import { useModal } from "@/globalStates/useModal";
-import { INTERNAL_URL } from "@/constants/url";
+import { INTERNAL_URL } from "@/constants";
 import { useUserState } from "@/globalStates/useUserState";
 import { ErrorResponseDef } from "@/types/errorType";
 

@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { useHealthCheck } from "@/apis";
-import { INTERNAL_URL } from "@/constants/url";
+import { INTERNAL_URL } from "@/constants";
 
 import { PrivateRouteProps } from "./type";
 import { cssObj } from "./style";
