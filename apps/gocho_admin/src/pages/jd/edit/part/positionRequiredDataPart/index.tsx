@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState, useEffect } from "react";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
@@ -17,9 +17,15 @@ import { requiredExpArr } from "./constant";
 import { PositionRequiredDataPartProps } from "./type";
 
 export const PositionRequiredDataPart: FunctionComponent<PositionRequiredDataPartProps> = ({ id, index, jobForm }) => {
-  const isDisabled =
-    jobForm.watch("position_arr")[index].required_exp !== "경력" &&
-    jobForm.watch("position_arr")[index].required_exp !== "신입/경력";
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
+  const { watch } = jobForm;
+
+  useEffect(() => {
+    const a =
+      watch("position_arr")[index].required_exp !== "경력" && watch("position_arr")[index].required_exp !== "신입/경력";
+
+    setIsDisabled(a);
+  }, [index, watch]);
 
   return (
     <>
