@@ -12,9 +12,7 @@ import { useFocusTrap } from "shared-hooks";
 import { FiCheckCircle, FiX } from "react-icons/fi";
 import { useDoLogin } from "@/apis";
 import { ModalComponent } from "@/components/global/modal/modalBackground";
-import { useModal } from "@/globalStates/useModal";
-import { useToast } from "@/globalStates/useToast";
-import { useUserState } from "@/globalStates/useUserState";
+import { useModal, useToast, useUserState } from "@/globalStates";
 import { loginSuccessEvent } from "@/ga/auth";
 
 import { LOGIN_ERROR_MESSAGES } from "./constant";

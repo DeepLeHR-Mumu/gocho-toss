@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { COLORS } from "shared-style/color";
 import { SharedButton } from "shared-ui/business/sharedButton";
 
-import { useToast } from "@/globalStates/useToast";
+import { useToast } from "@/globalStates";
 import { useDeleteJd, useEndJd, jdArrKeyObj } from "@/apis";
 
 import { JD_EDIT_MESSAGE_OBJ } from "../../constant";

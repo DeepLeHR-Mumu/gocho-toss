@@ -9,7 +9,7 @@ import { COLORS } from "shared-style/color";
 import { NUMBER_REGEXP } from "shared-constant";
 
 import { useCompanyDetail } from "@/apis";
-import { useUserState } from "@/globalStates/useUserState";
+import { useUserState } from "@/globalStates";
 
 import { FindAddressButton } from "../../component/findAddressButton";
 import { KakaoMap } from "../../component/kakaoMap";

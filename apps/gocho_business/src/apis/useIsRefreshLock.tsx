@@ -6,9 +6,8 @@ import dayjs from "dayjs";
 import { BUSINESS_BACKEND_URL } from "shared-constant";
 import { managerTokenDecryptor } from "shared-util";
 
-import { useModal } from "@/globalStates/useModal";
+import { useModal,useUserState } from "@/globalStates";
 import { INTERNAL_URL } from "@/constants";
-import { useUserState } from "@/globalStates/useUserState";
 import { ErrorResponseDef } from "@/types/errorType";
 
 export const axiosNoTokenInstance = axios.create({

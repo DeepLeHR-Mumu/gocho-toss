@@ -8,7 +8,7 @@ import { COLORS } from "shared-style/color";
 
 import bizTextMono from "@/public/image/deepleLogo/bizTextMono.svg";
 import bizTextColor from "@/public/image/deepleLogo/bizTextColor.svg";
-import { useUserState } from "@/globalStates/useUserState";
+import { useUserState } from "@/globalStates";
 import { useDoLogout } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 import { signupButtonClickEvent } from "@/ga/auth";

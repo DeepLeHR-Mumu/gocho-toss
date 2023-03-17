@@ -6,7 +6,7 @@ import { FiEye } from "react-icons/fi";
 import { Spinner } from "shared-ui/common/atom/spinner";
 
 import { useCompanyDetail, useCountInfo } from "@/apis";
-import { useUserState } from "@/globalStates/useUserState";
+import { useUserState } from "@/globalStates";
 
 import { cssObj } from "./style";
 

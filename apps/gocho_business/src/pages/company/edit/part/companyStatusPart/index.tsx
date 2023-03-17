@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 
 import { useCompanyDetail } from "@/apis";
-import { useUserState } from "@/globalStates/useUserState";
+import { useUserState } from "@/globalStates";
 
 import { cssObj } from "./style";
 

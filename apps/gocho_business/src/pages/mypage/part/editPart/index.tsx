@@ -6,8 +6,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { PWD_REGEXP } from "shared-constant";
 
 import { useEditUserInfo } from "@/apis";
-import { useUserState } from "@/globalStates/useUserState";
-import { useToast } from "@/globalStates/useToast";
+import { useUserState, useToast } from "@/globalStates";
 
 import { EDIT_PASSWORD_MESSAGE } from "./constants";
 import { EditFormValues, PasswordShowObjDef } from "./type";

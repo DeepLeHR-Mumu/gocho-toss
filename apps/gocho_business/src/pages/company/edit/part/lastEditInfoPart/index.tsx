@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import { Spinner } from "shared-ui/common/atom/spinner";
 
 import { useCompanyDetail } from "@/apis";
-import { useUserState } from "@/globalStates/useUserState";
+import { useUserState } from "@/globalStates";
 
 import { cssObj } from "./style";
 

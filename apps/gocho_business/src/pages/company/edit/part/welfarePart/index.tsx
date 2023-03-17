@@ -4,7 +4,7 @@ import { FiCornerDownLeft } from "react-icons/fi";
 import { Spinner } from "shared-ui/common/atom/spinner";
 
 import { useCompanyDetail } from "@/apis";
-import { useUserState } from "@/globalStates/useUserState";
+import { useUserState } from "@/globalStates";
 
 import { InformDesc } from "../../component/informDesc";
 import { WelfareForm } from "../../component/welfareForm";

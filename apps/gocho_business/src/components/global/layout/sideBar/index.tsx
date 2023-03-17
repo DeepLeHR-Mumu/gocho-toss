@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
-import { useUserState } from "@/globalStates/useUserState";
+import { useUserState } from "@/globalStates";
 import { INTERNAL_URL } from "@/constants";
 
 import { linkArr } from "./constant";

@@ -7,7 +7,7 @@ import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 import { usePreventRouting } from "shared-hooks";
 
-import { useToast } from "@/globalStates/useToast";
+import { useToast } from "@/globalStates";
 import {
   jdUploadConfirmEvent,
   jdUploadDoneEvent,

@@ -10,7 +10,7 @@ import dayjs from "dayjs";
 import { COLORS } from "shared-style/color";
 import { SharedButton } from "shared-ui/business/sharedButton";
 
-import { useToast } from "@/globalStates/useToast";
+import { useToast } from "@/globalStates";
 import {
   jdDeleteButtonEvent,
   jdCloseButtonEvent,

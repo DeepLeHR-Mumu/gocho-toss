@@ -9,7 +9,7 @@ import { COLORS } from "shared-style/color";
 import { Spinner } from "shared-ui/common/atom/spinner";
 import { usePreventRouting } from "shared-hooks";
 
-import { useToast } from "@/globalStates/useToast";
+import { useToast } from "@/globalStates";
 import {
   jdEditConfirmEvent,
   jdEditDoneEvent,

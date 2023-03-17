@@ -9,8 +9,7 @@ import { usePreventRouting } from "shared-hooks";
 
 import { useAddCompanyDetail, useCompanyDetail } from "@/apis";
 import { CommonStatusChip } from "@/components";
-import { useUserState } from "@/globalStates/useUserState";
-import { useToast } from "@/globalStates/useToast";
+import { useUserState, useToast } from "@/globalStates";
 import { PageLayout, GlobalLayout, Footer } from "@/components/global/layout";
 import { NextPageWithLayout } from "@/pages/index/type";
 import {

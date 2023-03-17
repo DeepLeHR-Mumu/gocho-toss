@@ -9,8 +9,7 @@ import { NormalButton } from "shared-ui/common/atom/button";
 import { useFocusTrap } from "shared-hooks";
 
 import { useFindPassword } from "@/apis";
-import { useModal } from "@/globalStates/useModal";
-import { useToast } from "@/globalStates/useToast";
+import { useModal, useToast } from "@/globalStates";
 
 import { ModalComponent } from "../modalBackground";
 import { CommonCloseButton } from "./component/commonCloseButton";
