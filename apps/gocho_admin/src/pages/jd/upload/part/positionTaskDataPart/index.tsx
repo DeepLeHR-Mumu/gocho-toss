@@ -11,13 +11,13 @@ import { cssObj } from "./style";
 export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, index, jobForm }) => {
   const [bigPlace, setBigPlace] = useState<string>("");
   const [smallPlace, setSmallPlace] = useState<string>("");
-  const { watch } = jobForm;
+  const { watch, setValue } = jobForm;
 
   const isConversionDisabled =
     watch("position_arr")[index].contract_type !== "인턴" && watch("position_arr")[index].contract_type !== "계약>정규";
 
   const deletePlaceHandler = (place: string) => {
-    jobForm.setValue(`position_arr.${index}.place.address_arr`, [
+    setValue(`position_arr.${index}.place.address_arr`, [
       ...(watch("position_arr")[index].place.address_arr?.filter((element) => {
         return element !== place;
       }) || []),
@@ -25,7 +25,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
   };
 
   const mainTask = taskArr.find((task) => {
-    return jobForm.watch("position_arr")[index].task_main === task.mainTask;
+    return watch("position_arr")[index].task_main === task.mainTask;
   });
 
   return (
