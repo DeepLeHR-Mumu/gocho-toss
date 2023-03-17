@@ -17,7 +17,7 @@ import {
   jdEditButtonEvent,
   jdCloseDoneEvent,
   jdDeleteDoneEvent,
-} from "@/ga/jdList";
+} from "@/ga";
 import { CommonInfoBox, CommonStatusChip } from "@/components";
 import { INTERNAL_URL } from "@/constants";
 import { useEndJd, useDeleteJd, jdArrKeyObj } from "@/apis";

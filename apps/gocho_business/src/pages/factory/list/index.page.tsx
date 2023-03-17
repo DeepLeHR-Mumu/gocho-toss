@@ -2,7 +2,7 @@ import { ReactElement, useEffect, useState } from "react";
 
 import { NextPageWithLayout } from "@/pages/index/type";
 import { CompanyInfoPart, PageLayout, GlobalLayout, Footer } from "@/components";
-import { factoryListPageFunnelEvent } from "@/ga/factoryList";
+import { factoryListPageFunnelEvent } from "@/ga";
 
 import { PageHead } from "./pageHead";
 import { RegisterPart } from "./part/registerPart";

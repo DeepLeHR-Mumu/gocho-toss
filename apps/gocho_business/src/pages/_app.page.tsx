@@ -8,7 +8,7 @@ import ReactGA from "react-ga4";
 import { datadogRum } from "@datadog/browser-rum";
 
 import { GA_KEY } from "@/constants";
-import { globalStyle } from "@/styles/globalStyle";
+import { globalStyle } from "@/styles";
 import { useAxiosInterceptor } from "@/apis";
 import { ToastPlaceholder, PrivateRouteLayout, ModalPlaceholder, ErrorBoundary } from "@/components";
 

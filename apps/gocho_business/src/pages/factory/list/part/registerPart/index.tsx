@@ -14,7 +14,7 @@ import {
   factoryUploadConfirmEvent,
   factoryUploadDoneEvent,
   factoryUploadFailEvent,
-} from "@/ga/factoryList";
+} from "@/ga";
 
 import { cssObj } from "./style";
 import { FactoryRegisterDef, RegisterPartProps } from "./type";

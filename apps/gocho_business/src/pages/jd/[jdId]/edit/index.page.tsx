@@ -17,7 +17,7 @@ import {
   jdEditExitEvent,
   jdEditFailEvent,
   jdEditPageFunnelEvent,
-} from "@/ga/jdEdit";
+} from "@/ga";
 import type { NextPageWithLayout } from "@/pages/index/type";
 import { PageLayout, GlobalLayout } from "@/components";
 import { useJdDetail, useEditJd, useDeleteJd, useEndJd, jdArrKeyObj } from "@/apis";

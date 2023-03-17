@@ -3,7 +3,7 @@ import { ReactElement, useEffect } from "react";
 import { Footer, GlobalLayout, PageLayout } from "@/components";
 
 import { NextPageWithLayout } from "@/pages/index/type";
-import { myPageFunnelEvent } from "@/ga/myPage";
+import { myPageFunnelEvent } from "@/ga";
 
 import { PageHead } from "./pageHead";
 import { HeaderPart } from "./part/headerPart";

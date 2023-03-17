@@ -5,7 +5,7 @@ import { Spinner } from "shared-ui/common/atom/spinner";
 import { CompanyInfoPart, Footer, GlobalLayout, PageLayout } from "@/components";
 import { NextPageWithLayout } from "@/pages/index/type";
 import { useRecruiterArr } from "@/apis";
-import { recruiterListPageFunnelEvent } from "@/ga/recruiterList";
+import { recruiterListPageFunnelEvent } from "@/ga";
 
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";

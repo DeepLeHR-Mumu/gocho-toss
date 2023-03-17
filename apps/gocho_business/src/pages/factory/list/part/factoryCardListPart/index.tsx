@@ -9,7 +9,7 @@ import { Spinner } from "shared-ui/common/atom/spinner";
 import { SharedButton } from "shared-ui/business/sharedButton";
 
 import { useDeleteFactory, useFactoryArr } from "@/apis";
-import { factoryDeleteConfirmEvent, factoryDeleteDoneEvent } from "@/ga/factoryList";
+import { factoryDeleteConfirmEvent, factoryDeleteDoneEvent } from "@/ga";
 import { CommonInfoBox, CommonStatusChip } from "@/components";
 
 import { cssObj } from "./style";

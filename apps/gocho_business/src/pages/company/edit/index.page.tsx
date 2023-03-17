@@ -16,7 +16,7 @@ import {
   companyEditDoneEvent,
   companyEditFailEvent,
   companyEditPageFunnelEvent,
-} from "@/ga/companyEdit";
+} from "@/ga";
 
 import { PageHead } from "./pageHead";
 import { CompanyInfoPart } from "./part/companyInfoPart";

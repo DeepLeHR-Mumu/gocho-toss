@@ -6,7 +6,7 @@ import jobi_500 from "@/public/image/jobi_500.svg";
 
 import { NextPageWithLayout } from "@/pages/index/type";
 import { Footer, GlobalLayout } from "@/components";
-import { unknownPageErrorEvent } from "@/ga/500";
+import { unknownPageErrorEvent } from "@/ga";
 
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";

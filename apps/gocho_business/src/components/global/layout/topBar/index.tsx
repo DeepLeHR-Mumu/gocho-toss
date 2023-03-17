@@ -11,7 +11,7 @@ import bizTextColor from "@/public/image/deepleLogo/bizTextColor.svg";
 import { useUserState } from "@/globalStates";
 import { useDoLogout } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
-import { signupButtonClickEvent } from "@/ga/auth";
+import { signupButtonClickEvent } from "@/ga";
 
 import { cssObj } from "./style";
 

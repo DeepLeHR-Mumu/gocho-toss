@@ -15,7 +15,7 @@ import {
   jdUploadExitEvent,
   jdUploadFailEvent,
   jdUploadPageFunnelEvent,
-} from "@/ga/jdUpload";
+} from "@/ga";
 import type { NextPageWithLayout } from "@/pages/index/type";
 import { PageLayout, GlobalLayout } from "@/components";
 import { useAddJd } from "@/apis";
