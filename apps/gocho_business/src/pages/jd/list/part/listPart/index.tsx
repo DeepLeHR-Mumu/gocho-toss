@@ -6,7 +6,7 @@ import { Spinner } from "shared-ui/common/atom/spinner";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
-import { useJdArr } from "@/apis/jd/useJdArr";
+import { useJdArr } from "@/apis";
 import { INTERNAL_URL } from "@/constants/url";
 
 import { JdCard } from "../../component/jdCard";

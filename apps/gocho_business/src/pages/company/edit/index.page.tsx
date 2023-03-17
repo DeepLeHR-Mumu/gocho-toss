@@ -7,8 +7,7 @@ import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 import { usePreventRouting } from "shared-hooks";
 
-import { useAddCompanyDetail } from "@/apis/company/useAddCompanyDetail";
-import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
+import { useAddCompanyDetail, useCompanyDetail } from "@/apis";
 import { CommonStatusChip } from "@/components/common";
 import { useUserState } from "@/globalStates/useUserState";
 import { useToast } from "@/globalStates/useToast";

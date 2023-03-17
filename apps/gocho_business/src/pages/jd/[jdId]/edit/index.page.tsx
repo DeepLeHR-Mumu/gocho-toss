@@ -20,11 +20,7 @@ import {
 } from "@/ga/jdEdit";
 import type { NextPageWithLayout } from "@/pages/index/type";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
-import { useJdDetail } from "@/apis/jd/useJdDetail";
-import { useEditJd } from "@/apis/jd/useEditJd";
-import { useDeleteJd } from "@/apis/jd/useDeleteJd";
-import { useEndJd } from "@/apis/jd/useEndJd";
-import { jdArrKeyObj } from "@/apis/jd/useJdArr/type";
+import { useJdDetail, useEditJd, useDeleteJd, useEndJd, jdArrKeyObj } from "@/apis";
 
 import { INTERNAL_URL } from "@/constants/url";
 import { HeaderPart } from "./part/headerPart";

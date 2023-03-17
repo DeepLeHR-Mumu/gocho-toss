@@ -11,8 +11,7 @@ import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 import { SharedTextLink } from "shared-ui/business/sharedTextLink";
 
-import { useFactoryArr } from "@/apis/factory/useFactoryArr";
-import { factoryArrKeyObj } from "@/apis/factory/useFactoryArr/type";
+import { useFactoryArr, factoryArrKeyObj } from "@/apis";
 import { INTERNAL_URL } from "@/constants/url";
 
 import { DeleteInputButton } from "../../component/deleteInputButton";

@@ -6,8 +6,7 @@ import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 import { usePreventRouting } from "shared-hooks";
 
-import { useAddFactory } from "@/apis/factory/useAddFactory";
-import { useFactoryArr } from "@/apis/factory/useFactoryArr";
+import { useAddFactory, useFactoryArr } from "@/apis";
 import {
   factoryEditConfirmEvent,
   factoryEditDoneEvent,

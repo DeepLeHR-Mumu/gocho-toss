@@ -20,9 +20,7 @@ import {
 } from "@/ga/jdList";
 import { CommonInfoBox, CommonStatusChip } from "@/components/common";
 import { INTERNAL_URL } from "@/constants/url";
-import { useEndJd } from "@/apis/jd/useEndJd";
-import { useDeleteJd } from "@/apis/jd/useDeleteJd";
-import { jdArrKeyObj } from "@/apis/jd/useJdArr/type";
+import { useEndJd, useDeleteJd, jdArrKeyObj } from "@/apis";
 
 import { JD_MESSAGE_OBJ } from "./constant";
 import { cssObj } from "./style";

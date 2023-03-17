@@ -7,9 +7,7 @@ import { COLORS } from "shared-style/color";
 import { SharedButton } from "shared-ui/business/sharedButton";
 
 import { useToast } from "@/globalStates/useToast";
-import { useDeleteJd } from "@/apis/jd/useDeleteJd";
-import { useEndJd } from "@/apis/jd/useEndJd";
-import { jdArrKeyObj } from "@/apis/jd/useJdArr/type";
+import { useDeleteJd, useEndJd, jdArrKeyObj } from "@/apis";
 
 import { JD_EDIT_MESSAGE_OBJ } from "../../constant";
 import { cssObj } from "./style";

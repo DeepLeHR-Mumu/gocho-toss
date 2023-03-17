@@ -18,7 +18,7 @@ import {
 } from "@/ga/jdUpload";
 import type { NextPageWithLayout } from "@/pages/index/type";
 import { PageLayout, GlobalLayout } from "@/components/global/layout";
-import { useAddJd } from "@/apis/jd/useAddJd";
+import { useAddJd } from "@/apis";
 
 import { INTERNAL_URL } from "@/constants/url";
 import { HeaderPart } from "./part/headerPart";
