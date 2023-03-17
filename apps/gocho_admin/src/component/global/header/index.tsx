@@ -1,14 +1,16 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { MAIN_URL, LOGIN_URL } from "@constant/internalURL";
-import Image from "next/image";
 import { FunctionComponent, useEffect, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import Image from "next/image";
 
+import { LinkButton } from "shared-ui/common/atom/button/linkButton";
+import { NormalButton } from "shared-ui/common/atom/button/normalButton";
 import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
 
-import { Layout } from "@component/layout";
-import { useQueryClient } from "@tanstack/react-query";
-import { headerWrapper, headerContainer, flexBox, logoCSS, title, loginButton, logoutButton } from "./style";
+import { MAIN_URL, LOGIN_URL } from "@constant/internalURL";
+
+import { cssObj } from "./style";
 
 export const Header: FunctionComponent = () => {
   const router = useRouter();
@@ -27,28 +29,16 @@ export const Header: FunctionComponent = () => {
   }, [isLogined, router]);
 
   return (
-    <header css={headerWrapper}>
-      <Layout>
-        <div css={headerContainer}>
-          <div css={flexBox}>
-            <Link href={MAIN_URL} passHref css={logoCSS}>
-              <Image src={colorLogoSrc} alt="고초대졸닷컴" fill />
-            </Link>
-            <p css={title}>관리자 어드민</p>
-          </div>
-          <div css={flexBox}>
-            {isLogined ? (
-              <button type="button" css={logoutButton} onClick={doLogout}>
-                로그아웃
-              </button>
-            ) : (
-              <Link href={LOGIN_URL} css={loginButton}>
-                로그인
-              </Link>
-            )}
-          </div>
-        </div>
-      </Layout>
+    <header css={cssObj.header}>
+      <Link href={MAIN_URL} passHref css={cssObj.logo}>
+        <Image src={colorLogoSrc} alt="고초대졸닷컴" fill />
+        <strong css={cssObj.title}>관리자 어드민</strong>
+      </Link>
+      {isLogined ? (
+        <NormalButton buttonClick={doLogout} text="로그아웃" variant="outlined" wide={false} />
+      ) : (
+        <LinkButton linkTo={LOGIN_URL} text="로그인" variant="filled" wide={false} />
+      )}
     </header>
   );
 };

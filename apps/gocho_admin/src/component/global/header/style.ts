@@ -1,56 +1,38 @@
 import { css } from "@emotion/react";
+
 import { COLORS } from "shared-style/color";
 
-export const headerWrapper = css`
-  height: 4.5rem;
-  display: flex;
-  z-index: 50;
-  position: sticky;
-  left: 0;
-  top: 0;
-  width: 100%;
-  background-color: ${COLORS.GRAY100};
-`;
+export const cssObj = {
+  header: css`
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    border-bottom: 1px solid ${COLORS.GRAY80};
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    padding: 0.5rem 2rem;
+    background-color: ${COLORS.GRAY100};
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  `,
+  logo: css`
+    position: relative;
+    width: 7.5rem;
+    height: 2.5rem;
 
-export const headerContainer = css`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const flexBox = css`
-  display: flex;
-`;
-
-export const logoCSS = css`
-  margin-top: 0.125rem;
-  width: 8.75rem;
-  height: 1.125rem;
-  margin-right: 0.5rem;
-  cursor: pointer;
-  position: relative;
-
-  > img {
-    object-fit: contain;
-  }
-`;
-
-export const title = css`
-  font-size: 1.25rem;
-  font-weight: 700;
-`;
-
-export const loginButton = css`
-  padding: 0.25rem 1rem;
-  border: 2px solid ${COLORS.GRAY10};
-  background-color: ${COLORS.BLUE_FIRST40};
-  color: ${COLORS.GRAY100};
-`;
-
-export const logoutButton = css`
-  margin-left: 1rem;
-  padding: 0.25rem 1rem;
-  border: 2px solid ${COLORS.GRAY10};
-  background-color: #b32100;
-  color: ${COLORS.GRAY100};
-`;
+    > img {
+      object-fit: contain;
+    }
+  `,
+  title: css`
+    display: block;
+    position: absolute;
+    right: -7.5rem;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: ${COLORS.GRAY10};
+  `,
+};
