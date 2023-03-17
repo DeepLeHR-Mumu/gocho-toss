@@ -3,7 +3,6 @@ import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
   email: string;
-  nickname: string;
   password: string;
 }
 
@@ -12,7 +11,7 @@ export interface SignUpResponseDef {
 }
 
 export interface PostSignUpDef {
-  ({ email, password, nickname }: RequestObjDef): Promise<SignUpResponseDef>;
+  ({ email, password }: RequestObjDef): Promise<SignUpResponseDef>;
 }
 
 export interface UseDoSignUpProps {
