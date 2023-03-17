@@ -10,12 +10,15 @@ const linkButtonCSS = css`
 
 export const cssObj = {
   wrapper: css`
+    position: relative;
     flex-shrink: 0;
     width: 17.5rem;
     background-color: ${COLORS.GRAY90};
     padding: 1rem;
   `,
   listBox: css`
+    position: sticky;
+    top: 6rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;

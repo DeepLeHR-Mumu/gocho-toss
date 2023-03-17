@@ -81,6 +81,7 @@ const JdUpload: NextPage = () => {
               );
             })}
           </ul>
+          {checkMsg && <p css={cssObj.warning}>{checkMsg}</p>}
           <div css={cssObj.buttonBox}>
             <NormalButton
               buttonClick={() => {
@@ -91,9 +92,7 @@ const JdUpload: NextPage = () => {
               variant="outlined"
             />
 
-            {checkMsg && <p css={cssObj.warning}>{checkMsg}</p>}
-
-            <NormalButton isSubmit wide text="공고 등록하기" variant="filled" />
+            <NormalButton isSubmit wide={false} text="공고 등록하기" variant="filled" />
           </div>
         </form>
       </Layout>

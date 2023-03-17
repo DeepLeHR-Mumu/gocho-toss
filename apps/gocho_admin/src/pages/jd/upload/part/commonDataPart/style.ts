@@ -43,11 +43,11 @@ export const cssObj = {
     padding: 1rem 0;
   `,
   dateBox: css`
-    width: 80%;
+    width: 100%;
     display: grid;
     grid-template-columns: 25% 25% 15% 15%;
     align-items: center;
-    justify-content: space-between;
+    gap: 2rem;
   `,
   textareaBox: css`
     display: flex;

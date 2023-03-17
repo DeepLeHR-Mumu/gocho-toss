@@ -66,6 +66,7 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ company
           <div css={cssObj.dateBox}>
             <DatetimeBox register={jobForm.register} valueName="start_time" />
             <DatetimeBox register={jobForm.register} valueName="end_time" />
+            {/* TODO : checkbox로 구성하고 마지막 데이트를 on off 하도록 */}
             <NormalButton
               wide={false}
               text="상시공고"

@@ -38,9 +38,7 @@ export const cssObj = {
   `,
   buttonBox: css`
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: 1rem;
     margin-bottom: 2rem;
   `,
