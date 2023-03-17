@@ -20,7 +20,8 @@ export const cssObj = {
   `,
   container: css`
     display: grid;
-    grid-template-columns: 10% 40% 10% 15% 25%;
+    grid-template-columns: 10% 35% 10% 15% 30%;
+    justify-content: space-between;
     align-items: center;
 
     > li {

@@ -7,6 +7,8 @@ import { cssObj } from "./style";
 
 export const SideBar: FunctionComponent = () => {
   const router = useRouter();
+  // console.log(router.asPath, router.pathname);
+
   return (
     <aside css={cssObj.wrapper}>
       <ul css={cssObj.listBox}>
@@ -15,7 +17,7 @@ export const SideBar: FunctionComponent = () => {
             <li key={menu.menuTitle}>
               <strong css={cssObj.title}>{menu.menuTitle}</strong>
               {menu.subMenuArr?.map((subMenu) => {
-                const isActive = router.asPath === subMenu.menuLink;
+                const isActive = router.pathname === subMenu.menuLink.split("?")[0];
                 return (
                   <Link
                     key={subMenu.menuTitle}

@@ -3,12 +3,13 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { jobArrKeyObj } from "shared-constant/queryKeyFactory/job/jobArrKeyObj";
 import { dateConverter } from "shared-util";
+import { NormalButton } from "shared-ui/common/atom/button/normalButton";
+import { LinkButton } from "shared-ui/common/atom/button/linkButton";
 
 import { useDeleteJd } from "@api/jd/useDeleteJd";
 import { useEndJd } from "@api/jd/useEndJd";
 import { JD_EDIT_URL } from "@constant/internalURL";
 
-import Link from "next/link";
 import { JobCardProps } from "./type";
 import { cssObj } from "./style";
 
@@ -72,27 +73,23 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
           <a href={job.applyUrl} css={cssObj.applyButton} target="_blank" rel="noopener noreferrer">
             채용 링크
           </a>
-          <button
-            css={cssObj.endJobButton}
-            type="button"
-            onClick={() => {
+          <NormalButton
+            text="마감"
+            wide={false}
+            variant="filled"
+            buttonClick={() => {
               return endJobHandler(job.id);
             }}
-          >
-            마감
-          </button>
-          <Link href={`${JD_EDIT_URL}/?id=${job.id}`} css={cssObj.editButton} passHref>
-            수정
-          </Link>
-          <button
-            css={cssObj.deleteButton}
-            type="button"
-            onClick={() => {
+          />
+          <LinkButton linkTo={`${JD_EDIT_URL}/?id=${job.id}`} text="수정" wide={false} variant="outlined" />
+          <NormalButton
+            text="삭제"
+            wide={false}
+            variant="text"
+            buttonClick={() => {
               return deleteJobHandler(job.id);
             }}
-          >
-            삭제
-          </button>
+          />
         </li>
       </ul>
     </li>
