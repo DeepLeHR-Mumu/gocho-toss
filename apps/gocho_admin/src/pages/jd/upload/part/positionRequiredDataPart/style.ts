@@ -58,7 +58,7 @@ export const cssObj = {
     flex-wrap: wrap;
     align-items: baseline;
     justify-content: flex-start;
-    gap: 1rem;
+    gap: 0.5rem;
     margin-bottom: 2rem;
   `,
   radioDesc: css`

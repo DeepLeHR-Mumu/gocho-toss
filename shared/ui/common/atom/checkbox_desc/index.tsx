@@ -9,6 +9,7 @@ export const CheckBoxWithDesc: FunctionComponent<CheckBoxWithDescProps> = ({
   isDisabled = false,
   desc,
   id,
+  value,
   checked,
 }) => {
   const [isFocus, setIsFocus] = useState(false);
@@ -21,6 +22,7 @@ export const CheckBoxWithDesc: FunctionComponent<CheckBoxWithDescProps> = ({
         {...registerObj}
         checked={checked}
         id={id}
+        value={value && value}
         disabled={isDisabled}
         onFocus={() => {
           setIsFocus(true);

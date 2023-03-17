@@ -71,6 +71,18 @@ export const cssObj = {
     color: ${COLORS.GRAY10};
     min-height: 8rem;
   `,
+  flexLiCSS: css`
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    > ul {
+      width: 50%;
+      > li {
+        margin-bottom: 2rem;
+      }
+    }
+  `,
   inputCSS: css`
     width: 100%;
     max-width: 40rem;

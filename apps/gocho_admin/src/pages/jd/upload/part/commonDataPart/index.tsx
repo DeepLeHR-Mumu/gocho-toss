@@ -82,37 +82,43 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ company
             />
           </div>
         </li>
-        <li>
-          <strong css={cssObj.requiredTitle}>채용 절차</strong>
-          <div css={cssObj.textareaBox}>
-            <p css={cssObj.textareaWarning}>엔터로 구분해주세요.</p>
-            <textarea css={cssObj.textarea} {...jobForm.register("process_arr", { required: true })} />
-          </div>
-        </li>
-        <li>
-          <strong css={cssObj.requiredTitle}>지원 방법</strong>
-          <div css={cssObj.textareaBox}>
-            <p css={cssObj.textareaWarning}>엔터로 구분해주세요.</p>
-            <textarea css={cssObj.textarea} {...jobForm.register("apply_route_arr", { required: true })} />
-          </div>
-        </li>
-        <li>
-          <strong css={cssObj.requiredTitle}>채용 링크</strong>
-          <div css={cssObj.flexFullBox}>
-            <input
-              type="url"
-              placeholder="https://"
-              css={cssObj.inputCSS}
-              {...jobForm.register("apply_url", { required: true })}
-            />
-          </div>
-        </li>
-        <li>
-          <strong css={cssObj.noRequiredTitle}>기타 사항</strong>
-          <div css={cssObj.textareaBox}>
-            <p css={cssObj.textareaWarning}>엔터로 구분해주세요, 필수가 아닙니다.</p>
-            <textarea css={cssObj.textarea} {...jobForm.register("etc_arr")} />
-          </div>
+        <li css={cssObj.flexLiCSS}>
+          <ul>
+            <li>
+              <strong css={cssObj.requiredTitle}>채용 절차</strong>
+              <div css={cssObj.textareaBox}>
+                <p css={cssObj.textareaWarning}>엔터로 구분해주세요.</p>
+                <textarea css={cssObj.textarea} {...jobForm.register("process_arr", { required: true })} />
+              </div>
+            </li>
+            <li>
+              <strong css={cssObj.requiredTitle}>지원 방법</strong>
+              <div css={cssObj.textareaBox}>
+                <p css={cssObj.textareaWarning}>엔터로 구분해주세요.</p>
+                <textarea css={cssObj.textarea} {...jobForm.register("apply_route_arr", { required: true })} />
+              </div>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <strong css={cssObj.requiredTitle}>채용 링크</strong>
+              <div css={cssObj.flexFullBox}>
+                <input
+                  type="url"
+                  placeholder="https://"
+                  css={cssObj.inputCSS}
+                  {...jobForm.register("apply_url", { required: true })}
+                />
+              </div>
+            </li>
+            <li>
+              <strong css={cssObj.noRequiredTitle}>기타 사항</strong>
+              <div css={cssObj.textareaBox}>
+                <p css={cssObj.textareaWarning}>엔터로 구분해주세요, 필수가 아닙니다.</p>
+                <textarea css={cssObj.textarea} {...jobForm.register("etc_arr")} />
+              </div>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>

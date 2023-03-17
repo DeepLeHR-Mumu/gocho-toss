@@ -41,8 +41,8 @@ export const cssObj = {
     flex-direction: column;
     align-items: flex-end;
     justify-content: space-between;
-    min-height: 8rem;
-    margin-bottom: 3.75rem;
+    gap: 1rem;
+    margin-bottom: 2rem;
   `,
   warning: css`
     width: 100%;
