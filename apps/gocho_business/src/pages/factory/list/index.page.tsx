@@ -1,12 +1,11 @@
 import { ReactElement, useEffect, useState } from "react";
 
-import { NextPageWithLayout } from "@/pages/index/type";
+import { NextPageWithLayout } from "@/types";
 import { CompanyInfoPart, PageLayout, GlobalLayout, Footer } from "@/components";
 import { factoryListPageFunnelEvent } from "@/ga";
 
 import { PageHead } from "./pageHead";
-import { RegisterPart } from "./part/registerPart";
-import { FactoryCardListPart } from "./part/factoryCardListPart";
+import { RegisterPart, FactoryCardListPart } from "./part";
 import { cssObj } from "./style";
 
 const FactoryListPage: NextPageWithLayout = () => {

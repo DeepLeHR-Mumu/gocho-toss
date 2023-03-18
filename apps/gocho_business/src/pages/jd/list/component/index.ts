@@ -1,0 +1,1 @@
+export { JdCard } from "./jdCard";

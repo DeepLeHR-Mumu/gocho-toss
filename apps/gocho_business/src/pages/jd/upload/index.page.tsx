@@ -16,18 +16,19 @@ import {
   jdUploadFailEvent,
   jdUploadPageFunnelEvent,
 } from "@/ga";
-import type { NextPageWithLayout } from "@/pages/index/type";
+import type { NextPageWithLayout } from "@/types";
 import { PageLayout, GlobalLayout } from "@/components";
 import { useAddJd } from "@/apis";
-
 import { INTERNAL_URL } from "@/constants";
-import { HeaderPart } from "./part/headerPart";
-import { BasicInfoPart } from "./part/basicInfoPart";
-import { PositionHeaderPart } from "./part/positionHeaderPart";
-import { PositionTitleInfoPart } from "./part/positionTitleInfoPart";
-import { PositionRequiredInfoPart } from "./part/positionRequiredInfoPart";
-import { PositionWorkInfoPart } from "./part/positionWorkInfoPart";
 
+import {
+  HeaderPart,
+  BasicInfoPart,
+  PositionHeaderPart,
+  PositionTitleInfoPart,
+  PositionRequiredInfoPart,
+  PositionWorkInfoPart,
+} from "./part";
 import { JobFormValues } from "./type";
 import { BLANK_POSITION, JD_UPLOAD_MESSAGE_OBJ } from "./constant";
 import { getFieldArrayValue, getFieldArrayValueWithNull } from "./util";

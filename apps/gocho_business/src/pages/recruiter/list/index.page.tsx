@@ -3,7 +3,7 @@ import { ReactElement, useEffect } from "react";
 import { Spinner } from "shared-ui/common/atom/spinner";
 
 import { CompanyInfoPart, Footer, GlobalLayout, PageLayout } from "@/components";
-import { NextPageWithLayout } from "@/pages/index/type";
+import { NextPageWithLayout } from "@/types";
 import { useRecruiterArr } from "@/apis";
 import { recruiterListPageFunnelEvent } from "@/ga";
 

@@ -12,7 +12,7 @@ import { globalStyle } from "@/styles";
 import { useAxiosInterceptor } from "@/apis";
 import { ToastPlaceholder, PrivateRouteLayout, ModalPlaceholder, ErrorBoundary } from "@/components";
 
-import { AppPropsWithLayout } from "./index/type";
+import { AppPropsWithLayout } from "../types/nextPageWithLayoutType";
 import { PROTECTED_ROUTE_ARR } from "./index/constant";
 
 if (typeof window !== "undefined" && !window.location.href.includes("localhost")) {

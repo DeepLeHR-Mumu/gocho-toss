@@ -14,9 +14,7 @@ import { SharedTextLink } from "shared-ui/business/sharedTextLink";
 import { useFactoryArr, factoryArrKeyObj } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 
-import { DeleteInputButton } from "../../component/deleteInputButton";
-import { AddFieldButton } from "../../component/addFieldButton";
-import { GuideChip } from "../../component/guideChip";
+import { DeleteInputButton, AddFieldButton, GuideChip } from "../../component";
 import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
 import { PositionWorkInfoPartProps } from "./type";
 import { ROTATION_ARR, PLACE_TYPE_ARR, CERTI_ARR, PREFERRED_ETC_GUIDE_ARR } from "./constant";

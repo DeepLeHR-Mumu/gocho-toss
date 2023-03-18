@@ -18,9 +18,8 @@ import {
 
 import { cssObj } from "./style";
 import { FactoryRegisterDef, RegisterPartProps } from "./type";
-import { FactoryBaseInfo } from "../../component/factoryBaseInfo";
-import { FactoryDetailInfo } from "../../component/factoryDetailInfo";
 import { defaultInput, FACTORY_MESSAGE_OBJ } from "./constant";
+import { FactoryBaseInfo, FactoryDetailInfo } from "../../component";
 
 export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingIndex, setEditingIndex }) => {
   const isLoading = useRef(false);

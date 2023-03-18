@@ -1,15 +1,17 @@
 import {
   sharedAllLocalStorageItem,
-  sharedAllSessionStorageItem,
   sharedClearLocalStorageItem,
-  sharedClearSessionStorageItem,
   sharedGetLocalStorageItem,
-  sharedGetSessionStorageItem,
   sharedRemoveLocalStorage,
-  sharedRemoveSessionStorage,
   sharedSetLocalStorageItem,
+} from "../storage/localStorage";
+import {
+  sharedAllSessionStorageItem,
+  sharedClearSessionStorageItem,
+  sharedGetSessionStorageItem,
+  sharedRemoveSessionStorage,
   sharedSetSessionStorageItem,
-} from "../storage";
+} from "../storage/sessionStorage";
 
 describe("로컬스토리지 함수 테스트", () => {
   beforeEach(() => {

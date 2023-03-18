@@ -1,11 +1,10 @@
 import { ReactElement, useEffect } from "react";
 
-import { NextPageWithLayout } from "@/pages/index/type";
+import { NextPageWithLayout } from "@/types";
 import { GlobalLayout, PageLayout, CompanyInfoPart } from "@/components";
 
 import { jdListPageFunnelEvent } from "@/ga";
-import { ListPart } from "./part/listPart";
-import { HeaderPart } from "./part/headerPart";
+import { ListPart, HeaderPart } from "./part";
 import { cssObj } from "./style";
 
 const JdListPage: NextPageWithLayout = () => {

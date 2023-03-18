@@ -11,8 +11,7 @@ import { NUMBER_REGEXP } from "shared-constant";
 import { useCompanyDetail } from "@/apis";
 import { useUserState } from "@/globalStates";
 
-import { FindAddressButton } from "../../component/findAddressButton";
-import { KakaoMap } from "../../component/kakaoMap";
+import { FindAddressButton, KakaoMap } from "../../component";
 
 import { MAX_LENGTH_ERROR_TEXT, ONLY_INT_ERROR_TEXT } from "./constant";
 import { BasicPartProps } from "./type";
