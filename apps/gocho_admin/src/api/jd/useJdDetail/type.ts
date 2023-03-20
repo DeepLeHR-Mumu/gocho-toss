@@ -72,9 +72,7 @@ export interface ResponseObjDef {
 
 export const jdDetailKeyObj = {
   all: [{ data: "jdDetail" }] as const,
-  detail: (requestObj: RequestObjDef) => {
-    return [{ data: "jdDetail", requestObj }] as const;
-  },
+  detail: (requestObj: RequestObjDef) => [{ data: "jdDetail", requestObj }] as const,
 };
 
 export interface GetJdDetailDef {

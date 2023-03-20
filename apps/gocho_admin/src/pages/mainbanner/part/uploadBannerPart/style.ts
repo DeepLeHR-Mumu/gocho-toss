@@ -7,17 +7,15 @@ export const sectionContainer = css`
   background-color: ${COLORS.BLUE_SECOND90};
 `;
 
-export const inputBox = (isSmall: boolean) => {
-  return css`
-    width: ${isSmall ? "6rem" : "25%"};
-    border-radius: 0.5rem;
-    border: 1px solid ${COLORS.GRAY70};
-    background-color: ${COLORS.GRAY100};
-    height: 2rem;
-    padding: 0.25rem 0.5rem;
-    margin-right: 1rem;
-  `;
-};
+export const inputBox = (isSmall: boolean) => css`
+  width: ${isSmall ? "6rem" : "25%"};
+  border-radius: 0.5rem;
+  border: 1px solid ${COLORS.GRAY70};
+  background-color: ${COLORS.GRAY100};
+  height: 2rem;
+  padding: 0.25rem 0.5rem;
+  margin-right: 1rem;
+`;
 
 export const inputContainer = css`
   display: flex;

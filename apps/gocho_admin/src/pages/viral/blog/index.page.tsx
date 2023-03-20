@@ -2,9 +2,9 @@ import type { NextPage } from "next";
 
 import { dateConverter } from "shared-util";
 
-import { useJdArr } from "@api/jd/useJdArr";
-import { mainContainer, pageTitle } from "@style/commonStyles";
-import { LoadingScreen, ErrorScreen } from "@component/screen";
+import { useJdArr } from "@/api/jd/useJdArr";
+import { mainContainer, pageTitle } from "@/style/commonStyles";
+import { LoadingScreen, ErrorScreen } from "@/component/global/screen";
 
 import { JobDef } from "../type";
 import { sectionContainer, sectionTitle, buttonContainer, naverButton, jdButton } from "./style";
@@ -124,13 +124,7 @@ const Blog: NextPage = () => {
       <section css={sectionContainer}>
         <h3 css={sectionTitle}>오늘의 공고</h3>
         <div css={buttonContainer}>
-          <button
-            css={jdButton}
-            type="button"
-            onClick={() => {
-              return copyViral(jdDataArr.jdDataArr);
-            }}
-          >
+          <button css={jdButton} type="button" onClick={() => copyViral(jdDataArr.jdDataArr)}>
             오늘의 공고 복사하기
           </button>
         </div>
@@ -139,22 +133,10 @@ const Blog: NextPage = () => {
       <section css={sectionContainer}>
         <h3 css={sectionTitle}>네이버 블로그</h3>
         <div css={buttonContainer}>
-          <button
-            css={naverButton}
-            type="button"
-            onClick={() => {
-              return copyBlogTodayJob(jdDataArr.jdDataArr);
-            }}
-          >
+          <button css={naverButton} type="button" onClick={() => copyBlogTodayJob(jdDataArr.jdDataArr)}>
             오늘의 채용공고 복사하기
           </button>
-          <button
-            css={naverButton}
-            type="button"
-            onClick={() => {
-              return copyBlogTag(jdDataArr.jdDataArr);
-            }}
-          >
+          <button css={naverButton} type="button" onClick={() => copyBlogTag(jdDataArr.jdDataArr)}>
             태그 복사하기
           </button>
         </div>

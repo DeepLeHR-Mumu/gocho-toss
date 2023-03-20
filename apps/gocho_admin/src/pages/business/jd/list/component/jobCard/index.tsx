@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { dateConverter } from "shared-util";
 
-import { BUSINESS_JD_EDIT_URL, BUSINESS_JD_REGISTER_URL } from "@constant/internalURL";
+import { BUSINESS_JD_EDIT_URL, BUSINESS_JD_REGISTER_URL } from "@/constant/internalURL";
 
 import { JobCardProps } from "./type";
 import { cssObj } from "./style";
@@ -20,13 +20,11 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
         <p css={cssObj.jobTitle}>{job.title}</p>
       </td>
       <td css={cssObj.taskContainer}>
-        {job.taskArr.map((task) => {
-          return (
-            <p key={`${job.id}${task}`} css={cssObj.taskBox}>
-              {task}
-            </p>
-          );
-        })}
+        {job.taskArr.map((task) => (
+          <p key={`${job.id}${task}`} css={cssObj.taskBox}>
+            {task}
+          </p>
+        ))}
       </td>
       <td css={cssObj.dateBox}>
         {startYear}-{startMonth}-{startDate}

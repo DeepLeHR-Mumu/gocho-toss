@@ -8,7 +8,7 @@ import { LinkButton } from "shared-ui/common/atom/button/linkButton";
 import { NormalButton } from "shared-ui/common/atom/button/normalButton";
 import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
 
-import { MAIN_URL, LOGIN_URL } from "@constant/internalURL";
+import { MAIN_URL, LOGIN_URL } from "@/constant/internalURL";
 
 import { cssObj } from "./style";
 

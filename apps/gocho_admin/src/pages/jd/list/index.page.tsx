@@ -1,17 +1,16 @@
-import type { NextPage } from "next";
 import { useRouter } from "next/router";
+import { ReactElement } from "react";
 
-import { useJdArr } from "@api/jd/useJdArr";
-import { Layout } from "@component/layout";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
-import { BottomPagination } from "@component/bottomPagination";
-import { JD_LIST_URL } from "@constant/internalURL";
+import { useJdArr } from "@/api/jd/useJdArr";
+import { JD_LIST_URL } from "@/constant/internalURL";
+import { GlobalLayout, PageLayout, ErrorScreen, LoadingScreen, Pagination } from "@/component";
+import type { NextPageWithLayout } from "@/types";
 
 import { JD_SEARCH_LIMIT } from "./constant";
 import JobCard from "./component/jobCard";
 import { cssObj } from "./style";
 
-const JdList: NextPage = () => {
+const JdList: NextPageWithLayout = () => {
   const router = useRouter();
 
   const {
@@ -38,7 +37,7 @@ const JdList: NextPage = () => {
 
   return (
     <main css={cssObj.wrapper}>
-      <Layout>
+      <PageLayout>
         <h2 css={cssObj.title}>공고 목록</h2>
         <section css={cssObj.container}>
           <ul css={cssObj.thead}>
@@ -48,15 +47,17 @@ const JdList: NextPage = () => {
             <li>채용기간</li>
           </ul>
           <ul css={cssObj.tbody}>
-            {jobDataObj.jdDataArr.map((job) => {
-              return <JobCard key={`ManagerJobCard${job.id}`} job={job} />;
-            })}
+            {jobDataObj.jdDataArr.map((job) => (
+              <JobCard key={`ManagerJobCard${job.id}`} job={job} />
+            ))}
           </ul>
         </section>
-        <BottomPagination totalPage={totalPage} url={JD_LIST_URL} />
-      </Layout>
+        <Pagination totalPage={totalPage} url={JD_LIST_URL} />
+      </PageLayout>
     </main>
   );
 };
+
+JdList.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default JdList;

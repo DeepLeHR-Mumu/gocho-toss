@@ -5,12 +5,12 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { jdArrKeyObj } from "@api/jd/useJdArr/type";
-import { useJdDetail } from "@api/jd/useJdDetail";
-import { useAcceptJd } from "@api/jd/useAcceptJd";
-import { useRejectJd } from "@api/jd/useRejectJd";
-import { mainContainer, pageTitle } from "@style/commonStyles";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
+import { jdArrKeyObj } from "@/api/jd/useJdArr/type";
+import { useJdDetail } from "@/api/jd/useJdDetail";
+import { useAcceptJd } from "@/api/jd/useAcceptJd";
+import { useRejectJd } from "@/api/jd/useRejectJd";
+import { mainContainer, pageTitle } from "@/style/commonStyles";
+import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
 
 import { JdPart } from "./part/jdPart";
 import { cssObj } from "./style";

@@ -4,10 +4,10 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
 import { NormalButton } from "shared-ui/common/atom/button/normalButton";
 
-import { useFindCompany } from "@api/company/useFindCompany";
-import { useAddJd } from "@api/jd/useAddJd";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
-import { Layout } from "@component/layout";
+import { useFindCompany } from "@/api/company/useFindCompany";
+import { useAddJd } from "@/api/jd/useAddJd";
+import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
+import { PageLayout } from "@/component/global/layout/pageLayout";
 
 import { CommonDataPart } from "./part/commonDataPart";
 import { PositionRequiredDataPart } from "./part/positionRequiredDataPart";
@@ -62,7 +62,7 @@ const JdUpload: NextPage = () => {
 
   return (
     <main css={cssObj.wrapper}>
-      <Layout>
+      <PageLayout>
         <h2 css={cssObj.title}>공고 업로드</h2>
         <p css={cssObj.infoDesc}>
           <span>필수 작성칸</span> <span>필수 작성아님</span>
@@ -74,15 +74,13 @@ const JdUpload: NextPage = () => {
             setSearchWord={setSearchWord}
           />
           <ul css={cssObj.fieldArrCSS}>
-            {fields.map((item, index) => {
-              return (
-                <li key={item.id}>
-                  <PositionRequiredDataPart id={item.id} index={index} jobForm={jobForm} />
-                  <PositionTaskDataPart id={item.id} index={index} jobForm={jobForm} />
-                  <PositionEtcDataPart id={item.id} index={index} jobForm={jobForm} append={append} remove={remove} />
-                </li>
-              );
-            })}
+            {fields.map((item, index) => (
+              <li key={item.id}>
+                <PositionRequiredDataPart id={item.id} index={index} jobForm={jobForm} />
+                <PositionTaskDataPart id={item.id} index={index} jobForm={jobForm} />
+                <PositionEtcDataPart id={item.id} index={index} jobForm={jobForm} append={append} remove={remove} />
+              </li>
+            ))}
           </ul>
           {checkMsg && <p css={cssObj.warning}>{checkMsg}</p>}
           <div css={cssObj.buttonBox}>
@@ -98,7 +96,7 @@ const JdUpload: NextPage = () => {
             <NormalButton isSubmit wide={false} text="공고 등록하기" variant="filled" />
           </div>
         </form>
-      </Layout>
+      </PageLayout>
     </main>
   );
 };

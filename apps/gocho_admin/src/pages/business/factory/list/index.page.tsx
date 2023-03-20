@@ -2,11 +2,11 @@ import type { NextPage } from "next";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-import { useFactoryArr } from "@api/factory/useFactoryArr";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
-import { BottomPagination } from "@component/bottomPagination";
-import { BUSINESS_FACTORY_LIST_URL } from "@constant/internalURL";
-import { mainContainer, pageTitle } from "@style/commonStyles";
+import { useFactoryArr } from "@/api/factory/useFactoryArr";
+import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
+import { Pagination } from "@/component";
+import { BUSINESS_FACTORY_LIST_URL } from "@/constant/internalURL";
+import { mainContainer, pageTitle } from "@/style/commonStyles";
 
 import FactoryCard from "./component/factoryCard";
 import { FACTORY_SEARCH_LIMIT } from "./constant";
@@ -36,9 +36,7 @@ const BusinessFactoryList: NextPage = () => {
   }
 
   const changeFactoryStatusHandler = () => {
-    setFactoryStatus((prev) => {
-      return prev === "upload-waiting" ? "modify-waiting" : "upload-waiting";
-    });
+    setFactoryStatus((prev) => (prev === "upload-waiting" ? "modify-waiting" : "upload-waiting"));
   };
 
   const totalPage = Math.ceil(factoryDataObj.count / FACTORY_SEARCH_LIMIT);
@@ -68,13 +66,13 @@ const BusinessFactoryList: NextPage = () => {
             </tr>
           </thead>
           <tbody>
-            {factoryDataObj.factoryDataArr.map((factory) => {
-              return <FactoryCard factory={factory} key={`ManagerBizFactoryCard${factory.id}`} />;
-            })}
+            {factoryDataObj.factoryDataArr.map((factory) => (
+              <FactoryCard factory={factory} key={`ManagerBizFactoryCard${factory.id}`} />
+            ))}
           </tbody>
         </table>
       </section>
-      <BottomPagination totalPage={totalPage} url={BUSINESS_FACTORY_LIST_URL} />
+      <Pagination totalPage={totalPage} url={BUSINESS_FACTORY_LIST_URL} />
     </main>
   );
 };

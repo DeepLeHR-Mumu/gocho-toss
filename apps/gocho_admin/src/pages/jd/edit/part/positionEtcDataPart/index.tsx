@@ -82,9 +82,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
             </div>
             <div css={cssObj.flexBox}>
               {certificateArr
-                .filter((prevCerti) => {
-                  return prevCerti.includes(certiSearchWord);
-                })
+                .filter((prevCerti) => prevCerti.includes(certiSearchWord))
                 .map((certi) => {
                   if (certiSearchWord === "") return null;
                   return (
@@ -99,46 +97,35 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
                 })}
             </div>
             <div css={cssObj.flexBox}>
-              {jobForm.watch("position_arr")[index].preferred_certi_arr?.map((certi) => {
-                return (
-                  <button
-                    key={`${id}${certi}`}
-                    css={cssObj.deleteButton}
-                    type="button"
-                    aria-label={`${certi} 삭제`}
-                    onClick={() => {
-                      jobForm.setValue(`position_arr.${index}.preferred_certi_arr`, [
-                        ...(jobForm.watch("position_arr")[index].preferred_certi_arr?.filter((element) => {
-                          return element !== certi;
-                        }) || []),
-                      ]);
-                    }}
-                  >
-                    {certi} <RiCloseFill />
-                  </button>
-                );
-              })}
+              {jobForm.watch("position_arr")[index].preferred_certi_arr?.map((certi) => (
+                <button
+                  key={`${id}${certi}`}
+                  css={cssObj.deleteButton}
+                  type="button"
+                  aria-label={`${certi} 삭제`}
+                  onClick={() => {
+                    jobForm.setValue(`position_arr.${index}.preferred_certi_arr`, [
+                      ...(jobForm
+                        .watch("position_arr")
+                        [index].preferred_certi_arr?.filter((element) => element !== certi) || []),
+                    ]);
+                  }}
+                >
+                  {certi} <RiCloseFill />
+                </button>
+              ))}
             </div>
           </li>
         </ul>
       </div>
       <div css={cssObj.buttonBox}>
         <NormalButton
-          buttonClick={() => {
-            return append({ ...jobForm.watch("position_arr")[index], id: null });
-          }}
+          buttonClick={() => append({ ...jobForm.watch("position_arr")[index], id: null })}
           text="해당 직무 복사"
           wide={false}
           variant="outlined"
         />
-        <NormalButton
-          buttonClick={() => {
-            return remove(index);
-          }}
-          text="해당 직무 제거"
-          wide={false}
-          variant="filled"
-        />
+        <NormalButton buttonClick={() => remove(index)} text="해당 직무 제거" wide={false} variant="filled" />
       </div>
     </div>
   );

@@ -2,11 +2,11 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-import { useJdArr } from "@api/jd/useJdArr";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
-import { BottomPagination } from "@component/bottomPagination";
-import { BUSINESS_JD_LIST_URL } from "@constant/internalURL";
-import { mainContainer, pageTitle } from "@style/commonStyles";
+import { useJdArr } from "@/api/jd/useJdArr";
+import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
+import { Pagination } from "@/component";
+import { BUSINESS_JD_LIST_URL } from "@/constant/internalURL";
+import { mainContainer, pageTitle } from "@/style/commonStyles";
 
 import JobCard from "./component/jobCard";
 import { JD_SEARCH_LIMIT } from "./constant";
@@ -36,9 +36,7 @@ const BusinessJdList: NextPage = () => {
   }
 
   const changeJdStatusHandler = () => {
-    setJdStatus((prev) => {
-      return prev === "upload-waiting" ? "modify-waiting" : "upload-waiting";
-    });
+    setJdStatus((prev) => (prev === "upload-waiting" ? "modify-waiting" : "upload-waiting"));
   };
 
   const totalPage = Math.ceil(jobDataObj.count / JD_SEARCH_LIMIT);
@@ -69,13 +67,13 @@ const BusinessJdList: NextPage = () => {
             </tr>
           </thead>
           <tbody>
-            {jobDataObj.jdDataArr.map((job) => {
-              return <JobCard key={`ManagerBizJobCard${job.id}`} job={job} />;
-            })}
+            {jobDataObj.jdDataArr.map((job) => (
+              <JobCard key={`ManagerBizJobCard${job.id}`} job={job} />
+            ))}
           </tbody>
         </table>
       </section>
-      <BottomPagination totalPage={totalPage} url={BUSINESS_JD_LIST_URL} />
+      <Pagination totalPage={totalPage} url={BUSINESS_JD_LIST_URL} />
     </main>
   );
 };

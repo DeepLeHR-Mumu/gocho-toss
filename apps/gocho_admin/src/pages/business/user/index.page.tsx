@@ -2,10 +2,10 @@ import { NextPage } from "next";
 import { useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { mainContainer, pageTitle } from "@style/commonStyles";
-import { useAddRecruiter } from "@api/recruiter/useAddRecruiter";
-import { useFindCompany } from "@api/company/useFindCompany";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
+import { mainContainer, pageTitle } from "@/style/commonStyles";
+import { useAddRecruiter } from "@/api/recruiter/useAddRecruiter";
+import { useFindCompany } from "@/api/company/useFindCompany";
+import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
 
 import { cssObj } from "./style";
 import { RecruiterFormValues } from "./type";
@@ -68,13 +68,11 @@ const BusinessUser: NextPage = () => {
               {...register("company_id", { valueAsNumber: true, required: "필수 항목입니다." })}
             >
               <option value="">기업 선택 ▼</option>
-              {companyDataObj.companyDataArr.map((company) => {
-                return (
-                  <option key={company.name} value={company.id}>
-                    {company.name}
-                  </option>
-                );
-              })}
+              {companyDataObj.companyDataArr.map((company) => (
+                <option key={company.name} value={company.id}>
+                  {company.name}
+                </option>
+              ))}
             </select>
           </div>
           <p css={cssObj.errorMessage}>{formState.errors.company_id && formState.errors.company_id.message}</p>

@@ -18,15 +18,11 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
 
   const deletePlaceHandler = (place: string) => {
     setValue(`position_arr.${index}.place.address_arr`, [
-      ...(watch("position_arr")[index].place.address_arr?.filter((element) => {
-        return element !== place;
-      }) || []),
+      ...(watch("position_arr")[index].place.address_arr?.filter((element) => element !== place) || []),
     ]);
   };
 
-  const mainTask = taskArr.find((task) => {
-    return watch("position_arr")[index].task_main === task.mainTask;
-  });
+  const mainTask = taskArr.find((task) => watch("position_arr")[index].task_main === task.mainTask);
 
   return (
     <div css={cssObj.wrapper}>
@@ -35,18 +31,16 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
           <li>
             <strong css={cssObj.requiredTitle}>계약 형태</strong>
             <div css={cssObj.flexBox}>
-              {contractTypeArr.map((contractName) => {
-                return (
-                  <SharedRadioButton
-                    key={`${contractName}${index}`}
-                    registerObj={jobForm.register(`position_arr.${index}.contract_type`)}
-                    value={contractName}
-                    id={`${contractName}${index}`}
-                  >
-                    <p css={cssObj.radioDesc}>{contractName}</p>
-                  </SharedRadioButton>
-                );
-              })}
+              {contractTypeArr.map((contractName) => (
+                <SharedRadioButton
+                  key={`${contractName}${index}`}
+                  registerObj={jobForm.register(`position_arr.${index}.contract_type`)}
+                  value={contractName}
+                  id={`${contractName}${index}`}
+                >
+                  <p css={cssObj.radioDesc}>{contractName}</p>
+                </SharedRadioButton>
+              ))}
             </div>
           </li>
           <li>
@@ -67,16 +61,14 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
           <li>
             <strong css={cssObj.noRequiredTitle}>교대 형태</strong>
             <div css={cssObj.flexBox}>
-              {rotationArr.map((rotation) => {
-                return (
-                  <CheckBoxWithDesc
-                    registerObj={{ ...jobForm.register(`position_arr.${index}.rotation_arr`) }}
-                    key={`${id}${rotation.data}`}
-                    desc={rotation.name}
-                    id={`${id}${rotation.data}`}
-                  />
-                );
-              })}
+              {rotationArr.map((rotation) => (
+                <CheckBoxWithDesc
+                  registerObj={{ ...jobForm.register(`position_arr.${index}.rotation_arr`) }}
+                  key={`${id}${rotation.data}`}
+                  desc={rotation.name}
+                  id={`${id}${rotation.data}`}
+                />
+              ))}
             </div>
           </li>
           <li>
@@ -95,13 +87,11 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                 <option value="" disabled>
                   근무지 종류 선택 ▼
                 </option>
-                {placeTypeArr.map((placeType) => {
-                  return (
-                    <option key={`${id}${placeType}`} value={placeType}>
-                      {placeType}
-                    </option>
-                  );
-                })}
+                {placeTypeArr.map((placeType) => (
+                  <option key={`${id}${placeType}`} value={placeType}>
+                    {placeType}
+                  </option>
+                ))}
               </select>
             </div>
           </li>
@@ -117,13 +107,11 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                   }}
                 >
                   <option value="">도/시 선택 ▼</option>
-                  {placeArr.map((place) => {
-                    return (
-                      <option key={`${id}${place}`} value={place}>
-                        {place}
-                      </option>
-                    );
-                  })}
+                  {placeArr.map((place) => (
+                    <option key={`${id}${place}`} value={place}>
+                      {place}
+                    </option>
+                  ))}
                 </select>
                 <input
                   css={cssObj.inputCSS}
@@ -155,9 +143,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                       css={cssObj.placeButtonCSS}
                       key={key}
                       type="button"
-                      onClick={() => {
-                        return deletePlaceHandler(place);
-                      }}
+                      onClick={() => deletePlaceHandler(place)}
                     >
                       {place} <RiCloseFill />
                     </button>
@@ -180,34 +166,30 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
             <div>
               <strong css={cssObj.subTitle}>1차직무 선택</strong>
               <div css={cssObj.flexBox}>
-                {taskArr.map((task) => {
-                  return (
-                    <SharedRadioButton
-                      key={`${id}${task.mainTask}`}
-                      registerObj={{ ...jobForm.register(`position_arr.${index}.task_main`, { required: true }) }}
-                      value={task.mainTask}
-                      id={`${id}${task.mainTask}`}
-                    >
-                      <p css={cssObj.radioDesc}>{task.mainTask}</p>
-                    </SharedRadioButton>
-                  );
-                })}
+                {taskArr.map((task) => (
+                  <SharedRadioButton
+                    key={`${id}${task.mainTask}`}
+                    registerObj={{ ...jobForm.register(`position_arr.${index}.task_main`, { required: true }) }}
+                    value={task.mainTask}
+                    id={`${id}${task.mainTask}`}
+                  >
+                    <p css={cssObj.radioDesc}>{task.mainTask}</p>
+                  </SharedRadioButton>
+                ))}
               </div>
             </div>
             <div>
               <strong css={cssObj.subTitle}>2차직무 선택</strong>
               <p css={cssObj.textareaWarning}>중복선택이 가능합니다.</p>
               <div css={cssObj.flexBox}>
-                {mainTask?.subTaskArr.map((subTask) => {
-                  return (
-                    <CheckBoxWithDesc
-                      key={`${id}${subTask}`}
-                      registerObj={{ ...jobForm.register(`position_arr.${index}.task_sub_arr`, { required: true }) }}
-                      desc={subTask}
-                      id={subTask}
-                    />
-                  );
-                })}
+                {mainTask?.subTaskArr.map((subTask) => (
+                  <CheckBoxWithDesc
+                    key={`${id}${subTask}`}
+                    registerObj={{ ...jobForm.register(`position_arr.${index}.task_sub_arr`, { required: true }) }}
+                    desc={subTask}
+                    id={subTask}
+                  />
+                ))}
               </div>
             </div>
           </li>

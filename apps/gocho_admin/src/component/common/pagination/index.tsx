@@ -3,10 +3,10 @@ import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from "
 import { useRouter } from "next/router";
 
 import { dummyArrCreator } from "shared-util";
-import { BottomPaginationProps } from "./type";
+import { PaginationProps } from "./type";
 import { paginationContainer, movePageButton, paginationBox, paginationButton } from "./style";
 
-export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ q, url, totalPage }) => {
+export const Pagination: FunctionComponent<PaginationProps> = ({ q, url, totalPage }) => {
   const router = useRouter();
   const currentPageNumber = Number(router.query.page);
   const count = Math.floor(currentPageNumber / 10);
@@ -77,7 +77,7 @@ export const BottomPagination: FunctionComponent<BottomPaginationProps> = ({ q, 
                 </button>
               </li>
             );
-          return <li key={`bottomPagination${pageIndex}`} />;
+          return <li key={`Pagination${pageIndex}`} />;
         })}
       </ul>
 

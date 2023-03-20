@@ -28,9 +28,7 @@ export interface ResponseObjDef {
 
 export const factoryDetailKeyObj = {
   all: [{ data: "factoryDetail" }] as const,
-  detail: (requestObj: RequestObjDef) => {
-    return [{ data: "factoryDetail", requestObj }] as const;
-  },
+  detail: (requestObj: RequestObjDef) => [{ data: "factoryDetail", requestObj }] as const,
 };
 
 export interface GetFactoryDetailDef {

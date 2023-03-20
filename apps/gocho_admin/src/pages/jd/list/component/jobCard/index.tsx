@@ -6,9 +6,9 @@ import { dateConverter } from "shared-util";
 import { NormalButton } from "shared-ui/common/atom/button/normalButton";
 import { LinkButton } from "shared-ui/common/atom/button/linkButton";
 
-import { useDeleteJd } from "@api/jd/useDeleteJd";
-import { useEndJd } from "@api/jd/useEndJd";
-import { JD_EDIT_URL } from "@constant/internalURL";
+import { useDeleteJd } from "@/api/jd/useDeleteJd";
+import { useEndJd } from "@/api/jd/useEndJd";
+import { JD_EDIT_URL } from "@/constant/internalURL";
 
 import { JobCardProps } from "./type";
 import { cssObj } from "./style";
@@ -53,43 +53,25 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
           {job.title}
         </li>
         <li css={cssObj.taskBox}>
-          {job.taskArr.map((task) => {
-            return (
-              <span css={cssObj.task} key={`${job.id}${task}`}>
-                {task}
-              </span>
-            );
-          })}
+          {job.taskArr.map((task) => (
+            <span css={cssObj.task} key={`${job.id}${task}`}>
+              {task}
+            </span>
+          ))}
         </li>
         <li css={cssObj.leftDesc}>
           <span css={cssObj.startDateCSS}>
             {startYear}.{startMonth}.{startDate}
           </span>
-          <span css={cssObj.endDateCSS}>
-            {endYear}.{endMonth}.{endDate}
-          </span>
+          <span css={cssObj.endDateCSS}>{endYear === 9999 ? "상시공고" : `${endYear}.${endMonth}.${endDate}`}</span>
         </li>
         <li css={cssObj.flexBox}>
           <a href={job.applyUrl} css={cssObj.applyButton} target="_blank" rel="noopener noreferrer">
             채용 링크
           </a>
-          <NormalButton
-            text="마감"
-            wide={false}
-            variant="filled"
-            buttonClick={() => {
-              return endJobHandler(job.id);
-            }}
-          />
+          <NormalButton text="마감" wide={false} variant="filled" buttonClick={() => endJobHandler(job.id)} />
           <LinkButton linkTo={`${JD_EDIT_URL}/?id=${job.id}`} text="수정" wide={false} variant="outlined" />
-          <NormalButton
-            text="삭제"
-            wide={false}
-            variant="text"
-            buttonClick={() => {
-              return deleteJobHandler(job.id);
-            }}
-          />
+          <NormalButton text="삭제" wide={false} variant="text" buttonClick={() => deleteJobHandler(job.id)} />
         </li>
       </ul>
     </li>

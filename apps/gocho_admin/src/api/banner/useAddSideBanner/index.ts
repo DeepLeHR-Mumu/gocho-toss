@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "@api/useAxiosInterceptor";
+import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { PostSideBannerDef, RequestObjDef, useAddSideBannerProps } from "./type";
 
@@ -12,6 +12,5 @@ export const postAddSideBanner: PostSideBannerDef = async (requestObj) => {
   return data;
 };
 
-export const useAddSideBanner: useAddSideBannerProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: postAddSideBanner });
-};
+export const useAddSideBanner: useAddSideBannerProps = () =>
+  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: postAddSideBanner });

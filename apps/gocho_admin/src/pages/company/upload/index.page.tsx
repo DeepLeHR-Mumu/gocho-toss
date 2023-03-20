@@ -2,8 +2,8 @@ import { useState } from "react";
 import type { NextPage } from "next";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
-import { useAddCompany } from "@api/company/useAddCompany";
-import { mainContainer, pageTitle } from "@style/commonStyles";
+import { useAddCompany } from "@/api/company/useAddCompany";
+import { mainContainer, pageTitle } from "@/style/commonStyles";
 
 import { FactoryBox } from "./component/factoryBox";
 import { BasicInfoPart } from "./part/basicInfoPart";
@@ -70,9 +70,9 @@ const CompanyUpload: NextPage = () => {
         <WelfareInfoPart register={register} />
         <PayInfoPart register={register} />
         <ul>
-          {fields.map((item, index) => {
-            return <FactoryBox key={item.id} index={index} companyForm={companyForm} remove={remove} />;
-          })}
+          {fields.map((item, index) => (
+            <FactoryBox key={item.id} index={index} companyForm={companyForm} remove={remove} />
+          ))}
         </ul>
         <button
           css={addFactoryButton}

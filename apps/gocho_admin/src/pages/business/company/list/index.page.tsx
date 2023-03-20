@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { useCompanyArr } from "@api/company/useCompanyArr";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
-import { BottomPagination } from "@component/bottomPagination";
-import { BUSINESS_COMPANY_LIST_URL } from "@constant/internalURL";
-import { mainContainer, pageTitle } from "@style/commonStyles";
+import { useCompanyArr } from "@/api/company/useCompanyArr";
+import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
+import { Pagination } from "@/component/common/pagination";
+import { BUSINESS_COMPANY_LIST_URL } from "@/constant/internalURL";
+import { mainContainer, pageTitle } from "@/style/commonStyles";
 
 import CompanyCard from "./component/companyCard";
 import { COMPANY_SEARCH_LIMIT } from "./constant";
@@ -48,13 +48,13 @@ const BusinessCompanyList: NextPage = () => {
             </tr>
           </thead>
           <tbody>
-            {companyDataObj.companyDataArr.map((company) => {
-              return <CompanyCard key={`ManagerBizCompanyCard${company.id}`} company={company} />;
-            })}
+            {companyDataObj.companyDataArr.map((company) => (
+              <CompanyCard key={`ManagerBizCompanyCard${company.id}`} company={company} />
+            ))}
           </tbody>
         </table>
       </section>
-      <BottomPagination totalPage={totalPage} url={BUSINESS_COMPANY_LIST_URL} />
+      <Pagination totalPage={totalPage} url={BUSINESS_COMPANY_LIST_URL} />
     </main>
   );
 };

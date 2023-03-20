@@ -5,11 +5,11 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
 import { NormalButton } from "shared-ui/common/atom/button/normalButton";
 
-import { useFindCompany } from "@api/company/useFindCompany";
-import { useEditJd } from "@api/jd/useEditJd";
-import { useJdDetail } from "@api/jd/useJdDetail";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
-import { Layout } from "@component/layout";
+import { useFindCompany } from "@/api/company/useFindCompany";
+import { useEditJd } from "@/api/jd/useEditJd";
+import { useJdDetail } from "@/api/jd/useJdDetail";
+import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
+import { PageLayout } from "@/component/global/layout/pageLayout";
 
 import { CommonDataPart } from "./part/commonDataPart";
 import { PositionRequiredDataPart } from "./part/positionRequiredDataPart";
@@ -47,35 +47,33 @@ const JdEdit: NextPage = () => {
     const newStartTime = jobData?.startTime ? jobData.startTime + 540000 * 60 : 0;
     const newEndTime = jobData?.endTime ? jobData.endTime + 540000 * 60 : 0;
 
-    const positionNewArr = jobData?.positionArr.map((position) => {
-      return {
-        id: position.id,
-        middle: position.eduSummary.middle,
-        high: position.eduSummary.high,
-        college: position.eduSummary.college,
-        four: position.eduSummary.four,
-        required_exp: position.requiredExp.type,
-        min_year: position.requiredExp.minYear,
-        max_year: position.requiredExp.maxYear,
-        required_etc_arr: position.requiredEtcArr?.join("\n"),
-        contract_type: position.contractType.type,
-        conversion_rate: position.contractType.conversionRate,
-        task_main: position.task.mainTask,
-        task_sub_arr: position.task.subTaskArr,
-        task_detail_arr: position.taskDetailArr.join("\n"),
-        rotation_arr: position.rotationArr,
-        rotation_etc: position.rotationEtc,
-        place: {
-          type: position.place.type,
-          address_arr: position.place.addressArr || [],
-          etc: position.place.etc || "",
-        },
-        hire_number: position.hireCount,
-        pay_arr: position.payArr?.join("\n"),
-        preferred_certi_arr: position.preferredCertiArr,
-        preferred_etc_arr: position.preferredEtcArr?.join("\n"),
-      };
-    });
+    const positionNewArr = jobData?.positionArr.map((position) => ({
+      id: position.id,
+      middle: position.eduSummary.middle,
+      high: position.eduSummary.high,
+      college: position.eduSummary.college,
+      four: position.eduSummary.four,
+      required_exp: position.requiredExp.type,
+      min_year: position.requiredExp.minYear,
+      max_year: position.requiredExp.maxYear,
+      required_etc_arr: position.requiredEtcArr?.join("\n"),
+      contract_type: position.contractType.type,
+      conversion_rate: position.contractType.conversionRate,
+      task_main: position.task.mainTask,
+      task_sub_arr: position.task.subTaskArr,
+      task_detail_arr: position.taskDetailArr.join("\n"),
+      rotation_arr: position.rotationArr,
+      rotation_etc: position.rotationEtc,
+      place: {
+        type: position.place.type,
+        address_arr: position.place.addressArr || [],
+        etc: position.place.etc || "",
+      },
+      hire_number: position.hireCount,
+      pay_arr: position.payArr?.join("\n"),
+      preferred_certi_arr: position.preferredCertiArr,
+      preferred_etc_arr: position.preferredEtcArr?.join("\n"),
+    }));
 
     reset({
       company_id: jobData?.company.id,
@@ -116,7 +114,7 @@ const JdEdit: NextPage = () => {
 
   return (
     <main css={cssObj.wrapper}>
-      <Layout>
+      <PageLayout>
         <h2 css={cssObj.title}>공고 수정</h2>
         <p css={cssObj.infoDesc}>
           <span>필수 작성칸</span> <span>필수 작성아님</span>
@@ -130,15 +128,13 @@ const JdEdit: NextPage = () => {
               jobData={jobData}
             />
             <ul css={cssObj.fieldArrCSS}>
-              {fields.map((item, index) => {
-                return (
-                  <li key={item.id}>
-                    <PositionRequiredDataPart id={item.id} index={index} jobForm={jobForm} />
-                    <PositionTaskDataPart id={item.id} index={index} jobForm={jobForm} />
-                    <PositionEtcDataPart id={item.id} index={index} jobForm={jobForm} append={append} remove={remove} />
-                  </li>
-                );
-              })}
+              {fields.map((item, index) => (
+                <li key={item.id}>
+                  <PositionRequiredDataPart id={item.id} index={index} jobForm={jobForm} />
+                  <PositionTaskDataPart id={item.id} index={index} jobForm={jobForm} />
+                  <PositionEtcDataPart id={item.id} index={index} jobForm={jobForm} append={append} remove={remove} />
+                </li>
+              ))}
             </ul>
             {checkMsg && <p css={cssObj.warning}>{checkMsg}</p>}
             <div css={cssObj.buttonBox}>
@@ -155,7 +151,7 @@ const JdEdit: NextPage = () => {
             </div>
           </form>
         </section>
-      </Layout>
+      </PageLayout>
     </main>
   );
 };

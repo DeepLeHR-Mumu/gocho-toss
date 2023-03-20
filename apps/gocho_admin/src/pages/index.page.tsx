@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 
-import { useStatistics } from "@api/stat/useStatistics";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
-import { mainContainer, pageTitle } from "@style/commonStyles";
+import { useStatistics } from "@/api/stat/useStatistics";
+import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
+import { mainContainer, pageTitle } from "@/style/commonStyles";
 
 import UserDataPart from "./index/part/userDataPart";
 import WebsiteDataPart from "./index/part/websiteDataPart";

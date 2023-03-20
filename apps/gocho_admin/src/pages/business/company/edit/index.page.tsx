@@ -4,13 +4,13 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useCompanyDetail } from "@api/company/useCompanyDetail";
-import { useEditCompanyRequest } from "@api/company/useEditCompanyRequest";
-import { useAcceptCompany } from "@api/company/useAcceptCompany";
-import { useRejectCompany } from "@api/company/useRejectCompany";
-import { companyArrKeyObj } from "@api/company/useCompanyArr/type";
-import { mainContainer, pageTitle } from "@style/commonStyles";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
+import { useCompanyDetail } from "@/api/company/useCompanyDetail";
+import { useEditCompanyRequest } from "@/api/company/useEditCompanyRequest";
+import { useAcceptCompany } from "@/api/company/useAcceptCompany";
+import { useRejectCompany } from "@/api/company/useRejectCompany";
+import { companyArrKeyObj } from "@/api/company/useCompanyArr/type";
+import { mainContainer, pageTitle } from "@/style/commonStyles";
+import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
 
 import { CompanyPart } from "./part/companyPart";
 import { cssObj } from "./style";

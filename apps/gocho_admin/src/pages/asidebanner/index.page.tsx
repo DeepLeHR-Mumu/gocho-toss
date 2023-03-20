@@ -2,8 +2,8 @@ import type { NextPage } from "next";
 
 import { useBannerArr } from "shared-api/banner/useBannerArr";
 
-import { mainContainer } from "@style/commonStyles";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
+import { mainContainer } from "@/style/commonStyles";
+import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
 
 import { UploadBannerPart } from "./part/uploadBannerPart";
 import { BannerListPart } from "./part/bannerListPart";

@@ -63,9 +63,7 @@ export interface ResponseObjDef {
 
 export const companyDetailKeyObj = {
   all: [{ data: "companyDetail" }] as const,
-  detail: (requestObj: RequestObjDef) => {
-    return [{ data: "companyDetail", requestObj }] as const;
-  },
+  detail: (requestObj: RequestObjDef) => [{ data: "companyDetail", requestObj }] as const,
 };
 
 export interface GetCompanyDetailDef {

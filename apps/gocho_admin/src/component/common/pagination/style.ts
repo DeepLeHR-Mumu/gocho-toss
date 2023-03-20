@@ -31,14 +31,12 @@ export const movePageButton = css`
   }
 `;
 
-export const selectPageButton = (isCurrent = false) => {
-  return css`
-    color: ${isCurrent ? COLORS.GRAY10 : `${COLORS.GRAY60}`};
-    font-weight: 500;
-    font-size: 1rem;
-    padding: 0 1rem;
-  `;
-};
+export const selectPageButton = (isCurrent = false) => css`
+  color: ${isCurrent ? COLORS.GRAY10 : `${COLORS.GRAY60}`};
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0 1rem;
+`;
 
 export const paginationBox = css`
   display: flex;
@@ -50,11 +48,9 @@ interface PaginationButtonDef {
   (isActivePage: boolean): SerializedStyles;
 }
 
-export const paginationButton: PaginationButtonDef = (isActivePage) => {
-  return css`
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: ${isActivePage ? COLORS.GRAY10 : COLORS.GRAY60};
-    padding: 1rem;
-  `;
-};
+export const paginationButton: PaginationButtonDef = (isActivePage) => css`
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: ${isActivePage ? COLORS.GRAY10 : COLORS.GRAY60};
+  padding: 1rem;
+`;

@@ -58,18 +58,16 @@ export const PositionRequiredDataPart: FunctionComponent<PositionBoxProps> = ({ 
           <li>
             <strong css={cssObj.requiredTitle}>경력 조건</strong>
             <div css={cssObj.flexBox}>
-              {requiredExpArr.map((expName) => {
-                return (
-                  <SharedRadioButton
-                    key={`${expName}${id}`}
-                    registerObj={jobForm.register(`position_arr.${index}.required_exp`)}
-                    value={expName}
-                    id={`${expName}${index}`}
-                  >
-                    <p css={cssObj.radioDesc}>{expName}</p>
-                  </SharedRadioButton>
-                );
-              })}
+              {requiredExpArr.map((expName) => (
+                <SharedRadioButton
+                  key={`${expName}${id}`}
+                  registerObj={jobForm.register(`position_arr.${index}.required_exp`)}
+                  value={expName}
+                  id={`${expName}${index}`}
+                >
+                  <p css={cssObj.radioDesc}>{expName}</p>
+                </SharedRadioButton>
+              ))}
             </div>
           </li>
           <li>

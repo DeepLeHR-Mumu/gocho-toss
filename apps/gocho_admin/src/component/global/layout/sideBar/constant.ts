@@ -12,7 +12,7 @@ import {
   BUSINESS_JD_LIST_URL,
   BUSINESS_COMPANY_LIST_URL,
   BUSINESS_FACTORY_LIST_URL,
-} from "@constant/internalURL";
+} from "@/constant/internalURL";
 
 export const menuArr = [
   {

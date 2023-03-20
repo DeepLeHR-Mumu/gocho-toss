@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { subPageTitle } from "@style/commonStyles";
 import { COLORS } from "shared-style/color";
+import { subPageTitle } from "@/style/commonStyles";
 
 export const cssObj = {
   wrapper: css``,

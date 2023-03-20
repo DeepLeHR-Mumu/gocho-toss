@@ -5,8 +5,8 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { adminTokenDecryptor } from "shared-util";
 
-import { useDoLogin } from "@api/auth/useDoLogin";
-import { mainContainer } from "@style/commonStyles";
+import { useDoLogin } from "@/api/auth/useDoLogin";
+import { mainContainer } from "@/style/commonStyles";
 
 import { inputBox, inputContainer, inputTitle, title, submitButton } from "./style";
 import { LoginFormValues } from "./type";

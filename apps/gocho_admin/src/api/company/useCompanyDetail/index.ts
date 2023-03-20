@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { axiosNoTokenInstance } from "@api/useAxiosInterceptor";
+import { axiosNoTokenInstance } from "@/api/useAxiosInterceptor";
 
 import { companyDetailKeyObj, GetCompanyDetailDef, RequestObjDef } from "./type";
 import { companyDetailConverter } from "./util";
@@ -10,13 +10,10 @@ export const getCompanyDetail: GetCompanyDetailDef = async ({ queryKey: [{ reque
   return data;
 };
 
-export const useCompanyDetail = (requestObj: RequestObjDef) => {
-  return useQuery({
+export const useCompanyDetail = (requestObj: RequestObjDef) =>
+  useQuery({
     queryKey: companyDetailKeyObj.detail(requestObj),
     queryFn: getCompanyDetail,
     enabled: Boolean(requestObj.companyId),
-    select: (data) => {
-      return companyDetailConverter(data);
-    },
+    select: (data) => companyDetailConverter(data),
   });
-};
