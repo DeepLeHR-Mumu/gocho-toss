@@ -5,9 +5,7 @@ import { useFieldArray } from "react-hook-form";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 
-import { DeleteInputButton } from "../../component/deleteInputButton";
-import { AddFieldButton } from "../../component/addFieldButton";
-import { GuideChip } from "../../component/guideChip";
+import { DeleteInputButton, GuideChip, AddFieldButton } from "../../component";
 import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
 import { PositionRequiredInfoPartProps } from "./type";
 import { CONTRACT_TYPE_ARR, REQUIRED_EXP_ARR, REQUIRED_ETC_GUIDE_ARR } from "./constant";

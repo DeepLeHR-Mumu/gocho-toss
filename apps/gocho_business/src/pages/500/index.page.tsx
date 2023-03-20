@@ -4,9 +4,9 @@ import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
 import jobi_500 from "@/public/image/jobi_500.svg";
 
-import { NextPageWithLayout } from "@/pages/index/type";
-import { Footer, GlobalLayout } from "@/components/global/layout";
-import { unknownPageErrorEvent } from "@/ga/500";
+import { NextPageWithLayout } from "@/types";
+import { Footer, GlobalLayout } from "@/components";
+import { unknownPageErrorEvent } from "@/ga";
 
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";

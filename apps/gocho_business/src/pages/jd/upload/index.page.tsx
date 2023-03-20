@@ -7,7 +7,7 @@ import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 import { usePreventRouting } from "shared-hooks";
 
-import { useToast } from "@/globalStates/useToast";
+import { useToast } from "@/globalStates";
 import {
   jdUploadConfirmEvent,
   jdUploadDoneEvent,
@@ -15,19 +15,20 @@ import {
   jdUploadExitEvent,
   jdUploadFailEvent,
   jdUploadPageFunnelEvent,
-} from "@/ga/jdUpload";
-import type { NextPageWithLayout } from "@/pages/index/type";
-import { PageLayout, GlobalLayout } from "@/components/global/layout";
-import { useAddJd } from "@/apis/jd/useAddJd";
+} from "@/ga";
+import type { NextPageWithLayout } from "@/types";
+import { PageLayout, GlobalLayout } from "@/components";
+import { useAddJd } from "@/apis";
+import { INTERNAL_URL } from "@/constants";
 
-import { INTERNAL_URL } from "@/constants/url";
-import { HeaderPart } from "./part/headerPart";
-import { BasicInfoPart } from "./part/basicInfoPart";
-import { PositionHeaderPart } from "./part/positionHeaderPart";
-import { PositionTitleInfoPart } from "./part/positionTitleInfoPart";
-import { PositionRequiredInfoPart } from "./part/positionRequiredInfoPart";
-import { PositionWorkInfoPart } from "./part/positionWorkInfoPart";
-
+import {
+  HeaderPart,
+  BasicInfoPart,
+  PositionHeaderPart,
+  PositionTitleInfoPart,
+  PositionRequiredInfoPart,
+  PositionWorkInfoPart,
+} from "./part";
 import { JobFormValues } from "./type";
 import { BLANK_POSITION, JD_UPLOAD_MESSAGE_OBJ } from "./constant";
 import { getFieldArrayValue, getFieldArrayValueWithNull } from "./util";

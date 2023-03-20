@@ -6,8 +6,7 @@ import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 import { usePreventRouting } from "shared-hooks";
 
-import { useAddFactory } from "@/apis/factory/useAddFactory";
-import { useFactoryArr } from "@/apis/factory/useFactoryArr";
+import { useAddFactory, useFactoryArr } from "@/apis";
 import {
   factoryEditConfirmEvent,
   factoryEditDoneEvent,
@@ -15,13 +14,12 @@ import {
   factoryUploadConfirmEvent,
   factoryUploadDoneEvent,
   factoryUploadFailEvent,
-} from "@/ga/factoryList";
+} from "@/ga";
 
 import { cssObj } from "./style";
 import { FactoryRegisterDef, RegisterPartProps } from "./type";
-import { FactoryBaseInfo } from "../../component/factoryBaseInfo";
-import { FactoryDetailInfo } from "../../component/factoryDetailInfo";
 import { defaultInput, FACTORY_MESSAGE_OBJ } from "./constant";
+import { FactoryBaseInfo, FactoryDetailInfo } from "../../component";
 
 export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingIndex, setEditingIndex }) => {
   const isLoading = useRef(false);

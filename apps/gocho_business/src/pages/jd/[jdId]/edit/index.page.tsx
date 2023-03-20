@@ -9,7 +9,7 @@ import { COLORS } from "shared-style/color";
 import { Spinner } from "shared-ui/common/atom/spinner";
 import { usePreventRouting } from "shared-hooks";
 
-import { useToast } from "@/globalStates/useToast";
+import { useToast } from "@/globalStates";
 import {
   jdEditConfirmEvent,
   jdEditDoneEvent,
@@ -17,23 +17,20 @@ import {
   jdEditExitEvent,
   jdEditFailEvent,
   jdEditPageFunnelEvent,
-} from "@/ga/jdEdit";
-import type { NextPageWithLayout } from "@/pages/index/type";
-import { PageLayout, GlobalLayout } from "@/components/global/layout";
-import { useJdDetail } from "@/apis/jd/useJdDetail";
-import { useEditJd } from "@/apis/jd/useEditJd";
-import { useDeleteJd } from "@/apis/jd/useDeleteJd";
-import { useEndJd } from "@/apis/jd/useEndJd";
-import { jdArrKeyObj } from "@/apis/jd/useJdArr/type";
+} from "@/ga";
+import type { NextPageWithLayout } from "@/types";
+import { PageLayout, GlobalLayout } from "@/components";
+import { useJdDetail, useEditJd, useDeleteJd, useEndJd, jdArrKeyObj } from "@/apis";
+import { INTERNAL_URL } from "@/constants";
 
-import { INTERNAL_URL } from "@/constants/url";
-import { HeaderPart } from "./part/headerPart";
-import { BasicInfoPart } from "./part/basicInfoPart";
-import { PositionHeaderPart } from "./part/positionHeaderPart";
-import { PositionTitleInfoPart } from "./part/positionTitleInfoPart";
-import { PositionRequiredInfoPart } from "./part/positionRequiredInfoPart";
-import { PositionWorkInfoPart } from "./part/positionWorkInfoPart";
-
+import {
+  PositionRequiredInfoPart,
+  HeaderPart,
+  BasicInfoPart,
+  PositionHeaderPart,
+  PositionTitleInfoPart,
+  PositionWorkInfoPart,
+} from "./part";
 import { JdFormValues } from "./type";
 import { BLANK_POSITION, JD_EDIT_MESSAGE_OBJ, ROTATION_ARR } from "./constant";
 import { getFieldArrayValue, getFieldArrayValueWithNull, setFieldArray } from "./util";

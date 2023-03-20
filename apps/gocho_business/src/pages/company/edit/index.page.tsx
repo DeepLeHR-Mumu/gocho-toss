@@ -7,26 +7,14 @@ import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 import { usePreventRouting } from "shared-hooks";
 
-import { useAddCompanyDetail } from "@/apis/company/useAddCompany";
-import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
-import { CommonStatusChip } from "@/components/common";
-import { useUserState } from "@/globalStates/useUserState";
-import { useToast } from "@/globalStates/useToast";
-import { PageLayout, GlobalLayout, Footer } from "@/components/global/layout";
-import { NextPageWithLayout } from "@/pages/index/type";
-import {
-  companyEditConfirmEvent,
-  companyEditDoneEvent,
-  companyEditFailEvent,
-  companyEditPageFunnelEvent,
-} from "@/ga/companyEdit";
+import { useAddCompanyDetail, useCompanyDetail } from "@/apis";
+import { CommonStatusChip, PageLayout, GlobalLayout, Footer } from "@/components";
+import { useUserState, useToast } from "@/globalStates";
+import { companyEditConfirmEvent, companyEditDoneEvent, companyEditFailEvent, companyEditPageFunnelEvent } from "@/ga";
+import { NextPageWithLayout } from "@/types";
 
 import { PageHead } from "./pageHead";
-import { CompanyInfoPart } from "./part/companyInfoPart";
-import { CompanyStatusPart } from "./part/companyStatusPart";
-import { LastEditInfoPart } from "./part/lastEditInfoPart";
-import { BasicPart } from "./part/basicPart";
-import { WelfarePart } from "./part/welfarePart";
+import { CompanyInfoPart, CompanyStatusPart, LastEditInfoPart, BasicPart, WelfarePart } from "./part";
 import { COMPANY_MESSAGE_OBJ, ALREADY_DONE_EDIT_MESSAGE } from "./constants";
 import { PostSubmitValues } from "./type";
 import { cssObj } from "./style";

@@ -6,7 +6,7 @@ import { AiOutlineEnvironment } from "react-icons/ai";
 import { COLORS } from "shared-style/color";
 import { SharedButton } from "shared-ui/business/sharedButton";
 
-import { CommonStatusChip } from "@/components/common";
+import { CommonStatusChip } from "@/components";
 
 import { cssObj } from "./style";
 import { FactoryBaseInfoProps } from "./type";

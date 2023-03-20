@@ -12,12 +12,11 @@ import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
 import gochoColorSrc from "shared-image/global/deepLeLogo/logoIconColor.svg";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 
-import { useModal } from "@/globalStates/useModal";
-import { INTERNAL_URL } from "@/constants/url";
-import { useUserState } from "@/globalStates/useUserState";
-import { TopBar } from "@/components/global/layout/topBar";
-import { useDoLogin } from "@/apis/auth/useDoLogin";
-import { loginPageFunnelEvent, loginSuccessEvent, signupButtonClickEvent } from "@/ga/auth";
+import { useModal, useUserState } from "@/globalStates";
+import { INTERNAL_URL } from "@/constants";
+import { TopBar } from "@/components";
+import { useDoLogin } from "@/apis";
+import { loginPageFunnelEvent, loginSuccessEvent, signupButtonClickEvent } from "@/ga";
 
 import { LOGIN_ERROR_MESSAGES } from "./constant";
 import { PageHead } from "./pageHead";
