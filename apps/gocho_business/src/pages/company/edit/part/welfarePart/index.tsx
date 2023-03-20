@@ -3,11 +3,10 @@ import { FiCornerDownLeft } from "react-icons/fi";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
-import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
-import { useUserState } from "@/globalStates/useUserState";
+import { useCompanyDetail } from "@/apis";
+import { useUserState } from "@/globalStates";
 
-import { InformDesc } from "../../component/informDesc";
-import { WelfareForm } from "../../component/welfareForm";
+import { InformDesc, WelfareForm } from "../../component";
 import { welfareArrCreator } from "./util";
 import { WelfarePartProps } from "./type";
 import { cssObj } from "./style";

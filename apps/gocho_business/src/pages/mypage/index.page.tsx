@@ -1,13 +1,12 @@
 import { ReactElement, useEffect } from "react";
 
-import { Footer, GlobalLayout, PageLayout } from "@/components/global/layout";
+import { Footer, GlobalLayout, PageLayout } from "@/components";
 
-import { NextPageWithLayout } from "@/pages/index/type";
-import { myPageFunnelEvent } from "@/ga/myPage";
+import { NextPageWithLayout } from "@/types";
+import { myPageFunnelEvent } from "@/ga";
 
 import { PageHead } from "./pageHead";
-import { HeaderPart } from "./part/headerPart";
-import { EditPart } from "./part/editPart";
+import { HeaderPart, EditPart } from "./part";
 import { cssObj } from "./style";
 
 const MyPage: NextPageWithLayout = () => {

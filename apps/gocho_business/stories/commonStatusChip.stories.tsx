@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { CommonStatusChip } from "@/components/common";
+import { CommonStatusChip } from "@/components";
 
 export default {
   title: "CommonStatusChip",

@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 import { BUSINESS_BACKEND_URL } from "shared-constant";
-import { INTERNAL_URL } from "@/constants/url";
+import { INTERNAL_URL } from "@/constants";
 
 test("기업 정보 변경 페이지 테스트", async ({ page, context }) => {
   await page.goto(INTERNAL_URL.HOME);

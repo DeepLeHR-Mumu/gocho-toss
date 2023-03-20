@@ -6,10 +6,8 @@ import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { SharedTextLink } from "shared-ui/business/sharedTextLink";
 import { SharedBoxLink } from "shared-ui/business/sharedBoxLink";
 
-import { DeleteInputButton } from "../../component/deleteInputButton";
-import { GuideChip } from "../../component/guideChip";
-import { AddFieldButton } from "../../component/addFieldButton";
-import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
+import { DeleteInputButton, GuideChip, AddFieldButton } from "../../component";
+import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../../util";
 import { BasicInfoPartProps } from "./type";
 import { PROCESS_GUIDE_ARR, APPLY_ROUTE_GUIDE_ARR, APPLY_EXTERNAL_LINK_ARR } from "./constant";
 import { cssObj } from "./style";

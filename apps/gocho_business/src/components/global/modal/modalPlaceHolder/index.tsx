@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { useModal } from "@/globalStates/useModal";
+import { useModal } from "@/globalStates";
 import { FindPasswordModal } from "../findPasswordModal";
 import { LoginModal } from "../loginModal";
 

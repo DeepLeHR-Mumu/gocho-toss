@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { FiAirplay } from "react-icons/fi";
 
-import { CommonInfoBox } from "@/components/common";
+import { CommonInfoBox } from "@/components";
 
 export default {
   title: "CommonInfoBox",

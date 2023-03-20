@@ -1,4 +1,4 @@
-import { INTERNAL_URL } from "@/constants/url";
+import { INTERNAL_URL } from "@/constants";
 
 export const PROTECTED_ROUTE_ARR = [
   INTERNAL_URL.MY_PAGE,

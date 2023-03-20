@@ -10,13 +10,11 @@ import { managerTokenDecryptor } from "shared-util";
 import { useFocusTrap } from "shared-hooks";
 
 import { FiCheckCircle, FiX } from "react-icons/fi";
-import { useDoLogin } from "@/apis/auth/useDoLogin";
-import { ModalComponent } from "@/components/global/modal/modalBackground";
-import { useModal } from "@/globalStates/useModal";
-import { useToast } from "@/globalStates/useToast";
-import { useUserState } from "@/globalStates/useUserState";
-import { loginSuccessEvent } from "@/ga/auth";
+import { useDoLogin } from "@/apis";
+import { useModal, useToast, useUserState } from "@/globalStates";
+import { loginSuccessEvent } from "@/ga";
 
+import { ModalComponent } from "../modalBackground";
 import { LOGIN_ERROR_MESSAGES } from "./constant";
 import { LoginFormValues } from "./type";
 import { cssObj } from "./style";

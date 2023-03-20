@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { dDayCalculator } from "../date";
+import { dDayCalculator } from "../date/dDayCalculator";
 
 describe("dDayCalculator unit 테스트", () => {
   it("같은시간 입력 시 차이 0ms 테스트", () => {
