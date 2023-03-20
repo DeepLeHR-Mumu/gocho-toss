@@ -5,7 +5,7 @@ import { userBookmarkKeyObj } from "shared-constant/queryKeyFactory/bookmark/boo
 import { axiosInstance } from "../../../axiosInstance";
 import { jobBookmarkResObjDef } from "../../type/bookmark";
 
-import { ResponseObjDef, AddJobBookmarkDef, RequestObjDef } from "./type";
+import { AddJobBookmarkDef, RequestObjDef, ResponseObjDef } from "./type";
 
 interface JobObjDef {
   id: number;
@@ -16,22 +16,19 @@ interface JobObjDef {
 }
 
 const addJobBookmark: AddJobBookmarkDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
+  const token = localStorage.getItem("accessToken");
+  const headers = token ? { "x-access-token": token } : undefined;
   const { data } = await axiosInstance.post(
     `/users/${requestObj.userId}/jd-bookmarks/`,
-    { elemId: requestObj.elemId },
-    {
-      headers: {
-        "x-access-token": token,
-      },
-    }
+    { id: requestObj.id },
+    { headers }
   );
   return data;
 };
 
 export const useAddJobBookmarkArr = (jobObj: JobObjDef | undefined) => {
   const queryClient = useQueryClient();
-  const mutationResult = useMutation<ResponseObjDef, AxiosError, RequestObjDef>({
+  return useMutation<ResponseObjDef, AxiosError, RequestObjDef>({
     mutationFn: addJobBookmark,
     onMutate: async (requestObj) => {
       await queryClient.cancelQueries(userBookmarkKeyObj.jobBookmarkArr({ userId: requestObj.userId }));
@@ -55,5 +52,4 @@ export const useAddJobBookmarkArr = (jobObj: JobObjDef | undefined) => {
       return { previousTodos };
     },
   });
-  return mutationResult;
 };

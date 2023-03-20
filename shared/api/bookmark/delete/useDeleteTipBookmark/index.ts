@@ -11,18 +11,18 @@ interface TipObjDef {
 }
 
 const deleteTipBookmarkArr: DeleteTipBookmarkArrDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
-  const { data } = await axiosInstance.delete(`/users/${requestObj?.userId}/tip-likes/${requestObj.elemId}`, {
-    headers: {
-      "x-access-token": token,
-    },
+  const token = localStorage.getItem("accessToken");
+  const headers = token ? { "x-access-token": token } : undefined;
+
+  const { data } = await axiosInstance.delete(`/users/${requestObj?.userId}/tip-likes/${requestObj.id}`, {
+    headers,
   });
   return data;
 };
 
 export const useDeleteTipBookmarkArr = (postingObj: TipObjDef | undefined) => {
   const queryClient = useQueryClient();
-  const mutationResult = useMutation({
+  return useMutation({
     mutationFn: deleteTipBookmarkArr,
     onMutate: async (requestObj) => {
       await queryClient.cancelQueries(userBookmarkKeyObj.tipBookmarkArr({ userId: requestObj.userId }));
@@ -50,5 +50,4 @@ export const useDeleteTipBookmarkArr = (postingObj: TipObjDef | undefined) => {
       return { previousTodos };
     },
   });
-  return mutationResult;
 };

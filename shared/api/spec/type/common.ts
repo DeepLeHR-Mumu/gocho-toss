@@ -48,7 +48,31 @@ export type LanguageType = {
 }[];
 
 export interface EvalDef {
-  strength_count_arr: [string, number][];
-  weakness_count_arr: [string, number][];
+  strength_count_arr: {
+    NONE: number;
+    ATTENDANCE: number;
+    AGE: number;
+    EDUCATION_SCORE: number;
+    RELATED_CERT: number;
+    MANY_CERT: number;
+    LANGUAGE_SCORE: number;
+    AWARDS: number;
+    DEPARTMENT: number;
+    RELATED_CAREER: number;
+    LONG_CAREER: number;
+  };
+  weakness_count_arr: {
+    NONE: number;
+    ATTENDANCE: number;
+    AGE: number;
+    EDUCATION_SCORE: number;
+    UNRELATED_CERT: number;
+    LESS_CERT: number;
+    LANGUAGE_SCORE: number;
+    AWARDS: number;
+    DEPARTMENT: number;
+    UNRELATED_CAREER: number;
+    SHORT_CAREER: number;
+  };
   feedback_arr: string[] | null;
 }

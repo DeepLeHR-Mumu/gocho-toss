@@ -32,7 +32,7 @@ export const PictureEditBox: FunctionComponent = () => {
         {
           onSuccess: (data) => {
             setCurrentToast("프로필 이미지가 변경되었습니다.");
-            localStorage.setItem("token", `${data?.data.token}`);
+            localStorage.setItem("access_token", `${data?.data.access_token}`);
             refetch();
           },
         }

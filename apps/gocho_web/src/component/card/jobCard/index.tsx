@@ -99,7 +99,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
     }
     if (userId)
       addMutate(
-        { userId, elemId: jobData.id },
+        { userId, id: jobData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries(jobArrKeyObj.all);
@@ -112,7 +112,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   const deleteJobBookmark = () => {
     if (userId)
       deleteMutate(
-        { userId, elemId: jobData.id },
+        { userId, id: jobData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries(jobArrKeyObj.all);

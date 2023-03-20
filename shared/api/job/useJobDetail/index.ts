@@ -2,17 +2,17 @@ import { useQuery } from "@tanstack/react-query";
 
 import { jobDetailKeyObj, JobDetailRequestObjDef } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 
-import { axiosNewInstance } from "../../axiosInstance";
+import { axiosNoTokenInstance } from "../../axiosInstance";
 import { selector } from "./util";
 import { GetJobDetailDef } from "./type";
 
 export const getJobDetail: GetJobDetailDef = async ({ queryKey: [{ requestObj }] }) => {
-  const { data } = await axiosNewInstance.get(`/jds/${requestObj.id}`);
+  const { data } = await axiosNoTokenInstance.get(`/jds/${requestObj.id}`);
   return data;
 };
 
 export const useJobDetail = (requestObj: JobDetailRequestObjDef) => {
-  const queryResult = useQuery({
+  return useQuery({
     queryKey: jobDetailKeyObj.detail(requestObj),
     queryFn: getJobDetail,
     staleTime: Infinity,
@@ -21,6 +21,4 @@ export const useJobDetail = (requestObj: JobDetailRequestObjDef) => {
       return selector(data);
     },
   });
-
-  return queryResult;
 };

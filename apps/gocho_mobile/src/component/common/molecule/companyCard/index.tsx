@@ -44,11 +44,11 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
       setCurrentModal("loginModal", { button: "close" });
       return;
     }
-    addMutate({ userId: userData.id, elemId: companyData.id });
+    addMutate({ userId: userData.id, id: companyData.id });
   };
 
   const deleteCompanyBookmark = () => {
-    if (userData) deleteMutate({ userId: userData.id, elemId: companyData.id });
+    if (userData) deleteMutate({ userId: userData.id, id: companyData.id });
   };
 
   return (

@@ -6,7 +6,7 @@ module.exports = {
     "arrow-body-style": ["error", "as-needed"],
     "import/no-extraneous-dependencies": [
       "error",
-      { depnedencies: false, evDependencies: false, optionalDependencies: false, peerDependencies: false },
+      { dependencies: false, devDependencies: false, optionalDependencies: false, peerDependencies: false },
     ],
   },
 };

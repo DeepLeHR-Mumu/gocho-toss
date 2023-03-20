@@ -52,7 +52,7 @@ export const BottomMenu: FunctionComponent<BottomMenuProps> = ({
     return (
       userId &&
       addMutate(
-        { userId, elemId: jobDetailData.id },
+        { userId, id: jobDetailData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
@@ -66,7 +66,7 @@ export const BottomMenu: FunctionComponent<BottomMenuProps> = ({
     return (
       userId &&
       deleteMutate(
-        { userId, elemId: jobDetailData.id },
+        { userId, id: jobDetailData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));

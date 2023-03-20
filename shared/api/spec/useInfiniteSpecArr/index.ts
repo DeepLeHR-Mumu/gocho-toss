@@ -1,23 +1,22 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { SpecArrInfinityRequestDef, specArrKeyObj } from "shared-constant/queryKeyFactory/spec/arrKeyObj";
-import { axiosNewInstance } from "../../axiosInstance";
+import { axiosNoTokenInstance } from "../../axiosInstance";
 
 import { GetInifiniteSpecArrDef } from "./type";
 import { selector } from "./util";
 
 export const getInfiniteSpecArr: GetInifiniteSpecArrDef = async ({ queryKey: [{ requestObj }], pageParam }) => {
-  const { data } = await axiosNewInstance.get("/specs", {
+  const { data } = await axiosNoTokenInstance.get("/specs", {
     params: { ...requestObj, offset: pageParam },
   });
-
   const nextPage = pageParam === undefined ? 20 : pageParam + 20;
 
   return { ...data, nextPage };
 };
 
 export const useInfiniteSpecArr = (requestObj: SpecArrInfinityRequestDef) => {
-  const queryResult = useInfiniteQuery({
+  return useInfiniteQuery({
     queryKey: specArrKeyObj.infinite(requestObj),
     queryFn: getInfiniteSpecArr,
     getNextPageParam: (responseObj) => {
@@ -32,5 +31,4 @@ export const useInfiniteSpecArr = (requestObj: SpecArrInfinityRequestDef) => {
       };
     },
   });
-  return queryResult;
 };

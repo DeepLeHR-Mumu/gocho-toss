@@ -88,13 +88,13 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
       {
         userId: userInfoData?.id,
         q: {
-          possibleEdu: watch("possibleEdu"),
+          possible_edu: watch("possibleEdu"),
           place: watch("place"),
           industry: watch("industry"),
           rotation: watch("rotation"),
           task: watch("task"),
-          requiredExp: watch("requiredExp"),
-          contractType: watch("contractType"),
+          required_exp: watch("requiredExp"),
+          contract_type: watch("contractType"),
         },
       },
       {

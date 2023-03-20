@@ -97,9 +97,20 @@ const DetailPage: NextPage = () => {
               </div>
             </div>
 
-            {companyCommentArrData && (
-              <DetailComment jdId={null} userInfo={userInfo} commentDataArr={companyCommentArrData} />
-            )}
+            <DetailComment
+              jdId={null}
+              userInfo={userInfo}
+              commentDataArr={
+                companyCommentArrData || {
+                  company: {
+                    id: companyDetailData.id,
+                    name: companyDetailData.name,
+                    logoUrl: companyDetailData.logoUrl,
+                  },
+                  commentArr: null,
+                }
+              }
+            />
           </div>
           <p css={warningDesc}>유의사항 : 실제 정보와 상이할 수도 있으니 참고해주세요.</p>
         </section>

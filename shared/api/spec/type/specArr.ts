@@ -46,7 +46,7 @@ export interface SpecObjDef {
       }
     | null
     | undefined;
-  language: LanguageType[] | null; // 언어
+  language: LanguageType[] | null;
   award: string[] | null;
   career: string[] | null;
   etc: string[] | null;

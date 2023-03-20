@@ -11,22 +11,19 @@ interface TipObjDef {
 }
 
 const addTipBookmarkArr: AddTipBookmarkArrDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
+  const token = localStorage.getItem("accessToken");
+  const headers = token ? { "x-access-token": token } : undefined;
   const { data } = await axiosInstance.post(
     `/users/${requestObj.userId}/tip-likes/`,
-    { elemId: requestObj.elemId },
-    {
-      headers: {
-        "x-access-token": token,
-      },
-    }
+    { id: requestObj.id },
+    { headers }
   );
   return data;
 };
 
 export const useAddTipBookmarkArr = (tipObj: TipObjDef | undefined) => {
   const queryClient = useQueryClient();
-  const mutationResult = useMutation({
+  return useMutation({
     mutationFn: addTipBookmarkArr,
     onMutate: async (requestObj) => {
       await queryClient.cancelQueries(userBookmarkKeyObj.tipBookmarkArr({ userId: requestObj.userId }));
@@ -50,5 +47,4 @@ export const useAddTipBookmarkArr = (tipObj: TipObjDef | undefined) => {
       return { previousTodos };
     },
   });
-  return mutationResult;
 };

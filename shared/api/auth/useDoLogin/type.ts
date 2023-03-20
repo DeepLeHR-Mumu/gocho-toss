@@ -7,7 +7,7 @@ export interface RequestObjDef {
 }
 
 export interface ResponseObjDef {
-  data: { token: string };
+  data: { access_token: string; refresh_token: string };
 }
 
 export interface PostLoginDef {

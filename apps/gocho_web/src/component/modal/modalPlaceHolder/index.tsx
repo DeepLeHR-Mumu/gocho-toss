@@ -8,7 +8,6 @@ import { PageBlockingModal } from "../pageBlockingModal";
 import { AccountSettingModal } from "../accountSettingModal";
 import { TipModal } from "../tipModal";
 import { FactoryModal } from "../factoryModal";
-import { WriteKakaoInfoModal } from "../writeKakaoInfoModal";
 import { DialogModal } from "../dialogModal";
 import { FindPasswordModal } from "../findPasswordModal";
 import { NoticeModal } from "../noticeModal";
@@ -33,9 +32,6 @@ export const ModalPlaceholder: FunctionComponent = () => {
   }
   if (currentModal?.activatedModal === "factoryModal") {
     return <FactoryModal />;
-  }
-  if (currentModal?.activatedModal === "writeKakaoInfoModal") {
-    return <WriteKakaoInfoModal />;
   }
   if (currentModal?.activatedModal === "findPasswordModal") {
     return <FindPasswordModal />;

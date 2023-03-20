@@ -64,7 +64,7 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, us
   const addJobBookmark = () => {
     if (userId)
       addMutate(
-        { userId, elemId: jobDetailData.id },
+        { userId, id: jobDetailData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
@@ -78,7 +78,7 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, us
     return (
       userId &&
       deleteMutate(
-        { userId, elemId: jobDetailData.id },
+        { userId, id: jobDetailData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
