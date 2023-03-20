@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
-import { useUserState } from "@/globalStates/useUserState";
+import { useUserState } from "@/globalStates";
 
 import { cssObj } from "./style";
 

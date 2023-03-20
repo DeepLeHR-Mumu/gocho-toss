@@ -4,8 +4,8 @@ import Link from "next/link";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
-import { useUserState } from "@/globalStates/useUserState";
-import { INTERNAL_URL } from "@/constants/url";
+import { useUserState } from "@/globalStates";
+import { INTERNAL_URL } from "@/constants";
 
 import { linkArr } from "./constant";
 import { CompanyInfoBox } from "./component/companyInfoBox";

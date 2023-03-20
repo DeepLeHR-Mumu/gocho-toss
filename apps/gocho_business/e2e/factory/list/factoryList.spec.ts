@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import { INTERNAL_URL } from "@/constants/url";
+import { INTERNAL_URL } from "@/constants";
 
 test("공장 정보 등록 및 삭제 테스트", async ({ page, context }) => {
   await page.goto(INTERNAL_URL.HOME);

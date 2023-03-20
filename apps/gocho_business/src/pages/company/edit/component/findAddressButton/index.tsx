@@ -1,9 +1,9 @@
 import { FunctionComponent } from "react";
 
 import { cssObj } from "./style";
-import { CommonRoundButtonProps } from "./type";
+import { FindAddresButtonProps } from "./type";
 
-export const CommonRoundButton: FunctionComponent<CommonRoundButtonProps> = ({
+export const FindAddressButton: FunctionComponent<FindAddresButtonProps> = ({
   text,
   Icon,
   isDisabled,

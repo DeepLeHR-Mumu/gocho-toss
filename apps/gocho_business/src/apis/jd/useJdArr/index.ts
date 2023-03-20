@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import { ErrorResponseDef } from "@/types/errorType";
-import { axiosInstance } from "@/apis/useIsRefreshLock";
+import { ErrorResponseDef } from "@/types";
 
+import { axiosInstance } from "../../useIsRefreshLock";
 import { GetJdArrDef, jdArrKeyObj, RequestObjDef, ResponseObjDef } from "./type";
 import { jdArrSelector } from "./util";
 

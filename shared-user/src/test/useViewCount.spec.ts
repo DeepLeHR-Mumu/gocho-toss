@@ -1,10 +1,5 @@
 import { renderHook } from "@testing-library/react";
-import {
-  userClearLocalStorageItem,
-  userGetLocalStoargetItem,
-  userResetLocalStorageItem,
-  userSetLocalStorageItem,
-} from "../utils/storage";
+import { userGetLocalStoargetItem, userSetLocalStorageItem } from "../utils/storage";
 
 import { useViewCount } from "../hooks/useViewCount";
 const mutationFunction = () => {};

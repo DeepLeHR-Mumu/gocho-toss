@@ -1,6 +1,6 @@
 import { chromium } from "@playwright/test";
 
-import { INTERNAL_URL } from "@/constants/url";
+import { INTERNAL_URL } from "@/constants";
 
 async function globalSetup() {
   const browser = await chromium.launch();
