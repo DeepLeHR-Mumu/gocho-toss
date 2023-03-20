@@ -4,7 +4,7 @@ import { AxiosError } from "axios";
 import { ResponseDef } from "shared-type/api/responseType";
 import { userBookmarkKeyObj } from "shared-constant/queryKeyFactory/bookmark/bookmarkKeyObj";
 
-import { RequestObjDef, DeleteJobBookmarkArrDef } from "./type";
+import { DeleteJobBookmarkArrDef, RequestObjDef } from "./type";
 import { axiosInstance } from "../../../axiosInstance";
 import { jobBookmarkResObjDef } from "../../type/bookmark";
 
@@ -17,18 +17,17 @@ interface JobObjDef {
 }
 
 const deleteJobBookmarkArr: DeleteJobBookmarkArrDef = async (requestObj) => {
-  const token = localStorage.getItem("accessToken") as string;
+  const token = localStorage.getItem("accessToken");
+  const headers = token ? { "x-access-token": token } : undefined;
   const { data } = await axiosInstance.delete(`/users/${requestObj?.userId}/jd-bookmarks/${requestObj.id}`, {
-    headers: {
-      "x-access-token": token,
-    },
+    headers,
   });
   return data;
 };
 
 export const useDeleteJobBookmarkArr = (jobObj: JobObjDef | undefined) => {
   const queryClient = useQueryClient();
-  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>({
+  return useMutation<ResponseDef, AxiosError, RequestObjDef>({
     mutationFn: deleteJobBookmarkArr,
     onMutate: async (requestObj) => {
       await queryClient.cancelQueries(userBookmarkKeyObj.jobBookmarkArr({ userId: requestObj.userId }));
@@ -56,5 +55,4 @@ export const useDeleteJobBookmarkArr = (jobObj: JobObjDef | undefined) => {
       return { previousTodos };
     },
   });
-  return mutationResult;
 };

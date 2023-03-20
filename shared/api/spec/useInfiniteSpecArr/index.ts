@@ -10,14 +10,13 @@ export const getInfiniteSpecArr: GetInifiniteSpecArrDef = async ({ queryKey: [{ 
   const { data } = await axiosNoTokenInstance.get("/specs", {
     params: { ...requestObj, offset: pageParam },
   });
-
   const nextPage = pageParam === undefined ? 20 : pageParam + 20;
 
   return { ...data, nextPage };
 };
 
 export const useInfiniteSpecArr = (requestObj: SpecArrInfinityRequestDef) => {
-  const queryResult = useInfiniteQuery({
+  return useInfiniteQuery({
     queryKey: specArrKeyObj.infinite(requestObj),
     queryFn: getInfiniteSpecArr,
     getNextPageParam: (responseObj) => {
@@ -32,5 +31,4 @@ export const useInfiniteSpecArr = (requestObj: SpecArrInfinityRequestDef) => {
       };
     },
   });
-  return queryResult;
 };

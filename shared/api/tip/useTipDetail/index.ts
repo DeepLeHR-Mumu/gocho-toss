@@ -12,13 +12,11 @@ export const getTipDetail: GetTipDetailDef = async ({ queryKey: [{ requestObj }]
 };
 
 export const useTipDetail = (requestObj: TipRequestObjDef) => {
-  const queryResult = useQuery({
+  return useQuery({
     queryKey: tipDetailKeyObj.detail(requestObj),
     queryFn: getTipDetail,
     select: ({ data }) => {
       return selector(data);
     },
   });
-
-  return queryResult;
 };

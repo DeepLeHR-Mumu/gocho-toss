@@ -3,15 +3,13 @@ import { AxiosError } from "axios";
 
 import { axiosInstance } from "../../axiosInstance";
 
-import { ResponseObjDef, useDoLoginProps, PostKakaoLoginDef, RequestObjDef } from "./type";
+import { PostKakaoLoginDef, RequestObjDef, ResponseObjDef, useDoLoginProps } from "./type";
 
 const postKakaoLogin: PostKakaoLoginDef = async (requestObj) => {
   const { data } = await axiosInstance.post("/auth/kakao", { ...requestObj });
-
   return data;
 };
 
 export const useDoKakaoLogin: useDoLoginProps = () => {
-  const mutationResult = useMutation<ResponseObjDef, AxiosError, RequestObjDef>({ mutationFn: postKakaoLogin });
-  return mutationResult;
+  return useMutation<ResponseObjDef, AxiosError, RequestObjDef>({ mutationFn: postKakaoLogin });
 };

@@ -12,7 +12,7 @@ export const getJobDetail: GetJobDetailDef = async ({ queryKey: [{ requestObj }]
 };
 
 export const useJobDetail = (requestObj: JobDetailRequestObjDef) => {
-  const queryResult = useQuery({
+  return useQuery({
     queryKey: jobDetailKeyObj.detail(requestObj),
     queryFn: getJobDetail,
     staleTime: Infinity,
@@ -21,6 +21,4 @@ export const useJobDetail = (requestObj: JobDetailRequestObjDef) => {
       return selector(data);
     },
   });
-
-  return queryResult;
 };

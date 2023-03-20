@@ -12,7 +12,7 @@ export const getJdCountInfo: GetJdCountInfoDef = async ({ queryKey: [{ requestOb
 };
 
 export const useJdCountInfo = (requestObj: JdCountInfoRequestObjDef) => {
-  const queryResult = useQuery({
+  return useQuery({
     queryKey: jdCountInfoKeyObj.countInfo(requestObj),
     queryFn: getJdCountInfo,
     enabled: Boolean(requestObj.id),
@@ -20,6 +20,4 @@ export const useJdCountInfo = (requestObj: JdCountInfoRequestObjDef) => {
       return selector(data);
     },
   });
-
-  return queryResult;
 };

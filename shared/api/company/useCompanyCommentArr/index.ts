@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 
 import {
-  CompanyCommentArrRequestDef,
   companyCommentArrKeyObj,
+  CompanyCommentArrRequestDef,
 } from "shared-constant/queryKeyFactory/company/commentArrKeyObj";
 import { axiosInstance } from "../../axiosInstance";
 
@@ -16,15 +16,14 @@ export const getCompanyComment: GetCompanyCommentDef = async ({
     },
   ],
 }) => {
-  const token = localStorage.getItem("accessToken") as string;
-  const { data } = await axiosInstance.get(`/companies/${companyId}/comments`, {
-    headers: { "x-access-token": token },
-  });
+  const token = localStorage.getItem("accessToken");
+  const headers = token ? { "x-access-token": token } : undefined;
+  const { data } = await axiosInstance.get(`/companies/${companyId}/comments`, { headers });
   return data;
 };
 
 export const useCompanyCommentArr = (requestObj: CompanyCommentArrRequestDef) => {
-  const queryResult = useQuery({
+  return useQuery({
     queryKey: companyCommentArrKeyObj.commentArr(requestObj),
     queryFn: getCompanyComment,
     enabled: Boolean(requestObj.companyId),
@@ -32,5 +31,4 @@ export const useCompanyCommentArr = (requestObj: CompanyCommentArrRequestDef) =>
       return selector(data);
     },
   });
-  return queryResult;
 };

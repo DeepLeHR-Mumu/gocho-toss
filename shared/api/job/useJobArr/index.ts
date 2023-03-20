@@ -15,7 +15,7 @@ export const getJobArr: GetJobArrDef = async ({ queryKey: [{ requestObj }] }) =>
 };
 
 export const useJobArr = (requestObj: JobArrRequestObjDef) => {
-  const queryResult = useQuery({
+  return useQuery({
     queryKey: jobArrKeyObj.jobArr(requestObj),
     queryFn: getJobArr,
     select: ({ data, count }) => {
@@ -23,5 +23,4 @@ export const useJobArr = (requestObj: JobArrRequestObjDef) => {
     },
     enabled: Boolean(requestObj.order),
   });
-  return queryResult;
 };

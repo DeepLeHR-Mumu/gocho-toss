@@ -11,18 +11,17 @@ interface PostingObjDef {
 }
 
 const deletePostingBookmarkArr: DeletePostingBookmarkArrDef = async (requestObj) => {
-  const token = localStorage.getItem("accessToken") as string;
+  const token = localStorage.getItem("accessToken");
+  const headers = token ? { "x-access-token": token } : undefined;
   const { data } = await axiosInstance.delete(`/users/${requestObj?.userId}/posting-likes/${requestObj.id}`, {
-    headers: {
-      "x-access-token": token,
-    },
+    headers,
   });
   return data;
 };
 
 export const useDeletePostingBookmarkArr = (postingObj: PostingObjDef | undefined) => {
   const queryClient = useQueryClient();
-  const mutationResult = useMutation({
+  return useMutation({
     mutationFn: deletePostingBookmarkArr,
     onMutate: async (requestObj) => {
       await queryClient.cancelQueries(userBookmarkKeyObj.postingBookmarkArr({ userId: requestObj.userId }));
@@ -50,5 +49,4 @@ export const useDeletePostingBookmarkArr = (postingObj: PostingObjDef | undefine
       return { previousTodos };
     },
   });
-  return mutationResult;
 };

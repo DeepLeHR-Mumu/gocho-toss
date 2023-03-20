@@ -5,7 +5,7 @@ import { userBookmarkKeyObj } from "shared-constant/queryKeyFactory/bookmark/boo
 
 import { axiosInstance } from "../../../axiosInstance";
 import { CompanyBookmarkResObjDef } from "../../type/bookmark";
-import { ResponseObjDef, AddCompanyBookmarkArrDef, RequestObjDef } from "./type";
+import { AddCompanyBookmarkArrDef, RequestObjDef, ResponseObjDef } from "./type";
 
 interface CompanyObjDef {
   id: number;
@@ -14,22 +14,19 @@ interface CompanyObjDef {
 }
 
 const addCompanyBookmarkArr: AddCompanyBookmarkArrDef = async (requestObj) => {
-  const token = localStorage.getItem("accessToken") as string;
+  const token = localStorage.getItem("accessToken");
+  const headers = token ? { "x-access-token": token } : undefined;
   const { data } = await axiosInstance.post(
     `/users/${requestObj?.userId}/company-bookmarks/`,
     { id: requestObj.id },
-    {
-      headers: {
-        "x-access-token": token,
-      },
-    }
+    { headers }
   );
   return data;
 };
 
 export const useAddCompanyBookmarkArr = (companyObj: CompanyObjDef | undefined) => {
   const queryClient = useQueryClient();
-  const mutationResult = useMutation<ResponseObjDef, AxiosError, RequestObjDef>({
+  return useMutation<ResponseObjDef, AxiosError, RequestObjDef>({
     mutationFn: addCompanyBookmarkArr,
     onMutate: async (requestObj) => {
       await queryClient.cancelQueries(userBookmarkKeyObj.companyBookmarkArr({ userId: requestObj.userId }));
@@ -55,5 +52,4 @@ export const useAddCompanyBookmarkArr = (companyObj: CompanyObjDef | undefined) 
       return { previousTodos };
     },
   });
-  return mutationResult;
 };

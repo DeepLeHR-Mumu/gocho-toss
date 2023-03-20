@@ -3,17 +3,15 @@ import { AxiosError } from "axios";
 
 import { axiosInstance } from "../../axiosInstance";
 
-import { PostEvalSpecResponse, UseEvalSpecProps, PostEvalSpecDef, RequestObjDef } from "./type";
+import { PostEvalSpecDef, PostEvalSpecResponse, RequestObjDef, UseEvalSpecProps } from "./type";
 
 const postEvalSpec: PostEvalSpecDef = async (requestObj) => {
-  const token = localStorage.getItem("accessToken") as string;
-  const { data } = await axiosInstance.post(`specs/${requestObj.specId}/evals`, requestObj.specData, {
-    headers: { "x-access-token": token },
-  });
+  const token = localStorage.getItem("accessToken");
+  const headers = token ? { "x-access-token": token } : undefined;
+  const { data } = await axiosInstance.post(`specs/${requestObj.specId}/evals`, requestObj.specData, { headers });
   return data;
 };
 
 export const useEvalSpec: UseEvalSpecProps = () => {
-  const mutationResult = useMutation<PostEvalSpecResponse, AxiosError, RequestObjDef>({ mutationFn: postEvalSpec });
-  return mutationResult;
+  return useMutation<PostEvalSpecResponse, AxiosError, RequestObjDef>({ mutationFn: postEvalSpec });
 };

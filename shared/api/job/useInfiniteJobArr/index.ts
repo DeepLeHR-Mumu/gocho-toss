@@ -11,13 +11,12 @@ export const getInfiniteJobArr: GetInfiniteJobArrDef = async ({ queryKey: [{ req
   const { data } = await axiosNoTokenInstance.get("/jds", {
     params: { ...requestObj, offset: pageParam },
   });
-
   const nextPage = pageParam === undefined ? 10 : pageParam + 10;
   return { ...data, nextPage };
 };
 
 export const useInfiniteJobArr = (requestObj: JobArrRequestObjDef) => {
-  const queryResult = useInfiniteQuery({
+  return useInfiniteQuery({
     queryKey: jobArrKeyObj.infinite(requestObj),
     queryFn: getInfiniteJobArr,
     getNextPageParam: (responseObj) => {
@@ -32,5 +31,4 @@ export const useInfiniteJobArr = (requestObj: JobArrRequestObjDef) => {
       };
     },
   });
-  return queryResult;
 };

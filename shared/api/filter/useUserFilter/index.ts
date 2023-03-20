@@ -8,18 +8,14 @@ import { GetUserFilterDef } from "./type";
 import { selector } from "./util";
 
 const getUserFilter: GetUserFilterDef = async ({ queryKey: [{ requestObj }] }) => {
-  const token = localStorage.getItem("accessToken") as string;
-  const { data } = await axiosInstance.get(`/users/${requestObj?.userId}/filter`, {
-    headers: {
-      "x-access-token": token,
-    },
-  });
-
+  const token = localStorage.getItem("accessToken");
+  const headers = token ? { "x-access-token": token } : undefined;
+  const { data } = await axiosInstance.get(`/users/${requestObj?.userId}/filter`, { headers });
   return data;
 };
 
 export const useUserFilter = (requestObj: FilterRequestObjDef) => {
-  const queryResult = useQuery({
+  return useQuery({
     queryKey: filterKeyObj.all(requestObj),
     queryFn: getUserFilter,
     onError: (error) => {
@@ -33,5 +29,4 @@ export const useUserFilter = (requestObj: FilterRequestObjDef) => {
       return selector(data);
     },
   });
-  return queryResult;
 };

@@ -15,7 +15,7 @@ export const getCompanyDetail: GetCompanyDetailDef = async ({ queryKey: [{ reque
 };
 
 export const useCompanyDetail = (requestObj: CompanyDetailRequestDef) => {
-  const queryResult = useQuery({
+  return useQuery({
     queryKey: companyDetailKeyObj.detail(requestObj),
     queryFn: getCompanyDetail,
     staleTime: Infinity,
@@ -24,5 +24,4 @@ export const useCompanyDetail = (requestObj: CompanyDetailRequestDef) => {
       return selector(data);
     },
   });
-  return queryResult;
 };

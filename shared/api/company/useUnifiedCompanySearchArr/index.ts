@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import {
-  SearchCompanyArrRequestDef,
   searchCompanyArrKeyObj,
+  SearchCompanyArrRequestDef,
 } from "shared-constant/queryKeyFactory/company/searchCompanyArrKeyObj";
 
 import { axiosNoTokenInstance } from "../../axiosInstance";
@@ -23,7 +23,7 @@ export const getUnifiedCompanySearchArr: GetSearchCompanyArrDef = async ({ query
 };
 
 export const useUnifiedCompanySearchArr = (requestObj: SearchCompanyArrRequestDef) => {
-  const queryResult = useQuery({
+  return useQuery({
     queryKey: searchCompanyArrKeyObj.searchArr(requestObj),
     queryFn: getUnifiedCompanySearchArr,
     select: ({ data, count }) => {
@@ -31,5 +31,4 @@ export const useUnifiedCompanySearchArr = (requestObj: SearchCompanyArrRequestDe
     },
     enabled: Number.isInteger(Number(requestObj.page)) && typeof requestObj.searchWord !== "undefined",
   });
-  return queryResult;
 };

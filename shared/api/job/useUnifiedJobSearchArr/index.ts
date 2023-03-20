@@ -21,7 +21,7 @@ export const getUnifiedJobSearchArr: GetJobArrDef = async ({ queryKey: [{ reques
 };
 
 export const useUnifiedJobSearchArr = (requestObj: SearchJobRequestObj) => {
-  const queryResult = useQuery({
+  return useQuery({
     queryKey: searchJobArrKeyObj.searchArr(requestObj),
     queryFn: getUnifiedJobSearchArr,
     select: ({ data, count }) => {
@@ -29,5 +29,4 @@ export const useUnifiedJobSearchArr = (requestObj: SearchJobRequestObj) => {
     },
     enabled: Number.isInteger(Number(requestObj.page)) && typeof requestObj.searchWord !== "undefined",
   });
-  return queryResult;
 };
