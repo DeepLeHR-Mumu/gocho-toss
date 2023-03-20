@@ -96,7 +96,7 @@ const basicSpecRegisterTester = async (page: Page) => {
 
 const specResponseCheckTester = async (isDeepRegister: boolean, response: Response, request: APIRequestContext) => {
   const registerPostData = await response.json();
-  const registerId = await registerPostData.data["insertId"];
+  const registerId = await registerPostData.data["id"];
 
   const registerGetResponse = await request.get(`${BACKEND_URL}/specs/${registerId}`);
   const registerGetData = await registerGetResponse.json();
