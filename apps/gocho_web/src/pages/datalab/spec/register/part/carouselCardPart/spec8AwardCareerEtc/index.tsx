@@ -50,22 +50,52 @@ export const Spec8AwardCareerEtc: FunctionComponent<Spec8AwardCareerEtcProps> = 
       career: careerData.length === 0 ? null : careerData,
     };
 
-    postMySpecRegister(currentSpecObj, {
-      onError: (error) => {
-        const errorCode = error.response?.status;
+    postMySpecRegister(
+      {
+        secret: currentSpecObj.secret,
+        gender: currentSpecObj.gender,
+        age: currentSpecObj.age,
+        military: currentSpecObj.military,
+        desired_task: currentSpecObj.desiredTask,
+        desired_industry: currentSpecObj.desiredIndustry,
+        last_education: currentSpecObj.lastEducation,
+        highschool: {
+          type: currentSpecObj.highschool.leaveEarly,
+          naesin: currentSpecObj.highschool.leaveEarly,
+          absent: currentSpecObj.highschool.leaveEarly,
+          tardy: currentSpecObj.highschool.leaveEarly,
+          leave_early: currentSpecObj.highschool.leaveEarly,
+          class_miss: currentSpecObj.highschool.classMiss,
+        },
+        college: {
+          department: currentSpecObj.college.department,
+          grade: currentSpecObj.college.grade,
+          max_grade: currentSpecObj.college.maxGrade,
+          uturn: currentSpecObj.college.uturn,
+        },
+        certificate: currentSpecObj.certificate,
+        language: currentSpecObj.language,
+        award: currentSpecObj.award,
+        career: currentSpecObj.career,
+        etc: currentSpecObj.etc,
+      },
+      {
+        onError: (error) => {
+          const errorCode = error.response?.status;
 
-        if (errorCode === 401) {
-          queryClient.invalidateQueries(userInfoKeyObj.userInfo);
-          setCurrentModal("loginModal", { button: "home" });
-        }
-      },
-      onSuccess: () => {
-        specRegisterEvent(true);
-        queryClient.invalidateQueries(specArrKeyObj.all);
-        moveNextCard("8");
-        sessionStorage.removeItem("specObj");
-      },
-    });
+          if (errorCode === 401) {
+            queryClient.invalidateQueries(userInfoKeyObj.userInfo);
+            setCurrentModal("loginModal", { button: "home" });
+          }
+        },
+        onSuccess: () => {
+          specRegisterEvent(true);
+          queryClient.invalidateQueries(specArrKeyObj.all);
+          moveNextCard("8");
+          sessionStorage.removeItem("specObj");
+        },
+      }
+    );
   };
 
   return (

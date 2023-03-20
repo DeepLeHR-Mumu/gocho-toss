@@ -11,7 +11,7 @@ test.beforeEach(async ({ page }) => {
 const basicSpecRegisterTester = async (page: Page) => {
   // part1Basic
   const [userCheckResponse] = await Promise.all([
-    page.waitForResponse((response) => response.url().includes("/auth/check") && response.status() === 200),
+    page.waitForResponse((response) => response.url().includes("/auth/detokenize") && response.status() === 200),
     page.waitForNavigation(),
     await page.getByRole("link", { name: "스펙 등록하기" }).click(),
   ]);
@@ -138,7 +138,7 @@ test.describe("스펙등록 테스트", () => {
 
   test("비로그인 접속시 모달 확인", async ({ page }) => {
     const [response] = await Promise.all([
-      page.waitForResponse((response) => response.url().includes("/auth/check") && response.status() === 401),
+      page.waitForResponse((response) => response.url().includes("/auth/detokenize") && response.status() === 401),
       page.goto(linkObj.SPEC_REGISTER_URL, {
         waitUntil: "load",
       }),
@@ -160,11 +160,8 @@ test.describe("스펙등록 테스트", () => {
 
   test("로그인 후 스펙 간단 등록 진행", async ({ page, request }) => {
     test.slow();
-    // 로그인 하기
     await loginTester(page);
-    // 기본 스펙 등록
     await basicSpecRegisterTester(page);
-    // 기본 스펙 등록 후 데이터 검수
     const registerResponse = await Promise.all([
       page.waitForResponse((response) => response.url().includes("/specs") && response.status() === 201),
       await page.locator('button:has-text("스펙 등록하기")').click(),
@@ -175,11 +172,9 @@ test.describe("스펙등록 테스트", () => {
 
   test("로그인 후 스펙 상세 등록 진행", async ({ page, request }) => {
     test.slow();
-    // 로그인 하기
     await loginTester(page);
-    // 기본 스펙 등록
     await basicSpecRegisterTester(page);
-    // 어학 파트 경고창 확인
+
     await page.getByRole("button", { name: "상세 스펙 추가" }).click();
     await page.getByRole("button", { name: "어학 추가하기" }).click();
     await page.getByRole("button", { name: "다음" }).click();
