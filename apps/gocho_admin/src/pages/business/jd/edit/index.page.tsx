@@ -10,7 +10,7 @@ import { useEditJdRequest } from "@/api/jd/useEditJdRequest";
 import { useAcceptJd } from "@/api/jd/useAcceptJd";
 import { useRejectJd } from "@/api/jd/useRejectJd";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
-import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
+import { ErrorScreen, LoadingScreen } from "@/component";
 
 import { JdPart } from "./part/jdPart";
 import { cssObj } from "./style";

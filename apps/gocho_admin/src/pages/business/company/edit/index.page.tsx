@@ -10,7 +10,7 @@ import { useAcceptCompany } from "@/api/company/useAcceptCompany";
 import { useRejectCompany } from "@/api/company/useRejectCompany";
 import { companyArrKeyObj } from "@/api/company/useCompanyArr/type";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
-import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
+import { ErrorScreen, LoadingScreen } from "@/component";
 
 import { CompanyPart } from "./part/companyPart";
 import { cssObj } from "./style";

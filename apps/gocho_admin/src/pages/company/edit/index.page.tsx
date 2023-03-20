@@ -7,7 +7,7 @@ import { useEditCompany } from "@/api/company/useEditCompany";
 import { useCompanyDetail } from "@/api/company/useCompanyDetail";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 
-import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
+import { ErrorScreen, LoadingScreen } from "@/component";
 import { FactoryBox } from "./component/factoryBox";
 import { BasicInfoPart } from "./part/basicInfoPart";
 import { WelfareInfoPart } from "./part/welfareInfoPart";

@@ -3,8 +3,8 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { companyArrKeyObj } from "shared-constant/queryKeyFactory/company/arrKeyObj";
 
-import { useDeleteCompany } from "@/api/company/useDeleteCompany";
-import { COMPANY_EDIT_URL } from "@/constant/internalURL";
+import { useDeleteCompany } from "@/api";
+import { INTERNAL_URL } from "@/constant";
 
 import { companyContainer, companyIdBox, companyNameBox, deleteButton, fixButton, flexBox } from "./style";
 import { CompanyCardProps } from "./type";
@@ -29,7 +29,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps> = ({ company }) =>
       <td css={companyIdBox}>{company.id}</td>
       <td css={companyNameBox}>{company.name}</td>
       <td css={flexBox}>
-        <a type="button" css={fixButton} href={`${COMPANY_EDIT_URL}/?id=${company.id}`}>
+        <a type="button" css={fixButton} href={`${INTERNAL_URL.COMPANY_EDIT_URL}/?id=${company.id}`}>
           수정
         </a>
         <button type="button" onClick={() => companyDelete()} css={deleteButton}>

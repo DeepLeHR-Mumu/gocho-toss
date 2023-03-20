@@ -3,9 +3,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 import { useFactoryArr } from "@/api/factory/useFactoryArr";
-import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
-import { Pagination } from "@/component";
-import { BUSINESS_FACTORY_LIST_URL } from "@/constant/internalURL";
+import { ErrorScreen, LoadingScreen, Pagination } from "@/component";
+import { INTERNAL_URL } from "@/constant/internalURL";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 
 import FactoryCard from "./component/factoryCard";
@@ -72,7 +71,7 @@ const BusinessFactoryList: NextPage = () => {
           </tbody>
         </table>
       </section>
-      <Pagination totalPage={totalPage} url={BUSINESS_FACTORY_LIST_URL} />
+      <Pagination totalPage={totalPage} url={INTERNAL_URL.BUSINESS_FACTORY_LIST_URL} />
     </main>
   );
 };

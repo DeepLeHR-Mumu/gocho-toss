@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import Link from "next/link";
 
-import { BUSINESS_FACTORY_EDIT_URL, BUSINESS_FACTORY_REGISTER_URL } from "@/constant/internalURL";
+import { INTERNAL_URL } from "@/constant";
 
 import { FactoryCardProps } from "./type";
 import { cssObj } from "./style";
@@ -16,8 +16,8 @@ const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factory }) => (
         passHref
         href={
           factory.status.name === "등록대기"
-            ? `${BUSINESS_FACTORY_REGISTER_URL}/?id=${factory.id}`
-            : `${BUSINESS_FACTORY_EDIT_URL}/?id=${factory.id}`
+            ? `${INTERNAL_URL.BUSINESS_FACTORY_REGISTER_URL}/?id=${factory.id}`
+            : `${INTERNAL_URL.BUSINESS_FACTORY_EDIT_URL}/?id=${factory.id}`
         }
       >
         상세보기

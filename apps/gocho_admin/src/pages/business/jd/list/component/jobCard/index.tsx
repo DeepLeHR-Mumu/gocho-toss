@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { dateConverter } from "shared-util";
 
-import { BUSINESS_JD_EDIT_URL, BUSINESS_JD_REGISTER_URL } from "@/constant/internalURL";
+import { INTERNAL_URL } from "@/constant";
 
 import { JobCardProps } from "./type";
 import { cssObj } from "./style";
@@ -37,8 +37,8 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
           css={cssObj.activeButton}
           href={
             job.status.name === "등록대기"
-              ? `${BUSINESS_JD_REGISTER_URL}/?id=${job.id}`
-              : `${BUSINESS_JD_EDIT_URL}/?id=${job.id}`
+              ? `${INTERNAL_URL.BUSINESS_JD_REGISTER_URL}/?id=${job.id}`
+              : `${INTERNAL_URL.BUSINESS_JD_EDIT_URL}/?id=${job.id}`
           }
         >
           상세보기

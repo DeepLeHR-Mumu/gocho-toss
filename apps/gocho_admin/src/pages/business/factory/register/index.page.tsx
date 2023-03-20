@@ -9,7 +9,7 @@ import { useAcceptFactory } from "@/api/factory/useAcceptFactory";
 import { useRejectFactory } from "@/api/factory/useRejectFactory";
 import { factoryArrKeyObj } from "@/api/factory/useFactoryArr/type";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
-import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
+import { ErrorScreen, LoadingScreen } from "@/component";
 
 import { FactoryPart } from "./part/factoryPart";
 import { cssObj } from "./style";

@@ -6,9 +6,8 @@ import { dateConverter } from "shared-util";
 import { NormalButton } from "shared-ui/common/atom/button/normalButton";
 import { LinkButton } from "shared-ui/common/atom/button/linkButton";
 
-import { useDeleteJd } from "@/api/jd/useDeleteJd";
-import { useEndJd } from "@/api/jd/useEndJd";
-import { JD_EDIT_URL } from "@/constant/internalURL";
+import { useDeleteJd, useEndJd } from "@/api";
+import { INTERNAL_URL } from "@/constant";
 
 import { JobCardProps } from "./type";
 import { cssObj } from "./style";
@@ -70,7 +69,12 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
             채용 링크
           </a>
           <NormalButton text="마감" wide={false} variant="filled" buttonClick={() => endJobHandler(job.id)} />
-          <LinkButton linkTo={`${JD_EDIT_URL}/?id=${job.id}`} text="수정" wide={false} variant="outlined" />
+          <LinkButton
+            linkTo={`${INTERNAL_URL.JD_EDIT_URL}/?id=${job.id}`}
+            text="수정"
+            wide={false}
+            variant="outlined"
+          />
           <NormalButton text="삭제" wide={false} variant="text" buttonClick={() => deleteJobHandler(job.id)} />
         </li>
       </ul>

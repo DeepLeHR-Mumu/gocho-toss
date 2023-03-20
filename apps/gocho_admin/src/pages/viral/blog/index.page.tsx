@@ -4,7 +4,7 @@ import { dateConverter } from "shared-util";
 
 import { useJdArr } from "@/api/jd/useJdArr";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
-import { LoadingScreen, ErrorScreen } from "@/component/global/screen";
+import { LoadingScreen, ErrorScreen } from "@/component";
 
 import { JobDef } from "../type";
 import { sectionContainer, sectionTitle, buttonContainer, naverButton, jdButton } from "./style";

@@ -1,15 +1,12 @@
-import { useEffect, useState } from "react";
-import type { NextPage } from "next";
+import { ReactElement, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
 import { NormalButton } from "shared-ui/common/atom/button/normalButton";
 
-import { useFindCompany } from "@/api/company/useFindCompany";
-import { useEditJd } from "@/api/jd/useEditJd";
-import { useJdDetail } from "@/api/jd/useJdDetail";
-import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
-import { PageLayout } from "@/component/global/layout/pageLayout";
+import { useFindCompany, useEditJd, useJdDetail } from "@/api";
+import { ErrorScreen, GlobalLayout, LoadingScreen, PageLayout } from "@/component";
+import type { NextPageWithLayout } from "@/types";
 
 import { CommonDataPart } from "./part/commonDataPart";
 import { PositionRequiredDataPart } from "./part/positionRequiredDataPart";
@@ -19,7 +16,7 @@ import { JobFormValues } from "./type";
 import { blankPosition } from "./constant";
 import { cssObj } from "./style";
 
-const JdEdit: NextPage = () => {
+const JdEdit: NextPageWithLayout = () => {
   const router = useRouter();
   const jobId = Number(router.query.id);
 
@@ -155,5 +152,7 @@ const JdEdit: NextPage = () => {
     </main>
   );
 };
+
+JdEdit.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default JdEdit;

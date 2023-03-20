@@ -1,17 +1,17 @@
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
-import { useJdArr } from "@/api/jd/useJdArr";
-import { JD_LIST_URL } from "@/constant/internalURL";
+import { useJdArr } from "@/api";
 import { GlobalLayout, PageLayout, ErrorScreen, LoadingScreen, Pagination } from "@/component";
+import { INTERNAL_URL } from "@/constant";
 import type { NextPageWithLayout } from "@/types";
 
-import { JD_SEARCH_LIMIT } from "./constant";
 import JobCard from "./component/jobCard";
 import { cssObj } from "./style";
 
 const JdList: NextPageWithLayout = () => {
   const router = useRouter();
+  const JD_SEARCH_LIMIT = 10;
 
   const {
     data: jobDataObj,
@@ -52,7 +52,7 @@ const JdList: NextPageWithLayout = () => {
             ))}
           </ul>
         </section>
-        <Pagination totalPage={totalPage} url={JD_LIST_URL} />
+        <Pagination totalPage={totalPage} url={INTERNAL_URL.JD_LIST_URL} />
       </PageLayout>
     </main>
   );

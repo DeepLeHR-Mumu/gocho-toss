@@ -1,13 +1,11 @@
-import { useState } from "react";
-import type { NextPage } from "next";
+import { ReactElement, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
 import { NormalButton } from "shared-ui/common/atom/button/normalButton";
 
-import { useFindCompany } from "@/api/company/useFindCompany";
-import { useAddJd } from "@/api/jd/useAddJd";
-import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
-import { PageLayout } from "@/component/global/layout/pageLayout";
+import { useFindCompany, useAddJd } from "@/api";
+import { ErrorScreen, GlobalLayout, LoadingScreen, PageLayout } from "@/component";
+import type { NextPageWithLayout } from "@/types";
 
 import { CommonDataPart } from "./part/commonDataPart";
 import { PositionRequiredDataPart } from "./part/positionRequiredDataPart";
@@ -18,7 +16,7 @@ import { blankPosition } from "./constant";
 import { JobFormValues } from "./type";
 import { cssObj } from "./style";
 
-const JdUpload: NextPage = () => {
+const JdUpload: NextPageWithLayout = () => {
   const [searchWord, setSearchWord] = useState<string>("");
   const [checkMsg, setCheckMsg] = useState<string>();
 
@@ -100,5 +98,7 @@ const JdUpload: NextPage = () => {
     </main>
   );
 };
+
+JdUpload.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default JdUpload;

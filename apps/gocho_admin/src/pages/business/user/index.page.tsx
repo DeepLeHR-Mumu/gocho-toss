@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 import { useAddRecruiter } from "@/api/recruiter/useAddRecruiter";
 import { useFindCompany } from "@/api/company/useFindCompany";
-import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
+import { ErrorScreen, LoadingScreen } from "@/component";
 
 import { cssObj } from "./style";
 import { RecruiterFormValues } from "./type";

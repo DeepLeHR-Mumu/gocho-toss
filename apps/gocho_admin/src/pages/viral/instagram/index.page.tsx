@@ -6,7 +6,7 @@ import { dateConverter } from "shared-util";
 
 import { useJdArr } from "@/api/jd/useJdArr";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
-import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
+import { ErrorScreen, LoadingScreen } from "@/component";
 
 import { JobDef } from "../type";
 

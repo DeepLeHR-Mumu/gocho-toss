@@ -2,9 +2,9 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { useCompanyArr } from "@/api/company/useCompanyArr";
-import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
+import { ErrorScreen, LoadingScreen } from "@/component";
 import { Pagination } from "@/component/common/pagination";
-import { BUSINESS_COMPANY_LIST_URL } from "@/constant/internalURL";
+import { INTERNAL_URL } from "@/constant";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 
 import CompanyCard from "./component/companyCard";
@@ -54,7 +54,7 @@ const BusinessCompanyList: NextPage = () => {
           </tbody>
         </table>
       </section>
-      <Pagination totalPage={totalPage} url={BUSINESS_COMPANY_LIST_URL} />
+      <Pagination totalPage={totalPage} url={INTERNAL_URL.BUSINESS_COMPANY_LIST_URL} />
     </main>
   );
 };

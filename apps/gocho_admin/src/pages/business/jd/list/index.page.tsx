@@ -3,9 +3,8 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 import { useJdArr } from "@/api/jd/useJdArr";
-import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
-import { Pagination } from "@/component";
-import { BUSINESS_JD_LIST_URL } from "@/constant/internalURL";
+import { ErrorScreen, LoadingScreen, Pagination } from "@/component";
+import { INTERNAL_URL } from "@/constant";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 
 import JobCard from "./component/jobCard";
@@ -73,7 +72,7 @@ const BusinessJdList: NextPage = () => {
           </tbody>
         </table>
       </section>
-      <Pagination totalPage={totalPage} url={BUSINESS_JD_LIST_URL} />
+      <Pagination totalPage={totalPage} url={INTERNAL_URL.BUSINESS_JD_LIST_URL} />
     </main>
   );
 };

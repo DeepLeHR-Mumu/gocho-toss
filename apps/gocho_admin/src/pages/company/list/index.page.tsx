@@ -2,9 +2,8 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { useCompanyArr } from "@/api/company/useCompanyArr";
-import { ErrorScreen, LoadingScreen } from "@/component/global/screen";
-import { Pagination } from "@/component";
-import { COMPANY_LIST_URL } from "@/constant/internalURL";
+import { ErrorScreen, LoadingScreen, Pagination } from "@/component";
+import { INTERNAL_URL } from "@/constant";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 
 import { COMPANY_SEARCH_LIMIT } from "./constant";
@@ -46,7 +45,7 @@ const CompanyList: NextPage = () => {
           </tbody>
         </table>
       </section>
-      <Pagination totalPage={totalPage} url={COMPANY_LIST_URL} />
+      <Pagination totalPage={totalPage} url={INTERNAL_URL.COMPANY_LIST_URL} />
     </main>
   );
 };
