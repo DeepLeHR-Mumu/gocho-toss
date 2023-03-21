@@ -66,6 +66,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                   registerObj={{ ...jobForm.register(`position_arr.${index}.rotation_arr`) }}
                   key={`${id}${rotation.data}`}
                   desc={rotation.name}
+                  value={rotation.data}
                   id={`${id}${rotation.data}`}
                 />
               ))}
@@ -187,6 +188,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                     key={`${id}${subTask}`}
                     registerObj={{ ...jobForm.register(`position_arr.${index}.task_sub_arr`, { required: true }) }}
                     desc={subTask}
+                    value={subTask}
                     id={subTask}
                   />
                 ))}

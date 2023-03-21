@@ -1,7 +1,6 @@
 import { FunctionComponent } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { jobArrKeyObj } from "shared-constant/queryKeyFactory/job/jobArrKeyObj";
 import { dateConverter } from "shared-util";
 import { NormalButton } from "shared-ui/common/atom/button/normalButton";
 import { LinkButton } from "shared-ui/common/atom/button/linkButton";
@@ -23,7 +22,7 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
       { jdId: jobId },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries(jobArrKeyObj.all);
+          queryClient.invalidateQueries();
         },
       }
     );
@@ -34,7 +33,7 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
       { jdId: jobId },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries(jobArrKeyObj.all);
+          queryClient.invalidateQueries();
         },
       }
     );

@@ -1,32 +1,34 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useState, useRef } from "react";
+import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
 import { NormalButton } from "shared-ui/common/atom/button/normalButton";
 
+import { useToast } from "@/globalStates";
 import { useFindCompany, useAddJd } from "@/api";
 import { ErrorScreen, GlobalLayout, LoadingScreen, PageLayout } from "@/component";
 import type { NextPageWithLayout } from "@/types";
 
-import { CommonDataPart } from "./part/commonDataPart";
-import { PositionRequiredDataPart } from "./part/positionRequiredDataPart";
-import { PositionTaskDataPart } from "./part/positionTaskDataPart";
-import { PositionEtcDataPart } from "./part/positionEtcDataPart";
-
+import { CommonDataPart, PositionEtcDataPart, PositionRequiredDataPart, PositionTaskDataPart } from "./part";
 import { blankPosition } from "./constant";
 import { JobFormValues } from "./type";
 import { cssObj } from "./style";
+import { INTERNAL_URL } from "@/constant";
 
 const JdUpload: NextPageWithLayout = () => {
   const [searchWord, setSearchWord] = useState<string>("");
   const [checkMsg, setCheckMsg] = useState<string>();
+  const isUploadLoading = useRef<boolean>(false);
+  const router = useRouter();
 
   const jobForm = useForm<JobFormValues>({
     defaultValues: {
       position_arr: [blankPosition],
     },
   });
-  const { control, handleSubmit } = jobForm;
 
+  const { setToast } = useToast();
+  const { control, handleSubmit } = jobForm;
   const { fields, append, remove } = useFieldArray({
     control,
     name: "position_arr",
@@ -35,6 +37,33 @@ const JdUpload: NextPageWithLayout = () => {
   const { data: companyDataObj, isLoading, isError } = useFindCompany({ word: searchWord, order: "recent" });
   const { mutate: addJobMutate } = useAddJd();
 
+  const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
+    if (isUploadLoading.current) return;
+
+    if (!isUploadLoading.current) {
+      isUploadLoading.current = true;
+      addJobMutate(
+        { dto: jobObj },
+        {
+          onSuccess: () => {
+            setToast("등록되었습니다");
+            router.push({
+              pathname: INTERNAL_URL.JD_LIST_URL,
+              query: { ...router.query, page: 1 },
+            });
+          },
+
+          onError: (addJobError) => {
+            setCheckMsg(addJobError.response?.data.error_message);
+          },
+          onSettled: () => {
+            isUploadLoading.current = false;
+          },
+        }
+      );
+    }
+  };
+
   if (!companyDataObj || isLoading) {
     return <LoadingScreen />;
   }
@@ -42,21 +71,6 @@ const JdUpload: NextPageWithLayout = () => {
   if (isError) {
     return <ErrorScreen />;
   }
-
-  const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
-    addJobMutate(
-      { dto: jobObj },
-      {
-        onSuccess: () => {
-          setCheckMsg("서버에 공고가 업로드 되었습니다.");
-        },
-
-        onError: (addJobError) => {
-          setCheckMsg(addJobError.response?.data.error_message);
-        },
-      }
-    );
-  };
 
   return (
     <main css={cssObj.wrapper}>

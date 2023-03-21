@@ -8,10 +8,8 @@ import { useFindCompany, useEditJd, useJdDetail } from "@/api";
 import { ErrorScreen, GlobalLayout, LoadingScreen, PageLayout } from "@/component";
 import type { NextPageWithLayout } from "@/types";
 
-import { CommonDataPart } from "./part/commonDataPart";
-import { PositionRequiredDataPart } from "./part/positionRequiredDataPart";
-import { PositionTaskDataPart } from "./part/positionTaskDataPart";
-import { PositionEtcDataPart } from "./part/positionEtcDataPart";
+import { CommonDataPart, PositionRequiredDataPart, PositionEtcDataPart, PositionTaskDataPart } from "./part";
+
 import { JobFormValues } from "./type";
 import { blankPosition } from "./constant";
 import { cssObj } from "./style";

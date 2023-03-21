@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-const MOBILE = `@media (max-width:400px)`;
+import { COLORS } from "shared-style/color";
 
 export const globalStyle = css`
   * {
@@ -96,10 +96,6 @@ export const globalStyle = css`
   html {
     font-family: "Noto Sans KR", Verdana, sans-serif;
     font-size: 16px;
-    min-width: 360px;
-    ${MOBILE} {
-      font-size: 14px;
-    }
   }
   /* HTML5 display-role reset for older browsers */
   article,
@@ -139,7 +135,17 @@ export const globalStyle = css`
   }
   a {
     text-decoration: none;
-    color: inherit;
+    color: ${COLORS.GRAY10};
+
+    :focus {
+      outline: none;
+    }
+    :focus-visible {
+      outline-color: ${COLORS.BLUE_FIRST40};
+      outline-offset: 0.3rem;
+      outline-style: solid;
+      outline-width: 3px;
+    }
   }
   input,
   select,
@@ -156,6 +162,25 @@ export const globalStyle = css`
     align-items: center;
     justify-content: center;
     appearance: none;
+
+    :focus {
+      outline: none;
+    }
+    :focus-visible {
+      outline-color: ${COLORS.BLUE_FIRST40};
+      outline-offset: 0.3rem;
+      outline-style: solid;
+      outline-width: 3px;
+    }
+  }
+  input[type="checkbox"],
+  input[type="radio"] {
+    :focus {
+      outline: none;
+    }
+    :focus-visible {
+      outline: none;
+    }
   }
   textarea {
     font-family: "Noto Sans KR", Verdana, sans-serif;
