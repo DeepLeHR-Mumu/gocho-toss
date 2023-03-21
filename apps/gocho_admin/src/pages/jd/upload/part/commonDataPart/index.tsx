@@ -1,35 +1,41 @@
 import { FunctionComponent, FocusEvent, useEffect, useState } from "react";
-import { FiCheck } from "react-icons/fi";
 
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
+import { URL_REGEXP } from "shared-constant/src/regExp";
 
-import { DatetimeBox, ErrorMessage } from "../../component";
+import { useFindCompany } from "@/api";
+
+import { DatetimeBox, ErrorMessage, AutoEndTimeCheckBox } from "../../component";
 import { CommonDataPartProps } from "./type";
 import { cssObj } from "./style";
 
-export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ companyDataArr, jobForm, setSearchWord }) => {
+export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobForm }) => {
+  const [searchWord, setSearchWord] = useState<string>("");
   const [isAlways, setIsAlways] = useState<boolean>(false);
+
   const {
     watch,
     setError,
     setValue,
+    resetField,
     formState: { errors },
   } = jobForm;
+
+  const { data: companyDataObj } = useFindCompany({ word: searchWord, order: "recent" });
 
   useEffect(() => {
     if (isAlways) {
       setValue("end_time", "9999-12-31T23:59");
     }
     if (!isAlways) {
-      jobForm.resetField("end_time");
+      resetField("end_time");
     }
-  }, [isAlways, jobForm, setValue]);
+  }, [isAlways, resetField, setValue]);
 
   return (
     <div css={cssObj.wrapper}>
       <strong css={cssObj.title}>공통 공고 내용</strong>
-
       <ul css={cssObj.container}>
         <li>
           <strong css={cssObj.requiredTitle}>기업 이름</strong>
@@ -48,12 +54,20 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ company
             </button>
           </div>
           <div css={cssObj.companySelectBox}>
-            {companyDataArr.map((company) => (
+            {companyDataObj?.companyDataArr.map((company) => (
               <SharedRadioButton
                 key={company.name}
                 id={company.name}
                 value={`${company.id}`}
-                registerObj={{ ...jobForm.register("company_id", { valueAsNumber: true, required: true }) }}
+                registerObj={{
+                  ...jobForm.register("company_id", {
+                    valueAsNumber: true,
+                    required: {
+                      value: true,
+                      message: "선택된 기업이 없습니다.",
+                    },
+                  }),
+                }}
               >
                 <p>{company.name}</p>
               </SharedRadioButton>
@@ -85,20 +99,12 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ company
         <li>
           <strong css={cssObj.requiredTitle}>채용 기간 </strong>
           <div css={cssObj.dateBox}>
-            <label htmlFor="alwaysEndTime" css={cssObj.checkBoxLabel(isAlways)}>
-              <input
-                type="checkbox"
-                id="alwaysEndTime"
-                css={cssObj.checkBoxInput}
-                onClick={() => {
-                  setIsAlways((isPrev) => !isPrev);
-                }}
-              />
-              <div css={cssObj.checkBox(isAlways)}>
-                <FiCheck />
-              </div>
-              <p css={cssObj.checkboxDesc}>상시공고</p>
-            </label>
+            <AutoEndTimeCheckBox
+              onClickEvent={() => {
+                setIsAlways((isPrev) => !isPrev);
+              }}
+              isChecked={isAlways}
+            />
             <CheckBoxWithDesc registerObj={{ ...jobForm.register("cut") }} desc="채용시 마감" id="cut" />
             <DatetimeBox register={jobForm.register} valueName="start_time" />
             {!isAlways && <DatetimeBox register={jobForm.register} valueName="end_time" />}
@@ -108,28 +114,56 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ company
           <ul>
             <li>
               <strong css={cssObj.requiredTitle}>채용 절차</strong>
+              {errors.process_arr?.message && <ErrorMessage msg={errors.process_arr.message} />}
               <div css={cssObj.textareaBox}>
                 <p css={cssObj.textareaWarning}>엔터로 구분해주세요.</p>
-                <textarea css={cssObj.textarea} {...jobForm.register("process_arr", { required: true })} />
+                <textarea
+                  css={cssObj.textarea}
+                  {...jobForm.register("process_arr", {
+                    required: {
+                      value: true,
+                      message: "채용절차를 작성해주세요.",
+                    },
+                  })}
+                />
               </div>
             </li>
             <li>
               <strong css={cssObj.requiredTitle}>지원 방법</strong>
+              {errors.apply_route_arr?.message && <ErrorMessage msg={errors.apply_route_arr.message} />}
               <div css={cssObj.textareaBox}>
                 <p css={cssObj.textareaWarning}>엔터로 구분해주세요.</p>
-                <textarea css={cssObj.textarea} {...jobForm.register("apply_route_arr", { required: true })} />
+                <textarea
+                  css={cssObj.textarea}
+                  {...jobForm.register("apply_route_arr", {
+                    required: {
+                      value: true,
+                      message: "지원방법을 작성해주세요.",
+                    },
+                  })}
+                />
               </div>
             </li>
           </ul>
           <ul>
             <li>
               <strong css={cssObj.requiredTitle}>채용 링크</strong>
+              {errors.apply_url?.message && <ErrorMessage msg={errors.apply_url.message} />}
               <div css={cssObj.flexFullBox}>
                 <input
                   type="url"
                   placeholder="https://"
                   css={cssObj.inputCSS}
-                  {...jobForm.register("apply_url", { required: true })}
+                  {...jobForm.register("apply_url", {
+                    pattern: {
+                      value: URL_REGEXP,
+                      message: "http 또는 https를 포함한 url 형식을 작성해주세요.",
+                    },
+                    required: {
+                      value: true,
+                      message: "http 또는 https를 포함한 url 형식을 작성해주세요.",
+                    },
+                  })}
                 />
               </div>
             </li>

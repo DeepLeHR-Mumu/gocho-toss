@@ -4,6 +4,7 @@ import { AxiosError } from "axios";
 import { AdminResponseDef } from "shared-type/api/responseType";
 
 import { axiosInstance } from "@/api/useAxiosInterceptor";
+import { ErrorResponseDef } from "@/types";
 
 import { PostEditJdDef, RequestObjDef, useEditJdProps } from "./type";
 
@@ -20,7 +21,7 @@ export const putEditJd: PostEditJdDef = async (requestObj) => {
 };
 
 export const useEditJd: useEditJdProps = () =>
-  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({
+  useMutation<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>({
     mutationFn: (requestObj) => {
       const newRequestObj = {
         ...requestObj,

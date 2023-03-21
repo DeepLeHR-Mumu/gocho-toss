@@ -1,42 +1,38 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
 import { NormalButton } from "shared-ui/common/atom/button/normalButton";
 
-import { useFindCompany, useEditJd, useJdDetail } from "@/api";
-import { ErrorScreen, GlobalLayout, LoadingScreen, PageLayout } from "@/component";
+import { useToast } from "@/globalStates";
+import { useEditJd, useJdDetail } from "@/api";
+import { GlobalLayout, LoadingScreen, PageLayout } from "@/component";
 import type { NextPageWithLayout } from "@/types";
+import { INTERNAL_URL } from "@/constant";
 
 import { CommonDataPart, PositionRequiredDataPart, PositionEtcDataPart, PositionTaskDataPart } from "./part";
-
 import { JobFormValues } from "./type";
 import { blankPosition } from "./constant";
 import { cssObj } from "./style";
 
 const JdEdit: NextPageWithLayout = () => {
+  const [checkMsg, setCheckMsg] = useState<string>();
   const router = useRouter();
   const jobId = Number(router.query.id);
-
-  const [searchWord, setSearchWord] = useState<string>("");
-  const [checkMsg, setCheckMsg] = useState<string>();
-
-  const { data: jobData } = useJdDetail({ id: jobId });
-  const { data: companyDataObj, isLoading, isError } = useFindCompany({ word: searchWord, order: "recent" });
-  const { mutate: editJobMutate } = useEditJd();
+  const isUploadLoading = useRef<boolean>(false);
 
   const jobForm = useForm<JobFormValues>({
-    defaultValues: {
-      company_id: jobData?.company.id,
-      position_arr: [blankPosition],
-    },
+    mode: "onBlur",
   });
   const { control, handleSubmit, reset } = jobForm;
-
   const { fields, append, remove } = useFieldArray({
     control,
     name: "position_arr",
   });
+
+  const { setToast } = useToast();
+  const { data: jobData } = useJdDetail({ id: jobId });
+  const { mutate: editJobMutate } = useEditJd();
 
   useEffect(() => {
     const newStartTime = jobData?.startTime ? jobData.startTime + 540000 * 60 : 0;
@@ -84,27 +80,35 @@ const JdEdit: NextPageWithLayout = () => {
     });
   }, [jobData, reset]);
 
-  if (!companyDataObj || !jobData || isLoading) {
+  if (!jobData) {
     return <LoadingScreen />;
   }
 
-  if (isError) {
-    return <ErrorScreen />;
-  }
-
   const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
-    editJobMutate(
-      { jdId: jobId, dto: jobObj },
-      {
-        onSuccess: () => {
-          setCheckMsg("공고가 수정 되었습니다.");
-        },
+    if (isUploadLoading.current) return;
 
-        onError: () => {
-          setCheckMsg("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
-        },
-      }
-    );
+    if (!isUploadLoading.current) {
+      isUploadLoading.current = true;
+
+      editJobMutate(
+        { jdId: jobId, dto: jobObj },
+        {
+          onSuccess: () => {
+            setToast("수정되었습니다");
+            router.push({
+              pathname: INTERNAL_URL.JD_LIST_URL,
+              query: { ...router.query, page: 1 },
+            });
+          },
+          onError: (editJobError) => {
+            setCheckMsg(editJobError.response?.data.error_message);
+          },
+          onSettled: () => {
+            isUploadLoading.current = false;
+          },
+        }
+      );
+    }
   };
 
   return (
@@ -116,12 +120,7 @@ const JdEdit: NextPageWithLayout = () => {
         </p>
         <section>
           <form css={cssObj.formContainer} onSubmit={handleSubmit(jobSubmitHandler)}>
-            <CommonDataPart
-              companyDataArr={companyDataObj.companyDataArr}
-              jobForm={jobForm}
-              setSearchWord={setSearchWord}
-              jobData={jobData}
-            />
+            <CommonDataPart jobForm={jobForm} jobData={jobData} />
             <ul css={cssObj.fieldArrCSS}>
               {fields.map((item, index) => (
                 <li key={item.id}>

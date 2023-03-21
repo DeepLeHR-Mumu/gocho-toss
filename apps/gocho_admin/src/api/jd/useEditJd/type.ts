@@ -1,6 +1,8 @@
-import { AdminResponseDef } from "shared-type/api/responseType";
 import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
+
+import { AdminResponseDef } from "shared-type/api/responseType";
+import { ErrorResponseDef } from "@/types";
 
 export interface RequestObjDef {
   jdId: number;
@@ -93,5 +95,5 @@ export interface PostEditJdDef {
 }
 
 export interface useEditJdProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

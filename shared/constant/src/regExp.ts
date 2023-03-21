@@ -4,3 +4,5 @@ export const EMAIL_REGEXP =
 export const PWD_REGEXP = /^\S*$/;
 
 export const NUMBER_REGEXP = /^[0-9]+$/;
+
+export const URL_REGEXP = /^(http|https):\/\/[a-zA-Z0-9-.]+\.[a-zA-Z]{2,}(\/\S*)?$/;

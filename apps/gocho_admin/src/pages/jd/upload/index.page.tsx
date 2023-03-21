@@ -5,23 +5,23 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { NormalButton } from "shared-ui/common/atom/button/normalButton";
 
 import { useToast } from "@/globalStates";
-import { useFindCompany, useAddJd } from "@/api";
-import { ErrorScreen, GlobalLayout, LoadingScreen, PageLayout } from "@/component";
+import { useAddJd } from "@/api";
+import { GlobalLayout, PageLayout } from "@/component";
 import type { NextPageWithLayout } from "@/types";
+import { INTERNAL_URL } from "@/constant";
 
 import { CommonDataPart, PositionEtcDataPart, PositionRequiredDataPart, PositionTaskDataPart } from "./part";
 import { blankPosition } from "./constant";
 import { JobFormValues } from "./type";
 import { cssObj } from "./style";
-import { INTERNAL_URL } from "@/constant";
 
 const JdUpload: NextPageWithLayout = () => {
-  const [searchWord, setSearchWord] = useState<string>("");
   const [checkMsg, setCheckMsg] = useState<string>();
   const isUploadLoading = useRef<boolean>(false);
   const router = useRouter();
 
   const jobForm = useForm<JobFormValues>({
+    mode: "onBlur",
     defaultValues: {
       position_arr: [blankPosition],
     },
@@ -34,7 +34,6 @@ const JdUpload: NextPageWithLayout = () => {
     name: "position_arr",
   });
 
-  const { data: companyDataObj, isLoading, isError } = useFindCompany({ word: searchWord, order: "recent" });
   const { mutate: addJobMutate } = useAddJd();
 
   const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
@@ -52,7 +51,6 @@ const JdUpload: NextPageWithLayout = () => {
               query: { ...router.query, page: 1 },
             });
           },
-
           onError: (addJobError) => {
             setCheckMsg(addJobError.response?.data.error_message);
           },
@@ -64,14 +62,6 @@ const JdUpload: NextPageWithLayout = () => {
     }
   };
 
-  if (!companyDataObj || isLoading) {
-    return <LoadingScreen />;
-  }
-
-  if (isError) {
-    return <ErrorScreen />;
-  }
-
   return (
     <main css={cssObj.wrapper}>
       <PageLayout>
@@ -80,11 +70,8 @@ const JdUpload: NextPageWithLayout = () => {
           <span>필수 작성칸</span> <span>필수 작성아님</span>
         </p>
         <form css={cssObj.formContainer} onSubmit={handleSubmit(jobSubmitHandler)}>
-          <CommonDataPart
-            companyDataArr={companyDataObj.companyDataArr}
-            jobForm={jobForm}
-            setSearchWord={setSearchWord}
-          />
+          <CommonDataPart jobForm={jobForm} />
+
           <ul css={cssObj.fieldArrCSS}>
             {fields.map((item, index) => (
               <li key={item.id}>

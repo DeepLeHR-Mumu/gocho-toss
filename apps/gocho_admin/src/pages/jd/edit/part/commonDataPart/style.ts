@@ -18,6 +18,7 @@ export const cssObj = {
       margin-bottom: 1.25rem;
     }
   `,
+
   infoBox: css``,
   requiredTitle: css`
     font-size: 1.125rem;
@@ -45,7 +46,7 @@ export const cssObj = {
   dateBox: css`
     width: 100%;
     display: grid;
-    grid-template-columns: 25% 25% 15% 15%;
+    grid-template-columns: 10% 10% 30% 30%;
     align-items: center;
     gap: 2rem;
   `,
