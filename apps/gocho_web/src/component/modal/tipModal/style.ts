@@ -15,7 +15,7 @@ export const modalWrapper = css`
 export const contentContainer = css`
   overflow: hidden;
   overflow-y: scroll;
-  height: 70vh;
+  height: 69vh;
   padding: 2.5rem 7rem;
 
   ::-webkit-scrollbar {
