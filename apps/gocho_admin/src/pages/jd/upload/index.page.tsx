@@ -77,7 +77,17 @@ const JdUpload: NextPageWithLayout = () => {
               <li key={item.id}>
                 <PositionRequiredDataPart id={item.id} index={index} jobForm={jobForm} />
                 <PositionTaskDataPart id={item.id} index={index} jobForm={jobForm} />
-                <PositionEtcDataPart id={item.id} index={index} jobForm={jobForm} append={append} remove={remove} />
+                <PositionEtcDataPart id={item.id} index={index} jobForm={jobForm} />
+
+                <div css={cssObj.cardButtonBox}>
+                  <NormalButton
+                    buttonClick={() => append({ ...jobForm.watch("position_arr")[index] })}
+                    text="해당 직무 복사"
+                    wide={false}
+                    variant="outlined"
+                  />
+                  <NormalButton buttonClick={() => remove(index)} text="해당 직무 제거" wide={false} variant="filled" />
+                </div>
               </li>
             ))}
           </ul>

@@ -57,6 +57,12 @@ export const cssObj = {
     gap: 1rem;
     margin-bottom: 2rem;
   `,
+  cardButtonBox: css`
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+  `,
   warning: css`
     width: 100%;
     border: 1px solid ${COLORS.ERROR_YELLOW50};

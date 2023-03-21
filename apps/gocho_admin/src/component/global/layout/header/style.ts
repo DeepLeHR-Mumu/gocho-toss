@@ -8,6 +8,7 @@ export const cssObj = {
     top: 0;
     left: 0;
     z-index: 10;
+    min-width: 97.5rem;
     border-bottom: 1px solid ${COLORS.GRAY80};
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
     padding: 0.5rem 2rem;

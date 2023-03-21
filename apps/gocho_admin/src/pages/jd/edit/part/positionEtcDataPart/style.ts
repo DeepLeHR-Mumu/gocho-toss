@@ -99,6 +99,35 @@ export const cssObj = {
     color: ${COLORS.GRAY10};
     margin-right: 1rem;
   `,
+  isHaveCertiButton: css`
+    font-size: 0.875rem;
+    color: ${COLORS.BLUE_FIRST40};
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > div {
+      margin-right: 0.25rem;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background-color: ${COLORS.BLUE_FIRST40};
+    }
+  `,
+  certiButton: css`
+    font-size: 0.875rem;
+    color: ${COLORS.GRAY10};
+    padding: 0.5rem;
+    > div {
+      margin-right: 0.25rem;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background-color: ${COLORS.GRAY100};
+      border: 1px solid ${COLORS.GRAY10};
+    }
+  `,
   gridBox: css`
     display: grid;
     align-items: center;
