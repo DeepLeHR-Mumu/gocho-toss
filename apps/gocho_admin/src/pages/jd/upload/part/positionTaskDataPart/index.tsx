@@ -64,10 +64,10 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
               {rotationArr.map((rotation) => (
                 <CheckBoxWithDesc
                   registerObj={{ ...jobForm.register(`position_arr.${index}.rotation_arr`) }}
-                  key={`${id}${rotation.data}`}
+                  key={`${rotation.data}`}
                   desc={rotation.name}
                   value={rotation.data}
-                  id={`${id}${rotation.data}`}
+                  id={`${rotation.data}`}
                 />
               ))}
             </div>
@@ -169,10 +169,10 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
               <div css={cssObj.flexBox}>
                 {taskArr.map((task) => (
                   <SharedRadioButton
-                    key={`${id}${task.mainTask}`}
+                    key={`${task.mainTask}`}
                     registerObj={{ ...jobForm.register(`position_arr.${index}.task_main`, { required: true }) }}
                     value={task.mainTask}
-                    id={`${id}${task.mainTask}`}
+                    id={`${task.mainTask}`}
                   >
                     <p css={cssObj.radioDesc}>{task.mainTask}</p>
                   </SharedRadioButton>

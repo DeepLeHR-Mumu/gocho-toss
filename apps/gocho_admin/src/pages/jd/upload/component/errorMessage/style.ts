@@ -7,5 +7,6 @@ export const cssObj = {
     font-size: 0.875rem;
     font-weight: 500;
     color: ${COLORS.ERROR_RED40};
+    line-height: 2;
   `,
 };

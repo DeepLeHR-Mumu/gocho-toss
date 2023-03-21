@@ -10,15 +10,15 @@ import { GlobalLayout, PageLayout } from "@/component";
 import type { NextPageWithLayout } from "@/types";
 import { INTERNAL_URL } from "@/constant";
 
-import { CommonDataPart, PositionEtcDataPart, PositionRequiredDataPart, PositionTaskDataPart } from "./part";
+import { CommonDataPart, PositionRequiredDataPart, PositionTaskDataPart, PositionEtcDataPart } from "./part";
 import { blankPosition } from "./constant";
 import { JobFormValues } from "./type";
 import { cssObj } from "./style";
 
 const JdUpload: NextPageWithLayout = () => {
   const [checkMsg, setCheckMsg] = useState<string>();
-  const isUploadLoading = useRef<boolean>(false);
   const router = useRouter();
+  const isUploadLoading = useRef<boolean>(false);
 
   const jobForm = useForm<JobFormValues>({
     mode: "onBlur",

@@ -28,7 +28,7 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobData
       resetField("end_time", { defaultValue: "9999-12-31T23:59" });
     }
     if (!isAlways && new Date(jobData.endTime).toISOString().substring(0, 4) === "9999") {
-      resetField("end_time", { defaultValue: new Date().toISOString().substring(0, 19) });
+      resetField("end_time", { defaultValue: "" });
     }
     if (!isAlways && new Date(jobData.endTime).toISOString().substring(0, 4) !== "9999") {
       resetField("end_time", { defaultValue: new Date(jobData.endTime).toISOString().substring(0, 19) });

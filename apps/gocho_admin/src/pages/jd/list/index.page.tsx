@@ -6,7 +6,7 @@ import { GlobalLayout, PageLayout, ErrorScreen, LoadingScreen, Pagination } from
 import { INTERNAL_URL } from "@/constant";
 import type { NextPageWithLayout } from "@/types";
 
-import JobCard from "./component/jobCard";
+import { JobCard } from "./component";
 import { cssObj } from "./style";
 
 const JdList: NextPageWithLayout = () => {

@@ -11,7 +11,7 @@ import { INTERNAL_URL } from "@/constant";
 import { JobCardProps } from "./type";
 import { cssObj } from "./style";
 
-const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
+export const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
   const queryClient = useQueryClient();
 
   const { mutate: deleteJobMutate } = useDeleteJd();
@@ -50,6 +50,7 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
           <span css={cssObj.companyName}>{job.companyName}</span>
           {job.title}
         </li>
+        {/* TODO : 따로 안오고 뭉쳐서 오고있음 */}
         <li css={cssObj.taskBox}>
           {job.taskArr.map((task) => (
             <span css={cssObj.task} key={`${job.id}${task}`}>
@@ -80,5 +81,3 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
     </li>
   );
 };
-
-export default JobCard;

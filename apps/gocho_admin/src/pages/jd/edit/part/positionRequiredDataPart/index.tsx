@@ -3,16 +3,21 @@ import { FunctionComponent } from "react";
 import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 
+import { ErrorMessage } from "../../component";
 import { requiredExpArr } from "./constant";
 import { cssObj } from "./style";
 import { PositionRequiredDataPartProps } from "./type";
 
 export const PositionRequiredDataPart: FunctionComponent<PositionRequiredDataPartProps> = ({ id, index, jobForm }) => {
-  const { watch } = jobForm;
+  const {
+    watch,
+    formState: { errors },
+  } = jobForm;
 
-  // TODO: 초기 렌더링시 undefined fix
   const isDisabled =
     watch("position_arr")[index].required_exp !== "경력" && watch("position_arr")[index].required_exp !== "신입/경력";
+
+  const positionError = errors.position_arr && errors.position_arr[index];
 
   return (
     <div css={cssObj.wrapper}>
@@ -59,11 +64,19 @@ export const PositionRequiredDataPart: FunctionComponent<PositionRequiredDataPar
         <ul css={cssObj.formBox}>
           <li>
             <strong css={cssObj.requiredTitle}>경력 조건</strong>
+            {positionError && positionError.required_exp?.message && (
+              <ErrorMessage msg={positionError.required_exp.message} />
+            )}
             <div css={cssObj.flexBox}>
               {requiredExpArr.map((expName) => (
                 <SharedRadioButton
                   key={`${expName}${id}`}
-                  registerObj={jobForm.register(`position_arr.${index}.required_exp`)}
+                  registerObj={jobForm.register(`position_arr.${index}.required_exp`, {
+                    required: {
+                      value: true,
+                      message: "경력 조건을 선택해주세요.",
+                    },
+                  })}
                   value={expName}
                   id={`${expName}${index}`}
                 >

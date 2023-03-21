@@ -44,16 +44,6 @@ export const cssObj = {
     flex-direction: column;
     align-items: center;
   `,
-  flexBox: css`
-    display: flex;
-    justify-content: space-between;
-  `,
-  companyName: css`
-    font-weight: 500;
-    display: block;
-    margin-bottom: 0.25rem;
-    ${shorten()};
-  `,
   task: css`
     background-color: ${COLORS.GRAY90};
     margin-bottom: 0.5rem;
@@ -66,6 +56,16 @@ export const cssObj = {
     align-items: center;
     justify-content: center;
     border-radius: 0.5rem;
+  `,
+  flexBox: css`
+    display: flex;
+    justify-content: space-between;
+  `,
+  companyName: css`
+    font-weight: 500;
+    display: block;
+    margin-bottom: 0.25rem;
+    ${shorten()};
   `,
   startDateCSS: css`
     display: block;
