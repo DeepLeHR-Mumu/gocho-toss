@@ -90,10 +90,15 @@ export const info = css`
 `;
 
 export const numInfo = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
   margin: 0 1rem 0 0.25rem;
   color: ${COLORS.GRAY10};
 
   :after {
+    color: ${COLORS.GRAY10};
     content: " · ";
     margin-left: 1rem;
   }

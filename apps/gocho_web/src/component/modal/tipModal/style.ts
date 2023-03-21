@@ -150,20 +150,20 @@ export const bodyCSS = css`
 export const infoContainer = css`
   align-items: center;
   display: flex;
+  color: ${COLORS.GRAY20};
 `;
 
 export const info = css`
   margin-right: 1rem;
   font-size: 0.875rem;
-  color: ${COLORS.GRAY20};
 `;
 
 export const numInfo = css`
-  width: 2rem;
   font-size: 0.875rem;
-  font-weight: 400;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  color: ${COLORS.GRAY20};
+  margin-left: 0.25rem;
+`;
+
+export const uploader = css`
+  font-size: 0.875rem;
+  margin-left: 1rem;
 `;
