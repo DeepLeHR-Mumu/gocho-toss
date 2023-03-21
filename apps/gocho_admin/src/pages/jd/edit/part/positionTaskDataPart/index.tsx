@@ -62,14 +62,19 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
           <li>
             <strong css={cssObj.noRequiredTitle}>교대 형태</strong>
             <div css={cssObj.flexBox}>
-              {rotationArr.map((rotation) => (
-                <CheckBoxWithDesc
-                  registerObj={{ ...jobForm.register(`position_arr.${index}.rotation_arr`) }}
-                  key={`${id}${rotation.data}`}
-                  desc={rotation.name}
-                  id={`${id}${rotation.data}`}
-                />
-              ))}
+              {rotationArr.map((rotation) => {
+                const isChecked = watch(`position_arr.${index}.rotation_arr`)?.includes(rotation.name);
+                return (
+                  <CheckBoxWithDesc
+                    registerObj={{ ...jobForm.register(`position_arr.${index}.rotation_arr`) }}
+                    key={`${rotation.data}`}
+                    desc={rotation.name}
+                    value={rotation.data}
+                    checked={isChecked}
+                    id={`${rotation.data}`}
+                  />
+                );
+              })}
             </div>
           </li>
           <li>
@@ -183,14 +188,19 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
               <strong css={cssObj.subTitle}>2차직무 선택</strong>
               <p css={cssObj.textareaWarning}>중복선택이 가능합니다.</p>
               <div css={cssObj.flexBox}>
-                {mainTask?.subTaskArr.map((subTask) => (
-                  <CheckBoxWithDesc
-                    key={`${id}${subTask}`}
-                    registerObj={{ ...jobForm.register(`position_arr.${index}.task_sub_arr`, { required: true }) }}
-                    desc={subTask}
-                    id={subTask}
-                  />
-                ))}
+                {mainTask?.subTaskArr.map((subTask) => {
+                  const isChecked = watch(`position_arr.${index}.task_sub_arr`)?.includes(subTask);
+                  return (
+                    <CheckBoxWithDesc
+                      key={`${id}${subTask}`}
+                      registerObj={{ ...jobForm.register(`position_arr.${index}.task_sub_arr`, { required: true }) }}
+                      desc={subTask}
+                      value={subTask}
+                      checked={isChecked}
+                      id={subTask}
+                    />
+                  );
+                })}
               </div>
             </div>
           </li>

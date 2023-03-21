@@ -11,6 +11,7 @@ import { cssObj } from "./style";
 export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, index, jobForm }) => {
   const [bigPlace, setBigPlace] = useState<string>("");
   const [smallPlace, setSmallPlace] = useState<string>("");
+
   const { watch, setValue } = jobForm;
 
   const isConversionDisabled =
