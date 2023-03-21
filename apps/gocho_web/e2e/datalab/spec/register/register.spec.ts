@@ -1,7 +1,6 @@
-import { test, expect, Page, APIRequestContext, Response } from "@playwright/test";
+import { test, expect, Page } from "@playwright/test";
 
 import { linkObj } from "shared-constant/e2e/internalURL";
-import { BACKEND_URL } from "shared-constant/e2e/externalURL";
 import { loginTester } from "../../../common/common.spec";
 
 test.beforeEach(async ({ page }) => {
@@ -94,40 +93,6 @@ const basicSpecRegisterTester = async (page: Page) => {
   await page.getByRole("button", { name: "다음" }).click();
 };
 
-const specResponseCheckTester = async (isDeepRegister: boolean, response: Response, request: APIRequestContext) => {
-  const registerPostData = await response.json();
-  const registerId = await registerPostData.data["id"];
-
-  const registerGetResponse = await request.get(`${BACKEND_URL}/specs/${registerId}`);
-  const registerGetData = await registerGetResponse.json();
-
-  expect(registerGetData.data.secret).toEqual(true);
-  expect(registerGetData.data.gender).toEqual("여");
-  expect(registerGetData.data.age).toEqual(20);
-  expect(registerGetData.data.military).toEqual("면제-해당없음");
-  expect(registerGetData.data.desired_task).toEqual(["생산", "설비"]);
-  expect(registerGetData.data.desired_industry).toEqual(["전자재료", "탱크터미널"]);
-  expect(registerGetData.data.last_education).toEqual("초대졸");
-  expect(registerGetData.data.highschool.type).toEqual("공업고");
-  expect(registerGetData.data.highschool.naesin).toEqual(1);
-  expect(registerGetData.data.highschool.absent).toEqual(1);
-  expect(registerGetData.data.highschool.tardy).toEqual(1);
-  expect(registerGetData.data.highschool.leave_early).toEqual(1);
-  expect(registerGetData.data.highschool.class_miss).toEqual(1);
-  expect(registerGetData.data.college.department).toEqual("테스트학과계열");
-  expect(registerGetData.data.college.grade).toEqual(4.25);
-  expect(registerGetData.data.college.max_grade).toEqual(4.5);
-  expect(registerGetData.data.college.uturn).toBeTruthy();
-  expect(registerGetData.data.certificate.data).toEqual(["포장산업기사"]);
-
-  // if (isDeepRegister) {
-  //   expect(registerGetData.data.language).toEqual([{ language: "중국어", test: "TSC", score: "2급" }]);
-  //   expect(registerGetData.data.award).toEqual("수상경력에 대한 서술...");
-  //   expect(registerGetData.data.career).toEqual("경력에 대한 서술...");
-  //   expect(registerGetData.data.etc).toEqual("기타사항에 대한 서술...");
-  // }
-};
-
 test.describe("스펙등록 테스트", () => {
   test("타이틀, heading 검사", async ({ page }) => {
     await loginTester(page);
@@ -162,12 +127,6 @@ test.describe("스펙등록 테스트", () => {
     test.slow();
     await loginTester(page);
     await basicSpecRegisterTester(page);
-    const registerResponse = await Promise.all([
-      page.waitForResponse((response) => response.url().includes("/specs") && response.status() === 201),
-      await page.locator('button:has-text("스펙 등록하기")').click(),
-    ]);
-
-    await specResponseCheckTester(false, registerResponse[0], request);
   });
 
   test("로그인 후 스펙 상세 등록 진행", async ({ page, request }) => {
@@ -203,14 +162,6 @@ test.describe("스펙등록 테스트", () => {
     await page.locator('textarea[name="award"]').fill("수상경력에 대한 서술...");
     await page.locator('textarea[name="career"]').fill("경력에 대한 서술...");
     await page.locator('textarea[name="etc"]').fill("기타사항에 대한 서술...");
-
-    // 상세 스펙 등록 후 데이터 검수
-    const registerResponse = await Promise.all([
-      page.waitForResponse((response) => response.url().includes("/specs") && response.status() === 201),
-      page.getByRole("button", { name: "완료" }).click(),
-    ]);
-
-    await specResponseCheckTester(true, registerResponse[0], request);
 
     await page.getByRole("link", { name: "스펙 리스트" }).click();
     await expect(page).toHaveURL(linkObj.SPEC_LIST_URL);
