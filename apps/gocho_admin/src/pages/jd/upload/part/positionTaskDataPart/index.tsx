@@ -5,7 +5,7 @@ import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
 
-import { useFactoryArr } from "@/api";
+import { useFindFactory } from "@/api";
 
 import { contractTypeArr, placeTypeArr, rotationArr, taskArr } from "./constant";
 import { PositionBoxProps } from "./type";
@@ -16,7 +16,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
   const openPostCodePopup = useDaumPostcodePopup();
 
   // TODO : 리밋 0으로 변경해야함 그리고 공장 find api로 변환해야함
-  const { data: factoryData } = useFactoryArr({ companyId: watch("company_id"), limit: 6 });
+  const { data: factoryData } = useFindFactory({ companyId: watch("company_id") });
 
   const isConversionDisabled =
     watch("position_arr")[index].contract_type !== "인턴" && watch("position_arr")[index].contract_type !== "계약>정규";
@@ -108,10 +108,10 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                 <strong css={cssObj.requiredTitle}>공장 근무지</strong>
                 {!factoryData && <p css={cssObj.textareaWarning}>기업 이름에서 기업을 선택해주세요.</p>}
                 <div css={cssObj.flexBox}>
-                  {factoryData?.factoryDataArr.length === 0 ? (
+                  {factoryData?.length === 0 ? (
                     <p>등록된 공장이 없습니다.</p>
                   ) : (
-                    factoryData?.factoryDataArr?.map((factoryAddress) => {
+                    factoryData?.map((factoryAddress) => {
                       const isHaveFactory = watch(`position_arr.${index}.place.factory_arr`)?.includes(
                         factoryAddress.id
                       );

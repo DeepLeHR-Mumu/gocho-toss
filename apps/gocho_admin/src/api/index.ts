@@ -24,6 +24,7 @@ export { useEditFactoryRequest } from "./factory/useEditFactoryRequest";
 export { useFactoryArr } from "./factory/useFactoryArr";
 export { useFactoryDetail } from "./factory/useFactoryDetail";
 export { useRejectFactory } from "./factory/useRejectFactory";
+export { useFindFactory } from "./factory/useFindFactory";
 
 export { useAcceptJd } from "./jd/useAcceptJd";
 export { useAddJd } from "./jd/useAddJd";
