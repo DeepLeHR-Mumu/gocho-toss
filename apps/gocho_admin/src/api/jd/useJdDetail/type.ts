@@ -41,7 +41,7 @@ export interface ResponseObjDef {
       rotation_arr: string[];
       rotation_etc: string;
       place: {
-        type: "일반" | "전국" | "해외" | "기타";
+        type: "일반" | "해외" | "기타";
         address_arr: string[] | null;
         factory_arr:
           | {

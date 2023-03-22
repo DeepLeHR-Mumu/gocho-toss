@@ -59,6 +59,7 @@ const JdEdit: NextPageWithLayout = () => {
         type: position.place.type,
         address_arr: position.place.addressArr || [],
         etc: position.place.etc || "",
+        factory_arr: position.place.factoryArr?.map((factoryNumber) => factoryNumber.id) || [],
       },
       hire_number: position.hireCount,
       pay_arr: position.payArr?.join("\n"),
