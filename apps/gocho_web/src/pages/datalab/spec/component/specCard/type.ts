@@ -19,9 +19,10 @@ export interface SpecCardProps {
       leaveEarly: number;
     };
     certificate: {
-      level1: number;
-      level2: number;
-      level3: number;
+      data: string[] | null;
+      level1: number | null;
+      level2: number | null;
+      level3: number | null;
     } | null;
   };
   isSkeleton?: never;

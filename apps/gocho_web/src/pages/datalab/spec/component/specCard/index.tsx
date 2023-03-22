@@ -43,7 +43,7 @@ export const SpecCard: FunctionComponent<SpecCardProps | SpecCardSkeleton> = ({ 
     specData.lastEducation === "초대졸" && specData.college !== null
       ? specData.college.grade
       : specData.highschool.naesin;
-  const isCerti = specData.certificate !== null;
+  const isCerti = specData.certificate?.data !== null;
 
   return (
     <article css={cardWrapper}>
@@ -111,21 +111,15 @@ export const SpecCard: FunctionComponent<SpecCardProps | SpecCardSkeleton> = ({ 
             <>
               <div css={certiLabel}>
                 기능사
-                {specData.certificate?.level1 !== undefined && specData.certificate?.level1 !== 0 && (
-                  <span css={certiNumber}>{specData.certificate.level1}</span>
-                )}
+                {specData.certificate?.level1 !== null && <span css={certiNumber}>{specData.certificate?.level1}</span>}
               </div>
               <div css={certiLabel}>
                 산업기사
-                {specData.certificate?.level2 !== undefined && specData.certificate?.level2 !== 0 && (
-                  <span css={certiNumber}>{specData.certificate.level2}</span>
-                )}
+                {specData.certificate?.level2 !== null && <span css={certiNumber}>{specData.certificate?.level2}</span>}
               </div>
               <div css={certiLabel}>
                 기사+
-                {specData.certificate?.level3 !== undefined && specData.certificate?.level3 !== 0 && (
-                  <span css={certiNumber}>{specData.certificate.level3}</span>
-                )}
+                {specData.certificate?.level3 !== null && <span css={certiNumber}>{specData.certificate?.level3}</span>}
               </div>
             </>
           ) : (
