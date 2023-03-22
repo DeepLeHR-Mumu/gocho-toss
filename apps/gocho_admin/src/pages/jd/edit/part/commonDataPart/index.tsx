@@ -101,6 +101,9 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobData
         </li>
         <li>
           <strong css={cssObj.requiredTitle}>채용 기간 </strong>
+          {errors.start_time && <ErrorMessage msg="공고 시작 일자를 작성해주세요" />}
+          {errors.end_time && <ErrorMessage msg="공고 만료 일자를 작성해주세요" />}
+
           <div css={cssObj.dateBox}>
             <AutoEndTimeCheckBox
               isChecked={isAlways}

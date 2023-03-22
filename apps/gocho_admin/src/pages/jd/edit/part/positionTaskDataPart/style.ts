@@ -78,6 +78,57 @@ export const cssObj = {
     justify-content: flex-start;
     gap: 0.5rem;
   `,
+  deleteButton: css`
+    background-color: ${COLORS.BLUE_FIRST40};
+    padding: 0.25rem 1rem;
+    width: fit-content;
+    border-radius: 0.3125rem;
+    font-size: 0.875rem;
+    color: ${COLORS.GRAY100};
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${COLORS.GRAY100};
+    transition: all 200ms ease-in;
+
+    :hover {
+      background-color: ${COLORS.ERROR_RED30};
+    }
+
+    > svg {
+      margin-left: 0.25rem;
+    }
+  `,
+  isHaveFactoryButton: css`
+    font-size: 0.875rem;
+    color: ${COLORS.BLUE_FIRST40};
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > div {
+      margin-right: 0.25rem;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background-color: ${COLORS.BLUE_FIRST40};
+    }
+  `,
+  factoryButton: css`
+    font-size: 0.875rem;
+    color: ${COLORS.GRAY10};
+    padding: 0.5rem;
+    > div {
+      margin-right: 0.25rem;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background-color: ${COLORS.GRAY100};
+      border: 1px solid ${COLORS.GRAY10};
+    }
+  `,
   radioDesc: css`
     font-size: 0.875rem;
     color: ${COLORS.GRAY10};
@@ -182,6 +233,21 @@ export const cssObj = {
     flex-direction: column;
     gap: 0.25rem;
     margin: 1rem 0;
+  `,
+  addAddressButton: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.4rem;
+    border: 1px solid ${COLORS.GRAY70};
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    width: fit-content;
+    color: ${COLORS.GRAY10};
+    font-weight: 400;
+    background-color: ${COLORS.GRAY100};
+    padding: 0.25rem 1rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
   `,
   placeButtonCSS: css`
     display: flex;

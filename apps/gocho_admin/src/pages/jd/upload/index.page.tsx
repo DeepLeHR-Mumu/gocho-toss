@@ -41,6 +41,7 @@ const JdUpload: NextPageWithLayout = () => {
 
     if (!isUploadLoading.current) {
       isUploadLoading.current = true;
+
       addJobMutate(
         { dto: jobObj },
         {
