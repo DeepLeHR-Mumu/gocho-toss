@@ -67,13 +67,13 @@ export const Spec8AwardCareerEtc: FunctionComponent<Spec8AwardCareerEtcProps> = 
           leave_early: currentSpecObj.highschool.leaveEarly,
           class_miss: currentSpecObj.highschool.classMiss,
         },
-        college: {
+        college: currentSpecObj.college && {
           department: currentSpecObj.college.department,
           grade: currentSpecObj.college.grade,
           max_grade: currentSpecObj.college.maxGrade,
           uturn: currentSpecObj.college.uturn,
         },
-        certificate: currentSpecObj.certificate,
+        certificate: currentSpecObj.certificate && currentSpecObj.certificate,
         language: currentSpecObj.language,
         award: currentSpecObj.award,
         career: currentSpecObj.career,
