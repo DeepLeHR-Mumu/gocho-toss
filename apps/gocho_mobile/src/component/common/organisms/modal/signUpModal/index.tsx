@@ -50,7 +50,7 @@ export const SignUpModal: FunctionComponent = () => {
       onError: (error) => {
         const errorResponse = error.response?.data as ErrorResponse;
         signupAttempt.current += 1;
-        setErrorMsg(errorResponse.error.errorMessage);
+        setErrorMsg(errorResponse.error_message);
       },
       onSuccess: (response) => {
         localStorage.setItem("accessToken", `${response?.data.access_token}`);

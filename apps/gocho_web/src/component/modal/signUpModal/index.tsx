@@ -38,7 +38,7 @@ export const SignUpBox: FunctionComponent = () => {
     mutate(signUpObj, {
       onError: (error) => {
         const errorResponse = error.response?.data as ErrorResponse;
-        setErrorMsg(errorResponse.error.errorMessage);
+        setErrorMsg(errorResponse.error_message);
         signupAttempt.current += 1;
       },
       onSuccess: (response) => {

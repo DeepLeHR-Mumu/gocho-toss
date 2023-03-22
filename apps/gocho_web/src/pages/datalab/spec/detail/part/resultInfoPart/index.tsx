@@ -55,13 +55,13 @@ export const ResultInfoPart: FunctionComponent<ResultInfoPartProps> = ({ resultD
       <section css={scoreContainer}>
         <p css={specTitle}>
           <FiUser />
-          평균총점
+          평균총점 / 평가횟수
         </p>
         {resultData.score === null ? (
           <p css={overview}>평가없음</p>
         ) : (
           <p css={overview}>
-            {resultData.score}
+            {resultData.score.toFixed(2)}
             <span> / {resultData.scoreCount}</span>
           </p>
         )}
