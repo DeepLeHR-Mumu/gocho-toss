@@ -94,6 +94,11 @@ export interface PostEditJdDef {
   ({ jdId, dto }: axiosRequestObjDef): Promise<AdminResponseDef>;
 }
 
+export const jdDetailKeyObj = {
+  all: [{ data: "jdDetail" }] as const,
+  detail: (requestObj: RequestObjDef) => [{ data: "jdDetail", requestObj }] as const,
+};
+
 export interface useEditJdProps {
   (): UseMutationResult<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

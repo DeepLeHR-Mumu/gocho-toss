@@ -141,14 +141,14 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                 </button>
               </div>
               <ul css={cssObj.placeBox}>
-                {/* TODO : 중복데이터 처리 */}
-                {jobForm.watch("position_arr")[index].place.address_arr?.map((place, positionIndex) => {
+                {watch("position_arr")[index].place.address_arr?.map((place, positionIndex) => {
                   const key = `${id}${place}${positionIndex}`;
                   return (
                     <button
                       css={cssObj.placeButtonCSS}
                       key={key}
                       type="button"
+                      aria-label={`${place} 제거`}
                       onClick={() => deletePlaceHandler(place)}
                     >
                       {place} <RiCloseFill />

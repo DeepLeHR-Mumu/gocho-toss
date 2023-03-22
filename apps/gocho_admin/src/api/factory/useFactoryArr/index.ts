@@ -14,5 +14,6 @@ export const useFactoryArr = (requestObj: RequestObjDef) =>
   useQuery({
     queryKey: factoryArrKeyObj.arr(requestObj),
     queryFn: getFactoryArr,
+    enabled: Boolean(requestObj.companyId),
     select: (data) => factoryArrSelector(data),
   });

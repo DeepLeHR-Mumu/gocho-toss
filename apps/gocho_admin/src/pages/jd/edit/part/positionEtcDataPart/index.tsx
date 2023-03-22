@@ -21,6 +21,10 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
   const positionError = errors.position_arr && errors.position_arr[index];
 
   useEffect(() => {
+    if (certiArr.length === 0) {
+      setValue(`position_arr.${index}.preferred_certi_arr`, null);
+      return;
+    }
     setValue(`position_arr.${index}.preferred_certi_arr`, certiArr);
   }, [certiArr, index, setValue]);
 

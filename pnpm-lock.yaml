@@ -39,6 +39,7 @@ importers:
       jest: ^29.4.3
       next: 13.1.6
       react: 18.2.0
+      react-daum-postcode: ^3.1.1
       react-dom: 18.2.0
       react-hook-form: ^7.34.2
       react-icons: ^4.4.0
@@ -61,6 +62,7 @@ importers:
       axios: 0.27.2
       next: 13.1.6_6m24vuloj5ihw4zc5lbsktc4fu
       react: 18.2.0
+      react-daum-postcode: 3.1.1_react@18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-hook-form: 7.43.2_react@18.2.0
       react-icons: 4.7.1_react@18.2.0

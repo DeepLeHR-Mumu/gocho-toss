@@ -53,7 +53,7 @@ export const rotationArr = [
   { data: "5;4", name: "5조 4교대" },
 ] as const;
 
-export const placeTypeArr = ["일반", "전국", "해외", "기타"] as const;
+export const placeTypeArr = ["일반", "해외", "기타"] as const;
 
 export const placeArr = [
   "서울특별시",

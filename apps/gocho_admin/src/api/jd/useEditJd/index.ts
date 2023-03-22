@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
@@ -6,7 +6,7 @@ import { AdminResponseDef } from "shared-type/api/responseType";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 import { ErrorResponseDef } from "@/types";
 
-import { PostEditJdDef, RequestObjDef, useEditJdProps } from "./type";
+import { jdDetailKeyObj, PostEditJdDef, RequestObjDef, useEditJdProps } from "./type";
 
 export const putEditJd: PostEditJdDef = async (requestObj) => {
   const formData = new FormData();
@@ -20,8 +20,10 @@ export const putEditJd: PostEditJdDef = async (requestObj) => {
   return data;
 };
 
-export const useEditJd: useEditJdProps = () =>
-  useMutation<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>({
+export const useEditJd: useEditJdProps = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>({
     mutationFn: (requestObj) => {
       const newRequestObj = {
         ...requestObj,
@@ -34,6 +36,12 @@ export const useEditJd: useEditJdProps = () =>
           etc_arr: requestObj.dto.etc_arr ? requestObj.dto.etc_arr.split("\n") : null,
           position_arr: requestObj.dto.position_arr.map((position) => ({
             ...position,
+            place: {
+              address_arr: position.place.address_arr?.length === 0 ? null : position.place.address_arr,
+              etc: position.place.etc,
+              type: position.place.type,
+              factory_arr: position.place.factory_arr,
+            },
             required_etc_arr: position.required_etc_arr ? position.required_etc_arr.split("\n") : null,
             task_detail_arr: position.task_detail_arr.split("\n"),
             pay_arr: position.pay_arr?.split("\n"),
@@ -43,4 +51,8 @@ export const useEditJd: useEditJdProps = () =>
       };
       return putEditJd(newRequestObj);
     },
+    onSuccess: () => {
+      queryClient.invalidateQueries(jdDetailKeyObj.all);
+    },
   });
+};
