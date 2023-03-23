@@ -103,15 +103,15 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
           <div css={flexBetweenBox}>
             <p css={subTitle}>기타</p>
             {freshPosition.requiredEtcArr ? (
-              <p css={desc}>
+              <div css={desc}>
                 {freshPosition.requiredEtcArr.map((etc) => {
                   return (
-                    <span css={restPoint} key={etc}>
+                    <div css={restPoint} key={etc}>
                       {etc}
-                    </span>
+                    </div>
                   );
                 })}
-              </p>
+              </div>
             ) : (
               <NoDataDesc />
             )}
