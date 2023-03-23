@@ -20,7 +20,6 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobForm
     setError,
     setValue,
     resetField,
-    reset,
     clearErrors,
     formState: { errors },
   } = jobForm;
@@ -139,12 +138,6 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobForm
                       value: true,
                       message: "채용절차를 작성해주세요.",
                     },
-                    onBlur: (onBlurEvent: FocusEvent<HTMLTextAreaElement>) => {
-                      reset((formValues) => ({
-                        ...formValues,
-                        process_arr: onBlurEvent.target.value.replace(/^\s/gm, "").trim(),
-                      }));
-                    },
                   })}
                 />
               </div>
@@ -160,12 +153,6 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobForm
                     required: {
                       value: true,
                       message: "지원방법을 작성해주세요.",
-                    },
-                    onBlur: (onBlurEvent: FocusEvent<HTMLTextAreaElement>) => {
-                      reset((formValues) => ({
-                        ...formValues,
-                        apply_route_arr: onBlurEvent.target.value.replace(/^\s/gm, "").trim(),
-                      }));
                     },
                   })}
                 />
@@ -220,7 +207,7 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobForm
                       },
                       required: {
                         value: true,
-                        message: "http 또는 https를 포함한 url 형식을 작성해주세요.",
+                        message: "채용링크를 작성해주세요.",
                       },
                     })}
                   />
@@ -248,17 +235,7 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobForm
               <strong css={cssObj.noRequiredTitle}>기타 사항</strong>
               <div css={cssObj.textareaBox}>
                 <p css={cssObj.textareaWarning}>엔터로 구분해주세요, 필수가 아닙니다.</p>
-                <textarea
-                  css={cssObj.textarea}
-                  {...jobForm.register("etc_arr", {
-                    onBlur: (onBlurEvent: FocusEvent<HTMLTextAreaElement>) => {
-                      reset((formValues) => ({
-                        ...formValues,
-                        etc_arr: onBlurEvent.target.value.replace(/^\s/gm, "").trim(),
-                      }));
-                    },
-                  })}
-                />
+                <textarea css={cssObj.textarea} {...jobForm.register("etc_arr")} />
               </div>
             </li>
           </ul>

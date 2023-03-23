@@ -102,6 +102,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
               <input
                 css={cssObj.inputCSS}
                 type="text"
+                name="certiSearchWord"
                 onChange={(onChangeEvent: ChangeEvent<HTMLInputElement>) => {
                   setCertiSearchWord(onChangeEvent.target.value);
                 }}

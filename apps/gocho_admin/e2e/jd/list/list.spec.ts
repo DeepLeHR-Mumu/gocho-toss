@@ -10,6 +10,6 @@ test("공고 리스트 테스트", async ({ page }) => {
   expect(jdListResponse.ok()).toBeTruthy();
   await expect(page.locator("h2")).toHaveText("공고 목록");
 
-  await page.getByTestId("jd/list/jobCard").getByRole("link", { name: "수정" }).nth(0).click();
+  await page.getByTestId("jd/list/jobCard").nth(0).getByRole("link", { name: "수정" }).nth(0).click();
   expect(page.url().includes("jd/edit"));
 });

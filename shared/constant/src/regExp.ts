@@ -5,4 +5,4 @@ export const PWD_REGEXP = /^\S*$/;
 
 export const NUMBER_REGEXP = /^[0-9]+$/;
 
-export const URL_REGEXP = /^(http|https):\/\/[a-zA-Z0-9-.]+\.[a-zA-Z]{2,}(\/\S*)?$/;
+export const URL_REGEXP = /(http(s)?:\/\/)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/gi;

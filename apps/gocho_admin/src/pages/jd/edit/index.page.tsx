@@ -81,22 +81,6 @@ const JdEdit: NextPageWithLayout = () => {
     });
   }, [jobData, reset]);
 
-  useEffect(() => {
-    window.addEventListener("keydown", (keyDownEvent) => {
-      if (keyDownEvent.key === "Enter") {
-        keyDownEvent.preventDefault();
-      }
-    });
-
-    return () => {
-      window.removeEventListener("keydown", (keyDownEvent) => {
-        if (keyDownEvent.key === "Enter") {
-          keyDownEvent.preventDefault();
-        }
-      });
-    };
-  }, []);
-
   if (!jobData) {
     return <LoadingScreen />;
   }

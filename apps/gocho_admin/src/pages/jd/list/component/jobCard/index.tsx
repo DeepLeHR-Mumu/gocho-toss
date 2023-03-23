@@ -43,7 +43,7 @@ export const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
   const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
 
   return (
-    <li css={cssObj.wrapper} data-testId="jd/list/jobCard">
+    <li css={cssObj.wrapper} data-testid="jd/list/jobCard">
       <ul css={cssObj.container}>
         <li css={cssObj.centerDesc}>{job.id}</li>
         <li css={cssObj.leftDesc}>
