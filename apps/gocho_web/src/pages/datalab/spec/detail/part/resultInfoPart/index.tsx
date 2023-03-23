@@ -77,8 +77,10 @@ export const ResultInfoPart: FunctionComponent<ResultInfoPartProps> = ({ resultD
             <p css={noChipContainer}>획득한 칩이 없습니다.</p>
           ) : (
             <div css={chipList}>
-              {Object.keys(resultData.evals?.strongPointArr).map((key) => {
-                return <ChipBox key={`Strong${key}`} string={key} number={resultData.evals?.strongPointArr[key]} />;
+              {Object.keys(resultData.evals?.strongPointArr || {}).map((key) => {
+                return (
+                  <ChipBox key={`Strong${key}`} string={key} number={resultData.evals?.strongPointArr[key] || 0} />
+                );
               })}
             </div>
           )}
@@ -93,8 +95,10 @@ export const ResultInfoPart: FunctionComponent<ResultInfoPartProps> = ({ resultD
               <p css={noChipContainer}>획득한 칩이 없습니다.</p>
             ) : (
               <div css={chipList}>
-                {Object.keys(resultData.evals?.weakPointArr).map((key) => {
-                  return <ChipBox key={`Strong${key}`} string={key} number={resultData.evals?.weakPointArr[key]} />;
+                {Object.keys(resultData.evals?.weakPointArr || {}).map((key) => {
+                  return (
+                    <ChipBox key={`Strong${key}`} string={key} number={resultData.evals?.weakPointArr[key] || 0} />
+                  );
                 })}
               </div>
             )}
@@ -107,7 +111,7 @@ export const ResultInfoPart: FunctionComponent<ResultInfoPartProps> = ({ resultD
           <FiMessageSquare /> 기타 피드백
         </p>
 
-        {resultData.evals === null || resultData.evals.feedbackArr === null ? (
+        {resultData.evals?.feedbackArr === undefined || resultData.evals?.feedbackArr?.length === 0 ? (
           <p css={noChipBox}>피드백이 없습니다</p>
         ) : (
           <ul css={feedbackBox}>
