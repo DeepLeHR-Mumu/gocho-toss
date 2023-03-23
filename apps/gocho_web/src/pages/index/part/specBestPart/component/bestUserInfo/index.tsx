@@ -44,7 +44,9 @@ export const BestUserBox: FunctionComponent<BestUserInfoProps | skeletonProps> =
   }
 
   const educationTypeTitle = bestUserData.college ? "학과" : "학교종류";
-  const educationType = bestUserData.college ? `${bestUserData.college.department}` : `${bestUserData.highschool.type}`;
+  const educationType = bestUserData.college?.department
+    ? `${bestUserData.college.department}`
+    : `${bestUserData.highschool.type}`;
   const isCerti = bestUserData.certificate?.data !== null;
 
   return (

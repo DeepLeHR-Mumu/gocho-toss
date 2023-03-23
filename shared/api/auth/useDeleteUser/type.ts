@@ -11,5 +11,5 @@ export interface DeleteUserInfoDef {
 }
 
 export interface UseDeleteUserInfoDef {
-  (): UseMutationResult<ResponseDef, AxiosError, RequestObjDef>;
+  (onSuccessAction: () => void): UseMutationResult<ResponseDef, AxiosError, RequestObjDef>;
 }

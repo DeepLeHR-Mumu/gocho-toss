@@ -22,10 +22,18 @@ export const AccountSettingBox: FunctionComponent = () => {
   const [isPictureEditing, setIsPictureEditing] = useState(true);
   const [isPasswordEditing, setIsPasswordEditing] = useState(false);
 
-  const { data: userInfoData } = useUserInfo();
-  const { mutate: deleteUserDataInfo } = useDeleteUserInfo();
-  const { setCurrentToast } = useToast();
   const { setCurrentModal } = useModal();
+  const { setCurrentToast } = useToast();
+
+  const { data: userInfoData } = useUserInfo();
+  const { mutate: deleteUserDataInfo } = useDeleteUserInfo(() => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    queryClient.resetQueries();
+    queryClient.invalidateQueries(userInfoKeyObj.userInfo);
+    setCurrentToast("회원탈퇴가 되었습니다.");
+    router.push(MAIN_URL);
+  });
 
   const deleteUserInfo = (id: number) => {
     setCurrentModal("dialogModal", {
@@ -33,19 +41,7 @@ export const AccountSettingBox: FunctionComponent = () => {
       title: "계정을 삭제 하시겠습니까?",
       desc: "모든 정보가 삭제되며 복구가 불가합니다. 정말로 삭제하시겠습니까?",
       doActive: () => {
-        deleteUserDataInfo(
-          { id },
-          {
-            onSuccess: () => {
-              localStorage.removeItem("accessToken");
-              localStorage.removeItem("refreshToken");
-              queryClient.resetQueries();
-              queryClient.invalidateQueries(userInfoKeyObj.userInfo);
-              setCurrentToast("회원탈퇴가 되었습니다.");
-              router.push(MAIN_URL);
-            },
-          }
-        );
+        deleteUserDataInfo({ id });
       },
     });
   };
