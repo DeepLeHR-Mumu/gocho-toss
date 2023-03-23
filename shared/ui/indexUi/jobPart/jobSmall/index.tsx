@@ -69,7 +69,7 @@ export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSke
   const addJobBookmark = () => {
     if (userId)
       addMutate(
-        { userId, elemId: jobData.id },
+        { userId, id: jobData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries([{ data: "jobArr" }]);
@@ -81,7 +81,7 @@ export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSke
   const deleteJobBookmark = () => {
     if (userId)
       deleteMutate(
-        { userId, elemId: jobData.id },
+        { userId, id: jobData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries([{ data: "jobArr" }]);

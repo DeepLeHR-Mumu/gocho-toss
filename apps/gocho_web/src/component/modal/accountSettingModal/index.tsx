@@ -37,7 +37,8 @@ export const AccountSettingBox: FunctionComponent = () => {
           { id },
           {
             onSuccess: () => {
-              localStorage.removeItem("token");
+              localStorage.removeItem("accessToken");
+              localStorage.removeItem("refreshToken");
               queryClient.resetQueries();
               queryClient.invalidateQueries(userInfoKeyObj.userInfo);
               setCurrentToast("회원탈퇴가 되었습니다.");

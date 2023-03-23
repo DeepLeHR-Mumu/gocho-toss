@@ -59,14 +59,14 @@ const SpecDetail: NextPage = () => {
         option={{
           id: specDetailData.id,
           age: specDetailData.age,
-          nickname: specDetailData.user.nickname,
+          nickname: specDetailData.uploader.nickname,
           gender: specDetailData.gender,
           certificate: specDetailData.certificate?.data,
           desiredTask: specDetailData.desiredTask,
           desiredIndustry: specDetailData.desiredIndustry,
         }}
       />
-      <InvisibleH1 title={`[${specDetailData.user.nickname.slice(0, 1)}***]님의 생산직 스펙평가 - 고초대졸닷컴`} />
+      <InvisibleH1 title={`[${specDetailData.uploader.nickname.slice(0, 1)}***]님의 생산직 스펙평가 - 고초대졸닷컴`} />
 
       <Layout>
         <div css={container}>

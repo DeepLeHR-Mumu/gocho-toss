@@ -13,18 +13,17 @@ interface CompanyObjDef {
 }
 
 const deleteCompanyBoookmarkArr: DeleteCompanyBoookmarkArrDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
-  const { data } = await axiosInstance.delete(`/users/${requestObj?.userId}/company-bookmarks/${requestObj.elemId}`, {
-    headers: {
-      "x-access-token": token,
-    },
+  const token = localStorage.getItem("accessToken");
+  const headers = token ? { "x-access-token": token } : undefined;
+  const { data } = await axiosInstance.delete(`/users/${requestObj?.userId}/company-bookmarks/${requestObj.id}`, {
+    headers,
   });
   return data;
 };
 
 export const useDeleteCompanyBookmarkArr = (companyObj: CompanyObjDef | undefined) => {
   const queryClient = useQueryClient();
-  const mutationResult = useMutation({
+  return useMutation({
     mutationFn: deleteCompanyBoookmarkArr,
     onMutate: async (requestObj) => {
       await queryClient.cancelQueries(userBookmarkKeyObj.companyBookmarkArr({ userId: requestObj.userId }));
@@ -55,5 +54,4 @@ export const useDeleteCompanyBookmarkArr = (companyObj: CompanyObjDef | undefine
       return { previousTodos };
     },
   });
-  return mutationResult;
 };

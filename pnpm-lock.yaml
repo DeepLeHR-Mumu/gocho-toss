@@ -262,7 +262,7 @@ importers:
       shared-ui: link:../../shared/ui
       shared-user: link:../../shared-user
       shared-util: link:../../shared/util
-      slick-carousel: 1.8.1_jquery@3.6.3
+      slick-carousel: 1.8.1_jquery@3.6.4
       tsconfig-deeple: link:../../packages/tsconfig-deeple
     devDependencies:
       '@babel/core': 7.21.0
@@ -376,7 +376,7 @@ importers:
       shared-ui: link:../../shared/ui
       shared-user: link:../../shared-user
       shared-util: link:../../shared/util
-      slick-carousel: 1.8.1_jquery@3.6.3
+      slick-carousel: 1.8.1_jquery@3.6.4
       tsconfig-deeple: link:../../packages/tsconfig-deeple
     devDependencies:
       '@babel/core': 7.21.0
@@ -475,7 +475,9 @@ importers:
   shared/api:
     specifiers:
       '@tanstack/react-query': ^4.2.3
+      '@types/react': 18.0.17
       axios: ^0.27.2
+      dayjs: ^1.11.7
       eslint-config-deeple: workspace:^1.0.0
       react: 18.2.0
       react-dom: 18.2.0
@@ -487,12 +489,14 @@ importers:
     dependencies:
       '@tanstack/react-query': 4.24.10_biqbaboplfbrettd7655fr4n2y
       axios: 0.27.2
+      dayjs: 1.11.7
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       shared-constant: link:../constant
       shared-type: link:../type
       shared-util: link:../util
     devDependencies:
+      '@types/react': 18.0.17
       eslint-config-deeple: link:../../packages/eslint-config-deeple
       tsconfig-deeple: link:../../packages/tsconfig-deeple
       typescript: 4.7.2
@@ -2666,11 +2670,11 @@ packages:
     engines: {node: '>=14'}
     dependencies:
       '@types/set-cookie-parser': 2.4.2
-      set-cookie-parser: 2.5.1
+      set-cookie-parser: 2.6.0
     dev: true
 
-  /@mswjs/interceptors/0.17.7:
-    resolution: {integrity: sha512-dPInyLEF6ybLxfKGY99euI+mbT6ls4PVO9qPgGIsRk3+2VZVfT7fo9Sq6Q8eKT9W38QtUyhG74hN7xMtKWioGw==}
+  /@mswjs/interceptors/0.17.9:
+    resolution: {integrity: sha512-4LVGt03RobMH/7ZrbHqRxQrS9cc2uh+iNKSj8UWr8M26A2i793ju+csaB5zaqYltqJmA2jUq4VeYfKmVqvsXQg==}
     engines: {node: '>=14'}
     dependencies:
       '@open-draft/until': 1.0.3
@@ -3465,12 +3469,12 @@ packages:
       telejson: 7.0.4
     dev: true
 
-  /@storybook/channel-postmessage/7.0.0-rc.4:
-    resolution: {integrity: sha512-ZWuwZfYfwpvCx+WgoTEweFmQ6cb4B3HUT6eNcFMeXgMRw1q9roa8CDCCw+4TJ2jDkvUrdkYTHYmcgn0QpAxpAg==}
+  /@storybook/channel-postmessage/7.0.0-rc.6:
+    resolution: {integrity: sha512-FXLben722pbLeoGiTMAWo3ngtamNjqmlCrsdc6f6nS2EFPAgHZ9U0acFmJ5HcJsh//VS38/4UQd9O7v8UXc9fg==}
     dependencies:
-      '@storybook/channels': 7.0.0-rc.4
-      '@storybook/client-logger': 7.0.0-rc.4
-      '@storybook/core-events': 7.0.0-rc.4
+      '@storybook/channels': 7.0.0-rc.6
+      '@storybook/client-logger': 7.0.0-rc.6
+      '@storybook/core-events': 7.0.0-rc.6
       '@storybook/global': 5.0.0
       qs: 6.11.0
       telejson: 7.0.4
@@ -3501,8 +3505,8 @@ packages:
     resolution: {integrity: sha512-UnMRoVzUe1jUnlcbraSLjFA3B+Nmui6S2ShNr/9Hc7vcOyFisJuFK7HDqTRS8Z6kvHFa7mVMoZ+LHTPJd5WkEA==}
     dev: true
 
-  /@storybook/channels/7.0.0-rc.4:
-    resolution: {integrity: sha512-N4jQPVsT+Qd3dYRFKL2jN1Ik1XXYxCO2e6hoxir55VvAd5WCCnwNWmglEWRoIMNwmJQAbyFRCxbYzAKctsqaVw==}
+  /@storybook/channels/7.0.0-rc.6:
+    resolution: {integrity: sha512-DkAr34GeLH6978du2zIz6ulyZMGkuzQfErV0v4Fqo2ZaXHV41MxgVubkEoX/pED4ksNUlTE85ZtxFPcF1PYIQw==}
     dev: true
 
   /@storybook/cli/7.0.0-beta.50:
@@ -3627,8 +3631,8 @@ packages:
       '@storybook/global': 5.0.0
     dev: true
 
-  /@storybook/client-logger/7.0.0-rc.4:
-    resolution: {integrity: sha512-z5w2odssAavqSPtkX0kjPwCpvSYNGDnC3pqKw0nHrZ4fb59SKdjdcoCbcUntDa0kAid9g29CT+eNTtPcci8/XA==}
+  /@storybook/client-logger/7.0.0-rc.6:
+    resolution: {integrity: sha512-bT0PbEsHII2zeQQ93YBaoYl8PGJZioowlUYnLl6XchSloYVwWfQIveSwsM70jgA4e99L6/Sbnp0V+2SrxKHw6A==}
     dependencies:
       '@storybook/global': 5.0.0
     dev: true
@@ -3768,8 +3772,8 @@ packages:
     resolution: {integrity: sha512-ODFto8BXVenukVrEfOHvlqBP0YjWoC/OSO2lOmkgJeOApa66wsgwzNDeGn9938Nc6n1fyQg8sOPm4n9Pd90pCA==}
     dev: true
 
-  /@storybook/core-events/7.0.0-rc.4:
-    resolution: {integrity: sha512-OgEhQSaOMcSx0y5tjGg5Mscyyk9BayhqiJeuDK3kVZfKtFO3LErwhV4TrNjuDnYFfwUgiPa2ikTAB6K6JAn6yg==}
+  /@storybook/core-events/7.0.0-rc.6:
+    resolution: {integrity: sha512-BOe6r//QEn/R9BXMiJsFM69jVUzgXGlPTfjECSIxdCEpUnCezwFA3LWPC8f4tDpL2uONqATkO9LQeQsGGapmCw==}
     dev: true
 
   /@storybook/core-server/7.0.0-beta.50:
@@ -3969,14 +3973,14 @@ packages:
       '@storybook/preview-api': 7.0.0-beta.53
     dev: true
 
-  /@storybook/instrumenter/7.0.0-rc.4:
-    resolution: {integrity: sha512-6/k+cUFsDCJnnXsPGZ03qB11F8ND1G4UQtIs2pn8yWR8mo7EaDnugFLFAhjtYRaLAhg4hKhVspJcXGf/R+gxnQ==}
+  /@storybook/instrumenter/7.0.0-rc.6:
+    resolution: {integrity: sha512-hveboySEYxBtLYSgxHm2PI0Sa1DD/M6zkuCYqP4MXIoftRd437U1KzAtPrklnCoKrzUWPAXMJ8GUjwbM40RyGg==}
     dependencies:
-      '@storybook/channels': 7.0.0-rc.4
-      '@storybook/client-logger': 7.0.0-rc.4
-      '@storybook/core-events': 7.0.0-rc.4
+      '@storybook/channels': 7.0.0-rc.6
+      '@storybook/client-logger': 7.0.0-rc.6
+      '@storybook/core-events': 7.0.0-rc.6
       '@storybook/global': 5.0.0
-      '@storybook/preview-api': 7.0.0-rc.4
+      '@storybook/preview-api': 7.0.0-rc.6
     dev: true
 
   /@storybook/manager-api/7.0.0-beta.53_biqbaboplfbrettd7655fr4n2y:
@@ -4194,16 +4198,16 @@ packages:
       util-deprecate: 1.0.2
     dev: true
 
-  /@storybook/preview-api/7.0.0-rc.4:
-    resolution: {integrity: sha512-J4PMV+UlWDqzV2Cj6PfxkUZ8315m3Mcbx1JPjKFcIGJ3HaK0mXye1brBMPG7gefjx9239QVw6w0zmw9ahLWmVw==}
+  /@storybook/preview-api/7.0.0-rc.6:
+    resolution: {integrity: sha512-p+UcJW6KZfDbJoSJStijxNaMOsDG4KMlv5tZmEzca54NGt6+AWzpdGPTTM8+wP0r/OoDOeTRs0BxinYjbf7ZHQ==}
     dependencies:
-      '@storybook/channel-postmessage': 7.0.0-rc.4
-      '@storybook/channels': 7.0.0-rc.4
-      '@storybook/client-logger': 7.0.0-rc.4
-      '@storybook/core-events': 7.0.0-rc.4
+      '@storybook/channel-postmessage': 7.0.0-rc.6
+      '@storybook/channels': 7.0.0-rc.6
+      '@storybook/client-logger': 7.0.0-rc.6
+      '@storybook/core-events': 7.0.0-rc.6
       '@storybook/csf': 0.0.2-next.10
       '@storybook/global': 5.0.0
-      '@storybook/types': 7.0.0-rc.4
+      '@storybook/types': 7.0.0-rc.6
       '@types/qs': 6.9.7
       dequal: 2.0.3
       lodash: 4.17.21
@@ -4357,8 +4361,8 @@ packages:
   /@storybook/testing-library/0.0.14-next.1:
     resolution: {integrity: sha512-1CAl40IKIhcPaCC4pYCG0b9IiYNymktfV/jTrX7ctquRY3akaN7f4A1SippVHosksft0M+rQTFE0ccfWW581fw==}
     dependencies:
-      '@storybook/client-logger': 7.0.0-rc.4
-      '@storybook/instrumenter': 7.0.0-rc.4
+      '@storybook/client-logger': 7.0.0-rc.6
+      '@storybook/instrumenter': 7.0.0-rc.6
       '@testing-library/dom': 8.20.0
       '@testing-library/user-event': 13.5.0_yxlyej73nftwmh2fiao7paxmlm
       ts-dedent: 2.2.0
@@ -4410,10 +4414,10 @@ packages:
       file-system-cache: 2.0.2
     dev: true
 
-  /@storybook/types/7.0.0-rc.4:
-    resolution: {integrity: sha512-Zu9weYGeKrnaWgVk2vtPU/MpUp6EtM27ehqJVK3x0I/sa8/MXCc411ErblALLVrMX6KhFjUFU98gHlvo8ietIA==}
+  /@storybook/types/7.0.0-rc.6:
+    resolution: {integrity: sha512-miG7HXDgMSMJ/IMQTYqmelqTtPTbMTml1zOP3PXgswvrCY8RFYytNp7DM6dpADRU7wsAOo1BwnEUSYkS3CKxUQ==}
     dependencies:
-      '@storybook/channels': 7.0.0-rc.4
+      '@storybook/channels': 7.0.0-rc.6
       '@types/babel__core': 7.20.0
       '@types/express': 4.17.17
       file-system-cache: 2.0.2
@@ -9294,8 +9298,8 @@ packages:
       - ts-node
     dev: true
 
-  /jquery/3.6.3:
-    resolution: {integrity: sha512-bZ5Sy3YzKo9Fyc8wH2iIQK4JImJ6R0GWI9kL1/k7Z91ZBNgkRXE6U0JfHIizZbort8ZunhSI3jw9I6253ahKfg==}
+  /jquery/3.6.4:
+    resolution: {integrity: sha512-v28EW9DWDFpzcD9O5iyJXg3R3+q+mET5JhnjJzQUZMHOv67bpSIHq81GEYpPNZHG+XXHsfSme3nxp/hndKEcsQ==}
     dev: false
 
   /js-levenshtein/1.1.6:
@@ -9926,7 +9930,7 @@ packages:
         optional: true
     dependencies:
       '@mswjs/cookies': 0.2.2
-      '@mswjs/interceptors': 0.17.7
+      '@mswjs/interceptors': 0.17.9
       '@open-draft/until': 1.0.3
       '@types/cookie': 0.4.1
       '@types/js-levenshtein': 1.1.1
@@ -11510,8 +11514,8 @@ packages:
     resolution: {integrity: sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==}
     dev: true
 
-  /set-cookie-parser/2.5.1:
-    resolution: {integrity: sha512-1jeBGaKNGdEq4FgIrORu/N570dwoPYio8lSoYLWmX7sQ//0JY08Xh9o5pBcgmHQ/MbsYp/aZnOe1s1lIsbLprQ==}
+  /set-cookie-parser/2.6.0:
+    resolution: {integrity: sha512-RVnVQxTXuerk653XfuliOxBP81Sf0+qfQE73LIYKcyMYHG94AuH0kgrQpRDuTZnSmjpysHmzxJXKNfa6PjFhyQ==}
     dev: true
 
   /setprototypeof/1.2.0:
@@ -11608,12 +11612,12 @@ packages:
       is-fullwidth-code-point: 4.0.0
     dev: false
 
-  /slick-carousel/1.8.1_jquery@3.6.3:
+  /slick-carousel/1.8.1_jquery@3.6.4:
     resolution: {integrity: sha512-XB9Ftrf2EEKfzoQXt3Nitrt/IPbT+f1fgqBdoxO3W/+JYvtEOW6EgxnWfr9GH6nmULv7Y2tPmEX3koxThVmebA==}
     peerDependencies:
       jquery: '>=1.8.0'
     dependencies:
-      jquery: 3.6.3
+      jquery: 3.6.4
     dev: false
 
   /sort-keys/2.0.0:

@@ -73,15 +73,14 @@ export const ResultInfoPart: FunctionComponent<ResultInfoPartProps> = ({ resultD
           <p css={title}>
             <FiSmile /> 획득한 강점 칩
           </p>
-          {/* TODO === null */}
-          {resultData.evals === null ? (
+          {Object.keys(resultData.evals?.strongPointArr || {}).length === 0 ? (
             <p css={noChipContainer}>획득한 칩이 없습니다.</p>
           ) : (
-            <ul css={chipList}>
-              {resultData.evals?.strongPointArr.map((strong) => {
-                return <ChipBox key={`강점 칩${strong[0]}`} string={strong[0]} number={strong[1]} />;
+            <div css={chipList}>
+              {Object.keys(resultData.evals?.strongPointArr).map((key) => {
+                return <ChipBox key={`Strong${key}`} string={key} number={resultData.evals?.strongPointArr[key]} />;
               })}
-            </ul>
+            </div>
           )}
         </div>
         <div css={chipBox}>
@@ -90,14 +89,14 @@ export const ResultInfoPart: FunctionComponent<ResultInfoPartProps> = ({ resultD
           </p>
 
           <div css={chipList}>
-            {resultData.evals === null ? (
+            {Object.keys(resultData.evals?.weakPointArr || {}).length === 0 ? (
               <p css={noChipContainer}>획득한 칩이 없습니다.</p>
             ) : (
-              <ul css={chipList}>
-                {resultData.evals?.weakPointArr.map((weakness) => {
-                  return <ChipBox key={`약점 칩${weakness[0]}`} string={weakness[0]} number={weakness[1]} />;
+              <div css={chipList}>
+                {Object.keys(resultData.evals?.weakPointArr).map((key) => {
+                  return <ChipBox key={`Strong${key}`} string={key} number={resultData.evals?.weakPointArr[key]} />;
                 })}
-              </ul>
+              </div>
             )}
           </div>
         </div>

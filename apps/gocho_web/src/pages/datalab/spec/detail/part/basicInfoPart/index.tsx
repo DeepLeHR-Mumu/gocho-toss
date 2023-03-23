@@ -36,11 +36,11 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ basicData
       </Link>
 
       <div css={imageContainer}>
-        <ProfileImg imageStr={basicData.user.image} size="L" />
+        <ProfileImg imageStr={basicData.uploader.image} size="L" />
       </div>
 
       <section css={basicInfoContainer}>
-        <p css={userId}>{basicData.user.nickname}</p>
+        <p css={userId}>{basicData.uploader.nickname}</p>
 
         <ul css={characteristicCSS}>
           <li>{basicData.gender}</li>

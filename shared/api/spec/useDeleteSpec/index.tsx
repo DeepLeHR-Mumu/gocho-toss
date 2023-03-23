@@ -3,20 +3,16 @@ import { AxiosError } from "axios";
 
 import { ResponseDef } from "shared-type/api/responseType";
 import { axiosInstance } from "../../axiosInstance";
-import { PostDeleteMySpecDef, useDeleteMySpecProps, RequestObjDef } from "./type";
+import { PostDeleteMySpecDef, RequestObjDef, useDeleteMySpecProps } from "./type";
 
 const postDeleteMySpec: PostDeleteMySpecDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
-  const { data } = await axiosInstance.delete(`/specs/${requestObj?.id}`, {
-    headers: {
-      "x-access-token": token,
-    },
-  });
+  const token = localStorage.getItem("accessToken");
+  const headers = token ? { "x-access-token": token } : undefined;
+  const { data } = await axiosInstance.delete(`/specs/${requestObj?.id}`, { headers });
 
   return data;
 };
 
 export const useDeleteMySpec: useDeleteMySpecProps = () => {
-  const mutationResult = useMutation<ResponseDef, AxiosError, RequestObjDef>({ mutationFn: postDeleteMySpec });
-  return mutationResult;
+  return useMutation<ResponseDef, AxiosError, RequestObjDef>({ mutationFn: postDeleteMySpec });
 };

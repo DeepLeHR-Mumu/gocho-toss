@@ -1,17 +1,16 @@
 export interface RequestObjDef {
+  userId: number;
+  id: number;
+}
+
+export interface ResponseObjDef {
+  data: {
+    insertId: number;
     userId: number;
-    elemId: number;
-  }
-  
-  export interface ResponseObjDef {
-    data: {
-      insertId: number;
-      userId: number;
-      Id: number;
-    };
-  }
-  
-  export interface AddCompanyBookamrkArrDef {
-    ({ userId, elemId }: RequestObjDef): Promise<ResponseObjDef>;
-  }
-  
+    id: number;
+  };
+}
+
+export interface AddCompanyBookmarkArrDef {
+  ({ userId, id }: RequestObjDef): Promise<ResponseObjDef>;
+}

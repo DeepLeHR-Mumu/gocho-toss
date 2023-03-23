@@ -94,13 +94,7 @@ export type contentModalNameDef =
   | "writePostingModal"
   | "dialogModal";
 
-export type modalNameDef =
-  | "logoutModal"
-  | "signUpModal"
-  | "accountSettingModal"
-  | "writeKakaoInfoModal"
-  | "findPasswordModal"
-  | "noticeModal";
+export type modalNameDef = "logoutModal" | "signUpModal" | "accountSettingModal" | "findPasswordModal" | "noticeModal";
 
 export interface modalAtomDef {
   activatedModal: modalNameDef | contentModalNameDef;

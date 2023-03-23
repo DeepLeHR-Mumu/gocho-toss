@@ -1,20 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
-import { CompanyArrRequestDef, companyArrKeyObj } from "shared-constant/queryKeyFactory/company/arrKeyObj";
+import { companyArrKeyObj, CompanyArrRequestDef } from "shared-constant/queryKeyFactory/company/arrKeyObj";
 
-import { axiosNewInstance } from "../../axiosInstance";
+import { axiosNoTokenInstance } from "../../axiosInstance";
 
 import { GetCompanyArrDef } from "./type";
 import { selector } from "./util";
 
 export const getCompanyArr: GetCompanyArrDef = async ({ queryKey: [{ requestObj }] }) => {
-  const { data } = await axiosNewInstance.get("/companies", {
+  const { data } = await axiosNoTokenInstance.get("/companies", {
     params: requestObj,
   });
   return data;
 };
 
 export const useCompanyArr = (requestObj: CompanyArrRequestDef) => {
-  const queryResult = useQuery({
+  return useQuery({
     queryKey: companyArrKeyObj.companyArr(requestObj),
     queryFn: getCompanyArr,
     select: ({ data, count }) => {
@@ -22,5 +22,4 @@ export const useCompanyArr = (requestObj: CompanyArrRequestDef) => {
     },
     enabled: Boolean(requestObj.order),
   });
-  return queryResult;
 };
