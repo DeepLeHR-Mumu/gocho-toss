@@ -63,6 +63,9 @@ jobs:
       fail-fast: true
       matrix:
         command:
+          - service_name: admin
+            dev_server: pnpm dev-admin &
+            test: pnpm turbo --filter=gocho_admin e2e:CICD
           - service_name: business
             dev_server: pnpm dev-biz &
             test: pnpm turbo --filter=gocho_business e2e:CICD
