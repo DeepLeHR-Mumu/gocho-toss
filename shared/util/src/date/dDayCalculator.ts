@@ -10,7 +10,7 @@ export const dDayCalculator: setDdayValueCreatorDef = (endTime) => {
   const endTimeNoHours = new Date(endTime).setHours(0, 0, 0, 0);
   dayjs.extend(isToday);
 
-  const dDay = Math.floor(
+  const dDay = Math.ceil(
     (endTimeNoHours - new Date(new Date().setHours(0, 0, 0, 0)).getTime()) / (1000 * 60 * 60 * 24)
   );
 
