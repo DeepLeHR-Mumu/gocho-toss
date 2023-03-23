@@ -50,13 +50,8 @@ export const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
           <span css={cssObj.companyName}>{job.companyName}</span>
           {job.title}
         </li>
-        {/* TODO : 따로 안오고 뭉쳐서 오고있음 */}
         <li css={cssObj.taskBox}>
-          {job.taskArr.map((task) => (
-            <span css={cssObj.task} key={`${job.id}${task}`}>
-              {task}
-            </span>
-          ))}
+          <p css={cssObj.task}>{job.taskArr[0]}</p>
         </li>
         <li css={cssObj.leftDesc}>
           <span css={cssObj.startDateCSS}>

@@ -71,10 +71,8 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
             </div>
           </li>
           <li>
-            <strong css={cssObj.noRequiredTitle}>교대 형태</strong>
-            {positionError && positionError.rotation_arr?.message && (
-              <ErrorMessage msg={positionError.rotation_arr.message} />
-            )}
+            <strong css={cssObj.requiredTitle}>교대 형태</strong>
+            <p css={cssObj.textareaWarning}>교대 형태를 선택하면 기타 교대 형태 값은 제거됩니다.</p>
             <div css={cssObj.flexBox}>
               {rotationArr.map((rotation) => {
                 const isChecked = watch(`position_arr.${index}.rotation_arr`)?.includes(rotation.name);
@@ -82,9 +80,8 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                   <CheckBoxWithDesc
                     registerObj={{
                       ...jobForm.register(`position_arr.${index}.rotation_arr`, {
-                        required: {
-                          value: true,
-                          message: "교태 형태를 선택해주세요",
+                        onChange: () => {
+                          setValue(`position_arr.${index}.rotation_etc`, null);
                         },
                       }),
                     }}
@@ -99,9 +96,17 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
             </div>
           </li>
           <li>
-            <strong css={cssObj.noRequiredTitle}>기타 교대 형태</strong>
+            <strong css={cssObj.requiredTitle}>기타 교대 형태</strong>
+            <p css={cssObj.textareaWarning}>기타 교대 형태를 입력하면 선택된 교대 형태는 제거됩니다.</p>
             <div>
-              <input css={cssObj.inputCSS} {...jobForm.register(`position_arr.${index}.rotation_etc`)} />
+              <input
+                css={cssObj.inputCSS}
+                {...jobForm.register(`position_arr.${index}.rotation_etc`, {
+                  onChange: () => {
+                    setValue(`position_arr.${index}.rotation_arr`, null);
+                  },
+                })}
+              />
             </div>
           </li>
           <li>
@@ -211,7 +216,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
               </li>
             </>
           )}
-          {watch(`position_arr.${index}.place.type`) !== "일반" && (
+          {watch(`position_arr.${index}.place.type`) !== "일반" && watch(`position_arr.${index}.place.type`) && (
             <li>
               <strong css={cssObj.requiredTitle}>{watch(`position_arr.${index}.place.type`)} 근무지</strong>
               <div css={cssObj.placeBox}>

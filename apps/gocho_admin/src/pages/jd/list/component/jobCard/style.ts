@@ -45,17 +45,10 @@ export const cssObj = {
     align-items: center;
   `,
   task: css`
-    background-color: ${COLORS.GRAY90};
-    margin-bottom: 0.5rem;
-    border: 1px solid ${COLORS.GRAY70};
-    padding: 0.25rem 1rem;
     font-size: 0.75rem;
-    color: ${COLORS.GRAY20};
-    width: fit-content;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.5rem;
+    color: ${COLORS.GRAY10};
+    word-break: keep-all;
+    text-align: center;
   `,
   flexBox: css`
     display: flex;

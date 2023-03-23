@@ -166,4 +166,45 @@ export const cssObj = {
       padding: 0.25rem;
     }
   `,
+  linkLabelContainer: css`
+    display: flex;
+    gap: 0 1rem;
+    margin-bottom: 0.25rem;
+  `,
+
+  radio: css`
+    margin: 0;
+    display: none;
+    appearance: auto;
+    :checked ~ div {
+      :after {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 0.625rem;
+        height: 0.625rem;
+        background-color: ${COLORS.GRAY10};
+        border-radius: 50%;
+        content: "";
+      }
+    }
+  `,
+  label: css`
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  `,
+  radioBox: css`
+    border: 2px solid ${COLORS.GRAY10};
+    width: 1.125rem;
+    height: 1.125rem;
+    position: relative;
+    background-color: ${COLORS.GRAY100};
+    border-radius: 50%;
+    margin-right: 0.25rem;
+  `,
+  labelTitle: css`
+    color: ${COLORS.GRAY10};
+  `,
 };

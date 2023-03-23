@@ -2,7 +2,7 @@ import { FunctionComponent, FocusEvent, useEffect, useState } from "react";
 
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
-import { URL_REGEXP } from "shared-constant/src/regExp";
+import { EMAIL_REGEXP, URL_REGEXP } from "shared-constant/src/regExp";
 
 import { useFindCompany } from "@/api";
 
@@ -13,15 +13,26 @@ import { cssObj } from "./style";
 export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobData, jobForm }) => {
   const [searchWord, setSearchWord] = useState<string>("");
   const [isAlways, setIsAlways] = useState<boolean>(new Date(jobData.endTime).toISOString().substring(0, 4) === "9999");
+  const [linkType, setLinkType] = useState<"email" | "website">(
+    jobData.applyUrl.includes("http") ? "website" : "email"
+  );
 
   const {
     watch,
     setError,
     resetField,
+    setValue,
+    clearErrors,
     formState: { errors },
   } = jobForm;
 
   const { data: companyDataObj } = useFindCompany({ word: searchWord, order: "recent" });
+
+  const linkButtonClickHandler = (type: typeof linkType) => {
+    setLinkType(type);
+    setValue(`apply_url`, watch("apply_url"));
+    clearErrors("apply_url");
+  };
 
   useEffect(() => {
     if (isAlways) {
@@ -68,6 +79,9 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobData
                     required: {
                       value: true,
                       message: "선택된 기업이 없습니다.",
+                    },
+                    onChange: () => {
+                      clearErrors("company_id");
                     },
                   }),
                 }}
@@ -159,23 +173,73 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobData
           <ul>
             <li>
               <strong css={cssObj.requiredTitle}>채용 링크</strong>
+              <div css={cssObj.linkLabelContainer}>
+                <label css={cssObj.label} htmlFor="website">
+                  <input
+                    defaultChecked={linkType === "website"}
+                    type="radio"
+                    name="link"
+                    id="website"
+                    css={cssObj.radio}
+                    onClick={() => {
+                      linkButtonClickHandler("website");
+                    }}
+                  />
+                  <div css={cssObj.radioBox} />
+                  <p css={cssObj.labelTitle}>채용 링크</p>
+                </label>
+                <p css={cssObj.labelTitle}>또는</p>
+                <label css={cssObj.label} htmlFor="email">
+                  <input
+                    defaultChecked={linkType === "email"}
+                    type="radio"
+                    name="link"
+                    id="email"
+                    css={cssObj.radio}
+                    onClick={() => {
+                      linkButtonClickHandler("email");
+                    }}
+                  />
+                  <div css={cssObj.radioBox} />
+                  <p css={cssObj.labelTitle}>이메일 링크</p>
+                </label>
+              </div>
               {errors.apply_url?.message && <ErrorMessage msg={errors.apply_url.message} />}
               <div css={cssObj.flexFullBox}>
-                <input
-                  type="url"
-                  placeholder="https://"
-                  css={cssObj.inputCSS}
-                  {...jobForm.register("apply_url", {
-                    pattern: {
-                      value: URL_REGEXP,
-                      message: "http 또는 https를 포함한 url 형식을 작성해주세요.",
-                    },
-                    required: {
-                      value: true,
-                      message: "http 또는 https를 포함한 url 형식을 작성해주세요.",
-                    },
-                  })}
-                />
+                {linkType === "website" && (
+                  <input
+                    type="url"
+                    placeholder="https://"
+                    css={cssObj.inputCSS}
+                    {...jobForm.register("apply_url", {
+                      pattern: {
+                        value: URL_REGEXP,
+                        message: "http 또는 https를 포함한 url 형식을 작성해주세요.",
+                      },
+                      required: {
+                        value: true,
+                        message: "http 또는 https를 포함한 url 형식을 작성해주세요.",
+                      },
+                    })}
+                  />
+                )}
+                {linkType === "email" && (
+                  <input
+                    type="email"
+                    placeholder="@"
+                    css={cssObj.inputCSS}
+                    {...jobForm.register("apply_url", {
+                      pattern: {
+                        value: EMAIL_REGEXP,
+                        message: "EMAIL 형식에 맞게 작성해주세요",
+                      },
+                      required: {
+                        value: true,
+                        message: "이메일 채용링크를 작성해주세요",
+                      },
+                    })}
+                  />
+                )}
               </div>
             </li>
             <li>

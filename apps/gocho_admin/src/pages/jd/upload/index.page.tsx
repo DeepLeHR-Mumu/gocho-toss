@@ -1,4 +1,4 @@
-import { ReactElement, useState, useRef } from "react";
+import { ReactElement, useState, useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
@@ -62,6 +62,22 @@ const JdUpload: NextPageWithLayout = () => {
       );
     }
   };
+
+  useEffect(() => {
+    window.addEventListener("keydown", (keyDownEvent) => {
+      if (keyDownEvent.key === "Enter") {
+        keyDownEvent.preventDefault();
+      }
+    });
+
+    return () => {
+      window.removeEventListener("keydown", (keyDownEvent) => {
+        if (keyDownEvent.key === "Enter") {
+          keyDownEvent.preventDefault();
+        }
+      });
+    };
+  }, []);
 
   return (
     <main css={cssObj.wrapper}>
