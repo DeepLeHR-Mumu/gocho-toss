@@ -52,7 +52,7 @@ export const PasswordEditBox: FunctionComponent = () => {
             setFailCurrentPw(false);
             setCurrentToast("비밀번호가 변경되었습니다.");
             closeModal();
-            localStorage.setItem("access_token", `${data?.data.access_token}`);
+            localStorage.setItem("accessToken", `${data?.data.access_token}`);
             refetch();
           },
         }
