@@ -26,8 +26,8 @@ export const tagListCSS = css`
 export const tagCSS = css`
   margin-right: 0.5rem;
   color: ${COLORS.BLUE_FIRST40};
-  font-weight: 500;
-  font-size: 0.875rem;
+  font-weight: 400;
+  font-size: 0.75rem;
 
   :before {
     content: "#";
@@ -58,8 +58,8 @@ export const contentContainer = css`
 
 export const titleCSS = css`
   display: block;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.25rem;
+  font-weight: 700;
   margin-bottom: 0.5rem;
 `;
 
@@ -90,10 +90,15 @@ export const info = css`
 `;
 
 export const numInfo = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
   margin: 0 1rem 0 0.25rem;
   color: ${COLORS.GRAY10};
 
   :after {
+    color: ${COLORS.GRAY10};
     content: " · ";
     margin-left: 1rem;
   }

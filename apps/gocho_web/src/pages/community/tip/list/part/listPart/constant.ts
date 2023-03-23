@@ -13,8 +13,8 @@ export const setTipCompanyButtonArr: {
     text: "포스코",
     companyId: 156,
   },
-  // {
-  //   text: "준비중",
-  //   companyId: 0,
-  // },
+  {
+    text: "현대모비스",
+    companyId: 255,
+  },
 ];

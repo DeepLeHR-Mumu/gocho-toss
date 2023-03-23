@@ -13,7 +13,7 @@ export const BookmarkCompanyArr: FunctionComponent = () => {
   if (!userData || !userCompanyBookmarkArr || isLoading) {
     return (
       <div css={cardListContainer}>
-        <p css={descCSS}>기업 북마크를 이용하시면 기업공고가 더 정교해져요 😳</p>
+        <p css={descCSS}>기업 북마크를 이용하시면 추천기업이 더 정교해져요 😳</p>
       </div>
     );
   }
@@ -21,7 +21,7 @@ export const BookmarkCompanyArr: FunctionComponent = () => {
   return (
     <div css={cardListContainer}>
       {userCompanyBookmarkArr.length === 0 && (
-        <p css={descCSS}>{userData.nickname} 님! 북마크를 이용하시면 기업공고가 더 정교해져요 😳</p>
+        <p css={descCSS}>{userData.nickname} 님! 북마크를 이용하시면 추천기업이 더 정교해져요 😳</p>
       )}
       {userCompanyBookmarkArr.map((companyData) => {
         return (

@@ -3,6 +3,7 @@ export interface TipCardProps {
     id: number;
     thumbnailSrc: string;
     title: string;
+    uploaderName: string;
     description: string;
     tagArr: string[];
     createdTime: number;

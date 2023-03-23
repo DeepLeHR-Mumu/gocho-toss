@@ -49,13 +49,13 @@ export const Spec6MiddleEnd: FunctionComponent<Spec6MiddleEndProps> = ({
           leave_early: userSpecObj.highschool.leaveEarly,
           class_miss: userSpecObj.highschool.classMiss,
         },
-        college: {
+        college: userSpecObj.college && {
           department: userSpecObj.college.department,
           grade: userSpecObj.college.grade,
           max_grade: userSpecObj.college.maxGrade,
           uturn: userSpecObj.college.uturn,
         },
-        certificate: userSpecObj.certificate,
+        certificate: userSpecObj.certificate && userSpecObj.certificate,
         language: userSpecObj.language,
         award: userSpecObj.award,
         career: userSpecObj.career,

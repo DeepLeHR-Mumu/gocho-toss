@@ -33,6 +33,7 @@ import {
   numInfo,
   likeButtonCSS,
   logoBox,
+  uploader,
 } from "./style";
 import { TipBoxProps } from "./type";
 import { setCarouselSetting } from "./util";
@@ -150,15 +151,13 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
         <p css={bodyCSS}>{tipData.description}</p>
         <div css={infoContainer}>
           <p css={info}>{`${year}.${month}.${date}`}</p>
-
           <button type="button" onClick={likePosting} css={likeButtonCSS(isBookmarked)} aria-label="꿀팁 좋아요">
             <AiOutlineLike />
             {tipData.likeCount}
           </button>
-
-          <p css={numInfo}>
-            <AiOutlineEye /> {tipData.viewCount.toLocaleString("Ko-KR")}
-          </p>
+          <AiOutlineEye />
+          <p css={numInfo}>{tipData.viewCount.toLocaleString("Ko-KR")}</p>
+          <p css={uploader}>작성자: {tipData.uploaderName}</p>
         </div>
       </article>
     </div>

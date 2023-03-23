@@ -37,15 +37,12 @@ export interface SpecObjDef {
     | null
     | undefined;
   // NOTMYFAULT undefined 수정하기 - null로 와야함
-  certificate:
-    | {
-        data: string[] | null; // 자격증 raw data
-        level1: number; // 기능사 개수
-        level2: number; // 산업기사 개수
-        level3: number; // 기사+ 개수
-      }
-    | null
-    | undefined;
+  certificate: {
+    data: string[] | null; // 자격증 raw data
+    level1: number | null; // 기능사 개수
+    level2: number | null; // 산업기사 개수
+    level3: number | null; // 기사+ 개수
+  } | null;
   language: LanguageType[] | null;
   award: string[] | null;
   career: string[] | null;

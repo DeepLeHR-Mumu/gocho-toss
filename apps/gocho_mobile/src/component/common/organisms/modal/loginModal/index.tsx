@@ -54,7 +54,7 @@ export const LoginModal: FunctionComponent = () => {
     mutate(loginObj, {
       onError: (error) => {
         const errorResponse = error.response?.data as ErrorResponse;
-        setErrorMsg(errorResponse.error.errorMessage);
+        setErrorMsg(errorResponse.error_message);
         ref.current += 1;
       },
       onSuccess: (response) => {
