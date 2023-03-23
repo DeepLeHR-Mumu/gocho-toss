@@ -31,7 +31,7 @@ export const AccountSettingBox: FunctionComponent = () => {
     setCurrentModal("dialogModal", {
       agreeDesc: "삭제",
       title: "계정을 삭제 하시겠습니까?",
-      desc: "모든 정보가 삭제되며 복구가 불가합니다. 주의사항에 동의하고 삭제하시겠습니까?",
+      desc: "모든 정보가 삭제되며 복구가 불가합니다. 정말로 삭제하시겠습니까?",
       doActive: () => {
         deleteUserDataInfo(
           { id },
