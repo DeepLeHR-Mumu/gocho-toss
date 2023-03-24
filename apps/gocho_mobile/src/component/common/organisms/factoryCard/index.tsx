@@ -118,7 +118,7 @@ export const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factoryInfo }
                 <Image src={hireNumberIcon} alt="" fill />
               </div>
               <p css={largeMenuNameBox}>
-                임직원 <span css={numberCSS}>{totalNumber}명</span>
+                직원 <span css={numberCSS}>{totalNumber}명</span>
               </p>
             </div>
             <div css={contentBox}>

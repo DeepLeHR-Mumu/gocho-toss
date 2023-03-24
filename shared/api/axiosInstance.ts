@@ -63,6 +63,8 @@ export const useAxiosInterceptor = () => {
 
     // 0. token 없는 경우
     if (!accessTokenData || !refreshTokenData) {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
       throw new axios.Cancel("로그인하지 않은 상태");
     }
 

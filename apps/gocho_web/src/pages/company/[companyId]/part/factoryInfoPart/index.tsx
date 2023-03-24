@@ -130,7 +130,7 @@ export const FactoryInfoPart: FunctionComponent = () => {
                   <div css={flexBox}>
                     <div css={infoChildBox}>
                       <div css={infoIcon}>
-                        <Image fill src={hireNumberIcon} alt="공장 임직원 정보 아이콘" />
+                        <Image fill src={hireNumberIcon} alt="공장 직원 정보 아이콘" />
                       </div>
                       <div css={infoText}>
                         <strong css={infoTitle}>임직원</strong>
@@ -139,7 +139,7 @@ export const FactoryInfoPart: FunctionComponent = () => {
                     </div>
                     <div css={infoChildBox}>
                       <div css={infoIcon}>
-                        <Image fill src={genderIcon} alt="공장 임직원 성비 정보 아이콘" />
+                        <Image fill src={genderIcon} alt="공장 직원 성비 정보 아이콘" />
                       </div>
                       <div css={infoText}>
                         <strong css={infoTitle}>
