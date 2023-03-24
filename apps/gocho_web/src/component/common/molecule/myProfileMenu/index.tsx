@@ -4,7 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { profileMenuArr } from "@component/global/header/constant";
 
-import { myProfileMenuWrapper, myProfileTitle, myProfileMenuCSS, logoutCSS } from "./style";
+import { myProfileMenuWrapper, myProfileMenuCSS, logoutCSS } from "./style";
 import { MyProfileMenuProps } from "./type";
 
 declare global {
