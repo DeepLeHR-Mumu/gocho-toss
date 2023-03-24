@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import { useCompanyCommentArr } from "shared-api/company";
 import { useUserInfo } from "shared-api/auth";
-import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
 import { LinkButton, NormalButton } from "../../common/atom/button";
@@ -60,12 +60,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
           <div css={companyInfoContainer}>
             {!isMobile && (
               <div css={companyLogoBox}>
-                <Image
-                  layout="fill"
-                  objectFit="contain"
-                  src={companyData.logoUrl || defaultCompanyLogo}
-                  alt={`${companyData.name} 기업 로고`}
-                />
+                <Image fill src={companyData.logoUrl || defaultCompanyLogo} alt={`${companyData.name} 기업 로고`} />
               </div>
             )}
 
@@ -95,12 +90,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
         </section>
 
         <div css={linkBox}>
-          <LinkButton
-            text="실시간 댓글 보러가기"
-            linkTo={`/company/${companyData.id}/detail`}
-            wide
-            variant="outlined"
-          />
+          <LinkButton text="기업 정보 보러가기" linkTo={`/company/${companyData.id}/detail`} wide variant="outlined" />
         </div>
       </div>
     );
@@ -113,10 +103,10 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
           {!isMobile && (
             <div css={companyLogoBox}>
               <Image
-                layout="fill"
-                objectFit="contain"
+                fill
                 src={companyData.logoUrl || defaultCompanyLogo}
                 alt={`${companyCommentArrData.company.name} 기업 로고`}
+                sizes="1"
               />
             </div>
           )}
@@ -134,7 +124,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
       </section>
 
       <div css={linkBox}>
-        <LinkButton text="실시간 댓글 보러가기" linkTo={`/company/${companyData.id}/detail`} wide variant="outlined" />
+        <LinkButton text="기업 정보 보러가기" linkTo={`/company/${companyData.id}/detail`} wide variant="outlined" />
       </div>
     </div>
   );

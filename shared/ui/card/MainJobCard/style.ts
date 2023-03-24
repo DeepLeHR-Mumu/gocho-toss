@@ -3,34 +3,30 @@ import { css } from "@emotion/react";
 import { shorten } from "shared-style/common";
 import { COLORS } from "shared-style/color";
 
-export const cardWrapper = (isMobile: boolean) => {
-  return css`
-    position: relative;
-    display: block;
-    cursor: pointer;
-    width: ${isMobile ? "100%" : "calc(33% - 0.5rem)"};
-    border-radius: 1.5rem;
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.15);
-    padding: 1rem;
-    overflow: hidden;
-  `;
-};
+export const cardWrapper = (isMobile: boolean) => css`
+  position: relative;
+  display: block;
+  cursor: pointer;
+  width: ${isMobile ? "100%" : "calc(33% - 0.5rem)"};
+  border-radius: 1.5rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+  overflow: hidden;
+`;
 
-export const bookmarkButton = (isBookmarked = false) => {
-  return css`
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 1rem;
-    margin: 0;
-    background-color: ${COLORS.GRAY90};
-    border-radius: 0 1.25rem 0 1.25rem;
-    color: ${isBookmarked ? COLORS.BLUE_FIRST40 : COLORS.GRAY60};
-    background-color: ${isBookmarked ? COLORS.STATE_SUCCESS : `${COLORS.GRAY90}`};
-    font-size: 1rem;
-    z-index: 15;
-  `;
-};
+export const bookmarkButton = (isBookmarked = false) => css`
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 1rem;
+  margin: 0;
+  background-color: ${COLORS.GRAY90};
+  border-radius: 0 1.25rem 0 1.25rem;
+  color: ${isBookmarked ? COLORS.BLUE_FIRST40 : COLORS.GRAY60};
+  background-color: ${isBookmarked ? COLORS.STATE_SUCCESS : `${COLORS.GRAY90}`};
+  font-size: 1rem;
+  z-index: 15;
+`;
 
 export const labelContainer = css`
   display: flex;
@@ -76,6 +72,9 @@ export const companyLogoBox = css`
   width: 4.5rem;
   height: 4.5rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const titleCSS = css`

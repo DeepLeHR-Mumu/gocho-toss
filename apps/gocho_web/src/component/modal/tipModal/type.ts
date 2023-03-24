@@ -19,6 +19,7 @@ export interface TipBoxProps {
   tipData: {
     id: number;
     title: string;
+    uploaderName: string;
     description: string;
     tagArr: string[];
     createdTime: number;

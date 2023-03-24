@@ -2,10 +2,22 @@ import { css } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
 
+export const title = css`
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: ${COLORS.GRAY10};
+  margin-bottom: 5.5rem;
+`;
+
+export const colorPoint = css`
+  color: ${COLORS.BLUE_NEON30};
+`;
+
 export const wrapper = css`
-  padding: 11.5rem 0 4.1875rem;
+  padding: 5.5rem 0 10rem;
   box-sizing: border-box;
-  background-color: ${COLORS.BLUE_SECOND40};
+  background-color: ${COLORS.BLUE_SECOND70};
 `;
 
 export const totalMySpecCSS = css`

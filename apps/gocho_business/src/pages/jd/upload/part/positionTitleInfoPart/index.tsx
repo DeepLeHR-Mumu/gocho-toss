@@ -6,8 +6,7 @@ import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
-import { DeleteInputButton } from "../../component/deleteInputButton";
-import { AddFieldButton } from "../../component/addFieldButton";
+import { DeleteInputButton, AddFieldButton } from "../../component";
 import { PositionTitleInfoPartProps } from "./type";
 import { TASK_ARR } from "./constant";
 import { cssObj } from "./style";

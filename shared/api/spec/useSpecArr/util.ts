@@ -7,16 +7,15 @@ export const selector = (specDataArr: SpecObjDef[]) => {
       profileImg: specData.image,
       score: specData.score,
       scoreCount: specData.score_count,
-      user: {
-        nickname: specData.user.nickname,
-        badge: specData.user.badge,
-        image: specData.user.image,
+      uploader: {
+        nickname: specData.uploader.nickname,
+        badge: specData.uploader.badge,
+        image: specData.uploader.image,
       },
       gender: specData.gender,
       age: specData.age,
       desiredTask: specData.desired_task,
       lastEducation: specData.last_education,
-      isMine: specData.isMine,
       // NOTMYFAULT undefined 해결 예정
       college:
         specData.college === null || specData.college === undefined

@@ -1,21 +1,23 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { tipArrKeyObj, TipArrRequestObjDef } from "shared-constant/queryKeyFactory/tip/arrKeyObj";
 
-import { axiosInstance } from "../../axiosInstance";
+import { axiosNoTokenInstance } from "../../axiosInstance";
 import { GetInfiniteTipArrObjDef } from "./type";
 import { selector } from "./util";
 
 export const getInfiniteTipArr: GetInfiniteTipArrObjDef = async ({ queryKey: [{ requestObj }], pageParam }) => {
-  const { data } = await axiosInstance.get(`/tips`, {
+  const { data } = await axiosNoTokenInstance.get("/tips", {
     params: { ...requestObj, offset: pageParam },
   });
-
   const nextPage = pageParam === undefined ? 0 : pageParam + 4;
+
   return { ...data, nextPage };
 };
 
 export const useInfiniteTipArr = (requestObj: TipArrRequestObjDef) => {
-  const queryResult = useInfiniteQuery(tipArrKeyObj.infinite(requestObj), getInfiniteTipArr, {
+  return useInfiniteQuery({
+    queryKey: tipArrKeyObj.infinite(requestObj),
+    queryFn: getInfiniteTipArr,
     getNextPageParam: (responseObj) => {
       return responseObj.data.length !== 0 ? responseObj.nextPage : undefined;
     },
@@ -28,5 +30,4 @@ export const useInfiniteTipArr = (requestObj: TipArrRequestObjDef) => {
       };
     },
   });
-  return queryResult;
 };

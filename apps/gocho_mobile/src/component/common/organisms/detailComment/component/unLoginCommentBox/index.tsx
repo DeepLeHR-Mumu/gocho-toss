@@ -3,7 +3,7 @@ import { FunctionComponent } from "react";
 import { useModal } from "@recoil/hook/modal";
 import { NormalButton } from "shared-ui/common/atom/button";
 
-import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util";
 import { UnLoginCommentBoxProps } from "./type";
 import {
   commentBody,

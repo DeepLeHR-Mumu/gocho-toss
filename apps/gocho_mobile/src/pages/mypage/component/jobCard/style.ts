@@ -57,6 +57,9 @@ export const companyLogoBox = css`
   border-radius: 50%;
   position: relative;
   transition: all 0.3s ease;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const dateInfoContainer = css`

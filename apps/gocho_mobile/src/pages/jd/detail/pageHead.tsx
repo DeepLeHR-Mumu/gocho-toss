@@ -1,8 +1,7 @@
 import { FunctionComponent } from "react";
 import Head from "next/head";
 
-import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL } from "shared-constant/internalURL";
-import { JD_DETAIL_META } from "shared-constant/meta";
+import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL, JD_DETAIL_META } from "shared-constant";
 
 import { PageHeadProps } from "./type";
 

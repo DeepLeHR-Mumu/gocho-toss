@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useRef, useState } from "react";
+import { FunctionComponent, useRef, useState } from "react";
 import Slider from "react-slick";
 import Image from "next/image";
 import { AiOutlineEye, AiOutlineLike } from "react-icons/ai";
@@ -7,8 +7,9 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import gochoLogoMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { useAddTipBookmarkArr, useDeleteTipBookmarkArr, useUserTipBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
-import { dateConverter } from "shared-util/date/dateConverter";
+import { dateConverter } from "shared-util";
 import { useAddTipViewCount } from "shared-api/viewCount";
+import { useViewCount } from "shared-user";
 
 import { useToast } from "@recoil/hook/toast";
 import { ModalComponent } from "@component/modal/modalBackground";
@@ -32,6 +33,7 @@ import {
   numInfo,
   likeButtonCSS,
   logoBox,
+  uploader,
 } from "./style";
 import { TipBoxProps } from "./type";
 import { setCarouselSetting } from "./util";
@@ -58,31 +60,24 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
     if (!userInfoData) {
       return setCurrentToast("로그인이 필요한 서비스입니다.");
     }
-    if (isBookmarked) return deleteBookmarkMutate({ userId: userInfoData?.id as number, elemId: tipData.id });
-    return addBookmarkMutate({ userId: userInfoData?.id as number, elemId: tipData.id });
+    if (isBookmarked) return deleteBookmarkMutate({ userId: userInfoData?.id as number, id: tipData.id });
+    return addBookmarkMutate({ userId: userInfoData?.id as number, id: tipData.id });
   };
 
-  useEffect(() => {
-    const tipViewStr = sessionStorage.getItem("tipViewArr");
-
-    const isViewed = tipViewStr?.includes(String(tipData.id));
-    if (isViewed) return;
-
-    if (tipViewStr) {
-      const tipViewArr: number[] = JSON.parse(tipViewStr);
-      tipViewArr.push(tipData.id);
-      sessionStorage.setItem("tipViewArr", JSON.stringify(tipViewArr));
+  useViewCount({
+    id: tipData.id,
+    target: "tip",
+    viewMutation: () => {
       addViewCount({ elemId: tipData.id });
-      return;
-    }
-    if (!isViewed) {
-      sessionStorage.setItem("tipViewArr", JSON.stringify([tipData.id]));
-      addViewCount({ elemId: tipData.id });
-    }
-  }, [tipData, addViewCount]);
+    },
+  });
 
   if (currentModal?.modalContentObj === undefined) {
-    return <div>error!!</div>;
+    return (
+      <div>
+        <p>의도치 않은 에러가 발생했습니다.</p>
+      </div>
+    );
   }
 
   const { year, month, date } = dateConverter(tipData.createdTime);
@@ -94,7 +89,7 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
 
       <article css={contentContainer}>
         <div css={logoBox}>
-          <Image src={gochoLogoMono} alt="고초대졸닷컴" objectFit="contain" layout="fill" />
+          <Image src={gochoLogoMono} alt="고초대졸닷컴" fill />
         </div>
         <strong css={titleCSS}>{tipData.title}</strong>
         <ul css={tagListCSS}>
@@ -111,12 +106,12 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
                 <div key={`${tipData.title + index}`}>
                   <div css={tipImageBox}>
                     <Image
-                      layout="fill"
-                      objectFit="contain"
+                      fill
                       src={`${srcURL + (index + 1)}.png`}
                       alt={`${tipData.title} 본문`}
                       loading="eager"
                       unoptimized
+                      sizes="1"
                     />
                   </div>
                 </div>
@@ -156,15 +151,13 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
         <p css={bodyCSS}>{tipData.description}</p>
         <div css={infoContainer}>
           <p css={info}>{`${year}.${month}.${date}`}</p>
-
           <button type="button" onClick={likePosting} css={likeButtonCSS(isBookmarked)} aria-label="꿀팁 좋아요">
             <AiOutlineLike />
             {tipData.likeCount}
           </button>
-
-          <p css={numInfo}>
-            <AiOutlineEye /> {tipData.viewCount.toLocaleString("Ko-KR")}
-          </p>
+          <AiOutlineEye />
+          <p css={numInfo}>{tipData.viewCount.toLocaleString("Ko-KR")}</p>
+          <p css={uploader}>작성자: {tipData.uploaderName}</p>
         </div>
       </article>
     </div>

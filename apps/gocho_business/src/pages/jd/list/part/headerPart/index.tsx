@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { COLORS } from "shared-style/color";
 import { SharedButton } from "shared-ui/business/sharedButton";
 
-import { INTERNAL_URL } from "@/constants/url";
+import { INTERNAL_URL } from "@/constants";
 
 import { cssObj } from "./style";
 

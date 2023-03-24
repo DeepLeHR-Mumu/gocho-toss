@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import { axiosInstance } from "@/apis/useIsRefreshLock";
-import { ErrorResponseDef } from "@/types/errorType";
+import { ErrorResponseDef } from "@/types";
 
+import { axiosInstance } from "../../useIsRefreshLock";
 import { countInfoKeyObj, GetCountInfoDef, RequestObjDef, ResponseObjDef } from "./type";
 import { countInfoSelector } from "./util";
 
@@ -18,7 +18,9 @@ export const useCountInfo = (requestObj: RequestObjDef) =>
     AxiosError<ErrorResponseDef>,
     ReturnType<typeof countInfoSelector>,
     ReturnType<typeof countInfoKeyObj.detail>
-  >(countInfoKeyObj.detail(requestObj), getCountInfo, {
+  >({
+    queryKey: countInfoKeyObj.detail(requestObj),
+    queryFn: getCountInfo,
     enabled: Boolean(requestObj.companyId),
     select: (data) => countInfoSelector(data),
   });

@@ -11,7 +11,9 @@ export const getJdArr: GetJdArrDef = async ({ queryKey: [{ requestObj }] }) => {
 };
 
 export const useJdArr = (requestObj: RequestObjDef) => {
-  return useQuery(jdArrKeyObj.arr(requestObj), getJdArr, {
+  return useQuery({
+    queryKey: jdArrKeyObj.arr(requestObj),
+    queryFn: getJdArr,
     select: (data) => {
       return jdArrSelector(data);
     },

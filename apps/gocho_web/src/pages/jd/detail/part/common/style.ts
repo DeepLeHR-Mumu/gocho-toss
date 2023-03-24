@@ -62,6 +62,8 @@ export const subTitle = css`
 `;
 
 export const desc = css`
+  display: flex;
+  flex-direction: column;
   color: ${COLORS.GRAY10};
   font-size: 0.875rem;
   line-height: 1.4;

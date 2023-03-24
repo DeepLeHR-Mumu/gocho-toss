@@ -48,7 +48,7 @@ export type LanguageType = {
 }[];
 
 export interface EvalDef {
-  strength_count_arr: [string, number][];
-  weakness_count_arr: [string, number][];
+  strength_count_arr: { [key: string]: number };
+  weakness_count_arr: { [key: string]: number };
   feedback_arr: string[] | null;
 }

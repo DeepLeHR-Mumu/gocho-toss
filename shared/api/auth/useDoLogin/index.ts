@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 
 import { axiosInstance } from "../../axiosInstance";
 
-import { ResponseObjDef, useDoLoginProps, PostLoginDef, RequestObjDef } from "./type";
+import { PostLoginDef, RequestObjDef, ResponseObjDef, useDoLoginProps } from "./type";
 
 const postLogin: PostLoginDef = async (requestObj) => {
   const { data } = await axiosInstance.post("/auth/login", { ...requestObj });
@@ -11,6 +11,5 @@ const postLogin: PostLoginDef = async (requestObj) => {
 };
 
 export const useDoLogin: useDoLoginProps = () => {
-  const mutationResult = useMutation<ResponseObjDef, AxiosError, RequestObjDef>(postLogin);
-  return mutationResult;
+  return useMutation<ResponseObjDef, AxiosError, RequestObjDef>({ mutationFn: postLogin });
 };

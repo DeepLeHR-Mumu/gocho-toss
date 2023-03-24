@@ -15,5 +15,5 @@ const putAcceptFactory: AcceptFactoryDef = async (requestObj) => {
 };
 
 export const useAcceptFactory: UseAcceptFactoryProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(putAcceptFactory);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: putAcceptFactory });
 };

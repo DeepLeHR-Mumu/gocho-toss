@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Image from "next/image";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-import { dateConverter } from "shared-util/date";
+import { dateConverter } from "shared-util";
 
 import { useJdArr } from "@api/jd/useJdArr";
 import { mainContainer, pageTitle } from "@style/commonStyles";
@@ -122,7 +122,7 @@ const Instagram: NextPage = () => {
               <li key={job.id} css={jobContainer}>
                 <div css={jobInfoContainer}>
                   <div css={companyLogo}>
-                    <Image layout="fill" objectFit="contain" src={job.companyLogo || defaultCompanyLogo} alt="" />
+                    <Image src={job.companyLogo || defaultCompanyLogo} fill alt="" sizes="1" />
                   </div>
                   <div css={companyInfo}>
                     <div css={infoName}>{job.companyName}</div>

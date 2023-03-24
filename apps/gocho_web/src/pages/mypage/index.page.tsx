@@ -27,6 +27,9 @@ const MypageHome: NextPage = () => {
     if (currentModal?.activatedModal === "signUpModal") {
       setCurrentModal("signUpModal");
     }
+    if (currentModal?.activatedModal === "findPasswordModal") {
+      setCurrentModal("findPasswordModal");
+    }
   }, [error, closeModal, setCurrentModal, currentModal?.activatedModal]);
 
   useEffect(() => {

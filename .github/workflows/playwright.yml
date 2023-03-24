@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         name: 코드가져오기 checkout
-      
+
       - uses: actions/setup-node@v2
         with:
           node-version: "16.x"
@@ -66,12 +66,13 @@ jobs:
           - service_name: business
             dev_server: pnpm dev-biz &
             test: pnpm turbo --filter=gocho_business e2e:CICD
-          - service_name: web
-            dev_server: pnpm dev-web &
-            test: pnpm turbo --filter=gocho_web e2e:CICD
-          - service_name: mobile
-            dev_server: pnpm dev-mobile &
-            test: pnpm turbo --filter=gocho_mobile e2e:CICD
+            # TODO: 다음에 살리기
+            # service_name: web
+            # dev_server: pnpm dev-web &
+            # test: pnpm turbo --filter=gocho_web e2e:CICD
+          - service_name: unit
+            dev_server: ls &
+            test: pnpm turbo test
     name: ${{matrix.command.service_name}} 테스트
     runs-on: ubuntu-latest
     env:

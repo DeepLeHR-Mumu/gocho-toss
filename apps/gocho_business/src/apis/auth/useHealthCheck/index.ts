@@ -9,4 +9,4 @@ export const getHealthCheck = async () => {
   return data;
 };
 
-export const useHealthCheck = () => useQuery(userStateKeyObj.all, getHealthCheck);
+export const useHealthCheck = () => useQuery({ queryKey: userStateKeyObj.all, queryFn: getHealthCheck });

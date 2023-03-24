@@ -4,8 +4,8 @@ import { MdBookmarkBorder } from "react-icons/md";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
-import { useCountInfo } from "@/apis/company/useCountInfo";
-import { useUserState } from "@/globalStates/useUserState";
+import { useCountInfo } from "@/apis";
+import { useUserState } from "@/globalStates";
 
 import { cssObj } from "./style";
 
@@ -26,7 +26,7 @@ export const CompanyInfoPart = () => {
   return (
     <section css={cssObj.wrapper}>
       <div css={cssObj.logo}>
-        <Image src={userInfoData.companyLogo} alt={userInfoData.companyName} layout="fill" objectFit="contain" />
+        <Image src={userInfoData.companyLogo} alt={userInfoData.companyName} fill sizes="1" />
       </div>
       <div css={cssObj.companyInfoBox}>
         <strong css={cssObj.companyNameCSS}>{userInfoData.companyName}</strong>

@@ -1,16 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const withTM = require("next-transpile-modules")([
-  "shared-ui",
-  "shared-api",
-  "shared-constant",
-  "shared-util",
-  "shared-type",
-  "shared-style",
-  "shared-image",
-  "shared-ga",
-]);
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
@@ -21,13 +8,24 @@ const nextConfig = {
   images: {
     domains: [`cdn.gocho-back.com`, "devcdn.gocho-back.com"],
     formats: ["image/avif", "image/webp"],
+    deviceSizes: [1256],
+    imageSizes: [],
   },
   pageExtensions: ["page.tsx"],
+  transpilePackages: [
+    "shared-ui",
+    "shared-api",
+    "shared-constant",
+    "shared-util",
+    "shared-type",
+    "shared-style",
+    "shared-image",
+    "shared-ga",
+  ],
 };
 
-module.exports = withBundleAnalyzer(withTM(nextConfig));
+module.exports = withBundleAnalyzer(nextConfig);
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const intercept = require("intercept-stdout");
 
 function interceptStdout(text) {

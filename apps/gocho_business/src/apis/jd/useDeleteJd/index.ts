@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
-import { ErrorResponseDef } from "@/types/errorType";
+import { ErrorResponseDef } from "@/types";
 
 import { jdArrKeyObj, ResponseObjDef } from "../useJdArr/type";
 import { axiosInstance } from "../../useIsRefreshLock";
@@ -14,7 +14,8 @@ export const deleteJd: DeleteJdDef = async (requestObj) => {
 
 export const useDeleteJd = () => {
   const queryClient = useQueryClient();
-  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>(deleteJd, {
+  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
+    mutationFn: deleteJd,
     onMutate: async (requestObj) => {
       await queryClient.cancelQueries(jdArrKeyObj.all);
       const previousData = queryClient.getQueryData(jdArrKeyObj.all);

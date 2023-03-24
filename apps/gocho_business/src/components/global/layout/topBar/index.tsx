@@ -8,10 +8,10 @@ import { COLORS } from "shared-style/color";
 
 import bizTextMono from "@/public/image/deepleLogo/bizTextMono.svg";
 import bizTextColor from "@/public/image/deepleLogo/bizTextColor.svg";
-import { useUserState } from "@/globalStates/useUserState";
-import { useDoLogout } from "@/apis/auth/useDoLogout";
-import { INTERNAL_URL } from "@/constants/url";
-import { signupButtonClickEvent } from "@/ga/auth";
+import { useUserState } from "@/globalStates";
+import { useDoLogout } from "@/apis";
+import { INTERNAL_URL } from "@/constants";
+import { signupButtonClickEvent } from "@/ga";
 
 import { cssObj } from "./style";
 
@@ -48,12 +48,7 @@ export const TopBar: FunctionComponent = () => {
     <header css={cssObj.wrapper(isLogin)}>
       <div css={cssObj.container}>
         <h1 css={cssObj.title}>
-          <Image
-            src={isLogin ? bizTextColor : bizTextMono}
-            alt="고초대졸닷컴 비즈니스"
-            layout="fill"
-            objectFit="contain"
-          />
+          <Image src={isLogin ? bizTextColor : bizTextMono} alt="고초대졸닷컴 비즈니스" fill />
         </h1>
       </div>
       {userInfoData ? (

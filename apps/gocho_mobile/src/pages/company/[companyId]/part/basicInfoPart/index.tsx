@@ -4,7 +4,7 @@ import { FiInfo } from "react-icons/fi";
 import Image from "next/image";
 
 import { useCompanyDetail } from "shared-api/company/useCompanyDetail";
-import { dateConverter } from "shared-util/date/index";
+import { dateConverter } from "shared-util";
 import nozo_false from "shared-image/page/companyDetail/nozo_false_icon.svg";
 import nozo_true from "shared-image/page/companyDetail/nozo_true_icon.svg";
 
@@ -107,11 +107,7 @@ export const BasicInfoPart: FunctionComponent = () => {
                 {companyDetailData.nozo.exists ? "노조 있음" : "노조 없음"}
 
                 <span css={nozoIconBox}>
-                  <Image
-                    src={companyDetailData.nozo.exists ? nozo_true : nozo_false}
-                    layout="fixed"
-                    objectFit="contain"
-                  />
+                  <Image src={companyDetailData.nozo.exists ? nozo_true : nozo_false} fill alt="" />
                 </span>
               </p>
             </div>

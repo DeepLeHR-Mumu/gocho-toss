@@ -4,19 +4,17 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
-import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
+import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 import { NormalButton } from "shared-ui/common/atom/button";
-import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
-import { useFocusTrap } from "shared-hooks/useFocusTrap";
+import { managerTokenDecryptor } from "shared-util";
+import { useFocusTrap } from "shared-hooks";
 
 import { FiCheckCircle, FiX } from "react-icons/fi";
-import { useDoLogin } from "@/apis/auth/useDoLogin";
-import { ModalComponent } from "@/components/global/modal/modalBackground";
-import { useModal } from "@/globalStates/useModal";
-import { useToast } from "@/globalStates/useToast";
-import { useUserState } from "@/globalStates/useUserState";
-import { loginSuccessEvent } from "@/ga/auth";
+import { useDoLogin } from "@/apis";
+import { useModal, useToast, useUserState } from "@/globalStates";
+import { loginSuccessEvent } from "@/ga";
 
+import { ModalComponent } from "../modalBackground";
 import { LOGIN_ERROR_MESSAGES } from "./constant";
 import { LoginFormValues } from "./type";
 import { cssObj } from "./style";
@@ -93,7 +91,7 @@ export const LoginBox: FunctionComponent = () => {
   return (
     <div css={cssObj.wrapper} ref={modalRef} tabIndex={-1}>
       <div css={cssObj.logoContainer}>
-        <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" />
+        <Image src={smallMono} alt="고초대졸 로고" />
       </div>
       <p css={cssObj.desc}>재로그인이 필요합니다</p>
       <form css={cssObj.formCSS} onSubmit={handleSubmit(loginSubmit)}>

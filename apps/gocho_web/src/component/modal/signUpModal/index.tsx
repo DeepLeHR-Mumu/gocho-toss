@@ -3,8 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 
 import { useDoSignUp, useUserInfo } from "shared-api/auth";
-import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
-import { EMAIL_ERROR_MESSAGE, NICKNAME_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant/errorMessage";
+import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE, EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
@@ -16,18 +15,20 @@ import { CloseButton } from "@component/common/atom/closeButton";
 import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
 import { useToast } from "@recoil/hook/toast";
 
+import { tokenDecryptor } from "shared-util";
+import { useQueryClient } from "@tanstack/react-query";
 import { wrapper, desc, formCSS, closeBtn, formArr, logoContainer, sideErrorMsg } from "./style";
 import { SignUpFormValues } from "./type";
-import { validateNickname } from "./util";
 
 export const SignUpBox: FunctionComponent = () => {
   const {
     register,
     handleSubmit,
-    watch,
     setValue,
     formState: { errors, dirtyFields },
   } = useForm<SignUpFormValues>({ mode: "onChange" });
+
+  const queryClient = useQueryClient();
   const { refetch } = useUserInfo();
   const { closeModal } = useModal();
   const { mutate } = useDoSignUp();
@@ -40,15 +41,18 @@ export const SignUpBox: FunctionComponent = () => {
     mutate(signUpObj, {
       onError: (error) => {
         const errorResponse = error.response?.data as ErrorResponse;
-        setErrorMsg(errorResponse.error.errorMessage);
+        setErrorMsg(errorResponse.error_message);
         signupAttempt.current += 1;
       },
       onSuccess: (response) => {
-        localStorage.setItem("token", `${response?.data.token}`);
+        localStorage.setItem("accessToken", `${response?.data.access_token}`);
+        localStorage.setItem("refreshToken", `${response?.data.refresh_token}`);
+        const { nickname } = tokenDecryptor(response.data.access_token);
         signupSuccessEvent();
+        queryClient.invalidateQueries();
         refetch();
         closeModal();
-        setCurrentToast("님 환영합니다.", watch("nickname"));
+        setCurrentToast("님 환영합니다.", nickname);
       },
     });
   };
@@ -73,7 +77,7 @@ export const SignUpBox: FunctionComponent = () => {
         />
       </div>
       <div css={logoContainer}>
-        <Image objectFit="contain" src={smallMono} alt="고초대졸 닷컴" layout="fill" />
+        <Image src={smallMono} alt="고초대졸 닷컴" fill />
       </div>
       <p css={desc}>가입은 5초면 가능!</p>
 
@@ -118,22 +122,6 @@ export const SignUpBox: FunctionComponent = () => {
               errorObj={errors.password}
               isDirty={dirtyFields.password}
               inputType="password"
-            />
-          </li>
-          <li>
-            <AccountInput
-              registerObj={register("nickname", {
-                required: NICKNAME_ERROR_MESSAGE.REQUIRED,
-                validate: validateNickname,
-              })}
-              setValue={() => {
-                setValue("nickname", "");
-              }}
-              placeholder="닉네임을 입력해주세요"
-              label="닉네임"
-              errorObj={errors.nickname}
-              isDirty={dirtyFields.nickname}
-              inputType="text"
             />
           </li>
         </ul>

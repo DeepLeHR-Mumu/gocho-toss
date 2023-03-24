@@ -49,17 +49,15 @@ export type TaskType = (
 
 export interface specArrDef {
   age: number;
-  award: string | null;
-  career: string | null;
-  certificate:
-    | {
-        data: string[] | null;
-        level1: number;
-        level2: number;
-        level3: number;
-      }
-    | null
-    | undefined;
+  award: string[] | null;
+  career: string[] | null;
+  etc: string[] | null;
+  certificate: {
+    data: string[] | null;
+    level1: number;
+    level2: number;
+    level3: number;
+  } | null;
   college:
     | {
         department: string;
@@ -72,7 +70,6 @@ export interface specArrDef {
   created_time: number;
   desired_industry: IndustryType | null;
   desired_task: TaskType | null;
-  etc: string | null;
   gender: "남" | "여";
   highschool: {
     type: string;
@@ -94,6 +91,6 @@ export interface specArrDef {
 }
 
 export interface getMySpecHistoryDef {
-  evalCount: number;
+  eval_count: number;
   spec_arr: specArrDef[];
 }

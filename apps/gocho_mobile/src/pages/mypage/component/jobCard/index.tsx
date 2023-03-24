@@ -5,7 +5,7 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
-import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
+import { JOBS_DETAIL_URL } from "shared-constant";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
@@ -75,7 +75,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   const addJobBookmark = () => {
     if (userId)
       addMutate(
-        { userId, elemId: jobData.id },
+        { userId, id: jobData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries([{ data: "jobArr" }]);
@@ -87,7 +87,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   const deleteJobBookmark = () => {
     if (userId)
       deleteMutate(
-        { userId, elemId: jobData.id },
+        { userId, id: jobData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries([{ data: "jobArr" }]);
@@ -122,7 +122,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
           <div css={companyInfoContainer}>
             <div css={companyLogoWrapper}>
               <div className="Logo" css={companyLogoBox}>
-                <Image layout="fill" objectFit="contain" src={jobData.companyLogo || defaultCompanyLogo} alt="" />
+                <Image src={jobData.companyLogo || defaultCompanyLogo} alt="" sizes="1" />
               </div>
             </div>
             <div css={companyName}>{jobData.companyName}</div>

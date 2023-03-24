@@ -70,6 +70,9 @@ export const imageBox = css`
   width: 5.3125rem;
   height: 4.5rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const oxIconBox = css`
@@ -77,6 +80,9 @@ export const oxIconBox = css`
   width: 1rem;
   height: 1rem;
   margin-top: 0.65rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const boxTitle = css`

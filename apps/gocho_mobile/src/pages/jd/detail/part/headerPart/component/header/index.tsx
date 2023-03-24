@@ -10,7 +10,7 @@ import defaultCompanyLogo from "shared-image/global/common/default_company_logo.
 import { useUserInfo } from "shared-api/auth";
 import { useJdApplyClick, useJdCountInfo } from "shared-api/job";
 import { useModal } from "@recoil/hook/modal";
-import { dateConverter, dDayCalculator } from "shared-util/date";
+import { dateConverter, dDayCalculator } from "shared-util";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { jdBookmarkEvent } from "shared-ga/jd";
 import { jdCountInfoKeyObj } from "shared-constant/queryKeyFactory/job/jdCountInfoKeyObj";
@@ -73,7 +73,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
     return (
       userId &&
       addMutate(
-        { userId, elemId: jobDetailData.id },
+        { userId, id: jobDetailData.id },
         {
           onSuccess: () => {
             jdBookmarkEvent(jobDetailData.id);
@@ -88,7 +88,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
     return (
       userId &&
       deleteMutate(
-        { userId, elemId: jobDetailData.id },
+        { userId, id: jobDetailData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries(jdCountInfoKeyObj.countInfo({ id: jobDetailData.id }));
@@ -111,8 +111,8 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
             <Image
               src={jobDetailData.company.logoUrl || defaultCompanyLogo}
               alt={jobDetailData.company.name}
-              layout="fill"
-              objectFit="contain"
+              fill
+              sizes="1"
             />
           </div>
         </div>
@@ -148,8 +148,8 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
             </button>
           </li>
           <li>
-            <Link href={`/company/${jobDetailData.company.companyId}/detail`} passHref>
-              <a css={buttonCSS(false)}>기업정보</a>
+            <Link href={`/company/${jobDetailData.company.companyId}/detail`} passHref css={buttonCSS(false)}>
+              기업정보
             </Link>
           </li>
           {jobDetailData.company.youtubeUrl && (
@@ -175,8 +175,8 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
             </p>
           </li>
         </ul>
-        <Link href={`/company/${jobDetailData.company.companyId}/detail`}>
-          <a css={companyName}>{jobDetailData.company.name}</a>
+        <Link href={`/company/${jobDetailData.company.companyId}/detail`} css={companyName}>
+          {jobDetailData.company.name}
         </Link>
         <p css={title}>{jobDetailData.title}</p>
       </div>

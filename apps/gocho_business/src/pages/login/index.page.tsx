@@ -6,18 +6,17 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { managerTokenDecryptor } from "shared-util/tokenDecryptor";
+import { managerTokenDecryptor } from "shared-util";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
 import gochoColorSrc from "shared-image/global/deepLeLogo/logoIconColor.svg";
-import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
+import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 
-import { useModal } from "@/globalStates/useModal";
-import { INTERNAL_URL } from "@/constants/url";
-import { useUserState } from "@/globalStates/useUserState";
-import { TopBar } from "@/components/global/layout/topBar";
-import { useDoLogin } from "@/apis/auth/useDoLogin";
-import { loginPageFunnelEvent, loginSuccessEvent, signupButtonClickEvent } from "@/ga/auth";
+import { useModal, useUserState } from "@/globalStates";
+import { INTERNAL_URL } from "@/constants";
+import { TopBar } from "@/components";
+import { useDoLogin } from "@/apis";
+import { loginPageFunnelEvent, loginSuccessEvent, signupButtonClickEvent } from "@/ga";
 
 import { LOGIN_ERROR_MESSAGES } from "./constant";
 import { PageHead } from "./pageHead";
@@ -68,6 +67,12 @@ const LoginPage: NextPage = () => {
           exp,
         });
         queryClient.invalidateQueries();
+
+        if (!response.data.is_changed) {
+          window.alert("보안을 위해 초기 비밀번호를 변경해주세요");
+          router.push(INTERNAL_URL.MY_PAGE);
+          return;
+        }
         router.push(INTERNAL_URL.JD_LIST);
       },
     });
@@ -94,7 +99,7 @@ const LoginPage: NextPage = () => {
         <div css={cssObj.container}>
           <div css={cssObj.titleBox}>
             <div css={cssObj.gochoLogoBox}>
-              <Image src={gochoColorSrc} alt="고초대졸닷컴" layout="fill" objectFit="contain" />
+              <Image src={gochoColorSrc} alt="고초대졸닷컴" fill />
             </div>
             <strong css={cssObj.title}>생산직 채용의 새로운 기준</strong>
           </div>

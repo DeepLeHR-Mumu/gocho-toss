@@ -4,7 +4,7 @@ import { ImageType } from "shared-type/ui/imageType";
 export interface BasicInfoPartProps {
   basicData: {
     profileImg: ImageType;
-    user: {
+    uploader: {
       nickname: string;
       image: "default" | "default_work" | "jobi" | "jobi_safety" | "jobi_chat" | "jobi_play" | "jobi_teach";
       badge: "default" | "early_bird" | "admin";
@@ -25,9 +25,9 @@ export interface BasicInfoPartProps {
     };
     certificate: {
       data: string[] | null;
-      level1: number;
-      level2: number;
-      level3: number;
+      level1: number | null;
+      level2: number | null;
+      level3: number | null;
     } | null;
     college: {
       department: string;

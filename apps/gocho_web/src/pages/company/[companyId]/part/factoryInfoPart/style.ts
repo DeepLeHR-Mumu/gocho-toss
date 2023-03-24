@@ -25,6 +25,9 @@ export const iconBox = css`
   height: 1.5rem;
   position: relative;
   margin-right: 1rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const noFactoryWarning = css`
@@ -148,12 +151,16 @@ export const infoIcon = css`
   width: 4.8rem;
   height: 4.8rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const infoText = css`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.25rem;
   margin-top: 1rem;
 `;
 
@@ -161,22 +168,26 @@ export const infoTextTop = css`
   display: flex;
   align-items: flex-start;
   margin-left: 1rem;
+  gap: 0.5rem;
   width: calc(100% - 5rem);
 `;
 
 export const infoTitle = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 0.875rem;
   white-space: nowrap;
   font-weight: 400;
   line-height: 1.6;
   color: ${COLORS.GRAY10};
-  margin-right: 0.5rem;
 `;
 
 export const info = css`
   font-size: 0.875rem;
-  line-height: 1.6;
   font-weight: 400;
+  line-height: 1.6;
+  margin-left: 0.125rem;
   color: ${COLORS.BLUE_NEON40};
   word-break: break-all;
 `;
@@ -194,6 +205,9 @@ export const booleanIcon = css`
   width: 1rem;
   height: 1rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const subDesc = css`

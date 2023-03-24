@@ -8,12 +8,17 @@ export const cssObj = {
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: calc(100vh - 18.75rem);
     gap: 2rem 0;
   `,
   jobiImage: css`
     position: relative;
     width: 11.875rem;
     height: 17.5rem;
+
+    > img {
+      object-fit: contain;
+    }
   `,
   title: css`
     color: ${COLORS.GRAY10};

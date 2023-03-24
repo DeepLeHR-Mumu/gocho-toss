@@ -2,13 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 
 import { searchJobArrKeyObj, SearchJobRequestObj } from "shared-constant/queryKeyFactory/job/searchJobArrKeyObj";
 
-import { axiosInstance } from "../../axiosInstance";
+import { axiosNoTokenInstance } from "../../axiosInstance";
 
 import { GetJobArrDef } from "./type";
 import { selector } from "./util";
 
 export const getUnifiedJobSearchArr: GetJobArrDef = async ({ queryKey: [{ requestObj }] }) => {
-  const { data } = await axiosInstance.get("/jds", {
+  const { data } = await axiosNoTokenInstance.get("/jds", {
     params: {
       order: "recent",
       filter: "valid",
@@ -21,11 +21,12 @@ export const getUnifiedJobSearchArr: GetJobArrDef = async ({ queryKey: [{ reques
 };
 
 export const useUnifiedJobSearchArr = (requestObj: SearchJobRequestObj) => {
-  const queryResult = useQuery(searchJobArrKeyObj.searchArr(requestObj), getUnifiedJobSearchArr, {
+  return useQuery({
+    queryKey: searchJobArrKeyObj.searchArr(requestObj),
+    queryFn: getUnifiedJobSearchArr,
     select: ({ data, count }) => {
       return selector(data, count);
     },
     enabled: Number.isInteger(Number(requestObj.page)) && typeof requestObj.searchWord !== "undefined",
   });
-  return queryResult;
 };

@@ -7,7 +7,7 @@ import kakaoMobile03 from "shared-image/event/renewal/mobile_kakao_03.png";
 
 import { Layout } from "@component/layout";
 
-import { desc, iconCSS, imgBox, title, wrapper } from "./style";
+import { desc, iconCSS, imgBox, lastImgBox, title, wrapper } from "./style";
 
 export const PartVOC: FunctionComponent = () => {
   return (
@@ -19,13 +19,13 @@ export const PartVOC: FunctionComponent = () => {
         </strong>
         <p css={desc}>인사담당자들도 인정한 높은 퀄리티의 빠른 인재 매칭 시스템 그 초석을 다졌습니다 </p>
         <div css={imgBox}>
-          <Image src={kakaoMobile01} alt="" objectFit="contain" layout="responsive" />
+          <Image src={kakaoMobile01} alt="" fill />
         </div>
         <div css={imgBox}>
-          <Image src={kakaoMobile02} alt="" objectFit="contain" layout="responsive" />
+          <Image src={kakaoMobile02} alt="" fill />
         </div>
-        <div css={imgBox}>
-          <Image src={kakaoMobile03} alt="" objectFit="contain" layout="responsive" />
+        <div css={lastImgBox}>
+          <Image src={kakaoMobile03} alt="" fill />
         </div>
       </Layout>
     </section>

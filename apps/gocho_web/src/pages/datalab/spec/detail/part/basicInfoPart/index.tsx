@@ -3,7 +3,7 @@ import { BsStars } from "react-icons/bs";
 import { FiChevronLeft } from "react-icons/fi";
 import Link from "next/link";
 
-import { SPEC_LIST_URL } from "shared-constant/internalURL";
+import { SPEC_LIST_URL } from "shared-constant";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { BasicInfoPartProps } from "./type";
 
@@ -31,18 +31,16 @@ import {
 export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ basicData }) => {
   return (
     <div css={container}>
-      <Link href={SPEC_LIST_URL} passHref>
-        <a css={backButton}>
-          <FiChevronLeft /> 리스트로 돌아가기
-        </a>
+      <Link href={SPEC_LIST_URL} passHref css={backButton}>
+        <FiChevronLeft /> 리스트로 돌아가기
       </Link>
 
       <div css={imageContainer}>
-        <ProfileImg imageStr={basicData.user.image} size="L" />
+        <ProfileImg imageStr={basicData.uploader.image} size="L" />
       </div>
 
       <section css={basicInfoContainer}>
-        <p css={userId}>{basicData.user.nickname}</p>
+        <p css={userId}>{basicData.uploader.nickname}</p>
 
         <ul css={characteristicCSS}>
           <li>{basicData.gender}</li>

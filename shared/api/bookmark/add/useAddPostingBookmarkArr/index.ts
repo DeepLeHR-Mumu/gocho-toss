@@ -11,22 +11,20 @@ interface PostingObjDef {
 }
 
 const addPostingBookmarkArr: AddPostingBookmarkArrDef = async (requestObj) => {
-  const token = localStorage.getItem("token") as string;
+  const token = localStorage.getItem("accessToken");
+  const headers = token ? { "x-access-token": token } : undefined;
   const { data } = await axiosInstance.post(
     `/users/${requestObj.userId}/posting-likes/`,
-    { elemId: requestObj.elemId },
-    {
-      headers: {
-        "x-access-token": token,
-      },
-    }
+    { id: requestObj.id },
+    { headers }
   );
   return data;
 };
 
 export const useAddPostingBookmarkArr = (postingObj: PostingObjDef | undefined) => {
   const queryClient = useQueryClient();
-  const mutationResult = useMutation(addPostingBookmarkArr, {
+  return useMutation({
+    mutationFn: addPostingBookmarkArr,
     onMutate: async (requestObj) => {
       await queryClient.cancelQueries(userBookmarkKeyObj.postingBookmarkArr({ userId: requestObj.userId }));
       const previousTodos = queryClient.getQueryData(userBookmarkKeyObj.jobBookmarkArr({ userId: requestObj.userId }));
@@ -49,5 +47,4 @@ export const useAddPostingBookmarkArr = (postingObj: PostingObjDef | undefined) 
       return { previousTodos };
     },
   });
-  return mutationResult;
 };

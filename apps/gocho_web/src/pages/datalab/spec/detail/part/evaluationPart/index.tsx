@@ -229,7 +229,14 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
             css={feedBackContainer}
             maxLength={100}
             placeholder="최대 100자"
-            {...register("feedback", { maxLength: 100 })}
+            {...register("feedback", {
+              maxLength: 100,
+              onBlur: () => {
+                if (watch("feedback")?.trim().length === 0) {
+                  setValue("feedback", undefined);
+                }
+              },
+            })}
           />
         </section>
 

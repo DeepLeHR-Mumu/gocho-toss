@@ -9,6 +9,7 @@ export interface RequestObjDef {
 export interface ResponseObjDef {
   access_token: string;
   refresh_token: string;
+  is_changed: boolean;
 }
 
 export interface PostLoginDef {

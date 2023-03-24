@@ -13,5 +13,5 @@ export const postAddSideBanner: PostSideBannerDef = async (requestObj) => {
 };
 
 export const useAddSideBanner: useAddSideBannerProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(postAddSideBanner);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: postAddSideBanner });
 };

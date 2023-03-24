@@ -12,7 +12,7 @@ export interface DetailCommentProps {
   commentDataArr: {
     company: {
       name: string;
-      logoUrl: string;
+      logoUrl: string | null;
       id: number;
     };
     commentArr:

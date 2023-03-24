@@ -14,7 +14,7 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({ carouselData }) =
         <p css={middleDescCSS}>{carouselData.middleDesc}</p>
         {carouselData.iconImage && (
           <div css={iconBox}>
-            <Image src={carouselData.iconImage} alt="" objectFit="contain" layout="fill" />
+            <Image src={carouselData.iconImage} alt="" fill />
           </div>
         )}
       </div>
@@ -27,11 +27,10 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({ carouselData }) =
           passHref
           target={carouselData.buttonObj.target}
           onClick={carouselData.buttonObj.onClick}
+          css={linkButton(carouselData.buttonObj.backgroundColor, carouselData.buttonObj.color)}
         >
-          <a css={linkButton(carouselData.buttonObj.backgroundColor, carouselData.buttonObj.color)}>
-            <FiArrowRight />
-            {carouselData.buttonObj.text}
-          </a>
+          <FiArrowRight />
+          {carouselData.buttonObj.text}
         </Link>
       )}
       {carouselData.buttonObj && carouselData.buttonObj.target === "_blank" && (

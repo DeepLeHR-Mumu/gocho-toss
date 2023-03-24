@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
-import { ErrorResponseDef } from "@/types/errorType";
+import { ErrorResponseDef } from "@/types";
 
 import { axiosInstance } from "../../useIsRefreshLock";
 import { RequestObjDef, PostFactoryDef } from "./type";
@@ -19,7 +19,8 @@ export const postAddFactory: PostFactoryDef = async (requestObj) => {
 export const useAddFactory = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>(postAddFactory, {
+  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
+    mutationFn: postAddFactory,
     onSuccess: () => {
       queryClient.invalidateQueries(factoryArrKeyObj.all);
     },

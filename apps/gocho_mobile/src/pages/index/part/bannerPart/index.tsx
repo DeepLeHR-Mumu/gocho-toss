@@ -18,7 +18,7 @@ export const BannerPart: FunctionComponent = () => {
                   <strong css={titleCSS}>{banner.title}</strong>
                   <p css={descCSS}>{banner.desc}</p>
                   <div css={iconBox}>
-                    <Image src={banner.iconSrc} alt="" layout="fill" objectFit="contain" />
+                    <Image src={banner.iconSrc} alt="" fill />
                   </div>
                 </a>
               </li>

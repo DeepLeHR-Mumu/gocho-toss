@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { companyCommentArrKeyObj } from "shared-constant/queryKeyFactory/company/commentArrKeyObj";
-import { dateConverter } from "shared-util/date/dateConverter";
+import { dateConverter } from "shared-util";
 import { useLikeComment } from "shared-api/company/useLikeComment";
 import { useDisLikeComment } from "shared-api/company/useDisLikeComment";
 import { useFakeComment } from "shared-api/company/useFakeComment";
@@ -97,20 +97,20 @@ export const Comment: FunctionComponent<CommentProps> = ({ nickname, commentData
           <CommentLikeButton
             count={commentData.likeCount}
             isLiked={commentData.liked}
-            setLikeSubmit={() => {
-              return commentData.liked
+            setLikeSubmit={() =>
+              commentData.liked
                 ? postDislikeSubmit(commentData.companyId, commentData.id)
-                : postLikeSubmit(commentData.companyId, commentData.id);
-            }}
+                : postLikeSubmit(commentData.companyId, commentData.id)
+            }
           />
           <CommentDislikeButton
             count={commentData.disLikeCount}
             isDisLiked={commentData.disLiked}
-            setDislikeSubmit={() => {
-              return commentData.disLiked
+            setDislikeSubmit={() =>
+              commentData.disLiked
                 ? postDisFakeSubmit(commentData.companyId, commentData.id)
-                : postFakeSubmit(commentData.companyId, commentData.id);
-            }}
+                : postFakeSubmit(commentData.companyId, commentData.id)
+            }
           />
         </div>
       </div>

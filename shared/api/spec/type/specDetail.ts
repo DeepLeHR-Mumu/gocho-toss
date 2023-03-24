@@ -4,7 +4,7 @@ import { EvalDef, IndustryType, LanguageType, TaskType } from "./common";
 export interface SpecDetailObjDef {
   id: number;
   image: ImageType;
-  user: {
+  uploader: {
     nickname: string;
     image: "default" | "default_work" | "jobi" | "jobi_safety" | "jobi_chat" | "jobi_play" | "jobi_teach";
     badge: "default" | "early_bird" | "admin";
@@ -38,21 +38,18 @@ export interface SpecDetailObjDef {
     | null
     | undefined;
   // NOTMYFAULT undefined 수정하기 - null로 와야함
-  certificate:
-    | {
-        data: string[] | null;
-        level1: number;
-        level2: number;
-        level3: number;
-      }
-    | null
-    | undefined;
+  certificate: {
+    data: string[] | null;
+    level1: number | null;
+    level2: number | null;
+    level3: number | null;
+  };
   language: LanguageType | null;
-  award: string | null;
-  career: string | null;
-  etc: string | null;
-  isMine: boolean;
+  award: string[] | null;
+  career: string[] | null;
+  etc: string[] | null;
+  is_mine: boolean;
   evals: EvalDef;
-  didEval: boolean;
-  evalCount: number;
+  did_eval: boolean;
+  eval_count: number;
 }

@@ -49,17 +49,15 @@ export type TaskType = (
 
 export interface MySpecDataDef {
   age: number;
-  award: string | null;
-  career: string | null;
-  certificate:
-    | {
-        data: string[] | null;
-        level1: number;
-        level2: number;
-        level3: number;
-      }
-    | null
-    | undefined;
+  award: string[] | null;
+  career: string[] | null;
+  etc: string[] | null;
+  certificate: {
+    data: string[] | null;
+    level1: number;
+    level2: number;
+    level3: number;
+  } | null;
   college:
     | {
         department: string | undefined;
@@ -72,7 +70,6 @@ export interface MySpecDataDef {
   createdTime: number;
   desiredIndustry: IndustryType | null;
   desiredTask: TaskType | null;
-  etc: string | null;
   gender: "남" | "여";
   highschool: {
     type: string;

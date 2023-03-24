@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 
-import { dateConverter } from "shared-util/date";
+import { dateConverter } from "shared-util";
 
 import { useJdArr } from "@api/jd/useJdArr";
 import { mainContainer, pageTitle } from "@style/commonStyles";

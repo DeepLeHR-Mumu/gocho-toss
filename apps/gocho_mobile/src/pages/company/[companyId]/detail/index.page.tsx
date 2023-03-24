@@ -9,6 +9,7 @@ import { useAddCompanyViewCount } from "shared-api/viewCount";
 import { useCompanyDetail, getCompanyDetail } from "shared-api/company";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { companyInfoFunnelEvent } from "shared-ga/company";
+import { useViewCount } from "shared-user";
 
 import { PageHead } from "./pageHead";
 import { TopButton } from "../component/topButton";
@@ -27,25 +28,13 @@ const DetailPage: NextPage = () => {
   const { mutate: addViewCount } = useAddCompanyViewCount();
   const { data: companyDetailData } = useCompanyDetail({ companyId: Number(router.query.companyId) });
 
-  useEffect(() => {
-    const companyViewStr = sessionStorage.getItem("jobViewArr");
-    if (!router.query.companyId) return;
-
-    const isViewed = companyViewStr?.includes(String(router.query.companyId));
-    if (isViewed) return;
-
-    if (companyViewStr) {
-      const jobViewArr: number[] = JSON.parse(companyViewStr);
-      jobViewArr.push(Number(router.query.companyId));
-      sessionStorage.setItem("jobViewArr", JSON.stringify(jobViewArr));
+  useViewCount({
+    id: Number(router.query.companyId),
+    target: "company",
+    viewMutation: () => {
       addViewCount({ elemId: Number(router.query.companyId) });
-      return;
-    }
-    if (!isViewed) {
-      sessionStorage.setItem("jobViewArr", JSON.stringify([router.query.companyId]));
-      addViewCount({ elemId: Number(router.query.companyId) });
-    }
-  }, [addViewCount, router.query.companyId]);
+    },
+  });
 
   useEffect(() => {
     if (companyDetailData) {

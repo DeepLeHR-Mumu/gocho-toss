@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
-import { ErrorResponseDef } from "@/types/errorType";
+import { ErrorResponseDef } from "@/types";
 
 import { axiosInstance } from "../../useIsRefreshLock";
 import { RequestObjDef, DeleteFactoryDef } from "./type";
@@ -14,7 +14,8 @@ export const deleteFactory: DeleteFactoryDef = async (requestObj) => {
 
 export const useDeleteFactory = () => {
   const queryClient = useQueryClient();
-  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>(deleteFactory, {
+  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
+    mutationFn: deleteFactory,
     onMutate: async (requestObj) => {
       await queryClient.cancelQueries(factoryArrKeyObj.all);
       const previousData = queryClient.getQueryData(factoryArrKeyObj.all);

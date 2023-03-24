@@ -10,19 +10,19 @@ import { selector } from "./util";
 import { GetMySpecHistoryArrDef } from "./type";
 
 export const getMySpecHistoryArr: GetMySpecHistoryArrDef = async ({ queryKey: [{ requestObj }] }) => {
-  const token = localStorage.getItem("token") as string;
-  const { data } = await axiosInstance.get(`/users/${requestObj.id}/specs`, {
-    headers: { "x-access-token": token },
-  });
+  const token = localStorage.getItem("accessToken");
+  const headers = token ? { "x-access-token": token } : undefined;
+  const { data } = await axiosInstance.get(`/users/${requestObj.id}/specs`, { headers });
   return data;
 };
 
 export const useMySpecHistory = (requestObj: mySpecHistoryRequestObjDef) => {
-  const queryResult = useQuery(mySpecHistoryKeyObj.list(requestObj), getMySpecHistoryArr, {
+  return useQuery({
+    queryKey: mySpecHistoryKeyObj.list(requestObj),
+    queryFn: getMySpecHistoryArr,
     enabled: Boolean(requestObj.id),
     select: ({ data }) => {
       return selector(data);
     },
   });
-  return queryResult;
 };

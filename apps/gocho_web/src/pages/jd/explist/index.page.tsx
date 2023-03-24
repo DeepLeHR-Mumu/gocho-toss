@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { JOBS_EXPLIST_URL } from "shared-constant/internalURL";
+import { JOBS_EXPLIST_URL } from "shared-constant";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { expiredJdListFunnelEvent } from "shared-ga/jd";
@@ -20,7 +20,7 @@ const JdExpListPage: NextPage = () => {
 
   useEffect(() => {
     if (Object.keys(router.query).length === 0 && router.isReady) {
-      router.replace({ pathname: JOBS_EXPLIST_URL, query: { page: 1, order: "recent" } });
+      router.replace({ pathname: JOBS_EXPLIST_URL, query: { page: 1, order: "view" } });
     }
   }, [router]);
   useEffect(() => {

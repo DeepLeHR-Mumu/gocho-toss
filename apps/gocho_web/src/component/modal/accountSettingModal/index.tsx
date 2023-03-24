@@ -5,7 +5,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useUserInfo, useDeleteUserInfo } from "shared-api/auth";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { userInfoKeyObj } from "shared-constant/queryKeyFactory/user/infoKeyObj";
-import { MAIN_URL } from "shared-constant/internalURL";
+import { MAIN_URL } from "shared-constant";
 
 import { useToast } from "@recoil/hook/toast";
 import { useModal } from "@recoil/hook/modal";
@@ -22,29 +22,26 @@ export const AccountSettingBox: FunctionComponent = () => {
   const [isPictureEditing, setIsPictureEditing] = useState(true);
   const [isPasswordEditing, setIsPasswordEditing] = useState(false);
 
-  const { data: userInfoData } = useUserInfo();
-  const { mutate: deleteUserDataInfo } = useDeleteUserInfo();
-  const { setCurrentToast } = useToast();
   const { setCurrentModal } = useModal();
+  const { setCurrentToast } = useToast();
+
+  const { data: userInfoData } = useUserInfo();
+  const { mutate: deleteUserDataInfo } = useDeleteUserInfo(() => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    queryClient.resetQueries();
+    queryClient.invalidateQueries(userInfoKeyObj.userInfo);
+    setCurrentToast("회원탈퇴가 되었습니다.");
+    router.push(MAIN_URL);
+  });
 
   const deleteUserInfo = (id: number) => {
     setCurrentModal("dialogModal", {
       agreeDesc: "삭제",
       title: "계정을 삭제 하시겠습니까?",
-      desc: "모든 정보가 삭제되며 복구가 불가합니다. 주의사항에 동의하고 삭제하시겠습니까?",
+      desc: "모든 정보가 삭제되며 복구가 불가합니다. 정말로 삭제하시겠습니까?",
       doActive: () => {
-        deleteUserDataInfo(
-          { id },
-          {
-            onSuccess: () => {
-              localStorage.removeItem("token");
-              queryClient.resetQueries();
-              queryClient.invalidateQueries(userInfoKeyObj.userInfo);
-              setCurrentToast("회원탈퇴가 되었습니다.");
-              router.push(MAIN_URL);
-            },
-          }
-        );
+        deleteUserDataInfo({ id });
       },
     });
   };

@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { INTERNAL_URL } from "@/constants/url";
+import { INTERNAL_URL } from "@/constants";
 
 test("공고 리스트 테스트", async ({ page }) => {
   await page.goto(INTERNAL_URL.JD_LIST);

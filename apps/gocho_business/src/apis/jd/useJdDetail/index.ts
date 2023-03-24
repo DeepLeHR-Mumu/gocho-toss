@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import { ErrorResponseDef } from "@/types/errorType";
-import { axiosInstance } from "@/apis/useIsRefreshLock";
+import { ErrorResponseDef } from "@/types";
 
+import { axiosInstance } from "../../useIsRefreshLock";
 import { ResponseObjDef, RequestObjDef, GetJdDetailDef, jdDetailKeyObj } from "./type";
 import { jdDetailSelector } from "./util";
 
@@ -18,7 +18,9 @@ export const useJdDetail = (isLogin: boolean, requestObj: RequestObjDef) =>
     AxiosError<ErrorResponseDef>,
     ReturnType<typeof jdDetailSelector>,
     ReturnType<typeof jdDetailKeyObj.detail>
-  >(jdDetailKeyObj.detail(requestObj), getJdDetail, {
+  >({
+    queryKey: jdDetailKeyObj.detail(requestObj),
+    queryFn: getJdDetail,
     select: (data) => jdDetailSelector(data),
     enabled: isLogin,
   });

@@ -16,5 +16,5 @@ const patchEditRecruiter: EditRecruiterDef = async (requestObj) => {
 };
 
 export const useEditRecruiter: UseEditRecruiterProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(patchEditRecruiter);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: patchEditRecruiter });
 };

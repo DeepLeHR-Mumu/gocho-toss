@@ -33,6 +33,9 @@ export const logoBox = css`
   position: relative;
   width: 7.5rem;
   height: 7.5rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const applyButton = css`

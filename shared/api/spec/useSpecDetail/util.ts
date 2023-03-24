@@ -4,10 +4,10 @@ export const selector = (data: SpecDetailObjDef) => {
   return {
     id: data.id,
     profileImg: data.image,
-    user: {
-      nickname: data.user.nickname,
-      badge: data.user.badge,
-      image: data.user.image,
+    uploader: {
+      nickname: data.uploader.nickname,
+      badge: data.uploader.badge,
+      image: data.uploader.image,
     },
     gender: data.gender,
     age: data.age,
@@ -57,8 +57,8 @@ export const selector = (data: SpecDetailObjDef) => {
             weakPointArr: data.evals.weakness_count_arr,
             feedbackArr: data.evals.feedback_arr,
           },
-    isMine: data.isMine,
-    didEval: data.didEval,
-    evalCount: data.evalCount,
+    isMine: data.is_mine,
+    didEval: data.did_eval,
+    evalCount: data.eval_count,
   };
 };

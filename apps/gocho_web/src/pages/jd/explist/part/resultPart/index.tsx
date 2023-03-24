@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import { useRouter } from "next/router";
 
 import { useCompanyArr } from "shared-api/company";
-import { JOBS_EXPLIST_URL } from "shared-constant/internalURL";
+import { JOBS_EXPLIST_URL } from "shared-constant";
 
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
 

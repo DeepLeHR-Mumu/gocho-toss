@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import { CloseButton } from "@component/common/atom/closeButton";
 import GDTitleSrc from "shared-image/global/deepLeLogo/smallMono.svg";
-import { PWD_REGEXP } from "shared-constant/regExp";
+import { PWD_REGEXP } from "shared-constant";
 import { usePatchUserInfo } from "shared-api/auth/usePatchUserInfo";
 import { useUserInfo } from "shared-api/auth";
 import { useToast } from "@recoil/hook/toast";
@@ -41,8 +41,8 @@ export const PasswordEditBox: FunctionComponent = () => {
       mutate(
         {
           userId: userInfoData.id,
-          originPassword,
-          password,
+          origin_password: originPassword,
+          new_password: password,
         },
         {
           onError: () => {
@@ -52,7 +52,7 @@ export const PasswordEditBox: FunctionComponent = () => {
             setFailCurrentPw(false);
             setCurrentToast("비밀번호가 변경되었습니다.");
             closeModal();
-            localStorage.setItem("token", `${data?.data.token}`);
+            localStorage.setItem("accessToken", `${data?.data.access_token}`);
             refetch();
           },
         }
@@ -66,7 +66,7 @@ export const PasswordEditBox: FunctionComponent = () => {
         <CloseButton size="M" buttonClick={closeModal} />
       </div>
       <div css={imageContainer}>
-        <Image src={GDTitleSrc} layout="responsive" objectFit="contain" alt="고초대졸닷컴 로고" />
+        <Image src={GDTitleSrc} fill alt="" />
       </div>
       <form css={formContainer} onSubmit={handleSubmit(passwordSubmit)}>
         <p css={menuName}>비밀번호 변경</p>

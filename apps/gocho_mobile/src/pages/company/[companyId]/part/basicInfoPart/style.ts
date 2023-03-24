@@ -124,6 +124,10 @@ export const nozoIconBox = css`
   width: 2.5rem;
   height: 2.5rem;
   margin-left: 0.5rem;
+  position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const nozoExplainText = css`

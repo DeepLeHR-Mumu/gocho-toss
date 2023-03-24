@@ -1,12 +1,10 @@
 import { ReactElement, useEffect } from "react";
 
-import { NextPageWithLayout } from "@/pages/index/type";
-import { GlobalLayout, PageLayout } from "@/components/global/layout";
-import { CompanyInfoPart } from "@/components/global/companyInfoPart";
+import { NextPageWithLayout } from "@/types";
+import { GlobalLayout, PageLayout, CompanyInfoPart } from "@/components";
 
-import { jdListPageFunnelEvent } from "@/ga/jdList";
-import { ListPart } from "./part/listPart";
-import { HeaderPart } from "./part/headerPart";
+import { jdListPageFunnelEvent } from "@/ga";
+import { ListPart, HeaderPart } from "./part";
 import { cssObj } from "./style";
 
 const JdListPage: NextPageWithLayout = () => {

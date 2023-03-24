@@ -8,7 +8,7 @@ import highTrue from "shared-image/global/common/go_color.svg";
 import collegeTrue from "shared-image/global/common/cho_color.svg";
 import { useJobArr } from "shared-api/job";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
-import { JOBS_LIST_URL } from "shared-constant/internalURL";
+import { JOBS_LIST_URL } from "shared-constant";
 import { jdListFunnelEvent, jdSearchEvent } from "shared-ga/jd";
 
 import { Layout } from "@component/layout";
@@ -154,7 +154,7 @@ export const ListPart: FunctionComponent = () => {
                 const isActive = button.order === router.query.order;
                 return (
                   <button
-                    type="submit"
+                    type="button"
                     key={`jobCardArr${button.text}`}
                     css={setJobOrderButton(isActive)}
                     onClick={() => {
@@ -178,10 +178,10 @@ export const ListPart: FunctionComponent = () => {
         <div css={infoContainer}>
           <FiInfo />
           <div css={infoImage}>
-            <Image src={highTrue} alt="고졸 지원가능" layout="fill" objectFit="contain" />
+            <Image src={highTrue} alt="고졸 지원가능" fill />
           </div>
           <div css={infoImage}>
-            <Image src={collegeTrue} alt="초대졸 지원가능" layout="fill" objectFit="contain" />
+            <Image src={collegeTrue} alt="초대졸 지원가능" fill />
           </div>
           <p>고는 고졸지원가능 초는 초대졸 지원 가능합니다</p>
         </div>

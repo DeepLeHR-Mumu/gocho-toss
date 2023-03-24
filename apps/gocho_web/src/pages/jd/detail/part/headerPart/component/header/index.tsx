@@ -7,7 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-import { dateConverter } from "shared-util/date";
+import { dateConverter } from "shared-util";
 import { jdCountInfoKeyObj } from "shared-constant/queryKeyFactory/job/jdCountInfoKeyObj";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr, useUserJobBookmarkArr } from "shared-api/bookmark";
@@ -69,7 +69,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
     return (
       userId &&
       addMutate(
-        { userId, elemId: jobDetailData.id },
+        { userId, id: jobDetailData.id },
         {
           onSuccess: () => {
             jdBookmarkEvent(jobDetailData.id);
@@ -84,7 +84,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
     return (
       userId &&
       deleteMutate(
-        { userId, elemId: jobDetailData.id },
+        { userId, id: jobDetailData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries(jdCountInfoKeyObj.countInfo({ id: jobDetailData.id }));
@@ -107,12 +107,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
   return (
     <header css={headerCSS}>
       <div css={imageBox}>
-        <Image
-          src={jobDetailData.company.logoUrl || defaultCompanyLogo}
-          alt={jobDetailData.company.name}
-          layout="fill"
-          objectFit="contain"
-        />
+        <Image alt="" fill sizes="1" src={jobDetailData.company.logoUrl || defaultCompanyLogo} />
       </div>
       <div>
         <ul css={dateBox}>
@@ -127,8 +122,8 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
             </p>
           </li>
         </ul>{" "}
-        <Link href={`/company/${jobDetailData.company.companyId}/detail`} passHref>
-          <a css={companyNameCSS}>{jobDetailData.company.name}</a>
+        <Link href={`/company/${jobDetailData.company.companyId}/detail`} passHref css={companyNameCSS}>
+          {jobDetailData.company.name}
         </Link>
         <p css={titleCSS}>{jobDetailData.title}</p>
         <ul css={linksCSS}>
@@ -165,8 +160,8 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
             </button>
           </li>
           <li>
-            <Link href={`/company/${jobDetailData.company.companyId}/detail`} passHref>
-              <a css={buttonCSS(false)}>기업정보</a>
+            <Link href={`/company/${jobDetailData.company.companyId}/detail`} passHref css={buttonCSS(false)}>
+              기업정보
             </Link>
           </li>
           {jobDetailData.company.youtubeUrl && (

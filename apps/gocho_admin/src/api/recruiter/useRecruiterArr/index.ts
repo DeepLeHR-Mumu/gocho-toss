@@ -11,7 +11,9 @@ export const getRecruiterArr: GetRecruiterArrDef = async () => {
 };
 
 export const useRecruiterArr = () => {
-  return useQuery(recruiterArrKeyObj.arr(), getRecruiterArr, {
+  return useQuery({
+    queryKey: recruiterArrKeyObj.arr(),
+    queryFn: getRecruiterArr,
     select: (data) => {
       return recruiterArrSelector(data);
     },

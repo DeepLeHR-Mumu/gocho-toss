@@ -30,24 +30,72 @@ export const Spec8AwardCareerEtc: FunctionComponent<Spec8AwardCareerEtcProps> = 
 
   const postSubmit: SubmitHandler<PostSubmitValues> = async (formData) => {
     const prevSpecObj = await JSON.parse(sessionStorage.getItem("specObj") || "{}");
-    const currentSpecObj = await Object.assign(prevSpecObj, { ...formData });
-
-    postMySpecRegister(currentSpecObj, {
-      onError: (error) => {
-        const errorCode = error.response?.status;
-
-        if (errorCode === 401) {
-          queryClient.invalidateQueries(userInfoKeyObj.userInfo);
-          setCurrentModal("loginModal", { button: "home" });
-        }
-      },
-      onSuccess: () => {
-        specRegisterEvent(true);
-        queryClient.invalidateQueries(specArrKeyObj.all);
-        moveNextCard("8");
-        sessionStorage.removeItem("specObj");
-      },
+    const etcData = formData.etc.split("\n").filter((text) => {
+      if (text === "") return false;
+      return text;
     });
+    const awardData = formData.award.split("\n").filter((text) => {
+      if (text === "") return false;
+      return text;
+    });
+    const careerData = formData.career.split("\n").filter((text) => {
+      if (text === "") return false;
+      return text;
+    });
+
+    const currentSpecObj = await {
+      ...prevSpecObj,
+      etc: etcData.length === 0 ? null : etcData,
+      award: awardData.length === 0 ? null : awardData,
+      career: careerData.length === 0 ? null : careerData,
+    };
+
+    postMySpecRegister(
+      {
+        secret: currentSpecObj.secret,
+        gender: currentSpecObj.gender,
+        age: currentSpecObj.age,
+        military: currentSpecObj.military,
+        desired_task: currentSpecObj.desiredTask,
+        desired_industry: currentSpecObj.desiredIndustry,
+        last_education: currentSpecObj.lastEducation,
+        highschool: {
+          type: currentSpecObj.highschool.type,
+          naesin: currentSpecObj.highschool.naesin,
+          absent: currentSpecObj.highschool.absent,
+          tardy: currentSpecObj.highschool.tardy,
+          leave_early: currentSpecObj.highschool.leaveEarly,
+          class_miss: currentSpecObj.highschool.classMiss,
+        },
+        college: currentSpecObj.college && {
+          department: currentSpecObj.college.department,
+          grade: currentSpecObj.college.grade,
+          max_grade: currentSpecObj.college.maxGrade,
+          uturn: currentSpecObj.college.uturn,
+        },
+        certificate: currentSpecObj.certificate && currentSpecObj.certificate,
+        language: currentSpecObj.language,
+        award: currentSpecObj.award,
+        career: currentSpecObj.career,
+        etc: currentSpecObj.etc,
+      },
+      {
+        onError: (error) => {
+          const errorCode = error.response?.status;
+
+          if (errorCode === 401) {
+            queryClient.invalidateQueries(userInfoKeyObj.userInfo);
+            setCurrentModal("loginModal", { button: "home" });
+          }
+        },
+        onSuccess: () => {
+          specRegisterEvent(true);
+          queryClient.invalidateQueries(specArrKeyObj.all);
+          moveNextCard("8");
+          sessionStorage.removeItem("specObj");
+        },
+      }
+    );
   };
 
   return (

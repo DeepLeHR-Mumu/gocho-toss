@@ -70,6 +70,14 @@ export const flexDesc = css`
   align-items: center;
 `;
 
+export const factoryIconCSS = css`
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+  > img {
+    object-fit: contain;
+  }
+`;
 export const factoryAddressDesc = css`
   font-size: 0.875rem;
   font-weight: 400;

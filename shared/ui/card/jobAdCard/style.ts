@@ -10,29 +10,25 @@ export const jobAdCardSkeleton = css`
   margin: 0.5rem;
 `;
 
-export const cardWrapper = (isMobile: boolean) => {
-  return css`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: ${isMobile ? "100%" : "calc(100% - 1rem)"};
-    border-radius: 1.5rem 1.5rem 0 0;
-    padding: 1rem;
-    background-color: #f2f4f7;
-  `;
-};
+export const cardWrapper = (isMobile: boolean) => css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: ${isMobile ? "100%" : "calc(100% - 1rem)"};
+  border-radius: 1.5rem 1.5rem 0 0;
+  padding: 1rem;
+  background-color: #f2f4f7;
+`;
 
 export const buttonBox = css`
   display: block;
 `;
 
-export const colorLine = (colorCode: string, isMobile: boolean) => {
-  return css`
-    height: 0.8rem;
-    width: ${isMobile ? "100%" : "calc(100% - 1rem)"};
-    background-image: linear-gradient(to right, ${colorCode}, ${COLORS.BLUE_FIRST40});
-  `;
-};
+export const colorLine = (colorCode: string, isMobile: boolean) => css`
+  height: 0.8rem;
+  width: ${isMobile ? "100%" : "calc(100% - 1rem)"};
+  background-image: linear-gradient(to right, ${colorCode}, ${COLORS.BLUE_FIRST40});
+`;
 
 export const mainContainer = css`
   display: flex;

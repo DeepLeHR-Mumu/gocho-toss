@@ -36,7 +36,6 @@ export const setSpecOrderButton = (active = false) => {
     justify-content: center;
     color: ${COLORS.GRAY30};
     font-size: 0.875rem;
-    font-weight: 400;
     width: fit-content;
     text-align: center;
     border-radius: 1.5rem;
@@ -45,9 +44,8 @@ export const setSpecOrderButton = (active = false) => {
     transition: all 0.2s ease;
     white-space: nowrap;
     font-weight: ${active ? 500 : 400};
-    border: 1px solid ${active ? COLORS.BLUE_SECOND40 : COLORS.GRAY40};
     color: ${active ? "#3171b7" : COLORS.GRAY30};
-    background-color: ${active ? COLORS.BLUE_SECOND40 : "transparent"};
+    background-color: ${active ? COLORS.BLUE_SECOND40 : COLORS.GRAY100};
 
     ${PC_HOVER} {
       :hover {

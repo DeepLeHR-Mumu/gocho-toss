@@ -4,7 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { profileMenuArr } from "@component/global/header/constant";
 
-import { myProfileMenuWrapper, myProfileTitle, myProfileMenuCSS, logoutCSS } from "./style";
+import { myProfileMenuWrapper, myProfileMenuCSS, logoutCSS } from "./style";
 import { MyProfileMenuProps } from "./type";
 
 declare global {
@@ -25,19 +25,19 @@ export const MyProfileMenu: FunctionComponent<MyProfileMenuProps> = ({ active })
   }, []);
 
   const doLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
     queryClient.resetQueries();
   };
 
   return (
     <article css={myProfileMenuWrapper(active)}>
-      <p css={myProfileTitle}>나의 프로필</p>
       <ul css={myProfileMenuCSS}>
         {profileMenuArr.map((profileMenu) => {
           return (
             <li key={profileMenu.title}>
               <Link href={profileMenu.link} passHref>
-                <a>{profileMenu.title}</a>
+                {profileMenu.title}
               </Link>
             </li>
           );

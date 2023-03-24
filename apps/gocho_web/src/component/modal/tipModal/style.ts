@@ -15,7 +15,7 @@ export const modalWrapper = css`
 export const contentContainer = css`
   overflow: hidden;
   overflow-y: scroll;
-  height: 70vh;
+  height: 69vh;
   padding: 2.5rem 7rem;
 
   ::-webkit-scrollbar {
@@ -39,6 +39,9 @@ export const logoBox = css`
   height: 1.5rem;
   position: relative;
   margin: 0 0 3rem auto;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const closeButtonWrapper = css`
@@ -103,6 +106,9 @@ export const tipImageBox = css`
   width: 100%;
   height: 25rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const controlWrapper = css`
@@ -144,20 +150,20 @@ export const bodyCSS = css`
 export const infoContainer = css`
   align-items: center;
   display: flex;
+  color: ${COLORS.GRAY20};
 `;
 
 export const info = css`
   margin-right: 1rem;
   font-size: 0.875rem;
-  color: ${COLORS.GRAY20};
 `;
 
 export const numInfo = css`
-  width: 2rem;
   font-size: 0.875rem;
-  font-weight: 400;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  color: ${COLORS.GRAY20};
+  margin-left: 0.25rem;
+`;
+
+export const uploader = css`
+  font-size: 0.875rem;
+  margin-left: 1rem;
 `;

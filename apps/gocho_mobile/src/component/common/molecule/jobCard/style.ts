@@ -58,6 +58,9 @@ export const companyLogoBox = css`
   border-radius: 50%;
   position: relative;
   transition: all 0.3s ease;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const dateInfoContainer = css`
@@ -123,6 +126,10 @@ export const eduQual = css`
   padding: 0.25rem;
   background-color: ${COLORS.GRAY90};
   border-radius: 50%;
+  position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const detailInfo = css`

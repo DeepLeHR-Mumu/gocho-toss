@@ -29,7 +29,7 @@ export const BookmarkCompanyPart: FunctionComponent = () => {
           <p css={warningCSS}>
             기업 북마크를 이용하시면
             <br />
-            기업공고가 더 정교해져요 😳
+            추천기업이 더 정교해져요 😳
           </p>
         </div>
       </section>
@@ -50,7 +50,7 @@ export const BookmarkCompanyPart: FunctionComponent = () => {
           <p css={warningCSS}>
             기업 북마크를 이용하시면
             <br />
-            기업공고가 더 정교해져요 😳
+            추천기업이 더 정교해져요 😳
           </p>
         </div>
       )}

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
-import { JOBS_LIST_URL } from "shared-constant/internalURL";
+import { JOBS_LIST_URL } from "shared-constant";
 
 import { PageHead } from "./pageHead";
 import { AdPart } from "./part/adPart";
@@ -23,8 +23,8 @@ const JobsList: NextPage = () => {
     <main>
       <PageHead />
       <InvisibleH1 title="실시간 생산직 채용공고" />
-
       <InvisibleH2 title="오늘의 추천 공고" />
+
       <AdPart />
       <ListPart />
     </main>

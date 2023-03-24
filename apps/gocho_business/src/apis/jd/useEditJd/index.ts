@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
-import { ErrorResponseDef } from "@/types/errorType";
-import { axiosInstance } from "@/apis/useIsRefreshLock";
+import { ErrorResponseDef } from "@/types";
 
+import { axiosInstance } from "../../useIsRefreshLock";
 import { PostEditJdDef, RequestObjDef, useEditJdProps } from "./type";
 
 export const putEditJd: PostEditJdDef = async (requestObj) => {
@@ -19,4 +19,4 @@ export const putEditJd: PostEditJdDef = async (requestObj) => {
 };
 
 export const useEditJd: useEditJdProps = () =>
-  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>(putEditJd);
+  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({ mutationFn: putEditJd });

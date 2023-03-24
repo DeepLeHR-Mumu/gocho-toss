@@ -27,6 +27,9 @@ export const animationBox = css`
   position: relative;
   text-indent: -99999px;
   color: ${COLORS.GRAY10};
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const postButtonCSS = css`

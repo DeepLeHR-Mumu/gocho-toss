@@ -32,7 +32,7 @@ export const PictureEditBox: FunctionComponent = () => {
         {
           onSuccess: (data) => {
             setCurrentToast("프로필 이미지가 변경되었습니다.");
-            localStorage.setItem("token", `${data?.data.token}`);
+            localStorage.setItem("accessToken", `${data?.data.access_token}`);
             refetch();
           },
         }
@@ -45,7 +45,7 @@ export const PictureEditBox: FunctionComponent = () => {
       <div css={closeButtonBox}>
         <CloseButton size="M" buttonClick={closeModal} />
       </div>
-      <strong css={title}>프로필 사진을 바꾸시겠습니까?</strong>
+      <strong css={title}>프로필 사진 변경</strong>
       <form onSubmit={handleSubmit(profileImgSubmit)}>
         <ul css={imgContainer}>
           {profileArr.map((profile) => {

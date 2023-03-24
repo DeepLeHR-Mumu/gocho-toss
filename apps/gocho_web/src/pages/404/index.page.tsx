@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import deepLeLogo from "shared-image/global/deepLeLogo/smallMono.svg";
 import { LinkButton } from "shared-ui/common/atom/button";
-import { MAIN_URL } from "shared-constant/internalURL";
+import { MAIN_URL } from "shared-constant";
 import { notFoundEvent, notFoundFunnelEvent } from "shared-ga/error";
 
 import jobiError from "@public/images/global/errrorPage/jobi_404.png";
@@ -31,11 +31,11 @@ const NotFoundPage: NextPage = () => {
           <LinkButton text="메인페이지로 이동" variant="filled" linkTo={MAIN_URL} />
         </div>
         <div css={logoContainer}>
-          <Image src={deepLeLogo} alt="디플 회사 로고" objectFit="contain" layout="fill" draggable="false" />
+          <Image src={deepLeLogo} alt="" fill />
         </div>
       </article>
       <div css={jobiImageContainer}>
-        <Image src={jobiError} objectFit="contain" alt="" layout="fill" draggable="false" />
+        <Image src={jobiError} alt="" />
       </div>
     </main>
   );

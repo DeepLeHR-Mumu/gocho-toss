@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import axios, { AxiosError, AxiosResponse } from "axios";
 
-import { ErrorResponseDef } from "@/types/errorType";
+import { ErrorResponseDef } from "@/types";
 
 import { axiosNoTokenInstance } from "../../useIsRefreshLock";
 import { PostLogoutDef } from "./type";
@@ -21,4 +21,4 @@ const postLogout: PostLogoutDef = async () => {
   return data;
 };
 
-export const useDoLogout = () => useMutation<AxiosResponse, AxiosError<ErrorResponseDef>>(postLogout);
+export const useDoLogout = () => useMutation<AxiosResponse, AxiosError<ErrorResponseDef>>({ mutationFn: postLogout });

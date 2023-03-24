@@ -4,6 +4,7 @@ export const selector = (tipDataArr: TipObjDef[]) => {
   return tipDataArr.map((tipData) => {
     return {
       id: tipData.id,
+      uploaderName: tipData.uploader.nickname,
       title: tipData.title,
       description: tipData.description,
       tagArr: tipData.tag,

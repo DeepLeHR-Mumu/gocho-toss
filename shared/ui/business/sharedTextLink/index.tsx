@@ -17,20 +17,18 @@ export const SharedTextLink: FunctionComponent<ExternalLinkProps | InternalLinkP
 
   if (internalUrl) {
     return (
-      <Link href={internalUrl} passHref>
-        <a css={cssObj.container}>
-          {iconLocation === "left" && (
-            <div css={cssObj.icon(convertedFontColor, iconLocation)}>
-              <FiArrowLeft />
-            </div>
-          )}
-          <span css={cssObj.text(convertedFontColor)}>{text}</span>
-          {iconLocation === "right" && (
-            <div css={cssObj.icon(convertedFontColor, iconLocation)}>
-              <FiArrowRight />
-            </div>
-          )}
-        </a>
+      <Link href={internalUrl} passHref css={cssObj.container}>
+        {iconLocation === "left" && (
+          <div css={cssObj.icon(convertedFontColor, iconLocation)}>
+            <FiArrowLeft />
+          </div>
+        )}
+        <span css={cssObj.text(convertedFontColor)}>{text}</span>
+        {iconLocation === "right" && (
+          <div css={cssObj.icon(convertedFontColor, iconLocation)}>
+            <FiArrowRight />
+          </div>
+        )}
       </Link>
     );
   }

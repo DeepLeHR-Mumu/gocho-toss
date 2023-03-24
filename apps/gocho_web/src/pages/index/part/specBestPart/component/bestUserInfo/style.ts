@@ -132,17 +132,10 @@ export const infoValueCSS = css`
   ${shorten()}
 `;
 
-export const dateCSS = css`
-  font-size: 0.75rem;
-  color: #646464;
+export const noValueText = css`
   font-weight: 400;
-  padding-left: 10px;
-`;
-
-export const workingTime = css`
   font-size: 0.875rem;
-  color: ${COLORS.GRAY20};
-  font-weight: 400;
+  color: ${COLORS.GRAY40};
 `;
 
 export const cardFooter = css`
@@ -172,8 +165,8 @@ export const bounceIcon = css`
   left: 0;
   top: -1.75rem;
   display: block;
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.6rem;
+  height: 1.6rem;
   animation: bounceAnimation 1s ease infinite;
 
   @keyframes bounceAnimation {

@@ -20,8 +20,8 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, use
               <Image
                 src={commentDataArr.company.logoUrl || defaultCompanyLogo}
                 alt={commentDataArr.company.name}
-                objectFit="contain"
-                layout="fill"
+                fill
+                sizes="1"
               />
             </div>
             <p css={companyName}>{commentDataArr.company.name}</p>
@@ -68,12 +68,7 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, use
       <header css={headerCSS}>
         <div css={flexBox}>
           <div css={imageBox}>
-            <Image
-              src={commentDataArr.company.logoUrl || defaultCompanyLogo}
-              alt={commentDataArr.company.name}
-              objectFit="contain"
-              layout="fill"
-            />
+            <Image src={commentDataArr.company.logoUrl || defaultCompanyLogo} alt="" sizes="1" fill />
           </div>
           <p css={companyName}>{commentDataArr.company.name}</p>
         </div>

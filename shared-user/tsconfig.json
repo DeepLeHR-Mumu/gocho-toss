@@ -1,0 +1,10 @@
+{
+  "extends": "tsconfig-deeple/nextjs.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {}
+  },
+  "include": ["**/**/*.ts", "**/**/*.tsx"],
+
+  "exclude": ["node_modules", "jest.config.js"]
+}

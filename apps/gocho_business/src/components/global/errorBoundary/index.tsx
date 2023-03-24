@@ -6,7 +6,7 @@ import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
 import jobi_500 from "@/public/image/jobi_500.svg";
-import { INTERNAL_URL } from "@/constants/url";
+import { INTERNAL_URL } from "@/constants";
 
 import { cssObj } from "./style";
 import { PropsDef, StateDef } from "./type";
@@ -35,7 +35,7 @@ export class ErrorBoundary extends Component<PropsDef, StateDef> {
         <main css={cssObj.container}>
           <InvisibleH2 title="없는 페이지" />
           <div css={cssObj.jobiImage}>
-            <Image src={jobi_500} alt="" objectFit="fill" layout="fill" />
+            <Image src={jobi_500} alt="" fill priority />
           </div>
           <p css={cssObj.title}>예기치 못한 오류가 발생했습니다</p>
           <div css={cssObj.catchPhraseContainer}>

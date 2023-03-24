@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util";
 import { JobCard } from "@component/common/molecule/jobCard";
 
 import { useUserInfo } from "shared-api/auth";

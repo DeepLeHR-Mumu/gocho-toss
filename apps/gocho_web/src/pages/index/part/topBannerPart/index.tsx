@@ -3,7 +3,7 @@ import Link from "next/link";
 import { MdKeyboardArrowRight, MdClear } from "react-icons/md";
 
 import { Layout } from "@component/layout";
-import { COMMUNITY_TIPS_LIST_URL } from "shared-constant/internalURL";
+import { COMMUNITY_TIPS_LIST_URL } from "shared-constant";
 
 import { topBannerWrapper, topBannerPosition, topBannerContainer, bannerDesc, closeButton, linkButton } from "./style";
 

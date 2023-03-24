@@ -2,8 +2,8 @@ import { FunctionComponent } from "react";
 import Image from "next/image";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
-import { dateConverter } from "shared-util/date";
+import { JOBS_DETAIL_URL } from "shared-constant";
+import { dateConverter } from "shared-util";
 import { jdAdClickEvent } from "shared-ga/jd";
 
 import { SkeletonBox } from "../../common/atom/skeletonBox";
@@ -56,12 +56,7 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
           <div css={mainContainer}>
             <div css={companyLogoWrapper}>
               <div css={companyLogoBox}>
-                <Image
-                  layout="fill"
-                  objectFit="contain"
-                  src={jobAdData?.companyLogo || defaultCompanyLogo}
-                  alt={jobAdData.companyName}
-                />
+                <Image fill src={jobAdData?.companyLogo || defaultCompanyLogo} alt="" sizes="1" />
               </div>
             </div>
             <div css={infoContainer}>
@@ -74,7 +69,6 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
           <strong css={titleCSS}>{jobAdData.title}</strong>
         </button>
       </a>
-      {/* LATER : 관리자페이지 color 연결 */}
       <div css={colorLine(jobAdData?.color || "#2284a5", isMobile)} />
     </>
   );

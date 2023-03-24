@@ -4,7 +4,7 @@ import { BsChevronLeft } from "react-icons/bs";
 
 import { StarEvaluation } from "@component/common/molecule/starEvaluation";
 import { LinkButton } from "shared-ui/common/atom/button";
-import { SPEC_LIST_URL } from "shared-constant/internalURL";
+import { SPEC_LIST_URL } from "shared-constant";
 import { COLORS } from "shared-style/color";
 
 import { ChipBox } from "./component/chipBox";
@@ -55,13 +55,13 @@ export const ResultInfoPart: FunctionComponent<ResultInfoPartProps> = ({ resultD
       <section css={scoreContainer}>
         <p css={specTitle}>
           <FiUser />
-          평균총점
+          평균총점 / 평가횟수
         </p>
         {resultData.score === null ? (
           <p css={overview}>평가없음</p>
         ) : (
           <p css={overview}>
-            {resultData.score}
+            {resultData.score.toFixed(2)}
             <span> / {resultData.scoreCount}</span>
           </p>
         )}
@@ -73,15 +73,16 @@ export const ResultInfoPart: FunctionComponent<ResultInfoPartProps> = ({ resultD
           <p css={title}>
             <FiSmile /> 획득한 강점 칩
           </p>
-          {/* TODO === null */}
-          {resultData.evals === null ? (
+          {Object.keys(resultData.evals?.strongPointArr || {}).length === 0 ? (
             <p css={noChipContainer}>획득한 칩이 없습니다.</p>
           ) : (
-            <ul css={chipList}>
-              {resultData.evals?.strongPointArr.map((strong) => {
-                return <ChipBox key={`강점 칩${strong[0]}`} string={strong[0]} number={strong[1]} />;
+            <div css={chipList}>
+              {Object.keys(resultData.evals?.strongPointArr || {}).map((key) => {
+                return (
+                  <ChipBox key={`Strong${key}`} string={key} number={resultData.evals?.strongPointArr[key] || 0} />
+                );
               })}
-            </ul>
+            </div>
           )}
         </div>
         <div css={chipBox}>
@@ -90,14 +91,16 @@ export const ResultInfoPart: FunctionComponent<ResultInfoPartProps> = ({ resultD
           </p>
 
           <div css={chipList}>
-            {resultData.evals === null ? (
+            {Object.keys(resultData.evals?.weakPointArr || {}).length === 0 ? (
               <p css={noChipContainer}>획득한 칩이 없습니다.</p>
             ) : (
-              <ul css={chipList}>
-                {resultData.evals?.weakPointArr.map((weakness) => {
-                  return <ChipBox key={`약점 칩${weakness[0]}`} string={weakness[0]} number={weakness[1]} />;
+              <div css={chipList}>
+                {Object.keys(resultData.evals?.weakPointArr || {}).map((key) => {
+                  return (
+                    <ChipBox key={`Strong${key}`} string={key} number={resultData.evals?.weakPointArr[key] || 0} />
+                  );
                 })}
-              </ul>
+              </div>
             )}
           </div>
         </div>
@@ -108,7 +111,7 @@ export const ResultInfoPart: FunctionComponent<ResultInfoPartProps> = ({ resultD
           <FiMessageSquare /> 기타 피드백
         </p>
 
-        {resultData.evals === null || resultData.evals.feedbackArr === null ? (
+        {resultData.evals?.feedbackArr === undefined || resultData.evals?.feedbackArr?.length === 0 ? (
           <p css={noChipBox}>피드백이 없습니다</p>
         ) : (
           <ul css={feedbackBox}>

@@ -28,7 +28,7 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
   return (
     <section>
       <div css={logoImageBox}>
-        <Image src={logoSrc} alt="고초대졸닷컴" objectFit="contain" />
+        <Image src={logoSrc} alt="" />
       </div>
       <h3 css={title}>{getJobTitleCreator(freshPosition)}</h3>
 
@@ -39,13 +39,13 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
             <FiInfo />
             <span css={isColorPoint(true)}>
               <strong css={isPossibleEduIcon}>
-                <Image src={graduateColor} alt="" />
+                <Image src={graduateColor} alt="" fill />
               </strong>
               지원가능
             </span>
             <span css={isColorPoint(false)}>
               <strong css={isPossibleEduIcon}>
-                <Image src={graduateGray} alt="" />
+                <Image src={graduateGray} alt="" fill />
               </strong>
               지원불가
             </span>

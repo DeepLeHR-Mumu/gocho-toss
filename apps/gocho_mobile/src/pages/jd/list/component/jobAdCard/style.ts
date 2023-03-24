@@ -51,6 +51,9 @@ export const companyLogoBox = css`
   width: 5.5rem;
   height: 5.5rem;
   position: relative;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const endTime = css`
