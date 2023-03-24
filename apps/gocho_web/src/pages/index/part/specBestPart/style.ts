@@ -8,21 +8,25 @@ export const specBestWrapper = css`
   background-color: ${COLORS.GRAY90};
 `;
 
+export const titleContainer = css`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+`;
+
 export const title = css`
   font-size: 1.25rem;
-  font-weight: 500;
+  font-weight: 700;
   color: ${COLORS.GRAY10};
-  margin-bottom: 3.5rem;
 `;
 
 export const linkButton = css`
   color: ${COLORS.GRAY40};
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 400;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-bottom: 1.5rem;
 `;
 
 export const bestUserWrapper = css`

@@ -15,7 +15,17 @@ import { AsideMenu } from "../component/asideMenu";
 import { SimpleCard } from "./component/simpleCard";
 import { Pagination } from "./component/pagination";
 
-import { flexBox, wrapper, container, tableHead, cardBox, noMySpecDesc, totalMySpecCSS } from "./style";
+import {
+  colorPoint,
+  title,
+  flexBox,
+  wrapper,
+  container,
+  tableHead,
+  cardBox,
+  noMySpecDesc,
+  totalMySpecCSS,
+} from "./style";
 
 export const MySpecHistory: NextPage = () => {
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
@@ -34,6 +44,9 @@ export const MySpecHistory: NextPage = () => {
     }
     if (currentModal?.activatedModal === "signUpModal") {
       setCurrentModal("signUpModal");
+    }
+    if (currentModal?.activatedModal === "findPasswordModal") {
+      setCurrentModal("findPasswordModal");
     }
     return () => {
       closeModal();
@@ -85,10 +98,13 @@ export const MySpecHistory: NextPage = () => {
       <InvisibleH1 title="내가 작성한 스펙 - 고초대졸닷컴" />
 
       <Layout>
+        <strong css={title}>
+          <span css={colorPoint}>My </span>
+          스펙 등록 내역
+        </strong>
         <section>
           <div css={flexBox}>
             <AsideMenu isFix={false} />
-
             <article css={container}>
               <p css={totalMySpecCSS}>등록된 전체스펙 : {filterMySpecHistoryArr.length.toLocaleString("Ko-KR")}개</p>
               <ul css={tableHead}>
@@ -107,7 +123,7 @@ export const MySpecHistory: NextPage = () => {
                       key={`나의스펙내역${mySpecData.id}`}
                       index={index}
                       mySpecData={mySpecData}
-                      evalCount={mySpecHistoryData.EvalCount}
+                      evalCount={mySpecHistoryData.evalCount}
                       currentActiveIndex={activeCardIndex}
                       setActiveCardIndex={setActiveCardIndex}
                     />

@@ -127,6 +127,10 @@ test.describe("스펙등록 테스트", () => {
     test.slow();
     await loginTester(page);
     await basicSpecRegisterTester(page);
+    await Promise.all([
+      page.waitForResponse((response) => response.url().includes("/specs") && response.status() === 201),
+      await page.locator('button:has-text("스펙 등록하기")').click(),
+    ]);
   });
 
   test("로그인 후 스펙 상세 등록 진행", async ({ page, request }) => {
@@ -163,7 +167,10 @@ test.describe("스펙등록 테스트", () => {
     await page.locator('textarea[name="career"]').fill("경력에 대한 서술...");
     await page.locator('textarea[name="etc"]').fill("기타사항에 대한 서술...");
 
-    await page.locator('button:has-text("스펙 등록하기")').click();
+    await Promise.all([
+      page.waitForResponse((response) => response.url().includes("/specs") && response.status() === 201),
+      await page.locator('button:has-text("완료")').click(),
+    ]);
     await page.getByRole("link", { name: "스펙 리스트" }).click();
     await expect(page).toHaveURL(linkObj.SPEC_LIST_URL);
   });

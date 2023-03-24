@@ -3,7 +3,7 @@ import { COLORS } from "shared-style/color";
 
 export const partContainer = css`
   background-color: #f2f2f6;
-  padding: 5.5rem 0 10.5rem;
+  padding: 5.5rem 0 8rem;
 `;
 
 export const title = css`

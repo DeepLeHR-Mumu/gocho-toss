@@ -9,7 +9,7 @@ import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
 import { BestUserList } from "./component/bestUserList";
 import { BestUserBox } from "./component/bestUserInfo";
-import { specBestWrapper, colorPoint, title, linkButton, bestUserWrapper } from "./style";
+import { specBestWrapper, titleContainer, colorPoint, title, linkButton, bestUserWrapper } from "./style";
 
 export const SpecBestPart: FunctionComponent = () => {
   const [activeUserID, setActiveUserID] = useState(0);
@@ -24,13 +24,14 @@ export const SpecBestPart: FunctionComponent = () => {
       <section css={specBestWrapper}>
         <InvisibleH2 title="생산/기능직 구직자 스펙 평가 리스트" />
         <Layout>
-          <p css={title}>
-            <span css={colorPoint}>BEST</span> 스펙평가 ✨
-          </p>
-          <Link href={SPEC_LIST_URL} passHref css={linkButton}>
-            전체보기 <BsChevronRight />
-          </Link>
-
+          <div css={titleContainer}>
+            <p css={title}>
+              <span css={colorPoint}>BEST</span> 스펙평가 ✨
+            </p>
+            <Link href={SPEC_LIST_URL} passHref css={linkButton}>
+              전체보기 <BsChevronRight />
+            </Link>
+          </div>
           <div css={bestUserWrapper}>
             <BestUserList isSkeleton />
             <BestUserBox isSkeleton />
@@ -44,13 +45,14 @@ export const SpecBestPart: FunctionComponent = () => {
     <section css={specBestWrapper}>
       <InvisibleH2 title="생산/기능직 구직자 스펙 평가 리스트" />
       <Layout>
-        <p css={title}>
-          <span css={colorPoint}>BEST</span> 스펙평가 ✨
-        </p>
-        <Link href={SPEC_LIST_URL} passHref css={linkButton}>
-          전체보기 <BsChevronRight />
-        </Link>
-
+        <div css={titleContainer}>
+          <p css={title}>
+            <span css={colorPoint}>BEST</span> 스펙평가 ✨
+          </p>
+          <Link href={SPEC_LIST_URL} passHref css={linkButton}>
+            전체보기 <BsChevronRight />
+          </Link>
+        </div>
         <div css={bestUserWrapper}>
           <BestUserList
             setActiveUserID={setActiveUserID}

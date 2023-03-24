@@ -20,7 +20,7 @@ const JdExpListPage: NextPage = () => {
 
   useEffect(() => {
     if (Object.keys(router.query).length === 0 && router.isReady) {
-      router.replace({ pathname: JOBS_EXPLIST_URL, query: { page: 1, order: "recent" } });
+      router.replace({ pathname: JOBS_EXPLIST_URL, query: { page: 1, order: "view" } });
     }
   }, [router]);
   useEffect(() => {
