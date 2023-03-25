@@ -39,4 +39,7 @@ test("공고 업로드 및 수정 테스트", async ({ page }) => {
   await page.getByRole("button", { name: "공고 등록하기" }).click();
 
   //   등록된 공고 수정
+  await page.getByRole("link", { name: "공고 목록" }).click();
+  await page.getByTestId("jd/list/jobCard").nth(0).getByRole("link", { name: "수정" }).nth(0).click();
+  await page.getByPlaceholder("기업이름을 작성해주세요").fill("디플");
 });

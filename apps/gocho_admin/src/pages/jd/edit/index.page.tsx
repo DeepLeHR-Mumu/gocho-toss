@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
 import { NormalButton } from "shared-ui/common/atom/button/normalButton";
+import { useDisabledKeydownSubmit } from "shared-hooks";
 
 import { useToast } from "@/globalStates";
 import { useEditJd, useJdDetail } from "@/api";
@@ -33,6 +34,8 @@ const JdEdit: NextPageWithLayout = () => {
   const { setToast } = useToast();
   const { data: jobData } = useJdDetail({ id: jobId });
   const { mutate: editJobMutate } = useEditJd();
+
+  useDisabledKeydownSubmit();
 
   useEffect(() => {
     const newStartTime = jobData?.startTime ? jobData.startTime + 540000 * 60 : 0;

@@ -32,6 +32,7 @@
     "shared-type": "workspace:^0.0.0",
     "shared-ui": "workspace:^0.0.0",
     "shared-util": "workspace:^0.0.0",
+    "shared-hooks": "workspace:^1.0.0",
     "tsconfig-deeple": "workspace:^0.0.0",
     "zustand": "^4.1.5"
   },

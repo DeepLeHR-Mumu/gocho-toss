@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
 import { NormalButton } from "shared-ui/common/atom/button/normalButton";
+import { useDisabledKeydownSubmit } from "shared-hooks/src";
 
 import { useToast } from "@/globalStates";
 import { useAddJd } from "@/api";
@@ -27,6 +28,7 @@ const JdUpload: NextPageWithLayout = () => {
     },
   });
 
+  useDisabledKeydownSubmit();
   const { setToast } = useToast();
   const { control, handleSubmit } = jobForm;
   const { fields, append, remove } = useFieldArray({
