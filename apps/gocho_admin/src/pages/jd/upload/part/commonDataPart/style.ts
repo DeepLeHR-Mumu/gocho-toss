@@ -15,7 +15,7 @@ export const cssObj = {
     padding: 1rem;
 
     > li {
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
     }
   `,
   checkBoxLabel: (isFocus: boolean) => css`
@@ -118,15 +118,17 @@ export const cssObj = {
   `,
   flexLiCSS: css`
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 2rem;
+    flex-direction: column;
     > ul {
-      width: 50%;
+      width: 100%;
       > li {
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
       }
     }
+  `,
+  point: css`
+    color: ${COLORS.BLUE_FIRST40};
+    font-weight: 500;
   `,
   inputCSS: css`
     width: 100%;

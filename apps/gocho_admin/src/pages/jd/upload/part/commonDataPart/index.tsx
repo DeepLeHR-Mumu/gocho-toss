@@ -80,7 +80,11 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobForm
                   }),
                 }}
               >
-                <p>{company.name}</p>
+                <p>
+                  {company.name.split(searchWord)[0]}
+                  <span css={cssObj.point}>{searchWord}</span>
+                  {company.name.split(searchWord)[1]}
+                </p>
               </SharedRadioButton>
             ))}
           </div>
