@@ -41,5 +41,30 @@ test("공고 업로드 및 수정 테스트", async ({ page }) => {
   //   등록된 공고 수정
   await page.getByRole("link", { name: "공고 목록" }).click();
   await page.getByTestId("jd/list/jobCard").nth(0).getByRole("link", { name: "수정" }).nth(0).click();
-  await page.getByPlaceholder("기업이름을 작성해주세요").fill("디플");
+  await page.getByPlaceholder("기업이름을 작성해주세요").fill("고초");
+  await page.getByRole("button", { name: "검색" }).click();
+  await page.waitForTimeout(100);
+  await page.locator("label").filter({ hasText: "고초대졸닷컴" }).first().check({ force: true });
+  await page.getByPlaceholder("공고제목을 작성해주세요").fill("테스트용 공고 수정 제목입니다.");
+  await page.locator('input[name="start_time"]').fill(new Date().toISOString().substring(0, 16));
+  await page.locator("label").filter({ hasText: "상시공고" }).click();
+  await page.waitForTimeout(100);
+  await page
+    .locator('input[name="end_time"]')
+    .fill(new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().substring(0, 16));
+  await page.waitForTimeout(100);
+  await page.locator("label").filter({ hasText: "이메일 링크" }).check();
+  await page.getByPlaceholder("@").fill("gocho@test.co.kr");
+  await page.locator("label").filter({ hasText: "초대졸" }).first().check();
+  await page.locator("label").filter({ hasText: "4년제" }).first().check();
+  await page.locator("label").filter({ hasText: "신입" }).first().click();
+  await page.locator("label").filter({ hasText: "정규직" }).check();
+  await page.locator("label").filter({ hasText: "물류" }).click();
+  await page.waitForTimeout(100);
+  await page.locator("label").filter({ hasText: "자재" }).click();
+  await page.selectOption('[name="position_arr.0.place.type"]', "일반");
+  await page.getByRole("button", { name: "테스트 공장 1" }).click();
+  await page.getByRole("button", { name: "000명 채용" }).first().click();
+  await page.getByRole("button", { name: "웹디자인" }).click();
+  await page.getByRole("button", { name: "공고 수정하기" }).click();
 });
