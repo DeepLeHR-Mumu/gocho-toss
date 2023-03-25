@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { MANAGER_BACKEND_URL } from "shared-constant";
-import { adminTokenDecryptor } from "shared-util";
+import { adminTokenDecryptor, sharedSetLocalStorageItem, sharedGetLocalStorageItem } from "shared-util";
 
 export const axiosInstance = axios.create({
   timeout: 10000,
@@ -9,10 +9,9 @@ export const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(async (config) => {
-  let accessToken = localStorage.getItem("accessToken") as string;
-  const refreshToken = localStorage.getItem("refreshToken") as string;
-  const accessExp = localStorage.getItem("accessExp") as string;
-  const refreshExp = localStorage.getItem("refreshExp") as string;
+  const refreshToken = sharedGetLocalStorageItem("refreshToken");
+  const accessExp = sharedGetLocalStorageItem("accessExp");
+  const refreshExp = sharedGetLocalStorageItem("refreshExp");
 
   const date = Math.floor(new Date().getTime() / 1000);
 
@@ -26,24 +25,22 @@ axiosInstance.interceptors.request.use(async (config) => {
       headers: { "x-refresh-token": refreshToken },
     });
 
-    localStorage.setItem("accessToken", `${data.data.access_token}`);
-    localStorage.setItem("refreshToken", `${data.data.refresh_token}`);
-
-    accessToken = localStorage.getItem("accessToken") as string;
+    sharedSetLocalStorageItem({ key: "accessToken", value: data.data.access_token });
+    sharedSetLocalStorageItem({ key: "refreshToken", value: data.data.refresh_token });
 
     const { email, role, exp: accessNewExp } = adminTokenDecryptor(data.data.access_token);
     const { exp: refreshNewExp } = adminTokenDecryptor(data.data.refresh_token);
 
-    localStorage.setItem("email", email);
-    localStorage.setItem("role", role);
-    localStorage.setItem("accessExp", String(accessNewExp));
-    localStorage.setItem("refreshExp", String(refreshNewExp));
+    sharedSetLocalStorageItem({ key: "email", value: email });
+    sharedSetLocalStorageItem({ key: "role", value: role });
+    sharedSetLocalStorageItem({ key: "accessExp", value: accessNewExp });
+    sharedSetLocalStorageItem({ key: "refreshExp", value: refreshNewExp });
   }
 
   const newConfig = config;
 
   newConfig.headers = newConfig.headers ?? {};
-  newConfig.headers["x-access-token"] = accessToken;
+  newConfig.headers["x-access-token"] = sharedGetLocalStorageItem("accessToken");
 
   return newConfig;
 });

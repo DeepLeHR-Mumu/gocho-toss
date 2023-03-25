@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { adminTokenDecryptor } from "shared-util";
+import { adminTokenDecryptor, sharedSetLocalStorageItem } from "shared-util";
 
 import { useDoLogin } from "@/api/auth/useDoLogin";
 import { mainContainer } from "@/style/commonStyles";
@@ -23,12 +23,10 @@ export const Login: NextPage = () => {
       onSuccess: (response) => {
         const { exp: accessExp } = adminTokenDecryptor(response.data.access_token);
         const { exp: refreshExp } = adminTokenDecryptor(response.data.refresh_token);
-
-        localStorage.setItem("accessToken", `${response.data.access_token}`);
-        localStorage.setItem("refreshToken", `${response.data.refresh_token}`);
-        localStorage.setItem("accessExp", `${accessExp}`);
-        localStorage.setItem("refreshExp", `${refreshExp}`);
-
+        sharedSetLocalStorageItem({ key: "accessToken", value: response.data.refresh_token });
+        sharedSetLocalStorageItem({ key: "refreshToken", value: response.data.access_token });
+        sharedSetLocalStorageItem({ key: "accessExp", value: accessExp });
+        sharedSetLocalStorageItem({ key: "refreshExp", value: refreshExp });
         queryClient.invalidateQueries();
         router.push("/");
       },
