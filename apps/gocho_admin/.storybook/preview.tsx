@@ -2,14 +2,14 @@ import { Global } from "@emotion/react";
 
 import { globalStyle } from "../src/style/globalStyle";
 
-// export const decorators = [
-//   (Story) => (
-//     <>
-//       <Global styles={globalStyle} />
-//       <Story />
-//     </>
-//   ),
-// ];
+export const decorators = [
+  (Story) => (
+    <>
+      <Global styles={globalStyle} />
+      <Story />
+    </>
+  ),
+];
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
