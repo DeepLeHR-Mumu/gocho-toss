@@ -6,7 +6,7 @@ import { EMAIL_REGEXP, URL_REGEXP } from "shared-constant/src/regExp";
 
 import { useFindCompany } from "@/api";
 
-import { DatetimeBox, ErrorMessage, AutoEndTimeCheckBox } from "../../component";
+import { ErrorMessage, AutoEndTimeCheckBox } from "../../component";
 import { CommonDataPartProps } from "./type";
 import { cssObj } from "./style";
 
@@ -135,8 +135,18 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobData
               checked={jobForm.watch("cut")}
               id="cut"
             />
-            <DatetimeBox register={jobForm.register} valueName="start_time" />
-            {!isAlways && <DatetimeBox register={jobForm.register} valueName="end_time" />}
+            <input
+              css={cssObj.dateInput}
+              type="datetime-local"
+              {...jobForm.register("start_time", { required: true })}
+            />
+            {!isAlways && (
+              <input
+                css={cssObj.dateInput}
+                type="datetime-local"
+                {...jobForm.register("end_time", { required: true })}
+              />
+            )}
           </div>
         </li>
         <li css={cssObj.flexLiCSS}>

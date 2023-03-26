@@ -18,6 +18,14 @@ export const cssObj = {
       margin-bottom: 1.5rem;
     }
   `,
+  dateInput: css`
+    width: 100%;
+    border-radius: 0.625rem;
+    border: 1px solid ${COLORS.GRAY10};
+    padding: 0 1rem;
+    height: 2.5rem;
+    background-color: ${COLORS.GRAY100};
+  `,
   checkBoxLabel: (isFocus: boolean) => css`
     display: flex;
     cursor: pointer;
