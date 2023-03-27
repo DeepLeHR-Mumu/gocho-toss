@@ -1,16 +1,16 @@
-import { NextPage } from "next";
-import { useRef, useState } from "react";
+import { useRef, useState, ReactElement } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 import { useAddRecruiter } from "@/api/recruiter/useAddRecruiter";
 import { useFindCompany } from "@/api/company/useFindCompany";
-import { ErrorScreen, LoadingScreen } from "@/component";
+import { ErrorScreen, LoadingScreen, GlobalLayout } from "@/component";
+import type { NextPageWithLayout } from "@/types";
 
 import { cssObj } from "./style";
 import { RecruiterFormValues } from "./type";
 
-const BusinessUser: NextPage = () => {
+const BusinessUser: NextPageWithLayout = () => {
   const [searchWord, setSearchWord] = useState<string>("");
   const [checkMsg, setCheckMsg] = useState<string>();
   const isSubmitting = useRef(false);
@@ -119,5 +119,7 @@ const BusinessUser: NextPage = () => {
     </main>
   );
 };
+
+BusinessUser.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default BusinessUser;

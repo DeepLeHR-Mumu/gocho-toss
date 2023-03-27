@@ -1,17 +1,18 @@
-import type { NextPage } from "next";
 import { useRouter } from "next/router";
+import { ReactElement } from "react";
 
 import { useCompanyArr } from "@/api/company/useCompanyArr";
-import { ErrorScreen, LoadingScreen } from "@/component";
+import { ErrorScreen, GlobalLayout, LoadingScreen } from "@/component";
 import { Pagination } from "@/component/common/pagination";
 import { INTERNAL_URL } from "@/constant";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
+import type { NextPageWithLayout } from "@/types";
 
 import CompanyCard from "./component/companyCard";
 import { COMPANY_SEARCH_LIMIT } from "./constant";
 import { cssObj } from "./style";
 
-const BusinessCompanyList: NextPage = () => {
+const BusinessCompanyList: NextPageWithLayout = () => {
   const router = useRouter();
 
   const {
@@ -58,5 +59,7 @@ const BusinessCompanyList: NextPage = () => {
     </main>
   );
 };
+
+BusinessCompanyList.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default BusinessCompanyList;

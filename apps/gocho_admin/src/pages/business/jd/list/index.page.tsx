@@ -1,17 +1,17 @@
-import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, ReactElement } from "react";
 
 import { useJdArr } from "@/api/jd/useJdArr";
-import { ErrorScreen, LoadingScreen, Pagination } from "@/component";
+import { ErrorScreen, LoadingScreen, Pagination, GlobalLayout } from "@/component";
 import { INTERNAL_URL } from "@/constant";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
+import type { NextPageWithLayout } from "@/types";
 
 import JobCard from "./component/jobCard";
 import { JD_SEARCH_LIMIT } from "./constant";
 import { cssObj } from "./style";
 
-const BusinessJdList: NextPage = () => {
+const BusinessJdList: NextPageWithLayout = () => {
   const [jdStatus, setJdStatus] = useState<"upload-waiting" | "modify-waiting">("upload-waiting");
   const router = useRouter();
 
@@ -76,5 +76,7 @@ const BusinessJdList: NextPage = () => {
     </main>
   );
 };
+
+BusinessJdList.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default BusinessJdList;

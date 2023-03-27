@@ -1,9 +1,10 @@
-import { useState } from "react";
-import type { NextPage } from "next";
+import { useState, ReactElement } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
+import { GlobalLayout } from "@/component";
 import { useAddCompany } from "@/api/company/useAddCompany";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
+import type { NextPageWithLayout } from "@/types";
 
 import { FactoryBox } from "./component/factoryBox";
 import { BasicInfoPart } from "./part/basicInfoPart";
@@ -14,7 +15,7 @@ import { blankFactory } from "./constant";
 
 import { formContainer, addFactoryButton, submitButton, checkMsgBox } from "./style";
 
-const CompanyUpload: NextPage = () => {
+const CompanyUpload: NextPageWithLayout = () => {
   const [logoPicture, setLogoPicture] = useState<File>();
   const [checkMsg, setCheckMsg] = useState<string>();
 
@@ -91,5 +92,7 @@ const CompanyUpload: NextPage = () => {
     </main>
   );
 };
+
+CompanyUpload.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default CompanyUpload;

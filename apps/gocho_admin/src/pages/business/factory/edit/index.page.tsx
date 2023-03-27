@@ -1,5 +1,4 @@
-import { NextPage } from "next";
-import { useState } from "react";
+import { useState, ReactElement } from "react";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -10,13 +9,14 @@ import { useAcceptFactory } from "@/api/factory/useAcceptFactory";
 import { useRejectFactory } from "@/api/factory/useRejectFactory";
 import { factoryArrKeyObj } from "@/api/factory/useFactoryArr/type";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
-import { ErrorScreen, LoadingScreen } from "@/component";
+import { ErrorScreen, GlobalLayout, LoadingScreen } from "@/component";
+import type { NextPageWithLayout } from "@/types";
 
 import { FactoryPart } from "./part/factoryPart";
 import { cssObj } from "./style";
 import { RejectFormValues } from "./type";
 
-const FactoryEditDetail: NextPage = () => {
+const FactoryEditDetail: NextPageWithLayout = () => {
   const [checkMsg, setCheckMsg] = useState<string>();
 
   const queryClient = useQueryClient();
@@ -120,5 +120,7 @@ const FactoryEditDetail: NextPage = () => {
     </main>
   );
 };
+
+FactoryEditDetail.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default FactoryEditDetail;

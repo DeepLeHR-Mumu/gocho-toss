@@ -1,12 +1,13 @@
-import type { NextPage } from "next";
 import Image from "next/image";
+import { ReactElement } from "react";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { dateConverter } from "shared-util";
 
 import { useJdArr } from "@/api/jd/useJdArr";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
-import { ErrorScreen, LoadingScreen } from "@/component";
+import { ErrorScreen, LoadingScreen, GlobalLayout } from "@/component";
+import type { NextPageWithLayout } from "@/types";
 
 import { JobDef } from "../type";
 
@@ -30,7 +31,7 @@ import {
   copyButton,
 } from "./style";
 
-const Instagram: NextPage = () => {
+const Instagram: NextPageWithLayout = () => {
   const {
     data: jdDataArr,
     isLoading,
@@ -242,5 +243,7 @@ const Instagram: NextPage = () => {
     </main>
   );
 };
+
+Instagram.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default Instagram;

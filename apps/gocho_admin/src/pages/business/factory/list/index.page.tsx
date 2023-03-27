@@ -1,18 +1,18 @@
-import type { NextPage } from "next";
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 import { useRouter } from "next/router";
 
 import { useFactoryArr } from "@/api/factory/useFactoryArr";
-import { ErrorScreen, LoadingScreen, Pagination } from "@/component";
+import { ErrorScreen, LoadingScreen, GlobalLayout, Pagination } from "@/component";
 import { INTERNAL_URL } from "@/constant/internalURL";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
+import type { NextPageWithLayout } from "@/types";
 
 import FactoryCard from "./component/factoryCard";
 import { FACTORY_SEARCH_LIMIT } from "./constant";
 
 import { cssObj } from "./style";
 
-const BusinessFactoryList: NextPage = () => {
+const BusinessFactoryList: NextPageWithLayout = () => {
   const [factoryStatus, setFactoryStatus] = useState<"upload-waiting" | "modify-waiting">("upload-waiting");
   const router = useRouter();
 
@@ -75,5 +75,7 @@ const BusinessFactoryList: NextPage = () => {
     </main>
   );
 };
+
+BusinessFactoryList.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default BusinessFactoryList;

@@ -1,13 +1,14 @@
-import type { NextPage } from "next";
+import { ReactElement } from "react";
 
 import { useStatistics } from "@/api/stat/useStatistics";
-import { ErrorScreen, LoadingScreen } from "@/component";
+import { ErrorScreen, GlobalLayout, LoadingScreen } from "@/component";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
+import type { NextPageWithLayout } from "@/types";
 
 import UserDataPart from "./index/part/userDataPart";
 import WebsiteDataPart from "./index/part/websiteDataPart";
 
-const Home: NextPage = () => {
+const Home: NextPageWithLayout = () => {
   const { data: dashboardData, isLoading, isError } = useStatistics();
 
   if (isError) {
@@ -26,5 +27,7 @@ const Home: NextPage = () => {
     </main>
   );
 };
+
+Home.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default Home;

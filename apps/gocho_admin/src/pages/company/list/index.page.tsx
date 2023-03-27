@@ -1,16 +1,17 @@
-import type { NextPage } from "next";
 import { useRouter } from "next/router";
+import { ReactElement } from "react";
 
 import { useCompanyArr } from "@/api/company/useCompanyArr";
-import { ErrorScreen, LoadingScreen, Pagination } from "@/component";
+import { ErrorScreen, LoadingScreen, Pagination, GlobalLayout } from "@/component";
 import { INTERNAL_URL } from "@/constant";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
+import type { NextPageWithLayout } from "@/types";
 
 import { COMPANY_SEARCH_LIMIT } from "./constant";
 import { sectionContainer, tableContainer } from "./style";
 import { CompanyCard } from "./component/companyCard";
 
-const CompanyList: NextPage = () => {
+const CompanyList: NextPageWithLayout = () => {
   const router = useRouter();
 
   const {
@@ -49,5 +50,7 @@ const CompanyList: NextPage = () => {
     </main>
   );
 };
+
+CompanyList.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default CompanyList;

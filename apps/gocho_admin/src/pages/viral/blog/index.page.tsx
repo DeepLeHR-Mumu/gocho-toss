@@ -1,15 +1,15 @@
-import type { NextPage } from "next";
-
 import { dateConverter } from "shared-util";
 
+import { ReactElement } from "react";
 import { useJdArr } from "@/api/jd/useJdArr";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
-import { LoadingScreen, ErrorScreen } from "@/component";
+import { LoadingScreen, ErrorScreen, GlobalLayout } from "@/component";
+import type { NextPageWithLayout } from "@/types";
 
 import { JobDef } from "../type";
 import { sectionContainer, sectionTitle, buttonContainer, naverButton, jdButton } from "./style";
 
-const Blog: NextPage = () => {
+const Blog: NextPageWithLayout = () => {
   const {
     data: jdDataArr,
     isLoading,
@@ -144,5 +144,7 @@ const Blog: NextPage = () => {
     </main>
   );
 };
+
+Blog.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default Blog;

@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import type { NextPage } from "next";
+import { useEffect, useState, ReactElement } from "react";
 import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
 import { useEditCompany } from "@/api/company/useEditCompany";
 import { useCompanyDetail } from "@/api/company/useCompanyDetail";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
+import type { NextPageWithLayout } from "@/types";
+import { ErrorScreen, LoadingScreen, GlobalLayout } from "@/component";
 
-import { ErrorScreen, LoadingScreen } from "@/component";
 import { FactoryBox } from "./component/factoryBox";
 import { BasicInfoPart } from "./part/basicInfoPart";
 import { WelfareInfoPart } from "./part/welfareInfoPart";
@@ -16,7 +16,7 @@ import { CompanyFormValues } from "./type";
 import { blankFactory } from "./constant";
 import { formContainer, addFactoryButton, submitButton, checkMsgBox } from "./style";
 
-const CompanyEdit: NextPage = () => {
+const CompanyEdit: NextPageWithLayout = () => {
   const router = useRouter();
   const companyId = Number(router.query.id);
 
@@ -159,5 +159,7 @@ const CompanyEdit: NextPage = () => {
     </main>
   );
 };
+
+CompanyEdit.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default CompanyEdit;
