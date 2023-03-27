@@ -25,12 +25,7 @@ export const WelfareInfoPart: FunctionComponent = () => {
             return (
               <div css={infoBox} key={`companyWelfareInfo${welfare.title}`}>
                 <div css={infoPicture}>
-                  <Image
-                    layout="fill"
-                    objectFit="contain"
-                    src={welfare.image}
-                    alt={`${companyDetailData.name} ${welfare.title} 복지`}
-                  />
+                  <Image fill src={welfare.image} alt={`${companyDetailData.name} ${welfare.title} 복지`} />
                 </div>
                 <strong css={infoTitle}>{welfare.title}</strong>
                 <ul css={textBox}>

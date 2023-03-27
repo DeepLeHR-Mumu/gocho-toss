@@ -8,21 +8,19 @@ import { GetUserCompanyBookmarkArrDef } from "./type";
 import { selector } from "./util";
 
 export const getUserCompanyBookmarkArr: GetUserCompanyBookmarkArrDef = async ({ queryKey: [{ requestObj }] }) => {
-  const token = localStorage.getItem("token") as string;
-  const { data } = await axiosInstance.get(`/users/${requestObj?.userId}/company-bookmarks`, {
-    headers: {
-      "x-access-token": token,
-    },
-  });
+  const token = localStorage.getItem("accessToken");
+  const headers = token ? { "x-access-token": token } : undefined;
+  const { data } = await axiosInstance.get(`/users/${requestObj?.userId}/company-bookmarks`, { headers });
   return data;
 };
 
 export const useUserCompanyBookmarkArr = (requestObj: UserBookmarkArrRequestDef) => {
-  const queryResult = useQuery(oldBookmarkKeyObj.companyBookmarkArr(requestObj), getUserCompanyBookmarkArr, {
+  return useQuery({
+    queryKey: oldBookmarkKeyObj.companyBookmarkArr(requestObj),
+    queryFn: getUserCompanyBookmarkArr,
     enabled: Boolean(requestObj.userId),
     select: ({ data }) => {
       return selector(data);
     },
   });
-  return queryResult;
 };

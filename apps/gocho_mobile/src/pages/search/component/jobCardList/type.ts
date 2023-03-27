@@ -3,7 +3,7 @@ export type JobListPartProps = {
     | {
         id: number;
         companyName: string;
-        companyLogo: string;
+        companyLogo: string | null;
         startTime: number;
         endTime: number;
         title: string;

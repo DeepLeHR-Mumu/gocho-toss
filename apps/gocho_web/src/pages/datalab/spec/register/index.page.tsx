@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import { SPEC_LIST_URL } from "shared-constant/internalURL";
+import { SPEC_LIST_URL } from "shared-constant";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { specRegisterFunnelEvent } from "shared-ga/spec";

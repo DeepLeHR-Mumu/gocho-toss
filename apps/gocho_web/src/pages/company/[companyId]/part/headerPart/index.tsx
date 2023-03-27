@@ -61,7 +61,7 @@ export const HeaderPart: FunctionComponent = () => {
     return (
       userData &&
       addMutate(
-        { userId: userData.id, elemId: companyDetailData.id },
+        { userId: userData.id, id: companyDetailData.id },
         {
           onSuccess: () => {
             companyBookmarkEvent(companyDetailData.id);
@@ -76,7 +76,7 @@ export const HeaderPart: FunctionComponent = () => {
     return (
       userData &&
       deleteMutate(
-        { userId: userData.id, elemId: companyDetailData.id },
+        { userId: userData.id, id: companyDetailData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries(companyCountInfoKeyObj.countInfo({ id: companyDetailData.id }));
@@ -102,12 +102,7 @@ export const HeaderPart: FunctionComponent = () => {
   return (
     <section css={sectionContainer}>
       <div css={companyLogoBox}>
-        <Image
-          layout="fill"
-          objectFit="contain"
-          src={companyDetailData.logoUrl || defaultCompanyLogo}
-          alt={`${companyDetailData.name} 기업 로고`}
-        />
+        <Image src={companyDetailData.logoUrl || defaultCompanyLogo} alt="" fill sizes="1" />
       </div>
       <div css={infoContainer}>
         <div css={infoBox}>
@@ -125,12 +120,11 @@ export const HeaderPart: FunctionComponent = () => {
         <p css={companyName}>{companyDetailData.name}</p>
         <p css={industry}>{companyDetailData.industry}</p>
       </div>
-      {/* LATER : null data들에대한 정확한 파악 필요 null 일 시 렌더링 안되는 것 확인 및 디자인 변경 확인 필요 */}
       {companyDetailData.catchUrl && (
         <a css={catchLinkButton} href={companyDetailData.catchUrl} target="_blank" rel="noopener noreferrer">
           캐치 기업정보 더보기
           <div css={catchLogoBox}>
-            <Image src={catchLogoSrc} alt="" layout="fill" objectFit="contain" />
+            <Image src={catchLogoSrc} alt="" fill />
           </div>
         </a>
       )}

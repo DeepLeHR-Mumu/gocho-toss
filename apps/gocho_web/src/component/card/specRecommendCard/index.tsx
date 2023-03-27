@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
-import { SPEC_DETAIL_URL } from "shared-constant/internalURL";
+import { SPEC_DETAIL_URL } from "shared-constant";
 import { LinkButton } from "shared-ui/common/atom/button";
 
 import { SpecRecommendCardProps, SkeletonCardProps } from "./type";
@@ -44,13 +44,14 @@ export const SpecRecommendCard: FunctionComponent<SpecRecommendCardProps | Skele
     specData.lastEducation === "초대졸" && specData.college !== undefined
       ? specData.college?.grade
       : specData.highschool.naesin;
+  const isCerti = specData.certificate?.data !== null;
 
   return (
     <article css={cardWrapper}>
       <div css={userInfoContainer}>
-        <ProfileImg imageStr={specData.user.image} size="M" />
+        <ProfileImg imageStr={specData.uploader.image} size="M" />
         <div css={userInfoBox}>
-          <p css={nicknameCSS}>{specData.user.nickname}</p>
+          <p css={nicknameCSS}>{specData.uploader.nickname}</p>
           <p css={genderCSS}>
             {specData.gender} {specData.age}살
           </p>
@@ -113,35 +114,29 @@ export const SpecRecommendCard: FunctionComponent<SpecRecommendCardProps | Skele
           </li>
         </ul>
         <ul css={certi}>
-          {/* TODO 자격증 정보 유연한 */}
-          <li css={certiLabel}>
-            기능사
-            {specData.certificate?.level1 !== undefined && specData.certificate?.level1 !== 0 && (
-              <span css={certiNumber}>{specData.certificate.level1}</span>
-            )}
-          </li>
-
-          <li css={certiLabel}>
-            산업기사
-            {specData.certificate?.level2 !== undefined && specData.certificate?.level2 !== 0 && (
-              <span css={certiNumber}>{specData.certificate.level2}</span>
-            )}
-          </li>
-          <li css={certiLabel}>
-            기사+
-            {specData.certificate?.level3 !== undefined && specData.certificate?.level3 !== 0 && (
-              <span css={certiNumber}>{specData.certificate.level3}</span>
-            )}
-          </li>
+          {isCerti ? (
+            <>
+              <li css={certiLabel}>
+                기능사
+                {specData.certificate?.level1 !== null && <span css={certiNumber}>{specData.certificate?.level1}</span>}
+              </li>
+              <li css={certiLabel}>
+                산업기사
+                {specData.certificate?.level2 !== null && <span css={certiNumber}>{specData.certificate?.level2}</span>}
+              </li>
+              <li css={certiLabel}>
+                기사+
+                {specData.certificate?.level3 !== null && <span css={certiNumber}>{specData.certificate?.level3}</span>}
+              </li>
+            </>
+          ) : (
+            <li css={certiLabel}>자격증 정보가 없습니다.</li>
+          )}
         </ul>
       </div>
 
       <div css={buttonContainer}>
-        <LinkButton
-          text={specData.isMine ? "평가 내역 보기" : "평가하기"}
-          variant="filled"
-          linkTo={`${SPEC_DETAIL_URL}/${specData.id}`}
-        />
+        <LinkButton text="평가하기" variant="filled" linkTo={`${SPEC_DETAIL_URL}/${specData.id}`} />
       </div>
     </article>
   );

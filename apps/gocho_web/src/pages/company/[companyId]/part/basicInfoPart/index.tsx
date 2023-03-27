@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import nozoTrue from "shared-image/page/companyDetail/nozo_true_icon.svg";
 import nozoFalse from "shared-image/page/companyDetail/nozo_false_icon.svg";
 import { InvisibleH3 } from "shared-ui/common/atom/invisibleH3";
-import { dateConverter } from "shared-util/date";
+import { dateConverter } from "shared-util";
 import { useCompanyDetail } from "shared-api/company";
 
 import { KakaoMap } from "../../component/kakaoMap";
@@ -70,8 +70,7 @@ export const BasicInfoPart: FunctionComponent = () => {
               <Image
                 src={companyDetailData.nozo.exists ? nozoTrue : nozoFalse}
                 alt={companyDetailData.nozo.exists ? "노조 있음" : "노조 없음"}
-                objectFit="contain"
-                layout="fill"
+                fill
               />
             </span>
             {companyDetailData.nozo.desc && <span css={nozoDesc}>{companyDetailData.nozo.desc}</span>}

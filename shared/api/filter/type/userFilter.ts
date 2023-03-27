@@ -1,8 +1,8 @@
 export interface UserFilterDef {
-  possibleEdu: string[];
+  possible_edu: string[];
   place: string[];
-  requiredExp: string[];
-  contractType: string[];
+  required_exp: string[];
+  contract_type: string[];
   rotation: string[];
   industry: string[];
   task: string[];

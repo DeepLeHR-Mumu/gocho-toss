@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 
 import { useUserInfo } from "shared-api/auth";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
-import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util";
 
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { Bookmark } from "../bookmark";

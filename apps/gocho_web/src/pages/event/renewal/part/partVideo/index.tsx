@@ -6,7 +6,7 @@ import { FiArrowRight, FiCheck } from "react-icons/fi";
 import mainBackground02 from "shared-image/event/renewal/main_background_02.jpg";
 import drawLine from "shared-image/event/renewal/draw_line.svg";
 import drawPoint from "shared-image/event/renewal/draw_point.svg";
-import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
+import { JOBS_DETAIL_URL } from "shared-constant";
 
 import {
   backgroundBox,
@@ -40,12 +40,12 @@ export const PartVideo: FunctionComponent = () => {
             <strong css={infoTitle}>
               채용 플랫폼 유일 공장 정보 제공
               <div css={pointBox}>
-                <Image src={drawPoint} alt="" objectFit="contain" layout="fixed" />
+                <Image src={drawPoint} alt="" fill />
               </div>
             </strong>
 
             <div css={lineBox}>
-              <Image src={drawLine} alt="" objectFit="contain" layout="fixed" />
+              <Image src={drawLine} alt="" fill />
             </div>
             <p css={desc}>
               40만건에 해당하는 공장 정보를 손수 가공하여
@@ -59,10 +59,8 @@ export const PartVideo: FunctionComponent = () => {
               <br />
               <span css={descPoint}>실제로 근무하게 될 공장</span>에 대한 정보를 살펴보아요!
             </p>
-            <Link href={`${JOBS_DETAIL_URL}/5360`} passHref>
-              <a css={linkCSS}>
-                <FiArrowRight /> 공장정보 보러가기
-              </a>
+            <Link href={`${JOBS_DETAIL_URL}/5360`} passHref css={linkCSS}>
+              <FiArrowRight /> 공장정보 보러가기
             </Link>
           </li>
         </ul>
@@ -101,7 +99,7 @@ export const PartVideo: FunctionComponent = () => {
         </ul>
       </div>
       <div css={backgroundBox}>
-        <Image src={mainBackground02} alt="" layout="fill" objectFit="cover" />
+        <Image src={mainBackground02} alt="" fill />
       </div>
     </section>
   );

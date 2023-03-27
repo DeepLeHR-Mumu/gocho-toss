@@ -5,8 +5,8 @@ import dayjs from "dayjs";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
-import { useCompanyDetail } from "@/apis/company/useCompanyDetail";
-import { useUserState } from "@/globalStates/useUserState";
+import { useCompanyDetail } from "@/apis";
+import { useUserState } from "@/globalStates";
 
 import { cssObj } from "./style";
 
@@ -46,7 +46,9 @@ export const LastEditInfoPart: FunctionComponent = () => {
         <p css={cssObj.userInfo}>
           등록자
           <FiUser />
-          {companyDetailData.uploader.name}({companyDetailData.uploader.department})
+          {companyDetailData.uploader.name === "없음"
+            ? "없음"
+            : `${companyDetailData.uploader.name}(${companyDetailData.uploader.department})`}
         </p>
       </div>
     );

@@ -4,9 +4,9 @@ import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
 import jobi_500 from "@/public/image/jobi_500.svg";
 
-import { NextPageWithLayout } from "@/pages/index/type";
-import { Footer, GlobalLayout } from "@/components/global/layout";
-import { unknownPageErrorEvent } from "@/ga/500";
+import { NextPageWithLayout } from "@/types";
+import { Footer, GlobalLayout } from "@/components";
+import { unknownPageErrorEvent } from "@/ga";
 
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
@@ -21,7 +21,7 @@ const UnknownErrorPage: NextPageWithLayout = () => {
     <main css={cssObj.container}>
       <InvisibleH2 title="없는 페이지" />
       <div css={cssObj.jobiImage}>
-        <Image src={jobi_500} alt="" objectFit="fill" layout="fill" />
+        <Image src={jobi_500} alt="" priority fill />
       </div>
       <p css={cssObj.title}>열심히 고치고 있습니다</p>
       <div css={cssObj.catchPhraseContainer}>

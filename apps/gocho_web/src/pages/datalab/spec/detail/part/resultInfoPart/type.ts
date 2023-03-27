@@ -5,8 +5,8 @@ export interface ResultInfoPartProps {
     score: number | null;
     scoreCount: number;
     evals: {
-      strongPointArr: [string, number][];
-      weakPointArr: [string, number][];
+      strongPointArr: { [key: string]: number };
+      weakPointArr: { [key: string]: number };
       feedbackArr: string[] | null;
     } | null;
   };

@@ -2,11 +2,11 @@ import { FunctionComponent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { dDayCalculator } from "shared-util/date";
+import { dDayCalculator } from "shared-util";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { jdAdClickEvent } from "shared-ga/jd";
-import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
+import { JOBS_DETAIL_URL } from "shared-constant";
 
 import { SlideCardProps, SlideCardSkeleton } from "./type";
 import {
@@ -43,12 +43,7 @@ export const JobAdCard: FunctionComponent<SlideCardProps | SlideCardSkeleton> = 
           <div css={slideInfo(jobData?.color || "#2284a5")}>
             <div css={companyLogoWrapper}>
               <div css={companyLogoBox}>
-                <Image
-                  layout="fill"
-                  objectFit="contain"
-                  src={jobData.companyLogo || defaultCompanyLogo}
-                  alt={jobData.companyName}
-                />
+                <Image fill src={jobData.companyLogo || defaultCompanyLogo} alt="" sizes="1" />
               </div>
             </div>
             <p css={endTime}>{dDayCalculator(jobData.jdEndTime)}</p>

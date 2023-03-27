@@ -55,6 +55,10 @@ export const bannerPreviewContainer = css`
   height: 12.5rem;
   margin: 0 1rem;
   position: relative;
+
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const colorPickerButton = css`

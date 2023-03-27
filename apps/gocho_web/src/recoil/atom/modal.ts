@@ -17,6 +17,7 @@ export interface postingObjDef {
 export interface tipObjDef {
   id: number;
   title: string;
+  uploaderName: string;
   description: string;
   tagArr: string[];
   createdTime: number;
@@ -94,13 +95,7 @@ export type contentModalNameDef =
   | "writePostingModal"
   | "dialogModal";
 
-export type modalNameDef =
-  | "logoutModal"
-  | "signUpModal"
-  | "accountSettingModal"
-  | "writeKakaoInfoModal"
-  | "findPasswordModal"
-  | "noticeModal";
+export type modalNameDef = "logoutModal" | "signUpModal" | "accountSettingModal" | "findPasswordModal" | "noticeModal";
 
 export interface modalAtomDef {
   activatedModal: modalNameDef | contentModalNameDef;

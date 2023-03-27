@@ -5,7 +5,7 @@ export interface BestUserInfoProps {
   isSkeleton?: never;
   bestUserData: {
     profileImg: ImageType;
-    user: {
+    uploader: {
       nickname: string;
       image: "default" | "default_work" | "jobi" | "jobi_safety" | "jobi_chat" | "jobi_play" | "jobi_teach";
       badge: "default" | "early_bird" | "admin";
@@ -18,9 +18,10 @@ export interface BestUserInfoProps {
     college: { department: string } | null;
     highschool: { type: string };
     certificate: {
-      level1: number;
-      level2: number;
-      level3: number;
+      data: string[] | null;
+      level1: number | null;
+      level2: number | null;
+      level3: number | null;
     } | null;
     id: number;
   };

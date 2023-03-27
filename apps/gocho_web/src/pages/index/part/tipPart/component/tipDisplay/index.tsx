@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
 
-import { COMMUNITY_TIPS_LIST_URL } from "shared-constant/internalURL";
+import { COMMUNITY_TIPS_LIST_URL } from "shared-constant";
 import { LinkButton } from "shared-ui/common/atom/button";
 
 import {
@@ -20,14 +20,7 @@ export const TipDisplay: FunctionComponent<TipDisplayProps> = ({ currentTip }) =
     <article css={tipDisplayWrapper}>
       <div css={tipFadeContainer}>
         <div css={tipImageBox}>
-          <Image
-            src={currentTip.thumbnailSvgSrc}
-            alt={currentTip.title}
-            layout="fill"
-            objectFit="cover"
-            draggable="false"
-            loading="eager"
-          />
+          <Image src={currentTip.thumbnailSvgSrc} alt={currentTip.title} draggable="false" loading="eager" fill />
         </div>
       </div>
 

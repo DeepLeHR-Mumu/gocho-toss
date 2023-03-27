@@ -11,8 +11,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Global } from "@emotion/react";
 import { datadogRum } from "@datadog/browser-rum";
 
-import { KEY } from "shared-constant/gaKey";
-import { FB_PIXEL_ID } from "shared-constant/fbPixelKey";
+import { KEY, FB_PIXEL_ID } from "shared-constant";
+import { useAxiosInterceptor } from "shared-api/axiosInstance";
 
 import { GNB } from "@component/global/gnb";
 import { Footer } from "@component/global/footer";
@@ -117,8 +117,12 @@ function UserMobileService({ Component, pageProps }: AppProps) {
   }, [router.events]);
 
   useEffect(() => {
-    window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
+    if (!window.Kakao.isInitialized()) {
+      window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
+    }
   }, []);
+
+  useAxiosInterceptor();
 
   return (
     <RecoilRoot>

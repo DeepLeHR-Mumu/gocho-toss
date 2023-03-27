@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { useJobArr } from "shared-api/job";
-import { JOBS_LIST_URL } from "shared-constant/internalURL";
+import { JOBS_LIST_URL } from "shared-constant";
 import { jdListFunnelEvent, jdSearchEvent } from "shared-ga/jd";
 // import { myFilterLoadEvent, myFilterSaveEvent } from "shared-ga/jd";
 

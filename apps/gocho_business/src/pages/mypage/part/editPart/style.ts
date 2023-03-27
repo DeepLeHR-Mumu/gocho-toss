@@ -53,6 +53,7 @@ export const cssObj = {
     font-weight: 400;
     width: 100%;
     padding: 0 3rem 0 1rem;
+    background-color: ${COLORS.GRAY100};
     height: 2.5rem;
     box-shadow: 0 0 0 1000px ${COLORS.GRAY100} inset;
 

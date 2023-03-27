@@ -1,8 +1,7 @@
 import { FunctionComponent } from "react";
-import Link from "next/link";
 import { FiX, FiHome } from "react-icons/fi";
 
-import { MAIN_URL } from "shared-constant/internalURL";
+import { MAIN_URL } from "shared-constant";
 
 import { closeButtonWrapper } from "./style";
 import { ButtonProps } from "./type";
@@ -10,11 +9,9 @@ import { ButtonProps } from "./type";
 export const CloseButton: FunctionComponent<ButtonProps> = ({ size, buttonClick, isHome }) => {
   if (isHome) {
     return (
-      <Link href={MAIN_URL} passHref>
-        <a css={closeButtonWrapper(size)}>
-          <FiHome />
-        </a>
-      </Link>
+      <a href={MAIN_URL} css={closeButtonWrapper(size)}>
+        <FiHome />
+      </a>
     );
   }
   return (

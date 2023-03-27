@@ -9,16 +9,14 @@ import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import kakaoMono from "shared-image/global/sns/kakaoLogo.svg";
 import { useDoLogin } from "shared-api/auth";
 import { loginModalCloseEvent, loginModalOpenEvent, loginSuccessEvent } from "shared-ga/auth";
-import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant/regExp";
-import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant/errorMessage";
+import { EMAIL_REGEXP, PWD_REGEXP, MAIN_URL, EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { useToast } from "@recoil/hook/toast";
 import { useModal } from "@recoil/hook/modal";
 import { BottomPopup } from "@component/bottomPopup";
 import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
-import { tokenDecryptor } from "shared-util/tokenDecryptor";
-import { MAIN_URL } from "shared-constant/internalURL";
+import { tokenDecryptor } from "shared-util";
 
 import {
   wrapper,
@@ -56,14 +54,15 @@ export const LoginModal: FunctionComponent = () => {
     mutate(loginObj, {
       onError: (error) => {
         const errorResponse = error.response?.data as ErrorResponse;
-        setErrorMsg(errorResponse.error.errorMessage);
+        setErrorMsg(errorResponse.error_message);
         ref.current += 1;
       },
       onSuccess: (response) => {
-        localStorage.setItem("token", `${response.data.token}`);
+        localStorage.setItem("accessToken", `${response.data.access_token}`);
+        localStorage.setItem("refreshToken", `${response.data.refresh_token}`);
         queryClient.invalidateQueries();
         closeModal();
-        const { id, nickname } = tokenDecryptor(response.data.token);
+        const { id, nickname } = tokenDecryptor(response.data.access_token);
         loginSuccessEvent(id, "gocho");
         setCurrentToast("님 반갑습니다.", nickname);
       },
@@ -104,7 +103,7 @@ export const LoginModal: FunctionComponent = () => {
         )}
 
         <div css={logoContainer}>
-          <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" layout="fill" />
+          <Image src={smallMono} alt="고초대졸 로고" fill />
         </div>
 
         <p css={desc}>로그인이 필요한 서비스입니다.</p>
@@ -155,7 +154,7 @@ export const LoginModal: FunctionComponent = () => {
 
             <button type="button" css={kakaoLoginBox} onClick={kakaoLogin}>
               <div css={kakaoLogoBox}>
-                <Image src={kakaoMono} alt="카카오 로그인" layout="fill" objectFit="contain" />
+                <Image src={kakaoMono} alt="" fill />
               </div>
               카카오톡으로 로그인하기
             </button>

@@ -1,20 +1,18 @@
 import { FunctionComponent, useState, useRef } from "react";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { FiCheckCircle, FiX } from "react-icons/fi";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
-import { EMAIL_REGEXP } from "shared-constant/regExp";
-import { EMAIL_ERROR_MESSAGE } from "shared-constant/errorMessage";
+import { EMAIL_REGEXP, EMAIL_ERROR_MESSAGE } from "shared-constant";
 import { NormalButton } from "shared-ui/common/atom/button";
-import { useFocusTrap } from "shared-hooks/useFocusTrap";
+import { useFocusTrap } from "shared-hooks";
 
-import { FiCheckCircle, FiX } from "react-icons/fi";
-import { useFindPassword } from "@/apis/auth/usefindPassword";
-import { CommonCloseButton } from "@/components/common/commonCloseButton";
-import { useModal } from "@/globalStates/useModal";
-import { useToast } from "@/globalStates/useToast";
+import { useFindPassword } from "@/apis";
+import { useModal, useToast } from "@/globalStates";
 
 import { ModalComponent } from "../modalBackground";
+import { CommonCloseButton } from "./component/commonCloseButton";
 
 import { FindEmailFormValues } from "./type";
 import { cssObj } from "./style";
@@ -77,7 +75,7 @@ export const FindPasswordBox: FunctionComponent = () => {
         <CommonCloseButton size="S" buttonClick={closeFindPasswordModal} />
       </div>
       <div css={cssObj.logoContainer}>
-        <Image objectFit="contain" src={smallMono} alt="고초대졸닷컴" />
+        <Image src={smallMono} alt="고초대졸닷컴" />
       </div>
       <p css={cssObj.desc}>가입한 이메일에서 비밀번호를 확인하세요</p>
       <form css={cssObj.formCSS} onSubmit={handleSubmit(findEmailSubmit)}>

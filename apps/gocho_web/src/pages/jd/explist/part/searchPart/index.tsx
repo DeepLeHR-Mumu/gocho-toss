@@ -4,7 +4,7 @@ import { FiSearch } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { useCompanyArr } from "shared-api/company";
-import { JOBS_EXPLIST_URL } from "shared-constant/internalURL";
+import { JOBS_EXPLIST_URL } from "shared-constant";
 import { expiredJdListSortingEvent } from "shared-ga/jd";
 
 import { useToast } from "@recoil/hook/toast";

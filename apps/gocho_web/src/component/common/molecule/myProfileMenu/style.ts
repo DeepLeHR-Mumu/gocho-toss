@@ -23,15 +23,6 @@ export const myProfileMenuWrapper: profileMenuWrapperDef = (active) => {
   `;
 };
 
-export const myProfileTitle = css`
-  font-size: 0.75rem;
-  white-space: nowrap;
-  color: ${COLORS.GRAY30};
-  border-bottom: 1px solid ${COLORS.GRAY70};
-  padding-bottom: 1rem;
-  margin-bottom: 1rem;
-`;
-
 export const myProfileMenuCSS = css`
   > li {
     line-height: 2;

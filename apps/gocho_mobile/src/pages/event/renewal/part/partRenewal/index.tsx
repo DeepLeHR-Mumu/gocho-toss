@@ -51,22 +51,22 @@ export const PartRenewal: FunctionComponent = () => {
           </p>
 
           <div css={pointImgBox1}>
-            <Image src={drawPoint1} alt="" objectFit="contain" layout="fill" />
+            <Image src={drawPoint1} alt="" fill />
           </div>
           <div css={pointImgBox2}>
-            <Image src={drawPoint2} alt="" objectFit="contain" layout="fill" />
+            <Image src={drawPoint2} alt="" fill />
           </div>
         </div>
 
         <ul css={listCSS}>
           <li>
-            <Image src={renewal01Src} layout="responsive" objectFit="cover" />
+            <Image alt="" src={renewal01Src} fill />
           </li>
           <li>
-            <Image src={renewal02Src} layout="responsive" objectFit="cover" />
+            <Image alt="" src={renewal02Src} fill />
           </li>
           <li>
-            <Image src={renewal03Src} layout="responsive" objectFit="cover" />
+            <Image alt="" src={renewal03Src} fill />
           </li>
         </ul>
 
@@ -77,7 +77,7 @@ export const PartRenewal: FunctionComponent = () => {
         </p>
 
         <div css={logoBox}>
-          <Image src={gochoLogoColor} alt="고초대졸닷컴" layout="fixed" objectFit="contain" />
+          <Image alt="" src={gochoLogoColor} fill />
         </div>
 
         {!isSuccess && (

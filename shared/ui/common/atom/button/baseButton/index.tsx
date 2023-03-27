@@ -15,15 +15,13 @@ export const BaseButton: FunctionComponent<GeneralButtonProps> = ({
 }) => {
   if (linkTo) {
     return (
-      <Link href={linkTo} passHref>
-        <a css={buttonCSS(variant, wide, iconObj?.position)}>
-          {iconObj && (
-            <div css={iconCSS(iconObj.size, iconObj.color)}>
-              <iconObj.icon />
-            </div>
-          )}
-          {text}
-        </a>
+      <Link href={linkTo} passHref css={buttonCSS(variant, wide, iconObj?.position)}>
+        {iconObj && (
+          <div css={iconCSS(iconObj.size, iconObj.color)}>
+            <iconObj.icon />
+          </div>
+        )}
+        {text}
       </Link>
     );
   }

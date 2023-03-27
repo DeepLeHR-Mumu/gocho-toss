@@ -44,11 +44,11 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
       setCurrentModal("loginModal", { button: "close" });
       return;
     }
-    addMutate({ userId: userData.id, elemId: companyData.id });
+    addMutate({ userId: userData.id, id: companyData.id });
   };
 
   const deleteCompanyBookmark = () => {
-    if (userData) deleteMutate({ userId: userData.id, elemId: companyData.id });
+    if (userData) deleteMutate({ userId: userData.id, id: companyData.id });
   };
 
   return (
@@ -65,17 +65,10 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
         <BsFillBookmarkFill />
       </button>
       <Link href={`/company/${companyData.id}/detail`} passHref>
-        <a>
           <strong css={NameCSS}>{companyData.name}</strong>
           <div css={companyLogoBox}>
-            <Image
-              layout="fill"
-              objectFit="contain"
-              src={companyData.logoUrl || defaultCompanyLogo}
-              alt={companyData.name}
-            />
+            <Image fill src={companyData.logoUrl || defaultCompanyLogo} alt={companyData.name} />
           </div>
-        </a>
       </Link>
     </article>
   );

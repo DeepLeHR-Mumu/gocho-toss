@@ -1,10 +1,10 @@
 import { ReactElement } from "react";
 import Image from "next/image";
 
-import { NextPageWithLayout } from "@/pages/index/type";
-import { GlobalLayout, Footer } from "@/components/global/layout";
-import chatIcon from "@/public/image/help/chat.svg";
 import helpBackground from "@/public/image/help/help_background.svg";
+import chatIcon from "@/public/image/help/chat.svg";
+import { NextPageWithLayout } from "@/types";
+import { GlobalLayout, Footer } from "@/components";
 
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
@@ -20,12 +20,12 @@ const HelpPage: NextPageWithLayout = () => (
       </p>
       <strong css={cssObj.strongDesc}>무엇이든 문의해주세요!</strong>
       <div css={cssObj.chatIconBox}>
-        <Image src={chatIcon} alt="" layout="fill" objectFit="contain" />
+        <Image src={chatIcon} alt="" fill />
       </div>
     </div>
 
     <div css={cssObj.backgroundBox}>
-      <Image src={helpBackground} alt="" objectFit="contain" layout="responsive" draggable={false} priority />
+      <Image src={helpBackground} alt="" fill priority />
     </div>
   </main>
 );

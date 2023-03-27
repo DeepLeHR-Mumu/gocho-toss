@@ -13,5 +13,5 @@ const putAcceptJd: AcceptJdDef = async (requestObj) => {
 };
 
 export const useAcceptJd: UseAcceptJdProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>(putAcceptJd);
+  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: putAcceptJd });
 };

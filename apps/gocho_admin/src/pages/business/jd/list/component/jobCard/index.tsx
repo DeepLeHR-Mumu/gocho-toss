@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import Link from "next/link";
 
-import { dateConverter } from "shared-util/date";
+import { dateConverter } from "shared-util";
 
 import { BUSINESS_JD_EDIT_URL, BUSINESS_JD_REGISTER_URL } from "@constant/internalURL";
 
@@ -36,13 +36,14 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
       <td css={cssObj.buttonContainer}>
         <Link
           passHref
+          css={cssObj.activeButton}
           href={
             job.status.name === "등록대기"
               ? `${BUSINESS_JD_REGISTER_URL}/?id=${job.id}`
               : `${BUSINESS_JD_EDIT_URL}/?id=${job.id}`
           }
         >
-          <a css={cssObj.activeButton}>상세보기</a>
+          상세보기
         </Link>
       </td>
     </tr>

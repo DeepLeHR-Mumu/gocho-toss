@@ -4,8 +4,8 @@ import Link from "next/link";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
-import { useUserState } from "@/globalStates/useUserState";
-import { INTERNAL_URL } from "@/constants/url";
+import { useUserState } from "@/globalStates";
+import { INTERNAL_URL } from "@/constants";
 
 import { linkArr } from "./constant";
 import { CompanyInfoBox } from "./component/companyInfoBox";
@@ -39,11 +39,9 @@ export const SideBar: FunctionComponent = () => {
             const isEdit = linkObj.name === "공고" && router.asPath === INTERNAL_URL.JD_EDIT(Number(jdId));
 
             return (
-              <Link href={linkObj.url} key={linkObj.url} passHref>
-                <a css={cssObj.linkCSS(isRoute || isUpload || isEdit)}>
-                  <linkObj.icon />
-                  {linkObj.name}
-                </a>
+              <Link href={linkObj.url} key={linkObj.url} passHref css={cssObj.linkCSS(isRoute || isUpload || isEdit)}>
+                <linkObj.icon />
+                {linkObj.name}
               </Link>
             );
           })}

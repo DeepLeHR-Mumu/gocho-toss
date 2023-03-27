@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
-import { ErrorResponseDef } from "@/types/errorType";
+import { ErrorResponseDef } from "@/types";
 
 import { PatchUserInfoDef, RequestObjDef, ResponseObjDef } from "./type";
 import { axiosInstance } from "../../useIsRefreshLock";
@@ -15,4 +15,6 @@ const patchUserInfo: PatchUserInfoDef = async (requestObj) => {
 };
 
 export const useEditUserInfo = () =>
-  useMutation<AxiosResponse<ResponseObjDef>, AxiosError<ErrorResponseDef>, RequestObjDef>(patchUserInfo);
+  useMutation<AxiosResponse<ResponseObjDef>, AxiosError<ErrorResponseDef>, RequestObjDef>({
+    mutationFn: patchUserInfo,
+  });

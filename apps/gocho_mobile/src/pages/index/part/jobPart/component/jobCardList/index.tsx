@@ -2,7 +2,7 @@ import { FunctionComponent, useRef } from "react";
 import Slider from "react-slick";
 
 import { useJobArr } from "shared-api/job";
-import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util";
 import { MainJobCard } from "shared-ui/card/MainJobCard";
 import { useUserInfo } from "shared-api/auth";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";

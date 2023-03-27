@@ -12,6 +12,9 @@ export const backgroundBox = css`
   top: 0;
   width: 100%;
   height: 100%;
+  > img {
+    object-fit: cover;
+  }
 `;
 
 export const positionBox = css`
@@ -46,6 +49,7 @@ export const infoBox = css`
 
   > li {
     background-color: #ffffffcc;
+    width: 32rem;
     padding: 1.625rem;
     text-align: center;
     margin-bottom: 0.75rem;
@@ -75,6 +79,9 @@ export const pointBox = css`
   position: absolute;
   right: -2rem;
   top: -0.5rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const desc = css`

@@ -11,6 +11,9 @@ export const backgroundBox = css`
   top: 0;
   width: 100%;
   height: 100%;
+  > img {
+    object-fit: cover;
+  }
 `;
 
 export const positionBox = css`
@@ -66,6 +69,9 @@ export const lineBox = css`
   height: 1.25rem;
   position: relative;
   margin: 0.25rem 0;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const pointBox = css`
@@ -74,6 +80,9 @@ export const pointBox = css`
   position: absolute;
   right: -2rem;
   top: -0.5rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const desc = css`

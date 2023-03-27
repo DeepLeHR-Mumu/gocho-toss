@@ -5,7 +5,7 @@ import { BsChevronRight } from "react-icons/bs";
 import { useUserInfo } from "shared-api/auth";
 import { useUnifiedCompanySearchArr } from "shared-api/company";
 import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
-import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { COLORS } from "shared-style/color";
 

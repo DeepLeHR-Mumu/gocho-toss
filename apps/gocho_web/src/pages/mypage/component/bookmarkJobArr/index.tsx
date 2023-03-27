@@ -5,7 +5,7 @@ import { BookmarkedJobCard } from "shared-ui/card/bookmarkedJobCard";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
 
-import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util";
 import { cardListContainer, skeletonContainer, desc, warningCSS } from "./style";
 
 export const BookmarkJobArr: FunctionComponent = () => {

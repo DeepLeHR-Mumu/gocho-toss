@@ -9,4 +9,8 @@ export const bannerImgBox = css`
   width: 6rem;
   height: 8rem;
   position: relative;
+
+  > img {
+    object-fit: contain;
+  }
 `;

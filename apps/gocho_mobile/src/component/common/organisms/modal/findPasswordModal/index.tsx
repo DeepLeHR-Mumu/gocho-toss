@@ -5,8 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { useFindPassword } from "shared-api/auth";
-import { EMAIL_REGEXP } from "shared-constant/regExp";
-import { EMAIL_ERROR_MESSAGE } from "shared-constant/errorMessage";
+import { EMAIL_REGEXP, EMAIL_ERROR_MESSAGE } from "shared-constant";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { useModal } from "@recoil/hook/modal";
@@ -70,7 +69,7 @@ export const FindPasswordModal: FunctionComponent = () => {
         </button>
 
         <div css={logoContainer}>
-          <Image objectFit="contain" src={smallMono} alt="고초대졸 로고" />
+          <Image src={smallMono} alt="" />
         </div>
         <p css={desc}>로그인이 필요한 서비스입니다.</p>
         <form css={formCSS} onSubmit={handleSubmit(loginSubmit)}>

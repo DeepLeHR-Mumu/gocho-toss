@@ -1,16 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import {
-  SearchCompanyArrRequestDef,
   searchCompanyArrKeyObj,
+  SearchCompanyArrRequestDef,
 } from "shared-constant/queryKeyFactory/company/searchCompanyArrKeyObj";
 
-import { axiosInstance } from "../../axiosInstance";
+import { axiosNoTokenInstance } from "../../axiosInstance";
 
 import { GetSearchCompanyArrDef } from "./type";
 import { selector } from "./util";
 
 export const getUnifiedCompanySearchArr: GetSearchCompanyArrDef = async ({ queryKey: [{ requestObj }] }) => {
-  const { data } = await axiosInstance.get(`/companies`, {
+  const { data } = await axiosNoTokenInstance.get("/companies", {
     params: {
       order: "recent",
       filter: "valid",
@@ -23,11 +23,12 @@ export const getUnifiedCompanySearchArr: GetSearchCompanyArrDef = async ({ query
 };
 
 export const useUnifiedCompanySearchArr = (requestObj: SearchCompanyArrRequestDef) => {
-  const queryResult = useQuery(searchCompanyArrKeyObj.searchArr(requestObj), getUnifiedCompanySearchArr, {
+  return useQuery({
+    queryKey: searchCompanyArrKeyObj.searchArr(requestObj),
+    queryFn: getUnifiedCompanySearchArr,
     select: ({ data, count }) => {
       return selector(data, count);
     },
     enabled: Number.isInteger(Number(requestObj.page)) && typeof requestObj.searchWord !== "undefined",
   });
-  return queryResult;
 };

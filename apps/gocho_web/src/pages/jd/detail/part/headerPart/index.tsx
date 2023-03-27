@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { useUserInfo } from "shared-api/auth";
 import { useJobDetail } from "shared-api/job";
-import { dDayCalculator } from "shared-util/date";
+import { dDayCalculator } from "shared-util";
 
 import { PositionCard } from "./component/positionCard";
 import { HeaderFix } from "./component/headerFix";

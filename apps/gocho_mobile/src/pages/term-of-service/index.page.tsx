@@ -2,7 +2,7 @@ import { NextPage } from "next";
 
 import { Layout } from "@component/layout";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
-import { executionDesc, tosArr } from "shared-constant/TOS";
+import { tosExecutionDesc, tosArr } from "shared-constant";
 
 import { PageHead } from "./pageHead";
 import { tosTitle, subTitle, container, executionDescCSS, wrapper, listTitle, listArr, desc } from "./style";
@@ -46,7 +46,7 @@ const Tos: NextPage = () => {
             <span>
               {"<"} 부칙 {">"}
             </span>
-            {executionDesc}
+            {tosExecutionDesc}
           </p>
         </Layout>
       </section>

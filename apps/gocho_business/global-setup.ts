@@ -1,5 +1,5 @@
 import { request, FullConfig } from "@playwright/test";
-import { BUSINESS_BACKEND_URL } from "shared-constant/e2e/externalURL";
+import { BUSINESS_BACKEND_URL } from "shared-constant";
 
 async function globalSetup(config: FullConfig) {
   const { storageState } = config.projects[0].use;

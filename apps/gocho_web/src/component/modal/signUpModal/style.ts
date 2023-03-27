@@ -23,6 +23,9 @@ export const logoContainer = css`
   height: 1rem;
   position: relative;
   margin-bottom: 1rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const desc = css`

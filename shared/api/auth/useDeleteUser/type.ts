@@ -11,5 +11,6 @@ export interface DeleteUserInfoDef {
 }
 
 export interface UseDeleteUserInfoDef {
-  (): UseMutationResult<ResponseDef, AxiosError, RequestObjDef>;
+  // TODO: 나중에 어떻게 하면 onSuccessAction을 없앨 수 있을지 or 깔끔하게 바꿀 수 있을지 고민해보기
+  (onSuccessAction: () => void): UseMutationResult<ResponseDef, AxiosError, RequestObjDef>;
 }

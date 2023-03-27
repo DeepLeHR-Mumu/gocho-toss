@@ -11,7 +11,7 @@ import collegeTrue from "shared-image/global/common/cho_color.svg";
 import collegeFalse from "shared-image/global/common/cho_mono.svg";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
-import { JOBS_DETAIL_URL } from "shared-constant/internalURL";
+import { JOBS_DETAIL_URL } from "shared-constant";
 import { SkeletonBox } from "../../../common/atom/skeletonBox";
 import { DdayBox } from "../../../common/atom/dDayBox";
 
@@ -69,7 +69,7 @@ export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSke
   const addJobBookmark = () => {
     if (userId)
       addMutate(
-        { userId, elemId: jobData.id },
+        { userId, id: jobData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries([{ data: "jobArr" }]);
@@ -81,7 +81,7 @@ export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSke
   const deleteJobBookmark = () => {
     if (userId)
       deleteMutate(
-        { userId, elemId: jobData.id },
+        { userId, id: jobData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries([{ data: "jobArr" }]);
@@ -101,42 +101,40 @@ export const JobSmallCard: FunctionComponent<JobSmallCardProps | JobSmallCardSke
         <BsFillBookmarkFill />
       </button>
 
-      <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
-        <a aria-label={`${jobData.title} 채용 공고로 이동`}>
-          <div css={flexBox}>
-            <div css={companyLogoBox}>
-              <Image layout="fill" objectFit="contain" src={jobData.companyLogo || defaultCompanyLogo} alt="" />
-            </div>
-
-            <div css={infoBox}>
-              <DdayBox endTime={jobData.endTime} />
-              <p css={companyNameCSS}>{jobData.companyName}</p>
-              <p css={titleCSS}>{jobData.title}</p>
-            </div>
+      <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref aria-label={`${jobData.title} 채용 공고로 이동`}>
+        <div css={flexBox}>
+          <div css={companyLogoBox}>
+            <Image fill src={jobData.companyLogo || defaultCompanyLogo} alt="" />
           </div>
-          <ul css={bottomInfo}>
-            <li>
-              <Image
-                layout="fixed"
-                objectFit="contain"
-                src={jobData.high ? highTrue : highFalse}
-                alt={jobData.high ? "고졸 지원 가능" : "고졸 지원 불가능"}
-              />
-            </li>
-            <li>
-              <Image
-                src={jobData.college ? collegeTrue : collegeFalse}
-                alt={jobData.college ? "초대졸 지원 가능" : "초대졸 지원 불가능"}
-              />
-            </li>
-            <li>
-              {jobData.placeArr[0][1]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
-            </li>
-            <li>
-              {jobData.rotationArr[0]} {jobData.rotationArr.length !== 1 && `외 ${jobData.rotationArr.length - 1}형태`}
-            </li>
-          </ul>
-        </a>
+
+          <div css={infoBox}>
+            <DdayBox endTime={jobData.endTime} />
+            <p css={companyNameCSS}>{jobData.companyName}</p>
+            <p css={titleCSS}>{jobData.title}</p>
+          </div>
+        </div>
+        <ul css={bottomInfo}>
+          <li>
+            <Image
+              fill
+              src={jobData.high ? highTrue : highFalse}
+              alt={jobData.high ? "고졸 지원 가능" : "고졸 지원 불가능"}
+            />
+          </li>
+          <li>
+            <Image
+              fill
+              src={jobData.college ? collegeTrue : collegeFalse}
+              alt={jobData.college ? "초대졸 지원 가능" : "초대졸 지원 불가능"}
+            />
+          </li>
+          <li>
+            {jobData.placeArr[0][1]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
+          </li>
+          <li>
+            {jobData.rotationArr[0]} {jobData.rotationArr.length !== 1 && `외 ${jobData.rotationArr.length - 1}형태`}
+          </li>
+        </ul>
       </Link>
     </div>
   );

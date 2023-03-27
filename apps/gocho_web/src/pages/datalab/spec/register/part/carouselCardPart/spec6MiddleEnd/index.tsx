@@ -32,21 +32,51 @@ export const Spec6MiddleEnd: FunctionComponent<Spec6MiddleEndProps> = ({
 
   const specSubmit = () => {
     const userSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
-    mutate(userSpecObj, {
-      onError: (error) => {
-        const errorCode = error.response?.status;
-        if (errorCode === 401) {
-          queryClient.invalidateQueries(userInfoKeyObj.userInfo);
-          setCurrentModal("loginModal", { button: "home" });
-        }
+    mutate(
+      {
+        secret: userSpecObj.secret,
+        gender: userSpecObj.gender,
+        age: userSpecObj.age,
+        military: userSpecObj.military,
+        desired_task: userSpecObj.desiredTask,
+        desired_industry: userSpecObj.desiredIndustry,
+        last_education: userSpecObj.lastEducation,
+        highschool: {
+          type: userSpecObj.highschool.type,
+          naesin: userSpecObj.highschool.naesin,
+          absent: userSpecObj.highschool.absent,
+          tardy: userSpecObj.highschool.tardy,
+          leave_early: userSpecObj.highschool.leaveEarly,
+          class_miss: userSpecObj.highschool.classMiss,
+        },
+        college: userSpecObj.college && {
+          department: userSpecObj.college.department,
+          grade: userSpecObj.college.grade,
+          max_grade: userSpecObj.college.maxGrade,
+          uturn: userSpecObj.college.uturn,
+        },
+        certificate: userSpecObj.certificate && userSpecObj.certificate,
+        language: userSpecObj.language.length === 0 ? null : userSpecObj.language,
+        award: userSpecObj.award,
+        career: userSpecObj.career,
+        etc: userSpecObj.etc,
       },
-      onSuccess: () => {
-        specRegisterEvent(false);
-        moveNextCard("8");
-        queryClient.invalidateQueries(specArrKeyObj.all);
-        sessionStorage.removeItem("specObj");
-      },
-    });
+      {
+        onError: (error) => {
+          const errorCode = error.response?.status;
+          if (errorCode === 401) {
+            queryClient.invalidateQueries(userInfoKeyObj.userInfo);
+            setCurrentModal("loginModal", { button: "home" });
+          }
+        },
+        onSuccess: () => {
+          specRegisterEvent(false);
+          moveNextCard("8");
+          queryClient.invalidateQueries(specArrKeyObj.all);
+          sessionStorage.removeItem("specObj");
+        },
+      }
+    );
   };
 
   return (
@@ -64,7 +94,7 @@ export const Spec6MiddleEnd: FunctionComponent<Spec6MiddleEndProps> = ({
         </p>
 
         <div css={animationBox}>
-          <Image src={jobiFighting} alt="" layout="fill" objectFit="contain" draggable={false} />
+          <Image src={jobiFighting} alt="" fill />
         </div>
 
         <button type="button" css={postButtonCSS} onClick={specSubmit}>

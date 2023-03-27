@@ -6,7 +6,7 @@ import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookma
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { useModal } from "@recoil/hook/modal";
 import { useUserInfo } from "shared-api/auth";
-import { dDayCalculator } from "shared-util/date";
+import { dDayCalculator } from "shared-util";
 
 import { NormalButton } from "shared-ui/common/atom/button";
 import { BottomMenuProps } from "./type";
@@ -52,7 +52,7 @@ export const BottomMenu: FunctionComponent<BottomMenuProps> = ({
     return (
       userId &&
       addMutate(
-        { userId, elemId: jobDetailData.id },
+        { userId, id: jobDetailData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
@@ -66,7 +66,7 @@ export const BottomMenu: FunctionComponent<BottomMenuProps> = ({
     return (
       userId &&
       deleteMutate(
-        { userId, elemId: jobDetailData.id },
+        { userId, id: jobDetailData.id },
         {
           onSuccess: () => {
             queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));

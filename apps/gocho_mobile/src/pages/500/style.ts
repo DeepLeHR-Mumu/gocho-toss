@@ -66,6 +66,9 @@ export const gochoLogoBox = css`
   position: relative;
   width: 7.5rem;
   height: 1rem;
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const jobiContainer = css`
@@ -81,6 +84,7 @@ export const jobiContainer = css`
     height: 30rem;
     img {
       object-position: right bottom;
+      object-fit: contain;
     }
   }
 `;

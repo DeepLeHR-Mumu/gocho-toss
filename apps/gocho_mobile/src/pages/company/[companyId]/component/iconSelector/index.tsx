@@ -41,7 +41,7 @@ export const IconSelector: FunctionComponent<IconSelectorProps> = ({ activatedMe
   };
   return (
     <div css={wrapper}>
-      <Image src={selector(activatedMenu)} layout="fill" objectFit="contain" />
+      <Image alt="" src={selector(activatedMenu)} fill />
     </div>
   );
 };

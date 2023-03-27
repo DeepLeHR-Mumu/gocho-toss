@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import Link from "next/link";
 import { FiChevronRight } from "react-icons/fi";
 
-import { JOBS_LIST_URL } from "shared-constant/internalURL";
+import { JOBS_LIST_URL } from "shared-constant";
 import { Layout } from "@component/layout";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { JobCardList } from "./component/jobCardList";
@@ -21,17 +21,14 @@ export const JobPart: FunctionComponent = () => {
               pathname: JOBS_LIST_URL,
               query: { page: 1, order: "recent" },
             }}
+            css={linkButton}
             passHref
           >
-            <a css={linkButton}>
-              전체 보기 <FiChevronRight />
-            </a>
+            전체 보기 <FiChevronRight />
           </Link>
         </div>
       </Layout>
-      <div css={cardContainer}>
-        <JobCardList />
-      </div>
+      <div css={cardContainer}><JobCardList /></div>
     </section>
   );
 };

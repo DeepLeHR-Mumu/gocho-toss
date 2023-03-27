@@ -11,8 +11,8 @@ import Head from "next/head";
 import { datadogRum } from "@datadog/browser-rum";
 import ReactGA from "react-ga4";
 
-import { KEY } from "shared-constant/gaKey";
-import { FB_PIXEL_ID } from "shared-constant/fbPixelKey";
+import { KEY, FB_PIXEL_ID } from "shared-constant";
+import { useAxiosInterceptor } from "shared-api/axiosInstance";
 
 import { Header } from "@component/global/header";
 import { Footer } from "@component/global/footer";
@@ -121,8 +121,12 @@ function UserPCService({ Component, pageProps }: AppProps) {
   }, [router.events]);
 
   useEffect(() => {
-    window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
+    if (!window.Kakao.isInitialized()) {
+      window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
+    }
   }, []);
+
+  useAxiosInterceptor();
 
   return (
     <RecoilRoot>

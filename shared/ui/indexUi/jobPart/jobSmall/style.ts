@@ -16,19 +16,17 @@ interface BookmarkButtonCSSDef {
   (isBookmarked: boolean): SerializedStyles;
 }
 
-export const bookmarkButtonCSS: BookmarkButtonCSSDef = (isBookmarked) => {
-  return css`
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 1rem;
-    background-color: ${COLORS.GRAY90};
-    border-radius: 0 0 0 1.25rem;
-    color: ${isBookmarked ? COLORS.BLUE_FIRST40 : COLORS.GRAY60};
-    font-size: 1rem;
-    z-index: 15;
-  `;
-};
+export const bookmarkButtonCSS: BookmarkButtonCSSDef = (isBookmarked) => css`
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 1rem;
+  background-color: ${COLORS.GRAY90};
+  border-radius: 0 0 0 1.25rem;
+  color: ${isBookmarked ? COLORS.BLUE_FIRST40 : COLORS.GRAY60};
+  font-size: 1rem;
+  z-index: 15;
+`;
 
 export const flexBox = css`
   display: flex;

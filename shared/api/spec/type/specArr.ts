@@ -6,9 +6,8 @@ export interface SpecObjDef {
   image: ImageType;
   gender: "남" | "여";
   age: number;
-  isMine: boolean;
   military: "군필" | "미필" | "면제-해당없음";
-  user: {
+  uploader: {
     nickname: string;
     image: "default" | "default_work" | "jobi" | "jobi_safety" | "jobi_chat" | "jobi_play" | "jobi_teach";
     badge: "default" | "early_bird" | "admin";
@@ -38,17 +37,14 @@ export interface SpecObjDef {
     | null
     | undefined;
   // NOTMYFAULT undefined 수정하기 - null로 와야함
-  certificate:
-    | {
-        data: string[] | null; // 자격증 raw data
-        level1: number; // 기능사 개수
-        level2: number; // 산업기사 개수
-        level3: number; // 기사+ 개수
-      }
-    | null
-    | undefined;
-  language: LanguageType[] | null; // 언어
-  award: string | null;
-  career: string | null;
-  etc: string | null;
+  certificate: {
+    data: string[] | null; // 자격증 raw data
+    level1: number | null; // 기능사 개수
+    level2: number | null; // 산업기사 개수
+    level3: number | null; // 기사+ 개수
+  } | null;
+  language: LanguageType[] | null;
+  award: string[] | null;
+  career: string[] | null;
+  etc: string[] | null;
 }

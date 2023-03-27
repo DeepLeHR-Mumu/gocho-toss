@@ -1,8 +1,8 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { SharedBoxLink } from "../business/sharedBoxLink";
 
-export default {
+const meta: Meta<typeof SharedBoxLink> = {
   title: "SharedBoxLink",
   component: SharedBoxLink,
   argTypes: {
@@ -25,18 +25,20 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof SharedBoxLink>;
-
-const Template: ComponentStory<typeof SharedBoxLink> = (args) => <SharedBoxLink {...args} />;
-
-export const 내부링크 = Template.bind({});
-내부링크.args = {
-  text: "링크 텍스트",
-  colorVariation: "blue",
-  internalUrl: "/33",
-  iconLocation: "left",
-  isFullWidth: false,
 };
 
-export const 외부링크 = Template.bind({});
-외부링크.args = { text: "링크 텍스트", colorVariation: "blue", externalUrl: "/33", isFullWidth: false };
+export default meta;
+type Story = StoryObj<typeof SharedBoxLink>;
+
+export const 내부링크: Story = {
+  args: {
+    text: "링크 텍스트",
+    colorVariation: "blue",
+    internalUrl: "/33",
+    iconLocation: "left",
+    isFullWidth: false,
+  },
+};
+export const 외부링크: Story = {
+  args: { text: "링크 텍스트", colorVariation: "blue", externalUrl: "/33", isFullWidth: false },
+};

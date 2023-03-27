@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import { INTERNAL_URL } from "@/constants/url";
+import { INTERNAL_URL } from "@/constants";
 
 test.use({ storageState: { cookies: [], origins: [] } });
 

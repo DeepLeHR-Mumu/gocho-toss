@@ -2,9 +2,9 @@ import { ResponseDef } from "shared-type/api/responseType";
 
 export interface RequestObjDef {
   userId: number;
-  elemId: number;
+  id: number;
 }
 
 export interface DeleteCompanyBoookmarkArrDef {
-  ({ userId, elemId }: RequestObjDef): Promise<ResponseDef>;
+  ({ userId, id }: RequestObjDef): Promise<ResponseDef>;
 }

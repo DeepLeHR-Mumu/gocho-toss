@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import { axiosInstance } from "@/apis/useIsRefreshLock";
-import { ErrorResponseDef } from "@/types/errorType";
+import { ErrorResponseDef } from "@/types";
 
+import { axiosInstance } from "../../useIsRefreshLock";
 import { recruiterArrKeyObj, GetRecruiterArrDef, ResponseObjDef } from "./type";
 import { recruiterArrSelector } from "./util";
 
@@ -13,10 +13,8 @@ export const getRecruiterArr: GetRecruiterArrDef = async () => {
 };
 
 export const useRecruiterArr = () =>
-  useQuery<ResponseObjDef, AxiosError<ErrorResponseDef>, ReturnType<typeof recruiterArrSelector>>(
-    recruiterArrKeyObj.all,
-    getRecruiterArr,
-    {
-      select: (data) => recruiterArrSelector(data),
-    }
-  );
+  useQuery<ResponseObjDef, AxiosError<ErrorResponseDef>, ReturnType<typeof recruiterArrSelector>>({
+    queryKey: recruiterArrKeyObj.all,
+    queryFn: getRecruiterArr,
+    select: (data) => recruiterArrSelector(data),
+  });

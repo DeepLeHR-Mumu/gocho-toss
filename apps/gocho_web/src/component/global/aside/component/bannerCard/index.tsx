@@ -11,7 +11,7 @@ export const BannerCard: FunctionComponent<BannerCardProps> = ({ title, desc, ba
         <strong css={titleCSS}>{title}</strong>
         <p css={descCSS}>{desc}</p>
         <div css={iconBox}>
-          <Image src={iconSrc} alt="" layout="fill" objectFit="contain" />
+          <Image src={iconSrc} alt="" fill  />
         </div>
       </a>
     </li>

@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
-import { ErrorResponseDef } from "@/types/errorType";
+import { ErrorResponseDef } from "@/types";
 
 import { axiosNoTokenInstance } from "../../useIsRefreshLock";
 import { PostLoginDef, RequestObjDef, ResponseObjDef } from "./type";
@@ -12,4 +12,4 @@ const postLogin: PostLoginDef = async (requestObj) => {
 };
 
 export const useDoLogin = () =>
-  useMutation<AxiosResponse<ResponseObjDef>, AxiosError<ErrorResponseDef>, RequestObjDef>(postLogin);
+  useMutation<AxiosResponse<ResponseObjDef>, AxiosError<ErrorResponseDef>, RequestObjDef>({ mutationFn: postLogin });

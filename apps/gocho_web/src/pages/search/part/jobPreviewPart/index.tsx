@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import { useRouter } from "next/router";
 import { BsChevronRight } from "react-icons/bs";
 
-import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util";
 import { useUnifiedJobSearchArr } from "shared-api/job";
 import { useUserInfo } from "shared-api/auth";
 import { NormalButton } from "shared-ui/common/atom/button";

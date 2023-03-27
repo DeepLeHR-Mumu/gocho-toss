@@ -18,22 +18,20 @@ export const SharedBoxLink: FunctionComponent<ExternalLinkProps | InternalLinkPr
 
   if (internalUrl) {
     return (
-      <Link href={internalUrl} passHref>
-        <a css={cssObj.wrapper(backGroundColor, isFullWidth)}>
-          <div css={cssObj.container}>
-            {iconLocation === "left" && (
-              <div css={cssObj.icon(fontColor, iconLocation)}>
-                <FiArrowLeft />
-              </div>
-            )}
-            <span css={cssObj.text(fontColor)}>{text}</span>
-            {iconLocation === "right" && (
-              <div css={cssObj.icon(fontColor, iconLocation)}>
-                <FiArrowRight />
-              </div>
-            )}
-          </div>
-        </a>
+      <Link href={internalUrl} passHref css={cssObj.wrapper(backGroundColor, isFullWidth)}>
+        <div css={cssObj.container}>
+          {iconLocation === "left" && (
+            <div css={cssObj.icon(fontColor, iconLocation)}>
+              <FiArrowLeft />
+            </div>
+          )}
+          <span css={cssObj.text(fontColor)}>{text}</span>
+          {iconLocation === "right" && (
+            <div css={cssObj.icon(fontColor, iconLocation)}>
+              <FiArrowRight />
+            </div>
+          )}
+        </div>
       </Link>
     );
   }

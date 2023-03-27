@@ -12,7 +12,7 @@ import { useDisLikeComment } from "shared-api/company/useDisLikeComment";
 import { useFakeComment } from "shared-api/company/useFakeComment";
 import { useDisFakeComment } from "shared-api/company/useDisFakeComment";
 import { companyCommentArrKeyObj } from "shared-constant/queryKeyFactory/company/commentArrKeyObj";
-import { dateConverter } from "shared-util/date";
+import { dateConverter } from "shared-util";
 
 import { LoginCommentBoxProps, CommentFormValues } from "./type";
 import {

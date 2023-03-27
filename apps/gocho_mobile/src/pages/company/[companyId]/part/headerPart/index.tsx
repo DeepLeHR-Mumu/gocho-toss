@@ -6,6 +6,7 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
 
 import { useUserInfo } from "shared-api/auth";
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { useCompanyDetail, useCompanyCountInfo } from "shared-api/company";
 import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr, useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { companyCountInfoKeyObj } from "shared-constant/queryKeyFactory/company/companyCountInfoKeyObj";
@@ -57,7 +58,7 @@ export const HeaderPart: FunctionComponent = () => {
     return (
       userData?.id &&
       addMutate(
-        { userId: userData?.id, elemId: companyDetailData?.id as number },
+        { userId: userData?.id, id: companyDetailData?.id as number },
         {
           onSuccess: () => {
             queryClient.invalidateQueries(companyCountInfoKeyObj.countInfo({ id: Number(companyDetailData?.id) }));
@@ -71,7 +72,7 @@ export const HeaderPart: FunctionComponent = () => {
     return (
       userData?.id &&
       deleteMutate(
-        { userId: userData?.id, elemId: companyDetailData?.id as number },
+        { userId: userData?.id, id: companyDetailData?.id as number },
         {
           onSuccess: () => {
             queryClient.invalidateQueries(companyCountInfoKeyObj.countInfo({ id: Number(companyDetailData?.id) }));
@@ -101,7 +102,7 @@ export const HeaderPart: FunctionComponent = () => {
         <div css={container}>
           <div css={infoBox}>
             <div css={logoBox}>
-              <Image src={companyDetailData.logoUrl} layout="fill" objectFit="contain" />
+              <Image alt="" src={companyDetailData.logoUrl || defaultCompanyLogo} fill />
             </div>
             <div css={buttonBox}>
               <button

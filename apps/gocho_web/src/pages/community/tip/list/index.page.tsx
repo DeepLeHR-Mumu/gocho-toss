@@ -15,7 +15,6 @@ const Tip: NextPage = () => {
     <main>
       <PageHead />
       <InvisibleH1 title="생산직 취업꿀팁 - 고초대졸닷컴" />
-
       <ListPart />
     </main>
   );

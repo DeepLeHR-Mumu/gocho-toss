@@ -1,9 +1,9 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { FiUser } from "react-icons/fi";
 
 import { SharedButton } from "../business/sharedButton";
 
-export default {
+const meta: Meta<typeof SharedButton> = {
   title: "SharedButton",
   component: SharedButton,
   argTypes: {
@@ -26,20 +26,23 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof SharedButton>;
+};
 
-const Template: ComponentStory<typeof SharedButton> = (args) => <SharedButton {...args} />;
+export default meta;
+type Story = StoryObj<typeof SharedButton>;
 
-export const 기본 = Template.bind({});
-기본.args = {
-  radius: "rect",
-  fontColor: "white",
-  iconObj: { icon: FiUser, location: "right" },
-  backgroundColor: "#f97c91",
-  size: "small",
-  isFullWidth: true,
-  text: "공통 버튼 컴포넌트",
-  onClickHandler: () => {
-    alert("hi");
+export const 내부링크: Story = {
+  args: {
+    radius: "rect",
+    fontColor: "white",
+    iconObj: { icon: FiUser, location: "right" },
+    backgroundColor: "#f97c91",
+    size: "small",
+    isFullWidth: true,
+    text: "공통 버튼 컴포넌트",
+    onClickHandler: () => {
+      // eslint-disable-next-line no-alert
+      alert("hi");
+    },
   },
 };

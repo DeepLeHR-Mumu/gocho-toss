@@ -7,7 +7,7 @@ export interface RequestObjDef {
   gender?: "남" | "여";
   age?: number;
   military?: "군필" | "미필" | "면제-해당없음";
-  desiredTask?: (
+  desired_task?: (
     | "생산"
     | "공무"
     | "설비"
@@ -19,7 +19,7 @@ export interface RequestObjDef {
     | "시설관리"
     | "기타"
   )[];
-  desiredIndustry?: (
+  desired_industry?: (
     | "제약"
     | "바이오"
     | "반도체"
@@ -48,19 +48,19 @@ export interface RequestObjDef {
     | "조선"
     | "화장품/헬스케어"
   )[];
-  lastEducation?: "고졸" | "초대졸";
+  last_education?: "고졸" | "초대졸";
   highschool?: {
     type: "일반고" | "공업고" | "마이스터고" | "농업고" | "상업고" | "검정고시" | "기타";
     naesin: number;
     absent: number;
     tardy: number;
-    leaveEarly: number;
-    classMiss: number;
+    leave_early: number;
+    class_miss: number;
   };
   college?: {
     department: string;
     grade: number;
-    maxGrade: 4.5 | 4.3;
+    max_grade: 4.5 | 4.3;
     uturn: boolean;
   } | null;
   certificate?: string[] | null;
@@ -80,9 +80,9 @@ export interface postRegisterSpecDef {
     gender,
     age,
     military,
-    desiredTask,
-    desiredIndustry,
-    lastEducation,
+    desired_task,
+    desired_industry,
+    last_education,
     highschool,
     college,
     certificate,

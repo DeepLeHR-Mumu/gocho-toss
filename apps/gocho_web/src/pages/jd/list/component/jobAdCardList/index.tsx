@@ -3,7 +3,7 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Slider from "react-slick";
 
 import { useBannerArr } from "shared-api/banner/useBannerArr";
-import { dummyArrCreator } from "shared-util/dummyArrCreator";
+import { dummyArrCreator } from "shared-util";
 import { JobAdCard } from "shared-ui/card/jobAdCard";
 
 import { setCarouselSetting } from "./util";
