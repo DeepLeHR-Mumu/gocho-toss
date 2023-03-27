@@ -22,7 +22,7 @@ const JdList: NextPageWithLayout = () => {
     filter: "valid",
     status: "all",
     limit: JD_SEARCH_LIMIT,
-    offset: (Number(router.query.page) - 1) * JD_SEARCH_LIMIT,
+    offset: (Number(router.query.page || 1) - 1) * JD_SEARCH_LIMIT,
   });
 
   if (!jobDataObj || isLoading) {

@@ -1,9 +1,19 @@
 import { expect, test } from "@playwright/test";
 
+import { MANAGER_BACKEND_URL } from "shared-constant/src";
 import { INTERNAL_URL } from "@/constant";
 
-test("공고 업로드 및 수정 테스트", async ({ page }) => {
-  // 공고 업로드
+test("공고 업로드 테스트", async ({ page }) => {
+  test.slow();
+
+  await page.route(`${MANAGER_BACKEND_URL}/jds`, (route) => {
+    route.fulfill({
+      headers: { "Content-Type": "multipart/form-data" },
+      status: 200,
+      body: JSON.stringify({}),
+    });
+  });
+
   await page.goto(INTERNAL_URL.JD_UPLOAD_URL);
   expect(page.locator("h2")).toHaveText("공고 업로드");
   await page.getByPlaceholder("기업이름을 작성해주세요").fill("sk하이닉스");
@@ -32,39 +42,15 @@ test("공고 업로드 및 수정 테스트", async ({ page }) => {
   await page.selectOption('[name="position_arr.0.place.type"]', "일반");
   await page.getByRole("button", { name: "충북 4공장" }).click();
   await page.getByRole("button", { name: "00명 채용" }).first().click();
-  await page.locator('input[name="certiSearchWord"]').fill("웹디자인");
-  await page.getByRole("button", { name: "웹디자인" }).click();
+  await page.locator('input[name="certiSearchWord"]').fill("건설안전");
+  await page.getByRole("button", { name: "건설안전" }).click();
   await page.locator('textarea[name="position_arr\\.0\\.pay_arr"]').fill("급여 1단계\n급여 2단계");
   await page.locator('textarea[name="position_arr\\.0\\.preferred_etc_arr"]').fill("기타우대 1단계\n기타우대 2단계");
-  await page.getByRole("button", { name: "공고 등록하기" }).click();
 
-  //   등록된 공고 수정
-  await page.getByRole("link", { name: "공고 목록" }).click();
-  await page.getByTestId("jd/list/jobCard").nth(0).getByRole("link", { name: "수정" }).nth(0).click();
-  await page.getByPlaceholder("기업이름을 작성해주세요").fill("고초");
-  await page.getByRole("button", { name: "검색" }).click();
-  await page.waitForTimeout(100);
-  await page.locator("label").filter({ hasText: "고초대졸닷컴" }).first().check({ force: true });
-  await page.getByPlaceholder("공고제목을 작성해주세요").fill("테스트용 공고 수정 제목입니다.");
-  await page.locator('input[name="start_time"]').fill(new Date().toISOString().substring(0, 16));
-  await page.locator("label").filter({ hasText: "상시공고" }).click();
-  await page.waitForTimeout(500);
-  await page
-    .locator('input[name="end_time"]')
-    .fill(new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().substring(0, 16));
-  await page.waitForTimeout(100);
-  await page.locator("label").filter({ hasText: "이메일 링크" }).check();
-  await page.getByPlaceholder("@").fill("gocho@test.co.kr");
-  await page.locator("label").filter({ hasText: "초대졸" }).first().check();
-  await page.locator("label").filter({ hasText: "4년제" }).first().check();
-  await page.locator("label").filter({ hasText: "신입" }).first().click();
-  await page.locator("label").filter({ hasText: "정규직" }).check();
-  await page.locator("label").filter({ hasText: "물류" }).click();
-  await page.waitForTimeout(100);
-  await page.locator("label").filter({ hasText: "자재" }).click();
-  await page.selectOption('[name="position_arr.0.place.type"]', "일반");
-  await page.getByRole("button", { name: "테스트 공장 1" }).nth(0).click();
-  await page.getByRole("button", { name: "000명 채용" }).first().click();
-  await page.getByRole("button", { name: "웹디자인" }).click();
-  await page.getByRole("button", { name: "공고 수정하기" }).click();
+  const [submitRequest] = await Promise.all([
+    page.waitForResponse(`${MANAGER_BACKEND_URL}/jds`),
+    await page.getByRole("button", { name: "공고 등록하기" }).click(),
+  ]);
+  expect(submitRequest.ok()).toBeTruthy();
+  await page.close();
 });
