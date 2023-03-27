@@ -48,7 +48,7 @@ test("공고 업로드 및 수정 테스트", async ({ page }) => {
   await page.getByPlaceholder("공고제목을 작성해주세요").fill("테스트용 공고 수정 제목입니다.");
   await page.locator('input[name="start_time"]').fill(new Date().toISOString().substring(0, 16));
   await page.locator("label").filter({ hasText: "상시공고" }).click();
-  await page.waitForTimeout(100);
+  await page.waitForTimeout(500);
   await page
     .locator('input[name="end_time"]')
     .fill(new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().substring(0, 16));
