@@ -74,7 +74,7 @@ export const Spec8AwardCareerEtc: FunctionComponent<Spec8AwardCareerEtcProps> = 
           uturn: currentSpecObj.college.uturn,
         },
         certificate: currentSpecObj.certificate && currentSpecObj.certificate,
-        language: currentSpecObj.language,
+        language: currentSpecObj.language.length === 0 ? null : currentSpecObj.language,
         award: currentSpecObj.award,
         career: currentSpecObj.career,
         etc: currentSpecObj.etc,
