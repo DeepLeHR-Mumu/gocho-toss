@@ -27,7 +27,7 @@ const basicSpecRegisterTester = async (page: Page) => {
   // basic 파트
   await page.locator('label[for="secret"]').click();
   await page.getByPlaceholder("나이를 숫자로만 적어주세요 예시: 32").fill("999");
-  await expect(page.locator('p:has-text("최대 나이는 99세 입니다.")')).toBeVisible();
+  await expect(page.locator('p:has-text("최대 나이는 90세 입니다.")')).toBeVisible();
   await page.getByPlaceholder("나이를 숫자로만 적어주세요 예시: 32").fill("20");
   await page.locator('label[for="남0"]').click();
   await page.locator('label[for="여1"]').click();

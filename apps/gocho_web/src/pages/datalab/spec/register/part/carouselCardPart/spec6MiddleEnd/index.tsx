@@ -56,7 +56,7 @@ export const Spec6MiddleEnd: FunctionComponent<Spec6MiddleEndProps> = ({
           uturn: userSpecObj.college.uturn,
         },
         certificate: userSpecObj.certificate && userSpecObj.certificate,
-        language: userSpecObj.language,
+        language: userSpecObj.language.length === 0 ? null : userSpecObj.language,
         award: userSpecObj.award,
         career: userSpecObj.career,
         etc: userSpecObj.etc,
