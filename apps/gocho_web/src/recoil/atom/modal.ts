@@ -17,7 +17,6 @@ export interface postingObjDef {
 export interface tipObjDef {
   id: number;
   title: string;
-  uploaderName: string;
   description: string;
   tagArr: string[];
   createdTime: number;
@@ -25,6 +24,7 @@ export interface tipObjDef {
   viewCount: number;
   thumbnailSrc: string;
   imgPageCount: number;
+  uploaderName: string;
 }
 
 export interface changePostingObjDef {
@@ -95,7 +95,13 @@ export type contentModalNameDef =
   | "writePostingModal"
   | "dialogModal";
 
-export type modalNameDef = "logoutModal" | "signUpModal" | "accountSettingModal" | "findPasswordModal" | "noticeModal";
+export type modalNameDef =
+  | "logoutModal"
+  | "signUpModal"
+  | "accountSettingModal"
+  | "writeKakaoInfoModal"
+  | "findPasswordModal"
+  | "noticeModal";
 
 export interface modalAtomDef {
   activatedModal: modalNameDef | contentModalNameDef;

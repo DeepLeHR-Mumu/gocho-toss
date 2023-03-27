@@ -150,7 +150,7 @@ function UserPCService({ Component, pageProps }: AppProps) {
           `,
         }}
       />
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient} contextSharing>
         <Hydrate state={pageProps.dehydratedState}>
           <Global styles={globalStyle} />
           <ModalPlaceholder />
