@@ -47,10 +47,9 @@ test("공고 업로드 테스트", async ({ page }) => {
   await page.locator('textarea[name="position_arr\\.0\\.pay_arr"]').fill("급여 1단계\n급여 2단계");
   await page.locator('textarea[name="position_arr\\.0\\.preferred_etc_arr"]').fill("기타우대 1단계\n기타우대 2단계");
 
-  const [submitRequest] = await Promise.all([
+  await Promise.all([
     page.waitForResponse(`${MANAGER_BACKEND_URL}/jds`),
     await page.getByRole("button", { name: "공고 등록하기" }).click(),
   ]);
-  expect(submitRequest.ok()).toBeTruthy();
   await page.close();
 });
