@@ -28,20 +28,19 @@ export const useAxiosInterceptor = () => {
     });
   };
 
-  // accessToken이 만료 된 경우 refresh api를 호출하여 access, refresh 토큰을 재발급 받는 함수
+  // accessToken이 만료 된 경우 refresh 함수를 호출하여 access, refreshToken 재발급 받는 함수
   const getRefreshTokenCreator = async (): Promise<{ newToken: string } | void> => {
     const refreshToken = localStorage.getItem("refreshToken");
-
     if (!refreshToken) throw new axios.Cancel("요청 취소");
 
-    const refreshResults = await axios
+    return axios
       .get(`${BACKEND_URL}/auth/refresh`, {
         headers: { "x-refresh-token": refreshToken },
       })
       .then(({ data }) => {
         localStorage.setItem("accessToken", data.data.access_token);
         localStorage.setItem("refreshToken", data.data.refresh_token);
-        // interceptor request안에서 어세스토큰이 만료된 이후 저장된 api 큐를 실행
+        // interceptor request 안에서 accessToken 만료된 이후 저장된 api 큐를 실행
         activeQueue(data.data.access_token);
       })
       .catch((error) => {
@@ -56,8 +55,6 @@ export const useAxiosInterceptor = () => {
         isRequestLock = false;
         readyQueueArr = [];
       });
-
-    return refreshResults;
   };
 
   const requestConfigHandler = async (config: AxiosRequestConfig) => {
@@ -66,6 +63,8 @@ export const useAxiosInterceptor = () => {
 
     // 0. token 없는 경우
     if (!accessTokenData || !refreshTokenData) {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
       throw new axios.Cancel("로그인하지 않은 상태");
     }
 
@@ -77,11 +76,10 @@ export const useAxiosInterceptor = () => {
     const accessBetweenCurrentDiffTime = accessCreateTime.diff(currentTime, "ms");
     const isRefreshAfterCurrentTime = currentTime.isAfter(refreshCreateTime);
 
-    // 1. refreshToken 만료된 경우 -> 모든 토큰 삭제
+    // 1. refreshToken 만료된 경우 -> 모든 token 삭제
     if (isRefreshAfterCurrentTime) {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      // setUserInfoData(null);
       throw new axios.Cancel("refreshToken 만료");
     }
 

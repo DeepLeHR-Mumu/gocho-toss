@@ -60,11 +60,12 @@ export const TipCard: FunctionComponent<TipCardProps | TipCardSkeleton> = ({ tip
 
           <div css={infoContainer}>
             <ul css={infoBox}>
-              <li css={info}>고수들의 취업꿀팁</li>
+              <li css={info}>{tipData.uploaderName}</li>
               <li css={info}>{`${year}.${month}.${date}`}</li>
 
               <li css={numInfo}>
-                <AiOutlineLike /> {tipData.likeCount}
+                <AiOutlineLike />
+                {tipData.likeCount}
               </li>
 
               <li css={numInfo}>

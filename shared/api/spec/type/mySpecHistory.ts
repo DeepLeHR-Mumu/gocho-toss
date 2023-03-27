@@ -52,15 +52,12 @@ export interface specArrDef {
   award: string[] | null;
   career: string[] | null;
   etc: string[] | null;
-  certificate:
-    | {
-        data: string[] | null;
-        level1: number;
-        level2: number;
-        level3: number;
-      }
-    | null
-    | undefined;
+  certificate: {
+    data: string[] | null;
+    level1: number;
+    level2: number;
+    level3: number;
+  } | null;
   college:
     | {
         department: string;
@@ -94,6 +91,6 @@ export interface specArrDef {
 }
 
 export interface getMySpecHistoryDef {
-  evalCount: number;
+  eval_count: number;
   spec_arr: specArrDef[];
 }

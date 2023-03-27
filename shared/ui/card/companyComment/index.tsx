@@ -90,12 +90,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
         </section>
 
         <div css={linkBox}>
-          <LinkButton
-            text="실시간 댓글 보러가기"
-            linkTo={`/company/${companyData.id}/detail`}
-            wide
-            variant="outlined"
-          />
+          <LinkButton text="기업 정보 보러가기" linkTo={`/company/${companyData.id}/detail`} wide variant="outlined" />
         </div>
       </div>
     );
@@ -129,7 +124,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
       </section>
 
       <div css={linkBox}>
-        <LinkButton text="실시간 댓글 보러가기" linkTo={`/company/${companyData.id}/detail`} wide variant="outlined" />
+        <LinkButton text="기업 정보 보러가기" linkTo={`/company/${companyData.id}/detail`} wide variant="outlined" />
       </div>
     </div>
   );

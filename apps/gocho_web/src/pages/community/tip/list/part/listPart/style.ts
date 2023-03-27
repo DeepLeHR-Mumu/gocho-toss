@@ -4,7 +4,7 @@ import { COLORS } from "shared-style/color";
 import { PC_HOVER } from "shared-style/mediaQuery";
 
 export const partContainer = css`
-  background-color: ${COLORS.BLUE_SECOND40};
+  background-color: ${COLORS.BLUE_SECOND70};
   padding: 7.5rem 0 3rem 0;
   border-radius: 2rem 2rem 0 0;
 `;
@@ -14,6 +14,12 @@ export const title = css`
   margin-bottom: 3.5rem;
   font-weight: 700;
   color: ${COLORS.BLUE_FIRST40};
+`;
+
+export const weightPoint = css`
+  margin-left: 0.25rem;
+  font-weight: 400;
+  font-size: 1.5rem;
 `;
 
 export const mainContainer = css`
@@ -107,7 +113,3 @@ export const setTipsFilterButton = (active = false) => {
     }
   `;
 };
-
-export const weightPoint = css`
-  font-weight: 400;
-`;

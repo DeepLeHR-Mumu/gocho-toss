@@ -16,6 +16,7 @@ import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
 import { useToast } from "@recoil/hook/toast";
 
 import { tokenDecryptor } from "shared-util";
+import { useQueryClient } from "@tanstack/react-query";
 import { wrapper, desc, formCSS, closeBtn, formArr, logoContainer, sideErrorMsg } from "./style";
 import { SignUpFormValues } from "./type";
 
@@ -26,6 +27,8 @@ export const SignUpBox: FunctionComponent = () => {
     setValue,
     formState: { errors, dirtyFields },
   } = useForm<SignUpFormValues>({ mode: "onChange" });
+
+  const queryClient = useQueryClient();
   const { refetch } = useUserInfo();
   const { closeModal } = useModal();
   const { mutate } = useDoSignUp();
@@ -38,7 +41,7 @@ export const SignUpBox: FunctionComponent = () => {
     mutate(signUpObj, {
       onError: (error) => {
         const errorResponse = error.response?.data as ErrorResponse;
-        setErrorMsg(errorResponse.error.errorMessage);
+        setErrorMsg(errorResponse.error_message);
         signupAttempt.current += 1;
       },
       onSuccess: (response) => {
@@ -46,6 +49,7 @@ export const SignUpBox: FunctionComponent = () => {
         localStorage.setItem("refreshToken", `${response?.data.refresh_token}`);
         const { nickname } = tokenDecryptor(response.data.access_token);
         signupSuccessEvent();
+        queryClient.invalidateQueries();
         refetch();
         closeModal();
         setCurrentToast("님 환영합니다.", nickname);

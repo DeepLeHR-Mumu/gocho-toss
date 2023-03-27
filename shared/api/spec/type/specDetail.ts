@@ -38,15 +38,12 @@ export interface SpecDetailObjDef {
     | null
     | undefined;
   // NOTMYFAULT undefined 수정하기 - null로 와야함
-  certificate:
-    | {
-        data: string[] | null;
-        level1: number;
-        level2: number;
-        level3: number;
-      }
-    | null
-    | undefined;
+  certificate: {
+    data: string[] | null;
+    level1: number | null;
+    level2: number | null;
+    level3: number | null;
+  };
   language: LanguageType | null;
   award: string[] | null;
   career: string[] | null;

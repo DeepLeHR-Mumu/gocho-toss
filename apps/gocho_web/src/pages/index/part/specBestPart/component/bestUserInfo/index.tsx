@@ -30,6 +30,7 @@ import {
   bestUserDesc,
   bestUserNickName,
   bounceIcon,
+  noValueText,
 } from "./style";
 import { BestUserInfoProps, skeletonProps } from "./type";
 
@@ -43,7 +44,10 @@ export const BestUserBox: FunctionComponent<BestUserInfoProps | skeletonProps> =
   }
 
   const educationTypeTitle = bestUserData.college ? "학과" : "학교종류";
-  const educationType = bestUserData.college ? `${bestUserData.college.department}` : `${bestUserData.highschool.type}`;
+  const educationType = bestUserData.college?.department
+    ? `${bestUserData.college.department}`
+    : `${bestUserData.highschool.type}`;
+  const isCerti = bestUserData.certificate?.data !== null;
 
   return (
     <div css={bestUserInfoWrapper}>
@@ -88,23 +92,32 @@ export const BestUserBox: FunctionComponent<BestUserInfoProps | skeletonProps> =
               <span css={infoValueCSS}>{educationType}</span>
             </li>
           </ul>
-          {bestUserData.certificate && (
-            <ul css={infoArrCSS}>
-              <li>
-                기능사
-                <span css={infoValueCSS}>{bestUserData.certificate.level1}</span>
-              </li>
-              <li>
-                산업기사
-                <span css={infoValueCSS}>{bestUserData.certificate.level2}</span>
-              </li>
-              <li>
-                산업기사+
-                <span css={infoValueCSS}>{bestUserData.certificate.level3}</span>
-              </li>
-            </ul>
-          )}
-
+          <ul css={infoArrCSS}>
+            {isCerti ? (
+              <>
+                <li>
+                  기능사
+                  {bestUserData.certificate?.level1 !== null && (
+                    <span css={infoValueCSS}>{bestUserData.certificate?.level1}</span>
+                  )}
+                </li>
+                <li>
+                  산업기사
+                  {bestUserData.certificate?.level2 !== null && (
+                    <span css={infoValueCSS}>{bestUserData.certificate?.level2}</span>
+                  )}
+                </li>
+                <li>
+                  기사+
+                  {bestUserData.certificate?.level3 !== null && (
+                    <span css={infoValueCSS}>{bestUserData.certificate?.level3}</span>
+                  )}
+                </li>
+              </>
+            ) : (
+              <li css={noValueText}>자격증 정보가 없습니다.</li>
+            )}
+          </ul>
           <div css={cardFooter}>
             <p css={bestUserDesc}>
               화제의 스펙

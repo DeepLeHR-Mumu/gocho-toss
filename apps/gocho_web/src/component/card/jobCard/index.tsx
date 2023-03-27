@@ -193,7 +193,8 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
                 />
               </li>
               <li css={detailInfo}>
-                {jobData.placeArr[0]} {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
+                {jobData.placeArr[0].split(" ").slice(0, 2).join(" ")}{" "}
+                {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
               </li>
 
               <li css={detailInfo}>

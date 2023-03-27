@@ -4,7 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { profileMenuArr } from "@component/global/header/constant";
 
-import { myProfileMenuWrapper, myProfileTitle, myProfileMenuCSS, logoutCSS } from "./style";
+import { myProfileMenuWrapper, myProfileMenuCSS, logoutCSS } from "./style";
 import { MyProfileMenuProps } from "./type";
 
 declare global {
@@ -32,7 +32,6 @@ export const MyProfileMenu: FunctionComponent<MyProfileMenuProps> = ({ active })
 
   return (
     <article css={myProfileMenuWrapper(active)}>
-      <p css={myProfileTitle}>나의 프로필</p>
       <ul css={myProfileMenuCSS}>
         {profileMenuArr.map((profileMenu) => {
           return (

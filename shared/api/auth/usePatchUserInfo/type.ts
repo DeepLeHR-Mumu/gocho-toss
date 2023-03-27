@@ -19,14 +19,12 @@ export interface PatchUserInfoDef {
 }
 
 export interface ErrorResponse extends AxiosError {
-  error: {
-    status: number;
-    errorMessage: string;
-    errorCode: number;
-    statusName: string;
-    path: string;
-    method: string;
-  };
+  status: string;
+  error_message: string;
+  error_code: number;
+  status_name: string;
+  path: string;
+  method: string;
 }
 
 export interface UsePatchUserInfoProps {

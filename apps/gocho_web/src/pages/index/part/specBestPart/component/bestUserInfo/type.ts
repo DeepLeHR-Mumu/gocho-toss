@@ -18,9 +18,10 @@ export interface BestUserInfoProps {
     college: { department: string } | null;
     highschool: { type: string };
     certificate: {
-      level1: number;
-      level2: number;
-      level3: number;
+      data: string[] | null;
+      level1: number | null;
+      level2: number | null;
+      level3: number | null;
     } | null;
     id: number;
   };

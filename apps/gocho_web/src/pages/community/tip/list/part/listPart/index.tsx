@@ -44,8 +44,8 @@ export const ListPart: FunctionComponent = () => {
       <Layout>
         <InvisibleH2 title="생산/기능직 취업 꿀팁" />
         <p css={title}>
-          고수들의 🍯취업꿀팁
-          <span css={weightPoint}> by.고초대졸 닷컴</span>
+          고수들의 취업🍯팁
+          <span css={weightPoint}> by.고초대졸닷컴</span>
         </p>
         <div css={mainContainer}>
           <div css={buttonArrContainer}>
@@ -68,13 +68,7 @@ export const ListPart: FunctionComponent = () => {
           <div css={listContainer}>
             <form css={formCSS} onSubmit={handleSubmit(tipSearch)}>
               <div css={searchWrapper}>
-                <input
-                  {...register("q", {
-                    required: true,
-                  })}
-                  css={searchBox}
-                  placeholder="검색어를 입력해주세요"
-                />
+                <input {...register("q")} css={searchBox} placeholder="검색어를 입력해주세요" />
                 <button type="submit" css={searchButton} aria-label="꿀팁 검색">
                   <FiSearch />
                 </button>

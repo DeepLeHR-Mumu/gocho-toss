@@ -132,17 +132,10 @@ export const infoValueCSS = css`
   ${shorten()}
 `;
 
-export const dateCSS = css`
-  font-size: 0.75rem;
-  color: #646464;
+export const noValueText = css`
   font-weight: 400;
-  padding-left: 10px;
-`;
-
-export const workingTime = css`
   font-size: 0.875rem;
-  color: ${COLORS.GRAY20};
-  font-weight: 400;
+  color: ${COLORS.GRAY40};
 `;
 
 export const cardFooter = css`

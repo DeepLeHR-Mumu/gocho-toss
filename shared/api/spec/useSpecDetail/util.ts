@@ -49,11 +49,14 @@ export const selector = (data: SpecDetailObjDef) => {
     etc: data.etc,
     score: data.score,
     scoreCount: data.score_count,
-    evals: {
-      strongPointArr: data.evals.strength_count_arr,
-      weakPointArr: data.evals.weakness_count_arr,
-      feedbackArr: data.evals.feedback_arr,
-    },
+    evals:
+      data.evals === null
+        ? null
+        : {
+            strongPointArr: data.evals.strength_count_arr,
+            weakPointArr: data.evals.weakness_count_arr,
+            feedbackArr: data.evals.feedback_arr,
+          },
     isMine: data.is_mine,
     didEval: data.did_eval,
     evalCount: data.eval_count,

@@ -74,8 +74,8 @@ export const asideLink = css`
 `;
 
 export const pointLink = css`
-  background-color: ${COLORS.BLUE_SECOND40};
-  color: ${COLORS.BLUE_FIRST40};
+  background-color: ${COLORS.BLUE_NEON40};
+  color: ${COLORS.GRAY100};
 `;
 
 export const activeLink = css`

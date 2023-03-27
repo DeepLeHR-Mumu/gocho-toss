@@ -112,7 +112,7 @@ export const FactoryInfoPart: FunctionComponent = () => {
                     <strong css={addressTitle}>주소</strong>
                     <p css={address}>{factory.address}</p>
                   </div>
-                  {/* LATER : kakao factory map join */}
+                  {/* TODO: kakao factory map join */}
                   {/* <KakaoMap address={factory.address} /> */}
                 </div>
 
@@ -130,7 +130,7 @@ export const FactoryInfoPart: FunctionComponent = () => {
                   <div css={flexBox}>
                     <div css={infoChildBox}>
                       <div css={infoIcon}>
-                        <Image fill src={hireNumberIcon} alt="공장 임직원 정보 아이콘" />
+                        <Image fill src={hireNumberIcon} alt="공장 직원 정보 아이콘" />
                       </div>
                       <div css={infoText}>
                         <strong css={infoTitle}>임직원</strong>
@@ -139,13 +139,21 @@ export const FactoryInfoPart: FunctionComponent = () => {
                     </div>
                     <div css={infoChildBox}>
                       <div css={infoIcon}>
-                        <Image fill src={genderIcon} alt="공장 임직원 성비 정보 아이콘" />
+                        <Image fill src={genderIcon} alt="공장 직원 성비 정보 아이콘" />
                       </div>
                       <div css={infoText}>
-                        <strong css={infoTitle}>남</strong>
-                        <div css={info}>{Math.round((factory.maleNumber / totalNumber) * 100)}% </div>
-                        <strong css={infoTitle}>여</strong>
-                        <p css={info}>{Math.round((factory.femaleNumber / totalNumber) * 100)}%</p>
+                        <strong css={infoTitle}>
+                          남
+                          <div css={info}>
+                            {totalNumber !== 0 ? Math.round((factory.maleNumber / totalNumber) * 100) : 0}%
+                          </div>
+                        </strong>
+                        <strong css={infoTitle}>
+                          여
+                          <p css={info}>
+                            {totalNumber !== 0 ? Math.round((factory.femaleNumber / totalNumber) * 100) : 0}%
+                          </p>
+                        </strong>
                       </div>
                     </div>
                     <div css={infoChildBox}>

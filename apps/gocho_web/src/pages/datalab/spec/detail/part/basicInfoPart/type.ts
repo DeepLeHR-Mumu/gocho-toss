@@ -25,9 +25,9 @@ export interface BasicInfoPartProps {
     };
     certificate: {
       data: string[] | null;
-      level1: number;
-      level2: number;
-      level3: number;
+      level1: number | null;
+      level2: number | null;
+      level3: number | null;
     } | null;
     college: {
       department: string;
