@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import { BUSINESS_BACKEND_URL } from "shared-constant";
 import { managerTokenDecryptor } from "shared-util";
 
-import { useModal,useUserState } from "@/globalStates";
+import { useModal, useUserState } from "@/globalStates";
 import { INTERNAL_URL } from "@/constants";
 import { ErrorResponseDef } from "@/types";
 
