@@ -1,12 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import { axiosInstance } from "../../axiosInstance";
+import { axiosNoTokenInstance } from "../../axiosInstance";
 
 import { PostKakaoLoginDef, RequestObjDef, ResponseObjDef, useDoLoginProps } from "./type";
 
 const postKakaoLogin: PostKakaoLoginDef = async (requestObj) => {
-  const { data } = await axiosInstance.post("/auth/kakao", { ...requestObj });
+  const { data } = await axiosNoTokenInstance.post("/auth/kakao", { ...requestObj });
   return data;
 };
 
