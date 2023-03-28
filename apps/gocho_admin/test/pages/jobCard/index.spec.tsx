@@ -15,17 +15,10 @@ describe("공고 리스트 jobCard 컴포넌트 테스트", () => {
             id: 13994,
             applyUrl: "https://naver.com",
             companyName: "고초대졸닷컴",
-            companyId: 119,
             title: "테스트용 공고 제목입니다",
-            view: 0,
             startTime: 1679710980000,
             endTime: 253402268340000,
             taskArr: ["공무"],
-            eduArr: ["고졸"],
-            placeArr: ["기타 근무지"],
-            rotationArr: ["5조 3교대"],
-            contractArr: ["계약>정규"],
-            requiredExpArr: ["경력"],
           }}
         />
       </QueryClientProvider>

@@ -43,17 +43,10 @@ export const 기본 = Template.bind({});
     id: 13995,
     applyUrl: "https://test.co.kr",
     companyName: "고초대졸닷컴",
-    companyId: 1,
     title:
       "테스트 공고에 대한 제목 테스트 공고에 대한 제목 테스트 공고에 대한 제목 테스트 공고에 대한 제목 테스트 공고에 대한 제목",
-    view: 124,
     startTime: 1679711400000,
     endTime: 1679797800000,
     taskArr: ["공무"],
-    eduArr: ["고졸"],
-    placeArr: ["기타 근무지"],
-    rotationArr: ["5조 3교대"],
-    contractArr: ["정규직"],
-    requiredExpArr: ["신입"],
   },
 };
