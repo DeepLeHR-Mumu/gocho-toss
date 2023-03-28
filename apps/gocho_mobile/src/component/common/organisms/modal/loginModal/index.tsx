@@ -12,11 +12,11 @@ import { loginModalCloseEvent, loginModalOpenEvent, loginSuccessEvent } from "sh
 import { EMAIL_REGEXP, PWD_REGEXP, MAIN_URL, EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
-import { useToast } from "@recoil/hook/toast";
-import { useModal } from "@recoil/hook/modal";
 import { BottomPopup } from "@component/bottomPopup";
 import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
 import { tokenDecryptor } from "shared-util";
+
+import { useToast, useModal } from "@/globalStates";
 
 import {
   wrapper,
@@ -43,9 +43,9 @@ export const LoginModal: FunctionComponent = () => {
   const queryClient = useQueryClient();
 
   const router = useRouter();
-  const { setCurrentToast } = useToast();
+  const { setToastMessage } = useToast();
   const { mutate } = useDoLogin();
-  const { closeModal, setCurrentModal, currentModal } = useModal();
+  const { closeModal, setModal, contentObj } = useModal();
   const ref = useRef(0);
 
   const [errorMsg, setErrorMsg] = useState<null | string>(null);
@@ -64,7 +64,7 @@ export const LoginModal: FunctionComponent = () => {
         closeModal();
         const { id, nickname } = tokenDecryptor(response.data.access_token);
         loginSuccessEvent(id, "gocho");
-        setCurrentToast("님 반갑습니다.", nickname);
+        setToastMessage("님 반갑습니다.", nickname);
       },
     });
   };
@@ -83,7 +83,7 @@ export const LoginModal: FunctionComponent = () => {
   return (
     <BottomPopup>
       <div css={wrapper}>
-        {currentModal?.modalContentObj?.button === "close" && (
+        {contentObj?.button === "close" && (
           <button
             css={closeButton}
             type="button"
@@ -96,7 +96,7 @@ export const LoginModal: FunctionComponent = () => {
           </button>
         )}
 
-        {currentModal?.modalContentObj?.button === "home" && (
+        {contentObj?.button === "home" && (
           <Link href={MAIN_URL}>
             <a css={closeButton}>홈으로</a>
           </Link>
@@ -164,14 +164,14 @@ export const LoginModal: FunctionComponent = () => {
             variant="text"
             text="고초대졸 회원가입하기"
             buttonClick={() => {
-              setCurrentModal("signUpModal");
+              setModal("signUpModal");
             }}
           />
           <button
             type="button"
             css={findPasswordButton}
             onClick={() => {
-              setCurrentModal("findPasswordModal");
+              setModal("findPasswordModal");
             }}
           >
             비밀번호 찾기

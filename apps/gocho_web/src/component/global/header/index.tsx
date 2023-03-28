@@ -15,8 +15,8 @@ import { Layout } from "@component/layout";
 import { Profile } from "@component/common/molecule/profile";
 import { UnAuthMenu } from "@component/common/molecule/unAuthMenu";
 import { menuArr } from "@component/global/header/constant";
-import { useToast } from "@recoil/hook/toast";
-import { useModal } from "@recoil/hook/modal";
+
+import { useToast, useModal } from "@/globalStates";
 
 import { SubMenuButton } from "./component/subMenuButton";
 import {
@@ -44,7 +44,7 @@ export const Header: FunctionComponent = () => {
   const { closeModal } = useModal();
 
   const router = useRouter();
-  const { setCurrentToast } = useToast();
+  const { setToastMessage } = useToast();
   const { pathname } = router;
 
   const handleParam = (typeKeyword: ChangeEvent<HTMLInputElement>) => {
@@ -62,7 +62,7 @@ export const Header: FunctionComponent = () => {
     const regExp = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/g;
 
     if (query.match(regExp)) {
-      setCurrentToast("검색어에 특수문자는 포함될 수 없습니다.");
+      setToastMessage("검색어에 특수문자는 포함될 수 없습니다.");
       return;
     }
     globalSearchEvent(query);

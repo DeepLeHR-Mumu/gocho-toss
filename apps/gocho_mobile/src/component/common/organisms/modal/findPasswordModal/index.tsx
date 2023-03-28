@@ -8,9 +8,9 @@ import { useFindPassword } from "shared-api/auth";
 import { EMAIL_REGEXP, EMAIL_ERROR_MESSAGE } from "shared-constant";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
-import { useModal } from "@recoil/hook/modal";
-import { useToast } from "@recoil/hook/toast";
 import { BottomPopup } from "@component/bottomPopup";
+
+import { useModal, useToast } from "@/globalStates";
 
 import { wrapper, desc, formCSS, formArr, closeButton, loginButton, logoContainer } from "./style";
 import { LoginFormValues } from "./type";
@@ -31,7 +31,7 @@ export const FindPasswordModal: FunctionComponent = () => {
     formState: { errors, dirtyFields },
   } = useForm<LoginFormValues>({ mode: "onChange" });
 
-  const { setCurrentToast } = useToast();
+  const { setToastMessage } = useToast();
   const { mutate } = useFindPassword();
   const { closeModal } = useModal();
 
@@ -46,7 +46,7 @@ export const FindPasswordModal: FunctionComponent = () => {
       },
 
       onSuccess: () => {
-        setCurrentToast("메일이 전송됐습니다. 이메일을 확인해주세요.");
+        setToastMessage("메일이 전송됐습니다. 이메일을 확인해주세요.");
       },
     });
   };

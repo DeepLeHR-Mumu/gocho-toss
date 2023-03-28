@@ -1,21 +1,21 @@
 import { FunctionComponent } from "react";
 
-import { useModal } from "@recoil/hook/modal";
+import { useModal } from "@/globalStates";
 
 import { wrapper, buttonCSS, divider } from "./style";
 import { unauthorizedMEnuDef } from "./type";
 
 export const UnauthorizedMenu: FunctionComponent<unauthorizedMEnuDef> = ({ setOpenedElement }) => {
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
 
   const openLoginModal = () => {
     setOpenedElement(null);
-    setCurrentModal("loginModal", { button: "close" });
+    setModal("loginModal", { button: "close" });
   };
 
   const openSignUpModal = () => {
     setOpenedElement(null);
-    setCurrentModal("signUpModal");
+    setModal("signUpModal");
   };
 
   return (

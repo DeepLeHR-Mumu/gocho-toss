@@ -2,13 +2,13 @@ import { FunctionComponent } from "react";
 import { FiChevronLeft, FiLink } from "react-icons/fi";
 
 import { JOBS_DETAIL_URL } from "shared-constant";
-import { useToast } from "@recoil/hook/toast";
+import { useToast } from "@/globalStates";
 
 import { menuWrapper, flexBox, backButton, jobTitle, shareIcon } from "./style";
 import { TopMenuDef } from "./type";
 
 export const TopMenu: FunctionComponent<TopMenuDef> = ({ title, id }) => {
-  const { setCurrentToast } = useToast();
+  const { setToastMessage } = useToast();
   const copyJobLink = () => {
     navigator.clipboard.writeText(`https://고초대졸.com${JOBS_DETAIL_URL}/${id}`);
   };
@@ -33,7 +33,7 @@ export const TopMenu: FunctionComponent<TopMenuDef> = ({ title, id }) => {
         css={shareIcon}
         onClick={() => {
           copyJobLink();
-          setCurrentToast("링크가 복사되었습니다.");
+          setToastMessage("링크가 복사되었습니다.");
         }}
       >
         <FiLink />

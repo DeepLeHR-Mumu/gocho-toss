@@ -14,7 +14,7 @@ import { jdListFunnelEvent, jdSearchEvent } from "shared-ga/jd";
 import { Layout } from "@component/layout";
 import { Pagination } from "@pages/jd/component/pagination";
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
-import { useToast } from "@recoil/hook/toast";
+import { useToast } from "@/globalStates";
 
 import { JobCardList } from "../../component/jobCardList";
 import { Filter } from "../../component/filter";
@@ -42,7 +42,7 @@ export const ListPart: FunctionComponent = () => {
 
   const router = useRouter();
 
-  const { setCurrentToast } = useToast();
+  const { setToastMessage } = useToast();
 
   const { register, handleSubmit, watch, setValue, getValues } = useForm<SearchValues>({
     defaultValues: {
@@ -70,7 +70,7 @@ export const ListPart: FunctionComponent = () => {
 
   const jdSearch: SubmitHandler<SearchValues> = (searchVal) => {
     if (searchVal.searchWord?.match(specialCharacterRegExp)) {
-      setCurrentToast("검색어에 특수문자는 포함될 수 없습니다.");
+      setToastMessage("검색어에 특수문자는 포함될 수 없습니다.");
       return;
     }
     router.push({ query: { ...router.query, page: 1 } });

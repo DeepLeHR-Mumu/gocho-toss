@@ -18,13 +18,12 @@ import { NormalButton } from "shared-ui/common/atom/button";
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
 import { signupModalOpenEvent, signupModalCloseEvent, signupSuccessEvent } from "shared-ga/auth";
+import { tokenDecryptor } from "shared-util";
 
-import { useModal } from "@recoil/hook/modal";
 import { BottomPopup } from "@component/bottomPopup";
 import { closeButton } from "@component/common/organisms/modal/loginModal/style";
-import { useToast } from "@recoil/hook/toast";
+import { useModal, useToast } from "@/globalStates";
 
-import { tokenDecryptor } from "shared-util";
 import { wrapper, desc, formCSS, formArr, logoContainer, bottomDesc, colorPoint, sideErrorMsg } from "./style";
 import { SignUpFormValues } from "./type";
 
@@ -37,7 +36,7 @@ export const SignUpModal: FunctionComponent = () => {
   } = useForm<SignUpFormValues>({ mode: "onChange" });
   const [errorMsg, setErrorMsg] = useState<null | string>(null);
   const queryClient = useQueryClient();
-  const { setCurrentToast } = useToast();
+  const { setToastMessage } = useToast();
   const { refetch } = useUserInfo();
   const router = useRouter();
   const signupAttempt = useRef(0);
@@ -59,7 +58,7 @@ export const SignUpModal: FunctionComponent = () => {
         queryClient.invalidateQueries();
         closeModal();
         refetch();
-        setCurrentToast("님 환영합니다.", nickname);
+        setToastMessage("님 환영합니다.", nickname);
       },
     });
   };

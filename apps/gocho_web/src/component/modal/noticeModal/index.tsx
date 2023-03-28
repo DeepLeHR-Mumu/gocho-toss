@@ -5,7 +5,7 @@ import gochoMonoSrc from "shared-image/global/deepLeLogo/smallMono.svg";
 import constructionSrc from "shared-image/global/jobi/construction.png";
 import { NormalButton } from "shared-ui/common/atom/button";
 
-import { useModal } from "@recoil/hook/modal";
+import { useModal } from "@/globalStates";
 
 import { ModalComponent } from "../modalBackground";
 import {

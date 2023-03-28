@@ -7,7 +7,7 @@ import { useUserInfo } from "shared-api/auth";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { myFilterLoadEvent, myFilterSaveEvent } from "shared-ga/jd";
 
-import { useToast } from "@recoil/hook/toast";
+import { useToast } from "@/globalStates";
 
 import { filterMenuListArr } from "./constant";
 import { FilterProps, filterMenuDef, watchListDef } from "./type";
@@ -32,7 +32,7 @@ import {
 
 export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setValue, getValues }) => {
   const [activeMenu, setActiveMenu] = useState<filterMenuDef | null>(null);
-  const { setCurrentToast } = useToast();
+  const { setToastMessage } = useToast();
   const watchList: watchListDef[] = filterMenuListArr.map((menu) => {
     return { query: menu.query, categoryArr: watch(menu.query) };
   });
@@ -55,18 +55,18 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
 
   const applyUserFilter = () => {
     if (!isSuccess) {
-      setCurrentToast("로그인후 My 필터를 저장해주세요.");
+      setToastMessage("로그인후 My 필터를 저장해주세요.");
       return;
     }
 
     if (!userFilter) {
-      setCurrentToast("My필터를 저장후 불러주세요.");
+      setToastMessage("My필터를 저장후 불러주세요.");
       return;
     }
 
     if (userFilterSuccess) {
       myFilterLoadEvent();
-      setCurrentToast("My필터를 불러왔습니다.");
+      setToastMessage("My필터를 불러왔습니다.");
     }
 
     const userFilterArr: watchListDef[] = [
@@ -86,7 +86,7 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
 
   const saveUserFilter = () => {
     if (!isSuccess) {
-      setCurrentToast("로그인후 My 필터를 저장해주세요.");
+      setToastMessage("로그인후 My 필터를 저장해주세요.");
       return;
     }
 
@@ -107,7 +107,7 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
         onSuccess: () => {
           refetchUserFilter();
           myFilterSaveEvent();
-          setCurrentToast("My필터가 저장되었습니다");
+          setToastMessage("My필터가 저장되었습니다");
         },
       }
     );

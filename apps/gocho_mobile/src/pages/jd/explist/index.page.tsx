@@ -12,7 +12,7 @@ import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { JOBS_EXPLIST_URL } from "shared-constant";
 import { expiredJdListFunnelEvent, expiredJdListSortingEvent } from "shared-ga/jd";
 
-import { useToast } from "@recoil/hook/toast";
+import { useToast } from "@/globalStates";
 
 import { PageHead } from "./pageHead";
 import { ExpJobCardList } from "./component/expJobCardList";
@@ -42,12 +42,12 @@ const JobsExpList: NextPage = () => {
     },
   });
 
-  const { setCurrentToast } = useToast();
+  const { setToastMessage } = useToast();
 
   const jdSearchHandler: SubmitHandler<PostingValues> = (searchVal) => {
     const specialCharacterRegEx = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/g;
     if (searchVal.name?.match(specialCharacterRegEx)) {
-      setCurrentToast("검색어에 특수문자는 포함될 수 없습니다.");
+      setToastMessage("검색어에 특수문자는 포함될 수 없습니다.");
       return;
     }
 
