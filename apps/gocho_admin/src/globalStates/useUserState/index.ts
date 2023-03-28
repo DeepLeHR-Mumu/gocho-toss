@@ -1,8 +1,9 @@
 import { create } from "zustand";
 import { useEffect } from "react";
 
-import { managerTokenDecryptor, sharedGetLocalStorageItem } from "shared-util";
+import { managerTokenDecryptor } from "shared-util";
 
+import { userGetLocalStoargetItem } from "@/utils";
 import { UserStateInfoProps, UseUserStateDef } from "./type";
 
 const userStateInfo = create<UserStateInfoProps>((set) => ({
@@ -14,7 +15,7 @@ export const useUserState: UseUserStateDef = () => {
   const { userState: userInfoData, setUserState: setUserInfoData } = userStateInfo();
 
   useEffect(() => {
-    const token = sharedGetLocalStorageItem("accessToken");
+    const token = userGetLocalStoargetItem("USER")?.accessToken;
 
     if (userInfoData === null && token) {
       const { id, company_id, company_name, company_logo, company_industry, exp, email, name, department } =

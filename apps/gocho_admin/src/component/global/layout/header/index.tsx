@@ -4,11 +4,11 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 
-import { sharedGetLocalStorageItem, sharedRemoveLocalStorage } from "shared-util";
 import { LinkButton } from "shared-ui/common/atom/button/linkButton";
 import { NormalButton } from "shared-ui/common/atom/button/normalButton";
 import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
 
+import { userGetLocalStoargetItem, userResetLocalStorageItem } from "@/utils";
 import { INTERNAL_URL } from "@/constant";
 
 import { cssObj } from "./style";
@@ -19,15 +19,15 @@ export const Header: FunctionComponent = () => {
   const [isLogined, setIsLogined] = useState<boolean>(false);
 
   const doLogout = () => {
-    sharedRemoveLocalStorage("accessToken");
+    userResetLocalStorageItem("USER");
     setIsLogined(false);
     router.push(INTERNAL_URL.LOGIN_URL);
     queryClient.resetQueries();
   };
 
   useEffect(() => {
-    const isAccessToken = sharedGetLocalStorageItem("accessToken") !== null;
-    setIsLogined(isAccessToken);
+    const userObjInfo = userGetLocalStoargetItem("USER");
+    setIsLogined(userObjInfo === undefined);
   }, [isLogined, router]);
 
   return (
