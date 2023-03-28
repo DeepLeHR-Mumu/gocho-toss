@@ -12,10 +12,8 @@ import hireNumberIcon from "shared-image/page/factory/hireNumber_icon.svg";
 import busTrueIcon from "shared-image/page/factory/bus_true_icon.svg";
 import busFalseIcon from "shared-image/page/factory/bus_false_icon.svg";
 
-import { factoryObjDef } from "@recoil/atom/modal";
-import { useModal } from "@recoil/hook/modal";
-import { useToast } from "@recoil/hook/toast";
 import { CloseButton } from "@component/common/atom/closeButton";
+import { factoryObjDef, useModal, useToast } from "@/globalStates";
 
 import { copyString } from "./util";
 import {
@@ -41,17 +39,16 @@ import {
 } from "./style";
 
 export const FactoryModal: FunctionComponent = () => {
-  const { currentModal, closeModal } = useModal();
-  const { setCurrentToast } = useToast();
+  const { contentObj, closeModal } = useModal();
+  const { setToastMessage } = useToast();
 
-  const { address, maleNumber, femaleNumber, product, bus, dormitory, factoryName } =
-    currentModal?.modalContentObj as factoryObjDef;
+  const { address, maleNumber, femaleNumber, product, bus, dormitory, factoryName } = contentObj as factoryObjDef;
 
   const hireNumber = maleNumber + femaleNumber;
 
   const handleCopyAddress = () => {
     copyString(address);
-    setCurrentToast("위치가 복사되었습니다.");
+    setToastMessage("위치가 복사되었습니다.");
   };
 
   return (

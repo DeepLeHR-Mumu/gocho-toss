@@ -8,8 +8,8 @@ import { userInfoKeyObj } from "shared-constant/queryKeyFactory/user/infoKeyObj"
 import jobiFighting from "shared-image/global/jobi/fighting.png";
 import { specRegisterEvent } from "shared-ga/spec";
 
-import { useModal } from "@recoil/hook/modal";
 import { TopTitle } from "@pages/datalab/spec/register/component";
+import { useModal } from "@/globalStates";
 
 import { specCardWrapper } from "../style";
 
@@ -21,7 +21,7 @@ export const Spec6MiddleEnd: FunctionComponent<Spec6MiddleEndProps> = ({
   movePrevCard,
   writeMoreSpecHandler,
 }) => {
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
 
   const { mutate } = useRegisterSpec();
   const queryClient = useQueryClient();
@@ -66,7 +66,7 @@ export const Spec6MiddleEnd: FunctionComponent<Spec6MiddleEndProps> = ({
           const errorCode = error.response?.status;
           if (errorCode === 401) {
             queryClient.invalidateQueries(userInfoKeyObj.userInfo);
-            setCurrentModal("loginModal", { button: "home" });
+            setModal("loginModal", { button: "home" });
           }
         },
         onSuccess: () => {

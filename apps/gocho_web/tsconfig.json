@@ -5,8 +5,10 @@
     "jsxImportSource": "@emotion/react",
     "baseUrl": ".",
     "paths": {
+      "@/*": ["src/*"],
       "@public/*": ["public/*"],
       "@component/*": ["src/component/*"],
+      "@globalStates/*": ["src/globalStates/*"],
       "@constant/*": ["src/constant/*"],
       "@pages/*": ["src/pages/*"],
       "@type/*": ["src/type/*"],
@@ -17,6 +19,6 @@
       "@hook/*": ["src/hook/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next-sitemap.config.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next-sitemap.config.js", "test/component/useToast.spec.tsx"],
   "exclude": ["node_modules", "e2e"]
 }

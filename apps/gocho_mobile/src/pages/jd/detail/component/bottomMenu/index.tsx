@@ -4,11 +4,11 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
-import { useModal } from "@recoil/hook/modal";
 import { useUserInfo } from "shared-api/auth";
 import { dDayCalculator } from "shared-util";
 
 import { NormalButton } from "shared-ui/common/atom/button";
+import { useModal } from "@/globalStates";
 import { BottomMenuProps } from "./type";
 import { wrapper, bookmarkButton, buttonBox } from "./style";
 
@@ -19,7 +19,7 @@ export const BottomMenu: FunctionComponent<BottomMenuProps> = ({
   setOpenComment,
 }) => {
   const queryClient = useQueryClient();
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
   const { isSuccess } = useUserInfo();
 
   const openJobInNewTab = () => {
@@ -85,7 +85,7 @@ export const BottomMenu: FunctionComponent<BottomMenuProps> = ({
         css={bookmarkButton(isBookmarked)}
         onClick={() => {
           if (!isSuccess) {
-            setCurrentModal("loginModal", { button: "close" });
+            setModal("loginModal", { button: "close" });
           }
           return isBookmarked ? deleteJobBookmark() : addJobBookmark();
         }}

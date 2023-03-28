@@ -10,8 +10,8 @@ import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 // import { specDetailKeyObj } from "shared-constant/queryKeyFactory/spec/detailKeyObj";
 
-import { useModal } from "@recoil/hook/modal";
 import { Layout } from "@component/layout";
+import { useModal } from "@/globalStates";
 
 import { PageHead } from "./pageHead";
 import { BasicInfoPart } from "./part/basicInfoPart";
@@ -25,22 +25,22 @@ const SpecDetail: NextPage = () => {
   const { specId } = router.query;
   const { data: specDetailData, isLoading } = useSpecDetail({ specId: Number(specId) });
   const { error: userError } = useUserInfo();
-  const { setCurrentModal, closeModal, currentModal } = useModal();
+  const { setModal, closeModal, modal } = useModal();
 
   useEffect(() => {
     if (axios.isAxiosError(userError) && (userError.response?.status === 401 || userError.response?.status === 403)) {
-      setCurrentModal("loginModal", { button: "home" });
+      setModal("loginModal", { button: "home" });
     }
-    if (currentModal?.activatedModal === "signUpModal") {
-      setCurrentModal("signUpModal");
+    if (modal === "signUpModal") {
+      setModal("signUpModal");
     }
-    if (currentModal?.activatedModal === "findPasswordModal") {
-      setCurrentModal("findPasswordModal");
+    if (modal === "findPasswordModal") {
+      setModal("findPasswordModal");
     }
     return () => {
       closeModal();
     };
-  }, [closeModal, currentModal?.activatedModal, setCurrentModal, userError]);
+  }, [closeModal, modal, setModal, userError]);
 
   if (isLoading || !specDetailData || router.isFallback) {
     return (

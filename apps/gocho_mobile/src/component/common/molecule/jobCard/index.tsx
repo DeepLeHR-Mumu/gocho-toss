@@ -15,7 +15,7 @@ import highFalse from "shared-image/global/common/go_mono.svg";
 import collegeTrue from "shared-image/global/common/cho_color.svg";
 import collegeFalse from "shared-image/global/common/cho_mono.svg";
 import { jdBookmarkEvent } from "shared-ga/jd";
-import { useModal } from "@recoil/hook/modal";
+import { useModal } from "@/globalStates";
 
 import { dDayBooleanReturn } from "./util";
 import { JobCardProps, JobCardSkeleton } from "./type";
@@ -49,7 +49,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   const queryClient = useQueryClient();
   const router = useRouter();
   const { isSuccess } = useUserInfo();
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
 
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobData?.id as number,
@@ -83,7 +83,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
 
   const addJobBookmark = () => {
     if (!isSuccess) {
-      setCurrentModal("loginModal", { button: "close" });
+      setModal("loginModal", { button: "close" });
       return;
     }
     if (userId)

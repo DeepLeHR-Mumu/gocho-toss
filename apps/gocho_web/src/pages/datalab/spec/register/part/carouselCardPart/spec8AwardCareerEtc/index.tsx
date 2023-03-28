@@ -7,11 +7,10 @@ import { specArrKeyObj } from "shared-constant/queryKeyFactory/spec/arrKeyObj";
 import { userInfoKeyObj } from "shared-constant/queryKeyFactory/user/infoKeyObj";
 import { specRegisterEvent } from "shared-ga/spec";
 
-import { useModal } from "@recoil/hook/modal";
 import { TopTitle, BottomButton } from "@pages/datalab/spec/register/component";
+import { useModal } from "@/globalStates";
 
 import { specCardWrapper, formCSS } from "../style";
-
 import { Spec8AwardCareerEtcProps, PostSubmitValues } from "./type";
 import { textareaCSS } from "./style";
 
@@ -22,7 +21,7 @@ export const Spec8AwardCareerEtc: FunctionComponent<Spec8AwardCareerEtcProps> = 
 
   const { mutate: postMySpecRegister } = useRegisterSpec();
   const queryClient = useQueryClient();
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
 
   const movePrevSlider = () => {
     movePrevCard("6");
@@ -85,7 +84,7 @@ export const Spec8AwardCareerEtc: FunctionComponent<Spec8AwardCareerEtcProps> = 
 
           if (errorCode === 401) {
             queryClient.invalidateQueries(userInfoKeyObj.userInfo);
-            setCurrentModal("loginModal", { button: "home" });
+            setModal("loginModal", { button: "home" });
           }
         },
         onSuccess: () => {

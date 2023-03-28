@@ -1,4 +1,3 @@
-import { useToast } from "@recoil/hook/toast";
 import { useQueryClient } from "@tanstack/react-query";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -9,13 +8,14 @@ import { useGetKakaoCode } from "shared-api/auth/useGetKakaoCode";
 import { loginSuccessEvent } from "shared-ga/auth";
 import { tokenDecryptor } from "shared-util";
 import { KAKAO_API_KEY } from "shared-user/src/constants";
+import { useToast } from "@/globalStates";
 
 const KakaoLogin: NextPage = () => {
   const queryClient = useQueryClient();
 
   const router = useRouter();
   const { code } = router.query;
-  const { setCurrentToast } = useToast();
+  const { setToastMessage } = useToast();
   const { mutate: kakaoCodeMutation } = useGetKakaoCode();
   const { mutate: kakaologinMutation } = useDoKakaoLogin();
 
@@ -43,7 +43,7 @@ const KakaoLogin: NextPage = () => {
                   const kakaopath = sessionStorage.getItem("kakaopath");
                   loginSuccessEvent(id, "kakao", kakaopath);
                   router.push(kakaopath as string);
-                  setCurrentToast("님 환영합니다.", nickname);
+                  setToastMessage("님 환영합니다.", nickname);
                 },
               }
             );

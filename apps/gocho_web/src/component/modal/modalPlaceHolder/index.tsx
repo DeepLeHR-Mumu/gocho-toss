@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { useModal } from "@recoil/hook/modal";
+import { useModal } from "@/globalStates";
 
 import { SignUpModal } from "../signUpModal";
 import { LoginModal } from "../loginModal";
@@ -13,33 +13,33 @@ import { FindPasswordModal } from "../findPasswordModal";
 import { NoticeModal } from "../noticeModal";
 
 export const ModalPlaceholder: FunctionComponent = () => {
-  const { currentModal } = useModal();
+  const { modal } = useModal();
 
-  if (currentModal?.activatedModal === "loginModal") {
+  if (modal === "loginModal") {
     return <LoginModal />;
   }
-  if (currentModal?.activatedModal === "signUpModal") {
+  if (modal === "signUpModal") {
     return <SignUpModal />;
   }
-  if (currentModal?.activatedModal === "accountSettingModal") {
+  if (modal === "accountSettingModal") {
     return <AccountSettingModal />;
   }
-  if (currentModal?.activatedModal === "tipModal") {
+  if (modal === "tipModal") {
     return <TipModal />;
   }
-  if (currentModal?.activatedModal === "pageBlockModal") {
+  if (modal === "pageBlockModal") {
     return <PageBlockingModal />;
   }
-  if (currentModal?.activatedModal === "factoryModal") {
+  if (modal === "factoryModal") {
     return <FactoryModal />;
   }
-  if (currentModal?.activatedModal === "findPasswordModal") {
+  if (modal === "findPasswordModal") {
     return <FindPasswordModal />;
   }
-  if (currentModal?.activatedModal === "dialogModal") {
+  if (modal === "dialogModal") {
     return <DialogModal />;
   }
-  if (currentModal?.activatedModal === "noticeModal") {
+  if (modal === "noticeModal") {
     return <NoticeModal />;
   }
 

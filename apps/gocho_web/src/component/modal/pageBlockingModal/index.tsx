@@ -1,9 +1,8 @@
 import { FunctionComponent } from "react";
 import { useRouter } from "next/router";
-import { useModal } from "@recoil/hook/modal";
 
-import { pageBlockModalDef } from "@recoil/atom/modal";
 import { ModalComponent } from "@component/modal/modalBackground";
+import { useModal, pageBlockModalDef } from "@/globalStates";
 
 import { PageBlockingBoxProps } from "./type";
 import { title, wrapper, descCSS, flexBox, noButton, yesButton } from "./style";
@@ -42,11 +41,11 @@ const PageBlockingBox: FunctionComponent<PageBlockingBoxProps> = ({ dataObj, clo
 };
 
 export const PageBlockingModal: FunctionComponent = () => {
-  const { closeModal, currentModal } = useModal();
+  const { closeModal, contentObj } = useModal();
 
   return (
     <ModalComponent>
-      <PageBlockingBox closeModal={closeModal} dataObj={currentModal?.modalContentObj as pageBlockModalDef} />
+      <PageBlockingBox closeModal={closeModal} dataObj={contentObj as pageBlockModalDef} />
     </ModalComponent>
   );
 };

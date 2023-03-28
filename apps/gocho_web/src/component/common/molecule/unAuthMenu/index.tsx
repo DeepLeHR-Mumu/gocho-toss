@@ -1,18 +1,18 @@
 import { FunctionComponent } from "react";
 
-import { useModal } from "@recoil/hook/modal";
+import { useModal } from "@/globalStates";
 
 import { wrapper, buttonCSS } from "./style";
 
 export const UnAuthMenu: FunctionComponent = () => {
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
 
   return (
     <button
       css={wrapper}
       type="button"
       onClick={() => {
-        setCurrentModal("loginModal", { button: "close" });
+        setModal("loginModal", { button: "close" });
       }}
     >
       <div css={buttonCSS}>로그인 /</div>
