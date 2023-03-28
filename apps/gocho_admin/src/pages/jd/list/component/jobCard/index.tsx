@@ -64,12 +64,7 @@ export const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
             채용 링크
           </a>
           <NormalButton text="마감" wide={false} variant="filled" buttonClick={() => endJobHandler(job.id)} />
-          <LinkButton
-            linkTo={`${INTERNAL_URL.JD_EDIT_URL}/?id=${job.id}`}
-            text="수정"
-            wide={false}
-            variant="outlined"
-          />
+          <LinkButton linkTo={`${INTERNAL_URL.JD_EDIT_URL}/?id=${job.id}`} text="수정" variant="outlined" />
           <NormalButton text="삭제" wide={false} variant="text" buttonClick={() => deleteJobHandler(job.id)} />
         </li>
       </ul>

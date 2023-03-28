@@ -39,7 +39,7 @@ export const Header: FunctionComponent = () => {
       {isLogined ? (
         <NormalButton buttonClick={doLogout} text="로그아웃" variant="outlined" wide={false} />
       ) : (
-        <LinkButton linkTo={INTERNAL_URL.LOGIN_URL} text="로그인" variant="filled" wide={false} />
+        <LinkButton linkTo={INTERNAL_URL.LOGIN_URL} text="로그인" variant="filled" />
       )}
     </header>
   );
