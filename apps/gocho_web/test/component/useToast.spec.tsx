@@ -16,7 +16,7 @@ describe("토스트 테스트", () => {
     });
 
     act(() => {
-      result.current.setCurrentToast("My필터가 저장되었습니다");
+      result.current.setToastMessage("My필터가 저장되었습니다");
     });
     expect(result.current.toastMessage).toBe("My필터가 저장되었습니다");
 

@@ -1,6 +1,7 @@
 import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { useDoSignUp, useUserInfo } from "shared-api/auth";
 import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE, EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
@@ -10,13 +11,11 @@ import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { signupModalOpenEvent, signupModalCloseEvent, signupSuccessEvent } from "shared-ga/auth";
 
 import { ModalComponent } from "@component/modal/modalBackground";
-import { useModal } from "@recoil/hook/modal";
 import { CloseButton } from "@component/common/atom/closeButton";
 import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
-import { useToast } from "@recoil/hook/toast";
 
 import { tokenDecryptor } from "shared-util";
-import { useQueryClient } from "@tanstack/react-query";
+import { useModal, useToast } from "@/globalStates";
 import { wrapper, desc, formCSS, closeBtn, formArr, logoContainer, sideErrorMsg } from "./style";
 import { SignUpFormValues } from "./type";
 
@@ -32,7 +31,7 @@ export const SignUpBox: FunctionComponent = () => {
   const { refetch } = useUserInfo();
   const { closeModal } = useModal();
   const { mutate } = useDoSignUp();
-  const { setCurrentToast } = useToast();
+  const { setToastMessage } = useToast();
 
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const signupAttempt = useRef(0);
@@ -52,7 +51,7 @@ export const SignUpBox: FunctionComponent = () => {
         queryClient.invalidateQueries();
         refetch();
         closeModal();
-        setCurrentToast("님 환영합니다.", nickname);
+        setToastMessage("님 환영합니다.", nickname);
       },
     });
   };

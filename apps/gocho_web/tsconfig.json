@@ -5,8 +5,10 @@
     "jsxImportSource": "@emotion/react",
     "baseUrl": ".",
     "paths": {
+      "@/*": ["src/*"],
       "@public/*": ["public/*"],
       "@component/*": ["src/component/*"],
+      "@globalStates/*": ["src/globalStates/*"],
       "@constant/*": ["src/constant/*"],
       "@pages/*": ["src/pages/*"],
       "@type/*": ["src/type/*"],

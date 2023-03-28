@@ -15,7 +15,7 @@ const toastZustand = create<ToastAtomProps>((set) => {
 });
 
 export const useToast = () => {
-  const { toastMessage: _toastMessage, setToastMessage: _setToastMessage } = toastZustand();
+  const { toastMessage: _toastMessage, setToastMessage: _setToastMessage, nickname: _nickname } = toastZustand();
 
   useEffect(() => {
     if (_toastMessage === null) {
@@ -30,7 +30,7 @@ export const useToast = () => {
     return _setToastMessage(null);
   };
 
-  const setCurrentToast: SetToastMessageDef = (toastMessage, nickname) => {
+  const setToastMessage: SetToastMessageDef = (toastMessage, nickname) => {
     if (toastMessage === null) {
       return null;
     }
@@ -38,6 +38,7 @@ export const useToast = () => {
     return _setToastMessage(toastMessage, nickname);
   };
   const toastMessage = _toastMessage;
+  const nickname = _nickname;
 
-  return { setCurrentToast, toastMessage, closeToast };
+  return { setToastMessage, toastMessage, nickname, closeToast };
 };

@@ -19,7 +19,7 @@ export const modalZustand = create<UseModalProps>((set) => {
 });
 
 export const useModal = () => {
-  const { modal: _currentModal, setModal: _setModal } = modalZustand();
+  const { modal: _currentModal, contentObj: _contentObj, setModal: _setModal } = modalZustand();
 
   const closeModal = useCallback(() => {
     return _setModal(null);
@@ -33,5 +33,6 @@ export const useModal = () => {
   );
   const modal = _currentModal;
 
-  return { setModal, modal, closeModal };
+  const contentObj = _contentObj;
+  return { setModal, modal, contentObj, closeModal };
 };

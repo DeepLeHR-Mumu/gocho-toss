@@ -13,7 +13,7 @@ import catchLogoSrc from "shared-image/global/common/catch_logo.png";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { companyCountInfoKeyObj } from "shared-constant/queryKeyFactory/company/companyCountInfoKeyObj";
 
-import { useModal } from "@recoil/hook/modal";
+import { useModal } from "@/globalStates";
 
 import {
   sectionContainer,
@@ -35,7 +35,7 @@ export const HeaderPart: FunctionComponent = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
   const { data: userData } = useUserInfo();
   const { data: companyCountInfoData } = useCompanyCountInfo({
     id: Number(router.query.companyId),
@@ -94,7 +94,7 @@ export const HeaderPart: FunctionComponent = () => {
 
   const setBookmarkHandler = () => {
     if (!userData) {
-      return setCurrentModal("loginModal", { button: "close" });
+      return setModal("loginModal", { button: "close" });
     }
     return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
   };

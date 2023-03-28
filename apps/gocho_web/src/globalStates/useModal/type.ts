@@ -27,6 +27,7 @@ export interface tipObjDef {
   viewCount: number;
   thumbnailSrc: string;
   imgPageCount: number;
+  uploaderName: string;
 }
 
 export interface loginObjDef {
@@ -46,7 +47,7 @@ export interface dialogModalDef {
   doActive(): void;
 }
 
-export type contentModalDef = pageBlockModalDef | factoryObjDef | loginObjDef | dialogModalDef;
+export type contentModalDef = pageBlockModalDef | factoryObjDef | loginObjDef | dialogModalDef | tipObjDef;
 
 export type modalNameDef =
   | "logoutModal"
