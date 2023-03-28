@@ -72,15 +72,15 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
           </li>
           <li>
             <strong css={cssObj.requiredTitle}>교대 형태</strong>
-            <p css={cssObj.textareaWarning}>교대 형태를 선택하면 기타 교대 형태 값은 제거됩니다.</p>
+            {positionError && positionError.rotation_arr?.message && (
+              <ErrorMessage msg={positionError.rotation_arr.message} />
+            )}
             <div css={cssObj.flexBox}>
               {rotationArr.map((rotation) => (
                 <CheckBoxWithDesc
                   registerObj={{
                     ...jobForm.register(`position_arr.${index}.rotation_arr`, {
-                      onChange: () => {
-                        setValue(`position_arr.${index}.rotation_etc`, null);
-                      },
+                      required: "교대 형태를 선택해주세요.",
                     }),
                   }}
                   key={`${rotation.data}`}
@@ -89,20 +89,6 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                   id={`${rotation.data}`}
                 />
               ))}
-            </div>
-          </li>
-          <li>
-            <strong css={cssObj.requiredTitle}>기타 교대 형태</strong>
-            <p css={cssObj.textareaWarning}>기타 교대 형태를 입력하면 선택된 교대 형태는 제거됩니다.</p>
-            <div>
-              <input
-                css={cssObj.inputCSS}
-                {...jobForm.register(`position_arr.${index}.rotation_etc`, {
-                  onChange: () => {
-                    setValue(`position_arr.${index}.rotation_arr`, null);
-                  },
-                })}
-              />
             </div>
           </li>
           <li>

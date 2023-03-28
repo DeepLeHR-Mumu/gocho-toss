@@ -57,7 +57,6 @@ const JdEdit: NextPageWithLayout = () => {
       task_sub_arr: position.task.subTaskArr,
       task_detail_arr: position.taskDetailArr.join("\n"),
       rotation_arr: position.rotationArr,
-      rotation_etc: position.rotationEtc,
       place: {
         type: position.place.type,
         address_arr: position.place.addressArr || [],

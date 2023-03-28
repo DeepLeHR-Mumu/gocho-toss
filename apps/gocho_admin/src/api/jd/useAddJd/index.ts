@@ -38,7 +38,6 @@ export const useAddJd: useAddJdProps = () =>
           position_arr: requestObj.dto.position_arr.map((position) => ({
             ...position,
             rotation_arr: position.rotation_arr?.length !== 0 ? position.rotation_arr : null,
-            rotation_etc: position.rotation_etc !== "" ? position.rotation_etc : null,
             required_etc_arr: position.required_etc_arr ? position.required_etc_arr.split("\n") : null,
             task_detail_arr: position.task_detail_arr.split("\n"),
             pay_arr: position.pay_arr?.split("\n"),

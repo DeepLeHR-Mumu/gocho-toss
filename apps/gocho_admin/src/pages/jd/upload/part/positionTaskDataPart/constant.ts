@@ -36,6 +36,7 @@ export const taskArr = [
 
 export const rotationArr = [
   { data: "주간", name: "주간" },
+  { data: "기타", name: "기타" },
   { data: "야간", name: "야간" },
   { data: "교대", name: "교대" },
   { data: "주간2교대", name: "주간 2교대" },
