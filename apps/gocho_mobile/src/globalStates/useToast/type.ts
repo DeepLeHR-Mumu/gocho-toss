@@ -1,5 +1,3 @@
-import { atom } from "recoil";
-
 export type ToastMsgDef =
   | "비밀번호가 변경되었습니다."
   | "계정이 삭제되었습니다."
@@ -16,16 +14,22 @@ export type ToastMsgDef =
   | "주소가 복사되었습니다."
   | "이미 사용중인 닉네임 입니다."
   | "메일이 전송됐습니다. 이메일을 확인해주세요."
-  | "검색어에 특수문자는 포함될 수 없습니다.";
+  | "검색어에 특수문자는 포함될 수 없습니다."
+  | null;
 
 export type ToastAuthMsgDef = "님 반갑습니다." | "님 환영합니다.";
 
-interface toastAtomDef {
-  activatedMsg: ToastMsgDef | ToastAuthMsgDef;
-  nickname?: string | never;
+export interface SetToastMessageDef {
+  (toastMessage: ToastMsgDef, nickname?: never): void;
+  (toastMessage: ToastAuthMsgDef, nickname: string): void;
 }
 
-export const toastAtom = atom<toastAtomDef | null>({
-  key: "toast",
-  default: null,
-});
+export interface SetToastDef {
+  (toastMessage: ToastAuthMsgDef | ToastMsgDef, nickname?: string | never): void;
+}
+
+export interface ToastAtomProps {
+  toastMessage: ToastMsgDef | ToastAuthMsgDef;
+  nickname?: string | never;
+  setToastMessage: SetToastDef;
+}

@@ -5,7 +5,6 @@ import Head from "next/head";
 import Script from "next/script";
 import ReactGA from "react-ga4";
 import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { RecoilRoot } from "recoil";
 import axios from "axios";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Global } from "@emotion/react";
@@ -125,7 +124,7 @@ function UserMobileService({ Component, pageProps }: AppProps) {
   useAxiosInterceptor();
 
   return (
-    <RecoilRoot>
+    <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
@@ -157,7 +156,7 @@ function UserMobileService({ Component, pageProps }: AppProps) {
           <ReactQueryDevtools initialIsOpen={false} />
         </Hydrate>
       </QueryClientProvider>
-    </RecoilRoot>
+    </>
   );
 }
 

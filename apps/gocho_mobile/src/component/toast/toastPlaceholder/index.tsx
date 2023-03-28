@@ -1,14 +1,14 @@
 import { FunctionComponent } from "react";
 
-import { useToast } from "@recoil/hook/toast";
+import { useToast } from "@/globalStates";
 
 import { ToastComponent } from "../toastBox";
 
 export const ToastPlaceholder: FunctionComponent = () => {
-  const { currentToast } = useToast();
+  const { toastMessage, nickname } = useToast();
 
-  if (currentToast) {
-    return <ToastComponent nickName={currentToast.nickname} activatedMsg={currentToast.activatedMsg} />;
+  if (toastMessage) {
+    return <ToastComponent nickName={nickname} activatedMsg={toastMessage} />;
   }
   return null;
 };

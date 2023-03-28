@@ -6,9 +6,10 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr } from "shared-api/bookmark";
 import { useUserInfo } from "shared-api/auth";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
-import { useModal } from "@recoil/hook/modal";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
+
+import { useModal } from "@/globalStates";
 
 import { CompanyCardProps, CompanyCardSkeleton } from "./type";
 import { companyCardSkeleton, cardWrapper, bookmarkButtonWrapper, NameCSS, companyLogoBox } from "./style";
@@ -19,7 +20,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
   isSkeleton,
 }) => {
   const { isSuccess: isUserLoginSuccess, data: userData } = useUserInfo();
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
   const { mutate: addMutate } = useAddCompanyBookmarkArr({
     id: companyData?.id as number,
     logo_url: companyData?.logoUrl as string,
@@ -41,7 +42,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
 
   const addCompanyBookmark = () => {
     if (!isUserLoginSuccess) {
-      setCurrentModal("loginModal", { button: "close" });
+      setModal("loginModal", { button: "close" });
       return;
     }
     addMutate({ userId: userData.id, id: companyData.id });
@@ -65,10 +66,10 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
         <BsFillBookmarkFill />
       </button>
       <Link href={`/company/${companyData.id}/detail`} passHref>
-          <strong css={NameCSS}>{companyData.name}</strong>
-          <div css={companyLogoBox}>
-            <Image fill src={companyData.logoUrl || defaultCompanyLogo} alt={companyData.name} />
-          </div>
+        <strong css={NameCSS}>{companyData.name}</strong>
+        <div css={companyLogoBox}>
+          <Image fill src={companyData.logoUrl || defaultCompanyLogo} alt={companyData.name} />
+        </div>
       </Link>
     </article>
   );

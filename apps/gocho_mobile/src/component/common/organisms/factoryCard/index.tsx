@@ -1,5 +1,6 @@
 import { FunctionComponent, useState } from "react";
 import Image from "next/image";
+import { FiChevronUp, FiChevronDown, FiCopy, FiInfo, FiMapPin } from "react-icons/fi";
 
 import factoryIcon from "shared-image/page/factory/yes_data.svg";
 import locationIcon from "shared-image/page/factory/factory_icon.svg";
@@ -11,9 +12,9 @@ import busFalseIcon from "shared-image/page/factory/bus_false_icon.svg";
 import dormitoryIcon from "shared-image/page/factory/dormitory_icon.svg";
 import xIcon from "shared-image/page/factory/x_icon.svg";
 import oIcon from "shared-image/page/factory/o_icon.svg";
-import { useToast } from "@recoil/hook/toast";
 
-import { FiChevronUp, FiChevronDown, FiCopy, FiInfo, FiMapPin } from "react-icons/fi";
+import { useToast } from "@/globalStates";
+
 import {
   addressCSS,
   xoBox,
@@ -46,7 +47,7 @@ export const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factoryInfo }
   const totalNumber = factoryInfo.maleNumber + factoryInfo.femaleNumber;
   const femaleRatio = Math.round((factoryInfo.femaleNumber / totalNumber) * 100);
   const maleRatio = Math.round((factoryInfo.maleNumber / totalNumber) * 100);
-  const { setCurrentToast } = useToast();
+  const { setToastMessage } = useToast();
   const [isCardOpen, setIsCardOpen] = useState(false);
   return (
     <section css={wrapper}>
@@ -91,7 +92,7 @@ export const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factoryInfo }
                   css={mapLink}
                   type="button"
                   onClick={() => {
-                    setCurrentToast("주소가 복사되었습니다.");
+                    setToastMessage("주소가 복사되었습니다.");
                     return navigator.clipboard.writeText(factoryInfo.address);
                   }}
                 >

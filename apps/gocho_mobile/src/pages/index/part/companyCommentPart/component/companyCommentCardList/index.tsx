@@ -2,18 +2,18 @@ import { FunctionComponent, useRef } from "react";
 import Slider from "react-slick";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
-import { useModal } from "@recoil/hook/modal/useModal";
 import { dummyArrCreator } from "shared-util";
 import { useCompanyArr } from "shared-api/company";
 import { CompanyCommentCard } from "shared-ui/card/companyComment";
 
+import { useModal } from "@/globalStates";
 import { setCarouselSetting } from "./util";
 import { listContainer, buttonCSSCreator } from "./style";
 
 export const CompanyCommentCardList: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
   const { data: companyDataArr, isLoading } = useCompanyArr({ order: "view", limit: 6, offset: 0 });
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
 
   if (!companyDataArr || isLoading) {
     return (
@@ -35,7 +35,7 @@ export const CompanyCommentCardList: FunctionComponent = () => {
             <CompanyCommentCard
               companyData={data}
               key={`CompanyCommentCard${data.id}`}
-              setCurrentModal={setCurrentModal}
+              setCurrentModal={setModal}
               isMobile
             />
           );
