@@ -1,6 +1,5 @@
 import { FunctionComponent } from "react";
 
-// import { useModal } from "@globalStates";
 import { useModal } from "@/globalStates";
 
 import { SignUpModal } from "../signUpModal";
