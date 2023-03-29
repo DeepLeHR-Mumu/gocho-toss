@@ -1,7 +1,8 @@
 import { ChangeEvent, FunctionComponent, useEffect, useState } from "react";
 import { RiCloseFill } from "react-icons/ri";
 
-import { NormalButton } from "shared-ui/common/atom/button/normalButton";
+import { SharedButton } from "shared-ui/business/sharedButton";
+import { COLORS } from "shared-style/color";
 
 import { ErrorMessage } from "../../component";
 import { certificateArr } from "./constant";
@@ -33,29 +34,35 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
             {positionError?.hire_number?.message && <ErrorMessage msg={positionError.hire_number.message} />}
 
             <div css={cssObj.gridBox}>
-              <NormalButton
-                buttonClick={() => {
+              <SharedButton
+                onClickHandler={() => {
                   setValue(`position_arr.${index}.hire_number`, -1);
                 }}
                 text="0명 채용"
-                wide={false}
-                variant="text"
+                size="medium"
+                radius="round"
+                fontColor={COLORS.GRAY100}
+                backgroundColor={COLORS.BLUE_FIRST40}
               />
-              <NormalButton
-                buttonClick={() => {
+              <SharedButton
+                onClickHandler={() => {
                   setValue(`position_arr.${index}.hire_number`, -2);
                 }}
                 text="00명 채용"
-                wide={false}
-                variant="text"
+                size="medium"
+                radius="round"
+                fontColor={COLORS.GRAY100}
+                backgroundColor={COLORS.BLUE_FIRST40}
               />
-              <NormalButton
-                buttonClick={() => {
+              <SharedButton
+                onClickHandler={() => {
                   setValue(`position_arr.${index}.hire_number`, -3);
                 }}
                 text="000명 채용"
-                wide={false}
-                variant="text"
+                size="medium"
+                radius="round"
+                fontColor={COLORS.GRAY100}
+                backgroundColor={COLORS.BLUE_FIRST40}
               />
               <input
                 css={cssObj.inputCSS}
