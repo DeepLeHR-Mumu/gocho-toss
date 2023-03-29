@@ -72,10 +72,7 @@ export const PositionRequiredDataPart: FunctionComponent<PositionRequiredDataPar
                 <SharedRadioButton
                   key={`${expName}${id}`}
                   registerObj={jobForm.register(`position_arr.${index}.required_exp`, {
-                    required: {
-                      value: true,
-                      message: "경력 조건을 선택해주세요.",
-                    },
+                    required: "경력 조건을 선택해주세요.",
                   })}
                   value={expName}
                   id={`${expName}${index}`}

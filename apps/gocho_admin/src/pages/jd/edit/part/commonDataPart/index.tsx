@@ -76,10 +76,7 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobData
                 registerObj={{
                   ...jobForm.register("company_id", {
                     valueAsNumber: true,
-                    required: {
-                      value: true,
-                      message: "선택된 기업이 없습니다.",
-                    },
+                    required: "선택된 기업이 없습니다.",
                     onChange: () => {
                       clearErrors("company_id");
                     },
@@ -104,10 +101,7 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobData
               type="text"
               placeholder="공고제목을 작성해주세요"
               {...jobForm.register("title", {
-                required: {
-                  value: true,
-                  message: "공고 제목을 작성해주세요",
-                },
+                required: "공고 제목을 작성해주세요.",
               })}
               onFocus={() => {
                 if (!watch("company_id")) {
@@ -159,10 +153,7 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobData
                 <textarea
                   css={cssObj.textarea}
                   {...jobForm.register("process_arr", {
-                    required: {
-                      value: true,
-                      message: "채용절차를 작성해주세요.",
-                    },
+                    required: "채용절차를 작성해주세요.",
                   })}
                 />
               </div>
@@ -175,10 +166,7 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobData
                 <textarea
                   css={cssObj.textarea}
                   {...jobForm.register("apply_route_arr", {
-                    required: {
-                      value: true,
-                      message: "지원방법을 작성해주세요.",
-                    },
+                    required: "지원방법을 작성해주세요.",
                   })}
                 />
               </div>
@@ -230,10 +218,7 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobData
                         value: URL_REGEXP,
                         message: "http 또는 https를 포함한 url 형식을 작성해주세요.",
                       },
-                      required: {
-                        value: true,
-                        message: "http 또는 https를 포함한 url 형식을 작성해주세요.",
-                      },
+                      required: "http 또는 https를 포함한 url 형식을 작성해주세요.",
                     })}
                   />
                 )}
@@ -247,10 +232,7 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobData
                         value: EMAIL_REGEXP,
                         message: "EMAIL 형식에 맞게 작성해주세요",
                       },
-                      required: {
-                        value: true,
-                        message: "이메일 채용링크를 작성해주세요",
-                      },
+                      required: "이메일 채용링크를 작성해주세요.",
                     })}
                   />
                 )}

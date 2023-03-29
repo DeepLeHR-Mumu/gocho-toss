@@ -42,10 +42,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                 <SharedRadioButton
                   key={`${contractName}${index}`}
                   registerObj={jobForm.register(`position_arr.${index}.contract_type`, {
-                    required: {
-                      value: true,
-                      message: "계약 형태를 선택해주세요.",
-                    },
+                    required: "계약 형태를 선택해주세요.",
                   })}
                   value={contractName}
                   id={`${contractName}${index}`}
@@ -222,10 +219,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                     key={`${task.mainTask}`}
                     registerObj={{
                       ...jobForm.register(`position_arr.${index}.task_main`, {
-                        required: {
-                          value: true,
-                          message: "1차 직무를 선택해주세요",
-                        },
+                        required: "1차 직무를 선택해주세요.",
                       }),
                     }}
                     value={task.mainTask}
@@ -248,10 +242,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                     key={`${id}${subTask}`}
                     registerObj={{
                       ...jobForm.register(`position_arr.${index}.task_sub_arr`, {
-                        required: {
-                          value: true,
-                          message: "2차 직무를 선택해주세요",
-                        },
+                        required: "2차 직무를 선택해주세요.",
                       }),
                     }}
                     desc={subTask}
@@ -272,10 +263,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
               <textarea
                 css={cssObj.textarea}
                 {...jobForm.register(`position_arr.${index}.task_detail_arr`, {
-                  required: {
-                    value: true,
-                    message: "세부 직무 내용을 작성해주세요",
-                  },
+                  required: "세부 직무 내용을 작성해주세요.",
                 })}
               />
             </div>

@@ -70,10 +70,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
                 type="number"
                 {...register(`position_arr.${index}.hire_number`, {
                   valueAsNumber: true,
-                  required: {
-                    value: true,
-                    message: "채용 인원을 작성해주세요.",
-                  },
+                  required: "채용 인원을 작성해주세요.",
                 })}
               />
             </div>
@@ -86,10 +83,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
               <textarea
                 css={cssObj.textarea}
                 {...register(`position_arr.${index}.pay_arr`, {
-                  required: {
-                    value: true,
-                    message: "급여 정보를 작성해주세요.",
-                  },
+                  required: "급여 정보를 작성해주세요.",
                 })}
               />
             </div>
