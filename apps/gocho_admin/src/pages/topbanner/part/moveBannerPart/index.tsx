@@ -4,8 +4,8 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
 
-import { useMoveBanner } from "@api/banner/useMoveBanner";
-import { pageTitle } from "@style/commonStyles";
+import { useMoveBanner } from "@/api/banner/useMoveBanner";
+import { pageTitle } from "@/style/commonStyles";
 
 import { changeBannerButton, flexBox, inputBox, sectionContainer } from "./style";
 import { BannerMoveFormValues } from "./type";

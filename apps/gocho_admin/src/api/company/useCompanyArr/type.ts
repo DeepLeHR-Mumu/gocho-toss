@@ -25,9 +25,7 @@ export interface ResponseObjDef {
 
 export const companyArrKeyObj = {
   all: [{ data: "companyArr" }] as const,
-  arr: (requestObj: RequestObjDef) => {
-    return [{ data: "companyArr", requestObj }] as const;
-  },
+  arr: (requestObj: RequestObjDef) => [{ data: "companyArr", requestObj }] as const,
 };
 
 export interface GetCompanyArrDef {

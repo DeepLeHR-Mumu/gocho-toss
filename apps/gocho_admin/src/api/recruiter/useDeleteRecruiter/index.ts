@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "@api/useAxiosInterceptor";
+import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { DeleteRecruiterDef, RequestObjDef, useDeleteRecruiterProps } from "./type";
 
@@ -12,6 +12,5 @@ export const deleteRecruiter: DeleteRecruiterDef = async (requestObj) => {
   return data;
 };
 
-export const useDeleteRecruiter: useDeleteRecruiterProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: deleteRecruiter });
-};
+export const useDeleteRecruiter: useDeleteRecruiterProps = () =>
+  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: deleteRecruiter });

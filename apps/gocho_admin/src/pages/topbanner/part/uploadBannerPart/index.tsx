@@ -7,9 +7,9 @@ import { dateConverter } from "shared-util";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
 
-import { useJdDetail } from "@api/jd/useJdDetail";
-import { useAddTopBanner } from "@api/banner/useAddTopBanner";
-import { pageTitle } from "@style/commonStyles";
+import { useJdDetail } from "@/api/jd/useJdDetail";
+import { useAddTopBanner } from "@/api/banner/useAddTopBanner";
+import { pageTitle } from "@/style/commonStyles";
 
 import {
   cardContainer,
@@ -90,9 +90,7 @@ export const UploadBannerPart: FunctionComponent = () => {
               css={inputBox(false)}
               {...register("start_time", {
                 required: true,
-                setValueAs: (startDate: Date) => {
-                  return new Date(startDate).getTime();
-                },
+                setValueAs: (startDate: Date) => new Date(startDate).getTime(),
               })}
             />
             <input
@@ -100,9 +98,7 @@ export const UploadBannerPart: FunctionComponent = () => {
               css={inputBox(false)}
               {...register("end_time", {
                 required: true,
-                setValueAs: (endDate: Date) => {
-                  return new Date(endDate).getTime();
-                },
+                setValueAs: (endDate: Date) => new Date(endDate).getTime(),
               })}
             />
             <label css={getJobButton} htmlFor="topBannerColor">

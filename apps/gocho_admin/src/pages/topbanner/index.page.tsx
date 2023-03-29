@@ -1,15 +1,16 @@
-import type { NextPage } from "next";
+import { ReactElement } from "react";
 
 import { useBannerArr } from "shared-api/banner/useBannerArr";
 
-import { mainContainer } from "@style/commonStyles";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
+import type { NextPageWithLayout } from "@/types";
+import { mainContainer } from "@/style/commonStyles";
+import { ErrorScreen, LoadingScreen, GlobalLayout } from "@/component";
 
 import { UploadBannerPart } from "./part/uploadBannerPart";
 import { BannerListPart } from "./part/bannerListPart";
 import { MoveBannerPart } from "./part/moveBannerPart";
 
-const TopBanner: NextPage = () => {
+const TopBanner: NextPageWithLayout = () => {
   const { data: bannerDataArr, isLoading, isError } = useBannerArr({ type: "T" });
 
   if (!bannerDataArr || isLoading) {
@@ -28,5 +29,7 @@ const TopBanner: NextPage = () => {
     </main>
   );
 };
+
+TopBanner.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default TopBanner;

@@ -1,6 +1,8 @@
-import { AdminResponseDef } from "shared-type/api/responseType";
 import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
+
+import { AdminResponseDef } from "shared-type/api/responseType";
+import { ErrorResponseDef } from "@/types";
 
 export interface RequestObjDef {
   jdId: number;
@@ -30,7 +32,6 @@ export interface RequestObjDef {
       task_sub_arr: string[];
       task_detail_arr: string;
       rotation_arr: string[] | null;
-      rotation_etc: string | null;
       place: {
         type: string;
         address_arr: string[] | null;
@@ -73,7 +74,6 @@ interface axiosRequestObjDef {
       task_sub_arr: string[];
       task_detail_arr: string[];
       rotation_arr: string[] | null;
-      rotation_etc: string | null;
       place: {
         type: string;
         address_arr: string[] | null;
@@ -92,6 +92,11 @@ export interface PostEditJdDef {
   ({ jdId, dto }: axiosRequestObjDef): Promise<AdminResponseDef>;
 }
 
+export const jdDetailKeyObj = {
+  all: [{ data: "jdDetail" }] as const,
+  detail: (requestObj: RequestObjDef) => [{ data: "jdDetail", requestObj }] as const,
+};
+
 export interface useEditJdProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

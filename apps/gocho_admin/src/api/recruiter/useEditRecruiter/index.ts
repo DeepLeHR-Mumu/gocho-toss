@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "@api/useAxiosInterceptor";
+import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { EditRecruiterDef, RequestObjDef, UseEditRecruiterProps } from "./type";
 
@@ -15,6 +15,5 @@ const patchEditRecruiter: EditRecruiterDef = async (requestObj) => {
   return data;
 };
 
-export const useEditRecruiter: UseEditRecruiterProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: patchEditRecruiter });
-};
+export const useEditRecruiter: UseEditRecruiterProps = () =>
+  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: patchEditRecruiter });

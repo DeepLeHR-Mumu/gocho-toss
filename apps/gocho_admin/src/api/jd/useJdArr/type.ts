@@ -38,9 +38,7 @@ export interface ResponseObjDef {
 
 export const jdArrKeyObj = {
   all: [{ data: "jdArr" }] as const,
-  arr: (requestObj: RequestObjDef) => {
-    return [{ data: "jdArr", requestObj }] as const;
-  },
+  arr: (requestObj: RequestObjDef) => [{ data: "jdArr", requestObj }] as const,
 };
 
 export interface GetJdArrDef {

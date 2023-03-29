@@ -84,26 +84,22 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
         <strong css={inputTitle}>업종 *</strong>
         <select css={selectBox} {...register("industry", { required: true })}>
           <option value="">업종 선택 ▼</option>
-          {industryArr.map((industry) => {
-            return (
-              <option key={industry} value={industry}>
-                {industry}
-              </option>
-            );
-          })}
+          {industryArr.map((industry) => (
+            <option key={industry} value={industry}>
+              {industry}
+            </option>
+          ))}
         </select>
       </div>
       <div css={inputContainer}>
         <strong css={inputTitle}>기업 형태 *</strong>
         <select css={selectBox} {...register("size", { required: true })}>
           <option value="">기업 규모 선택 ▼</option>
-          {sizeArr.map((size) => {
-            return (
-              <option key={size} value={size}>
-                {size}
-              </option>
-            );
-          })}
+          {sizeArr.map((size) => (
+            <option key={size} value={size}>
+              {size}
+            </option>
+          ))}
         </select>
       </div>
       <div css={inputContainer}>

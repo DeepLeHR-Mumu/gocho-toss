@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "@api/useAxiosInterceptor";
+import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { RejectCompanyDef, RequestObjDef, UseRejectCompanyProps } from "./type";
 
@@ -17,6 +17,5 @@ const patchRejectCompany: RejectCompanyDef = async (requestObj) => {
   return data;
 };
 
-export const useRejectCompany: UseRejectCompanyProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: patchRejectCompany });
-};
+export const useRejectCompany: UseRejectCompanyProps = () =>
+  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: patchRejectCompany });

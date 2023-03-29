@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 
 import { dateConverter } from "shared-util";
 
-import { WelfareBox } from "@pages/business/company/edit/component/welfareBox";
+import { WelfareBox } from "@/pages/business/company/edit/component/welfareBox";
 import { cssObj } from "./style";
 import { CompanyPartProps } from "./type";
 
@@ -84,9 +84,9 @@ export const CompanyPart: FunctionComponent<CompanyPartProps> = ({ company }) =>
       </div>
 
       <div css={cssObj.welfareContainer}>
-        {welfareArr.map((welfare) => {
-          return <WelfareBox key={`WelfareBox${welfare.name}`} welfare={welfare} />;
-        })}
+        {welfareArr.map((welfare) => (
+          <WelfareBox key={`WelfareBox${welfare.name}`} welfare={welfare} />
+        ))}
       </div>
     </section>
   );

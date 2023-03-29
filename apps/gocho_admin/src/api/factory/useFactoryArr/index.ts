@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { axiosInstance } from "@api/useAxiosInterceptor";
+import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { factoryArrKeyObj, GetFactoryArrDef, RequestObjDef } from "./type";
 import { factoryArrSelector } from "./util";
@@ -10,12 +10,10 @@ export const getFactoryArr: GetFactoryArrDef = async ({ queryKey: [{ requestObj 
   return data;
 };
 
-export const useFactoryArr = (requestObj: RequestObjDef) => {
-  return useQuery({
+export const useFactoryArr = (requestObj: RequestObjDef) =>
+  useQuery({
     queryKey: factoryArrKeyObj.arr(requestObj),
     queryFn: getFactoryArr,
-    select: (data) => {
-      return factoryArrSelector(data);
-    },
+    enabled: Boolean(requestObj.companyId),
+    select: (data) => factoryArrSelector(data),
   });
-};

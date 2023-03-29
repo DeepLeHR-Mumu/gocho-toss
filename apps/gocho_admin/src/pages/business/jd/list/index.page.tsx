@@ -1,18 +1,17 @@
-import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, ReactElement } from "react";
 
-import { useJdArr } from "@api/jd/useJdArr";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
-import { BottomPagination } from "@component/bottomPagination";
-import { BUSINESS_JD_LIST_URL } from "@constant/internalURL";
-import { mainContainer, pageTitle } from "@style/commonStyles";
+import { useJdArr } from "@/api/jd/useJdArr";
+import { ErrorScreen, LoadingScreen, Pagination, GlobalLayout } from "@/component";
+import { INTERNAL_URL } from "@/constant";
+import { mainContainer, pageTitle } from "@/style/commonStyles";
+import type { NextPageWithLayout } from "@/types";
 
 import JobCard from "./component/jobCard";
 import { JD_SEARCH_LIMIT } from "./constant";
 import { cssObj } from "./style";
 
-const BusinessJdList: NextPage = () => {
+const BusinessJdList: NextPageWithLayout = () => {
   const [jdStatus, setJdStatus] = useState<"upload-waiting" | "modify-waiting">("upload-waiting");
   const router = useRouter();
 
@@ -36,9 +35,7 @@ const BusinessJdList: NextPage = () => {
   }
 
   const changeJdStatusHandler = () => {
-    setJdStatus((prev) => {
-      return prev === "upload-waiting" ? "modify-waiting" : "upload-waiting";
-    });
+    setJdStatus((prev) => (prev === "upload-waiting" ? "modify-waiting" : "upload-waiting"));
   };
 
   const totalPage = Math.ceil(jobDataObj.count / JD_SEARCH_LIMIT);
@@ -69,15 +66,17 @@ const BusinessJdList: NextPage = () => {
             </tr>
           </thead>
           <tbody>
-            {jobDataObj.jdDataArr.map((job) => {
-              return <JobCard key={`ManagerBizJobCard${job.id}`} job={job} />;
-            })}
+            {jobDataObj.jdDataArr.map((job) => (
+              <JobCard key={`ManagerBizJobCard${job.id}`} job={job} />
+            ))}
           </tbody>
         </table>
       </section>
-      <BottomPagination totalPage={totalPage} url={BUSINESS_JD_LIST_URL} />
+      <Pagination totalPage={totalPage} url={INTERNAL_URL.BUSINESS_JD_LIST_URL} />
     </main>
   );
 };
+
+BusinessJdList.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default BusinessJdList;
