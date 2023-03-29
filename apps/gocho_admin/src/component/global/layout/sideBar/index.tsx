@@ -7,7 +7,6 @@ import { cssObj } from "./style";
 
 export const SideBar: FunctionComponent = () => {
   const router = useRouter();
-  // console.log(router.asPath, router.pathname);
 
   return (
     <aside css={cssObj.wrapper}>
