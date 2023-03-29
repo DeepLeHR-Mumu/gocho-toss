@@ -32,11 +32,11 @@ jobs:
         run: |
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v3
-        name: pnpm 캐시 가져오기
-        with:
-          path: ${{ steps.pnpm-directory.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+      # - uses: actions/cache@v3
+      #   name: pnpm 캐시 가져오기
+      #   with:
+      #     path: ${{ steps.pnpm-directory.outputs.STORE_PATH }}
+      #     key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - name: dependency 설치
         run: pnpm install --frozen-lockfile
