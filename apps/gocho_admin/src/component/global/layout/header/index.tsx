@@ -27,7 +27,7 @@ export const Header: FunctionComponent = () => {
 
   useEffect(() => {
     const userObjInfo = userGetLocalStoargetItem("USER");
-    setIsLogined(userObjInfo === undefined);
+    setIsLogined(Boolean(userObjInfo));
   }, [isLogined, router]);
 
   return (

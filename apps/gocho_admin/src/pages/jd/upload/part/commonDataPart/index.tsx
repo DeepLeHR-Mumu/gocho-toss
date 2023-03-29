@@ -35,9 +35,11 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobForm
   useEffect(() => {
     if (isAlways) {
       setValue("end_time", "9999-12-31T23:59");
+      setValue("cut", true);
     }
     if (!isAlways) {
       resetField("end_time");
+      resetField("cut");
     }
   }, [isAlways, resetField, setValue]);
 
