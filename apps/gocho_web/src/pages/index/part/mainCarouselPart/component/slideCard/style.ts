@@ -51,9 +51,9 @@ export const middleDescIconBox = css`
   width: 2.1875rem;
   height: 3.25rem;
   position: relative;
-  margin-left: 0.5rem >img {
+  margin-left: 0.5rem > img {
     object-fit: contain;
-  } ;
+  }
 `;
 
 export const titleCSS = css`
@@ -64,17 +64,6 @@ export const titleCSS = css`
   line-height: 1.5;
   word-break: keep-all;
   margin-bottom: 1.5rem;
-`;
-
-export const dimmed = css`
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(to right, #000 5%, transparent 95%);
-  opacity: 0.25;
-  z-index: 10;
 `;
 
 export const lastDescCSS = css`
