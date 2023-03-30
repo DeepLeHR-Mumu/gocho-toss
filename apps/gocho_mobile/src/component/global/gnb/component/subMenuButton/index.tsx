@@ -14,16 +14,7 @@ export const SubMenuButton: FunctionComponent<SubMenuButtonProps> = ({ link, tit
           setOpenedElement(null);
         }}
       >
-        <Link
-          href={{
-            pathname: link,
-            query: {
-              page: 1,
-              order: "recent",
-            },
-          }}
-          passHref
-        >
+        <Link href={{ pathname: link }} passHref>
           {title}
         </Link>
       </button>

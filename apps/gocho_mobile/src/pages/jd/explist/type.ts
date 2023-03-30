@@ -1,4 +1,4 @@
-export type OrderDef = "recent" | "view" | "popular" | "name";
+export type OrderDef = "view" | "popular" | "name";
 
 export interface changeOrderDef {
   (order: OrderDef): void;
