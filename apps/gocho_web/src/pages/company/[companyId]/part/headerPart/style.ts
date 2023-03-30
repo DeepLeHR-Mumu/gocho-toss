@@ -110,10 +110,12 @@ export const youtubeLinkButton = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
+  gap: 0.5rem;
   height: 2.5rem;
   margin-left: 1rem;
+  padding: 0 1rem;
+  font-size: 0.875rem;
   color: ${COLORS.GRAY30};
   background-color: ${COLORS.GRAY90};
-  border-radius: 50%;
+  border-radius: 2rem;
 `;

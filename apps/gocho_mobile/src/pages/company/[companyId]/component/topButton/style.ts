@@ -3,7 +3,7 @@ import { COLORS } from "shared-style/color";
 
 export const wrapper = css`
   background-color: #f2f2f6;
-  padding: 3rem 0;
+  padding: 2rem 0;
 `;
 
 export const container = css`

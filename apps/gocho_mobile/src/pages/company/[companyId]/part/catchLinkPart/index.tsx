@@ -32,7 +32,7 @@ export const CatchLinkPart: FunctionComponent = () => {
             {companyDetailData.youtubeUrl && (
               <a href={companyDetailData.youtubeUrl} target="_blank" rel="noopener noreferrer">
                 <div css={youtubeIconBox}>
-                  <FiYoutube />
+                  <FiYoutube /> 기업 정보영상 보기
                 </div>
               </a>
             )}

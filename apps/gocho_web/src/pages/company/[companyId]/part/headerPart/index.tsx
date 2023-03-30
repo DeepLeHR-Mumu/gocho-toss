@@ -137,7 +137,7 @@ export const HeaderPart: FunctionComponent = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FiYoutube />
+          <FiYoutube /> 기업 정보영상 보기
         </a>
       )}
     </section>

@@ -32,6 +32,10 @@ export const linkBox = css`
 `;
 
 export const youtubeIconBox = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   color: ${COLORS.GRAY30};
-  font-size: 1.2rem;
+  font-size: 0.875rem;
 `;
