@@ -7,9 +7,7 @@ import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { userInfoKeyObj } from "shared-constant/queryKeyFactory/user/infoKeyObj";
 import { MAIN_URL } from "shared-constant";
 
-import { useToast } from "@recoil/hook/toast";
-import { useModal } from "@recoil/hook/modal";
-
+import { useToast, useModal } from "@/globalStates";
 import { ModalComponent } from "../modalBackground";
 import { PictureEditBox } from "./component/pictureEditBox";
 import { PasswordEditBox } from "./component/passwordEditBox";
@@ -22,8 +20,8 @@ export const AccountSettingBox: FunctionComponent = () => {
   const [isPictureEditing, setIsPictureEditing] = useState(true);
   const [isPasswordEditing, setIsPasswordEditing] = useState(false);
 
-  const { setCurrentModal } = useModal();
-  const { setCurrentToast } = useToast();
+  const { setModal } = useModal();
+  const { setToastMessage } = useToast();
 
   const { data: userInfoData } = useUserInfo();
   const { mutate: deleteUserDataInfo } = useDeleteUserInfo(() => {
@@ -31,12 +29,12 @@ export const AccountSettingBox: FunctionComponent = () => {
     localStorage.removeItem("refreshToken");
     queryClient.resetQueries();
     queryClient.invalidateQueries(userInfoKeyObj.userInfo);
-    setCurrentToast("회원탈퇴가 되었습니다.");
+    setToastMessage("회원탈퇴가 되었습니다.");
     router.push(MAIN_URL);
   });
 
   const deleteUserInfo = (id: number) => {
-    setCurrentModal("dialogModal", {
+    setModal("dialogModal", {
       agreeDesc: "삭제",
       title: "계정을 삭제 하시겠습니까?",
       desc: "모든 정보가 삭제되며 복구가 불가합니다. 정말로 삭제하시겠습니까?",

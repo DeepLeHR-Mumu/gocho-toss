@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "@api/useAxiosInterceptor";
+import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { AcceptCompanyDef, RequestObjDef, UseAcceptCompanyProps } from "./type";
 
@@ -14,6 +14,5 @@ const putAcceptCompany: AcceptCompanyDef = async (requestObj) => {
   return data;
 };
 
-export const useAcceptCompany: UseAcceptCompanyProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: putAcceptCompany });
-};
+export const useAcceptCompany: UseAcceptCompanyProps = () =>
+  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: putAcceptCompany });

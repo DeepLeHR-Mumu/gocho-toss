@@ -8,8 +8,8 @@ import { useEvalSpec } from "shared-api/spec/useEvalSpec";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { specDetailKeyObj } from "shared-constant/queryKeyFactory/spec/detailKeyObj";
 
-import { useToast } from "@recoil/hook/toast";
 import { StarEvaluation } from "@component/common/molecule/starEvaluation";
+import { useToast } from "@/globalStates";
 
 import { EvalPointBox } from "./component/evalPointBox";
 import { SelectBox } from "./component/selectBox";
@@ -43,7 +43,7 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
 
   const queryClient = useQueryClient();
   const { mutate } = useEvalSpec();
-  const { setCurrentToast } = useToast();
+  const { setToastMessage } = useToast();
 
   const {
     register,
@@ -83,7 +83,7 @@ export const EvaluationPart: FunctionComponent<EvaluationPartProps> = ({ isMine,
         onSuccess: () => {
           setCurrentDidEval(true);
           queryClient.invalidateQueries(specDetailKeyObj.detail({ specId: Number(specId) }));
-          setCurrentToast("평가를 완료하였습니다.");
+          setToastMessage("평가를 완료하였습니다.");
         },
       }
     );

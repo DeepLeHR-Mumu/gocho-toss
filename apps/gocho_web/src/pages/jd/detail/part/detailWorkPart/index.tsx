@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import factoryIcon from "shared-image/global/common/factory_icon.svg";
 
-import { useModal } from "@recoil/hook/modal";
+import { useModal } from "@/globalStates";
 
 import { NoDataDesc } from "../common/component/noDataDesc";
 import { DetailWorkPartProps, ShowFactoryModalDef } from "./type";
@@ -23,10 +23,10 @@ import {
 } from "./style";
 
 export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPosition }) => {
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
 
   const showFactoryModal: ShowFactoryModalDef = (factoryObj) => {
-    setCurrentModal("factoryModal", factoryObj);
+    setModal("factoryModal", factoryObj);
   };
 
   return (

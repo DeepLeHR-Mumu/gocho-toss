@@ -36,9 +36,7 @@ export interface ResponseObjDef {
 
 export const factoryArrKeyObj = {
   all: [{ data: "factoryArr" }] as const,
-  arr: (requestObj: RequestObjDef) => {
-    return [{ data: "factoryArr", requestObj }] as const;
-  },
+  arr: (requestObj: RequestObjDef) => [{ data: "factoryArr", requestObj }] as const,
 };
 
 export interface GetFactoryArrDef {

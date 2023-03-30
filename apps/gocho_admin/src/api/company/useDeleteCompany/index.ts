@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "@api/useAxiosInterceptor";
+import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { DeleteCompanyDef, RequestObjDef, useDeleteCompanyProps } from "./type";
 
@@ -12,6 +12,5 @@ export const deleteCompany: DeleteCompanyDef = async (requestObj) => {
   return data;
 };
 
-export const useDeleteCompany: useDeleteCompanyProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: deleteCompany });
-};
+export const useDeleteCompany: useDeleteCompanyProps = () =>
+  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: deleteCompany });

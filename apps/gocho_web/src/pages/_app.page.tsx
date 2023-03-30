@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query";
-import { RecoilRoot } from "recoil";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Script from "next/script";
 import axios from "axios";
@@ -129,7 +128,7 @@ function UserPCService({ Component, pageProps }: AppProps) {
   useAxiosInterceptor();
 
   return (
-    <RecoilRoot>
+    <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
@@ -162,7 +161,7 @@ function UserPCService({ Component, pageProps }: AppProps) {
           <ReactQueryDevtools initialIsOpen={false} />
         </Hydrate>
       </QueryClientProvider>
-    </RecoilRoot>
+    </>
   );
 }
 

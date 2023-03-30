@@ -9,13 +9,13 @@ import { useRouter } from "next/router";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { useUserInfo } from "shared-api/auth";
 import { useJdApplyClick, useJdCountInfo } from "shared-api/job";
-import { useModal } from "@recoil/hook/modal";
 import { dateConverter, dDayCalculator } from "shared-util";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { jdBookmarkEvent } from "shared-ga/jd";
 import { jdCountInfoKeyObj } from "shared-constant/queryKeyFactory/job/jdCountInfoKeyObj";
-
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
+
+import { useModal } from "@/globalStates";
 import { HeaderProps } from "./type";
 import {
   headerWrapper,
@@ -36,7 +36,7 @@ import {
 
 export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookmarked, userId }) => {
   const queryClient = useQueryClient();
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
   const { isSuccess } = useUserInfo();
   const router = useRouter();
 
@@ -67,7 +67,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
 
   const addJobBookmark = () => {
     if (!isSuccess) {
-      setCurrentModal("loginModal", { button: "close" });
+      setModal("loginModal", { button: "close" });
       return undefined;
     }
     return (

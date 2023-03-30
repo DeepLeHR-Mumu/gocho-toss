@@ -50,17 +50,15 @@ export const inputLabel = css`
   align-items: center;
 `;
 
-export const booleanInputBox = (disabled: boolean) => {
-  return css`
-    width: 50%;
-    background-color: ${disabled ? COLORS.GRAY70 : COLORS.GRAY100};
-    border-radius: 0.5rem;
-    border: 1px solid ${COLORS.GRAY70};
-    height: 2rem;
-    padding: 0.25rem 0.5rem;
-    margin: 0 0.5rem;
-  `;
-};
+export const booleanInputBox = (disabled: boolean) => css`
+  width: 50%;
+  background-color: ${disabled ? COLORS.GRAY70 : COLORS.GRAY100};
+  border-radius: 0.5rem;
+  border: 1px solid ${COLORS.GRAY70};
+  height: 2rem;
+  padding: 0.25rem 0.5rem;
+  margin: 0 0.5rem;
+`;
 
 export const checkboxText = css`
   margin-right: 0.5rem;

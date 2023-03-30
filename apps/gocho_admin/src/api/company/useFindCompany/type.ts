@@ -20,9 +20,7 @@ export interface ResponseObjDef {
 
 export const companyArrFindKeyObj = {
   all: [{ data: "companyArrFind" }] as const,
-  find: (requestObj: RequestObjDef) => {
-    return [{ data: "companyArrFind", requestObj }] as const;
-  },
+  find: (requestObj: RequestObjDef) => [{ data: "companyArrFind", requestObj }] as const,
 };
 
 export interface GetCompanyArrDef {

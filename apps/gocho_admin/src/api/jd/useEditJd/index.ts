@@ -1,11 +1,12 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "@api/useAxiosInterceptor";
+import { axiosInstance } from "@/api/useAxiosInterceptor";
+import { ErrorResponseDef } from "@/types";
 
-import { PostEditJdDef, RequestObjDef, useEditJdProps } from "./type";
+import { jdDetailKeyObj, PostEditJdDef, RequestObjDef, useEditJdProps } from "./type";
 
 export const putEditJd: PostEditJdDef = async (requestObj) => {
   const formData = new FormData();
@@ -20,7 +21,9 @@ export const putEditJd: PostEditJdDef = async (requestObj) => {
 };
 
 export const useEditJd: useEditJdProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({
+  const queryClient = useQueryClient();
+
+  return useMutation<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>({
     mutationFn: (requestObj) => {
       const newRequestObj = {
         ...requestObj,
@@ -31,18 +34,25 @@ export const useEditJd: useEditJdProps = () => {
           process_arr: requestObj.dto.process_arr?.split("\n"),
           apply_route_arr: requestObj.dto.apply_route_arr?.split("\n"),
           etc_arr: requestObj.dto.etc_arr ? requestObj.dto.etc_arr.split("\n") : null,
-          position_arr: requestObj.dto.position_arr.map((position) => {
-            return {
-              ...position,
-              required_etc_arr: position.required_etc_arr ? position.required_etc_arr.split("\n") : null,
-              task_detail_arr: position.task_detail_arr.split("\n"),
-              pay_arr: position.pay_arr?.split("\n"),
-              preferred_etc_arr: position.preferred_etc_arr ? position.preferred_etc_arr.split("\n") : null,
-            };
-          }),
+          position_arr: requestObj.dto.position_arr.map((position) => ({
+            ...position,
+            place: {
+              address_arr: position.place.address_arr?.length === 0 ? null : position.place.address_arr,
+              etc: position.place.etc,
+              type: position.place.type,
+              factory_arr: position.place.factory_arr,
+            },
+            required_etc_arr: position.required_etc_arr ? position.required_etc_arr.split("\n") : null,
+            task_detail_arr: position.task_detail_arr.split("\n"),
+            pay_arr: position.pay_arr?.split("\n"),
+            preferred_etc_arr: position.preferred_etc_arr ? position.preferred_etc_arr.split("\n") : null,
+          })),
         },
       };
       return putEditJd(newRequestObj);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(jdDetailKeyObj.all);
     },
   });
 };

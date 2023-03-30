@@ -7,9 +7,9 @@ import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { specRegisterFunnelEvent } from "shared-ga/spec";
 
-import { useShowUnLoginModal } from "@recoil/hook/unLoginModal";
-import { useModal } from "@recoil/hook/modal";
 import { Layout } from "@component/layout";
+import { useShowUnLoginModal } from "@/hooks";
+import { useModal } from "@/globalStates";
 
 import { ProgressPart } from "./part/progressPart";
 import { SpecWritePart } from "./part/carouselCardPart";
@@ -19,7 +19,7 @@ import { wrapper, title } from "./style";
 
 const Register: NextPage = () => {
   const router = useRouter();
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
   useShowUnLoginModal();
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Register: NextPage = () => {
       const isCurrentSpecObj = Boolean(sessionStorage.getItem("specObj") === null);
 
       if (!isCurrentSpecObj) {
-        setCurrentModal("pageBlockModal", { url, text: "작성 중인 스펙이 초기화됩니다. 나가시겠습니까?" });
+        setModal("pageBlockModal", { url, text: "작성 중인 스펙이 초기화됩니다. 나가시겠습니까?" });
         router.events.emit("routeChangeError");
         // eslint-disable-next-line no-throw-literal
         throw true;
@@ -52,7 +52,7 @@ const Register: NextPage = () => {
         return true;
       });
     };
-  }, [router, router.events, setCurrentModal]);
+  }, [router, router.events, setModal]);
 
   useEffect(() => {
     specRegisterFunnelEvent();

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { axiosNoTokenInstance } from "@api/useAxiosInterceptor";
+import { axiosNoTokenInstance } from "@/api/useAxiosInterceptor";
 
 import { companyArrKeyObj, GetCompanyArrDef, RequestObjDef } from "./type";
 import { companyArrSelector } from "./util";
@@ -10,12 +10,9 @@ export const getCompanyArr: GetCompanyArrDef = async ({ queryKey: [{ requestObj 
   return data;
 };
 
-export const useCompanyArr = (requestObj: RequestObjDef) => {
-  return useQuery({
+export const useCompanyArr = (requestObj: RequestObjDef) =>
+  useQuery({
     queryKey: companyArrKeyObj.arr(requestObj),
     queryFn: getCompanyArr,
-    select: (data) => {
-      return companyArrSelector(data);
-    },
+    select: (data) => companyArrSelector(data),
   });
-};

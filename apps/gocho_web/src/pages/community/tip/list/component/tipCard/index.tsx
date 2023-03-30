@@ -3,8 +3,8 @@ import { AiOutlineEye, AiOutlineLike } from "react-icons/ai";
 import Image from "next/image";
 
 import { dateConverter } from "shared-util";
-import { useModal } from "@recoil/hook/modal";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
+import { useModal } from "@/globalStates";
 import {
   cardContainer,
   tagListCSS,
@@ -22,7 +22,7 @@ import {
 import { TipCardProps, TipCardSkeleton } from "./type";
 
 export const TipCard: FunctionComponent<TipCardProps | TipCardSkeleton> = ({ tipData, isSkeleton }) => {
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
 
   if (isSkeleton || typeof tipData === "undefined") {
     return (
@@ -33,7 +33,7 @@ export const TipCard: FunctionComponent<TipCardProps | TipCardSkeleton> = ({ tip
   }
 
   const openTipModal = () => {
-    setCurrentModal("tipModal", tipData);
+    setModal("tipModal", tipData);
   };
 
   const { year, month, date } = dateConverter(tipData.createdTime);

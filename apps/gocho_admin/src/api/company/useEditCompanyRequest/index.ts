@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { axiosInstance } from "@api/useAxiosInterceptor";
+import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { GetEditCompanyRequestDef, RequestObjDef, companyDetailRequestKeyObj } from "./type";
 import { companyDetailEditSelector } from "./util";
@@ -10,13 +10,10 @@ export const getEditCompanyRequest: GetEditCompanyRequestDef = async ({ queryKey
   return data;
 };
 
-export const useEditCompanyRequest = (requestObj: RequestObjDef) => {
-  return useQuery({
+export const useEditCompanyRequest = (requestObj: RequestObjDef) =>
+  useQuery({
     queryKey: companyDetailRequestKeyObj.detail(requestObj),
     queryFn: getEditCompanyRequest,
     enabled: Boolean(requestObj.companyId),
-    select: (data) => {
-      return companyDetailEditSelector(data);
-    },
+    select: (data) => companyDetailEditSelector(data),
   });
-};

@@ -30,7 +30,7 @@ export default function Document() {
       </Head>
       <body>
         <div id="portal" />
-        <div id="toast" />
+        <div id="toastPortal" />
         <Main />
         <NextScript />
       </body>

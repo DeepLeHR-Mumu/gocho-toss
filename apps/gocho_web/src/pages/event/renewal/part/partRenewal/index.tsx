@@ -9,9 +9,9 @@ import renewal02Src from "shared-image/event/renewal/renewal_02.png";
 import renewal03Src from "shared-image/event/renewal/renewal_03.png";
 
 import { NormalButton } from "shared-ui/common/atom/button";
-import { useModal } from "@recoil/hook/modal";
 import { useUserInfo } from "shared-api/auth";
 import { Layout } from "@component/layout";
+import { useModal } from "@/globalStates";
 
 import {
   buttonBox,
@@ -27,11 +27,11 @@ import {
 } from "./style";
 
 export const PartRenewal: FunctionComponent = () => {
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
   const { isSuccess } = useUserInfo();
 
   const openLoginModal = () => {
-    setCurrentModal("loginModal", { button: "close" });
+    setModal("loginModal", { button: "close" });
   };
 
   return (

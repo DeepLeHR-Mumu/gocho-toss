@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { axiosInstance } from "@api/useAxiosInterceptor";
+import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { GetRecruiterArrDef, recruiterArrKeyObj } from "./type";
 import { recruiterArrSelector } from "./util";
@@ -10,12 +10,9 @@ export const getRecruiterArr: GetRecruiterArrDef = async () => {
   return data;
 };
 
-export const useRecruiterArr = () => {
-  return useQuery({
+export const useRecruiterArr = () =>
+  useQuery({
     queryKey: recruiterArrKeyObj.arr(),
     queryFn: getRecruiterArr,
-    select: (data) => {
-      return recruiterArrSelector(data);
-    },
+    select: (data) => recruiterArrSelector(data),
   });
-};

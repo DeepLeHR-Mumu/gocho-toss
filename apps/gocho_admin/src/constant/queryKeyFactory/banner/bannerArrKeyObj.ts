@@ -4,7 +4,5 @@ export interface BannerArrRequestObjDef {
 
 export const bannerArrKeyObj = {
   all: [{ data: "bannerArr" }] as const,
-  bannerArr: (requestObj: BannerArrRequestObjDef) => {
-    return [{ data: "bannerArr", requestObj }] as const;
-  },
+  bannerArr: (requestObj: BannerArrRequestObjDef) => [{ data: "bannerArr", requestObj }] as const,
 };

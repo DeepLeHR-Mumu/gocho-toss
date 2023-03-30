@@ -8,17 +8,15 @@ export const sectionContainer = css`
   background-color: ${COLORS.BLUE_SECOND90};
 `;
 
-export const inputBox = (isSmall: boolean) => {
-  return css`
-    width: ${isSmall ? "6rem" : "25%"};
-    border-radius: 0.5rem;
-    border: 1px solid ${COLORS.GRAY70};
-    background-color: ${COLORS.GRAY100};
-    height: 2rem;
-    padding: 0.25rem 0.5rem;
-    margin-right: 1rem;
-  `;
-};
+export const inputBox = (isSmall: boolean) => css`
+  width: ${isSmall ? "6rem" : "25%"};
+  border-radius: 0.5rem;
+  border: 1px solid ${COLORS.GRAY70};
+  background-color: ${COLORS.GRAY100};
+  height: 2rem;
+  padding: 0.25rem 0.5rem;
+  margin-right: 1rem;
+`;
 
 export const inputContainer = css`
   display: flex;
@@ -113,13 +111,11 @@ export const titleCSS = css`
   text-align: left;
 `;
 
-export const colorLine = (colorCode: string) => {
-  return css`
-    height: 0.8rem;
-    width: 100%;
-    background-image: linear-gradient(to right, ${colorCode}, ${COLORS.BLUE_FIRST40});
-  `;
-};
+export const colorLine = (colorCode: string) => css`
+  height: 0.8rem;
+  width: 100%;
+  background-image: linear-gradient(to right, ${colorCode}, ${COLORS.BLUE_FIRST40});
+`;
 
 export const getJobButton = css`
   cursor: pointer;

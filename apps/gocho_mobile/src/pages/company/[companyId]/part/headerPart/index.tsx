@@ -13,7 +13,7 @@ import { companyCountInfoKeyObj } from "shared-constant/queryKeyFactory/company/
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 
 import { Layout } from "@component/layout";
-import { useModal } from "@recoil/hook/modal";
+import { useModal } from "@/globalStates";
 
 import {
   wrapper,
@@ -33,7 +33,7 @@ export const HeaderPart: FunctionComponent = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
   const { data: userData } = useUserInfo();
   const { data: companyCountInfoData } = useCompanyCountInfo({ id: Number(router.query.companyId) });
   const { data: userCompanyBookmarkArr } = useUserCompanyBookmarkArr({ userId: userData?.id });
@@ -53,7 +53,7 @@ export const HeaderPart: FunctionComponent = () => {
 
   const addCompanyBookmark = () => {
     if (!userData) {
-      setCurrentModal("loginModal", { button: "close" });
+      setModal("loginModal", { button: "close" });
     }
     return (
       userData?.id &&

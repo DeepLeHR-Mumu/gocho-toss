@@ -6,9 +6,8 @@ import { usePatchUserInfo } from "shared-api/auth/usePatchUserInfo";
 import { ImageType } from "shared-type/ui/imageType";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { CloseButton } from "@component/common/atom/closeButton";
-import { useModal } from "@recoil/hook/modal";
-import { useToast } from "@recoil/hook/toast";
 
+import { useToast, useModal } from "@/globalStates";
 import { wrapper, imgContainer, closeButtonBox, title } from "./style";
 import { ImageRadioButton } from "./component/imageRadioButton";
 import { ImageChangeFormValues } from "./type";
@@ -20,7 +19,7 @@ export const PictureEditBox: FunctionComponent = () => {
   const { closeModal } = useModal();
   const { register, handleSubmit } = useForm<ImageChangeFormValues>();
   const [checkedImage, setCheckedImage] = useState<ImageType>(userInfoData?.image as ImageType);
-  const { setCurrentToast } = useToast();
+  const { setToastMessage } = useToast();
 
   const profileImgSubmit: SubmitHandler<ImageChangeFormValues> = ({ image }) => {
     if (userInfoData) {
@@ -31,7 +30,7 @@ export const PictureEditBox: FunctionComponent = () => {
         },
         {
           onSuccess: (data) => {
-            setCurrentToast("프로필 이미지가 변경되었습니다.");
+            setToastMessage("프로필 이미지가 변경되었습니다.");
             localStorage.setItem("accessToken", `${data?.data.access_token}`);
             refetch();
           },

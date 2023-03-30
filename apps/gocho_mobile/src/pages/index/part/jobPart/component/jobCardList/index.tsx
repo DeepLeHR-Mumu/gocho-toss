@@ -7,7 +7,7 @@ import { MainJobCard } from "shared-ui/card/MainJobCard";
 import { useUserInfo } from "shared-api/auth";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 
-import { useModal } from "@recoil/hook/modal";
+import { useModal } from "@/globalStates";
 
 import { setCarouselSetting } from "./util";
 import { listContainer } from "./style";
@@ -27,10 +27,10 @@ export const JobCardList: FunctionComponent = () => {
 
   const { data: userData } = useUserInfo();
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
 
   const loginOpener = () => {
-    setCurrentModal("loginModal", { button: "close" });
+    setModal("loginModal", { button: "close" });
   };
 
   if (!jobDataArr || isError || isLoading) {

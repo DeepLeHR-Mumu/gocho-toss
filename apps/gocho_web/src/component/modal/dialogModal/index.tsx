@@ -1,8 +1,7 @@
 import { FunctionComponent } from "react";
-import { useModal } from "@recoil/hook/modal";
 
-import { dialogModalDef } from "@recoil/atom/modal";
 import { ModalComponent } from "@component/modal/modalBackground";
+import { useModal, dialogModalDef } from "@/globalStates";
 
 import { DialogModalBoxProps } from "./type";
 import { title, wrapper, descCSS, flexBox, noButton, yesButton } from "./style";
@@ -36,11 +35,11 @@ const DialogModalBox: FunctionComponent<DialogModalBoxProps> = ({ dataObj }) => 
 };
 
 export const DialogModal: FunctionComponent = () => {
-  const { currentModal } = useModal();
+  const { contentObj } = useModal();
 
   return (
     <ModalComponent>
-      <DialogModalBox dataObj={currentModal?.modalContentObj as dialogModalDef} />
+      <DialogModalBox dataObj={contentObj as dialogModalDef} />
     </ModalComponent>
   );
 };

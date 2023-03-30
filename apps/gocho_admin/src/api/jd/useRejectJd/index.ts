@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "@api/useAxiosInterceptor";
+import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { RejectJdDef, RequestObjDef, UseRejectJdProps } from "./type";
 
@@ -14,6 +14,5 @@ const patchRejectJd: RejectJdDef = async (requestObj) => {
   return data;
 };
 
-export const useRejectJd: UseRejectJdProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: patchRejectJd });
-};
+export const useRejectJd: UseRejectJdProps = () =>
+  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: patchRejectJd });

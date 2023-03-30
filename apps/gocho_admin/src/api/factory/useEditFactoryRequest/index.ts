@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { axiosInstance } from "@api/useAxiosInterceptor";
+import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { factoryEditKeyObj, GetEditFactoryRequestDef, RequestObjDef } from "./type";
 import { factoryDetailSelector } from "./util";
@@ -10,12 +10,9 @@ export const getEditFactoryRequest: GetEditFactoryRequestDef = async ({ queryKey
   return data;
 };
 
-export const useEditFactoryRequest = (requestObj: RequestObjDef) => {
-  return useQuery({
+export const useEditFactoryRequest = (requestObj: RequestObjDef) =>
+  useQuery({
     queryKey: factoryEditKeyObj.edit(requestObj),
     queryFn: getEditFactoryRequest,
-    select: (data) => {
-      return factoryDetailSelector(data);
-    },
+    select: (data) => factoryDetailSelector(data),
   });
-};

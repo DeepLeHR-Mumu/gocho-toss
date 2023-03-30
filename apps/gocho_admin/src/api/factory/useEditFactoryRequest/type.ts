@@ -25,9 +25,7 @@ export interface ResponseObjDef {
 
 export const factoryEditKeyObj = {
   all: [{ data: "factoryEdit" }] as const,
-  edit: (requestObj: RequestObjDef) => {
-    return [{ data: "factoryEdit", requestObj }] as const;
-  },
+  edit: (requestObj: RequestObjDef) => [{ data: "factoryEdit", requestObj }] as const,
 };
 
 export interface GetEditFactoryRequestDef {

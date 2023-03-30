@@ -8,7 +8,7 @@ import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { mySpecListFunnelEvent } from "shared-ga/spec";
 
 import { Layout } from "@component/layout";
-import { useModal } from "@recoil/hook/modal";
+import { useModal } from "@/globalStates";
 
 import { PageHead } from "./pageHead";
 import { AsideMenu } from "../component/asideMenu";
@@ -30,7 +30,7 @@ import {
 export const MySpecHistory: NextPage = () => {
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const { setCurrentModal, closeModal, currentModal } = useModal();
+  const { setModal, closeModal, modal } = useModal();
   const activeCardCount = 5;
 
   const { data: userInfoData, error } = useUserInfo();
@@ -40,18 +40,18 @@ export const MySpecHistory: NextPage = () => {
 
   useEffect(() => {
     if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
-      setCurrentModal("loginModal", { button: "home" });
+      setModal("loginModal", { button: "home" });
     }
-    if (currentModal?.activatedModal === "signUpModal") {
-      setCurrentModal("signUpModal");
+    if (modal === "signUpModal") {
+      setModal("signUpModal");
     }
-    if (currentModal?.activatedModal === "findPasswordModal") {
-      setCurrentModal("findPasswordModal");
+    if (modal === "findPasswordModal") {
+      setModal("findPasswordModal");
     }
     return () => {
       closeModal();
     };
-  }, [error, closeModal, setCurrentModal, currentModal?.activatedModal]);
+  }, [error, closeModal, setModal, modal]);
 
   useEffect(() => {
     setActiveCardIndex(null);

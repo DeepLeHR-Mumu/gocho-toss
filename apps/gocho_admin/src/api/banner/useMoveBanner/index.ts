@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "@api/useAxiosInterceptor";
+import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { MoveBannerDef, RequestObjDef, UseMoveBannerProps } from "./type";
 
@@ -14,6 +14,5 @@ const patchMoveBanner: MoveBannerDef = async (requestObj) => {
   return data;
 };
 
-export const useMoveBanner: UseMoveBannerProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: patchMoveBanner });
-};
+export const useMoveBanner: UseMoveBannerProps = () =>
+  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: patchMoveBanner });

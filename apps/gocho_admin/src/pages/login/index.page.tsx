@@ -5,8 +5,9 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { adminTokenDecryptor } from "shared-util";
 
-import { useDoLogin } from "@api/auth/useDoLogin";
-import { mainContainer } from "@style/commonStyles";
+import { userSetLocalStorageItem } from "@/utils";
+import { useDoLogin } from "@/api/auth/useDoLogin";
+import { mainContainer } from "@/style/commonStyles";
 
 import { inputBox, inputContainer, inputTitle, title, submitButton } from "./style";
 import { LoginFormValues } from "./type";
@@ -23,12 +24,12 @@ export const Login: NextPage = () => {
       onSuccess: (response) => {
         const { exp: accessExp } = adminTokenDecryptor(response.data.access_token);
         const { exp: refreshExp } = adminTokenDecryptor(response.data.refresh_token);
-
-        localStorage.setItem("accessToken", `${response.data.access_token}`);
-        localStorage.setItem("refreshToken", `${response.data.refresh_token}`);
-        localStorage.setItem("accessExp", `${accessExp}`);
-        localStorage.setItem("refreshExp", `${refreshExp}`);
-
+        userSetLocalStorageItem("USER", {
+          accessToken: response.data.refresh_token,
+          refreshToken: response.data.access_token,
+          accessExp,
+          refreshExp,
+        });
         queryClient.invalidateQueries();
         router.push("/");
       },

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { axiosInstance } from "@api/useAxiosInterceptor";
+import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { GetStatisticsDef, statisticsKeyObj } from "./type";
 import { statSelector } from "./util";
@@ -10,12 +10,9 @@ export const getStatistics: GetStatisticsDef = async () => {
   return data;
 };
 
-export const useStatistics = () => {
-  return useQuery({
+export const useStatistics = () =>
+  useQuery({
     queryKey: statisticsKeyObj.all,
     queryFn: getStatistics,
-    select: (data) => {
-      return statSelector(data);
-    },
+    select: (data) => statSelector(data),
   });
-};
