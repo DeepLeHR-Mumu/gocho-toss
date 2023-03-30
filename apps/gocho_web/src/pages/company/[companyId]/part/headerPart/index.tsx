@@ -19,7 +19,6 @@ import {
   sectionContainer,
   companyLogoBox,
   infoContainer,
-  infoBox,
   bookmarkButton,
   icon,
   viewBox,
@@ -105,7 +104,11 @@ export const HeaderPart: FunctionComponent = () => {
         <Image src={companyDetailData.logoUrl || defaultCompanyLogo} alt="" fill sizes="1" />
       </div>
       <div css={infoContainer}>
-        <div css={infoBox}>
+        <div>
+          <p css={companyName}>{companyDetailData.name}</p>
+          <p css={industry}>{companyDetailData.industry}</p>
+        </div>
+        <div>
           <button type="button" css={bookmarkButton(isBookmarked)} onClick={setBookmarkHandler}>
             <BsFillBookmarkFill />
             기업 북마크 {companyCountInfoData?.bookmarkCount.toLocaleString("ko-KR")}
@@ -117,8 +120,6 @@ export const HeaderPart: FunctionComponent = () => {
             조회수 <span css={viewColor}>{companyCountInfoData?.viewCount.toLocaleString("ko-KR")}</span>
           </p>
         </div>
-        <p css={companyName}>{companyDetailData.name}</p>
-        <p css={industry}>{companyDetailData.industry}</p>
       </div>
       {companyDetailData.catchUrl && (
         <a css={catchLinkButton} href={companyDetailData.catchUrl} target="_blank" rel="noopener noreferrer">

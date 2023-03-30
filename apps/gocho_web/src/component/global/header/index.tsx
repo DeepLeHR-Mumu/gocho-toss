@@ -6,7 +6,6 @@ import { BsChevronDown, BsXLg } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 
 import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
-import grayLogoSrc from "shared-image/global/deepLeLogo/smallMono.svg";
 import { useUserInfo } from "shared-api/auth";
 import { globalSearchEvent } from "shared-ga/search";
 import { MAIN_URL } from "shared-constant";
@@ -87,7 +86,7 @@ export const Header: FunctionComponent = () => {
           <div css={logoCSS}>
             <Link href={MAIN_URL} passHref>
               <div css={logoLink}>
-                <Image src={pathname === MAIN_URL ? colorLogoSrc : grayLogoSrc} alt="" fill />
+                <Image src={colorLogoSrc} alt="" fill />
               </div>
             </Link>
           </div>
