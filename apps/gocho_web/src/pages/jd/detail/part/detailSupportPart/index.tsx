@@ -64,8 +64,7 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
         <div css={flexBox}>
           <div>
             <div css={flexBetweenBox}>
-              <p css={subTitle}>학력</p>
-
+              <p css={subTitle}>학력 조건</p>
               <ul css={eduContainer}>
                 {getPossibleEduArr(freshPosition.possibleEdu).map((edu) => {
                   return (
@@ -80,7 +79,7 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
               </ul>
             </div>
             <div css={flexBetweenBox}>
-              <p css={subTitle}>경력</p>
+              <p css={subTitle}>경력 조건</p>
               <p css={desc}>
                 {freshPosition.requiredExp.type}
 
