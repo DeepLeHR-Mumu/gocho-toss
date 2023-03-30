@@ -132,7 +132,7 @@ export const ResultInfoPart: FunctionComponent<ResultInfoPartProps> = ({ resultD
           iconObj={{
             icon: BsChevronLeft,
             color: COLORS.BLUE_FIRST40,
-            size: 0.8,
+            size: 1,
             position: "left",
           }}
         />
