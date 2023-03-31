@@ -3,7 +3,7 @@ import { COLORS } from "shared-style/color";
 
 export const partContainer = css`
   background-color: #f2f2f6;
-  padding: 5.5rem 0 8rem;
+  padding: 5.5rem 0;
 `;
 
 export const title = css`
@@ -16,4 +16,9 @@ export const title = css`
 
 export const colorPoint = css`
   color: ${COLORS.BLUE_NEON30};
+`;
+
+export const registerButtonContainer = css`
+  width: 20rem;
+  margin: 2rem auto 0;
 `;

@@ -45,7 +45,7 @@ const JobsExpList: NextPage = () => {
   const { setToastMessage } = useToast();
 
   const jdSearchHandler: SubmitHandler<PostingValues> = (searchVal) => {
-    const specialCharacterRegEx = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/g;
+    const specialCharacterRegEx = /[{}[\]/?.,;:|)*~`!^_+<>@#$%&\\=('"]/g;
     if (searchVal.name?.match(specialCharacterRegEx)) {
       setToastMessage("검색어에 특수문자는 포함될 수 없습니다.");
       return;

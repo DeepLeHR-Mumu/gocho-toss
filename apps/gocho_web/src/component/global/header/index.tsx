@@ -55,7 +55,7 @@ export const Header: FunctionComponent = () => {
   };
 
   const submitHandler = preventRefresh(() => {
-    const regExp = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/g;
+    const regExp = /[{}[\]/?.,;:|)*~`!^_+<>@#$%&\\=('"]/g;
 
     if (query.match(regExp)) {
       setToastMessage("검색어에 특수문자는 포함될 수 없습니다.");

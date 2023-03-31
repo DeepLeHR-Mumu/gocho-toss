@@ -4,7 +4,6 @@ import { COLORS } from "shared-style/color";
 export const container = css`
   position: relative;
   padding: 1.5rem 2rem 0;
-  border-bottom: 1px solid ${COLORS.GRAY80};
 `;
 
 export const backButton = css`
@@ -98,6 +97,8 @@ export const schoolInfoTitle = css`
 `;
 
 export const schoolInfoDesc = css`
+  display: flex;
+  gap: 0.25rem;
   font-size: 0.875rem;
   color: ${COLORS.GRAY10};
   font-weight: 500;
@@ -113,7 +114,6 @@ export const certiContainer = css`
   display: flex;
   flex-direction: column;
   justify-content: left;
-  margin-bottom: 2.25rem;
 `;
 
 export const certiTitle = css`
