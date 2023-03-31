@@ -140,11 +140,7 @@ export const ListPart: FunctionComponent = () => {
 
           <div css={flexBox}>
             <div css={searchWrapper}>
-              <input
-                {...register("searchWord", {})}
-                css={searchBox}
-                placeholder="검색이후 오른쪽 태그로 공고를 정렬할 수 있어요. 물론 검색전에도요!"
-              />
+              <input {...register("searchWord", {})} css={searchBox} placeholder="원하는 공고를 검색해보세요" />
               <button type="submit" css={searchButton} aria-label="공고 검색하기">
                 <FiSearch />
               </button>

@@ -13,11 +13,11 @@ export const setJobOrderButtonArr: {
     order: "end",
   },
   {
-    text: "👀 조회수",
+    text: "👀 조회수 높은",
     order: "view",
   },
   {
-    text: "🔖 북마크",
+    text: "🔖 북마크 많은",
     order: "popular",
   },
 ];
