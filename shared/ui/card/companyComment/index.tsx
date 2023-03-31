@@ -43,7 +43,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
   useEffect(() => {
     const bottomHeight = commentContainerRef.current?.scrollHeight;
     commentContainerRef.current?.scrollTo(0, bottomHeight !== undefined ? bottomHeight : 0);
-  }, [isSuccess]);
+  }, [companyCommentArrData?.commentArr]);
 
   if (isSkeleton || companyData === undefined) {
     return (
