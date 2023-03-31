@@ -101,12 +101,6 @@ export const subMenuToggleWrapper: subMenuToggleWrapperDef = (isHover) => {
   `;
 };
 
-export const searchIcon = css`
-  color: ${COLORS.BLUE_FIRST40};
-  font-size: 1.25rem;
-  padding-right: 1rem;
-`;
-
 export const unifiedSearchWrapper = css`
   position: relative;
   margin-right: 1.5rem;
