@@ -2,8 +2,9 @@ import { FunctionComponent } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { dateConverter } from "shared-util";
-import { NormalButton } from "shared-ui/common/atom/button/normalButton";
-import { LinkButton } from "shared-ui/common/atom/button/linkButton";
+import { SharedButton } from "shared-ui/business/sharedButton";
+import { SharedBoxLink } from "shared-ui/business/sharedBoxLink";
+import { COLORS } from "shared-style/color";
 
 import { useDeleteJd, useEndJd } from "@/api";
 import { INTERNAL_URL } from "@/constant";
@@ -63,9 +64,28 @@ export const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
           <a href={job.applyUrl} css={cssObj.applyButton} target="_blank" rel="noopener noreferrer">
             채용 링크
           </a>
-          <NormalButton text="마감" wide={false} variant="filled" buttonClick={() => endJobHandler(job.id)} />
-          <LinkButton linkTo={`${INTERNAL_URL.JD_EDIT_URL}/?id=${job.id}`} text="수정" variant="outlined" />
-          <NormalButton text="삭제" wide={false} variant="text" buttonClick={() => deleteJobHandler(job.id)} />
+          <SharedButton
+            onClickHandler={() => endJobHandler(job.id)}
+            text="마감"
+            size="medium"
+            radius="round"
+            fontColor={COLORS.GRAY10}
+            backgroundColor={COLORS.GRAY100}
+          />
+          <SharedBoxLink
+            internalUrl={`${INTERNAL_URL.JD_EDIT_URL}/?id=${job.id}`}
+            text="수정"
+            colorVariation="blue"
+            iconLocation="right"
+          />
+          <SharedButton
+            onClickHandler={() => deleteJobHandler(job.id)}
+            text="삭제"
+            size="medium"
+            radius="round"
+            fontColor={COLORS.GRAY10}
+            backgroundColor={COLORS.GRAY100}
+          />
         </li>
       </ul>
     </li>

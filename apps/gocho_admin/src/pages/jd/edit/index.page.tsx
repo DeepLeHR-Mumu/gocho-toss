@@ -2,8 +2,9 @@ import { ReactElement, useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
-import { NormalButton } from "shared-ui/common/atom/button/normalButton";
+import { SharedButton } from "shared-ui/business/sharedButton";
 import { useDisabledKeydownSubmit } from "shared-hooks";
+import { COLORS } from "shared-style/color";
 
 import { useToast } from "@/globalStates";
 import { useEditJd, useJdDetail } from "@/api";
@@ -132,17 +133,21 @@ const JdEdit: NextPageWithLayout = () => {
                   <PositionEtcDataPart id={item.id} index={index} jobForm={jobForm} jobData={jobData} />
 
                   <div css={cssObj.cardButtonBox}>
-                    <NormalButton
-                      buttonClick={() => append({ ...jobForm.watch("position_arr")[index], id: null })}
+                    <SharedButton
+                      onClickHandler={() => append({ ...jobForm.watch("position_arr")[index], id: null })}
                       text="해당 직무 복사"
-                      wide={false}
-                      variant="outlined"
+                      size="medium"
+                      radius="round"
+                      backgroundColor={COLORS.BLUE_FIRST40}
+                      fontColor={COLORS.GRAY100}
                     />
-                    <NormalButton
-                      buttonClick={() => remove(index)}
+                    <SharedButton
+                      onClickHandler={() => remove(index)}
                       text="해당 직무 제거"
-                      wide={false}
-                      variant="filled"
+                      size="medium"
+                      radius="round"
+                      backgroundColor={COLORS.BLUE_FIRST40}
+                      fontColor={COLORS.GRAY100}
                     />
                   </div>
                 </li>
@@ -150,16 +155,25 @@ const JdEdit: NextPageWithLayout = () => {
             </ul>
             {checkMsg && <p css={cssObj.warning}>{checkMsg}</p>}
             <div css={cssObj.buttonBox}>
-              <NormalButton
-                buttonClick={() => {
+              <SharedButton
+                onClickHandler={() => {
                   append(blankPosition);
                 }}
-                wide={false}
                 text="직무 추가"
-                variant="outlined"
+                size="large"
+                radius="round"
+                backgroundColor={COLORS.BLUE_FIRST40}
+                fontColor={COLORS.GRAY100}
               />
 
-              <NormalButton isSubmit wide={false} text="공고 수정하기" variant="filled" />
+              <SharedButton
+                onClickHandler="submit"
+                text="공고 수정하기"
+                size="large"
+                radius="round"
+                backgroundColor={COLORS.BLUE_FIRST40}
+                fontColor={COLORS.GRAY100}
+              />
             </div>
           </form>
         </section>
