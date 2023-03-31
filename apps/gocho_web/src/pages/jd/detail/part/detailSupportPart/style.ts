@@ -9,17 +9,6 @@ export const flexText = css`
   align-items: center;
 `;
 
-export const logoImageBox = css`
-  max-width: 11.5rem;
-  width: 100%;
-  height: 1.5rem;
-  position: relative;
-  margin: 0 auto 2.5rem;
-  > img {
-    object-fit: contain;
-  }
-`;
-
 export const title = css`
   font-size: 1.375rem;
   color: ${COLORS.GRAY10};
