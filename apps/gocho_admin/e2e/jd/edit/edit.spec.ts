@@ -30,7 +30,7 @@ test("공고 수정 테스트", async ({ page }) => {
   await page.locator("label").filter({ hasText: "정규직" }).check();
   await page.locator("label").filter({ hasText: "물류" }).click();
   await page.waitForTimeout(100);
-  await page.locator("label").filter({ hasText: "자재" }).click();
+  await page.locator("label").filter({ hasText: "없음" }).click();
   await page.selectOption('[name="position_arr.0.place.type"]', "일반");
   await page.getByRole("button", { name: "테스트 공장 1" }).nth(0).click();
   await page.getByRole("button", { name: "000명 채용" }).first().click();
