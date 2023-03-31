@@ -11,7 +11,7 @@ export const flexText = css`
 
 export const logoImageBox = css`
   max-width: 11.5rem;
-  width: fit-content;
+  width: 100%;
   height: 1.5rem;
   position: relative;
   margin: 0 auto 2.5rem;

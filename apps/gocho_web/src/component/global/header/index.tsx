@@ -138,30 +138,29 @@ export const Header: FunctionComponent = () => {
             </ul>
 
             <div css={flexBox}>
-              <button
-                aria-label={isUnifiedSearchOpened ? "통합검색창 닫기" : "통합검색창 열기"}
-                type="button"
-                css={searchIcon}
-                onClick={() => {
-                  setIsUnifiedSearchOpened((prev) => {
-                    return !prev;
-                  });
-                }}
-              >
-                {isUnifiedSearchOpened ? <BsXLg /> : <FiSearch />}
-              </button>
+              <form onSubmit={submitHandler} css={unifiedSearchWrapper}>
+                <input css={unifiedSearch} placeholder="궁금한 기업명이나 공고를 검색해보세요" onChange={handleParam} />
+                <button type="submit" css={searchButton} aria-label="통합검색 실행">
+                  <FiSearch />
+                </button>
+              </form>
+              {/* <button */}
+              {/*  aria-label={isUnifiedSearchOpened ? "통합검색창 닫기" : "통합검색창 열기"} */}
+              {/*  type="button" */}
+              {/*  css={searchIcon} */}
+              {/*  onClick={() => { */}
+              {/*    setIsUnifiedSearchOpened((prev) => { */}
+              {/*      return !prev; */}
+              {/*    }); */}
+              {/*  }} */}
+              {/* > */}
+              {/*  {isUnifiedSearchOpened ? <BsXLg /> : <FiSearch />} */}
+              {/* </button> */}
               {isSuccess ? <Profile /> : <UnAuthMenu />}
             </div>
           </nav>
         </div>
       </Layout>
-      <div css={searchDimmed(isUnifiedSearchOpened)} />
-      <form onSubmit={submitHandler} css={unifiedSearchWrapper(isUnifiedSearchOpened)}>
-        <input css={unifiedSearch} placeholder="궁금한 기업명이나 공고를 검색해보세요" onChange={handleParam} />
-        <button type="submit" css={searchButton} aria-label="통합검색 실행">
-          <FiSearch />
-        </button>
-      </form>
     </header>
   );
 };
