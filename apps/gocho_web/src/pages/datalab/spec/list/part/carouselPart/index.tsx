@@ -4,8 +4,10 @@ import { useUserInfo } from "shared-api/auth";
 import { Layout } from "@component/layout";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
-import { partContainer, title, colorPoint } from "./style";
+import { SPEC_REGISTER_URL } from "shared-constant";
+import { LinkButton } from "shared-ui/common/atom/button";
 import { RecommendCardList } from "../../../component/recommendCardList";
+import { partContainer, title, colorPoint, registerButtonContainer } from "./style";
 
 export const CarouselPart: FunctionComponent = () => {
   const { data: userInfoData, error } = useUserInfo();
@@ -20,6 +22,9 @@ export const CarouselPart: FunctionComponent = () => {
             스펙 평가를 기다리고 있어요 👀
           </strong>
           <RecommendCardList />
+          <div css={registerButtonContainer}>
+            <LinkButton text="내 스펙 등록하기" variant="outlined" linkTo={`${SPEC_REGISTER_URL}/#1`} />
+          </div>
         </Layout>
       </section>
     );
@@ -34,6 +39,9 @@ export const CarouselPart: FunctionComponent = () => {
           {userInfoData.nickname} 님의 스펙 평가를 기다리고 있어요 👀
         </strong>
         <RecommendCardList />
+        <div css={registerButtonContainer}>
+          <LinkButton text="내 스펙 등록하기" variant="outlined" linkTo={`${SPEC_REGISTER_URL}/#1`} />
+        </div>
       </Layout>
     </section>
   );

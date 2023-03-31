@@ -25,7 +25,6 @@ import {
   companyName,
   industryText,
   buttonBox,
-  countCSS,
   infoBox,
 } from "./style";
 
@@ -111,7 +110,7 @@ export const HeaderPart: FunctionComponent = () => {
                 onClick={isBookmarked ? deleteCompanyBookmark : addCompanyBookmark}
               >
                 <BsFillBookmarkFill />
-                기업 북마크 <span css={countCSS}>{companyCountInfoData?.bookmarkCount.toLocaleString("Ko-KR")}</span>
+                기업 북마크 <span>{companyCountInfoData?.bookmarkCount.toLocaleString("Ko-KR")}</span>
               </button>
 
               <p css={viewCountContainer}>

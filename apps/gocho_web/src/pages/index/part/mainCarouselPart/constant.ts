@@ -31,7 +31,7 @@ export const carouselArr = [
     lastDesc: "이제 공장정보는 공고에서 바로 확인하세요!",
     backgroundImage: banner02,
     iconImage: checkIconImage,
-    backgroundColor: "#2961CD",
+    backgroundColor: "#2961cd",
     buttonObj: null,
   },
   {
@@ -42,7 +42,7 @@ export const carouselArr = [
     lastDesc: "다양한 취업정보 및 꿀팁을 물어보세요",
     backgroundImage: banner03,
     iconImage: checkIconImage,
-    backgroundColor: "#fbc540",
+    backgroundColor: "#fab60e",
     buttonObj: {
       target: "_blank" as const,
       text: "오픈카톡 바로가기",

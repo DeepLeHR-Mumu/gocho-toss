@@ -36,6 +36,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
   }
 
   const addCompanyBookmark = () => {
+    // TODO: need to add globalStates
     if (userId) addMutate({ userId, id: companyData.id });
   };
 

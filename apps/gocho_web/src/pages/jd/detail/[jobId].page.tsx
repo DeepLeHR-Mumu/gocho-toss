@@ -1,8 +1,10 @@
 import { NextPage, GetStaticProps, GetStaticPropsContext, GetStaticPaths } from "next";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 
+import logoSrc from "shared-image/global/deepLeLogo/largeColor.svg";
 import { useViewCount } from "shared-user";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
@@ -20,7 +22,7 @@ import { jdDetailFunnelEvent } from "shared-ga/jd";
 import { HeaderPart, DetailSupportPart, DetailWorkPart, DetailPreferencePart, ReceptInfoPart } from "./part";
 import { PageHead } from "./pageHead";
 
-import { wrapper, flexBox, container, containerSkeleton } from "./style";
+import { wrapper, flexBox, container, containerSkeleton, logoImageBox } from "./style";
 
 const JobsDetail: NextPage = () => {
   const [currentPositionId, setCurrentPositionId] = useState<number>(0);
@@ -92,6 +94,9 @@ const JobsDetail: NextPage = () => {
         />
         <div css={flexBox}>
           <section css={container}>
+            <div css={logoImageBox}>
+              <Image src={logoSrc} alt="" fill />
+            </div>
             <DetailSupportPart freshPosition={jobDetailData.positionArr[currentPositionId]} />
             <DetailWorkPart freshPosition={jobDetailData.positionArr[currentPositionId]} />
             <DetailPreferencePart freshPosition={jobDetailData.positionArr[currentPositionId]} />

@@ -2,7 +2,6 @@ import { FunctionComponent } from "react";
 import Image from "next/image";
 import { FiInfo } from "react-icons/fi";
 
-import logoSrc from "shared-image/global/deepLeLogo/largeColor.svg";
 import graduateColor from "shared-image/global/common/graduate_color.svg";
 import graduateGray from "shared-image/global/common/graduate_gray.svg";
 
@@ -22,7 +21,6 @@ import {
 } from "../common/style";
 import {
   wrapper,
-  logoImageBox,
   title,
   containerSubTitle,
   isColorPoint,
@@ -36,9 +34,6 @@ import {
 export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ freshPosition }) => {
   return (
     <section css={wrapper}>
-      <div css={logoImageBox}>
-        <Image src={logoSrc} alt="" fill />
-      </div>
       <h3 css={title}>{getJobTitleCreator(freshPosition)}</h3>
 
       <section css={container}>
@@ -64,8 +59,7 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
         <div css={flexBox}>
           <div>
             <div css={flexBetweenBox}>
-              <p css={subTitle}>학력</p>
-
+              <p css={subTitle}>학력 조건</p>
               <ul css={eduContainer}>
                 {getPossibleEduArr(freshPosition.possibleEdu).map((edu) => {
                   return (
@@ -80,7 +74,7 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
               </ul>
             </div>
             <div css={flexBetweenBox}>
-              <p css={subTitle}>경력</p>
+              <p css={subTitle}>경력 조건</p>
               <p css={desc}>
                 {freshPosition.requiredExp.type}
 

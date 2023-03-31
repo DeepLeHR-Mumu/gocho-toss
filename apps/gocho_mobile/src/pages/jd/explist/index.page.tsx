@@ -45,7 +45,7 @@ const JobsExpList: NextPage = () => {
   const { setToastMessage } = useToast();
 
   const jdSearchHandler: SubmitHandler<PostingValues> = (searchVal) => {
-    const specialCharacterRegEx = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/g;
+    const specialCharacterRegEx = /[{}[\]/?.,;:|)*~`!^_+<>@#$%&\\=('"]/g;
     if (searchVal.name?.match(specialCharacterRegEx)) {
       setToastMessage("검색어에 특수문자는 포함될 수 없습니다.");
       return;
@@ -77,7 +77,7 @@ const JobsExpList: NextPage = () => {
 
   useEffect(() => {
     if (Object.keys(router.query).length === 0 && router.isReady) {
-      router.replace({ pathname: JOBS_EXPLIST_URL, query: { page: 1, order: "recent" } });
+      router.replace({ pathname: JOBS_EXPLIST_URL, query: { page: 1, order: "view" } });
     }
   }, [router]);
 

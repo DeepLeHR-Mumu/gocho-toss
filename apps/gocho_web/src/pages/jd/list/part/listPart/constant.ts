@@ -13,15 +13,15 @@ export const setJobOrderButtonArr: {
     order: "end",
   },
   {
-    text: "👀 조회수",
+    text: "👀 조회수 높은",
     order: "view",
   },
   {
-    text: "🔖 북마크",
+    text: "🔖 북마크 많은",
     order: "popular",
   },
 ];
 
 export const limit = 10;
 
-export const specialCharacterRegExp = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/g;
+export const specialCharacterRegExp = /[{}[\]/?.,;:|)*~`!^_+<>@#$%&\\=('"]/g;

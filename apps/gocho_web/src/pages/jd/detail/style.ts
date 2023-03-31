@@ -25,9 +25,24 @@ export const containerSkeleton = css`
 `;
 
 export const container = css`
+  position: relative;
   width: calc(100% - 18rem);
   padding: 3rem 2rem;
   background-color: ${COLORS.GRAY100};
   box-sizing: border-box;
   border-radius: 2rem 2rem 0 0;
+`;
+
+export const logoImageBox = css`
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  opacity: 0.25;
+  z-index: 0;
+  width: 15rem;
+  height: 2rem;
+  margin-left: 0.5rem;
+  > img {
+    object-fit: contain;
+  }
 `;

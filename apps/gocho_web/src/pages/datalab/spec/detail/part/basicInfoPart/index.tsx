@@ -75,7 +75,9 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ basicData
         <section css={descContainer}>
           <div css={schoolInfo}>
             <p css={schoolInfoTitle}>최종학력</p>
-            <p css={schoolInfoDesc}>{basicData.lastEducation}</p>
+            <p css={schoolInfoDesc}>
+              {basicData.lastEducation} {basicData.college.isUturn && <p css={schoolInfoDesc}>(U-턴함)</p>}
+            </p>
           </div>
           <div css={schoolInfo}>
             <p css={schoolInfoTitle}>학과</p>
@@ -88,7 +90,6 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ basicData
               <span css={noStrongDesc}>/{basicData.college.maxGrade.toFixed(1)}</span>
             </p>
           </div>
-          {basicData.college.isUturn && <p css={schoolInfoDesc}>U-턴함</p>}
         </section>
       )}
 
