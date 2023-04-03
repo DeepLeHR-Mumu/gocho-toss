@@ -28,7 +28,7 @@ const SpecDetail: NextPage = () => {
   const { setModal, closeModal, modal } = useModal();
 
   useEffect(() => {
-    if (axios.isAxiosError(userError) && (userError.response?.status === 401 || userError.response?.status === 403)) {
+    if (axios.isAxiosError(userError) && userError.code === "ERR_CANCELED") {
       setModal("loginModal", { button: "home" });
     }
     if (modal === "signUpModal") {
