@@ -1,12 +1,13 @@
-import type { NextPage } from "next";
 import Image from "next/image";
+import { ReactElement } from "react";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { dateConverter } from "shared-util";
 
-import { useJdArr } from "@api/jd/useJdArr";
-import { mainContainer, pageTitle } from "@style/commonStyles";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
+import { useJdArr } from "@/api/jd/useJdArr";
+import { mainContainer, pageTitle } from "@/style/commonStyles";
+import { ErrorScreen, LoadingScreen, GlobalLayout } from "@/component";
+import type { NextPageWithLayout } from "@/types";
 
 import { JobDef } from "../type";
 
@@ -30,7 +31,7 @@ import {
   copyButton,
 } from "./style";
 
-const Instagram: NextPage = () => {
+const Instagram: NextPageWithLayout = () => {
   const {
     data: jdDataArr,
     isLoading,
@@ -131,45 +132,37 @@ const Instagram: NextPage = () => {
                   <div css={infoBox}>
                     <p css={infoName}>채용 분야</p>
                     <div css={info}>
-                      {job.taskArr.map((task) => {
-                        return (
-                          <p key={`${job.id}${task}`} css={infoText}>
-                            {task}
-                          </p>
-                        );
-                      })}
+                      {job.taskArr.map((task) => (
+                        <p key={`${job.id}${task}`} css={infoText}>
+                          {task}
+                        </p>
+                      ))}
                     </div>
                     <p css={infoName}>학력</p>
                     <div css={info}>
-                      {job.eduArr.map((edu) => {
-                        return (
-                          <p key={`${job.id}${edu}`} css={infoText}>
-                            {edu}
-                          </p>
-                        );
-                      })}
+                      {job.eduArr.map((edu) => (
+                        <p key={`${job.id}${edu}`} css={infoText}>
+                          {edu}
+                        </p>
+                      ))}
                     </div>
                   </div>
                   <div css={infoBox}>
                     <p css={infoName}>교대</p>
                     <div css={info}>
-                      {job.rotationArr.map((rotation) => {
-                        return (
-                          <p key={`${job.id}${rotation}`} css={infoText}>
-                            {rotation}
-                          </p>
-                        );
-                      })}
+                      {job.rotationArr.map((rotation) => (
+                        <p key={`${job.id}${rotation}`} css={infoText}>
+                          {rotation}
+                        </p>
+                      ))}
                     </div>
                     <p css={infoName}>계약 형태</p>
                     <div css={info}>
-                      {job.contractArr.map((contract) => {
-                        return (
-                          <p key={`${job.id}${contract}`} css={infoText}>
-                            {contract}
-                          </p>
-                        );
-                      })}
+                      {job.contractArr.map((contract) => (
+                        <p key={`${job.id}${contract}`} css={infoText}>
+                          {contract}
+                        </p>
+                      ))}
                     </div>
                   </div>
                   <div css={longInfoBox}>
@@ -188,13 +181,11 @@ const Instagram: NextPage = () => {
                   <div css={infoBox}>
                     <p css={infoName}>경력 조건</p>
                     <div css={info}>
-                      {job.requiredExpArr.map((exp) => {
-                        return (
-                          <p key={`${job.id}${exp}`} css={infoText}>
-                            {exp}
-                          </p>
-                        );
-                      })}
+                      {job.requiredExpArr.map((exp) => (
+                        <p key={`${job.id}${exp}`} css={infoText}>
+                          {exp}
+                        </p>
+                      ))}
                     </div>
                     <p css={infoName}>조회수</p>
                     <div css={info}>{job.view}</div>
@@ -252,5 +243,7 @@ const Instagram: NextPage = () => {
     </main>
   );
 };
+
+Instagram.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default Instagram;

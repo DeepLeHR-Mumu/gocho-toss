@@ -90,7 +90,7 @@ export const setJobOrderButton = (active = false) => {
     width: fit-content;
     text-align: center;
     white-space: nowrap;
-    height: 2.5rem;
+    height: 2.25rem;
     display: flex;
     align-items: center;
     justify-content: center;

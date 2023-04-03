@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
-import { axiosInstance } from "@api/useAxiosInterceptor";
+import { axiosInstance } from "@/api/useAxiosInterceptor";
 import { PostCompanyDef, RequestObjDef, useAddCompanyProps } from "./type";
 
 export const postAddCompany: PostCompanyDef = async (requestObj) => {
@@ -18,8 +18,8 @@ export const postAddCompany: PostCompanyDef = async (requestObj) => {
   return data;
 };
 
-export const useAddCompany: useAddCompanyProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({
+export const useAddCompany: useAddCompanyProps = () =>
+  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({
     mutationFn: (requestObj) => {
       const newRequestObj = {
         dto: {
@@ -40,4 +40,3 @@ export const useAddCompany: useAddCompanyProps = () => {
       return postAddCompany(newRequestObj);
     },
   });
-};

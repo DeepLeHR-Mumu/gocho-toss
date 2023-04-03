@@ -1,100 +1,137 @@
-import { useState } from "react";
-import type { NextPage } from "next";
+import { ReactElement, useState, useRef } from "react";
+import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
-import { useFindCompany } from "@api/company/useFindCompany";
-import { useAddJd } from "@api/jd/useAddJd";
-import { mainContainer, pageTitle } from "@style/commonStyles";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
+import { SharedButton } from "shared-ui/business/sharedButton";
+import { useDisabledKeydownSubmit } from "shared-hooks/src";
+import { COLORS } from "shared-style/color";
 
-import { CommonDataPart } from "./part/commonDataPart";
-import { PositionRequiredDataPart } from "./part/positionRequiredDataPart";
-import { PositionTaskDataPart } from "./part/positionTaskDataPart";
-import { PositionEtcDataPart } from "./part/positionEtcDataPart";
-import { JobFormValues } from "./type";
-import { formContainer, positionContainer, addPositionButton, submitButton, checkMsgBox } from "./style";
+import { useToast } from "@/globalStates";
+import { useAddJd } from "@/api";
+import { GlobalLayout, PageLayout } from "@/component";
+import type { NextPageWithLayout } from "@/types";
+import { INTERNAL_URL } from "@/constant";
+
+import { CommonDataPart, PositionRequiredDataPart, PositionTaskDataPart, PositionEtcDataPart } from "./part";
 import { blankPosition } from "./constant";
+import { JobFormValues } from "./type";
+import { cssObj } from "./style";
 
-const JdUpload: NextPage = () => {
-  const [searchWord, setSearchWord] = useState<string>("");
+const JdUpload: NextPageWithLayout = () => {
   const [checkMsg, setCheckMsg] = useState<string>();
+  const router = useRouter();
+  const isUploadLoading = useRef<boolean>(false);
 
   const jobForm = useForm<JobFormValues>({
+    mode: "onBlur",
     defaultValues: {
       position_arr: [blankPosition],
     },
   });
-  const { control, handleSubmit } = jobForm;
 
+  useDisabledKeydownSubmit();
+  const { setToast } = useToast();
+  const { control, handleSubmit } = jobForm;
   const { fields, append, remove } = useFieldArray({
     control,
     name: "position_arr",
   });
 
-  const { data: companyDataObj, isLoading, isError } = useFindCompany({ word: searchWord, order: "recent" });
   const { mutate: addJobMutate } = useAddJd();
 
-  if (!companyDataObj || isLoading) {
-    return <LoadingScreen />;
-  }
-
-  if (isError) {
-    return <ErrorScreen />;
-  }
-
   const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
-    addJobMutate(
-      { dto: jobObj },
-      {
-        onSuccess: () => {
-          setCheckMsg("서버에 공고가 업로드 되었습니다.");
-        },
+    if (isUploadLoading.current) return;
 
-        onError: (addJobError) => {
-          setCheckMsg(addJobError.response?.data.error_message);
-        },
-      }
-    );
+    if (!isUploadLoading.current) {
+      isUploadLoading.current = true;
+
+      addJobMutate(
+        { dto: jobObj },
+        {
+          onSuccess: () => {
+            setToast("등록되었습니다");
+            router.push({
+              pathname: INTERNAL_URL.JD_LIST_URL,
+              query: { ...router.query, page: 1 },
+            });
+          },
+          onError: (addJobError) => {
+            setCheckMsg(addJobError.response?.data.error_message);
+          },
+          onSettled: () => {
+            isUploadLoading.current = false;
+          },
+        }
+      );
+    }
   };
 
   return (
-    <main css={mainContainer}>
-      <h2 css={pageTitle}>공고 업로드</h2>
-      <section>
-        <form css={formContainer} onSubmit={handleSubmit(jobSubmitHandler)}>
-          <CommonDataPart
-            companyDataArr={companyDataObj.companyDataArr}
-            jobForm={jobForm}
-            setSearchWord={setSearchWord}
-          />
-          <ul>
-            {fields.map((item, index) => {
-              return (
-                <li css={positionContainer} key={item.id}>
-                  <PositionRequiredDataPart id={item.id} index={index} jobForm={jobForm} />
-                  <PositionTaskDataPart id={item.id} index={index} jobForm={jobForm} />
-                  <PositionEtcDataPart id={item.id} index={index} jobForm={jobForm} append={append} remove={remove} />
-                </li>
-              );
-            })}
+    <main css={cssObj.wrapper}>
+      <PageLayout>
+        <h2 css={cssObj.title}>공고 업로드</h2>
+        <p css={cssObj.infoDesc}>
+          <span>필수 작성칸</span> <span>필수 작성아님</span>
+        </p>
+        <form css={cssObj.formContainer} onSubmit={handleSubmit(jobSubmitHandler)}>
+          <CommonDataPart jobForm={jobForm} />
+
+          <ul css={cssObj.fieldArrCSS}>
+            {fields.map((item, index) => (
+              <li key={item.id}>
+                <PositionRequiredDataPart id={item.id} index={index} jobForm={jobForm} />
+                <PositionTaskDataPart id={item.id} index={index} jobForm={jobForm} />
+                <PositionEtcDataPart id={item.id} index={index} jobForm={jobForm} />
+
+                <div css={cssObj.cardButtonBox}>
+                  <SharedButton
+                    onClickHandler={() => append({ ...jobForm.watch("position_arr")[index] })}
+                    text="해당 직무 복사"
+                    size="medium"
+                    radius="round"
+                    backgroundColor={COLORS.BLUE_FIRST40}
+                    fontColor={COLORS.GRAY100}
+                  />
+                  <SharedButton
+                    onClickHandler={() => remove(index)}
+                    text="해당 직무 제거"
+                    size="medium"
+                    radius="round"
+                    backgroundColor={COLORS.BLUE_FIRST40}
+                    fontColor={COLORS.GRAY100}
+                  />
+                </div>
+              </li>
+            ))}
           </ul>
-          <button
-            css={addPositionButton}
-            type="button"
-            onClick={() => {
-              append(blankPosition);
-            }}
-          >
-            직무 추가
-          </button>
-          <button css={submitButton} type="submit">
-            공고 등록하기
-          </button>
-          {checkMsg && <p css={checkMsgBox}>{checkMsg}</p>}
+          {checkMsg && <p css={cssObj.warning}>{checkMsg}</p>}
+          <div css={cssObj.buttonBox}>
+            <SharedButton
+              onClickHandler={() => {
+                append(blankPosition);
+              }}
+              text="직무 추가"
+              size="large"
+              radius="round"
+              backgroundColor={COLORS.BLUE_FIRST40}
+              fontColor={COLORS.GRAY100}
+            />
+
+            <SharedButton
+              onClickHandler="submit"
+              text="공고 등록하기"
+              size="large"
+              radius="round"
+              backgroundColor={COLORS.BLUE_FIRST40}
+              fontColor={COLORS.GRAY100}
+            />
+          </div>
         </form>
-      </section>
+      </PageLayout>
     </main>
   );
 };
+
+JdUpload.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default JdUpload;

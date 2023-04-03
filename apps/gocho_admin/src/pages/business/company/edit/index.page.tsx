@@ -1,22 +1,22 @@
-import { NextPage } from "next";
-import { useState } from "react";
+import { useState, ReactElement } from "react";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useCompanyDetail } from "@api/company/useCompanyDetail";
-import { useEditCompanyRequest } from "@api/company/useEditCompanyRequest";
-import { useAcceptCompany } from "@api/company/useAcceptCompany";
-import { useRejectCompany } from "@api/company/useRejectCompany";
-import { companyArrKeyObj } from "@api/company/useCompanyArr/type";
-import { mainContainer, pageTitle } from "@style/commonStyles";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
+import { useCompanyDetail } from "@/api/company/useCompanyDetail";
+import { useEditCompanyRequest } from "@/api/company/useEditCompanyRequest";
+import { useAcceptCompany } from "@/api/company/useAcceptCompany";
+import { useRejectCompany } from "@/api/company/useRejectCompany";
+import { companyArrKeyObj } from "@/api/company/useCompanyArr/type";
+import { mainContainer, pageTitle } from "@/style/commonStyles";
+import { ErrorScreen, GlobalLayout, LoadingScreen } from "@/component";
+import type { NextPageWithLayout } from "@/types";
 
 import { CompanyPart } from "./part/companyPart";
 import { cssObj } from "./style";
 import { RejectFormValues } from "./type";
 
-const CompanyEditDetail: NextPage = () => {
+const CompanyEditDetail: NextPageWithLayout = () => {
   const [checkMsg, setCheckMsg] = useState<string>();
 
   const queryClient = useQueryClient();
@@ -116,5 +116,7 @@ const CompanyEditDetail: NextPage = () => {
     </main>
   );
 };
+
+CompanyEditDetail.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default CompanyEditDetail;

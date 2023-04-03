@@ -153,7 +153,7 @@ export const certiNumber = css`
 export const buttonContainer = css`
   display: flex;
   white-space: nowrap;
-  align-items: flex-end;
+  align-items: center;
   justify-content: flex-end;
   padding: 1rem;
 `;

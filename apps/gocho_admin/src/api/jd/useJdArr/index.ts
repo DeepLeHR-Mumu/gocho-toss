@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { axiosNoTokenInstance } from "@api/useAxiosInterceptor";
+import { axiosNoTokenInstance } from "@/api/useAxiosInterceptor";
 
 import { GetJdArrDef, jdArrKeyObj, RequestObjDef } from "./type";
 import { jdArrSelector } from "./util";
@@ -10,12 +10,9 @@ export const getJdArr: GetJdArrDef = async ({ queryKey: [{ requestObj }] }) => {
   return data;
 };
 
-export const useJdArr = (requestObj: RequestObjDef) => {
-  return useQuery({
+export const useJdArr = (requestObj: RequestObjDef) =>
+  useQuery({
     queryKey: jdArrKeyObj.arr(requestObj),
     queryFn: getJdArr,
-    select: (data) => {
-      return jdArrSelector(data);
-    },
+    select: (data) => jdArrSelector(data),
   });
-};

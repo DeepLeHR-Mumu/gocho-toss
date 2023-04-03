@@ -8,7 +8,15 @@ import { changeHomeJdListSortingEvent } from "shared-ga/home";
 import { Layout } from "@component/layout";
 
 import { setJobOrderButtonArr } from "./constant";
-import { partContainer, buttonArrContainer, title, setJobOrderButton, showMoreJobBox, colorPoint } from "./style";
+import {
+  partContainer,
+  titleContainer,
+  buttonArrContainer,
+  title,
+  setJobOrderButton,
+  showMoreJobBox,
+  colorPoint,
+} from "./style";
 import { changeOrderDef, OrderDef } from "./type";
 import { JobCardList } from "./component/jobCardList";
 
@@ -23,7 +31,7 @@ export const JobPart: FunctionComponent = () => {
     <section css={partContainer}>
       <InvisibleH2 title="생산직 채용 공고" />
       <Layout>
-        <header>
+        <header css={titleContainer}>
           <p css={title}>
             <span css={colorPoint}>NEW</span> 실시간 채용 공고 📮
           </p>

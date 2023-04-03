@@ -9,8 +9,8 @@ import { globalSearchEvent } from "shared-ga/search";
 import { MAIN_URL } from "shared-constant";
 import { useUserInfo } from "shared-api/auth";
 
-import { useToast } from "@recoil/hook/toast";
 import { Layout } from "@component/layout";
+import { useToast } from "@/globalStates";
 
 import { AuthorizedMenu } from "./component/authorizedMenu";
 import { UnauthorizedMenu } from "./component/unauthorizedMenu";
@@ -36,7 +36,7 @@ import {
 export const GNB: FunctionComponent = () => {
   const [openedElement, setOpenedElement] = useState<openedElementDef>(null);
   const [query, setQuery] = useState("");
-  const { setCurrentToast } = useToast();
+  const { setToastMessage } = useToast();
 
   const router = useRouter();
   const { isSuccess } = useUserInfo();
@@ -57,10 +57,10 @@ export const GNB: FunctionComponent = () => {
   };
 
   const submitHandler = preventRefresh(() => {
-    const regExp = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/g;
+    const regExp = /[{}[\]/?.,;:|)*~`!^_+<>@#$%&\\=('"]/g;
 
     if (query.match(regExp)) {
-      setCurrentToast("검색어에 특수문자는 포함될 수 없습니다.");
+      setToastMessage("검색어에 특수문자는 포함될 수 없습니다.");
       return;
     }
     globalSearchEvent(query);

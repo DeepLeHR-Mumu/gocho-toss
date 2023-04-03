@@ -7,8 +7,8 @@ import { useCompanyArr } from "shared-api/company";
 import { JOBS_EXPLIST_URL } from "shared-constant";
 import { expiredJdListSortingEvent } from "shared-ga/jd";
 
-import { useToast } from "@recoil/hook/toast";
 import { Pagination } from "@pages/jd/component/pagination";
+import { useToast } from "@/globalStates";
 
 import { setJobOrderButtonArr } from "./constant";
 import { buttonArrContainer, container, searchBox, searchButton, setJobOrderButton, wrapper } from "./style";
@@ -30,12 +30,12 @@ export const SearchPart: FunctionComponent = () => {
     offset: (Number(router.query.page) - 1) * 10,
   });
 
-  const { setCurrentToast } = useToast();
+  const { setToastMessage } = useToast();
 
   const jdSearchHandler: SubmitHandler<PostingValues> = (postingVal) => {
-    const specialCharacterRegEx = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/g;
+    const specialCharacterRegEx = /[{}[\]/?.,;:|)*~`!^_+<>@#$%&\\=('"]/g;
     if (postingVal.name?.match(specialCharacterRegEx)) {
-      setCurrentToast("검색어에 특수문자는 포함될 수 없습니다.");
+      setToastMessage("검색어에 특수문자는 포함될 수 없습니다.");
       return;
     }
     router.push({

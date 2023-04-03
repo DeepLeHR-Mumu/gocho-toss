@@ -23,13 +23,10 @@ export const companyLogoBox = css`
 `;
 
 export const infoContainer = css`
-  flex-grow: 1;
-`;
-
-export const infoBox = css`
   display: flex;
   align-items: center;
-  margin-bottom: 0.5rem;
+  gap: 2rem;
+  flex-grow: 1;
 `;
 
 export const bookmarkButton = (isBookmarked = false) => {
@@ -43,7 +40,7 @@ export const bookmarkButton = (isBookmarked = false) => {
     border-radius: 1.5rem;
     background-color: ${isBookmarked ? COLORS.STATE_SUCCESS : `${COLORS.GRAY90}`};
     color: ${isBookmarked ? COLORS.BLUE_FIRST40 : `${COLORS.GRAY30}`};
-    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
     transition: all 0.2s ease;
     font-size: 0.875rem;
     font-weight: 400;
@@ -63,6 +60,7 @@ export const viewBox = css`
   color: ${COLORS.GRAY60};
   font-size: 0.875rem;
   font-weight: 400;
+  margin-left: 1rem;
 `;
 
 export const viewColor = css`
@@ -110,10 +108,12 @@ export const youtubeLinkButton = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
+  gap: 0.5rem;
   height: 2.5rem;
   margin-left: 1rem;
+  padding: 0 1rem;
+  font-size: 0.875rem;
   color: ${COLORS.GRAY30};
   background-color: ${COLORS.GRAY90};
-  border-radius: 50%;
+  border-radius: 2rem;
 `;

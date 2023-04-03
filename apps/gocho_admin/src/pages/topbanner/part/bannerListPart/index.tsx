@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 
 import { useBannerArr } from "shared-api/banner/useBannerArr";
 
-import { pageTitle } from "@style/commonStyles";
+import { pageTitle } from "@/style/commonStyles";
 
 import { bannerIdBox, companyNameBox, expireDateBox, sectionContainer, tableTitle, titleBox } from "./style";
 import { BannerBox } from "../../component/bannerBox";
@@ -25,9 +25,9 @@ export const BannerListPart: FunctionComponent = () => {
             </tr>
           </thead>
           <tbody>
-            {bannerDataArr?.bannerDataArr.map((banner) => {
-              return <BannerBox key={`ManagerTopBanner${banner.id}`} banner={banner} />;
-            })}
+            {bannerDataArr?.bannerDataArr.map((banner) => (
+              <BannerBox key={`ManagerTopBanner${banner.id}`} banner={banner} />
+            ))}
           </tbody>
         </table>
       </section>

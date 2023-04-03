@@ -7,7 +7,7 @@ import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { myPageFunnelEvent } from "shared-ga/myPage";
 
 import { Layout } from "@component/layout";
-import { useModal } from "@recoil/hook/modal";
+import { useModal } from "@/globalStates";
 
 import { BookmarkCompanyPart } from "./part/bookmarkCompanyPart";
 import { BookmarkJobPart } from "./part/bookmarkJobPart";
@@ -19,23 +19,23 @@ import { activeButtonDef } from "./type";
 
 const MyPage: NextPage = () => {
   const [activeButton, setActiveButton] = useState<activeButtonDef>("채용공고");
-  const { setCurrentModal, currentModal, closeModal } = useModal();
+  const { setModal, modal, closeModal } = useModal();
   const { error } = useUserInfo();
 
   useEffect(() => {
     if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
-      setCurrentModal("loginModal", { button: "home" });
+      setModal("loginModal", { button: "home" });
     }
-    if (currentModal?.activatedModal === "signUpModal") {
-      setCurrentModal("signUpModal");
+    if (modal === "signUpModal") {
+      setModal("signUpModal");
     }
-    if (currentModal?.activatedModal === "findPasswordModal") {
-      setCurrentModal("findPasswordModal");
+    if (modal === "findPasswordModal") {
+      setModal("findPasswordModal");
     }
     return () => {
       closeModal();
     };
-  }, [error, closeModal, setCurrentModal, currentModal?.activatedModal]);
+  }, [error, closeModal, setModal, modal]);
 
   useEffect(() => {
     myPageFunnelEvent();

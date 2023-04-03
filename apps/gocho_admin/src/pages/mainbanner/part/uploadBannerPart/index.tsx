@@ -5,8 +5,8 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
 
-import { useAddMainBanner } from "@api/banner/useAddMainBanner";
-import { pageTitle } from "@style/commonStyles";
+import { useAddMainBanner } from "@/api/banner/useAddMainBanner";
+import { pageTitle } from "@/style/commonStyles";
 
 import {
   bannerPreviewContainer,
@@ -79,9 +79,7 @@ export const UploadBannerPart: FunctionComponent = () => {
               css={inputBox(false)}
               {...register("start_time", {
                 required: true,
-                setValueAs: (startDate: Date) => {
-                  return new Date(startDate).getTime();
-                },
+                setValueAs: (startDate: Date) => new Date(startDate).getTime(),
               })}
             />
             <input
@@ -89,9 +87,7 @@ export const UploadBannerPart: FunctionComponent = () => {
               css={inputBox(false)}
               {...register("end_time", {
                 required: true,
-                setValueAs: (endDate: Date) => {
-                  return new Date(endDate).getTime();
-                },
+                setValueAs: (endDate: Date) => new Date(endDate).getTime(),
               })}
             />
             <label css={colorPickerButton} htmlFor="topBannerColor">

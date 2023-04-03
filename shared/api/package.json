@@ -6,7 +6,7 @@
   "main": "./index.tsx",
   "types": "./index.tsx",
   "dependencies": {
-    "@tanstack/react-query": "^4.2.3",
+    "@tanstack/react-query": "^4.28.0",
     "axios": "^0.27.2",
     "dayjs": "^1.11.7",
     "react": "18.2.0",

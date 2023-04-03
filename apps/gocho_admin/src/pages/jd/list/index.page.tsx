@@ -1,27 +1,17 @@
-import type { NextPage } from "next";
 import { useRouter } from "next/router";
+import { ReactElement } from "react";
 
-import { useJdArr } from "@api/jd/useJdArr";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
-import { BottomPagination } from "@component/bottomPagination";
-import { JD_LIST_URL } from "@constant/internalURL";
-import { mainContainer, pageTitle } from "@style/commonStyles";
+import { useJdArr } from "@/api";
+import { GlobalLayout, PageLayout, ErrorScreen, LoadingScreen, Pagination } from "@/component";
+import { INTERNAL_URL } from "@/constant";
+import type { NextPageWithLayout } from "@/types";
 
-import { JD_SEARCH_LIMIT } from "./constant";
-import JobCard from "./component/jobCard";
-import {
-  sectionContainer,
-  tableContainer,
-  jobContainer,
-  jobIdBox,
-  mainInfoBox,
-  taskContainer,
-  dateBox,
-  buttonContainer,
-} from "./style";
+import { JobCard } from "./component";
+import { cssObj } from "./style";
 
-const JdList: NextPage = () => {
+const JdList: NextPageWithLayout = () => {
   const router = useRouter();
+  const JD_SEARCH_LIMIT = 10;
 
   const {
     data: jobDataObj,
@@ -32,7 +22,7 @@ const JdList: NextPage = () => {
     filter: "valid",
     status: "all",
     limit: JD_SEARCH_LIMIT,
-    offset: (Number(router.query.page) - 1) * JD_SEARCH_LIMIT,
+    offset: (Number(router.query.page || 1) - 1) * JD_SEARCH_LIMIT,
   });
 
   if (!jobDataObj || isLoading) {
@@ -46,29 +36,28 @@ const JdList: NextPage = () => {
   const totalPage = Math.ceil(jobDataObj.count / JD_SEARCH_LIMIT);
 
   return (
-    <main css={mainContainer}>
-      <h2 css={pageTitle}>공고 목록</h2>
-      <section css={sectionContainer}>
-        <table css={tableContainer}>
-          <thead>
-            <tr css={jobContainer}>
-              <th css={jobIdBox}>공고 ID</th>
-              <th css={mainInfoBox}>기업이름 / 공고제목</th>
-              <th css={taskContainer}>직무</th>
-              <th css={dateBox}>채용 날짜</th>
-              <th css={buttonContainer}> </th>
-            </tr>
-          </thead>
-          <tbody>
-            {jobDataObj.jdDataArr.map((job) => {
-              return <JobCard key={`ManagerJobCard${job.id}`} job={job} />;
-            })}
-          </tbody>
-        </table>
-      </section>
-      <BottomPagination totalPage={totalPage} url={JD_LIST_URL} />
+    <main css={cssObj.wrapper}>
+      <PageLayout>
+        <h2 css={cssObj.title}>공고 목록</h2>
+        <section css={cssObj.container}>
+          <ul css={cssObj.thead}>
+            <li>ID</li>
+            <li>공고정보</li>
+            <li>직무</li>
+            <li>채용기간</li>
+          </ul>
+          <ul css={cssObj.tbody}>
+            {jobDataObj.jdDataArr.map((job) => (
+              <JobCard key={`ManagerJobCard${job.id}`} job={job} />
+            ))}
+          </ul>
+        </section>
+        <Pagination totalPage={totalPage} url={INTERNAL_URL.JD_LIST_URL} />
+      </PageLayout>
     </main>
   );
 };
+
+JdList.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default JdList;

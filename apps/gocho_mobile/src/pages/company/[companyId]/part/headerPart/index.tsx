@@ -13,7 +13,7 @@ import { companyCountInfoKeyObj } from "shared-constant/queryKeyFactory/company/
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 
 import { Layout } from "@component/layout";
-import { useModal } from "@recoil/hook/modal";
+import { useModal } from "@/globalStates";
 
 import {
   wrapper,
@@ -25,7 +25,6 @@ import {
   companyName,
   industryText,
   buttonBox,
-  countCSS,
   infoBox,
 } from "./style";
 
@@ -33,7 +32,7 @@ export const HeaderPart: FunctionComponent = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
   const { data: userData } = useUserInfo();
   const { data: companyCountInfoData } = useCompanyCountInfo({ id: Number(router.query.companyId) });
   const { data: userCompanyBookmarkArr } = useUserCompanyBookmarkArr({ userId: userData?.id });
@@ -53,7 +52,7 @@ export const HeaderPart: FunctionComponent = () => {
 
   const addCompanyBookmark = () => {
     if (!userData) {
-      setCurrentModal("loginModal", { button: "close" });
+      setModal("loginModal", { button: "close" });
     }
     return (
       userData?.id &&
@@ -111,7 +110,7 @@ export const HeaderPart: FunctionComponent = () => {
                 onClick={isBookmarked ? deleteCompanyBookmark : addCompanyBookmark}
               >
                 <BsFillBookmarkFill />
-                기업 북마크 <span css={countCSS}>{companyCountInfoData?.bookmarkCount.toLocaleString("Ko-KR")}</span>
+                기업 북마크 <span>{companyCountInfoData?.bookmarkCount.toLocaleString("Ko-KR")}</span>
               </button>
 
               <p css={viewCountContainer}>

@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "@api/useAxiosInterceptor";
+import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { EditFactoryDef, RequestObjDef, UseEditFactoryProps } from "./type";
 
@@ -12,6 +12,5 @@ const putEditFactory: EditFactoryDef = async (requestObj) => {
   return data;
 };
 
-export const useEditFactory: UseEditFactoryProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: putEditFactory });
-};
+export const useEditFactory: UseEditFactoryProps = () =>
+  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: putEditFactory });

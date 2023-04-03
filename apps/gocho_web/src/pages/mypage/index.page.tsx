@@ -4,11 +4,11 @@ import axios from "axios";
 
 import { useUserInfo } from "shared-api/auth";
 import { myPageFunnelEvent } from "shared-ga/myPage";
-
-import { useModal } from "@recoil/hook/modal";
-import { Layout } from "@component/layout";
-
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
+
+import { Layout } from "@component/layout";
+import { useModal } from "@/globalStates";
+
 import { SettingPart } from "./part/settingPart";
 import { CalendarPart } from "./part/calendarPart";
 import { BookmarkPart } from "./part/bookmarkPart";
@@ -16,21 +16,21 @@ import { PageHead } from "./pageHead";
 import { mainContainer, title, colorPoint, mypagePosition, mypageBody } from "./style";
 
 const MypageHome: NextPage = () => {
-  const { setCurrentModal, currentModal, closeModal } = useModal();
+  const { setModal, modal, closeModal } = useModal();
 
   const { error } = useUserInfo();
 
   useEffect(() => {
     if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
-      setCurrentModal("loginModal", { button: "home" });
+      setModal("loginModal", { button: "home" });
     }
-    if (currentModal?.activatedModal === "signUpModal") {
-      setCurrentModal("signUpModal");
+    if (modal === "signUpModal") {
+      setModal("signUpModal");
     }
-    if (currentModal?.activatedModal === "findPasswordModal") {
-      setCurrentModal("findPasswordModal");
+    if (modal === "findPasswordModal") {
+      setModal("findPasswordModal");
     }
-  }, [error, closeModal, setCurrentModal, currentModal?.activatedModal]);
+  }, [error, closeModal, setModal, modal]);
 
   useEffect(() => {
     myPageFunnelEvent();

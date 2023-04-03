@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "@api/useAxiosInterceptor";
+import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { PostTopBannerDef, RequestObjDef, useAddTopBannerProps } from "./type";
 
@@ -19,6 +19,5 @@ export const postAddTopBanner: PostTopBannerDef = async (requestObj) => {
   return data;
 };
 
-export const useAddTopBanner: useAddTopBannerProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: postAddTopBanner });
-};
+export const useAddTopBanner: useAddTopBannerProps = () =>
+  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: postAddTopBanner });

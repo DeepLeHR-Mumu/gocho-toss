@@ -1,22 +1,22 @@
-import { NextPage } from "next";
-import { useState } from "react";
+import { useState, ReactElement } from "react";
 import { useRouter } from "next/router";
 import { useQueryClient } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { jdArrKeyObj } from "@api/jd/useJdArr/type";
-import { useJdDetail } from "@api/jd/useJdDetail";
-import { useEditJdRequest } from "@api/jd/useEditJdRequest";
-import { useAcceptJd } from "@api/jd/useAcceptJd";
-import { useRejectJd } from "@api/jd/useRejectJd";
-import { mainContainer, pageTitle } from "@style/commonStyles";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
+import { jdArrKeyObj } from "@/api/jd/useJdArr/type";
+import { useJdDetail } from "@/api/jd/useJdDetail";
+import { useEditJdRequest } from "@/api/jd/useEditJdRequest";
+import { useAcceptJd } from "@/api/jd/useAcceptJd";
+import { useRejectJd } from "@/api/jd/useRejectJd";
+import { mainContainer, pageTitle } from "@/style/commonStyles";
+import { ErrorScreen, LoadingScreen, GlobalLayout } from "@/component";
+import type { NextPageWithLayout } from "@/types";
 
 import { JdPart } from "./part/jdPart";
 import { cssObj } from "./style";
 import { RejectFormValues } from "./type";
 
-const JdEditDetail: NextPage = () => {
+const JdEditDetail: NextPageWithLayout = () => {
   const [checkMsg, setCheckMsg] = useState<string>();
 
   const queryClient = useQueryClient();
@@ -106,5 +106,7 @@ const JdEditDetail: NextPage = () => {
     </main>
   );
 };
+
+JdEditDetail.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default JdEditDetail;

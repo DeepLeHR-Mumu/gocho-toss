@@ -15,7 +15,7 @@ import { useUserInfo } from "shared-api/auth";
 import { useJdApplyClick, useJdCountInfo } from "shared-api/job";
 import { jdBookmarkEvent } from "shared-ga/jd";
 
-import { useModal } from "@recoil/hook/modal";
+import { useModal } from "@/globalStates";
 
 import { HeaderProps } from "./type";
 import {
@@ -38,7 +38,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
   const queryClient = useQueryClient();
   const { data: userInfoData } = useUserInfo();
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userInfoData?.id });
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
   const router = useRouter();
 
   const { mutate: mutateJdApplyClick } = useJdApplyClick();
@@ -150,7 +150,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, 
               css={buttonCSS(isBookmarked)}
               onClick={() => {
                 if (!userInfoData) {
-                  setCurrentModal("loginModal", { button: "close" });
+                  setModal("loginModal", { button: "close" });
                 }
                 return isBookmarked ? deleteJobBookmark() : addJobBookmark();
               }}

@@ -7,9 +7,9 @@ import GDTitleSrc from "shared-image/global/deepLeLogo/smallMono.svg";
 import { PWD_REGEXP } from "shared-constant";
 import { usePatchUserInfo } from "shared-api/auth/usePatchUserInfo";
 import { useUserInfo } from "shared-api/auth";
-import { useToast } from "@recoil/hook/toast";
-import { useModal } from "@recoil/hook/modal";
+
 import { NormalButton } from "shared-ui/common/atom/button";
+import { useToast, useModal } from "@/globalStates";
 
 import {
   formContainer,
@@ -32,7 +32,7 @@ export const PasswordEditBox: FunctionComponent = () => {
   } = useForm<PasswordChangeFormValues>();
   const { data: userInfoData, refetch } = useUserInfo();
   const { mutate } = usePatchUserInfo();
-  const { setCurrentToast } = useToast();
+  const { setToastMessage } = useToast();
   const { closeModal } = useModal();
   const [failCurrentPw, setFailCurrentPw] = useState(false);
 
@@ -50,7 +50,7 @@ export const PasswordEditBox: FunctionComponent = () => {
           },
           onSuccess: (data) => {
             setFailCurrentPw(false);
-            setCurrentToast("비밀번호가 변경되었습니다.");
+            setToastMessage("비밀번호가 변경되었습니다.");
             closeModal();
             localStorage.setItem("accessToken", `${data?.data.access_token}`);
             refetch();

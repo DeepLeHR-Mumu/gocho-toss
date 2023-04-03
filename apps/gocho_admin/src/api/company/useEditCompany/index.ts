@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
-import { axiosInstance } from "@api/useAxiosInterceptor";
+import { axiosInstance } from "@/api/useAxiosInterceptor";
 import { EditCompanyDef, RequestObjDef, useEditCompanyProps } from "./type";
 
 export const editCompany: EditCompanyDef = async (requestObj) => {
@@ -18,8 +18,8 @@ export const editCompany: EditCompanyDef = async (requestObj) => {
   return data;
 };
 
-export const useEditCompany: useEditCompanyProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({
+export const useEditCompany: useEditCompanyProps = () =>
+  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({
     mutationFn: (requestObj) => {
       const newRequestObj = {
         companyId: requestObj.companyId,
@@ -41,4 +41,3 @@ export const useEditCompany: useEditCompanyProps = () => {
       return editCompany(newRequestObj);
     },
   });
-};

@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 
-import { useModal } from "@recoil/hook/modal";
 import { NormalButton } from "shared-ui/common/atom/button";
+import { useModal } from "@/globalStates";
 
 import {
   commentArrCSS,
@@ -18,10 +18,10 @@ import {
 } from "./style";
 
 export const UnLoginCommentBox: FunctionComponent = () => {
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
 
   const showLoginModal = () => {
-    setCurrentModal("loginModal", { button: "close" });
+    setModal("loginModal", { button: "close" });
   };
 
   return (

@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
 
-import { axiosInstance } from "@api/useAxiosInterceptor";
+import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { DeleteBannerDef, RequestObjDef, useDeleteBannerProps } from "./type";
 
@@ -12,6 +12,5 @@ export const deleteBanner: DeleteBannerDef = async (requestObj) => {
   return data;
 };
 
-export const useDeleteBanner: useDeleteBannerProps = () => {
-  return useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: deleteBanner });
-};
+export const useDeleteBanner: useDeleteBannerProps = () =>
+  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: deleteBanner });

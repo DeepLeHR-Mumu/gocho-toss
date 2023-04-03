@@ -19,7 +19,7 @@ import { dateConverter } from "shared-util";
 import { jdBookmarkEvent } from "shared-ga/jd";
 import { useUserInfo } from "shared-api/auth";
 
-import { useModal } from "@recoil/hook/modal";
+import { useModal } from "@/globalStates";
 
 import { dDayBooleanReturn } from "./util";
 import { JobCardProps, JobCardSkeleton } from "./type";
@@ -60,7 +60,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
   const queryClient = useQueryClient();
   const router = useRouter();
   const { isSuccess } = useUserInfo();
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
   const { data: userInfoData } = useUserInfo();
 
   const { mutate: addMutate } = useAddJobBookmarkArr({
@@ -95,7 +95,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
 
   const addJobBookmark = () => {
     if (!isSuccess) {
-      setCurrentModal("loginModal", { button: "close" });
+      setModal("loginModal", { button: "close" });
     }
     if (userId)
       addMutate(
@@ -138,7 +138,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         css={bookmarkButtonWrapper(isBookmarked)}
         onClick={(event) => {
           if (!userInfoData) {
-            setCurrentModal("loginModal", { button: "close" });
+            setModal("loginModal", { button: "close" });
           }
           event.preventDefault();
           return isBookmarked ? deleteJobBookmark() : addJobBookmark();

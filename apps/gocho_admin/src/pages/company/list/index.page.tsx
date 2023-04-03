@@ -1,17 +1,17 @@
-import type { NextPage } from "next";
 import { useRouter } from "next/router";
+import { ReactElement } from "react";
 
-import { useCompanyArr } from "@api/company/useCompanyArr";
-import { ErrorScreen, LoadingScreen } from "@component/screen";
-import { BottomPagination } from "@component/bottomPagination";
-import { COMPANY_LIST_URL } from "@constant/internalURL";
-import { mainContainer, pageTitle } from "@style/commonStyles";
+import { useCompanyArr } from "@/api/company/useCompanyArr";
+import { ErrorScreen, LoadingScreen, Pagination, GlobalLayout } from "@/component";
+import { INTERNAL_URL } from "@/constant";
+import { mainContainer, pageTitle } from "@/style/commonStyles";
+import type { NextPageWithLayout } from "@/types";
 
 import { COMPANY_SEARCH_LIMIT } from "./constant";
 import { sectionContainer, tableContainer } from "./style";
 import { CompanyCard } from "./component/companyCard";
 
-const CompanyList: NextPage = () => {
+const CompanyList: NextPageWithLayout = () => {
   const router = useRouter();
 
   const {
@@ -40,15 +40,17 @@ const CompanyList: NextPage = () => {
       <section css={sectionContainer}>
         <table>
           <tbody css={tableContainer}>
-            {companyDataObj.companyDataArr.map((company) => {
-              return <CompanyCard key={`ManagerCompanyCard${company.id}`} company={company} />;
-            })}
+            {companyDataObj.companyDataArr.map((company) => (
+              <CompanyCard key={`ManagerCompanyCard${company.id}`} company={company} />
+            ))}
           </tbody>
         </table>
       </section>
-      <BottomPagination totalPage={totalPage} url={COMPANY_LIST_URL} />
+      <Pagination totalPage={totalPage} url={INTERNAL_URL.COMPANY_LIST_URL} />
     </main>
   );
 };
+
+CompanyList.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default CompanyList;

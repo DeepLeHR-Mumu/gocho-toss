@@ -11,7 +11,6 @@ import {
   middleDescIconBox,
   lastDescCSS,
   titleCSS,
-  dimmed,
   linkButton,
   imageCss,
 } from "./style";
@@ -57,7 +56,6 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({ slideData }) => {
           </a>
         )}
       </div>
-      <div css={dimmed} />
       <div css={imageCss}>
         <Image priority src={slideData.backgroundImage} alt={slideData.title} fill />
       </div>

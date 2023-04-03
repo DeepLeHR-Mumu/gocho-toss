@@ -13,13 +13,12 @@ import catchLogoSrc from "shared-image/global/common/catch_logo.png";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { companyCountInfoKeyObj } from "shared-constant/queryKeyFactory/company/companyCountInfoKeyObj";
 
-import { useModal } from "@recoil/hook/modal";
+import { useModal } from "@/globalStates";
 
 import {
   sectionContainer,
   companyLogoBox,
   infoContainer,
-  infoBox,
   bookmarkButton,
   icon,
   viewBox,
@@ -35,7 +34,7 @@ export const HeaderPart: FunctionComponent = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
   const { data: userData } = useUserInfo();
   const { data: companyCountInfoData } = useCompanyCountInfo({
     id: Number(router.query.companyId),
@@ -94,7 +93,7 @@ export const HeaderPart: FunctionComponent = () => {
 
   const setBookmarkHandler = () => {
     if (!userData) {
-      return setCurrentModal("loginModal", { button: "close" });
+      return setModal("loginModal", { button: "close" });
     }
     return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
   };
@@ -105,7 +104,11 @@ export const HeaderPart: FunctionComponent = () => {
         <Image src={companyDetailData.logoUrl || defaultCompanyLogo} alt="" fill sizes="1" />
       </div>
       <div css={infoContainer}>
-        <div css={infoBox}>
+        <div>
+          <p css={companyName}>{companyDetailData.name}</p>
+          <p css={industry}>{companyDetailData.industry}</p>
+        </div>
+        <div>
           <button type="button" css={bookmarkButton(isBookmarked)} onClick={setBookmarkHandler}>
             <BsFillBookmarkFill />
             기업 북마크 {companyCountInfoData?.bookmarkCount.toLocaleString("ko-KR")}
@@ -117,8 +120,6 @@ export const HeaderPart: FunctionComponent = () => {
             조회수 <span css={viewColor}>{companyCountInfoData?.viewCount.toLocaleString("ko-KR")}</span>
           </p>
         </div>
-        <p css={companyName}>{companyDetailData.name}</p>
-        <p css={industry}>{companyDetailData.industry}</p>
       </div>
       {companyDetailData.catchUrl && (
         <a css={catchLinkButton} href={companyDetailData.catchUrl} target="_blank" rel="noopener noreferrer">
@@ -137,7 +138,7 @@ export const HeaderPart: FunctionComponent = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FiYoutube />
+          <FiYoutube /> 기업 정보영상 보기
         </a>
       )}
     </section>

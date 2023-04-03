@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import type { NextPage } from "next";
+import { useEffect, useState, ReactElement } from "react";
 import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
-import { useEditCompany } from "@api/company/useEditCompany";
-import { useCompanyDetail } from "@api/company/useCompanyDetail";
-import { mainContainer, pageTitle } from "@style/commonStyles";
+import { useEditCompany } from "@/api/company/useEditCompany";
+import { useCompanyDetail } from "@/api/company/useCompanyDetail";
+import { mainContainer, pageTitle } from "@/style/commonStyles";
+import type { NextPageWithLayout } from "@/types";
+import { ErrorScreen, LoadingScreen, GlobalLayout } from "@/component";
 
-import { ErrorScreen, LoadingScreen } from "@component/screen";
 import { FactoryBox } from "./component/factoryBox";
 import { BasicInfoPart } from "./part/basicInfoPart";
 import { WelfareInfoPart } from "./part/welfareInfoPart";
@@ -16,7 +16,7 @@ import { CompanyFormValues } from "./type";
 import { blankFactory } from "./constant";
 import { formContainer, addFactoryButton, submitButton, checkMsgBox } from "./style";
 
-const CompanyEdit: NextPage = () => {
+const CompanyEdit: NextPageWithLayout = () => {
   const router = useRouter();
   const companyId = Number(router.query.id);
 
@@ -71,20 +71,18 @@ const CompanyEdit: NextPage = () => {
   useEffect(() => {
     const businessNumber = companyData?.businessNumber;
     const newFoundDate = companyData?.foundDate ? companyData.foundDate + 540000 * 60 : 0;
-    const FactoryNewArr = companyData?.factoryArr?.map((factory) => {
-      return {
-        id: factory.id,
-        factory_name: factory.factoryName,
-        address: factory.address,
-        male_number: factory.maleNumber,
-        female_number: factory.femaleNumber,
-        product: factory.product,
-        bus_bool: factory.bus.exists,
-        bus_etc: factory.bus.desc,
-        dormitory_bool: factory.dormitory.exists,
-        dormitory_etc: factory.dormitory.desc,
-      };
-    });
+    const FactoryNewArr = companyData?.factoryArr?.map((factory) => ({
+      id: factory.id,
+      factory_name: factory.factoryName,
+      address: factory.address,
+      male_number: factory.maleNumber,
+      female_number: factory.femaleNumber,
+      product: factory.product,
+      bus_bool: factory.bus.exists,
+      bus_etc: factory.bus.desc,
+      dormitory_bool: factory.dormitory.exists,
+      dormitory_etc: factory.dormitory.desc,
+    }));
 
     reset({
       name: companyData?.name,
@@ -140,9 +138,9 @@ const CompanyEdit: NextPage = () => {
         <WelfareInfoPart register={register} />
         <PayInfoPart register={register} />
         <ul>
-          {fields.map((item, index) => {
-            return <FactoryBox key={item.id} index={index} companyForm={companyForm} remove={remove} />;
-          })}
+          {fields.map((item, index) => (
+            <FactoryBox key={item.id} index={index} companyForm={companyForm} remove={remove} />
+          ))}
         </ul>
         <button
           css={addFactoryButton}
@@ -161,5 +159,7 @@ const CompanyEdit: NextPage = () => {
     </main>
   );
 };
+
+CompanyEdit.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default CompanyEdit;

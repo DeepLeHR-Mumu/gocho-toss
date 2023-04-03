@@ -13,12 +13,10 @@ import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { ModalComponent } from "@component/modal/modalBackground";
 import { CloseButton } from "@component/common/atom/closeButton";
-import { loginObjDef } from "@recoil/atom/modal";
-import { useModal } from "@recoil/hook/modal";
-import { useToast } from "@recoil/hook/toast";
 
 import { tokenDecryptor } from "shared-util";
 import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
+import { useModal, loginObjDef, useToast } from "@/globalStates";
 import {
   wrapper,
   desc,
@@ -44,9 +42,9 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   } = useForm<LoginFormValues>({ mode: "onChange" });
   const queryClient = useQueryClient();
 
-  const { setCurrentToast } = useToast();
+  const { setToastMessage } = useToast();
   const { mutate } = useDoLogin();
-  const { closeModal, setCurrentModal } = useModal();
+  const { closeModal, setModal } = useModal();
   const [errorMsg, setErrorMsg] = useState<null | string>(null);
   const ref = useRef(0);
   const router = useRouter();
@@ -65,7 +63,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
         const { id, nickname } = tokenDecryptor(response.data.access_token);
         loginSuccessEvent(id, "gocho");
         closeModal();
-        setCurrentToast("님 반갑습니다.", nickname);
+        setToastMessage("님 반갑습니다.", nickname);
       },
     });
   };
@@ -151,14 +149,14 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
           variant="text"
           text="회원가입하기"
           buttonClick={() => {
-            setCurrentModal("signUpModal");
+            setModal("signUpModal");
           }}
         />
         <button
           type="button"
           css={findPasswordButton}
           onClick={() => {
-            setCurrentModal("findPasswordModal");
+            setModal("findPasswordModal");
           }}
         >
           비밀번호 찾기
@@ -169,9 +167,9 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
 };
 
 export const LoginModal: FunctionComponent = () => {
-  const { currentModal } = useModal();
+  const { contentObj } = useModal();
 
-  const loginObj = currentModal?.modalContentObj as loginObjDef;
+  const loginObj = contentObj as loginObjDef;
   return (
     <ModalComponent>
       <LoginBox button={loginObj.button} />

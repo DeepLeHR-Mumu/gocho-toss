@@ -101,33 +101,18 @@ export const subMenuToggleWrapper: subMenuToggleWrapperDef = (isHover) => {
   `;
 };
 
-export const searchIcon = css`
-  color: ${COLORS.BLUE_FIRST40};
-  font-size: 1.25rem;
-  padding-right: 1rem;
+export const unifiedSearchWrapper = css`
+  position: relative;
+  margin-right: 1.5rem;
 `;
 
-export const unifiedSearchWrapper = (isOn = false) => {
-  return css`
-    position: absolute;
-    bottom: ${isOn ? "-4rem" : "4rem"};
-    opacity: ${isOn ? 1 : 0};
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    max-width: 53.75rem;
-    transition: all 0.2s ease;
-    z-index: 20;
-  `;
-};
-
 export const unifiedSearch = css`
-  width: 100%;
-  height: 2.5rem;
+  width: 20rem;
+  height: 2.25rem;
   font-weight: 400;
   font-size: 0.875rem;
   background-color: ${COLORS.GRAY100};
-  padding: 0.5rem 2rem;
+  padding: 0.25rem 2rem;
   border-radius: 1.5rem;
   border: 2px solid ${COLORS.BLUE_SECOND40};
   box-shadow: 0 2px 8px 0 #b4b4b440;
