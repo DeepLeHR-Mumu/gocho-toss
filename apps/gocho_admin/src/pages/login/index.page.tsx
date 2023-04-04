@@ -25,8 +25,8 @@ export const Login: NextPage = () => {
         const { exp: accessExp } = adminTokenDecryptor(response.data.access_token);
         const { exp: refreshExp } = adminTokenDecryptor(response.data.refresh_token);
         userSetLocalStorageItem("USER", {
-          accessToken: response.data.refresh_token,
-          refreshToken: response.data.access_token,
+          accessToken: response.data.access_token,
+          refreshToken: response.data.refresh_token,
           accessExp,
           refreshExp,
         });
