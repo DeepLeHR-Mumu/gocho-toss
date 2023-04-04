@@ -22,9 +22,6 @@ export const CarouselPart: FunctionComponent = () => {
             스펙 평가를 기다리고 있어요 👀
           </strong>
           <RecommendCardList />
-          <div css={registerButtonContainer}>
-            <LinkButton text="내 스펙 등록하기" variant="outlined" linkTo={`${SPEC_REGISTER_URL}/#1`} />
-          </div>
         </Layout>
       </section>
     );
