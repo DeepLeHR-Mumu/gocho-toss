@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { MANAGER_BACKEND_URL } from "shared-constant";
 import { adminTokenDecryptor } from "shared-util";
-import { userSetLocalStorageItem, userGetLocalStoargetItem, userAllLocalStorageItem } from "@/utils";
+import { userSetLocalStorageItem, userGetLocalStoargetItem, userClearLocalStorageItem } from "@/utils";
 
 export const axiosInstance = axios.create({
   timeout: 10000,
@@ -13,7 +13,7 @@ axiosInstance.interceptors.request.use(async (config) => {
   const userObjInfo = userGetLocalStoargetItem("USER");
 
   if (!userObjInfo) {
-    userAllLocalStorageItem();
+    userClearLocalStorageItem();
     window.location.href = "/login";
     throw new axios.Cancel("유저 정보가 존재하지 않으므로 로그인 페이지 이동");
   }
@@ -25,7 +25,7 @@ axiosInstance.interceptors.request.use(async (config) => {
     userObjInfo.refreshToken === "undefined" ||
     parseInt(`${userObjInfo.refreshExp}`, 10) - 10 < date
   ) {
-    userAllLocalStorageItem();
+    userClearLocalStorageItem();
     window.location.href = "/login";
   }
 
