@@ -35,7 +35,7 @@ export const Header: FunctionComponent = () => {
     <header css={cssObj.header}>
       <Link href={INTERNAL_URL.MAIN_URL} passHref css={cssObj.logo}>
         <Image src={colorLogoSrc} alt="고초대졸닷컴" fill />
-        <strong css={cssObj.title}>관리자 어드민</strong>
+        <strong css={cssObj.title}>Admin 페이지</strong>
       </Link>
       {isLogined ? (
         <SharedButton
