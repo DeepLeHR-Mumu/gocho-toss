@@ -80,10 +80,10 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                       required: "교대 형태를 선택해주세요.",
                     }),
                   }}
-                  key={`${rotation.data}`}
+                  key={`${id}${rotation.data}`}
                   desc={rotation.name}
                   value={rotation.data}
-                  id={`${rotation.data}`}
+                  id={`${id}${rotation.data}`}
                 />
               ))}
             </div>
@@ -146,7 +146,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                               factoryAddress.id,
                             ]);
                           }}
-                          key={factoryAddress.id}
+                          key={`${id}${factoryAddress.id}`}
                         >
                           <div /> {factoryAddress.name}
                         </button>
@@ -179,7 +179,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                     <button
                       css={cssObj.isHaveFactoryButton}
                       type="button"
-                      key={address}
+                      key={`${id}${address}`}
                       aria-label={`${address} 제거하기`}
                       onClick={() => {
                         const filterAddressArr = watch(`position_arr.${index}.place.address_arr`)?.filter(
@@ -216,14 +216,14 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
               <div css={cssObj.flexBox}>
                 {taskArr.map((task) => (
                   <SharedRadioButton
-                    key={`${task.mainTask}`}
+                    key={`${id}${task.mainTask}`}
                     registerObj={{
                       ...jobForm.register(`position_arr.${index}.task_main`, {
                         required: "1차 직무를 선택해주세요.",
                       }),
                     }}
                     value={task.mainTask}
-                    id={`${task.mainTask}`}
+                    id={`${id}${task.mainTask}`}
                   >
                     <p css={cssObj.radioDesc}>{task.mainTask}</p>
                   </SharedRadioButton>
@@ -247,7 +247,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                     }}
                     desc={subTask}
                     value={subTask}
-                    id={subTask}
+                    id={`${id}${subTask}`}
                   />
                 ))}
               </div>
