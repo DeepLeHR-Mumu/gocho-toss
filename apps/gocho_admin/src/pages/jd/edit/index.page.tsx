@@ -1,6 +1,7 @@
 import { ReactElement, useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { useDisabledKeydownSubmit } from "shared-hooks";
@@ -12,12 +13,15 @@ import { GlobalLayout, LoadingScreen, PageLayout } from "@/component";
 import type { NextPageWithLayout } from "@/types";
 import { INTERNAL_URL } from "@/constant";
 
+import { jdArrKeyObj } from "@/api/jd/useJdArr/type";
 import { CommonDataPart, PositionRequiredDataPart, PositionTaskDataPart, PositionEtcDataPart } from "./part";
 import { JobFormValues } from "./type";
 import { blankPosition } from "./constant";
 import { cssObj } from "./style";
 
 const JdEdit: NextPageWithLayout = () => {
+  const queryClient = useQueryClient();
+
   const [checkMsg, setCheckMsg] = useState<string>();
   const router = useRouter();
   const jobId = Number(router.query.id);
@@ -75,7 +79,7 @@ const JdEdit: NextPageWithLayout = () => {
       title: jobData?.title,
       start_time: new Date(newStartTime).toISOString().substring(0, 19),
       end_time: new Date(newEndTime).toISOString().substring(0, 19),
-      cut: jobData?.cut,
+      cut: jobData?.cut ? jobData.cut : false,
       process_arr: jobData?.processArr.join("\n"),
       apply_route_arr: jobData?.applyRouteArr.join("\n"),
       apply_url: jobData?.applyUrl,
@@ -99,6 +103,8 @@ const JdEdit: NextPageWithLayout = () => {
         {
           onSuccess: () => {
             setToast("수정되었습니다");
+            queryClient.invalidateQueries(jdArrKeyObj.all);
+
             router.push({
               pathname: INTERNAL_URL.JD_LIST_URL,
               query: { ...router.query, page: 1 },
