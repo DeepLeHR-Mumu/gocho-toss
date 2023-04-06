@@ -8,7 +8,6 @@ import { CompanyCommentPart } from "@pages/index/part/companyCommentPart";
 
 import { MainCarouselPart } from "./index/part/mainCarouselPart";
 import { JobPart } from "./index/part/jobPart";
-import { SpecBestPart } from "./index/part/specBestPart";
 import { TipPart } from "./index/part/tipPart";
 import { PageHead } from "./index/pageHead";
 
@@ -26,7 +25,6 @@ const Home: NextPage = () => {
       <JobPart />
       <CompanyCommentPart />
       <TipPart />
-      <SpecBestPart />
     </main>
   );
 };
