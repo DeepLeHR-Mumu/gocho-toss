@@ -1,24 +1,17 @@
 import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
 
 import { LinkButton } from "shared-ui/common/atom/button";
 import deepLeLogo from "shared-image/global/deepLeLogo/smallMono.svg";
 import { MAIN_URL } from "shared-constant";
-import { unknownErrorEvent, unknownErrorFunnelEvent } from "shared-ga/error";
 
 import jobiError from "@public/images/global/errrorPage/jobi_500.png";
 
 import { catchphrase, buttonBox, errorWrapper, jobiImageContainer, logoContainer, title, wrapper } from "./style";
 import { PageHead } from "./pageHead";
 
-const UnKnownErrorPage: NextPage = () => {
-  useEffect(() => {
-    unknownErrorFunnelEvent();
-    unknownErrorEvent();
-  }, []);
-
+const DatalabRenewalPage: NextPage = () => {
   return (
     <main css={wrapper}>
       <PageHead />
@@ -42,4 +35,4 @@ const UnKnownErrorPage: NextPage = () => {
   );
 };
 
-export default UnKnownErrorPage;
+export default DatalabRenewalPage;
