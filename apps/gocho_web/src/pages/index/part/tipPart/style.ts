@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const tipPartWrapper = css`
-  margin: 8rem;
+  margin: 8rem 0;
 `;
 
 export const title = css`
