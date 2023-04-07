@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { axiosNoTokenInstance } from "@/api/useAxiosInterceptor";
 
-import { GetCompanyKeywordArrDef, companyArrKeyObj } from "./type";
+import { GetCompanyKeywordArrDef, companyKeywordArrKeyObj } from "./type";
 import { companyKeywordArrSelector } from "./util";
 
 export const getCompanyKeywordArr: GetCompanyKeywordArrDef = async () => {
@@ -12,7 +12,7 @@ export const getCompanyKeywordArr: GetCompanyKeywordArrDef = async () => {
 
 export const useCompanyKeywordArr = () =>
   useQuery({
-    queryKey: companyArrKeyObj.all,
+    queryKey: companyKeywordArrKeyObj.all,
     queryFn: getCompanyKeywordArr,
     select: (data) => companyKeywordArrSelector(data),
   });

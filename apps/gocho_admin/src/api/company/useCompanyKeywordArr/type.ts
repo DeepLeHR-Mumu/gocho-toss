@@ -11,10 +11,10 @@ export interface ResponseObjDef {
   }[];
 }
 
-export const companyArrKeyObj = {
-  all: [{ data: "companyArr" }] as const,
+export const companyKeywordArrKeyObj = {
+  all: [{ data: "companyKeywordArr" }] as const,
 };
 
 export interface GetCompanyKeywordArrDef {
-  ({ queryKey }: QueryFunctionContext<typeof companyArrKeyObj.all>): Promise<ResponseObjDef>;
+  ({ queryKey }: QueryFunctionContext<typeof companyKeywordArrKeyObj.all>): Promise<ResponseObjDef>;
 }

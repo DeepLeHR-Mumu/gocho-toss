@@ -12,6 +12,7 @@ export { useCompanyArr } from "./company/useCompanyArr";
 export { useCompanyDetail } from "./company/useCompanyDetail";
 export { useCompanyKeywordArr } from "./company/useCompanyKeywordArr";
 export { useDeleteCompany } from "./company/useDeleteCompany";
+export { useDeleteCompanyKeyword } from "./company/useDeleteCompanyKeyword";
 export { useEditCompany } from "./company/useEditCompany";
 export { useEditCompanyRequest } from "./company/useEditCompanyRequest";
 export { useFindCompany } from "./company/useFindCompany";
