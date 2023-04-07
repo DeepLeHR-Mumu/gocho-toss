@@ -220,14 +220,14 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
               <div css={cssObj.flexBox}>
                 {taskArr.map((task) => (
                   <SharedRadioButton
-                    key={`mainTask${task.mainTask}`}
+                    key={`${id}${task.mainTask}`}
                     registerObj={{
                       ...jobForm.register(`position_arr.${index}.task_main`, {
                         required: "1차 직무를 선택해주세요.",
                       }),
                     }}
                     value={task.mainTask}
-                    id={`mainTask${task.mainTask}`}
+                    id={`${id}${task.mainTask}`}
                   >
                     <p css={cssObj.radioDesc}>{task.mainTask}</p>
                   </SharedRadioButton>
@@ -245,7 +245,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                   const isChecked = watch(`position_arr.${index}.task_sub_arr`)?.includes(subTask);
                   return (
                     <CheckBoxWithDesc
-                      key={`subTask${subTask}`}
+                      key={`${id}${subTask}`}
                       registerObj={{
                         ...jobForm.register(`position_arr.${index}.task_sub_arr`, {
                           required: "2차 직무를 선택해주세요.",
@@ -254,7 +254,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                       desc={subTask}
                       value={subTask}
                       checked={isChecked}
-                      id={`subTask${subTask}`}
+                      id={`${id}${subTask}`}
                     />
                   );
                 })}
