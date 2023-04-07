@@ -10,6 +10,7 @@ export const INTERNAL_URL = {
   COMPANY_UPLOAD_URL: "/company/upload",
   COMPANY_LIST_URL: "/company/list",
   COMPANY_EDIT_URL: "/company/edit",
+  COMPANY_KEYWORD_URL: "/company/keyword",
   VIRAL_BLOG_URL: "/viral/blog",
   VIRAL_INSTA_URL: "/viral/instagram",
   BUSINESS_USER: "/business/user",

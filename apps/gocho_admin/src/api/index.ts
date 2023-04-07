@@ -10,6 +10,7 @@ export { useAcceptCompany } from "./company/useAcceptCompany";
 export { useAddCompany } from "./company/useAddCompany";
 export { useCompanyArr } from "./company/useCompanyArr";
 export { useCompanyDetail } from "./company/useCompanyDetail";
+export { useCompanyKeywordArr } from "./company/useCompanyKeywordArr";
 export { useDeleteCompany } from "./company/useDeleteCompany";
 export { useEditCompany } from "./company/useEditCompany";
 export { useEditCompanyRequest } from "./company/useEditCompanyRequest";
