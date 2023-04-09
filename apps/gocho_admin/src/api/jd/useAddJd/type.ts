@@ -2,7 +2,7 @@ import { AdminResponseDef } from "shared-type/api/responseType";
 import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
-import { ErrorResponseDef } from "../../../types/errorType";
+import { ErrorResponseDef } from "@/types";
 
 export interface RequestObjDef {
   dto: {

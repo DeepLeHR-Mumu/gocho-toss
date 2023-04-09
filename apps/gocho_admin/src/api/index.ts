@@ -8,6 +8,7 @@ export { useMoveBanner } from "./banner/useMoveBanner";
 
 export { useAcceptCompany } from "./company/useAcceptCompany";
 export { useAddCompany } from "./company/useAddCompany";
+export { useAddCompanyKeyword } from "./company/useAddCompanyKeyword";
 export { useCompanyArr } from "./company/useCompanyArr";
 export { useCompanyDetail } from "./company/useCompanyDetail";
 export { useCompanyKeywordArr } from "./company/useCompanyKeywordArr";
