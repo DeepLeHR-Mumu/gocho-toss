@@ -21,7 +21,7 @@ const CompanyKeyword: NextPageWithLayout = () => {
   return (
     <main css={cssObj.wrapper}>
       <PageLayout>
-        <h2 css={cssObj.title}>기업 키워드</h2>
+        <h2 css={cssObj.title}>기업 키워드 목록</h2>
         <section css={cssObj.container}>
           <ul css={cssObj.thead}>
             <li>키워드</li>

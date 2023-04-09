@@ -43,8 +43,12 @@ export const menuArr = [
         menuLink: `${INTERNAL_URL.COMPANY_LIST_URL}?page=1`,
       },
       {
-        menuTitle: "기업 키워드",
+        menuTitle: "기업 키워드 목록",
         menuLink: `${INTERNAL_URL.COMPANY_KEYWORD_URL}`,
+      },
+      {
+        menuTitle: "기업 키워드 업로드",
+        menuLink: `${INTERNAL_URL.COMPANY_KEYWORD_UPLOAD_URL}`,
       },
     ],
   },
