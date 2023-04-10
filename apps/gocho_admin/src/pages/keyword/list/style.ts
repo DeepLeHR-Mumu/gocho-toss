@@ -4,11 +4,9 @@ import { COLORS } from "shared-style/color";
 import { subPageTitle } from "@/style/commonStyles";
 
 export const cssObj = {
-  wrapper: css``,
   title: css`
     ${subPageTitle};
   `,
-  container: css``,
   thead: css`
     display: grid;
     grid-template-columns: 10% 80% 10%;

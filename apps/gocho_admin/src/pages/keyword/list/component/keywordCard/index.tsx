@@ -15,7 +15,7 @@ export const KeywordCard: FunctionComponent<KeywordCardProps> = ({ keywordObj })
 
   const { mutate: deleteKeywordMutate } = useDeleteCompanyKeyword();
 
-  const deleteKeywordHandler = (keyword: string) => {
+  const deleteCompanyKeywordHandler = (keyword: string) => {
     deleteKeywordMutate(
       { keyword },
       {
@@ -35,7 +35,7 @@ export const KeywordCard: FunctionComponent<KeywordCardProps> = ({ keywordObj })
         ))}
       </div>
       <SharedButton
-        onClickHandler={() => deleteKeywordHandler(keywordObj.keyword)}
+        onClickHandler={() => deleteCompanyKeywordHandler(keywordObj.keyword)}
         text="삭제"
         size="medium"
         radius="round"

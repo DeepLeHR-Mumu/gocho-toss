@@ -35,7 +35,7 @@ const CompanyKeywordUpload: NextPageWithLayout = () => {
   } = useForm<CompanyKeywordFormValues>();
   const queryClient = useQueryClient();
 
-  const companyKeywordSubmit: SubmitHandler<CompanyKeywordFormValues> = (companyKeywordObj) => {
+  const companyKeywordSubmitHandler: SubmitHandler<CompanyKeywordFormValues> = (companyKeywordObj) => {
     if (isUploadLoading.current) return;
 
     if (!isUploadLoading.current) {
@@ -60,10 +60,10 @@ const CompanyKeywordUpload: NextPageWithLayout = () => {
   };
 
   return (
-    <main css={cssObj.wrapper}>
+    <main>
       <PageLayout>
         <h2 css={cssObj.title}>기업 키워드 업로드</h2>
-        <form css={cssObj.formContainer} onSubmit={handleSubmit(companyKeywordSubmit)}>
+        <form css={cssObj.formContainer} onSubmit={handleSubmit(companyKeywordSubmitHandler)}>
           <div css={cssObj.inputContainer}>
             <strong>회사</strong>
             <input

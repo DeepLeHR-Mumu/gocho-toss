@@ -4,7 +4,6 @@ import { AxiosError } from "axios";
 import { AdminResponseDef } from "shared-type/api/responseType";
 
 import { ErrorResponseDef } from "@/types";
-
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { RequestObjDef, PostCompanyKeywordDef, useAddCompanyKeywordProps } from "./type";
