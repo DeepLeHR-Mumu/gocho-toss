@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
 
-import { subPageTitle } from "@/style/commonStyles";
+import { subPageTitle } from "@/style";
 
 export const cssObj = {
   title: css`

@@ -4,7 +4,7 @@ import { useCompanyKeywordArr } from "@/api";
 import { NextPageWithLayout } from "@/types";
 import { GlobalLayout, PageLayout, ErrorScreen, LoadingScreen } from "@/component";
 
-import { KeywordCard } from "./component/keywordCard";
+import { KeywordCard } from "./component";
 import { cssObj } from "./style";
 
 const CompanyKeyword: NextPageWithLayout = () => {
