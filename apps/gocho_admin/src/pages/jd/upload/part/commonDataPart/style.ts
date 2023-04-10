@@ -172,7 +172,6 @@ export const cssObj = {
     p {
       font-size: 1rem;
       color: ${COLORS.GRAY20};
-      padding-left: 0.25rem;
       padding: 0.25rem;
     }
   `,
