@@ -173,7 +173,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
 
         <div css={taskTitle}>
           <p css={taskSummary}>채용중인 직무</p>
-          <p css={taskNumber}>{jobData.taskArr.length}</p>
+          <p css={taskNumber}>{jobData.positionCount}</p>
         </div>
         <ul css={taskContainer}>
           {jobData.taskArr.map((task) => {

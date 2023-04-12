@@ -11,6 +11,7 @@ export const selector = (jobArr: JobObjDef[], count: number) => {
       endTime: job.end_time,
       title: job.title,
       high: job.high,
+      positionCount: job.position_count,
       college: job.college,
       placeArr: job.place_arr,
       rotationArr: job.rotation_arr,
