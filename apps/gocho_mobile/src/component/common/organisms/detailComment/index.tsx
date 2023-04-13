@@ -84,7 +84,8 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
                       setIsTotalComment(true);
                     }}
                   >
-                    전체 댓글 <span>{companyCommentArrData?.commentArr?.length}</span>
+                    전체 댓글
+                    {companyCommentArrData && <span>{companyCommentArrData.commentArr?.length}</span>}
                   </button>
                 </li>
                 {jdId !== null && (

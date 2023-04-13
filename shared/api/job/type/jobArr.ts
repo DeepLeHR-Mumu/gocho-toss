@@ -9,6 +9,7 @@ export interface JobObjDef {
   title: string;
   high: boolean;
   college: boolean;
+  position_count: number;
   place_arr: string[];
   rotation_arr: string[];
   task_arr: string[];

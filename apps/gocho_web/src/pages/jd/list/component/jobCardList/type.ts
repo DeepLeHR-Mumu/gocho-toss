@@ -9,6 +9,7 @@ export interface JobCardListProps {
         endTime: number;
         title: string;
         high: boolean;
+        positionCount: number;
         college: boolean;
         placeArr: string[];
         rotationArr: string[];
