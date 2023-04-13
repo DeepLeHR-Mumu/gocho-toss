@@ -8,6 +8,7 @@ export interface JobCardListProps {
         startTime: number;
         endTime: number;
         title: string;
+        positionCount: number;
         high: boolean;
         college: boolean;
         placeArr: string[];
