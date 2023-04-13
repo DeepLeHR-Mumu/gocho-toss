@@ -80,10 +80,10 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                       required: "교대 형태를 선택해주세요.",
                     }),
                   }}
-                  key={`${id}${rotation.data}`}
+                  key={`${rotation.data}${index}`}
                   desc={rotation.name}
                   value={rotation.data}
-                  id={`${id}${rotation.data}`}
+                  id={`${rotation.data}${index}`}
                 />
               ))}
             </div>
@@ -124,18 +124,16 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                   {factoryData?.length === 0 ? (
                     <p css={cssObj.warningDesc}>등록된 공장이 없습니다.</p>
                   ) : (
-                    factoryData?.map((factoryAddress) => {
-                      const isHaveFactory = watch(`position_arr.${index}.place.factory_arr`)?.includes(
-                        factoryAddress.id
-                      );
+                    factoryData?.map((factory) => {
+                      const isHaveFactory = watch(`position_arr.${index}.place.factory_arr`)?.includes(factory.id);
                       return (
                         <button
                           type="button"
                           css={isHaveFactory ? cssObj.isHaveFactoryButton : cssObj.factoryButton}
                           onClick={() => {
-                            if (watch("position_arr")[index].place.factory_arr?.includes(factoryAddress.id)) {
+                            if (watch("position_arr")[index].place.factory_arr?.includes(factory.id)) {
                               const filterFactoryIdArr = watch("position_arr")[index].place.factory_arr?.filter(
-                                (prevFactoryId) => prevFactoryId !== factoryAddress.id
+                                (prevFactoryId) => prevFactoryId !== factory.id
                               );
                               setValue(`position_arr.${index}.place.factory_arr`, filterFactoryIdArr || []);
                               return;
@@ -143,12 +141,13 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
 
                             setValue(`position_arr.${index}.place.factory_arr`, [
                               ...(watch("position_arr")[index].place.factory_arr || []),
-                              factoryAddress.id,
+                              factory.id,
                             ]);
                           }}
-                          key={`${id}${factoryAddress.id}`}
+                          key={`${id}${factory.id}`}
                         >
-                          <div /> {factoryAddress.name}
+                          <div /> {factory.name}
+                          <br />({factory.address})
                         </button>
                       );
                     })
@@ -223,7 +222,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                       }),
                     }}
                     value={task.mainTask}
-                    id={`${id}${task.mainTask}`}
+                    id={`${index}${task.mainTask}`}
                   >
                     <p css={cssObj.radioDesc}>{task.mainTask}</p>
                   </SharedRadioButton>

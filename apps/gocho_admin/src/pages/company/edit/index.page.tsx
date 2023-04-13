@@ -31,7 +31,7 @@ const CompanyEdit: NextPageWithLayout = () => {
       nozo: { exists: false, desc: null },
     },
   });
-  const { register, control, handleSubmit, watch, reset } = companyForm;
+  const { register, control, handleSubmit, watch, setValue, reset } = companyForm;
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -132,6 +132,7 @@ const CompanyEdit: NextPageWithLayout = () => {
         <BasicInfoPart
           register={register}
           watch={watch}
+          setValue={setValue}
           companyLogo={companyData?.logoUrl || ""}
           setLogoPicture={setLogoPicture}
         />
