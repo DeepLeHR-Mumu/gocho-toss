@@ -5,8 +5,7 @@ import Image from "next/image";
 import { CloseButton } from "@component/common/atom/closeButton";
 import GDTitleSrc from "shared-image/global/deepLeLogo/smallMono.svg";
 import { PWD_REGEXP } from "shared-constant";
-import { usePatchUserInfo } from "shared-api/auth/usePatchUserInfo";
-import { useUserInfo } from "shared-api/auth";
+import { useUserInfo, usePatchUserPassword } from "shared-api/auth";
 
 import { NormalButton } from "shared-ui/common/atom/button";
 import { useToast, useModal } from "@/globalStates";
@@ -16,7 +15,7 @@ import {
   imageContainer,
   menuName,
   inputCSS,
-  errorMsgContiner,
+  errorMsgContainer,
   wrapper,
   passwordErrorMsg,
   closeButtonBox,
@@ -31,7 +30,7 @@ export const PasswordEditBox: FunctionComponent = () => {
     formState: { errors },
   } = useForm<PasswordChangeFormValues>();
   const { data: userInfoData, refetch } = useUserInfo();
-  const { mutate } = usePatchUserInfo();
+  const { mutate } = usePatchUserPassword();
   const { setToastMessage } = useToast();
   const { closeModal } = useModal();
   const [failCurrentPw, setFailCurrentPw] = useState(false);
@@ -81,7 +80,7 @@ export const PasswordEditBox: FunctionComponent = () => {
           type="password"
           placeholder="현재 비밀번호"
         />
-        <div css={errorMsgContiner}>
+        <div css={errorMsgContainer}>
           {failCurrentPw && <p css={passwordErrorMsg}>현재 비밀번호가 일치하지 않습니다.</p>}
           {errors.originPassword?.type === "required" && <p css={passwordErrorMsg}>현재 비밀번호를 입력해주세요</p>}
           {errors.originPassword?.type === "minLength" && (
@@ -100,7 +99,7 @@ export const PasswordEditBox: FunctionComponent = () => {
           type="password"
           placeholder="새 비밀번호"
         />
-        <div css={errorMsgContiner}>
+        <div css={errorMsgContainer}>
           {errors.password?.type === "required" && <p css={passwordErrorMsg}>새로운 비밀번호를 입력해주세요.</p>}
           {errors.password?.type === "minLength" && <p css={passwordErrorMsg}>비밀번호는 8자 이상 입력해주세요</p>}
           {errors.password?.type === "maxLength" && <p css={passwordErrorMsg}>최대 입력 글자는 20자입니다.</p>}
@@ -119,7 +118,7 @@ export const PasswordEditBox: FunctionComponent = () => {
           type="password"
           placeholder="새 비밀번호 확인"
         />
-        <div css={errorMsgContiner}>
+        <div css={errorMsgContainer}>
           {errors.chkNewPassword?.type === "required" && <p css={passwordErrorMsg}>새 비밀번호를 다시 입력해주세요</p>}
           {(errors.chkNewPassword?.type === "minLength" || errors.chkNewPassword?.type === "maxLength") && (
             <p css={passwordErrorMsg}>비밀번호는 8~20자 사이로 입력해주세요.</p>

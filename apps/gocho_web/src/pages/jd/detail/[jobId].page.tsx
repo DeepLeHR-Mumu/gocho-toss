@@ -36,7 +36,7 @@ const JobsDetail: NextPage = () => {
     id: Number(jobId),
     target: "job",
     viewMutation: () => {
-      addViewCount({ elemId: Number(jobId) });
+      addViewCount({ jobId: Number(jobId) });
     },
   });
 

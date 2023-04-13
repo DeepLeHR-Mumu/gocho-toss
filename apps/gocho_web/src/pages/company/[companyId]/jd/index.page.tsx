@@ -38,13 +38,13 @@ const JdPage: NextPage = () => {
       const companyViewArr: number[] = JSON.parse(companyViewStr);
       companyViewArr.push(companyDetailData.id);
       sessionStorage.setItem("companyViewArr", JSON.stringify(companyViewArr));
-      addViewCount({ elemId: companyDetailData.id });
+      addViewCount({ companyId: companyDetailData.id });
       return;
     }
 
     if (!isViewed) {
       sessionStorage.setItem("companyViewArr", JSON.stringify([companyDetailData.id]));
-      addViewCount({ elemId: companyDetailData.id });
+      addViewCount({ companyId: companyDetailData.id });
     }
   }, [companyDetailData, addViewCount]);
 

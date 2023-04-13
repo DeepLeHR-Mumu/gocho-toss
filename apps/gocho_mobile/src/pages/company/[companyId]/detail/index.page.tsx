@@ -32,7 +32,7 @@ const DetailPage: NextPage = () => {
     id: Number(router.query.companyId),
     target: "company",
     viewMutation: () => {
-      addViewCount({ elemId: Number(router.query.companyId) });
+      addViewCount({ companyId: Number(router.query.companyId) });
     },
   });
 
