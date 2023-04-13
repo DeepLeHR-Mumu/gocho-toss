@@ -26,7 +26,7 @@ const CompanyUpload: NextPageWithLayout = () => {
       nozo: { exists: false, desc: null },
     },
   });
-  const { register, control, handleSubmit, watch } = companyForm;
+  const { register, control, handleSubmit, watch, setValue } = companyForm;
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -67,7 +67,7 @@ const CompanyUpload: NextPageWithLayout = () => {
     <main css={mainContainer}>
       <h2 css={pageTitle}>기업 등록</h2>
       <form css={formContainer} onSubmit={handleSubmit(companySubmit)}>
-        <BasicInfoPart register={register} watch={watch} setLogoPicture={setLogoPicture} />
+        <BasicInfoPart register={register} setValue={setValue} watch={watch} setLogoPicture={setLogoPicture} />
         <WelfareInfoPart register={register} />
         <PayInfoPart register={register} />
         <ul>

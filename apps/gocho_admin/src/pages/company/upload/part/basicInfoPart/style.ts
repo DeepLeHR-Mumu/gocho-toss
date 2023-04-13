@@ -29,8 +29,21 @@ export const inputBox = css`
   border: 1px solid ${COLORS.GRAY70};
   background-color: ${COLORS.GRAY100};
   height: 2rem;
+  text-align: left;
+  display: block;
   padding: 0.25rem 0.5rem;
   margin-right: 1rem;
+`;
+
+export const addressButton = css`
+  background-color: ${COLORS.GRAY10};
+  color: ${COLORS.GRAY100};
+  height: 2rem;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.625rem;
 `;
 
 export const logoUploadLabel = css`
