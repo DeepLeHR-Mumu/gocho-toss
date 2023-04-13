@@ -30,10 +30,17 @@ export const cssObj = {
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    flex-direction: column;
     gap: 0 3rem;
   `,
   formBox: css`
-    width: 50%;
+    width: 100%;
+    max-width: 40rem;
+    margin-bottom: 2rem;
+
+    :last-of-type {
+      margin-bottom: 0;
+    }
   `,
   requiredTitle: css`
     font-size: 1.125rem;

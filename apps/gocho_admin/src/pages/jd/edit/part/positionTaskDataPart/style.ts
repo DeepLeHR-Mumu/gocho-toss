@@ -29,11 +29,13 @@ export const cssObj = {
   container: css`
     display: flex;
     align-items: flex-start;
+    flex-direction: column;
     justify-content: center;
     gap: 0 3rem;
   `,
   formBox: css`
-    width: 50%;
+    width: 100%;
+    max-width: 40rem;
 
     > li {
       margin-bottom: 2rem;
@@ -105,8 +107,10 @@ export const cssObj = {
     color: ${COLORS.BLUE_FIRST40};
     padding: 0.5rem;
     display: flex;
+    text-align: left;
     align-items: center;
-    justify-content: center;
+    width: 100%;
+    justify-content: flex-start;
 
     > div {
       margin-right: 0.25rem;
@@ -118,8 +122,13 @@ export const cssObj = {
   `,
   factoryButton: css`
     font-size: 0.875rem;
+    width: 100%;
     color: ${COLORS.GRAY10};
     padding: 0.5rem;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
     > div {
       margin-right: 0.25rem;
       width: 0.5rem;

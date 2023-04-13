@@ -1,5 +1,6 @@
 import { ChangeEvent, FunctionComponent, useState } from "react";
 import Image from "next/image";
+import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
@@ -19,6 +20,7 @@ import {
   sectionContainer,
   sectionTitle,
   selectBox,
+  addressButton,
 } from "./style";
 import { BasicInfoPartProps } from "./type";
 import { industryArr, sizeArr } from "./constant";
@@ -26,10 +28,13 @@ import { industryArr, sizeArr } from "./constant";
 export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
   register,
   watch,
+  setValue,
   companyLogo,
   setLogoPicture,
 }) => {
   const [imageSrc, setImageSrc] = useState<string>();
+
+  const openPostCodePopup = useDaumPostcodePopup();
 
   const onUploadLogo = async (e: ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader();
@@ -126,7 +131,31 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
       </div>
       <div css={inputContainer}>
         <strong css={inputTitle}>기업 주소 *</strong>
-        <input css={inputBox} {...register("address", { required: true })} />
+        <input
+          type="button"
+          onClick={() => {
+            openPostCodePopup({
+              onComplete: (addressObj: Address) => {
+                setValue(`address`, addressObj.address);
+              },
+            });
+          }}
+          css={inputBox}
+          {...register("address", { required: true })}
+        />
+        <button
+          type="button"
+          css={addressButton}
+          onClick={() => {
+            openPostCodePopup({
+              onComplete: (addressObj: Address) => {
+                setValue(`address`, addressObj.address);
+              },
+            });
+          }}
+        >
+          기업주소 찾기
+        </button>
       </div>
       <div css={inputContainer}>
         <strong css={inputTitle}>노조 *</strong>
