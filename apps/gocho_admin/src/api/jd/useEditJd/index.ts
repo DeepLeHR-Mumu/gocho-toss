@@ -36,16 +36,21 @@ export const useEditJd: useEditJdProps = () => {
           etc_arr: requestObj.dto.etc_arr ? requestObj.dto.etc_arr.split("\n") : null,
           position_arr: requestObj.dto.position_arr.map((position) => ({
             ...position,
-            place: {
-              address_arr: position.place.address_arr?.length === 0 ? null : position.place.address_arr,
-              etc: position.place.etc,
-              type: position.place.type,
-              factory_arr: position.place.factory_arr,
-            },
+            rotation_arr: position.rotation_arr?.length !== 0 ? position.rotation_arr : null,
             required_etc_arr: position.required_etc_arr ? position.required_etc_arr.split("\n") : null,
             task_detail_arr: position.task_detail_arr.split("\n"),
             pay_arr: position.pay_arr?.split("\n"),
-            preferred_etc_arr: position.preferred_etc_arr ? position.preferred_etc_arr.split("\n") : null,
+            place: {
+              type: position.place.type,
+              address_arr: position.place.address_arr?.length === 0 ? null : position.place.address_arr,
+              factory_arr: position.place.factory_arr?.length === 0 ? null : position.place.factory_arr,
+              etc: position.place.type === "일반" ? null : position.place.etc,
+            },
+            preferred_certi_arr: position.preferred_certi_arr?.length !== 0 ? position.preferred_certi_arr : null,
+            preferred_etc_arr:
+              position.preferred_etc_arr && position.preferred_etc_arr?.length !== 0
+                ? position.preferred_etc_arr?.split("\n")
+                : null,
           })),
         },
       };
