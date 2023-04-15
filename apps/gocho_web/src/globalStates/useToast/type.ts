@@ -24,6 +24,7 @@ export type ToastMsgDef =
   | "회원탈퇴가 되었습니다."
   | "게시글이 삭제되었습니다."
   | "게시글이 수정되었습니다."
+  | "프로필 이미지를 선택해주세요."
   | null;
 
 export type ToastAuthMsgDef = "님 반갑습니다." | "님 환영합니다.";

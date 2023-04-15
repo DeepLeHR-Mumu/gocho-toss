@@ -9,8 +9,10 @@ import { ImageRadioButtonProps } from "./type";
 export const ImageRadioButton: FunctionComponent<ImageRadioButtonProps> = ({
   registerObj,
   imageValue,
+  imageFile,
   checkedImage,
   setCheckedImage,
+  setProfileUrl,
 }) => {
   return (
     <li>
@@ -22,7 +24,8 @@ export const ImageRadioButton: FunctionComponent<ImageRadioButtonProps> = ({
           css={invisibleRadioButton}
           id={`checkImg1${imageValue}`}
           onClick={() => {
-            return setCheckedImage(imageValue);
+            setCheckedImage(imageValue);
+            return setProfileUrl(imageFile.src);
           }}
         />
         <div css={imageWrapper(checkedImage === imageValue)}>

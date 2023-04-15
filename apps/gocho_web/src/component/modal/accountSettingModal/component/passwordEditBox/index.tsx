@@ -6,8 +6,8 @@ import { CloseButton } from "@component/common/atom/closeButton";
 import GDTitleSrc from "shared-image/global/deepLeLogo/smallMono.svg";
 import { PWD_REGEXP } from "shared-constant";
 import { useUserProfile, usePatchUserPassword } from "shared-api/auth";
-
 import { NormalButton } from "shared-ui/common/atom/button";
+
 import { useToast, useModal } from "@/globalStates";
 
 import {

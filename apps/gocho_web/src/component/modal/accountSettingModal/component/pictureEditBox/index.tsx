@@ -1,32 +1,35 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { useUserProfile } from "shared-api/auth";
-import { usePatchUserInfo } from "shared-api/auth/usePatchUserInfo";
+import { useUserProfile, usePatchUserProfile } from "shared-api/auth";
 import { ImageType } from "shared-type/ui/imageType";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { CloseButton } from "@component/common/atom/closeButton";
 
 import { useToast, useModal } from "@/globalStates";
-import { wrapper, imgContainer, closeButtonBox, title } from "./style";
+
 import { ImageRadioButton } from "./component/imageRadioButton";
-import { ImageChangeFormValues } from "./type";
-import { profileArr } from "./constant";
+import { ProfileChangeFormValues } from "./type";
+import { profileObjArr } from "./constant";
+import { wrapper, imgContainer, closeButtonBox, title } from "./style";
 
 export const PictureEditBox: FunctionComponent = () => {
   const { data: userInfoData, refetch } = useUserProfile();
-  const { mutate } = usePatchUserInfo();
+  const { mutate } = usePatchUserProfile();
   const { closeModal } = useModal();
-  const { register, handleSubmit } = useForm<ImageChangeFormValues>();
-  const [checkedImage, setCheckedImage] = useState<ImageType>(userInfoData?.image as ImageType);
+  const { register, handleSubmit } = useForm<ProfileChangeFormValues>();
+  const [profileUrl, setProfileUrl] = useState<string | null>(null);
+  const [checkedImage, setCheckedImage] = useState<ImageType | null>(null);
+  const [imageSrc, setImageSrc] = useState<File | null>(null);
   const { setToastMessage } = useToast();
 
-  const profileImgSubmit: SubmitHandler<ImageChangeFormValues> = ({ image }) => {
-    if (userInfoData) {
+  const profileImgSubmit: SubmitHandler<ProfileChangeFormValues> = () => {
+    if (userInfoData && imageSrc) {
       mutate(
         {
           userId: userInfoData.id,
-          image,
+          nickname: userInfoData.nickname,
+          image: imageSrc,
         },
         {
           onSuccess: (data) => {
@@ -39,6 +42,21 @@ export const PictureEditBox: FunctionComponent = () => {
     }
   };
 
+  useEffect(() => {
+    const DOMAIN = `${
+      process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? "https://xn--299a59id5upfe.com/" : "http://localhost:3000/"
+    }`;
+
+    const fetchImage = async () => {
+      const response = await fetch(`${DOMAIN}${profileUrl}`);
+      const blob = await response.blob();
+      const file = new File([blob], "image.png", { type: blob.type });
+      setImageSrc(file);
+    };
+
+    fetchImage();
+  }, [profileUrl]);
+
   return (
     <div css={wrapper}>
       <div css={closeButtonBox}>
@@ -47,13 +65,15 @@ export const PictureEditBox: FunctionComponent = () => {
       <strong css={title}>프로필 사진 변경</strong>
       <form onSubmit={handleSubmit(profileImgSubmit)}>
         <ul css={imgContainer}>
-          {profileArr.map((profile) => {
+          {profileObjArr.map((profile) => {
             return (
               <ImageRadioButton
-                key={profile}
+                key={profile.key}
+                imageFile={profile.image}
                 checkedImage={checkedImage}
                 setCheckedImage={setCheckedImage}
-                imageValue={profile}
+                setProfileUrl={setProfileUrl}
+                imageValue={profile.key}
                 registerObj={register("image")}
               />
             );
