@@ -5,7 +5,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
 
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { useCompanyDetail, useCompanyCountInfo } from "shared-api/company";
 import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr, useUserCompanyBookmarkArr } from "shared-api/bookmark";
@@ -33,7 +33,7 @@ export const HeaderPart: FunctionComponent = () => {
   const router = useRouter();
 
   const { setModal } = useModal();
-  const { data: userData } = useUserInfo();
+  const { data: userData } = useUserProfile();
   const { data: companyCountInfoData } = useCompanyCountInfo({ id: Number(router.query.companyId) });
   const { data: userCompanyBookmarkArr } = useUserCompanyBookmarkArr({ userId: userData?.id });
   const { data: companyDetailData, isLoading } = useCompanyDetail({ companyId: Number(router.query.companyId) });

@@ -5,7 +5,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { JOBS_DETAIL_URL } from "shared-constant";
@@ -48,7 +48,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
 }) => {
   const queryClient = useQueryClient();
   const router = useRouter();
-  const { isSuccess } = useUserInfo();
+  const { isSuccess } = useUserProfile();
   const { setModal } = useModal();
 
   const { mutate: addMutate } = useAddJobBookmarkArr({

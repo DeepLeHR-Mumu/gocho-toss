@@ -1,13 +1,13 @@
 import { FunctionComponent } from "react";
 
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { CompanyCard } from "shared-ui/card/companyCard";
 
 import { cardListContainer, descCSS } from "./style";
 
 export const BookmarkCompanyArr: FunctionComponent = () => {
-  const { data: userData } = useUserInfo();
+  const { data: userData } = useUserProfile();
   const { data: userCompanyBookmarkArr, isLoading, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
 
   if (!userData || !userCompanyBookmarkArr || isLoading) {

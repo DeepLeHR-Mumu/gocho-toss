@@ -4,17 +4,17 @@ import { axiosInstance } from "../../axiosInstance";
 
 import { selector } from "./util";
 
-export const postUserAuth = async () => {
+export const getUserProfile = async () => {
   const token = localStorage.getItem("accessToken");
   const headers = token ? { "x-access-token": token } : undefined;
-  const { data } = await axiosInstance.get(`/auth/detokenize`, { headers });
+  const { data } = await axiosInstance.get(`/users/profile`, { headers });
   return data;
 };
 
-export const useUserInfo = () => {
+export const useUserProfile = () => {
   return useQuery({
     queryKey: userInfoKeyObj.userInfo,
-    queryFn: postUserAuth,
+    queryFn: getUserProfile,
     select: ({ data }) => {
       return selector(data);
     },

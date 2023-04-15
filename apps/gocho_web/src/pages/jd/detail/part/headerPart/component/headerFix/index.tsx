@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { useUserJobBookmarkArr, useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { useJdApplyClick, useJdCountInfo } from "shared-api/job";
 import { jdBookmarkEvent } from "shared-ga/jd";
@@ -31,7 +31,7 @@ import {
 
 export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, userId, isDdayEnd }) => {
   const queryClient = useQueryClient();
-  const { data: userInfoData } = useUserInfo();
+  const { data: userInfoData } = useUserProfile();
   const { setModal } = useModal();
   const router = useRouter();
 

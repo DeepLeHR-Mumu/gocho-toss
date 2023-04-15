@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { dummyArrCreator } from "shared-util";
 import { CompanyCard } from "@component/common/molecule/companyCard";
@@ -9,7 +9,7 @@ import { listContainer } from "./style";
 import { CompanyCardListProps } from "./type";
 
 export const CompanyCardList: FunctionComponent<CompanyCardListProps> = ({ companyDataArr, isLoading }) => {
-  const { data: userData } = useUserInfo();
+  const { data: userData } = useUserProfile();
   const { data: userCompanyBookmarkArr, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
 
   if (!companyDataArr || isLoading) {

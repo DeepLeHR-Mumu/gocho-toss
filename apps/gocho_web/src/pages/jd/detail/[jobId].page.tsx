@@ -15,7 +15,7 @@ import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKe
 
 import { Layout } from "@component/layout";
 import { DetailComment } from "@component/global/detailComment";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { useAddJobViewCount } from "shared-api/viewCount";
 import { jdDetailFunnelEvent } from "shared-ga/jd";
 
@@ -27,7 +27,7 @@ import { wrapper, flexBox, container, containerSkeleton, logoImageBox } from "./
 const JobsDetail: NextPage = () => {
   const [currentPositionId, setCurrentPositionId] = useState<number>(0);
 
-  const { data: userData } = useUserInfo();
+  const { data: userData } = useUserProfile();
   const { mutate: addViewCount } = useAddJobViewCount();
 
   const router = useRouter();

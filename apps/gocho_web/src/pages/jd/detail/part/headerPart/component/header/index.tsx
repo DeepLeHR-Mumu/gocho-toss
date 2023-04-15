@@ -11,7 +11,7 @@ import { dateConverter } from "shared-util";
 import { jdCountInfoKeyObj } from "shared-constant/queryKeyFactory/job/jdCountInfoKeyObj";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr, useUserJobBookmarkArr } from "shared-api/bookmark";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { useJdApplyClick, useJdCountInfo } from "shared-api/job";
 import { jdBookmarkEvent } from "shared-ga/jd";
 
@@ -36,7 +36,7 @@ import {
 
 export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, userId, isDdayEnd }) => {
   const queryClient = useQueryClient();
-  const { data: userInfoData } = useUserInfo();
+  const { data: userInfoData } = useUserProfile();
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userInfoData?.id });
   const { setModal } = useModal();
   const router = useRouter();

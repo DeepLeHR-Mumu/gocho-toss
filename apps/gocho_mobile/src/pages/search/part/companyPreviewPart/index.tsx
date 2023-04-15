@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import { useRouter } from "next/router";
 import { BsChevronRight } from "react-icons/bs";
 
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { useUnifiedCompanySearchArr } from "shared-api/company";
 import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { dummyArrCreator } from "shared-util";
@@ -16,7 +16,7 @@ import { listContainer, noDataText, buttonBox } from "./style";
 export const CompanyPreviewPart: FunctionComponent = () => {
   const router = useRouter();
 
-  const { data: userData } = useUserInfo();
+  const { data: userData } = useUserProfile();
   const { data: companyDataArr, isLoading: isCompanyDataArrLoading } = useUnifiedCompanySearchArr({
     searchWord: router.query.q,
     page: router.query.page,

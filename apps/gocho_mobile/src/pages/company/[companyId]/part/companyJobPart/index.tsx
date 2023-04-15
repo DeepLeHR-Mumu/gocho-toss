@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
 import { JobCard } from "@component/common/molecule/jobCard";
 import { Layout } from "@component/layout";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useJobArr } from "shared-api/job";
 import { dummyArrCreator } from "shared-util";
@@ -40,7 +40,7 @@ export const CompanyJobPart: FunctionComponent = () => {
     setPage(Number(router.query.page));
   }, [router.query.page]);
 
-  const { data: userData } = useUserInfo();
+  const { data: userData } = useUserProfile();
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
   if (!jobDataArr || isLoading) {

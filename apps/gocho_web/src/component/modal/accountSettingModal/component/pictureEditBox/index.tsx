@@ -1,7 +1,7 @@
 import { FunctionComponent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { usePatchUserInfo } from "shared-api/auth/usePatchUserInfo";
 import { ImageType } from "shared-type/ui/imageType";
 import { NormalButton } from "shared-ui/common/atom/button";
@@ -14,7 +14,7 @@ import { ImageChangeFormValues } from "./type";
 import { profileArr } from "./constant";
 
 export const PictureEditBox: FunctionComponent = () => {
-  const { data: userInfoData, refetch } = useUserInfo();
+  const { data: userInfoData, refetch } = useUserProfile();
   const { mutate } = usePatchUserInfo();
   const { closeModal } = useModal();
   const { register, handleSubmit } = useForm<ImageChangeFormValues>();

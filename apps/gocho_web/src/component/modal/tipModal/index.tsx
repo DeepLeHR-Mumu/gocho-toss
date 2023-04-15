@@ -6,7 +6,7 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 import gochoLogoMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { useAddTipBookmarkArr, useDeleteTipBookmarkArr, useUserTipBookmarkArr } from "shared-api/bookmark";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { dateConverter } from "shared-util";
 import { useAddTipViewCount } from "shared-api/viewCount";
 import { useViewCount } from "shared-user";
@@ -41,7 +41,7 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
   const sliderRef = useRef<Slider>(null);
   const { closeModal, contentObj } = useModal();
   const { setToastMessage } = useToast();
-  const { data: userInfoData } = useUserInfo();
+  const { data: userInfoData } = useUserProfile();
 
   const { mutate: addViewCount } = useAddTipViewCount();
   const { mutate: addBookmarkMutate } = useAddTipBookmarkArr({ id: tipData.id });

@@ -9,7 +9,7 @@ import renewal02Src from "shared-image/event/renewal/renewal_02.png";
 import renewal03Src from "shared-image/event/renewal/renewal_03.png";
 
 import { NormalButton } from "shared-ui/common/atom/button";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { Layout } from "@component/layout";
 
 import { useModal } from "@/globalStates";
@@ -30,7 +30,7 @@ import {
 
 export const PartRenewal: FunctionComponent = () => {
   const { setModal } = useModal();
-  const { isSuccess } = useUserInfo();
+  const { isSuccess } = useUserProfile();
 
   const openLoginModal = () => {
     setModal("loginModal", { button: "close" });

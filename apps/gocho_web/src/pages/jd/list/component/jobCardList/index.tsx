@@ -3,13 +3,13 @@ import { FunctionComponent } from "react";
 import { dummyArrCreator } from "shared-util";
 
 import { JobCard } from "@component/card/jobCard";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { JobCardListProps } from "./type";
 import { listContainer, noDataDesc } from "./style";
 
 export const JobCardList: FunctionComponent<JobCardListProps> = ({ jobDataArr, isLoading, isError }) => {
-  const { data: userData } = useUserInfo();
+  const { data: userData } = useUserProfile();
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
   if (!jobDataArr || isError || isLoading) {

@@ -8,7 +8,7 @@ import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { getJobDetail, useJobDetail } from "shared-api/job";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { useAddJobViewCount } from "shared-api/viewCount";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { jdDetailFunnelEvent } from "shared-ga/jd";
@@ -26,7 +26,7 @@ const JobsDetail: NextPage = () => {
   const [currentPositionId, setCurrentPositionId] = useState<number>(0);
   const [openComment, setOpenComment] = useState<boolean>(false);
 
-  const { data: userData } = useUserInfo();
+  const { data: userData } = useUserProfile();
   const { data: userJobBookmarkArr, refetch } = useUserJobBookmarkArr({ userId: userData?.id });
   const { mutate: addViewCount } = useAddJobViewCount();
 

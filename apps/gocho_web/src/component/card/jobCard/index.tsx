@@ -17,7 +17,7 @@ import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { JOBS_DETAIL_URL } from "shared-constant";
 import { dateConverter } from "shared-util";
 import { jdBookmarkEvent } from "shared-ga/jd";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 
 import { useModal } from "@/globalStates";
 
@@ -59,9 +59,8 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
 }) => {
   const queryClient = useQueryClient();
   const router = useRouter();
-  const { isSuccess } = useUserInfo();
+  const { isSuccess, data: userInfoData } = useUserProfile();
   const { setModal } = useModal();
-  const { data: userInfoData } = useUserInfo();
 
   const { mutate: addMutate } = useAddJobBookmarkArr({
     id: jobData?.id as number,

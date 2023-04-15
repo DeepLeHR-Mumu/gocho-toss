@@ -3,7 +3,7 @@ import { AiOutlineInfoCircle } from "react-icons/ai";
 import { useRouter } from "next/router";
 
 import { useInfiniteJobArr } from "shared-api/job/useInfiniteJobArr";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { dummyArrCreator } from "shared-util";
 
@@ -25,7 +25,7 @@ export const CompanyJobPart: FunctionComponent = () => {
     limit: 10,
     order: "recent",
   });
-  const { data: userData } = useUserInfo();
+  const { data: userData } = useUserProfile();
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
   useEffect(() => {

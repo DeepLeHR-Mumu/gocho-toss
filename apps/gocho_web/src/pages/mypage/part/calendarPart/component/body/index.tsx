@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { dummyArrCreator } from "shared-util";
 
@@ -12,7 +12,7 @@ import { BodyProps } from "./type";
 import { skeletonContainer, weekdayContainer, weekdayCSS, table, todayCSS, dayCSS } from "./style";
 
 export const Body: FunctionComponent<BodyProps> = ({ twoWeek }) => {
-  const { data: userInfoData } = useUserInfo();
+  const { data: userInfoData } = useUserProfile();
   const todayHours = getDateHours(new Date());
 
   const { data: userJobBookmarkArrData, isLoading } = useUserJobBookmarkArr({

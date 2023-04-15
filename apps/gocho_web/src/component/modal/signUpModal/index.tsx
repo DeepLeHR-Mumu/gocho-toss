@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useDoSignUp, useUserInfo } from "shared-api/auth";
+import { useDoSignUp, useUserProfile } from "shared-api/auth";
 import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE, EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
@@ -28,7 +28,7 @@ export const SignUpBox: FunctionComponent = () => {
   } = useForm<SignUpFormValues>({ mode: "onChange" });
 
   const queryClient = useQueryClient();
-  const { refetch } = useUserInfo();
+  const { refetch } = useUserProfile();
   const { closeModal } = useModal();
   const { mutate } = useDoSignUp();
   const { setToastMessage } = useToast();

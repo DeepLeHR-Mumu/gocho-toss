@@ -7,7 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { useJdApplyClick, useJdCountInfo } from "shared-api/job";
 import { dateConverter, dDayCalculator } from "shared-util";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
@@ -37,7 +37,7 @@ import {
 export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookmarked, userId }) => {
   const queryClient = useQueryClient();
   const { setModal } = useModal();
-  const { isSuccess } = useUserInfo();
+  const { isSuccess } = useUserProfile();
   const router = useRouter();
 
   const { mutate: mutateJdApplyClick } = useJdApplyClick();

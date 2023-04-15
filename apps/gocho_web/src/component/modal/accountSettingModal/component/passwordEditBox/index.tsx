@@ -5,7 +5,7 @@ import Image from "next/image";
 import { CloseButton } from "@component/common/atom/closeButton";
 import GDTitleSrc from "shared-image/global/deepLeLogo/smallMono.svg";
 import { PWD_REGEXP } from "shared-constant";
-import { useUserInfo, usePatchUserPassword } from "shared-api/auth";
+import { useUserProfile, usePatchUserPassword } from "shared-api/auth";
 
 import { NormalButton } from "shared-ui/common/atom/button";
 import { useToast, useModal } from "@/globalStates";
@@ -29,7 +29,7 @@ export const PasswordEditBox: FunctionComponent = () => {
     watch,
     formState: { errors },
   } = useForm<PasswordChangeFormValues>();
-  const { data: userInfoData, refetch } = useUserInfo();
+  const { data: userInfoData, refetch } = useUserProfile();
   const { mutate } = usePatchUserPassword();
   const { setToastMessage } = useToast();
   const { closeModal } = useModal();

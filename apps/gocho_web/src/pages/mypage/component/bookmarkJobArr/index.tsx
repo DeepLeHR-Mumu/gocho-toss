@@ -3,13 +3,13 @@ import { FunctionComponent } from "react";
 import { BookmarkedJobCard } from "shared-ui/card/bookmarkedJobCard";
 
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 
 import { dummyArrCreator } from "shared-util";
 import { cardListContainer, skeletonContainer, desc, warningCSS } from "./style";
 
 export const BookmarkJobArr: FunctionComponent = () => {
-  const { data: userData } = useUserInfo();
+  const { data: userData } = useUserProfile();
 
   const { data: userJobBookmarkArrData, isLoading } = useUserJobBookmarkArr({
     userId: userData?.id,

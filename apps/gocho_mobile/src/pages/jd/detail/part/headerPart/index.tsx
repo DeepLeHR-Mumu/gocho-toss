@@ -3,7 +3,7 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useRouter } from "next/router";
 
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useJobDetail } from "shared-api/job";
 import { dDayCalculator } from "shared-util";
@@ -29,7 +29,7 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
   const { jobId } = router.query;
   const [defaultCardCount, setDefaultCardCount] = useState(5);
   const { data: jobDetailData } = useJobDetail({ id: Number(jobId) });
-  const { data: userData } = useUserInfo();
+  const { data: userData } = useUserProfile();
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
   const handleMoreCardCount = () => {

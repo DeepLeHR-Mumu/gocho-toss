@@ -5,7 +5,7 @@ import { QueryClient, dehydrate } from "@tanstack/react-query";
 
 import { useAddCompanyViewCount } from "shared-api/viewCount";
 import { useCompanyDetail, getCompanyDetail, useCompanyCommentArr } from "shared-api/company";
-import { useUserInfo } from "shared-api/auth/useUserInfo";
+import { useUserProfile } from "shared-api/auth";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
@@ -33,7 +33,7 @@ const DetailPage: NextPage = () => {
   const welfareInfoRef = useRef<null | HTMLDivElement>(null);
   const router = useRouter();
 
-  const { data: userInfo } = useUserInfo();
+  const { data: userInfo } = useUserProfile();
   const { data: companyDetailData } = useCompanyDetail({
     companyId: Number(router.query.companyId),
   });

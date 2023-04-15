@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import { useJobArr } from "shared-api/job";
 import { dummyArrCreator } from "shared-util";
 import { MainJobCard } from "shared-ui/card/MainJobCard";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 
 import { useModal } from "@/globalStates";
@@ -25,7 +25,7 @@ export const JobCardList: FunctionComponent = () => {
     limit: 9,
   });
 
-  const { data: userData } = useUserInfo();
+  const { data: userData } = useUserProfile();
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
   const { setModal } = useModal();
 

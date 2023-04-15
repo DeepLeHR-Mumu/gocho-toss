@@ -2,7 +2,7 @@ import { FunctionComponent, useRef, useEffect } from "react";
 import Image from "next/image";
 
 import { useCompanyCommentArr } from "shared-api/company";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { dummyArrCreator } from "shared-util";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
@@ -34,7 +34,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
   isMobile,
 }) => {
   const commentContainerRef = useRef<HTMLDivElement | null>(null);
-  const { isSuccess, data: userInfoData } = useUserInfo();
+  const { isSuccess, data: userInfoData } = useUserProfile();
 
   const { data: companyCommentArrData } = useCompanyCommentArr({
     companyId: companyData?.id || 0,

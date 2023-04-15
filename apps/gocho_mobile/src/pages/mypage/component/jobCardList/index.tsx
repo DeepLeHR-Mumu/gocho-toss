@@ -1,13 +1,13 @@
 import { FunctionComponent } from "react";
 
 import { BookmarkedJobCard } from "shared-ui/card/bookmarkedJobCard";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 
 import { listContainer } from "./style";
 import { JobListPartProps } from "./type";
 
 export const JobCardList: FunctionComponent<JobListPartProps> = ({ jobDataArr }) => {
-  const { data: userData } = useUserInfo();
+  const { data: userData } = useUserProfile();
 
   return (
     <section css={listContainer}>

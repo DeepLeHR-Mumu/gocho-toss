@@ -4,7 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { dDayCalculator } from "shared-util";
 
 import { NormalButton } from "shared-ui/common/atom/button";
@@ -20,7 +20,7 @@ export const BottomMenu: FunctionComponent<BottomMenuProps> = ({
 }) => {
   const queryClient = useQueryClient();
   const { setModal } = useModal();
-  const { isSuccess } = useUserInfo();
+  const { isSuccess } = useUserProfile();
 
   const openJobInNewTab = () => {
     window.open(jobDetailData.applyUrl, "_blank", "noopener, noreferrer");

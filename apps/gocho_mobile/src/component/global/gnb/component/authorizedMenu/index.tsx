@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 
 import { MYPAGE_URL } from "shared-constant";
@@ -19,7 +19,7 @@ export const AuthorizedMenu: FunctionComponent<AuthorizedMenuProps> = ({ setOpen
     queryClient.resetQueries();
   };
 
-  const { data: userInfoData } = useUserInfo();
+  const { data: userInfoData } = useUserProfile();
 
   return (
     <ul>

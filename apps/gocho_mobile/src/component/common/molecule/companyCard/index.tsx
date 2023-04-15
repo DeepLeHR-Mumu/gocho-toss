@@ -4,7 +4,7 @@ import Link from "next/link";
 import { BsFillBookmarkFill } from "react-icons/bs";
 
 import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr } from "shared-api/bookmark";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
@@ -19,7 +19,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
   isBookmarked,
   isSkeleton,
 }) => {
-  const { isSuccess: isUserLoginSuccess, data: userData } = useUserInfo();
+  const { isSuccess: isUserLoginSuccess, data: userData } = useUserProfile();
   const { setModal } = useModal();
   const { mutate: addMutate } = useAddCompanyBookmarkArr({
     id: companyData?.id as number,

@@ -1,6 +1,6 @@
 import { FunctionComponent, useState, useEffect } from "react";
 
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { Pagination } from "@pages/mypage/component/pagination";
@@ -12,7 +12,7 @@ export const BookmarkCompanyPart: FunctionComponent = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const activeCardCount = 3;
 
-  const { data: userInfoData } = useUserInfo();
+  const { data: userInfoData } = useUserProfile();
   const { data: userBookmarkCompanyDataArr, isLoading } = useUserCompanyBookmarkArr({
     userId: userInfoData?.id,
   });

@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from "react";
 
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { Header } from "./component/header";
@@ -10,7 +10,7 @@ import { container, title, desc } from "./style";
 import { twoWeekDef } from "./type";
 
 export const CalendarPart: FunctionComponent = () => {
-  const { data: userInfoData } = useUserInfo();
+  const { data: userInfoData } = useUserProfile();
   const now = new Date();
 
   const [currentDate, setCurrentDate] = useState<Date>(now);

@@ -7,7 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { useCompanyDetail, useCompanyCountInfo } from "shared-api/company";
 import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr, useUserCompanyBookmarkArr } from "shared-api/bookmark";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { companyBookmarkEvent } from "shared-ga/company";
 import catchLogoSrc from "shared-image/global/common/catch_logo.png";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
@@ -35,7 +35,7 @@ export const HeaderPart: FunctionComponent = () => {
   const queryClient = useQueryClient();
 
   const { setModal } = useModal();
-  const { data: userData } = useUserInfo();
+  const { data: userData } = useUserProfile();
   const { data: companyCountInfoData } = useCompanyCountInfo({
     id: Number(router.query.companyId),
   });

@@ -10,7 +10,7 @@ import collegeTrue from "shared-image/global/common/cho_color.svg";
 import collegeFalse from "shared-image/global/common/cho_mono.svg";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { JOBS_DETAIL_URL } from "shared-constant";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 import { jdBookmarkEvent } from "shared-ga/jd";
 
@@ -40,7 +40,7 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
   userId,
   loginOpener,
 }) => {
-  const { error: useUserInfoError } = useUserInfo();
+  const { error: useUserInfoError } = useUserProfile();
   const queryClient = useQueryClient();
 
   const { mutate: addMutate } = useAddJobBookmarkArr({

@@ -3,7 +3,7 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useRouter } from "next/router";
 
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { useJobDetail } from "shared-api/job";
 import { dDayCalculator } from "shared-util";
 
@@ -34,7 +34,7 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
   const observeRef = useRef<HTMLDivElement | null>(null);
   const { data: jobDetailData } = useJobDetail({ id: Number(jobId) });
 
-  const { data: userData } = useUserInfo();
+  const { data: userData } = useUserProfile();
 
   useEffect(() => {
     if (observeRef.current) {

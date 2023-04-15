@@ -4,7 +4,7 @@ import { BsChevronRight } from "react-icons/bs";
 
 import { dummyArrCreator } from "shared-util";
 import { useUnifiedJobSearchArr } from "shared-api/job";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { COLORS } from "shared-style/color";
@@ -17,7 +17,7 @@ import { listContainer, noDataText, buttonBox } from "./style";
 export const JobPreviewPart: FunctionComponent = () => {
   const router = useRouter();
 
-  const { data: userData } = useUserInfo();
+  const { data: userData } = useUserProfile();
   const { data: jobDataArr, isLoading: isJobLoading } = useUnifiedJobSearchArr({
     searchWord: router.query.q,
     page: router.query.page,
