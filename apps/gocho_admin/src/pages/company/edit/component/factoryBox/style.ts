@@ -21,7 +21,17 @@ export const inputBox = css`
   padding: 0.25rem 0.5rem;
   margin-right: 1rem;
 `;
-
+export const addressInput = css`
+  width: 50%;
+  border-radius: 0.5rem;
+  border: 1px solid ${COLORS.GRAY70};
+  background-color: ${COLORS.GRAY100};
+  height: 2rem;
+  padding: 0.25rem 0.5rem;
+  margin-right: 1rem;
+  display: block;
+  text-align: left;
+`;
 export const flexBox = css`
   display: flex;
 `;

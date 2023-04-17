@@ -67,6 +67,7 @@ export const jobiImageContainer = css`
   right: 0;
   bottom: 0;
   width: 30vw;
+  overflow: hidden;
 
   img {
     object-position: bottom;

@@ -14,11 +14,13 @@ export const cssObj = {
   container: css`
     display: flex;
     align-items: flex-start;
+    flex-direction: column;
     justify-content: center;
     gap: 0 3rem;
   `,
   formBox: css`
-    width: 50%;
+    width: 100%;
+    max-width: 40rem;
 
     > li {
       margin-bottom: 2rem;

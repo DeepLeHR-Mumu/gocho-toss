@@ -39,7 +39,7 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobForm
     }
     if (!isAlways) {
       resetField("end_time");
-      resetField("cut");
+      setValue("cut", false);
     }
   }, [isAlways, resetField, setValue]);
 

@@ -9,6 +9,7 @@ export interface JobCardProps {
     high: boolean;
     college: boolean;
     placeArr: string[];
+    positionCount: number;
     rotationArr: string[];
     taskArr: string[] | null[];
     bookmark: number;

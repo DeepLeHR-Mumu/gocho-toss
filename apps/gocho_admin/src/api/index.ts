@@ -8,9 +8,12 @@ export { useMoveBanner } from "./banner/useMoveBanner";
 
 export { useAcceptCompany } from "./company/useAcceptCompany";
 export { useAddCompany } from "./company/useAddCompany";
+export { useAddCompanyKeyword } from "./company/useAddCompanyKeyword";
 export { useCompanyArr } from "./company/useCompanyArr";
 export { useCompanyDetail } from "./company/useCompanyDetail";
+export { useCompanyKeywordArr } from "./company/useCompanyKeywordArr";
 export { useDeleteCompany } from "./company/useDeleteCompany";
+export { useDeleteCompanyKeyword } from "./company/useDeleteCompanyKeyword";
 export { useEditCompany } from "./company/useEditCompany";
 export { useEditCompanyRequest } from "./company/useEditCompanyRequest";
 export { useFindCompany } from "./company/useFindCompany";

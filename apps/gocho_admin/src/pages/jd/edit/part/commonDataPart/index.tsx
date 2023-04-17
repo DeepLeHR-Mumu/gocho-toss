@@ -37,14 +37,17 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobData
   useEffect(() => {
     if (isAlways) {
       resetField("end_time", { defaultValue: "9999-12-31T23:59" });
+      setValue("cut", true);
     }
     if (!isAlways && new Date(jobData.endTime).toISOString().substring(0, 4) === "9999") {
       resetField("end_time", { defaultValue: "" });
+      setValue("cut", false);
     }
     if (!isAlways && new Date(jobData.endTime).toISOString().substring(0, 4) !== "9999") {
       resetField("end_time", { defaultValue: new Date(jobData.endTime).toISOString().substring(0, 19) });
+      setValue("cut", false);
     }
-  }, [isAlways, jobData.endTime, resetField]);
+  }, [isAlways, jobData.endTime, resetField, setValue]);
 
   return (
     <div css={cssObj.wrapper}>
