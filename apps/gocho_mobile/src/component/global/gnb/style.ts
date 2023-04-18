@@ -111,6 +111,8 @@ export const menuContainer = css`
 `;
 
 export const menuCategory = css`
+  display: flex;
+  align-items: center;
   font-weight: 500;
   color: ${COLORS.GRAY30};
   font-size: 1rem;
@@ -119,4 +121,16 @@ export const menuCategory = css`
 
 export const subMenuArr = css`
   background-color: ${COLORS.GRAY90};
+`;
+
+export const newBox = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+  color: ${COLORS.GRAY100};
+  background-color: ${COLORS.ERROR_RED30};
 `;
