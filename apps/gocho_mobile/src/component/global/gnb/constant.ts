@@ -23,3 +23,5 @@ export const profileMenuArr = [
     link: `${MYPAGE_URL}`,
   },
 ];
+
+export const blogUrl = "https://blog.gochodaejol.com/?utm_source=gochodaejoldotcom";

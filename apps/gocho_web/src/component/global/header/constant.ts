@@ -1,11 +1,4 @@
-import {
-  JOBS_LIST_URL,
-  JOBS_EXPLIST_URL,
-  MYPAGE_URL,
-  COMMUNITY_TIPS_LIST_URL,
-  SPEC_LIST_URL,
-  DATALAB_DETAIL,
-} from "shared-constant";
+import { JOBS_LIST_URL, JOBS_EXPLIST_URL, MYPAGE_URL, SPEC_LIST_URL, DATALAB_DETAIL } from "shared-constant";
 
 export const menuArr = [
   {
@@ -25,12 +18,6 @@ export const menuArr = [
       },
     ],
   },
-  {
-    menuTitle: "취업꿀팁",
-    mainUrl: "/community/tip/list",
-    menuLink: COMMUNITY_TIPS_LIST_URL,
-  },
-
   {
     menuTitle: "dataLab",
     mainUrl: "datalab",
@@ -54,3 +41,5 @@ export const profileMenuArr = [
     link: MYPAGE_URL,
   },
 ];
+
+export const blogUrl = "https://blog.gochodaejol.com/?utm_source=gochodaejoldotcom";
