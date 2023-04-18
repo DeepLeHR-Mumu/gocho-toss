@@ -137,19 +137,14 @@ export const flexBox = css`
   align-items: center;
 `;
 
-interface SearchDimmedDef {
-  (isUnifiedSearch: boolean): SerializedStyles;
-}
-
-export const searchDimmed: SearchDimmedDef = (isUnifiedSearch) => {
-  return css`
-    position: absolute;
-    left: 0;
-    bottom: -5rem;
-    width: 100%;
-    height: 5rem;
-    z-index: 10;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 5%, transparent 95%);
-    display: ${isUnifiedSearch ? "block" : "none"};
-  `;
-};
+export const newBox = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+  color: ${COLORS.GRAY100};
+  background-color: ${COLORS.ERROR_RED30};
+`;

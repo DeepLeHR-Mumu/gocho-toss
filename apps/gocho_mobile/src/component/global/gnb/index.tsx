@@ -15,7 +15,8 @@ import { useToast } from "@/globalStates";
 import { AuthorizedMenu } from "./component/authorizedMenu";
 import { UnauthorizedMenu } from "./component/unauthorizedMenu";
 import { SubMenuButton } from "./component/subMenuButton";
-import { menuArr } from "./constant";
+
+import { blogUrl, menuArr } from "./constant";
 import { openedElementDef } from "./type";
 import {
   headerWrapper,
@@ -31,6 +32,7 @@ import {
   menuCategory,
   subMenuArr,
   iconBox,
+  newBox,
 } from "./style";
 
 export const GNB: FunctionComponent = () => {
@@ -149,6 +151,12 @@ export const GNB: FunctionComponent = () => {
                 </li>
               );
             })}
+            <li key="navMenu_blog">
+              <a href={blogUrl} target="_blank" rel="noreferrer" css={menuCategory}>
+                블로그
+                <span css={newBox}>N</span>
+              </a>
+            </li>
           </ul>
           {isSuccess ? (
             <AuthorizedMenu setOpenedElement={setOpenedElement} />

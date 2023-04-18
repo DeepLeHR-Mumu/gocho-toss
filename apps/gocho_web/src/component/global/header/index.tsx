@@ -13,9 +13,8 @@ import { MAIN_URL } from "shared-constant";
 import { Layout } from "@component/layout";
 import { Profile } from "@component/common/molecule/profile";
 import { UnAuthMenu } from "@component/common/molecule/unAuthMenu";
-import { menuArr } from "@component/global/header/constant";
-
 import { useToast, useModal } from "@/globalStates";
+import { blogUrl, menuArr } from "./constant";
 
 import { SubMenuButton } from "./component/subMenuButton";
 import {
@@ -32,6 +31,7 @@ import {
   searchButton,
   flexBox,
   logoLink,
+  newBox,
 } from "./style";
 
 export const Header: FunctionComponent = () => {
@@ -131,6 +131,12 @@ export const Header: FunctionComponent = () => {
                   </li>
                 );
               })}
+              <li key="navMenu_blog" css={activeRouter(false)}>
+                <a href={blogUrl} target="_blank" rel="noreferrer" css={flexBox}>
+                  블로그
+                  <span css={newBox}>N</span>
+                </a>
+              </li>
             </ul>
             <div css={flexBox}>
               <form onSubmit={submitHandler} css={unifiedSearchWrapper}>
