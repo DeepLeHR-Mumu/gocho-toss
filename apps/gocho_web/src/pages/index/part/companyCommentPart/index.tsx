@@ -16,10 +16,10 @@ import { setCarouselSetting } from "./util";
 
 export const CompanyCommentPart: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
-  const { data: companyDataArr, isLoading } = useCompanyArr({ order: "view" });
   const { setModal } = useModal();
+  const { data: companyDataObj, isLoading } = useCompanyArr({ order: "view", size: 10 });
 
-  if (!companyDataArr || isLoading) {
+  if (!companyDataObj || isLoading) {
     return (
       <section css={partContainer}>
         <InvisibleH2 title="기업별 댓글" />
@@ -50,7 +50,7 @@ export const CompanyCommentPart: FunctionComponent = () => {
 
       <section css={cardListContainer}>
         <Slider {...setCarouselSetting()} ref={sliderRef} css={sliderContainer}>
-          {companyDataArr.companyDataArr.map((data) => {
+          {companyDataObj.companyDataArr.map((data) => {
             return (
               <CompanyCommentCard
                 companyData={data}

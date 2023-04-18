@@ -1,4 +1,6 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+import { userInfoKeyObj } from "shared-constant/queryKeyFactory/user/infoKeyObj";
 
 import { axiosInstance } from "../../axiosInstance";
 
@@ -11,12 +13,23 @@ import {
 } from "./type";
 
 const patchUserProfile: PatchUserProfileDef = async (requestObj) => {
-  const token = localStorage.getItem("accessToken");
-  const headers = token ? { "x-access-token": token, "Content-Type": "application/json" } : undefined;
-  const { data } = await axiosInstance.patch(`/users/${requestObj.userId}/profile`, { ...requestObj }, { headers });
+  const formData = new FormData();
+  if (requestObj.nickname) formData.append("json", JSON.stringify({ nickname: requestObj.nickname }));
+  if (requestObj.image) formData.append("image", requestObj.image as File);
+  const { data } = await axiosInstance.patch(`/users/${requestObj.userId}/profile`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
   return data;
 };
 
 export const usePatchUserProfile: UsePatchUserProfileProps = () => {
-  return useMutation<UserProfileResponse, ErrorResponse, RequestObjDef>({ mutationFn: patchUserProfile });
+  const queryClient = useQueryClient();
+  return useMutation<UserProfileResponse, ErrorResponse, RequestObjDef>({
+    mutationFn: patchUserProfile,
+    onSuccess: (data) => {
+      localStorage.setItem("accessToken", data.data.access_token);
+      localStorage.setItem("refreshToken", data.data.refresh_token);
+      queryClient.invalidateQueries(userInfoKeyObj.userInfo);
+    },
+  });
 };

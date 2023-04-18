@@ -2,7 +2,7 @@ import { FunctionComponent, useRef } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Slider from "react-slick";
 
-import { useBannerArr } from "shared-api/banner/useBannerArr";
+import { useTopArr } from "shared-api/banner";
 import { dummyArrCreator } from "shared-util";
 import { JobAdCard } from "shared-ui/card/jobAdCard";
 
@@ -12,7 +12,7 @@ import { listContainer, sliderButton, sliderButtonContainer } from "./style";
 export const JobAdCardList: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
 
-  const { data: bannerDataArr, isLoading } = useBannerArr({ type: "T" });
+  const { data: bannerDataArr, isLoading } = useTopArr();
 
   if (!bannerDataArr || isLoading) {
     return (

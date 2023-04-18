@@ -1,7 +1,7 @@
 export interface JobArrRequestObjDef {
   order: "recent" | "popular" | "rand" | "view" | "end" | "com" | undefined;
-  limit?: number;
-  offset?: number;
+  page?: number;
+  size?: number;
   q?: string;
   userId?: string;
   filter?: "todayUpload" | "almostDeadline" | "deadline" | "expired" | "valid";

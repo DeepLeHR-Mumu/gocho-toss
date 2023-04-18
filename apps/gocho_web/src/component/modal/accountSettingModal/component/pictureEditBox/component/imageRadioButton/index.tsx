@@ -1,9 +1,8 @@
 import { FunctionComponent } from "react";
 import { FiCheck } from "react-icons/fi";
+import Image from "next/image";
 
-import { ProfileImg } from "shared-ui/common/atom/profileImg";
-
-import { checkPoint, imageWrapper, invisibleRadioButton } from "./style";
+import { checkPoint, imageWrapper, invisibleRadioButton, wrapper } from "./style";
 import { ImageRadioButtonProps } from "./type";
 
 export const ImageRadioButton: FunctionComponent<ImageRadioButtonProps> = ({
@@ -29,7 +28,9 @@ export const ImageRadioButton: FunctionComponent<ImageRadioButtonProps> = ({
           }}
         />
         <div css={imageWrapper(checkedImage === imageValue)}>
-          <ProfileImg size="L" imageStr={imageValue} />
+          <div css={wrapper("L")}>
+            <Image src={imageFile} alt="유저 프로필" fill sizes="1" />
+          </div>
           {checkedImage === imageValue && (
             <div css={checkPoint}>
               <FiCheck />

@@ -3,7 +3,6 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useRouter } from "next/router";
 
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
-import { useUserProfile } from "shared-api/auth";
 import { useJobDetail } from "shared-api/job";
 import { dDayCalculator } from "shared-util";
 
@@ -33,8 +32,6 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
   const [isOverlap, setIsOverlap] = useState(true);
   const observeRef = useRef<HTMLDivElement | null>(null);
   const { data: jobDetailData } = useJobDetail({ id: Number(jobId) });
-
-  const { data: userData } = useUserProfile();
 
   useEffect(() => {
     if (observeRef.current) {
@@ -78,9 +75,9 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
   return (
     <div>
       {isOverlap ? (
-        <Header jobDetailData={jobDetailData} userId={userData?.id} isDdayEnd={isDdayEnd} />
+        <Header jobDetailData={jobDetailData} isDdayEnd={isDdayEnd} />
       ) : (
-        <HeaderFix jobDetailData={jobDetailData} userId={userData?.id} isDdayEnd={isDdayEnd} />
+        <HeaderFix jobDetailData={jobDetailData} isDdayEnd={isDdayEnd} />
       )}
 
       <div css={observeCSS} ref={observeRef} />

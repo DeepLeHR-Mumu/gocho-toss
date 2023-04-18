@@ -24,24 +24,12 @@ import {
 } from "./style";
 
 export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDetailData }) => {
-  const {
-    year: startYear,
-    month: startMonth,
-    date: startDate,
-    hour: startHour,
-    minute: startMinute,
-  } = dateConverter(jobDetailData.startTime);
+  const { dateWithTime: jobStartDate } = dateConverter(jobDetailData.startTime);
 
-  const {
-    year: endYear,
-    month: endMonth,
-    date: endDate,
-    hour: endHour,
-    minute: endMinute,
-  } = dateConverter(jobDetailData.endTime);
+  const { dateWithTime: jobEndDate, year: jobEndYear } = dateConverter(jobDetailData.endTime);
 
   const isDdayEnd = dDayCalculator(jobDetailData.endTime) === "만료";
-  const isEveryJob = Boolean(endYear === 9999);
+  const isEveryJob = Boolean(jobEndYear === "9999");
 
   return (
     <div>
@@ -53,9 +41,9 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
               <p css={isEveryDate}>상시채용입니다.</p>
             ) : (
               <>
-                <li>{`${startYear}. ${startMonth}. ${startDate}  ${startHour}:${startMinute}`}</li>
+                <li>{jobStartDate}</li>
                 <li>~</li>
-                <li>{`${endYear}. ${endMonth}. ${endDate}  ${endHour}:${endMinute}`}</li>
+                <li>{jobEndDate}</li>
               </>
             )}
           </ul>

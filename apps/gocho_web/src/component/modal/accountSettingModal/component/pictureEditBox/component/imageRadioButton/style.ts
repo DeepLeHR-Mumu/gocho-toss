@@ -18,7 +18,6 @@ export const imageWrapper: ImageWrapperDef = (isImageWrapper) => {
     border-radius: 50%;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     position: relative;
-    margin-bottom: 1rem;
     border: 2px solid ${isImageWrapper ? COLORS.BLUE_FIRST40 : "transparent"};
   `;
 };
@@ -34,3 +33,29 @@ export const checkPoint = css`
   font-size: 1rem;
   border-radius: 50%;
 `;
+
+interface sizeCreatorDef {
+  (size: "S" | "M" | "L" | "XL"): string;
+}
+export const sizeCreator: sizeCreatorDef = (size) => {
+  if (size === "S") return "2.25rem";
+  if (size === "M") return "3.25rem";
+  if (size === "L") return "6rem";
+  return "10rem";
+};
+
+interface WrapperDef {
+  (size: "S" | "M" | "L" | "XL"): SerializedStyles;
+}
+export const wrapper: WrapperDef = (size) => {
+  return css`
+    border-radius: 50%;
+    overflow: hidden;
+    width: ${sizeCreator(size)};
+    height: ${sizeCreator(size)};
+    position: relative;
+    > img {
+      object-fit: contain;
+    }
+  `;
+};

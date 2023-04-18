@@ -2,7 +2,7 @@ export interface jobBookmarkResObjDef {
   data:
     | {
         id: number;
-        end_time: number;
+        end_time: string;
         title: string;
         cut: boolean;
         company: { name: string; logo_url: string };
@@ -16,8 +16,14 @@ export interface CompanyBookmarkResObjDef {
 
 export interface companyBookmarkObjDef {
   id: number;
-  name: string;
-  logo_url: string;
+  company: {
+    id: number;
+    name: string;
+    logo_url: string;
+  };
+  title: string;
+  cut: boolean;
+  end_time: string;
 }
 
 export interface postingBookmarkResObjDef {

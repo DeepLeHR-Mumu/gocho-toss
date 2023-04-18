@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { BsFillBookmarkFill } from "react-icons/bs";
 
-import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr } from "shared-api/bookmark";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
+import { useCompanyBookmarkToggle } from "shared-api/company";
 
 import { SkeletonBox } from "../../common/atom/skeletonBox";
 import { CompanyCardProps, CompanyCardSkeleton } from "./type";
@@ -12,20 +12,10 @@ import { companyCardSkeleton, cardWrapper, bookmarkButtonWrapper, nameCSS, compa
 
 export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkeleton> = ({
   companyData,
-  isBookmarked,
-  userId,
   isSkeleton,
+  refetchUserBookmark,
 }) => {
-  const { mutate: addMutate } = useAddCompanyBookmarkArr({
-    id: companyData?.id as number,
-    logo_url: companyData?.logoUrl as string,
-    name: companyData?.name as string,
-  });
-  const { mutate: deleteMutate } = useDeleteCompanyBookmarkArr({
-    id: companyData?.id as number,
-    logo_url: companyData?.logoUrl as string,
-    name: companyData?.name as string,
-  });
+  const { mutate: companyBookmarkToggle } = useCompanyBookmarkToggle();
 
   if (isSkeleton || companyData === undefined) {
     return (
@@ -35,25 +25,14 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
     );
   }
 
-  const addCompanyBookmark = () => {
-    // TODO: need to add globalStates
-    if (userId) addMutate({ userId, id: companyData.id });
-  };
-
-  const deleteCompanyBookmark = () => {
-    if (userId) deleteMutate({ userId, id: companyData.id });
+  const companyBookmarkToggleHandler = () => {
+    refetchUserBookmark();
+    companyBookmarkToggle({ companyId: companyData.id });
   };
 
   return (
     <article css={cardWrapper}>
-      <button
-        type="button"
-        css={bookmarkButtonWrapper(isBookmarked)}
-        onClick={(event) => {
-          event.preventDefault();
-          return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
-        }}
-      >
+      <button type="button" css={bookmarkButtonWrapper(companyData.isBookmark)} onClick={companyBookmarkToggleHandler}>
         <BsFillBookmarkFill />
       </button>
       <Link href={`/company/${companyData.id}/detail`} passHref>

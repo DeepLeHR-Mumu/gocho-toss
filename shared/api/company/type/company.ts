@@ -44,6 +44,7 @@ export interface CompanyObjDef {
   pay_start: number;
   pay_desc: string | null;
   bookmark: number;
+  is_bookmark: boolean;
   view: number;
   logo_url: string | null;
   welfare: WelfareDef;

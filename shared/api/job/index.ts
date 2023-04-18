@@ -1,5 +1,6 @@
 export { useJobArr } from "./useJobArr";
-export { useUnifiedJobSearchArr } from "./useUnifiedJobSearchArr";
 export { useJobDetail, getJobDetail } from "./useJobDetail";
 export { useJdApplyClick } from "./useJdApplyClick";
 export { useJdCountInfo } from "./useJdCountInfo";
+export { useJdBookmarkToggle } from "./useJobBookmarkToggle";
+export { useUserJobBookmarkArr } from "./useUserJobBookmarkArr";

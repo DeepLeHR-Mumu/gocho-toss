@@ -11,7 +11,7 @@ import { useToast, useModal } from "@/globalStates";
 import { ImageRadioButton } from "./component/imageRadioButton";
 import { ProfileChangeFormValues } from "./type";
 import { profileObjArr } from "./constant";
-import { wrapper, imgContainer, closeButtonBox, title } from "./style";
+import { wrapper, imgContainer, closeButtonBox, title, formCSS } from "./style";
 
 export const PictureEditBox: FunctionComponent = () => {
   const { data: userInfoData, refetch } = useUserProfile();
@@ -28,7 +28,6 @@ export const PictureEditBox: FunctionComponent = () => {
       mutate(
         {
           userId: userInfoData.id,
-          nickname: userInfoData.nickname,
           image: imageSrc,
         },
         {
@@ -48,10 +47,12 @@ export const PictureEditBox: FunctionComponent = () => {
     }`;
 
     const fetchImage = async () => {
-      const response = await fetch(`${DOMAIN}${profileUrl}`);
-      const blob = await response.blob();
-      const file = new File([blob], "image.png", { type: blob.type });
-      setImageSrc(file);
+      if (profileUrl) {
+        const response = await fetch(`${DOMAIN}${profileUrl}`);
+        const blob = await response.blob();
+        const file = new File([blob], "image.png", { type: blob.type });
+        setImageSrc(file);
+      }
     };
 
     fetchImage();
@@ -63,7 +64,7 @@ export const PictureEditBox: FunctionComponent = () => {
         <CloseButton size="M" buttonClick={closeModal} />
       </div>
       <strong css={title}>프로필 사진 변경</strong>
-      <form onSubmit={handleSubmit(profileImgSubmit)}>
+      <form onSubmit={handleSubmit(profileImgSubmit)} css={formCSS}>
         <ul css={imgContainer}>
           {profileObjArr.map((profile) => {
             return (

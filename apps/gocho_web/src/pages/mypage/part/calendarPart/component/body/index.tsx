@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 
 import { useUserProfile } from "shared-api/auth";
-import { useUserJobBookmarkArr } from "shared-api/bookmark";
+import { useUserJobBookmarkArr } from "shared-api/job";
 import { dummyArrCreator } from "shared-util";
 
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
@@ -63,7 +63,7 @@ export const Body: FunctionComponent<BodyProps> = ({ twoWeek }) => {
 
   const bookmarkData = userJobBookmarkArrData.filter((jobBookmarkData) => {
     return twoWeek.some((day) => {
-      return getDateHours(day.date) === getDateHours(jobBookmarkData.endTime);
+      return getDateHours(day.date) === getDateHours(new Date(jobBookmarkData.endTime));
     });
   });
 

@@ -22,7 +22,7 @@ export interface TipBoxProps {
     uploaderName: string;
     description: string;
     tagArr: string[];
-    createdTime: number;
+    createdTime: string;
     likeCount: number;
     viewCount: number;
     thumbnailSrc: string;

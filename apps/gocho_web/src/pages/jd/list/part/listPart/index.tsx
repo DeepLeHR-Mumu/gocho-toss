@@ -35,7 +35,6 @@ import {
 } from "./style";
 
 export const ListPart: FunctionComponent = () => {
-  const [total, setTotal] = useState<number>(0);
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
   const firstRenderingRef = useRef<boolean>(true);
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -57,15 +56,15 @@ export const ListPart: FunctionComponent = () => {
   });
 
   const {
-    data: jobDataArr,
+    data: jobData,
     isLoading: isJobDataArrLoading,
     isError: isJobDataArrError,
   } = useJobArr({
     q: JSON.stringify(searchQuery),
     order: router.query.order as OrderDef,
     filter: "valid",
-    limit,
-    offset: (Number(router.query.page) - 1) * limit,
+    page: Number(router.query.page),
+    size: limit,
   });
 
   const jdSearch: SubmitHandler<SearchValues> = (searchVal) => {
@@ -105,12 +104,6 @@ export const ListPart: FunctionComponent = () => {
   };
 
   useEffect(() => {
-    if (jobDataArr) {
-      setTotal(jobDataArr.count);
-    }
-  }, [jobDataArr]);
-
-  useEffect(() => {
     if (router.query.page && firstRenderingRef.current) {
       firstRenderingRef.current = false;
       return;
@@ -124,8 +117,6 @@ export const ListPart: FunctionComponent = () => {
   useEffect(() => {
     jdListFunnelEvent();
   }, []);
-
-  const totalPage = Math.ceil(total / limit);
 
   return (
     <section css={partContainer}>
@@ -162,12 +153,14 @@ export const ListPart: FunctionComponent = () => {
                 );
               })}
             </div>
-            <Pagination
-              totalPage={totalPage}
-              linkObj={{
-                pathname: JOBS_LIST_URL,
-              }}
-            />
+            {jobData && (
+              <Pagination
+                totalPage={jobData.pageResult.totalPages}
+                linkObj={{
+                  pathname: JOBS_LIST_URL,
+                }}
+              />
+            )}
           </div>
         </form>
 
@@ -182,13 +175,15 @@ export const ListPart: FunctionComponent = () => {
           <p>고는 고졸지원가능 초는 초대졸 지원 가능합니다</p>
         </div>
 
-        <JobCardList jobDataArr={jobDataArr?.jobDataArr} isLoading={isJobDataArrLoading} isError={isJobDataArrError} />
-        <BottomPagination
-          totalPage={totalPage}
-          linkObj={{
-            pathname: JOBS_LIST_URL,
-          }}
-        />
+        <JobCardList jobDataArr={jobData?.jobDataArr} isLoading={isJobDataArrLoading} isError={isJobDataArrError} />
+        {jobData && (
+          <BottomPagination
+            totalPage={jobData.pageResult.totalPages}
+            linkObj={{
+              pathname: JOBS_LIST_URL,
+            }}
+          />
+        )}
       </Layout>
     </section>
   );

@@ -1,4 +1,4 @@
 export interface BookmarkProps {
-  bookmarkData: { id: number; endTime: number; title: string }[];
+  bookmarkData: { id: number; endTime: string; title: string }[];
   dayHours: number;
 }

@@ -3,8 +3,6 @@ import { FunctionComponent } from "react";
 import { useJobArr } from "shared-api/job";
 import { dummyArrCreator } from "shared-util";
 import { MainJobCard } from "shared-ui/card/MainJobCard";
-import { useUserProfile } from "shared-api/auth";
-import { useUserJobBookmarkArr } from "shared-api/bookmark";
 
 import { useModal } from "@/globalStates";
 
@@ -12,8 +10,6 @@ import { cardListContainer } from "./style";
 import { JobCardArrProps } from "./type";
 
 export const JobCardList: FunctionComponent<JobCardArrProps> = ({ listOrder }) => {
-  const { data: userData } = useUserProfile();
-  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
   const { setModal } = useModal();
 
   const {
@@ -23,7 +19,8 @@ export const JobCardList: FunctionComponent<JobCardArrProps> = ({ listOrder }) =
   } = useJobArr({
     order: listOrder,
     filter: "valid",
-    limit: 9,
+    page: 1,
+    size: 9,
   });
 
   const loginModalOpener = () => {
@@ -41,22 +38,9 @@ export const JobCardList: FunctionComponent<JobCardArrProps> = ({ listOrder }) =
   }
   return (
     <div css={cardListContainer}>
-      {jobDataArr.jobDataArr.map((jobData) => {
-        const isBookmarked = Boolean(
-          userJobBookmarkArr?.some((job) => {
-            return job.id === jobData.id;
-          })
-        );
-
+      {jobDataArr.jobDataArr.map((data) => {
         return (
-          <MainJobCard
-            key={`MainJobCard${jobData.id}`}
-            jobData={jobData}
-            isMobile={false}
-            isBookmarked={isBookmarked}
-            userId={userData?.id}
-            loginOpener={loginModalOpener}
-          />
+          <MainJobCard key={`MainJobCard${data.id}`} jobData={data} isMobile={false} loginOpener={loginModalOpener} />
         );
       })}
     </div>

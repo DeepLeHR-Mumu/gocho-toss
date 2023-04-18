@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { FunctionComponent } from "react";
 
-import { useUnifiedJobSearchArr } from "shared-api/job";
-import { useUnifiedCompanySearchArr } from "shared-api/company";
+import { useJobArr } from "shared-api/job";
+import { useCompanyArr } from "shared-api/company";
 
 import { searchMenuButtonArr } from "./constant";
 import { menuButton, menuElement, menuList } from "./style";
@@ -10,19 +10,20 @@ import { menuButton, menuElement, menuList } from "./style";
 export const MenuListPart: FunctionComponent = () => {
   const router = useRouter();
 
-  const { data: jobDataArr } = useUnifiedJobSearchArr({
-    searchWord: router.query.q,
-    page: router.query.page,
-    limit: 0,
+  const { data: jobData } = useJobArr({
+    order: "recent",
+    q: JSON.stringify({ searchWord: router.query.q }),
+    filter: "valid",
+    size: 4,
   });
 
-  const { data: companyDataArr } = useUnifiedCompanySearchArr({
-    searchWord: router.query.q,
-    page: router.query.page,
-    limit: 0,
+  const { data: companyData } = useCompanyArr({
+    q: router.query.q as string,
+    order: "view",
+    size: 10,
   });
 
-  const totalCount = (jobDataArr?.count || 0) + (companyDataArr?.count || 0);
+  const totalCount = (jobData?.pageResult.totalElements || 0) + (companyData?.pageResult.totalElements || 0);
 
   return (
     <nav>
@@ -42,8 +43,8 @@ export const MenuListPart: FunctionComponent = () => {
                 }}
               >
                 {menuText} {menuText === "전체" && totalCount.toLocaleString("Ko-KR")}
-                {menuText === "공고" && jobDataArr?.count.toLocaleString("Ko-KR")}
-                {menuText === "기업" && companyDataArr?.count.toLocaleString("Ko-KR")}
+                {menuText === "공고" && jobData?.pageResult.totalElements.toLocaleString("Ko-KR")}
+                {menuText === "기업" && companyData?.pageResult.totalElements.toLocaleString("Ko-KR")}
               </button>
             </li>
           );

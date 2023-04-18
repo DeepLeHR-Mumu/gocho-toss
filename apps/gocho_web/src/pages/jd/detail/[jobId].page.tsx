@@ -43,8 +43,8 @@ const JobsDetail: NextPage = () => {
   const { data: jobDetailData, isLoading } = useJobDetail({
     id: Number(jobId),
   });
-  const { data: companyCommentDataArr } = useCompanyCommentArr({
-    companyId: Number(jobDetailData?.company.companyId),
+  const { data: companyCommentData } = useCompanyCommentArr({
+    companyId: Number(jobDetailData?.company.id),
   });
 
   useEffect(() => {
@@ -60,8 +60,12 @@ const JobsDetail: NextPage = () => {
             <section css={containerSkeleton}>
               <SkeletonBox />
             </section>
-            {companyCommentDataArr && (
-              <DetailComment jdId={null} commentDataArr={companyCommentDataArr} userInfo={userData} />
+            {companyCommentData && (
+              <DetailComment
+                company={companyCommentData.company}
+                commentDataArr={companyCommentData.commentArr}
+                userInfo={userData}
+              />
             )}
           </div>
         </Layout>
@@ -101,16 +105,22 @@ const JobsDetail: NextPage = () => {
             <DetailWorkPart freshPosition={jobDetailData.positionArr[currentPositionId]} />
             <DetailPreferencePart freshPosition={jobDetailData.positionArr[currentPositionId]} />
           </section>
-          <DetailComment
-            jdId={jobDetailData.id}
-            commentDataArr={
-              companyCommentDataArr || {
-                company: { ...jobDetailData.company, id: jobDetailData.company.companyId },
-                commentArr: null,
-              }
-            }
-            userInfo={userData}
-          />
+          {!userData && !companyCommentData && (
+            <DetailComment
+              company={{
+                name: jobDetailData.company.name,
+                logoUrl: jobDetailData.company.logoUrl,
+                id: jobDetailData.company.id,
+              }}
+            />
+          )}
+          {companyCommentData && (
+            <DetailComment
+              company={companyCommentData.company}
+              commentDataArr={companyCommentData.commentArr}
+              userInfo={userData}
+            />
+          )}
         </div>
         <ReceptInfoPart jobDetailData={jobDetailData} />
       </Layout>

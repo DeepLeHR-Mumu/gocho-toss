@@ -3,10 +3,8 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
-import { useQueryClient } from "@tanstack/react-query";
 
-import { jobArrKeyObj } from "shared-constant/queryKeyFactory/job/jobArrKeyObj";
-import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
+import { useJdBookmarkToggle } from "shared-api/job";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import highTrue from "shared-image/global/common/go_color.svg";
@@ -51,38 +49,11 @@ import {
   taskArrCSS,
 } from "./style";
 
-export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
-  jobData,
-  isBookmarked,
-  userId,
-  isSkeleton,
-}) => {
-  const queryClient = useQueryClient();
+export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ jobData, isSkeleton }) => {
   const router = useRouter();
   const { isSuccess, data: userInfoData } = useUserProfile();
+  const { mutate: jobBookmarkToggle } = useJdBookmarkToggle();
   const { setModal } = useModal();
-
-  const { mutate: addMutate } = useAddJobBookmarkArr({
-    id: jobData?.id as number,
-    end_time: jobData?.endTime as number,
-    title: jobData?.title as string,
-    cut: jobData?.cut as boolean,
-    company: {
-      name: jobData?.companyName as string,
-      logo_url: jobData?.companyLogo as string,
-    },
-  });
-
-  const { mutate: deleteMutate } = useDeleteJobBookmarkArr({
-    id: jobData?.id as number,
-    end_time: jobData?.endTime as number,
-    title: jobData?.title as string,
-    cut: jobData?.cut as boolean,
-    company: {
-      name: jobData?.companyName as string,
-      logo_url: jobData?.companyLogo as string,
-    },
-  });
 
   if (isSkeleton || !jobData) {
     return (
@@ -92,36 +63,18 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
     );
   }
 
-  const addJobBookmark = () => {
-    if (!isSuccess) {
+  const jobBookmarkHandler = () => {
+    if (!userInfoData || !isSuccess) {
       setModal("loginModal", { button: "close" });
+      return;
     }
-    if (userId)
-      addMutate(
-        { userId, id: jobData.id },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries(jobArrKeyObj.all);
-            jdBookmarkEvent(jobData.id);
-          },
-        }
-      );
+
+    jdBookmarkEvent(jobData.id);
+    jobBookmarkToggle({ jdId: jobData.id });
   };
 
-  const deleteJobBookmark = () => {
-    if (userId)
-      deleteMutate(
-        { userId, id: jobData.id },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries(jobArrKeyObj.all);
-          },
-        }
-      );
-  };
-
-  const { year: startYear, month: startMonth, date: startDate } = dateConverter(jobData.startTime);
-  const { year: endYear, month: endMonth, date: endDate } = dateConverter(jobData.endTime);
+  const { date: jobStartTime } = dateConverter(jobData.startTime);
+  const { date: jobEndTime, year: jobEndYear } = dateConverter(jobData.endTime);
 
   const isExpired = dDayBooleanReturn(jobData.endTime);
 
@@ -134,15 +87,9 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
     <article css={cardWrapper(isExpired)}>
       <button
         type="button"
-        css={bookmarkButtonWrapper(isBookmarked)}
-        onClick={(event) => {
-          if (!userInfoData) {
-            setModal("loginModal", { button: "close" });
-          }
-          event.preventDefault();
-          return isBookmarked ? deleteJobBookmark() : addJobBookmark();
-        }}
-        aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
+        css={bookmarkButtonWrapper(jobData.isBookmark)}
+        onClick={jobBookmarkHandler}
+        aria-label={jobData.isBookmark ? "북마크 해지" : "북마크 하기"}
       >
         <BsFillBookmarkFill />
         <span css={bookmarkNumber}>{jobData.bookmark}</span>
@@ -163,20 +110,16 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
         <div css={mainContainer}>
           <div css={companyLogoWrapper} className="Logo">
             <div css={companyLogoBox}>
-              <Image fill src={jobData.companyLogo || defaultCompanyLogo} alt={jobData.companyName} sizes="1" />
+              <Image fill src={jobData.company.logoUrl || defaultCompanyLogo} alt={jobData.company.logoUrl} sizes="1" />
             </div>
           </div>
           <div css={infoBox}>
             <div css={dateInfoContainer}>
-              <p css={date}>
-                {endYear === 9999
-                  ? `${startYear}.${startMonth}.${startDate}`
-                  : `${startYear}.${startMonth}.${startDate}~${endYear}.${endMonth}.${endDate}`}
-              </p>
+              <p css={date}>{jobEndYear === "9999" ? `${jobStartTime}` : `${jobStartTime}~${jobEndTime}`}</p>
               <DdayBox endTime={jobData.endTime} />
               {jobData.cut && <div css={cutBox}>채용시마감</div>}
             </div>
-            <p css={companyName}>{jobData.companyName}</p>
+            <p css={companyName}>{jobData.company.name}</p>
             <strong css={titleCSS}>{jobData.title}</strong>
             <ul css={detailInfoContainer}>
               <li css={eduQual}>
@@ -192,7 +135,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({
                 />
               </li>
               <li css={detailInfo}>
-                {jobData.placeArr[0].split(" ").slice(0, 2).join(" ")}{" "}
+                {jobData.placeArr[0] && jobData.placeArr[0].split(" ").slice(0, 2).join(" ")}{" "}
                 {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
               </li>
 

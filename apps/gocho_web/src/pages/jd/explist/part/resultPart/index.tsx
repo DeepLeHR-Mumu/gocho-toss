@@ -13,30 +13,30 @@ import { noDataBox, noDataDesc } from "./style";
 export const ResultPart: FunctionComponent = () => {
   const router = useRouter();
 
-  const { data: companyDataArr, isLoading } = useCompanyArr({
+  const { data: companyData, isLoading } = useCompanyArr({
     q: router.query.q as string,
     order: router.query.order as OrderDef,
-    limit: 10,
-    offset: (Number(router.query.page) - 1) * 10,
+    page: Number(router.query.page),
+    size: 10,
   });
-
-  const totalPage = companyDataArr?.count ? Math.ceil(companyDataArr.count / 10) : 0;
 
   return (
     <div>
-      {companyDataArr?.companyDataArr.length === 0 ? (
+      {companyData?.pageResult.totalElements === 0 ? (
         <div css={noDataBox}>
           <p css={noDataDesc}>검색결과가 없습니다 👀</p>
         </div>
       ) : (
         <>
-          <ExpJobCardList companyDataArr={companyDataArr?.companyDataArr} isLoading={isLoading} />
-          <BottomPagination
-            linkObj={{
-              pathname: JOBS_EXPLIST_URL,
-            }}
-            totalPage={totalPage}
-          />
+          <ExpJobCardList companyDataArr={companyData?.companyDataArr} isLoading={isLoading} />
+          {companyData && (
+            <BottomPagination
+              linkObj={{
+                pathname: JOBS_EXPLIST_URL,
+              }}
+              totalPage={companyData?.pageResult.totalPages}
+            />
+          )}
         </>
       )}
     </div>

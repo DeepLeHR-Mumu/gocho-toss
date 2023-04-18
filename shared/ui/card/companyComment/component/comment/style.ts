@@ -53,14 +53,6 @@ export const bodyWrapper: BodyWrapperDef = (isSameUserNickname) => css`
   border-radius: 0 1rem 1rem 1rem;
 `;
 
-export const locationCSS = css`
-  font-size: 0.75rem;
-  margin-bottom: 1rem;
-  line-height: 1.6;
-  font-weight: 400;
-  color: ${COLORS.GRAY30};
-`;
-
 export const bodyCSS = css`
   word-break: break-all;
   font-size: 0.75rem;

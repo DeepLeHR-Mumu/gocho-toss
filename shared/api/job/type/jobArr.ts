@@ -1,23 +1,36 @@
-import { CompanyObjDef } from "../../company/type/company";
-
 export interface JobObjDef {
   id: number;
-  company: CompanyObjDef;
-  created_time: number;
-  start_time: number;
-  end_time: number;
+  company: {
+    id: number;
+    name: string;
+    logo_url: string;
+  };
   title: string;
+  cut: boolean;
+  start_time: string;
+  end_time: string;
+  created_time: string;
+  updated_time: string | null;
+  apply_url: string;
+  bookmark: number;
+  is_bookmark: boolean;
+  view: number;
+  click: number;
+  position_count: number;
   high: boolean;
   college: boolean;
-  position_count: number;
+  required_exp_arr: string[];
   place_arr: string[];
   rotation_arr: string[];
+  contract_type: string[];
   task_arr: string[];
-  process_arr: string[];
-  apply_desc_arr: string[];
-  etc_arr: string[];
-  apply_url: string;
-  cut: boolean;
-  bookmark: number;
-  view: number;
+}
+
+export interface PageResultDef {
+  total_elements: number;
+  total_pages: number;
+  page: number;
+  size: number;
+  is_first: boolean;
+  is_last: boolean;
 }

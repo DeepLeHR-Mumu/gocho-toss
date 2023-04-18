@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 
 import { BookmarkedJobCard } from "shared-ui/card/bookmarkedJobCard";
 
-import { useUserJobBookmarkArr } from "shared-api/bookmark";
+import { useUserJobBookmarkArr } from "shared-api/job";
 import { useUserProfile } from "shared-api/auth";
 
 import { dummyArrCreator } from "shared-util";
@@ -39,7 +39,7 @@ export const BookmarkJobArr: FunctionComponent = () => {
         <p css={desc}>{userData.nickname} 님! 북마크를 이용하시면 추천공고가 더 정교해져요 😳</p>
       )}
       {userJobBookmarkArrData.map((job) => {
-        return <BookmarkedJobCard isMobile={false} key={job.id} jobData={job} isBookmarked userId={userData?.id} />;
+        return <BookmarkedJobCard isMobile={false} key={job.id} jobData={job} isBookmarked />;
       })}
     </div>
   );

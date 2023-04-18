@@ -1,13 +1,10 @@
 import { FunctionComponent } from "react";
 import { BsFillBookmarkFill } from "react-icons/bs";
-import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
-import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { useUserProfile } from "shared-api/auth";
-import { useUserJobBookmarkArr, useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
-import { useJdApplyClick, useJdCountInfo } from "shared-api/job";
+import { useJdApplyClick, useJdBookmarkToggle } from "shared-api/job";
 import { jdBookmarkEvent } from "shared-ga/jd";
 
 import { Layout } from "@component/layout";
@@ -29,70 +26,22 @@ import {
   applyEndButton,
 } from "./style";
 
-export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, userId, isDdayEnd }) => {
-  const queryClient = useQueryClient();
+export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, isDdayEnd }) => {
   const { data: userInfoData } = useUserProfile();
   const { setModal } = useModal();
   const router = useRouter();
 
-  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userInfoData?.id });
-  const { data: jdCountData } = useJdCountInfo({ id: Number(router.query.jobId) });
-
+  const { mutate: jobBookmarkToggle } = useJdBookmarkToggle();
   const { mutate: mutateJdApplyClick } = useJdApplyClick();
-  const { mutate: addMutate } = useAddJobBookmarkArr({
-    id: jobDetailData?.id as number,
-    end_time: jobDetailData?.endTime as number,
-    title: jobDetailData?.title as string,
-    cut: jobDetailData?.cut as boolean,
-    company: {
-      name: jobDetailData?.company.name as string,
-      logo_url: jobDetailData?.company.logoUrl as string,
-    },
-  });
 
-  const { mutate: deleteMutate } = useDeleteJobBookmarkArr({
-    id: jobDetailData?.id as number,
-    end_time: jobDetailData?.endTime as number,
-    title: jobDetailData?.title as string,
-    cut: jobDetailData?.cut as boolean,
-    company: {
-      name: jobDetailData?.company.name as string,
-      logo_url: jobDetailData?.company.logoUrl as string,
-    },
-  });
-
-  const addJobBookmark = () => {
-    if (userId)
-      addMutate(
-        { userId, id: jobDetailData.id },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
-            jdBookmarkEvent(jobDetailData.id);
-          },
-        }
-      );
+  const jobBookmarkToggleHandler = () => {
+    if (!userInfoData) {
+      setModal("loginModal", { button: "close" });
+      return;
+    }
+    jdBookmarkEvent(jobDetailData.id);
+    jobBookmarkToggle({ jdId: jobDetailData.id });
   };
-
-  const deleteJobBookmark = () => {
-    return (
-      userId &&
-      deleteMutate(
-        { userId, id: jobDetailData.id },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
-          },
-        }
-      )
-    );
-  };
-
-  const isBookmarked = Boolean(
-    userJobBookmarkArr?.some((job) => {
-      return job.id === jobDetailData.id;
-    })
-  );
 
   return (
     <header css={headerCSS}>
@@ -107,17 +56,12 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, us
           <div css={flexBox}>
             <button
               type="button"
-              css={bookmarkButton(isBookmarked)}
-              onClick={() => {
-                if (!userInfoData) {
-                  setModal("loginModal", { button: "close" });
-                }
-                return isBookmarked ? deleteJobBookmark() : addJobBookmark();
-              }}
-              aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
+              css={bookmarkButton(jobDetailData.isBookmark)}
+              onClick={jobBookmarkToggleHandler}
+              aria-label={jobDetailData.isBookmark ? "북마크 해지" : "북마크 하기"}
             >
               <BsFillBookmarkFill />
-              공고 북마크 <span> {jdCountData?.bookmarkCount}</span>
+              공고 북마크 <span> {jobDetailData?.bookmark}</span>
             </button>
             <div css={applyBox}>
               <div css={dDayContainer}>

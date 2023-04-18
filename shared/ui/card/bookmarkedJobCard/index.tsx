@@ -2,12 +2,11 @@ import { FunctionComponent } from "react";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import Link from "next/link";
 import Image from "next/image";
-import { useQueryClient } from "@tanstack/react-query";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { JOBS_DETAIL_URL } from "shared-constant";
 
-import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
+import { useJdBookmarkToggle } from "shared-api/job";
 
 import { SkeletonBox } from "../../common/atom/skeletonBox";
 import { DdayBox } from "../../common/atom/dDayBox";
@@ -29,32 +28,9 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
   jobData,
   isMobile,
   isBookmarked,
-  userId,
   isSkeleton,
 }) => {
-  const queryClient = useQueryClient();
-
-  const { mutate: addMutate } = useAddJobBookmarkArr({
-    id: jobData?.id as number,
-    end_time: jobData?.endTime as number,
-    title: jobData?.title as string,
-    cut: jobData?.cut as boolean,
-    company: {
-      name: jobData?.companyName as string,
-      logo_url: jobData?.companyLogo as string,
-    },
-  });
-
-  const { mutate: deleteMutate } = useDeleteJobBookmarkArr({
-    id: jobData?.id as number,
-    end_time: jobData?.endTime as number,
-    title: jobData?.title as string,
-    cut: jobData?.cut as boolean,
-    company: {
-      name: jobData?.companyName as string,
-      logo_url: jobData?.companyLogo as string,
-    },
-  });
+  const { mutate: jobBookmarkToggle } = useJdBookmarkToggle();
 
   if (isSkeleton || jobData === undefined) {
     return (
@@ -64,28 +40,8 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
     );
   }
 
-  const addJobBookmark = () => {
-    if (userId)
-      addMutate(
-        { userId, id: jobData.id },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries([{ data: "jobArr" }]);
-          },
-        }
-      );
-  };
-
-  const deleteJobBookmark = () => {
-    if (userId)
-      deleteMutate(
-        { userId, id: jobData.id },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries([{ data: "jobArr" }]);
-          },
-        }
-      );
+  const jobBookmarkToggleHandler = () => {
+    jobBookmarkToggle({ jdId: jobData.id });
   };
 
   return (
@@ -93,7 +49,7 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
       <button
         type="button"
         css={bookmarkButton(isBookmarked)}
-        onClick={() => (isBookmarked ? deleteJobBookmark() : addJobBookmark())}
+        onClick={jobBookmarkToggleHandler}
         aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
       >
         <BsFillBookmarkFill />

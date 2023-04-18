@@ -44,12 +44,13 @@ export interface CompanyProps {
   youtubeUrl: string | null;
   logoUrl: string;
   employeeNumber: number;
-  foundDate: number;
+  foundDate: string;
   address: string;
   intro: string;
   payAvg: number | null;
   payStart: number | null;
   payDesc: string | null;
+  isBookmark: boolean;
   bookmark: number;
   view: number;
   welfare: WelfareProps;

@@ -2,16 +2,24 @@ export interface HeaderFixProps {
   isDdayEnd: boolean;
   jobDetailData: {
     id: number;
-    endTime: number;
-    applyUrl: string;
-    title: string;
-    cut: boolean;
-    bookmarkCount: number;
     company: {
-      companyId: number;
+      id: number;
       name: string;
       logoUrl: string;
+      youtubeUrl: string;
+      commentCount: number;
     };
+    title: string;
+    cut: boolean;
+    startTime: string;
+    endTime: string;
+    processArr: string[];
+    applyRouteArr: string[];
+    applyUrl: string;
+    etcArr: string[];
+    bookmark: number;
+    isBookmark: boolean;
+    view: number;
+    click: number;
   };
-  userId: number | undefined;
 }

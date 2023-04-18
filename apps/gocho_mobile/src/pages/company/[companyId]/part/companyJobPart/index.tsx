@@ -1,4 +1,4 @@
-import { FunctionComponent, useState, useEffect } from "react";
+import { FunctionComponent } from "react";
 import { useRouter } from "next/router";
 
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
@@ -15,35 +15,23 @@ import { listContainer, totalText } from "./style";
 
 export const CompanyJobPart: FunctionComponent = () => {
   const router = useRouter();
-  const { companyId } = router.query;
   const limit = 6;
-  const [total, setTotal] = useState<number>(0);
-  const [page, setPage] = useState<number>(Number(router.query.page));
+  const { companyId } = router.query;
 
   const { data: companyDetailData, isLoading: isCompanyDataLoading } = useCompanyDetail({
     companyId: Number(companyId),
   });
-  const { data: jobDataArr, isLoading } = useJobArr({
+  const { data: jobData, isLoading } = useJobArr({
     companyId: Number(companyId),
-    limit,
     order: "recent",
-    offset: (page - 1) * limit,
+    page: Number(router.query.page),
+    size: limit,
   });
-
-  useEffect(() => {
-    if (jobDataArr) {
-      setTotal(jobDataArr.count);
-    }
-  }, [jobDataArr]);
-
-  useEffect(() => {
-    setPage(Number(router.query.page));
-  }, [router.query.page]);
 
   const { data: userData } = useUserProfile();
   const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
-  if (!jobDataArr || isLoading) {
+  if (!jobData || isLoading) {
     return (
       <div css={listContainer}>
         {dummyArrCreator(10).map((dummy) => {
@@ -63,26 +51,22 @@ export const CompanyJobPart: FunctionComponent = () => {
     );
   }
 
-  const totalPage = Math.ceil(total / limit);
-
   return (
     <Layout>
       <InvisibleH2 title={`${companyDetailData.name} 채용공고 모음`} />
-      <strong css={totalText}>총 채용공고 {jobDataArr.count}개</strong>
+      <strong css={totalText}>총 채용공고 {jobData.pageResult.totalElements}개</strong>
       <section css={listContainer}>
-        {jobDataArr.jobDataArr.map((jobData) => {
+        {jobData.jobDataArr.map((data) => {
           const isBookmarked = Boolean(
             userJobBookmarkArr?.some((job) => {
-              return job.id === jobData.id;
+              return job.id === data.id;
             })
           );
-          return (
-            <JobCard jobData={jobData} isBookmarked={isBookmarked} userId={userData?.id} key={`JobCard${jobData.id}`} />
-          );
+          return <JobCard jobData={data} isBookmarked={isBookmarked} userId={userData?.id} key={`JobCard${data.id}`} />;
         })}
       </section>
       <BottomPagination
-        totalPage={totalPage}
+        totalPage={jobData.pageResult.totalPages}
         linkObj={{
           pathname: router.pathname,
         }}

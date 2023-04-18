@@ -36,10 +36,11 @@ import {
 } from "./style";
 
 export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton> = ({ companyData, isSkeleton }) => {
-  const { data: jobDataArr } = useJobArr({
+  const { data: jobData } = useJobArr({
     companyId: companyData?.id,
     filter: "expired",
     order: "recent",
+    size: 3,
   });
 
   if (isSkeleton || companyData === undefined) {
@@ -56,18 +57,13 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
     <article css={cardWrapper}>
       <div css={companyInfoContainer}>
         <div css={companyLogo}>
-          <Image
-            layout="fill"
-            objectFit="contain"
-            src={companyData.logoUrl || defaultCompanyLogo}
-            alt={companyData.name}
-          />
+          <Image fill src={companyData.logoUrl || defaultCompanyLogo} alt={companyData.name} sizes="1" />
         </div>
         <div>
           <div css={companyName}>{companyData.name}</div>
           <div css={buttonContainer}>
-            <Link href={`/company/${companyData.id}/detail`} passHref>
-              <a css={companyDetailButton}>기업상세</a>
+            <Link css={companyDetailButton} href={`/company/${companyData.id}/detail`} passHref>
+              기업상세
             </Link>
 
             <Link
@@ -77,64 +73,59 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
                   page: 1,
                 },
               }}
+              css={moreExpJobButton}
               passHref
             >
-              <a css={moreExpJobButton}>공고 더보기</a>
+              공고 더보기
             </Link>
           </div>
         </div>
       </div>
       <div css={expJobListContainer}>
-        {jobDataArr?.count === 0 && (
+        {jobData?.pageResult.totalElements === 0 && (
           <p css={noExplistArrText}>
             <AiOutlineInfoCircle /> 만료된 공고가 없습니다.
           </p>
         )}
-        {jobDataArr?.jobDataArr
-          .filter((data, index) => {
-            return index < 3;
-          })
-          .map((jobData) => {
-            const { year: startYear, month: startMonth, date: startDate } = dateConverter(jobData.startTime);
-            const { year: endYear, month: endMonth, date: endDate } = dateConverter(jobData.endTime);
+        {jobData?.jobDataArr.map((data) => {
+          const { year: startYear, month: startMonth, date: startDate } = dateConverter(data.startTime);
+          const { year: endYear, month: endMonth, date: endDate } = dateConverter(data.endTime);
 
-            return (
-              <div key={`ExpJob${jobData.id}`} css={expJobBox}>
-                <div css={jobTitleContainer}>
-                  <strong css={jobTitle}>{jobData.title}</strong>
-                  <p css={jobDate}>
-                    {`${startYear}.${startMonth}.${startDate}`} ~ {`${endYear}.${endMonth}.${endDate}`}
-                  </p>
-                </div>
-
-                <div css={taskContainer}>
-                  <div css={flexRow}>
-                    <p css={taskSummary}>
-                      모집한 직무
-                      <span css={taskNumber}>{jobData.taskArr.length}</span>
-                    </p>
-                    <ul css={flexBox}>
-                      {jobData.taskArr.map((task, index) => {
-                        return (
-                          index < 3 && (
-                            <li css={taskBox} key={`${jobData.id}${task}`}>
-                              {task}
-                            </li>
-                          )
-                        );
-                      })}
-                    </ul>
-                  </div>
-
-                  <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref>
-                    <a css={jobDetailButton}>
-                      상세보기 <BsChevronRight />
-                    </a>
-                  </Link>
-                </div>
+          return (
+            <div key={`ExpJob${data.id}`} css={expJobBox}>
+              <div css={jobTitleContainer}>
+                <strong css={jobTitle}>{data.title}</strong>
+                <p css={jobDate}>
+                  {`${startYear}.${startMonth}.${startDate}`} ~ {`${endYear}.${endMonth}.${endDate}`}
+                </p>
               </div>
-            );
-          })}
+
+              <div css={taskContainer}>
+                <div css={flexRow}>
+                  <p css={taskSummary}>
+                    모집한 직무
+                    <span css={taskNumber}>{data.taskArr.length}</span>
+                  </p>
+                  <ul css={flexBox}>
+                    {data.taskArr.map((task, index) => {
+                      return (
+                        index < 3 && (
+                          <li css={taskBox} key={`${data.id}${task}`}>
+                            {task}
+                          </li>
+                        )
+                      );
+                    })}
+                  </ul>
+                </div>
+
+                <Link href={`${JOBS_DETAIL_URL}/${data.id}`} passHref css={jobDetailButton}>
+                  상세보기 <BsChevronRight />
+                </Link>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </article>
   );

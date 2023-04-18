@@ -2,13 +2,11 @@ import { FunctionComponent } from "react";
 import { useRouter } from "next/router";
 import { BsChevronRight } from "react-icons/bs";
 
-import { useUserProfile } from "shared-api/auth";
-import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { dummyArrCreator } from "shared-util";
 import { CompanyCard } from "shared-ui/card/companyCard";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { COLORS } from "shared-style/color";
-import { useUnifiedCompanySearchArr } from "shared-api/company";
+import { useCompanyArr } from "shared-api/company";
 
 import { COMPANY_PREVIEW_RESULT_LIMIT } from "@pages/search/constant";
 
@@ -17,15 +15,13 @@ import { buttonBox, listContainer, noDataText } from "./style";
 export const CompanyPreviewPart: FunctionComponent = () => {
   const router = useRouter();
 
-  const { data: userData } = useUserProfile();
-  const { data: companyDataArr, isLoading: isCompanyDataArrLoading } = useUnifiedCompanySearchArr({
-    searchWord: router.query.q,
-    page: router.query.page,
-    limit: COMPANY_PREVIEW_RESULT_LIMIT,
+  const { data: companyDataObj, refetch } = useCompanyArr({
+    q: router.query.q as string,
+    order: "view",
+    size: COMPANY_PREVIEW_RESULT_LIMIT,
   });
-  const { data: userCompanyBookmarkArr, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
 
-  if (!companyDataArr || isCompanyDataArrLoading) {
+  if (!companyDataObj) {
     return (
       <div css={listContainer}>
         {dummyArrCreator(COMPANY_PREVIEW_RESULT_LIMIT).map((dummy) => {
@@ -35,7 +31,7 @@ export const CompanyPreviewPart: FunctionComponent = () => {
     );
   }
 
-  if (companyDataArr.count === 0) {
+  if (companyDataObj.pageResult.totalElements === 0) {
     return (
       <div css={listContainer}>
         <p css={noDataText}>검색 결과가 없습니다.</p>
@@ -45,23 +41,17 @@ export const CompanyPreviewPart: FunctionComponent = () => {
 
   return (
     <section css={listContainer}>
-      {companyDataArr.companyDataArr.map((companyData) => {
-        const isBookmarked = Boolean(
-          userCompanyBookmarkArr?.some((company) => {
-            return company.id === companyData.id;
-          })
-        );
+      {companyDataObj.companyDataArr.map((companyData) => {
         return (
           <CompanyCard
             companyData={companyData}
-            isBookmarked={isBookmarked}
-            userId={userData?.id}
             refetchUserBookmark={refetch}
             key={`UnifiedSearchCompanyCard${companyData.id}`}
           />
         );
       })}
-      {companyDataArr?.count !== 0 && (
+
+      {companyDataObj?.pageResult.totalElements !== 0 && (
         <div css={buttonBox}>
           <NormalButton
             text="기업정보 더보기"

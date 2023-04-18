@@ -22,20 +22,20 @@ const Template: ComponentStory<typeof DdayBox> = (args) => {
 
 // Dday일 경우 -> getTime ms의 오차 때문에 50000ms 추가
 export const Dday = Template.bind({});
-Dday.args = { endTime: new Date().getTime() + 5000000 };
+Dday.args = { endTime: (new Date().getTime() + 5000000).toString() };
 
 // 3.0012일 후
 export const D3 = Template.bind({});
 D3.args = {
-  endTime: new Date().getTime() + 259200000,
+  endTime: (new Date().getTime() + 259200000).toString(),
 };
 
 // 4.0012일 후
 export const D4 = Template.bind({});
 D4.args = {
-  endTime: new Date().getTime() + 345700000,
+  endTime: (new Date().getTime() + 345700000).toString(),
 };
 
 // 500초전
 export const 만료500초후 = Template.bind({});
-만료500초후.args = { endTime: new Date().getTime() - 500000 };
+만료500초후.args = { endTime: (new Date().getTime() - 500000).toString() };

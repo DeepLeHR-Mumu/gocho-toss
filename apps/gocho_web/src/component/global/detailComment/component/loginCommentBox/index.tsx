@@ -7,11 +7,8 @@ import { UserBadge } from "shared-ui/common/atom/userBadge";
 import { CommentLikeButton } from "shared-ui/common/atom/commentLikeButton";
 import { CommentDislikeButton } from "shared-ui/common/atom/commentDislikeButton";
 import { useWriteCompanyComment } from "shared-api/company/useWriteCompanyComment";
-import { useLikeComment } from "shared-api/company/useLikeComment";
-import { useDisLikeComment } from "shared-api/company/useDisLikeComment";
-import { useFakeComment } from "shared-api/company/useFakeComment";
-import { useDisFakeComment } from "shared-api/company/useDisFakeComment";
 import { companyCommentArrKeyObj } from "shared-constant/queryKeyFactory/company/commentArrKeyObj";
+import { useCompanyCommentToggle } from "shared-api/company";
 import { dateConverter } from "shared-util";
 
 import { LoginCommentBoxProps, CommentFormValues } from "./type";
@@ -22,7 +19,6 @@ import {
   commentContainer,
   commentDesc,
   commentHeader,
-  commentTypeCSS,
   dateCSS,
   evalButtonBox,
   formCSS,
@@ -34,7 +30,7 @@ import {
   firstCommentAlert,
 } from "./style";
 
-export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ jdId, userData, companyId, commentArr }) => {
+export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ userData, companyId, commentArr }) => {
   const [textValue, setTextValue] = useState("");
   const commentBoxRef = useRef<HTMLDivElement | null>(null);
   const queryClient = useQueryClient();
@@ -42,14 +38,10 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ jdId,
   const { register, handleSubmit } = useForm<CommentFormValues>({
     defaultValues: {
       companyId,
-      jdId,
     },
   });
 
-  const { mutate: postLikeComment } = useLikeComment();
-  const { mutate: postDisLikeComment } = useDisLikeComment();
-  const { mutate: postFakeComment } = useFakeComment();
-  const { mutate: postDisFakeComment } = useDisFakeComment();
+  const { mutate: companyCommentToggle } = useCompanyCommentToggle({ companyId });
   const { mutate: postWriteCompanyComment } = useWriteCompanyComment();
 
   const commentSubmit: SubmitHandler<CommentFormValues> = (commentObj) => {
@@ -59,50 +51,6 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ jdId,
         queryClient.invalidateQueries(companyCommentArrKeyObj.all);
       },
     });
-  };
-
-  const postLikeSubmit = (id: number, commentId: number) => {
-    postLikeComment(
-      { companyId: id, commentId },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries(companyCommentArrKeyObj.all);
-        },
-      }
-    );
-  };
-
-  const postFakeSubmit = (id: number, commentId: number) => {
-    postFakeComment(
-      { companyId: id, commentId },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries(companyCommentArrKeyObj.all);
-        },
-      }
-    );
-  };
-
-  const postDislikeSubmit = (id: number, commentId: number) => {
-    postDisLikeComment(
-      { companyId: id, commentId },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries(companyCommentArrKeyObj.all);
-        },
-      }
-    );
-  };
-
-  const postDisFakeSubmit = (id: number, commentId: number) => {
-    postDisFakeComment(
-      { companyId: id, commentId },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries(companyCommentArrKeyObj.all);
-        },
-      }
-    );
   };
 
   useEffect(() => {
@@ -123,43 +71,37 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ jdId,
           )}
 
           {commentArr.map((comment) => {
-            const { month, date } = dateConverter(comment.createdTime);
-            const isMyComment = Boolean(userData.nickname === comment.nickname);
+            const { date: createDate } = dateConverter(comment.createdTime);
+            const isMyComment = Boolean(userData.nickname === comment.uploader.nickname);
             return (
               <li key={comment.id}>
                 <div css={commentHeader}>
                   <div css={nicknameCSS}>
-                    {comment.nickname} <UserBadge badge={comment.badge} />
+                    {comment.uploader.nickname}
+                    {/* <UserBadge badge={comment.badge} /> */}
                   </div>
-                  <p css={dateCSS}>
-                    {month}.{date}
-                  </p>
+                  <p css={dateCSS}>{createDate}</p>
                 </div>
                 <div css={commentBody}>
                   <div css={commentBox(isMyComment)}>
-                    <p css={commentTypeCSS}>{comment.title || "기업 정보"}</p>
                     <p css={commentDesc}>{comment.description}</p>
                   </div>
                   <ul css={evalButtonBox}>
                     <li>
                       <CommentLikeButton
                         count={comment.likeCount}
-                        isLiked={comment.liked}
+                        isLiked={comment.isLiked}
                         setLikeSubmit={() => {
-                          return comment.liked
-                            ? postDislikeSubmit(comment.companyId, comment.id)
-                            : postLikeSubmit(comment.companyId, comment.id);
+                          companyCommentToggle({ companyId, commentId: comment.id, type: "like" });
                         }}
                       />
                     </li>
                     <li>
                       <CommentDislikeButton
-                        isDisLiked={comment.disLiked}
-                        count={comment.disLikeCount}
+                        isDisLiked={comment.isDisliked}
+                        count={comment.dislikeCount}
                         setDislikeSubmit={() => {
-                          return comment.disLiked
-                            ? postDisFakeSubmit(comment.companyId, comment.id)
-                            : postFakeSubmit(comment.companyId, comment.id);
+                          companyCommentToggle({ companyId, commentId: comment.id, type: "dislike" });
                         }}
                       />
                     </li>
@@ -191,7 +133,6 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ jdId,
                 onKeyDownEvent.preventDefault();
                 commentSubmit({
                   companyId,
-                  jdId,
                   description: textValue,
                 });
               }

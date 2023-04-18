@@ -16,13 +16,14 @@ export const JobCardList: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
 
   const {
-    data: jobDataArr,
+    data: jobData,
     isLoading,
     isError,
   } = useJobArr({
     order: "recent",
     filter: "valid",
-    limit: 9,
+    size: 9,
+    page: 1,
   });
 
   const { data: userData } = useUserProfile();
@@ -33,7 +34,7 @@ export const JobCardList: FunctionComponent = () => {
     setModal("loginModal", { button: "close" });
   };
 
-  if (!jobDataArr || isError || isLoading) {
+  if (!jobData || isError || isLoading) {
     return (
       <div css={listContainer}>
         <Slider {...setCarouselSetting()} ref={sliderRef}>
@@ -48,16 +49,16 @@ export const JobCardList: FunctionComponent = () => {
   return (
     <div css={listContainer}>
       <Slider {...setCarouselSetting()} ref={sliderRef}>
-        {jobDataArr.jobDataArr.map((jobData) => {
+        {jobData.jobDataArr.map((data) => {
           const isBookmarked = Boolean(
             userJobBookmarkArr?.some((job) => {
-              return job.id === jobData.id;
+              return job.id === data.id;
             })
           );
           return (
             <MainJobCard
-              key={`MainJobCard${jobData.id}`}
-              jobData={jobData}
+              key={`MainJobCard${data.id}`}
+              jobData={data}
               isMobile
               isBookmarked={isBookmarked}
               userId={userData?.id}

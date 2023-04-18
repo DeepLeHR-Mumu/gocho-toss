@@ -17,6 +17,7 @@ export const selector = (data: CompanyObjDef) => {
     payStart: data.pay_start,
     payDesc: data.pay_desc,
     bookmark: data.bookmark,
+    isBookmark: data.is_bookmark,
     view: data.view,
     welfare: {
       money: data.welfare.money,

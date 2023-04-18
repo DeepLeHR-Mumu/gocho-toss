@@ -1,18 +1,21 @@
 export interface CommentProps {
-  nickname: string;
   commentData: {
     id: number;
-    companyId: number;
-    jdId: number;
+    uploader: {
+      id: number;
+      nickname: string;
+      image: string;
+    };
     description: string;
-    userId: number | null;
-    createdTime: number;
-    liked: boolean;
-    disLiked: boolean;
-    nickname: string;
-    title: string | null;
-    badge: "default" | "admin" | "early_bird";
+    createdTime: string;
     likeCount: number;
-    disLikeCount: number;
+    isLiked: boolean;
+    dislikeCount: number;
+    isDisliked: boolean;
+  };
+  company: {
+    name: string;
+    id: number;
+    logoUrl: string;
   };
 }

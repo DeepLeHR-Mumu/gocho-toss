@@ -78,7 +78,7 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
     );
   }
 
-  const { year, month, date } = dateConverter(tipData.createdTime);
+  const { date: createDate } = dateConverter(tipData.createdTime);
   return (
     <div css={modalWrapper}>
       <div css={closeButtonWrapper}>
@@ -148,7 +148,7 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
 
         <p css={bodyCSS}>{tipData.description}</p>
         <div css={infoContainer}>
-          <p css={info}>{`${year}.${month}.${date}`}</p>
+          <p css={info}>{createDate}</p>
           <button type="button" onClick={likePosting} css={likeButtonCSS(isBookmarked)} aria-label="꿀팁 좋아요">
             <AiOutlineLike />
             {tipData.likeCount}

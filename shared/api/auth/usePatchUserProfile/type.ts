@@ -8,7 +8,7 @@ export interface RequestObjDef {
 }
 
 export interface UserProfileResponse {
-  data: { access_token: string; refresh_token: string };
+  data: { access_token: string; refresh_token: string; user_id: number };
 }
 
 export interface PatchUserProfileDef {

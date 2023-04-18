@@ -28,6 +28,8 @@ export const oldBookmarkKeyObj = {
 };
 
 export const userBookmarkKeyObj = {
+  jobAll: [{ data: "userJobBookmarkArr" }] as const,
+  companyAll: [{ data: "userCompanyBookmarkArr" }] as const,
   jobBookmarkArr: (requestObj: UserBookmarkArrRequestDef) => {
     return [{ data: "userJobBookmarkArr", requestObj }] as const;
   },

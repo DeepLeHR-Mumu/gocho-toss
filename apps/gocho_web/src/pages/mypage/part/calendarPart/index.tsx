@@ -10,11 +10,10 @@ import { container, title, desc } from "./style";
 import { twoWeekDef } from "./type";
 
 export const CalendarPart: FunctionComponent = () => {
-  const { data: userInfoData } = useUserProfile();
-  const now = new Date();
-
-  const [currentDate, setCurrentDate] = useState<Date>(now);
+  const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [twoWeek, setTwoWeek] = useState<twoWeekDef[]>([]);
+
+  const { data: userInfoData } = useUserProfile();
 
   return (
     <section css={container}>

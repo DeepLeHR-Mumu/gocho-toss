@@ -32,7 +32,6 @@ import {
 import { OrderDef, SearchQueryDef, SearchValues } from "./type";
 
 export const ListPart: FunctionComponent = () => {
-  const [total, setTotal] = useState<number>(0);
   const [searchQuery, setSearchQuery] = useState<SearchQueryDef>();
   const [showFilter, setShowFilter] = useState<boolean>(false);
 
@@ -52,12 +51,12 @@ export const ListPart: FunctionComponent = () => {
     },
   });
 
-  const { data: jobDataArr, isLoading } = useJobArr({
+  const { data: jobData, isLoading } = useJobArr({
     q: JSON.stringify(searchQuery),
     order: router.query.order as OrderDef,
     filter: "valid",
-    limit,
-    offset: (Number(router.query.page) - 1) * limit,
+    size: limit,
+    page: Number(router.query.page),
   });
 
   const jdSearch: SubmitHandler<SearchValues> = (searchVal) => {
@@ -98,16 +97,8 @@ export const ListPart: FunctionComponent = () => {
   };
 
   useEffect(() => {
-    if (jobDataArr) {
-      setTotal(jobDataArr.count);
-    }
-  }, [jobDataArr]);
-
-  useEffect(() => {
     jdListFunnelEvent();
   }, []);
-
-  const totalPage = Math.ceil(total / limit);
 
   return (
     <section css={partContainer}>
@@ -163,17 +154,19 @@ export const ListPart: FunctionComponent = () => {
               );
             })}
           </div>
-          {jobDataArr?.jobDataArr.length === 0 ? (
+          {jobData?.jobDataArr.length === 0 ? (
             <p css={noArrDesc}>검색된 공고가 존재하지 않습니다.</p>
           ) : (
             <>
-              <JobCardList jobDataArr={jobDataArr?.jobDataArr} isLoading={isLoading} />
-              <BottomPagination
-                totalPage={totalPage}
-                linkObj={{
-                  pathname: JOBS_LIST_URL,
-                }}
-              />
+              <JobCardList jobDataArr={jobData?.jobDataArr} isLoading={isLoading} />
+              {jobData && (
+                <BottomPagination
+                  totalPage={jobData.pageResult.totalPages}
+                  linkObj={{
+                    pathname: JOBS_LIST_URL,
+                  }}
+                />
+              )}
             </>
           )}
         </Layout>

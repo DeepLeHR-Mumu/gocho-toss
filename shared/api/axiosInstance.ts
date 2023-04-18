@@ -60,6 +60,13 @@ export const useAxiosInterceptor = () => {
   const requestConfigHandler = async (config: AxiosRequestConfig) => {
     const accessTokenData = localStorage.getItem("accessToken");
     const refreshTokenData = localStorage.getItem("refreshToken");
+    const matchingUrlReGex = /\bjds\b|\bcompanies\b/i;
+
+    // TODO : 비로그인시 comments api는 보내지않도록 변경
+    // 비로그인상황에서 공고와 컴퍼니 정보는 일단 request는 요청한다.
+    if (!accessTokenData && config.url && matchingUrlReGex.test(config.url)) {
+      return config;
+    }
 
     // 0. token 없는 경우
     if (!accessTokenData || !refreshTokenData) {

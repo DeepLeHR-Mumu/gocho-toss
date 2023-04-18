@@ -2,8 +2,8 @@ export interface ExpJobCardListProps {
   companyDataArr:
     | {
         id: number;
-        name: string;
         logoUrl: string | null;
+        name: string;
       }[]
     | undefined;
   isLoading: boolean;

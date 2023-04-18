@@ -42,7 +42,7 @@ export const FactoryModal: FunctionComponent = () => {
   const { contentObj, closeModal } = useModal();
   const { setToastMessage } = useToast();
 
-  const { address, maleNumber, femaleNumber, product, bus, dormitory, factoryName } = contentObj as factoryObjDef;
+  const { address, maleNumber, femaleNumber, product, bus, dormitory, name } = contentObj as factoryObjDef;
 
   const hireNumber = maleNumber + femaleNumber;
 
@@ -61,7 +61,7 @@ export const FactoryModal: FunctionComponent = () => {
       </header>
 
       <div css={body}>
-        <h4 css={factoryNameCSS}>{factoryName}</h4>
+        <h4 css={factoryNameCSS}>{name}</h4>
 
         <div css={flexBox("center")}>
           <div css={addressBox}>
@@ -139,8 +139,7 @@ export const FactoryModal: FunctionComponent = () => {
                 <Image
                   src={dormitory.exists ? OIcon : XIcon}
                   alt={dormitory.exists ? "기숙사 존재유" : "기숙사 존재무"}
-                  objectFit="contain"
-                  layout="fill"
+                  fill
                 />
               </div>
             </div>

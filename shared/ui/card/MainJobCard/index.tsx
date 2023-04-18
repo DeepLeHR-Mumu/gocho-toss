@@ -2,7 +2,6 @@ import { FunctionComponent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { BsFillBookmarkFill } from "react-icons/bs";
-import { useQueryClient } from "@tanstack/react-query";
 
 import highTrue from "shared-image/global/common/go_color.svg";
 import highFalse from "shared-image/global/common/go_mono.svg";
@@ -11,7 +10,7 @@ import collegeFalse from "shared-image/global/common/cho_mono.svg";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { JOBS_DETAIL_URL } from "shared-constant";
 import { useUserProfile } from "shared-api/auth";
-import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
+import { useJdBookmarkToggle } from "shared-api/job";
 import { jdBookmarkEvent } from "shared-ga/jd";
 
 import { SkeletonBox } from "../../common/atom/skeletonBox";
@@ -36,34 +35,10 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
   jobData,
   isSkeleton,
   isMobile,
-  isBookmarked,
-  userId,
   loginOpener,
 }) => {
-  const { error: useUserInfoError } = useUserProfile();
-  const queryClient = useQueryClient();
-
-  const { mutate: addMutate } = useAddJobBookmarkArr({
-    id: jobData?.id as number,
-    end_time: jobData?.endTime as number,
-    title: jobData?.title as string,
-    cut: jobData?.cut as boolean,
-    company: {
-      name: jobData?.companyName as string,
-      logo_url: jobData?.companyLogo as string,
-    },
-  });
-
-  const { mutate: deleteMutate } = useDeleteJobBookmarkArr({
-    id: jobData?.id as number,
-    end_time: jobData?.endTime as number,
-    title: jobData?.title as string,
-    cut: jobData?.cut as boolean,
-    company: {
-      name: jobData?.companyName as string,
-      logo_url: jobData?.companyLogo as string,
-    },
-  });
+  const { error: useUserInfoError, data: userInfoData } = useUserProfile();
+  const { mutate: jobBookmarkToggle } = useJdBookmarkToggle();
 
   if (isSkeleton || jobData === undefined) {
     return (
@@ -73,29 +48,11 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
     );
   }
 
-  const addJobBookmark = () => {
-    if (userId)
-      addMutate(
-        { userId, id: jobData.id },
-        {
-          onSuccess: () => {
-            jdBookmarkEvent(jobData.id);
-            queryClient.invalidateQueries([{ data: "jobArr" }]);
-          },
-        }
-      );
-  };
-
-  const deleteJobBookmark = () => {
-    if (userId)
-      deleteMutate(
-        { userId, id: jobData.id },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries([{ data: "jobArr" }]);
-          },
-        }
-      );
+  const jobBookmarkHandler = () => {
+    if (userInfoData) {
+      jdBookmarkEvent(jobData.id);
+      jobBookmarkToggle({ jdId: jobData.id });
+    }
   };
 
   return (
@@ -107,15 +64,15 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
     >
       <button
         type="button"
-        css={bookmarkButton(isBookmarked)}
+        css={bookmarkButton(jobData.isBookmark)}
         onClick={(event) => {
           event.preventDefault();
           if (useUserInfoError) {
             return loginOpener();
           }
-          return isBookmarked ? deleteJobBookmark() : addJobBookmark();
+          return jobBookmarkHandler();
         }}
-        aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
+        aria-label={jobData.isBookmark ? "북마크 해지" : "북마크 하기"}
       >
         <BsFillBookmarkFill />
       </button>
@@ -127,11 +84,11 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
 
       <div css={flexBox}>
         <div css={companyLogoBox}>
-          <Image fill src={jobData.companyLogo || defaultCompanyLogo} alt="" sizes="1" />
+          <Image fill src={jobData.company.logoUrl || defaultCompanyLogo} alt="" sizes="1" />
         </div>
 
         <div css={infoBox}>
-          <p css={companyNameCSS}>{jobData.companyName}</p>
+          <p css={companyNameCSS}>{jobData.company.name}</p>
           <p css={titleCSS}>{jobData.title}</p>
         </div>
       </div>
