@@ -16,11 +16,9 @@ export interface WelfareProps {
 }
 
 export interface FactoryProps {
-  factoryName: string;
+  name: string;
   id: number;
   companyId: number;
-  place1: string;
-  place2: string;
   address: string;
   maleNumber: number;
   femaleNumber: number;
@@ -38,21 +36,21 @@ export interface FactoryProps {
 export interface CompanyProps {
   id: number;
   name: string;
-  industry: string;
-  size: "대기업" | "중견기업" | "중소기업" | "외국계" | "공기업" | "공공기관" | "기타";
   catchUrl: string | null;
   youtubeUrl: string | null;
-  logoUrl: string;
+  industry: string;
+  size: "대기업" | "중소기업" | "중견기업" | "외국계" | "공기업" | "공공기관" | "기타";
   employeeNumber: number;
   foundDate: string;
   address: string;
   intro: string;
-  payAvg: number | null;
-  payStart: number | null;
+  payAvg: number;
+  payStart: number;
   payDesc: string | null;
-  isBookmark: boolean;
   bookmark: number;
+  isBookmark: boolean;
   view: number;
+  logoUrl: string | null;
   welfare: WelfareProps;
   nozo: {
     exists: boolean;

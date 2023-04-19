@@ -1,17 +1,12 @@
 import { FunctionComponent } from "react";
 
-import { useUserProfile } from "shared-api/auth";
-import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
 import { dummyArrCreator } from "shared-util";
 import { CompanyCard } from "shared-ui/card/companyCard";
 
 import { listContainer } from "./style";
 import { CompanyCardListProps } from "./type";
 
-export const CompanyCardList: FunctionComponent<CompanyCardListProps> = ({ companyDataArr }) => {
-  const { data: userData } = useUserProfile();
-  const { data: userCompanyBookmarkArr, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
-
+export const CompanyCardList: FunctionComponent<CompanyCardListProps> = ({ companyDataArr, refetch }) => {
   if (!companyDataArr) {
     return (
       <div css={listContainer}>
@@ -25,16 +20,9 @@ export const CompanyCardList: FunctionComponent<CompanyCardListProps> = ({ compa
   return (
     <section css={listContainer}>
       {companyDataArr.map((companyData) => {
-        const isBookmarked = Boolean(
-          userCompanyBookmarkArr?.some((company) => {
-            return company.id === companyData.id;
-          })
-        );
         return (
           <CompanyCard
             companyData={companyData}
-            isBookmarked={isBookmarked}
-            userId={userData?.id}
             refetchUserBookmark={refetch}
             key={`UnifiedSearchCompanyCard${companyData.id}`}
           />

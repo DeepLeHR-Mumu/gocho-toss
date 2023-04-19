@@ -59,8 +59,8 @@ const Instagram: NextPageWithLayout = () => {
 
   const copyKakaoDesc = async (job: JobDef) => {
     let text = "";
-    const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
-    const deadline = endYear === 9999 ? "상시" : `~ ${endYear}-${endMonth}-${endDate} 까지`;
+    const { year: endYear, date: endDate } = dateConverter(job.endTime);
+    const deadline = endYear === "9999" ? "상시" : `~ ${endDate} 까지`;
 
     text += `🚀 ${job.companyName}\n${job.title}\n- 접수기간 : ${deadline}\n`;
     let taskString = "";
@@ -116,8 +116,8 @@ const Instagram: NextPageWithLayout = () => {
 
         <ul>
           {jdDataArr.jdDataArr.map((job) => {
-            const { year: startYear, month: startMonth, date: startDate } = dateConverter(job.startTime);
-            const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
+            const { date: startDate } = dateConverter(job.startTime);
+            const { year: endYear, date: endDate } = dateConverter(job.endTime);
 
             return (
               <li key={job.id} css={jobContainer}>
@@ -174,8 +174,7 @@ const Instagram: NextPageWithLayout = () => {
                     </div>
                     <p css={infoName}>날짜</p>
                     <div css={info}>
-                      {startYear}-{startMonth}-{startDate}~
-                      {endYear === 9999 ? "상시공고" : `${endYear}-${endMonth}-${endDate}`}
+                      {startDate}~{endYear === "9999" ? "상시공고" : `${endDate}`}
                     </div>
                   </div>
                   <div css={infoBox}>

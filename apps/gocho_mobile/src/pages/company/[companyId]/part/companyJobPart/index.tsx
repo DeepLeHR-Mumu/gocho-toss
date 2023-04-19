@@ -4,8 +4,6 @@ import { useRouter } from "next/router";
 import { BottomPagination } from "@component/common/molecule/bottomPagination";
 import { JobCard } from "@component/common/molecule/jobCard";
 import { Layout } from "@component/layout";
-import { useUserProfile } from "shared-api/auth";
-import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useJobArr } from "shared-api/job";
 import { dummyArrCreator } from "shared-util";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
@@ -27,9 +25,6 @@ export const CompanyJobPart: FunctionComponent = () => {
     page: Number(router.query.page),
     size: limit,
   });
-
-  const { data: userData } = useUserProfile();
-  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
   if (!jobData || isLoading) {
     return (
@@ -57,12 +52,7 @@ export const CompanyJobPart: FunctionComponent = () => {
       <strong css={totalText}>총 채용공고 {jobData.pageResult.totalElements}개</strong>
       <section css={listContainer}>
         {jobData.jobDataArr.map((data) => {
-          const isBookmarked = Boolean(
-            userJobBookmarkArr?.some((job) => {
-              return job.id === data.id;
-            })
-          );
-          return <JobCard jobData={data} isBookmarked={isBookmarked} userId={userData?.id} key={`JobCard${data.id}`} />;
+          return <JobCard jobData={data} key={`JobCard${data.id}`} />;
         })}
       </section>
       <BottomPagination

@@ -22,7 +22,7 @@ export const MoveBannerPart: FunctionComponent = () => {
       { ...bannerMoveObj, type: "T" },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries(bannerArrKeyObj.bannerArr({ type: "T" }));
+          queryClient.invalidateQueries(bannerArrKeyObj.top);
         },
       }
     );

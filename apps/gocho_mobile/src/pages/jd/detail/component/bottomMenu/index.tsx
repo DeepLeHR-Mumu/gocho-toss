@@ -1,10 +1,8 @@
 import { FunctionComponent } from "react";
 import { BsFillBookmarkFill } from "react-icons/bs";
-import { useQueryClient } from "@tanstack/react-query";
 
-import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
-import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { useUserProfile } from "shared-api/auth";
+import { useJdBookmarkToggle } from "shared-api/job";
 import { dDayCalculator } from "shared-util";
 
 import { NormalButton } from "shared-ui/common/atom/button";
@@ -12,84 +10,33 @@ import { useModal } from "@/globalStates";
 import { BottomMenuProps } from "./type";
 import { wrapper, bookmarkButton, buttonBox } from "./style";
 
-export const BottomMenu: FunctionComponent<BottomMenuProps> = ({
-  jobDetailData,
-  isBookmarked,
-  userId,
-  setOpenComment,
-}) => {
-  const queryClient = useQueryClient();
+export const BottomMenu: FunctionComponent<BottomMenuProps> = ({ jobDetailData, setOpenComment }) => {
   const { setModal } = useModal();
-  const { isSuccess } = useUserProfile();
+  const { data: userInfoData } = useUserProfile();
 
   const openJobInNewTab = () => {
     window.open(jobDetailData.applyUrl, "_blank", "noopener, noreferrer");
   };
 
-  const { mutate: addMutate } = useAddJobBookmarkArr({
-    id: jobDetailData?.id as number,
-    end_time: jobDetailData?.endTime as number,
-    title: jobDetailData?.title as string,
-    cut: jobDetailData?.cut as boolean,
-    company: {
-      name: jobDetailData?.company.name as string,
-      logo_url: jobDetailData?.company.logoUrl as string,
-    },
-  });
+  const { mutate: jobBookmarkToggle } = useJdBookmarkToggle();
 
-  const { mutate: deleteMutate } = useDeleteJobBookmarkArr({
-    id: jobDetailData?.id as number,
-    end_time: jobDetailData?.endTime as number,
-    title: jobDetailData?.title as string,
-    cut: jobDetailData?.cut as boolean,
-    company: {
-      name: jobDetailData?.company.name as string,
-      logo_url: jobDetailData?.company.logoUrl as string,
-    },
-  });
-
-  const addJobBookmark = () => {
-    return (
-      userId &&
-      addMutate(
-        { userId, id: jobDetailData.id },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
-          },
-        }
-      )
-    );
+  const jobBookmarkToggleHandler = () => {
+    if (!userInfoData) {
+      setModal("loginModal", { button: "close" });
+      return;
+    }
+    jobBookmarkToggle({ jdId: jobDetailData.id });
   };
 
-  const deleteJobBookmark = () => {
-    return (
-      userId &&
-      deleteMutate(
-        { userId, id: jobDetailData.id },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries(jobDetailKeyObj.detail({ id: jobDetailData.id }));
-          },
-        }
-      )
-    );
-  };
-
-  const isJobEnd = dDayCalculator(jobDetailData.endTime) === "만료";
+  const isJobEnd = dDayCalculator(jobDetailData.endTime.toString()) === "만료";
 
   return (
     <div css={wrapper}>
       <button
         type="button"
-        css={bookmarkButton(isBookmarked)}
-        onClick={() => {
-          if (!isSuccess) {
-            setModal("loginModal", { button: "close" });
-          }
-          return isBookmarked ? deleteJobBookmark() : addJobBookmark();
-        }}
-        aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
+        css={bookmarkButton(jobDetailData.isBookmark)}
+        onClick={jobBookmarkToggleHandler}
+        aria-label={jobDetailData.isBookmark ? "북마크 해지" : "북마크 하기"}
       >
         <BsFillBookmarkFill />
       </button>

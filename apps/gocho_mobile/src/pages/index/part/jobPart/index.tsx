@@ -28,7 +28,9 @@ export const JobPart: FunctionComponent = () => {
           </Link>
         </div>
       </Layout>
-      <div css={cardContainer}><JobCardList /></div>
+      <div css={cardContainer}>
+        <JobCardList />
+      </div>
     </section>
   );
 };

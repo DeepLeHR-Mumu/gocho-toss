@@ -3,17 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { FiYoutube } from "react-icons/fi";
 import { BsFillBookmarkFill } from "react-icons/bs";
-import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { useUserProfile } from "shared-api/auth";
-import { useJdApplyClick, useJdCountInfo } from "shared-api/job";
+import { useJdApplyClick, useJdBookmarkToggle } from "shared-api/job";
 import { dateConverter, dDayCalculator } from "shared-util";
 import { DdayBox } from "shared-ui/common/atom/dDayBox";
 import { jdBookmarkEvent } from "shared-ga/jd";
-import { jdCountInfoKeyObj } from "shared-constant/queryKeyFactory/job/jdCountInfoKeyObj";
-import { useAddJobBookmarkArr, useDeleteJobBookmarkArr } from "shared-api/bookmark";
 
 import { useModal } from "@/globalStates";
 import { HeaderProps } from "./type";
@@ -34,72 +31,25 @@ import {
   applyEndButton,
 } from "./style";
 
-export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookmarked, userId }) => {
-  const queryClient = useQueryClient();
-  const { setModal } = useModal();
-  const { isSuccess } = useUserProfile();
+export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData }) => {
   const router = useRouter();
+  const { setModal } = useModal();
+  const { data: userInfoData } = useUserProfile();
 
   const { mutate: mutateJdApplyClick } = useJdApplyClick();
-  const { data: jdCountData } = useJdCountInfo({ id: Number(router.query.jobId) });
+  const { mutate: jobBookmarkToggle } = useJdBookmarkToggle();
 
-  const { mutate: addMutate } = useAddJobBookmarkArr({
-    id: jobDetailData?.id as number,
-    end_time: jobDetailData?.endTime as number,
-    title: jobDetailData?.title as string,
-    cut: jobDetailData?.cut as boolean,
-    company: {
-      name: jobDetailData?.company.name as string,
-      logo_url: jobDetailData?.company.logoUrl as string,
-    },
-  });
+  const { date: jobStartDate } = dateConverter(jobDetailData.startTime);
+  const { date: jobEndDate, year: jobEndYear } = dateConverter(jobDetailData.endTime);
 
-  const { mutate: deleteMutate } = useDeleteJobBookmarkArr({
-    id: jobDetailData?.id as number,
-    end_time: jobDetailData?.endTime as number,
-    title: jobDetailData?.title as string,
-    cut: jobDetailData?.cut as boolean,
-    company: {
-      name: jobDetailData?.company.name as string,
-      logo_url: jobDetailData?.company.logoUrl as string,
-    },
-  });
-
-  const addJobBookmark = () => {
-    if (!isSuccess) {
+  const jobBookmarkToggleHandler = () => {
+    if (!userInfoData) {
       setModal("loginModal", { button: "close" });
-      return undefined;
+      return;
     }
-    return (
-      userId &&
-      addMutate(
-        { userId, id: jobDetailData.id },
-        {
-          onSuccess: () => {
-            jdBookmarkEvent(jobDetailData.id);
-            queryClient.invalidateQueries(jdCountInfoKeyObj.countInfo({ id: jobDetailData.id }));
-          },
-        }
-      )
-    );
+    jdBookmarkEvent(jobDetailData.id);
+    jobBookmarkToggle({ jdId: jobDetailData.id });
   };
-
-  const deleteJobBookmark = () => {
-    return (
-      userId &&
-      deleteMutate(
-        { userId, id: jobDetailData.id },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries(jdCountInfoKeyObj.countInfo({ id: jobDetailData.id }));
-          },
-        }
-      )
-    );
-  };
-
-  const { year: startYear, month: startMonth, date: startDate } = dateConverter(jobDetailData.startTime);
-  const { year: endYear, month: endMonth, date: endDate } = dateConverter(jobDetailData.endTime);
 
   const isDdayEnd = dDayCalculator(jobDetailData.endTime) === "만료";
 
@@ -137,18 +87,16 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
           <li>
             <button
               type="button"
-              css={buttonCSS(isBookmarked)}
-              onClick={() => {
-                return isBookmarked ? deleteJobBookmark() : addJobBookmark();
-              }}
-              aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
+              css={buttonCSS(jobDetailData.isBookmark)}
+              onClick={jobBookmarkToggleHandler}
+              aria-label={jobDetailData.isBookmark ? "북마크 해지" : "북마크 하기"}
             >
               <BsFillBookmarkFill />
-              공고 북마크 {jdCountData?.bookmarkCount}
+              공고 북마크 {jobDetailData.bookmark}
             </button>
           </li>
           <li>
-            <Link href={`/company/${jobDetailData.company.companyId}/detail`} passHref css={buttonCSS(false)}>
+            <Link href={`/company/${jobDetailData.company.id}/detail`} passHref css={buttonCSS(false)}>
               기업정보
             </Link>
           </li>
@@ -169,13 +117,10 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isBookma
           </li>
           <li>{jobDetailData.cut && <p css={cutBox}>채용시마감</p>}</li>
           <li>
-            <p css={date}>
-              {`${startYear}. ${startMonth}. ${startDate}`} ~{" "}
-              {endYear !== 9999 && `${endYear}. ${endMonth}. ${endDate}`}
-            </p>
+            <p css={date}>{jobEndYear === "9999" ? jobStartDate : `${jobStartDate} ~ ${jobEndDate}`}</p>
           </li>
         </ul>
-        <Link href={`/company/${jobDetailData.company.companyId}/detail`} css={companyName}>
+        <Link href={`/company/${jobDetailData.company.id}/detail`} css={companyName}>
           {jobDetailData.company.name}
         </Link>
         <p css={title}>{jobDetailData.title}</p>

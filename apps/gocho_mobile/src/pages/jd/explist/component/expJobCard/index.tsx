@@ -88,16 +88,14 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
           </p>
         )}
         {jobData?.jobDataArr.map((data) => {
-          const { year: startYear, month: startMonth, date: startDate } = dateConverter(data.startTime);
-          const { year: endYear, month: endMonth, date: endDate } = dateConverter(data.endTime);
+          const { date: jobStartDate } = dateConverter(data.startTime);
+          const { date: jobEndDate, year: jobEndYear } = dateConverter(data.endTime);
 
           return (
             <div key={`ExpJob${data.id}`} css={expJobBox}>
               <div css={jobTitleContainer}>
                 <strong css={jobTitle}>{data.title}</strong>
-                <p css={jobDate}>
-                  {`${startYear}.${startMonth}.${startDate}`} ~ {`${endYear}.${endMonth}.${endDate}`}
-                </p>
+                <p css={jobDate}>{jobEndYear === "9999" ? jobStartDate : `${jobStartDate} ~ ${jobEndDate}`}</p>
               </div>
 
               <div css={taskContainer}>

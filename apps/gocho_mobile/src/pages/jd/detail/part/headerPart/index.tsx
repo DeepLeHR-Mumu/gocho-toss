@@ -3,8 +3,6 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useRouter } from "next/router";
 
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
-import { useUserProfile } from "shared-api/auth";
-import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useJobDetail } from "shared-api/job";
 import { dDayCalculator } from "shared-util";
 import { PositionCard } from "./component/positionCard";
@@ -28,9 +26,8 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
   const router = useRouter();
   const { jobId } = router.query;
   const [defaultCardCount, setDefaultCardCount] = useState(5);
+
   const { data: jobDetailData } = useJobDetail({ id: Number(jobId) });
-  const { data: userData } = useUserProfile();
-  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
   const handleMoreCardCount = () => {
     if (jobDetailData) {
@@ -57,17 +54,11 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
     );
   }
 
-  const isBookmarked = Boolean(
-    userJobBookmarkArr?.some((job) => {
-      return job.id === jobDetailData.id;
-    })
-  );
-
   const isDdayEnd = dDayCalculator(jobDetailData.endTime) === "만료";
 
   return (
     <div>
-      <Header jobDetailData={jobDetailData} isBookmarked={isBookmarked} userId={userData?.id} />
+      <Header jobDetailData={jobDetailData} />
 
       <section css={positionContainer}>
         <p css={positionTitle}>

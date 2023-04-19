@@ -1,5 +1,3 @@
-import { QueryObserverResult } from "@tanstack/react-query";
-
 export interface CompanyCardProps {
   companyData: {
     id: number;
@@ -7,13 +5,11 @@ export interface CompanyCardProps {
     logoUrl: string | null;
   };
   isBookmarked: boolean;
-  refetchUserBookmark: () => Promise<QueryObserverResult>;
   isSkeleton?: never;
 }
 
 export interface CompanyCardSkeleton {
   companyData?: never;
   isBookmarked?: never;
-  refetchUserBookmark?: never;
   isSkeleton: boolean;
 }

@@ -7,8 +7,7 @@ import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { getJobDetail, useJobDetail } from "shared-api/job";
-import { useUserJobBookmarkArr } from "shared-api/bookmark";
-import { useUserProfile } from "shared-api/auth";
+import { useCompanyCommentArr } from "shared-api/company";
 import { useAddJobViewCount } from "shared-api/viewCount";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { jdDetailFunnelEvent } from "shared-ga/jd";
@@ -25,16 +24,17 @@ import { wrapper, flexBox, container, containerSkeleton } from "./style";
 const JobsDetail: NextPage = () => {
   const [currentPositionId, setCurrentPositionId] = useState<number>(0);
   const [openComment, setOpenComment] = useState<boolean>(false);
-
-  const { data: userData } = useUserProfile();
-  const { data: userJobBookmarkArr, refetch } = useUserJobBookmarkArr({ userId: userData?.id });
-  const { mutate: addViewCount } = useAddJobViewCount();
-
   const router = useRouter();
   const { jobId } = router.query;
 
+  const { mutate: addViewCount } = useAddJobViewCount();
+
   const { data: jobDetailData, isLoading } = useJobDetail({
     id: Number(jobId),
+  });
+
+  const { data: companyCommentData } = useCompanyCommentArr({
+    companyId: Number(jobDetailData?.company.id),
   });
 
   useViewCount({
@@ -62,14 +62,8 @@ const JobsDetail: NextPage = () => {
     );
   }
 
-  const isBookmarked = Boolean(
-    userJobBookmarkArr?.some((job) => {
-      return job.id === jobDetailData.id;
-    })
-  );
-
   const commentData = {
-    companyId: jobDetailData.company.companyId,
+    companyId: jobDetailData.company.id,
     name: jobDetailData.company.name,
     title: jobDetailData.title,
     logoUrl: jobDetailData.company.logoUrl,
@@ -93,13 +87,8 @@ const JobsDetail: NextPage = () => {
 
       <InvisibleH2 title={jobDetailData.title} />
       <TopMenu title={jobDetailData.title} id={jobDetailData.id} />
-      <HeaderPart
-        setCurrentPositionId={setCurrentPositionId}
-        currentPositionId={currentPositionId}
-        isBookmarked={isBookmarked}
-        userId={userData?.id}
-        refetchUserBookmark={refetch}
-      />
+      <HeaderPart setCurrentPositionId={setCurrentPositionId} currentPositionId={currentPositionId} />
+
       <div css={flexBox}>
         <section css={container}>
           <DetailSupportPart freshPosition={jobDetailData.positionArr[currentPositionId]} />
@@ -108,15 +97,8 @@ const JobsDetail: NextPage = () => {
         </section>
       </div>
       <ReceptInfoPart jobDetailData={jobDetailData} />
-      {openComment && (
-        <DetailComment jdId={jobDetailData.id} detailData={commentData} setOpenComment={setOpenComment} />
-      )}
-      <BottomMenu
-        jobDetailData={jobDetailData}
-        isBookmarked={isBookmarked}
-        userId={userData?.id}
-        setOpenComment={setOpenComment}
-      />
+      {openComment && companyCommentData && <DetailComment detailData={commentData} setOpenComment={setOpenComment} />}
+      <BottomMenu jobDetailData={jobDetailData} setOpenComment={setOpenComment} />
     </main>
   );
 };

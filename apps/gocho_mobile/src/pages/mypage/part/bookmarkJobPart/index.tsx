@@ -1,8 +1,9 @@
 import { FunctionComponent, useState, useEffect } from "react";
 
+import { useUserJobBookmarkArr } from "shared-api/job";
+
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { Pagination } from "@pages/mypage/component/pagination";
-import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { useUserProfile } from "shared-api/auth";
 import { JobCardList } from "../../component/jobCardList";
 import { emptyBox, warningCSS } from "./style";

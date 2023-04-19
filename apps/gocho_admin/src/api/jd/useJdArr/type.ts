@@ -23,8 +23,8 @@ export interface ResponseObjDef {
     title: string;
     cut: boolean;
     view: number;
-    start_time: number;
-    end_time: number;
+    start_time: string;
+    end_time: string;
     apply_url: string;
     task_arr: string[];
     edu_summary: string[];

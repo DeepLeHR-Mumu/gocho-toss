@@ -4,14 +4,14 @@ import { dummyArrCreator } from "shared-util";
 import { JobAdCard } from "shared-ui/card/jobAdCard";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
-import { useBannerArr } from "shared-api/banner/useBannerArr";
+import { useTopArr } from "shared-api/banner/useTopArr";
 import { setCarouselSetting } from "./util";
 import { listContainer, controlWrapper, buttonCSS } from "./style";
 
 export const SuggestedJobCardList: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
 
-  const { data: bannerDataArr, isLoading, isError } = useBannerArr({ type: "T" });
+  const { data: bannerDataArr, isLoading, isError } = useTopArr();
 
   if (!bannerDataArr || isError || isLoading) {
     return (

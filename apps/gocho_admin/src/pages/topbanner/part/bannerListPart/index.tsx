@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { useBannerArr } from "shared-api/banner/useBannerArr";
+import { useTopArr } from "shared-api/banner";
 
 import { pageTitle } from "@/style/commonStyles";
 
@@ -8,7 +8,7 @@ import { bannerIdBox, companyNameBox, expireDateBox, sectionContainer, tableTitl
 import { BannerBox } from "../../component/bannerBox";
 
 export const BannerListPart: FunctionComponent = () => {
-  const { data: bannerDataArr } = useBannerArr({ type: "T" });
+  const { data: bannerDataArr } = useTopArr();
 
   return (
     <>

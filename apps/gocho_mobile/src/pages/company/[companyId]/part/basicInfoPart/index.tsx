@@ -39,7 +39,7 @@ export const BasicInfoPart: FunctionComponent = () => {
     return <>Loading</>;
   }
 
-  const { year: foundYear, month: foundMonth, date: foundDate } = dateConverter(companyDetailData.foundDate);
+  const { date: foundDate } = dateConverter(companyDetailData.foundDate);
   return (
     <div css={wrapper}>
       <StrongTitle title="일반 정보" />
@@ -56,9 +56,7 @@ export const BasicInfoPart: FunctionComponent = () => {
             </div>
             <div css={infoContainer}>
               <p>설립연도</p>
-              <p>
-                {foundYear}년 {foundMonth}월 {foundDate}일
-              </p>
+              <p>{foundDate}</p>
             </div>
             <div css={infoContainer}>
               <p>사원수</p>
@@ -93,7 +91,7 @@ export const BasicInfoPart: FunctionComponent = () => {
                   {companyDetailData.factoryArr.map((factory) => {
                     return (
                       <li css={factoryText} key={factory.id}>
-                        {factory.factoryName}
+                        {factory.name}
                       </li>
                     );
                   })}

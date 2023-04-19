@@ -12,11 +12,7 @@ import { JobCardArrProps } from "./type";
 export const JobCardList: FunctionComponent<JobCardArrProps> = ({ listOrder }) => {
   const { setModal } = useModal();
 
-  const {
-    data: jobDataArr,
-    isLoading,
-    isError,
-  } = useJobArr({
+  const { data: jobDataArr } = useJobArr({
     order: listOrder,
     filter: "valid",
     page: 1,
@@ -27,7 +23,7 @@ export const JobCardList: FunctionComponent<JobCardArrProps> = ({ listOrder }) =
     setModal("loginModal", { button: "close" });
   };
 
-  if (!jobDataArr || isError || isLoading) {
+  if (!jobDataArr) {
     return (
       <div css={cardListContainer}>
         {dummyArrCreator(9).map((value) => {

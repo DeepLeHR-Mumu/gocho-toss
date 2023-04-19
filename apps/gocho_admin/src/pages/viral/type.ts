@@ -4,8 +4,8 @@ export type JobDef = {
   companyId: number;
   title: string;
   cut: boolean;
-  startTime: number;
-  endTime: number;
+  startTime: string;
+  endTime: string;
   taskArr: string[];
   eduArr: string[];
   placeArr: string[];

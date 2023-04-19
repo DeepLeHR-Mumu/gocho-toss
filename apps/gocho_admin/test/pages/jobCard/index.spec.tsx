@@ -16,8 +16,8 @@ describe("공고 리스트 jobCard 컴포넌트 테스트", () => {
             applyUrl: "https://naver.com",
             companyName: "고초대졸닷컴",
             title: "테스트용 공고 제목입니다",
-            startTime: 1679710980000,
-            endTime: 253402268340000,
+            startTime: "1679710980000",
+            endTime: "253402268340000",
             taskArr: ["공무"],
           }}
         />

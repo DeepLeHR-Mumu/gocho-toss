@@ -1,4 +1,4 @@
-import { FunctionComponent, useState, useEffect } from "react";
+import { FunctionComponent, useEffect } from "react";
 import Image from "next/image";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
@@ -16,21 +16,17 @@ import {
   headerWrapper,
   flexBox,
   closeCommentButton,
-  commentButton,
-  commentButtonContainer,
   wrapperSkeleton,
   companyName,
   imageBox,
   dimmed,
 } from "./style";
 
-export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, detailData, setOpenComment }) => {
+export const DetailComment: FunctionComponent<DetailCommentProps> = ({ detailData, setOpenComment }) => {
   const { data: userData, isSuccess } = useUserProfile();
   const { data: companyCommentArrData } = useCompanyCommentArr({
     companyId: Number(detailData?.companyId),
   });
-
-  const [isTotalComment, setIsTotalComment] = useState<boolean>(true);
 
   useEffect(() => {
     // TODO: body css로 옮기기
@@ -74,35 +70,6 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
               </div>
               <p css={companyName}>{detailData?.name}</p>
             </div>
-            <nav css={commentButtonContainer}>
-              <ul>
-                <li>
-                  <button
-                    css={commentButton(isTotalComment)}
-                    type="button"
-                    onClick={() => {
-                      setIsTotalComment(true);
-                    }}
-                  >
-                    전체 댓글
-                    {companyCommentArrData && <span>{companyCommentArrData.commentArr?.length}</span>}
-                  </button>
-                </li>
-                {jdId !== null && (
-                  <li>
-                    <button
-                      css={commentButton(!isTotalComment)}
-                      type="button"
-                      onClick={() => {
-                        setIsTotalComment(false);
-                      }}
-                    >
-                      현재 공고 댓글
-                    </button>
-                  </li>
-                )}
-              </ul>
-            </nav>
           </header>
           <UnLoginCommentBox setOpenComment={setOpenComment} />
         </section>
@@ -110,11 +77,6 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
       </>
     );
   }
-
-  const filterComment = companyCommentArrData.commentArr.filter((comment) => {
-    if (jdId === null) return comment.title === null;
-    return comment.jdId === jdId;
-  });
 
   return (
     <>
@@ -140,41 +102,11 @@ export const DetailComment: FunctionComponent<DetailCommentProps> = ({ jdId, det
             </div>
             <p css={companyName}>{companyCommentArrData.company.name}</p>
           </div>
-          <nav css={commentButtonContainer}>
-            <ul>
-              <li>
-                <button
-                  css={commentButton(isTotalComment)}
-                  type="button"
-                  onClick={() => {
-                    setIsTotalComment(true);
-                  }}
-                >
-                  전체 댓글 <span>{companyCommentArrData.commentArr.length}</span>
-                </button>
-              </li>
-              {jdId !== null && (
-                <li>
-                  <button
-                    css={commentButton(!isTotalComment)}
-                    type="button"
-                    onClick={() => {
-                      setIsTotalComment(false);
-                    }}
-                  >
-                    {jdId === null ? "기업 정보" : "현재 공고"} 댓글
-                    <span>{filterComment.length}</span>
-                  </button>
-                </li>
-              )}
-            </ul>
-          </nav>
         </header>
         <LoginCommentBox
-          jdId={jdId}
           userData={userData}
           companyId={companyCommentArrData.company.id}
-          commentArr={isTotalComment ? companyCommentArrData.commentArr : filterComment}
+          commentArr={companyCommentArrData.commentArr}
         />
       </section>
       <div css={dimmed} />

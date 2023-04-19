@@ -47,7 +47,7 @@ export const UploadBannerPart: FunctionComponent = () => {
       { dto: bannerSubmitObj },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries(bannerArrKeyObj.bannerArr({ type: "T" }));
+          queryClient.invalidateQueries(bannerArrKeyObj.top);
         },
       }
     );
@@ -58,8 +58,8 @@ export const UploadBannerPart: FunctionComponent = () => {
     setValue("color", changeEvent.target.value);
   };
 
-  const { month: jobStartMonth, date: jobStartDate } = dateConverter(jobData?.startTime || 0);
-  const { month: jobEndMonth, date: jobEndDate } = dateConverter(jobData?.endTime || 0);
+  const { date: jobStartDate } = dateConverter(jobData?.startTime || "0");
+  const { date: jobEndDate } = dateConverter(jobData?.endTime || "0");
 
   return (
     <>
@@ -125,7 +125,7 @@ export const UploadBannerPart: FunctionComponent = () => {
                   <div css={infoContainer}>
                     <p css={companyName}>{jobData?.company.name}</p>
                     <p css={date}>
-                      {`${jobStartMonth}/${jobStartDate}`}~{`${jobEndMonth}/${jobEndDate}`}
+                      {`${jobStartDate}`}~{`${jobEndDate}`}
                     </p>
                   </div>
                 </div>

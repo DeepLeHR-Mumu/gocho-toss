@@ -12,8 +12,8 @@ import { useAddTipViewCount } from "shared-api/viewCount";
 import { useViewCount } from "shared-user";
 
 import { ModalComponent } from "@component/modal/modalBackground";
-import { CloseButton } from "@component/common/atom/closeButton";
-import { useToast, useModal, tipObjDef } from "@/globalStates";
+// import { CloseButton } from "@component/common/atom/closeButton";
+// import { useToast, useModal, tipObjDef } from "@/globalStates";
 import {
   modalWrapper,
   contentContainer,
@@ -39,8 +39,8 @@ import { setCarouselSetting } from "./util";
 export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
   const [activeIndex, setActiveIndex] = useState<number>(1);
   const sliderRef = useRef<Slider>(null);
-  const { closeModal, contentObj } = useModal();
-  const { setToastMessage } = useToast();
+  // const { closeModal, contentObj } = useModal();
+  // const { setToastMessage } = useToast();
   const { data: userInfoData } = useUserProfile();
 
   const { mutate: addViewCount } = useAddTipViewCount();
@@ -56,7 +56,7 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
 
   const likePosting = () => {
     if (!userInfoData) {
-      return setToastMessage("로그인이 필요한 서비스입니다.");
+      // return setToastMessage("로그인이 필요한 서비스입니다.");
     }
     if (isBookmarked) return deleteBookmarkMutate({ userId: userInfoData?.id as number, id: tipData.id });
     return addBookmarkMutate({ userId: userInfoData?.id as number, id: tipData.id });
@@ -70,20 +70,18 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
     },
   });
 
-  if (contentObj === undefined) {
-    return (
-      <div>
-        <p>의도치 않은 에러가 발생했습니다.</p>
-      </div>
-    );
-  }
+  // if (contentObj === undefined) {
+  //   return (
+  //     <div>
+  //       <p>의도치 않은 에러가 발생했습니다.</p>
+  //     </div>
+  //   );
+  // }
 
   const { date: createDate } = dateConverter(tipData.createdTime);
   return (
     <div css={modalWrapper}>
-      <div css={closeButtonWrapper}>
-        <CloseButton size="L" buttonClick={closeModal} />
-      </div>
+      <div css={closeButtonWrapper}>{/* <CloseButton size="L" buttonClick={closeModal} /> */}</div>
 
       <article css={contentContainer}>
         <div css={logoBox}>
@@ -163,11 +161,7 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
 };
 
 export const TipModal: FunctionComponent = () => {
-  const { contentObj } = useModal();
+  // const { contentObj } = useModal();
 
-  return (
-    <ModalComponent>
-      <TipBox tipData={contentObj as tipObjDef} />
-    </ModalComponent>
-  );
+  return <ModalComponent>{/* <TipBox tipData={contentObj as tipObjDef} /> */}</ModalComponent>;
 };

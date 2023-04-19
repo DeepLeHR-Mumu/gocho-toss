@@ -4,7 +4,5 @@ export interface BannerBoxProps {
     imageUrl?: string;
     startTime: number;
     endTime: number;
-    jdStartTime: number;
-    jdEndTime: number;
   };
 }

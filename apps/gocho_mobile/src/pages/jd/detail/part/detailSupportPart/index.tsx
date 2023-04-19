@@ -73,15 +73,23 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
 
             {freshPosition.requiredExp.type === "경력" && (
               <span css={subDesc}>
-                {freshPosition.requiredExp.minYear >= 1 && ` ${freshPosition.requiredExp.minYear}년 이상`}
-                {freshPosition.requiredExp.maxYear >= 1 && ` ${freshPosition.requiredExp.maxYear}년 이하`}
+                {freshPosition.requiredExp.minYear &&
+                  freshPosition.requiredExp.minYear >= 1 &&
+                  ` ${freshPosition.requiredExp.minYear}년 이상`}
+                {freshPosition.requiredExp.maxYear &&
+                  freshPosition.requiredExp.maxYear >= 1 &&
+                  ` ${freshPosition.requiredExp.maxYear}년 이하`}
               </span>
             )}
             {freshPosition.requiredExp.type === "신입/경력" && (
               <span css={subDesc}>
                 경력인 경우
-                {freshPosition.requiredExp.minYear >= 1 && ` ${freshPosition.requiredExp.minYear}년 이상`}
-                {freshPosition.requiredExp.maxYear >= 1 && ` ${freshPosition.requiredExp.maxYear}년 이하`}
+                {freshPosition.requiredExp.minYear &&
+                  freshPosition.requiredExp.minYear >= 1 &&
+                  ` ${freshPosition.requiredExp.minYear}년 이상`}
+                {freshPosition.requiredExp.maxYear &&
+                  freshPosition.requiredExp.maxYear >= 1 &&
+                  ` ${freshPosition.requiredExp.maxYear}년 이하`}
               </span>
             )}
           </p>

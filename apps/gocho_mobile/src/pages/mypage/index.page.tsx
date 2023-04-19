@@ -67,7 +67,6 @@ const MyPage: NextPage = () => {
             })}
           </div>
         </div>
-
         {activeButton === "채용공고" ? <BookmarkJobPart /> : <BookmarkCompanyPart />}
       </Layout>
     </main>

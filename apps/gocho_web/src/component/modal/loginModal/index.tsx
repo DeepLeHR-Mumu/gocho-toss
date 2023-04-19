@@ -7,14 +7,13 @@ import { useRouter } from "next/router";
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import kakaoMono from "shared-image/global/sns/kakaoLogo.svg";
 import { loginModalCloseEvent, loginModalOpenEvent, loginSuccessEvent } from "shared-ga/auth";
-import { useDoLogin } from "shared-api/auth";
+import { useDoLogin, useUserProfile } from "shared-api/auth";
 import { EMAIL_REGEXP, PWD_REGEXP, EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { ModalComponent } from "@component/modal/modalBackground";
 import { CloseButton } from "@component/common/atom/closeButton";
 
-import { tokenDecryptor } from "shared-util";
 import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
 import { useModal, loginObjDef, useToast } from "@/globalStates";
 import {
@@ -45,6 +44,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   const { setToastMessage } = useToast();
   const { mutate } = useDoLogin();
   const { closeModal, setModal } = useModal();
+  const { data: userInfoData } = useUserProfile();
   const [errorMsg, setErrorMsg] = useState<null | string>(null);
   const ref = useRef(0);
   const router = useRouter();
@@ -60,10 +60,11 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
         localStorage.setItem("accessToken", `${response.data.access_token}`);
         localStorage.setItem("refreshToken", `${response.data.refresh_token}`);
         queryClient.invalidateQueries();
-        const { id, nickname } = tokenDecryptor(response.data.access_token);
-        loginSuccessEvent(id, "gocho");
-        closeModal();
-        setToastMessage("님 반갑습니다.", nickname);
+        if (userInfoData) {
+          loginSuccessEvent(userInfoData.id, "gocho");
+          closeModal();
+          setToastMessage("님 반갑습니다.", userInfoData.nickname);
+        }
       },
     });
   };

@@ -1,14 +1,19 @@
 export interface BannerBoxProps {
   banner: {
     id: number;
-    color?: string;
-    startTime: number;
-    endTime: number;
-    jdStartTime: number;
-    jdEndTime: number;
-    jdId?: number;
-    imageUrl?: string;
-    companyName?: string;
-    title?: string;
+    color: string;
+    startTime: string;
+    endTime: string;
+    company: {
+      id: number;
+      logoUrl: string;
+      name: string;
+    };
+    jd: {
+      id: number;
+      title: string;
+      startTime: string;
+      endTime: string;
+    };
   };
 }
