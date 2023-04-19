@@ -32,7 +32,7 @@ export const Comment: FunctionComponent<CommentProps> = ({ commentData, company 
   return (
     <div css={container}>
       <div css={writerContainer}>
-        <p css={usernameCSS}>{userInfoData?.nickname}</p>
+        <p css={usernameCSS}>{commentData.uploader.nickname}</p>
         <p css={dateCSS}>{createDate}</p>
       </div>
 

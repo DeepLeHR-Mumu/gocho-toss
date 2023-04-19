@@ -17,7 +17,7 @@ import { setCarouselSetting } from "./util";
 export const CompanyCommentPart: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
   const { setModal } = useModal();
-  const { data: companyDataObj, isLoading } = useCompanyArr({ order: "view", size: 10 });
+  const { data: companyDataObj, isLoading } = useCompanyArr({ order: "view" });
 
   if (!companyDataObj || isLoading) {
     return (

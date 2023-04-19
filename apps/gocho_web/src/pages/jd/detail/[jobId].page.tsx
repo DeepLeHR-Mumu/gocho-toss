@@ -105,15 +105,7 @@ const JobsDetail: NextPage = () => {
             <DetailWorkPart freshPosition={jobDetailData.positionArr[currentPositionId]} />
             <DetailPreferencePart freshPosition={jobDetailData.positionArr[currentPositionId]} />
           </section>
-          {!userData && !companyCommentData && (
-            <DetailComment
-              company={{
-                name: jobDetailData.company.name,
-                logoUrl: jobDetailData.company.logoUrl,
-                id: jobDetailData.company.id,
-              }}
-            />
-          )}
+          {!userData && !companyCommentData && <DetailComment company={jobDetailData.company} />}
           {companyCommentData && (
             <DetailComment
               company={companyCommentData.company}
