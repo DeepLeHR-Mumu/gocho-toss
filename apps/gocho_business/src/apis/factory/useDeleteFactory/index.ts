@@ -21,9 +21,9 @@ export const useDeleteFactory = () => {
       const previousData = queryClient.getQueryData(factoryArrKeyObj.all);
 
       queryClient.setQueryData<ResponseObjDef>(factoryArrKeyObj.all, (oldObj) => {
-        if (!oldObj?.data) return { data: [] };
+        if (!oldObj?.data) return { data: [], page_result: null };
         const data = oldObj?.data.filter((old) => old.id !== requestObj.factoryId);
-        return { data };
+        return { data, page_result: oldObj.page_result };
       });
 
       return { previousData };

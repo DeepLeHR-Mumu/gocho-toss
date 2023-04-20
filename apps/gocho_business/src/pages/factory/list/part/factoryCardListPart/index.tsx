@@ -21,17 +21,17 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
   editingIndex,
   setRejectedMessage,
 }) => {
-  const { data: factoryDataArr } = useFactoryArr();
+  const { data: factoryDataObj } = useFactoryArr();
   const { mutate: deleteFactoryMutation } = useDeleteFactory();
 
-  if (!factoryDataArr)
+  if (!factoryDataObj)
     return (
       <div css={cssObj.spinner}>
         <Spinner />
       </div>
     );
 
-  if (factoryDataArr.length === 0)
+  if (factoryDataObj.pageResult.totalElements === 0)
     return (
       <div css={cssObj.noDataWrapper}>
         <p css={cssObj.noDataMessage}>등록된 공장이 없습니다</p>
@@ -39,7 +39,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
     );
   return (
     <>
-      {factoryDataArr.map((factoryData, index) => {
+      {factoryDataObj.factoryDataArr.map((factoryData, index) => {
         const totalEmployeeCount = factoryData.maleNumber + factoryData.femaleNumber;
         const malePercentage =
           factoryData.maleNumber === 0 ? 0 : Math.round((100 * factoryData.maleNumber) / totalEmployeeCount);

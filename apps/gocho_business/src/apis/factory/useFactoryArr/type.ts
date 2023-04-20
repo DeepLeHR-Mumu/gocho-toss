@@ -1,5 +1,7 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
+import { PageResultDef } from "shared-type/api/paginationType";
+
 export interface ResponseObjDef {
   data:
     | {
@@ -23,6 +25,7 @@ export interface ResponseObjDef {
         updated_time: number | null;
       }[]
     | [];
+  page_result: PageResultDef | null;
 }
 
 export const factoryArrKeyObj = {

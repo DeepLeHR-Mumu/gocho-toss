@@ -20,12 +20,12 @@ export const HeaderPart: FunctionComponent = () => {
 
   return (
     <section css={cssObj.wrapper} data-testid="company/edit/headerPart">
-      <p css={cssObj.name}>
+      <div css={cssObj.name}>
         <div css={cssObj.companyLogo}>
           <Image fill src={managerProfile.company.logoUrl} alt={managerProfile.company.name} />
         </div>
         {`${managerProfile.name}(${managerProfile.department})`}
-      </p>
+      </div>
       <button
         css={cssObj.deleteUserButton}
         type="button"

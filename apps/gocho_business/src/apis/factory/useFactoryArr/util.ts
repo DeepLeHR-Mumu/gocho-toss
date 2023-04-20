@@ -1,7 +1,16 @@
 import { ResponseObjDef } from "./type";
 
-export const factoryArrSelector = ({ data }: ResponseObjDef) =>
-  data.map((factory) => ({
+export const factoryArrSelector = ({ data, page_result }: ResponseObjDef) => {
+  const pageResult = {
+    totalElements: page_result?.total_elements,
+    totalPages: page_result?.total_pages,
+    page: page_result?.page,
+    size: page_result?.size,
+    isFirst: page_result?.is_first,
+    isLast: page_result?.is_last,
+  };
+
+  const factoryDataArr = data.map((factory) => ({
     id: factory.id,
     status: factory.status,
     uploader: {
@@ -25,3 +34,6 @@ export const factoryArrSelector = ({ data }: ResponseObjDef) =>
     createdTime: factory.created_time,
     updatedTime: factory.updated_time,
   }));
+
+  return { factoryDataArr, pageResult };
+};
