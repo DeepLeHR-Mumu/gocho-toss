@@ -76,10 +76,7 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ userD
             return (
               <li key={comment.id}>
                 <div css={commentHeader}>
-                  <div css={nicknameCSS}>
-                    {comment.uploader.nickname}
-                    {/* <UserBadge badge={comment.badge} /> */}
-                  </div>
+                  <div css={nicknameCSS}>{comment.uploader.nickname}</div>
                   <p css={dateCSS}>{createDate}</p>
                 </div>
                 <div css={commentBody}>
