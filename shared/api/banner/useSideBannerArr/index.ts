@@ -5,15 +5,15 @@ import { axiosManagerInstance } from "../../axiosInstance";
 import { GetBannerArrDef } from "./type";
 import { selector } from "./util";
 
-export const getTopArr: GetBannerArrDef = async () => {
-  const { data } = await axiosManagerInstance.get("/banners?type=T");
+export const getSideBannerArr: GetBannerArrDef = async () => {
+  const { data } = await axiosManagerInstance.get("/banners?type=S");
   return data;
 };
 
-export const useTopArr = () => {
+export const useSideBannerArr = () => {
   return useQuery({
-    queryKey: bannerArrKeyObj.top,
-    queryFn: getTopArr,
+    queryKey: bannerArrKeyObj.side,
+    queryFn: getSideBannerArr,
     select: ({ data, count }) => {
       return selector(data, count);
     },

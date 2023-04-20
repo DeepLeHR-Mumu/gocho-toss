@@ -1,3 +1,3 @@
-export { useBannerArr } from "./useMainArr";
-export { useSideArr } from "./useSideArr";
-export { useTopArr } from "./useTopArr";
+export { useMainBannerArr } from "./useMainBannerArr";
+export { useSideBannerArr } from "./useSideBannerArr";
+export { useTopBannerArr } from "./useTopBannerArr";

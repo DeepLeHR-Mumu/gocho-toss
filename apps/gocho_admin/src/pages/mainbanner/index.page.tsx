@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-import { useBannerArr } from "shared-api/banner";
+import { useMainBannerArr } from "shared-api/banner";
 
 import { mainContainer } from "@/style/commonStyles";
 import { ErrorScreen, LoadingScreen, GlobalLayout } from "@/component";
@@ -10,7 +10,7 @@ import { UploadBannerPart } from "./part/uploadBannerPart";
 import { BannerListPart } from "./part/bannerListPart";
 
 const MainBanner: NextPageWithLayout = () => {
-  const { data: bannerDataArr, isLoading, isError } = useBannerArr();
+  const { data: bannerDataArr, isLoading, isError } = useMainBannerArr();
 
   if (!bannerDataArr || isLoading) {
     return <LoadingScreen />;

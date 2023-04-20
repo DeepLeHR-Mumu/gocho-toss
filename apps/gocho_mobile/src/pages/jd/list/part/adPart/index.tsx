@@ -1,7 +1,7 @@
 import { FunctionComponent, useRef } from "react";
 import Slider from "react-slick";
 
-import { useTopArr } from "shared-api/banner";
+import { useTopBannerArr } from "shared-api/banner";
 import { dummyArrCreator } from "shared-util";
 
 import { setCarouselSetting } from "./util";
@@ -11,7 +11,7 @@ import { JobAdCard } from "../../component/jobAdCard";
 export const AdPart: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
 
-  const { data: bannerDataArr } = useTopArr();
+  const { data: bannerDataArr } = useTopBannerArr();
 
   if (!bannerDataArr) {
     return (
