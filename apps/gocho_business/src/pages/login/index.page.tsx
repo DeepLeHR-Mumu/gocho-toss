@@ -6,16 +6,15 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { managerTokenDecryptor } from "shared-util";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
 import gochoColorSrc from "shared-image/global/deepLeLogo/logoIconColor.svg";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 
-import { useModal, useUserState } from "@/globalStates";
+import { useModal } from "@/globalStates";
 import { INTERNAL_URL } from "@/constants";
 import { TopBar } from "@/components";
-import { useDoLogin } from "@/apis";
+import { useDoLogin, useManagerProfile } from "@/apis";
 import { loginPageFunnelEvent, loginSuccessEvent, signupButtonClickEvent } from "@/ga";
 
 import { LOGIN_ERROR_MESSAGES } from "./constant";
@@ -28,7 +27,7 @@ const LoginPage: NextPage = () => {
   const router = useRouter();
 
   const queryClient = useQueryClient();
-  const { setUserInfoData, userInfoData } = useUserState();
+  const { isSuccess: isManagerLogin } = useManagerProfile();
   const { mutate: postLogin } = useDoLogin();
   const { setCurrentModal } = useModal();
   const {
@@ -53,19 +52,6 @@ const LoginPage: NextPage = () => {
         loginSuccessEvent(watch("auto_login"));
         localStorage.setItem("accessToken", response.data.access_token);
         localStorage.setItem("refreshToken", response.data.refresh_token);
-        const { id, company_id, company_name, company_logo, company_industry, exp, email, name, department } =
-          managerTokenDecryptor(response.data.access_token);
-        setUserInfoData({
-          id,
-          companyId: company_id,
-          companyName: company_name,
-          companyLogo: company_logo,
-          email,
-          name,
-          department,
-          companyIndustry: company_industry,
-          exp,
-        });
         queryClient.invalidateQueries();
 
         if (!response.data.is_changed) {
@@ -79,9 +65,8 @@ const LoginPage: NextPage = () => {
   };
 
   useEffect(() => {
-    const isLogin = Boolean(userInfoData);
-    if (isLogin) router.replace(INTERNAL_URL.JD_LIST);
-  }, [router, userInfoData]);
+    if (isManagerLogin) router.replace(INTERNAL_URL.JD_LIST);
+  }, [isManagerLogin, router]);
 
   useEffect(() => {
     loginPageFunnelEvent();

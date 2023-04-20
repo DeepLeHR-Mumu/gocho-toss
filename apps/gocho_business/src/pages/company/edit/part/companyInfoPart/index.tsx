@@ -5,15 +5,14 @@ import { FiEye } from "react-icons/fi";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
-import { useCompanyDetail, useCountInfo } from "@/apis";
-import { useUserState } from "@/globalStates";
+import { useCompanyDetail, useCountInfo, useManagerProfile } from "@/apis";
 
 import { cssObj } from "./style";
 
 export const CompanyInfoPart: FunctionComponent = () => {
-  const { userInfoData } = useUserState();
-  const { data: companyData } = useCompanyDetail({ companyId: userInfoData?.companyId });
-  const { data: countInfoData } = useCountInfo({ companyId: userInfoData?.companyId });
+  const { data: userInfoData } = useManagerProfile();
+  const { data: companyData } = useCompanyDetail({ companyId: userInfoData?.company.id });
+  const { data: countInfoData } = useCountInfo({ companyId: userInfoData?.company.id });
 
   if (!userInfoData || !companyData || !countInfoData) {
     return (

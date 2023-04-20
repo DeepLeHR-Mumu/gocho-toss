@@ -23,17 +23,18 @@ export const cssObj = {
     font-size: 1.25rem;
     font-weight: 700;
   `,
-  profile: css`
+  companyLogo: css`
+    position: relative;
     width: 3rem;
     height: 3rem;
-    background-color: ${COLORS.GRAY70};
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 0.75rem;
     border-radius: 50%;
-    font-weight: 400;
-    font-size: 1rem;
+    > img {
+      object-fit: contain;
+    }
   `,
   deleteUserButton: css`
     font-size: 1rem;

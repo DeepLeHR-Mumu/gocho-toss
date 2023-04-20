@@ -1,46 +1,39 @@
-import { create } from "zustand";
-import { useEffect } from "react";
+// import { create } from "zustand";
+// import { useEffect } from "react";
 
-import { managerTokenDecryptor } from "shared-util";
+// import { managerTokenDecryptor } from "shared-util";
 
-import { UserStateInfoProps, UseUserStateDef } from "./type";
+// import { UserStateInfoProps, UseUserStateDef } from "./type";
 
-const userStateInfo = create<UserStateInfoProps>((set) => ({
-  userState: null,
-  setUserState: (status) => set(() => ({ userState: status })),
-}));
+// const userStateInfo = create<UserStateInfoProps>((set) => ({
+//   userState: null,
+//   setUserState: (status) => set(() => ({ userState: status })),
+// }));
 
-export const useUserState: UseUserStateDef = () => {
-  const { userState: userInfoData, setUserState: setUserInfoData } = userStateInfo();
+// export const useUserState: UseUserStateDef = () => {
+//   const { userState: userInfoData, setUserState: setUserInfoData } = userStateInfo();
 
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
+//   useEffect(() => {
+//     const token = localStorage.getItem("accessToken");
 
-    if (userInfoData === null && token) {
-      const { id, company_id, company_name, company_logo, company_industry, exp, email, name, department } =
-        managerTokenDecryptor(token);
+//     if (userInfoData === null && token) {
+//       const { exp } = managerTokenDecryptor(token);
 
-      setUserInfoData({
-        id,
-        companyId: company_id,
-        companyName: company_name,
-        companyLogo: company_logo,
-        email,
-        name,
-        department,
-        exp,
-        companyIndustry: company_industry,
-      });
-    }
+//       setUserInfoData({
+//         id,
+//         companyId: company_id,
+//         exp,
+//       });
+//     }
 
-    if (userInfoData === null && !token) {
-      setUserInfoData(false);
-    }
-  }, [userInfoData, setUserInfoData]);
+//     if (userInfoData === null && !token) {
+//       setUserInfoData(false);
+//     }
+//   }, [userInfoData, setUserInfoData]);
 
-  if (userInfoData) {
-    return { userInfoData, setUserInfoData };
-  }
+//   if (userInfoData) {
+//     return { userInfoData, setUserInfoData };
+//   }
 
-  return { setUserInfoData };
-};
+//   return { setUserInfoData };
+// };

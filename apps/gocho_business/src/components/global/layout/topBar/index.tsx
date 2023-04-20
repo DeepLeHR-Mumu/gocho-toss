@@ -8,8 +8,7 @@ import { COLORS } from "shared-style/color";
 
 import bizTextMono from "@/public/image/deepleLogo/bizTextMono.svg";
 import bizTextColor from "@/public/image/deepleLogo/bizTextColor.svg";
-import { useUserState } from "@/globalStates";
-import { useDoLogout } from "@/apis";
+import { useDoLogout, useManagerProfile } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 import { signupButtonClickEvent } from "@/ga";
 
@@ -17,7 +16,7 @@ import { cssObj } from "./style";
 
 export const TopBar: FunctionComponent = () => {
   const router = useRouter();
-  const { userInfoData, setUserInfoData } = useUserState();
+  const { data: userInfoData, isSuccess: isManagerLogin } = useManagerProfile();
   const { mutate: postLogout } = useDoLogout();
   const queryClient = useQueryClient();
 
@@ -25,7 +24,6 @@ export const TopBar: FunctionComponent = () => {
     const afterLogoutActiveFunction = () => {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      setUserInfoData(null);
       queryClient.invalidateQueries();
       router.push(INTERNAL_URL.LOGIN);
     };
@@ -42,13 +40,11 @@ export const TopBar: FunctionComponent = () => {
     });
   };
 
-  const isLogin = Boolean(userInfoData);
-
   return (
-    <header css={cssObj.wrapper(isLogin)}>
+    <header css={cssObj.wrapper(isManagerLogin)}>
       <div css={cssObj.container}>
         <h1 css={cssObj.title}>
-          <Image src={isLogin ? bizTextColor : bizTextMono} alt="고초대졸닷컴 비즈니스" fill />
+          <Image src={isManagerLogin ? bizTextColor : bizTextMono} alt="고초대졸닷컴 비즈니스" fill />
         </h1>
       </div>
       {userInfoData ? (

@@ -8,8 +8,7 @@ import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { COLORS } from "shared-style/color";
 import { NUMBER_REGEXP } from "shared-constant";
 
-import { useCompanyDetail } from "@/apis";
-import { useUserState } from "@/globalStates";
+import { useCompanyDetail, useManagerProfile } from "@/apis";
 
 import { FindAddressButton, KakaoMap } from "../../component";
 
@@ -24,10 +23,10 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
     watch,
     formState: { errors },
   } = companyForm;
-  const { userInfoData } = useUserState();
+  const { data: userInfoData } = useManagerProfile();
 
   const { data: companyDetailData } = useCompanyDetail({
-    companyId: userInfoData?.companyId,
+    companyId: userInfoData?.company.id,
   });
 
   const openPostCodePopup = useDaumPostcodePopup();

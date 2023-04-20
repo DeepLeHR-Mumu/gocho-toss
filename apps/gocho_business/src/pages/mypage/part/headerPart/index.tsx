@@ -1,15 +1,16 @@
 import { FunctionComponent } from "react";
+import Image from "next/image";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
-import { useUserState } from "@/globalStates";
+import { useManagerProfile } from "@/apis";
 
 import { cssObj } from "./style";
 
 export const HeaderPart: FunctionComponent = () => {
-  const { userInfoData } = useUserState();
+  const { data: managerProfile } = useManagerProfile();
 
-  if (!userInfoData) {
+  if (!managerProfile) {
     return (
       <div css={cssObj.spinner}>
         <Spinner />
@@ -20,8 +21,10 @@ export const HeaderPart: FunctionComponent = () => {
   return (
     <section css={cssObj.wrapper} data-testid="company/edit/headerPart">
       <p css={cssObj.name}>
-        <span css={cssObj.profile}>{userInfoData.name[0]}</span>
-        {`${userInfoData.name}(${userInfoData.department})`}
+        <div css={cssObj.companyLogo}>
+          <Image fill src={managerProfile.company.logoUrl} alt={managerProfile.company.name} />
+        </div>
+        {`${managerProfile.name}(${managerProfile.department})`}
       </p>
       <button
         css={cssObj.deleteUserButton}

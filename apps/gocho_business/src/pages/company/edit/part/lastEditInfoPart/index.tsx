@@ -5,15 +5,14 @@ import dayjs from "dayjs";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
-import { useCompanyDetail } from "@/apis";
-import { useUserState } from "@/globalStates";
+import { useCompanyDetail, useManagerProfile } from "@/apis";
 
 import { cssObj } from "./style";
 
 export const LastEditInfoPart: FunctionComponent = () => {
-  const { userInfoData } = useUserState();
+  const { data: userInfoData } = useManagerProfile();
   const { data: companyDetailData } = useCompanyDetail({
-    companyId: userInfoData?.companyId,
+    companyId: userInfoData?.company.id,
   });
 
   if (!companyDetailData) {

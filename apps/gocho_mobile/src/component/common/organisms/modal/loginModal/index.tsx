@@ -7,14 +7,13 @@ import { useRouter } from "next/router";
 
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import kakaoMono from "shared-image/global/sns/kakaoLogo.svg";
-import { useDoLogin } from "shared-api/auth";
+import { useDoLogin, useUserProfile } from "shared-api/auth";
 import { loginModalCloseEvent, loginModalOpenEvent, loginSuccessEvent } from "shared-ga/auth";
 import { EMAIL_REGEXP, PWD_REGEXP, MAIN_URL, EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 import { BottomPopup } from "@component/bottomPopup";
 import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
-import { tokenDecryptor } from "shared-util";
 
 import { useToast, useModal } from "@/globalStates";
 
@@ -45,6 +44,7 @@ export const LoginModal: FunctionComponent = () => {
   const router = useRouter();
   const { setToastMessage } = useToast();
   const { mutate } = useDoLogin();
+  const { data: userInfoData } = useUserProfile();
   const { closeModal, setModal, contentObj } = useModal();
   const ref = useRef(0);
 
@@ -62,9 +62,10 @@ export const LoginModal: FunctionComponent = () => {
         localStorage.setItem("refreshToken", `${response.data.refresh_token}`);
         queryClient.invalidateQueries();
         closeModal();
-        const { id, nickname } = tokenDecryptor(response.data.access_token);
-        loginSuccessEvent(id, "gocho");
-        setToastMessage("님 반갑습니다.", nickname);
+        if (userInfoData) {
+          loginSuccessEvent(userInfoData.id, "gocho");
+          setToastMessage("님 반갑습니다.", userInfoData.nickname);
+        }
       },
     });
   };
