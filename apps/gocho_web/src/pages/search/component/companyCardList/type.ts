@@ -6,5 +6,5 @@ export type CompanyCardListProps = {
     name: string;
     logoUrl: string;
   }[];
-  refetchUserBookmark: () => Promise<QueryObserverResult>;
+  refetchUserCompanyBookmark: () => Promise<QueryObserverResult>;
 };

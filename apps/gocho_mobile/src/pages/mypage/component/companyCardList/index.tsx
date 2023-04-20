@@ -23,7 +23,7 @@ export const CompanyCardList: FunctionComponent<CompanyCardListProps> = ({ compa
         return (
           <CompanyCard
             companyData={companyData}
-            refetchUserBookmark={refetch}
+            refetchUserCompanyBookmark={refetch}
             key={`UnifiedSearchCompanyCard${companyData.id}`}
           />
         );

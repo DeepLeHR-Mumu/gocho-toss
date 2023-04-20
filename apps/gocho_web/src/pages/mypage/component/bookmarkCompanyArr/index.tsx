@@ -24,7 +24,7 @@ export const BookmarkCompanyArr: FunctionComponent = () => {
         <p css={descCSS}>{userData?.nickname} 님! 북마크를 이용하시면 추천기업이 더 정교해져요 😳</p>
       )}
       {userCompanyBookmarkObj.companyBookmarkDataArr.map((companyData) => {
-        return <CompanyCard key={companyData.id} refetchUserBookmark={refetch} companyData={companyData} />;
+        return <CompanyCard key={companyData.id} refetchUserCompanyBookmark={refetch} companyData={companyData} />;
       })}
     </div>
   );

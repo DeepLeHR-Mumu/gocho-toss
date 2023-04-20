@@ -7,12 +7,12 @@ export interface CompanyCardProps {
     logoUrl: string;
     isBookmark?: boolean;
   };
-  refetchUserBookmark: () => Promise<QueryObserverResult>;
+  refetchUserCompanyBookmark: () => Promise<QueryObserverResult>;
   isSkeleton?: never;
 }
 
 export interface CompanyCardSkeleton {
   companyData?: never;
-  refetchUserBookmark?: never;
+  refetchUserCompanyBookmark?: never;
   isSkeleton: boolean;
 }
