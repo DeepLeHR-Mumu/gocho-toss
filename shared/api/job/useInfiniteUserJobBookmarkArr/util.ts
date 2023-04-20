@@ -22,6 +22,5 @@ export const selector = (data: JobBookmarkArrDef[], page_result: PageResultDef) 
       endTime: job.end_time,
     };
   });
-
   return { userJobBookmarkArr, pageResult };
 };

@@ -61,7 +61,7 @@ export const Body: FunctionComponent<BodyProps> = ({ twoWeek }) => {
     );
   }
 
-  const bookmarkData = userJobBookmarkArrData.filter((jobBookmarkData) => {
+  const bookmarkData = userJobBookmarkArrData.userJobBookmarkArr.filter((jobBookmarkData) => {
     return twoWeek.some((day) => {
       return getDateHours(day.date) === getDateHours(new Date(jobBookmarkData.endTime));
     });

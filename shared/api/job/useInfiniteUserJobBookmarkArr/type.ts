@@ -28,6 +28,6 @@ export interface ResponseObjDef {
   page_result: PageResultDef;
 }
 
-export interface GetUserJobBookmarkArrDef {
-  ({ queryKey }: QueryFunctionContext<ReturnType<typeof userBookmarkKeyObj.jobBookmarkArr>>): Promise<ResponseObjDef>;
+export interface GetInfiniteJobArrDef {
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof userBookmarkKeyObj.infinite>>): Promise<ResponseObjDef>;
 }

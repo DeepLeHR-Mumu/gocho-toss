@@ -1,5 +1,9 @@
 export interface UserBookmarkArrRequestDef {
   userId: number | undefined;
+  order?: "recent" | "popular" | "rand" | "view" | "end" | "com";
+  filter?: "valid" | "expired" | "todayUpload" | "almostDeadline" | "deadline";
+  page?: number;
+  size?: number;
 }
 
 export interface OldUserBookmarkRequestDef {

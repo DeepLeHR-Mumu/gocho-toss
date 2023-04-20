@@ -3,9 +3,7 @@ export interface JobArrRequestObjDef {
   page?: number;
   size?: number;
   q?: string;
-  userId?: string;
   filter?: "todayUpload" | "almostDeadline" | "deadline" | "expired" | "valid";
-  parsing?: "full" | "raw";
   companyId?: number;
 }
 

@@ -15,6 +15,7 @@ export const CompanyListPart: FunctionComponent = () => {
   const { data: companyDataObj, refetch } = useCompanyArr({
     q: router.query.q as string,
     order: "view",
+    page: Number(router.query.page),
     size: COMPANY_RESULT_LIMIT,
   });
 

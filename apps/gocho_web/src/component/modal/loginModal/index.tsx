@@ -60,9 +60,9 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
         localStorage.setItem("accessToken", `${response.data.access_token}`);
         localStorage.setItem("refreshToken", `${response.data.refresh_token}`);
         queryClient.invalidateQueries();
+        closeModal();
         if (userInfoData) {
           loginSuccessEvent(userInfoData.id, "gocho");
-          closeModal();
           setToastMessage("님 반갑습니다.", userInfoData.nickname);
         }
       },

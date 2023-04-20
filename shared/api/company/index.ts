@@ -5,3 +5,4 @@ export { useCompanyCountInfo } from "./useCompanyCountInfo";
 export { useCompanyCommentToggle } from "./useCompanyCommentToggle";
 export { useCompanyBookmarkToggle } from "./useCompanyBookmarkToggle";
 export { useUserCompanyBookmarkArr } from "./useUserCompanyBookmarkArr";
+export { useInfiniteUserCompanyBookmarkArr } from "./useInfiniteUserCompanyBookmarkArr";

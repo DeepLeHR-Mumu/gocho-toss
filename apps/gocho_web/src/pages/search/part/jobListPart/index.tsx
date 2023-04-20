@@ -16,6 +16,7 @@ export const JobListPart: FunctionComponent = () => {
     order: "recent",
     q: JSON.stringify({ searchWord: router.query.q }),
     filter: "valid",
+    page: Number(router.query.page),
     size: JOB_RESULT_LIMIT,
   });
 

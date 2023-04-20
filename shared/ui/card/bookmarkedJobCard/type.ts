@@ -1,11 +1,14 @@
 export interface BookmarkedJobCardProps {
   jobData: {
     id: number;
-    endTime: string;
+    company: {
+      id: number;
+      name: string;
+      logoUrl: string;
+    };
     title: string;
     cut: boolean;
-    companyLogo: string;
-    companyName: string;
+    endTime: string;
   };
   isMobile: boolean;
   isBookmarked: boolean;

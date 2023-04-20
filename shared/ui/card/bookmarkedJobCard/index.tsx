@@ -56,14 +56,19 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
       </button>
       <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`} passHref css={linkButtonCSS(isMobile)}>
         <div css={companyLogoBox}>
-          <Image src={jobData.companyLogo || defaultCompanyLogo} alt={`${jobData.companyName}의 로고`} fill sizes="1" />
+          <Image
+            src={jobData.company.logoUrl || defaultCompanyLogo}
+            alt={`${jobData.company.name}의 로고`}
+            fill
+            sizes="1"
+          />
         </div>
         <div css={jobInfoBox(isMobile)}>
           <div css={flexBox}>
             <DdayBox endTime={jobData.endTime} />
             {jobData.cut && <div css={cutBox}>채용시마감</div>}
           </div>
-          <p css={companyName}>{jobData.companyName}</p>
+          <p css={companyName}>{jobData.company.name}</p>
           <p css={title}>{jobData.title}</p>
         </div>
       </Link>
