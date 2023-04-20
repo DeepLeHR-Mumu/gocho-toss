@@ -18,14 +18,14 @@ export const BottomMenu: FunctionComponent<BottomMenuProps> = ({ jobDetailData, 
     window.open(jobDetailData.applyUrl, "_blank", "noopener, noreferrer");
   };
 
-  const { mutate: jobBookmarkToggle } = useJdBookmarkToggle();
+  const { mutate: jdBookmarkToggle } = useJdBookmarkToggle();
 
-  const jobBookmarkToggleHandler = () => {
+  const jdBookmarkToggleHandler = () => {
     if (!userInfoData) {
       setModal("loginModal", { button: "close" });
       return;
     }
-    jobBookmarkToggle({ jdId: jobDetailData.id });
+    jdBookmarkToggle({ jdId: jobDetailData.id });
   };
 
   const isJobEnd = dDayCalculator(jobDetailData.endTime.toString()) === "만료";
@@ -35,7 +35,7 @@ export const BottomMenu: FunctionComponent<BottomMenuProps> = ({ jobDetailData, 
       <button
         type="button"
         css={bookmarkButton(jobDetailData.isBookmark)}
-        onClick={jobBookmarkToggleHandler}
+        onClick={jdBookmarkToggleHandler}
         aria-label={jobDetailData.isBookmark ? "북마크 해지" : "북마크 하기"}
       >
         <BsFillBookmarkFill />

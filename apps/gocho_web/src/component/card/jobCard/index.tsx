@@ -52,7 +52,7 @@ import {
 export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ jobData, isSkeleton }) => {
   const router = useRouter();
   const { isSuccess, data: userInfoData } = useUserProfile();
-  const { mutate: jobBookmarkToggle } = useJdBookmarkToggle();
+  const { mutate: jdBookmarkToggle } = useJdBookmarkToggle();
   const { setModal } = useModal();
 
   if (isSkeleton || !jobData) {
@@ -70,7 +70,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
     }
 
     jdBookmarkEvent(jobData.id);
-    jobBookmarkToggle({ jdId: jobData.id });
+    jdBookmarkToggle({ jdId: jobData.id });
   };
 
   const { date: jobStartTime } = dateConverter(jobData.startTime);

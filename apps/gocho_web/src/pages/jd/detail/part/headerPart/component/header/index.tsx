@@ -37,18 +37,18 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isDdayEn
   const router = useRouter();
 
   const { mutate: mutateJdApplyClick } = useJdApplyClick();
-  const { mutate: jobBookmarkToggle } = useJdBookmarkToggle();
+  const { mutate: jdBookmarkToggle } = useJdBookmarkToggle();
 
   const { date: jobStartDate } = dateConverter(jobDetailData.startTime);
   const { date: jobEndDate, year: jobEndYear } = dateConverter(jobDetailData.endTime);
 
-  const jobBookmarkToggleHandler = () => {
+  const jdBookmarkToggleHandler = () => {
     if (!userInfoData) {
       setModal("loginModal", { button: "close" });
       return;
     }
     jdBookmarkEvent(jobDetailData.id);
-    jobBookmarkToggle({ jdId: jobDetailData.id });
+    jdBookmarkToggle({ jdId: jobDetailData.id });
   };
 
   return (
@@ -89,7 +89,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isDdayEn
             )}
           </li>
           <li>
-            <button type="button" css={buttonCSS(jobDetailData.isBookmark)} onClick={jobBookmarkToggleHandler}>
+            <button type="button" css={buttonCSS(jobDetailData.isBookmark)} onClick={jdBookmarkToggleHandler}>
               <BsFillBookmarkFill />
               공고 북마크 {jobDetailData?.bookmark}
             </button>

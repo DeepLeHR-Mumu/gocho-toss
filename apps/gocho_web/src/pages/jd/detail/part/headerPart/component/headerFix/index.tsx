@@ -31,16 +31,16 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, is
   const { setModal } = useModal();
   const router = useRouter();
 
-  const { mutate: jobBookmarkToggle } = useJdBookmarkToggle();
+  const { mutate: jdBookmarkToggle } = useJdBookmarkToggle();
   const { mutate: mutateJdApplyClick } = useJdApplyClick();
 
-  const jobBookmarkToggleHandler = () => {
+  const jdBookmarkToggleHandler = () => {
     if (!userInfoData) {
       setModal("loginModal", { button: "close" });
       return;
     }
     jdBookmarkEvent(jobDetailData.id);
-    jobBookmarkToggle({ jdId: jobDetailData.id });
+    jdBookmarkToggle({ jdId: jobDetailData.id });
   };
 
   return (
@@ -57,7 +57,7 @@ export const HeaderFix: FunctionComponent<HeaderFixProps> = ({ jobDetailData, is
             <button
               type="button"
               css={bookmarkButton(jobDetailData.isBookmark)}
-              onClick={jobBookmarkToggleHandler}
+              onClick={jdBookmarkToggleHandler}
               aria-label={jobDetailData.isBookmark ? "북마크 해지" : "북마크 하기"}
             >
               <BsFillBookmarkFill />
