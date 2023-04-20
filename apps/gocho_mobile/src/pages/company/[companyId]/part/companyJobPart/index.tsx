@@ -19,14 +19,14 @@ export const CompanyJobPart: FunctionComponent = () => {
   const { data: companyDetailData, isLoading: isCompanyDataLoading } = useCompanyDetail({
     companyId: Number(companyId),
   });
-  const { data: jobData, isLoading } = useJobArr({
+  const { data: jobData } = useJobArr({
     companyId: Number(companyId),
     order: "recent",
     page: Number(router.query.page),
     size: limit,
   });
 
-  if (!jobData || isLoading) {
+  if (!jobData) {
     return (
       <div css={listContainer}>
         {dummyArrCreator(10).map((dummy) => {

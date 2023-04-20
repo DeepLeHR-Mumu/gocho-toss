@@ -31,7 +31,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
     );
   }
 
-  const companyBookamrkToggle = () => {
+  const companyBookmarkToggleHandler = () => {
     if (!isUserLoginSuccess) {
       setModal("loginModal", { button: "close" });
       return;
@@ -44,7 +44,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
       <button
         type="button"
         css={bookmarkButtonWrapper(isBookmarked)}
-        onClick={companyBookamrkToggle}
+        onClick={companyBookmarkToggleHandler}
         aria-label={isBookmarked ? "기업 북마크 해지" : "기업 북마크 하기"}
       >
         <BsFillBookmarkFill />
