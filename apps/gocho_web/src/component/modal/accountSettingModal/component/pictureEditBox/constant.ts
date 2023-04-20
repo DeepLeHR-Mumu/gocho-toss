@@ -6,12 +6,12 @@ import jobiSafetyProfile from "shared-image/global/profile/jobi_safety.png";
 import jobiTeachProfile from "shared-image/global/profile/jobi_teach.png";
 import jobiProfile from "shared-image/global/profile/jobi.png";
 
-interface ProfileObjArrDef {
+interface ProfileImgObjArrDef {
   key: "default" | "default_work" | "jobi_chat" | "jobi_play" | "jobi_safety" | "jobi_teach" | "jobi";
   image: StaticImageData;
 }
 
-export const profileObjArr: ProfileObjArrDef[] = [
+export const profileImgObjArr: ProfileImgObjArrDef[] = [
   {
     key: "jobi_chat",
     image: jobiChatProfile,

@@ -10,7 +10,7 @@ import { useToast, useModal } from "@/globalStates";
 
 import { ImageRadioButton } from "./component/imageRadioButton";
 import { ProfileChangeFormValues } from "./type";
-import { profileObjArr } from "./constant";
+import { profileImgObjArr } from "./constant";
 import { wrapper, imgContainer, closeButtonBox, title, formCSS } from "./style";
 
 export const PictureEditBox: FunctionComponent = () => {
@@ -66,15 +66,15 @@ export const PictureEditBox: FunctionComponent = () => {
       <strong css={title}>프로필 사진 변경</strong>
       <form onSubmit={handleSubmit(profileImgSubmit)} css={formCSS}>
         <ul css={imgContainer}>
-          {profileObjArr.map((profile) => {
+          {profileImgObjArr.map((profile) => {
             return (
               <ImageRadioButton
                 key={profile.key}
                 imageFile={profile.image}
+                imageValue={profile.key}
                 checkedImage={checkedImage}
                 setCheckedImage={setCheckedImage}
                 setProfileUrl={setProfileUrl}
-                imageValue={profile.key}
                 registerObj={register("image")}
               />
             );
