@@ -64,7 +64,7 @@ export const useAxiosInterceptor = () => {
 
     // TODO : 비로그인시 comments api는 보내지않도록 변경
     // 비로그인상황에서 공고와 컴퍼니 정보는 일단 request는 요청한다.
-    if (!accessTokenData && config.url && matchingUrlReGex.test(config.url)) {
+    if (!accessTokenData && config.url && matchingUrlReGex.test(config.url) && !config.url.includes("comments")) {
       return config;
     }
 

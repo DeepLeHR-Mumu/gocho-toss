@@ -45,6 +45,9 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ userD
   const { mutate: postWriteCompanyComment } = useWriteCompanyComment();
 
   const commentSubmit: SubmitHandler<CommentFormValues> = (commentObj) => {
+    if (textValue.trim().length === 0) {
+      return;
+    }
     postWriteCompanyComment(commentObj, {
       onSuccess: () => {
         setTextValue("");
