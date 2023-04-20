@@ -14,13 +14,11 @@ export const MenuListPart: FunctionComponent = () => {
     order: "recent",
     q: JSON.stringify({ searchWord: router.query.q }),
     filter: "valid",
-    size: 4,
   });
 
   const { data: companyData } = useCompanyArr({
     q: router.query.q as string,
     order: "view",
-    size: 10,
   });
 
   const totalCount = (jobData?.pageResult.totalElements || 0) + (companyData?.pageResult.totalElements || 0);
