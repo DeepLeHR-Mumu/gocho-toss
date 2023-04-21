@@ -39,7 +39,7 @@ const Instagram: NextPageWithLayout = () => {
   } = useJdArr({
     order: "popular",
     filter: "todayUpload",
-    limit: 10,
+    size: 50,
   });
 
   const copyMoreJobLink = async () => {

@@ -9,9 +9,7 @@ import { PostTopBannerDef, RequestObjDef, useAddTopBannerProps } from "./type";
 
 export const postAddTopBanner: PostTopBannerDef = async (requestObj) => {
   const formData = new FormData();
-  const json = JSON.stringify(requestObj.dto);
-  const blob = new Blob([json], { type: "application/json" });
-  formData.append("dto", blob);
+  formData.append("json", JSON.stringify(requestObj.dto));
 
   const { data } = await axiosInstance.post("/banners/top", formData, {
     headers: { "Content-Type": "multipart/form-data" },

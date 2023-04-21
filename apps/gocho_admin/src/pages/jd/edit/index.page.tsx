@@ -1,4 +1,5 @@
 import { ReactElement, useEffect, useState, useRef } from "react";
+import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -43,8 +44,8 @@ const JdEdit: NextPageWithLayout = () => {
   useDisabledKeydownSubmit();
 
   useEffect(() => {
-    const newStartTime = jobData?.startTime ? jobData.startTime + 540000 * 60 : 0;
-    const newEndTime = jobData?.endTime ? jobData.endTime + 540000 * 60 : 0;
+    const newStartTime = dayjs(jobData?.startTime, "YYYY-MM-DDTHH:MM:SS").toDate();
+    const newEndTime = dayjs(jobData?.endTime, "YYYY-MM-DDTHH:MM:SS").toDate();
 
     const positionNewArr = jobData?.positionArr.map((position) => ({
       id: position.id,

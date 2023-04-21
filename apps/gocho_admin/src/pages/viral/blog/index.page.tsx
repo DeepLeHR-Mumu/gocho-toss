@@ -17,7 +17,7 @@ const Blog: NextPageWithLayout = () => {
   } = useJdArr({
     order: "popular",
     filter: "todayUpload",
-    limit: 0,
+    size: 50,
   });
 
   const copyViral = async (jobList: JobDef[]) => {

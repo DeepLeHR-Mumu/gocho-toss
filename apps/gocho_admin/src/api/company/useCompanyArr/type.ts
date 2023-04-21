@@ -1,9 +1,11 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
+import { PageResultDef } from "shared-type/api/paginationType";
+
 export interface RequestObjDef {
   q?: string;
-  limit?: number;
-  offset?: number;
+  page?: number;
+  size?: number;
   status?: "all" | "upload-waiting" | "modify-waiting" | "upload-reject" | "modify-reject";
   order: "recent" | "comment" | "name" | "popular" | "rand" | "view" | undefined;
   word?: string;
@@ -20,7 +22,7 @@ export interface ResponseObjDef {
     logo_url: string;
     comment_count: number;
   }[];
-  count: number;
+  page_result: PageResultDef;
 }
 
 export const companyArrKeyObj = {
