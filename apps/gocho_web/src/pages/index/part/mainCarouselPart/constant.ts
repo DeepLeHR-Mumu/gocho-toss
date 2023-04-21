@@ -1,4 +1,4 @@
-import banner01 from "@public/images/global/MainCarousel/open_renewal_banner.jpg";
+import banner01 from "@public/images/global/MainCarousel/gocho_blog.png";
 import banner02 from "@public/images/global/MainCarousel/factory_banner.jpg";
 import banner03 from "@public/images/global/MainCarousel/openTalk_banner.jpg";
 
@@ -9,18 +9,18 @@ export const carouselArr = [
   {
     id: 1,
     topDesc: "OPEN",
-    middleDesc: "고초대졸닷컴",
-    title: "웹사이트 전체 리뉴얼",
-    lastDesc: "열심히 준비했습니다",
+    middleDesc: "고초대졸 블로그",
+    title: "고초대졸닷컴 공식 블로그",
+    lastDesc: "생산직 취업에 필요한 모든 정보를 블로그에서 만나보세요",
     backgroundImage: banner01,
     iconImage: checkIconImage,
-    backgroundColor: "#121012",
+    backgroundColor: "#59adff",
     buttonObj: {
-      target: "_self" as const,
-      text: "자세히보기",
+      target: "_blank" as const,
+      text: "블로그 바로가기",
       color: "#fff",
       backgroundColor: "#333",
-      url: "/event/renewal",
+      url: "https://blog.gochodaejol.com/?utm_source=gochodaejoldotcom&utm_medium=main-banner",
     },
   },
   {

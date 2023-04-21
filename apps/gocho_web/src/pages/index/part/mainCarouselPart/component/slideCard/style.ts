@@ -69,6 +69,8 @@ export const titleCSS = css`
 export const lastDescCSS = css`
   font-size: 1rem;
   font-weight: 400;
+  line-height: 1.6;
+  word-break: keep-all;
   font-style: normal;
   color: ${COLORS.GRAY100};
 `;
