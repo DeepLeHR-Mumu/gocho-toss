@@ -11,9 +11,9 @@ export interface JdCardProps {
     view: number;
     bookmark: number;
     click: number;
-    startTime: number;
-    endTime: number;
-    updatedTime: number;
-    createdTime: number;
+    startTime: string;
+    endTime: string;
+    updatedTime: string;
+    createdTime: string;
   };
 }

@@ -21,8 +21,8 @@ export interface ResponseObjDef {
           exists: boolean;
           desc: string | null;
         };
-        created_time: number;
-        updated_time: number | null;
+        created_time: string;
+        updated_time: string | null;
       }[]
     | [];
   page_result: PageResultDef | null;

@@ -24,10 +24,10 @@ export interface ResponseObjDef {
         view: number;
         bookmark: number;
         click: number;
-        start_time: number;
-        end_time: number;
-        created_time: number;
-        updated_time: number;
+        start_time: string;
+        end_time: string;
+        created_time: string;
+        updated_time: string;
         apply_url: string;
         task_arr: string[];
       }[]

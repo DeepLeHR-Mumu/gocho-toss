@@ -1,4 +1,5 @@
 import { ReactElement, useEffect } from "react";
+import dayjs from "dayjs";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
@@ -12,6 +13,7 @@ import { cssObj } from "./style";
 
 const RecruiterListPage: NextPageWithLayout = () => {
   const { data: recruiterDataArr } = useRecruiterArr();
+  dayjs.locale("ko");
 
   useEffect(() => {
     recruiterListPageFunnelEvent();
@@ -24,8 +26,6 @@ const RecruiterListPage: NextPageWithLayout = () => {
       </div>
     );
   }
-
-  const foundDate = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
 
   return (
     <main css={cssObj.wrapper}>
@@ -47,7 +47,7 @@ const RecruiterListPage: NextPageWithLayout = () => {
                   {recruiterData.name}({recruiterData.department})
                 </p>
                 <p css={cssObj.data}>{recruiterData.email}</p>
-                <p css={cssObj.data}>{foundDate.format(recruiterData.createdTime)}</p>
+                <p css={cssObj.data}>{dayjs(recruiterData.createdTime).format("YYYY년 MM일 DD일")}</p>
               </li>
             ))}
           </ul>

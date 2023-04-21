@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import dayjs from "dayjs";
 import Image from "next/image";
 import { MdBookmarkBorder } from "react-icons/md";
 import { FiEye } from "react-icons/fi";
@@ -23,7 +24,6 @@ export const CompanyInfoPart: FunctionComponent = () => {
   }
 
   const countFormat = new Intl.NumberFormat("ko", { notation: "compact", compactDisplay: "long" });
-  const foundDate = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
 
   return (
     <section css={cssObj.wrapper} data-testid="company/edit/CompanyInfoPart">
@@ -57,7 +57,7 @@ export const CompanyInfoPart: FunctionComponent = () => {
         </li>
         <li>
           <strong css={cssObj.subTitle}>설립일</strong>
-          <p css={cssObj.subDesc}>{foundDate.format(companyData.foundNumber)}</p>
+          <p css={cssObj.subDesc}>{dayjs(companyData.foundNumber).format("YYYYMMSS")}</p>
         </li>
         <li>
           <strong css={cssObj.subTitle}>사업자 번호</strong>

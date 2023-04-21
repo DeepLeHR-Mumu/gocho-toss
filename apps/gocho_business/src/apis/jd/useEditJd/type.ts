@@ -6,8 +6,8 @@ export interface RequestObjDef {
   dto: {
     company_id: number;
     title: string;
-    start_time: number;
-    end_time: number;
+    start_time: string;
+    end_time: string;
     cut: boolean;
     process_arr: string[];
     apply_route_arr: string[];

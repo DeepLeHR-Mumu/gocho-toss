@@ -8,13 +8,9 @@ import { companyDetailKeyObj, PutCompanyDetailDef, RequestObjDef, useCompanyDeta
 
 export const putCompanyDetail: PutCompanyDetailDef = async (requestObj) => {
   const formData = new FormData();
-  const json = JSON.stringify(requestObj.dto);
-  const blob = new Blob([json], { type: "application/json" });
-  formData.append("dto", blob);
+  formData.append("json", JSON.stringify(requestObj.dto));
 
-  const { data } = await axiosInstance.put(`/companies/${requestObj.companyId}`, formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+  const { data } = await axiosInstance.put(`/companies/${requestObj.companyId}`, formData);
   return data;
 };
 

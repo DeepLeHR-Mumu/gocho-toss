@@ -27,7 +27,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
   const { watch, setValue, trigger, formState, register, clearErrors } = jobForm;
 
   const alwaysButtonClickHandler = () => {
-    setValue(`end_time`, isAlways ? "" : "9999-12-31T23:59");
+    setValue(`end_time`, isAlways ? "" : "9999-12-31T14:59:00");
     setValue(`cut`, !isAlways);
     setIsAlways((prev) => !prev);
   };
