@@ -46,7 +46,7 @@ export const BookmarkCompanyArr: FunctionComponent = () => {
           return (
             <CompanyCard
               key={data.id}
-              refetchUserBookmark={refetch}
+              refetchUserCompanyBookmark={refetch}
               companyData={{
                 ...data,
                 isBookmark: true,

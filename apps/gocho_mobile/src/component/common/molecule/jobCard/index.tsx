@@ -45,7 +45,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
   const router = useRouter();
 
   const { data: userInfoData } = useUserProfile();
-  const { mutate: jobBookmarkToggle } = useJdBookmarkToggle();
+  const { mutate: jdBookmarkToggle } = useJdBookmarkToggle();
   const { setModal } = useModal();
 
   if (isSkeleton || !jobData) {
@@ -56,14 +56,14 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
     );
   }
 
-  const jobBookmarkHandler = () => {
+  const jdBookmarkHandler = () => {
     if (!userInfoData) {
       setModal("loginModal", { button: "close" });
       return;
     }
 
     jdBookmarkEvent(jobData.id);
-    jobBookmarkToggle({ jdId: jobData.id });
+    jdBookmarkToggle({ jdId: jobData.id });
   };
 
   const isExpired = dDayBooleanReturn(jobData.endTime);
@@ -77,7 +77,7 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
       <button
         type="button"
         css={bookmarkButtonWrapper(jobData.isBookmark)}
-        onClick={jobBookmarkHandler}
+        onClick={jdBookmarkHandler}
         aria-label={jobData.isBookmark ? "공고 북마크 해지" : "공고 북마크 하기"}
       >
         <BsFillBookmarkFill />

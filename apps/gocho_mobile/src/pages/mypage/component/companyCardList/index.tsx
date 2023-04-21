@@ -51,7 +51,7 @@ export const CompanyCardList: FunctionComponent = () => {
                 ...data,
                 isBookmark: true,
               }}
-              refetchUserBookmark={refetch}
+              refetchUserCompanyBookmark={refetch}
               key={`UnifiedSearchCompanyCard${data.id}`}
             />
           );

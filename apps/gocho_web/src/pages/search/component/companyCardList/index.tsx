@@ -6,7 +6,10 @@ import { CompanyCard } from "shared-ui/card/companyCard";
 import { listContainer } from "./style";
 import { CompanyCardListProps } from "./type";
 
-export const CompanyCardList: FunctionComponent<CompanyCardListProps> = ({ companyDataArr, refetchUserBookmark }) => {
+export const CompanyCardList: FunctionComponent<CompanyCardListProps> = ({
+  companyDataArr,
+  refetchUserCompanyBookmark,
+}) => {
   if (!companyDataArr) {
     return (
       <div css={listContainer}>
@@ -23,8 +26,8 @@ export const CompanyCardList: FunctionComponent<CompanyCardListProps> = ({ compa
         return (
           <CompanyCard
             companyData={companyData}
-            refetchUserBookmark={refetchUserBookmark}
-            key={`UnifiedSearchCompanyCard - ${companyData.id}`}
+            refetchUserCompanyBookmark={refetchUserCompanyBookmark}
+            key={`UnifiedSearchCompanyCard${companyData.id}`}
           />
         );
       })}

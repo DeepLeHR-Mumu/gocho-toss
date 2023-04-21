@@ -23,13 +23,13 @@ export const CompanyListPart: FunctionComponent = () => {
     <section>
       <p css={title}>기업 정보 🏢</p>
       {companyDataObj && (
-        <CompanyCardList companyDataArr={companyDataObj?.companyDataArr} refetchUserBookmark={refetch} />
-      )}
-      {companyDataObj && (
-        <BottomPagination
-          totalPage={companyDataObj.pageResult.totalPages}
-          linkObj={{ pathname: "/search", q: router.query.q as string }}
-        />
+        <>
+          <CompanyCardList companyDataArr={companyDataObj?.companyDataArr} refetchUserCompanyBookmark={refetch} />
+          <BottomPagination
+            totalPage={companyDataObj.pageResult.totalPages}
+            linkObj={{ pathname: "/search", q: router.query.q as string }}
+          />
+        </>
       )}
     </section>
   );

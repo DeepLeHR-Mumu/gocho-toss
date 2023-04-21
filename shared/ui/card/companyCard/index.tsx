@@ -13,7 +13,7 @@ import { companyCardSkeleton, cardWrapper, bookmarkButtonWrapper, nameCSS, compa
 export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkeleton> = ({
   companyData,
   isSkeleton,
-  refetchUserBookmark,
+  refetchUserCompanyBookmark,
 }) => {
   const { mutate: companyBookmarkToggle } = useCompanyBookmarkToggle();
 
@@ -26,7 +26,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
   }
 
   const companyBookmarkToggleHandler = () => {
-    refetchUserBookmark();
+    refetchUserCompanyBookmark();
     companyBookmarkToggle({ companyId: companyData.id });
   };
 

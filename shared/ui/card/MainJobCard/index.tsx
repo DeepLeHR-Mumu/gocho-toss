@@ -38,7 +38,7 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
   loginOpener,
 }) => {
   const { error: useUserInfoError, data: userInfoData } = useUserProfile();
-  const { mutate: jobBookmarkToggle } = useJdBookmarkToggle();
+  const { mutate: jdBookmarkToggle } = useJdBookmarkToggle();
 
   if (isSkeleton || jobData === undefined) {
     return (
@@ -51,7 +51,7 @@ export const MainJobCard: FunctionComponent<MainJobCardProps | MainJobCardSkelet
   const jobBookmarkHandler = () => {
     if (userInfoData) {
       jdBookmarkEvent(jobData.id);
-      jobBookmarkToggle({ jdId: jobData.id });
+      jdBookmarkToggle({ jdId: jobData.id });
     }
   };
 

@@ -30,7 +30,7 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
   isBookmarked,
   isSkeleton,
 }) => {
-  const { mutate: jobBookmarkToggle } = useJdBookmarkToggle();
+  const { mutate: jdBookmarkToggle } = useJdBookmarkToggle();
 
   if (isSkeleton || jobData === undefined) {
     return (
@@ -40,8 +40,8 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
     );
   }
 
-  const jobBookmarkToggleHandler = () => {
-    jobBookmarkToggle({ jdId: jobData.id });
+  const jdBookmarkToggleHandler = () => {
+    jdBookmarkToggle({ jdId: jobData.id });
   };
 
   return (
@@ -49,7 +49,7 @@ export const BookmarkedJobCard: FunctionComponent<BookmarkedJobCardProps | Bookm
       <button
         type="button"
         css={bookmarkButton(isBookmarked)}
-        onClick={jobBookmarkToggleHandler}
+        onClick={jdBookmarkToggleHandler}
         aria-label={isBookmarked ? "북마크 해지" : "북마크 하기"}
       >
         <BsFillBookmarkFill />

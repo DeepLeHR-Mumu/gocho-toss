@@ -45,7 +45,7 @@ export const CompanyPreviewPart: FunctionComponent = () => {
         return (
           <CompanyCard
             companyData={companyData}
-            refetchUserBookmark={refetch}
+            refetchUserCompanyBookmark={refetch}
             key={`UnifiedSearchCompanyCard${companyData.id}`}
           />
         );
