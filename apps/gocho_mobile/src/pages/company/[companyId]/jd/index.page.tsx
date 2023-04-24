@@ -34,12 +34,12 @@ const DetailPage: NextPage = () => {
       const jobViewArr: number[] = JSON.parse(companyViewStr);
       jobViewArr.push(Number(router.query.companyId));
       sessionStorage.setItem("jobViewArr", JSON.stringify(jobViewArr));
-      addViewCount({ elemId: Number(router.query.companyId) });
+      addViewCount({ companyId: Number(router.query.companyId) });
       return;
     }
     if (!isViewed) {
       sessionStorage.setItem("jobViewArr", JSON.stringify([router.query.companyId]));
-      addViewCount({ elemId: Number(router.query.companyId) });
+      addViewCount({ companyId: Number(router.query.companyId) });
     }
   }, [addViewCount, router.query.companyId]);
 

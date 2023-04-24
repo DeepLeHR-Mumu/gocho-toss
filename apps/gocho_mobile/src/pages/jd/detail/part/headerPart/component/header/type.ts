@@ -1,20 +1,21 @@
 export interface HeaderProps {
   jobDetailData: {
     id: number;
-    startTime: number;
-    endTime: number;
-    applyUrl: string;
-    title: string;
-    cut: boolean;
-    bookmarkCount: number;
-    viewCount: number;
     company: {
-      companyId: number;
+      id: number;
       name: string;
       logoUrl: string;
-      youtubeUrl: string | null;
+      youtubeUrl: string;
+      commentCount: number;
     };
+    title: string;
+    cut: boolean;
+    startTime: string;
+    endTime: string;
+    applyUrl: string;
+    bookmark: number;
+    isBookmark: boolean;
+    view: number;
+    click: number;
   };
-  isBookmarked: boolean;
-  userId: number | undefined;
 }

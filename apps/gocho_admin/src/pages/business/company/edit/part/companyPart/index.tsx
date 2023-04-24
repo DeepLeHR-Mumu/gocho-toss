@@ -7,7 +7,7 @@ import { cssObj } from "./style";
 import { CompanyPartProps } from "./type";
 
 export const CompanyPart: FunctionComponent<CompanyPartProps> = ({ company }) => {
-  const { year: foundYear, month: foundMonth, date: foundDate } = dateConverter(company.foundDate);
+  const { date: foundDate } = dateConverter(company.foundDate);
   const welfareArr: { name: string; data: string[] | null }[] = [
     { name: "급여", data: company.welfare?.money ? company.welfare?.money : null },
     { name: "의료", data: company.welfare?.health ? company.welfare?.health : null },
@@ -39,9 +39,7 @@ export const CompanyPart: FunctionComponent<CompanyPartProps> = ({ company }) =>
       </div>
       <div css={cssObj.dataContainer}>
         <strong css={cssObj.dataTitle}>설립일</strong>
-        <p css={cssObj.dataBox}>
-          {foundYear}-{foundMonth}-{foundDate}
-        </p>
+        <p css={cssObj.dataBox}>{foundDate}</p>
       </div>
       <div css={cssObj.dataContainer}>
         <strong css={cssObj.dataTitle}>사원수</strong>

@@ -8,13 +8,9 @@ import { PostEditJdDef, RequestObjDef, useEditJdProps } from "./type";
 
 export const putEditJd: PostEditJdDef = async (requestObj) => {
   const formData = new FormData();
-  const json = JSON.stringify(requestObj.dto);
-  const blob = new Blob([json], { type: "application/json" });
-  formData.append("dto", blob);
+  formData.append("json", JSON.stringify(requestObj.dto));
 
-  const { data } = await axiosInstance.put(`/jds/${requestObj.jdId}`, formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+  const { data } = await axiosInstance.put(`/jds/${requestObj.jdId}`, formData);
   return data;
 };
 

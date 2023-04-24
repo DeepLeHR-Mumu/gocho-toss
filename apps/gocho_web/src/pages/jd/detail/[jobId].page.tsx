@@ -15,7 +15,7 @@ import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKe
 
 import { Layout } from "@component/layout";
 import { DetailComment } from "@component/global/detailComment";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { useAddJobViewCount } from "shared-api/viewCount";
 import { jdDetailFunnelEvent } from "shared-ga/jd";
 
@@ -27,7 +27,7 @@ import { wrapper, flexBox, container, containerSkeleton, logoImageBox } from "./
 const JobsDetail: NextPage = () => {
   const [currentPositionId, setCurrentPositionId] = useState<number>(0);
 
-  const { data: userData } = useUserInfo();
+  const { data: userData } = useUserProfile();
   const { mutate: addViewCount } = useAddJobViewCount();
 
   const router = useRouter();
@@ -36,15 +36,15 @@ const JobsDetail: NextPage = () => {
     id: Number(jobId),
     target: "job",
     viewMutation: () => {
-      addViewCount({ elemId: Number(jobId) });
+      addViewCount({ jobId: Number(jobId) });
     },
   });
 
   const { data: jobDetailData, isLoading } = useJobDetail({
     id: Number(jobId),
   });
-  const { data: companyCommentDataArr } = useCompanyCommentArr({
-    companyId: Number(jobDetailData?.company.companyId),
+  const { data: companyCommentData } = useCompanyCommentArr({
+    companyId: Number(jobDetailData?.company.id),
   });
 
   useEffect(() => {
@@ -60,8 +60,12 @@ const JobsDetail: NextPage = () => {
             <section css={containerSkeleton}>
               <SkeletonBox />
             </section>
-            {companyCommentDataArr && (
-              <DetailComment jdId={null} commentDataArr={companyCommentDataArr} userInfo={userData} />
+            {companyCommentData && (
+              <DetailComment
+                company={companyCommentData.company}
+                commentDataArr={companyCommentData.commentArr}
+                userInfo={userData}
+              />
             )}
           </div>
         </Layout>
@@ -101,16 +105,14 @@ const JobsDetail: NextPage = () => {
             <DetailWorkPart freshPosition={jobDetailData.positionArr[currentPositionId]} />
             <DetailPreferencePart freshPosition={jobDetailData.positionArr[currentPositionId]} />
           </section>
-          <DetailComment
-            jdId={jobDetailData.id}
-            commentDataArr={
-              companyCommentDataArr || {
-                company: { ...jobDetailData.company, id: jobDetailData.company.companyId },
-                commentArr: null,
-              }
-            }
-            userInfo={userData}
-          />
+          {!userData && !companyCommentData && <DetailComment company={jobDetailData.company} />}
+          {companyCommentData && (
+            <DetailComment
+              company={companyCommentData.company}
+              commentDataArr={companyCommentData.commentArr}
+              userInfo={userData}
+            />
+          )}
         </div>
         <ReceptInfoPart jobDetailData={jobDetailData} />
       </Layout>

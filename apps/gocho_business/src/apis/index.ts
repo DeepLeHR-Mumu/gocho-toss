@@ -23,6 +23,8 @@ export { useJdArr } from "./jd/useJdArr";
 export { useJdDetail } from "./jd/useJdDetail";
 export { jdArrKeyObj } from "./jd/useJdArr/type";
 
+export { useManagerProfile } from "./manager/useManagerProfile";
+
 export { useRecruiterArr } from "./recruiter/useRecruiterArr";
 
 export { useAxiosInterceptor, axiosInstance, axiosNoTokenInstance } from "./useIsRefreshLock";

@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-import { useBannerArr } from "shared-api/banner/useBannerArr";
+import { useTopBannerArr } from "shared-api/banner";
 
 import type { NextPageWithLayout } from "@/types";
 import { mainContainer } from "@/style/commonStyles";
@@ -11,7 +11,7 @@ import { BannerListPart } from "./part/bannerListPart";
 import { MoveBannerPart } from "./part/moveBannerPart";
 
 const TopBanner: NextPageWithLayout = () => {
-  const { data: bannerDataArr, isLoading, isError } = useBannerArr({ type: "T" });
+  const { data: bannerDataArr, isLoading, isError } = useTopBannerArr();
 
   if (!bannerDataArr || isLoading) {
     return <LoadingScreen />;

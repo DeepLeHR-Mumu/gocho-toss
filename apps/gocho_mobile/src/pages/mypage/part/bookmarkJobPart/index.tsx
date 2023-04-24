@@ -1,26 +1,19 @@
-import { FunctionComponent, useState, useEffect } from "react";
+import { FunctionComponent } from "react";
+
+import { useInfiniteUserJobBookmarkArr } from "shared-api/job";
 
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
-import { Pagination } from "@pages/mypage/component/pagination";
-import { useUserJobBookmarkArr } from "shared-api/bookmark";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { JobCardList } from "../../component/jobCardList";
 import { emptyBox, warningCSS } from "./style";
 
 export const BookmarkJobPart: FunctionComponent = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const activeCardCount = 6;
-
-  const { data: userInfoData } = useUserInfo();
-  const { data: userBookmarkJobDataArr, isLoading } = useUserJobBookmarkArr({
+  const { data: userInfoData } = useUserProfile();
+  const { data: userBookmarkJobData } = useInfiniteUserJobBookmarkArr({
     userId: userInfoData?.id,
   });
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [setCurrentPage, currentPage]);
-
-  if (isLoading || !userBookmarkJobDataArr) {
+  if (!userBookmarkJobData) {
     return (
       <section>
         <InvisibleH2 title="채용공고 북마크" />
@@ -35,16 +28,10 @@ export const BookmarkJobPart: FunctionComponent = () => {
     );
   }
 
-  const totalPage = Math.ceil(userBookmarkJobDataArr.length / activeCardCount);
-
-  const firstArrIndex = (currentPage - 1) * activeCardCount;
-  const lastArrIndex = currentPage * activeCardCount;
-  const filterMyBookmarkArr = userBookmarkJobDataArr.slice(firstArrIndex, lastArrIndex);
-
   return (
     <section>
       <InvisibleH2 title="채용공고 북마크" />
-      {totalPage === 0 && (
+      {userBookmarkJobData.pages[0].pageResult.totalElements === 0 && (
         <div css={emptyBox}>
           <p css={warningCSS}>
             공고 북마크를 이용하시면
@@ -54,12 +41,7 @@ export const BookmarkJobPart: FunctionComponent = () => {
         </div>
       )}
 
-      {totalPage !== 0 && (
-        <>
-          <JobCardList jobDataArr={filterMyBookmarkArr} />
-          <Pagination totalPage={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
-        </>
-      )}
+      <JobCardList />
     </section>
   );
 };

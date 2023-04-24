@@ -1,13 +1,25 @@
+export interface PageResultDef {
+  total_elements: number;
+  total_pages: number;
+  page: number;
+  size: number;
+  is_first: boolean;
+  is_last: boolean;
+}
+
 export interface jobBookmarkResObjDef {
-  data:
-    | {
-        id: number;
-        end_time: number;
-        title: string;
-        cut: boolean;
-        company: { name: string; logo_url: string };
-      }[]
-    | null;
+  data: {
+    id: number;
+    company: {
+      id: number;
+      name: string;
+      logo_url: string;
+    };
+    title: string;
+    cut: boolean;
+    end_time: string;
+  }[];
+  page_result: PageResultDef;
 }
 
 export interface CompanyBookmarkResObjDef {
@@ -16,8 +28,14 @@ export interface CompanyBookmarkResObjDef {
 
 export interface companyBookmarkObjDef {
   id: number;
-  name: string;
-  logo_url: string;
+  company: {
+    id: number;
+    name: string;
+    logo_url: string;
+  };
+  title: string;
+  cut: boolean;
+  end_time: string;
 }
 
 export interface postingBookmarkResObjDef {

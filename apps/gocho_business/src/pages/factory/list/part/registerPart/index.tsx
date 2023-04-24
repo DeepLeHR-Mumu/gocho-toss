@@ -29,7 +29,7 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingInde
 
   usePreventRouting(Boolean(Object.keys(formState.dirtyFields).length));
 
-  const { data: factoryDataArr } = useFactoryArr();
+  const { data: factoryDataObj } = useFactoryArr();
   const { mutate: addFactoryMutation } = useAddFactory();
 
   const factoryPostSubmitHandler = (factoryRequestObj: FactoryRegisterDef) => {
@@ -49,7 +49,7 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingInde
           bus_etc: factoryRequestObj.bus_etc === "" ? null : factoryRequestObj.bus_etc,
           dormitory_etc: factoryRequestObj.dormitory_etc === "" ? null : factoryRequestObj.dormitory_etc,
           dormitory_bool: factoryRequestObj.dormitory_bool === "true",
-          id: editingIndex === null ? undefined : factoryDataArr?.[Number(editingIndex)]?.id,
+          id: editingIndex === null ? undefined : factoryDataObj?.factoryDataArr?.[Number(editingIndex)]?.id,
         },
         {
           onSuccess: () => {
@@ -86,25 +86,25 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingInde
       return;
     }
 
-    if (!factoryDataArr) {
+    if (!factoryDataObj) {
       return;
     }
 
     reset(
       {
-        factory_name: factoryDataArr[editingIndex].name,
-        address: factoryDataArr[editingIndex].address,
-        product: factoryDataArr[editingIndex].product,
-        male_number: factoryDataArr[editingIndex].maleNumber,
-        female_number: factoryDataArr[editingIndex].femaleNumber,
-        bus_bool: factoryDataArr[editingIndex].bus.exists ? "true" : "false",
-        bus_etc: factoryDataArr[editingIndex].bus.desc || "",
-        dormitory_bool: factoryDataArr[editingIndex].dormitory.exists ? "true" : "false",
-        dormitory_etc: factoryDataArr[editingIndex].dormitory.desc || "",
+        factory_name: factoryDataObj.factoryDataArr[editingIndex].name,
+        address: factoryDataObj.factoryDataArr[editingIndex].address,
+        product: factoryDataObj.factoryDataArr[editingIndex].product,
+        male_number: factoryDataObj.factoryDataArr[editingIndex].maleNumber,
+        female_number: factoryDataObj.factoryDataArr[editingIndex].femaleNumber,
+        bus_bool: factoryDataObj.factoryDataArr[editingIndex].bus.exists ? "true" : "false",
+        bus_etc: factoryDataObj.factoryDataArr[editingIndex].bus.desc || "",
+        dormitory_bool: factoryDataObj.factoryDataArr[editingIndex].dormitory.exists ? "true" : "false",
+        dormitory_etc: factoryDataObj.factoryDataArr[editingIndex].dormitory.desc || "",
       },
       { keepDirtyValues: true }
     );
-  }, [factoryDataArr, editingIndex, reset]);
+  }, [factoryDataObj, editingIndex, reset]);
 
   const totalWorkerNumber = Number(watch("male_number") || 0) + Number(watch("female_number") || 0);
 
@@ -115,7 +115,9 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingInde
           <section css={cssObj.wrapper}>
             <FactoryBaseInfo
               formObj={formObj}
-              requestStatus={editingIndex !== null ? factoryDataArr?.[editingIndex].status.name : undefined}
+              requestStatus={
+                editingIndex !== null ? factoryDataObj?.factoryDataArr?.[editingIndex].status.name : undefined
+              }
             />
             <FactoryDetailInfo formObj={formObj} totalWorkerNumber={totalWorkerNumber} />
           </section>

@@ -65,7 +65,7 @@ export const FactoryCard: FunctionComponent<FactoryCardProps> = ({ factoryInfo }
               });
             }}
           >
-            {factoryInfo.factoryName}
+            {factoryInfo.name}
 
             <span css={updownIconBox}>{isCardOpen ? <FiChevronUp /> : <FiChevronDown />}</span>
           </button>

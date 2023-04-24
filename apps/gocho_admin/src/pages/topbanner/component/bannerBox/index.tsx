@@ -19,22 +19,20 @@ export const BannerBox: FunctionComponent<BannerBoxProps> = ({ banner }) => {
       { bannerId: id },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries(bannerArrKeyObj.bannerArr({ type: "T" }));
+          queryClient.invalidateQueries(bannerArrKeyObj.top);
         },
       }
     );
   };
 
-  const { year: endYear, month: endMonth, date: endDate } = dateConverter(banner.endTime);
+  const { date } = dateConverter(banner.endTime);
 
   return (
     <tr css={bannerBox}>
       <td css={bannerIdBox}>{banner.id}</td>
-      <td css={companyNameBox}>{banner.companyName}</td>
-      <td css={titleBox}>{banner.title}</td>
-      <td css={expireDateBox}>
-        {endYear}-{endMonth}-{endDate}
-      </td>
+      <td css={companyNameBox}>{banner.company.name}</td>
+      <td css={titleBox}>{banner.jd.title}</td>
+      <td css={expireDateBox}>{date}</td>
       <td>
         <button
           css={deleteBannerButton}

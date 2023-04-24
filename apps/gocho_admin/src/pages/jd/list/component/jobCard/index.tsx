@@ -40,8 +40,8 @@ export const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
     );
   };
 
-  const { year: startYear, month: startMonth, date: startDate } = dateConverter(job.startTime);
-  const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
+  const { date: startDate } = dateConverter(job.startTime);
+  const { year: endYear, date: endDate } = dateConverter(job.endTime);
 
   return (
     <li css={cssObj.wrapper} data-testid="jd/list/jobCard">
@@ -55,10 +55,8 @@ export const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
           <p css={cssObj.task}>{job.taskArr[0]}</p>
         </li>
         <li css={cssObj.leftDesc}>
-          <span css={cssObj.startDateCSS}>
-            {startYear}.{startMonth}.{startDate}
-          </span>
-          <span css={cssObj.endDateCSS}>{endYear === 9999 ? "상시공고" : `${endYear}.${endMonth}.${endDate}`}</span>
+          <span css={cssObj.startDateCSS}>{startDate}</span>
+          <span css={cssObj.endDateCSS}>{endYear === "9999" ? "상시공고" : endDate}</span>
         </li>
         <li css={cssObj.flexBox}>
           <a href={job.applyUrl} css={cssObj.applyButton} target="_blank" rel="noopener noreferrer">

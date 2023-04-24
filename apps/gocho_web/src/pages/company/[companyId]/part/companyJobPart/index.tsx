@@ -3,8 +3,6 @@ import { AiOutlineInfoCircle } from "react-icons/ai";
 import { useRouter } from "next/router";
 
 import { useInfiniteJobArr } from "shared-api/job/useInfiniteJobArr";
-import { useUserInfo } from "shared-api/auth";
-import { useUserJobBookmarkArr } from "shared-api/bookmark";
 import { dummyArrCreator } from "shared-util";
 
 import { JobCard } from "@component/card/jobCard";
@@ -17,16 +15,14 @@ export const CompanyJobPart: FunctionComponent = () => {
   const router = useRouter();
 
   const {
-    data: jobDataArr,
+    data: jobData,
     isLoading,
     fetchNextPage,
   } = useInfiniteJobArr({
     companyId: Number(router.query.companyId),
-    limit: 10,
+    size: 10,
     order: "recent",
   });
-  const { data: userData } = useUserInfo();
-  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
 
   useEffect(() => {
     if (observeRef.current) {
@@ -38,9 +34,9 @@ export const CompanyJobPart: FunctionComponent = () => {
       );
       observer.observe(observeRef.current);
     }
-  }, [fetchNextPage, jobDataArr]);
+  }, [fetchNextPage, jobData]);
 
-  if (!jobDataArr || isLoading || router.isFallback) {
+  if (!jobData || isLoading || router.isFallback) {
     return (
       <Layout>
         <div css={listContainer}>
@@ -55,31 +51,18 @@ export const CompanyJobPart: FunctionComponent = () => {
   return (
     <div css={partContainer}>
       <Layout>
-        <p css={totalCount}>총 채용공고 {jobDataArr.pages[0].count}개</p>
+        <p css={totalCount}>총 채용공고 {jobData.pages[0].pageResult.totalElements}개</p>
         <section css={listContainer}>
-          {jobDataArr.pages[0].count === 0 && (
+          {jobData.pages[0].pageResult.totalElements === 0 && (
             <p css={noJobListText}>
               <AiOutlineInfoCircle />
               현재 채용중인 공고가 없습니다.
             </p>
           )}
 
-          {jobDataArr.pages.map((page) => {
-            return page.jobDataArr.map((jobData) => {
-              const isBookmarked = Boolean(
-                userJobBookmarkArr?.some((job) => {
-                  return job.id === jobData.id;
-                })
-              );
-
-              return (
-                <JobCard
-                  jobData={jobData}
-                  isBookmarked={isBookmarked}
-                  userId={userData?.id}
-                  key={`JobCard${jobData.id}`}
-                />
-              );
+          {jobData.pages.map((page) => {
+            return page.jobDataArr.map((data) => {
+              return <JobCard jobData={data} key={`JobCard${data.id}`} />;
             });
           })}
         </section>

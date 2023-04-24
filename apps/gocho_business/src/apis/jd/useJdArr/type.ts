@@ -1,35 +1,38 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
+import { PageResultDef } from "shared-type/api/paginationType";
+
 export interface RequestObjDef {
-  order: "recent" | "popular" | "rand" | "view" | "end" | "com" | undefined;
+  order?: "recent" | "popular" | "rand" | "view" | "end" | "com";
   filter?: "todayUpload" | "almostDeadline" | "deadline" | "expired" | "valid";
-  limit?: number;
-  offset?: number;
-  q?: string;
+  size?: number;
+  page?: number;
 }
 
 export interface ResponseObjDef {
-  data: {
-    id: number;
-    uploader: { name: string; department: string; is_mine: boolean };
-    company: { id: number; name: string; logo_url: string };
-    status: {
-      name: "진행중" | "등록대기" | "수정대기" | "등록반려" | "수정반려";
-      reason: string;
-    };
-    title: string;
-    cut: boolean;
-    view: number;
-    bookmark: number;
-    click: number;
-    start_time: number;
-    end_time: number;
-    created_time: number;
-    updated_time: number;
-    apply_url: string;
-    task_arr: string[];
-  }[];
-  count: number;
+  data:
+    | {
+        id: number;
+        uploader: { name: string; department: string; is_mine: boolean };
+        company: { id: number; name: string; logo_url: string };
+        status: {
+          name: "진행중" | "등록대기" | "수정대기" | "등록반려" | "수정반려";
+          reason: string;
+        };
+        title: string;
+        cut: boolean;
+        view: number;
+        bookmark: number;
+        click: number;
+        start_time: string;
+        end_time: string;
+        created_time: string;
+        updated_time: string;
+        apply_url: string;
+        task_arr: string[];
+      }[]
+    | [];
+  page_result: PageResultDef | null;
 }
 
 export const jdArrKeyObj = {

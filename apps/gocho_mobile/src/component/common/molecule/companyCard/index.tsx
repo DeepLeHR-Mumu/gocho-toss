@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { BsFillBookmarkFill } from "react-icons/bs";
 
-import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr } from "shared-api/bookmark";
-import { useUserInfo } from "shared-api/auth";
+import { useCompanyBookmarkToggle } from "shared-api/company";
+import { useUserProfile } from "shared-api/auth";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
@@ -19,18 +19,9 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
   isBookmarked,
   isSkeleton,
 }) => {
-  const { isSuccess: isUserLoginSuccess, data: userData } = useUserInfo();
+  const { isSuccess: isUserLoginSuccess } = useUserProfile();
   const { setModal } = useModal();
-  const { mutate: addMutate } = useAddCompanyBookmarkArr({
-    id: companyData?.id as number,
-    logo_url: companyData?.logoUrl as string,
-    name: companyData?.name as string,
-  });
-  const { mutate: deleteMutate } = useDeleteCompanyBookmarkArr({
-    id: companyData?.id as number,
-    logo_url: companyData?.logoUrl as string,
-    name: companyData?.name as string,
-  });
+  const { mutate: companyBookmarkToggle } = useCompanyBookmarkToggle();
 
   if (isSkeleton || companyData === undefined) {
     return (
@@ -40,16 +31,12 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
     );
   }
 
-  const addCompanyBookmark = () => {
+  const companyBookmarkToggleHandler = () => {
     if (!isUserLoginSuccess) {
       setModal("loginModal", { button: "close" });
       return;
     }
-    addMutate({ userId: userData.id, id: companyData.id });
-  };
-
-  const deleteCompanyBookmark = () => {
-    if (userData) deleteMutate({ userId: userData.id, id: companyData.id });
+    companyBookmarkToggle({ companyId: companyData.id });
   };
 
   return (
@@ -57,10 +44,7 @@ export const CompanyCard: FunctionComponent<CompanyCardProps | CompanyCardSkelet
       <button
         type="button"
         css={bookmarkButtonWrapper(isBookmarked)}
-        onClick={(event) => {
-          event.preventDefault();
-          return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
-        }}
+        onClick={companyBookmarkToggleHandler}
         aria-label={isBookmarked ? "기업 북마크 해지" : "기업 북마크 하기"}
       >
         <BsFillBookmarkFill />

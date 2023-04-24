@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
-import { useUserState } from "@/globalStates";
+import { useManagerProfile } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 
 import { linkArr } from "./constant";
@@ -15,7 +15,7 @@ import { cssObj } from "./style";
 export const SideBar: FunctionComponent = () => {
   const router = useRouter();
   const { jdId } = router.query;
-  const { userInfoData } = useUserState();
+  const { data: userInfoData } = useManagerProfile();
 
   if (!userInfoData) {
     return (
@@ -32,7 +32,7 @@ export const SideBar: FunctionComponent = () => {
     <nav css={cssObj.wrapper}>
       <div css={cssObj.marginContainer}>
         <div css={cssObj.container}>
-          <CompanyInfoBox name={userInfoData.companyName} img={userInfoData.companyLogo} />
+          <CompanyInfoBox name={userInfoData.company.name} img={userInfoData.company.logoUrl} />
           {linkArr.map((linkObj) => {
             const isRoute = router.asPath === linkObj.url;
             const isUpload = linkObj.name === "공고" && router.asPath === INTERNAL_URL.JD_UPLOAD;

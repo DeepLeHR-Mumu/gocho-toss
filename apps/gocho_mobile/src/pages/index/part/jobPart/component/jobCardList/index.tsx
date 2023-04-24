@@ -4,8 +4,6 @@ import Slider from "react-slick";
 import { useJobArr } from "shared-api/job";
 import { dummyArrCreator } from "shared-util";
 import { MainJobCard } from "shared-ui/card/MainJobCard";
-import { useUserInfo } from "shared-api/auth";
-import { useUserJobBookmarkArr } from "shared-api/bookmark";
 
 import { useModal } from "@/globalStates";
 
@@ -15,25 +13,20 @@ import { listContainer } from "./style";
 export const JobCardList: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
 
-  const {
-    data: jobDataArr,
-    isLoading,
-    isError,
-  } = useJobArr({
+  const { data: jobData } = useJobArr({
     order: "recent",
     filter: "valid",
-    limit: 9,
+    size: 9,
+    page: 1,
   });
 
-  const { data: userData } = useUserInfo();
-  const { data: userJobBookmarkArr } = useUserJobBookmarkArr({ userId: userData?.id });
   const { setModal } = useModal();
 
   const loginOpener = () => {
     setModal("loginModal", { button: "close" });
   };
 
-  if (!jobDataArr || isError || isLoading) {
+  if (!jobData) {
     return (
       <div css={listContainer}>
         <Slider {...setCarouselSetting()} ref={sliderRef}>
@@ -48,22 +41,8 @@ export const JobCardList: FunctionComponent = () => {
   return (
     <div css={listContainer}>
       <Slider {...setCarouselSetting()} ref={sliderRef}>
-        {jobDataArr.jobDataArr.map((jobData) => {
-          const isBookmarked = Boolean(
-            userJobBookmarkArr?.some((job) => {
-              return job.id === jobData.id;
-            })
-          );
-          return (
-            <MainJobCard
-              key={`MainJobCard${jobData.id}`}
-              jobData={jobData}
-              isMobile
-              isBookmarked={isBookmarked}
-              userId={userData?.id}
-              loginOpener={loginOpener}
-            />
-          );
+        {jobData.jobDataArr.map((data) => {
+          return <MainJobCard key={`MainJobCard${data.id}`} jobData={data} isMobile loginOpener={loginOpener} />;
         })}
       </Slider>
     </div>

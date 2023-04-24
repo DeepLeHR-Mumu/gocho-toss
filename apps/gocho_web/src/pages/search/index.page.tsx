@@ -17,6 +17,7 @@ import { PageHead } from "./pageHead";
 
 const UnifiedSearch: NextPage = () => {
   const router = useRouter();
+  const queryMenu = router.query.menu;
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -39,7 +40,7 @@ const UnifiedSearch: NextPage = () => {
 
       <Layout>
         <MenuListPart />
-        {router.query.menu === "전체" && (
+        {queryMenu === "전체" && (
           <div>
             <p css={title}>채용 공고 📮</p>
             <JobPreviewPart />
@@ -48,8 +49,8 @@ const UnifiedSearch: NextPage = () => {
           </div>
         )}
 
-        {router.query.menu === "공고" && <JobListPart />}
-        {router.query.menu === "기업" && <CompanyListPart />}
+        {queryMenu === "공고" && <JobListPart />}
+        {queryMenu === "기업" && <CompanyListPart />}
       </Layout>
     </main>
   );

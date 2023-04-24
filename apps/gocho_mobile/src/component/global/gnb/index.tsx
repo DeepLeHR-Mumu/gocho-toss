@@ -7,7 +7,7 @@ import Image from "next/image";
 import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
 import { globalSearchEvent } from "shared-ga/search";
 import { MAIN_URL } from "shared-constant";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 
 import { Layout } from "@component/layout";
 import { useToast } from "@/globalStates";
@@ -41,7 +41,7 @@ export const GNB: FunctionComponent = () => {
   const { setToastMessage } = useToast();
 
   const router = useRouter();
-  const { isSuccess } = useUserInfo();
+  const { isSuccess } = useUserProfile();
 
   const handleParam = (typeKeyword: ChangeEvent<HTMLInputElement>) => {
     return setQuery(typeKeyword.target.value);

@@ -51,8 +51,8 @@ interface axiosRequestObjDef {
   dto: {
     company_id: number;
     title: string;
-    start_time: number | string;
-    end_time: number | string;
+    start_time: string;
+    end_time: string;
     cut: boolean;
     process_arr: string[];
     apply_route_arr: string[];

@@ -78,14 +78,14 @@ export const FactoryInfoPart: FunctionComponent = () => {
           return (
             <button
               type="button"
-              key={`companyFactoryDetailInfo${factory.factoryName}`}
+              key={`companyFactoryDetailInfo${factory.name}`}
               css={selectButton(activeFactory === factory.id)}
               onClick={() => {
                 return setActiveFactory(factory.id);
               }}
-              aria-label={`${factory.factoryName} 자세히보기`}
+              aria-label={`${factory.name} 자세히보기`}
             >
-              {factory.factoryName}
+              {factory.name}
             </button>
           );
         })}
@@ -107,7 +107,7 @@ export const FactoryInfoPart: FunctionComponent = () => {
             factory.id === activeFactory && (
               <div css={infoContainer} key={`companyFactoryDetailInfo${factory.id}`}>
                 <div css={addressWrapper}>
-                  <div css={factoryName}>{factory.factoryName}</div>
+                  <div css={factoryName}>{factory.name}</div>
                   <div css={addressBox}>
                     <strong css={addressTitle}>주소</strong>
                     <p css={address}>{factory.address}</p>

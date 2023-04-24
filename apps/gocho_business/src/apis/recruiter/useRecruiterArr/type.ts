@@ -5,7 +5,7 @@ export interface ResponseObjDef {
     email: string;
     name: string;
     department: string;
-    created_time: number;
+    created_time: string;
   }[];
 }
 

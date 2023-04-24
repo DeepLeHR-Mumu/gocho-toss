@@ -4,7 +4,7 @@ export const selector = ({ company, comment_arr }: CompanyCommentArrDef) => {
   if (!comment_arr) {
     return {
       company: { name: company.name, logoUrl: company.logo_url, id: company.id },
-      commentArr: null,
+      commentArr: [],
     };
   }
   return {
@@ -12,18 +12,17 @@ export const selector = ({ company, comment_arr }: CompanyCommentArrDef) => {
     commentArr: comment_arr.map((comment) => {
       return {
         id: comment.id,
-        companyId: comment.company_id,
-        jdId: comment.jd_id,
-        userId: comment.user_id,
-        nickname: comment.nickname,
-        badge: comment.badge,
+        uploader: {
+          id: comment.uploader.id,
+          nickname: comment.uploader.nickname,
+          image: comment.uploader.image,
+        },
         description: comment.description,
         createdTime: comment.created_time,
-        liked: comment.liked,
-        disLiked: comment.disliked,
-        title: comment.title,
         likeCount: comment.like_count,
-        disLikeCount: comment.dislike_count,
+        isLiked: comment.is_liked,
+        dislikeCount: comment.dislike_count,
+        isDisliked: comment.is_disliked,
       };
     }),
   };

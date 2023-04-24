@@ -5,8 +5,8 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { PWD_REGEXP } from "shared-constant";
 
-import { useEditUserInfo } from "@/apis";
-import { useUserState, useToast } from "@/globalStates";
+import { useEditUserInfo, useManagerProfile } from "@/apis";
+import { useToast } from "@/globalStates";
 
 import { EDIT_PASSWORD_MESSAGE } from "./constants";
 import { EditFormValues, PasswordShowObjDef } from "./type";
@@ -21,7 +21,7 @@ export const EditPart: FunctionComponent = () => {
   const isLoading = useRef(false);
 
   const { setToast } = useToast();
-  const { userInfoData } = useUserState();
+  const { data: userInfoData } = useManagerProfile();
   const { mutate: editUserInfo } = useEditUserInfo();
 
   const queryClient = useQueryClient();

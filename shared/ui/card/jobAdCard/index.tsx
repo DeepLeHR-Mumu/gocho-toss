@@ -35,14 +35,14 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
     );
   }
 
-  const { month: startMonth, date: startDate } = dateConverter(jobAdData.jdStartTime);
-  const { month: endMonth, date: endDate } = dateConverter(jobAdData.jdEndTime);
+  const { date: jobStartDate } = dateConverter(jobAdData.startTime);
+  const { date: jobEndDate, year: jobEndYear } = dateConverter(jobAdData.endTime);
 
   return (
     <>
       <a
         css={cardWrapper(isMobile)}
-        href={`${JOBS_DETAIL_URL}/${jobAdData.jdId}`}
+        href={`${JOBS_DETAIL_URL}/${jobAdData.jd.id}`}
         target="_blank"
         rel="noreferrer noopener"
       >
@@ -50,23 +50,23 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
           type="button"
           css={buttonBox}
           onClick={() => {
-            if (jobAdData.jdId) jdAdClickEvent(jobAdData.id, jobAdData.jdId);
+            if (jobAdData.jd.id) jdAdClickEvent(jobAdData.id, jobAdData.jd.id);
           }}
         >
           <div css={mainContainer}>
             <div css={companyLogoWrapper}>
               <div css={companyLogoBox}>
-                <Image fill src={jobAdData?.companyLogo || defaultCompanyLogo} alt="" sizes="1" />
+                <Image fill src={jobAdData.company.logoUrl || defaultCompanyLogo} alt="" sizes="1" />
               </div>
             </div>
             <div css={infoContainer}>
-              <p css={companyName}>{jobAdData.companyName}</p>
+              <p css={companyName}>{jobAdData.company.name}</p>
               <p css={date}>
-                {`${startMonth}/${startDate}`}~{`${endMonth}/${endDate}`}
+                {jobEndYear === "9999" ? jobStartDate : `${jobStartDate}`}~{`${jobEndDate}`}
               </p>
             </div>
           </div>
-          <strong css={titleCSS}>{jobAdData.title}</strong>
+          <strong css={titleCSS}>{jobAdData.jd.title}</strong>
         </button>
       </a>
       <div css={colorLine(jobAdData?.color || "#2284a5", isMobile)} />

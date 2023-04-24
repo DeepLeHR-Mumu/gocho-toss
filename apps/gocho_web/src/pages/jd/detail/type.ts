@@ -5,7 +5,7 @@ export interface PageHeadProps {
     companyName: string;
     rotation: string;
     taskDetail: string;
-    pay: number | null;
+    pay: string | null;
     possibleEdu: string;
     place: string | null;
   };

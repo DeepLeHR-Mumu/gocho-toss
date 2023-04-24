@@ -11,7 +11,7 @@ export interface RequestObjDef {
     industry: string;
     size: string;
     employee_number: number;
-    found_date: number | string;
+    found_date: string;
     address: string;
     intro: string;
     pay_avg: number | null;
@@ -58,7 +58,7 @@ export interface axiosRequestObjDef {
     industry: string;
     size: string;
     employee_number: number;
-    found_date: number | string;
+    found_date: string;
     address: string;
     intro: string;
     pay_avg: number | null;

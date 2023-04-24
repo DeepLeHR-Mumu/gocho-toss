@@ -35,6 +35,10 @@ export const companyLogo = css`
   height: 5rem;
   margin-right: 1.25rem;
   position: relative;
+
+  > img {
+    object-fit: contain;
+  }
 `;
 
 export const buttonContainer = css`

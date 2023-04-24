@@ -8,8 +8,8 @@ import { bannerBox, bannerImgBox } from "./style";
 import { BannerBoxProps } from "./type";
 
 export const BannerBox: FunctionComponent<BannerBoxProps> = ({ banner }) => {
-  const { year: startYear, month: startMonth, date: startDate } = dateConverter(banner.startTime);
-  const { year: endYear, month: endMonth, date: endDate } = dateConverter(banner.endTime);
+  const { date: startDate } = dateConverter(String(banner.startTime));
+  const { date: endDate } = dateConverter(String(banner.endTime));
 
   return (
     <li css={bannerBox}>
@@ -18,7 +18,7 @@ export const BannerBox: FunctionComponent<BannerBoxProps> = ({ banner }) => {
         <Image src={banner.imageUrl || defaultCompanyLogo} alt="" fill />
       </div>
       <div>
-        {startYear}-{startMonth}-{startDate} ~ {endYear}-{endMonth}-{endDate}
+        {startDate} ~ {endDate}
       </div>
     </li>
   );

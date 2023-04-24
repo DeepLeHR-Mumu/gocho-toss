@@ -4,7 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-import { useDoSignUp, useUserInfo } from "shared-api/auth";
+import { useDoSignUp, useUserProfile } from "shared-api/auth";
 import {
   EMAIL_REGEXP,
   PWD_REGEXP,
@@ -37,7 +37,7 @@ export const SignUpModal: FunctionComponent = () => {
   const [errorMsg, setErrorMsg] = useState<null | string>(null);
   const queryClient = useQueryClient();
   const { setToastMessage } = useToast();
-  const { refetch } = useUserInfo();
+  const { refetch } = useUserProfile();
   const router = useRouter();
   const signupAttempt = useRef(0);
 

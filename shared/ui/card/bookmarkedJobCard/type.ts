@@ -1,15 +1,17 @@
 export interface BookmarkedJobCardProps {
   jobData: {
     id: number;
-    endTime: number;
+    company: {
+      id: number;
+      name: string;
+      logoUrl: string;
+    };
     title: string;
     cut: boolean;
-    companyLogo: string;
-    companyName: string;
+    endTime: string;
   };
   isMobile: boolean;
   isBookmarked: boolean;
-  userId: number | undefined;
   isSkeleton?: never;
 }
 
@@ -17,6 +19,5 @@ export interface BookmarkedJobCardSkeleton {
   jobData?: never;
   isMobile?: never;
   isBookmarked?: never;
-  userId?: never;
   isSkeleton: boolean;
 }

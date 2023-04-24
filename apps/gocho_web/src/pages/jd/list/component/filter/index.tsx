@@ -3,7 +3,7 @@ import { FiRefreshCw, FiChevronDown, FiPlus, FiX, FiFilter } from "react-icons/f
 import { BsFolderSymlink } from "react-icons/bs";
 
 import { useUserFilter, useDoUserFilter } from "shared-api/filter";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { myFilterLoadEvent, myFilterSaveEvent } from "shared-ga/jd";
 
@@ -45,7 +45,7 @@ export const Filter: FunctionComponent<FilterProps> = ({ register, watch, setVal
     setActiveMenu(menu);
   };
 
-  const { data: userInfoData, isSuccess } = useUserInfo();
+  const { data: userInfoData, isSuccess } = useUserProfile();
   const {
     data: userFilter,
     isSuccess: userFilterSuccess,

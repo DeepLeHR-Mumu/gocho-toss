@@ -1,8 +1,8 @@
 export interface ReceptInfoPartProps {
   jobDetailData: {
     processArr: string[];
-    startTime: number;
-    endTime: number;
+    startTime: string;
+    endTime: string;
     cut: boolean;
     applyUrl: string;
     applyRouteArr: string[];

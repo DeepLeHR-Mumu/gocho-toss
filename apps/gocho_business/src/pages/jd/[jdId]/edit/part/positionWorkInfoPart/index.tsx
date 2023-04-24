@@ -40,7 +40,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
   const openPostCodePopup = useDaumPostcodePopup();
 
   // TODO: factories/find로 변경하기, params 추가
-  const { data: factoryDataArr } = useFactoryArr();
+  const { data: factoryDataObj } = useFactoryArr();
 
   const payArr = useFieldArray({
     control,
@@ -231,7 +231,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                   <button
                     css={cssObj.input(20)}
                     type="button"
-                    disabled={factoryDataArr?.length === 0}
+                    disabled={factoryDataObj?.pageResult.totalElements === 0}
                     onClick={() => {
                       if (
                         isFactoryListOpen &&
@@ -250,11 +250,13 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                       setIsFactoryListOpen(false);
                     }}
                   >
-                    {factoryDataArr?.length === 0 ? "등록된 공장이 없습니다" : "해당하는 공장을 모두 선택해주세요"}
+                    {factoryDataObj?.pageResult.totalElements === 0
+                      ? "등록된 공장이 없습니다"
+                      : "해당하는 공장을 모두 선택해주세요"}
                     {isFactoryListOpen ? <FiChevronUp /> : <FiChevronDown />}
                   </button>
                   <div css={cssObj.optionList(isFactoryListOpen)}>
-                    {factoryDataArr?.map((factory) => (
+                    {factoryDataObj?.factoryDataArr?.map((factory) => (
                       <button
                         type="button"
                         css={cssObj.option}
@@ -294,7 +296,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
                 {watch("position_arr")[positionIndex].place.factory_arr?.map((factory) => (
                   <div key={`${factory}${id}`} css={cssObj.factoryBox}>
                     <TbBuildingFactory2 />
-                    {factoryDataArr?.find((factoryObj) => factoryObj.id === factory)?.name}
+                    {factoryDataObj?.factoryDataArr?.find((factoryObj) => factoryObj.id === factory)?.name}
                     <button
                       type="button"
                       css={cssObj.smallDeleteButton}

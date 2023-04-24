@@ -1,18 +1,37 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useRef } from "react";
 
-import { useUserInfo } from "shared-api/auth";
-import { useUserCompanyBookmarkArr } from "shared-api/bookmark";
+import { useUserProfile } from "shared-api/auth";
+import { useInfiniteUserCompanyBookmarkArr } from "shared-api/company";
 import { dummyArrCreator } from "shared-util";
 import { CompanyCard } from "shared-ui/card/companyCard";
 
 import { listContainer } from "./style";
-import { CompanyCardListProps } from "./type";
 
-export const CompanyCardList: FunctionComponent<CompanyCardListProps> = ({ companyDataArr }) => {
-  const { data: userData } = useUserInfo();
-  const { data: userCompanyBookmarkArr, refetch } = useUserCompanyBookmarkArr({ userId: userData?.id });
+export const CompanyCardList: FunctionComponent = () => {
+  const observeRef = useRef<HTMLDivElement | null>(null);
 
-  if (!companyDataArr) {
+  const { data: userInfoData } = useUserProfile();
+  const {
+    data: userBookmarkCompanyData,
+    refetch,
+    fetchNextPage,
+  } = useInfiniteUserCompanyBookmarkArr({
+    userId: userInfoData?.id,
+  });
+
+  useEffect(() => {
+    if (observeRef.current) {
+      const observer = new IntersectionObserver(
+        (entry) => {
+          if (entry[0].isIntersecting) fetchNextPage();
+        },
+        { threshold: 0.2 }
+      );
+      observer.observe(observeRef.current);
+    }
+  }, [fetchNextPage, userBookmarkCompanyData]);
+
+  if (!userBookmarkCompanyData) {
     return (
       <div css={listContainer}>
         {dummyArrCreator(6).map((dummy) => {
@@ -24,22 +43,22 @@ export const CompanyCardList: FunctionComponent<CompanyCardListProps> = ({ compa
 
   return (
     <section css={listContainer}>
-      {companyDataArr.map((companyData) => {
-        const isBookmarked = Boolean(
-          userCompanyBookmarkArr?.some((company) => {
-            return company.id === companyData.id;
-          })
-        );
-        return (
-          <CompanyCard
-            companyData={companyData}
-            isBookmarked={isBookmarked}
-            userId={userData?.id}
-            refetchUserBookmark={refetch}
-            key={`UnifiedSearchCompanyCard${companyData.id}`}
-          />
-        );
+      {userBookmarkCompanyData?.pages.map((page) => {
+        return page.userCompanyBookmarkArr.map((data) => {
+          return (
+            <CompanyCard
+              companyData={{
+                ...data,
+                isBookmark: true,
+              }}
+              refetchUserCompanyBookmark={refetch}
+              key={`UnifiedSearchCompanyCard${data.id}`}
+            />
+          );
+        });
       })}
+
+      <div ref={observeRef} />
     </section>
   );
 };

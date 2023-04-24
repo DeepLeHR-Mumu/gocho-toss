@@ -53,7 +53,7 @@ export const closeButtonBox = css`
   top: -0.5rem;
 `;
 
-export const errorMsgContiner = css`
+export const errorMsgContainer = css`
   height: 2rem;
 `;
 

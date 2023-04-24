@@ -4,14 +4,13 @@ import { MdBookmarkBorder } from "react-icons/md";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
-import { useCountInfo } from "@/apis";
-import { useUserState } from "@/globalStates";
+import { useCountInfo, useManagerProfile } from "@/apis";
 
 import { cssObj } from "./style";
 
 export const CompanyInfoPart = () => {
-  const { userInfoData } = useUserState();
-  const { data: countInfoData } = useCountInfo({ companyId: userInfoData?.companyId });
+  const { data: userInfoData } = useManagerProfile();
+  const { data: countInfoData } = useCountInfo({ companyId: userInfoData?.company.id });
 
   if (!userInfoData || !countInfoData) {
     return (
@@ -26,11 +25,11 @@ export const CompanyInfoPart = () => {
   return (
     <section css={cssObj.wrapper}>
       <div css={cssObj.logo}>
-        <Image src={userInfoData.companyLogo} alt={userInfoData.companyName} fill sizes="1" />
+        <Image src={userInfoData.company.logoUrl} alt={userInfoData.company.name} fill sizes="1" />
       </div>
       <div css={cssObj.companyInfoBox}>
-        <strong css={cssObj.companyNameCSS}>{userInfoData.companyName}</strong>
-        <p css={cssObj.companyGenreCSS}>{userInfoData.companyIndustry}</p>
+        <strong css={cssObj.companyNameCSS}>{userInfoData.company.name}</strong>
+        <p css={cssObj.companyGenreCSS}>{userInfoData.company.industry}</p>
       </div>
       <div css={cssObj.countingInfoBox}>
         <div css={cssObj.countBox}>

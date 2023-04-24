@@ -6,12 +6,11 @@ import { useQueryClient } from "@tanstack/react-query";
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 import { NormalButton } from "shared-ui/common/atom/button";
-import { managerTokenDecryptor } from "shared-util";
 import { useFocusTrap } from "shared-hooks";
 
 import { FiCheckCircle, FiX } from "react-icons/fi";
 import { useDoLogin } from "@/apis";
-import { useModal, useToast, useUserState } from "@/globalStates";
+import { useModal, useToast } from "@/globalStates";
 import { loginSuccessEvent } from "@/ga";
 
 import { ModalComponent } from "../modalBackground";
@@ -29,7 +28,6 @@ export const LoginBox: FunctionComponent = () => {
   useFocusTrap(modalRef);
   const queryClient = useQueryClient();
 
-  const { setUserInfoData } = useUserState();
   const { setToast } = useToast();
   const { closeModal } = useModal();
   const { mutate: postLogin } = useDoLogin();
@@ -57,19 +55,6 @@ export const LoginBox: FunctionComponent = () => {
         loginSuccessEvent(watch("auto_login"));
         localStorage.setItem("accessToken", response.data.access_token);
         localStorage.setItem("refreshToken", response.data.refresh_token);
-        const { id, company_id, company_name, company_logo, company_industry, exp, email, name, department } =
-          managerTokenDecryptor(response.data.access_token);
-        setUserInfoData({
-          id,
-          companyId: company_id,
-          companyName: company_name,
-          companyLogo: company_logo,
-          email,
-          name,
-          department,
-          companyIndustry: company_industry,
-          exp,
-        });
         queryClient.invalidateQueries();
         setToast("재접속되었습니다");
       },

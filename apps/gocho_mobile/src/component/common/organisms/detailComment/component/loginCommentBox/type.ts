@@ -1,5 +1,4 @@
 export interface LoginCommentBoxProps {
-  jdId: number | null;
   userData: {
     id: number;
     badge: "default" | "early_bird" | "admin";
@@ -8,23 +7,21 @@ export interface LoginCommentBoxProps {
   companyId: number;
   commentArr: {
     id: number;
-    title: string | null;
-    companyId: number;
-    jdId: number;
+    uploader: {
+      id: number;
+      nickname: string;
+      image: string;
+    };
     description: string;
-    userId: number | null;
-    createdTime: number;
-    liked: boolean;
-    disLiked: boolean;
-    disLikeCount: number;
-    nickname: string;
-    badge: "default" | "early_bird" | "admin";
+    createdTime: string;
     likeCount: number;
+    isLiked: boolean;
+    dislikeCount: number;
+    isDisliked: boolean;
   }[];
 }
 
 export interface CommentFormValues {
   description: string;
   companyId: number;
-  jdId: number | null;
 }

@@ -1,9 +1,11 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
+import { PageResultDef } from "shared-type/api/paginationType";
+
 export interface RequestObjDef {
   order: "recent" | "popular" | "rand" | "view" | "end" | "com" | undefined;
-  limit?: number;
-  offset?: number;
+  size?: number;
+  page?: number;
   q?: string;
   userId?: string;
   filter?: "todayUpload" | "almostDeadline" | "deadline" | "expired" | "valid";
@@ -23,8 +25,8 @@ export interface ResponseObjDef {
     title: string;
     cut: boolean;
     view: number;
-    start_time: number;
-    end_time: number;
+    start_time: string;
+    end_time: string;
     apply_url: string;
     task_arr: string[];
     edu_summary: string[];
@@ -33,7 +35,7 @@ export interface ResponseObjDef {
     contract_type: string[];
     required_exp_arr: string[];
   }[];
-  count: number;
+  page_result: PageResultDef;
 }
 
 export const jdArrKeyObj = {

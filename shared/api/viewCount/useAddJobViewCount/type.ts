@@ -1,3 +1,3 @@
 export interface RequestObjDef {
-  elemId: number;
+  jobId: number;
 }

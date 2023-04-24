@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { myPageFunnelEvent } from "shared-ga/myPage";
 
@@ -20,7 +20,7 @@ import { activeButtonDef } from "./type";
 const MyPage: NextPage = () => {
   const [activeButton, setActiveButton] = useState<activeButtonDef>("채용공고");
   const { setModal, modal, closeModal } = useModal();
-  const { error } = useUserInfo();
+  const { error } = useUserProfile();
 
   useEffect(() => {
     if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
@@ -67,7 +67,6 @@ const MyPage: NextPage = () => {
             })}
           </div>
         </div>
-
         {activeButton === "채용공고" ? <BookmarkJobPart /> : <BookmarkCompanyPart />}
       </Layout>
     </main>

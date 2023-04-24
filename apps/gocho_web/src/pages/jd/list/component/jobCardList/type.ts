@@ -2,21 +2,30 @@ export interface JobCardListProps {
   jobDataArr:
     | {
         id: number;
-        companyName: string;
-        companyLogo: string | null;
-        companyId: number;
-        startTime: number;
-        endTime: number;
+        company: {
+          id: number;
+          name: string;
+          logoUrl: string;
+        };
         title: string;
-        high: boolean;
+        cut: boolean;
+        startTime: string;
+        endTime: string;
+        createdTime: string;
+        updatedTime: string | null;
+        applyUrl: string;
+        bookmark: number;
+        isBookmark: boolean;
+        view: number;
+        click: number;
         positionCount: number;
+        high: boolean;
         college: boolean;
+        requiredExpArr: string[];
         placeArr: string[];
         rotationArr: string[];
+        contractType: string[];
         taskArr: string[];
-        bookmark: number;
-        view: number;
-        cut: boolean;
       }[]
     | undefined;
   isLoading: boolean;

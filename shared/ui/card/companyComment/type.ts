@@ -1,9 +1,9 @@
 export interface CommentCardProps {
   companyData: {
     id: number;
-    logoUrl: string | null;
-    name: string;
     commentCount: number;
+    logoUrl: string;
+    name: string;
   };
   setCurrentModal: {
     (modalName: "loginModal", modalContentObj: { button: "home" | "close" }): void;

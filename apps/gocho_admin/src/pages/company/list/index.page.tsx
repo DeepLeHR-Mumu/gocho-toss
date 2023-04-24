@@ -20,8 +20,8 @@ const CompanyList: NextPageWithLayout = () => {
     isError,
   } = useCompanyArr({
     order: "recent",
-    limit: COMPANY_SEARCH_LIMIT,
-    offset: (Number(router.query.page) - 1) * COMPANY_SEARCH_LIMIT,
+    size: COMPANY_SEARCH_LIMIT,
+    page: Number(router.query.page),
   });
 
   if (!companyDataObj || isLoading) {
@@ -31,8 +31,6 @@ const CompanyList: NextPageWithLayout = () => {
   if (isError) {
     return <ErrorScreen />;
   }
-
-  const totalPage = Math.ceil(companyDataObj.count / COMPANY_SEARCH_LIMIT);
 
   return (
     <main css={mainContainer}>
@@ -46,7 +44,7 @@ const CompanyList: NextPageWithLayout = () => {
           </tbody>
         </table>
       </section>
-      <Pagination totalPage={totalPage} url={INTERNAL_URL.COMPANY_LIST_URL} />
+      <Pagination totalPage={companyDataObj.pageResult.totalPages} url={INTERNAL_URL.COMPANY_LIST_URL} />
     </main>
   );
 };

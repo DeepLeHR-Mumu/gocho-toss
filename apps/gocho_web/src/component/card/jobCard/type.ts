@@ -1,35 +1,40 @@
 export interface JobCardProps {
   jobData: {
     id: number;
-    companyId: number;
-    companyName: string;
-    companyLogo: string | null;
-    startTime: number;
-    endTime: number;
+    company: {
+      id: number;
+      name: string;
+      logoUrl: string;
+    };
     title: string;
+    cut: boolean;
+    startTime: string;
+    endTime: string;
+    createdTime: string;
+    updatedTime: string | null;
+    applyUrl: string;
+    bookmark: number;
+    isBookmark: boolean;
+    view: number;
+    click: number;
+    positionCount: number;
     high: boolean;
     college: boolean;
+    requiredExpArr: string[];
     placeArr: string[];
-    positionCount: number;
     rotationArr: string[];
+    contractType: string[];
     taskArr: string[];
-    bookmark: number;
-    view: number;
-    cut: boolean;
   };
-  isBookmarked: boolean;
-  userId: number | undefined;
   isSkeleton?: never;
 }
 
 export interface JobCardSkeleton {
   jobData?: never;
-  isBookmarked?: never;
-  userId?: never;
   refetchUserBookmark?: never;
   isSkeleton: boolean;
 }
 
 export interface DDayBooleanReturnDef {
-  (endTime: number): boolean;
+  (endTime: string): boolean;
 }

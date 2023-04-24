@@ -29,9 +29,16 @@ export const title = css`
   text-align: center;
 `;
 
-export const imgContainer = css`
+export const formCSS = css`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  height: 90%;
+`;
+
+export const imgContainer = css`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   flex-wrap: wrap;
-  align-items: center;
+  gap: 1rem;
 `;

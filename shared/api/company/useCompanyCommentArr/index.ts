@@ -9,16 +9,8 @@ import { axiosInstance } from "../../axiosInstance";
 import { GetCompanyCommentDef } from "./type";
 import { selector } from "./util";
 
-export const getCompanyComment: GetCompanyCommentDef = async ({
-  queryKey: [
-    {
-      requestObj: { companyId },
-    },
-  ],
-}) => {
-  const token = localStorage.getItem("accessToken");
-  const headers = token ? { "x-access-token": token } : undefined;
-  const { data } = await axiosInstance.get(`/companies/${companyId}/comments`, { headers });
+export const getCompanyComment: GetCompanyCommentDef = async ({ queryKey: [{ requestObj }] }) => {
+  const { data } = await axiosInstance.get(`/companies/${requestObj.companyId}/comments`);
   return data;
 };
 

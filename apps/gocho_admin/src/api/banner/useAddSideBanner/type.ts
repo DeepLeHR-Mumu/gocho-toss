@@ -4,8 +4,8 @@ import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
   url: string;
-  start_time: number;
-  end_time: number;
+  start_time: string;
+  end_time: string;
 }
 
 export interface PostSideBannerDef {

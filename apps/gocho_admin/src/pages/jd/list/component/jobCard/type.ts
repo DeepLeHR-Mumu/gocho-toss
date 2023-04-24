@@ -4,8 +4,8 @@ export interface JobCardProps {
     applyUrl: string;
     companyName: string;
     title: string;
-    startTime: number;
-    endTime: number;
+    startTime: string;
+    endTime: string;
     taskArr: string[];
   };
 }

@@ -18,7 +18,6 @@ export const imageWrapper: ImageWrapperDef = (isImageWrapper) => {
     border-radius: 50%;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     position: relative;
-    margin-bottom: 1rem;
     border: 2px solid ${isImageWrapper ? COLORS.BLUE_FIRST40 : "transparent"};
   `;
 };

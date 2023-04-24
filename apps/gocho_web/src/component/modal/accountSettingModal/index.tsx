@@ -2,7 +2,7 @@ import { FunctionComponent, useState } from "react";
 import { useRouter } from "next/router";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useUserInfo, useDeleteUserInfo } from "shared-api/auth";
+import { useUserProfile, useDeleteUserInfo } from "shared-api/auth";
 import { ProfileImg } from "shared-ui/common/atom/profileImg";
 import { userInfoKeyObj } from "shared-constant/queryKeyFactory/user/infoKeyObj";
 import { MAIN_URL } from "shared-constant";
@@ -23,7 +23,7 @@ export const AccountSettingBox: FunctionComponent = () => {
   const { setModal } = useModal();
   const { setToastMessage } = useToast();
 
-  const { data: userInfoData } = useUserInfo();
+  const { data: userInfoData } = useUserProfile();
   const { mutate: deleteUserDataInfo } = useDeleteUserInfo(() => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
