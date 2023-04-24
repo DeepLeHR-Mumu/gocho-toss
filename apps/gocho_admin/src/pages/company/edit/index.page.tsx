@@ -72,7 +72,7 @@ const CompanyEdit: NextPageWithLayout = () => {
   useEffect(() => {
     const businessNumber = companyData?.businessNumber;
 
-    const newFoundDate = dayjs(companyData?.foundDate, "YYYY-MM-DDTHH:MM:SS").toDate();
+    const newFoundDate = dayjs(companyData?.foundDate, "YYYY-MM-DD").add(1, "d").toDate();
 
     const FactoryNewArr = companyData?.factoryArr?.map((factory) => ({
       id: factory.id,
