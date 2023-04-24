@@ -44,7 +44,7 @@ export const PositionCard: FunctionComponent<PositionCardProps> = ({
             position.place.factoryArr?.map((factory) => {
               return (
                 <span css={restCSS} key={`지역_${factory}`}>
-                  {factory.factoryName}
+                  {factory.name}
                 </span>
               );
             })}

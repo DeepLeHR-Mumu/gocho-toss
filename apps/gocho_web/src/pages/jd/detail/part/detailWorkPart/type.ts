@@ -1,7 +1,6 @@
 interface FactoryObjDef {
   id: number;
-  place1: string;
-  place2: string;
+  name: string;
   address: string;
   maleNumber: number;
   femaleNumber: number;
@@ -14,7 +13,6 @@ interface FactoryObjDef {
     exists: boolean;
     desc: string | null;
   };
-  factoryName: string;
 }
 
 export interface DetailWorkPartProps {
@@ -26,36 +24,31 @@ export interface DetailWorkPartProps {
     taskDetailArr: string[];
     rotationArr: string[];
     place: {
-      addressArr: string[] | null;
-      factoryArr:
-        | {
-            id: number;
-            companyId: number;
-            place1: string;
-            place2: string;
-            address: string;
-            maleNumber: number;
-            femaleNumber: number;
-            product: string;
-            bus: {
-              exists: boolean;
-              desc: string | null;
-            };
-            dormitory: {
-              exists: boolean;
-              desc: string | null;
-            };
-            factoryName: string;
-          }[]
-        | null;
+      addressArr: string[];
+      factoryArr: {
+        id: number;
+        name: string;
+        address: string;
+        maleNumber: number;
+        femaleNumber: number;
+        product: string;
+        bus: {
+          exists: boolean;
+          desc: string | null;
+        };
+        dormitory: {
+          exists: boolean;
+          desc: string | null;
+        };
+      }[];
       etc: string | null;
-      type: "일반" | "전국" | "해외" | "기타";
+      type: "일반" | "해외" | "기타";
     };
-    hireCount: number;
-    payArr: number[] | null;
+    hireNumber: string;
+    payArr: string[];
     task: {
       mainTask: string;
-      subTaskArr: string[] | null;
+      subTaskArr: string[];
     };
   };
 }

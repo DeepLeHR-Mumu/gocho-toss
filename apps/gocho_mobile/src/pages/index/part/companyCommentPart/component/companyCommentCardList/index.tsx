@@ -7,15 +7,16 @@ import { useCompanyArr } from "shared-api/company";
 import { CompanyCommentCard } from "shared-ui/card/companyComment";
 
 import { useModal } from "@/globalStates";
+
 import { setCarouselSetting } from "./util";
 import { listContainer, buttonCSSCreator } from "./style";
 
 export const CompanyCommentCardList: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
-  const { data: companyDataArr, isLoading } = useCompanyArr({ order: "view", limit: 6, offset: 0 });
   const { setModal } = useModal();
+  const { data: companyData } = useCompanyArr({ order: "view", size: 6 });
 
-  if (!companyDataArr || isLoading) {
+  if (!companyData) {
     return (
       <div css={listContainer}>
         <Slider {...setCarouselSetting()} ref={sliderRef}>
@@ -30,7 +31,7 @@ export const CompanyCommentCardList: FunctionComponent = () => {
   return (
     <div css={listContainer}>
       <Slider {...setCarouselSetting()} ref={sliderRef}>
-        {companyDataArr.companyDataArr.map((data) => {
+        {companyData.companyDataArr.map((data) => {
           return (
             <CompanyCommentCard
               companyData={data}

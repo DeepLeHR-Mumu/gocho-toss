@@ -15,7 +15,7 @@ import { cssObj } from "./style";
 export const ListPart: FunctionComponent = () => {
   const router = useRouter();
 
-  const { data: jdDataObj } = useJdArr(true, { order: "recent", limit: 0 });
+  const { data: jdDataObj } = useJdArr(true, { order: "recent", size: 10 });
 
   if (!jdDataObj) {
     return (
@@ -25,7 +25,7 @@ export const ListPart: FunctionComponent = () => {
     );
   }
 
-  if (jdDataObj.count === 0) {
+  if (jdDataObj.pageResult.totalElements === 0) {
     return (
       <section css={cssObj.noDataSectionContainer}>
         <p css={cssObj.noDataDesc}>등록된 공고가 없습니다.</p>

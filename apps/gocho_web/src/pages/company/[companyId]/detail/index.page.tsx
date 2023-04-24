@@ -5,7 +5,7 @@ import { QueryClient, dehydrate } from "@tanstack/react-query";
 
 import { useAddCompanyViewCount } from "shared-api/viewCount";
 import { useCompanyDetail, getCompanyDetail, useCompanyCommentArr } from "shared-api/company";
-import { useUserInfo } from "shared-api/auth/useUserInfo";
+import { useUserProfile } from "shared-api/auth";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
@@ -33,7 +33,7 @@ const DetailPage: NextPage = () => {
   const welfareInfoRef = useRef<null | HTMLDivElement>(null);
   const router = useRouter();
 
-  const { data: userInfo } = useUserInfo();
+  const { data: userInfo } = useUserProfile();
   const { data: companyDetailData } = useCompanyDetail({
     companyId: Number(router.query.companyId),
   });
@@ -46,7 +46,7 @@ const DetailPage: NextPage = () => {
     id: Number(router.query.companyId),
     target: "company",
     viewMutation: () => {
-      addViewCount({ elemId: Number(router.query.companyId) });
+      addViewCount({ companyId: Number(router.query.companyId) });
     },
   });
 
@@ -97,20 +97,22 @@ const DetailPage: NextPage = () => {
               </div>
             </div>
 
-            <DetailComment
-              jdId={null}
-              userInfo={userInfo}
-              commentDataArr={
-                companyCommentArrData || {
-                  company: {
-                    id: companyDetailData.id,
-                    name: companyDetailData.name,
-                    logoUrl: companyDetailData.logoUrl,
-                  },
-                  commentArr: null,
-                }
-              }
-            />
+            {!userInfo && !companyCommentArrData && (
+              <DetailComment
+                company={{
+                  name: companyDetailData.name,
+                  logoUrl: companyDetailData.logoUrl,
+                  id: companyDetailData.id,
+                }}
+              />
+            )}
+            {userInfo && companyCommentArrData && (
+              <DetailComment
+                userInfo={userInfo}
+                commentDataArr={companyCommentArrData.commentArr}
+                company={companyCommentArrData.company}
+              />
+            )}
           </div>
           <p css={warningDesc}>유의사항 : 실제 정보와 상이할 수도 있으니 참고해주세요.</p>
         </section>

@@ -1,10 +1,11 @@
-import { jobArrKeyObj } from "shared-constant/queryKeyFactory/job/jobArrKeyObj";
 import { QueryFunctionContext } from "@tanstack/react-query";
-import { JobObjDef } from "../type/jobArr";
+
+import { jobArrKeyObj } from "shared-constant/queryKeyFactory/job/jobArrKeyObj";
+import { JobObjDef, PageResultDef } from "../type/jobArr";
 
 export interface ResponseObjDef {
   data: JobObjDef[];
-  count: number;
+  page_result: PageResultDef;
 }
 
 export interface GetJobArrDef {

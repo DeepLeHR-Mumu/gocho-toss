@@ -1,17 +1,16 @@
 interface CompanyCommentDef {
-  user_id: number | null;
-  nickname: string;
-  badge: "default" | "admin" | "early_bird";
   id: number;
-  company_id: number;
-  jd_id: number;
+  uploader: {
+    id: number;
+    nickname: string;
+    image: string;
+  };
   description: string;
-  created_time: number;
-  liked: boolean;
-  disliked: boolean;
-  title: string | null;
+  created_time: string;
   like_count: number;
+  is_liked: boolean;
   dislike_count: number;
+  is_disliked: boolean;
 }
 
 export interface CompanyCommentArrDef {
@@ -20,5 +19,5 @@ export interface CompanyCommentArrDef {
     id: number;
     logo_url: string;
   };
-  comment_arr: CompanyCommentDef[] | null;
+  comment_arr: CompanyCommentDef[];
 }

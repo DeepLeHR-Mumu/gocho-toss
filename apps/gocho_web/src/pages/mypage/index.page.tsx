@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import { useEffect } from "react";
 import axios from "axios";
 
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { myPageFunnelEvent } from "shared-ga/myPage";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 
@@ -18,7 +18,7 @@ import { mainContainer, title, colorPoint, mypagePosition, mypageBody } from "./
 const MypageHome: NextPage = () => {
   const { setModal, modal, closeModal } = useModal();
 
-  const { error } = useUserInfo();
+  const { error } = useUserProfile();
 
   useEffect(() => {
     if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {

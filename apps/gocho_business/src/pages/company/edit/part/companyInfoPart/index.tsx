@@ -1,19 +1,19 @@
 import { FunctionComponent } from "react";
+import dayjs from "dayjs";
 import Image from "next/image";
 import { MdBookmarkBorder } from "react-icons/md";
 import { FiEye } from "react-icons/fi";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
-import { useCompanyDetail, useCountInfo } from "@/apis";
-import { useUserState } from "@/globalStates";
+import { useCompanyDetail, useCountInfo, useManagerProfile } from "@/apis";
 
 import { cssObj } from "./style";
 
 export const CompanyInfoPart: FunctionComponent = () => {
-  const { userInfoData } = useUserState();
-  const { data: companyData } = useCompanyDetail({ companyId: userInfoData?.companyId });
-  const { data: countInfoData } = useCountInfo({ companyId: userInfoData?.companyId });
+  const { data: userInfoData } = useManagerProfile();
+  const { data: companyData } = useCompanyDetail({ companyId: userInfoData?.company.id });
+  const { data: countInfoData } = useCountInfo({ companyId: userInfoData?.company.id });
 
   if (!userInfoData || !companyData || !countInfoData) {
     return (
@@ -24,7 +24,6 @@ export const CompanyInfoPart: FunctionComponent = () => {
   }
 
   const countFormat = new Intl.NumberFormat("ko", { notation: "compact", compactDisplay: "long" });
-  const foundDate = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
 
   return (
     <section css={cssObj.wrapper} data-testid="company/edit/CompanyInfoPart">
@@ -58,7 +57,7 @@ export const CompanyInfoPart: FunctionComponent = () => {
         </li>
         <li>
           <strong css={cssObj.subTitle}>설립일</strong>
-          <p css={cssObj.subDesc}>{foundDate.format(companyData.foundNumber)}</p>
+          <p css={cssObj.subDesc}>{dayjs(companyData.foundNumber).format("YYYYMMSS")}</p>
         </li>
         <li>
           <strong css={cssObj.subTitle}>사업자 번호</strong>

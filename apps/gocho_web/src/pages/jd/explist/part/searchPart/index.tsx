@@ -23,11 +23,11 @@ export const SearchPart: FunctionComponent = () => {
     },
   });
 
-  const { data: companyDataArr } = useCompanyArr({
+  const { data: companyData } = useCompanyArr({
     q: router.query.q as string,
     order: router.query.order as OrderDef,
-    limit: 10,
-    offset: (Number(router.query.page) - 1) * 10,
+    size: 10,
+    page: Number(router.query.page),
   });
 
   const { setToastMessage } = useToast();
@@ -55,8 +55,6 @@ export const SearchPart: FunctionComponent = () => {
       { scroll: false }
     );
   };
-
-  const totalPage = companyDataArr?.count ? Math.ceil(companyDataArr.count / 10) : 0;
 
   return (
     <div css={container}>
@@ -92,12 +90,14 @@ export const SearchPart: FunctionComponent = () => {
           );
         })}
       </div>
-      <Pagination
-        totalPage={totalPage}
-        linkObj={{
-          pathname: JOBS_EXPLIST_URL,
-        }}
-      />
+      {companyData && (
+        <Pagination
+          totalPage={companyData.pageResult.totalPages}
+          linkObj={{
+            pathname: JOBS_EXPLIST_URL,
+          }}
+        />
+      )}
     </div>
   );
 };

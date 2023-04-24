@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import { AiOutlineEye, AiOutlineLike } from "react-icons/ai";
 import Image from "next/image";
 
-import { dateConverter } from "shared-util";
+// import { dateConverter } from "shared-util";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { useModal } from "@/globalStates";
 import {
@@ -36,7 +36,7 @@ export const TipCard: FunctionComponent<TipCardProps | TipCardSkeleton> = ({ tip
     setModal("tipModal", tipData);
   };
 
-  const { year, month, date } = dateConverter(tipData.createdTime);
+  // const { year, month, date } = dateConverter(tipData.createdTime);
   return (
     <button type="button" onClick={openTipModal} aria-label={`${tipData.title} 자세히보기`}>
       <article css={cardContainer}>
@@ -61,7 +61,7 @@ export const TipCard: FunctionComponent<TipCardProps | TipCardSkeleton> = ({ tip
           <div css={infoContainer}>
             <ul css={infoBox}>
               <li css={info}>{tipData.uploaderName}</li>
-              <li css={info}>{`${year}.${month}.${date}`}</li>
+              {/* <li css={info}>{`${year}.${month}.${date}`}</li> */}
 
               <li css={numInfo}>
                 <AiOutlineLike />

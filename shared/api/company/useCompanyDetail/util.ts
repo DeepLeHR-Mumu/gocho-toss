@@ -17,6 +17,7 @@ export const selector = (data: CompanyObjDef) => {
     payStart: data.pay_start,
     payDesc: data.pay_desc,
     bookmark: data.bookmark,
+    isBookmark: data.is_bookmark,
     view: data.view,
     welfare: {
       money: data.welfare.money,
@@ -34,11 +35,9 @@ export const selector = (data: CompanyObjDef) => {
     },
     factoryArr: data.factory_arr.map((factory) => {
       return {
-        factoryName: factory.name,
+        name: factory.name,
         id: factory.id,
         companyId: factory.company_id,
-        place1: factory.place_1,
-        place2: factory.place_2,
         address: factory.address,
         maleNumber: factory.male_number,
         femaleNumber: factory.female_number,

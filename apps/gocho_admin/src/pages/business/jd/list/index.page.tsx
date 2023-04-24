@@ -22,8 +22,8 @@ const BusinessJdList: NextPageWithLayout = () => {
   } = useJdArr({
     order: "recent",
     status: jdStatus,
-    limit: JD_SEARCH_LIMIT,
-    offset: (Number(router.query.page) - 1) * JD_SEARCH_LIMIT,
+    size: JD_SEARCH_LIMIT,
+    page: Number(router.query.page),
   });
 
   if (!jobDataObj || isLoading) {
@@ -37,8 +37,6 @@ const BusinessJdList: NextPageWithLayout = () => {
   const changeJdStatusHandler = () => {
     setJdStatus((prev) => (prev === "upload-waiting" ? "modify-waiting" : "upload-waiting"));
   };
-
-  const totalPage = Math.ceil(jobDataObj.count / JD_SEARCH_LIMIT);
 
   return (
     <main css={mainContainer}>
@@ -72,7 +70,7 @@ const BusinessJdList: NextPageWithLayout = () => {
           </tbody>
         </table>
       </section>
-      <Pagination totalPage={totalPage} url={INTERNAL_URL.BUSINESS_JD_LIST_URL} />
+      <Pagination totalPage={jobDataObj.pageResult.totalPages} url={INTERNAL_URL.BUSINESS_JD_LIST_URL} />
     </main>
   );
 };

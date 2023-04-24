@@ -52,7 +52,7 @@ export const UploadBannerPart: FunctionComponent = () => {
         { dto: bannerSubmitObj, image: bannerPicture },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(bannerArrKeyObj.bannerArr({ type: "M" }));
+            queryClient.invalidateQueries(bannerArrKeyObj.main);
           },
         }
       );

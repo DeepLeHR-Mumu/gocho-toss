@@ -45,8 +45,8 @@ export const 기본 = Template.bind({});
     companyName: "고초대졸닷컴",
     title:
       "테스트 공고에 대한 제목 테스트 공고에 대한 제목 테스트 공고에 대한 제목 테스트 공고에 대한 제목 테스트 공고에 대한 제목",
-    startTime: 1679711400000,
-    endTime: 1679797800000,
+    startTime: "1679711400000",
+    endTime: "1679797800000",
     taskArr: ["공무"],
   },
 };

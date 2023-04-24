@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+import dayjs from "dayjs";
 import { AxiosError } from "axios";
 
 import { AdminResponseDef } from "shared-type/api/responseType";
@@ -10,13 +11,9 @@ import { PostJdDef, RequestObjDef, useAddJdProps } from "./type";
 
 export const postAddJd: PostJdDef = async (requestObj) => {
   const formData = new FormData();
-  const json = JSON.stringify(requestObj.dto);
-  const blob = new Blob([json], { type: "application/json" });
-  formData.append("dto", blob);
+  formData.append("json", JSON.stringify(requestObj.dto));
 
-  const { data } = await axiosInstance.post("/jds", formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+  const { data } = await axiosInstance.post("/jds", formData);
   return data;
 };
 
@@ -26,8 +23,8 @@ export const useAddJd: useAddJdProps = () =>
       const newRequestObj = {
         dto: {
           ...requestObj.dto,
-          start_time: new Date(requestObj.dto.start_time).getTime(),
-          end_time: new Date(requestObj.dto.end_time).getTime(),
+          start_time: dayjs(new Date(requestObj.dto.start_time)).format("YYYY-MM-DDTHH:MM:ss"),
+          end_time: dayjs(new Date(requestObj.dto.end_time)).format("YYYY-MM-DDTHH:MM:ss"),
           process_arr: requestObj.dto.process_arr?.split("\n"),
           apply_route_arr: requestObj.dto.apply_route_arr.split("\n"),
           etc_arr: requestObj.dto.etc_arr ? requestObj.dto.etc_arr.split("\n") : null,

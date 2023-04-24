@@ -2,6 +2,7 @@ import { useEffect, useState, ReactElement } from "react";
 import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
+import dayjs from "dayjs";
 import { useEditCompany } from "@/api/company/useEditCompany";
 import { useCompanyDetail } from "@/api/company/useCompanyDetail";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
@@ -70,7 +71,9 @@ const CompanyEdit: NextPageWithLayout = () => {
 
   useEffect(() => {
     const businessNumber = companyData?.businessNumber;
-    const newFoundDate = companyData?.foundDate ? companyData.foundDate + 540000 * 60 : 0;
+
+    const newFoundDate = dayjs(companyData?.foundDate, "YYYY-MM-DDTHH:MM:SS").toDate();
+
     const FactoryNewArr = companyData?.factoryArr?.map((factory) => ({
       id: factory.id,
       factory_name: factory.factoryName,

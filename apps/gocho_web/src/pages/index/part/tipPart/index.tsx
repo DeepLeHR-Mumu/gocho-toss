@@ -14,7 +14,7 @@ export const TipPart: FunctionComponent = () => {
   const [currentTip, setCurrentTip] = useState<TipDef | null>(null);
 
   const { data: tipArr } = useTipArr({
-    limit: 3,
+    size: 3,
   });
 
   useEffect(() => {

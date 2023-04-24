@@ -1,13 +1,10 @@
 export interface FactoryObjDef {
   id: number;
-  company_id: number;
-  place_1: string;
-  place_2: string;
+  name: string;
   address: string;
   male_number: number;
   female_number: number;
   product: string;
-  name: string;
   bus: {
     exists: boolean;
     desc: string | null;
@@ -18,63 +15,66 @@ export interface FactoryObjDef {
   };
 }
 
-export interface PositionObjDef {
+export interface JobCompanyObjDef {
   id: number;
-  jd_id: number;
+  name: string;
+  logo_url: string;
+  youtube_url: string;
+  comment_count: number;
+}
+
+export interface PositionArrDef {
+  id: number;
+  possible_edu: {
+    summary: string;
+    college: boolean;
+    high: boolean;
+    middle: boolean;
+    four: boolean;
+  };
   required_exp: {
     type: "신입" | "경력" | "무관" | "신입/경력";
-    max_year: number;
-    min_year: number;
+    min_year: number | null;
+    max_year: number | null;
   };
-  required_etc_arr: string[] | null;
+  required_etc_arr: string[];
   contract_type: {
     type: "정규직" | "계약직" | "계약>정규" | "연수생" | "인턴";
     conversion_rate: number | null;
   };
-  task_detail_arr: string[];
-  rotation_arr: string[];
-  place: {
-    address_arr: string[] | null;
-    factory_arr: FactoryObjDef[] | null;
-    etc: string | null;
-    type: "일반" | "전국" | "해외" | "기타";
-  };
-  hire_number: number;
-  pay_arr: number[] | null;
-  preferred_certi_arr: string[] | null;
-  preferred_etc_arr: string[] | null;
-  created_time: number;
-  possible_edu: {
-    summary: string;
-    middle: boolean;
-    high: boolean;
-    college: boolean;
-    four: boolean;
-  };
   task: {
     main_task: string;
-    sub_task_arr: string[] | null;
+    sub_task_arr: string[];
   };
+  task_detail_arr: string[];
+  rotation_arr: string[];
+  rotation_etc: string | null;
+  place: {
+    type: "일반" | "해외" | "기타";
+    address_arr: string[];
+    factory_arr: FactoryObjDef[];
+    etc: string | null;
+  };
+  hire_number: string;
+  pay_arr: string[];
+  preferred_certi_arr: string[];
+  preferred_etc_arr: string[];
 }
 
 export interface JobDetailObjDef {
   id: number;
-  created_time: number;
-  start_time: number;
-  end_time: number;
+  company: JobCompanyObjDef;
+  title: string;
+  cut: boolean;
+  start_time: string;
+  end_time: string;
   process_arr: string[];
   apply_route_arr: string[];
   apply_url: string;
   etc_arr: string[];
-  title: string;
-  cut: boolean;
   bookmark: number;
+  is_bookmark: boolean;
   view: number;
-  position_arr: PositionObjDef[];
-  company: {
-    id: number;
-    name: string;
-    logo_url: string;
-    youtube_url: string | null;
-  };
+  click: number;
+  position_arr: PositionArrDef[];
 }

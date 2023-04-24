@@ -1,8 +1,8 @@
+import dayjs from "dayjs";
+
 import { DDayBooleanReturnDef } from "./type";
 
 export const dDayBooleanReturn: DDayBooleanReturnDef = (endTime) => {
-  if (endTime < new Date().getTime()) {
-    return true;
-  }
-  return false;
+  const currentTime = dayjs(new Date(), "YYYY-MM-DD HH:mm:ss");
+  return currentTime.isAfter(endTime);
 };

@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 
 interface setDdayValueCreatorDef {
-  (endTime: number): string;
+  (endTime: string): string;
 }
 
 export const dDayCalculator: setDdayValueCreatorDef = (endTime) => {

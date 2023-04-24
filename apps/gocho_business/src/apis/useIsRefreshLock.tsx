@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import { BUSINESS_BACKEND_URL } from "shared-constant";
 import { managerTokenDecryptor } from "shared-util";
 
-import { useModal, useUserState } from "@/globalStates";
+import { useModal } from "@/globalStates";
 import { INTERNAL_URL } from "@/constants";
 import { ErrorResponseDef } from "@/types";
 
@@ -27,7 +27,7 @@ export const useAxiosInterceptor = () => {
   let readyQueueArr: ((token: string) => void)[] = [];
 
   const { setCurrentModal } = useModal();
-  const { setUserInfoData } = useUserState();
+  // const { setUserInfoData } = useUserState();
   const saveQueue = (callback: (token: string) => void) => readyQueueArr.push(callback);
   const activeQueue = (token: string) => readyQueueArr.forEach((callback) => callback(token));
 
@@ -52,7 +52,7 @@ export const useAxiosInterceptor = () => {
         if (error_code === "EMPTY_JWT") {
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
-          setUserInfoData(null);
+          // setUserInfoData(null);
           router.push(INTERNAL_URL.LOGIN);
           throw new axios.Cancel("재요청 취소");
         }
@@ -87,7 +87,7 @@ export const useAxiosInterceptor = () => {
       window.alert("세션이 만료되었습니다. 재로그인 후 이용해주세요");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      setUserInfoData(null);
+      // setUserInfoData(null);
       router.push(INTERNAL_URL.LOGIN);
       throw new axios.Cancel("리프래시 토큰 만료로 인한 강제 로그인페이지 이동");
     }

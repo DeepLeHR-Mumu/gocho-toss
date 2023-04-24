@@ -21,6 +21,7 @@ const nextConfig = {
     "shared-style",
     "shared-image",
     "shared-ga",
+    "shared-hooks",
   ],
 };
 

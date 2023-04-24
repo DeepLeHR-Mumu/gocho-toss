@@ -2,7 +2,6 @@ import { FunctionComponent, useRef, useEffect } from "react";
 import Image from "next/image";
 
 import { useCompanyCommentArr } from "shared-api/company";
-import { useUserInfo } from "shared-api/auth";
 import { dummyArrCreator } from "shared-util";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
@@ -34,7 +33,6 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
   isMobile,
 }) => {
   const commentContainerRef = useRef<HTMLDivElement | null>(null);
-  const { isSuccess, data: userInfoData } = useUserInfo();
 
   const { data: companyCommentArrData } = useCompanyCommentArr({
     companyId: companyData?.id || 0,
@@ -53,7 +51,7 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
     );
   }
 
-  if (!companyCommentArrData || !isSuccess || companyCommentArrData.commentArr === null) {
+  if (!companyCommentArrData) {
     return (
       <div css={cardWrapper(isMobile)} className="active">
         <header css={header}>
@@ -112,13 +110,13 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
           )}
           <strong css={companyName}>{companyCommentArrData.company.name}</strong>
         </div>
-        <p css={commentCount}>총 댓글 {companyCommentArrData.commentArr.length.toLocaleString("ko-KR")}개</p>
+        <p css={commentCount}>총 댓글 {companyData.commentCount.toLocaleString("ko-KR")}개</p>
       </header>
 
       <section css={commentBodyContainer}>
         <div css={commentContainer} ref={commentContainerRef}>
-          {companyCommentArrData.commentArr.map((comment) => (
-            <Comment nickname={userInfoData.nickname} commentData={comment} key={comment.id} />
+          {companyCommentArrData.commentArr?.map((comment) => (
+            <Comment commentData={comment} key={comment.id} company={companyCommentArrData.company} />
           ))}
         </div>
       </section>

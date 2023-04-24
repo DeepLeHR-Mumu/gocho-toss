@@ -23,6 +23,7 @@ const JdExpListPage: NextPage = () => {
       router.replace({ pathname: JOBS_EXPLIST_URL, query: { page: 1, order: "view" } });
     }
   }, [router]);
+
   useEffect(() => {
     const location = (scrollRef.current?.getBoundingClientRect().top as number) + window.pageYOffset - 200;
     window.scrollTo(0, location);

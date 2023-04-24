@@ -36,7 +36,7 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
         <div>
           <div css={flexBetweenBox}>
             <p css={subTitle}>채용 인원</p>
-            <p css={desc}>{freshPosition.hireCount}명</p>
+            <p css={desc}>{freshPosition.hireNumber}명</p>
           </div>
 
           <div css={flexBetweenBox}>
@@ -104,7 +104,7 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
 
             {freshPosition.place.factoryArr?.map((factory) => {
               return (
-                <div css={flexDesc} key={`${factory.factoryName}_${factory.id}`}>
+                <div css={flexDesc} key={`${factory.name}_${factory.id}`}>
                   <button
                     css={factoryButton}
                     type="button"
@@ -115,7 +115,7 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
                     <div css={factoryIconCSS}>
                       <Image src={factoryIcon} alt="" fill />
                     </div>
-                    {factory.factoryName}
+                    {factory.name}
                   </button>
                   <p css={factoryAddressDesc}>{factory.address}</p>
                 </div>

@@ -6,7 +6,7 @@ import { BsChevronDown } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 
 import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { globalSearchEvent } from "shared-ga/search";
 import { MAIN_URL } from "shared-constant";
 
@@ -72,7 +72,7 @@ export const Header: FunctionComponent = () => {
     closeModal();
   }, [closeModal, pathname]);
 
-  const { isSuccess } = useUserInfo();
+  const { isSuccess } = useUserProfile();
   const menuMainUrl = pathname.split("/")[1];
 
   return (

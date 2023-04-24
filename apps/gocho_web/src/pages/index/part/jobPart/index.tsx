@@ -7,6 +7,7 @@ import { changeHomeJdListSortingEvent } from "shared-ga/home";
 
 import { Layout } from "@component/layout";
 
+import { JobCardList } from "./component/jobCardList";
 import { setJobOrderButtonArr } from "./constant";
 import {
   partContainer,
@@ -18,7 +19,6 @@ import {
   colorPoint,
 } from "./style";
 import { changeOrderDef, OrderDef } from "./type";
-import { JobCardList } from "./component/jobCardList";
 
 export const JobPart: FunctionComponent = () => {
   const [activeOrder, setActiveOrder] = useState<OrderDef>("recent");

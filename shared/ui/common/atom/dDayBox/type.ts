@@ -1,3 +1,3 @@
 export interface DdayBoxProps {
-  endTime: number;
+  endTime: string;
 }

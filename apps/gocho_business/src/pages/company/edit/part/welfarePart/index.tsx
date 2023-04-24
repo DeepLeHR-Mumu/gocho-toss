@@ -3,8 +3,7 @@ import { FiCornerDownLeft } from "react-icons/fi";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
-import { useCompanyDetail } from "@/apis";
-import { useUserState } from "@/globalStates";
+import { useCompanyDetail, useManagerProfile } from "@/apis";
 
 import { InformDesc, WelfareForm } from "../../component";
 import { welfareArrCreator } from "./util";
@@ -12,9 +11,9 @@ import { WelfarePartProps } from "./type";
 import { cssObj } from "./style";
 
 export const WelfarePart: FunctionComponent<WelfarePartProps> = ({ companyForm }) => {
-  const { userInfoData } = useUserState();
+  const { data: userInfoData } = useManagerProfile();
   const { data: companyDetailData } = useCompanyDetail({
-    companyId: userInfoData?.companyId,
+    companyId: userInfoData?.company.id,
   });
 
   if (!companyDetailData) {

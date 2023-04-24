@@ -10,8 +10,8 @@ export interface JobCardProps {
     companyId: number;
     title: string;
     view: number;
-    startTime: number;
-    endTime: number;
+    startTime: string;
+    endTime: string;
     taskArr: string[];
     eduArr: string[];
     placeArr: string[];

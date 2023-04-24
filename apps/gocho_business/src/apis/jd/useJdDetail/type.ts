@@ -16,8 +16,8 @@ export interface ResponseObjDef {
     view: number;
     bookmark: number;
     click: number;
-    start_time: number;
-    end_time: number;
+    start_time: string;
+    end_time: string;
     process_arr: string[];
     apply_route_arr: string[];
     apply_url: string;

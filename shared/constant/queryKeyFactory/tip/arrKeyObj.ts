@@ -1,7 +1,9 @@
 export interface TipArrRequestObjDef {
   order?: "recent" | "popular" | "rand" | "view";
-  limit?: number;
-  offset?: number;
+  page?: number;
+  size?: number;
+  // limit?: number;
+  // offset?: number;
   q?: string;
   company?: number;
 }

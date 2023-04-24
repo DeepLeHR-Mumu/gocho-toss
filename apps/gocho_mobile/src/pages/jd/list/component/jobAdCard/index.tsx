@@ -31,24 +31,24 @@ export const JobAdCard: FunctionComponent<SlideCardProps | SlideCardSkeleton> = 
   }
 
   return (
-    <Link href={`${JOBS_DETAIL_URL}/${jobData.jdId}`}>
+    <Link href={`${JOBS_DETAIL_URL}/${jobData.id}`}>
       <button
         type="button"
         css={buttonBox}
         onClick={() => {
-          if (jobData.jdId) jdAdClickEvent(jobData.id, jobData.jdId);
+          jdAdClickEvent(jobData.id, jobData.jd.id);
         }}
       >
         <div css={cardWrapper}>
-          <div css={slideInfo(jobData?.color || "#2284a5")}>
+          <div css={slideInfo(jobData.color || "#2284a5")}>
             <div css={companyLogoWrapper}>
               <div css={companyLogoBox}>
-                <Image fill src={jobData.companyLogo || defaultCompanyLogo} alt="" sizes="1" />
+                <Image fill src={jobData.company.logoUrl || defaultCompanyLogo} alt="" sizes="1" />
               </div>
             </div>
-            <p css={endTime}>{dDayCalculator(jobData.jdEndTime)}</p>
-            <p css={companyName}>{jobData.companyName}</p>
-            <strong css={jdTitle}>{jobData.title}</strong>
+            <p css={endTime}>{dDayCalculator(jobData.jd.endTime)}</p>
+            <p css={companyName}>{jobData.company.name}</p>
+            <strong css={jdTitle}>{jobData.jd.title}</strong>
           </div>
         </div>
       </button>

@@ -9,10 +9,7 @@ import { CommentLikeButton } from "shared-ui/common/atom/commentLikeButton";
 import { CommentDislikeButton } from "shared-ui/common/atom/commentDislikeButton";
 import { useWriteCompanyComment } from "shared-api/company/useWriteCompanyComment";
 import { companyCommentArrKeyObj } from "shared-constant/queryKeyFactory/company/commentArrKeyObj";
-import { useLikeComment } from "shared-api/company/useLikeComment";
-import { useDisLikeComment } from "shared-api/company/useDisLikeComment";
-import { useFakeComment } from "shared-api/company/useFakeComment";
-import { useDisFakeComment } from "shared-api/company/useDisFakeComment";
+import { useCompanyCommentToggle } from "shared-api/company";
 
 import { LoginCommentBoxProps, CommentFormValues } from "./type";
 import {
@@ -21,7 +18,6 @@ import {
   commentContainer,
   commentDesc,
   commentHeader,
-  commentTypeCSS,
   dateCSS,
   evalButtonBox,
   formCSS,
@@ -33,21 +29,17 @@ import {
   firstCommentAlert,
 } from "./style";
 
-export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ jdId, companyId, commentArr, userData }) => {
+export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ companyId, commentArr, userData }) => {
   const commentBoxRef = useRef<HTMLDivElement | null>(null);
   const [textValue, setTextValue] = useState("");
   const { nickname } = userData;
   const { register, handleSubmit } = useForm<CommentFormValues>({
     defaultValues: {
       companyId,
-      jdId,
     },
   });
 
-  const { mutate: postLikeComment } = useLikeComment();
-  const { mutate: postDisLikeComment } = useDisLikeComment();
-  const { mutate: postFakeComment } = useFakeComment();
-  const { mutate: postDisFakeComment } = useDisFakeComment();
+  const { mutate: companyCommentToggle } = useCompanyCommentToggle({ companyId });
 
   const { mutate: postWriteCompanyComment } = useWriteCompanyComment();
   const queryClient = useQueryClient();
@@ -59,50 +51,6 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ jdId,
         queryClient.invalidateQueries(companyCommentArrKeyObj.all);
       },
     });
-  };
-
-  const postLikeSubmit = (id: number, commentId: number) => {
-    postLikeComment(
-      { companyId: id, commentId },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries(companyCommentArrKeyObj.all);
-        },
-      }
-    );
-  };
-
-  const postFakeSubmit = (id: number, commentId: number) => {
-    postFakeComment(
-      { companyId: id, commentId },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries(companyCommentArrKeyObj.all);
-        },
-      }
-    );
-  };
-
-  const postDislikeSubmit = (id: number, commentId: number) => {
-    postDisLikeComment(
-      { companyId: id, commentId },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries(companyCommentArrKeyObj.all);
-        },
-      }
-    );
-  };
-
-  const postDisFakeSubmit = (id: number, commentId: number) => {
-    postDisFakeComment(
-      { companyId: id, commentId },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries(companyCommentArrKeyObj.all);
-        },
-      }
-    );
   };
 
   useEffect(() => {
@@ -122,44 +70,35 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ jdId,
             </li>
           )}
           {commentArr.map((comment) => {
-            const { month, date } = dateConverter(comment.createdTime);
-            const isMyComment = Boolean(nickname === comment.nickname);
+            const { date: commentCreateDate } = dateConverter(comment.createdTime);
+            const isMyComment = Boolean(nickname === comment.uploader.nickname);
 
             return (
               <li key={comment.id}>
                 <div css={commentHeader}>
-                  <p css={nicknameCSS}>
-                    {comment.nickname} <UserBadge badge={comment.badge} />
-                  </p>
-                  <p css={dateCSS}>
-                    {month}.{date}
-                  </p>
+                  <p css={nicknameCSS}>{comment.uploader.nickname}</p>
+                  <p css={dateCSS}>{commentCreateDate}</p>
                 </div>
                 <div css={commentBody}>
                   <div css={commentBox(isMyComment)}>
-                    {comment.title && <p css={commentTypeCSS}>{comment.title || "기업 정보"}</p>}
                     <p css={commentDesc}>{comment.description}</p>
                   </div>
                   <ul css={evalButtonBox}>
                     <li>
                       <CommentLikeButton
                         count={comment.likeCount}
-                        isLiked={comment.liked}
+                        isLiked={comment.isLiked}
                         setLikeSubmit={() => {
-                          return comment.liked
-                            ? postDislikeSubmit(comment.companyId, comment.id)
-                            : postLikeSubmit(comment.companyId, comment.id);
+                          return companyCommentToggle({ companyId, commentId: comment.id, type: "like" });
                         }}
                       />
                     </li>
                     <li>
                       <CommentDislikeButton
-                        isDisLiked={comment.disLiked}
-                        count={comment.disLikeCount}
+                        isDisLiked={comment.isDisliked}
+                        count={comment.dislikeCount}
                         setDislikeSubmit={() => {
-                          return comment.disLiked
-                            ? postDisFakeSubmit(comment.companyId, comment.id)
-                            : postFakeSubmit(comment.companyId, comment.id);
+                          return companyCommentToggle({ companyId, commentId: comment.id, type: "dislike" });
                         }}
                       />
                     </li>
@@ -191,7 +130,6 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ jdId,
                 onKeyDownEvent.preventDefault();
                 commentSubmit({
                   companyId,
-                  jdId,
                   description: textValue,
                 });
               }

@@ -1,14 +1,14 @@
 import { FunctionComponent, useEffect } from "react";
+import dayjs from "dayjs";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
-import { dateConverter, dummyArrCreator } from "shared-util";
+import { dummyArrCreator } from "shared-util";
 
 import { container, titleCSS, button } from "./style";
 import { HeaderProps, changeWeekDef } from "./type";
 
 export const Header: FunctionComponent<HeaderProps> = ({ setCurrentDate, currentDate, setTwoWeek }) => {
-  const { year, month } = dateConverter(currentDate.getTime());
-  const title = `${year}년 ${month}월`;
+  const titleDate = dayjs(currentDate).format("YYYY.MM");
 
   const changeWeek: changeWeekDef = (direction) => {
     if (direction === "prev") {
@@ -42,7 +42,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ setCurrentDate, current
       >
         <BsChevronLeft />
       </button>
-      <p css={titleCSS}>{title}</p>
+      <p css={titleCSS}>{titleDate}</p>
       <button
         type="button"
         css={button}

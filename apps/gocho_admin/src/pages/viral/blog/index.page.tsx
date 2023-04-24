@@ -17,7 +17,7 @@ const Blog: NextPageWithLayout = () => {
   } = useJdArr({
     order: "popular",
     filter: "todayUpload",
-    limit: 0,
+    size: 50,
   });
 
   const copyViral = async (jobList: JobDef[]) => {
@@ -28,8 +28,8 @@ const Blog: NextPageWithLayout = () => {
     text += `------ \n\n`;
 
     jobList.map((job) => {
-      const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
-      const deadline = endYear === 9999 ? "상시" : `~ ${endYear}-${endMonth}-${endDate} 까지`;
+      const { date: jobDate, year: jobYear } = dateConverter(job.endTime);
+      const deadline = jobYear === "9999" ? "상시" : `~ ${jobDate} 까지`;
 
       text += `🚀 ${job.companyName}\n${job.title}\n- 접수기간 : ${deadline}\n`;
       let taskString = "";
@@ -63,8 +63,8 @@ const Blog: NextPageWithLayout = () => {
   const copyBlogTodayJob = async (jobList: JobDef[]) => {
     let text = "";
     jobList.map((job) => {
-      const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
-      const deadline = endYear === 9999 ? "상시" : `~ ${endYear}-${endMonth}-${endDate} 까지`;
+      const { year: endYear, date: endDate } = dateConverter(job.endTime);
+      const deadline = endYear === "9999" ? "상시" : `~ ${endDate} 까지`;
 
       text += `🚀 ${job.companyName}\n${job.title}\n- 접수기간 : ${deadline}\n`;
       let taskString = "";

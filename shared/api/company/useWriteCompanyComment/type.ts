@@ -4,12 +4,11 @@ import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
   companyId: number;
-  jdId?: number | null;
   description: string;
 }
 
 export interface PostWriteCompanyCommentDef {
-  ({ companyId, jdId, description }: RequestObjDef): Promise<ResponseDef>;
+  ({ companyId, description }: RequestObjDef): Promise<ResponseDef>;
 }
 
 export interface useWriteCompanyCommentProps {

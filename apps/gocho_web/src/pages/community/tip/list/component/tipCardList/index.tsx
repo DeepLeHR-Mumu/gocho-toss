@@ -14,7 +14,7 @@ export const TipCardList: FunctionComponent<TipCardListProps> = ({ companyId, q 
     isError,
     fetchNextPage,
   } = useInfiniteTipArr({
-    limit: 4,
+    // limit: 4,
     company: companyId,
     q,
   });

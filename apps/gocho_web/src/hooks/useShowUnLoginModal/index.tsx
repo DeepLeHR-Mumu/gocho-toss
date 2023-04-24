@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import axios from "axios";
 
-import { useUserInfo } from "shared-api/auth";
+import { useUserProfile } from "shared-api/auth";
 import { useModal } from "@/globalStates";
 
 export const useShowUnLoginModal = () => {
   const { setModal, modal } = useModal();
-  const { error: userInfoError } = useUserInfo();
+  const { error: userInfoError } = useUserProfile();
 
   useEffect(() => {
     if (

@@ -7,9 +7,9 @@ import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 import { usePreventRouting } from "shared-hooks";
 
-import { useAddCompanyDetail, useCompanyDetail } from "@/apis";
+import { useAddCompanyDetail, useCompanyDetail, useManagerProfile } from "@/apis";
 import { CommonStatusChip, PageLayout, GlobalLayout, Footer } from "@/components";
-import { useUserState, useToast } from "@/globalStates";
+import { useToast } from "@/globalStates";
 import { companyEditConfirmEvent, companyEditDoneEvent, companyEditFailEvent, companyEditPageFunnelEvent } from "@/ga";
 import { NextPageWithLayout } from "@/types";
 
@@ -21,10 +21,10 @@ import { cssObj } from "./style";
 
 const CompanyEditPage: NextPageWithLayout = () => {
   const isRefetching = useRef(false);
-  const { userInfoData } = useUserState();
+  const { data: userInfoData } = useManagerProfile();
   const { setToast } = useToast();
   const { data: companyDetailData, refetch: companyDetailRefetch } = useCompanyDetail({
-    companyId: userInfoData?.companyId,
+    companyId: userInfoData?.company.id,
   });
 
   const { mutate: putCompanyDetail } = useAddCompanyDetail();
@@ -56,7 +56,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
       if (response.data?.uploader.isMine && window.confirm(COMPANY_MESSAGE_OBJ.EDIT)) {
         putCompanyDetail(
           {
-            companyId: userInfoData?.companyId as number,
+            companyId: userInfoData?.company.id as number,
             dto: {
               ...formData,
               manager_id: userInfoData?.id as number,

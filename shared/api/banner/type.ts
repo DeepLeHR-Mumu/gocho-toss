@@ -1,9 +1,9 @@
-export interface mainBannerDef {
+export interface MainBannerDef {
   id: number;
   image_url: string;
   color: string;
-  start_time: number;
-  end_time: number;
+  start_time: string;
+  end_time: string;
   company: {
     id: number;
     logo_url: string;
@@ -12,16 +12,16 @@ export interface mainBannerDef {
   jd: {
     id: number;
     title: string;
-    start_time: number;
-    end_time: number;
+    start_time: string;
+    end_time: string;
   };
 }
 
-export interface topBannerDef {
+export interface TopBannerDef {
   id: number;
   color: string;
-  start_time: number;
-  end_time: number;
+  start_time: string;
+  end_time: string;
   company: {
     id: number;
     logo_url: string;
@@ -30,14 +30,14 @@ export interface topBannerDef {
   jd: {
     id: number;
     title: string;
-    start_time: number;
-    end_time: number;
+    start_time: string;
+    end_time: string;
   };
 }
 
-export interface sideBannerDef {
+export interface SideBannerDef {
   id: number;
+  start_time: number;
+  end_time: number;
   image_url: string;
 }
-
-export interface BannerObjDef extends mainBannerDef, topBannerDef, sideBannerDef {}

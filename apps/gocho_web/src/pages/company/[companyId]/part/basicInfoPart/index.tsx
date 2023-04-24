@@ -31,7 +31,7 @@ export const BasicInfoPart: FunctionComponent = () => {
     return <section css={wrapper} />;
   }
 
-  const { year, month, date } = dateConverter(companyDetailData.foundDate);
+  const { date: foundDate } = dateConverter(String(companyDetailData.foundDate));
   return (
     <section css={infoContainer}>
       <InvisibleH3 title="일반 정보" />
@@ -46,7 +46,7 @@ export const BasicInfoPart: FunctionComponent = () => {
         </div>
         <div css={flexBox}>
           <strong css={infoTitle}>설립연도</strong>
-          <p css={info}>{`${year}년 ${month}월 ${date}일`}</p>
+          <p css={info}>{foundDate}</p>
         </div>
         <div css={flexBox}>
           <strong css={infoTitle}>사원수</strong>

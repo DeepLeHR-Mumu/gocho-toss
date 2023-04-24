@@ -8,13 +8,9 @@ import { PostJdDef, RequestObjDef, useAddJdProps } from "./type";
 
 export const postAddJd: PostJdDef = async (requestObj) => {
   const formData = new FormData();
-  const json = JSON.stringify(requestObj.dto);
-  const blob = new Blob([json], { type: "application/json" });
-  formData.append("dto", blob);
+  formData.append("json", JSON.stringify(requestObj.dto));
 
-  const { data } = await axiosInstance.post("/jds", formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+  const { data } = await axiosInstance.post("/jds", formData);
   return data;
 };
 

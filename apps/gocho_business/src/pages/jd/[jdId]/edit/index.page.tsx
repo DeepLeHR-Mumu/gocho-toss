@@ -1,4 +1,5 @@
 import { ReactElement, useEffect, useRef, useState } from "react";
+import dayjs from "dayjs";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { BiRocket } from "react-icons/bi";
@@ -143,8 +144,8 @@ const JdEditPage: NextPageWithLayout = () => {
           jdId: Number(router.query.jdId),
           dto: {
             ...jdObj,
-            start_time: new Date(jdObj.start_time).getTime(),
-            end_time: new Date(jdObj.end_time).getTime(),
+            start_time: dayjs(new Date(jdObj.start_time)).format("YYYY-MM-DDTHH:MM:SS"),
+            end_time: dayjs(new Date(jdObj.end_time)).format("YYYY-MM-DDTHH:MM:SS"),
             apply_url: jdObj.apply_url.includes("@") ? `mailto: ${jdObj.apply_url}` : jdObj.apply_url,
             process_arr: getFieldArrayValue(jdObj.process_arr),
             apply_route_arr: getFieldArrayValue(jdObj.apply_route_arr),
@@ -192,8 +193,8 @@ const JdEditPage: NextPageWithLayout = () => {
   };
 
   useEffect(() => {
-    const newStartTime = jdData?.startTime ? jdData.startTime + 540000 * 60 : 0;
-    const newEndTime = jdData?.endTime ? jdData.endTime + 540000 * 60 : 0;
+    const newStartTime = dayjs(jdData?.startTime, "YYYY-MM-DDTHH:MM:SS").toDate();
+    const newEndTime = dayjs(jdData?.endTime, "YYYY-MM-DDTHH:MM:SS").toDate();
 
     const positionNewArr = jdData?.positionArr.map((position) => ({
       id: position.id,
@@ -274,26 +275,34 @@ const JdEditPage: NextPageWithLayout = () => {
             <BasicInfoPart jdForm={jdForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
             <PositionHeaderPart fields={fields} append={append} setIsCardOpen={setIsCardOpenArr} />
             <ul>
-              {fields.map((item, index) => (
-                <li key={`${item.id}`} css={cssObj.cardContainer}>
-                  <PositionTitleInfoPart
-                    id={item.id}
-                    positionIndex={index}
-                    jdForm={jdForm}
-                    appendPosition={append}
-                    removePosition={remove}
-                    control={control}
-                    isCardOpen={isCardOpenArr[index]}
-                    setIsCardOpen={setIsCardOpenArr}
-                  />
-                  {isCardOpenArr[index] && (
-                    <>
-                      <PositionRequiredInfoPart id={item.id} positionIndex={index} jdForm={jdForm} control={control} />
-                      <PositionWorkInfoPart id={item.id} positionIndex={index} jdForm={jdForm} control={control} />
-                    </>
-                  )}
-                </li>
-              ))}
+              {fields.map((item, index) => {
+                if (item.task_main === "") return null;
+                return (
+                  <li key={`${item.id}`} css={cssObj.cardContainer}>
+                    <PositionTitleInfoPart
+                      id={item.id}
+                      positionIndex={index}
+                      jdForm={jdForm}
+                      appendPosition={append}
+                      removePosition={remove}
+                      control={control}
+                      isCardOpen={isCardOpenArr[index]}
+                      setIsCardOpen={setIsCardOpenArr}
+                    />
+                    {isCardOpenArr[index] && (
+                      <>
+                        <PositionRequiredInfoPart
+                          id={item.id}
+                          positionIndex={index}
+                          jdForm={jdForm}
+                          control={control}
+                        />
+                        <PositionWorkInfoPart id={item.id} positionIndex={index} jdForm={jdForm} control={control} />
+                      </>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
             <div css={cssObj.buttonContainer}>
               <SharedButton

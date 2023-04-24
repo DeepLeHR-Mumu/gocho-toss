@@ -22,7 +22,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
   const { watch, setValue, trigger, formState, register, clearErrors } = jdForm;
 
   const alwaysButtonClickHandler = () => {
-    setValue(`end_time`, isAlways ? "" : "9999-12-31T23:59");
+    setValue(`end_time`, isAlways ? "" : "9999-12-31T14:59:00");
     setValue(`cut`, !isAlways);
     setIsAlways((prev) => !prev);
   };
@@ -37,6 +37,12 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jdForm, p
     if (/^http/.test(link)) return link;
     return `https://${link}`;
   };
+
+  useEffect(() => {
+    if (watch("end_time") && watch("end_time").includes("9999")) {
+      setIsAlways(true);
+    }
+  }, [watch]);
 
   useEffect(() => {
     setRandomApplyRouteGuideArr(APPLY_ROUTE_GUIDE_ARR.sort(() => Math.random() - 0.5).slice(0, 3));

@@ -12,8 +12,9 @@ export const getJdDetail: GetJdDetailDef = async ({ queryKey: [{ requestObj }] }
   return data;
 };
 
-export const useJdDetail = (isLogin: boolean, requestObj: RequestObjDef) =>
-  useQuery<
+export const useJdDetail = (isLogin: boolean, requestObj: RequestObjDef) => {
+  const isSuccess = isLogin && Boolean(requestObj.id);
+  return useQuery<
     ResponseObjDef,
     AxiosError<ErrorResponseDef>,
     ReturnType<typeof jdDetailSelector>,
@@ -22,5 +23,6 @@ export const useJdDetail = (isLogin: boolean, requestObj: RequestObjDef) =>
     queryKey: jdDetailKeyObj.detail(requestObj),
     queryFn: getJdDetail,
     select: (data) => jdDetailSelector(data),
-    enabled: isLogin,
+    enabled: isSuccess,
   });
+};

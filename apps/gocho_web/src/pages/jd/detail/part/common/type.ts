@@ -4,8 +4,8 @@ export interface getJobTitleCreatorDef {
       mainTask: string;
     };
     contractType: {
-      type: string;
+      type: "정규직" | "계약직" | "계약>정규" | "연수생" | "인턴";
     };
-    hireCount: number;
+    hireNumber: string;
   }): string;
 }

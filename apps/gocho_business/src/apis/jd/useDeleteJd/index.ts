@@ -21,10 +21,9 @@ export const useDeleteJd = () => {
       const previousData = queryClient.getQueryData(jdArrKeyObj.all);
 
       queryClient.setQueryData<ResponseObjDef>(jdArrKeyObj.all, (oldObj) => {
-        if (!oldObj?.data) return { data: [], count: 0 };
+        if (!oldObj?.data) return { data: [], page_result: null };
         const data = oldObj?.data.filter((old) => old.id !== requestObj.jdId);
-        const count = oldObj.count - 1;
-        return { data, count };
+        return { data, page_result: oldObj.page_result };
       });
 
       return { previousData };

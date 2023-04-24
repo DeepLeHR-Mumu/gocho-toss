@@ -9,8 +9,8 @@ export interface ResponseObjDef {
     id: number;
     title: string;
     cut: boolean;
-    start_time: number;
-    end_time: number;
+    start_time: string;
+    end_time: string;
     process_arr: string[];
     apply_route_arr: string[];
     apply_url: string;

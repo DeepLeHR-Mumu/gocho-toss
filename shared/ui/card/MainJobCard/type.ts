@@ -1,19 +1,32 @@
 export type MainJobCardProps = {
   jobData: {
     id: number;
-    companyName: string;
-    companyLogo: string | null;
+    company: {
+      id: number;
+      name: string;
+      logoUrl: string;
+    };
     title: string;
-    endTime: number;
     cut: boolean;
+    startTime: string;
+    endTime: string;
+    createdTime: string;
+    updatedTime: string | null;
+    applyUrl: string;
+    bookmark: number;
+    isBookmark: boolean;
+    view: number;
+    click: number;
+    positionCount: number;
     high: boolean;
     college: boolean;
+    requiredExpArr: string[];
     placeArr: string[];
     rotationArr: string[];
+    contractType: string[];
+    taskArr: string[];
   };
   isMobile: boolean;
-  isBookmarked: boolean;
-  userId: number | undefined;
   isSkeleton?: never;
   loginOpener: () => void;
 };
@@ -21,8 +34,6 @@ export type MainJobCardProps = {
 export type MainJobCardSkeleton = {
   jobData?: never;
   isMobile?: never;
-  isBookmarked?: never;
-  userId?: never;
   isSkeleton: boolean;
   loginOpener?: never;
 };

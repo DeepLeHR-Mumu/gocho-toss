@@ -1,13 +1,12 @@
 import { FunctionComponent } from "react";
 
-import { useCompanyDetail } from "@/apis";
-import { useUserState } from "@/globalStates";
+import { useCompanyDetail, useManagerProfile } from "@/apis";
 
 import { cssObj } from "./style";
 
 export const CompanyStatusPart: FunctionComponent = () => {
-  const { userInfoData } = useUserState();
-  const { data: companyData } = useCompanyDetail({ companyId: userInfoData?.companyId });
+  const { data: userInfoData } = useManagerProfile();
+  const { data: companyData } = useCompanyDetail({ companyId: userInfoData?.company.id });
 
   if (!userInfoData || !companyData) {
     return <div css={cssObj.spinner} />;

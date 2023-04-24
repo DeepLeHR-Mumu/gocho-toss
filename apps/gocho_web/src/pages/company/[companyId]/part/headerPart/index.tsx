@@ -3,15 +3,13 @@ import { FiEye, FiYoutube } from "react-icons/fi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useQueryClient } from "@tanstack/react-query";
 
-import { useCompanyDetail, useCompanyCountInfo } from "shared-api/company";
-import { useAddCompanyBookmarkArr, useDeleteCompanyBookmarkArr, useUserCompanyBookmarkArr } from "shared-api/bookmark";
-import { useUserInfo } from "shared-api/auth";
+import { useCompanyDetail, useCompanyBookmarkToggle } from "shared-api/company";
+
+import { useUserProfile } from "shared-api/auth";
 import { companyBookmarkEvent } from "shared-ga/company";
 import catchLogoSrc from "shared-image/global/common/catch_logo.png";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-import { companyCountInfoKeyObj } from "shared-constant/queryKeyFactory/company/companyCountInfoKeyObj";
 
 import { useModal } from "@/globalStates";
 
@@ -32,70 +30,24 @@ import {
 
 export const HeaderPart: FunctionComponent = () => {
   const router = useRouter();
-  const queryClient = useQueryClient();
 
   const { setModal } = useModal();
-  const { data: userData } = useUserInfo();
-  const { data: companyCountInfoData } = useCompanyCountInfo({
-    id: Number(router.query.companyId),
+  const { data: userData } = useUserProfile();
+  const { data: companyDetailData } = useCompanyDetail({
+    companyId: Number(router.query.companyId),
   });
-  const { data: companyDetailData, isLoading } = useCompanyDetail({ companyId: Number(router.query.companyId) });
-  const { data: userCompanyBookmarkArr } = useUserCompanyBookmarkArr({ userId: userData?.id });
-  const { mutate: addMutate } = useAddCompanyBookmarkArr({
-    id: companyDetailData?.id as number,
-    logo_url: companyDetailData?.logoUrl as string,
-    name: companyDetailData?.name as string,
-  });
-  const { mutate: deleteMutate } = useDeleteCompanyBookmarkArr({
-    id: companyDetailData?.id as number,
-    logo_url: companyDetailData?.logoUrl as string,
-    name: companyDetailData?.name as string,
-  });
+  const { mutate: companyBookmarkToggle } = useCompanyBookmarkToggle();
 
-  if (!companyDetailData || isLoading) {
+  if (!companyDetailData) {
     return <div>..</div>;
   }
-
-  const addCompanyBookmark = () => {
-    return (
-      userData &&
-      addMutate(
-        { userId: userData.id, id: companyDetailData.id },
-        {
-          onSuccess: () => {
-            companyBookmarkEvent(companyDetailData.id);
-            queryClient.invalidateQueries(companyCountInfoKeyObj.countInfo({ id: companyDetailData.id }));
-          },
-        }
-      )
-    );
-  };
-
-  const deleteCompanyBookmark = () => {
-    return (
-      userData &&
-      deleteMutate(
-        { userId: userData.id, id: companyDetailData.id },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries(companyCountInfoKeyObj.countInfo({ id: companyDetailData.id }));
-          },
-        }
-      )
-    );
-  };
-
-  const isBookmarked = Boolean(
-    userCompanyBookmarkArr?.some((company) => {
-      return company.id === companyDetailData?.id;
-    })
-  );
 
   const setBookmarkHandler = () => {
     if (!userData) {
       return setModal("loginModal", { button: "close" });
     }
-    return isBookmarked ? deleteCompanyBookmark() : addCompanyBookmark();
+    companyBookmarkEvent(Number(router.query.companyId));
+    return companyBookmarkToggle({ companyId: Number(router.query.companyId) });
   };
 
   return (
@@ -109,15 +61,15 @@ export const HeaderPart: FunctionComponent = () => {
           <p css={industry}>{companyDetailData.industry}</p>
         </div>
         <div>
-          <button type="button" css={bookmarkButton(isBookmarked)} onClick={setBookmarkHandler}>
+          <button type="button" css={bookmarkButton(companyDetailData.isBookmark)} onClick={setBookmarkHandler}>
             <BsFillBookmarkFill />
-            기업 북마크 {companyCountInfoData?.bookmarkCount.toLocaleString("ko-KR")}
+            기업 북마크 {companyDetailData.bookmark.toLocaleString("ko-KR")}
           </button>
           <p css={viewBox}>
             <span css={icon}>
               <FiEye />
             </span>
-            조회수 <span css={viewColor}>{companyCountInfoData?.viewCount.toLocaleString("ko-KR")}</span>
+            조회수 <span css={viewColor}>{companyDetailData.view.toLocaleString("ko-KR")}</span>
           </p>
         </div>
       </div>

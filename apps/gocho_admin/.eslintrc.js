@@ -5,5 +5,6 @@ module.exports = {
     "import/no-unresolved": "off",
     "no-alert": "off",
     "arrow-body-style": ["error", "as-needed"],
+    "import/no-extraneous-dependencies": "off",
   },
 };

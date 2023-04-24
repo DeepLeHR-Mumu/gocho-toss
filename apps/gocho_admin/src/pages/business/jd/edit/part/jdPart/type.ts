@@ -1,8 +1,8 @@
 export interface JdPartProps {
   jd: {
     title: string;
-    startTime: number;
-    endTime: number;
+    startTime: string;
+    endTime: string;
     processArr: string[];
     applyRouteArr: string[];
     applyUrl: string;

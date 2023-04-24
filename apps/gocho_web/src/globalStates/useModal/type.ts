@@ -1,7 +1,6 @@
 export interface factoryObjDef {
   id: number;
-  place1: string;
-  place2: string;
+  name: string;
   address: string;
   maleNumber: number;
   femaleNumber: number;
@@ -14,7 +13,6 @@ export interface factoryObjDef {
     exists: boolean;
     desc: string | null;
   };
-  factoryName: string;
 }
 
 export interface tipObjDef {

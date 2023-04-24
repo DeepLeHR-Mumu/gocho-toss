@@ -6,8 +6,8 @@ import { JdPartProps } from "./type";
 import { cssObj } from "./style";
 
 export const JdPart: FunctionComponent<JdPartProps> = ({ jd }) => {
-  const { year: startYear, month: startMonth, date: startDate } = dateConverter(jd.startTime);
-  const { year: endYear, month: endMonth, date: endDate } = dateConverter(jd.endTime);
+  const { date: startDate } = dateConverter(jd.startTime);
+  const { date: endDate } = dateConverter(jd.endTime);
 
   return (
     <section css={cssObj.sectionContainer}>
@@ -19,7 +19,7 @@ export const JdPart: FunctionComponent<JdPartProps> = ({ jd }) => {
         <strong css={cssObj.dataTitle}>게시 기간</strong>
         <div>
           <p css={cssObj.dataBox}>
-            {startYear}-{startMonth}-{startDate} ~ {endYear}-{endMonth}-{endDate}
+            {startDate} ~ {endDate}
           </p>
           {!jd.cut && <p css={cssObj.dataBox}>상시공고</p>}
         </div>

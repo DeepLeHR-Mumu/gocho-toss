@@ -9,8 +9,8 @@ import { JobCardProps } from "./type";
 import { cssObj } from "./style";
 
 const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
-  const { year: startYear, month: startMonth, date: startDate } = dateConverter(job.startTime);
-  const { year: endYear, month: endMonth, date: endDate } = dateConverter(job.endTime);
+  const { date: startDate } = dateConverter(job.startTime);
+  const { date: endDate } = dateConverter(job.endTime);
 
   return (
     <tr css={cssObj.jobContainer}>
@@ -27,9 +27,9 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
         ))}
       </td>
       <td css={cssObj.dateBox}>
-        {startYear}-{startMonth}-{startDate}
+        {startDate}
         <br />
-        {endYear}-{endMonth}-{endDate}
+        {endDate}
       </td>
       <td css={cssObj.buttonContainer}>
         <Link

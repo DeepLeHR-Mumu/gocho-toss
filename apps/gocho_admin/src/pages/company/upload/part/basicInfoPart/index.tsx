@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
+import dayjs from "dayjs";
 import {
   booleanInputBox,
   checkboxText,
@@ -101,7 +102,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ register,
             required: true,
             setValueAs: (d: Date) => {
               const date = new Date(d);
-              return date.getTime();
+              return dayjs(date, "YYYY-MM-DDTHH:MM:SS");
             },
           })}
         />

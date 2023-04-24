@@ -58,16 +58,14 @@ export const PositionCard: FunctionComponent<PositionCardProps> = ({
           <p css={desc}>{position.possibleEdu.summary}</p>
           <p css={desc}>
             {position.place.type === "일반" &&
-              position.place.addressArr &&
               position.place.addressArr.map((address, i) => {
                 return `${i !== 0 ? ", " : ""}${address.split(" ")[0]}`;
               })}
             {position.place.type === "일반" &&
-              !position.place.addressArr &&
               position.place.factoryArr?.map((factory) => {
                 return (
                   <span css={restCSS} key={`지역_${factory}`}>
-                    {factory.factoryName}
+                    {factory.name}
                   </span>
                 );
               })}

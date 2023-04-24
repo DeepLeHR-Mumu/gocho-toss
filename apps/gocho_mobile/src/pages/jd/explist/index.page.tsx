@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { NextPage } from "next";
 import { FiSearch } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -33,8 +33,6 @@ import { changeOrderDef, PostingValues, OrderDef } from "./type";
 
 const JobsExpList: NextPage = () => {
   const router = useRouter();
-  const limit = 6;
-  const [total, setTotal] = useState<number>(0);
 
   const { register, handleSubmit } = useForm<PostingValues>({
     defaultValues: {
@@ -68,11 +66,11 @@ const JobsExpList: NextPage = () => {
     );
   };
 
-  const { data: companyDataArr, isLoading } = useCompanyArr({
+  const { data: companyData, isLoading } = useCompanyArr({
     q: router.query.q as string,
     order: router.query.order as OrderDef,
-    limit,
-    offset: (Number(router.query.page) - 1) * 5,
+    size: 6,
+    page: Number(router.query.page),
   });
 
   useEffect(() => {
@@ -82,16 +80,8 @@ const JobsExpList: NextPage = () => {
   }, [router]);
 
   useEffect(() => {
-    if (companyDataArr) {
-      setTotal(companyDataArr.count);
-    }
-  }, [companyDataArr]);
-
-  useEffect(() => {
     expiredJdListFunnelEvent();
   }, []);
-
-  const totalPage = Math.ceil(total / limit);
 
   return (
     <main css={mainContainer}>
@@ -127,19 +117,21 @@ const JobsExpList: NextPage = () => {
               );
             })}
           </div>
-          {companyDataArr?.companyDataArr.length === 0 ? (
+          {companyData?.pageResult.totalElements === 0 ? (
             <div css={noDataBox}>
               <p css={noDataDesc}>검색결과가 없습니다 👀</p>
             </div>
           ) : (
             <>
-              <ExpJobCardList companyDataArr={companyDataArr?.companyDataArr} isLoading={isLoading} />
-              <BottomPagination
-                totalPage={totalPage}
-                linkObj={{
-                  pathname: JOBS_EXPLIST_URL,
-                }}
-              />
+              <ExpJobCardList companyDataArr={companyData?.companyDataArr} isLoading={isLoading} />
+              {companyData && (
+                <BottomPagination
+                  totalPage={companyData.pageResult.totalPages}
+                  linkObj={{
+                    pathname: JOBS_EXPLIST_URL,
+                  }}
+                />
+              )}
             </>
           )}
         </section>

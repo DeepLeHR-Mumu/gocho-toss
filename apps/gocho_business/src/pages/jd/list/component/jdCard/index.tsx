@@ -11,13 +11,7 @@ import { COLORS } from "shared-style/color";
 import { SharedButton } from "shared-ui/business/sharedButton";
 
 import { useToast } from "@/globalStates";
-import {
-  jdDeleteButtonEvent,
-  jdCloseButtonEvent,
-  jdEditButtonEvent,
-  jdCloseDoneEvent,
-  jdDeleteDoneEvent,
-} from "@/ga";
+import { jdDeleteButtonEvent, jdCloseButtonEvent, jdEditButtonEvent, jdCloseDoneEvent, jdDeleteDoneEvent } from "@/ga";
 import { CommonInfoBox, CommonStatusChip } from "@/components";
 import { INTERNAL_URL } from "@/constants";
 import { useEndJd, useDeleteJd, jdArrKeyObj } from "@/apis";
@@ -88,7 +82,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
     }
   };
 
-  const isExpired = jd.endTime - new Date().getTime() < 0;
+  const isExpired = dayjs(jd.endTime).isBefore(dayjs());
 
   return (
     <div css={cssObj.cardContainer(isExpired)}>

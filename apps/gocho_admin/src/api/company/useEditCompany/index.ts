@@ -7,14 +7,10 @@ import { EditCompanyDef, RequestObjDef, useEditCompanyProps } from "./type";
 
 export const editCompany: EditCompanyDef = async (requestObj) => {
   const formData = new FormData();
-  const json = JSON.stringify(requestObj.dto);
-  const blob = new Blob([json], { type: "application/json" });
-  formData.append("dto", blob);
+  formData.append("json", JSON.stringify(requestObj.dto));
   if (requestObj.logo) formData.append("logo", requestObj.logo);
 
-  const { data } = await axiosInstance.put(`/companies/${requestObj.companyId}`, formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+  const { data } = await axiosInstance.put(`/companies/${requestObj.companyId}`, formData);
   return data;
 };
 

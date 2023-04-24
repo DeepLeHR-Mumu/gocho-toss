@@ -21,8 +21,8 @@ const JdList: NextPageWithLayout = () => {
     order: "recent",
     filter: "valid",
     status: "all",
-    limit: JD_SEARCH_LIMIT,
-    offset: (Number(router.query.page || 1) - 1) * JD_SEARCH_LIMIT,
+    size: JD_SEARCH_LIMIT,
+    page: Number(router.query.page),
   });
 
   if (!jobDataObj || isLoading) {
@@ -32,8 +32,6 @@ const JdList: NextPageWithLayout = () => {
   if (isError) {
     return <ErrorScreen />;
   }
-
-  const totalPage = Math.ceil(jobDataObj.count / JD_SEARCH_LIMIT);
 
   return (
     <main css={cssObj.wrapper}>
@@ -52,7 +50,7 @@ const JdList: NextPageWithLayout = () => {
             ))}
           </ul>
         </section>
-        <Pagination totalPage={totalPage} url={INTERNAL_URL.JD_LIST_URL} />
+        <Pagination totalPage={jobDataObj.pageResult.totalPages} url={INTERNAL_URL.JD_LIST_URL} />
       </PageLayout>
     </main>
   );
