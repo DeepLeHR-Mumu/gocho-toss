@@ -30,3 +30,11 @@ export const descCSS = css`
   color: ${COLORS.GRAY60};
   border-radius: 2rem;
 `;
+
+export const bottomPaginationBox = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  width: 100%;
+`;
