@@ -24,4 +24,4 @@ export const profileMenuArr = [
   },
 ];
 
-export const blogUrl = "https://blog.gochodaejol.com/?utm_source=gochodaejoldotcom";
+export const blogUrl = "https://blog.gochodaejol.com/?utm_source=gochodaejoldotcom&utm_medium=GNB";
