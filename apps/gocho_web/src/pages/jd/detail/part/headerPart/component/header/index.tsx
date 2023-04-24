@@ -63,7 +63,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ jobDetailData, isDdayEn
           </li>
           <li>{jobDetailData.cut && <div css={cutBox}>채용시마감</div>}</li>
           <li>
-            <p css={dateCSS}>{jobEndYear !== "9999" ? `${jobStartDate}` : `${jobStartDate} ~ ${jobEndDate}`}</p>
+            <p css={dateCSS}>{jobEndYear === "9999" ? `${jobStartDate} ~ ` : `${jobStartDate} ~ ${jobEndDate}`}</p>
           </li>
         </ul>{" "}
         <Link href={`/company/${jobDetailData.company.id}/detail`} passHref css={companyNameCSS}>
