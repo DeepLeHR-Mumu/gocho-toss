@@ -17,7 +17,7 @@ export const BookmarkJobArr: FunctionComponent = () => {
   });
 
   useEffect(() => {
-    if (observeRef.current) {
+    if (observeRef.current && userJobBookmarkArrData?.pages[0].pageResult.totalElements !== 0) {
       const observer = new IntersectionObserver(
         (entry) => {
           if (entry[0].isIntersecting) fetchNextPage();
