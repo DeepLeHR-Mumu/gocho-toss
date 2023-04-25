@@ -57,7 +57,7 @@ export const SlideCard: FunctionComponent<SlideCardProps> = ({ slideData }) => {
         )}
       </div>
       <div css={imageCss}>
-        <Image priority src={slideData.backgroundImage} alt={slideData.title} fill />
+        <Image priority unoptimized src={slideData.backgroundImage} alt={slideData.title} fill />
       </div>
     </div>
   );

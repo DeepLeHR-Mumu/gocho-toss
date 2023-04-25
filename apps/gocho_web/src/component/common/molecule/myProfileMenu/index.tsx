@@ -36,7 +36,16 @@ export const MyProfileMenu: FunctionComponent<MyProfileMenuProps> = ({ active })
         {profileMenuArr.map((profileMenu) => {
           return (
             <li key={profileMenu.title}>
-              <Link href={profileMenu.link} passHref>
+              <Link
+                href={{
+                  pathname: profileMenu.link,
+                  query: {
+                    page: 1,
+                    type: "job",
+                  },
+                }}
+                passHref
+              >
                 {profileMenu.title}
               </Link>
             </li>

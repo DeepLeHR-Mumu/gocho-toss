@@ -25,6 +25,7 @@ export const useInfiniteUserCompanyBookmarkArr = (requestObj: UserBookmarkArrReq
     queryKey: userBookmarkKeyObj.infinite(requestObj),
     queryFn: getInfiniteUserCompanyBookmarkArr,
     getNextPageParam: (responseObj) => {
+      if (responseObj.page_result.total_pages === 0) return undefined;
       return responseObj.page_result.total_pages === responseObj.page_result.page
         ? undefined
         : responseObj.page_result.page + 1;

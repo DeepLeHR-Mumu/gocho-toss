@@ -8,7 +8,7 @@ import { GetUserCompanyBookmarkArrDef } from "./type";
 import { selector } from "./util";
 
 export const getUserCompanyBookmarkArr: GetUserCompanyBookmarkArrDef = async ({ queryKey: [{ requestObj }] }) => {
-  const { data } = await axiosInstance.get(`/users/${requestObj?.userId}/company-bookmarks`);
+  const { data } = await axiosInstance.get(`/users/${requestObj?.userId}/company-bookmarks`, { params: requestObj });
   return data;
 };
 
