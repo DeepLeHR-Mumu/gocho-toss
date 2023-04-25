@@ -11,8 +11,6 @@ export const PageHead: FunctionComponent<PageHeadProps> = ({ option }) => {
     option.taskDetail
   }${option.pay !== null && `, 급여 : ${option.pay}`}`;
 
-  // eslint-disable-next-line no-console
-  console.log(option);
   return (
     <Head>
       <title>{`[${option.companyName}] ${title} - 고초대졸닷컴`}</title>
