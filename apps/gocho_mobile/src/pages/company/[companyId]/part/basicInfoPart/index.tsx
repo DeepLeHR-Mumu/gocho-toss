@@ -32,6 +32,7 @@ export const BasicInfoPart: FunctionComponent = () => {
 
   const { data: companyDetailData, isLoading } = useCompanyDetail({
     companyId: Number(router.query.companyId),
+    isStatic: false,
   });
 
   if (isLoading || !companyDetailData) {

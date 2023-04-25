@@ -49,7 +49,7 @@ export const FactoryInfoPart: FunctionComponent = () => {
   const [activeFactory, setActiveFactory] = useState<null | number>(null);
   const router = useRouter();
 
-  const { data: companyDetailData } = useCompanyDetail({ companyId: Number(router.query.companyId) });
+  const { data: companyDetailData } = useCompanyDetail({ companyId: Number(router.query.companyId), isStatic: false });
 
   useEffect(() => {
     if (companyDetailData && companyDetailData.factoryArr.length !== 0) {

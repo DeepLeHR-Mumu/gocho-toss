@@ -30,6 +30,7 @@ export const PayInfoPart: FunctionComponent = () => {
   const router = useRouter();
   const { data: companyDetailData, isLoading } = useCompanyDetail({
     companyId: Number(router.query.companyId) as number,
+    isStatic: false,
   });
 
   if (isLoading || !companyDetailData) {

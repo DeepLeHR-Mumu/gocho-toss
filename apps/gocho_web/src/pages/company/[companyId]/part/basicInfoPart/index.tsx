@@ -25,7 +25,8 @@ import {
 
 export const BasicInfoPart: FunctionComponent = () => {
   const router = useRouter();
-  const { data: companyDetailData } = useCompanyDetail({ companyId: Number(router.query.companyId) });
+
+  const { data: companyDetailData } = useCompanyDetail({ companyId: Number(router.query.companyId), isStatic: false });
 
   if (!companyDetailData) {
     return <section css={wrapper} />;

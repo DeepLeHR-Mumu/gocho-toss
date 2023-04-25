@@ -24,7 +24,10 @@ import {
 export const PayInfoPart: FunctionComponent = () => {
   const router = useRouter();
 
-  const { data: companyDetailData, isLoading } = useCompanyDetail({ companyId: Number(router.query.companyId) });
+  const { data: companyDetailData, isLoading } = useCompanyDetail({
+    companyId: Number(router.query.companyId),
+    isStatic: false,
+  });
 
   if (!companyDetailData || isLoading) {
     return <section css={wrapper} />;

@@ -13,6 +13,7 @@ export const CatchLinkPart: FunctionComponent = () => {
 
   const { data: companyDetailData, isLoading } = useCompanyDetail({
     companyId: Number(router.query.companyId),
+    isStatic: false,
   });
 
   if (!companyDetailData || isLoading) {

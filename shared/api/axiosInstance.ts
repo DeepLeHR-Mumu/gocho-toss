@@ -62,7 +62,6 @@ export const useAxiosInterceptor = () => {
     const refreshTokenData = localStorage.getItem("refreshToken");
     const matchingUrlReGex = /^(?!.*comments).*\b(companies|jds)\b.*$/i;
 
-    // TODO :  토큰만료되면 안된다고 함
     // 비로그인상황에서 공고와 컴퍼니 정보는 일단 request는 요청한다.
     if (!accessTokenData && config.url && matchingUrlReGex.test(config.url)) {
       return config;
@@ -77,9 +76,9 @@ export const useAxiosInterceptor = () => {
 
     const { exp: accessTokenExp } = tokenDecryptor(accessTokenData);
     const { exp: refreshTokenExp } = tokenDecryptor(refreshTokenData);
-    const accessCreateTime = dayjs(new Date(accessTokenExp * 1000), "YYYY-MM-DD HH:mm:ss.SSS");
-    const refreshCreateTime = dayjs(new Date(refreshTokenExp * 1000), "YYYY-MM-DD HH:mm:ss.SSS");
-    const currentTime = dayjs(new Date(), "YYYY-MM-DD HH:mm:ss.SSS");
+    const accessCreateTime = dayjs(new Date(accessTokenExp * 1000), "YYYY-MM-DDTHH:MM:ss");
+    const refreshCreateTime = dayjs(new Date(refreshTokenExp * 1000), "YYYY-MM-DDTHH:MM:ss");
+    const currentTime = dayjs(new Date(), "YYYY-MM-DDTHH:MM:ss");
     const accessBetweenCurrentDiffTime = accessCreateTime.diff(currentTime, "ms");
     const isRefreshAfterCurrentTime = currentTime.isAfter(refreshCreateTime);
 
