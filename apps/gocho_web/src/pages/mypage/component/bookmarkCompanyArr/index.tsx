@@ -1,32 +1,23 @@
-import { FunctionComponent, useRef, useEffect } from "react";
+import { FunctionComponent } from "react";
+import { useRouter } from "next/router";
 
+import { MYPAGE_URL } from "shared-constant";
 import { useUserProfile } from "shared-api/auth";
-import { useInfiniteUserCompanyBookmarkArr } from "shared-api/company";
+import { useUserCompanyBookmarkArr } from "shared-api/company";
 import { CompanyCard } from "shared-ui/card/companyCard";
 
-import { cardListContainer, descCSS } from "./style";
+import { BottomPagination } from "@/component/common/molecule/bottomPagination";
+
+import { bottomPaginationBox, cardListContainer, descCSS } from "./style";
 
 export const BookmarkCompanyArr: FunctionComponent = () => {
-  const observeRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter();
 
   const { data: userData } = useUserProfile();
-  const {
-    data: userCompanyBookmarkObj,
-    refetch,
-    fetchNextPage,
-  } = useInfiniteUserCompanyBookmarkArr({ userId: userData?.id });
-
-  useEffect(() => {
-    if (observeRef.current && userCompanyBookmarkObj?.pages[0].pageResult.totalElements !== 0) {
-      const observer = new IntersectionObserver(
-        (entry) => {
-          if (entry[0].isIntersecting) fetchNextPage();
-        },
-        { threshold: 0.2 }
-      );
-      observer.observe(observeRef.current);
-    }
-  }, [fetchNextPage, userCompanyBookmarkObj]);
+  const { data: userCompanyBookmarkObj, refetch } = useUserCompanyBookmarkArr({
+    userId: userData?.id,
+    page: Number(router.query.page),
+  });
 
   if (!userCompanyBookmarkObj) {
     return (
@@ -35,27 +26,29 @@ export const BookmarkCompanyArr: FunctionComponent = () => {
       </div>
     );
   }
+
   return (
     <div css={cardListContainer}>
-      {userCompanyBookmarkObj.pages[0].pageResult.totalElements === 0 && (
+      {userCompanyBookmarkObj.pageResult.totalElements === 0 && (
         <p css={descCSS}>{userData?.nickname} 님! 북마크를 이용하시면 추천기업이 더 정교해져요 😳</p>
       )}
 
-      {userCompanyBookmarkObj.pages.map((page) => {
-        return page.userCompanyBookmarkArr.map((data) => {
-          return (
-            <CompanyCard
-              key={data.id}
-              refetchUserCompanyBookmark={refetch}
-              companyData={{
-                ...data,
-                isBookmark: true,
-              }}
-            />
-          );
-        });
+      {userCompanyBookmarkObj.companyBookmarkDataArr.map((data) => {
+        return (
+          <CompanyCard
+            key={data.id}
+            refetchUserCompanyBookmark={refetch}
+            companyData={{
+              ...data,
+              isBookmark: true,
+            }}
+          />
+        );
       })}
-      <div ref={observeRef} />
+
+      <div css={bottomPaginationBox}>
+        <BottomPagination totalPage={userCompanyBookmarkObj.pageResult.totalPages} linkObj={{ pathname: MYPAGE_URL }} />
+      </div>
     </div>
   );
 };

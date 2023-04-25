@@ -1,19 +1,18 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+
+import { MYPAGE_URL } from "shared-constant";
+import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
 import { BookmarkJobArr } from "@pages/mypage/component/bookmarkJobArr";
 import { BookmarkCompanyArr } from "@pages/mypage/component/bookmarkCompanyArr";
-import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
 import { setBookmarkViewButtonArr } from "./constant";
-import { changeOrderDef } from "./type";
 import { partContainer, headerContainer, title, buttonArrContainer, setBookmarkViewButton } from "./style";
 
 export const BookmarkPart: FunctionComponent = () => {
-  const [activeButtonType, setActiveButtonType] = useState("job");
-
-  const changeView: changeOrderDef = (newType) => {
-    setActiveButtonType(newType);
-  };
+  const router = useRouter();
 
   return (
     <section css={partContainer}>
@@ -23,21 +22,24 @@ export const BookmarkPart: FunctionComponent = () => {
         <div css={buttonArrContainer}>
           {setBookmarkViewButtonArr.map((button) => {
             return (
-              <button
-                type="button"
+              <Link
                 key={button.text}
-                css={setBookmarkViewButton(button.show === activeButtonType)}
-                onClick={() => {
-                  changeView(button.show);
+                css={setBookmarkViewButton(button.show === router.query.type)}
+                href={{
+                  pathname: MYPAGE_URL,
+                  query: {
+                    page: 1,
+                    type: button.show,
+                  },
                 }}
               >
                 {button.text}
-              </button>
+              </Link>
             );
           })}
         </div>
       </div>
-      {activeButtonType === "job" ? <BookmarkJobArr /> : <BookmarkCompanyArr />}
+      {router.query.type === "job" ? <BookmarkJobArr /> : <BookmarkCompanyArr />}
     </section>
   );
 };
