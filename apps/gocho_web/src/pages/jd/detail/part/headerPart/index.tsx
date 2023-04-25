@@ -29,9 +29,20 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
   const router = useRouter();
   const { jobId } = router.query;
   const [defaultCardCount, setDefaultCardCount] = useState(5);
+  const [isStatic, setIsStatic] = useState<boolean>(true);
   const [isOverlap, setIsOverlap] = useState(true);
   const observeRef = useRef<HTMLDivElement | null>(null);
-  const { data: jobDetailData } = useJobDetail({ id: Number(jobId) });
+  const { data: jobDetailData } = useJobDetail({ id: Number(jobId), isStatic });
+
+  const handleMoreCardCount = () => {
+    if (jobDetailData) {
+      setDefaultCardCount(jobDetailData.positionArr.length);
+    }
+  };
+
+  const handleLessCardCount = () => {
+    setDefaultCardCount(5);
+  };
 
   useEffect(() => {
     if (observeRef.current) {
@@ -45,15 +56,9 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
     }
   }, [currentPositionId]);
 
-  const handleMoreCardCount = () => {
-    if (jobDetailData) {
-      setDefaultCardCount(jobDetailData.positionArr.length);
-    }
-  };
-
-  const handleLessCardCount = () => {
-    setDefaultCardCount(5);
-  };
+  useEffect(() => {
+    setIsStatic(false);
+  }, []);
 
   if (isSkeleton || !jobDetailData || setCurrentPositionId === undefined || currentPositionId === undefined) {
     return (

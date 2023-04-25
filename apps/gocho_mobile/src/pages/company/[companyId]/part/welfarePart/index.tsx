@@ -20,6 +20,7 @@ export const WelfarePart: FunctionComponent = () => {
 
   const { data: companyDetailData, isLoading } = useCompanyDetail({
     companyId: Number(router.query.companyId) as number,
+    isStatic: false,
   });
 
   useEffect(() => {

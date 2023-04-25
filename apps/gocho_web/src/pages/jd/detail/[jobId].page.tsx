@@ -26,6 +26,7 @@ import { wrapper, flexBox, container, containerSkeleton, logoImageBox } from "./
 
 const JobsDetail: NextPage = () => {
   const [currentPositionId, setCurrentPositionId] = useState<number>(0);
+  const [isStatic, setIsStatic] = useState<boolean>(true);
 
   const { data: userData } = useUserProfile();
   const { mutate: addViewCount } = useAddJobViewCount();
@@ -42,11 +43,16 @@ const JobsDetail: NextPage = () => {
 
   const { data: jobDetailData } = useJobDetail({
     id: Number(jobId),
+    isStatic,
   });
 
   const { data: companyCommentData } = useCompanyCommentArr({
     companyId: Number(jobDetailData?.company.id),
   });
+
+  useEffect(() => {
+    setIsStatic(false);
+  }, []);
 
   useEffect(() => {
     if (jobDetailData) jdDetailFunnelEvent(jobDetailData.id);
@@ -132,7 +138,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
   }
 
   if (params) {
-    await queryClient.prefetchQuery(jobDetailKeyObj.detail({ id: Number(params.jobId) }), getJobDetail);
+    await queryClient.prefetchQuery(jobDetailKeyObj.detail({ id: Number(params.jobId), isStatic: true }), getJobDetail);
   }
 
   return {

@@ -35,6 +35,7 @@ export const HeaderPart: FunctionComponent = () => {
   const { data: userData } = useUserProfile();
   const { data: companyDetailData } = useCompanyDetail({
     companyId: Number(router.query.companyId),
+    isStatic: false,
   });
   const { mutate: companyBookmarkToggle } = useCompanyBookmarkToggle();
 

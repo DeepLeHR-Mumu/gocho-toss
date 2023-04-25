@@ -31,7 +31,10 @@ export const HeaderPart: FunctionComponent = () => {
   const { setModal } = useModal();
   const { data: userData } = useUserProfile();
   const { mutate: companyBookmarkToggle } = useCompanyBookmarkToggle();
-  const { data: companyDetailData, isLoading } = useCompanyDetail({ companyId: Number(router.query.companyId) });
+  const { data: companyDetailData, isLoading } = useCompanyDetail({
+    companyId: Number(router.query.companyId),
+    isStatic: false,
+  });
 
   const companyBookmarkToggleHandler = () => {
     if (!userData) {

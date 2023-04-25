@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
@@ -18,10 +18,15 @@ import { container, loadingBox } from "./style";
 import { HeaderPart } from "../part/headerPart";
 
 const DetailPage: NextPage = () => {
+  const [isStatic, setIsStatic] = useState<boolean>(true);
   const router = useRouter();
 
   const { mutate: addViewCount } = useAddCompanyViewCount();
-  const { data: companyDetailData } = useCompanyDetail({ companyId: Number(router.query.companyId) });
+  const { data: companyDetailData } = useCompanyDetail({ companyId: Number(router.query.companyId), isStatic });
+
+  useEffect(() => {
+    setIsStatic(false);
+  }, []);
 
   useEffect(() => {
     const companyViewStr = sessionStorage.getItem("jobViewArr");
@@ -81,7 +86,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
 
   if (params)
     await queryClient.prefetchQuery(
-      companyDetailKeyObj.detail({ companyId: Number(params.companyId) }),
+      companyDetailKeyObj.detail({ companyId: Number(params.companyId), isStatic: true }),
       getCompanyDetail
     );
 

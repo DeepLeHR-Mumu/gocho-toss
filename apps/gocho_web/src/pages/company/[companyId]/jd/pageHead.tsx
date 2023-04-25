@@ -9,6 +9,7 @@ export const PageHead: FunctionComponent = () => {
   const router = useRouter();
   const { data: companyDetailData } = useCompanyDetail({
     companyId: Number(router.query.companyId),
+    isStatic: true,
   });
 
   return (

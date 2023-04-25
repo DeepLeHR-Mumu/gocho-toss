@@ -24,6 +24,7 @@ import { wrapper, flexBox, container, containerSkeleton } from "./style";
 const JobsDetail: NextPage = () => {
   const [currentPositionId, setCurrentPositionId] = useState<number>(0);
   const [openComment, setOpenComment] = useState<boolean>(false);
+  const [isStatic, setIsStatic] = useState<boolean>(true);
   const router = useRouter();
   const { jobId } = router.query;
 
@@ -31,6 +32,7 @@ const JobsDetail: NextPage = () => {
 
   const { data: jobDetailData, isLoading } = useJobDetail({
     id: Number(jobId),
+    isStatic,
   });
 
   const { data: companyCommentData } = useCompanyCommentArr({
@@ -44,6 +46,10 @@ const JobsDetail: NextPage = () => {
       addViewCount({ jobId: Number(jobId) });
     },
   });
+
+  useEffect(() => {
+    setIsStatic(false);
+  }, []);
 
   useEffect(() => {
     if (jobDetailData) jdDetailFunnelEvent(jobDetailData.id);
@@ -113,7 +119,8 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
     return { notFound: true };
   }
 
-  if (params) await queryClient.prefetchQuery(jobDetailKeyObj.detail({ id: Number(params.jobId) }), getJobDetail);
+  if (params)
+    await queryClient.prefetchQuery(jobDetailKeyObj.detail({ id: Number(params.jobId), isStatic: true }), getJobDetail);
 
   return {
     props: {
