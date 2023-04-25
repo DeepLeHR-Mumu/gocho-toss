@@ -57,7 +57,7 @@ export const CompanyInfoPart: FunctionComponent = () => {
         </li>
         <li>
           <strong css={cssObj.subTitle}>설립일</strong>
-          <p css={cssObj.subDesc}>{dayjs(companyData.foundNumber).format("YYYYMMSS")}</p>
+          <p css={cssObj.subDesc}>{dayjs(companyData.foundNumber).format("YYYY.MM.DD")}</p>
         </li>
         <li>
           <strong css={cssObj.subTitle}>사업자 번호</strong>
