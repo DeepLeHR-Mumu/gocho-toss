@@ -5,12 +5,13 @@ import {
   CompanyDetailRequestDef,
 } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 
-import { axiosInstance } from "../../axiosInstance";
+import { axiosInstance, axiosNoTokenInstance } from "../../axiosInstance";
 import { GetCompanyDetailDef } from "./type";
 import { selector } from "./util";
 
 export const getCompanyDetail: GetCompanyDetailDef = async ({ queryKey: [{ requestObj }] }) => {
-  const { data } = await axiosInstance.get(`/companies/${requestObj.companyId}`);
+  const instance = requestObj.isStatic ? axiosNoTokenInstance : axiosInstance;
+  const { data } = await instance.get(`/companies/${requestObj.companyId}`);
   return data;
 };
 

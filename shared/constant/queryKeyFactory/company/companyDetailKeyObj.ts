@@ -1,5 +1,6 @@
 export interface CompanyDetailRequestDef {
   companyId: number;
+  isStatic: boolean;
 }
 
 export const companyDetailKeyObj = {

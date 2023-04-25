@@ -1,6 +1,6 @@
 import { NextPage, GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import { useRouter } from "next/router";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 
 import { useAddCompanyViewCount } from "shared-api/viewCount";
@@ -31,12 +31,16 @@ const DetailPage: NextPage = () => {
   const factoryInfoRef = useRef<null | HTMLDivElement>(null);
   const payInfoRef = useRef<null | HTMLDivElement>(null);
   const welfareInfoRef = useRef<null | HTMLDivElement>(null);
+  const [isStatic, setIsStatic] = useState<boolean>(true);
+
   const router = useRouter();
 
   const { data: userInfo } = useUserProfile();
   const { data: companyDetailData } = useCompanyDetail({
     companyId: Number(router.query.companyId),
+    isStatic,
   });
+
   const { data: companyCommentArrData } = useCompanyCommentArr({
     companyId: Number(router.query.companyId),
   });
@@ -49,6 +53,10 @@ const DetailPage: NextPage = () => {
       addViewCount({ companyId: Number(router.query.companyId) });
     },
   });
+
+  useEffect(() => {
+    setIsStatic(false);
+  }, []);
 
   useEffect(() => {
     if (companyDetailData) {
@@ -133,7 +141,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
 
   if (params)
     await queryClient.prefetchQuery(
-      companyDetailKeyObj.detail({ companyId: Number(params.companyId) }),
+      companyDetailKeyObj.detail({ companyId: Number(params.companyId), isStatic: true }),
       getCompanyDetail
     );
 

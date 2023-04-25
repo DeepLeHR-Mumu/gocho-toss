@@ -18,6 +18,7 @@ export const CompanyJobPart: FunctionComponent = () => {
 
   const { data: companyDetailData, isLoading: isCompanyDataLoading } = useCompanyDetail({
     companyId: Number(companyId),
+    isStatic: false,
   });
   const { data: jobData } = useJobArr({
     companyId: Number(companyId),
