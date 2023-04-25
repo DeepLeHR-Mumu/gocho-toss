@@ -61,7 +61,6 @@ const JobsDetail: NextPage = () => {
             <section css={containerSkeleton}>
               <SkeletonBox />
             </section>
-            sssssssssss
             {companyCommentData && (
               <DetailComment
                 company={companyCommentData.company}
