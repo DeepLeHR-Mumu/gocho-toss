@@ -40,9 +40,10 @@ const JobsDetail: NextPage = () => {
     },
   });
 
-  const { data: jobDetailData, isLoading } = useJobDetail({
+  const { data: jobDetailData } = useJobDetail({
     id: Number(jobId),
   });
+
   const { data: companyCommentData } = useCompanyCommentArr({
     companyId: Number(jobDetailData?.company.id),
   });
@@ -51,7 +52,7 @@ const JobsDetail: NextPage = () => {
     if (jobDetailData) jdDetailFunnelEvent(jobDetailData.id);
   }, [jobDetailData]);
 
-  if (!jobDetailData || isLoading || router.isFallback) {
+  if (!jobDetailData || router.isFallback) {
     return (
       <main css={wrapper}>
         <Layout>
@@ -60,6 +61,7 @@ const JobsDetail: NextPage = () => {
             <section css={containerSkeleton}>
               <SkeletonBox />
             </section>
+            sssssssssss
             {companyCommentData && (
               <DetailComment
                 company={companyCommentData.company}
@@ -130,13 +132,15 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
     return { notFound: true };
   }
 
-  if (params) await queryClient.prefetchQuery(jobDetailKeyObj.detail({ id: Number(params.jobId) }), getJobDetail);
+  if (params) {
+    await queryClient.prefetchQuery(jobDetailKeyObj.detail({ id: Number(params.jobId) }), getJobDetail);
+  }
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
     },
-    revalidate: process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? 600 : 10,
+    revalidate: process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? 600 : 100,
   };
 };
 

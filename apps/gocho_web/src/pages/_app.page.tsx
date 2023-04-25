@@ -127,6 +127,9 @@ function UserPCService({ Component, pageProps }: AppProps) {
 
   useAxiosInterceptor();
 
+  // eslint-disable-next-line no-console
+  console.log(pageProps.dehydratedState);
+
   return (
     <>
       <Head>
