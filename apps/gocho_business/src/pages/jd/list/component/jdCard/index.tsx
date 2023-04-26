@@ -99,7 +99,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
         </div>
         <CommonInfoBox Icon={AiOutlineEye} infoData={viewData} infoName="조회수" />
         <CommonInfoBox Icon={BiBookmark} infoData={bookmarkData} infoName="북마크" />
-        <CommonInfoBox Icon={MdAdsClick} infoData={clickData} infoName="지원 현황" />
+        <CommonInfoBox Icon={MdAdsClick} infoData={clickData} infoName="지원하기 클릭 수" />
         <CommonInfoBox Icon={FiUser} infoData={`${jd.uploader.name} (${jd.uploader.department})`} infoName="등록자" />
       </div>
       <div css={cssObj.bottomContainer}>
