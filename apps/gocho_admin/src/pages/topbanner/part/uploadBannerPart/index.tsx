@@ -91,7 +91,7 @@ export const UploadBannerPart: FunctionComponent = () => {
               css={inputBox(false)}
               {...register("start_time", {
                 required: true,
-                setValueAs: (startDate: Date) => dayjs(startDate, "YYYY-MM-DDTHH:MM:SS"),
+                setValueAs: (startDate: Date) => `${dayjs(startDate).format("YYYY-MM-DD")}T00:00:00`,
               })}
             />
             <input
@@ -99,7 +99,7 @@ export const UploadBannerPart: FunctionComponent = () => {
               css={inputBox(false)}
               {...register("end_time", {
                 required: true,
-                setValueAs: (endDate: Date) => dayjs(endDate, "YYYY-MM-DDTHH:MM:SS"),
+                setValueAs: (endDate: Date) => `${dayjs(endDate).format("YYYY-MM-DD")}T00:00:00`,
               })}
             />
             <label css={getJobButton} htmlFor="topBannerColor">
