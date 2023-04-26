@@ -1,9 +1,9 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
+import dayjs from "dayjs";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { JOBS_DETAIL_URL } from "shared-constant";
-import { dateConverter } from "shared-util";
 import { jdAdClickEvent } from "shared-ga/jd";
 
 import { SkeletonBox } from "../../common/atom/skeletonBox";
@@ -35,9 +35,6 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
     );
   }
 
-  const { date: jobStartDate } = dateConverter(jobAdData.startTime);
-  const { date: jobEndDate, year: jobEndYear } = dateConverter(jobAdData.endTime);
-
   return (
     <>
       <a
@@ -62,7 +59,10 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
             <div css={infoContainer}>
               <p css={companyName}>{jobAdData.company.name}</p>
               <p css={date}>
-                {jobEndYear === "9999" ? jobStartDate : `${jobStartDate}`}~{`${jobEndDate}`}
+                {dayjs(jobAdData.jd.endTime).format("YYYY") === "9999" && dayjs(jobAdData.jd.startTime).format("MM.DD")}
+                {dayjs(jobAdData.jd.endTime).format("YYYY") !== "9999" &&
+                  dayjs(jobAdData.jd.startTime).format("MM.DD")}{" "}
+                ~ {dayjs(jobAdData.jd.endTime).format("MM.DD")}
               </p>
             </div>
           </div>
