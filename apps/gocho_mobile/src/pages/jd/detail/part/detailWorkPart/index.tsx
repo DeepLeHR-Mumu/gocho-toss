@@ -58,18 +58,16 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
       <div css={flexBox}>
         <p css={subTitle}>근무지</p>
         <div css={flexDesc}>
-          {freshPosition.place.addressArr?.map((place) => {
-            return (
-              <span css={restPoint} key={`지역_${place}`}>
-                {place}
-              </span>
-            );
-          })}
-          {!freshPosition.place.addressArr && !freshPosition.place.factoryArr && (
-            <div key={`지역_${freshPosition.place.etc}`}>
-              <p css={restPoint}>{freshPosition.place.etc}</p>
-            </div>
-          )}
+          {freshPosition.place.etc?.length !== 0 && <p css={restPoint}>{freshPosition.place.etc}</p>}
+
+          {freshPosition.place.addressArr.length !== 0 &&
+            freshPosition.place.addressArr.map((place) => {
+              return (
+                <span css={restPoint} key={`지역_${place}`}>
+                  {place}
+                </span>
+              );
+            })}
         </div>
       </div>
 
