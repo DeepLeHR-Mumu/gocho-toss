@@ -15,8 +15,6 @@ import {
   workPlaceContainer,
   factoryButton,
   flexDesc,
-  typeText,
-  placeContainer,
   placeDesc,
   factoryAddressDesc,
   factoryIconCSS,
@@ -87,20 +85,16 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
         <div css={flexBetweenBox}>
           <p css={subTitle}>근무지</p>
           <div>
-            {freshPosition.place.addressArr?.map((place) => {
-              return (
-                <p css={placeDesc} key={`지역_${place}`}>
-                  {place}
-                </p>
-              );
-            })}
+            {freshPosition.place.etc?.length !== 0 && <p css={placeDesc}>{freshPosition.place.etc}</p>}
 
-            {!freshPosition.place.addressArr && !freshPosition.place.factoryArr && (
-              <p css={placeContainer} key={`지역_${freshPosition.place.etc}`}>
-                <span css={typeText}>{freshPosition.place.type}</span>
-                <span css={restPoint}>{freshPosition.place.etc}</span>
-              </p>
-            )}
+            {freshPosition.place.addressArr.length !== 0 &&
+              freshPosition.place.addressArr.map((place) => {
+                return (
+                  <p css={placeDesc} key={`지역_${place}`}>
+                    {place}
+                  </p>
+                );
+              })}
 
             {freshPosition.place.factoryArr?.map((factory) => {
               return (
