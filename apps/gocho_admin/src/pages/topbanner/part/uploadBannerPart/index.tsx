@@ -2,6 +2,7 @@ import { ChangeEvent, FunctionComponent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
+import dayjs from "dayjs";
 
 import { dateConverter } from "shared-util";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
@@ -90,7 +91,7 @@ export const UploadBannerPart: FunctionComponent = () => {
               css={inputBox(false)}
               {...register("start_time", {
                 required: true,
-                setValueAs: (startDate: Date) => new Date(startDate).getTime(),
+                setValueAs: (startDate: Date) => dayjs(startDate, "YYYY-MM-DDTHH:MM:SS"),
               })}
             />
             <input
@@ -98,7 +99,7 @@ export const UploadBannerPart: FunctionComponent = () => {
               css={inputBox(false)}
               {...register("end_time", {
                 required: true,
-                setValueAs: (endDate: Date) => new Date(endDate).getTime(),
+                setValueAs: (endDate: Date) => dayjs(endDate, "YYYY-MM-DDTHH:MM:SS"),
               })}
             />
             <label css={getJobButton} htmlFor="topBannerColor">

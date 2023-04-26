@@ -9,7 +9,9 @@ import { PostMainBannerDef, RequestObjDef, useAddMainBannerProps } from "./type"
 
 export const postAddMainBanner: PostMainBannerDef = async (requestObj) => {
   const formData = new FormData();
-  formData.append("json", JSON.stringify(requestObj.dto));
+  const json = JSON.stringify(requestObj.dto);
+  const blob = new Blob([json], { type: "application/json" });
+  formData.append("dto", blob);
   formData.append("image", requestObj.image);
 
   const { data } = await axiosInstance.post("/banners/main", formData, {
