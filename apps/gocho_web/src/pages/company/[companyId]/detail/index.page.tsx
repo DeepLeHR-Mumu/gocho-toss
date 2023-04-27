@@ -9,7 +9,7 @@ import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { companyInfoFunnelEvent } from "shared-ga/company";
-import { useCompanyViewCount } from "shared-user";
+import { useAddCompanyViewCount } from "shared-api/viewCount";
 
 import { DetailComment } from "@component/global/detailComment";
 import { Layout } from "@component/layout";
@@ -30,11 +30,13 @@ const DetailPage: NextPage = () => {
   const factoryInfoRef = useRef<null | HTMLDivElement>(null);
   const payInfoRef = useRef<null | HTMLDivElement>(null);
   const welfareInfoRef = useRef<null | HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
   const [isStatic, setIsStatic] = useState<boolean>(true);
 
   const router = useRouter();
 
   const { data: userInfo } = useUserProfile();
+  const { mutate: addViewCount } = useAddCompanyViewCount();
   const { data: companyDetailData } = useCompanyDetail({
     companyId: Number(router.query.companyId),
     isStatic,
@@ -54,7 +56,12 @@ const DetailPage: NextPage = () => {
     }
   }, [companyDetailData]);
 
-  useCompanyViewCount(Number(router.query.companyId));
+  useEffect(() => {
+    if (router.query.companyId && isFirstRender.current) {
+      isFirstRender.current = false;
+      addViewCount({ companyId: Number(router.query.companyId) });
+    }
+  }, [addViewCount, router.query.companyId]);
 
   if (!companyDetailData || router.isFallback) {
     return <main css={mainContainerSkeleton} />;

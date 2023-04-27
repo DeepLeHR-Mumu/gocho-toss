@@ -1,6 +1,6 @@
 import { NextPage, GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 
 import { useCompanyDetail, getCompanyDetail } from "shared-api/company";
@@ -8,7 +8,7 @@ import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { companyJdFunnelEvent } from "shared-ga/company";
-import { useCompanyViewCount } from "shared-user";
+import { useAddCompanyViewCount } from "shared-api/viewCount";
 
 import { Layout } from "@component/layout";
 
@@ -21,11 +21,13 @@ import { mainContainer, mainContainerSkeleton } from "./style";
 const JdPage: NextPage = () => {
   const [isStatic, setIsStatic] = useState<boolean>(true);
   const router = useRouter();
+  const isFirstRender = useRef(true);
 
   const { data: companyDetailData } = useCompanyDetail({
     companyId: Number(router.query.companyId),
     isStatic,
   });
+  const { mutate: addViewCount } = useAddCompanyViewCount();
 
   useEffect(() => {
     setIsStatic(false);
@@ -37,7 +39,12 @@ const JdPage: NextPage = () => {
     }
   }, [companyDetailData]);
 
-  useCompanyViewCount(Number(router.query.companyId));
+  useEffect(() => {
+    if (router.query.companyId && isFirstRender.current) {
+      isFirstRender.current = false;
+      addViewCount({ companyId: Number(router.query.companyId) });
+    }
+  }, [addViewCount, router.query.companyId]);
 
   if (!companyDetailData || router.isFallback) {
     return <main css={mainContainerSkeleton} />;
