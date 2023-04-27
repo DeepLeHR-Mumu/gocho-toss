@@ -5,19 +5,18 @@ import { useRouter } from "next/router";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 
 import logoSrc from "shared-image/global/deepLeLogo/largeColor.svg";
-import { useViewCount } from "shared-user";
+import { useJdViewCount } from "shared-user";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { getJobDetail, useJobDetail } from "shared-api/job";
 import { useCompanyCommentArr } from "shared-api/company";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
+import { useUserProfile } from "shared-api/auth";
+import { jdDetailFunnelEvent } from "shared-ga/jd";
 
 import { Layout } from "@component/layout";
 import { DetailComment } from "@component/global/detailComment";
-import { useUserProfile } from "shared-api/auth";
-import { useAddJobViewCount } from "shared-api/viewCount";
-import { jdDetailFunnelEvent } from "shared-ga/jd";
 
 import { HeaderPart, DetailSupportPart, DetailWorkPart, DetailPreferencePart, ReceptInfoPart } from "./part";
 import { PageHead } from "./pageHead";
@@ -29,17 +28,9 @@ const JobsDetail: NextPage = () => {
   const [isStatic, setIsStatic] = useState<boolean>(true);
 
   const { data: userData } = useUserProfile();
-  const { mutate: addViewCount } = useAddJobViewCount();
 
   const router = useRouter();
   const { jobId } = router.query;
-  useViewCount({
-    id: Number(jobId),
-    target: "job",
-    viewMutation: () => {
-      addViewCount({ jobId: Number(jobId) });
-    },
-  });
 
   const { data: jobDetailData } = useJobDetail({
     id: Number(jobId),
@@ -57,6 +48,8 @@ const JobsDetail: NextPage = () => {
   useEffect(() => {
     if (jobDetailData) jdDetailFunnelEvent(jobDetailData.id);
   }, [jobDetailData]);
+
+  useJdViewCount(Number(jobId));
 
   if (!jobDetailData || router.isFallback) {
     return (

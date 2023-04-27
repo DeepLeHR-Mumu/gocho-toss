@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 
-import { useAddCompanyViewCount } from "shared-api/viewCount";
 import { useCompanyDetail, getCompanyDetail } from "shared-api/company";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { companyJdFunnelEvent } from "shared-ga/company";
+import { useCompanyViewCount } from "shared-user";
 
 import { Layout } from "@component/layout";
 
@@ -26,39 +26,18 @@ const JdPage: NextPage = () => {
     companyId: Number(router.query.companyId),
     isStatic,
   });
-  const { mutate: addViewCount } = useAddCompanyViewCount();
 
   useEffect(() => {
     setIsStatic(false);
   }, []);
 
   useEffect(() => {
-    const companyViewStr = sessionStorage.getItem("companyViewArr");
-
-    if (!companyDetailData) return;
-
-    const isViewed = companyViewStr?.includes(String(companyDetailData?.id));
-    if (isViewed) return;
-
-    if (companyViewStr) {
-      const companyViewArr: number[] = JSON.parse(companyViewStr);
-      companyViewArr.push(companyDetailData.id);
-      sessionStorage.setItem("companyViewArr", JSON.stringify(companyViewArr));
-      addViewCount({ companyId: companyDetailData.id });
-      return;
-    }
-
-    if (!isViewed) {
-      sessionStorage.setItem("companyViewArr", JSON.stringify([companyDetailData.id]));
-      addViewCount({ companyId: companyDetailData.id });
-    }
-  }, [companyDetailData, addViewCount]);
-
-  useEffect(() => {
     if (companyDetailData) {
       companyJdFunnelEvent(companyDetailData.id);
     }
   }, [companyDetailData]);
+
+  useCompanyViewCount(Number(router.query.companyId));
 
   if (!companyDetailData || router.isFallback) {
     return <main css={mainContainerSkeleton} />;

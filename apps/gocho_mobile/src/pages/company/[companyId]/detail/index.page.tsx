@@ -5,11 +5,10 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
-import { useAddCompanyViewCount } from "shared-api/viewCount";
 import { useCompanyDetail, getCompanyDetail } from "shared-api/company";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { companyInfoFunnelEvent } from "shared-ga/company";
-import { useViewCount } from "shared-user";
+import { useCompanyViewCount } from "shared-user";
 
 import { PageHead } from "./pageHead";
 import { TopButton } from "../component/topButton";
@@ -26,16 +25,7 @@ const DetailPage: NextPage = () => {
   const [isStatic, setIsStatic] = useState<boolean>(true);
   const router = useRouter();
 
-  const { mutate: addViewCount } = useAddCompanyViewCount();
   const { data: companyDetailData } = useCompanyDetail({ companyId: Number(router.query.companyId), isStatic });
-
-  useViewCount({
-    id: Number(router.query.companyId),
-    target: "company",
-    viewMutation: () => {
-      addViewCount({ companyId: Number(router.query.companyId) });
-    },
-  });
 
   useEffect(() => {
     setIsStatic(false);
@@ -46,6 +36,8 @@ const DetailPage: NextPage = () => {
       companyInfoFunnelEvent(companyDetailData.id);
     }
   }, [companyDetailData]);
+
+  useCompanyViewCount(Number(router.query.companyId));
 
   if (!companyDetailData || router.isFallback) {
     return <main css={loadingBox} />;

@@ -3,14 +3,13 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 
-import { useAddCompanyViewCount } from "shared-api/viewCount";
 import { useCompanyDetail, getCompanyDetail, useCompanyCommentArr } from "shared-api/company";
 import { useUserProfile } from "shared-api/auth";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { companyInfoFunnelEvent } from "shared-ga/company";
-import { useViewCount } from "shared-user";
+import { useCompanyViewCount } from "shared-user";
 
 import { DetailComment } from "@component/global/detailComment";
 import { Layout } from "@component/layout";
@@ -44,15 +43,6 @@ const DetailPage: NextPage = () => {
   const { data: companyCommentArrData } = useCompanyCommentArr({
     companyId: Number(router.query.companyId),
   });
-  const { mutate: addViewCount } = useAddCompanyViewCount();
-
-  useViewCount({
-    id: Number(router.query.companyId),
-    target: "company",
-    viewMutation: () => {
-      addViewCount({ companyId: Number(router.query.companyId) });
-    },
-  });
 
   useEffect(() => {
     setIsStatic(false);
@@ -63,6 +53,8 @@ const DetailPage: NextPage = () => {
       companyInfoFunnelEvent(companyDetailData.id);
     }
   }, [companyDetailData]);
+
+  useCompanyViewCount(Number(router.query.companyId));
 
   if (!companyDetailData || router.isFallback) {
     return <main css={mainContainerSkeleton} />;

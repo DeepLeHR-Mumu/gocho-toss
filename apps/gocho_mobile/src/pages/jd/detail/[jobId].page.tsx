@@ -8,10 +8,9 @@ import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { getJobDetail, useJobDetail } from "shared-api/job";
 import { useCompanyCommentArr } from "shared-api/company";
-import { useAddJobViewCount } from "shared-api/viewCount";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { jdDetailFunnelEvent } from "shared-ga/jd";
-import { useViewCount } from "shared-user";
+import { useJdViewCount } from "shared-user";
 
 import { DetailComment } from "@component/common/organisms/detailComment";
 
@@ -28,8 +27,6 @@ const JobsDetail: NextPage = () => {
   const router = useRouter();
   const { jobId } = router.query;
 
-  const { mutate: addViewCount } = useAddJobViewCount();
-
   const { data: jobDetailData, isLoading } = useJobDetail({
     id: Number(jobId),
     isStatic,
@@ -39,14 +36,6 @@ const JobsDetail: NextPage = () => {
     companyId: Number(jobDetailData?.company.id),
   });
 
-  useViewCount({
-    id: Number(jobId),
-    target: "job",
-    viewMutation: () => {
-      addViewCount({ jobId: Number(jobId) });
-    },
-  });
-
   useEffect(() => {
     setIsStatic(false);
   }, []);
@@ -54,6 +43,8 @@ const JobsDetail: NextPage = () => {
   useEffect(() => {
     if (jobDetailData) jdDetailFunnelEvent(jobDetailData.id);
   }, [jobDetailData]);
+
+  useJdViewCount(Number(jobId));
 
   if (!jobDetailData || isLoading || router.isFallback) {
     return (

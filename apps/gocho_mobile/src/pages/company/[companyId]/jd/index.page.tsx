@@ -5,10 +5,10 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
-import { useAddCompanyViewCount } from "shared-api/viewCount";
 import { useCompanyDetail, getCompanyDetail } from "shared-api/company";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { companyJdFunnelEvent } from "shared-ga/company";
+import { useCompanyViewCount } from "shared-user";
 
 import { PageHead } from "./pageHead";
 import { TopButton } from "../component/topButton";
@@ -21,7 +21,6 @@ const DetailPage: NextPage = () => {
   const [isStatic, setIsStatic] = useState<boolean>(true);
   const router = useRouter();
 
-  const { mutate: addViewCount } = useAddCompanyViewCount();
   const { data: companyDetailData } = useCompanyDetail({ companyId: Number(router.query.companyId), isStatic });
 
   useEffect(() => {
@@ -29,30 +28,12 @@ const DetailPage: NextPage = () => {
   }, []);
 
   useEffect(() => {
-    const companyViewStr = sessionStorage.getItem("jobViewArr");
-    if (!router.query.companyId) return;
-
-    const isViewed = companyViewStr?.includes(String(router.query.companyId));
-    if (isViewed) return;
-
-    if (companyViewStr) {
-      const jobViewArr: number[] = JSON.parse(companyViewStr);
-      jobViewArr.push(Number(router.query.companyId));
-      sessionStorage.setItem("jobViewArr", JSON.stringify(jobViewArr));
-      addViewCount({ companyId: Number(router.query.companyId) });
-      return;
-    }
-    if (!isViewed) {
-      sessionStorage.setItem("jobViewArr", JSON.stringify([router.query.companyId]));
-      addViewCount({ companyId: Number(router.query.companyId) });
-    }
-  }, [addViewCount, router.query.companyId]);
-
-  useEffect(() => {
     if (companyDetailData) {
       companyJdFunnelEvent(companyDetailData.id);
     }
   }, [companyDetailData]);
+
+  useCompanyViewCount(Number(router.query.companyId));
 
   if (!companyDetailData || router.isFallback) {
     return <main css={loadingBox} />;
