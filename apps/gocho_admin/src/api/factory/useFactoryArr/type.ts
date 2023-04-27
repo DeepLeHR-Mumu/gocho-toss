@@ -1,10 +1,12 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
+import { PageResultDef } from "shared-type/api/paginationType";
+
 export interface RequestObjDef {
-  companyId?: number;
-  limit?: number;
-  offset?: number;
+  size?: number;
+  page?: number;
   status?: "all" | "upload-waiting" | "modify-waiting" | "upload-reject" | "modify-reject";
+  companyId?: number;
 }
 
 export interface ResponseObjDef {
@@ -31,7 +33,7 @@ export interface ResponseObjDef {
       name: string;
     };
   }[];
-  count: number;
+  page_result: PageResultDef;
 }
 
 export const factoryArrKeyObj = {

@@ -5,5 +5,8 @@ export const cssObj = {
     display: flex;
     min-height: 100vh;
   `,
-  content: css``,
+  content: css`
+    flex-grow: 1;
+    max-width: 60vw;
+  `,
 };
