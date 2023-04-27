@@ -1,6 +1,15 @@
 import { ResponseObjDef } from "./type";
 
-export const factoryArrSelector = ({ data: factoryArr, count }: ResponseObjDef) => {
+export const factoryArrSelector = ({ data: factoryArr, page_result }: ResponseObjDef) => {
+  const pageResult = {
+    totalElements: page_result?.total_elements,
+    totalPages: page_result?.total_pages,
+    page: page_result?.page,
+    size: page_result?.size,
+    isFirst: page_result?.is_first,
+    isLast: page_result?.is_last,
+  };
+
   const factoryDataArr = factoryArr.map((factory) => ({
     id: factory.id,
     status: factory.status,
@@ -21,5 +30,5 @@ export const factoryArrSelector = ({ data: factoryArr, count }: ResponseObjDef) 
       name: factory.company.name,
     },
   }));
-  return { factoryDataArr, count };
+  return { factoryDataArr, pageResult };
 };

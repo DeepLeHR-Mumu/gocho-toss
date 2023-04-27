@@ -22,8 +22,8 @@ const BusinessFactoryList: NextPageWithLayout = () => {
     isError,
   } = useFactoryArr({
     status: factoryStatus,
-    limit: FACTORY_SEARCH_LIMIT,
-    offset: (Number(router.query.page) - 1) * FACTORY_SEARCH_LIMIT,
+    size: FACTORY_SEARCH_LIMIT,
+    page: Number(router.query.page),
   });
 
   if (!factoryDataObj || isLoading) {
@@ -37,8 +37,6 @@ const BusinessFactoryList: NextPageWithLayout = () => {
   const changeFactoryStatusHandler = () => {
     setFactoryStatus((prev) => (prev === "upload-waiting" ? "modify-waiting" : "upload-waiting"));
   };
-
-  const totalPage = Math.ceil(factoryDataObj.count / FACTORY_SEARCH_LIMIT);
 
   return (
     <main css={mainContainer}>
@@ -71,7 +69,7 @@ const BusinessFactoryList: NextPageWithLayout = () => {
           </tbody>
         </table>
       </section>
-      <Pagination totalPage={totalPage} url={INTERNAL_URL.BUSINESS_FACTORY_LIST_URL} />
+      <Pagination totalPage={factoryDataObj.pageResult.totalPages} url={INTERNAL_URL.BUSINESS_FACTORY_LIST_URL} />
     </main>
   );
 };
