@@ -26,6 +26,10 @@ export const useAddJd: useAddJdProps = () =>
           start_time: dayjs(new Date(requestObj.dto.start_time)).format("YYYY-MM-DDTHH:MM:ss"),
           end_time: dayjs(new Date(requestObj.dto.end_time)).format("YYYY-MM-DDTHH:MM:ss"),
           process_arr: requestObj.dto.process_arr?.split("\n"),
+          apply_url:
+            requestObj.dto.apply_url.includes("@") && !requestObj.dto.apply_url.includes("mailto")
+              ? `mailto: ${requestObj.dto.apply_url}`
+              : requestObj.dto.apply_url,
           apply_route_arr: requestObj.dto.apply_route_arr.split("\n"),
           etc_arr: requestObj.dto.etc_arr ? requestObj.dto.etc_arr.split("\n") : null,
           position_arr: requestObj.dto.position_arr.map((position) => ({
