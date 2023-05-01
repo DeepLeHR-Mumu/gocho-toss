@@ -1,16 +1,17 @@
 import { useMutation } from "@tanstack/react-query";
+import { AxiosError, AxiosResponse } from "axios";
 
-import { axiosNoTokenInstance } from "../../axiosInstance";
+import { ErrorResponseDef } from "shared-type/api/errorResponeType";
 
-import { RequestObjDef } from "./type";
+import { axiosInstance } from "../../axiosInstance";
 
-const addJobViewCount = async (requestObj: RequestObjDef) => {
-  const token = localStorage.getItem("accessToken");
-  const headers = token ? { "x-access-token": token } : undefined;
-  const { data } = await axiosNoTokenInstance.post(`/jds/${requestObj.jobId}/views`, null, { headers });
+import { RequestObjDef, AddJdViewCountDef, UseAddJdViewCountProps } from "./type";
+
+const addJobViewCount: AddJdViewCountDef = async (requestObj) => {
+  const { data } = await axiosInstance.post(`/jds/${requestObj.jobId}/views`, null);
   return data;
 };
 
-export const useAddJobViewCount = () => {
-  return useMutation({ mutationFn: addJobViewCount });
+export const useAddJobViewCount: UseAddJdViewCountProps = () => {
+  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({ mutationFn: addJobViewCount });
 };

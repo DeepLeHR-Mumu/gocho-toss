@@ -1,15 +1,14 @@
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
-import { useAddCompanyViewCount } from "shared-api/viewCount";
 import { useCompanyDetail, getCompanyDetail } from "shared-api/company";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { companyInfoFunnelEvent } from "shared-ga/company";
-import { useViewCount } from "shared-user";
+import { useAddCompanyViewCount } from "shared-api/viewCount";
 
 import { PageHead } from "./pageHead";
 import { TopButton } from "../component/topButton";
@@ -25,17 +24,10 @@ import { container, loadingBox } from "./style";
 const DetailPage: NextPage = () => {
   const [isStatic, setIsStatic] = useState<boolean>(true);
   const router = useRouter();
+  const isFirstRender = useRef(true);
 
-  const { mutate: addViewCount } = useAddCompanyViewCount();
   const { data: companyDetailData } = useCompanyDetail({ companyId: Number(router.query.companyId), isStatic });
-
-  useViewCount({
-    id: Number(router.query.companyId),
-    target: "company",
-    viewMutation: () => {
-      addViewCount({ companyId: Number(router.query.companyId) });
-    },
-  });
+  const { mutate: addViewCount } = useAddCompanyViewCount();
 
   useEffect(() => {
     setIsStatic(false);
@@ -46,6 +38,13 @@ const DetailPage: NextPage = () => {
       companyInfoFunnelEvent(companyDetailData.id);
     }
   }, [companyDetailData]);
+
+  useEffect(() => {
+    if (router.query.companyId && isFirstRender.current) {
+      isFirstRender.current = false;
+      addViewCount({ companyId: Number(router.query.companyId) });
+    }
+  }, [addViewCount, router.query.companyId]);
 
   if (!companyDetailData || router.isFallback) {
     return <main css={loadingBox} />;
