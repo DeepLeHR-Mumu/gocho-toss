@@ -44,7 +44,11 @@ export const BottomMenu: FunctionComponent<BottomMenuProps> = ({ jobDetailData, 
         <NormalButton
           text="실시간 댓글"
           buttonClick={() => {
-            return setOpenComment(true);
+            if (!userInfoData) {
+              setModal("loginModal", { button: "close" });
+              return;
+            }
+            setOpenComment(true);
           }}
           variant="outlined"
           wide
