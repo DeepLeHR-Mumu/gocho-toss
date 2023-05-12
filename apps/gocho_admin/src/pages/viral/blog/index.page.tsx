@@ -16,7 +16,7 @@ const Blog: NextPageWithLayout = () => {
     isError,
   } = useJdArr({
     order: "popular",
-    filter: "todayUpload",
+    filter: "viral",
     size: 50,
   });
 

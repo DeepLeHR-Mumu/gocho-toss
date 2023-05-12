@@ -6,11 +6,13 @@ import { SharedButton } from "shared-ui/business/sharedButton";
 
 import { useDeleteCompanyKeyword } from "@/api";
 import { companyKeywordArrKeyObj } from "@/api/company/useCompanyKeywordArr/type";
+import { useToast } from "@/globalStates";
 
 import { cssObj } from "./style";
 import { KeywordCardProps } from "./type";
 
 export const KeywordCard: FunctionComponent<KeywordCardProps> = ({ keywordObj }) => {
+  const { setToast } = useToast();
   const queryClient = useQueryClient();
 
   const { mutate: deleteKeywordMutate } = useDeleteCompanyKeyword();
@@ -20,6 +22,7 @@ export const KeywordCard: FunctionComponent<KeywordCardProps> = ({ keywordObj })
       { keyword },
       {
         onSuccess: () => {
+          setToast("삭제되었습니다");
           queryClient.invalidateQueries(companyKeywordArrKeyObj.all);
         },
       }
