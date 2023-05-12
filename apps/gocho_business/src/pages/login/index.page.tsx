@@ -176,7 +176,7 @@ const LoginPage: NextPage = () => {
               로그인
             </button>
             <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSfYgeAv0BREQSPEtgjHO6-1rHh-srF3EDnRHAWL2e2g1PL_Pw/viewform"
+              href="https://tally.so/r/wL9e5J"
               css={cssObj.signupButton}
               target="_blank"
               rel="noreferrer"
