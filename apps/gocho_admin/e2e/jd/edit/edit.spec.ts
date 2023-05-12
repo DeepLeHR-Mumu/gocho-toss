@@ -5,7 +5,7 @@ import { INTERNAL_URL } from "@/constant";
 
 test("공고 수정 테스트", async ({ page }) => {
   test.slow();
-  await page.goto(INTERNAL_URL.JD_LIST_URL);
+  await page.goto(`${INTERNAL_URL.JD_LIST_URL}?page=1`);
 
   await page.route(`${MANAGER_BACKEND_URL}/jds`, (route) => {
     route.fulfill({
@@ -32,7 +32,6 @@ test("공고 수정 테스트", async ({ page }) => {
   await page.waitForTimeout(100);
   await page.locator("label").filter({ hasText: "출하" }).click();
   await page.selectOption('[name="position_arr.0.place.type"]', "일반");
-  await page.getByRole("button", { name: "테스트 공장 1" }).nth(0).click();
   await page.getByRole("button", { name: "000명 채용" }).first().click();
 
   await Promise.all([

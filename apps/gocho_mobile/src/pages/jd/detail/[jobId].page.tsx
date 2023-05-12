@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage } from "next";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 
@@ -7,11 +7,10 @@ import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { getJobDetail, useJobDetail } from "shared-api/job";
-import { useCompanyCommentArr } from "shared-api/company";
 import { useAddJobViewCount } from "shared-api/viewCount";
+import { useCompanyCommentArr } from "shared-api/company";
 import { jobDetailKeyObj } from "shared-constant/queryKeyFactory/job/jobDetailKeyObj";
 import { jdDetailFunnelEvent } from "shared-ga/jd";
-import { useViewCount } from "shared-user";
 
 import { DetailComment } from "@component/common/organisms/detailComment";
 
@@ -25,11 +24,12 @@ const JobsDetail: NextPage = () => {
   const [currentPositionId, setCurrentPositionId] = useState<number>(0);
   const [openComment, setOpenComment] = useState<boolean>(false);
   const [isStatic, setIsStatic] = useState<boolean>(true);
+  const isFirstRender = useRef(true);
+
   const router = useRouter();
   const { jobId } = router.query;
 
   const { mutate: addViewCount } = useAddJobViewCount();
-
   const { data: jobDetailData, isLoading } = useJobDetail({
     id: Number(jobId),
     isStatic,
@@ -39,14 +39,6 @@ const JobsDetail: NextPage = () => {
     companyId: Number(jobDetailData?.company.id),
   });
 
-  useViewCount({
-    id: Number(jobId),
-    target: "job",
-    viewMutation: () => {
-      addViewCount({ jobId: Number(jobId) });
-    },
-  });
-
   useEffect(() => {
     setIsStatic(false);
   }, []);
@@ -54,6 +46,13 @@ const JobsDetail: NextPage = () => {
   useEffect(() => {
     if (jobDetailData) jdDetailFunnelEvent(jobDetailData.id);
   }, [jobDetailData]);
+
+  useEffect(() => {
+    if (jobId && isFirstRender.current) {
+      isFirstRender.current = false;
+      addViewCount({ jobId: Number(jobId) });
+    }
+  }, [addViewCount, jobId]);
 
   if (!jobDetailData || isLoading || router.isFallback) {
     return (

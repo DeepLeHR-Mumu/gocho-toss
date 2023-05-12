@@ -8,8 +8,6 @@ import gochoLogoMono from "shared-image/global/deepLeLogo/smallMono.svg";
 import { useAddTipBookmarkArr, useDeleteTipBookmarkArr, useUserTipBookmarkArr } from "shared-api/bookmark";
 import { useUserProfile } from "shared-api/auth";
 import { dateConverter } from "shared-util";
-import { useAddTipViewCount } from "shared-api/viewCount";
-import { useViewCount } from "shared-user";
 
 import { ModalComponent } from "@component/modal/modalBackground";
 // import { CloseButton } from "@component/common/atom/closeButton";
@@ -43,7 +41,6 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
   // const { setToastMessage } = useToast();
   const { data: userInfoData } = useUserProfile();
 
-  const { mutate: addViewCount } = useAddTipViewCount();
   const { mutate: addBookmarkMutate } = useAddTipBookmarkArr({ id: tipData.id });
   const { mutate: deleteBookmarkMutate } = useDeleteTipBookmarkArr({ id: tipData.id });
   const { data: tipBookmarkArr } = useUserTipBookmarkArr({ userId: userInfoData?.id });
@@ -61,14 +58,6 @@ export const TipBox: FunctionComponent<TipBoxProps> = ({ tipData }) => {
     if (isBookmarked) return deleteBookmarkMutate({ userId: userInfoData?.id as number, id: tipData.id });
     return addBookmarkMutate({ userId: userInfoData?.id as number, id: tipData.id });
   };
-
-  useViewCount({
-    id: tipData.id,
-    target: "tip",
-    viewMutation: () => {
-      addViewCount({ elemId: tipData.id });
-    },
-  });
 
   // if (contentObj === undefined) {
   //   return (

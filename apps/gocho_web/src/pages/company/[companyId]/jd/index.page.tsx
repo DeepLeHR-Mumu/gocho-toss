@@ -1,14 +1,14 @@
 import { NextPage, GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 
-import { useAddCompanyViewCount } from "shared-api/viewCount";
 import { useCompanyDetail, getCompanyDetail } from "shared-api/company";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { companyJdFunnelEvent } from "shared-ga/company";
+import { useAddCompanyViewCount } from "shared-api/viewCount";
 
 import { Layout } from "@component/layout";
 
@@ -21,6 +21,7 @@ import { mainContainer, mainContainerSkeleton } from "./style";
 const JdPage: NextPage = () => {
   const [isStatic, setIsStatic] = useState<boolean>(true);
   const router = useRouter();
+  const isFirstRender = useRef(true);
 
   const { data: companyDetailData } = useCompanyDetail({
     companyId: Number(router.query.companyId),
@@ -33,32 +34,17 @@ const JdPage: NextPage = () => {
   }, []);
 
   useEffect(() => {
-    const companyViewStr = sessionStorage.getItem("companyViewArr");
-
-    if (!companyDetailData) return;
-
-    const isViewed = companyViewStr?.includes(String(companyDetailData?.id));
-    if (isViewed) return;
-
-    if (companyViewStr) {
-      const companyViewArr: number[] = JSON.parse(companyViewStr);
-      companyViewArr.push(companyDetailData.id);
-      sessionStorage.setItem("companyViewArr", JSON.stringify(companyViewArr));
-      addViewCount({ companyId: companyDetailData.id });
-      return;
-    }
-
-    if (!isViewed) {
-      sessionStorage.setItem("companyViewArr", JSON.stringify([companyDetailData.id]));
-      addViewCount({ companyId: companyDetailData.id });
-    }
-  }, [companyDetailData, addViewCount]);
-
-  useEffect(() => {
     if (companyDetailData) {
       companyJdFunnelEvent(companyDetailData.id);
     }
   }, [companyDetailData]);
+
+  useEffect(() => {
+    if (router.query.companyId && isFirstRender.current) {
+      isFirstRender.current = false;
+      addViewCount({ companyId: Number(router.query.companyId) });
+    }
+  }, [addViewCount, router.query.companyId]);
 
   if (!companyDetailData || router.isFallback) {
     return <main css={mainContainerSkeleton} />;

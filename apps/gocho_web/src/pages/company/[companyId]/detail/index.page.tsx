@@ -3,14 +3,13 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 
-import { useAddCompanyViewCount } from "shared-api/viewCount";
 import { useCompanyDetail, getCompanyDetail, useCompanyCommentArr } from "shared-api/company";
 import { useUserProfile } from "shared-api/auth";
 import { InvisibleH1 } from "shared-ui/common/atom/invisibleH1";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { companyDetailKeyObj } from "shared-constant/queryKeyFactory/company/companyDetailKeyObj";
 import { companyInfoFunnelEvent } from "shared-ga/company";
-import { useViewCount } from "shared-user";
+import { useAddCompanyViewCount } from "shared-api/viewCount";
 
 import { DetailComment } from "@component/global/detailComment";
 import { Layout } from "@component/layout";
@@ -31,11 +30,13 @@ const DetailPage: NextPage = () => {
   const factoryInfoRef = useRef<null | HTMLDivElement>(null);
   const payInfoRef = useRef<null | HTMLDivElement>(null);
   const welfareInfoRef = useRef<null | HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
   const [isStatic, setIsStatic] = useState<boolean>(true);
 
   const router = useRouter();
 
   const { data: userInfo } = useUserProfile();
+  const { mutate: addViewCount } = useAddCompanyViewCount();
   const { data: companyDetailData } = useCompanyDetail({
     companyId: Number(router.query.companyId),
     isStatic,
@@ -43,15 +44,6 @@ const DetailPage: NextPage = () => {
 
   const { data: companyCommentArrData } = useCompanyCommentArr({
     companyId: Number(router.query.companyId),
-  });
-  const { mutate: addViewCount } = useAddCompanyViewCount();
-
-  useViewCount({
-    id: Number(router.query.companyId),
-    target: "company",
-    viewMutation: () => {
-      addViewCount({ companyId: Number(router.query.companyId) });
-    },
   });
 
   useEffect(() => {
@@ -63,6 +55,13 @@ const DetailPage: NextPage = () => {
       companyInfoFunnelEvent(companyDetailData.id);
     }
   }, [companyDetailData]);
+
+  useEffect(() => {
+    if (router.query.companyId && isFirstRender.current) {
+      isFirstRender.current = false;
+      addViewCount({ companyId: Number(router.query.companyId) });
+    }
+  }, [addViewCount, router.query.companyId]);
 
   if (!companyDetailData || router.isFallback) {
     return <main css={mainContainerSkeleton} />;
