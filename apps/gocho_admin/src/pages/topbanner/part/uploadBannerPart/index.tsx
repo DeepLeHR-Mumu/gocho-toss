@@ -8,8 +8,7 @@ import { dateConverter } from "shared-util";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
 
-import { useJdDetail } from "@/api/jd/useJdDetail";
-import { useAddTopBanner } from "@/api/banner/useAddTopBanner";
+import { useJdDetail, useAddTopBanner } from "@/api";
 import { pageTitle } from "@/style/commonStyles";
 
 import {

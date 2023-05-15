@@ -4,14 +4,13 @@ import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
   factoryId: number;
-  type: string;
   reason: string;
 }
 
-export interface RejectFactoryDef {
-  ({ factoryId, type, reason }: RequestObjDef): Promise<AdminResponseDef>;
+export interface RejectUploadFactoryDef {
+  ({ factoryId, reason }: RequestObjDef): Promise<AdminResponseDef>;
 }
 
-export interface UseRejectFactoryProps {
+export interface UseRejectUploadFactoryProps {
   (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
 }

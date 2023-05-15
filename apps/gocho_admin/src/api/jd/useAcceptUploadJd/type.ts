@@ -5,14 +5,12 @@ import { AdminResponseDef } from "shared-type/api/responseType";
 
 export interface RequestObjDef {
   jdId: number;
-  type: string;
-  reason: string;
 }
 
-export interface RejectJdDef {
-  ({ jdId, type }: RequestObjDef): Promise<AdminResponseDef>;
+export interface AcceptUploadJdDef {
+  ({ jdId }: RequestObjDef): Promise<AdminResponseDef>;
 }
 
-export interface UseRejectJdProps {
+export interface UseAcceptUploadJdProps {
   (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
 }

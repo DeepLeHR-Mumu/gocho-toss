@@ -4,7 +4,7 @@ import { ReactElement } from "react";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { dateConverter } from "shared-util";
 
-import { useJdArr } from "@/api/jd/useJdArr";
+import { useJdArr } from "@/api";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 import { ErrorScreen, LoadingScreen, GlobalLayout } from "@/component";
 import type { NextPageWithLayout } from "@/types";

@@ -8,8 +8,8 @@ import { SharedButton } from "shared-ui/business/sharedButton";
 import { useDisabledKeydownSubmit } from "shared-hooks";
 import { COLORS } from "shared-style/color";
 
-import { useToast } from "@/globalStates";
 import { useEditJd, useJdDetail } from "@/api";
+import { useToast } from "@/globalStates";
 import { GlobalLayout, LoadingScreen, PageLayout } from "@/component";
 import type { NextPageWithLayout } from "@/types";
 import { INTERNAL_URL } from "@/constant";

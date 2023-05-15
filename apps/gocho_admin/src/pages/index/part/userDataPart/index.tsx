@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { useStatistics } from "@/api/stat/useStatistics";
+import { useStatistics } from "@/api";
 
 import Graph from "../../component/graph";
 import { dataBox, dataTextPoint, dataTitle, dataWrapper, sectionTitle } from "./style";

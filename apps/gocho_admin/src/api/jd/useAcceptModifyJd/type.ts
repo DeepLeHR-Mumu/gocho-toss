@@ -4,15 +4,13 @@ import { UseMutationResult } from "@tanstack/react-query";
 import { AdminResponseDef } from "shared-type/api/responseType";
 
 export interface RequestObjDef {
-  companyId: number;
-  type: string;
-  reason: string;
+  jdId: number;
 }
 
-export interface RejectCompanyDef {
-  ({ companyId, type, reason }: RequestObjDef): Promise<AdminResponseDef>;
+export interface AcceptModifyJdDef {
+  ({ jdId }: RequestObjDef): Promise<AdminResponseDef>;
 }
 
-export interface UseRejectCompanyProps {
+export interface UseAcceptModifyJdProps {
   (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
 }

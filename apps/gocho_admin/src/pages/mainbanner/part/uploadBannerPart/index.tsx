@@ -5,7 +5,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
 
-import { useAddMainBanner } from "@/api/banner/useAddMainBanner";
+import { useAddMainBanner } from "@/api";
 import { pageTitle } from "@/style/commonStyles";
 
 import {

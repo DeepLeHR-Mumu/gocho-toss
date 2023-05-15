@@ -6,7 +6,7 @@ export { useAddTopBanner } from "./banner/useAddTopBanner";
 export { useDeleteBanner } from "./banner/useDeleteBanner";
 export { useMoveBanner } from "./banner/useMoveBanner";
 
-export { useAcceptCompany } from "./company/useAcceptCompany";
+export { useAcceptModifyCompany } from "./company/useAcceptModifyCompany";
 export { useAddCompany } from "./company/useAddCompany";
 export { useAddCompanyKeyword } from "./company/useAddCompanyKeyword";
 export { useCompanyArr } from "./company/useCompanyArr";
@@ -17,19 +17,22 @@ export { useDeleteCompanyKeyword } from "./company/useDeleteCompanyKeyword";
 export { useEditCompany } from "./company/useEditCompany";
 export { useEditCompanyRequest } from "./company/useEditCompanyRequest";
 export { useFindCompany } from "./company/useFindCompany";
-export { useRejectCompany } from "./company/useRejectCompany";
+export { useRejectModifyCompany } from "./company/useRejectModifyCompany";
 
-export { useAcceptFactory } from "./factory/useAcceptFactory";
+export { useAcceptModifyFactory } from "./factory/useAcceptModifyFactory";
+export { useAcceptUploadFactory } from "./factory/useAcceptUploadFactory";
 export { useAddFactory } from "./factory/useAddFactory";
 export { useDeleteFactory } from "./factory/useDeleteFactory";
 export { useEditFactory } from "./factory/useEditFactory";
 export { useEditFactoryRequest } from "./factory/useEditFactoryRequest";
 export { useFactoryArr } from "./factory/useFactoryArr";
 export { useFactoryDetail } from "./factory/useFactoryDetail";
-export { useRejectFactory } from "./factory/useRejectFactory";
+export { useRejectModifyFactory } from "./factory/useRejectModifyFactory";
+export { useRejectUploadFactory } from "./factory/useRejectUploadFactory";
 export { useFindFactory } from "./factory/useFindFactory";
 
-export { useAcceptJd } from "./jd/useAcceptJd";
+export { useAcceptModifyJd } from "./jd/useAcceptModifyJd";
+export { useAcceptUploadJd } from "./jd/useAcceptUploadJd";
 export { useAddJd } from "./jd/useAddJd";
 export { useDeleteJd } from "./jd/useDeleteJd";
 export { useEditJd } from "./jd/useEditJd";
@@ -37,7 +40,8 @@ export { useEditJdRequest } from "./jd/useEditJdRequest";
 export { useEndJd } from "./jd/useEndJd";
 export { useJdArr } from "./jd/useJdArr";
 export { useJdDetail } from "./jd/useJdDetail";
-export { useRejectJd } from "./jd/useRejectJd";
+export { useRejectModifyJd } from "./jd/useRejectModifyJd";
+export { useRejectUploadJd } from "./jd/useRejectUploadJd";
 
 export { useAddRecruiter } from "./recruiter/useAddRecruiter";
 export { useDeleteRecruiter } from "./recruiter/useDeleteRecruiter";

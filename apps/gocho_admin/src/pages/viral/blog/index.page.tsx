@@ -1,7 +1,7 @@
 import { dateConverter } from "shared-util";
 
 import { ReactElement } from "react";
-import { useJdArr } from "@/api/jd/useJdArr";
+import { useJdArr } from "@/api";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 import { LoadingScreen, ErrorScreen, GlobalLayout } from "@/component";
 import type { NextPageWithLayout } from "@/types";
