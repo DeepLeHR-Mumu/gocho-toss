@@ -52,7 +52,6 @@ export const menuArr = [
       },
     ],
   },
-
   {
     menuTitle: "바이럴 마케팅",
     subMenuArr: [
@@ -66,7 +65,6 @@ export const menuArr = [
       },
     ],
   },
-
   {
     menuTitle: "기업 서비스",
     subMenuArr: [
@@ -85,6 +83,19 @@ export const menuArr = [
       {
         menuTitle: "공장 검수 리스트",
         menuLink: `${INTERNAL_URL.BUSINESS_FACTORY_LIST_URL}?page=1`,
+      },
+    ],
+  },
+  {
+    menuTitle: "앱 관련",
+    subMenuArr: [
+      {
+        menuTitle: "추천 검색 키워드 목록",
+        menuLink: INTERNAL_URL.SEARCH_KEYWORD_URL,
+      },
+      {
+        menuTitle: "추천 검색 키워드 추가",
+        menuLink: INTERNAL_URL.SEARCH_KEYWORD_UPLOAD_URL,
       },
     ],
   },
