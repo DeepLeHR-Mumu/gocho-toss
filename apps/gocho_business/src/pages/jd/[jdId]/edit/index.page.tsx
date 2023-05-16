@@ -144,8 +144,8 @@ const JdEditPage: NextPageWithLayout = () => {
           jdId: Number(router.query.jdId),
           dto: {
             ...jdObj,
-            start_time: dayjs(new Date(jdObj.start_time)).format("YYYY-MM-DDTHH:MM:ss"),
-            end_time: dayjs(new Date(jdObj.end_time)).format("YYYY-MM-DDTHH:MM:ss"),
+            start_time: dayjs(new Date(jdObj.start_time)).format("YYYY-MM-DDTHH:mm:ss"),
+            end_time: dayjs(new Date(jdObj.end_time)).format("YYYY-MM-DDTHH:mm:ss"),
             apply_url: jdObj.apply_url.includes("@") ? `mailto: ${jdObj.apply_url}` : jdObj.apply_url,
             process_arr: getFieldArrayValue(jdObj.process_arr),
             apply_route_arr: getFieldArrayValue(jdObj.apply_route_arr),
@@ -193,8 +193,8 @@ const JdEditPage: NextPageWithLayout = () => {
   };
 
   useEffect(() => {
-    const newStartTime = dayjs(jdData?.startTime, "YYYY-MM-DDTHH:MM:SS").toDate();
-    const newEndTime = dayjs(jdData?.endTime, "YYYY-MM-DDTHH:MM:SS").toDate();
+    const newStartTime = dayjs(jdData?.startTime, "YYYY-MM-DDTHH:mm:ss").toDate();
+    const newEndTime = dayjs(jdData?.endTime, "YYYY-MM-DDTHH:mm:ss").toDate();
 
     const positionNewArr = jdData?.positionArr.map((position) => ({
       id: position.id,

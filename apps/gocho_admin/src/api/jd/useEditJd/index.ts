@@ -25,8 +25,8 @@ export const useEditJd: useEditJdProps = () => {
         ...requestObj,
         dto: {
           ...requestObj.dto,
-          start_time: dayjs(new Date(requestObj.dto.start_time)).format("YYYY-MM-DDTHH:MM:ss"),
-          end_time: dayjs(new Date(requestObj.dto.end_time)).format("YYYY-MM-DDTHH:MM:ss"),
+          start_time: dayjs(new Date(requestObj.dto.start_time)).format("YYYY-MM-DDTHH:mm"),
+          end_time: dayjs(new Date(requestObj.dto.end_time)).format("YYYY-MM-DDTHH:mm"),
           process_arr: requestObj.dto.process_arr?.split("\n"),
           apply_url:
             requestObj.dto.apply_url.includes("@") && !requestObj.dto.apply_url.includes("mailto")
