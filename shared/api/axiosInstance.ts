@@ -76,9 +76,9 @@ export const useAxiosInterceptor = () => {
 
     const { exp: accessTokenExp } = tokenDecryptor(accessTokenData);
     const { exp: refreshTokenExp } = tokenDecryptor(refreshTokenData);
-    const accessCreateTime = dayjs(new Date(accessTokenExp * 1000), "YYYY-MM-DDTHH:MM:ss");
-    const refreshCreateTime = dayjs(new Date(refreshTokenExp * 1000), "YYYY-MM-DDTHH:MM:ss");
-    const currentTime = dayjs(new Date(), "YYYY-MM-DDTHH:MM:ss");
+    const accessCreateTime = dayjs(new Date(accessTokenExp * 1000), "YYYY-MM-DDTHH:mm:ss");
+    const refreshCreateTime = dayjs(new Date(refreshTokenExp * 1000), "YYYY-MM-DDTHH:mm:ss");
+    const currentTime = dayjs(new Date(), "YYYY-MM-DDTHH:mm:ss");
     const accessBetweenCurrentDiffTime = accessCreateTime.diff(currentTime, "ms");
     const isRefreshAfterCurrentTime = currentTime.isAfter(refreshCreateTime);
 

@@ -117,7 +117,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
             required: true,
             setValueAs: (d: Date) => {
               const date = new Date(d);
-              return dayjs(date, "YYYY-MM-DDTHH:MM:SS");
+              return dayjs(date, "YYYY-MM-DDTHH:mm:ss");
             },
           })}
         />
