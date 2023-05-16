@@ -52,6 +52,8 @@ export { useSearchKeywordArr } from "./keyword/useSearchKeywordArr";
 export { useAddSearchKeyword } from "./keyword/useAddSearchKeyword";
 export { useDeleteSearchKeyword } from "./keyword/useDeleteSearchKeyword";
 
+export { useAddPush } from "./fcm/useAddPush";
+
 export { useStatistics } from "./stat/useStatistics";
 
 // export { useAxiosInterceptor, axiosInstance, axiosNoTokenInstance } from "./useAxiosInterceptor";

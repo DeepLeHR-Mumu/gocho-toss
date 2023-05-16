@@ -54,7 +54,7 @@ const SearchKeywordUpload: NextPageWithLayout = () => {
   return (
     <main>
       <PageLayout>
-        <h2 css={cssObj.title}>기업 키워드 업로드</h2>
+        <h2 css={cssObj.title}>추천 검색 키워드 추가</h2>
         <form css={cssObj.formContainer} onSubmit={handleSubmit(searchKeywordSubmitHandler)}>
           <div css={cssObj.inputContainer}>
             <strong>키워드</strong>

@@ -90,6 +90,10 @@ export const menuArr = [
     menuTitle: "앱 관련",
     subMenuArr: [
       {
+        menuTitle: "푸쉬 알림 발송",
+        menuLink: INTERNAL_URL.FCM_PUSH,
+      },
+      {
         menuTitle: "추천 검색 키워드 목록",
         menuLink: INTERNAL_URL.SEARCH_KEYWORD_URL,
       },

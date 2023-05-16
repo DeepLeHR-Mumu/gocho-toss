@@ -23,6 +23,7 @@ export const INTERNAL_URL = {
   BUSINESS_COMPANY_EDIT_URL: "/business/company/edit",
   BUSINESS_FACTORY_REGISTER_URL: "/business/factory/register",
   BUSINESS_FACTORY_EDIT_URL: "/business/factory/edit",
-  SEARCH_KEYWORD_URL: "/search/list",
-  SEARCH_KEYWORD_UPLOAD_URL: "/search/upload",
+  FCM_PUSH: "/app/fcm",
+  SEARCH_KEYWORD_URL: "/app/search/list",
+  SEARCH_KEYWORD_UPLOAD_URL: "/app/search/upload",
 };
