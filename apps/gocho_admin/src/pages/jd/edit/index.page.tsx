@@ -44,8 +44,8 @@ const JdEdit: NextPageWithLayout = () => {
   useDisabledKeydownSubmit();
 
   useEffect(() => {
-    const newStartTime = dayjs(jobData?.startTime, "YYYY-MM-DDTHH:MM:SS").toDate();
-    const newEndTime = dayjs(jobData?.endTime, "YYYY-MM-DDTHH:MM:SS").toDate();
+    const newStartTime = dayjs(jobData?.startTime, "YYYY-MM-DDTHH:mm:ss").add(9, "hour").toDate();
+    const newEndTime = dayjs(jobData?.endTime, "YYYY-MM-DDTHH:mm:ss").add(9, "hour").toDate();
 
     const positionNewArr = jobData?.positionArr.map((position) => ({
       id: position.id,
