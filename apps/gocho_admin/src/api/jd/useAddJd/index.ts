@@ -23,8 +23,8 @@ export const useAddJd: useAddJdProps = () =>
       const newRequestObj = {
         dto: {
           ...requestObj.dto,
-          start_time: dayjs(new Date(requestObj.dto.start_time)).format("YYYY-MM-DDTHH:MM:ss"),
-          end_time: dayjs(new Date(requestObj.dto.end_time)).format("YYYY-MM-DDTHH:MM:ss"),
+          start_time: dayjs(new Date(requestObj.dto.start_time)).format("YYYY-MM-DDTHH:mm:ss"),
+          end_time: dayjs(new Date(requestObj.dto.end_time)).format("YYYY-MM-DDTHH:mm:ss"),
           process_arr: requestObj.dto.process_arr?.split("\n"),
           apply_url:
             requestObj.dto.apply_url.includes("@") && !requestObj.dto.apply_url.includes("mailto")
