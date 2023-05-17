@@ -6,7 +6,7 @@ export const INTERNAL_URL = {
   JD_EDIT_URL: "/jd/edit",
   MAIN_BANNER_URL: "/banner/main",
   JD_TOP_BANNER_URL: "/banner/top",
-  ASIDE_BANNER_URL: "/banner/aside",
+  APP_JD_BANNER_URL: "/banner/app",
   COMPANY_UPLOAD_URL: "/company/upload",
   COMPANY_LIST_URL: "/company/list",
   COMPANY_EDIT_URL: "/company/edit",

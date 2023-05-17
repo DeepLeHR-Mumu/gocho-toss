@@ -14,7 +14,7 @@ export const postAddMainBanner: PostMainBannerDef = async (requestObj) => {
   formData.append("dto", blob);
   formData.append("image", requestObj.image);
 
-  const { data } = await axiosInstance.post("/banners/main", formData, {
+  const { data } = await axiosInstance.post("/ads/main-banner", formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return data;

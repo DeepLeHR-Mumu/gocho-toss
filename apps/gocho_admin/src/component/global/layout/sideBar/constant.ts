@@ -26,8 +26,8 @@ export const menuArr = [
         menuLink: INTERNAL_URL.JD_TOP_BANNER_URL,
       },
       {
-        menuTitle: "사이드 배너",
-        menuLink: INTERNAL_URL.ASIDE_BANNER_URL,
+        menuTitle: "앱 공고 배너",
+        menuLink: INTERNAL_URL.APP_JD_BANNER_URL,
       },
     ],
   },

@@ -1,7 +1,7 @@
 import { ReactElement, useEffect, useState, useRef } from "react";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
-import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { SharedButton } from "shared-ui/business/sharedButton";
@@ -17,7 +17,6 @@ import { INTERNAL_URL } from "@/constant";
 import { jdArrKeyObj } from "@/api/jd/useJdArr/type";
 import { CommonDataPart, PositionRequiredDataPart, PositionTaskDataPart, PositionEtcDataPart } from "./part";
 import { JobFormValues } from "./type";
-import { blankPosition } from "./constant";
 import { cssObj } from "./style";
 
 const JdEdit: NextPageWithLayout = () => {
@@ -31,11 +30,7 @@ const JdEdit: NextPageWithLayout = () => {
   const jobForm = useForm<JobFormValues>({
     mode: "onBlur",
   });
-  const { control, handleSubmit, reset } = jobForm;
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "position_arr",
-  });
+  const { handleSubmit, reset } = jobForm;
 
   const { setToast } = useToast();
   const { data: jobData } = useJdDetail({ id: jobId });
@@ -47,35 +42,8 @@ const JdEdit: NextPageWithLayout = () => {
     const newStartTime = dayjs(jobData?.startTime, "YYYY-MM-DDTHH:mm:ss").add(9, "hour").toDate();
     const newEndTime = dayjs(jobData?.endTime, "YYYY-MM-DDTHH:mm:ss").add(9, "hour").toDate();
 
-    const positionNewArr = jobData?.positionArr.map((position) => ({
-      id: position.id,
-      middle: position.eduSummary.middle,
-      high: position.eduSummary.high,
-      college: position.eduSummary.college,
-      four: position.eduSummary.four,
-      required_exp: position.requiredExp.type,
-      min_year: position.requiredExp.minYear,
-      max_year: position.requiredExp.maxYear,
-      required_etc_arr: position.requiredEtcArr?.join("\n"),
-      contract_type: position.contractType.type,
-      conversion_rate: position.contractType.conversionRate,
-      task_main: position.task.mainTask,
-      task_sub_arr: position.task.subTaskArr,
-      task_detail_arr: position.taskDetailArr.join("\n"),
-      rotation_arr: position.rotationArr,
-      place: {
-        type: position.place.type,
-        address_arr: position.place.addressArr || [],
-        etc: position.place.etc || "",
-        factory_arr: position.place.factoryArr?.map((factoryNumber) => factoryNumber.id) || [],
-      },
-      hire_number: position.hireCount,
-      pay_arr: position.payArr?.join("\n"),
-      preferred_certi_arr: position.preferredCertiArr,
-      preferred_etc_arr: position.preferredEtcArr?.join("\n"),
-    }));
-
     reset({
+      id: jobData?.id,
       company_id: jobData?.company.id,
       title: jobData?.title,
       start_time: new Date(newStartTime).toISOString().substring(0, 19),
@@ -85,7 +53,30 @@ const JdEdit: NextPageWithLayout = () => {
       apply_route_arr: jobData?.applyRouteArr.join("\n"),
       apply_url: jobData?.applyUrl,
       etc_arr: jobData?.etcArr.join("\n"),
-      position_arr: positionNewArr,
+      middle: jobData?.eduSummary.middle,
+      high: jobData?.eduSummary.high,
+      college: jobData?.eduSummary.college,
+      four: jobData?.eduSummary.four,
+      required_exp: jobData?.requiredExp.type,
+      min_year: jobData?.requiredExp.minYear,
+      max_year: jobData?.requiredExp.maxYear,
+      required_etc_arr: jobData?.requiredEtcArr?.join("\n"),
+      contract_type: jobData?.contractType.type,
+      conversion_rate: jobData?.contractType.conversionRate,
+      task_main: jobData?.task.mainTask,
+      task_sub_arr: jobData?.task.subTaskArr,
+      task_detail_arr: jobData?.taskDetailArr.join("\n"),
+      rotation_arr: jobData?.rotationArr,
+      place: {
+        type: jobData?.place.type,
+        address_arr: jobData?.place.addressArr || [],
+        etc: jobData?.place.etc || "",
+        factory_arr: jobData?.place.factoryArr?.map((factoryNumber) => factoryNumber.id) || [],
+      },
+      hire_number: jobData?.hireCount,
+      pay_arr: jobData?.payArr?.join("\n"),
+      preferred_certi_arr: jobData?.preferredCertiArr,
+      preferred_etc_arr: jobData?.preferredEtcArr?.join("\n"),
     });
   }, [jobData, reset]);
 
@@ -132,56 +123,18 @@ const JdEdit: NextPageWithLayout = () => {
         <section>
           <form css={cssObj.formContainer} onSubmit={handleSubmit(jobSubmitHandler)}>
             <CommonDataPart jobForm={jobForm} jobData={jobData} />
-            <ul css={cssObj.fieldArrCSS}>
-              {fields.map((item, index) => (
-                <li key={item.id}>
-                  <PositionRequiredDataPart id={item.id} index={index} jobForm={jobForm} />
-                  <PositionTaskDataPart id={item.id} index={index} jobForm={jobForm} />
-                  <PositionEtcDataPart id={item.id} index={index} jobForm={jobForm} jobData={jobData} />
-
-                  <div css={cssObj.cardButtonBox}>
-                    <SharedButton
-                      onClickHandler={() => append({ ...jobForm.watch("position_arr")[index], id: null })}
-                      text="해당 직무 복사"
-                      size="medium"
-                      radius="round"
-                      backgroundColor={COLORS.BLUE_FIRST40}
-                      fontColor={COLORS.GRAY100}
-                    />
-                    <SharedButton
-                      onClickHandler={() => remove(index)}
-                      text="해당 직무 제거"
-                      size="medium"
-                      radius="round"
-                      backgroundColor={COLORS.BLUE_FIRST40}
-                      fontColor={COLORS.GRAY100}
-                    />
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <PositionRequiredDataPart jobForm={jobForm} />
+            <PositionTaskDataPart jobForm={jobForm} />
+            <PositionEtcDataPart jobForm={jobForm} jobData={jobData} />
             {checkMsg && <p css={cssObj.warning}>{checkMsg}</p>}
-            <div css={cssObj.buttonBox}>
-              <SharedButton
-                onClickHandler={() => {
-                  append(blankPosition);
-                }}
-                text="직무 추가"
-                size="large"
-                radius="round"
-                backgroundColor={COLORS.BLUE_FIRST40}
-                fontColor={COLORS.GRAY100}
-              />
-
-              <SharedButton
-                onClickHandler="submit"
-                text="공고 수정하기"
-                size="large"
-                radius="round"
-                backgroundColor={COLORS.BLUE_FIRST40}
-                fontColor={COLORS.GRAY100}
-              />
-            </div>
+            <SharedButton
+              onClickHandler="submit"
+              text="공고 수정하기"
+              size="large"
+              radius="round"
+              backgroundColor={COLORS.BLUE_FIRST40}
+              fontColor={COLORS.GRAY100}
+            />
           </form>
         </section>
       </PageLayout>

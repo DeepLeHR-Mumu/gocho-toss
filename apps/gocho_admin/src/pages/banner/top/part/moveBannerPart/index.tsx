@@ -4,7 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
 
-import { useMoveBanner } from "@/api";
+import { useMoveTopBanner } from "@/api";
 import { pageTitle } from "@/style/commonStyles";
 
 import { changeBannerButton, flexBox, inputBox, sectionContainer } from "./style";
@@ -15,7 +15,7 @@ export const MoveBannerPart: FunctionComponent = () => {
 
   const { register, handleSubmit } = useForm<BannerMoveFormValues>();
 
-  const { mutate: moveMutate } = useMoveBanner();
+  const { mutate: moveMutate } = useMoveTopBanner();
 
   const bannerMoveHandler: SubmitHandler<BannerMoveFormValues> = (bannerMoveObj) => {
     moveMutate(

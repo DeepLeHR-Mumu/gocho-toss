@@ -9,7 +9,7 @@ export const sectionContainer = css`
 `;
 
 export const inputBox = (isSmall: boolean) => css`
-  width: ${isSmall ? "6rem" : "25%"};
+  width: ${isSmall ? "6rem" : "20%"};
   border-radius: 0.5rem;
   border: 1px solid ${COLORS.GRAY70};
   background-color: ${COLORS.GRAY100};

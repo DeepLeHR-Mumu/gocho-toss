@@ -28,7 +28,7 @@ export interface ResponseObjDef {
     start_time: string;
     end_time: string;
     apply_url: string;
-    task_arr: string[];
+    task: string;
     edu_summary: string[];
     place_arr: string[];
     rotation_arr: string[];

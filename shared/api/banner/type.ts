@@ -22,12 +22,12 @@ export interface TopBannerDef {
   color: string;
   start_time: string;
   end_time: string;
-  company: {
-    id: number;
-    logo_url: string;
-    name: string;
-  };
   jd: {
+    company: {
+      id: number;
+      logo_url: string;
+      name: string;
+    };
     id: number;
     title: string;
     start_time: string;

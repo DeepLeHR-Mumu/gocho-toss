@@ -43,14 +43,11 @@ export const UploadBannerPart: FunctionComponent = () => {
   const { mutate: addMutate } = useAddTopBanner();
 
   const submitBannerHandler: SubmitHandler<BannerSubmitFormValues> = (bannerSubmitObj) => {
-    addMutate(
-      { dto: bannerSubmitObj },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries(bannerArrKeyObj.top);
-        },
-      }
-    );
+    addMutate(bannerSubmitObj, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(bannerArrKeyObj.top);
+      },
+    });
   };
 
   const changeColorHandler = (changeEvent: ChangeEvent<HTMLInputElement>) => {

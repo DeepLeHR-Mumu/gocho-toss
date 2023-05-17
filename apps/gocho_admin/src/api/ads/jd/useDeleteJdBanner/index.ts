@@ -5,12 +5,12 @@ import { AdminResponseDef } from "shared-type/api/responseType";
 
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
-import { DeleteBannerDef, RequestObjDef, useDeleteBannerProps } from "./type";
+import { DeleteJdBannerDef, RequestObjDef, useDeleteJdBannerProps } from "./type";
 
-export const deleteBanner: DeleteBannerDef = async (requestObj) => {
-  const { data } = await axiosInstance.delete(`/banners/${requestObj.bannerId}`);
+export const deleteBanner: DeleteJdBannerDef = async (requestObj) => {
+  const { data } = await axiosInstance.delete(`/ads/jd-banner/${requestObj.bannerId}`);
   return data;
 };
 
-export const useDeleteBanner: useDeleteBannerProps = () =>
+export const useDeleteJdBanner: useDeleteJdBannerProps = () =>
   useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: deleteBanner });

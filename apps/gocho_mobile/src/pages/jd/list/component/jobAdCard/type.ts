@@ -4,12 +4,12 @@ export interface SlideCardProps {
     color: string;
     startTime: string;
     endTime: string;
-    company: {
-      id: number;
-      logoUrl: string;
-      name: string;
-    };
     jd: {
+      company: {
+        id: number;
+        logoUrl: string;
+        name: string;
+      };
       id: number;
       title: string;
       startTime: string;

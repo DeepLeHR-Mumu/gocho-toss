@@ -6,10 +6,10 @@ export interface RequestObjDef {
   bannerId: number;
 }
 
-export interface DeleteBannerDef {
+export interface DeleteTopBannerDef {
   ({ bannerId }: RequestObjDef): Promise<AdminResponseDef>;
 }
 
-export interface useDeleteBannerProps {
+export interface useDeleteTopBannerProps {
   (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
 }

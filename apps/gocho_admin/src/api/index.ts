@@ -1,10 +1,13 @@
 export { useDoLogin } from "./auth/useDoLogin";
 
-export { useAddMainBanner } from "./banner/useAddMainBanner";
-export { useAddSideBanner } from "./banner/useAddSideBanner";
-export { useAddTopBanner } from "./banner/useAddTopBanner";
-export { useDeleteBanner } from "./banner/useDeleteBanner";
-export { useMoveBanner } from "./banner/useMoveBanner";
+export { useDeleteJdBanner } from "./ads/jd/useDeleteJdBanner";
+export { useMoveJdBanner } from "./ads/jd/useMoveJdBanner";
+export { useAddMainBanner } from "./ads/main/useAddMainBanner";
+export { useDeleteMainBanner } from "./ads/main/useDeleteMainBanner";
+export { useMoveMainBanner } from "./ads/main/useMoveMainBanner";
+export { useAddTopBanner } from "./ads/top/useAddTopBanner";
+export { useDeleteTopBanner } from "./ads/top/useDeleteTopBanner";
+export { useMoveTopBanner } from "./ads/top/useMoveTopBanner";
 
 export { useAcceptModifyCompany } from "./company/useAcceptModifyCompany";
 export { useAddCompany } from "./company/useAddCompany";
