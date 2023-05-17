@@ -20,7 +20,7 @@ export const CheckBoxWithDesc: FunctionComponent<CheckBoxWithDescProps> = ({
         type="checkbox"
         css={cssObj.input}
         {...registerObj}
-        defaultChecked={checked}
+        checked={checked}
         id={id}
         value={value || ""}
         disabled={isDisabled}

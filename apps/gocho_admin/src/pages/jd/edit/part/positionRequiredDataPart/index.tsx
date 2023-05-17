@@ -28,25 +28,25 @@ export const PositionRequiredDataPart: FunctionComponent<PositionRequiredDataPar
                 registerObj={{ ...jobForm.register("middle") }}
                 id="middle"
                 desc="중졸"
-                checked={jobForm.watch("middle")}
+                checked={jobForm.watch("middle") || false}
               />
               <CheckBoxWithDesc
                 registerObj={{ ...jobForm.register("high") }}
                 id="high"
                 desc="고졸"
-                checked={jobForm.watch("high")}
+                checked={jobForm.watch("high") || false}
               />
               <CheckBoxWithDesc
                 registerObj={{ ...jobForm.register("college") }}
                 id="college"
                 desc="초대졸"
-                checked={jobForm.watch("college")}
+                checked={jobForm.watch("college") || false}
               />
               <CheckBoxWithDesc
                 registerObj={{ ...jobForm.register("four") }}
                 id="four"
                 desc="4년제"
-                checked={jobForm.watch("four")}
+                checked={jobForm.watch("four") || false}
               />
             </div>
           </li>

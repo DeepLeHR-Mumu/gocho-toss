@@ -67,7 +67,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ jobF
             {errors?.rotation_arr?.message && <ErrorMessage msg={errors.rotation_arr.message} />}
             <div css={cssObj.flexBox}>
               {rotationArr.map((rotation) => {
-                const isChecked = watch("rotation_arr")?.includes(rotation.name);
+                const isChecked = watch("rotation_arr")?.includes(rotation.name) || false;
                 return (
                   <CheckBoxWithDesc
                     registerObj={{
@@ -225,7 +225,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ jobF
               {errors.task_sub_arr?.message && <ErrorMessage msg={errors.task_sub_arr.message} />}
               <div css={cssObj.flexBox}>
                 {mainTask?.subTaskArr.map((subTask) => {
-                  const isChecked = watch("task_sub_arr").includes(subTask);
+                  const isChecked = watch("task_sub_arr").includes(subTask) || false;
                   return (
                     <CheckBoxWithDesc
                       key={subTask}
