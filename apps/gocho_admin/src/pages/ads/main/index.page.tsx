@@ -1,10 +1,9 @@
 import { ReactElement } from "react";
 
-import { useMainBannerArr } from "shared-api/banner";
-
 import { mainContainer } from "@/style/commonStyles";
 import { ErrorScreen, LoadingScreen, GlobalLayout } from "@/component";
 import type { NextPageWithLayout } from "@/types";
+import { useMainBannerArr } from "@/api";
 
 import { UploadBannerPart } from "./part/uploadBannerPart";
 import { BannerListPart } from "./part/bannerListPart";

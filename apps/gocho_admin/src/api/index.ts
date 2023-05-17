@@ -2,9 +2,11 @@ export { useDoLogin } from "./auth/useDoLogin";
 
 export { useDeleteJdBanner } from "./ads/jd/useDeleteJdBanner";
 export { useMoveJdBanner } from "./ads/jd/useMoveJdBanner";
+export { useMainBannerArr } from "./ads/main/useMainBannerArr";
 export { useAddMainBanner } from "./ads/main/useAddMainBanner";
 export { useDeleteMainBanner } from "./ads/main/useDeleteMainBanner";
 export { useMoveMainBanner } from "./ads/main/useMoveMainBanner";
+export { useTopBannerArr } from "./ads/top/useTopBannerArr";
 export { useAddTopBanner } from "./ads/top/useAddTopBanner";
 export { useDeleteTopBanner } from "./ads/top/useDeleteTopBanner";
 export { useMoveTopBanner } from "./ads/top/useMoveTopBanner";

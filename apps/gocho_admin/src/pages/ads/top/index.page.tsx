@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-import { useTopBannerArr } from "shared-api/banner";
+import { useTopBannerArr } from "shared-api/ads";
 
 import type { NextPageWithLayout } from "@/types";
 import { mainContainer } from "@/style/commonStyles";

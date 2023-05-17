@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-import { useMainBannerArr } from "shared-api/banner";
+import { useMainBannerArr } from "shared-api/ads";
 
 import { mainContainer } from "@/style/commonStyles";
 import { ErrorScreen, LoadingScreen, GlobalLayout } from "@/component";

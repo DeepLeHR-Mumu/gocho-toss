@@ -1,7 +1,7 @@
-import { SideBannerDef } from "../type";
+import { TopBannerDef } from "../../type";
 
 export interface ResponseObjDef {
-  data: SideBannerDef[];
+  data: TopBannerDef[];
   count: number;
 }
 

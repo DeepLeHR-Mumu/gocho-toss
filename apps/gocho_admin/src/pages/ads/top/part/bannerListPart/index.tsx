@@ -1,14 +1,14 @@
 import { FunctionComponent } from "react";
 
-import { useMainBannerArr } from "shared-api/banner";
+import { useTopBannerArr } from "shared-api/ads";
 
 import { pageTitle } from "@/style/commonStyles";
 
-import { bannerId, companyName, expireDate, sectionContainer, title, titleBox } from "./style";
+import { bannerIdBox, companyNameBox, expireDateBox, sectionContainer, tableTitle, titleBox } from "./style";
 import { BannerBox } from "../../component/bannerBox";
 
 export const BannerListPart: FunctionComponent = () => {
-  const { data: bannerDataArr } = useMainBannerArr();
+  const { data: bannerDataArr } = useTopBannerArr();
 
   return (
     <>
@@ -16,17 +16,17 @@ export const BannerListPart: FunctionComponent = () => {
       <section css={sectionContainer}>
         <table>
           <thead>
-            <tr css={titleBox}>
-              <th css={bannerId}>배너 ID</th>
-              <th css={companyName}>회사 이름</th>
-              <th css={title}>배너 제목</th>
-              <th css={expireDate}>만료 날짜</th>
+            <tr css={tableTitle}>
+              <th css={bannerIdBox}>배너 ID</th>
+              <th css={companyNameBox}>회사 이름</th>
+              <th css={titleBox}>배너 제목</th>
+              <th css={expireDateBox}>만료 날짜</th>
               <th> </th>
             </tr>
           </thead>
           <tbody>
             {bannerDataArr?.bannerDataArr.map((banner) => (
-              <BannerBox key={`ManagerMainBanner${banner.id}`} banner={banner} />
+              <BannerBox key={`ManagerTopBanner${banner.id}`} banner={banner} />
             ))}
           </tbody>
         </table>
