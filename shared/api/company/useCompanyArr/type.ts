@@ -1,6 +1,9 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
+
 import { companyArrKeyObj } from "shared-constant/queryKeyFactory/company/arrKeyObj";
-import { CompanyDef, PageResultDef } from "../type/companyArr";
+import { PageResultDef } from "shared-type/api/paginationType";
+
+import { CompanyDef } from "../type/companyArr";
 
 export interface CompanyArrResponseObjDef {
   data: CompanyDef[];

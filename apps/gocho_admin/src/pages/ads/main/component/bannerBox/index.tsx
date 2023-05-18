@@ -6,7 +6,7 @@ import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerAr
 
 import { useDeleteMainBanner } from "@/api";
 
-import { bannerBox, bannerId, companyName, deleteBannerButton, expireDate, title } from "./style";
+import { bannerBox, bannerId, deleteBannerButton, expireDate } from "./style";
 import { BannerBoxProps } from "./type";
 
 export const BannerBox: FunctionComponent<BannerBoxProps> = ({ banner }) => {
@@ -30,8 +30,6 @@ export const BannerBox: FunctionComponent<BannerBoxProps> = ({ banner }) => {
   return (
     <tr css={bannerBox}>
       <td css={bannerId}>{banner.id}</td>
-      <td css={companyName}>{banner.company.name}</td>
-      <td css={title}>{banner.jd.title}</td>
       <td css={expireDate}>{date}</td>
       <td>
         <button

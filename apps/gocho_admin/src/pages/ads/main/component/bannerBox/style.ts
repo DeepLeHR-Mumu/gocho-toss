@@ -16,18 +16,6 @@ export const bannerId = css`
   text-align: center;
 `;
 
-export const companyName = css`
-  width: 20%;
-  text-align: center;
-  ${shorten()};
-`;
-
-export const title = css`
-  width: 40%;
-  text-align: center;
-  ${shorten()};
-`;
-
 export const expireDate = css`
   width: 20%;
   text-align: center;

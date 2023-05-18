@@ -1,15 +1,7 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
 import { userBookmarkKeyObj } from "shared-constant/queryKeyFactory/company/companyUserBookmarkArrKeyObj";
-
-export interface PageResultDef {
-  total_elements: number;
-  total_pages: number;
-  page: number;
-  size: number;
-  is_first: boolean;
-  is_last: boolean;
-}
+import { PageResultDef } from "shared-type/api/paginationType";
 
 export interface CompanyBookmarkArrDef {
   id: number;
