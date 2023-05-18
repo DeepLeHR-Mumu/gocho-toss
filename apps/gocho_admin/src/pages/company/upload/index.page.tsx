@@ -1,8 +1,8 @@
 import { useState, ReactElement } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
+import { useAddCompany } from "@/api";
 import { GlobalLayout } from "@/component";
-import { useAddCompany } from "@/api/company/useAddCompany";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 import type { NextPageWithLayout } from "@/types";
 

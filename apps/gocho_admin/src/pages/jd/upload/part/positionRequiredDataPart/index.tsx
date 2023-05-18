@@ -8,16 +8,13 @@ import { requiredExpArr } from "./constant";
 import { PositionBoxProps } from "./type";
 import { cssObj } from "./style";
 
-export const PositionRequiredDataPart: FunctionComponent<PositionBoxProps> = ({ id, index, jobForm }) => {
+export const PositionRequiredDataPart: FunctionComponent<PositionBoxProps> = ({ jobForm }) => {
   const {
     watch,
     formState: { errors },
   } = jobForm;
 
-  const isDisabled =
-    watch("position_arr")[index].required_exp !== "경력" && watch("position_arr")[index].required_exp !== "신입/경력";
-
-  const positionError = errors.position_arr && errors.position_arr[index];
+  const isDisabled = watch("required_exp") !== "경력" && watch("required_exp") !== "신입/경력";
 
   return (
     <div css={cssObj.wrapper}>
@@ -27,51 +24,33 @@ export const PositionRequiredDataPart: FunctionComponent<PositionBoxProps> = ({ 
           <li>
             <strong css={cssObj.requiredTitle}>학력 조건</strong>
             <div css={cssObj.flexBox}>
-              <CheckBoxWithDesc
-                registerObj={{ ...jobForm.register(`position_arr.${index}.middle`) }}
-                id={`middle${index}`}
-                desc="중졸"
-              />
-              <CheckBoxWithDesc
-                registerObj={{ ...jobForm.register(`position_arr.${index}.high`) }}
-                id={`high${index}`}
-                desc="고졸"
-              />
-              <CheckBoxWithDesc
-                registerObj={{ ...jobForm.register(`position_arr.${index}.college`) }}
-                id={`college${index}`}
-                desc="초대졸"
-              />
-              <CheckBoxWithDesc
-                registerObj={{ ...jobForm.register(`position_arr.${index}.four`) }}
-                id={`four${index}`}
-                desc="4년제"
-              />
+              <CheckBoxWithDesc registerObj={{ ...jobForm.register("middle") }} id="middle" desc="중졸" />
+              <CheckBoxWithDesc registerObj={{ ...jobForm.register("high") }} id="high" desc="고졸" />
+              <CheckBoxWithDesc registerObj={{ ...jobForm.register("college") }} id="college" desc="초대졸" />
+              <CheckBoxWithDesc registerObj={{ ...jobForm.register("four") }} id="four" desc="4년제" />
             </div>
           </li>
           <li>
             <strong css={cssObj.noRequiredTitle}>기타 조건</strong>
             <div css={cssObj.textareaBox}>
               <p css={cssObj.textareaWarning}>엔터로 구분해주세요.</p>
-              <textarea css={cssObj.textarea} {...jobForm.register(`position_arr.${index}.required_etc_arr`)} />
+              <textarea css={cssObj.textarea} {...jobForm.register("required_etc_arr")} />
             </div>
           </li>
         </ul>
         <ul css={cssObj.formBox}>
           <li>
             <strong css={cssObj.requiredTitle}>경력 조건</strong>
-            {positionError && positionError.required_exp?.message && (
-              <ErrorMessage msg={positionError.required_exp.message} />
-            )}
+            {errors && errors.required_exp?.message && <ErrorMessage msg={errors.required_exp.message} />}
             <div css={cssObj.flexBox}>
               {requiredExpArr.map((expName) => (
                 <SharedRadioButton
-                  key={`${expName}${id}`}
-                  registerObj={jobForm.register(`position_arr.${index}.required_exp`, {
+                  key={expName}
+                  registerObj={jobForm.register("required_exp", {
                     required: "경력 조건을 선택해주세요.",
                   })}
                   value={expName}
-                  id={`${expName}${index}`}
+                  id={expName}
                 >
                   <p css={cssObj.radioDesc}>{expName}</p>
                 </SharedRadioButton>
@@ -81,23 +60,23 @@ export const PositionRequiredDataPart: FunctionComponent<PositionBoxProps> = ({ 
           <li>
             <strong css={cssObj.noRequiredTitle}>경력 기간</strong>
             <div css={cssObj.flexBox}>
-              <label htmlFor={`position_arr.${index}.min_year`} css={cssObj.minMaxLabel}>
+              <label htmlFor="min_year" css={cssObj.minMaxLabel}>
                 <input
-                  id={`position_arr.${index}.min_year`}
+                  id="min_year"
                   type="number"
                   css={isDisabled ? cssObj.disabledMinMaxInput : cssObj.minMaxInput}
-                  {...jobForm.register(`position_arr.${index}.min_year`, { valueAsNumber: true })}
+                  {...jobForm.register("min_year", { valueAsNumber: true })}
                   disabled={isDisabled}
                 />
                 <p css={cssObj.minMaxDesc}>년 이상</p>
               </label>
 
-              <label htmlFor={`position_arr.${index}.max_year`} css={cssObj.minMaxLabel}>
+              <label htmlFor="max_year" css={cssObj.minMaxLabel}>
                 <input
-                  id={`position_arr.${index}.max_year`}
+                  id="max_year"
                   type="number"
                   css={isDisabled ? cssObj.disabledMinMaxInput : cssObj.minMaxInput}
-                  {...jobForm.register(`position_arr.${index}.max_year`, { valueAsNumber: true })}
+                  {...jobForm.register("max_year", { valueAsNumber: true })}
                   disabled={isDisabled}
                 />
                 <p css={cssObj.minMaxDesc}>년 이하</p>

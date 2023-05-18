@@ -4,7 +4,7 @@ import { ReactElement } from "react";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { dateConverter } from "shared-util";
 
-import { useJdArr } from "@/api/jd/useJdArr";
+import { useJdArr } from "@/api";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 import { ErrorScreen, LoadingScreen, GlobalLayout } from "@/component";
 import type { NextPageWithLayout } from "@/types";
@@ -38,7 +38,7 @@ const Instagram: NextPageWithLayout = () => {
     isError,
   } = useJdArr({
     order: "popular",
-    filter: "todayUpload",
+    filter: "viral",
     size: 50,
   });
 
@@ -63,12 +63,7 @@ const Instagram: NextPageWithLayout = () => {
     const deadline = endYear === "9999" ? "상시" : `~ ${endDate} 까지`;
 
     text += `🚀 ${job.companyName}\n${job.title}\n- 접수기간 : ${deadline}\n`;
-    let taskString = "";
-    job.taskArr.map((task, index, taskArr) => {
-      taskString += index + 1 === taskArr.length ? `${task}` : `${task}, `;
-      return taskString;
-    });
-    text += `- 직무: ${taskString}\n`;
+    text += `- 직무: ${job.task}\n`;
     let contractString = "";
     job.contractArr.map((contract, index, contractArr) => {
       contractString += index + 1 === contractArr.length ? `${contract}` : `${contract}, `;
@@ -132,11 +127,9 @@ const Instagram: NextPageWithLayout = () => {
                   <div css={infoBox}>
                     <p css={infoName}>채용 분야</p>
                     <div css={info}>
-                      {job.taskArr.map((task) => (
-                        <p key={`${job.id}${task}`} css={infoText}>
-                          {task}
-                        </p>
-                      ))}
+                      <p key={job.task} css={infoText}>
+                        {job.task}
+                      </p>
                     </div>
                     <p css={infoName}>학력</p>
                     <div css={info}>

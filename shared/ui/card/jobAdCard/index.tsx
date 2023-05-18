@@ -53,11 +53,11 @@ export const JobAdCard: FunctionComponent<JobAdCardProps | JobAdCardSkeleton> = 
           <div css={mainContainer}>
             <div css={companyLogoWrapper}>
               <div css={companyLogoBox}>
-                <Image fill src={jobAdData.company.logoUrl || defaultCompanyLogo} alt="" sizes="1" />
+                <Image fill src={jobAdData.jd.company.logoUrl || defaultCompanyLogo} alt="" sizes="1" />
               </div>
             </div>
             <div css={infoContainer}>
-              <p css={companyName}>{jobAdData.company.name}</p>
+              <p css={companyName}>{jobAdData.jd.company.name}</p>
               <p css={date}>
                 {dayjs(jobAdData.jd.endTime).format("YYYY") === "9999" && dayjs(jobAdData.jd.startTime).format("MM.DD")}
                 {dayjs(jobAdData.jd.endTime).format("YYYY") !== "9999" &&

@@ -1,4 +1,6 @@
-import { JobBookmarkArrDef, PageResultDef } from "./type";
+import { PageResultDef } from "shared-type/api/paginationType";
+
+import { JobBookmarkArrDef } from "./type";
 
 export const selector = (data: JobBookmarkArrDef[], page_result: PageResultDef) => {
   const pageResult = {

@@ -43,11 +43,11 @@ export const JobAdCard: FunctionComponent<SlideCardProps | SlideCardSkeleton> = 
           <div css={slideInfo(jobData.color || "#2284a5")}>
             <div css={companyLogoWrapper}>
               <div css={companyLogoBox}>
-                <Image fill src={jobData.company.logoUrl || defaultCompanyLogo} alt="" sizes="1" />
+                <Image fill src={jobData.jd.company.logoUrl || defaultCompanyLogo} alt="" sizes="1" />
               </div>
             </div>
             <p css={endTime}>{dDayCalculator(jobData.jd.endTime)}</p>
-            <p css={companyName}>{jobData.company.name}</p>
+            <p css={companyName}>{jobData.jd.company.name}</p>
             <strong css={jdTitle}>{jobData.jd.title}</strong>
           </div>
         </div>

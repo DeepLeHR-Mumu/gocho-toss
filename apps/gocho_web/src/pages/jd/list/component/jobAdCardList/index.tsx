@@ -2,9 +2,9 @@ import { FunctionComponent, useRef } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Slider from "react-slick";
 
-import { useTopBannerArr } from "shared-api/banner";
 import { dummyArrCreator } from "shared-util";
 import { JobAdCard } from "shared-ui/card/jobAdCard";
+import { useTopBannerArr } from "shared-api/ads";
 
 import { setCarouselSetting } from "./util";
 import { listContainer, sliderButton, sliderButtonContainer } from "./style";

@@ -8,7 +8,7 @@ export interface RequestObjDef {
   page?: number;
   q?: string;
   userId?: string;
-  filter?: "todayUpload" | "almostDeadline" | "deadline" | "expired" | "valid";
+  filter?: "todayUpload" | "almostDeadline" | "deadline" | "expired" | "valid" | "viral";
   status?: "all" | "upload-waiting" | "modify-waiting" | "upload-reject" | "modify-reject";
   parsing?: "full" | "raw";
   companyId?: number;
@@ -28,7 +28,7 @@ export interface ResponseObjDef {
     start_time: string;
     end_time: string;
     apply_url: string;
-    task_arr: string[];
+    task: string;
     edu_summary: string[];
     place_arr: string[];
     rotation_arr: string[];

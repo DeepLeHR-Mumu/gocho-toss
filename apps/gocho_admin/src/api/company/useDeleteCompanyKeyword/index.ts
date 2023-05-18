@@ -5,12 +5,13 @@ import { AdminResponseDef } from "shared-type/api/responseType";
 
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
+import { ErrorResponseDef } from "@/types";
 import { DeleteCompanyKeywordDef, RequestObjDef, useDeleteCompanyKeywordProps } from "./type";
 
 export const deleteCompanyKeyword: DeleteCompanyKeywordDef = async (requestObj) => {
-  const { data } = await axiosInstance.delete(`/companies/keywords?keyword=${requestObj.keyword}`);
+  const { data } = await axiosInstance.delete("/keywords/company", { data: { keyword: requestObj.keyword } });
   return data;
 };
 
 export const useDeleteCompanyKeyword: useDeleteCompanyKeywordProps = () =>
-  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: deleteCompanyKeyword });
+  useMutation<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>({ mutationFn: deleteCompanyKeyword });

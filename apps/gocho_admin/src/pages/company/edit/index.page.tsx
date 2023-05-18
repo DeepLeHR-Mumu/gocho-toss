@@ -1,10 +1,9 @@
 import { useEffect, useState, ReactElement } from "react";
 import { useRouter } from "next/router";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-
 import dayjs from "dayjs";
-import { useEditCompany } from "@/api/company/useEditCompany";
-import { useCompanyDetail } from "@/api/company/useCompanyDetail";
+
+import { useEditCompany, useCompanyDetail } from "@/api";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 import type { NextPageWithLayout } from "@/types";
 import { ErrorScreen, LoadingScreen, GlobalLayout } from "@/component";

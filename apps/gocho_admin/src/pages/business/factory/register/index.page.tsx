@@ -4,9 +4,7 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useFactoryDetail } from "@/api/factory/useFactoryDetail";
-import { useAcceptFactory } from "@/api/factory/useAcceptFactory";
-import { useRejectFactory } from "@/api/factory/useRejectFactory";
+import { useFactoryDetail, useAcceptUploadFactory, useRejectUploadFactory } from "@/api";
 import { factoryArrKeyObj } from "@/api/factory/useFactoryArr/type";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 import { ErrorScreen, LoadingScreen } from "@/component";
@@ -25,12 +23,12 @@ const FactoryRegisterDetail: NextPage = () => {
   const { register, handleSubmit } = useForm<RejectFormValues>();
 
   const { data: factoryDataObj, isLoading, isError } = useFactoryDetail({ factoryId });
-  const { mutate: acceptFactoryMutate } = useAcceptFactory();
-  const { mutate: rejectFactoryMutate } = useRejectFactory();
+  const { mutate: acceptFactoryMutate } = useAcceptUploadFactory();
+  const { mutate: rejectFactoryMutate } = useRejectUploadFactory();
 
   const acceptFactoryHandler = () => {
     acceptFactoryMutate(
-      { factoryId, type: "upload" },
+      { factoryId },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(factoryArrKeyObj.all);
@@ -45,7 +43,7 @@ const FactoryRegisterDetail: NextPage = () => {
 
   const rejectFactoryHandler: SubmitHandler<RejectFormValues> = (formData) => {
     rejectFactoryMutate(
-      { factoryId, reason: formData.reason, type: "upload" },
+      { factoryId, reason: formData.reason },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(factoryArrKeyObj.all);

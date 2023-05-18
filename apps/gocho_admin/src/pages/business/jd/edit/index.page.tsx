@@ -3,11 +3,8 @@ import { useRouter } from "next/router";
 import { useQueryClient } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+import { useJdDetail, useEditJdRequest, useAcceptUploadJd, useRejectUploadJd } from "@/api";
 import { jdArrKeyObj } from "@/api/jd/useJdArr/type";
-import { useJdDetail } from "@/api/jd/useJdDetail";
-import { useEditJdRequest } from "@/api/jd/useEditJdRequest";
-import { useAcceptJd } from "@/api/jd/useAcceptJd";
-import { useRejectJd } from "@/api/jd/useRejectJd";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 import { ErrorScreen, LoadingScreen, GlobalLayout } from "@/component";
 import type { NextPageWithLayout } from "@/types";
@@ -27,12 +24,12 @@ const JdEditDetail: NextPageWithLayout = () => {
 
   const { data: jdBeforeData, isLoading: isBeforeLoading, isError: isBeforeError } = useJdDetail({ id: jdId });
   const { data: jdAfterData, isLoading: isAfterLoading, isError: isAfterError } = useEditJdRequest({ id: jdId });
-  const { mutate: acceptJdMutate } = useAcceptJd();
-  const { mutate: rejectJdMutate } = useRejectJd();
+  const { mutate: acceptJdMutate } = useAcceptUploadJd();
+  const { mutate: rejectJdMutate } = useRejectUploadJd();
 
   const acceptJdHandler = () => {
     acceptJdMutate(
-      { jdId, type: "update" },
+      { jdId },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(jdArrKeyObj.all);
@@ -47,7 +44,7 @@ const JdEditDetail: NextPageWithLayout = () => {
 
   const rejectJdHandler: SubmitHandler<RejectFormValues> = (formData) => {
     rejectJdMutate(
-      { jdId, reason: formData.reason, type: "update" },
+      { jdId, reason: formData.reason },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(jdArrKeyObj.all);

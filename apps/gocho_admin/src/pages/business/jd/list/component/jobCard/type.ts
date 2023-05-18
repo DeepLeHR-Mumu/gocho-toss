@@ -12,7 +12,7 @@ export interface JobCardProps {
     view: number;
     startTime: string;
     endTime: string;
-    taskArr: string[];
+    task: string;
     eduArr: string[];
     placeArr: string[];
     rotationArr: string[];

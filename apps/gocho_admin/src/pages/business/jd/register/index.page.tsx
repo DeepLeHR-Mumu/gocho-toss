@@ -3,10 +3,8 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
+import { useJdDetail, useAcceptUploadJd, useRejectUploadJd } from "@/api";
 import { jdArrKeyObj } from "@/api/jd/useJdArr/type";
-import { useJdDetail } from "@/api/jd/useJdDetail";
-import { useAcceptJd } from "@/api/jd/useAcceptJd";
-import { useRejectJd } from "@/api/jd/useRejectJd";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 import { ErrorScreen, LoadingScreen, GlobalLayout } from "@/component";
 import type { NextPageWithLayout } from "@/types";
@@ -25,12 +23,12 @@ const JdRegisterDetail: NextPageWithLayout = () => {
   const { register, handleSubmit } = useForm<RejectFormValues>();
 
   const { data: jdDataObj, isLoading, isError } = useJdDetail({ id: jdId });
-  const { mutate: acceptJdMutate } = useAcceptJd();
-  const { mutate: rejectJdMutate } = useRejectJd();
+  const { mutate: acceptJdMutate } = useAcceptUploadJd();
+  const { mutate: rejectJdMutate } = useRejectUploadJd();
 
   const acceptJdHandler = () => {
     acceptJdMutate(
-      { jdId, type: "upload" },
+      { jdId },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(jdArrKeyObj.all);
@@ -45,7 +43,7 @@ const JdRegisterDetail: NextPageWithLayout = () => {
 
   const rejectJdHandler: SubmitHandler<RejectFormValues> = (formData) => {
     rejectJdMutate(
-      { jdId, reason: formData.reason, type: "upload" },
+      { jdId, reason: formData.reason },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(jdArrKeyObj.all);

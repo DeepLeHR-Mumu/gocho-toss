@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import axios, { AxiosRequestConfig } from "axios";
 import dayjs from "dayjs";
-import { BACKEND_URL, MANAGER_BACKEND_URL } from "shared-constant";
+import { BACKEND_URL } from "shared-constant";
 import { tokenDecryptor } from "shared-util";
 
 export const axiosNoTokenInstance = axios.create({
@@ -135,8 +135,3 @@ export const useAxiosInterceptor = () => {
     };
   }, [requestInterceptor]);
 };
-
-export const axiosManagerInstance = axios.create({
-  timeout: 10000,
-  baseURL: MANAGER_BACKEND_URL,
-});

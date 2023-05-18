@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useState, ReactElement } from "react";
 
-import { useJdArr } from "@/api/jd/useJdArr";
+import { useJdArr } from "@/api";
 import { ErrorScreen, LoadingScreen, Pagination, GlobalLayout } from "@/component";
 import { INTERNAL_URL } from "@/constant";
 import { mainContainer, pageTitle } from "@/style/commonStyles";

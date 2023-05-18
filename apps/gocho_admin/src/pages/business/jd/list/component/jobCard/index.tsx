@@ -19,13 +19,9 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
         <p css={cssObj.companyName}>{job.companyName}</p>
         <p css={cssObj.jobTitle}>{job.title}</p>
       </td>
-      <td css={cssObj.taskContainer}>
-        {job.taskArr.map((task) => (
-          <p key={`${job.id}${task}`} css={cssObj.taskBox}>
-            {task}
-          </p>
-        ))}
-      </td>
+      <p key={job.task} css={cssObj.taskBox}>
+        {job.task}
+      </p>
       <td css={cssObj.dateBox}>
         {startDate}
         <br />

@@ -12,7 +12,7 @@ import { contractTypeArr, placeTypeArr, rotationArr, taskArr } from "./constant"
 import { PositionBoxProps } from "./type";
 import { cssObj } from "./style";
 
-export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, index, jobForm }) => {
+export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ jobForm }) => {
   const {
     watch,
     setValue,
@@ -22,11 +22,8 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
 
   const { data: factoryData } = useFindFactory({ companyId: watch("company_id") });
 
-  const isConversionDisabled =
-    watch("position_arr")[index].contract_type !== "인턴" && watch("position_arr")[index].contract_type !== "계약>정규";
-
-  const mainTask = taskArr.find((task) => watch("position_arr")[index].task_main === task.mainTask);
-  const positionError = errors.position_arr && errors.position_arr[index];
+  const isConversionDisabled = watch("contract_type") !== "인턴" && watch("contract_type") !== "계약>정규";
+  const mainTask = taskArr.find((task) => watch("task_main") === task.mainTask);
 
   return (
     <div css={cssObj.wrapper}>
@@ -34,18 +31,16 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
         <ul css={cssObj.formBox}>
           <li>
             <strong css={cssObj.requiredTitle}>계약 형태</strong>
-            {positionError && positionError.contract_type?.message && (
-              <ErrorMessage msg={positionError.contract_type.message} />
-            )}
+            {errors && errors.contract_type?.message && <ErrorMessage msg={errors.contract_type.message} />}
             <div css={cssObj.flexBox}>
               {contractTypeArr.map((contractName) => (
                 <SharedRadioButton
-                  key={`${contractName}${index}`}
-                  registerObj={jobForm.register(`position_arr.${index}.contract_type`, {
+                  key={contractName}
+                  registerObj={jobForm.register("contract_type", {
                     required: "계약 형태를 선택해주세요.",
                   })}
                   value={contractName}
-                  id={`${contractName}${index}`}
+                  id={contractName}
                 >
                   <p css={cssObj.radioDesc}>{contractName}</p>
                 </SharedRadioButton>
@@ -55,12 +50,12 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
           <li>
             <strong css={cssObj.noRequiredTitle}>전환율</strong>
             <div css={cssObj.flexBox}>
-              <label htmlFor={`conversion_rate.${index}`} css={cssObj.conversionLabel}>
+              <label htmlFor="conversion_rate" css={cssObj.conversionLabel}>
                 <input
-                  id={`conversion_rate.${index}`}
+                  id="conversion_rate"
                   type="number"
                   css={isConversionDisabled ? cssObj.disabledConversionInput : cssObj.conversionInput}
-                  {...jobForm.register(`position_arr.${index}.conversion_rate`)}
+                  {...jobForm.register("conversion_rate")}
                   disabled={isConversionDisabled}
                 />
                 <p css={cssObj.conversionDesc}>%</p>
@@ -69,24 +64,22 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
           </li>
           <li>
             <strong css={cssObj.requiredTitle}>교대 형태</strong>
-            {positionError && positionError.rotation_arr?.message && (
-              <ErrorMessage msg={positionError.rotation_arr.message} />
-            )}
+            {errors?.rotation_arr?.message && <ErrorMessage msg={errors.rotation_arr.message} />}
             <div css={cssObj.flexBox}>
               {rotationArr.map((rotation) => {
-                const isChecked = watch(`position_arr.${index}.rotation_arr`)?.includes(rotation.name);
+                const isChecked = watch("rotation_arr")?.includes(rotation.name) || false;
                 return (
                   <CheckBoxWithDesc
                     registerObj={{
-                      ...jobForm.register(`position_arr.${index}.rotation_arr`, {
+                      ...jobForm.register("rotation_arr", {
                         required: "교대 형태를 선택해주세요.",
                       }),
                     }}
-                    key={`${rotation.data}${index}`}
+                    key={rotation.data}
                     desc={rotation.name}
                     value={rotation.data}
                     checked={isChecked}
-                    id={`${rotation.data}${index}`}
+                    id={rotation.data}
                   />
                 );
               })}
@@ -98,28 +91,28 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
             <div>
               <select
                 css={cssObj.selectCSS}
-                {...jobForm.register(`position_arr.${index}.place.type`, {
+                {...jobForm.register("place.type", {
                   required: true,
                 })}
                 onChange={(onChangeEvent: ChangeEvent<HTMLSelectElement>) => {
-                  jobForm.register(`position_arr.${index}.place.type`).onChange(onChangeEvent);
-                  setValue(`position_arr.${index}.place.etc`, null);
-                  setValue(`position_arr.${index}.place.address_arr`, null);
-                  setValue(`position_arr.${index}.place.factory_arr`, null);
+                  jobForm.register("place.type").onChange(onChangeEvent);
+                  setValue("place.etc", null);
+                  setValue("place.address_arr", null);
+                  setValue("place.factory_arr", null);
                 }}
               >
                 <option value="" disabled>
                   근무지 종류 선택 ▼
                 </option>
                 {placeTypeArr.map((placeType) => (
-                  <option key={`${id}${placeType}`} value={placeType}>
+                  <option key={placeType} value={placeType}>
                     {placeType}
                   </option>
                 ))}
               </select>
             </div>
           </li>
-          {watch(`position_arr.${index}.place.type`) === "일반" && (
+          {watch("place.type") === "일반" && (
             <>
               <li>
                 <strong css={cssObj.requiredTitle}>공장 근무지</strong>
@@ -129,24 +122,21 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                     <p css={cssObj.warningDesc}>등록된 공장이 없습니다.</p>
                   ) : (
                     factoryData?.map((factory) => {
-                      const isHaveFactory = watch(`position_arr.${index}.place.factory_arr`)?.includes(factory.id);
+                      const isHaveFactory = watch("place.factory_arr")?.includes(factory.id);
                       return (
                         <button
                           type="button"
                           css={isHaveFactory ? cssObj.isHaveFactoryButton : cssObj.factoryButton}
                           onClick={() => {
-                            if (watch("position_arr")[index].place.factory_arr?.includes(factory.id)) {
-                              const filterFactoryIdArr = watch("position_arr")[index].place.factory_arr?.filter(
+                            if (watch("place.factory_arr")?.includes(factory.id)) {
+                              const filterFactoryIdArr = watch("place.factory_arr")?.filter(
                                 (prevFactoryId) => prevFactoryId !== factory.id
                               );
-                              setValue(`position_arr.${index}.place.factory_arr`, filterFactoryIdArr || []);
+                              setValue("place.factory_arr", filterFactoryIdArr || []);
                               return;
                             }
 
-                            setValue(`position_arr.${index}.place.factory_arr`, [
-                              ...(watch("position_arr")[index].place.factory_arr || []),
-                              factory.id,
-                            ]);
+                            setValue("place.factory_arr", [...(watch("place.factory_arr") || []), factory.id]);
                           }}
                           key={factory.id}
                         >
@@ -167,10 +157,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                   onClick={() => {
                     openPostCodePopup({
                       onComplete: (addressObj: Address) => {
-                        setValue(`position_arr.${index}.place.address_arr`, [
-                          ...(watch("position_arr")[index].place.address_arr || []),
-                          addressObj.address,
-                        ]);
+                        setValue("place.address_arr", [...(watch("place.address_arr") || []), addressObj.address]);
                       },
                     });
                   }}
@@ -179,17 +166,17 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
                   일반 근무지 추가하기
                 </button>
                 <div css={cssObj.flexBox}>
-                  {watch(`position_arr.${index}.place.address_arr`)?.map((address) => (
+                  {watch("place.address_arr")?.map((address) => (
                     <button
                       css={cssObj.isHaveFactoryButton}
                       type="button"
                       key={address}
                       aria-label={`${address} 제거하기`}
                       onClick={() => {
-                        const filterAddressArr = watch(`position_arr.${index}.place.address_arr`)?.filter(
+                        const filterAddressArr = watch("place.address_arr")?.filter(
                           (prevAddress) => prevAddress !== address
                         );
-                        setValue(`position_arr.${index}.place.address_arr`, filterAddressArr || []);
+                        setValue("place.address_arr", filterAddressArr || []);
                       }}
                     >
                       <div /> {address}
@@ -199,12 +186,12 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
               </li>
             </>
           )}
-          {watch(`position_arr.${index}.place.type`) !== "일반" && watch(`position_arr.${index}.place.type`) && (
+          {watch("place.type") !== "일반" && watch("place.type") && (
             <li>
-              <strong css={cssObj.requiredTitle}>{watch(`position_arr.${index}.place.type`)} 근무지</strong>
+              <strong css={cssObj.requiredTitle}>{watch("place.type")} 근무지</strong>
               <div css={cssObj.placeBox}>
-                <p css={cssObj.textareaWarning}>{watch(`position_arr.${index}.place.type`)}일 경우 입력해주세요.</p>
-                <input css={cssObj.inputCSS} {...jobForm.register(`position_arr.${index}.place.etc`)} />
+                <p css={cssObj.textareaWarning}>{watch("place.type")}일 경우 입력해주세요.</p>
+                <input css={cssObj.inputCSS} {...jobForm.register("place.etc")} />
               </div>
             </li>
           )}
@@ -214,20 +201,18 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
             <strong css={cssObj.requiredTitle}>채용 직무</strong>
             <div>
               <strong css={cssObj.subTitle}>1차직무 선택</strong>
-              {positionError && positionError.task_main?.message && (
-                <ErrorMessage msg={positionError.task_main.message} />
-              )}
+              {errors && errors.task_main?.message && <ErrorMessage msg={errors.task_main.message} />}
               <div css={cssObj.flexBox}>
                 {taskArr.map((task) => (
                   <SharedRadioButton
-                    key={`${id}${task.mainTask}`}
+                    key={task.mainTask}
                     registerObj={{
-                      ...jobForm.register(`position_arr.${index}.task_main`, {
+                      ...jobForm.register("task_main", {
                         required: "1차 직무를 선택해주세요.",
                       }),
                     }}
                     value={task.mainTask}
-                    id={`${index}${task.mainTask}`}
+                    id={task.mainTask}
                   >
                     <p css={cssObj.radioDesc}>{task.mainTask}</p>
                   </SharedRadioButton>
@@ -237,24 +222,22 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
             <div>
               <strong css={cssObj.subTitle}>2차직무 선택</strong>
               <p css={cssObj.textareaWarning}>중복선택이 가능합니다.</p>
-              {positionError && positionError.task_sub_arr?.message && (
-                <ErrorMessage msg={positionError.task_sub_arr.message} />
-              )}
+              {errors.task_sub_arr?.message && <ErrorMessage msg={errors.task_sub_arr.message} />}
               <div css={cssObj.flexBox}>
                 {mainTask?.subTaskArr.map((subTask) => {
-                  const isChecked = watch(`position_arr.${index}.task_sub_arr`)?.includes(subTask);
+                  const isChecked = watch("task_sub_arr").includes(subTask) || false;
                   return (
                     <CheckBoxWithDesc
-                      key={`${id}${subTask}`}
+                      key={subTask}
                       registerObj={{
-                        ...jobForm.register(`position_arr.${index}.task_sub_arr`, {
+                        ...jobForm.register("task_sub_arr", {
                           required: "2차 직무를 선택해주세요.",
                         }),
                       }}
                       desc={subTask}
                       value={subTask}
                       checked={isChecked}
-                      id={`${id}${subTask}`}
+                      id={subTask}
                     />
                   );
                 })}
@@ -263,14 +246,12 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ id, 
           </li>
           <li>
             <strong css={cssObj.requiredTitle}>세부 직무 내용</strong>
-            {positionError && positionError.task_detail_arr?.message && (
-              <ErrorMessage msg={positionError.task_detail_arr.message} />
-            )}
+            {errors.task_detail_arr?.message && <ErrorMessage msg={errors.task_detail_arr.message} />}
             <div css={cssObj.textareaBox}>
               <p css={cssObj.textareaWarning}>엔터로 구분해주세요.</p>
               <textarea
                 css={cssObj.textarea}
-                {...jobForm.register(`position_arr.${index}.task_detail_arr`, {
+                {...jobForm.register("task_detail_arr", {
                   required: "세부 직무 내용을 작성해주세요.",
                 })}
               />

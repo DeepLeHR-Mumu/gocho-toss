@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-import { useStatistics } from "@/api/stat/useStatistics";
+import { useStatistics } from "@/api";
 import { ErrorScreen, GlobalLayout, LoadingScreen } from "@/component";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 import type { NextPageWithLayout } from "@/types";

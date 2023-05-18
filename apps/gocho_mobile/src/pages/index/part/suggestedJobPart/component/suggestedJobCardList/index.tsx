@@ -4,7 +4,7 @@ import { dummyArrCreator } from "shared-util";
 import { JobAdCard } from "shared-ui/card/jobAdCard";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
-import { useTopBannerArr } from "shared-api/banner";
+import { useTopBannerArr } from "shared-api/ads";
 import { setCarouselSetting } from "./util";
 import { listContainer, controlWrapper, buttonCSS } from "./style";
 
