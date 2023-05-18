@@ -13,12 +13,12 @@ export const cssObj = {
   `,
 
   bannerId: css`
-    width: 10%;
+    width: 5%;
     text-align: center;
   `,
 
   expireDate: css`
-    width: 20%;
+    width: 10%;
     text-align: center;
     ${shorten()};
   `,

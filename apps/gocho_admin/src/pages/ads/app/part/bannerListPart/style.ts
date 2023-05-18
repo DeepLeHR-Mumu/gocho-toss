@@ -2,37 +2,35 @@ import { css } from "@emotion/react";
 import { shorten } from "shared-style/common";
 import { COLORS } from "shared-style/color";
 
-export const sectionContainer = css`
-  margin: 2rem 0;
-  padding: 1rem;
-  background-color: ${COLORS.BLUE_SECOND90};
-`;
+export const cssObj = {
+  sectionContainer: css`
+    margin: 2rem 0;
+    padding: 1rem;
+    background-color: ${COLORS.BLUE_SECOND90};
+  `,
 
-export const titleBox = css`
-  height: 2rem;
-  font-size: 1.25rem;
-  padding: 0.5rem;
-`;
+  titleBox: css`
+    height: 2rem;
+    font-size: 1.25rem;
+    padding: 0.5rem;
+  `,
 
-export const bannerId = css`
-  width: 10%;
-  text-align: center;
-`;
+  bannerId: css`
+    width: 5%;
+    text-align: center;
+  `,
 
-export const companyName = css`
-  width: 20%;
-  text-align: center;
-  ${shorten()};
-`;
+  expireDate: css`
+    width: 5%;
+    text-align: center;
+    ${shorten()};
+  `,
 
-export const title = css`
-  width: 40%;
-  text-align: center;
-  ${shorten()};
-`;
+  pcImagePreview: css`
+    width: 40%;
+  `,
 
-export const expireDate = css`
-  width: 20%;
-  text-align: center;
-  ${shorten()};
-`;
+  mobileImagePreview: css`
+    width: 40%;
+  `,
+};

@@ -5,7 +5,7 @@ import { useMainBannerArr } from "@/api";
 
 import { LoadingScreen, Pagination } from "@/component";
 import { INTERNAL_URL } from "@/constant";
-import { bannerId, companyName, expireDate, sectionContainer, title, titleBox } from "./style";
+import { cssObj } from "./style";
 import { BannerBox } from "../../component/bannerBox";
 
 export const BannerListPart: FunctionComponent = () => {
@@ -18,14 +18,14 @@ export const BannerListPart: FunctionComponent = () => {
   return (
     <>
       <h2 css={pageTitle}>배너 리스트</h2>
-      <section css={sectionContainer}>
+      <section css={cssObj.sectionContainer}>
         <table>
           <thead>
-            <tr css={titleBox}>
-              <th css={bannerId}>배너 ID</th>
-              <th css={companyName}>회사 이름</th>
-              <th css={title}>배너 제목</th>
-              <th css={expireDate}>만료 날짜</th>
+            <tr css={cssObj.titleBox}>
+              <th css={cssObj.bannerId}>ID</th>
+              <th css={cssObj.expireDate}>만료 날짜</th>
+              <th css={cssObj.pcImagePreview}>PC 미리보기</th>
+              <th css={cssObj.mobileImagePreview}>모바일 미리보기</th>
               <th> </th>
             </tr>
           </thead>
