@@ -1,7 +1,7 @@
 import { ReactElement, useState } from "react";
 import { useRouter } from "next/router";
 
-import { useFactoryArr } from "@/api/factory/useFactoryArr";
+import { useFactoryArr } from "@/api";
 import { ErrorScreen, LoadingScreen, GlobalLayout, Pagination } from "@/component";
 import { INTERNAL_URL } from "@/constant/internalURL";
 import { mainContainer, pageTitle } from "@/style/commonStyles";

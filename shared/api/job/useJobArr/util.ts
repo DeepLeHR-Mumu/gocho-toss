@@ -1,4 +1,6 @@
-import { JobObjDef, PageResultDef } from "../type/jobArr";
+import { PageResultDef } from "shared-type/api/paginationType";
+
+import { JobObjDef } from "../type/jobArr";
 
 export const selector = (jobArr: JobObjDef[], page_result: PageResultDef) => {
   const pageResult = {

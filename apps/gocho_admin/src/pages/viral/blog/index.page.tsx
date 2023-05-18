@@ -1,7 +1,7 @@
 import { dateConverter } from "shared-util";
 
 import { ReactElement } from "react";
-import { useJdArr } from "@/api/jd/useJdArr";
+import { useJdArr } from "@/api";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 import { LoadingScreen, ErrorScreen, GlobalLayout } from "@/component";
 import type { NextPageWithLayout } from "@/types";
@@ -16,7 +16,7 @@ const Blog: NextPageWithLayout = () => {
     isError,
   } = useJdArr({
     order: "popular",
-    filter: "todayUpload",
+    filter: "viral",
     size: 50,
   });
 
@@ -28,16 +28,11 @@ const Blog: NextPageWithLayout = () => {
     text += `------ \n\n`;
 
     jobList.map((job) => {
-      const { date: jobDate, year: jobYear } = dateConverter(job.endTime);
+      const { year: jobYear, date: jobDate } = dateConverter(job.endTime);
       const deadline = jobYear === "9999" ? "상시" : `~ ${jobDate} 까지`;
 
       text += `🚀 ${job.companyName}\n${job.title}\n- 접수기간 : ${deadline}\n`;
-      let taskString = "";
-      job.taskArr.map((task, index, taskArr) => {
-        taskString += index + 1 === taskArr.length ? `${task}` : `${task}, `;
-        return taskString;
-      });
-      text += `- 직무: ${taskString}\n`;
+      text += `- 직무: ${job.task}\n`;
       let contractString = "";
       job.contractArr.map((contract, index, contractArr) => {
         contractString += index + 1 === contractArr.length ? `${contract}` : `${contract}, `;
@@ -67,12 +62,7 @@ const Blog: NextPageWithLayout = () => {
       const deadline = endYear === "9999" ? "상시" : `~ ${endDate} 까지`;
 
       text += `🚀 ${job.companyName}\n${job.title}\n- 접수기간 : ${deadline}\n`;
-      let taskString = "";
-      job.taskArr.map((task, index, taskArr) => {
-        taskString += index + 1 === taskArr.length ? `${task}` : `${task}, `;
-        return taskString;
-      });
-      text += `- 직무: ${taskString}\n`;
+      text += `- 직무: ${job.task}\n`;
       let contractString = "";
       job.contractArr.map((contract, index, contractArr) => {
         contractString += index + 1 === contractArr.length ? `${contract}` : `${contract}, `;

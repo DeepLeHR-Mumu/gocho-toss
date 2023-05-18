@@ -3,10 +3,7 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useCompanyDetail } from "@/api/company/useCompanyDetail";
-import { useEditCompanyRequest } from "@/api/company/useEditCompanyRequest";
-import { useAcceptCompany } from "@/api/company/useAcceptCompany";
-import { useRejectCompany } from "@/api/company/useRejectCompany";
+import { useCompanyDetail, useEditCompanyRequest, useAcceptModifyCompany, useRejectModifyCompany } from "@/api";
 import { companyArrKeyObj } from "@/api/company/useCompanyArr/type";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 import { ErrorScreen, GlobalLayout, LoadingScreen } from "@/component";
@@ -37,12 +34,12 @@ const CompanyEditDetail: NextPageWithLayout = () => {
     isError: isAfterError,
   } = useEditCompanyRequest({ companyId });
 
-  const { mutate: acceptCompanyMutate } = useAcceptCompany();
-  const { mutate: rejectCompanyMutate } = useRejectCompany();
+  const { mutate: acceptCompanyMutate } = useAcceptModifyCompany();
+  const { mutate: rejectCompanyMutate } = useRejectModifyCompany();
 
   const acceptCompanyHandler = () => {
     acceptCompanyMutate(
-      { companyId, type: "update" },
+      { companyId },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(companyArrKeyObj.all);
@@ -57,7 +54,7 @@ const CompanyEditDetail: NextPageWithLayout = () => {
 
   const rejectCompanyHandler: SubmitHandler<RejectFormValues> = (formData) => {
     rejectCompanyMutate(
-      { companyId, reason: formData.reason, type: "update" },
+      { companyId, reason: formData.reason },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(companyArrKeyObj.all);

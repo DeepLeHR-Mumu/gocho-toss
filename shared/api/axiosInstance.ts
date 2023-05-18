@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import axios, { AxiosRequestConfig } from "axios";
 import dayjs from "dayjs";
-import { BACKEND_URL, MANAGER_BACKEND_URL } from "shared-constant";
+import { BACKEND_URL } from "shared-constant";
 import { tokenDecryptor } from "shared-util";
 
 export const axiosNoTokenInstance = axios.create({
@@ -76,9 +76,9 @@ export const useAxiosInterceptor = () => {
 
     const { exp: accessTokenExp } = tokenDecryptor(accessTokenData);
     const { exp: refreshTokenExp } = tokenDecryptor(refreshTokenData);
-    const accessCreateTime = dayjs(new Date(accessTokenExp * 1000), "YYYY-MM-DDTHH:MM:ss");
-    const refreshCreateTime = dayjs(new Date(refreshTokenExp * 1000), "YYYY-MM-DDTHH:MM:ss");
-    const currentTime = dayjs(new Date(), "YYYY-MM-DDTHH:MM:ss");
+    const accessCreateTime = dayjs(new Date(accessTokenExp * 1000), "YYYY-MM-DDTHH:mm:ss");
+    const refreshCreateTime = dayjs(new Date(refreshTokenExp * 1000), "YYYY-MM-DDTHH:mm:ss");
+    const currentTime = dayjs(new Date(), "YYYY-MM-DDTHH:mm:ss");
     const accessBetweenCurrentDiffTime = accessCreateTime.diff(currentTime, "ms");
     const isRefreshAfterCurrentTime = currentTime.isAfter(refreshCreateTime);
 
@@ -135,8 +135,3 @@ export const useAxiosInterceptor = () => {
     };
   }, [requestInterceptor]);
 };
-
-export const axiosManagerInstance = axios.create({
-  timeout: 10000,
-  baseURL: MANAGER_BACKEND_URL,
-});

@@ -1,4 +1,5 @@
-import { PageResultDef } from "../type/companyArr";
+import { PageResultDef } from "shared-type/api/paginationType";
+
 import { CompanyBookmarkObjDef } from "./type";
 
 export const selector = (data: CompanyBookmarkObjDef[], page_result: PageResultDef) => {

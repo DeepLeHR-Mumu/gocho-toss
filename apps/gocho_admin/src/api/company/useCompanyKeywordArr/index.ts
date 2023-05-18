@@ -6,7 +6,7 @@ import { GetCompanyKeywordArrDef, companyKeywordArrKeyObj } from "./type";
 import { companyKeywordArrSelector } from "./util";
 
 export const getCompanyKeywordArr: GetCompanyKeywordArrDef = async () => {
-  const { data } = await axiosNoTokenInstance.get(`/companies/keywords`);
+  const { data } = await axiosNoTokenInstance.get(`/keywords/company`);
   return data;
 };
 

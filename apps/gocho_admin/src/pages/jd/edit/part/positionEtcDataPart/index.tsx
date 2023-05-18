@@ -9,7 +9,7 @@ import { certificateArr } from "./constant";
 import { PositionBoxProps } from "./type";
 import { cssObj } from "./style";
 
-export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, index, jobForm, jobData }) => {
+export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ jobForm, jobData }) => {
   const [certiSearchWord, setCertiSearchWord] = useState<string>("");
   const [certiArr, setCertiArr] = useState<string[]>([]);
 
@@ -19,19 +19,17 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
     formState: { errors },
   } = jobForm;
 
-  const positionError = errors.position_arr && errors.position_arr[index];
-
   useEffect(() => {
     if (certiArr.length === 0) {
-      setValue(`position_arr.${index}.preferred_certi_arr`, null);
+      setValue(`preferred_certi_arr`, null);
       return;
     }
-    setValue(`position_arr.${index}.preferred_certi_arr`, certiArr);
-  }, [certiArr, index, setValue]);
+    setValue(`preferred_certi_arr`, certiArr);
+  }, [certiArr, setValue]);
 
   useEffect(() => {
-    setCertiArr(jobData.positionArr[index].preferredCertiArr);
-  }, [index, jobData.positionArr]);
+    setCertiArr(jobData.preferredCertiArr);
+  }, [jobData]);
 
   return (
     <div css={cssObj.wrapper}>
@@ -39,12 +37,12 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
         <ul css={cssObj.formBox}>
           <li>
             <strong css={cssObj.requiredTitle}>채용 인원</strong>
-            {positionError?.hire_number?.message && <ErrorMessage msg={positionError.hire_number.message} />}
+            {errors?.hire_number?.message && <ErrorMessage msg={errors.hire_number.message} />}
 
             <div css={cssObj.gridBox}>
               <SharedButton
                 onClickHandler={() => {
-                  setValue(`position_arr.${index}.hire_number`, -1);
+                  setValue(`hire_number`, -1);
                 }}
                 text="0명 채용"
                 size="medium"
@@ -54,7 +52,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
               />
               <SharedButton
                 onClickHandler={() => {
-                  setValue(`position_arr.${index}.hire_number`, -2);
+                  setValue(`hire_number`, -2);
                 }}
                 text="00명 채용"
                 size="medium"
@@ -64,7 +62,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
               />
               <SharedButton
                 onClickHandler={() => {
-                  setValue(`position_arr.${index}.hire_number`, -3);
+                  setValue(`hire_number`, -3);
                 }}
                 text="000명 채용"
                 size="medium"
@@ -75,7 +73,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
               <input
                 css={cssObj.inputCSS}
                 type="number"
-                {...register(`position_arr.${index}.hire_number`, {
+                {...register(`hire_number`, {
                   valueAsNumber: true,
                   required: "채용 인원을 작성해주세요.",
                 })}
@@ -84,12 +82,12 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
           </li>
           <li>
             <strong css={cssObj.requiredTitle}>급여</strong>
-            {positionError?.pay_arr?.message && <ErrorMessage msg={positionError.pay_arr.message} />}
+            {errors?.pay_arr?.message && <ErrorMessage msg={errors.pay_arr.message} />}
             <p css={cssObj.textareaWarning}>엔터로 구분해주세요.</p>
             <div css={cssObj.textareaBox}>
               <textarea
                 css={cssObj.textarea}
-                {...register(`position_arr.${index}.pay_arr`, {
+                {...register(`pay_arr`, {
                   required: "급여 정보를 작성해주세요.",
                 })}
               />
@@ -99,7 +97,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
             <strong css={cssObj.noRequiredTitle}>기타 우대사항</strong>
             <p css={cssObj.textareaWarning}>엔터로 구분해주세요.</p>
             <div css={cssObj.textareaBox}>
-              <textarea css={cssObj.textarea} {...register(`position_arr.${index}.preferred_etc_arr`)} />
+              <textarea css={cssObj.textarea} {...register(`preferred_etc_arr`)} />
             </div>
           </li>
         </ul>
@@ -125,7 +123,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
                     <button
                       type="button"
                       css={isHaveCerti ? cssObj.isHaveCertiButton : cssObj.certiButton}
-                      key={`${id}${certi}`}
+                      key={certi}
                       onClick={() => {
                         setCertiArr((prevCerti) => {
                           const multipleCertiBlockArr = prevCerti.filter((currentCerti) => currentCerti !== certi);
@@ -142,7 +140,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ id, i
             <div css={cssObj.flexBox}>
               {certiArr.map((certi) => (
                 <button
-                  key={`${id}${certi}`}
+                  key={certi}
                   css={cssObj.deleteButton}
                   type="button"
                   aria-label={`${certi} 삭제`}

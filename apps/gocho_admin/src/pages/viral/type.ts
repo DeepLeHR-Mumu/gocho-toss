@@ -6,7 +6,7 @@ export type JobDef = {
   cut: boolean;
   startTime: string;
   endTime: string;
-  taskArr: string[];
+  task: string;
   eduArr: string[];
   placeArr: string[];
   rotationArr: string[];

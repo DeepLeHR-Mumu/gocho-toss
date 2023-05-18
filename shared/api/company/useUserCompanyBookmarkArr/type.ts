@@ -1,8 +1,7 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
 import { oldBookmarkKeyObj } from "shared-constant/queryKeyFactory/bookmark/bookmarkKeyObj";
-
-import { PageResultDef } from "../type/companyArr";
+import { PageResultDef } from "shared-type/api/paginationType";
 
 export interface CompanyBookmarkObjDef {
   id: number;

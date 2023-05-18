@@ -18,7 +18,7 @@ describe("공고 리스트 jobCard 컴포넌트 테스트", () => {
             title: "테스트용 공고 제목입니다",
             startTime: "2023-04-26T00:00:00",
             endTime: "9999-12-31T23:59",
-            taskArr: ["공무"],
+            task: "공무",
           }}
         />
       </QueryClientProvider>

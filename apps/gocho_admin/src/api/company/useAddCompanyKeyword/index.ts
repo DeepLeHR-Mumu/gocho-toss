@@ -9,7 +9,7 @@ import { axiosInstance } from "@/api/useAxiosInterceptor";
 import { RequestObjDef, PostCompanyKeywordDef, useAddCompanyKeywordProps } from "./type";
 
 export const postAddCompanyKeyword: PostCompanyKeywordDef = async (requestObj) => {
-  const { data } = await axiosInstance.post("/companies/keywords", requestObj);
+  const { data } = await axiosInstance.post("/keywords/company", requestObj);
   return data;
 };
 

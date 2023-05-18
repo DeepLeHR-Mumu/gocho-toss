@@ -1,8 +1,8 @@
 import { FunctionComponent, useRef } from "react";
 import Slider from "react-slick";
 
-import { useTopBannerArr } from "shared-api/banner";
 import { dummyArrCreator } from "shared-util";
+import { useTopBannerArr } from "shared-api/ads";
 
 import { setCarouselSetting } from "./util";
 import { carouselContainer } from "./style";
