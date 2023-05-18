@@ -1,5 +1,7 @@
 export { useDoLogin } from "./auth/useDoLogin";
 
+export { useJdBannerArr } from "./ads/jd/useJdBannerArr";
+export { useAddJdBanner } from "./ads/jd/useAddJdBanner";
 export { useDeleteJdBanner } from "./ads/jd/useDeleteJdBanner";
 export { useMoveJdBanner } from "./ads/jd/useMoveJdBanner";
 export { useMainBannerArr } from "./ads/main/useMainBannerArr";

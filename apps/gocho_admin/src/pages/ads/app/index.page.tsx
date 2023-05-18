@@ -1,28 +1,18 @@
 import { ReactElement } from "react";
 
-import { useMainBannerArr } from "shared-api/ads";
-
 import { mainContainer } from "@/style/commonStyles";
-import { ErrorScreen, LoadingScreen, GlobalLayout } from "@/component";
+import { GlobalLayout } from "@/component";
 import type { NextPageWithLayout } from "@/types";
 
-const AppJdBanner: NextPageWithLayout = () => {
-  const { data: bannerDataArr, isLoading, isError } = useMainBannerArr();
+import { UploadBannerPart } from "./part/uploadBannerPart";
+import { BannerListPart } from "./part/bannerListPart";
 
-  if (!bannerDataArr || isLoading) {
-    return <LoadingScreen />;
-  }
-
-  if (isError) {
-    return <ErrorScreen />;
-  }
-
-  return (
-    <main css={mainContainer}>
-      <h2>앱 공고배너 등록</h2>
-    </main>
-  );
-};
+const AppJdBanner: NextPageWithLayout = () => (
+  <main css={mainContainer}>
+    <UploadBannerPart />
+    <BannerListPart />
+  </main>
+);
 
 AppJdBanner.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 

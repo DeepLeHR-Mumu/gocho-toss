@@ -19,15 +19,15 @@ export const menuArr = [
     subMenuArr: [
       {
         menuTitle: "메인 배너",
-        menuLink: INTERNAL_URL.MAIN_AD_URL,
+        menuLink: `${INTERNAL_URL.MAIN_AD_URL}?page=1`,
       },
       {
         menuTitle: "공고 상단 배너",
-        menuLink: INTERNAL_URL.TOP_AD_URL,
+        menuLink: `${INTERNAL_URL.TOP_AD_URL}?page=1`,
       },
       {
         menuTitle: "앱 공고 배너",
-        menuLink: INTERNAL_URL.APP_JD_AD_URL,
+        menuLink: `${INTERNAL_URL.APP_JD_AD_URL}?page=1`,
       },
     ],
   },

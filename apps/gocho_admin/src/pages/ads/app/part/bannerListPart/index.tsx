@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 
 import { pageTitle } from "@/style/commonStyles";
-import { useMainBannerArr } from "@/api";
+import { useJdBannerArr } from "@/api";
 
 import { LoadingScreen, Pagination } from "@/component";
 import { INTERNAL_URL } from "@/constant";
@@ -9,7 +9,7 @@ import { bannerId, companyName, expireDate, sectionContainer, title, titleBox } 
 import { BannerBox } from "../../component/bannerBox";
 
 export const BannerListPart: FunctionComponent = () => {
-  const { data: bannerDataArr } = useMainBannerArr();
+  const { data: bannerDataArr } = useJdBannerArr();
 
   if (!bannerDataArr) {
     return <LoadingScreen />;
@@ -36,7 +36,7 @@ export const BannerListPart: FunctionComponent = () => {
           </tbody>
         </table>
       </section>
-      <Pagination totalPage={bannerDataArr?.pageResult.totalPages} url={INTERNAL_URL.MAIN_AD_URL} />
+      <Pagination totalPage={bannerDataArr?.pageResult.totalPages} url={INTERNAL_URL.APP_JD_AD_URL} />
     </>
   );
 };

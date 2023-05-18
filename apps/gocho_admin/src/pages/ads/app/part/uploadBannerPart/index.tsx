@@ -6,7 +6,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
 
-import { useAddMainBanner } from "@/api";
+import { useAddJdBanner } from "@/api";
 import { pageTitle } from "@/style/commonStyles";
 
 import { cssObj } from "./style";
@@ -21,7 +21,7 @@ export const UploadBannerPart: FunctionComponent = () => {
   const queryClient = useQueryClient();
   const { register, handleSubmit } = useForm<BannerFormValues>({});
 
-  const { mutate: addMutate } = useAddMainBanner();
+  const { mutate: addMutate } = useAddJdBanner();
 
   const onUploadBannerPictureHandler = async (
     changeEvent: ChangeEvent<HTMLInputElement>,
@@ -46,7 +46,7 @@ export const UploadBannerPart: FunctionComponent = () => {
         { dto: bannerSubmitObj, pcImage, mobileImage },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(bannerArrKeyObj.main);
+            queryClient.invalidateQueries(bannerArrKeyObj.jd);
           },
         }
       );
@@ -55,7 +55,7 @@ export const UploadBannerPart: FunctionComponent = () => {
 
   return (
     <>
-      <h2 css={pageTitle}>메인 배너 업로드</h2>
+      <h2 css={pageTitle}>앱 공고 배너 업로드</h2>
       <section css={cssObj.sectionContainer}>
         <form onSubmit={handleSubmit(submitBannerHandler)}>
           <div css={cssObj.inputContainer}>

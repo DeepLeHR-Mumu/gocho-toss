@@ -9,10 +9,9 @@ import { PostJdBannerDef, RequestObjDef, useAddJdBannerProps } from "./type";
 
 export const postAddJdBanner: PostJdBannerDef = async (requestObj) => {
   const formData = new FormData();
-  const json = JSON.stringify(requestObj.dto);
-  const blob = new Blob([json], { type: "application/json" });
-  formData.append("dto", blob);
-  formData.append("image", requestObj.image);
+  formData.append("json", JSON.stringify(requestObj.dto));
+  formData.append("pcImage", requestObj.pcImage);
+  formData.append("mobileImage", requestObj.mobileImage);
 
   const { data } = await axiosInstance.post("/ads/jd-banner", formData, {
     headers: { "Content-Type": "multipart/form-data" },
