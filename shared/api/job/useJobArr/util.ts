@@ -38,7 +38,7 @@ export const selector = (jobArr: JobObjDef[], page_result: PageResultDef) => {
       placeArr: job.place_arr,
       rotationArr: job.rotation_arr,
       contractType: job.contract_type,
-      taskArr: job.task_arr,
+      task: job.task,
     };
   });
   return { jobDataArr, pageResult };

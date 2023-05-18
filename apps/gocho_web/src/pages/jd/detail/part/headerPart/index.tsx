@@ -1,25 +1,15 @@
 import { FunctionComponent, useEffect, useState, useRef } from "react";
-import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useRouter } from "next/router";
 
 import { SkeletonBox } from "shared-ui/common/atom/skeletonBox";
 import { useJobDetail } from "shared-api/job";
 import { dDayCalculator } from "shared-util";
 
-import { PositionCard } from "./component/positionCard";
 import { HeaderFix } from "./component/headerFix";
 import { Header } from "./component/header";
 
 import { HeaderPartProps, HeaderPartSkeleton } from "./type";
-import {
-  positionContainer,
-  positionTitle,
-  cardContainer,
-  moreButton,
-  observeCSS,
-  skeletonContainer,
-  positionTitleSkeleton,
-} from "./style";
+import { positionContainer, observeCSS, skeletonContainer, positionTitleSkeleton } from "./style";
 
 export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton> = ({
   isSkeleton,
@@ -28,21 +18,10 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
 }) => {
   const router = useRouter();
   const { jobId } = router.query;
-  const [defaultCardCount, setDefaultCardCount] = useState(5);
   const [isStatic, setIsStatic] = useState<boolean>(true);
   const [isOverlap, setIsOverlap] = useState(true);
   const observeRef = useRef<HTMLDivElement | null>(null);
   const { data: jobDetailData } = useJobDetail({ id: Number(jobId), isStatic });
-
-  const handleMoreCardCount = () => {
-    if (jobDetailData) {
-      setDefaultCardCount(jobDetailData.positionArr.length);
-    }
-  };
-
-  const handleLessCardCount = () => {
-    setDefaultCardCount(5);
-  };
 
   useEffect(() => {
     if (observeRef.current) {
@@ -84,43 +63,7 @@ export const HeaderPart: FunctionComponent<HeaderPartProps | HeaderPartSkeleton>
       ) : (
         <HeaderFix jobDetailData={jobDetailData} isDdayEnd={isDdayEnd} />
       )}
-
       <div css={observeCSS} ref={observeRef} />
-
-      <section css={positionContainer}>
-        <p css={positionTitle(isDdayEnd)}>
-          채용중인 직무<span>{jobDetailData.positionArr.length}</span>
-        </p>
-        <div css={cardContainer}>
-          {jobDetailData.positionArr.map((position, index) => {
-            return (
-              index < defaultCardCount && (
-                <PositionCard
-                  isDdayEnd={isDdayEnd}
-                  currentPositionId={currentPositionId}
-                  currentPositionIndex={index}
-                  setCurrentPositionId={() => {
-                    setCurrentPositionId(index);
-                  }}
-                  position={position}
-                  key={position.id}
-                />
-              )
-            );
-          })}
-
-          {jobDetailData.positionArr.length > 5 &&
-            (defaultCardCount === jobDetailData.positionArr.length ? (
-              <button css={moreButton} type="button" onClick={handleLessCardCount} aria-label="공고리스트 줄이기">
-                줄이기 <FiChevronUp />
-              </button>
-            ) : (
-              <button css={moreButton} type="button" onClick={handleMoreCardCount} aria-label="공고리스트 더보기">
-                더보기 <FiChevronDown />
-              </button>
-            ))}
-        </div>
-      </section>
     </div>
   );
 };

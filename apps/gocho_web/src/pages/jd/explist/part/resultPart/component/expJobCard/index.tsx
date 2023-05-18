@@ -28,8 +28,6 @@ import {
   jobDate,
   taskContainer,
   flexBox,
-  taskBox,
-  taskNumber,
   taskSummary,
   jobDetailButton,
   noExplistArrText,
@@ -97,15 +95,8 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
                 <div css={flexBox}>
                   <p css={taskSummary}>
                     모집한 직무
-                    <span css={taskNumber}>{job.taskArr.length}</span>
+                    {job.task}
                   </p>
-                  {job.taskArr.map((task) => {
-                    return (
-                      <p css={taskBox} key={`${job.id}${task}`}>
-                        {task}
-                      </p>
-                    );
-                  })}
                 </div>
                 <Link href={`${JOBS_DETAIL_URL}/${job.id}`} passHref css={jobDetailButton}>
                   상세보기 <BsChevronRight />

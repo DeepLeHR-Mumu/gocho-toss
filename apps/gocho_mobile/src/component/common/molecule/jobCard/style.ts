@@ -172,9 +172,3 @@ export const taskBox = css`
   color: ${COLORS.GRAY40};
   border: 1px solid ${COLORS.GRAY80};
 `;
-
-export const taskContainer = css`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem;
-`;

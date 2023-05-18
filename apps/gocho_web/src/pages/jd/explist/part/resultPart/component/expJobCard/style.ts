@@ -169,26 +169,6 @@ export const taskSummary = css`
   height: 1.5rem;
 `;
 
-export const taskNumber = css`
-  font-size: 0.75rem;
-  position: absolute;
-  color: ${COLORS.GRAY10};
-  background-color: ${COLORS.GRAY80};
-  border-radius: 1.5rem;
-  padding: 0.25rem 0.5rem;
-  top: 0;
-  right: 0;
-  transform: translate(35%, -35%);
-`;
-
-export const taskBox = css`
-  font-size: 0.75rem;
-  font-weight: 400;
-  margin-right: 0.5rem;
-  color: ${COLORS.GRAY40};
-  ${shorten()};
-`;
-
 export const jobDetailButton = css`
   font-size: 0.75rem;
   display: flex;

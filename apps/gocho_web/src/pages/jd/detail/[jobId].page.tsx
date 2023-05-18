@@ -87,11 +87,11 @@ const JobsDetail: NextPage = () => {
           id: jobDetailData.id,
           title: jobDetailData.title,
           companyName: jobDetailData.company.name,
-          rotation: jobDetailData.positionArr[0].rotationArr[0],
-          pay: jobDetailData.positionArr[0].payArr && jobDetailData.positionArr[0].payArr[0],
-          place: jobDetailData.positionArr[0].place.addressArr && jobDetailData.positionArr[0].place.addressArr[0],
-          possibleEdu: jobDetailData.positionArr[0].possibleEdu.summary,
-          taskDetail: jobDetailData.positionArr[0].taskDetailArr[0],
+          rotation: jobDetailData.rotationArr[0],
+          pay: jobDetailData.payArr && jobDetailData.payArr[0],
+          place: jobDetailData.place.addressArr && jobDetailData.place.addressArr[0],
+          possibleEdu: jobDetailData.possibleEdu.summary,
+          taskDetail: jobDetailData.taskDetailArr[0],
         }}
       />
       <InvisibleH1 title={`[${jobDetailData.company.name}]${jobDetailData.title} - 고초대졸닷컴`} />
@@ -108,9 +108,9 @@ const JobsDetail: NextPage = () => {
             <div css={logoImageBox}>
               <Image src={logoSrc} alt="" fill />
             </div>
-            <DetailSupportPart freshPosition={jobDetailData.positionArr[currentPositionId]} />
-            <DetailWorkPart freshPosition={jobDetailData.positionArr[currentPositionId]} />
-            <DetailPreferencePart freshPosition={jobDetailData.positionArr[currentPositionId]} />
+            <DetailSupportPart freshPosition={jobDetailData} />
+            <DetailWorkPart freshPosition={jobDetailData} />
+            <DetailPreferencePart freshPosition={jobDetailData} />
           </section>
           {!userData && !companyCommentData && <DetailComment company={jobDetailData.company} />}
           {companyCommentData && (

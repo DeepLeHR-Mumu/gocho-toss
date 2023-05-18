@@ -155,11 +155,6 @@ export const taskNumber = css`
   transform: translate(35%, -35%);
 `;
 
-export const flexBox = css`
-  display: flex;
-  align-items: center;
-`;
-
 export const taskBox = css`
   font-size: 0.75rem;
   margin-right: 0.5rem;

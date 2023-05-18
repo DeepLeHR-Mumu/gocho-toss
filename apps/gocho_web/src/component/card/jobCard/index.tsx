@@ -152,18 +152,9 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
             채용중인 직무
             <span css={taskNumber(isExpired)}>{jobData.positionCount}</span>
           </p>
-          <ul css={taskArrCSS}>
-            {jobData.taskArr.map((task) => {
-              if (task !== null) {
-                return (
-                  <li css={taskBox} key={`${jobData.id}${task}`}>
-                    {task}
-                  </li>
-                );
-              }
-              return <li key={`${jobData.id}${task}`} />;
-            })}
-          </ul>
+          <div css={taskBox} key={`${jobData.id}${jobData.task}`}>
+            {jobData.task}
+          </div>
         </div>
 
         <p css={hoverButton} className="hoverButton">

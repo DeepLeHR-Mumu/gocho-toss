@@ -26,7 +26,6 @@ import {
   jobTitle,
   jobDate,
   taskContainer,
-  flexBox,
   taskBox,
   taskNumber,
   taskSummary,
@@ -102,19 +101,11 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
                 <div css={flexRow}>
                   <p css={taskSummary}>
                     모집한 직무
-                    <span css={taskNumber}>{data.taskArr.length}</span>
+                    <span css={taskNumber}>{data.task.length}</span>
                   </p>
-                  <ul css={flexBox}>
-                    {data.taskArr.map((task, index) => {
-                      return (
-                        index < 3 && (
-                          <li css={taskBox} key={`${data.id}${task}`}>
-                            {task}
-                          </li>
-                        )
-                      );
-                    })}
-                  </ul>
+                  <div css={taskBox} key={`${data.id}${data.task}`}>
+                    {data.task}
+                  </div>
                 </div>
 
                 <Link href={`${JOBS_DETAIL_URL}/${data.id}`} passHref css={jobDetailButton}>
