@@ -1,6 +1,5 @@
 export interface BannerFormValues {
-  color: string;
-  jd_id: number;
+  link: string;
   start_time: string;
   end_time: string;
 }

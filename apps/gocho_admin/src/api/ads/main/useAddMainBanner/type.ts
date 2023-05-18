@@ -3,17 +3,17 @@ import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
-  image: File;
+  pcImage: File;
+  mobileImage: File;
   dto: {
-    color: string;
-    jd_id: number;
+    link: string;
     start_time: string;
     end_time: string;
   };
 }
 
 export interface PostMainBannerDef {
-  ({ dto, image }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ pcImage, mobileImage, dto }: RequestObjDef): Promise<AdminResponseDef>;
 }
 
 export interface useAddMainBannerProps {

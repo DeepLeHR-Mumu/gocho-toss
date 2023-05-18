@@ -7,8 +7,7 @@ export const sectionContainer = css`
   background-color: ${COLORS.BLUE_SECOND90};
 `;
 
-export const inputBox = (isSmall: boolean) => css`
-  width: ${isSmall ? "6rem" : "25%"};
+export const inputBox = css`
   border-radius: 0.5rem;
   border: 1px solid ${COLORS.GRAY70};
   background-color: ${COLORS.GRAY100};
@@ -57,20 +56,6 @@ export const bannerPreviewContainer = css`
   > img {
     object-fit: contain;
   }
-`;
-
-export const colorPickerButton = css`
-  cursor: pointer;
-  padding: 0.25rem 0.5rem;
-  background-color: ${COLORS.BLUE_NEON30};
-  color: ${COLORS.GRAY100};
-  margin-right: 0.5rem;
-  border: 2px solid ${COLORS.GRAY10};
-`;
-
-export const colorPicker = css`
-  opacity: 0;
-  height: 1px;
 `;
 
 export const submitBannerButton = css`
