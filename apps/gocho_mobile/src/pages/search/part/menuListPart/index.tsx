@@ -12,8 +12,8 @@ export const MenuListPart: FunctionComponent = () => {
 
   const { data: jobDataObj } = useJobArr({
     order: "recent",
-    q: JSON.stringify({ searchWord: router.query.q }),
     filter: "valid",
+    searchWord: router.query.q as string,
     size: 4,
   });
 

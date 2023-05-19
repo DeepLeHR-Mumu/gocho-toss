@@ -17,7 +17,7 @@ export const JobPreviewPart: FunctionComponent = () => {
 
   const { data: jobDataArr, isLoading: isJobLoading } = useJobArr({
     order: "recent",
-    q: JSON.stringify({ searchWord: router.query.q }),
+    searchWord: router.query.q as string,
     page: Number(router.query.page),
     size: JOB_PREVIEW_RESULT_LIMIT,
   });
