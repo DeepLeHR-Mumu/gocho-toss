@@ -46,7 +46,6 @@ import {
   taskBox,
   hoverButton,
   infoBox,
-  taskArrCSS,
 } from "./style";
 
 export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ jobData, isSkeleton }) => {

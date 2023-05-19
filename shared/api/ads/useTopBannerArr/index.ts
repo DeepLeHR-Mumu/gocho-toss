@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
-import { axiosInstance } from "../../axiosInstance";
+import { axiosNoTokenInstance } from "../../axiosInstance";
 import { GetBannerArrDef } from "./type";
 import { selector } from "./util";
 
 export const getTopBannerArr: GetBannerArrDef = async () => {
-  const { data } = await axiosInstance.get("/ads/jd-top");
+  const token = localStorage.getItem("accessToken");
+  const headers = token ? { "x-access-token": token } : undefined;
+  const { data } = await axiosNoTokenInstance.get("/ads/jd-top", { headers });
   return data;
 };
 
