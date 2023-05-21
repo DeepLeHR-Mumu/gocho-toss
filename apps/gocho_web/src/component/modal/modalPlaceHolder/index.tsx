@@ -6,7 +6,6 @@ import { SignUpModal } from "../signUpModal";
 import { LoginModal } from "../loginModal";
 import { PageBlockingModal } from "../pageBlockingModal";
 import { AccountSettingModal } from "../accountSettingModal";
-import { TipModal } from "../tipModal";
 import { FactoryModal } from "../factoryModal";
 import { DialogModal } from "../dialogModal";
 import { FindPasswordModal } from "../findPasswordModal";
@@ -23,9 +22,6 @@ export const ModalPlaceholder: FunctionComponent = () => {
   }
   if (modal === "accountSettingModal") {
     return <AccountSettingModal />;
-  }
-  if (modal === "tipModal") {
-    return <TipModal />;
   }
   if (modal === "pageBlockModal") {
     return <PageBlockingModal />;
