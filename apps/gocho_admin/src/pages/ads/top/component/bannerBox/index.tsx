@@ -25,7 +25,7 @@ export const BannerBox: FunctionComponent<BannerBoxProps> = ({ banner }) => {
     );
   };
 
-  const { date } = dateConverter(banner.endTime);
+  const { date } = dateConverter(banner.jd.endTime);
 
   return (
     <tr css={bannerBox}>

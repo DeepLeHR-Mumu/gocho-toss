@@ -3,11 +3,21 @@ import { PageResultDef } from "shared-type/api/paginationType";
 export interface ResponseObjDef {
   data: {
     id: number;
-    pc_image_url: string;
-    mobile_image_url: string;
-    link: string;
-    start_time: string;
-    end_time: string;
+    color: string;
+    jd: {
+      id: number;
+      company: {
+        id: number;
+        logo_url: string;
+        name: string;
+      };
+      title: string;
+      start_time: string;
+      end_time: string;
+      high: boolean;
+      college: boolean;
+      is_bookmark: boolean;
+    };
   }[];
   page_result: PageResultDef;
 }

@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { useTopBannerArr } from "shared-api/ads";
+import { useTopBannerArr } from "@/api";
 
 import { pageTitle } from "@/style/commonStyles";
 
