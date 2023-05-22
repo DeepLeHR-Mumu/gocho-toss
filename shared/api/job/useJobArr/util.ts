@@ -39,6 +39,7 @@ export const selector = (jobArr: JobObjDef[], page_result: PageResultDef) => {
       rotationArr: job.rotation_arr,
       contractType: job.contract_type,
       task: job.task,
+      isExpired: job.is_expired,
     };
   });
   return { jobDataArr, pageResult };
