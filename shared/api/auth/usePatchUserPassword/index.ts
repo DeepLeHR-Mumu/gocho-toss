@@ -11,9 +11,7 @@ import {
 } from "./type";
 
 const patchUserPassword: PatchUserPasswordDef = async (requestObj) => {
-  const token = localStorage.getItem("accessToken");
-  const headers = token ? { "x-access-token": token } : undefined;
-  const { data } = await axiosInstance.patch(`/users/${requestObj.userId}/password`, { ...requestObj }, { headers });
+  const { data } = await axiosInstance.patch(`/users/${requestObj.userId}/password`, { ...requestObj });
   return data;
 };
 

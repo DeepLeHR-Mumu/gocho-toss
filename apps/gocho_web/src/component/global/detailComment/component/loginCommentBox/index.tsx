@@ -92,7 +92,7 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ userD
                         count={comment.likeCount}
                         isLiked={comment.isLiked}
                         setLikeSubmit={() => {
-                          companyCommentToggle({ companyId, commentId: comment.id, type: "like" });
+                          companyCommentToggle({ companyId, commentId: comment.id, type: "likes" });
                         }}
                       />
                     </li>
@@ -101,7 +101,7 @@ export const LoginCommentBox: FunctionComponent<LoginCommentBoxProps> = ({ userD
                         isDisLiked={comment.isDisliked}
                         count={comment.dislikeCount}
                         setDislikeSubmit={() => {
-                          companyCommentToggle({ companyId, commentId: comment.id, type: "dislike" });
+                          companyCommentToggle({ companyId, commentId: comment.id, type: "dislikes" });
                         }}
                       />
                     </li>

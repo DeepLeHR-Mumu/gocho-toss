@@ -10,10 +10,11 @@ import kakaoMono from "shared-image/global/sns/kakaoLogo.svg";
 import { useDoLogin, useUserProfile } from "shared-api/auth";
 import { loginModalCloseEvent, loginModalOpenEvent, loginSuccessEvent } from "shared-ga/auth";
 import { EMAIL_REGEXP, PWD_REGEXP, MAIN_URL, EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant";
+import { ErrorResponseDef } from "shared-type/api/errorResponseType";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
+
 import { BottomPopup } from "@component/bottomPopup";
-import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
 
 import { useToast, useModal } from "@/globalStates";
 
@@ -53,7 +54,7 @@ export const LoginModal: FunctionComponent = () => {
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     mutate(loginObj, {
       onError: (error) => {
-        const errorResponse = error.response?.data as ErrorResponse;
+        const errorResponse = error.response?.data as ErrorResponseDef;
         setErrorMsg(errorResponse.error_message);
         ref.current += 1;
       },
