@@ -29,7 +29,7 @@ export interface ResponseObjDef {
         created_time: string;
         updated_time: string;
         apply_url: string;
-        task_arr: string[];
+        task: string;
       }[]
     | [];
   page_result: PageResultDef | null;

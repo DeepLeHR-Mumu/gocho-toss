@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState, useRef } from "react";
+import { ReactElement, useEffect, useRef } from "react";
 import dayjs from "dayjs";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { BiRocket } from "react-icons/bi";
@@ -25,18 +25,16 @@ import { INTERNAL_URL } from "@/constants";
 import {
   HeaderPart,
   BasicInfoPart,
-  PositionHeaderPart,
   PositionTitleInfoPart,
   PositionRequiredInfoPart,
   PositionWorkInfoPart,
 } from "./part";
 import { JobFormValues } from "./type";
-import { BLANK_POSITION, JD_UPLOAD_MESSAGE_OBJ } from "./constant";
+import { JD_UPLOAD_MESSAGE_OBJ } from "./constant";
 import { getFieldArrayValue, getFieldArrayValueWithNull } from "./util";
 import { cssObj } from "./style";
 
 const JdUploadPage: NextPageWithLayout = () => {
-  const [isCardOpenArr, setIsCardOpenArr] = useState<boolean[]>([true]);
   const isLoading = useRef(false);
 
   const { mutate: addJobMutate } = useAddJd();
@@ -50,7 +48,6 @@ const JdUploadPage: NextPageWithLayout = () => {
       process_arr: [{ value: "" }, { value: "" }],
       apply_route_arr: [{ value: "" }],
       etc_arr: [{ value: "" }],
-      position_arr: [BLANK_POSITION],
     },
   });
 
@@ -59,11 +56,6 @@ const JdUploadPage: NextPageWithLayout = () => {
     handleSubmit,
     formState: { submitCount, dirtyFields, isSubmitSuccessful },
   } = jobForm;
-
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "position_arr",
-  });
 
   const processArr = useFieldArray({
     control,
@@ -96,25 +88,22 @@ const JdUploadPage: NextPageWithLayout = () => {
             process_arr: getFieldArrayValue(jobObj.process_arr),
             apply_route_arr: getFieldArrayValue(jobObj.apply_route_arr),
             etc_arr: getFieldArrayValueWithNull(jobObj.etc_arr),
-            position_arr: jobObj.position_arr.map((position) => ({
-              ...position,
-              conversion_rate: position.conversion_rate ? position.conversion_rate : null,
-              min_year: position.min_year ? position.min_year : null,
-              max_year: position.max_year ? position.max_year : null,
-              hire_number: position.hire_number ? position.hire_number : 0,
-              task_sub_arr: position.task_sub_arr ? position.task_sub_arr : null,
-              task_detail_arr: getFieldArrayValue(position.task_detail_arr),
-              required_etc_arr: getFieldArrayValueWithNull(position.required_etc_arr),
-              pay_arr: getFieldArrayValue(position.pay_arr),
-              place: {
-                type: position.place.type,
-                address_arr: position.place.address_arr?.length === 0 ? null : position.place.address_arr,
-                factory_arr: position.place.factory_arr?.length === 0 ? null : position.place.factory_arr,
-                etc: position.place.etc?.length === 0 ? null : position.place.etc,
-              },
-              preferred_certi_arr: position.preferred_certi_arr?.length === 0 ? null : position.preferred_certi_arr,
-              preferred_etc_arr: getFieldArrayValueWithNull(position.preferred_etc_arr),
-            })),
+            conversion_rate: jobObj.conversion_rate ? jobObj.conversion_rate : null,
+            min_year: jobObj.min_year ? jobObj.min_year : null,
+            max_year: jobObj.max_year ? jobObj.max_year : null,
+            hire_number: jobObj.hire_number ? jobObj.hire_number : 0,
+            task_sub_arr: jobObj.task_sub_arr ? jobObj.task_sub_arr : null,
+            task_detail_arr: getFieldArrayValue(jobObj.task_detail_arr),
+            required_etc_arr: getFieldArrayValueWithNull(jobObj.required_etc_arr),
+            pay_arr: getFieldArrayValue(jobObj.pay_arr),
+            place: {
+              type: jobObj.place.type,
+              address_arr: jobObj.place.address_arr?.length === 0 ? null : jobObj.place.address_arr,
+              factory_arr: jobObj.place.factory_arr?.length === 0 ? null : jobObj.place.factory_arr,
+              etc: jobObj.place.etc?.length === 0 ? null : jobObj.place.etc,
+            },
+            preferred_certi_arr: jobObj.preferred_certi_arr?.length === 0 ? null : jobObj.preferred_certi_arr,
+            preferred_etc_arr: getFieldArrayValueWithNull(jobObj.preferred_etc_arr),
           },
         },
         {
@@ -160,34 +149,9 @@ const JdUploadPage: NextPageWithLayout = () => {
           <form onSubmit={handleSubmit(jobSubmitHandler)}>
             <HeaderPart />
             <BasicInfoPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
-            <PositionHeaderPart fields={fields} append={append} setIsCardOpen={setIsCardOpenArr} />
-            <ul>
-              {fields.map((item, index) => (
-                <li key={`${item.id}`} css={cssObj.cardContainer}>
-                  <PositionTitleInfoPart
-                    id={item.id}
-                    positionIndex={index}
-                    jobForm={jobForm}
-                    appendPosition={append}
-                    removePosition={remove}
-                    control={control}
-                    isCardOpen={isCardOpenArr[index]}
-                    setIsCardOpen={setIsCardOpenArr}
-                  />
-                  {isCardOpenArr[index] && (
-                    <>
-                      <PositionRequiredInfoPart
-                        id={item.id}
-                        positionIndex={index}
-                        jobForm={jobForm}
-                        control={control}
-                      />
-                      <PositionWorkInfoPart id={item.id} positionIndex={index} jobForm={jobForm} control={control} />
-                    </>
-                  )}
-                </li>
-              ))}
-            </ul>
+            <PositionTitleInfoPart jobForm={jobForm} control={control} />
+            <PositionRequiredInfoPart jobForm={jobForm} control={control} />
+            <PositionWorkInfoPart jobForm={jobForm} control={control} />
             <div css={cssObj.buttonWrapper}>
               <SharedButton
                 radius="round"
