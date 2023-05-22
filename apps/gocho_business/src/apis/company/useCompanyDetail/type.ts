@@ -23,7 +23,11 @@ export interface ResponseObjDef {
     size: string;
     employee_number: number;
     found_date: string;
-    address: string;
+    location: {
+      address: string;
+      x: number;
+      y: number;
+    };
     intro: string;
     pay_avg: number;
     pay_start: number;

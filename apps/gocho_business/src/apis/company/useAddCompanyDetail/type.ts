@@ -6,7 +6,11 @@ export interface RequestObjDef {
   dto: {
     manager_id: number;
     employee_number: number;
-    address: string;
+    location: {
+      address: string;
+      x: number;
+      y: number;
+    };
     intro: string;
     welfare: {
       money: string[] | null;

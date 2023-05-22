@@ -21,6 +21,7 @@ import { cssObj } from "./style";
 
 const CompanyEditPage: NextPageWithLayout = () => {
   const isRefetching = useRef(false);
+
   const { data: userInfoData } = useManagerProfile();
   const { setToast } = useToast();
   const { data: companyDetailData, refetch: companyDetailRefetch } = useCompanyDetail({
@@ -60,16 +61,6 @@ const CompanyEditPage: NextPageWithLayout = () => {
             dto: {
               ...formData,
               manager_id: userInfoData?.id as number,
-              welfare: {
-                money: formData.welfare.money,
-                health: formData.welfare.health,
-                life: formData.welfare.life,
-                holiday: formData.welfare.holiday,
-                facility: formData.welfare.facility,
-                etc: formData.welfare.etc,
-                growth: formData.welfare.growth,
-                vacation: formData.welfare.vacation,
-              },
               pay_desc: formData.pay_desc || null,
               nozo: {
                 exists: formData.nozo.exists === "true",
@@ -118,7 +109,11 @@ const CompanyEditPage: NextPageWithLayout = () => {
       reset({
         employee_number: companyDetailData.employeeNumber,
         intro: companyDetailData.intro || "",
-        address: companyDetailData.address,
+        location: {
+          address: companyDetailData.location.address,
+          x: companyDetailData.location.x,
+          y: companyDetailData.location.y,
+        },
         nozo: {
           exists: companyDetailData.nozo.exists ? "true" : "false",
           desc: companyDetailData.nozo.desc || "",

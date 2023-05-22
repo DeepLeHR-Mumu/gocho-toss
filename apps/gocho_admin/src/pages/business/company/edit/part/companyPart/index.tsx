@@ -51,7 +51,7 @@ export const CompanyPart: FunctionComponent<CompanyPartProps> = ({ company }) =>
       </div>
       <div css={cssObj.dataContainer}>
         <strong css={cssObj.dataTitle}>기업 주소</strong>
-        <p css={cssObj.dataBox}>{company.address}</p>
+        <p css={cssObj.dataBox}>{company.location.address}</p>
       </div>
       <div css={cssObj.dataContainer}>
         <strong css={cssObj.dataTitle}>노조</strong>

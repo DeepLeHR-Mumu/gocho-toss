@@ -16,6 +16,13 @@ import { MAX_LENGTH_ERROR_TEXT, ONLY_INT_ERROR_TEXT } from "./constant";
 import { BasicPartProps } from "./type";
 import { cssObj } from "./style";
 
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    kakao: any;
+  }
+}
+
 export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) => {
   const {
     register,
@@ -30,6 +37,31 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
   });
 
   const openPostCodePopup = useDaumPostcodePopup();
+
+  const onClickAddress = () => {
+    const mapScript = document.createElement("script");
+
+    mapScript.async = true;
+    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=0687bed33c060c4758f582d26ff44e16&libraries=services&libraries=services&autoload=false`;
+    document.head.appendChild(mapScript);
+
+    openPostCodePopup({
+      onComplete: (addressObj: Address) => {
+        setValue("location.address", addressObj.address, { shouldDirty: true });
+        window.kakao.maps.load(() => {
+          const geocoder = new window.kakao.maps.services.Geocoder();
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          geocoder.addressSearch(addressObj.address, (result: any, status: any) => {
+            if (status === window.kakao.maps.services.Status.OK) {
+              const { x, y } = result[0];
+              setValue("location.x", x, { shouldDirty: true });
+              setValue("location.y", y, { shouldDirty: true });
+            }
+          });
+        });
+      },
+    });
+  };
 
   if (!companyDetailData) {
     return (
@@ -90,7 +122,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
         </div>
       </div>
       <div css={cssObj.container()}>
-        <strong css={cssObj.subTitle(Boolean(errors.address), !companyDetailData.uploader.isMine)}>
+        <strong css={cssObj.subTitle(Boolean(errors.location?.address), !companyDetailData.uploader.isMine)}>
           기업 본사 주소
         </strong>
         <label htmlFor="address" css={cssObj.address}>
@@ -98,37 +130,27 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             Icon={FiMap}
             isDisabled={!companyDetailData?.uploader.isMine}
             text="주소찾기"
-            onClickHandler={() =>
-              openPostCodePopup({
-                onComplete: (addressObj: Address) => {
-                  setValue("address", addressObj.address, { shouldDirty: true });
-                },
-              })
-            }
+            onClickHandler={() => onClickAddress}
             backgroundColor={COLORS.GRAY80}
           />
           <div css={cssObj.inputBox(!companyDetailData.uploader.isMine)}>
             <FiMapPin />
             <input
               type="button"
-              {...register("address", { required: true })}
+              {...register("location.address", { required: true })}
               placeholder="좌측 버튼을 눌러 기업 주소를 입력해주세요"
               onClick={(onClickEvent: MouseEvent<HTMLInputElement>) => {
                 if (!companyDetailData.uploader.isMine) {
                   onClickEvent.preventDefault();
                   return;
                 }
-                openPostCodePopup({
-                  onComplete: (addressObj: Address) => {
-                    setValue("address", addressObj.address, { shouldDirty: true });
-                  },
-                });
+                onClickAddress();
               }}
-              css={cssObj.inputAddress(Boolean(errors.address), !companyDetailData.uploader.isMine)}
+              css={cssObj.inputAddress(Boolean(errors.location?.address), !companyDetailData.uploader.isMine)}
             />
           </div>
         </label>
-        <KakaoMap address={watch("address")} />
+        <KakaoMap address={watch("location.address")} />
       </div>
       <div css={cssObj.container(80)}>
         <strong css={cssObj.subTitle(Boolean(errors.nozo?.exists), !companyDetailData.uploader.isMine)}>노조</strong>

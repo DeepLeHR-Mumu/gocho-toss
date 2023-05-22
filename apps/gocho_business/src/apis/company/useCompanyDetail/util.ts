@@ -16,7 +16,11 @@ export const companyDetailSelector = ({ data }: ResponseObjDef) => ({
   businessNumber: data.business_number,
   employeeNumber: data.employee_number,
   foundNumber: data.found_date,
-  address: data.address,
+  location: {
+    address: data.location.address,
+    x: data.location.x,
+    y: data.location.y,
+  },
   intro: data.intro,
   payAvg: data.pay_avg,
   payStart: data.pay_start,

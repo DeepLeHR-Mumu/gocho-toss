@@ -11,7 +11,11 @@ export const companyDetailEditSelector = ({ data: company }: ResponseObjDef) => 
   logoUrl: company.logo_url,
   employeeNumber: company.employee_number,
   foundDate: company.found_date,
-  address: company.address,
+  location: {
+    address: company.location.address,
+    x: company.location.x,
+    y: company.location.y,
+  },
   intro: company.intro,
   payAvg: company.pay_avg,
   payStart: company.pay_start,

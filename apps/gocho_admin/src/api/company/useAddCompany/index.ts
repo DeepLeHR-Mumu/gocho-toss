@@ -9,6 +9,7 @@ export const postAddCompany: PostCompanyDef = async (requestObj) => {
   const formData = new FormData();
   formData.append("json", JSON.stringify(requestObj.dto));
   if (requestObj.logo) formData.append("logo", requestObj.logo);
+  if (requestObj.bgImage) formData.append("backgroundImage", requestObj.bgImage);
 
   const { data } = await axiosInstance.post("/companies", formData);
   return data;
@@ -32,6 +33,7 @@ export const useAddCompany: useAddCompanyProps = () =>
           },
         },
         logo: requestObj.logo,
+        backgroundImage: requestObj.bgImage,
       };
       return postAddCompany(newRequestObj);
     },

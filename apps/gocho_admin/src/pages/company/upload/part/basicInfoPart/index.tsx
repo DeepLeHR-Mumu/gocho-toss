@@ -1,4 +1,4 @@
-import { ChangeEvent, FunctionComponent, useState } from "react";
+import { ChangeEvent, Dispatch, FunctionComponent, SetStateAction, useState } from "react";
 import Image from "next/image";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 
@@ -14,7 +14,7 @@ import {
   inputTitle,
   logoPreviewContainer,
   logoUploadLabel,
-  logoUploadInput,
+  imageUploadInput,
   sectionContainer,
   sectionTitle,
   selectBox,
@@ -23,23 +23,66 @@ import {
 import { BasicInfoPartProps } from "./type";
 import { industryArr, sizeArr } from "./constant";
 
-export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ register, watch, setValue, setLogoPicture }) => {
-  const [imageSrc, setImageSrc] = useState<string>();
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    kakao: any;
+  }
+}
+
+export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
+  register,
+  watch,
+  setValue,
+  setLogo,
+  setBgImage,
+}) => {
+  const [logoPreview, setLogoPreview] = useState<string>();
+  const [bgImagePreview, setBgImagePreview] = useState<string>();
 
   const openPostCodePopup = useDaumPostcodePopup();
 
-  const onUploadLogo = async (e: ChangeEvent<HTMLInputElement>) => {
+  const onUploadImage = async (
+    changeEvent: ChangeEvent<HTMLInputElement>,
+    setFile: Dispatch<SetStateAction<File | undefined>>,
+    setPreview: Dispatch<SetStateAction<string | undefined>>
+  ) => {
     const reader = new FileReader();
 
-    if (e.target.files?.[0]) {
-      const img = e.target.files[0];
-      setLogoPicture(img);
+    if (changeEvent.target.files?.[0]) {
+      const img = changeEvent.target.files[0];
+      setFile(img);
 
       reader.onloadend = () => {
-        setImageSrc(reader.result as string);
+        setPreview(reader.result as string);
       };
       reader.readAsDataURL(img);
     }
+  };
+
+  const onClickAddress = () => {
+    const mapScript = document.createElement("script");
+
+    mapScript.async = true;
+    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=0687bed33c060c4758f582d26ff44e16&libraries=services&libraries=services&autoload=false`;
+    document.head.appendChild(mapScript);
+
+    openPostCodePopup({
+      onComplete: (addressObj: Address) => {
+        setValue("location.address", addressObj.address);
+        window.kakao.maps.load(() => {
+          const geocoder = new window.kakao.maps.services.Geocoder();
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          geocoder.addressSearch(addressObj.address, (result: any, status: any) => {
+            if (status === window.kakao.maps.services.Status.OK) {
+              const { x, y } = result[0];
+              setValue("location.x", x);
+              setValue("location.y", y);
+            }
+          });
+        });
+      },
+    });
   };
 
   return (
@@ -50,22 +93,42 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ register,
         <input css={inputBox} {...register("name", { required: true })} />
       </div>
       <div css={imageInput}>
-        <strong css={inputTitle}>기업 로고</strong>
-        <label css={logoUploadLabel} htmlFor="logoImg">
-          로고 업로드
-          <input
-            css={logoUploadInput}
-            type="file"
-            id="logoImg"
-            accept="image/png, image/gif, image/jpeg, image/jpg"
-            onChange={onUploadLogo}
-          />
-        </label>
-        {imageSrc && (
-          <div css={logoPreviewContainer}>
-            <Image fill src={imageSrc} alt="" />
-          </div>
-        )}
+        <div css={inputContainer}>
+          <strong css={inputTitle}>기업 로고</strong>
+          <label css={logoUploadLabel} htmlFor="logoImg">
+            로고 업로드
+            <input
+              css={imageUploadInput}
+              type="file"
+              id="logoImg"
+              accept="image/png, image/gif, image/jpeg, image/jpg"
+              onChange={(changeEvent) => onUploadImage(changeEvent, setLogo, setLogoPreview)}
+            />
+          </label>
+          {logoPreview && (
+            <div css={logoPreviewContainer}>
+              <Image fill src={logoPreview} alt="" />
+            </div>
+          )}
+        </div>
+        <div css={inputContainer}>
+          <strong css={inputTitle}>배경 이미지</strong>
+          <label css={logoUploadLabel} htmlFor="bgImg">
+            로고 업로드
+            <input
+              css={imageUploadInput}
+              type="file"
+              id="bgImg"
+              accept="image/png, image/gif, image/jpeg, image/jpg"
+              onChange={(changeEvent) => onUploadImage(changeEvent, setBgImage, setBgImagePreview)}
+            />
+          </label>
+          {bgImagePreview && (
+            <div css={logoPreviewContainer}>
+              <Image fill src={bgImagePreview} alt="" />
+            </div>
+          )}
+        </div>
       </div>
       <div css={inputContainer}>
         <strong css={inputTitle}>사업자번호 *</strong>
@@ -119,27 +182,11 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({ register,
         <strong css={inputTitle}>기업 주소 *</strong>
         <input
           type="button"
-          onClick={() => {
-            openPostCodePopup({
-              onComplete: (addressObj: Address) => {
-                setValue(`address`, addressObj.address);
-              },
-            });
-          }}
+          onClick={onClickAddress}
           css={inputBox}
-          {...register("address", { required: true })}
+          {...register("location.address", { required: true })}
         />
-        <button
-          type="button"
-          css={addressButton}
-          onClick={() => {
-            openPostCodePopup({
-              onComplete: (addressObj: Address) => {
-                setValue(`address`, addressObj.address);
-              },
-            });
-          }}
-        >
+        <button type="button" css={addressButton} onClick={onClickAddress}>
           기업주소 찾기
         </button>
       </div>

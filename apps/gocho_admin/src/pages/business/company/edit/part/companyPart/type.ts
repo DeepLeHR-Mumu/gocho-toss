@@ -20,7 +20,11 @@ export interface CompanyPartProps {
     size: "대기업" | "중견기업" | "중소기업" | "외국계" | "공기업" | "공공기관" | "기타";
     employeeNumber: number;
     foundDate: string;
-    address: string;
+    location: {
+      address: string;
+      x: number;
+      y: number;
+    };
     intro: string;
     payAvg: number | null;
     payStart: number | null;
