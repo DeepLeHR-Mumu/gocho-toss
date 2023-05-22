@@ -6,9 +6,10 @@ import { GetBannerArrDef } from "./type";
 import { selector } from "./util";
 
 export const getTopBannerArr: GetBannerArrDef = async () => {
-  const token = localStorage.getItem("accessToken");
-  const headers = token ? { "x-access-token": token } : undefined;
-  const { data } = await axiosNoTokenInstance.get("/ads/jd-top", { headers });
+  // TODO: 추후 token이 들어가도록 변경
+  // const token = localStorage.getItem("accessToken");
+  // const headers = token ? { "x-access-token": token } : undefined;
+  const { data } = await axiosNoTokenInstance.get("/ads/jd-top");
   return data;
 };
 
