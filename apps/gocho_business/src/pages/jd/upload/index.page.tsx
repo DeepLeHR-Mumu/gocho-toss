@@ -21,7 +21,6 @@ import type { NextPageWithLayout } from "@/types";
 import { PageLayout, GlobalLayout } from "@/components";
 import { useAddJd } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
-
 import {
   HeaderPart,
   BasicInfoPart,
@@ -30,7 +29,7 @@ import {
   PositionWorkInfoPart,
 } from "./part";
 import { JobFormValues } from "./type";
-import { JD_UPLOAD_MESSAGE_OBJ } from "./constant";
+import { BLANK_JD, JD_UPLOAD_MESSAGE_OBJ } from "./constant";
 import { getFieldArrayValue, getFieldArrayValueWithNull } from "./util";
 import { cssObj } from "./style";
 
@@ -44,11 +43,7 @@ const JdUploadPage: NextPageWithLayout = () => {
   const jobForm = useForm<JobFormValues>({
     mode: "onTouched",
     reValidateMode: "onChange",
-    defaultValues: {
-      process_arr: [{ value: "" }, { value: "" }],
-      apply_route_arr: [{ value: "" }],
-      etc_arr: [{ value: "" }],
-    },
+    defaultValues: { ...BLANK_JD },
   });
 
   const {

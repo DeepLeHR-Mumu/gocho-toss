@@ -58,7 +58,6 @@ export const selector = (jobDetailObj: JobDetailObjDef) => {
     },
     taskDetailArr: jobDetailObj.task_detail_arr,
     rotationArr: jobDetailObj.rotation_arr,
-    rotationEtc: jobDetailObj.rotation_etc,
     place: {
       type: jobDetailObj.place.type,
       addressArr: jobDetailObj.place.address_arr,

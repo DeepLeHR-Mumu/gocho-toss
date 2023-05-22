@@ -41,7 +41,6 @@ export const jdDetailSelector = ({ data: jd }: ResponseObjDef) => {
     },
     taskDetailArr: jd.task_detail_arr,
     rotationArr: jd.rotation_arr,
-    rotationEtc: jd.rotation_etc,
     place: {
       addressArr: jd.place.address_arr,
       factoryArr: jdFactoryArr,

@@ -32,7 +32,7 @@ import {
   PositionWorkInfoPart,
 } from "./part";
 import { JdFormValues } from "./type";
-import { JD_EDIT_MESSAGE_OBJ, ROTATION_ARR } from "./constant";
+import { BLANK_JD, JD_EDIT_MESSAGE_OBJ, ROTATION_ARR } from "./constant";
 import { getFieldArrayValue, getFieldArrayValueWithNull, setFieldArray } from "./util";
 import { cssObj } from "./style";
 
@@ -48,11 +48,7 @@ const JdEditPage: NextPageWithLayout = () => {
   const jdForm = useForm<JdFormValues>({
     mode: "onTouched",
     reValidateMode: "onChange",
-    defaultValues: {
-      process_arr: [{ value: "" }, { value: "" }],
-      apply_route_arr: [{ value: "" }],
-      etc_arr: [{ value: "" }],
-    },
+    defaultValues: { ...BLANK_JD },
   });
   const {
     control,
