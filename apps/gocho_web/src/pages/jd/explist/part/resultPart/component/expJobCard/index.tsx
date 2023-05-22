@@ -28,8 +28,6 @@ import {
   jobDate,
   taskContainer,
   flexBox,
-  taskBox,
-  taskNumber,
   taskSummary,
   jobDetailButton,
   noExplistArrText,
@@ -37,9 +35,9 @@ import {
 
 export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton> = ({ companyData, isSkeleton }) => {
   const { data: jobData } = useJobArr({
-    companyId: companyData?.id,
-    filter: "expired",
     order: "recent",
+    filter: "expired",
+    companyId: companyData?.id,
     size: 3,
   });
   // TODO: companyId enabled를 어떻게 처리할까?
@@ -97,15 +95,8 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
                 <div css={flexBox}>
                   <p css={taskSummary}>
                     모집한 직무
-                    <span css={taskNumber}>{job.taskArr.length}</span>
+                    {job.task}
                   </p>
-                  {job.taskArr.map((task) => {
-                    return (
-                      <p css={taskBox} key={`${job.id}${task}`}>
-                        {task}
-                      </p>
-                    );
-                  })}
                 </div>
                 <Link href={`${JOBS_DETAIL_URL}/${job.id}`} passHref css={jobDetailButton}>
                   상세보기 <BsChevronRight />

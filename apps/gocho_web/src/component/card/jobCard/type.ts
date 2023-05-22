@@ -24,7 +24,7 @@ export interface JobCardProps {
     placeArr: string[];
     rotationArr: string[];
     contractType: string[];
-    taskArr: string[];
+    task: string;
   };
   isSkeleton?: never;
 }

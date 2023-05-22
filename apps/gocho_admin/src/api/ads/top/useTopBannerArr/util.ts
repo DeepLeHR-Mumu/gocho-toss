@@ -12,11 +12,18 @@ export const topBannerSelector = ({ data: bannerArr, page_result }: ResponseObjD
 
   const bannerDataArr = bannerArr.map((banner) => ({
     id: banner.id,
-    pcImageUrl: banner.pc_image_url,
-    mobileImageUrl: banner.mobile_image_url,
-    link: banner.link,
-    startTime: banner.start_time,
-    endTime: banner.end_time,
+    color: banner.color,
+    jd: {
+      company: {
+        id: banner.jd.company.id,
+        logoUrl: banner.jd.company.logo_url,
+        name: banner.jd.company.name,
+      },
+      id: banner.jd.id,
+      title: banner.jd.title,
+      startTime: banner.jd.start_time,
+      endTime: banner.jd.end_time,
+    },
   }));
   return { bannerDataArr, pageResult };
 };

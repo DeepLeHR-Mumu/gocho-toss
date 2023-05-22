@@ -12,8 +12,8 @@ export const MenuListPart: FunctionComponent = () => {
 
   const { data: jobData } = useJobArr({
     order: "recent",
-    q: JSON.stringify({ searchWord: router.query.q }),
     filter: "valid",
+    searchWord: router.query.q as string,
   });
 
   const { data: companyData } = useCompanyArr({

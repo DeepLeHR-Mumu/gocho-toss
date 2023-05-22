@@ -12,7 +12,7 @@ import { signupModalOpenEvent, signupModalCloseEvent, signupSuccessEvent } from 
 
 import { ModalComponent } from "@component/modal/modalBackground";
 import { CloseButton } from "@component/common/atom/closeButton";
-import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
+import { ErrorResponseDef } from "shared-type/api/errorResponseType";
 
 import { tokenDecryptor } from "shared-util";
 import { useModal, useToast } from "@/globalStates";
@@ -39,7 +39,7 @@ export const SignUpBox: FunctionComponent = () => {
   const signUpSubmit: SubmitHandler<SignUpFormValues> = (signUpObj) => {
     mutate(signUpObj, {
       onError: (error) => {
-        const errorResponse = error.response?.data as ErrorResponse;
+        const errorResponse = error.response?.data as ErrorResponseDef;
         setErrorMsg(errorResponse.error_message);
         signupAttempt.current += 1;
       },

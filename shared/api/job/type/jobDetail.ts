@@ -23,8 +23,21 @@ export interface JobCompanyObjDef {
   comment_count: number;
 }
 
-export interface PositionArrDef {
+export interface JobDetailObjDef {
   id: number;
+  company: JobCompanyObjDef;
+  title: string;
+  cut: boolean;
+  start_time: string;
+  end_time: string;
+  process_arr: string[];
+  apply_route_arr: string[];
+  apply_url: string;
+  etc_arr: string[];
+  bookmark: number;
+  is_bookmark: boolean;
+  view: number;
+  click: number;
   possible_edu: {
     summary: string;
     college: boolean;
@@ -59,22 +72,4 @@ export interface PositionArrDef {
   pay_arr: string[];
   preferred_certi_arr: string[];
   preferred_etc_arr: string[];
-}
-
-export interface JobDetailObjDef {
-  id: number;
-  company: JobCompanyObjDef;
-  title: string;
-  cut: boolean;
-  start_time: string;
-  end_time: string;
-  process_arr: string[];
-  apply_route_arr: string[];
-  apply_url: string;
-  etc_arr: string[];
-  bookmark: number;
-  is_bookmark: boolean;
-  view: number;
-  click: number;
-  position_arr: PositionArrDef[];
 }

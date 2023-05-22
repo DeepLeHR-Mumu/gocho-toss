@@ -23,5 +23,6 @@ export interface JobObjDef {
   place_arr: string[];
   rotation_arr: string[];
   contract_type: string[];
-  task_arr: string[];
+  task: string;
+  is_expired: boolean;
 }

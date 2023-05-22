@@ -60,9 +60,16 @@ export const ListPart: FunctionComponent = () => {
     isLoading: isJobDataArrLoading,
     isError: isJobDataArrError,
   } = useJobArr({
-    q: JSON.stringify(searchQuery),
     order: router.query.order as OrderDef,
     filter: "valid",
+    contractType: searchQuery?.contractType.join(", ") || "",
+    industry: searchQuery?.industry.join(", ") || "",
+    place: searchQuery?.place.join(", ") || "",
+    possibleEdu: searchQuery?.possibleEdu.join(", ") || "",
+    requiredExp: searchQuery?.requiredExp.join(", ") || "",
+    rotation: searchQuery?.rotation.join(", ") || "",
+    task: searchQuery?.task.join(", ") || "",
+    searchWord: searchQuery?.searchWord || null,
     page: Number(router.query.page),
     size: limit,
   });

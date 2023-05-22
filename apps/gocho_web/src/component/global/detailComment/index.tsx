@@ -9,7 +9,7 @@ import { DetailCommentProps } from "./type";
 import { companyName, flexBox, headerCSS, imageBox, wrapper } from "./style";
 
 export const DetailComment: FunctionComponent<DetailCommentProps> = ({ userInfo, commentDataArr, company }) => {
-  if (!userInfo && !commentDataArr) {
+  if (!userInfo) {
     return (
       <aside css={wrapper}>
         <header css={headerCSS}>

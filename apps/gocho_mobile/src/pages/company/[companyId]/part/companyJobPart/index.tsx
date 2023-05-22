@@ -21,8 +21,8 @@ export const CompanyJobPart: FunctionComponent = () => {
     isStatic: false,
   });
   const { data: jobData } = useJobArr({
-    companyId: Number(companyId),
     order: "recent",
+    companyId: Number(companyId),
     page: Number(router.query.page),
     size: limit,
   });

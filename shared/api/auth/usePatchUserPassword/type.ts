@@ -1,6 +1,8 @@
 import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
+import { ErrorResponseDef } from "shared-type/api/errorResponseType";
+
 export interface RequestObjDef {
   userId: number;
   origin_password?: string;
@@ -15,15 +17,6 @@ export interface PatchUserPasswordDef {
   ({ userId, origin_password, new_password }: RequestObjDef): Promise<UserPasswordResponse>;
 }
 
-export interface ErrorResponse extends AxiosError {
-  status: string;
-  error_message: string;
-  error_code: number;
-  status_name: string;
-  path: string;
-  method: string;
-}
-
 export interface UsePatchUserPasswordProps {
-  (): UseMutationResult<UserPasswordResponse, ErrorResponse, RequestObjDef>;
+  (): UseMutationResult<UserPasswordResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

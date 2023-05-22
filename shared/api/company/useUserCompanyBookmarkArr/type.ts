@@ -1,12 +1,13 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
-import { oldBookmarkKeyObj } from "shared-constant/queryKeyFactory/bookmark/bookmarkKeyObj";
+import { userBookmarkKeyObj } from "shared-constant/queryKeyFactory/bookmark/bookmarkKeyObj";
 import { PageResultDef } from "shared-type/api/paginationType";
 
 export interface CompanyBookmarkObjDef {
   id: number;
   name: string;
   logo_url: string;
+  industry: string;
 }
 
 export interface ResponseObjDef {
@@ -15,5 +16,5 @@ export interface ResponseObjDef {
 }
 
 export interface GetUserCompanyBookmarkArrDef {
-  (requestObj: QueryFunctionContext<ReturnType<typeof oldBookmarkKeyObj.companyBookmarkArr>>): Promise<ResponseObjDef>;
+  (requestObj: QueryFunctionContext<ReturnType<typeof userBookmarkKeyObj.companyBookmarkArr>>): Promise<ResponseObjDef>;
 }

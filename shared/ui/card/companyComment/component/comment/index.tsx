@@ -23,7 +23,7 @@ export const Comment: FunctionComponent<CommentProps> = ({ commentData, company 
   const { data: userInfoData } = useUserProfile();
   const { mutate: commentToggle } = useCompanyCommentToggle({ companyId: company.id });
 
-  const postCommentToggleHandler = (type: "like" | "dislike") => {
+  const postCommentToggleHandler = (type: "likes" | "dislikes") => {
     commentToggle({ companyId: company.id, commentId: commentData.id, type });
   };
 
@@ -44,12 +44,12 @@ export const Comment: FunctionComponent<CommentProps> = ({ commentData, company 
           <CommentLikeButton
             count={commentData.likeCount}
             isLiked={commentData.isLiked}
-            setLikeSubmit={() => postCommentToggleHandler("like")}
+            setLikeSubmit={() => postCommentToggleHandler("likes")}
           />
           <CommentDislikeButton
             count={commentData.dislikeCount}
             isDisLiked={commentData.isDisliked}
-            setDislikeSubmit={() => postCommentToggleHandler("dislike")}
+            setDislikeSubmit={() => postCommentToggleHandler("dislikes")}
           />
         </div>
       </div>

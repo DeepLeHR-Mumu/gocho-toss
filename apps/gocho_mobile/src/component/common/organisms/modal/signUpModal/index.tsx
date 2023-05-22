@@ -16,7 +16,7 @@ import {
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
-import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
+import { ErrorResponseDef } from "shared-type/api/errorResponseType";
 import { signupModalOpenEvent, signupModalCloseEvent, signupSuccessEvent } from "shared-ga/auth";
 import { tokenDecryptor } from "shared-util";
 
@@ -47,7 +47,7 @@ export const SignUpModal: FunctionComponent = () => {
   const signUpSubmit: SubmitHandler<SignUpFormValues> = (signUpObj) => {
     mutate(signUpObj, {
       onError: (error) => {
-        const errorResponse = error.response?.data as ErrorResponse;
+        const errorResponse = error.response?.data as ErrorResponseDef;
         signupAttempt.current += 1;
         setErrorMsg(errorResponse.error_message);
       },

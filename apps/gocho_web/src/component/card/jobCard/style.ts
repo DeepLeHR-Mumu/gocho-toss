@@ -243,19 +243,6 @@ export const taskSummary: TaskSummaryDef = (isExpired) => {
   `;
 };
 
-export const taskArrCSS = css`
-  display: flex;
-  flex-wrap: wrap;
-
-  > li {
-    margin: 0 0.5rem 0.5rem 0;
-
-    :last-of-type {
-      margin: 0;
-    }
-  }
-`;
-
 interface TaskNumberDef {
   (isExpired: boolean): SerializedStyles;
 }

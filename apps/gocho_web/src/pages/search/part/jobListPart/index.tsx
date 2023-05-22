@@ -14,8 +14,8 @@ export const JobListPart: FunctionComponent = () => {
 
   const { data: jobDataObj } = useJobArr({
     order: "recent",
-    q: JSON.stringify({ searchWord: router.query.q }),
     filter: "valid",
+    searchWord: router.query.q as string,
     page: Number(router.query.page),
     size: JOB_RESULT_LIMIT,
   });

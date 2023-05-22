@@ -13,6 +13,7 @@ export interface JobBookmarkArrDef {
   title: string;
   cut: boolean;
   end_time: string;
+  is_expired: boolean;
 }
 
 export interface ResponseObjDef {

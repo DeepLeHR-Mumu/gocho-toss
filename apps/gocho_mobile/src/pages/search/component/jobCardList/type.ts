@@ -24,7 +24,7 @@ export type JobListPartProps = {
     placeArr: string[];
     rotationArr: string[];
     contractType: string[];
-    taskArr: string[];
+    task: string;
   }[];
   isLoading: boolean;
 };

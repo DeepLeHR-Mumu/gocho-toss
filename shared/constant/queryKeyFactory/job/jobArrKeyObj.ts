@@ -2,7 +2,14 @@ export interface JobArrRequestObjDef {
   order: "recent" | "popular" | "rand" | "view" | "end" | "com" | undefined;
   page?: number;
   size?: number;
-  q?: string;
+  contractType?: string;
+  industry?: string;
+  place?: string;
+  possibleEdu?: string;
+  requiredExp?: string;
+  rotation?: string;
+  task?: string;
+  searchWord?: string | null;
   filter?: "todayUpload" | "almostDeadline" | "deadline" | "expired" | "valid";
   companyId?: number;
 }

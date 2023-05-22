@@ -17,6 +17,7 @@ export const selector = (data: CompanyBookmarkObjDef[], page_result: PageResultD
       id: company.id,
       name: company.name,
       logoUrl: company.logo_url,
+      industry: company.industry,
     };
   });
 

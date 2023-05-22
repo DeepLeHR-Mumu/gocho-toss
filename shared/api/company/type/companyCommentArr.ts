@@ -7,9 +7,9 @@ interface CompanyCommentDef {
   };
   description: string;
   created_time: string;
-  like_count: number;
+  like: number;
   is_liked: boolean;
-  dislike_count: number;
+  dislike: number;
   is_disliked: boolean;
 }
 
