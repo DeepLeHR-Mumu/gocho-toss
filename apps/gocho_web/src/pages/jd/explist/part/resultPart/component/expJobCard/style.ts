@@ -116,7 +116,7 @@ export const jobTitleContainer = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 `;
 
 export const jobTitle = css`

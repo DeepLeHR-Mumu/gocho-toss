@@ -31,13 +31,13 @@ export const CompanyPart: FunctionComponent<CompanyPartProps> = ({ company }) =>
       <div css={cssObj.dataContainer}>
         <strong css={cssObj.dataTitle}>기업 로고</strong>
         <div css={cssObj.imageContainer}>
-          <Image fill src={company.logoUrl || defaultCompanyLogo} alt="기업 로고" />
+          <Image fill sizes="1" src={company.logoUrl || defaultCompanyLogo} alt="기업 로고" />
         </div>
       </div>
       <div css={cssObj.dataContainer}>
         <strong css={cssObj.dataTitle}>배경 이미지</strong>
         <div css={cssObj.imageContainer}>
-          <Image fill src={company.bgImageUrl || defaultCompanyBg} alt="배경 이미지" />
+          <Image fill sizes="1" src={company.bgImageUrl || defaultCompanyBg} alt="배경 이미지" />
         </div>
       </div>
       <div css={cssObj.dataContainer}>

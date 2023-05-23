@@ -107,7 +107,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
           </label>
           {logoPreview && (
             <div css={logoPreviewContainer}>
-              <Image fill src={logoPreview} alt="" />
+              <Image fill sizes="1" src={logoPreview} alt="" />
             </div>
           )}
         </div>
@@ -125,7 +125,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
           </label>
           {bgImagePreview && (
             <div css={logoPreviewContainer}>
-              <Image fill src={bgImagePreview} alt="" />
+              <Image fill sizes="1" src={bgImagePreview} alt="" />
             </div>
           )}
         </div>

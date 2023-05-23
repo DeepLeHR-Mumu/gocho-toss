@@ -126,44 +126,21 @@ export const flexRow = css`
   align-items: center;
 `;
 
-export const taskSummary = css`
+export const taskBox = css`
   font-size: 0.75rem;
-  margin-right: 01rem;
   font-weight: 700;
-  white-space: nowrap;
+  word-break: keep-all;
   width: fit-content;
-  position: relative;
-  color: ${COLORS.GRAY100};
-  background-color: ${COLORS.GRAY40};
-  border-radius: 2rem;
-  padding: 0 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 1.5rem;
-`;
-
-export const taskNumber = css`
-  font-size: 0.75rem;
-  position: absolute;
-  color: ${COLORS.GRAY10};
-  background-color: ${COLORS.GRAY80};
+  position: relative;
+  color: ${COLORS.GRAY100};
+  background-color: ${COLORS.GRAY40};
   border-radius: 1.5rem;
-  padding: 0.25rem 0.5rem;
-  top: 0;
-  right: 0;
-  transform: translate(35%, -35%);
-`;
-
-export const taskBox = css`
-  font-size: 0.75rem;
-  margin-right: 0.5rem;
-  color: ${COLORS.GRAY40};
-  word-break: keep-all;
-
-  :last-of-type {
-    ${shorten()};
-  }
+  padding: 0 1.5rem;
+  margin-right: 2rem;
+  height: 1.5rem;
 `;
 
 export const jobDetailButton = css`

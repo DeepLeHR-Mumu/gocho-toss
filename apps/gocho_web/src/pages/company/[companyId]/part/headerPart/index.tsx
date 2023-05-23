@@ -78,7 +78,7 @@ export const HeaderPart: FunctionComponent = () => {
         <a css={catchLinkButton} href={companyDetailData.catchUrl} target="_blank" rel="noopener noreferrer">
           캐치 기업정보 더보기
           <div css={catchLogoBox}>
-            <Image src={catchLogoSrc} alt="" fill />
+            <Image src={catchLogoSrc} alt="" fill sizes="1" />
           </div>
         </a>
       )}

@@ -40,10 +40,6 @@ import {
   detailInfoContainer,
   eduQual,
   detailInfo,
-  taskContainer,
-  taskSummary,
-  taskNumber,
-  taskBox,
   hoverButton,
   infoBox,
 } from "./style";
@@ -137,22 +133,14 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
                 {jobData.placeArr[0] && jobData.placeArr[0].split(" ").slice(0, 2).join(" ")}{" "}
                 {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
               </li>
-
               <li css={detailInfo}>
                 {jobData.rotationArr[0]}{" "}
                 {jobData.rotationArr.length !== 1 && `외 ${jobData.rotationArr.length - 1}형태`}
               </li>
+              <li css={detailInfo} key={`${jobData.id}${jobData.task}`}>
+                {jobData.task}
+              </li>
             </ul>
-          </div>
-        </div>
-
-        <div css={taskContainer}>
-          <p css={taskSummary(isExpired)}>
-            채용중인 직무
-            <span css={taskNumber(isExpired)}>{jobData.positionCount}</span>
-          </p>
-          <div css={taskBox} key={`${jobData.id}${jobData.task}`}>
-            {jobData.task}
           </div>
         </div>
 

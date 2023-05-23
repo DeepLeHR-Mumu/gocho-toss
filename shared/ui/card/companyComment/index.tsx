@@ -58,7 +58,12 @@ export const CompanyCommentCard: FunctionComponent<CommentCardProps | CommentCar
           <div css={companyInfoContainer}>
             {!isMobile && (
               <div css={companyLogoBox}>
-                <Image fill src={companyData.logoUrl || defaultCompanyLogo} alt={`${companyData.name} 기업 로고`} />
+                <Image
+                  fill
+                  sizes="1"
+                  src={companyData.logoUrl || defaultCompanyLogo}
+                  alt={`${companyData.name} 기업 로고`}
+                />
               </div>
             )}
 

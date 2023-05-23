@@ -89,7 +89,7 @@ export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> 
   };
 
   const rotationTextMaker = (selectedRotation: string[]) => {
-    if (selectedRotation.length === 0) return "교대 형태 선택";
+    if (!selectedRotation || selectedRotation.length === 0) return "교대 형태 선택";
     return selectedRotation
       .map((rotation) => ROTATION_ARR.find((rotationObj) => rotationObj.data === rotation)?.name)
       .join(", ");

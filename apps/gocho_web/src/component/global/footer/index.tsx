@@ -73,7 +73,7 @@ export const Footer: FunctionComponent = () => {
                 </a>
 
                 <span css={kakaoBox}>
-                  <Image src={kakaoMonoSrc} alt="카카오톡 플러스친구" fill />
+                  <Image src={kakaoMonoSrc} alt="카카오톡 플러스친구" fill sizes="1" />
                 </span>
               </p>
             </div>

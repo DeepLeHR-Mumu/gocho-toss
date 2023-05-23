@@ -57,7 +57,7 @@ export const HeaderPart: FunctionComponent = () => {
         <div css={container}>
           <div css={infoBox}>
             <div css={logoBox}>
-              <Image alt="" src={companyDetailData.logoUrl || defaultCompanyLogo} fill />
+              <Image alt="" src={companyDetailData.logoUrl || defaultCompanyLogo} fill sizes="1" />
             </div>
             <div css={buttonBox}>
               <button

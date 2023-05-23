@@ -106,7 +106,7 @@ const JobsDetail: NextPage = () => {
         <div css={flexBox}>
           <section css={container}>
             <div css={logoImageBox}>
-              <Image src={logoSrc} alt="" fill />
+              <Image src={logoSrc} alt="" fill sizes="1" />
             </div>
             <DetailSupportPart freshPosition={jobDetailData} />
             <DetailWorkPart freshPosition={jobDetailData} />

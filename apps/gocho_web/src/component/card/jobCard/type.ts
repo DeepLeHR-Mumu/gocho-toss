@@ -17,7 +17,6 @@ export interface JobCardProps {
     isBookmark: boolean;
     view: number;
     click: number;
-    positionCount: number;
     high: boolean;
     college: boolean;
     requiredExpArr: string[];

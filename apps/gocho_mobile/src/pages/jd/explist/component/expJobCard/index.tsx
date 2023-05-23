@@ -27,8 +27,6 @@ import {
   jobDate,
   taskContainer,
   taskBox,
-  taskNumber,
-  taskSummary,
   jobDetailButton,
   noExplistArrText,
   flexRow,
@@ -99,10 +97,6 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
 
               <div css={taskContainer}>
                 <div css={flexRow}>
-                  <p css={taskSummary}>
-                    모집한 직무
-                    <span css={taskNumber}>{data.task.length}</span>
-                  </p>
                   <div css={taskBox} key={`${data.id}${data.task}`}>
                     {data.task}
                   </div>

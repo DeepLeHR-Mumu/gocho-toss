@@ -39,7 +39,7 @@ export const rotationArr = [
   { data: "기타", name: "기타" },
   { data: "야간", name: "야간" },
   { data: "교대", name: "교대" },
-  { data: "주간2교대", name: "주간 2교대" },
+  { data: "주간2교대", name: "주간2교대" },
   { data: "2교대", name: "2교대" },
   { data: "3교대", name: "3교대" },
   { data: "2;1", name: "2조 1교대" },

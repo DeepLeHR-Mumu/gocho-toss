@@ -251,9 +251,11 @@ const JdEditPage: NextPageWithLayout = () => {
           <form onSubmit={handleSubmit(jdEditHandler)}>
             <HeaderPart jdData={jdData} />
             <BasicInfoPart jdForm={jdForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
-            <PositionTitleInfoPart jdForm={jdForm} control={control} />
-            <PositionRequiredInfoPart jdForm={jdForm} control={control} />
-            <PositionWorkInfoPart jdForm={jdForm} control={control} />
+            <div css={cssObj.cardContainer}>
+              <PositionTitleInfoPart jdForm={jdForm} control={control} />
+              <PositionRequiredInfoPart jdForm={jdForm} control={control} />
+              <PositionWorkInfoPart jdForm={jdForm} control={control} />
+            </div>
             <div css={cssObj.buttonContainer}>
               <SharedButton
                 radius="round"

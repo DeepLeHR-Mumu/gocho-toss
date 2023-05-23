@@ -74,10 +74,10 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ jobF
                       required: "교대 형태를 선택해주세요.",
                     }),
                   }}
-                  key={rotation.data}
+                  key={`rotation${rotation.data}`}
                   desc={rotation.name}
                   value={rotation.data}
-                  id={rotation.data}
+                  id={`rotation${rotation.data}`}
                 />
               ))}
             </div>
@@ -200,14 +200,14 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ jobF
               <div css={cssObj.flexBox}>
                 {taskArr.map((task) => (
                   <SharedRadioButton
-                    key={task.mainTask}
+                    key={`mainTask${task.mainTask}`}
                     registerObj={{
                       ...jobForm.register("task_main", {
                         required: "1차 직무를 선택해주세요.",
                       }),
                     }}
                     value={task.mainTask}
-                    id={task.mainTask}
+                    id={`mainTask${task.mainTask}`}
                   >
                     <p css={cssObj.radioDesc}>{task.mainTask}</p>
                   </SharedRadioButton>
@@ -221,7 +221,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ jobF
               <div css={cssObj.flexBox}>
                 {mainTask?.subTaskArr.map((subTask) => (
                   <CheckBoxWithDesc
-                    key={subTask}
+                    key={`${mainTask.mainTask}${subTask}`}
                     registerObj={{
                       ...jobForm.register("task_sub_arr", {
                         required: "2차 직무를 선택해주세요.",
@@ -229,7 +229,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ jobF
                     }}
                     desc={subTask}
                     value={subTask}
-                    id={subTask}
+                    id={`${mainTask.mainTask}${subTask}`}
                   />
                 ))}
               </div>
