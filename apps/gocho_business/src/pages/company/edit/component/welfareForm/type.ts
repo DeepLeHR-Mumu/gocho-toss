@@ -1,5 +1,5 @@
 import { UseFormReturn } from "react-hook-form";
-import { PostSubmitValues } from "../../type";
+import { CompanyFormValues } from "../../type";
 
 export type WelfareKey =
   | "welfare.money"
@@ -17,5 +17,5 @@ export interface WelfareFormProps {
   isMine: boolean;
   registerKey: WelfareKey;
   welfareValueArr: string[] | null;
-  companyFormObj: UseFormReturn<PostSubmitValues>;
+  companyFormObj: UseFormReturn<CompanyFormValues>;
 }

@@ -27,6 +27,16 @@ export const cssObj = {
     word-break: break-all;
   `,
 
+  imageContainer: css`
+    width: 12rem;
+    height: 5rem;
+    position: relative;
+
+    > img {
+      object-fit: contain;
+    }
+  `,
+
   welfareContainer: css`
     display: flex;
     flex-wrap: wrap;

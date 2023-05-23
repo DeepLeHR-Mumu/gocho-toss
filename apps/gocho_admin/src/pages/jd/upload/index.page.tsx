@@ -13,6 +13,7 @@ import type { NextPageWithLayout } from "@/types";
 import { INTERNAL_URL } from "@/constant";
 
 import { CommonDataPart, PositionRequiredDataPart, PositionTaskDataPart, PositionEtcDataPart } from "./part";
+import { BLANK_JD } from "./constant";
 import { JobFormValues } from "./type";
 import { cssObj } from "./style";
 
@@ -23,6 +24,7 @@ const JdUpload: NextPageWithLayout = () => {
 
   const jobForm = useForm<JobFormValues>({
     mode: "onBlur",
+    defaultValues: { ...BLANK_JD },
   });
 
   useDisabledKeydownSubmit();

@@ -20,7 +20,8 @@ const CompanyEdit: NextPageWithLayout = () => {
   const router = useRouter();
   const companyId = Number(router.query.id);
 
-  const [logoPicture, setLogoPicture] = useState<File>();
+  const [logo, setLogo] = useState<File>();
+  const [bgImage, setBgImage] = useState<File>();
   const [checkMsg, setCheckMsg] = useState<string>();
 
   const { data: companyData, isLoading, isError } = useCompanyDetail({ companyId });
@@ -39,33 +40,18 @@ const CompanyEdit: NextPageWithLayout = () => {
   });
 
   const companySubmit: SubmitHandler<CompanyFormValues> = (companyObj) => {
-    if (logoPicture) {
-      mutate(
-        { companyId, dto: companyObj, logo: logoPicture },
-        {
-          onSuccess: () => {
-            setCheckMsg("기업이 수정 되었습니다!");
-          },
+    mutate(
+      { companyId, dto: companyObj, logo, bgImage },
+      {
+        onSuccess: () => {
+          setCheckMsg("기업이 수정 되었습니다!");
+        },
 
-          onError: () => {
-            setCheckMsg("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
-          },
-        }
-      );
-    } else {
-      mutate(
-        { companyId, dto: companyObj },
-        {
-          onSuccess: () => {
-            setCheckMsg("기업이 수정 되었습니다!");
-          },
-
-          onError: () => {
-            setCheckMsg("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
-          },
-        }
-      );
-    }
+        onError: () => {
+          setCheckMsg("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
+        },
+      }
+    );
   };
 
   useEffect(() => {
@@ -96,7 +82,11 @@ const CompanyEdit: NextPageWithLayout = () => {
       size: companyData?.size,
       employee_number: companyData?.employeeNumber,
       found_date: new Date(newFoundDate).toISOString().substring(0, 10),
-      address: companyData?.address,
+      location: {
+        address: companyData?.location.address,
+        x: companyData?.location.x,
+        y: companyData?.location.y,
+      },
       intro: companyData?.intro,
       pay_avg: companyData?.payAvg,
       pay_start: companyData?.payStart,
@@ -136,7 +126,8 @@ const CompanyEdit: NextPageWithLayout = () => {
           watch={watch}
           setValue={setValue}
           companyLogo={companyData?.logoUrl || ""}
-          setLogoPicture={setLogoPicture}
+          setLogo={setLogo}
+          setBgImage={setBgImage}
         />
         <WelfareInfoPart register={register} />
         <PayInfoPart register={register} />

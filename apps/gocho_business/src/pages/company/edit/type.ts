@@ -1,6 +1,10 @@
-export interface PostSubmitValues {
+export interface CompanyFormValues {
   intro: string;
-  address: string;
+  location: {
+    address: string;
+    x: number;
+    y: number;
+  };
   nozo: {
     exists: "true" | "false";
     desc: string | null;

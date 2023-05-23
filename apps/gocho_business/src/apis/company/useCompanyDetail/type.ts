@@ -17,13 +17,18 @@ export interface ResponseObjDef {
       reason: string | null;
     };
     logo_url: string;
+    background_image_url: string;
     industry: string;
     business_number: string;
     name: string;
     size: string;
     employee_number: number;
     found_date: string;
-    address: string;
+    location: {
+      address: string;
+      x: number;
+      y: number;
+    };
     intro: string;
     pay_avg: number;
     pay_start: number;

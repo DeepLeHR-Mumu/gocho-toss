@@ -1,4 +1,7 @@
-export const BLANK_POSITION = {
+export const BLANK_JD = {
+  process_arr: [{ value: "" }, { value: "" }],
+  apply_route_arr: [{ value: "" }],
+  etc_arr: [{ value: "" }],
   middle: false,
   high: false,
   college: false,

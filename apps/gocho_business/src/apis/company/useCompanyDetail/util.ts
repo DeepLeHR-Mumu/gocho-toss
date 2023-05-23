@@ -6,6 +6,7 @@ export const companyDetailSelector = ({ data }: ResponseObjDef) => ({
   name: data.name,
   size: data.size,
   logo: data.logo_url,
+  backgroundImage: data.background_image_url,
   uploader: {
     name: data.uploader.name,
     department: data.uploader.department,
@@ -16,7 +17,11 @@ export const companyDetailSelector = ({ data }: ResponseObjDef) => ({
   businessNumber: data.business_number,
   employeeNumber: data.employee_number,
   foundNumber: data.found_date,
-  address: data.address,
+  location: {
+    address: data.location.address,
+    x: data.location.x,
+    y: data.location.y,
+  },
   intro: data.intro,
   payAvg: data.pay_avg,
   payStart: data.pay_start,

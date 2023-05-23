@@ -8,22 +8,49 @@ export const cssObj = {
     width: 100%;
     min-height: 30vh;
   `,
+
   wrapper: css`
     position: relative;
   `,
+
   payContainer: css`
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
   `,
+
   rowBox: css`
     display: flex;
     align-items: flex-start;
   `,
+
+  imageUploadLabel: css`
+    margin-left: 1rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    color: ${COLORS.GRAY100};
+    background-color: ${COLORS.BLUE_FIRST50};
+  `,
+
+  imageUploadInput: css`
+    display: none;
+  `,
+
+  logoPreviewContainer: css`
+    height: 8rem;
+    position: relative;
+
+    > img {
+      object-fit: contain;
+    }
+  `,
+
   payLabel: css`
     display: flex;
     align-items: center;
   `,
+
   container: (width?: number) => {
     if (width) {
       return css`
@@ -35,6 +62,7 @@ export const cssObj = {
       margin-bottom: 1.75rem;
     `;
   },
+
   subTitle: (isError: boolean, isDisabled: boolean) => {
     const defaultCSS = css`
       font-size: 1rem;
@@ -54,12 +82,14 @@ export const cssObj = {
       color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
     `;
   },
+
   textValue: (isDisabled: boolean) => css`
     font-size: 1rem;
     font-weight: 400;
     padding: 0 1rem;
     color: ${isDisabled ? COLORS.GRAY65 : COLORS.GRAY10};
   `,
+
   employeeNumber: (isDisabled: boolean) => css`
     display: flex;
     align-items: center;
@@ -70,6 +100,7 @@ export const cssObj = {
       color: ${isDisabled ? COLORS.GRAY65 : COLORS.GRAY10};
     }
   `,
+
   input: (isError: boolean, isDisabled: boolean) => {
     const defaultCSS = css`
       border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
@@ -95,6 +126,7 @@ export const cssObj = {
       ${defaultCSS};
     `;
   },
+
   unit: (isDisabled: boolean) => css`
     font-size: 1rem;
     font-weight: 400;
@@ -121,6 +153,7 @@ export const cssObj = {
       margin-right: 0.5rem;
     }
   `,
+
   inputBox: (isDisabled: boolean) => css`
     display: flex;
     margin-left: 1rem;
@@ -137,6 +170,7 @@ export const cssObj = {
       transform: translate(0, -50%);
     }
   `,
+
   inputAddress: (isError: boolean, isDisabled: boolean) => {
     const defaultCSS = css`
       border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
@@ -165,6 +199,7 @@ export const cssObj = {
       ${defaultCSS}
     `;
   },
+
   nozoBox: (isDisabled: boolean) => css`
     display: flex;
     margin-bottom: 0.5rem;
@@ -181,6 +216,7 @@ export const cssObj = {
     width: 45%;
     margin-bottom: 0.5rem;
   `,
+
   infoTitle: (isError: boolean, isDisabled: boolean) => {
     const defaultCSS = css`
       font-size: 1rem;
@@ -200,6 +236,7 @@ export const cssObj = {
       color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
     `;
   },
+
   errorMsg: css`
     color: ${COLORS.ERROR_RED40};
     font-size: 0.75rem;

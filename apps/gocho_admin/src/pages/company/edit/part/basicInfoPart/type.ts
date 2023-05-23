@@ -7,5 +7,6 @@ export interface BasicInfoPartProps {
   watch: UseFormWatch<CompanyFormValues>;
   setValue: UseFormSetValue<CompanyFormValues>;
   companyLogo: string;
-  setLogoPicture: Dispatch<SetStateAction<File | undefined>>;
+  setLogo: Dispatch<SetStateAction<File | undefined>>;
+  setBgImage: Dispatch<SetStateAction<File | undefined>>;
 }

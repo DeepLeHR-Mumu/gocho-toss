@@ -11,7 +11,11 @@ export interface RequestObjDef {
     size: string;
     employee_number: number;
     found_date: string;
-    address: string;
+    location: {
+      address: string;
+      x: number;
+      y: number;
+    };
     intro: string;
     pay_avg: number | null;
     pay_start: number | null;
@@ -26,12 +30,10 @@ export interface RequestObjDef {
       growth: string | null;
       etc: string | null;
     };
-
     nozo: {
       exists: boolean;
       desc: string | null;
     };
-
     factory_arr: {
       factory_name: string;
       address: string;
@@ -44,8 +46,8 @@ export interface RequestObjDef {
       dormitory_etc: string | null;
     }[];
   };
-
   logo?: File;
+  bgImage?: File;
 }
 
 interface axiosRequestObjDef {
@@ -57,7 +59,11 @@ interface axiosRequestObjDef {
     size: string;
     employee_number: number;
     found_date: string;
-    address: string;
+    location: {
+      address: string;
+      x: number;
+      y: number;
+    };
     intro: string;
     pay_avg: number | null;
     pay_start: number | null;
@@ -72,12 +78,10 @@ interface axiosRequestObjDef {
       growth: string[] | null;
       etc: string[] | null;
     };
-
     nozo: {
       exists: boolean;
       desc: string | null;
     };
-
     factory_arr: {
       factory_name: string;
       address: string;
@@ -90,12 +94,12 @@ interface axiosRequestObjDef {
       dormitory_etc: string | null;
     }[];
   };
-
   logo?: File;
+  bgImage?: File;
 }
 
 export interface PostCompanyDef {
-  ({ dto, logo }: axiosRequestObjDef): Promise<AdminResponseDef>;
+  ({ dto, logo, bgImage }: axiosRequestObjDef): Promise<AdminResponseDef>;
 }
 
 export interface useAddCompanyProps {

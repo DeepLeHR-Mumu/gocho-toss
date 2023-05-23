@@ -30,7 +30,7 @@ export const jdArrSelector = ({ data: jdArr, page_result }: ResponseObjDef) => {
     endTime: jd.end_time,
     createdTime: jd.created_time,
     updatedTime: jd.updated_time,
-    taskArr: jd.task_arr,
+    task: jd.task,
   }));
   return { jdDataArr, pageResult };
 };
