@@ -8,7 +8,7 @@ import { axiosInstance } from "@/api/useAxiosInterceptor";
 import { RejectModifyJdDef, RequestObjDef, UseRejectModifyJdProps } from "./type";
 
 const patchRejectModifyJd: RejectModifyJdDef = async (requestObj) => {
-  const { data } = await axiosInstance.patch(`/jds/${requestObj.jdId}/requests/reject`, {
+  const { data } = await axiosInstance.patch(`/jds/${requestObj.jdId}/requests/modify-reject`, {
     reason: requestObj.reason,
   });
   return data;

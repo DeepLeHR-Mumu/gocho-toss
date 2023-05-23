@@ -8,7 +8,7 @@ import { axiosInstance } from "@/api/useAxiosInterceptor";
 import { AcceptModifyJdDef, RequestObjDef, UseAcceptModifyJdProps } from "./type";
 
 const putAcceptModifyJd: AcceptModifyJdDef = async (requestObj) => {
-  const { data } = await axiosInstance.put(`/jds/${requestObj.jdId}/requests/accept`);
+  const { data } = await axiosInstance.put(`/jds/${requestObj.jdId}/requests/modify-accept`);
   return data;
 };
 

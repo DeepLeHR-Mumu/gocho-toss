@@ -8,7 +8,6 @@ import { Spinner } from "shared-ui/common/atom/spinner";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { COLORS } from "shared-style/color";
 import { NUMBER_REGEXP } from "shared-constant";
-import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import defaultCompanyBg from "shared-image/global/common/default_company_bg.webp";
 
 import { useCompanyDetail, useManagerProfile } from "@/apis";
@@ -26,8 +25,7 @@ declare global {
   }
 }
 
-export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, setLogo, setBgImage }) => {
-  const [logoPreview, setLogoPreview] = useState<string>();
+export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, setBgImage }) => {
   const [bgImagePreview, setBgImagePreview] = useState<string>();
 
   const {
@@ -98,28 +96,6 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, setL
   return (
     <div css={cssObj.wrapper} data-testid="company/edit/BasicPart">
       <div css={cssObj.rowBox}>
-        <div css={cssObj.container(50)}>
-          <strong css={cssObj.subTitle(false, !companyDetailData.uploader.isMine)}>기업 로고</strong>
-          <label htmlFor="logoImg" css={cssObj.imageUploadLabel}>
-            새 로고 업로드
-            <input
-              css={cssObj.imageUploadInput}
-              type="file"
-              id="logoImg"
-              accept="image/png, image/gif, image/jpeg, image/jpg"
-              onChange={(changeEvent) => onUploadImage(changeEvent, setLogo, setLogoPreview)}
-            />
-          </label>
-          {logoPreview ? (
-            <div css={cssObj.logoPreviewContainer}>
-              <Image fill src={logoPreview} alt="" />
-            </div>
-          ) : (
-            <div css={cssObj.logoPreviewContainer}>
-              <Image fill src={companyDetailData.logo || defaultCompanyLogo} alt="" />
-            </div>
-          )}
-        </div>
         <div css={cssObj.container(50)}>
           <strong css={cssObj.subTitle(false, !companyDetailData.uploader.isMine)}>배경 이미지</strong>
           <label htmlFor="bgImg" css={cssObj.imageUploadLabel}>

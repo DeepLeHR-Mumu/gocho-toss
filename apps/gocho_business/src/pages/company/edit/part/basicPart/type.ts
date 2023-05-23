@@ -5,6 +5,5 @@ import { CompanyFormValues } from "../../type";
 
 export interface BasicPartProps {
   companyForm: UseFormReturn<CompanyFormValues>;
-  setLogo: Dispatch<SetStateAction<File | undefined>>;
   setBgImage: Dispatch<SetStateAction<File | undefined>>;
 }

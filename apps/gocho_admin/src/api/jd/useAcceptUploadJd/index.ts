@@ -8,7 +8,7 @@ import { axiosInstance } from "@/api/useAxiosInterceptor";
 import { AcceptUploadJdDef, RequestObjDef, UseAcceptUploadJdProps } from "./type";
 
 const putAcceptUploadJd: AcceptUploadJdDef = async (requestObj) => {
-  const { data } = await axiosInstance.put(`/jds/${requestObj.jdId}/requests/accept`);
+  const { data } = await axiosInstance.put(`/jds/${requestObj.jdId}/requests/upload-accept`);
   return data;
 };
 

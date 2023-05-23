@@ -20,7 +20,6 @@ import { CompanyFormValues } from "./type";
 import { cssObj } from "./style";
 
 const CompanyEditPage: NextPageWithLayout = () => {
-  const [logo, setLogo] = useState<File>();
   const [bgImage, setBgImage] = useState<File>();
 
   const isRefetching = useRef(false);
@@ -49,7 +48,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
     companyEditConfirmEvent();
     isRefetching.current = true;
     companyDetailRefetch().then((response) => {
-      if (!isDirty && !logo && !bgImage) {
+      if (!isDirty && !bgImage) {
         window.alert("변경사항이 없습니다.");
         return;
       }
@@ -70,7 +69,6 @@ const CompanyEditPage: NextPageWithLayout = () => {
                 desc: formData.nozo.desc || null,
               },
             },
-            logo,
             bgImage,
           },
           {
@@ -204,7 +202,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
           {companyDetailData.status.reason && <CompanyStatusPart />}
 
           <section css={cssObj.companyInfoBox}>
-            <BasicPart companyForm={companyForm} setLogo={setLogo} setBgImage={setBgImage} />
+            <BasicPart companyForm={companyForm} setBgImage={setBgImage} />
             <WelfarePart companyForm={companyForm} />
           </section>
 

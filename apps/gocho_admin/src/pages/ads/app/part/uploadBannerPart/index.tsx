@@ -9,6 +9,7 @@ import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerAr
 import { useAddJdBanner } from "@/api";
 import { pageTitle } from "@/style/commonStyles";
 
+import { TYPE_ARR } from "@/pages/ads/main/part/uploadBannerPart/type";
 import { cssObj } from "./style";
 import { BannerFormValues } from "./type";
 
@@ -19,7 +20,11 @@ export const UploadBannerPart: FunctionComponent = () => {
   const [mobileImage, setMobileImage] = useState<File>();
 
   const queryClient = useQueryClient();
-  const { register, handleSubmit } = useForm<BannerFormValues>({});
+  const { register, handleSubmit } = useForm<BannerFormValues>({
+    defaultValues: {
+      link: null,
+    },
+  });
 
   const { mutate: addMutate } = useAddJdBanner();
 
@@ -58,9 +63,30 @@ export const UploadBannerPart: FunctionComponent = () => {
       <h2 css={pageTitle}>앱 공고 배너 업로드</h2>
       <section css={cssObj.sectionContainer}>
         <form onSubmit={handleSubmit(submitBannerHandler)}>
+          <p css={cssObj.errorMsgBox}>
+            웹 링크 배너일 시 http:// 혹은 https:// 로 시작하는 링크를, 앱 링크 배너일 시 gocho:// 로 시작하는 링크를
+            넣어주세요
+          </p>
           <div css={cssObj.inputContainer}>
+            <strong css={cssObj.inputTitle}>배너 종류</strong>
+            <select css={cssObj.inputBox} {...register("type", { required: true })}>
+              <option value="">배너 종류 선택</option>
+              {TYPE_ARR.map((type) => (
+                <option key={type.text} value={type.data}>
+                  {type.text}
+                </option>
+              ))}
+            </select>
             <strong css={cssObj.inputTitle}>광고 링크</strong>
-            <input css={cssObj.inputBox} {...register("link", { required: true })} />
+            <input
+              css={cssObj.inputBox}
+              {...register("link", {
+                setValueAs: (link) => {
+                  if (link === "") return null;
+                  return link;
+                },
+              })}
+            />
             <strong css={cssObj.inputTitle}>게시 기간</strong>
             <input
               type="datetime-local"
