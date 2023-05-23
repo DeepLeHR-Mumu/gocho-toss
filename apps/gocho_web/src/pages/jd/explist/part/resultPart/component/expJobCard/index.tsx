@@ -90,13 +90,9 @@ export const ExpJobCard: FunctionComponent<ExpJobCardProps | ExpJobCardSkeleton>
                   {`${jobStartDate}`}~{`${jobEndDate}`}
                 </p>
               </div>
-
               <div css={taskContainer}>
                 <div css={flexBox}>
-                  <p css={taskSummary}>
-                    모집한 직무
-                    {job.task}
-                  </p>
+                  <p css={taskSummary}>{job.task}</p>
                 </div>
                 <Link href={`${JOBS_DETAIL_URL}/${job.id}`} passHref css={jobDetailButton}>
                   상세보기 <BsChevronRight />
