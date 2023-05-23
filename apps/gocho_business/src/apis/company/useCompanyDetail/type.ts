@@ -17,6 +17,7 @@ export interface ResponseObjDef {
       reason: string | null;
     };
     logo_url: string;
+    background_image_url: string;
     industry: string;
     business_number: string;
     name: string;

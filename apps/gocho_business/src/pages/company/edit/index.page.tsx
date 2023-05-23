@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useRef } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 
@@ -16,10 +16,13 @@ import { NextPageWithLayout } from "@/types";
 import { PageHead } from "./pageHead";
 import { CompanyInfoPart, CompanyStatusPart, LastEditInfoPart, BasicPart, WelfarePart } from "./part";
 import { COMPANY_MESSAGE_OBJ, ALREADY_DONE_EDIT_MESSAGE } from "./constants";
-import { PostSubmitValues } from "./type";
+import { CompanyFormValues } from "./type";
 import { cssObj } from "./style";
 
 const CompanyEditPage: NextPageWithLayout = () => {
+  const [logo, setLogo] = useState<File>();
+  const [bgImage, setBgImage] = useState<File>();
+
   const isRefetching = useRef(false);
 
   const { data: userInfoData } = useManagerProfile();
@@ -30,7 +33,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
 
   const { mutate: putCompanyDetail } = useAddCompanyDetail();
 
-  const companyForm = useForm<PostSubmitValues>({
+  const companyForm = useForm<CompanyFormValues>({
     mode: "onBlur",
   });
 
@@ -42,11 +45,11 @@ const CompanyEditPage: NextPageWithLayout = () => {
 
   usePreventRouting(Boolean(Object.keys(dirtyFields).length));
 
-  const addCompanyDetail = (formData: PostSubmitValues) => {
+  const addCompanyDetail = (formData: CompanyFormValues) => {
     companyEditConfirmEvent();
     isRefetching.current = true;
     companyDetailRefetch().then((response) => {
-      if (!isDirty) {
+      if (!isDirty && !logo && !bgImage) {
         window.alert("변경사항이 없습니다.");
         return;
       }
@@ -67,6 +70,8 @@ const CompanyEditPage: NextPageWithLayout = () => {
                 desc: formData.nozo.desc || null,
               },
             },
+            logo,
+            bgImage,
           },
           {
             onSuccess: () => {
@@ -199,7 +204,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
           {companyDetailData.status.reason && <CompanyStatusPart />}
 
           <section css={cssObj.companyInfoBox}>
-            <BasicPart companyForm={companyForm} />
+            <BasicPart companyForm={companyForm} setLogo={setLogo} setBgImage={setBgImage} />
             <WelfarePart companyForm={companyForm} />
           </section>
 

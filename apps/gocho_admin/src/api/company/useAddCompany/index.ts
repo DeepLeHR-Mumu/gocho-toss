@@ -33,7 +33,7 @@ export const useAddCompany: useAddCompanyProps = () =>
           },
         },
         logo: requestObj.logo,
-        backgroundImage: requestObj.bgImage,
+        bgImage: requestObj.bgImage,
       };
       return postAddCompany(newRequestObj);
     },

@@ -1,6 +1,10 @@
 import { UseFormReturn } from "react-hook-form";
-import { PostSubmitValues } from "../../type";
+import { Dispatch, SetStateAction } from "react";
+
+import { CompanyFormValues } from "../../type";
 
 export interface BasicPartProps {
-  companyForm: UseFormReturn<PostSubmitValues>;
+  companyForm: UseFormReturn<CompanyFormValues>;
+  setLogo: Dispatch<SetStateAction<File | undefined>>;
+  setBgImage: Dispatch<SetStateAction<File | undefined>>;
 }

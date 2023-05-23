@@ -1,6 +1,9 @@
 import { FunctionComponent } from "react";
+import Image from "next/image";
 
 import { dateConverter } from "shared-util";
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
+import defaultCompanyBg from "shared-image/global/common/default_company_bg.webp";
 
 import { WelfareBox } from "@/pages/business/company/edit/component/welfareBox";
 import { cssObj } from "./style";
@@ -24,6 +27,18 @@ export const CompanyPart: FunctionComponent<CompanyPartProps> = ({ company }) =>
       <div css={cssObj.dataContainer}>
         <strong css={cssObj.dataTitle}>기업 이름</strong>
         <p css={cssObj.dataBox}>{company.name}</p>
+      </div>
+      <div css={cssObj.dataContainer}>
+        <strong css={cssObj.dataTitle}>기업 로고</strong>
+        <div css={cssObj.imageContainer}>
+          <Image fill src={company.logoUrl || defaultCompanyLogo} alt="기업 로고" />
+        </div>
+      </div>
+      <div css={cssObj.dataContainer}>
+        <strong css={cssObj.dataTitle}>배경 이미지</strong>
+        <div css={cssObj.imageContainer}>
+          <Image fill src={company.bgImageUrl || defaultCompanyBg} alt="배경 이미지" />
+        </div>
       </div>
       <div css={cssObj.dataContainer}>
         <strong css={cssObj.dataTitle}>사업자 번호</strong>

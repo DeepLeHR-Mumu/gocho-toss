@@ -1,12 +1,15 @@
-import { FocusEvent, MouseEvent, FunctionComponent } from "react";
+import { FocusEvent, MouseEvent, FunctionComponent, useState, ChangeEvent, Dispatch, SetStateAction } from "react";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { BiUserVoice } from "react-icons/bi";
 import { FiMap, FiMapPin, FiUsers } from "react-icons/fi";
+import Image from "next/image";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { COLORS } from "shared-style/color";
 import { NUMBER_REGEXP } from "shared-constant";
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
+import defaultCompanyBg from "shared-image/global/common/default_company_bg.webp";
 
 import { useCompanyDetail, useManagerProfile } from "@/apis";
 
@@ -23,7 +26,10 @@ declare global {
   }
 }
 
-export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) => {
+export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, setLogo, setBgImage }) => {
+  const [logoPreview, setLogoPreview] = useState<string>();
+  const [bgImagePreview, setBgImagePreview] = useState<string>();
+
   const {
     register,
     setValue,
@@ -63,6 +69,24 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
     });
   };
 
+  const onUploadImage = async (
+    changeEvent: ChangeEvent<HTMLInputElement>,
+    setFile: Dispatch<SetStateAction<File | undefined>>,
+    setPreview: Dispatch<SetStateAction<string | undefined>>
+  ) => {
+    const reader = new FileReader();
+
+    if (changeEvent.target.files?.[0]) {
+      const img = changeEvent.target.files[0];
+      setFile(img);
+
+      reader.onloadend = () => {
+        setPreview(reader.result as string);
+      };
+      reader.readAsDataURL(img);
+    }
+  };
+
   if (!companyDetailData) {
     return (
       <div css={cssObj.spinnerBox}>
@@ -73,6 +97,52 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
 
   return (
     <div css={cssObj.wrapper} data-testid="company/edit/BasicPart">
+      <div css={cssObj.rowBox}>
+        <div css={cssObj.container(50)}>
+          <strong css={cssObj.subTitle(false, !companyDetailData.uploader.isMine)}>기업 로고</strong>
+          <label htmlFor="logoImg" css={cssObj.imageUploadLabel}>
+            새 로고 업로드
+            <input
+              css={cssObj.imageUploadInput}
+              type="file"
+              id="logoImg"
+              accept="image/png, image/gif, image/jpeg, image/jpg"
+              onChange={(changeEvent) => onUploadImage(changeEvent, setLogo, setLogoPreview)}
+            />
+          </label>
+          {logoPreview ? (
+            <div css={cssObj.logoPreviewContainer}>
+              <Image fill src={logoPreview} alt="" />
+            </div>
+          ) : (
+            <div css={cssObj.logoPreviewContainer}>
+              <Image fill src={companyDetailData.logo || defaultCompanyLogo} alt="" />
+            </div>
+          )}
+        </div>
+        <div css={cssObj.container(50)}>
+          <strong css={cssObj.subTitle(false, !companyDetailData.uploader.isMine)}>배경 이미지</strong>
+          <label htmlFor="bgImg" css={cssObj.imageUploadLabel}>
+            새 배경 업로드
+            <input
+              css={cssObj.imageUploadInput}
+              type="file"
+              id="bgImg"
+              accept="image/png, image/gif, image/jpeg, image/jpg"
+              onChange={(changeEvent) => onUploadImage(changeEvent, setBgImage, setBgImagePreview)}
+            />
+          </label>
+          {bgImagePreview ? (
+            <div css={cssObj.logoPreviewContainer}>
+              <Image fill src={bgImagePreview} alt="" />
+            </div>
+          ) : (
+            <div css={cssObj.logoPreviewContainer}>
+              <Image fill src={companyDetailData.backgroundImage || defaultCompanyBg} alt="" />
+            </div>
+          )}
+        </div>
+      </div>
       <div css={cssObj.rowBox}>
         <div css={cssObj.container(30)}>
           <strong css={cssObj.subTitle(Boolean(errors.employee_number), !companyDetailData.uploader.isMine)}>

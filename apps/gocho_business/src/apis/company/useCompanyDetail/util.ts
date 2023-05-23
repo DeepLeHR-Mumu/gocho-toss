@@ -6,6 +6,7 @@ export const companyDetailSelector = ({ data }: ResponseObjDef) => ({
   name: data.name,
   size: data.size,
   logo: data.logo_url,
+  backgroundImage: data.background_image_url,
   uploader: {
     name: data.uploader.name,
     department: data.uploader.department,

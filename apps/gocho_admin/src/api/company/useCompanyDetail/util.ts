@@ -9,6 +9,7 @@ export const companyDetailConverter = ({ data: company }: ResponseObjDef) => ({
   catchUrl: company.catch_url,
   youtubeUrl: company.youtube_url,
   logoUrl: company.logo_url,
+  bgImageUrl: company.background_image_url,
   employeeNumber: company.employee_number,
   foundDate: company.found_date,
   location: {

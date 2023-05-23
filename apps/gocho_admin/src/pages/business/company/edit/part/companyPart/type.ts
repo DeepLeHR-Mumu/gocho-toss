@@ -32,6 +32,7 @@ export interface CompanyPartProps {
     bookmark: number;
     view: number;
     logoUrl: string | null;
+    bgImageUrl: string | null;
     nozo: {
       exists: boolean;
       desc: string | null;

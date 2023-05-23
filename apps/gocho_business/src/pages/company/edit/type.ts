@@ -1,4 +1,4 @@
-export interface PostSubmitValues {
+export interface CompanyFormValues {
   intro: string;
   location: {
     address: string;

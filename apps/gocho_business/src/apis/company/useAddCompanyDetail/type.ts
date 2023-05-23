@@ -30,6 +30,8 @@ export interface RequestObjDef {
       desc: string | null;
     };
   };
+  logo?: File;
+  bgImage?: File;
 }
 
 export const companyDetailKeyObj = {

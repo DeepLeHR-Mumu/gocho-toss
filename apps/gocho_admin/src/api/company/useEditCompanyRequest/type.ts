@@ -56,6 +56,7 @@ export interface ResponseObjDef {
     bookmark: number;
     view: number;
     logo_url: string | null;
+    background_image_url: string | null;
     welfare: WelfareObjDef | null;
     nozo: {
       exists: boolean;
