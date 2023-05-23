@@ -51,22 +51,6 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
     return selectedSubTask.join(", ");
   };
 
-  const titleMaker = (task: string, contract: string, hire: number) => {
-    const taskPart = task ? `[${task}]` : "1차직무";
-    const contractPart = contract ? `${contract}` : "{계약형태}";
-    let hireNumberPart;
-
-    if (hire) {
-      if (hire < 0) hireNumberPart = hireNumberLabel;
-      else hireNumberPart = hire;
-    } else {
-      hireNumberPart = "{명수}";
-    }
-
-    if (!(!!task || !!contract || !!hire)) return "직무 카드";
-    return `${taskPart} ${contractPart} ${hireNumberPart}명 채용`;
-  };
-
   useEffect(() => {
     const hireNumber = watch("hire_number");
 
@@ -79,9 +63,7 @@ export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps
   return (
     <>
       <div css={cssObj.titleContainer}>
-        <strong css={cssObj.positionTitle}>
-          {titleMaker(watch("task_main"), watch("contract_type"), watch("hire_number") || 0)}
-        </strong>
+        <strong css={cssObj.positionTitle}>채용 세부사항</strong>
       </div>
       <div css={cssObj.container}>
         <input

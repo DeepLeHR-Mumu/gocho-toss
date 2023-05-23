@@ -144,9 +144,12 @@ const JdUploadPage: NextPageWithLayout = () => {
           <form onSubmit={handleSubmit(jobSubmitHandler)}>
             <HeaderPart />
             <BasicInfoPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
-            <PositionTitleInfoPart jobForm={jobForm} control={control} />
-            <PositionRequiredInfoPart jobForm={jobForm} control={control} />
-            <PositionWorkInfoPart jobForm={jobForm} control={control} />
+            <div css={cssObj.cardContainer}>
+              <PositionTitleInfoPart jobForm={jobForm} control={control} />
+              <PositionRequiredInfoPart jobForm={jobForm} control={control} />
+              <PositionWorkInfoPart jobForm={jobForm} control={control} />
+            </div>
+
             <div css={cssObj.buttonWrapper}>
               <SharedButton
                 radius="round"
