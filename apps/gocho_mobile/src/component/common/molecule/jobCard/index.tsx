@@ -34,9 +34,6 @@ import {
   detailInfoContainer,
   eduQual,
   detailInfo,
-  taskTitle,
-  taskSummary,
-  taskNumber,
   taskBox,
 } from "./style";
 

@@ -1,4 +1,4 @@
-import { css, SerializedStyles } from "@emotion/react";
+import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 import { shorten } from "shared-style/common";
 import { MOBILE, PC_HOVER } from "shared-style/mediaQuery";

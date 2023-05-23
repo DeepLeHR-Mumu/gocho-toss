@@ -142,27 +142,6 @@ export const detailInfo = css`
   ${shorten()}
 `;
 
-export const taskTitle = css`
-  display: flex;
-  align-items: center;
-  margin: 1rem 0 0.5rem;
-`;
-
-export const taskSummary = css`
-  font-size: 0.75rem;
-  font-weight: 500;
-  margin-right: 0.25rem;
-  color: ${COLORS.GRAY30};
-`;
-
-export const taskNumber = css`
-  font-size: 0.75rem;
-  color: ${COLORS.GRAY10};
-  background-color: ${COLORS.BLUE_SECOND70};
-  border-radius: 1.5rem;
-  padding: 0.25rem 0.5rem;
-`;
-
 export const taskBox = css`
   width: fit-content;
   border-radius: 1.5rem;
