@@ -216,3 +216,7 @@ export const UNKNOWN_ERROR_META = {
 };
 
 export const NOT_FOUND_META = { title: "고초대졸닷컴 | 유효하지 않은 주소입니다" };
+
+export const NOTICE_META = {
+  title: "고초대졸닷컴 | 서버 점검중입니다",
+};

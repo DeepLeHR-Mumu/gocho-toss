@@ -5,7 +5,7 @@ import Head from "next/head";
 import Script from "next/script";
 import ReactGA from "react-ga4";
 import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import axios from "axios";
+// import axios from "axios";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Global } from "@emotion/react";
 import { datadogRum } from "@datadog/browser-rum";
@@ -60,13 +60,18 @@ function UserMobileService({ Component, pageProps }: AppProps) {
           refetchOnWindowFocus: false,
           keepPreviousData: true,
           retry: 0,
-          onError: (error) => {
-            if (axios.isAxiosError(error) && error.response?.status === 404) {
-              router.push("/404");
-            }
-            if (axios.isAxiosError(error) && error.response?.status === 500) {
-              router.push("/500");
-            }
+          onSuccess: () => {
+            router.push("/notice");
+          },
+
+          onError: () => {
+            router.push("/notice");
+            // if (axios.isAxiosError(error) && error.response?.status === 404) {
+            //   router.push("/404");
+            // }
+            // if (axios.isAxiosError(error) && error.response?.status === 500) {
+            //   router.push("/500");
+            // }
           },
         },
       },

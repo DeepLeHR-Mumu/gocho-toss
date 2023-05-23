@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Script from "next/script";
-import axios from "axios";
+// import axios from "axios";
 import type { AppProps } from "next/app";
 import { Global } from "@emotion/react";
 import { useRouter } from "next/router";
@@ -61,13 +61,18 @@ function UserPCService({ Component, pageProps }: AppProps) {
           refetchOnWindowFocus: false,
           keepPreviousData: true,
           retry: 0,
-          onError: (error) => {
-            if (axios.isAxiosError(error) && error.response?.status === 404) {
-              router.push("/404");
-            }
-            if (axios.isAxiosError(error) && error.response?.status === 500) {
-              router.push("/500");
-            }
+          onSuccess: () => {
+            router.push("/notice");
+          },
+
+          onError: () => {
+            router.push("/notice");
+            // if (axios.isAxiosError(error) && error.response?.status === 404) {
+            //   router.push("/404");
+            // }
+            // if (axios.isAxiosError(error) && error.response?.status === 500) {
+            //   router.push("/500");
+            // }
           },
         },
       },
