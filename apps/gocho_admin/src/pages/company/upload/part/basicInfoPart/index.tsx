@@ -205,7 +205,16 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
       </div>
       <div css={inputContainer}>
         <strong css={inputTitle}>유투브 URL</strong>
-        <input type="url" css={inputBox} {...register("youtube_url")} />
+        <input
+          type="url"
+          css={inputBox}
+          {...register("youtube_url", {
+            setValueAs: (link) => {
+              if (link === "") return null;
+              return link;
+            },
+          })}
+        />
       </div>
     </section>
   );

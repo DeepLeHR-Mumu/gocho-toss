@@ -6,7 +6,8 @@ export interface RequestObjDef {
   pcImage: File;
   mobileImage: File;
   dto: {
-    link: string;
+    type: number;
+    link: string | null;
     start_time: string;
     end_time: string;
   };

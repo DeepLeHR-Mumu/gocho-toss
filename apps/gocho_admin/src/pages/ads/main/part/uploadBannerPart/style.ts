@@ -68,4 +68,11 @@ export const cssObj = {
     background-color: ${COLORS.BLUE_NEON40};
     color: ${COLORS.GRAY100};
   `,
+
+  errorMsgBox: css`
+    color: ${COLORS.BLUE_FIRST40};
+    font-weight: 500;
+    text-align: center;
+    margin: 1rem 0;
+  `,
 };
