@@ -77,11 +77,10 @@ export const cutBox = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 0.25rem;
   border-radius: 1rem;
   margin-top: 0.5rem;
-  width: fit-content;
   padding: 0 1rem;
+  width: fit-content;
   height: 1.625rem;
   background-color: ${COLORS.GRAY90};
   color: ${COLORS.BLUE_FIRST40};
@@ -94,6 +93,7 @@ export const companyInfoContainer = css`
 `;
 
 export const companyName = css`
+  margin-left: 0.25rem;
   font-size: 1rem;
   color: ${COLORS.GRAY10};
   font-weight: 500;

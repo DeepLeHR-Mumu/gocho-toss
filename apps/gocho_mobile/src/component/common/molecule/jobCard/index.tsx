@@ -124,10 +124,6 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
           </p>
         </div>
 
-        <div css={taskTitle}>
-          <p css={taskSummary}>채용중인 직무</p>
-          <p css={taskNumber}>{jobData.positionCount}</p>
-        </div>
         <div css={taskBox} key={`${jobData.id}${jobData.task}`}>
           {jobData.task}
         </div>
