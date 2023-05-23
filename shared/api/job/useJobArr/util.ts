@@ -1,4 +1,6 @@
-import { JobObjDef, PageResultDef } from "../type/jobArr";
+import { PageResultDef } from "shared-type/api/paginationType";
+
+import { JobObjDef } from "../type/jobArr";
 
 export const selector = (jobArr: JobObjDef[], page_result: PageResultDef) => {
   const pageResult = {
@@ -36,7 +38,8 @@ export const selector = (jobArr: JobObjDef[], page_result: PageResultDef) => {
       placeArr: job.place_arr,
       rotationArr: job.rotation_arr,
       contractType: job.contract_type,
-      taskArr: job.task_arr,
+      task: job.task,
+      isExpired: job.is_expired,
     };
   });
   return { jobDataArr, pageResult };

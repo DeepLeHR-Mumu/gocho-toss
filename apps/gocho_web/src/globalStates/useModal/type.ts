@@ -55,7 +55,7 @@ export type modalNameDef =
   | "noticeModal"
   | null;
 
-export type contentModalNameDef = "tipModal" | "factoryModal" | "loginModal" | "pageBlockModal" | "dialogModal";
+export type contentModalNameDef = "factoryModal" | "loginModal" | "pageBlockModal" | "dialogModal";
 
 export interface setCurrentModalDef {
   (modal: contentModalNameDef, contentObj: contentModalDef): void;

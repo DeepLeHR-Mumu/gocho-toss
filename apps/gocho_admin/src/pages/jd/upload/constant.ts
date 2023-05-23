@@ -1,4 +1,4 @@
-export const blankPosition = {
+export const BLANK_JD = {
   middle: false,
   high: false,
   college: false,

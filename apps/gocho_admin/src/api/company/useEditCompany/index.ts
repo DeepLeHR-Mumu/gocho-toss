@@ -9,6 +9,7 @@ export const editCompany: EditCompanyDef = async (requestObj) => {
   const formData = new FormData();
   formData.append("json", JSON.stringify(requestObj.dto));
   if (requestObj.logo) formData.append("logo", requestObj.logo);
+  if (requestObj.bgImage) formData.append("backgroundImage", requestObj.bgImage);
 
   const { data } = await axiosInstance.put(`/companies/${requestObj.companyId}`, formData);
   return data;
@@ -33,6 +34,7 @@ export const useEditCompany: useEditCompanyProps = () =>
           },
         },
         logo: requestObj.logo,
+        bgImage: requestObj.bgImage,
       };
       return editCompany(newRequestObj);
     },

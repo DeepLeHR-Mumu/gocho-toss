@@ -22,7 +22,7 @@ export const jdArrSelector = ({ data: jdArr, page_result }: ResponseObjDef) => {
     view: jd.view,
     startTime: jd.start_time,
     endTime: jd.end_time,
-    taskArr: jd.task_arr,
+    task: jd.task,
     eduArr: jd.edu_summary,
     placeArr: jd.place_arr,
     rotationArr: jd.rotation_arr,

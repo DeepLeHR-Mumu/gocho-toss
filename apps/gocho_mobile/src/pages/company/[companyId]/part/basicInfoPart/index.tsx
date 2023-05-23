@@ -106,7 +106,7 @@ export const BasicInfoPart: FunctionComponent = () => {
                 {companyDetailData.nozo.exists ? "노조 있음" : "노조 없음"}
 
                 <span css={nozoIconBox}>
-                  <Image src={companyDetailData.nozo.exists ? nozo_true : nozo_false} fill alt="" />
+                  <Image src={companyDetailData.nozo.exists ? nozo_true : nozo_false} fill sizes="1" alt="" />
                 </span>
               </p>
             </div>

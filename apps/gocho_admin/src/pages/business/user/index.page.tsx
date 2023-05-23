@@ -1,9 +1,8 @@
 import { useRef, useState, ReactElement } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+import { useAddRecruiter, useFindCompany } from "@/api";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
-import { useAddRecruiter } from "@/api/recruiter/useAddRecruiter";
-import { useFindCompany } from "@/api/company/useFindCompany";
 import { ErrorScreen, LoadingScreen, GlobalLayout } from "@/component";
 import type { NextPageWithLayout } from "@/types";
 

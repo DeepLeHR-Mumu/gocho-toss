@@ -44,7 +44,11 @@ export interface ResponseObjDef {
     size: "대기업" | "중견기업" | "중소기업" | "외국계" | "공기업" | "공공기관" | "기타";
     employee_number: number;
     found_date: string;
-    address: string;
+    location: {
+      address: string;
+      x: number;
+      y: number;
+    };
     intro: string;
     pay_avg: number | null;
     pay_start: number | null;
@@ -52,6 +56,7 @@ export interface ResponseObjDef {
     bookmark: number;
     view: number;
     logo_url: string | null;
+    background_image_url: string | null;
     welfare: WelfareObjDef | null;
     nozo: {
       exists: boolean;

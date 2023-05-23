@@ -64,7 +64,7 @@ export const logoUploadLabel = css`
   border: 2px solid ${COLORS.GRAY10};
 `;
 
-export const logoUploadInput = css`
+export const imageUploadInput = css`
   display: none;
 `;
 

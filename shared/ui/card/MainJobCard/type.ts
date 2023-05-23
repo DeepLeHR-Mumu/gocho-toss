@@ -24,7 +24,7 @@ export type MainJobCardProps = {
     placeArr: string[];
     rotationArr: string[];
     contractType: string[];
-    taskArr: string[];
+    task: string;
   };
   isMobile: boolean;
   isSkeleton?: never;

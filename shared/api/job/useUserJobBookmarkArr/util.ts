@@ -1,4 +1,6 @@
-import { JobBookmarkArrDef, PageResultDef } from "./type";
+import { PageResultDef } from "shared-type/api/paginationType";
+
+import { JobBookmarkArrDef } from "./type";
 
 export const selector = (data: JobBookmarkArrDef[], page_result: PageResultDef) => {
   const pageResult = {
@@ -20,6 +22,7 @@ export const selector = (data: JobBookmarkArrDef[], page_result: PageResultDef) 
       title: job.title,
       cut: job.cut,
       endTime: job.end_time,
+      is_expired: job.is_expired,
     };
   });
 

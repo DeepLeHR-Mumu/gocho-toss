@@ -6,7 +6,11 @@ export interface CompanyFormValues {
   size: string;
   employee_number: number;
   found_date: string;
-  address: string;
+  location: {
+    address: string;
+    x: number;
+    y: number;
+  };
   intro: string;
   pay_avg: number | null;
   pay_start: number | null;

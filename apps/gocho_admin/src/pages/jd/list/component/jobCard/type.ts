@@ -6,6 +6,6 @@ export interface JobCardProps {
     title: string;
     startTime: string;
     endTime: string;
-    taskArr: string[];
+    task: string;
   };
 }

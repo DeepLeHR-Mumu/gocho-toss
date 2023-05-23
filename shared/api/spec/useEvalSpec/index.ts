@@ -6,9 +6,7 @@ import { axiosInstance } from "../../axiosInstance";
 import { PostEvalSpecDef, PostEvalSpecResponse, RequestObjDef, UseEvalSpecProps } from "./type";
 
 const postEvalSpec: PostEvalSpecDef = async (requestObj) => {
-  const token = localStorage.getItem("accessToken");
-  const headers = token ? { "x-access-token": token } : undefined;
-  const { data } = await axiosInstance.post(`specs/${requestObj.specId}/evals`, requestObj.specData, { headers });
+  const { data } = await axiosInstance.post(`specs/${requestObj.specId}/evals`, requestObj.specData);
   return data;
 };
 

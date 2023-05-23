@@ -60,9 +60,16 @@ export const ListPart: FunctionComponent = () => {
     isLoading: isJobDataArrLoading,
     isError: isJobDataArrError,
   } = useJobArr({
-    q: JSON.stringify(searchQuery),
     order: router.query.order as OrderDef,
     filter: "valid",
+    contractType: searchQuery?.contractType.join(", ") || "",
+    industry: searchQuery?.industry.join(", ") || "",
+    place: searchQuery?.place.join(", ") || "",
+    possibleEdu: searchQuery?.possibleEdu.join(", ") || "",
+    requiredExp: searchQuery?.requiredExp.join(", ") || "",
+    rotation: searchQuery?.rotation.join(", ") || "",
+    task: searchQuery?.task.join(", ") || "",
+    searchWord: searchQuery?.searchWord || null,
     page: Number(router.query.page),
     size: limit,
   });
@@ -167,10 +174,10 @@ export const ListPart: FunctionComponent = () => {
         <div css={infoContainer}>
           <FiInfo />
           <div css={infoImage}>
-            <Image src={highTrue} alt="고졸 지원가능" fill />
+            <Image src={highTrue} alt="고졸 지원가능" fill sizes="1" />
           </div>
           <div css={infoImage}>
-            <Image src={collegeTrue} alt="초대졸 지원가능" fill />
+            <Image src={collegeTrue} alt="초대졸 지원가능" fill sizes="1" />
           </div>
           <p>고는 고졸지원가능 초는 초대졸 지원 가능합니다</p>
         </div>

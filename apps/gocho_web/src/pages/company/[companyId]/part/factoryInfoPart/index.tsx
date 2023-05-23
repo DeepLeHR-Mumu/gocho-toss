@@ -68,6 +68,7 @@ export const FactoryInfoPart: FunctionComponent = () => {
         <div css={iconBox}>
           <Image
             fill
+            sizes="1"
             src={companyDetailData.factoryArr.length === 0 ? noData : yesData}
             alt={companyDetailData.factoryArr.length === 0 ? "공장정보가 없습니다." : "공장정보가 있습니다."}
           />
@@ -119,7 +120,7 @@ export const FactoryInfoPart: FunctionComponent = () => {
                 <div css={infoWrapper}>
                   <div css={productInfo}>
                     <div css={infoIcon}>
-                      <Image fill src={productIcon} alt="공장 생산품 정보 아이콘" />
+                      <Image fill sizes="1" src={productIcon} alt="공장 생산품 정보 아이콘" />
                     </div>
                     <div css={infoTextTop}>
                       <strong css={infoTitle}>생산품</strong>
@@ -130,7 +131,7 @@ export const FactoryInfoPart: FunctionComponent = () => {
                   <div css={flexBox}>
                     <div css={infoChildBox}>
                       <div css={infoIcon}>
-                        <Image fill src={hireNumberIcon} alt="공장 직원 정보 아이콘" />
+                        <Image fill sizes="1" src={hireNumberIcon} alt="공장 직원 정보 아이콘" />
                       </div>
                       <div css={infoText}>
                         <strong css={infoTitle}>임직원</strong>
@@ -139,7 +140,7 @@ export const FactoryInfoPart: FunctionComponent = () => {
                     </div>
                     <div css={infoChildBox}>
                       <div css={infoIcon}>
-                        <Image fill src={genderIcon} alt="공장 직원 성비 정보 아이콘" />
+                        <Image fill sizes="1" src={genderIcon} alt="공장 직원 성비 정보 아이콘" />
                       </div>
                       <div css={infoText}>
                         <strong css={infoTitle}>
@@ -160,6 +161,7 @@ export const FactoryInfoPart: FunctionComponent = () => {
                       <div css={infoIcon}>
                         <Image
                           fill
+                          sizes="1"
                           src={factory.bus.exists ? busTrueIcon : busFalseIcon}
                           alt={factory.bus.exists ? "통근버스 있음" : "통근버스 없음"}
                         />
@@ -169,6 +171,7 @@ export const FactoryInfoPart: FunctionComponent = () => {
                         <div css={booleanIcon}>
                           <Image
                             fill
+                            sizes="1"
                             src={factory.bus.exists ? oIcon : xIcon}
                             alt={factory.bus.exists ? "통근버스 있음" : "통근버스 없음"}
                           />
@@ -178,12 +181,17 @@ export const FactoryInfoPart: FunctionComponent = () => {
                     </div>
                     <div css={infoChildBox}>
                       <div css={infoIcon}>
-                        <Image fill src={dormitoryIcon} alt="공장 기숙사 정보 아이콘" />
+                        <Image fill sizes="1" src={dormitoryIcon} alt="공장 기숙사 정보 아이콘" />
                       </div>
                       <div css={infoText}>
                         <strong css={infoTitle}>기숙사</strong>
                         <div css={booleanIcon}>
-                          <Image fill src={factory.dormitory.exists ? oIcon : xIcon} alt="공장 기숙사 정보 아이콘" />
+                          <Image
+                            fill
+                            sizes="1"
+                            src={factory.dormitory.exists ? oIcon : xIcon}
+                            alt="공장 기숙사 정보 아이콘"
+                          />
                         </div>
                       </div>
                       <p css={subDesc}>{factory.dormitory.desc}</p>

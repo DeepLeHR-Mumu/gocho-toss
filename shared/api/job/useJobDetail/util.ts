@@ -1,57 +1,25 @@
 import { JobDetailObjDef } from "../type/jobDetail";
 
 export const selector = (jobDetailObj: JobDetailObjDef) => {
-  const positionCamelArr = jobDetailObj.position_arr.map((position) => {
-    const factoryCamelArr = position.place.factory_arr?.map((factory) => {
-      return {
-        id: factory.id,
-        name: factory.name,
-        address: factory.address,
-        maleNumber: factory.male_number,
-        femaleNumber: factory.female_number,
-        product: factory.product,
-        bus: {
-          exists: factory.bus.exists,
-          desc: factory.bus.desc,
-        },
-        dormitory: {
-          exists: factory.dormitory.exists,
-          desc: factory.dormitory.desc,
-        },
-      };
-    });
+  const factoryCamelArr = jobDetailObj.place.factory_arr?.map((factory) => {
     return {
-      id: position.id,
-      possibleEdu: position.possible_edu,
-      requiredExp: {
-        type: position.required_exp.type,
-        minYear: position.required_exp.min_year,
-        maxYear: position.required_exp.max_year,
+      id: factory.id,
+      name: factory.name,
+      address: factory.address,
+      maleNumber: factory.male_number,
+      femaleNumber: factory.female_number,
+      product: factory.product,
+      bus: {
+        exists: factory.bus.exists,
+        desc: factory.bus.desc,
       },
-      requiredEtcArr: position.required_etc_arr,
-      contractType: {
-        type: position.contract_type.type,
-        conversionRate: position.contract_type.conversion_rate,
+      dormitory: {
+        exists: factory.dormitory.exists,
+        desc: factory.dormitory.desc,
       },
-      task: {
-        mainTask: position.task.main_task,
-        subTaskArr: position.task.sub_task_arr,
-      },
-      taskDetailArr: position.task_detail_arr,
-      rotationArr: position.rotation_arr,
-      rotationEtc: position.rotation_etc,
-      place: {
-        type: position.place.type,
-        addressArr: position.place.address_arr,
-        factoryArr: factoryCamelArr,
-        etc: position.place.etc,
-      },
-      hireNumber: position.hire_number,
-      payArr: position.pay_arr,
-      preferredCertiArr: position.preferred_certi_arr,
-      preferredEtcArr: position.preferred_etc_arr,
     };
   });
+
   return {
     id: jobDetailObj.id,
     company: {
@@ -73,6 +41,32 @@ export const selector = (jobDetailObj: JobDetailObjDef) => {
     isBookmark: jobDetailObj.is_bookmark,
     view: jobDetailObj.view,
     click: jobDetailObj.click,
-    positionArr: positionCamelArr,
+    possibleEdu: jobDetailObj.possible_edu,
+    requiredExp: {
+      type: jobDetailObj.required_exp.type,
+      minYear: jobDetailObj.required_exp.min_year,
+      maxYear: jobDetailObj.required_exp.max_year,
+    },
+    requiredEtcArr: jobDetailObj.required_etc_arr,
+    contractType: {
+      type: jobDetailObj.contract_type.type,
+      conversionRate: jobDetailObj.contract_type.conversion_rate,
+    },
+    task: {
+      mainTask: jobDetailObj.task.main_task,
+      subTaskArr: jobDetailObj.task.sub_task_arr,
+    },
+    taskDetailArr: jobDetailObj.task_detail_arr,
+    rotationArr: jobDetailObj.rotation_arr,
+    place: {
+      type: jobDetailObj.place.type,
+      addressArr: jobDetailObj.place.address_arr,
+      factoryArr: factoryCamelArr,
+      etc: jobDetailObj.place.etc,
+    },
+    hireNumber: jobDetailObj.hire_number,
+    payArr: jobDetailObj.pay_arr,
+    preferredCertiArr: jobDetailObj.preferred_certi_arr,
+    preferredEtcArr: jobDetailObj.preferred_etc_arr,
   };
 };

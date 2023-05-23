@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useRef, useState } from "react";
+import { ReactElement, useEffect, useRef } from "react";
 import dayjs from "dayjs";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
@@ -28,17 +28,15 @@ import {
   PositionRequiredInfoPart,
   HeaderPart,
   BasicInfoPart,
-  PositionHeaderPart,
   PositionTitleInfoPart,
   PositionWorkInfoPart,
 } from "./part";
 import { JdFormValues } from "./type";
-import { BLANK_POSITION, JD_EDIT_MESSAGE_OBJ, ROTATION_ARR } from "./constant";
+import { BLANK_JD, JD_EDIT_MESSAGE_OBJ, ROTATION_ARR } from "./constant";
 import { getFieldArrayValue, getFieldArrayValueWithNull, setFieldArray } from "./util";
 import { cssObj } from "./style";
 
 const JdEditPage: NextPageWithLayout = () => {
-  const [isCardOpenArr, setIsCardOpenArr] = useState<boolean[]>([true]);
   const isEditLoading = useRef(false);
   const isDeleteLoading = useRef(false);
   const isEndLoading = useRef(false);
@@ -50,12 +48,7 @@ const JdEditPage: NextPageWithLayout = () => {
   const jdForm = useForm<JdFormValues>({
     mode: "onTouched",
     reValidateMode: "onChange",
-    defaultValues: {
-      process_arr: [{ value: "" }, { value: "" }],
-      apply_route_arr: [{ value: "" }],
-      etc_arr: [{ value: "" }],
-      position_arr: [BLANK_POSITION],
-    },
+    defaultValues: { ...BLANK_JD },
   });
   const {
     control,
@@ -63,11 +56,6 @@ const JdEditPage: NextPageWithLayout = () => {
     reset,
     formState: { dirtyFields, submitCount, isSubmitSuccessful },
   } = jdForm;
-
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "position_arr",
-  });
 
   const processArr = useFieldArray({
     control,
@@ -150,25 +138,22 @@ const JdEditPage: NextPageWithLayout = () => {
             process_arr: getFieldArrayValue(jdObj.process_arr),
             apply_route_arr: getFieldArrayValue(jdObj.apply_route_arr),
             etc_arr: getFieldArrayValueWithNull(jdObj.etc_arr),
-            position_arr: jdObj.position_arr.map((position) => ({
-              ...position,
-              conversion_rate: position.conversion_rate ? position.conversion_rate : null,
-              min_year: position.min_year ? position.min_year : null,
-              max_year: position.max_year ? position.max_year : null,
-              hire_number: position.hire_number ? position.hire_number : 0,
-              task_sub_arr: position.task_sub_arr ? position.task_sub_arr : null,
-              task_detail_arr: getFieldArrayValue(position.task_detail_arr),
-              required_etc_arr: getFieldArrayValueWithNull(position.required_etc_arr),
-              pay_arr: getFieldArrayValue(position.pay_arr),
-              place: {
-                type: position.place.type,
-                address_arr: position.place.address_arr?.length === 0 ? null : position.place.address_arr,
-                factory_arr: position.place.factory_arr?.length === 0 ? null : position.place.factory_arr,
-                etc: position.place.etc?.length === 0 ? null : position.place.etc,
-              },
-              preferred_certi_arr: position.preferred_certi_arr?.length === 0 ? null : position.preferred_certi_arr,
-              preferred_etc_arr: getFieldArrayValueWithNull(position.preferred_etc_arr),
-            })),
+            conversion_rate: jdObj.conversion_rate ? jdObj.conversion_rate : null,
+            min_year: jdObj.min_year ? jdObj.min_year : null,
+            max_year: jdObj.max_year ? jdObj.max_year : null,
+            hire_number: jdObj.hire_number ? jdObj.hire_number : 0,
+            task_sub_arr: jdObj.task_sub_arr ? jdObj.task_sub_arr : null,
+            task_detail_arr: getFieldArrayValue(jdObj.task_detail_arr),
+            required_etc_arr: getFieldArrayValueWithNull(jdObj.required_etc_arr),
+            pay_arr: getFieldArrayValue(jdObj.pay_arr),
+            place: {
+              type: jdObj.place.type,
+              address_arr: jdObj.place.address_arr?.length === 0 ? null : jdObj.place.address_arr,
+              factory_arr: jdObj.place.factory_arr?.length === 0 ? null : jdObj.place.factory_arr,
+              etc: jdObj.place.etc?.length === 0 ? null : jdObj.place.etc,
+            },
+            preferred_certi_arr: jdObj.preferred_certi_arr?.length === 0 ? null : jdObj.preferred_certi_arr,
+            preferred_etc_arr: getFieldArrayValueWithNull(jdObj.preferred_etc_arr),
           },
         },
         {
@@ -196,37 +181,6 @@ const JdEditPage: NextPageWithLayout = () => {
     const newStartTime = dayjs(jdData?.startTime, "YYYY-MM-DDTHH:mm:ss").toDate();
     const newEndTime = dayjs(jdData?.endTime, "YYYY-MM-DDTHH:mm:ss").toDate();
 
-    const positionNewArr = jdData?.positionArr.map((position) => ({
-      id: position.id,
-      middle: position.eduSummary.middle,
-      high: position.eduSummary.high,
-      college: position.eduSummary.college,
-      four: position.eduSummary.four,
-      required_exp: position.requiredExp.type,
-      min_year: position.requiredExp.minYear,
-      max_year: position.requiredExp.maxYear,
-      required_etc_arr: setFieldArray(position.requiredEtcArr || []),
-      contract_type: position.contractType.type,
-      conversion_rate: position.contractType.conversionRate,
-      task_main: position.task.mainTask,
-      task_sub_arr: position.task.subTaskArr,
-      task_detail_arr: setFieldArray(position.taskDetailArr || []),
-      rotation_arr: position.rotationArr.map(
-        (rotation) => ROTATION_ARR.find((rotationObj) => rotationObj.name === rotation)?.data
-      ),
-      rotation_etc: position.rotationEtc,
-      place: {
-        type: position.place.type,
-        address_arr: position.place.addressArr || null,
-        factory_arr: position.place.factoryArr?.map((factory) => factory.id) || null,
-        etc: position.place.etc || "",
-      },
-      hire_number: position.hireCount,
-      pay_arr: setFieldArray(position.payArr || []),
-      preferred_certi_arr: position.preferredCertiArr,
-      preferred_etc_arr: setFieldArray(position.preferredEtcArr || []),
-    }));
-
     reset({
       company_id: jdData?.company.id,
       title: jdData?.title,
@@ -237,10 +191,34 @@ const JdEditPage: NextPageWithLayout = () => {
       apply_route_arr: setFieldArray(jdData?.applyRouteArr || []),
       apply_url: jdData?.applyUrl,
       etc_arr: setFieldArray(jdData?.etcArr || []),
-      position_arr: positionNewArr,
+      id: jdData?.id,
+      middle: jdData?.eduSummary.middle,
+      high: jdData?.eduSummary.high,
+      college: jdData?.eduSummary.college,
+      four: jdData?.eduSummary.four,
+      required_exp: jdData?.requiredExp.type,
+      min_year: jdData?.requiredExp.minYear,
+      max_year: jdData?.requiredExp.maxYear,
+      required_etc_arr: setFieldArray(jdData?.requiredEtcArr || []),
+      contract_type: jdData?.contractType.type,
+      conversion_rate: jdData?.contractType.conversionRate,
+      task_main: jdData?.task.mainTask,
+      task_sub_arr: jdData?.task.subTaskArr,
+      task_detail_arr: setFieldArray(jdData?.taskDetailArr || []),
+      rotation_arr: jdData?.rotationArr.map(
+        (rotation) => ROTATION_ARR.find((rotationObj) => rotationObj.name === rotation)?.data
+      ),
+      place: {
+        type: jdData?.place.type,
+        address_arr: jdData?.place.addressArr || null,
+        factory_arr: jdData?.place.factoryArr?.map((factory) => factory.id) || null,
+        etc: jdData?.place.etc || "",
+      },
+      hire_number: jdData?.hireCount,
+      pay_arr: setFieldArray(jdData?.payArr || []),
+      preferred_certi_arr: jdData?.preferredCertiArr,
+      preferred_etc_arr: setFieldArray(jdData?.preferredEtcArr || []),
     });
-
-    setIsCardOpenArr(Array.from({ length: positionNewArr?.length || 0 }, () => false));
   }, [jdData, reset]);
 
   usePreventRouting(
@@ -273,37 +251,11 @@ const JdEditPage: NextPageWithLayout = () => {
           <form onSubmit={handleSubmit(jdEditHandler)}>
             <HeaderPart jdData={jdData} />
             <BasicInfoPart jdForm={jdForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
-            <PositionHeaderPart fields={fields} append={append} setIsCardOpen={setIsCardOpenArr} />
-            <ul>
-              {fields.map((item, index) => {
-                if (item.task_main === "") return null;
-                return (
-                  <li key={`${item.id}`} css={cssObj.cardContainer}>
-                    <PositionTitleInfoPart
-                      id={item.id}
-                      positionIndex={index}
-                      jdForm={jdForm}
-                      appendPosition={append}
-                      removePosition={remove}
-                      control={control}
-                      isCardOpen={isCardOpenArr[index]}
-                      setIsCardOpen={setIsCardOpenArr}
-                    />
-                    {isCardOpenArr[index] && (
-                      <>
-                        <PositionRequiredInfoPart
-                          id={item.id}
-                          positionIndex={index}
-                          jdForm={jdForm}
-                          control={control}
-                        />
-                        <PositionWorkInfoPart id={item.id} positionIndex={index} jdForm={jdForm} control={control} />
-                      </>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
+            <div css={cssObj.cardContainer}>
+              <PositionTitleInfoPart jdForm={jdForm} control={control} />
+              <PositionRequiredInfoPart jdForm={jdForm} control={control} />
+              <PositionWorkInfoPart jdForm={jdForm} control={control} />
+            </div>
             <div css={cssObj.buttonContainer}>
               <SharedButton
                 radius="round"

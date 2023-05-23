@@ -1,19 +1,19 @@
 import { ReactElement, useState, useRef } from "react";
 import { useRouter } from "next/router";
-import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { useDisabledKeydownSubmit } from "shared-hooks/src";
 import { COLORS } from "shared-style/color";
 
-import { useToast } from "@/globalStates";
 import { useAddJd } from "@/api";
+import { useToast } from "@/globalStates";
 import { GlobalLayout, PageLayout } from "@/component";
 import type { NextPageWithLayout } from "@/types";
 import { INTERNAL_URL } from "@/constant";
 
 import { CommonDataPart, PositionRequiredDataPart, PositionTaskDataPart, PositionEtcDataPart } from "./part";
-import { blankPosition } from "./constant";
+import { BLANK_JD } from "./constant";
 import { JobFormValues } from "./type";
 import { cssObj } from "./style";
 
@@ -24,18 +24,12 @@ const JdUpload: NextPageWithLayout = () => {
 
   const jobForm = useForm<JobFormValues>({
     mode: "onBlur",
-    defaultValues: {
-      position_arr: [blankPosition],
-    },
+    defaultValues: { ...BLANK_JD },
   });
 
   useDisabledKeydownSubmit();
   const { setToast } = useToast();
-  const { control, handleSubmit } = jobForm;
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "position_arr",
-  });
+  const { handleSubmit } = jobForm;
 
   const { mutate: addJobMutate } = useAddJd();
 
@@ -75,57 +69,19 @@ const JdUpload: NextPageWithLayout = () => {
         </p>
         <form css={cssObj.formContainer} onSubmit={handleSubmit(jobSubmitHandler)}>
           <CommonDataPart jobForm={jobForm} />
+          <PositionRequiredDataPart jobForm={jobForm} />
+          <PositionTaskDataPart jobForm={jobForm} />
+          <PositionEtcDataPart jobForm={jobForm} />
 
-          <ul css={cssObj.fieldArrCSS}>
-            {fields.map((item, index) => (
-              <li key={item.id}>
-                <PositionRequiredDataPart id={item.id} index={index} jobForm={jobForm} />
-                <PositionTaskDataPart id={item.id} index={index} jobForm={jobForm} />
-                <PositionEtcDataPart id={item.id} index={index} jobForm={jobForm} />
-
-                <div css={cssObj.cardButtonBox}>
-                  <SharedButton
-                    onClickHandler={() => append({ ...jobForm.watch("position_arr")[index] })}
-                    text="해당 직무 복사"
-                    size="medium"
-                    radius="round"
-                    backgroundColor={COLORS.BLUE_FIRST40}
-                    fontColor={COLORS.GRAY100}
-                  />
-                  <SharedButton
-                    onClickHandler={() => remove(index)}
-                    text="해당 직무 제거"
-                    size="medium"
-                    radius="round"
-                    backgroundColor={COLORS.BLUE_FIRST40}
-                    fontColor={COLORS.GRAY100}
-                  />
-                </div>
-              </li>
-            ))}
-          </ul>
           {checkMsg && <p css={cssObj.warning}>{checkMsg}</p>}
-          <div css={cssObj.buttonBox}>
-            <SharedButton
-              onClickHandler={() => {
-                append(blankPosition);
-              }}
-              text="직무 추가"
-              size="large"
-              radius="round"
-              backgroundColor={COLORS.BLUE_FIRST40}
-              fontColor={COLORS.GRAY100}
-            />
-
-            <SharedButton
-              onClickHandler="submit"
-              text="공고 등록하기"
-              size="large"
-              radius="round"
-              backgroundColor={COLORS.BLUE_FIRST40}
-              fontColor={COLORS.GRAY100}
-            />
-          </div>
+          <SharedButton
+            onClickHandler="submit"
+            text="공고 등록하기"
+            size="large"
+            radius="round"
+            backgroundColor={COLORS.BLUE_FIRST40}
+            fontColor={COLORS.GRAY100}
+          />
         </form>
       </PageLayout>
     </main>

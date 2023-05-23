@@ -23,8 +23,21 @@ export interface JobCompanyObjDef {
   comment_count: number;
 }
 
-export interface PositionArrDef {
+export interface JobDetailObjDef {
   id: number;
+  company: JobCompanyObjDef;
+  title: string;
+  cut: boolean;
+  start_time: string;
+  end_time: string;
+  process_arr: string[];
+  apply_route_arr: string[];
+  apply_url: string;
+  etc_arr: string[];
+  bookmark: number;
+  is_bookmark: boolean;
+  view: number;
+  click: number;
   possible_edu: {
     summary: string;
     college: boolean;
@@ -48,7 +61,6 @@ export interface PositionArrDef {
   };
   task_detail_arr: string[];
   rotation_arr: string[];
-  rotation_etc: string | null;
   place: {
     type: "일반" | "해외" | "기타";
     address_arr: string[];
@@ -59,22 +71,4 @@ export interface PositionArrDef {
   pay_arr: string[];
   preferred_certi_arr: string[];
   preferred_etc_arr: string[];
-}
-
-export interface JobDetailObjDef {
-  id: number;
-  company: JobCompanyObjDef;
-  title: string;
-  cut: boolean;
-  start_time: string;
-  end_time: string;
-  process_arr: string[];
-  apply_route_arr: string[];
-  apply_url: string;
-  etc_arr: string[];
-  bookmark: number;
-  is_bookmark: boolean;
-  view: number;
-  click: number;
-  position_arr: PositionArrDef[];
 }

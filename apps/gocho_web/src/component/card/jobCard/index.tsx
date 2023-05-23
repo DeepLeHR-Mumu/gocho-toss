@@ -40,13 +40,8 @@ import {
   detailInfoContainer,
   eduQual,
   detailInfo,
-  taskContainer,
-  taskSummary,
-  taskNumber,
-  taskBox,
   hoverButton,
   infoBox,
-  taskArrCSS,
 } from "./style";
 
 export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ jobData, isSkeleton }) => {
@@ -138,32 +133,15 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
                 {jobData.placeArr[0] && jobData.placeArr[0].split(" ").slice(0, 2).join(" ")}{" "}
                 {jobData.placeArr.length !== 1 && `외 ${jobData.placeArr.length - 1}곳`}
               </li>
-
               <li css={detailInfo}>
                 {jobData.rotationArr[0]}{" "}
                 {jobData.rotationArr.length !== 1 && `외 ${jobData.rotationArr.length - 1}형태`}
               </li>
+              <li css={detailInfo} key={`${jobData.id}${jobData.task}`}>
+                {jobData.task}
+              </li>
             </ul>
           </div>
-        </div>
-
-        <div css={taskContainer}>
-          <p css={taskSummary(isExpired)}>
-            채용중인 직무
-            <span css={taskNumber(isExpired)}>{jobData.positionCount}</span>
-          </p>
-          <ul css={taskArrCSS}>
-            {jobData.taskArr.map((task) => {
-              if (task !== null) {
-                return (
-                  <li css={taskBox} key={`${jobData.id}${task}`}>
-                    {task}
-                  </li>
-                );
-              }
-              return <li key={`${jobData.id}${task}`} />;
-            })}
-          </ul>
         </div>
 
         <p css={hoverButton} className="hoverButton">

@@ -52,7 +52,7 @@ export const rotationArr: filterMenuListDef = {
     "주간",
     "야간",
     "교대",
-    "주간 2교대",
+    "주간2교대",
     "2교대",
     "3교대",
     "2조 1교대",

@@ -34,11 +34,7 @@ import {
   detailInfoContainer,
   eduQual,
   detailInfo,
-  taskTitle,
-  taskSummary,
-  taskNumber,
   taskBox,
-  taskContainer,
 } from "./style";
 
 export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ jobData, isSkeleton }) => {
@@ -125,22 +121,9 @@ export const JobCard: FunctionComponent<JobCardProps | JobCardSkeleton> = ({ job
           </p>
         </div>
 
-        <div css={taskTitle}>
-          <p css={taskSummary}>채용중인 직무</p>
-          <p css={taskNumber}>{jobData.positionCount}</p>
+        <div css={taskBox} key={`${jobData.id}${jobData.task}`}>
+          {jobData.task}
         </div>
-        <ul css={taskContainer}>
-          {jobData.taskArr.map((task) => {
-            if (task !== null) {
-              return (
-                <li css={taskBox} key={`${jobData.id}${task}`}>
-                  {task}
-                </li>
-              );
-            }
-            return <li key={`${jobData.id}${task}`} />;
-          })}
-        </ul>
       </a>
     </article>
   );

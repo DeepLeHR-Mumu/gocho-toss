@@ -77,11 +77,10 @@ export const cutBox = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 0.25rem;
   border-radius: 1rem;
   margin-top: 0.5rem;
-  width: fit-content;
   padding: 0 1rem;
+  width: fit-content;
   height: 1.625rem;
   background-color: ${COLORS.GRAY90};
   color: ${COLORS.BLUE_FIRST40};
@@ -94,6 +93,7 @@ export const companyInfoContainer = css`
 `;
 
 export const companyName = css`
+  margin-left: 0.25rem;
   font-size: 1rem;
   color: ${COLORS.GRAY10};
   font-weight: 500;
@@ -142,27 +142,6 @@ export const detailInfo = css`
   ${shorten()}
 `;
 
-export const taskTitle = css`
-  display: flex;
-  align-items: center;
-  margin: 1rem 0 0.5rem;
-`;
-
-export const taskSummary = css`
-  font-size: 0.75rem;
-  font-weight: 500;
-  margin-right: 0.25rem;
-  color: ${COLORS.GRAY30};
-`;
-
-export const taskNumber = css`
-  font-size: 0.75rem;
-  color: ${COLORS.GRAY10};
-  background-color: ${COLORS.BLUE_SECOND70};
-  border-radius: 1.5rem;
-  padding: 0.25rem 0.5rem;
-`;
-
 export const taskBox = css`
   width: fit-content;
   border-radius: 1.5rem;
@@ -171,10 +150,4 @@ export const taskBox = css`
   margin-right: 0.5rem;
   color: ${COLORS.GRAY40};
   border: 1px solid ${COLORS.GRAY80};
-`;
-
-export const taskContainer = css`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem;
 `;

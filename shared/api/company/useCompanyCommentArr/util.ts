@@ -19,9 +19,9 @@ export const selector = ({ company, comment_arr }: CompanyCommentArrDef) => {
         },
         description: comment.description,
         createdTime: comment.created_time,
-        likeCount: comment.like_count,
+        likeCount: comment.like,
         isLiked: comment.is_liked,
-        dislikeCount: comment.dislike_count,
+        dislikeCount: comment.dislike,
         isDisliked: comment.is_disliked,
       };
     }),

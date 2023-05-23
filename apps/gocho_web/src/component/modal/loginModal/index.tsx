@@ -9,13 +9,14 @@ import kakaoMono from "shared-image/global/sns/kakaoLogo.svg";
 import { loginModalCloseEvent, loginModalOpenEvent, loginSuccessEvent } from "shared-ga/auth";
 import { useDoLogin, useUserProfile } from "shared-api/auth";
 import { EMAIL_REGEXP, PWD_REGEXP, EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE } from "shared-constant";
+import { ErrorResponseDef } from "shared-type/api/errorResponseType";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
+
 import { ModalComponent } from "@component/modal/modalBackground";
 import { CloseButton } from "@component/common/atom/closeButton";
-
-import { ErrorResponse } from "shared-api/auth/usePatchUserInfo/type";
 import { useModal, loginObjDef, useToast } from "@/globalStates";
+
 import {
   wrapper,
   desc,
@@ -52,7 +53,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     mutate(loginObj, {
       onError: (error) => {
-        const errorResponse = error.response?.data as ErrorResponse;
+        const errorResponse = error.response?.data as ErrorResponseDef;
         setErrorMsg(errorResponse.error_message);
         ref.current += 1;
       },
@@ -91,7 +92,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
         {button === "home" ? <CloseButton size="S" isHome /> : <CloseButton size="S" buttonClick={closeLoginModal} />}
       </div>
       <div css={logoContainer}>
-        <Image src={smallMono} alt="고초대졸 로고" fill />
+        <Image src={smallMono} alt="고초대졸 로고" fill sizes="1" />
       </div>
       <p css={desc}>로그인이 필요한 서비스입니다.</p>
       <form css={formCSS} onSubmit={handleSubmit(loginSubmit)}>
@@ -140,7 +141,7 @@ export const LoginBox: FunctionComponent<ButtonProps> = ({ button }) => {
 
           <button type="button" css={kakaoLoginBox} onClick={kakaoLogin}>
             <div css={kakaoLogoBox}>
-              <Image src={kakaoMono} alt="카카오 로그인" fill />
+              <Image src={kakaoMono} alt="카카오 로그인" fill sizes="1" />
             </div>
             카카오톡으로 로그인하기
           </button>

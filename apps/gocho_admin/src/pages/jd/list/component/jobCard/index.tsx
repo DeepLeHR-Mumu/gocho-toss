@@ -52,7 +52,7 @@ export const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
           {job.title}
         </li>
         <li css={cssObj.taskBox}>
-          <p css={cssObj.task}>{job.taskArr[0]}</p>
+          <p css={cssObj.task}>{job.task}</p>
         </li>
         <li css={cssObj.leftDesc}>
           <span css={cssObj.startDateCSS}>{startDate}</span>

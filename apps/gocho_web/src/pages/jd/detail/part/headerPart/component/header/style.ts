@@ -4,6 +4,7 @@ import { COLORS } from "shared-style/color";
 
 export const headerCSS = css`
   background-color: ${COLORS.GRAY100};
+  margin-bottom: 1rem;
   padding: 1.5rem;
   box-sizing: border-box;
   border-radius: 1rem;

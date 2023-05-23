@@ -3,10 +3,7 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useFactoryDetail } from "@/api/factory/useFactoryDetail";
-import { useEditFactoryRequest } from "@/api/factory/useEditFactoryRequest";
-import { useAcceptFactory } from "@/api/factory/useAcceptFactory";
-import { useRejectFactory } from "@/api/factory/useRejectFactory";
+import { useFactoryDetail, useEditFactoryRequest, useAcceptModifyFactory, useRejectModifyFactory } from "@/api";
 import { factoryArrKeyObj } from "@/api/factory/useFactoryArr/type";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 import { ErrorScreen, GlobalLayout, LoadingScreen } from "@/component";
@@ -37,12 +34,12 @@ const FactoryEditDetail: NextPageWithLayout = () => {
     isError: isAfterError,
   } = useEditFactoryRequest({ factoryId });
 
-  const { mutate: acceptFactoryMutate } = useAcceptFactory();
-  const { mutate: rejectFactoryMutate } = useRejectFactory();
+  const { mutate: acceptFactoryMutate } = useAcceptModifyFactory();
+  const { mutate: rejectFactoryMutate } = useRejectModifyFactory();
 
   const acceptFactoryHandler = () => {
     acceptFactoryMutate(
-      { factoryId, type: "update" },
+      { factoryId },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(factoryArrKeyObj.all);
@@ -57,7 +54,7 @@ const FactoryEditDetail: NextPageWithLayout = () => {
 
   const rejectFactoryHandler: SubmitHandler<RejectFormValues> = (formData) => {
     rejectFactoryMutate(
-      { factoryId, reason: formData.reason, type: "update" },
+      { factoryId, reason: formData.reason },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(factoryArrKeyObj.all);

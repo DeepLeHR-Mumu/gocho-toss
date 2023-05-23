@@ -1,4 +1,6 @@
-import { CompanyDef, PageResultDef } from "../type/companyArr";
+import { PageResultDef } from "shared-type/api/paginationType";
+
+import { CompanyDef } from "../type/companyArr";
 
 export const selector = (companyArr: CompanyDef[], page_result: PageResultDef) => {
   const pageResult = {

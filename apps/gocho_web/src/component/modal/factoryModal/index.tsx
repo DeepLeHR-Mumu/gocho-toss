@@ -66,7 +66,7 @@ export const FactoryModal: FunctionComponent = () => {
         <div css={flexBox("center")}>
           <div css={addressBox}>
             <div css={imageBox}>
-              <Image src={factoryIcon} alt="공장 위치" fill />
+              <Image src={factoryIcon} alt="공장 위치" fill sizes="1" />
             </div>
             <div css={flexBox("center")}>
               <h5 css={boxTitle}>위치</h5>
@@ -80,7 +80,7 @@ export const FactoryModal: FunctionComponent = () => {
           </div>
           <div css={productBox}>
             <div css={imageBox}>
-              <Image src={productIcon} alt="생산품" fill />
+              <Image src={productIcon} alt="생산품" fill sizes="1" />
             </div>
             <div css={flexBox("center")}>
               <h5 css={boxTitle}>생산품</h5>
@@ -92,7 +92,7 @@ export const FactoryModal: FunctionComponent = () => {
         <div css={flexBox("center")}>
           <div css={hireNumberBox}>
             <div css={imageBox}>
-              <Image src={hireNumberIcon} alt="임직원" fill />
+              <Image src={hireNumberIcon} alt="임직원" fill sizes="1" />
             </div>
             <div css={flexBox("center")}>
               <h5 css={boxTitle}>임직원</h5>
@@ -102,7 +102,7 @@ export const FactoryModal: FunctionComponent = () => {
 
           <div css={genderBox}>
             <div css={imageBox}>
-              <Image src={genderIcon} alt="남녀비율" fill />
+              <Image src={genderIcon} alt="남녀비율" fill sizes="1" />
             </div>
             <div css={flexBox("center")}>
               <h5 css={boxTitle}>남</h5>
@@ -114,12 +114,12 @@ export const FactoryModal: FunctionComponent = () => {
 
           <div css={busBox}>
             <div css={imageBox}>
-              <Image src={bus.exists ? busTrueIcon : busFalseIcon} alt="통근버스" fill />
+              <Image src={bus.exists ? busTrueIcon : busFalseIcon} alt="통근버스" fill sizes="1" />
             </div>
             <div css={flexBox("center")}>
               <h5 css={boxTitle}>통근버스</h5>
               <div css={oxIconBox}>
-                <Image src={bus.exists ? OIcon : XIcon} alt="" fill />
+                <Image src={bus.exists ? OIcon : XIcon} alt="" fill sizes="1" />
               </div>
             </div>
             {bus.desc && (
@@ -131,7 +131,7 @@ export const FactoryModal: FunctionComponent = () => {
 
           <div css={dormitoryBox}>
             <div css={imageBox}>
-              <Image src={dormitoryIcon} alt="기숙사" fill />
+              <Image src={dormitoryIcon} alt="기숙사" fill sizes="1" />
             </div>
             <div css={flexBox("center")}>
               <h5 css={boxTitle}>기숙사</h5>
@@ -140,6 +140,7 @@ export const FactoryModal: FunctionComponent = () => {
                   src={dormitory.exists ? OIcon : XIcon}
                   alt={dormitory.exists ? "기숙사 존재유" : "기숙사 존재무"}
                   fill
+                  sizes="1"
                 />
               </div>
             </div>

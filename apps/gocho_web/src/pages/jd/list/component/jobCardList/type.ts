@@ -25,7 +25,7 @@ export interface JobCardListProps {
         placeArr: string[];
         rotationArr: string[];
         contractType: string[];
-        taskArr: string[];
+        task: string;
       }[]
     | undefined;
   isLoading: boolean;

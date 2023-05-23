@@ -3,7 +3,7 @@ import { AxiosResponse } from "axios";
 export interface RequestObjDef {
   companyId: number;
   commentId: number;
-  type: "like" | "dislike";
+  type: "likes" | "dislikes";
 }
 
 export interface PostCompanyBookmarkDef {

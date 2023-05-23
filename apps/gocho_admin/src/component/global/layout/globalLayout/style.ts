@@ -7,6 +7,6 @@ export const cssObj = {
   `,
   content: css`
     flex-grow: 1;
-    max-width: 60vw;
+    max-width: 65vw;
   `,
 };

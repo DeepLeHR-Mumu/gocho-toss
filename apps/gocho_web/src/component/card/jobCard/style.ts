@@ -1,4 +1,4 @@
-import { css, SerializedStyles } from "@emotion/react";
+import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 import { shorten } from "shared-style/common";
 import { MOBILE, PC_HOVER } from "shared-style/mediaQuery";
@@ -100,7 +100,7 @@ export const viewNumber = css`
 export const mainContainer = css`
   display: flex;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 `;
 
 export const companyLogoWrapper = css`
@@ -213,86 +213,6 @@ export const detailInfo = css`
   align-items: center;
   justify-content: center;
   color: ${COLORS.GRAY40};
-`;
-
-export const taskContainer = css`
-  display: flex;
-  align-items: center;
-`;
-
-interface TaskSummaryDef {
-  (isExpired: boolean): SerializedStyles;
-}
-
-export const taskSummary: TaskSummaryDef = (isExpired) => {
-  return css`
-    font-size: 0.75rem;
-    font-weight: 700;
-    width: fit-content;
-    white-space: nowrap;
-    position: relative;
-    color: ${COLORS.GRAY100};
-    background-color: ${isExpired ? COLORS.GRAY40 : COLORS.GRAY10};
-    border-radius: 1.5rem;
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 2rem;
-    height: 2.25rem;
-  `;
-};
-
-export const taskArrCSS = css`
-  display: flex;
-  flex-wrap: wrap;
-
-  > li {
-    margin: 0 0.5rem 0.5rem 0;
-
-    :last-of-type {
-      margin: 0;
-    }
-  }
-`;
-
-interface TaskNumberDef {
-  (isExpired: boolean): SerializedStyles;
-}
-
-export const taskNumber: TaskNumberDef = (isExpired) => {
-  return css`
-    font-size: 0.75rem;
-    position: absolute;
-    color: ${COLORS.GRAY10};
-    background-color: ${isExpired ? COLORS.GRAY80 : COLORS.BLUE_SECOND70};
-    border-radius: 50%;
-    width: 1.875rem;
-    height: 1.875rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: 0;
-    right: 0;
-    transform: translate(35%, -35%);
-  `;
-};
-
-export const taskBox = css`
-  border-radius: 1.5rem;
-  font-size: 0.75rem;
-  min-width: 4rem;
-  width: fit-content;
-  padding: 0 1.25rem;
-  font-weight: 400;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: ${COLORS.GRAY10};
-  height: 1.5rem;
-  border: 1px solid ${COLORS.GRAY40};
-  background-color: ${COLORS.GRAY100};
 `;
 
 export const hoverButton = css`

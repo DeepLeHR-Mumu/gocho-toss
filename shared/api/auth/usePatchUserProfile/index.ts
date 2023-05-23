@@ -1,16 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 
 import { userInfoKeyObj } from "shared-constant/queryKeyFactory/user/infoKeyObj";
 
 import { axiosInstance } from "../../axiosInstance";
 
-import {
-  ErrorResponse,
-  PatchUserProfileDef,
-  RequestObjDef,
-  UsePatchUserProfileProps,
-  UserProfileResponse,
-} from "./type";
+import { PatchUserProfileDef, RequestObjDef, UsePatchUserProfileProps, UserProfileResponse } from "./type";
 
 const patchUserProfile: PatchUserProfileDef = async (requestObj) => {
   const formData = new FormData();
@@ -24,7 +19,7 @@ const patchUserProfile: PatchUserProfileDef = async (requestObj) => {
 
 export const usePatchUserProfile: UsePatchUserProfileProps = () => {
   const queryClient = useQueryClient();
-  return useMutation<UserProfileResponse, ErrorResponse, RequestObjDef>({
+  return useMutation<UserProfileResponse, AxiosError, RequestObjDef>({
     mutationFn: patchUserProfile,
     onSuccess: (data) => {
       localStorage.setItem("accessToken", data.data.access_token);

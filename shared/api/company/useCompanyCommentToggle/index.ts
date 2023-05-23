@@ -8,7 +8,7 @@ import { PostCompanyBookmarkDef, RequestObjDef } from "./type";
 
 const postCompanyCommentToggle: PostCompanyBookmarkDef = async (requestObj) => {
   const { data } = await axiosInstance.post(
-    `companies/${requestObj.companyId}/comments/${requestObj.commentId}/emotions?type=${requestObj.type}`,
+    `companies/${requestObj.companyId}/comments/${requestObj.commentId}/${requestObj.type}`,
     null
   );
   return data;

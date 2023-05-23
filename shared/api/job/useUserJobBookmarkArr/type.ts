@@ -1,15 +1,7 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
 import { userBookmarkKeyObj } from "shared-constant/queryKeyFactory/job/jobUserBookmarkArrKeyObj";
-
-export interface PageResultDef {
-  total_elements: number;
-  total_pages: number;
-  page: number;
-  size: number;
-  is_first: boolean;
-  is_last: boolean;
-}
+import { PageResultDef } from "shared-type/api/paginationType";
 
 export interface JobBookmarkArrDef {
   id: number;
@@ -21,6 +13,7 @@ export interface JobBookmarkArrDef {
   title: string;
   cut: boolean;
   end_time: string;
+  is_expired: boolean;
 }
 
 export interface ResponseObjDef {

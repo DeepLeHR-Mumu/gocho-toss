@@ -43,13 +43,13 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
             <FiInfo />
             <span css={isColorPoint(true)}>
               <strong css={isPossibleEduIcon}>
-                <Image src={graduateColor} alt="" fill />
+                <Image src={graduateColor} alt="" fill sizes="1" />
               </strong>
               지원가능
             </span>
             <span css={isColorPoint(false)}>
               <strong css={isPossibleEduIcon}>
-                <Image src={graduateGray} alt="" fill />
+                <Image src={graduateGray} alt="" fill sizes="1" />
               </strong>
               지원불가
             </span>
@@ -65,7 +65,7 @@ export const DetailSupportPart: FunctionComponent<DetailSupportPartProps> = ({ f
                   return (
                     <li key={edu.desc}>
                       <div css={eduImageBox}>
-                        <Image src={edu.isPossible ? graduateColor : graduateGray} alt="" fill />
+                        <Image src={edu.isPossible ? graduateColor : graduateGray} alt="" fill sizes="1" />
                       </div>
                       <p css={isPossibleEduDesc(edu.isPossible)}>{edu.desc}</p>
                     </li>
