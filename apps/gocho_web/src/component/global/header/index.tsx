@@ -82,7 +82,7 @@ export const Header: FunctionComponent = () => {
           <div css={logoCSS}>
             <Link href={MAIN_URL} passHref>
               <div css={logoLink}>
-                <Image src={colorLogoSrc} alt="" fill />
+                <Image src={colorLogoSrc} alt="" fill sizes="1" />
               </div>
             </Link>
           </div>

@@ -107,7 +107,7 @@ export const DetailWorkPart: FunctionComponent<DetailWorkPartProps> = ({ freshPo
                     }}
                   >
                     <div css={factoryIconCSS}>
-                      <Image src={factoryIcon} alt="" fill />
+                      <Image src={factoryIcon} alt="" fill sizes="1" />
                     </div>
                     {factory.name}
                   </button>

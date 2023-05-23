@@ -32,7 +32,7 @@ const UnKnownErrorPage: NextPage = () => {
           <LinkButton text="메인페이지로 이동" variant="filled" linkTo={MAIN_URL} />
         </div>
         <div css={logoContainer}>
-          <Image src={deepLeLogo} alt="" fill />
+          <Image src={deepLeLogo} alt="" fill sizes="1" />
         </div>
       </article>
       <div css={jobiImageContainer}>
