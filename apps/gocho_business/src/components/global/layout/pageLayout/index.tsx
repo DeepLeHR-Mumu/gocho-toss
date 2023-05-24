@@ -1,8 +1,12 @@
 import { FunctionComponent, ReactNode } from "react";
-import { container } from "./style";
+import { cssObj } from "./style";
 
 export interface PageLayoutProps {
   children: ReactNode;
 }
 
-export const PageLayout: FunctionComponent<PageLayoutProps> = ({ children }) => <div css={container}>{children}</div>;
+export const PageLayout: FunctionComponent<PageLayoutProps> = ({ children }) => (
+  <main css={cssObj.mainWrapper}>
+    <div css={cssObj.mainContainer}>{children}</div>
+  </main>
+);

@@ -1,27 +1,47 @@
 import { useEffect } from "react";
 
+import { Spinner } from "shared-ui/common/atom/spinner";
+
 import { NextPageWithLayout } from "@/types";
-import { PageLayout, CompanyInfoPart } from "@/components";
+import { PageLayout } from "@/components";
 
 import { jdListPageFunnelEvent } from "@/ga";
-import { ListPart, HeaderPart } from "./part";
+import { useJdArr } from "@/apis";
+import { JdCard } from "@/pages/jd/list/component";
 import { cssObj } from "./style";
 
 const JdListPage: NextPageWithLayout = () => {
+  const { data: jdDataObj } = useJdArr(true, { order: "recent", size: 10 });
+
   useEffect(() => {
     jdListPageFunnelEvent();
   }, []);
 
+  if (!jdDataObj) {
+    return (
+      <div css={cssObj.spinner}>
+        <Spinner />
+      </div>
+    );
+  }
+
+  if (jdDataObj.pageResult.totalElements === 0) {
+    return (
+      <section css={cssObj.noDataSectionContainer}>
+        <p css={cssObj.noDataDesc}>등록된 공고가 없습니다.</p>
+      </section>
+    );
+  }
+
   return (
-    <>
-      <CompanyInfoPart />
-      <main css={cssObj.mainContainer}>
-        <PageLayout>
-          <HeaderPart />
-          <ListPart />
-        </PageLayout>
-      </main>
-    </>
+    <PageLayout>
+      <div css={cssObj.contentContainer}>
+        <h2 css={cssObj.title}>등록된 공고 목록</h2>
+        {jdDataObj.jdDataArr.map((jd) => (
+          <JdCard key={`BusinessJdCard${jd.id}`} jd={jd} />
+        ))}
+      </div>
+    </PageLayout>
   );
 };
 

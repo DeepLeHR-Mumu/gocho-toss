@@ -6,9 +6,9 @@ import { Footer } from "../footer";
 import { GlobalLayoutProps } from "./type";
 
 export const GlobalLayout: FunctionComponent<GlobalLayoutProps> = ({ children }) => (
-  <div>
+  <>
     <TopBar />
     {children}
     <Footer />
-  </div>
+  </>
 );
