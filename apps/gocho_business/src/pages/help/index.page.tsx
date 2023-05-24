@@ -1,16 +1,16 @@
-import { ReactElement } from "react";
 import Image from "next/image";
 
 import helpBackground from "@/public/image/help/help_background.svg";
 import chatIcon from "@/public/image/help/chat.svg";
 import { NextPageWithLayout } from "@/types";
-import { GlobalLayout, Footer } from "@/components";
 
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
 const HelpPage: NextPageWithLayout = () => (
   <main css={cssObj.wrapper}>
+    <PageHead />
+
     <div>
       <h2 css={cssObj.title}>고객센터</h2>
       <p css={cssObj.desc}>
@@ -28,16 +28,6 @@ const HelpPage: NextPageWithLayout = () => (
       <Image src={helpBackground} alt="" fill priority />
     </div>
   </main>
-);
-
-HelpPage.getLayout = (page: ReactElement) => (
-  <>
-    <PageHead />
-    <GlobalLayout>
-      {page}
-      <Footer />
-    </GlobalLayout>
-  </>
 );
 
 export default HelpPage;

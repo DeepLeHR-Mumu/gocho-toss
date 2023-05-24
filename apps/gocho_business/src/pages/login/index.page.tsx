@@ -13,7 +13,6 @@ import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 
 import { useModal } from "@/globalStates";
 import { INTERNAL_URL } from "@/constants";
-import { TopBar } from "@/components";
 import { useDoLogin, useManagerProfile } from "@/apis";
 import { loginPageFunnelEvent, loginSuccessEvent, signupButtonClickEvent } from "@/ga";
 
@@ -78,7 +77,6 @@ const LoginPage: NextPage = () => {
   return (
     <>
       <PageHead />
-      <TopBar />
       <main css={cssObj.wrapper}>
         <InvisibleH2 title="고초대졸닷컴 로그인하기" />
         <div css={cssObj.container}>

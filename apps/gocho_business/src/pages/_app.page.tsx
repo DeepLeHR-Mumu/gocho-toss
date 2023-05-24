@@ -7,12 +7,12 @@ import { useRouter } from "next/router";
 import ReactGA from "react-ga4";
 import { datadogRum } from "@datadog/browser-rum";
 
+import { useAxiosInterceptor } from "@/apis";
+import { ToastPlaceholder, PrivateRouteLayout, ModalPlaceholder, ErrorBoundary, GlobalLayout } from "@/components";
 import { GA_KEY } from "@/constants";
 import { globalStyle } from "@/styles";
-import { useAxiosInterceptor } from "@/apis";
-import { ToastPlaceholder, PrivateRouteLayout, ModalPlaceholder, ErrorBoundary } from "@/components";
+import { AppPropsWithLayout } from "@/types/nextPageWithLayoutType";
 
-import { AppPropsWithLayout } from "../types/nextPageWithLayoutType";
 import { PROTECTED_ROUTE_ARR } from "./index/constant";
 
 if (typeof window !== "undefined" && !window.location.href.includes("localhost")) {
@@ -74,13 +74,15 @@ function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <Global styles={globalStyle} />
-        <ErrorBoundary>
-          <PrivateRouteLayout protectedRoutes={PROTECTED_ROUTE_ARR}>
-            {getLayout(<Component {...pageProps} />)}
-          </PrivateRouteLayout>
-          <ModalPlaceholder />
-          <ToastPlaceholder />
-        </ErrorBoundary>
+        <GlobalLayout>
+          <ErrorBoundary>
+            <PrivateRouteLayout protectedRoutes={PROTECTED_ROUTE_ARR}>
+              {getLayout(<Component {...pageProps} />)}
+            </PrivateRouteLayout>
+            <ModalPlaceholder />
+            <ToastPlaceholder />
+          </ErrorBoundary>
+        </GlobalLayout>
         <ReactQueryDevtools initialIsOpen={false} />
       </Hydrate>
     </QueryClientProvider>

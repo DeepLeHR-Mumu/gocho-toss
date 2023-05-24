@@ -1,7 +1,7 @@
-import { ReactElement, useEffect } from "react";
+import { useEffect } from "react";
 
 import { NextPageWithLayout } from "@/types";
-import { GlobalLayout, PageLayout, CompanyInfoPart } from "@/components";
+import { PageLayout, CompanyInfoPart } from "@/components";
 
 import { jdListPageFunnelEvent } from "@/ga";
 import { ListPart, HeaderPart } from "./part";
@@ -13,20 +13,16 @@ const JdListPage: NextPageWithLayout = () => {
   }, []);
 
   return (
-    <main css={cssObj.mainContainer}>
-      <PageLayout>
-        <HeaderPart />
-        <ListPart />
-      </PageLayout>
-    </main>
+    <>
+      <CompanyInfoPart />
+      <main css={cssObj.mainContainer}>
+        <PageLayout>
+          <HeaderPart />
+          <ListPart />
+        </PageLayout>
+      </main>
+    </>
   );
 };
-
-JdListPage.getLayout = (page: ReactElement) => (
-  <GlobalLayout>
-    <CompanyInfoPart />
-    {page}
-  </GlobalLayout>
-);
 
 export default JdListPage;

@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import dayjs from "dayjs";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
@@ -20,7 +20,7 @@ import {
   jdEditPageFunnelEvent,
 } from "@/ga";
 import type { NextPageWithLayout } from "@/types";
-import { PageLayout, GlobalLayout } from "@/components";
+import { PageLayout } from "@/components";
 import { useJdDetail, useEditJd, useDeleteJd, useEndJd, jdArrKeyObj } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 
@@ -297,7 +297,5 @@ const JdEditPage: NextPageWithLayout = () => {
     </main>
   );
 };
-
-JdEditPage.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default JdEditPage;

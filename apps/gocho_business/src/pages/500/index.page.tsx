@@ -1,11 +1,10 @@
-import { ReactElement, useEffect } from "react";
+import { useEffect } from "react";
 import Image from "next/image";
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
 import jobi_500 from "@/public/image/jobi_500.svg";
 
 import { NextPageWithLayout } from "@/types";
-import { Footer, GlobalLayout } from "@/components";
 import { unknownPageErrorEvent } from "@/ga";
 
 import { PageHead } from "./pageHead";
@@ -19,6 +18,7 @@ const UnknownErrorPage: NextPageWithLayout = () => {
 
   return (
     <main css={cssObj.container}>
+      <PageHead />
       <InvisibleH2 title="없는 페이지" />
       <div css={cssObj.jobiImage}>
         <Image src={jobi_500} alt="" priority fill />
@@ -31,13 +31,4 @@ const UnknownErrorPage: NextPageWithLayout = () => {
   );
 };
 
-UnknownErrorPage.getLayout = (page: ReactElement) => (
-  <>
-    <PageHead />
-    <GlobalLayout>
-      {page}
-      <Footer />
-    </GlobalLayout>
-  </>
-);
 export default UnknownErrorPage;

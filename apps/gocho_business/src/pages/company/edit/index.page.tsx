@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 
@@ -8,7 +8,7 @@ import { COLORS } from "shared-style/color";
 import { usePreventRouting } from "shared-hooks";
 
 import { useAddCompanyDetail, useCompanyDetail, useManagerProfile } from "@/apis";
-import { CommonStatusChip, PageLayout, GlobalLayout, Footer } from "@/components";
+import { CommonStatusChip, PageLayout } from "@/components";
 import { useToast } from "@/globalStates";
 import { companyEditConfirmEvent, companyEditDoneEvent, companyEditFailEvent, companyEditPageFunnelEvent } from "@/ga";
 import { NextPageWithLayout } from "@/types";
@@ -169,6 +169,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
 
   return (
     <main css={cssObj.wrapper}>
+      <PageHead />
       <PageLayout>
         <form css={cssObj.container} onSubmit={handleSubmit(addCompanyDetail)}>
           <header css={cssObj.header}>
@@ -227,15 +228,5 @@ const CompanyEditPage: NextPageWithLayout = () => {
     </main>
   );
 };
-
-CompanyEditPage.getLayout = (page: ReactElement) => (
-  <>
-    <PageHead />
-    <GlobalLayout>
-      {page}
-      <Footer />
-    </GlobalLayout>
-  </>
-);
 
 export default CompanyEditPage;

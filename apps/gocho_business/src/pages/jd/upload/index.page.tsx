@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import dayjs from "dayjs";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { BiRocket } from "react-icons/bi";
@@ -18,7 +18,7 @@ import {
   jdUploadPageFunnelEvent,
 } from "@/ga";
 import type { NextPageWithLayout } from "@/types";
-import { PageLayout, GlobalLayout } from "@/components";
+import { PageLayout } from "@/components";
 import { useAddJd } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 import {
@@ -168,7 +168,5 @@ const JdUploadPage: NextPageWithLayout = () => {
     </main>
   );
 };
-
-JdUploadPage.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default JdUploadPage;

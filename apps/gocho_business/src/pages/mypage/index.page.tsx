@@ -1,6 +1,6 @@
-import { ReactElement, useEffect } from "react";
+import { useEffect } from "react";
 
-import { Footer, GlobalLayout, PageLayout } from "@/components";
+import { PageLayout } from "@/components";
 
 import { NextPageWithLayout } from "@/types";
 import { myPageFunnelEvent } from "@/ga";
@@ -16,6 +16,7 @@ const MyPage: NextPageWithLayout = () => {
 
   return (
     <main css={cssObj.wrapper}>
+      <PageHead />
       <HeaderPart />
       <PageLayout>
         <EditPart />
@@ -24,13 +25,4 @@ const MyPage: NextPageWithLayout = () => {
   );
 };
 
-MyPage.getLayout = (page: ReactElement) => (
-  <>
-    <PageHead />
-    <GlobalLayout>
-      {page}
-      <Footer />
-    </GlobalLayout>
-  </>
-);
 export default MyPage;
