@@ -17,6 +17,8 @@ import { cssObj } from "./style";
 
 export const TopBar: FunctionComponent = () => {
   const router = useRouter();
+  const { pathname } = router;
+
   const [isCompanyActive, setIsCompanyActive] = useState<boolean>(false);
   const [isUserActive, setIsUserActive] = useState<boolean>(false);
 
@@ -44,6 +46,8 @@ export const TopBar: FunctionComponent = () => {
     });
   };
 
+  const menuUrl = pathname.split("/").join("/");
+
   return (
     <header css={cssObj.headerWrapper(isManagerLogin)}>
       <div css={cssObj.headerContainer}>
@@ -53,7 +57,12 @@ export const TopBar: FunctionComponent = () => {
           </h1>
           <nav css={cssObj.navWrapper}>
             {JD_LINK_ARR.map((linkObj) => (
-              <Link href={linkObj.url} key={`navBar${linkObj.name}`} css={cssObj.navLink} passHref>
+              <Link
+                href={linkObj.url}
+                key={`navBar${linkObj.name}`}
+                css={cssObj.navLink(menuUrl === linkObj.url)}
+                passHref
+              >
                 {linkObj.name}
               </Link>
             ))}

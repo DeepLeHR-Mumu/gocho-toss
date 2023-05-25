@@ -94,7 +94,7 @@ export const globalStyle = css`
     vertical-align: baseline;
   }
   html {
-    font-family: "Noto Sans KR", Verdana, sans-serif;
+    font-family: Pretendard Variable, serif;
     font-size: 16px;
     min-width: 1440px;
   }
@@ -207,7 +207,7 @@ export const globalStyle = css`
     }
   }
   textarea {
-    font-family: "Noto Sans KR", Verdana, sans-serif;
+    font-family: Pretendard Variable, serif;
   }
   input[type="number"] {
     ::-webkit-outer-spin-button,

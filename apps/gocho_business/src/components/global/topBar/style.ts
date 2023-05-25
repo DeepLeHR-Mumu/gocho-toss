@@ -40,24 +40,23 @@ export const cssObj = {
 
   navWrapper: css`
     display: flex;
-    margin-left: 1.5rem;
+    margin-left: 1rem;
     gap: 1.25rem;
   `,
 
-  navLink: css`
+  navLink: (isActive: boolean) => css`
     position: relative;
     width: 4rem;
-    font-weight: 700;
-    font-size: 0.875rem;
+    height: 4rem;
+    font-weight: ${isActive ? 700 : 500};
+    font-style: normal;
+    font-size: 18px;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-bottom: ${isActive ? `2px solid ${COLORS.GRAY100}` : "none"};
     color: ${COLORS.GRAY100};
     transition: color 0.2s ease;
-
-    :hover {
-      color: ${COLORS.BLUE_FIRST40};
-    }
   `,
 
   profileWrapper: css`
