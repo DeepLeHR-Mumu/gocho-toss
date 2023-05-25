@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
 import dayjs from "dayjs";
 import { AiOutlineEnvironment, AiOutlineMan, AiOutlineWoman } from "react-icons/ai";
-import { FiEdit, FiUser, FiUsers } from "react-icons/fi";
-import { BiMinus, BiBus, BiBuildingHouse } from "react-icons/bi";
+import { FiEdit } from "react-icons/fi";
+import { BiMinus } from "react-icons/bi";
 
 import { COLORS } from "shared-style/color";
 import { Spinner } from "shared-ui/common/atom/spinner";
@@ -123,7 +123,6 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                 <CommonInfoBox
                   infoName="임직원"
                   infoData={`${Intl.NumberFormat("kr").format(factoryData.maleNumber + factoryData.femaleNumber)} 명`}
-                  Icon={FiUsers}
                 />
               </div>
               <div css={cssObj.genderRatioInfoBox}>
@@ -144,15 +143,11 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                 </div>
               </div>
               <div css={cssObj.infoItem}>
-                <CommonInfoBox infoName="통근버스" infoData={`${factoryData.bus.exists ? "O" : "X"}`} Icon={BiBus} />
+                <CommonInfoBox infoName="통근버스" infoData={`${factoryData.bus.exists ? "O" : "X"}`} />
                 {factoryData.dormitory.desc && <p css={cssObj.etcInfo}>{factoryData.bus.desc}</p>}
               </div>
               <div css={cssObj.infoItem}>
-                <CommonInfoBox
-                  infoName="기숙사"
-                  infoData={`${factoryData.dormitory.exists ? "O" : "X"}`}
-                  Icon={BiBuildingHouse}
-                />
+                <CommonInfoBox infoName="기숙사" infoData={`${factoryData.dormitory.exists ? "O" : "X"}`} />
                 {factoryData.bus.desc && <p css={cssObj.etcInfo}>{factoryData.dormitory.desc} </p>}
               </div>
             </div>
@@ -161,7 +156,6 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
                 <CommonInfoBox
                   infoName="등록자"
                   infoData={`${factoryData.uploader.name} (${factoryData.uploader.department})`}
-                  Icon={FiUser}
                 />
               </div>
               <div css={cssObj.uploadedDateContainer}>

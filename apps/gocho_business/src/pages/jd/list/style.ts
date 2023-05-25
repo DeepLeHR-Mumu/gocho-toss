@@ -29,7 +29,7 @@ export const cssObj = {
   `,
 
   title: css`
-    font-size: 1.25rem;
+    font-size: 1.75rem;
   `,
 
   buttonWrapper: css`

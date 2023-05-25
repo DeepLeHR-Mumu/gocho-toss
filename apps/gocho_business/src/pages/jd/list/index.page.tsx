@@ -36,7 +36,7 @@ const JdListPage: NextPageWithLayout = () => {
   return (
     <PageLayout>
       <div css={cssObj.contentContainer}>
-        <h2 css={cssObj.title}>등록된 공고 목록</h2>
+        <h2 css={cssObj.title}>공고관리</h2>
         {jdDataObj.jdDataArr.map((jd) => (
           <JdCard key={`BusinessJdCard${jd.id}`} jd={jd} />
         ))}

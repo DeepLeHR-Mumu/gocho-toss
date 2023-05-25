@@ -1,8 +1,4 @@
 import { FunctionComponent, useRef } from "react";
-import { AiOutlineEye, AiOutlineNumber, AiOutlinePause } from "react-icons/ai";
-import { BiBookmark, BiMinus } from "react-icons/bi";
-import { FiUser, FiCalendar, FiEdit } from "react-icons/fi";
-import { MdAdsClick } from "react-icons/md";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
@@ -87,53 +83,43 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
   return (
     <div css={cssObj.cardContainer(isExpired)}>
       <div css={cssObj.topContainer}>
-        <div css={cssObj.titleBox}>
-          <div>
-            <strong css={cssObj.title}>{jd.title}</strong>
-            <p css={cssObj.date}>{`${dayjs(jd.startTime).format("YY.MM.DD")}~${dayjs(jd.endTime).format(
-              "YY.MM.DD"
-            )}`}</p>
-            {jd.cut && <p css={cssObj.date}>채용시 마감</p>}
-          </div>
+        <div>
           <CommonStatusChip status={jd.status.name} />
+          <strong css={cssObj.title}>{jd.title}</strong>
+          <div>{jd.cut && <p css={cssObj.date}>채용시 마감</p>}</div>
+          <div css={cssObj.titleBox}>
+            <div css={cssObj.infoBox}>
+              <strong css={cssObj.infoTitle}>식별번호</strong>
+              <p css={cssObj.info}>{jd.id}</p>
+            </div>
+            <div css={cssObj.infoBox}>
+              <strong css={cssObj.infoTitle}>공고등록일</strong>
+              <p css={cssObj.info}>{`${dayjs(jd.startTime).format("YYYY.MM.DD")}~${dayjs(jd.endTime).format(
+                "YYYY.MM.DD"
+              )}`}</p>
+            </div>
+            <div css={cssObj.infoBox}>
+              <strong css={cssObj.infoTitle}>최종수정일</strong>
+              <p css={cssObj.info}>{jd.updatedTime ? dayjs(jd.updatedTime).format("YY.MM.DD HH:mm") : "-"}</p>
+            </div>
+          </div>
         </div>
-        <CommonInfoBox Icon={AiOutlineEye} infoData={viewData} infoName="조회수" />
-        <CommonInfoBox Icon={BiBookmark} infoData={bookmarkData} infoName="북마크" />
-        <CommonInfoBox Icon={MdAdsClick} infoData={clickData} infoName="지원하기 클릭 수" />
-        <CommonInfoBox Icon={FiUser} infoData={`${jd.uploader.name} (${jd.uploader.department})`} infoName="등록자" />
+        <CommonInfoBox infoData={bookmarkData} infoName="공고 찜" />
+        <CommonInfoBox infoData={clickData} infoName="지원하기 클릭 수" />
+        <CommonInfoBox infoData={viewData} infoName="공고 조회수" />
       </div>
       <div css={cssObj.bottomContainer}>
         <div css={cssObj.bottomInfoContainer}>
-          <div css={cssObj.infoBox}>
-            <div css={cssObj.infoIcon}>
-              <AiOutlineNumber />
-            </div>
-            <strong css={cssObj.infoTitle}>식별번호</strong>
-            <p css={cssObj.info}>{jd.id}</p>
-          </div>
-          <div css={cssObj.infoBox}>
-            <div css={cssObj.infoIcon}>
-              <FiCalendar />
-            </div>
-            <strong css={cssObj.infoTitle}>공고등록일</strong>
-            <p css={cssObj.info}>{dayjs(jd.createdTime).format("YY.MM.DD HH:mm")}</p>
-          </div>
-          <div css={cssObj.infoBox}>
-            <div css={cssObj.infoIcon}>
-              <FiCalendar />
-            </div>
-            <strong css={cssObj.infoTitle}>최종수정일</strong>
-            <p css={cssObj.info}>{jd.updatedTime ? dayjs(jd.updatedTime).format("YY.MM.DD HH:mm") : "-"}</p>
-          </div>
+          <strong css={cssObj.infoTitle}>담당자</strong>
+          <div>{`${jd.uploader.name} (${jd.uploader.department})`}</div>
         </div>
-        {jd.uploader.is_mine && !isExpired && (
+        {!jd.uploader.is_mine && !isExpired && (
           <div css={cssObj.buttonContainer}>
             <SharedButton
               radius="circle"
               fontColor={COLORS.GRAY10}
               backgroundColor={COLORS.GRAY80}
               size="medium"
-              iconObj={{ icon: AiOutlinePause, location: "left" }}
               text="공고마감"
               onClickHandler={() => {
                 endJdHandler(jd.id);
@@ -144,7 +130,6 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
               fontColor={COLORS.GRAY10}
               backgroundColor={COLORS.GRAY80}
               size="medium"
-              iconObj={{ icon: BiMinus, location: "left" }}
               text="공고삭제"
               onClickHandler={() => {
                 deleteJdHandler(jd.id);
@@ -155,7 +140,6 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
               fontColor={COLORS.GRAY10}
               backgroundColor={COLORS.GRAY80}
               size="medium"
-              iconObj={{ icon: FiEdit, location: "left" }}
               text="공고수정"
               onClickHandler={() => {
                 jdEditButtonEvent(jd.id);
