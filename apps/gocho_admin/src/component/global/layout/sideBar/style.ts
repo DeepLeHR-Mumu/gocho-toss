@@ -22,7 +22,7 @@ export const cssObj = {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    align-items: flex-start;
+
     > li {
       width: 100%;
       display: flex;

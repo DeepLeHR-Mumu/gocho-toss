@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 
-import { TopBar } from "../topBar";
-import { Footer } from "../footer";
+import { TopBar } from "../../topBar";
+import { Footer } from "../../footer";
 
 import { GlobalLayoutProps } from "./type";
 

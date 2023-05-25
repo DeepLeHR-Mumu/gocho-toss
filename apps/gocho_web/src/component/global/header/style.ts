@@ -25,8 +25,8 @@ export const logoCSS = css`
   height: 1.125rem;
   position: relative;
   cursor: pointer;
-  position: relative;
 `;
+
 export const logoLink = css`
   width: 100%;
   height: 100%;

@@ -1,13 +1,11 @@
 export { CommonInfoBox } from "./common/commonInfoBox";
 export { CommonStatusChip } from "./common/commonStatusChip";
 
-export { CompanyInfoPart } from "./global/companyInfoPart";
+export { TopBar } from "./global/topBar";
+export { Footer } from "./global/footer";
 export { ErrorBoundary } from "./global/errorBoundary";
 export { PageLayout } from "./global/layout/pageLayout";
-export { SideBar } from "./global/layout/sideBar";
-export { TopBar } from "./global/layout/topBar";
 export { GlobalLayout } from "./global/layout/globalLayout";
-export { Footer } from "./global/layout/footer";
 export { PrivateRouteLayout } from "./global/layout/privateRouteLayout";
 
 export { FindPasswordModal } from "./global/modal/findPasswordModal";
