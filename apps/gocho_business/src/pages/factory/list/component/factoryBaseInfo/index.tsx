@@ -31,7 +31,7 @@ export const FactoryBaseInfo: FunctionComponent<FactoryBaseInfoProps> = ({ formO
           maxLength={30}
         />
         <div css={cssObj.statusChip}>
-          <CommonStatusChip status={requestStatus} />
+          <CommonStatusChip status={requestStatus} isExpired={false} />
         </div>
       </div>
       <div css={cssObj.inputContainer}>

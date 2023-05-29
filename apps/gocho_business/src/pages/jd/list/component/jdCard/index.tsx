@@ -84,12 +84,13 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
     <div css={cssObj.cardContainer}>
       <div css={cssObj.topContainer}>
         <div>
-          <CommonStatusChip status={jd.status.name} />
+          {/* {jd.status.name} */}
+          <CommonStatusChip status={jd.status.name} isExpired={isExpired} />
           <strong css={cssObj.title}>{jd.title}</strong>
           <div>{jd.cut && <p css={cssObj.date}>채용시 마감</p>}</div>
           <div css={cssObj.infoContainer}>
             <div css={cssObj.infoBox}>
-              <strong css={cssObj.infoTitle}>식별번호</strong>
+              <p css={cssObj.info}>식별번호</p>
               <p css={cssObj.info}>{jd.id}</p>
             </div>
             <div css={cssObj.infoBox}>
@@ -99,12 +100,12 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
             </div>
             {jd.updatedTime ? (
               <div css={cssObj.infoBox}>
-                <strong css={cssObj.infoTitle}>수정일</strong>
+                <p css={cssObj.info}>수정일</p>
                 <p css={cssObj.info}>{dayjs(jd.updatedTime).format("YY.MM.DD")}</p>
               </div>
             ) : (
               <div css={cssObj.infoBox}>
-                <strong css={cssObj.infoTitle}>등록일</strong>
+                <p css={cssObj.info}>등록일</p>
                 <p css={cssObj.info}>{dayjs(jd.createdTime).format("YY.MM.DD")}</p>
               </div>
             )}
@@ -127,7 +128,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
       </div>
       <div css={cssObj.bottomContainer}>
         <div css={cssObj.bottomInfoContainer}>
-          <p css={cssObj.infoTitle}>담당자</p>
+          <p css={cssObj.info}>담당자</p>
           <div>{jd.uploader.name}</div>
         </div>
 

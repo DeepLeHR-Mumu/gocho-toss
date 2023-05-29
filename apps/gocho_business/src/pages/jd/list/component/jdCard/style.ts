@@ -30,7 +30,7 @@ export const cssObj = {
   infoContainer: css`
     display: flex;
     align-items: flex-start;
-    gap: 0 1.5rem;
+    gap: 0 1rem;
   `,
 
   infoBox: css`
@@ -38,16 +38,15 @@ export const cssObj = {
     align-items: center;
     padding-right: 1rem;
     border-right: 1px solid ${NEWCOLORS.GRAY200};
+    gap: 0 0.5rem;
 
     :last-of-type {
       border-right: none;
     }
   `,
 
-  infoTitle: css`
-    font-weight: 400;
-    color: ${COLORS.GRAY60};
-    margin-right: 0.5rem;
+  info: css`
+    color: ${NEWCOLORS.BLUEGRAY600};
   `,
 
   commonInfoContainer: css`
@@ -97,10 +96,6 @@ export const cssObj = {
   bottomInfoContainer: css`
     display: flex;
     align-items: center;
-  `,
-
-  info: css`
-    color: ${COLORS.GRAY40};
   `,
 
   buttonContainer: css`

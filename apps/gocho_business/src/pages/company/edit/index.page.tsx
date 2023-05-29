@@ -178,7 +178,7 @@ const CompanyEditPage: NextPageWithLayout = () => {
               <p css={cssObj.desc}>변경사항이 있다면 작성 후 수정완료 버튼을 꼭 눌러주세요</p>
             </div>
             <div css={cssObj.topButtonBox}>
-              <CommonStatusChip status={companyDetailData.status.name} />
+              <CommonStatusChip status={companyDetailData.status.name} isExpired={false} />
               <div css={cssObj.sharedButtonBox}>
                 <SharedButton
                   onClickHandler="submit"

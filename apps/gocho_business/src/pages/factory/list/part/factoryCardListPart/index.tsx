@@ -64,7 +64,7 @@ export const FactoryCardListPart: FunctionComponent<FactoryCardListPartProps> = 
               <div css={cssObj.container(factoryData.uploader.isMine)}>
                 <div css={cssObj.nameContainer}>
                   <p css={cssObj.name}>{factoryData.name}</p>
-                  <CommonStatusChip status={factoryData.status.name} />
+                  <CommonStatusChip status={factoryData.status.name} isExpired={false} />
                 </div>
                 <div css={cssObj.addressContainer}>
                   <AiOutlineEnvironment />
