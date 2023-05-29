@@ -1,15 +1,15 @@
 import { css } from "@emotion/react";
+import { NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
   viewInfoBox: css`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    width: 9.25rem;
     height: 4rem;
-    gap: 0.5rem 0;
-    margin-right: 1rem;
-    padding-right: 3rem;
-    border-right: 1px solid gray;
+    border-right: 1px solid ${NEWCOLORS.GRAY200};
 
     :last-of-type {
       border-right: none;

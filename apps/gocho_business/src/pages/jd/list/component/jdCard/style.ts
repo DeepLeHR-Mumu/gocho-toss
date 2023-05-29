@@ -1,37 +1,79 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { COLORS, NEWCOLORS } from "shared-style/color";
 import { shorten } from "shared-style/common";
 
 export const cssObj = {
-  cardContainer: (isExpired: boolean) => css`
-    margin-top: 2rem;
-    padding: 1.5rem 1.5rem 1rem 1.5rem;
-    border: 1px solid ${COLORS.GRAY80};
-    background-color: ${isExpired ? COLORS.GRAY90 : COLORS.GRAY100};
+  cardContainer: css`
+    margin-top: 1.25rem;
+    background-color: ${NEWCOLORS.WHITE};
+    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
   `,
 
   topContainer: css`
-    height: 6.5rem;
     display: flex;
-    align-items: center;
-    gap: 0 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid ${COLORS.GRAY80};
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem 2.25rem;
   `,
 
-  titleBox: css`
-    max-width: 50%;
+  title: css`
+    width: 15rem;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    word-break: break-all;
+    ${shorten(3)};
+  `,
+
+  infoContainer: css`
     display: flex;
     align-items: flex-start;
     gap: 0 1.5rem;
   `,
 
-  title: css`
-    line-height: 1.2;
-    width: 15rem;
-    word-break: break-all;
-    ${shorten(3)};
+  infoBox: css`
+    display: flex;
+    align-items: center;
+    padding-right: 1rem;
+    border-right: 1px solid ${NEWCOLORS.GRAY200};
+
+    :last-of-type {
+      border-right: none;
+    }
+  `,
+
+  infoTitle: css`
+    font-weight: 400;
+    color: ${COLORS.GRAY60};
+    margin-right: 0.5rem;
+  `,
+
+  commonInfoContainer: css`
+    display: flex;
+  `,
+
+  viewInfoBox: css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 9.25rem;
+    height: 4rem;
+    border-right: 1px solid ${NEWCOLORS.GRAY200};
+
+    :last-of-type {
+      border-right: none;
+    }
+  `,
+
+  countName: css``,
+
+  count: (isExpired: boolean) => css`
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: ${isExpired ? `${NEWCOLORS.BLUEGRAY200}` : `${NEWCOLORS.BLACK}`};
   `,
 
   date: css`
@@ -46,30 +88,15 @@ export const cssObj = {
 
   bottomContainer: css`
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    height: 2.5rem;
-    margin-top: 0.5rem;
+    padding: 0.875rem 1rem;
+    background-color: ${NEWCOLORS.GRAY50};
   `,
 
   bottomInfoContainer: css`
     display: flex;
-    gap: 0 1rem;
-  `,
-
-  infoBox: css`
-    display: flex;
     align-items: center;
-    gap: 0 0.375rem;
-  `,
-
-  infoIcon: css`
-    font-size: 1.25rem;
-    color: ${COLORS.GRAY65};
-  `,
-
-  infoTitle: css`
-    font-weight: 400;
-    color: ${COLORS.GRAY60};
   `,
 
   info: css`

@@ -3,12 +3,12 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
-import { COLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 import { SharedButton } from "shared-ui/business/sharedButton";
 
 import { useToast } from "@/globalStates";
 import { jdDeleteButtonEvent, jdCloseButtonEvent, jdEditButtonEvent, jdCloseDoneEvent, jdDeleteDoneEvent } from "@/ga";
-import { CommonInfoBox, CommonStatusChip } from "@/components";
+import { CommonStatusChip } from "@/components";
 import { INTERNAL_URL } from "@/constants";
 import { useEndJd, useDeleteJd, jdArrKeyObj } from "@/apis";
 
@@ -81,13 +81,13 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
   const isExpired = dayjs(jd.endTime).isBefore(dayjs());
 
   return (
-    <div css={cssObj.cardContainer(isExpired)}>
+    <div css={cssObj.cardContainer}>
       <div css={cssObj.topContainer}>
         <div>
           <CommonStatusChip status={jd.status.name} />
           <strong css={cssObj.title}>{jd.title}</strong>
           <div>{jd.cut && <p css={cssObj.date}>채용시 마감</p>}</div>
-          <div css={cssObj.titleBox}>
+          <div css={cssObj.infoContainer}>
             <div css={cssObj.infoBox}>
               <strong css={cssObj.infoTitle}>식별번호</strong>
               <p css={cssObj.info}>{jd.id}</p>
@@ -110,31 +110,45 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
             )}
           </div>
         </div>
-        <CommonInfoBox infoData={bookmarkData} infoName="공고 찜" />
-        <CommonInfoBox infoData={clickData} infoName="지원하기 클릭 수" />
-        <CommonInfoBox infoData={viewData} infoName="공고 조회수" />
+        <div css={cssObj.commonInfoContainer}>
+          <div css={cssObj.viewInfoBox}>
+            <p css={cssObj.countName}>공고 찜</p>
+            <p css={cssObj.count(isExpired)}>{bookmarkData}</p>
+          </div>
+          <div css={cssObj.viewInfoBox}>
+            <p css={cssObj.countName}>지원하기 클릭 수</p>
+            <p css={cssObj.count(isExpired)}>{clickData}</p>
+          </div>
+          <div css={cssObj.viewInfoBox}>
+            <p css={cssObj.countName}>공고 조회수</p>
+            <p css={cssObj.count(isExpired)}>{viewData}</p>
+          </div>
+        </div>
       </div>
       <div css={cssObj.bottomContainer}>
         <div css={cssObj.bottomInfoContainer}>
-          <strong css={cssObj.infoTitle}>담당자</strong>
+          <p css={cssObj.infoTitle}>담당자</p>
           <div>{jd.uploader.name}</div>
         </div>
-        {!jd.uploader.is_mine && !isExpired && (
-          <div css={cssObj.buttonContainer}>
+
+        <div css={cssObj.buttonContainer}>
+          <SharedButton
+            radius="round"
+            fontColor={NEWCOLORS.BLUEGRAY300}
+            backgroundColor={NEWCOLORS.WHITE}
+            borderColor={NEWCOLORS.GRAY200}
+            size="medium"
+            text="공고마감"
+            onClickHandler={() => {
+              endJdHandler(jd.id);
+            }}
+          />
+          {!isExpired && (
             <SharedButton
-              radius="circle"
-              fontColor={COLORS.GRAY10}
-              backgroundColor={COLORS.GRAY80}
-              size="medium"
-              text="공고마감"
-              onClickHandler={() => {
-                endJdHandler(jd.id);
-              }}
-            />
-            <SharedButton
-              radius="circle"
-              fontColor={COLORS.GRAY10}
-              backgroundColor={COLORS.GRAY80}
+              radius="round"
+              fontColor={NEWCOLORS.BLUEGRAY300}
+              backgroundColor={NEWCOLORS.WHITE}
+              borderColor={NEWCOLORS.GRAY200}
               size="medium"
               text="수정"
               onClickHandler={() => {
@@ -144,19 +158,19 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
                 });
               }}
             />
-            <SharedButton
-              radius="circle"
-              fontColor={COLORS.GRAY10}
-              backgroundColor={COLORS.GRAY80}
-              size="medium"
-              text="삭제"
-              onClickHandler={() => {
-                deleteJdHandler(jd.id);
-              }}
-            />
-          </div>
-        )}
-        {isExpired && <div css={cssObj.inactiveLabel}>마감된 공고입니다</div>}
+          )}
+          <SharedButton
+            radius="round"
+            fontColor={NEWCOLORS.BLUEGRAY300}
+            backgroundColor={NEWCOLORS.WHITE}
+            borderColor={NEWCOLORS.GRAY200}
+            size="medium"
+            text="삭제"
+            onClickHandler={() => {
+              deleteJdHandler(jd.id);
+            }}
+          />
+        </div>
       </div>
     </div>
   );
