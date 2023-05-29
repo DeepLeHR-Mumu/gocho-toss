@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { COLORS, NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
   contentContainer: css`
@@ -30,6 +30,48 @@ export const cssObj = {
 
   title: css`
     font-size: 1.75rem;
+  `,
+
+  flexBox: css`
+    display: flex;
+    margin-top: 1rem;
+  `,
+
+  searchWrapper: css`
+    position: relative;
+  `,
+
+  searchBox: css`
+    width: 30rem;
+    height: 2.75rem;
+    padding: 0.5rem 1rem 0.5rem 3.25rem;
+    border-radius: 1rem;
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    background-color: ${NEWCOLORS.WHITE};
+    color: ${NEWCOLORS.BLUEGRAY700};
+
+    ::placeholder {
+      color: ${NEWCOLORS.GRAY300};
+    }
+  `,
+
+  searchButton: css`
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translate(0, -50%);
+    color: ${NEWCOLORS.BLUE300};
+
+    > svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  `,
+
+  buttonArrContainer: css`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   `,
 
   buttonWrapper: css`

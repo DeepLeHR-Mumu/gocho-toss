@@ -12,4 +12,3 @@ export const INTERNAL_URL = {
   UNKNOWN_ERROR: "/500",
   LOGIN: "/login",
 } as const;
-

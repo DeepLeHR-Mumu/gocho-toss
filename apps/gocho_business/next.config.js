@@ -22,15 +22,6 @@ const nextConfig = {
     "shared-ui",
     "shared-hooks",
   ],
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/jd/list",
-        permanent: true,
-      },
-    ];
-  },
 };
 
 module.exports = withBundleAnalyzer(nextConfig);
