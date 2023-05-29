@@ -93,15 +93,21 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
               <p css={cssObj.info}>{jd.id}</p>
             </div>
             <div css={cssObj.infoBox}>
-              <strong css={cssObj.infoTitle}>공고등록일</strong>
               <p css={cssObj.info}>{`${dayjs(jd.startTime).format("YYYY.MM.DD")}~${dayjs(jd.endTime).format(
                 "YYYY.MM.DD"
               )}`}</p>
             </div>
-            <div css={cssObj.infoBox}>
-              <strong css={cssObj.infoTitle}>최종수정일</strong>
-              <p css={cssObj.info}>{jd.updatedTime ? dayjs(jd.updatedTime).format("YY.MM.DD HH:mm") : "-"}</p>
-            </div>
+            {jd.updatedTime ? (
+              <div css={cssObj.infoBox}>
+                <strong css={cssObj.infoTitle}>수정일</strong>
+                <p css={cssObj.info}>{dayjs(jd.updatedTime).format("YY.MM.DD")}</p>
+              </div>
+            ) : (
+              <div css={cssObj.infoBox}>
+                <strong css={cssObj.infoTitle}>등록일</strong>
+                <p css={cssObj.info}>{dayjs(jd.createdTime).format("YY.MM.DD")}</p>
+              </div>
+            )}
           </div>
         </div>
         <CommonInfoBox infoData={bookmarkData} infoName="공고 찜" />
@@ -111,7 +117,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
       <div css={cssObj.bottomContainer}>
         <div css={cssObj.bottomInfoContainer}>
           <strong css={cssObj.infoTitle}>담당자</strong>
-          <div>{`${jd.uploader.name} (${jd.uploader.department})`}</div>
+          <div>{jd.uploader.name}</div>
         </div>
         {!jd.uploader.is_mine && !isExpired && (
           <div css={cssObj.buttonContainer}>
@@ -130,9 +136,12 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
               fontColor={COLORS.GRAY10}
               backgroundColor={COLORS.GRAY80}
               size="medium"
-              text="공고삭제"
+              text="수정"
               onClickHandler={() => {
-                deleteJdHandler(jd.id);
+                jdEditButtonEvent(jd.id);
+                router.push({
+                  pathname: INTERNAL_URL.JD_EDIT(jd.id),
+                });
               }}
             />
             <SharedButton
@@ -140,12 +149,9 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
               fontColor={COLORS.GRAY10}
               backgroundColor={COLORS.GRAY80}
               size="medium"
-              text="공고수정"
+              text="삭제"
               onClickHandler={() => {
-                jdEditButtonEvent(jd.id);
-                router.push({
-                  pathname: INTERNAL_URL.JD_EDIT(jd.id),
-                });
+                deleteJdHandler(jd.id);
               }}
             />
           </div>
