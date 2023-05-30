@@ -32,7 +32,7 @@ export interface ResponseObjDef {
         task: string;
       }[]
     | [];
-  page_result: PageResultDef | null;
+  page_result: PageResultDef;
 }
 
 export const jdArrKeyObj = {

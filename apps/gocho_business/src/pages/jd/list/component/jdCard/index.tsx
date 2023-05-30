@@ -128,8 +128,10 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
       </div>
       <div css={cssObj.bottomContainer}>
         <div css={cssObj.bottomInfoContainer}>
-          <p css={cssObj.info}>담당자</p>
-          <div>{jd.uploader.name}</div>
+          <div css={cssObj.infoBox}>
+            <p css={cssObj.info}>담당자</p>
+            <div>{jd.uploader.name}</div>
+          </div>
         </div>
 
         <div css={cssObj.buttonContainer}>

@@ -9,6 +9,7 @@ export const cssObj = {
     border-radius: 1rem;
     box-shadow: 0 2px 16px 0 #0000000d;
   `,
+
   spinner: css`
     position: relative;
     width: 100%;
@@ -32,10 +33,39 @@ export const cssObj = {
     font-size: 1.75rem;
   `,
 
+  filterBox: css`
+    display: flex;
+    margin-top: 2rem;
+    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+  `,
+
+  filterOption: (isSelected: boolean) => css`
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 8.75rem;
+    height: 3rem;
+    font-weight: 700;
+    color: ${isSelected ? `${NEWCOLORS.BLUE300}` : `${NEWCOLORS.BLUEGRAY400}`};
+    border-bottom: ${isSelected ? `2px solid ${NEWCOLORS.BLUE300}` : "none"};
+
+    > p {
+      color: ${isSelected ? `${NEWCOLORS.BLUE300}` : `${NEWCOLORS.BLUEGRAY400}`};
+    }
+  `,
+
+  filterCount: css`
+    font-weight: 400;
+    margin-left: 0.25rem;
+  `,
+
   flexBox: css`
     position: relative;
     display: flex;
+    justify-content: space-between;
     margin-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
   `,
 
   searchWrapper: css`
@@ -84,11 +114,8 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid ${NEWCOLORS.GRAY50};
-    border-radius: 5px;
     width: 6.625rem;
     height: 2.5rem;
-    padding: 0 1rem;
     font-size: 1rem;
     background-color: ${NEWCOLORS.WHITE};
     font-weight: 400;
@@ -99,24 +126,31 @@ export const cssObj = {
   `,
 
   orderList: (isOpen: boolean) => css`
+    display: ${isOpen ? "block" : "none"};
     position: absolute;
     top: 2.75rem;
     left: 0;
     width: 100%;
-    max-height: ${isOpen ? "20rem" : 0};
+    max-height: 20rem;
     overflow-x: hidden;
     overflow-y: scroll;
+    background-color: ${NEWCOLORS.WHITE};
     z-index: 20;
-    border: ${isOpen ? `1px solid ${NEWCOLORS.GRAY300}` : 0};
+    padding: 0.5rem 0;
+    border: 1px solid ${NEWCOLORS.BLACK};
+    border-radius: 1rem;
+  `,
 
-    ::-webkit-scrollbar {
-      width: 0.5rem;
-      background-color: ${NEWCOLORS.GRAY50};
-    }
+  orderOption: css`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0 0.5rem;
+    transition: 0.1s;
 
-    ::-webkit-scrollbar-thumb {
-      border-radius: 4px;
-      background-color: ${NEWCOLORS.GRAY300};
+    :hover {
+      background-color: ${NEWCOLORS.GRAY100};
     }
   `,
 };

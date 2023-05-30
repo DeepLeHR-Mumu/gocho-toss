@@ -89,7 +89,7 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.875rem 1rem;
+    padding: 0.875rem 1.5rem;
     background-color: ${NEWCOLORS.GRAY50};
   `,
 
