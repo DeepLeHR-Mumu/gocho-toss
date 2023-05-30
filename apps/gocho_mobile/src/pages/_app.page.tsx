@@ -17,6 +17,7 @@ import { GNB } from "@component/global/gnb";
 import { Footer } from "@component/global/footer";
 import { ModalPlaceholder } from "@component/common/organisms/modal/modalPlaceHolder";
 import { ToastPlaceholder } from "@component/toast/toastPlaceholder";
+import { useModal } from "@/globalStates";
 
 import { globalStyle } from "../style/globalStyle";
 
@@ -51,6 +52,7 @@ declare global {
 function UserMobileService({ Component, pageProps }: AppProps) {
   ReactGA.initialize(KEY);
   const router = useRouter();
+  const { setModal } = useModal();
 
   const [queryClient] = useState(() => {
     return new QueryClient({
@@ -120,6 +122,15 @@ function UserMobileService({ Component, pageProps }: AppProps) {
       window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
     }
   }, []);
+
+  useEffect(() => {
+    const todayTime = new Date().getTime();
+    const storageNoticeModalDate = localStorage.getItem("hideNoticeModalCreateTime");
+    const noticeModalCloseTime = new Date(`${storageNoticeModalDate}`).getTime();
+    const differentDay = (todayTime - noticeModalCloseTime) / (1000 * 60 * 60 * 24);
+    const isFinishNoticeModalPendingTime = differentDay >= 24;
+    if (isFinishNoticeModalPendingTime || storageNoticeModalDate === null) setModal("noticeModal");
+  }, [setModal]);
 
   useAxiosInterceptor();
 
