@@ -13,10 +13,10 @@ export interface JobCardProps {
     startTime: string;
     endTime: string;
     task: string;
-    eduArr: string[];
+    edu: string;
     placeArr: string[];
     rotationArr: string[];
-    contractArr: string[];
-    requiredExpArr: string[];
+    contract: string;
+    requiredExp: string;
   };
 }

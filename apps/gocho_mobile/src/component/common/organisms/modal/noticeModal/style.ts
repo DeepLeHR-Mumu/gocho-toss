@@ -1,77 +1,78 @@
 import { css } from "@emotion/react";
-
 import { COLORS } from "shared-style/color";
 
-export const wrapper = css`
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+export const cssObj = {
+  wrapper: css`
+    position: relative;
+    font-family: "Pretendard Variable", serif;
+    height: 21.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2.5rem 1rem 1rem;
+  `,
 
-export const topContainer = css`
-  padding: 2rem;
-  background-color: ${COLORS.GRAY90};
-`;
+  closeTopButton: css`
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
 
-export const bottomContainer = css`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-  padding: 1rem;
-`;
+    color: #9ba0a9;
 
-export const title = css`
-  font-size: 1.5rem;
-  font-weight: 400;
-  color: ${COLORS.GRAY10};
-  margin-bottom: 1rem;
-  display: block;
-`;
+    > svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  `,
 
-export const desc = css`
-  font-size: 0.875rem;
-  line-height: 1.7;
-  color: ${COLORS.GRAY20};
-  word-break: keep-all;
-  margin-bottom: 0.5rem;
-`;
+  iconBox: css`
+    position: relative;
+    width: 5rem;
+    height: 5rem;
 
-export const colorPoint = css`
-  color: ${COLORS.BLUE_FIRST40};
-`;
+    > img {
+      object-fit: contain;
+      border-radius: 1.5rem;
+    }
+  `,
 
-export const mailInfo = css`
-  margin-bottom: 0.5rem;
-  display: block;
-  line-height: 1.7;
-  color: ${COLORS.GRAY40};
-  font-weight: 500;
-`;
+  logoBox: css`
+    position: relative;
+    width: 11.5rem;
+    height: 1.75rem;
+    margin-top: 1.25rem;
 
-export const flexBox = css`
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-`;
+    > img {
+      object-fit: contain;
+    }
+  `,
 
-export const logoBox = css`
-  position: relative;
-  width: 100%;
-  max-width: 6.25rem;
-  height: 1rem;
-  margin: 2rem auto 0;
-  > img {
-    object-fit: contain;
-  }
-`;
+  text: css`
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #1c1c1c;
+  `,
 
-export const jobiBox = css`
-  position: relative;
-  width: 40%;
-  height: 5rem;
-  > img {
-    object-fit: contain;
-  }
-`;
+  linkButton: css`
+    width: 100%;
+    background-color: ${COLORS.BLUE_FIRST40};
+    color: ${COLORS.GRAY100};
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    margin-top: 1.5rem;
+    padding: 0.75rem 1rem;
+    text-align: center;
+  `,
+
+  closeButton: css`
+    width: 100%;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: #6b7684;
+    margin-top: 1rem;
+  `,
+};

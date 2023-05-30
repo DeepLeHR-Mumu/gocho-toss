@@ -8,8 +8,8 @@ import { useFindPassword } from "shared-api/auth";
 import { EMAIL_REGEXP, EMAIL_ERROR_MESSAGE } from "shared-constant";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
-import { BottomPopup } from "@component/bottomPopup";
 
+import { BottomPopup } from "@/component/bottomPopup";
 import { useModal, useToast } from "@/globalStates";
 
 import { wrapper, desc, formCSS, formArr, closeButton, loginButton, logoContainer } from "./style";
