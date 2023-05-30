@@ -58,13 +58,14 @@ const LoginPage: NextPage = () => {
           router.push(INTERNAL_URL.MY_PAGE);
           return;
         }
-        router.push(INTERNAL_URL.JD_LIST);
+
+        router.push(INTERNAL_URL.HOME);
       },
     });
   };
 
   useEffect(() => {
-    if (isManagerLogin) router.replace(INTERNAL_URL.JD_LIST);
+    if (isManagerLogin) router.replace(INTERNAL_URL.HOME);
   }, [isManagerLogin, router]);
 
   useEffect(() => {
