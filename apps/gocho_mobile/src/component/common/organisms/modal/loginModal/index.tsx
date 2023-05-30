@@ -14,8 +14,7 @@ import { ErrorResponseDef } from "shared-type/api/errorResponseType";
 import { AccountInput } from "shared-ui/common/atom/accountInput";
 import { NormalButton } from "shared-ui/common/atom/button";
 
-import { BottomPopup } from "@component/bottomPopup";
-
+import { BottomPopup } from "@/component/bottomPopup";
 import { useToast, useModal } from "@/globalStates";
 
 import {

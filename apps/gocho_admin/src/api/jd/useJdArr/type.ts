@@ -28,12 +28,12 @@ export interface ResponseObjDef {
     start_time: string;
     end_time: string;
     apply_url: string;
-    task: string;
-    edu_summary: string[];
+    edu_summary: string;
+    required_exp: string;
     place_arr: string[];
     rotation_arr: string[];
-    contract_type: string[];
-    required_exp_arr: string[];
+    contract_type: string;
+    task: string;
   }[];
   page_result: PageResultDef;
 }

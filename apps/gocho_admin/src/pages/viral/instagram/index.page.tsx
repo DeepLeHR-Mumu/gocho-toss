@@ -64,12 +64,7 @@ const Instagram: NextPageWithLayout = () => {
 
     text += `🚀 ${job.companyName}\n${job.title}\n- 접수기간 : ${deadline}\n`;
     text += `- 직무: ${job.task}\n`;
-    let contractString = "";
-    job.contractArr.map((contract, index, contractArr) => {
-      contractString += index + 1 === contractArr.length ? `${contract}` : `${contract}, `;
-      return contractString;
-    });
-    text += `- 채용형태: ${contractString}\n`;
+    text += `- 채용형태: ${job.contract}\n`;
     text += `- 근무지: ${job.placeArr[0]} ${job.placeArr.length !== 1 ? `외 ${job.placeArr.length - 1}곳` : ""}\n`;
     text += `- 근무형태: ${job.rotationArr[0]} ${
       job.rotationArr.length !== 1 ? `외 ${job.rotationArr.length - 1}형태` : ""
@@ -133,11 +128,9 @@ const Instagram: NextPageWithLayout = () => {
                     </div>
                     <p css={infoName}>학력</p>
                     <div css={info}>
-                      {job.eduArr.map((edu) => (
-                        <p key={`${job.id}${edu}`} css={infoText}>
-                          {edu}
-                        </p>
-                      ))}
+                      <p key={`${job.id}${job.edu}`} css={infoText}>
+                        {job.edu}
+                      </p>
                     </div>
                   </div>
                   <div css={infoBox}>
@@ -151,11 +144,9 @@ const Instagram: NextPageWithLayout = () => {
                     </div>
                     <p css={infoName}>계약 형태</p>
                     <div css={info}>
-                      {job.contractArr.map((contract) => (
-                        <p key={`${job.id}${contract}`} css={infoText}>
-                          {contract}
-                        </p>
-                      ))}
+                      <p key={`${job.id}${job.contract}`} css={infoText}>
+                        {job.contract}
+                      </p>
                     </div>
                   </div>
                   <div css={longInfoBox}>
@@ -173,11 +164,9 @@ const Instagram: NextPageWithLayout = () => {
                   <div css={infoBox}>
                     <p css={infoName}>경력 조건</p>
                     <div css={info}>
-                      {job.requiredExpArr.map((exp) => (
-                        <p key={`${job.id}${exp}`} css={infoText}>
-                          {exp}
-                        </p>
-                      ))}
+                      <p key={`${job.id}${job.requiredExp}`} css={infoText}>
+                        {job.requiredExp}
+                      </p>
                     </div>
                     <p css={infoName}>조회수</p>
                     <div css={info}>{job.view}</div>

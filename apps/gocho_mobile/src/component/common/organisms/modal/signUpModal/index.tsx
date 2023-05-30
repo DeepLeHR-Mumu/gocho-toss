@@ -20,8 +20,8 @@ import { ErrorResponseDef } from "shared-type/api/errorResponseType";
 import { signupModalOpenEvent, signupModalCloseEvent, signupSuccessEvent } from "shared-ga/auth";
 import { tokenDecryptor } from "shared-util";
 
-import { BottomPopup } from "@component/bottomPopup";
-import { closeButton } from "@component/common/organisms/modal/loginModal/style";
+import { BottomPopup } from "@/component/bottomPopup";
+import { closeButton } from "@/component/common/organisms/modal/loginModal/style";
 import { useModal, useToast } from "@/globalStates";
 
 import { wrapper, desc, formCSS, formArr, logoContainer, bottomDesc, colorPoint, sideErrorMsg } from "./style";

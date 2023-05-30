@@ -23,11 +23,11 @@ export const jdArrSelector = ({ data: jdArr, page_result }: ResponseObjDef) => {
     startTime: jd.start_time,
     endTime: jd.end_time,
     task: jd.task,
-    eduArr: jd.edu_summary,
+    edu: jd.edu_summary,
     placeArr: jd.place_arr,
     rotationArr: jd.rotation_arr,
-    contractArr: jd.contract_type,
-    requiredExpArr: jd.required_exp_arr,
+    contract: jd.contract_type,
+    requiredExp: jd.required_exp,
   }));
 
   return { jdDataArr, pageResult };

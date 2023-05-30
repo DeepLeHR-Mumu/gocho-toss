@@ -14,6 +14,12 @@ export default function Document() {
           rel="stylesheet preload"
           as="style"
         />
+        <link
+          rel="stylesheet"
+          as="style"
+          crossOrigin="true"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css"
+        />
 
         <meta name="theme-color" content="#ffffff" />
         <meta name="msapplication-TileColor" content="#ffffff" />

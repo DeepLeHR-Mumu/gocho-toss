@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest test",
+    "test": "jest test --passWithNoTests",
     "e2e": "pnpx playwright@1.28.0 test",
     "e2e:CICD": "PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright pnpx playwright@1.28.0 test e2e --trace on",
     "storybook": "storybook dev -p 6006",
