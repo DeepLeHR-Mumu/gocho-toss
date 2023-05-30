@@ -19,7 +19,7 @@ test("로그인 체크 및 로그인 이후 로그인페이지 블로킹", async
     await page.getByRole("button", { name: "로그인" }).click(),
   ]);
   expect(loginResponse.ok()).toBeTruthy();
-  await expect(page).toHaveURL(`${INTERNAL_URL.JD_LIST}?page=1`);
+  await expect(page).toHaveURL(INTERNAL_URL.JD_LIST);
 });
 
 test("정보가 미입력시 disabled 확인", async ({ page }) => {
@@ -43,7 +43,7 @@ test("정보가 미입력시 disabled 확인", async ({ page }) => {
 });
 
 test("로그인 안한 상태에서 타 페이지 접속시 블로킹", async ({ page }) => {
-  await page.goto(`${INTERNAL_URL.JD_LIST}?page=1`);
+  await page.goto(INTERNAL_URL.JD_LIST);
   await expect(page).toHaveURL(INTERNAL_URL.LOGIN);
   await page.goto(INTERNAL_URL.JD_UPLOAD);
   await expect(page).toHaveURL(INTERNAL_URL.LOGIN);

@@ -104,7 +104,7 @@ const JdUploadPage: NextPageWithLayout = () => {
         {
           onSuccess: () => {
             jdUploadDoneEvent();
-            router.push(`${INTERNAL_URL.JD_LIST}?page=1`);
+            router.push(INTERNAL_URL.JD_LIST);
             setToast("등록되었습니다");
           },
 

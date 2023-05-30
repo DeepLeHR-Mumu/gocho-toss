@@ -1,9 +1,9 @@
 import { css } from "@emotion/react";
-import { COLORS, NEWCOLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
   contentContainer: css`
-    background-color: ${COLORS.GRAY100};
+    background-color: ${NEWCOLORS.WHITE};
     padding: 2rem;
     border: 1px solid #e2e4e6;
     border-radius: 1rem;
@@ -33,6 +33,7 @@ export const cssObj = {
   `,
 
   flexBox: css`
+    position: relative;
     display: flex;
     margin-top: 1rem;
   `,
@@ -58,7 +59,7 @@ export const cssObj = {
   searchButton: css`
     position: absolute;
     top: 50%;
-    left: 1rem;
+    left: 1.375rem;
     transform: translate(0, -50%);
     color: ${NEWCOLORS.BLUE300};
 
@@ -74,8 +75,48 @@ export const cssObj = {
     justify-content: space-between;
   `,
 
-  buttonWrapper: css`
-    width: 400px;
-    margin: 4.5rem auto;
+  orderButtonContainer: css`
+    position: relative;
+  `,
+
+  orderToggleButton: css`
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid ${NEWCOLORS.GRAY50};
+    border-radius: 5px;
+    width: 6.625rem;
+    height: 2.5rem;
+    padding: 0 1rem;
+    font-size: 1rem;
+    background-color: ${NEWCOLORS.WHITE};
+    font-weight: 400;
+
+    ::placeholder {
+      color: ${NEWCOLORS.GRAY300};
+    }
+  `,
+
+  orderList: (isOpen: boolean) => css`
+    position: absolute;
+    top: 2.75rem;
+    left: 0;
+    width: 100%;
+    max-height: ${isOpen ? "20rem" : 0};
+    overflow-x: hidden;
+    overflow-y: scroll;
+    z-index: 20;
+    border: ${isOpen ? `1px solid ${NEWCOLORS.GRAY300}` : 0};
+
+    ::-webkit-scrollbar {
+      width: 0.5rem;
+      background-color: ${NEWCOLORS.GRAY50};
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: ${NEWCOLORS.GRAY300};
+    }
   `,
 };
