@@ -7,6 +7,7 @@ export interface RequestObjDef {
   filter?: "todayUpload" | "almostDeadline" | "deadline" | "expired" | "valid";
   size?: number;
   page?: number;
+  searchWord?: string | null;
 }
 
 export interface ResponseObjDef {

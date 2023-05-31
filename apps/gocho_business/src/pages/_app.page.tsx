@@ -13,7 +13,7 @@ import { GA_KEY } from "@/constants";
 import { globalStyle } from "@/styles";
 import { AppPropsWithLayout } from "@/types/nextPageWithLayoutType";
 
-import { PROTECTED_ROUTE_ARR } from "./index/constant";
+import { PROTECTED_ROUTE_ARR } from "./constant";
 
 if (typeof window !== "undefined" && !window.location.href.includes("localhost")) {
   datadogRum.init({
