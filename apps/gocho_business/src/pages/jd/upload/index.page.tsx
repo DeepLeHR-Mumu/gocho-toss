@@ -19,7 +19,7 @@ import { PageLayout } from "@/components";
 import { useAddJd } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 
-import { HeaderPart, TitlePart, BasicPart, RequiredPart, ConditionPart, ReceptPart, PlacePart } from "./part";
+import { HeaderPart, TitlePart, BasicPart, RequiredPart, ConditionPart, PlacePart, ApplyPart } from "./part";
 import { JobFormValues } from "./type";
 import { BLANK_JD, JD_UPLOAD_MESSAGE_OBJ } from "./constant";
 import { getFieldArrayValue, getFieldArrayValueWithNull } from "./util";
@@ -138,7 +138,7 @@ const JdUploadPage: NextPageWithLayout = () => {
           <RequiredPart jobForm={jobForm} control={control} />
           <ConditionPart jobForm={jobForm} control={control} />
           <PlacePart jobForm={jobForm} />
-          <ReceptPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
+          <ApplyPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
         </form>
       </PageLayout>
     </main>

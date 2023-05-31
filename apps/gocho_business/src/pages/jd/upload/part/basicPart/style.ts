@@ -1,27 +1,7 @@
 import { css } from "@emotion/react";
-import { COLORS, NEWCOLORS } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { COLORS } from "shared-style/color";
 
 export const cssObj = {
-  partContainer: css`
-    background-color: ${NEWCOLORS.WHITE};
-    margin-top: 1.25rem;
-    padding: 2rem;
-    border: 1px solid #e2e4e6;
-    border-radius: 1rem;
-    box-shadow: 0 2px 16px 0 #0000000d;
-  `,
-
-  partTitle: css`
-    ${TEXTS.TITLE11};
-    display: block;
-    margin-bottom: 2rem;
-  `,
-
-  inputTitle: css`
-    ${TEXTS.TITLE9};
-  `,
-
   positionButtonContainer: css`
     display: flex;
     gap: 0 1rem;

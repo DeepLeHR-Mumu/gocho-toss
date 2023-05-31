@@ -9,6 +9,8 @@ import { DeleteInputButton, GuideChip, AddFieldButton } from "../../component";
 import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
 import { RequiredPartProps } from "./type";
 import { REQUIRED_ETC_GUIDE_ARR, CERTI_ARR, PREFERRED_ETC_GUIDE_ARR } from "./constant";
+
+import { commonCssObj } from "../style";
 import { cssObj } from "./style";
 
 export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, control }) => {
@@ -56,9 +58,10 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, co
   }, []);
 
   return (
-    <div css={cssObj.partContainer}>
+    <div css={commonCssObj.partContainer}>
+      <strong css={commonCssObj.partTitle}>지원 자격</strong>
       <div css={cssObj.container}>
-        <p>지원 가능 학력</p>
+        <p css={commonCssObj.inputTitle}>지원 가능 학력</p>
         <div css={cssObj.labelContainer}>
           <label css={cssObj.label} htmlFor="middle">
             <input type="checkbox" id="middle" {...register(`middle`)} />
@@ -90,7 +93,7 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, co
         <p css={cssObj.errorMessage} />
       </div>
       <div css={cssObj.containerWithGuide}>
-        <p css={cssObj.inputTitle(Boolean(formState.errors?.required_etc_arr))}>기타 지원 조건</p>
+        <p css={commonCssObj.inputTitle}>기타 지원 조건</p>
         <div css={cssObj.inputContainerWithGuide}>
           {requiredEtcArr.fields.map((item, index) => (
             <div key={`requiredEtcArr${item.id}`}>
@@ -173,7 +176,7 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, co
         </div>
       </div>
       <div css={cssObj.container}>
-        <p css={cssObj.inputTitle(false)}>우대 자격증(선택)</p>
+        <p css={commonCssObj.inputTitle}>우대 자격증(선택)</p>
         <div css={cssObj.optionContainer}>
           <input
             css={cssObj.input(20)}
@@ -228,7 +231,7 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, co
         </div>
       </div>
       <div css={cssObj.containerWithGuide}>
-        <p css={cssObj.inputTitle(Boolean(formState.errors?.preferred_etc_arr))}>기타 우대 사항(선택)</p>
+        <p css={commonCssObj.inputTitle}>기타 우대 사항(선택)</p>
         <div css={cssObj.inputContainerWithGuide}>
           {preferredEtcArr.fields.map((item, index) => (
             <div key={`${preferredEtcArr}${item.id}`}>

@@ -16,6 +16,7 @@ import { INTERNAL_URL } from "@/constants";
 import { DeleteInputButton } from "../../component";
 import { PositionWorkInfoPartProps } from "./type";
 import { PLACE_TYPE_ARR } from "./constant";
+import { commonCssObj } from "../style";
 import { cssObj } from "./style";
 
 export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobForm }) => {
@@ -46,9 +47,10 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
   };
 
   return (
-    <div css={cssObj.partContainer}>
+    <div css={commonCssObj.partContainer}>
+      <strong css={commonCssObj.partTitle}>근무지</strong>
       <div css={cssObj.container}>
-        <p css={cssObj.inputTitle(false)}>근무지 종류</p>
+        <p css={commonCssObj.inputTitle}>근무지 종류</p>
         <div css={cssObj.labelContainer}>
           {PLACE_TYPE_ARR.map((placeType) => (
             <div key={placeType.name}>
@@ -93,7 +95,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                 })}
               />
               <input css={cssObj.hiddenInput} {...register(`place.address_arr`)} />
-              <p css={cssObj.inputTitle(Boolean(formState.errors?.place?.factory_arr))}>공장 근무지</p>
+              <p css={commonCssObj.inputTitle}>공장 근무지</p>
               <div css={cssObj.factoryInputWrapper}>
                 <div css={cssObj.optionContainer}>
                   <button
@@ -210,7 +212,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
               <br />
               {watch("place").address_arr?.length !== 0 && (
                 <>
-                  <p css={cssObj.inputTitle(false)}>일반 근무지</p>
+                  <p css={commonCssObj.inputTitle}>일반 근무지</p>
                   <div css={cssObj.placeContainer}>
                     {watch("place").address_arr?.map((address) => (
                       <div key={address}>
@@ -243,7 +245,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
           )}
           {watch("place").type === "해외" && (
             <>
-              <p css={cssObj.inputTitle(Boolean(formState.errors?.place?.etc))}>해외 근무지</p>
+              <p css={commonCssObj.inputTitle}>해외 근무지</p>
               <input
                 css={cssObj.input(47)}
                 maxLength={100}
@@ -258,7 +260,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
           )}
           {watch("place").type === "기타" && (
             <>
-              <p css={cssObj.inputTitle(Boolean(formState.errors?.place?.etc))}>기타 근무지</p>
+              <p css={commonCssObj.inputTitle}>기타 근무지</p>
               <input
                 css={cssObj.input(47)}
                 maxLength={100}

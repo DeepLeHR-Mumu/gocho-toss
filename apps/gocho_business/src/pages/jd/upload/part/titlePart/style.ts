@@ -6,7 +6,7 @@ export const cssObj = {
   partContainer: css`
     background-color: ${NEWCOLORS.WHITE};
     padding: 2rem;
-    border: 1px solid #e2e4e6;
+    border: 1px solid ${NEWCOLORS.GRAY200};
     border-radius: 1rem;
     box-shadow: 0 2px 16px 0 #0000000d;
     text-align: center;

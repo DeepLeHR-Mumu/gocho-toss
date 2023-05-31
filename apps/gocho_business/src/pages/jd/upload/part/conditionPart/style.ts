@@ -1,16 +1,7 @@
 import { css } from "@emotion/react";
-import { COLORS, NEWCOLORS } from "shared-style/color";
+import { COLORS } from "shared-style/color";
 
 export const cssObj = {
-  partContainer: css`
-    background-color: ${NEWCOLORS.WHITE};
-    margin-top: 1.25rem;
-    padding: 2rem;
-    border: 1px solid #e2e4e6;
-    border-radius: 1rem;
-    box-shadow: 0 2px 16px 0 #0000000d;
-  `,
-
   container: css`
     margin-bottom: 1rem;
   `,
@@ -165,11 +156,6 @@ export const cssObj = {
     margin: 0.5rem 0 2rem;
     padding: 1.5rem;
     background-color: ${COLORS.GRAY100};
-  `,
-
-  inputTitle: (isError: boolean) => css`
-    color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
-    margin-bottom: 0.25rem;
   `,
 
   inputContainer: css`

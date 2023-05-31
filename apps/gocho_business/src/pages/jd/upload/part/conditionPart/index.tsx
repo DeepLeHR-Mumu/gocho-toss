@@ -8,6 +8,7 @@ import { DeleteInputButton, AddFieldButton, GuideChip } from "../../component";
 import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
 import { ConditionPartProps } from "./type";
 import { ROTATION_ARR } from "./constant";
+import { commonCssObj } from "../style";
 import { cssObj } from "./style";
 
 export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, control }) => {
@@ -39,9 +40,10 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
   };
 
   return (
-    <div css={cssObj.partContainer}>
+    <div css={commonCssObj.partContainer}>
+      <strong css={commonCssObj.partTitle}>근무 조건</strong>
       <div css={cssObj.container}>
-        <p css={cssObj.inputTitle(Boolean(formState.errors?.rotation_arr))}>교대 형태</p>
+        <p css={commonCssObj.inputTitle}>교대 형태</p>
         <div css={cssObj.optionContainer}>
           <input
             css={cssObj.hiddenInput}
@@ -91,7 +93,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
         </p>
       </div>
       <div css={cssObj.containerWithGuide}>
-        <p css={cssObj.inputTitle(Boolean(formState.errors?.pay_arr))}>급여</p>
+        <p css={commonCssObj.inputTitle}>급여</p>
         <div css={cssObj.inputContainerWithGuide}>
           {payArr.fields.map((item, index) => (
             <div key={`${payArr}${item.id}`}>

@@ -8,6 +8,7 @@ import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { DeleteInputButton, AddFieldButton } from "../../component";
 import { BasicPartProps } from "./type";
 import { CONTRACT_TYPE_ARR, TASK_ARR, REQUIRED_EXP_ARR } from "./constant";
+import { commonCssObj } from "../style";
 import { cssObj } from "./style";
 
 export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, control }) => {
@@ -81,8 +82,8 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, control 
   }, [jobForm, isMinYearDisabled, isMaxYearDisabled, setValue, clearErrors]);
 
   return (
-    <div css={cssObj.partContainer}>
-      <strong css={cssObj.partTitle}>모집요강</strong>
+    <div css={commonCssObj.partContainer}>
+      <strong css={commonCssObj.partTitle}>모집요강</strong>
       <div css={cssObj.container}>
         <input
           css={cssObj.hiddenInput}
@@ -96,7 +97,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, control 
             required: "2차 직무는 필수 입력 사항입니다",
           })}
         />
-        <p css={cssObj.inputTitle}>채용 직무</p>
+        <p css={commonCssObj.inputTitle}>채용 직무</p>
         <div css={cssObj.taskInputContainer}>
           <div>
             <div css={cssObj.taskContainer}>
@@ -190,7 +191,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, control 
         </div>
       </div>
       <div css={cssObj.container}>
-        <p css={cssObj.inputTitle}>세부 직무 내용</p>
+        <p css={commonCssObj.inputTitle}>세부 직무 내용</p>
         <div css={cssObj.inputContainer}>
           {taskDetailArr.fields.map((item, index) => (
             <div key={`taskDetailArr${item.id}`}>
@@ -236,7 +237,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, control 
         </div>
       </div>
       <div css={cssObj.container}>
-        <p css={cssObj.inputTitle}>채용 인원</p>
+        <p css={commonCssObj.inputTitle}>채용 인원</p>
         <div css={cssObj.hireNumberContainer}>
           <div css={cssObj.hireNumberInputContainer}>
             {(watch("hire_number") || 1) < 0 ? (
@@ -281,7 +282,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, control 
       </div>
       <div css={cssObj.contractTypeWrapper}>
         <div css={cssObj.container}>
-          <p css={cssObj.inputTitle}>계약 형태</p>
+          <p css={commonCssObj.inputTitle}>계약 형태</p>
           <div css={cssObj.labelContainer}>
             {CONTRACT_TYPE_ARR.map((contractName) => (
               <SharedRadioButton
@@ -350,7 +351,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, control 
       </div>
       <div css={cssObj.contractTypeWrapper}>
         <div css={cssObj.container}>
-          <p css={cssObj.inputTitle}>경력 조건</p>
+          <p css={commonCssObj.inputTitle}>경력 조건</p>
           <div css={cssObj.labelContainer}>
             {REQUIRED_EXP_ARR.map((expName) => (
               <label key={`${expName}`} htmlFor={`${expName}`} css={cssObj.label}>
@@ -371,7 +372,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, control 
           <p css={cssObj.errorMessage}>{formState.errors?.required_exp && formState.errors?.required_exp?.message}</p>
         </div>
         <div css={cssObj.container}>
-          <p css={cssObj.inputTitle}>최소경력(연)</p>
+          <p css={commonCssObj.inputTitle}>최소경력(연)</p>
           <div css={cssObj.yearInputContainer}>
             <input
               type="number"
@@ -407,7 +408,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, control 
           <p css={cssObj.errorMessage}>{formState.errors?.min_year && formState.errors?.min_year?.message}</p>
         </div>
         <div css={cssObj.container}>
-          <p css={cssObj.inputTitle}>최대경력(연)</p>
+          <p css={commonCssObj.inputTitle}>최대경력(연)</p>
           <div css={cssObj.yearInputContainer}>
             <input
               type="number"

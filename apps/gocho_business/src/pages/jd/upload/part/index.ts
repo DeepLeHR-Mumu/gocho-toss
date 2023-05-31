@@ -4,4 +4,4 @@ export { BasicPart } from "./basicPart";
 export { RequiredPart } from "./requiredPart";
 export { ConditionPart } from "./conditionPart";
 export { PlacePart } from "./placePart";
-export { ReceptPart } from "./receptPart";
+export { ApplyPart } from "./applyPart";
