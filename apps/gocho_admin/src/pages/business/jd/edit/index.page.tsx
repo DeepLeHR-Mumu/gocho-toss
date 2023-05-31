@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useQueryClient } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { useJdDetail, useEditJdRequest, useAcceptUploadJd, useRejectUploadJd } from "@/api";
+import { useJdDetail, useEditJdRequest, useAcceptModifyJd, useRejectModifyJd } from "@/api";
 import { jdArrKeyObj } from "@/api/jd/useJdArr/type";
 import { mainContainer, pageTitle } from "@/style/commonStyles";
 import { ErrorScreen, LoadingScreen, GlobalLayout } from "@/component";
@@ -24,8 +24,8 @@ const JdEditDetail: NextPageWithLayout = () => {
 
   const { data: jdBeforeData, isLoading: isBeforeLoading, isError: isBeforeError } = useJdDetail({ id: jdId });
   const { data: jdAfterData, isLoading: isAfterLoading, isError: isAfterError } = useEditJdRequest({ id: jdId });
-  const { mutate: acceptJdMutate } = useAcceptUploadJd();
-  const { mutate: rejectJdMutate } = useRejectUploadJd();
+  const { mutate: acceptJdMutate } = useAcceptModifyJd();
+  const { mutate: rejectJdMutate } = useRejectModifyJd();
 
   const acceptJdHandler = () => {
     acceptJdMutate(
