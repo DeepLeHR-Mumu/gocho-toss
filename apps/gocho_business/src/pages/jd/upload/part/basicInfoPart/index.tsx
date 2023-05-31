@@ -50,26 +50,6 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
   return (
     <section css={cssObj.partContainer}>
       <div css={cssObj.dataWrapper}>
-        <div css={cssObj.container}>
-          <p css={cssObj.inputTitle(Boolean(formState.errors.title))}>공고 제목</p>
-          <input
-            css={cssObj.input(47)}
-            placeholder="공고 제목 (최대 50자)"
-            maxLength={50}
-            onFocus={() => {
-              clearErrors("title");
-            }}
-            {...register("title", {
-              required: "공고 제목은 필수 입력 사항입니다",
-              onBlur: (blurEvent) => {
-                if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                  setValue("title", "");
-                }
-              },
-            })}
-          />
-          <p css={cssObj.errorMessage}>{formState.errors.title && formState.errors.title.message}</p>
-        </div>
         <div css={cssObj.dateInputContainer}>
           <div>
             <p css={cssObj.inputTitle(Boolean(formState.errors.start_time))}>채용시작 일시</p>

@@ -18,6 +18,7 @@ import type { NextPageWithLayout } from "@/types";
 import { PageLayout } from "@/components";
 import { useAddJd } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
+import { TitleInfoPart } from "@/pages/jd/upload/part/titleInfoPart";
 import {
   HeaderPart,
   BasicInfoPart,
@@ -140,6 +141,7 @@ const JdUploadPage: NextPageWithLayout = () => {
       <PageLayout>
         <div css={cssObj.pageContainer}>
           <form onSubmit={handleSubmit(jobSubmitHandler)}>
+            <TitleInfoPart jobForm={jobForm} />
             <BasicInfoPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
             <PositionTitleInfoPart jobForm={jobForm} control={control} />
             <PositionRequiredInfoPart jobForm={jobForm} control={control} />
