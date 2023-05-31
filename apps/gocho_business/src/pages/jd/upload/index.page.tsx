@@ -18,15 +18,8 @@ import type { NextPageWithLayout } from "@/types";
 import { PageLayout } from "@/components";
 import { useAddJd } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
-import { TitleInfoPart } from "@/pages/jd/upload/part/titleInfoPart";
-import { PlacePart } from "@/pages/jd/upload/part/placePart";
-import {
-  HeaderPart,
-  BasicInfoPart,
-  PositionTitleInfoPart,
-  PositionRequiredInfoPart,
-  PositionWorkInfoPart,
-} from "./part";
+
+import { HeaderPart, TitlePart, BasicPart, RequiredPart, ConditionPart, ReceptPart, PlacePart } from "./part";
 import { JobFormValues } from "./type";
 import { BLANK_JD, JD_UPLOAD_MESSAGE_OBJ } from "./constant";
 import { getFieldArrayValue, getFieldArrayValueWithNull } from "./util";
@@ -140,12 +133,12 @@ const JdUploadPage: NextPageWithLayout = () => {
       <HeaderPart />
       <PageLayout>
         <form onSubmit={handleSubmit(jobSubmitHandler)}>
-          <TitleInfoPart jobForm={jobForm} />
-          <PositionTitleInfoPart jobForm={jobForm} control={control} />
-          <PositionRequiredInfoPart jobForm={jobForm} control={control} />
-          <PositionWorkInfoPart jobForm={jobForm} control={control} />
+          <TitlePart jobForm={jobForm} />
+          <BasicPart jobForm={jobForm} control={control} />
+          <RequiredPart jobForm={jobForm} control={control} />
+          <ConditionPart jobForm={jobForm} control={control} />
           <PlacePart jobForm={jobForm} />
-          <BasicInfoPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
+          <ReceptPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
         </form>
       </PageLayout>
     </main>

@@ -6,11 +6,11 @@ import { CheckBox } from "shared-ui/common/atom/checkbox";
 
 import { DeleteInputButton, AddFieldButton, GuideChip } from "../../component";
 import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
-import { PositionWorkInfoPartProps } from "./type";
+import { ConditionPartProps } from "./type";
 import { ROTATION_ARR } from "./constant";
 import { cssObj } from "./style";
 
-export const PositionWorkInfoPart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobForm, control }) => {
+export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, control }) => {
   const [payIsFocusedArr, setPayIsFocusedArr] = useState<boolean[]>([false]);
   const [isRotationOpen, setIsRotationOpen] = useState<boolean>(false);
 

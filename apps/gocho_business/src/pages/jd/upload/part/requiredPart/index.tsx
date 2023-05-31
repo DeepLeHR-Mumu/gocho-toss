@@ -7,11 +7,11 @@ import { CheckBox } from "shared-ui/common/atom/checkbox";
 
 import { DeleteInputButton, GuideChip, AddFieldButton } from "../../component";
 import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
-import { PositionRequiredInfoPartProps } from "./type";
+import { RequiredPartProps } from "./type";
 import { REQUIRED_ETC_GUIDE_ARR, CERTI_ARR, PREFERRED_ETC_GUIDE_ARR } from "./constant";
 import { cssObj } from "./style";
 
-export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPartProps> = ({ jobForm, control }) => {
+export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, control }) => {
   const [requiredEtcIsFocusedArr, setRequiredEtcIsFocusedArr] = useState<boolean[]>([false]);
 
   const [randomRequiredEtcGuideArr, setRandomRequiredEtcGuideArr] = useState<string[]>([]);

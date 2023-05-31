@@ -1,5 +1,7 @@
-export { BasicInfoPart } from "./basicInfoPart";
 export { HeaderPart } from "./headerPart";
-export { PositionRequiredInfoPart } from "./positionRequiredInfoPart";
-export { PositionTitleInfoPart } from "./positionTitleInfoPart";
-export { PositionWorkInfoPart } from "./positionWorkInfoPart";
+export { TitlePart } from "./titlePart";
+export { BasicPart } from "./basicPart";
+export { RequiredPart } from "./requiredPart";
+export { ConditionPart } from "./conditionPart";
+export { PlacePart } from "./placePart";
+export { ReceptPart } from "./receptPart";

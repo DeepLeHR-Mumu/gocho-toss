@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
-import { BasicInfoPartProps } from "./type";
+import { TitlePartProps } from "./type";
 import { cssObj } from "./style";
 
-export const TitleInfoPart: FunctionComponent<BasicInfoPartProps> = ({ jobForm }) => {
+export const TitlePart: FunctionComponent<TitlePartProps> = ({ jobForm }) => {
   const { setValue, formState, register, clearErrors } = jobForm;
 
   return (

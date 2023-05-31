@@ -8,16 +8,11 @@ import { SharedBoxLink } from "shared-ui/business/sharedBoxLink";
 
 import { DeleteInputButton, GuideChip, AddFieldButton } from "../../component";
 import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
-import { BasicInfoPartProps } from "./type";
+import { ReceptPartProps } from "./type";
 import { PROCESS_GUIDE_ARR, APPLY_ROUTE_GUIDE_ARR, APPLY_EXTERNAL_LINK_ARR } from "./constant";
 import { cssObj } from "./style";
 
-export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
-  jobForm,
-  processArr,
-  applyRouteArr,
-  etcArr,
-}) => {
+export const ReceptPart: FunctionComponent<ReceptPartProps> = ({ jobForm, processArr, applyRouteArr, etcArr }) => {
   const [processIsFocusedArr, setProcessIsFocusedArr] = useState<boolean[]>(new Array(8).fill(false));
   const [applyRouteIsFocusedArr, setApplyRouteIsFocusedArr] = useState<boolean[]>([false]);
   const [isAlways, setIsAlways] = useState<boolean>(false);

@@ -6,11 +6,11 @@ import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 
 import { DeleteInputButton, AddFieldButton } from "../../component";
-import { PositionTitleInfoPartProps } from "./type";
+import { BasicPartProps } from "./type";
 import { CONTRACT_TYPE_ARR, TASK_ARR, REQUIRED_EXP_ARR } from "./constant";
 import { cssObj } from "./style";
 
-export const PositionTitleInfoPart: FunctionComponent<PositionTitleInfoPartProps> = ({ jobForm, control }) => {
+export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, control }) => {
   const [isMainTaskOpen, setIsMainTaskOpen] = useState<boolean>(false);
   const [isSubTaskOpen, setIsSubTaskOpen] = useState<boolean>(false);
   const [hireNumberLabel, setHireNumberLabel] = useState<string>("");
