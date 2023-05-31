@@ -1,11 +1,8 @@
 import { useEffect, useRef } from "react";
 import dayjs from "dayjs";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import { BiRocket } from "react-icons/bi";
 import { useRouter } from "next/router";
 
-import { SharedButton } from "shared-ui/business/sharedButton";
-import { COLORS } from "shared-style/color";
 import { usePreventRouting } from "shared-hooks";
 
 import { useToast } from "@/globalStates";
@@ -139,29 +136,14 @@ const JdUploadPage: NextPageWithLayout = () => {
 
   return (
     <main>
+      <HeaderPart />
       <PageLayout>
         <div css={cssObj.pageContainer}>
           <form onSubmit={handleSubmit(jobSubmitHandler)}>
-            <HeaderPart />
             <BasicInfoPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
-            <div css={cssObj.cardContainer}>
-              <PositionTitleInfoPart jobForm={jobForm} control={control} />
-              <PositionRequiredInfoPart jobForm={jobForm} control={control} />
-              <PositionWorkInfoPart jobForm={jobForm} control={control} />
-            </div>
-
-            <div css={cssObj.buttonWrapper}>
-              <SharedButton
-                radius="round"
-                fontColor={`${COLORS.GRAY100}`}
-                backgroundColor={`${COLORS.BLUE_FIRST40}`}
-                isFullWidth
-                size="xLarge"
-                text="공고 등록"
-                iconObj={{ icon: BiRocket, location: "left" }}
-                onClickHandler="submit"
-              />
-            </div>
+            <PositionTitleInfoPart jobForm={jobForm} control={control} />
+            <PositionRequiredInfoPart jobForm={jobForm} control={control} />
+            <PositionWorkInfoPart jobForm={jobForm} control={control} />
           </form>
         </div>
       </PageLayout>

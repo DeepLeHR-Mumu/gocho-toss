@@ -6,17 +6,6 @@ export const cssObj = {
     margin-top: 2.5rem;
   `,
 
-  titleWrapper: css`
-    padding: 1rem 2rem;
-    background-color: #e9f6ff;
-    border-radius: 1.5rem;
-    margin-bottom: 1rem;
-  `,
-
-  title: css`
-    font-size: 1.25rem;
-  `,
-
   dataWrapper: css`
     padding: 2rem;
     box-shadow: 0 0 8px rgba(85, 85, 85, 0.25);

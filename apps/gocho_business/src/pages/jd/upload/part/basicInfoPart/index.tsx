@@ -49,10 +49,6 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
 
   return (
     <section css={cssObj.partContainer}>
-      <div css={cssObj.titleWrapper}>
-        <h2 css={cssObj.title}>접수 정보</h2>
-        <p>공고 접수와 관련된 공통 정보들 입니다</p>
-      </div>
       <div css={cssObj.dataWrapper}>
         <div css={cssObj.container}>
           <p css={cssObj.inputTitle(Boolean(formState.errors.title))}>공고 제목</p>
