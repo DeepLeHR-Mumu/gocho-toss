@@ -148,6 +148,21 @@ export const cssObj = {
     border-radius: 50%;
   `,
 
+  placeTypeLabelData: (isSelected: boolean) => css`
+    display: flex;
+    background-color: ${isSelected ? `${COLORS.GRAY100}` : `${COLORS.GRAY80}`};
+    padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+    margin-left: -2rem;
+    margin-right: 0.75rem;
+    align-items: center;
+    gap: 0 0.25rem;
+  `,
+
+  placeTypeLabelIcon: css`
+    margin-top: 0.25rem;
+    font-size: 1.25rem;
+  `,
+
   desc: css`
     display: flex;
     align-items: center;
@@ -165,6 +180,50 @@ export const cssObj = {
     margin: 0.5rem 0 2rem;
     padding: 1.5rem;
     background-color: ${COLORS.GRAY100};
+  `,
+
+  factoryInputWrapper: css`
+    display: flex;
+    align-items: center;
+    gap: 0 0.5rem;
+  `,
+
+  uploadFactoryDesc: css`
+    margin-left: 1rem;
+  `,
+
+  uploadFactoryButton: css`
+    color: ${COLORS.BLUE_FIRST40};
+    margin-left: 0.5rem;
+  `,
+
+  placeContainer: css`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.75rem 0;
+  `,
+
+  factoryBox: css`
+    display: flex;
+    align-items: center;
+    gap: 0 0.5rem;
+    border-radius: 2rem;
+    border: 1px solid ${COLORS.GRAY70};
+    background-color: ${COLORS.GRAY100};
+    height: 2.25rem;
+    padding: 0 0.5rem 0 1rem;
+  `,
+
+  addressBox: css`
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0 1rem;
+    border-radius: 2rem;
+    background-color: ${COLORS.GRAY90};
+    height: 2.5rem;
+    padding: 0 2.5rem 0 1rem;
   `,
 
   inputTitle: (isError: boolean) => css`

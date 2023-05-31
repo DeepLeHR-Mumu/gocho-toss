@@ -19,6 +19,7 @@ import { PageLayout } from "@/components";
 import { useAddJd } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 import { TitleInfoPart } from "@/pages/jd/upload/part/titleInfoPart";
+import { PlacePart } from "@/pages/jd/upload/part/placePart";
 import {
   HeaderPart,
   BasicInfoPart,
@@ -29,7 +30,6 @@ import {
 import { JobFormValues } from "./type";
 import { BLANK_JD, JD_UPLOAD_MESSAGE_OBJ } from "./constant";
 import { getFieldArrayValue, getFieldArrayValueWithNull } from "./util";
-import { cssObj } from "./style";
 
 const JdUploadPage: NextPageWithLayout = () => {
   const isLoading = useRef(false);
@@ -139,15 +139,14 @@ const JdUploadPage: NextPageWithLayout = () => {
     <main>
       <HeaderPart />
       <PageLayout>
-        <div css={cssObj.pageContainer}>
-          <form onSubmit={handleSubmit(jobSubmitHandler)}>
-            <TitleInfoPart jobForm={jobForm} />
-            <BasicInfoPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
-            <PositionTitleInfoPart jobForm={jobForm} control={control} />
-            <PositionRequiredInfoPart jobForm={jobForm} control={control} />
-            <PositionWorkInfoPart jobForm={jobForm} control={control} />
-          </form>
-        </div>
+        <form onSubmit={handleSubmit(jobSubmitHandler)}>
+          <TitleInfoPart jobForm={jobForm} />
+          <PositionTitleInfoPart jobForm={jobForm} control={control} />
+          <PositionRequiredInfoPart jobForm={jobForm} control={control} />
+          <PositionWorkInfoPart jobForm={jobForm} control={control} />
+          <PlacePart jobForm={jobForm} />
+          <BasicInfoPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
+        </form>
       </PageLayout>
     </main>
   );

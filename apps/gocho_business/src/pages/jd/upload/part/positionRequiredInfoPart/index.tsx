@@ -1,35 +1,49 @@
-import { ChangeEvent, FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
+import { FiX } from "react-icons/fi";
 import { useFieldArray } from "react-hook-form";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
-import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 
 import { DeleteInputButton, GuideChip, AddFieldButton } from "../../component";
 import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
 import { PositionRequiredInfoPartProps } from "./type";
-import { CONTRACT_TYPE_ARR, REQUIRED_EXP_ARR, REQUIRED_ETC_GUIDE_ARR } from "./constant";
+import { REQUIRED_ETC_GUIDE_ARR, CERTI_ARR, PREFERRED_ETC_GUIDE_ARR } from "./constant";
 import { cssObj } from "./style";
 
 export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPartProps> = ({ jobForm, control }) => {
   const [requiredEtcIsFocusedArr, setRequiredEtcIsFocusedArr] = useState<boolean[]>([false]);
-  const [isMinYear, setIsMinYear] = useState<boolean>(false);
-  const [isMaxYear, setIsMaxYear] = useState<boolean>(false);
-  const [randomRequiredEtcGuideArr, setRandomRequiredEtcGuideArr] = useState<string[]>([]);
 
-  const { watch, setValue, clearErrors, trigger, formState, register, setError } = jobForm;
+  const [randomRequiredEtcGuideArr, setRandomRequiredEtcGuideArr] = useState<string[]>([]);
+  const [preferredEtcIsFocusedArr, setPreferredEtcIsFocusedArr] = useState<boolean[]>([false]);
+  const [certiSearchWord, setCertiSearchWord] = useState<string>("");
+  const [isCertiSearchFocused, setIsCertiSearchFocused] = useState<boolean>(false);
+  const [randomPreferredEtcGuideArr, setRandomPreferredEtcGuideArr] = useState<string[]>([]);
+
+  const { watch, setValue, clearErrors, trigger, formState, register } = jobForm;
 
   const requiredEtcArr = useFieldArray({
     control,
     name: `required_etc_arr`,
   });
 
-  const conversionRateHandler = (event: ChangeEvent<HTMLInputElement>, isError: boolean) => {
-    if (isError && Number(event.target.value) === 0) {
-      setError(`conversion_rate`, {
-        type: "required",
-        message: "전환율은 필수 입력 값입니다",
-      });
+  const preferredEtcArr = useFieldArray({
+    control,
+    name: `preferred_etc_arr`,
+  });
+
+  const certiClickHandler = (certi: string) => {
+    const totalNumber = watch("preferred_certi_arr")?.length || 0;
+    const isInList = watch("preferred_certi_arr")?.includes(certi);
+
+    if (totalNumber < 10) {
+      if (isInList) {
+        setValue(`preferred_certi_arr`, [
+          ...(watch("preferred_certi_arr")?.filter((element) => element !== certi) || []),
+        ]);
+      } else {
+        setValue(`preferred_certi_arr`, [...(watch("preferred_certi_arr") || []), certi]);
+      }
     }
   };
 
@@ -37,96 +51,12 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
     setRandomRequiredEtcGuideArr(REQUIRED_ETC_GUIDE_ARR.sort(() => Math.random() - 0.5).slice(0, 3));
   }, []);
 
-  const isConversionDisabled = watch("contract_type") !== "인턴" && watch("contract_type") !== "계약>정규";
-
-  const isYearDisabled = watch("required_exp") !== "경력" && watch("required_exp") !== "신입/경력";
-
-  const isMinYearDisabled = isYearDisabled || isMinYear;
-  const isMaxYearDisabled = isYearDisabled || isMaxYear;
-
   useEffect(() => {
-    if (isMinYearDisabled) {
-      setValue(`min_year`, null);
-      clearErrors(`min_year`);
-    }
-
-    if (isMaxYearDisabled) {
-      setValue(`max_year`, null);
-      clearErrors(`max_year`);
-    }
-  }, [jobForm, isMinYearDisabled, isMaxYearDisabled, setValue, clearErrors]);
+    setRandomPreferredEtcGuideArr(PREFERRED_ETC_GUIDE_ARR.sort(() => Math.random() - 0.5).slice(0, 3));
+  }, []);
 
   return (
-    <>
-      <div css={cssObj.contractTypeWrapper}>
-        <div css={cssObj.container}>
-          <p css={cssObj.inputTitle(Boolean(formState.errors?.contract_type))}>계약 형태</p>
-          <div css={cssObj.labelContainer}>
-            {CONTRACT_TYPE_ARR.map((contractName) => (
-              <SharedRadioButton
-                key={contractName}
-                value={contractName}
-                id={contractName}
-                registerObj={register(`contract_type`, {
-                  required: "계약 형태는 필수 입력 값입니다",
-                  onChange: () => {
-                    if (!isConversionDisabled) {
-                      clearErrors(`conversion_rate`);
-                      setValue(`conversion_rate`, null);
-                    }
-                  },
-                })}
-              >
-                <p css={cssObj.radioLabel}>{contractName}</p>
-              </SharedRadioButton>
-            ))}
-          </div>
-          <p css={cssObj.errorMessage}>{formState.errors?.contract_type && formState.errors?.contract_type?.message}</p>
-        </div>
-        <div css={cssObj.container}>
-          <p>전환율</p>
-          <div css={cssObj.conversionRateContainer}>
-            <div css={cssObj.conversionRateSliderBox}>
-              <input
-                css={cssObj.rangeSlider(isConversionDisabled)}
-                type="range"
-                min="0"
-                max="100"
-                step="5"
-                disabled={isConversionDisabled}
-                value={watch("conversion_rate") || 0}
-                onChange={(e) => {
-                  setValue(`conversion_rate`, Number(e.target.value));
-                  conversionRateHandler(e, !isConversionDisabled);
-                  if (Number(e.target.value) !== 0) clearErrors(`conversion_rate`);
-                }}
-              />
-              <p css={cssObj.conversionRateLabel(watch("conversion_rate") || 0)}>{watch("conversion_rate") || 0}%</p>
-            </div>
-            <div css={cssObj.conversionRateInputContainer}>
-              <input
-                css={cssObj.activatableInput(isConversionDisabled)}
-                type="number"
-                min="0"
-                max="100"
-                step="1"
-                {...register(`conversion_rate`, {
-                  required: { value: !isConversionDisabled, message: "전환율은 필수 입력 값입니다" },
-                  min: { value: 0, message: "최소값은 1입니다" },
-                  max: { value: 100, message: "최대값은 100입니다" },
-                  valueAsNumber: true,
-                  disabled: isConversionDisabled,
-                  onChange: (e) => conversionRateHandler(e, !isConversionDisabled),
-                })}
-              />
-              %
-            </div>
-          </div>
-          <p css={cssObj.errorMessage}>
-            {formState.errors?.conversion_rate && formState.errors?.conversion_rate?.message}
-          </p>
-        </div>
-      </div>
+    <div css={cssObj.partContainer}>
       <div css={cssObj.container}>
         <p>지원 가능 학력</p>
         <div css={cssObj.labelContainer}>
@@ -158,101 +88,6 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           </p>
         </div>
         <p css={cssObj.errorMessage} />
-      </div>
-      <div css={cssObj.contractTypeWrapper}>
-        <div css={cssObj.container}>
-          <p css={cssObj.inputTitle(Boolean(formState.errors?.required_exp))}>경력 조건</p>
-          <div css={cssObj.labelContainer}>
-            {REQUIRED_EXP_ARR.map((expName) => (
-              <label key={`${expName}`} htmlFor={`${expName}`} css={cssObj.label}>
-                <input
-                  type="radio"
-                  id={`${expName}`}
-                  css={cssObj.radio}
-                  {...register(`required_exp`, {
-                    required: "경력 조건은 필수 입력 사항입니다",
-                  })}
-                  value={expName}
-                />
-                <div css={cssObj.radioBox} />
-                <p css={cssObj.radioLabel}>{expName}</p>
-              </label>
-            ))}
-          </div>
-          <p css={cssObj.errorMessage}>{formState.errors?.required_exp && formState.errors?.required_exp?.message}</p>
-        </div>
-        <div css={cssObj.container}>
-          <p css={cssObj.inputTitle(Boolean(formState.errors?.min_year))}>최소경력(연)</p>
-          <div css={cssObj.yearInputContainer}>
-            <input
-              type="number"
-              min="1"
-              max="50"
-              css={cssObj.activatableInput(isMinYearDisabled)}
-              {...register(`min_year`, {
-                required: { value: !isMinYearDisabled, message: "최소 경력은 필수 입력 사항입니다" },
-                disabled: isMinYearDisabled,
-                min: { value: 1, message: "최소 경력은 1년 이상이어야 합니다" },
-                max: { value: 50, message: "최소 경력은 50년 이하이어야 합니다" },
-                onBlur: () => trigger(`max_year`),
-                valueAsNumber: true,
-              })}
-            />
-            <label htmlFor="isMinYear" css={cssObj.toggleSwitch(isMinYear, isYearDisabled)}>
-              <input
-                type="checkbox"
-                id="isMinYear"
-                hidden
-                disabled={isYearDisabled}
-                onClick={() => {
-                  if (!isMinYear) {
-                    clearErrors(`min_year`);
-                  }
-                  setIsMinYear((prev) => !prev);
-                }}
-              />
-              <span css={cssObj.toggleButton(isMinYear)} />
-            </label>
-            <p>무관</p>
-          </div>
-          <p css={cssObj.errorMessage}>{formState.errors?.min_year && formState.errors?.min_year?.message}</p>
-        </div>
-        <div css={cssObj.container}>
-          <p css={cssObj.inputTitle(Boolean(formState.errors?.max_year))}>최대경력(연)</p>
-          <div css={cssObj.yearInputContainer}>
-            <input
-              type="number"
-              min="1"
-              max="100"
-              css={cssObj.activatableInput(isMaxYearDisabled)}
-              {...register(`max_year`, {
-                required: { value: !isMaxYearDisabled, message: "최대 경력은 필수 입력 사항입니다" },
-                disabled: isMaxYearDisabled,
-                max: { value: 50, message: "최소 경력은 50년 이하이어야 합니다" },
-                validate: (value) =>
-                  (value || 1) > (watch("min_year") || 0) || "최소 경력 조건이 최대보다 작거나 같을 수 없습니다.",
-                valueAsNumber: true,
-              })}
-            />
-            <label htmlFor="isMaxYear" css={cssObj.toggleSwitch(isMaxYear, isYearDisabled)}>
-              <input
-                type="checkbox"
-                id="isMaxYear"
-                hidden
-                disabled={isYearDisabled}
-                onClick={() => {
-                  if (!isMaxYear) {
-                    clearErrors(`max_year`);
-                  }
-                  setIsMaxYear((prev) => !prev);
-                }}
-              />
-              <span css={cssObj.toggleButton(isMaxYear)} />
-            </label>
-            <p>무관</p>
-          </div>
-          <p css={cssObj.errorMessage}>{formState.errors?.max_year && formState.errors?.max_year?.message}</p>
-        </div>
       </div>
       <div css={cssObj.containerWithGuide}>
         <p css={cssObj.inputTitle(Boolean(formState.errors?.required_etc_arr))}>기타 지원 조건</p>
@@ -337,6 +172,137 @@ export const PositionRequiredInfoPart: FunctionComponent<PositionRequiredInfoPar
           )}
         </div>
       </div>
-    </>
+      <div css={cssObj.container}>
+        <p css={cssObj.inputTitle(false)}>우대 자격증(선택)</p>
+        <div css={cssObj.optionContainer}>
+          <input
+            css={cssObj.input(20)}
+            type="text"
+            onFocus={() => {
+              setIsCertiSearchFocused(true);
+            }}
+            onBlur={() => {
+              setIsCertiSearchFocused(false);
+            }}
+            placeholder="자격증 검색"
+            onChange={(e) => {
+              setCertiSearchWord(e.target.value);
+            }}
+          />
+          <div css={cssObj.optionList(isCertiSearchFocused)}>
+            {CERTI_ARR.filter((prevCerti) => prevCerti.includes(certiSearchWord)).map((certi) => (
+              <button
+                type="button"
+                css={cssObj.option}
+                key={certi}
+                value={certi}
+                onMouseDown={(event) => {
+                  event.preventDefault();
+                  certiClickHandler(certi);
+                }}
+              >
+                <CheckBox isChecked={watch("preferred_certi_arr")?.includes(certi) || false} />
+                {certi}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div css={cssObj.selectedCertiContainer}>
+          {watch("preferred_certi_arr")?.map((certi) => (
+            <div key={certi} css={cssObj.certiLabel}>
+              {certi}
+              <button
+                type="button"
+                css={cssObj.smallDeleteButton}
+                onClick={() => {
+                  setValue(`preferred_certi_arr`, [
+                    ...(jobForm.watch("preferred_certi_arr")?.filter((element) => element !== certi) || []),
+                  ]);
+                }}
+              >
+                <FiX />
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div css={cssObj.containerWithGuide}>
+        <p css={cssObj.inputTitle(Boolean(formState.errors?.preferred_etc_arr))}>기타 우대 사항(선택)</p>
+        <div css={cssObj.inputContainerWithGuide}>
+          {preferredEtcArr.fields.map((item, index) => (
+            <div key={`${preferredEtcArr}${item.id}`}>
+              <label css={cssObj.inputLabel} htmlFor={`${preferredEtcArr}${item.id}`}>
+                <input
+                  id={`${preferredEtcArr}${item.id}`}
+                  css={cssObj.erasableInput(47)}
+                  placeholder="기타 우대 사항 (최대 70자)"
+                  maxLength={70}
+                  onFocus={() => {
+                    focusedArrOnFocusHandler(setPreferredEtcIsFocusedArr, index);
+                  }}
+                  {...register(`preferred_etc_arr.${index}.value`, {
+                    onBlur: () => {
+                      trigger(`preferred_etc_arr`);
+                      focusedArrOnBlurHandler(setPreferredEtcIsFocusedArr, index);
+                    },
+                  })}
+                  autoComplete="off"
+                />
+                {index !== 0 && (
+                  <DeleteInputButton
+                    onClickHandler={() => {
+                      if (preferredEtcArr.fields.length > 1) {
+                        preferredEtcArr.remove(index);
+                        setPreferredEtcIsFocusedArr((prev) => prev.filter((_, stateIndex) => stateIndex !== index));
+                      }
+                    }}
+                  />
+                )}
+              </label>
+              <p css={cssObj.arrayErrorMessage}>
+                {formState?.errors?.preferred_etc_arr?.[index] &&
+                  formState?.errors?.preferred_etc_arr?.[index]?.value?.message}
+              </p>
+              <div css={cssObj.guideChipContainer}>
+                {preferredEtcIsFocusedArr[index] &&
+                  randomPreferredEtcGuideArr.map((preferredEtcGuide) => (
+                    <GuideChip
+                      key={`${preferredEtcGuide}${item.id}`}
+                      text={preferredEtcGuide}
+                      onClickHandler={() => {
+                        setValue(`preferred_etc_arr.${index}.value`, preferredEtcGuide);
+                        const filteredArr = PREFERRED_ETC_GUIDE_ARR.filter(
+                          (element) =>
+                            !randomPreferredEtcGuideArr.includes(element) &&
+                            !jobForm
+                              .watch("preferred_etc_arr")
+                              .some((elem) => JSON.stringify({ value: element }) === JSON.stringify(elem))
+                        )[0];
+                        if (filteredArr) {
+                          setRandomPreferredEtcGuideArr((prev) => [
+                            ...prev.filter((element) => element !== preferredEtcGuide),
+                            filteredArr,
+                          ]);
+                        } else {
+                          setRandomPreferredEtcGuideArr((prev) => [
+                            ...prev.filter((element) => element !== preferredEtcGuide),
+                          ]);
+                        }
+                      }}
+                    />
+                  ))}
+              </div>
+            </div>
+          ))}
+          <AddFieldButton
+            onClickHandler={() => {
+              preferredEtcArr.append({ value: "" });
+              setPreferredEtcIsFocusedArr((prev) => [...prev, false]);
+            }}
+          />
+        </div>
+      </div>
+    </div>
   );
 };

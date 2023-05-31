@@ -1,9 +1,14 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { COLORS, NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
   partContainer: css`
-    margin-top: 2.5rem;
+    background-color: ${NEWCOLORS.WHITE};
+    margin-top: 1.25rem;
+    padding: 2rem;
+    border: 1px solid #e2e4e6;
+    border-radius: 1rem;
+    box-shadow: 0 2px 16px 0 #0000000d;
   `,
 
   dataWrapper: css`
