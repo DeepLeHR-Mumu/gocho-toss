@@ -20,9 +20,9 @@ jobs:
         with:
           node-version: "16.x"
 
-     - name: Set timezone
-       run: |
-        sudo timedatectl set-timezone Asia/Seoul
+      - name: Set timezone
+        run: |
+          sudo timedatectl set-timezone Asia/Seoul
 
       - name: pnpm 초기 설정
         uses: pnpm/action-setup@v2
