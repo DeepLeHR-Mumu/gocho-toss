@@ -134,7 +134,10 @@ const JdEditPage: NextPageWithLayout = () => {
             ...jdObj,
             start_time: dayjs(new Date(jdObj.start_time)).format("YYYY-MM-DDTHH:mm:ss"),
             end_time: dayjs(new Date(jdObj.end_time)).format("YYYY-MM-DDTHH:mm:ss"),
-            apply_url: jdObj.apply_url.includes("@") ? `mailto: ${jdObj.apply_url}` : jdObj.apply_url,
+            apply_url:
+              jdObj.apply_url.includes("@") && !jdObj.apply_url.includes("mailto:")
+                ? `mailto: ${jdObj.apply_url}`
+                : jdObj.apply_url,
             process_arr: getFieldArrayValue(jdObj.process_arr),
             apply_route_arr: getFieldArrayValue(jdObj.apply_route_arr),
             etc_arr: getFieldArrayValueWithNull(jdObj.etc_arr),

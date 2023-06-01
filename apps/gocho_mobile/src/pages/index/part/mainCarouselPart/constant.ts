@@ -15,7 +15,7 @@ export const carouselArr = [
       text: "블로그 바로가기",
       color: "#fff",
       backgroundColor: "#333",
-      url: "/https://blog.gochodaejol.com/?utm_source=gochodaejoldotcom&utm_medium=main-banner",
+      url: "https://blog.gochodaejol.com/?utm_source=gochodaejoldotcom&utm_medium=main-banner",
     },
   },
   {
