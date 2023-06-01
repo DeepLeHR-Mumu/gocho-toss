@@ -20,31 +20,6 @@ export const cssObj = {
     margin-left: 0.25rem;
   `,
 
-  conversionRateContainer: css`
-    display: flex;
-    align-items: flex-start;
-  `,
-
-  conversionRateSliderBox: css`
-    margin-top: 1rem;
-  `,
-
-  rangeSlider: (isDisabled: boolean) => css`
-    width: 8rem;
-    height: 2px;
-    margin-right: 2rem;
-    background-color: ${isDisabled ? `${COLORS.GRAY70}` : `${COLORS.GRAY40}`};
-
-    ::-webkit-slider-thumb {
-      background-color: ${isDisabled ? `${COLORS.GRAY70}` : `${COLORS.GRAY40}`};
-    }
-  `,
-
-  conversionRateLabel: (value: number) => css`
-    margin-top: 0.25rem;
-    margin-left: ${value <= 100 ? (6.5 * value) / 100 : 0}rem;
-  `,
-
   conversionRateInputContainer: css`
     display: flex;
     align-items: center;

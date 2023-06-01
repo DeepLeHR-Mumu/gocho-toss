@@ -46,50 +46,45 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
   return (
     <section css={commonCssObj.partContainer}>
       <strong css={commonCssObj.partTitle}>접수방법</strong>
-      <div css={cssObj.dateInputContainer}>
-        <div>
-          <p css={commonCssObj.inputTitle}>채용시작 일시</p>
-          <input
-            css={cssObj.input(20)}
-            type="datetime-local"
-            onFocus={() => {
-              clearErrors("start_time");
-            }}
-            {...register("start_time", {
-              required: "시작 일시는 필수 입력 사항입니다",
-              onBlur: () => trigger("end_time"),
-            })}
-          />
-          <p css={cssObj.errorMessage}>{formState.errors.start_time && formState.errors.start_time.message}</p>
-        </div>
-        <div>
-          <p css={commonCssObj.inputTitle}>채용마감 일시</p>
-          {isAlways ? (
-            <div css={cssObj.isAlwaysBlock}>상시 모집</div>
-          ) : (
-            <>
-              <input
-                css={cssObj.input(20)}
-                type="datetime-local"
-                onFocus={() => {
-                  clearErrors("end_time");
-                }}
-                {...register("end_time", {
-                  required: "마감 일시는 필수 입력 사항입니다",
-                  validate: {
-                    isFasterThanStart: (value) =>
-                      !new Date(watch("start_time")).getTime() ||
-                      new Date(watch("start_time")).getTime() < new Date(value).getTime() ||
-                      "시작 일시가 마감 일시보다 느릴 수 없습니다.",
-                    isFasterThanNow: (value) =>
-                      new Date(value).getTime() > new Date().getTime() || "마감 일시가 현재 시각보다 빠를 수 없습니다.",
-                  },
-                })}
-              />
-              <p css={cssObj.errorMessage}>{formState.errors.end_time && formState.errors.end_time.message}</p>
-            </>
-          )}
-        </div>
+      <div css={commonCssObj.container}>
+        <p css={commonCssObj.inputTitle}>채용기간</p>
+        <input
+          css={cssObj.input(20)}
+          type="datetime-local"
+          onFocus={() => {
+            clearErrors("start_time");
+          }}
+          {...register("start_time", {
+            required: "시작 일시는 필수 입력 사항입니다",
+            onBlur: () => trigger("end_time"),
+          })}
+        />
+        <p css={cssObj.errorMessage}>{formState.errors.start_time && formState.errors.start_time.message}</p>
+        {isAlways ? (
+          <div css={cssObj.isAlwaysBlock}>상시 모집</div>
+        ) : (
+          <>
+            <input
+              css={cssObj.input(20)}
+              type="datetime-local"
+              onFocus={() => {
+                clearErrors("end_time");
+              }}
+              {...register("end_time", {
+                required: "마감 일시는 필수 입력 사항입니다",
+                validate: {
+                  isFasterThanStart: (value) =>
+                    !new Date(watch("start_time")).getTime() ||
+                    new Date(watch("start_time")).getTime() < new Date(value).getTime() ||
+                    "시작 일시가 마감 일시보다 느릴 수 없습니다.",
+                  isFasterThanNow: (value) =>
+                    new Date(value).getTime() > new Date().getTime() || "마감 일시가 현재 시각보다 빠를 수 없습니다.",
+                },
+              })}
+            />
+            <p css={cssObj.errorMessage}>{formState.errors.end_time && formState.errors.end_time.message}</p>
+          </>
+        )}
         <div css={cssObj.dateLabelContainer}>
           <label css={cssObj.label} htmlFor="always">
             <input
@@ -109,7 +104,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
           </label>
         </div>
       </div>
-      <div css={cssObj.containerWithGuide}>
+      <div css={commonCssObj.container}>
         <p css={commonCssObj.inputTitle}>채용 절차</p>
         <div css={cssObj.inputContainerWithGuide}>
           {processArr.fields.map((item, index) => (
@@ -179,7 +174,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
           </div>
         </div>
       </div>
-      <div css={cssObj.containerWithGuide}>
+      <div css={commonCssObj.container}>
         <p css={commonCssObj.inputTitle}>지원 방법/제출 서류</p>
         <div css={cssObj.inputContainerWithGuide}>
           {applyRouteArr.fields.map((item, index) => (
@@ -262,7 +257,8 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
           </div>
         </div>
       </div>
-      <div css={cssObj.container}>
+      <div css={commonCssObj.container}>
+        <p css={commonCssObj.inputTitle}>접수링크</p>
         <div css={cssObj.linkLabelContainer}>
           <label css={cssObj.label} htmlFor="website">
             <input
@@ -278,7 +274,6 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
             <div css={cssObj.radioBox} />
             <p css={cssObj.labelTitle(Boolean(formState.errors.apply_url))}>채용 링크</p>
           </label>
-          <p>또는</p>
           <label css={cssObj.label} htmlFor="email">
             <input
               defaultChecked={linkType === "email"}
@@ -360,8 +355,8 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
           )}
         </div>
       </div>
-      <div css={cssObj.container}>
-        <p css={commonCssObj.inputTitle}>기타 사항 (선택)</p>
+      <div css={commonCssObj.container}>
+        <p css={commonCssObj.optionalInputTitle}>기타 사항</p>
         <div css={cssObj.inputContainer}>
           {etcArr.fields.map((item, index) => (
             <label css={cssObj.inputLabel} key={`etcArr${item.id}`} htmlFor={`etcArr${item.id}`}>

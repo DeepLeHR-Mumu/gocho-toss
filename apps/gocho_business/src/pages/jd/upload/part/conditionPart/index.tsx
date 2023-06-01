@@ -4,15 +4,12 @@ import { useFieldArray } from "react-hook-form";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
-import { DeleteInputButton, AddFieldButton, GuideChip } from "../../component";
-import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
 import { ConditionPartProps } from "./type";
 import { ROTATION_ARR } from "./constant";
 import { commonCssObj } from "../style";
 import { cssObj } from "./style";
 
 export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, control }) => {
-  const [payIsFocusedArr, setPayIsFocusedArr] = useState<boolean[]>([false]);
   const [isRotationOpen, setIsRotationOpen] = useState<boolean>(false);
 
   const { watch, setValue, clearErrors, trigger, formState, register, setError } = jobForm;
@@ -42,7 +39,40 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
   return (
     <div css={commonCssObj.partContainer}>
       <strong css={commonCssObj.partTitle}>근무 조건</strong>
-      <div css={cssObj.container}>
+      <div css={commonCssObj.container}>
+        <p css={commonCssObj.inputTitle}>급여</p>
+        <div css={cssObj.inputContainerWithGuide}>
+          {payArr.fields.map((item, index) => (
+            <div key={`${payArr}${item.id}`}>
+              <label css={cssObj.inputLabel} htmlFor={`${payArr}${item.id}`}>
+                <input
+                  id={`${payArr}${item.id}`}
+                  css={cssObj.erasableInput(47)}
+                  placeholder="급여 정보 (최대 70자)"
+                  maxLength={70}
+                  onFocus={() => {
+                    clearErrors(`pay_arr.${index}`);
+                  }}
+                  {...register(`pay_arr.${index}.value`, {
+                    required: "모든 칸이 채워져야 합니다",
+                    onBlur: (blurEvent) => {
+                      if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                        setValue(`pay_arr.${index}.value`, "");
+                      }
+                      trigger(`pay_arr`);
+                    },
+                  })}
+                  autoComplete="off"
+                />
+              </label>
+              <p css={cssObj.arrayErrorMessage}>
+                {formState?.errors?.pay_arr?.[index] && formState?.errors?.pay_arr?.[index]?.value?.message}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div css={commonCssObj.container}>
         <p css={commonCssObj.inputTitle}>교대 형태</p>
         <div css={cssObj.optionContainer}>
           <input
@@ -91,67 +121,6 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
         <p css={cssObj.errorMessage}>
           {formState.errors?.rotation_arr && `${formState.errors?.rotation_arr?.message}`}
         </p>
-      </div>
-      <div css={cssObj.containerWithGuide}>
-        <p css={commonCssObj.inputTitle}>급여</p>
-        <div css={cssObj.inputContainerWithGuide}>
-          {payArr.fields.map((item, index) => (
-            <div key={`${payArr}${item.id}`}>
-              <label css={cssObj.inputLabel} htmlFor={`${payArr}${item.id}`}>
-                <input
-                  id={`${payArr}${item.id}`}
-                  css={cssObj.erasableInput(47)}
-                  placeholder="급여 정보 (최대 70자)"
-                  maxLength={70}
-                  onFocus={() => {
-                    clearErrors(`pay_arr.${index}`);
-                    focusedArrOnFocusHandler(setPayIsFocusedArr, index);
-                  }}
-                  {...register(`pay_arr.${index}.value`, {
-                    required: "모든 칸이 채워져야 합니다",
-                    onBlur: (blurEvent) => {
-                      if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                        setValue(`pay_arr.${index}.value`, "");
-                      }
-                      trigger(`pay_arr`);
-                      focusedArrOnBlurHandler(setPayIsFocusedArr, index);
-                    },
-                  })}
-                  autoComplete="off"
-                />
-                {index !== 0 && (
-                  <DeleteInputButton
-                    onClickHandler={() => {
-                      payArr.remove(index);
-                      setPayIsFocusedArr((prev) => prev.filter((stateItem, stateIndex) => stateIndex !== index));
-                    }}
-                  />
-                )}
-              </label>
-              <p css={cssObj.arrayErrorMessage}>
-                {formState?.errors?.pay_arr?.[index] && formState?.errors?.pay_arr?.[index]?.value?.message}
-              </p>
-              <div css={cssObj.guideChipContainer}>
-                {payIsFocusedArr[index] && (
-                  <GuideChip
-                    text="회사 내규에 따름"
-                    onClickHandler={() => {
-                      setValue(`pay_arr.${index}.value`, "회사 내규에 따름");
-                    }}
-                  />
-                )}
-              </div>
-            </div>
-          ))}
-          {payArr.fields.length < 10 && (
-            <AddFieldButton
-              onClickHandler={() => {
-                payArr.append({ value: "" });
-                setPayIsFocusedArr((prev) => [...prev, false]);
-              }}
-            />
-          )}
-        </div>
       </div>
     </div>
   );

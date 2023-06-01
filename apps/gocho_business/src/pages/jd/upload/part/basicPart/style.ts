@@ -2,32 +2,6 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
-  positionButtonContainer: css`
-    display: flex;
-    gap: 0 1rem;
-  `,
-
-  openCardButton: css`
-    height: 2.5rem;
-    border-radius: 2rem;
-    padding: 0 1rem;
-    color: ${COLORS.GRAY30};
-    background-color: ${COLORS.GRAY80};
-  `,
-
-  copyPositionButton: css`
-    height: 2.5rem;
-    border: 1px solid ${COLORS.GRAY10};
-    padding: 0 1rem;
-  `,
-
-  deletePositionButton: css`
-    height: 2.5rem;
-    background-color: #ffc8c8;
-    color: ${COLORS.GRAY10};
-    padding: 0 1rem;
-  `,
-
   container: css`
     margin-bottom: 1.5rem;
   `,
@@ -112,6 +86,7 @@ export const cssObj = {
   `,
 
   errorMessage: css`
+    display: none;
     margin-top: 0.25rem;
     height: 0.75rem;
     font-size: 0.75rem;
@@ -220,7 +195,6 @@ export const cssObj = {
   labelContainer: css`
     display: flex;
     gap: 0 2.5rem;
-    margin: 0.5rem 0 0.75rem;
   `,
 
   radioLabel: css`
@@ -232,39 +206,19 @@ export const cssObj = {
     align-items: flex-start;
   `,
 
-  conversionRateSliderBox: css`
-    margin-top: 1rem;
-  `,
-
-  rangeSlider: (isDisabled: boolean) => css`
-    width: 8rem;
-    height: 2px;
-    margin-right: 2rem;
-    background-color: ${isDisabled ? `${COLORS.GRAY70}` : `${COLORS.GRAY40}`};
-
-    ::-webkit-slider-thumb {
-      background-color: ${isDisabled ? `${COLORS.GRAY70}` : `${COLORS.GRAY40}`};
-    }
-  `,
-
-  conversionRateLabel: (value: number) => css`
-    margin-top: 0.25rem;
-    margin-left: ${value <= 100 ? (6.5 * value) / 100 : 0}rem;
-  `,
-
   conversionRateInputContainer: css`
     display: flex;
     align-items: center;
     gap: 0 0.5rem;
   `,
 
-  activatableInput: (isDisabled: boolean) => css`
+  activatableInput: css`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid ${isDisabled ? `${COLORS.GRAY70}` : `${COLORS.GRAY10}`};
+    border: 1px solid ${COLORS.GRAY10};
     border-radius: 5px;
-    color: ${isDisabled ? `${COLORS.GRAY70}` : `${COLORS.GRAY10}`};
+    color: ${COLORS.GRAY10};
     width: 6rem;
     height: 2.5rem;
     margin-right: 1rem;
@@ -302,6 +256,7 @@ export const cssObj = {
       }
     }
   `,
+
   radioBox: css`
     border: 2px solid ${COLORS.GRAY10};
     width: 1.125rem;
@@ -315,28 +270,5 @@ export const cssObj = {
     display: flex;
     align-items: center;
     gap: 0 0.5rem;
-  `,
-
-  toggleSwitch: (isClicked: boolean, isDisabled: boolean) => css`
-    display: block;
-    position: relative;
-    width: 2rem;
-    height: 0.75rem;
-    border-radius: 0.5rem;
-    background-color: ${isClicked ? `${COLORS.BLUE_SECOND40}` : `${COLORS.GRAY40}`};
-    opacity: ${isDisabled ? 0.6 : 1};
-    cursor: ${isDisabled ? "normal" : "pointer"};
-  `,
-
-  toggleButton: (isActivated: boolean) => css`
-    width: 1.125rem;
-    height: 1.125rem;
-    position: absolute;
-    top: 50%;
-    left: ${isActivated ? "calc(100% - 1rem)" : "-0.125rem"};
-    transform: translateY(-50%);
-    border-radius: 50%;
-    background-color: ${isActivated ? `${COLORS.BLUE_FIRST40}` : `${COLORS.GRAY20}`};
-    transition: all 0.2s ease-in;
   `,
 };
