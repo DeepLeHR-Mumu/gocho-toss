@@ -19,8 +19,8 @@ describe("dDayCalculator unit 테스트", () => {
     const twoDaysLater = dayjs().add(2, "day").format("YYYY-MM-DDTHH:mm:ss");
     expect(dDayCalculator(twoDaysLater)).toBe("D-2");
   });
-  it("지금 1일 20시간 이후", () => {
-    const oneDayTwentyHourLater = dayjs().add(1, "day").add(20, "hour").format("YYYY-MM-DDTHH:mm:ss");
+  it("지금 1일 23시간 59분 이후", () => {
+    const oneDayTwentyHourLater = dayjs().add(1, "day").add(23, "hour").add(59, "minute").format("YYYY-MM-DDTHH:mm:ss");
     expect(dDayCalculator(oneDayTwentyHourLater.valueOf())).toBe("D-2");
   });
   it("지금 1일 후", () => {
