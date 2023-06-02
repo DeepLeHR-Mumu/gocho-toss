@@ -47,7 +47,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
     <section css={commonCssObj.partContainer}>
       <strong css={commonCssObj.partTitle}>접수방법</strong>
       <div css={commonCssObj.container}>
-        <p css={commonCssObj.inputTitle}>채용기간</p>
+        <p css={commonCssObj.inputTitle(false)}>채용기간</p>
         <input
           css={cssObj.input(20)}
           type="datetime-local"
@@ -105,7 +105,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
         </div>
       </div>
       <div css={commonCssObj.container}>
-        <p css={commonCssObj.inputTitle}>채용 절차</p>
+        <p css={commonCssObj.inputTitle(false)}>채용 절차</p>
         <div css={cssObj.inputContainerWithGuide}>
           {processArr.fields.map((item, index) => (
             <div key={`processArr${item.id}`} css={cssObj.processBox}>
@@ -175,7 +175,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
         </div>
       </div>
       <div css={commonCssObj.container}>
-        <p css={commonCssObj.inputTitle}>지원 방법/제출 서류</p>
+        <p css={commonCssObj.inputTitle(false)}>지원 방법/제출 서류</p>
         <div css={cssObj.inputContainerWithGuide}>
           {applyRouteArr.fields.map((item, index) => (
             <div key={`applyRouteArr${item.id}`}>
@@ -258,7 +258,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
         </div>
       </div>
       <div css={commonCssObj.container}>
-        <p css={commonCssObj.inputTitle}>접수링크</p>
+        <p css={commonCssObj.inputTitle(false)}>접수링크</p>
         <div css={cssObj.linkLabelContainer}>
           <label css={cssObj.label} htmlFor="website">
             <input
@@ -356,7 +356,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
         </div>
       </div>
       <div css={commonCssObj.container}>
-        <p css={commonCssObj.optionalInputTitle}>기타 사항</p>
+        <p css={commonCssObj.optionalInputTitle(false)}>기타 사항</p>
         <div css={cssObj.inputContainer}>
           {etcArr.fields.map((item, index) => (
             <label css={cssObj.inputLabel} key={`etcArr${item.id}`} htmlFor={`etcArr${item.id}`}>

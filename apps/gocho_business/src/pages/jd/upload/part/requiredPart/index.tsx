@@ -45,7 +45,7 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, co
     <div css={commonCssObj.partContainer}>
       <strong css={commonCssObj.partTitle}>지원 자격</strong>
       <div css={commonCssObj.container}>
-        <p css={commonCssObj.inputTitle}>학력</p>
+        <p css={commonCssObj.inputTitle(false)}>학력</p>
         <div css={cssObj.labelContainer}>
           <label css={cssObj.label} htmlFor="high">
             <input type="checkbox" id="high" {...register(`high`)} />
@@ -66,7 +66,7 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, co
         <p css={cssObj.errorMessage} />
       </div>
       <div css={commonCssObj.container}>
-        <p css={commonCssObj.optionalInputTitle}>기타 조건</p>
+        <p css={commonCssObj.optionalInputTitle(false)}>기타 조건</p>
         <div css={cssObj.inputContainerWithGuide}>
           {requiredEtcArr.fields.map((item, index) => (
             <div key={`requiredEtcArr${item.id}`}>
@@ -100,7 +100,7 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, co
         </div>
       </div>
       <div css={commonCssObj.container}>
-        <p css={commonCssObj.optionalInputTitle}>우대사항</p>
+        <p css={commonCssObj.optionalInputTitle(false)}>우대사항</p>
         <div css={cssObj.inputContainerWithGuide}>
           {preferredEtcArr.fields.map((item, index) => (
             <div key={`${preferredEtcArr}${item.id}`}>
@@ -123,7 +123,7 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, co
         </div>
       </div>
       <div css={commonCssObj.container}>
-        <p css={commonCssObj.optionalInputTitle}>우대 자격증</p>
+        <p css={commonCssObj.optionalInputTitle(false)}>우대 자격증</p>
         <div css={cssObj.optionContainer}>
           <input
             css={cssObj.input(20)}

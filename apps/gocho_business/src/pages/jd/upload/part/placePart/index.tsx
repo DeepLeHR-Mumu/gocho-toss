@@ -49,7 +49,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
     <div css={commonCssObj.partContainer}>
       <strong css={commonCssObj.partTitle}>근무지</strong>
       <div css={commonCssObj.container}>
-        <p css={commonCssObj.inputTitle}>상세근무지</p>
+        <p css={commonCssObj.inputTitle(false)}>상세근무지</p>
         <div>
           <div css={cssObj.labelContainer}>
             {PLACE_TYPE_ARR.map((placeType) => (
@@ -235,7 +235,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
             )}
             {watch("place").type === "해외" && (
               <>
-                <p css={commonCssObj.inputTitle}>해외 근무지</p>
+                <p css={commonCssObj.inputTitle(false)}>해외 근무지</p>
                 <input
                   css={cssObj.input(47)}
                   maxLength={100}
@@ -250,7 +250,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
             )}
             {watch("place").type === "기타" && (
               <>
-                <p css={commonCssObj.inputTitle}>기타 근무지</p>
+                <p css={commonCssObj.inputTitle(false)}>기타 근무지</p>
                 <input
                   css={cssObj.input(47)}
                   maxLength={100}

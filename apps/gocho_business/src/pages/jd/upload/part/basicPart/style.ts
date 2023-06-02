@@ -1,25 +1,26 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { COLORS, NEWCOLORS } from "shared-style/color";
+import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
-  container: css`
-    margin-bottom: 1.5rem;
-  `,
-
   hiddenInput: css`
     display: none;
   `,
 
-  taskInputContainer: css`
+  inputWrapper: css`
+    flex-grow: 1;
+  `,
+
+  taskSelectContainer: css`
     display: flex;
     align-items: center;
-    gap: 0 2rem;
+    gap: 0 1.25rem;
+    margin-bottom: 1rem;
   `,
 
   taskContainer: css`
     position: relative;
     width: 20rem;
-    height: 2.5rem;
     cursor: pointer;
   `,
 
@@ -61,30 +62,6 @@ export const cssObj = {
     }
   `,
 
-  input: (width: number) => css`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px solid ${COLORS.GRAY10};
-    border-radius: 5px;
-    width: ${width}rem;
-    height: 2.5rem;
-    padding: 0 1rem;
-    font-size: 1rem;
-    background-color: ${COLORS.GRAY100};
-    font-weight: 400;
-
-    ::placeholder {
-      color: ${COLORS.GRAY30};
-    }
-  `,
-
-  desc: (isErrorMessage: boolean) => css`
-    margin-top: 0.25rem;
-    font-size: 0.75rem;
-    color: ${isErrorMessage ? COLORS.ERROR_RED40 : COLORS.GRAY10};
-  `,
-
   errorMessage: css`
     display: none;
     margin-top: 0.25rem;
@@ -93,82 +70,32 @@ export const cssObj = {
     color: ${COLORS.ERROR_RED40};
   `,
 
-  arrayErrorMessage: css`
-    position: absolute;
-    margin-top: 0.25rem;
-    height: 0.75rem;
-    font-size: 0.75rem;
-    color: ${COLORS.ERROR_RED40};
-  `,
-
-  inputContainer: css`
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1.75rem 2rem;
-  `,
-
-  inputLabel: css`
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 2.5rem;
-  `,
-
-  erasableInput: (width: number) => css`
-    font-size: 1rem;
-    font-weight: 400;
-    border: 1px solid ${COLORS.GRAY10};
-    border-radius: 5px;
-    width: ${width}rem;
-    padding: 0.5rem 1rem;
-    background-color: ${COLORS.GRAY100};
-
-    ::placeholder {
-      color: ${COLORS.GRAY30};
-    }
-  `,
-
-  deleteInputButton: css`
-    position: absolute;
-    right: 0;
-    margin-right: 0.5rem;
-    border-radius: 50%;
-    width: 1.75rem;
-    height: 1.75rem;
-    color: ${COLORS.GRAY10};
-    background-color: ${COLORS.GRAY70};
-  `,
-
-  addButtonWrapper: css`
-    margin-left: 0.5rem;
-  `,
-
   hireNumberContainer: css`
     display: flex;
     align-items: center;
-    gap: 0 2rem;
+    gap: 1rem;
   `,
 
   hireNumberButton: css`
     height: 2.25rem;
+    margin-top: 1rem;
     padding: 0 1rem;
-    border: 1px solid ${COLORS.GRAY70};
-    background-color: ${COLORS.GRAY100};
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    background-color: ${NEWCOLORS.WHITE};
+    color: ${NEWCOLORS.BLUEGRAY400};
     border-radius: 0.5rem;
   `,
 
   hireNumberCover: css`
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    border: 1px solid ${COLORS.GRAY10};
-    width: 6rem;
-    height: 2.5rem;
+    justify-content: flex-start;
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    border-radius: 0.5rem;
+    width: 6.625rem;
+    height: 3.25rem;
+    background-color: ${NEWCOLORS.GRAY200};
     padding: 0 1rem;
-    font-size: 1rem;
-    background-color: ${COLORS.GRAY90};
     font-weight: 400;
   `,
 
@@ -181,55 +108,38 @@ export const cssObj = {
     background-color: ${COLORS.GRAY90};
   `,
 
-  hireNumberInputContainer: css`
-    display: flex;
-    align-items: center;
-    gap: 0 0.5rem;
-  `,
-
-  contractTypeWrapper: css`
-    display: flex;
-    gap: 0 4rem;
-  `,
-
   labelContainer: css`
     display: flex;
     gap: 0 2.5rem;
+    height: 2.25rem;
+    margin-right: 1rem;
   `,
 
   radioLabel: css`
     margin-left: 0.25rem;
   `,
 
-  conversionRateContainer: css`
-    display: flex;
-    align-items: flex-start;
+  borderLine: css`
+    height: 1.25rem;
+    border-left: 1px solid ${NEWCOLORS.GRAY200};
   `,
 
-  conversionRateInputContainer: css`
+  optionalInputContainer: css`
     display: flex;
     align-items: center;
-    gap: 0 0.5rem;
+    padding-left: 1rem;
   `,
 
-  activatableInput: css`
+  optionalInput: css`
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    border: 1px solid ${COLORS.GRAY10};
-    border-radius: 5px;
-    color: ${COLORS.GRAY10};
-    width: 6rem;
-    height: 2.5rem;
-    margin-right: 1rem;
-    padding: 0 1rem;
-    font-size: 1rem;
-    background-color: ${COLORS.GRAY100};
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    border-radius: 0.5rem;
+    width: 3.5rem;
+    margin: 0 0.5rem 0 1rem;
+    padding: 0.5rem 0.875rem;
     font-weight: 400;
-
-    ::placeholder {
-      color: ${COLORS.GRAY30};
-    }
+    ${TEXTS.TITLE4};
   `,
 
   label: css`
@@ -264,11 +174,5 @@ export const cssObj = {
     height: 1.125rem;
     background-color: ${COLORS.GRAY100};
     border-radius: 50%;
-  `,
-
-  yearInputContainer: css`
-    display: flex;
-    align-items: center;
-    gap: 0 0.5rem;
   `,
 };

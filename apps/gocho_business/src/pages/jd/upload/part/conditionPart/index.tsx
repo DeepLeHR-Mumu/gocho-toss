@@ -40,7 +40,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
     <div css={commonCssObj.partContainer}>
       <strong css={commonCssObj.partTitle}>근무 조건</strong>
       <div css={commonCssObj.container}>
-        <p css={commonCssObj.inputTitle}>급여</p>
+        <p css={commonCssObj.inputTitle(false)}>급여</p>
         <div css={cssObj.inputContainerWithGuide}>
           {payArr.fields.map((item, index) => (
             <div key={`${payArr}${item.id}`}>
@@ -73,7 +73,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
         </div>
       </div>
       <div css={commonCssObj.container}>
-        <p css={commonCssObj.inputTitle}>교대 형태</p>
+        <p css={commonCssObj.inputTitle(false)}>교대 형태</p>
         <div css={cssObj.optionContainer}>
           <input
             css={cssObj.hiddenInput}

@@ -14,7 +14,7 @@ export const BLANK_JD = {
   conversion_rate: null,
   task_main: "",
   task_sub_arr: [],
-  task_detail_arr: [{ value: "" }],
+  task_detail_arr: "",
   rotation_arr: [],
   rotation_etc: null,
   place: {

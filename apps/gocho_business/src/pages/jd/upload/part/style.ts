@@ -20,32 +20,43 @@ export const commonCssObj = {
 
   container: css`
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    margin-bottom: 2.5rem;
   `,
 
-  inputTitle: css`
+  longContainer: css`
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2.5rem;
+  `,
+
+  inputTitle: (hasMargin: boolean) => css`
     display: flex;
     align-items: center;
     ${TEXTS.TITLE9};
+    margin-top: ${hasMargin ? "1rem" : 0};
     width: 8.25rem;
 
     :after {
       content: "·";
       color: ${NEWCOLORS.BLUE300};
-      font-size: 1.5rem;
+      line-height: 0.5;
+      font-size: 2rem;
       font-weight: 700;
       margin-left: 0.5rem;
+      margin-bottom: 0.25rem;
     }
   `,
 
-  optionalInputTitle: css`
+  optionalInputTitle: (hasMargin: boolean) => css`
     display: flex;
     align-items: center;
     width: 8.25rem;
+    margin-top: ${hasMargin ? "1rem" : 0};
     ${TEXTS.TITLE9};
   `,
 
-  input: (width: number) => css`
+  select: (width: number) => css`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -59,5 +70,36 @@ export const commonCssObj = {
 
     ::placeholder {
       ${TEXTS.TITLE5};
+      color: ${NEWCOLORS.GRAY300};
+  `,
+
+  textarea: css`
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    border-radius: 0.5rem;
+    width: 100%;
+    height: 5.25rem;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+
+    ::placeholder {
+      ${TEXTS.TITLE5};
+      color: ${NEWCOLORS.GRAY300};
+  `,
+
+  input: (width: number) => css`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    border-radius: 0.5rem;
+    width: ${width}rem;
+    height: 3.25rem;
+    padding: 0 1rem;
+    font-weight: 400;
+
+    ::placeholder {
+      ${TEXTS.TITLE5};
+      color: ${NEWCOLORS.GRAY300};
   `,
 };

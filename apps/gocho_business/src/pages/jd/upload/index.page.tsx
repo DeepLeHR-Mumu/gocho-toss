@@ -79,7 +79,7 @@ const JdUploadPage: NextPageWithLayout = () => {
             max_year: jobObj.max_year ? jobObj.max_year : null,
             hire_number: jobObj.hire_number ? jobObj.hire_number : 0,
             task_sub_arr: jobObj.task_sub_arr ? jobObj.task_sub_arr : null,
-            task_detail_arr: getFieldArrayValue(jobObj.task_detail_arr),
+            task_detail_arr: jobObj.task_detail_arr.split("\n"),
             required_etc_arr: getFieldArrayValueWithNull(jobObj.required_etc_arr),
             pay_arr: getFieldArrayValue(jobObj.pay_arr),
             place: {
