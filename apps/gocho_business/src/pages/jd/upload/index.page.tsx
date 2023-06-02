@@ -80,8 +80,8 @@ const JdUploadPage: NextPageWithLayout = () => {
             hire_number: jobObj.hire_number ? jobObj.hire_number : 0,
             task_sub_arr: jobObj.task_sub_arr ? jobObj.task_sub_arr : null,
             task_detail_arr: jobObj.task_detail_arr.split("\n"),
-            required_etc_arr: getFieldArrayValueWithNull(jobObj.required_etc_arr),
-            pay_arr: getFieldArrayValue(jobObj.pay_arr),
+            required_etc_arr: jobObj.required_etc_arr.split("\n"),
+            pay_arr: jobObj.required_etc_arr.split("\n"),
             place: {
               type: jobObj.place.type,
               address_arr: jobObj.place.address_arr?.length === 0 ? null : jobObj.place.address_arr,
@@ -89,7 +89,7 @@ const JdUploadPage: NextPageWithLayout = () => {
               etc: jobObj.place.etc?.length === 0 ? null : jobObj.place.etc,
             },
             preferred_certi_arr: jobObj.preferred_certi_arr?.length === 0 ? null : jobObj.preferred_certi_arr,
-            preferred_etc_arr: getFieldArrayValueWithNull(jobObj.preferred_etc_arr),
+            preferred_etc_arr: jobObj.preferred_etc_arr.split("\n"),
           },
         },
         {

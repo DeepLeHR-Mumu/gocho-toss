@@ -15,7 +15,7 @@ export interface JobFormValues {
   required_exp: string;
   min_year: number | null;
   max_year: number | null;
-  required_etc_arr: { value: string }[];
+  required_etc_arr: string;
   contract_type: string;
   conversion_rate: number | null;
   task_main: string;
@@ -29,7 +29,7 @@ export interface JobFormValues {
     etc: string | null;
   };
   hire_number: number | null;
-  pay_arr: { value: string }[];
+  pay_arr: string;
   preferred_certi_arr: string[] | null;
-  preferred_etc_arr: { value: string }[];
+  preferred_etc_arr: string;
 }

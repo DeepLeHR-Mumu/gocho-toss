@@ -9,7 +9,7 @@ export const BLANK_JD = {
   required_exp: "",
   min_year: null,
   max_year: null,
-  required_etc_arr: [{ value: "" }],
+  required_etc_arr: "",
   contract_type: "",
   conversion_rate: null,
   task_main: "",
@@ -24,9 +24,9 @@ export const BLANK_JD = {
     etc: null,
   },
   hire_number: null,
-  pay_arr: [{ value: "" }],
+  pay_arr: "",
   preferred_certi_arr: null,
-  preferred_etc_arr: [{ value: "" }],
+  preferred_etc_arr: "",
 };
 
 export const JD_UPLOAD_MESSAGE_OBJ = {

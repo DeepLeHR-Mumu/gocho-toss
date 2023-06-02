@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useState } from "react";
 import { FiLink, FiAtSign } from "react-icons/fi";
 import { MdOutlineNavigateNext } from "react-icons/md";
 
@@ -6,19 +6,15 @@ import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { SharedTextLink } from "shared-ui/business/sharedTextLink";
 import { SharedBoxLink } from "shared-ui/business/sharedBoxLink";
 
-import { DeleteInputButton, GuideChip, AddFieldButton } from "../../component";
-import { focusedArrOnBlurHandler, focusedArrOnFocusHandler } from "../util";
+import { DeleteInputButton, AddFieldButton } from "../../component";
 import { ApplyPartProps } from "./type";
-import { PROCESS_GUIDE_ARR, APPLY_ROUTE_GUIDE_ARR, APPLY_EXTERNAL_LINK_ARR } from "./constant";
+import { APPLY_EXTERNAL_LINK_ARR } from "./constant";
 import { commonCssObj } from "../style";
 import { cssObj } from "./style";
 
 export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processArr, applyRouteArr, etcArr }) => {
-  const [processIsFocusedArr, setProcessIsFocusedArr] = useState<boolean[]>(new Array(8).fill(false));
-  const [applyRouteIsFocusedArr, setApplyRouteIsFocusedArr] = useState<boolean[]>([false]);
   const [isAlways, setIsAlways] = useState<boolean>(false);
   const [linkType, setLinkType] = useState<"website" | "email">("website");
-  const [randomApplyRouteGuideArr, setRandomApplyRouteGuideArr] = useState<string[]>([]);
 
   const { watch, setValue, trigger, formState, register, clearErrors } = jobForm;
 
@@ -38,10 +34,6 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
     if (/^http/.test(link)) return link;
     return `https://${link}`;
   };
-
-  useEffect(() => {
-    setRandomApplyRouteGuideArr(APPLY_ROUTE_GUIDE_ARR.sort(() => Math.random() - 0.5).slice(0, 3));
-  }, []);
 
   return (
     <section css={commonCssObj.partContainer}>
@@ -118,7 +110,6 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                     maxLength={30}
                     onFocus={() => {
                       clearErrors(`process_arr.${index}`);
-                      focusedArrOnFocusHandler(setProcessIsFocusedArr, index);
                     }}
                     {...register(`process_arr.${index}.value`, {
                       required: "모든 칸이 채워져야 합니다",
@@ -127,7 +118,6 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                           setValue(`process_arr.${index}.value`, "");
                         }
                         trigger(`process_arr`);
-                        focusedArrOnBlurHandler(setProcessIsFocusedArr, index);
                       },
                     })}
                     autoComplete="off"
@@ -143,18 +133,6 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                 <p css={cssObj.arrayErrorMessage}>
                   {formState?.errors?.process_arr?.[index] && formState?.errors?.process_arr?.[index]?.value?.message}
                 </p>
-                <div css={cssObj.guideChipContainer}>
-                  {processIsFocusedArr[index] &&
-                    PROCESS_GUIDE_ARR[index].map((processGuide) => (
-                      <GuideChip
-                        key={`${processGuide}${item.id}`}
-                        text={processGuide}
-                        onClickHandler={() => {
-                          setValue(`process_arr.${index}.value`, processGuide);
-                        }}
-                      />
-                    ))}
-                </div>
               </div>
               {index + 1 !== processArr.fields.length && (
                 <div css={cssObj.icon}>
@@ -187,7 +165,6 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                   maxLength={50}
                   onFocus={() => {
                     clearErrors(`apply_route_arr.${index}`);
-                    focusedArrOnFocusHandler(setApplyRouteIsFocusedArr, index);
                   }}
                   {...register(`apply_route_arr.${index}.value`, {
                     required: "모든 칸이 채워져야 합니다",
@@ -196,7 +173,6 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                         setValue(`apply_route_arr.${index}.value`, "");
                       }
                       trigger(`apply_route_arr`);
-                      focusedArrOnBlurHandler(setApplyRouteIsFocusedArr, index);
                     },
                   })}
                   autoComplete="off"
@@ -205,7 +181,6 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                   <DeleteInputButton
                     onClickHandler={() => {
                       applyRouteArr.remove(index);
-                      setApplyRouteIsFocusedArr((prev) => prev.filter((stateItem, stateIndex) => stateIndex !== index));
                     }}
                   />
                 )}
@@ -214,35 +189,6 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                 {formState?.errors?.apply_route_arr?.[index] &&
                   formState?.errors?.apply_route_arr?.[index]?.value?.message}
               </p>
-              <div css={cssObj.guideChipContainer}>
-                {applyRouteIsFocusedArr[index] &&
-                  randomApplyRouteGuideArr.map((applyRouteGuide) => (
-                    <GuideChip
-                      key={`${applyRouteGuide}${item.id}`}
-                      text={applyRouteGuide}
-                      onClickHandler={() => {
-                        setValue(`apply_route_arr.${index}.value`, applyRouteGuide);
-                        const filteredElement = APPLY_ROUTE_GUIDE_ARR.filter(
-                          (element) =>
-                            !randomApplyRouteGuideArr.includes(element) &&
-                            !jobForm
-                              .watch("apply_route_arr")
-                              .some((elem) => JSON.stringify({ value: element }) === JSON.stringify(elem))
-                        )[0];
-                        if (filteredElement) {
-                          setRandomApplyRouteGuideArr((prev) => [
-                            ...prev.filter((element) => element !== applyRouteGuide),
-                            filteredElement,
-                          ]);
-                        } else {
-                          setRandomApplyRouteGuideArr((prev) => [
-                            ...prev.filter((element) => element !== applyRouteGuide),
-                          ]);
-                        }
-                      }}
-                    />
-                  ))}
-              </div>
             </div>
           ))}
           <div css={cssObj.addButtonWrapper}>
@@ -250,7 +196,6 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
               <AddFieldButton
                 onClickHandler={() => {
                   applyRouteArr.append({ value: "" });
-                  setApplyRouteIsFocusedArr((prev) => [...prev, false]);
                 }}
               />
             )}

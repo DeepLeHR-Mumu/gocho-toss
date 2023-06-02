@@ -17,10 +17,6 @@ export const JD_FILTER_BUTTON_ARR: {
     filter: "pending",
   },
   {
-    text: "임시저장",
-    filter: "permanent",
-  },
-  {
     text: "전체",
     filter: "all",
   },

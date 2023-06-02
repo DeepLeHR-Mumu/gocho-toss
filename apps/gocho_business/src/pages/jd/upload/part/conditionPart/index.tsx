@@ -1,6 +1,5 @@
 import { FunctionComponent, useState } from "react";
 import { FiChevronUp, FiChevronDown } from "react-icons/fi";
-import { useFieldArray } from "react-hook-form";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
@@ -9,15 +8,10 @@ import { ROTATION_ARR } from "./constant";
 import { commonCssObj } from "../style";
 import { cssObj } from "./style";
 
-export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, control }) => {
+export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm }) => {
   const [isRotationOpen, setIsRotationOpen] = useState<boolean>(false);
 
   const { watch, setValue, clearErrors, trigger, formState, register, setError } = jobForm;
-
-  const payArr = useFieldArray({
-    control,
-    name: `pay_arr`,
-  });
 
   const rotationClickHandler = (rotation: string) => {
     const isInList = watch("rotation_arr").includes(rotation);
@@ -41,36 +35,24 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
       <strong css={commonCssObj.partTitle}>근무 조건</strong>
       <div css={commonCssObj.container}>
         <p css={commonCssObj.inputTitle(false)}>급여</p>
-        <div css={cssObj.inputContainerWithGuide}>
-          {payArr.fields.map((item, index) => (
-            <div key={`${payArr}${item.id}`}>
-              <label css={cssObj.inputLabel} htmlFor={`${payArr}${item.id}`}>
-                <input
-                  id={`${payArr}${item.id}`}
-                  css={cssObj.erasableInput(47)}
-                  placeholder="급여 정보 (최대 70자)"
-                  maxLength={70}
-                  onFocus={() => {
-                    clearErrors(`pay_arr.${index}`);
-                  }}
-                  {...register(`pay_arr.${index}.value`, {
-                    required: "모든 칸이 채워져야 합니다",
-                    onBlur: (blurEvent) => {
-                      if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                        setValue(`pay_arr.${index}.value`, "");
-                      }
-                      trigger(`pay_arr`);
-                    },
-                  })}
-                  autoComplete="off"
-                />
-              </label>
-              <p css={cssObj.arrayErrorMessage}>
-                {formState?.errors?.pay_arr?.[index] && formState?.errors?.pay_arr?.[index]?.value?.message}
-              </p>
-            </div>
-          ))}
-        </div>
+        <input
+          css={commonCssObj.input(47)}
+          placeholder="급여 정보 (최대 50자)"
+          maxLength={50}
+          onFocus={() => {
+            clearErrors(`pay_arr`);
+          }}
+          {...register(`pay_arr`, {
+            required: "모든 칸이 채워져야 합니다",
+            onBlur: (blurEvent) => {
+              if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                setValue(`pay_arr`, "");
+              }
+              trigger(`pay_arr`);
+            },
+          })}
+          autoComplete="off"
+        />
       </div>
       <div css={commonCssObj.container}>
         <p css={commonCssObj.inputTitle(false)}>교대 형태</p>
@@ -82,7 +64,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
             })}
           />
           <button
-            css={cssObj.input(20)}
+            css={commonCssObj.select(30)}
             type="button"
             onClick={() => {
               if (isRotationOpen && watch("rotation_arr").length === 0) {
@@ -100,11 +82,11 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
             <p css={cssObj.rotationInnerText}>{rotationTextMaker(watch("rotation_arr"))}</p>
             {isRotationOpen ? <FiChevronUp /> : <FiChevronDown />}
           </button>
-          <div css={cssObj.optionList(isRotationOpen)}>
+          <div css={commonCssObj.optionList(isRotationOpen)}>
             {ROTATION_ARR.map((rotation) => (
               <button
                 type="button"
-                css={cssObj.option}
+                css={commonCssObj.option}
                 key={rotation.data}
                 value={rotation.data}
                 onMouseDown={(event) => {

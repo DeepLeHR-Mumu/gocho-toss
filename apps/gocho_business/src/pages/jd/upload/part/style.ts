@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLORS, NEWCOLORS } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const commonCssObj = {
@@ -71,13 +71,13 @@ export const commonCssObj = {
     ::placeholder {
       ${TEXTS.TITLE5};
       color: ${NEWCOLORS.GRAY300};
+    }
   `,
 
   textarea: css`
+    width: 100%;
     border: 1px solid ${NEWCOLORS.GRAY200};
     border-radius: 0.5rem;
-    width: 100%;
-    height: 5.25rem;
     padding: 1rem;
     font-size: 1rem;
     font-weight: 400;
@@ -85,6 +85,7 @@ export const commonCssObj = {
     ::placeholder {
       ${TEXTS.TITLE5};
       color: ${NEWCOLORS.GRAY300};
+    }
   `,
 
   input: (width: number) => css`
@@ -101,5 +102,62 @@ export const commonCssObj = {
     ::placeholder {
       ${TEXTS.TITLE5};
       color: ${NEWCOLORS.GRAY300};
+    }
+  `,
+
+  optionList: (isOpen: boolean) => css`
+    position: absolute;
+    top: 3.75rem;
+    left: 0;
+    width: 100%;
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    border-radius: 0.5rem;
+    max-height: ${isOpen ? "20rem" : 0};
+    overflow-x: hidden;
+    overflow-y: scroll;
+    z-index: 20;
+    border: ${isOpen ? `1px solid ${COLORS.GRAY30}` : 0};
+
+    ::-webkit-scrollbar {
+      width: 0.5rem;
+      background-color: ${COLORS.GRAY90};
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: ${COLORS.GRAY60};
+    }
+  `,
+
+  option: css`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0 0.25rem;
+    width: 100%;
+    height: 2.5rem;
+    padding: 0 1rem;
+    background-color: ${COLORS.GRAY100};
+    color: ${COLORS.GRAY30};
+    transition: 0.1s;
+
+    :hover {
+      background-color: ${COLORS.GRAY80};
+    }
+  `,
+
+  addInputButton: css`
+    display: flex;
+    gap: 0 0.5rem;
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    border-radius: 0.5rem;
+    height: 3.25rem;
+    padding: 1rem;
+    background-color: ${NEWCOLORS.GRAY50};
+    ${TEXTS.TITLE5};
+
+    > svg {
+      color: ${NEWCOLORS.GRAY300};
+    }
   `,
 };
