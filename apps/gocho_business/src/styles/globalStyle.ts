@@ -127,7 +127,6 @@ export const globalStyle = css`
   h4,
   span,
   h5 {
-    line-height: 1.6;
     word-break: keep-all;
   }
   ol,

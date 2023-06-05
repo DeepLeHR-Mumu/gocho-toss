@@ -1,7 +1,7 @@
 export const BLANK_JD = {
   process_arr: [{ value: "" }, { value: "" }],
   apply_route_arr: [{ value: "" }],
-  etc_arr: [{ value: "" }],
+  etc_arr: "",
   middle: false,
   high: false,
   college: false,

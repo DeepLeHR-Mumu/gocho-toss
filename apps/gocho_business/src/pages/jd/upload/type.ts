@@ -7,7 +7,7 @@ export interface JobFormValues {
   process_arr: { value: string }[];
   apply_route_arr: { value: string }[];
   apply_url: string;
-  etc_arr: { value: string }[];
+  etc_arr: string;
   middle: boolean;
   high: boolean;
   college: boolean;

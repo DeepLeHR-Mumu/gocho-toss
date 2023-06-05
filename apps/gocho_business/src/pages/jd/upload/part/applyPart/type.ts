@@ -5,5 +5,4 @@ export interface ApplyPartProps {
   jobForm: UseFormReturn<JobFormValues>;
   processArr: UseFieldArrayReturn<JobFormValues, "process_arr", "id">;
   applyRouteArr: UseFieldArrayReturn<JobFormValues, "apply_route_arr", "id">;
-  etcArr: UseFieldArrayReturn<JobFormValues, "etc_arr", "id">;
 }

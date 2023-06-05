@@ -22,7 +22,7 @@ import { INTERNAL_URL } from "@/constants";
 import { HeaderPart, TitlePart, BasicPart, RequiredPart, ConditionPart, PlacePart, ApplyPart } from "./part";
 import { JobFormValues } from "./type";
 import { BLANK_JD, JD_UPLOAD_MESSAGE_OBJ } from "./constant";
-import { getFieldArrayValue, getFieldArrayValueWithNull } from "./util";
+import { getFieldArrayValue } from "./util";
 
 const JdUploadPage: NextPageWithLayout = () => {
   const isLoading = useRef(false);
@@ -53,11 +53,6 @@ const JdUploadPage: NextPageWithLayout = () => {
     name: "apply_route_arr",
   });
 
-  const etcArr = useFieldArray({
-    control,
-    name: "etc_arr",
-  });
-
   const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
     if (isLoading.current) return;
     isLoading.current = true;
@@ -73,7 +68,7 @@ const JdUploadPage: NextPageWithLayout = () => {
             apply_url: jobObj.apply_url.includes("@") ? `mailto: ${jobObj.apply_url}` : jobObj.apply_url,
             process_arr: getFieldArrayValue(jobObj.process_arr),
             apply_route_arr: getFieldArrayValue(jobObj.apply_route_arr),
-            etc_arr: getFieldArrayValueWithNull(jobObj.etc_arr),
+            etc_arr: jobObj.etc_arr.split("\n"),
             conversion_rate: jobObj.conversion_rate ? jobObj.conversion_rate : null,
             min_year: jobObj.min_year ? jobObj.min_year : null,
             max_year: jobObj.max_year ? jobObj.max_year : null,
@@ -81,7 +76,7 @@ const JdUploadPage: NextPageWithLayout = () => {
             task_sub_arr: jobObj.task_sub_arr ? jobObj.task_sub_arr : null,
             task_detail_arr: jobObj.task_detail_arr.split("\n"),
             required_etc_arr: jobObj.required_etc_arr.split("\n"),
-            pay_arr: jobObj.required_etc_arr.split("\n"),
+            pay_arr: jobObj.pay_arr.split("\n"),
             place: {
               type: jobObj.place.type,
               address_arr: jobObj.place.address_arr?.length === 0 ? null : jobObj.place.address_arr,
@@ -138,7 +133,7 @@ const JdUploadPage: NextPageWithLayout = () => {
           <RequiredPart jobForm={jobForm} control={control} />
           <ConditionPart jobForm={jobForm} control={control} />
           <PlacePart jobForm={jobForm} />
-          <ApplyPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
+          <ApplyPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} />
         </form>
       </PageLayout>
     </main>
