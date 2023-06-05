@@ -1,5 +1,5 @@
 import { FunctionComponent, useState } from "react";
-import { FiChevronUp, FiX, FiRotateCw, FiChevronDown, FiPlus } from "react-icons/fi";
+import { FiChevronUp, FiX, FiRotateCw, FiChevronDown } from "react-icons/fi";
 import { TbBuildingFactory2 } from "react-icons/tb";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { useQueryClient } from "@tanstack/react-query";
@@ -12,7 +12,7 @@ import { SharedTextLink } from "shared-ui/business/sharedTextLink";
 import { useFactoryArr, factoryArrKeyObj } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 
-import { DeleteInputButton } from "../../component";
+import { AddFieldButton, DeleteInputButton } from "../../component";
 import { PositionWorkInfoPartProps } from "./type";
 import { PLACE_TYPE_ARR } from "./constant";
 import { commonCssObj } from "../style";
@@ -21,7 +21,14 @@ import { cssObj } from "./style";
 export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobForm }) => {
   const [isFactoryListOpen, setIsFactoryListOpen] = useState<boolean>(false);
 
-  const { watch, setValue, clearErrors, formState, register, setError } = jobForm;
+  const {
+    watch,
+    setValue,
+    clearErrors,
+    formState: { errors },
+    register,
+    setError,
+  } = jobForm;
 
   const queryClient = useQueryClient();
   const openPostCodePopup = useDaumPostcodePopup();
@@ -175,13 +182,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                     </div>
                   ))}
                 </div>
-                <SharedButton
-                  radius="round"
-                  fontColor={COLORS.GRAY10}
-                  backgroundColor={COLORS.GRAY100}
-                  borderColor={COLORS.GRAY70}
-                  size="medium"
-                  iconObj={{ icon: FiPlus, location: "left" }}
+                <AddFieldButton
                   text="공장 외 일반 근무지 추가"
                   onClickHandler={() =>
                     openPostCodePopup({
@@ -228,9 +229,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                     ))}
                   </div>
                 )}
-                <p css={cssObj.errorMessage}>
-                  {formState.errors?.place?.factory_arr && formState.errors?.place?.factory_arr?.message}
-                </p>
+                <p css={cssObj.errorMessage}>{errors.place?.factory_arr && errors.place?.factory_arr?.message}</p>
               </>
             )}
             {watch("place").type === "해외" && (
@@ -245,7 +244,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                     validate: (value) => !!value?.trim() || "빈 칸을 입력할 수 없습니다",
                   })}
                 />
-                <p css={cssObj.errorMessage}>{formState.errors?.place?.etc && formState.errors?.place?.etc?.message}</p>
+                <p css={cssObj.errorMessage}>{errors.place?.etc && errors.place?.etc?.message}</p>
               </>
             )}
             {watch("place").type === "기타" && (
@@ -260,7 +259,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                     validate: (value) => !!value?.trim() || "빈 칸을 입력할 수 없습니다",
                   })}
                 />
-                <p css={cssObj.errorMessage}>{formState.errors?.place?.etc && formState.errors?.place?.etc?.message}</p>
+                <p css={cssObj.errorMessage}>{errors.place?.etc && errors.place?.etc?.message}</p>
               </>
             )}
           </div>

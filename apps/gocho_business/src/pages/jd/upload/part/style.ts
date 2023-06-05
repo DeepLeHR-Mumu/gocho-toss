@@ -74,37 +74,6 @@ export const commonCssObj = {
     }
   `,
 
-  textarea: css`
-    width: 100%;
-    border: 1px solid ${NEWCOLORS.GRAY200};
-    border-radius: 0.5rem;
-    padding: 1rem;
-    font-size: 1rem;
-    font-weight: 400;
-
-    ::placeholder {
-      ${TEXTS.TITLE5};
-      color: ${NEWCOLORS.GRAY300};
-    }
-  `,
-
-  input: (width: number) => css`
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    border: 1px solid ${NEWCOLORS.GRAY200};
-    border-radius: 0.5rem;
-    width: ${width}rem;
-    height: 3.25rem;
-    padding: 0 1rem;
-    font-weight: 400;
-
-    ::placeholder {
-      ${TEXTS.TITLE5};
-      color: ${NEWCOLORS.GRAY300};
-    }
-  `,
-
   optionList: (isOpen: boolean) => css`
     position: absolute;
     top: 3.75rem;
@@ -143,6 +112,37 @@ export const commonCssObj = {
 
     :hover {
       background-color: ${COLORS.GRAY80};
+    }
+  `,
+
+  textarea: css`
+    width: 100%;
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+
+    ::placeholder {
+      ${TEXTS.TITLE5};
+      color: ${NEWCOLORS.GRAY300};
+    }
+  `,
+
+  input: (width: number, isError: boolean) => css`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px solid ${isError ? `${NEWCOLORS.RED300}` : `${NEWCOLORS.GRAY200}`};
+    border-radius: 0.5rem;
+    width: ${width}rem;
+    height: 3.25rem;
+    padding: 0 1rem;
+    font-weight: 400;
+
+    ::placeholder {
+      ${TEXTS.TITLE5};
+      color: ${NEWCOLORS.GRAY300};
     }
   `,
 

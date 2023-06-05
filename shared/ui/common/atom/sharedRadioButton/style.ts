@@ -24,8 +24,8 @@ export const cssObj = {
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        width: 0.5625rem;
-        height: 0.5625rem;
+        width: 0.75rem;
+        height: 0.75rem;
         background-color: ${COLORS.BLUE_FIRST40};
         border-radius: 50%;
         content: "";
@@ -33,10 +33,10 @@ export const cssObj = {
     }
   `,
   radioBox: (isDisabled: boolean) => css`
-    border: 2px solid ${isDisabled ? COLORS.GRAY70 : COLORS.GRAY40};
-    width: 1.125rem;
+    border: 1.5px solid ${isDisabled ? COLORS.GRAY70 : COLORS.GRAY40};
+    width: 1.25rem;
     position: relative;
-    height: 1.125rem;
+    height: 1.25rem;
     background-color: ${isDisabled ? COLORS.GRAY80 : COLORS.GRAY100};
     border-radius: 50%;
   `,

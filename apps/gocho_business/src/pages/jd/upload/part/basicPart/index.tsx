@@ -14,7 +14,15 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
   const [isSubTaskOpen, setIsSubTaskOpen] = useState<boolean>(false);
   const [hireNumberLabel, setHireNumberLabel] = useState<string>("");
 
-  const { watch, setValue, clearErrors, trigger, formState, register, setError } = jobForm;
+  const {
+    watch,
+    setValue,
+    clearErrors,
+    trigger,
+    formState: { errors },
+    register,
+    setError,
+  } = jobForm;
 
   const mainTaskClickHandler = (task: string) => {
     setValue(`task_main`, task);
@@ -53,7 +61,8 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
     }
   };
 
-  const isConversionDisabled = watch("contract_type") !== "인턴" && watch("contract_type") !== "계약>정규";
+  const isConversionActivated = watch("contract_type") === "인턴" || watch("contract_type") === "계약>정규";
+  const isYearActivated = watch("required_exp") === "경력" || watch("required_exp") === "신입/경력";
   const selectedSubTaskObj = TASK_ARR.find((task) => watch("task_main") === task.mainTask);
 
   return (
@@ -167,9 +176,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
               },
             })}
           />
-          <p css={cssObj.errorMessage}>
-            {formState?.errors?.task_detail_arr && formState?.errors?.task_detail_arr?.message}
-          </p>
+          <p css={cssObj.errorMessage}>{errors.task_detail_arr && errors.task_detail_arr?.message}</p>
         </div>
       </div>
       <div css={commonCssObj.longContainer}>
@@ -193,7 +200,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
               <>
                 <input
                   type="number"
-                  css={commonCssObj.input(6.625)}
+                  css={commonCssObj.input(6.625, Boolean(errors.hire_number))}
                   {...register(`hire_number`, {
                     valueAsNumber: true,
                     required: "채용 인원은 필수 입력 값입니다",
@@ -217,7 +224,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
             </button>
           </div>
         </div>
-        <p css={cssObj.errorMessage}>{formState.errors?.hire_number && formState.errors?.hire_number?.message}</p>
+        <p css={cssObj.errorMessage}>{errors.hire_number && errors.hire_number?.message}</p>
       </div>
       <div css={commonCssObj.container}>
         <p css={commonCssObj.inputTitle(false)}>계약 형태</p>
@@ -230,7 +237,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
               registerObj={register(`contract_type`, {
                 required: "계약 형태는 필수 입력 값입니다",
                 onChange: () => {
-                  if (!isConversionDisabled) {
+                  if (isConversionActivated) {
                     clearErrors(`conversion_rate`);
                     setValue(`conversion_rate`, null);
                   }
@@ -241,8 +248,8 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
             </SharedRadioButton>
           ))}
         </div>
-        <p css={cssObj.errorMessage}>{formState.errors?.contract_type && formState.errors?.contract_type?.message}</p>
-        {!isConversionDisabled && (
+        <p css={cssObj.errorMessage}>{errors.contract_type && errors.contract_type?.message}</p>
+        {isConversionActivated && (
           <>
             <div css={cssObj.borderLine} />
             <div css={cssObj.optionalInputContainer}>
@@ -254,21 +261,19 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
                 max="100"
                 step="1"
                 {...register(`conversion_rate`, {
-                  required: { value: !isConversionDisabled, message: "전환율은 필수 입력 값입니다" },
+                  required: { value: isConversionActivated, message: "전환율은 필수 입력 값입니다" },
                   min: { value: 0, message: "최소값은 1입니다" },
                   max: { value: 100, message: "최대값은 100입니다" },
                   valueAsNumber: true,
-                  disabled: isConversionDisabled,
-                  onChange: (e) => conversionRateHandler(e, !isConversionDisabled),
+                  disabled: !isConversionActivated,
+                  onChange: (e) => conversionRateHandler(e, isConversionActivated),
                 })}
               />
               %
             </div>
           </>
         )}
-        <p css={cssObj.errorMessage}>
-          {formState.errors?.conversion_rate && formState.errors?.conversion_rate?.message}
-        </p>
+        <p css={cssObj.errorMessage}>{errors.conversion_rate && errors.conversion_rate?.message}</p>
       </div>
       <div css={commonCssObj.container}>
         <p css={commonCssObj.inputTitle(false)}>경력 조건</p>
@@ -286,8 +291,8 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
             </SharedRadioButton>
           ))}
         </div>
-        <p css={cssObj.errorMessage}>{formState.errors?.required_exp && formState.errors?.required_exp?.message}</p>
-        {watch(`required_exp`) === "경력" && (
+        <p css={cssObj.errorMessage}>{errors.required_exp && errors.required_exp?.message}</p>
+        {isYearActivated && (
           <>
             <div css={cssObj.borderLine} />
             <div css={cssObj.optionalInputContainer}>
@@ -307,7 +312,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
               />
               년
             </div>
-            <p css={cssObj.errorMessage}>{formState.errors?.min_year && formState.errors?.min_year?.message}</p>
+            <p css={cssObj.errorMessage}>{errors.min_year && errors.min_year?.message}</p>
             <div css={cssObj.optionalInputContainer}>
               <p>최대경력</p>
               <input
@@ -327,7 +332,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
             </div>
           </>
         )}
-        <p css={cssObj.errorMessage}>{formState.errors?.max_year && formState.errors?.max_year?.message}</p>
+        <p css={cssObj.errorMessage}>{errors.max_year && errors.max_year?.message}</p>
       </div>
     </div>
   );

@@ -35,4 +35,4 @@ export const TASK_ARR = [
   { mainTask: "기타", subTaskArr: ["없음"] },
 ] as const;
 
-export const REQUIRED_EXP_ARR = ["경력 무관", "신입", "경력"] as const;
+export const REQUIRED_EXP_ARR = ["경력 무관", "신입", "경력", "신입/경력"] as const;

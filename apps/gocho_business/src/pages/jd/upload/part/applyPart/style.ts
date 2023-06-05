@@ -3,9 +3,14 @@ import { COLORS, NEWCOLORS } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
+  dateInputContainer: css`
+    display: flex;
+    align-items: center;
+    gap: 0 1rem;
+  `,
+
   errorMessage: css`
-    margin-top: 0.25rem;
-    height: 0.75rem;
+    height: 0;
     font-size: 0.75rem;
     color: ${COLORS.ERROR_RED40};
   `,
@@ -31,18 +36,14 @@ export const cssObj = {
     border-bottom: 1px solid ${COLORS.GRAY10};
   `,
 
-  dateLabelContainer: css`
-    display: flex;
-    gap: 0 3rem;
-  `,
-
   label: css`
     cursor: pointer;
     display: flex;
     align-items: center;
   `,
 
-  inputContainerWithGuide: css`
+  arrayInputContainer: css`
+    flex-grow: 1;
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
@@ -52,7 +53,7 @@ export const cssObj = {
 
   processBox: css`
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 0 0.5rem;
   `,
 

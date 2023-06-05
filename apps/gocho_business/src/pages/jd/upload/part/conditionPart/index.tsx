@@ -11,7 +11,15 @@ import { cssObj } from "./style";
 export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm }) => {
   const [isRotationOpen, setIsRotationOpen] = useState<boolean>(false);
 
-  const { watch, setValue, clearErrors, trigger, formState, register, setError } = jobForm;
+  const {
+    watch,
+    setValue,
+    clearErrors,
+    trigger,
+    formState: { errors },
+    register,
+    setError,
+  } = jobForm;
 
   const rotationClickHandler = (rotation: string) => {
     const isInList = watch("rotation_arr").includes(rotation);
@@ -36,7 +44,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm }
       <div css={commonCssObj.container}>
         <p css={commonCssObj.inputTitle(false)}>급여</p>
         <input
-          css={commonCssObj.input(47)}
+          css={commonCssObj.input(47, Boolean(errors.rotation_arr))}
           placeholder="급여 정보 (최대 50자)"
           maxLength={50}
           onFocus={() => {
@@ -100,9 +108,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm }
             ))}
           </div>
         </div>
-        <p css={cssObj.errorMessage}>
-          {formState.errors?.rotation_arr && `${formState.errors?.rotation_arr?.message}`}
-        </p>
+        <p css={cssObj.errorMessage}>{errors.rotation_arr && `${errors.rotation_arr?.message}`}</p>
       </div>
     </div>
   );

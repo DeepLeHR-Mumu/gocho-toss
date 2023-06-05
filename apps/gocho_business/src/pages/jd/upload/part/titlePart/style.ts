@@ -17,11 +17,11 @@ export const cssObj = {
     margin-bottom: 1.25rem;
   `,
 
-  input: css`
+  input: (isError: boolean) => css`
     width: 45.875rem;
     height: 3.25rem;
     margin: 0 auto;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${isError ? `${NEWCOLORS.RED300}` : `${NEWCOLORS.GRAY200}`};
     border-radius: 0.5rem;
     text-align: center;
     ${TEXTS.TITLE9}

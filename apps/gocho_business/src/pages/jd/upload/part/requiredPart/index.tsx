@@ -1,11 +1,11 @@
 import { FunctionComponent } from "react";
-import { FiPlus, FiX } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
 import { RequiredPartProps } from "./type";
 // import { CERTI_ARR } from "./constant";
-
+import { AddFieldButton } from "../../component";
 import { commonCssObj } from "../style";
 import { cssObj } from "./style";
 
@@ -107,10 +107,7 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm }) 
             </div>
           ))}
         </div>
-        <button type="button" css={commonCssObj.addInputButton}>
-          <FiPlus />
-          자격증 추가
-        </button>
+        <AddFieldButton text="자격증 추가" onClickHandler={() => null} />
       </div>
     </div>
   );

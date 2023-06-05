@@ -63,7 +63,6 @@ export const cssObj = {
   `,
 
   errorMessage: css`
-    display: none;
     margin-top: 0.25rem;
     height: 0.75rem;
     font-size: 0.75rem;

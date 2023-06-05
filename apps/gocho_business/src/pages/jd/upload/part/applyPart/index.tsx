@@ -14,7 +14,14 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
   const [isAlways, setIsAlways] = useState<boolean>(false);
   const [linkType, setLinkType] = useState<"website" | "email">("website");
 
-  const { watch, setValue, trigger, formState, register, clearErrors } = jobForm;
+  const {
+    watch,
+    setValue,
+    trigger,
+    formState: { errors },
+    register,
+    clearErrors,
+  } = jobForm;
 
   const alwaysButtonClickHandler = () => {
     setValue(`end_time`, isAlways ? "" : "9999-12-31T14:59:00");
@@ -33,44 +40,50 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
       <strong css={commonCssObj.partTitle}>접수방법</strong>
       <div css={commonCssObj.container}>
         <p css={commonCssObj.inputTitle(false)}>채용기간</p>
-        <input
-          css={commonCssObj.input(15)}
-          type="datetime-local"
-          onFocus={() => {
-            clearErrors("start_time");
-          }}
-          {...register("start_time", {
-            required: "시작 일시는 필수 입력 사항입니다",
-            onBlur: () => trigger("end_time"),
-          })}
-        />
-        <p css={cssObj.errorMessage}>{formState.errors.start_time && formState.errors.start_time.message}</p>
-        {isAlways ? (
-          <div css={cssObj.isAlwaysBlock}>상시 모집</div>
-        ) : (
-          <>
+        <div css={cssObj.dateInputContainer}>
+          <div>
             <input
-              css={commonCssObj.input(15)}
+              css={commonCssObj.input(17.5, Boolean(errors.start_time))}
               type="datetime-local"
               onFocus={() => {
-                clearErrors("end_time");
+                clearErrors("start_time");
               }}
-              {...register("end_time", {
-                required: "마감 일시는 필수 입력 사항입니다",
-                validate: {
-                  isFasterThanStart: (value) =>
-                    !new Date(watch("start_time")).getTime() ||
-                    new Date(watch("start_time")).getTime() < new Date(value).getTime() ||
-                    "시작 일시가 마감 일시보다 느릴 수 없습니다.",
-                  isFasterThanNow: (value) =>
-                    new Date(value).getTime() > new Date().getTime() || "마감 일시가 현재 시각보다 빠를 수 없습니다.",
-                },
+              {...register("start_time", {
+                required: "시작 일시는 필수 입력 사항입니다",
+                onBlur: () => trigger("end_time"),
               })}
             />
-            <p css={cssObj.errorMessage}>{formState.errors.end_time && formState.errors.end_time.message}</p>
-          </>
-        )}
-        <div css={cssObj.dateLabelContainer}>
+            <p css={cssObj.errorMessage}>{errors.start_time && errors.start_time.message}</p>
+          </div>
+          <p>~</p>
+          <div>
+            {isAlways ? (
+              <div css={cssObj.isAlwaysBlock}>상시 모집</div>
+            ) : (
+              <>
+                <input
+                  css={commonCssObj.input(17.5, Boolean(errors.end_time))}
+                  type="datetime-local"
+                  onFocus={() => {
+                    clearErrors("end_time");
+                  }}
+                  {...register("end_time", {
+                    required: "마감 일시는 필수 입력 사항입니다",
+                    validate: {
+                      isFasterThanStart: (value) =>
+                        !new Date(watch("start_time")).getTime() ||
+                        new Date(watch("start_time")).getTime() < new Date(value).getTime() ||
+                        "시작 일시가 마감 일시보다 느릴 수 없습니다.",
+                      isFasterThanNow: (value) =>
+                        new Date(value).getTime() > new Date().getTime() ||
+                        "마감 일시가 현재 시각보다 빠를 수 없습니다.",
+                    },
+                  })}
+                />
+                <p css={cssObj.errorMessage}>{errors.end_time && errors.end_time.message}</p>
+              </>
+            )}
+          </div>
           <label css={cssObj.label} htmlFor="always">
             <input
               type="checkbox"
@@ -91,14 +104,14 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
       </div>
       <div css={commonCssObj.longContainer}>
         <p css={commonCssObj.inputTitle(true)}>채용 절차</p>
-        <div css={cssObj.inputContainerWithGuide}>
+        <div css={cssObj.arrayInputContainer}>
           {processArr.fields.map((item, index) => (
             <div key={`processArr${item.id}`} css={cssObj.processBox}>
               <div>
                 <label css={cssObj.inputLabel} htmlFor={`processArr${item.id}`}>
                   <input
                     id={`processArr${item.id}`}
-                    css={commonCssObj.input(11.5)}
+                    css={commonCssObj.input(11.5, Boolean(errors.process_arr))}
                     placeholder={`${index + 1}차 (최대 30자)`}
                     maxLength={30}
                     onFocus={() => {
@@ -124,7 +137,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                   )}
                 </label>
                 <p css={cssObj.arrayErrorMessage}>
-                  {formState?.errors?.process_arr?.[index] && formState?.errors?.process_arr?.[index]?.value?.message}
+                  {errors.process_arr?.[index] && errors.process_arr?.[index]?.value?.message}
                 </p>
               </div>
               {index + 1 !== processArr.fields.length && (
@@ -147,13 +160,13 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
       </div>
       <div css={commonCssObj.longContainer}>
         <p css={commonCssObj.inputTitle(true)}>제출 서류</p>
-        <div css={cssObj.inputContainerWithGuide}>
+        <div css={cssObj.arrayInputContainer}>
           {applyRouteArr.fields.map((item, index) => (
             <div key={`applyRouteArr${item.id}`}>
               <label css={cssObj.inputLabel} htmlFor={`applyRouteArr${item.id}`}>
                 <input
                   id={`applyRouteArr${item.id}`}
-                  css={commonCssObj.input(15)}
+                  css={commonCssObj.input(15, Boolean(errors.apply_route_arr))}
                   placeholder="제출 서류 (최대 50자)"
                   maxLength={50}
                   onFocus={() => {
@@ -179,8 +192,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                 )}
               </label>
               <p css={cssObj.arrayErrorMessage}>
-                {formState?.errors?.apply_route_arr?.[index] &&
-                  formState?.errors?.apply_route_arr?.[index]?.value?.message}
+                {errors.apply_route_arr?.[index] && errors.apply_route_arr?.[index]?.value?.message}
               </p>
             </div>
           ))}
@@ -231,14 +243,14 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
               <div css={cssObj.radioBox} />
               <p>이메일</p>
             </label>
-            <p css={cssObj.errorMessage}>{formState.errors.apply_url && formState.errors.apply_url.message}</p>
+            <p css={cssObj.errorMessage}>{errors.apply_url && errors.apply_url.message}</p>
           </div>
           <div>
             {linkType === "website" ? (
               <div>
                 <label css={cssObj.inputLabel} key="applyUrlWebsite" htmlFor="applyUrlWebsite">
                   <input
-                    css={commonCssObj.input(47)}
+                    css={commonCssObj.input(47, Boolean(errors.apply_url))}
                     placeholder="https://"
                     {...register("apply_url", {
                       required: "링크는 필수 입력 사항입니다",
@@ -270,7 +282,8 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
               <div>
                 <label css={cssObj.inputLabel} key="applyUrlWebsite" htmlFor="applyUrlWebsite">
                   <input
-                    css={commonCssObj.input(47)}
+                    css={commonCssObj.input(47, Boolean(errors.apply_url))}
+                    placeholder="@"
                     {...register("apply_url", {
                       required: "링크는 필수 입력 사항입니다",
                       validate: (value) =>
@@ -292,7 +305,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
         <p css={commonCssObj.optionalInputTitle(true)}>기타 사항</p>
         <textarea
           css={commonCssObj.textarea}
-          placeholder="기타 사항 (선택, 최대 70자)"
+          placeholder="기타 사항을 엔터(Enter)로 구분하여 입력해 주세요 (각 항목당 최대 70자)"
           maxLength={70}
           {...register("etc_arr")}
         />
