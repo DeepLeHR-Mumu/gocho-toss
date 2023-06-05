@@ -73,20 +73,20 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
         <input
           css={cssObj.hiddenInput}
           {...register(`task_main`, {
-            required: "1차 직무는 필수 입력 사항입니다",
+            required: "* 1차 직무와 2차 세부 직무를 선택해주세요",
           })}
         />
         <input
           css={cssObj.hiddenInput}
           {...register(`task_sub_arr`, {
-            required: "2차 직무는 필수 입력 사항입니다",
+            required: "* 1차 직무와 2차 세부 직무를 선택해주세요",
           })}
         />
         <div css={cssObj.inputWrapper}>
           <div css={cssObj.taskSelectContainer}>
             <div css={cssObj.taskContainer}>
               <button
-                css={commonCssObj.select(20)}
+                css={commonCssObj.select(20, Boolean(errors.task_main))}
                 type="button"
                 onClick={() => {
                   if (isMainTaskOpen && watch("task_main") === "") {
@@ -104,11 +104,11 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
                 {selectedSubTaskObj ? `${selectedSubTaskObj.mainTask}` : "1차직무 선택"}
                 {isMainTaskOpen ? <FiChevronUp /> : <FiChevronDown />}
               </button>
-              <div css={cssObj.taskList(isMainTaskOpen)}>
+              <div css={commonCssObj.optionList(isMainTaskOpen)}>
                 {TASK_ARR.map((taskObj) => (
                   <button
                     type="button"
-                    css={cssObj.option}
+                    css={commonCssObj.option}
                     key={`${taskObj.mainTask}`}
                     value={taskObj.mainTask}
                     onMouseDown={(mouseEvent) => {
@@ -123,7 +123,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
             </div>
             <div css={cssObj.taskContainer}>
               <button
-                css={commonCssObj.select(20)}
+                css={commonCssObj.select(20, Boolean(errors.task_sub_arr))}
                 type="button"
                 onClick={() => {
                   if (isSubTaskOpen && watch("task_sub_arr")?.length === 0) {
@@ -141,11 +141,11 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
                 {subTaskTextMaker(watch("task_sub_arr") || [])}
                 {isSubTaskOpen ? <FiChevronUp /> : <FiChevronDown />}
               </button>
-              <div css={cssObj.taskList(isSubTaskOpen)}>
+              <div css={commonCssObj.optionList(isSubTaskOpen)}>
                 {selectedSubTaskObj?.subTaskArr.map((subTask) => (
                   <button
                     type="button"
-                    css={cssObj.option}
+                    css={commonCssObj.option}
                     key={`${subTask}`}
                     value={subTask}
                     onMouseDown={(mouseEvent) => {
@@ -168,7 +168,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
             placeholder="합격시 구체적으로 어떤 일을 하게 되는지 명시해주세요 (최대 70자)"
             maxLength={70}
             {...register(`task_detail_arr`, {
-              required: "모든 칸이 채워져야 합니다",
+              required: "* 세부 직무 사항을 최소 1개 입력해주세요",
               onBlur: (blurEvent) => {
                 if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                   setValue(`task_detail_arr`, "");
@@ -176,7 +176,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
               },
             })}
           />
-          <p css={cssObj.errorMessage}>{errors.task_detail_arr && errors.task_detail_arr?.message}</p>
+          <p css={commonCssObj.errorMessage}>{errors.task_detail_arr && errors.task_detail_arr?.message}</p>
         </div>
       </div>
       <div css={commonCssObj.longContainer}>
@@ -200,11 +200,12 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
               <>
                 <input
                   type="number"
+                  max="9999"
                   css={commonCssObj.input(6.625, Boolean(errors.hire_number))}
                   {...register(`hire_number`, {
                     valueAsNumber: true,
-                    required: "채용 인원은 필수 입력 값입니다",
-                    max: { value: 9999, message: "최대값은 9999명입니다" },
+                    required: "* 채용 인원 수를 입력해 주세요",
+                    max: { value: 9999, message: "* 최대값은 9999명입니다" },
                   })}
                   placeholder="숫자만 입력"
                 />
@@ -224,18 +225,18 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
             </button>
           </div>
         </div>
-        <p css={cssObj.errorMessage}>{errors.hire_number && errors.hire_number?.message}</p>
+        <p css={commonCssObj.errorMessage}>{errors.hire_number && errors.hire_number?.message}</p>
       </div>
       <div css={commonCssObj.container}>
         <p css={commonCssObj.inputTitle(false)}>계약 형태</p>
-        <div css={cssObj.labelContainer}>
+        <div css={commonCssObj.labelContainer}>
           {CONTRACT_TYPE_ARR.map((contractName) => (
             <SharedRadioButton
               key={contractName}
               value={contractName}
               id={contractName}
               registerObj={register(`contract_type`, {
-                required: "계약 형태는 필수 입력 값입니다",
+                required: "* 계약 형태는 필수 입력입니다",
                 onChange: () => {
                   if (isConversionActivated) {
                     clearErrors(`conversion_rate`);
@@ -248,7 +249,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
             </SharedRadioButton>
           ))}
         </div>
-        <p css={cssObj.errorMessage}>{errors.contract_type && errors.contract_type?.message}</p>
+        <p css={commonCssObj.errorMessage}>{errors.contract_type && errors.contract_type?.message}</p>
         {isConversionActivated && (
           <>
             <div css={cssObj.borderLine} />
@@ -261,7 +262,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
                 max="100"
                 step="1"
                 {...register(`conversion_rate`, {
-                  required: { value: isConversionActivated, message: "전환율은 필수 입력 값입니다" },
+                  required: { value: isConversionActivated, message: "* 전환율은 필수 입력입니다" },
                   min: { value: 0, message: "최소값은 1입니다" },
                   max: { value: 100, message: "최대값은 100입니다" },
                   valueAsNumber: true,
@@ -273,66 +274,70 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
             </div>
           </>
         )}
-        <p css={cssObj.errorMessage}>{errors.conversion_rate && errors.conversion_rate?.message}</p>
+        <p css={commonCssObj.errorMessage}>{errors.conversion_rate && errors.conversion_rate?.message}</p>
       </div>
       <div css={commonCssObj.container}>
         <p css={commonCssObj.inputTitle(false)}>경력 조건</p>
-        <div css={cssObj.labelContainer}>
+        <div css={commonCssObj.labelContainer}>
           {REQUIRED_EXP_ARR.map((expName) => (
             <SharedRadioButton
               key={expName}
               value={expName}
               id={expName}
               registerObj={register(`required_exp`, {
-                required: "경력 조건은 필수 입력 사항입니다",
+                required: "* 경력 조건은 필수 입력입니다",
               })}
             >
               <p css={cssObj.radioLabel}>{expName}</p>
             </SharedRadioButton>
           ))}
         </div>
-        <p css={cssObj.errorMessage}>{errors.required_exp && errors.required_exp?.message}</p>
+        <p css={commonCssObj.errorMessage}>{errors.required_exp && errors.required_exp?.message}</p>
         {isYearActivated && (
           <>
             <div css={cssObj.borderLine} />
-            <div css={cssObj.optionalInputContainer}>
-              <p>최소경력</p>
-              <input
-                type="number"
-                min="1"
-                max="50"
-                css={cssObj.optionalInput}
-                {...register(`min_year`, {
-                  required: "최소 경력은 필수 입력 사항입니다",
-                  min: { value: 1, message: "최소 경력은 1년 이상이어야 합니다" },
-                  max: { value: 50, message: "최소 경력은 50년 이하이어야 합니다" },
-                  onBlur: () => trigger(`max_year`),
-                  valueAsNumber: true,
-                })}
-              />
-              년
+            <div>
+              <div css={cssObj.optionalInputContainer}>
+                <p>최소경력</p>
+                <input
+                  type="number"
+                  min="1"
+                  max="50"
+                  css={cssObj.optionalInput}
+                  {...register(`min_year`, {
+                    required: "* 최소 경력은 필수 입력입니다",
+                    min: { value: 1, message: "최소 경력은 1년 이상이어야 합니다" },
+                    max: { value: 50, message: "최소 경력은 50년 이하이어야 합니다" },
+                    onBlur: () => trigger(`max_year`),
+                    valueAsNumber: true,
+                  })}
+                />
+                년
+              </div>
+              <p css={commonCssObj.errorMessage}>{errors.min_year && errors.min_year?.message}</p>
             </div>
-            <p css={cssObj.errorMessage}>{errors.min_year && errors.min_year?.message}</p>
-            <div css={cssObj.optionalInputContainer}>
-              <p>최대경력</p>
-              <input
-                type="number"
-                min="1"
-                max="100"
-                css={cssObj.optionalInput}
-                {...register(`max_year`, {
-                  required: "최대 경력은 필수 입력 사항입니다",
-                  max: { value: 50, message: "최소 경력은 50년 이하이어야 합니다" },
-                  validate: (value) =>
-                    (value || 1) > (watch("min_year") || 0) || "최소 경력 조건이 최대보다 작거나 같을 수 없습니다.",
-                  valueAsNumber: true,
-                })}
-              />
-              년
+            <div>
+              <div css={cssObj.optionalInputContainer}>
+                <p>최대경력</p>
+                <input
+                  type="number"
+                  min="1"
+                  max="100"
+                  css={cssObj.optionalInput}
+                  {...register(`max_year`, {
+                    required: "* 최대 경력은 필수 입력입니다",
+                    max: { value: 50, message: "최소 경력은 50년 이하이어야 합니다" },
+                    validate: (value) =>
+                      (value || 1) > (watch("min_year") || 0) || "최소 경력 조건이 최대보다 작거나 같을 수 없습니다.",
+                    valueAsNumber: true,
+                  })}
+                />
+                년
+              </div>
+              <p css={commonCssObj.errorMessage}>{errors.max_year && errors.max_year?.message}</p>
             </div>
           </>
         )}
-        <p css={cssObj.errorMessage}>{errors.max_year && errors.max_year?.message}</p>
       </div>
     </div>
   );

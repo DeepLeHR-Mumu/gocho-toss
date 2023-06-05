@@ -56,11 +56,11 @@ export const commonCssObj = {
     ${TEXTS.TITLE9};
   `,
 
-  select: (width: number) => css`
+  select: (width: number, isError: boolean) => css`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${isError ? `${NEWCOLORS.RED300}` : `${NEWCOLORS.GRAY200}`};
     border-radius: 0.5rem;
     width: ${width}rem;
     height: 3.25rem;
@@ -117,6 +117,7 @@ export const commonCssObj = {
 
   textarea: css`
     width: 100%;
+    max-width: 59.625rem;
     border: 1px solid ${NEWCOLORS.GRAY200};
     border-radius: 0.5rem;
     padding: 1rem;
@@ -144,6 +145,62 @@ export const commonCssObj = {
       ${TEXTS.TITLE5};
       color: ${NEWCOLORS.GRAY300};
     }
+  `,
+
+  labelContainer: css`
+    display: flex;
+    align-items: center;
+    gap: 0 2.5rem;
+  `,
+
+  label: css`
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    gap: 0 0.25rem;
+    ${TEXTS.TITLE5};
+
+    > p {
+      ${TEXTS.TITLE5};
+    }
+  `,
+
+  radio: css`
+    margin: 0;
+    display: none;
+    appearance: auto;
+    :checked ~ div {
+      border-color: ${NEWCOLORS.BLUE300};
+
+      :after {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 0.75rem;
+        height: 0.75rem;
+        background-color: ${NEWCOLORS.BLUE300};
+        border-radius: 50%;
+        content: "";
+      }
+    }
+  `,
+
+  radioBox: css`
+    border: 1.5px solid ${NEWCOLORS.GRAY300};
+    width: 1.25rem;
+    height: 1.25rem;
+    position: relative;
+    background-color: ${NEWCOLORS.WHITE};
+    border-radius: 50%;
+    margin-right: 0.25rem;
+  `,
+
+  errorMessage: css`
+    margin-top: 0.25rem;
+    height: 0;
+    font-size: 0.75rem;
+    color: ${NEWCOLORS.RED300};
   `,
 
   addInputButton: css`

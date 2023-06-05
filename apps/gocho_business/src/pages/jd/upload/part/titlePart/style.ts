@@ -31,8 +31,4 @@ export const cssObj = {
       color: ${NEWCOLORS.GRAY300};
     }
   `,
-
-  errorMessage: css`
-    color: ${NEWCOLORS.RED300};
-  `,
 };

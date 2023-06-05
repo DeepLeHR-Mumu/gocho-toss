@@ -125,17 +125,17 @@ const JdUploadPage: NextPageWithLayout = () => {
 
   return (
     <main>
-      <HeaderPart />
-      <PageLayout>
-        <form onSubmit={handleSubmit(jobSubmitHandler)}>
+      <form onSubmit={handleSubmit(jobSubmitHandler)}>
+        <HeaderPart />
+        <PageLayout>
           <TitlePart jobForm={jobForm} />
           <BasicPart jobForm={jobForm} control={control} />
           <RequiredPart jobForm={jobForm} control={control} />
           <ConditionPart jobForm={jobForm} control={control} />
           <PlacePart jobForm={jobForm} />
           <ApplyPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} />
-        </form>
-      </PageLayout>
+        </PageLayout>
+      </form>
     </main>
   );
 };

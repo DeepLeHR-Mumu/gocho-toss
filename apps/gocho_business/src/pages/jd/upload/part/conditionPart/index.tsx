@@ -45,13 +45,13 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm }
         <p css={commonCssObj.inputTitle(false)}>급여</p>
         <input
           css={commonCssObj.input(47, Boolean(errors.rotation_arr))}
-          placeholder="급여 정보 (최대 50자)"
+          placeholder="급여 정보를 엔터(Enter)로 구분하여 적어주세요 (최대 70자)"
           maxLength={50}
           onFocus={() => {
             clearErrors(`pay_arr`);
           }}
           {...register(`pay_arr`, {
-            required: "모든 칸이 채워져야 합니다",
+            required: "* 급여 정보를 입력해 주세요",
             onBlur: (blurEvent) => {
               if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                 setValue(`pay_arr`, "");
@@ -64,21 +64,21 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm }
       </div>
       <div css={commonCssObj.container}>
         <p css={commonCssObj.inputTitle(false)}>교대 형태</p>
-        <div css={cssObj.optionContainer}>
+        <div css={cssObj.rotationContainer}>
           <input
             css={cssObj.hiddenInput}
             {...register(`rotation_arr`, {
-              required: "교대 형태는 필수 입력 사항입니다",
+              required: "* 교대 형태를 선택해 주세요",
             })}
           />
           <button
-            css={commonCssObj.select(30)}
+            css={commonCssObj.select(30, Boolean(errors.rotation_arr))}
             type="button"
             onClick={() => {
               if (isRotationOpen && watch("rotation_arr").length === 0) {
                 setError(`rotation_arr`, {
                   type: "required",
-                  message: "교대 형태는 필수 입력 사항입니다",
+                  message: "* 교대 형태를 선택해 주세요",
                 });
               }
               setIsRotationOpen((prev) => !prev);
@@ -108,7 +108,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm }
             ))}
           </div>
         </div>
-        <p css={cssObj.errorMessage}>{errors.rotation_arr && `${errors.rotation_arr?.message}`}</p>
+        <p css={commonCssObj.errorMessage}>{errors.rotation_arr && `${errors.rotation_arr?.message}`}</p>
       </div>
     </div>
   );

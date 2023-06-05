@@ -53,7 +53,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                 onBlur: () => trigger("end_time"),
               })}
             />
-            <p css={cssObj.errorMessage}>{errors.start_time && errors.start_time.message}</p>
+            <p css={commonCssObj.errorMessage}>{errors.start_time && errors.start_time.message}</p>
           </div>
           <p>~</p>
           <div>
@@ -80,11 +80,11 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                     },
                   })}
                 />
-                <p css={cssObj.errorMessage}>{errors.end_time && errors.end_time.message}</p>
+                <p css={commonCssObj.errorMessage}>{errors.end_time && errors.end_time.message}</p>
               </>
             )}
           </div>
-          <label css={cssObj.label} htmlFor="always">
+          <label css={commonCssObj.label} htmlFor="always">
             <input
               type="checkbox"
               id="always"
@@ -95,7 +95,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
             <CheckBox isChecked={isAlways} />
             상시공고
           </label>
-          <label css={cssObj.label} htmlFor="cut">
+          <label css={commonCssObj.label} htmlFor="cut">
             <input type="checkbox" id="cut" {...register("cut")} disabled={isAlways} />
             <CheckBox isChecked={watch("cut")} />
             채용시 마감
@@ -215,35 +215,35 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
         <p css={commonCssObj.inputTitle(false)}>링크</p>
         <div>
           <div css={cssObj.linkLabelContainer}>
-            <label css={cssObj.label} htmlFor="website">
+            <label css={commonCssObj.label} htmlFor="website">
               <input
                 defaultChecked={linkType === "website"}
                 type="radio"
                 name="link"
                 id="website"
-                css={cssObj.radio}
+                css={commonCssObj.radio}
                 onClick={() => {
                   linkButtonClickHandler("website");
                 }}
               />
-              <div css={cssObj.radioBox} />
+              <div css={commonCssObj.radioBox} />
               <p>채용 링크</p>
             </label>
-            <label css={cssObj.label} htmlFor="email">
+            <label css={commonCssObj.label} htmlFor="email">
               <input
                 defaultChecked={linkType === "email"}
                 type="radio"
                 name="link"
                 id="email"
-                css={cssObj.radio}
+                css={commonCssObj.radio}
                 onClick={() => {
                   linkButtonClickHandler("email");
                 }}
               />
-              <div css={cssObj.radioBox} />
+              <div css={commonCssObj.radioBox} />
               <p>이메일</p>
             </label>
-            <p css={cssObj.errorMessage}>{errors.apply_url && errors.apply_url.message}</p>
+            <p css={commonCssObj.errorMessage}>{errors.apply_url && errors.apply_url.message}</p>
           </div>
           <div>
             {linkType === "website" ? (

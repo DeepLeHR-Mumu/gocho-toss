@@ -9,18 +9,12 @@ export const cssObj = {
     gap: 0 1rem;
   `,
 
-  errorMessage: css`
-    height: 0;
-    font-size: 0.75rem;
-    color: ${COLORS.ERROR_RED40};
-  `,
-
   arrayErrorMessage: css`
     position: absolute;
     margin-top: 0.25rem;
     height: 0.75rem;
     font-size: 0.75rem;
-    color: ${COLORS.ERROR_RED40};
+    color: ${NEWCOLORS.RED300};
   `,
 
   isAlwaysBlock: css`
@@ -34,12 +28,6 @@ export const cssObj = {
     background-color: ${COLORS.GRAY70};
     color: ${COLORS.GRAY30};
     border-bottom: 1px solid ${COLORS.GRAY10};
-  `,
-
-  label: css`
-    cursor: pointer;
-    display: flex;
-    align-items: center;
   `,
 
   arrayInputContainer: css`
@@ -89,37 +77,6 @@ export const cssObj = {
     display: flex;
     gap: 0 2.5rem;
     margin-bottom: 1.75rem;
-  `,
-
-  radio: css`
-    margin: 0;
-    display: none;
-    appearance: auto;
-    :checked ~ div {
-      border-color: ${COLORS.BLUE_FIRST40};
-
-      :after {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 0.75rem;
-        height: 0.75rem;
-        background-color: ${NEWCOLORS.BLUE300};
-        border-radius: 50%;
-        content: "";
-      }
-    }
-  `,
-
-  radioBox: css`
-    border: 1.5px solid ${NEWCOLORS.GRAY300};
-    width: 1.25rem;
-    height: 1.25rem;
-    position: relative;
-    background-color: ${NEWCOLORS.WHITE};
-    border-radius: 50%;
-    margin-right: 0.25rem;
   `,
 
   linkButtonContainer: css`
