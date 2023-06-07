@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
-import { FiPlus } from "react-icons/fi";
+import { FiPlus, FiEdit3 } from "react-icons/fi";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
@@ -46,9 +46,9 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
   return (
     <div css={commonCssObj.partContainer}>
       <strong css={commonCssObj.partTitle}>근무지</strong>
-      <div css={commonCssObj.container}>
+      <div css={commonCssObj.longContainer}>
         <p css={commonCssObj.inputTitle(false)}>상세근무지</p>
-        <div>
+        <div css={cssObj.placeWrapper}>
           <div css={commonCssObj.labelContainer}>
             {PLACE_TYPE_ARR.map((placeType) => (
               <div key={placeType.name}>
@@ -75,7 +75,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
               </div>
             ))}
           </div>
-          <div css={cssObj.placeInputContainer}>
+          <div css={cssObj.placeInputWrapper}>
             {watch("place").type === "일반" && (
               <>
                 <input
@@ -90,7 +90,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                 {factoryDataObj?.factoryDataArr?.map((factory) => (
                   <button
                     type="button"
-                    css={commonCssObj.option}
+                    css={cssObj.factoryBox}
                     key={factory.id}
                     value={factory.id}
                     onMouseDown={(event) => {
@@ -98,16 +98,20 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                       factoryClickHandler(factory.id);
                     }}
                   >
-                    <CheckBox isChecked={watch("place").factory_arr?.includes(factory.id) || false} />
-                    {factory.name}
+                    <div css={cssObj.factoryInfoWrapper}>
+                      <CheckBox isChecked={watch("place").factory_arr?.includes(factory.id) || false} />
+                      {factory.name}
+                      <p css={cssObj.factoryAddress}>{factory.address}</p>
+                    </div>
+                    <FiEdit3 />
                   </button>
                 ))}
                 {watch("place").address_arr?.length !== 0 && (
-                  <div css={cssObj.placeContainer}>
+                  <div>
                     {watch("place").address_arr?.map((address) => (
                       <div key={address}>
-                        <div css={cssObj.addressBox}>
-                          {address}
+                        <div css={cssObj.factoryBox}>
+                          <p css={cssObj.factoryAddress}>{address}</p>
                           <DeleteInputButton
                             onClickHandler={() => {
                               const totalNumber =
@@ -127,31 +131,33 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                     ))}
                   </div>
                 )}
-                <AddFieldButton
-                  text="공장 외 일반 근무지 추가"
-                  onClickHandler={() =>
-                    openPostCodePopup({
-                      onComplete: (addressObj: Address) => {
-                        clearErrors(`place.factory_arr`);
-                        setValue(`place.address_arr`, [...(watch("place").address_arr || []), addressObj.address]);
-                      },
+                <div css={cssObj.addPlaceButtonContainer}>
+                  <AddFieldButton
+                    text="공장 외 일반 근무지 추가"
+                    onClickHandler={() =>
+                      openPostCodePopup({
+                        onComplete: (addressObj: Address) => {
+                          clearErrors(`place.factory_arr`);
+                          setValue(`place.address_arr`, [...(watch("place").address_arr || []), addressObj.address]);
+                        },
 
-                      onClose: () => {
-                        const totalNumber =
-                          (watch("place").factory_arr?.length || 0) + (watch("place").address_arr?.length || 0);
-                        if (totalNumber === 0)
-                          setError(`place.factory_arr`, {
-                            type: "required",
-                            message: "공장과 일반 근무지 중 적어도 하나 이상의 근무지를 입력해야 합니다",
-                          });
-                      },
-                    })
-                  }
-                />
-                <button type="button" css={cssObj.uploadFactoryButton}>
-                  <FiPlus />
-                  공장 등록
-                </button>
+                        onClose: () => {
+                          const totalNumber =
+                            (watch("place").factory_arr?.length || 0) + (watch("place").address_arr?.length || 0);
+                          if (totalNumber === 0)
+                            setError(`place.factory_arr`, {
+                              type: "required",
+                              message: "공장과 일반 근무지 중 적어도 하나 이상의 근무지를 입력해야 합니다",
+                            });
+                        },
+                      })
+                    }
+                  />
+                  <button type="button" css={cssObj.uploadFactoryButton}>
+                    <FiPlus />
+                    공장 등록
+                  </button>
+                </div>
                 <p css={commonCssObj.errorMessage}>{errors.place?.factory_arr && errors.place?.factory_arr?.message}</p>
               </>
             )}

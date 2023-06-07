@@ -3,19 +3,52 @@ import { COLORS, NEWCOLORS } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
+  placeWrapper: css`
+    flex-grow: 1;
+  `,
+
+  placeInputWrapper: css`
+    margin-top: 1.5rem;
+  `,
+
   hiddenInput: css`
     display: none;
   `,
 
-  rotationInnerText: css`
-    white-space: nowrap;
-    overflow: hidden;
+  factoryBox: css`
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0.75rem;
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    background-color: ${NEWCOLORS.WHITE};
+    height: 3.25rem;
+    padding: 0 1rem;
+    margin-bottom: 1.25rem;
+
+    > svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: ${NEWCOLORS.GRAY300};
+    }
   `,
 
-  placeInputContainer: css`
-    margin: 0.5rem 0 2rem;
-    padding: 1.5rem;
-    background-color: ${NEWCOLORS.WHITE};
+  factoryInfoWrapper: css`
+    display: flex;
+    align-items: center;
+    gap: 0 0.5rem;
+  `,
+
+  factoryAddress: css`
+    ${TEXTS.TITLE3};
+    color: ${NEWCOLORS.BLUEGRAY300};
+  `,
+
+  addPlaceButtonContainer: css`
+    display: flex;
+    gap: 0 1.25rem;
   `,
 
   uploadFactoryButton: css`
@@ -31,24 +64,6 @@ export const cssObj = {
     > svg {
       color: ${NEWCOLORS.GRAY300};
     }
-  `,
-
-  placeContainer: css`
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 0.75rem 0;
-  `,
-
-  factoryBox: css`
-    display: flex;
-    align-items: center;
-    gap: 0 0.5rem;
-    border-radius: 2rem;
-    border: 1px solid ${COLORS.GRAY70};
-    background-color: ${COLORS.GRAY100};
-    height: 2.25rem;
-    padding: 0 0.5rem 0 1rem;
   `,
 
   addressBox: css`

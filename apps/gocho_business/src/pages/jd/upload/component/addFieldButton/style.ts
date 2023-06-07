@@ -7,7 +7,7 @@ export const cssObj = {
     display: flex;
     gap: 0 0.5rem;
     border: 1px solid ${NEWCOLORS.GRAY200};
-    border-radius: 0.5rem;
+    border-radius: 0.75rem;
     height: 3.25rem;
     padding: 1rem;
     background-color: ${NEWCOLORS.GRAY50};
