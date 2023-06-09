@@ -10,8 +10,7 @@ import { commonCssObj } from "../style";
 import { cssObj } from "./style";
 
 export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
-  const [isMainTaskOpen, setIsMainTaskOpen] = useState<boolean>(false);
-  const [isSubTaskOpen, setIsSubTaskOpen] = useState<boolean>(false);
+  const [isTaskOpen, setIsTaskOpen] = useState<boolean>(false);
   const [hireNumberLabel, setHireNumberLabel] = useState<string>("");
 
   const {
@@ -28,12 +27,11 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
     setValue(`task_main`, task);
     setValue(`task_sub_arr`, []);
     clearErrors(`task_main`);
-    setIsMainTaskOpen(false);
   };
 
   const subTaskClickHandler = (subTask: string) => {
     const isInList = watch("task_sub_arr")?.includes(subTask);
-    clearErrors(`task_sub_arr`);
+    clearErrors(`task_main`);
     if (isInList) {
       setValue(`task_sub_arr`, [...(watch("task_sub_arr")?.filter((element) => element !== subTask) || [])]);
     } else {
@@ -48,8 +46,15 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
   };
 
   const subTaskTextMaker = (selectedSubTask: string[]) => {
-    if (selectedSubTask.length === 0) return "2차직무 선택";
+    if (selectedSubTask.length === 0) return "2차 세부 직무 선택";
     return selectedSubTask.join(", ");
+  };
+
+  const taskErrorHandler = () => {
+    if ((watch("task_main") === "" || watch("task_sub_arr")?.length === 0) && isTaskOpen) {
+      setError(`task_main`, { type: "required", message: "* 1차 직무와 2차 세부 직무를 선택해주세요" });
+    }
+    setIsTaskOpen(false);
   };
 
   const conversionRateHandler = (event: ChangeEvent<HTMLInputElement>, isError: boolean) => {
@@ -86,29 +91,24 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
           <div css={cssObj.taskSelectContainer}>
             <div css={cssObj.taskContainer}>
               <button
-                css={commonCssObj.select(20, Boolean(errors.task_main))}
+                css={commonCssObj.select(17.5, Boolean(errors.task_main))}
                 type="button"
                 onClick={() => {
-                  if (isMainTaskOpen && watch("task_main") === "") {
-                    setError(`task_main`, { type: "required" });
+                  if (isTaskOpen && watch("task_main") === "") {
+                    setError(`task_main`, { type: "required", message: "* 1차 직무와 2차 세부 직무를 선택해주세요" });
                   }
-                  setIsMainTaskOpen((prev) => !prev);
+                  setIsTaskOpen((prev) => !prev);
                 }}
-                onBlur={() => {
-                  if (isMainTaskOpen && watch("task_main") === "") {
-                    setError(`task_main`, { type: "required" });
-                  }
-                  setIsMainTaskOpen(false);
-                }}
+                onBlur={taskErrorHandler}
               >
                 {selectedSubTaskObj ? `${selectedSubTaskObj.mainTask}` : "1차직무 선택"}
-                {isMainTaskOpen ? <FiChevronUp /> : <FiChevronDown />}
+                {isTaskOpen ? <FiChevronUp /> : <FiChevronDown />}
               </button>
-              <div css={commonCssObj.optionList(isMainTaskOpen)}>
+              <div css={commonCssObj.optionList(isTaskOpen, 26)}>
                 {TASK_ARR.map((taskObj) => (
                   <button
                     type="button"
-                    css={commonCssObj.option}
+                    css={cssObj.mainTaskOption(watch("task_main") === taskObj.mainTask)}
                     key={`${taskObj.mainTask}`}
                     value={taskObj.mainTask}
                     onMouseDown={(mouseEvent) => {
@@ -123,25 +123,20 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
             </div>
             <div css={cssObj.taskContainer}>
               <button
-                css={commonCssObj.select(20, Boolean(errors.task_sub_arr))}
+                css={commonCssObj.select(17.5, Boolean(errors.task_main))}
                 type="button"
                 onClick={() => {
-                  if (isSubTaskOpen && watch("task_sub_arr")?.length === 0) {
+                  if (isTaskOpen && watch("task_sub_arr")?.length === 0) {
                     setError(`task_sub_arr`, { type: "required" });
                   }
-                  setIsSubTaskOpen((prev) => !prev);
+                  setIsTaskOpen((prev) => !prev);
                 }}
-                onBlur={() => {
-                  if (isSubTaskOpen && watch("task_sub_arr")?.length === 0) {
-                    setError(`task_sub_arr`, { type: "required" });
-                  }
-                  setIsSubTaskOpen(false);
-                }}
+                onBlur={taskErrorHandler}
               >
                 {subTaskTextMaker(watch("task_sub_arr") || [])}
-                {isSubTaskOpen ? <FiChevronUp /> : <FiChevronDown />}
+                {isTaskOpen ? <FiChevronUp /> : <FiChevronDown />}
               </button>
-              <div css={commonCssObj.optionList(isSubTaskOpen)}>
+              <div css={commonCssObj.optionList(isTaskOpen, 46)}>
                 {selectedSubTaskObj?.subTaskArr.map((subTask) => (
                   <button
                     type="button"
@@ -159,6 +154,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
                 ))}
               </div>
             </div>
+            <p css={commonCssObj.errorMessage}>{errors.task_main && errors.task_main?.message}</p>
           </div>
           <textarea
             css={commonCssObj.textarea}
@@ -225,7 +221,9 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
             </button>
           </div>
         </div>
-        <p css={commonCssObj.errorMessage}>{errors.hire_number && errors.hire_number?.message}</p>
+        <div css={cssObj.errorMessageWrapper}>
+          <p css={commonCssObj.errorMessage}>{errors.hire_number && errors.hire_number?.message}</p>
+        </div>
       </div>
       <div css={commonCssObj.container}>
         <p css={commonCssObj.inputTitle(false)}>계약 형태</p>

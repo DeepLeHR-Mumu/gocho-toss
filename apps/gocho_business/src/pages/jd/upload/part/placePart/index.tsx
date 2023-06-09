@@ -74,6 +74,8 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                 </label>
               </div>
             ))}
+            <p css={commonCssObj.errorMessage}>{errors.place?.factory_arr && errors.place?.factory_arr?.message}</p>
+            <p css={commonCssObj.errorMessage}>{errors.place?.etc && errors.place?.etc?.message}</p>
           </div>
           <div css={cssObj.placeInputWrapper}>
             {watch("place").type === "일반" && (
@@ -83,7 +85,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                   {...register(`place.factory_arr`, {
                     validate: (value) =>
                       (value?.length || 0) + (watch("place").address_arr?.length || 0) !== 0 ||
-                      "공장과 일반 근무지 중 적어도 하나 이상의 근무지를 입력해야 합니다",
+                      "* 공장 혹은 일반 근무지를 입력해주세요",
                   })}
                 />
                 <input css={cssObj.hiddenInput} {...register(`place.address_arr`)} />
@@ -119,7 +121,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                               if (totalNumber === 1)
                                 setError(`place.factory_arr`, {
                                   type: "required",
-                                  message: "공장과 일반 근무지 중 적어도 하나 이상의 근무지를 입력해야 합니다",
+                                  message: "* 공장 혹은 일반 근무지를 입력해주세요",
                                 });
                               setValue(`place.address_arr`, [
                                 ...(jobForm.watch("place").address_arr?.filter((element) => element !== address) || []),
@@ -147,7 +149,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                           if (totalNumber === 0)
                             setError(`place.factory_arr`, {
                               type: "required",
-                              message: "공장과 일반 근무지 중 적어도 하나 이상의 근무지를 입력해야 합니다",
+                              message: "* 공장 혹은 일반 근무지를 입력해주세요",
                             });
                         },
                       })
@@ -158,36 +160,29 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                     공장 등록
                   </button>
                 </div>
-                <p css={commonCssObj.errorMessage}>{errors.place?.factory_arr && errors.place?.factory_arr?.message}</p>
               </>
             )}
             {watch("place").type === "해외" && (
-              <>
-                <input
-                  css={commonCssObj.input(47, Boolean(errors.place?.etc))}
-                  maxLength={100}
-                  placeholder="근무지를 작성해주세요"
-                  {...register(`place.etc`, {
-                    required: "근무지는 필수 입력 사항입니다",
-                    validate: (value) => !!value?.trim() || "빈 칸을 입력할 수 없습니다",
-                  })}
-                />
-                <p css={commonCssObj.errorMessage}>{errors.place?.etc && errors.place?.etc?.message}</p>
-              </>
+              <input
+                css={commonCssObj.input(47, Boolean(errors.place?.etc))}
+                maxLength={100}
+                placeholder="근무지를 작성해주세요"
+                {...register(`place.etc`, {
+                  required: "* 근무지를 입력해주세요",
+                  validate: (value) => !!value?.trim() || "빈 칸을 입력할 수 없습니다",
+                })}
+              />
             )}
             {watch("place").type === "기타" && (
-              <>
-                <input
-                  css={commonCssObj.input(47, Boolean(errors.place?.etc))}
-                  maxLength={100}
-                  placeholder="전국 순환, 입사 후 근무지 배정 등 특수 근무지를 작성해주세요"
-                  {...register(`place.etc`, {
-                    required: "근무지는 필수 입력 사항입니다",
-                    validate: (value) => !!value?.trim() || "빈 칸을 입력할 수 없습니다",
-                  })}
-                />
-                <p css={commonCssObj.errorMessage}>{errors.place?.etc && errors.place?.etc?.message}</p>
-              </>
+              <input
+                css={commonCssObj.input(47, Boolean(errors.place?.etc))}
+                maxLength={100}
+                placeholder="전국 순환, 입사 후 근무지 배정 등 특수 근무지를 작성해주세요"
+                {...register(`place.etc`, {
+                  required: "* 근무지를 입력해주세요",
+                  validate: (value) => !!value?.trim() || "빈 칸을 입력할 수 없습니다",
+                })}
+              />
             )}
           </div>
         </div>

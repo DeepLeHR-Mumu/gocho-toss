@@ -49,11 +49,13 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                 clearErrors("start_time");
               }}
               {...register("start_time", {
-                required: "시작 일시는 필수 입력 사항입니다",
+                required: "* 공고 시작 날짜를 선택해 주세요",
                 onBlur: () => trigger("end_time"),
               })}
             />
-            <p css={commonCssObj.errorMessage}>{errors.start_time && errors.start_time.message}</p>
+            <div css={cssObj.errorMessageWrapper}>
+              <p css={commonCssObj.errorMessage}>{errors.start_time && errors.start_time.message}</p>
+            </div>
           </div>
           <p>~</p>
           <div>
@@ -68,7 +70,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                     clearErrors("end_time");
                   }}
                   {...register("end_time", {
-                    required: "마감 일시는 필수 입력 사항입니다",
+                    required: "* 공고 마감 날짜를 선택해 주세요",
                     validate: {
                       isFasterThanStart: (value) =>
                         !new Date(watch("start_time")).getTime() ||
@@ -80,7 +82,9 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                     },
                   })}
                 />
-                <p css={commonCssObj.errorMessage}>{errors.end_time && errors.end_time.message}</p>
+                <div css={cssObj.errorMessageWrapper}>
+                  <p css={commonCssObj.errorMessage}>{errors.end_time && errors.end_time.message}</p>
+                </div>
               </>
             )}
           </div>
@@ -212,7 +216,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
         </div>
       </div>
       <div css={commonCssObj.longContainer}>
-        <p css={commonCssObj.inputTitle(false)}>링크</p>
+        <p css={commonCssObj.inputTitle(false)}>접수링크</p>
         <div>
           <div css={cssObj.linkLabelContainer}>
             <label css={commonCssObj.label} htmlFor="website">
@@ -253,7 +257,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                     css={commonCssObj.input(47, Boolean(errors.apply_url))}
                     placeholder="https://"
                     {...register("apply_url", {
-                      required: "링크는 필수 입력 사항입니다",
+                      required: "* 접수 링크는 필수 입력 사항입니다",
                       validate: () => true,
                       onBlur: (blurEvent) => {
                         if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
@@ -285,7 +289,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                     css={commonCssObj.input(47, Boolean(errors.apply_url))}
                     placeholder="@"
                     {...register("apply_url", {
-                      required: "링크는 필수 입력 사항입니다",
+                      required: "* 접수 링크는 필수 입력 사항입니다",
                       validate: (value) =>
                         /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || "이메일 형식이 올바르지 않습니다",
                       onBlur: (blurEvent) => {

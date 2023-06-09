@@ -2,10 +2,6 @@ import { css } from "@emotion/react";
 import { COLORS } from "shared-style/color";
 
 export const cssObj = {
-  input: css`
-    margin: 0;
-  `,
-
   selectedCertiContainer: css`
     display: flex;
     flex-wrap: wrap;

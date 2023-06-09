@@ -20,24 +20,31 @@ export const cssObj = {
 
   taskContainer: css`
     position: relative;
-    width: 20rem;
     cursor: pointer;
+  `,
+
+  mainTaskOption: (isSelected: boolean) => css`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0 0.25rem;
+    width: 100%;
+    height: 2.5rem;
+    padding: 0 1rem;
+    background-color: ${NEWCOLORS.WHITE};
+    transition: 0.1s;
+    color: ${isSelected ? `${NEWCOLORS.BLUE300}` : `${NEWCOLORS.BLACK}`};
+    ${TEXTS.TITLE5};
+
+    :hover {
+      background-color: ${NEWCOLORS.GRAY100};
+    }
   `,
 
   hireNumberContainer: css`
     display: flex;
     align-items: center;
     gap: 1rem;
-  `,
-
-  hireNumberButton: css`
-    height: 2.25rem;
-    margin-top: 1rem;
-    padding: 0 1rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
-    background-color: ${NEWCOLORS.WHITE};
-    color: ${NEWCOLORS.BLUEGRAY400};
-    border-radius: 0.5rem;
   `,
 
   hireNumberCover: css`
@@ -60,6 +67,23 @@ export const cssObj = {
     border-radius: 5px;
     border: 1px solid ${COLORS.GRAY65};
     background-color: ${COLORS.GRAY90};
+  `,
+
+  hireNumberButton: css`
+    height: 2.25rem;
+    margin-top: 1rem;
+    padding: 0 1rem;
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    background-color: ${NEWCOLORS.WHITE};
+    color: ${NEWCOLORS.BLUEGRAY400};
+    border-radius: 0.5rem;
+  `,
+
+  errorMessageWrapper: css`
+    display: flex;
+    height: 3.25rem;
+    margin-left: -3rem;
+    align-items: center;
   `,
 
   radioLabel: css`

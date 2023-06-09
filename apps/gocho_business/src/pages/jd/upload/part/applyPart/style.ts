@@ -9,6 +9,11 @@ export const cssObj = {
     gap: 0 1rem;
   `,
 
+  errorMessageWrapper: css`
+    margin-top: 0.25rem;
+    height: 0;
+  `,
+
   arrayErrorMessage: css`
     position: absolute;
     margin-top: 0.25rem;
@@ -21,13 +26,13 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20rem;
-    height: 2.5rem;
-    margin-bottom: 1rem;
-    text-align: center;
+    border-radius: 0.5rem;
+    margin-bottom: 0.25rem;
+    width: 17.5rem;
+    height: 3.25rem;
+    font-weight: 400;
     background-color: ${COLORS.GRAY70};
     color: ${COLORS.GRAY30};
-    border-bottom: 1px solid ${COLORS.GRAY10};
   `,
 
   arrayInputContainer: css`
@@ -75,8 +80,9 @@ export const cssObj = {
 
   linkLabelContainer: css`
     display: flex;
+    align-items: center;
     gap: 0 2.5rem;
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.5rem;
   `,
 
   linkButtonContainer: css`

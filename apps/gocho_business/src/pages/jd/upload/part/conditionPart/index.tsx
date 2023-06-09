@@ -41,26 +41,41 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm }
   return (
     <div css={commonCssObj.partContainer}>
       <strong css={commonCssObj.partTitle}>근무 조건</strong>
-      <div css={commonCssObj.container}>
-        <p css={commonCssObj.inputTitle(false)}>급여</p>
-        <input
-          css={commonCssObj.input(47, Boolean(errors.rotation_arr))}
-          placeholder="급여 정보를 엔터(Enter)로 구분하여 적어주세요 (최대 70자)"
-          maxLength={50}
-          onFocus={() => {
-            clearErrors(`pay_arr`);
-          }}
-          {...register(`pay_arr`, {
-            required: "* 급여 정보를 입력해 주세요",
-            onBlur: (blurEvent) => {
-              if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                setValue(`pay_arr`, "");
-              }
-              trigger(`pay_arr`);
-            },
-          })}
-          autoComplete="off"
-        />
+      <div css={commonCssObj.longContainer}>
+        <p css={commonCssObj.inputTitle(true)}>급여</p>
+        <div css={cssObj.inputWrapper}>
+          <div css={commonCssObj.labelContainer}>
+            <label css={commonCssObj.label} htmlFor="companyDepend">
+              <input type="checkbox" id="companyDepend" />
+              <CheckBox isChecked={watch("college")} />
+              회사 내규에 따름
+            </label>
+            <label css={commonCssObj.label} htmlFor="after">
+              <input type="checkbox" id="after" />
+              <CheckBox isChecked={watch("college")} />
+              면접 후 결정
+            </label>
+            <p css={commonCssObj.errorMessage}>{errors.pay_arr && `${errors.pay_arr?.message}`}</p>
+          </div>
+          <textarea
+            css={commonCssObj.textarea}
+            placeholder="급여 정보를 엔터(Enter)로 구분하여 적어주세요 (최대 70자)"
+            maxLength={50}
+            onFocus={() => {
+              clearErrors(`pay_arr`);
+            }}
+            {...register(`pay_arr`, {
+              required: "* 급여 정보를 입력해 주세요",
+              onBlur: (blurEvent) => {
+                if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                  setValue(`pay_arr`, "");
+                }
+                trigger(`pay_arr`);
+              },
+            })}
+            autoComplete="off"
+          />
+        </div>
       </div>
       <div css={commonCssObj.container}>
         <p css={commonCssObj.inputTitle(false)}>교대 형태</p>
@@ -84,13 +99,14 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm }
               setIsRotationOpen((prev) => !prev);
             }}
             onBlur={() => {
+              trigger(`rotation_arr`);
               setIsRotationOpen(false);
             }}
           >
             <p css={cssObj.rotationInnerText}>{rotationTextMaker(watch("rotation_arr"))}</p>
             {isRotationOpen ? <FiChevronUp /> : <FiChevronDown />}
           </button>
-          <div css={commonCssObj.optionList(isRotationOpen)}>
+          <div css={commonCssObj.optionList(isRotationOpen, 12)}>
             {ROTATION_ARR.map((rotation) => (
               <button
                 type="button"

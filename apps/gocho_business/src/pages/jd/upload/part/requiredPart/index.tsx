@@ -36,23 +36,22 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm }) 
         <p css={commonCssObj.inputTitle(false)}>학력</p>
         <div css={commonCssObj.labelContainer}>
           <label css={commonCssObj.label} htmlFor="high">
-            <input css={cssObj.input} type="checkbox" id="high" {...register(`high`)} />
+            <input type="checkbox" id="high" {...register(`high`)} />
             <CheckBox isChecked={watch("high")} />
             고졸
           </label>
           <label css={commonCssObj.label} htmlFor="college">
-            <input css={cssObj.input} type="checkbox" id="college" {...register(`college`)} />
+            <input type="checkbox" id="college" {...register(`college`)} />
             <CheckBox isChecked={watch("college")} />
             초대졸
           </label>
           <label css={commonCssObj.label} htmlFor="four">
-            <input css={cssObj.input} type="checkbox" id="four" {...register(`four`)} />
+            <input type="checkbox" id="four" {...register(`four`)} />
             <CheckBox isChecked={watch("four")} />
             4년제
           </label>
           <label css={commonCssObj.label} htmlFor="all">
             <input
-              css={cssObj.input}
               type="checkbox"
               id="all"
               onClick={() => {
