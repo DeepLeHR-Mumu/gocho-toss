@@ -41,7 +41,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
       <div css={commonCssObj.container}>
         <p css={commonCssObj.inputTitle(false)}>채용기간</p>
         <div css={cssObj.dateInputContainer}>
-          <div>
+          <div css={cssObj.dateWrapper}>
             <input
               css={commonCssObj.input(17.5, Boolean(errors.start_time))}
               type="datetime-local"
@@ -58,7 +58,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
             </div>
           </div>
           <p>~</p>
-          <div>
+          <div css={cssObj.dateWrapper}>
             {isAlways ? (
               <div css={cssObj.isAlwaysBlock}>상시 모집</div>
             ) : (
@@ -122,7 +122,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                       clearErrors(`process_arr.${index}`);
                     }}
                     {...register(`process_arr.${index}.value`, {
-                      required: "모든 칸이 채워져야 합니다",
+                      required: "* 모든 칸이 채워져야 합니다",
                       onBlur: (blurEvent) => {
                         if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                           setValue(`process_arr.${index}.value`, "");
@@ -177,7 +177,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                     clearErrors(`apply_route_arr.${index}`);
                   }}
                   {...register(`apply_route_arr.${index}.value`, {
-                    required: "모든 칸이 채워져야 합니다",
+                    required: "* 모든 칸이 채워져야 합니다",
                     onBlur: (blurEvent) => {
                       if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                         setValue(`apply_route_arr.${index}.value`, "");
@@ -309,7 +309,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
         <p css={commonCssObj.optionalInputTitle(true)}>기타 사항</p>
         <textarea
           css={commonCssObj.textarea}
-          placeholder="기타 사항을 엔터(Enter)로 구분하여 입력해 주세요 (각 항목당 최대 70자)"
+          placeholder="기타 사항을 엔터(Enter)로 구분하여 기재해 주세요 (항목당 최대 70자)"
           maxLength={70}
           {...register("etc_arr")}
         />

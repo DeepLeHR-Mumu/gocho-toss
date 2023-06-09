@@ -47,7 +47,10 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
     <div css={commonCssObj.partContainer}>
       <strong css={commonCssObj.partTitle}>근무지</strong>
       <div css={commonCssObj.longContainer}>
-        <p css={commonCssObj.inputTitle(false)}>상세근무지</p>
+        <div css={cssObj.titleWrapper}>
+          {" "}
+          <p css={commonCssObj.inputTitle(false)}>상세근무지</p>
+        </div>
         <div css={cssObj.placeWrapper}>
           <div css={commonCssObj.labelContainer}>
             {PLACE_TYPE_ARR.map((placeType) => (
@@ -135,7 +138,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                 )}
                 <div css={cssObj.addPlaceButtonContainer}>
                   <AddFieldButton
-                    text="공장 외 일반 근무지 추가"
+                    text="근무지 추가"
                     onClickHandler={() =>
                       openPostCodePopup({
                         onComplete: (addressObj: Address) => {

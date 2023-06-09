@@ -75,7 +75,7 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm }) 
         <p css={commonCssObj.optionalInputTitle(true)}>기타 조건</p>
         <textarea
           css={commonCssObj.textarea}
-          placeholder="군필 여부, 나이, 성별 등의 기타 조건을 엔터(Enter)로 구분하여 적어주세요 (최대 70자)"
+          placeholder="엔터(Enter)로 구분하여 기재해 주세요 (항목당 최대 70자) 예) 군필 여부, 나이, 성별 등"
           onFocus={() => {
             clearErrors(`required_etc_arr`);
           }}
@@ -95,7 +95,7 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm }) 
         <p css={commonCssObj.optionalInputTitle(true)}>우대사항</p>
         <textarea
           css={commonCssObj.textarea}
-          placeholder="엔터(Enter)로 구분하여 기입해 주세요 (최대 70자) Ex) 인근거주자, 차량소지자"
+          placeholder="엔터(Enter)로 구분하여 기재해 주세요 (항목당 최대 70자) Ex) 인근거주자, 차량소지자"
           {...register(`preferred_etc_arr`, {
             onBlur: () => {
               trigger(`preferred_etc_arr`);

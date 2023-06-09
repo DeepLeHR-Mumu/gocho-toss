@@ -161,7 +161,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
             onFocus={() => {
               clearErrors(`task_detail_arr`);
             }}
-            placeholder="합격시 구체적으로 어떤 일을 하게 되는지 명시해주세요 (최대 70자)"
+            placeholder="합격시 구체적으로 어떤 일을 하게 되는지 엔터(Enter)로 구분하여 기재해주세요 (항목당 최대 70자)"
             maxLength={70}
             {...register(`task_detail_arr`, {
               required: "* 세부 직무 사항을 최소 1개 입력해주세요",

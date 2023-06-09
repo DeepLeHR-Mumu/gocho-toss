@@ -42,7 +42,9 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm }
     <div css={commonCssObj.partContainer}>
       <strong css={commonCssObj.partTitle}>근무 조건</strong>
       <div css={commonCssObj.longContainer}>
-        <p css={commonCssObj.inputTitle(true)}>급여</p>
+        <div css={cssObj.titleWrapper}>
+          <p css={commonCssObj.inputTitle(false)}>급여</p>
+        </div>
         <div css={cssObj.inputWrapper}>
           <div css={commonCssObj.labelContainer}>
             <label css={commonCssObj.label} htmlFor="companyDepend">
@@ -59,7 +61,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm }
           </div>
           <textarea
             css={commonCssObj.textarea}
-            placeholder="급여 정보를 엔터(Enter)로 구분하여 적어주세요 (최대 70자)"
+            placeholder="급여 정보를 엔터(Enter)로 구분하여 기재해 주세요 (항목당 최대 70자)"
             maxLength={50}
             onFocus={() => {
               clearErrors(`pay_arr`);

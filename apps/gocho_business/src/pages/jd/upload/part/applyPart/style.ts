@@ -9,6 +9,10 @@ export const cssObj = {
     gap: 0 1rem;
   `,
 
+  dateWrapper: css`
+    height: 3.25rem;
+  `,
+
   errorMessageWrapper: css`
     margin-top: 0.25rem;
     height: 0;

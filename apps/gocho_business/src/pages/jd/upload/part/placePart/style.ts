@@ -3,6 +3,12 @@ import { COLORS, NEWCOLORS } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
+  titleWrapper: css`
+    display: flex;
+    align-items: center;
+    height: 2.25rem;
+  `,
+
   placeWrapper: css`
     flex-grow: 1;
   `,
