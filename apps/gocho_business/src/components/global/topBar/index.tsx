@@ -87,8 +87,8 @@ export const TopBar: FunctionComponent = () => {
                   <Image src={userInfoData.company.logoUrl} fill sizes="1" alt="상단 바 기업 로고" />
                 </div>
                 <div>
-                  <strong>{userInfoData.company.name}</strong>
-                  <p>{userInfoData.company.industry}</p>
+                  <strong css={cssObj.companyName}>{userInfoData.company.name}</strong>
+                  <p css={cssObj.industry}>{userInfoData.company.industry}</p>
                 </div>
               </div>
               {COMPANY_LINK_ARR.map((linkObj) => (
@@ -118,15 +118,9 @@ export const TopBar: FunctionComponent = () => {
                   {linkObj.name}
                 </Link>
               ))}
-              <SharedButton
-                onClickHandler={doLogoutHandler}
-                size="medium"
-                backgroundColor={COLORS.GRAY100}
-                borderColor={COLORS.GRAY100}
-                text="로그아웃"
-                fontColor={COLORS.GRAY10}
-                radius="round"
-              />
+              <button type="button" css={cssObj.logoutButton} onClick={doLogoutHandler}>
+                로그아웃
+              </button>
             </div>
           )}
         </div>

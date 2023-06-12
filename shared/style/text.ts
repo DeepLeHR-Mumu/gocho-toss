@@ -55,7 +55,7 @@ export const TEXTS = {
 
   TITLE10: `
     font-weight: 600;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     line-height: 1.16;
   `,
 

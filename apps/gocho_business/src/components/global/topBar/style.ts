@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
+import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
   headerWrapper: (isLogin: boolean) => css`
@@ -10,8 +11,7 @@ export const cssObj = {
     padding: 1rem 2rem;
     height: 4rem;
     width: 100%;
-    background-color: ${COLORS.BLUE_FIRST40};
-    border-bottom: 1px solid ${COLORS.GRAY80};
+    background-color: ${NEWCOLORS.BLUE300};
   `,
 
   headerContainer: css`
@@ -54,8 +54,8 @@ export const cssObj = {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: ${isActive ? `2px solid ${COLORS.GRAY100}` : "none"};
-    color: ${COLORS.GRAY100};
+    border-bottom: ${isActive ? `2px solid ${NEWCOLORS.WHITE}` : "none"};
+    color: ${NEWCOLORS.WHITE};
     transition: color 0.2s ease;
   `,
 
@@ -73,7 +73,7 @@ export const cssObj = {
     padding: 1rem 0;
     align-items: center;
     cursor: pointer;
-    color: ${COLORS.GRAY100};
+    color: ${NEWCOLORS.WHITE};
     font-weight: 700;
   `,
 
@@ -81,7 +81,7 @@ export const cssObj = {
     font-size: 1rem;
     font-weight: 700;
     margin-left: 0.5rem;
-    color: ${COLORS.GRAY100};
+    color: ${NEWCOLORS.WHITE};
     transition: all 0.2s ease-in;
     transform: ${isActive ? "rotate(0deg)" : "rotate(180deg)"};
   `,
@@ -90,11 +90,11 @@ export const cssObj = {
     position: absolute;
     top: 4.25rem;
     right: 0;
-    border: 1px solid ${COLORS.GRAY10};
+    border: 1px solid ${NEWCOLORS.BLACK};
     border-radius: 1rem;
     width: 15rem;
-    padding: 1rem;
-    background-color: ${COLORS.GRAY100};
+    padding-top: 1rem;
+    background-color: ${NEWCOLORS.WHITE};
     z-index: 50;
   `,
 
@@ -102,6 +102,7 @@ export const cssObj = {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
+    padding: 0 1rem;
   `,
 
   companyLogoBox: css`
@@ -116,25 +117,22 @@ export const cssObj = {
     }
   `,
 
-  companyMenuLink: css`
-    display: block;
-    padding: 0.625rem 0;
-
-    :last-of-type {
-      padding-bottom: 0;
-    }
+  companyName: css`
+    ${TEXTS.TITLE9};
+    margin-bottom: 0.25rem;
   `,
 
-  userMenu: css`
-    position: absolute;
-    top: 4.25rem;
-    right: 0;
-    border: 1px solid ${COLORS.GRAY10};
-    border-radius: 1rem;
-    width: 10rem;
-    padding: 1rem;
-    background-color: ${COLORS.GRAY100};
-    z-index: 50;
+  industry: css`
+    ${TEXTS.TITLE3};
+  `,
+
+  companyMenuLink: css`
+    display: block;
+    padding: 0.625rem 1rem;
+
+    :last-of-type {
+      padding-bottom: 1rem;
+    }
   `,
 
   userName: css`
@@ -142,5 +140,25 @@ export const cssObj = {
       content: " 님";
       font-weight: 400;
     }
+  `,
+
+  userMenu: css`
+    position: absolute;
+    top: 4.25rem;
+    right: 0;
+    border: 1px solid ${NEWCOLORS.BLACK};
+    border-radius: 1rem;
+    width: 15rem;
+    padding-top: 1rem;
+    background-color: ${NEWCOLORS.WHITE};
+    z-index: 50;
+  `,
+
+  logoutButton: css`
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+    background-color: ${NEWCOLORS.GRAY50};
+    border-radius: 0 0 1rem 1rem;
   `,
 };

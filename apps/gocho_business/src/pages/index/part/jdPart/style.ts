@@ -8,7 +8,6 @@ export const cssObj = {
     display: block;
     cursor: pointer;
     ${TEXTS.TITLE11};
-    color: ${NEWCOLORS.BLUEGRAY400};
     margin-bottom: 1.25rem;
   `,
 
