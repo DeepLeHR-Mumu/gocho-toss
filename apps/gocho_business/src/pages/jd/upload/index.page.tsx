@@ -124,7 +124,7 @@ const JdUploadPage: NextPageWithLayout = () => {
   }, []);
 
   return (
-    <main>
+    <div>
       <form onSubmit={handleSubmit(jobSubmitHandler)}>
         <HeaderPart />
         <PageLayout>
@@ -136,7 +136,7 @@ const JdUploadPage: NextPageWithLayout = () => {
           <ApplyPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} />
         </PageLayout>
       </form>
-    </main>
+    </div>
   );
 };
 

@@ -5,6 +5,7 @@ import { PageResultDef } from "shared-type/api/paginationType";
 export interface RequestObjDef {
   order?: "recent" | "popular" | "rand" | "view" | "end" | "com";
   filter?: "todayUpload" | "almostDeadline" | "deadline" | "expired" | "valid";
+  status?: "progress" | "waiting" | "reject";
   size?: number;
   page?: number;
   searchWord?: string | null;
@@ -15,7 +16,6 @@ export interface ResponseObjDef {
     | {
         id: number;
         uploader: { name: string; department: string; is_mine: boolean };
-        company: { id: number; name: string; logo_url: string };
         status: {
           name: "진행중" | "등록대기" | "수정대기" | "등록반려" | "수정반려";
           reason: string;

@@ -23,5 +23,5 @@ export const useJdArr = (isLogin: boolean, requestObj: RequestObjDef) =>
     queryKey: jdArrKeyObj.arr(requestObj),
     queryFn: getJdArr,
     select: (data) => jdArrSelector(data),
-    enabled: isLogin && Boolean(requestObj.order),
+    enabled: isLogin,
   });

@@ -95,6 +95,7 @@ export const cssObj = {
     width: 15rem;
     padding: 1rem;
     background-color: ${COLORS.GRAY100};
+    z-index: 50;
   `,
 
   companyProfile: css`
@@ -133,6 +134,7 @@ export const cssObj = {
     width: 10rem;
     padding: 1rem;
     background-color: ${COLORS.GRAY100};
+    z-index: 50;
   `,
 
   userName: css`

@@ -1,5 +1,8 @@
 import { css } from "@emotion/react";
+
 import { NEWCOLORS } from "shared-style/color";
+import { TEXTS } from "shared-style/text";
+
 import { OutPutStatusType } from "./type";
 
 export const cssObj = {
@@ -26,9 +29,8 @@ export const cssObj = {
       `;
     }
     return css`
+      ${TEXTS.TITLE6};
       ${fontColor};
-      font-size: 1.125rem;
-      line-height: 1.2;
       margin-bottom: 0.5rem;
     `;
   },
