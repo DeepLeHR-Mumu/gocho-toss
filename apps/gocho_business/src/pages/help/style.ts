@@ -1,82 +1,69 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+
+import { NEWCOLORS } from "shared-style/color";
+import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
-  wrapper: css`
-    overflow: hidden;
-    min-height: calc(100vh - 19rem);
-    background-color: #f4f7ff;
-    text-align: center;
+  contentWrapper: css`
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+    gap: 0 1.25rem;
   `,
-  title: css`
-    padding-top: 2rem;
-    padding-bottom: 0.5rem;
-    font-size: 1.25rem;
-    color: ${COLORS.GRAY10};
-    font-weight: 700;
-  `,
-  desc: css`
-    font-size: 1rem;
-    color: ${COLORS.GRAY10};
-    margin-bottom: 1rem;
-  `,
-  strongDesc: css`
-    font-size: 2.25rem;
-    font-weight: 700;
-    color: ${COLORS.GRAY10};
-    margin-bottom: 1.75rem;
-    display: block;
-  `,
-  chatIconBox: css`
+
+  partContainer: css`
+    flex-grow: 1;
     position: relative;
+    height: 45rem;
+    background-color: ${NEWCOLORS.WHITE};
+    padding: 2rem;
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    border-radius: 1rem;
+    box-shadow: 0 2px 16px 0 #0000000d;
+  `,
+
+  pageTitle: css`
+    width: fit-content;
+    margin-bottom: 1.5rem;
+    ${TEXTS.TITLE11};
+  `,
+
+  descWrapper: css`
+    background-color: ${NEWCOLORS.GRAY50};
+    padding: 1.5rem;
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    border-radius: 1rem;
+    margin-bottom: 1.75rem;
+  `,
+
+  descTitle: css`
+    display: block;
+    ${TEXTS.TITLE9};
+    margin-bottom: 0.5rem;
+  `,
+
+  desc: css`
+    ${TEXTS.TITLE3};
+  `,
+
+  email: css`
+    ${TEXTS.TITLE5};
+    color: ${NEWCOLORS.BLUEGRAY400};
+    margin-bottom: 0.5rem;
+
+    > a {
+      margin-left: 0.5rem;
+      color: ${NEWCOLORS.BLUEGRAY400};
+    }
+  `,
+
+  chatIconBox: css`
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
     width: 6rem;
     height: 6rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-
-    :before {
-      content: "";
-      position: absolute;
-      left: -3.75rem;
-      top: -0.625rem;
-      width: 5rem;
-      height: 3.75rem;
-      background-image: url("/image/help/arrow_left.svg");
-      background-repeat: no-repeat;
-      background-size: contain;
-    }
-    :after {
-      content: "";
-      position: absolute;
-      right: -3.75rem;
-      top: -0.625rem;
-      width: 5rem;
-      height: 3.75rem;
-      background-image: url("/image/help/stars.svg");
-      background-repeat: no-repeat;
-      background-size: contain;
-    }
-    > img {
-      object-fit: contain;
-    }
-  `,
-  backgroundBox: css`
-    position: relative;
-    width: 100%;
-    height: 40vh;
-    min-width: 23.25rem;
-    max-width: 35vw;
-    margin-bottom: -2px;
 
     > img {
       object-fit: contain;
-      object-position: center bottom;
     }
   `,
 };

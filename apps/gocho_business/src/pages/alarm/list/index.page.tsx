@@ -5,20 +5,18 @@ import { PageLayout } from "@/components";
 
 import { cssObj } from "./style";
 
-const Notice: NextPage = () => (
+const AlarmList: NextPage = () => (
   <div>
     <PageLayout>
       <div css={cssObj.contentWrapper}>
         <SideNav />
         <div css={cssObj.partContainer}>
-          <h2 css={cssObj.pageTitle}>공지사항</h2>
-          <p css={cssObj.pageDesc}>
-            총<span css={cssObj.noticeCount}>{Intl.NumberFormat("kr").format(1234)}</span>건
-          </p>
+          <h2 css={cssObj.pageTitle}>알림</h2>
+          <p css={cssObj.pageDesc}>받은지 90일이 지난 알림은 사라집니다.</p>
         </div>
       </div>
     </PageLayout>
   </div>
 );
 
-export default Notice;
+export default AlarmList;

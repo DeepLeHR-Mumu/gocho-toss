@@ -10,6 +10,7 @@ import { setInfoTypeButton } from "./constant";
 
 export const InfoPart: FunctionComponent = () => {
   const [infoType, setInfoType] = useState<InfoTypeDef>("alarm");
+  const isInfoTypeAlarm = infoType === "alarm";
 
   return (
     <section css={partCssObj.partContainer}>
@@ -26,7 +27,7 @@ export const InfoPart: FunctionComponent = () => {
             </button>
           ))}
         </div>
-        <Link href={INTERNAL_URL.HELP} passHref css={cssObj.moreButton}>
+        <Link href={isInfoTypeAlarm ? INTERNAL_URL.ALARM_LIST : INTERNAL_URL.NOTICE} passHref css={cssObj.moreButton}>
           더보기 {">"}
         </Link>
       </div>

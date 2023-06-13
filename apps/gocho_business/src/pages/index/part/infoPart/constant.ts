@@ -10,6 +10,6 @@ export const setInfoTypeButton: {
   },
   {
     text: "공지사항",
-    type: "announcement",
+    type: "notice",
   },
 ];

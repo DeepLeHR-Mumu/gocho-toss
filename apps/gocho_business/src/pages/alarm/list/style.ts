@@ -17,6 +17,7 @@ export const cssObj = {
     border: 1px solid ${NEWCOLORS.GRAY200};
     border-radius: 1rem;
     box-shadow: 0 2px 16px 0 #0000000d;
+    text-align: center;
   `,
 
   pageTitle: css`
@@ -26,6 +27,7 @@ export const cssObj = {
   `,
 
   pageDesc: css`
+    text-align: left;
     ${TEXTS.TITLE5};
     color: ${NEWCOLORS.BLUEGRAY400};
     padding-bottom: 2rem;

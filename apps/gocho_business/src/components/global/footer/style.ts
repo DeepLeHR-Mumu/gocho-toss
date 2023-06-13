@@ -13,7 +13,7 @@ export const cssObj = {
   container: css`
     display: flex;
     width: 75rem;
-    padding: 0 1.5rem 6rem;
+    padding: 0 1.5rem;
     margin: 0 auto;
     gap: 0 1.25rem;
     border-top: 1px solid ${NEWCOLORS.GRAY200};

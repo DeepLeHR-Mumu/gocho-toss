@@ -2,7 +2,7 @@ export { CommonInfoBox } from "./common/commonInfoBox";
 export { CommonStatusChip } from "./common/commonStatusChip";
 export { Pagination } from "./common/pagination";
 
-export { TopBar } from "./global/topBar";
+export { GlobalNav } from "./global/globalNav";
 export { Footer } from "./global/footer";
 export { ErrorBoundary } from "./global/errorBoundary";
 export { PageLayout } from "./global/layout/pageLayout";

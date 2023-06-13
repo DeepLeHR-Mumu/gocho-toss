@@ -10,7 +10,7 @@ export const INTERNAL_URL = {
   HELP: "/help",
   ALARM_LIST: "/alarm/list",
   ALARM_SETTING: "/alarm/setting",
-  ANNOUNCEMENT: "/announcement",
+  NOTICE: "/notice",
   NOT_FOUND: "/404",
   UNKNOWN_ERROR: "/500",
   LOGIN: "/login",

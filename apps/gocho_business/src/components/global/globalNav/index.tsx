@@ -12,7 +12,7 @@ import { INTERNAL_URL } from "@/constants";
 import { JD_LINK_ARR, COMPANY_LINK_ARR, USER_LINK_ARR } from "./constant";
 import { cssObj } from "./style";
 
-export const TopBar: FunctionComponent = () => {
+export const GlobalNav: FunctionComponent = () => {
   const router = useRouter();
   const { pathname } = router;
 
