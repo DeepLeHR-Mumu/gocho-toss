@@ -9,7 +9,7 @@ import { InfoTypeDef } from "./type";
 import { setInfoTypeButton } from "./constant";
 
 export const InfoPart: FunctionComponent = () => {
-  const [infoType, setInfoType] = useState<InfoTypeDef>("notice");
+  const [infoType, setInfoType] = useState<InfoTypeDef>("alarm");
 
   return (
     <section css={partCssObj.partContainer}>

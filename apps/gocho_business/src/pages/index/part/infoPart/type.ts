@@ -1,1 +1,1 @@
-export type InfoTypeDef = "notice" | "announcement";
+export type InfoTypeDef = "alarm" | "announcement";

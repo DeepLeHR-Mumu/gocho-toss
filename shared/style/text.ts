@@ -112,4 +112,11 @@ export const TEXTS = {
     font-size: 1.5rem;
     line-height: 1.33;
   `,
+
+  UNDERLINE: `
+    text-decoration: underline;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.25;
+  `,
 };

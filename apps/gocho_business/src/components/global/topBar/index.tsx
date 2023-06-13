@@ -5,9 +5,6 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 
-import { SharedButton } from "shared-ui/business/sharedButton";
-import { COLORS } from "shared-style/color";
-
 import bizTextMono from "@/public/image/deepleLogo/bizTextMono.svg";
 import { useDoLogout, useManagerProfile } from "@/apis";
 import { INTERNAL_URL } from "@/constants";

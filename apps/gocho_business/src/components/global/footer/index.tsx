@@ -2,34 +2,64 @@ import { FunctionComponent } from "react";
 import Image from "next/image";
 
 import gochoTextMono from "shared-image/global/deepLeLogo/textMono.svg";
+import kakaoLogo from "shared-image/global/sns/kakaoLogo.svg";
 
-import { FOOTER_INFO } from "./constants";
+import { kakaoChannelUrl } from "shared-constant";
+import Link from "next/link";
+import { INTERNAL_URL } from "@/constants";
 import { cssObj } from "./style";
 
 export const Footer: FunctionComponent = () => (
-  <footer css={cssObj.wrapper}>
+  <footer css={cssObj.footer}>
     <div css={cssObj.container}>
-      <div css={cssObj.infoBox}>
-        <strong css={cssObj.titleBox}>
+      <div css={cssObj.infoContainer}>
+        <strong css={cssObj.logoBox}>
           <Image src={gochoTextMono} alt="고초대졸닷컴" fill />
         </strong>
-        <p css={cssObj.desc}>{FOOTER_INFO.address}</p>
-        <p css={cssObj.desc}>
-          <span>{`대표 ${FOOTER_INFO.ceo}`}</span>
-          <a href={`tel:${FOOTER_INFO.telNumber}`}>{FOOTER_INFO.telView}</a>
-        </p>
-        <p css={cssObj.desc}>
-          <span>{`사업자 등록번호 ${FOOTER_INFO.businessNumber}`}</span>
-          <span>{`직업정보제공사업 신고번호 ${FOOTER_INFO.reportNumber}`}</span>
-        </p>
-        <p css={cssObj.copyRight}>{FOOTER_INFO.copyRight}</p>
+        <div css={cssObj.infoBox}>
+          <p css={cssObj.info}>(주)디플에이치알</p>
+          <div css={cssObj.contour} />
+          <p css={cssObj.info}>대표: 박중우</p>
+        </div>
+        <div css={cssObj.middleBox}>
+          <div css={cssObj.infoBox}>
+            <p css={cssObj.info}>사업자등록번호 : 331-86-02342</p>
+            <div css={cssObj.contour} />
+            <a css={cssObj.info} href="tel:01066808170">
+              연락처 : 010-6680-8170
+            </a>
+          </div>
+          <p css={cssObj.info}>서울특별시 서초구 강남대로 311, 드림플러스 1203호/ 1204호</p>
+        </div>
+        <p css={cssObj.info}>copyright by 주식회사 디플에이치알 All rights reserved.</p>
       </div>
-      <div css={cssObj.customBox}>
-        <strong css={cssObj.title}>고객센터</strong>
-        <div css={cssObj.helpBox}>
-          <a css={cssObj.linkCSS} href={`mailto:${FOOTER_INFO.helpEmail}`}>
-            {FOOTER_INFO.helpEmail}
+      <div css={cssObj.contactContainer}>
+        <div css={cssObj.contactBox}>
+          <strong css={cssObj.contactTitle}>광고문의</strong>
+          <a css={cssObj.link} href="mailto:register@deeplehr.com">
+            채용공고 · 광고 등록 register@deeplehr.com
           </a>
+        </div>
+        <div css={cssObj.contactBox}>
+          <strong css={cssObj.contactTitle}>고객센터</strong>
+          <a css={cssObj.link} href="mailto:cs@deeplehr.com">
+            cs@deeplehr.com
+          </a>
+          <a css={cssObj.link} href={kakaoChannelUrl} target="_blank" rel="noreferrer">
+            <span css={cssObj.kakaoLogo}>
+              <Image src={kakaoLogo} alt="카카오톡 플러스친구" fill sizes="1" />
+            </span>
+            카카오톡 플러스친구
+          </a>
+        </div>
+        <div css={cssObj.linkBox}>
+          <Link href={INTERNAL_URL.HELP} passHref css={cssObj.underlineLink}>
+            이용약관
+          </Link>
+          <div css={cssObj.contour} />
+          <Link href={INTERNAL_URL.HELP} passHref css={cssObj.underlineLink}>
+            개인정보처리방침
+          </Link>
         </div>
       </div>
     </div>

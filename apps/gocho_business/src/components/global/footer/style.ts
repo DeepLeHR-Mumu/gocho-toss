@@ -1,86 +1,103 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
+import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
-  wrapper: css`
-    background-color: #f6f7fa;
+  footer: css`
+    margin-top: 7.5rem;
+    background-color: #f2f2f5;
     width: 100%;
   `,
+
   container: css`
     display: flex;
-    width: 100%;
-    max-width: 1032px;
+    width: 75rem;
+    padding: 0 1.5rem 6rem;
+    margin: 0 auto;
+    gap: 0 1.25rem;
+    border-top: 1px solid ${NEWCOLORS.GRAY200};
   `,
-  infoBox: css`
-    width: calc(100% - 23.75rem);
-    padding: 3rem;
+
+  infoContainer: css`
+    width: 50.25rem;
+    padding: 2.5rem 1.5rem;
   `,
-  customBox: css`
-    display: flex;
-    align-items: flex-start;
-    padding: 0 4rem;
-    flex-direction: column;
-    justify-content: center;
-    width: 23.75rem;
-    background-color: ${COLORS.GRAY90};
-  `,
-  titleBox: css`
+
+  logoBox: css`
     position: relative;
-    width: 9.5rem;
+    width: 8rem;
     height: 1.5rem;
     display: block;
-    margin-bottom: 1rem;
+    margin-bottom: 1.75rem;
 
     > img {
       object-fit: contain;
     }
   `,
-  desc: css`
-    font-size: 0.75rem;
-    color: ${COLORS.GRAY40};
-    line-height: 2;
-    > a {
-      color: inherit;
-    }
-    > span {
-      position: relative;
-      :first-of-type {
-        margin-right: 1rem;
-        :after {
-          content: "";
-          width: 1px;
-          height: 0.75rem;
-          background-color: ${COLORS.GRAY40};
-          position: absolute;
-          right: -0.5rem;
-          top: 50%;
-          transform: translate(0, -50%);
-        }
-      }
-    }
-  `,
-  copyRight: css`
-    font-size: 0.75rem;
-    color: ${COLORS.GRAY40};
-    margin-top: 1rem;
-  `,
-  title: css`
-    font-size: 1rem;
-    font-weight: 700;
-    color: ${COLORS.GRAY40};
-    line-height: 2;
-  `,
-  helpBox: css`
+
+  infoBox: css`
     display: flex;
-    width: 100%;
-    align-items: center;
+    gap: 0 1rem;
+    margin-bottom: 0.5rem;
   `,
-  linkCSS: css`
-    font-size: 0.75rem;
-    white-space: nowrap;
+
+  info: css`
+    ${TEXTS.TITLE5};
+    color: ${NEWCOLORS.BLUEGRAY400};
+  `,
+
+  contour: css`
+    border-left: 1px solid ${NEWCOLORS.GRAY200};
+  `,
+
+  middleBox: css`
+    margin: 1.25rem 0 2.5rem;
+  `,
+
+  contactContainer: css`
+    width: 20.5rem;
+    padding: 2.5rem 0.5rem;
+  `,
+
+  contactBox: css`
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem 0;
+    margin-bottom: 1.75rem;
+  `,
+
+  contactTitle: css`
+    ${TEXTS.TITLE7};
+    color: ${NEWCOLORS.BLUEGRAY400};
+  `,
+
+  link: css`
     display: flex;
     align-items: center;
-    color: ${COLORS.GRAY40};
+    ${TEXTS.TITLE5};
+    color: ${NEWCOLORS.BLUEGRAY400};
+  `,
+
+  kakaoLogo: css`
+    display: block;
+    position: relative;
+    margin-right: 0.25rem;
+    width: 1rem;
+    height: 1rem;
+
+    > img {
+      object-fit: contain;
+    }
+  `,
+
+  linkBox: css`
+    display: flex;
+    gap: 0 1rem;
+  `,
+
+  underlineLink: css`
+    ${TEXTS.UNDERLINE};
+    color: ${NEWCOLORS.BLUEGRAY400};
   `,
 };

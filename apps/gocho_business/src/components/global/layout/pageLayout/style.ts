@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 
 export const cssObj = {
   mainWrapper: css`
+    min-height: calc(100vh - 4rem);
     background-color: #f2f2f5;
   `,
 

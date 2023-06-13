@@ -6,7 +6,7 @@ export const setInfoTypeButton: {
 }[] = [
   {
     text: "알림",
-    type: "notice",
+    type: "alarm",
   },
   {
     text: "공지사항",

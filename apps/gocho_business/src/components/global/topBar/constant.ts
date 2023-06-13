@@ -14,5 +14,5 @@ export const COMPANY_LINK_ARR = [
 
 export const USER_LINK_ARR = [
   { name: "내 계정 관리", url: INTERNAL_URL.MY_PAGE },
-  { name: "알림 설정", url: INTERNAL_URL.HELP },
+  { name: "알림 설정", url: INTERNAL_URL.ALARM_SETTING },
 ] as const;

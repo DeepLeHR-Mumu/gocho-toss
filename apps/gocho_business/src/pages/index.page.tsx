@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 
-import { PageLayout } from "@/components";
+import { Footer, PageLayout } from "@/components";
 
 import { HeaderPart, InfoPart, ButtonPart, JdPart, SidePart } from "./index/part";
 import { cssObj } from "./index/style";
@@ -19,6 +19,7 @@ const HomePage: NextPage = () => (
           <SidePart />
         </div>
       </div>
+      <Footer />
     </PageLayout>
   </div>
 );
