@@ -17,6 +17,7 @@ export const cssObj = {
 
   partContainer: css`
     flex-grow: 1;
+    width: 59.5rem;
     position: relative;
     background-color: ${NEWCOLORS.WHITE};
     padding: 2rem;

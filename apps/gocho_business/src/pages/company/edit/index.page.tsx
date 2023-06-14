@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { FiEdit } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 import { NextPage } from "next";
 
@@ -174,58 +173,35 @@ const CompanyEditPage: NextPage = () => {
       <PageLayout>
         <div css={cssObj.contentWrapper}>
           <CompanySideNav />
-          <div css={cssObj.partContainer}>
-            <form css={cssObj.container} onSubmit={handleSubmit(addCompanyDetail)}>
-              <header css={cssObj.header}>
-                <div>
-                  <h2 css={cssObj.title}>기업정보</h2>
-                  <p css={cssObj.desc}>변경사항이 있다면 작성 후 수정완료 버튼을 꼭 눌러주세요</p>
-                </div>
-                <div css={cssObj.topButtonBox}>
-                  <CommonStatusChip status={companyDetailData.status.name} isExpired={false} />
-                  <div css={cssObj.sharedButtonBox}>
-                    <SharedButton
-                      onClickHandler="submit"
-                      text="기업 정보 수정완료"
-                      radius="round"
-                      isFullWidth
-                      isDisabled={!companyDetailData?.uploader.isMine}
-                      fontColor={COLORS.GRAY100}
-                      iconObj={{
-                        icon: FiEdit,
-                        location: "left",
-                      }}
-                      size="medium"
-                      backgroundColor={COLORS.BLUE_FIRST40}
-                    />
-                  </div>
-                </div>
-              </header>
-              <CompanyInfoPart />
-              <LastEditInfoPart />
-              {companyDetailData.status.reason && <CompanyStatusPart />}
-              <section css={cssObj.companyInfoBox}>
-                <BasicPart companyForm={companyForm} setBgImage={setBgImage} />
-                <WelfarePart companyForm={companyForm} />
-              </section>
-              <div css={cssObj.sharedButtonBox}>
-                <SharedButton
-                  onClickHandler="submit"
-                  text="기업 정보 수정완료"
-                  radius="round"
-                  isFullWidth
-                  isDisabled={!companyDetailData?.uploader.isMine}
-                  fontColor={COLORS.GRAY100}
-                  iconObj={{
-                    icon: FiEdit,
-                    location: "left",
-                  }}
-                  size="medium"
-                  backgroundColor={COLORS.BLUE_FIRST40}
-                />
-              </div>
-            </form>
-          </div>
+          <form css={cssObj.formContainer} onSubmit={handleSubmit(addCompanyDetail)}>
+            <CommonStatusChip status={companyDetailData.status.name} isExpired={false} />
+            {companyDetailData.status.reason && <CompanyStatusPart />}
+            <LastEditInfoPart />
+            <CompanyInfoPart companyForm={companyForm} setBgImage={setBgImage} />
+            <BasicPart companyForm={companyForm} />
+            <WelfarePart companyForm={companyForm} />
+            <div css={cssObj.infoBox}>
+              <p css={cssObj.info}>
+                · 영업일 기준 최대 2일 이내 검수 후 고초대졸닷컴 내 수정된 정보가 업데이트 됩니다.
+              </p>
+              <p css={cssObj.info}>
+                · 수정 요청 반려 시, 이메일 및 비즈니스 내 알림으로 알려드리며, 해당 사항 수정 후 다시 제출하여야
+                합니다. 충분한 검토 후 제출해 주세요
+              </p>
+            </div>
+            <div css={cssObj.buttonBox}>
+              <SharedButton
+                onClickHandler="submit"
+                text="수정 요청"
+                radius="round"
+                isFullWidth
+                isDisabled={!companyDetailData?.uploader.isMine}
+                fontColor={COLORS.GRAY100}
+                size="medium"
+                backgroundColor={COLORS.BLUE_FIRST40}
+              />
+            </div>
+          </form>
         </div>
       </PageLayout>
     </>

@@ -1,4 +1,4 @@
-export { HeaderPart } from "./headerPart";
+export { ButtonPart } from "./buttonPart";
 export { TitlePart } from "./titlePart";
 export { BasicPart } from "./basicPart";
 export { RequiredPart } from "./requiredPart";
