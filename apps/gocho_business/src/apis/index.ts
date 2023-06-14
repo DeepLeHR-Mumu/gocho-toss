@@ -8,6 +8,7 @@ export { useFindPassword } from "./auth/usefindPassword";
 export { useAddCompanyDetail } from "./company/useAddCompanyDetail";
 export { useCompanyDetail } from "./company/useCompanyDetail";
 export { useCountInfo } from "./company/useCountInfo";
+export { useManagerArr } from "./company/useManagerArr";
 
 export { useFactoryArr } from "./factory/useFactoryArr";
 export { useAddFactory } from "./factory/useAddFactory";
@@ -24,7 +25,5 @@ export { useJdDetail } from "./jd/useJdDetail";
 export { jdArrKeyObj } from "./jd/useJdArr/type";
 
 export { useManagerProfile } from "./manager/useManagerProfile";
-
-export { useRecruiterArr } from "./recruiter/useRecruiterArr";
 
 export { useAxiosInterceptor, axiosInstance, axiosNoTokenInstance } from "./useIsRefreshLock";

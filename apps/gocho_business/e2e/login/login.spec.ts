@@ -55,6 +55,6 @@ test("로그인 안한 상태에서 타 페이지 접속시 블로킹", async ({
   await expect(page).toHaveURL(INTERNAL_URL.LOGIN);
   await page.goto(INTERNAL_URL.HOME);
   await expect(page).toHaveURL(INTERNAL_URL.LOGIN);
-  await page.goto(INTERNAL_URL.RECRUITER_LIST);
+  await page.goto(INTERNAL_URL.MANAGER_LIST);
   await expect(page).toHaveURL(INTERNAL_URL.LOGIN);
 });

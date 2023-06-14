@@ -8,6 +8,7 @@ import { JdCardProps } from "./type";
 
 export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
   const isExpired = dayjs(jd.endTime).isBefore(dayjs());
+  const isJdActive = jd.status.name === "진행중" || jd.status.name === "수정대기" || jd.status.name === "수정반려";
 
   return (
     <div css={cssObj.cardContainer}>
@@ -24,15 +25,10 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
             "YYYY.MM.DD"
           )}`}</p>
         </div>
-        {jd.updatedTime ? (
+        {isJdActive && (
           <div css={cssObj.infoBox}>
-            <p css={cssObj.info}>수정일</p>
-            <p css={cssObj.info}>{dayjs(jd.updatedTime).format("YY.MM.DD")}</p>
-          </div>
-        ) : (
-          <div css={cssObj.infoBox}>
-            <p css={cssObj.info}>등록일</p>
-            <p css={cssObj.info}>{dayjs(jd.createdTime).format("YY.MM.DD")}</p>
+            <p css={cssObj.info}>조회수</p>
+            <p css={cssObj.info}>{jd.view}</p>
           </div>
         )}
       </div>

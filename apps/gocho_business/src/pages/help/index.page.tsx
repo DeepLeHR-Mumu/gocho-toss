@@ -3,18 +3,18 @@ import Image from "next/image";
 import chatIcon from "@/public/image/help/chat.svg";
 import { NextPageWithLayout } from "@/types";
 
-import { SideNav } from "@/components/global/sideNav";
+import { EtcSideNav } from "@/components/global/etcSideNav";
 import { PageLayout } from "@/components";
 
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
 const HelpPage: NextPageWithLayout = () => (
-  <div>
+  <>
     <PageHead />
     <PageLayout>
       <div css={cssObj.contentWrapper}>
-        <SideNav />
+        <EtcSideNav />
         <div css={cssObj.partContainer}>
           <h2 css={cssObj.pageTitle}>고객센터</h2>
           <div css={cssObj.descWrapper}>
@@ -33,7 +33,7 @@ const HelpPage: NextPageWithLayout = () => (
         </div>
       </div>
     </PageLayout>
-  </div>
+  </>
 );
 
 export default HelpPage;

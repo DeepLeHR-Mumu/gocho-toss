@@ -6,7 +6,7 @@ export const INTERNAL_URL = {
   JD_EDIT: (jdIndex: number) => `/jd/${jdIndex}/edit`,
   FACTORY_LIST: "/factory/list",
   COMPANY_EDIT: "/company/edit",
-  RECRUITER_LIST: "/recruiter/list",
+  MANAGER_LIST: "/manager/list",
   HELP: "/help",
   ALARM_LIST: "/alarm/list",
   ALARM_SETTING: "/alarm/setting",

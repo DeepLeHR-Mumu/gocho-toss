@@ -8,6 +8,7 @@ export const CommonStatusChip: FunctionComponent<CommonStatusChipProps> = ({ sta
     if (isExpired) {
       return "공고마감";
     }
+
     if (!isExpired && status === "진행중") {
       return "진행중";
     }

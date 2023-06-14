@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 
-import { SideNav } from "@/components/global/sideNav";
+import { EtcSideNav } from "@/components/global/etcSideNav";
 import { PageLayout } from "@/components";
 
 import { cssObj } from "./style";
@@ -9,7 +9,7 @@ const Notice: NextPage = () => (
   <div>
     <PageLayout>
       <div css={cssObj.contentWrapper}>
-        <SideNav />
+        <EtcSideNav />
         <div css={cssObj.partContainer}>
           <h2 css={cssObj.pageTitle}>공지사항</h2>
           <p css={cssObj.pageDesc}>

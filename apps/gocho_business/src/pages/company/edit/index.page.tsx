@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import { useForm } from "react-hook-form";
+import { NextPage } from "next";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 import { SharedButton } from "shared-ui/business/sharedButton";
@@ -11,7 +12,7 @@ import { useAddCompanyDetail, useCompanyDetail, useManagerProfile } from "@/apis
 import { CommonStatusChip, PageLayout } from "@/components";
 import { useToast } from "@/globalStates";
 import { companyEditConfirmEvent, companyEditDoneEvent, companyEditFailEvent, companyEditPageFunnelEvent } from "@/ga";
-import { NextPageWithLayout } from "@/types";
+import { CompanySideNav } from "@/components/global/companySideNav";
 
 import { PageHead } from "./pageHead";
 import { CompanyInfoPart, CompanyStatusPart, LastEditInfoPart, BasicPart, WelfarePart } from "./part";
@@ -19,7 +20,7 @@ import { COMPANY_MESSAGE_OBJ, ALREADY_DONE_EDIT_MESSAGE } from "./constants";
 import { CompanyFormValues } from "./type";
 import { cssObj } from "./style";
 
-const CompanyEditPage: NextPageWithLayout = () => {
+const CompanyEditPage: NextPage = () => {
   const [bgImage, setBgImage] = useState<File>();
 
   const isRefetching = useRef(false);
@@ -168,17 +169,45 @@ const CompanyEditPage: NextPageWithLayout = () => {
   }
 
   return (
-    <main css={cssObj.wrapper}>
+    <>
       <PageHead />
       <PageLayout>
-        <form css={cssObj.container} onSubmit={handleSubmit(addCompanyDetail)}>
-          <header css={cssObj.header}>
-            <div>
-              <h2 css={cssObj.title}>기업정보</h2>
-              <p css={cssObj.desc}>변경사항이 있다면 작성 후 수정완료 버튼을 꼭 눌러주세요</p>
-            </div>
-            <div css={cssObj.topButtonBox}>
-              <CommonStatusChip status={companyDetailData.status.name} isExpired={false} />
+        <div css={cssObj.contentWrapper}>
+          <CompanySideNav />
+          <div css={cssObj.partContainer}>
+            <form css={cssObj.container} onSubmit={handleSubmit(addCompanyDetail)}>
+              <header css={cssObj.header}>
+                <div>
+                  <h2 css={cssObj.title}>기업정보</h2>
+                  <p css={cssObj.desc}>변경사항이 있다면 작성 후 수정완료 버튼을 꼭 눌러주세요</p>
+                </div>
+                <div css={cssObj.topButtonBox}>
+                  <CommonStatusChip status={companyDetailData.status.name} isExpired={false} />
+                  <div css={cssObj.sharedButtonBox}>
+                    <SharedButton
+                      onClickHandler="submit"
+                      text="기업 정보 수정완료"
+                      radius="round"
+                      isFullWidth
+                      isDisabled={!companyDetailData?.uploader.isMine}
+                      fontColor={COLORS.GRAY100}
+                      iconObj={{
+                        icon: FiEdit,
+                        location: "left",
+                      }}
+                      size="medium"
+                      backgroundColor={COLORS.BLUE_FIRST40}
+                    />
+                  </div>
+                </div>
+              </header>
+              <CompanyInfoPart />
+              <LastEditInfoPart />
+              {companyDetailData.status.reason && <CompanyStatusPart />}
+              <section css={cssObj.companyInfoBox}>
+                <BasicPart companyForm={companyForm} setBgImage={setBgImage} />
+                <WelfarePart companyForm={companyForm} />
+              </section>
               <div css={cssObj.sharedButtonBox}>
                 <SharedButton
                   onClickHandler="submit"
@@ -195,37 +224,11 @@ const CompanyEditPage: NextPageWithLayout = () => {
                   backgroundColor={COLORS.BLUE_FIRST40}
                 />
               </div>
-            </div>
-          </header>
-
-          <CompanyInfoPart />
-          <LastEditInfoPart />
-          {companyDetailData.status.reason && <CompanyStatusPart />}
-
-          <section css={cssObj.companyInfoBox}>
-            <BasicPart companyForm={companyForm} setBgImage={setBgImage} />
-            <WelfarePart companyForm={companyForm} />
-          </section>
-
-          <div css={cssObj.sharedButtonBox}>
-            <SharedButton
-              onClickHandler="submit"
-              text="기업 정보 수정완료"
-              radius="round"
-              isFullWidth
-              isDisabled={!companyDetailData?.uploader.isMine}
-              fontColor={COLORS.GRAY100}
-              iconObj={{
-                icon: FiEdit,
-                location: "left",
-              }}
-              size="medium"
-              backgroundColor={COLORS.BLUE_FIRST40}
-            />
+            </form>
           </div>
-        </form>
+        </div>
       </PageLayout>
-    </main>
+    </>
   );
 };
 
