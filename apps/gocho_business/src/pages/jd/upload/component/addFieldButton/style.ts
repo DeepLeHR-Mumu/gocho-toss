@@ -3,7 +3,7 @@ import { NEWCOLORS } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
-  addInputButton: css`
+  addFieldButton: css`
     display: flex;
     gap: 0 0.5rem;
     border: 1px solid ${NEWCOLORS.GRAY200};

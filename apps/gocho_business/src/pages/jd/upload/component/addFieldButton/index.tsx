@@ -5,7 +5,7 @@ import { AddFieldButtonProps } from "./type";
 import { cssObj } from "./style";
 
 export const AddFieldButton: FunctionComponent<AddFieldButtonProps> = ({ onClickHandler, text }) => (
-  <button type="button" css={cssObj.addInputButton} onClick={onClickHandler}>
+  <button type="button" css={cssObj.addFieldButton} onClick={onClickHandler}>
     <FiPlus />
     {text}
   </button>

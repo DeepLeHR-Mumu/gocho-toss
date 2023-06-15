@@ -21,13 +21,21 @@ export const commonCssObj = {
   container: css`
     display: flex;
     align-items: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
+
+    :last-of-type {
+      margin-bottom: 0;
+    }
   `,
 
   longContainer: css`
     display: flex;
     align-items: flex-start;
     margin-bottom: 2.5rem;
+
+    :last-of-type {
+      margin-bottom: 0;
+    }
   `,
 
   inputTitle: (hasMargin: boolean) => css`
@@ -61,7 +69,7 @@ export const commonCssObj = {
     align-items: center;
     justify-content: space-between;
     border: 1px solid ${isError ? `${NEWCOLORS.RED300}` : `${NEWCOLORS.GRAY200}`};
-    border-radius: 0.5rem;
+    border-radius: 0.75rem;
     width: ${width}rem;
     height: 3.25rem;
     padding: 0 1rem;
@@ -80,7 +88,7 @@ export const commonCssObj = {
     left: 0;
     width: 100%;
     border: 1px solid ${NEWCOLORS.GRAY200};
-    border-radius: 0.5rem;
+    border-radius: 0.75rem;
     max-height: ${isOpen ? `${maxHeight}rem` : 0};
     overflow-x: hidden;
     overflow-y: scroll;
@@ -121,7 +129,7 @@ export const commonCssObj = {
     max-width: 59.625rem;
     height: 5.75rem;
     border: 1px solid ${NEWCOLORS.GRAY200};
-    border-radius: 0.5rem;
+    border-radius: 0.75rem;
     padding: 1rem;
     font-size: 1rem;
     font-weight: 400;
@@ -132,14 +140,17 @@ export const commonCssObj = {
     }
   `,
 
-  input: (width: number, isError: boolean) => css`
+  input: (width: number, isDisabled: boolean) => css`
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    border: 1px solid ${isError ? `${NEWCOLORS.RED300}` : `${NEWCOLORS.GRAY200}`};
-    border-radius: 0.5rem;
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    border-radius: 0.75rem;
+    color: ${NEWCOLORS.BLACK};
+
     width: ${width}rem;
     height: 3.25rem;
+    background-color: ${isDisabled ? `${NEWCOLORS.GRAY100}` : `${NEWCOLORS.WHITE}`};
     padding: 0 1rem;
     font-weight: 400;
 
@@ -154,7 +165,7 @@ export const commonCssObj = {
     align-items: center;
     height: 2.25rem;
     gap: 0 2.5rem;
-    margin-right: 2rem;
+    margin-bottom: 1.5rem;
   `,
 
   label: css`
@@ -203,20 +214,5 @@ export const commonCssObj = {
   errorMessage: css`
     font-size: 0.75rem;
     color: ${NEWCOLORS.RED300};
-  `,
-
-  addInputButton: css`
-    display: flex;
-    gap: 0 0.5rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
-    border-radius: 0.5rem;
-    height: 3.25rem;
-    padding: 1rem;
-    background-color: ${NEWCOLORS.GRAY50};
-    ${TEXTS.TITLE5};
-
-    > svg {
-      color: ${NEWCOLORS.GRAY300};
-    }
   `,
 };

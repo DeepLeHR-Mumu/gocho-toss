@@ -1,5 +1,5 @@
 import { FunctionComponent, useState } from "react";
-import { FiExternalLink, FiPlus } from "react-icons/fi";
+import { FiExternalLink } from "react-icons/fi";
 import { MdOutlineNavigateNext } from "react-icons/md";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
@@ -202,15 +202,11 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
           ))}
           <div css={cssObj.addButtonWrapper}>
             {applyRouteArr.fields.length < 15 && (
-              <button
-                type="button"
-                css={commonCssObj.addInputButton}
-                onClick={() => {
+              <AddFieldButton
+                onClickHandler={() => {
                   applyRouteArr.append({ value: "" });
                 }}
-              >
-                <FiPlus />
-              </button>
+              />
             )}
           </div>
         </div>

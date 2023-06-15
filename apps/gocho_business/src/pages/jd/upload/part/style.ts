@@ -21,7 +21,7 @@ export const commonCssObj = {
   container: css`
     display: flex;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
   `,
 
   longContainer: css`
@@ -132,15 +132,14 @@ export const commonCssObj = {
     }
   `,
 
-  input: (width: number, isDisabled: boolean) => css`
+  input: (width: number, isError: boolean) => css`
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${isError ? `${NEWCOLORS.RED300}` : `${NEWCOLORS.GRAY200}`};
     border-radius: 0.5rem;
     width: ${width}rem;
     height: 3.25rem;
-    background-color: ${isDisabled ? `${NEWCOLORS.GRAY100}` : `${NEWCOLORS.WHITE}`};
     padding: 0 1rem;
     font-weight: 400;
 
@@ -204,20 +203,5 @@ export const commonCssObj = {
   errorMessage: css`
     font-size: 0.75rem;
     color: ${NEWCOLORS.RED300};
-  `,
-
-  addInputButton: css`
-    display: flex;
-    gap: 0 0.5rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
-    border-radius: 0.5rem;
-    height: 3.25rem;
-    padding: 1rem;
-    background-color: ${NEWCOLORS.GRAY50};
-    ${TEXTS.TITLE5};
-
-    > svg {
-      color: ${NEWCOLORS.GRAY300};
-    }
   `,
 };
