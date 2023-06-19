@@ -1,11 +1,19 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { COLORS, NEWCOLORS } from "shared-style/color";
+import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
-  wrapper: css`
-    width: 20rem;
+  welFareWrapper: css`
+    display: flex;
+    align-items: flex-start;
+    margin-top: 1.25rem;
   `,
+
+  inputContainer: css`
+    flex-grow: 1;
+  `,
+
   title: (isMine: boolean) => css`
     font-size: 1rem;
     font-weight: 400;
@@ -13,54 +21,16 @@ export const cssObj = {
     margin-bottom: 0.5rem;
     display: block;
   `,
+
   hidden: css`
     display: none;
   `,
+
   writeBox: css`
     position: relative;
     margin-bottom: 0.25rem;
   `,
-  enterButton: (isMine: boolean) => css`
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translate(0, -50%);
-    width: 1rem;
-    height: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: ${isMine ? COLORS.GRAY65 : COLORS.GRAY10};
-  `,
-  inputLine: (isMine: boolean) => css`
-    border: 1px solid ${isMine ? COLORS.GRAY65 : COLORS.GRAY10};
-    padding: 0.75rem 2.5rem 0.75rem 1rem;
-    border-radius: 0.3125rem;
-    font-size: 1rem;
-    width: 100%;
-    font-weight: 400;
 
-    ::placeholder {
-      color: ${isMine ? COLORS.GRAY65 : COLORS.GRAY30};
-    }
-  `,
-  container: (isMine: boolean) => css`
-    border: 1px solid ${isMine ? COLORS.GRAY65 : COLORS.GRAY10};
-  `,
-  desc: (isMine: boolean) => css`
-    padding: 0.5rem 1rem;
-    background-color: ${COLORS.GRAY95};
-    font-size: 0.875rem;
-    color: ${isMine ? COLORS.GRAY65 : COLORS.GRAY30};
-    font-weight: 400;
-    height: 3.75rem;
-  `,
-  listBox: css`
-    height: 21.25rem;
-    overflow: hidden;
-    overflow-y: scroll;
-    background-color: ${COLORS.GRAY90};
-  `,
   buttonLine: css`
     align-items: center;
     width: 100%;
@@ -69,30 +39,58 @@ export const cssObj = {
     border-bottom: 1px solid ${COLORS.GRAY70};
     background-color: ${COLORS.GRAY100};
   `,
-  noData: (isMine: boolean) => css`
-    font-size: 1rem;
-    height: 21.25rem;
+
+  noData: css`
+    ${TEXTS.TITLE4};
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${isMine ? COLORS.GRAY65 : COLORS.GRAY30};
-    background-color: ${COLORS.GRAY90};
+    color: ${NEWCOLORS.BLUEGRAY200};
+    padding: 1rem 0;
   `,
-  valueDesc: (isMine: boolean) => css`
-    font-size: 1rem;
-    color: ${isMine ? COLORS.GRAY65 : COLORS.GRAY10};
-    text-align: left;
+
+  welfareList: css`
+    display: flex;
+  `,
+
+  inputLabel: css`
+    position: relative;
+    display: flex;
     width: 100%;
-    overflow-wrap: anywhere;
-    width: 80%;
-    padding: 0.75rem 1rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    gap: 0 1rem;
   `,
-  deleteButton: (isMine: boolean) => css`
-    margin-right: 1rem;
-    width: 2rem;
-    height: 2rem;
-    background-color: ${COLORS.GRAY80};
+
+  welfareInput: (isDisabled: boolean) => css`
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    border-radius: 0.75rem;
+    color: ${NEWCOLORS.BLACK};
+    height: 3.25rem;
+    background-color: ${isDisabled ? `${NEWCOLORS.GRAY100}` : `${NEWCOLORS.WHITE}`};
+    padding: 0 1rem;
+    font-weight: 400;
+
+    ::placeholder {
+      ${TEXTS.TITLE5};
+      color: ${NEWCOLORS.GRAY300};
+    }
+  `,
+
+  deleteButton: css`
+    position: absolute;
+    right: 0;
+    margin-right: 0.5rem;
     border-radius: 50%;
-    color: ${isMine ? COLORS.GRAY65 : COLORS.GRAY10};
+    width: 1.75rem;
+    height: 1.75rem;
+    color: ${COLORS.GRAY10};
+    background-color: ${COLORS.GRAY70};
+    z-index: 20;
   `,
 };

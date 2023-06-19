@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
   spinnerBox: css`
@@ -8,19 +8,12 @@ export const cssObj = {
     min-height: 30vh;
     position: relative;
   `,
-  wrapper: css`
-    margin-bottom: 1.5rem;
-  `,
-  subTitle: (isMine: boolean) => css`
-    font-size: 1rem;
-    font-weight: 700;
-    color: ${isMine ? COLORS.GRAY65 : COLORS.GRAY10};
-    margin-bottom: 0.5rem;
-    display: inline-block;
-  `,
-  welfareBox: css`
+
+  welfareButtonContainer: css`
     display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
+    gap: 0 1rem;
+    justify-content: space-between;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
   `,
 };

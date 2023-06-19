@@ -1,12 +1,14 @@
 import { FunctionComponent } from "react";
-import { FiCornerDownLeft } from "react-icons/fi";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
 import { useCompanyDetail, useManagerProfile } from "@/apis";
 
 import { commonCssObj } from "@/pages/jd/upload/part/style";
-import { InformDesc, WelfareForm } from "../../component";
+// import { AddFieldButton } from "@/pages/jd/upload/component";
+
+import { WelfareForm } from "../../component";
+// import { WELFARE_ARR } from "./constant";
 import { welfareArrCreator } from "./util";
 import { WelfarePartProps } from "./type";
 import { cssObj } from "./style";
@@ -30,22 +32,25 @@ export const WelfarePart: FunctionComponent<WelfarePartProps> = ({ companyForm }
   return (
     <section css={commonCssObj.partContainer} data-testid="company/edit/WelfarePart">
       <h3 css={commonCssObj.partTitle}>상세 복지 정보</h3>
-      {companyDetailData.uploader.isMine && (
-        <InformDesc
-          Icon={FiCornerDownLeft}
-          desc="복지 항목에서 입력 후 키보드의 엔터를 누르거나, 입력폼 오른쪽 $icon 엔터모양 아이콘을 클릭하면 추가됩니다"
-        />
-      )}
-      <div css={cssObj.welfareBox}>
+      {/* <div css={cssObj.welfareButtonContainer}> */}
+      {/*  {WELFARE_ARR.map((welfareObj) => ( */}
+      {/*    <AddFieldButton */}
+      {/*      key={`welfareAddButton${welfareObj.data}`} */}
+      {/*      onClickHandler={() => null} */}
+      {/*      text={welfareObj.name} */}
+      {/*    /> */}
+      {/*  ))} */}
+      {/* </div> */}
+      <div>
         {welfareArr.map((welfare) => (
           <WelfareForm
             key={welfare.title}
+            title={welfare.title}
+            desc={welfare.desc}
             welfareValueArr={welfare.welfareValueArr}
             isMine={!companyDetailData.uploader.isMine}
             companyFormObj={companyForm}
             registerKey={welfare.registerKey}
-            title={welfare.title}
-            desc={welfare.desc}
           />
         ))}
       </div>

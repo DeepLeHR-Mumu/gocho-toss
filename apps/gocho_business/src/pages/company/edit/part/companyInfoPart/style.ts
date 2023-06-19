@@ -54,7 +54,7 @@ export const cssObj = {
 
   companyInfoWrapper: css`
     position: relative;
-    padding: 1.25rem 2rem 0;
+    padding: 1.25rem 2rem 2rem;
   `,
 
   logoBox: css`

@@ -15,7 +15,7 @@ import { CompanySideNav } from "@/components/global/companySideNav";
 
 import { PageHead } from "./pageHead";
 import { CompanyInfoPart, CompanyStatusPart, LastEditInfoPart, BasicPart, WelfarePart } from "./part";
-import { COMPANY_MESSAGE_OBJ, ALREADY_DONE_EDIT_MESSAGE } from "./constants";
+import { COMPANY_MESSAGE_OBJ, ALREADY_DONE_EDIT_MESSAGE } from "./constant";
 import { CompanyFormValues } from "./type";
 import { cssObj } from "./style";
 
