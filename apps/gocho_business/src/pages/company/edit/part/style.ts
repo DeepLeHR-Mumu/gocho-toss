@@ -96,14 +96,19 @@ export const commonCssObj = {
     border: ${isOpen ? `1px solid ${COLORS.GRAY30}` : 0};
 
     ::-webkit-scrollbar {
-      padding: 0.125rem;
+      overflow: hidden;
+      border-radius: 0.5rem;
       width: 0.5rem;
+      height: calc(100% - 2rem);
+      margin: auto 0;
       background-color: ${COLORS.GRAY90};
     }
 
     ::-webkit-scrollbar-thumb {
       border-radius: 0.5rem;
+
       background-color: ${COLORS.GRAY60};
+      overflow: hidden;
     }
   `,
 

@@ -26,9 +26,14 @@ export const cssObj = {
   `,
 
   inputWrapper: css`
+    position: relative;
     display: flex;
     align-items: center;
     gap: 0 1rem;
+  `,
+
+  hiddenInput: css`
+    display: none;
   `,
 
   titleWrapper: css`

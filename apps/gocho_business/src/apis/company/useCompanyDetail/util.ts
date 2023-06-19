@@ -16,7 +16,7 @@ export const companyDetailSelector = ({ data }: ResponseObjDef) => ({
   industry: data.industry,
   businessNumber: data.business_number,
   employeeNumber: data.employee_number,
-  foundNumber: data.found_date,
+  foundDate: data.found_date,
   location: {
     address: data.location.address,
     x: data.location.x,

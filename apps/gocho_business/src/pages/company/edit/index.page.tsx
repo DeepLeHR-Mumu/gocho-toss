@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { NextPage } from "next";
+import dayjs from "dayjs";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 import { SharedButton } from "shared-ui/business/sharedButton";
@@ -8,13 +9,13 @@ import { COLORS } from "shared-style/color";
 import { usePreventRouting } from "shared-hooks";
 
 import { useAddCompanyDetail, useCompanyDetail, useManagerProfile } from "@/apis";
-import { CommonStatusChip, PageLayout } from "@/components";
+import { PageLayout } from "@/components";
 import { useToast } from "@/globalStates";
 import { companyEditConfirmEvent, companyEditDoneEvent, companyEditFailEvent, companyEditPageFunnelEvent } from "@/ga";
 import { CompanySideNav } from "@/components/global/companySideNav";
 
 import { PageHead } from "./pageHead";
-import { CompanyInfoPart, CompanyStatusPart, LastEditInfoPart, BasicPart, WelfarePart } from "./part";
+import { CompanyInfoPart, LastEditInfoPart, BasicPart, WelfarePart } from "./part";
 import { COMPANY_MESSAGE_OBJ, ALREADY_DONE_EDIT_MESSAGE } from "./constant";
 import { CompanyFormValues } from "./type";
 import { cssObj } from "./style";
@@ -110,6 +111,9 @@ const CompanyEditPage: NextPage = () => {
             };
 
       reset({
+        industry: companyDetailData.industry,
+        size: companyDetailData.size,
+        found_date: dayjs(new Date(companyDetailData.foundDate)).format("YYYY-MM-DD"),
         employee_number: companyDetailData.employeeNumber,
         intro: companyDetailData.intro || "",
         location: {
@@ -174,8 +178,6 @@ const CompanyEditPage: NextPage = () => {
         <div css={cssObj.contentWrapper}>
           <CompanySideNav />
           <form css={cssObj.formContainer} onSubmit={handleSubmit(addCompanyDetail)}>
-            <CommonStatusChip status={companyDetailData.status.name} isExpired={false} />
-            {companyDetailData.status.reason && <CompanyStatusPart />}
             <LastEditInfoPart />
             <CompanyInfoPart companyForm={companyForm} setBgImage={setBgImage} />
             <BasicPart companyForm={companyForm} />

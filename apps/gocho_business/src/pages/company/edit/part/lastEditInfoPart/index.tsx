@@ -7,6 +7,7 @@ import { Spinner } from "shared-ui/common/atom/spinner";
 
 import { useCompanyDetail, useManagerProfile } from "@/apis";
 
+import { CommonStatusChip } from "@/components";
 import { cssObj } from "./style";
 
 export const LastEditInfoPart: FunctionComponent = () => {
@@ -26,12 +27,13 @@ export const LastEditInfoPart: FunctionComponent = () => {
   if (companyDetailData.status.name === "수정반려" || companyDetailData.status.name === "등록반려") {
     return (
       <div css={cssObj.companionWrapper}>
+        <CommonStatusChip status={companyDetailData.status.name} isExpired={false} />
         <MdWarningAmber />
         <p css={cssObj.companionDesc}>기업정보 수정요청 반려됨</p>
         <p css={cssObj.userInfo}>
           등록자
           <FiUser />
-          {companyDetailData.uploader.name}({companyDetailData.uploader.department})
+          {companyDetailData.uploader.name}({companyDetailData.uploader.department}){companyDetailData.status.reason}
         </p>
       </div>
     );
@@ -40,6 +42,7 @@ export const LastEditInfoPart: FunctionComponent = () => {
   if (companyDetailData.status.name === "등록대기" || companyDetailData.status.name === "수정대기") {
     return (
       <div css={cssObj.companionWrapper}>
+        <CommonStatusChip status={companyDetailData.status.name} isExpired={false} />
         <MdWarningAmber />
         <p css={cssObj.companionDesc}>기업정보 수정요청 대기중</p>
         <p css={cssObj.userInfo}>
@@ -55,6 +58,7 @@ export const LastEditInfoPart: FunctionComponent = () => {
 
   return (
     <div css={cssObj.wrapper}>
+      <CommonStatusChip status={companyDetailData.status.name} isExpired={false} />
       <FiInfo />
       <p css={cssObj.desc}>
         기업정보 수정 등록일

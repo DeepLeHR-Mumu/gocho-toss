@@ -1,4 +1,7 @@
 export interface CompanyFormValues {
+  industry: string;
+  size: string;
+  found_date: string;
   intro: string;
   location: {
     address: string;
