@@ -129,8 +129,8 @@ export const cssObj = {
     display: ${isOpen ? "block" : "none"};
     position: absolute;
     top: 2.75rem;
-    left: 0;
-    width: 100%;
+    right: 0.25rem;
+    width: 8rem;
     max-height: 20rem;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -146,7 +146,7 @@ export const cssObj = {
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    padding: 0 0.5rem;
+    padding: 0.5rem 1rem;
     transition: 0.1s;
 
     :hover {

@@ -8,7 +8,7 @@ export interface RequestObjDef {
   status?: "progress" | "waiting" | "reject";
   size?: number;
   page?: number;
-  searchWord?: string | null;
+  search?: string | null;
 }
 
 export interface ResponseObjDef {

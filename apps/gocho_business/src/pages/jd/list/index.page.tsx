@@ -20,14 +20,15 @@ const JdListPage: NextPage = () => {
   const router = useRouter();
   const [isOrderContainerOpen, setIsOrderContainerOpen] = useState<boolean>(false);
   const [selectedOrder, setSelectedOrder] = useState<string>("최신");
-  const [selectedFilter, setSelectedFilter] = useState<string>("진행중");
+  const [selectedFilter, setSelectedFilter] = useState<FilterDef>("almostDeadline");
   const [searchWord, setSearchWord] = useState<string | null>(null);
 
   const { data: jdDataObj } = useJdArr(true, {
     order: router.query.order as OrderDef,
+    filter: selectedFilter,
     size: 10,
     page: Number(router.query.page),
-    searchWord,
+    search: searchWord,
   });
 
   const { register, handleSubmit } = useForm<SearchValues>({});
@@ -37,7 +38,7 @@ const JdListPage: NextPage = () => {
   };
 
   const changeFilterHandler = (filterObj: { filter: FilterDef; text: string }) => {
-    setSelectedFilter(filterObj.text);
+    setSelectedFilter(filterObj.filter);
   };
 
   const changeOrderHandler = (orderObj: { order: OrderDef; text: string }) => {
@@ -70,14 +71,6 @@ const JdListPage: NextPage = () => {
     );
   }
 
-  if (jdDataObj.pageResult.totalElements === 0) {
-    return (
-      <section css={cssObj.noDataSectionContainer}>
-        <p css={cssObj.noDataDesc}>등록된 공고가 없습니다.</p>
-      </section>
-    );
-  }
-
   return (
     <PageLayout>
       <div css={cssObj.contentContainer}>
@@ -85,7 +78,7 @@ const JdListPage: NextPage = () => {
         <div css={cssObj.filterBox}>
           {JD_FILTER_BUTTON_ARR.map((filterObj) => (
             <button
-              css={cssObj.filterOption(selectedFilter === filterObj.text)}
+              css={cssObj.filterOption(selectedFilter === filterObj.filter)}
               type="button"
               key={`jdCardArr${filterObj.text}`}
               onMouseDown={() => changeFilterHandler(filterObj)}

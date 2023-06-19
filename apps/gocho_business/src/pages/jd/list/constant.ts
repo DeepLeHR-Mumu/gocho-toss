@@ -6,19 +6,19 @@ export const JD_FILTER_BUTTON_ARR: {
 }[] = [
   {
     text: "진행중",
-    filter: "ongoing",
+    filter: "valid",
   },
   {
     text: "공고마감",
-    filter: "end",
+    filter: "expired",
   },
   {
     text: "대기중",
-    filter: "pending",
+    filter: "almostDeadline",
   },
   {
     text: "전체",
-    filter: "all",
+    filter: "deadline",
   },
 ];
 

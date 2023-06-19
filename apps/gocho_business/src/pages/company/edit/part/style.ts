@@ -99,7 +99,6 @@ export const commonCssObj = {
       overflow: hidden;
       border-radius: 0.5rem;
       width: 0.5rem;
-      height: calc(100% - 2rem);
       margin: auto 0;
       background-color: ${COLORS.GRAY90};
     }
