@@ -9,6 +9,7 @@ export interface RequestObjDef {
   size?: number;
   page?: number;
   search?: string | null;
+  mine?: boolean | null;
 }
 
 export interface ResponseObjDef {

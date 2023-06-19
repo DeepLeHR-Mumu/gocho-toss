@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FiChevronDown, FiChevronUp, FiSearch } from "react-icons/fi";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
+import { CheckBox } from "shared-ui/common/atom/checkbox";
 
 import { useJdArr } from "@/apis";
 import { PageLayout, Pagination } from "@/components";
@@ -19,6 +20,7 @@ import { cssObj } from "./style";
 const JdListPage: NextPage = () => {
   const router = useRouter();
   const [isOrderContainerOpen, setIsOrderContainerOpen] = useState<boolean>(false);
+  const [isMine, setIsMine] = useState<boolean | null>(null);
   const [selectedOrder, setSelectedOrder] = useState<string>("최신");
   const [selectedFilter, setSelectedFilter] = useState<FilterDef>("almostDeadline");
   const [searchWord, setSearchWord] = useState<string | null>(null);
@@ -29,6 +31,7 @@ const JdListPage: NextPage = () => {
     size: 10,
     page: Number(router.query.page),
     search: searchWord,
+    mine: isMine,
   });
 
   const { register, handleSubmit } = useForm<SearchValues>({});
@@ -97,6 +100,20 @@ const JdListPage: NextPage = () => {
             <input {...register("searchWord")} css={cssObj.searchBox} placeholder="공고 제목, 공고 번호, 담당자 검색" />
           </form>
           <div css={cssObj.orderButtonContainer}>
+            <label htmlFor="isMine" css={cssObj.label}>
+              <input
+                type="checkbox"
+                id="isMine"
+                onClick={() =>
+                  setIsMine((prev) => {
+                    if (prev === true) return null;
+                    return true;
+                  })
+                }
+              />
+              <CheckBox isChecked={isMine || false} />
+              내가 올린 공고만 보기
+            </label>
             <button
               type="button"
               css={cssObj.orderToggleButton}

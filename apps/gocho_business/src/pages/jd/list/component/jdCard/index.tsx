@@ -146,7 +146,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
               endJdHandler(jd.id);
             }}
           />
-          {!isExpired && (
+          {!isExpired && jd.uploader.is_mine && (
             <SharedButton
               radius="round"
               fontColor={NEWCOLORS.BLUEGRAY300}
@@ -162,6 +162,15 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
               }}
             />
           )}
+          <SharedButton
+            radius="round"
+            fontColor={NEWCOLORS.BLUEGRAY300}
+            backgroundColor={NEWCOLORS.WHITE}
+            borderColor={NEWCOLORS.GRAY200}
+            size="medium"
+            text="복사"
+            onClickHandler={() => null}
+          />
           <SharedButton
             radius="round"
             fontColor={NEWCOLORS.BLUEGRAY300}

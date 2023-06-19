@@ -106,7 +106,16 @@ export const cssObj = {
   `,
 
   orderButtonContainer: css`
+    display: flex;
+    align-items: center;
     position: relative;
+  `,
+
+  label: css`
+    display: flex;
+    align-items: center;
+    gap: 0 0.25rem;
+    margin-right: 2.5rem;
   `,
 
   orderToggleButton: css`
