@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useRouter } from "next/router";
 
 import { dummyArrCreator } from "shared-util";

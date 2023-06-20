@@ -27,9 +27,13 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
   const { mutate: endJdMutation } = useEndJd();
 
   const numberFormat = Intl.NumberFormat("ko-KR", { notation: "compact" });
-  const viewData = numberFormat.format(jd.view);
-  const bookmarkData = numberFormat.format(jd.bookmark);
-  const clickData = numberFormat.format(jd.click);
+  const isExpired = dayjs(jd.endTime).isBefore(dayjs());
+  const isViewOn = isExpired || jd.status.name === "진행중";
+  const isEditOn =
+    jd.uploader.is_mine && !isExpired && (jd.status.name === "진행중" || jd.status.name.includes("반려"));
+  const isCopyOn = jd.uploader.is_mine && (isExpired || jd.status.name === "진행중");
+  const isEndOn = jd.uploader.is_mine && !isExpired;
+  const isDeleteOn = jd.uploader.is_mine;
 
   const endJdHandler = (id: number) => {
     if (isEndLoading.current) return;
@@ -77,13 +81,10 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
     }
   };
 
-  const isExpired = dayjs(jd.endTime).isBefore(dayjs());
-
   return (
     <div css={cssObj.cardContainer}>
       <div css={cssObj.topContainer}>
         <div>
-          {/* {jd.status.name} */}
           <CommonStatusChip status={jd.status.name} isExpired={isExpired} />
           <strong css={cssObj.title}>{jd.title}</strong>
           <div>{jd.cut && <p css={cssObj.date}>채용시 마감</p>}</div>
@@ -113,15 +114,15 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
         <div css={cssObj.commonInfoContainer}>
           <div css={cssObj.viewInfoBox}>
             <p css={cssObj.countName}>공고 찜</p>
-            <p css={cssObj.count(isExpired)}>{bookmarkData}</p>
+            <p css={cssObj.count(isExpired)}>{numberFormat.format(jd.bookmark)}</p>
           </div>
           <div css={cssObj.viewInfoBox}>
             <p css={cssObj.countName}>지원하기 클릭 수</p>
-            <p css={cssObj.count(isExpired)}>{clickData}</p>
+            <p css={cssObj.count(isExpired)}>{numberFormat.format(jd.click)}</p>
           </div>
           <div css={cssObj.viewInfoBox}>
             <p css={cssObj.countName}>공고 조회수</p>
-            <p css={cssObj.count(isExpired)}>{viewData}</p>
+            <p css={cssObj.count(isExpired)}>{numberFormat.format(jd.view)}</p>
           </div>
         </div>
       </div>
@@ -134,23 +135,17 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
         </div>
 
         <div css={cssObj.buttonContainer}>
-          <a
-            href={`https://고초대졸.com/jd/detail/${jd.id}`}
-            css={cssObj.linkButton}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            공고보기
-          </a>
-          <NewSharedButton
-            buttonType="outLineGray"
-            width={5}
-            text="공고마감"
-            onClickHandler={() => {
-              endJdHandler(jd.id);
-            }}
-          />
-          {!isExpired && jd.uploader.is_mine && (
+          {isViewOn && (
+            <a
+              href={`https://고초대졸.com/jd/detail/${jd.id}`}
+              css={cssObj.linkButton}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              공고보기
+            </a>
+          )}
+          {isEditOn && (
             <NewSharedButton
               buttonType="outLineGray"
               width={5}
@@ -163,15 +158,27 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
               }}
             />
           )}
-          <NewSharedButton buttonType="outLineGray" width={5} text="복사" onClickHandler={() => null} />
-          <NewSharedButton
-            buttonType="outLineGray"
-            width={5}
-            text="삭제"
-            onClickHandler={() => {
-              deleteJdHandler(jd.id);
-            }}
-          />
+          {isCopyOn && <NewSharedButton buttonType="outLineGray" width={5} text="복사" onClickHandler={() => null} />}
+          {isEndOn && (
+            <NewSharedButton
+              buttonType="outLineGray"
+              width={5}
+              text="마감"
+              onClickHandler={() => {
+                endJdHandler(jd.id);
+              }}
+            />
+          )}
+          {isDeleteOn && (
+            <NewSharedButton
+              buttonType="outLineGray"
+              width={5}
+              text="삭제"
+              onClickHandler={() => {
+                deleteJdHandler(jd.id);
+              }}
+            />
+          )}
         </div>
       </div>
     </div>
