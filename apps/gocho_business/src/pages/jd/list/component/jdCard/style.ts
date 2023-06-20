@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 
 import { COLORS, NEWCOLORS } from "shared-style/color";
 import { shorten } from "shared-style/common";
+import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
   cardContainer: css`
@@ -100,7 +101,19 @@ export const cssObj = {
 
   buttonContainer: css`
     display: flex;
+    align-items: center;
     gap: 0 1rem;
+  `,
+
+  linkButton: css`
+    ${TEXTS.TITLE6}
+    padding: 0.75rem 0;
+    border-radius: 0.5rem;
+    width: 5rem;
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    background-color: ${NEWCOLORS.WHITE};
+    color: ${NEWCOLORS.BLUEGRAY300};
+    text-align: center;
   `,
 
   inactiveLabel: css`

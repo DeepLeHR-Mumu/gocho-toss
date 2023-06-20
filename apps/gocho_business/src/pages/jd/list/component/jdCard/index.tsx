@@ -3,8 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
-import { NEWCOLORS } from "shared-style/color";
-import { SharedButton } from "shared-ui/business/sharedButton";
+import { NewSharedButton } from "shared-ui/common/newSharedButton";
 
 import { useToast } from "@/globalStates";
 import { jdDeleteButtonEvent, jdCloseButtonEvent, jdEditButtonEvent, jdCloseDoneEvent, jdDeleteDoneEvent } from "@/ga";
@@ -135,24 +134,21 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
         </div>
 
         <div css={cssObj.buttonContainer}>
-          <SharedButton
-            radius="round"
-            fontColor={NEWCOLORS.BLUEGRAY300}
-            backgroundColor={NEWCOLORS.WHITE}
-            borderColor={NEWCOLORS.GRAY200}
-            size="medium"
+          <a href={`https://고초대졸.com/jd/${jd.id}`} css={cssObj.linkButton}>
+            공고보기
+          </a>
+          <NewSharedButton
+            buttonType="outLineGray"
+            width={5}
             text="공고마감"
             onClickHandler={() => {
               endJdHandler(jd.id);
             }}
           />
           {!isExpired && jd.uploader.is_mine && (
-            <SharedButton
-              radius="round"
-              fontColor={NEWCOLORS.BLUEGRAY300}
-              backgroundColor={NEWCOLORS.WHITE}
-              borderColor={NEWCOLORS.GRAY200}
-              size="medium"
+            <NewSharedButton
+              buttonType="outLineGray"
+              width={5}
               text="수정"
               onClickHandler={() => {
                 jdEditButtonEvent(jd.id);
@@ -162,21 +158,10 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
               }}
             />
           )}
-          <SharedButton
-            radius="round"
-            fontColor={NEWCOLORS.BLUEGRAY300}
-            backgroundColor={NEWCOLORS.WHITE}
-            borderColor={NEWCOLORS.GRAY200}
-            size="medium"
-            text="복사"
-            onClickHandler={() => null}
-          />
-          <SharedButton
-            radius="round"
-            fontColor={NEWCOLORS.BLUEGRAY300}
-            backgroundColor={NEWCOLORS.WHITE}
-            borderColor={NEWCOLORS.GRAY200}
-            size="medium"
+          <NewSharedButton buttonType="outLineGray" width={5} text="복사" onClickHandler={() => null} />
+          <NewSharedButton
+            buttonType="outLineGray"
+            width={5}
             text="삭제"
             onClickHandler={() => {
               deleteJdHandler(jd.id);
