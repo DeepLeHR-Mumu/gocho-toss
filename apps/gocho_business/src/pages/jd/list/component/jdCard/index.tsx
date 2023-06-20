@@ -134,7 +134,12 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
         </div>
 
         <div css={cssObj.buttonContainer}>
-          <a href={`https://고초대졸.com/jd/${jd.id}`} css={cssObj.linkButton}>
+          <a
+            href={`https://고초대졸.com/jd/detail/${jd.id}`}
+            css={cssObj.linkButton}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             공고보기
           </a>
           <NewSharedButton

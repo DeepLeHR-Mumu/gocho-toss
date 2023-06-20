@@ -21,7 +21,7 @@ const JdListPage: NextPage = () => {
   const router = useRouter();
   const [isOrderContainerOpen, setIsOrderContainerOpen] = useState<boolean>(false);
   const [isMine, setIsMine] = useState<boolean | null>(null);
-  const [selectedOrder, setSelectedOrder] = useState<string>("최신");
+  const [selectedOrder, setSelectedOrder] = useState<string>("최근 등록 순");
   const [selectedFilter, setSelectedFilter] = useState<FilterDef>("almostDeadline");
   const [searchWord, setSearchWord] = useState<string | null>(null);
 
@@ -91,7 +91,6 @@ const JdListPage: NextPage = () => {
             </button>
           ))}
         </div>
-
         <div css={cssObj.flexBox}>
           <form css={cssObj.searchWrapper} onSubmit={handleSubmit(jdSearch)}>
             <button type="submit" css={cssObj.searchButton} aria-label="공고 검색하기">
@@ -137,9 +136,11 @@ const JdListPage: NextPage = () => {
             </div>
           </div>
         </div>
-        {jdDataObj.jdDataArr.map((jd) => (
-          <JdCard key={`BusinessJdCard${jd.id}`} jd={jd} />
-        ))}
+        <div css={cssObj.cardListContainer}>
+          {jdDataObj.jdDataArr.map((jd) => (
+            <JdCard key={`BusinessJdCard${jd.id}`} jd={jd} />
+          ))}
+        </div>
         <Pagination totalPage={jdDataObj.pageResult.totalPages} url={INTERNAL_URL.JD_LIST} />
       </div>
     </PageLayout>

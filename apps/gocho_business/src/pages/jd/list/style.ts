@@ -162,4 +162,8 @@ export const cssObj = {
       background-color: ${NEWCOLORS.GRAY100};
     }
   `,
+
+  cardListContainer: css`
+    margin-bottom: 3.25rem;
+  `,
 };

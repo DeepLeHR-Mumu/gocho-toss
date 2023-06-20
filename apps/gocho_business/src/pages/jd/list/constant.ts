@@ -27,19 +27,15 @@ export const JD_ORDER_BUTTON_ARR: {
   order: OrderDef;
 }[] = [
   {
-    text: "최신",
+    text: "최근 등록 순",
     order: "recent",
   },
   {
-    text: "마감임박",
+    text: "마감일 순",
     order: "end",
   },
   {
-    text: "조회수 높은",
+    text: "조회수 순",
     order: "view",
-  },
-  {
-    text: "북마크 많은",
-    order: "popular",
   },
 ];

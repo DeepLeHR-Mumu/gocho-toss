@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import { dummyArrCreator } from "shared-util";
 import { PaginationProps } from "./type";
-import { paginationContainer, movePageButton, paginationBox, paginationButton } from "./style";
+import { cssObj } from "./style";
 
 export const Pagination: FunctionComponent<PaginationProps> = ({ q, url, totalPage }) => {
   const router = useRouter();
@@ -12,47 +12,49 @@ export const Pagination: FunctionComponent<PaginationProps> = ({ q, url, totalPa
   const count = Math.floor(currentPageNumber / 10);
 
   if (totalPage <= 1) {
-    return <div css={paginationContainer} />;
+    return <div css={cssObj.paginationContainer} />;
   }
 
   return (
-    <div css={paginationContainer}>
-      <button
-        css={movePageButton}
-        type="button"
-        aria-label="첫 페이지로 이동"
-        onClick={() => {
-          router.push({
-            pathname: url,
-            query: {
-              q,
-              page: 1,
-            },
-          });
-        }}
-      >
-        <FiChevronsLeft />
-      </button>
+    <div css={cssObj.paginationContainer}>
+      {/* <button */}
+      {/*  css={cssObj.movePageButton} */}
+      {/*  type="button" */}
+      {/*  aria-label="첫 페이지로 이동" */}
+      {/*  onClick={() => { */}
+      {/*    router.push({ */}
+      {/*      pathname: url, */}
+      {/*      query: { */}
+      {/*        q, */}
+      {/*        page: 1, */}
+      {/*      }, */}
+      {/*    }); */}
+      {/*  }} */}
+      {/* > */}
+      {/*  <FiChevronsLeft /> */}
+      {/* </button> */}
 
-      <button
-        css={movePageButton}
-        type="button"
-        disabled={currentPageNumber === 1}
-        aria-label="이전 페이지로 이동"
-        onClick={() => {
-          router.push({
-            pathname: url,
-            query: {
-              q,
-              page: currentPageNumber - 1,
-            },
-          });
-        }}
-      >
-        <FiChevronLeft />
-      </button>
+      {currentPageNumber !== 1 && (
+        <button
+          css={cssObj.movePageButton}
+          type="button"
+          disabled={currentPageNumber === 1}
+          aria-label="이전 페이지로 이동"
+          onClick={() => {
+            router.push({
+              pathname: url,
+              query: {
+                q,
+                page: currentPageNumber - 1,
+              },
+            });
+          }}
+        >
+          <FiChevronLeft /> 이전
+        </button>
+      )}
 
-      <ul css={paginationBox}>
+      <ul css={cssObj.paginationBox}>
         {dummyArrCreator(10).map((idx) => {
           const pageIndex = count * 10 + idx;
           const isActivePage = pageIndex === currentPageNumber;
@@ -60,7 +62,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({ q, url, totalPa
             return (
               <li key={`pagination${idx}`}>
                 <button
-                  css={paginationButton(isActivePage)}
+                  css={cssObj.paginationButton(isActivePage)}
                   type="button"
                   aria-label={`${pageIndex}번 페이지로 이동`}
                   onClick={() => {
@@ -81,40 +83,42 @@ export const Pagination: FunctionComponent<PaginationProps> = ({ q, url, totalPa
         })}
       </ul>
 
-      <button
-        css={movePageButton}
-        type="button"
-        disabled={currentPageNumber === totalPage}
-        aria-label="다음 페이지로 이동"
-        onClick={() => {
-          router.push({
-            pathname: url,
-            query: {
-              q,
-              page: currentPageNumber + 1,
-            },
-          });
-        }}
-      >
-        <FiChevronRight />
-      </button>
+      {currentPageNumber !== totalPage && (
+        <button
+          css={cssObj.movePageButton}
+          type="button"
+          disabled={currentPageNumber === totalPage}
+          aria-label="다음 페이지로 이동"
+          onClick={() => {
+            router.push({
+              pathname: url,
+              query: {
+                q,
+                page: currentPageNumber + 1,
+              },
+            });
+          }}
+        >
+          다음 <FiChevronRight />
+        </button>
+      )}
 
-      <button
-        css={movePageButton}
-        type="button"
-        aria-label="마지막 페이지로 이동"
-        onClick={() => {
-          router.push({
-            pathname: url,
-            query: {
-              q,
-              page: totalPage,
-            },
-          });
-        }}
-      >
-        <FiChevronsRight />
-      </button>
+      {/* <button */}
+      {/*  css={cssObj.movePageButton} */}
+      {/*  type="button" */}
+      {/*  aria-label="마지막 페이지로 이동" */}
+      {/*  onClick={() => { */}
+      {/*    router.push({ */}
+      {/*      pathname: url, */}
+      {/*      query: { */}
+      {/*        q, */}
+      {/*        page: totalPage, */}
+      {/*      }, */}
+      {/*    }); */}
+      {/*  }} */}
+      {/* > */}
+      {/*  <FiChevronsRight /> */}
+      {/* </button> */}
     </div>
   );
 };
