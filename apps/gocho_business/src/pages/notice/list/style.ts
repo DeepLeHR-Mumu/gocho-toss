@@ -33,6 +33,10 @@ export const cssObj = {
     border-bottom: 1px solid ${NEWCOLORS.GRAY300};
   `,
 
+  infoList: css`
+    margin-bottom: 2rem;
+  `,
+
   noticeCount: css`
     margin: 0 0.25rem;
     color: ${NEWCOLORS.RED200};

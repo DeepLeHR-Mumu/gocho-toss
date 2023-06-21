@@ -1,18 +1,28 @@
+import { useEffect } from "react";
 import { NextPage } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
+import { INTERNAL_URL } from "@/constants";
 import { EtcSideNav } from "@/components/global/etcSideNav";
-import { PageLayout } from "@/components";
+import { PageLayout, Pagination } from "@/components";
 import { useNoticeArr } from "@/apis";
 
-import { INTERNAL_URL } from "@/constants";
 import { cssObj } from "./style";
 
 const NoticeList: NextPage = () => {
-  const { data: noticeArrObj } = useNoticeArr({ order: "recent", size: 15 });
+  const router = useRouter();
+
+  const { data: noticeArrObj } = useNoticeArr({ order: "recent", page: Number(router.query.page), size: 15 });
+
+  useEffect(() => {
+    if (Object.keys(router.query).length === 0 && router.isReady) {
+      router.replace({ pathname: INTERNAL_URL.NOTICE_LIST, query: { page: 1 } });
+    }
+  }, [router]);
 
   if (!noticeArrObj) {
     return (
@@ -36,13 +46,13 @@ const NoticeList: NextPage = () => {
               </span>
               건
             </p>
-            <div>
+            <div css={cssObj.infoList}>
               {noticeArrObj.noticeDataArr.map((notice) => (
                 <Link
                   href={INTERNAL_URL.NOTICE_DETAIL(notice.id)}
                   passHref
                   css={cssObj.infoContainer}
-                  key={`mainNotice${notice.id}`}
+                  key={`notice${notice.id}`}
                 >
                   <p css={cssObj.infoType}>{notice.type}</p>
                   <strong css={cssObj.infoTitle}>{notice.title}</strong>
@@ -50,6 +60,7 @@ const NoticeList: NextPage = () => {
                 </Link>
               ))}
             </div>
+            <Pagination url={INTERNAL_URL.NOTICE_LIST} totalPage={noticeArrObj.pageResult.totalPages} />
           </div>
         </div>
       </PageLayout>

@@ -13,7 +13,6 @@ export const alarmArrSelector = ({ data: alarmArr, page_result }: ResponseObjDef
   const alarmDataArr = alarmArr.map((alarm) => ({
     id: alarm.id,
     category: alarm.category,
-    title: alarm.title,
     description: alarm.description,
     isRead: alarm.is_read,
     createdTime: alarm.created_time,

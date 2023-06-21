@@ -67,7 +67,7 @@ export const InfoPart: FunctionComponent = () => {
             {alarmArrObj.alarmDataArr.map((alarm) => (
               <div css={cssObj.infoContainer} key={`mainAlarm${alarm.id}`}>
                 <p css={cssObj.infoType}>{alarm.category}</p>
-                <strong css={cssObj.infoTitle}>{alarm.title}</strong>
+                <strong css={cssObj.infoTitle}>{alarm.description}</strong>
                 <p css={cssObj.infoDate}>{dayjs(alarm.createdTime).format("YYYY.MM.DD")}</p>
               </div>
             ))}

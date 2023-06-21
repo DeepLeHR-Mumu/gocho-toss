@@ -12,7 +12,6 @@ export interface ResponseObjDef {
   data: {
     id: number;
     category: string;
-    title: string;
     description: string;
     link: string;
     is_read: number;

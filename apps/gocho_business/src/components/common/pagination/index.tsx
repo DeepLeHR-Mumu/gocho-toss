@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 import { useRouter } from "next/router";
 
 import { dummyArrCreator } from "shared-util";
@@ -17,41 +17,43 @@ export const Pagination: FunctionComponent<PaginationProps> = ({ q, url, totalPa
 
   return (
     <div css={cssObj.paginationContainer}>
-      {/* <button */}
-      {/*  css={cssObj.movePageButton} */}
-      {/*  type="button" */}
-      {/*  aria-label="첫 페이지로 이동" */}
-      {/*  onClick={() => { */}
-      {/*    router.push({ */}
-      {/*      pathname: url, */}
-      {/*      query: { */}
-      {/*        q, */}
-      {/*        page: 1, */}
-      {/*      }, */}
-      {/*    }); */}
-      {/*  }} */}
-      {/* > */}
-      {/*  <FiChevronsLeft /> */}
-      {/* </button> */}
-
       {currentPageNumber !== 1 && (
-        <button
-          css={cssObj.movePageButton}
-          type="button"
-          disabled={currentPageNumber === 1}
-          aria-label="이전 페이지로 이동"
-          onClick={() => {
-            router.push({
-              pathname: url,
-              query: {
-                q,
-                page: currentPageNumber - 1,
-              },
-            });
-          }}
-        >
-          <FiChevronLeft /> 이전
-        </button>
+        <>
+          <button
+            css={cssObj.movePageButton}
+            type="button"
+            aria-label="첫 페이지로 이동"
+            onClick={() => {
+              router.push({
+                pathname: url,
+                query: {
+                  q,
+                  page: 1,
+                },
+              });
+            }}
+          >
+            <FiChevronsLeft />
+          </button>
+
+          <button
+            css={cssObj.movePageButton}
+            type="button"
+            disabled={currentPageNumber === 1}
+            aria-label="이전 페이지로 이동"
+            onClick={() => {
+              router.push({
+                pathname: url,
+                query: {
+                  q,
+                  page: currentPageNumber - 1,
+                },
+              });
+            }}
+          >
+            <FiChevronLeft /> 이전
+          </button>
+        </>
       )}
 
       <ul css={cssObj.paginationBox}>
@@ -84,41 +86,42 @@ export const Pagination: FunctionComponent<PaginationProps> = ({ q, url, totalPa
       </ul>
 
       {currentPageNumber !== totalPage && (
-        <button
-          css={cssObj.movePageButton}
-          type="button"
-          disabled={currentPageNumber === totalPage}
-          aria-label="다음 페이지로 이동"
-          onClick={() => {
-            router.push({
-              pathname: url,
-              query: {
-                q,
-                page: currentPageNumber + 1,
-              },
-            });
-          }}
-        >
-          다음 <FiChevronRight />
-        </button>
+        <>
+          <button
+            css={cssObj.movePageButton}
+            type="button"
+            disabled={currentPageNumber === totalPage}
+            aria-label="다음 페이지로 이동"
+            onClick={() => {
+              router.push({
+                pathname: url,
+                query: {
+                  q,
+                  page: currentPageNumber + 1,
+                },
+              });
+            }}
+          >
+            다음 <FiChevronRight />
+          </button>
+          <button
+            css={cssObj.movePageButton}
+            type="button"
+            aria-label="마지막 페이지로 이동"
+            onClick={() => {
+              router.push({
+                pathname: url,
+                query: {
+                  q,
+                  page: totalPage,
+                },
+              });
+            }}
+          >
+            <FiChevronsRight />
+          </button>
+        </>
       )}
-
-      {/* <button */}
-      {/*  css={cssObj.movePageButton} */}
-      {/*  type="button" */}
-      {/*  aria-label="마지막 페이지로 이동" */}
-      {/*  onClick={() => { */}
-      {/*    router.push({ */}
-      {/*      pathname: url, */}
-      {/*      query: { */}
-      {/*        q, */}
-      {/*        page: totalPage, */}
-      {/*      }, */}
-      {/*    }); */}
-      {/*  }} */}
-      {/* > */}
-      {/*  <FiChevronsRight /> */}
-      {/* </button> */}
     </div>
   );
 };
