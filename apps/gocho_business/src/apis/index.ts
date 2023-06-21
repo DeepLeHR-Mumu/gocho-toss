@@ -24,6 +24,11 @@ export { useJdArr } from "./jd/useJdArr";
 export { useJdDetail } from "./jd/useJdDetail";
 export { jdArrKeyObj } from "./jd/useJdArr/type";
 
+export { useNoticeArr } from "./notice/useNoticeArr";
+export { useNoticeDetail } from "./notice/useNoticeDetail";
+
 export { useManagerProfile } from "./manager/useManagerProfile";
+export { useAlarmArr } from "./manager/alarm/useAlarmArr";
+// export { useAlarmDetail } from "./manager/alarm/useAlarmDetail";
 
 export { useAxiosInterceptor, axiosInstance, axiosNoTokenInstance } from "./useIsRefreshLock";

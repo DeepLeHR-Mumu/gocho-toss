@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 
 import { TEXTS } from "shared-style/text";
 import { NEWCOLORS } from "shared-style/color";
+import { shorten } from "shared-style/common";
 
 export const cssObj = {
   topBar: css`
@@ -26,5 +27,29 @@ export const cssObj = {
   moreButton: css`
     ${TEXTS.TITLE3};
     color: ${NEWCOLORS.BLUEGRAY400};
+  `,
+
+  infoList: css``,
+
+  infoContainer: css`
+    display: flex;
+    align-items: center;
+    margin-top: 1.25rem;
+  `,
+
+  infoType: css`
+    ${TEXTS.TITLE7};
+    width: 5.25rem;
+  `,
+
+  infoTitle: css`
+    flex-grow: 1;
+    ${TEXTS.TITLE6};
+    ${shorten()};
+  `,
+
+  infoDate: css`
+    ${TEXTS.TITLE3};
+    color: ${NEWCOLORS.BLUEGRAY300};
   `,
 };
