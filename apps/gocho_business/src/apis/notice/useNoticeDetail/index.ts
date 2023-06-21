@@ -14,7 +14,7 @@ export const getNoticeDetail: GetNoticeDetailDef = async ({ queryKey: [{ request
   return data;
 };
 
-export const useNoticeDetail = (isLogin: boolean, requestObj: RequestObjDef) =>
+export const useNoticeDetail = (requestObj: RequestObjDef) =>
   useQuery<
     ResponseObjDef,
     AxiosError<ErrorResponseDef>,
@@ -24,5 +24,5 @@ export const useNoticeDetail = (isLogin: boolean, requestObj: RequestObjDef) =>
     queryKey: noticeDetailKeyObj.detail(requestObj),
     queryFn: getNoticeDetail,
     select: (data) => noticeDetailSelector(data),
-    enabled: isLogin,
+    enabled: Boolean(requestObj.noticeId),
   });

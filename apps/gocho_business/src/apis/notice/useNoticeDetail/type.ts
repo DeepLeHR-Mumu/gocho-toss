@@ -15,12 +15,12 @@ export interface ResponseObjDef {
   };
 
   page_result: {
-    prev: {
+    prev?: {
       id: number;
       title: string;
       created_time: string;
     };
-    next: {
+    next?: {
       id: number;
       title: string;
       created_time: string;

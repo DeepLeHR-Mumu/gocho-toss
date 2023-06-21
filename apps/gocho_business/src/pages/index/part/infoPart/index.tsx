@@ -43,7 +43,11 @@ export const InfoPart: FunctionComponent = () => {
             </button>
           ))}
         </div>
-        <Link href={isInfoTypeAlarm ? INTERNAL_URL.ALARM_LIST : INTERNAL_URL.NOTICE} passHref css={cssObj.moreButton}>
+        <Link
+          href={isInfoTypeAlarm ? INTERNAL_URL.ALARM_LIST : INTERNAL_URL.NOTICE_LIST}
+          passHref
+          css={cssObj.moreButton}
+        >
           더보기 {">"}
         </Link>
       </div>

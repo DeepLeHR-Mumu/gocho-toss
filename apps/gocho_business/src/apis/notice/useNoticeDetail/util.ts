@@ -1,18 +1,25 @@
 import { ResponseObjDef } from "./type";
 
 export const noticeDetailSelector = ({ data: notice, page_result }: ResponseObjDef) => {
-  const pageResult = {
-    prev: {
-      id: page_result?.prev.id,
-      title: page_result?.prev.title,
-      created_time: page_result?.prev.created_time,
-    },
+  const prevObj = page_result?.prev
+    ? {
+        id: page_result?.prev.id,
+        title: page_result?.prev.title,
+        createdTime: page_result?.prev.created_time,
+      }
+    : null;
 
-    next: {
-      id: page_result?.next.id,
-      title: page_result?.next.title,
-      created_time: page_result?.next.created_time,
-    },
+  const nextObj = page_result?.next
+    ? {
+        id: page_result?.next.id,
+        title: page_result?.next.title,
+        createdTime: page_result?.next.created_time,
+      }
+    : null;
+
+  const pageResult = {
+    prev: prevObj,
+    next: nextObj,
   };
 
   const noticeData = {

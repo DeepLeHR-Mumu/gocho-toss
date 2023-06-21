@@ -41,7 +41,7 @@ export const cssObj = {
   infoContainer: css`
     display: flex;
     align-items: center;
-    padding: 1rem 0;
+    padding: 1rem 1.5rem;
     border-bottom: 1px solid ${NEWCOLORS.GRAY200};
   `,
 
