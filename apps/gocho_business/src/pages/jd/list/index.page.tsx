@@ -13,7 +13,7 @@ import { INTERNAL_URL } from "@/constants";
 import { jdListPageFunnelEvent } from "@/ga";
 
 import { JD_ORDER_BUTTON_ARR, JD_FILTER_BUTTON_ARR } from "./constant";
-import { JdCard } from "./component/jdCard";
+import { JdCard, FilterCount } from "./component";
 import { OrderDef, FilterDef, SearchValues } from "./type";
 import { cssObj } from "./style";
 
@@ -22,7 +22,7 @@ const JdListPage: NextPage = () => {
   const [isOrderContainerOpen, setIsOrderContainerOpen] = useState<boolean>(false);
   const [isMine, setIsMine] = useState<boolean | null>(null);
   const [selectedOrder, setSelectedOrder] = useState<string>("최근 등록 순");
-  const [selectedFilter, setSelectedFilter] = useState<FilterDef>("valid");
+  const [selectedFilter, setSelectedFilter] = useState<FilterDef>("progress");
   const [searchWord, setSearchWord] = useState<string | null>(null);
 
   const { data: jdDataObj } = useJdArr(true, {
@@ -87,7 +87,7 @@ const JdListPage: NextPage = () => {
               onMouseDown={() => changeFilterHandler(filterObj)}
             >
               {filterObj.text}
-              <p css={cssObj.filterCount}>123</p>
+              <FilterCount filter={filterObj.filter} />
             </button>
           ))}
         </div>

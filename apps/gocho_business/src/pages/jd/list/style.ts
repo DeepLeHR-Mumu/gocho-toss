@@ -54,11 +54,6 @@ export const cssObj = {
     }
   `,
 
-  filterCount: css`
-    font-weight: 400;
-    margin-left: 0.25rem;
-  `,
-
   flexBox: css`
     position: relative;
     display: flex;
