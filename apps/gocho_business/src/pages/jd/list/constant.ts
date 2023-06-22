@@ -2,11 +2,11 @@ import { OrderDef, FilterDef } from "./type";
 
 export const JD_FILTER_BUTTON_ARR: {
   text: string;
-  filter: FilterDef;
+  filter?: FilterDef;
 }[] = [
   {
     text: "진행중",
-    filter: "valid",
+    filter: "progress",
   },
   {
     text: "공고마감",
@@ -14,11 +14,14 @@ export const JD_FILTER_BUTTON_ARR: {
   },
   {
     text: "대기중",
-    filter: "almostDeadline",
+    filter: "waiting",
+  },
+  {
+    text: "반려됨",
+    filter: "reject",
   },
   {
     text: "전체",
-    filter: "deadline",
   },
 ];
 

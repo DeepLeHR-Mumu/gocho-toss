@@ -12,8 +12,8 @@ import { partCssObj } from "../style";
 import { cssObj } from "./style";
 
 export const SidePart: FunctionComponent = () => {
-  const { data: processJdDataObj } = useJdArr(true, { status: "progress" });
-  const { data: waitingJdDataObj } = useJdArr(true, { status: "waiting" });
+  const { data: processJdDataObj } = useJdArr(true, { filter: "progress" });
+  const { data: waitingJdDataObj } = useJdArr(true, { filter: "waiting" });
   const { data: userInfoData } = useManagerProfile();
 
   return (

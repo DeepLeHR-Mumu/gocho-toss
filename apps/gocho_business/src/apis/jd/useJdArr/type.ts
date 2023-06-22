@@ -4,8 +4,7 @@ import { PageResultDef } from "shared-type/api/paginationType";
 
 export interface RequestObjDef {
   order?: "recent" | "popular" | "rand" | "view" | "end" | "com";
-  filter?: "todayUpload" | "almostDeadline" | "deadline" | "expired" | "valid";
-  status?: "progress" | "waiting" | "reject";
+  filter?: "todayUpload" | "almostDeadline" | "deadline" | "expired" | "valid" | "progress" | "waiting" | "reject";
   size?: number;
   page?: number;
   search?: string | null;

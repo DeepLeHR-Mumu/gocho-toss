@@ -16,13 +16,13 @@ import { cssObj } from "./style";
 const NoticeList: NextPage = () => {
   const router = useRouter();
 
-  const { data: noticeArrObj } = useNoticeArr({ order: "notice", page: Number(router.query.page), size: 15 });
-
   useEffect(() => {
     if (Object.keys(router.query).length === 0 && router.isReady) {
       router.replace({ pathname: INTERNAL_URL.NOTICE_LIST, query: { page: 1 } });
     }
   }, [router]);
+
+  const { data: noticeArrObj } = useNoticeArr({ order: "notice", page: Number(router.query.page), size: 15 });
 
   if (!noticeArrObj) {
     return (

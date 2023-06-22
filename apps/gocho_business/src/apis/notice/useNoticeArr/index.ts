@@ -24,4 +24,5 @@ export const useNoticeArr = (requestObj: RequestObjDef) =>
     queryKey: noticeArrKeyObj.arr(requestObj),
     queryFn: getNoticeArr,
     select: (data) => noticeArrSelector(data),
+    enabled: !Number.isNaN(requestObj.page),
   });

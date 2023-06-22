@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { FiChevronUp } from "react-icons/fi";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
@@ -43,6 +43,11 @@ export const GlobalNav: FunctionComponent = () => {
     });
   };
 
+  useEffect(() => {
+    setIsCompanyActive(false);
+    setIsUserActive(false);
+  }, [pathname]);
+
   const menuUrl = pathname.split("/").join("/");
 
   return (
@@ -72,6 +77,7 @@ export const GlobalNav: FunctionComponent = () => {
             aria-label={isCompanyActive ? "서브메뉴 열기" : "서브메뉴 닫기"}
             onClick={() => {
               setIsCompanyActive((isPrev) => !isPrev);
+              setIsUserActive(false);
             }}
           >
             <div>{userInfoData?.company.name}</div>
@@ -103,6 +109,7 @@ export const GlobalNav: FunctionComponent = () => {
             aria-label={isUserActive ? "서브메뉴 열기" : "서브메뉴 닫기"}
             onClick={() => {
               setIsUserActive((isPrev) => !isPrev);
+              setIsCompanyActive(false);
             }}
           >
             <div css={cssObj.userName}>{userInfoData?.name}</div>

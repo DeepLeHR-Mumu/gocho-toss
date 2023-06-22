@@ -24,5 +24,5 @@ export const useAlarmArr = (requestObj: RequestObjDef) =>
     queryKey: alarmArrKeyObj.arr(requestObj),
     queryFn: getAlarmArr,
     select: (data) => alarmArrSelector(data),
-    enabled: Boolean(requestObj.managerId),
+    enabled: Boolean(requestObj.managerId) && !Number.isNaN(requestObj.page),
   });

@@ -22,7 +22,7 @@ const JdListPage: NextPage = () => {
   const [isOrderContainerOpen, setIsOrderContainerOpen] = useState<boolean>(false);
   const [isMine, setIsMine] = useState<boolean | null>(null);
   const [selectedOrder, setSelectedOrder] = useState<string>("최근 등록 순");
-  const [selectedFilter, setSelectedFilter] = useState<FilterDef>("almostDeadline");
+  const [selectedFilter, setSelectedFilter] = useState<FilterDef>("valid");
   const [searchWord, setSearchWord] = useState<string | null>(null);
 
   const { data: jdDataObj } = useJdArr(true, {
@@ -40,7 +40,7 @@ const JdListPage: NextPage = () => {
     setSearchWord(searchVal.searchWord);
   };
 
-  const changeFilterHandler = (filterObj: { filter: FilterDef; text: string }) => {
+  const changeFilterHandler = (filterObj: { filter?: FilterDef; text: string }) => {
     setSelectedFilter(filterObj.filter);
   };
 
