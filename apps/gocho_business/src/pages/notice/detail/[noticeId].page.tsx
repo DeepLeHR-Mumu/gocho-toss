@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -7,7 +8,7 @@ import { Spinner } from "shared-ui/common/atom/spinner";
 
 import { EtcSideNav } from "@/components/global/etcSideNav";
 import { PageLayout } from "@/components";
-import { useNoticeDetail } from "@/apis";
+import { useNoticeDetail, useAddNoticeView } from "@/apis";
 
 import { INTERNAL_URL } from "@/constants";
 import { cssObj } from "./style";
@@ -17,6 +18,13 @@ const NoticeDetail: NextPage = () => {
   const { noticeId } = router.query;
 
   const { data: noticeDataObj } = useNoticeDetail({ noticeId: Number(noticeId) });
+  const { mutate: addViewCount } = useAddNoticeView();
+
+  useEffect(() => {
+    if (noticeId) {
+      addViewCount({ noticeId: Number(noticeId) });
+    }
+  }, [addViewCount, noticeId]);
 
   if (!noticeDataObj) {
     return (

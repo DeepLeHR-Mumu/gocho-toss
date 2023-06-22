@@ -16,7 +16,7 @@ import { cssObj } from "./style";
 const NoticeList: NextPage = () => {
   const router = useRouter();
 
-  const { data: noticeArrObj } = useNoticeArr({ order: "recent", page: Number(router.query.page), size: 15 });
+  const { data: noticeArrObj } = useNoticeArr({ order: "notice", page: Number(router.query.page), size: 15 });
 
   useEffect(() => {
     if (Object.keys(router.query).length === 0 && router.isReady) {
@@ -47,18 +47,21 @@ const NoticeList: NextPage = () => {
               건
             </p>
             <div css={cssObj.infoList}>
-              {noticeArrObj.noticeDataArr.map((notice) => (
-                <Link
-                  href={INTERNAL_URL.NOTICE_DETAIL(notice.id)}
-                  passHref
-                  css={cssObj.infoContainer}
-                  key={`notice${notice.id}`}
-                >
-                  <p css={cssObj.infoType}>{notice.type}</p>
-                  <strong css={cssObj.infoTitle}>{notice.title}</strong>
-                  <p css={cssObj.infoDate}>{dayjs(notice.createdTime).format("YYYY.MM.DD")}</p>
-                </Link>
-              ))}
+              {noticeArrObj.noticeDataArr.map((notice) => {
+                const isAnnounce = notice.type === "공지";
+                return (
+                  <Link
+                    href={INTERNAL_URL.NOTICE_DETAIL(notice.id)}
+                    passHref
+                    css={cssObj.infoContainer}
+                    key={`notice${notice.id}`}
+                  >
+                    <p css={cssObj.infoType(isAnnounce)}>{notice.type}</p>
+                    <strong css={cssObj.infoTitle(isAnnounce)}>{notice.title}</strong>
+                    <p css={cssObj.infoDate}>{dayjs(notice.createdTime).format("YYYY.MM.DD")}</p>
+                  </Link>
+                );
+              })}
             </div>
             <Pagination url={INTERNAL_URL.NOTICE_LIST} totalPage={noticeArrObj.pageResult.totalPages} />
           </div>

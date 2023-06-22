@@ -49,14 +49,15 @@ export const cssObj = {
     border-bottom: 1px solid ${NEWCOLORS.GRAY200};
   `,
 
-  infoType: css`
-    ${TEXTS.TITLE7};
+  infoType: (isAnnounce: boolean) => css`
+    ${isAnnounce ? TEXTS.TITLE7 : TEXTS.TITLE6};
+    color: ${isAnnounce ? NEWCOLORS.BLUE250 : NEWCOLORS.BLACK};
     width: 5.25rem;
   `,
 
-  infoTitle: css`
+  infoTitle: (isAnnounce: boolean) => css`
+    ${isAnnounce ? TEXTS.TITLE7 : TEXTS.TITLE5};
     flex-grow: 1;
-    ${TEXTS.TITLE6};
     ${shorten()};
   `,
 
