@@ -1,82 +1,105 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
+import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
   spinnerBox: css`
     position: relative;
   `,
-  wrapper: css`
+
+  wrapper: (isWaiting: boolean) => css`
+    border: 1px solid ${isWaiting ? NEWCOLORS.GREEN : NEWCOLORS.RED300};
+    background-color: ${NEWCOLORS.WHITE};
+    box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.05);
+    padding: 1.5rem 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+  `,
+
+  infoTitle: (isWaiting: boolean) => css`
     display: flex;
     align-items: center;
-    background-color: ${COLORS.GRAY95};
-    padding: 1.125rem;
-    border-radius: 0.625rem;
-    font-size: 0.875rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 0.5rem;
 
     > svg {
-      color: ${COLORS.GRAY35};
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-right: 0.5rem;
+      color: ${isWaiting ? NEWCOLORS.GREEN : NEWCOLORS.RED300};
+    }
+
+    > p {
+      ${TEXTS.TITLE9}
+      color: ${isWaiting ? NEWCOLORS.GREEN : NEWCOLORS.RED300};
     }
   `,
-  companionWrapper: css`
+
+  infoContainer: css`
     display: flex;
     align-items: center;
-    background-color: #fff7e6;
-    padding: 1.125rem;
-    border-radius: 0.625rem;
-    font-size: 0.875rem;
-    margin-bottom: 2.5rem;
+    justify-content: space-between;
+  `,
 
-    > svg {
-      color: #fa541c;
-    }
-  `,
-  desc: css`
-    color: ${COLORS.GRAY35};
-    position: relative;
-    padding: 0 0.5rem;
-    margin-right: 0.5rem;
-
-    ::after {
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translate(0, -50%);
-      height: 1rem;
-      width: 1px;
-      background-color: ${COLORS.GRAY35};
-      content: "";
-    }
-  `,
-  companionDesc: css`
-    color: #fa541c;
-    position: relative;
-    padding: 0 0.5rem;
-    margin-right: 0.5rem;
-
-    ::after {
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translate(0, -50%);
-      height: 1rem;
-      width: 1px;
-      background-color: #fa541c;
-      content: "";
-    }
-  `,
-  dateInfo: css`
-    padding-left: 0.5rem;
-  `,
   userInfo: css`
     display: flex;
-    align-items: center;
-    color: ${COLORS.GRAY35};
+    gap: 0 0.5rem;
+  `,
 
-    > svg {
-      color: ${COLORS.GRAY30};
-      margin: 0 0.375rem 0 0.625rem;
+  infoBox: css`
+    ${TEXTS.TITLE3};
+    color: ${NEWCOLORS.BLUEGRAY300};
+
+    > span {
+      margin-left: 0.5rem;
+      color: ${NEWCOLORS.BLUEGRAY500};
+    }
+  `,
+
+  contour: css`
+    border-left: 1px solid ${NEWCOLORS.GRAY200};
+  `,
+
+  email: css`
+    ${TEXTS.TITLE3};
+    color: ${NEWCOLORS.BLUEGRAY400};
+
+    > span {
+      margin-left: 0.5rem;
+    }
+  `,
+
+  reasonContainer: css`
+    border-top: 1px solid ${NEWCOLORS.GRAY200};
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+  `,
+
+  reasonTitle: css`
+    ${TEXTS.TITLE6};
+    color: ${NEWCOLORS.RED300};
+    margin-bottom: 1.25rem;
+
+    > span {
+      ${TEXTS.TITLE3};
+      color: ${NEWCOLORS.BLUEGRAY300};
+      margin-left: 0.5rem;
+    }
+  `,
+
+  reason: css`
+    ${TEXTS.TITLE5};
+    margin-bottom: 0.5rem;
+
+    :before {
+      ${TEXTS.TITLE5};
+      font-weight: 700;
+      content: "·";
+      margin-right: 0.25rem;
+    }
+
+    :last-of-type {
+      margin-bottom: 0;
     }
   `,
 };

@@ -24,13 +24,12 @@ const CompanyEditPage: NextPage = () => {
   const [bgImage, setBgImage] = useState<File>();
 
   const isRefetching = useRef(false);
+  const { setToast } = useToast();
 
   const { data: userInfoData } = useManagerProfile();
-  const { setToast } = useToast();
   const { data: companyDetailData, refetch: companyDetailRefetch } = useCompanyDetail({
     companyId: userInfoData?.company.id,
   });
-
   const { mutate: putCompanyDetail } = useAddCompanyDetail();
 
   const companyForm = useForm<CompanyFormValues>({
@@ -159,8 +158,8 @@ const CompanyEditPage: NextPage = () => {
   }, [submitCount]);
 
   useEffect(() => {
-    if (!companyDetailData || isRefetching.current === true) return;
-    if (companyDetailData.uploader.isMine === false) window.alert(ALREADY_DONE_EDIT_MESSAGE);
+    if (!companyDetailData || isRefetching.current) return;
+    if (!companyDetailData.uploader.isMine) window.alert(ALREADY_DONE_EDIT_MESSAGE);
   }, [companyDetailData]);
 
   if (!companyDetailData) {

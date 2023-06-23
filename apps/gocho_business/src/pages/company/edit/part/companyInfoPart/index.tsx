@@ -3,6 +3,7 @@ import Image from "next/image";
 import { FiEdit3, FiX, FiEye, FiUserCheck } from "react-icons/fi";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import defaultCompanyBg from "shared-image/global/common/default_company_bg.webp";
 
 import { useCompanyDetail, useCountInfo, useManagerProfile } from "@/apis";
@@ -92,7 +93,7 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({ companyFo
       </div>
       <div css={cssObj.companyInfoWrapper}>
         <div css={cssObj.logoBox}>
-          <Image src={companyData.logo} alt={companyData.name} fill sizes="1" />
+          <Image src={companyData.logo || defaultCompanyLogo} alt={companyData.name} fill sizes="1" />
         </div>
         <p css={cssObj.count}>
           <FiEye />
