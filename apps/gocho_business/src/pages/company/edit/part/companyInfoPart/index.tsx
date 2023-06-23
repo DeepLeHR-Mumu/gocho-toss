@@ -6,18 +6,22 @@ import { Spinner } from "shared-ui/common/atom/spinner";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import defaultCompanyBg from "shared-image/global/common/default_company_bg.webp";
 
-import { useCompanyDetail, useCountInfo, useManagerProfile } from "@/apis";
+import { useCountInfo, useManagerProfile } from "@/apis";
 
 import { commonCssObj } from "../style";
 import { cssObj } from "./style";
 import { CompanyInfoProps } from "./type";
 
-export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({ companyForm, setBgImage, setLogo }) => {
+export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({
+  companyForm,
+  companyData,
+  setBgImage,
+  setLogo,
+}) => {
   const [bgImagePreview, setBgImagePreview] = useState<string>();
   const [logoPreview, setLogoPreview] = useState<string>();
 
   const { data: userInfoData } = useManagerProfile();
-  const { data: companyData } = useCompanyDetail({ companyId: userInfoData?.company.id });
   const { data: countInfoData } = useCountInfo({ companyId: userInfoData?.company.id });
 
   const {
@@ -26,7 +30,7 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({ companyFo
     formState: { errors },
   } = companyForm;
 
-  if (!userInfoData || !companyData || !countInfoData) {
+  if (!userInfoData || !countInfoData) {
     return (
       <div>
         <Spinner />

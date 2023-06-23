@@ -2,18 +2,15 @@ import { FocusEvent, FunctionComponent, useState } from "react";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
-import { Spinner } from "shared-ui/common/atom/spinner";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { NUMBER_REGEXP } from "shared-constant";
-
-import { useCompanyDetail, useManagerProfile } from "@/apis";
 
 import { MAX_LENGTH_ERROR_TEXT, ONLY_INT_ERROR_TEXT, INDUSTRY_ARR, SIZE_ARR } from "./constant";
 import { BasicPartProps } from "./type";
 import { commonCssObj } from "../style";
 import { cssObj } from "./style";
 
-export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) => {
+export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOtherEdit }) => {
   const [isIndustryOpen, setIsIndustryOpen] = useState<boolean>(false);
   const [isSizeOpen, setIsSizeOpen] = useState<boolean>(false);
 
@@ -23,11 +20,6 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
     watch,
     formState: { errors },
   } = companyForm;
-  const { data: userInfoData } = useManagerProfile();
-
-  const { data: companyDetailData } = useCompanyDetail({
-    companyId: userInfoData?.company.id,
-  });
 
   const openPostCodePopup = useDaumPostcodePopup();
 
@@ -38,14 +30,6 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
       },
     });
   };
-
-  if (!companyDetailData) {
-    return (
-      <div css={cssObj.spinnerBox}>
-        <Spinner />
-      </div>
-    );
-  }
 
   return (
     <section css={commonCssObj.partContainer} data-testid="company/edit/BasicPart">
@@ -157,7 +141,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
         <div css={cssObj.inputWrapper}>
           <input
             type="number"
-            css={commonCssObj.input(7.5, !companyDetailData.uploader.isMine)}
+            css={commonCssObj.input(7.5, isOtherEdit)}
             onWheel={(event) => {
               event.currentTarget.blur();
             }}
@@ -165,7 +149,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
               required: true,
               min: 1,
               pattern: NUMBER_REGEXP,
-              disabled: !companyDetailData.uploader.isMine,
+              disabled: isOtherEdit,
             })}
           />
           <p>명</p>
@@ -176,7 +160,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
         <div css={cssObj.inputWrapper}>
           <input
             type="number"
-            css={commonCssObj.input(7.5, !companyDetailData.uploader.isMine)}
+            css={commonCssObj.input(7.5, isOtherEdit)}
             {...register("pay_start", {
               required: true,
               min: 1000,
@@ -184,7 +168,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
                 value: NUMBER_REGEXP,
                 message: ONLY_INT_ERROR_TEXT,
               },
-              disabled: !companyDetailData.uploader.isMine,
+              disabled: isOtherEdit,
               onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
                 if (Number(onBlurEvent.target.value) <= 999) {
                   window.alert("월급이 아닌 연봉 기준입니다. 입력하신 정보가 맞나요?");
@@ -202,12 +186,12 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
         <div css={cssObj.inputWrapper}>
           <input
             type="number"
-            css={commonCssObj.input(7.5, !companyDetailData.uploader.isMine)}
+            css={commonCssObj.input(7.5, isOtherEdit)}
             {...register("pay_avg", {
               required: true,
               min: 1000,
               pattern: NUMBER_REGEXP,
-              disabled: !companyDetailData.uploader.isMine,
+              disabled: isOtherEdit,
               onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
                 if (Number(onBlurEvent.target.value) <= 999) {
                   window.alert("월급이 아닌 연봉 기준입니다. 입력하신 정보가 맞나요?");
@@ -229,7 +213,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
               value: 120,
               message: MAX_LENGTH_ERROR_TEXT,
             },
-            disabled: !companyDetailData.uploader.isMine,
+            disabled: isOtherEdit,
             onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
               if (onBlurEvent.target.value.trim().length === 0) {
                 setValue("pay_desc", "");
@@ -237,7 +221,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
             },
           })}
           placeholder="상여금, 성과급 등의 정보를 적어주세요"
-          css={commonCssObj.input(30, !companyDetailData.uploader.isMine)}
+          css={commonCssObj.input(30, isOtherEdit)}
         />
         <p css={commonCssObj.errorMessage}>{errors.pay_desc?.message}</p>
       </div>
@@ -249,15 +233,15 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
           <div css={commonCssObj.labelContainer}>
             <SharedRadioButton
               registerObj={register("nozo.exists", { required: true })}
-              isDisabled={!companyDetailData.uploader.isMine}
+              isDisabled={isOtherEdit}
               value="true"
               id="nozoTrue"
             >
               <p css={cssObj.radioLabel}>있음</p>
             </SharedRadioButton>
             <SharedRadioButton
-              registerObj={register("nozo.exists", { disabled: !companyDetailData.uploader.isMine, required: true })}
-              isDisabled={!companyDetailData.uploader.isMine}
+              registerObj={register("nozo.exists", { disabled: isOtherEdit, required: true })}
+              isDisabled={isOtherEdit}
               value="false"
               id="nozoFalse"
             >
@@ -271,7 +255,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
                 value: 70,
                 message: MAX_LENGTH_ERROR_TEXT,
               },
-              disabled: !companyDetailData.uploader.isMine,
+              disabled: isOtherEdit,
               onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
                 if (onBlurEvent.target.value.trim().length === 0) {
                   setValue("nozo.desc", "");
@@ -279,7 +263,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
               },
             })}
             placeholder="보충설명(선택)"
-            css={commonCssObj.input(47, !companyDetailData.uploader.isMine)}
+            css={commonCssObj.input(47, isOtherEdit)}
           />
           <p css={commonCssObj.errorMessage}>{errors.nozo?.desc?.message}</p>
         </div>

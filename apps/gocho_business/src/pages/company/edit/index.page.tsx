@@ -15,7 +15,7 @@ import { companyEditConfirmEvent, companyEditDoneEvent, companyEditFailEvent, co
 import { CompanySideNav } from "@/components/global/companySideNav";
 
 import { PageHead } from "./pageHead";
-import { CompanyInfoPart, LastEditInfoPart, BasicPart, WelfarePart } from "./part";
+import { CompanyInfoPart, LastEditInfoPart, BasicPart, WelfarePart, FactoryPart } from "./part";
 import { COMPANY_MESSAGE_OBJ, ALREADY_DONE_EDIT_MESSAGE } from "./constant";
 import { CompanyFormValues } from "./type";
 import { cssObj } from "./style";
@@ -180,9 +180,15 @@ const CompanyEditPage: NextPage = () => {
           <CompanySideNav />
           <form css={cssObj.formContainer} onSubmit={handleSubmit(addCompanyDetail)}>
             <LastEditInfoPart />
-            <CompanyInfoPart companyForm={companyForm} setBgImage={setBgImage} setLogo={setLogo} />
-            <BasicPart companyForm={companyForm} />
-            <WelfarePart companyForm={companyForm} />
+            <CompanyInfoPart
+              companyForm={companyForm}
+              companyData={companyDetailData}
+              setBgImage={setBgImage}
+              setLogo={setLogo}
+            />
+            <BasicPart companyForm={companyForm} isOtherEdit={!companyDetailData.uploader.isMine} />
+            <WelfarePart companyForm={companyForm} companyData={companyDetailData} />
+            <FactoryPart companyForm={companyForm} companyData={companyDetailData} />
             <div css={cssObj.infoBox}>
               <p css={cssObj.info}>
                 · 영업일 기준 최대 2일 이내 검수 후 고초대졸닷컴 내 수정된 정보가 업데이트 됩니다.

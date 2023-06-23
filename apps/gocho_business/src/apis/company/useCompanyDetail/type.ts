@@ -3,6 +3,7 @@ import { QueryFunctionContext } from "@tanstack/react-query";
 export interface RequestObjDef {
   companyId: number | undefined;
 }
+
 export interface ResponseObjDef {
   data: {
     id: number;
@@ -45,10 +46,28 @@ export interface ResponseObjDef {
       growth: string[] | null;
       etc: string[] | null;
     } | null;
+
     nozo: {
       exists: boolean;
       desc: string | null;
     };
+
+    factory_arr: {
+      id: number;
+      name: string;
+      address: string;
+      male_number: number;
+      female_number: number;
+      product: string;
+      bus: {
+        exists: boolean;
+        desc: string | null;
+      };
+      dormitory: {
+        exists: boolean;
+        desc: string | null;
+      };
+    }[];
   };
 }
 
