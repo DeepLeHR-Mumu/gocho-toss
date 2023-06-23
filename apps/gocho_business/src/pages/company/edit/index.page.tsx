@@ -22,6 +22,7 @@ import { cssObj } from "./style";
 
 const CompanyEditPage: NextPage = () => {
   const [bgImage, setBgImage] = useState<File>();
+  const [logo, setLogo] = useState<File>();
 
   const isRefetching = useRef(false);
   const { setToast } = useToast();
@@ -48,7 +49,7 @@ const CompanyEditPage: NextPage = () => {
     companyEditConfirmEvent();
     isRefetching.current = true;
     companyDetailRefetch().then((response) => {
-      if (!isDirty && !bgImage) {
+      if (!isDirty && !bgImage && !logo) {
         window.alert("변경사항이 없습니다.");
         return;
       }
@@ -70,6 +71,7 @@ const CompanyEditPage: NextPage = () => {
               },
             },
             bgImage,
+            logo,
           },
           {
             onSuccess: () => {
@@ -178,7 +180,7 @@ const CompanyEditPage: NextPage = () => {
           <CompanySideNav />
           <form css={cssObj.formContainer} onSubmit={handleSubmit(addCompanyDetail)}>
             <LastEditInfoPart />
-            <CompanyInfoPart companyForm={companyForm} setBgImage={setBgImage} />
+            <CompanyInfoPart companyForm={companyForm} setBgImage={setBgImage} setLogo={setLogo} />
             <BasicPart companyForm={companyForm} />
             <WelfarePart companyForm={companyForm} />
             <div css={cssObj.infoBox}>

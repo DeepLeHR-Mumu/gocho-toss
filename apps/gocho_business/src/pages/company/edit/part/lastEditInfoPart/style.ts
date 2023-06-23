@@ -14,7 +14,7 @@ export const cssObj = {
     box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.05);
     padding: 1.5rem 2rem;
     border-radius: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
   `,
 
   infoTitle: (isWaiting: boolean) => css`

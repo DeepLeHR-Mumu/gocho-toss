@@ -12,8 +12,9 @@ import { commonCssObj } from "../style";
 import { cssObj } from "./style";
 import { CompanyInfoProps } from "./type";
 
-export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({ companyForm, setBgImage }) => {
+export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({ companyForm, setBgImage, setLogo }) => {
   const [bgImagePreview, setBgImagePreview] = useState<string>();
+  const [logoPreview, setLogoPreview] = useState<string>();
 
   const { data: userInfoData } = useManagerProfile();
   const { data: companyData } = useCompanyDetail({ companyId: userInfoData?.company.id });
@@ -33,7 +34,7 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({ companyFo
     );
   }
 
-  const bgUploadHandler = async (
+  const uploadImageHandler = async (
     changeEvent: ChangeEvent<HTMLInputElement>,
     setFile: Dispatch<SetStateAction<File | undefined>>,
     setPreview: Dispatch<SetStateAction<string | undefined>>
@@ -51,7 +52,7 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({ companyFo
     }
   };
 
-  const deleteBackgroundHandler = (
+  const deleteImageHandler = (
     setFile: Dispatch<SetStateAction<File | undefined>>,
     setPreview: Dispatch<SetStateAction<string | undefined>>
   ) => {
@@ -71,13 +72,13 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({ companyFo
             type="file"
             id="bgImg"
             accept="image/png, image/gif, image/jpeg, image/jpg"
-            onChange={(changeEvent) => bgUploadHandler(changeEvent, setBgImage, setBgImagePreview)}
+            onChange={(changeEvent) => uploadImageHandler(changeEvent, setBgImage, setBgImagePreview)}
           />
         </label>
         <button
           type="button"
           css={cssObj.imageUploadLabel(1, 1.25)}
-          onClick={() => deleteBackgroundHandler(setBgImage, setBgImagePreview)}
+          onClick={() => deleteImageHandler(setBgImage, setBgImagePreview)}
         >
           <FiX />
         </button>
@@ -92,8 +93,33 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({ companyFo
         )}
       </div>
       <div css={cssObj.companyInfoWrapper}>
+        {logoPreview ? (
+          <button
+            type="button"
+            css={cssObj.imageUploadLabel(9.25, 50.5)}
+            onClick={() => deleteImageHandler(setLogo, setLogoPreview)}
+          >
+            <FiX />
+          </button>
+        ) : (
+          <label htmlFor="logoImg" css={cssObj.imageUploadLabel(9.25, 50.5)}>
+            <FiEdit3 />
+            <input
+              css={cssObj.imageUploadInput}
+              type="file"
+              id="logoImg"
+              accept="image/png, image/gif, image/jpeg, image/jpg"
+              onChange={(changeEvent) => uploadImageHandler(changeEvent, setLogo, setLogoPreview)}
+            />
+          </label>
+        )}
+
         <div css={cssObj.logoBox}>
-          <Image src={companyData.logo || defaultCompanyLogo} alt={companyData.name} fill sizes="1" />
+          {logoPreview ? (
+            <Image src={logoPreview} alt={companyData.name} fill sizes="1" />
+          ) : (
+            <Image src={companyData.logo || defaultCompanyLogo} alt={companyData.name} fill sizes="1" />
+          )}
         </div>
         <p css={cssObj.count}>
           <FiEye />
