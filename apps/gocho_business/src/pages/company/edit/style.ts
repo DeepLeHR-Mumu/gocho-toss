@@ -28,9 +28,4 @@ export const cssObj = {
     color: ${NEWCOLORS.BLUEGRAY500};
     margin-bottom: 0.5rem;
   `,
-
-  buttonBox: css`
-    margin: auto;
-    width: 11.25rem;
-  `,
 };

@@ -58,7 +58,13 @@ export const cssObj = {
     gap: 0 1.5rem;
   `,
 
-  editButton: css``,
+  editButton: css`
+    > svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: ${NEWCOLORS.GRAY300};
+    }
+  `,
 
   deleteButton: css`
     border-radius: 50%;

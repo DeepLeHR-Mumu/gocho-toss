@@ -29,7 +29,7 @@ export const cssObj = {
     background-color: ${NEWCOLORS.GRAY100};
     border-radius: 50%;
     cursor: pointer;
-    z-index: 100;
+    z-index: 30;
 
     > svg {
       width: 1.25rem;
