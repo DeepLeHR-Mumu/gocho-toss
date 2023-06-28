@@ -5,9 +5,10 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { NUMBER_REGEXP } from "shared-constant";
 
+import { commonCssObj } from "@/styles";
+
 import { MAX_LENGTH_ERROR_TEXT, ONLY_INT_ERROR_TEXT, INDUSTRY_ARR, SIZE_ARR } from "./constant";
 import { BasicPartProps } from "./type";
-import { commonCssObj } from "../style";
 import { cssObj } from "./style";
 
 export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOtherEdit }) => {

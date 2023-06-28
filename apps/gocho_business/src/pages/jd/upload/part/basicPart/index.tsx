@@ -4,9 +4,10 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 
+import { commonCssObj } from "@/styles";
+
 import { BasicPartProps } from "./type";
 import { CONTRACT_TYPE_ARR, TASK_ARR, REQUIRED_EXP_ARR } from "./constant";
-import { commonCssObj } from "../style";
 import { cssObj } from "./style";
 
 export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {

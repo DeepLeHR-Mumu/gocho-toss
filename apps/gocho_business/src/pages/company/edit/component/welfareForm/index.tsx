@@ -1,7 +1,8 @@
 import { FunctionComponent, useRef, useState } from "react";
 import { FiMinus } from "react-icons/fi";
 
-import { commonCssObj } from "../../part/style";
+import { commonCssObj } from "@/styles";
+
 import { WelfareFormProps } from "./type";
 import { cssObj } from "./style";
 import { AddFieldButton } from "../addFieldButton";

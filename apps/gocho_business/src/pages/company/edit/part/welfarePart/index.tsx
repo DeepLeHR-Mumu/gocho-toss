@@ -1,9 +1,8 @@
 import { FunctionComponent } from "react";
 
-import { commonCssObj } from "@/pages/jd/upload/part/style";
-import { AddFieldButton } from "@/pages/jd/upload/component";
+import { commonCssObj } from "@/styles";
 
-import { WelfareForm } from "../../component";
+import { WelfareForm, AddFieldButton } from "../../component";
 import { WELFARE_ARR } from "./constant";
 import { welfareArrCreator } from "./util";
 import { WelfarePartProps } from "./type";

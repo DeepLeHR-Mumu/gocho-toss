@@ -8,10 +8,6 @@ import { RequestObjDef, PostFactoryDef } from "./type";
 import { factoryArrKeyObj } from "../useFactoryArr/type";
 
 export const postAddFactory: PostFactoryDef = async (requestObj) => {
-  if (requestObj.id) {
-    const { data } = await axiosInstance.put(`/factories/${requestObj.id}`, requestObj);
-    return data;
-  }
   const { data } = await axiosInstance.post(`/factories`, requestObj);
   return data;
 };

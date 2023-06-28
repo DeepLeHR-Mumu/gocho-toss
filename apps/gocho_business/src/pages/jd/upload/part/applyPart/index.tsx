@@ -4,10 +4,11 @@ import { MdOutlineNavigateNext } from "react-icons/md";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
+import { commonCssObj } from "@/styles";
+
 import { AddFieldButton, DeleteInputButton } from "../../component";
 import { ApplyPartProps } from "./type";
 import { APPLY_EXTERNAL_LINK_ARR } from "./constant";
-import { commonCssObj } from "../style";
 import { cssObj } from "./style";
 
 export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processArr, applyRouteArr }) => {

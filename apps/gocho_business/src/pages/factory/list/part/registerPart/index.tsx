@@ -49,7 +49,6 @@ export const RegisterPart: FunctionComponent<RegisterPartProps> = ({ editingInde
           bus_etc: factoryRequestObj.bus_etc === "" ? null : factoryRequestObj.bus_etc,
           dormitory_etc: factoryRequestObj.dormitory_etc === "" ? null : factoryRequestObj.dormitory_etc,
           dormitory_bool: factoryRequestObj.dormitory_bool === "true",
-          id: editingIndex === null ? undefined : factoryDataObj?.factoryDataArr?.[Number(editingIndex)]?.id,
         },
         {
           onSuccess: () => {

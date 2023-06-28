@@ -5,11 +5,11 @@ import { FiPlus, FiEdit3 } from "react-icons/fi";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
 import { useFactoryArr } from "@/apis";
+import { commonCssObj } from "@/styles";
 
 import { AddFieldButton, DeleteInputButton } from "../../component";
 import { PositionWorkInfoPartProps } from "./type";
 import { PLACE_TYPE_ARR } from "./constant";
-import { commonCssObj } from "../style";
 import { cssObj } from "./style";
 
 export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobForm }) => {
@@ -93,23 +93,24 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                 />
                 <input css={cssObj.hiddenInput} {...register(`place.address_arr`)} />
                 {factoryDataObj?.factoryDataArr?.map((factory) => (
-                  <button
-                    type="button"
-                    css={cssObj.factoryBox}
-                    key={factory.id}
-                    value={factory.id}
-                    onMouseDown={(event) => {
-                      event.preventDefault();
-                      factoryClickHandler(factory.id);
-                    }}
-                  >
+                  <div key={`jdUploadFactory${factory.id}`} css={cssObj.factoryBox}>
                     <div css={cssObj.factoryInfoWrapper}>
-                      <CheckBox isChecked={watch("place").factory_arr?.includes(factory.id) || false} />
+                      <button
+                        type="button"
+                        key={factory.id}
+                        value={factory.id}
+                        onMouseDown={(event) => {
+                          event.preventDefault();
+                          factoryClickHandler(factory.id);
+                        }}
+                      >
+                        <CheckBox isChecked={watch("place").factory_arr?.includes(factory.id) || false} />
+                      </button>
                       {factory.name}
                       <p css={cssObj.factoryAddress}>{factory.address}</p>
                     </div>
                     <FiEdit3 />
-                  </button>
+                  </div>
                 ))}
                 {watch("place").address_arr?.length !== 0 && (
                   <div>

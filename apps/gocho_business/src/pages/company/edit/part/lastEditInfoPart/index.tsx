@@ -76,7 +76,8 @@ export const LastEditInfoPart: FunctionComponent = () => {
         </div>
         <div css={cssObj.reasonContainer}>
           <p css={cssObj.reasonTitle}>
-            반려사유 123건 <span>* 아래 반려 사유를 확인하시고 수정 후 재 검수 요청해 주세요</span>
+            반려사유 {companyDetailData.status.reason?.length}건{" "}
+            <span>* 아래 반려 사유를 확인하시고 수정 후 재 검수 요청해 주세요</span>
           </p>
           {companyDetailData.status.reason?.map((reason) => (
             <p key={`rejectReason${reason}`} css={cssObj.reason}>

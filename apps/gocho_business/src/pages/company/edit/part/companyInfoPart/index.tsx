@@ -7,8 +7,8 @@ import defaultCompanyLogo from "shared-image/global/common/default_company_logo.
 import defaultCompanyBg from "shared-image/global/common/default_company_bg.webp";
 
 import { useCountInfo, useManagerProfile } from "@/apis";
+import { commonCssObj } from "@/styles";
 
-import { commonCssObj } from "../style";
 import { cssObj } from "./style";
 import { CompanyInfoProps } from "./type";
 

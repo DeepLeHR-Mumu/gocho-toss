@@ -3,10 +3,10 @@ import { FiX } from "react-icons/fi";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
+import { commonCssObj } from "@/styles";
 import { RequiredPartProps } from "./type";
 // import { CERTI_ARR } from "./constant";
 import { AddFieldButton } from "../../component";
-import { commonCssObj } from "../style";
 import { cssObj } from "./style";
 
 export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm }) => {

@@ -3,9 +3,10 @@ import { FiChevronUp, FiChevronDown } from "react-icons/fi";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
+import { commonCssObj } from "@/styles";
+
 import { ConditionPartProps } from "./type";
 import { ROTATION_ARR } from "./constant";
-import { commonCssObj } from "../style";
 import { cssObj } from "./style";
 
 export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm }) => {

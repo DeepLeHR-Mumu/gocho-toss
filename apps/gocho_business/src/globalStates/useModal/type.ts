@@ -1,4 +1,4 @@
-export type modalNameDef = "findPasswordModal" | "loginModal";
+export type modalNameDef = "findPasswordModal" | "loginModal" | "factoryModal";
 
 export interface UseModalProps {
   currentModal: modalNameDef | null;
