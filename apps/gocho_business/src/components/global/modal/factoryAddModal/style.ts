@@ -11,7 +11,6 @@ export const cssObj = {
     transform: translate(-50%, -50%);
     z-index: 80;
     width: 50rem;
-    //height: auto;
     padding: 2rem;
     background-color: ${NEWCOLORS.WHITE};
     border-radius: 1rem;
@@ -34,6 +33,16 @@ export const cssObj = {
   title: css`
     ${TEXTS.TITLE11};
     display: block;
+  `,
+
+  addAddressButton: css`
+    ${TEXTS.TITLE5};
+    flex-grow: 1;
+    margin-left: 0.5rem;
+    height: 3.25rem;
+    padding: 0.75rem 1rem;
+    background-color: ${NEWCOLORS.GRAY200};
+    border-radius: 0.5rem;
   `,
 
   closeButton: css`

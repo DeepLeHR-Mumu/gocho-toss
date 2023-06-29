@@ -11,6 +11,7 @@ import { commonCssObj } from "@/styles";
 import { factoryEditConfirmEvent, factoryEditDoneEvent } from "@/ga";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { NewSharedButton } from "shared-ui/common/newSharedButton";
+import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { ModalComponent } from "../modalBackground";
 
 import { cssObj } from "./style";
@@ -28,8 +29,17 @@ export const FactoryEditBox: FunctionComponent = () => {
   useFocusTrap(modalRef);
 
   const { mutate: editFactoryMutation } = useEditFactory();
+  const openPostCodePopup = useDaumPostcodePopup();
 
-  const factoryPostSubmitHandler = (factoryRequestObj: FactoryEditFormValues) => {
+  const onClickAddress = () => {
+    openPostCodePopup({
+      onComplete: (addressObj: Address) => {
+        setValue("address", addressObj.address, { shouldDirty: true });
+      },
+    });
+  };
+
+  const editFactoryHandler = (factoryRequestObj: FactoryEditFormValues) => {
     if (isLoading.current) {
       return;
     }
@@ -76,12 +86,12 @@ export const FactoryEditBox: FunctionComponent = () => {
   return (
     <div css={cssObj.modalContainer} ref={modalRef} tabIndex={-1}>
       <div css={cssObj.titleWrapper}>
-        <h3 css={cssObj.title}>공장 등록</h3>
+        <h3 css={cssObj.title}>공장 수정</h3>
         <button type="button" css={cssObj.closeButton} onClick={() => closeModal()}>
           <FiX />
         </button>
       </div>
-      <form onSubmit={handleSubmit(factoryPostSubmitHandler)}>
+      <form onSubmit={handleSubmit(editFactoryHandler)}>
         <div css={commonCssObj.container}>
           <strong css={commonCssObj.inputTitle(false)}>공장 명칭</strong>
           <input
@@ -100,7 +110,10 @@ export const FactoryEditBox: FunctionComponent = () => {
         </div>
         <div css={commonCssObj.container}>
           <strong css={commonCssObj.inputTitle(false)}>공장 주소</strong>
-          <input css={commonCssObj.input(37.5, false)} {...register("address", { required: true })} />
+          <input css={commonCssObj.input(30.5, false)} disabled {...register("address", { required: true })} />
+          <button css={cssObj.addAddressButton} type="button" onClick={onClickAddress}>
+            주소찾기
+          </button>
         </div>
         <div css={commonCssObj.container}>
           <strong css={commonCssObj.inputTitle(false)}>임직원</strong>
@@ -201,7 +214,7 @@ export const FactoryEditBox: FunctionComponent = () => {
         </div>
         <div css={cssObj.buttonContainer}>
           <NewSharedButton onClickHandler={() => closeModal()} buttonType="outLineGray" text="취소" width={8.75} />
-          <NewSharedButton onClickHandler="submit" buttonType="fillBlue" text="확인" width={8.75} />
+          <NewSharedButton onClickHandler="submit" buttonType="fillBlue" text="수정하기" width={8.75} />
         </div>
       </form>
     </div>

@@ -1,5 +1,6 @@
 import { ChangeEvent, FunctionComponent, useRef } from "react";
 import { useForm } from "react-hook-form";
+import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { FiX } from "react-icons/fi";
 
 import { useFocusTrap } from "shared-hooks";
@@ -19,16 +20,24 @@ import { FactoryRegisterFormValues } from "./type";
 export const FactoryAddBox: FunctionComponent = () => {
   const modalRef = useRef<HTMLDivElement>(null);
   const isLoading = useRef(false);
+  const { closeModal } = useModal();
 
   const { register, handleSubmit, setValue } = useForm<FactoryRegisterFormValues>();
-
-  const { closeModal } = useModal();
 
   useFocusTrap(modalRef);
 
   const { mutate: addFactoryMutation } = useAddFactory();
+  const openPostCodePopup = useDaumPostcodePopup();
 
-  const factoryPostSubmitHandler = (factoryRequestObj: FactoryRegisterFormValues) => {
+  const onClickAddress = () => {
+    openPostCodePopup({
+      onComplete: (addressObj: Address) => {
+        setValue("address", addressObj.address, { shouldDirty: true });
+      },
+    });
+  };
+
+  const addFactoryHandler = (factoryRequestObj: FactoryRegisterFormValues) => {
     if (isLoading.current) {
       return;
     }
@@ -63,7 +72,7 @@ export const FactoryAddBox: FunctionComponent = () => {
           <FiX />
         </button>
       </div>
-      <form onSubmit={handleSubmit(factoryPostSubmitHandler)}>
+      <form onSubmit={handleSubmit(addFactoryHandler)}>
         <div css={commonCssObj.container}>
           <strong css={commonCssObj.inputTitle(false)}>공장 명칭</strong>
           <input
@@ -82,7 +91,10 @@ export const FactoryAddBox: FunctionComponent = () => {
         </div>
         <div css={commonCssObj.container}>
           <strong css={commonCssObj.inputTitle(false)}>공장 주소</strong>
-          <input css={commonCssObj.input(37.5, false)} {...register("address", { required: true })} />
+          <input css={commonCssObj.input(30.5, false)} disabled {...register("address", { required: true })} />
+          <button css={cssObj.addAddressButton} type="button" onClick={onClickAddress}>
+            주소찾기
+          </button>
         </div>
         <div css={commonCssObj.container}>
           <strong css={commonCssObj.inputTitle(false)}>임직원</strong>
@@ -183,7 +195,7 @@ export const FactoryAddBox: FunctionComponent = () => {
         </div>
         <div css={cssObj.buttonContainer}>
           <NewSharedButton onClickHandler={() => closeModal()} buttonType="outLineGray" text="취소" width={8.75} />
-          <NewSharedButton onClickHandler="submit" buttonType="fillBlue" text="확인" width={8.75} />
+          <NewSharedButton onClickHandler="submit" buttonType="fillBlue" text="등록하기" width={8.75} />
         </div>
       </form>
     </div>

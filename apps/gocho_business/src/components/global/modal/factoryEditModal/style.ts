@@ -36,6 +36,16 @@ export const cssObj = {
     display: block;
   `,
 
+  addAddressButton: css`
+    ${TEXTS.TITLE5};
+    flex-grow: 1;
+    margin-left: 0.5rem;
+    height: 3.25rem;
+    padding: 0.75rem 1rem;
+    background-color: ${NEWCOLORS.GRAY200};
+    border-radius: 0.5rem;
+  `,
+
   closeButton: css`
     > svg {
       width: 2rem;
