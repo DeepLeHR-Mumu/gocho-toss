@@ -3,12 +3,29 @@ import { FiEdit3, FiMinus, FiPlus } from "react-icons/fi";
 
 import { useModal } from "@/globalStates";
 import { commonCssObj } from "@/styles";
+import { useDeleteFactory } from "@/apis";
+import { factoryDeleteConfirmEvent, factoryDeleteDoneEvent } from "@/ga";
 
-import { cssObj } from "./style";
 import { FactoryPartProps } from "./type";
+import { cssObj } from "./style";
 
 export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ companyData }) => {
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
+  const { mutate: deleteFactoryMutation } = useDeleteFactory();
+
+  const deleteFactoryHandler = (factoryId: number) => {
+    factoryDeleteConfirmEvent();
+    if (window.confirm("공장을 삭제하시겠습니까?")) {
+      deleteFactoryMutation(
+        { factoryId },
+        {
+          onSuccess: () => {
+            factoryDeleteDoneEvent();
+          },
+        }
+      );
+    }
+  };
 
   return (
     <section css={commonCssObj.partContainer}>
@@ -17,7 +34,7 @@ export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ companyData }
         type="button"
         css={cssObj.addFactoryButton}
         onClick={() => {
-          setCurrentModal("factoryModal");
+          setModal("factoryAddModal");
         }}
       >
         <FiPlus />
@@ -31,10 +48,21 @@ export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ companyData }
               <p css={cssObj.factoryAddress}>{factory.address}</p>
             </div>
             <div css={cssObj.buttonContainer}>
-              <button type="button" css={cssObj.editButton}>
+              <button
+                type="button"
+                css={cssObj.editButton}
+                onClick={() => {
+                  setModal("factoryEditModal", factory);
+                }}
+              >
                 <FiEdit3 />
               </button>
-              <button type="button" aria-label={`공장${factory.name}삭제하기`} css={cssObj.deleteButton}>
+              <button
+                type="button"
+                aria-label={`공장${factory.name}삭제하기`}
+                css={cssObj.deleteButton}
+                onClick={() => deleteFactoryHandler(factory.id)}
+              >
                 <FiMinus />
               </button>
             </div>

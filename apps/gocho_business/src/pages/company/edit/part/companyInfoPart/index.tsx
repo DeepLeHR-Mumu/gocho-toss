@@ -100,13 +100,13 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({
         {logoPreview ? (
           <button
             type="button"
-            css={cssObj.imageUploadLabel(9.25, 50.5)}
+            css={cssObj.imageUploadLabel(11.75, 50.5)}
             onClick={() => deleteImageHandler(setLogo, setLogoPreview)}
           >
             <FiX />
           </button>
         ) : (
-          <label htmlFor="logoImg" css={cssObj.imageUploadLabel(9.25, 50.5)}>
+          <label htmlFor="logoImg" css={cssObj.imageUploadLabel(11.75, 50.5)}>
             <FiEdit3 />
             <input
               css={cssObj.imageUploadInput}
@@ -117,7 +117,6 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({
             />
           </label>
         )}
-
         <div css={cssObj.logoBox}>
           {logoPreview ? (
             <Image src={logoPreview} alt={companyData.name} fill sizes="1" />
@@ -138,27 +137,25 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({
             사업자 번호<span>{companyData.businessNumber}</span>
           </p>
         </div>
-        <div css={commonCssObj.container}>
-          <input
-            type="text"
-            {...register("intro", {
-              required: true,
-              maxLength: {
-                value: 120,
-                message: "asdf",
-              },
-              disabled: !companyData.uploader.isMine,
-              onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
-                if (onBlurEvent.target.value.trim().length === 0) {
-                  setValue("intro", "");
-                }
-              },
-            })}
-            placeholder="한 줄로 기업을 소개해주세요"
-            css={commonCssObj.input(41, !companyData.uploader.isMine)}
-          />
-          <p>{errors.intro?.message}</p>
-        </div>
+        <input
+          type="text"
+          {...register("intro", {
+            required: true,
+            maxLength: {
+              value: 120,
+              message: "최대 길이는 120자입니다",
+            },
+            disabled: !companyData.uploader.isMine,
+            onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
+              if (onBlurEvent.target.value.trim().length === 0) {
+                setValue("intro", "");
+              }
+            },
+          })}
+          placeholder="한 줄로 기업을 소개해주세요"
+          css={commonCssObj.input(41, !companyData.uploader.isMine)}
+        />
+        <p>{errors.intro?.message}</p>
       </div>
     </section>
   );

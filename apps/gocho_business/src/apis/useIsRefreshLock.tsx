@@ -26,7 +26,7 @@ export const useAxiosInterceptor = () => {
   let isRequestLock = false;
   let readyQueueArr: ((token: string) => void)[] = [];
 
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
   // const { setUserInfoData } = useUserState();
   const saveQueue = (callback: (token: string) => void) => readyQueueArr.push(callback);
   const activeQueue = (token: string) => readyQueueArr.forEach((callback) => callback(token));
@@ -158,7 +158,7 @@ export const useAxiosInterceptor = () => {
 
       // 이전페이지가 존재하고(사이트 사용중) 리프래시 토큰이 만료된 경우 route를 캔슬하고 로그인 모달을 출력한다.
       if (isRefreshAfterCurrentTime && prevUrl !== "none" && router.pathname !== INTERNAL_URL.LOGIN) {
-        setCurrentModal("loginModal");
+        setModal("loginModal");
         throw router.events.emit("routeChangeError");
       }
       return null;
@@ -168,7 +168,7 @@ export const useAxiosInterceptor = () => {
     return () => {
       router.events.off("routeChangeStart", blockingRouter);
     };
-  }, [setCurrentModal, router]);
+  }, [setModal, router]);
 
   useEffect(
     () => () => {

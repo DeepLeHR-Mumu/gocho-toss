@@ -4,21 +4,29 @@ import { create } from "zustand";
 import { setCurrentModalDef, UseModalProps } from "./type";
 
 export const modalZustand = create<UseModalProps>((set) => ({
-  currentModal: null,
-  setModal: (status) => set(() => ({ currentModal: status })),
+  modal: null,
+  contentObj: undefined,
+  setModal: (modal, contentObj = undefined) => {
+    set(() => ({
+      modal,
+      contentObj,
+    }));
+  },
 }));
 
 export const useModal = () => {
-  const { currentModal: _currentModal, setModal: _setCurrentModal } = modalZustand();
+  const { modal: _currentModal, contentObj: _contentObj, setModal: _setModal } = modalZustand();
 
-  const closeModal = useCallback(() => _setCurrentModal(null), [_setCurrentModal]);
+  const closeModal = useCallback(() => _setModal(null), [_setModal]);
 
-  const currentModal = _currentModal;
-
-  const setCurrentModal: setCurrentModalDef = useCallback(
-    (modalName) => _setCurrentModal(modalName),
-    [_setCurrentModal]
+  const setModal: setCurrentModalDef = useCallback(
+    (modal, contentObj) => {
+      _setModal(modal, contentObj);
+    },
+    [_setModal]
   );
+  const modal = _currentModal;
 
-  return { setCurrentModal, currentModal, closeModal };
+  const contentObj = _contentObj;
+  return { setModal, modal, contentObj, closeModal };
 };

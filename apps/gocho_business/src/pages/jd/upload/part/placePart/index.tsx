@@ -1,18 +1,22 @@
 import { FunctionComponent } from "react";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
-import { FiPlus, FiEdit3 } from "react-icons/fi";
+import { FiPlus, FiEdit3, FiMinus } from "react-icons/fi";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
-import { useFactoryArr } from "@/apis";
+import { useDeleteFactory, useFactoryArr } from "@/apis";
 import { commonCssObj } from "@/styles";
 
+import { useModal } from "@/globalStates";
+import { factoryDeleteConfirmEvent, factoryDeleteDoneEvent } from "@/ga";
 import { AddFieldButton, DeleteInputButton } from "../../component";
 import { PositionWorkInfoPartProps } from "./type";
 import { PLACE_TYPE_ARR } from "./constant";
 import { cssObj } from "./style";
 
 export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobForm }) => {
+  const { setModal } = useModal();
+
   const {
     watch,
     setValue,
@@ -26,6 +30,21 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
 
   // TODO: factories/find로 변경하기, params 추가
   const { data: factoryDataObj } = useFactoryArr();
+  const { mutate: deleteFactoryMutation } = useDeleteFactory();
+
+  const deleteFactoryHandler = (factoryId: number) => {
+    factoryDeleteConfirmEvent();
+    if (window.confirm("공장을 삭제하시겠습니까?")) {
+      deleteFactoryMutation(
+        { factoryId },
+        {
+          onSuccess: () => {
+            factoryDeleteDoneEvent();
+          },
+        }
+      );
+    }
+  };
 
   const factoryClickHandler = (factory: number) => {
     const totalNumber = (watch("place").factory_arr?.length || 0) + (watch("place").address_arr?.length || 0);
@@ -109,7 +128,25 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                       {factory.name}
                       <p css={cssObj.factoryAddress}>{factory.address}</p>
                     </div>
-                    <FiEdit3 />
+                    <div css={cssObj.buttonContainer}>
+                      <button
+                        type="button"
+                        css={cssObj.editButton}
+                        onClick={() => {
+                          setModal("factoryEditModal", factory);
+                        }}
+                      >
+                        <FiEdit3 />
+                      </button>
+                      <button
+                        type="button"
+                        aria-label={`공장${factory.name}삭제하기`}
+                        css={cssObj.deleteButton}
+                        onClick={() => deleteFactoryHandler(factory.id)}
+                      >
+                        <FiMinus />
+                      </button>
+                    </div>
                   </div>
                 ))}
                 {watch("place").address_arr?.length !== 0 && (
@@ -159,7 +196,13 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                       })
                     }
                   />
-                  <button type="button" css={cssObj.uploadFactoryButton}>
+                  <button
+                    type="button"
+                    css={cssObj.uploadFactoryButton}
+                    onClick={() => {
+                      setModal("factoryAddModal");
+                    }}
+                  >
                     <FiPlus />
                     공장 등록
                   </button>

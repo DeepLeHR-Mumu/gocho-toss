@@ -52,6 +52,28 @@ export const cssObj = {
     color: ${NEWCOLORS.BLUEGRAY300};
   `,
 
+  buttonContainer: css`
+    display: flex;
+    align-items: center;
+    gap: 0 1.5rem;
+  `,
+
+  editButton: css`
+    > svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: ${NEWCOLORS.GRAY300};
+    }
+  `,
+
+  deleteButton: css`
+    border-radius: 50%;
+    width: 1.75rem;
+    height: 1.75rem;
+    color: ${COLORS.GRAY10};
+    background-color: ${COLORS.GRAY70};
+  `,
+
   addPlaceButtonContainer: css`
     display: flex;
     gap: 0 1.25rem;
@@ -89,16 +111,5 @@ export const cssObj = {
     align-items: center;
     justify-content: space-between;
     height: 2.5rem;
-  `,
-
-  smallDeleteButton: css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    width: 1.75rem;
-    height: 1.75rem;
-    color: ${COLORS.GRAY10};
-    background-color: ${COLORS.GRAY70};
   `,
 };

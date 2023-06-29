@@ -28,7 +28,7 @@ const LoginPage: NextPage = () => {
   const queryClient = useQueryClient();
   const { isSuccess: isManagerLogin } = useManagerProfile();
   const { mutate: postLogin } = useDoLogin();
-  const { setCurrentModal } = useModal();
+  const { setModal } = useModal();
   const {
     register,
     watch,
@@ -162,7 +162,7 @@ const LoginPage: NextPage = () => {
                 type="button"
                 css={cssObj.findPasswordButton}
                 onClick={() => {
-                  setCurrentModal("findPasswordModal");
+                  setModal("findPasswordModal");
                 }}
               >
                 비밀번호 찾기

@@ -1,50 +1,53 @@
-import { ChangeEvent, FunctionComponent, useRef } from "react";
+import { ChangeEvent, FunctionComponent, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { FiX } from "react-icons/fi";
 
 import { useFocusTrap } from "shared-hooks";
 
-import { useModal } from "@/globalStates";
-import { useAddFactory } from "@/apis";
+import { useModal, factoryObjDef } from "@/globalStates";
+import { useEditFactory } from "@/apis";
 import { commonCssObj } from "@/styles";
 
-import { factoryUploadConfirmEvent, factoryUploadDoneEvent } from "@/ga";
+import { factoryEditConfirmEvent, factoryEditDoneEvent } from "@/ga";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { NewSharedButton } from "shared-ui/common/newSharedButton";
 import { ModalComponent } from "../modalBackground";
 
 import { cssObj } from "./style";
-import { FactoryRegisterFormValues } from "./type";
+import { FactoryEditFormValues } from "./type";
 
-export const FactoryBox: FunctionComponent = () => {
+export const FactoryEditBox: FunctionComponent = () => {
+  const { contentObj, closeModal } = useModal();
   const modalRef = useRef<HTMLDivElement>(null);
   const isLoading = useRef(false);
 
-  const { register, handleSubmit, setValue } = useForm<FactoryRegisterFormValues>();
+  const { register, handleSubmit, setValue, reset } = useForm<FactoryEditFormValues>();
 
-  const { closeModal } = useModal();
+  const { id } = contentObj as factoryObjDef;
 
   useFocusTrap(modalRef);
 
-  const { mutate: addFactoryMutation } = useAddFactory();
+  const { mutate: editFactoryMutation } = useEditFactory();
 
-  const factoryPostSubmitHandler = (factoryRequestObj: FactoryRegisterFormValues) => {
+  const factoryPostSubmitHandler = (factoryRequestObj: FactoryEditFormValues) => {
     if (isLoading.current) {
       return;
     }
     isLoading.current = true;
-    factoryUploadConfirmEvent();
-    addFactoryMutation(
+    factoryEditConfirmEvent();
+    editFactoryMutation(
       {
         ...factoryRequestObj,
+        id,
         bus_bool: factoryRequestObj.bus_bool === "true",
         bus_etc: factoryRequestObj.bus_etc === "" ? null : factoryRequestObj.bus_etc,
-        dormitory_etc: factoryRequestObj.dormitory_etc === "" ? null : factoryRequestObj.dormitory_etc,
         dormitory_bool: factoryRequestObj.dormitory_bool === "true",
+        dormitory_etc: factoryRequestObj.dormitory_etc === "" ? null : factoryRequestObj.dormitory_etc,
       },
       {
         onSuccess: () => {
-          factoryUploadDoneEvent();
+          factoryEditDoneEvent();
+          closeModal();
         },
         onSettled: () => {
           isLoading.current = false;
@@ -53,6 +56,22 @@ export const FactoryBox: FunctionComponent = () => {
     );
     isLoading.current = false;
   };
+
+  useEffect(() => {
+    if (contentObj) {
+      reset({
+        factory_name: contentObj.name,
+        address: contentObj.address,
+        male_number: contentObj.maleNumber,
+        female_number: contentObj.femaleNumber,
+        product: contentObj.product,
+        bus_bool: contentObj.bus.exists ? "true" : "false",
+        bus_etc: contentObj.bus.desc ? contentObj.bus.desc : "",
+        dormitory_bool: contentObj.dormitory.exists ? "true" : "false",
+        dormitory_etc: contentObj.dormitory.desc ? contentObj.dormitory.desc : "",
+      });
+    }
+  }, [reset, contentObj]);
 
   return (
     <div css={cssObj.modalContainer} ref={modalRef} tabIndex={-1}>
@@ -189,8 +208,8 @@ export const FactoryBox: FunctionComponent = () => {
   );
 };
 
-export const FactoryModal: FunctionComponent = () => (
+export const FactoryEditModal: FunctionComponent = () => (
   <ModalComponent>
-    <FactoryBox />
+    <FactoryEditBox />
   </ModalComponent>
 );
