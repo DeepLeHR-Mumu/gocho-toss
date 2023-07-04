@@ -1,82 +1,92 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { COLORS, NEWCOLORS } from "shared-style/color";
+import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
-  wrapper: css`
-    margin-top: 2rem;
+  userInfoContainer: css`
+    padding-bottom: 2rem;
+    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
   `,
-  title: css`
-    font-size: 1.25rem;
-    font-weight: 700;
-  `,
-  basicInfo: css`
-    padding: 1.75rem;
 
-    > li {
-      margin-bottom: 2rem;
-    }
-  `,
-  infoTitle: css`
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-    font-weight: 700;
-  `,
-  infoDesc: css`
-    font-size: 1rem;
-    padding: 0.75rem 1rem;
-  `,
-  formBox: css`
-    padding-left: 1.75rem;
-    margin-bottom: 2.5rem;
-  `,
-  formTitle: (isError: boolean) => css`
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-    font-weight: 400;
-    color: ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
-    display: block;
-  `,
-  label: (isError: boolean) => css`
-    border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
+  infoWrapper: css`
     display: flex;
     align-items: center;
-    border-radius: 0.3125rem;
-    overflow: hidden;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 28rem;
-    position: relative;
+    padding: 1rem 0;
   `,
-  input: css`
-    font-size: 1rem;
-    font-weight: 400;
-    width: 100%;
-    padding: 0 3rem 0 1rem;
-    background-color: ${COLORS.GRAY100};
-    height: 2.5rem;
-    box-shadow: 0 0 0 1000px ${COLORS.GRAY100} inset;
 
-    ::placeholder {
-      font-size: 1rem;
-      color: ${COLORS.GRAY40};
+  infoTitle: css`
+    ${TEXTS.TITLE6};
+    color: ${NEWCOLORS.BLUEGRAY400};
+    width: 8rem;
+  `,
+
+  infoDesc: css`
+    ${TEXTS.TITLE6};
+  `,
+
+  inputWrapper: css`
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    :last-of-type {
+      margin-bottom: 0;
     }
   `,
+
+  inputTitle: css`
+    display: flex;
+    align-items: center;
+    ${TEXTS.TITLE6};
+    color: ${NEWCOLORS.BLUEGRAY400};
+    width: 8rem;
+
+    :after {
+      content: "·";
+      color: ${NEWCOLORS.BLUE300};
+      line-height: 0.5;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-left: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+  `,
+
+  label: css`
+    position: relative;
+  `,
+
   showButton: css`
-    right: 1rem;
     position: absolute;
+    top: 1rem;
+    right: 1rem;
     z-index: 10;
-    font-size: 1.5rem;
-    color: ${COLORS.GRAY10};
+    font-size: 1.25rem;
+    color: ${NEWCOLORS.GRAY300};
   `,
-  errorBox: css`
-    height: 1rem;
-    margin: 0.25rem 0 1.25rem;
-  `,
+
   errorDesc: css`
-    font-size: 0.75rem;
-    color: ${COLORS.ERROR_RED40};
+    ${TEXTS.TITLE5};
+    height: 3.25rem;
+    line-height: 3.25rem;
+    margin-left: 1.5rem;
+    color: ${NEWCOLORS.RED300};
   `,
+
+  desc: css`
+    ${TEXTS.TITLE5};
+    color: ${NEWCOLORS.BLUEGRAY500};
+    margin-top: 1.5rem;
+  `,
+
+  link: css`
+    text-decoration: underline;
+    color: ${NEWCOLORS.BLUE300};
+    padding: 0 0.25rem;
+  `,
+
   submitButton: (isActive: boolean) => css`
     width: 100%;
     font-size: 1rem;
@@ -88,7 +98,7 @@ export const cssObj = {
     padding: 0.875rem 0;
     line-height: 1;
     max-width: 25rem;
-    margin: auto;
+    margin: 3rem auto 0;
     background-color: ${isActive ? COLORS.BLUE_FIRST40 : COLORS.GRAY65};
   `,
 };

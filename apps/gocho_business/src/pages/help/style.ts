@@ -54,16 +54,4 @@ export const cssObj = {
       color: ${NEWCOLORS.BLUEGRAY400};
     }
   `,
-
-  chatIconBox: css`
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    width: 6rem;
-    height: 6rem;
-
-    > img {
-      object-fit: contain;
-    }
-  `,
 };

@@ -1,6 +1,3 @@
-import Image from "next/image";
-
-import chatIcon from "@/public/image/help/chat.svg";
 import { NextPageWithLayout } from "@/types";
 
 import { EtcSideNav } from "@/components/global/etcSideNav";
@@ -27,9 +24,6 @@ const HelpPage: NextPageWithLayout = () => (
           <p css={cssObj.email}>
             이메일 문의 <a href="mailto:cs@deeplehr.com">cs@deeplehr.com</a>
           </p>
-          <div css={cssObj.chatIconBox}>
-            <Image src={chatIcon} alt="고객센터 링크 아이콘" />
-          </div>
         </div>
       </div>
     </PageLayout>

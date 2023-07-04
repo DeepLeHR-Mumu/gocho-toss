@@ -100,13 +100,13 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({
         {logoPreview ? (
           <button
             type="button"
-            css={cssObj.imageUploadLabel(11.75, 50.5)}
+            css={cssObj.imageUploadLabel(9.75, 50.5)}
             onClick={() => deleteImageHandler(setLogo, setLogoPreview)}
           >
             <FiX />
           </button>
         ) : (
-          <label htmlFor="logoImg" css={cssObj.imageUploadLabel(11.75, 50.5)}>
+          <label htmlFor="logoImg" css={cssObj.imageUploadLabel(9.75, 50.5)}>
             <FiEdit3 />
             <input
               css={cssObj.imageUploadInput}
