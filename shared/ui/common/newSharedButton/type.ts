@@ -12,5 +12,6 @@ export interface SharedButtonProps {
   width: number;
   text: string;
   isMobile?: boolean;
+  isLong?: boolean;
   onClickHandler: (() => void) | "submit";
 }
