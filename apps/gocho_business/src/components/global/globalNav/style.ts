@@ -93,7 +93,7 @@ export const cssObj = {
     border: 1px solid ${NEWCOLORS.BLACK};
     border-radius: 1rem;
     width: 15rem;
-    padding-top: 1rem;
+    padding: 1rem 0 0.25rem;
     background-color: ${NEWCOLORS.WHITE};
     z-index: 50;
   `,
@@ -127,19 +127,9 @@ export const cssObj = {
   `,
 
   companyMenuLink: css`
+    ${TEXTS.TITLE5};
     display: block;
-    padding: 0.625rem 1rem;
-
-    :last-of-type {
-      padding-bottom: 1rem;
-    }
-  `,
-
-  userName: css`
-    :after {
-      content: " 님";
-      font-weight: 400;
-    }
+    padding: 0.75rem 1rem;
   `,
 
   userMenu: css`
@@ -149,9 +139,24 @@ export const cssObj = {
     border: 1px solid ${NEWCOLORS.BLACK};
     border-radius: 1rem;
     width: 15rem;
-    padding-top: 1rem;
+    padding-top: 1.25rem;
     background-color: ${NEWCOLORS.WHITE};
     z-index: 50;
+  `,
+
+  userInfoContainer: css`
+    margin: 0 1rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+  `,
+
+  userName: css`
+    ${TEXTS.TITLE9};
+    margin-bottom: 0.25rem;
+  `,
+
+  userDepartment: css`
+    ${TEXTS.TITLE3};
   `,
 
   logoutButton: css`

@@ -112,11 +112,15 @@ export const GlobalNav: FunctionComponent = () => {
               setIsCompanyActive(false);
             }}
           >
-            <div css={cssObj.userName}>{userInfoData?.name}</div>
+            <div>{userInfoData?.name} 님</div>
             <FiChevronUp css={cssObj.toggleIcon(isUserActive)} />
           </button>
           {isUserActive && userInfoData && (
             <div css={cssObj.userMenu}>
+              <div css={cssObj.userInfoContainer}>
+                <p css={cssObj.userName}>{userInfoData?.name} 님</p>
+                <p css={cssObj.userDepartment}>{userInfoData?.department}</p>
+              </div>
               {USER_LINK_ARR.map((linkObj) => (
                 <Link href={linkObj.url} key={`navBar${linkObj.name}`} css={cssObj.companyMenuLink} passHref>
                   {linkObj.name}
