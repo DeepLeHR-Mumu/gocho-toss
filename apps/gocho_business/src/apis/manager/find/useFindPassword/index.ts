@@ -3,11 +3,11 @@ import { AxiosError, AxiosResponse } from "axios";
 
 import { ErrorResponseDef } from "@/types";
 
-import { axiosNoTokenInstance } from "../../useIsRefreshLock";
+import { axiosNoTokenInstance } from "../../../useIsRefreshLock";
 import { PostFindPasswordDef, RequestObjDef } from "./type";
 
 const postFindPassword: PostFindPasswordDef = async (requestObj) => {
-  const { data } = await axiosNoTokenInstance.post("/auth/find-password", { ...requestObj });
+  const { data } = await axiosNoTokenInstance.post("/managers/find-password", { ...requestObj });
   return data;
 };
 

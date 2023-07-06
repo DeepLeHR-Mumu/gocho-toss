@@ -3,7 +3,8 @@ export { useDoLogin } from "./auth/useDoLogin";
 export { useDoLogout } from "./auth/useDoLogout";
 export { useEditUserInfo } from "./auth/useEditUserInfo";
 export { useHealthCheck } from "./auth/useHealthCheck";
-export { useFindPassword } from "./auth/usefindPassword";
+export { useSendAuthNumber } from "./auth/useSendAuthNumber";
+export { useCheckAuthNumber } from "./auth/useCheckAuthNumber";
 
 export { useAddCompanyDetail } from "./company/useAddCompanyDetail";
 export { useCompanyDetail } from "./company/useCompanyDetail";
@@ -30,5 +31,7 @@ export { useAddNoticeView } from "./notice/useAddNoticeView";
 
 export { useManagerProfile } from "./manager/useManagerProfile";
 export { useAlarmArr } from "./manager/alarm/useAlarmArr";
+export { useFindEmail } from "./manager/find/useFindEmail";
+export { useFindPassword } from "./manager/find/useFindPassword";
 
 export { useAxiosInterceptor, axiosInstance, axiosNoTokenInstance } from "./useIsRefreshLock";

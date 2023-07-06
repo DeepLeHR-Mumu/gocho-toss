@@ -13,7 +13,7 @@ import { LoginFormValues } from "@/pages/login/type";
 
 import { cssObj } from "./style";
 
-const FindId: NextPage = () => {
+const FindEmail: NextPage = () => {
   const { mutate: postLogin } = useDoLogin();
   const {
     register,
@@ -114,4 +114,4 @@ const FindId: NextPage = () => {
   );
 };
 
-export default FindId;
+export default FindEmail;
