@@ -16,6 +16,7 @@ export const cssObj = {
     ${TEXTS.TITLE13};
     width: 50rem;
   `,
+
   loginWrapper: css`
     width: fit-content;
     background-color: ${NEWCOLORS.WHITE};
