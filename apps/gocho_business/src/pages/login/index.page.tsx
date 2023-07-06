@@ -166,7 +166,7 @@ const LoginPage: NextPage = () => {
                   type="button"
                   css={cssObj.findButton}
                   onClick={() => {
-                    setModal("findPasswordModal");
+                    router.push(INTERNAL_URL.FIND_ID);
                   }}
                 >
                   아이디 찾기

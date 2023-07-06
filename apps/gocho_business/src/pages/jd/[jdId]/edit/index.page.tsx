@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react";
-import dayjs from "dayjs";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import { useRouter } from "next/router";
 import { BiRocket } from "react-icons/bi";
+import { NextPage } from "next";
+import { useRouter } from "next/router";
+import dayjs from "dayjs";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { SharedButton } from "shared-ui/business/sharedButton";
@@ -19,7 +20,6 @@ import {
   jdEditFailEvent,
   jdEditPageFunnelEvent,
 } from "@/ga";
-import type { NextPageWithLayout } from "@/types";
 import { PageLayout } from "@/components";
 import { useJdDetail, useEditJd, useDeleteJd, useEndJd, jdArrKeyObj } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
@@ -36,7 +36,7 @@ import { BLANK_JD, JD_EDIT_MESSAGE_OBJ, ROTATION_ARR } from "./constant";
 import { getFieldArrayValue, getFieldArrayValueWithNull, setFieldArray } from "./util";
 import { cssObj } from "./style";
 
-const JdEditPage: NextPageWithLayout = () => {
+const JdEditPage: NextPage = () => {
   const isEditLoading = useRef(false);
   const isDeleteLoading = useRef(false);
   const isEndLoading = useRef(false);

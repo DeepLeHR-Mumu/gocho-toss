@@ -1,16 +1,17 @@
 import { useEffect } from "react";
 import Image from "next/image";
+import { NextPage } from "next";
+
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
 import jobi_500 from "@/public/image/jobi_500.svg";
 
-import { NextPageWithLayout } from "@/types";
 import { unknownPageErrorEvent } from "@/ga";
 
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
-const UnknownErrorPage: NextPageWithLayout = () => {
+const UnknownErrorPage: NextPage = () => {
   useEffect(() => {
     const prevUrl = sessionStorage.getItem("prevUrl");
     unknownPageErrorEvent(prevUrl || "/");

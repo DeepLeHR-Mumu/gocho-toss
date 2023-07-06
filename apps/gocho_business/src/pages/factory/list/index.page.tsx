@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+import { NextPage } from "next";
 
-import { NextPageWithLayout } from "@/types";
 import { PageLayout } from "@/components";
 import { factoryListPageFunnelEvent } from "@/ga";
 
@@ -8,7 +8,7 @@ import { PageHead } from "./pageHead";
 import { RegisterPart, FactoryCardListPart } from "./part";
 import { cssObj } from "./style";
 
-const FactoryListPage: NextPageWithLayout = () => {
+const FactoryListPage: NextPage = () => {
   const [editingIndex, setEditingIndex] = useState<null | number>(null);
   const [rejectedMessage, setRejectedMessage] = useState<null | string>(null);
 

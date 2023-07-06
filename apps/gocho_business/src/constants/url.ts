@@ -15,4 +15,6 @@ export const INTERNAL_URL = {
   NOT_FOUND: "/404",
   UNKNOWN_ERROR: "/500",
   LOGIN: "/login",
+  FIND_ID: "/find/id",
+  FIND_PASSWORD: "/find/password",
 } as const;

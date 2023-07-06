@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
-import dayjs from "dayjs";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { NextPage } from "next";
 import { useRouter } from "next/router";
+import dayjs from "dayjs";
 
 import { usePreventRouting } from "shared-hooks";
 
@@ -14,7 +15,6 @@ import {
   jdUploadFailEvent,
   jdUploadPageFunnelEvent,
 } from "@/ga";
-import type { NextPageWithLayout } from "@/types";
 import { PageLayout } from "@/components";
 import { useAddJd } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
@@ -24,7 +24,7 @@ import { JobFormValues } from "./type";
 import { BLANK_JD, JD_UPLOAD_MESSAGE_OBJ } from "./constant";
 import { getFieldArrayValue } from "./util";
 
-const JdUploadPage: NextPageWithLayout = () => {
+const JdUploadPage: NextPage = () => {
   const isLoading = useRef(false);
 
   const { mutate: addJobMutate } = useAddJd();

@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import Image from "next/image";
+import { NextPage } from "next";
 
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 
 import jobi_404 from "@/public/image/jobi_404.svg";
-import { NextPageWithLayout } from "@/types";
 import { notFoundPageErrorEvent } from "@/ga";
 
 import { cssObj } from "./style";
 import { PageHead } from "./pageHead";
 
-const NotFoundPage: NextPageWithLayout = () => {
+const NotFoundPage: NextPage = () => {
   useEffect(() => {
     const prevUrl = sessionStorage.getItem("prevUrl");
     notFoundPageErrorEvent(prevUrl || "/");

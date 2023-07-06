@@ -1,4 +1,4 @@
-import { NextPageWithLayout } from "@/types";
+import { NextPage } from "next";
 
 import { EtcSideNav } from "@/components/global/etcSideNav";
 import { PageLayout } from "@/components";
@@ -6,7 +6,7 @@ import { PageLayout } from "@/components";
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
-const HelpPage: NextPageWithLayout = () => (
+const HelpPage: NextPage = () => (
   <>
     <PageHead />
     <PageLayout>

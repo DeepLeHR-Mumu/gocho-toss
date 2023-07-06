@@ -71,7 +71,7 @@ export const useAxiosInterceptor = () => {
 
     if (!accessTokenData || !refreshTokenData) {
       router.replace(INTERNAL_URL.LOGIN);
-      throw new axios.Cancel("토큰이 존재하지 않으므로 요청취소");
+      throw new axios.Cancel("No Token - Access Denied");
     }
 
     const { exp: accessTokenExp } = managerTokenDecryptor(accessTokenData);
@@ -89,7 +89,7 @@ export const useAxiosInterceptor = () => {
       localStorage.removeItem("refreshToken");
       // setUserInfoData(null);
       router.push(INTERNAL_URL.LOGIN);
-      throw new axios.Cancel("리프래시 토큰 만료로 인한 강제 로그인페이지 이동");
+      throw new axios.Cancel("Refresh Token Outdated");
     }
 
     // 2. 어세스토큰이 만료된 이후 처음으로 실행될 코드
