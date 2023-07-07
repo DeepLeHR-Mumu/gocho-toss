@@ -92,31 +92,46 @@ const FindEmail: NextPage = () => {
           <div>
             {email ? (
               <div css={cssObj.resultContainer}>
-                <p>회원님의 가입 당시 이메일(아이디)은</p>
-                <p>
-                  <span css={cssObj.result}>{email}</span> 입니다
-                </p>
+                회원님의 가입 당시 이메일(아이디)은
+                <br />
+                <p css={cssObj.result}>{email} 입니다</p>
               </div>
             ) : (
               <p css={cssObj.resultContainer}>입력하신 정보와 일치하는 아이디가 존재하지 않습니다.</p>
             )}
             <div css={cssObj.buttonContainer}>
-              <NewSharedButton
-                buttonType="outLineGray"
-                width={12}
-                text="비밀번호 찾기"
-                onClickHandler={() => {
-                  router.push(INTERNAL_URL.FIND_PASSWORD);
-                }}
-              />
-              <NewSharedButton
-                buttonType="fillBlue"
-                width={12}
-                text="로그인 하기"
-                onClickHandler={() => {
-                  router.push(INTERNAL_URL.LOGIN);
-                }}
-              />
+              {email ? (
+                <>
+                  <NewSharedButton
+                    buttonType="outLineGray"
+                    width={12}
+                    text="비밀번호 찾기"
+                    isLong
+                    onClickHandler={() => {
+                      router.push(INTERNAL_URL.FIND_PASSWORD);
+                    }}
+                  />
+                  <NewSharedButton
+                    buttonType="fillBlue"
+                    width={12}
+                    text="로그인 하기"
+                    isLong
+                    onClickHandler={() => {
+                      router.push(INTERNAL_URL.LOGIN);
+                    }}
+                  />
+                </>
+              ) : (
+                <NewSharedButton
+                  buttonType="fillBlue"
+                  width={25.5}
+                  text="회원가입 하기"
+                  isLong
+                  onClickHandler={() => {
+                    router.push(INTERNAL_URL.LOGIN);
+                  }}
+                />
+              )}
             </div>
           </div>
         ) : (
