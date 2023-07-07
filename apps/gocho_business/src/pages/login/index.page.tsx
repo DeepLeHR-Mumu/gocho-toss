@@ -14,7 +14,6 @@ import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 import { useDoLogin, useManagerProfile } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 import { loginPageFunnelEvent, loginSuccessEvent, signupButtonClickEvent } from "@/ga";
-import { useModal } from "@/globalStates";
 import { commonCssObj } from "@/styles";
 import bizTextColor from "@/public/image/deepleLogo/bizTextColor.svg";
 
@@ -30,7 +29,6 @@ const LoginPage: NextPage = () => {
   const queryClient = useQueryClient();
   const { isSuccess: isManagerLogin } = useManagerProfile();
   const { mutate: postLogin } = useDoLogin();
-  const { setModal } = useModal();
   const {
     register,
     watch,
@@ -176,7 +174,7 @@ const LoginPage: NextPage = () => {
                   type="button"
                   css={cssObj.findButton}
                   onClick={() => {
-                    setModal("findPasswordModal");
+                    router.push(INTERNAL_URL.FIND_PASSWORD);
                   }}
                 >
                   비밀번호 찾기

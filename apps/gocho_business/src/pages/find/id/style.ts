@@ -6,6 +6,7 @@ import { TEXTS } from "shared-style/text";
 export const cssObj = {
   sectionContainer: css`
     width: fit-content;
+    height: 41rem;
     background-color: ${NEWCOLORS.WHITE};
     margin: 6rem auto;
     padding: 1.5rem;
@@ -39,7 +40,28 @@ export const cssObj = {
     ${TEXTS.TITLE9};
   `,
 
-  inputBox: css`
+  resultContainer: css`
+    ${TEXTS.TITLE7};
+    color: ${NEWCOLORS.BLUEGRAY400};
+    height: 30.75rem;
+  `,
+
+  result: css`
+    ${TEXTS.TITLE9};
+    margin-right: 0.25rem;
+  `,
+
+  buttonContainer: css`
+    display: flex;
+    align-items: center;
+    gap: 0 1.5rem;
+  `,
+
+  formWrapper: css`
+    height: 30.5rem;
+  `,
+
+  inputWrapper: css`
     position: relative;
     margin-bottom: 2rem;
   `,
@@ -48,6 +70,12 @@ export const cssObj = {
     ${TEXTS.TITLE7};
     color: ${NEWCOLORS.BLUEGRAY400};
     margin-bottom: 0.75rem;
+  `,
+
+  inputBox: css`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   `,
 
   errorMsg: css`
