@@ -11,6 +11,6 @@ export interface ResponseObjDef {
   refresh_token: string;
 }
 
-export interface PatchUserInfoDef {
+export interface PatchUserPasswordDef {
   (requestObj: RequestObjDef): Promise<AxiosResponse<ResponseObjDef>>;
 }

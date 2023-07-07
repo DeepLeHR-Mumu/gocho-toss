@@ -3,18 +3,18 @@ import { AxiosError, AxiosResponse } from "axios";
 
 import { ErrorResponseDef } from "@/types";
 
-import { PatchUserInfoDef, RequestObjDef, ResponseObjDef } from "./type";
+import { PatchUserPasswordDef, RequestObjDef, ResponseObjDef } from "./type";
 import { axiosInstance } from "../../useIsRefreshLock";
 
-const patchUserInfo: PatchUserInfoDef = async (requestObj) => {
-  const { data } = await axiosInstance.patch(`/managers/${requestObj.managerId}`, {
+const patchUserPassword: PatchUserPasswordDef = async (requestObj) => {
+  const { data } = await axiosInstance.patch(`/managers/${requestObj.managerId}/password`, {
     new_password: requestObj.new_password,
     origin_password: requestObj.origin_password,
   });
   return data;
 };
 
-export const useEditUserInfo = () =>
+export const useEditUserPassword = () =>
   useMutation<AxiosResponse<ResponseObjDef>, AxiosError<ErrorResponseDef>, RequestObjDef>({
-    mutationFn: patchUserInfo,
+    mutationFn: patchUserPassword,
   });

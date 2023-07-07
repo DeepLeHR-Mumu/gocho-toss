@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS, NEWCOLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -86,18 +86,9 @@ export const cssObj = {
     padding: 0 0.25rem;
   `,
 
-  submitButton: (isActive: boolean) => css`
-    width: 100%;
-    font-size: 1rem;
-    color: ${COLORS.GRAY100};
-    border-radius: 0.3125rem;
+  buttonWrapper: css`
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 0.875rem 0;
-    line-height: 1;
-    max-width: 25rem;
-    margin: 3rem auto 0;
-    background-color: ${isActive ? COLORS.BLUE_FIRST40 : COLORS.GRAY65};
+    margin-top: 3rem;
   `,
 };

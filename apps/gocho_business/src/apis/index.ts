@@ -1,7 +1,7 @@
 export { useDeleteUserInfo } from "./auth/useDeleteUserInfo";
 export { useDoLogin } from "./auth/useDoLogin";
 export { useDoLogout } from "./auth/useDoLogout";
-export { useEditUserInfo } from "./auth/useEditUserInfo";
+export { useEditUserPassword } from "./auth/useEditUserPassword";
 export { useHealthCheck } from "./auth/useHealthCheck";
 export { useSendAuthNumber } from "./auth/useSendAuthNumber";
 export { useCheckAuthNumber } from "./auth/useCheckAuthNumber";
