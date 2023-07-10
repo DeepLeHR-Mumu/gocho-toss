@@ -10,6 +10,7 @@ export { useAddCompanyDetail } from "./company/useAddCompanyDetail";
 export { useCompanyDetail } from "./company/useCompanyDetail";
 export { useCountInfo } from "./company/useCountInfo";
 export { useManagerArr } from "./company/useManagerArr";
+export { useFindCompany } from "./company/useFindCompany";
 
 export { useFactoryArr } from "./factory/useFactoryArr";
 export { useAddFactory } from "./factory/useAddFactory";

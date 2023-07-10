@@ -128,7 +128,7 @@ const FindEmail: NextPage = () => {
                   text="회원가입 하기"
                   isLong
                   onClickHandler={() => {
-                    router.push(INTERNAL_URL.LOGIN);
+                    router.push(INTERNAL_URL.SIGNUP);
                   }}
                 />
               )}

@@ -198,6 +198,7 @@ const LoginPage: NextPage = () => {
               text="기업회원 가입하기"
               onClickHandler={() => {
                 signupButtonClickEvent();
+                router.push(INTERNAL_URL.SIGNUP);
               }}
               isLong
             />
