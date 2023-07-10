@@ -10,7 +10,7 @@ import { FindCompanyPartProps, PostSubmitValues } from "./type";
 
 import { cssObj } from "./style";
 
-export const FindCompanyPart: FunctionComponent<FindCompanyPartProps> = ({ moveNextCard }) => {
+export const FindCompanyPart: FunctionComponent<FindCompanyPartProps> = ({ sliderRef }) => {
   const [searchWord, setSearchWord] = useState<string>("");
 
   const { handleSubmit } = useForm<PostSubmitValues>({
@@ -21,11 +21,11 @@ export const FindCompanyPart: FunctionComponent<FindCompanyPartProps> = ({ moveN
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
     sessionStorage.setItem("specObj", JSON.stringify(formData));
-    moveNextCard("2");
+    sliderRef.current?.slickNext();
   };
 
   return (
-    <form onSubmit={handleSubmit(postSubmit)} css={cssObj.specCardWrapper}>
+    <form onSubmit={handleSubmit(postSubmit)}>
       <div css={cssObj.formWrapper}>
         <div css={cssObj.inputWrapper}>
           <p css={cssObj.inputTitle}>기업명이 무엇인가요?</p>

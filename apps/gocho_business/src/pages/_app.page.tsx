@@ -15,6 +15,9 @@ import { globalStyle } from "@/styles";
 
 import { PROTECTED_ROUTE_ARR } from "./constant";
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 if (typeof window !== "undefined" && !window.location.href.includes("localhost")) {
   datadogRum.init({
     applicationId: "ae36adeb-77ea-4c17-8d46-e239927462e4",
