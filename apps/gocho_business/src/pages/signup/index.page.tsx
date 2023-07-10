@@ -27,12 +27,10 @@ const Signup: NextPage = () => {
             <FiX />
           </Link>
         </div>
-        <div css={cssObj.asdf}>
-          <Slider {...setCarouselSetting} ref={sliderRef}>
-            <FindCompanyPart sliderRef={sliderRef} />
-            <IdPasswordPart sliderRef={sliderRef} />
-          </Slider>
-        </div>
+        <Slider {...setCarouselSetting} ref={sliderRef}>
+          <FindCompanyPart sliderRef={sliderRef} />
+          <IdPasswordPart sliderRef={sliderRef} />
+        </Slider>
       </section>
     </main>
   );

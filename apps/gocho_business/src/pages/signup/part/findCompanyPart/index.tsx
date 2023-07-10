@@ -13,7 +13,12 @@ import { cssObj } from "./style";
 export const FindCompanyPart: FunctionComponent<FindCompanyPartProps> = ({ sliderRef }) => {
   const [searchWord, setSearchWord] = useState<string>("");
 
-  const { handleSubmit } = useForm<PostSubmitValues>({
+  const {
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<PostSubmitValues>({
     mode: "onChange",
   });
 
@@ -24,6 +29,8 @@ export const FindCompanyPart: FunctionComponent<FindCompanyPartProps> = ({ slide
     sliderRef.current?.slickNext();
   };
 
+  const isCompanyName = Boolean(watch("companyName"));
+
   return (
     <form onSubmit={handleSubmit(postSubmit)}>
       <div css={cssObj.formWrapper}>
@@ -32,16 +39,37 @@ export const FindCompanyPart: FunctionComponent<FindCompanyPartProps> = ({ slide
           <input
             css={commonCssObj.input(25.5, false)}
             type="text"
+            value={searchWord}
             onChange={(e) => {
               setSearchWord(e.target.value);
             }}
           />
         </div>
-        {companyDataObj?.companyDataArr.map((company) => (
-          <p key={`SignupCompany${company.id}`}>{company.name}</p>
-        ))}
+        <div css={cssObj.optionList(searchWord !== "")}>
+          {companyDataObj?.companyDataArr.map((company) => (
+            <button
+              type="button"
+              css={cssObj.option}
+              key={`SignupCompany${company.id}`}
+              value={company.name}
+              onMouseDown={(mouseEvent) => {
+                mouseEvent.preventDefault();
+                setSearchWord(company.name);
+                setValue(`companyName`, company.name);
+              }}
+            >
+              {company.name}
+            </button>
+          ))}
+        </div>
       </div>
-      <NewSharedButton buttonType="fillBlue" width={25.5} text="다음" onClickHandler="submit" isLong />
+      <NewSharedButton
+        buttonType={!isCompanyName || errors.companyName?.message ? "disabled" : "fillBlue"}
+        width={25.5}
+        text="다음"
+        onClickHandler="submit"
+        isLong
+      />
     </form>
   );
 };

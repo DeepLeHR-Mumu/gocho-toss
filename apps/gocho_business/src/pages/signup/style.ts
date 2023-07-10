@@ -39,9 +39,4 @@ export const cssObj = {
   title: css`
     ${TEXTS.TITLE9};
   `,
-
-  asdf: css`
-    position: relative;
-    overflow: hidden;
-  `,
 };
