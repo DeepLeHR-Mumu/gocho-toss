@@ -10,6 +10,7 @@ export const cssObj = {
 
   inputWrapper: css`
     position: relative;
+    margin-bottom: 2rem;
   `,
 
   inputTitle: css`
@@ -19,13 +20,17 @@ export const cssObj = {
   `,
 
   optionList: (isSearched: boolean) => css`
+    position: absolute;
+    top: 5.75rem;
+    width: 25.5rem;
     display: ${isSearched ? "block" : "none"};
-    margin-top: 0.5rem;
+    background-color: ${NEWCOLORS.WHITE};
     border: 1px solid ${NEWCOLORS.GRAY200};
     border-radius: 1rem;
     box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.05);
     max-height: 11.5rem;
     overflow-y: scroll;
+    z-index: 50;
   `,
 
   option: css`
@@ -41,5 +46,48 @@ export const cssObj = {
     :hover {
       background-color: ${NEWCOLORS.GRAY100};
     }
+  `,
+
+  newCompanyButton: css`
+    ${TEXTS.TITLE6};
+
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    padding: 0.75rem 1.5rem;
+
+    :hover {
+      background-color: ${NEWCOLORS.GRAY100};
+    }
+  `,
+
+  desc: css`
+    ${TEXTS.TITLE3};
+    margin-bottom: 0.75rem;
+  `,
+
+  buttonBox: css`
+    display: flex;
+
+    > svg {
+      rotate: 45deg;
+      font-weight: 700;
+      width: 1.25rem;
+      height: 1.25rem;
+      margin-right: 0.5rem;
+    }
+  `,
+
+  point: css`
+    color: ${NEWCOLORS.BLUE300};
+    margin-left: 0.25rem;
+  `,
+
+  businessNumberInput: css`
+    display: flex;
+    align-items: center;
+    gap: 0 0.5rem;
+    color: ${NEWCOLORS.GRAY300};
   `,
 };

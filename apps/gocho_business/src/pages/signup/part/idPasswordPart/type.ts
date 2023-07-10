@@ -6,5 +6,6 @@ export interface FindCompanyPartProps {
 }
 
 export interface PostSubmitValues {
-  companyName: string;
+  email: string;
+  password: string;
 }

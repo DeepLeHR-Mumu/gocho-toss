@@ -1,47 +1,87 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 import { NewSharedButton } from "shared-ui/common/newSharedButton";
 
 import { commonCssObj } from "@/styles";
 
-import { useFindCompany } from "@/apis";
+import { LOGIN_ERROR_MESSAGES } from "@/pages/login/constant";
 import { FindCompanyPartProps, PostSubmitValues } from "./type";
 
 import { cssObj } from "./style";
 
 export const IdPasswordPart: FunctionComponent<FindCompanyPartProps> = ({ sliderRef }) => {
-  const [searchWord, setSearchWord] = useState<string>("");
-
-  const { handleSubmit } = useForm<PostSubmitValues>({
+  const {
+    handleSubmit,
+    register,
+    watch,
+    formState: { errors },
+  } = useForm<PostSubmitValues>({
     mode: "onChange",
   });
-
-  const { data: companyDataObj } = useFindCompany({ word: searchWord });
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
     sessionStorage.setItem("specObj", JSON.stringify(formData));
     sliderRef.current?.slickNext();
   };
 
+  const isEmail = Boolean(watch("email"));
+  const isPassword = Boolean(watch("password"));
+
   return (
     <form onSubmit={handleSubmit(postSubmit)}>
       <div css={cssObj.formWrapper}>
         <div css={cssObj.inputWrapper}>
-          <p css={cssObj.inputTitle}>ㅁㄴㅇㄹ</p>
+          <p css={cssObj.inputTitle}>아이디(이메일)</p>
           <input
-            css={commonCssObj.input(25.5, false)}
+            css={commonCssObj.input(25.5, Boolean(errors.email))}
             type="text"
-            onChange={(e) => {
-              setSearchWord(e.target.value);
-            }}
+            {...register("email", {
+              required: LOGIN_ERROR_MESSAGES.BLANK_EMAIL,
+              maxLength: {
+                value: 30,
+                message: LOGIN_ERROR_MESSAGES.EXCEED_LENGTH_EMAIL,
+              },
+              pattern: {
+                value: EMAIL_REGEXP,
+                message: LOGIN_ERROR_MESSAGES.WRONG_EMAIL,
+              },
+            })}
           />
         </div>
-        {companyDataObj?.companyDataArr.map((company) => (
-          <p key={`SignupCompany${company.id}`}>{company.name}</p>
-        ))}
+        <div css={cssObj.inputWrapper}>
+          <p css={cssObj.inputTitle}>비밀번호</p>
+          <input
+            css={commonCssObj.input(25.5, Boolean(errors.password))}
+            type="password"
+            {...register("password", {
+              required: LOGIN_ERROR_MESSAGES.BLANK_PWD,
+              pattern: {
+                value: PWD_REGEXP,
+                message: LOGIN_ERROR_MESSAGES.NO_SPACE,
+              },
+              minLength: {
+                value: 8,
+                message: LOGIN_ERROR_MESSAGES.MIN_PASSWORD,
+              },
+              maxLength: {
+                value: 20,
+                message: LOGIN_ERROR_MESSAGES.MAX_PASSWORD,
+              },
+            })}
+          />
+        </div>
       </div>
-      <NewSharedButton buttonType="fillBlue" width={25.5} text="다음" onClickHandler="submit" isLong />
+      <NewSharedButton
+        buttonType={
+          !isEmail || !isPassword || errors.email?.message || errors.password?.message ? "disabled" : "fillBlue"
+        }
+        width={25.5}
+        text="다음"
+        onClickHandler="submit"
+        isLong
+      />
     </form>
   );
 };
