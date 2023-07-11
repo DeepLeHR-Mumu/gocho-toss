@@ -18,6 +18,7 @@ export const FindCompanyPart: FunctionComponent<FindCompanyPartProps> = ({ slide
 
   const {
     handleSubmit,
+    register,
     setValue,
     watch,
     formState: { errors },
@@ -28,23 +29,49 @@ export const FindCompanyPart: FunctionComponent<FindCompanyPartProps> = ({ slide
   const { data: companyDataObj } = useFindCompany({ word: searchWord });
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
-    sessionStorage.setItem("specObj", JSON.stringify(formData));
+    const newFormData = {
+      company: formData.company_id
+        ? {
+            company_id: formData.company_id,
+            company_name: formData.company_name,
+            business_number: isBusinessNumberOn
+              ? formData.business_number_1 + formData.business_number_2 + formData.business_number_3
+              : formData.business_number,
+          }
+        : {
+            company_name: formData.company_name,
+            business_number: isBusinessNumberOn
+              ? formData.business_number_1 + formData.business_number_2 + formData.business_number_3
+              : formData.business_number,
+          },
+    };
+    sessionStorage.setItem("specObj", JSON.stringify(newFormData));
     sliderRef.current?.slickNext();
   };
 
-  const selectCompanyHandler = (companyName: string) => {
+  const selectCompanyHandler = (companyName: string, companyId: number, businessNumber: string) => {
     setSearchWord(companyName);
-    setValue(`companyName`, companyName);
+    setValue("company_name", companyName);
+    setValue("company_id", companyId);
+    setValue("business_number", businessNumber);
     setIsCompanyListOn(false);
     setIsBusinessNumberOn(false);
   };
 
   const addNewCompanyHandler = (companyName: string) => {
-    selectCompanyHandler(companyName);
+    setSearchWord(companyName);
+    setValue("company_name", companyName);
+    setIsCompanyListOn(false);
     setIsBusinessNumberOn(true);
   };
 
-  const isCompanyName = Boolean(watch("companyName"));
+  const isCompanyName = Boolean(watch("company_name"));
+  const isBusinessNumber = Boolean(
+    watch("business_number") || (watch("business_number_1") && watch("business_number_2") && watch("business_number_3"))
+  );
+  const isBusinessNumberError = Boolean(
+    errors.business_number_1 || errors.business_number_2 || errors.business_number_3
+  );
   const isCompanyNotExist = isCompanyListOn && searchWord !== "" && companyDataObj?.count === 0;
 
   return (
@@ -71,7 +98,7 @@ export const FindCompanyPart: FunctionComponent<FindCompanyPartProps> = ({ slide
                 key={`SignupCompany${company.id}`}
                 value={company.name}
                 onMouseDown={() => {
-                  selectCompanyHandler(company.name);
+                  selectCompanyHandler(company.name, company.id, company.businessNumber);
                 }}
               >
                 {company.name}
@@ -96,17 +123,54 @@ export const FindCompanyPart: FunctionComponent<FindCompanyPartProps> = ({ slide
           <div css={cssObj.inputWrapper}>
             <p css={cssObj.inputTitle}>사업자 등록번호</p>
             <div css={cssObj.businessNumberInput}>
-              <input css={commonCssObj.input(5, false)} type="text" placeholder="000" />
+              <input
+                css={commonCssObj.input(5, false)}
+                type="text"
+                placeholder="000"
+                maxLength={3}
+                {...register("business_number_1", {
+                  pattern: {
+                    value: /^[0-9]{3}$/,
+                    message: "사업자 번호 앞 3자리를 입력해주세요.",
+                  },
+                })}
+              />
               -
-              <input css={commonCssObj.input(5, false)} type="text" placeholder="000" />
+              <input
+                css={commonCssObj.input(5, false)}
+                type="text"
+                placeholder="00"
+                maxLength={2}
+                {...register("business_number_2", {
+                  pattern: {
+                    value: /^[0-9]{2}$/,
+                    message: "사업자 번호 가운데 2자리를 입력해주세요.",
+                  },
+                })}
+              />
               -
-              <input css={commonCssObj.input(6.25, false)} type="text" placeholder="00000" />
+              <input
+                css={commonCssObj.input(6.25, false)}
+                type="text"
+                placeholder="00000"
+                maxLength={5}
+                {...register("business_number_3", {
+                  pattern: {
+                    value: /^[0-9]{5}$/,
+                    message: "사업자 번호 뒷 5자리를 입력해주세요.",
+                  },
+                })}
+              />
             </div>
           </div>
         )}
       </div>
       <NewSharedButton
-        buttonType={!isCompanyName || errors.companyName?.message ? "disabled" : "fillBlue"}
+        buttonType={
+          !isCompanyName || errors.company_name?.message || !isBusinessNumber || isBusinessNumberError
+            ? "disabled"
+            : "fillBlue"
+        }
         width={25.5}
         text="다음"
         onClickHandler="submit"

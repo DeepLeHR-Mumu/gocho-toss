@@ -7,7 +7,7 @@ import Link from "next/link";
 import { AuthNav } from "@/components/global/authNav";
 import { INTERNAL_URL } from "@/constants";
 
-import { FindCompanyPart, IdPasswordPart } from "./part";
+import { FindCompanyPart, IdPasswordPart, AuthPart } from "./part";
 import { setCarouselSetting } from "./util";
 import { cssObj } from "./style";
 
@@ -30,6 +30,7 @@ const Signup: NextPage = () => {
         <Slider {...setCarouselSetting} ref={sliderRef}>
           <FindCompanyPart sliderRef={sliderRef} />
           <IdPasswordPart sliderRef={sliderRef} />
+          <AuthPart sliderRef={sliderRef} />
         </Slider>
       </section>
     </main>

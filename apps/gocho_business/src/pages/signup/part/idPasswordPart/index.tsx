@@ -22,7 +22,9 @@ export const IdPasswordPart: FunctionComponent<FindCompanyPartProps> = ({ slider
   });
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
-    sessionStorage.setItem("specObj", JSON.stringify(formData));
+    const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
+    const currentSpecObj = Object.assign(prevSpecObj, formData);
+    sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
     sliderRef.current?.slickNext();
   };
 
