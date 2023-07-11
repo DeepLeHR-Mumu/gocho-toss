@@ -5,13 +5,16 @@ import { FiChevronRight, FiSmartphone } from "react-icons/fi";
 import { NewSharedButton } from "shared-ui/common/newSharedButton";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
+import { useModal } from "@/globalStates";
 import { commonCssObj } from "@/styles";
 
 import { AuthPartProps, PostSubmitValues } from "./type";
 
 import { cssObj } from "./style";
 
-export const AuthPart: FunctionComponent<AuthPartProps> = ({ sliderRef }) => {
+export const AuthPart: FunctionComponent<AuthPartProps> = () => {
+  const { setModal } = useModal();
+
   const {
     handleSubmit,
     register,
@@ -22,14 +25,21 @@ export const AuthPart: FunctionComponent<AuthPartProps> = ({ sliderRef }) => {
   });
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
+    const newFormData = {
+      ...formData,
+      manager_agreement: {
+        terms: formData.manager_agreement.terms && 1,
+        privacy: formData.manager_agreement.privacy && 1,
+      },
+    };
     const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
-    const currentSpecObj = Object.assign(prevSpecObj, formData);
+    const currentSpecObj = Object.assign(prevSpecObj, newFormData);
     sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
-    sliderRef.current?.slickNext();
   };
 
   const isDepartment = Boolean(watch("department"));
   const isPosition = Boolean(watch("position"));
+  const isTerm = Boolean(watch("manager_agreement.terms") && watch("manager_agreement.privacy"));
 
   return (
     <form onSubmit={handleSubmit(postSubmit)}>
@@ -63,24 +73,38 @@ export const AuthPart: FunctionComponent<AuthPartProps> = ({ sliderRef }) => {
             {...register("position")}
           />
         </div>
-        <div css={cssObj.termBox}>
-          <CheckBox isChecked={false} />
+        <label css={cssObj.termBox} htmlFor="usageTerm">
+          <input type="checkbox" id="usageTerm" {...register("manager_agreement.terms")} />
+          <CheckBox isChecked={watch("manager_agreement.terms")} />
           [필수]
-          <button type="button" css={cssObj.termLink}>
+          <button
+            type="button"
+            css={cssObj.termLink}
+            onClick={() => {
+              setModal("usageTermModal");
+            }}
+          >
             이용약관 동의
           </button>
-        </div>
-        <div css={cssObj.termBox}>
-          <CheckBox isChecked={false} />
+        </label>
+        <label css={cssObj.termBox} htmlFor="privacy">
+          <input type="checkbox" id="privacy" {...register("manager_agreement.privacy")} />
+          <CheckBox isChecked={watch("manager_agreement.privacy")} />
           [필수]
-          <button type="button" css={cssObj.termLink}>
+          <button
+            type="button"
+            css={cssObj.termLink}
+            onClick={() => {
+              setModal("privacyTermModal");
+            }}
+          >
             개인정보 수집 및 이용 동의
           </button>
-        </div>
+        </label>
       </div>
       <NewSharedButton
         buttonType={
-          !isDepartment || !isPosition || errors.department?.message || errors.position?.message
+          !isDepartment || !isPosition || !isTerm || errors.department?.message || errors.position?.message
             ? "disabled"
             : "fillBlue"
         }

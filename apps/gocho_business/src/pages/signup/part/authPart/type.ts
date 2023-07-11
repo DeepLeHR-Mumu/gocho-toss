@@ -8,4 +8,8 @@ export interface AuthPartProps {
 export interface PostSubmitValues {
   department: string;
   position: string;
+  manager_agreement: {
+    terms: boolean;
+    privacy: boolean;
+  };
 }

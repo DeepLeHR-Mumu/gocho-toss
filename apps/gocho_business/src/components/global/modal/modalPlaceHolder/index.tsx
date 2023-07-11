@@ -5,6 +5,8 @@ import { FindPasswordModal } from "../findPasswordModal";
 import { LoginModal } from "../loginModal";
 import { FactoryAddModal } from "../factoryAddModal";
 import { FactoryEditModal } from "../factoryEditModal";
+import { UsageTermModal } from "../usageTermModal";
+import { PrivacyTermModal } from "../privacyTermModal";
 
 export const ModalPlaceholder: FunctionComponent = () => {
   const { modal } = useModal();
@@ -23,6 +25,14 @@ export const ModalPlaceholder: FunctionComponent = () => {
 
   if (modal === "factoryEditModal") {
     return <FactoryEditModal />;
+  }
+
+  if (modal === "usageTermModal") {
+    return <UsageTermModal />;
+  }
+
+  if (modal === "privacyTermModal") {
+    return <PrivacyTermModal />;
   }
 
   return null;

@@ -4,6 +4,7 @@ import { NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
   check: (isChecked: boolean) => css`
+    cursor: pointer;
     width: 1rem;
     height: 1rem;
     margin-right: 0.25rem;

@@ -16,7 +16,13 @@ export interface factoryObjDef {
 }
 
 export type contentModalDef = factoryObjDef;
-export type modalNameDef = "findPasswordModal" | "loginModal" | "factoryAddModal" | "factoryEditModal" | null;
+export type modalNameDef =
+  | "findPasswordModal"
+  | "loginModal"
+  | "factoryAddModal"
+  | "usageTermModal"
+  | "privacyTermModal"
+  | null;
 export type contentModalNameDef = "factoryEditModal";
 
 export interface setCurrentModalDef {
