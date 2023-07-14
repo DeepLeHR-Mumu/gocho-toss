@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 
 import { NEWCOLORS } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
+import { shorten } from "shared-style/common";
 
 export const cssObj = {
   headerWrapper: (isLogin: boolean) => css`
@@ -66,6 +67,50 @@ export const cssObj = {
     :last-of-type {
       margin-right: 0;
     }
+  `,
+
+  alarmButton: css`
+    padding: 1rem 0;
+
+    > svg {
+      color: ${NEWCOLORS.WHITE};
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  `,
+
+  alarmMenu: css`
+    position: absolute;
+    top: 4.25rem;
+    right: 0;
+    border: 1px solid ${NEWCOLORS.BLACK};
+    border-radius: 1rem;
+    width: 25rem;
+    max-height: 28rem;
+    overflow-y: scroll;
+    background-color: ${NEWCOLORS.WHITE};
+    z-index: 50;
+  `,
+
+  alarmContainer: css`
+    text-align: left;
+    padding: 1rem;
+  `,
+
+  infoType: (isRead: boolean) => css`
+    ${TEXTS.TITLE4};
+    color: ${isRead ? NEWCOLORS.BLUEGRAY400 : NEWCOLORS.BLUE200};
+  `,
+
+  infoTitle: (isRead: boolean) => css`
+    ${TEXTS.BODY3};
+    color: ${isRead ? NEWCOLORS.BLUEGRAY400 : NEWCOLORS.BLACK};
+    ${shorten(3)};
+  `,
+
+  contour: css`
+    margin: 0.25rem 1rem;
+    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
   `,
 
   profileButton: css`

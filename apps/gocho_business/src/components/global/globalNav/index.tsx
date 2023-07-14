@@ -1,12 +1,12 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { FiChevronUp } from "react-icons/fi";
+import { FiChevronUp, FiBell } from "react-icons/fi";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 
 import bizTextMono from "@/public/image/deepleLogo/bizTextMono.svg";
-import { useDoLogout, useManagerProfile } from "@/apis";
+import { useAlarmArr, useDoLogout, useManagerProfile, useReadAlarm } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 
 import { JD_LINK_ARR, COMPANY_LINK_ARR, USER_LINK_ARR } from "./constant";
@@ -16,11 +16,14 @@ export const GlobalNav: FunctionComponent = () => {
   const router = useRouter();
   const { pathname } = router;
 
+  const [isAlarmActive, setIsAlarmActive] = useState<boolean>(false);
   const [isCompanyActive, setIsCompanyActive] = useState<boolean>(false);
   const [isUserActive, setIsUserActive] = useState<boolean>(false);
 
   const { data: userInfoData, isSuccess: isManagerLogin } = useManagerProfile();
+  const { data: alarmArrObj } = useAlarmArr({ managerId: userInfoData?.id, page: Number(router.query.page), size: 15 });
   const { mutate: postLogout } = useDoLogout();
+  const { mutate: readAlarmMutate } = useReadAlarm();
   const queryClient = useQueryClient();
 
   const doLogoutHandler = () => {
@@ -43,10 +46,21 @@ export const GlobalNav: FunctionComponent = () => {
     });
   };
 
+  const profileMenuHandler = (clickedMenu: string) => {
+    setIsAlarmActive((prev) => (clickedMenu === "alarm" ? !prev : false));
+    setIsCompanyActive((prev) => (clickedMenu === "company" ? !prev : false));
+    setIsUserActive((prev) => (clickedMenu === "user" ? !prev : false));
+  };
+
   useEffect(() => {
-    setIsCompanyActive(false);
-    setIsUserActive(false);
+    profileMenuHandler("");
   }, [pathname]);
+
+  useEffect(() => {
+    if (alarmArrObj && userInfoData?.id && isAlarmActive) {
+      readAlarmMutate({ managerId: userInfoData.id, category: "all" });
+    }
+  }, [alarmArrObj, readAlarmMutate, userInfoData?.id, isAlarmActive]);
 
   const menuUrl = pathname.split("/").join("/");
 
@@ -72,12 +86,35 @@ export const GlobalNav: FunctionComponent = () => {
         </div>
         <div css={cssObj.profileWrapper}>
           <button
+            type="button"
+            css={cssObj.alarmButton}
+            onClick={() => {
+              profileMenuHandler("alarm");
+            }}
+          >
+            <FiBell />
+          </button>
+          {isAlarmActive && (
+            <div css={cssObj.alarmMenu}>
+              {alarmArrObj?.alarmDataArr.map((alarm) => (
+                <>
+                  <div key={`alarm${alarm.id}`} css={cssObj.alarmContainer}>
+                    <p css={cssObj.infoType(alarm.isRead)}>{alarm.category}</p>
+                    <strong css={cssObj.infoTitle(alarm.isRead)}>{alarm.description}</strong>
+                  </div>
+                  <div css={cssObj.contour} />
+                </>
+              ))}
+            </div>
+          )}
+        </div>
+        <div css={cssObj.profileWrapper}>
+          <button
             css={cssObj.profileButton}
             type="button"
             aria-label={isCompanyActive ? "서브메뉴 열기" : "서브메뉴 닫기"}
             onClick={() => {
-              setIsCompanyActive((isPrev) => !isPrev);
-              setIsUserActive(false);
+              profileMenuHandler("company");
             }}
           >
             <div>{userInfoData?.company.name}</div>
@@ -108,8 +145,7 @@ export const GlobalNav: FunctionComponent = () => {
             type="button"
             aria-label={isUserActive ? "서브메뉴 열기" : "서브메뉴 닫기"}
             onClick={() => {
-              setIsUserActive((isPrev) => !isPrev);
-              setIsCompanyActive(false);
+              profileMenuHandler("user");
             }}
           >
             <div>{userInfoData?.name} 님</div>
