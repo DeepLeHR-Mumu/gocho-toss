@@ -32,6 +32,7 @@ export { useAddNoticeView } from "./notice/useAddNoticeView";
 
 export { useManagerProfile } from "./manager/useManagerProfile";
 export { useAlarmArr } from "./manager/alarm/useAlarmArr";
+export { useReadAlarm } from "./manager/alarm/useReadAlarm";
 export { useFindEmail } from "./manager/find/useFindEmail";
 export { useFindPassword } from "./manager/find/useFindPassword";
 

@@ -14,7 +14,7 @@ export interface ResponseObjDef {
     category: string;
     description: string;
     link: string;
-    is_read: number;
+    is_read: boolean;
     created_time: string;
     updated_time: string | null;
   }[];

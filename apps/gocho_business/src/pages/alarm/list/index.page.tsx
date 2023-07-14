@@ -8,7 +8,7 @@ import { Spinner } from "shared-ui/common/atom/spinner";
 import { INTERNAL_URL } from "@/constants";
 import { EtcSideNav } from "@/components/global/etcSideNav";
 import { PageLayout, Pagination } from "@/components";
-import { useAlarmArr, useManagerProfile } from "@/apis";
+import { useManagerProfile, useReadAlarm, useAlarmArr } from "@/apis";
 
 import { cssObj } from "./style";
 
@@ -17,12 +17,19 @@ const AlarmList: NextPage = () => {
 
   const { data: userInfoData } = useManagerProfile();
   const { data: alarmArrObj } = useAlarmArr({ managerId: userInfoData?.id, page: Number(router.query.page), size: 15 });
+  const { mutate: readAlarmMutate } = useReadAlarm();
 
   useEffect(() => {
     if (Object.keys(router.query).length === 0 && router.isReady) {
       router.replace({ pathname: INTERNAL_URL.ALARM_LIST, query: { page: 1 } });
     }
   }, [router]);
+
+  useEffect(() => {
+    if (alarmArrObj && userInfoData?.id) {
+      readAlarmMutate({ managerId: userInfoData.id, category: "all" });
+    }
+  }, [alarmArrObj, readAlarmMutate, userInfoData?.id]);
 
   if (!alarmArrObj) {
     return (
