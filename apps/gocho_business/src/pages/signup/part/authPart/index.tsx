@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FiChevronRight, FiSmartphone } from "react-icons/fi";
+import axios from "axios";
 
 import { NewSharedButton } from "shared-ui/common/newSharedButton";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
@@ -37,6 +38,23 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
     sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
   };
 
+  const handleIdentityCheck = async () => {
+    const serverHost = process.env.NEXT_PUBLIC_SERVER_HOST;
+    const returnUrl = `http://localhost:3000/signup/success`;
+    const redirectUrl = `http://localhost:3000/signup/fail`;
+
+    const response = await axios.get(`${serverHost}/nice/encrypt/data`, {
+      params: { returnUrl, redirectUrl },
+      withCredentials: true,
+    });
+
+    const encodeData = response.data;
+    const form = document.forms.namedItem("form_chk") as HTMLFormElement;
+    form.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
+    form.EncodeData.value = encodeData;
+    form.submit();
+  };
+
   const isDepartment = Boolean(watch("department"));
   const isPosition = Boolean(watch("position"));
   const isTerm = Boolean(watch("manager_agreement.terms") && watch("manager_agreement.privacy"));
@@ -45,12 +63,24 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
     <form onSubmit={handleSubmit(postSubmit)}>
       <div css={cssObj.formWrapper}>
         <div css={cssObj.authWrapper}>
-          <div css={cssObj.authLink}>
+          <form name="form_chk" id="form" action="https://nice.checkplus.co.kr/CheckPlusSafeModel/service.cb">
+            <input type="hidden" id="m" name="m" value="service" />
+            <input type="hidden" id="token_version_id" name="token_version_id" value="" />
+            <input type="hidden" id="enc_data" name="enc_data" />
+            <input type="hidden" id="integrity_value" name="integrity_value" />
+          </form>
+          <button
+            type="button"
+            css={cssObj.authLink}
+            onClick={() => {
+              handleIdentityCheck();
+            }}
+          >
             <span css={cssObj.icon}>
               <FiSmartphone />
             </span>
             휴대폰 인증 <FiChevronRight />
-          </div>
+          </button>
           <p css={cssObj.desc}>
             휴대폰 인증을 진행해 주세요. 본인 인증 시 제공되는 정보는 인증이외 용도로 이용 또는 저장되지 않습니다.
           </p>
