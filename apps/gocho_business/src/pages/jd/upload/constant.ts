@@ -1,7 +1,8 @@
 export const BLANK_JD = {
   process_arr: [{ value: "" }, { value: "" }],
   apply_route_arr: [{ value: "" }],
-  etc_arr: "",
+  apply_document_arr: [{ value: "" }],
+  etc_arr: [{ value: "" }],
   middle: false,
   high: false,
   college: false,
@@ -9,12 +10,12 @@ export const BLANK_JD = {
   required_exp: "",
   min_year: null,
   max_year: null,
-  required_etc_arr: "",
+  required_etc_arr: [{ value: "" }],
   contract_type: "",
   conversion_rate: null,
   task_main: "",
   task_sub_arr: [],
-  task_detail_arr: "",
+  task_detail_arr: [{ value: "" }],
   rotation_arr: [],
   rotation_etc: null,
   place: {
@@ -24,9 +25,9 @@ export const BLANK_JD = {
     etc: null,
   },
   hire_number: null,
-  pay_arr: "",
+  pay_arr: [{ value: "" }],
   preferred_certi_arr: null,
-  preferred_etc_arr: "",
+  preferred_etc_arr: [{ value: "" }],
 };
 
 export const JD_UPLOAD_MESSAGE_OBJ = {

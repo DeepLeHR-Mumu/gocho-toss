@@ -18,14 +18,6 @@ export const cssObj = {
     height: 0;
   `,
 
-  arrayErrorMessage: css`
-    position: absolute;
-    margin-top: 0.25rem;
-    height: 0.75rem;
-    font-size: 0.75rem;
-    color: ${NEWCOLORS.RED300};
-  `,
-
   isAlwaysBlock: css`
     display: flex;
     align-items: center;
@@ -39,26 +31,10 @@ export const cssObj = {
     color: ${COLORS.GRAY30};
   `,
 
-  arrayInputContainer: css`
-    flex-grow: 1;
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    max-width: 59.625rem;
-    gap: 0.5rem;
-  `,
-
   processBox: css`
     display: flex;
     align-items: center;
     gap: 0 0.5rem;
-  `,
-
-  inputLabel: css`
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
   `,
 
   deleteInputButton: css`

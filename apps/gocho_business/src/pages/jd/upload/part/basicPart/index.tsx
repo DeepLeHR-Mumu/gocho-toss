@@ -6,11 +6,12 @@ import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 
 import { commonCssObj } from "@/styles";
 
+import { AddFieldButton, DeleteInputButton } from "@/pages/jd/upload/component";
 import { BasicPartProps } from "./type";
 import { CONTRACT_TYPE_ARR, TASK_ARR, REQUIRED_EXP_ARR } from "./constant";
 import { cssObj } from "./style";
 
-export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
+export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDetailArr }) => {
   const [isTaskOpen, setIsTaskOpen] = useState<boolean>(false);
   const [hireNumberLabel, setHireNumberLabel] = useState<string>("");
 
@@ -157,22 +158,52 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm }) => {
             </div>
             <p css={commonCssObj.errorMessage}>{errors.task_main && errors.task_main?.message}</p>
           </div>
-          <textarea
-            css={commonCssObj.textarea}
-            onFocus={() => {
-              clearErrors(`task_detail_arr`);
-            }}
-            placeholder="합격시 구체적으로 어떤 일을 하게 되는지 엔터(Enter)로 구분하여 기재해주세요 (항목당 최대 70자)"
-            maxLength={70}
-            {...register(`task_detail_arr`, {
-              required: "* 세부 직무 사항을 최소 1개 입력해주세요",
-              onBlur: (blurEvent) => {
-                if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                  setValue(`task_detail_arr`, "");
-                }
-              },
-            })}
-          />
+          <div css={commonCssObj.arrayInputContainer}>
+            {taskDetailArr.fields.map((item, index) => (
+              <div key={`taskDetailArr${item.id}`}>
+                <label css={commonCssObj.inputLabel} htmlFor={`taskDetailArr${item.id}`}>
+                  <input
+                    id={`taskDetailArr${item.id}`}
+                    css={commonCssObj.input(55.5, Boolean(errors.task_detail_arr))}
+                    placeholder="제출 서류 (최대 50자)"
+                    maxLength={50}
+                    onFocus={() => {
+                      clearErrors(`task_detail_arr.${index}`);
+                    }}
+                    {...register(`task_detail_arr.${index}.value`, {
+                      required: "* 모든 칸이 채워져야 합니다",
+                      onBlur: (blurEvent) => {
+                        if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                          setValue(`task_detail_arr.${index}.value`, "");
+                        }
+                        trigger(`task_detail_arr`);
+                      },
+                    })}
+                    autoComplete="off"
+                  />
+                  {index !== 0 && (
+                    <DeleteInputButton
+                      onClickHandler={() => {
+                        taskDetailArr.remove(index);
+                      }}
+                    />
+                  )}
+                </label>
+                <p css={commonCssObj.errorMessage}>
+                  {errors.task_detail_arr?.[index] && errors.task_detail_arr?.[index]?.value?.message}
+                </p>
+              </div>
+            ))}
+            <div css={commonCssObj.addButtonWrapper}>
+              {taskDetailArr.fields.length < 15 && (
+                <AddFieldButton
+                  onClickHandler={() => {
+                    taskDetailArr.append({ value: "" });
+                  }}
+                />
+              )}
+            </div>
+          </div>
           <p css={commonCssObj.errorMessage}>{errors.task_detail_arr && errors.task_detail_arr?.message}</p>
         </div>
       </div>

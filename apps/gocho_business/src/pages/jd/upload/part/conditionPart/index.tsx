@@ -5,11 +5,12 @@ import { CheckBox } from "shared-ui/common/atom/checkbox";
 
 import { commonCssObj } from "@/styles";
 
+import { AddFieldButton, DeleteInputButton } from "@/pages/jd/upload/component";
 import { ConditionPartProps } from "./type";
 import { ROTATION_ARR } from "./constant";
 import { cssObj } from "./style";
 
-export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm }) => {
+export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, payArr }) => {
   const [isRotationOpen, setIsRotationOpen] = useState<boolean>(false);
 
   const {
@@ -60,24 +61,52 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm }
             </label>
             <p css={commonCssObj.errorMessage}>{errors.pay_arr && `${errors.pay_arr?.message}`}</p>
           </div>
-          <textarea
-            css={commonCssObj.textarea}
-            placeholder="급여 정보를 엔터(Enter)로 구분하여 기재해 주세요 (항목당 최대 70자)"
-            maxLength={50}
-            onFocus={() => {
-              clearErrors(`pay_arr`);
-            }}
-            {...register(`pay_arr`, {
-              required: "* 급여 정보를 입력해 주세요",
-              onBlur: (blurEvent) => {
-                if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                  setValue(`pay_arr`, "");
-                }
-                trigger(`pay_arr`);
-              },
-            })}
-            autoComplete="off"
-          />
+          <div css={commonCssObj.arrayInputContainer}>
+            {payArr.fields.map((item, index) => (
+              <div key={`payArr${item.id}`}>
+                <label css={commonCssObj.inputLabel} htmlFor={`payArr${item.id}`}>
+                  <input
+                    id={`payArr${item.id}`}
+                    css={commonCssObj.input(55.5, Boolean(errors.pay_arr))}
+                    placeholder="급여 정보를 기재해주세요 (최대 50자)"
+                    maxLength={50}
+                    onFocus={() => {
+                      clearErrors(`pay_arr.${index}`);
+                    }}
+                    {...register(`pay_arr.${index}.value`, {
+                      required: "* 모든 칸이 채워져야 합니다",
+                      onBlur: (blurEvent) => {
+                        if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                          setValue(`pay_arr.${index}.value`, "");
+                        }
+                        trigger(`pay_arr`);
+                      },
+                    })}
+                    autoComplete="off"
+                  />
+                  {index !== 0 && (
+                    <DeleteInputButton
+                      onClickHandler={() => {
+                        payArr.remove(index);
+                      }}
+                    />
+                  )}
+                </label>
+                <p css={commonCssObj.errorMessage}>
+                  {errors.pay_arr?.[index] && errors.pay_arr?.[index]?.value?.message}
+                </p>
+              </div>
+            ))}
+            <div css={commonCssObj.addButtonWrapper}>
+              {payArr.fields.length < 15 && (
+                <AddFieldButton
+                  onClickHandler={() => {
+                    payArr.append({ value: "" });
+                  }}
+                />
+              )}
+            </div>
+          </div>
         </div>
       </div>
       <div css={commonCssObj.container}>

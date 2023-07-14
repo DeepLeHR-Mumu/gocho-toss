@@ -43,6 +43,26 @@ const JdUploadPage: NextPage = () => {
     formState: { submitCount, dirtyFields, isSubmitSuccessful },
   } = jobForm;
 
+  const taskDetailArr = useFieldArray({
+    control,
+    name: "task_detail_arr",
+  });
+
+  const requiredEtcArr = useFieldArray({
+    control,
+    name: "required_etc_arr",
+  });
+
+  const preferredEtcArr = useFieldArray({
+    control,
+    name: "preferred_etc_arr",
+  });
+
+  const payArr = useFieldArray({
+    control,
+    name: "pay_arr",
+  });
+
   const processArr = useFieldArray({
     control,
     name: "process_arr",
@@ -51,6 +71,16 @@ const JdUploadPage: NextPage = () => {
   const applyRouteArr = useFieldArray({
     control,
     name: "apply_route_arr",
+  });
+
+  const applyDocumentArr = useFieldArray({
+    control,
+    name: "apply_document_arr",
+  });
+
+  const etcArr = useFieldArray({
+    control,
+    name: "etc_arr",
   });
 
   const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
@@ -68,15 +98,16 @@ const JdUploadPage: NextPage = () => {
             apply_url: jobObj.apply_url.includes("@") ? `mailto: ${jobObj.apply_url}` : jobObj.apply_url,
             process_arr: getFieldArrayValue(jobObj.process_arr),
             apply_route_arr: getFieldArrayValue(jobObj.apply_route_arr),
-            etc_arr: jobObj.etc_arr.split("\n"),
+            apply_document_arr: getFieldArrayValue(jobObj.apply_document_arr),
+            etc_arr: getFieldArrayValue(jobObj.etc_arr),
             conversion_rate: jobObj.conversion_rate ? jobObj.conversion_rate : null,
             min_year: jobObj.min_year ? jobObj.min_year : null,
             max_year: jobObj.max_year ? jobObj.max_year : null,
             hire_number: jobObj.hire_number ? jobObj.hire_number : 0,
             task_sub_arr: jobObj.task_sub_arr ? jobObj.task_sub_arr : null,
-            task_detail_arr: jobObj.task_detail_arr.split("\n"),
-            required_etc_arr: jobObj.required_etc_arr.split("\n"),
-            pay_arr: jobObj.pay_arr.split("\n"),
+            task_detail_arr: getFieldArrayValue(jobObj.task_detail_arr),
+            required_etc_arr: getFieldArrayValue(jobObj.required_etc_arr),
+            pay_arr: getFieldArrayValue(jobObj.pay_arr),
             place: {
               type: jobObj.place.type,
               address_arr: jobObj.place.address_arr?.length === 0 ? null : jobObj.place.address_arr,
@@ -84,7 +115,7 @@ const JdUploadPage: NextPage = () => {
               etc: jobObj.place.etc?.length === 0 ? null : jobObj.place.etc,
             },
             preferred_certi_arr: jobObj.preferred_certi_arr?.length === 0 ? null : jobObj.preferred_certi_arr,
-            preferred_etc_arr: jobObj.preferred_etc_arr.split("\n"),
+            preferred_etc_arr: getFieldArrayValue(jobObj.preferred_etc_arr),
           },
         },
         {
@@ -128,11 +159,22 @@ const JdUploadPage: NextPage = () => {
       <ButtonPart />
       <PageLayout>
         <TitlePart jobForm={jobForm} />
-        <BasicPart jobForm={jobForm} control={control} />
-        <RequiredPart jobForm={jobForm} control={control} />
-        <ConditionPart jobForm={jobForm} control={control} />
+        <BasicPart jobForm={jobForm} control={control} taskDetailArr={taskDetailArr} />
+        <RequiredPart
+          jobForm={jobForm}
+          control={control}
+          requiredEtcArr={requiredEtcArr}
+          preferredEtcArr={preferredEtcArr}
+        />
+        <ConditionPart jobForm={jobForm} control={control} payArr={payArr} />
         <PlacePart jobForm={jobForm} />
-        <ApplyPart jobForm={jobForm} processArr={processArr} applyRouteArr={applyRouteArr} />
+        <ApplyPart
+          jobForm={jobForm}
+          processArr={processArr}
+          applyRouteArr={applyRouteArr}
+          applyDocumentArr={applyDocumentArr}
+          etcArr={etcArr}
+        />
       </PageLayout>
     </form>
   );

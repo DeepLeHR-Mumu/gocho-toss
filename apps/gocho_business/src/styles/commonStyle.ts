@@ -149,6 +149,22 @@ export const commonCssObj = {
     }
   `,
 
+  arrayInputContainer: css`
+    flex-grow: 1;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    max-width: 59.625rem;
+    gap: 0.5rem;
+  `,
+
+  inputLabel: css`
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  `,
+
   labelContainer: css`
     display: flex;
     align-items: center;
@@ -203,5 +219,9 @@ export const commonCssObj = {
   errorMessage: css`
     font-size: 0.75rem;
     color: ${NEWCOLORS.RED300};
+  `,
+
+  addButtonWrapper: css`
+    margin-left: 0.5rem;
   `,
 };

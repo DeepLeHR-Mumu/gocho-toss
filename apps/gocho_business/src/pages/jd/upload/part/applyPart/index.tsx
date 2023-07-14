@@ -11,7 +11,13 @@ import { ApplyPartProps } from "./type";
 import { APPLY_EXTERNAL_LINK_ARR } from "./constant";
 import { cssObj } from "./style";
 
-export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processArr, applyRouteArr }) => {
+export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
+  jobForm,
+  processArr,
+  applyRouteArr,
+  applyDocumentArr,
+  etcArr,
+}) => {
   const [isAlways, setIsAlways] = useState<boolean>(false);
   const [linkType, setLinkType] = useState<"website" | "email">("website");
 
@@ -109,11 +115,11 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
       </div>
       <div css={commonCssObj.longContainer}>
         <p css={commonCssObj.inputTitle(true)}>채용 절차</p>
-        <div css={cssObj.arrayInputContainer}>
+        <div css={commonCssObj.arrayInputContainer}>
           {processArr.fields.map((item, index) => (
             <div key={`processArr${item.id}`} css={cssObj.processBox}>
               <div>
-                <label css={cssObj.inputLabel} htmlFor={`processArr${item.id}`}>
+                <label css={commonCssObj.inputLabel} htmlFor={`processArr${item.id}`}>
                   <input
                     id={`processArr${item.id}`}
                     css={commonCssObj.input(11.5, Boolean(errors.process_arr))}
@@ -141,7 +147,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                     />
                   )}
                 </label>
-                <p css={cssObj.arrayErrorMessage}>
+                <p css={commonCssObj.errorMessage}>
                   {errors.process_arr?.[index] && errors.process_arr?.[index]?.value?.message}
                 </p>
               </div>
@@ -164,15 +170,15 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
         </div>
       </div>
       <div css={commonCssObj.longContainer}>
-        <p css={commonCssObj.inputTitle(true)}>제출 서류</p>
-        <div css={cssObj.arrayInputContainer}>
+        <p css={commonCssObj.inputTitle(true)}>지원 방법</p>
+        <div css={commonCssObj.arrayInputContainer}>
           {applyRouteArr.fields.map((item, index) => (
             <div key={`applyRouteArr${item.id}`}>
-              <label css={cssObj.inputLabel} htmlFor={`applyRouteArr${item.id}`}>
+              <label css={commonCssObj.inputLabel} htmlFor={`applyRouteArr${item.id}`}>
                 <input
                   id={`applyRouteArr${item.id}`}
                   css={commonCssObj.input(15, Boolean(errors.apply_route_arr))}
-                  placeholder="제출 서류 (최대 50자)"
+                  placeholder="지원 방법 (최대 50자)"
                   maxLength={50}
                   onFocus={() => {
                     clearErrors(`apply_route_arr.${index}`);
@@ -196,12 +202,12 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
                   />
                 )}
               </label>
-              <p css={cssObj.arrayErrorMessage}>
+              <p css={commonCssObj.errorMessage}>
                 {errors.apply_route_arr?.[index] && errors.apply_route_arr?.[index]?.value?.message}
               </p>
             </div>
           ))}
-          <div css={cssObj.addButtonWrapper}>
+          <div css={commonCssObj.addButtonWrapper}>
             {applyRouteArr.fields.length < 15 && (
               <AddFieldButton
                 onClickHandler={() => {
@@ -249,7 +255,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
           <div>
             {linkType === "website" ? (
               <div>
-                <label css={cssObj.inputLabel} key="applyUrlWebsite" htmlFor="applyUrlWebsite">
+                <label css={commonCssObj.inputLabel} key="applyUrlWebsite" htmlFor="applyUrlWebsite">
                   <input
                     css={commonCssObj.input(47, Boolean(errors.apply_url))}
                     placeholder="https://"
@@ -281,7 +287,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
               </div>
             ) : (
               <div>
-                <label css={cssObj.inputLabel} key="applyUrlWebsite" htmlFor="applyUrlWebsite">
+                <label css={commonCssObj.inputLabel} key="applyUrlWebsite" htmlFor="applyUrlWebsite">
                   <input
                     css={commonCssObj.input(47, Boolean(errors.apply_url))}
                     placeholder="@"
@@ -303,13 +309,102 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jobForm, processA
         </div>
       </div>
       <div css={commonCssObj.longContainer}>
+        <p css={commonCssObj.optionalInputTitle(true)}>제출서류</p>
+        <div css={commonCssObj.arrayInputContainer}>
+          {applyDocumentArr.fields.map((item, index) => (
+            <div key={`applyDocumentArr${item.id}`}>
+              <label css={commonCssObj.inputLabel} htmlFor={`applyDocumentArr${item.id}`}>
+                <input
+                  id={`applyDocumentArr${item.id}`}
+                  css={commonCssObj.input(55.5, Boolean(errors.apply_document_arr))}
+                  placeholder="제출 서류 (최대 50자)"
+                  maxLength={50}
+                  onFocus={() => {
+                    clearErrors(`apply_document_arr.${index}`);
+                  }}
+                  {...register(`apply_document_arr.${index}.value`, {
+                    required: "* 모든 칸이 채워져야 합니다",
+                    onBlur: (blurEvent) => {
+                      if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                        setValue(`apply_document_arr.${index}.value`, "");
+                      }
+                      trigger(`apply_document_arr`);
+                    },
+                  })}
+                  autoComplete="off"
+                />
+                {index !== 0 && (
+                  <DeleteInputButton
+                    onClickHandler={() => {
+                      applyDocumentArr.remove(index);
+                    }}
+                  />
+                )}
+              </label>
+              <p css={commonCssObj.errorMessage}>
+                {errors.apply_document_arr?.[index] && errors.apply_document_arr?.[index]?.value?.message}
+              </p>
+            </div>
+          ))}
+          <div css={commonCssObj.addButtonWrapper}>
+            {applyDocumentArr.fields.length < 15 && (
+              <AddFieldButton
+                onClickHandler={() => {
+                  applyDocumentArr.append({ value: "" });
+                }}
+              />
+            )}
+          </div>
+        </div>
+      </div>
+      <div css={commonCssObj.longContainer}>
         <p css={commonCssObj.optionalInputTitle(true)}>기타 사항</p>
-        <textarea
-          css={commonCssObj.textarea}
-          placeholder="기타 사항을 엔터(Enter)로 구분하여 기재해 주세요 (항목당 최대 70자)"
-          maxLength={70}
-          {...register("etc_arr")}
-        />
+        <div css={commonCssObj.arrayInputContainer}>
+          {etcArr.fields.map((item, index) => (
+            <div key={`etcArr${item.id}`}>
+              <label css={commonCssObj.inputLabel} htmlFor={`etcArr${item.id}`}>
+                <input
+                  id={`etcArr${item.id}`}
+                  css={commonCssObj.input(15, Boolean(errors.etc_arr))}
+                  placeholder="기타 사항이 있는 경우 기재해 주세요 (최대 50자)"
+                  maxLength={50}
+                  onFocus={() => {
+                    clearErrors(`etc_arr.${index}`);
+                  }}
+                  {...register(`etc_arr.${index}.value`, {
+                    required: "* 모든 칸이 채워져야 합니다",
+                    onBlur: (blurEvent) => {
+                      if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                        setValue(`etc_arr.${index}.value`, "");
+                      }
+                      trigger(`etc_arr`);
+                    },
+                  })}
+                  autoComplete="off"
+                />
+                {index !== 0 && (
+                  <DeleteInputButton
+                    onClickHandler={() => {
+                      etcArr.remove(index);
+                    }}
+                  />
+                )}
+              </label>
+              <p css={commonCssObj.errorMessage}>
+                {errors.etc_arr?.[index] && errors.etc_arr?.[index]?.value?.message}
+              </p>
+            </div>
+          ))}
+          <div css={commonCssObj.addButtonWrapper}>
+            {etcArr.fields.length < 15 && (
+              <AddFieldButton
+                onClickHandler={() => {
+                  etcArr.append({ value: "" });
+                }}
+              />
+            )}
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -5,9 +5,10 @@ export interface JobFormValues {
   end_time: string;
   cut: boolean;
   process_arr: { value: string }[];
+  apply_document_arr: { value: string }[];
   apply_route_arr: { value: string }[];
   apply_url: string;
-  etc_arr: string;
+  etc_arr: { value: string }[];
   middle: boolean;
   high: boolean;
   college: boolean;
@@ -15,12 +16,12 @@ export interface JobFormValues {
   required_exp: string;
   min_year: number | null;
   max_year: number | null;
-  required_etc_arr: string;
+  required_etc_arr: { value: string }[];
   contract_type: string;
   conversion_rate: number | null;
   task_main: string;
   task_sub_arr: string[] | null;
-  task_detail_arr: string;
+  task_detail_arr: { value: string }[];
   rotation_arr: string[];
   place: {
     type: string;
@@ -29,7 +30,7 @@ export interface JobFormValues {
     etc: string | null;
   };
   hire_number: number | null;
-  pay_arr: string;
+  pay_arr: { value: string }[];
   preferred_certi_arr: string[] | null;
-  preferred_etc_arr: string;
+  preferred_etc_arr: { value: string }[];
 }

@@ -6,11 +6,18 @@ import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { commonCssObj } from "@/styles";
 import { RequiredPartProps } from "./type";
 // import { CERTI_ARR } from "./constant";
-import { AddFieldButton } from "../../component";
+import { AddFieldButton, DeleteInputButton } from "../../component";
 import { cssObj } from "./style";
 
-export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm }) => {
-  const { watch, setValue, clearErrors, trigger, register } = jobForm;
+export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, requiredEtcArr, preferredEtcArr }) => {
+  const {
+    watch,
+    setValue,
+    clearErrors,
+    trigger,
+    register,
+    formState: { errors },
+  } = jobForm;
 
   // const certiClickHandler = (certi: string) => {
   //   const totalNumber = watch("preferred_certi_arr")?.length || 0;
@@ -73,36 +80,101 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm }) 
       </div>
       <div css={commonCssObj.longContainer}>
         <p css={commonCssObj.optionalInputTitle(true)}>기타 조건</p>
-        <textarea
-          css={commonCssObj.textarea}
-          placeholder="엔터(Enter)로 구분하여 기재해 주세요 (항목당 최대 70자) 예) 군필 여부, 나이, 성별 등"
-          onFocus={() => {
-            clearErrors(`required_etc_arr`);
-          }}
-          {...register(`required_etc_arr`, {
-            required: "모든 칸이 채워져야 합니다",
-            onBlur: (blurEvent) => {
-              if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                setValue("title", "");
-              }
-              trigger(`required_etc_arr`);
-            },
-          })}
-          autoComplete="off"
-        />
+        <div css={commonCssObj.arrayInputContainer}>
+          {requiredEtcArr.fields.map((item, index) => (
+            <div key={`requiredEtcArr${item.id}`}>
+              <label css={commonCssObj.inputLabel} htmlFor={`requiredEtcArr${item.id}`}>
+                <input
+                  id={`requiredEtcArr${item.id}`}
+                  css={commonCssObj.input(55.5, Boolean(errors.required_etc_arr))}
+                  placeholder="기타 조건 (최대 50자)"
+                  maxLength={50}
+                  onFocus={() => {
+                    clearErrors(`required_etc_arr.${index}`);
+                  }}
+                  {...register(`required_etc_arr.${index}.value`, {
+                    required: "* 모든 칸이 채워져야 합니다",
+                    onBlur: (blurEvent) => {
+                      if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                        setValue(`required_etc_arr.${index}.value`, "");
+                      }
+                      trigger(`required_etc_arr`);
+                    },
+                  })}
+                  autoComplete="off"
+                />
+                {index !== 0 && (
+                  <DeleteInputButton
+                    onClickHandler={() => {
+                      requiredEtcArr.remove(index);
+                    }}
+                  />
+                )}
+              </label>
+              <p css={commonCssObj.errorMessage}>
+                {errors.required_etc_arr?.[index] && errors.required_etc_arr?.[index]?.value?.message}
+              </p>
+            </div>
+          ))}
+          <div css={commonCssObj.addButtonWrapper}>
+            {requiredEtcArr.fields.length < 15 && (
+              <AddFieldButton
+                onClickHandler={() => {
+                  requiredEtcArr.append({ value: "" });
+                }}
+              />
+            )}
+          </div>
+        </div>
       </div>
       <div css={commonCssObj.longContainer}>
         <p css={commonCssObj.optionalInputTitle(true)}>우대사항</p>
-        <textarea
-          css={commonCssObj.textarea}
-          placeholder="엔터(Enter)로 구분하여 기재해 주세요 (항목당 최대 70자) Ex) 인근거주자, 차량소지자"
-          {...register(`preferred_etc_arr`, {
-            onBlur: () => {
-              trigger(`preferred_etc_arr`);
-            },
-          })}
-          autoComplete="off"
-        />
+        <div css={commonCssObj.arrayInputContainer}>
+          {preferredEtcArr.fields.map((item, index) => (
+            <div key={`preferredEtcArr${item.id}`}>
+              <label css={commonCssObj.inputLabel} htmlFor={`preferredEtcArr${item.id}`}>
+                <input
+                  id={`preferredEtcArr${item.id}`}
+                  css={commonCssObj.input(55.5, Boolean(errors.preferred_etc_arr))}
+                  placeholder="우대 사항 (최대 50자)"
+                  maxLength={50}
+                  onFocus={() => {
+                    clearErrors(`preferred_etc_arr.${index}`);
+                  }}
+                  {...register(`preferred_etc_arr.${index}.value`, {
+                    required: "* 모든 칸이 채워져야 합니다",
+                    onBlur: (blurEvent) => {
+                      if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                        setValue(`preferred_etc_arr.${index}.value`, "");
+                      }
+                      trigger(`preferred_etc_arr`);
+                    },
+                  })}
+                  autoComplete="off"
+                />
+                {index !== 0 && (
+                  <DeleteInputButton
+                    onClickHandler={() => {
+                      preferredEtcArr.remove(index);
+                    }}
+                  />
+                )}
+              </label>
+              <p css={commonCssObj.errorMessage}>
+                {errors.preferred_etc_arr?.[index] && errors.preferred_etc_arr?.[index]?.value?.message}
+              </p>
+            </div>
+          ))}
+          <div css={commonCssObj.addButtonWrapper}>
+            {preferredEtcArr.fields.length < 15 && (
+              <AddFieldButton
+                onClickHandler={() => {
+                  preferredEtcArr.append({ value: "" });
+                }}
+              />
+            )}
+          </div>
+        </div>
       </div>
       <div css={commonCssObj.longContainer}>
         <p css={commonCssObj.optionalInputTitle(true)}>우대 자격증</p>
