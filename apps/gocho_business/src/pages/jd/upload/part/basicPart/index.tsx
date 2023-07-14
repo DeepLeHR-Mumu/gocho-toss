@@ -165,7 +165,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
                   <input
                     id={`taskDetailArr${item.id}`}
                     css={commonCssObj.input(55.5, Boolean(errors.task_detail_arr))}
-                    placeholder="제출 서류 (최대 50자)"
+                    placeholder="합격 시 구체적으로 어떤 일을 하게 되는지 세부 직무 내용을 기재해 주세요 (최대 50자)"
                     maxLength={50}
                     onFocus={() => {
                       clearErrors(`task_detail_arr.${index}`);

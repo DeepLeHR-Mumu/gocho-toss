@@ -123,8 +123,8 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                   <input
                     id={`processArr${item.id}`}
                     css={commonCssObj.input(11.5, Boolean(errors.process_arr))}
-                    placeholder={`${index + 1}차 (최대 30자)`}
-                    maxLength={30}
+                    placeholder={`${index + 1}차 (최대 20자)`}
+                    maxLength={20}
                     onFocus={() => {
                       clearErrors(`process_arr.${index}`);
                     }}
@@ -178,8 +178,8 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                 <input
                   id={`applyRouteArr${item.id}`}
                   css={commonCssObj.input(15, Boolean(errors.apply_route_arr))}
-                  placeholder="지원 방법 (최대 50자)"
-                  maxLength={50}
+                  placeholder="지원 방법 (최대 20자)"
+                  maxLength={20}
                   onFocus={() => {
                     clearErrors(`apply_route_arr.${index}`);
                   }}
@@ -317,8 +317,8 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                 <input
                   id={`applyDocumentArr${item.id}`}
                   css={commonCssObj.input(55.5, Boolean(errors.apply_document_arr))}
-                  placeholder="제출 서류 (최대 50자)"
-                  maxLength={50}
+                  placeholder="예) 이력서 (최대 20자)"
+                  maxLength={20}
                   onFocus={() => {
                     clearErrors(`apply_document_arr.${index}`);
                   }}

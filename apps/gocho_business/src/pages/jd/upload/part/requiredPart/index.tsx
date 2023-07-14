@@ -87,7 +87,7 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, re
                 <input
                   id={`requiredEtcArr${item.id}`}
                   css={commonCssObj.input(55.5, Boolean(errors.required_etc_arr))}
-                  placeholder="기타 조건 (최대 50자)"
+                  placeholder="예) 군필자, 전공 무관, 운전 가능자 등 (최대 50자)"
                   maxLength={50}
                   onFocus={() => {
                     clearErrors(`required_etc_arr.${index}`);
@@ -136,7 +136,7 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, re
                 <input
                   id={`preferredEtcArr${item.id}`}
                   css={commonCssObj.input(55.5, Boolean(errors.preferred_etc_arr))}
-                  placeholder="우대 사항 (최대 50자)"
+                  placeholder="예) 인근거주자, 차량소지자 (최대 50자)"
                   maxLength={50}
                   onFocus={() => {
                     clearErrors(`preferred_etc_arr.${index}`);
