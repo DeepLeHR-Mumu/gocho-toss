@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { Spinner } from "shared-ui/common/atom/spinner";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
-import { useJdArr } from "@/apis";
+import { useJdArr, useManagerProfile } from "@/apis";
 import { PageLayout, Pagination } from "@/components";
 import { INTERNAL_URL } from "@/constants";
 import { jdListPageFunnelEvent } from "@/ga";
@@ -25,6 +25,7 @@ const JdListPage: NextPage = () => {
   const [selectedFilter, setSelectedFilter] = useState<FilterDef>("progress");
   const [searchWord, setSearchWord] = useState<string | null>(null);
 
+  const { data: userInfoData } = useManagerProfile();
   const { data: jdDataObj } = useJdArr(true, {
     order: router.query.order as OrderDef,
     filter: selectedFilter,
@@ -73,6 +74,8 @@ const JdListPage: NextPage = () => {
       </div>
     );
   }
+
+  const isAuth = userInfoData?.status.name !== "미인증";
 
   return (
     <PageLayout>
@@ -137,9 +140,11 @@ const JdListPage: NextPage = () => {
           </div>
         </div>
         <div css={cssObj.cardListContainer}>
-          {jdDataObj.jdDataArr.map((jd) => (
-            <JdCard key={`BusinessJdCard${jd.id}`} jd={jd} />
-          ))}
+          {isAuth ? (
+            jdDataObj.jdDataArr.map((jd) => <JdCard key={`BusinessJdCard${jd.id}`} jd={jd} />)
+          ) : (
+            <p css={cssObj.noAuthJdCard}>기업 인증 후 공고 조희 및 등록이 가능합니다.</p>
+          )}
         </div>
         <Pagination totalPage={jdDataObj.pageResult.totalPages} url={INTERNAL_URL.JD_LIST} />
       </div>

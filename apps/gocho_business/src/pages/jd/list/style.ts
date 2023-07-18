@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { NEWCOLORS } from "shared-style/color";
+import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
   contentContainer: css`
@@ -160,5 +161,14 @@ export const cssObj = {
 
   cardListContainer: css`
     margin-bottom: 3.25rem;
+  `,
+
+  noAuthJdCard: css`
+    ${TEXTS.TITLE5};
+    color: ${NEWCOLORS.BLUEGRAY400};
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   `,
 };

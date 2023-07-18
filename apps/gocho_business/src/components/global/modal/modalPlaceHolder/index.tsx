@@ -6,6 +6,7 @@ import { FactoryAddModal } from "../factoryAddModal";
 import { FactoryEditModal } from "../factoryEditModal";
 import { UsageTermModal } from "../usageTermModal";
 import { PrivacyTermModal } from "../privacyTermModal";
+import { CompanyAuthModal } from "../companyAuthModal";
 
 export const ModalPlaceholder: FunctionComponent = () => {
   const { modal } = useModal();
@@ -28,6 +29,10 @@ export const ModalPlaceholder: FunctionComponent = () => {
 
   if (modal === "privacyTermModal") {
     return <PrivacyTermModal />;
+  }
+
+  if (modal === "companyAuthModal") {
+    return <CompanyAuthModal />;
   }
 
   return null;

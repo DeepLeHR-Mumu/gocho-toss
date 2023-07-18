@@ -8,7 +8,7 @@ import { usePreventRouting } from "shared-hooks";
 
 import { useAddCompanyDetail, useCompanyDetail, useManagerProfile } from "@/apis";
 import { PageLayout } from "@/components";
-import { useToast } from "@/globalStates";
+import { useModal, useToast } from "@/globalStates";
 import { companyEditConfirmEvent, companyEditDoneEvent, companyEditFailEvent, companyEditPageFunnelEvent } from "@/ga";
 import { CompanySideNav } from "@/components/global/companySideNav";
 
@@ -22,6 +22,7 @@ const CompanyEditPage: NextPage = () => {
   const [bgImage, setBgImage] = useState<File>();
   const [logo, setLogo] = useState<File>();
 
+  const { setModal } = useModal();
   const isRefetching = useRef(false);
   const { setToast } = useToast();
 
@@ -131,6 +132,10 @@ const CompanyEditPage: NextPage = () => {
       });
     }
   }, [companyDetailData, reset]);
+
+  useEffect(() => {
+    if (userInfoData && userInfoData.status.name === "미인증") setModal("companyAuthModal");
+  }, [setModal, userInfoData]);
 
   useEffect(() => {
     window.addEventListener("keydown", (keyDownEvent) => {

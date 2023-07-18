@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 
 import { usePreventRouting } from "shared-hooks";
 
-import { useToast } from "@/globalStates";
+import { useModal, useToast } from "@/globalStates";
 import {
   jdUploadConfirmEvent,
   jdUploadDoneEvent,
@@ -16,7 +16,7 @@ import {
   jdUploadPageFunnelEvent,
 } from "@/ga";
 import { PageLayout } from "@/components";
-import { useAddJd } from "@/apis";
+import { useAddJd, useManagerProfile } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 
 import { ButtonPart, TitlePart, BasicPart, RequiredPart, ConditionPart, PlacePart, ApplyPart } from "./part";
@@ -25,8 +25,11 @@ import { BLANK_JD, JD_UPLOAD_MESSAGE_OBJ } from "./constant";
 import { getFieldArrayValue } from "./util";
 
 const JdUploadPage: NextPage = () => {
+  const { setModal } = useModal();
+
   const isLoading = useRef(false);
 
+  const { data: userInfoData } = useManagerProfile();
   const { mutate: addJobMutate } = useAddJd();
   const { setToast } = useToast();
   const router = useRouter();
@@ -139,16 +142,20 @@ const JdUploadPage: NextPage = () => {
     }
   };
 
-  useEffect(() => {
-    if (submitCount === 0) return;
-    jdUploadFailEvent(submitCount);
-  }, [submitCount]);
-
   usePreventRouting(
     Boolean(Object.keys(dirtyFields).length) && !isSubmitSuccessful,
     jdUploadExitEvent,
     jdUploadExitDoneEvent
   );
+
+  useEffect(() => {
+    if (userInfoData && userInfoData.status.name === "미인증") setModal("companyAuthModal");
+  }, [setModal, userInfoData]);
+
+  useEffect(() => {
+    if (submitCount === 0) return;
+    jdUploadFailEvent(submitCount);
+  }, [submitCount]);
 
   useEffect(() => {
     jdUploadPageFunnelEvent();
