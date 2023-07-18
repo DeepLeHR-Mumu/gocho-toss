@@ -3,8 +3,8 @@ import { FiHelpCircle } from "react-icons/fi";
 
 import { commonCssObj } from "@/styles";
 
-import { Tooltip } from "../../component/tooltip";
-import useFileNameSyncWithForm from "../useFileNameSyncWithForm.ts";
+import { Tooltip } from "../../../component/tooltip";
+import useFileNameSyncWithForm from "../../useFileNameSyncWithForm";
 import { cssObj } from "./style";
 import { RegistrationPartProps } from "./type";
 

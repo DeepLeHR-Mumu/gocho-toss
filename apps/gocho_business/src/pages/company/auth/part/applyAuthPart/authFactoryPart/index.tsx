@@ -4,7 +4,7 @@ import { FiEdit3, FiMinus, FiPlus, FiHelpCircle } from "react-icons/fi";
 // import { useDeleteFactory } from "@/apis";
 // import { factoryDeleteConfirmEvent, factoryDeleteDoneEvent } from "@/ga";
 
-import { AuthFactoryAddModal, Tooltip } from "../../component";
+import { AuthFactoryAddModal, Tooltip } from "../../../component";
 import { AuthFactoryPartProps, Factory } from "./type";
 import { cssObj } from "./style";
 

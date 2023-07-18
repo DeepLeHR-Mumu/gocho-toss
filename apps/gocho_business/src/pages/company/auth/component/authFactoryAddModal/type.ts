@@ -1,4 +1,4 @@
-import { Factory } from "../../part/authFactoryPart/type";
+import { Factory } from "../../part/applyAuthPart/authFactoryPart/type";
 
 export interface FactoryRegisterFormValues {
   name: string;

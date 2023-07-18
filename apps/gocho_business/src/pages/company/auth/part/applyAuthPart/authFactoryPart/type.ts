@@ -1,5 +1,5 @@
 import { UseFormReturn } from "react-hook-form";
-import { CompanyAuthFormValues } from "../applyAuthPart/type";
+import { CompanyAuthFormValues } from "../type";
 
 export interface Factory {
   name: string;

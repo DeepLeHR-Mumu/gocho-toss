@@ -2,8 +2,7 @@ import { FunctionComponent } from "react";
 
 import { commonCssObj } from "@/styles";
 
-import useFileNameSyncWithForm from "../useFileNameSyncWithForm.ts";
-// import { isFileList } from "../applyAuthPart/util";
+import useFileNameSyncWithForm from "../../useFileNameSyncWithForm";
 import { AuthInfoPartProps } from "./type";
 import { cssObj } from "./style";
 
@@ -37,7 +36,6 @@ export const AuthInfoPart: FunctionComponent<AuthInfoPartProps> = ({ companyAuth
         <input
           disabled
           value={certFileName}
-          // {...register("location.address", { required: true })}
           placeholder="파일형식: jpg, jpeg, pdf / 파일 용량: 5MB"
           css={commonCssObj.input(38, false)}
         />

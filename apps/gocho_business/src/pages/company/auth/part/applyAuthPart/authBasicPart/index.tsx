@@ -5,14 +5,9 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { NUMBER_REGEXP } from "shared-constant";
 
-import {
-  MAX_LENGTH_ERROR_TEXT,
-  ONLY_INT_ERROR_TEXT,
-  INDUSTRY_ARR,
-  SIZE_ARR,
-} from "@/pages/company/edit/part/basicPart/constant";
 import { commonCssObj } from "@/styles";
 
+import { MAX_LENGTH_ERROR_TEXT, ONLY_INT_ERROR_TEXT, INDUSTRY_ARR, SIZE_ARR } from "./constant";
 import { AuthBasicPartProps } from "./type";
 import { cssObj } from "./style";
 

@@ -2,15 +2,13 @@ import { FunctionComponent, useState, useRef } from "react";
 
 import { commonCssObj } from "@/styles";
 
-import { WELFARE_DESC_OBJ } from "@/pages/company/edit/part/welfarePart/constant";
-import { welfareArrCreator } from "@/pages/company/edit/part/welfarePart/util";
-import { PostWelfareSubmitValues } from "@/pages/company/edit/part/welfarePart/type";
-
-import { AuthWelfareForm, AuthAddFieldButton } from "../../component";
-import { AuthWelfarePartProps } from "./type";
-import { cssObj } from "./style";
 import { Entries } from "@/types";
-import { WelfareKey } from "@/pages/company/edit/component/welfareForm/type";
+
+import { AuthWelfareForm, AuthAddFieldButton } from "../../../component";
+import { WELFARE_DESC_OBJ } from "./constant";
+import { welfareArrCreator } from "./util";
+import { WelfareKey, PostWelfareSubmitValues, AuthWelfarePartProps } from "./type";
+import { cssObj } from "./style";
 
 export const AuthWelfarePart: FunctionComponent<AuthWelfarePartProps> = ({ companyAuthForm, companyData }) => {
   const welfareBtnInfoRef = useRef(Object.entries(WELFARE_DESC_OBJ) as Entries<typeof WELFARE_DESC_OBJ>);

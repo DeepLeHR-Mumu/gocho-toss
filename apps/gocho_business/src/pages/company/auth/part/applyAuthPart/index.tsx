@@ -6,20 +6,18 @@ import { Spinner } from "shared-ui/common/atom/spinner";
 import { usePreventRouting } from "shared-hooks";
 
 import { useManagerProfile, useCompanyDetail, useManagerAuth } from "@/apis";
-import {
-  AuthInfoPart,
-  AuthBasicPart,
-  AuthFactoryPart,
-  AuthWelfarePart,
-  RegistrationPart,
-} from "@/pages/company/auth/part";
-import { ConfirmModal } from "@/components/global/modal/confirmModal";
-
 import { RequestObjDef as AuthRequestObjDef } from "@/apis/manager/auth/useManagerAuth/type";
+import { ConfirmModal } from "@/components/global/modal/confirmModal";
+import { INTERNAL_URL } from "@/constants";
+
+import { AuthInfoPart } from "./authInfoPart";
+import { AuthBasicPart } from "./authBasicPart";
+import { AuthFactoryPart } from "./authFactoryPart";
+import { AuthWelfarePart } from "./authWelfarePart";
+import { RegistrationPart } from "./registrationPart";
 
 import { CompanyAuthFormValues } from "./type";
 import { cssObj } from "./style";
-import { INTERNAL_URL } from "@/constants";
 
 export const ApplyAuthPart: FunctionComponent = () => {
   const [confirmModal, setConfirmModal] = useState(false);

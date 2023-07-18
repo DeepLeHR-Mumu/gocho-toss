@@ -5,11 +5,11 @@ import { FiArrowUpRight } from "react-icons/fi";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
 
+import factory from "@/public/image/factory.svg";
 import { AuthName } from "@/apis/manager/useManagerProfile/type";
 import { INTERNAL_URL } from "@/constants";
 import { useManagerProfile } from "@/apis";
 
-import factory from "../../../../../../public/image/factory.svg";
 import { AuthStatePartProps } from "./type";
 import { cssObj } from "./style";
 
