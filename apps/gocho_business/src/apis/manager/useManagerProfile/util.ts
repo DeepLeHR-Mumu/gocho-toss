@@ -11,4 +11,12 @@ export const managerProfileSelector = ({ data }: ResponseObjDef) => ({
     logoUrl: data.company.logo_url,
     industry: data.company.industry,
   },
+  status: {
+    name: data.status.name,
+    reason: data.status.reason,
+    authenticatedTime: data.status.authenticated_time,
+    isFirst: data.status.is_first,
+  },
 });
+
+export type ConvertedManagerProfile = ReturnType<typeof managerProfileSelector>;

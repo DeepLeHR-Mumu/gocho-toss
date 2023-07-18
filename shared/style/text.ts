@@ -77,6 +77,12 @@ export const TEXTS = {
     line-height: 1.1;
   `,
 
+  TITLE14: `
+    font-weight: 500;
+    font-size: 1.75rem;
+    line-height: 1.14;
+  `,
+
   BODY1: `
     font-weight: 400;
     font-size: 0.75rem;
@@ -111,6 +117,12 @@ export const TEXTS = {
     font-weight: 600;
     font-size: 1.5rem;
     line-height: 1.33;
+  `,
+
+  BODY7: `
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.125;
   `,
 
   UNDERLINE: `
