@@ -2,8 +2,6 @@ import { FunctionComponent, useState } from "react";
 import Link from "next/link";
 import dayjs from "dayjs";
 
-import { Spinner } from "shared-ui/common/atom/spinner";
-
 import { INTERNAL_URL } from "@/constants";
 import { useAlarmArr, useManagerProfile, useNoticeArr } from "@/apis";
 
@@ -19,14 +17,6 @@ export const InfoPart: FunctionComponent = () => {
   const { data: userInfoData } = useManagerProfile();
   const { data: noticeArrObj } = useNoticeArr({ order: "recent", size: 3 });
   const { data: alarmArrObj } = useAlarmArr({ managerId: userInfoData?.id, size: 3 });
-
-  if (!noticeArrObj || !alarmArrObj) {
-    return (
-      <div>
-        <Spinner />
-      </div>
-    );
-  }
 
   return (
     <section css={partCssObj.partContainer}>
@@ -54,7 +44,7 @@ export const InfoPart: FunctionComponent = () => {
       <div css={cssObj.infoList}>
         {infoType === "notice" ? (
           <div>
-            {noticeArrObj.noticeDataArr.map((notice) => (
+            {noticeArrObj?.noticeDataArr.map((notice) => (
               <div css={cssObj.infoContainer} key={`mainNotice${notice.id}`}>
                 <p css={cssObj.infoType}>{notice.type}</p>
                 <strong css={cssObj.infoTitle}>{notice.title}</strong>
@@ -64,7 +54,7 @@ export const InfoPart: FunctionComponent = () => {
           </div>
         ) : (
           <div>
-            {alarmArrObj.alarmDataArr.map((alarm) => (
+            {alarmArrObj?.alarmDataArr.map((alarm) => (
               <div css={cssObj.infoContainer} key={`mainAlarm${alarm.id}`}>
                 <p css={cssObj.infoType}>{alarm.category}</p>
                 <strong css={cssObj.infoTitle}>{alarm.description}</strong>

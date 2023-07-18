@@ -29,7 +29,9 @@ export const cssObj = {
     color: ${NEWCOLORS.BLUEGRAY400};
   `,
 
-  infoList: css``,
+  infoList: css`
+    min-height: 6.25rem;
+  `,
 
   infoContainer: css`
     display: flex;

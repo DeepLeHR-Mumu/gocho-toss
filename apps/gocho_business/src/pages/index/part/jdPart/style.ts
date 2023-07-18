@@ -4,10 +4,11 @@ import { NEWCOLORS } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
-  partTitle: css`
+  partTitle: (isAuth: boolean) => css`
     display: block;
     cursor: pointer;
     ${TEXTS.TITLE11};
+    color: ${isAuth ? NEWCOLORS.BLACK : NEWCOLORS.BLUEGRAY400};
     margin-bottom: 1.25rem;
   `,
 
@@ -15,5 +16,14 @@ export const cssObj = {
     width: 100%;
     margin: 0 -0.5rem;
     border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+  `,
+
+  noAuthJdCard: css`
+    ${TEXTS.TITLE3};
+    color: ${NEWCOLORS.BLUEGRAY400};
+    height: 30rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   `,
 };

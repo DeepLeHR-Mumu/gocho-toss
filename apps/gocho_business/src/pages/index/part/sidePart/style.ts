@@ -63,6 +63,17 @@ export const cssObj = {
     color: ${NEWCOLORS.BLUEGRAY400};
   `,
 
+  companyAuthButton: css`
+    display: block;
+    cursor: pointer;
+    width: fit-content;
+    margin: 1.25rem auto 0;
+    padding: 0.75rem 1rem;
+    border-radius: 1.5rem;
+    background-color: ${NEWCOLORS.BLUE100};
+    color: ${NEWCOLORS.BLUE300};
+  `,
+
   jdCountContainer: css`
     display: flex;
     justify-content: center;
@@ -80,8 +91,9 @@ export const cssObj = {
     margin-bottom: 1rem;
   `,
 
-  countNumber: css`
+  countNumber: (isAuth: boolean) => css`
     ${TEXTS.TITLE10};
+    color: ${isAuth ? NEWCOLORS.BLACK : NEWCOLORS.BLUEGRAY200};
   `,
 
   contour: css`
