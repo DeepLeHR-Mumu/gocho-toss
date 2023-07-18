@@ -35,5 +35,6 @@ export { useAlarmArr } from "./manager/alarm/useAlarmArr";
 export { useReadAlarm } from "./manager/alarm/useReadAlarm";
 export { useFindEmail } from "./manager/find/useFindEmail";
 export { useFindPassword } from "./manager/find/useFindPassword";
+export { useManagerAuth } from "./manager/auth/useManagerAuth";
 
 export { useAxiosInterceptor, axiosInstance, axiosNoTokenInstance } from "./useIsRefreshLock";

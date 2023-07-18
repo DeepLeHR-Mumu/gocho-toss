@@ -7,6 +7,7 @@ export const INTERNAL_URL = {
   FACTORY_LIST: "/factory/list",
   COMPANY_EDIT: "/company/edit",
   MANAGER_LIST: "/manager/list",
+  COMPANY_AUTH: "/company/auth",
   HELP: "/help",
   ALARM_LIST: "/alarm/list",
   ALARM_SETTING: "/alarm/setting",
