@@ -1,11 +1,29 @@
+import banner00 from "@public/images/global/MainCarousel/posco_ad.png";
 import banner01 from "@public/images/global/MainCarousel/gocho_blog.png";
 import banner02 from "@public/images/global/MainCarousel/factory_banner.jpg";
 import banner03 from "@public/images/global/MainCarousel/openTalk_banner.jpg";
 
 import checkIconImage from "shared-image/global/common/yellow_check.svg";
-// import { adClickEvent } from "shared-ga/home";
+import { adClickEvent } from "shared-ga/home";
 
 export const carouselArr = [
+  {
+    id: 0,
+    topDesc: "OPEN",
+    middleDesc: "포스코",
+    title: "생산기술직 (포항/광양) 채용형 인턴 신입사원 모집",
+    lastDesc: "랜선 리크루팅 신청하고 채용 꿀팁 알아가세요!",
+    backgroundImage: banner00,
+    backgroundColor: "#005890",
+    buttonObj: {
+      target: "_blank" as const,
+      text: "공고 확인하기",
+      color: "#fff",
+      backgroundColor: "#111",
+      url: "https://고초대졸.com/jd/detail/17228",
+      onClick: adClickEvent,
+    },
+  },
   {
     id: 1,
     topDesc: "OPEN",
