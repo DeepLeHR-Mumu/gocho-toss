@@ -1,7 +1,6 @@
 import { FunctionComponent } from "react";
 
 import { useModal } from "@/globalStates";
-import { FindPasswordModal } from "../findPasswordModal";
 import { LoginModal } from "../loginModal";
 import { FactoryAddModal } from "../factoryAddModal";
 import { FactoryEditModal } from "../factoryEditModal";
@@ -10,10 +9,6 @@ import { PrivacyTermModal } from "../privacyTermModal";
 
 export const ModalPlaceholder: FunctionComponent = () => {
   const { modal } = useModal();
-
-  if (modal === "findPasswordModal") {
-    return <FindPasswordModal />;
-  }
 
   if (modal === "loginModal") {
     return <LoginModal />;
