@@ -16,6 +16,8 @@ import { INTERNAL_URL } from "@/constants";
 import { loginPageFunnelEvent, loginSuccessEvent, signupButtonClickEvent } from "@/ga";
 import { commonCssObj } from "@/styles";
 import bizTextColor from "@/public/image/deepleLogo/bizTextColor.svg";
+import homeBg1 from "@/public/image/home_bg_1.png";
+import homeBg2 from "@/public/image/home_bg_2.png";
 
 import { LOGIN_ERROR_MESSAGES } from "./constant";
 import { PageHead } from "./pageHead";
@@ -37,6 +39,8 @@ const LoginPage: NextPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormValues>({ mode: "onChange" });
+
+  const randNumber = Math.round(Math.random());
 
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     postLogin(loginObj, {
@@ -79,11 +83,9 @@ const LoginPage: NextPage = () => {
     <>
       <PageHead />
       <main css={cssObj.mainContainer}>
-        <section css={cssObj.backgroundWrapper}>
-          여기
-          <br /> 텍스트
-          <br /> 들어감
-        </section>
+        <div css={cssObj.backgroundWrapper}>
+          <Image src={randNumber ? homeBg1 : homeBg2} alt="로그인 페이지 배경화면" fill quality={100} />
+        </div>
         <section css={cssObj.loginWrapper}>
           <InvisibleH2 title="고초대졸닷컴 로그인하기" />
           <div css={cssObj.logoBox}>

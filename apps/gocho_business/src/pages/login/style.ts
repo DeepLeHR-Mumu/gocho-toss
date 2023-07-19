@@ -4,26 +4,31 @@ import { NEWCOLORS } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
-  mainContainer: css`
-    display: flex;
-    height: 100vh;
-  `,
+  mainContainer: css``,
 
   backgroundWrapper: css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    ${TEXTS.TITLE13};
-    width: 50rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 110vw;
+    min-height: 110vh;
+    > img {
+      object-fit: cover;
+    }
   `,
 
   loginWrapper: css`
+    position: absolute;
+    top: 50%;
+    right: 20%;
+    transform: translate(50%, -50%);
     width: fit-content;
     background-color: ${NEWCOLORS.WHITE};
     margin: auto;
     padding: 3rem 1.5rem 1.5rem;
     border-radius: 1rem;
     box-shadow: 0 2px 16px 0 #0000000d;
+    z-index: 30;
   `,
 
   logoBox: css`
