@@ -45,11 +45,15 @@ export const InfoPart: FunctionComponent = () => {
         {infoType === "notice" ? (
           <div>
             {noticeArrObj?.noticeDataArr.map((notice) => (
-              <div css={cssObj.infoContainer} key={`mainNotice${notice.id}`}>
+              <Link
+                href={INTERNAL_URL.NOTICE_DETAIL(notice.id)}
+                css={cssObj.infoContainer}
+                key={`mainNotice${notice.id}`}
+              >
                 <p css={cssObj.infoType}>{notice.type}</p>
                 <strong css={cssObj.infoTitle}>{notice.title}</strong>
                 <p css={cssObj.infoDate}>{dayjs(notice.createdTime).format("YYYY.MM.DD")}</p>
-              </div>
+              </Link>
             ))}
           </div>
         ) : (

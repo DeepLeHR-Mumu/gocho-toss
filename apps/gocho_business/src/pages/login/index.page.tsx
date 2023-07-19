@@ -25,6 +25,7 @@ import { LoginFormValues } from "./type";
 import { cssObj } from "./style";
 
 const LoginPage: NextPage = () => {
+  const [randomNumber, setRandomNumber] = useState<number>();
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
   const router = useRouter();
 
@@ -40,7 +41,9 @@ const LoginPage: NextPage = () => {
     formState: { errors },
   } = useForm<LoginFormValues>({ mode: "onChange" });
 
-  const randNumber = Math.round(Math.random());
+  useEffect(() => {
+    setRandomNumber(Math.round(Math.random()));
+  }, []);
 
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     postLogin(loginObj, {
@@ -84,7 +87,7 @@ const LoginPage: NextPage = () => {
       <PageHead />
       <main css={cssObj.mainContainer}>
         <div css={cssObj.backgroundWrapper}>
-          <Image src={randNumber ? homeBg1 : homeBg2} alt="로그인 페이지 배경화면" fill quality={100} />
+          <Image src={randomNumber ? homeBg1 : homeBg2} alt="로그인 페이지 배경화면" fill quality={100} />
         </div>
         <section css={cssObj.loginWrapper}>
           <InvisibleH2 title="고초대졸닷컴 로그인하기" />

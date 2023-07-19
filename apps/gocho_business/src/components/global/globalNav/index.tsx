@@ -21,7 +21,7 @@ export const GlobalNav: FunctionComponent = () => {
   const [isUserActive, setIsUserActive] = useState<boolean>(false);
 
   const { data: userInfoData, isSuccess: isManagerLogin } = useManagerProfile();
-  const { data: alarmArrObj } = useAlarmArr({ managerId: userInfoData?.id, page: Number(router.query.page), size: 15 });
+  const { data: alarmArrObj } = useAlarmArr({ managerId: userInfoData?.id, size: 15 });
   const { mutate: postLogout } = useDoLogout();
   const { mutate: readAlarmMutate } = useReadAlarm();
   const queryClient = useQueryClient();
@@ -117,7 +117,7 @@ export const GlobalNav: FunctionComponent = () => {
               profileMenuHandler("company");
             }}
           >
-            <div>{userInfoData?.company.name}</div>
+            <div css={cssObj.companyProfileButton}>{userInfoData?.company.name}</div>
             <FiChevronUp css={cssObj.toggleIcon(isCompanyActive)} />
           </button>
           {isCompanyActive && userInfoData && (

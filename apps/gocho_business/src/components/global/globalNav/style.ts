@@ -87,6 +87,7 @@ export const cssObj = {
     border-radius: 1rem;
     width: 25rem;
     max-height: 28rem;
+    padding: 0.25rem 0;
     overflow-y: scroll;
     background-color: ${NEWCOLORS.WHITE};
     z-index: 50;
@@ -120,6 +121,11 @@ export const cssObj = {
     cursor: pointer;
     color: ${NEWCOLORS.WHITE};
     font-weight: 700;
+  `,
+
+  companyProfileButton: css`
+    max-width: 6.5rem;
+    ${shorten()};
   `,
 
   toggleIcon: (isActive: boolean) => css`

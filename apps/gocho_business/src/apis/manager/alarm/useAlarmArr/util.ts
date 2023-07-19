@@ -17,6 +17,7 @@ export const alarmArrSelector = ({ data: alarmArr, page_result }: ResponseObjDef
     isRead: alarm.is_read,
     createdTime: alarm.created_time,
     updatedTime: alarm.updated_time,
+    link: alarm.link,
   }));
 
   return { alarmDataArr, pageResult };
