@@ -85,6 +85,7 @@ export const commonCssObj = {
     overflow-x: hidden;
     overflow-y: scroll;
     z-index: 20;
+    background-color: ${NEWCOLORS.WHITE};
     border: ${isOpen ? `1px solid ${COLORS.GRAY30}` : 0};
 
     ::-webkit-scrollbar {

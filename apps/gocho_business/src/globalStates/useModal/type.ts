@@ -1,3 +1,7 @@
+import { UseFormReturn } from "react-hook-form";
+
+import { JobFormValues } from "@/pages/jd/upload/type";
+
 export interface factoryObjDef {
   id: number;
   name: string;
@@ -15,11 +19,11 @@ export interface factoryObjDef {
   };
 }
 
-export interface certiArrDef {
-  certiArr: string[];
+export interface certiModalDef {
+  jobForm: UseFormReturn<JobFormValues>;
 }
 
-export type contentModalDef = factoryObjDef | certiArrDef;
+export type contentModalDef = factoryObjDef | certiModalDef;
 
 export type modalNameDef =
   | "loginModal"

@@ -28,22 +28,12 @@ export const cssObj = {
     width: 100%;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   `,
 
   title: css`
     ${TEXTS.TITLE11};
     display: block;
-  `,
-
-  addAddressButton: css`
-    ${TEXTS.TITLE5};
-    flex-grow: 1;
-    margin-left: 0.5rem;
-    height: 3.25rem;
-    padding: 0.75rem 1rem;
-    background-color: ${NEWCOLORS.GRAY200};
-    border-radius: 0.5rem;
   `,
 
   closeButton: css`
@@ -53,28 +43,66 @@ export const cssObj = {
     }
   `,
 
+  desc: css`
+    ${TEXTS.TITLE3};
+    color: ${NEWCOLORS.BLUEGRAY400};
+    width: 100%;
+    text-align: left;
+    margin-bottom: 1.5rem;
+  `,
+
   inputWrapper: css`
-    display: flex;
-    align-items: center;
-    gap: 0 1rem;
-    margin-right: 2.5rem;
+    position: relative;
   `,
 
-  labelContainer: css`
-    display: flex;
-    align-items: center;
-    gap: 0 2rem;
-    margin-bottom: 1.25rem;
+  addCertiButton: css`
+    ${TEXTS.TITLE5};
+    color: ${NEWCOLORS.BLUEGRAY400};
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0 1rem;
+    height: 2.5rem;
   `,
 
-  radioLabel: css`
-    margin-left: 0.5rem;
+  selectedCertiWrapper: css`
+    width: 46rem;
+    height: 8.5rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: ${NEWCOLORS.GRAY50};
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    border-radius: 0.75rem;
+    margin-top: 1.25rem;
+  `,
+
+  selectedCertiButton: css`
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    padding: 0.75rem 1rem;
+    border-radius: 1.5rem;
+    background-color: ${NEWCOLORS.BLUE100};
+    color: ${NEWCOLORS.BLUE300};
+  `,
+
+  smallDeleteButton: css`
+    cursor: pointer;
+    > svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+    color: ${NEWCOLORS.BLUE300};
   `,
 
   buttonContainer: css`
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    margin-top: 2rem;
     gap: 0 1rem;
   `,
 };

@@ -1,33 +1,30 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
   selectedCertiContainer: css`
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
+    gap: 0 1rem;
   `,
 
   certiLabel: css`
     display: flex;
     align-items: center;
-    gap: 0 0.25rem;
-    border-radius: 1rem;
-    border: 1px solid ${COLORS.GRAY70};
-    background-color: ${COLORS.GRAY100};
-    height: 2.25rem;
-    padding: 0 0.5rem;
+    width: fit-content;
+    padding: 0.75rem 1rem;
+    border-radius: 1.5rem;
+    background-color: ${NEWCOLORS.BLUE100};
+    color: ${NEWCOLORS.BLUE300};
   `,
 
   smallDeleteButton: css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    width: 1.75rem;
-    height: 1.75rem;
-    color: ${COLORS.GRAY10};
-    background-color: ${COLORS.GRAY70};
+    cursor: pointer;
+    > svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+    color: ${NEWCOLORS.BLUE300};
   `,
 };

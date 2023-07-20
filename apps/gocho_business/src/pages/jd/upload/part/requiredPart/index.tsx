@@ -6,9 +6,8 @@ import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { commonCssObj } from "@/styles";
 import { useModal } from "@/globalStates";
 
-import { RequiredPartProps } from "./type";
-// import { CERTI_ARR } from "./constant";
 import { AddFieldButton, DeleteInputButton } from "../../component";
+import { RequiredPartProps } from "./type";
 import { cssObj } from "./style";
 
 export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, requiredEtcArr, preferredEtcArr }) => {
@@ -22,21 +21,6 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, re
     register,
     formState: { errors },
   } = jobForm;
-
-  // const certiClickHandler = (certi: string) => {
-  //   const totalNumber = watch("preferred_certi_arr")?.length || 0;
-  //   const isInList = watch("preferred_certi_arr")?.includes(certi);
-  //
-  //   if (totalNumber < 10) {
-  //     if (isInList) {
-  //       setValue(`preferred_certi_arr`, [
-  //         ...(watch("preferred_certi_arr")?.filter((element) => element !== certi) || []),
-  //       ]);
-  //     } else {
-  //       setValue(`preferred_certi_arr`, [...(watch("preferred_certi_arr") || []), certi]);
-  //     }
-  //   }
-  // };
 
   const isSchoolAllSelected = watch("high") && watch("college") && watch("four");
 
@@ -199,11 +183,8 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, re
               </button>
             </div>
           ))}
+          <AddFieldButton text="자격증 추가" onClickHandler={() => setModal("certiAddModal", { jobForm })} />
         </div>
-        <AddFieldButton
-          text="자격증 추가"
-          onClickHandler={() => setModal("certiAddModal", { certiArr: watch("preferred_certi_arr") || [] })}
-        />
       </div>
     </div>
   );
