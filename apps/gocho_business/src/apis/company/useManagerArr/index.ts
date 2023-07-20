@@ -8,7 +8,7 @@ import { managerArrKeyObj, GetManagerArrDef, ResponseObjDef, RequestObjDef } fro
 import { managerArrSelector } from "./util";
 
 export const getManagerArr: GetManagerArrDef = async ({ queryKey: [{ requestObj }] }) => {
-  const { data } = await axiosInstance.get(`/companies/${requestObj.companyId}/managers`);
+  const { data } = await axiosInstance.get(`/companies/${requestObj.companyId}/managers`, { params: requestObj });
   return data;
 };
 

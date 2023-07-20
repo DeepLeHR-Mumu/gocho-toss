@@ -1,15 +1,17 @@
 import React, { FunctionComponent } from "react";
 import Link from "next/link";
 
-import { useJdArr } from "@/apis";
+import { useJdArr, useManagerProfile } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 import { JdCard } from "../../component";
-import { IndexPartProps } from "../../type";
 import { partCssObj } from "../style";
 import { cssObj } from "./style";
 
-export const JdPart: FunctionComponent<IndexPartProps> = ({ isAuth }) => {
+export const JdPart: FunctionComponent = () => {
+  const { data: userInfoData } = useManagerProfile();
   const { data: jdDataObj } = useJdArr(true, { order: "recent" });
+
+  const isAuth = userInfoData?.status.name !== "미인증";
 
   return (
     <section css={partCssObj.partContainer}>
@@ -17,11 +19,13 @@ export const JdPart: FunctionComponent<IndexPartProps> = ({ isAuth }) => {
         등록된 공고 관리 {">"}
       </Link>
       <p css={cssObj.contour} />
-      {isAuth ? (
-        jdDataObj?.jdDataArr.map((jd) => <JdCard key={`BusinessJdCard${jd.id}`} jd={jd} />)
-      ) : (
-        <p css={cssObj.noAuthJdCard}>기업 인증 후 공고 조희 및 등록이 가능합니다.</p>
-      )}
+      <div css={cssObj.cardContainer}>
+        {isAuth ? (
+          jdDataObj?.jdDataArr.map((jd) => <JdCard key={`BusinessJdCard${jd.id}`} jd={jd} />)
+        ) : (
+          <p css={cssObj.noAuthJdCard}>기업 인증 후 공고 조희 및 등록이 가능합니다.</p>
+        )}
+      </div>
     </section>
   );
 };

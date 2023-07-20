@@ -67,6 +67,7 @@ export const cssObj = {
     padding: 1rem 2rem;
     border-radius: 1rem;
     border: 1px solid ${NEWCOLORS.GRAY200};
+    margin-bottom: 2rem;
   `,
 
   tableHeader: css`

@@ -15,7 +15,12 @@ export interface factoryObjDef {
   };
 }
 
-export type contentModalDef = factoryObjDef;
+export interface certiArrDef {
+  certiArr: string[];
+}
+
+export type contentModalDef = factoryObjDef | certiArrDef;
+
 export type modalNameDef =
   | "loginModal"
   | "factoryAddModal"
@@ -23,7 +28,8 @@ export type modalNameDef =
   | "privacyTermModal"
   | "companyAuthModal"
   | null;
-export type contentModalNameDef = "factoryEditModal";
+
+export type contentModalNameDef = "factoryEditModal" | "certiAddModal";
 
 export interface setCurrentModalDef {
   (modal: contentModalNameDef, contentObj: contentModalDef): void;

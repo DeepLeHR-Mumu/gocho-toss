@@ -1,4 +1,4 @@
 export { useModal } from "./useModal";
-export type { factoryObjDef } from "./useModal/type";
+export type { certiArrDef, factoryObjDef } from "./useModal/type";
 
 export { useToast } from "./useToast";

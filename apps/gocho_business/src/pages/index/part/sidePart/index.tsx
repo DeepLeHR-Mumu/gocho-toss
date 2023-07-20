@@ -10,12 +10,13 @@ import { useJdArr, useManagerProfile } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 import { partCssObj } from "../style";
 import { cssObj } from "./style";
-import { IndexPartProps } from "../../type";
 
-export const SidePart: FunctionComponent<IndexPartProps> = ({ isAuth }) => {
+export const SidePart: FunctionComponent = () => {
   const { data: processJdDataObj } = useJdArr(true, { filter: "progress" });
   const { data: waitingJdDataObj } = useJdArr(true, { filter: "waiting" });
   const { data: userInfoData } = useManagerProfile();
+
+  const isAuth = userInfoData?.status.name !== "미인증";
 
   return (
     <div>

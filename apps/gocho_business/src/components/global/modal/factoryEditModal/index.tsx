@@ -24,7 +24,7 @@ export const FactoryEditModal: FunctionComponent = () => {
 
   const { register, handleSubmit, setValue, reset } = useForm<FactoryEditFormValues>();
 
-  const { id } = contentObj as factoryObjDef;
+  const factoryObj = contentObj as factoryObjDef;
 
   useFocusTrap(modalRef);
 
@@ -48,7 +48,7 @@ export const FactoryEditModal: FunctionComponent = () => {
     editFactoryMutation(
       {
         ...factoryRequestObj,
-        id,
+        id: factoryObj.id,
         bus_bool: factoryRequestObj.bus_bool === "true",
         bus_etc: factoryRequestObj.bus_etc === "" ? null : factoryRequestObj.bus_etc,
         dormitory_bool: factoryRequestObj.dormitory_bool === "true",
@@ -68,20 +68,20 @@ export const FactoryEditModal: FunctionComponent = () => {
   };
 
   useEffect(() => {
-    if (contentObj) {
+    if (factoryObj) {
       reset({
-        factory_name: contentObj.name,
-        address: contentObj.address,
-        male_number: contentObj.maleNumber,
-        female_number: contentObj.femaleNumber,
-        product: contentObj.product,
-        bus_bool: contentObj.bus.exists ? "true" : "false",
-        bus_etc: contentObj.bus.desc ? contentObj.bus.desc : "",
-        dormitory_bool: contentObj.dormitory.exists ? "true" : "false",
-        dormitory_etc: contentObj.dormitory.desc ? contentObj.dormitory.desc : "",
+        factory_name: factoryObj.name,
+        address: factoryObj.address,
+        male_number: factoryObj.maleNumber,
+        female_number: factoryObj.femaleNumber,
+        product: factoryObj.product,
+        bus_bool: factoryObj.bus.exists ? "true" : "false",
+        bus_etc: factoryObj.bus.desc ? factoryObj.bus.desc : "",
+        dormitory_bool: factoryObj.dormitory.exists ? "true" : "false",
+        dormitory_etc: factoryObj.dormitory.desc ? factoryObj.dormitory.desc : "",
       });
     }
-  }, [reset, contentObj]);
+  }, [reset, factoryObj]);
 
   return (
     <ModalComponent>

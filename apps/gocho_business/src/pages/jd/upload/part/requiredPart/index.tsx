@@ -4,12 +4,16 @@ import { FiX } from "react-icons/fi";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
 import { commonCssObj } from "@/styles";
+import { useModal } from "@/globalStates";
+
 import { RequiredPartProps } from "./type";
 // import { CERTI_ARR } from "./constant";
 import { AddFieldButton, DeleteInputButton } from "../../component";
 import { cssObj } from "./style";
 
 export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, requiredEtcArr, preferredEtcArr }) => {
+  const { setModal } = useModal();
+
   const {
     watch,
     setValue,
@@ -196,7 +200,10 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, re
             </div>
           ))}
         </div>
-        <AddFieldButton text="자격증 추가" onClickHandler={() => null} />
+        <AddFieldButton
+          text="자격증 추가"
+          onClickHandler={() => setModal("certiAddModal", { certiArr: watch("preferred_certi_arr") || [] })}
+        />
       </div>
     </div>
   );

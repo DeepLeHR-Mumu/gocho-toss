@@ -18,6 +18,10 @@ export const cssObj = {
     border-bottom: 1px solid ${NEWCOLORS.GRAY200};
   `,
 
+  cardContainer: css`
+    min-height: 30rem;
+  `,
+
   noAuthJdCard: css`
     ${TEXTS.TITLE3};
     color: ${NEWCOLORS.BLUEGRAY400};

@@ -1,7 +1,11 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
+import { PageResultDef } from "shared-type/api/paginationType";
+
 export interface RequestObjDef {
   companyId: number | undefined;
+  size?: number;
+  page?: number;
 }
 
 export interface ResponseObjDef {
@@ -11,6 +15,7 @@ export interface ResponseObjDef {
     department: string;
     created_time: string;
   }[];
+  page_result: PageResultDef;
 }
 
 export const managerArrKeyObj = {
