@@ -35,7 +35,7 @@ export const RegistrationPart: FunctionComponent<RegistrationPartProps> = ({ com
         <input
           type="text"
           css={commonCssObj.input(47, false)}
-          {...register("oneLineIntro", { required: true, maxLength: 20 })}
+          {...register("intro", { required: true, maxLength: 20 })}
         />
       </div>
       <div css={cssObj.subContainer}>

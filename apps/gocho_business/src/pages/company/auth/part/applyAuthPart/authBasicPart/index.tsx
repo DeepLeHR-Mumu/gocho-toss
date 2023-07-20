@@ -11,6 +11,13 @@ import { MAX_LENGTH_ERROR_TEXT, ONLY_INT_ERROR_TEXT, INDUSTRY_ARR, SIZE_ARR } fr
 import { AuthBasicPartProps } from "./type";
 import { cssObj } from "./style";
 
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    kakao: any;
+  }
+}
+
 export const AuthBasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthForm, isOtherEdit }) => {
   const [isIndustryOpen, setIsIndustryOpen] = useState<boolean>(false);
   const [isSizeOpen, setIsSizeOpen] = useState<boolean>(false);
@@ -25,9 +32,26 @@ export const AuthBasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAu
   const openPostCodePopup = useDaumPostcodePopup();
 
   const onClickAddress = () => {
+    const mapScript = document.createElement("script");
+
+    mapScript.async = true;
+    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=0687bed33c060c4758f582d26ff44e16&libraries=services&libraries=services&autoload=false`;
+    document.head.appendChild(mapScript);
+
     openPostCodePopup({
       onComplete: (addressObj: Address) => {
         setValue("location.address", addressObj.address, { shouldDirty: true });
+        window.kakao.maps.load(() => {
+          const geocoder = new window.kakao.maps.services.Geocoder();
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          geocoder.addressSearch(addressObj.address, (result: any, status: any) => {
+            if (status === window.kakao.maps.services.Status.OK) {
+              const { x, y } = result[0];
+              setValue("location.x", x);
+              setValue("location.y", y);
+            }
+          });
+        });
       },
     });
   };
@@ -206,7 +230,7 @@ export const AuthBasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAu
         <p css={commonCssObj.errorMessage}>{errors.pay_avg?.message}</p>
       </div>
       <div css={commonCssObj.container}>
-        <strong css={commonCssObj.inputTitle(false)}>기타 연봉 정보</strong>
+        <strong css={commonCssObj.optionalInputTitle(false)}>기타 연봉 정보</strong>
         <input
           type="text"
           {...register("pay_desc", {

@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
-import { usePreventRouting } from "shared-hooks";
 
 import { useManagerProfile, useCompanyDetail, useManagerAuth } from "@/apis";
 import { RequestObjDef as AuthRequestObjDef } from "@/apis/manager/auth/useManagerAuth/type";
@@ -35,10 +34,8 @@ export const ApplyAuthPart: FunctionComponent = () => {
 
   const {
     handleSubmit: handleSubmitCompanyForm,
-    formState: { dirtyFields, isValid },
+    formState: { isValid },
   } = companyAuthForm;
-
-  usePreventRouting(Boolean(Object.keys(dirtyFields).length));
 
   if (!companyDetailData || !userInfoData) {
     return (
@@ -62,15 +59,18 @@ export const ApplyAuthPart: FunctionComponent = () => {
         const companyLogoFile = companyLogo.item(0);
         const backgroundImageFile = backgroundImage.item(0);
         requetObj.dto = {
+          industry: formData.industry,
           employee_number: formData.employee_number,
           location: formData.location,
           intro: formData.intro,
+          found_date: formData.found_date,
           welfare: formData.welfare,
           pay_avg: formData.pay_avg,
           pay_start: formData.pay_start,
           pay_desc: formData.pay_desc,
           nozo: { ...formData.nozo, exists: formData.nozo.exists === "true" },
           factory_arr: formData.factory,
+          size: formData.size,
         };
         requetObj.logo = companyLogoFile !== null ? companyLogoFile : undefined;
         requetObj.backgroundImage = backgroundImageFile !== null ? backgroundImageFile : undefined;
