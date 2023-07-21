@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { NextPage } from "next";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
@@ -10,6 +11,7 @@ import { EtcSideNav } from "@/components/global/etcSideNav";
 import { PageLayout, Pagination } from "@/components";
 import { useManagerProfile, useReadAlarm, useAlarmArr } from "@/apis";
 
+import { alarmCategoryToLink } from "./util";
 import { cssObj } from "./style";
 
 const AlarmList: NextPage = () => {
@@ -49,11 +51,13 @@ const AlarmList: NextPage = () => {
             <p css={cssObj.pageDesc}>받은지 90일이 지난 알림은 사라집니다.</p>
             <div css={cssObj.infoList}>
               {alarmArrObj.alarmDataArr.map((alarm) => (
-                <div key={`alarm${alarm.id}`} css={cssObj.infoContainer}>
-                  <p css={cssObj.infoType}>{alarm.category}</p>
-                  <strong css={cssObj.infoTitle}>{alarm.description}</strong>
-                  <p css={cssObj.infoDate}>{dayjs(alarm.createdTime).format("YYYY.MM.DD")}</p>
-                </div>
+                <Link key={`alarm${alarm.id}`} href={alarmCategoryToLink(alarm.category)}>
+                  <div css={cssObj.infoContainer}>
+                    <p css={cssObj.infoType}>{alarm.category}</p>
+                    <strong css={cssObj.infoTitle}>{alarm.description}</strong>
+                    <p css={cssObj.infoDate}>{dayjs(alarm.createdTime).format("YYYY.MM.DD")}</p>
+                  </div>
+                </Link>
               ))}
             </div>
             <Pagination url={INTERNAL_URL.ALARM_LIST} totalPage={alarmArrObj.pageResult.totalPages} />

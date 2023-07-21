@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 
 import { INTERNAL_URL } from "@/constants";
 import { useAlarmArr, useManagerProfile, useNoticeArr } from "@/apis";
+import { alarmCategoryToLink } from "@/pages/alarm/list/util";
 
 import { partCssObj } from "../style";
 import { cssObj } from "./style";
@@ -61,7 +62,9 @@ export const InfoPart: FunctionComponent = () => {
             {alarmArrObj?.alarmDataArr.map((alarm) => (
               <div css={cssObj.infoContainer} key={`mainAlarm${alarm.id}`}>
                 <p css={cssObj.infoType}>{alarm.category}</p>
-                <strong css={cssObj.infoTitle}>{alarm.description}</strong>
+                <strong css={cssObj.infoTitle}>
+                  <Link href={alarmCategoryToLink(alarm.category)}>{alarm.description}</Link>
+                </strong>
                 <p css={cssObj.infoDate}>{dayjs(alarm.createdTime).format("YYYY.MM.DD")}</p>
               </div>
             ))}
