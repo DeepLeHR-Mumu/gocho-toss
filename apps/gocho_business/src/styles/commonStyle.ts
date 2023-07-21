@@ -148,6 +148,10 @@ export const commonCssObj = {
       ${TEXTS.TITLE5};
       color: ${NEWCOLORS.GRAY300};
     }
+
+    :disabled {
+      background-color: ${NEWCOLORS.GRAY100};
+    }
   `,
 
   arrayInputContainer: css`

@@ -1,16 +1,20 @@
 import { FunctionComponent, useState } from "react";
 import { FiChevronUp, FiChevronDown } from "react-icons/fi";
+import { UseFieldArrayReturn } from "react-hook-form";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
 import { commonCssObj } from "@/styles";
 
-import { AddFieldButton, DeleteInputButton } from "@/pages/jd/upload/component";
+import { AddFieldButton, DeleteInputButton } from "../../component";
+import { JobFormValues } from "../../type";
 import { ConditionPartProps } from "./type";
 import { ROTATION_ARR } from "./constant";
 import { cssObj } from "./style";
 
 export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, payArr }) => {
+  const [companyDepend, setCompanyDepend] = useState<boolean>(false);
+  const [afterPass, setAfterPass] = useState<boolean>(false);
   const [isRotationOpen, setIsRotationOpen] = useState<boolean>(false);
 
   const {
@@ -40,6 +44,29 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
       .join(", ");
   };
 
+  const payArrCheckboxClickHandler = (
+    currentCheck: boolean,
+    anotherCheck: boolean,
+    setCurrentCheck: (value: ((prevState: boolean) => boolean) | boolean) => void,
+    arr: UseFieldArrayReturn<JobFormValues, "pay_arr", "id">,
+    text: string
+  ) => {
+    if (currentCheck) {
+      const index = arr.fields.findIndex((item) => item.value === text);
+      if (index !== -1) {
+        if (arr.fields.length !== 1) arr.remove(index);
+        else setValue("pay_arr", [{ value: "" }]);
+      }
+    } else if (anotherCheck) {
+      arr.append({ value: text });
+    } else {
+      setValue("pay_arr", [{ value: text }]);
+    }
+    setCurrentCheck((prev) => !prev);
+  };
+
+  const isPayArrDisabled = companyDepend || afterPass;
+
   return (
     <div css={commonCssObj.partContainer}>
       <strong css={commonCssObj.partTitle}>근무 조건</strong>
@@ -48,18 +75,44 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
           <p css={commonCssObj.inputTitle(false)}>급여</p>
         </div>
         <div css={cssObj.inputWrapper}>
-          <div css={commonCssObj.labelContainer}>
-            <label css={commonCssObj.label} htmlFor="companyDepend">
-              <input type="checkbox" id="companyDepend" />
-              <CheckBox isChecked={watch("college")} />
-              회사 내규에 따름
-            </label>
-            <label css={commonCssObj.label} htmlFor="after">
-              <input type="checkbox" id="after" />
-              <CheckBox isChecked={watch("college")} />
-              면접 후 결정
-            </label>
-            <p css={commonCssObj.errorMessage}>{errors.pay_arr && `${errors.pay_arr?.message}`}</p>
+          <div css={cssObj.payLabelContainer}>
+            <div css={commonCssObj.labelContainer}>
+              <label css={commonCssObj.label} htmlFor="companyDepend">
+                <input
+                  type="checkbox"
+                  id="companyDepend"
+                  onClick={() => {
+                    payArrCheckboxClickHandler(companyDepend, afterPass, setCompanyDepend, payArr, "회사 내규에 따름");
+                  }}
+                />
+                <CheckBox isChecked={companyDepend} />
+                회사 내규에 따름
+              </label>
+              <label css={commonCssObj.label} htmlFor="afterPass">
+                <input
+                  type="checkbox"
+                  id="afterPass"
+                  onClick={() => {
+                    payArrCheckboxClickHandler(afterPass, companyDepend, setAfterPass, payArr, "면접 후 결정");
+                    // if (afterPass) {
+                    //   const index = payArr.fields.findIndex((item) => item.value === "면접 후 결정");
+                    //   if (index !== -1) {
+                    //     if (payArr.fields.length !== 1) payArr.remove(index);
+                    //     else setValue("pay_arr", [{ value: "" }]);
+                    //   }
+                    // } else if (companyDepend) {
+                    //   payArr.append({ value: "면접 후 결정" });
+                    // } else {
+                    //   setValue("pay_arr", [{ value: "면접 후 결정" }]);
+                    // }
+                    // setAfterPass((prev) => !prev);
+                  }}
+                />
+                <CheckBox isChecked={afterPass} />
+                면접 후 결정
+              </label>
+              <p css={commonCssObj.errorMessage}>{errors.pay_arr && `${errors.pay_arr?.message}`}</p>
+            </div>
           </div>
           <div css={commonCssObj.arrayInputContainer}>
             {payArr.fields.map((item, index) => (
@@ -70,6 +123,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
                     css={commonCssObj.input(55.5, Boolean(errors.pay_arr))}
                     placeholder="급여 정보를 기재해주세요 (최대 50자)"
                     maxLength={50}
+                    disabled={isPayArrDisabled}
                     onFocus={() => {
                       clearErrors(`pay_arr.${index}`);
                     }}
@@ -103,6 +157,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
                   onClickHandler={() => {
                     payArr.append({ value: "" });
                   }}
+                  disabled={isPayArrDisabled}
                 />
               )}
             </div>

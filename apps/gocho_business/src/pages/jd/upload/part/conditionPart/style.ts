@@ -11,8 +11,8 @@ export const cssObj = {
     flex-grow: 1;
   `,
 
-  labelContainer: css`
-    display: flex;
+  payLabelContainer: css`
+    margin-bottom: 1rem;
   `,
 
   rotationContainer: css`
