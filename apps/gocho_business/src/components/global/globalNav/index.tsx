@@ -93,6 +93,8 @@ export const GlobalNav: FunctionComponent = () => {
               profileMenuHandler("alarm");
             }}
           >
+            {/* TODO 테스트 해봐야 함. */}
+            {alarmArrObj?.alarmDataArr.findIndex((alarm) => !alarm.isRead) !== -1 && <div css={cssObj.redDot} />}
             <FiBell />
           </button>
           {isAlarmActive && (
