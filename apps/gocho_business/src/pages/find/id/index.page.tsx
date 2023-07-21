@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FiArrowLeft, FiX } from "react-icons/fi";
 import Link from "next/link";
-import { router } from "next/client";
+import { useRouter } from "next/router";
 
 import { NewSharedButton } from "shared-ui/common/newSharedButton";
 
@@ -16,6 +16,8 @@ import { FindEmailFormValues } from "./type";
 import { cssObj } from "./style";
 
 const FindEmail: NextPage = () => {
+  const router = useRouter();
+
   const [didfoundEmail, setDidFoundEmail] = useState<boolean>(false);
   const [email, setEmail] = useState<string | null>(null);
   const { mutate: postSendAuthNumber } = useSendAuthNumber();

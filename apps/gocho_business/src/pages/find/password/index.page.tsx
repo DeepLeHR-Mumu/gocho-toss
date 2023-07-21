@@ -2,7 +2,7 @@ import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { NextPage } from "next";
 import Link from "next/link";
-import { router } from "next/client";
+import { useRouter } from "next/router";
 import { FiArrowLeft, FiX } from "react-icons/fi";
 
 import { EMAIL_REGEXP, EMAIL_ERROR_MESSAGE } from "shared-constant";
@@ -17,7 +17,9 @@ import { cssObj } from "./style";
 import { FindPasswordFormValues } from "./type";
 
 const FindPassword: NextPage = () => {
+  const router = useRouter();
   const [didfoundPassword, setDidFoundPassword] = useState<boolean>(false);
+
   const { mutate: postFindPassword } = useFindPassword();
   const {
     register,
