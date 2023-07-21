@@ -142,6 +142,14 @@ const JdUploadPage: NextPage = () => {
     }
   };
 
+  const jobErrorHandler = () => {
+    if (payArr.fields.length === 0 || payArr.fields.every((field) => !field.value || field.value.trim() === "")) {
+      jobForm.setError("pay_arr", {
+        message: "* 급여 정보를 입력해 주세요",
+      });
+    }
+  };
+
   usePreventRouting(
     Boolean(Object.keys(dirtyFields).length) && !isSubmitSuccessful,
     jdUploadExitEvent,
@@ -162,7 +170,7 @@ const JdUploadPage: NextPage = () => {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit(jobSubmitHandler)}>
+    <form onSubmit={handleSubmit(jobSubmitHandler, jobErrorHandler)}>
       <ButtonPart />
       <PageLayout>
         <TitlePart jobForm={jobForm} />

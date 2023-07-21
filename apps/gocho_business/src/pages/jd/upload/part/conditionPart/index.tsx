@@ -94,24 +94,12 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
                   id="afterPass"
                   onClick={() => {
                     payArrCheckboxClickHandler(afterPass, companyDepend, setAfterPass, payArr, "면접 후 결정");
-                    // if (afterPass) {
-                    //   const index = payArr.fields.findIndex((item) => item.value === "면접 후 결정");
-                    //   if (index !== -1) {
-                    //     if (payArr.fields.length !== 1) payArr.remove(index);
-                    //     else setValue("pay_arr", [{ value: "" }]);
-                    //   }
-                    // } else if (companyDepend) {
-                    //   payArr.append({ value: "면접 후 결정" });
-                    // } else {
-                    //   setValue("pay_arr", [{ value: "면접 후 결정" }]);
-                    // }
-                    // setAfterPass((prev) => !prev);
                   }}
                 />
                 <CheckBox isChecked={afterPass} />
                 면접 후 결정
               </label>
-              <p css={commonCssObj.errorMessage}>{errors.pay_arr && `${errors.pay_arr?.message}`}</p>
+              <p css={commonCssObj.errorMessage}>{errors.pay_arr?.message}</p>
             </div>
           </div>
           <div css={commonCssObj.arrayInputContainer}>
@@ -124,19 +112,22 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
                     placeholder="급여 정보를 기재해주세요 (최대 50자)"
                     maxLength={50}
                     disabled={isPayArrDisabled}
-                    onFocus={() => {
-                      clearErrors(`pay_arr.${index}`);
-                    }}
                     {...register(`pay_arr.${index}.value`, {
-                      required: "* 모든 칸이 채워져야 합니다",
                       onBlur: (blurEvent) => {
                         if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                           setValue(`pay_arr.${index}.value`, "");
                         }
-                        trigger(`pay_arr`);
+                        if (
+                          payArr.fields.length === 0 ||
+                          payArr.fields.every((field) => !field.value || field.value.trim() === "")
+                        ) {
+                          setError("pay_arr", {
+                            type: "required",
+                            message: "* 급여 정보를 입력해 주세요",
+                          });
+                        }
                       },
                     })}
-                    autoComplete="off"
                   />
                   {index !== 0 && (
                     <DeleteInputButton

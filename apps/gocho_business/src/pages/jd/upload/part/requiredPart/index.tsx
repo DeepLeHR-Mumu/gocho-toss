@@ -16,8 +16,6 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, re
   const {
     watch,
     setValue,
-    clearErrors,
-    trigger,
     register,
     formState: { errors },
   } = jobForm;
@@ -77,19 +75,13 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, re
                   css={commonCssObj.input(55.5, Boolean(errors.required_etc_arr))}
                   placeholder="예) 군필자, 전공 무관, 운전 가능자 등 (최대 50자)"
                   maxLength={50}
-                  onFocus={() => {
-                    clearErrors(`required_etc_arr.${index}`);
-                  }}
                   {...register(`required_etc_arr.${index}.value`, {
-                    required: "* 모든 칸이 채워져야 합니다",
                     onBlur: (blurEvent) => {
                       if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                         setValue(`required_etc_arr.${index}.value`, "");
                       }
-                      trigger(`required_etc_arr`);
                     },
                   })}
-                  autoComplete="off"
                 />
                 {index !== 0 && (
                   <DeleteInputButton
@@ -126,19 +118,13 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, re
                   css={commonCssObj.input(55.5, Boolean(errors.preferred_etc_arr))}
                   placeholder="예) 인근거주자, 차량소지자 (최대 50자)"
                   maxLength={50}
-                  onFocus={() => {
-                    clearErrors(`preferred_etc_arr.${index}`);
-                  }}
                   {...register(`preferred_etc_arr.${index}.value`, {
-                    required: "* 모든 칸이 채워져야 합니다",
                     onBlur: (blurEvent) => {
                       if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                         setValue(`preferred_etc_arr.${index}.value`, "");
                       }
-                      trigger(`preferred_etc_arr`);
                     },
                   })}
-                  autoComplete="off"
                 />
                 {index !== 0 && (
                   <DeleteInputButton

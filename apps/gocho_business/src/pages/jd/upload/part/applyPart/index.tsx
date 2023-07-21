@@ -27,6 +27,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
     trigger,
     formState: { errors },
     register,
+    setError,
     clearErrors,
   } = jobForm;
 
@@ -115,107 +116,121 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
       </div>
       <div css={commonCssObj.longContainer}>
         <p css={commonCssObj.inputTitle(true)}>채용 절차</p>
-        <div css={commonCssObj.arrayInputContainer}>
-          {processArr.fields.map((item, index) => (
-            <div key={`processArr${item.id}`} css={cssObj.processBox}>
-              <div>
-                <label css={commonCssObj.inputLabel} htmlFor={`processArr${item.id}`}>
+        <div>
+          <div css={commonCssObj.arrayInputContainer}>
+            {processArr.fields.map((item, index) => (
+              <div key={`processArr${item.id}`} css={cssObj.processBox}>
+                <div>
+                  <label css={commonCssObj.inputLabel} htmlFor={`processArr${item.id}`}>
+                    <input
+                      id={`processArr${item.id}`}
+                      css={commonCssObj.input(11.5, Boolean(errors.process_arr))}
+                      placeholder={`${index + 1}차 (최대 20자)`}
+                      maxLength={20}
+                      {...register(`process_arr.${index}.value`, {
+                        onBlur: (blurEvent) => {
+                          if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                            setValue(`process_arr.${index}.value`, "");
+                          }
+                          if (
+                            processArr.fields.length === 0 ||
+                            processArr.fields.every((field) => !field.value || field.value.trim() === "")
+                          ) {
+                            setError("process_arr", {
+                              type: "required",
+                              message: "* 채용절차는 최소 1개 이상 기재해 주세요",
+                            });
+                          }
+                          trigger(`process_arr`);
+                        },
+                      })}
+                    />
+                    {index !== 0 && (
+                      <DeleteInputButton
+                        onClickHandler={() => {
+                          if (processArr.fields.length > 1) processArr.remove(index);
+                        }}
+                      />
+                    )}
+                  </label>
+                  <p css={commonCssObj.errorMessage}>
+                    {errors.process_arr?.[index] && errors.process_arr?.[index]?.value?.message}
+                  </p>
+                </div>
+                {index + 1 !== processArr.fields.length && (
+                  <div css={cssObj.icon}>
+                    <MdOutlineNavigateNext />
+                  </div>
+                )}
+              </div>
+            ))}
+            <div css={cssObj.addButtonWrapper}>
+              {processArr.fields.length < 8 && (
+                <AddFieldButton
+                  onClickHandler={() => {
+                    processArr.append({ value: "" });
+                  }}
+                />
+              )}
+            </div>
+          </div>
+          <p css={commonCssObj.errorMessage}>{errors.process_arr?.message}</p>
+        </div>
+      </div>
+      <div css={commonCssObj.longContainer}>
+        <p css={commonCssObj.inputTitle(true)}>지원 방법</p>
+        <div>
+          <div css={commonCssObj.arrayInputContainer}>
+            {applyRouteArr.fields.map((item, index) => (
+              <div key={`applyRouteArr${item.id}`}>
+                <label css={commonCssObj.inputLabel} htmlFor={`applyRouteArr${item.id}`}>
                   <input
-                    id={`processArr${item.id}`}
-                    css={commonCssObj.input(11.5, Boolean(errors.process_arr))}
-                    placeholder={`${index + 1}차 (최대 20자)`}
+                    id={`applyRouteArr${item.id}`}
+                    css={commonCssObj.input(15, Boolean(errors.apply_route_arr))}
+                    placeholder="지원 방법 (최대 20자)"
                     maxLength={20}
-                    onFocus={() => {
-                      clearErrors(`process_arr.${index}`);
-                    }}
-                    {...register(`process_arr.${index}.value`, {
-                      required: "* 모든 칸이 채워져야 합니다",
+                    {...register(`apply_route_arr.${index}.value`, {
                       onBlur: (blurEvent) => {
                         if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                          setValue(`process_arr.${index}.value`, "");
+                          setValue(`apply_route_arr.${index}.value`, "");
                         }
-                        trigger(`process_arr`);
+                        if (
+                          applyRouteArr.fields.length === 0 ||
+                          applyRouteArr.fields.every((field) => !field.value || field.value.trim() === "")
+                        ) {
+                          setError("apply_route_arr", {
+                            type: "required",
+                            message: "* 지원 방법은 최소 1개 이상 기재해 주세요",
+                          });
+                        }
+                        trigger(`apply_route_arr`);
                       },
                     })}
-                    autoComplete="off"
                   />
                   {index !== 0 && (
                     <DeleteInputButton
                       onClickHandler={() => {
-                        if (processArr.fields.length > 1) processArr.remove(index);
+                        applyRouteArr.remove(index);
                       }}
                     />
                   )}
                 </label>
                 <p css={commonCssObj.errorMessage}>
-                  {errors.process_arr?.[index] && errors.process_arr?.[index]?.value?.message}
+                  {errors.apply_route_arr?.[index] && errors.apply_route_arr?.[index]?.value?.message}
                 </p>
               </div>
-              {index + 1 !== processArr.fields.length && (
-                <div css={cssObj.icon}>
-                  <MdOutlineNavigateNext />
-                </div>
+            ))}
+            <div css={commonCssObj.addButtonWrapper}>
+              {applyRouteArr.fields.length < 15 && (
+                <AddFieldButton
+                  onClickHandler={() => {
+                    applyRouteArr.append({ value: "" });
+                  }}
+                />
               )}
             </div>
-          ))}
-          <div css={cssObj.addButtonWrapper}>
-            {processArr.fields.length < 8 && (
-              <AddFieldButton
-                onClickHandler={() => {
-                  processArr.append({ value: "" });
-                }}
-              />
-            )}
           </div>
-        </div>
-      </div>
-      <div css={commonCssObj.longContainer}>
-        <p css={commonCssObj.inputTitle(true)}>지원 방법</p>
-        <div css={commonCssObj.arrayInputContainer}>
-          {applyRouteArr.fields.map((item, index) => (
-            <div key={`applyRouteArr${item.id}`}>
-              <label css={commonCssObj.inputLabel} htmlFor={`applyRouteArr${item.id}`}>
-                <input
-                  id={`applyRouteArr${item.id}`}
-                  css={commonCssObj.input(15, Boolean(errors.apply_route_arr))}
-                  placeholder="지원 방법 (최대 20자)"
-                  maxLength={20}
-                  onFocus={() => {
-                    clearErrors(`apply_route_arr.${index}`);
-                  }}
-                  {...register(`apply_route_arr.${index}.value`, {
-                    required: "* 모든 칸이 채워져야 합니다",
-                    onBlur: (blurEvent) => {
-                      if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                        setValue(`apply_route_arr.${index}.value`, "");
-                      }
-                      trigger(`apply_route_arr`);
-                    },
-                  })}
-                  autoComplete="off"
-                />
-                {index !== 0 && (
-                  <DeleteInputButton
-                    onClickHandler={() => {
-                      applyRouteArr.remove(index);
-                    }}
-                  />
-                )}
-              </label>
-              <p css={commonCssObj.errorMessage}>
-                {errors.apply_route_arr?.[index] && errors.apply_route_arr?.[index]?.value?.message}
-              </p>
-            </div>
-          ))}
-          <div css={commonCssObj.addButtonWrapper}>
-            {applyRouteArr.fields.length < 15 && (
-              <AddFieldButton
-                onClickHandler={() => {
-                  applyRouteArr.append({ value: "" });
-                }}
-              />
-            )}
-          </div>
+          <p css={commonCssObj.errorMessage}>{errors.apply_route_arr?.message}</p>
         </div>
       </div>
       <div css={commonCssObj.longContainer}>
@@ -260,7 +275,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                     css={commonCssObj.input(47, Boolean(errors.apply_url))}
                     placeholder="https://"
                     {...register("apply_url", {
-                      required: "* 접수 링크는 필수 입력 사항입니다",
+                      required: "* 채용 사이트 링크 또는 이메일을 기입해 주세요",
                       validate: () => true,
                       onBlur: (blurEvent) => {
                         if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
@@ -292,7 +307,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                     css={commonCssObj.input(47, Boolean(errors.apply_url))}
                     placeholder="@"
                     {...register("apply_url", {
-                      required: "* 접수 링크는 필수 입력 사항입니다",
+                      required: "* 채용 사이트 링크 또는 이메일을 기입해 주세요",
                       validate: (value) =>
                         /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || "이메일 형식이 올바르지 않습니다",
                       onBlur: (blurEvent) => {
@@ -319,19 +334,13 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                   css={commonCssObj.input(55.5, Boolean(errors.apply_document_arr))}
                   placeholder="예) 이력서 (최대 20자)"
                   maxLength={20}
-                  onFocus={() => {
-                    clearErrors(`apply_document_arr.${index}`);
-                  }}
                   {...register(`apply_document_arr.${index}.value`, {
-                    required: "* 모든 칸이 채워져야 합니다",
                     onBlur: (blurEvent) => {
                       if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                         setValue(`apply_document_arr.${index}.value`, "");
                       }
-                      trigger(`apply_document_arr`);
                     },
                   })}
-                  autoComplete="off"
                 />
                 {index !== 0 && (
                   <DeleteInputButton
@@ -368,19 +377,13 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                   css={commonCssObj.input(15, Boolean(errors.etc_arr))}
                   placeholder="기타 사항이 있는 경우 기재해 주세요 (최대 50자)"
                   maxLength={50}
-                  onFocus={() => {
-                    clearErrors(`etc_arr.${index}`);
-                  }}
                   {...register(`etc_arr.${index}.value`, {
-                    required: "* 모든 칸이 채워져야 합니다",
                     onBlur: (blurEvent) => {
                       if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                         setValue(`etc_arr.${index}.value`, "");
                       }
-                      trigger(`etc_arr`);
                     },
                   })}
-                  autoComplete="off"
                 />
                 {index !== 0 && (
                   <DeleteInputButton

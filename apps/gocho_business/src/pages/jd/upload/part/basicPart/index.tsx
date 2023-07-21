@@ -167,11 +167,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
                     css={commonCssObj.input(55.5, Boolean(errors.task_detail_arr))}
                     placeholder="합격 시 구체적으로 어떤 일을 하게 되는지 세부 직무 내용을 기재해 주세요 (최대 50자)"
                     maxLength={50}
-                    onFocus={() => {
-                      clearErrors(`task_detail_arr.${index}`);
-                    }}
                     {...register(`task_detail_arr.${index}.value`, {
-                      required: "* 모든 칸이 채워져야 합니다",
                       onBlur: (blurEvent) => {
                         if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                           setValue(`task_detail_arr.${index}.value`, "");
@@ -179,7 +175,6 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
                         trigger(`task_detail_arr`);
                       },
                     })}
-                    autoComplete="off"
                   />
                   {index !== 0 && (
                     <DeleteInputButton
@@ -266,7 +261,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
               value={contractName}
               id={contractName}
               registerObj={register(`contract_type`, {
-                required: "* 계약 형태는 필수 입력입니다",
+                required: "* 계약 형태를 선택해주세요",
                 onChange: () => {
                   if (isConversionActivated) {
                     clearErrors(`conversion_rate`);
@@ -292,7 +287,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
                 max="100"
                 step="1"
                 {...register(`conversion_rate`, {
-                  required: { value: isConversionActivated, message: "* 전환율은 필수 입력입니다" },
+                  required: { value: isConversionActivated, message: "* 전환율를 선택해 주세요" },
                   min: { value: 0, message: "최소값은 1입니다" },
                   max: { value: 100, message: "최대값은 100입니다" },
                   valueAsNumber: true,
@@ -315,7 +310,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
               value={expName}
               id={expName}
               registerObj={register(`required_exp`, {
-                required: "* 경력 조건은 필수 입력입니다",
+                required: "* 경력 조건을 선택해 주세요",
               })}
             >
               <p css={cssObj.radioLabel}>{expName}</p>
