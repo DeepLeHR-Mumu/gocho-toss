@@ -2,7 +2,7 @@ import { CompanyFormValues } from "@/pages/company/edit/type";
 
 export interface CompanyAuthFormValues extends CompanyFormValues {
   certificateOfBusiness: FileList;
-  oneLineIntro: string;
+  intro: string;
   companyLogo: FileList;
   backgroundImage: FileList;
   factory: {

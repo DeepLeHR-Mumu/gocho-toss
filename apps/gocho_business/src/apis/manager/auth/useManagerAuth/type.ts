@@ -9,6 +9,7 @@ export interface RequestObjDef {
   logo?: File;
   backgroundImage?: File;
   dto?: {
+    industry: string;
     employee_number: number;
     location: {
       address: string;
@@ -16,6 +17,8 @@ export interface RequestObjDef {
       y: number;
     };
     intro: string;
+    size: string;
+    found_date: string;
     welfare: {
       money: string[] | null;
       health: string[] | null;

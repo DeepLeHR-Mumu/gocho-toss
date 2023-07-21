@@ -141,7 +141,7 @@ export const AuthStatePart: FunctionComponent<AuthStatePartProps> = ({ onClick }
             <div css={cssObj.line} />
           </div>
           <div css={cssObj.footerContainer}>
-            <button type="button" css={cssObj.authButton} onClick={onClick}>
+            <button type="button" disabled={authName === "인증대기"} css={cssObj.authButton} onClick={onClick}>
               기업 인증하기
             </button>
           </div>

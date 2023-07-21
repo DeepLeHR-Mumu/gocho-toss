@@ -234,5 +234,11 @@ export const cssObj = {
     color: ${NEWCOLORS.WHITE};
     margin-top: 3rem;
     margin-bottom: 1.25rem;
+
+    &:disabled {
+      background-color: ${NEWCOLORS.GRAY200};
+      color: ${NEWCOLORS.GRAY300};
+      cursor: not-allowed;
+    }
   `,
 };
