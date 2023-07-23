@@ -4,11 +4,11 @@ import { FiEdit3, FiMinus, FiPlus, FiHelpCircle } from "react-icons/fi";
 // import { useDeleteFactory } from "@/apis";
 // import { factoryDeleteConfirmEvent, factoryDeleteDoneEvent } from "@/ga";
 
-import { AuthFactoryAddModal, Tooltip } from "../../../component";
+import { FactoryAddModal, Tooltip } from "../../../component";
 import { AuthFactoryPartProps, Factory } from "./type";
 import { cssObj } from "./style";
 
-export const AuthFactoryPart: FunctionComponent<AuthFactoryPartProps> = ({ companyAuthForm }) => {
+export const FactoryPart: FunctionComponent<AuthFactoryPartProps> = ({ companyAuthForm }) => {
   const [tooltip, setTooltip] = useState(false);
   const [modal, setModal] = useState<{ state: boolean; modifyIndex: number | null }>({
     state: false,
@@ -91,7 +91,7 @@ export const AuthFactoryPart: FunctionComponent<AuthFactoryPartProps> = ({ compa
         </div>
       </section>
       {modal.state && (
-        <AuthFactoryAddModal
+        <FactoryAddModal
           defaultFactory={modal.modifyIndex !== null ? factories[modal.modifyIndex] : null}
           cancel={() => setModal({ state: false, modifyIndex: null })}
           add={(newFactory) => {

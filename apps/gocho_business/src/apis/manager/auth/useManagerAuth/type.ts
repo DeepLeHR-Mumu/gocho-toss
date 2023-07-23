@@ -1,7 +1,7 @@
 import { UseMutationResult } from "@tanstack/react-query";
 import { AxiosResponse, AxiosError } from "axios";
 
-import { Factory } from "@/pages/company/auth/part/applyAuthPart/authFactoryPart/type";
+import { Factory } from "@/pages/company/auth/part/applyAuthPart/factoryPart/type";
 
 export interface RequestObjDef {
   managerId: number;

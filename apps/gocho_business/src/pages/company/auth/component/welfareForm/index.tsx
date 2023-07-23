@@ -3,11 +3,11 @@ import { FiMinus } from "react-icons/fi";
 
 import { commonCssObj } from "@/styles";
 
-import { AuthAddFieldButton } from "../authAddFieldButton";
+import { AddFieldButton } from "../addFieldButton";
 import { AuthWelfareFormProps } from "./type";
 import { cssObj } from "./style";
 
-export const AuthWelfareForm: FunctionComponent<AuthWelfareFormProps> = ({
+export const WelfareForm: FunctionComponent<AuthWelfareFormProps> = ({
   title,
   desc,
   welfareValueArr,
@@ -61,7 +61,7 @@ export const AuthWelfareForm: FunctionComponent<AuthWelfareFormProps> = ({
   };
 
   return (
-    <div css={cssObj.welFareWrapper} data-testid="company/edit/welfareForm">
+    <div css={cssObj.welFareWrapper}>
       <strong css={commonCssObj.optionalInputTitle(true)}>{title}</strong>
       <div css={cssObj.inputContainer}>
         <div css={cssObj.inputLabel}>
@@ -78,7 +78,7 @@ export const AuthWelfareForm: FunctionComponent<AuthWelfareFormProps> = ({
               }
             }}
           />
-          <AuthAddFieldButton
+          <AddFieldButton
             state={false}
             onClickHandler={() => addValueHandler(inputRef.current?.value || "")}
             text="추가"

@@ -1,4 +1,4 @@
-export { AuthWelfareForm } from "./authWelfareForm";
-export { AuthAddFieldButton } from "./authAddFieldButton";
-export { AuthFactoryAddModal } from "./authFactoryAddModal";
+export { WelfareForm } from "./welfareForm";
+export { AddFieldButton } from "./addFieldButton";
+export { FactoryAddModal } from "./factoryAddModal";
 export { Tooltip } from "./tooltip";

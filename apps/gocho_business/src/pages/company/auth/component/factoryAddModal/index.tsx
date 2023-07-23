@@ -16,7 +16,7 @@ import { ModalComponent } from "@/components/global/modal/modalBackground";
 import { cssObj } from "./style";
 import { AuthFactoryAddModalProps, FactoryRegisterFormValues } from "./type";
 
-export const AuthFactoryAddModal: FunctionComponent<AuthFactoryAddModalProps> = ({
+export const FactoryAddModal: FunctionComponent<AuthFactoryAddModalProps> = ({
   defaultFactory,
   add,
   cancel,

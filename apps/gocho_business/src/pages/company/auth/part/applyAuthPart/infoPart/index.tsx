@@ -6,7 +6,7 @@ import useFileNameSyncWithForm from "../../useFileNameSyncWithForm";
 import { AuthInfoPartProps } from "./type";
 import { cssObj } from "./style";
 
-export const AuthInfoPart: FunctionComponent<AuthInfoPartProps> = ({ companyAuthForm, companyDetailData }) => {
+export const InfoPart: FunctionComponent<AuthInfoPartProps> = ({ companyAuthForm, companyDetailData }) => {
   const { register } = companyAuthForm;
 
   const { name: certFileName } = useFileNameSyncWithForm(companyAuthForm, "certificateOfBusiness", {

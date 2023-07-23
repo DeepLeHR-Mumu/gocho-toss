@@ -18,7 +18,7 @@ declare global {
   }
 }
 
-export const AuthBasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthForm, isOtherEdit }) => {
+export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthForm, isOtherEdit }) => {
   const [isIndustryOpen, setIsIndustryOpen] = useState<boolean>(false);
   const [isSizeOpen, setIsSizeOpen] = useState<boolean>(false);
 

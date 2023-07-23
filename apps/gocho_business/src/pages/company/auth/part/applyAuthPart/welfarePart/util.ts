@@ -1,6 +1,6 @@
 import { Entries } from "@/types";
 
-import { AuthWelfareFormProps, WelfareKey } from "../../../component/authWelfareForm/type";
+import { AuthWelfareFormProps, WelfareKey } from "../../../component/welfareForm/type";
 import { WELFARE_DESC_OBJ } from "./constant";
 import { PostWelfareSubmitValues } from "./type";
 

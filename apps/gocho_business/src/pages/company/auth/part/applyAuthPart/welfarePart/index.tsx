@@ -4,17 +4,17 @@ import { commonCssObj } from "@/styles";
 
 import { Entries } from "@/types";
 
-import { AuthWelfareForm, AuthAddFieldButton } from "../../../component";
+import { WelfareForm, AddFieldButton } from "../../../component";
 import { WELFARE_DESC_OBJ } from "./constant";
 import { welfareArrCreator } from "./util";
 import { WelfareKey, PostWelfareSubmitValues, AuthWelfarePartProps } from "./type";
 import { cssObj } from "./style";
 
-export const AuthWelfarePart: FunctionComponent<AuthWelfarePartProps> = ({ companyAuthForm, companyData }) => {
+export const WelfarePart: FunctionComponent<AuthWelfarePartProps> = ({ companyAuthForm, companyData }) => {
   const welfareBtnInfoRef = useRef(Object.entries(WELFARE_DESC_OBJ) as Entries<typeof WELFARE_DESC_OBJ>);
 
-  const { welfareArr: initialWelfares } = welfareArrCreator(companyData.welfare);
-  const [welfareArr, setWelfareArr] = useState(initialWelfares);
+  const { welfareArr: initialWelfareArr } = welfareArrCreator(companyData.welfare);
+  const [welfareArr, setWelfareArr] = useState(initialWelfareArr);
 
   const welfareBtnHandler = (key: keyof PostWelfareSubmitValues) => {
     const isExist = welfareArr.findIndex((welfare) => welfare.registerKey === `welfare.${key}`) !== -1;
@@ -41,7 +41,7 @@ export const AuthWelfarePart: FunctionComponent<AuthWelfarePartProps> = ({ compa
   };
 
   return (
-    <section css={commonCssObj.partContainer} data-testid="company/edit/AuthWelfarePart">
+    <section css={commonCssObj.partContainer}>
       <h3 css={commonCssObj.partTitle}>상세 복지 정보</h3>
       <div css={cssObj.welfareButtonContainer}>
         {welfareBtnInfoRef.current.map((welfareBtnInfo) => {
@@ -49,7 +49,7 @@ export const AuthWelfarePart: FunctionComponent<AuthWelfarePartProps> = ({ compa
           const buttonState = welfareArr.findIndex((welfare) => welfare.registerKey === `welfare.${key}`) !== -1;
 
           return (
-            <AuthAddFieldButton
+            <AddFieldButton
               key={`welfareAddButton${key}`}
               state={buttonState}
               onClickHandler={() => welfareBtnHandler(key)}
@@ -60,7 +60,7 @@ export const AuthWelfarePart: FunctionComponent<AuthWelfarePartProps> = ({ compa
       </div>
       <div>
         {welfareArr.map((welfare) => (
-          <AuthWelfareForm
+          <WelfareForm
             key={welfare.title}
             title={welfare.title}
             desc={welfare.desc}

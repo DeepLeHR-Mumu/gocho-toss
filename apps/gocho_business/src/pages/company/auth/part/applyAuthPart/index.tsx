@@ -9,10 +9,10 @@ import { RequestObjDef as AuthRequestObjDef } from "@/apis/manager/auth/useManag
 import { ConfirmModal } from "@/components/global/modal/confirmModal";
 import { INTERNAL_URL } from "@/constants";
 
-import { AuthInfoPart } from "./authInfoPart";
-import { AuthBasicPart } from "./authBasicPart";
-import { AuthFactoryPart } from "./authFactoryPart";
-import { AuthWelfarePart } from "./authWelfarePart";
+import { InfoPart } from "./infoPart";
+import { BasicPart } from "./basicPart";
+import { FactoryPart } from "./factoryPart";
+import { WelfarePart } from "./welfarePart";
 import { RegistrationPart } from "./registrationPart";
 
 import { CompanyAuthFormValues } from "./type";
@@ -89,16 +89,16 @@ export const ApplyAuthPart: FunctionComponent = () => {
     <>
       <div css={cssObj.partContainer}>
         <form>
-          <AuthInfoPart companyAuthForm={companyAuthForm} companyDetailData={companyDetailData} />
+          <InfoPart companyAuthForm={companyAuthForm} companyDetailData={companyDetailData} />
           {userInfoData.status.isFirst && (
             <>
               <RegistrationPart companyAuthForm={companyAuthForm} />
-              <AuthBasicPart companyAuthForm={companyAuthForm} isOtherEdit={false} />
-              <AuthWelfarePart
+              <BasicPart companyAuthForm={companyAuthForm} isOtherEdit={false} />
+              <WelfarePart
                 companyAuthForm={companyAuthForm}
                 companyData={{ welfare: null, uploader: { isMine: true } }}
               />
-              <AuthFactoryPart companyAuthForm={companyAuthForm} />
+              <FactoryPart companyAuthForm={companyAuthForm} />
             </>
           )}
           <div css={cssObj.footerContainer}>
