@@ -4,8 +4,8 @@ import { FiPlus } from "react-icons/fi";
 import { AddFieldButtonProps } from "./type";
 import { cssObj } from "./style";
 
-export const AddFieldButton: FunctionComponent<AddFieldButtonProps> = ({ onClickHandler, text }) => (
-  <button type="button" css={cssObj.addFieldButton} onClick={onClickHandler}>
+export const AddFieldButton: FunctionComponent<AddFieldButtonProps> = ({ onClickHandler, text, state }) => (
+  <button type="button" css={cssObj.addFieldButton(state)} onClick={onClickHandler}>
     <FiPlus />
     {text}
   </button>

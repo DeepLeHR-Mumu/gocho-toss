@@ -78,7 +78,11 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
               }
             }}
           />
-          <AddFieldButton onClickHandler={() => addValueHandler(inputRef.current?.value || "")} text="추가" />
+          <AddFieldButton
+            onClickHandler={() => addValueHandler(inputRef.current?.value || "")}
+            state={false}
+            text="추가"
+          />
         </div>
         <div>
           {welfareArr && (
