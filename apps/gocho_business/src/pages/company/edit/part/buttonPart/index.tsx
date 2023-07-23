@@ -1,13 +1,18 @@
 import { FunctionComponent } from "react";
 
+import { NewSharedButton } from "shared-ui/common/newSharedButton";
 import { cssObj } from "./style";
+import { ButtonPartProps } from "./type";
 
-export const ButtonPart: FunctionComponent = () => (
+export const ButtonPart: FunctionComponent<ButtonPartProps> = ({ disabled }) => (
   <section css={cssObj.headerContainer}>
     <div css={cssObj.buttonContainer}>
-      <button type="submit" css={cssObj.submitButton}>
-        수정 요청
-      </button>
+      <NewSharedButton
+        buttonType={disabled ? "disabled" : "fillBlue"}
+        width={8.75}
+        text="수정 요청"
+        onClickHandler="submit"
+      />
     </div>
   </section>
 );

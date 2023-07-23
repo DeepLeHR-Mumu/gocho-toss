@@ -25,9 +25,26 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
   const openPostCodePopup = useDaumPostcodePopup();
 
   const onClickAddress = () => {
+    const mapScript = document.createElement("script");
+
+    mapScript.async = true;
+    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=0687bed33c060c4758f582d26ff44e16&libraries=services&libraries=services&autoload=false`;
+    document.head.appendChild(mapScript);
+
     openPostCodePopup({
       onComplete: (addressObj: Address) => {
         setValue("location.address", addressObj.address, { shouldDirty: true });
+        window.kakao.maps.load(() => {
+          const geocoder = new window.kakao.maps.services.Geocoder();
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          geocoder.addressSearch(addressObj.address, (result: any, status: any) => {
+            if (status === window.kakao.maps.services.Status.OK) {
+              const { x, y } = result[0];
+              setValue("location.x", x);
+              setValue("location.y", y);
+            }
+          });
+        });
       },
     });
   };
@@ -39,7 +56,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
         <input
           css={cssObj.hiddenInput}
           {...register("industry", {
-            required: "* asdf",
+            required: "* 업종을 입력해주세요.",
           })}
         />
         <strong css={commonCssObj.inputTitle(false)}>업종</strong>
@@ -77,7 +94,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
         <input
           css={cssObj.hiddenInput}
           {...register("size", {
-            required: "* asdf",
+            required: "* 기업 규모를 입력해주세요.",
           })}
         />
         <strong css={commonCssObj.inputTitle(false)}>기업 규모</strong>
@@ -116,9 +133,8 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
         <input
           css={commonCssObj.input(12.5, false)}
           type="date"
-          // onFocus={() => {}}
           {...register("found_date", {
-            required: "* 공고 시작 날짜를 선택해 주세요",
+            required: "* 설립일을 입력해주세요.",
           })}
         />
       </div>
@@ -130,7 +146,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
             disabled
             {...register("location.address", { required: true })}
             placeholder="좌측 버튼을 눌러 기업 주소를 입력해주세요"
-            css={commonCssObj.input(38, true)}
+            css={commonCssObj.input(38, false)}
           />
           <button type="button" onClick={onClickAddress} css={cssObj.addAddressButton}>
             주소찾기
@@ -147,7 +163,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
               event.currentTarget.blur();
             }}
             {...register("employee_number", {
-              required: true,
+              required: "* 사원수를 입력해주세요.",
               min: 1,
               pattern: NUMBER_REGEXP,
               disabled: isOtherEdit,
@@ -163,7 +179,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
             type="number"
             css={commonCssObj.input(7.5, isOtherEdit)}
             {...register("pay_start", {
-              required: true,
+              required: "* 평균 초봉을 입력해주세요.",
               min: 1000,
               pattern: {
                 value: NUMBER_REGEXP,
@@ -189,7 +205,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
             type="number"
             css={commonCssObj.input(7.5, isOtherEdit)}
             {...register("pay_avg", {
-              required: true,
+              required: "* 평균 연봉을 입력해주세요.",
               min: 1000,
               pattern: NUMBER_REGEXP,
               disabled: isOtherEdit,

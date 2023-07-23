@@ -42,13 +42,15 @@ const CompanyEditPage: NextPage = () => {
     formState: { submitCount, dirtyFields, isDirty },
   } = companyForm;
 
+  const isFormDirty = !isDirty && !bgImage && !logo;
+
   usePreventRouting(Boolean(Object.keys(dirtyFields).length));
 
   const addCompanyDetail = (formData: CompanyFormValues) => {
     companyEditConfirmEvent();
     isRefetching.current = true;
     companyDetailRefetch().then((response) => {
-      if (!isDirty && !bgImage && !logo) {
+      if (isFormDirty) {
         window.alert("변경사항이 없습니다.");
         return;
       }
@@ -179,7 +181,7 @@ const CompanyEditPage: NextPage = () => {
     <>
       <PageHead />
       <form onSubmit={handleSubmit(addCompanyDetail)}>
-        <ButtonPart />
+        <ButtonPart disabled={isFormDirty} />
         <PageLayout>
           <div css={cssObj.contentWrapper}>
             <CompanySideNav />

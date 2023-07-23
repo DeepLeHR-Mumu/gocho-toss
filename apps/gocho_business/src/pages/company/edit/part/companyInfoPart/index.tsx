@@ -140,7 +140,7 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({
         <input
           type="text"
           {...register("intro", {
-            required: true,
+            required: "* 한 줄 소개를 입력해주세요.",
             maxLength: {
               value: 120,
               message: "최대 길이는 120자입니다",
@@ -153,7 +153,7 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({
             },
           })}
           placeholder="한 줄로 기업을 소개해주세요"
-          css={commonCssObj.input(41, !companyData.uploader.isMine)}
+          css={commonCssObj.input(41, Boolean(errors.intro))}
         />
         <p>{errors.intro?.message}</p>
       </div>
