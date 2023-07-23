@@ -109,8 +109,8 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
                   <input
                     id={`payArr${item.id}`}
                     css={commonCssObj.input(55.5, Boolean(errors.pay_arr))}
-                    placeholder="급여 정보를 기재해주세요 (최대 50자)"
-                    maxLength={50}
+                    placeholder="급여 정보를 기재해주세요 (최대 30자)"
+                    maxLength={30}
                     disabled={isPayArrDisabled}
                     {...register(`pay_arr.${index}.value`, {
                       onBlur: (blurEvent) => {

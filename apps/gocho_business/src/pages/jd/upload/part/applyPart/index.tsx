@@ -42,6 +42,17 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
     setValue(`apply_url`, "");
     clearErrors("apply_url");
   };
+  //
+  // useEffect(() => {
+  //   if (watch("process_arr").every((field) => !field.value || field.value.trim() === "")) {
+  //     setError("process_arr", {
+  //       type: "required",
+  //       message: "* 채용절차는 최소 1개 이상 기재해 주세요",
+  //     });
+  //   } else {
+  //     clearErrors("process_arr");
+  //   }
+  // }, [watch, setError, clearErrors]);
 
   return (
     <section css={commonCssObj.partContainer}>
@@ -133,15 +144,16 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                             setValue(`process_arr.${index}.value`, "");
                           }
                           if (
-                            processArr.fields.length === 0 ||
-                            processArr.fields.every((field) => !field.value || field.value.trim() === "")
+                            watch("process_arr").length === 0 ||
+                            watch("process_arr").every((field) => field.value.trim().length === 0)
                           ) {
                             setError("process_arr", {
                               type: "required",
                               message: "* 채용절차는 최소 1개 이상 기재해 주세요",
                             });
+                          } else {
+                            clearErrors("process_arr");
                           }
-                          trigger(`process_arr`);
                         },
                       })}
                     />
@@ -174,7 +186,9 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
               )}
             </div>
           </div>
-          <p css={commonCssObj.errorMessage}>{errors.process_arr?.message}</p>
+          <div css={cssObj.errorMessageWrapper}>
+            <p css={commonCssObj.errorMessage}>{errors.process_arr?.message}</p>
+          </div>
         </div>
       </div>
       <div css={commonCssObj.longContainer}>
@@ -195,15 +209,16 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                           setValue(`apply_route_arr.${index}.value`, "");
                         }
                         if (
-                          applyRouteArr.fields.length === 0 ||
-                          applyRouteArr.fields.every((field) => !field.value || field.value.trim() === "")
+                          watch("apply_route_arr").length === 0 ||
+                          watch("apply_route_arr").every((field) => field.value.trim().length === 0)
                         ) {
                           setError("apply_route_arr", {
                             type: "required",
-                            message: "* 지원 방법은 최소 1개 이상 기재해 주세요",
+                            message: "* 채용절차는 최소 1개 이상 기재해 주세요",
                           });
+                        } else {
+                          clearErrors("apply_route_arr");
                         }
-                        trigger(`apply_route_arr`);
                       },
                     })}
                   />
@@ -230,7 +245,9 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
               )}
             </div>
           </div>
-          <p css={commonCssObj.errorMessage}>{errors.apply_route_arr?.message}</p>
+          <div css={cssObj.errorMessageWrapper}>
+            <p css={commonCssObj.errorMessage}>{errors.apply_route_arr?.message}</p>
+          </div>
         </div>
       </div>
       <div css={commonCssObj.longContainer}>
