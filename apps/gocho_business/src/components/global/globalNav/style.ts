@@ -79,6 +79,16 @@ export const cssObj = {
     }
   `,
 
+  redDot: css`
+    width: 3px;
+    height: 3px;
+    background-color: ${NEWCOLORS.RED200};
+    border-radius: 50%;
+    position: absolute;
+    top: 1rem;
+    left: 0;
+  `,
+
   alarmMenu: css`
     position: absolute;
     top: 4.25rem;

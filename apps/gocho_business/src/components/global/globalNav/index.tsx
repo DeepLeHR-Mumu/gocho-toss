@@ -8,6 +8,7 @@ import Link from "next/link";
 import bizTextMono from "@/public/image/deepleLogo/bizTextMono.svg";
 import { useAlarmArr, useDoLogout, useManagerProfile, useReadAlarm } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
+import { alarmCategoryToLink } from "@/pages/alarm/list/util";
 
 import { JD_LINK_ARR, COMPANY_LINK_ARR, USER_LINK_ARR } from "./constant";
 import { cssObj } from "./style";
@@ -92,16 +93,20 @@ export const GlobalNav: FunctionComponent = () => {
               profileMenuHandler("alarm");
             }}
           >
+            {/* TODO 테스트 해봐야 함. */}
+            {alarmArrObj?.alarmDataArr.findIndex((alarm) => !alarm.isRead) !== -1 && <div css={cssObj.redDot} />}
             <FiBell />
           </button>
           {isAlarmActive && (
             <div css={cssObj.alarmMenu}>
               {alarmArrObj?.alarmDataArr.map((alarm) => (
                 <>
-                  <div key={`alarm${alarm.id}`} css={cssObj.alarmContainer}>
-                    <p css={cssObj.infoType(alarm.isRead)}>{alarm.category}</p>
-                    <strong css={cssObj.infoTitle(alarm.isRead)}>{alarm.description}</strong>
-                  </div>
+                  <Link href={alarmCategoryToLink(alarm.category)}>
+                    <div key={`alarm${alarm.id}`} css={cssObj.alarmContainer}>
+                      <p css={cssObj.infoType(alarm.isRead)}>{alarm.category}</p>
+                      <strong css={cssObj.infoTitle(alarm.isRead)}>{alarm.description}</strong>
+                    </div>
+                  </Link>
                   <div css={cssObj.contour} />
                 </>
               ))}
