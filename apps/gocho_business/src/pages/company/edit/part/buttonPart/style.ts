@@ -11,7 +11,7 @@ export const cssObj = {
     align-items: center;
     background-color: ${NEWCOLORS.WHITE};
     height: 5rem;
-    z-index: 30;
+    z-index: 50;
     box-shadow: 0 2px 10px 0 #00000008;
   `,
 

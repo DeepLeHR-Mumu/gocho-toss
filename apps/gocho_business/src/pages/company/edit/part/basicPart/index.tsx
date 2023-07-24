@@ -252,7 +252,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
           <strong css={commonCssObj.inputTitle(false)}>노조</strong>
         </div>
         <div>
-          <div css={commonCssObj.labelContainer}>
+          <div css={cssObj.nozoLabelContainer}>
             <SharedRadioButton
               registerObj={register("nozo.exists", { disabled: isOtherEdit, required: true })}
               isDisabled={isOtherEdit}

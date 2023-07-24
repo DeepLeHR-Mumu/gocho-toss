@@ -46,6 +46,14 @@ export const cssObj = {
     height: 2.25rem;
   `,
 
+  nozoLabelContainer: css`
+    display: flex;
+    align-items: center;
+    height: 2.25rem;
+    gap: 0 2.5rem;
+    margin-bottom: 1rem;
+  `,
+
   radioLabel: css`
     margin-left: 0.5rem;
   `,

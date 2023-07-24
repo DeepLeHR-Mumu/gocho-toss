@@ -164,12 +164,6 @@ export const globalStyle = css`
     :focus {
       outline: none;
     }
-    :focus-visible {
-      outline-color: ${COLORS.BLUE_FIRST40};
-      outline-offset: 0.3rem;
-      outline-style: solid;
-      outline-width: 3px;
-    }
   }
   input,
   select,
@@ -189,12 +183,6 @@ export const globalStyle = css`
 
     :focus {
       outline: none;
-    }
-    :focus-visible {
-      outline-color: ${COLORS.BLUE_FIRST40};
-      outline-offset: 0.3rem;
-      outline-style: solid;
-      outline-width: 3px;
     }
   }
   input[type="checkbox"],
