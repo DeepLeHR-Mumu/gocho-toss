@@ -8,7 +8,8 @@ import { cssObj } from "./style";
 export const EtcSideNav: FunctionComponent = () => {
   const router = useRouter();
   const { pathname } = router;
-  const menuUrl = pathname.split("/").join("/");
+  const menuUrl = pathname.split("/")[1];
+  console.log(menuUrl);
 
   return (
     <div css={cssObj.sideNavContainer}>

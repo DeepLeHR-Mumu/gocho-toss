@@ -48,8 +48,13 @@ export const cssObj = {
     }
   `,
 
-  content: css`
+  contentWrapper: css`
     max-height: 50vh;
     overflow-y: scroll;
+  `,
+
+  text: css`
+    ${TEXTS.BODY4};
+    color: ${NEWCOLORS.BLUEGRAY400};
   `,
 };

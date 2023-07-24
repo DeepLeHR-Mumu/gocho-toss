@@ -24,7 +24,16 @@ export const PrivacyTermModal: FunctionComponent = () => {
             <FiX />
           </button>
         </div>
-        <p css={cssObj.content}>{PRIVACY_TERM}</p>
+        <div css={cssObj.contentWrapper}>
+          {PRIVACY_TERM.split("\n").map((str) => (
+            <>
+              <p key={str} css={cssObj.text}>
+                {str}
+              </p>
+              {str === "" && <br />}
+            </>
+          ))}
+        </div>
       </div>
     </ModalComponent>
   );

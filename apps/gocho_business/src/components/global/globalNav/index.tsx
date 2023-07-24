@@ -69,9 +69,9 @@ export const GlobalNav: FunctionComponent = () => {
     <header css={cssObj.headerWrapper(isManagerLogin)}>
       <div css={cssObj.headerContainer}>
         <div css={cssObj.defaultMenuContainer}>
-          <h1 css={cssObj.logo}>
+          <Link href={INTERNAL_URL.HOME} passHref css={cssObj.logo}>
             <Image src={bizTextMono} alt="고초대졸닷컴 비즈니스" fill />
-          </h1>
+          </Link>
           <nav css={cssObj.navWrapper}>
             {JD_LINK_ARR.map((linkObj) => (
               <Link
@@ -99,17 +99,24 @@ export const GlobalNav: FunctionComponent = () => {
           </button>
           {isAlarmActive && (
             <div css={cssObj.alarmMenu}>
-              {alarmArrObj?.alarmDataArr.map((alarm) => (
-                <>
-                  <Link href={alarmCategoryToLink(alarm.category)}>
-                    <div key={`alarm${alarm.id}`} css={cssObj.alarmContainer}>
-                      <p css={cssObj.infoType(alarm.isRead)}>{alarm.category}</p>
-                      <strong css={cssObj.infoTitle(alarm.isRead)}>{alarm.description}</strong>
-                    </div>
-                  </Link>
-                  <div css={cssObj.contour} />
-                </>
-              ))}
+              {alarmArrObj?.alarmDataArr.length === 0 ? (
+                alarmArrObj?.alarmDataArr.map((alarm) => (
+                  <>
+                    <Link href={alarmCategoryToLink(alarm.category)}>
+                      <div key={`alarm${alarm.id}`} css={cssObj.alarmContainer}>
+                        <p css={cssObj.infoType(alarm.isRead)}>{alarm.category}</p>
+                        <strong css={cssObj.infoTitle(alarm.isRead)}>{alarm.description}</strong>
+                      </div>
+                    </Link>
+                    <div css={cssObj.contour} />
+                  </>
+                ))
+              ) : (
+                <p css={cssObj.noAlarmDesc}>
+                  수신한 알림이 없습니다. <br />
+                  받은 알림은 90일 후 자동 삭제됩니다.
+                </p>
+              )}
             </div>
           )}
         </div>

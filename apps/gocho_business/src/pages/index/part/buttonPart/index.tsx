@@ -1,7 +1,9 @@
 import { FunctionComponent } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 import { INTERNAL_URL } from "@/constants";
+import homeJdUpload from "@/public/image/home_jdUpload_button.svg";
 
 import { cssObj } from "./style";
 
@@ -14,6 +16,9 @@ export const ButtonPart: FunctionComponent = () => (
         <br />
         뛰어난 인재를 채용해 보세요!
       </p>
+      <div css={cssObj.jdUploadImageBox}>
+        <Image src={homeJdUpload} alt="공고 등록하기 버튼" fill />
+      </div>
     </Link>
     <Link css={cssObj.linkButton("white")} passHref href={INTERNAL_URL.HELP}>
       <h3 css={cssObj.uploadTitle("blue")}>고객센터</h3>

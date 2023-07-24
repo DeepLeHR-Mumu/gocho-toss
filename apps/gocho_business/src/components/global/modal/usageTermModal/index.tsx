@@ -25,7 +25,16 @@ export const UsageTermModal: FunctionComponent = () => {
             <FiX />
           </button>
         </div>
-        <p css={cssObj.content}>{USAGE_TERM}</p>
+        <div css={cssObj.contentWrapper}>
+          {USAGE_TERM.split("\n").map((str) => (
+            <>
+              <p key={str} css={cssObj.text}>
+                {str}
+              </p>
+              {str === "" && <br />}
+            </>
+          ))}
+        </div>
       </div>
     </ModalComponent>
   );

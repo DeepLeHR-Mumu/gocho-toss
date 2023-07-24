@@ -124,6 +124,16 @@ export const cssObj = {
     border-bottom: 1px solid ${NEWCOLORS.GRAY200};
   `,
 
+  noAlarmDesc: css`
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    ${TEXTS.TITLE4};
+    color: ${NEWCOLORS.BLUEGRAY400};
+  `,
+
   profileButton: css`
     display: flex;
     padding: 1rem 0;

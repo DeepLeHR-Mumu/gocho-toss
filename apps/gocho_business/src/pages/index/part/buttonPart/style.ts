@@ -10,6 +10,7 @@ export const cssObj = {
   `,
 
   linkButton: (bgColor: string) => css`
+    position: relative;
     display: block;
     width: 50%;
     height: 8.5rem;
@@ -36,6 +37,18 @@ export const cssObj = {
     ${TEXTS.BODY4};
     color: ${textColor === "blue" ? `${NEWCOLORS.BLUE250}` : `${NEWCOLORS.WHITE}`};
     margin-bottom: 0.5rem;
+  `,
+
+  jdUploadImageBox: css`
+    position: absolute;
+    top: 0.2rem;
+    right: 2rem;
+    width: 7.5rem;
+    height: 9rem;
+    margin-right: 0.5rem;
+    > img {
+      object-fit: contain;
+    }
   `,
 
   helpDesc: css`
