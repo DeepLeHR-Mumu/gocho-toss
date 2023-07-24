@@ -16,8 +16,8 @@ import { INTERNAL_URL } from "@/constants";
 import { loginPageFunnelEvent, loginSuccessEvent, signupButtonClickEvent } from "@/ga";
 import { commonCssObj } from "@/styles";
 import bizTextColor from "@/public/image/deepleLogo/bizTextColor.svg";
-import homeBg1 from "@/public/image/home_bg_1.png";
-import homeBg2 from "@/public/image/home_bg_2.png";
+import homeBg1 from "@/public/image/home_bg_1.svg";
+import homeBg2 from "@/public/image/home_bg_2.svg";
 
 import { LOGIN_ERROR_MESSAGES } from "./constant";
 import { PageHead } from "./pageHead";

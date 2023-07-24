@@ -92,6 +92,7 @@ export const cssObj = {
     justify-content: space-between;
     padding: 0.875rem 1.5rem;
     background-color: ${NEWCOLORS.GRAY50};
+    height: 4.625rem;
   `,
 
   bottomInfoContainer: css`

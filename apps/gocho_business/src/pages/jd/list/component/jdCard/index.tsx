@@ -81,22 +81,25 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
     }
   };
 
+  const jdDateMaker = () => {
+    if (jd.cut) return `${dayjs(jd.startTime).format("YYYY.MM.DD")}~채용 시 마감`;
+    if (dayjs(jd.endTime).year() === 9999) return `${dayjs(jd.startTime).format("YYYY.MM.DD")}~상시채용`;
+    return `${dayjs(jd.startTime).format("YYYY.MM.DD")}~${dayjs(jd.endTime).format("YYYY.MM.DD")}`;
+  };
+
   return (
     <div css={cssObj.cardContainer}>
       <div css={cssObj.topContainer}>
         <div>
           <CommonStatusChip status={jd.status.name} isExpired={isExpired} />
           <strong css={cssObj.title}>{jd.title}</strong>
-          <div>{jd.cut && <p css={cssObj.date}>채용시 마감</p>}</div>
           <div css={cssObj.infoContainer}>
             <div css={cssObj.infoBox}>
               <p css={cssObj.info}>식별번호</p>
               <p css={cssObj.info}>{jd.id}</p>
             </div>
             <div css={cssObj.infoBox}>
-              <p css={cssObj.info}>{`${dayjs(jd.startTime).format("YYYY.MM.DD")}~${dayjs(jd.endTime).format(
-                "YYYY.MM.DD"
-              )}`}</p>
+              <p css={cssObj.info}>{jdDateMaker()}</p>
             </div>
             {jd.updatedTime ? (
               <div css={cssObj.infoBox}>
