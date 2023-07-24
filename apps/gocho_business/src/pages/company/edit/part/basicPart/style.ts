@@ -15,6 +15,17 @@ export const cssObj = {
     gap: 0 1.25rem;
   `,
 
+  inputWrapper: css`
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0 1rem;
+  `,
+
+  errorMessageWrapper: css`
+    margin-left: 2rem;
+  `,
+
   addAddressButton: css`
     display: flex;
     border: 1px solid ${NEWCOLORS.GRAY200};
@@ -23,13 +34,6 @@ export const cssObj = {
     padding: 1rem 2rem;
     background-color: ${NEWCOLORS.WHITE};
     ${TEXTS.TITLE4};
-  `,
-
-  inputWrapper: css`
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 0 1rem;
   `,
 
   hiddenInput: css`

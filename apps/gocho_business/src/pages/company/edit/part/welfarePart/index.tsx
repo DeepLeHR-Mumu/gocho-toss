@@ -47,13 +47,13 @@ export const WelfarePart: FunctionComponent<WelfarePartProps> = ({ companyForm, 
         {welfareButtonInfoRef.current.map((welfareButton) => {
           const [key, obj] = welfareButton;
           const buttonState = welfareArr.findIndex((welfare) => welfare.registerKey === `welfare.${key}`) !== -1;
-
           return (
             <AddFieldButton
               key={`welfareAddButton${key}`}
               state={buttonState}
               onClickHandler={() => welfareButtonHandler(key)}
               text={obj.name}
+              disabled={!companyData.uploader.isMine}
             />
           );
         })}

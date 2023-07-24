@@ -16,5 +16,9 @@ export const cssObj = {
     > svg {
       color: ${NEWCOLORS.GRAY300};
     }
+
+    :disabled {
+      background-color: ${NEWCOLORS.GRAY100};
+    }
   `,
 };

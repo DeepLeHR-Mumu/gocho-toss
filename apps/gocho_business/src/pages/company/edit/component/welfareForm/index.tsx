@@ -71,7 +71,7 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
             disabled={isMine}
             maxLength={50}
             placeholder={desc}
-            css={cssObj.welfareInput(false)}
+            css={cssObj.welfareInput(isMine)}
             onKeyUp={(onKeyEvent) => {
               if (onKeyEvent.key === "Enter") {
                 addValueHandler(inputRef.current?.value || "");
@@ -91,7 +91,7 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
                 const key = `${title}_${data}${index}`;
                 return (
                   <div key={key} css={cssObj.inputLabel}>
-                    <p css={cssObj.welfareInput(false)}>{data}</p>
+                    <p css={cssObj.welfareInput(isMine)}>{data}</p>
                     <button
                       disabled={isMine}
                       type="button"

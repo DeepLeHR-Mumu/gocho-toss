@@ -7,7 +7,6 @@ export const cssObj = {
   partContainer: css`
     position: relative;
     background-color: ${NEWCOLORS.WHITE};
-    margin-top: 1.25rem;
     border: 1px solid ${NEWCOLORS.GRAY200};
     border-radius: 1rem;
     box-shadow: 0 2px 16px 0 #0000000d;
@@ -114,5 +113,11 @@ export const cssObj = {
       margin-left: 0.5rem;
       color: ${NEWCOLORS.BLUEGRAY500};
     }
+  `,
+
+  inputWrapper: css`
+    display: flex;
+    align-items: center;
+    gap: 2rem;
   `,
 };

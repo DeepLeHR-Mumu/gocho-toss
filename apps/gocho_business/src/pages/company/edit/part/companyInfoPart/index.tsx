@@ -65,6 +65,7 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({
   };
 
   const countFormat = new Intl.NumberFormat("ko", { notation: "compact", compactDisplay: "long" });
+  const isOtherEdit = !companyData.uploader.isMine;
 
   return (
     <section css={cssObj.partContainer} data-testid="company/edit/CompanyInfoPart">
@@ -77,12 +78,14 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({
             id="bgImg"
             accept="image/png, image/gif, image/jpeg, image/jpg"
             onChange={(changeEvent) => uploadImageHandler(changeEvent, setBgImage, setBgImagePreview)}
+            disabled={isOtherEdit}
           />
         </label>
         <button
           type="button"
           css={cssObj.imageUploadLabel(1, 1.25)}
           onClick={() => deleteImageHandler(setBgImage, setBgImagePreview)}
+          disabled={isOtherEdit}
         >
           <FiX />
         </button>
@@ -100,13 +103,14 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({
         {logoPreview ? (
           <button
             type="button"
-            css={cssObj.imageUploadLabel(9.75, 50.5)}
+            css={cssObj.imageUploadLabel(9.25, 50.5)}
             onClick={() => deleteImageHandler(setLogo, setLogoPreview)}
+            disabled={isOtherEdit}
           >
             <FiX />
           </button>
         ) : (
-          <label htmlFor="logoImg" css={cssObj.imageUploadLabel(9.75, 50.5)}>
+          <label htmlFor="logoImg" css={cssObj.imageUploadLabel(9.25, 50.5)}>
             <FiEdit3 />
             <input
               css={cssObj.imageUploadInput}
@@ -114,6 +118,7 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({
               id="logoImg"
               accept="image/png, image/gif, image/jpeg, image/jpg"
               onChange={(changeEvent) => uploadImageHandler(changeEvent, setLogo, setLogoPreview)}
+              disabled={isOtherEdit}
             />
           </label>
         )}
@@ -137,25 +142,27 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({
             사업자 번호<span>{companyData.businessNumber}</span>
           </p>
         </div>
-        <input
-          type="text"
-          {...register("intro", {
-            required: "* 한 줄 소개를 입력해주세요.",
-            maxLength: {
-              value: 120,
-              message: "최대 길이는 120자입니다",
-            },
-            disabled: !companyData.uploader.isMine,
-            onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
-              if (onBlurEvent.target.value.trim().length === 0) {
-                setValue("intro", "");
-              }
-            },
-          })}
-          placeholder="한 줄로 기업을 소개해주세요"
-          css={commonCssObj.input(41, Boolean(errors.intro))}
-        />
-        <p>{errors.intro?.message}</p>
+        <div css={cssObj.inputWrapper}>
+          <input
+            type="text"
+            {...register("intro", {
+              required: "* 한 줄 소개를 입력해주세요.",
+              maxLength: {
+                value: 120,
+                message: "최대 길이는 120자입니다",
+              },
+              disabled: isOtherEdit,
+              onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
+                if (onBlurEvent.target.value.trim().length === 0) {
+                  setValue("intro", "");
+                }
+              },
+            })}
+            placeholder="한 줄로 기업을 소개해주세요"
+            css={commonCssObj.input(41, Boolean(errors.intro))}
+          />
+          <p css={commonCssObj.errorMessage}>{errors.intro?.message}</p>
+        </div>
       </div>
     </section>
   );

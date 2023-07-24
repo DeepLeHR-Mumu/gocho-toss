@@ -80,6 +80,10 @@ export const cssObj = {
       ${TEXTS.TITLE5};
       color: ${NEWCOLORS.GRAY300};
     }
+
+    :disabled {
+      background-color: ${NEWCOLORS.GRAY100};
+    }
   `,
 
   deleteButton: css`

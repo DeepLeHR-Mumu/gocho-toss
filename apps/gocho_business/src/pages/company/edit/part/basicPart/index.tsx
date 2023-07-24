@@ -62,11 +62,12 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
         <strong css={commonCssObj.inputTitle(false)}>업종</strong>
         <div css={cssObj.inputWrapper}>
           <button
-            css={commonCssObj.select(17, false)}
+            css={commonCssObj.select(17, Boolean(errors.industry))}
             type="button"
             onClick={() => {
               setIsIndustryOpen((prev) => !prev);
             }}
+            disabled={isOtherEdit}
           >
             {watch("industry")}
             {isIndustryOpen ? <FiChevronUp /> : <FiChevronDown />}
@@ -88,7 +89,6 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
             ))}
           </div>
         </div>
-        <p css={commonCssObj.errorMessage}>{errors.pay_start?.message}</p>
       </div>
       <div css={commonCssObj.container}>
         <input
@@ -100,11 +100,12 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
         <strong css={commonCssObj.inputTitle(false)}>기업 규모</strong>
         <div css={cssObj.inputWrapper}>
           <button
-            css={commonCssObj.select(17, false)}
+            css={commonCssObj.select(17, Boolean(errors.size))}
             type="button"
             onClick={() => {
               setIsSizeOpen((prev) => !prev);
             }}
+            disabled={isOtherEdit}
           >
             {watch("size")}
             {isSizeOpen ? <FiChevronUp /> : <FiChevronDown />}
@@ -126,17 +127,20 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
             ))}
           </div>
         </div>
-        <p css={commonCssObj.errorMessage}>{errors.pay_start?.message}</p>
       </div>
       <div css={commonCssObj.container}>
         <strong css={commonCssObj.inputTitle(false)}>설립일</strong>
         <input
-          css={commonCssObj.input(12.5, false)}
+          css={commonCssObj.input(12.5, Boolean(errors.found_date))}
           type="date"
           {...register("found_date", {
             required: "* 설립일을 입력해주세요.",
           })}
+          disabled={isOtherEdit}
         />
+        <div css={cssObj.errorMessageWrapper}>
+          <p css={commonCssObj.errorMessage}>{errors.found_date?.message}</p>
+        </div>
       </div>
       <div css={commonCssObj.container}>
         <strong css={commonCssObj.inputTitle(false)}>주소</strong>
@@ -158,7 +162,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
         <div css={cssObj.inputWrapper}>
           <input
             type="number"
-            css={commonCssObj.input(7.5, isOtherEdit)}
+            css={commonCssObj.input(7.5, Boolean(errors.employee_number))}
             onWheel={(event) => {
               event.currentTarget.blur();
             }}
@@ -168,8 +172,12 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
               pattern: NUMBER_REGEXP,
               disabled: isOtherEdit,
             })}
+            disabled={isOtherEdit}
           />
           <p>명</p>
+        </div>
+        <div css={cssObj.errorMessageWrapper}>
+          <p css={commonCssObj.errorMessage}>{errors.employee_number?.message}</p>
         </div>
       </div>
       <div css={commonCssObj.container}>
@@ -177,7 +185,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
         <div css={cssObj.inputWrapper}>
           <input
             type="number"
-            css={commonCssObj.input(7.5, isOtherEdit)}
+            css={commonCssObj.input(7.5, Boolean(errors.pay_start))}
             {...register("pay_start", {
               required: "* 평균 초봉을 입력해주세요.",
               min: 1000,
@@ -186,45 +194,43 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
                 message: ONLY_INT_ERROR_TEXT,
               },
               disabled: isOtherEdit,
-              onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
-                if (Number(onBlurEvent.target.value) <= 999) {
-                  window.alert("월급이 아닌 연봉 기준입니다. 입력하신 정보가 맞나요?");
-                }
-              },
             })}
             placeholder="숫자만 입력해주세요"
+            disabled={isOtherEdit}
           />
           <p>만원</p>
         </div>
-        <p css={commonCssObj.errorMessage}>{errors.pay_start?.message}</p>
+        <div css={cssObj.errorMessageWrapper}>
+          <p css={commonCssObj.errorMessage}>{errors.pay_start?.message}</p>
+        </div>
       </div>
       <div css={commonCssObj.container}>
         <strong css={commonCssObj.inputTitle(false)}>평균 연봉</strong>
         <div css={cssObj.inputWrapper}>
           <input
             type="number"
-            css={commonCssObj.input(7.5, isOtherEdit)}
+            css={commonCssObj.input(7.5, Boolean(errors.pay_avg))}
             {...register("pay_avg", {
               required: "* 평균 연봉을 입력해주세요.",
               min: 1000,
               pattern: NUMBER_REGEXP,
               disabled: isOtherEdit,
-              onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
-                if (Number(onBlurEvent.target.value) <= 999) {
-                  window.alert("월급이 아닌 연봉 기준입니다. 입력하신 정보가 맞나요?");
-                }
-              },
             })}
             placeholder="숫자만 입력해주세요"
+            disabled={isOtherEdit}
           />
           <p>만원</p>
         </div>
-        <p css={commonCssObj.errorMessage}>{errors.pay_avg?.message}</p>
+        <div css={cssObj.errorMessageWrapper}>
+          <p css={commonCssObj.errorMessage}>{errors.pay_avg?.message}</p>
+        </div>
       </div>
       <div css={commonCssObj.container}>
-        <strong css={commonCssObj.inputTitle(false)}>기타 연봉 정보</strong>
+        <strong css={commonCssObj.optionalInputTitle(false)}>기타 연봉 정보</strong>
         <input
           type="text"
+          css={commonCssObj.input(30, Boolean(errors.pay_desc))}
+          maxLength={120}
           {...register("pay_desc", {
             maxLength: {
               value: 120,
@@ -238,9 +244,8 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
             },
           })}
           placeholder="상여금, 성과급 등의 정보를 적어주세요"
-          css={commonCssObj.input(30, isOtherEdit)}
+          disabled={isOtherEdit}
         />
-        <p css={commonCssObj.errorMessage}>{errors.pay_desc?.message}</p>
       </div>
       <div css={commonCssObj.longContainer}>
         <div css={cssObj.titleWrapper}>
@@ -249,7 +254,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
         <div>
           <div css={commonCssObj.labelContainer}>
             <SharedRadioButton
-              registerObj={register("nozo.exists", { required: true })}
+              registerObj={register("nozo.exists", { disabled: isOtherEdit, required: true })}
               isDisabled={isOtherEdit}
               value="true"
               id="nozoTrue"
@@ -267,6 +272,8 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
           </div>
           <input
             type="text"
+            maxLength={70}
+            css={commonCssObj.input(47, Boolean(errors.nozo?.desc))}
             {...register("nozo.desc", {
               maxLength: {
                 value: 70,
@@ -280,9 +287,11 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
               },
             })}
             placeholder="보충설명(선택)"
-            css={commonCssObj.input(47, isOtherEdit)}
+            disabled={isOtherEdit}
           />
-          <p css={commonCssObj.errorMessage}>{errors.nozo?.desc?.message}</p>
+          <div css={cssObj.errorMessageWrapper}>
+            <p css={commonCssObj.errorMessage}>{errors.nozo?.desc?.message}</p>
+          </div>
         </div>
       </div>
     </section>
