@@ -1,1 +1,2 @@
-export const getFieldArrayValue = (arrData: { value: string }[]) => arrData.map((item) => item.value);
+export const getFieldArrayValue = (arrData: { value: string }[]) =>
+  arrData.filter((item) => item.value.trim() !== "").map((item) => item.value);

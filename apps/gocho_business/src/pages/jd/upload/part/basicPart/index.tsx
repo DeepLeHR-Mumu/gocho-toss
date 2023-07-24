@@ -235,6 +235,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
                 명
               </>
             )}
+            <p css={commonCssObj.errorMessage}>{errors.hire_number && errors.hire_number?.message}</p>
           </div>
           <div css={cssObj.hireNumberContainer}>
             <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-1, "0")}>
@@ -247,9 +248,6 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
               000명
             </button>
           </div>
-        </div>
-        <div css={cssObj.errorMessageWrapper}>
-          <p css={commonCssObj.errorMessage}>{errors.hire_number && errors.hire_number?.message}</p>
         </div>
       </div>
       <div css={commonCssObj.container}>
@@ -287,9 +285,9 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
                 max="100"
                 step="1"
                 {...register(`conversion_rate`, {
-                  required: { value: isConversionActivated, message: "* 전환율를 선택해 주세요" },
-                  min: { value: 0, message: "최소값은 1입니다" },
-                  max: { value: 100, message: "최대값은 100입니다" },
+                  required: { value: isConversionActivated, message: "* 전환율을 입력해 주세요" },
+                  min: { value: 0, message: "* 최소값은 1입니다" },
+                  max: { value: 100, message: "* 최대값은 100입니다" },
                   valueAsNumber: true,
                   disabled: !isConversionActivated,
                   onChange: (e) => conversionRateHandler(e, isConversionActivated),
@@ -297,9 +295,9 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
               />
               %
             </div>
+            <p css={commonCssObj.errorMessage}>{errors.conversion_rate && errors.conversion_rate?.message}</p>
           </>
         )}
-        <p css={commonCssObj.errorMessage}>{errors.conversion_rate && errors.conversion_rate?.message}</p>
       </div>
       <div css={commonCssObj.container}>
         <p css={commonCssObj.inputTitle(false)}>경력 조건</p>
@@ -321,7 +319,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
         {isYearActivated && (
           <>
             <div css={cssObj.borderLine} />
-            <div>
+            <div css={cssObj.yearInputWrapper}>
               <div css={cssObj.optionalInputContainer}>
                 <p>최소경력</p>
                 <input
@@ -330,18 +328,19 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
                   max="50"
                   css={cssObj.optionalInput}
                   {...register(`min_year`, {
-                    required: "* 최소 경력은 필수 입력입니다",
-                    min: { value: 1, message: "최소 경력은 1년 이상이어야 합니다" },
-                    max: { value: 50, message: "최소 경력은 50년 이하이어야 합니다" },
+                    min: { value: 1, message: "* 최소 경력은 1년 이상이어야 합니다" },
+                    max: { value: 50, message: "* 최소 경력은 50년 이하이어야 합니다" },
                     onBlur: () => trigger(`max_year`),
                     valueAsNumber: true,
                   })}
                 />
                 년
               </div>
-              <p css={commonCssObj.errorMessage}>{errors.min_year && errors.min_year?.message}</p>
+              <div css={cssObj.errorMessageWrapper}>
+                <p css={commonCssObj.errorMessage}>{errors.min_year && errors.min_year?.message}</p>
+              </div>
             </div>
-            <div>
+            <div css={cssObj.yearInputWrapper}>
               <div css={cssObj.optionalInputContainer}>
                 <p>최대경력</p>
                 <input
@@ -350,16 +349,17 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
                   max="100"
                   css={cssObj.optionalInput}
                   {...register(`max_year`, {
-                    required: "* 최대 경력은 필수 입력입니다",
-                    max: { value: 50, message: "최소 경력은 50년 이하이어야 합니다" },
+                    max: { value: 50, message: "* 최대 경력은 50년 이하이어야 합니다" },
                     validate: (value) =>
-                      (value || 1) > (watch("min_year") || 0) || "최소 경력 조건이 최대보다 작거나 같을 수 없습니다.",
+                      (value || 1) > (watch("min_year") || 0) || "* 최소 경력 조건이 최대보다 작거나 같을 수 없습니다.",
                     valueAsNumber: true,
                   })}
                 />
                 년
               </div>
-              <p css={commonCssObj.errorMessage}>{errors.max_year && errors.max_year?.message}</p>
+              <div css={cssObj.errorMessageWrapper}>
+                <p css={commonCssObj.errorMessage}>{errors.max_year && errors.max_year?.message}</p>
+              </div>
             </div>
           </>
         )}

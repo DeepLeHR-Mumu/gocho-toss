@@ -43,6 +43,7 @@ const JdUploadPage: NextPage = () => {
   const {
     control,
     handleSubmit,
+    watch,
     formState: { submitCount, dirtyFields, isSubmitSuccessful },
   } = jobForm;
 
@@ -142,12 +143,18 @@ const JdUploadPage: NextPage = () => {
     }
   };
 
-  const jobErrorHandler = () => {
-    if (payArr.fields.length === 0 || payArr.fields.every((field) => !field.value || field.value.trim() === "")) {
-      jobForm.setError("pay_arr", {
-        message: "* 급여 정보를 입력해 주세요",
+  const setFieldErrorIfEmpty = (fieldName: "pay_arr" | "process_arr" | "apply_route_arr", errorMessage: string) => {
+    if (watch(fieldName).length === 0 || watch(fieldName).every((field) => !field.value || field.value.trim() === "")) {
+      jobForm.setError(fieldName, {
+        message: errorMessage,
       });
     }
+  };
+
+  const jobErrorHandler = () => {
+    setFieldErrorIfEmpty("pay_arr", "* 급여 정보를 입력해 주세요");
+    setFieldErrorIfEmpty("process_arr", "* 채용절차는 최소 1개 이상 기재해 주세요");
+    setFieldErrorIfEmpty("apply_route_arr", "* 지원 경로는 최소 1개 이상 기재해 주세요");
   };
 
   usePreventRouting(

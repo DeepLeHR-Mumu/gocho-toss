@@ -42,17 +42,6 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
     setValue(`apply_url`, "");
     clearErrors("apply_url");
   };
-  //
-  // useEffect(() => {
-  //   if (watch("process_arr").every((field) => !field.value || field.value.trim() === "")) {
-  //     setError("process_arr", {
-  //       type: "required",
-  //       message: "* 채용절차는 최소 1개 이상 기재해 주세요",
-  //     });
-  //   } else {
-  //     clearErrors("process_arr");
-  //   }
-  // }, [watch, setError, clearErrors]);
 
   return (
     <section css={commonCssObj.partContainer}>

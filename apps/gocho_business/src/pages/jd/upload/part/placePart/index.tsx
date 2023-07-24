@@ -1,14 +1,13 @@
 import { FunctionComponent } from "react";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
-import { FiPlus, FiEdit3, FiMinus } from "react-icons/fi";
+import { FiPlus, FiEdit3 } from "react-icons/fi";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
-import { useDeleteFactory, useFactoryArr } from "@/apis";
+import { useFactoryArr } from "@/apis";
 import { commonCssObj } from "@/styles";
 
 import { useModal } from "@/globalStates";
-import { factoryDeleteConfirmEvent, factoryDeleteDoneEvent } from "@/ga";
 import { AddFieldButton, DeleteInputButton } from "../../component";
 import { PositionWorkInfoPartProps } from "./type";
 import { PLACE_TYPE_ARR } from "./constant";
@@ -28,23 +27,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
 
   const openPostCodePopup = useDaumPostcodePopup();
 
-  // TODO: factories/find로 변경하기, params 추가
   const { data: factoryDataObj } = useFactoryArr();
-  const { mutate: deleteFactoryMutation } = useDeleteFactory();
-
-  const deleteFactoryHandler = (factoryId: number) => {
-    factoryDeleteConfirmEvent();
-    if (window.confirm("공장을 삭제하시겠습니까?")) {
-      deleteFactoryMutation(
-        { factoryId },
-        {
-          onSuccess: () => {
-            factoryDeleteDoneEvent();
-          },
-        }
-      );
-    }
-  };
 
   const factoryClickHandler = (factory: number) => {
     const totalNumber = (watch("place").factory_arr?.length || 0) + (watch("place").address_arr?.length || 0);
@@ -137,14 +120,6 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                         }}
                       >
                         <FiEdit3 />
-                      </button>
-                      <button
-                        type="button"
-                        aria-label={`공장${factory.name}삭제하기`}
-                        css={cssObj.deleteButton}
-                        onClick={() => deleteFactoryHandler(factory.id)}
-                      >
-                        <FiMinus />
                       </button>
                     </div>
                   </div>

@@ -79,13 +79,6 @@ export const cssObj = {
     border-radius: 0.5rem;
   `,
 
-  errorMessageWrapper: css`
-    display: flex;
-    height: 3.25rem;
-    margin-left: -3rem;
-    align-items: center;
-  `,
-
   radioLabel: css`
     margin-left: 0.25rem;
   `,
@@ -93,13 +86,14 @@ export const cssObj = {
   borderLine: css`
     height: 1.25rem;
     border-left: 1px solid ${NEWCOLORS.GRAY200};
-    margin: 0 1rem;
+    margin-right: 1rem;
   `,
 
   optionalInputContainer: css`
     display: flex;
     align-items: center;
-    padding-left: 0.5rem;
+    padding-left: 1rem;
+    margin-right: 1rem;
   `,
 
   optionalInput: css`
@@ -112,5 +106,15 @@ export const cssObj = {
     padding: 0.5rem 0.875rem;
     font-weight: 400;
     ${TEXTS.TITLE4};
+  `,
+
+  yearInputWrapper: css`
+    position: relative;
+  `,
+
+  errorMessageWrapper: css`
+    position: absolute;
+    margin-top: 0.25rem;
+    left: 1rem;
   `,
 };

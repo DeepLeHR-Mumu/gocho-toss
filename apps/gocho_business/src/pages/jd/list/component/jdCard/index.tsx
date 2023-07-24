@@ -32,7 +32,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
   const isEditOn =
     jd.uploader.is_mine && !isExpired && (jd.status.name === "진행중" || jd.status.name.includes("반려"));
   const isCopyOn = jd.uploader.is_mine && (isExpired || jd.status.name === "진행중");
-  const isEndOn = jd.uploader.is_mine && !isExpired;
+  const isEndOn = jd.uploader.is_mine && !isExpired && jd.status.name === "진행중";
   const isDeleteOn = jd.uploader.is_mine;
 
   const endJdHandler = (id: number) => {

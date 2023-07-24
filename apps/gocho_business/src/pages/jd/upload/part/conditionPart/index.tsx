@@ -62,7 +62,9 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
     } else {
       setValue("pay_arr", [{ value: text }]);
     }
+
     setCurrentCheck((prev) => !prev);
+    clearErrors("pay_arr");
   };
 
   const isPayArrDisabled = companyDepend || afterPass;
@@ -118,18 +120,20 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
                           setValue(`pay_arr.${index}.value`, "");
                         }
                         if (
-                          payArr.fields.length === 0 ||
-                          payArr.fields.every((field) => !field.value || field.value.trim() === "")
+                          watch("pay_arr").length === 0 ||
+                          watch("pay_arr").every((field) => !field.value || field.value.trim() === "")
                         ) {
                           setError("pay_arr", {
                             type: "required",
                             message: "* 급여 정보를 입력해 주세요",
                           });
+                        } else {
+                          clearErrors("pay_arr");
                         }
                       },
                     })}
                   />
-                  {index !== 0 && (
+                  {index !== 0 && !isPayArrDisabled && (
                     <DeleteInputButton
                       onClickHandler={() => {
                         payArr.remove(index);
@@ -143,7 +147,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
               </div>
             ))}
             <div css={commonCssObj.addButtonWrapper}>
-              {payArr.fields.length < 15 && (
+              {payArr.fields.length < 15 && !isPayArrDisabled && (
                 <AddFieldButton
                   onClickHandler={() => {
                     payArr.append({ value: "" });
