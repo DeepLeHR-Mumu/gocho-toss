@@ -1,7 +1,5 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
-
 export const globalStyle = css`
   * {
     box-sizing: border-box;

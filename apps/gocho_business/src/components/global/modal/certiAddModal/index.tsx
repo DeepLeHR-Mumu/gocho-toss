@@ -46,6 +46,8 @@ export const CertiAddModal: FunctionComponent = () => {
 
   useFocusTrap(modalRef);
 
+  const certiSearchResultArr = CERTI_ARR.filter((prevCerti) => prevCerti.includes(searchWord));
+
   return (
     <ModalComponent>
       <div css={cssObj.modalContainer} ref={modalRef} tabIndex={-1}>
@@ -66,19 +68,23 @@ export const CertiAddModal: FunctionComponent = () => {
             }}
           />
           <div css={commonCssObj.optionList(searchWord !== "", 6.5)}>
-            {CERTI_ARR.filter((prevCerti) => prevCerti.includes(searchWord)).map((certi) => (
-              <button
-                type="button"
-                key={`CertiAddModal${certi}`}
-                onClick={() => {
-                  addCertiHandler(certi);
-                  setSearchWord("");
-                }}
-                css={cssObj.addCertiButton}
-              >
-                {certi}
-              </button>
-            ))}
+            {certiSearchResultArr.length === 0 ? (
+              <p css={cssObj.noCertiSearchDesc}>자격증 검색 결과가 없습니다.</p>
+            ) : (
+              certiSearchResultArr.map((certi) => (
+                <button
+                  type="button"
+                  key={`CertiAddModal${certi}`}
+                  onClick={() => {
+                    addCertiHandler(certi);
+                    setSearchWord("");
+                  }}
+                  css={cssObj.addCertiButton}
+                >
+                  {certi}
+                </button>
+              ))
+            )}
           </div>
         </div>
         <div css={cssObj.selectedCertiWrapper}>

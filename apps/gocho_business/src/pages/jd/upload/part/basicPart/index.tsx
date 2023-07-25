@@ -33,12 +33,17 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
 
   const subTaskClickHandler = (subTask: string) => {
     const isInList = watch("task_sub_arr")?.includes(subTask);
+    const isSubtaskNone = subTask === "없음";
+    let currentSubTasks = watch("task_sub_arr") || [];
     clearErrors(`task_main`);
+
     if (isInList) {
-      setValue(`task_sub_arr`, [...(watch("task_sub_arr")?.filter((element) => element !== subTask) || [])]);
+      currentSubTasks = isSubtaskNone ? [] : currentSubTasks.filter((element) => element !== subTask);
     } else {
-      setValue(`task_sub_arr`, [...(watch("task_sub_arr") || []), subTask]);
+      currentSubTasks = isSubtaskNone ? [subTask] : [...currentSubTasks, subTask];
     }
+
+    setValue(`task_sub_arr`, currentSubTasks);
   };
 
   const hireNumberClickHandler = (value: number, label: string) => {
@@ -67,6 +72,8 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
       });
     }
   };
+
+  const isSubTaskNone = watch("task_sub_arr")?.includes("없음");
 
   const isConversionActivated = watch("contract_type") === "인턴" || watch("contract_type") === "계약>정규";
   const isYearActivated = watch("required_exp") === "경력" || watch("required_exp") === "신입/경력";
@@ -149,6 +156,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
                       mouseEvent.preventDefault();
                       subTaskClickHandler(subTask);
                     }}
+                    disabled={subTask !== "없음" && isSubTaskNone}
                   >
                     <CheckBox isChecked={watch("task_sub_arr")?.includes(subTask) || false} />
                     {subTask}

@@ -11,7 +11,6 @@ export const cssObj = {
     transform: translate(-50%, -50%);
     z-index: 80;
     width: 50rem;
-    //height: auto;
     padding: 2rem;
     background-color: ${NEWCOLORS.WHITE};
     border-radius: 1rem;
@@ -53,6 +52,15 @@ export const cssObj = {
 
   inputWrapper: css`
     position: relative;
+  `,
+
+  noCertiSearchDesc: css`
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    ${TEXTS.BODY3};
+    color: ${NEWCOLORS.BLUEGRAY400};
   `,
 
   addCertiButton: css`

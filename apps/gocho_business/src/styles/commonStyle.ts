@@ -87,15 +87,16 @@ export const commonCssObj = {
     border-radius: 0.5rem;
     max-height: ${isOpen ? `${maxHeight}rem` : 0};
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     z-index: 20;
     background-color: ${NEWCOLORS.WHITE};
     border: ${isOpen ? `1px solid ${COLORS.GRAY30}` : 0};
 
     ::-webkit-scrollbar {
-      padding: 0.125rem;
+      padding: 0.25rem 0;
       width: 0.5rem;
       background-color: ${COLORS.GRAY90};
+      border-radius: 1rem;
     }
 
     ::-webkit-scrollbar-thumb {
