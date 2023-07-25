@@ -8,7 +8,7 @@ import { PostAuthRejectDef, RequestObjDef, useAuthRejectProps } from "./type";
 
 export const postAuthReject: PostAuthRejectDef = async (requestObj) => {
   const { data } = await axiosInstance.post(`/managers/${requestObj.managerId}/requests/auth-reject`, {
-    data: { reason: requestObj.reason },
+    reason: requestObj.reason,
   });
   return data;
 };
