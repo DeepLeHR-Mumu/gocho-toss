@@ -35,6 +35,7 @@ export const ApplyAuthPart: FunctionComponent = () => {
   const {
     handleSubmit: handleSubmitCompanyForm,
     formState: { isValid },
+    getValues,
   } = companyAuthForm;
 
   if (!companyDetailData || !userInfoData) {
@@ -102,7 +103,16 @@ export const ApplyAuthPart: FunctionComponent = () => {
             </>
           )}
           <div css={cssObj.footerContainer}>
-            <button type="button" disabled={!isValid} css={cssObj.submitButton} onClick={() => setConfirmModal(true)}>
+            <button
+              type="button"
+              disabled={
+                (userInfoData.status.isFirst
+                  ? getValues("certificateOfBusiness") === undefined || getValues("companyLogo") === undefined
+                  : getValues("certificateOfBusiness")) === undefined || !isValid
+              }
+              css={cssObj.submitButton}
+              onClick={() => setConfirmModal(true)}
+            >
               제출하기
             </button>
           </div>
