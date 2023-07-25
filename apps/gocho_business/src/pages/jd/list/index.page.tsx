@@ -4,9 +4,9 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { Spinner } from "shared-ui/common/atom/spinner";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
+import { useModal } from "@/globalStates";
 import { useJdArr, useManagerProfile } from "@/apis";
 import { PageLayout, Pagination } from "@/components";
 import { INTERNAL_URL } from "@/constants";
@@ -18,6 +18,8 @@ import { OrderDef, FilterDef, SearchValues } from "./type";
 import { cssObj } from "./style";
 
 const JdListPage: NextPage = () => {
+  const { setModal } = useModal();
+
   const router = useRouter();
   const [isOrderContainerOpen, setIsOrderContainerOpen] = useState<boolean>(false);
   const [isMine, setIsMine] = useState<boolean | null>(null);
@@ -58,6 +60,10 @@ const JdListPage: NextPage = () => {
   };
 
   useEffect(() => {
+    if (userInfoData && userInfoData.status.name !== "인증완료") setModal("companyAuthModal");
+  }, [setModal, userInfoData]);
+
+  useEffect(() => {
     jdListPageFunnelEvent();
   }, []);
 
@@ -66,14 +72,6 @@ const JdListPage: NextPage = () => {
       router.replace({ pathname: INTERNAL_URL.JD_LIST, query: { page: 1, order: "recent" } });
     }
   }, [router]);
-
-  if (!jdDataObj) {
-    return (
-      <div css={cssObj.spinner}>
-        <Spinner />
-      </div>
-    );
-  }
 
   const isAuth = userInfoData?.status.name === "인증완료";
 
@@ -141,12 +139,12 @@ const JdListPage: NextPage = () => {
         </div>
         <div css={cssObj.cardListContainer}>
           {isAuth ? (
-            jdDataObj.jdDataArr.map((jd) => <JdCard key={`BusinessJdCard${jd.id}`} jd={jd} />)
+            jdDataObj?.jdDataArr.map((jd) => <JdCard key={`BusinessJdCard${jd.id}`} jd={jd} />)
           ) : (
             <p css={cssObj.noAuthJdCard}>기업 인증 후 공고 조희 및 등록이 가능합니다.</p>
           )}
         </div>
-        <Pagination totalPage={jdDataObj.pageResult.totalPages} url={INTERNAL_URL.JD_LIST} />
+        <Pagination totalPage={jdDataObj ? jdDataObj.pageResult.totalPages : 0} url={INTERNAL_URL.JD_LIST} />
       </div>
     </PageLayout>
   );

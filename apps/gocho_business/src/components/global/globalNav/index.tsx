@@ -143,11 +143,17 @@ export const GlobalNav: FunctionComponent = () => {
                   <p css={cssObj.industry}>{userInfoData.company.industry}</p>
                 </div>
               </div>
-              {COMPANY_LINK_ARR.map((linkObj) => (
-                <Link href={linkObj.url} key={`navBar${linkObj.name}`} css={cssObj.companyMenuLink} passHref>
-                  {linkObj.name}
+              {userInfoData.status.name !== "인증완료" ? (
+                <Link href={INTERNAL_URL.COMPANY_AUTH} css={cssObj.companyMenuLink} passHref>
+                  기업 회원 인증
                 </Link>
-              ))}
+              ) : (
+                COMPANY_LINK_ARR.map((linkObj) => (
+                  <Link href={linkObj.url} key={`navBar${linkObj.name}`} css={cssObj.companyMenuLink} passHref>
+                    {linkObj.name}
+                  </Link>
+                ))
+              )}
             </div>
           )}
         </div>
