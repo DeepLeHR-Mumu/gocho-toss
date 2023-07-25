@@ -1,10 +1,11 @@
 import { ReactElement, useState } from "react";
 import { useRouter } from "next/router";
 
-import { GlobalLayout, ModalComponent } from "@/component";
+import { GlobalLayout, LoadingScreen, ModalComponent, Pagination } from "@/component";
 import { NextPageWithLayout } from "@/types";
 import { mainContainer, pageTitle } from "@/style";
 import { useManagerArr, useAuthAccept, useAuthReject } from "@/api";
+import { INTERNAL_URL } from "@/constant";
 
 import { cssObj } from "./style";
 
@@ -16,13 +17,27 @@ const BusinessAuthList: NextPageWithLayout = () => {
     reason: "",
   });
 
-  const { data: managerDataObj } = useManagerArr({ status: "all", size: 6, page: Number(router.query.page) });
+  const {
+    data: managerDataObj,
+    isLoading,
+    refetch: refetchManagerArr,
+  } = useManagerArr({
+    status: "all",
+    size: 6,
+    page: Number(router.query.page),
+  });
   const { mutate: authAcceptMutate } = useAuthAccept();
   const { mutate: authRejectMutate } = useAuthReject();
 
   const accept = (managerId: number) => {
     if (window.confirm("정말 승인하시겠습니까?")) {
-      authAcceptMutate({ managerId }, { onSuccess: () => window.alert("성공"), onError: () => window.alert("실패") });
+      authAcceptMutate(
+        { managerId },
+        {
+          onSuccess: () => refetchManagerArr(),
+          onError: () => window.alert("실패"),
+        }
+      );
     }
   };
 
@@ -30,10 +45,17 @@ const BusinessAuthList: NextPageWithLayout = () => {
     if (window.confirm("정말 반려하시겠습니까?")) {
       authRejectMutate(
         { managerId, reason: modal.reason },
-        { onSuccess: () => window.alert("성공"), onError: () => window.alert("실패") }
+        {
+          onSuccess: () => refetchManagerArr(),
+          onError: () => window.alert("실패"),
+        }
       );
     }
   };
+
+  if (!managerDataObj || isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <>
@@ -53,7 +75,7 @@ const BusinessAuthList: NextPageWithLayout = () => {
               </tr>
             </thead>
             <tbody>
-              {managerDataObj?.managerDataArr.map((manager) => (
+              {managerDataObj.managerDataArr.map((manager) => (
                 <tr key={manager.id}>
                   <td>{manager.name}</td>
                   <td>{manager.company.name}</td>
@@ -82,6 +104,7 @@ const BusinessAuthList: NextPageWithLayout = () => {
             </tbody>
           </table>
         </section>
+        <Pagination totalPage={managerDataObj.pageResult.totalPages} url={INTERNAL_URL.BUSINESS_AUTH_LIST_URL} />
       </main>
       {modal.state && (
         <ModalComponent>
