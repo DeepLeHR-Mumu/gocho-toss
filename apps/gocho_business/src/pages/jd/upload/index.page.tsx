@@ -22,7 +22,7 @@ import { INTERNAL_URL } from "@/constants";
 import { ButtonPart, TitlePart, BasicPart, RequiredPart, ConditionPart, PlacePart, ApplyPart } from "./part";
 import { JobFormValues } from "./type";
 import { BLANK_JD, JD_UPLOAD_MESSAGE_OBJ } from "./constant";
-import { getFieldArrayValue } from "./util";
+import { getFieldArrayValue, getFieldArrayValueWithNull, setFieldErrorIfEmpty } from "./util";
 
 const JdUploadPage: NextPage = () => {
   const { setModal } = useModal();
@@ -102,14 +102,14 @@ const JdUploadPage: NextPage = () => {
             apply_url: jobObj.apply_url.includes("@") ? `mailto: ${jobObj.apply_url}` : jobObj.apply_url,
             process_arr: getFieldArrayValue(jobObj.process_arr),
             apply_route_arr: getFieldArrayValue(jobObj.apply_route_arr),
-            apply_document_arr: getFieldArrayValue(jobObj.apply_document_arr),
-            etc_arr: getFieldArrayValue(jobObj.etc_arr),
+            apply_document_arr: getFieldArrayValueWithNull(jobObj.apply_document_arr),
+            etc_arr: getFieldArrayValueWithNull(jobObj.etc_arr),
             conversion_rate: jobObj.conversion_rate ? jobObj.conversion_rate : null,
             min_year: jobObj.min_year ? jobObj.min_year : null,
             max_year: jobObj.max_year ? jobObj.max_year : null,
             hire_number: jobObj.hire_number ? jobObj.hire_number : 0,
-            task_sub_arr: jobObj.task_sub_arr ? jobObj.task_sub_arr : null,
-            task_detail_arr: getFieldArrayValue(jobObj.task_detail_arr),
+            task_sub_arr: jobObj.task_sub_arr,
+            task_detail_arr: getFieldArrayValueWithNull(jobObj.task_detail_arr),
             required_etc_arr: getFieldArrayValue(jobObj.required_etc_arr),
             pay_arr: getFieldArrayValue(jobObj.pay_arr),
             place: {
@@ -119,7 +119,7 @@ const JdUploadPage: NextPage = () => {
               etc: jobObj.place.etc?.length === 0 ? null : jobObj.place.etc,
             },
             preferred_certi_arr: jobObj.preferred_certi_arr?.length === 0 ? null : jobObj.preferred_certi_arr,
-            preferred_etc_arr: getFieldArrayValue(jobObj.preferred_etc_arr),
+            preferred_etc_arr: getFieldArrayValueWithNull(jobObj.preferred_etc_arr),
           },
         },
         {
@@ -143,18 +143,14 @@ const JdUploadPage: NextPage = () => {
     }
   };
 
-  const setFieldErrorIfEmpty = (fieldName: "pay_arr" | "process_arr" | "apply_route_arr", errorMessage: string) => {
-    if (watch(fieldName).length === 0 || watch(fieldName).every((field) => !field.value || field.value.trim() === "")) {
-      jobForm.setError(fieldName, {
-        message: errorMessage,
-      });
-    }
-  };
-
   const jobErrorHandler = () => {
-    setFieldErrorIfEmpty("pay_arr", "* 급여 정보를 입력해 주세요");
-    setFieldErrorIfEmpty("process_arr", "* 채용절차는 최소 1개 이상 기재해 주세요");
-    setFieldErrorIfEmpty("apply_route_arr", "* 지원 경로는 최소 1개 이상 기재해 주세요");
+    const ifEduNotSelected = !watch("high") && !watch("college") && !watch("four");
+    setFieldErrorIfEmpty(watch, jobForm, "pay_arr", "* 급여 정보를 입력해 주세요");
+    setFieldErrorIfEmpty(watch, jobForm, "process_arr", "* 채용절차는 최소 1개 이상 기재해 주세요");
+    setFieldErrorIfEmpty(watch, jobForm, "apply_route_arr", "* 지원 경로는 최소 1개 이상 기재해 주세요");
+    if (ifEduNotSelected) {
+      jobForm.setError("high", { message: "* 학력 조건을 하나 이상 선택해 주세요" });
+    }
   };
 
   usePreventRouting(
@@ -166,6 +162,12 @@ const JdUploadPage: NextPage = () => {
   useEffect(() => {
     if (userInfoData && userInfoData.status.name !== "인증완료") setModal("companyAuthModal");
   }, [setModal, userInfoData]);
+
+  useEffect(() => {
+    if (watch("high") || watch("college") || watch("four")) {
+      jobForm.clearErrors("high");
+    }
+  }, [jobForm, watch]);
 
   useEffect(() => {
     if (submitCount === 0) return;

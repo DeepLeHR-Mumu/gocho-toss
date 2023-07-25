@@ -7,6 +7,7 @@ import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { commonCssObj } from "@/styles";
 
 import { AddFieldButton, DeleteInputButton } from "../../component";
+import { setFieldErrorIfEmpty } from "../../util";
 import { ApplyPartProps } from "./type";
 import { APPLY_EXTERNAL_LINK_ARR } from "./constant";
 import { cssObj } from "./style";
@@ -27,7 +28,6 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
     trigger,
     formState: { errors },
     register,
-    setError,
     clearErrors,
   } = jobForm;
 
@@ -132,17 +132,12 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                           if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                             setValue(`process_arr.${index}.value`, "");
                           }
-                          if (
-                            watch("process_arr").length === 0 ||
-                            watch("process_arr").every((field) => field.value.trim().length === 0)
-                          ) {
-                            setError("process_arr", {
-                              type: "required",
-                              message: "* 채용절차는 최소 1개 이상 기재해 주세요",
-                            });
-                          } else {
-                            clearErrors("process_arr");
-                          }
+                          setFieldErrorIfEmpty(
+                            watch,
+                            jobForm,
+                            "process_arr",
+                            "* 채용절차는 최소 1개 이상 기재해 주세요"
+                          );
                         },
                       })}
                     />
@@ -150,6 +145,12 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                       <DeleteInputButton
                         onClickHandler={() => {
                           if (processArr.fields.length > 1) processArr.remove(index);
+                          setFieldErrorIfEmpty(
+                            watch,
+                            jobForm,
+                            "process_arr",
+                            "* 채용절차는 최소 1개 이상 기재해 주세요"
+                          );
                         }}
                       />
                     )}
@@ -170,6 +171,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                 <AddFieldButton
                   onClickHandler={() => {
                     processArr.append({ value: "" });
+                    setFieldErrorIfEmpty(watch, jobForm, "process_arr", "* 채용절차는 최소 1개 이상 기재해 주세요");
                   }}
                 />
               )}
@@ -197,17 +199,12 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                         if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                           setValue(`apply_route_arr.${index}.value`, "");
                         }
-                        if (
-                          watch("apply_route_arr").length === 0 ||
-                          watch("apply_route_arr").every((field) => field.value.trim().length === 0)
-                        ) {
-                          setError("apply_route_arr", {
-                            type: "required",
-                            message: "* 채용절차는 최소 1개 이상 기재해 주세요",
-                          });
-                        } else {
-                          clearErrors("apply_route_arr");
-                        }
+                        setFieldErrorIfEmpty(
+                          watch,
+                          jobForm,
+                          "apply_route_arr",
+                          "* 지원 경로는 최소 1개 이상 기재해 주세요"
+                        );
                       },
                     })}
                   />
@@ -215,6 +212,12 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                     <DeleteInputButton
                       onClickHandler={() => {
                         applyRouteArr.remove(index);
+                        setFieldErrorIfEmpty(
+                          watch,
+                          jobForm,
+                          "apply_route_arr",
+                          "* 지원 경로는 최소 1개 이상 기재해 주세요"
+                        );
                       }}
                     />
                   )}
@@ -229,6 +232,12 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                 <AddFieldButton
                   onClickHandler={() => {
                     applyRouteArr.append({ value: "" });
+                    setFieldErrorIfEmpty(
+                      watch,
+                      jobForm,
+                      "apply_route_arr",
+                      "* 지원 경로는 최소 1개 이상 기재해 주세요"
+                    );
                   }}
                 />
               )}

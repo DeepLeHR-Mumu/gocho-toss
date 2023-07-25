@@ -8,6 +8,7 @@ import { commonCssObj } from "@/styles";
 
 import { AddFieldButton, DeleteInputButton } from "../../component";
 import { JobFormValues } from "../../type";
+import { setFieldErrorIfEmpty } from "../../util";
 import { ConditionPartProps } from "./type";
 import { ROTATION_ARR } from "./constant";
 import { cssObj } from "./style";
@@ -119,17 +120,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
                         if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                           setValue(`pay_arr.${index}.value`, "");
                         }
-                        if (
-                          watch("pay_arr").length === 0 ||
-                          watch("pay_arr").every((field) => !field.value || field.value.trim() === "")
-                        ) {
-                          setError("pay_arr", {
-                            type: "required",
-                            message: "* 급여 정보를 입력해 주세요",
-                          });
-                        } else {
-                          clearErrors("pay_arr");
-                        }
+                        setFieldErrorIfEmpty(watch, jobForm, "pay_arr", "* 급여 정보를 입력해 주세요");
                       },
                     })}
                   />
@@ -137,6 +128,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
                     <DeleteInputButton
                       onClickHandler={() => {
                         payArr.remove(index);
+                        setFieldErrorIfEmpty(watch, jobForm, "pay_arr", "* 급여 정보를 입력해 주세요");
                       }}
                     />
                   )}
@@ -151,6 +143,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
                 <AddFieldButton
                   onClickHandler={() => {
                     payArr.append({ value: "" });
+                    setFieldErrorIfEmpty(watch, jobForm, "pay_arr", "* 급여 정보를 입력해 주세요");
                   }}
                   disabled={isPayArrDisabled}
                 />

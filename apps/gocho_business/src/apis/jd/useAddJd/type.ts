@@ -10,7 +10,7 @@ export interface RequestObjDef {
     cut: boolean;
     process_arr: string[];
     apply_route_arr: string[];
-    apply_document_arr: string[];
+    apply_document_arr: string[] | null;
     apply_url: string;
     etc_arr: string[] | null;
     middle: boolean;
@@ -25,7 +25,7 @@ export interface RequestObjDef {
     conversion_rate: number | null;
     task_main: string;
     task_sub_arr: string[] | null;
-    task_detail_arr: string[];
+    task_detail_arr: string[] | null;
     rotation_arr: string[];
     place: {
       type: string;
