@@ -11,7 +11,7 @@ export const JdPart: FunctionComponent = () => {
   const { data: userInfoData } = useManagerProfile();
   const { data: jdDataObj } = useJdArr(true, { order: "recent" });
 
-  const isAuth = userInfoData?.status.name !== "미인증";
+  const isAuth = userInfoData?.status.name === "인증완료";
 
   return (
     <section css={partCssObj.partContainer}>

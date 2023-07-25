@@ -16,7 +16,7 @@ export const SidePart: FunctionComponent = () => {
   const { data: waitingJdDataObj } = useJdArr(true, { filter: "waiting" });
   const { data: userInfoData } = useManagerProfile();
 
-  const isAuth = userInfoData?.status.name !== "미인증";
+  const isAuth = userInfoData?.status.name === "인증완료";
 
   return (
     <div>

@@ -75,7 +75,7 @@ const JdListPage: NextPage = () => {
     );
   }
 
-  const isAuth = userInfoData?.status.name !== "미인증";
+  const isAuth = userInfoData?.status.name === "인증완료";
 
   return (
     <PageLayout>

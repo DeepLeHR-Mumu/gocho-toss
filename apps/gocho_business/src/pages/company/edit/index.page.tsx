@@ -136,7 +136,7 @@ const CompanyEditPage: NextPage = () => {
   }, [companyDetailData, reset]);
 
   useEffect(() => {
-    if (userInfoData && userInfoData.status.name === "미인증") setModal("companyAuthModal");
+    if (userInfoData && userInfoData.status.name !== "인증완료") setModal("companyAuthModal");
   }, [setModal, userInfoData]);
 
   useEffect(() => {
