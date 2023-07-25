@@ -84,6 +84,10 @@ export const menuArr = [
         menuTitle: "공장 검수 리스트",
         menuLink: `${INTERNAL_URL.BUSINESS_FACTORY_LIST_URL}?page=1`,
       },
+      {
+        menuTitle: "인증 요청 리스트",
+        menuLink: `${INTERNAL_URL.BUSINESS_AUTH_LIST_URL}?page=1`,
+      },
     ],
   },
   {
