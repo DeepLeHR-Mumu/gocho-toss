@@ -18,6 +18,7 @@ export const INTERNAL_URL = {
   BUSINESS_JD_LIST_URL: "/business/jd/list",
   BUSINESS_COMPANY_LIST_URL: "/business/company/list",
   BUSINESS_FACTORY_LIST_URL: "/business/factory/list",
+  BUSINESS_AUTH_LIST_URL: "/business/auth/list",
   BUSINESS_JD_REGISTER_URL: "/business/jd/register",
   BUSINESS_JD_EDIT_URL: "/business/jd/edit",
   BUSINESS_COMPANY_EDIT_URL: "/business/company/edit",

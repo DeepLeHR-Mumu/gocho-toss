@@ -1,4 +1,5 @@
 export { Pagination } from "./common/pagination";
+export { ModalComponent } from "./common/modalBackground";
 
 export { Header } from "./global/layout/header";
 export { PageLayout } from "./global/layout/pageLayout";

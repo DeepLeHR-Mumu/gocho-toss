@@ -37,6 +37,9 @@ export { useFactoryDetail } from "./factory/useFactoryDetail";
 export { useRejectModifyFactory } from "./factory/useRejectModifyFactory";
 export { useRejectUploadFactory } from "./factory/useRejectUploadFactory";
 export { useFindFactory } from "./factory/useFindFactory";
+export { useManagerArr } from "./managers/useManagerArr";
+export { useAuthAccept } from "./managers/useAuthAccept";
+export { useAuthReject } from "./managers/useAuthReject";
 
 export { useAcceptModifyJd } from "./jd/useAcceptModifyJd";
 export { useAcceptUploadJd } from "./jd/useAcceptUploadJd";
