@@ -22,7 +22,7 @@ const NoticeList: NextPage = () => {
     }
   }, [router]);
 
-  const { data: noticeArrObj } = useNoticeArr({ order: "notice", page: Number(router.query.page), size: 15 });
+  const { data: noticeArrObj } = useNoticeArr({ order: "notice", page: Number(router.query.page), size: 10 });
 
   if (!noticeArrObj) {
     return (

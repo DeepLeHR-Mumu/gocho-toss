@@ -12,13 +12,12 @@ export const cssObj = {
 
   partContainer: css`
     flex-grow: 1;
-    height: 45rem;
+    min-height: 50rem;
     background-color: ${NEWCOLORS.WHITE};
     padding: 2rem;
     border: 1px solid ${NEWCOLORS.GRAY200};
     border-radius: 1rem;
     box-shadow: 0 2px 16px 0 #0000000d;
-    text-align: center;
   `,
 
   pageTitle: css`

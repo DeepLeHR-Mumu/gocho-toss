@@ -18,7 +18,11 @@ const AlarmList: NextPage = () => {
   const router = useRouter();
 
   const { data: userInfoData } = useManagerProfile();
-  const { data: alarmArrObj } = useAlarmArr({ managerId: userInfoData?.id, page: Number(router.query.page), size: 15 });
+  const { data: alarmArrObj } = useAlarmArr({
+    managerId: userInfoData?.id,
+    page: Number(router.query.page),
+    size: 10,
+  });
   const { mutate: readAlarmMutate } = useReadAlarm();
 
   useEffect(() => {
