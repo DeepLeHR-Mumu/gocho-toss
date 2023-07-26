@@ -18,4 +18,12 @@ export const cssObj = {
     color: ${NEWCOLORS.BLUEGRAY400};
     margin-bottom: 0.75rem;
   `,
+
+  errorMsg: css`
+    ${TEXTS.TITLE5};
+    color: ${NEWCOLORS.RED300};
+    height: 1rem;
+    margin: 3rem 0;
+    text-align: center;
+  `,
 };

@@ -74,6 +74,7 @@ export const IdPasswordPart: FunctionComponent<FindCompanyPartProps> = ({ slider
             })}
           />
         </div>
+        <p css={cssObj.errorMsg}>{errors.email?.message || errors.password?.message}</p>
       </div>
       <NewSharedButton
         buttonType={

@@ -89,7 +89,7 @@ export const FindCompanyPart: FunctionComponent<FindCompanyPartProps> = ({ slide
             }}
           />
         </div>
-        <div css={cssObj.optionList(isCompanyListOn)}>
+        <div css={cssObj.optionList(isCompanyListOn && searchWord !== "")}>
           {isCompanyListOn &&
             companyDataObj?.companyDataArr.map((company) => (
               <button

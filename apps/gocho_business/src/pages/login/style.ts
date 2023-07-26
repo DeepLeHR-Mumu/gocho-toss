@@ -63,14 +63,11 @@ export const cssObj = {
   `,
 
   errorMsg: css`
-    font-size: 1rem;
+    ${TEXTS.TITLE5};
+    color: ${NEWCOLORS.RED300};
     height: 1rem;
     margin: 3rem 0;
     text-align: center;
-    line-height: 1;
-    display: block;
-    color: ${NEWCOLORS.RED300};
-    font-weight: 400;
   `,
 
   bottomBox: css`
