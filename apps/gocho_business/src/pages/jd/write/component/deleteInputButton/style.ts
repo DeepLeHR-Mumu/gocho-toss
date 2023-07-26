@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
   deleteInputButton: css`
@@ -9,7 +9,7 @@ export const cssObj = {
     border-radius: 50%;
     width: 1.75rem;
     height: 1.75rem;
-    color: ${COLORS.GRAY10};
-    background-color: ${COLORS.GRAY70};
+    color: ${NEWCOLORS.BLACK};
+    background-color: ${NEWCOLORS.BLUEGRAY100};
   `,
 };

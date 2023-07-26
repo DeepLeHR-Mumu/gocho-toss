@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS, NEWCOLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -27,8 +27,8 @@ export const cssObj = {
     width: 17.5rem;
     height: 3.25rem;
     font-weight: 400;
-    background-color: ${COLORS.GRAY70};
-    color: ${COLORS.GRAY30};
+    background-color: ${NEWCOLORS.BLUEGRAY100};
+    color: ${NEWCOLORS.BLUEGRAY400};
   `,
 
   processBox: css`
@@ -44,14 +44,14 @@ export const cssObj = {
     border-radius: 50%;
     width: 1.75rem;
     height: 1.75rem;
-    color: ${COLORS.GRAY10};
-    background-color: ${COLORS.GRAY70};
+    color: ${NEWCOLORS.BLACK};
+    background-color: ${NEWCOLORS.BLUEGRAY100};
   `,
 
   icon: css`
     margin-top: 0.5rem;
     font-size: 1.5rem;
-    color: ${COLORS.GRAY35};
+    color: ${NEWCOLORS.BLUEGRAY400};
   `,
 
   addButtonWrapper: css`

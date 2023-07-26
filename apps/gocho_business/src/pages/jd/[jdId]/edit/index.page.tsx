@@ -32,7 +32,7 @@ const JdEditPage: NextPage = () => {
 
   const { data: userInfoData } = useManagerProfile();
   const { mutate: editJdMutate } = useEditJd();
-  const { data: jdData } = useJdDetail(true, { id: Number(router.query.jdId) });
+  const { data: jdData } = useJdDetail(Boolean(userInfoData), { id: Number(router.query.jdId) });
   const { setToast } = useToast();
 
   const jobForm = useForm<JobFormValues>({

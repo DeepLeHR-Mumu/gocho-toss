@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS, NEWCOLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 import { commonCssObj } from "@/styles";
@@ -96,8 +96,8 @@ export const cssObj = {
     border-radius: 50%;
     width: 1.75rem;
     height: 1.75rem;
-    color: ${COLORS.GRAY10};
-    background-color: ${COLORS.GRAY70};
+    color: ${NEWCOLORS.BLACK};
+    background-color: ${NEWCOLORS.BLUEGRAY100};
     z-index: 20;
   `,
 };

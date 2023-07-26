@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS, NEWCOLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 
 export const globalStyle = css`
   * {
@@ -155,11 +155,11 @@ export const globalStyle = css`
   h4,
   h5,
   h6 {
-    color: ${COLORS.GRAY10};
+    color: ${NEWCOLORS.BLACK};
   }
   a {
     text-decoration: none;
-    color: ${COLORS.GRAY10};
+    color: ${NEWCOLORS.BLACK};
 
     :focus {
       outline: none;

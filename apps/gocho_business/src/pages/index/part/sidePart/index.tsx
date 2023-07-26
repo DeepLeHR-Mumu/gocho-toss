@@ -12,9 +12,9 @@ import { partCssObj } from "../style";
 import { cssObj } from "./style";
 
 export const SidePart: FunctionComponent = () => {
-  const { data: processJdDataObj } = useJdArr(true, { filter: "progress" });
-  const { data: waitingJdDataObj } = useJdArr(true, { filter: "waiting" });
   const { data: userInfoData } = useManagerProfile();
+  const { data: processJdDataObj } = useJdArr(Boolean(userInfoData), { filter: "progress" });
+  const { data: waitingJdDataObj } = useJdArr(Boolean(userInfoData), { filter: "waiting" });
 
   const isAuth = userInfoData?.status.name === "인증완료";
 

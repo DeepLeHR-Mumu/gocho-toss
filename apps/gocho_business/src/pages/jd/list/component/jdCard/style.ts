@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS, NEWCOLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 import { shorten } from "shared-style/common";
 import { TEXTS } from "shared-style/text";
 
@@ -83,7 +83,7 @@ export const cssObj = {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: ${COLORS.GRAY35};
+    color: ${NEWCOLORS.BLUEGRAY400};
   `,
 
   bottomContainer: css`
@@ -124,8 +124,8 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${COLORS.GRAY100};
-    background-color: ${COLORS.GRAY65};
+    color: ${NEWCOLORS.WHITE};
+    background-color: ${NEWCOLORS.BLUEGRAY200};
     border-radius: 50rem;
   `,
 };

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
   container: css`
@@ -22,7 +22,7 @@ export const cssObj = {
     }
   `,
   title: css`
-    color: ${COLORS.GRAY10};
+    color: ${NEWCOLORS.BLACK};
     font-size: 2.25rem;
   `,
   catchPhraseContainer: css`
@@ -31,6 +31,6 @@ export const cssObj = {
     align-items: center;
   `,
   catchPhrase: css`
-    color: ${COLORS.GRAY10};
+    color: ${NEWCOLORS.BLACK};
   `,
 };

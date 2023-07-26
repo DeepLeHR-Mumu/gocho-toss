@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
   container: css`
@@ -12,6 +12,7 @@ export const cssObj = {
     gap: 2rem 0;
     min-height: calc(100vh - 25rem);
   `,
+
   jobiImage: css`
     position: relative;
     width: 11.875rem;
@@ -21,16 +22,19 @@ export const cssObj = {
       object-fit: contain;
     }
   `,
+
   title: css`
-    color: ${COLORS.GRAY10};
+    color: ${NEWCOLORS.BLACK};
     font-size: 2.25rem;
   `,
+
   catchPhraseContainer: css`
     display: flex;
     flex-direction: column;
     align-items: center;
   `,
+
   catchPhrase: css`
-    color: ${COLORS.GRAY10};
+    color: ${NEWCOLORS.BLACK};
   `,
 };

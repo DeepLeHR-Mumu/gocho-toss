@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS, NEWCOLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -69,8 +69,8 @@ export const cssObj = {
     padding: 0.5rem 0.75rem;
     font-size: 0.875rem;
     border-radius: 5px;
-    border: 1px solid ${COLORS.GRAY65};
-    background-color: ${COLORS.GRAY90};
+    border: 1px solid ${NEWCOLORS.BLUEGRAY200};
+    background-color: ${NEWCOLORS.GRAY50};
   `,
 
   hireNumberButton: css`

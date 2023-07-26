@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS, NEWCOLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const commonCssObj = {
@@ -90,18 +90,18 @@ export const commonCssObj = {
     overflow-y: auto;
     z-index: 20;
     background-color: ${NEWCOLORS.WHITE};
-    border: ${isOpen ? `1px solid ${COLORS.GRAY30}` : 0};
+    border: ${isOpen ? `1px solid ${NEWCOLORS.BLUEGRAY400}` : 0};
 
     ::-webkit-scrollbar {
       padding: 0.25rem 0;
       width: 0.5rem;
-      background-color: ${COLORS.GRAY90};
+      background-color: ${NEWCOLORS.WHITE};
       border-radius: 1rem;
     }
 
     ::-webkit-scrollbar-thumb {
       border-radius: 0.5rem;
-      background-color: ${COLORS.GRAY60};
+      background-color: ${NEWCOLORS.BLUEGRAY200};
     }
   `,
 

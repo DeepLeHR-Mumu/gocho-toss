@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS, NEWCOLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -70,8 +70,8 @@ export const cssObj = {
     border-radius: 50%;
     width: 1.75rem;
     height: 1.75rem;
-    color: ${COLORS.GRAY10};
-    background-color: ${COLORS.GRAY70};
+    color: ${NEWCOLORS.BLACK};
+    background-color: ${NEWCOLORS.BLUEGRAY100};
   `,
 
   addPlaceButtonContainer: css`
@@ -100,7 +100,7 @@ export const cssObj = {
     align-items: center;
     gap: 0 1rem;
     border-radius: 2rem;
-    background-color: ${COLORS.GRAY90};
+    background-color: ${NEWCOLORS.GRAY50};
     height: 2.5rem;
     padding: 0 2.5rem 0 1rem;
   `,

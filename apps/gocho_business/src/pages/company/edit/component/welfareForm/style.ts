@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS, NEWCOLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -17,7 +17,7 @@ export const cssObj = {
   title: (isMine: boolean) => css`
     font-size: 1rem;
     font-weight: 400;
-    color: ${isMine ? COLORS.GRAY65 : COLORS.GRAY10};
+    color: ${isMine ? NEWCOLORS.BLUEGRAY200 : NEWCOLORS.BLACK};
     margin-bottom: 0.5rem;
     display: block;
   `,
@@ -36,8 +36,8 @@ export const cssObj = {
     width: 100%;
     justify-content: space-between;
     display: flex;
-    border-bottom: 1px solid ${COLORS.GRAY70};
-    background-color: ${COLORS.GRAY100};
+    border-bottom: 1px solid ${NEWCOLORS.BLUEGRAY100};
+    background-color: ${NEWCOLORS.WHITE};
   `,
 
   noData: css`
@@ -93,8 +93,8 @@ export const cssObj = {
     border-radius: 50%;
     width: 1.75rem;
     height: 1.75rem;
-    color: ${COLORS.GRAY10};
-    background-color: ${COLORS.GRAY70};
+    color: ${NEWCOLORS.BLACK};
+    background-color: ${NEWCOLORS.BLUEGRAY100};
     z-index: 20;
   `,
 };

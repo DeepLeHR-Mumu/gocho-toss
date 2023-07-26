@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS, NEWCOLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 import { shorten } from "shared-style/common";
 import { TEXTS } from "shared-style/text";
 
@@ -53,6 +53,6 @@ export const cssObj = {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: ${COLORS.GRAY35};
+    color: ${NEWCOLORS.BLUEGRAY300};
   `,
 };

@@ -28,7 +28,7 @@ const JdListPage: NextPage = () => {
   const [searchWord, setSearchWord] = useState<string | null>(null);
 
   const { data: userInfoData } = useManagerProfile();
-  const { data: jdDataObj } = useJdArr(true, {
+  const { data: jdDataObj } = useJdArr(Boolean(userInfoData), {
     order: router.query.order as OrderDef,
     filter: selectedFilter,
     size: 10,
