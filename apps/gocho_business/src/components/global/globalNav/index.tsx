@@ -99,7 +99,7 @@ export const GlobalNav: FunctionComponent = () => {
           </button>
           {isAlarmActive && (
             <div css={cssObj.alarmMenu}>
-              {alarmArrObj?.alarmDataArr.length === 0 ? (
+              {alarmArrObj?.alarmDataArr.length !== 0 ? (
                 alarmArrObj?.alarmDataArr.map((alarm) => (
                   <>
                     <Link href={alarmCategoryToLink(alarm.category)}>

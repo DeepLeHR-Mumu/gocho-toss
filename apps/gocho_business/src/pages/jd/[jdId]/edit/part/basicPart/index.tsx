@@ -7,7 +7,7 @@ import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { commonCssObj } from "@/styles";
 
 import { AddFieldButton, DeleteInputButton } from "@/pages/jd/upload/component";
-import { setFieldErrorIfEmpty } from "@/pages/jd/upload/util";
+import { setFieldErrorIfEmpty } from "@/pages/jd/[jdId]/edit/util";
 import { BasicPartProps } from "./type";
 import { CONTRACT_TYPE_ARR, TASK_ARR, REQUIRED_EXP_ARR } from "./constant";
 import { cssObj } from "./style";
@@ -197,6 +197,9 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
                     />
                   )}
                 </label>
+                <p css={commonCssObj.errorMessage}>
+                  {errors.task_detail_arr?.[index] && errors.task_detail_arr?.[index]?.value?.message}
+                </p>
               </div>
             ))}
             <div css={commonCssObj.addButtonWrapper}>
@@ -210,6 +213,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
               )}
             </div>
           </div>
+          <p css={commonCssObj.errorMessage}>{errors.task_detail_arr && errors.task_detail_arr?.message}</p>
         </div>
       </div>
       <div css={commonCssObj.longContainer}>

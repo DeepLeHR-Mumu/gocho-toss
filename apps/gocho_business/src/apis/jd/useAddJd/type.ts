@@ -13,7 +13,6 @@ export interface RequestObjDef {
     apply_document_arr: string[] | null;
     apply_url: string;
     etc_arr: string[] | null;
-    middle: boolean;
     high: boolean;
     college: boolean;
     four: boolean;
@@ -25,7 +24,7 @@ export interface RequestObjDef {
     conversion_rate: number | null;
     task_main: string;
     task_sub_arr: string[] | null;
-    task_detail_arr: string[] | null;
+    task_detail_arr: string[];
     rotation_arr: string[];
     place: {
       type: string;

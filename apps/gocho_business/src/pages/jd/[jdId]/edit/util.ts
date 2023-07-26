@@ -1,33 +1,26 @@
-import { Dispatch, SetStateAction } from "react";
+import { UseFormReturn, UseFormWatch } from "react-hook-form";
+import { JobFormValues } from "./type";
 
-export const focusedArrOnFocusHandler = (setIsFocusedArr: Dispatch<SetStateAction<boolean[]>>, index: number) => {
-  setIsFocusedArr((prev) =>
-    prev.map((stateItem, stateIndex) => {
-      if (stateIndex === index) {
-        return true;
-      }
-      return stateItem;
-    })
-  );
+export const getFieldArrayValue = (arrData: { value: string }[]) =>
+  arrData.filter((item) => item.value.trim() !== "").map((item) => item.value);
+
+export const getFieldArrayValueWithNull = (arrData: { value: string }[]) =>
+  arrData.every((field) => !field.value || field.value.trim() === "")
+    ? null
+    : arrData.filter((item) => item.value.trim() !== "").map((item) => item.value);
+
+export const setFieldErrorIfEmpty = (
+  watch: UseFormWatch<JobFormValues>,
+  jobForm: UseFormReturn<JobFormValues>,
+  fieldName: "task_detail_arr" | "pay_arr" | "process_arr" | "apply_route_arr",
+  errorMessage: string
+) => {
+  if (watch(fieldName).length === 0 || watch(fieldName).every((field) => !field.value || field.value.trim() === "")) {
+    jobForm.setError(fieldName, {
+      message: errorMessage,
+    });
+  } else jobForm.clearErrors(fieldName);
 };
 
-export const focusedArrOnBlurHandler = (setIsFocusedArr: Dispatch<SetStateAction<boolean[]>>, index: number) => {
-  setIsFocusedArr((prev) =>
-    prev.map((stateItem, stateIndex) => {
-      if (stateIndex === index) {
-        return false;
-      }
-      return stateItem;
-    })
-  );
-};
-
-export const getFieldArrayValue = (arrData: { value: string }[]) => arrData.map((item) => item.value);
-
-export const getFieldArrayValueWithNull = (arrData: { value: string }[]) => {
-  const returnArr = arrData.map((item) => item.value);
-  if (returnArr.every((element) => element === "")) return null;
-  return returnArr.filter((element) => element !== "");
-};
-
-export const setFieldArray = (arrData: string[]) => arrData.map((item) => ({ value: item || "" }));
+export const setFieldArray = (arrData: string[]) =>
+  arrData.length === 0 ? [{ value: "" }] : arrData.map((item) => ({ value: item || "" }));

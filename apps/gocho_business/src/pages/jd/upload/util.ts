@@ -12,7 +12,7 @@ export const getFieldArrayValueWithNull = (arrData: { value: string }[]) =>
 export const setFieldErrorIfEmpty = (
   watch: UseFormWatch<JobFormValues>,
   jobForm: UseFormReturn<JobFormValues>,
-  fieldName: "pay_arr" | "process_arr" | "apply_route_arr",
+  fieldName: "task_detail_arr" | "pay_arr" | "process_arr" | "apply_route_arr",
   errorMessage: string
 ) => {
   if (watch(fieldName).length === 0 || watch(fieldName).every((field) => !field.value || field.value.trim() === "")) {

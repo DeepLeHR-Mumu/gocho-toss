@@ -1,3 +1,5 @@
+export const CONTRACT_TYPE_ARR = ["정규직", "계약>정규", "계약직", "인턴", "연수생"] as const;
+
 export const TASK_ARR = [
   {
     mainTask: "생산",
@@ -32,3 +34,5 @@ export const TASK_ARR = [
   { mainTask: "시설관리", subTaskArr: ["없음", "전기시설", "기계시설", "영선"] },
   { mainTask: "기타", subTaskArr: ["없음"] },
 ] as const;
+
+export const REQUIRED_EXP_ARR = ["경력 무관", "신입", "경력", "신입/경력"] as const;

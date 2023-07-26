@@ -1,15 +1,6 @@
 import { ResponseObjDef } from "./type";
 
 export const jdDetailSelector = ({ data: jd }: ResponseObjDef) => {
-  const companyFactoryArr =
-    jd.company.factories === null
-      ? null
-      : jd.company.factories?.map((factory) => ({
-          id: factory.id,
-          address: factory.address,
-          factoryName: factory.name,
-        }));
-
   const jdFactoryArr =
     jd.place.factory_arr === null
       ? null
@@ -28,6 +19,7 @@ export const jdDetailSelector = ({ data: jd }: ResponseObjDef) => {
     startTime: jd.start_time,
     endTime: jd.end_time,
     processArr: jd.process_arr,
+    applyDocumentArr: jd.apply_document_arr,
     applyRouteArr: jd.apply_route_arr,
     applyUrl: jd.apply_url,
     etcArr: jd.etc_arr,
@@ -37,16 +29,15 @@ export const jdDetailSelector = ({ data: jd }: ResponseObjDef) => {
     bookmark: jd.bookmark,
     click: jd.click,
     requiredExp: {
-      type: jd.required_exp.type,
-      maxYear: jd.required_exp.max_year,
-      minYear: jd.required_exp.min_year,
+      type: jd.career.type,
+      maxYear: jd.career.max_year,
+      minYear: jd.career.min_year,
     },
     requiredEtcArr: jd.required_etc_arr,
     contractType: {
-      type: jd.contract_type.type,
-      conversionRate: jd.contract_type.conversion_rate,
+      type: jd.contract.type,
+      conversionRate: jd.contract.conversion_rate,
     },
-    taskDetailArr: jd.task_detail_arr,
     rotationArr: jd.rotation_arr,
     place: {
       addressArr: jd.place.address_arr,
@@ -59,20 +50,14 @@ export const jdDetailSelector = ({ data: jd }: ResponseObjDef) => {
     preferredCertiArr: jd.preferred_certi_arr,
     preferredEtcArr: jd.preferred_etc_arr,
     eduSummary: {
-      middle: jd.edu_summary.middle,
-      high: jd.edu_summary.high,
-      college: jd.edu_summary.college,
-      four: jd.edu_summary.four,
+      high: jd.education.high,
+      college: jd.education.college,
+      four: jd.education.four,
     },
     task: {
-      mainTask: jd.task.main_task,
-      subTaskArr: jd.task.sub_task_arr,
-    },
-    company: {
-      id: jd.company.id,
-      name: jd.company.name,
-      logoUrl: jd.company.logo_url,
-      factories: companyFactoryArr,
+      mainTask: jd.task.task_main,
+      subTaskArr: jd.task.task_sub_arr,
+      detailArr: jd.task.task_detail_arr,
     },
   };
 };

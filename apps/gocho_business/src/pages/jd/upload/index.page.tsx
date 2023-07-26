@@ -109,7 +109,7 @@ const JdUploadPage: NextPage = () => {
             max_year: jobObj.max_year ? jobObj.max_year : null,
             hire_number: jobObj.hire_number ? jobObj.hire_number : 0,
             task_sub_arr: jobObj.task_sub_arr,
-            task_detail_arr: getFieldArrayValueWithNull(jobObj.task_detail_arr),
+            task_detail_arr: getFieldArrayValue(jobObj.task_detail_arr),
             required_etc_arr: getFieldArrayValue(jobObj.required_etc_arr),
             pay_arr: getFieldArrayValue(jobObj.pay_arr),
             place: {
@@ -145,6 +145,7 @@ const JdUploadPage: NextPage = () => {
 
   const jobErrorHandler = () => {
     const ifEduNotSelected = !watch("high") && !watch("college") && !watch("four");
+    setFieldErrorIfEmpty(watch, jobForm, "task_detail_arr", "* 세부 직무 내용을 입력해 주세요");
     setFieldErrorIfEmpty(watch, jobForm, "pay_arr", "* 급여 정보를 입력해 주세요");
     setFieldErrorIfEmpty(watch, jobForm, "process_arr", "* 채용절차는 최소 1개 이상 기재해 주세요");
     setFieldErrorIfEmpty(watch, jobForm, "apply_route_arr", "* 지원 경로는 최소 1개 이상 기재해 주세요");
