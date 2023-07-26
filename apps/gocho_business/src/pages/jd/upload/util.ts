@@ -21,3 +21,6 @@ export const setFieldErrorIfEmpty = (
     });
   } else jobForm.clearErrors(fieldName);
 };
+
+export const setFieldArray = (arrData: string[]) =>
+  arrData.length === 0 ? [{ value: "" }] : arrData.map((item) => ({ value: item || "" }));

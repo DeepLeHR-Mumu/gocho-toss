@@ -160,7 +160,14 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
               }}
             />
           )}
-          {isCopyOn && <NewSharedButton buttonType="outLineGray" width={5} text="복사" onClickHandler={() => null} />}
+          {isCopyOn && (
+            <NewSharedButton
+              buttonType="outLineGray"
+              width={5}
+              text="복사"
+              onClickHandler={() => router.push(`${INTERNAL_URL.JD_UPLOAD}?copy=${jd.id}`)}
+            />
+          )}
           {isEndOn && (
             <NewSharedButton
               buttonType="outLineGray"

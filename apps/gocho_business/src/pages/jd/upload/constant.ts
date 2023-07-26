@@ -34,3 +34,23 @@ export const JD_UPLOAD_MESSAGE_OBJ = {
   UPLOAD: "최종 공고 업로드 요청 하시겠습니까? 영업일 기준 검수 완료까지 1시간 정도 소요됩니다.",
   LEAVE: "변경사항이 있습니다. 페이지를 나가시겠습니까?",
 };
+
+export const ROTATION_ARR = [
+  { data: "주간", name: "주간" },
+  { data: "야간", name: "야간" },
+  { data: "교대", name: "교대" },
+  { data: "기타", name: "기타" },
+  { data: "주간2교대", name: "주간2교대" },
+  { data: "2교대", name: "2교대" },
+  { data: "3교대", name: "3교대" },
+  { data: "2;1", name: "2조 1교대" },
+  { data: "2;2", name: "2조 2교대" },
+  { data: "3;1", name: "3조 1교대" },
+  { data: "3;2", name: "3조 2교대" },
+  { data: "3;3", name: "3조 3교대" },
+  { data: "4;2", name: "4조 2교대" },
+  { data: "4;3", name: "4조 3교대" },
+  { data: "4;4", name: "4조 4교대" },
+  { data: "5;3", name: "5조 3교대" },
+  { data: "5;4", name: "5조 4교대" },
+] as const;

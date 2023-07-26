@@ -13,6 +13,7 @@ export interface RequestObjDef {
     apply_document_arr: string[] | null;
     apply_url: string;
     etc_arr: string[] | null;
+    middle: boolean;
     high: boolean;
     college: boolean;
     four: boolean;

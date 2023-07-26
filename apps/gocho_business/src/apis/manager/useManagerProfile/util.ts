@@ -18,5 +18,3 @@ export const managerProfileSelector = ({ data }: ResponseObjDef) => ({
     isFirst: data.status.is_first,
   },
 });
-
-export type ConvertedManagerProfile = ReturnType<typeof managerProfileSelector>;

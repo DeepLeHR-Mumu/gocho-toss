@@ -16,23 +16,24 @@ import {
   jdUploadPageFunnelEvent,
 } from "@/ga";
 import { PageLayout } from "@/components";
-import { useAddJd, useManagerProfile } from "@/apis";
+import { useAddJd, useJdDetail, useManagerProfile } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 
 import { ButtonPart, TitlePart, BasicPart, RequiredPart, ConditionPart, PlacePart, ApplyPart } from "./part";
 import { JobFormValues } from "./type";
-import { BLANK_JD, JD_UPLOAD_MESSAGE_OBJ } from "./constant";
-import { getFieldArrayValue, getFieldArrayValueWithNull, setFieldErrorIfEmpty } from "./util";
+import { BLANK_JD, JD_UPLOAD_MESSAGE_OBJ, ROTATION_ARR } from "./constant";
+import { getFieldArrayValue, getFieldArrayValueWithNull, setFieldErrorIfEmpty, setFieldArray } from "./util";
 
 const JdUploadPage: NextPage = () => {
   const { setModal } = useModal();
+  const router = useRouter();
 
   const isLoading = useRef(false);
 
   const { data: userInfoData } = useManagerProfile();
   const { mutate: addJobMutate } = useAddJd();
+  const { data: jdData } = useJdDetail(Boolean(userInfoData), { id: Number(router.query.copy) });
   const { setToast } = useToast();
-  const router = useRouter();
 
   const jobForm = useForm<JobFormValues>({
     mode: "onTouched",
@@ -44,6 +45,7 @@ const JdUploadPage: NextPage = () => {
     control,
     handleSubmit,
     watch,
+    reset,
     formState: { submitCount, dirtyFields, isSubmitSuccessful },
   } = jobForm;
 
@@ -97,6 +99,7 @@ const JdUploadPage: NextPage = () => {
         {
           dto: {
             ...jobObj,
+            middle: false,
             start_time: dayjs(new Date(jobObj.start_time)).format("YYYY-MM-DDTHH:mm:ss"),
             end_time: dayjs(new Date(jobObj.end_time)).format("YYYY-MM-DDTHH:mm:ss"),
             apply_url: jobObj.apply_url.includes("@") ? `mailto: ${jobObj.apply_url}` : jobObj.apply_url,
@@ -153,6 +156,46 @@ const JdUploadPage: NextPage = () => {
       jobForm.setError("high", { message: "* 학력 조건을 하나 이상 선택해 주세요" });
     }
   };
+
+  useEffect(() => {
+    if (jdData) {
+      reset({
+        title: jdData.title,
+        start_time: new Date(dayjs().format("YYYY-MM-DDTHH:mm")).toISOString().substring(0, 19),
+        cut: jdData.cut,
+        process_arr: setFieldArray(jdData.processArr || []),
+        apply_document_arr: setFieldArray(jdData.applyDocumentArr || []),
+        apply_route_arr: setFieldArray(jdData.applyRouteArr || []),
+        apply_url: jdData.applyUrl,
+        etc_arr: setFieldArray(jdData.etcArr || []),
+        high: jdData.eduSummary.high,
+        college: jdData.eduSummary.college,
+        four: jdData.eduSummary.four,
+        required_exp: jdData.requiredExp.type,
+        min_year: jdData.requiredExp.minYear,
+        max_year: jdData.requiredExp.maxYear,
+        required_etc_arr: setFieldArray(jdData.requiredEtcArr || []),
+        contract_type: jdData.contractType.type,
+        conversion_rate: jdData.contractType.conversionRate,
+        task_main: jdData.task.mainTask,
+        task_sub_arr: jdData.task.subTaskArr,
+        task_detail_arr: setFieldArray(jdData.task.detailArr || []),
+        rotation_arr: jdData.rotationArr.map(
+          (rotation) => ROTATION_ARR.find((rotationObj) => rotationObj.name === rotation)?.data
+        ),
+        place: {
+          type: jdData.place.type,
+          address_arr: jdData.place.addressArr || null,
+          factory_arr: jdData.place.factoryArr?.map((factory) => factory.id) || null,
+          etc: jdData.place.etc || "",
+        },
+        hire_number: jdData.hireCount,
+        pay_arr: setFieldArray(jdData.payArr || []),
+        preferred_certi_arr: jdData.preferredCertiArr,
+        preferred_etc_arr: setFieldArray(jdData.preferredEtcArr || []),
+      });
+    }
+  }, [jdData, reset]);
 
   usePreventRouting(
     Boolean(Object.keys(dirtyFields).length) && !isSubmitSuccessful,
