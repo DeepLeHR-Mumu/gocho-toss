@@ -5,6 +5,8 @@ import { FiTool, FiEye, FiChevronRight } from "react-icons/fi";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
+import homeAdRequest from "@/public/image/home_ad_request.svg";
+
 import { useJdArr, useManagerProfile } from "@/apis";
 
 import { INTERNAL_URL } from "@/constants";
@@ -66,8 +68,10 @@ export const SidePart: FunctionComponent = () => {
           </div>
         </div>
       </div>
-      <div css={partCssObj.partContainer}>
-        <p>광고문의</p>
+      <div css={cssObj.adImageWrapper}>
+        <a href="mailto:register@deeplehr.com" target="_blank" rel="noreferrer noopener">
+          <Image src={homeAdRequest} alt="고초대졸닷컴 광고 문의" />
+        </a>
       </div>
     </div>
   );

@@ -100,4 +100,11 @@ export const cssObj = {
     margin: 1rem 0;
     border-left: 1px solid ${NEWCOLORS.GRAY200};
   `,
+
+  adImageWrapper: css`
+    border-radius: 1rem;
+    overflow: hidden;
+    width: 20.5rem;
+    height: 27.25rem;
+  `,
 };
