@@ -7,7 +7,7 @@ import defaultCompanyLogo from "shared-image/global/common/default_company_logo.
 
 import homeAdRequest from "@/public/image/home_ad_request.svg";
 
-import { useJdArr, useManagerProfile } from "@/apis";
+import { useManagerProfile } from "@/apis";
 
 import { INTERNAL_URL } from "@/constants";
 import { partCssObj } from "../style";
@@ -15,8 +15,6 @@ import { cssObj } from "./style";
 
 export const SidePart: FunctionComponent = () => {
   const { data: userInfoData } = useManagerProfile();
-  const { data: processJdDataObj } = useJdArr(Boolean(userInfoData), { filter: "progress" });
-  const { data: waitingJdDataObj } = useJdArr(Boolean(userInfoData), { filter: "waiting" });
 
   const isAuth = userInfoData?.status.name === "인증완료";
 
@@ -46,7 +44,7 @@ export const SidePart: FunctionComponent = () => {
             <div css={cssObj.infoContainer}>
               <FiEye />
               <strong css={cssObj.infoTitle}>기업 조회수</strong>
-              <p css={cssObj.info}>{userInfoData?.company.id}</p>
+              <p css={cssObj.info}>{userInfoData?.company.view.toLocaleString()}회</p>
             </div>
           </>
         ) : (
@@ -59,12 +57,14 @@ export const SidePart: FunctionComponent = () => {
         <div css={cssObj.jdCountContainer}>
           <div css={cssObj.jdCountWrapper}>
             <p css={cssObj.countInfo}>진행중 공고</p>
-            <p css={cssObj.countNumber(isAuth)}>{isAuth ? processJdDataObj?.pageResult.totalElements : 0}</p>
+            <p css={cssObj.countNumber(isAuth)}>
+              {isAuth ? userInfoData?.company.progressJdCount.toLocaleString() : 0}
+            </p>
           </div>
           <div css={cssObj.contour} />
           <div css={cssObj.jdCountWrapper}>
             <p css={cssObj.countInfo}>대기중 공고</p>
-            <p css={cssObj.countNumber(isAuth)}>{isAuth ? waitingJdDataObj?.pageResult.totalElements : 0}</p>
+            <p css={cssObj.countNumber(isAuth)}>{isAuth ? userInfoData?.company.waitingJdCount.toLocaleString() : 0}</p>
           </div>
         </div>
       </div>

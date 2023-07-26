@@ -20,6 +20,9 @@ export interface ResponseObjDef {
       name: string;
       logo_url: string;
       industry: string;
+      view: number;
+      progress_jd_count: number;
+      waiting_jd_count: number;
     };
     status: AuthStatus;
   };
