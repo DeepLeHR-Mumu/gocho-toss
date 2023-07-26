@@ -15,20 +15,16 @@ export const cssObj = {
   `,
 
   titleContainer: css`
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 2.75rem;
   `,
 
-  backIcon: css`
-    > svg {
-      width: 1.5rem;
-      height: 1.5rem;
-    }
-  `,
-
   closeIcon: css`
+    position: absolute;
+    right: 0;
     > svg {
       width: 1.5rem;
       height: 1.5rem;

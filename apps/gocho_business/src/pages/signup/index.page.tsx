@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import Slider from "react-slick";
-import { FiArrowLeft, FiX } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 import { NextPage } from "next";
 import Link from "next/link";
 
@@ -19,11 +19,8 @@ const Signup: NextPage = () => {
       <AuthNav />
       <section css={cssObj.sectionContainer}>
         <div css={cssObj.titleContainer}>
-          <Link href={INTERNAL_URL.HOME} passHref css={cssObj.backIcon}>
-            <FiArrowLeft />
-          </Link>
           <p css={cssObj.title}>회원가입</p>
-          <Link href={INTERNAL_URL.HOME} passHref css={cssObj.closeIcon}>
+          <Link href={INTERNAL_URL.LOGIN} passHref css={cssObj.closeIcon}>
             <FiX />
           </Link>
         </div>
