@@ -13,6 +13,7 @@ export const cssObj = {
     background-color: ${NEWCOLORS.WHITE};
     height: 3.5rem;
     box-shadow: 0 2px 10px 0 #00000008;
+    z-index: 90;
   `,
 
   noticeContainer: css`

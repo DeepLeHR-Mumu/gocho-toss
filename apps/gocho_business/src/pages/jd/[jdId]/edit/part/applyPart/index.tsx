@@ -346,7 +346,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
               <label css={commonCssObj.inputLabel} htmlFor={`applyDocumentArr${item.id}`}>
                 <input
                   id={`applyDocumentArr${item.id}`}
-                  css={commonCssObj.input(55.5, Boolean(errors.apply_document_arr))}
+                  css={commonCssObj.input(15, Boolean(errors.apply_document_arr))}
                   placeholder="예) 이력서 (최대 20자)"
                   maxLength={20}
                   {...register(`apply_document_arr.${index}.value`, {
@@ -389,7 +389,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
               <label css={commonCssObj.inputLabel} htmlFor={`etcArr${item.id}`}>
                 <input
                   id={`etcArr${item.id}`}
-                  css={commonCssObj.input(15, Boolean(errors.etc_arr))}
+                  css={commonCssObj.input(55.5, Boolean(errors.etc_arr))}
                   placeholder="기타 사항이 있는 경우 기재해 주세요 (최대 50자)"
                   maxLength={50}
                   {...register(`etc_arr.${index}.value`, {

@@ -164,11 +164,6 @@ const CompanyEditPage: NextPage = () => {
     companyEditFailEvent(submitCount);
   }, [submitCount]);
 
-  useEffect(() => {
-    if (!companyDetailData || isRefetching.current) return;
-    if (!companyDetailData.uploader.isMine) window.alert(ALREADY_DONE_EDIT_MESSAGE);
-  }, [companyDetailData]);
-
   if (!companyDetailData) {
     return (
       <div css={cssObj.spinner}>

@@ -100,7 +100,7 @@ export const cssObj = {
     padding: 0.25rem 0;
     overflow-y: scroll;
     background-color: ${NEWCOLORS.WHITE};
-    z-index: 50;
+    z-index: 100;
   `,
 
   alarmContainer: css`
@@ -166,7 +166,7 @@ export const cssObj = {
     width: 15rem;
     padding: 1rem 0 0.25rem;
     background-color: ${NEWCOLORS.WHITE};
-    z-index: 50;
+    z-index: 100;
   `,
 
   companyProfile: css`
@@ -212,7 +212,7 @@ export const cssObj = {
     width: 15rem;
     padding-top: 1.25rem;
     background-color: ${NEWCOLORS.WHITE};
-    z-index: 50;
+    z-index: 100;
   `,
 
   userInfoContainer: css`
