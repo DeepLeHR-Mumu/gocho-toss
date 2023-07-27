@@ -6,6 +6,7 @@ export interface ReceptInfoPartProps {
     cut: boolean;
     applyUrl: string;
     applyRouteArr: string[];
+    applyDocumentArr: string[];
     etcArr: string[];
   };
 }

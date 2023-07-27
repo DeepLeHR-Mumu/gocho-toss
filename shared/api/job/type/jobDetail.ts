@@ -32,6 +32,7 @@ export interface JobDetailObjDef {
   end_time: string;
   process_arr: string[];
   apply_route_arr: string[];
+  apply_document_arr: string[];
   apply_url: string;
   etc_arr: string[];
   bookmark: number;

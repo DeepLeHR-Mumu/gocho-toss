@@ -14,6 +14,7 @@ import {
   desc,
   detailTitle,
   flexBox,
+  dataBox,
   infoBox,
   infoDetailBox,
   infoTitle,
@@ -66,20 +67,32 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
               return <li key={`채용절차_${process}`}>{process}</li>;
             })}
           </ul>
-
           <div css={flexBox}>
-            <p css={detailTitle}>지원방법</p>
-            <p css={desc}>
-              {jobDetailData.applyRouteArr.map((route) => {
-                return (
-                  <span css={restPoint} key={`지원방법_${route}`}>
-                    {route}
-                  </span>
-                );
-              })}
-            </p>
+            <div css={dataBox}>
+              <p css={detailTitle}>지원방법</p>
+              <p css={desc}>
+                {jobDetailData.applyRouteArr.map((route) => {
+                  return (
+                    <span css={restPoint} key={`지원방법_${route}`}>
+                      {route}
+                    </span>
+                  );
+                })}
+              </p>
+            </div>
+            <div css={dataBox}>
+              <p css={detailTitle}>제출서류</p>
+              <p css={desc}>
+                {jobDetailData.applyDocumentArr.map((document) => {
+                  return (
+                    <span css={restPoint} key={`제출서류_${document}`}>
+                      {document}
+                    </span>
+                  );
+                })}
+              </p>
+            </div>
           </div>
-
           <div css={flexBox}>
             <p css={detailTitle}>기타사항</p>
             {jobDetailData.etcArr ? (
