@@ -33,7 +33,7 @@ const JdList: NextPageWithLayout = () => {
   }
 
   return (
-    <main css={cssObj.wrapper}>
+    <main>
       <PageLayout>
         <h2 css={cssObj.title}>공고 목록</h2>
         <section css={cssObj.container}>

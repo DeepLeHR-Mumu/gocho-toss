@@ -81,12 +81,20 @@ export const menuArr = [
         menuLink: `${INTERNAL_URL.BUSINESS_COMPANY_LIST_URL}?page=1`,
       },
       {
-        menuTitle: "기업회원 등록",
-        menuLink: INTERNAL_URL.BUSINESS_USER,
+        menuTitle: "회원 등록",
+        menuLink: `${INTERNAL_URL.BUSINESS_USER_REGISTER_URL}`,
       },
       {
-        menuTitle: "인증 요청 리스트",
-        menuLink: `${INTERNAL_URL.BUSINESS_AUTH_LIST_URL}?page=1`,
+        menuTitle: "회원 인증 요청",
+        menuLink: `${INTERNAL_URL.BUSINESS_USER_AUTH_LIST_URL}?page=1`,
+      },
+      {
+        menuTitle: "공지사항 리스트",
+        menuLink: INTERNAL_URL.BUSINESS_NOTICE_LIST,
+      },
+      {
+        menuTitle: "공지사항 등록",
+        menuLink: INTERNAL_URL.BUSINESS_NOTICE_REGISTER,
       },
     ],
   },

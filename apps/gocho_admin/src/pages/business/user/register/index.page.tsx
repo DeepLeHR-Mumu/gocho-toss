@@ -9,7 +9,7 @@ import type { NextPageWithLayout } from "@/types";
 import { cssObj } from "./style";
 import { RecruiterFormValues } from "./type";
 
-const BusinessUser: NextPageWithLayout = () => {
+const BusinessUserRegister: NextPageWithLayout = () => {
   const [searchWord, setSearchWord] = useState<string>("");
   const [checkMsg, setCheckMsg] = useState<string>();
   const isSubmitting = useRef(false);
@@ -119,6 +119,6 @@ const BusinessUser: NextPageWithLayout = () => {
   );
 };
 
-BusinessUser.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
+BusinessUserRegister.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
-export default BusinessUser;
+export default BusinessUserRegister;

@@ -18,9 +18,10 @@ export const cssObj = {
     border-bottom: 1px solid ${COLORS.GRAY80};
     padding: 1rem 0;
   `,
+
   container: css`
     display: grid;
-    grid-template-columns: 10% 35% 10% 15% 30%;
+    grid-template-columns: 5% 10% 15% 30% 10% 30%;
     justify-content: space-between;
     align-items: center;
 
@@ -33,8 +34,13 @@ export const cssObj = {
     }
   `,
 
-  centerDesc: css`
+  data: css`
     text-align: center;
+  `,
+
+  desc: css`
+    text-align: center;
+    ${shorten(2)};
   `,
 
   leftDesc: css`
@@ -58,29 +64,6 @@ export const cssObj = {
   flexBox: css`
     display: flex;
     justify-content: space-between;
-  `,
-
-  companyName: css`
-    font-weight: 500;
-    display: block;
-    margin-bottom: 0.25rem;
-    ${shorten()};
-  `,
-
-  startDateCSS: css`
-    display: block;
-    font-size: 0.875rem;
-    ::before {
-      content: "시작일 : ";
-    }
-  `,
-
-  endDateCSS: css`
-    font-size: 0.875rem;
-    ::before {
-      content: "마감일 : ";
-    }
-    display: block;
   `,
 
   applyButton: css`

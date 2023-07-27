@@ -18,9 +18,9 @@ export const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
   const { mutate: deleteJobMutate } = useDeleteJd();
   const { mutate: endJobMutate } = useEndJd();
 
-  const deleteJobHandler = (jobId: number) => {
+  const deleteJobHandler = (jdId: number) => {
     deleteJobMutate(
-      { jdId: jobId },
+      { jdId },
       {
         onSuccess: () => {
           queryClient.invalidateQueries();
@@ -29,9 +29,9 @@ export const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
     );
   };
 
-  const endJobHandler = (jobId: number) => {
+  const endJobHandler = (jdId: number) => {
     endJobMutate(
-      { jdId: jobId },
+      { jdId },
       {
         onSuccess: () => {
           queryClient.invalidateQueries();

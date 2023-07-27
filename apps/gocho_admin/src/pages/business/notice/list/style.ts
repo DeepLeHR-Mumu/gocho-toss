@@ -14,7 +14,7 @@ export const cssObj = {
 
   thead: css`
     display: grid;
-    grid-template-columns: 10% 35% 10% 15% 30%;
+    grid-template-columns: 5% 10% 15% 30% 10% 30%;
     justify-content: space-between;
     text-align: center;
     padding: 1rem 0;
@@ -33,6 +33,5 @@ export const cssObj = {
     display: flex;
     flex-direction: column;
     background-color: ${COLORS.GRAY100};
-    padding-top: 1rem;
   `,
 };
