@@ -21,7 +21,7 @@ const BusinessJdList: NextPageWithLayout = () => {
     isError,
   } = useJdArr({
     order: "recent",
-    status: jdStatus,
+    filter: jdStatus,
     size: JD_SEARCH_LIMIT,
     page: Number(router.query.page),
   });

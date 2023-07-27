@@ -20,7 +20,6 @@ const JdList: NextPageWithLayout = () => {
   } = useJdArr({
     order: "recent",
     filter: "valid",
-    status: "all",
     size: JD_SEARCH_LIMIT,
     page: Number(router.query.page),
   });
