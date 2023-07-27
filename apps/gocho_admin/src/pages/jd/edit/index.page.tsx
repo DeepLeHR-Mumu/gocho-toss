@@ -51,6 +51,7 @@ const JdEdit: NextPageWithLayout = () => {
       cut: jobData?.cut ? jobData.cut : false,
       process_arr: jobData?.processArr.join("\n"),
       apply_route_arr: jobData?.applyRouteArr.join("\n"),
+      apply_document_arr: jobData?.applyDocumentArr.join("\n"),
       apply_url: jobData?.applyUrl,
       etc_arr: jobData?.etcArr.join("\n"),
       middle: jobData?.eduSummary.middle,

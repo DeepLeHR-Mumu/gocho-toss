@@ -24,7 +24,6 @@ export const PositionRequiredDataPart: FunctionComponent<PositionBoxProps> = ({ 
           <li>
             <strong css={cssObj.requiredTitle}>학력 조건</strong>
             <div css={cssObj.flexBox}>
-              <CheckBoxWithDesc registerObj={{ ...jobForm.register("middle") }} id="middle" desc="중졸" />
               <CheckBoxWithDesc registerObj={{ ...jobForm.register("high") }} id="high" desc="고졸" />
               <CheckBoxWithDesc registerObj={{ ...jobForm.register("college") }} id="college" desc="초대졸" />
               <CheckBoxWithDesc registerObj={{ ...jobForm.register("four") }} id="four" desc="4년제" />

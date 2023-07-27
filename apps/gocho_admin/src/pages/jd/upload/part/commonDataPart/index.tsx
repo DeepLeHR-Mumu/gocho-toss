@@ -162,6 +162,13 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobForm
                 />
               </div>
             </li>
+            <li>
+              <strong css={cssObj.noRequiredTitle}>제출 서류</strong>
+              <div css={cssObj.textareaBox}>
+                <p css={cssObj.textareaWarning}>엔터로 구분해주세요, 필수가 아닙니다</p>
+                <textarea css={cssObj.textarea} {...jobForm.register("apply_document_arr", {})} />
+              </div>
+            </li>
           </ul>
           <ul>
             <li>
