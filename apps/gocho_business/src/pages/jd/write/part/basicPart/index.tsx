@@ -1,4 +1,4 @@
-import { ChangeEvent, FunctionComponent, useState } from "react";
+import { ChangeEvent, FunctionComponent, useEffect, useState } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
@@ -47,10 +47,17 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
     setValue(`task_sub_arr`, currentSubTasks);
   };
 
-  const hireNumberClickHandler = (value: number, label: string) => {
+  const hireNumberStringConverter = (value: number) => {
+    if (value === -1) return "0";
+    if (value === -2) return "00";
+    if (value === -3) return "000";
+    return `${value}`;
+  };
+
+  const hireNumberClickHandler = (value: number) => {
     setValue(`hire_number`, value);
     trigger(`hire_number`);
-    setHireNumberLabel(label);
+    setHireNumberLabel(hireNumberStringConverter(value));
   };
 
   const subTaskTextMaker = (selectedSubTask: string[]) => {
@@ -79,6 +86,8 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
   const isConversionActivated = watch("contract_type") === "인턴" || watch("contract_type") === "계약>정규";
   const isYearActivated = watch("required_exp") === "경력" || watch("required_exp") === "신입/경력";
   const selectedSubTaskObj = TASK_ARR.find((task) => watch("task_main") === task.mainTask);
+
+  useEffect(() => setHireNumberLabel(hireNumberStringConverter(watch("hire_number") || 0)), [watch]);
 
   return (
     <div css={commonCssObj.partContainer}>
@@ -248,13 +257,13 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
             <p css={commonCssObj.errorMessage}>{errors.hire_number && errors.hire_number?.message}</p>
           </div>
           <div css={cssObj.hireNumberContainer}>
-            <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-1, "0")}>
+            <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-1)}>
               0명
             </button>
-            <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-2, "00")}>
+            <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-2)}>
               00명
             </button>
-            <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-3, "000")}>
+            <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-3)}>
               000명
             </button>
           </div>

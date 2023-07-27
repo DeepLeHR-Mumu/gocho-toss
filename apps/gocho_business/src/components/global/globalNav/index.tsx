@@ -101,15 +101,15 @@ export const GlobalNav: FunctionComponent = () => {
             <div css={cssObj.alarmMenu}>
               {alarmArrObj?.alarmDataArr.length !== 0 ? (
                 alarmArrObj?.alarmDataArr.map((alarm) => (
-                  <>
+                  <div key={`alarm${alarm.id}`}>
                     <Link href={alarmCategoryToLink(alarm.category)}>
-                      <div key={`alarm${alarm.id}`} css={cssObj.alarmContainer}>
+                      <div css={cssObj.alarmContainer}>
                         <p css={cssObj.infoType(alarm.isRead)}>{alarm.category}</p>
                         <strong css={cssObj.infoTitle(alarm.isRead)}>{alarm.description}</strong>
                       </div>
                     </Link>
                     <div css={cssObj.contour} />
-                  </>
+                  </div>
                 ))
               ) : (
                 <p css={cssObj.noAlarmDesc}>
