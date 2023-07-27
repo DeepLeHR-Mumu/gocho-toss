@@ -18,6 +18,7 @@ export const cssObj = {
   companyContainer: css`
     padding: 0 2rem;
     display: flex;
+    flex-wrap: wrap;
     gap: 0.25rem;
 
     > p {

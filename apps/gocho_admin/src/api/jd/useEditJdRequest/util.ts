@@ -25,6 +25,7 @@ export const jdDetailSelector = ({ data: jd }: ResponseObjDef) => {
     endTime: jd.end_time,
     processArr: jd.process_arr,
     applyRouteArr: jd.apply_route_arr,
+    applyDocumentArr: jd.apply_document_arr,
     applyUrl: jd.apply_url,
     etcArr: jd.etc_arr,
     title: jd.title,

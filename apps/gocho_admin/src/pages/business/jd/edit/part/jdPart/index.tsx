@@ -45,6 +45,16 @@ export const JdPart: FunctionComponent<JdPartProps> = ({ jd }) => {
         </div>
       </div>
       <div css={cssObj.dataContainer}>
+        <strong css={cssObj.dataTitle}>제출 서류</strong>
+        <div>
+          {jd.applyDocumentArr.map((document) => (
+            <p key={`ApplyDocumentArr${document}`} css={cssObj.dataBox}>
+              {document}
+            </p>
+          ))}
+        </div>
+      </div>
+      <div css={cssObj.dataContainer}>
         <strong css={cssObj.dataTitle}>지원 링크</strong>
         <p css={cssObj.dataBox}>{jd.applyUrl}</p>
       </div>

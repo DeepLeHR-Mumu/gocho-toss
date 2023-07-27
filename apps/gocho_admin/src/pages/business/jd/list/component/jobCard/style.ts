@@ -37,25 +37,11 @@ export const cssObj = {
     ${shorten()};
   `,
 
-  taskContainer: css`
+  taskBox: css`
     width: 20%;
     display: flex;
     justify-content: center;
     ${shorten()};
-  `,
-
-  taskBox: css`
-    :after {
-      content: ",";
-      margin-right: 0.25rem;
-    }
-
-    :last-of-type {
-      :after {
-        content: "";
-        margin-right: 0;
-      }
-    }
   `,
 
   dateBox: css`

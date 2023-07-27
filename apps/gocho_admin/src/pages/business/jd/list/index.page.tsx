@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState, ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { useJdArr } from "@/api";
 import { ErrorScreen, LoadingScreen, Pagination, GlobalLayout } from "@/component";
@@ -11,9 +11,9 @@ import JobCard from "./component/jobCard";
 import { JD_SEARCH_LIMIT } from "./constant";
 import { cssObj } from "./style";
 
-const BusinessJdList: NextPageWithLayout = () => {
-  const [jdStatus, setJdStatus] = useState<"upload-waiting" | "modify-waiting">("upload-waiting");
+const BusinessJdRegisterList: NextPageWithLayout = () => {
   const router = useRouter();
+  const filter = String(router.query.type) === "register" ? "upload-waiting" : "modify-waiting";
 
   const {
     data: jobDataObj,
@@ -21,7 +21,7 @@ const BusinessJdList: NextPageWithLayout = () => {
     isError,
   } = useJdArr({
     order: "recent",
-    filter: jdStatus,
+    filter,
     size: JD_SEARCH_LIMIT,
     page: Number(router.query.page),
   });
@@ -34,23 +34,10 @@ const BusinessJdList: NextPageWithLayout = () => {
     return <ErrorScreen />;
   }
 
-  const changeJdStatusHandler = () => {
-    setJdStatus((prev) => (prev === "upload-waiting" ? "modify-waiting" : "upload-waiting"));
-  };
-
   return (
     <main css={mainContainer}>
       <div css={cssObj.titleContainer}>
-        <h2 css={pageTitle}>{jdStatus === "upload-waiting" ? "공고 등록 요청 목록" : "공고 수정 요청 목록"}</h2>
-        <button
-          type="button"
-          css={cssObj.listChangeButton}
-          onClick={() => {
-            changeJdStatusHandler();
-          }}
-        >
-          {jdStatus === "upload-waiting" ? "수정 요청 목록 보기" : "등록 요청 목록 보기"}
-        </button>
+        <h2 css={pageTitle}>{filter === "upload-waiting" ? "공고 등록 요청 목록" : "공고 수정 요청 목록"}</h2>
       </div>
       <section css={cssObj.sectionContainer}>
         <table css={cssObj.tableContainer}>
@@ -70,11 +57,14 @@ const BusinessJdList: NextPageWithLayout = () => {
           </tbody>
         </table>
       </section>
-      <Pagination totalPage={jobDataObj.pageResult.totalPages} url={INTERNAL_URL.BUSINESS_JD_LIST_URL} />
+      <Pagination
+        totalPage={jobDataObj.pageResult.totalPages}
+        url={`${INTERNAL_URL.BUSINESS_JD_LIST_URL}?type=${String(router.query.type)}`}
+      />
     </main>
   );
 };
 
-BusinessJdList.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
+BusinessJdRegisterList.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
-export default BusinessJdList;
+export default BusinessJdRegisterList;
