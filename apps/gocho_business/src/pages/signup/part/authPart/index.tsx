@@ -63,12 +63,6 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
     <form onSubmit={handleSubmit(postSubmit)}>
       <div css={cssObj.formWrapper}>
         <div css={cssObj.authWrapper}>
-          <form name="form_chk" id="form" action="https://nice.checkplus.co.kr/CheckPlusSafeModel/service.cb">
-            <input type="hidden" id="m" name="m" value="service" />
-            <input type="hidden" id="token_version_id" name="token_version_id" value="" />
-            <input type="hidden" id="enc_data" name="enc_data" />
-            <input type="hidden" id="integrity_value" name="integrity_value" />
-          </form>
           <button
             type="button"
             css={cssObj.authLink}

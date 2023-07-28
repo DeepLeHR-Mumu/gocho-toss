@@ -9,7 +9,8 @@ export const SideBar: FunctionComponent = () => {
   const router = useRouter();
 
   const menuActiveHandler = (path: string, menu: string) => {
-    if (path === "/business/jd/list") return menu.includes(String(router.query.type));
+    if (path === "/business/jd/list")
+      return menu.includes(String("/business/jd/list")) && menu.includes(String(router.query.type));
     return path === menu.split("?")[0];
   };
 

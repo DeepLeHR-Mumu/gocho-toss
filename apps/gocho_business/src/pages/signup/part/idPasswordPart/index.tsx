@@ -38,6 +38,7 @@ export const IdPasswordPart: FunctionComponent<FindCompanyPartProps> = ({ slider
           <p css={cssObj.inputTitle}>아이디(이메일)</p>
           <input
             css={commonCssObj.input(25.5, Boolean(errors.email))}
+            autoComplete="new-password"
             type="text"
             {...register("email", {
               required: LOGIN_ERROR_MESSAGES.BLANK_EMAIL,
@@ -57,6 +58,7 @@ export const IdPasswordPart: FunctionComponent<FindCompanyPartProps> = ({ slider
           <input
             css={commonCssObj.input(25.5, Boolean(errors.password))}
             type="password"
+            autoComplete="new-password"
             {...register("password", {
               required: LOGIN_ERROR_MESSAGES.BLANK_PWD,
               pattern: {

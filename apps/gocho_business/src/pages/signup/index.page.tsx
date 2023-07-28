@@ -1,8 +1,10 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import { FiX } from "react-icons/fi";
 import { NextPage } from "next";
 import Link from "next/link";
+
+import { Spinner } from "shared-ui/common/atom/spinner";
 
 import { AuthNav } from "@/components/global/authNav";
 import { INTERNAL_URL } from "@/constants";
@@ -12,7 +14,21 @@ import { setCarouselSetting } from "./util";
 import { cssObj } from "./style";
 
 const Signup: NextPage = () => {
+  const [renderInputs, setRenderInputs] = useState(false);
+
   const sliderRef = useRef<Slider>(null);
+
+  useEffect(() => {
+    setRenderInputs(true);
+  }, []);
+
+  if (!renderInputs) {
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <main>
