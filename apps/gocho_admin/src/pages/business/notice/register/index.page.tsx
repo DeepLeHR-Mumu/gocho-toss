@@ -9,7 +9,7 @@ import { useAddNotice } from "@/api";
 import { GlobalLayout } from "@/component";
 
 import { cssObj } from "./style";
-import { NoticeFormValues } from "./type";
+import { TYPE_ARR, NoticeFormValues } from "./type";
 
 const BusinessNoticeRegister: NextPageWithLayout = () => {
   const isSubmitting = useRef(false);
@@ -24,7 +24,7 @@ const BusinessNoticeRegister: NextPageWithLayout = () => {
 
     addNoticeMutate(noticeObj, {
       onSuccess: () => {
-        setCheckMsg("새로운 기업 계정이 추가되었습니다.");
+        setCheckMsg("새로운 공지 사항이 추가되었습니다.");
       },
 
       onError: () => {
@@ -44,7 +44,14 @@ const BusinessNoticeRegister: NextPageWithLayout = () => {
         <div css={cssObj.inputWrapper}>
           <div css={cssObj.inputContainer}>
             <strong css={cssObj.inputTitle}>종류</strong>
-            <input css={cssObj.inputBox(false)} {...register("type", { required: "필수 항목입니다." })} />
+            <select css={cssObj.inputBox(false)} {...register("type", { required: "필수 항목입니다." })}>
+              <option value="">공지사항 종류 선택 ▼</option>
+              {TYPE_ARR.map((type) => (
+                <option key={type.text} value={type.text}>
+                  {type.text}
+                </option>
+              ))}
+            </select>
           </div>
           <p css={cssObj.errorMessage}>{formState.errors.type && formState.errors.type.message}</p>
         </div>
