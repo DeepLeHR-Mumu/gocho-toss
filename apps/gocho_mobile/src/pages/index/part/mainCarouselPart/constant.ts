@@ -23,7 +23,7 @@ export const carouselArr = [
     topDesc: "OPEN",
     middleDesc: "포스코인터내셔녈",
     title: "전문기술직 (인천/광양) 채용형 인턴 신입사원 모집",
-    lastDesc: "정규직 채용률 80% 이상!",
+    lastDesc: "정규직 채용률 80% 내외",
     backgroundColor: "#0077c3",
     buttonObj: {
       target: "_blank" as const,
