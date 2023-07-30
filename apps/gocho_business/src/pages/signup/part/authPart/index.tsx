@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FiChevronRight, FiSmartphone } from "react-icons/fi";
 import axios from "axios";
@@ -6,15 +6,21 @@ import axios from "axios";
 import { NewSharedButton } from "shared-ui/common/newSharedButton";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
+import { axiosNoTokenInstance } from "@/apis";
 import { useModal } from "@/globalStates";
 import { commonCssObj } from "@/styles";
 
-import { AuthPartProps, PostSubmitValues } from "./type";
+import { AuthPartProps, DecryptedUserInfo, PostSubmitValues } from "./type";
 
 import { cssObj } from "./style";
 
 export const AuthPart: FunctionComponent<AuthPartProps> = () => {
   const { setModal } = useModal();
+  const [flag, setFlag] = useState(false);
+  // eslint-disable-next-line
+  const [userInfo, setUserInfo] = useState<DecryptedUserInfo | null>();
+  const tokenVersionId = useRef<string | null>(null);
+  const redirectUrl = useRef<string | null>(null);
 
   const {
     handleSubmit,
@@ -24,6 +30,33 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
   } = useForm<PostSubmitValues>({
     mode: "onChange",
   });
+
+  useEffect(() => {
+    redirectUrl.current = `${window.location.origin}/api/post-test`;
+  }, []);
+
+  useEffect(() => {
+    const getDecryptedUserInfo = () => {
+      if (document.visibilityState === "visible" && flag && tokenVersionId.current !== null) {
+        axios
+          .post<DecryptedUserInfo>(`${redirectUrl.current}?token_version_id=${tokenVersionId.current}`)
+          .then((res) => {
+            setUserInfo(res.data);
+            setFlag(false);
+            tokenVersionId.current = null;
+          })
+          .catch(() => {
+            // 400 처리
+            setUserInfo(null);
+          });
+      }
+    };
+    document.addEventListener("visibilitychange", getDecryptedUserInfo);
+
+    return () => {
+      document.removeEventListener("visibilitychange", getDecryptedUserInfo);
+    };
+  }, [flag]);
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
     const newFormData = {
@@ -39,20 +72,25 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
   };
 
   const handleIdentityCheck = async () => {
-    const serverHost = process.env.NEXT_PUBLIC_SERVER_HOST;
-    const returnUrl = `http://localhost:3000/signup/success`;
-    const redirectUrl = `http://localhost:3000/signup/fail`;
+    const response = await axiosNoTokenInstance.get(`/auth/pass/token?redirectUrl=${redirectUrl.current}`);
 
-    const response = await axios.get(`${serverHost}/nice/encrypt/data`, {
-      params: { returnUrl, redirectUrl },
-      withCredentials: true,
-    });
+    if (response.data) {
+      const { data } = response.data;
+      const { encData, integrityValue, dataBody } = data;
+      const { token_version_id } = dataBody;
 
-    const encodeData = response.data;
-    const form = document.forms.namedItem("form_chk") as HTMLFormElement;
-    form.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
-    form.EncodeData.value = encodeData;
-    form.submit();
+      tokenVersionId.current = token_version_id;
+
+      const form = document.forms.namedItem("form_chk") as HTMLFormElement;
+      form.target = "nicePopup";
+      form.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
+      form.enc_data.value = encData;
+      form.token_version_id.value = token_version_id;
+      form.integrity_value.value = integrityValue;
+
+      form.submit();
+      setFlag(true);
+    }
   };
 
   const isDepartment = Boolean(watch("department"));
