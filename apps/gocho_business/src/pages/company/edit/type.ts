@@ -1,4 +1,6 @@
 export interface CompanyFormValues {
+  logo_url: string;
+  background_image_url: string;
   industry: string;
   size: string;
   found_date: string;

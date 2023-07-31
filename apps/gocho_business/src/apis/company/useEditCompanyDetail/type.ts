@@ -4,6 +4,8 @@ import { UseMutationResult } from "@tanstack/react-query";
 export interface RequestObjDef {
   companyId: number;
   dto: {
+    logo_url: string;
+    background_image_url: string;
     manager_id: number;
     employee_number: number;
     location: {

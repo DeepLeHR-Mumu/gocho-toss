@@ -132,6 +132,8 @@ const CompanyEditPage: NextPage = () => {
       }));
 
       reset({
+        logo_url: companyDetailData.logo,
+        background_image_url: companyDetailData.backgroundImage,
         industry: companyDetailData.industry,
         size: companyDetailData.size,
         found_date: dayjs(new Date(companyDetailData.foundDate)).format("YYYY-MM-DD"),
