@@ -17,7 +17,7 @@ export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ companyForm }
     if (window.confirm("공장을 삭제하시겠습니까?")) {
       const prevFactoryArr = watch("factory_arr");
       const filteredArr = prevFactoryArr ? prevFactoryArr.filter((factory) => factory.id !== factoryId) : [];
-      setValue("factory_arr", filteredArr);
+      setValue("factory_arr", filteredArr, { shouldDirty: true });
       factoryDeleteDoneEvent();
     }
   };

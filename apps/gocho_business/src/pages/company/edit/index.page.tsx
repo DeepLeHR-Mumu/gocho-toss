@@ -136,7 +136,7 @@ const CompanyEditPage: NextPage = () => {
         size: companyDetailData.size,
         found_date: dayjs(new Date(companyDetailData.foundDate)).format("YYYY-MM-DD"),
         employee_number: companyDetailData.employeeNumber,
-        intro: companyDetailData.intro || "",
+        intro: companyDetailData.intro,
         location: {
           address: companyDetailData.location.address,
           x: companyDetailData.location.x,

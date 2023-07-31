@@ -9,6 +9,23 @@ interface WelfareObjDef {
   etc: string[] | null;
 }
 
+interface factoryObjDef {
+  id: number;
+  name: string;
+  address: string;
+  maleNumber: number;
+  femaleNumber: number;
+  product: string;
+  bus: {
+    exists: boolean;
+    desc: string | null;
+  };
+  dormitory: {
+    exists: boolean;
+    desc: string | null;
+  };
+}
+
 export interface CompanyPartProps {
   company: {
     id: number;
@@ -38,5 +55,6 @@ export interface CompanyPartProps {
       desc: string | null;
     };
     welfare: WelfareObjDef | null;
+    factoryArr: factoryObjDef[] | null;
   };
 }

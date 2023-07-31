@@ -54,7 +54,7 @@ export const FactoryEditModal: FunctionComponent = () => {
       dormitory_bool: factoryRequestObj.dormitory_bool === "true",
       dormitory_etc: factoryRequestObj.dormitory_etc === "" ? null : factoryRequestObj.dormitory_etc,
     };
-    setCompanyValue("factory_arr", replaceFactory(prevFactoryArr, editFactory));
+    setCompanyValue("factory_arr", replaceFactory(prevFactoryArr, editFactory), { shouldDirty: true });
     closeModal();
   };
 

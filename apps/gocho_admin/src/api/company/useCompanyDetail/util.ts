@@ -41,7 +41,7 @@ export const companyDetailConverter = ({ data: company }: ResponseObjDef) => ({
   },
   factoryArr: company.factory_arr
     ? company.factory_arr.map((factory) => ({
-        factoryName: factory.name,
+        name: factory.name,
         id: factory.id,
         companyId: factory.company_id,
         address: factory.address,

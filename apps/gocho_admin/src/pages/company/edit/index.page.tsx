@@ -61,7 +61,7 @@ const CompanyEdit: NextPageWithLayout = () => {
 
     const FactoryNewArr = companyData?.factoryArr?.map((factory) => ({
       id: factory.id,
-      factory_name: factory.factoryName,
+      factory_name: factory.name,
       address: factory.address,
       male_number: factory.maleNumber,
       female_number: factory.femaleNumber,

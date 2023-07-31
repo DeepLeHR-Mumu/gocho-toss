@@ -12,6 +12,7 @@ import { cssObj } from "./style";
 
 export const WelfarePart: FunctionComponent<WelfarePartProps> = ({ companyForm, welfareData }) => {
   const welfareButtonInfoRef = useRef(Object.entries(WELFARE_DESC_OBJ) as Entries<typeof WELFARE_DESC_OBJ>);
+  const { setValue } = companyForm;
 
   const { welfareArr: initialWelfareArr } = welfareArrCreator(welfareData);
   const [welfareArr, setWelfareArr] = useState(initialWelfareArr);
@@ -22,6 +23,7 @@ export const WelfarePart: FunctionComponent<WelfarePartProps> = ({ companyForm, 
     let newWelfareArr = [...welfareArr];
     if (isExist) {
       newWelfareArr = newWelfareArr.filter((welfare) => welfare.registerKey !== `welfare.${key}`);
+      setValue(`welfare.${key}`, [], { shouldDirty: true });
     } else {
       const { index } = WELFARE_DESC_OBJ[key];
       const welfareKey: WelfareKey = `welfare.${key}`;
