@@ -73,8 +73,6 @@ const JdListPage: NextPage = () => {
     }
   }, [router]);
 
-  const isAuth = userInfoData?.status.name === "인증완료";
-
   return (
     <PageLayout>
       <div css={cssObj.contentContainer}>
@@ -138,10 +136,10 @@ const JdListPage: NextPage = () => {
           </div>
         </div>
         <div css={cssObj.cardListContainer}>
-          {isAuth ? (
+          {jdDataObj?.pageResult.totalElements !== 0 ? (
             jdDataObj?.jdDataArr.map((jd) => <JdCard key={`BusinessJdCard${jd.id}`} jd={jd} />)
           ) : (
-            <p css={cssObj.noAuthJdCard}>기업 인증 후 공고 조희 및 등록이 가능합니다.</p>
+            <p css={cssObj.noAuthJdCard}>등록된 공고가 없습니다.</p>
           )}
         </div>
         <Pagination totalPage={jdDataObj ? jdDataObj.pageResult.totalPages : 0} url={INTERNAL_URL.JD_LIST} />

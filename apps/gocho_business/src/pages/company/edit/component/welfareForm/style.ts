@@ -63,7 +63,7 @@ export const cssObj = {
     gap: 0 1rem;
   `,
 
-  welfareInput: (isDisabled: boolean) => css`
+  welfareInput: css`
     flex-grow: 1;
     display: flex;
     align-items: center;
@@ -72,17 +72,13 @@ export const cssObj = {
     border-radius: 0.75rem;
     color: ${NEWCOLORS.BLACK};
     height: 3.25rem;
-    background-color: ${isDisabled ? `${NEWCOLORS.GRAY100}` : `${NEWCOLORS.WHITE}`};
+    background-color: ${NEWCOLORS.WHITE};
     padding: 0 1rem;
     font-weight: 400;
 
     ::placeholder {
       ${TEXTS.TITLE5};
       color: ${NEWCOLORS.GRAY300};
-    }
-
-    :disabled {
-      background-color: ${NEWCOLORS.GRAY100};
     }
   `,
 

@@ -1,15 +1,18 @@
 import { FunctionComponent } from "react";
 import { FiEdit3, FiMinus, FiPlus } from "react-icons/fi";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { useModal } from "@/globalStates";
 import { commonCssObj } from "@/styles";
-import { useDeleteFactory } from "@/apis";
+import { factoryArrKeyObj, useDeleteFactory } from "@/apis";
 import { factoryDeleteConfirmEvent, factoryDeleteDoneEvent } from "@/ga";
 
 import { FactoryPartProps } from "./type";
 import { cssObj } from "./style";
 
 export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ companyData }) => {
+  const queryClient = useQueryClient();
+
   const { setModal } = useModal();
   const { mutate: deleteFactoryMutation } = useDeleteFactory();
 
@@ -20,6 +23,7 @@ export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ companyData }
         { factoryId },
         {
           onSuccess: () => {
+            queryClient.invalidateQueries(factoryArrKeyObj.all);
             factoryDeleteDoneEvent();
           },
         }

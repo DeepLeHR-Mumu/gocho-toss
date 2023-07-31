@@ -65,7 +65,6 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({
   };
 
   const countFormat = new Intl.NumberFormat("ko", { notation: "compact", compactDisplay: "long" });
-  const isOtherEdit = !companyData.uploader.isMine;
 
   return (
     <section css={cssObj.partContainer} data-testid="company/edit/CompanyInfoPart">
@@ -78,14 +77,12 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({
             id="bgImg"
             accept="image/png, image/gif, image/jpeg, image/jpg"
             onChange={(changeEvent) => uploadImageHandler(changeEvent, setBgImage, setBgImagePreview)}
-            disabled={isOtherEdit}
           />
         </label>
         <button
           type="button"
           css={cssObj.imageUploadLabel(1, 1.25)}
           onClick={() => deleteImageHandler(setBgImage, setBgImagePreview)}
-          disabled={isOtherEdit}
         >
           <FiX />
         </button>
@@ -105,7 +102,6 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({
             type="button"
             css={cssObj.imageUploadLabel(9.25, 50.5)}
             onClick={() => deleteImageHandler(setLogo, setLogoPreview)}
-            disabled={isOtherEdit}
           >
             <FiX />
           </button>
@@ -118,7 +114,6 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({
               id="logoImg"
               accept="image/png, image/gif, image/jpeg, image/jpg"
               onChange={(changeEvent) => uploadImageHandler(changeEvent, setLogo, setLogoPreview)}
-              disabled={isOtherEdit}
             />
           </label>
         )}
@@ -151,7 +146,6 @@ export const CompanyInfoPart: FunctionComponent<CompanyInfoProps> = ({
                 value: 120,
                 message: "최대 길이는 120자입니다",
               },
-              disabled: isOtherEdit,
               onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
                 if (onBlurEvent.target.value.trim().length === 0) {
                   setValue("intro", "");

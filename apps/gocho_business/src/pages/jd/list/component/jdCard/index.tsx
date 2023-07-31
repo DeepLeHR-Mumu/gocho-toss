@@ -30,8 +30,8 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
   const isExpired = dayjs(jd.endTime).isBefore(dayjs());
   const isViewOn = isExpired || jd.status.name === "진행중";
   const isEditOn = jd.uploader.is_mine && !isExpired;
-  const isCopyOn = jd.uploader.is_mine && (isExpired || jd.status.name === "진행중");
   const isEndOn = jd.uploader.is_mine && !isExpired && jd.status.name === "진행중";
+  const isCopyOn = jd.uploader.is_mine;
   const isDeleteOn = jd.uploader.is_mine;
 
   const endJdHandler = (id: number) => {

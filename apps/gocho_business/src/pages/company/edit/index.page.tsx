@@ -14,7 +14,7 @@ import { CompanySideNav } from "@/components/global/companySideNav";
 
 import { PageHead } from "./pageHead";
 import { ButtonPart, CompanyInfoPart, LastEditInfoPart, BasicPart, WelfarePart, FactoryPart } from "./part";
-import { COMPANY_MESSAGE_OBJ, ALREADY_DONE_EDIT_MESSAGE } from "./constant";
+import { COMPANY_MESSAGE_OBJ } from "./constant";
 import { CompanyFormValues } from "./type";
 import { cssObj } from "./style";
 
@@ -49,16 +49,12 @@ const CompanyEditPage: NextPage = () => {
   const addCompanyDetail = (formData: CompanyFormValues) => {
     companyEditConfirmEvent();
     isRefetching.current = true;
-    companyDetailRefetch().then((response) => {
+    companyDetailRefetch().then(() => {
       if (isFormDirty) {
         window.alert("변경사항이 없습니다.");
         return;
       }
-      if (!response.data?.uploader.isMine) {
-        window.alert(ALREADY_DONE_EDIT_MESSAGE);
-        return;
-      }
-      if (response.data?.uploader.isMine && window.confirm(COMPANY_MESSAGE_OBJ.EDIT)) {
+      if (window.confirm(COMPANY_MESSAGE_OBJ.EDIT)) {
         putCompanyDetail(
           {
             companyId: userInfoData?.company.id as number,
@@ -188,7 +184,7 @@ const CompanyEditPage: NextPage = () => {
                 setBgImage={setBgImage}
                 setLogo={setLogo}
               />
-              <BasicPart companyForm={companyForm} isOtherEdit={!companyDetailData.uploader.isMine} />
+              <BasicPart companyForm={companyForm} />
               <WelfarePart companyForm={companyForm} companyData={companyDetailData} />
               <FactoryPart companyForm={companyForm} companyData={companyDetailData} />
               <div css={cssObj.infoBox}>

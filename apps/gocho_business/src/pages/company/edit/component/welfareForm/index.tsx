@@ -11,7 +11,6 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
   title,
   desc,
   welfareValueArr,
-  isMine,
   registerKey,
   companyFormObj,
 }) => {
@@ -68,10 +67,9 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
           <input
             ref={inputRef}
             type="text"
-            disabled={isMine}
-            maxLength={50}
+            maxLength={20}
             placeholder={desc}
-            css={cssObj.welfareInput(isMine)}
+            css={cssObj.welfareInput}
             onKeyUp={(onKeyEvent) => {
               if (onKeyEvent.key === "Enter") {
                 addValueHandler(inputRef.current?.value || "");
@@ -91,9 +89,8 @@ export const WelfareForm: FunctionComponent<WelfareFormProps> = ({
                 const key = `${title}_${data}${index}`;
                 return (
                   <div key={key} css={cssObj.inputLabel}>
-                    <p css={cssObj.welfareInput(isMine)}>{data}</p>
+                    <p css={cssObj.welfareInput}>{data}</p>
                     <button
-                      disabled={isMine}
                       type="button"
                       aria-label={`복지 ${data} 제거하기`}
                       css={cssObj.deleteButton}

@@ -11,7 +11,7 @@ import { MAX_LENGTH_ERROR_TEXT, ONLY_INT_ERROR_TEXT, INDUSTRY_ARR, SIZE_ARR } fr
 import { BasicPartProps } from "./type";
 import { cssObj } from "./style";
 
-export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOtherEdit }) => {
+export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) => {
   const [isIndustryOpen, setIsIndustryOpen] = useState<boolean>(false);
   const [isSizeOpen, setIsSizeOpen] = useState<boolean>(false);
 
@@ -67,7 +67,6 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
             onClick={() => {
               setIsIndustryOpen((prev) => !prev);
             }}
-            disabled={isOtherEdit}
           >
             {watch("industry")}
             {isIndustryOpen ? <FiChevronUp /> : <FiChevronDown />}
@@ -105,7 +104,6 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
             onClick={() => {
               setIsSizeOpen((prev) => !prev);
             }}
-            disabled={isOtherEdit}
           >
             {watch("size")}
             {isSizeOpen ? <FiChevronUp /> : <FiChevronDown />}
@@ -136,7 +134,6 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
           {...register("found_date", {
             required: "* 설립일을 입력해주세요.",
           })}
-          disabled={isOtherEdit}
         />
         <div css={cssObj.errorMessageWrapper}>
           <p css={commonCssObj.errorMessage}>{errors.found_date?.message}</p>
@@ -170,9 +167,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
               required: "* 사원수를 입력해주세요.",
               min: 1,
               pattern: NUMBER_REGEXP,
-              disabled: isOtherEdit,
             })}
-            disabled={isOtherEdit}
           />
           <p>명</p>
         </div>
@@ -193,10 +188,8 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
                 value: NUMBER_REGEXP,
                 message: ONLY_INT_ERROR_TEXT,
               },
-              disabled: isOtherEdit,
             })}
             placeholder="숫자만 입력해주세요"
-            disabled={isOtherEdit}
           />
           <p>만원</p>
         </div>
@@ -214,10 +207,8 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
               required: "* 평균 연봉을 입력해주세요.",
               min: 1000,
               pattern: NUMBER_REGEXP,
-              disabled: isOtherEdit,
             })}
             placeholder="숫자만 입력해주세요"
-            disabled={isOtherEdit}
           />
           <p>만원</p>
         </div>
@@ -236,7 +227,6 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
               value: 120,
               message: MAX_LENGTH_ERROR_TEXT,
             },
-            disabled: isOtherEdit,
             onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
               if (onBlurEvent.target.value.trim().length === 0) {
                 setValue("pay_desc", "");
@@ -244,7 +234,6 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
             },
           })}
           placeholder="상여금, 성과급 등의 정보를 적어주세요"
-          disabled={isOtherEdit}
         />
       </div>
       <div css={commonCssObj.longContainer}>
@@ -253,20 +242,10 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
         </div>
         <div>
           <div css={cssObj.nozoLabelContainer}>
-            <SharedRadioButton
-              registerObj={register("nozo.exists", { disabled: isOtherEdit, required: true })}
-              isDisabled={isOtherEdit}
-              value="true"
-              id="nozoTrue"
-            >
+            <SharedRadioButton registerObj={register("nozo.exists", { required: true })} value="true" id="nozoTrue">
               <p css={cssObj.radioLabel}>있음</p>
             </SharedRadioButton>
-            <SharedRadioButton
-              registerObj={register("nozo.exists", { disabled: isOtherEdit, required: true })}
-              isDisabled={isOtherEdit}
-              value="false"
-              id="nozoFalse"
-            >
+            <SharedRadioButton registerObj={register("nozo.exists", { required: true })} value="false" id="nozoFalse">
               <p css={cssObj.radioLabel}>없음</p>
             </SharedRadioButton>
           </div>
@@ -279,7 +258,6 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
                 value: 70,
                 message: MAX_LENGTH_ERROR_TEXT,
               },
-              disabled: isOtherEdit,
               onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
                 if (onBlurEvent.target.value.trim().length === 0) {
                   setValue("nozo.desc", "");
@@ -287,7 +265,6 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm, isOt
               },
             })}
             placeholder="보충설명(선택)"
-            disabled={isOtherEdit}
           />
           <div css={cssObj.errorMessageWrapper}>
             <p css={commonCssObj.errorMessage}>{errors.nozo?.desc?.message}</p>

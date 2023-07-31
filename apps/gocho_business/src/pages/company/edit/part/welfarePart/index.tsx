@@ -65,7 +65,6 @@ export const WelfarePart: FunctionComponent<WelfarePartProps> = ({ companyForm, 
             title={welfare.title}
             desc={welfare.desc}
             welfareValueArr={welfare.welfareValueArr}
-            isMine={!companyData.uploader.isMine}
             companyFormObj={companyForm}
             registerKey={welfare.registerKey}
           />

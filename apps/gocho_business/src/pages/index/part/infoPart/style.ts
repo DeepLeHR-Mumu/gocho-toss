@@ -41,7 +41,7 @@ export const cssObj = {
 
   infoType: css`
     ${TEXTS.TITLE7};
-    width: 5.25rem;
+    min-width: 5.25rem;
   `,
 
   infoTitle: css`
