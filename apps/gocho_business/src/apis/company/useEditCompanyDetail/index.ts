@@ -16,7 +16,7 @@ export const putCompanyDetail: PutCompanyDetailDef = async (requestObj) => {
   return data;
 };
 
-export const useAddCompanyDetail: useCompanyDetailProps = () => {
+export const useEditCompanyDetail: useCompanyDetailProps = () => {
   const queryClient = useQueryClient();
 
   return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({

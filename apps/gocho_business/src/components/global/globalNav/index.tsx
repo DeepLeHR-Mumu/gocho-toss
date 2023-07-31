@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
+
 import bizTextMono from "@/public/image/deepleLogo/bizTextMono.svg";
 import { useAlarmArr, useDoLogout, useManagerProfile, useReadAlarm } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
@@ -136,7 +138,12 @@ export const GlobalNav: FunctionComponent = () => {
             <div css={cssObj.companyMenu}>
               <div css={cssObj.companyProfile}>
                 <div css={cssObj.companyLogoBox}>
-                  <Image src={userInfoData.company.logoUrl} fill sizes="1" alt="상단 바 기업 로고" />
+                  <Image
+                    src={userInfoData.company.logoUrl || defaultCompanyLogo}
+                    fill
+                    sizes="1"
+                    alt="상단 바 기업 로고"
+                  />
                 </div>
                 <div>
                   <strong css={cssObj.companyName}>{userInfoData.company.name}</strong>

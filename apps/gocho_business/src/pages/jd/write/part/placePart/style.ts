@@ -52,12 +52,6 @@ export const cssObj = {
     color: ${NEWCOLORS.BLUEGRAY300};
   `,
 
-  buttonContainer: css`
-    display: flex;
-    align-items: center;
-    gap: 0 1.5rem;
-  `,
-
   editButton: css`
     > svg {
       width: 1.25rem;

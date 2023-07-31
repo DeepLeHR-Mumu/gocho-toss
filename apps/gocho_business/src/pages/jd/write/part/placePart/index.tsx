@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
-import { FiPlus, FiEdit3 } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
@@ -110,17 +110,6 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                       </button>
                       {factory.name}
                       <p css={cssObj.factoryAddress}>{factory.address}</p>
-                    </div>
-                    <div css={cssObj.buttonContainer}>
-                      <button
-                        type="button"
-                        css={cssObj.editButton}
-                        onClick={() => {
-                          setModal("factoryEditModal", factory);
-                        }}
-                      >
-                        <FiEdit3 />
-                      </button>
                     </div>
                   </div>
                 ))}

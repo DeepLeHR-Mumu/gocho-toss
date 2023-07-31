@@ -1,4 +1,5 @@
 export interface FactoryEditFormValues {
+  id: number;
   factory_name: string;
   address: string;
   male_number: number;

@@ -1,34 +1,31 @@
 import { ChangeEvent, FunctionComponent, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { FiX } from "react-icons/fi";
+import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 
 import { useFocusTrap } from "shared-hooks";
 
-import { useModal, factoryObjDef } from "@/globalStates";
-import { useEditFactory } from "@/apis";
+import { factoryObjDef, useModal } from "@/globalStates";
 import { commonCssObj } from "@/styles";
 
-import { factoryEditConfirmEvent, factoryEditDoneEvent } from "@/ga";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { NewSharedButton } from "shared-ui/common/newSharedButton";
-import { Address, useDaumPostcodePopup } from "react-daum-postcode";
-import { ModalComponent } from "../modalBackground";
 
+import { ModalComponent } from "../modalBackground";
 import { cssObj } from "./style";
 import { FactoryEditFormValues } from "./type";
 
 export const FactoryEditModal: FunctionComponent = () => {
   const { contentObj, closeModal } = useModal();
   const modalRef = useRef<HTMLDivElement>(null);
-  const isLoading = useRef(false);
 
   const { register, handleSubmit, setValue, reset } = useForm<FactoryEditFormValues>();
 
-  const factoryObj = contentObj as factoryObjDef;
+  const { factory: factoryObj, companyForm } = contentObj as factoryObjDef;
+  const { watch, setValue: setCompanyValue } = companyForm;
 
   useFocusTrap(modalRef);
 
-  const { mutate: editFactoryMutation } = useEditFactory();
   const openPostCodePopup = useDaumPostcodePopup();
 
   const onClickAddress = () => {
@@ -39,46 +36,40 @@ export const FactoryEditModal: FunctionComponent = () => {
     });
   };
 
-  const editFactoryHandler = (factoryRequestObj: FactoryEditFormValues) => {
-    if (isLoading.current) {
-      return;
+  const replaceFactory = (factoryArr: (typeof factoryObj)[], newFactory: typeof factoryObj) => {
+    const index = factoryArr.findIndex((factory) => factory.id === newFactory.id);
+    if (index !== -1) {
+      return [...factoryArr.slice(0, index), newFactory, ...factoryArr.slice(index + 1)];
     }
-    isLoading.current = true;
-    factoryEditConfirmEvent();
-    editFactoryMutation(
-      {
-        ...factoryRequestObj,
-        id: factoryObj.id,
-        bus_bool: factoryRequestObj.bus_bool === "true",
-        bus_etc: factoryRequestObj.bus_etc === "" ? null : factoryRequestObj.bus_etc,
-        dormitory_bool: factoryRequestObj.dormitory_bool === "true",
-        dormitory_etc: factoryRequestObj.dormitory_etc === "" ? null : factoryRequestObj.dormitory_etc,
-      },
-      {
-        onSuccess: () => {
-          factoryEditDoneEvent();
-          closeModal();
-        },
-        onSettled: () => {
-          isLoading.current = false;
-        },
-      }
-    );
-    isLoading.current = false;
+    return factoryArr;
+  };
+
+  const editFactoryHandler = (factoryRequestObj: FactoryEditFormValues) => {
+    const prevFactoryArr = watch("factory_arr");
+    const editFactory = {
+      ...factoryRequestObj,
+      id: factoryObj.id,
+      bus_bool: factoryRequestObj.bus_bool === "true",
+      bus_etc: factoryRequestObj.bus_etc === "" ? null : factoryRequestObj.bus_etc,
+      dormitory_bool: factoryRequestObj.dormitory_bool === "true",
+      dormitory_etc: factoryRequestObj.dormitory_etc === "" ? null : factoryRequestObj.dormitory_etc,
+    };
+    setCompanyValue("factory_arr", replaceFactory(prevFactoryArr, editFactory));
+    closeModal();
   };
 
   useEffect(() => {
     if (factoryObj) {
       reset({
-        factory_name: factoryObj.name,
+        factory_name: factoryObj.factory_name,
         address: factoryObj.address,
-        male_number: factoryObj.maleNumber,
-        female_number: factoryObj.femaleNumber,
+        male_number: factoryObj.male_number,
+        female_number: factoryObj.female_number,
         product: factoryObj.product,
-        bus_bool: factoryObj.bus.exists ? "true" : "false",
-        bus_etc: factoryObj.bus.desc ? factoryObj.bus.desc : "",
-        dormitory_bool: factoryObj.dormitory.exists ? "true" : "false",
-        dormitory_etc: factoryObj.dormitory.desc ? factoryObj.dormitory.desc : "",
+        bus_bool: factoryObj.bus_bool ? "true" : "false",
+        bus_etc: factoryObj.bus_etc ? factoryObj.bus_etc : "",
+        dormitory_bool: factoryObj.dormitory_bool ? "true" : "false",
+        dormitory_etc: factoryObj.dormitory_etc ? factoryObj.dormitory_etc : "",
       });
     }
   }, [reset, factoryObj]);

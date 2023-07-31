@@ -29,6 +29,18 @@ export interface RequestObjDef {
       exists: boolean;
       desc: string | null;
     };
+    factory_arr: {
+      id: number;
+      factory_name: string;
+      product: string;
+      address: string;
+      male_number: number;
+      female_number: number;
+      bus_bool: boolean;
+      bus_etc: string | null;
+      dormitory_bool: boolean;
+      dormitory_etc: string | null;
+    }[];
   };
   logo?: File;
   bgImage?: File;

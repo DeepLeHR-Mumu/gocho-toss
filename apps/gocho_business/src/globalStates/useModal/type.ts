@@ -1,22 +1,22 @@
 import { UseFormReturn } from "react-hook-form";
 
 import { JobFormValues } from "@/pages/jd/upload/type";
+import { CompanyFormValues } from "@/pages/company/edit/type";
 
 export interface factoryObjDef {
-  id: number;
-  name: string;
-  address: string;
-  maleNumber: number;
-  femaleNumber: number;
-  product: string;
-  bus: {
-    exists: boolean;
-    desc: string | null;
+  factory: {
+    id: number;
+    factory_name: string;
+    product: string;
+    address: string;
+    male_number: number;
+    female_number: number;
+    bus_bool: boolean;
+    bus_etc: string | null;
+    dormitory_bool: boolean;
+    dormitory_etc: string | null;
   };
-  dormitory: {
-    exists: boolean;
-    desc: string | null;
-  };
+  companyForm: UseFormReturn<CompanyFormValues>;
 }
 
 export interface certiModalDef {

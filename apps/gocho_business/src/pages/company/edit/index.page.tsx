@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import { Spinner } from "shared-ui/common/atom/spinner";
 import { usePreventRouting } from "shared-hooks";
 
-import { useAddCompanyDetail, useCompanyDetail, useManagerProfile } from "@/apis";
+import { useEditCompanyDetail, useCompanyDetail, useManagerProfile } from "@/apis";
 import { PageLayout } from "@/components";
 import { useModal, useToast } from "@/globalStates";
 import { companyEditConfirmEvent, companyEditDoneEvent, companyEditFailEvent, companyEditPageFunnelEvent } from "@/ga";
@@ -16,6 +16,7 @@ import { PageHead } from "./pageHead";
 import { ButtonPart, CompanyInfoPart, LastEditInfoPart, BasicPart, WelfarePart, FactoryPart } from "./part";
 import { COMPANY_MESSAGE_OBJ } from "./constant";
 import { CompanyFormValues } from "./type";
+import { getFieldArrayValueWithNull } from "./util";
 import { cssObj } from "./style";
 
 const CompanyEditPage: NextPage = () => {
@@ -30,7 +31,7 @@ const CompanyEditPage: NextPage = () => {
   const { data: companyDetailData, refetch: companyDetailRefetch } = useCompanyDetail({
     companyId: userInfoData?.company.id,
   });
-  const { mutate: putCompanyDetail } = useAddCompanyDetail();
+  const { mutate: putCompanyDetail } = useEditCompanyDetail();
 
   const companyForm = useForm<CompanyFormValues>({
     mode: "onBlur",
@@ -66,6 +67,16 @@ const CompanyEditPage: NextPage = () => {
                 exists: formData.nozo.exists === "true",
                 desc: formData.nozo.desc || null,
               },
+              welfare: {
+                money: formData.welfare.money && getFieldArrayValueWithNull(formData.welfare.money),
+                health: formData.welfare.health && getFieldArrayValueWithNull(formData.welfare.health),
+                life: formData.welfare.life && getFieldArrayValueWithNull(formData.welfare.life),
+                holiday: formData.welfare.holiday && getFieldArrayValueWithNull(formData.welfare.holiday),
+                facility: formData.welfare.facility && getFieldArrayValueWithNull(formData.welfare.facility),
+                vacation: formData.welfare.vacation && getFieldArrayValueWithNull(formData.welfare.vacation),
+                growth: formData.welfare.growth && getFieldArrayValueWithNull(formData.welfare.growth),
+                etc: formData.welfare.etc && getFieldArrayValueWithNull(formData.welfare.etc),
+              },
             },
             bgImage,
             logo,
@@ -79,7 +90,6 @@ const CompanyEditPage: NextPage = () => {
         );
       }
     });
-
     return null;
   };
 
@@ -108,6 +118,19 @@ const CompanyEditPage: NextPage = () => {
               etc: companyDetailData.welfare.etc,
             };
 
+      const factoryArr = companyDetailData.factory.map((factoryObj) => ({
+        id: factoryObj.id,
+        factory_name: factoryObj.name,
+        female_number: factoryObj.femaleNumber,
+        male_number: factoryObj.maleNumber,
+        product: factoryObj.product,
+        address: factoryObj.address,
+        bus_bool: factoryObj.bus.exists,
+        bus_etc: factoryObj.bus.desc,
+        dormitory_bool: factoryObj.dormitory.exists,
+        dormitory_etc: factoryObj.dormitory.desc,
+      }));
+
       reset({
         industry: companyDetailData.industry,
         size: companyDetailData.size,
@@ -127,6 +150,7 @@ const CompanyEditPage: NextPage = () => {
         pay_start: companyDetailData.payStart,
         pay_desc: companyDetailData.payDesc || "",
         welfare: welfareObj,
+        factory_arr: factoryArr,
       });
     }
   }, [companyDetailData, reset]);
@@ -185,8 +209,8 @@ const CompanyEditPage: NextPage = () => {
                 setLogo={setLogo}
               />
               <BasicPart companyForm={companyForm} />
-              <WelfarePart companyForm={companyForm} companyData={companyDetailData} />
-              <FactoryPart companyForm={companyForm} companyData={companyDetailData} />
+              <WelfarePart companyForm={companyForm} welfareData={companyDetailData.welfare} />
+              <FactoryPart companyForm={companyForm} />
               <div css={cssObj.infoBox}>
                 <p css={cssObj.info}>
                   · 영업일 기준 최대 2일 이내 검수 후 고초대졸닷컴 내 수정된 정보가 업데이트 됩니다.

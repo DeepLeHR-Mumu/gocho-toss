@@ -10,10 +10,10 @@ import { welfareArrCreator } from "./util";
 import { WelfarePartProps } from "./type";
 import { cssObj } from "./style";
 
-export const WelfarePart: FunctionComponent<WelfarePartProps> = ({ companyForm, companyData }) => {
+export const WelfarePart: FunctionComponent<WelfarePartProps> = ({ companyForm, welfareData }) => {
   const welfareButtonInfoRef = useRef(Object.entries(WELFARE_DESC_OBJ) as Entries<typeof WELFARE_DESC_OBJ>);
 
-  const { welfareArr: initialWelfareArr } = welfareArrCreator(companyData.welfare);
+  const { welfareArr: initialWelfareArr } = welfareArrCreator(welfareData);
   const [welfareArr, setWelfareArr] = useState(initialWelfareArr);
 
   const welfareButtonHandler = (key: keyof PostWelfareSubmitValues) => {
@@ -53,7 +53,6 @@ export const WelfarePart: FunctionComponent<WelfarePartProps> = ({ companyForm, 
               state={buttonState}
               onClickHandler={() => welfareButtonHandler(key)}
               text={obj.name}
-              disabled={!companyData.uploader.isMine}
             />
           );
         })}

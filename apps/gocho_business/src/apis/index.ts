@@ -6,7 +6,7 @@ export { useHealthCheck } from "./auth/useHealthCheck";
 export { useSendAuthNumber } from "./auth/useSendAuthNumber";
 export { useCheckAuthNumber } from "./auth/useCheckAuthNumber";
 
-export { useAddCompanyDetail } from "./company/useAddCompanyDetail";
+export { useEditCompanyDetail } from "./company/useEditCompanyDetail";
 export { useCompanyDetail } from "./company/useCompanyDetail";
 export { useCountInfo } from "./company/useCountInfo";
 export { useManagerArr } from "./company/useManagerArr";
