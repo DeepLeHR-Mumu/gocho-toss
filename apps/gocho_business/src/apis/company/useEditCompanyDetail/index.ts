@@ -3,7 +3,7 @@ import { AxiosError, AxiosResponse } from "axios";
 
 import { ErrorResponseDef } from "@/types";
 
-import { axiosInstance } from "../../useIsRefreshLock";
+import { axiosInstance } from "../../axiosInstance";
 import { companyDetailKeyObj, PutCompanyDetailDef, RequestObjDef, useCompanyDetailProps } from "./type";
 
 export const putCompanyDetail: PutCompanyDetailDef = async (requestObj) => {

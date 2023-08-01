@@ -3,7 +3,7 @@ import { AxiosError, AxiosResponse } from "axios";
 
 import { ErrorResponseDef } from "@/types";
 
-import { axiosNoTokenInstance } from "../../useIsRefreshLock";
+import { axiosNoTokenInstance } from "../../axiosInstance";
 import { PostLoginDef, RequestObjDef, ResponseObjDef } from "./type";
 
 const postLogin: PostLoginDef = async (requestObj) => {

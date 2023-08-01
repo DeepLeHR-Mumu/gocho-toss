@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 
 import { ErrorResponseDef } from "@/types";
 
-import { axiosInstance } from "../../useIsRefreshLock";
+import { axiosInstance } from "../../axiosInstance";
 import { ResponseObjDef, RequestObjDef, GetJdDetailDef, jdDetailKeyObj } from "./type";
 import { jdDetailSelector } from "./util";
 

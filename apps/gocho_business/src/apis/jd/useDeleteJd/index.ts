@@ -4,7 +4,7 @@ import { AxiosError, AxiosResponse } from "axios";
 import { ErrorResponseDef } from "@/types";
 
 import { jdArrKeyObj, ResponseObjDef } from "../useJdArr/type";
-import { axiosInstance } from "../../useIsRefreshLock";
+import { axiosInstance } from "../../axiosInstance";
 import { RequestObjDef, DeleteJdDef } from "./type";
 
 export const deleteJd: DeleteJdDef = async (requestObj) => {

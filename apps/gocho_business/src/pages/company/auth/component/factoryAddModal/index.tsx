@@ -7,10 +7,7 @@ import { useFocusTrap } from "shared-hooks";
 import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { NewSharedButton } from "shared-ui/common/newSharedButton";
 
-// import { useModal } from "@/globalStates";
-// import { useAddFactory } from "@/apis";
 import { commonCssObj } from "@/styles";
-// import { factoryUploadConfirmEvent, factoryUploadDoneEvent } from "@/ga";
 import { ModalComponent } from "@/components/global/modal/modalBackground";
 
 import { cssObj } from "./style";
@@ -37,7 +34,6 @@ export const FactoryAddModal: FunctionComponent<AuthFactoryAddModalProps> = ({
 
   useFocusTrap(modalRef);
 
-  // const { mutate: addFactoryMutation } = useAddFactory();
   const openPostCodePopup = useDaumPostcodePopup();
 
   const onClickAddress = () => {
@@ -52,25 +48,6 @@ export const FactoryAddModal: FunctionComponent<AuthFactoryAddModalProps> = ({
     if (defaultFactory) {
       modify(factoryRequestObj);
     } else add(factoryRequestObj);
-    // factoryUploadConfirmEvent();
-    // addFactoryMutation(
-    //   {
-    //     ...factoryRequestObj,
-    //     bus_bool: factoryRequestObj.bus_bool === "true",
-    //     bus_etc: factoryRequestObj.bus_etc === "" ? null : factoryRequestObj.bus_etc,
-    //     dormitory_bool: factoryRequestObj.dormitory_bool === "true",
-    //     dormitory_etc: factoryRequestObj.dormitory_etc === "" ? null : factoryRequestObj.dormitory_etc,
-    //   },
-    //   {
-    //     onSuccess: () => {
-    //       factoryUploadDoneEvent();
-    //       closeModal();
-    //     },
-    //     onSettled: () => {
-    //       isLoading.current = false;
-    //     },
-    //   }
-    // );
     cancel();
   };
 

@@ -11,9 +11,9 @@ export const Pagination: FunctionComponent<PaginationProps> = ({ q, url, totalPa
   const currentPageNumber = Number(router.query.page);
   const count = Math.floor(currentPageNumber / 10);
 
-  // if (totalPage <= 1) {
-  //   return <div css={cssObj.paginationContainer} />;
-  // }
+  if (totalPage <= 1) {
+    return <div css={cssObj.paginationContainer} />;
+  }
 
   return (
     <div css={cssObj.paginationContainer}>

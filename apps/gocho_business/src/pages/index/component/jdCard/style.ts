@@ -17,7 +17,7 @@ export const cssObj = {
   `,
 
   title: css`
-    width: 15rem;
+    width: 25rem;
     ${TEXTS.TITLE9};
     margin-bottom: 1.5rem;
     word-break: break-all;
