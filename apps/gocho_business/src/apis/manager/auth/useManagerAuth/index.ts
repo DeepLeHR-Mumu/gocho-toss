@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
-import { axiosInstance } from "@/apis/useIsRefreshLock";
 import { ErrorResponseDef } from "@/types";
 
+import { axiosInstance } from "../../../axiosInstance";
 import { PostMaganersAuthDef, RequestObjDef, useManagerAuthProps, managerAuthKeyObj } from "./type";
 
 export const postManagersAuth: PostMaganersAuthDef = async (requestObj) => {

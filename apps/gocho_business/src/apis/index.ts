@@ -37,4 +37,4 @@ export { useFindEmail } from "./manager/find/useFindEmail";
 export { useFindPassword } from "./manager/find/useFindPassword";
 export { useManagerAuth } from "./manager/auth/useManagerAuth";
 
-export { useAxiosInterceptor, axiosInstance, axiosNoTokenInstance } from "./useIsRefreshLock";
+export { useAxiosInterceptor, axiosInstance, axiosNoTokenInstance } from "./axiosInstance";

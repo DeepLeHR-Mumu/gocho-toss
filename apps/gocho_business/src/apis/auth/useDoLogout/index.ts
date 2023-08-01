@@ -3,7 +3,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 
 import { ErrorResponseDef } from "@/types";
 
-import { axiosNoTokenInstance } from "../../useIsRefreshLock";
+import { axiosNoTokenInstance } from "../../axiosInstance";
 import { PostLogoutDef } from "./type";
 
 const postLogout: PostLogoutDef = async () => {

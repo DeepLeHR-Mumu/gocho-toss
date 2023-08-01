@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 
 import { ErrorResponseDef } from "@/types";
 
-import { axiosNoTokenInstance } from "../../useIsRefreshLock";
+import { axiosNoTokenInstance } from "../../axiosInstance";
 import { GetNoticeArrDef, noticeArrKeyObj, RequestObjDef, ResponseObjDef } from "./type";
 import { noticeArrSelector } from "./util";
 
