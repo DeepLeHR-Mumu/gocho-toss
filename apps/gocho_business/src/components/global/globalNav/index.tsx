@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { FiChevronUp, FiBell } from "react-icons/fi";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
@@ -17,17 +17,20 @@ import { cssObj } from "./style";
 
 export const GlobalNav: FunctionComponent = () => {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { pathname } = router;
 
   const [isAlarmActive, setIsAlarmActive] = useState<boolean>(false);
   const [isCompanyActive, setIsCompanyActive] = useState<boolean>(false);
   const [isUserActive, setIsUserActive] = useState<boolean>(false);
+  const alarmDropdownMenuRef = useRef<HTMLDivElement>(null);
+  const companyDropdownMenuRef = useRef<HTMLDivElement>(null);
+  const userDropdownMenuRef = useRef<HTMLDivElement>(null);
 
   const { data: userInfoData, isSuccess: isManagerLogin } = useManagerProfile();
   const { data: alarmArrObj } = useAlarmArr({ managerId: userInfoData?.id, size: 15 });
   const { mutate: postLogout } = useDoLogout();
   const { mutate: readAlarmMutate } = useReadAlarm();
-  const queryClient = useQueryClient();
 
   const doLogoutHandler = () => {
     const afterLogoutActiveFunction = () => {
@@ -60,6 +63,25 @@ export const GlobalNav: FunctionComponent = () => {
   }, [pathname]);
 
   useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (alarmDropdownMenuRef.current && !alarmDropdownMenuRef.current.contains(event.target as Node)) {
+        setIsAlarmActive(false);
+      }
+      if (companyDropdownMenuRef.current && !companyDropdownMenuRef.current.contains(event.target as Node)) {
+        setIsCompanyActive(false);
+      }
+      if (userDropdownMenuRef.current && !userDropdownMenuRef.current.contains(event.target as Node)) {
+        setIsUserActive(false);
+      }
+    };
+
+    document.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
+
+  useEffect(() => {
     if (alarmArrObj && userInfoData?.id && isAlarmActive) {
       readAlarmMutate({ managerId: userInfoData.id, category: "all" });
     }
@@ -87,7 +109,7 @@ export const GlobalNav: FunctionComponent = () => {
             ))}
           </nav>
         </div>
-        <div css={cssObj.profileWrapper}>
+        <div css={cssObj.profileWrapper} ref={alarmDropdownMenuRef}>
           <button
             type="button"
             css={cssObj.alarmButton}
@@ -122,7 +144,7 @@ export const GlobalNav: FunctionComponent = () => {
             </div>
           )}
         </div>
-        <div css={cssObj.profileWrapper}>
+        <div css={cssObj.profileWrapper} ref={companyDropdownMenuRef}>
           <button
             css={cssObj.profileButton}
             type="button"
@@ -164,7 +186,7 @@ export const GlobalNav: FunctionComponent = () => {
             </div>
           )}
         </div>
-        <div css={cssObj.profileWrapper}>
+        <div css={cssObj.profileWrapper} ref={userDropdownMenuRef}>
           <button
             css={cssObj.profileButton}
             type="button"
