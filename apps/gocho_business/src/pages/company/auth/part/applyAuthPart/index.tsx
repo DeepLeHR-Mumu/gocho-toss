@@ -51,7 +51,7 @@ export const ApplyAuthPart: FunctionComponent = () => {
     const certificationFile = certificateOfBusiness.item(0);
 
     if (certificationFile) {
-      const requetObj: AuthRequestObjDef = {
+      const requestObj: AuthRequestObjDef = {
         managerId: userInfoData.id,
         certification: certificationFile,
       };
@@ -59,7 +59,7 @@ export const ApplyAuthPart: FunctionComponent = () => {
       if (userInfoData.status.isFirst) {
         const companyLogoFile = companyLogo.item(0);
         const backgroundImageFile = backgroundImage.item(0);
-        requetObj.dto = {
+        requestObj.dto = {
           industry: formData.industry,
           employee_number: formData.employee_number,
           location: formData.location,
@@ -70,14 +70,14 @@ export const ApplyAuthPart: FunctionComponent = () => {
           pay_start: formData.pay_start,
           pay_desc: formData.pay_desc,
           nozo: { ...formData.nozo, exists: formData.nozo.exists === "true" },
-          factory_arr: formData.factory,
+          factory_arr: formData.factory_arr,
           size: formData.size,
         };
-        requetObj.logo = companyLogoFile !== null ? companyLogoFile : undefined;
-        requetObj.backgroundImage = backgroundImageFile !== null ? backgroundImageFile : undefined;
+        requestObj.logo = companyLogoFile !== null ? companyLogoFile : undefined;
+        requestObj.backgroundImage = backgroundImageFile !== null ? backgroundImageFile : undefined;
       }
 
-      postManagersAuth(requetObj, {
+      postManagersAuth(requestObj, {
         onSuccess: () => {
           managerProfileRefetch();
           router.push(INTERNAL_URL.HOME);

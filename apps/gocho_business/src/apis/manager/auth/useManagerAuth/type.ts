@@ -1,8 +1,6 @@
 import { UseMutationResult } from "@tanstack/react-query";
 import { AxiosResponse, AxiosError } from "axios";
 
-import { Factory } from "@/pages/company/auth/part/applyAuthPart/factoryPart/type";
-
 export interface RequestObjDef {
   managerId: number;
   certification: File;
@@ -36,7 +34,17 @@ export interface RequestObjDef {
       exists: boolean;
       desc: string | null;
     };
-    factory_arr: Factory[]; // NOTE id 가 필요한지 확인
+    factory_arr: {
+      factory_name: string;
+      product: string;
+      address: string;
+      male_number: number;
+      female_number: number;
+      bus_bool: boolean;
+      bus_etc: string | null;
+      dormitory_bool: boolean;
+      dormitory_etc: string | null;
+    }[];
   };
 }
 

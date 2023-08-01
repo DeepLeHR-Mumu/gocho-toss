@@ -1,11 +1,8 @@
 import { FunctionComponent, useState, useEffect } from "react";
 import { FiEdit3, FiMinus, FiPlus, FiHelpCircle } from "react-icons/fi";
 
-// import { useDeleteFactory } from "@/apis";
-// import { factoryDeleteConfirmEvent, factoryDeleteDoneEvent } from "@/ga";
-
-import { FactoryAddModal, Tooltip } from "../../../component";
-import { AuthFactoryPartProps, Factory } from "./type";
+import { FactoryModal, Tooltip } from "../../../component";
+import { AuthFactoryPartProps, FactoryDef } from "./type";
 import { cssObj } from "./style";
 
 export const FactoryPart: FunctionComponent<AuthFactoryPartProps> = ({ companyAuthForm }) => {
@@ -14,32 +11,18 @@ export const FactoryPart: FunctionComponent<AuthFactoryPartProps> = ({ companyAu
     state: false,
     modifyIndex: null,
   });
-  const [factories, setFactories] = useState<Factory[]>([]);
+  const [factories, setFactories] = useState<FactoryDef[]>([]);
 
   const { setValue } = companyAuthForm;
-
-  // const { mutate: deleteFactoryMutation } = useDeleteFactory();
 
   const deleteFactoryHandler = (index: number) => {
     const newFactories = [...factories];
     newFactories.splice(index, 1);
     setFactories(newFactories);
-
-    // factoryDeleteConfirmEvent();
-    // if (window.confirm("공장을 삭제하시겠습니까?")) {
-    //   deleteFactoryMutation(
-    //     { factoryId },
-    //     {
-    //       onSuccess: () => {
-    //         factoryDeleteDoneEvent();
-    //       },
-    //     }
-    //   );
-    // }
   };
 
   useEffect(() => {
-    setValue("factory", factories);
+    setValue("factory_arr", factories);
   }, [setValue, factories]);
 
   return (
@@ -62,11 +45,9 @@ export const FactoryPart: FunctionComponent<AuthFactoryPartProps> = ({ companyAu
         </button>
         <div css={cssObj.factoryList}>
           {factories.map((factory, index) => (
-            // NOTE 고유한 값 사용 전까지 index 로
-            // eslint-disable-next-line
-            <div key={`companyEditFactory${index}`} css={cssObj.factoryBox}>
+            <div key={`companyEditFactory${factory.address}`} css={cssObj.factoryBox}>
               <div css={cssObj.factoryInfoWrapper}>
-                {factory.name}
+                {factory.factory_name}
                 <p css={cssObj.factoryAddress}>{factory.address}</p>
               </div>
               <div css={cssObj.buttonContainer}>
@@ -79,7 +60,7 @@ export const FactoryPart: FunctionComponent<AuthFactoryPartProps> = ({ companyAu
                 </button>
                 <button
                   type="button"
-                  aria-label={`공장${factory.name}삭제하기`}
+                  aria-label={`공장${factory.factory_name}삭제하기`}
                   css={cssObj.deleteButton}
                   onClick={() => deleteFactoryHandler(index)}
                 >
@@ -91,27 +72,16 @@ export const FactoryPart: FunctionComponent<AuthFactoryPartProps> = ({ companyAu
         </div>
       </section>
       {modal.state && (
-        <FactoryAddModal
+        <FactoryModal
           defaultFactory={modal.modifyIndex !== null ? factories[modal.modifyIndex] : null}
           cancel={() => setModal({ state: false, modifyIndex: null })}
           add={(newFactory) => {
-            setFactories((prev) => [
-              {
-                ...newFactory,
-                bus: { ...newFactory.bus, exists: newFactory.bus.exists === "true" },
-                dormitory: { ...newFactory.dormitory, exists: newFactory.dormitory.exists === "true" },
-              },
-              ...prev,
-            ]);
+            setFactories((prev) => [{ ...newFactory }, ...prev]);
           }}
           modify={(newFactory) => {
             if (modal.modifyIndex !== null) {
               const newFactories = [...factories];
-              newFactories[modal.modifyIndex] = {
-                ...newFactory,
-                bus: { ...newFactory.bus, exists: newFactory.bus.exists === "true" },
-                dormitory: { ...newFactory.dormitory, exists: newFactory.dormitory.exists === "true" },
-              };
+              newFactories[modal.modifyIndex] = { ...newFactory };
               setFactories(newFactories);
             }
           }}

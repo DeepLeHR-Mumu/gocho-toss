@@ -5,19 +5,15 @@ export interface CompanyAuthFormValues extends CompanyFormValues {
   intro: string;
   companyLogo: FileList;
   backgroundImage: FileList;
-  factory: {
-    name: string;
-    address: string;
-    maleNumber: number;
-    femaleNumber: number;
+  factory_arr: {
+    factory_name: string;
     product: string;
-    bus: {
-      exists: boolean;
-      desc: string;
-    };
-    dormitory: {
-      exists: boolean;
-      desc: string;
-    };
+    address: string;
+    male_number: number;
+    female_number: number;
+    bus_bool: boolean;
+    bus_etc: string | null;
+    dormitory_bool: boolean;
+    dormitory_etc: string | null;
   }[];
 }

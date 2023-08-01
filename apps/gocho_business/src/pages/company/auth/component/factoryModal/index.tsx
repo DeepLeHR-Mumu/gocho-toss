@@ -13,23 +13,11 @@ import { ModalComponent } from "@/components/global/modal/modalBackground";
 import { cssObj } from "./style";
 import { AuthFactoryAddModalProps, FactoryRegisterFormValues } from "./type";
 
-export const FactoryAddModal: FunctionComponent<AuthFactoryAddModalProps> = ({
-  defaultFactory,
-  add,
-  cancel,
-  modify,
-}) => {
+export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defaultFactory, add, cancel, modify }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   const { watch, register, handleSubmit, setValue } = useForm<FactoryRegisterFormValues>({
-    defaultValues:
-      defaultFactory !== null
-        ? {
-            ...defaultFactory,
-            bus: { ...defaultFactory.bus, exists: defaultFactory.bus.exists ? "true" : "false" },
-            dormitory: { ...defaultFactory.dormitory, exists: defaultFactory.dormitory.exists ? "true" : "false" },
-          }
-        : undefined,
+    defaultValues: defaultFactory !== null ? { ...defaultFactory } : undefined,
   });
 
   useFocusTrap(modalRef);
@@ -65,8 +53,8 @@ export const FactoryAddModal: FunctionComponent<AuthFactoryAddModalProps> = ({
             <strong css={commonCssObj.inputTitle(false)}>공장 명칭</strong>
             <input
               css={commonCssObj.input(37.5, false)}
-              defaultValue={watch("name")}
-              {...register("name", { maxLength: 50, required: true })}
+              defaultValue={watch("factory_name")}
+              {...register("factory_name", { maxLength: 50, required: true })}
               placeholder="고초대졸 제1공장 (최대 50자)"
             />
           </div>
@@ -95,12 +83,12 @@ export const FactoryAddModal: FunctionComponent<AuthFactoryAddModalProps> = ({
             <strong css={commonCssObj.inputTitle(false)}>임직원</strong>
             <div css={cssObj.inputWrapper}>
               <input
-                defaultValue={watch("maleNumber")}
-                {...register("maleNumber", {
+                defaultValue={watch("male_number")}
+                {...register("male_number", {
                   required: true,
                   valueAsNumber: true,
                   onChange: (value: ChangeEvent<HTMLInputElement>) => {
-                    if (Number(value?.target?.value) > 100000) setValue("maleNumber", 99999);
+                    if (Number(value?.target?.value) > 100000) setValue("male_number", 99999);
                   },
                 })}
                 type="number"
@@ -112,12 +100,12 @@ export const FactoryAddModal: FunctionComponent<AuthFactoryAddModalProps> = ({
             </div>
             <div css={cssObj.inputWrapper}>
               <input
-                defaultValue={watch("femaleNumber")}
-                {...register("femaleNumber", {
+                defaultValue={watch("female_number")}
+                {...register("female_number", {
                   required: true,
                   valueAsNumber: true,
                   onChange: (value: ChangeEvent<HTMLInputElement>) => {
-                    if (Number(value?.target?.value) > 100000) setValue("femaleNumber", 99999);
+                    if (Number(value?.target?.value) > 100000) setValue("female_number", 99999);
                   },
                 })}
                 type="number"
@@ -132,16 +120,16 @@ export const FactoryAddModal: FunctionComponent<AuthFactoryAddModalProps> = ({
             <strong css={commonCssObj.inputTitle(false)}>통근버스</strong>
             <div>
               <div css={cssObj.labelContainer}>
-                <SharedRadioButton id="busTrue" value="true" registerObj={register("bus.exists", { required: true })}>
+                <SharedRadioButton id="busTrue" value="true" registerObj={register("bus_bool", { required: true })}>
                   <p css={cssObj.radioLabel}>있음</p>
                 </SharedRadioButton>
-                <SharedRadioButton id="busFalse" value="false" registerObj={register("bus.exists", { required: true })}>
+                <SharedRadioButton id="busFalse" value="false" registerObj={register("bus_bool", { required: true })}>
                   <p css={cssObj.radioLabel}>없음</p>
                 </SharedRadioButton>
               </div>
               <input
-                defaultValue={watch("bus.desc")}
-                {...register("bus.desc", {
+                defaultValue={watch("bus_etc") || ""}
+                {...register("bus_etc", {
                   maxLength: 70,
                   validate: (value) => {
                     if (value) {
@@ -163,21 +151,21 @@ export const FactoryAddModal: FunctionComponent<AuthFactoryAddModalProps> = ({
                 <SharedRadioButton
                   id="dormitoryTrue"
                   value="true"
-                  registerObj={register("dormitory.exists", { required: true })}
+                  registerObj={register("dormitory_etc", { required: true })}
                 >
                   <p css={cssObj.radioLabel}>있음</p>
                 </SharedRadioButton>
                 <SharedRadioButton
                   id="dormitoryFalse"
                   value="false"
-                  registerObj={register("dormitory.exists", { required: true })}
+                  registerObj={register("dormitory_etc", { required: true })}
                 >
                   <p css={cssObj.radioLabel}>없음</p>
                 </SharedRadioButton>
               </div>
               <input
-                defaultValue={watch("dormitory.desc")}
-                {...register("dormitory.desc", {
+                defaultValue={watch("dormitory_etc") || ""}
+                {...register("dormitory_etc", {
                   maxLength: 70,
                   validate: (value) => {
                     if (value) {

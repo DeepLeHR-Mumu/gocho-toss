@@ -6,7 +6,7 @@ import { ErrorResponseDef } from "@/types";
 import { axiosInstance } from "../../../axiosInstance";
 import { PostMaganersAuthDef, RequestObjDef, useManagerAuthProps, managerAuthKeyObj } from "./type";
 
-export const postManagersAuth: PostMaganersAuthDef = async (requestObj) => {
+export const postManagerAuth: PostMaganersAuthDef = async (requestObj) => {
   const formData = new FormData();
   const { managerId, certification, dto, logo, backgroundImage } = requestObj;
 
@@ -23,7 +23,7 @@ export const useManagerAuth: useManagerAuthProps = () => {
   const queryClient = useQueryClient();
 
   return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
-    mutationFn: (requestObj) => postManagersAuth(requestObj),
+    mutationFn: (requestObj) => postManagerAuth(requestObj),
     onSuccess: () => {
       queryClient.invalidateQueries(managerAuthKeyObj.all);
     },

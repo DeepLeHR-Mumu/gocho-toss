@@ -5,7 +5,7 @@ import { CompanyFormValues } from "@/pages/company/edit/type";
 
 export interface factoryObjDef {
   factory: {
-    id: number;
+    id?: number;
     factory_name: string;
     product: string;
     address: string;

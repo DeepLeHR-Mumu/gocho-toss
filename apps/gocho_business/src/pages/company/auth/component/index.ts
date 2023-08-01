@@ -1,4 +1,4 @@
 export { WelfareForm } from "./welfareForm";
 export { AddFieldButton } from "./addFieldButton";
-export { FactoryAddModal } from "./factoryAddModal";
+export { FactoryModal } from "./factoryModal";
 export { Tooltip } from "./tooltip";

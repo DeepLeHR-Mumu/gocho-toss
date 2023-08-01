@@ -1,26 +1,30 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { FiEdit3, FiMinus, FiPlus } from "react-icons/fi";
 
-import { useModal } from "@/globalStates";
 import { commonCssObj } from "@/styles";
-import { factoryDeleteConfirmEvent, factoryDeleteDoneEvent } from "@/ga";
 
-import { FactoryPartProps } from "./type";
+import { FactoryModal } from "../../component";
+import { FactoryPartProps, FactoryDef } from "./type";
 import { cssObj } from "./style";
 
 export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ companyForm }) => {
-  const { setModal } = useModal();
   const { watch, setValue } = companyForm;
 
-  const deleteFactoryHandler = (factoryId: number) => {
-    factoryDeleteConfirmEvent();
-    if (window.confirm("공장을 삭제하시겠습니까?")) {
-      const prevFactoryArr = watch("factory_arr");
-      const filteredArr = prevFactoryArr ? prevFactoryArr.filter((factory) => factory.id !== factoryId) : [];
-      setValue("factory_arr", filteredArr, { shouldDirty: true });
-      factoryDeleteDoneEvent();
-    }
+  const [modal, setModal] = useState<{ state: boolean; modifyIndex: number | null }>({
+    state: false,
+    modifyIndex: null,
+  });
+  const [factories, setFactories] = useState<FactoryDef[]>([]);
+
+  const deleteFactoryHandler = (index: number) => {
+    const newFactories = [...factories];
+    newFactories.splice(index, 1);
+    setFactories(newFactories);
   };
+
+  useEffect(() => {
+    setValue("factory_arr", factories);
+  }, [setValue, factories]);
 
   return (
     <section css={commonCssObj.partContainer}>
@@ -29,14 +33,14 @@ export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ companyForm }
         type="button"
         css={cssObj.addFactoryButton}
         onClick={() => {
-          setModal("factoryAddModal");
+          setModal((prev) => ({ ...prev, state: true }));
         }}
       >
         <FiPlus />
         공장 추가
       </button>
       <div css={cssObj.factoryList}>
-        {watch("factory_arr")?.map((factory) => (
+        {watch("factory_arr")?.map((factory, index) => (
           <div key={`companyEditFactory${factory.id}`} css={cssObj.factoryBox}>
             <div css={cssObj.factoryInfoWrapper}>
               {factory.factory_name}
@@ -47,8 +51,7 @@ export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ companyForm }
                 type="button"
                 css={cssObj.editButton}
                 onClick={() => {
-                  const selectedFactory = watch("factory_arr").find((factoryObj) => factoryObj.id === factory.id);
-                  if (selectedFactory) setModal("factoryEditModal", { factory: selectedFactory, companyForm });
+                  setModal({ state: true, modifyIndex: index });
                 }}
               >
                 <FiEdit3 />
@@ -57,7 +60,7 @@ export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ companyForm }
                 type="button"
                 aria-label={`공장${factory.factory_name}삭제하기`}
                 css={cssObj.deleteButton}
-                onClick={() => deleteFactoryHandler(factory.id)}
+                onClick={() => deleteFactoryHandler(index)}
               >
                 <FiMinus />
               </button>
@@ -65,6 +68,27 @@ export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ companyForm }
           </div>
         ))}
       </div>
+      {modal.state && (
+        <FactoryModal
+          defaultFactory={modal.modifyIndex !== null ? factories[modal.modifyIndex] : null}
+          cancel={() => setModal({ state: false, modifyIndex: null })}
+          add={(newFactory) => {
+            setValue("factory_arr", [
+              ...watch("factory_arr"),
+              {
+                ...newFactory,
+              },
+            ]);
+          }}
+          modify={(newFactory) => {
+            if (modal.modifyIndex !== null) {
+              const newFactories = [...factories];
+              newFactories[modal.modifyIndex] = { ...newFactory };
+              setFactories(newFactories);
+            }
+          }}
+        />
+      )}
     </section>
   );
 };

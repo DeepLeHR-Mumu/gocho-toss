@@ -97,7 +97,7 @@ export const AuthStatePart: FunctionComponent<AuthStatePartProps> = ({ onClick }
       <ul css={cssObj.additionalDescription}>
         {!descriptionState && (
           <li>
-            기업 인증 시 [사업자등록증명원]이 필요합니다.(사업자등록증X) <Gov24Link />
+            기업 인증 시 [사업자등록증명원]이 필요합니다.(사업자등록증 X) <Gov24Link />
           </li>
         )}
         <li>사업자등록증명원(주민번호 비공개)은 신청일 기준 90일 이내의 문서여야 합니다.</li>

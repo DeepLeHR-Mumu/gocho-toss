@@ -32,7 +32,7 @@ export interface RequestObjDef {
       desc: string | null;
     };
     factory_arr: {
-      id: number;
+      id?: number;
       factory_name: string;
       product: string;
       address: string;
