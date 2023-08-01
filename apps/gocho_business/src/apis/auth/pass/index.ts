@@ -1,4 +1,4 @@
-import { axiosNoTokenInstance } from "../../useIsRefreshLock";
+import { axiosNoTokenInstance } from "../../axiosInstance";
 
 export const getPass = async () => {
   const response = await axiosNoTokenInstance.get("/auth/pass");
