@@ -19,7 +19,7 @@ export const cssObj = {
   `,
 
   title: css`
-    width: 15rem;
+    width: 27rem;
     font-weight: 600;
     font-size: 1.5rem;
     line-height: 1.15;
