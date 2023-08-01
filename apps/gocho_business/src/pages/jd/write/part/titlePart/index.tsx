@@ -3,13 +3,13 @@ import { TitlePartProps } from "./type";
 
 import { cssObj } from "./style";
 
-export const TitlePart: FunctionComponent<TitlePartProps> = ({ jobForm }) => {
+export const TitlePart: FunctionComponent<TitlePartProps> = ({ jdForm }) => {
   const {
     setValue,
     formState: { errors },
     register,
     clearErrors,
-  } = jobForm;
+  } = jdForm;
 
   return (
     <section css={cssObj.partContainer}>

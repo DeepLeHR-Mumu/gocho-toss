@@ -18,6 +18,7 @@ export const cssObj = {
     height: 3.5rem;
     margin-right: 1rem;
     border-radius: 50%;
+    overflow: hidden;
 
     > img {
       object-fit: contain;

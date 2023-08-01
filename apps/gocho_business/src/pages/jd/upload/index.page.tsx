@@ -20,7 +20,7 @@ import { useAddJd, useJdDetail, useManagerProfile } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 
 import { ButtonPart, TitlePart, BasicPart, RequiredPart, ConditionPart, PlacePart, ApplyPart } from "../write/part";
-import { JobFormValues } from "./type";
+import { JdFormValues } from "./type";
 import { BLANK_JD, JD_UPLOAD_MESSAGE_OBJ, ROTATION_ARR } from "./constant";
 import { getFieldArrayValue, getFieldArrayValueWithNull, setFieldErrorIfEmpty, setFieldArray } from "./util";
 
@@ -35,7 +35,7 @@ const JdUploadPage: NextPage = () => {
   const { data: jdData } = useJdDetail(Boolean(userInfoData), { id: Number(router.query.copy) });
   const { setToast } = useToast();
 
-  const jobForm = useForm<JobFormValues>({
+  const jdForm = useForm<JdFormValues>({
     mode: "onTouched",
     reValidateMode: "onChange",
     defaultValues: { ...BLANK_JD },
@@ -47,7 +47,7 @@ const JdUploadPage: NextPage = () => {
     watch,
     reset,
     formState: { submitCount, dirtyFields, isSubmitSuccessful },
-  } = jobForm;
+  } = jdForm;
 
   const taskDetailArr = useFieldArray({
     control,
@@ -89,7 +89,7 @@ const JdUploadPage: NextPage = () => {
     name: "etc_arr",
   });
 
-  const jobSubmitHandler: SubmitHandler<JobFormValues> = (jobObj) => {
+  const jobSubmitHandler: SubmitHandler<JdFormValues> = (jobObj) => {
     if (isLoading.current) return;
     isLoading.current = true;
 
@@ -148,12 +148,12 @@ const JdUploadPage: NextPage = () => {
 
   const jobErrorHandler = () => {
     const ifEduNotSelected = !watch("high") && !watch("college") && !watch("four");
-    setFieldErrorIfEmpty(watch, jobForm, "task_detail_arr", "* 세부 직무 내용을 입력해 주세요");
-    setFieldErrorIfEmpty(watch, jobForm, "pay_arr", "* 급여 정보를 입력해 주세요");
-    setFieldErrorIfEmpty(watch, jobForm, "process_arr", "* 채용절차는 최소 1개 이상 기재해 주세요");
-    setFieldErrorIfEmpty(watch, jobForm, "apply_route_arr", "* 지원 경로는 최소 1개 이상 기재해 주세요");
+    setFieldErrorIfEmpty(watch, jdForm, "task_detail_arr", "* 세부 직무 내용을 입력해 주세요");
+    setFieldErrorIfEmpty(watch, jdForm, "pay_arr", "* 급여 정보를 입력해 주세요");
+    setFieldErrorIfEmpty(watch, jdForm, "process_arr", "* 채용절차는 최소 1개 이상 기재해 주세요");
+    setFieldErrorIfEmpty(watch, jdForm, "apply_route_arr", "* 지원 경로는 최소 1개 이상 기재해 주세요");
     if (ifEduNotSelected) {
-      jobForm.setError("high", { message: "* 학력 조건을 하나 이상 선택해 주세요" });
+      jdForm.setError("high", { message: "* 학력 조건을 하나 이상 선택해 주세요" });
     }
   };
 
@@ -209,9 +209,9 @@ const JdUploadPage: NextPage = () => {
 
   useEffect(() => {
     if (watch("high") || watch("college") || watch("four")) {
-      jobForm.clearErrors("high");
+      jdForm.clearErrors("high");
     }
-  }, [jobForm, watch]);
+  }, [jdForm, watch]);
 
   useEffect(() => {
     if (submitCount === 0) return;
@@ -226,18 +226,18 @@ const JdUploadPage: NextPage = () => {
     <form onSubmit={handleSubmit(jobSubmitHandler, jobErrorHandler)}>
       <ButtonPart />
       <PageLayout>
-        <TitlePart jobForm={jobForm} />
-        <BasicPart jobForm={jobForm} control={control} taskDetailArr={taskDetailArr} />
+        <TitlePart jdForm={jdForm} />
+        <BasicPart jdForm={jdForm} control={control} taskDetailArr={taskDetailArr} />
         <RequiredPart
-          jobForm={jobForm}
+          jdForm={jdForm}
           control={control}
           requiredEtcArr={requiredEtcArr}
           preferredEtcArr={preferredEtcArr}
         />
-        <ConditionPart jobForm={jobForm} control={control} payArr={payArr} />
-        <PlacePart jobForm={jobForm} />
+        <ConditionPart jdForm={jdForm} control={control} payArr={payArr} />
+        <PlacePart jdForm={jdForm} />
         <ApplyPart
-          jobForm={jobForm}
+          jdForm={jdForm}
           processArr={processArr}
           applyRouteArr={applyRouteArr}
           applyDocumentArr={applyDocumentArr}

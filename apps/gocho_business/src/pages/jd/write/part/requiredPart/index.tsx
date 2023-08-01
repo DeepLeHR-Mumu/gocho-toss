@@ -10,7 +10,7 @@ import { AddFieldButton, DeleteInputButton } from "../../component";
 import { RequiredPartProps } from "./type";
 import { cssObj } from "./style";
 
-export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, requiredEtcArr, preferredEtcArr }) => {
+export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jdForm, requiredEtcArr, preferredEtcArr }) => {
   const { setModal } = useModal();
 
   const {
@@ -19,7 +19,7 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, re
     register,
     clearErrors,
     formState: { errors },
-  } = jobForm;
+  } = jdForm;
 
   const isSchoolAllSelected = watch("high") && watch("college") && watch("four");
 
@@ -164,7 +164,7 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, re
                 css={cssObj.smallDeleteButton}
                 onClick={() => {
                   setValue(`preferred_certi_arr`, [
-                    ...(jobForm.watch("preferred_certi_arr")?.filter((element) => element !== certi) || []),
+                    ...(jdForm.watch("preferred_certi_arr")?.filter((element) => element !== certi) || []),
                   ]);
                 }}
               >
@@ -172,7 +172,7 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jobForm, re
               </button>
             </div>
           ))}
-          <AddFieldButton text="자격증 추가" onClickHandler={() => setModal("certiAddModal", { jobForm })} />
+          <AddFieldButton text="자격증 추가" onClickHandler={() => setModal("certiAddModal", { jdForm })} />
         </div>
       </div>
     </div>

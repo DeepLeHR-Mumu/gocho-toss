@@ -5,7 +5,6 @@ import { NewSharedButton } from "shared-ui/common/newSharedButton";
 import { useFocusTrap } from "shared-hooks";
 
 import { useModal, certiModalDef } from "@/globalStates";
-// import { commonCssObj } from "@/styles";
 
 import { commonCssObj } from "@/styles";
 import { ModalComponent } from "../modalBackground";
@@ -20,8 +19,8 @@ export const CertiAddModal: FunctionComponent = () => {
   const { contentObj, closeModal } = useModal();
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const { jobForm } = contentObj as certiModalDef;
-  const { setValue, watch } = jobForm;
+  const { jdForm } = contentObj as certiModalDef;
+  const { setValue, watch } = jdForm;
 
   useEffect(() => {
     setCurrentCerti(watch("preferred_certi_arr") || []);

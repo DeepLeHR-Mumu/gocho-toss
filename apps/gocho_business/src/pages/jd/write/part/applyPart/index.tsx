@@ -13,7 +13,7 @@ import { APPLY_EXTERNAL_LINK_ARR } from "./constant";
 import { cssObj } from "./style";
 
 export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
-  jobForm,
+  jdForm,
   processArr,
   applyRouteArr,
   applyDocumentArr,
@@ -29,7 +29,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
     formState: { errors },
     register,
     clearErrors,
-  } = jobForm;
+  } = jdForm;
 
   const alwaysButtonClickHandler = () => {
     setValue(`end_time`, isAlways ? "" : "9999-12-31T14:59:00");
@@ -134,7 +134,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                           }
                           setFieldErrorIfEmpty(
                             watch,
-                            jobForm,
+                            jdForm,
                             "process_arr",
                             "* 채용절차는 최소 1개 이상 기재해 주세요"
                           );
@@ -147,7 +147,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                           if (processArr.fields.length > 1) processArr.remove(index);
                           setFieldErrorIfEmpty(
                             watch,
-                            jobForm,
+                            jdForm,
                             "process_arr",
                             "* 채용절차는 최소 1개 이상 기재해 주세요"
                           );
@@ -171,7 +171,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                 <AddFieldButton
                   onClickHandler={() => {
                     processArr.append({ value: "" });
-                    setFieldErrorIfEmpty(watch, jobForm, "process_arr", "* 채용절차는 최소 1개 이상 기재해 주세요");
+                    setFieldErrorIfEmpty(watch, jdForm, "process_arr", "* 채용절차는 최소 1개 이상 기재해 주세요");
                   }}
                 />
               )}
@@ -201,7 +201,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                         }
                         setFieldErrorIfEmpty(
                           watch,
-                          jobForm,
+                          jdForm,
                           "apply_route_arr",
                           "* 지원 경로는 최소 1개 이상 기재해 주세요"
                         );
@@ -214,7 +214,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                         applyRouteArr.remove(index);
                         setFieldErrorIfEmpty(
                           watch,
-                          jobForm,
+                          jdForm,
                           "apply_route_arr",
                           "* 지원 경로는 최소 1개 이상 기재해 주세요"
                         );
@@ -232,12 +232,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                 <AddFieldButton
                   onClickHandler={() => {
                     applyRouteArr.append({ value: "" });
-                    setFieldErrorIfEmpty(
-                      watch,
-                      jobForm,
-                      "apply_route_arr",
-                      "* 지원 경로는 최소 1개 이상 기재해 주세요"
-                    );
+                    setFieldErrorIfEmpty(watch, jdForm, "apply_route_arr", "* 지원 경로는 최소 1개 이상 기재해 주세요");
                   }}
                 />
               )}

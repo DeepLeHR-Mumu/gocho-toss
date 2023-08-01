@@ -9,7 +9,11 @@ export interface ResponseObjDef {
     id: number;
     status: {
       name: "진행중" | "등록대기" | "수정대기" | "등록반려" | "수정반려";
-      reason: string;
+      reason: string[];
+    };
+    uploader: {
+      name: string;
+      is_mine: boolean;
     };
     title: string;
     cut: boolean;

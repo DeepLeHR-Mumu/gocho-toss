@@ -7,13 +7,13 @@ import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { commonCssObj } from "@/styles";
 
 import { AddFieldButton, DeleteInputButton } from "../../component";
-import { JobFormValues } from "../../../upload/type";
+import { JdFormValues } from "../../../upload/type";
 import { setFieldErrorIfEmpty } from "../../../upload/util";
 import { ConditionPartProps } from "./type";
 import { ROTATION_ARR } from "./constant";
 import { cssObj } from "./style";
 
-export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, payArr }) => {
+export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jdForm, payArr }) => {
   const [companyDepend, setCompanyDepend] = useState<boolean>(false);
   const [afterPass, setAfterPass] = useState<boolean>(false);
   const [isRotationOpen, setIsRotationOpen] = useState<boolean>(false);
@@ -26,7 +26,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
     formState: { errors },
     register,
     setError,
-  } = jobForm;
+  } = jdForm;
 
   const rotationClickHandler = (rotation: string) => {
     const isInList = watch("rotation_arr").includes(rotation);
@@ -49,7 +49,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
     currentCheck: boolean,
     anotherCheck: boolean,
     setCurrentCheck: (value: ((prevState: boolean) => boolean) | boolean) => void,
-    arr: UseFieldArrayReturn<JobFormValues, "pay_arr", "id">,
+    arr: UseFieldArrayReturn<JdFormValues, "pay_arr", "id">,
     text: string
   ) => {
     if (currentCheck) {
@@ -120,7 +120,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
                         if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                           setValue(`pay_arr.${index}.value`, "");
                         }
-                        setFieldErrorIfEmpty(watch, jobForm, "pay_arr", "* 급여 정보를 입력해 주세요");
+                        setFieldErrorIfEmpty(watch, jdForm, "pay_arr", "* 급여 정보를 입력해 주세요");
                       },
                     })}
                   />
@@ -128,7 +128,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
                     <DeleteInputButton
                       onClickHandler={() => {
                         payArr.remove(index);
-                        setFieldErrorIfEmpty(watch, jobForm, "pay_arr", "* 급여 정보를 입력해 주세요");
+                        setFieldErrorIfEmpty(watch, jdForm, "pay_arr", "* 급여 정보를 입력해 주세요");
                       }}
                     />
                   )}
@@ -143,7 +143,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jobForm, 
                 <AddFieldButton
                   onClickHandler={() => {
                     payArr.append({ value: "" });
-                    setFieldErrorIfEmpty(watch, jobForm, "pay_arr", "* 급여 정보를 입력해 주세요");
+                    setFieldErrorIfEmpty(watch, jdForm, "pay_arr", "* 급여 정보를 입력해 주세요");
                   }}
                   disabled={isPayArrDisabled}
                 />

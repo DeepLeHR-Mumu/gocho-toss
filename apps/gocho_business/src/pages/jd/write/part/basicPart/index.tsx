@@ -12,7 +12,7 @@ import { BasicPartProps } from "./type";
 import { CONTRACT_TYPE_ARR, TASK_ARR, REQUIRED_EXP_ARR } from "./constant";
 import { cssObj } from "./style";
 
-export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDetailArr }) => {
+export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetailArr }) => {
   const [isTaskOpen, setIsTaskOpen] = useState<boolean>(false);
   const [hireNumberLabel, setHireNumberLabel] = useState<string>("");
 
@@ -24,7 +24,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
     formState: { errors },
     register,
     setError,
-  } = jobForm;
+  } = jdForm;
 
   const mainTaskClickHandler = (task: string) => {
     setValue(`task_main`, task);
@@ -193,7 +193,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
                         if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                           setValue(`task_detail_arr.${index}.value`, "");
                         }
-                        setFieldErrorIfEmpty(watch, jobForm, "task_detail_arr", "* 세부 직무 내용을 입력해 주세요");
+                        setFieldErrorIfEmpty(watch, jdForm, "task_detail_arr", "* 세부 직무 내용을 입력해 주세요");
                       },
                     })}
                   />
@@ -201,7 +201,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
                     <DeleteInputButton
                       onClickHandler={() => {
                         taskDetailArr.remove(index);
-                        setFieldErrorIfEmpty(watch, jobForm, "task_detail_arr", "* 세부 직무 내용을 입력해 주세요");
+                        setFieldErrorIfEmpty(watch, jdForm, "task_detail_arr", "* 세부 직무 내용을 입력해 주세요");
                       }}
                     />
                   )}
@@ -213,7 +213,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jobForm, taskDeta
                 <AddFieldButton
                   onClickHandler={() => {
                     taskDetailArr.append({ value: "" });
-                    setFieldErrorIfEmpty(watch, jobForm, "task_detail_arr", "* 세부 직무 내용을 입력해 주세요");
+                    setFieldErrorIfEmpty(watch, jdForm, "task_detail_arr", "* 세부 직무 내용을 입력해 주세요");
                   }}
                 />
               )}

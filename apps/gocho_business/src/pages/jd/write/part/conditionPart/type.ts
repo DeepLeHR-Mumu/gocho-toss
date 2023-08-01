@@ -1,8 +1,8 @@
 import { Control, UseFieldArrayReturn, UseFormReturn } from "react-hook-form";
-import { JobFormValues } from "../../../upload/type";
+import { JdFormValues } from "../../../upload/type";
 
 export interface ConditionPartProps {
-  jobForm: UseFormReturn<JobFormValues>;
-  control: Control<JobFormValues>;
-  payArr: UseFieldArrayReturn<JobFormValues, "pay_arr", "id">;
+  jdForm: UseFormReturn<JdFormValues>;
+  control: Control<JdFormValues>;
+  payArr: UseFieldArrayReturn<JdFormValues, "pay_arr", "id">;
 }

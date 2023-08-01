@@ -181,6 +181,7 @@ export const cssObj = {
     height: 2rem;
     margin-right: 1rem;
     border-radius: 50%;
+    overflow: hidden;
     position: relative;
 
     > img {

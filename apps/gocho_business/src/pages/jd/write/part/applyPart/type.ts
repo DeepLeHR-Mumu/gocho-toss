@@ -1,10 +1,10 @@
 import { UseFieldArrayReturn, UseFormReturn } from "react-hook-form";
-import { JobFormValues } from "../../../upload/type";
+import { JdFormValues } from "../../../upload/type";
 
 export interface ApplyPartProps {
-  jobForm: UseFormReturn<JobFormValues>;
-  processArr: UseFieldArrayReturn<JobFormValues, "process_arr", "id">;
-  applyRouteArr: UseFieldArrayReturn<JobFormValues, "apply_route_arr", "id">;
-  applyDocumentArr: UseFieldArrayReturn<JobFormValues, "apply_document_arr", "id">;
-  etcArr: UseFieldArrayReturn<JobFormValues, "etc_arr", "id">;
+  jdForm: UseFormReturn<JdFormValues>;
+  processArr: UseFieldArrayReturn<JdFormValues, "process_arr", "id">;
+  applyRouteArr: UseFieldArrayReturn<JdFormValues, "apply_route_arr", "id">;
+  applyDocumentArr: UseFieldArrayReturn<JdFormValues, "apply_document_arr", "id">;
+  etcArr: UseFieldArrayReturn<JdFormValues, "etc_arr", "id">;
 }

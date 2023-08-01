@@ -16,6 +16,10 @@ export const jdDetailSelector = ({ data: jd }: ResponseObjDef) => {
       name: jd.status.name,
       reason: jd.status.reason,
     },
+    uploader: {
+      name: jd.uploader.name,
+      isMine: jd.uploader.is_mine,
+    },
     startTime: jd.start_time,
     endTime: jd.end_time,
     processArr: jd.process_arr,

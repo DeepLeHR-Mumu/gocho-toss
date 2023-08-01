@@ -13,7 +13,7 @@ import { PositionWorkInfoPartProps } from "./type";
 import { PLACE_TYPE_ARR } from "./constant";
 import { cssObj } from "./style";
 
-export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobForm }) => {
+export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jdForm }) => {
   const { setModal } = useModal();
 
   const {
@@ -23,7 +23,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
     formState: { errors },
     register,
     setError,
-  } = jobForm;
+  } = jdForm;
 
   const openPostCodePopup = useDaumPostcodePopup();
 
@@ -129,7 +129,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jobFor
                                   message: "* 공장 혹은 일반 근무지를 입력해주세요",
                                 });
                               setValue(`place.address_arr`, [
-                                ...(jobForm.watch("place").address_arr?.filter((element) => element !== address) || []),
+                                ...(jdForm.watch("place").address_arr?.filter((element) => element !== address) || []),
                               ]);
                             }}
                           />

@@ -1,8 +1,8 @@
 import { Control, UseFieldArrayReturn, UseFormReturn } from "react-hook-form";
-import { JobFormValues } from "../../../upload/type";
+import { JdFormValues } from "../../../upload/type";
 
 export interface BasicPartProps {
-  jobForm: UseFormReturn<JobFormValues>;
-  control: Control<JobFormValues>;
-  taskDetailArr: UseFieldArrayReturn<JobFormValues, "task_detail_arr", "id">;
+  jdForm: UseFormReturn<JdFormValues>;
+  control: Control<JdFormValues>;
+  taskDetailArr: UseFieldArrayReturn<JdFormValues, "task_detail_arr", "id">;
 }
