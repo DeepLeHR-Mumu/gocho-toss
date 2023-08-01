@@ -1,26 +1,25 @@
 import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { FiChevronRight, FiSmartphone } from "react-icons/fi";
-import axios from "axios";
+import { FiCheck, FiChevronRight, FiSmartphone } from "react-icons/fi";
 
 import { NewSharedButton } from "shared-ui/common/newSharedButton";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
-import { axiosNoTokenInstance } from "@/apis";
+import { getPass, getPassCheck } from "@/apis";
 import { useModal } from "@/globalStates";
 import { commonCssObj } from "@/styles";
 
-import { AuthPartProps, DecryptedUserInfo, PostSubmitValues } from "./type";
+import { AuthPartProps, PostSubmitValues } from "./type";
 
 import { cssObj } from "./style";
 
 export const AuthPart: FunctionComponent<AuthPartProps> = () => {
   const { setModal } = useModal();
   const [flag, setFlag] = useState(false);
+  const [passState, setPassState] = useState(false);
+
   // eslint-disable-next-line
-  const [userInfo, setUserInfo] = useState<DecryptedUserInfo | null>();
   const tokenVersionId = useRef<string | null>(null);
-  const redirectUrl = useRef<string | null>(null);
 
   const {
     handleSubmit,
@@ -32,29 +31,24 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
   });
 
   useEffect(() => {
-    redirectUrl.current = `${window.location.origin}/api/post-test`;
-  }, []);
-
-  useEffect(() => {
-    const getDecryptedUserInfo = () => {
+    const changeCallback = () => {
       if (document.visibilityState === "visible" && flag && tokenVersionId.current !== null) {
-        axios
-          .post<DecryptedUserInfo>(`${redirectUrl.current}?token_version_id=${tokenVersionId.current}`)
+        getPassCheck(tokenVersionId.current)
           .then((res) => {
-            setUserInfo(res.data);
             setFlag(false);
+            setPassState(res.data.data.is_exist);
             tokenVersionId.current = null;
           })
           .catch(() => {
             // 400 처리
-            setUserInfo(null);
+            setPassState(false);
           });
       }
     };
-    document.addEventListener("visibilitychange", getDecryptedUserInfo);
+    document.addEventListener("visibilitychange", changeCallback);
 
     return () => {
-      document.removeEventListener("visibilitychange", getDecryptedUserInfo);
+      document.removeEventListener("visibilitychange", changeCallback);
     };
   }, [flag]);
 
@@ -72,24 +66,53 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
   };
 
   const handleIdentityCheck = async () => {
-    const response = await axiosNoTokenInstance.get(`/auth/pass/token?redirectUrl=${redirectUrl.current}`);
+    const response = await getPass();
 
     if (response.data) {
       const { data } = response.data;
-      const { encData, integrityValue, dataBody } = data;
-      const { token_version_id } = dataBody;
+      const { token_version_id, enc_data, integrity_value } = data;
 
       tokenVersionId.current = token_version_id;
 
-      const form = document.forms.namedItem("form_chk") as HTMLFormElement;
-      form.target = "nicePopup";
-      form.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
-      form.enc_data.value = encData;
-      form.token_version_id.value = token_version_id;
-      form.integrity_value.value = integrityValue;
+      const popUp = window.open("", "");
+      if (popUp) {
+        const form = popUp.document.createElement("form");
+        form.setAttribute("action", "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb");
 
-      form.submit();
-      setFlag(true);
+        const serviceInput = popUp.document.createElement("input");
+        const tokenVersionIdInput = popUp.document.createElement("input");
+        const encDataInput = popUp.document.createElement("input");
+        const ivInput = popUp.document.createElement("input");
+
+        form.appendChild(serviceInput);
+        form.appendChild(tokenVersionIdInput);
+        form.appendChild(encDataInput);
+        form.appendChild(ivInput);
+        popUp.document.body.appendChild(form);
+
+        serviceInput.id = "m";
+        serviceInput.name = "m";
+        serviceInput.value = "service";
+        serviceInput.type = "hidden";
+
+        tokenVersionIdInput.id = "token_version_id";
+        tokenVersionIdInput.name = "token_version_id";
+        tokenVersionIdInput.value = token_version_id;
+        tokenVersionIdInput.type = "hidden";
+
+        encDataInput.id = "enc_data";
+        encDataInput.name = "enc_data";
+        encDataInput.value = enc_data;
+        encDataInput.type = "hidden";
+
+        ivInput.id = "integrity_value";
+        ivInput.name = "integrity_value";
+        ivInput.value = integrity_value;
+        ivInput.type = "hidden";
+
+        form.submit();
+        setFlag(true);
+      }
     }
   };
 
@@ -111,10 +134,12 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
             <span css={cssObj.icon}>
               <FiSmartphone />
             </span>
-            휴대폰 인증 <FiChevronRight />
+            휴대폰 인증 {passState ? <FiCheck /> : <FiChevronRight />}
           </button>
           <p css={cssObj.desc}>
-            휴대폰 인증을 진행해 주세요. 본인 인증 시 제공되는 정보는 인증이외 용도로 이용 또는 저장되지 않습니다.
+            {passState
+              ? "휴대폰 인증이 완료되었습니다."
+              : "휴대폰 인증을 진행해 주세요. 본인 인증 시 제공되는 정보는 인증이외 용도로 이용 또는 저장되지 않습니다."}
           </p>
         </div>
         <div css={cssObj.inputWrapper}>
