@@ -5,6 +5,7 @@ export { useEditUserPassword } from "./auth/useEditUserPassword";
 export { useHealthCheck } from "./auth/useHealthCheck";
 export { useSendAuthNumber } from "./auth/useSendAuthNumber";
 export { useCheckAuthNumber } from "./auth/useCheckAuthNumber";
+export { getPass, getPassCheck } from "./auth/pass";
 
 export { useEditCompanyDetail } from "./company/useEditCompanyDetail";
 export { useCompanyDetail } from "./company/useCompanyDetail";
@@ -36,6 +37,6 @@ export { useReadAlarm } from "./manager/alarm/useReadAlarm";
 export { useFindEmail } from "./manager/find/useFindEmail";
 export { useFindPassword } from "./manager/find/useFindPassword";
 export { useManagerAuth } from "./manager/auth/useManagerAuth";
+export { useManagerRegister } from "./manager/useManagerRegister";
 
-export { getPass, getPassCheck } from "./auth/pass";
 export { useAxiosInterceptor, axiosInstance, axiosNoTokenInstance } from "./axiosInstance";
