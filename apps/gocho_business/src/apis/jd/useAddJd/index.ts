@@ -3,7 +3,7 @@ import { AxiosError, AxiosResponse } from "axios";
 
 import { ErrorResponseDef } from "@/types";
 
-import { axiosInstance } from "../../useIsRefreshLock";
+import { axiosInstance } from "../../axiosInstance";
 import { PostJdDef, RequestObjDef, useAddJdProps } from "./type";
 
 export const postAddJd: PostJdDef = async (requestObj) => {

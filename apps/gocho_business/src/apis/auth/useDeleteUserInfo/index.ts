@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
-import { axiosInstance } from "../../useIsRefreshLock";
+import { axiosInstance } from "../../axiosInstance";
 import { RequestObjDef, DeleteUserInfoDef } from "./type";
 
 const deleteUserInfo: DeleteUserInfoDef = async (requestObj) => {

@@ -5,6 +5,6 @@ export const FUNNEL = {
   JD_EDIT_PAGE: "enter_jd_edit",
   FACTORY_LIST_PAGE: "enter_factory_list",
   COMPANY_EDIT_PAGE: "enter_company_edit",
-  RECRUITER_LIST_PAGE: "enter_recruiter_list",
+  MANAGER_LIST_PAGE: "enter_manager_list",
   MY_PAGE: "enter_mypage",
 };

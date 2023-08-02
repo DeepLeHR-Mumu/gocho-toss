@@ -10,7 +10,6 @@ export interface RequestObjDef {
   bus_etc: string | null;
   dormitory_bool: boolean;
   dormitory_etc: string | null;
-  id?: number;
 }
 
 export interface PostFactoryDef {

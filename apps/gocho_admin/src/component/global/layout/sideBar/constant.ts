@@ -69,20 +69,32 @@ export const menuArr = [
     menuTitle: "기업 서비스",
     subMenuArr: [
       {
-        menuTitle: "기업회원 등록",
-        menuLink: INTERNAL_URL.BUSINESS_USER,
+        menuTitle: "공고 등록 요청",
+        menuLink: `${INTERNAL_URL.BUSINESS_JD_LIST_URL}?type=register&page=1`,
       },
       {
-        menuTitle: "공고 검수 리스트",
-        menuLink: `${INTERNAL_URL.BUSINESS_JD_LIST_URL}?page=1`,
+        menuTitle: "공고 수정 요청",
+        menuLink: `${INTERNAL_URL.BUSINESS_JD_LIST_URL}?type=edit&page=1`,
       },
       {
-        menuTitle: "기업 검수 리스트",
+        menuTitle: "기업 수정 요청",
         menuLink: `${INTERNAL_URL.BUSINESS_COMPANY_LIST_URL}?page=1`,
       },
       {
-        menuTitle: "공장 검수 리스트",
-        menuLink: `${INTERNAL_URL.BUSINESS_FACTORY_LIST_URL}?page=1`,
+        menuTitle: "회원 등록",
+        menuLink: `${INTERNAL_URL.BUSINESS_USER_REGISTER_URL}`,
+      },
+      {
+        menuTitle: "회원 인증 요청",
+        menuLink: `${INTERNAL_URL.BUSINESS_USER_AUTH_LIST_URL}?page=1`,
+      },
+      {
+        menuTitle: "공지사항 리스트",
+        menuLink: INTERNAL_URL.BUSINESS_NOTICE_LIST,
+      },
+      {
+        menuTitle: "공지사항 등록",
+        menuLink: INTERNAL_URL.BUSINESS_NOTICE_REGISTER,
       },
     ],
   },

@@ -3,7 +3,7 @@ import { AxiosError, AxiosResponse } from "axios";
 
 import { ErrorResponseDef } from "@/types";
 
-import { axiosInstance } from "../../useIsRefreshLock";
+import { axiosInstance } from "../../axiosInstance";
 import { RequestObjDef, DeleteFactoryDef } from "./type";
 import { factoryArrKeyObj, ResponseObjDef } from "../useFactoryArr/type";
 
@@ -21,7 +21,11 @@ export const useDeleteFactory = () => {
       const previousData = queryClient.getQueryData(factoryArrKeyObj.all);
 
       queryClient.setQueryData<ResponseObjDef>(factoryArrKeyObj.all, (oldObj) => {
-        if (!oldObj?.data) return { data: [], page_result: null };
+        if (!oldObj?.data)
+          return {
+            data: [],
+            page_result: { total_elements: 0, total_pages: 0, page: 0, size: 0, is_first: false, is_last: false },
+          };
         const data = oldObj?.data.filter((old) => old.id !== requestObj.factoryId);
         return { data, page_result: oldObj.page_result };
       });

@@ -6,6 +6,7 @@ export interface JobFormValues {
   cut: boolean;
   process_arr: string;
   apply_route_arr: string;
+  apply_document_arr: string;
   apply_url: string;
   etc_arr: string | null;
   middle: boolean;

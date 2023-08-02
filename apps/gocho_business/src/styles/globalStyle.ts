@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 
 export const globalStyle = css`
   * {
@@ -94,9 +94,10 @@ export const globalStyle = css`
     vertical-align: baseline;
   }
   html {
-    font-family: "Noto Sans KR", Verdana, sans-serif;
+    font-family: Pretendard Variable, serif;
     font-size: 16px;
     min-width: 1440px;
+    color: ${NEWCOLORS.BLACK};
   }
   /* HTML5 display-role reset for older browsers */
   article,
@@ -126,7 +127,6 @@ export const globalStyle = css`
   h4,
   span,
   h5 {
-    line-height: 1.6;
     word-break: keep-all;
   }
   ol,
@@ -155,20 +155,14 @@ export const globalStyle = css`
   h4,
   h5,
   h6 {
-    color: ${COLORS.GRAY10};
+    color: ${NEWCOLORS.BLACK};
   }
   a {
     text-decoration: none;
-    color: ${COLORS.GRAY10};
+    color: ${NEWCOLORS.BLACK};
 
     :focus {
       outline: none;
-    }
-    :focus-visible {
-      outline-color: ${COLORS.BLUE_FIRST40};
-      outline-offset: 0.3rem;
-      outline-style: solid;
-      outline-width: 3px;
     }
   }
   input,
@@ -190,12 +184,6 @@ export const globalStyle = css`
     :focus {
       outline: none;
     }
-    :focus-visible {
-      outline-color: ${COLORS.BLUE_FIRST40};
-      outline-offset: 0.3rem;
-      outline-style: solid;
-      outline-width: 3px;
-    }
   }
   input[type="checkbox"],
   input[type="radio"] {
@@ -207,7 +195,7 @@ export const globalStyle = css`
     }
   }
   textarea {
-    font-family: "Noto Sans KR", Verdana, sans-serif;
+    font-family: Pretendard Variable, serif;
   }
   input[type="number"] {
     ::-webkit-outer-spin-button,

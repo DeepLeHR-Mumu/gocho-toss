@@ -1,6 +1,5 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
 import { DESKTOP, TABLET } from "shared-style/mediaQuery";
 
 export const globalStyle = css`
@@ -149,12 +148,6 @@ export const globalStyle = css`
     :focus {
       outline: none;
     }
-    :focus-visible {
-      outline-color: ${COLORS.BLUE_FIRST40};
-      outline-offset: 0.3rem;
-      outline-style: solid;
-      outline-width: 3px;
-    }
   }
   h1,
   h2,
@@ -184,12 +177,6 @@ export const globalStyle = css`
 
     :focus {
       outline: none;
-    }
-    :focus-visible {
-      outline-color: ${COLORS.BLUE_FIRST40};
-      outline-offset: 0.3rem;
-      outline-style: solid;
-      outline-width: 3px;
     }
   }
   input[type="checkbox"],

@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
+import ReactGA from "react-ga4";
+import { AppProps } from "next/app";
+import { useRouter } from "next/router";
+import axios from "axios";
 import { Global } from "@emotion/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query";
-import axios from "axios";
-import { useRouter } from "next/router";
-import ReactGA from "react-ga4";
 import { datadogRum } from "@datadog/browser-rum";
 
+import { useAxiosInterceptor } from "@/apis";
+import { ToastPlaceholder, PrivateRouteLayout, ModalPlaceholder, ErrorBoundary, GlobalLayout } from "@/components";
 import { GA_KEY } from "@/constants";
 import { globalStyle } from "@/styles";
-import { useAxiosInterceptor } from "@/apis";
-import { ToastPlaceholder, PrivateRouteLayout, ModalPlaceholder, ErrorBoundary } from "@/components";
 
-import { AppPropsWithLayout } from "../types/nextPageWithLayoutType";
-import { PROTECTED_ROUTE_ARR } from "./index/constant";
+import { PROTECTED_ROUTE_ARR } from "./constant";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 if (typeof window !== "undefined" && !window.location.href.includes("localhost")) {
   datadogRum.init({
@@ -34,7 +37,7 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
   datadogRum.startSessionReplayRecording();
 }
 
-function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
+function BusinessService({ Component, pageProps }: AppProps) {
   ReactGA.initialize(GA_KEY);
 
   const router = useRouter();
@@ -68,19 +71,19 @@ function BusinessService({ Component, pageProps }: AppPropsWithLayout) {
 
   useAxiosInterceptor();
 
-  const getLayout = Component.getLayout || ((page) => page);
-
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <Global styles={globalStyle} />
-        <ErrorBoundary>
-          <PrivateRouteLayout protectedRoutes={PROTECTED_ROUTE_ARR}>
-            {getLayout(<Component {...pageProps} />)}
-          </PrivateRouteLayout>
-          <ModalPlaceholder />
-          <ToastPlaceholder />
-        </ErrorBoundary>
+        <GlobalLayout>
+          <ErrorBoundary>
+            <PrivateRouteLayout protectedRoutes={PROTECTED_ROUTE_ARR}>
+              <Component {...pageProps} />
+            </PrivateRouteLayout>
+            <ModalPlaceholder />
+            <ToastPlaceholder />
+          </ErrorBoundary>
+        </GlobalLayout>
         <ReactQueryDevtools initialIsOpen={false} />
       </Hydrate>
     </QueryClientProvider>

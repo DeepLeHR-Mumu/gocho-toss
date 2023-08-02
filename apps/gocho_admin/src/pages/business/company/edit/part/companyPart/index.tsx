@@ -2,9 +2,10 @@ import { FunctionComponent } from "react";
 import Image from "next/image";
 
 import { dateConverter } from "shared-util";
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import defaultCompanyBg from "shared-image/global/common/default_company_bg.webp";
 
-import { WelfareBox } from "@/pages/business/company/edit/component/welfareBox";
+import { WelfareBox, FactoryBox } from "../../component";
 import { cssObj } from "./style";
 import { CompanyPartProps } from "./type";
 
@@ -31,6 +32,12 @@ export const CompanyPart: FunctionComponent<CompanyPartProps> = ({ company }) =>
         <strong css={cssObj.dataTitle}>배경 이미지</strong>
         <div css={cssObj.imageContainer}>
           <Image fill sizes="1" src={company.bgImageUrl || defaultCompanyBg} alt="배경 이미지" />
+        </div>
+      </div>
+      <div css={cssObj.dataContainer}>
+        <strong css={cssObj.dataTitle}>회사 로고</strong>
+        <div css={cssObj.imageContainer}>
+          <Image fill sizes="1" src={company.logoUrl || defaultCompanyLogo} alt="배경 이미지" />
         </div>
       </div>
       <div css={cssObj.dataContainer}>
@@ -88,10 +95,14 @@ export const CompanyPart: FunctionComponent<CompanyPartProps> = ({ company }) =>
         <strong css={cssObj.dataTitle}>연봉 기타</strong>
         <p css={cssObj.dataBox}>{company.payDesc}</p>
       </div>
-
       <div css={cssObj.welfareContainer}>
         {welfareArr.map((welfare) => (
           <WelfareBox key={`WelfareBox${welfare.name}`} welfare={welfare} />
+        ))}
+      </div>
+      <div css={cssObj.factoryContainer}>
+        {company.factoryArr?.map((factory) => (
+          <FactoryBox key={`FactoryBox${factory.id}`} factory={factory} />
         ))}
       </div>
     </section>

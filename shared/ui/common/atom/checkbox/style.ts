@@ -1,16 +1,19 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 
-export const checkCSS = css`
-  width: 1rem;
-  height: 1rem;
-  margin-right: 0.25rem;
-  background-color: ${COLORS.GRAY100};
-  border: 1px solid ${COLORS.GRAY60};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 3px;
-  color: ${COLORS.BLUE_NEON40};
-`;
+export const cssObj = {
+  check: (isChecked: boolean) => css`
+    cursor: pointer;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.25rem;
+    background-color: ${isChecked ? `${NEWCOLORS.BLUE300}` : `${NEWCOLORS.WHITE}`};
+    border: 1px solid ${isChecked ? `${NEWCOLORS.BLUE300}` : `${NEWCOLORS.GRAY300}`};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    color: ${NEWCOLORS.WHITE};
+  `,
+};

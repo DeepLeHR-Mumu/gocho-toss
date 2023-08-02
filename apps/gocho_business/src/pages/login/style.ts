@@ -1,131 +1,100 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
+import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
-  wrapper: css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: calc(100vh - 64px);
+  mainContainer: css``,
+
+  backgroundWrapper: css`
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 110vw;
+    min-height: 110vh;
+    > img {
+      object-fit: cover;
+    }
   `,
-  container: css`
-    width: 28rem;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+
+  loginWrapper: css`
+    position: absolute;
+    top: 50%;
+    right: 20%;
+    transform: translate(50%, -50%);
+    width: fit-content;
+    background-color: ${NEWCOLORS.WHITE};
+    margin: auto;
+    padding: 3rem 1.5rem 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 16px 0 #0000000d;
+    z-index: 30;
   `,
-  titleBox: css`
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-  `,
-  gochoLogoBox: css`
+
+  logoBox: css`
     position: relative;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    margin-bottom: 2rem;
+    width: 15rem;
+    height: 2rem;
+    margin: 0 auto 2rem;
 
     > img {
       object-fit: contain;
     }
   `,
-  title: css`
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 3.75rem;
-    color: ${COLORS.GRAY10};
-  `,
-  formCSS: css`
-    width: 100%;
-  `,
+
   inputBox: css`
-    margin-bottom: 1.75rem;
     position: relative;
-    width: 100%;
-    background-color: ${COLORS.GRAY100};
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    margin-bottom: 2rem;
   `,
-  inputCSS: (isError: boolean) => css`
-    font-size: 1rem;
-    padding: 0.75rem 4rem 0.75rem 1rem;
-    font-weight: 400;
-    width: 100%;
-    border-radius: 5px;
-    box-shadow: 0 0 0 1000px ${COLORS.GRAY100} inset;
-    border: 1px solid ${isError ? COLORS.ERROR_RED40 : COLORS.GRAY10};
 
-    :focus {
-      border-color: ${COLORS.BLUE_FIRST40};
-    }
-
-    ::placeholder {
-      font-size: 1rem;
-      color: ${COLORS.GRAY40};
-    }
+  inputTitle: css`
+    ${TEXTS.TITLE7};
+    color: ${NEWCOLORS.BLUEGRAY400};
+    margin-bottom: 0.75rem;
   `,
+
   eyeButtonCSS: css`
     z-index: 10;
     font-size: 1.5rem;
-    color: ${COLORS.GRAY40};
+    color: ${NEWCOLORS.GRAY200};
     position: absolute;
+    top: 2.875rem;
     right: 1rem;
   `,
+
   errorMsg: css`
-    font-size: 1rem;
+    ${TEXTS.TITLE5};
+    color: ${NEWCOLORS.RED300};
     height: 1rem;
-    margin: 2rem 0;
+    margin: 3rem 0;
     text-align: center;
-    line-height: 1;
-    display: block;
-    color: ${COLORS.ERROR_RED40};
-    font-weight: 400;
   `,
+
   bottomBox: css`
     display: flex;
     align-items: center;
     justify-content: space-between;
   `,
-  findPasswordButton: css`
-    color: ${COLORS.GRAY30};
-    font-size: 0.875rem;
-    font-weight: 400;
-    text-decoration: underline;
-  `,
-  loginButton: css`
-    width: 100%;
+
+  buttonContainer: css`
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 1rem;
-    font-weight: 400;
-    color: ${COLORS.GRAY100};
-    background-color: ${COLORS.GRAY65};
-    height: 3rem;
+    gap: 0 0.5rem;
   `,
-  submitButton: (isActive: boolean) => css`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: ${isActive ? COLORS.BLUE_FIRST40 : COLORS.GRAY65};
-    color: ${COLORS.GRAY100};
-    border-radius: 0.375rem;
-    font-size: 1rem;
-    font-weight: 700;
-    padding: 1rem 0;
+
+  findButton: css`
+    ${TEXTS.TITLE5};
+    color: ${NEWCOLORS.BLUEGRAY400};
   `,
-  signupButton: css`
-    display: block;
-    text-align: center;
-    margin-top: 2rem;
-    color: ${COLORS.BLUE_NEON30};
+
+  contour: css`
+    :after {
+      content: "|";
+      color: ${NEWCOLORS.GRAY200};
+    }
+  `,
+
+  buttonDivider: css`
+    margin-top: 1.25rem;
   `,
 };

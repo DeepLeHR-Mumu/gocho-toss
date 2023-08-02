@@ -19,9 +19,7 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
         <p css={cssObj.companyName}>{job.companyName}</p>
         <p css={cssObj.jobTitle}>{job.title}</p>
       </td>
-      <p key={job.task} css={cssObj.taskBox}>
-        {job.task}
-      </p>
+      <td css={cssObj.taskBox}>{job.task}</td>
       <td css={cssObj.dateBox}>
         {startDate}
         <br />
@@ -33,8 +31,8 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
           css={cssObj.activeButton}
           href={
             job.status.name === "등록대기"
-              ? `${INTERNAL_URL.BUSINESS_JD_REGISTER_URL}/?id=${job.id}`
-              : `${INTERNAL_URL.BUSINESS_JD_EDIT_URL}/?id=${job.id}`
+              ? `${INTERNAL_URL.BUSINESS_JD_REGISTER_URL(job.id)}`
+              : `${INTERNAL_URL.BUSINESS_JD_EDIT_URL(job.id)}`
           }
         >
           상세보기

@@ -1,18 +1,13 @@
 import { FunctionComponent, useRef } from "react";
-import { AiOutlineEye, AiOutlineNumber, AiOutlinePause } from "react-icons/ai";
-import { BiBookmark, BiMinus } from "react-icons/bi";
-import { FiUser, FiCalendar, FiEdit } from "react-icons/fi";
-import { MdAdsClick } from "react-icons/md";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
-import { COLORS } from "shared-style/color";
-import { SharedButton } from "shared-ui/business/sharedButton";
+import { NewSharedButton } from "shared-ui/common/newSharedButton";
 
 import { useToast } from "@/globalStates";
 import { jdDeleteButtonEvent, jdCloseButtonEvent, jdEditButtonEvent, jdCloseDoneEvent, jdDeleteDoneEvent } from "@/ga";
-import { CommonInfoBox, CommonStatusChip } from "@/components";
+import { CommonStatusChip } from "@/components";
 import { INTERNAL_URL } from "@/constants";
 import { useEndJd, useDeleteJd, jdArrKeyObj } from "@/apis";
 
@@ -32,9 +27,12 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
   const { mutate: endJdMutation } = useEndJd();
 
   const numberFormat = Intl.NumberFormat("ko-KR", { notation: "compact" });
-  const viewData = numberFormat.format(jd.view);
-  const bookmarkData = numberFormat.format(jd.bookmark);
-  const clickData = numberFormat.format(jd.click);
+  const isExpired = dayjs(jd.endTime).isBefore(dayjs());
+  const isViewOn = isExpired || jd.status.name === "진행중";
+  const isEditOn = jd.uploader.is_mine && !isExpired;
+  const isEndOn = jd.uploader.is_mine && !isExpired && jd.status.name === "진행중";
+  const isCopyOn = jd.uploader.is_mine;
+  const isDeleteOn = jd.uploader.is_mine;
 
   const endJdHandler = (id: number) => {
     if (isEndLoading.current) return;
@@ -82,81 +80,78 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
     }
   };
 
-  const isExpired = dayjs(jd.endTime).isBefore(dayjs());
+  const jdDateMaker = () => {
+    if (jd.cut) return `${dayjs(jd.startTime).format("YYYY.MM.DD")}~채용 시 마감`;
+    if (dayjs(jd.endTime).year() === 9999) return `${dayjs(jd.startTime).format("YYYY.MM.DD")}~상시채용`;
+    return `${dayjs(jd.startTime).format("YYYY.MM.DD")}~${dayjs(jd.endTime).format("YYYY.MM.DD")}`;
+  };
 
   return (
-    <div css={cssObj.cardContainer(isExpired)}>
+    <div css={cssObj.cardContainer}>
       <div css={cssObj.topContainer}>
-        <div css={cssObj.titleBox}>
-          <div>
-            <strong css={cssObj.title}>{jd.title}</strong>
-            <p css={cssObj.date}>{`${dayjs(jd.startTime).format("YY.MM.DD")}~${dayjs(jd.endTime).format(
-              "YY.MM.DD"
-            )}`}</p>
-            {jd.cut && <p css={cssObj.date}>채용시 마감</p>}
+        <div>
+          <CommonStatusChip status={jd.status.name} isExpired={isExpired} />
+          <strong css={cssObj.title}>{jd.title}</strong>
+          <div css={cssObj.infoContainer}>
+            <div css={cssObj.infoBox}>
+              <p css={cssObj.info}>식별번호</p>
+              <p css={cssObj.info}>{jd.id}</p>
+            </div>
+            <div css={cssObj.infoBox}>
+              <p css={cssObj.info}>{jdDateMaker()}</p>
+            </div>
+            {jd.updatedTime ? (
+              <div css={cssObj.infoBox}>
+                <p css={cssObj.info}>수정일</p>
+                <p css={cssObj.info}>{dayjs(jd.updatedTime).format("YY.MM.DD")}</p>
+              </div>
+            ) : (
+              <div css={cssObj.infoBox}>
+                <p css={cssObj.info}>등록일</p>
+                <p css={cssObj.info}>{dayjs(jd.createdTime).format("YY.MM.DD")}</p>
+              </div>
+            )}
           </div>
-          <CommonStatusChip status={jd.status.name} />
         </div>
-        <CommonInfoBox Icon={AiOutlineEye} infoData={viewData} infoName="조회수" />
-        <CommonInfoBox Icon={BiBookmark} infoData={bookmarkData} infoName="북마크" />
-        <CommonInfoBox Icon={MdAdsClick} infoData={clickData} infoName="지원하기 클릭 수" />
-        <CommonInfoBox Icon={FiUser} infoData={`${jd.uploader.name} (${jd.uploader.department})`} infoName="등록자" />
+        <div css={cssObj.commonInfoContainer}>
+          <div css={cssObj.viewInfoBox}>
+            <p css={cssObj.countName}>공고 찜</p>
+            <p css={cssObj.count(isExpired)}>{numberFormat.format(jd.bookmark)}</p>
+          </div>
+          <div css={cssObj.viewInfoBox}>
+            <p css={cssObj.countName}>지원하기 클릭 수</p>
+            <p css={cssObj.count(isExpired)}>{numberFormat.format(jd.click)}</p>
+          </div>
+          <div css={cssObj.viewInfoBox}>
+            <p css={cssObj.countName}>공고 조회수</p>
+            <p css={cssObj.count(isExpired)}>{numberFormat.format(jd.view)}</p>
+          </div>
+        </div>
       </div>
       <div css={cssObj.bottomContainer}>
         <div css={cssObj.bottomInfoContainer}>
           <div css={cssObj.infoBox}>
-            <div css={cssObj.infoIcon}>
-              <AiOutlineNumber />
-            </div>
-            <strong css={cssObj.infoTitle}>식별번호</strong>
-            <p css={cssObj.info}>{jd.id}</p>
-          </div>
-          <div css={cssObj.infoBox}>
-            <div css={cssObj.infoIcon}>
-              <FiCalendar />
-            </div>
-            <strong css={cssObj.infoTitle}>공고등록일</strong>
-            <p css={cssObj.info}>{dayjs(jd.createdTime).format("YY.MM.DD HH:mm")}</p>
-          </div>
-          <div css={cssObj.infoBox}>
-            <div css={cssObj.infoIcon}>
-              <FiCalendar />
-            </div>
-            <strong css={cssObj.infoTitle}>최종수정일</strong>
-            <p css={cssObj.info}>{jd.updatedTime ? dayjs(jd.updatedTime).format("YY.MM.DD HH:mm") : "-"}</p>
+            <p css={cssObj.info}>담당자</p>
+            <div>{jd.uploader.name}</div>
           </div>
         </div>
-        {jd.uploader.is_mine && !isExpired && (
-          <div css={cssObj.buttonContainer}>
-            <SharedButton
-              radius="circle"
-              fontColor={COLORS.GRAY10}
-              backgroundColor={COLORS.GRAY80}
-              size="medium"
-              iconObj={{ icon: AiOutlinePause, location: "left" }}
-              text="공고마감"
-              onClickHandler={() => {
-                endJdHandler(jd.id);
-              }}
-            />
-            <SharedButton
-              radius="circle"
-              fontColor={COLORS.GRAY10}
-              backgroundColor={COLORS.GRAY80}
-              size="medium"
-              iconObj={{ icon: BiMinus, location: "left" }}
-              text="공고삭제"
-              onClickHandler={() => {
-                deleteJdHandler(jd.id);
-              }}
-            />
-            <SharedButton
-              radius="circle"
-              fontColor={COLORS.GRAY10}
-              backgroundColor={COLORS.GRAY80}
-              size="medium"
-              iconObj={{ icon: FiEdit, location: "left" }}
-              text="공고수정"
+
+        <div css={cssObj.buttonContainer}>
+          {isViewOn && (
+            <a
+              href={`https://고초대졸.com/jd/detail/${jd.id}`}
+              css={cssObj.linkButton}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              공고보기
+            </a>
+          )}
+          {isEditOn && (
+            <NewSharedButton
+              buttonType="outLineGray"
+              width={5}
+              text="수정"
               onClickHandler={() => {
                 jdEditButtonEvent(jd.id);
                 router.push({
@@ -164,9 +159,36 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
                 });
               }}
             />
-          </div>
-        )}
-        {isExpired && <div css={cssObj.inactiveLabel}>마감된 공고입니다</div>}
+          )}
+          {isCopyOn && (
+            <NewSharedButton
+              buttonType="outLineGray"
+              width={5}
+              text="복사"
+              onClickHandler={() => router.push(`${INTERNAL_URL.JD_UPLOAD}?copy=${jd.id}`)}
+            />
+          )}
+          {isEndOn && (
+            <NewSharedButton
+              buttonType="outLineGray"
+              width={5}
+              text="마감"
+              onClickHandler={() => {
+                endJdHandler(jd.id);
+              }}
+            />
+          )}
+          {isDeleteOn && (
+            <NewSharedButton
+              buttonType="outLineGray"
+              width={5}
+              text="삭제"
+              onClickHandler={() => {
+                deleteJdHandler(jd.id);
+              }}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

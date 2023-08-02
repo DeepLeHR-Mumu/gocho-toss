@@ -4,7 +4,7 @@ import { AxiosError, AxiosResponse } from "axios";
 import { ErrorResponseDef } from "@/types";
 
 import { jdArrKeyObj, ResponseObjDef } from "../useJdArr/type";
-import { axiosInstance } from "../../useIsRefreshLock";
+import { axiosInstance } from "../../axiosInstance";
 import { RequestObjDef, DeleteJdDef } from "./type";
 
 export const deleteJd: DeleteJdDef = async (requestObj) => {
@@ -21,7 +21,11 @@ export const useDeleteJd = () => {
       const previousData = queryClient.getQueryData(jdArrKeyObj.all);
 
       queryClient.setQueryData<ResponseObjDef>(jdArrKeyObj.all, (oldObj) => {
-        if (!oldObj?.data) return { data: [], page_result: null };
+        if (!oldObj?.data)
+          return {
+            data: [],
+            page_result: { total_elements: 0, total_pages: 0, page: 0, size: 0, is_first: false, is_last: false },
+          };
         const data = oldObj?.data.filter((old) => old.id !== requestObj.jdId);
         return { data, page_result: oldObj.page_result };
       });

@@ -172,6 +172,12 @@ export const desc = css`
   line-height: 1.5;
 `;
 
+export const dataBox = css`
+  width: 50%;
+  display: flex;
+  align-items: center;
+`;
+
 export const restPoint = css`
   margin-right: 0.5rem;
 

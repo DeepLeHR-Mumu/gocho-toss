@@ -3,7 +3,7 @@ import { AxiosError, AxiosResponse } from "axios";
 
 import { ErrorResponseDef } from "@/types";
 
-import { axiosInstance } from "../../useIsRefreshLock";
+import { axiosInstance } from "../../axiosInstance";
 import { RequestObjDef, EndJdDef } from "./type";
 
 export const patchJd: EndJdDef = async (requestObj) => {

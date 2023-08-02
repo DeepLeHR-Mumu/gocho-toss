@@ -1,27 +1,25 @@
 import { css } from "@emotion/react";
-
-import { COLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
   viewInfoBox: css`
     display: flex;
     flex-direction: column;
-    margin-right: 2rem;
-    gap: 0.5rem 0;
-  `,
-  infoBoxContainer: css`
-    display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 9.25rem;
+    height: 4rem;
+    border-right: 1px solid ${NEWCOLORS.GRAY200};
+
+    :last-of-type {
+      border-right: none;
+    }
   `,
-  iconBox: css`
-    color: ${COLORS.GRAY10};
+
+  countName: css``,
+
+  count: css`
     font-size: 1.5rem;
-    margin-right: 0.5rem;
-  `,
-  countName: css`
-    font-weight: 700;
-  `,
-  countCSS: css`
-    word-break: break-all;
+    font-weight: 600;
   `,
 };

@@ -14,4 +14,14 @@ export interface PostWelfareSubmitValues {
 
 export interface WelfarePartProps {
   companyForm: UseFormReturn<CompanyFormValues>;
+  welfareData: {
+    money: string[] | null;
+    health: string[] | null;
+    life: string[] | null;
+    holiday: string[] | null;
+    facility: string[] | null;
+    vacation: string[] | null;
+    growth: string[] | null;
+    etc: string[] | null;
+  } | null;
 }

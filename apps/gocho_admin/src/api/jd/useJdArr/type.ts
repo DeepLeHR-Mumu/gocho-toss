@@ -8,8 +8,18 @@ export interface RequestObjDef {
   page?: number;
   q?: string;
   userId?: string;
-  filter?: "todayUpload" | "almostDeadline" | "deadline" | "expired" | "valid" | "viral";
-  status?: "all" | "upload-waiting" | "modify-waiting" | "upload-reject" | "modify-reject";
+  filter?:
+    | "todayUpload"
+    | "almostDeadline"
+    | "deadline"
+    | "expired"
+    | "valid"
+    | "viral"
+    | "all"
+    | "upload-waiting"
+    | "modify-waiting"
+    | "upload-reject"
+    | "modify-reject";
   parsing?: "full" | "raw";
   companyId?: number;
 }

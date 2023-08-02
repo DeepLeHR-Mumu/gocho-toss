@@ -1,36 +1,37 @@
-import { ReactElement, useEffect, useRef, useState } from "react";
-import { FiEdit } from "react-icons/fi";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { NextPage } from "next";
+import dayjs from "dayjs";
 
 import { Spinner } from "shared-ui/common/atom/spinner";
-import { SharedButton } from "shared-ui/business/sharedButton";
-import { COLORS } from "shared-style/color";
 import { usePreventRouting } from "shared-hooks";
 
-import { useAddCompanyDetail, useCompanyDetail, useManagerProfile } from "@/apis";
-import { CommonStatusChip, PageLayout, GlobalLayout, Footer } from "@/components";
-import { useToast } from "@/globalStates";
+import { useEditCompanyDetail, useCompanyDetail, useManagerProfile } from "@/apis";
+import { PageLayout } from "@/components";
+import { useModal, useToast } from "@/globalStates";
 import { companyEditConfirmEvent, companyEditDoneEvent, companyEditFailEvent, companyEditPageFunnelEvent } from "@/ga";
-import { NextPageWithLayout } from "@/types";
+import { CompanySideNav } from "@/components/global/companySideNav";
 
 import { PageHead } from "./pageHead";
-import { CompanyInfoPart, CompanyStatusPart, LastEditInfoPart, BasicPart, WelfarePart } from "./part";
-import { COMPANY_MESSAGE_OBJ, ALREADY_DONE_EDIT_MESSAGE } from "./constants";
+import { ButtonPart, CompanyInfoPart, LastEditInfoPart, BasicPart, WelfarePart, FactoryPart } from "./part";
+import { COMPANY_MESSAGE_OBJ } from "./constant";
 import { CompanyFormValues } from "./type";
+import { getFieldArrayValueWithNull } from "./util";
 import { cssObj } from "./style";
 
-const CompanyEditPage: NextPageWithLayout = () => {
+const CompanyEditPage: NextPage = () => {
   const [bgImage, setBgImage] = useState<File>();
+  const [logo, setLogo] = useState<File>();
 
+  const { setModal } = useModal();
   const isRefetching = useRef(false);
+  const { setToast } = useToast();
 
   const { data: userInfoData } = useManagerProfile();
-  const { setToast } = useToast();
   const { data: companyDetailData, refetch: companyDetailRefetch } = useCompanyDetail({
     companyId: userInfoData?.company.id,
   });
-
-  const { mutate: putCompanyDetail } = useAddCompanyDetail();
+  const { mutate: putCompanyDetail } = useEditCompanyDetail();
 
   const companyForm = useForm<CompanyFormValues>({
     mode: "onBlur",
@@ -42,21 +43,19 @@ const CompanyEditPage: NextPageWithLayout = () => {
     formState: { submitCount, dirtyFields, isDirty },
   } = companyForm;
 
+  const isFormDirty = !isDirty && !bgImage && !logo;
+
   usePreventRouting(Boolean(Object.keys(dirtyFields).length));
 
   const addCompanyDetail = (formData: CompanyFormValues) => {
     companyEditConfirmEvent();
     isRefetching.current = true;
-    companyDetailRefetch().then((response) => {
-      if (!isDirty && !bgImage) {
+    companyDetailRefetch().then(() => {
+      if (isFormDirty) {
         window.alert("변경사항이 없습니다.");
         return;
       }
-      if (!response.data?.uploader.isMine) {
-        window.alert(ALREADY_DONE_EDIT_MESSAGE);
-        return;
-      }
-      if (response.data?.uploader.isMine && window.confirm(COMPANY_MESSAGE_OBJ.EDIT)) {
+      if (window.confirm(COMPANY_MESSAGE_OBJ.EDIT)) {
         putCompanyDetail(
           {
             companyId: userInfoData?.company.id as number,
@@ -68,8 +67,19 @@ const CompanyEditPage: NextPageWithLayout = () => {
                 exists: formData.nozo.exists === "true",
                 desc: formData.nozo.desc || null,
               },
+              welfare: {
+                money: formData.welfare.money && getFieldArrayValueWithNull(formData.welfare.money),
+                health: formData.welfare.health && getFieldArrayValueWithNull(formData.welfare.health),
+                life: formData.welfare.life && getFieldArrayValueWithNull(formData.welfare.life),
+                holiday: formData.welfare.holiday && getFieldArrayValueWithNull(formData.welfare.holiday),
+                facility: formData.welfare.facility && getFieldArrayValueWithNull(formData.welfare.facility),
+                vacation: formData.welfare.vacation && getFieldArrayValueWithNull(formData.welfare.vacation),
+                growth: formData.welfare.growth && getFieldArrayValueWithNull(formData.welfare.growth),
+                etc: formData.welfare.etc && getFieldArrayValueWithNull(formData.welfare.etc),
+              },
             },
             bgImage,
+            logo,
           },
           {
             onSuccess: () => {
@@ -80,7 +90,6 @@ const CompanyEditPage: NextPageWithLayout = () => {
         );
       }
     });
-
     return null;
   };
 
@@ -109,9 +118,27 @@ const CompanyEditPage: NextPageWithLayout = () => {
               etc: companyDetailData.welfare.etc,
             };
 
+      const factoryArr = companyDetailData.factory.map((factoryObj) => ({
+        id: factoryObj.id,
+        factory_name: factoryObj.name,
+        female_number: factoryObj.femaleNumber,
+        male_number: factoryObj.maleNumber,
+        product: factoryObj.product,
+        address: factoryObj.address,
+        bus_bool: factoryObj.bus.exists,
+        bus_etc: factoryObj.bus.desc,
+        dormitory_bool: factoryObj.dormitory.exists,
+        dormitory_etc: factoryObj.dormitory.desc,
+      }));
+
       reset({
+        logo_url: companyDetailData.logo,
+        background_image_url: companyDetailData.backgroundImage,
+        industry: companyDetailData.industry,
+        size: companyDetailData.size,
+        found_date: dayjs(new Date(companyDetailData.foundDate)).format("YYYY-MM-DD"),
         employee_number: companyDetailData.employeeNumber,
-        intro: companyDetailData.intro || "",
+        intro: companyDetailData.intro,
         location: {
           address: companyDetailData.location.address,
           x: companyDetailData.location.x,
@@ -125,9 +152,14 @@ const CompanyEditPage: NextPageWithLayout = () => {
         pay_start: companyDetailData.payStart,
         pay_desc: companyDetailData.payDesc || "",
         welfare: welfareObj,
+        factory_arr: factoryArr,
       });
     }
   }, [companyDetailData, reset]);
+
+  useEffect(() => {
+    if (userInfoData && userInfoData.status.name !== "인증완료") setModal("companyAuthModal");
+  }, [setModal, userInfoData]);
 
   useEffect(() => {
     window.addEventListener("keydown", (keyDownEvent) => {
@@ -154,11 +186,6 @@ const CompanyEditPage: NextPageWithLayout = () => {
     companyEditFailEvent(submitCount);
   }, [submitCount]);
 
-  useEffect(() => {
-    if (!companyDetailData || isRefetching.current === true) return;
-    if (companyDetailData.uploader.isMine === false) window.alert(ALREADY_DONE_EDIT_MESSAGE);
-  }, [companyDetailData]);
-
   if (!companyDetailData) {
     return (
       <div css={cssObj.spinner}>
@@ -168,74 +195,39 @@ const CompanyEditPage: NextPageWithLayout = () => {
   }
 
   return (
-    <main css={cssObj.wrapper}>
-      <PageLayout>
-        <form css={cssObj.container} onSubmit={handleSubmit(addCompanyDetail)}>
-          <header css={cssObj.header}>
-            <div>
-              <h2 css={cssObj.title}>기업정보</h2>
-              <p css={cssObj.desc}>변경사항이 있다면 작성 후 수정완료 버튼을 꼭 눌러주세요</p>
-            </div>
-            <div css={cssObj.topButtonBox}>
-              <CommonStatusChip status={companyDetailData.status.name} />
-              <div css={cssObj.sharedButtonBox}>
-                <SharedButton
-                  onClickHandler="submit"
-                  text="기업 정보 수정완료"
-                  radius="round"
-                  isFullWidth
-                  isDisabled={!companyDetailData?.uploader.isMine}
-                  fontColor={COLORS.GRAY100}
-                  iconObj={{
-                    icon: FiEdit,
-                    location: "left",
-                  }}
-                  size="medium"
-                  backgroundColor={COLORS.BLUE_FIRST40}
-                />
+    <>
+      <PageHead />
+      <form onSubmit={handleSubmit(addCompanyDetail)}>
+        <ButtonPart disabled={isFormDirty} />
+        <PageLayout>
+          <div css={cssObj.contentWrapper}>
+            <CompanySideNav />
+            <div css={cssObj.formContainer}>
+              <LastEditInfoPart />
+              <CompanyInfoPart
+                companyForm={companyForm}
+                companyData={companyDetailData}
+                setBgImage={setBgImage}
+                setLogo={setLogo}
+              />
+              <BasicPart companyForm={companyForm} />
+              <WelfarePart companyForm={companyForm} welfareData={companyDetailData.welfare} />
+              <FactoryPart companyForm={companyForm} />
+              <div css={cssObj.infoBox}>
+                <p css={cssObj.info}>
+                  · 영업일 기준 최대 2일 이내 검수 후 고초대졸닷컴 내 수정된 정보가 업데이트 됩니다.
+                </p>
+                <p css={cssObj.info}>
+                  · 수정 요청 반려 시, 이메일 및 비즈니스 내 알림으로 알려드리며, 해당 사항 수정 후 다시 제출하여야
+                  합니다. 충분한 검토 후 제출해 주세요
+                </p>
               </div>
             </div>
-          </header>
-
-          <CompanyInfoPart />
-          <LastEditInfoPart />
-          {companyDetailData.status.reason && <CompanyStatusPart />}
-
-          <section css={cssObj.companyInfoBox}>
-            <BasicPart companyForm={companyForm} setBgImage={setBgImage} />
-            <WelfarePart companyForm={companyForm} />
-          </section>
-
-          <div css={cssObj.sharedButtonBox}>
-            <SharedButton
-              onClickHandler="submit"
-              text="기업 정보 수정완료"
-              radius="round"
-              isFullWidth
-              isDisabled={!companyDetailData?.uploader.isMine}
-              fontColor={COLORS.GRAY100}
-              iconObj={{
-                icon: FiEdit,
-                location: "left",
-              }}
-              size="medium"
-              backgroundColor={COLORS.BLUE_FIRST40}
-            />
           </div>
-        </form>
-      </PageLayout>
-    </main>
+        </PageLayout>
+      </form>
+    </>
   );
 };
-
-CompanyEditPage.getLayout = (page: ReactElement) => (
-  <>
-    <PageHead />
-    <GlobalLayout>
-      {page}
-      <Footer />
-    </GlobalLayout>
-  </>
-);
 
 export default CompanyEditPage;

@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
+import { axiosInstance } from "../../axiosInstance";
 import { userStateKeyObj } from "./type";
-
-import { axiosInstance } from "../../useIsRefreshLock";
 
 export const getHealthCheck = async () => {
   const { data } = await axiosInstance.get(`/auth/health-check`);

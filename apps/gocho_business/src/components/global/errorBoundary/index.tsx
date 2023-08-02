@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { SharedButton } from "shared-ui/business/sharedButton";
-import { COLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 
 import jobi_500 from "@/public/image/jobi_500.svg";
 import { INTERNAL_URL } from "@/constants";
@@ -44,8 +44,8 @@ export class ErrorBoundary extends Component<PropsDef, StateDef> {
           <div css={cssObj.linkContainer}>
             <SharedButton
               radius="round"
-              fontColor={COLORS.GRAY10}
-              backgroundColor={COLORS.GRAY80}
+              fontColor={NEWCOLORS.BLUEGRAY700}
+              backgroundColor={NEWCOLORS.GRAY200}
               size="medium"
               text="새로고침"
               onClickHandler={() => {
@@ -54,8 +54,8 @@ export class ErrorBoundary extends Component<PropsDef, StateDef> {
             />
             <SharedButton
               radius="round"
-              fontColor={COLORS.GRAY100}
-              backgroundColor={COLORS.BLUE_NEON40}
+              fontColor={NEWCOLORS.WHITE}
+              backgroundColor={NEWCOLORS.BLUE250}
               size="medium"
               text="홈으로"
               onClickHandler={() => {

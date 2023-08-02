@@ -52,4 +52,4 @@ export {
 
 export { myPageFunnelEvent } from "./myPage";
 
-export { recruiterListPageFunnelEvent } from "./recruiterList";
+export { managerListPageFunnelEvent } from "./managerList";

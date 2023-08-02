@@ -35,6 +35,7 @@ export const selector = (jobDetailObj: JobDetailObjDef) => {
     endTime: jobDetailObj.end_time,
     processArr: jobDetailObj.process_arr,
     applyRouteArr: jobDetailObj.apply_route_arr,
+    applyDocumentArr: jobDetailObj.apply_document_arr,
     applyUrl: jobDetailObj.apply_url,
     etcArr: jobDetailObj.etc_arr,
     bookmark: jobDetailObj.bookmark,

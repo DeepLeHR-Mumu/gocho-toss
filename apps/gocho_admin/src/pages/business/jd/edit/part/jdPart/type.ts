@@ -6,6 +6,7 @@ export interface JdPartProps {
     endTime: string;
     processArr: string[];
     applyRouteArr: string[];
+    applyDocumentArr: string[];
     applyUrl: string;
     etcArr: string[] | null;
     cut: boolean;

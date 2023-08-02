@@ -26,17 +26,20 @@ export { useEditCompanyRequest } from "./company/useEditCompanyRequest";
 export { useFindCompany } from "./company/useFindCompany";
 export { useRejectModifyCompany } from "./company/useRejectModifyCompany";
 
-export { useAcceptModifyFactory } from "./factory/useAcceptModifyFactory";
-export { useAcceptUploadFactory } from "./factory/useAcceptUploadFactory";
 export { useAddFactory } from "./factory/useAddFactory";
 export { useDeleteFactory } from "./factory/useDeleteFactory";
-export { useEditFactory } from "./factory/useEditFactory";
-export { useEditFactoryRequest } from "./factory/useEditFactoryRequest";
 export { useFactoryArr } from "./factory/useFactoryArr";
 export { useFactoryDetail } from "./factory/useFactoryDetail";
-export { useRejectModifyFactory } from "./factory/useRejectModifyFactory";
-export { useRejectUploadFactory } from "./factory/useRejectUploadFactory";
 export { useFindFactory } from "./factory/useFindFactory";
+
+export { useManagerArr } from "./managers/useManagerArr";
+export { useAuthAccept } from "./managers/useAuthAccept";
+export { useAuthReject } from "./managers/useAuthReject";
+
+export { useNoticeArr } from "./notice/useNoticeArr";
+export { useNoticeDetail } from "./notice/useNoticeDetail";
+export { useAddNotice } from "./notice/useAddNotice";
+export { useDeleteNotice } from "./notice/useDeleteNotice";
 
 export { useAcceptModifyJd } from "./jd/useAcceptModifyJd";
 export { useAcceptUploadJd } from "./jd/useAcceptUploadJd";

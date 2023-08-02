@@ -1,16 +1,12 @@
-import { ReactElement, useEffect, useRef } from "react";
-import dayjs from "dayjs";
+import { useEffect, useRef } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { BiRocket } from "react-icons/bi";
-import { useQueryClient } from "@tanstack/react-query";
+import dayjs from "dayjs";
 
-import { SharedButton } from "shared-ui/business/sharedButton";
-import { COLORS } from "shared-style/color";
-import { Spinner } from "shared-ui/common/atom/spinner";
 import { usePreventRouting } from "shared-hooks";
 
-import { useToast } from "@/globalStates";
+import { useModal, useToast } from "@/globalStates";
 import {
   jdEditConfirmEvent,
   jdEditDoneEvent,
@@ -19,30 +15,33 @@ import {
   jdEditFailEvent,
   jdEditPageFunnelEvent,
 } from "@/ga";
-import type { NextPageWithLayout } from "@/types";
-import { PageLayout, GlobalLayout } from "@/components";
-import { useJdDetail, useEditJd, useDeleteJd, useEndJd, jdArrKeyObj } from "@/apis";
+import { PageLayout } from "@/components";
+import { useEditJd, useJdDetail, useManagerProfile } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 
 import {
-  PositionRequiredInfoPart,
-  HeaderPart,
-  BasicInfoPart,
-  PositionTitleInfoPart,
-  PositionWorkInfoPart,
-} from "./part";
+  ReasonPart,
+  ButtonPart,
+  TitlePart,
+  BasicPart,
+  RequiredPart,
+  ConditionPart,
+  PlacePart,
+  ApplyPart,
+} from "../../write/part";
+import { getFieldArrayValue, getFieldArrayValueWithNull, setFieldErrorIfEmpty, setFieldArray } from "./util";
 import { JdFormValues } from "./type";
 import { BLANK_JD, JD_EDIT_MESSAGE_OBJ, ROTATION_ARR } from "./constant";
-import { getFieldArrayValue, getFieldArrayValueWithNull, setFieldArray } from "./util";
-import { cssObj } from "./style";
 
-const JdEditPage: NextPageWithLayout = () => {
-  const isEditLoading = useRef(false);
-  const isDeleteLoading = useRef(false);
-  const isEndLoading = useRef(false);
-
+const JdEditPage: NextPage = () => {
   const router = useRouter();
-  const queryClient = useQueryClient();
+  const { setModal } = useModal();
+
+  const isLoading = useRef(false);
+
+  const { data: userInfoData } = useManagerProfile();
+  const { mutate: editJdMutate } = useEditJd();
+  const { data: jdData } = useJdDetail(Boolean(userInfoData), { id: Number(router.query.jdId) });
   const { setToast } = useToast();
 
   const jdForm = useForm<JdFormValues>({
@@ -50,12 +49,34 @@ const JdEditPage: NextPageWithLayout = () => {
     reValidateMode: "onChange",
     defaultValues: { ...BLANK_JD },
   });
+
   const {
     control,
     handleSubmit,
     reset,
-    formState: { dirtyFields, submitCount, isSubmitSuccessful },
+    watch,
+    formState: { submitCount, dirtyFields, isSubmitSuccessful },
   } = jdForm;
+
+  const taskDetailArr = useFieldArray({
+    control,
+    name: "task_detail_arr",
+  });
+
+  const requiredEtcArr = useFieldArray({
+    control,
+    name: "required_etc_arr",
+  });
+
+  const preferredEtcArr = useFieldArray({
+    control,
+    name: "preferred_etc_arr",
+  });
+
+  const payArr = useFieldArray({
+    control,
+    name: "pay_arr",
+  });
 
   const processArr = useFieldArray({
     control,
@@ -67,63 +88,19 @@ const JdEditPage: NextPageWithLayout = () => {
     name: "apply_route_arr",
   });
 
+  const applyDocumentArr = useFieldArray({
+    control,
+    name: "apply_document_arr",
+  });
+
   const etcArr = useFieldArray({
     control,
     name: "etc_arr",
   });
 
-  const { data: jdData } = useJdDetail(true, { id: Number(router.query.jdId) });
-  const { mutate: editJdMutate } = useEditJd();
-  const { mutate: deleteJdMutation } = useDeleteJd();
-  const { mutate: endJdMutation } = useEndJd();
-
-  const endJdHandler = (id: number) => {
-    if (isEndLoading.current) return;
-    isEndLoading.current = true;
-
-    if (window.confirm(JD_EDIT_MESSAGE_OBJ.END)) {
-      endJdMutation(
-        { jdId: id },
-        {
-          onSuccess: () => {
-            setToast("마감되었습니다");
-            router.push(INTERNAL_URL.JD_LIST);
-            queryClient.invalidateQueries(jdArrKeyObj.all);
-          },
-
-          onSettled: () => {
-            isEndLoading.current = false;
-          },
-        }
-      );
-    }
-  };
-
-  const deleteJdHandler = (id: number) => {
-    if (isDeleteLoading.current) return;
-    isDeleteLoading.current = true;
-
-    if (window.confirm(JD_EDIT_MESSAGE_OBJ.DELETE)) {
-      deleteJdMutation(
-        { jdId: id },
-        {
-          onSuccess: () => {
-            setToast("삭제되었습니다");
-            router.push(INTERNAL_URL.JD_LIST);
-            queryClient.invalidateQueries(jdArrKeyObj.all);
-          },
-
-          onSettled: () => {
-            isDeleteLoading.current = false;
-          },
-        }
-      );
-    }
-  };
-
   const jdEditHandler: SubmitHandler<JdFormValues> = (jdObj) => {
-    if (isEditLoading.current) return;
-    isEditLoading.current = true;
+    if (isLoading.current) return;
+    isLoading.current = true;
 
     jdEditConfirmEvent();
     if (window.confirm(JD_EDIT_MESSAGE_OBJ.EDIT)) {
@@ -132,22 +109,21 @@ const JdEditPage: NextPageWithLayout = () => {
           jdId: Number(router.query.jdId),
           dto: {
             ...jdObj,
+            middle: false,
             start_time: dayjs(new Date(jdObj.start_time)).format("YYYY-MM-DDTHH:mm:ss"),
             end_time: dayjs(new Date(jdObj.end_time)).format("YYYY-MM-DDTHH:mm:ss"),
-            apply_url:
-              jdObj.apply_url.includes("@") && !jdObj.apply_url.includes("mailto:")
-                ? `mailto: ${jdObj.apply_url}`
-                : jdObj.apply_url,
+            apply_url: jdObj.apply_url.includes("@") ? `mailto: ${jdObj.apply_url}` : jdObj.apply_url,
             process_arr: getFieldArrayValue(jdObj.process_arr),
             apply_route_arr: getFieldArrayValue(jdObj.apply_route_arr),
+            apply_document_arr: getFieldArrayValueWithNull(jdObj.apply_document_arr),
             etc_arr: getFieldArrayValueWithNull(jdObj.etc_arr),
             conversion_rate: jdObj.conversion_rate ? jdObj.conversion_rate : null,
             min_year: jdObj.min_year ? jdObj.min_year : null,
             max_year: jdObj.max_year ? jdObj.max_year : null,
             hire_number: jdObj.hire_number ? jdObj.hire_number : 0,
-            task_sub_arr: jdObj.task_sub_arr ? jdObj.task_sub_arr : null,
+            task_sub_arr: jdObj.task_sub_arr,
             task_detail_arr: getFieldArrayValue(jdObj.task_detail_arr),
-            required_etc_arr: getFieldArrayValueWithNull(jdObj.required_etc_arr),
+            required_etc_arr: getFieldArrayValue(jdObj.required_etc_arr),
             pay_arr: getFieldArrayValue(jdObj.pay_arr),
             place: {
               type: jdObj.place.type,
@@ -163,7 +139,7 @@ const JdEditPage: NextPageWithLayout = () => {
           onSuccess: () => {
             jdEditDoneEvent();
             router.push(INTERNAL_URL.JD_LIST);
-            setToast("수정되었습니다");
+            setToast("등록되었습니다");
           },
 
           onError: () => {
@@ -171,31 +147,40 @@ const JdEditPage: NextPageWithLayout = () => {
           },
 
           onSettled: () => {
-            isEditLoading.current = false;
+            isLoading.current = false;
           },
         }
       );
     } else {
-      isEditLoading.current = false;
+      isLoading.current = false;
+    }
+  };
+
+  const jobErrorHandler = () => {
+    const ifEduNotSelected = !watch("high") && !watch("college") && !watch("four");
+    setFieldErrorIfEmpty(watch, jdForm, "task_detail_arr", "* 세부 직무 내용을 입력해 주세요");
+    setFieldErrorIfEmpty(watch, jdForm, "pay_arr", "* 급여 정보를 입력해 주세요");
+    setFieldErrorIfEmpty(watch, jdForm, "process_arr", "* 채용절차는 최소 1개 이상 기재해 주세요");
+    setFieldErrorIfEmpty(watch, jdForm, "apply_route_arr", "* 지원 경로는 최소 1개 이상 기재해 주세요");
+    if (ifEduNotSelected) {
+      jdForm.setError("high", { message: "* 학력 조건을 하나 이상 선택해 주세요" });
     }
   };
 
   useEffect(() => {
-    const newStartTime = dayjs(jdData?.startTime, "YYYY-MM-DDTHH:mm:ss").toDate();
-    const newEndTime = dayjs(jdData?.endTime, "YYYY-MM-DDTHH:mm:ss").toDate();
+    const newStartTime = dayjs(jdData?.startTime, "YYYY-MM-DDTHH:mm:ss").add(9, "hour").toDate();
+    const newEndTime = dayjs(jdData?.endTime, "YYYY-MM-DDTHH:mm:ss").add(9, "hour").toDate();
 
     reset({
-      company_id: jdData?.company.id,
       title: jdData?.title,
       start_time: new Date(newStartTime).toISOString().substring(0, 19),
       end_time: new Date(newEndTime).toISOString().substring(0, 19),
       cut: jdData?.cut,
       process_arr: setFieldArray(jdData?.processArr || []),
+      apply_document_arr: setFieldArray(jdData?.applyDocumentArr || []),
       apply_route_arr: setFieldArray(jdData?.applyRouteArr || []),
       apply_url: jdData?.applyUrl,
       etc_arr: setFieldArray(jdData?.etcArr || []),
-      id: jdData?.id,
-      middle: jdData?.eduSummary.middle,
       high: jdData?.eduSummary.high,
       college: jdData?.eduSummary.college,
       four: jdData?.eduSummary.four,
@@ -207,7 +192,7 @@ const JdEditPage: NextPageWithLayout = () => {
       conversion_rate: jdData?.contractType.conversionRate,
       task_main: jdData?.task.mainTask,
       task_sub_arr: jdData?.task.subTaskArr,
-      task_detail_arr: setFieldArray(jdData?.taskDetailArr || []),
+      task_detail_arr: setFieldArray(jdData?.task.detailArr || []),
       rotation_arr: jdData?.rotationArr.map(
         (rotation) => ROTATION_ARR.find((rotationObj) => rotationObj.name === rotation)?.data
       ),
@@ -231,6 +216,16 @@ const JdEditPage: NextPageWithLayout = () => {
   );
 
   useEffect(() => {
+    if (userInfoData && userInfoData.status.name !== "인증완료") setModal("companyAuthModal");
+  }, [setModal, userInfoData]);
+
+  useEffect(() => {
+    if (watch("high") || watch("college") || watch("four")) {
+      jdForm.clearErrors("high");
+    }
+  }, [jdForm, watch]);
+
+  useEffect(() => {
     if (submitCount === 0) return;
     jdEditFailEvent(submitCount);
   }, [submitCount]);
@@ -239,68 +234,31 @@ const JdEditPage: NextPageWithLayout = () => {
     jdEditPageFunnelEvent();
   }, []);
 
-  if (!jdData) {
-    return (
-      <div css={cssObj.spinnerBox}>
-        <Spinner />
-      </div>
-    );
-  }
-
   return (
-    <main>
+    <form onSubmit={handleSubmit(jdEditHandler, jobErrorHandler)}>
+      <ButtonPart />
       <PageLayout>
-        <div css={cssObj.pageContainer}>
-          <form onSubmit={handleSubmit(jdEditHandler)}>
-            <HeaderPart jdData={jdData} />
-            <BasicInfoPart jdForm={jdForm} processArr={processArr} applyRouteArr={applyRouteArr} etcArr={etcArr} />
-            <div css={cssObj.cardContainer}>
-              <PositionTitleInfoPart jdForm={jdForm} control={control} />
-              <PositionRequiredInfoPart jdForm={jdForm} control={control} />
-              <PositionWorkInfoPart jdForm={jdForm} control={control} />
-            </div>
-            <div css={cssObj.buttonContainer}>
-              <SharedButton
-                radius="round"
-                fontColor={`${COLORS.BLUE_FIRST40}`}
-                borderColor={`${COLORS.BLUE_FIRST40}`}
-                backgroundColor={`${COLORS.GRAY100}`}
-                size="xLarge"
-                text="공고 마감"
-                onClickHandler={() => {
-                  endJdHandler(Number(router.query.jdId));
-                }}
-                iconObj={{ icon: BiRocket, location: "left" }}
-              />
-              <SharedButton
-                radius="round"
-                fontColor={`${COLORS.BLUE_FIRST40}`}
-                borderColor={`${COLORS.BLUE_FIRST40}`}
-                backgroundColor={`${COLORS.GRAY100}`}
-                size="xLarge"
-                text="공고 삭제"
-                onClickHandler={() => {
-                  deleteJdHandler(Number(router.query.jdId));
-                }}
-                iconObj={{ icon: BiRocket, location: "left" }}
-              />
-              <SharedButton
-                radius="round"
-                fontColor={`${COLORS.GRAY100}`}
-                backgroundColor={`${COLORS.BLUE_FIRST40}`}
-                size="xLarge"
-                text="수정 완료"
-                onClickHandler="submit"
-                iconObj={{ icon: BiRocket, location: "left" }}
-              />
-            </div>
-          </form>
-        </div>
+        {jdData?.status.name.includes("반려") && <ReasonPart jdData={jdData} />}
+        <TitlePart jdForm={jdForm} />
+        <BasicPart jdForm={jdForm} control={control} taskDetailArr={taskDetailArr} />
+        <RequiredPart
+          jdForm={jdForm}
+          control={control}
+          requiredEtcArr={requiredEtcArr}
+          preferredEtcArr={preferredEtcArr}
+        />
+        <ConditionPart jdForm={jdForm} control={control} payArr={payArr} />
+        <PlacePart jdForm={jdForm} />
+        <ApplyPart
+          jdForm={jdForm}
+          processArr={processArr}
+          applyRouteArr={applyRouteArr}
+          applyDocumentArr={applyDocumentArr}
+          etcArr={etcArr}
+        />
       </PageLayout>
-    </main>
+    </form>
   );
 };
-
-JdEditPage.getLayout = (page: ReactElement) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default JdEditPage;

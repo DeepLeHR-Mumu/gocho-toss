@@ -1,5 +1,4 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { FiAirplay } from "react-icons/fi";
 
 import { CommonInfoBox } from "@/components";
 
@@ -25,4 +24,4 @@ export default {
 const Template: ComponentStory<typeof CommonInfoBox> = (args) => <CommonInfoBox {...args} />;
 
 export const Default = Template.bind({});
-Default.args = { infoName: "조회수", infoData: "3399", Icon: FiAirplay };
+Default.args = { infoName: "조회수", infoData: "3399" };

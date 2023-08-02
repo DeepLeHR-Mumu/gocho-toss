@@ -4,13 +4,14 @@ import { COLORS } from "shared-style/color";
 import { subPageTitle } from "@/style";
 
 export const cssObj = {
-  wrapper: css``,
   title: css`
     ${subPageTitle};
   `,
+
   container: css`
     margin-bottom: 3rem;
   `,
+
   thead: css`
     display: grid;
     grid-template-columns: 10% 35% 10% 15% 30%;
@@ -27,6 +28,7 @@ export const cssObj = {
       color: ${COLORS.GRAY30};
     }
   `,
+
   tbody: css`
     display: flex;
     flex-direction: column;

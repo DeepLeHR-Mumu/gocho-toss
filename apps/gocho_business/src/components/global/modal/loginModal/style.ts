@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
   wrapper: css`
@@ -12,7 +12,7 @@ export const cssObj = {
     width: 22rem;
     height: auto;
     padding: 2rem;
-    background-color: ${COLORS.GRAY100};
+    background-color: ${NEWCOLORS.WHITE};
     border-radius: 1rem;
     display: flex;
     flex-direction: column;
@@ -29,8 +29,9 @@ export const cssObj = {
       object-fit: contain;
     }
   `,
+
   desc: css`
-    color: ${COLORS.BLUE_FIRST40};
+    color: ${NEWCOLORS.BLUE300};
     font-size: 0.875rem;
     font-weight: 400;
   `,
@@ -48,6 +49,7 @@ export const cssObj = {
       position: relative;
     }
   `,
+
   label: ({ isError, isFocus, isSuccess }: { isError: boolean; isFocus: boolean; isSuccess: boolean }) => {
     const defaultCSS = css`
       font-size: 0.75rem;
@@ -56,7 +58,7 @@ export const cssObj = {
       top: 0;
       margin-left: 1.75rem;
       transform: translate(0%, -50%);
-      background-color: ${COLORS.GRAY100};
+      background-color: ${NEWCOLORS.WHITE};
       padding: 0 0.25rem;
       height: 1rem;
       text-align: center;
@@ -65,20 +67,21 @@ export const cssObj = {
     if (isError) {
       return css`
         ${defaultCSS};
-        color: ${COLORS.ERROR_RED30};
+        color: ${NEWCOLORS.RED300};
       `;
     }
     if (isFocus || isSuccess) {
       return css`
         ${defaultCSS};
-        color: ${COLORS.BLUE_FIRST40};
+        color: ${NEWCOLORS.BLUE300};
       `;
     }
     return css`
       ${defaultCSS};
-      color: ${COLORS.GRAY60};
+      color: ${NEWCOLORS.BLUEGRAY200};
     `;
   },
+
   input: ({ isError, isFocus, isSuccess }: { isError: boolean; isFocus: boolean; isSuccess: boolean }) => {
     const defaultCSS = css`
       width: 100%;
@@ -92,46 +95,51 @@ export const cssObj = {
     if (isError) {
       return css`
         ${defaultCSS};
-        border-color: ${COLORS.ERROR_RED30};
+        border-color: ${NEWCOLORS.RED300};
       `;
     }
     if (isFocus || isSuccess) {
       return css`
         ${defaultCSS};
-        border-color: ${COLORS.BLUE_FIRST40};
+        border-color: ${NEWCOLORS.BLUE300};
       `;
     }
     return css`
       ${defaultCSS};
-      border-color: ${COLORS.GRAY60};
+      border-color: ${NEWCOLORS.BLUEGRAY200};
     `;
   },
+
   deleteButton: css`
     position: absolute;
     right: 5%;
     top: 50%;
     transform: translate(0, -50%);
     font-size: 1.2rem;
-    color: ${COLORS.ERROR_RED30};
+    color: ${NEWCOLORS.RED300};
   `,
+
   successIconBox: css`
     position: absolute;
     right: 5%;
     top: 50%;
     transform: translate(0, -50%);
     font-size: 1.2rem;
-    color: ${COLORS.BLUE_FIRST40};
+    color: ${NEWCOLORS.BLUE300};
   `,
+
   errorBox: css`
     margin-top: 0.2rem;
     height: 1.5rem;
     margin-bottom: 1.25rem;
   `,
+
   errorMsgCSS: css`
     font-size: 0.875rem;
-    color: ${COLORS.ERROR_RED30};
+    color: ${NEWCOLORS.RED300};
     text-align: center;
   `,
+
   loginButton: css`
     margin-bottom: 0.3rem;
   `,

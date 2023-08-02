@@ -32,34 +32,41 @@ export const cssObj = {
       padding: 0 1rem;
     }
   `,
+
   centerDesc: css`
     text-align: center;
   `,
+
   leftDesc: css`
     text-align: left;
     word-break: keep-all;
   `,
+
   taskBox: css`
     display: flex;
     flex-direction: column;
     align-items: center;
   `,
+
   task: css`
     font-size: 0.75rem;
     color: ${COLORS.GRAY10};
     word-break: keep-all;
     text-align: center;
   `,
+
   flexBox: css`
     display: flex;
     justify-content: space-between;
   `,
+
   companyName: css`
     font-weight: 500;
     display: block;
     margin-bottom: 0.25rem;
     ${shorten()};
   `,
+
   startDateCSS: css`
     display: block;
     font-size: 0.875rem;
@@ -67,6 +74,7 @@ export const cssObj = {
       content: "시작일 : ";
     }
   `,
+
   endDateCSS: css`
     font-size: 0.875rem;
     ::before {
@@ -74,22 +82,26 @@ export const cssObj = {
     }
     display: block;
   `,
+
   applyButton: css`
     ${defaultButton};
     color: ${COLORS.BLUE_FIRST40};
     background-color: ${COLORS.GRAY90};
     border: 1px solid ${COLORS.GRAY80};
   `,
+
   editButton: css`
     ${defaultButton};
     color: ${COLORS.GRAY10};
     background-color: ${COLORS.ERROR_YELLOW50};
   `,
+
   deleteButton: css`
     ${defaultButton};
     color: ${COLORS.GRAY100};
     background-color: ${COLORS.ERROR_RED30};
   `,
+
   endJobButton: css`
     ${defaultButton};
     color: ${COLORS.GRAY10};

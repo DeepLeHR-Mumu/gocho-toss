@@ -1,11 +1,11 @@
 export interface JdFormValues {
-  id: number;
   company_id: number;
   title: string;
   start_time: string;
   end_time: string;
   cut: boolean;
   process_arr: { value: string }[];
+  apply_document_arr: { value: string }[];
   apply_route_arr: { value: string }[];
   apply_url: string;
   etc_arr: { value: string }[];

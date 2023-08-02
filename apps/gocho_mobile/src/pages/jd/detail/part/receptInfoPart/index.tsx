@@ -89,6 +89,19 @@ export const ReceptInfoPart: FunctionComponent<ReceptInfoPartProps> = ({ jobDeta
           </div>
 
           <div css={flexBox}>
+            <p css={detailTitle}>제출서류</p>
+            <p css={desc}>
+              {jobDetailData.applyDocumentArr.map((document) => {
+                return (
+                  <span css={restPoint} key={`제출서류_${document}`}>
+                    {document}
+                  </span>
+                );
+              })}
+            </p>
+          </div>
+
+          <div css={flexBox}>
             <p css={detailTitle}>기타사항</p>
             {jobDetailData.etcArr ? (
               <p css={desc}>

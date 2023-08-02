@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 
 export const wrapper = css`
   background-color: rgba(43, 43, 43, 0.8);
@@ -40,6 +40,6 @@ export const wrapper = css`
 `;
 
 export const descCSS = css`
-  color: ${COLORS.GRAY100};
+  color: ${NEWCOLORS.WHITE};
   font-size: 1rem;
 `;

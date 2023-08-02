@@ -1,13 +1,17 @@
 export { useDeleteUserInfo } from "./auth/useDeleteUserInfo";
 export { useDoLogin } from "./auth/useDoLogin";
 export { useDoLogout } from "./auth/useDoLogout";
-export { useEditUserInfo } from "./auth/useEditUserInfo";
+export { useEditUserPassword } from "./auth/useEditUserPassword";
 export { useHealthCheck } from "./auth/useHealthCheck";
-export { useFindPassword } from "./auth/usefindPassword";
+export { useSendAuthNumber } from "./auth/useSendAuthNumber";
+export { useCheckAuthNumber } from "./auth/useCheckAuthNumber";
+export { getPass, getPassCheck } from "./auth/pass";
 
-export { useAddCompanyDetail } from "./company/useAddCompanyDetail";
+export { useEditCompanyDetail } from "./company/useEditCompanyDetail";
 export { useCompanyDetail } from "./company/useCompanyDetail";
 export { useCountInfo } from "./company/useCountInfo";
+export { useManagerArr } from "./company/useManagerArr";
+export { useFindCompany } from "./company/useFindCompany";
 
 export { useFactoryArr } from "./factory/useFactoryArr";
 export { useAddFactory } from "./factory/useAddFactory";
@@ -23,8 +27,16 @@ export { useJdArr } from "./jd/useJdArr";
 export { useJdDetail } from "./jd/useJdDetail";
 export { jdArrKeyObj } from "./jd/useJdArr/type";
 
+export { useNoticeArr } from "./notice/useNoticeArr";
+export { useNoticeDetail } from "./notice/useNoticeDetail";
+export { useAddNoticeView } from "./notice/useAddNoticeView";
+
 export { useManagerProfile } from "./manager/useManagerProfile";
+export { useAlarmArr } from "./manager/alarm/useAlarmArr";
+export { useReadAlarm } from "./manager/alarm/useReadAlarm";
+export { useFindEmail } from "./manager/find/useFindEmail";
+export { useFindPassword } from "./manager/find/useFindPassword";
+export { useManagerAuth } from "./manager/auth/useManagerAuth";
+export { useManagerRegister } from "./manager/useManagerRegister";
 
-export { useRecruiterArr } from "./recruiter/useRecruiterArr";
-
-export { useAxiosInterceptor, axiosInstance, axiosNoTokenInstance } from "./useIsRefreshLock";
+export { useAxiosInterceptor, axiosInstance, axiosNoTokenInstance } from "./axiosInstance";

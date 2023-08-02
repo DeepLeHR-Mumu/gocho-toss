@@ -1,42 +1,32 @@
-import { ReactElement } from "react";
-import Image from "next/image";
+import { NextPage } from "next";
 
-import helpBackground from "@/public/image/help/help_background.svg";
-import chatIcon from "@/public/image/help/chat.svg";
-import { NextPageWithLayout } from "@/types";
-import { GlobalLayout, Footer } from "@/components";
+import { EtcSideNav } from "@/components/global/etcSideNav";
+import { PageLayout } from "@/components";
 
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
-const HelpPage: NextPageWithLayout = () => (
-  <main css={cssObj.wrapper}>
-    <div>
-      <h2 css={cssObj.title}>고객센터</h2>
-      <p css={cssObj.desc}>
-        페이지 오른쪽 하단의 채널톡에서
-        <br />
-        담당자가 기다립니다
-      </p>
-      <strong css={cssObj.strongDesc}>무엇이든 문의해주세요!</strong>
-      <div css={cssObj.chatIconBox}>
-        <Image src={chatIcon} alt="" fill />
-      </div>
-    </div>
-
-    <div css={cssObj.backgroundBox}>
-      <Image src={helpBackground} alt="" fill priority />
-    </div>
-  </main>
-);
-
-HelpPage.getLayout = (page: ReactElement) => (
+const HelpPage: NextPage = () => (
   <>
     <PageHead />
-    <GlobalLayout>
-      {page}
-      <Footer />
-    </GlobalLayout>
+    <PageLayout>
+      <div css={cssObj.contentWrapper}>
+        <EtcSideNav />
+        <div css={cssObj.partContainer}>
+          <h2 css={cssObj.pageTitle}>고객센터</h2>
+          <div css={cssObj.descWrapper}>
+            <strong css={cssObj.descTitle}>고객센터 운영시간</strong>
+            <p css={cssObj.desc}>평일 10:00-15:00시 (주말 및 공휴일 휴무)</p>
+          </div>
+          <p css={cssObj.email}>
+            채용공고 · 광고 등록 문의 <a href="mailto:register@deeplehr.com">register@deeplehr.com</a>
+          </p>
+          <p css={cssObj.email}>
+            이메일 문의 <a href="mailto:cs@deeplehr.com">cs@deeplehr.com</a>
+          </p>
+        </div>
+      </div>
+    </PageLayout>
   </>
 );
 
