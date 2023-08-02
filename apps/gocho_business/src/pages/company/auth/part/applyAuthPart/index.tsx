@@ -26,7 +26,7 @@ export const ApplyAuthPart: FunctionComponent = () => {
   const { data: companyDetailData } = useCompanyDetail({
     companyId: userInfoData?.company.id,
   });
-  const { mutate: postManagersAuth } = useManagerAuth();
+  const { mutate: postManagerAuth } = useManagerAuth();
 
   const companyAuthForm = useForm<CompanyAuthFormValues>({
     mode: "onBlur",
@@ -77,7 +77,7 @@ export const ApplyAuthPart: FunctionComponent = () => {
         requestObj.backgroundImage = backgroundImageFile !== null ? backgroundImageFile : undefined;
       }
 
-      postManagersAuth(requestObj, {
+      postManagerAuth(requestObj, {
         onSuccess: () => {
           managerProfileRefetch();
           router.push(INTERNAL_URL.HOME);

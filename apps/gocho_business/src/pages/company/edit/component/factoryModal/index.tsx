@@ -1,4 +1,4 @@
-import { ChangeEvent, FunctionComponent, useRef } from "react";
+import { ChangeEvent, FunctionComponent, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { FiX } from "react-icons/fi";
@@ -11,14 +11,17 @@ import { commonCssObj } from "@/styles";
 import { ModalComponent } from "@/components/global/modal/modalBackground";
 
 import { cssObj } from "./style";
-import { AuthFactoryAddModalProps, FactoryRegisterFormValues } from "./type";
+import { FactoryModalProps, FactoryRegisterFormValues } from "./type";
 
-export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defaultFactory, add, cancel, modify }) => {
+export const FactoryModal: FunctionComponent<FactoryModalProps> = ({
+  factory,
+  addFactoryArr,
+  modifyFactoryArr,
+  closeModal,
+}) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const { watch, register, handleSubmit, setValue } = useForm<FactoryRegisterFormValues>({
-    defaultValues: defaultFactory !== null ? { ...defaultFactory } : undefined,
-  });
+  const { watch, register, handleSubmit, setValue, reset } = useForm<FactoryRegisterFormValues>({});
 
   useFocusTrap(modalRef);
 
@@ -33,18 +36,22 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
   };
 
   const addFactoryHandler = (factoryRequestObj: FactoryRegisterFormValues) => {
-    if (defaultFactory) {
-      modify(factoryRequestObj);
-    } else add(factoryRequestObj);
-    cancel();
+    if (factory) {
+      modifyFactoryArr(factoryRequestObj);
+    } else addFactoryArr(factoryRequestObj);
+    closeModal();
   };
+
+  useEffect(() => {
+    if (factory) reset({ ...factory });
+  }, [reset, factory]);
 
   return (
     <ModalComponent>
       <div css={cssObj.modalContainer} ref={modalRef} tabIndex={-1}>
         <div css={cssObj.titleWrapper}>
           <h3 css={cssObj.title}>공장 등록</h3>
-          <button type="button" css={cssObj.closeButton} onClick={cancel}>
+          <button type="button" css={cssObj.closeButton} onClick={closeModal}>
             <FiX />
           </button>
         </div>
@@ -53,7 +60,6 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
             <strong css={commonCssObj.inputTitle(false)}>공장 명칭</strong>
             <input
               css={commonCssObj.input(37.5, false)}
-              defaultValue={watch("factory_name")}
               {...register("factory_name", { maxLength: 50, required: true })}
               placeholder="고초대졸 제1공장 (최대 50자)"
             />
@@ -62,19 +68,13 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
             <strong css={commonCssObj.inputTitle(false)}>생산품</strong>
             <input
               css={commonCssObj.input(37.5, false)}
-              defaultValue={watch("product")}
               {...register("product", { maxLength: 50, required: true })}
               placeholder="공장 주 생산품 (최대 50자)"
             />
           </div>
           <div css={commonCssObj.container}>
             <strong css={commonCssObj.inputTitle(false)}>공장 주소</strong>
-            <input
-              css={commonCssObj.input(30.5, false)}
-              disabled
-              defaultValue={watch("address")}
-              {...register("address", { required: true })}
-            />
+            <input css={commonCssObj.input(30.5, false)} disabled {...register("address", { required: true })} />
             <button css={cssObj.addAddressButton} type="button" onClick={onClickAddress}>
               주소찾기
             </button>
@@ -83,7 +83,6 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
             <strong css={commonCssObj.inputTitle(false)}>임직원</strong>
             <div css={cssObj.inputWrapper}>
               <input
-                defaultValue={watch("male_number")}
                 {...register("male_number", {
                   required: true,
                   valueAsNumber: true,
@@ -100,7 +99,6 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
             </div>
             <div css={cssObj.inputWrapper}>
               <input
-                defaultValue={watch("female_number")}
                 {...register("female_number", {
                   required: true,
                   valueAsNumber: true,
@@ -128,7 +126,6 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
                 </SharedRadioButton>
               </div>
               <input
-                defaultValue={watch("bus_etc") || ""}
                 {...register("bus_etc", {
                   maxLength: 70,
                   validate: (value) => {
@@ -164,7 +161,6 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
                 </SharedRadioButton>
               </div>
               <input
-                defaultValue={watch("dormitory_etc") || ""}
                 {...register("dormitory_etc", {
                   maxLength: 70,
                   validate: (value) => {
@@ -181,8 +177,13 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
             </div>
           </div>
           <div css={cssObj.buttonContainer}>
-            <NewSharedButton onClickHandler={cancel} buttonType="outLineGray" text="취소" width={8.75} />
-            <NewSharedButton onClickHandler="submit" buttonType="fillBlue" text="등록하기" width={8.75} />
+            <NewSharedButton onClickHandler={closeModal} buttonType="outLineGray" text="취소" width={8.75} />
+            <NewSharedButton
+              onClickHandler={() => addFactoryHandler(watch())}
+              buttonType="fillBlue"
+              text="등록하기"
+              width={8.75}
+            />
           </div>
         </form>
       </div>

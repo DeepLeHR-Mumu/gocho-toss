@@ -10,9 +10,9 @@ export interface FactoryRegisterFormValues {
   dormitory_etc: string | null;
 }
 
-export interface AuthFactoryAddModalProps {
-  defaultFactory: FactoryRegisterFormValues | null;
-  add: (factory: FactoryRegisterFormValues) => void;
-  modify: (factory: FactoryRegisterFormValues) => void;
-  cancel: () => void;
+export interface FactoryModalProps {
+  factory: FactoryRegisterFormValues | null;
+  addFactoryArr: (factory: FactoryRegisterFormValues) => void;
+  modifyFactoryArr: (factory: FactoryRegisterFormValues) => void;
+  closeModal: () => void;
 }

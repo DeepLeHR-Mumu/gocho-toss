@@ -1,10 +1,10 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useState } from "react";
 import { FiEdit3, FiMinus, FiPlus } from "react-icons/fi";
 
 import { commonCssObj } from "@/styles";
 
 import { FactoryModal } from "../../component";
-import { FactoryPartProps, FactoryDef } from "./type";
+import { FactoryPartProps } from "./type";
 import { cssObj } from "./style";
 
 export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ companyForm }) => {
@@ -14,17 +14,12 @@ export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ companyForm }
     state: false,
     modifyIndex: null,
   });
-  const [factories, setFactories] = useState<FactoryDef[]>([]);
 
   const deleteFactoryHandler = (index: number) => {
-    const newFactories = [...factories];
+    const newFactories = [...watch("factory_arr")];
     newFactories.splice(index, 1);
-    setFactories(newFactories);
+    setValue("factory_arr", newFactories, { shouldDirty: true });
   };
-
-  useEffect(() => {
-    setValue("factory_arr", factories);
-  }, [setValue, factories]);
 
   return (
     <section css={commonCssObj.partContainer}>
@@ -33,7 +28,7 @@ export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ companyForm }
         type="button"
         css={cssObj.addFactoryButton}
         onClick={() => {
-          setModal((prev) => ({ ...prev, state: true }));
+          setModal({ state: true, modifyIndex: null });
         }}
       >
         <FiPlus />
@@ -70,23 +65,18 @@ export const FactoryPart: FunctionComponent<FactoryPartProps> = ({ companyForm }
       </div>
       {modal.state && (
         <FactoryModal
-          defaultFactory={modal.modifyIndex !== null ? factories[modal.modifyIndex] : null}
-          cancel={() => setModal({ state: false, modifyIndex: null })}
-          add={(newFactory) => {
-            setValue("factory_arr", [
-              ...watch("factory_arr"),
-              {
-                ...newFactory,
-              },
-            ]);
+          factory={modal.modifyIndex !== null ? watch("factory_arr")[modal.modifyIndex] : null}
+          addFactoryArr={(newFactory) => {
+            setValue("factory_arr", [...watch("factory_arr"), { ...newFactory }], { shouldDirty: true });
           }}
-          modify={(newFactory) => {
+          modifyFactoryArr={(newFactory) => {
             if (modal.modifyIndex !== null) {
-              const newFactories = [...factories];
+              const newFactories = [...watch("factory_arr")];
               newFactories[modal.modifyIndex] = { ...newFactory };
-              setFactories(newFactories);
+              setValue("factory_arr", newFactories, { shouldDirty: true });
             }
           }}
+          closeModal={() => setModal({ state: false, modifyIndex: null })}
         />
       )}
     </section>
