@@ -156,7 +156,7 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
             placeholder="좌측 버튼을 눌러 기업 주소를 입력해주세요"
             css={commonCssObj.input(38, false)}
           />
-          <button type="button" onClick={onClickAddress} css={cssObj.addAddressButton}>
+          <button type="button" onClick={() => onClickAddress()} css={cssObj.addAddressButton}>
             주소찾기
           </button>
         </label>
