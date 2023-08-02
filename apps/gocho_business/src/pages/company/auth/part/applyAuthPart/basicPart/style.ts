@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 
 import { NEWCOLORS } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
+import { commonCssObj } from "@/styles";
 
 export const cssObj = {
   spinnerBox: css`
@@ -44,5 +45,11 @@ export const cssObj = {
 
   radioLabel: css`
     margin-left: 0.5rem;
+  `,
+
+  errorMessageMargin: css`
+    margin-left: 1rem;
+    ${commonCssObj.errorMessage}
+    font-size: 0.9rem;
   `,
 };

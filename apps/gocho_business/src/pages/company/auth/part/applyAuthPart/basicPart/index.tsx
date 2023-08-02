@@ -1,4 +1,4 @@
-import { FunctionComponent, useState, FocusEvent } from "react";
+import { FunctionComponent, useState, useEffect } from "react";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
@@ -7,7 +7,7 @@ import { NUMBER_REGEXP } from "shared-constant";
 
 import { commonCssObj } from "@/styles";
 
-import { MAX_LENGTH_ERROR_TEXT, ONLY_INT_ERROR_TEXT, INDUSTRY_ARR, SIZE_ARR } from "./constant";
+import { ONLY_INT_ERROR_TEXT, INDUSTRY_ARR, SIZE_ARR } from "./constant";
 import { AuthBasicPartProps } from "./type";
 import { cssObj } from "./style";
 
@@ -28,6 +28,29 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
     watch,
     formState: { errors },
   } = companyAuthForm;
+
+  const [payDesc, setPayDesc] = useState("");
+  const [nozoDesc, setNozoDesc] = useState("");
+
+  const changePayDescHandler = (text: string) => {
+    if (payDesc.length < 120) {
+      setPayDesc(text);
+    }
+  };
+
+  const changeNozoDescHandler = (text: string) => {
+    if (nozoDesc.length < 50) {
+      setNozoDesc(text);
+    }
+  };
+
+  useEffect(() => {
+    setValue("pay_desc", payDesc);
+  }, [payDesc, setValue]);
+
+  useEffect(() => {
+    setValue("nozo.desc", nozoDesc);
+  }, [nozoDesc, setValue]);
 
   const openPostCodePopup = useDaumPostcodePopup();
 
@@ -95,7 +118,6 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
             ))}
           </div>
         </div>
-        <p css={commonCssObj.errorMessage}>{errors.pay_start?.message}</p>
       </div>
       <div css={commonCssObj.container}>
         <input
@@ -133,7 +155,6 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
             ))}
           </div>
         </div>
-        <p css={commonCssObj.errorMessage}>{errors.pay_start?.message}</p>
       </div>
       <div css={commonCssObj.container}>
         <strong css={commonCssObj.inputTitle(false)}>설립일</strong>
@@ -188,23 +209,18 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
             css={commonCssObj.input(7.5, isOtherEdit)}
             {...register("pay_start", {
               required: true,
-              min: 1000,
+              min: { value: 1000, message: "평균 초봉은 1000만원 이상으로 입력해주세요" },
               pattern: {
                 value: NUMBER_REGEXP,
                 message: ONLY_INT_ERROR_TEXT,
               },
               disabled: isOtherEdit,
-              onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
-                if (Number(onBlurEvent.target.value) <= 999) {
-                  window.alert("월급이 아닌 연봉 기준입니다. 입력하신 정보가 맞나요?");
-                }
-              },
             })}
             placeholder="숫자만 입력해주세요"
           />
           <p>만원</p>
         </div>
-        <p css={commonCssObj.errorMessage}>{errors.pay_start?.message}</p>
+        <p css={cssObj.errorMessageMargin}>{errors.pay_start?.message}</p>
       </div>
       <div css={commonCssObj.container}>
         <strong css={commonCssObj.inputTitle(false)}>평균 연봉</strong>
@@ -214,39 +230,24 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
             css={commonCssObj.input(7.5, isOtherEdit)}
             {...register("pay_avg", {
               required: true,
-              min: 1000,
+              min: { value: 1000, message: "평균 연봉은 1000만원 이상으로 입력해주세요" },
               pattern: NUMBER_REGEXP,
               disabled: isOtherEdit,
-              onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
-                if (Number(onBlurEvent.target.value) <= 999) {
-                  window.alert("월급이 아닌 연봉 기준입니다. 입력하신 정보가 맞나요?");
-                }
-              },
             })}
             placeholder="숫자만 입력해주세요"
           />
           <p>만원</p>
         </div>
-        <p css={commonCssObj.errorMessage}>{errors.pay_avg?.message}</p>
+        <p css={cssObj.errorMessageMargin}>{errors.pay_avg?.message}</p>
       </div>
       <div css={commonCssObj.container}>
         <strong css={commonCssObj.optionalInputTitle(false)}>기타 연봉 정보</strong>
         <input
           type="text"
-          {...register("pay_desc", {
-            maxLength: {
-              value: 120,
-              message: MAX_LENGTH_ERROR_TEXT,
-            },
-            disabled: isOtherEdit,
-            onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
-              if (onBlurEvent.target.value.trim().length === 0) {
-                setValue("pay_desc", "");
-              }
-            },
-          })}
+          value={payDesc}
+          onChange={(e) => changePayDescHandler(e.target.value)}
           placeholder="상여금, 성과급 등의 정보를 적어주세요"
-          css={commonCssObj.input(30, isOtherEdit)}
+          css={commonCssObj.input(47, isOtherEdit)}
         />
         <p css={commonCssObj.errorMessage}>{errors.pay_desc?.message}</p>
       </div>
@@ -275,18 +276,8 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
           </div>
           <input
             type="text"
-            {...register("nozo.desc", {
-              maxLength: {
-                value: 70,
-                message: MAX_LENGTH_ERROR_TEXT,
-              },
-              disabled: isOtherEdit,
-              onBlur: (onBlurEvent: FocusEvent<HTMLInputElement>) => {
-                if (onBlurEvent.target.value.trim().length === 0) {
-                  setValue("nozo.desc", "");
-                }
-              },
-            })}
+            value={nozoDesc}
+            onChange={(e) => changeNozoDescHandler(e.target.value)}
             placeholder="보충설명(선택)"
             css={commonCssObj.input(47, isOtherEdit)}
           />
