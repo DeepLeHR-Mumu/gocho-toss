@@ -16,7 +16,7 @@ import { PageHead } from "./pageHead";
 import { ButtonPart, CompanyInfoPart, LastEditInfoPart, BasicPart, WelfarePart, FactoryPart } from "./part";
 import { COMPANY_MESSAGE_OBJ } from "./constant";
 import { CompanyFormValues } from "./type";
-import { getFieldArrayValueWithNull } from "./util";
+import { stringArrayOrEmptyArray } from "./util";
 import { cssObj } from "./style";
 
 const CompanyEditPage: NextPage = () => {
@@ -68,14 +68,14 @@ const CompanyEditPage: NextPage = () => {
                 desc: formData.nozo.desc || null,
               },
               welfare: {
-                money: formData.welfare.money && getFieldArrayValueWithNull(formData.welfare.money),
-                health: formData.welfare.health && getFieldArrayValueWithNull(formData.welfare.health),
-                life: formData.welfare.life && getFieldArrayValueWithNull(formData.welfare.life),
-                holiday: formData.welfare.holiday && getFieldArrayValueWithNull(formData.welfare.holiday),
-                facility: formData.welfare.facility && getFieldArrayValueWithNull(formData.welfare.facility),
-                vacation: formData.welfare.vacation && getFieldArrayValueWithNull(formData.welfare.vacation),
-                growth: formData.welfare.growth && getFieldArrayValueWithNull(formData.welfare.growth),
-                etc: formData.welfare.etc && getFieldArrayValueWithNull(formData.welfare.etc),
+                money: formData.welfare.money && stringArrayOrEmptyArray(formData.welfare.money),
+                health: formData.welfare.health && stringArrayOrEmptyArray(formData.welfare.health),
+                life: formData.welfare.life && stringArrayOrEmptyArray(formData.welfare.life),
+                holiday: formData.welfare.holiday && stringArrayOrEmptyArray(formData.welfare.holiday),
+                facility: formData.welfare.facility && stringArrayOrEmptyArray(formData.welfare.facility),
+                vacation: formData.welfare.vacation && stringArrayOrEmptyArray(formData.welfare.vacation),
+                growth: formData.welfare.growth && stringArrayOrEmptyArray(formData.welfare.growth),
+                etc: formData.welfare.etc && stringArrayOrEmptyArray(formData.welfare.etc),
               },
             },
             bgImage,
