@@ -46,12 +46,21 @@ export const useAxiosInterceptor = () => {
   const requestConfigHandler = async (config: AxiosRequestConfig) => {
     const accessTokenData = localStorage.getItem("accessToken");
     const refreshTokenData = localStorage.getItem("refreshToken");
-    // const matchingUrlReGex = /^(?!.*comments).*\b(companies|jds)\b.*$/i;
+    const matchingUrlReGex = /^(?!.*comments)(?!.*bookmark).*\b(companies|jds)\b.*$/i;
 
-    // // accessToken 이 없이도 접근할 수 있는 API에 대한 처리
-    // if (config.url && matchingUrlReGex.test(config.url)) {
-    //   return config;
-    // }
+    if (config.url?.includes("jds") && accessTokenData) {
+      return {
+        ...config,
+        headers: {
+          "x-access-token": accessTokenData,
+        },
+      };
+    }
+
+    // accessToken 이 없이도 접근할 수 있는 API에 대한 처리
+    if (config.url && matchingUrlReGex.test(config.url)) {
+      return config;
+    }
 
     // 0. token 없는 경우
     if (!accessTokenData || !refreshTokenData) {
