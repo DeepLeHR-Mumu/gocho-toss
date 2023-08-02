@@ -10,7 +10,7 @@ export const InfoPart: FunctionComponent<AuthInfoPartProps> = ({ companyAuthForm
   const { register } = companyAuthForm;
 
   const { name: certFileName } = useFileNameSyncWithForm(companyAuthForm, "certificateOfBusiness", {
-    maxSize: 5242880,
+    maxSize: 5242880 * 2,
     allowedfileTypes: ["image/jpg", "image/jpeg", "application/pdf"],
   });
 

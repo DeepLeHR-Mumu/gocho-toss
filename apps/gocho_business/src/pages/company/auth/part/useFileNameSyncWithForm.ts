@@ -20,15 +20,19 @@ const useFileNameSyncWithForm = <T extends object>(
     const fileList = watch(key) as unknown;
 
     if (isFileList(fileList) && fileList.length > 0) {
+      const { maxSize, allowedfileTypes } = config;
       const targetFile = fileList[0];
       const resetFile = () => {
         setFileName("");
         resetField(key);
+        const detailFileTypes = allowedfileTypes.map((fileType) => fileType.split("/")[1]);
+
+        alert(`${(maxSize / 1000000).toFixed(0)}mb 이하의 ${detailFileTypes.join(", ")} 형식으로 첨부해주세요.`);
       };
 
       const fileSize = targetFile.size;
 
-      if (fileSize > config.maxSize) {
+      if (fileSize > maxSize) {
         resetFile();
         return;
       }
@@ -40,7 +44,7 @@ const useFileNameSyncWithForm = <T extends object>(
         return;
       }
 
-      if (config.allowedfileTypes.includes(fileType)) {
+      if (allowedfileTypes.includes(fileType)) {
         setFileName(targetFile.name);
       } else {
         resetFile();

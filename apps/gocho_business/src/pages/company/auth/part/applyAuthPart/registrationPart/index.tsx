@@ -19,12 +19,12 @@ export const RegistrationPart: FunctionComponent<RegistrationPartProps> = ({ com
 
   const { name: logoImgName } = useFileNameSyncWithForm(companyAuthForm, companyLogoKey, {
     maxSize: 5242880,
-    allowedfileTypes: ["image/jpg", "image/jpeg"],
+    allowedfileTypes: ["image/jpg", "image/jpeg", "image/png"],
   });
 
   const { name: bgImgName } = useFileNameSyncWithForm(companyAuthForm, backgroundImageKey, {
     maxSize: 5242880,
-    allowedfileTypes: ["image/jpg", "image/jpeg"],
+    allowedfileTypes: ["image/jpg", "image/jpeg", "image/png"],
   });
 
   return (
@@ -53,7 +53,7 @@ export const RegistrationPart: FunctionComponent<RegistrationPartProps> = ({ com
         <input
           disabled
           value={logoImgName}
-          placeholder="파일형식: jpg, jpeg, pdf / 파일 용량: 5MB"
+          placeholder="파일형식: jpg, jpeg, png / 파일 용량: 5MB"
           css={commonCssObj.input(38, false)}
         />
         <label htmlFor={companyLogoKey} css={cssObj.fileAddButton}>
@@ -76,7 +76,7 @@ export const RegistrationPart: FunctionComponent<RegistrationPartProps> = ({ com
         <input
           disabled
           value={bgImgName}
-          placeholder="파일형식: jpg, jpeg, pdf / 파일 용량: 5MB"
+          placeholder="파일형식: jpg, jpeg, png / 파일 용량: 5MB"
           css={commonCssObj.input(38, false)}
         />
         <label htmlFor={backgroundImageKey} css={cssObj.fileAddButton}>
