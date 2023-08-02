@@ -151,14 +151,14 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
                 <SharedRadioButton
                   id="dormitoryTrue"
                   value="true"
-                  registerObj={register("dormitory_etc", { required: true })}
+                  registerObj={register("dormitory_bool", { required: true })}
                 >
                   <p css={cssObj.radioLabel}>있음</p>
                 </SharedRadioButton>
                 <SharedRadioButton
                   id="dormitoryFalse"
                   value="false"
-                  registerObj={register("dormitory_etc", { required: true })}
+                  registerObj={register("dormitory_bool", { required: true })}
                 >
                   <p css={cssObj.radioLabel}>없음</p>
                 </SharedRadioButton>
