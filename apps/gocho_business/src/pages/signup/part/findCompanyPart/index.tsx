@@ -33,13 +33,13 @@ export const FindCompanyPart: FunctionComponent<FindCompanyPartProps> = ({ slide
       company: formData.company_id
         ? {
             company_id: formData.company_id,
-            company_name: formData.company_name,
+            name: formData.company_name,
             business_number: isBusinessNumberOn
               ? formData.business_number_1 + formData.business_number_2 + formData.business_number_3
               : formData.business_number,
           }
         : {
-            company_name: formData.company_name,
+            name: formData.company_name,
             business_number: isBusinessNumberOn
               ? formData.business_number_1 + formData.business_number_2 + formData.business_number_3
               : formData.business_number,

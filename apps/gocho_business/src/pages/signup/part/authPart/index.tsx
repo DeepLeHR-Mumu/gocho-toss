@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FiCheck, FiChevronRight, FiSmartphone } from "react-icons/fi";
@@ -5,8 +6,9 @@ import { FiCheck, FiChevronRight, FiSmartphone } from "react-icons/fi";
 import { NewSharedButton } from "shared-ui/common/newSharedButton";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
-import { getPass, getPassCheck } from "@/apis";
+import { getPass, getPassCheck, useManagerRegister } from "@/apis";
 import { useModal } from "@/globalStates";
+import { INTERNAL_URL } from "@/constants";
 import { commonCssObj } from "@/styles";
 
 import { AuthPartProps, PostSubmitValues } from "./type";
@@ -14,6 +16,7 @@ import { AuthPartProps, PostSubmitValues } from "./type";
 import { cssObj } from "./style";
 
 export const AuthPart: FunctionComponent<AuthPartProps> = () => {
+  const router = useRouter();
   const { setModal } = useModal();
   const [flag, setFlag] = useState(false);
   const [passState, setPassState] = useState(false);
@@ -30,6 +33,8 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
     mode: "onChange",
   });
 
+  const { mutate: postManagersRegister } = useManagerRegister();
+
   useEffect(() => {
     const changeCallback = () => {
       if (document.visibilityState === "visible" && flag && tokenVersionId.current !== null) {
@@ -37,7 +42,6 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
           .then((res) => {
             setFlag(false);
             setPassState(res.data.data.is_exist);
-            tokenVersionId.current = null;
           })
           .catch(() => {
             // 400 처리
@@ -55,14 +59,27 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
     const newFormData = {
       ...formData,
+      token_version_id: tokenVersionId.current !== null ? tokenVersionId.current : undefined,
       manager_agreement: {
         terms: formData.manager_agreement.terms && 1,
         privacy: formData.manager_agreement.privacy && 1,
       },
     };
+
     const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
     const currentSpecObj = Object.assign(prevSpecObj, newFormData);
     sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
+
+    postManagersRegister(currentSpecObj, {
+      onSuccess: () => {
+        router.push(INTERNAL_URL.LOGIN);
+        sessionStorage.removeItem("specObj");
+        tokenVersionId.current = null;
+      },
+      onError: () => {
+        // TODO 에러처리 필요하다면 이곳에
+      },
+    });
   };
 
   const handleIdentityCheck = async () => {
@@ -128,7 +145,7 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
             type="button"
             css={cssObj.authLink}
             onClick={() => {
-              handleIdentityCheck();
+              if (!passState) handleIdentityCheck();
             }}
           >
             <span css={cssObj.icon}>
@@ -191,7 +208,12 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
       </div>
       <NewSharedButton
         buttonType={
-          !isDepartment || !isPosition || !isTerm || errors.department?.message || errors.position?.message
+          !passState ||
+          !isDepartment ||
+          !isPosition ||
+          !isTerm ||
+          errors.department?.message ||
+          errors.position?.message
             ? "disabled"
             : "fillBlue"
         }
