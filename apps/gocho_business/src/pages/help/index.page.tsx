@@ -16,7 +16,7 @@ const HelpPage: NextPage = () => (
           <h2 css={cssObj.pageTitle}>고객센터</h2>
           <div css={cssObj.descWrapper}>
             <strong css={cssObj.descTitle}>고객센터 운영시간</strong>
-            <p css={cssObj.desc}>평일 10:00-15:00시 (주말 및 공휴일 휴무)</p>
+            <p css={cssObj.desc}>평일 10:00-19:00시 (주말 및 공휴일 휴무)</p>
           </div>
           <p css={cssObj.email}>
             채용공고 · 광고 등록 문의 <a href="mailto:register@deeplehr.com">register@deeplehr.com</a>

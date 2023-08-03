@@ -23,7 +23,7 @@ export const ButtonPart: FunctionComponent = () => (
     <Link css={cssObj.linkButton("white")} passHref href={INTERNAL_URL.HELP}>
       <h3 css={cssObj.uploadTitle("blue")}>고객센터</h3>
       <p css={cssObj.helpSubtitle("blue")}>고초대졸닷컴 내 광고 및 기타사항 문의</p>
-      <p css={cssObj.helpDesc}>운영시간 평일 10:00-15:00시 (주말 및 공휴일 휴무)</p>
+      <p css={cssObj.helpDesc}>운영시간 평일 10:00-19:00시 (주말 및 공휴일 휴무)</p>
     </Link>
   </section>
 );
