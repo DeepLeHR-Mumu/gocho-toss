@@ -88,7 +88,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ jobFo
           </li>
           <li>
             <strong css={cssObj.noRequiredTitle}>기타 우대사항</strong>
-            <p css={cssObj.textareaWarning}>엔터로 구분해주세요.</p>
+            <p css={cssObj.textareaWarning}>엔터로 구분해주세요, 필수가 아닙니다.</p>
             <div css={cssObj.textareaBox}>
               <textarea css={cssObj.textarea} {...register("preferred_etc_arr")} />
             </div>
