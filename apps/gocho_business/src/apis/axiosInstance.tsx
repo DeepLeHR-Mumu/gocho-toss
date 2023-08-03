@@ -22,7 +22,7 @@ export const axiosInstance = axios.create({
 
 export const useAxiosInterceptor = () => {
   const router = useRouter();
-  const accessTokenLimitMs = 590000;
+  const accessTokenLimitMs = 10000;
   let isRefreshing = false;
   let refreshSubscribers: (() => void)[] = [];
 
