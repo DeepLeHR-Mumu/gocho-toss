@@ -22,54 +22,59 @@ export const axiosInstance = axios.create({
 
 export const useAxiosInterceptor = () => {
   const router = useRouter();
-  const accessTokenLimitMs = 10000;
+  const accessTokenLimitMs = 590000;
   let isRefreshing = false;
-  let failedQueue: { resolve: (token: string) => void; reject: (error: AxiosError) => void }[] = [];
+  let refreshSubscribers: (() => void)[] = [];
 
   const { setModal } = useModal();
 
-  const processQueue = (error: AxiosError | null, token: string | null) => {
-    if (token === null) throw new Error("Token is null");
-
-    failedQueue.forEach((prom) => {
-      if (error) {
-        prom.reject(error);
-      } else {
-        prom.resolve(token);
-      }
-    });
-
-    failedQueue = [];
+  const subscribeTokenRefresh = (cb: () => void) => {
+    refreshSubscribers.push(cb);
   };
 
-  // 어세스토큰이 만료 된 경우 refresh api를 호출하여 access, refresh 토큰을 재발급 받는 함수
-  const getNewAccessToken = async (): Promise<{ newToken: string } | void> => {
-    const refreshToken = localStorage.getItem("refreshToken");
-    if (!refreshToken) throw new axios.Cancel("요청 취소");
+  const onRefreshed = () => {
+    refreshSubscribers.map((cb) => cb());
+    refreshSubscribers = [];
+  };
 
-    const refreshResults = await axios
-      .get(`${BUSINESS_BACKEND_URL}/auth/refresh`, {
-        headers: { "x-refresh-token": refreshToken },
-      })
-      .then(({ data }) => {
-        localStorage.setItem("accessToken", data.data.access_token);
-        localStorage.setItem("refreshToken", data.data.refresh_token);
-      })
-      .catch((error) => {
-        const { error_code } = error.response.data;
-        if (error_code === "EMPTY_JWT") {
-          localStorage.removeItem("accessToken");
-          localStorage.removeItem("refreshToken");
-          router.push(INTERNAL_URL.LOGIN);
-          throw new axios.Cancel("재요청 취소");
-        }
+  // accessToken이 만료 된 경우 refresh api를 호출하여 access, refresh 토큰을 재발급 받는 함수
+  const getNewAccessToken = async (): Promise<string> => {
+    if (!isRefreshing) {
+      isRefreshing = true;
+      const refreshToken = localStorage.getItem("refreshToken");
+      if (!refreshToken) throw new axios.Cancel("요청 취소");
 
-        isRefreshing = false;
-        processQueue(error, null);
-        throw error;
+      axios
+        .get(`${BUSINESS_BACKEND_URL}/auth/refresh`, {
+          headers: { "x-refresh-token": refreshToken },
+        })
+        .then(({ data }) => {
+          isRefreshing = false;
+          console.log("accessToken received");
+          localStorage.setItem("accessToken", data.data.access_token);
+          localStorage.setItem("refreshToken", data.data.refresh_token);
+          onRefreshed();
+        })
+        .catch((error) => {
+          isRefreshing = false;
+          const { error_code } = error.response.data;
+          if (error_code === "EMPTY_JWT") {
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("refreshToken");
+            router.push(INTERNAL_URL.LOGIN);
+            throw new axios.Cancel("재요청 취소");
+          }
+
+          throw error;
+        });
+    }
+
+    return new Promise<string>((resolve) => {
+      subscribeTokenRefresh(() => {
+        const newToken = localStorage.getItem("accessToken");
+        resolve(newToken || "");
       });
-
-    return refreshResults;
+    });
   };
 
   const requestConfigHandler = async (config: AxiosRequestConfig) => {
@@ -101,19 +106,6 @@ export const useAxiosInterceptor = () => {
 
     // 2. accessToken 만료되었을 경우 -> 새로운 accessToken 들고 옴
     if (isAccessExpired) {
-      if (isRefreshing) {
-        return new Promise((resolve, reject) => {
-          failedQueue.push({ resolve, reject });
-        })
-          .then((token) => ({
-            ...config,
-            headers: {
-              "x-access-token": token,
-            },
-          }))
-          .catch((error) => Promise.reject(error));
-      }
-
       const newToken = await getNewAccessToken();
 
       return {
