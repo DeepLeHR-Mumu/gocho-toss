@@ -50,7 +50,6 @@ export const useAxiosInterceptor = () => {
         })
         .then(({ data }) => {
           isRefreshing = false;
-          console.log("accessToken received");
           localStorage.setItem("accessToken", data.data.access_token);
           localStorage.setItem("refreshToken", data.data.refresh_token);
           onRefreshed();
