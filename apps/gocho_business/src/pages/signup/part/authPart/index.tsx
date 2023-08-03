@@ -2,11 +2,13 @@ import { useRouter } from "next/router";
 import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FiCheck, FiChevronRight, FiSmartphone } from "react-icons/fi";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { NewSharedButton } from "shared-ui/common/newSharedButton";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
-import { getPass, getPassCheck, useManagerRegister } from "@/apis";
+import { loginSuccessEvent } from "@/ga";
+import { getPass, getPassCheck, useManagerRegister, useDoLogin } from "@/apis";
 import { useModal } from "@/globalStates";
 import { INTERNAL_URL } from "@/constants";
 import { commonCssObj } from "@/styles";
@@ -14,10 +16,13 @@ import { commonCssObj } from "@/styles";
 import { AuthPartProps, PostSubmitValues } from "./type";
 
 import { cssObj } from "./style";
+import { isSpecObj } from "./util";
 
 export const AuthPart: FunctionComponent<AuthPartProps> = () => {
   const router = useRouter();
   const { setModal } = useModal();
+  const queryClient = useQueryClient();
+
   const [flag, setFlag] = useState(false);
   const [passState, setPassState] = useState(false);
 
@@ -34,6 +39,7 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
   });
 
   const { mutate: postManagersRegister } = useManagerRegister();
+  const { mutate: postLogin } = useDoLogin();
 
   useEffect(() => {
     const changeCallback = () => {
@@ -72,7 +78,34 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
 
     postManagersRegister(currentSpecObj, {
       onSuccess: () => {
-        router.push(INTERNAL_URL.LOGIN);
+        if (isSpecObj(currentSpecObj)) {
+          const { email, password } = currentSpecObj;
+
+          postLogin(
+            { email, password, auto_login: false },
+            {
+              onSuccess: (response) => {
+                loginSuccessEvent(false);
+                localStorage.setItem("accessToken", response.data.access_token);
+                localStorage.setItem("refreshToken", response.data.refresh_token);
+                queryClient.invalidateQueries();
+
+                if (!response.data.is_changed) {
+                  window.alert("보안을 위해 초기 비밀번호를 변경해주세요");
+                  router.push(INTERNAL_URL.MY_PAGE);
+                  return;
+                }
+
+                router.push(INTERNAL_URL.HOME);
+              },
+              onError: () => {
+                router.push(INTERNAL_URL.LOGIN);
+              },
+            }
+          );
+        } else {
+          router.push(INTERNAL_URL.LOGIN);
+        }
         sessionStorage.removeItem("specObj");
         tokenVersionId.current = null;
       },
