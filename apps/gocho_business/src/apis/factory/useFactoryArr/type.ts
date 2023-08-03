@@ -2,6 +2,11 @@ import { QueryFunctionContext } from "@tanstack/react-query";
 
 import { PageResultDef } from "shared-type/api/paginationType";
 
+export interface RequestObjDef {
+  page?: number;
+  size?: number;
+}
+
 export interface ResponseObjDef {
   data:
     | {
@@ -30,8 +35,9 @@ export interface ResponseObjDef {
 
 export const factoryArrKeyObj = {
   all: [{ data: "factoryArr" }] as const,
+  detail: (requestObj: RequestObjDef) => [{ data: "factoryArr", requestObj }] as const,
 };
 
 export interface GetFactoryArrDef {
-  ({ queryKey }: QueryFunctionContext): Promise<ResponseObjDef>;
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof factoryArrKeyObj.detail>>): Promise<ResponseObjDef>;
 }
