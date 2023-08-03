@@ -10,8 +10,9 @@ export const cssObj = {
     position: absolute;
     top: 0;
     left: 0;
-    min-width: 110vw;
-    min-height: 110vh;
+    min-width: 100vw;
+    min-height: 100vh;
+
     > img {
       object-fit: cover;
     }

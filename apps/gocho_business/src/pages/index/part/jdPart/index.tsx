@@ -15,9 +15,12 @@ export const JdPart: FunctionComponent = () => {
 
   return (
     <section css={partCssObj.partContainer}>
-      <Link href={INTERNAL_URL.JD_LIST} css={cssObj.partTitle(isAuth)} passHref>
-        등록된 공고 관리 {">"}
-      </Link>
+      <div css={cssObj.titleWrapper}>
+        <h3 css={cssObj.partTitle(isAuth)}>등록된 공고 관리</h3>
+        <Link href={INTERNAL_URL.JD_LIST} passHref css={cssObj.moreButton}>
+          더보기 {">"}
+        </Link>
+      </div>
       <p css={cssObj.contour} />
       <div css={cssObj.cardContainer}>
         {isAuth ? (

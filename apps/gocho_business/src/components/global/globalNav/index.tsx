@@ -27,7 +27,7 @@ export const GlobalNav: FunctionComponent = () => {
   const companyDropdownMenuRef = useRef<HTMLDivElement>(null);
   const userDropdownMenuRef = useRef<HTMLDivElement>(null);
 
-  const { data: userInfoData, isSuccess: isManagerLogin } = useManagerProfile();
+  const { data: userInfoData } = useManagerProfile();
   const { data: alarmArrObj } = useAlarmArr({ managerId: userInfoData?.id, size: 15 });
   const { mutate: postLogout } = useDoLogout();
   const { mutate: readAlarmMutate } = useReadAlarm();
@@ -90,7 +90,7 @@ export const GlobalNav: FunctionComponent = () => {
   const menuUrl = pathname.split("/").join("/");
 
   return (
-    <header css={cssObj.headerWrapper(isManagerLogin)}>
+    <header css={cssObj.headerWrapper}>
       <div css={cssObj.headerContainer}>
         <div css={cssObj.defaultMenuContainer}>
           <Link href={INTERNAL_URL.HOME} passHref css={cssObj.logo}>
