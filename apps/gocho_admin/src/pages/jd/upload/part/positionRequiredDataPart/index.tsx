@@ -32,7 +32,7 @@ export const PositionRequiredDataPart: FunctionComponent<PositionBoxProps> = ({ 
           <li>
             <strong css={cssObj.noRequiredTitle}>기타 조건</strong>
             <div css={cssObj.textareaBox}>
-              <p css={cssObj.textareaWarning}>엔터로 구분해주세요.</p>
+              <p css={cssObj.textareaWarning}>엔터로 구분해주세요, 필수가 아닙니다.</p>
               <textarea css={cssObj.textarea} {...jobForm.register("required_etc_arr")} />
             </div>
           </li>

@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { FiHelpCircle } from "react-icons/fi";
 
 import { commonCssObj } from "@/styles";
@@ -12,7 +12,19 @@ export const RegistrationPart: FunctionComponent<RegistrationPartProps> = ({ com
   const [logoTooltip, setLogoTooltip] = useState(false);
   const [bgImageTooltip, setBgImageTooltip] = useState(false);
 
-  const { register } = companyAuthForm;
+  const { register, setValue } = companyAuthForm;
+
+  const [intro, setIntro] = useState("");
+
+  const changeIntroHandler = (text: string) => {
+    if (intro.length < 30) {
+      setIntro(text);
+    }
+  };
+
+  useEffect(() => {
+    setValue("intro", intro);
+  }, [intro, setValue]);
 
   const companyLogoKey = "companyLogo";
   const backgroundImageKey = "backgroundImage";
@@ -35,7 +47,8 @@ export const RegistrationPart: FunctionComponent<RegistrationPartProps> = ({ com
         <input
           type="text"
           css={commonCssObj.input(47, false)}
-          {...register("intro", { required: true, maxLength: 20 })}
+          value={intro}
+          onChange={(e) => changeIntroHandler(e.target.value)}
         />
       </div>
       <div css={cssObj.subContainer}>

@@ -27,7 +27,8 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jdForm
 
   const openPostCodePopup = useDaumPostcodePopup();
 
-  const { data: factoryDataObj } = useFactoryArr();
+  // NOTE 임시로 100개로 해놓은 상태!
+  const { data: factoryDataObj } = useFactoryArr({ size: 100 });
 
   const factoryClickHandler = (factory: number) => {
     const totalNumber = (watch("place").factory_arr?.length || 0) + (watch("place").address_arr?.length || 0);
@@ -50,7 +51,6 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jdForm
       <strong css={commonCssObj.partTitle}>근무지</strong>
       <div css={commonCssObj.longContainer}>
         <div css={cssObj.titleWrapper}>
-          {" "}
           <p css={commonCssObj.inputTitle(false)}>상세근무지</p>
         </div>
         <div css={cssObj.placeWrapper}>
