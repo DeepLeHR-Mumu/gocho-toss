@@ -11,19 +11,19 @@ export const FactoryPart: FunctionComponent<AuthFactoryPartProps> = ({ companyAu
     state: false,
     modifyIndex: null,
   });
-  const [factories, setFactories] = useState<FactoryDef[]>([]);
+  const [factoryArr, setFactoryArr] = useState<FactoryDef[]>([]);
 
   const { setValue } = companyAuthForm;
 
   const deleteFactoryHandler = (index: number) => {
-    const newFactories = [...factories];
-    newFactories.splice(index, 1);
-    setFactories(newFactories);
+    const newFactoryArr = [...factoryArr];
+    newFactoryArr.splice(index, 1);
+    setFactoryArr(newFactoryArr);
   };
 
   useEffect(() => {
-    setValue("factory_arr", factories);
-  }, [setValue, factories]);
+    setValue("factory_arr", factoryArr);
+  }, [setValue, factoryArr]);
 
   return (
     <>
@@ -44,7 +44,7 @@ export const FactoryPart: FunctionComponent<AuthFactoryPartProps> = ({ companyAu
           공장 추가
         </button>
         <div css={cssObj.factoryList}>
-          {factories.map((factory, index) => (
+          {factoryArr.map((factory, index) => (
             <div key={`companyEditFactory${factory.address}`} css={cssObj.factoryBox}>
               <div css={cssObj.factoryInfoWrapper}>
                 {factory.factory_name}
@@ -73,16 +73,16 @@ export const FactoryPart: FunctionComponent<AuthFactoryPartProps> = ({ companyAu
       </section>
       {modal.state && (
         <FactoryModal
-          defaultFactory={modal.modifyIndex !== null ? factories[modal.modifyIndex] : null}
+          defaultFactory={modal.modifyIndex !== null ? factoryArr[modal.modifyIndex] : null}
           cancel={() => setModal({ state: false, modifyIndex: null })}
           add={(newFactory) => {
-            setFactories((prev) => [{ ...newFactory }, ...prev]);
+            setFactoryArr((prev) => [{ ...newFactory }, ...prev]);
           }}
           modify={(newFactory) => {
             if (modal.modifyIndex !== null) {
-              const newFactories = [...factories];
-              newFactories[modal.modifyIndex] = { ...newFactory };
-              setFactories(newFactories);
+              const newFactoryArr = [...factoryArr];
+              newFactoryArr[modal.modifyIndex] = { ...newFactory };
+              setFactoryArr(newFactoryArr);
             }
           }}
         />

@@ -4,9 +4,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 import { NewSharedButton } from "shared-ui/common/newSharedButton";
 
+import { useCheckEmail } from "@/apis";
 import { commonCssObj } from "@/styles";
-
 import { LOGIN_ERROR_MESSAGES } from "@/pages/login/constant";
+
 import { FindCompanyPartProps, PostSubmitValues } from "./type";
 
 import { cssObj } from "./style";
@@ -16,16 +17,33 @@ export const IdPasswordPart: FunctionComponent<FindCompanyPartProps> = ({ slider
     handleSubmit,
     register,
     watch,
+    setError,
     formState: { errors },
   } = useForm<PostSubmitValues>({
     mode: "onChange",
   });
 
+  const { mutate: postManagersCheckEmail } = useCheckEmail();
+
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
-    const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
-    const currentSpecObj = Object.assign(prevSpecObj, formData);
-    sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
-    sliderRef.current?.slickNext();
+    const { email } = formData;
+    postManagersCheckEmail(
+      { email },
+      {
+        onSuccess: (res) => {
+          if (res.data.is_exists) {
+            setError("email", { message: "중복된 이메일입니다." });
+            return;
+          }
+
+          const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
+          const currentSpecObj = Object.assign(prevSpecObj, formData);
+          sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
+          sliderRef.current?.slickNext();
+        },
+        // NOTE 중복 체크 실패시 onError 추가
+      }
+    );
   };
 
   const isEmail = Boolean(watch("email"));

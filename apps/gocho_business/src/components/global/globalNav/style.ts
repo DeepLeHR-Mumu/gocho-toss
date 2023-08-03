@@ -5,8 +5,8 @@ import { TEXTS } from "shared-style/text";
 import { shorten } from "shared-style/common";
 
 export const cssObj = {
-  headerWrapper: (isLogin: boolean) => css`
-    display: ${isLogin ? "flex" : "none"};
+  headerWrapper: css`
+    display: flex;
     align-items: center;
     justify-content: center;
     padding: 1rem 2rem;
