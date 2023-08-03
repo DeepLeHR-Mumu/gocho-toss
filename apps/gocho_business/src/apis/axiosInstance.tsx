@@ -23,8 +23,24 @@ export const axiosInstance = axios.create({
 export const useAxiosInterceptor = () => {
   const router = useRouter();
   const accessTokenLimitMs = 10000;
+  let isRefreshing = false;
+  let failedQueue: { resolve: (token: string) => void; reject: (error: AxiosError) => void }[] = [];
 
   const { setModal } = useModal();
+
+  const processQueue = (error: AxiosError | null, token: string | null) => {
+    if (token === null) throw new Error("Token is null");
+
+    failedQueue.forEach((prom) => {
+      if (error) {
+        prom.reject(error);
+      } else {
+        prom.resolve(token);
+      }
+    });
+
+    failedQueue = [];
+  };
 
   // 어세스토큰이 만료 된 경우 refresh api를 호출하여 access, refresh 토큰을 재발급 받는 함수
   const getNewAccessToken = async (): Promise<{ newToken: string } | void> => {
@@ -47,6 +63,9 @@ export const useAxiosInterceptor = () => {
           router.push(INTERNAL_URL.LOGIN);
           throw new axios.Cancel("재요청 취소");
         }
+
+        isRefreshing = false;
+        processQueue(error, null);
         throw error;
       });
 
@@ -82,12 +101,25 @@ export const useAxiosInterceptor = () => {
 
     // 2. accessToken 만료되었을 경우 -> 새로운 accessToken 들고 옴
     if (isAccessExpired) {
-      await getNewAccessToken();
-      const newAccessToken = localStorage.getItem("accessToken");
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          failedQueue.push({ resolve, reject });
+        })
+          .then((token) => ({
+            ...config,
+            headers: {
+              "x-access-token": token,
+            },
+          }))
+          .catch((error) => Promise.reject(error));
+      }
+
+      const newToken = await getNewAccessToken();
+
       return {
         ...config,
         headers: {
-          "x-access-token": newAccessToken,
+          "x-access-token": newToken,
         },
       };
     }
