@@ -31,7 +31,7 @@ export const useAddJd: useAddJdProps = () =>
               ? `mailto: ${requestObj.dto.apply_url}`
               : requestObj.dto.apply_url,
           apply_route_arr: requestObj.dto.apply_route_arr.split("\n"),
-          apply_document_arr: requestObj.dto.apply_document_arr.split("\n"),
+          apply_document_arr: requestObj.dto.apply_document_arr ? requestObj.dto.apply_document_arr.split("\n") : null,
           etc_arr: requestObj.dto.etc_arr ? requestObj.dto.etc_arr.split("\n") : null,
           rotation_arr: requestObj.dto.rotation_arr?.length !== 0 ? requestObj.dto.rotation_arr : null,
           required_etc_arr: requestObj.dto.required_etc_arr ? requestObj.dto.required_etc_arr.split("\n") : null,
