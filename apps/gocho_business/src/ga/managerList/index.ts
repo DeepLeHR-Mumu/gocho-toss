@@ -6,6 +6,6 @@ export const managerListPageFunnelEvent = () => {
   if (funnel === FUNNEL.MANAGER_LIST_PAGE) {
     return;
   }
-  ReactGA.event("enter_manager_list", { prev: funnel });
   sessionStorage.setItem("funnel", FUNNEL.MANAGER_LIST_PAGE);
+  ReactGA.event("enter_manager_list", { prev: funnel });
 };

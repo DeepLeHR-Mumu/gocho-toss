@@ -8,7 +8,7 @@ import { usePreventRouting } from "shared-hooks";
 
 import { useModal, useToast } from "@/globalStates";
 import {
-  jdUploadConfirmEvent,
+  jdUploadClickEvent,
   jdUploadDoneEvent,
   jdUploadExitDoneEvent,
   jdUploadExitEvent,
@@ -93,7 +93,7 @@ const JdUploadPage: NextPage = () => {
     if (isLoading.current) return;
     isLoading.current = true;
 
-    jdUploadConfirmEvent();
+    jdUploadClickEvent();
     if (window.confirm(JD_UPLOAD_MESSAGE_OBJ.UPLOAD)) {
       addJobMutate(
         {

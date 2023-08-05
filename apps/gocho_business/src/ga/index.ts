@@ -2,7 +2,30 @@ export { notFoundPageErrorEvent } from "./400";
 
 export { unknownPageErrorEvent } from "./500";
 
-export { loginSuccessEvent, loginPageFunnelEvent, signupButtonClickEvent } from "./auth";
+export { loginSuccessEvent, loginPageFunnelEvent } from "./login";
+
+export {
+  registerClickEvent,
+  registerCompanySearchClickEvent,
+  registerCompanySearchNextClickEvent,
+  registerCompanyAddSearchClickEvent,
+  registerPhoneValidationClickEvent,
+  registerEmailNextClickEvent,
+  registerCompleteClickEvent,
+} from "./register";
+
+export {
+  homeFunnelEvent,
+  homeJdUploadEvent,
+  homeJdListEvent,
+  homeQnaEvent,
+  homeAlarmClickEvent,
+  homeAlertEvent,
+  homeCompanyInfoClickEvent,
+  homeNewsClickEvent,
+  homeProfileInfoClickEvent,
+  homeVerityCompanyEvent,
+} from "./home";
 
 export {
   companyEditConfirmEvent,
@@ -42,14 +65,20 @@ export {
 } from "./jdList";
 
 export {
-  jdUploadConfirmEvent,
+  jdUploadClickEvent,
   jdUploadDoneEvent,
   jdUploadExitDoneEvent,
   jdUploadExitEvent,
   jdUploadFailEvent,
   jdUploadPageFunnelEvent,
+  jdMailClickEvent,
+  jdAcademicClickEvent,
+  jdRotationClickEvent,
+  jdPlaceAddClickEvent,
+  jdCareerClickEvent,
+  jdTitleClickEvent,
 } from "./jdUpload";
 
-export { myPageFunnelEvent } from "./myPage";
+export { myPageFunnelEvent } from "./mypage";
 
 export { managerListPageFunnelEvent } from "./managerList";

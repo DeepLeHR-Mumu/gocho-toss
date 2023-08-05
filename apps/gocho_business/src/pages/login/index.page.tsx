@@ -13,7 +13,7 @@ import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 
 import { useDoLogin, useManagerProfile } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
-import { loginPageFunnelEvent, loginSuccessEvent, signupButtonClickEvent } from "@/ga";
+import { loginPageFunnelEvent, loginSuccessEvent, registerClickEvent } from "@/ga";
 import { commonCssObj } from "@/styles";
 import bizTextColor from "@/public/image/deepleLogo/bizTextColor.svg";
 import homeBg1 from "@/public/image/login_bg_1.svg";
@@ -202,7 +202,7 @@ const LoginPage: NextPage = () => {
               width={25.5}
               text="기업회원 가입하기"
               onClickHandler={() => {
-                signupButtonClickEvent();
+                registerClickEvent();
                 router.push(INTERNAL_URL.SIGNUP);
               }}
               isLong
