@@ -4,7 +4,7 @@ import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
   managerId: number;
-  reason: string;
+  reason: string | null;
 }
 
 export interface PostAuthRejectDef {

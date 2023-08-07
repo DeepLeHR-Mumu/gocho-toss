@@ -1,20 +1,20 @@
 import { ReactElement, useState } from "react";
 import { useRouter } from "next/router";
 
-import { GlobalLayout, LoadingScreen, ModalComponent, Pagination } from "@/component";
+import { GlobalLayout, LoadingScreen, Pagination } from "@/component";
 import { NextPageWithLayout } from "@/types";
 import { mainContainer, pageTitle } from "@/style";
 import { useManagerArr, useAuthAccept, useAuthReject } from "@/api";
 import { INTERNAL_URL } from "@/constant";
 
+import { AuthInfoModal } from "./component";
 import { cssObj } from "./style";
 
 const BusinessAuthList: NextPageWithLayout = () => {
   const router = useRouter();
-  const [modal, setModal] = useState<{ state: boolean; managerId: number | null; reason: string }>({
+  const [modal, setModal] = useState<{ state: boolean; managerId: number | null }>({
     state: false,
     managerId: null,
-    reason: "",
   });
 
   const {
@@ -29,24 +29,34 @@ const BusinessAuthList: NextPageWithLayout = () => {
   const { mutate: authAcceptMutate } = useAuthAccept();
   const { mutate: authRejectMutate } = useAuthReject();
 
+  const closeModal = () => setModal({ state: false, managerId: null });
+
   const accept = (managerId: number) => {
     if (window.confirm("정말 승인하시겠습니까?")) {
       authAcceptMutate(
         { managerId },
         {
-          onSuccess: () => refetchManagerArr(),
+          onSuccess: () => {
+            refetchManagerArr();
+            closeModal();
+            window.alert("승인되었습니다.");
+          },
           onError: () => window.alert("실패"),
         }
       );
     }
   };
 
-  const reject = (managerId: number) => {
+  const reject = (managerId: number, reason: string | null) => {
     if (window.confirm("정말 반려하시겠습니까?")) {
       authRejectMutate(
-        { managerId, reason: modal.reason },
+        { managerId, reason },
         {
-          onSuccess: () => refetchManagerArr(),
+          onSuccess: () => {
+            refetchManagerArr();
+            closeModal();
+            window.alert("반려되었습니다.");
+          },
           onError: () => window.alert("실패"),
         }
       );
@@ -85,18 +95,16 @@ const BusinessAuthList: NextPageWithLayout = () => {
                     <button
                       type="button"
                       css={cssObj.customButton}
-                      onClick={() => {
-                        accept(manager.id);
-                      }}
+                      onClick={() =>
+                        setModal((prev) => ({
+                          ...prev,
+                          state: true,
+                          managerId: manager.id,
+                          isFirst: manager.isFirst,
+                        }))
+                      }
                     >
-                      승인
-                    </button>
-                    <button
-                      type="button"
-                      css={cssObj.customButton}
-                      onClick={() => setModal((prev) => ({ ...prev, state: true, managerId: manager.id }))}
-                    >
-                      반려
+                      기업 확인
                     </button>
                   </td>
                 </tr>
@@ -106,32 +114,8 @@ const BusinessAuthList: NextPageWithLayout = () => {
         </section>
         <Pagination totalPage={managerDataObj.pageResult.totalPages} url={INTERNAL_URL.BUSINESS_USER_AUTH_LIST_URL} />
       </main>
-      {modal.state && (
-        <ModalComponent>
-          <div css={cssObj.modalContainer}>
-            <h3>반려사유</h3>
-            <textarea
-              value={modal.reason}
-              onChange={(e) => setModal((prev) => ({ ...prev, reason: e.target.value }))}
-            />
-            <div css={cssObj.flexRow}>
-              <button
-                type="button"
-                css={cssObj.customButton}
-                onClick={() => setModal({ state: false, managerId: null, reason: "" })}
-              >
-                취소
-              </button>
-              <button
-                type="button"
-                css={cssObj.customButton}
-                onClick={() => modal.managerId !== null && reject(modal.managerId)}
-              >
-                반려하기
-              </button>
-            </div>
-          </div>
-        </ModalComponent>
+      {modal.state && modal.managerId && (
+        <AuthInfoModal managerId={modal.managerId} accept={accept} reject={reject} close={closeModal} />
       )}
     </>
   );
