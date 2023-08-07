@@ -28,7 +28,6 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jdForm
 
   const openPostCodePopup = useDaumPostcodePopup();
 
-  // NOTE 임시로 100개로 해놓은 상태!
   const { data: factoryDataObj } = useFactoryArr({ size: 100 });
 
   const factoryClickHandler = (factory: number) => {
