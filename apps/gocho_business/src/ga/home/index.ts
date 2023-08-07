@@ -7,7 +7,7 @@ export const homeFunnelEvent = () => {
     return;
   }
   sessionStorage.setItem("funnel", FUNNEL.HOME_PAGE);
-  ReactGA.event("enter_home", { prev: funnel });
+  ReactGA.event("home_enter", { prev: funnel });
 };
 
 export const homeAlarmClickEvent = () => {

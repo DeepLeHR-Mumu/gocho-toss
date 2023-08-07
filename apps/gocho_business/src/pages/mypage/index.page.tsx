@@ -9,7 +9,7 @@ import { PWD_REGEXP } from "shared-constant";
 import { NewSharedButton } from "shared-ui/common/newSharedButton";
 
 import { PageLayout } from "@/components";
-import { myPageFunnelEvent } from "@/ga";
+import { mypageFunnelEvent } from "@/ga";
 import { useEditUserPassword, useManagerProfile } from "@/apis";
 import { useToast } from "@/globalStates";
 import { commonCssObj } from "@/styles";
@@ -95,7 +95,7 @@ const MyPage: NextPage = () => {
   const isCheckPassword = Boolean(watch("check_password"));
 
   useEffect(() => {
-    myPageFunnelEvent();
+    mypageFunnelEvent();
   }, []);
 
   return (

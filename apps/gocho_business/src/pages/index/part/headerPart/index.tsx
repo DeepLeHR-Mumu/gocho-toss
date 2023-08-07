@@ -1,8 +1,11 @@
 import { FunctionComponent } from "react";
 import Slider from "react-slick";
+import Link from "next/link";
 
 import { useNoticeArr } from "@/apis";
 
+import { INTERNAL_URL } from "@/constants";
+import { homeNewsClickEvent } from "@/ga";
 import { setCarouselSetting } from "./util";
 import { cssObj } from "./style";
 
@@ -16,10 +19,17 @@ export const HeaderPart: FunctionComponent = () => {
   return (
     <Slider {...setCarouselSetting} css={cssObj.headerContainer}>
       {noticeArrObj?.noticeDataArr.map((notice) => (
-        <div key={`IndexHeaderNotice${notice.id}`} css={cssObj.noticeContainer}>
+        <Link
+          href={INTERNAL_URL.NOTICE_DETAIL(notice.id)}
+          css={cssObj.noticeContainer}
+          key={`IndexHeaderNotice${notice.id}`}
+          onClick={() => {
+            homeNewsClickEvent();
+          }}
+        >
           <strong css={cssObj.noticeType}>{notice.type}</strong>
           <p css={cssObj.noticeTitle}>{notice.title}</p>
-        </div>
+        </Link>
       ))}
     </Slider>
   );

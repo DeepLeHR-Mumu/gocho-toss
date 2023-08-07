@@ -28,25 +28,6 @@ export {
 } from "./home";
 
 export {
-  companyEditConfirmEvent,
-  companyEditDoneEvent,
-  companyEditFailEvent,
-  companyEditPageFunnelEvent,
-} from "./companyEdit";
-
-export {
-  factoryDeleteConfirmEvent,
-  factoryDeleteDoneEvent,
-  factoryEditConfirmEvent,
-  factoryEditDoneEvent,
-  factoryEditFailEvent,
-  factoryListPageFunnelEvent,
-  factoryUploadConfirmEvent,
-  factoryUploadDoneEvent,
-  factoryUploadFailEvent,
-} from "./factoryList";
-
-export {
   jdEditConfirmEvent,
   jdEditDoneEvent,
   jdEditExitDoneEvent,
@@ -56,8 +37,8 @@ export {
 } from "./jdEdit";
 
 export {
-  jdCloseButtonEvent,
-  jdCloseDoneEvent,
+  jdEndButtonEvent,
+  jdEndDoneEvent,
   jdDeleteButtonEvent,
   jdDeleteDoneEvent,
   jdEditButtonEvent,
@@ -79,6 +60,24 @@ export {
   jdTitleClickEvent,
 } from "./jdUpload";
 
-export { myPageFunnelEvent } from "./mypage";
+export {
+  companyEditConfirmEvent,
+  companyEditDoneEvent,
+  companyEditFailEvent,
+  companyEditPageFunnelEvent,
+} from "./companyEdit";
+
+export {
+  factoryDeleteConfirmEvent,
+  factoryDeleteDoneEvent,
+  factoryEditConfirmEvent,
+  factoryEditDoneEvent,
+  factoryEditFailEvent,
+  factoryUploadConfirmEvent,
+  factoryUploadDoneEvent,
+  factoryUploadFailEvent,
+} from "./factory";
+
+export { mypageFunnelEvent } from "./mypage";
 
 export { managerListPageFunnelEvent } from "./managerList";

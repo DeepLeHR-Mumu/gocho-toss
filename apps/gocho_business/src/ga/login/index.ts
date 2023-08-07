@@ -11,5 +11,5 @@ export const loginPageFunnelEvent = () => {
     return;
   }
   sessionStorage.setItem("funnel", FUNNEL.LOGIN_PAGE);
-  ReactGA.event("enter_login", { prev: funnel });
+  ReactGA.event("login_enter", { prev: funnel });
 };

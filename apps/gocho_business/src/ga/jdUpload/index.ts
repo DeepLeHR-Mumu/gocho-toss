@@ -7,7 +7,7 @@ export const jdUploadPageFunnelEvent = () => {
     return;
   }
   sessionStorage.setItem("funnel", FUNNEL.JD_UPLOAD_PAGE);
-  ReactGA.event("enter_jd_upload", { prev: funnel });
+  ReactGA.event("jd_upload_enter", { prev: funnel });
 };
 
 export const jdUploadClickEvent = () => {

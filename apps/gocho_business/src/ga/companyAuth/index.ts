@@ -7,7 +7,7 @@ export const companyAuthFunnelEvent = () => {
     return;
   }
   sessionStorage.setItem("funnel", FUNNEL.COMPANY_AUTH_PAGE);
-  ReactGA.event("enter_company_auth", { prev: funnel });
+  ReactGA.event("company_auth_enter", { prev: funnel });
 };
 
 export const companyAuthDocsClickEvent = () => {

@@ -7,5 +7,5 @@ export const managerListPageFunnelEvent = () => {
     return;
   }
   sessionStorage.setItem("funnel", FUNNEL.MANAGER_LIST_PAGE);
-  ReactGA.event("enter_manager_list", { prev: funnel });
+  ReactGA.event("manager_list_enter", { prev: funnel });
 };

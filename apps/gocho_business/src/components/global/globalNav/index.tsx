@@ -10,6 +10,7 @@ import defaultCompanyLogo from "shared-image/global/common/default_company_logo.
 import bizTextMono from "@/public/image/deepleLogo/bizTextMono.svg";
 import { useAlarmArr, useDoLogout, useManagerProfile, useReadAlarm } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
+import { homeAlarmClickEvent, homeCompanyInfoClickEvent, homeProfileInfoClickEvent } from "@/ga";
 import { alarmCategoryToLink } from "@/pages/alarm/list/util";
 
 import { JD_LINK_ARR, COMPANY_LINK_ARR, USER_LINK_ARR } from "./constant";
@@ -114,6 +115,7 @@ export const GlobalNav: FunctionComponent = () => {
             type="button"
             css={cssObj.alarmButton}
             onClick={() => {
+              homeAlarmClickEvent();
               profileMenuHandler("alarm");
             }}
           >
@@ -150,6 +152,7 @@ export const GlobalNav: FunctionComponent = () => {
             type="button"
             aria-label={isCompanyActive ? "서브메뉴 열기" : "서브메뉴 닫기"}
             onClick={() => {
+              homeCompanyInfoClickEvent();
               profileMenuHandler("company");
             }}
           >
@@ -192,6 +195,7 @@ export const GlobalNav: FunctionComponent = () => {
             type="button"
             aria-label={isUserActive ? "서브메뉴 열기" : "서브메뉴 닫기"}
             onClick={() => {
+              homeProfileInfoClickEvent();
               profileMenuHandler("user");
             }}
           >

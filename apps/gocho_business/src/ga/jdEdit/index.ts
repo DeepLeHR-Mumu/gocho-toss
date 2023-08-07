@@ -27,5 +27,5 @@ export const jdEditPageFunnelEvent = () => {
     return;
   }
   sessionStorage.setItem("funnel", FUNNEL.JD_EDIT_PAGE);
-  ReactGA.event("enter_jd_edit", { prev: funnel });
+  ReactGA.event("jd_edit_enter", { prev: funnel });
 };
