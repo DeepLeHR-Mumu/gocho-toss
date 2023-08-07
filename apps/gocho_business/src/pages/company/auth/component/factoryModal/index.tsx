@@ -10,6 +10,8 @@ import { NewSharedButton } from "shared-ui/common/newSharedButton";
 import { commonCssObj } from "@/styles";
 import { ModalComponent } from "@/components/global/modal/modalBackground";
 
+import { stringOrNull } from "../../util";
+
 import { cssObj } from "./style";
 import { AuthFactoryAddModalProps, FactoryRegisterFormValues } from "./type";
 
@@ -33,9 +35,14 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
   };
 
   const addFactoryHandler = (factoryRequestObj: FactoryRegisterFormValues) => {
+    const newFactory: FactoryRegisterFormValues = {
+      ...factoryRequestObj,
+      bus_etc: stringOrNull(factoryRequestObj.bus_etc),
+      dormitory_etc: stringOrNull(factoryRequestObj.dormitory_etc),
+    };
     if (defaultFactory) {
-      modify(factoryRequestObj);
-    } else add(factoryRequestObj);
+      modify(newFactory);
+    } else add(newFactory);
     cancel();
   };
 
