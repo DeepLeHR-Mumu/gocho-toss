@@ -9,12 +9,13 @@ import { RequestObjDef as AuthRequestObjDef } from "@/apis/manager/auth/useManag
 import { ConfirmModal } from "@/components/global/modal/confirmModal";
 import { INTERNAL_URL } from "@/constants";
 
+import { stringOrNull } from "../../util";
+
 import { InfoPart } from "./infoPart";
 import { BasicPart } from "./basicPart";
 import { FactoryPart } from "./factoryPart";
 import { WelfarePart } from "./welfarePart";
 import { RegistrationPart } from "./registrationPart";
-
 import { CompanyAuthFormValues } from "./type";
 import { cssObj } from "./style";
 
@@ -68,8 +69,8 @@ export const ApplyAuthPart: FunctionComponent = () => {
           welfare: formData.welfare,
           pay_avg: formData.pay_avg,
           pay_start: formData.pay_start,
-          pay_desc: formData.pay_desc,
-          nozo: { ...formData.nozo, exists: formData.nozo.exists === "true" },
+          pay_desc: stringOrNull(formData.pay_desc),
+          nozo: { exists: formData.nozo.exists === "true", desc: stringOrNull(formData.nozo.desc) },
           factory_arr: formData.factory_arr,
           size: formData.size,
         };
