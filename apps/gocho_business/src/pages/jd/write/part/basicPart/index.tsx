@@ -6,6 +6,7 @@ import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 
 import { commonCssObj } from "@/styles";
 
+import { jdCareerClickEvent } from "@/ga";
 import { AddFieldButton, DeleteInputButton } from "../../component";
 import { setFieldErrorIfEmpty } from "../../../upload/util";
 import { BasicPartProps } from "./type";
@@ -329,6 +330,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
               registerObj={register(`required_exp`, {
                 required: "* 경력 조건을 선택해 주세요",
               })}
+              onClick={() => jdCareerClickEvent()}
             >
               <p css={cssObj.radioLabel}>{expName}</p>
             </SharedRadioButton>

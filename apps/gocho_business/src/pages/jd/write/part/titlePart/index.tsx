@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import { jdTitleClickEvent } from "@/ga";
 import { TitlePartProps } from "./type";
 
 import { cssObj } from "./style";
@@ -18,6 +19,9 @@ export const TitlePart: FunctionComponent<TitlePartProps> = ({ jdForm }) => {
         css={cssObj.input(Boolean(errors.title))}
         placeholder="공고 제목 (최대 50자)"
         maxLength={50}
+        onClick={() => {
+          jdTitleClickEvent();
+        }}
         onFocus={() => {
           clearErrors("title");
         }}

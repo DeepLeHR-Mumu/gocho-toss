@@ -60,12 +60,6 @@ const LoginPage: NextPage = () => {
         localStorage.setItem("refreshToken", response.data.refresh_token);
         queryClient.invalidateQueries();
 
-        if (!response.data.is_changed) {
-          window.alert("보안을 위해 초기 비밀번호를 변경해주세요");
-          router.push(INTERNAL_URL.MY_PAGE);
-          return;
-        }
-
         router.push(INTERNAL_URL.HOME);
       },
     });

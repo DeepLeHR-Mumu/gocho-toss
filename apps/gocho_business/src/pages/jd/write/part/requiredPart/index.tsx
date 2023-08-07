@@ -5,6 +5,7 @@ import { CheckBox } from "shared-ui/common/atom/checkbox";
 
 import { commonCssObj } from "@/styles";
 import { useModal } from "@/globalStates";
+import { jdAcademicClickEvent } from "@/ga";
 
 import { AddFieldButton, DeleteInputButton } from "../../component";
 import { RequiredPartProps } from "./type";
@@ -29,41 +30,49 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jdForm, req
       <div css={commonCssObj.container}>
         <p css={commonCssObj.inputTitle(false)}>학력</p>
         <div css={commonCssObj.labelContainer}>
-          <label css={commonCssObj.label} htmlFor="high">
-            <input type="checkbox" id="high" {...register(`high`)} onClick={() => clearErrors("high")} />
-            <CheckBox isChecked={watch("high")} />
-            고졸
-          </label>
-          <label css={commonCssObj.label} htmlFor="college">
-            <input type="checkbox" id="college" {...register(`college`)} onClick={() => clearErrors("high")} />
-            <CheckBox isChecked={watch("college")} />
-            초대졸
-          </label>
-          <label css={commonCssObj.label} htmlFor="four">
-            <input type="checkbox" id="four" {...register(`four`)} onClick={() => clearErrors("high")} />
-            <CheckBox isChecked={watch("four")} />
-            4년제
-          </label>
-          <label css={commonCssObj.label} htmlFor="all">
-            <input
-              type="checkbox"
-              id="all"
-              onClick={() => {
-                if (isSchoolAllSelected) {
-                  setValue("high", false);
-                  setValue("college", false);
-                  setValue("four", false);
-                } else {
-                  setValue("high", true);
-                  setValue("college", true);
-                  setValue("four", true);
-                }
-                clearErrors("high");
-              }}
-            />
-            <CheckBox isChecked={isSchoolAllSelected} />
-            학력무관
-          </label>
+          <button type="button" onClick={() => jdAcademicClickEvent()} onKeyDown={() => jdAcademicClickEvent()}>
+            <label css={commonCssObj.label} htmlFor="high">
+              <input type="checkbox" id="high" {...register(`high`)} onClick={() => clearErrors("high")} />
+              <CheckBox isChecked={watch("high")} />
+              고졸
+            </label>
+          </button>
+          <button type="button" onClick={() => jdAcademicClickEvent()} onKeyDown={() => jdAcademicClickEvent()}>
+            <label css={commonCssObj.label} htmlFor="college">
+              <input type="checkbox" id="college" {...register(`college`)} onClick={() => clearErrors("high")} />
+              <CheckBox isChecked={watch("college")} />
+              초대졸
+            </label>
+          </button>
+          <button type="button" onClick={() => jdAcademicClickEvent()} onKeyDown={() => jdAcademicClickEvent()}>
+            <label css={commonCssObj.label} htmlFor="four">
+              <input type="checkbox" id="four" {...register(`four`)} onClick={() => clearErrors("high")} />
+              <CheckBox isChecked={watch("four")} />
+              4년제
+            </label>
+          </button>
+          <button type="button" onClick={() => jdAcademicClickEvent()} onKeyDown={() => jdAcademicClickEvent()}>
+            <label css={commonCssObj.label} htmlFor="all">
+              <input
+                type="checkbox"
+                id="all"
+                onClick={() => {
+                  if (isSchoolAllSelected) {
+                    setValue("high", false);
+                    setValue("college", false);
+                    setValue("four", false);
+                  } else {
+                    setValue("high", true);
+                    setValue("college", true);
+                    setValue("four", true);
+                  }
+                  clearErrors("high");
+                }}
+              />
+              <CheckBox isChecked={isSchoolAllSelected} />
+              학력무관
+            </label>
+          </button>
         </div>
         <p css={commonCssObj.errorMessage}>{errors.high?.message}</p>
       </div>

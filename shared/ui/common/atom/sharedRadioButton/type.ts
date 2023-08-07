@@ -7,4 +7,5 @@ export interface SharedRadioButtonProps {
   isDisabled?: boolean;
   registerObj: UseFormRegisterReturn;
   children: React.ReactNode;
+  onClick?: () => void;
 }

@@ -5,6 +5,7 @@ import { UseFieldArrayReturn } from "react-hook-form";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
 import { commonCssObj } from "@/styles";
+import { jdRotationClickEvent } from "@/ga";
 
 import { AddFieldButton, DeleteInputButton } from "../../component";
 import { JdFormValues } from "../../../upload/type";
@@ -165,6 +166,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jdForm, p
             css={commonCssObj.select(30, Boolean(errors.rotation_arr))}
             type="button"
             onClick={() => {
+              jdRotationClickEvent();
               if (isRotationOpen && watch("rotation_arr").length === 0) {
                 setError(`rotation_arr`, {
                   type: "required",

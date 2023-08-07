@@ -2,6 +2,7 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { FiHelpCircle } from "react-icons/fi";
 
 import { commonCssObj } from "@/styles";
+import { companyAuthLogoClickEvent } from "@/ga";
 
 import { Tooltip } from "../../../component/tooltip";
 import useFileNameSyncWithForm from "../../useFileNameSyncWithForm";
@@ -71,7 +72,14 @@ export const RegistrationPart: FunctionComponent<RegistrationPartProps> = ({ com
         />
         <label htmlFor={companyLogoKey} css={cssObj.fileAddButton}>
           파일 첨부
-          <input type="file" id={companyLogoKey} {...register(companyLogoKey, { required: true })} />
+          <input
+            type="file"
+            id={companyLogoKey}
+            {...register(companyLogoKey, { required: true })}
+            onClick={() => {
+              companyAuthLogoClickEvent();
+            }}
+          />
         </label>
       </div>
       <div css={cssObj.subContainer}>

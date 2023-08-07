@@ -1,8 +1,8 @@
 export { notFoundPageErrorEvent } from "./400";
-
 export { unknownPageErrorEvent } from "./500";
-
 export { loginSuccessEvent, loginPageFunnelEvent } from "./login";
+export { mypageFunnelEvent } from "./mypage";
+export { managerListPageFunnelEvent } from "./managerList";
 
 export {
   registerClickEvent,
@@ -61,6 +61,14 @@ export {
 } from "./jdUpload";
 
 export {
+  companyAuthFunnelEvent,
+  companyAuthDocsClickEvent,
+  companyAuthLogoClickEvent,
+  companyAuthSubmitClickEvent,
+  companyAuthUnionClickEvent,
+} from "./companyAuth";
+
+export {
   companyEditConfirmEvent,
   companyEditDoneEvent,
   companyEditFailEvent,
@@ -77,7 +85,3 @@ export {
   factoryUploadDoneEvent,
   factoryUploadFailEvent,
 } from "./factory";
-
-export { mypageFunnelEvent } from "./mypage";
-
-export { managerListPageFunnelEvent } from "./managerList";

@@ -8,6 +8,7 @@ import { useFactoryArr } from "@/apis";
 import { commonCssObj } from "@/styles";
 
 import { useModal } from "@/globalStates";
+import { jdPlaceAddClickEvent } from "@/ga";
 import { AddFieldButton, DeleteInputButton } from "../../component";
 import { PositionWorkInfoPartProps } from "./type";
 import { PLACE_TYPE_ARR } from "./constant";
@@ -141,7 +142,8 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jdForm
                 <div css={cssObj.addPlaceButtonContainer}>
                   <AddFieldButton
                     text="근무지 추가"
-                    onClickHandler={() =>
+                    onClickHandler={() => {
+                      jdPlaceAddClickEvent();
                       openPostCodePopup({
                         onComplete: (addressObj: Address) => {
                           clearErrors(`place.factory_arr`);
@@ -157,8 +159,8 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jdForm
                               message: "* 공장 혹은 일반 근무지를 입력해주세요",
                             });
                         },
-                      })
-                    }
+                      });
+                    }}
                   />
                   <button
                     type="button"
