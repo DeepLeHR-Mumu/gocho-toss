@@ -14,6 +14,13 @@ const Mobile = () => {
       const globalNav = headerArr[0];
       globalNav.style.display = "none";
     }
+
+    const htmlArr = document.getElementsByTagName("html");
+
+    if (htmlArr.length > 0) {
+      const htmlTag = htmlArr[0];
+      htmlTag.style.minWidth = "0px";
+    }
   }, []);
 
   return (

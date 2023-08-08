@@ -5,11 +5,13 @@ import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
   container: css`
-    width: 100vw;
-    height: 100vh;
+    display: flex;
+    width: 100dvw;
+    height: 100dvh;
   `,
 
   flexColumn: css`
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
