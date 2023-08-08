@@ -19,7 +19,6 @@ import { blogUrl, menuArr } from "./constant";
 import { SubMenuButton } from "./component/subMenuButton";
 import {
   headerWrapper,
-  customLayout,
   headerContainer,
   logoCSS,
   navWrapper,
@@ -79,7 +78,7 @@ export const Header: FunctionComponent = () => {
 
   return (
     <header css={headerWrapper}>
-      <Layout additionalCss={customLayout}>
+      <Layout>
         <div css={headerContainer}>
           <div css={logoCSS}>
             <Link href={MAIN_URL} passHref>
@@ -148,14 +147,17 @@ export const Header: FunctionComponent = () => {
                 </button>
               </form>
               {isSuccess ? <Profile /> : <UnAuthMenu />}
-            </div>
-            {!isSuccess && (
-              <a href="https://gocho.biz/?utm_source=gochodaejoldotcom&utm_medium=GNB" target="_blank" rel="noreferrer">
-                <button type="button" css={businessService}>
+              {!isSuccess && (
+                <a
+                  href="https://gocho.biz/?utm_source=gochodaejoldotcom&utm_medium=GNB"
+                  target="_blank"
+                  rel="noreferrer"
+                  css={businessService}
+                >
                   기업 서비스
-                </button>
-              </a>
-            )}
+                </a>
+              )}
+            </div>
           </nav>
         </div>
       </Layout>
