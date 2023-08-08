@@ -9,11 +9,9 @@ import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query
 import { datadogRum } from "@datadog/browser-rum";
 
 import { useAxiosInterceptor } from "@/apis";
-import { ToastPlaceholder, PrivateRouteLayout, ModalPlaceholder, ErrorBoundary, GlobalLayout } from "@/components";
-import { GA_KEY } from "@/constants";
+import { ToastPlaceholder, PrivateRouteLayout, ModalPlaceholder, ErrorBoundary } from "@/components";
+import { GA_KEY, INTERNAL_URL } from "@/constants";
 import { globalStyle } from "@/styles";
-
-import { PROTECTED_ROUTE_ARR } from "./constant";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -64,10 +62,16 @@ function BusinessService({ Component, pageProps }: AppProps) {
   );
 
   useEffect(() => {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (router.pathname !== INTERNAL_URL.MOBILE && isMobile) {
+      router.replace(INTERNAL_URL.MOBILE);
+    }
+
     const prevUrl = sessionStorage.getItem("currentUrl");
     sessionStorage.setItem("prevUrl", prevUrl || "none");
     sessionStorage.setItem("currentUrl", router.asPath);
-  }, [router.asPath]);
+  }, [router]);
 
   useAxiosInterceptor();
 
@@ -75,15 +79,13 @@ function BusinessService({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <Global styles={globalStyle} />
-        <GlobalLayout>
-          <ErrorBoundary>
-            <PrivateRouteLayout protectedRoutes={PROTECTED_ROUTE_ARR}>
-              <Component {...pageProps} />
-            </PrivateRouteLayout>
-            <ModalPlaceholder />
-            <ToastPlaceholder />
-          </ErrorBoundary>
-        </GlobalLayout>
+        <ErrorBoundary>
+          <PrivateRouteLayout>
+            <Component {...pageProps} />
+          </PrivateRouteLayout>
+          <ModalPlaceholder />
+          <ToastPlaceholder />
+        </ErrorBoundary>
         <ReactQueryDevtools initialIsOpen={false} />
       </Hydrate>
     </QueryClientProvider>
