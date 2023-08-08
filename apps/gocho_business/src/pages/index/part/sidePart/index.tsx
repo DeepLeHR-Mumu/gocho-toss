@@ -8,8 +8,9 @@ import defaultCompanyLogo from "shared-image/global/common/default_company_logo.
 import homeAdRequest from "@/public/image/home_ad_request.svg";
 
 import { useManagerProfile } from "@/apis";
-
 import { INTERNAL_URL } from "@/constants";
+import { homeVerityCompanyEvent } from "@/ga";
+
 import { partCssObj } from "../style";
 import { cssObj } from "./style";
 
@@ -48,7 +49,14 @@ export const SidePart: FunctionComponent = () => {
             </div>
           </>
         ) : (
-          <Link href={INTERNAL_URL.COMPANY_AUTH} css={cssObj.companyAuthButton} passHref>
+          <Link
+            href={INTERNAL_URL.COMPANY_AUTH}
+            css={cssObj.companyAuthButton}
+            passHref
+            onClick={() => {
+              homeVerityCompanyEvent();
+            }}
+          >
             기업 인증하기
           </Link>
         )}

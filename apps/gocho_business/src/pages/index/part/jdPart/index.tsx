@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { useJdArr, useManagerProfile } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
+import { homeJdListEvent } from "@/ga";
 import { JdCard } from "../../component";
 import { partCssObj } from "../style";
 import { cssObj } from "./style";
@@ -17,7 +18,14 @@ export const JdPart: FunctionComponent = () => {
     <section css={partCssObj.partContainer}>
       <div css={cssObj.titleWrapper}>
         <h3 css={cssObj.partTitle(isAuth)}>등록된 공고 관리</h3>
-        <Link href={INTERNAL_URL.JD_LIST} passHref css={cssObj.moreButton}>
+        <Link
+          href={INTERNAL_URL.JD_LIST}
+          passHref
+          css={cssObj.moreButton}
+          onClick={() => {
+            homeJdListEvent();
+          }}
+        >
           더보기 {">"}
         </Link>
       </div>

@@ -7,7 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { NewSharedButton } from "shared-ui/common/newSharedButton";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
 
-import { loginSuccessEvent } from "@/ga";
+import { loginSuccessEvent, registerCompleteClickEvent, registerPhoneValidationClickEvent } from "@/ga";
 import { getPass, getPassCheck, useManagerRegister, useDoLogin } from "@/apis";
 import { useModal } from "@/globalStates";
 import { INTERNAL_URL } from "@/constants";
@@ -26,7 +26,6 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
   const [flag, setFlag] = useState(false);
   const [passState, setPassState] = useState(false);
 
-  // eslint-disable-next-line
   const tokenVersionId = useRef<string | null>(null);
 
   const {
@@ -63,6 +62,8 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
   }, [flag]);
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
+    registerCompleteClickEvent();
+
     const newFormData = {
       ...formData,
       token_version_id: tokenVersionId.current !== null ? tokenVersionId.current : undefined,
@@ -90,14 +91,9 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
                 localStorage.setItem("refreshToken", response.data.refresh_token);
                 queryClient.invalidateQueries();
 
-                if (!response.data.is_changed) {
-                  window.alert("보안을 위해 초기 비밀번호를 변경해주세요");
-                  router.push(INTERNAL_URL.MY_PAGE);
-                  return;
-                }
-
                 router.push(INTERNAL_URL.HOME);
               },
+
               onError: () => {
                 router.push(INTERNAL_URL.LOGIN);
               },
@@ -178,6 +174,7 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
             type="button"
             css={cssObj.authLink}
             onClick={() => {
+              registerPhoneValidationClickEvent();
               if (!passState) handleIdentityCheck();
             }}
           >

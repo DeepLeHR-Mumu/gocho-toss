@@ -1,8 +1,72 @@
 export { notFoundPageErrorEvent } from "./400";
-
 export { unknownPageErrorEvent } from "./500";
+export { loginSuccessEvent, loginPageFunnelEvent } from "./login";
+export { mypageFunnelEvent } from "./mypage";
+export { managerListPageFunnelEvent } from "./managerList";
 
-export { loginSuccessEvent, loginPageFunnelEvent, signupButtonClickEvent } from "./auth";
+export {
+  registerClickEvent,
+  registerCompanySearchClickEvent,
+  registerCompanySearchNextClickEvent,
+  registerCompanyAddSearchClickEvent,
+  registerPhoneValidationClickEvent,
+  registerEmailNextClickEvent,
+  registerCompleteClickEvent,
+} from "./register";
+
+export {
+  homeFunnelEvent,
+  homeJdUploadEvent,
+  homeJdListEvent,
+  homeQnaEvent,
+  homeAlarmClickEvent,
+  homeAlertEvent,
+  homeCompanyInfoClickEvent,
+  homeNewsClickEvent,
+  homeProfileInfoClickEvent,
+  homeVerityCompanyEvent,
+} from "./home";
+
+export {
+  jdEditConfirmEvent,
+  jdEditDoneEvent,
+  jdEditExitDoneEvent,
+  jdEditExitEvent,
+  jdEditFailEvent,
+  jdEditPageFunnelEvent,
+} from "./jdEdit";
+
+export {
+  jdEndButtonEvent,
+  jdEndDoneEvent,
+  jdDeleteButtonEvent,
+  jdDeleteDoneEvent,
+  jdEditButtonEvent,
+  jdListPageFunnelEvent,
+} from "./jdList";
+
+export {
+  jdUploadClickEvent,
+  jdUploadDoneEvent,
+  jdUploadExitDoneEvent,
+  jdUploadExitEvent,
+  jdUploadFailEvent,
+  jdUploadPageFunnelEvent,
+  jdMailClickEvent,
+  jdAcademicClickEvent,
+  jdRotationClickEvent,
+  jdPlaceAddClickEvent,
+  jdCareerClickEvent,
+  jdTitleClickEvent,
+} from "./jdUpload";
+
+export {
+  companyAuthFunnelEvent,
+  companyAuthDocsClickEvent,
+  companyAuthLogoClickEvent,
+  companyAuthSubmitClickEvent,
+  companyAuthUnionClickEvent,
+} from "./companyAuth";
 
 export {
   companyEditConfirmEvent,
@@ -17,39 +81,7 @@ export {
   factoryEditConfirmEvent,
   factoryEditDoneEvent,
   factoryEditFailEvent,
-  factoryListPageFunnelEvent,
   factoryUploadConfirmEvent,
   factoryUploadDoneEvent,
   factoryUploadFailEvent,
-} from "./factoryList";
-
-export {
-  jdEditConfirmEvent,
-  jdEditDoneEvent,
-  jdEditExitDoneEvent,
-  jdEditExitEvent,
-  jdEditFailEvent,
-  jdEditPageFunnelEvent,
-} from "./jdEdit";
-
-export {
-  jdCloseButtonEvent,
-  jdCloseDoneEvent,
-  jdDeleteButtonEvent,
-  jdDeleteDoneEvent,
-  jdEditButtonEvent,
-  jdListPageFunnelEvent,
-} from "./jdList";
-
-export {
-  jdUploadConfirmEvent,
-  jdUploadDoneEvent,
-  jdUploadExitDoneEvent,
-  jdUploadExitEvent,
-  jdUploadFailEvent,
-  jdUploadPageFunnelEvent,
-} from "./jdUpload";
-
-export { myPageFunnelEvent } from "./myPage";
-
-export { managerListPageFunnelEvent } from "./managerList";
+} from "./factory";

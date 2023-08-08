@@ -81,7 +81,6 @@ export const useAxiosInterceptor = () => {
     const refreshTokenData = localStorage.getItem("refreshToken");
 
     if (!accessTokenData || !refreshTokenData) {
-      router.replace(INTERNAL_URL.LOGIN);
       throw new axios.Cancel("No Token - Access Denied");
     }
 
@@ -125,7 +124,11 @@ export const useAxiosInterceptor = () => {
 
   const responseErrorHandler = async (error: AxiosError<ErrorResponseDef>) => {
     // privateRouteLayout 컴포넌트에서 유저 토큰을 확인 하여 만약 손상된 토큰이라면 기존 토큰 삭제 후 로그인 페이지로 이동
-    if (error.response?.data.error_code === "MALFORMED_JWT" && error.config.url === "/auth/health-check") {
+    // URIError 발생 케이스 추가
+    if (
+      (error.response?.data.error_code === "MALFORMED_JWT" && error.config.url === "/auth/health-check") ||
+      error.name === "URIError"
+    ) {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       router.push(INTERNAL_URL.LOGIN);

@@ -35,6 +35,7 @@ export { useFindFactory } from "./factory/useFindFactory";
 export { useManagerArr } from "./managers/useManagerArr";
 export { useAuthAccept } from "./managers/useAuthAccept";
 export { useAuthReject } from "./managers/useAuthReject";
+export { useManagerRequest } from "./managers/useManagerRequest";
 
 export { useNoticeArr } from "./notice/useNoticeArr";
 export { useNoticeDetail } from "./notice/useNoticeDetail";

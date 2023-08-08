@@ -5,8 +5,12 @@ import { FiArrowUp } from "react-icons/fi";
 import { NewSharedButton } from "shared-ui/common/newSharedButton";
 
 import { commonCssObj } from "@/styles";
-
 import { useFindCompany } from "@/apis";
+import {
+  registerCompanyAddSearchClickEvent,
+  registerCompanySearchClickEvent,
+  registerCompanySearchNextClickEvent,
+} from "@/ga";
 import { FindCompanyPartProps, PostSubmitValues } from "./type";
 
 import { cssObj } from "./style";
@@ -29,6 +33,8 @@ export const FindCompanyPart: FunctionComponent<FindCompanyPartProps> = ({ slide
   const { data: companyDataObj } = useFindCompany({ word: searchWord });
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
+    registerCompanySearchNextClickEvent();
+
     const newFormData = {
       company: formData.company_id
         ? {
@@ -83,7 +89,10 @@ export const FindCompanyPart: FunctionComponent<FindCompanyPartProps> = ({ slide
             css={commonCssObj.input(25.5, false)}
             type="text"
             value={searchWord}
-            onClick={() => setIsCompanyListOn(true)}
+            onClick={() => {
+              registerCompanySearchClickEvent();
+              setIsCompanyListOn(true);
+            }}
             onChange={(e) => {
               setSearchWord(e.target.value);
             }}
@@ -98,6 +107,7 @@ export const FindCompanyPart: FunctionComponent<FindCompanyPartProps> = ({ slide
                 key={`SignupCompany${company.id}`}
                 value={company.name}
                 onMouseDown={() => {
+                  registerCompanyAddSearchClickEvent();
                   selectCompanyHandler(company.name, company.id, company.businessNumber);
                 }}
               >

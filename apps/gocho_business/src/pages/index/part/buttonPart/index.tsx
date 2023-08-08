@@ -5,11 +5,19 @@ import Image from "next/image";
 import { INTERNAL_URL } from "@/constants";
 import homeJdUpload from "@/public/image/home_jdUpload_button.svg";
 
+import { homeJdUploadEvent, homeQnaEvent } from "@/ga";
 import { cssObj } from "./style";
 
 export const ButtonPart: FunctionComponent = () => (
   <section css={cssObj.partContainer}>
-    <Link css={cssObj.linkButton("blue")} passHref href={INTERNAL_URL.JD_UPLOAD}>
+    <Link
+      css={cssObj.linkButton("blue")}
+      passHref
+      href={INTERNAL_URL.JD_UPLOAD}
+      onClick={() => {
+        homeJdUploadEvent();
+      }}
+    >
       <h3 css={cssObj.uploadTitle("white")}>공고 등록하기</h3>
       <p css={cssObj.helpSubtitle("white")}>
         새로운 공고를 등록하여
@@ -20,7 +28,14 @@ export const ButtonPart: FunctionComponent = () => (
         <Image src={homeJdUpload} alt="공고 등록하기 버튼" fill />
       </div>
     </Link>
-    <Link css={cssObj.linkButton("white")} passHref href={INTERNAL_URL.HELP}>
+    <Link
+      css={cssObj.linkButton("white")}
+      passHref
+      href={INTERNAL_URL.HELP}
+      onClick={() => {
+        homeQnaEvent();
+      }}
+    >
       <h3 css={cssObj.uploadTitle("blue")}>고객센터</h3>
       <p css={cssObj.helpSubtitle("blue")}>고초대졸닷컴 내 광고 및 기타사항 문의</p>
       <p css={cssObj.helpDesc}>운영시간 평일 10:00-19:00시 (주말 및 공휴일 휴무)</p>
