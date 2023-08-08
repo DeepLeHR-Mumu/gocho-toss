@@ -1,25 +1,9 @@
 import checkIconImage from "shared-image/global/common/yellow_check.svg";
-import { adClickEvent2 } from "shared-ga/home";
+// import { adClickEvent } from "shared-ga/home";
 
 export const carouselArr = [
   {
     id: 1,
-    topDesc: "OPEN",
-    middleDesc: "포스코인터내셔녈",
-    title: "전문기술직 (인천/광양) 채용형 인턴 신입사원 모집",
-    lastDesc: "정규직 채용률 80% 내외",
-    backgroundColor: "#0077c3",
-    buttonObj: {
-      target: "_blank" as const,
-      text: "공고 확인하기",
-      color: "#fff",
-      backgroundColor: "#111",
-      url: "https://m.고초대졸.com/jd/detail/17540",
-      onClick: adClickEvent2,
-    },
-  },
-  {
-    id: 2,
     topDesc: "OPEN",
     middleDesc: "고초대졸 블로그",
     title: "고초대졸닷컴 공식 블로그",
@@ -35,7 +19,7 @@ export const carouselArr = [
     },
   },
   {
-    id: 3,
+    id: 2,
     topDesc: "OPEN",
     middleDesc: "고초대졸닷컴",
     title: "공고에서 근무할 공장 정보 바로보기 서비스 시작",
@@ -45,7 +29,7 @@ export const carouselArr = [
     buttonObj: null,
   },
   {
-    id: 4,
+    id: 3,
     topDesc: "OPEN",
     middleDesc: "고초대졸닷컴",
     title: "생산/기능직 관련 최대 규모 오픈카톡방",
