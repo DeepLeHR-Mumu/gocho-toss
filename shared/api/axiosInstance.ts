@@ -18,29 +18,56 @@ export const axiosInstance = axios.create({
 
 export const useAxiosInterceptor = () => {
   const accessTokenLimitMs = 10000;
+  let isRefreshing = false;
+  let refreshSubscribers: (() => void)[] = [];
+
+  const subscribeTokenRefresh = (cb: () => void) => {
+    refreshSubscribers.push(cb);
+  };
+
+  const onRefreshed = () => {
+    refreshSubscribers.map((cb) => {
+      return cb();
+    });
+    refreshSubscribers = [];
+  };
 
   // accessToken이 만료 된 경우 refresh 함수를 호출하여 access, refreshToken 재발급 받는 함수
-  const getNewAccessToken = async (): Promise<{ newToken: string } | void> => {
-    const refreshToken = localStorage.getItem("refreshToken");
-    if (!refreshToken) throw new axios.Cancel("요청 취소");
+  const getNewAccessToken = async (): Promise<string> => {
+    if (!isRefreshing) {
+      isRefreshing = true;
+      const refreshToken = localStorage.getItem("refreshToken");
+      if (!refreshToken) throw new axios.Cancel("요청 취소");
 
-    return axios
-      .get(`${BACKEND_URL}/auth/refresh`, {
-        headers: { "x-refresh-token": refreshToken },
-      })
-      .then(({ data }) => {
-        localStorage.setItem("accessToken", data.data.access_token);
-        localStorage.setItem("refreshToken", data.data.refresh_token);
-      })
-      .catch((error) => {
-        const { error_code } = error.response.data;
-        if (error_code === "EMPTY_JWT") {
-          localStorage.removeItem("accessToken");
-          localStorage.removeItem("refreshToken");
-          throw new axios.Cancel("재요청 취소");
-        }
-        throw error;
+      axios
+        .get(`${BACKEND_URL}/auth/refresh`, {
+          headers: { "x-refresh-token": refreshToken },
+        })
+        .then(({ data }) => {
+          isRefreshing = false;
+          localStorage.setItem("accessToken", data.data.access_token);
+          localStorage.setItem("refreshToken", data.data.refresh_token);
+          onRefreshed();
+        })
+        .catch((error) => {
+          isRefreshing = false;
+          const { error_code } = error.response.data;
+          if (error_code === "EMPTY_JWT") {
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("refreshToken");
+            throw new axios.Cancel("재요청 취소");
+          }
+
+          throw error;
+        });
+    }
+
+    return new Promise<string>((resolve) => {
+      subscribeTokenRefresh(() => {
+        const newToken = localStorage.getItem("accessToken");
+        resolve(newToken || "");
       });
+    });
   };
 
   const requestConfigHandler = async (config: AxiosRequestConfig) => {
@@ -57,7 +84,7 @@ export const useAxiosInterceptor = () => {
       };
     }
 
-    // accessToken 이 없이도 접근할 수 있는 API에 대한 처리
+    // accessToken 없이도 접근할 수 있는 API
     if (config.url && matchingUrlReGex.test(config.url)) {
       return config;
     }
@@ -74,8 +101,9 @@ export const useAxiosInterceptor = () => {
     const accessExpireTime = dayjs(new Date(accessTokenExp * 1000), "YYYY-MM-DDTHH:mm:ss");
     const refreshExpireTime = dayjs(new Date(refreshTokenExp * 1000), "YYYY-MM-DDTHH:mm:ss");
     const currentTime = dayjs(new Date(), "YYYY-MM-DDTHH:mm:ss");
-    const accessBetweenCurrentDiffTime = accessExpireTime.diff(currentTime, "ms");
+
     const isRefreshExpired = currentTime.isAfter(refreshExpireTime);
+    const isAccessExpired = accessExpireTime.diff(currentTime, "ms") <= accessTokenLimitMs;
 
     // 1. refreshToken 만료된 경우 -> 모든 token 삭제
     if (isRefreshExpired) {
@@ -85,9 +113,8 @@ export const useAxiosInterceptor = () => {
     }
 
     // 2. accessToken 만료되었을 경우 -> 새로운 accessToken 들고 옴
-    if (accessBetweenCurrentDiffTime <= accessTokenLimitMs) {
-      await getNewAccessToken();
-      const newAccessToken = localStorage.getItem("accessToken");
+    if (isAccessExpired) {
+      const newAccessToken = await getNewAccessToken();
       return {
         ...config,
         headers: {
