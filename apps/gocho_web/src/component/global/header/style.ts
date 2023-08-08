@@ -160,7 +160,8 @@ export const businessService = css`
   align-items: center;
   justify-content: center;
   border: 1px solid ${COLORS.BLUE_FIRST40};
-  color: ${COLORS.BLUE_FIRST40};
+  color: white;
+  background-color: ${COLORS.BLUE_FIRST40};
   border-radius: 2rem;
 
   font-size: 0.75rem;
