@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
 
 import { commonCssObj } from "@/styles";
+import { companyAuthDocsClickEvent } from "@/ga";
 
 import useFileNameSyncWithForm from "../../useFileNameSyncWithForm";
 import { AuthInfoPartProps } from "./type";
@@ -41,7 +42,14 @@ export const InfoPart: FunctionComponent<AuthInfoPartProps> = ({ companyAuthForm
         />
         <label htmlFor="certificateOfBusiness" css={cssObj.fileAddButton}>
           파일 첨부
-          <input type="file" id="certificateOfBusiness" {...register("certificateOfBusiness", { required: true })} />
+          <input
+            type="file"
+            id="certificateOfBusiness"
+            {...register("certificateOfBusiness", { required: true })}
+            onClick={() => {
+              companyAuthDocsClickEvent();
+            }}
+          />
         </label>
       </div>
     </div>

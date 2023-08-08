@@ -7,6 +7,7 @@ import { NUMBER_REGEXP } from "shared-constant";
 
 import { commonCssObj } from "@/styles";
 
+import { companyAuthUnionClickEvent } from "@/ga";
 import { ONLY_INT_ERROR_TEXT, INDUSTRY_ARR, SIZE_ARR } from "./constant";
 import { AuthBasicPartProps } from "./type";
 import { cssObj } from "./style";
@@ -262,6 +263,7 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
               isDisabled={isOtherEdit}
               value="true"
               id="nozoTrue"
+              onClick={() => companyAuthUnionClickEvent()}
             >
               <p css={cssObj.radioLabel}>있음</p>
             </SharedRadioButton>
@@ -270,6 +272,7 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
               isDisabled={isOtherEdit}
               value="false"
               id="nozoFalse"
+              onClick={() => companyAuthUnionClickEvent()}
             >
               <p css={cssObj.radioLabel}>없음</p>
             </SharedRadioButton>

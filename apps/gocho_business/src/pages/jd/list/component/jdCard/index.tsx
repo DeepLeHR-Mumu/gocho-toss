@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import { NewSharedButton } from "shared-ui/common/newSharedButton";
 
 import { useToast } from "@/globalStates";
-import { jdDeleteButtonEvent, jdCloseButtonEvent, jdEditButtonEvent, jdCloseDoneEvent, jdDeleteDoneEvent } from "@/ga";
+import { jdDeleteButtonEvent, jdDeleteDoneEvent, jdEndButtonEvent, jdEndDoneEvent, jdEditButtonEvent } from "@/ga";
 import { CommonStatusChip } from "@/components";
 import { INTERNAL_URL } from "@/constants";
 import { useEndJd, useDeleteJd, jdArrKeyObj } from "@/apis";
@@ -38,14 +38,14 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
     if (isEndLoading.current) return;
     isEndLoading.current = true;
 
-    jdCloseButtonEvent(id);
+    jdEndButtonEvent(id);
     if (window.confirm(JD_MESSAGE_OBJ.END)) {
       endJdMutation(
         { jdId: id },
         {
           onSuccess: () => {
             setToast("마감되었습니다");
-            jdCloseDoneEvent(id);
+            jdEndDoneEvent(id);
             queryClient.invalidateQueries(jdArrKeyObj.all);
           },
 

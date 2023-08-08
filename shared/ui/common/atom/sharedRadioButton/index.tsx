@@ -9,6 +9,7 @@ export const SharedRadioButton: FunctionComponent<SharedRadioButtonProps> = ({
   registerObj,
   id,
   children,
+  onClick,
 }) => {
   const [isFocus, setIsFocus] = useState(false);
 
@@ -27,6 +28,7 @@ export const SharedRadioButton: FunctionComponent<SharedRadioButtonProps> = ({
         onBlur={() => {
           setIsFocus(false);
         }}
+        onClick={onClick}
       />
       <div css={cssObj.radioBox(isDisabled)} />
       {children}

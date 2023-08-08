@@ -6,6 +6,7 @@ import { NewSharedButton } from "shared-ui/common/newSharedButton";
 
 import { useCheckEmail } from "@/apis";
 import { commonCssObj } from "@/styles";
+import { registerEmailNextClickEvent } from "@/ga";
 import { LOGIN_ERROR_MESSAGES } from "@/pages/login/constant";
 
 import { FindCompanyPartProps, PostSubmitValues } from "./type";
@@ -26,6 +27,8 @@ export const IdPasswordPart: FunctionComponent<FindCompanyPartProps> = ({ slider
   const { mutate: postManagersCheckEmail } = useCheckEmail();
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
+    registerEmailNextClickEvent();
+
     const { email } = formData;
     postManagersCheckEmail(
       { email },

@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 
 import { INTERNAL_URL } from "@/constants";
 import { useAlarmArr, useManagerProfile, useNoticeArr } from "@/apis";
+import { homeAlertEvent } from "@/ga";
 import { alarmCategoryToLink } from "@/pages/alarm/list/util";
 
 import { partCssObj } from "../style";
@@ -50,6 +51,9 @@ export const InfoPart: FunctionComponent = () => {
                 href={INTERNAL_URL.NOTICE_DETAIL(notice.id)}
                 css={cssObj.infoContainer}
                 key={`mainNotice${notice.id}`}
+                onClick={() => {
+                  homeAlertEvent();
+                }}
               >
                 <p css={cssObj.infoType}>{notice.type}</p>
                 <strong css={cssObj.infoTitle}>{notice.title}</strong>

@@ -6,6 +6,7 @@ import { CheckBox } from "shared-ui/common/atom/checkbox";
 
 import { commonCssObj } from "@/styles";
 
+import { jdMailClickEvent } from "@/ga";
 import { AddFieldButton, DeleteInputButton } from "../../component";
 import { setFieldErrorIfEmpty } from "../../../upload/util";
 import { ApplyPartProps } from "./type";
@@ -283,6 +284,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                 <label css={commonCssObj.inputLabel} key="applyUrlWebsite" htmlFor="applyUrlWebsite">
                   <input
                     css={commonCssObj.input(47, Boolean(errors.apply_url))}
+                    onClick={() => jdMailClickEvent()}
                     placeholder="https://"
                     {...register("apply_url", {
                       required: "* 채용 사이트 링크 또는 이메일을 기입해 주세요",
@@ -315,6 +317,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                 <label css={commonCssObj.inputLabel} key="applyUrlWebsite" htmlFor="applyUrlWebsite">
                   <input
                     css={commonCssObj.input(47, Boolean(errors.apply_url))}
+                    onClick={() => jdMailClickEvent()}
                     placeholder="@"
                     {...register("apply_url", {
                       required: "* 채용 사이트 링크 또는 이메일을 기입해 주세요",

@@ -7,13 +7,9 @@ export const loginSuccessEvent = (isAutoLogin: boolean) => {
 
 export const loginPageFunnelEvent = () => {
   const funnel = sessionStorage.getItem("funnel");
-  if (funnel === FUNNEL.MAIN_PAGE) {
+  if (funnel === FUNNEL.LOGIN_PAGE) {
     return;
   }
-  sessionStorage.setItem("funnel", FUNNEL.MAIN_PAGE);
-  ReactGA.event("enter_welcome", { prev: funnel });
-};
-
-export const signupButtonClickEvent = () => {
-  ReactGA.event("signup_button_click");
+  sessionStorage.setItem("funnel", FUNNEL.LOGIN_PAGE);
+  ReactGA.event("login_enter", { prev: funnel });
 };

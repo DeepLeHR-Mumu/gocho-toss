@@ -13,7 +13,7 @@ import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 
 import { useDoLogin, useManagerProfile } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
-import { loginPageFunnelEvent, loginSuccessEvent, signupButtonClickEvent } from "@/ga";
+import { loginPageFunnelEvent, loginSuccessEvent, registerClickEvent } from "@/ga";
 import { commonCssObj } from "@/styles";
 import bizTextColor from "@/public/image/deepleLogo/bizTextColor.svg";
 import homeBg1 from "@/public/image/login_bg_1.svg";
@@ -59,12 +59,6 @@ const LoginPage: NextPage = () => {
         localStorage.setItem("accessToken", response.data.access_token);
         localStorage.setItem("refreshToken", response.data.refresh_token);
         queryClient.invalidateQueries();
-
-        if (!response.data.is_changed) {
-          window.alert("보안을 위해 초기 비밀번호를 변경해주세요");
-          router.push(INTERNAL_URL.MY_PAGE);
-          return;
-        }
 
         router.push(INTERNAL_URL.HOME);
       },
@@ -202,7 +196,7 @@ const LoginPage: NextPage = () => {
               width={25.5}
               text="기업회원 가입하기"
               onClickHandler={() => {
-                signupButtonClickEvent();
+                registerClickEvent();
                 router.push(INTERNAL_URL.SIGNUP);
               }}
               isLong

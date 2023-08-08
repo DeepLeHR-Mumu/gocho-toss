@@ -19,5 +19,5 @@ export const companyEditPageFunnelEvent = () => {
     return;
   }
   sessionStorage.setItem("funnel", FUNNEL.COMPANY_EDIT_PAGE);
-  ReactGA.event("enter_company_edit", { prev: funnel });
+  ReactGA.event("company_edit_enter", { prev: funnel });
 };

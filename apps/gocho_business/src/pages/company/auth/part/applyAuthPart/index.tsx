@@ -9,6 +9,7 @@ import { RequestObjDef as AuthRequestObjDef } from "@/apis/manager/auth/useManag
 import { ConfirmModal } from "@/components/global/modal/confirmModal";
 import { INTERNAL_URL } from "@/constants";
 
+import { companyAuthSubmitClickEvent } from "@/ga";
 import { stringOrNull } from "../../util";
 
 import { InfoPart } from "./infoPart";
@@ -112,7 +113,10 @@ export const ApplyAuthPart: FunctionComponent = () => {
                   : getValues("certificateOfBusiness")) === undefined || !isValid
               }
               css={cssObj.submitButton}
-              onClick={() => setConfirmModal(true)}
+              onClick={() => {
+                companyAuthSubmitClickEvent();
+                setConfirmModal(true);
+              }}
             >
               제출하기
             </button>
