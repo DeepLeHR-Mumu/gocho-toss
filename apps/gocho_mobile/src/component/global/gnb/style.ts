@@ -134,3 +134,9 @@ export const newBox = css`
   color: ${COLORS.GRAY100};
   background-color: ${COLORS.ERROR_RED30};
 `;
+
+export const businessService = css`
+  font-weight: 500;
+  color: ${COLORS.GRAY30};
+  line-height: 2.5;
+`;

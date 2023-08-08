@@ -15,8 +15,7 @@ export const UnAuthMenu: FunctionComponent = () => {
         setModal("loginModal", { button: "close" });
       }}
     >
-      <div css={buttonCSS}>로그인 /</div>
-      <div css={buttonCSS}> 회원가입</div>
+      <div css={buttonCSS}>로그인 / 회원가입</div>
     </button>
   );
 };

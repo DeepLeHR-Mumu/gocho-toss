@@ -32,6 +32,7 @@ import {
   flexBox,
   logoLink,
   newBox,
+  businessService,
 } from "./style";
 
 export const Header: FunctionComponent = () => {
@@ -146,6 +147,16 @@ export const Header: FunctionComponent = () => {
                 </button>
               </form>
               {isSuccess ? <Profile /> : <UnAuthMenu />}
+              {!isSuccess && (
+                <a
+                  href="https://gocho.biz/?utm_source=gochodaejoldotcom&utm_medium=GNB"
+                  target="_blank"
+                  rel="noreferrer"
+                  css={businessService}
+                >
+                  기업 서비스
+                </a>
+              )}
             </div>
           </nav>
         </div>
