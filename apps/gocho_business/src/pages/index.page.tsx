@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import type { NextPage } from "next";
 
 import { Footer, PageLayout } from "@/components";
-
 import { homeFunnelEvent } from "@/ga";
-import { HeaderPart, InfoPart, ButtonPart, JdPart, SidePart } from "./index/part";
+
+import { InfoPart, ButtonPart, JdPart, SidePart } from "./index/part";
 import { cssObj } from "./index/style";
 
 const HomePage: NextPage = () => {
@@ -14,7 +14,6 @@ const HomePage: NextPage = () => {
 
   return (
     <div>
-      <HeaderPart />
       <PageLayout>
         <div css={cssObj.container}>
           <div css={cssObj.contentContainer}>

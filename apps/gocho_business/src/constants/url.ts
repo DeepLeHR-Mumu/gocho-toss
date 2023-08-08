@@ -19,4 +19,5 @@ export const INTERNAL_URL = {
   SIGNUP: "/signup",
   FIND_ID: "/find/id",
   FIND_PASSWORD: "/find/password",
+  MOBILE: "/mobile",
 } as const;
