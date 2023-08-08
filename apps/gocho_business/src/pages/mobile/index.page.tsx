@@ -1,13 +1,24 @@
 import { useEffect } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 
 import logo from "public/image/deepleLogo/bizTextColor.svg";
 import mobile from "public/image/mobile.svg";
 
+import { INTERNAL_URL } from "@/constants";
+
 import { cssObj } from "./style";
 
 const Mobile = () => {
+  const router = useRouter();
+
   useEffect(() => {
+    const isPc = /Windows|Macintosh/i.test(navigator.userAgent);
+
+    if (isPc) {
+      router.replace(INTERNAL_URL.HOME);
+    }
+
     const headerArr = document.getElementsByTagName("header");
 
     if (headerArr.length > 0) {
@@ -21,7 +32,7 @@ const Mobile = () => {
       const htmlTag = htmlArr[0];
       htmlTag.style.minWidth = "0px";
     }
-  }, []);
+  }, [router]);
 
   return (
     <main css={cssObj.container}>
