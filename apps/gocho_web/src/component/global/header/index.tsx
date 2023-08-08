@@ -19,6 +19,7 @@ import { blogUrl, menuArr } from "./constant";
 import { SubMenuButton } from "./component/subMenuButton";
 import {
   headerWrapper,
+  customLayout,
   headerContainer,
   logoCSS,
   navWrapper,
@@ -32,6 +33,7 @@ import {
   flexBox,
   logoLink,
   newBox,
+  businessService,
 } from "./style";
 
 export const Header: FunctionComponent = () => {
@@ -77,7 +79,7 @@ export const Header: FunctionComponent = () => {
 
   return (
     <header css={headerWrapper}>
-      <Layout>
+      <Layout additionalCss={customLayout}>
         <div css={headerContainer}>
           <div css={logoCSS}>
             <Link href={MAIN_URL} passHref>
@@ -147,6 +149,13 @@ export const Header: FunctionComponent = () => {
               </form>
               {isSuccess ? <Profile /> : <UnAuthMenu />}
             </div>
+            {!isSuccess && (
+              <a href="https://gocho.biz/?utm_source=gochodaejoldotcom&utm_medium=GNB" target="_blank" rel="noreferrer">
+                <button type="button" css={businessService}>
+                  기업 서비스
+                </button>
+              </a>
+            )}
           </nav>
         </div>
       </Layout>

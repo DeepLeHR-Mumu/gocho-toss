@@ -33,6 +33,7 @@ import {
   subMenuArr,
   iconBox,
   newBox,
+  businessService,
 } from "./style";
 
 export const GNB: FunctionComponent = () => {
@@ -163,6 +164,14 @@ export const GNB: FunctionComponent = () => {
           ) : (
             <UnauthorizedMenu setOpenedElement={setOpenedElement} />
           )}
+          <a
+            href="https://gocho.biz/?utm_source=gochodaejoldotcom&utm_medium=GNB"
+            target="_blank"
+            rel="noreferrer"
+            css={businessService}
+          >
+            기업 서비스
+          </a>
         </Layout>
       </nav>
     </header>

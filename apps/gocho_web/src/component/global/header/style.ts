@@ -14,6 +14,11 @@ export const headerWrapper = css`
   background-color: ${COLORS.GRAY100};
 `;
 
+export const customLayout = css`
+  max-width: calc(1200px + 0rem);
+  padding: 0 0 0 2rem;
+`;
+
 export const headerContainer = css`
   display: flex;
   justify-content: space-between;
@@ -147,4 +152,18 @@ export const newBox = css`
   height: 1rem;
   color: ${COLORS.GRAY100};
   background-color: ${COLORS.ERROR_RED30};
+`;
+
+export const businessService = css`
+  padding: 0.375rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid ${COLORS.BLUE_FIRST40};
+  color: ${COLORS.BLUE_FIRST40};
+  border-radius: 2rem;
+
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
 `;
