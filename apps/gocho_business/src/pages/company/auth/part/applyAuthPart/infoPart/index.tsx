@@ -37,7 +37,7 @@ export const InfoPart: FunctionComponent<AuthInfoPartProps> = ({ companyAuthForm
         <input
           disabled
           value={certFileName}
-          placeholder="파일형식: jpg, jpeg, pdf / 파일 용량: 5MB"
+          placeholder="파일형식: jpg, jpeg, pdf / 파일 용량: 10MB"
           css={commonCssObj.input(38, false)}
         />
         <label htmlFor="certificateOfBusiness" css={cssObj.fileAddButton}>
