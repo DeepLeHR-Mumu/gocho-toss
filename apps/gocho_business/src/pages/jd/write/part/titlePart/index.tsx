@@ -27,6 +27,7 @@ export const TitlePart: FunctionComponent<TitlePartProps> = ({ jdForm }) => {
         }}
         {...register("title", {
           required: "공고 제목은 필수 입력 사항입니다",
+          maxLength: { value: 50, message: "최대 길이는 50자입니다." },
           onBlur: (blurEvent) => {
             if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
               setValue("title", "");

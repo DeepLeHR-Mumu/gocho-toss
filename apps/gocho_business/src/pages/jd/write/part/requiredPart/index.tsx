@@ -93,6 +93,7 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jdForm, req
                         setValue(`required_etc_arr.${index}.value`, "");
                       }
                     },
+                    maxLength: { value: 50, message: "최대 길이는 50자입니다." },
                   })}
                 />
                 {index !== 0 && (
@@ -136,6 +137,7 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jdForm, req
                         setValue(`preferred_etc_arr.${index}.value`, "");
                       }
                     },
+                    maxLength: { value: 50, message: "최대 길이는 50자입니다." },
                   })}
                 />
                 {index !== 0 && (

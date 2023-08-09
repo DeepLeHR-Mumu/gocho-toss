@@ -140,6 +140,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                             "* 채용절차는 최소 1개 이상 기재해 주세요"
                           );
                         },
+                        maxLength: { value: 20, message: "최대 길이는 20자입니다." },
                       })}
                     />
                     {index !== 0 && (
@@ -207,6 +208,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                           "* 지원 경로는 최소 1개 이상 기재해 주세요"
                         );
                       },
+                      maxLength: { value: 20, message: "최대 길이는 20자입니다." },
                     })}
                   />
                   {index !== 0 && (
@@ -353,6 +355,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                         setValue(`apply_document_arr.${index}.value`, "");
                       }
                     },
+                    maxLength: { value: 20, message: "최대 길이는 20자입니다." },
                   })}
                 />
                 {index !== 0 && (
@@ -396,6 +399,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                         setValue(`etc_arr.${index}.value`, "");
                       }
                     },
+                    maxLength: { value: 50, message: "최대 길이는 50자입니다." },
                   })}
                 />
                 {index !== 0 && (

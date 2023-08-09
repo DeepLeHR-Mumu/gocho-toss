@@ -181,6 +181,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jdForm
                 placeholder="근무지를 작성해주세요"
                 {...register(`place.etc`, {
                   required: "* 근무지를 입력해주세요",
+                  maxLength: { value: 100, message: "최대 길이는 100자입니다." },
                   validate: (value) => !!value?.trim() || "빈 칸을 입력할 수 없습니다",
                 })}
               />
@@ -192,6 +193,7 @@ export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jdForm
                 placeholder="전국 순환, 입사 후 근무지 배정 등 특수 근무지를 작성해주세요"
                 {...register(`place.etc`, {
                   required: "* 근무지를 입력해주세요",
+                  maxLength: { value: 100, message: "최대 길이는 100자입니다." },
                   validate: (value) => !!value?.trim() || "빈 칸을 입력할 수 없습니다",
                 })}
               />
