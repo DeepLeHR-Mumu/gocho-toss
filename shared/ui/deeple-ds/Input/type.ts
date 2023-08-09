@@ -1,12 +1,11 @@
-import { ChangeEventHandler } from "react";
+import { InputHTMLAttributes, ReactNode } from "react";
 
-export interface InputProps {
+export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "prefix" | "suffix" | "disabled"> {
   label?: string;
-  id?: string;
-  placeholder?: string;
+  prefix?: ReactNode;
+  suffix?: ReactNode;
   state?: {
     state: "default" | "disabled" | "error" | "success";
     message?: string;
   };
-  onChange?: ChangeEventHandler<HTMLInputElement>;
 }

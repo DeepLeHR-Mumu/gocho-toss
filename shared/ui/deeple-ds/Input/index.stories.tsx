@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { FiAlertCircle } from "react-icons/fi";
 import Input from ".";
 
 const meta: Meta<typeof Input> = {
@@ -19,3 +20,5 @@ export const Disabled: Story = { args: { label: "label", state: { state: "disabl
 export const Error: Story = { args: { label: "label", state: { state: "error", message: "error" } } };
 
 export const Success: Story = { args: { label: "label", state: { state: "success", message: "success" } } };
+
+export const WithPrefixAndSuffix: Story = { args: { prefix: <FiAlertCircle />, suffix: <FiAlertCircle /> } };

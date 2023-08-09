@@ -15,32 +15,49 @@ export const cssObj = {
   `,
 
   input: css`
+    flex: 1;
     ${NEWTEXTS.TITLE7}
+
+    :focus {
+      outline: none;
+    }
+
+    :disabled {
+      cursor: not-allowed;
+    }
+
+    ::placeholder {
+      color: ${NEWCOLORS.GRAY300};
+    }
+  `,
+
+  inputWrapper: (disabled?: boolean) => css`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
     border-radius: 0.75rem;
     border: 1px solid ${NEWCOLORS.GRAY200};
     padding: 1rem;
 
-    &::placeholder {
-      color: ${NEWCOLORS.GRAY300};
-    }
-
-    &:focus {
-      outline: none;
+    &:focus-within {
       border-color: ${NEWCOLORS.BLUE200};
     }
 
-    &:disabled {
-      background-color: ${NEWCOLORS.GRAY200};
-      color: ${NEWCOLORS.GRAY300};
-      cursor: not-allowed;
-    }
+    ${disabled
+      ? css`
+          background-color: ${NEWCOLORS.GRAY200};
+          color: ${NEWCOLORS.GRAY300};
+          cursor: not-allowed;
+        `
+      : ""}
   `,
 
   // NOTE 공통 스타일로 빼도 될듯?
   error: css`
     border-color: ${NEWCOLORS.RED300};
 
-    &:focus {
+    &:focus-within {
       border-color: ${NEWCOLORS.RED300};
     }
   `,
@@ -55,7 +72,7 @@ export const cssObj = {
   success: css`
     border-color: ${NEWCOLORS.BLUE300};
 
-    &:focus {
+    &:focus-within {
       border-color: ${NEWCOLORS.BLUE300};
     }
   `,

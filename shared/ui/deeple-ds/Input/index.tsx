@@ -3,26 +3,23 @@ import { css } from "@emotion/react";
 import { InputProps } from "./type";
 import { cssObj } from "./style";
 
-const Input = ({ label, id, placeholder, state, onChange }: InputProps) => (
+const Input = ({ label, prefix, suffix, state, ...props }: InputProps) => (
   <div css={cssObj.wrapper}>
     {label && (
-      <label css={cssObj.label} htmlFor={id}>
+      <label css={cssObj.label} htmlFor={props.id}>
         {label}
       </label>
     )}
-    <div>
-      <input
-        type="text"
-        css={css`
-          ${cssObj.input}${state?.state === "error" ? cssObj.error : ""}${state?.state === "success"
-            ? cssObj.success
-            : ""}
-        `}
-        id={id}
-        placeholder={placeholder}
-        disabled={state?.state === "disabled"}
-        onChange={onChange}
-      />
+    <div
+      css={css`
+        ${cssObj.inputWrapper(state?.state === "disabled")}${state?.state === "error"
+          ? cssObj.error
+          : ""}${state?.state === "success" ? cssObj.success : ""}
+      `}
+    >
+      {prefix}
+      <input css={cssObj.input} disabled={state?.state === "disabled"} {...props} />
+      {suffix}
     </div>
     {state?.message && (
       <span
