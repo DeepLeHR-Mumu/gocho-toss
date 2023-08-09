@@ -6,4 +6,5 @@ export interface ChipProps {
   children?: ReactNode;
   color?: ChipColor;
   size?: "small";
+  optional?: "noBorder";
 }

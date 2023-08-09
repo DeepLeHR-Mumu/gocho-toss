@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
 import { MOBILE } from "shared-style/mediaQuery";
-// import { NEWCOLORS } from "shared-style/color";
+import { NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
   default: css`
@@ -22,6 +22,20 @@ export const cssObj = {
     ${MOBILE} {
       padding: 0.25rem 0.5rem;
       ${NEWTEXTS.TITLE2}
+    }
+  `,
+
+  noBorder: css`
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    color: ${NEWCOLORS.BLUEGRAY300};
+    padding: 0.5rem 1rem;
+    ${NEWTEXTS.TITLE7}
+
+    ${MOBILE} {
+      padding: 0.25rem 0.5rem;
+      ${NEWTEXTS.TITLE1}
     }
   `,
 };

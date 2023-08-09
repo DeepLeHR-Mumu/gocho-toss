@@ -45,3 +45,5 @@ export const GrayLine: Story = { args: { color: "grayLine" } };
 export const RedFill: Story = { args: { color: "redFill" } };
 
 export const Blue100: Story = { args: { color: "blue100" } };
+
+export const NoBorder: Story = { args: { children: "#중견기업", optional: "noBorder" } };
