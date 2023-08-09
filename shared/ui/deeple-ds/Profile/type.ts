@@ -1,7 +1,7 @@
 import { MouseEventHandler } from "react";
 
 export interface ProfileProps {
-  size?: 100 | 120;
+  size?: number;
   src: string;
   onClick?: MouseEventHandler<HTMLImageElement>;
 }

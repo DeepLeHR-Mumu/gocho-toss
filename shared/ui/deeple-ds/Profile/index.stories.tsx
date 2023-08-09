@@ -16,6 +16,8 @@ type Story = StoryObj<typeof Profile>;
 
 export const Default: Story = { args: { src: testSmallImage1 } };
 
+export const Size52: Story = { args: { src: testSmallImage1, size: 52 } };
+
 export const Size100: Story = { args: { src: testSmallImage1 } };
 
 export const Size120: Story = { args: { src: testLargeImage1, size: 120 } };

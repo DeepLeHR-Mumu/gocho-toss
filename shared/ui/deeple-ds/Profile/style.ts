@@ -5,6 +5,6 @@ export const cssObj = {
   profile: (clickable: boolean) => css`
     border-radius: 50%;
     border: 1px solid ${NEWCOLORS.GRAY100};
-    cursor: ${clickable ? "pointer" : "none"};
+    cursor: ${clickable ? "pointer" : "auto"};
   `,
 };
