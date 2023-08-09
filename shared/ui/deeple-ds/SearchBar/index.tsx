@@ -10,7 +10,7 @@ const SearchBar = ({ border, prefix, suffix }: SearchBarProps) => (
     `}
   >
     {prefix}
-    <input css={cssObj.input} />
+    <input type="search" css={cssObj.input} />
     {suffix}
   </div>
 );
