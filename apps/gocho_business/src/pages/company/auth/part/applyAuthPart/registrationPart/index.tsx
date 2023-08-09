@@ -18,9 +18,8 @@ export const RegistrationPart: FunctionComponent<RegistrationPartProps> = ({ com
   const [intro, setIntro] = useState("");
 
   const changeIntroHandler = (text: string) => {
-    if (intro.length < 30) {
-      setIntro(text);
-    }
+    const INTRO_MAX = 30;
+    setIntro(text.slice(0, INTRO_MAX));
   };
 
   useEffect(() => {

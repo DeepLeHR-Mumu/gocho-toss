@@ -34,15 +34,13 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
   const [nozoDesc, setNozoDesc] = useState("");
 
   const changePayDescHandler = (text: string) => {
-    if (payDesc.length < 120) {
-      setPayDesc(text);
-    }
+    const PAY_DESC = 120;
+    setPayDesc(text.slice(0, PAY_DESC));
   };
 
   const changeNozoDescHandler = (text: string) => {
-    if (nozoDesc.length < 50) {
-      setNozoDesc(text);
-    }
+    const NOZO_DESC_MAX = 50;
+    setNozoDesc(text.slice(0, NOZO_DESC_MAX));
   };
 
   useEffect(() => {
