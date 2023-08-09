@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { NEWCOLORS } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
@@ -10,12 +10,12 @@ export const cssObj = {
   `,
 
   label: css`
-    ${TEXTS.TITLE7}
+    ${NEWTEXTS.TITLE9}
     color: ${NEWCOLORS.BLUEGRAY400}
   `,
 
   input: css`
-    ${TEXTS.TITLE5}
+    ${NEWTEXTS.TITLE7}
     border-radius: 0.75rem;
     border: 1px solid ${NEWCOLORS.GRAY200};
     padding: 1rem;
@@ -48,7 +48,7 @@ export const cssObj = {
   // NOTE 공통 스타일로 빼도 될듯?
   errorMessage: css`
     color: ${NEWCOLORS.RED300};
-    ${TEXTS.TITLE1}
+    ${NEWTEXTS.TITLE1}
   `,
 
   // NOTE 공통 스타일로 빼도 될듯?
@@ -63,6 +63,6 @@ export const cssObj = {
   // NOTE 공통 스타일로 빼도 될듯?
   successMessage: css`
     color: ${NEWCOLORS.BLUE300};
-    ${TEXTS.TITLE1}
+    ${NEWTEXTS.TITLE1}
   `,
 };
