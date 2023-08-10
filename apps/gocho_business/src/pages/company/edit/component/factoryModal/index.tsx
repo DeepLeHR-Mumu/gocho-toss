@@ -21,7 +21,10 @@ export const FactoryModal: FunctionComponent<FactoryModalProps> = ({
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const { watch, register, handleSubmit, setValue, reset } = useForm<FactoryRegisterFormValues>({});
+  const { watch, register, handleSubmit, setValue, reset } = useForm<FactoryRegisterFormValues>({
+    mode: "onTouched",
+    reValidateMode: "onChange",
+  });
 
   useFocusTrap(modalRef);
 

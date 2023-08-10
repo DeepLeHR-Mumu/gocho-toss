@@ -19,7 +19,10 @@ export const FactoryEditModal: FunctionComponent = () => {
   const { contentObj, closeModal } = useModal();
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const { register, handleSubmit, setValue, reset } = useForm<FactoryEditFormValues>();
+  const { register, handleSubmit, setValue, reset } = useForm<FactoryEditFormValues>({
+    mode: "onTouched",
+    reValidateMode: "onChange",
+  });
 
   const { factory: factoryObj, companyForm } = contentObj as factoryObjDef;
   const { watch, setValue: setCompanyValue } = companyForm;

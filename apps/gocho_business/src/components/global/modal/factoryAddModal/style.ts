@@ -89,14 +89,12 @@ export const cssObj = {
   errorMessageRight: css`
     margin-left: 1rem;
     ${commonCssObj.errorMessage}
-    font-size: 0.875rem;
   `,
 
   errorMessageBottom: css`
     position: absolute;
     top: 3.5rem;
     ${commonCssObj.errorMessage}
-    font-size: 0.875rem;
   `,
 
   errorRadioButton: css`

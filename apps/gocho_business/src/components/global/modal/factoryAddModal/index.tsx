@@ -28,7 +28,7 @@ export const FactoryAddModal: FunctionComponent = () => {
     setValue,
     clearErrors,
     formState: { errors },
-  } = useForm<FactoryRegisterFormValues>();
+  } = useForm<FactoryRegisterFormValues>({ mode: "onTouched", reValidateMode: "onChange" });
 
   useFocusTrap(modalRef);
 
