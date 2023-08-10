@@ -61,8 +61,9 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
             <input
               css={commonCssObj.input(37.5, false)}
               defaultValue={watch("factory_name")}
-              {...register("factory_name", { maxLength: 50, required: true })}
-              placeholder="고초대졸 제1공장 (최대 50자)"
+              {...register("factory_name", { maxLength: 10, required: true })}
+              placeholder="고초대졸 제1공장 (최대 10자)"
+              maxLength={10}
             />
           </div>
           <div css={commonCssObj.container}>
@@ -70,8 +71,9 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
             <input
               css={commonCssObj.input(37.5, false)}
               defaultValue={watch("product")}
-              {...register("product", { maxLength: 50, required: true })}
-              placeholder="공장 주 생산품 (최대 50자)"
+              {...register("product", { maxLength: 30, required: true })}
+              placeholder="공장 주 생산품 (최대 30자)"
+              maxLength={30}
             />
           </div>
           <div css={commonCssObj.container}>
@@ -95,7 +97,7 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
                   required: true,
                   valueAsNumber: true,
                   onChange: (value: ChangeEvent<HTMLInputElement>) => {
-                    if (Number(value?.target?.value) > 100000) setValue("male_number", 99999);
+                    if (Number(value?.target?.value) > 99999) setValue("male_number", 99999);
                   },
                 })}
                 type="number"
@@ -112,7 +114,7 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
                   required: true,
                   valueAsNumber: true,
                   onChange: (value: ChangeEvent<HTMLInputElement>) => {
-                    if (Number(value?.target?.value) > 100000) setValue("female_number", 99999);
+                    if (Number(value?.target?.value) > 99999) setValue("female_number", 99999);
                   },
                 })}
                 type="number"
@@ -137,7 +139,7 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
               <input
                 defaultValue={watch("bus_etc") || ""}
                 {...register("bus_etc", {
-                  maxLength: 70,
+                  maxLength: 50,
                   validate: (value) => {
                     if (value) {
                       return value.trim().length !== 0;
@@ -147,7 +149,7 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
                 })}
                 css={commonCssObj.input(37.5, false)}
                 placeholder="보충 설명(선택)"
-                maxLength={70}
+                maxLength={50}
               />
             </div>
           </div>
@@ -173,7 +175,7 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
               <input
                 defaultValue={watch("dormitory_etc") || ""}
                 {...register("dormitory_etc", {
-                  maxLength: 70,
+                  maxLength: 50,
                   validate: (value) => {
                     if (value) {
                       return value.trim().length !== 0;
@@ -183,7 +185,7 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
                 })}
                 css={commonCssObj.input(37.5, false)}
                 placeholder="보충 설명(선택)"
-                maxLength={70}
+                maxLength={50}
               />
             </div>
           </div>

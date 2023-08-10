@@ -53,7 +53,19 @@ export const cssObj = {
     ${commonCssObj.input(width, isError)}
 
     &:disabled {
-      background-color: ${NEWCOLORS.GRAY100};
+      background-color: ${NEWCOLORS.WHITE};
     }
+  `,
+
+  errorWrapper: css`
+    position: relative;
+  `,
+
+  certFileError: css`
+    position: absolute;
+    top: 3.5rem;
+    left: 0;
+    ${commonCssObj.errorMessage}
+    font-size: 0.875rem;
   `,
 };

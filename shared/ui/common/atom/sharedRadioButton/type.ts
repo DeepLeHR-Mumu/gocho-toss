@@ -1,4 +1,5 @@
 import React from "react";
+import { SerializedStyles } from "@emotion/react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 export interface SharedRadioButtonProps {
@@ -8,4 +9,5 @@ export interface SharedRadioButtonProps {
   registerObj: UseFormRegisterReturn;
   children: React.ReactNode;
   onClick?: () => void;
+  additionalStyle?: SerializedStyles | string;
 }
