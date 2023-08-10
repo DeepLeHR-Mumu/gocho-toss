@@ -3,8 +3,10 @@ import { FunctionComponent } from "react";
 import { commonCssObj } from "@/styles";
 import { companyAuthDocsClickEvent } from "@/ga";
 
+import { FILE_SIZE_5MB } from "../contant";
 import useFileNameSyncWithForm from "../../useFileNameSyncWithForm";
 import { AuthInfoPartProps } from "./type";
+import { CERTIFICATION_FILE_KEY } from "./constant";
 import { cssObj } from "./style";
 
 export const InfoPart: FunctionComponent<AuthInfoPartProps> = ({ companyAuthForm, companyDetailData }) => {
@@ -13,8 +15,8 @@ export const InfoPart: FunctionComponent<AuthInfoPartProps> = ({ companyAuthForm
     formState: { errors },
   } = companyAuthForm;
 
-  const { name: certFileName } = useFileNameSyncWithForm(companyAuthForm, "certificateOfBusiness", {
-    maxSize: 5242880 * 2,
+  const { name: certFileName } = useFileNameSyncWithForm(companyAuthForm, CERTIFICATION_FILE_KEY, {
+    maxSize: FILE_SIZE_5MB * 2,
     allowedfileTypes: ["image/jpg", "image/jpeg", "application/pdf"],
   });
 
@@ -46,12 +48,12 @@ export const InfoPart: FunctionComponent<AuthInfoPartProps> = ({ companyAuthForm
           />
           {errors.certificateOfBusiness && <div css={cssObj.certFileError}>{errors.certificateOfBusiness.message}</div>}
         </div>
-        <label htmlFor="certificateOfBusiness" css={cssObj.fileAddButton}>
+        <label htmlFor={CERTIFICATION_FILE_KEY} css={cssObj.fileAddButton}>
           파일 첨부
           <input
             type="file"
-            id="certificateOfBusiness"
-            {...register("certificateOfBusiness", {
+            id={CERTIFICATION_FILE_KEY}
+            {...register(CERTIFICATION_FILE_KEY, {
               required: { value: true, message: "* 사업자 증명원 파일을 등록해 주세요." },
             })}
             onClick={() => {

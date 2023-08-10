@@ -5,9 +5,11 @@ import { commonCssObj } from "@/styles";
 import { companyAuthLogoClickEvent } from "@/ga";
 
 import { Tooltip } from "../../../component/tooltip";
+import { FILE_SIZE_5MB } from "../contant";
 import useFileNameSyncWithForm from "../../useFileNameSyncWithForm";
-import { cssObj } from "./style";
 import { RegistrationPartProps } from "./type";
+import { COMPANY_LOGO_KEY, BACKGROUND_IMAGE_KEY, INTRO_MAX_LENGTH } from "./constant";
+import { cssObj } from "./style";
 
 export const RegistrationPart: FunctionComponent<RegistrationPartProps> = ({ companyAuthForm }) => {
   const [logoTooltip, setLogoTooltip] = useState(false);
@@ -18,16 +20,13 @@ export const RegistrationPart: FunctionComponent<RegistrationPartProps> = ({ com
     formState: { errors },
   } = companyAuthForm;
 
-  const companyLogoKey = "companyLogo";
-  const backgroundImageKey = "backgroundImage";
-
-  const { name: logoImgName } = useFileNameSyncWithForm(companyAuthForm, companyLogoKey, {
-    maxSize: 5242880,
+  const { name: logoImgName } = useFileNameSyncWithForm(companyAuthForm, COMPANY_LOGO_KEY, {
+    maxSize: FILE_SIZE_5MB,
     allowedfileTypes: ["image/jpg", "image/jpeg", "image/png"],
   });
 
-  const { name: bgImgName } = useFileNameSyncWithForm(companyAuthForm, backgroundImageKey, {
-    maxSize: 5242880,
+  const { name: bgImgName } = useFileNameSyncWithForm(companyAuthForm, BACKGROUND_IMAGE_KEY, {
+    maxSize: FILE_SIZE_5MB,
     allowedfileTypes: ["image/jpg", "image/jpeg", "image/png"],
   });
 
@@ -39,7 +38,7 @@ export const RegistrationPart: FunctionComponent<RegistrationPartProps> = ({ com
         <div css={cssObj.errorWrapper}>
           <input
             type="text"
-            maxLength={30}
+            maxLength={INTRO_MAX_LENGTH}
             css={commonCssObj.input(47, !!errors.intro)}
             {...register("intro", { required: { value: true, message: "* 기업 한줄 소개를 입력해 주세요." } })}
           />
@@ -67,12 +66,12 @@ export const RegistrationPart: FunctionComponent<RegistrationPartProps> = ({ com
           />
           {errors.companyLogo && <p css={cssObj.errorMessageBottom}>{errors.companyLogo.message}</p>}
         </div>
-        <label htmlFor={companyLogoKey} css={cssObj.fileAddButton}>
+        <label htmlFor={COMPANY_LOGO_KEY} css={cssObj.fileAddButton}>
           파일 첨부
           <input
             type="file"
-            id={companyLogoKey}
-            {...register(companyLogoKey, { required: { value: true, message: "* 기업 로고 파일을 등록해 주세요." } })}
+            id={COMPANY_LOGO_KEY}
+            {...register(COMPANY_LOGO_KEY, { required: { value: true, message: "* 기업 로고 파일을 등록해 주세요." } })}
             onClick={() => {
               companyAuthLogoClickEvent();
             }}
@@ -97,9 +96,9 @@ export const RegistrationPart: FunctionComponent<RegistrationPartProps> = ({ com
           placeholder="파일형식: jpg, jpeg, png / 파일 용량: 5MB"
           css={cssObj.customInput(38, false)}
         />
-        <label htmlFor={backgroundImageKey} css={cssObj.fileAddButton}>
+        <label htmlFor={BACKGROUND_IMAGE_KEY} css={cssObj.fileAddButton}>
           파일 첨부
-          <input type="file" id={backgroundImageKey} {...register(backgroundImageKey)} />
+          <input type="file" id={BACKGROUND_IMAGE_KEY} {...register(BACKGROUND_IMAGE_KEY)} />
         </label>
       </div>
     </div>

@@ -31,7 +31,7 @@ export const ApplyAuthPart: FunctionComponent = () => {
   const { mutate: postManagerAuth } = useManagerAuth();
 
   const companyAuthForm = useForm<CompanyAuthFormValues>({
-    mode: "onBlur",
+    mode: "onSubmit",
   });
 
   const {
@@ -96,14 +96,17 @@ export const ApplyAuthPart: FunctionComponent = () => {
 
       postManagerAuth(requestObj, {
         onSuccess: () => {
+          alert(
+            "기업회원 정보가 성공적으로 제출되었습니다.\n 영업일 기준 3시간 이내 검수 결과가 메일과 알림으로 전송될 예정입니다."
+          );
+
           managerProfileRefetch();
           router.push(INTERNAL_URL.HOME);
-
-          // TODO 성공했을 시 메세지 추가
         },
         onError: () => {
-          // TODO 실패했을 시 메세지 추가
-          // setConfirmModal(false);
+          alert(`등록중 오류가 발생했습니다.\n cs@deeplehr.com로 문의해주세요.`);
+
+          setConfirmModal(false);
         },
       });
     }
