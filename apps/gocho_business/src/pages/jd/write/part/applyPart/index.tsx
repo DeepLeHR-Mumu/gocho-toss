@@ -126,8 +126,8 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                     <input
                       id={`processArr${item.id}`}
                       css={commonCssObj.input(11.5, Boolean(errors.process_arr))}
-                      placeholder={`${index + 1}차 (최대 20자)`}
-                      maxLength={20}
+                      placeholder={`${index + 1}차 (최대 10자)`}
+                      maxLength={10}
                       {...register(`process_arr.${index}.value`, {
                         onBlur: (blurEvent) => {
                           if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
@@ -140,7 +140,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                             "* 채용절차는 최소 1개 이상 기재해 주세요"
                           );
                         },
-                        maxLength: { value: 20, message: "최대 길이는 20자입니다." },
+                        maxLength: { value: 10, message: "최대 길이는 10자입니다." },
                       })}
                     />
                     {index !== 0 && (
@@ -391,15 +391,15 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                 <input
                   id={`etcArr${item.id}`}
                   css={commonCssObj.input(55.5, Boolean(errors.etc_arr))}
-                  placeholder="기타 사항이 있는 경우 기재해 주세요 (최대 50자)"
-                  maxLength={50}
+                  placeholder="기타 사항이 있는 경우 기재해 주세요 (최대 30자)"
+                  maxLength={30}
                   {...register(`etc_arr.${index}.value`, {
                     onBlur: (blurEvent) => {
                       if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                         setValue(`etc_arr.${index}.value`, "");
                       }
                     },
-                    maxLength: { value: 50, message: "최대 길이는 50자입니다." },
+                    maxLength: { value: 30, message: "최대 길이는 30자입니다." },
                   })}
                 />
                 {index !== 0 && (
