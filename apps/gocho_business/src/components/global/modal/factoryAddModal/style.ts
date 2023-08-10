@@ -3,6 +3,8 @@ import { css } from "@emotion/react";
 import { NEWCOLORS } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
+import { commonCssObj } from "@/styles";
+
 export const cssObj = {
   modalContainer: css`
     position: absolute;
@@ -75,5 +77,29 @@ export const cssObj = {
     align-items: center;
     justify-content: flex-end;
     gap: 0 1rem;
+  `,
+
+  errorWrapper: css`
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0 1rem;
+  `,
+
+  errorMessageRight: css`
+    margin-left: 1rem;
+    ${commonCssObj.errorMessage}
+    font-size: 0.875rem;
+  `,
+
+  errorMessageBottom: css`
+    position: absolute;
+    top: 3.5rem;
+    ${commonCssObj.errorMessage}
+    font-size: 0.875rem;
+  `,
+
+  errorRadioButton: css`
+    border-color: ${NEWCOLORS.RED300};
   `,
 };
