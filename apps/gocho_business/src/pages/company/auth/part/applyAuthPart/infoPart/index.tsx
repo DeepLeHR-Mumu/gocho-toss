@@ -8,7 +8,10 @@ import { AuthInfoPartProps } from "./type";
 import { cssObj } from "./style";
 
 export const InfoPart: FunctionComponent<AuthInfoPartProps> = ({ companyAuthForm, companyDetailData }) => {
-  const { register } = companyAuthForm;
+  const {
+    register,
+    formState: { errors },
+  } = companyAuthForm;
 
   const { name: certFileName } = useFileNameSyncWithForm(companyAuthForm, "certificateOfBusiness", {
     maxSize: 5242880 * 2,
@@ -22,30 +25,35 @@ export const InfoPart: FunctionComponent<AuthInfoPartProps> = ({ companyAuthForm
       <h3 css={cssObj.subContainerTitle}>인증 정보</h3>
       <div css={cssObj.subContainer}>
         <strong css={commonCssObj.optionalInputTitle(false)}>기업명</strong>
-        <input type="text" value={companyDetailData.name} disabled css={cssObj.customInput(7.5, false)} />
+        <input type="text" value={companyDetailData.name} disabled css={commonCssObj.input(7.5, false)} />
       </div>
       <div css={cssObj.subContainer}>
         <strong css={commonCssObj.optionalInputTitle(false)}>사업자번호</strong>
-        <input type="number" value={firstBusinessNumber} disabled css={cssObj.customInput(7.5, false)} />
+        <input type="number" value={firstBusinessNumber} disabled css={commonCssObj.input(7.5, false)} />
         <span css={cssObj.dash}>-</span>
-        <input type="number" value={secondBusinessNumber} disabled css={cssObj.customInput(7.5, false)} />
+        <input type="number" value={secondBusinessNumber} disabled css={commonCssObj.input(7.5, false)} />
         <span css={cssObj.dash}>-</span>
-        <input type="number" value={thirdBusinessNumber} disabled css={cssObj.customInput(7.5, false)} />
+        <input type="number" value={thirdBusinessNumber} disabled css={commonCssObj.input(7.5, false)} />
       </div>
       <div css={cssObj.subContainer}>
         <strong css={commonCssObj.inputTitle(false)}>사업자증명원</strong>
-        <input
-          disabled
-          value={certFileName}
-          placeholder="파일형식: jpg, jpeg, pdf / 파일 용량: 10MB"
-          css={commonCssObj.input(38, false)}
-        />
+        <div css={cssObj.errorWrapper}>
+          <input
+            disabled
+            value={certFileName}
+            placeholder="파일형식: jpg, jpeg, pdf / 파일 용량: 10MB"
+            css={cssObj.customInput(38, !!errors.certificateOfBusiness)}
+          />
+          {errors.certificateOfBusiness && <div css={cssObj.certFileError}>{errors.certificateOfBusiness.message}</div>}
+        </div>
         <label htmlFor="certificateOfBusiness" css={cssObj.fileAddButton}>
           파일 첨부
           <input
             type="file"
             id="certificateOfBusiness"
-            {...register("certificateOfBusiness", { required: true })}
+            {...register("certificateOfBusiness", {
+              required: { value: true, message: "* 사업자 증명원 파일을 등록해 주세요." },
+            })}
             onClick={() => {
               companyAuthDocsClickEvent();
             }}

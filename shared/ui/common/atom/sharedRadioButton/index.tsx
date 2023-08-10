@@ -1,4 +1,5 @@
 import { FunctionComponent, useState } from "react";
+import { css } from "@emotion/react";
 
 import { SharedRadioButtonProps } from "./type";
 import { cssObj } from "./style";
@@ -10,6 +11,7 @@ export const SharedRadioButton: FunctionComponent<SharedRadioButtonProps> = ({
   id,
   children,
   onClick,
+  additionalStyle,
 }) => {
   const [isFocus, setIsFocus] = useState(false);
 
@@ -30,7 +32,11 @@ export const SharedRadioButton: FunctionComponent<SharedRadioButtonProps> = ({
         }}
         onClick={onClick}
       />
-      <div css={cssObj.radioBox(isDisabled)} />
+      <div
+        css={css`
+          ${cssObj.radioBox(isDisabled)}${additionalStyle}
+        `}
+      />
       {children}
     </label>
   );

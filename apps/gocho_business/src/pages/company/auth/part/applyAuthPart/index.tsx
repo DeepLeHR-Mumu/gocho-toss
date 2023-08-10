@@ -48,7 +48,22 @@ export const ApplyAuthPart: FunctionComponent = () => {
     );
   }
 
-  const validHandler = (formData: CompanyAuthFormValues) => {
+  const validHandler = () => {
+    if (
+      (userInfoData.status.isFirst
+        ? getValues("certificateOfBusiness") === undefined || getValues("companyLogo") === undefined
+        : getValues("certificateOfBusiness") === undefined) ||
+      !isValid
+    ) {
+      return;
+    }
+
+    setConfirmModal(true);
+  };
+
+  const requestAuth = (formData: CompanyAuthFormValues) => {
+    companyAuthSubmitClickEvent();
+
     const { certificateOfBusiness, companyLogo, backgroundImage } = formData;
     const certificationFile = certificateOfBusiness.item(0);
 
@@ -83,6 +98,12 @@ export const ApplyAuthPart: FunctionComponent = () => {
         onSuccess: () => {
           managerProfileRefetch();
           router.push(INTERNAL_URL.HOME);
+
+          // TODO 성공했을 시 메세지 추가
+        },
+        onError: () => {
+          // TODO 실패했을 시 메세지 추가
+          // setConfirmModal(false);
         },
       });
     }
@@ -96,7 +117,7 @@ export const ApplyAuthPart: FunctionComponent = () => {
           {userInfoData.status.isFirst && (
             <>
               <RegistrationPart companyAuthForm={companyAuthForm} />
-              <BasicPart companyAuthForm={companyAuthForm} isOtherEdit={false} />
+              <BasicPart companyAuthForm={companyAuthForm} />
               <WelfarePart
                 companyAuthForm={companyAuthForm}
                 companyData={{ welfare: null, uploader: { isMine: true } }}
@@ -105,19 +126,7 @@ export const ApplyAuthPart: FunctionComponent = () => {
             </>
           )}
           <div css={cssObj.footerContainer}>
-            <button
-              type="button"
-              disabled={
-                (userInfoData.status.isFirst
-                  ? getValues("certificateOfBusiness") === undefined || getValues("companyLogo") === undefined
-                  : getValues("certificateOfBusiness")) === undefined || !isValid
-              }
-              css={cssObj.submitButton}
-              onClick={() => {
-                companyAuthSubmitClickEvent();
-                setConfirmModal(true);
-              }}
-            >
+            <button type="button" css={cssObj.submitButton} onClick={handleSubmitCompanyForm(validHandler)}>
               제출하기
             </button>
           </div>
@@ -134,7 +143,7 @@ export const ApplyAuthPart: FunctionComponent = () => {
             </ul>
           }
           cancel={{ name: "취소", onClick: () => setConfirmModal(false) }}
-          confirm={{ name: "확인", onClick: handleSubmitCompanyForm(validHandler) }}
+          confirm={{ name: "확인", onClick: handleSubmitCompanyForm(requestAuth) }}
         />
       )}
     </>

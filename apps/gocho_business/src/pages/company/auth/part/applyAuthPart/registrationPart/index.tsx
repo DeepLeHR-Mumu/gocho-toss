@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useState } from "react";
 import { FiHelpCircle } from "react-icons/fi";
 
 import { commonCssObj } from "@/styles";
@@ -13,18 +13,10 @@ export const RegistrationPart: FunctionComponent<RegistrationPartProps> = ({ com
   const [logoTooltip, setLogoTooltip] = useState(false);
   const [bgImageTooltip, setBgImageTooltip] = useState(false);
 
-  const { register, setValue } = companyAuthForm;
-
-  const [intro, setIntro] = useState("");
-
-  const changeIntroHandler = (text: string) => {
-    const INTRO_MAX = 30;
-    setIntro(text.slice(0, INTRO_MAX));
-  };
-
-  useEffect(() => {
-    setValue("intro", intro);
-  }, [intro, setValue]);
+  const {
+    register,
+    formState: { errors },
+  } = companyAuthForm;
 
   const companyLogoKey = "companyLogo";
   const backgroundImageKey = "backgroundImage";
@@ -44,12 +36,15 @@ export const RegistrationPart: FunctionComponent<RegistrationPartProps> = ({ com
       <h3 css={cssObj.subContainerTitle}>기업 등록</h3>
       <div css={cssObj.subContainer}>
         <strong css={commonCssObj.inputTitle(false)}>기업 한줄 소개</strong>
-        <input
-          type="text"
-          css={commonCssObj.input(47, false)}
-          value={intro}
-          onChange={(e) => changeIntroHandler(e.target.value)}
-        />
+        <div css={cssObj.errorWrapper}>
+          <input
+            type="text"
+            maxLength={30}
+            css={commonCssObj.input(47, !!errors.intro)}
+            {...register("intro", { required: { value: true, message: "* 기업 한줄 소개를 입력해 주세요." } })}
+          />
+          {errors.intro && <p css={cssObj.errorMessageBottom}>{errors.intro.message}</p>}
+        </div>
       </div>
       <div css={cssObj.subContainer}>
         <strong css={commonCssObj.inputTitle(false)}>
@@ -63,18 +58,21 @@ export const RegistrationPart: FunctionComponent<RegistrationPartProps> = ({ com
             {logoTooltip && <Tooltip>채용 공고와 기업 페이지 내 기업 프로필 사진으로 등록될 이미지 입니다.</Tooltip>}
           </div>
         </strong>
-        <input
-          disabled
-          value={logoImgName}
-          placeholder="파일형식: jpg, jpeg, png / 파일 용량: 5MB"
-          css={commonCssObj.input(38, false)}
-        />
+        <div css={cssObj.errorWrapper}>
+          <input
+            disabled
+            value={logoImgName}
+            placeholder="파일형식: jpg, jpeg, png / 파일 용량: 5MB"
+            css={cssObj.customInput(38, !!errors.companyLogo)}
+          />
+          {errors.companyLogo && <p css={cssObj.errorMessageBottom}>{errors.companyLogo.message}</p>}
+        </div>
         <label htmlFor={companyLogoKey} css={cssObj.fileAddButton}>
           파일 첨부
           <input
             type="file"
             id={companyLogoKey}
-            {...register(companyLogoKey, { required: true })}
+            {...register(companyLogoKey, { required: { value: true, message: "* 기업 로고 파일을 등록해 주세요." } })}
             onClick={() => {
               companyAuthLogoClickEvent();
             }}
@@ -97,7 +95,7 @@ export const RegistrationPart: FunctionComponent<RegistrationPartProps> = ({ com
           disabled
           value={bgImgName}
           placeholder="파일형식: jpg, jpeg, png / 파일 용량: 5MB"
-          css={commonCssObj.input(38, false)}
+          css={cssObj.customInput(38, false)}
         />
         <label htmlFor={backgroundImageKey} css={cssObj.fileAddButton}>
           파일 첨부
