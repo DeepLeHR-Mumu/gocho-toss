@@ -6,6 +6,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { NewSharedButton } from "shared-ui/common/newSharedButton";
 import { CheckBox } from "shared-ui/common/atom/checkbox";
+import { ErrorResponseDef } from "shared-type/api/errorResponseType";
 
 import { loginSuccessEvent, registerCompleteClickEvent, registerPhoneValidationClickEvent } from "@/ga";
 import { getPass, getPassCheck, useManagerRegister, useDoLogin } from "@/apis";
@@ -25,6 +26,7 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
 
   const [flag, setFlag] = useState(false);
   const [passState, setPassState] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<null | string>(null);
 
   const tokenVersionId = useRef<string | null>(null);
 
@@ -105,8 +107,9 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
         sessionStorage.removeItem("specObj");
         tokenVersionId.current = null;
       },
-      onError: () => {
-        // TODO 에러처리 필요하다면 이곳에
+      onError: (error) => {
+        const errorResponse = error.response?.data as ErrorResponseDef;
+        setErrorMessage(errorResponse.error_message);
       },
     });
   };
@@ -235,6 +238,7 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
             개인정보 수집 및 이용 동의
           </button>
         </label>
+        <p css={cssObj.errorMessage}>{errorMessage && errorMessage}</p>
       </div>
       <NewSharedButton
         buttonType={

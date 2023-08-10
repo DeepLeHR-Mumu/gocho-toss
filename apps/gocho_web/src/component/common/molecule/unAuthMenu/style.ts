@@ -5,6 +5,7 @@ import { PC_HOVER } from "shared-style/mediaQuery";
 
 export const wrapper = css`
   padding: 0.375rem 1.5rem;
+  height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;

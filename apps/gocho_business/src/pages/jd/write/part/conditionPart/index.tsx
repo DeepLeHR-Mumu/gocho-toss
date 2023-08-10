@@ -123,6 +123,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jdForm, p
                         }
                         setFieldErrorIfEmpty(watch, jdForm, "pay_arr", "* 급여 정보를 입력해 주세요");
                       },
+                      maxLength: { value: 30, message: "최대 길이는 30자입니다." },
                     })}
                   />
                   {index !== 0 && !isPayArrDisabled && (

@@ -18,6 +18,7 @@ export const headerContainer = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 0 2rem;
 `;
 
 export const logoCSS = css`
@@ -37,7 +38,6 @@ export const logoLink = css`
 `;
 
 export const navWrapper = css`
-  width: calc(100% - 14rem);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -107,12 +107,12 @@ export const unifiedSearchWrapper = css`
 `;
 
 export const unifiedSearch = css`
-  width: 20rem;
+  width: 19rem;
   height: 2.25rem;
   font-weight: 400;
   font-size: 0.875rem;
   background-color: ${COLORS.GRAY100};
-  padding: 0.25rem 2rem;
+  padding: 0.25rem 1.5rem;
   border-radius: 1.5rem;
   border: 2px solid ${COLORS.BLUE_SECOND40};
   box-shadow: 0 2px 8px 0 #b4b4b440;
@@ -147,4 +147,24 @@ export const newBox = css`
   height: 1rem;
   color: ${COLORS.GRAY100};
   background-color: ${COLORS.ERROR_RED30};
+`;
+
+export const businessService = css`
+  cursor: pointer;
+  height: 2rem;
+  padding: 0.375rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  word-break: keep-all;
+  border: 1px solid ${COLORS.BLUE_FIRST40};
+  color: white;
+  background-color: ${COLORS.BLUE_FIRST40};
+  border-radius: 2rem;
+  margin-left: 0.5rem;
+
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
 `;
