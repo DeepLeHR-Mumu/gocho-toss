@@ -69,7 +69,7 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
             <strong css={commonCssObj.inputTitle(false)}>공장 명칭</strong>
             <div css={cssObj.errorWrapper}>
               <input
-                css={commonCssObj.input(37.5, false)}
+                css={commonCssObj.input(37.5, !!errors.factory_name)}
                 defaultValue={watch("factory_name")}
                 {...register("factory_name", {
                   maxLength: 10,
@@ -85,7 +85,7 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
             <strong css={commonCssObj.inputTitle(false)}>생산품</strong>
             <div css={cssObj.errorWrapper}>
               <input
-                css={commonCssObj.input(37.5, false)}
+                css={commonCssObj.input(37.5, !!errors.product)}
                 defaultValue={watch("product")}
                 {...register("product", {
                   maxLength: 30,
@@ -101,7 +101,7 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
             <strong css={commonCssObj.inputTitle(false)}>공장 주소</strong>
             <div css={cssObj.errorWrapper}>
               <input
-                css={commonCssObj.input(30.5, false)}
+                css={commonCssObj.input(30.5, !!errors.address)}
                 disabled
                 defaultValue={watch("address")}
                 {...register("address", { required: { value: true, message: "* 공장 주소를 입력해 주세요." } })}
@@ -127,7 +127,7 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
                 type="number"
                 min="0"
                 placeholder="남성"
-                css={commonCssObj.input(5.5, false)}
+                css={commonCssObj.input(5.5, !!errors.male_number)}
               />
               <p>명</p>
             </div>
@@ -144,7 +144,7 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
                 type="number"
                 min="0"
                 placeholder="여성"
-                css={commonCssObj.input(5.5, false)}
+                css={commonCssObj.input(5.5, !!errors.female_number)}
               />
               <p>명</p>
             </div>
@@ -162,6 +162,7 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
                   registerObj={register("bus_bool", {
                     required: { value: true, message: "* 통근 버스 유무를 입력해 주세요." },
                   })}
+                  additionalStyle={errors.bus_bool ? cssObj.errorRadioButton : ""}
                 >
                   <p css={cssObj.radioLabel}>있음</p>
                 </SharedRadioButton>
@@ -171,6 +172,7 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
                   registerObj={register("bus_bool", {
                     required: { value: true, message: "* 통근 버스 유무를 입력해 주세요." },
                   })}
+                  additionalStyle={errors.bus_bool ? cssObj.errorRadioButton : ""}
                 >
                   <p css={cssObj.radioLabel}>없음</p>
                 </SharedRadioButton>
@@ -203,6 +205,7 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
                   registerObj={register("dormitory_bool", {
                     required: { value: true, message: "* 기숙사 유무를 입력해 주세요." },
                   })}
+                  additionalStyle={errors.dormitory_bool ? cssObj.errorRadioButton : ""}
                 >
                   <p css={cssObj.radioLabel}>있음</p>
                 </SharedRadioButton>
@@ -212,6 +215,7 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
                   registerObj={register("dormitory_bool", {
                     required: { value: true, message: "* 기숙사 유무를 입력해 주세요." },
                   })}
+                  additionalStyle={errors.dormitory_bool ? cssObj.errorRadioButton : ""}
                 >
                   <p css={cssObj.radioLabel}>없음</p>
                 </SharedRadioButton>
