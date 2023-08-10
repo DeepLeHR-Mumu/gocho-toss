@@ -26,7 +26,8 @@ export const FactoryModal: FunctionComponent<AuthFactoryAddModalProps> = ({ defa
     clearErrors,
     formState: { errors },
   } = useForm<FactoryRegisterFormValues>({
-    mode: "onSubmit",
+    mode: "onTouched",
+    reValidateMode: "onChange",
     defaultValues: defaultFactory !== null ? { ...defaultFactory } : undefined,
   });
 

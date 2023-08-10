@@ -31,7 +31,8 @@ export const ApplyAuthPart: FunctionComponent = () => {
   const { mutate: postManagerAuth } = useManagerAuth();
 
   const companyAuthForm = useForm<CompanyAuthFormValues>({
-    mode: "onSubmit",
+    mode: "onTouched",
+    reValidateMode: "onChange",
   });
 
   const {
