@@ -1,4 +1,4 @@
-import { FunctionComponent, useState, useEffect } from "react";
+import { FunctionComponent, useState } from "react";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
@@ -19,7 +19,7 @@ declare global {
   }
 }
 
-export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthForm, isOtherEdit }) => {
+export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthForm }) => {
   const [isIndustryOpen, setIsIndustryOpen] = useState<boolean>(false);
   const [isSizeOpen, setIsSizeOpen] = useState<boolean>(false);
 
@@ -28,30 +28,8 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
     setValue,
     watch,
     formState: { errors },
+    clearErrors,
   } = companyAuthForm;
-
-  const [payDesc, setPayDesc] = useState("");
-  const [nozoDesc, setNozoDesc] = useState("");
-
-  const changePayDescHandler = (text: string) => {
-    if (payDesc.length < 120) {
-      setPayDesc(text);
-    }
-  };
-
-  const changeNozoDescHandler = (text: string) => {
-    if (nozoDesc.length < 50) {
-      setNozoDesc(text);
-    }
-  };
-
-  useEffect(() => {
-    setValue("pay_desc", payDesc);
-  }, [payDesc, setValue]);
-
-  useEffect(() => {
-    setValue("nozo.desc", nozoDesc);
-  }, [nozoDesc, setValue]);
 
   const openPostCodePopup = useDaumPostcodePopup();
 
@@ -65,6 +43,7 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
     openPostCodePopup({
       onComplete: (addressObj: Address) => {
         setValue("location.address", addressObj.address, { shouldDirty: true });
+        clearErrors("location.address");
         window.kakao.maps.load(() => {
           const geocoder = new window.kakao.maps.services.Geocoder();
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -87,13 +66,14 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
         <input
           css={cssObj.hiddenInput}
           {...register("industry", {
-            required: "* asdf",
+            required: { value: true, message: "* 업종을 선택해 주세요." },
           })}
         />
         <strong css={commonCssObj.inputTitle(false)}>업종</strong>
         <div css={cssObj.inputWrapper}>
           <button
-            css={commonCssObj.select(17, false)}
+            // eslint-disable-next-line no-unneeded-ternary
+            css={commonCssObj.select(17, errors.industry ? true : false)}
             type="button"
             onClick={() => {
               setIsIndustryOpen((prev) => !prev);
@@ -102,6 +82,7 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
             {watch("industry")}
             {isIndustryOpen ? <FiChevronUp /> : <FiChevronDown />}
           </button>
+          {errors.industry && <p css={cssObj.errorMessageRight}>{errors.industry.message}</p>}
           <div css={commonCssObj.optionList(isIndustryOpen, 26)}>
             {INDUSTRY_ARR.map((industry) => (
               <button
@@ -112,6 +93,7 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
                 onMouseDown={() => {
                   setValue(`industry`, industry);
                   setIsIndustryOpen((prev) => !prev);
+                  clearErrors("industry");
                 }}
               >
                 {industry}
@@ -124,13 +106,13 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
         <input
           css={cssObj.hiddenInput}
           {...register("size", {
-            required: "* asdf",
+            required: { value: true, message: "* 기업 규모를 선택해 주세요." },
           })}
         />
         <strong css={commonCssObj.inputTitle(false)}>기업 규모</strong>
         <div css={cssObj.inputWrapper}>
           <button
-            css={commonCssObj.select(17, false)}
+            css={commonCssObj.select(17, !!errors.size)}
             type="button"
             onClick={() => {
               setIsSizeOpen((prev) => !prev);
@@ -139,6 +121,7 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
             {watch("size")}
             {isSizeOpen ? <FiChevronUp /> : <FiChevronDown />}
           </button>
+          {errors.size && <p css={cssObj.errorMessageRight}>{errors.size.message}</p>}
           <div css={commonCssObj.optionList(isSizeOpen, 26)}>
             {SIZE_ARR.map((size) => (
               <button
@@ -149,6 +132,7 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
                 onMouseDown={() => {
                   setValue(`size`, size);
                   setIsSizeOpen((prev) => !prev);
+                  clearErrors("size");
                 }}
               >
                 {size}
@@ -159,25 +143,29 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
       </div>
       <div css={commonCssObj.container}>
         <strong css={commonCssObj.inputTitle(false)}>설립일</strong>
-        <input
-          css={commonCssObj.input(12.5, false)}
-          type="date"
-          // onFocus={() => {}}
-          {...register("found_date", {
-            required: "* 공고 시작 날짜를 선택해 주세요",
-          })}
-        />
+        <div css={cssObj.inputWrapper}>
+          <input
+            css={commonCssObj.input(12.5, !!errors.found_date)}
+            type="date"
+            {...register("found_date", {
+              required: { value: true, message: "* 공고 시작 날짜를 선택해 주세요" },
+            })}
+          />
+          {errors.found_date && <p css={cssObj.errorMessageRight}>{errors.found_date.message}</p>}
+        </div>
       </div>
       <div css={commonCssObj.container}>
         <strong css={commonCssObj.inputTitle(false)}>주소</strong>
         <label htmlFor="address" css={cssObj.addressWrapper}>
-          <input
-            type="button"
-            disabled
-            {...register("location.address", { required: true })}
-            placeholder="좌측 버튼을 눌러 기업 주소를 입력해주세요"
-            css={commonCssObj.input(38, false)}
-          />
+          <div css={cssObj.inputWrapper}>
+            <input
+              disabled
+              placeholder="사업자등록증 상의 주소를 입력해 주세요."
+              css={cssObj.customInput(38, !!errors.location?.address)}
+              {...register("location.address", { required: { value: true, message: "* 주소를 입력해 주세요." } })}
+            />
+            {errors.location?.address && <p css={cssObj.errorMessageBottom}>{errors.location.address.message}</p>}
+          </div>
           <button type="button" onClick={() => onClickAddress()} css={cssObj.addAddressButton}>
             주소찾기
           </button>
@@ -188,18 +176,18 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
         <div css={cssObj.inputWrapper}>
           <input
             type="number"
-            css={commonCssObj.input(7.5, isOtherEdit)}
+            css={commonCssObj.input(7.5, !!errors.employee_number)}
             onWheel={(event) => {
               event.currentTarget.blur();
             }}
             {...register("employee_number", {
-              required: true,
-              min: 1,
+              required: { value: true, message: "* 사원 수를 입력해 주세요." },
+              min: { value: 1, message: "* 사원 수는 1명 이상 입력해 주세요." },
               pattern: NUMBER_REGEXP,
-              disabled: isOtherEdit,
             })}
           />
           <p>명</p>
+          {errors.employee_number && <p css={cssObj.errorMessageRight}>{errors.employee_number.message}</p>}
         </div>
       </div>
       <div css={commonCssObj.container}>
@@ -207,50 +195,47 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
         <div css={cssObj.inputWrapper}>
           <input
             type="number"
-            css={commonCssObj.input(7.5, isOtherEdit)}
+            css={commonCssObj.input(7.5, !!errors.pay_start)}
             {...register("pay_start", {
-              required: true,
-              min: { value: 1000, message: "평균 초봉은 1000만원 이상으로 입력해주세요" },
+              required: { value: true, message: "* 평균 초봉을 입력해 주세요." },
+              min: { value: 1000, message: "* 평균 초봉은 1000만원 이상으로 입력해주세요" },
               pattern: {
                 value: NUMBER_REGEXP,
                 message: ONLY_INT_ERROR_TEXT,
               },
-              disabled: isOtherEdit,
             })}
             placeholder="숫자만 입력해주세요"
           />
           <p>만원</p>
         </div>
-        <p css={cssObj.errorMessageMargin}>{errors.pay_start?.message}</p>
+        {errors.pay_start && <p css={cssObj.errorMessageRight}>{errors.pay_start.message}</p>}
       </div>
       <div css={commonCssObj.container}>
         <strong css={commonCssObj.inputTitle(false)}>평균 연봉</strong>
         <div css={cssObj.inputWrapper}>
           <input
             type="number"
-            css={commonCssObj.input(7.5, isOtherEdit)}
+            css={commonCssObj.input(7.5, !!errors.pay_avg)}
             {...register("pay_avg", {
-              required: true,
-              min: { value: 1000, message: "평균 연봉은 1000만원 이상으로 입력해주세요" },
+              required: { value: true, message: "* 평균 연봉을 입력해 주세요." },
+              min: { value: 1000, message: "* 평균 연봉은 1000만원 이상으로 입력해주세요" },
               pattern: NUMBER_REGEXP,
-              disabled: isOtherEdit,
             })}
             placeholder="숫자만 입력해주세요"
           />
           <p>만원</p>
         </div>
-        <p css={cssObj.errorMessageMargin}>{errors.pay_avg?.message}</p>
+        {errors.pay_avg && <p css={cssObj.errorMessageRight}>{errors.pay_avg.message}</p>}
       </div>
       <div css={commonCssObj.container}>
         <strong css={commonCssObj.optionalInputTitle(false)}>기타 연봉 정보</strong>
         <input
           type="text"
-          value={payDesc}
-          onChange={(e) => changePayDescHandler(e.target.value)}
+          maxLength={120}
           placeholder="상여금, 성과급 등의 정보를 적어주세요"
-          css={commonCssObj.input(47, isOtherEdit)}
+          css={commonCssObj.input(47, false)}
+          {...register("pay_desc")}
         />
-        <p css={commonCssObj.errorMessage}>{errors.pay_desc?.message}</p>
       </div>
       <div css={commonCssObj.longContainer}>
         <div css={cssObj.titleWrapper}>
@@ -259,32 +244,38 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
         <div>
           <div css={commonCssObj.labelContainer}>
             <SharedRadioButton
-              registerObj={register("nozo.exists", { required: true })}
-              isDisabled={isOtherEdit}
+              registerObj={register("nozo.exists", {
+                required: { value: true, message: "* 노조 유무를 선택해 주세요." },
+              })}
+              isDisabled={false}
               value="true"
               id="nozoTrue"
               onClick={() => companyAuthUnionClickEvent()}
+              additionalStyle={errors.nozo?.exists ? cssObj.errorRadioButton : ""}
             >
               <p css={cssObj.radioLabel}>있음</p>
             </SharedRadioButton>
             <SharedRadioButton
-              registerObj={register("nozo.exists", { disabled: isOtherEdit, required: true })}
-              isDisabled={isOtherEdit}
+              registerObj={register("nozo.exists", {
+                required: { value: true, message: "* 노조 유무를 선택해 주세요." },
+              })}
+              isDisabled={false}
               value="false"
               id="nozoFalse"
               onClick={() => companyAuthUnionClickEvent()}
+              additionalStyle={errors.nozo?.exists ? cssObj.errorRadioButton : ""}
             >
               <p css={cssObj.radioLabel}>없음</p>
             </SharedRadioButton>
+            {errors.nozo?.exists && <p css={cssObj.errorMessageRight}>{errors.nozo.exists.message}</p>}
           </div>
           <input
             type="text"
-            value={nozoDesc}
-            onChange={(e) => changeNozoDescHandler(e.target.value)}
+            maxLength={50}
             placeholder="보충설명(선택)"
-            css={commonCssObj.input(47, isOtherEdit)}
+            css={commonCssObj.input(47, false)}
+            {...register("nozo.desc")}
           />
-          <p css={commonCssObj.errorMessage}>{errors.nozo?.desc?.message}</p>
         </div>
       </div>
     </section>

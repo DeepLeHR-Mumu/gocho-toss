@@ -31,7 +31,8 @@ export const ApplyAuthPart: FunctionComponent = () => {
   const { mutate: postManagerAuth } = useManagerAuth();
 
   const companyAuthForm = useForm<CompanyAuthFormValues>({
-    mode: "onBlur",
+    mode: "onTouched",
+    reValidateMode: "onChange",
   });
 
   const {
@@ -48,7 +49,22 @@ export const ApplyAuthPart: FunctionComponent = () => {
     );
   }
 
-  const validHandler = (formData: CompanyAuthFormValues) => {
+  const validHandler = () => {
+    if (
+      (userInfoData.status.isFirst
+        ? getValues("certificateOfBusiness") === undefined || getValues("companyLogo") === undefined
+        : getValues("certificateOfBusiness") === undefined) ||
+      !isValid
+    ) {
+      return;
+    }
+
+    setConfirmModal(true);
+  };
+
+  const requestAuth = (formData: CompanyAuthFormValues) => {
+    companyAuthSubmitClickEvent();
+
     const { certificateOfBusiness, companyLogo, backgroundImage } = formData;
     const certificationFile = certificateOfBusiness.item(0);
 
@@ -81,8 +97,17 @@ export const ApplyAuthPart: FunctionComponent = () => {
 
       postManagerAuth(requestObj, {
         onSuccess: () => {
+          alert(
+            "기업회원 정보가 성공적으로 제출되었습니다.\n 영업일 기준 3시간 이내 검수 결과가 메일과 알림으로 전송될 예정입니다."
+          );
+
           managerProfileRefetch();
           router.push(INTERNAL_URL.HOME);
+        },
+        onError: () => {
+          alert(`등록중 오류가 발생했습니다.\n cs@deeplehr.com로 문의해주세요.`);
+
+          setConfirmModal(false);
         },
       });
     }
@@ -96,7 +121,7 @@ export const ApplyAuthPart: FunctionComponent = () => {
           {userInfoData.status.isFirst && (
             <>
               <RegistrationPart companyAuthForm={companyAuthForm} />
-              <BasicPart companyAuthForm={companyAuthForm} isOtherEdit={false} />
+              <BasicPart companyAuthForm={companyAuthForm} />
               <WelfarePart
                 companyAuthForm={companyAuthForm}
                 companyData={{ welfare: null, uploader: { isMine: true } }}
@@ -105,19 +130,7 @@ export const ApplyAuthPart: FunctionComponent = () => {
             </>
           )}
           <div css={cssObj.footerContainer}>
-            <button
-              type="button"
-              disabled={
-                (userInfoData.status.isFirst
-                  ? getValues("certificateOfBusiness") === undefined || getValues("companyLogo") === undefined
-                  : getValues("certificateOfBusiness")) === undefined || !isValid
-              }
-              css={cssObj.submitButton}
-              onClick={() => {
-                companyAuthSubmitClickEvent();
-                setConfirmModal(true);
-              }}
-            >
+            <button type="button" css={cssObj.submitButton} onClick={handleSubmitCompanyForm(validHandler)}>
               제출하기
             </button>
           </div>
@@ -134,7 +147,7 @@ export const ApplyAuthPart: FunctionComponent = () => {
             </ul>
           }
           cancel={{ name: "취소", onClick: () => setConfirmModal(false) }}
-          confirm={{ name: "확인", onClick: handleSubmitCompanyForm(validHandler) }}
+          confirm={{ name: "확인", onClick: handleSubmitCompanyForm(requestAuth) }}
         />
       )}
     </>

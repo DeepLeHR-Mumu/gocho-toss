@@ -85,14 +85,15 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jdForm, req
                 <input
                   id={`requiredEtcArr${item.id}`}
                   css={commonCssObj.input(55.5, Boolean(errors.required_etc_arr))}
-                  placeholder="예) 군필자, 전공 무관, 운전 가능자 등 (최대 50자)"
-                  maxLength={50}
+                  placeholder="예) 군필자, 전공 무관, 운전 가능자 등 (최대 30자)"
+                  maxLength={30}
                   {...register(`required_etc_arr.${index}.value`, {
                     onBlur: (blurEvent) => {
                       if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                         setValue(`required_etc_arr.${index}.value`, "");
                       }
                     },
+                    maxLength: { value: 30, message: "최대 길이는 30자입니다." },
                   })}
                 />
                 {index !== 0 && (
@@ -128,14 +129,15 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jdForm, req
                 <input
                   id={`preferredEtcArr${item.id}`}
                   css={commonCssObj.input(55.5, Boolean(errors.preferred_etc_arr))}
-                  placeholder="예) 인근거주자, 차량소지자 (최대 50자)"
-                  maxLength={50}
+                  placeholder="예) 인근거주자, 차량소지자 (최대 20자)"
+                  maxLength={20}
                   {...register(`preferred_etc_arr.${index}.value`, {
                     onBlur: (blurEvent) => {
                       if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
                         setValue(`preferred_etc_arr.${index}.value`, "");
                       }
                     },
+                    maxLength: { value: 20, message: "최대 길이는 20자입니다." },
                   })}
                 />
                 {index !== 0 && (

@@ -196,6 +196,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
                         }
                         setFieldErrorIfEmpty(watch, jdForm, "task_detail_arr", "* 세부 직무 내용을 입력해 주세요");
                       },
+                      maxLength: { value: 50, message: "최대 길이는 50자입니다." },
                     })}
                   />
                   {index !== 0 && (

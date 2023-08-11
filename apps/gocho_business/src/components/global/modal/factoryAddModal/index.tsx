@@ -22,7 +22,13 @@ export const FactoryAddModal: FunctionComponent = () => {
   const isLoading = useRef(false);
   const { closeModal } = useModal();
 
-  const { register, handleSubmit, setValue } = useForm<FactoryRegisterFormValues>();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    clearErrors,
+    formState: { errors },
+  } = useForm<FactoryRegisterFormValues>({ mode: "onTouched", reValidateMode: "onChange" });
 
   useFocusTrap(modalRef);
 
@@ -33,6 +39,7 @@ export const FactoryAddModal: FunctionComponent = () => {
     openPostCodePopup({
       onComplete: (addressObj: Address) => {
         setValue("address", addressObj.address, { shouldDirty: true });
+        clearErrors("address");
       },
     });
   };
@@ -76,23 +83,44 @@ export const FactoryAddModal: FunctionComponent = () => {
         <form onSubmit={handleSubmit(addFactoryHandler)}>
           <div css={commonCssObj.container}>
             <strong css={commonCssObj.inputTitle(false)}>공장 명칭</strong>
-            <input
-              css={commonCssObj.input(37.5, false)}
-              {...register("factory_name", { maxLength: 50, required: true })}
-              placeholder="고초대졸 제1공장 (최대 50자)"
-            />
+            <div css={cssObj.errorWrapper}>
+              <input
+                css={commonCssObj.input(37.5, !!errors.factory_name)}
+                maxLength={10}
+                {...register("factory_name", {
+                  maxLength: 10,
+                  required: { value: true, message: "* 공장 명칭을 입력해 주세요." },
+                })}
+                placeholder="고초대졸 제1공장 (최대 10자)"
+              />
+              {errors.factory_name && <p css={cssObj.errorMessageBottom}>{errors.factory_name.message}</p>}
+            </div>
           </div>
           <div css={commonCssObj.container}>
             <strong css={commonCssObj.inputTitle(false)}>생산품</strong>
-            <input
-              css={commonCssObj.input(37.5, false)}
-              {...register("product", { maxLength: 50, required: true })}
-              placeholder="공장 주 생산품 (최대 50자)"
-            />
+            <div css={cssObj.errorWrapper}>
+              <input
+                css={commonCssObj.input(37.5, !!errors.product)}
+                maxLength={30}
+                {...register("product", {
+                  maxLength: 30,
+                  required: { value: true, message: "* 생산품 항목을 입력해 주세요." },
+                })}
+                placeholder="공장 주 생산품 (최대 30자)"
+              />
+              {errors.product && <p css={cssObj.errorMessageBottom}>{errors.product.message}</p>}
+            </div>
           </div>
           <div css={commonCssObj.container}>
             <strong css={commonCssObj.inputTitle(false)}>공장 주소</strong>
-            <input css={commonCssObj.input(30.5, false)} disabled {...register("address", { required: true })} />
+            <div css={cssObj.errorWrapper}>
+              <input
+                css={commonCssObj.input(30.5, !!errors.address)}
+                disabled
+                {...register("address", { required: { value: true, message: "* 공장 주소를 입력해 주세요." } })}
+              />
+              {errors.address && <p css={cssObj.errorMessageBottom}>{errors.address.message}</p>}
+            </div>
             <button css={cssObj.addAddressButton} type="button" onClick={onClickAddress}>
               주소찾기
             </button>
@@ -111,7 +139,7 @@ export const FactoryAddModal: FunctionComponent = () => {
                 type="number"
                 min="0"
                 placeholder="남성"
-                css={commonCssObj.input(5.5, false)}
+                css={commonCssObj.input(5.5, !!errors.male_number)}
               />
               <p>명</p>
             </div>
@@ -127,25 +155,46 @@ export const FactoryAddModal: FunctionComponent = () => {
                 type="number"
                 min="0"
                 placeholder="여성"
-                css={commonCssObj.input(5.5, false)}
+                css={commonCssObj.input(5.5, !!errors.female_number)}
               />
               <p>명</p>
+              {(!!errors.female_number || !!errors.male_number) && (
+                <p css={cssObj.errorMessageRight}>* 임직원 수를 입력해 주세요.</p>
+              )}
             </div>
           </div>
           <div css={commonCssObj.longContainer}>
             <strong css={commonCssObj.inputTitle(false)}>통근버스</strong>
             <div>
               <div css={cssObj.labelContainer}>
-                <SharedRadioButton id="busTrue" value="true" registerObj={register("bus_bool", { required: true })}>
+                <SharedRadioButton
+                  id="busTrue"
+                  value="true"
+                  registerObj={register("bus_bool", {
+                    required: { value: true, message: "* 통근 버스 유무를 입력해 주세요." },
+                  })}
+                  additionalStyle={errors.bus_bool ? cssObj.errorRadioButton : ""}
+                >
                   <p css={cssObj.radioLabel}>있음</p>
                 </SharedRadioButton>
-                <SharedRadioButton id="busFalse" value="false" registerObj={register("bus_bool", { required: true })}>
+                <SharedRadioButton
+                  id="busFalse"
+                  value="false"
+                  registerObj={register("bus_bool", {
+                    required: { value: true, message: "* 통근 버스 유무를 입력해 주세요." },
+                  })}
+                  additionalStyle={errors.bus_bool ? cssObj.errorRadioButton : ""}
+                >
                   <p css={cssObj.radioLabel}>없음</p>
                 </SharedRadioButton>
+                {errors.bus_bool && <p css={cssObj.errorMessageRight}>{errors.bus_bool.message}</p>}
               </div>
               <input
+                css={commonCssObj.input(37.5, false)}
+                placeholder="보충 설명(선택, 최대 50자)"
+                maxLength={50}
                 {...register("bus_etc", {
-                  maxLength: 70,
+                  maxLength: 50,
                   validate: (value) => {
                     if (value) {
                       return value.trim().length !== 0;
@@ -153,9 +202,6 @@ export const FactoryAddModal: FunctionComponent = () => {
                     return true;
                   },
                 })}
-                css={commonCssObj.input(37.5, false)}
-                placeholder="보충 설명(선택)"
-                maxLength={70}
               />
             </div>
           </div>
@@ -166,21 +212,31 @@ export const FactoryAddModal: FunctionComponent = () => {
                 <SharedRadioButton
                   id="dormitoryTrue"
                   value="true"
-                  registerObj={register("dormitory_bool", { required: true })}
+                  registerObj={register("dormitory_bool", {
+                    required: { value: true, message: "* 기숙사 유무를 입력해 주세요." },
+                  })}
+                  additionalStyle={errors.dormitory_bool ? cssObj.errorRadioButton : ""}
                 >
                   <p css={cssObj.radioLabel}>있음</p>
                 </SharedRadioButton>
                 <SharedRadioButton
                   id="dormitoryFalse"
                   value="false"
-                  registerObj={register("dormitory_bool", { required: true })}
+                  registerObj={register("dormitory_bool", {
+                    required: { value: true, message: "* 기숙사 유무를 입력해 주세요." },
+                  })}
+                  additionalStyle={errors.dormitory_bool ? cssObj.errorRadioButton : ""}
                 >
                   <p css={cssObj.radioLabel}>없음</p>
                 </SharedRadioButton>
+                {errors.dormitory_bool && <p css={cssObj.errorMessageRight}>{errors.dormitory_bool.message}</p>}
               </div>
               <input
+                css={commonCssObj.input(37.5, false)}
+                placeholder="보충 설명(선택, 최대 50자)"
+                maxLength={50}
                 {...register("dormitory_etc", {
-                  maxLength: 70,
+                  maxLength: 50,
                   validate: (value) => {
                     if (value) {
                       return value.trim().length !== 0;
@@ -188,9 +244,6 @@ export const FactoryAddModal: FunctionComponent = () => {
                     return true;
                   },
                 })}
-                css={commonCssObj.input(37.5, false)}
-                placeholder="보충 설명(선택)"
-                maxLength={70}
               />
             </div>
           </div>

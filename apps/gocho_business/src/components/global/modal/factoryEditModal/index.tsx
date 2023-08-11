@@ -19,7 +19,10 @@ export const FactoryEditModal: FunctionComponent = () => {
   const { contentObj, closeModal } = useModal();
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const { register, handleSubmit, setValue, reset } = useForm<FactoryEditFormValues>();
+  const { register, handleSubmit, setValue, reset } = useForm<FactoryEditFormValues>({
+    mode: "onTouched",
+    reValidateMode: "onChange",
+  });
 
   const { factory: factoryObj, companyForm } = contentObj as factoryObjDef;
   const { watch, setValue: setCompanyValue } = companyForm;
@@ -88,16 +91,18 @@ export const FactoryEditModal: FunctionComponent = () => {
             <strong css={commonCssObj.inputTitle(false)}>공장 명칭</strong>
             <input
               css={commonCssObj.input(37.5, false)}
-              {...register("factory_name", { maxLength: 50, required: true })}
-              placeholder="고초대졸 제1공장 (최대 50자)"
+              maxLength={10}
+              {...register("factory_name", { maxLength: 10, required: true })}
+              placeholder="고초대졸 제1공장 (최대 10자)"
             />
           </div>
           <div css={commonCssObj.container}>
             <strong css={commonCssObj.inputTitle(false)}>생산품</strong>
             <input
               css={commonCssObj.input(37.5, false)}
-              {...register("product", { maxLength: 50, required: true })}
-              placeholder="공장 주 생산품 (최대 50자)"
+              maxLength={30}
+              {...register("product", { maxLength: 30, required: true })}
+              placeholder="공장 주 생산품 (최대 30자)"
             />
           </div>
           <div css={commonCssObj.container}>
@@ -154,8 +159,11 @@ export const FactoryEditModal: FunctionComponent = () => {
                 </SharedRadioButton>
               </div>
               <input
+                css={commonCssObj.input(37.5, false)}
+                placeholder="보충 설명(선택, 최대 50자)"
+                maxLength={50}
                 {...register("bus_etc", {
-                  maxLength: 70,
+                  maxLength: 50,
                   validate: (value) => {
                     if (value) {
                       return value.trim().length !== 0;
@@ -163,9 +171,6 @@ export const FactoryEditModal: FunctionComponent = () => {
                     return true;
                   },
                 })}
-                css={commonCssObj.input(37.5, false)}
-                placeholder="보충 설명(선택)"
-                maxLength={70}
               />
             </div>
           </div>
@@ -189,8 +194,11 @@ export const FactoryEditModal: FunctionComponent = () => {
                 </SharedRadioButton>
               </div>
               <input
+                css={commonCssObj.input(37.5, false)}
+                placeholder="보충 설명(선택, 최대 50자)"
+                maxLength={50}
                 {...register("dormitory_etc", {
-                  maxLength: 70,
+                  maxLength: 50,
                   validate: (value) => {
                     if (value) {
                       return value.trim().length !== 0;
@@ -198,9 +206,6 @@ export const FactoryEditModal: FunctionComponent = () => {
                     return true;
                   },
                 })}
-                css={commonCssObj.input(37.5, false)}
-                placeholder="보충 설명(선택)"
-                maxLength={70}
               />
             </div>
           </div>

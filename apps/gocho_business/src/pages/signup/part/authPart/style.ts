@@ -59,4 +59,11 @@ export const cssObj = {
     color: ${NEWCOLORS.BLUEGRAY400};
     text-decoration: underline;
   `,
+
+  errorMessage: css`
+    ${TEXTS.BODY3};
+    color: ${NEWCOLORS.RED300};
+    margin-top: 1.5rem;
+    text-align: center;
+  `,
 };
