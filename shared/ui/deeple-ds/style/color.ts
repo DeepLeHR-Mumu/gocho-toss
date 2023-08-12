@@ -28,7 +28,7 @@ export const borderBackgroundColor = {
 
   grayLine: css`
     border: 1px solid ${NEWCOLORS.GRAY200};
-    background-color: ${NEWCOLORS.GRAY200};
+    background-color: ${NEWCOLORS.WHITE};
     color: ${NEWCOLORS.BLUEGRAY300};
   `,
 
