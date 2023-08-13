@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { NEWCOLORS } from "shared-style/color";
+import { MOBILE } from "shared-style/mediaQuery";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -11,9 +12,20 @@ export const cssObj = {
     background-color: ${NEWCOLORS.WHITE};
     padding: 0.625rem 1.25rem;
     align-items: center;
+    border: 1px solid ${NEWCOLORS.WHITE};
 
     :focus-within {
       border: 1px solid ${NEWCOLORS.BLUE200};
+    }
+  `,
+
+  searchIcon: css`
+    width: 1.5rem;
+    height: 1.5rem;
+
+    ${MOBILE} {
+      width: 1.25rem;
+      height: 1.25rem;
     }
   `,
 
@@ -33,6 +45,10 @@ export const cssObj = {
       background-color: ${NEWCOLORS.GRAY200};
       color: ${NEWCOLORS.GRAY300};
       cursor: not-allowed;
+    }
+
+    ${MOBILE} {
+      ${NEWTEXTS.TITLE4}
     }
   `,
 

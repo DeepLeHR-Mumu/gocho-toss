@@ -17,6 +17,7 @@ export const GrayLine: Story = { args: { border: "grayLine" } };
 
 export const WithPreffix: Story = { args: { prefix: <FiSearch /> } };
 
-export const WithSuffix: Story = { args: { suffix: <FiSearch /> } };
+// eslint-disable-next-line react/jsx-no-useless-fragment
+export const WithSuffix: Story = { args: { prefix: <></>, suffix: <FiSearch /> } };
 
 export const WithPreffixAndSuffix: Story = { args: { prefix: <FiSearch />, suffix: <FiSearch /> } };
