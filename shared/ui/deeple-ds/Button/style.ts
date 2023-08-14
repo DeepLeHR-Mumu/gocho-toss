@@ -9,9 +9,32 @@ export const cssObj = {
     ${NEWTEXTS.TITLE6}
   `,
 
-  contentFit: css`
-    padding: 0.75rem 1.25rem;
+  // bookmark
+  icon: css`
+    width: fit-content;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+  `,
+
+  // black chip
+  blackChip: css`
+    width: fit-content;
+    border-radius: 1.5rem;
+    padding: 0.5625rem 0.875rem;
+    ${NEWTEXTS.TITLE12}
+
+    ${MOBILE} {
+      border-radius: 0.5rem;
+      padding: 0.3125rem; 0.59375rem;
+      ${NEWTEXTS.TITLE3}
+    }
+  `,
+
+  // follow button
+  followButton: css`
+    width: fit-content;
     border-radius: 1.875rem;
+    padding: 0.75rem 1.25rem;
     ${NEWTEXTS.TITLE6}
 
     // NOTE 수정해야할지도
@@ -21,9 +44,19 @@ export const cssObj = {
     }
   `,
 
-  short: css`
+  // filter button
+  filterButton: css`
+    width: fit-content;
     border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    ${NEWTEXTS.TITLE9}
+  `,
+
+  140: css`
     width: 8.75rem;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+
     height: 2.75rem;
     ${NEWTEXTS.TITLE8}
 
@@ -32,15 +65,16 @@ export const cssObj = {
     }
   `,
 
-  long: css`
-    border-radius: 0.75rem;
+  392: css`
     width: 24.5rem;
-    height: 3.25rem;
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    // height: 3.25rem;
     ${NEWTEXTS.TITLE9}
 
     ${MOBILE} {
       width: 20.5rem;
-      height: 2.75rem;
+      // height: 2.75rem;
       ${NEWTEXTS.TITLE6}
     }
   `,

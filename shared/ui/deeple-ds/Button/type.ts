@@ -1,11 +1,8 @@
-import { ReactNode, MouseEventHandler } from "react";
+import { ButtonHTMLAttributes } from "react";
 
-import { ChipColor } from "deeple-ds/type";
+import { BorderBackgroundColor } from "deeple-ds/type";
 
-export interface ButtonProps {
-  type?: "button" | "reset" | "submit";
-  size?: "contentFit" | "short" | "long";
-  color?: ChipColor;
-  children?: ReactNode;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  size?: "icon" | "blackChip" | "followButton" | "filterButton" | "140" | "392";
+  color?: BorderBackgroundColor;
 }

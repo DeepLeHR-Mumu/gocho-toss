@@ -19,8 +19,8 @@ type Story = StoryObj<typeof Chip>;
 
 export const Default: Story = { args: { children: "Chip" } };
 
-export const Small: Story = {
-  args: { size: "small", children: "D-1" },
+export const DDay: Story = {
+  args: { size: "dDay", children: "D-1" },
   decorators: [
     (Component, context) => (
       <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
@@ -45,5 +45,3 @@ export const GrayLine: Story = { args: { color: "grayLine" } };
 export const RedFill: Story = { args: { color: "redFill" } };
 
 export const Blue100: Story = { args: { color: "blue100" } };
-
-export const NoBorder: Story = { args: { children: "#중견기업", optional: "noBorder" } };

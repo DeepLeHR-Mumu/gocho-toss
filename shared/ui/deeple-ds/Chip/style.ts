@@ -1,10 +1,9 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
 import { MOBILE } from "shared-style/mediaQuery";
-import { NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
-  default: css`
+  withIcon: css`
     border-radius: 1.5rem;
     padding: 0.75rem 1rem;
     ${NEWTEXTS.TITLE10}
@@ -15,27 +14,25 @@ export const cssObj = {
     }
   `,
 
-  small: css`
+  oneLetter: css`
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    ${NEWTEXTS.TITLE7}
+
+    ${MOBILE} {
+      border-radius: 0.25rem;
+      padding: 0.25rem 0.375rem;
+      ${NEWTEXTS.TITLE3}
+    }
+  `,
+
+  dDay: css`
     padding: 0.375rem 1rem;
     ${NEWTEXTS.TITLE6}
 
     ${MOBILE} {
       padding: 0.25rem 0.5rem;
-      ${NEWTEXTS.TITLE2}
-    }
-  `,
-
-  noBorder: css`
-    border: none;
-    border-radius: 0;
-    background: transparent;
-    color: ${NEWCOLORS.BLUEGRAY300};
-    padding: 0.5rem 1rem;
-    ${NEWTEXTS.TITLE7}
-
-    ${MOBILE} {
-      padding: 0.25rem 0.5rem;
-      ${NEWTEXTS.TITLE1}
+      ${NEWTEXTS.TITLE3}
     }
   `,
 };

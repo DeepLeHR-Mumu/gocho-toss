@@ -1,10 +1,9 @@
 import { ReactNode } from "react";
 
-import { ChipColor } from "deeple-ds/type";
+import { BorderBackgroundColor } from "deeple-ds/type";
 
 export interface ChipProps {
   children?: ReactNode;
-  color?: ChipColor;
-  size?: "small";
-  optional?: "noBorder";
+  color?: BorderBackgroundColor;
+  size?: "oneLetter" | "dDay" | "withIcon";
 }

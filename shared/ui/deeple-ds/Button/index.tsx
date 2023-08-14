@@ -4,14 +4,13 @@ import { borderBackgroundColor } from "deeple-ds/style/color";
 import { ButtonProps } from "./type";
 import { cssObj } from "./style";
 
-const Button = ({ type = "button", size, color = "fillMain", children, onClick }: ButtonProps) => (
+const Button = ({ size = "140", color = "fillMain", children, ...props }: ButtonProps) => (
+  // eslint-disable-next-line react/button-has-type
   <button
-    // eslint-disable-next-line react/button-has-type
-    type={type}
     css={css`
       ${cssObj.default}${size ? cssObj[size] : ""}${borderBackgroundColor[color]}
     `}
-    onClick={onClick}
+    {...props}
   >
     {children}
   </button>

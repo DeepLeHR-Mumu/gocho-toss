@@ -1,1 +1,3 @@
-export type ChipColor = "fillMain" | "outline" | "disable" | "fillWhite" | "grayLine" | "redFill" | "blue100";
+import { borderBackgroundColor } from "./style/color";
+
+export type BorderBackgroundColor = keyof typeof borderBackgroundColor;

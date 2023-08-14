@@ -5,10 +5,10 @@ import { borderBackgroundColor } from "deeple-ds/style/color";
 import { ChipProps } from "./type";
 import { cssObj } from "./style";
 
-const Chip = ({ children, color = "fillMain", size, optional }: ChipProps) => (
+const Chip = ({ children, color = "fillMain", size = "withIcon" }: ChipProps) => (
   <div
     css={css`
-      ${cssObj.default}${borderBackgroundColor[color]}${size ? cssObj[size] : ""}${optional ? cssObj[optional] : ""}
+      ${borderBackgroundColor[color]}${size ? cssObj[size] : ""}
     `}
   >
     {children}
