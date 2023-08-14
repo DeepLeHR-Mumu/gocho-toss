@@ -109,11 +109,6 @@ export const useAxiosInterceptor = () => {
       };
     }
 
-    // accessToken 없이도 접근할 수 있는 API
-    if (config.url && matchingUrlReGex.test(config.url)) {
-      return config;
-    }
-
     if (config.url && config.url.includes("jds") && accessTokenData) {
       return {
         ...config,
@@ -121,6 +116,11 @@ export const useAxiosInterceptor = () => {
           "x-access-token": accessTokenData,
         },
       };
+    }
+
+    // accessToken 없이도 접근할 수 있는 API
+    if (config.url && matchingUrlReGex.test(config.url)) {
+      return config;
     }
 
     return {
