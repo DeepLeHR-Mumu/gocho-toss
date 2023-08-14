@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import { InputProps } from "./type";
 import { cssObj } from "./style";
 
-const Input = ({ label, prefix, suffix, state, ...props }: InputProps) => (
+const Input = ({ label, prefix, suffix, state, underline, ...props }: InputProps) => (
   <div css={cssObj.wrapper}>
     {label && (
       <label css={cssObj.label} htmlFor={props.id}>
@@ -14,7 +14,9 @@ const Input = ({ label, prefix, suffix, state, ...props }: InputProps) => (
       css={css`
         ${cssObj.inputWrapper(state?.state === "disabled")}${state?.state === "error"
           ? cssObj.error
-          : ""}${state?.state === "success" ? cssObj.success : ""}
+          : ""}${state?.state === "success" ? cssObj.success : ""}${underline
+          ? cssObj.underLine(state?.state === "disabled")
+          : ""}
       `}
     >
       {prefix}

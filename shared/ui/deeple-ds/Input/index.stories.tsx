@@ -22,3 +22,7 @@ export const Error: Story = { args: { label: "label", state: { state: "error", m
 export const Success: Story = { args: { label: "label", state: { state: "success", message: "success" } } };
 
 export const WithPrefixAndSuffix: Story = { args: { prefix: <FiAlertCircle />, suffix: <FiAlertCircle /> } };
+
+export const UnderLine: Story = {
+  args: { underline: true, label: "label", state: { state: "error" } },
+};

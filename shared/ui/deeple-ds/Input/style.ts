@@ -23,6 +23,7 @@ export const cssObj = {
     }
 
     :disabled {
+      color: ${NEWCOLORS.GRAY300};
       cursor: not-allowed;
     }
 
@@ -47,7 +48,6 @@ export const cssObj = {
     ${disabled
       ? css`
           background-color: ${NEWCOLORS.GRAY200};
-          color: ${NEWCOLORS.GRAY300};
           cursor: not-allowed;
         `
       : ""}
@@ -81,5 +81,20 @@ export const cssObj = {
   successMessage: css`
     color: ${NEWCOLORS.BLUE300};
     ${NEWTEXTS.TITLE1}
+  `,
+
+  underLine: (disabled?: boolean) => css`
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    padding: 0.25rem 0 0.75rem 0;
+
+    ${disabled
+      ? css`
+          background-color: transparent;
+          cursor: not-allowed;
+        `
+      : ""}
   `,
 };

@@ -8,4 +8,5 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
     state: "default" | "disabled" | "error" | "success";
     message?: string;
   };
+  underline?: boolean;
 }
