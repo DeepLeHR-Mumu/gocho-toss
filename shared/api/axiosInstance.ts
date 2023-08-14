@@ -17,7 +17,7 @@ export const axiosInstance = axios.create({
 });
 
 export const useAxiosInterceptor = () => {
-  const accessTokenLimitMs = 590000;
+  const accessTokenLimitMs = 10000;
   let isRefreshing = false;
   let refreshSubscribers: (() => void)[] = [];
 
@@ -75,20 +75,6 @@ export const useAxiosInterceptor = () => {
     const refreshTokenData = localStorage.getItem("refreshToken");
     const matchingUrlReGex = /^(?!.*comments)(?!.*bookmark).*\b(companies|jds)\b.*$/i;
 
-    if (config.url?.includes("jds") && accessTokenData) {
-      return {
-        ...config,
-        headers: {
-          "x-access-token": accessTokenData,
-        },
-      };
-    }
-
-    // accessToken 없이도 접근할 수 있는 API
-    if (config.url && matchingUrlReGex.test(config.url)) {
-      return config;
-    }
-
     // 0. token 없는 경우
     if (!accessTokenData || !refreshTokenData) {
       localStorage.removeItem("accessToken");
@@ -123,6 +109,20 @@ export const useAxiosInterceptor = () => {
       };
     }
 
+    // accessToken 없이도 접근할 수 있는 API
+    if (config.url && matchingUrlReGex.test(config.url)) {
+      return config;
+    }
+
+    if (config.url && config.url.includes("jds") && accessTokenData) {
+      return {
+        ...config,
+        headers: {
+          "x-access-token": accessTokenData,
+        },
+      };
+    }
+
     return {
       ...config,
       headers: {
@@ -133,21 +133,7 @@ export const useAxiosInterceptor = () => {
 
   const responseErrorHandler = async (error: AxiosError<ErrorResponseDef>) => {
     if (error.response?.data.error_code === "EXPIRED_JWT") {
-      const refreshToken = localStorage.getItem("refreshToken");
-      if (!refreshToken) {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        return new axios.Cancel("ResponseConfig - No refreshToken");
-      }
-
-      return axios
-        .get(`${BACKEND_URL}/auth/refresh`, {
-          headers: { "x-refresh-token": refreshToken },
-        })
-        .then(({ data }) => {
-          localStorage.setItem("accessToken", data.data.access_token);
-          localStorage.setItem("refreshToken", data.data.refresh_token);
-        });
+      await getNewAccessToken();
     }
 
     if (error.response?.data.error_code === "MALFORMED_JWT") {
