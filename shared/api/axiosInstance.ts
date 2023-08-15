@@ -37,7 +37,11 @@ export const useAxiosInterceptor = () => {
     if (!isRefreshing) {
       isRefreshing = true;
       const refreshToken = localStorage.getItem("refreshToken");
-      if (!refreshToken) throw new axios.Cancel("getNewAccessToken - No refreshToken");
+      if (!refreshToken) {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        throw new axios.Cancel("getNewAccessToken - No refreshToken");
+      }
 
       axios
         .get(`${BACKEND_URL}/auth/refresh`, {
@@ -77,6 +81,11 @@ export const useAxiosInterceptor = () => {
 
     // 0. token 없는 경우
     if (!accessTokenData || !refreshTokenData) {
+      // accessToken 없이도 접근할 수 있는 API
+      if (config.url && matchingUrlReGex.test(config.url)) {
+        return config;
+      }
+
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       throw new axios.Cancel("RequestConfig - No Token");
@@ -109,19 +118,14 @@ export const useAxiosInterceptor = () => {
       };
     }
 
-    if (config.url && config.url.includes("jds") && accessTokenData) {
-      return {
-        ...config,
-        headers: {
-          "x-access-token": accessTokenData,
-        },
-      };
-    }
-
-    // accessToken 없이도 접근할 수 있는 API
-    if (config.url && matchingUrlReGex.test(config.url)) {
-      return config;
-    }
+    // if (config.url && config.url.includes("jds") && accessTokenData) {
+    //   return {
+    //     ...config,
+    //     headers: {
+    //       "x-access-token": accessTokenData,
+    //     },
+    //   };
+    // }
 
     return {
       ...config,
