@@ -146,6 +146,10 @@ export const useAxiosInterceptor = () => {
       return Promise.resolve();
     }
 
+    if (error.response?.data.error_code === "EMPTY_JWT_REDIS") {
+      return Promise.resolve();
+    }
+
     return Promise.reject(error);
   };
 
