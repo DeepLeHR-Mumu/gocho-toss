@@ -57,14 +57,16 @@ export const useAxiosInterceptor = () => {
         .catch((error) => {
           isRefreshing = false;
           const { error_code } = error.response.data;
-          if (error_code === "EMPTY_JWT") {
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
-            router.push(INTERNAL_URL.LOGIN);
-            throw new axios.Cancel("재요청 취소");
+          switch (error_code) {
+            case "EMPTY_JWT":
+            case "BLANK_MEMBER":
+              localStorage.removeItem("accessToken");
+              localStorage.removeItem("refreshToken");
+              router.push(INTERNAL_URL.LOGIN);
+              throw new axios.Cancel("재요청 취소");
+            default:
+              throw error;
           }
-
-          throw error;
         });
     }
 
