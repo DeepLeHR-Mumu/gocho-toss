@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { borderBackgroundColor } from "deeple-ds/style/color";
+import { borderBackgroundColor } from "../style/color";
 
 import { ButtonProps } from "./type";
 import { cssObj } from "./style";
