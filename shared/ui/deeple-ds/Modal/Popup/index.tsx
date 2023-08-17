@@ -1,7 +1,7 @@
 import { FiX } from "react-icons/fi";
-import Divider from "deeple-ds/Divider";
-import Button from "deeple-ds/Button";
 
+import Divider from "../../Divider";
+import Button from "../../Button";
 import Modal from "..";
 
 import { PopupProps } from "./type";
