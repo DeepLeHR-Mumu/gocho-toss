@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -12,11 +13,10 @@ import ReactGA from "react-ga4";
 import { KEY, FB_PIXEL_ID } from "shared-constant";
 import { useAxiosInterceptor } from "shared-api/axiosInstance";
 
+import { globalStyle } from "@/styles/globalStyle";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useEffect, useState } from "react";
-
-import { globalCssObj } from "../styles/globalStyle";
 
 if (typeof window !== "undefined" && !window.location.href.includes("localhost")) {
   datadogRum.init({
@@ -118,7 +118,7 @@ function App({ Component, pageProps }: AppProps) {
       />
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <Global styles={globalCssObj} />
+          <Global styles={globalStyle} />
           <Component {...pageProps} />
           <ReactQueryDevtools initialIsOpen={false} />
         </Hydrate>
