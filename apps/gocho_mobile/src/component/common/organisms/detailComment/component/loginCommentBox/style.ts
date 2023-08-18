@@ -5,7 +5,7 @@ import { COLORS } from "shared-style/color";
 export const commentContainer = css`
   background-color: ${COLORS.GRAY90};
   padding: 1rem;
-  height: calc(70vh - 16.5rem);
+  height: calc(70vh - 11.5rem);
   overflow: hidden;
   overflow-y: scroll;
   position: relative;
@@ -100,7 +100,7 @@ export const evalButtonBox = css`
 //  commentWrite
 
 export const writeContainer = css`
-  height: 10rem;
+  height: 8rem;
   padding: 1rem;
   display: flex;
   flex-direction: column;

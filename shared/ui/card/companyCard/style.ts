@@ -56,6 +56,7 @@ export const isRecruitingCSS = css`
 `;
 
 export const nameCSS = css`
+  max-width: 17rem;
   font-size: 1rem;
   display: block;
   margin: 0.5rem 0;

@@ -1,18 +1,20 @@
 import { css } from "@emotion/react";
 
-import { borderBackgroundColor } from "../style/color";
+import { chipColor } from "../style/color";
 
 import { ChipProps } from "./type";
 import { cssObj } from "./style";
 
-const Chip = ({ children, color = "fillMain", size = "withIcon" }: ChipProps) => (
-  <div
+const Chip = ({ size, color = "nonSelected", children, ...props }: ChipProps) => (
+  // eslint-disable-next-line react/button-has-type
+  <button
     css={css`
-      ${borderBackgroundColor[color]}${size ? cssObj[size] : ""}
+      ${size ? cssObj[size] : ""}${chipColor[color]}
     `}
+    {...props}
   >
     {children}
-  </div>
+  </button>
 );
 
 export default Chip;

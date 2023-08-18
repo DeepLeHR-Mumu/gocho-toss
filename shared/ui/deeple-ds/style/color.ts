@@ -1,8 +1,8 @@
 import { css } from "@emotion/react";
 import { NEWCOLORS } from "shared-style/color";
 
-export const borderBackgroundColor = {
-  fillMain: css`
+export const buttonColor = {
+  active: css`
     border: 1px solid ${NEWCOLORS.BLUE300};
     background-color: ${NEWCOLORS.BLUE300};
     color: ${NEWCOLORS.WHITE};
@@ -26,7 +26,7 @@ export const borderBackgroundColor = {
     color: ${NEWCOLORS.BLACK};
   `,
 
-  grayLine: css`
+  outlineGray: css`
     border: 1px solid ${NEWCOLORS.GRAY200};
     background-color: transparent;
     color: ${NEWCOLORS.BLUEGRAY400};
@@ -37,46 +37,82 @@ export const borderBackgroundColor = {
     background-color: ${NEWCOLORS.BLUE100};
     color: ${NEWCOLORS.BLACK};
   `,
+};
 
-  redFill: css`
-    border: 1px solid ${NEWCOLORS.RED100};
-    background-color: ${NEWCOLORS.RED100};
-    color: ${NEWCOLORS.WHITE};
-  `,
-
-  blue100: css`
-    border: 1px solid ${NEWCOLORS.BLUE200};
-    background-color: ${NEWCOLORS.BLUE200};
+export const followButtonColor = {
+  unfollow: css`
+    border: 1px solid ${NEWCOLORS.BLUE300};
+    background-color: transparent;
     color: ${NEWCOLORS.BLUE300};
   `,
 
-  noneBlackWhite: css`
-    border: none;
+  follow: css`
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    background-color: ${NEWCOLORS.GRAY200};
+    color: ${NEWCOLORS.BLUEGRAY200};
+  `,
+};
+
+export const chipColor = {
+  nonSelected: css`
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    background-color: ${NEWCOLORS.WHITE};
+    color: ${NEWCOLORS.BLUEGRAY400};
+  `,
+
+  selected: css`
+    border: 1px solid ${NEWCOLORS.BLUE300};
+    background-color: ${NEWCOLORS.BLUE300};
+    color: ${NEWCOLORS.WHITE};
+  `,
+
+  fillBlue: css`
+    border: 1px solid ${NEWCOLORS.BLUE100};
+    background-color: ${NEWCOLORS.BLUE100};
+    color: ${NEWCOLORS.BLUE300};
+  `,
+
+  fillGray: css`
+    border: 1px solid ${NEWCOLORS.GRAY100};
+    background-color: ${NEWCOLORS.GRAY100};
+    color: ${NEWCOLORS.BLUEGRAY300};
+  `,
+
+  outlineBlue: css`
+    border: 1px solid ${NEWCOLORS.BLUE300};
+    background-color: ${NEWCOLORS.WHITE};
+    color: ${NEWCOLORS.BLUE300};
+  `,
+
+  fillBlack: css`
+    border: 1px solid ${NEWCOLORS.BLACK};
     background-color: ${NEWCOLORS.BLACK};
     color: ${NEWCOLORS.WHITE};
   `,
 
-  noneTransparentBlack: css`
+  transparent: css`
     border: none;
     background-color: transparent;
-    color: ${NEWCOLORS.BLACK};
+    color: ${NEWCOLORS.BLUEGRAY400};
   `,
+};
 
-  noneGray100Bluegray100: css`
+export const dDayChipColor = {
+  fillBlue: css`
     border: none;
-    background-color: ${NEWCOLORS.GRAY100};
-    color: ${NEWCOLORS.BLUEGRAY100};
-  `,
-
-  noneGray100Blue300: css`
-    border: none;
-    background-color: ${NEWCOLORS.GRAY100};
+    background-color: ${NEWCOLORS.BLUE200};
     color: ${NEWCOLORS.BLUE300};
   `,
 
-  gray100TransparentGray100: css`
-    border: 1px solid ${NEWCOLORS.GRAY100};
-    background-color: transparent;
-    color: ${NEWCOLORS.GRAY100};
+  fillRed: css`
+    border: none;
+    background-color: ${NEWCOLORS.RED200};
+    color: ${NEWCOLORS.WHITE};
+  `,
+
+  fillGray: css`
+    border: none;
+    background-color: ${NEWCOLORS.BLUEGRAY100};
+    color: ${NEWCOLORS.BLACK};
   `,
 };

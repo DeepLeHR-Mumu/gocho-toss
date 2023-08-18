@@ -9,50 +9,7 @@ export const cssObj = {
     ${NEWTEXTS.TITLE6}
   `,
 
-  // bookmark
-  icon: css`
-    width: fit-content;
-    border-radius: 0.5rem;
-    padding: 0.75rem;
-  `,
-
-  // black chip
-  blackChip: css`
-    width: fit-content;
-    border-radius: 1.5rem;
-    padding: 0.5625rem 0.875rem;
-    ${NEWTEXTS.TITLE12}
-
-    ${MOBILE} {
-      border-radius: 0.5rem;
-      padding: 0.3125rem; 0.59375rem;
-      ${NEWTEXTS.TITLE3}
-    }
-  `,
-
-  // follow button
-  followButton: css`
-    width: fit-content;
-    border-radius: 1.875rem;
-    padding: 0.75rem 1.25rem;
-    ${NEWTEXTS.TITLE6}
-
-    // NOTE 수정해야할지도
-    ${MOBILE} {
-      padding: 0.4375rem 0.875rem;
-      ${NEWTEXTS.TITLE4};
-    }
-  `,
-
-  // filter button
-  filterButton: css`
-    width: fit-content;
-    border-radius: 0.5rem;
-    padding: 0.75rem 1rem;
-    ${NEWTEXTS.TITLE9}
-  `,
-
-  140: css`
+  small: css`
     width: 8.75rem;
     border-radius: 0.5rem;
     padding: 0.75rem 1rem;
@@ -65,7 +22,7 @@ export const cssObj = {
     }
   `,
 
-  392: css`
+  large: css`
     width: 24.5rem;
     border-radius: 0.75rem;
     padding: 0.75rem 1rem;
