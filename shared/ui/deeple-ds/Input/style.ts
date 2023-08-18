@@ -7,6 +7,7 @@ export const cssObj = {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    position: relative;
   `,
 
   label: css`
@@ -51,6 +52,11 @@ export const cssObj = {
           cursor: not-allowed;
         `
       : ""}
+  `,
+
+  message: css`
+    position: absolute;
+    bottom: -1.5rem;
   `,
 
   // NOTE 공통 스타일로 빼도 될듯?

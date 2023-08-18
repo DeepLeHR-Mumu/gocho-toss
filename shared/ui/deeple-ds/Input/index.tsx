@@ -26,6 +26,7 @@ const Input = ({ label, prefix, suffix, state, underline, ...props }: InputProps
     {state?.message && (
       <span
         css={css`
+          ${cssObj.message}
           ${state.state === "error" ? cssObj.errorMessage : ""}${state.state === "success" ? cssObj.successMessage : ""}
         `}
       >
