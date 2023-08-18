@@ -31,20 +31,13 @@ export const slideInfo: slideInfoDef = (backgroundColor) => {
   `;
 };
 
-export const topDescCSS = css`
-  color: ${COLORS.GRAY100};
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-`;
-
 export const middleDescCSS = css`
   font-weight: 600;
   display: flex;
   align-items: center;
   color: ${COLORS.GRAY100};
   font-size: 1.25rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 `;
 
 export const middleDescIconBox = css`
@@ -75,6 +68,13 @@ export const lastDescCSS = css`
   color: ${COLORS.GRAY100};
 `;
 
+export const linkButtonContainer = css`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem 0;
+  margin-top: 2rem;
+`;
+
 interface LinkButtonDef {
   (backgroundColor: string, color: string): SerializedStyles;
 }
@@ -92,8 +92,6 @@ export const linkButton: LinkButtonDef = (backgroundColor, color) => {
     font-size: 0.75rem;
     font-weight: 500;
     transition: opacity 0.2s ease;
-    position: absolute;
-    bottom: 2rem;
   `;
 };
 
