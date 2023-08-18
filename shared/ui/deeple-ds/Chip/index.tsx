@@ -5,11 +5,11 @@ import { chipColor } from "../style/color";
 import { ChipProps } from "./type";
 import { cssObj } from "./style";
 
-const Chip = ({ color = "nonSelected", children, ...props }: ChipProps) => (
+const Chip = ({ size, color = "nonSelected", children, ...props }: ChipProps) => (
   // eslint-disable-next-line react/button-has-type
   <button
     css={css`
-      ${cssObj.chip}${chipColor[color]}
+      ${size ? cssObj[size] : ""}${chipColor[color]}
     `}
     {...props}
   >

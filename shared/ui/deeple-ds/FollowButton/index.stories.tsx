@@ -5,18 +5,12 @@ const meta: Meta<typeof FollowButton> = {
   component: FollowButton,
   title: "FollowButton",
   decorators: [
-    (Component, context) => {
-      if (context.name !== "Default" && context.name !== "Content Fit") {
-        return (
-          <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
-            {Component({ args: { color: "follow", ...context.args } })}
-            {Component({ args: { color: "unfollow", ...context.args } })}
-          </div>
-        );
-      }
-
-      return <Component />;
-    },
+    (Component, context) => (
+      <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
+        {Component({ args: { color: "follow", children: "팔로우", ...context.args } })}
+        {Component({ args: { color: "unfollow", children: "팔로잉", ...context.args } })}
+      </div>
+    ),
   ],
 };
 

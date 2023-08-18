@@ -61,19 +61,19 @@ export const chipColor = {
   `,
 
   selected: css`
-    border: none;
+    border: 1px solid ${NEWCOLORS.BLUE300};
     background-color: ${NEWCOLORS.BLUE300};
     color: ${NEWCOLORS.WHITE};
   `,
 
   fillBlue: css`
-    border: none;
+    border: 1px solid ${NEWCOLORS.BLUE100};
     background-color: ${NEWCOLORS.BLUE100};
     color: ${NEWCOLORS.BLUE300};
   `,
 
   fillGray: css`
-    border: none;
+    border: 1px solid ${NEWCOLORS.GRAY100};
     background-color: ${NEWCOLORS.GRAY100};
     color: ${NEWCOLORS.BLUEGRAY300};
   `,
@@ -82,6 +82,18 @@ export const chipColor = {
     border: 1px solid ${NEWCOLORS.BLUE300};
     background-color: ${NEWCOLORS.WHITE};
     color: ${NEWCOLORS.BLUE300};
+  `,
+
+  fillBlack: css`
+    border: 1px solid ${NEWCOLORS.BLACK};
+    background-color: ${NEWCOLORS.BLACK};
+    color: ${NEWCOLORS.WHITE};
+  `,
+
+  transparent: css`
+    border: none;
+    background-color: transparent;
+    color: ${NEWCOLORS.BLUEGRAY400};
   `,
 };
 

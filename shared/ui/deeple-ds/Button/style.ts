@@ -22,7 +22,7 @@ export const cssObj = {
     }
   `,
 
-  long: css`
+  large: css`
     width: 24.5rem;
     border-radius: 0.75rem;
     padding: 0.75rem 1rem;
