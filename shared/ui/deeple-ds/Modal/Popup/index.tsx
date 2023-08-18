@@ -28,12 +28,12 @@ const Popup = ({ title, description, closeHandler, cancel, confirm }: PopupProps
       {(cancel || confirm) && (
         <div css={cssObj.buttonGroup}>
           {cancel && (
-            <Button size="140" color="grayLine" onClick={cancel.handler}>
+            <Button size="small" color="outlineGray" onClick={cancel.handler}>
               {cancel.text}
             </Button>
           )}
           {confirm && (
-            <Button size="140" onClick={confirm.handler}>
+            <Button size="small" onClick={confirm.handler}>
               {confirm.text}
             </Button>
           )}

@@ -6,8 +6,9 @@ const meta: Meta<typeof Chip> = {
   title: "Chip",
   decorators: [
     (Component, context) => (
-      <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
-        {Component({ args: { children: "Chip", ...context.args } })}
+      <div style={{ display: "flex", flexDirection: "row", gap: "1rem", alignItems: "center" }}>
+        {Component({ args: { size: "small", children: "smallChip", ...context.args } })}
+        {Component({ args: { size: "large", children: "largeChip", ...context.args } })}
       </div>
     ),
   ],
@@ -17,31 +18,10 @@ export default meta;
 
 type Story = StoryObj<typeof Chip>;
 
-export const Default: Story = { args: { children: "Chip" } };
-
-export const DDay: Story = {
-  args: { size: "dDay", children: "D-1" },
-  decorators: [
-    (Component, context) => (
-      <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
-        {Component({ args: { ...context.args, color: "blue100" } })}
-        {Component({ args: { ...context.args, color: "redFill" } })}
-        {Component({ args: { ...context.args, color: "disable" } })}
-      </div>
-    ),
-  ],
-};
-
-export const FillMain: Story = { args: { color: "fillMain" } };
-
-export const Outline: Story = { args: { color: "outline" } };
-
-export const Disable: Story = { args: { color: "disable" } };
-
-export const FillWhite: Story = { args: { color: "fillWhite" } };
-
-export const GrayLine: Story = { args: { color: "grayLine" } };
-
-export const RedFill: Story = { args: { color: "redFill" } };
-
-export const Blue100: Story = { args: { color: "blue100" } };
+export const NonSelected: Story = { args: { color: "nonSelected" } };
+export const Selected: Story = { args: { color: "selected" } };
+export const FillBlue: Story = { args: { color: "fillBlue" } };
+export const FillGray: Story = { args: { color: "fillGray" } };
+export const OutlineBlue: Story = { args: { color: "outlineBlue" } };
+export const FillBlack: Story = { args: { color: "fillBlack" } };
+export const Transparent: Story = { args: { color: "transparent" } };

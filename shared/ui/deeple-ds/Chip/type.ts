@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 
-import { BorderBackgroundColor } from "deeple-ds/type";
+import { ChipColor } from "deeple-ds/type";
 
-export interface ChipProps {
+export interface ChipProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  size?: "small" | "large";
   children?: ReactNode;
-  color?: BorderBackgroundColor;
-  size?: "oneLetter" | "dDay" | "withIcon";
+  color?: ChipColor;
 }

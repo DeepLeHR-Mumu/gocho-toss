@@ -1,3 +1,7 @@
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -12,15 +16,26 @@ const nextConfig = {
   },
   pageExtensions: ["page.tsx"],
   transpilePackages: [
+    "shared-ui",
     "shared-api",
     "shared-constant",
     "shared-util",
     "shared-type",
     "shared-style",
     "shared-image",
-    "shared-ui",
+    "shared-ga",
     "shared-hooks",
   ],
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);
+
+const intercept = require("intercept-stdout");
+
+function interceptStdout(text) {
+  if (process.env.NODE_ENV === "development" && text.includes("Duplicate atom key")) {
+    return "";
+  }
+  return text;
+}
+intercept(interceptStdout);

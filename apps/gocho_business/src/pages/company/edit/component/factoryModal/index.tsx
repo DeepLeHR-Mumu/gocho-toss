@@ -39,9 +39,14 @@ export const FactoryModal: FunctionComponent<FactoryModalProps> = ({
   };
 
   const addFactoryHandler = (factoryRequestObj: FactoryRegisterFormValues) => {
+    const newFactory: FactoryRegisterFormValues = {
+      ...factoryRequestObj,
+      bus_etc: factoryRequestObj.bus_etc?.length === 0 ? null : factoryRequestObj.bus_etc,
+      dormitory_etc: factoryRequestObj.dormitory_etc?.length === 0 ? null : factoryRequestObj.dormitory_etc,
+    };
     if (factory) {
-      modifyFactoryArr(factoryRequestObj);
-    } else addFactoryArr(factoryRequestObj);
+      modifyFactoryArr(newFactory);
+    } else addFactoryArr(newFactory);
     closeModal();
   };
 
@@ -137,6 +142,11 @@ export const FactoryModal: FunctionComponent<FactoryModalProps> = ({
                     }
                     return true;
                   },
+                  onBlur: (blurEvent) => {
+                    if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                      setValue("bus_etc", "");
+                    }
+                  },
                 })}
                 css={commonCssObj.input(37.5, false)}
                 placeholder="보충 설명(선택)"
@@ -171,6 +181,11 @@ export const FactoryModal: FunctionComponent<FactoryModalProps> = ({
                       return value.trim().length !== 0;
                     }
                     return true;
+                  },
+                  onBlur: (blurEvent) => {
+                    if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
+                      setValue("dormitory_etc", "");
+                    }
                   },
                 })}
                 css={commonCssObj.input(37.5, false)}

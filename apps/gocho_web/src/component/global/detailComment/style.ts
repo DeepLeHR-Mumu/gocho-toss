@@ -2,6 +2,7 @@ import { css, SerializedStyles } from "@emotion/react";
 
 import { COLORS } from "shared-style/color";
 import { PC_HOVER } from "shared-style/mediaQuery";
+import { shorten } from "shared-style/common";
 
 export const wrapper = css`
   width: 100%;
@@ -37,7 +38,7 @@ export const flexBox = css`
 `;
 
 export const imageBox = css`
-  width: 3.5rem;
+  min-width: 3.5rem;
   height: 3.5rem;
   position: relative;
   > img {
@@ -51,6 +52,7 @@ export const companyName = css`
   font-weight: 500;
   padding-left: 1.5rem;
   line-height: 1.4;
+  ${shorten()};
 `;
 
 export const commentButtonContainer = css`
