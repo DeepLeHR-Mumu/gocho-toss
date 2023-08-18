@@ -10,7 +10,15 @@ export interface SlideCardProps {
     backgroundImage: StaticImageData;
     iconImage?: StaticImageData;
     backgroundColor: string;
-    buttonObj: {
+    topButtonObj: {
+      target: "_self" | "_blank";
+      text: string;
+      color: string;
+      backgroundColor: string;
+      url: string;
+      onClick?: () => void;
+    } | null;
+    bottomButtonObj: {
       target: "_self" | "_blank";
       text: string;
       color: string;
