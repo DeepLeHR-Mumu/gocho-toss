@@ -55,6 +55,13 @@ export const desc = css`
   color: ${COLORS.GRAY100};
 `;
 
+export const linkButtonContainer = css`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem 0;
+  margin-top: 2rem;
+`;
+
 interface LinkButtonDef {
   (backgroundColor: string, color: string): SerializedStyles;
 }
@@ -72,8 +79,6 @@ export const linkButton: LinkButtonDef = (backgroundColor, color) => {
     font-size: 0.75rem;
     font-weight: 500;
     transition: opacity 0.2s ease;
-    position: absolute;
-    bottom: 2rem;
   `;
 };
 
