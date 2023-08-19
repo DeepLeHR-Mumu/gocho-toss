@@ -14,6 +14,7 @@ import { KEY, FB_PIXEL_ID } from "shared-constant";
 import { useAxiosInterceptor } from "shared-api/axiosInstance";
 
 import { globalStyle } from "@/styles/globalStyle";
+import { GlobalNavigationBar } from "@/components";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -119,6 +120,7 @@ function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <Global styles={globalStyle} />
+          <GlobalNavigationBar />
           <Component {...pageProps} />
           <ReactQueryDevtools initialIsOpen={false} />
         </Hydrate>
