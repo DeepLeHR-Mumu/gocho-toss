@@ -11,6 +11,7 @@ import { PageLayout } from "@/components";
 import { useModal, useToast } from "@/globalStates";
 import { companyEditConfirmEvent, companyEditDoneEvent, companyEditFailEvent, companyEditPageFunnelEvent } from "@/ga";
 import { CompanySideNav } from "@/components/global/companySideNav";
+import { ErrorResponseDef } from "@/types";
 
 import { PageHead } from "./pageHead";
 import { ButtonPart, CompanyInfoPart, LastEditInfoPart, BasicPart, WelfarePart, FactoryPart } from "./part";
@@ -85,6 +86,11 @@ const CompanyEditPage: NextPage = () => {
             onSuccess: () => {
               setToast("등록되었습니다");
               companyEditDoneEvent();
+            },
+
+            onError: (error) => {
+              const errorResponse = error.response?.data as ErrorResponseDef;
+              alert(`${errorResponse.error_message}\n계속 오류가 발생할 시 우측 하단 채팅을 통해 문의주세요.`);
             },
           }
         );
