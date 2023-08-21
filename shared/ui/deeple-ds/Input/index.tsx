@@ -1,9 +1,13 @@
+import { ForwardRefRenderFunction, forwardRef } from "react";
 import { css } from "@emotion/react";
 
 import { InputProps } from "./type";
 import { cssObj } from "./style";
 
-const Input = ({ label, prefix, suffix, state, underline, ...props }: InputProps) => (
+const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
+  { label, prefix, suffix, state, underline, ...props },
+  ref
+) => (
   <div css={cssObj.wrapper}>
     {label && (
       <label css={cssObj.label} htmlFor={props.id}>
@@ -20,7 +24,7 @@ const Input = ({ label, prefix, suffix, state, underline, ...props }: InputProps
       `}
     >
       {prefix}
-      <input css={cssObj.input} disabled={state?.state === "disabled"} {...props} />
+      <input css={cssObj.input} disabled={state?.state === "disabled"} {...props} ref={ref} />
       {suffix}
     </div>
     {state?.message && (
@@ -36,4 +40,4 @@ const Input = ({ label, prefix, suffix, state, underline, ...props }: InputProps
   </div>
 );
 
-export default Input;
+export default forwardRef(Input);
