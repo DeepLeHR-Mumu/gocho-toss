@@ -7,8 +7,8 @@ const meta: Meta<typeof Chip> = {
   decorators: [
     (Component, context) => (
       <div style={{ display: "flex", flexDirection: "row", gap: "1rem", alignItems: "center" }}>
-        {Component({ args: { size: "small", children: "smallChip", ...context.args } })}
-        {Component({ args: { size: "large", children: "largeChip", ...context.args } })}
+        {Component({ args: { ...context.args, size: "small", children: "smallChip" } })}
+        {Component({ args: { ...context.args, size: "large", children: "largeChip" } })}
       </div>
     ),
   ],
