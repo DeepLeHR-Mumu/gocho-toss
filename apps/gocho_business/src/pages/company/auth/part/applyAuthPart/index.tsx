@@ -8,8 +8,9 @@ import { useManagerProfile, useCompanyDetail, useManagerAuth } from "@/apis";
 import { RequestObjDef as AuthRequestObjDef } from "@/apis/manager/auth/useManagerAuth/type";
 import { ConfirmModal } from "@/components/global/modal/confirmModal";
 import { INTERNAL_URL } from "@/constants";
-
 import { companyAuthSubmitClickEvent } from "@/ga";
+import { ErrorResponseDef } from "@/types";
+
 import { stringOrNull } from "../../util";
 
 import { InfoPart } from "./infoPart";
@@ -104,9 +105,10 @@ export const ApplyAuthPart: FunctionComponent = () => {
           managerProfileRefetch();
           router.push(INTERNAL_URL.HOME);
         },
-        onError: () => {
-          alert(`등록중 오류가 발생했습니다.\n cs@deeplehr.com로 문의해주세요.`);
 
+        onError: (error) => {
+          const errorResponse = error.response?.data as ErrorResponseDef;
+          alert(`${errorResponse.error_message}\n계속 오류가 발생할 시 우측 하단 채팅을 통해 문의주세요.`);
           setConfirmModal(false);
         },
       });
