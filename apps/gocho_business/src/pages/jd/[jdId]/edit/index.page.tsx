@@ -18,6 +18,7 @@ import {
 import { PageLayout } from "@/components";
 import { useEditJd, useJdDetail, useManagerProfile } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
+import { ErrorResponseDef } from "@/types";
 
 import {
   ReasonPart,
@@ -142,8 +143,9 @@ const JdEditPage: NextPage = () => {
             setToast("등록되었습니다");
           },
 
-          onError: () => {
-            alert("에러입니다. 조건을 한번 더 확인하거나 운영자에게 문의해주세요.");
+          onError: (error) => {
+            const errorResponse = error.response?.data as ErrorResponseDef;
+            alert(`${errorResponse.error_message}\n계속 오류가 발생할 시 우측 하단 채팅을 통해 문의주세요.`);
           },
 
           onSettled: () => {
