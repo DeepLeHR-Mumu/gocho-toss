@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 
 import { DESKTOP, TABLET } from "shared-style/mediaQuery";
+import { NEWCOLORS } from "shared-style/color";
 
 export const globalStyle = css`
   * {
@@ -94,9 +95,9 @@ export const globalStyle = css`
     vertical-align: baseline;
   }
   html {
-    font-family: "Noto Sans KR", Verdana, sans-serif;
-    min-width: 768px;
-    /* overflow-x: hidden; */
+    font-family: Pretendard Variable, serif;
+    color: ${NEWCOLORS.BLACK};
+    min-width: 360px;
     font-size: 16px;
     ${DESKTOP} {
       font-size: 14px;
