@@ -1,7 +1,7 @@
-import GlobalNavigationBar from "./GlobalNavigationBar";
-import LoginModal from "./LoginModal";
-import SearchModal from "./SearchModal";
-import JdRow from "./JdRow";
-import CompanyCard from "./CompanyCard";
-
-export { GlobalNavigationBar, LoginModal, SearchModal, JdRow, CompanyCard };
+export { Bookmark } from "./common/Bookmark";
+export { CompanyCard } from "./common/CompanyCard";
+export { Footer } from "./global/Footer";
+export { GlobalNavigationBar } from "./global/GlobalNavigationBar";
+export { Layout } from "./Layout";
+export { LoginModal } from "./modal/LoginModal";
+export { SearchModal } from "./modal/SearchModal";

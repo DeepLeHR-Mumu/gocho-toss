@@ -8,13 +8,13 @@ import { selector as jobArrSelector } from "shared-api/job/useJobArr/util";
 
 import { getRandomItems } from "@/utils";
 
-import CompanyCard from "../CompanyCard";
-import JdRow from "../JdRow";
+import { CompanyCard } from "../../common/CompanyCard";
+import { JdRow } from "../../common/JdRow";
 
 import { SearchModalProps } from "./type";
 import { cssObj } from "./style";
 
-const AdvancedSearch = ({ close }: SearchModalProps) => {
+export const SearchModal = ({ close }: SearchModalProps) => {
   const { data: jobData } = useJobArr({ order: "recent", size: 40 });
   const { data: companyData } = useCompanyArr({ order: "rank", size: 4 });
 
@@ -84,5 +84,3 @@ const AdvancedSearch = ({ close }: SearchModalProps) => {
     </div>
   );
 };
-
-export default AdvancedSearch;

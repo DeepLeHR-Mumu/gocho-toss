@@ -4,13 +4,13 @@ import DDayChip from "shared-ui/deeple-ds/DDayChip";
 
 import { isInvalidDate, isExpired, getDayUntilExpiry } from "@/utils";
 
-import Bookmark from "../Bookmark";
+import { Bookmark } from "../Bookmark";
 
 import { JdRowProps } from "./type";
 import { cssObj } from "./style";
 
 // TODO 모바일 반응형 추가
-const JdRow = ({ companyName, jdTitle, dueDate, bookmarked, half }: JdRowProps) => {
+export const JdRow = ({ companyName, jdTitle, dueDate, bookmarked, half }: JdRowProps) => {
   const validDueDate = useMemo(() => {
     const date = new Date(dueDate);
     if (!isInvalidDate(date)) {
@@ -56,5 +56,3 @@ const JdRow = ({ companyName, jdTitle, dueDate, bookmarked, half }: JdRowProps) 
     </div>
   );
 };
-
-export default JdRow;

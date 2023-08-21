@@ -10,7 +10,7 @@ import SignUp from "./components/SignUp";
 import { LoginModalProps } from "./type";
 import { cssObj } from "./style";
 
-const LoginModal = ({ close }: LoginModalProps) => {
+export const LoginModal = ({ close }: LoginModalProps) => {
   type SliderState = "signup" | "password";
   const [current, setCurrent] = useState<SliderState>("signup");
   const sliderRef = useRef<Slider>(null);
@@ -68,5 +68,3 @@ const LoginModal = ({ close }: LoginModalProps) => {
     </Modal>
   );
 };
-
-export default LoginModal;

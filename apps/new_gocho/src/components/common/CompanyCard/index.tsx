@@ -4,7 +4,7 @@ import FollowButton from "shared-ui/deeple-ds/FollowButton";
 import { CompanyCardProps } from "./type";
 import { cssObj } from "./style";
 
-const CompanyCard = ({ logoSrc, name, hashTagArr = [], buttonHandler }: CompanyCardProps) => {
+export const CompanyCard = ({ logoSrc, name, hashTagArr = [], buttonHandler }: CompanyCardProps) => {
   const isButtonExist = !!buttonHandler;
 
   // TODO Profile 을 모바일일 때 크기 72로 해야함.
@@ -23,5 +23,3 @@ const CompanyCard = ({ logoSrc, name, hashTagArr = [], buttonHandler }: CompanyC
     </div>
   );
 };
-
-export default CompanyCard;
