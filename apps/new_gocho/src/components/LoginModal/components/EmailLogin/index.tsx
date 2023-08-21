@@ -80,7 +80,7 @@ const EmailLogin = ({ toFindPassword, toSignUp, ...actionBarHandlers }: EmailLog
         </Button>
       </div>
       <div css={cssObj.findPasswordButtonWrapper}>
-        <Button css={cssObj.findPasswordButton} onClick={toFindPassword}>
+        <Button size="small" css={cssObj.findPasswordButton} onClick={toFindPassword}>
           비밀번호를 잊어버리셨나요?
         </Button>
       </div>

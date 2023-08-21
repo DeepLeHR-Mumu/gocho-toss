@@ -38,7 +38,9 @@ const GlobalNavigationBar = () => {
           >
             기업서비스
           </a>
-          <Button css={cssObj.loginButton}>로그인/회원가입</Button>
+          <Button size="small" css={cssObj.loginButton}>
+            로그인/회원가입
+          </Button>
         </div>
       </div>
     </header>

@@ -31,6 +31,8 @@ export const cssObj = {
   `,
 
   findPasswordButton: css`
+    width: auto;
+    height: auto;
     border: none;
     padding: 0;
     background-color: transparent;

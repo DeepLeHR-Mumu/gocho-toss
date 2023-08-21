@@ -16,11 +16,11 @@ const SocialLogin = ({ toEmailLogin }: SocialLoginProps) => {
       <Image src={LogoColor} alt="고초대졸_로고" width={280} height={36} css={cssObj.logo} />
       <span css={cssObj.subtitle}>가장 빠르고 정확한 생산직, 기술직 엄선 매칭 플랫폼</span>
       <div css={cssObj.tooltip}>3초만에 쉽게 가입하기</div>
-      <Button css={cssObj.kakaoButton}>
+      <Button size="large" css={cssObj.kakaoButton}>
         <Image src={kakao} alt="카카오" css={cssObj.kakaoLogo} />
         카카오로 로그인
       </Button>
-      <Button css={cssObj.emailLogin} onClick={toEmailLogin}>
+      <Button size="small" css={cssObj.emailLogin} onClick={toEmailLogin}>
         이메일로 로그인
       </Button>
     </div>
