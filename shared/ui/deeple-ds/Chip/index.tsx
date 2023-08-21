@@ -9,7 +9,7 @@ const Chip = ({ size, color = "nonSelected", children, ...props }: ChipProps) =>
   // eslint-disable-next-line react/button-has-type
   <button
     css={css`
-      ${size ? cssObj[size] : ""}${chipColor[color]}
+      ${cssObj.chipWrapper(size)}${chipColor[color]}
     `}
     {...props}
   >
