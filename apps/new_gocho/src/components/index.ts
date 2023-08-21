@@ -1,5 +1,6 @@
-export { Bookmark } from "./Bookmark";
-export { CompanyCard } from "./CompanyCard";
-export { Footer } from "./Footer";
-export { GlobalNavigationBar } from "./GlobalNavigationBar";
-export { LoginModal } from "./LoginModal";
+export { Bookmark } from "./common/Bookmark";
+export { CompanyCard } from "./common/CompanyCard";
+export { Footer } from "./global/Footer";
+export { GlobalNavigationBar } from "./global/GlobalNavigationBar";
+export { Layout } from "./Layout";
+export { LoginModal } from "./modal/LoginModal";

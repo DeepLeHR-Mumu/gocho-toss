@@ -18,30 +18,34 @@ export const cssObj = {
 
   titleArea: css`
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 56.25%;
-    padding-top: 1.5rem;
+  `,
+
+  logoWrapper: css`
+    position: relative;
+
+    > img {
+      width: 12rem;
+      object-fit: contain;
+    }
   `,
 
   searchBarWrapper: css`
-    width: 44%;
+    width: 30rem;
+    margin-left: 2rem;
   `,
 
   navigationArea: css`
-    width: 56.25%;
     display: flex;
-    flex-direction: row;
+    align-items: center;
     justify-content: space-between;
-    height: 100%;
+    margin-top: 1.125rem;
   `,
 
   navigationWrapper: css`
     display: flex;
-    flex-direction: row;
     align-items: center;
-    height: 100%;
     gap: 3rem;
 
     li {

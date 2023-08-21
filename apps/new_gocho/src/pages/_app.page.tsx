@@ -15,7 +15,7 @@ import { useAxiosInterceptor } from "shared-api/axiosInstance";
 
 import { globalStyle } from "@/styles/globalStyle";
 import { GlobalNavigationBar, Footer } from "@/components";
-import {} from "@/components/Footer";
+import {} from "@/components/global/Footer";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
