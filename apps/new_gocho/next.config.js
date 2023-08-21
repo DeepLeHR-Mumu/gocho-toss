@@ -11,6 +11,9 @@ const nextConfig = {
     deviceSizes: [1256],
     imageSizes: [],
   },
+  compiler: {
+    emotion: true,
+  },
   pageExtensions: ["page.tsx"],
   transpilePackages: [
     "shared-ui",
