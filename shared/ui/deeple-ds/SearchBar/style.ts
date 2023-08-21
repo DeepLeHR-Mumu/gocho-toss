@@ -22,6 +22,7 @@ export const cssObj = {
   searchIcon: css`
     width: 1.5rem;
     height: 1.5rem;
+    color: ${NEWCOLORS.BLUE300};
 
     ${MOBILE} {
       width: 1.25rem;

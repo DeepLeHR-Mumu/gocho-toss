@@ -4,14 +4,14 @@ import { FiSearch } from "react-icons/fi";
 import { SearchBarProps } from "./type";
 import { cssObj } from "./style";
 
-const SearchBar = ({ border, prefix, suffix }: SearchBarProps) => (
+const SearchBar = ({ border, prefix, suffix, ...props }: SearchBarProps) => (
   <div
     css={css`
       ${cssObj.wrapper}${border ? cssObj[border] : ""}
     `}
   >
     {prefix || <FiSearch css={cssObj.searchIcon} />}
-    <input type="search" css={cssObj.input} />
+    <input type="search" css={cssObj.input} {...props} />
     {suffix}
   </div>
 );

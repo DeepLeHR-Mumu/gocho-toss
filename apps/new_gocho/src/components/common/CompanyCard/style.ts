@@ -9,7 +9,6 @@ export const cssObj = {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1rem;
       width: ${isButtonExist ? "15.75rem" : "10.5rem"};
       height: ${isButtonExist ? "20rem" : "13.75rem"};
       padding: ${isButtonExist ? "2.25rem 1.5rem" : "1.5625rem 1.125rem"};
@@ -25,17 +24,15 @@ export const cssObj = {
     `;
   },
 
-  textArea: css`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  `,
-
   name: (isButtonExist: boolean) => {
     return css`
       width: 100%;
       text-align: center;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
       ${isButtonExist ? NEWTEXTS.TITLE13 : NEWTEXTS.TITLE12}
 
       ${MOBILE} {
@@ -50,6 +47,9 @@ export const cssObj = {
       word-wrap: break-word;
       word-break: break-all;
       color: ${NEWCOLORS.BLUEGRAY400};
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
       ${NEWTEXTS.TITLE7}
 
       ${MOBILE} {
