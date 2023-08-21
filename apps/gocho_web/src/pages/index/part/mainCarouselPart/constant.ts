@@ -15,7 +15,8 @@ export const carouselArr = [
     backgroundImage: banner01,
     iconImage: checkIconImage,
     backgroundColor: "#59adff",
-    buttonObj: {
+    topButtonObj: null,
+    bottomButtonObj: {
       target: "_blank" as const,
       text: "블로그 바로가기",
       color: "#fff",
@@ -32,7 +33,8 @@ export const carouselArr = [
     backgroundImage: banner02,
     iconImage: checkIconImage,
     backgroundColor: "#2961cd",
-    buttonObj: null,
+    topButtonObj: null,
+    bottomButtonObj: null,
   },
   {
     id: 3,
@@ -43,12 +45,19 @@ export const carouselArr = [
     backgroundImage: banner03,
     iconImage: checkIconImage,
     backgroundColor: "#fab60e",
-    buttonObj: {
+    topButtonObj: {
       target: "_blank" as const,
-      text: "오픈카톡 바로가기",
+      text: "잡담방 바로가기",
       color: "#fff",
       backgroundColor: "#333",
       url: "https://open.kakao.com/o/gxquBCud",
+    },
+    bottomButtonObj: {
+      target: "_blank" as const,
+      text: "취업방 바로가기",
+      color: "#fff",
+      backgroundColor: "#333",
+      url: "https://open.kakao.com/o/gXKeAtAf",
     },
   },
 ];
