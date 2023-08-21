@@ -16,6 +16,7 @@ export const cssObj = {
     height: 2rem;
     color: ${NEWCOLORS.GRAY300};
     align-self: flex-end;
+    cursor: pointer;
   `,
 
   title: css`

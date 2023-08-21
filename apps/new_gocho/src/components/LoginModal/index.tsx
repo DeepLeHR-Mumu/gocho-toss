@@ -7,9 +7,10 @@ import EmailLogin from "./components/EmailLogin";
 import FindPassword from "./components/FindPassword";
 import SignUp from "./components/SignUp";
 
+import { LoginModalProps } from "./type";
 import { cssObj } from "./style";
 
-const LoginModal = () => {
+const LoginModal = ({ close }: LoginModalProps) => {
   type SliderState = "signup" | "password";
   const [current, setCurrent] = useState<SliderState>("signup");
   const sliderRef = useRef<Slider>(null);
@@ -49,14 +50,19 @@ const LoginModal = () => {
     next();
   };
 
+  const actionBarHandlers = {
+    previousHandler: prev,
+    closeHandler: close,
+  };
+
   return (
     <Modal>
       <div css={cssObj.wrapper}>
         <Slider {...sliderConfig} ref={sliderRef}>
-          <SocialLogin toEmailLogin={next} />
-          <EmailLogin previousHandler={prev} toFindPassword={toFindPassword} toSignUp={toSignUp} />
-          {current === "signup" && <SignUp previousHandler={prev} />}
-          {current === "password" && <FindPassword previousHandler={prev} />}
+          <SocialLogin closeHandler={close} toEmailLogin={next} />
+          <EmailLogin {...actionBarHandlers} toFindPassword={toFindPassword} toSignUp={toSignUp} />
+          {current === "signup" && <SignUp {...actionBarHandlers} />}
+          {current === "password" && <FindPassword {...actionBarHandlers} />}
         </Slider>
       </div>
     </Modal>

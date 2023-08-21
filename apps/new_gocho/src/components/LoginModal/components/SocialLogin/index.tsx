@@ -8,10 +8,10 @@ import kakao from "@/public/kakao.svg";
 import { SocialLoginProps } from "./type";
 import { cssObj } from "./style";
 
-const SocialLogin = ({ toEmailLogin }: SocialLoginProps) => {
+const SocialLogin = ({ closeHandler, toEmailLogin }: SocialLoginProps) => {
   return (
     <div css={cssObj.wrapper}>
-      <FiX css={cssObj.closeIcon} />
+      <FiX css={cssObj.closeIcon} onClick={closeHandler} />
       <h3 css={cssObj.title}>생산직 채용의 새로운 기준</h3>
       <Image src={LogoColor} alt="고초대졸_로고" width={280} height={36} css={cssObj.logo} />
       <span css={cssObj.subtitle}>가장 빠르고 정확한 생산직, 기술직 엄선 매칭 플랫폼</span>
