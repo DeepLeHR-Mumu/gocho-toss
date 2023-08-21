@@ -6,7 +6,7 @@ import { SearchBar, Button } from "shared-ui/deeple-ds";
 import { URL } from "@/pages/constants";
 import logoWhite from "@/public/logoWhite.svg";
 
-import { Layout } from "@/components";
+import { Layout } from "../../Layout";
 import { LoginModal } from "../../modal/LoginModal";
 import { SearchModal } from "../../modal/SearchModal";
 import { cssObj } from "./style";
