@@ -11,16 +11,14 @@ const CompanyCard = ({ logoSrc, name, hashTagArr = [], buttonHandler }: CompanyC
   return (
     <div css={cssObj.cardWrapper(isButtonExist)}>
       <Profile src={logoSrc} size={isButtonExist ? 120 : 100} />
-      <div css={cssObj.textArea}>
-        <h3 css={cssObj.name(isButtonExist)}>{name}</h3>
-        <p css={cssObj.hashTags(isButtonExist)}>
-          {hashTagArr
-            .map((hashTag) => {
-              return `#${hashTag}`;
-            })
-            .join(" ")}
-        </p>
-      </div>
+      <h3 css={cssObj.name(isButtonExist)}>{name}</h3>
+      <p css={cssObj.hashTags(isButtonExist)}>
+        {hashTagArr
+          .map((hashTag) => {
+            return `#${hashTag}`;
+          })
+          .join(" ")}
+      </p>
       {isButtonExist && <FollowButton onClick={buttonHandler}>팔로우</FollowButton>}
     </div>
   );

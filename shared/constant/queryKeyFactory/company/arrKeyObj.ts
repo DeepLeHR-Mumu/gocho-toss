@@ -2,7 +2,7 @@ export interface CompanyArrRequestDef {
   q?: string;
   page?: number;
   size?: number;
-  order?: "recent" | "comment" | "name" | "popular" | "rand" | "view";
+  order?: "recent" | "comment" | "name" | "popular" | "rand" | "view" | "rank";
 }
 
 export const companyArrKeyObj = {
