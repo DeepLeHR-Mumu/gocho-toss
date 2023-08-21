@@ -9,7 +9,7 @@ import SignUp from "./components/SignUp";
 
 import { cssObj } from "./style";
 
-const LoginModal = () => {
+export const LoginModal = () => {
   type SliderState = "signup" | "password";
   const [current, setCurrent] = useState<SliderState>("signup");
   const sliderRef = useRef<Slider>(null);
@@ -62,5 +62,3 @@ const LoginModal = () => {
     </Modal>
   );
 };
-
-export default LoginModal;

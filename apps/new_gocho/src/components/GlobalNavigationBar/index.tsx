@@ -6,7 +6,7 @@ import logoWhite from "@/public/logoWhite.svg";
 
 import { cssObj } from "./style";
 
-const GlobalNavigationBar = () => {
+export const GlobalNavigationBar = () => {
   return (
     <header css={cssObj.wrapper}>
       <div css={cssObj.titleArea}>
@@ -46,5 +46,3 @@ const GlobalNavigationBar = () => {
     </header>
   );
 };
-
-export default GlobalNavigationBar;
