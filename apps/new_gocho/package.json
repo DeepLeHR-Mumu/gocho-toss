@@ -14,7 +14,7 @@
     "@datadog/browser-rum": "^4.46.0",
     "@emotion/react": "^11.10.0",
     "@playwright/test": "1.28.0",
-    "@tanstack/react-query": "^4.32.6",
+    "@tanstack/react-query": "4.28.0",
     "@tanstack/react-query-devtools": "^4.32.6",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
@@ -28,6 +28,9 @@
     "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.45.4",
+    "react-icons": "^4.10.1",
+    "react-slick": "^0.29.0",
     "react-ga4": "^1.4.1",
     "shared-api": "workspace:^",
     "shared-constant": "workspace:^",
@@ -40,6 +43,7 @@
     "typescript": "4.7.2"
   },
   "devDependencies": {
+    "@types/react-slick": "^0.23.10",
     "eslint-config-deeple": "workspace:^",
     "tsconfig-deeple": "workspace:^"
   }
