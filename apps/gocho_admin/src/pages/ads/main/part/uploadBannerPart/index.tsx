@@ -4,7 +4,7 @@ import Image from "next/image";
 import dayjs from "dayjs";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
+import { bannerArrKeyObj } from "@/constant/queryKeyFactory/banner/bannerArrKeyObj";
 
 import { useAddMainBanner } from "@/api";
 import { pageTitle } from "@/style/commonStyles";

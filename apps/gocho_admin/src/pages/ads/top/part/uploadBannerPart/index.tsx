@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 
 import { dateConverter } from "shared-util";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
+import { bannerArrKeyObj } from "@/constant/queryKeyFactory/banner/bannerArrKeyObj";
 
 import { useJdDetail, useAddTopBanner } from "@/api";
 import { pageTitle } from "@/style/commonStyles";
