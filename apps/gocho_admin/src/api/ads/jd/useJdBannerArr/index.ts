@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
-
+import { bannerArrKeyObj } from "@/constant/queryKeyFactory/banner/bannerArrKeyObj";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { GetBannerArrDef } from "./type";

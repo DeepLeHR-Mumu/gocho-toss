@@ -12,16 +12,14 @@ export const cssObj = {
 
   container: css`
     display: flex;
-    padding: 0 1.5rem;
+    justify-content: space-between;
     margin: 0 auto;
+    padding: 4.375rem 0;
     gap: 0 1.25rem;
     border-top: 1px solid ${NEWCOLORS.GRAY200};
   `,
 
-  infoContainer: css`
-    width: 50.25rem;
-    padding: 2.5rem 1.5rem;
-  `,
+  infoContainer: css``,
 
   logoBox: css`
     position: relative;
@@ -54,10 +52,7 @@ export const cssObj = {
     margin: 1.25rem 0 2.5rem;
   `,
 
-  contactContainer: css`
-    width: 20.5rem;
-    padding: 2.5rem 0.5rem;
-  `,
+  contactContainer: css``,
 
   contactBox: css`
     display: flex;

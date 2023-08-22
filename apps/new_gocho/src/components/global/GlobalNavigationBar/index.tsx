@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { SearchBar, Button } from "shared-ui/deeple-ds";
+import { SearchBar } from "shared-ui/deeple-ds";
 
 import { URL } from "@/pages/constants";
 import logoWhite from "@/public/logoWhite.svg";
@@ -50,19 +50,19 @@ export const GlobalNavigationBar = () => {
                 href="https://gocho.biz/?utm_source=gochodaejoldotcom&utm_medium=GNB"
                 target="_blank"
                 rel="noreferrer"
-                css={cssObj.businessServicebutton}
+                css={cssObj.businessServiceButton}
               >
                 기업서비스
               </a>
-              <Button
-                size="small"
+              <button
+                type="button"
                 css={cssObj.loginButton}
                 onClick={() => {
                   setLoginModal(true);
                 }}
               >
                 로그인/회원가입
-              </Button>
+              </button>
             </div>
           </div>
         </Layout>
