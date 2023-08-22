@@ -13,14 +13,14 @@ import { setCarouselSetting } from "./util";
 export const JdPart: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
 
-  const { data: jdDataArr } = useJdArr({
+  const { data: jdDataObj } = useJdArr({
     order: "rand",
     filter: "valid",
     page: 1,
     size: 12,
   });
 
-  if (!jdDataArr) {
+  if (!jdDataObj) {
     return (
       <section css={cssObj.sectionContainer}>
         <h2 css={cssObj.title}>
@@ -44,6 +44,7 @@ export const JdPart: FunctionComponent = () => {
           </h2>
           <div css={cssObj.buttonContainer}>
             <button
+              css={cssObj.sliderButton}
               aria-label="이전 추천공고보기"
               type="button"
               onClick={() => {
@@ -53,6 +54,7 @@ export const JdPart: FunctionComponent = () => {
               <FiChevronLeft />
             </button>
             <button
+              css={cssObj.sliderButton}
               aria-label="이전 추천공고보기"
               type="button"
               onClick={() => {
@@ -64,7 +66,7 @@ export const JdPart: FunctionComponent = () => {
           </div>
         </div>
         <Slider {...setCarouselSetting} ref={sliderRef}>
-          {jdDataArr?.jdDataArr.map((jd) => {
+          {jdDataObj?.jdDataArr.map((jd) => {
             return <p key={jd.id}>{jd.title}</p>;
           })}
         </Slider>
