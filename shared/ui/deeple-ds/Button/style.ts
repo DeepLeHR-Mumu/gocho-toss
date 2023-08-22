@@ -39,6 +39,10 @@ export const cssObj = {
     ${fill &&
     css`
       width: 100%;
+
+      ${MOBILE} {
+        width: 100%;
+      }
     `}
   `,
 };

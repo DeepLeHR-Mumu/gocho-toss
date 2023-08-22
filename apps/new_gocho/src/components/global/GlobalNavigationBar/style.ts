@@ -83,7 +83,7 @@ export const cssObj = {
     gap: 2rem;
   `,
 
-  businessServicebutton: css`
+  businessServiceButton: css`
     flex-basis: fit-content;
     border-radius: 1.25rem;
     border: 1px solid ${NEWCOLORS.BLUE200};
@@ -94,10 +94,7 @@ export const cssObj = {
   `,
 
   loginButton: css`
-    padding-left: 0;
-    padding-right: 0;
-    background-color: transparent;
-    border-color: transparent;
     ${NEWTEXTS.TITLE12}
+    color: ${NEWCOLORS.WHITE};
   `,
 };

@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
+import { bannerArrKeyObj } from "@/constant/queryKeyFactory/banner/bannerArrKeyObj";
 
 import { useMoveTopBanner } from "@/api";
 import { pageTitle } from "@/style/commonStyles";
