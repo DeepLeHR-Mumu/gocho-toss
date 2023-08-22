@@ -99,12 +99,6 @@ export const globalStyle = css`
     color: ${NEWCOLORS.BLACK};
     min-width: 360px;
     font-size: 16px;
-    ${DESKTOP} {
-      font-size: 14px;
-    }
-    ${TABLET} {
-      font-size: 12px;
-    }
   }
   /* HTML5 display-role reset for older browsers */
   article,
