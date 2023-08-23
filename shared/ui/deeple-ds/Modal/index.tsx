@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { ModalProps } from "./type";
 import { cssObj } from "./style";
 
-const Modal = ({ children }: ModalProps) => {
+export const Modal = ({ children }: ModalProps) => {
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
@@ -14,5 +14,3 @@ const Modal = ({ children }: ModalProps) => {
 
   return <div css={cssObj.layout}>{children}</div>;
 };
-
-export default Modal;

@@ -4,7 +4,7 @@ import { FiSearch } from "react-icons/fi";
 import { SearchBarProps } from "./type";
 import { cssObj } from "./style";
 
-const SearchBar = ({ border, prefix, suffix, ...props }: SearchBarProps) => (
+export const SearchBar = ({ border, prefix, suffix, ...props }: SearchBarProps) => (
   <div
     css={css`
       ${cssObj.wrapper}${border ? cssObj[border] : ""}
@@ -15,5 +15,3 @@ const SearchBar = ({ border, prefix, suffix, ...props }: SearchBarProps) => (
     {suffix}
   </div>
 );
-
-export default SearchBar;

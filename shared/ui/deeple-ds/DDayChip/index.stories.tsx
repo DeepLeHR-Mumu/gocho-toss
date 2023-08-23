@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import DDayChip from ".";
+import { DDayChip } from ".";
 
 const meta: Meta<typeof DDayChip> = {
   component: DDayChip,

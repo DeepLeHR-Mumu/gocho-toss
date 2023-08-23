@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { FiSearch } from "react-icons/fi";
-import SearchBar from ".";
+import { SearchBar } from ".";
 
 const meta: Meta<typeof SearchBar> = {
   component: SearchBar,

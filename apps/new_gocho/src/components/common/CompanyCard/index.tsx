@@ -1,5 +1,4 @@
-import { Profile } from "shared-ui/deeple-ds";
-import FollowButton from "shared-ui/deeple-ds/FollowButton";
+import { Profile, FollowButton } from "shared-ui/deeple-ds";
 
 import { CompanyCardProps } from "./type";
 import { cssObj } from "./style";

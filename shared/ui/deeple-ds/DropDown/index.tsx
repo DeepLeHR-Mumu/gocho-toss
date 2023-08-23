@@ -15,7 +15,7 @@ export const Menu = ({ width = 180, options = [], footer }: MenuProps) => (
   </div>
 );
 
-const DropDown = ({
+export const DropDown = ({
   title,
   icon = { location: "suffix", whenMenuVisible: <FiChevronUp />, whenMenuInvisible: <FiChevronDown /> },
   customTitle,
@@ -65,5 +65,3 @@ const DropDown = ({
     </div>
   );
 };
-
-export default DropDown;

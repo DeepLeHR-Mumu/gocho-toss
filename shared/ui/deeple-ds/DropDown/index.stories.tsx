@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Profile from "deeple-ds/Profile";
+import { Profile } from "deeple-ds/Profile";
 
 import testSmallImage1 from "shared-image/global/common/cho_color.svg";
 
-import DropDown from ".";
+import { DropDown } from ".";
 
 const meta: Meta<typeof DropDown> = {
   component: DropDown,

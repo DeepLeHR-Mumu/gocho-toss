@@ -4,7 +4,7 @@ import { followButtonColor } from "../style/color";
 import { FollowButtonProps } from "./type";
 import { cssObj } from "./style";
 
-const FollowButton = ({ color = "unfollow", children, ...props }: FollowButtonProps) => (
+export const FollowButton = ({ color = "unfollow", children, ...props }: FollowButtonProps) => (
   // eslint-disable-next-line react/button-has-type
   <button
     css={css`
@@ -15,5 +15,3 @@ const FollowButton = ({ color = "unfollow", children, ...props }: FollowButtonPr
     {children}
   </button>
 );
-
-export default FollowButton;

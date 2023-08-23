@@ -7,6 +7,7 @@ import { Divider } from "shared-ui/deeple-ds";
 
 import { useJdArr } from "@/apis/jd";
 
+import { JdCard } from "@/components/common/JdCard";
 import { cssObj } from "./style";
 import { setCarouselSetting } from "./util";
 
@@ -65,11 +66,13 @@ export const JdPart: FunctionComponent = () => {
             </button>
           </div>
         </div>
-        <Slider {...setCarouselSetting} ref={sliderRef}>
-          {jdDataObj?.jdDataArr.map((jd) => {
-            return <p key={jd.id}>{jd.title}</p>;
-          })}
-        </Slider>
+        <div css={cssObj.sliderContainer}>
+          <Slider {...setCarouselSetting} ref={sliderRef}>
+            {jdDataObj?.jdDataArr.map((jd) => {
+              return <JdCard key={jd.id} jd={jd} />;
+            })}
+          </Slider>
+        </div>
       </section>
       <Divider />
     </>

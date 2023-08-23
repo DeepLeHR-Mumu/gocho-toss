@@ -4,7 +4,7 @@ import { buttonColor } from "../style/color";
 import { ButtonProps } from "./type";
 import { cssObj } from "./style";
 
-const Button = ({ size, color = "active", fill, children, ...props }: ButtonProps) => (
+export const Button = ({ size, color = "active", fill, children, ...props }: ButtonProps) => (
   // eslint-disable-next-line react/button-has-type
   <button
     css={css`
@@ -15,5 +15,3 @@ const Button = ({ size, color = "active", fill, children, ...props }: ButtonProp
     {children}
   </button>
 );
-
-export default Button;
