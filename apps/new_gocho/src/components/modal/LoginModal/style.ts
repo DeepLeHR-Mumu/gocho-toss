@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { NEWCOLORS } from "shared-style/color";
+import { MOBILE } from "shared-style/mediaQuery";
 
 export const cssObj = {
   wrapper: css`
@@ -14,5 +15,13 @@ export const cssObj = {
     border-radius: 1.25rem;
     padding: 1.5rem;
     background-color: ${NEWCOLORS.WHITE};
+    overflow: auto;
+
+    ${MOBILE} {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      padding: 0;
+    }
   `,
 };

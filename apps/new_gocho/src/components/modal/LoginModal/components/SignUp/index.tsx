@@ -1,10 +1,12 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import axios from "axios";
 
-import { Input, Button } from "shared-ui/deeple-ds";
+import { Input, Button, Divider } from "shared-ui/deeple-ds";
 import { useDoSignUp, useUserProfile } from "shared-api/auth";
 import { RequestObjDef as SignUpFormValues } from "shared-api/auth/useDoSignup/type";
 import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE, EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
+
+import { useGetDeviceType } from "@/globalStates";
 
 import ActionBar from "../ActionBar";
 
@@ -12,6 +14,8 @@ import { SignUpProps } from "./type";
 import { cssObj } from "./style";
 
 const SignUp = ({ ...actionBarHandlers }: SignUpProps) => {
+  const { isMobile, browserSize } = useGetDeviceType();
+
   const {
     register,
     handleSubmit,
@@ -50,8 +54,12 @@ const SignUp = ({ ...actionBarHandlers }: SignUpProps) => {
   };
 
   return (
-    <div css={cssObj.wrapper}>
+    <div
+      css={cssObj.wrapper}
+      style={isMobile ? { width: `${browserSize.innerWidth}px`, height: `${browserSize.innerHeight}px` } : {}}
+    >
       <ActionBar title="회원가입" {...actionBarHandlers} />
+      <Divider css={cssObj.mobileDivider} />
       <div css={cssObj.signUpWrapper}>
         <form css={cssObj.form}>
           <Input
@@ -62,6 +70,7 @@ const SignUp = ({ ...actionBarHandlers }: SignUpProps) => {
                 message: EMAIL_ERROR_MESSAGE.REGEX,
               },
             })}
+            underline={isMobile}
             state={errors.email ? { state: "error", message: errors.email.message } : undefined}
           />
           <Input
@@ -75,13 +84,16 @@ const SignUp = ({ ...actionBarHandlers }: SignUpProps) => {
                 message: PWD_ERROR_MESSAGE.NOT_SPACE,
               },
             })}
+            underline={isMobile}
             state={errors.password ? { state: "error", message: errors.password.message } : undefined}
           />
         </form>
       </div>
-      <Button type="submit" size="large" onClick={handleSubmit(signUpSubmit)}>
-        가입하기
-      </Button>
+      <div css={cssObj.signUpButtonWrapper}>
+        <Button type="submit" size="large" fill={isMobile} onClick={handleSubmit(signUpSubmit)}>
+          가입하기
+        </Button>
+      </div>
     </div>
   );
 };
