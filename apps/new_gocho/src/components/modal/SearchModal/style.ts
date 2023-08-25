@@ -45,6 +45,14 @@ export const cssObj = {
     margin-top: 2.25rem;
   `,
 
+  chipDelete: css`
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-left: 0.25rem;
+    color: ${NEWCOLORS.GRAY300};
+    cursor: pointer;
+  `,
+
   recentWordHeader: css`
     display: flex;
     flex-direction: row;
@@ -58,10 +66,15 @@ export const cssObj = {
 
   recentWordDelete: css`
     color: ${NEWCOLORS.BLUEGRAY400};
+    cursor: pointer;
     ${NEWTEXTS.TITLE7};
   `,
 
   recentWordChipsWrapper: css`
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    flex-wrap: wrap;
     margin-bottom: 2rem;
   `,
 
