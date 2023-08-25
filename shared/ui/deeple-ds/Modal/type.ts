@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
+import { ReactNode, HTMLAttributes } from "react";
 
-export interface ModalProps {
+export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
