@@ -3,6 +3,7 @@ import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
   chipWrapper: (size?: string) => css`
+    white-space: nowrap;
     ${size === "small" &&
     css`
       height: 1.875rem;
