@@ -78,6 +78,7 @@ export const SearchModal = ({ close }: SearchModalProps) => {
                   <Chip
                     size="large"
                     key={word}
+                    color="fillGray"
                     onClick={() => {
                       searchAndSave(word);
                     }}

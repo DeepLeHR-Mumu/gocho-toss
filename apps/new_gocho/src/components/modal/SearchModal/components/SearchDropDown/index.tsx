@@ -18,7 +18,7 @@ export const SearchDropDown = ({ recentWordArr = [] }: SearchDropDownProps) => {
     register,
     handleSubmit,
     formState: { isDirty },
-  } = useForm<SearchFormProps>();
+  } = useForm<SearchFormProps>({ defaultValues: { search: "" } });
   const { searchAndSave } = useSearch();
 
   const searchHandler: SubmitHandler<SearchFormProps> = (searchObj) => {
@@ -45,14 +45,14 @@ export const SearchDropDown = ({ recentWordArr = [] }: SearchDropDownProps) => {
       {recentWordArr.length !== 0 && dropDownVisible && (
         <div css={cssObj.dropDownWrapper}>
           <ul>
-            {recentWordArr.slice(0, isDirty ? 2 : 5).map((recentWord, index) => {
+            {recentWordArr.slice(0, isDirty ? 2 : 5).map((recentWord) => {
               return (
-                <li key={index} css={cssObj.listItem}>
+                <li key={recentWord} css={cssObj.listItem}>
                   <Image src={recentLogo} alt="recent" />
                   <button
                     type="button"
                     css={cssObj.word}
-                    onClick={() => {
+                    onMouseDown={() => {
                       searchAndSave(recentWord);
                     }}
                   >

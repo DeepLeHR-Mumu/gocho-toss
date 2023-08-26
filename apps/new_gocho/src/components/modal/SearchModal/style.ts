@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { NEWCOLORS } from "shared-style/color";
+import { MOBILE } from "shared-style/mediaQuery";
 import { NEWTEXTS } from "shared-style/text";
 
 import { cssObj as modalCssObj } from "shared-ui/deeple-ds/Modal/style";
@@ -11,10 +12,14 @@ export const cssObj = {
     background-color: ${NEWCOLORS.WHITE};
     backdrop-filter: none;
     overflow: auto;
+
+    * ::-webkit-scrollbar {
+      display: none;
+    }
   `,
 
   contentsWrapper: css`
-    width: 46.5rem;
+    max-width: 46.5rem;
     height: auto;
     padding-top: 1.5rem;
     padding-bottom: 1.8125rem;
@@ -24,6 +29,11 @@ export const cssObj = {
     transform: translate(-50%, 0);
     display: flex;
     flex-direction: column;
+
+    ${MOBILE} {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
   `,
 
   closeIcon: css`
@@ -76,6 +86,11 @@ export const cssObj = {
     gap: 1rem;
     flex-wrap: wrap;
     margin-bottom: 2rem;
+
+    ${MOBILE} {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+    }
   `,
 
   recommendationWordTitle: css`
@@ -87,6 +102,10 @@ export const cssObj = {
     display: flex;
     flex-direction: row;
     gap: 1rem;
+
+    ${MOBILE} {
+      overflow-x: auto;
+    }
   `,
 
   recommendationCompanyTitle: css`
@@ -98,6 +117,11 @@ export const cssObj = {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    ${MOBILE} {
+      overflow-x: auto;
+      gap: 0.75rem;
+    }
   `,
 
   recommendationJdTitle: css`
