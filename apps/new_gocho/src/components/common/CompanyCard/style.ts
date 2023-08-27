@@ -36,6 +36,8 @@ export const cssObj = {
       ${isButtonExist ? NEWTEXTS.TITLE13 : NEWTEXTS.TITLE12}
 
       ${MOBILE} {
+        margin-top: 0.875rem;
+        margin-bottom: 0;
         ${isButtonExist ? NEWTEXTS.TITLE6 : NEWTEXTS.TITLE5}
       }
     `;

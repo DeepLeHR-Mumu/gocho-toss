@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
 import { NEWCOLORS } from "shared-style/color";
+import { MOBILE } from "shared-style/mediaQuery";
 
 export const cssObj = {
   wrapper: css`
@@ -14,6 +15,10 @@ export const cssObj = {
     left: 0;
     top: 0;
     background-color: ${NEWCOLORS.BLUE250};
+
+    ${MOBILE} {
+      height: 3.5rem;
+    }
   `,
 
   titleArea: css`
@@ -28,7 +33,19 @@ export const cssObj = {
     > img {
       width: 12rem;
       object-fit: contain;
+
+      ${MOBILE} {
+        width: 7.8rem;
+      }
     }
+  `,
+
+  mobileIcon: css`
+    width: 1.25rem;
+    height: 1.25rem;
+    color: ${NEWCOLORS.WHITE};
+    margin-left: 1rem;
+    cursor: pointer;
   `,
 
   searchBarWrapper: css`

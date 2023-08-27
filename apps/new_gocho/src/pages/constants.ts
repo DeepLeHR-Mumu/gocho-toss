@@ -6,6 +6,7 @@ export const URL = {
   JOBS_LIST: "/jd/list",
   COMPANY: "/company",
   COMMUNITY: "/community",
+  SEARCH: "/search",
 
   JOBS_DETAIL: "/jd/detail",
   JOBS_EXPLIST_URL: "/jd/explist",

@@ -34,3 +34,13 @@ export const getRandomItems = <T>(items: T[], count: number): T[] => {
 
   return shuffled.slice(0, count);
 };
+
+export const isStringArray = (param: unknown): param is string[] => {
+  if (!Array.isArray(param)) {
+    return false;
+  }
+
+  return param.every((item) => {
+    return typeof item === "string";
+  });
+};
