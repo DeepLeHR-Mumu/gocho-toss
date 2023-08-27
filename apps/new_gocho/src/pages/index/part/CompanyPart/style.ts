@@ -34,6 +34,10 @@ export const cssObj = {
     }
   `,
 
+  sliderContainer: css`
+    margin-top: 2.25rem;
+  `,
+
   cardContainer: css`
     display: flex;
   `,

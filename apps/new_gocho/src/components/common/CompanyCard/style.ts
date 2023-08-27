@@ -44,6 +44,9 @@ export const cssObj = {
   hashTags: (isButtonExist: boolean) => {
     return css`
       width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
       word-wrap: break-word;
       word-break: break-all;
       color: ${NEWCOLORS.BLUEGRAY400};

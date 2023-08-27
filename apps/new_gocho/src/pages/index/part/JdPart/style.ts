@@ -36,9 +36,6 @@ export const cssObj = {
 
   sliderContainer: css`
     margin-top: 2.25rem;
-
-    .slick-slide {
-    }
   `,
 
   colorPoint: css`
