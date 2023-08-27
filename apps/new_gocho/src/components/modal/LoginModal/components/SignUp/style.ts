@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { MOBILE } from "shared-style/mediaQuery";
 
 export const cssObj = {
   wrapper: css`
@@ -13,6 +14,11 @@ export const cssObj = {
     width: 100%;
     padding: 1.25rem 0.5rem 0 0.5rem;
     margin-bottom: 18.125rem;
+
+    ${MOBILE} {
+      padding: 1rem;
+      margin-bottom: 0;
+    }
   `,
 
   form: css`
@@ -21,9 +27,20 @@ export const cssObj = {
     gap: 1.5rem;
   `,
 
-  buttonGroupWrapper: css`
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  signUpButtonWrapper: css`
+    ${MOBILE} {
+      width: 100%;
+      padding: 0 1rem;
+      margin-top: 0.75rem;
+    }
+  `,
+
+  mobileDivider: css`
+    display: none;
+
+    ${MOBILE} {
+      display: block;
+      width: 100%;
+    }
   `,
 };

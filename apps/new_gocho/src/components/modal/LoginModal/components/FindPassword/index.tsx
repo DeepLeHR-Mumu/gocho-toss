@@ -1,10 +1,12 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 
-import { Input, Button } from "shared-ui/deeple-ds";
+import { Input, Button, Divider } from "shared-ui/deeple-ds";
 import { useFindPassword } from "shared-api/auth";
 import { RequestObjDef as FindPasswordFormValues } from "shared-api/auth/useFindPassword/type";
 import { EMAIL_ERROR_MESSAGE, EMAIL_REGEXP } from "shared-constant";
+
+import { useGetDeviceType } from "@/globalStates";
 
 import ActionBar from "../ActionBar";
 
@@ -12,6 +14,8 @@ import { FindPasswordProps } from "./type";
 import { cssObj } from "./style";
 
 const FindPassword = ({ ...actionBarHandlers }: FindPasswordProps) => {
+  const { isMobile } = useGetDeviceType();
+
   const {
     register,
     setError,
@@ -38,6 +42,7 @@ const FindPassword = ({ ...actionBarHandlers }: FindPasswordProps) => {
   return (
     <div css={cssObj.wrapper}>
       <ActionBar title="비밀번호 찾기" {...actionBarHandlers} />
+      <Divider css={cssObj.mobileDivider} />
       <div css={cssObj.emailWrapper}>
         <form>
           <Input
@@ -48,21 +53,25 @@ const FindPassword = ({ ...actionBarHandlers }: FindPasswordProps) => {
                 message: EMAIL_ERROR_MESSAGE.REGEX,
               },
             })}
+            underline={isMobile}
             state={errors.email ? { state: "error", message: errors.email.message } : undefined}
           />
         </form>
       </div>
       <div css={cssObj.buttonGroupWrapper}>
-        <Button
-          size="large"
-          color="outlineGray"
-          onClick={(e) => {
-            if (actionBarHandlers.previousHandler) actionBarHandlers.previousHandler(e);
-          }}
-        >
-          로그인 하러가기
-        </Button>
-        <Button type="submit" size="large" onClick={handleSubmit(findPasswordSubmit)}>
+        {!isMobile && (
+          <Button
+            size="large"
+            color="outlineGray"
+            fill={isMobile}
+            onClick={(e) => {
+              if (actionBarHandlers.previousHandler) actionBarHandlers.previousHandler(e);
+            }}
+          >
+            로그인 하러가기
+          </Button>
+        )}
+        <Button type="submit" size="large" fill={isMobile} onClick={handleSubmit(findPasswordSubmit)}>
           비밀번호 찾기
         </Button>
       </div>

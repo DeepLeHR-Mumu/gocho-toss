@@ -13,6 +13,7 @@ import ReactGA from "react-ga4";
 import { KEY, FB_PIXEL_ID } from "shared-constant";
 import { useAxiosInterceptor } from "shared-api/axiosInstance";
 
+import { useSetDeviceType } from "@/globalStates";
 import { globalStyle } from "@/styles/globalStyle";
 import { GlobalNavigationBar, Footer } from "@/components";
 import {} from "@/components/global/Footer";
@@ -93,6 +94,8 @@ function App({ Component, pageProps }: AppProps) {
       window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
     }
   }, []);
+
+  useSetDeviceType();
 
   useAxiosInterceptor();
 
