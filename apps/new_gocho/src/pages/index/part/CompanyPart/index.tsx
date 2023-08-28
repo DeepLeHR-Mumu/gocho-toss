@@ -9,6 +9,7 @@ import defaultCompanyLogo from "shared-image/global/common/default_company_logo.
 import { useCompanyKeywordArr } from "@/apis/keyword";
 import { CompanyCard } from "@/components";
 
+import { useGetDeviceType } from "@/globalStates";
 import { setCarouselSetting } from "./util";
 import { selectedCompanyDef } from "./type";
 import { cssObj } from "./style";
@@ -18,6 +19,7 @@ export const CompanyPart: FunctionComponent = () => {
   const [selectedCompanyArr, setSelectedCompanyArr] = useState<selectedCompanyDef[]>();
   const sliderRef = useRef<Slider>(null);
 
+  const { isMobile } = useGetDeviceType();
   const { data: companyKeywordDataObj } = useCompanyKeywordArr();
 
   if (!companyKeywordDataObj) {
@@ -42,7 +44,7 @@ export const CompanyPart: FunctionComponent = () => {
             return (
               <Chip
                 type="button"
-                size="large"
+                size={isMobile ? "small" : "large"}
                 color={selectedKeyword === companyKeyword.keyword ? "fillBlue" : "fillGray"}
                 key={`indexCompanyKeyword${companyKeyword.keyword}`}
                 onClick={() => {

@@ -6,8 +6,8 @@ import { dummyArrCreator } from "shared-util";
 import { Divider } from "shared-ui/deeple-ds";
 
 import { useJdArr } from "@/apis/jd";
-
 import { JdCard } from "@/components/common/JdCard";
+
 import { cssObj } from "./style";
 import { setCarouselSetting } from "./util";
 

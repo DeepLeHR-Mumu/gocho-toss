@@ -18,8 +18,10 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
         <div css={cssObj.eduChip(jd.college)}>초</div>
       </div>
       <strong css={cssObj.title}>{jd.title}</strong>
-      <p css={cssObj.desc}>{jd.company.name}</p>
-      <p css={cssObj.desc}>{jd.placeArr[0].split(" ").slice(0, 2).join(" ")}</p>
+      <div css={cssObj.descWrapper}>
+        <p css={cssObj.desc}>{jd.company.name}</p>
+        <p css={cssObj.desc}>{jd.placeArr[0].split(" ").slice(0, 2).join(" ")}</p>
+      </div>
     </div>
   );
 };
