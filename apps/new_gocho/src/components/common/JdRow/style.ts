@@ -31,7 +31,7 @@ export const cssObj = {
     display: flex;
     flex-direction: row;
     gap: 0.75rem;
-    align-item: center;
+    align-items: center;
   `,
 
   jdTitle: css`

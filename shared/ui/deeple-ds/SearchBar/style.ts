@@ -17,6 +17,19 @@ export const cssObj = {
     :focus-within {
       border: 1px solid ${NEWCOLORS.BLUE200};
     }
+
+    input::-ms-clear,
+    input::-ms-reveal {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+    input::-webkit-search-decoration,
+    input::-webkit-search-cancel-button,
+    input::-webkit-search-results-button,
+    input::-webkit-search-results-decoration {
+      display: none;
+    }
   `,
 
   searchIcon: css`
