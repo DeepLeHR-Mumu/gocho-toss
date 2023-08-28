@@ -17,11 +17,7 @@ export const SearchDropDown = ({
 }: SearchDropDownProps) => {
   type SearchFormProps = { search: string };
   const [dropDownVisible, setDropDownVisible] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { isDirty },
-  } = useForm<SearchFormProps>({ defaultValues: { search: defaultValue } });
+  const { register, handleSubmit } = useForm<SearchFormProps>({ defaultValues: { search: defaultValue } });
 
   const submitHandler: SubmitHandler<SearchFormProps> = (searchObj) => {
     // eslint-disable-next-line no-unused-expressions
@@ -50,7 +46,7 @@ export const SearchDropDown = ({
       {recentWordArr.length !== 0 && dropDownVisible && (
         <div css={cssObj.dropDownWrapper}>
           <ul>
-            {recentWordArr.slice(0, isDirty ? 2 : 5).map((recentWord) => {
+            {recentWordArr.slice(0, 10).map((recentWord) => {
               return (
                 <li key={recentWord} css={cssObj.listItem}>
                   <Image src={recentLogo} alt="recent" />
