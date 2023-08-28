@@ -3,23 +3,22 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Slider from "react-slick";
 
 import { dummyArrCreator } from "shared-util";
+import { Chip } from "shared-ui/deeple-ds";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
 import { useCompanyKeywordArr } from "@/apis/keyword";
 import { CompanyCard } from "@/components";
 
 import { setCarouselSetting } from "./util";
+import { selectedCompanyDef } from "./type";
 import { cssObj } from "./style";
 
 export const CompanyPart: FunctionComponent = () => {
-  const [selectedKeyword, setSelectedKeyword] = useState<string>("");
+  const [selectedKeyword, setSelectedKeyword] = useState<string>();
+  const [selectedCompanyArr, setSelectedCompanyArr] = useState<selectedCompanyDef[]>();
   const sliderRef = useRef<Slider>(null);
 
   const { data: companyKeywordDataObj } = useCompanyKeywordArr();
-
-  // useEffect(() => {
-  //   if (companyKeywordDataObj) setSelectedKeyword(companyKeywordDataObj[0].keyword);
-  // }, [companyKeywordDataObj, selectedKeyword, setSelectedKeyword]);
 
   if (!companyKeywordDataObj) {
     return (
@@ -36,8 +35,26 @@ export const CompanyPart: FunctionComponent = () => {
 
   return (
     <section css={cssObj.sectionContainer}>
-      <div css={cssObj.titleContainer}>
-        <h2 css={cssObj.title}>키워드 별 기업 모아보기</h2>
+      <h2 css={cssObj.title}>키워드 별 기업 모아보기</h2>
+      <div css={cssObj.controlContainer}>
+        <div css={cssObj.keywordContainer}>
+          {companyKeywordDataObj.map((companyKeyword) => {
+            return (
+              <Chip
+                type="button"
+                size="large"
+                color={selectedKeyword === companyKeyword.keyword ? "fillBlue" : "fillGray"}
+                key={`indexCompanyKeyword${companyKeyword.keyword}`}
+                onClick={() => {
+                  setSelectedKeyword(companyKeyword.keyword);
+                  setSelectedCompanyArr(companyKeyword.companyArr);
+                }}
+              >
+                {companyKeyword.keyword}
+              </Chip>
+            );
+          })}
+        </div>
         <div css={cssObj.buttonContainer}>
           <button
             css={cssObj.sliderButton}
@@ -51,7 +68,7 @@ export const CompanyPart: FunctionComponent = () => {
           </button>
           <button
             css={cssObj.sliderButton}
-            aria-label="이후 회사보기"
+            aria-label="다음 회사보기"
             type="button"
             onClick={() => {
               return sliderRef.current?.slickNext();
@@ -62,41 +79,21 @@ export const CompanyPart: FunctionComponent = () => {
         </div>
       </div>
       <div css={cssObj.sliderContainer}>
-        {companyKeywordDataObj.map((companyKeyword) => {
-          return (
-            <button
-              type="button"
-              key={`indexCompanyKeyword${companyKeyword.keyword}`}
-              onClick={() => {
-                return setSelectedKeyword(companyKeyword.keyword);
-              }}
-            >
-              {companyKeyword.keyword}
-            </button>
-          );
-        })}
-        <Slider {...setCarouselSetting} ref={sliderRef} />
-      </div>
-      <div>
-        {companyKeywordDataObj.map((companyKeyword) => {
-          if (companyKeyword.keyword === selectedKeyword) {
-            const selectedCompanyKeyword = companyKeyword.companyArr;
-            selectedCompanyKeyword.map((company) => {
-              return (
-                <CompanyCard
-                  key={company.id}
-                  logoSrc={company.logoUrl || defaultCompanyLogo}
-                  name={company.name}
-                  hashTagArr={[company.name]}
-                  buttonHandler={() => {
-                    return null;
-                  }}
-                />
-              );
-            });
-          }
-          return null;
-        })}
+        <Slider {...setCarouselSetting} ref={sliderRef}>
+          {selectedCompanyArr?.map((company) => {
+            return (
+              <CompanyCard
+                key={company.id}
+                logoSrc={company.logoUrl || defaultCompanyLogo}
+                name={company.name}
+                hashTagArr={[company.name]}
+                buttonHandler={() => {
+                  return null;
+                }}
+              />
+            );
+          })}
+        </Slider>
       </div>
     </section>
   );

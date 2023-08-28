@@ -1,10 +1,10 @@
-import { ForwardRefRenderFunction } from "react";
+import { ForwardRefRenderFunction, forwardRef } from "react";
 import { css } from "@emotion/react";
 
 import { InputProps } from "./type";
 import { cssObj } from "./style";
 
-export const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
+const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   { label, prefix, suffix, state, underline, ...props },
   ref
 ) => (
@@ -40,4 +40,4 @@ export const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   </div>
 );
 
-// export const forwardRef(Input);
+export default forwardRef(Input);

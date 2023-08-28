@@ -1,11 +1,11 @@
-import { ForwardRefRenderFunction } from "react";
+import { forwardRef, ForwardRefRenderFunction } from "react";
 import { css } from "@emotion/react";
 import { FiSearch } from "react-icons/fi";
 
 import { SearchBarProps } from "./type";
 import { cssObj } from "./style";
 
-export const SearchBar: ForwardRefRenderFunction<HTMLInputElement, SearchBarProps> = (
+const SearchBar: ForwardRefRenderFunction<HTMLInputElement, SearchBarProps> = (
   { border, prefix, suffix, ...props },
   ref
 ) => (
@@ -19,3 +19,5 @@ export const SearchBar: ForwardRefRenderFunction<HTMLInputElement, SearchBarProp
     {suffix}
   </div>
 );
+
+export default forwardRef(SearchBar);

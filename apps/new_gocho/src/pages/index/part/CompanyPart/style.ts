@@ -7,13 +7,21 @@ export const cssObj = {
     margin: 4.5rem 0;
   `,
 
-  titleContainer: css`
-    display: flex;
-    justify-content: space-between;
-  `,
-
   title: css`
     ${NEWTEXTS.TITLE15};
+  `,
+
+  controlContainer: css`
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 2.25rem;
+  `,
+
+  keywordContainer: css`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.25rem;
   `,
 
   buttonContainer: css`
