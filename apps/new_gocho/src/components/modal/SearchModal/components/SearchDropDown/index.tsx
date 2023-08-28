@@ -6,28 +6,31 @@ import { SearchBar } from "shared-ui/deeple-ds";
 
 import recentLogo from "@/public/recent.svg";
 
-import { useSearch } from "../../util";
-
 import { SearchDropDownProps } from "./type";
 import { cssObj } from "./style";
 
-export const SearchDropDown = ({ recentWordArr = [] }: SearchDropDownProps) => {
+export const SearchDropDown = ({
+  defaultValue = "",
+  recentWordArr = [],
+  searchHandler,
+  onClick,
+}: SearchDropDownProps) => {
   type SearchFormProps = { search: string };
   const [dropDownVisible, setDropDownVisible] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { isDirty },
-  } = useForm<SearchFormProps>({ defaultValues: { search: "" } });
-  const { searchAndSave } = useSearch();
+  } = useForm<SearchFormProps>({ defaultValues: { search: defaultValue } });
 
-  const searchHandler: SubmitHandler<SearchFormProps> = (searchObj) => {
-    searchAndSave(searchObj.search);
+  const submitHandler: SubmitHandler<SearchFormProps> = (searchObj) => {
+    // eslint-disable-next-line no-unused-expressions
+    searchHandler && searchHandler(searchObj.search);
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit(searchHandler)}>
+      <form onSubmit={handleSubmit(submitHandler)}>
         <SearchBar
           border="grayLine"
           prefix={
@@ -35,11 +38,13 @@ export const SearchDropDown = ({ recentWordArr = [] }: SearchDropDownProps) => {
               <FiSearch css={cssObj.searchIcon} />
             </button>
           }
+          defaultValue={defaultValue}
           onFocus={() => {
             setDropDownVisible(true);
           }}
           autoComplete="off"
           {...register("search")}
+          onClick={onClick}
         />
       </form>
       {recentWordArr.length !== 0 && dropDownVisible && (
@@ -53,7 +58,8 @@ export const SearchDropDown = ({ recentWordArr = [] }: SearchDropDownProps) => {
                     type="button"
                     css={cssObj.word}
                     onMouseDown={() => {
-                      searchAndSave(recentWord);
+                      // eslint-disable-next-line no-unused-expressions
+                      searchHandler && searchHandler(recentWord);
                     }}
                   >
                     {recentWord}

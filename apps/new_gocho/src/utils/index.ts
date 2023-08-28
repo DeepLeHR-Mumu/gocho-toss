@@ -20,21 +20,6 @@ export const getDayUntilExpiry = (expiryTime: Date) => {
   return Math.floor(timestampUntilExpiry / 1000 / 60 / 60 / 24);
 };
 
-export const getRandomItems = <T>(items: T[], count: number): T[] => {
-  if (count >= items.length) {
-    return items;
-  }
-
-  const shuffled = items.slice();
-  // eslint-disable-next-line no-plusplus
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-
-  return shuffled.slice(0, count);
-};
-
 export const isStringArray = (param: unknown): param is string[] => {
   if (!Array.isArray(param)) {
     return false;

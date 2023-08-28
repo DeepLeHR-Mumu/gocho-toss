@@ -1,12 +1,9 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FiX } from "react-icons/fi";
 
 import { Divider, Chip } from "shared-ui/deeple-ds";
 import { useJobArr } from "shared-api/job";
 import { useCompanyArr } from "shared-api/company";
-import { selector as jobArrSelector } from "shared-api/job/useJobArr/util";
-
-import { getRandomItems } from "@/utils";
 
 import { CompanyCard } from "../../common/CompanyCard";
 import { JdRow } from "../../common/JdRow";
@@ -18,22 +15,17 @@ import { SearchModalProps } from "./type";
 import { cssObj } from "./style";
 
 export const SearchModal = ({ close }: SearchModalProps) => {
-  const { data: jobData } = useJobArr({ order: "recent", size: 40 });
+  const { data: jobData } = useJobArr({ order: "rand", size: 5 });
   const { data: companyData } = useCompanyArr({ order: "rank", size: 4 });
   const [recentSearchWordArr, setRecentSearchWordArr] = useState<string[]>([]);
   const { searchAndSave } = useSearch();
 
-  const randomRecommendationJd = useMemo(() => {
-    return getRandomItems(
-      jobData?.jobDataArr || ([] as Extract<"jobDataArr", ReturnType<typeof jobArrSelector>>),
-      5
-    ).sort((prev, next) => {
-      const prevTimestamp = new Date(prev.createdTime).getTime();
-      const nextTimestamp = new Date(next.createdTime).getTime();
+  const searchHandler = (searchText: string) => {
+    searchAndSave(searchText);
 
-      return prevTimestamp - nextTimestamp;
-    });
-  }, [jobData]);
+    // eslint-disable-next-line no-unused-expressions
+    close && close();
+  };
 
   const deleteAllChip = () => {
     setRecentSearchWordArr([]);
@@ -57,7 +49,7 @@ export const SearchModal = ({ close }: SearchModalProps) => {
     <div css={cssObj.wrapper}>
       <div css={cssObj.contentsWrapper}>
         <FiX css={cssObj.closeIcon} onClick={close} />
-        <SearchDropDown recentWordArr={recentSearchWordArr} />
+        <SearchDropDown recentWordArr={recentSearchWordArr} searchHandler={searchHandler} />
         <div css={cssObj.etcWrapper}>
           <div css={cssObj.recentWordWrapper}>
             <div css={cssObj.recentWordHeader}>
@@ -80,7 +72,7 @@ export const SearchModal = ({ close }: SearchModalProps) => {
                     key={word}
                     color="fillGray"
                     onClick={() => {
-                      searchAndSave(word);
+                      searchHandler(word);
                     }}
                   >
                     {word}
@@ -107,7 +99,7 @@ export const SearchModal = ({ close }: SearchModalProps) => {
                     size="large"
                     color="fillBlue"
                     onClick={() => {
-                      searchAndSave(company);
+                      searchHandler(company);
                     }}
                   >
                     {company}
@@ -134,7 +126,7 @@ export const SearchModal = ({ close }: SearchModalProps) => {
           <div>
             <h3 css={cssObj.recommendationJdTitle}>추천공고</h3>
             <div css={cssObj.recommendationJdList}>
-              {randomRecommendationJd.map((job) => {
+              {jobData?.jobDataArr.map((job) => {
                 return (
                   <JdRow
                     key={job.id}
