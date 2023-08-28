@@ -3,7 +3,6 @@ import { StaticImageData } from "next/image";
 export interface SlideCardProps {
   slideData: {
     id: number;
-    topDesc: string;
     title: string;
     middleDesc: string;
     lastDesc: string;
