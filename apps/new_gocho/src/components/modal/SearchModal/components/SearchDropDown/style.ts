@@ -12,6 +12,12 @@ export const cssObj = {
     color: ${NEWCOLORS.BLUE300};
   `,
 
+  resetIcon: css`
+    width: 1.5rem;
+    height: 1.5rem;
+    color: ${NEWCOLORS.GRAY200};
+  `,
+
   dropDownWrapper: css`
     border-radius: 1rem;
     border: 1px solid ${NEWCOLORS.BLUE200};

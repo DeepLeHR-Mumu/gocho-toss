@@ -1,33 +1,40 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import { FiArrowUpLeft, FiSearch } from "react-icons/fi";
+import { RiCloseCircleFill } from "react-icons/ri";
 import { SearchBar } from "shared-ui/deeple-ds";
 
 import recentLogo from "@/public/recent.svg";
 
-import { useSearch } from "../../util";
-
 import { SearchDropDownProps } from "./type";
 import { cssObj } from "./style";
 
-export const SearchDropDown = ({ recentWordArr = [] }: SearchDropDownProps) => {
+export const SearchDropDown = ({
+  defaultValue = "",
+  recentWordArr = [],
+  searchHandler,
+  onClick,
+}: SearchDropDownProps) => {
   type SearchFormProps = { search: string };
   const [dropDownVisible, setDropDownVisible] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { isDirty },
-  } = useForm<SearchFormProps>({ defaultValues: { search: "" } });
-  const { searchAndSave } = useSearch();
+  const { register, handleSubmit, reset, setValue, getValues } = useForm<SearchFormProps>({
+    defaultValues: { search: "" },
+  });
 
-  const searchHandler: SubmitHandler<SearchFormProps> = (searchObj) => {
-    searchAndSave(searchObj.search);
+  const submitHandler: SubmitHandler<SearchFormProps> = (searchObj) => {
+    if (searchHandler) {
+      searchHandler(searchObj.search);
+    }
   };
 
+  useEffect(() => {
+    setValue("search", defaultValue);
+  }, [setValue, defaultValue]);
+
   return (
-    <div>
-      <form onSubmit={handleSubmit(searchHandler)}>
+    <div css={cssObj.wrapper}>
+      <form onSubmit={handleSubmit(submitHandler)}>
         <SearchBar
           border="grayLine"
           prefix={
@@ -35,17 +42,31 @@ export const SearchDropDown = ({ recentWordArr = [] }: SearchDropDownProps) => {
               <FiSearch css={cssObj.searchIcon} />
             </button>
           }
+          suffix={
+            getValues("search").length !== 0 && (
+              <RiCloseCircleFill
+                css={cssObj.resetIcon}
+                onClick={() => {
+                  reset();
+                }}
+              />
+            )
+          }
+          autoComplete="off"
+          {...register("search")}
+          onClick={onClick}
           onFocus={() => {
             setDropDownVisible(true);
           }}
-          autoComplete="off"
-          {...register("search")}
+          onBlur={() => {
+            setDropDownVisible(false);
+          }}
         />
       </form>
       {recentWordArr.length !== 0 && dropDownVisible && (
         <div css={cssObj.dropDownWrapper}>
           <ul>
-            {recentWordArr.slice(0, isDirty ? 2 : 5).map((recentWord) => {
+            {recentWordArr.slice(0, 10).map((recentWord) => {
               return (
                 <li key={recentWord} css={cssObj.listItem}>
                   <Image src={recentLogo} alt="recent" />
@@ -53,7 +74,9 @@ export const SearchDropDown = ({ recentWordArr = [] }: SearchDropDownProps) => {
                     type="button"
                     css={cssObj.word}
                     onMouseDown={() => {
-                      searchAndSave(recentWord);
+                      if (searchHandler) {
+                        searchHandler(recentWord);
+                      }
                     }}
                   >
                     {recentWord}
