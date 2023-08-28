@@ -8,12 +8,14 @@ import { Divider } from "shared-ui/deeple-ds";
 import { useJdArr } from "@/apis/jd";
 import { JdCard } from "@/components/common/JdCard";
 
+import { useGetDeviceType } from "@/globalStates";
 import { cssObj } from "./style";
 import { setCarouselSetting } from "./util";
 
 export const JdPart: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
 
+  const { isMobile } = useGetDeviceType();
   const { data: jdDataObj } = useJdArr({
     order: "rand",
     filter: "valid",
@@ -67,11 +69,19 @@ export const JdPart: FunctionComponent = () => {
           </div>
         </div>
         <div css={cssObj.sliderContainer}>
-          <Slider {...setCarouselSetting} ref={sliderRef}>
-            {jdDataObj?.jdDataArr.map((jd) => {
-              return <JdCard key={jd.id} jd={jd} />;
-            })}
-          </Slider>
+          {isMobile ? (
+            <div css={cssObj.cardContainer}>
+              {jdDataObj?.jdDataArr.map((jd) => {
+                return <JdCard key={jd.id} jd={jd} />;
+              })}
+            </div>
+          ) : (
+            <Slider {...setCarouselSetting} ref={sliderRef}>
+              {jdDataObj?.jdDataArr.map((jd) => {
+                return <JdCard key={jd.id} jd={jd} />;
+              })}
+            </Slider>
+          )}
         </div>
       </section>
       <Divider />

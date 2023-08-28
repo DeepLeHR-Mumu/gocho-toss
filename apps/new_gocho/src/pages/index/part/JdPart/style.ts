@@ -55,6 +55,16 @@ export const cssObj = {
     }
   `,
 
+  cardContainer: css`
+    display: flex;
+    gap: 0 1rem;
+    overflow-x: scroll;
+
+    * ::-webkit-scrollbar {
+      display: none;
+    }
+  `,
+
   colorPoint: css`
     color: ${NEWCOLORS.BLUE250};
   `,
