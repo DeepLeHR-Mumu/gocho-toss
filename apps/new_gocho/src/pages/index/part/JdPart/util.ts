@@ -3,7 +3,7 @@ export const setCarouselSetting = {
   dots: false,
   arrows: false,
   autoplay: false,
-  infinite: true,
+  infinite: false,
   swipeToSlide: true,
   slidesToShow: 4,
   slidesToScroll: 4,

@@ -1,4 +1,4 @@
-import { FunctionComponent, useRef, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Slider from "react-slick";
 
@@ -21,6 +21,13 @@ export const CompanyPart: FunctionComponent = () => {
 
   const { isMobile } = useGetDeviceType();
   const { data: companyKeywordDataObj } = useCompanyKeywordArr();
+
+  useEffect(() => {
+    if (companyKeywordDataObj) {
+      setSelectedKeyword(companyKeywordDataObj[0].keyword);
+      setSelectedCompanyArr(companyKeywordDataObj[0].companyArr);
+    }
+  }, [companyKeywordDataObj]);
 
   if (!companyKeywordDataObj) {
     return (
@@ -81,21 +88,39 @@ export const CompanyPart: FunctionComponent = () => {
         </div>
       </div>
       <div css={cssObj.sliderContainer}>
-        <Slider {...setCarouselSetting} ref={sliderRef}>
-          {selectedCompanyArr?.map((company) => {
-            return (
-              <CompanyCard
-                key={company.id}
-                logoSrc={company.logoUrl || defaultCompanyLogo}
-                name={company.name}
-                hashTagArr={[company.name]}
-                buttonHandler={() => {
-                  return null;
-                }}
-              />
-            );
-          })}
-        </Slider>
+        {isMobile ? (
+          <div css={cssObj.cardContainer}>
+            {selectedCompanyArr?.map((company) => {
+              return (
+                <CompanyCard
+                  key={company.id}
+                  logoSrc={company.logoUrl || defaultCompanyLogo}
+                  name={company.name}
+                  hashTagArr={[company.name]}
+                  buttonHandler={() => {
+                    return null;
+                  }}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <Slider {...setCarouselSetting} ref={sliderRef}>
+            {selectedCompanyArr?.map((company) => {
+              return (
+                <CompanyCard
+                  key={company.id}
+                  logoSrc={company.logoUrl || defaultCompanyLogo}
+                  name={company.name}
+                  hashTagArr={[company.name]}
+                  buttonHandler={() => {
+                    return null;
+                  }}
+                />
+              );
+            })}
+          </Slider>
+        )}
       </div>
     </section>
   );

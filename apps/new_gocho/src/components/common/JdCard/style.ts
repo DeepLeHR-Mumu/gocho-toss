@@ -6,11 +6,12 @@ import { MOBILE } from "shared-style/mediaQuery";
 
 export const cssObj = {
   cardWrapper: css`
-    min-width: 15.75rem;
+    width: 15.75rem;
     height: 23.125rem;
+    flex-shrink: 0;
 
     ${MOBILE} {
-      min-width: 8.75rem;
+      width: 8.75rem;
       height: 15rem;
     }
   `,

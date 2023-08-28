@@ -1,20 +1,11 @@
 export interface MainBannerDef {
   id: number;
-  image_url: string;
-  color: string;
+  pc_image_url: string;
+  mobile_image_url: string;
+  type: string;
+  link: string | null;
   start_time: string;
   end_time: string;
-  company: {
-    id: number;
-    logo_url: string;
-    name: string;
-  };
-  jd: {
-    id: number;
-    title: string;
-    start_time: string;
-    end_time: string;
-  };
 }
 
 export interface TopBannerDef {
@@ -33,11 +24,4 @@ export interface TopBannerDef {
     start_time: string;
     end_time: string;
   };
-}
-
-export interface SideBannerDef {
-  id: number;
-  start_time: number;
-  end_time: number;
-  image_url: string;
 }

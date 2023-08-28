@@ -15,6 +15,7 @@ export const cssObj = {
       border-radius: 1rem;
       border: 1px solid ${NEWCOLORS.GRAY100};
       background-color: ${NEWCOLORS.WHITE};
+      flex-shrink: 0;
 
       ${MOBILE} {
         width: ${isButtonExist ? "8.75rem" : "7.5rem"};
