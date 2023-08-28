@@ -16,5 +16,5 @@ export const changeHomeJdListSortingEvent = (keyword: string) => {
 };
 
 export const adClickEvent = () => {
-  ReactGA.event("ad_main_posco_intern_click");
+  ReactGA.event("ad_main_poscoFutureM_click");
 };
