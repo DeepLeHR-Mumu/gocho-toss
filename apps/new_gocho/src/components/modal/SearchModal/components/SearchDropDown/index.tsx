@@ -23,8 +23,9 @@ export const SearchDropDown = ({
   });
 
   const submitHandler: SubmitHandler<SearchFormProps> = (searchObj) => {
-    // eslint-disable-next-line no-unused-expressions
-    searchHandler && searchHandler(searchObj.search);
+    if (searchHandler) {
+      searchHandler(searchObj.search);
+    }
   };
 
   useEffect(() => {
@@ -32,7 +33,7 @@ export const SearchDropDown = ({
   }, [setValue, defaultValue]);
 
   return (
-    <div>
+    <div css={cssObj.wrapper}>
       <form onSubmit={handleSubmit(submitHandler)}>
         <SearchBar
           border="grayLine"
@@ -73,8 +74,9 @@ export const SearchDropDown = ({
                     type="button"
                     css={cssObj.word}
                     onMouseDown={() => {
-                      // eslint-disable-next-line no-unused-expressions
-                      searchHandler && searchHandler(recentWord);
+                      if (searchHandler) {
+                        searchHandler(recentWord);
+                      }
                     }}
                   >
                     {recentWord}

@@ -23,8 +23,9 @@ export const SearchModal = ({ close }: SearchModalProps) => {
   const searchHandler = (searchText: string) => {
     searchAndSave(searchText);
 
-    // eslint-disable-next-line no-unused-expressions
-    close && close();
+    if (close) {
+      close();
+    }
   };
 
   const deleteAllChip = () => {
