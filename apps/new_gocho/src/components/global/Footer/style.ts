@@ -1,13 +1,18 @@
 import { css } from "@emotion/react";
 
 import { NEWCOLORS } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { NEWTEXTS, TEXTS } from "shared-style/text";
+import { MOBILE } from "shared-style/mediaQuery";
 
 export const cssObj = {
   footer: css`
     margin-top: 7.5rem;
     background-color: #f2f2f5;
     width: 100%;
+
+    ${MOBILE} {
+      margin-top: 2.5rem;
+    }
   `,
 
   container: css`
@@ -16,10 +21,18 @@ export const cssObj = {
     margin: 0 auto;
     padding: 4.375rem 0;
     gap: 0 1.25rem;
-    border-top: 1px solid ${NEWCOLORS.GRAY200};
+
+    ${MOBILE} {
+      padding: 1.25rem 0;
+      flex-direction: column;
+    }
   `,
 
-  infoContainer: css``,
+  infoContainer: css`
+    ${MOBILE} {
+      margin-bottom: 0.5rem;
+    }
+  `,
 
   logoBox: css`
     position: relative;
@@ -27,6 +40,10 @@ export const cssObj = {
     height: 1.5rem;
     display: block;
     margin-bottom: 1.75rem;
+
+    ${MOBILE} {
+      margin-bottom: 1rem;
+    }
 
     > img {
       object-fit: contain;
@@ -37,11 +54,28 @@ export const cssObj = {
     display: flex;
     gap: 0 1rem;
     margin-bottom: 0.5rem;
+
+    ${MOBILE} {
+      gap: 0 0.5rem;
+    }
+  `,
+
+  ceoInfo: css`
+    ${TEXTS.TITLE5};
+    color: ${NEWCOLORS.BLUEGRAY400};
+
+    ${MOBILE} {
+      ${NEWTEXTS.TITLE4};
+    }
   `,
 
   info: css`
     ${TEXTS.TITLE5};
     color: ${NEWCOLORS.BLUEGRAY400};
+
+    ${MOBILE} {
+      ${NEWTEXTS.TITLE1};
+    }
   `,
 
   contour: css`
@@ -50,9 +84,11 @@ export const cssObj = {
 
   middleBox: css`
     margin: 1.25rem 0 2.5rem;
-  `,
 
-  contactContainer: css``,
+    ${MOBILE} {
+      margin: 1rem 0;
+    }
+  `,
 
   contactBox: css`
     display: flex;
@@ -64,6 +100,10 @@ export const cssObj = {
   contactTitle: css`
     ${TEXTS.TITLE7};
     color: ${NEWCOLORS.BLUEGRAY400};
+
+    ${MOBILE} {
+      ${NEWTEXTS.TITLE6};
+    }
   `,
 
   link: css`
@@ -71,6 +111,10 @@ export const cssObj = {
     align-items: center;
     ${TEXTS.TITLE5};
     color: ${NEWCOLORS.BLUEGRAY400};
+
+    ${MOBILE} {
+      ${NEWTEXTS.TITLE1};
+    }
   `,
 
   kakaoLogo: css`
@@ -88,10 +132,18 @@ export const cssObj = {
   linkBox: css`
     display: flex;
     gap: 0 1rem;
+
+    ${MOBILE} {
+      margin-bottom: 1rem;
+    }
   `,
 
   underlineLink: css`
     ${TEXTS.UNDERLINE};
     color: ${NEWCOLORS.BLUEGRAY400};
+
+    ${MOBILE} {
+      ${NEWTEXTS.TITLE6};
+    }
   `,
 };

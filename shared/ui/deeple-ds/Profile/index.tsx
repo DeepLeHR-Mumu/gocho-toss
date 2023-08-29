@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ProfileProps } from "./type";
 import { cssObj } from "./style";
 
-const Profile = ({ src, size = 100, onClick }: ProfileProps) => (
+export const Profile = ({ src, size = 100, onClick }: ProfileProps) => (
   <Image
     src={src}
     alt="profile"
@@ -13,5 +13,3 @@ const Profile = ({ src, size = 100, onClick }: ProfileProps) => (
     onClick={onClick}
   />
 );
-
-export default Profile;

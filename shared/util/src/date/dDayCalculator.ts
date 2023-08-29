@@ -21,7 +21,7 @@ export const dDayCalculator: setDdayValueCreatorDef = (endTime) => {
     return "만료";
   }
   if (endDate.isToday()) {
-    return "D-DAY";
+    return "오늘마감";
   }
 
   return `D-${dDay}`;

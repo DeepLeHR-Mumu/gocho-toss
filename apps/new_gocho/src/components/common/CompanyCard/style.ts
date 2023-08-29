@@ -15,6 +15,7 @@ export const cssObj = {
       border-radius: 1rem;
       border: 1px solid ${NEWCOLORS.GRAY100};
       background-color: ${NEWCOLORS.WHITE};
+      flex-shrink: 0;
 
       ${MOBILE} {
         width: ${isButtonExist ? "8.75rem" : "7.5rem"};
@@ -46,6 +47,9 @@ export const cssObj = {
   hashTags: (isButtonExist: boolean) => {
     return css`
       width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
       word-wrap: break-word;
       word-break: break-all;
       color: ${NEWCOLORS.BLUEGRAY400};

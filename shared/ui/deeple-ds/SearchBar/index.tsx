@@ -1,4 +1,4 @@
-import { ForwardRefRenderFunction, forwardRef } from "react";
+import { forwardRef, ForwardRefRenderFunction } from "react";
 import { css } from "@emotion/react";
 import { FiSearch } from "react-icons/fi";
 

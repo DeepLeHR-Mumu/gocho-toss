@@ -4,7 +4,7 @@ import { createPortal } from "react-dom";
 import { ModalProps } from "./type";
 import { cssObj } from "./style";
 
-const Modal = ({ portalId = "portal", children, ...props }: ModalProps) => {
+export const Modal = ({ portalId = "portal", children, ...props }: ModalProps) => {
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
@@ -20,5 +20,3 @@ const Modal = ({ portalId = "portal", children, ...props }: ModalProps) => {
     document.getElementById(portalId) as HTMLElement
   );
 };
-
-export default Modal;

@@ -3,16 +3,8 @@ export const setCarouselSetting = {
   dots: false,
   arrows: false,
   autoplay: false,
-  infinite: true,
+  infinite: false,
   swipeToSlide: true,
   slidesToShow: 4,
   slidesToScroll: 4,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-      },
-    },
-  ],
 };

@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { css } from "@emotion/react";
-import DDayChip from "shared-ui/deeple-ds/DDayChip";
+import { DDayChip } from "shared-ui/deeple-ds";
 
 import { isInvalidDate, isExpired, getDayUntilExpiry } from "@/utils";
 

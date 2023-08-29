@@ -1,21 +1,35 @@
-import { FunctionComponent, useRef } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Slider from "react-slick";
 
 import { dummyArrCreator } from "shared-util";
+import { Chip } from "shared-ui/deeple-ds";
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
-import { useCompanyArr } from "@/apis/company";
+import { useCompanyKeywordArr } from "@/apis/keyword";
 import { CompanyCard } from "@/components";
 
+import { useGetDeviceType } from "@/globalStates";
 import { setCarouselSetting } from "./util";
+import { selectedCompanyDef } from "./type";
 import { cssObj } from "./style";
 
 export const CompanyPart: FunctionComponent = () => {
+  const [selectedKeyword, setSelectedKeyword] = useState<string>();
+  const [selectedCompanyArr, setSelectedCompanyArr] = useState<selectedCompanyDef[]>();
   const sliderRef = useRef<Slider>(null);
 
-  const { data: companyDataObj } = useCompanyArr({ order: "view" });
+  const { isMobile } = useGetDeviceType();
+  const { data: companyKeywordDataObj } = useCompanyKeywordArr();
 
-  if (!companyDataObj) {
+  useEffect(() => {
+    if (companyKeywordDataObj) {
+      setSelectedKeyword(companyKeywordDataObj[0].keyword);
+      setSelectedCompanyArr(companyKeywordDataObj[0].companyArr);
+    }
+  }, [companyKeywordDataObj]);
+
+  if (!companyKeywordDataObj) {
     return (
       <section css={cssObj.sectionContainer}>
         <h2 css={cssObj.title}>키워드 별 기업 모아보기</h2>
@@ -27,14 +41,33 @@ export const CompanyPart: FunctionComponent = () => {
       </section>
     );
   }
+
   return (
     <section css={cssObj.sectionContainer}>
-      <div css={cssObj.titleContainer}>
-        <h2 css={cssObj.title}>키워드 별 기업 모아보기</h2>
+      <h2 css={cssObj.title}>키워드 별 기업 모아보기</h2>
+      <div css={cssObj.controlContainer}>
+        <div css={cssObj.keywordContainer}>
+          {companyKeywordDataObj.map((companyKeyword) => {
+            return (
+              <Chip
+                type="button"
+                size={isMobile ? "small" : "large"}
+                color={selectedKeyword === companyKeyword.keyword ? "fillBlue" : "fillGray"}
+                key={`indexCompanyKeyword${companyKeyword.keyword}`}
+                onClick={() => {
+                  setSelectedKeyword(companyKeyword.keyword);
+                  setSelectedCompanyArr(companyKeyword.companyArr);
+                }}
+              >
+                {companyKeyword.keyword}
+              </Chip>
+            );
+          })}
+        </div>
         <div css={cssObj.buttonContainer}>
           <button
             css={cssObj.sliderButton}
-            aria-label="이전 추천공고보기"
+            aria-label="이전 회사보기"
             type="button"
             onClick={() => {
               return sliderRef.current?.slickPrev();
@@ -44,7 +77,7 @@ export const CompanyPart: FunctionComponent = () => {
           </button>
           <button
             css={cssObj.sliderButton}
-            aria-label="이전 추천공고보기"
+            aria-label="다음 회사보기"
             type="button"
             onClick={() => {
               return sliderRef.current?.slickNext();
@@ -54,13 +87,41 @@ export const CompanyPart: FunctionComponent = () => {
           </button>
         </div>
       </div>
-      <Slider {...setCarouselSetting} ref={sliderRef}>
-        {companyDataObj?.companyDataArr.map((company) => {
-          return (
-            <CompanyCard key={company.id} logoSrc={company.logoUrl} name={company.name} hashTagArr={[company.size]} />
-          );
-        })}
-      </Slider>
+      <div css={cssObj.sliderContainer}>
+        {isMobile ? (
+          <div css={cssObj.cardContainer}>
+            {selectedCompanyArr?.map((company) => {
+              return (
+                <CompanyCard
+                  key={company.id}
+                  logoSrc={company.logoUrl || defaultCompanyLogo}
+                  name={company.name}
+                  hashTagArr={[company.name]}
+                  buttonHandler={() => {
+                    return null;
+                  }}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <Slider {...setCarouselSetting} ref={sliderRef}>
+            {selectedCompanyArr?.map((company) => {
+              return (
+                <CompanyCard
+                  key={company.id}
+                  logoSrc={company.logoUrl || defaultCompanyLogo}
+                  name={company.name}
+                  hashTagArr={[company.name]}
+                  buttonHandler={() => {
+                    return null;
+                  }}
+                />
+              );
+            })}
+          </Slider>
+        )}
+      </div>
     </section>
   );
 };
