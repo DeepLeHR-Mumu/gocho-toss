@@ -1,3 +1,5 @@
+import { ParsedUrlQuery } from "querystring";
+
 export const isInvalidDate = (date: Date) => {
   return Number.isNaN(date.getTime());
 };
@@ -28,4 +30,15 @@ export const isStringArray = (param: unknown): param is string[] => {
   return param.every((item) => {
     return typeof item === "string";
   });
+};
+
+export const isQueryString = <T extends keyof ParsedUrlQuery>(query: ParsedUrlQuery[T]): query is string => {
+  if (query) {
+    if (Array.isArray(query)) {
+      return false;
+    }
+    return true;
+  }
+
+  return false;
 };
