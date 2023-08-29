@@ -13,7 +13,7 @@ import ReactGA from "react-ga4";
 import { KEY, FB_PIXEL_ID } from "shared-constant";
 import { useAxiosInterceptor } from "shared-api/axiosInstance";
 
-import { useSetDeviceType } from "@/globalStates";
+import { useSetDeviceType, useGetDeviceType } from "@/globalStates";
 import { globalStyle } from "@/styles/globalStyle";
 import { GlobalNavigationBar, Footer } from "@/components";
 import {} from "@/components/global/Footer";
@@ -96,6 +96,7 @@ function App({ Component, pageProps }: AppProps) {
   }, []);
 
   useSetDeviceType();
+  const { isMobile } = useGetDeviceType();
 
   useAxiosInterceptor();
 
@@ -124,7 +125,8 @@ function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <Global styles={globalStyle} />
-          <GlobalNavigationBar />
+          {!(isMobile && router.pathname === "/search") && <GlobalNavigationBar />}
+          {/* <GlobalNavigationBar /> */}
           <Component {...pageProps} />
           <Footer />
           <ReactQueryDevtools initialIsOpen={false} />

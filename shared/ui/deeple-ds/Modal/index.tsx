@@ -1,9 +1,10 @@
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 
 import { ModalProps } from "./type";
 import { cssObj } from "./style";
 
-const Modal = ({ children, ...props }: ModalProps) => {
+const Modal = ({ portalId = "portal", children, ...props }: ModalProps) => {
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
@@ -12,10 +13,11 @@ const Modal = ({ children, ...props }: ModalProps) => {
     };
   }, []);
 
-  return (
+  return createPortal(
     <div css={cssObj.layout} {...props}>
       {children}
-    </div>
+    </div>,
+    document.getElementById(portalId) as HTMLElement
   );
 };
 

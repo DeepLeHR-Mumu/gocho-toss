@@ -6,6 +6,7 @@ export const cssObj = {
   dDayChip: css`
     border-radius: 1.5rem;
     padding: 0.375rem 1rem;
+    white-space: nowrap;
     ${NEWTEXTS.TITLE6}
 
     ${MOBILE} {

@@ -4,7 +4,9 @@ import { MOBILE } from "shared-style/mediaQuery";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
-  wrapper: css``,
+  wrapper: css`
+    width: 100%;
+  `,
 
   searchIcon: css`
     width: 1.5rem;
