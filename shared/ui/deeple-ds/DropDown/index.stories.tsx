@@ -26,13 +26,13 @@ export const Default: Story = {};
 export const WithMenu: Story = {
   args: {
     title: "Title",
-    menu: { options: [{ text: "option 1", focused: true }, { text: "option 2" }], footer: { text: "footer" } },
+    menu: { options: [{ content: "option 1", focused: true }, { content: "option 2" }], footer: { content: "footer" } },
   },
 };
 
 export const CustomTitle: Story = {
   args: {
     customTitle: <Profile src={testSmallImage1} />,
-    menu: { options: [{ text: "option 1", focused: true }, { text: "option 2" }], footer: { text: "footer" } },
+    menu: { options: [{ content: "option 1", focused: true }, { content: "option 2" }], footer: { content: "footer" } },
   },
 };
