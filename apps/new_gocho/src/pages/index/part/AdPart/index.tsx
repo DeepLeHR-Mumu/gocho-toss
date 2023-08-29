@@ -6,17 +6,19 @@ import Link from "next/link";
 
 import { useMainBannerArr } from "@/apis/ads";
 
+import { useGetDeviceType } from "@/globalStates";
 import { cssObj } from "./style";
 import { setCarouselSetting } from "./util";
 
 export const AdPart: FunctionComponent = () => {
   const { data: bannerDataObj } = useMainBannerArr();
+  const { isMobile } = useGetDeviceType();
 
   const sliderRef = useRef<Slider>(null);
 
   return (
     <section css={cssObj.sectionContainer}>
-      <Slider {...setCarouselSetting} ref={sliderRef} css={cssObj.sliderContainer}>
+      <Slider {...setCarouselSetting(isMobile)} ref={sliderRef} css={cssObj.sliderContainer}>
         {bannerDataObj?.bannerDataArr.map((banner) => {
           return (
             <Link key={`indexMainBanner${banner.id}`} css={cssObj.banner} href={banner.link || ""}>

@@ -14,7 +14,8 @@ export const cssObj = {
     position: sticky;
     left: 0;
     top: 0;
-    background-color: ${NEWCOLORS.BLUE250};
+    background-color: ${NEWCOLORS.BLUE300};
+    border-bottom: 1px solid ${NEWCOLORS.WHITE};
 
     ${MOBILE} {
       height: 3.5rem;
