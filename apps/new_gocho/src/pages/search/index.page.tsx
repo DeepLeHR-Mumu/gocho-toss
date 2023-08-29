@@ -124,6 +124,7 @@ const SearchPage = () => {
                 return (
                   <CompanyRow
                     key={company.id}
+                    id={company.id}
                     logo={company.logoUrl}
                     name={company.name}
                     size={company.size}
