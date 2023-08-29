@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { FiX } from "react-icons/fi";
 
-import { Divider, Chip } from "shared-ui/deeple-ds";
+import { Divider, Chip, Modal } from "shared-ui/deeple-ds";
 import { useJobArr } from "shared-api/job";
 import { useCompanyArr } from "shared-api/company";
 
@@ -47,7 +47,7 @@ export const SearchModal = ({ close }: SearchModalProps) => {
   }, []);
 
   return (
-    <div css={cssObj.wrapper}>
+    <Modal css={cssObj.wrapper}>
       <div css={cssObj.contentsWrapper}>
         <FiX css={cssObj.closeIcon} onClick={close} />
         <SearchDropDown recentWordArr={recentSearchWordArr} searchHandler={searchHandler} />
@@ -142,6 +142,6 @@ export const SearchModal = ({ close }: SearchModalProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 };

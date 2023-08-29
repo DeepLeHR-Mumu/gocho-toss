@@ -29,6 +29,7 @@ export const cssObj = {
     width: fit-content;
     border-radius: 1.5rem;
     padding: 0.375rem 1rem;
+    white-space: nowrap;
     ${NEWTEXTS.TITLE6}
     ${chipColor(dDay, year)};
 

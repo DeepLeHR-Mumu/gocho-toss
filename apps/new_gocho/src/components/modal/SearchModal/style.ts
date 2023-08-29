@@ -3,12 +3,8 @@ import { NEWCOLORS } from "shared-style/color";
 import { MOBILE } from "shared-style/mediaQuery";
 import { NEWTEXTS } from "shared-style/text";
 
-import { cssObj as modalCssObj } from "shared-ui/deeple-ds/Modal/style";
-
 export const cssObj = {
   wrapper: css`
-    ${modalCssObj.layout}
-
     background-color: ${NEWCOLORS.WHITE};
     backdrop-filter: none;
     overflow: auto;

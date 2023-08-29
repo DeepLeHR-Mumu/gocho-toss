@@ -52,7 +52,7 @@ export const useSearch = () => {
   const router = useRouter();
 
   const searchAndSave = (text: string) => {
-    router.push({ pathname: URL.SEARCH, query: { q: text } });
+    router.push({ pathname: URL.SEARCH, query: { q: text, page: 1 } });
     saveRecentWordToStorage(text);
   };
 
