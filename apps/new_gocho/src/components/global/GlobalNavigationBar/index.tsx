@@ -62,7 +62,7 @@ export const GlobalNavigationBar = () => {
                 <nav>
                   <ul css={cssObj.navigationWrapper}>
                     <li>
-                      <Link href={URL.JOBS_LIST}>채용공고</Link>
+                      <Link href={URL.JDS_LIST}>채용공고</Link>
                     </li>
                     <li>
                       <Link href={URL.COMPANY}>기업정보</Link>

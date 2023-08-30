@@ -71,12 +71,16 @@ export const cssObj = {
   `,
 
   imageWrapper: css`
-    width: calc(min(100vw - 10rem, 67.5rem));
-    min-width: 19.5rem;
-    height: calc(min(100vw / 1080 * 420, 26.25rem));
+    width: 67.5rem;
+    height: 26.25rem;
     border-radius: 1rem;
     overflow: hidden;
     position: relative;
+
+    ${MOBILE} {
+      width: calc(100vw - 5rem);
+      height: calc(100vw / 1080 * 420);
+    }
 
     > img {
       object-fit: cover;
