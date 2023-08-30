@@ -5,10 +5,10 @@ import Image from "next/image";
 import { FiEyeOff, FiEye } from "react-icons/fi";
 
 import { Input, Button, Divider } from "shared-ui/deeple-ds";
-import { useDoLogin, useUserProfile } from "shared-api/auth";
-import { RequestObjDef as LoginFormValues } from "shared-api/auth/useDoLogin/type";
 import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE, EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 
+import { useDoLogin, useUserProfile } from "@/apis/auth";
+import { RequestObjDef as LoginFormValues } from "@/apis/auth/useDoLogin/type";
 import { useGetDeviceType } from "@/globalStates";
 import kakaoLogo from "@/public/kakao.svg";
 

@@ -2,10 +2,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import axios from "axios";
 
 import { Input, Button, Divider } from "shared-ui/deeple-ds";
-import { useDoSignUp, useUserProfile } from "shared-api/auth";
-import { RequestObjDef as SignUpFormValues } from "shared-api/auth/useDoSignup/type";
 import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE, EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 
+import { useDoSignUp, useUserProfile } from "@/apis/auth";
+import { RequestObjDef as SignUpFormValues } from "@/apis/auth/useDoSignup/type";
 import { useGetDeviceType } from "@/globalStates";
 
 import ActionBar from "../ActionBar";
