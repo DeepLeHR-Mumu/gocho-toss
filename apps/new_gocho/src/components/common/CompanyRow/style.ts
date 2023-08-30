@@ -4,16 +4,20 @@ import { MOBILE } from "shared-style/mediaQuery";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
-  wrapper: css`
-    display: flex;
-    flex-direction: row;
-    padding: 1.25rem 1.5rem;
-    align-items: center;
+  wrapper: (border: boolean) => {
+    return css`
+      display: flex;
+      flex-direction: row;
+      padding: 1.25rem 1.5rem;
+      align-items: center;
+      border-radius: 1rem;
+      border: ${border ? `1px solid ${NEWCOLORS.GRAY200}` : "none"};
 
-    ${MOBILE} {
-      padding: 0.75rem 0;
-    }
-  `,
+      ${MOBILE} {
+        padding: 0.75rem 0;
+      }
+    `;
+  },
 
   infoWrapper: css`
     display: flex;
