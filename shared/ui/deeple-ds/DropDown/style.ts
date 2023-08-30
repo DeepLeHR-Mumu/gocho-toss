@@ -22,6 +22,11 @@ export const menuCssObj = {
     ${NEWTEXTS.TITLE7}
   `,
 
+  header: (clickable: boolean) => css`
+    padding: 1rem;
+    cursor: ${clickable ? "pointer" : "auto"};
+  `,
+
   footer: (clickable: boolean) => css`
     padding: 1rem;
     display: flex;

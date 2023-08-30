@@ -1,6 +1,6 @@
 import { Key, ReactNode, ReactElement } from "react";
 
-export type MenuOption = { text: string; key?: Key; focused?: boolean; onClick?: () => void };
+export type MenuOption = { content: ReactNode; key?: Key; focused?: boolean; onClick?: () => void };
 
 export type MenuDirection = "top-left" | "top-right" | "bottom-left" | "bottom-right";
 
@@ -13,6 +13,7 @@ export type MenuLocation = {
 export interface MenuProps {
   width?: 128 | 180;
   options?: MenuOption[];
+  header?: Omit<MenuOption, "key" | "focused">;
   footer?: Omit<MenuOption, "key" | "focused">;
 }
 

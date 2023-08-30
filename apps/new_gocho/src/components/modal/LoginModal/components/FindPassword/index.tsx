@@ -1,11 +1,11 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 
-import { Input, Button, Divider } from "shared-ui/deeple-ds";
-import { useFindPassword } from "shared-api/auth";
-import { RequestObjDef as FindPasswordFormValues } from "shared-api/auth/useFindPassword/type";
 import { EMAIL_ERROR_MESSAGE, EMAIL_REGEXP } from "shared-constant";
+import { Input, Button, Divider } from "shared-ui/deeple-ds";
 
+import { useFindPassword } from "@/apis/auth";
+import { RequestObjDef as FindPasswordFormValues } from "@/apis/auth/useFindPassword/type";
 import { useGetDeviceType } from "@/globalStates";
 
 import ActionBar from "../ActionBar";

@@ -4,14 +4,15 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { MenuProps, DropDownProps, MenuLocation } from "./type";
 import { menuCssObj, dropDownCssObj } from "./style";
 
-export const Menu = ({ width = 180, options = [], footer }: MenuProps) => (
+export const Menu = ({ width = 180, options = [], header, footer }: MenuProps) => (
   <div css={menuCssObj.menuContainer(width)}>
+    {header && <div css={menuCssObj.header(!!header.onClick)}>{header.content}</div>}
     {options.map((option, index) => (
       <div key={option.key ? option.key : index} css={menuCssObj.option(!!option.focused, !!option.onClick)}>
-        {option.text}
+        {option.content}
       </div>
     ))}
-    {footer && <div css={menuCssObj.footer(!!footer.onClick)}>{footer.text}</div>}
+    {footer && <div css={menuCssObj.footer(!!footer.onClick)}>{footer.content}</div>}
   </div>
 );
 
