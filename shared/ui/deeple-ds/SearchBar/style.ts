@@ -69,4 +69,8 @@ export const cssObj = {
   grayLine: css`
     border: 1px solid ${NEWCOLORS.GRAY200};
   `,
+
+  gray: css`
+    background-color: ${NEWCOLORS.GRAY50};
+  `,
 };
