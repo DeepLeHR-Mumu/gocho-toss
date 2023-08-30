@@ -6,12 +6,12 @@ import { SearchBarProps } from "./type";
 import { cssObj } from "./style";
 
 const SearchBar: ForwardRefRenderFunction<HTMLInputElement, SearchBarProps> = (
-  { border, prefix, suffix, ...props },
+  { border, prefix, suffix, color, ...props },
   ref
 ) => (
   <div
     css={css`
-      ${cssObj.wrapper}${border ? cssObj[border] : ""}
+      ${cssObj.wrapper}${border ? cssObj[border] : ""}${color ? cssObj[color] : ""}
     `}
   >
     {prefix || <FiSearch css={cssObj.searchIcon} />}
