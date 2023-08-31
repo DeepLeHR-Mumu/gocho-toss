@@ -4,4 +4,5 @@ export interface SearchBarProps extends Omit<InputHTMLAttributes<HTMLInputElemen
   border?: "grayLine";
   prefix?: ReactNode;
   suffix?: ReactNode;
+  color?: "gray";
 }

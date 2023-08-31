@@ -1,5 +1,6 @@
 export interface JdCardProps {
   jd: {
+    id: number;
     company: {
       name: string;
       logoUrl: string;
@@ -10,5 +11,6 @@ export interface JdCardProps {
     college: boolean;
     title: string;
     placeArr: string[];
+    isBookmark: boolean;
   };
 }

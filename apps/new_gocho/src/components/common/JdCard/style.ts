@@ -32,6 +32,34 @@ export const cssObj = {
     }
   `,
 
+  likeButton: (isBookmark: boolean) => {
+    return css`
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      ${MOBILE} {
+        top: 0.5rem;
+        right: 0.5rem;
+      }
+
+      > svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        color: ${isBookmark ? NEWCOLORS.RED100 : NEWCOLORS.BLUEGRAY100};
+
+        ${MOBILE} {
+          width: 1.25rem;
+          height: 1.25rem;
+        }
+      }
+    `;
+  },
+
   chipContainer: css`
     display: flex;
     align-items: center;

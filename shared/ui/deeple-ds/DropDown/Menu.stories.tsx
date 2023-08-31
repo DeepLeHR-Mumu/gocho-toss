@@ -10,8 +10,15 @@ export default meta;
 
 type Story = StoryObj<typeof Menu>;
 
-export const Default: Story = { args: { options: [{ text: "option 1" }, { text: "option 2" }] } };
+export const Default: Story = { args: { options: [{ content: "option 1" }, { content: "option 2" }] } };
 
 export const WithFooter: Story = {
-  args: { options: [{ text: "option 1" }, { text: "option 2" }], footer: { text: "footer" } },
+  args: { options: [{ content: "option 1" }, { content: "option 2" }], footer: { content: "footer" } },
+};
+
+export const WithHeader: Story = {
+  args: {
+    options: [{ content: "option 1" }, { content: "option 2" }],
+    header: { content: <div style={{ display: "flex", justifyContent: "flex-end" }}>header</div> },
+  },
 };
