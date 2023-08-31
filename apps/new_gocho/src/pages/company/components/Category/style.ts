@@ -6,8 +6,8 @@ export const cssObj = {
     width: 67.5rem;
     height: 29rem;
     margin: auto 0;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    padding-top: 3rem;
+    margin-bottom: 4.5rem;
     background-color: ${NEWCOLORS.WHITE};
   `,
 
@@ -21,7 +21,7 @@ export const cssObj = {
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 3.5rem;
-    padding-bottom: 2rem;
+    margin-bottom: 2rem;
   `,
 
   categoryBottomBox: css`
@@ -29,7 +29,7 @@ export const cssObj = {
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 2rem;
-    padding-bottom: 3.5rem;
+    margin-bottom: 3.5rem;
   `,
 
   categoryHeader: css`

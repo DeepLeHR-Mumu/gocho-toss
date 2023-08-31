@@ -1,12 +1,13 @@
 import { CategoryItem } from "./CategoryItem/index";
-import { cssObj } from "./style";
-
+import { HeaderTitle } from "../common/HeaderTitle";
 import { topCategoryIconArr, bottomCategoryIconArr } from "./constant";
+
+import { cssObj } from "./style";
 
 export const CategoryCompany = () => {
   return (
     <section css={cssObj.categoryContainer}>
-      <h1 css={cssObj.categoryHeader}>카테고리 별 기업</h1>
+      <HeaderTitle title="카테고리 별 기업" />
       <div css={cssObj.categoryBoxWrapper}>
         <div css={cssObj.categoryTopBox}>
           {topCategoryIconArr.map(({ key, src, categoryText }) => {
