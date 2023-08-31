@@ -17,7 +17,7 @@ export const CompanyRow = ({ id, logo, name, size, industry, follow, border }: C
       <div css={cssObj.infoWrapper}>
         <h3 css={cssObj.companyName}>{name}</h3>
         <span css={cssObj.companyCategory}>
-          {size} {industry}
+          {size} · {industry}
         </span>
       </div>
       {follow && (
