@@ -1,19 +1,18 @@
 import { NextPage } from "next";
+import { Divider } from "shared-ui/deeple-ds";
 import { Layout } from "@/components/Layout/index";
 import { CategoryCompany } from "./components/Category/index";
 import { RecommandCompany } from "./components/Recommand/index";
-
-import { cssObj } from "./style";
 
 const CompanyList: NextPage = () => {
   return (
     <Layout>
       <CategoryCompany />
-      <hr css={cssObj.hrStyle} />
+      <Divider />
       <RecommandCompany />
-      <hr css={cssObj.hrStyle} />
+      <Divider />
       <h1>인기기업</h1>
-      <hr css={cssObj.hrStyle} />
+      <Divider />
       <h1>전체기업</h1>
     </Layout>
   );
