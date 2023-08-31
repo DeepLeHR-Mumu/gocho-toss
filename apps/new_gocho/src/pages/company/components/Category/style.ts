@@ -4,15 +4,16 @@ import { NEWCOLORS } from "shared-style/color";
 export const cssObj = {
   categoryContainer: css`
     width: 67.5rem;
-    height: 29rem;
     margin: auto 0;
     padding-top: 3rem;
-    margin-bottom: 4.5rem;
+    padding-bottom: 4.5rem;
     background-color: ${NEWCOLORS.WHITE};
   `,
 
   categoryBoxWrapper: css`
     border: 1px solid ${NEWCOLORS.GRAY200};
+    height: 23.75rem;
+    margin-top: 3rem;
     border-radius: 0.75rem;
   `,
 
@@ -31,11 +32,4 @@ export const cssObj = {
     margin-top: 2rem;
     margin-bottom: 3.5rem;
   `,
-
-  categoryHeader: css`
-    font-size: 2rem;
-    margin-bottom: 3rem;
-  `,
-
-  itemText: css``,
 };
