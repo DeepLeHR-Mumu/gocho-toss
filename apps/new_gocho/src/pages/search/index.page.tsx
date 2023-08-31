@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { css } from "@emotion/react";
 import { FiChevronLeft } from "react-icons/fi";
@@ -15,7 +16,7 @@ import { isQueryString } from "@/utils";
 import { Tab } from "./type";
 import { cssObj } from "./style";
 
-const SearchPage = () => {
+const SearchPage: NextPage = () => {
   const [searchModal, setSearchModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
 

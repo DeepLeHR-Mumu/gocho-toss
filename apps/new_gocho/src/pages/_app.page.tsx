@@ -11,8 +11,8 @@ import { datadogRum } from "@datadog/browser-rum";
 import ReactGA from "react-ga4";
 
 import { KEY, FB_PIXEL_ID } from "shared-constant";
-import { useAxiosInterceptor } from "shared-api/axiosInstance";
 
+import { useAxiosInterceptor } from "@/apis/axiosInstance";
 import { useSetDeviceType, useGetDeviceType } from "@/globalStates";
 import { globalStyle } from "@/styles/globalStyle";
 import { GlobalNavigationBar, Footer } from "@/components";
