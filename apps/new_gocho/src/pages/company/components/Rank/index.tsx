@@ -6,8 +6,9 @@ import { useCompanyArr } from "@/apis/company/useCompanyArr";
 
 import { cssObj } from "./style";
 
-export const PopularCompany = () => {
-  const { data: PopularCompanyArr } = useCompanyArr({
+// TODO: useCompanyArr -> order: rank 시에 오류 발생
+export const RankCompany = () => {
+  const { data: rankCompanyArr } = useCompanyArr({
     order: "popular",
     size: 5,
   });
@@ -19,7 +20,7 @@ export const PopularCompany = () => {
         <TodayIcon />
       </div>
       <div css={cssObj.rankItemBox}>
-        {PopularCompanyArr?.companyDataArr.map(({ id, name, size, logoUrl, industry }, index) => {
+        {rankCompanyArr?.companyDataArr.map(({ id, name, size, logoUrl, industry }, index) => {
           return <RankItem key={id} name={name} logoUrl={logoUrl} size={size} industry={industry} rank={index + 1} />;
         })}
       </div>

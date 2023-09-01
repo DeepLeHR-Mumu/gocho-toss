@@ -1,10 +1,11 @@
 import { NextPage } from "next";
 import { Divider } from "shared-ui/deeple-ds";
-import { Layout } from "@/components/Layout/index";
+import { Layout } from "@/components/Layout";
 
-import { CategoryCompany } from "./components/Category/index";
-import { RecommandCompany } from "./components/Recommand/index";
-import { PopularCompany } from "./components/Popular";
+import { CategoryCompany } from "./components/Category";
+import { RecommandCompany } from "./components/Recommand";
+import { RankCompany } from "./components/Rank";
+import { EntireCompany } from "./components/Entire";
 
 const CompanyList: NextPage = () => {
   return (
@@ -13,9 +14,9 @@ const CompanyList: NextPage = () => {
       <Divider />
       <RecommandCompany />
       <Divider />
-      <PopularCompany />
+      <RankCompany />
       <Divider />
-      <h1>전체기업</h1>
+      <EntireCompany />
     </Layout>
   );
 };

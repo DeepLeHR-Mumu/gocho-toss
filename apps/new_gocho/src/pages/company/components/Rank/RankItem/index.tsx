@@ -9,7 +9,7 @@ import { RankItemProps } from "./type";
 
 import { cssObj } from "./style";
 
-export const RankItem: FunctionComponent<RankItemProps> = ({ key, name, size, logoUrl, industry, rank }) => {
+export const RankItem: FunctionComponent<RankItemProps> = ({ key, name, size, industry, rank, logoUrl = "" }) => {
   return (
     <div css={cssObj.rankContainer}>
       <div css={cssObj.rankItemBox}>
