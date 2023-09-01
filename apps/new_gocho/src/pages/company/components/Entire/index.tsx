@@ -33,7 +33,7 @@ export const EntireCompany = () => {
               key={id}
               id={id}
               size={size}
-              logo={logoUrl}
+              logo={logoUrl || ""}
               name={name}
               industry={industry}
               border

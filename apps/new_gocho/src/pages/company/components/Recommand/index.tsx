@@ -22,7 +22,7 @@ export const RecommandCompany = () => {
           return (
             <CompanyCard
               key={id}
-              logoSrc={logoUrl}
+              logoSrc={logoUrl || ""}
               name={name}
               hashTagArr={[industry]}
               buttonHandler={() => {
