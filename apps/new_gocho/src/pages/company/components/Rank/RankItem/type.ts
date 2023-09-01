@@ -1,5 +1,5 @@
 export interface RankItemProps {
-  key: number;
+  id: number;
   rank: number;
   name: string;
   size: string;

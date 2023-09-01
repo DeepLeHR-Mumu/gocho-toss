@@ -9,15 +9,15 @@ import { RankItemProps } from "./type";
 
 import { cssObj } from "./style";
 
-export const RankItem: FunctionComponent<RankItemProps> = ({ key, name, size, industry, rank, logoUrl = "" }) => {
+export const RankItem: FunctionComponent<RankItemProps> = ({ id, name, size, industry, rank, logoUrl = "" }) => {
   return (
     <div css={cssObj.rankContainer}>
       <div css={cssObj.rankItemBox}>
         <div css={cssObj.rankProfileBox}>
           <p css={cssObj.rankNumberText}>{rank}</p>
-          <CompanyRow id={key} size={size} logo={logoUrl} name={name} industry={industry} />
+          <CompanyRow id={id} size={size} logo={logoUrl} name={name} industry={industry} />
         </div>
-        <Link href={`/company/${key}/detail`}>
+        <Link href={`/company/${id}/detail`}>
           <FiChevronRight css={cssObj.companyDetailButtn} />
         </Link>
       </div>

@@ -7,7 +7,7 @@ import { RecommandCompany } from "./components/Recommand";
 import { RankCompany } from "./components/Rank";
 import { EntireCompany } from "./components/Entire";
 
-const CompanyList: NextPage = () => {
+const Company: NextPage = () => {
   return (
     <Layout>
       <CategoryCompany />
@@ -21,4 +21,4 @@ const CompanyList: NextPage = () => {
   );
 };
 
-export default CompanyList;
+export default Company;

@@ -21,7 +21,7 @@ export const EntireCompany = () => {
     <section css={cssObj.entrieCompanyContainer}>
       <div css={cssObj.headerBox}>
         <HeaderTitle title={ENTIRE_COMPANY_TITLE} />
-        <Link href="company/all" css={cssObj.etrieCompanyLinkText}>
+        <Link href="company/list" css={cssObj.etrieCompanyLinkText}>
           {ENTIRE_COMPANY_TEXT}
         </Link>
       </div>

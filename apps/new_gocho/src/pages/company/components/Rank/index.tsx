@@ -21,7 +21,15 @@ export const RankCompany = () => {
       <div css={cssObj.rankItemBox}>
         {rankCompanyArr?.companyDataArr.map(({ id, name, size, logoUrl, industry }, index) => {
           return (
-            <RankItem key={id} name={name} logoUrl={logoUrl || ""} size={size} industry={industry} rank={index + 1} />
+            <RankItem
+              key={id}
+              id={id}
+              name={name}
+              logoUrl={logoUrl || ""}
+              size={size}
+              industry={industry}
+              rank={index + 1}
+            />
           );
         })}
       </div>
