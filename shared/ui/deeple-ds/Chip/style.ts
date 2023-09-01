@@ -20,4 +20,8 @@ export const cssObj = {
       ${NEWTEXTS.TITLE10}
     `}
   `,
+
+  rect: css`
+    border-radius: 0.25rem;
+  `,
 };
