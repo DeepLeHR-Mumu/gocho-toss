@@ -18,13 +18,4 @@ export const cssObj = {
     padding-top: 0.625%;
     color: ${NEWCOLORS.BLUEGRAY400};
   `,
-
-  companyListBox: css`
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    > a {
-      width: 100%;
-    }
-  `,
 };

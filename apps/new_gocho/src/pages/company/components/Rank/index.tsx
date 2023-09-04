@@ -1,4 +1,4 @@
-import { HeaderTitle } from "../common/HeaderTitle";
+import { HeaderTitle } from "../HeaderTitle";
 import { RankItem } from "./RankItem";
 import { TodayIcon } from "./TodayIcon";
 

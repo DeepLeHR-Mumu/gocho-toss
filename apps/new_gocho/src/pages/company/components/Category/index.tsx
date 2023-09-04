@@ -1,5 +1,5 @@
 import { CategoryItem } from "./CategoryItem/index";
-import { HeaderTitle } from "../common/HeaderTitle";
+import { HeaderTitle } from "../HeaderTitle";
 import { topCategoryIconArr, bottomCategoryIconArr } from "./constant";
 
 import { cssObj } from "./style";

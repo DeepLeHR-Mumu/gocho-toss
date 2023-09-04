@@ -3,6 +3,8 @@ export interface CompanyArrRequestDef {
   page?: number;
   size?: number;
   order?: "recent" | "comment" | "name" | "popular" | "rand" | "view" | "rank";
+  // TODO: 타입 구체화 필요성 논의
+  industry?: string;
 }
 
 export const companyArrKeyObj = {

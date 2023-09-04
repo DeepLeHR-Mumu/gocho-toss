@@ -51,6 +51,6 @@ export const bottomCategoryIconArr: CategoryIcon[] = [
   {
     key: 8,
     src: electronicMaterialIcon,
-    categoryText: "전자제료",
+    categoryText: "전자재료",
   },
 ];

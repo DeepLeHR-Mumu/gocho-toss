@@ -1,5 +1,5 @@
 import { CompanyCard } from "@/components/common/CompanyCard/index";
-import { HeaderTitle } from "../common/HeaderTitle";
+import { HeaderTitle } from "../HeaderTitle";
 
 import { useCompanyArr } from "@/apis/company/useCompanyArr";
 
