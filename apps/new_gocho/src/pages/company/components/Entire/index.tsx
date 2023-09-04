@@ -7,7 +7,6 @@ import { useCompanyArr } from "@/apis/company";
 import { cssObj } from "./style";
 import { CompanyList } from "../common/CompanyList";
 
-// TODO: 전체 기업 보기 리스트 링크 논의
 // TODO: 팔로우 로직 넣기
 
 export const EntireCompany = () => {
