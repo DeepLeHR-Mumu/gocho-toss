@@ -1,11 +1,11 @@
 import Link from "next/link";
 
-import { HeaderTitle } from "../common/HeaderTitle";
+import { HeaderTitle } from "../HeaderTitle";
 
 import { useCompanyArr } from "@/apis/company";
 
 import { cssObj } from "./style";
-import { CompanyList } from "../common/CompanyList";
+import { CompanyList } from "../CompanyList";
 
 // TODO: 팔로우 로직 넣기
 

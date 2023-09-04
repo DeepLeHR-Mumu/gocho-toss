@@ -2,7 +2,7 @@ import { FunctionComponent, useState } from "react";
 
 import { DropDown } from "shared-ui/deeple-ds";
 import { FiChevronDown } from "react-icons/fi";
-import { HeaderTitle } from "@/pages/company/components/common/HeaderTitle";
+import { HeaderTitle } from "@/pages/company/components/HeaderTitle";
 
 import { CompanyListHeaderProps } from "./type";
 
@@ -31,6 +31,7 @@ export const CompanyListHeader: FunctionComponent<CompanyListHeaderProps> = ({
           }
           menu={{
             width: 180,
+            closeAfterClickEvent: true,
             options: filterOption.map(({ key, content, setState }) => {
               return {
                 key,
