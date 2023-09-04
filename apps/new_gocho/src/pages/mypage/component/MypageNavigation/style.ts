@@ -1,20 +1,18 @@
 import { css } from "@emotion/react";
+import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
-  wrapper: css`
+  navigationBox: css`
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    width: 10.5rem;
+    gap: 1.5rem;
   `,
 
-  contentWrapper: css`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  `,
-
-  userTextWrapper: css`
+  sideNavigation: css`
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
+    ${NEWTEXTS.TITLE7}
   `,
 };

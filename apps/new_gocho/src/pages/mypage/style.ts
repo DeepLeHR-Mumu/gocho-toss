@@ -10,10 +10,19 @@ export const cssObj = {
     padding-top: 2.5rem;
   `,
 
-  sideNavigation: css`
+  navBox: css`
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     ${NEWTEXTS.TITLE7}
+  `,
+
+  elementBox: css`
+    padding: 2rem;
+  `,
+
+  title: css`
+    ${NEWTEXTS.TITLE14}
+    margin-bottom:2rem;
   `,
 };
