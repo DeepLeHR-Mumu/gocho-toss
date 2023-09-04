@@ -1,8 +1,9 @@
 import { useState, useMemo } from "react";
-import { useRouter } from "next/router";
-import { FiBell, FiSearch, FiUser } from "react-icons/fi";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useQueryClient } from "@tanstack/react-query";
+import { FiBell, FiSearch, FiUser } from "react-icons/fi";
 
 import { SearchBar, DropDown, Profile } from "shared-ui/deeple-ds";
 
@@ -21,6 +22,7 @@ import { getCssObj } from "./style";
 
 export const GlobalNavigationBar = () => {
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const isThemeWhite = useMemo(() => {
     return THEME_WHITE_PAGES.includes(router.pathname);
@@ -53,7 +55,13 @@ export const GlobalNavigationBar = () => {
   };
 
   const openLoginModal = () => {
-    setLoginModal(false);
+    setLoginModal(true);
+  };
+
+  const doLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    queryClient.resetQueries();
   };
 
   return (
@@ -132,7 +140,7 @@ export const GlobalNavigationBar = () => {
                             { content: <Link href="/mypage">나의 QnA</Link> },
                             { content: <Link href="/mypage">알림 설정</Link> },
                           ],
-                          footer: { content: "로그아웃" },
+                          footer: { content: "로그아웃", onClick: doLogout },
                         }}
                       />
                     </>
@@ -163,6 +171,7 @@ export const GlobalNavigationBar = () => {
       {searchModal && (
         <SearchModal
           close={() => {
+            router.back();
             setSearchModal(false);
           }}
         />
