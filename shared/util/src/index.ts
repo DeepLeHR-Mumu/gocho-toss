@@ -1,5 +1,7 @@
 export { dDayCalculator } from "./date/dDayCalculator";
 export { dateConverter } from "./date/dateConverter";
+export { getCommunityDateFormat } from "./date/getCommunityDateFormat";
+
 export { dummyArrCreator } from "./dummyArrCreator";
 export { tokenDecryptor, adminTokenDecryptor, managerTokenDecryptor } from "./tokenDecryptor";
 

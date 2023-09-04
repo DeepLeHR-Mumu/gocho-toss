@@ -29,10 +29,7 @@ export const menuCssObj = {
 
   footer: (clickable: boolean) => css`
     padding: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
     border-radius: 0 0 0.75rem 0.75rem;
     cursor: ${clickable ? "pointer" : "auto"};
     background-color: ${NEWCOLORS.GRAY50};

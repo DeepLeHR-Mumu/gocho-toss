@@ -17,7 +17,11 @@ export const Menu = ({ width = 180, options = [], header, footer }: MenuProps) =
         {option.content}
       </button>
     ))}
-    {footer && <div css={menuCssObj.footer(!!footer.onClick)}>{footer.content}</div>}
+    {footer && (
+      <button type="button" css={menuCssObj.footer(!!footer.onClick)} onClick={footer.onClick}>
+        {footer.content}
+      </button>
+    )}
   </div>
 );
 
@@ -65,7 +69,22 @@ export const DropDown = ({
       </button>
       {!!menu && menuVisible && (
         <div css={dropDownCssObj.menuWrapper(menuLocation)}>
-          <Menu {...menu} />
+          <Menu
+            {...menu}
+            options={
+              menu.closeAfterClickEvent
+                ? menu.options?.map((option) => ({
+                    ...option,
+                    onClick: () => {
+                      if (option.onClick) {
+                        option.onClick();
+                        setMenuVisible(false);
+                      }
+                    },
+                  }))
+                : menu.options
+            }
+          />
         </div>
       )}
     </div>
