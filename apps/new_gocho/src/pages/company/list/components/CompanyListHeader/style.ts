@@ -9,7 +9,7 @@ export const cssObj = {
 
   filterBox: css`
     display: flex;
-    padding-top: 0.625rem;
+    padding-top: 0.25rem;
     justify-content: space-between;
     gap: 0.5rem;
   `,

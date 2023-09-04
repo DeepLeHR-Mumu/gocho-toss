@@ -1,11 +1,12 @@
 import { FunctionComponent, useState } from "react";
 
 import { DropDown } from "shared-ui/deeple-ds";
-
+import { FiChevronDown } from "react-icons/fi";
 import { HeaderTitle } from "@/pages/company/components/common/HeaderTitle";
 
-import { cssObj } from "./style";
 import { CompanyListHeaderProps } from "./type";
+
+import { cssObj } from "./style";
 
 export const CompanyListHeader: FunctionComponent<CompanyListHeaderProps> = ({
   category,
@@ -20,12 +21,20 @@ export const CompanyListHeader: FunctionComponent<CompanyListHeaderProps> = ({
       <div css={cssObj.filterBox}>
         <DropDown
           title={title}
+          customTitle={
+            <div css={cssObj.filterBox}>
+              <p css={cssObj.filterText}>{title}</p>
+              <p>
+                <FiChevronDown css={cssObj.filterIcon} />
+              </p>
+            </div>
+          }
           menu={{
             width: 180,
             options: filterOption.map(({ key, content, setState }) => {
               return {
                 key,
-                focused: false,
+                focused: title === content,
                 content: <p>{content}</p>,
                 onClick: () => {
                   setTitle(content);
