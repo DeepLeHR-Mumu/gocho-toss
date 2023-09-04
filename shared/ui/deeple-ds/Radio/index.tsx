@@ -1,4 +1,10 @@
+import { ForwardRefRenderFunction, forwardRef } from "react";
+
 import { RadioProps } from "./type";
 import { cssObj } from "./style";
 
-export const Radio = (props: RadioProps) => <input type="radio" css={cssObj.radio} {...props} />;
+const ForwardedRadio: ForwardRefRenderFunction<HTMLInputElement, RadioProps> = (props, ref) => (
+  <input type="radio" css={cssObj.radio} {...props} ref={ref} />
+);
+
+export const Radio = forwardRef(ForwardedRadio);

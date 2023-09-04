@@ -1,8 +1,4 @@
-import { ChangeEventHandler } from "react";
+import { InputHTMLAttributes } from "react";
 
-export interface RadioProps {
-  id?: string;
-  disabled?: boolean;
-  checked?: boolean;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface RadioProps extends InputHTMLAttributes<HTMLInputElement> {}

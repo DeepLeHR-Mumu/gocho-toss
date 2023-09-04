@@ -1,6 +1,9 @@
+import { ForwardRefRenderFunction, forwardRef } from "react";
 import { CheckboxProps } from "./type";
 import { cssObj } from "./style";
 
-export const Checkbox = ({ id, disabled, checked, onChange }: CheckboxProps) => (
-  <input type="checkbox" css={cssObj.checkbox} id={id} disabled={disabled} checked={checked} onChange={onChange} />
+const ForwardedCheckbox: ForwardRefRenderFunction<HTMLInputElement, CheckboxProps> = ({ ...props }, ref) => (
+  <input type="checkbox" css={cssObj.checkbox} {...props} ref={ref} />
 );
+
+export const Checkbox = forwardRef(ForwardedCheckbox);
