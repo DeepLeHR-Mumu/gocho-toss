@@ -13,18 +13,20 @@ export const MypageNavigation: FunctionComponent = () => {
       <Box>
         <div css={cssObj.sideNavigation}>
           {myPageMenu.map(({ key, type, text }) => {
-            return (
-              <Link
-                key={key}
-                href={{
-                  query: {
-                    type,
-                  },
-                }}
-              >
-                {text}
-              </Link>
-            );
+            if (type)
+              return (
+                <Link
+                  key={key}
+                  href={{
+                    query: {
+                      type,
+                    },
+                  }}
+                >
+                  {text}
+                </Link>
+              );
+            return null;
           })}
         </div>
       </Box>

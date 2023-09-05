@@ -6,7 +6,7 @@ interface NavigationMenu {
 
 export interface PageItem extends NavigationMenu {
   isNewTab: false;
-  type: string;
+  type: string | undefined;
   element: React.ReactNode;
 }
 

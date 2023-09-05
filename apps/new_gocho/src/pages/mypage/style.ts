@@ -19,6 +19,7 @@ export const cssObj = {
 
   elementBox: css`
     padding: 2rem;
+    box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.05);
   `,
 
   title: css`

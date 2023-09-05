@@ -5,6 +5,13 @@ import { Account } from "./part/Account";
 
 export const myPageMenu: PageItem[] = [
   {
+    key: 100,
+    text: "계정 관리",
+    isNewTab: false,
+    type: undefined,
+    element: <Account />,
+  },
+  {
     key: 101,
     text: "계정 관리",
     isNewTab: false,
@@ -79,4 +86,4 @@ export const partElementArray = sideNavMenu.concat(myPageMenu).reduce((acc, cur)
     });
   }
   return acc;
-}, [] as Array<{ key: number; type: string; title: string; element: ReactNode }>);
+}, [] as Array<{ key: number; type: string | undefined; title: string; element: ReactNode }>);

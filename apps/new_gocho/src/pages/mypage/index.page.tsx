@@ -12,13 +12,11 @@ import { Box } from "./component/Box";
 const MyPage: NextPage = () => {
   const { query } = useRouter();
 
-  const result = partElementArray.find(({ type }) => {
+  const curPart = partElementArray.find(({ type }) => {
     return type === query.type;
   });
 
-  if (!result) {
-    return <h1>error</h1>;
-  }
+  if (!curPart) return <h1>에러에러</h1>;
 
   return (
     <Layout>
@@ -28,8 +26,8 @@ const MyPage: NextPage = () => {
         </section>
         <section>
           <Box css={cssObj.elementBox}>
-            <h3 css={cssObj.title}>{result.title}</h3>
-            {result.element}
+            <h3 css={cssObj.title}>{curPart.title}</h3>
+            {curPart.element}
           </Box>
         </section>
       </main>
