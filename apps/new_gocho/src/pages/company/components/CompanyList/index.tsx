@@ -8,7 +8,7 @@ import { cssObj } from "./style";
 export const CompanyList: FunctionComponent<CompanyListProps> = ({ companyData }) => {
   return (
     <div css={cssObj.companyListBox}>
-      {companyData?.companyDataArr.map(({ id, industry, size, name, logoUrl }) => {
+      {companyData?.companyDataArr.map(({ id, industry, size, name, logoUrl, isBookmark }) => {
         return (
           <CompanyRow
             key={id}
@@ -18,12 +18,7 @@ export const CompanyList: FunctionComponent<CompanyListProps> = ({ companyData }
             name={name}
             industry={industry}
             border
-            follow={{
-              state: false,
-              onClick: () => {
-                alert("팔로우하기");
-              },
-            }}
+            bookmark={{ state: isBookmark }}
           />
         );
       })}
