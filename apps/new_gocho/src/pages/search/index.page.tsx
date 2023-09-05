@@ -7,7 +7,7 @@ import { FiChevronLeft } from "react-icons/fi";
 import { useJdArr } from "@/apis/jd";
 import { useCompanyArr } from "@/apis/company";
 
-import { Layout, SearchModal, Pagination, JdRow, CompanyRow, LoginModal } from "@/components";
+import { Layout, SearchModal, Pagination, JdRow, CompanyRow } from "@/components";
 import { SearchDropDown } from "@/components/modal/SearchModal/components/SearchDropDown";
 import { useGetDeviceType } from "@/globalStates";
 import { DEFAULT_PAGE_SIZE } from "@/pages/constants";
@@ -18,7 +18,6 @@ import { cssObj } from "./style";
 
 const SearchPage: NextPage = () => {
   const [searchModal, setSearchModal] = useState(false);
-  const [loginModal, setLoginModal] = useState(false);
 
   // TODO 나중에 "community" 추가할 것.
   const [tab, setTab] = useState<Tab>("jd");
@@ -130,12 +129,7 @@ const SearchPage: NextPage = () => {
                     name={company.name}
                     size={company.size}
                     industry={company.industry}
-                    follow={{
-                      state: false,
-                      onClick: () => {
-                        setLoginModal(true);
-                      },
-                    }}
+                    bookmark={{ state: company.isBookmark }}
                   />
                 );
               })}
@@ -157,13 +151,6 @@ const SearchPage: NextPage = () => {
         <SearchModal
           close={() => {
             setSearchModal(false);
-          }}
-        />
-      )}
-      {loginModal && (
-        <LoginModal
-          close={() => {
-            setLoginModal(false);
           }}
         />
       )}
