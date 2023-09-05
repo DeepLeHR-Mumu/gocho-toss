@@ -171,7 +171,6 @@ export const GlobalNavigationBar = () => {
       {searchModal && (
         <SearchModal
           close={() => {
-            router.back();
             setSearchModal(false);
           }}
         />

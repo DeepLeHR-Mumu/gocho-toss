@@ -1,24 +1,37 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { FiX } from "react-icons/fi";
 
 import { Divider, Chip, Modal } from "shared-ui/deeple-ds";
 import { useJobArr } from "shared-api/job";
 import { useCompanyArr } from "shared-api/company";
 
+import { URL } from "@/pages/constants";
+
 import { CompanyCard } from "../../common/CompanyCard";
 import { JdRow } from "../../common/JdRow";
 
 import { SearchDropDown } from "./components/SearchDropDown";
-import { getRecentSearchWordFromStorage, removeRecentWordFromStorage, removeAllRecentWord, useSearch } from "./util";
+import {
+  saveRecentWordToStorage,
+  getRecentSearchWordFromStorage,
+  removeRecentWordFromStorage,
+  removeAllRecentWord,
+} from "./util";
 import { RECOMMENDATION_COMPANY_ARR } from "./constant";
 import { SearchModalProps } from "./type";
 import { cssObj } from "./style";
 
 export const SearchModal = ({ close }: SearchModalProps) => {
-  const { data: jobData } = useJobArr({ order: "rand", size: 5 });
+  const router = useRouter();
+  const { data: jobData } = useJobArr({ order: "rand", filter: "valid", size: 5 });
   const { data: companyData } = useCompanyArr({ order: "rank", size: 4 });
   const [recentSearchWordArr, setRecentSearchWordArr] = useState<string[]>([]);
-  const { searchAndSave } = useSearch();
+
+  const searchAndSave = (text: string) => {
+    router.replace({ pathname: URL.SEARCH, query: { q: text, page: 1 } });
+    saveRecentWordToStorage(text);
+  };
 
   const searchHandler = (searchText: string) => {
     searchAndSave(searchText);
@@ -49,7 +62,15 @@ export const SearchModal = ({ close }: SearchModalProps) => {
   return (
     <Modal css={cssObj.wrapper}>
       <div css={cssObj.contentsWrapper}>
-        <FiX css={cssObj.closeIcon} onClick={close} />
+        <FiX
+          css={cssObj.closeIcon}
+          onClick={() => {
+            if (close) {
+              router.back();
+              close();
+            }
+          }}
+        />
         <SearchDropDown recentWordArr={recentSearchWordArr} searchHandler={searchHandler} />
         <div css={cssObj.etcWrapper}>
           <div css={cssObj.recentWordWrapper}>
