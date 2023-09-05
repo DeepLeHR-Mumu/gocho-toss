@@ -2,15 +2,15 @@ import { useMemo } from "react";
 import { css } from "@emotion/react";
 import { DDayChip } from "shared-ui/deeple-ds";
 
-import { isInvalidDate, isExpired, getDayUntilExpiry } from "@/utils";
+import { isInvalidDate, isExpired } from "@/utils";
 
-import { Bookmark } from "../Bookmark";
+import { JdBookmark } from "../JdBookmark";
 
 import { JdRowProps } from "./type";
 import { cssObj } from "./style";
 
 // TODO 모바일 반응형 추가
-export const JdRow = ({ companyName, jdTitle, dueDate, bookmarked, half }: JdRowProps) => {
+export const JdRow = ({ jdId, companyName, jdTitle, dueDate, bookmarked, half }: JdRowProps) => {
   const validDueDate = useMemo(() => {
     const date = new Date(dueDate);
     if (!isInvalidDate(date)) {
@@ -20,7 +20,6 @@ export const JdRow = ({ companyName, jdTitle, dueDate, bookmarked, half }: JdRow
   }, [dueDate]);
 
   const isDueDateExpired = isExpired(validDueDate || new Date(0));
-  const dateUntilExpiry = getDayUntilExpiry(validDueDate || new Date(0));
 
   const getWeekdayString = (date: Date): string => {
     const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
@@ -46,13 +45,14 @@ export const JdRow = ({ companyName, jdTitle, dueDate, bookmarked, half }: JdRow
         <span css={cssObj.jdCompanyName}>{companyName}</span>
         <div css={cssObj.jdTitleWrapper}>
           <h3 css={cssObj.jdTitle}>{jdTitle}</h3>
-          {!isDueDateExpired && <DDayChip>D-{dateUntilExpiry}</DDayChip>}
+          {/** NOTE JdRow 에서 end_time 이 만료인지 확인하는 로직과 DDayChip 내부에서 endTime 이 만료인지 확인하는 로직이 나뉘어 있다. 단일화 하는 게 좋아 보임. */}
+          {!isDueDateExpired && <DDayChip endTime={dueDate} />}
         </div>
         <div css={cssObj.jdDueDateWrapper}>
           <span css={cssObj.jdDueDate}>{validDueDate && formatDateToCustomString(validDueDate)}</span>
         </div>
       </div>
-      {!isDueDateExpired && <Bookmark marked={bookmarked} />}
+      {!isDueDateExpired && <JdBookmark jdId={jdId} marked={bookmarked} />}
     </div>
   );
 };

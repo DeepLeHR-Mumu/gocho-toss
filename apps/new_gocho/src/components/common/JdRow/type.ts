@@ -1,4 +1,5 @@
 export interface JdRowProps {
+  jdId: number;
   companyName: string;
   jdTitle: string;
   dueDate: string;

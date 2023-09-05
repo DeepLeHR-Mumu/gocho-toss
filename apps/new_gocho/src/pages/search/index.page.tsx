@@ -112,6 +112,7 @@ const SearchPage: NextPage = () => {
                 return (
                   <JdRow
                     key={jd.id}
+                    jdId={jd.id}
                     companyName={jd.company.name}
                     jdTitle={jd.title}
                     dueDate={jd.endTime}

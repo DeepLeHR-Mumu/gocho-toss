@@ -152,6 +152,7 @@ export const SearchModal = ({ close }: SearchModalProps) => {
                 return (
                   <JdRow
                     key={job.id}
+                    jdId={job.id}
                     companyName={job.company.name}
                     jdTitle={job.title}
                     dueDate={job.endTime}
