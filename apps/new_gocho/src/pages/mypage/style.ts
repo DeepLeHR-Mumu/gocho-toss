@@ -8,6 +8,7 @@ export const cssObj = {
     row-gap: 1.5rem;
     column-gap: 1.5rem;
     padding-top: 2.5rem;
+    height: 100vh;
   `,
 
   navBox: css`
