@@ -7,11 +7,11 @@ import {
 import { axiosInstance } from "../../axiosInstance";
 
 import { GetCompanyCommentDef } from "./type";
-import { selector } from "./util";
+// import { selector } from "./util";
 
 export const getCompanyComment: GetCompanyCommentDef = async ({ queryKey: [{ requestObj }] }) => {
   const { data } = await axiosInstance.get(`/companies/${requestObj.companyId}/comments`, {
-    params: { order: "outdated" },
+    params: { order: "outdated", jdId: requestObj.jdId },
   });
   return data;
 };
@@ -22,7 +22,7 @@ export const useCompanyCommentArr = (requestObj: CompanyCommentArrRequestDef) =>
     queryFn: getCompanyComment,
     enabled: Boolean(requestObj.companyId),
     select: ({ data }) => {
-      return selector(data);
+      return data;
     },
   });
 };

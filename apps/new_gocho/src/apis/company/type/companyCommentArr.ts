@@ -1,4 +1,4 @@
-interface CompanyCommentDef {
+export interface CompanyCommentDef {
   id: number;
   uploader: {
     id: number;

@@ -1,23 +1,20 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
+import { axiosInstance } from "@/apis/axiosInstance";
 import { companyCommentArrKeyObj } from "@/constants/queryKeyFactory/company/commentArrKeyObj";
 
-import { axiosInstance } from "../../axiosInstance";
-import { PostCompanyBookmarkDef, RequestObjDef } from "./type";
+import { BlockUserDef, RequestObjDef } from "./type";
 
-const postCompanyCommentToggle: PostCompanyBookmarkDef = async (requestObj) => {
-  const { data } = await axiosInstance.post(
-    `companies/${requestObj.companyId}/comments/${requestObj.commentId}/${requestObj.type}`,
-    null
-  );
+const postBlockUser: BlockUserDef = async (requestObj) => {
+  const { data } = await axiosInstance.post(`/users/${requestObj.userId}/block`);
   return data;
 };
 
-export const useCompanyCommentToggle = (requestObj: { companyId?: number }) => {
+export const useBlockUser = (requestObj: { companyId?: number }) => {
   const queryClient = useQueryClient();
   return useMutation<AxiosResponse, AxiosError, RequestObjDef>({
-    mutationFn: postCompanyCommentToggle,
+    mutationFn: postBlockUser,
     onSuccess: () => {
       if (requestObj.companyId) {
         queryClient.invalidateQueries(companyCommentArrKeyObj.commentArr({ companyId: requestObj.companyId }));

@@ -1,5 +1,6 @@
 export interface CompanyCommentArrRequestDef {
   companyId: number;
+  jdId?: number;
 }
 
 export const companyCommentArrKeyObj = {
