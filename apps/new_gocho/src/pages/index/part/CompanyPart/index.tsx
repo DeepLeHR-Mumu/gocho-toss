@@ -97,9 +97,7 @@ export const CompanyPart: FunctionComponent = () => {
                   logoSrc={company.logoUrl || defaultCompanyLogo}
                   name={company.name}
                   hashTagArr={[company.name]}
-                  buttonHandler={() => {
-                    return null;
-                  }}
+                  bookmark={{ state: company.isBookmark, companyId: company.id }}
                 />
               );
             })}
@@ -113,9 +111,7 @@ export const CompanyPart: FunctionComponent = () => {
                   logoSrc={company.logoUrl || defaultCompanyLogo}
                   name={company.name}
                   hashTagArr={[company.name]}
-                  buttonHandler={() => {
-                    return null;
-                  }}
+                  bookmark={{ state: company.isBookmark, companyId: company.id }}
                 />
               );
             })}
