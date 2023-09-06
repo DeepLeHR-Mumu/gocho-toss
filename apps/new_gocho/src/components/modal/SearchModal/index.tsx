@@ -137,6 +137,7 @@ export const SearchModal = ({ close }: SearchModalProps) => {
                 return (
                   <CompanyCard
                     key={company.id}
+                    id={company.id}
                     logoSrc={company.logoUrl || ""}
                     name={company.name}
                     hashTagArr={[company.industry, company.size]}

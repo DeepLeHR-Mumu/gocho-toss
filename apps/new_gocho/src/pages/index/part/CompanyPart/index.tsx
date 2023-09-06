@@ -94,10 +94,11 @@ export const CompanyPart: FunctionComponent = () => {
               return (
                 <CompanyCard
                   key={company.id}
+                  id={company.id}
                   logoSrc={company.logoUrl || defaultCompanyLogo}
                   name={company.name}
                   hashTagArr={[company.name]}
-                  bookmark={{ state: company.isBookmark, companyId: company.id }}
+                  bookmark={{ state: company.isBookmark }}
                 />
               );
             })}
@@ -108,10 +109,11 @@ export const CompanyPart: FunctionComponent = () => {
               return (
                 <CompanyCard
                   key={company.id}
+                  id={company.id}
                   logoSrc={company.logoUrl || defaultCompanyLogo}
                   name={company.name}
                   hashTagArr={[company.name]}
-                  bookmark={{ state: company.isBookmark, companyId: company.id }}
+                  bookmark={{ state: company.isBookmark }}
                 />
               );
             })}

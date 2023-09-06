@@ -22,10 +22,11 @@ export const RecommandCompany = () => {
           return (
             <CompanyCard
               key={id}
+              id={id}
               logoSrc={logoUrl || ""}
               name={name}
               hashTagArr={[industry]}
-              bookmark={{ state: isBookmark, companyId: id }}
+              bookmark={{ state: isBookmark }}
             />
           );
         })}

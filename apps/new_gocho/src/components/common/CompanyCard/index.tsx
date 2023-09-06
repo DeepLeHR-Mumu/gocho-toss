@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from "next/link";
 import { Profile, FollowButton } from "shared-ui/deeple-ds";
 
 import { LoginModal } from "@/components/modal/LoginModal";
@@ -8,8 +9,9 @@ import { useCompanyBookmarkToggle } from "@/apis/company";
 
 import { CompanyCardProps } from "./type";
 import { cssObj } from "./style";
+import { URL } from "@/pages/constants";
 
-export const CompanyCard = ({ logoSrc, name, hashTagArr = [], bookmark }: CompanyCardProps) => {
+export const CompanyCard = ({ id, logoSrc, name, hashTagArr = [], bookmark }: CompanyCardProps) => {
   const [loginModal, setLoginModal] = useState(false);
 
   const { isMobile } = useGetDeviceType();
@@ -25,7 +27,7 @@ export const CompanyCard = ({ logoSrc, name, hashTagArr = [], bookmark }: Compan
         return;
       }
 
-      companyBookmarkToggle({ companyId: bookmark.companyId });
+      companyBookmarkToggle({ companyId: id });
     }
   };
 
@@ -41,7 +43,9 @@ export const CompanyCard = ({ logoSrc, name, hashTagArr = [], bookmark }: Compan
     <>
       <div css={cssObj.cardWrapper(isButtonExist)}>
         <Profile src={logoSrc} size={getProfileSize()} />
-        <h3 css={cssObj.name(isButtonExist)}>{name}</h3>
+        <Link href={`${URL.COMPANY_DETAIL}/${id}`}>
+          <h3 css={cssObj.name(isButtonExist)}>{name}</h3>
+        </Link>
         {!isMobile && (
           <p css={cssObj.hashTags(isButtonExist)}>
             {hashTagArr
