@@ -16,7 +16,7 @@ export const cssObj = {
 
   inputBox: css`
     height: 0.9rem;
-    width: 23rem;
+    width: 31rem;
   `,
 
   buttonBox: css`

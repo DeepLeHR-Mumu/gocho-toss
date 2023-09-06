@@ -7,7 +7,7 @@ export const cssObj = {
     display: flex;
     flex-direction: column;
     gap: 1.75rem;
-    margin-bottom: 3.5rem;
+    margin-bottom: 0.5rem;
   `,
 
   inputBox: css`

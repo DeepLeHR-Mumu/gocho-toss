@@ -10,8 +10,9 @@ export const cssObj = {
 
   contentWrapper: css`
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
   `,
 
   profileBox: css`
@@ -19,11 +20,22 @@ export const cssObj = {
     gap: 2rem;
   `,
 
+  upload: css`
+    display: none;
+  `,
+
+  uploadIcon: css`
+    width: 1.25rem;
+    height: 1.25rem;
+  `,
+
   uploadBox: css`
     position: absolute;
+    display: inline-block;
+    vertical-align: middle;
     left: 5.25rem;
     top: 5.25rem;
-    background-color: orange;
+    background-color: ${NEWCOLORS.GRAY100};
     border-radius: 2rem;
     width: 2.25rem;
     height: 2.25rem;
@@ -79,30 +91,16 @@ export const cssObj = {
     }
   `,
 
-  reviseButton: css`
-    padding: 0.5rem 0.38rem;
-    width: 2.6rem;
-    height: 1.9rem;
-    font-size: 0.875rem;
-    border-radius: 1.5rem;
-  `,
-
-  pwdButton: css`
-    padding: 1rem 0.75rem;
-    width: 8.75rem;
-    height: 2.75rem;
-    font-size: 0.875rem;
-    border-radius: 0.5rem;
-    margin: 0.25rem 0;
-  `,
-
   // TODO: 저장하기 버튼 여쭤 보기
   submitBox: css`
-    position: absolute;
-    left: 50%;
+    // position: absolute;
+    // left: 50%;
+
+    margin: auto 0;
+
     height: 1px;
     > button {
-      position: relative;
+      // position: relative;
       top: 5rem;
     }
   `,
