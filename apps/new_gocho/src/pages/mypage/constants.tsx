@@ -16,14 +16,14 @@ export const myPageMenu: PageItem[] = [
     key: 100,
     text: "프로필 관리",
     isNewTab: false,
-    type: "account",
+    type: "profile",
     element: <ProfilePart />,
   },
   {
     key: 101,
     text: "계정 관리",
     isNewTab: false,
-    type: "profile",
+    type: "account",
     element: <AccountPart />,
   },
   {

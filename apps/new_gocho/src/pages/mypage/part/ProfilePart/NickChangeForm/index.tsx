@@ -39,15 +39,6 @@ export const NickChangeForm: FunctionComponent<NickChangeFormProps> = ({ userDat
         />
         {errors.nickName && <span>This field is required</span>}
       </div>
-
-      {/* <div css={cssObj.buttonBox}>
-        <Button size="small" type="submit">
-          저장
-        </Button>
-        <Button size="small" color="outlineGray" type="button" onClick={handleNickFormOpen}>
-          취소
-        </Button>
-      </div> */}
     </form>
   );
 };

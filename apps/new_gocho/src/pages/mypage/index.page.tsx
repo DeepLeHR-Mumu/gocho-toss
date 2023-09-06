@@ -22,7 +22,7 @@ const MyPage: NextPage = () => {
     <Layout>
       <main css={cssObj.wrapper}>
         <section css={cssObj.navBox}>
-          <MypageNavigation />
+          <MypageNavigation currentPart={curPart.type || "profile"} />
         </section>
         <section>
           <Box css={cssObj.elementBox}>

@@ -40,4 +40,11 @@ export const cssObj = {
       font-size: 0.825rem;
     }
   `,
+
+  submitBox: css`
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `,
 };

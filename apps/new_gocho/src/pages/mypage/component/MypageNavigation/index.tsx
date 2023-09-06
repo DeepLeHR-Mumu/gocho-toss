@@ -1,13 +1,17 @@
 import Link from "next/link";
 
-import { FunctionComponent } from "react";
+import { FC } from "react";
 import { myPageMenu, sideNavMenu } from "../../constants";
 
 import { Box } from "../Box";
 
 import { cssObj } from "./style";
 
-export const MypageNavigation: FunctionComponent = () => {
+interface MypageNavigationProps {
+  currentPart: string | undefined;
+}
+
+export const MypageNavigation: FC<MypageNavigationProps> = ({ currentPart }) => {
   return (
     <div css={cssObj.navigationBox}>
       <Box>
@@ -22,6 +26,7 @@ export const MypageNavigation: FunctionComponent = () => {
                       type,
                     },
                   }}
+                  css={currentPart === type && cssObj.highlightMenu}
                 >
                   {text}
                 </Link>
@@ -52,6 +57,7 @@ export const MypageNavigation: FunctionComponent = () => {
                     type,
                   },
                 }}
+                css={currentPart === type && cssObj.highlightMenu}
               >
                 {text}
               </Link>

@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { NEWCOLORS } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -14,5 +15,11 @@ export const cssObj = {
     flex-direction: column;
     gap: 1.5rem;
     ${NEWTEXTS.TITLE7}
+  `,
+
+  highlightMenu: css`
+    font-size: 1rem;
+    font-weight: 700;
+    color: ${NEWCOLORS.BLUE300};
   `,
 };

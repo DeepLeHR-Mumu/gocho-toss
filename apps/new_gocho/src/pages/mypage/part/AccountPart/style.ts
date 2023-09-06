@@ -52,9 +52,4 @@ export const cssObj = {
     margin: 0.25rem 0;
     font-size: 0.875rem;
   `,
-
-  // TODO: 저장하기 버튼 여쭤 보기
-  submitBox: css`
-    margin-bottom: 2rem;
-  `,
 };

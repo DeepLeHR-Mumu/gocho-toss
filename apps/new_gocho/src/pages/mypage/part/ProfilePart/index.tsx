@@ -6,8 +6,9 @@ import { FiEdit3 } from "react-icons/fi";
 
 import { useUserProfile } from "@/apis/auth";
 
-import { cssObj } from "./style";
 import { NickChangeForm } from "./NickChangeForm";
+import { fileEncording } from "./utils";
+import { cssObj } from "./style";
 
 export const ProfilePart: FunctionComponent = () => {
   const { data: userData } = useUserProfile();
@@ -30,25 +31,15 @@ export const ProfilePart: FunctionComponent = () => {
   };
 
   const handleProfileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    // console.log("api 전송하는 file 타입", profile);
     const profile = event.target.files?.[0];
+
     if (profile) {
-      const reader = new FileReader();
-
-      const filePromise = new Promise<string | ArrayBuffer | null>((resolve, reject) => {
-        reader.onload = () => {
-          resolve(reader.result);
-        };
-        reader.onerror = () => {
-          reject(new Error("File reading failed"));
-        };
-      });
-
-      reader.readAsDataURL(profile);
-
       try {
-        const result = await filePromise;
+        const result = await fileEncording(profile);
 
         if (typeof result === "string") {
+          // console.log("미리 보기 next/image 프로필", result);
           setProfile(result);
           setSaveBtnActive(true);
         }
