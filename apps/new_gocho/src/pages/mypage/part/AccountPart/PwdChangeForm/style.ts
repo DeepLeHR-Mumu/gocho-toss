@@ -22,7 +22,7 @@ export const cssObj = {
     }
 
     > div {
-      width: 20.5rem;
+      width: 24.5rem;
       height: 3.25rem;
     }
   `,

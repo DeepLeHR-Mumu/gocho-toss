@@ -41,13 +41,6 @@ export const cssObj = {
     height: 2.25rem;
   `,
 
-  infoBox: css`
-    display: flex;
-    width: 41.5rem;
-    flex-direction: column;
-    gap: 1rem;
-  `,
-
   nickNameBox: css`
     display: flex;
     justify-content: space-between;
@@ -75,19 +68,20 @@ export const cssObj = {
 
   inputBox: css`
     display: flex;
+    justify-content: center;
+    width: 30rem;
+  `,
 
-    p {
-      padding: 1rem 0;
-      width: 8.25rem;
-      line-height: 1rem;
-      font-weight: 500;
-      color: ${NEWCOLORS.BLUEGRAY400};
-    }
+  formBox: css`
+    display: flex;
+    gap: 3rem;
 
-    // 이메일
-    span {
-      padding-top: 0.8rem;
-      font-weight: 500;
+    button {
+      padding: 1rem 0.75rem;
+      height: 2.75rem;
+      font-size: 0.875rem;
+      border-radius: 1.5rem;
+      margin: 0.25rem 0;
     }
   `,
 

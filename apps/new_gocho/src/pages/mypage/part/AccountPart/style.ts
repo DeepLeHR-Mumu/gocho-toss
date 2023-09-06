@@ -22,7 +22,7 @@ export const cssObj = {
 
   infoBox: css`
     display: flex;
-    width: 41.5rem;
+    width: 100%;
     flex-direction: column;
     gap: 1rem;
   `,
