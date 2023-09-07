@@ -1,19 +1,21 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { Layout } from "@/components";
+import { Layout, LoginModal } from "@/components";
 import { MypageNavigation } from "./component/MypageNavigation";
 
 import { partElementArray } from "./constants";
 
 import { cssObj } from "./style";
 import { Box } from "./component/Box";
+import { useUserProfile } from "@/apis/auth";
 
 const MyPage: NextPage = () => {
-  const { query } = useRouter();
+  const router = useRouter();
+  const { data: userProfile } = useUserProfile();
 
   const curPart = partElementArray.find(({ type }) => {
-    return type === query.type;
+    return type === router.query.type;
   });
 
   if (!curPart) return <h1>에러에러</h1>;
@@ -31,6 +33,14 @@ const MyPage: NextPage = () => {
           </Box>
         </section>
       </main>
+      {/* TODO: 모달창 논의 필요 */}
+      {!userProfile && (
+        <LoginModal
+          close={() => {
+            router.push("/");
+          }}
+        />
+      )}
     </Layout>
   );
 };
