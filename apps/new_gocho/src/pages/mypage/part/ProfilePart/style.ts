@@ -5,14 +5,15 @@ export const cssObj = {
   wrapper: css`
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 2.5rem;
   `,
 
   contentWrapper: css`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3rem;
+    gap: 2.5rem;
+    margin-bottom: 1.5rem;
   `,
 
   profileBox: css`
@@ -70,6 +71,7 @@ export const cssObj = {
     display: flex;
     justify-content: center;
     width: 30rem;
+    text-align: center;
   `,
 
   formBox: css`
@@ -88,14 +90,13 @@ export const cssObj = {
   // TODO: 저장하기 버튼 여쭤 보기
   submitBox: css`
     // position: absolute;
-    // left: 50%;
 
     margin: auto 0;
 
     height: 1px;
     > button {
       // position: relative;
-      top: 5rem;
+      // top: 20rem;
     }
   `,
 };

@@ -23,6 +23,8 @@ export const ProfilePart: FunctionComponent = () => {
     register,
     handleSubmit,
     setError,
+    clearErrors,
+    trigger,
     formState: { errors, isValid },
   } = useForm<NickNameInputs>({ mode: "onChange" });
 
@@ -38,11 +40,13 @@ export const ProfilePart: FunctionComponent = () => {
   };
 
   const handleProfileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log("api 전송하는 file 타입", profile);
     const profile = event.target.files?.[0];
-    setProfileFile(profile);
 
     if (profile) {
+      setProfileFile(profile);
+      clearErrors("nickName");
+      trigger("nickName");
+
       try {
         const result = await fileEncording(profile);
 
@@ -50,6 +54,7 @@ export const ProfilePart: FunctionComponent = () => {
           setProfile(result);
         }
       } catch (error) {
+        // TODO: 토스트로 알림주기
         // console.error("An error occurred while reading the file: ", error);
       }
     }
@@ -57,6 +62,14 @@ export const ProfilePart: FunctionComponent = () => {
 
   const onSubmit: SubmitHandler<NickNameInputs> = (data) => {
     if (!userData) return;
+    if (data.nickName.trim().length < 1) {
+      setError("nickName", {
+        type: "custom",
+        message: "닉네임을 입력해 주세요.",
+      });
+
+      return;
+    }
 
     const queryOption = {
       onError: () => {
@@ -66,7 +79,9 @@ export const ProfilePart: FunctionComponent = () => {
         });
       },
       onSuccess: () => {
+        // TODO: 토스트로 알림주기
         alert("업로드 성공");
+        setProfileFile(null);
       },
     };
 
@@ -79,14 +94,13 @@ export const ProfilePart: FunctionComponent = () => {
         },
         queryOption
       );
-
-      setProfileFile(null);
+      return;
     }
 
     if (!useProfileFile && data.nickName === userData?.nickname) {
       setError("nickName", {
         type: "custom",
-        message: "",
+        message: "닉네임이나 프로필을 변경해주세요.",
       });
       return;
     }
@@ -125,12 +139,17 @@ export const ProfilePart: FunctionComponent = () => {
             defaultValue={userData?.nickname}
             state={{
               state: errors.nickName ? "error" : "default",
-              message: errors.nickName ? "프로필을 변경하거나 닉네임을 입력해주세요." : "",
+              message: errors.nickName ? errors.nickName.message : "",
             }}
             placeholder="닉네임을 입력해주세요."
             {...register("nickName", {
-              minLength: 1,
-              maxLength: 14,
+              required: "닉네임은 필수로 입력해야 합니다.",
+              minLength: { value: 2, message: "닉네임은 최소 2자 이상이어야 합니다." },
+              maxLength: { value: 14, message: "닉네임은 최대 14자까지 가능합니다." },
+              pattern: {
+                value: /^[a-zA-Z0-9\u3131-\u314e\u314f-\u3163\uac00-\ud7a3\s!@#$%^&*()_+{}\]:;<>,.?~]*$/,
+                message: "올바른 닉네임을 입력해 주세요.",
+              },
             })}
           />
         </div>

@@ -33,6 +33,7 @@ export const PwdChangeForm: FC<PwdChangeFormProps> = ({ userData, handleFormClos
           setError("originPassword", { type: "custom", message: "" });
         },
         onSuccess: () => {
+          // TODO: 토스트로 변경하기
           alert("비밀번호 변경 성공");
           handleFormClose();
         },
@@ -66,12 +67,12 @@ export const PwdChangeForm: FC<PwdChangeFormProps> = ({ userData, handleFormClos
             placeholder="새로운 비밀번호를 입력해 주세요"
             {...register("newPassword", {
               required: true,
-              minLength: 8,
-              maxLength: 20,
+              minLength: { value: 8, message: "8자 이상 입력해주세요." },
+              maxLength: { value: 20, message: "최대 20자 까지 입력 가능합니다." },
             })}
             state={{
               state: errors.newPassword ? "error" : "default",
-              message: errors.newPassword ? "8자 이상 입력해주세요." : "",
+              message: errors.newPassword ? errors.newPassword.message : "",
             }}
           />
         </div>
@@ -83,8 +84,8 @@ export const PwdChangeForm: FC<PwdChangeFormProps> = ({ userData, handleFormClos
             placeholder="한번 더 새로운 비밀번호를 입력해 주세요"
             {...register("checkPassword", {
               required: true,
-              minLength: 8,
-              maxLength: 20,
+              minLength: { value: 8, message: "8자 이상 입력해주세요." },
+              maxLength: { value: 20, message: "20자까지 입력 가능합니다." },
               validate: (checkPassword, formValues) => {
                 return checkPassword === formValues.newPassword;
               },
