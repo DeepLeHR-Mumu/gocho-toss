@@ -1,4 +1,4 @@
-import { FunctionComponent, useRef, useState } from "react";
+import { FC, useRef, useState } from "react";
 
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -10,12 +10,9 @@ import { usePatchUserProfile, useUserProfile } from "@/apis/auth";
 
 import { fileEncording } from "./utils";
 import { cssObj } from "./style";
+import { NickNameInputs } from "./type";
 
-type NickNameInputs = {
-  nickName: string;
-};
-
-export const ProfilePart: FunctionComponent = () => {
+export const ProfilePart: FC = () => {
   const { data: userData } = useUserProfile();
   const { mutate: postProfile } = usePatchUserProfile();
 

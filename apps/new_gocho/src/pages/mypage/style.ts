@@ -2,6 +2,12 @@ import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
+  background: css`
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+  `,
+
   wrapper: css`
     display: grid;
     grid-template-columns: 168px 1fr;

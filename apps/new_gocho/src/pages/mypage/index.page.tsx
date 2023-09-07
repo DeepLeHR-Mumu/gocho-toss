@@ -18,7 +18,22 @@ const MyPage: NextPage = () => {
     return type === router.query.type;
   });
 
-  if (!curPart) return <h1>에러에러</h1>;
+  if (!curPart) {
+    return <h1>Error</h1>;
+  }
+
+  if (!userProfile) {
+    /* TODO: 모달창 논의 필요 */
+    return (
+      <div css={cssObj.background}>
+        <LoginModal
+          close={() => {
+            router.push("/");
+          }}
+        />
+      </div>
+    );
+  }
 
   return (
     <Layout>
@@ -33,14 +48,6 @@ const MyPage: NextPage = () => {
           </Box>
         </section>
       </main>
-      {/* TODO: 모달창 논의 필요 */}
-      {!userProfile && (
-        <LoginModal
-          close={() => {
-            router.push("/");
-          }}
-        />
-      )}
     </Layout>
   );
 };

@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import { LinkItem, PageItem } from "./type";
 import { ProfilePart } from "./part/ProfilePart";
 import { AccountPart } from "./part/AccountPart";
+import { PrivacyPart } from "./part/PrivacyPart";
 
 export const myPageMenu: PageItem[] = [
   {
@@ -72,8 +73,8 @@ export const sideNavMenu: (LinkItem | PageItem)[] = [
     key: 108,
     text: "개인정보처리방침",
     isNewTab: false,
-    type: "privacyPolicy",
-    element: "",
+    type: "privacy",
+    element: <PrivacyPart />,
   },
   {
     key: 109,

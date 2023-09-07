@@ -19,7 +19,6 @@ export const PwdChangeForm: FC<PwdChangeFormProps> = ({ userData, handleFormClos
   });
 
   const onSubmit: SubmitHandler<PwdInputForm> = (data) => {
-    if (!data) return;
     if (!userData) return;
 
     patchPassword(

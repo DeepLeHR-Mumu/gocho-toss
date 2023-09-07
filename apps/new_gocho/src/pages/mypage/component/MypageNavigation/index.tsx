@@ -6,10 +6,7 @@ import { myPageMenu, sideNavMenu } from "../../constants";
 import { Box } from "../Box";
 
 import { cssObj } from "./style";
-
-interface MypageNavigationProps {
-  currentPart: string | undefined;
-}
+import { MypageNavigationProps } from "./type";
 
 export const MypageNavigation: FC<MypageNavigationProps> = ({ currentPart }) => {
   return (
