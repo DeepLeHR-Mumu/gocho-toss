@@ -32,6 +32,7 @@
     "shared-constant": "workspace:^0.0.0",
     "shared-ga": "workspace:^0.0.0",
     "shared-image": "workspace:^0.0.0",
+    "shared-meta": "workspace:^",
     "shared-style": "workspace:^0.0.0",
     "shared-type": "workspace:^0.0.0",
     "shared-ui": "workspace:^0.0.0",
