@@ -5,8 +5,7 @@ import { DropDown, Popup } from "shared-ui/deeple-ds";
 import { getCommunityDateFormat } from "shared-util";
 
 import { useCompanyCommentToggle, useDeleteCompanyComment } from "@/apis/company";
-import { BlockUserModal } from "@/components/modal/BlockUserModal";
-import { ReportUserModal } from "@/components";
+import { ReportUserModal, BlockUserModal } from "@/components";
 
 import { ReviewProps } from "./type";
 import { cssObj } from "./style";

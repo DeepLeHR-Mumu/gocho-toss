@@ -12,3 +12,6 @@ export { Layout } from "./Layout";
 export { LoginModal } from "./modal/LoginModal";
 export { SearchModal } from "./modal/SearchModal";
 export { ReportUserModal } from "./modal/ReportUserModal";
+export { BlockUserModal } from "./modal/BlockUserModal";
+export { FactoryInfoModal } from "./modal/FactoryInfoModal";
+export { ShareModal } from "./modal/ShareModal";

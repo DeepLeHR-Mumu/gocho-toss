@@ -1,0 +1,47 @@
+import { useRouter } from "next/router";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { Profile, Textarea, Button } from "shared-ui/deeple-ds";
+
+import { useWriteCompanyComment } from "@/apis/company";
+import { useUserProfile } from "@/apis/auth";
+
+import { cssObj } from "./style";
+
+export const WriteReview = () => {
+  const router = useRouter();
+  const { data: userData } = useUserProfile();
+  const { mutate: postWriteCompanyComment } = useWriteCompanyComment();
+
+  const { register, handleSubmit } = useForm<{ comment: string }>();
+
+  const writeComment: SubmitHandler<{ comment: string }> = (commentObj) => {
+    postWriteCompanyComment(
+      { companyId: Number(router.query.companyId), description: commentObj.comment },
+      {
+        onSuccess: () => {
+          // TODO 성공 시
+        },
+        onError: () => {
+          // TODO 실패 시
+        },
+      }
+    );
+  };
+
+  return (
+    <div css={cssObj.wrapper}>
+      <div css={cssObj.profileWrapper}>
+        <Profile src={userData?.image || ""} size={40} />
+        <span>{userData?.nickname}</span>
+      </div>
+      <form onSubmit={handleSubmit(writeComment)}>
+        <Textarea height={4.5} {...register("comment")} />
+      </form>
+      <div css={cssObj.buttonWrapper}>
+        <Button type="button" size="small">
+          작성완료
+        </Button>
+      </div>
+    </div>
+  );
+};
