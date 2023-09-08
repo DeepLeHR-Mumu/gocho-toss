@@ -4,16 +4,15 @@ import { axiosInstance } from "../../axiosInstance";
 
 import { selector } from "./util";
 
-export const getUserProfile = async () => {
-  const { data } = await axiosInstance.get(`/users/profile`);
+export const getUserInfo = async () => {
+  const { data } = await axiosInstance.get(`/users/info`);
   return data;
 };
 
-// TODO: swagger 에서 Deprecated 명시, 논의 후 수정
-export const useUserProfile = () => {
+export const useUserInfo = () => {
   return useQuery({
-    queryKey: userInfoKeyObj.userProfile,
-    queryFn: getUserProfile,
+    queryKey: userInfoKeyObj.userInfo,
+    queryFn: getUserInfo,
     select: ({ data }) => {
       return selector(data);
     },
