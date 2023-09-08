@@ -87,16 +87,7 @@ export const cssObj = {
     }
   `,
 
-  // TODO: 저장하기 버튼 여쭤 보기
   submitBox: css`
-    // position: absolute;
-
     margin: auto 0;
-
-    height: 1px;
-    > button {
-      // position: relative;
-      // top: 20rem;
-    }
   `,
 };

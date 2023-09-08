@@ -1,10 +1,8 @@
 import { ReactNode } from "react";
 
+import { AccountPart, ProfilePart, AlarmPart, PrivacyPart, TOSPart } from "./part";
+
 import { LinkItem, PageItem } from "./type";
-import { ProfilePart } from "./part/ProfilePart";
-import { AccountPart } from "./part/AccountPart";
-import { PrivacyPart } from "./part/PrivacyPart";
-import { TOSPart } from "./part/TosPart";
 
 export const myPageMenu: PageItem[] = [
   {
@@ -40,7 +38,7 @@ export const myPageMenu: PageItem[] = [
     text: "알림 설정",
     isNewTab: false,
     type: "alarm",
-    element: "",
+    element: <AlarmPart />,
   },
 ];
 

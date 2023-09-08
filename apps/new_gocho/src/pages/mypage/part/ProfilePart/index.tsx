@@ -114,48 +114,46 @@ export const ProfilePart: FC = () => {
   };
 
   return (
-    <div css={cssObj.wrapper} onSubmit={handleSubmit(onSubmit)}>
-      <form css={cssObj.contentWrapper}>
-        <div css={cssObj.profileBox}>
-          <Profile src={userProfile} size={120} />
-          <button type="button" css={cssObj.uploadBox} onClick={handleUploadButton}>
-            <FiEdit3 css={cssObj.uploadIcon} />
-          </button>
-          <input
-            type="file"
-            aria-label="프로필 업로드"
-            css={cssObj.upload}
-            onChange={handleProfileChange}
-            ref={uploadDom}
-          />
-        </div>
-        <div css={cssObj.formBox}>
-          <Input
-            type="text"
-            css={cssObj.inputBox}
-            defaultValue={userData?.nickname}
-            state={{
-              state: errors.nickName ? "error" : "default",
-              message: errors.nickName ? errors.nickName.message : "",
-            }}
-            placeholder="닉네임을 입력해주세요."
-            {...register("nickName", {
-              required: "닉네임은 필수로 입력해야 합니다.",
-              minLength: { value: 2, message: "닉네임은 최소 2자 이상이어야 합니다." },
-              maxLength: { value: 14, message: "닉네임은 최대 14자까지 가능합니다." },
-              pattern: {
-                value: /^[a-zA-Z0-9\u3131-\u314e\u314f-\u3163\uac00-\ud7a3\s!@#$%^&*()_+{}\]:;<>,.?~]*$/,
-                message: "올바른 닉네임을 입력해 주세요.",
-              },
-            })}
-          />
-        </div>
-        <div css={cssObj.submitBox}>
-          <Button size="small" type="submit" color={isValid ? "active" : "disable"} disabled={!isValid}>
-            저장하기
-          </Button>
-        </div>
-      </form>
-    </div>
+    <form css={cssObj.contentWrapper} onSubmit={handleSubmit(onSubmit)}>
+      <div css={cssObj.profileBox}>
+        <Profile src={userProfile} size={120} />
+        <button type="button" css={cssObj.uploadBox} onClick={handleUploadButton}>
+          <FiEdit3 css={cssObj.uploadIcon} />
+        </button>
+        <input
+          type="file"
+          aria-label="프로필 업로드"
+          css={cssObj.upload}
+          onChange={handleProfileChange}
+          ref={uploadDom}
+        />
+      </div>
+      <div css={cssObj.formBox}>
+        <Input
+          type="text"
+          css={cssObj.inputBox}
+          defaultValue={userData?.nickname}
+          state={{
+            state: errors.nickName ? "error" : "default",
+            message: errors.nickName ? errors.nickName.message : "",
+          }}
+          placeholder="닉네임을 입력해주세요."
+          {...register("nickName", {
+            required: "닉네임은 필수로 입력해야 합니다.",
+            minLength: { value: 2, message: "닉네임은 최소 2자 이상이어야 합니다." },
+            maxLength: { value: 14, message: "닉네임은 최대 14자까지 가능합니다." },
+            pattern: {
+              value: /^[a-zA-Z0-9\u3131-\u314e\u314f-\u3163\uac00-\ud7a3\s!@#$%^&*()_+{}\]:;<>,.?~]*$/,
+              message: "올바른 닉네임을 입력해 주세요.",
+            },
+          })}
+        />
+      </div>
+      <div css={cssObj.submitBox}>
+        <Button size="small" type="submit" color={isValid ? "active" : "disable"} disabled={!isValid}>
+          저장하기
+        </Button>
+      </div>
+    </form>
   );
 };
