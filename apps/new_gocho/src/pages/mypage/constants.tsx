@@ -4,6 +4,7 @@ import { LinkItem, PageItem } from "./type";
 import { ProfilePart } from "./part/ProfilePart";
 import { AccountPart } from "./part/AccountPart";
 import { PrivacyPart } from "./part/PrivacyPart";
+import { TOSPart } from "./part/TosPart";
 
 export const myPageMenu: PageItem[] = [
   {
@@ -66,8 +67,8 @@ export const sideNavMenu: (LinkItem | PageItem)[] = [
     key: 107,
     text: "이용약관",
     isNewTab: false,
-    type: "termsUse",
-    element: "",
+    type: "terms-of-service",
+    element: <TOSPart />,
   },
   {
     key: 108,

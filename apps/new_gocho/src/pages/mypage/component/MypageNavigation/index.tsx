@@ -39,9 +39,9 @@ export const MypageNavigation: FC<MypageNavigationProps> = ({ currentPart }) => 
               const { key, link, text } = menuItem;
 
               return (
-                <Link key={key} href={link}>
+                <a key={key} href={link} target="_blank" rel="noreferrer">
                   {text}
-                </Link>
+                </a>
               );
             }
             const { key, type, text } = menuItem;

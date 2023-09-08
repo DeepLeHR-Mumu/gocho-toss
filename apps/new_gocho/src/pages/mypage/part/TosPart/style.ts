@@ -8,6 +8,5 @@ export const cssObj = {
     font-weight: 400;
     line-height: 1.5rem; /* 150% */
     width: 100%;
-    height: auto;
   `,
 };

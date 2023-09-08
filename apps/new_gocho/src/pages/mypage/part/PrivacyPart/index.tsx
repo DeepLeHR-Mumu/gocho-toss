@@ -1,31 +1,25 @@
 import { privacyExecutionDesc, privacyArr, CTOINFO } from "shared-constant";
 
-interface PrivacyDef {
-  title: string;
-  subItem: {
-    title: string;
-    infoArr: string[];
-  }[];
-}
+import { PrivacyDef } from "./type";
+import { cssObj } from "./style";
 
 export const PrivacyPart = () => {
   return (
-    <section>
-      <strong>개인정보 처리방침</strong>
-
+    <section css={cssObj.wrapper}>
       {privacyArr.map((item: PrivacyDef) => {
         return (
           <div key={item.title}>
-            <h2>{item.title}</h2>
+            <p>{item.title}</p>
             {item.subItem.map((data) => {
               return (
                 <>
-                  <strong>{data.title}</strong>
+                  <p>{data.title}</p>
                   <ul>
                     {data.infoArr.map((list) => {
                       return <li key={list}>{list}</li>;
                     })}
                   </ul>
+                  <br />
                 </>
               );
             })}

@@ -1,11 +1,12 @@
 import { css } from "@emotion/react";
+import { NEWCOLORS } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
   background: css`
     width: 100vw;
     height: 100vh;
-    background-color: white;
+    background-color: ${NEWCOLORS.WHITE};
   `,
 
   wrapper: css`
@@ -14,7 +15,6 @@ export const cssObj = {
     row-gap: 1.5rem;
     column-gap: 1.5rem;
     padding-top: 2.5rem;
-    height: 100vh;
   `,
 
   navBox: css`
