@@ -1,37 +1,54 @@
 import { NextPage } from "next";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
-import { Layout } from "@/components";
+import { Layout, LoginModal } from "@/components";
+import { MypageNavigation } from "./component/MypageNavigation";
 
-import { Account } from "./part/Account";
-import { Box } from "./component/Box";
+import { partElementArray } from "./constants";
+
 import { cssObj } from "./style";
+import { Box } from "./component/Box";
+import { useUserProfile } from "@/apis/auth";
 
 const MyPage: NextPage = () => {
+  const router = useRouter();
+  const { data: userProfile } = useUserProfile();
+
+  const curPart = partElementArray.find(({ type }) => {
+    return type === router.query.type;
+  });
+
+  if (!curPart) {
+    return <h1>Error</h1>;
+  }
+
+  if (!userProfile) {
+    /* TODO: 모달창 논의 필요 */
+    return (
+      <div css={cssObj.background}>
+        <LoginModal
+          close={() => {
+            router.push("/");
+          }}
+        />
+      </div>
+    );
+  }
+
   return (
-    <main>
-      <Layout>
-        <div css={cssObj.wrapper}>
-          <Box>
-            <div css={cssObj.sideNavigation}>
-              <Link href={{ query: { type: "account" } }}>계정 관리</Link>
-              <Link href={{ query: { type: "bookmark" } }}>북마크</Link>
-              <Link href={{ query: { type: "alarm" } }}>알림 설정</Link>
-            </div>
+    <Layout>
+      <main css={cssObj.wrapper}>
+        <section css={cssObj.navBox}>
+          <MypageNavigation currentPart={curPart.type || "profile"} />
+        </section>
+        <section>
+          <Box css={cssObj.elementBox}>
+            <h3 css={cssObj.title}>{curPart.title}</h3>
+            {curPart.element}
           </Box>
-          <Account />
-          <Box>
-            <div css={cssObj.sideNavigation}>
-              <Link href={{ query: { type: "" } }}>공지사항</Link>
-              <Link href={{ query: { type: "" } }}>QnA</Link>
-              <Link href={{ query: { type: "" } }}>고객센터</Link>
-              <Link href={{ query: { type: "" } }}>약관 및 정책</Link>
-              <Link href={{ query: { type: "" } }}>오픈 소스 라이센스</Link>
-            </div>
-          </Box>
-        </div>
-      </Layout>
-    </main>
+        </section>
+      </main>
+    </Layout>
   );
 };
 
