@@ -27,6 +27,12 @@ export interface FactoryDef {
   };
 }
 
+export interface LocationDef {
+  address: string;
+  x: number;
+  y: number;
+}
+
 export interface CompanyObjDef {
   id: number;
   name: string;
@@ -36,7 +42,7 @@ export interface CompanyObjDef {
   size: "대기업" | "중소기업" | "중견기업" | "외국계" | "공기업" | "공공기관" | "기타";
   employee_number: number;
   found_date: string;
-  address: string;
+  location: LocationDef;
   intro: string;
   pay_avg: number;
   pay_start: number;
