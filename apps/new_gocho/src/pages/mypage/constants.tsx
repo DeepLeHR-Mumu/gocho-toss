@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { AccountPart, ProfilePart, AlarmPart, PrivacyPart, TOSPart } from "./part";
+import { AccountPart, ProfilePart, AlarmPart, PrivacyPart, TOSPart, BookmarkPart } from "./part";
 
 import { LinkItem, PageItem } from "./type";
 
@@ -31,7 +31,7 @@ export const myPageMenu: PageItem[] = [
     text: "북마크",
     isNewTab: false,
     type: "bookmark",
-    element: "",
+    element: <BookmarkPart />,
   },
   {
     key: 103,
