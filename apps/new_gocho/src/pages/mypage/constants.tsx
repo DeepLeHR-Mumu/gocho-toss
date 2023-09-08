@@ -75,13 +75,6 @@ export const sideNavMenu: (LinkItem | PageItem)[] = [
     type: "privacy",
     element: <PrivacyPart />,
   },
-  {
-    key: 109,
-    text: "오픈 소스 라이센스",
-    isNewTab: false,
-    type: "opnsrLcns",
-    element: "",
-  },
 ];
 
 export const partElementArray = sideNavMenu.concat(myPageMenu).reduce((acc, cur) => {

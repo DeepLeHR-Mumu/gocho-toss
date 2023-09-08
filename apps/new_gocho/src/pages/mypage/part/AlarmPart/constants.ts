@@ -5,7 +5,7 @@ export const alarmItemArr: AlarmItem[] = [
     key: 1,
     alarmText: "benefit_event",
     itemTitle: "혜택, 이벤트 알림",
-    itemDes: "채용 소식, 새로운 기능, 인기 게시물 등 마케링 알림",
+    itemDes: "채용 소식, 새로운 기능, 인기 게시물 등 마케팅 알림",
   },
   {
     key: 2,
