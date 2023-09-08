@@ -3,8 +3,11 @@ import { NEWCOLORS } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
-  input: css`
+  textarea: (height: number) => css`
+    border: none;
+    resize: none;
     flex: 1;
+    height: ${height}rem;
     ${NEWTEXTS.TITLE7}
 
     :focus {
