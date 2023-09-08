@@ -158,6 +158,7 @@ export const SearchModal = ({ close }: SearchModalProps) => {
                     jdTitle={job.title}
                     dueDate={job.endTime}
                     bookmarked={false}
+                    cut={job.cut}
                   />
                 );
               })}

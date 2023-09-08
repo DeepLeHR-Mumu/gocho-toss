@@ -74,6 +74,7 @@ const JdDetailPage: NextPage = () => {
                   jdTitle={jd.title}
                   dueDate={jd.endTime}
                   bookmarked={jd.isBookmark}
+                  cut={jd.cut}
                 />
               );
             })}
