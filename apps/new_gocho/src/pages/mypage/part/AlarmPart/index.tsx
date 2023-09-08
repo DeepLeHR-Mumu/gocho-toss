@@ -1,7 +1,7 @@
 import { AlarmItem } from "./component/AlarmItem";
 import { cssObj } from "./style";
 
-import { AlarmItemArr } from "./constants";
+import { alarmItemArr } from "./constants";
 import { useUserInfo } from "@/apis/auth/useUserInfo";
 
 export const AlarmPart = () => {
@@ -9,14 +9,31 @@ export const AlarmPart = () => {
 
   if (!userInfo) return null;
 
-  // const { alarmConfig } = userInfo;
+  const { alarmConfig } = userInfo;
 
-  // console.log("alarmConfig", alarmConfig);
+  const alarmFetchedArr = alarmItemArr.map(({ key, itemTitle, itemDes, alarmText }) => {
+    return {
+      key,
+      itemTitle,
+      itemDes,
+      alarmText,
+      isAlarmReceive: alarmConfig[alarmText],
+    };
+  });
 
   return (
     <div css={cssObj.wrapper}>
-      {AlarmItemArr.map(({ key, itemTitle, itemDes }) => {
-        return <AlarmItem key={key} itemTitle={itemTitle} itemDes={itemDes} />;
+      {alarmFetchedArr.map(({ key, itemTitle, itemDes, isAlarmReceive, alarmText }) => {
+        return (
+          <AlarmItem
+            key={key}
+            itemTitle={itemTitle}
+            itemDes={itemDes}
+            userId={userInfo.id}
+            alarmText={alarmText}
+            isAlarmReceive={isAlarmReceive}
+          />
+        );
       })}
     </div>
   );

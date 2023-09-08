@@ -1,14 +1,25 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Divider, Switch } from "shared-ui/deeple-ds";
 
 import { cssObj } from "./style";
+import { usePatchAlarm } from "@/apis/auth/usePatchUserAlarm";
+import { AlarmItemProps } from "./type";
 
-export interface AlarmItemProps {
-  itemTitle: string;
-  itemDes: string;
-}
+export const AlarmItem: FC<AlarmItemProps> = ({ userId, itemTitle, itemDes, alarmText, isAlarmReceive }) => {
+  const { mutate: patchAlarmSetting } = usePatchAlarm();
+  const [isReceive, setReceive] = useState<boolean>(isAlarmReceive);
 
-export const AlarmItem: FC<AlarmItemProps> = ({ itemTitle, itemDes }) => {
+  const handlerSettingAlarm = () => {
+    setReceive(!isReceive);
+    patchAlarmSetting({
+      userId,
+      alarmSetting: {
+        alarmText,
+        alarmReceive: !isAlarmReceive,
+      },
+    });
+  };
+
   return (
     <>
       <div css={cssObj.boxWrapper}>
@@ -16,12 +27,7 @@ export const AlarmItem: FC<AlarmItemProps> = ({ itemTitle, itemDes }) => {
           <h3 css={cssObj.titleText}>{itemTitle}</h3>
           <p css={cssObj.desText}>{itemDes}</p>
         </div>
-        <Switch
-          checked
-          onClick={() => {
-            alert("123");
-          }}
-        />
+        <Switch checked={isReceive} onChange={handlerSettingAlarm} />
       </div>
       <Divider />
     </>
