@@ -1,25 +1,29 @@
 import { useRouter } from "next/router";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
 import { Profile, Textarea, Button } from "shared-ui/deeple-ds";
 
 import { useWriteCompanyComment } from "@/apis/company";
 import { useUserProfile } from "@/apis/auth";
+import { companyCommentArrKeyObj } from "@/constants/queryKeyFactory/company/commentArrKeyObj";
 
 import { cssObj } from "./style";
 
 export const WriteReview = () => {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { data: userData } = useUserProfile();
   const { mutate: postWriteCompanyComment } = useWriteCompanyComment();
 
-  const { register, handleSubmit } = useForm<{ comment: string }>();
+  const { register, handleSubmit, reset } = useForm<{ comment: string }>();
 
   const writeComment: SubmitHandler<{ comment: string }> = (commentObj) => {
     postWriteCompanyComment(
       { companyId: Number(router.query.companyId), description: commentObj.comment },
       {
         onSuccess: () => {
-          // TODO 성공 시
+          reset();
+          queryClient.invalidateQueries(companyCommentArrKeyObj.all);
         },
         onError: () => {
           // TODO 실패 시
@@ -36,12 +40,12 @@ export const WriteReview = () => {
       </div>
       <form onSubmit={handleSubmit(writeComment)}>
         <Textarea height={4.5} {...register("comment")} />
+        <div css={cssObj.buttonWrapper}>
+          <Button type="submit" size="small">
+            작성완료
+          </Button>
+        </div>
       </form>
-      <div css={cssObj.buttonWrapper}>
-        <Button type="button" size="small">
-          작성완료
-        </Button>
-      </div>
     </div>
   );
 };

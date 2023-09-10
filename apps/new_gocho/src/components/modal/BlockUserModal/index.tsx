@@ -22,7 +22,10 @@ export const BlockUserModal = ({ companyId, userId, cancelHandler, confirmHandle
       confirm={{
         text: "확인",
         handler: () => {
-          postBlockUser({ userId });
+          if (userId) {
+            postBlockUser({ userId });
+          }
+
           if (confirmHandler) {
             confirmHandler();
           }

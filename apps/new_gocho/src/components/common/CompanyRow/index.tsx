@@ -2,12 +2,11 @@ import { useState } from "react";
 import Link from "next/link";
 
 import { Profile } from "shared-ui/deeple-ds";
-import { FollowButton } from "shared-ui/deeple-ds/FollowButton";
 
-import { useUserProfile } from "@/apis/auth";
-import { useCompanyBookmarkToggle } from "@/apis/company";
 import { useGetDeviceType } from "@/globalStates";
 import { LoginModal } from "@/components/modal/LoginModal";
+
+import { CompanyBookmark } from "../CompanyBookmark";
 
 import { CompanyRowProps } from "./type";
 import { cssObj } from "./style";
@@ -15,16 +14,6 @@ import { cssObj } from "./style";
 export const CompanyRow = ({ id, logo, name, size, industry, bookmark, border }: CompanyRowProps) => {
   const [loginModal, setLoginModal] = useState(false);
   const { isMobile } = useGetDeviceType();
-  const { data: userData } = useUserProfile();
-  const { mutate: companyBookmarkToggle } = useCompanyBookmarkToggle();
-
-  const bookmarkToggleHandler = () => {
-    if (!userData) {
-      setLoginModal(true);
-      return;
-    }
-    companyBookmarkToggle({ companyId: id });
-  };
 
   return (
     <>
@@ -38,11 +27,7 @@ export const CompanyRow = ({ id, logo, name, size, industry, bookmark, border }:
             {size} · {industry}
           </span>
         </div>
-        {bookmark && (
-          <FollowButton color={bookmark.state ? "follow" : "unfollow"} onClick={bookmarkToggleHandler}>
-            {bookmark.state ? "팔로잉" : "팔로우"}
-          </FollowButton>
-        )}
+        {bookmark && <CompanyBookmark companyId={id} isBookmark={bookmark.state} />}
       </div>
       {loginModal && (
         <LoginModal

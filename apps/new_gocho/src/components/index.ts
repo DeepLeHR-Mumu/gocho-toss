@@ -3,9 +3,14 @@ export { CompanyCard } from "./common/CompanyCard";
 export { JdRow } from "./common/JdRow";
 export { Pagination } from "./common/Pagination";
 export { CompanyRow } from "./common/CompanyRow";
+export { CommentThumbs } from "./common/CommentThumbs";
+export { BlockReportDropDown } from "./common/BlockReportDropDown";
+export { DeleteComment } from "./common/DeleteComment";
+export { CompanyBookmark } from "./common/CompanyBookmark";
 
 export { Footer } from "./global/Footer";
 export { GlobalNavigationBar } from "./global/GlobalNavigationBar";
+export { ToastPlaceholder } from "./global/ToastPlaceholder";
 
 export { Layout } from "./Layout";
 

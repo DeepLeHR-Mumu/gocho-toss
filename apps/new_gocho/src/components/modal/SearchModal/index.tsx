@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import { FiX } from "react-icons/fi";
 
 import { Divider, Chip, Modal } from "shared-ui/deeple-ds";
-import { useJobArr } from "shared-api/job";
-import { useCompanyArr } from "shared-api/company";
+import { useJdArr } from "@/apis/jd";
+import { useCompanyArr } from "@/apis/company";
 
 import { URL } from "@/pages/constants";
 
@@ -24,7 +24,7 @@ import { cssObj } from "./style";
 
 export const SearchModal = ({ close }: SearchModalProps) => {
   const router = useRouter();
-  const { data: jobData } = useJobArr({ order: "rand", filter: "valid", size: 5 });
+  const { data: jobData } = useJdArr({ order: "rand", filter: "valid", size: 5 });
   const { data: companyData } = useCompanyArr({ order: "rank", size: 4 });
   const [recentSearchWordArr, setRecentSearchWordArr] = useState<string[]>([]);
 
@@ -149,7 +149,7 @@ export const SearchModal = ({ close }: SearchModalProps) => {
           <div>
             <h3 css={cssObj.recommendationJdTitle}>추천공고</h3>
             <div css={cssObj.recommendationJdList}>
-              {jobData?.jobDataArr.map((job) => {
+              {jobData?.jdDataArr.map((job) => {
                 return (
                   <JdRow
                     key={job.id}

@@ -1,6 +1,6 @@
 export interface BlockUserModalProps {
   companyId?: number;
-  userId: number;
+  userId?: number;
   cancelHandler?: () => void;
   confirmHandler?: () => void;
 }

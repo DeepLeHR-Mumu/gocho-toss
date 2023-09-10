@@ -14,12 +14,15 @@ export const ReportUserModal = ({ companyId, userId, closeHandler }: ReportUserM
   const { register, handleSubmit } = useForm<ReportFormValues>();
 
   const submitReport: SubmitHandler<ReportFormValues> = (reportObj) => {
-    postReportUser(
-      { userId, reason: reportObj.reason },
-      {
-        // TODO 필요 시 onSuccess, onError 추가
-      }
-    );
+    if (userId) {
+      postReportUser(
+        { userId, reason: reportObj.reason },
+        {
+          // TODO 필요 시 onSuccess, onError 추가
+        }
+      );
+    }
+
     if (closeHandler) {
       closeHandler();
     }

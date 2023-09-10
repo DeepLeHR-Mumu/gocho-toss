@@ -1,33 +1,51 @@
 import Link from "next/link";
-import {
-  FiThumbsDown,
-  FiThumbsUp,
-  FiMoreVertical,
-  // FiTrash2,
-  FiChevronRight,
-} from "react-icons/fi";
+import { FiChevronRight } from "react-icons/fi";
+
 import { Profile } from "shared-ui/deeple-ds";
+import { getCommunityDateFormat } from "shared-util";
 
-import testImg from "@/public/bus.svg";
+import { CommentThumbs, BlockReportDropDown, DeleteComment } from "@/components";
 
+import { ReviewProps } from "./type";
 import { cssObj } from "./style";
 
-export const Review = () => {
+export const Review = ({ companyId, comment, isMyComment }: ReviewProps) => {
   return (
     <div css={cssObj.wrapper}>
       <div css={cssObj.profileWrapper}>
-        <Profile src={testImg} />
-        <h3>닉네임</h3>
-        <span>시간</span>
-        <FiMoreVertical />
+        <Profile src={comment.uploader.image} size={40} />
+        <h3 css={cssObj.nickname}>{comment.uploader.nickname}</h3>
+        <span css={cssObj.time}>{getCommunityDateFormat(comment.created_time)}</span>
+        {isMyComment ? (
+          <DeleteComment size={1.25} color="red" companyId={companyId} commentId={comment.id} />
+        ) : (
+          <BlockReportDropDown size={1.25} companyId={companyId} uploaderId={comment.uploader.id} />
+        )}
       </div>
       <div css={cssObj.commentWrapper}>
-        <Link href="/">
-          공고 링크 <FiChevronRight />
-        </Link>
-        <div css={cssObj.thumbsWrapper}>
-          <FiThumbsUp css={cssObj.thumbsUp} />
-          <FiThumbsDown />
+        {comment.jd && (
+          <Link href={`/jd/detail/${comment.jd.id}`} css={cssObj.jdLink}>
+            {comment.jd.title} <FiChevronRight css={cssObj.rightIcon} />
+          </Link>
+        )}
+        <p css={cssObj.comment}>{comment.description}</p>
+        <div css={cssObj.reactionWrapper}>
+          <CommentThumbs
+            type="likes"
+            size="large"
+            companyId={companyId}
+            commentId={comment.id}
+            count={comment.like}
+            isClicked={comment.is_liked}
+          />
+          <CommentThumbs
+            type="dislikes"
+            size="large"
+            companyId={companyId}
+            commentId={comment.id}
+            count={comment.dislike}
+            isClicked={comment.is_disliked}
+          />
         </div>
       </div>
     </div>

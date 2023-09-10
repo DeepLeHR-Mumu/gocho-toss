@@ -21,6 +21,9 @@ export const cssObj = {
   `,
 
   buttonWrapper: css`
-    align-self: flex-end;
+    margin-top: 0.75rem;
+    width: 100%;
+    display: inline-flex;
+    justify-content: flex-end;
   `,
 };

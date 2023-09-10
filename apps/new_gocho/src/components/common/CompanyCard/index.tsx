@@ -1,11 +1,10 @@
 import { useState } from "react";
 import Link from "next/link";
-import { Profile, FollowButton } from "shared-ui/deeple-ds";
+import { Profile } from "shared-ui/deeple-ds";
 
 import { LoginModal } from "@/components/modal/LoginModal";
 import { useGetDeviceType } from "@/globalStates";
-import { useUserProfile } from "@/apis/auth";
-import { useCompanyBookmarkToggle } from "@/apis/company";
+import { CompanyBookmark } from "../CompanyBookmark";
 
 import { CompanyCardProps } from "./type";
 import { cssObj } from "./style";
@@ -16,20 +15,6 @@ export const CompanyCard = ({ id, logoSrc, name, hashTagArr = [], bookmark }: Co
 
   const { isMobile } = useGetDeviceType();
   const isButtonExist = !!bookmark;
-
-  const { data: userData } = useUserProfile();
-  const { mutate: companyBookmarkToggle } = useCompanyBookmarkToggle();
-
-  const bookmarkToggleHandler = () => {
-    if (bookmark) {
-      if (!userData) {
-        setLoginModal(true);
-        return;
-      }
-
-      companyBookmarkToggle({ companyId: id });
-    }
-  };
 
   const getProfileSize = () => {
     if (isMobile) {
@@ -55,11 +40,7 @@ export const CompanyCard = ({ id, logoSrc, name, hashTagArr = [], bookmark }: Co
               .join(" ")}
           </p>
         )}
-        {isButtonExist && (
-          <FollowButton color={bookmark.state ? "follow" : "unfollow"} onClick={bookmarkToggleHandler}>
-            {bookmark.state ? "팔로잉" : "팔로우"}
-          </FollowButton>
-        )}
+        {isButtonExist && <CompanyBookmark companyId={id} isBookmark={bookmark.state} />}
       </div>
       {loginModal && (
         <LoginModal

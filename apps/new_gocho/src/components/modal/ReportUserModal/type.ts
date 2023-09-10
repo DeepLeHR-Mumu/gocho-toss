@@ -2,7 +2,7 @@ import { RequestObjDef as ReportUserObjDef } from "@/apis/users/useReportUser/ty
 import { ModalWithTitleProps } from "@/components/common/ModalWithTitle/type";
 
 export interface ReportUserModalProps extends Pick<ModalWithTitleProps, "closeHandler"> {
-  userId: number;
+  userId?: number;
   companyId?: number;
 }
 
