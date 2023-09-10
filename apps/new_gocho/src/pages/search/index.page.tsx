@@ -117,6 +117,7 @@ const SearchPage: NextPage = () => {
                     jdTitle={jd.title}
                     dueDate={jd.endTime}
                     bookmarked={false}
+                    cut={jd.cut}
                   />
                 );
               })}

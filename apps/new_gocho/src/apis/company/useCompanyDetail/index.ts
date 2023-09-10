@@ -4,7 +4,7 @@ import { companyDetailKeyObj, CompanyDetailRequestDef } from "@/constants/queryK
 
 import { axiosInstance, axiosNoTokenInstance } from "../../axiosInstance";
 import { GetCompanyDetailDef } from "./type";
-import { selector } from "./util";
+// import { selector } from "./util";
 
 export const getCompanyDetail: GetCompanyDetailDef = async ({ queryKey: [{ requestObj }] }) => {
   const instance = requestObj.isStatic ? axiosNoTokenInstance : axiosInstance;
@@ -19,7 +19,7 @@ export const useCompanyDetail = (requestObj: CompanyDetailRequestDef) => {
     staleTime: Infinity,
     enabled: Boolean(requestObj.companyId),
     select: ({ data }) => {
-      return selector(data);
+      return data;
     },
   });
 };

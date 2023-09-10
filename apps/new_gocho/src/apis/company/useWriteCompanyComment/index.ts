@@ -7,6 +7,7 @@ import { PostWriteCompanyCommentDef, RequestObjDef, useWriteCompanyCommentProps 
 
 const postWriteCompanyComment: PostWriteCompanyCommentDef = async (requestObj) => {
   const { data } = await axiosInstance.post(`/companies/${requestObj.companyId}/comments`, {
+    jd_id: requestObj.jdId,
     description: `${requestObj.description}`,
   });
 
