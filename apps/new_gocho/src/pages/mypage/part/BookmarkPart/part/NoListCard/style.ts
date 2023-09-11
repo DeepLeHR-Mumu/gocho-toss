@@ -5,7 +5,6 @@ export const cssObj = {
   listWrapper: css`
     width: 100%;
     height: 24.5rem;
-
     display: flex;
     justify-content: center;
     align-items: center;

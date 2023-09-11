@@ -1,3 +1,3 @@
 export { FallowPart } from "./FallowPart";
-export { FavoritePart } from "./FavoritePart";
+export { JDBookmarkPart } from "./JDBookmarkPart";
 export { HistoryPart } from "./HistoryPart";

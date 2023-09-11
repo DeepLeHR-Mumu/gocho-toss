@@ -103,6 +103,7 @@ export const FallowPart = () => {
                   follow={{
                     state: true,
                     onClick: () => {
+                      // TODO: 팔로우 이후 토스트 알림 주기
                       alert("팔로우하기");
                     },
                   }}

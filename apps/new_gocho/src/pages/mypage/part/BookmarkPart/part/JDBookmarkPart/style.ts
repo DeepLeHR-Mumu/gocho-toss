@@ -1,23 +1,35 @@
 import { css } from "@emotion/react";
+import { NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
   wrapper: css`
-    width: 100%;
-    margin-top: 2rem;
+    margin: 2rem 0;
     display: flex;
+    justify-content: space-between;
+  `,
+
+  checkWrapper: css`
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    p {
+      color: ${NEWCOLORS.BLUEGRAY400};
+      font-size: 0.875rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.125rem;
+    }
+  `,
+
+  listWrapper: css`
+    display: flex;
+    gap: 1rem;
     flex-direction: column;
-    gap: 2rem;
   `,
 
   dropdownWrapper: css`
     display: flex;
     flex-direction: row-reverse;
-  `,
-
-  listWrapper: css`
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
   `,
 
   filterBox: css`

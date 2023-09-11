@@ -1,6 +1,6 @@
 import { BookmarkPage } from "./type";
 
-import { FallowPart, FavoritePart, HistoryPart } from "./part";
+import { FallowPart, JDBookmarkPart, HistoryPart } from "./part";
 
 export const bookmarkPart: BookmarkPage[] = [
   {
@@ -11,7 +11,7 @@ export const bookmarkPart: BookmarkPage[] = [
   {
     key: 2,
     title: "찜한 공고",
-    element: <FavoritePart />,
+    element: <JDBookmarkPart />,
   },
   {
     key: 3,

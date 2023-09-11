@@ -17,7 +17,7 @@ export const BookmarkPart = () => {
   };
 
   return (
-    <>
+    <div>
       <div css={cssObj.navWrapper}>
         {bookmarkPart.map(({ key, title }) => {
           return (
@@ -38,6 +38,6 @@ export const BookmarkPart = () => {
       </div>
       <hr css={cssObj.bottomHr} />
       {curPart.element}
-    </>
+    </div>
   );
 };
