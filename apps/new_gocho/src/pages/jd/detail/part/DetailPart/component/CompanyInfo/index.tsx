@@ -13,15 +13,12 @@ export const CompanyInfo = ({ contents, company }: CompanyInfoProps) => {
       <CompanyRow {...company} />
       <Divider css={cssObj.divider} />
       <div css={cssObj.contentWrapper}>
-        {contentEntries.map(([subtitle, content], index) => {
-          return (
-            // eslint-disable-next-line react/no-array-index-key
-            <div key={index} css={cssObj.rowWrapper}>
-              <span>{subtitle}</span>
-              {content}
-            </div>
-          );
-        })}
+        {contentEntries.map(([subtitle, content]) => (
+          <div key={`CompanyInfo${subtitle}`} css={cssObj.rowWrapper}>
+            <span>{subtitle}</span>
+            {content}
+          </div>
+        ))}
       </div>
     </div>
   );

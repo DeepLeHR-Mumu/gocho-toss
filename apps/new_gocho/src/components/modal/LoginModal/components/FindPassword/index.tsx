@@ -9,11 +9,10 @@ import { RequestObjDef as FindPasswordFormValues } from "@/apis/auth/useFindPass
 import { useGetDeviceType } from "@/globalStates";
 
 import ActionBar from "../ActionBar";
-
-import { FindPasswordProps } from "./type";
+import { ActionBarHandlers } from "../ActionBar/type";
 import { cssObj } from "./style";
 
-const FindPassword = ({ ...actionBarHandlers }: FindPasswordProps) => {
+const FindPassword = ({ ...actionBarHandlers }: ActionBarHandlers) => {
   const { isMobile } = useGetDeviceType();
 
   const {

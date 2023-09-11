@@ -47,7 +47,6 @@ export const SearchModal = ({ close }: SearchModalProps) => {
   };
 
   const deleteChip = (target: string) => {
-    // eslint-disable-next-line arrow-body-style
     const newRecentSearcWordArr = recentSearchWordArr.filter((word) => word !== target);
     setRecentSearchWordArr(newRecentSearcWordArr);
     removeRecentWordFromStorage(target);
@@ -87,81 +86,73 @@ export const SearchModal = ({ close }: SearchModalProps) => {
               </button>
             </div>
             <div css={cssObj.recentWordChipsWrapper}>
-              {recentSearchWordArr.map((word) => {
-                return (
-                  <Chip
-                    size="large"
-                    key={word}
-                    color="fillGray"
-                    onClick={() => {
-                      searchHandler(word);
+              {recentSearchWordArr.map((word) => (
+                <Chip
+                  size="large"
+                  key={word}
+                  color="fillGray"
+                  onClick={() => {
+                    searchHandler(word);
+                  }}
+                >
+                  {word}
+                  <FiX
+                    css={cssObj.chipDelete}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      deleteChip(word);
                     }}
-                  >
-                    {word}
-                    <FiX
-                      css={cssObj.chipDelete}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        deleteChip(word);
-                      }}
-                    />
-                  </Chip>
-                );
-              })}
+                  />
+                </Chip>
+              ))}
             </div>
             <Divider />
           </div>
           <div>
             <h3 css={cssObj.recommendationWordTitle}>추천 검색어</h3>
             <div css={cssObj.recommendationWordChipsWrapper}>
-              {RECOMMENDATION_COMPANY_ARR.map((company) => {
-                return (
-                  <Chip
-                    key={company}
-                    size="large"
-                    color="fillBlue"
-                    onClick={() => {
-                      searchHandler(company);
-                    }}
-                  >
-                    {company}
-                  </Chip>
-                );
-              })}
+              {RECOMMENDATION_COMPANY_ARR.map((company) => (
+                <Chip
+                  key={company}
+                  size="large"
+                  color="fillBlue"
+                  onClick={() => {
+                    searchHandler(company);
+                  }}
+                >
+                  {company}
+                </Chip>
+              ))}
             </div>
           </div>
           <div>
             <h3 css={cssObj.recommendationCompanyTitle}>추천기업</h3>
             <div css={cssObj.recommendationCompanyList}>
-              {companyData?.companyDataArr.map((company) => {
-                return (
-                  <CompanyCard
-                    key={company.id}
-                    id={company.id}
-                    logoSrc={company.logoUrl || ""}
-                    name={company.name}
-                    hashTagArr={[company.industry, company.size]}
-                  />
-                );
-              })}
+              {companyData?.companyDataArr.map((company) => (
+                <CompanyCard
+                  key={company.id}
+                  id={company.id}
+                  logoSrc={company.logoUrl || ""}
+                  name={company.name}
+                  hashTagArr={[company.industry, company.size]}
+                />
+              ))}
             </div>
           </div>
           <div>
             <h3 css={cssObj.recommendationJdTitle}>추천공고</h3>
             <div css={cssObj.recommendationJdList}>
-              {jobData?.jdDataArr.map((job) => {
-                return (
-                  <JdRow
-                    key={job.id}
-                    jdId={job.id}
-                    companyName={job.company.name}
-                    jdTitle={job.title}
-                    dueDate={job.endTime}
-                    bookmarked={false}
-                    cut={job.cut}
-                  />
-                );
-              })}
+              {jobData?.jdDataArr.map((job) => (
+                <JdRow
+                  key={job.id}
+                  jdId={job.id}
+                  companyName={job.company.name}
+                  jdTitle={job.title}
+                  dueDate={job.endTime}
+                  bookmarked={false}
+                  cut={job.cut}
+                />
+              ))}
             </div>
           </div>
         </div>

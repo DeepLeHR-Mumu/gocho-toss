@@ -8,9 +8,9 @@ import { Layout, LoginModal, ShareModal, CompanyBookmark } from "@/components";
 import { useCompanyDetail } from "@/apis/company";
 import { useUserProfile } from "@/apis/auth";
 import { isQueryString } from "@/utils";
+import { URL } from "@/pages/constants";
 
 import { cssObj } from "./style";
-import { URL } from "@/pages/constants";
 
 export const TitlePart = () => {
   const [loginModal, setLoginModal] = useState(false);

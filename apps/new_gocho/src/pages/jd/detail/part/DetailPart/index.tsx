@@ -48,22 +48,20 @@ export const DetailPart = () => {
             <div css={cssObj.placeWrapper}>
               {address_arr.length !== 0 && <p>{address_arr.join(" / ")}</p>}
               {factory_arr.length !== 0 &&
-                factory_arr.map((factory) => {
-                  return (
-                    <div css={cssObj.factoryWrapper} key={factory.id}>
-                      <button
-                        type="button"
-                        css={cssObj.factoryName}
-                        onClick={() => {
-                          setFactoryInfoModal({ ...factory });
-                        }}
-                      >
-                        {factory.name} <FiChevronRight css={cssObj.rightIcon} />
-                      </button>
-                      <span css={cssObj.factoryAddress}>{factory.address}</span>
-                    </div>
-                  );
-                })}
+                factory_arr.map((factory) => (
+                  <div css={cssObj.factoryWrapper} key={factory.id}>
+                    <button
+                      type="button"
+                      css={cssObj.factoryName}
+                      onClick={() => {
+                        setFactoryInfoModal({ ...factory });
+                      }}
+                    >
+                      {factory.name} <FiChevronRight css={cssObj.rightIcon} />
+                    </button>
+                    <span css={cssObj.factoryAddress}>{factory.address}</span>
+                  </div>
+                ))}
             </div>
           );
       }
@@ -74,8 +72,7 @@ export const DetailPart = () => {
 
   if (!jdData) {
     // TODO 값이 없을 때 or 로딩화면
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    return <></>;
+    return <div />;
   }
 
   return (
