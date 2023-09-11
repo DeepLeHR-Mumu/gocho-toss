@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useState } from "react";
+import { useState } from "react";
 
 import { Checkbox, DropDown } from "shared-ui/deeple-ds";
 import { FiChevronDown } from "react-icons/fi";
@@ -13,7 +13,7 @@ import { cssObj } from "./style";
 import { JdBookmarkFilterType } from "./type";
 
 export const JDBookmarkPart = () => {
-  const [isExpiredJdView, setExpiredJdView] = useState<boolean>(true);
+  const [isExpiredJdView, setExpiredJdView] = useState<boolean>(false);
 
   const [filter, setFilter] = useState<JdBookmarkFilterType>("recent");
   const [dropTitle, setTitle] = useState<string>("최근 찜한 순");
@@ -66,12 +66,12 @@ export const JDBookmarkPart = () => {
   const { data: jdList } = useUserJdBookmarkArr({
     userId: userInfo?.id,
     order: filter,
+    filter: isExpiredJdView ? "valid" : undefined,
     size: 100,
-    filter: isExpiredJdView ? undefined : "valid",
   });
 
-  const handlerExpiredView: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setExpiredJdView(e.target.checked);
+  const handlerExpiredView = () => {
+    setExpiredJdView(!isExpiredJdView);
   };
 
   return (
@@ -114,7 +114,7 @@ export const JDBookmarkPart = () => {
           <div css={cssObj.listWrapper}>
             {jdList.userJdBookmarkArr.map(({ id, title, endTime, company }) => {
               return (
-                <JdRow key={id} jdId={id} dueDate={endTime} jdTitle={title} bookmarked companyName={company.name} />
+                <JdRow jdId={id} key={id} dueDate={endTime} jdTitle={title} bookmarked companyName={company.name} />
               );
             })}
           </div>
