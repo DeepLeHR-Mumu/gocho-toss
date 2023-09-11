@@ -44,7 +44,7 @@ declare global {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     fbq: any;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    Kakao: any;
+    kakao: any;
   }
 }
 
@@ -52,26 +52,27 @@ function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   ReactGA.initialize(KEY);
 
-  const [queryClient] = useState(() => {
-    return new QueryClient({
-      defaultOptions: {
-        queries: {
-          staleTime: 15000,
-          refetchOnWindowFocus: false,
-          keepPreviousData: true,
-          retry: 0,
-          onError: (error) => {
-            if (axios.isAxiosError(error) && error.response?.status === 404) {
-              router.push("/404");
-            }
-            if (axios.isAxiosError(error) && error.response?.status === 500) {
-              router.push("/500");
-            }
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 15000,
+            refetchOnWindowFocus: false,
+            keepPreviousData: true,
+            retry: 0,
+            onError: (error) => {
+              if (axios.isAxiosError(error) && error.response?.status === 404) {
+                router.push("/404");
+              }
+              if (axios.isAxiosError(error) && error.response?.status === 500) {
+                router.push("/500");
+              }
+            },
           },
         },
-      },
-    });
-  });
+      })
+  );
 
   useEffect(() => {
     const pageview = () => {
@@ -90,8 +91,8 @@ function App({ Component, pageProps }: AppProps) {
   }, [router.events]);
 
   useEffect(() => {
-    if (!window.Kakao.isInitialized()) {
-      window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
+    if (!window.kakao.isInitialized()) {
+      window.kakao.init("0687bed33c060c4758f582d26ff44e16");
     }
   }, []);
 

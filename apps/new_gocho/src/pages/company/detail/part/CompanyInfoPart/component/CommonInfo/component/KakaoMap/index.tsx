@@ -3,13 +3,6 @@ import { FunctionComponent, useEffect } from "react";
 import { KakaoMapProps } from "./type";
 import { cssObj } from "./style";
 
-declare global {
-  interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    kakao: any;
-  }
-}
-
 export const KakaoMap: FunctionComponent<KakaoMapProps> = ({ address }) => {
   useEffect(() => {
     const mapScript = document.createElement("script");
@@ -27,7 +20,6 @@ export const KakaoMap: FunctionComponent<KakaoMapProps> = ({ address }) => {
           level: 6,
         };
         const map = new window.kakao.maps.Map(container, options);
-
         const geocoder = new window.kakao.maps.services.Geocoder();
 
         // 주소로 좌표를 검색합니다
@@ -63,9 +55,7 @@ export const KakaoMap: FunctionComponent<KakaoMapProps> = ({ address }) => {
     };
     mapScript.addEventListener("load", onLoadKakaoMap);
 
-    return () => {
-      return mapScript.removeEventListener("load", onLoadKakaoMap);
-    };
+    return () => mapScript.removeEventListener("load", onLoadKakaoMap);
   }, [address]);
 
   return <div css={cssObj.mapBox} id="map" />;
