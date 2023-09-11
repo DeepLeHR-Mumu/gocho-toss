@@ -8,6 +8,7 @@ export interface CompanyBookmarkObjDef {
   name: string;
   logo_url: string;
   industry: string;
+  size: string;
 }
 
 export interface ResponseObjDef {
