@@ -15,7 +15,7 @@ import { KEY, FB_PIXEL_ID } from "shared-constant";
 import { useAxiosInterceptor } from "@/apis/axiosInstance";
 import { useSetDeviceType, useGetDeviceType } from "@/globalStates";
 import { globalStyle } from "@/styles/globalStyle";
-import { GlobalNavigationBar, Footer } from "@/components";
+import { GlobalNavigationBar, Footer, ToastPlaceholder } from "@/components";
 import {} from "@/components/global/Footer";
 
 import "slick-carousel/slick/slick.css";
@@ -126,6 +126,7 @@ function App({ Component, pageProps }: AppProps) {
         <Hydrate state={pageProps.dehydratedState}>
           <Global styles={globalStyle} />
           {!(isMobile && router.pathname === "/search") && <GlobalNavigationBar />}
+          <ToastPlaceholder />
           {/* <GlobalNavigationBar /> */}
           <Component {...pageProps} />
           <Footer />

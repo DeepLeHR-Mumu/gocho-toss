@@ -14,12 +14,14 @@ const postCompanyCommentToggle: PostCompanyBookmarkDef = async (requestObj) => {
   return data;
 };
 
-export const useCompanyCommentToggle = (requestObj: { companyId: number }) => {
+export const useCompanyCommentToggle = (requestObj: { companyId?: number }) => {
   const queryClient = useQueryClient();
   return useMutation<AxiosResponse, AxiosError, RequestObjDef>({
     mutationFn: postCompanyCommentToggle,
     onSuccess: () => {
-      queryClient.invalidateQueries(companyCommentArrKeyObj.commentArr({ companyId: requestObj.companyId }));
+      if (requestObj.companyId) {
+        queryClient.invalidateQueries(companyCommentArrKeyObj.commentArr({ companyId: requestObj.companyId }));
+      }
     },
   });
 };

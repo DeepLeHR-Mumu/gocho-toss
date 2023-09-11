@@ -1,3 +1,5 @@
+import { WelfareDef } from "@/apis/company/type/company";
+
 export interface FactoryObjDef {
   id: number;
   name: string;
@@ -21,6 +23,11 @@ export interface JdCompanyObjDef {
   logo_url: string;
   youtube_url: string;
   comment_count: number;
+  welfare: WelfareDef;
+  size: string;
+  industry: string;
+  found_date: string;
+  employee_number: number;
 }
 
 export interface JdDetailObjDef {

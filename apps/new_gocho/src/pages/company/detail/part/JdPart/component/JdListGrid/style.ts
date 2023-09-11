@@ -1,0 +1,49 @@
+import { css } from "@emotion/react";
+import { NEWCOLORS } from "shared-style/color";
+import { NEWTEXTS } from "shared-style/text";
+
+export const cssObj = {
+  titleWrapper: css`
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 1rem;
+  `,
+
+  jdNumber: css`
+    margin-bottom: 1.75rem;
+    ${NEWTEXTS.TITLE7}
+  `,
+
+  jdWrapper: css`
+    margin-top: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 1.5rem;
+    grid-row-gap: 1.25rem;
+  `,
+
+  seeMoreButton: css`
+    grid-column-start: 1;
+    grid-column-end: 3;
+    margin-top: 1.0625rem;
+    color: ${NEWCOLORS.BLUEGRAY400};
+    ${NEWTEXTS.TITLE11}
+
+    > svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: ${NEWCOLORS.GRAY300};
+    }
+  `,
+
+  noJd: css`
+    height: 11.0625rem;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: grid;
+    place-items: center;
+    margin-bottom: 2rem;
+    ${NEWTEXTS.TITLE10}
+  `,
+};

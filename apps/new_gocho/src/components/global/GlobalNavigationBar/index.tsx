@@ -25,8 +25,11 @@ export const GlobalNavigationBar = () => {
   const queryClient = useQueryClient();
 
   const isThemeWhite = useMemo(() => {
-    return THEME_WHITE_PAGES.includes(router.pathname);
+    return THEME_WHITE_PAGES.some((url) => {
+      return router.pathname.includes(url);
+    });
   }, [router.pathname]);
+
   const {
     wrapper,
     titleArea,
@@ -171,7 +174,6 @@ export const GlobalNavigationBar = () => {
       {searchModal && (
         <SearchModal
           close={() => {
-            router.back();
             setSearchModal(false);
           }}
         />

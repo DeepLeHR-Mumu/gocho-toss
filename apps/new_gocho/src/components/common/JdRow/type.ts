@@ -1,7 +1,9 @@
 export interface JdRowProps {
+  jdId: number;
   companyName: string;
   jdTitle: string;
   dueDate: string;
   bookmarked: boolean;
-  half?: boolean;
+  cut?: boolean;
+  half?: boolean; // NOTE 불필요해 보임.
 }

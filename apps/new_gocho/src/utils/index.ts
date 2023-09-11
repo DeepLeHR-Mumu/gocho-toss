@@ -42,3 +42,7 @@ export const isQueryString = <T extends keyof ParsedUrlQuery>(query: ParsedUrlQu
 
   return false;
 };
+
+export const copyToClipboard = (target: string) => {
+  return navigator.clipboard.writeText(target);
+};

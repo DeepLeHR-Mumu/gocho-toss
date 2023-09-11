@@ -94,12 +94,11 @@ export const CompanyPart: FunctionComponent = () => {
               return (
                 <CompanyCard
                   key={company.id}
+                  id={company.id}
                   logoSrc={company.logoUrl || defaultCompanyLogo}
                   name={company.name}
                   hashTagArr={[company.name]}
-                  buttonHandler={() => {
-                    return null;
-                  }}
+                  bookmark={{ state: company.isBookmark }}
                 />
               );
             })}
@@ -110,12 +109,11 @@ export const CompanyPart: FunctionComponent = () => {
               return (
                 <CompanyCard
                   key={company.id}
+                  id={company.id}
                   logoSrc={company.logoUrl || defaultCompanyLogo}
                   name={company.name}
                   hashTagArr={[company.name]}
-                  buttonHandler={() => {
-                    return null;
-                  }}
+                  bookmark={{ state: company.isBookmark }}
                 />
               );
             })}
