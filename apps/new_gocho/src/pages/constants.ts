@@ -5,12 +5,13 @@ export const DEFAULT_PAGE_SIZE = 10;
 
 export const URL = {
   MAIN: "/",
-  JDS_LIST: "/jd",
-  COMPANY: "/company",
-  COMMUNITY: "/community",
   SEARCH: "/search",
-
+  COMPANY: "/company",
+  COMPANY_DETAIL: "/company/detail",
+  JDS_LIST: "/jd",
   JDS_DETAIL: "/jd/detail",
+  COMMUNITY: "/community",
+
   JDS_EXPLIST_URL: "/jd/explist",
   COMMUNITY_POSTING_DETAIL_URL: "/community/posting/detail",
   COMMUNITY_POSTING_WRITE_URL: "/community/posting/detail",

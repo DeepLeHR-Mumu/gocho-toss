@@ -31,7 +31,6 @@ export const cssObj = {
     display: flex;
     flex-direction: row;
     gap: 0.75rem;
-    align-items: center;
   `,
 
   jdTitle: css`
@@ -42,7 +41,7 @@ export const cssObj = {
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
-    align-item: center;
+    align-items: center;
   `,
 
   jdDueDate: css`

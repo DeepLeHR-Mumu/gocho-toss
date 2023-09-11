@@ -1,8 +1,7 @@
-import { MouseEventHandler } from "react";
-
 export interface CompanyCardProps {
+  id: number;
   logoSrc: string;
   name: string;
   hashTagArr?: string[];
-  buttonHandler?: MouseEventHandler<HTMLButtonElement>;
+  bookmark?: { state: boolean };
 }

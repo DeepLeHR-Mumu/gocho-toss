@@ -1,4 +1,3 @@
-import Input from "./Input";
 import SearchBar from "./SearchBar";
 
 export { Button } from "./Button";
@@ -12,7 +11,8 @@ export { Modal } from "./Modal";
 export { Popup } from "./Modal/Popup";
 export { Profile } from "./Profile";
 export { Radio } from "./Radio";
-export { Input };
+export { Input } from "./Input";
 export { SearchBar };
 export { Switch } from "./Switch";
 export { Toast } from "./Toast";
+export { Textarea } from "./Textarea";

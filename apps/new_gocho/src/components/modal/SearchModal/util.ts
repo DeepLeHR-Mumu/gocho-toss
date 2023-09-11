@@ -1,7 +1,4 @@
-import { useRouter } from "next/router";
-
 import { isStringArray } from "@/utils";
-import { URL } from "@/pages/constants";
 
 import { RECENT_SEARCH_WORD_KEY, RECENT_SEARCH_WORD_MAX_NUMBER } from "./constant";
 
@@ -46,15 +43,4 @@ export const removeRecentWordFromStorage = (text: string) => {
 
 export const removeAllRecentWord = () => {
   localStorage.removeItem(RECENT_SEARCH_WORD_KEY);
-};
-
-export const useSearch = () => {
-  const router = useRouter();
-
-  const searchAndSave = (text: string) => {
-    router.push({ pathname: URL.SEARCH, query: { q: text, page: 1 } });
-    saveRecentWordToStorage(text);
-  };
-
-  return { searchAndSave };
 };

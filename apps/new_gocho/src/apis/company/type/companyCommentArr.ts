@@ -1,4 +1,4 @@
-interface CompanyCommentDef {
+export interface CompanyCommentDef {
   id: number;
   uploader: {
     id: number;
@@ -11,6 +11,7 @@ interface CompanyCommentDef {
   is_liked: boolean;
   dislike: number;
   is_disliked: boolean;
+  jd: { id: number; title: string } | null;
 }
 
 export interface CompanyCommentArrDef {

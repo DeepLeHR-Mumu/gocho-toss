@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { css } from "@emotion/react";
 import { FiChevronLeft } from "react-icons/fi";
@@ -6,7 +7,7 @@ import { FiChevronLeft } from "react-icons/fi";
 import { useJdArr } from "@/apis/jd";
 import { useCompanyArr } from "@/apis/company";
 
-import { Layout, SearchModal, Pagination, JdRow, CompanyRow, LoginModal } from "@/components";
+import { Layout, SearchModal, Pagination, JdRow, CompanyRow } from "@/components";
 import { SearchDropDown } from "@/components/modal/SearchModal/components/SearchDropDown";
 import { useGetDeviceType } from "@/globalStates";
 import { DEFAULT_PAGE_SIZE } from "@/pages/constants";
@@ -15,9 +16,8 @@ import { isQueryString } from "@/utils";
 import { Tab } from "./type";
 import { cssObj } from "./style";
 
-const SearchPage = () => {
+const SearchPage: NextPage = () => {
   const [searchModal, setSearchModal] = useState(false);
-  const [loginModal, setLoginModal] = useState(false);
 
   // TODO 나중에 "community" 추가할 것.
   const [tab, setTab] = useState<Tab>("jd");
@@ -112,10 +112,12 @@ const SearchPage = () => {
                 return (
                   <JdRow
                     key={jd.id}
+                    jdId={jd.id}
                     companyName={jd.company.name}
                     jdTitle={jd.title}
                     dueDate={jd.endTime}
                     bookmarked={false}
+                    cut={jd.cut}
                   />
                 );
               })}
@@ -129,12 +131,7 @@ const SearchPage = () => {
                     name={company.name}
                     size={company.size}
                     industry={company.industry}
-                    follow={{
-                      state: false,
-                      onClick: () => {
-                        setLoginModal(true);
-                      },
-                    }}
+                    bookmark={{ state: company.isBookmark }}
                   />
                 );
               })}
@@ -156,13 +153,6 @@ const SearchPage = () => {
         <SearchModal
           close={() => {
             setSearchModal(false);
-          }}
-        />
-      )}
-      {loginModal && (
-        <LoginModal
-          close={() => {
-            setLoginModal(false);
           }}
         />
       )}

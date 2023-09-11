@@ -6,3 +6,5 @@ export { useCompanyCommentToggle } from "./useCompanyCommentToggle";
 export { useCompanyBookmarkToggle } from "./useCompanyBookmarkToggle";
 export { useUserCompanyBookmarkArr } from "./useUserCompanyBookmarkArr";
 export { useInfiniteUserCompanyBookmarkArr } from "./useInfiniteUserCompanyBookmarkArr";
+export { useWriteCompanyComment } from "./useWriteCompanyComment";
+export { useDeleteCompanyComment } from "./useDeleteCompanyComment";
