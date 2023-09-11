@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEventHandler, useState } from "react";
 
 import { Checkbox, DropDown } from "shared-ui/deeple-ds";
 import { FiChevronDown } from "react-icons/fi";
@@ -13,7 +13,7 @@ import { cssObj } from "./style";
 import { JdBookmarkFilterType } from "./type";
 
 export const JDBookmarkPart = () => {
-  const [isExpiredJdView, setExpiredJdView] = useState<boolean>(false);
+  const [isExpiredJdView, setExpiredJdView] = useState<boolean>(true);
 
   const [filter, setFilter] = useState<JdBookmarkFilterType>("recent");
   const [dropTitle, setTitle] = useState<string>("최근 찜한 순");
@@ -66,10 +66,12 @@ export const JDBookmarkPart = () => {
   const { data: jdList } = useUserJdBookmarkArr({
     userId: userInfo?.id,
     order: filter,
+    size: 100,
+    filter: isExpiredJdView ? undefined : "valid",
   });
 
-  const handlerExpiredView = () => {
-    setExpiredJdView(!isExpiredJdView);
+  const handlerExpiredView: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setExpiredJdView(e.target.checked);
   };
 
   return (
@@ -79,7 +81,7 @@ export const JDBookmarkPart = () => {
         <>
           <div css={cssObj.wrapper}>
             <div css={cssObj.checkWrapper}>
-              <Checkbox checked={isExpiredJdView} onClick={handlerExpiredView} />
+              <Checkbox checked={isExpiredJdView} onChange={handlerExpiredView} />
               <p>만료된 공고 제외</p>
             </div>
             <DropDown
@@ -111,7 +113,9 @@ export const JDBookmarkPart = () => {
           </div>
           <div css={cssObj.listWrapper}>
             {jdList.userJdBookmarkArr.map(({ id, title, endTime, company }) => {
-              return <JdRow key={id} dueDate={endTime} jdTitle={title} bookmarked companyName={company.name} />;
+              return (
+                <JdRow key={id} jdId={id} dueDate={endTime} jdTitle={title} bookmarked companyName={company.name} />
+              );
             })}
           </div>
         </>
