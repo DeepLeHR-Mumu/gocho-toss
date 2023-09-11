@@ -2,23 +2,19 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { Layout, LoginModal } from "@/components";
-import { MypageNavigation } from "./component/MypageNavigation";
-
-import { partElementArray } from "./constants";
-
-import { cssObj } from "./style";
-import { Box } from "./component/Box";
 import { useUserProfile } from "@/apis/auth";
+
+import { MypageNavigation, Box } from "./component";
+import { partElementArray } from "./constants";
+import { cssObj } from "./style";
 
 const MyPage: NextPage = () => {
   const router = useRouter();
   const { data: userProfile } = useUserProfile();
 
-  const curPart = partElementArray.find(({ type }) => {
-    return type === router.query.type;
-  });
+  const currentPart = partElementArray.find(({ type }) => type === router.query.type);
 
-  if (!curPart) {
+  if (!currentPart) {
     return <h1>Error</h1>;
   }
 
@@ -39,12 +35,12 @@ const MyPage: NextPage = () => {
     <Layout>
       <main css={cssObj.wrapper}>
         <section css={cssObj.navBox}>
-          <MypageNavigation currentPart={curPart.type || "profile"} />
+          <MypageNavigation currentPart={currentPart.type || "profile"} />
         </section>
         <section>
           <Box css={cssObj.elementBox}>
-            <h3 css={cssObj.title}>{curPart.title}</h3>
-            {curPart.element}
+            <h3 css={cssObj.title}>{currentPart.title}</h3>
+            {currentPart.element}
           </Box>
         </section>
       </main>

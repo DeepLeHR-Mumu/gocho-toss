@@ -44,7 +44,7 @@ declare global {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     fbq: any;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    kakao: any;
+    Kakao: any;
   }
 }
 
@@ -91,8 +91,8 @@ function App({ Component, pageProps }: AppProps) {
   }, [router.events]);
 
   useEffect(() => {
-    if (!window.kakao.isInitialized()) {
-      window.kakao.init("0687bed33c060c4758f582d26ff44e16");
+    if (!window.Kakao.isInitialized()) {
+      window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
     }
   }, []);
 
