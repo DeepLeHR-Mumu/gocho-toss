@@ -1,5 +1,4 @@
 interface NavigationMenu {
-  key: number;
   text: string;
   isNewTab: boolean;
 }
