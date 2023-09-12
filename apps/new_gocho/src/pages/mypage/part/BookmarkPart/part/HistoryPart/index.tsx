@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 import { useUserInfo } from "@/apis/auth/useUserInfo";
-import { useUserCompanyHistoriesArr } from "@/apis/company/useUserCompanyHistories";
-import { useUserJdHistoriesArr } from "@/apis/jd/useUserJdHistories";
+import { useUserCompanyHistoryArr } from "@/apis/company/useUserCompanyHistoryArr";
+import { useUserJdHistoryArr } from "@/apis/jd/useUserJdHistoryArr";
 
 import { CompanyRow, JdRow } from "@/components";
 import { NoListCard } from "../NoListCard";
@@ -14,19 +14,12 @@ export const HistoryPart = () => {
   const [currentMenu, setCurrentMenu] = useState<RecentMenu>("기업");
 
   const { data: userInfo } = useUserInfo();
-  const { data: companyArr } = useUserCompanyHistoriesArr({
+  const { data: companyArr } = useUserCompanyHistoryArr({
     userId: userInfo?.id,
   });
-  const { data: jdArr } = useUserJdHistoriesArr({
+  const { data: jdArr } = useUserJdHistoryArr({
     userId: userInfo?.id,
   });
-
-  const setMenuCompany = () => {
-    return setCurrentMenu("기업");
-  };
-  const setMenuJd = () => {
-    return setCurrentMenu("공고");
-  };
 
   return (
     <>
@@ -37,14 +30,18 @@ export const HistoryPart = () => {
             <div css={cssObj.menuWrapper}>
               <button
                 type="button"
-                onClick={setMenuCompany}
+                onClick={() => {
+                  return setCurrentMenu("기업");
+                }}
                 css={currentMenu === "기업" ? cssObj.selectedButton : cssObj.defaultButton}
               >
                 기업
               </button>
               <button
                 type="button"
-                onClick={setMenuJd}
+                onClick={() => {
+                  return setCurrentMenu("공고");
+                }}
                 css={currentMenu === "공고" ? cssObj.selectedButton : cssObj.defaultButton}
               >
                 공고

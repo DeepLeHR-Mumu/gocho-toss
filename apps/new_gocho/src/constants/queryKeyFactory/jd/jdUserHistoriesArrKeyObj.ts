@@ -1,18 +1,18 @@
-export interface UserHistoriesJdArrRequestDef {
+export interface UserHistoryJdArrRequestDef {
   userId: number | undefined;
   page?: number;
   size?: number;
 }
 
 export const userJdHistoriesKeyObj = {
-  all: [{ data: "userJdHistoriesArr" }] as const,
-  jdHistoriesArr: (requestObj: UserHistoriesJdArrRequestDef) => {
-    return [{ data: "userJdHistoriesArr", requestObj }] as const;
+  all: [{ data: "userJdHistoryArr" }] as const,
+  jdHistoriesArr: (requestObj: UserHistoryJdArrRequestDef) => {
+    return [{ data: "userJdHistoryArr", requestObj }] as const;
   },
-  infinite: (requestObj: UserHistoriesJdArrRequestDef) => {
+  infinite: (requestObj: UserHistoryJdArrRequestDef) => {
     return [
       {
-        data: "userJdHistoriesArr",
+        data: "userJdHistoryArr",
         usage: "infinite",
         requestObj,
       },

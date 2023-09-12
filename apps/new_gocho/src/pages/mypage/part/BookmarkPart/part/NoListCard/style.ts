@@ -12,7 +12,7 @@ export const cssObj = {
     gap: 1.75rem;
   `,
 
-  textFont: css`
+  text: css`
     color: ${NEWCOLORS.BLUEGRAY400};
     text-align: center;
     font-size: 1rem;

@@ -1,23 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
 
 import {
-  UserHistoriesJdArrRequestDef,
+  UserHistoryJdArrRequestDef,
   userJdHistoriesKeyObj,
 } from "@/constants/queryKeyFactory/jd/jdUserHistoriesArrKeyObj";
 
 import { axiosInstance } from "../../axiosInstance";
-import { GetUserJdHistoriesArrDef } from "./type";
+import { GetUserJdHistoryArrDef } from "./type";
 import { selector } from "./util";
 
-export const getUserJdHistoriesArr: GetUserJdHistoriesArrDef = async ({ queryKey: [{ requestObj }] }) => {
-  const { data } = await axiosInstance.get(`/users/${requestObj?.userId}/jd-bookmarks`, { params: requestObj });
+export const getUserJdHistoryArr: GetUserJdHistoryArrDef = async ({ queryKey: [{ requestObj }] }) => {
+  const { data } = await axiosInstance.get(`/users/${requestObj?.userId}/jd-histories`, { params: requestObj });
   return data;
 };
 
-export const useUserJdHistoriesArr = (requestObj: UserHistoriesJdArrRequestDef) => {
+export const useUserJdHistoryArr = (requestObj: UserHistoryJdArrRequestDef) => {
   return useQuery({
     queryKey: userJdHistoriesKeyObj.jdHistoriesArr(requestObj),
-    queryFn: getUserJdHistoriesArr,
+    queryFn: getUserJdHistoryArr,
     enabled: Boolean(requestObj.userId),
     select: ({ data, page_result }) => {
       return selector(data, page_result);

@@ -1,12 +1,12 @@
-export interface UserCompanyHistoriesRequestDef {
+export interface UserCompanyHistoryArrRequestDef {
   userId: number | undefined;
   page?: number;
   size?: number;
 }
 
-export const userCompanyHistoriesArrKeyObj = {
-  all: [{ data: "companyHistories" }] as const,
-  companyHistoriesArr: (requestObj: UserCompanyHistoriesRequestDef) => {
-    return [{ data: "companyHistories", requestObj }] as const;
+export const userCompanyHistoryArrKeyObj = {
+  all: [{ data: "companyHistoryArr" }] as const,
+  companyHistoryArr: (requestObj: UserCompanyHistoryArrRequestDef) => {
+    return [{ data: "companyHistoryArr", requestObj }] as const;
   },
 };
