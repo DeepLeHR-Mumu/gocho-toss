@@ -15,8 +15,7 @@ export const ReceptionGuide = ({ title, contents, processArr, startTime, endTime
       <div css={cssObj.processWrapper}>
         {processArr.map((process, index) => {
           if (index === processArr.length - 1) {
-            // eslint-disable-next-line react/no-array-index-key
-            return <span key={index}>{process}</span>;
+            return <span key={`ReceptionProcess${process}`}>{process}</span>;
           }
           return (
             <>
@@ -42,15 +41,12 @@ export const ReceptionGuide = ({ title, contents, processArr, startTime, endTime
         </div>
       </div>
       <div css={cssObj.contentWrapper}>
-        {contentEntries.map(([subtitle, content], index) => {
-          return (
-            // eslint-disable-next-line react/no-array-index-key
-            <div key={index} css={cssObj.rowWrapper}>
-              <span>{subtitle}</span>
-              {content}
-            </div>
-          );
-        })}
+        {contentEntries.map(([subtitle, content]) => (
+          <div key={`ReceptionSubtitle${subtitle}`} css={cssObj.rowWrapper}>
+            <span>{subtitle}</span>
+            {content}
+          </div>
+        ))}
       </div>
     </div>
   );

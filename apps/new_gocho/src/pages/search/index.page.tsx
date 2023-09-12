@@ -102,40 +102,33 @@ const SearchPage: NextPage = () => {
             >
               기업
             </button>
-            {/* TODO <button type="button" css={cssObj.tabButton}>
-              커뮤니티
-            </button> */}
           </div>
           <span css={cssObj.total}>총 {total.elements}건</span>
           <div css={cssObj.resultWrapper}>
             {tab === "jd" &&
-              jdData?.jdDataArr.map((jd) => {
-                return (
-                  <JdRow
-                    key={jd.id}
-                    jdId={jd.id}
-                    companyName={jd.company.name}
-                    jdTitle={jd.title}
-                    dueDate={jd.endTime}
-                    bookmarked={false}
-                    cut={jd.cut}
-                  />
-                );
-              })}
+              jdData?.jdDataArr.map((jd) => (
+                <JdRow
+                  key={jd.id}
+                  jdId={jd.id}
+                  companyName={jd.company.name}
+                  jdTitle={jd.title}
+                  dueDate={jd.endTime}
+                  bookmarked={false}
+                  cut={jd.cut}
+                />
+              ))}
             {tab === "company" &&
-              companyData?.companyDataArr.map((company) => {
-                return (
-                  <CompanyRow
-                    key={company.id}
-                    id={company.id}
-                    logo={company.logoUrl}
-                    name={company.name}
-                    size={company.size}
-                    industry={company.industry}
-                    bookmark={{ state: company.isBookmark }}
-                  />
-                );
-              })}
+              companyData?.companyDataArr.map((company) => (
+                <CompanyRow
+                  key={company.id}
+                  id={company.id}
+                  logo={company.logoUrl}
+                  name={company.name}
+                  size={company.size}
+                  industry={company.industry}
+                  bookmark={{ state: company.isBookmark }}
+                />
+              ))}
             {total.elements === 0 && (
               <div css={cssObj.noDataWrapper}>
                 <strong>&#39;{searchWord}&#39;</strong>

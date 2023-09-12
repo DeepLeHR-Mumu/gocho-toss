@@ -4,16 +4,16 @@ import axios from "axios";
 import { Input, Button, Divider } from "shared-ui/deeple-ds";
 import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE, EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 
-import { useDoSignUp, useUserProfile } from "@/apis/auth";
+import { useDoSignUp } from "@/apis/auth";
 import { RequestObjDef as SignUpFormValues } from "@/apis/auth/useDoSignup/type";
 import { useGetDeviceType } from "@/globalStates";
 
 import ActionBar from "../ActionBar";
+import { ActionBarHandlers } from "../ActionBar/type";
 
-import { SignUpProps } from "./type";
 import { cssObj } from "./style";
 
-const SignUp = ({ ...actionBarHandlers }: SignUpProps) => {
+const SignUp = ({ ...actionBarHandlers }: ActionBarHandlers) => {
   const { isMobile, browserSize } = useGetDeviceType();
 
   const {

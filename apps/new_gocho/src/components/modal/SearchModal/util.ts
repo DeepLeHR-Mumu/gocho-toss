@@ -21,7 +21,6 @@ export const getRecentSearchWordFromStorage = (): string[] => {
 export const saveRecentWordToStorage = (text: string) => {
   const savedRecentSearchWordArr = getRecentSearchWordFromStorage();
 
-  // eslint-disable-next-line arrow-body-style
   const filteredRecentSearchWordArr = savedRecentSearchWordArr.filter((word) => word !== text);
   filteredRecentSearchWordArr.unshift(text);
 
@@ -35,7 +34,6 @@ export const saveRecentWordToStorage = (text: string) => {
 export const removeRecentWordFromStorage = (text: string) => {
   const savedRecentSearchWordArr = getRecentSearchWordFromStorage();
 
-  // eslint-disable-next-line arrow-body-style
   const filteredRecentSearchWordArr = savedRecentSearchWordArr.filter((word) => word !== text);
 
   localStorage.setItem(RECENT_SEARCH_WORD_KEY, JSON.stringify(filteredRecentSearchWordArr));
