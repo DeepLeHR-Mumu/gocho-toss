@@ -8,7 +8,7 @@ export const URL = {
   SEARCH: "/search",
   COMPANY: "/company",
   COMPANY_DETAIL: "/company/detail",
-  JDS_LIST: "/jd",
+  JDS_LIST: "/jd/list",
   JDS_DETAIL: "/jd/detail",
   COMMUNITY: "/community",
 
