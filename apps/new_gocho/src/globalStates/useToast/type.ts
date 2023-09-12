@@ -25,21 +25,23 @@ export type ToastMsgDef =
   | "게시글이 삭제되었습니다."
   | "게시글이 수정되었습니다."
   | "프로필 이미지를 선택해주세요."
+  | "입력하신 이메일로 임시 비밀번호가 발급되었습니다"
   | null;
 
 export type ToastAuthMsgDef = "님 반갑습니다." | "님 환영합니다.";
 
 export interface SetToastMessageDef {
+  (toastMessage: string, nickname?: never): void;
   (toastMessage: ToastMsgDef, nickname?: never): void;
   (toastMessage: ToastAuthMsgDef, nickname: string): void;
 }
 
 export interface SetToastDef {
-  (toastMessage: ToastAuthMsgDef | ToastMsgDef, nickname?: string | never): void;
+  (toastMessage: ToastAuthMsgDef | ToastMsgDef | string, nickname?: string | never): void;
 }
 
 export interface ToastAtomProps {
-  toastMessage: ToastMsgDef | ToastAuthMsgDef;
+  toastMessage: ToastMsgDef | ToastAuthMsgDef | string;
   nickname?: string | never;
   setToastMessage: SetToastDef;
 }
