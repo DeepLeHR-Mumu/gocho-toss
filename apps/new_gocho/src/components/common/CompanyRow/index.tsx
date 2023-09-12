@@ -6,6 +6,7 @@ import { Profile } from "shared-ui/deeple-ds";
 import { useGetDeviceType } from "@/globalStates";
 import { LoginModal } from "@/components/modal/LoginModal";
 
+import { INTERNAL_URL } from "@/pages/constants";
 import { CompanyBookmark } from "../CompanyBookmark";
 
 import { CompanyRowProps } from "./type";
@@ -20,7 +21,7 @@ export const CompanyRow = ({ id, logo, name, size, industry, bookmark, border }:
       <div css={cssObj.wrapper(!!border)}>
         <Profile size={isMobile ? 52 : 60} src={logo} />
         <div css={cssObj.infoWrapper}>
-          <Link href={`/company/${id}/detail`} css={cssObj.companyName}>
+          <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${id}`} css={cssObj.companyName}>
             {name}
           </Link>
           <span css={cssObj.companyCategory}>

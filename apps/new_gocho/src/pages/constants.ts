@@ -3,7 +3,7 @@ export const GOCHO_MOBILE_URL = "https://m.고초대졸.com";
 
 export const DEFAULT_PAGE_SIZE = 10;
 
-export const URL = {
+export const INTERNAL_URL = {
   MAIN: "/",
   SEARCH: "/search",
   COMPANY: "/company",

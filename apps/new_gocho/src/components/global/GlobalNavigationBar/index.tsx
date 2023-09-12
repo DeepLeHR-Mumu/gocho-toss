@@ -9,7 +9,7 @@ import { SearchBar, DropDown, Profile } from "shared-ui/deeple-ds";
 
 import { useUserProfile } from "@/apis/auth";
 import { useGetDeviceType } from "@/globalStates";
-import { URL } from "@/pages/constants";
+import { INTERNAL_URL } from "@/pages/constants";
 import logoWhite from "@/public/logoWhite.svg";
 import logoBlue from "@/public/logoBlue.svg";
 
@@ -24,11 +24,7 @@ export const GlobalNavigationBar = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const isThemeWhite = useMemo(() => {
-    return THEME_WHITE_PAGES.some((url) => {
-      return router.pathname.includes(url);
-    });
-  }, [router.pathname]);
+  const isThemeWhite = useMemo(() => THEME_WHITE_PAGES.some((url) => router.pathname.includes(url)), [router.pathname]);
 
   const {
     wrapper,
@@ -53,7 +49,7 @@ export const GlobalNavigationBar = () => {
   const { data: userData, isSuccess } = useUserProfile();
 
   const openSearchModal = () => {
-    router.push(URL.SEARCH);
+    router.push(INTERNAL_URL.SEARCH);
     setSearchModal(true);
   };
 
@@ -73,7 +69,7 @@ export const GlobalNavigationBar = () => {
         <Layout>
           {isMobile ? (
             <div css={titleArea}>
-              <Link href={URL.MAIN} css={logoWrapper}>
+              <Link href={INTERNAL_URL.MAIN} css={logoWrapper}>
                 <Image src={isThemeWhite ? logoBlue : logoWhite} alt="고초대졸_로고" />
               </Link>
               <div>
@@ -95,7 +91,7 @@ export const GlobalNavigationBar = () => {
           ) : (
             <>
               <div css={titleArea}>
-                <Link href={URL.MAIN} css={logoWrapper}>
+                <Link href={INTERNAL_URL.MAIN} css={logoWrapper}>
                   <Image src={isThemeWhite ? logoBlue : logoWhite} alt="고초대졸_로고" />
                 </Link>
                 <div css={searchBarWrapper}>
@@ -110,14 +106,14 @@ export const GlobalNavigationBar = () => {
               <div css={navigationArea}>
                 <nav>
                   <ul css={navigationWrapper}>
-                    <li css={router.pathname.includes(URL.JDS_LIST) && selected}>
-                      <Link href={URL.JDS_LIST}>채용공고</Link>
+                    <li css={router.pathname.includes(INTERNAL_URL.JDS_LIST) && selected}>
+                      <Link href={INTERNAL_URL.JDS_LIST}>채용공고</Link>
                     </li>
-                    <li css={router.pathname.includes(URL.COMPANY) && selected}>
-                      <Link href={URL.COMPANY}>기업정보</Link>
+                    <li css={router.pathname.includes(INTERNAL_URL.COMPANY) && selected}>
+                      <Link href={INTERNAL_URL.COMPANY}>기업정보</Link>
                     </li>
-                    <li css={router.pathname.includes(URL.COMMUNITY) && selected}>
-                      <Link href={URL.COMMUNITY}>커뮤니티</Link>
+                    <li css={router.pathname.includes(INTERNAL_URL.COMMUNITY) && selected}>
+                      <Link href={INTERNAL_URL.COMMUNITY}>커뮤니티</Link>
                     </li>
                   </ul>
                 </nav>

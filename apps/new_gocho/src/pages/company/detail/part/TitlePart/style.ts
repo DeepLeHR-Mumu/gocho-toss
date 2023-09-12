@@ -79,17 +79,14 @@ export const cssObj = {
     padding-top: 1.4375rem;
     display: flex;
     flex-direction: row;
-
-    li {
-      width: 8.75rem;
-      text-align: center;
-      padding-bottom: 1.5rem;
-      color: ${NEWCOLORS.BLUE300};
-      ${NEWTEXTS.TITLE12}
-    }
   `,
 
-  selected: css`
-    border-bottom: 2px solid ${NEWCOLORS.BLUE300};
+  menu: (isSelected: boolean) => css`
+    ${NEWTEXTS.TITLE12}
+    width: 8.75rem;
+    text-align: center;
+    padding-bottom: 1.5rem;
+    border-bottom: ${isSelected ? `2px solid ${NEWCOLORS.BLUE300}` : `none`};
+    color: ${isSelected ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY200};
   `,
 };
