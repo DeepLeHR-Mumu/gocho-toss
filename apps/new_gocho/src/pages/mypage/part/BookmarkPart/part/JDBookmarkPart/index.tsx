@@ -1,26 +1,26 @@
 import { useState } from "react";
+import { FiChevronDown } from "react-icons/fi";
 
 import { Checkbox, DropDown } from "shared-ui/deeple-ds";
-import { FiChevronDown } from "react-icons/fi";
 
 import { useUserInfo } from "@/apis/auth/useUserInfo";
 import { useUserJdBookmarkArr } from "@/apis/jd";
 
 import { JdRow } from "@/components";
-
 import { NoListCard } from "../NoListCard";
-import { cssObj } from "./style";
+
 import { JdBookmarkFilterType } from "./type";
 
-export const JDBookmarkPart = () => {
-  const [isExpiredJdView, setExpiredJdView] = useState<boolean>(false);
+import { cssObj } from "./style";
+
+export const JdBookmarkPart = () => {
+  const [isExpiredJdView, setIsExpiredJdView] = useState<boolean>(false);
 
   const [filter, setFilter] = useState<JdBookmarkFilterType>("recent");
   const [dropTitle, setTitle] = useState<string>("최근 찜한 순");
 
   const filterOption = [
     {
-      key: 1,
       content: "최근 찜한 순",
       filter: "recent",
       setState: () => {
@@ -28,7 +28,6 @@ export const JDBookmarkPart = () => {
       },
     },
     {
-      key: 2,
       content: "찜 많은 순",
       filter: "popular",
       setState: () => {
@@ -36,7 +35,6 @@ export const JDBookmarkPart = () => {
       },
     },
     {
-      key: 3,
       content: "공고 게시 순",
       filter: "upload",
       setState: () => {
@@ -44,7 +42,6 @@ export const JDBookmarkPart = () => {
       },
     },
     {
-      key: 4,
       content: "마감일 임박 순",
       filter: "end",
       setState: () => {
@@ -53,7 +50,6 @@ export const JDBookmarkPart = () => {
     },
 
     {
-      key: 5,
       content: "조회수 순",
       filter: "view",
       setState: () => {
@@ -71,7 +67,7 @@ export const JDBookmarkPart = () => {
   });
 
   const handlerExpiredView = () => {
-    setExpiredJdView(!isExpiredJdView);
+    setIsExpiredJdView(!isExpiredJdView);
   };
 
   return (
@@ -97,9 +93,9 @@ export const JDBookmarkPart = () => {
               menu={{
                 width: 180,
                 closeAfterClickEvent: true,
-                options: filterOption.map(({ key, content, setState }) => {
+                options: filterOption.map(({ content, setState }) => {
                   return {
-                    key,
+                    key: content,
                     focused: dropTitle === content,
                     content: <p>{content}</p>,
                     onClick: () => {

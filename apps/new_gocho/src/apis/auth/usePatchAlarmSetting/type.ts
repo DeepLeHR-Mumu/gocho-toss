@@ -10,14 +10,14 @@ export interface RequestObjDef {
   };
 }
 
-export interface UserAlarmSettingResponse {
+export interface PatchUserAlarmSettingResponse {
   data: { access_token: string; refresh_token: string };
 }
 
-export interface PatchUserAlarmDef {
-  ({ userId, alarmSetting }: RequestObjDef): Promise<UserAlarmSettingResponse>;
+export interface PatchUserAlarmSettingDef {
+  ({ userId, alarmSetting }: RequestObjDef): Promise<PatchUserAlarmSettingResponse>;
 }
 
-export interface UserAlarmSettingProps {
-  (): UseMutationResult<UserAlarmSettingResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
+export interface PatchUserAlarmSettingProps {
+  (): UseMutationResult<PatchUserAlarmSettingResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

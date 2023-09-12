@@ -11,27 +11,17 @@ export const AlarmPart = () => {
 
   const { alarmConfig } = userInfo;
 
-  const alarmFetchedArr = alarmItemArr.map(({ key, itemTitle, itemDes, alarmText }) => {
-    return {
-      key,
-      itemTitle,
-      itemDes,
-      alarmText,
-      isAlarmReceive: alarmConfig[alarmText],
-    };
-  });
-
   return (
     <div css={cssObj.wrapper}>
-      {alarmFetchedArr.map(({ key, itemTitle, itemDes, isAlarmReceive, alarmText }) => {
+      {alarmItemArr.map(({ itemTitle, itemDesc, alarmText }) => {
         return (
           <AlarmItem
-            key={key}
+            key={alarmText}
             itemTitle={itemTitle}
-            itemDes={itemDes}
+            itemDesc={itemDesc}
             userId={userInfo.id}
             alarmText={alarmText}
-            isAlarmReceive={isAlarmReceive}
+            isAlarmReceive={alarmConfig[alarmText]}
           />
         );
       })}

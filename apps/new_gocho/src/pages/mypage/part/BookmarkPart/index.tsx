@@ -6,14 +6,14 @@ import { bookmarkPart } from "./constants";
 import { cssObj } from "./style";
 
 export const BookmarkPart = () => {
-  const [curPart, setPart] = useState<BookmarkPage>(bookmarkPart[0]);
+  const [currentPart, setCurrentPart] = useState<BookmarkPage>(bookmarkPart[0]);
 
   const handlePartClick = (partKey: number) => {
     const part = bookmarkPart.find(({ key }) => {
       return key === partKey;
     });
     if (!part) return;
-    setPart(part);
+    setCurrentPart(part);
   };
 
   return (
@@ -24,20 +24,20 @@ export const BookmarkPart = () => {
             <div key={key} css={cssObj.navItem}>
               <button
                 type="button"
-                css={key === curPart.key ? cssObj.selectedText : cssObj.buttonText}
+                css={key === currentPart.key ? cssObj.selectedText : cssObj.buttonText}
                 onClick={() => {
                   handlePartClick(key);
                 }}
               >
                 {title}
               </button>
-              {key === curPart.key && <hr css={cssObj.selectedHr} />}
+              {key === currentPart.key && <hr css={cssObj.selectedHr} />}
             </div>
           );
         })}
       </div>
       <hr css={cssObj.bottomHr} />
-      {curPart.element}
+      {currentPart.element}
     </div>
   );
 };

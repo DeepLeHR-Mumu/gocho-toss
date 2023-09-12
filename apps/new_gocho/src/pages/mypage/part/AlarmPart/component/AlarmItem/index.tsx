@@ -1,16 +1,18 @@
 import { FC, useState } from "react";
 import { Divider, Switch } from "shared-ui/deeple-ds";
 
-import { cssObj } from "./style";
-import { usePatchAlarm } from "@/apis/auth/usePatchUserAlarm";
+import { usePatchAlarmSetting } from "@/apis/auth/usePatchAlarmSetting";
+
 import { AlarmItemProps } from "./type";
 
-export const AlarmItem: FC<AlarmItemProps> = ({ userId, itemTitle, itemDes, alarmText, isAlarmReceive }) => {
-  const { mutate: patchAlarmSetting } = usePatchAlarm();
-  const [isReceive, setReceive] = useState<boolean>(isAlarmReceive);
+import { cssObj } from "./style";
+
+export const AlarmItem: FC<AlarmItemProps> = ({ userId, itemTitle, itemDesc, alarmText, isAlarmReceive }) => {
+  const { mutate: patchAlarmSetting } = usePatchAlarmSetting();
+  const [isReceive, setIsReceive] = useState<boolean>(isAlarmReceive);
 
   const handlerSettingAlarm = () => {
-    setReceive(!isReceive);
+    setIsReceive(!isReceive);
     patchAlarmSetting({
       userId,
       alarmSetting: {
@@ -25,7 +27,7 @@ export const AlarmItem: FC<AlarmItemProps> = ({ userId, itemTitle, itemDes, alar
       <div css={cssObj.boxWrapper}>
         <div css={cssObj.titleWrapper}>
           <h3 css={cssObj.titleText}>{itemTitle}</h3>
-          <p css={cssObj.desText}>{itemDes}</p>
+          <p css={cssObj.desText}>{itemDesc}</p>
         </div>
         <Switch checked={isReceive} onChange={handlerSettingAlarm} />
       </div>

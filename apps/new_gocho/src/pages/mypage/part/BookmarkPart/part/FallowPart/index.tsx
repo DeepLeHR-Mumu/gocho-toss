@@ -17,7 +17,6 @@ export const FallowPart = () => {
 
   const filterOption = [
     {
-      key: 1,
       content: "팔로우한 순",
       filter: "recent",
       setState: () => {
@@ -25,7 +24,6 @@ export const FallowPart = () => {
       },
     },
     {
-      key: 2,
       content: "팔로워 많은 순",
       filter: "popular",
       setState: () => {
@@ -33,7 +31,6 @@ export const FallowPart = () => {
       },
     },
     {
-      key: 3,
       content: "이름 순",
       filter: "name",
       setState: () => {
@@ -41,7 +38,6 @@ export const FallowPart = () => {
       },
     },
     {
-      key: 4,
       content: "평균 연봉 순",
       filter: "pay",
       setState: () => {
@@ -57,59 +53,56 @@ export const FallowPart = () => {
     size: 100,
   });
 
-  return (
-    <>
-      {!companyList && <NoListCard text="아직 팔로우한 기업이 없습니다." linkText="기업보러가기" href="company" />}
-      {companyList && (
-        <div css={cssObj.wrapper}>
-          <div css={cssObj.dropdownWrapper}>
-            <DropDown
-              title="팔로우한 순"
-              customTitle={
-                <div css={cssObj.filterBox}>
-                  <p css={cssObj.filterText}>{title}</p>
-                  <p>
-                    <FiChevronDown css={cssObj.filterIcon} />
-                  </p>
-                </div>
-              }
-              menu={{
-                width: 180,
-                closeAfterClickEvent: true,
-                options: filterOption.map(({ key, content, setState }) => {
-                  return {
-                    key,
-                    focused: title === content,
-                    content: <p>{content}</p>,
-                    onClick: () => {
-                      setTitle(content);
-                      setState();
-                    },
-                  };
-                }),
+  return companyList ? (
+    <div css={cssObj.wrapper}>
+      <div css={cssObj.dropdownWrapper}>
+        <DropDown
+          title="팔로우한 순"
+          customTitle={
+            <div css={cssObj.filterBox}>
+              <p css={cssObj.filterText}>{title}</p>
+              <p>
+                <FiChevronDown css={cssObj.filterIcon} />
+              </p>
+            </div>
+          }
+          menu={{
+            width: 180,
+            closeAfterClickEvent: true,
+            options: filterOption.map(({ content, setState }) => {
+              return {
+                key: content,
+                focused: title === content,
+                content: <p>{content}</p>,
+                onClick: () => {
+                  setTitle(content);
+                  setState();
+                },
+              };
+            }),
+          }}
+        />
+      </div>
+      <div css={cssObj.listWrapper}>
+        {companyList.companyBookmarkDataArr.map(({ id, industry, name, logoUrl, size }) => {
+          return (
+            <CompanyRow
+              key={id}
+              id={id}
+              logo={logoUrl || ""}
+              name={name}
+              size={size}
+              industry={industry}
+              border
+              bookmark={{
+                state: true,
               }}
             />
-          </div>
-          <div css={cssObj.listWrapper}>
-            {companyList.companyBookmarkDataArr.map(({ id, industry, name, logoUrl, size }) => {
-              return (
-                <CompanyRow
-                  key={id}
-                  id={id}
-                  logo={logoUrl || ""}
-                  name={name}
-                  size={size}
-                  industry={industry}
-                  border
-                  bookmark={{
-                    state: true,
-                  }}
-                />
-              );
-            })}
-          </div>
-        </div>
-      )}
-    </>
+          );
+        })}
+      </div>
+    </div>
+  ) : (
+    <NoListCard text="아직 팔로우한 기업이 없습니다." linkText="기업보러가기" href="company" />
   );
 };

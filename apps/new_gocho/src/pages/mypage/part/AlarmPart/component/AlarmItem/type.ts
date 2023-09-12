@@ -3,7 +3,7 @@ import { AlarmText } from "../../type";
 export interface AlarmItemProps {
   userId: number;
   itemTitle: string;
-  itemDes: string;
+  itemDesc: string;
   alarmText: AlarmText;
   isAlarmReceive: boolean;
 }

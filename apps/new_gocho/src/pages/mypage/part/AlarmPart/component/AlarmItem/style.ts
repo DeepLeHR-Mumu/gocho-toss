@@ -6,7 +6,7 @@ export const cssObj = {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 2.06rem 0;
+    margin: 2rem 0;
   `,
 
   titleWrapper: css`
