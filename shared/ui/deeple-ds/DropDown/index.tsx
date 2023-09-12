@@ -40,7 +40,7 @@ export const DropDown = ({
 
     return defaultLocation;
   });
-
+  const dropDownWrapperRef = useRef<HTMLDivElement | null>(null);
   const customTitleRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -50,8 +50,30 @@ export const DropDown = ({
     }
   }, []);
 
+  useEffect(() => {
+    if (!menuVisible) {
+      return;
+    }
+    const close = (event: MouseEvent) => {
+      if (
+        dropDownWrapperRef.current &&
+        event.target instanceof Node &&
+        !dropDownWrapperRef.current.contains(event.target)
+      ) {
+        setMenuVisible(false);
+      }
+    };
+
+    window.addEventListener("click", close);
+
+    // eslint-disable-next-line consistent-return
+    return () => {
+      window.removeEventListener("click", close);
+    };
+  }, [menuVisible]);
+
   return (
-    <div css={dropDownCssObj.dropDownWrapper}>
+    <div css={dropDownCssObj.dropDownWrapper} ref={dropDownWrapperRef}>
       <button type="button" css={dropDownCssObj.titleWrapper} onClick={() => setMenuVisible(!menuVisible)}>
         {customTitle === undefined && (
           <>
