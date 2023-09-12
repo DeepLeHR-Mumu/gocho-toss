@@ -8,6 +8,7 @@ export interface CompanyHistoriesArr {
   id: number;
   name: string;
   logo_url: string;
+  size: string;
   industry: string;
   is_bookmark: boolean;
 }

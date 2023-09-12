@@ -16,6 +16,7 @@ export const selector = (data: CompanyHistoriesArr[], page_result: PageResultDef
     return {
       id: company.id,
       name: company.name,
+      size: company.size,
       logoUrl: company.logo_url,
       industry: company.industry,
       isBookmark: company.is_bookmark,
