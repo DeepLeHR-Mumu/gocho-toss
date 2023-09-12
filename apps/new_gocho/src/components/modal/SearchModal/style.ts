@@ -14,8 +14,7 @@ export const cssObj = {
     }
   `,
 
-  contentsWrapper: css`
-    max-width: 46.5rem;
+  contentWrapper: css`
     height: auto;
     padding-top: 1.5rem;
     padding-bottom: 1.8125rem;

@@ -1,6 +1,5 @@
-import { BoxProps } from "./type";
+import { AllHTMLAttributes } from "react";
+
 import { cssObj } from "./style";
 
-export const Box = ({ ...props }: BoxProps) => {
-  return <div css={cssObj.wrapper} {...props} />;
-};
+export const Box = ({ ...props }: AllHTMLAttributes<HTMLDivElement>) => <div css={cssObj.wrapper} {...props} />;

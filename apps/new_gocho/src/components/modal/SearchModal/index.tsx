@@ -8,6 +8,7 @@ import { useCompanyArr } from "@/apis/company";
 
 import { URL } from "@/pages/constants";
 
+import { Layout } from "@/components";
 import { CompanyCard } from "../../common/CompanyCard";
 import { JdRow } from "../../common/JdRow";
 
@@ -47,7 +48,6 @@ export const SearchModal = ({ close }: SearchModalProps) => {
   };
 
   const deleteChip = (target: string) => {
-    // eslint-disable-next-line arrow-body-style
     const newRecentSearcWordArr = recentSearchWordArr.filter((word) => word !== target);
     setRecentSearchWordArr(newRecentSearcWordArr);
     removeRecentWordFromStorage(target);
@@ -61,34 +61,34 @@ export const SearchModal = ({ close }: SearchModalProps) => {
 
   return (
     <Modal css={cssObj.wrapper}>
-      <div css={cssObj.contentsWrapper}>
-        <FiX
-          css={cssObj.closeIcon}
-          onClick={() => {
-            if (close) {
-              router.back();
-              close();
-            }
-          }}
-        />
-        <SearchDropDown recentWordArr={recentSearchWordArr} searchHandler={searchHandler} />
-        <div css={cssObj.etcWrapper}>
-          <div css={cssObj.recentWordWrapper}>
-            <div css={cssObj.recentWordHeader}>
-              <h3 css={cssObj.recentWordTitle}>최근 검색어</h3>
-              <button
-                type="button"
-                css={cssObj.recentWordDelete}
-                onClick={() => {
-                  deleteAllChip();
-                }}
-              >
-                전체삭제
-              </button>
-            </div>
-            <div css={cssObj.recentWordChipsWrapper}>
-              {recentSearchWordArr.map((word) => {
-                return (
+      <Layout>
+        <div css={cssObj.contentWrapper}>
+          <FiX
+            css={cssObj.closeIcon}
+            onClick={() => {
+              if (close) {
+                router.back();
+                close();
+              }
+            }}
+          />
+          <SearchDropDown recentWordArr={recentSearchWordArr} searchHandler={searchHandler} />
+          <div css={cssObj.etcWrapper}>
+            <div css={cssObj.recentWordWrapper}>
+              <div css={cssObj.recentWordHeader}>
+                <h3 css={cssObj.recentWordTitle}>최근 검색어</h3>
+                <button
+                  type="button"
+                  css={cssObj.recentWordDelete}
+                  onClick={() => {
+                    deleteAllChip();
+                  }}
+                >
+                  전체삭제
+                </button>
+              </div>
+              <div css={cssObj.recentWordChipsWrapper}>
+                {recentSearchWordArr.map((word) => (
                   <Chip
                     size="large"
                     key={word}
@@ -106,16 +106,14 @@ export const SearchModal = ({ close }: SearchModalProps) => {
                       }}
                     />
                   </Chip>
-                );
-              })}
+                ))}
+              </div>
+              <Divider />
             </div>
-            <Divider />
-          </div>
-          <div>
-            <h3 css={cssObj.recommendationWordTitle}>추천 검색어</h3>
-            <div css={cssObj.recommendationWordChipsWrapper}>
-              {RECOMMENDATION_COMPANY_ARR.map((company) => {
-                return (
+            <div>
+              <h3 css={cssObj.recommendationWordTitle}>추천 검색어</h3>
+              <div css={cssObj.recommendationWordChipsWrapper}>
+                {RECOMMENDATION_COMPANY_ARR.map((company) => (
                   <Chip
                     key={company}
                     size="large"
@@ -126,15 +124,13 @@ export const SearchModal = ({ close }: SearchModalProps) => {
                   >
                     {company}
                   </Chip>
-                );
-              })}
+                ))}
+              </div>
             </div>
-          </div>
-          <div>
-            <h3 css={cssObj.recommendationCompanyTitle}>추천기업</h3>
-            <div css={cssObj.recommendationCompanyList}>
-              {companyData?.companyDataArr.map((company) => {
-                return (
+            <div>
+              <h3 css={cssObj.recommendationCompanyTitle}>추천기업</h3>
+              <div css={cssObj.recommendationCompanyList}>
+                {companyData?.companyDataArr.map((company) => (
                   <CompanyCard
                     key={company.id}
                     id={company.id}
@@ -142,15 +138,13 @@ export const SearchModal = ({ close }: SearchModalProps) => {
                     name={company.name}
                     hashTagArr={[company.industry, company.size]}
                   />
-                );
-              })}
+                ))}
+              </div>
             </div>
-          </div>
-          <div>
-            <h3 css={cssObj.recommendationJdTitle}>추천공고</h3>
-            <div css={cssObj.recommendationJdList}>
-              {jobData?.jdDataArr.map((job) => {
-                return (
+            <div>
+              <h3 css={cssObj.recommendationJdTitle}>추천공고</h3>
+              <div css={cssObj.recommendationJdList}>
+                {jobData?.jdDataArr.map((job) => (
                   <JdRow
                     key={job.id}
                     jdId={job.id}
@@ -160,12 +154,12 @@ export const SearchModal = ({ close }: SearchModalProps) => {
                     bookmarked={false}
                     cut={job.cut}
                   />
-                );
-              })}
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Layout>
     </Modal>
   );
 };
