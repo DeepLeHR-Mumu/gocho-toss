@@ -1,8 +1,8 @@
 import { PageResultDef } from "shared-type/api/paginationType";
 
-import { CompanyBookmarkObjDef } from "./type";
+import { CompanyHistoriesArr } from "./type";
 
-export const selector = (data: CompanyBookmarkObjDef[], page_result: PageResultDef) => {
+export const selector = (data: CompanyHistoriesArr[], page_result: PageResultDef) => {
   const pageResult = {
     totalElements: page_result.total_elements,
     totalPages: page_result.total_pages,
@@ -12,15 +12,16 @@ export const selector = (data: CompanyBookmarkObjDef[], page_result: PageResultD
     isLast: page_result.is_last,
   };
 
-  const companyBookmarkDataArr = data.map((company) => {
+  const companyHistoryDataArr = data.map((company) => {
     return {
       id: company.id,
       name: company.name,
+      size: company.size,
       logoUrl: company.logo_url,
       industry: company.industry,
-      size: company.size,
+      isBookmark: company.is_bookmark,
     };
   });
 
-  return { companyBookmarkDataArr, pageResult };
+  return { companyHistoryDataArr, pageResult };
 };
