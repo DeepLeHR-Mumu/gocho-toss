@@ -11,7 +11,7 @@ import { useUserCompanyBookmarkArr } from "@/apis/company";
 import { cssObj } from "./style";
 import { BookmarkFilterType } from "./type";
 
-export const FallowPart = () => {
+export const FollowPart = () => {
   const [filter, setFilter] = useState<BookmarkFilterType>("recent");
   const [title, setTitle] = useState<string>("팔로우한 순");
 
