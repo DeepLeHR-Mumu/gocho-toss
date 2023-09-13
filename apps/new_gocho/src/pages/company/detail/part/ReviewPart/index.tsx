@@ -17,7 +17,16 @@ export const ReviewPart = () => {
   const { data: userData } = useUserProfile();
 
   if (!companyCommentData) {
-    return <> </>;
+    return (
+      <section css={cssObj.wrapper}>
+        <div css={cssObj.box}>
+          <div css={cssObj.titleWrapper}>
+            <h3 css={cssObj.title}>최근 리뷰</h3>
+            <span css={cssObj.reviewNumber}>로딩중입니다.</span>
+          </div>
+        </div>
+      </section>
+    );
   }
 
   return (
@@ -41,13 +50,13 @@ export const ReviewPart = () => {
         {writeReview && <WriteReview />}
         {companyCommentData.comment_arr
           .map((comment) => (
-              <Review
-                key={comment.id}
-                companyId={companyCommentData.company.id}
-                comment={comment}
-                isMyComment={comment.uploader.id === userData?.id}
-              />
-            ))
+            <Review
+              key={comment.id}
+              companyId={companyCommentData.company.id}
+              comment={comment}
+              isMyComment={comment.uploader.id === userData?.id}
+            />
+          ))
           .reverse()}
       </div>
     </section>

@@ -30,7 +30,7 @@ export const cssObj = {
 
   reviewNumber: css`
     align-self: flex-end;
-    margin-left: 1.75rem;
+    margin-left: 1.5rem;
     ${NEWTEXTS.TITLE7}
   `,
 

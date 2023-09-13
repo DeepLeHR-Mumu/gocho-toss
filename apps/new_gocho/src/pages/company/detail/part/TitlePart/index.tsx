@@ -59,7 +59,7 @@ export const TitlePart = () => {
             <div css={cssObj.introWrapper}>
               <span css={cssObj.intro}>{companyData.intro}</span>
               <span css={cssObj.follower}>
-                현재 해당 기업을 <span>{companyData.bookmark}</span>명이 팔로우하고 있어요
+                현재 해당 기업을 <span>{companyData.bookmark}</span>명이 팔로우하고 있어요!
               </span>
             </div>
           </div>

@@ -86,6 +86,7 @@ export const cssObj = {
 
   companyLogo: css`
     border-radius: 50%;
+    overflow: hidden;
     width: 6.25rem;
     height: 6.25rem;
     border: 1px solid ${NEWCOLORS.GRAY100};
