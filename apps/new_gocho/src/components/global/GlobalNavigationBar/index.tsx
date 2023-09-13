@@ -24,11 +24,7 @@ export const GlobalNavigationBar = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const isThemeWhite = useMemo(() => {
-    return THEME_WHITE_PAGES.some((url) => {
-      return router.pathname.includes(url);
-    });
-  }, [router.pathname]);
+  const isThemeWhite = useMemo(() => THEME_WHITE_PAGES.some((url) => router.pathname.includes(url)), [router.pathname]);
 
   const {
     wrapper,
@@ -110,7 +106,7 @@ export const GlobalNavigationBar = () => {
               <div css={navigationArea}>
                 <nav>
                   <ul css={navigationWrapper}>
-                    <li css={router.pathname.includes(URL.JDS_LIST) && selected}>
+                    <li css={router.pathname.includes(URL.JDS) && selected}>
                       <Link href={URL.JDS_LIST}>채용공고</Link>
                     </li>
                     <li css={router.pathname.includes(URL.COMPANY) && selected}>

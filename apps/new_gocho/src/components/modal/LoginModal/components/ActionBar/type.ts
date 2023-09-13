@@ -1,6 +1,4 @@
-import { MouseEvent } from "react";
-
-type ClickHandler = <T extends Element>(event: MouseEvent<T>) => void;
+export type ClickHandler = () => void;
 
 export interface ActionBarProps {
   title?: string;

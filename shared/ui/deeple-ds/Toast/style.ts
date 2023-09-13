@@ -15,7 +15,7 @@ export const cssObj = {
     left: 50%;
     top: 80%;
     transform: translate(-50%, -50%);
-    z-index: 70;
+    z-index: 110;
 
     animation: upAndFadeOut 3.2s forwards cubic-bezier(0.69, 0, 0.23, 1);
 
@@ -30,10 +30,8 @@ export const cssObj = {
         top: 80%;
       }
       90% {
-        opacity: 1;
       }
       100% {
-        opacity: 0;
       }
     }
 

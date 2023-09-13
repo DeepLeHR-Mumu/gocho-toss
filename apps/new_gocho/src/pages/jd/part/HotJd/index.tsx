@@ -52,7 +52,7 @@ export const HotJd: FunctionComponent = () => {
         </div>
       </div>
       <div css={cssObj.contentContainer}>
-        <Link href="/jd/now" css={cssObj.nowJdBanner}>
+        <Link href="/jd/list?page=1&order=recent" css={cssObj.nowJdBanner}>
           <p css={cssObj.bannerTitle}>
             지금
             <br />

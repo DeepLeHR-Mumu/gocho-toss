@@ -4,17 +4,18 @@ import axios from "axios";
 import { Input, Button, Divider } from "shared-ui/deeple-ds";
 import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE, EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 
-import { useDoSignUp, useUserProfile } from "@/apis/auth";
+import { useDoSignUp } from "@/apis/auth";
 import { RequestObjDef as SignUpFormValues } from "@/apis/auth/useDoSignup/type";
-import { useGetDeviceType } from "@/globalStates";
+import { useGetDeviceType, useToast } from "@/globalStates";
 
 import ActionBar from "../ActionBar";
+import { ActionBarHandlers } from "../ActionBar/type";
 
-import { SignUpProps } from "./type";
 import { cssObj } from "./style";
 
-const SignUp = ({ ...actionBarHandlers }: SignUpProps) => {
+const SignUp = ({ ...actionBarHandlers }: ActionBarHandlers) => {
   const { isMobile, browserSize } = useGetDeviceType();
+  const { setToastMessage } = useToast();
 
   const {
     register,
@@ -41,7 +42,11 @@ const SignUp = ({ ...actionBarHandlers }: SignUpProps) => {
         localStorage.setItem("accessToken", `${response?.data.access_token}`);
         localStorage.setItem("refreshToken", `${response?.data.refresh_token}`);
 
-        // TODO 회원가입 성공 시 로직 추가
+        setToastMessage("환영합니다.");
+
+        if (actionBarHandlers.closeHandler) {
+          actionBarHandlers.closeHandler();
+        }
 
         // const { nickname } = tokenDecryptor(response.data.access_token);
         // signupSuccessEvent();

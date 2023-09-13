@@ -5,36 +5,25 @@ import { MOBILE } from "shared-style/mediaQuery";
 
 import { DeviceType, DeviceStore } from "./type";
 
-const useDeviceStore = create<DeviceStore>((set) => {
-  return {
-    deviceType: null,
-    modelType: null,
-    browserSize: { innerWidth: 0, innerHeight: 0 },
-    // eslint-disable-next-line arrow-body-style
-    setDeviceType: (newDeviceType) => set(() => ({ deviceType: newDeviceType })),
-    // eslint-disable-next-line arrow-body-style
-    setModelType: (newModelTyp) => set(() => ({ modelType: newModelTyp })),
-    // eslint-disable-next-line arrow-body-style
-    setBrowserSize: (width, height) => set(() => ({ browserSize: { innerWidth: width, innerHeight: height } })),
-  };
-});
+const useDeviceStore = create<DeviceStore>((set) => ({
+  deviceType: null,
+  modelType: null,
+  browserSize: { innerWidth: 0, innerHeight: 0 },
+  setDeviceType: (newDeviceType) => set(() => ({ deviceType: newDeviceType })),
+  setModelType: (newModelTyp) => set(() => ({ modelType: newModelTyp })),
+  setBrowserSize: (width, height) => set(() => ({ browserSize: { innerWidth: width, innerHeight: height } })),
+}));
 
 export const useGetDeviceType = () => {
-  const { deviceType, browserSize } = useDeviceStore((state) => {
-    return state;
-  });
+  const { deviceType, browserSize } = useDeviceStore((state) => state);
 
-  const isMobile = useMemo(() => {
-    return deviceType === "MOBILE";
-  }, [deviceType]);
+  const isMobile = useMemo(() => deviceType === "MOBILE", [deviceType]);
 
   return { deviceType, isMobile, browserSize };
 };
 
 export const useSetDeviceType = () => {
-  const { deviceType, setDeviceType, setBrowserSize } = useDeviceStore((state) => {
-    return state;
-  });
+  const { deviceType, setDeviceType, setBrowserSize } = useDeviceStore((state) => state);
 
   const resizeCallback = useCallback(() => {
     const deviceWidth = window.innerWidth;
@@ -43,8 +32,7 @@ export const useSetDeviceType = () => {
 
     let newDeviceType: DeviceType = "DESKTOP";
 
-    // eslint-disable-next-line radix
-    if (deviceWidth < parseInt(mobileStandardWidth)) {
+    if (deviceWidth < parseInt(mobileStandardWidth, 10)) {
       newDeviceType = "MOBILE";
     }
 

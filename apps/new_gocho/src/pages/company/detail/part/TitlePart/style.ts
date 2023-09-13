@@ -7,10 +7,23 @@ export const cssObj = {
     background: ${NEWCOLORS.WHITE};
   `,
 
+  imageWrapper: css`
+    width: 100%;
+    height: 7.5rem;
+    overflow: hidden;
+    position: absolute;
+    z-index: 0;
+
+    img {
+      height: auto !important;
+    }
+  `,
+
   wrapper: css`
-    padding: 1.5rem 1.5rem 2.375rem;
+    padding: 9rem 1.5rem 2.375rem;
     display: flex;
     flex-direction: column;
+    position: relative;
   `,
 
   followWrapper: css`
@@ -73,6 +86,7 @@ export const cssObj = {
 
   companyLogo: css`
     position: absolute;
+    top: 4.375rem;
   `,
 
   listWrapper: css`

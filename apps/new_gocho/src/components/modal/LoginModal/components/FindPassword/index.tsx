@@ -6,15 +6,15 @@ import { Input, Button, Divider } from "shared-ui/deeple-ds";
 
 import { useFindPassword } from "@/apis/auth";
 import { RequestObjDef as FindPasswordFormValues } from "@/apis/auth/useFindPassword/type";
-import { useGetDeviceType } from "@/globalStates";
+import { useGetDeviceType, useToast } from "@/globalStates";
 
 import ActionBar from "../ActionBar";
-
-import { FindPasswordProps } from "./type";
+import { ActionBarHandlers } from "../ActionBar/type";
 import { cssObj } from "./style";
 
-const FindPassword = ({ ...actionBarHandlers }: FindPasswordProps) => {
+const FindPassword = ({ ...actionBarHandlers }: ActionBarHandlers) => {
   const { isMobile } = useGetDeviceType();
+  const { setToastMessage } = useToast();
 
   const {
     register,
@@ -34,7 +34,11 @@ const FindPassword = ({ ...actionBarHandlers }: FindPasswordProps) => {
         return setError("email", { type: "custom", message: "이메일을 확인 후 다시 시도해주세요." });
       },
       onSuccess: () => {
-        // TODO 비밀번호 찾기 성공 시 로직 추가
+        setToastMessage("입력하신 이메일로 임시 비밀번호가 발급되었습니다");
+
+        if (actionBarHandlers.previousHandler) {
+          actionBarHandlers.previousHandler();
+        }
       },
     });
   };
@@ -60,14 +64,7 @@ const FindPassword = ({ ...actionBarHandlers }: FindPasswordProps) => {
       </div>
       <div css={cssObj.buttonGroupWrapper}>
         {!isMobile && (
-          <Button
-            size="large"
-            color="outlineGray"
-            fill={isMobile}
-            onClick={(e) => {
-              if (actionBarHandlers.previousHandler) actionBarHandlers.previousHandler(e);
-            }}
-          >
+          <Button size="large" color="outlineGray" fill={isMobile} onClick={actionBarHandlers.previousHandler}>
             로그인 하러가기
           </Button>
         )}

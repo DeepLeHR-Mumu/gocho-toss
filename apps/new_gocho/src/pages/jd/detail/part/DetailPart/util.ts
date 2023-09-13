@@ -6,9 +6,7 @@ import { dateConverter } from "shared-util";
 import { JdDetailObjDef } from "@/apis/jd/type/jdDetail";
 import { DetailContents } from "./component/DetailSubContainer/type";
 
-const createSpanTag = (children: string) => {
-  return createElement("span", {}, children);
-};
+const createSpanTag = (children: string) => createElement("span", {}, children);
 
 export const getTaskContents = (task: JdDetailObjDef["task"]): DetailContents => {
   const taskContents: DetailContents = {};
@@ -81,10 +79,7 @@ export const getJobQualificationContents = (jobQualification: {
     jobQualificationContents["기타"] = createElement(
       "ul",
       {},
-      requiredEtcArr.map((etc, index) => {
-        // eslint-disable-next-line react/no-array-index-key
-        return createElement("li", { key: index }, etc);
-      })
+      requiredEtcArr.map((etc) => createElement("li", { key: `RequiredEtc${etc}` }, etc))
     );
   }
 
@@ -205,9 +200,7 @@ export const getReceptionGuideContents = (receptionGuide: {
     receptionGuideContents["기타사항"] = createElement(
       "div",
       { style: { display: "flex", flexDirection: "column", gap: "1rem" } },
-      etcArr.map((etc) => {
-        return createElement("p", {}, etc);
-      })
+      etcArr.map((etc) => createElement("p", {}, etc))
     );
   }
 

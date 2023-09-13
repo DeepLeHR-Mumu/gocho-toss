@@ -93,26 +93,22 @@ export const JdBookmarkPart = () => {
               menu={{
                 width: 180,
                 closeAfterClickEvent: true,
-                options: filterOption.map(({ content, setState }) => {
-                  return {
-                    key: content,
-                    focused: dropTitle === content,
-                    content: <p>{content}</p>,
-                    onClick: () => {
-                      setTitle(content);
-                      setState();
-                    },
-                  };
-                }),
+                options: filterOption.map(({ content, setState }) => ({
+                  key: content,
+                  focused: dropTitle === content,
+                  content: <p>{content}</p>,
+                  onClick: () => {
+                    setTitle(content);
+                    setState();
+                  },
+                })),
               }}
             />
           </div>
           <div css={cssObj.listWrapper}>
-            {jdList.userJdBookmarkArr.map(({ id, title, endTime, company }) => {
-              return (
-                <JdRow jdId={id} key={id} dueDate={endTime} jdTitle={title} bookmarked companyName={company.name} />
-              );
-            })}
+            {jdList.userJdBookmarkArr.map(({ id, title, endTime, company }) => (
+              <JdRow jdId={id} key={id} dueDate={endTime} jdTitle={title} bookmarked companyName={company.name} />
+            ))}
           </div>
         </>
       )}

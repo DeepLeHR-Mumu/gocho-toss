@@ -2,17 +2,13 @@ import { useEffect } from "react";
 import { create } from "zustand";
 import { SetToastMessageDef, ToastAtomProps } from "./type";
 
-const toastZustand = create<ToastAtomProps>((set) => {
-  return {
-    toastMessage: null,
-    nickname: undefined,
-    setToastMessage: (toastMessage, nickname = undefined) => {
-      set(() => {
-        return { toastMessage, nickname };
-      });
-    },
-  };
-});
+const toastZustand = create<ToastAtomProps>((set) => ({
+  toastMessage: null,
+  nickname: undefined,
+  setToastMessage: (toastMessage, nickname = undefined) => {
+    set(() => ({ toastMessage, nickname }));
+  },
+}));
 
 export const useToast = () => {
   const { toastMessage: _toastMessage, setToastMessage: _setToastMessage, nickname: _nickname } = toastZustand();
@@ -26,9 +22,7 @@ export const useToast = () => {
     }, 3500);
   }, [_toastMessage, _setToastMessage]);
 
-  const closeToast = () => {
-    return _setToastMessage(null);
-  };
+  const closeToast = () => _setToastMessage(null);
 
   const setToastMessage: SetToastMessageDef = (toastMessage, nickname) => {
     if (toastMessage === null) {
