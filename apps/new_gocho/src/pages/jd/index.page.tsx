@@ -8,19 +8,19 @@ import { HotJd, JdSlider } from "./part";
 import { cssObj } from "./style";
 
 const JdList: NextPage = () => (
-    <main>
-      <Layout>
-        <HotJd />
-        <div css={cssObj.divider}>
-          <Divider />
-        </div>
-        <JdSlider title="마감 임박 공고 ⏰" order="end" filter="valid" />
-        <div css={cssObj.divider}>
-          <Divider />
-        </div>
-        <JdSlider title="오늘 올라온 공고 💡" order="recent" filter="valid" />
-      </Layout>
-    </main>
-  );
+  <main>
+    <Layout>
+      <HotJd />
+      <div css={cssObj.divider}>
+        <Divider />
+      </div>
+      <JdSlider title="마감 임박 공고 ⏰" order="end" filter="valid" />
+      <div css={cssObj.divider}>
+        <Divider />
+      </div>
+      <JdSlider title="오늘 올라온 공고 💡" order="recent" filter="valid" />
+    </Layout>
+  </main>
+);
 
 export default JdList;

@@ -1,5 +1,7 @@
 import { Divider } from "shared-ui/deeple-ds";
 
+import { useToast } from "@/globalStates";
+
 import { copyToClipboard } from "@/utils";
 import { commonCssObj } from "@/pages/company/detail/style";
 
@@ -8,9 +10,11 @@ import { CommonInfoProps } from "./type";
 import { cssObj } from "./style";
 
 export const CommonInfo = ({ industry, size, foundDate, employeeNumber, nozoExists, address }: CommonInfoProps) => {
+  const { setToastMessage } = useToast();
+
   const copyAddress = () => {
     copyToClipboard(address);
-    // TODO 토스트 메시지 같은 거 추가해야할 듯?
+    setToastMessage("주소가 복사되었습니다!");
   };
 
   return (

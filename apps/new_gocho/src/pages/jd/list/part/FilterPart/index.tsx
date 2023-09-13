@@ -5,6 +5,8 @@ import { FiX, FiRefreshCw, FiFilter } from "react-icons/fi";
 
 import { Button } from "shared-ui/deeple-ds";
 
+import { useToast } from "@/globalStates";
+
 import { useUserProfile } from "@/apis/auth";
 import { useUserFilter, useDoUserFilter } from "@/apis/filter";
 import { useJdCount } from "@/apis/jd";
@@ -51,9 +53,11 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
     [ROTATION_FILTER_KEY]: watch(ROTATION_FILTER_KEY).join(","),
   });
 
+  const { setToastMessage } = useToast();
+
   const filterButton = (sourceKey: FilterKey, targetKey: string) => css`
-      ${cssObj.filter}${watch(sourceKey).includes(targetKey) && cssObj.appliedFilter}
-    `;
+    ${cssObj.filter}${watch(sourceKey).includes(targetKey) && cssObj.appliedFilter}
+  `;
 
   const filterHandler = (targetKey: FilterKey, value: string) => {
     const appliedFilter = getValues(targetKey);
@@ -71,9 +75,15 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
 
   const loadMyFilter = () => {
     if (!userData) {
+      setToastMessage("해당 서비스는 로그인 후 이용 가능한 서비스 입니다.");
       setLoginModal(true);
       return;
     }
+
+    if (!userFilter) {
+      setToastMessage("저장된 My필터가 없습니다.");
+    }
+
     setValue(JOB_FILTER_KEY, userFilter ? userFilter[JOB_FILTER_KEY] : []);
     setValue(INDUSTRY_FILTER_KEY, userFilter ? userFilter[INDUSTRY_FILTER_KEY] : []);
     setValue(EDUCATION_FILTER_KEY, userFilter ? userFilter[EDUCATION_FILTER_KEY] : []);
@@ -81,6 +91,8 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
     setValue(REQUIRED_EXP_FILTER_KEY, userFilter ? userFilter[REQUIRED_EXP_FILTER_KEY] : []);
     setValue(CONTRACT_FILTER_KEY, userFilter ? userFilter[CONTRACT_FILTER_KEY] : []);
     setValue(ROTATION_FILTER_KEY, userFilter ? userFilter[ROTATION_FILTER_KEY] : []);
+
+    setToastMessage("저장된 My필터를 불러왔습니다.");
   };
 
   const saveMyFilter = () => {
@@ -100,6 +112,8 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
         rotation: getValues(ROTATION_FILTER_KEY),
       },
     });
+
+    setToastMessage("My필터가 저장되었습니다.");
   };
 
   const flattedAllFilter = getAllFilter(watch());
@@ -121,18 +135,18 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
               <div>
                 <ul>
                   {JOB_FILTER_ARR.map((filter) => (
-                      <li key={filter}>
-                        <button
-                          css={filterButton(JOB_FILTER_KEY, filter)}
-                          type="button"
-                          onClick={() => {
-                            filterHandler(JOB_FILTER_KEY, filter);
-                          }}
-                        >
-                          {getFilterText(filter)}
-                        </button>
-                      </li>
-                    ))}
+                    <li key={filter}>
+                      <button
+                        css={filterButton(JOB_FILTER_KEY, filter)}
+                        type="button"
+                        onClick={() => {
+                          filterHandler(JOB_FILTER_KEY, filter);
+                        }}
+                      >
+                        {getFilterText(filter)}
+                      </button>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -141,18 +155,18 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
               <div>
                 <ul>
                   {INDUSTRY_FILTER_ARR.map((filter) => (
-                      <li key={filter}>
-                        <button
-                          css={filterButton(INDUSTRY_FILTER_KEY, filter)}
-                          type="button"
-                          onClick={() => {
-                            filterHandler(INDUSTRY_FILTER_KEY, filter);
-                          }}
-                        >
-                          {getFilterText(filter)}
-                        </button>
-                      </li>
-                    ))}
+                    <li key={filter}>
+                      <button
+                        css={filterButton(INDUSTRY_FILTER_KEY, filter)}
+                        type="button"
+                        onClick={() => {
+                          filterHandler(INDUSTRY_FILTER_KEY, filter);
+                        }}
+                      >
+                        {getFilterText(filter)}
+                      </button>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -161,18 +175,18 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
               <div>
                 <ul>
                   {EDUCATION_FILTER_ARR.map((filter) => (
-                      <li key={filter}>
-                        <button
-                          css={filterButton(EDUCATION_FILTER_KEY, filter)}
-                          type="button"
-                          onClick={() => {
-                            filterHandler(EDUCATION_FILTER_KEY, filter);
-                          }}
-                        >
-                          {getFilterText(filter)}
-                        </button>
-                      </li>
-                    ))}
+                    <li key={filter}>
+                      <button
+                        css={filterButton(EDUCATION_FILTER_KEY, filter)}
+                        type="button"
+                        onClick={() => {
+                          filterHandler(EDUCATION_FILTER_KEY, filter);
+                        }}
+                      >
+                        {getFilterText(filter)}
+                      </button>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -181,18 +195,18 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
               <div>
                 <ul>
                   {PLACE_FILTER_ARR.map((filter) => (
-                      <li key={filter}>
-                        <button
-                          css={filterButton(PLACE_FILTER_KEY, filter)}
-                          type="button"
-                          onClick={() => {
-                            filterHandler(PLACE_FILTER_KEY, filter);
-                          }}
-                        >
-                          {getFilterText(filter)}
-                        </button>
-                      </li>
-                    ))}
+                    <li key={filter}>
+                      <button
+                        css={filterButton(PLACE_FILTER_KEY, filter)}
+                        type="button"
+                        onClick={() => {
+                          filterHandler(PLACE_FILTER_KEY, filter);
+                        }}
+                      >
+                        {getFilterText(filter)}
+                      </button>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -201,18 +215,18 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
               <div>
                 <ul>
                   {REQUIRED_EXP_FILTER_ARR.map((filter) => (
-                      <li key={filter}>
-                        <button
-                          css={filterButton(REQUIRED_EXP_FILTER_KEY, filter)}
-                          type="button"
-                          onClick={() => {
-                            filterHandler(REQUIRED_EXP_FILTER_KEY, filter);
-                          }}
-                        >
-                          {getFilterText(filter)}
-                        </button>
-                      </li>
-                    ))}
+                    <li key={filter}>
+                      <button
+                        css={filterButton(REQUIRED_EXP_FILTER_KEY, filter)}
+                        type="button"
+                        onClick={() => {
+                          filterHandler(REQUIRED_EXP_FILTER_KEY, filter);
+                        }}
+                      >
+                        {getFilterText(filter)}
+                      </button>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -221,18 +235,18 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
               <div>
                 <ul>
                   {CONTRACT_FILTER_ARR.map((filter) => (
-                      <li key={filter}>
-                        <button
-                          css={filterButton(CONTRACT_FILTER_KEY, filter)}
-                          type="button"
-                          onClick={() => {
-                            filterHandler(CONTRACT_FILTER_KEY, filter);
-                          }}
-                        >
-                          {getFilterText(filter)}
-                        </button>
-                      </li>
-                    ))}
+                    <li key={filter}>
+                      <button
+                        css={filterButton(CONTRACT_FILTER_KEY, filter)}
+                        type="button"
+                        onClick={() => {
+                          filterHandler(CONTRACT_FILTER_KEY, filter);
+                        }}
+                      >
+                        {getFilterText(filter)}
+                      </button>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -241,18 +255,18 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
               <div>
                 <ul>
                   {ROTATION_FILTER_ARR.map((filter) => (
-                      <li key={filter}>
-                        <button
-                          css={filterButton(ROTATION_FILTER_KEY, filter)}
-                          type="button"
-                          onClick={() => {
-                            filterHandler(ROTATION_FILTER_KEY, filter);
-                          }}
-                        >
-                          {getFilterText(filter)}
-                        </button>
-                      </li>
-                    ))}
+                    <li key={filter}>
+                      <button
+                        css={filterButton(ROTATION_FILTER_KEY, filter)}
+                        type="button"
+                        onClick={() => {
+                          filterHandler(ROTATION_FILTER_KEY, filter);
+                        }}
+                      >
+                        {getFilterText(filter)}
+                      </button>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
