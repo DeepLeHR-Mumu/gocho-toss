@@ -8,11 +8,11 @@ import { partElementArray } from "./constants";
 
 import { cssObj } from "./style";
 import { Box } from "./component/Box";
-import { useUserProfile } from "@/apis/auth";
+import { useUserInfo } from "@/apis/auth/useUserInfo";
 
 const MyPage: NextPage = () => {
   const router = useRouter();
-  const { data: userProfile } = useUserProfile();
+  const { data: userProfile } = useUserInfo();
 
   const curPart = partElementArray.find(({ type }) => {
     return type === router.query.type;
