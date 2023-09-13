@@ -10,7 +10,7 @@ export const cssObj = {
 
   title: css`
     ${NEWTEXTS.TITLE14}
-    margin-bottom:1.75rem;
+    margin-bottom: 1.75rem;
   `,
 
   contentWrapper: css`

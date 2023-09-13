@@ -54,7 +54,7 @@ export const dropDownCssObj = {
     const [directionTopOrBottom, directionLeftOrRight] = location.direction.split("-");
     return css`
       position: absolute;
-      z-index: 2;
+      z-index: 50;
       ${directionTopOrBottom}: ${location.topOrBottom}rem;
       ${directionLeftOrRight}: ${location.leftOrRight}rem;
     `;

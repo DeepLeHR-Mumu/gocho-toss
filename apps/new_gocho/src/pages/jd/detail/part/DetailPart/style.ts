@@ -18,6 +18,7 @@ export const cssObj = {
     flex-direction: column;
     padding: 2rem 1.5rem;
     gap: 4rem;
+    box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.05);
   `,
 
   placeWrapper: css`
@@ -29,6 +30,7 @@ export const cssObj = {
   factoryWrapper: css`
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 0.5rem;
   `,
 

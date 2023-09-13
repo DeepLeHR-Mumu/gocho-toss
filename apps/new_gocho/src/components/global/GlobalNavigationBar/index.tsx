@@ -34,7 +34,7 @@ export const GlobalNavigationBar = () => {
     searchBarWrapper,
     navigationArea,
     navigationWrapper,
-    selected,
+    menu,
     etcWrapper,
     businessServiceButton,
     loginButton,
@@ -106,13 +106,13 @@ export const GlobalNavigationBar = () => {
               <div css={navigationArea}>
                 <nav>
                   <ul css={navigationWrapper}>
-                    <li css={router.pathname.includes(INTERNAL_URL.JD) && selected}>
-                      <Link href={INTERNAL_URL.JD_LIST}>채용공고</Link>
+                    <li css={menu(router.pathname.includes(INTERNAL_URL.JD))}>
+                      <Link href={INTERNAL_URL.JD}>채용공고</Link>
                     </li>
-                    <li css={router.pathname.includes(INTERNAL_URL.COMPANY) && selected}>
+                    <li css={menu(router.pathname.includes(INTERNAL_URL.COMPANY))}>
                       <Link href={INTERNAL_URL.COMPANY}>기업정보</Link>
                     </li>
-                    <li css={router.pathname.includes(INTERNAL_URL.COMMUNITY) && selected}>
+                    <li css={menu(router.pathname.includes(INTERNAL_URL.COMMUNITY))}>
                       <Link href={INTERNAL_URL.COMMUNITY}>커뮤니티</Link>
                     </li>
                   </ul>
