@@ -1,12 +1,12 @@
 import { BookmarkPage } from "./type";
 
-import { FallowPart, JdBookmarkPart, HistoryPart } from "./part";
+import { FollowPart, JdBookmarkPart, HistoryPart } from "./part";
 
 export const bookmarkPart: BookmarkPage[] = [
   {
     key: 1,
     title: "팔로잉 기업",
-    element: <FallowPart />,
+    element: <FollowPart />,
   },
   {
     key: 2,

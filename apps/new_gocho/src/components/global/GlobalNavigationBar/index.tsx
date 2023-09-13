@@ -110,7 +110,7 @@ export const GlobalNavigationBar = () => {
               <div css={navigationArea}>
                 <nav>
                   <ul css={navigationWrapper}>
-                    <li css={router.pathname.includes(URL.JDS_LIST) && selected}>
+                    <li css={router.pathname.includes(URL.JDS) && selected}>
                       <Link href={URL.JDS_LIST}>채용공고</Link>
                     </li>
                     <li css={router.pathname.includes(URL.COMPANY) && selected}>

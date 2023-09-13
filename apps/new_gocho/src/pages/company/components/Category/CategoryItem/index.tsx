@@ -4,12 +4,13 @@ import Link from "next/link";
 import { CategoryProps } from "./type";
 
 import { cssObj } from "./style";
+import { URL } from "@/pages/constants";
 
 export const CategoryItem: FunctionComponent<CategoryProps> = ({ src, text }) => {
   return (
     <Link
       href={{
-        pathname: "company/list",
+        pathname: URL.COMPANY_LIST,
         query: { category: text },
       }}
       css={cssObj.categoryItem}

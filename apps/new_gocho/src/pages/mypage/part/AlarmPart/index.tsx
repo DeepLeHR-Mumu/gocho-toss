@@ -13,18 +13,16 @@ export const AlarmPart = () => {
 
   return (
     <div css={cssObj.wrapper}>
-      {alarmItemArr.map(({ itemTitle, itemDesc, alarmText }) => {
-        return (
-          <AlarmItem
-            key={alarmText}
-            itemTitle={itemTitle}
-            itemDesc={itemDesc}
-            userId={userInfo.id}
-            alarmText={alarmText}
-            isAlarmReceive={alarmConfig[alarmText]}
-          />
-        );
-      })}
+      {alarmItemArr.map(({ itemTitle, itemDesc, alarmText }) => (
+        <AlarmItem
+          key={alarmText}
+          itemTitle={itemTitle}
+          itemDesc={itemDesc}
+          userId={userInfo.id}
+          alarmText={alarmText}
+          isAlarmReceive={alarmConfig[alarmText]}
+        />
+      ))}
     </div>
   );
 };

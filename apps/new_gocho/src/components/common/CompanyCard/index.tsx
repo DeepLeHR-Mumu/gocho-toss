@@ -1,8 +1,6 @@
-import { useState } from "react";
 import Link from "next/link";
 import { Profile } from "shared-ui/deeple-ds";
 
-import { LoginModal } from "@/components/modal/LoginModal";
 import { useGetDeviceType } from "@/globalStates";
 import { CompanyBookmark } from "../CompanyBookmark";
 
@@ -11,8 +9,6 @@ import { cssObj } from "./style";
 import { URL } from "@/pages/constants";
 
 export const CompanyCard = ({ id, logoSrc, name, hashTagArr = [], bookmark }: CompanyCardProps) => {
-  const [loginModal, setLoginModal] = useState(false);
-
   const { isMobile } = useGetDeviceType();
   const isButtonExist = !!bookmark;
 
@@ -25,30 +21,21 @@ export const CompanyCard = ({ id, logoSrc, name, hashTagArr = [], bookmark }: Co
   };
 
   return (
-    <>
-      <div css={cssObj.cardWrapper(isButtonExist)}>
-        <Profile src={logoSrc} size={getProfileSize()} />
-        <Link href={`${URL.COMPANY_DETAIL}/${id}`}>
-          <h3 css={cssObj.name(isButtonExist)}>{name}</h3>
-        </Link>
-        {!isMobile && (
-          <p css={cssObj.hashTags(isButtonExist)}>
-            {hashTagArr
-              .map((hashTag) => {
-                return `#${hashTag}`;
-              })
-              .join(" ")}
-          </p>
-        )}
-        {isButtonExist && <CompanyBookmark companyId={id} isBookmark={bookmark.state} />}
-      </div>
-      {loginModal && (
-        <LoginModal
-          close={() => {
-            setLoginModal(false);
-          }}
-        />
+    <div css={cssObj.cardWrapper(isButtonExist)}>
+      <Profile src={logoSrc} size={getProfileSize()} />
+      <Link href={`${URL.COMPANY_DETAIL}/${id}`}>
+        <h3 css={cssObj.name(isButtonExist)}>{name}</h3>
+      </Link>
+      {!isMobile && (
+        <p css={cssObj.hashTags(isButtonExist)}>
+          {hashTagArr
+            .map((hashTag) => {
+              return `#${hashTag}`;
+            })
+            .join(" ")}
+        </p>
       )}
-    </>
+      {isButtonExist && <CompanyBookmark companyId={id} isBookmark={bookmark.state} />}
+    </div>
   );
 };

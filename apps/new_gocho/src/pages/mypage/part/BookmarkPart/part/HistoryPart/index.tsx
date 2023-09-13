@@ -30,18 +30,14 @@ export const HistoryPart = () => {
             <div css={cssObj.menuWrapper}>
               <button
                 type="button"
-                onClick={() => {
-                  return setCurrentMenu("기업");
-                }}
+                onClick={() => setCurrentMenu("기업")}
                 css={currentMenu === "기업" ? cssObj.selectedButton : cssObj.defaultButton}
               >
                 기업
               </button>
               <button
                 type="button"
-                onClick={() => {
-                  return setCurrentMenu("공고");
-                }}
+                onClick={() => setCurrentMenu("공고")}
                 css={currentMenu === "공고" ? cssObj.selectedButton : cssObj.defaultButton}
               >
                 공고
@@ -50,28 +46,24 @@ export const HistoryPart = () => {
           </div>
           <div css={cssObj.listWrapper}>
             {currentMenu === "기업" &&
-              companyArr.companyHistoryDataArr.map(({ id, industry, name, logoUrl, size }) => {
-                return (
-                  <CompanyRow
-                    key={id}
-                    id={id}
-                    size={size}
-                    logo={logoUrl || ""}
-                    name={name}
-                    industry={industry}
-                    border
-                    bookmark={{
-                      state: true,
-                    }}
-                  />
-                );
-              })}
+              companyArr.companyHistoryDataArr.map(({ id, industry, name, logoUrl, size }) => (
+                <CompanyRow
+                  key={id}
+                  id={id}
+                  size={size}
+                  logo={logoUrl || ""}
+                  name={name}
+                  industry={industry}
+                  border
+                  bookmark={{
+                    state: true,
+                  }}
+                />
+              ))}
             {currentMenu === "공고" &&
-              jdArr.userJdHistoriesArr.map(({ id, title, endTime, company }) => {
-                return (
-                  <JdRow jdId={id} key={id} dueDate={endTime} jdTitle={title} bookmarked companyName={company.name} />
-                );
-              })}
+              jdArr.userJdHistoriesArr.map(({ id, title, endTime, company }) => (
+                <JdRow jdId={id} key={id} dueDate={endTime} jdTitle={title} bookmarked companyName={company.name} />
+              ))}
           </div>
         </>
       )}

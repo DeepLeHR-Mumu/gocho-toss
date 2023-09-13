@@ -1,5 +1,6 @@
 export interface JdArrRequestObjDef {
-  order: "recent" | "popular" | "rand" | "view" | "end" | "com" | undefined;
+  enable?: boolean;
+  order: "recent" | "popular" | "rand" | "view" | "end" | "com";
   page?: number;
   size?: number;
   contractType?: string;
