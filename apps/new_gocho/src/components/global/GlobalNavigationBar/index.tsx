@@ -24,11 +24,7 @@ export const GlobalNavigationBar = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const isThemeWhite = useMemo(() => {
-    return THEME_WHITE_PAGES.some((url) => {
-      return router.pathname.includes(url);
-    });
-  }, [router.pathname]);
+  const isThemeWhite = useMemo(() => THEME_WHITE_PAGES.some((url) => router.pathname.includes(url)), [router.pathname]);
 
   const {
     wrapper,

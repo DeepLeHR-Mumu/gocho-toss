@@ -7,9 +7,9 @@ import { FiEyeOff, FiEye } from "react-icons/fi";
 import { Input, Button, Divider } from "shared-ui/deeple-ds";
 import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE, EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 
-import { useDoLogin, useUserProfile } from "@/apis/auth";
+import { useDoLogin } from "@/apis/auth";
 import { RequestObjDef as LoginFormValues } from "@/apis/auth/useDoLogin/type";
-import { useGetDeviceType } from "@/globalStates";
+import { useGetDeviceType, useToast } from "@/globalStates";
 import kakaoLogo from "@/public/kakao.svg";
 
 import ActionBar from "../ActionBar";
@@ -18,6 +18,7 @@ import { EmailLoginProps } from "./type";
 import { cssObj } from "./style";
 
 const EmailLogin = ({ toFindPassword, toSignUp, ...actionBarHandlers }: EmailLoginProps) => {
+  const { setToastMessage } = useToast();
   const {
     register,
     setError,
@@ -43,13 +44,11 @@ const EmailLogin = ({ toFindPassword, toSignUp, ...actionBarHandlers }: EmailLog
         localStorage.setItem("accessToken", `${response.data.access_token}`);
         localStorage.setItem("refreshToken", `${response.data.refresh_token}`);
         queryClient.invalidateQueries();
-        // TODO 로그인 성공 시 로직 추가
+        setToastMessage("반갑습니다.");
 
-        // if (userInfoData) {
-        //   loginSuccessEvent(userInfoData.id, "gocho");
-        //   setToastMessage("님 반갑습니다.", userInfoData.nickname);
-        // }
-        // closeModal();
+        if (actionBarHandlers.closeHandler) {
+          actionBarHandlers.closeHandler();
+        }
       },
     });
   };
