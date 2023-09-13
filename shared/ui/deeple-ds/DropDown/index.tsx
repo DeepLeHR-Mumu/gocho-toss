@@ -94,13 +94,15 @@ export const DropDown = ({
           <Menu
             {...menu}
             options={
+              // TODO: 메뉴아이템 별로 Close의 상황이 나올 수 있는지 논의하기
               menu.closeAfterClickEvent
                 ? menu.options?.map((option) => ({
                     ...option,
                     onClick: () => {
+                      setMenuVisible(false);
+
                       if (option.onClick) {
                         option.onClick();
-                        setMenuVisible(false);
                       }
                     },
                   }))

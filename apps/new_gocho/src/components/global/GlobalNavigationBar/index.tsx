@@ -133,11 +133,56 @@ export const GlobalNavigationBar = () => {
                         customTitle={<Profile src={userData.image} size={40} />}
                         menu={{
                           width: 180,
+                          closeAfterClickEvent: true,
                           options: [
-                            { content: <Link href="/mypage">내 계정 관리</Link> },
-                            { content: <Link href="/mypage">북마크</Link> },
-                            { content: <Link href="/mypage">나의 QnA</Link> },
-                            { content: <Link href="/mypage">알림 설정</Link> },
+                            {
+                              content: (
+                                <Link
+                                  href={{
+                                    pathname: "/mypage",
+                                    query: { type: "profile" },
+                                  }}
+                                >
+                                  프로필 관리
+                                </Link>
+                              ),
+                            },
+                            {
+                              content: (
+                                <Link
+                                  href={{
+                                    pathname: "/mypage",
+                                    query: { type: "account" },
+                                  }}
+                                >
+                                  계정 관리
+                                </Link>
+                              ),
+                            },
+                            {
+                              content: (
+                                <Link
+                                  href={{
+                                    pathname: "/mypage",
+                                    query: { type: "bookmark" },
+                                  }}
+                                >
+                                  북마크
+                                </Link>
+                              ),
+                            },
+                            {
+                              content: (
+                                <Link
+                                  href={{
+                                    pathname: "/mypage",
+                                    query: { type: "alarm" },
+                                  }}
+                                >
+                                  알림 설정
+                                </Link>
+                              ),
+                            },
                           ],
                           footer: { content: "로그아웃", onClick: doLogout },
                         }}
