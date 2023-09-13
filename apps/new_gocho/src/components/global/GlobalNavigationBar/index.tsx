@@ -12,10 +12,10 @@ import { useGetDeviceType } from "@/globalStates";
 import { INTERNAL_URL } from "@/pages/constants";
 import logoWhite from "@/public/logoWhite.svg";
 import logoBlue from "@/public/logoBlue.svg";
+import { SearchModal } from "@/components/modal/SearchModal";
+import { LoginModal } from "@/components/modal/LoginModal";
 
 import { Layout } from "../../Layout";
-import { LoginModal } from "../../modal/LoginModal";
-import { SearchModal } from "../../modal/SearchModal";
 
 import { THEME_WHITE_PAGES } from "./constant";
 import { getCssObj } from "./style";
@@ -106,7 +106,7 @@ export const GlobalNavigationBar = () => {
               <div css={navigationArea}>
                 <nav>
                   <ul css={navigationWrapper}>
-                    <li css={router.pathname.includes(INTERNAL_URL.JDS_LIST) && selected}>
+                    <li css={router.pathname.includes(INTERNAL_URL.JDS) && selected}>
                       <Link href={INTERNAL_URL.JDS_LIST}>채용공고</Link>
                     </li>
                     <li css={router.pathname.includes(INTERNAL_URL.COMPANY) && selected}>
@@ -133,11 +133,56 @@ export const GlobalNavigationBar = () => {
                         customTitle={<Profile src={userData.image} size={40} />}
                         menu={{
                           width: 180,
+                          closeAfterClickEvent: true,
                           options: [
-                            { content: <Link href="/mypage">내 계정 관리</Link> },
-                            { content: <Link href="/mypage">북마크</Link> },
-                            { content: <Link href="/mypage">나의 QnA</Link> },
-                            { content: <Link href="/mypage">알림 설정</Link> },
+                            {
+                              content: (
+                                <Link
+                                  href={{
+                                    pathname: "/mypage",
+                                    query: { type: "profile" },
+                                  }}
+                                >
+                                  프로필 관리
+                                </Link>
+                              ),
+                            },
+                            {
+                              content: (
+                                <Link
+                                  href={{
+                                    pathname: "/mypage",
+                                    query: { type: "account" },
+                                  }}
+                                >
+                                  계정 관리
+                                </Link>
+                              ),
+                            },
+                            {
+                              content: (
+                                <Link
+                                  href={{
+                                    pathname: "/mypage",
+                                    query: { type: "bookmark" },
+                                  }}
+                                >
+                                  북마크
+                                </Link>
+                              ),
+                            },
+                            {
+                              content: (
+                                <Link
+                                  href={{
+                                    pathname: "/mypage",
+                                    query: { type: "alarm" },
+                                  }}
+                                >
+                                  알림 설정
+                                </Link>
+                              ),
+                            },
                           ],
                           footer: { content: "로그아웃", onClick: doLogout },
                         }}

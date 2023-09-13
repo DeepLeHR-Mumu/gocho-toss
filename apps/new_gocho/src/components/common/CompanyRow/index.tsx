@@ -5,8 +5,8 @@ import { Profile } from "shared-ui/deeple-ds";
 
 import { useGetDeviceType } from "@/globalStates";
 import { LoginModal } from "@/components/modal/LoginModal";
-
 import { INTERNAL_URL } from "@/pages/constants";
+
 import { CompanyBookmark } from "../CompanyBookmark";
 
 import { CompanyRowProps } from "./type";

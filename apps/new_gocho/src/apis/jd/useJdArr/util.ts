@@ -12,8 +12,7 @@ export const selector = (jdArr: JdObjDef[], page_result: PageResultDef) => {
     isLast: page_result.is_last,
   };
 
-  const jdDataArr = jdArr.map((jd) => {
-    return {
+  const jdDataArr = jdArr.map((jd) => ({
       id: jd.id,
       company: {
         id: jd.company.id,
@@ -40,7 +39,6 @@ export const selector = (jdArr: JdObjDef[], page_result: PageResultDef) => {
       contractType: jd.contract_type,
       task: jd.task,
       isExpired: jd.is_expired,
-    };
-  });
+    }));
   return { jdDataArr, pageResult };
 };

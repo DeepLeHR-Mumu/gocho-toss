@@ -10,12 +10,8 @@ export const getUserProfile = async () => {
 };
 
 // TODO: swagger 에서 Deprecated 명시, 논의 후 수정
-export const useUserProfile = () => {
-  return useQuery({
+export const useUserProfile = () => useQuery({
     queryKey: userInfoKeyObj.userProfile,
     queryFn: getUserProfile,
-    select: ({ data }) => {
-      return selector(data);
-    },
+    select: ({ data }) => selector(data),
   });
-};

@@ -9,8 +9,7 @@ export const selector = ({ company, comment_arr }: CompanyCommentArrDef) => {
   }
   return {
     company: { name: company.name, logoUrl: company.logo_url, id: company.id },
-    commentArr: comment_arr.map((comment) => {
-      return {
+    commentArr: comment_arr.map((comment) => ({
         id: comment.id,
         uploader: {
           id: comment.uploader.id,
@@ -23,7 +22,6 @@ export const selector = ({ company, comment_arr }: CompanyCommentArrDef) => {
         isLiked: comment.is_liked,
         dislikeCount: comment.dislike,
         isDisliked: comment.is_disliked,
-      };
-    }),
+      })),
   };
 };

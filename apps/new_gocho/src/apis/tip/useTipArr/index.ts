@@ -16,12 +16,8 @@ export const getTipArr: GetTipArrDef = async ({ queryKey: [{ requestObj }] }) =>
   return data;
 };
 
-export const useTipArr = (requestObj: TipArrRequestObjDef) => {
-  return useQuery({
+export const useTipArr = (requestObj: TipArrRequestObjDef) => useQuery({
     queryKey: tipArrKeyObj.tipArr(requestObj),
     queryFn: getTipArr,
-    select: ({ data }) => {
-      return selector(data);
-    },
+    select: ({ data }) => selector(data),
   });
-};

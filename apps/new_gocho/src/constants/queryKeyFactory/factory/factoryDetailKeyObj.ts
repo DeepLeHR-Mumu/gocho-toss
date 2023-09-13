@@ -4,10 +4,6 @@ export interface FactoryDetailRequestObjDef {
 
 export const factoryDetailKeyObj = {
   all: [{ data: "factoryDetail" }] as const,
-  detail: (requestObj: FactoryDetailRequestObjDef) => {
-    return [{ data: "factoryDetail", requestObj }] as const;
-  },
-  edit: (requestObj: FactoryDetailRequestObjDef) => {
-    return [{ data: "factoryEdit", requestObj }] as const;
-  },
+  detail: (requestObj: FactoryDetailRequestObjDef) => [{ data: "factoryDetail", requestObj }] as const,
+  edit: (requestObj: FactoryDetailRequestObjDef) => [{ data: "factoryEdit", requestObj }] as const,
 };

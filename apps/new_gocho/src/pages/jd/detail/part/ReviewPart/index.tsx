@@ -136,8 +136,7 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
         ) : (
           <div css={cssObj.contentsWrapper(false)} ref={scrollRef}>
             {companyCommentData?.comment_arr && companyCommentData.comment_arr.length !== 0 ? (
-              companyCommentData.comment_arr.map((comment) => {
-                return (
+              companyCommentData.comment_arr.map((comment) => (
                   <Review
                     key={comment.id}
                     companyId={company.id}
@@ -149,8 +148,7 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
                     thumbsDown={{ count: comment.dislike, isClicked: comment.is_disliked }}
                     isMyComment={comment.uploader.nickname === userData?.nickname}
                   />
-                );
-              })
+                ))
             ) : (
               <p css={cssObj.noComment}>
                 아직 등록된 {reviewState === "jd" ? "공고" : "기업"} 리뷰가 없습니다.

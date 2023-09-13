@@ -5,11 +5,9 @@ import { CompanyListProps } from "./type";
 
 import { cssObj } from "./style";
 
-export const CompanyList: FunctionComponent<CompanyListProps> = ({ companyData }) => {
-  return (
+export const CompanyList: FunctionComponent<CompanyListProps> = ({ companyData }) => (
     <div css={cssObj.companyListBox}>
-      {companyData?.companyDataArr.map(({ id, industry, size, name, logoUrl, isBookmark }) => {
-        return (
+      {companyData?.companyDataArr.map(({ id, industry, size, name, logoUrl, isBookmark }) => (
           <CompanyRow
             key={id}
             id={id}
@@ -20,8 +18,6 @@ export const CompanyList: FunctionComponent<CompanyListProps> = ({ companyData }
             border
             bookmark={{ state: isBookmark }}
           />
-        );
-      })}
+        ))}
     </div>
   );
-};

@@ -10,11 +10,9 @@ const deleteUserInfo: DeleteUserInfoDef = async (requestObj) => {
   return data;
 };
 
-export const useDeleteUserInfo: UseDeleteUserInfoDef = (onSuccessAction) => {
-  return useMutation<ResponseDef, AxiosError, RequestObjDef>({
+export const useDeleteUserInfo: UseDeleteUserInfoDef = (onSuccessAction) => useMutation<ResponseDef, AxiosError, RequestObjDef>({
     mutationFn: deleteUserInfo,
     onSuccess: () => {
       onSuccessAction();
     },
   });
-};

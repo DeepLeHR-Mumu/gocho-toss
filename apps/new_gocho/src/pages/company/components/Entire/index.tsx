@@ -1,8 +1,8 @@
 import Link from "next/link";
 
+import { useCompanyArr } from "@/apis/company";
 import { HeaderTitle } from "../HeaderTitle";
 
-import { useCompanyArr } from "@/apis/company";
 
 import { cssObj } from "./style";
 import { CompanyList } from "../CompanyList";

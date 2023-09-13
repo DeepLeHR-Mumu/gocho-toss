@@ -14,8 +14,7 @@ export const getInfiniteUserJdBookmarkArr: GetInfiniteJdArrDef = async ({ queryK
   return { ...data, nextPage };
 };
 
-export const useInfiniteUserJdBookmarkArr = (requestObj: UserBookmarkArrRequestDef) => {
-  return useInfiniteQuery({
+export const useInfiniteUserJdBookmarkArr = (requestObj: UserBookmarkArrRequestDef) => useInfiniteQuery({
     queryKey: userBookmarkKeyObj.infinite(requestObj),
     queryFn: getInfiniteUserJdBookmarkArr,
     getNextPageParam: (responseObj) => {
@@ -25,13 +24,8 @@ export const useInfiniteUserJdBookmarkArr = (requestObj: UserBookmarkArrRequestD
         : responseObj.page_result.page + 1;
     },
     enabled: Boolean(requestObj.userId),
-    select: (data) => {
-      return {
-        pages: data.pages.map((page) => {
-          return selector(page.data, page.page_result);
-        }),
+    select: (data) => ({
+        pages: data.pages.map((page) => selector(page.data, page.page_result)),
         pageParams: [...data.pageParams],
-      };
-    },
+      }),
   });
-};

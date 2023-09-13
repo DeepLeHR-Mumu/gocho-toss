@@ -32,14 +32,12 @@ export const ReportUserModal = ({ companyId, userId, closeHandler }: ReportUserM
     <ModalWithTitle width={25} title="신고하기" closeHandler={closeHandler}>
       <form onSubmit={handleSubmit(submitReport)}>
         <div css={cssObj.wrapper}>
-          {REPORT_REASON_ARR.map((reason) => {
-            return (
+          {REPORT_REASON_ARR.map((reason) => (
               <div key={reason} css={cssObj.rowWrapper}>
                 <Radio value={reason} {...register("reason")} />
                 <span>{reason}</span>
               </div>
-            );
-          })}
+            ))}
         </div>
         <Button type="submit" size="small" fill>
           확인

@@ -9,8 +9,7 @@ import { CommentThumbs, BlockReportDropDown, DeleteComment } from "@/components"
 import { ReviewProps } from "./type";
 import { cssObj } from "./style";
 
-export const Review = ({ companyId, comment, isMyComment }: ReviewProps) => {
-  return (
+export const Review = ({ companyId, comment, isMyComment }: ReviewProps) => (
     <div css={cssObj.wrapper}>
       <div css={cssObj.profileWrapper}>
         <Profile src={comment.uploader.image} size={40} />
@@ -50,4 +49,3 @@ export const Review = ({ companyId, comment, isMyComment }: ReviewProps) => {
       </div>
     </div>
   );
-};

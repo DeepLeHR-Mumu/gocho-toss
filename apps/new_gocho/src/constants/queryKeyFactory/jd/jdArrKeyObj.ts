@@ -1,5 +1,6 @@
 export interface JdArrRequestObjDef {
-  order: "recent" | "popular" | "rand" | "view" | "end" | "com" | undefined;
+  enable?: boolean;
+  order: "recent" | "popular" | "rand" | "view" | "end" | "com";
   page?: number;
   size?: number;
   contractType?: string;
@@ -16,16 +17,12 @@ export interface JdArrRequestObjDef {
 
 export const jdArrKeyObj = {
   all: [{ data: "jdArr" }] as const,
-  jdArr: (requestObj: JdArrRequestObjDef) => {
-    return [{ data: "jdArr", requestObj }] as const;
-  },
-  infinite: (requestObj: JdArrRequestObjDef) => {
-    return [
+  jdArr: (requestObj: JdArrRequestObjDef) => [{ data: "jdArr", requestObj }] as const,
+  infinite: (requestObj: JdArrRequestObjDef) => [
       {
         data: "jdArr",
         usage: "infinite",
         requestObj,
       },
-    ] as const;
-  },
+    ] as const,
 };

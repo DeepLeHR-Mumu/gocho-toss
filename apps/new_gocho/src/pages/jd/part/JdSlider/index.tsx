@@ -30,9 +30,7 @@ export const JdSlider: FunctionComponent<JdSliderProps> = ({ title, order, filte
             css={cssObj.sliderButton}
             aria-label="이전 추천공고보기"
             type="button"
-            onClick={() => {
-              return sliderRef.current?.slickPrev();
-            }}
+            onClick={() => sliderRef.current?.slickPrev()}
           >
             <FiChevronLeft />
           </button>
@@ -40,9 +38,7 @@ export const JdSlider: FunctionComponent<JdSliderProps> = ({ title, order, filte
             css={cssObj.sliderButton}
             aria-label="이전 추천공고보기"
             type="button"
-            onClick={() => {
-              return sliderRef.current?.slickNext();
-            }}
+            onClick={() => sliderRef.current?.slickNext()}
           >
             <FiChevronRight />
           </button>
@@ -51,15 +47,11 @@ export const JdSlider: FunctionComponent<JdSliderProps> = ({ title, order, filte
       <div css={cssObj.sliderContainer}>
         {isMobile ? (
           <div css={cssObj.cardContainer}>
-            {jdDataObj?.jdDataArr.map((jd) => {
-              return <JdCard key={jd.id} jd={jd} />;
-            })}
+            {jdDataObj?.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)}
           </div>
         ) : (
           <Slider {...setCarouselSetting} ref={sliderRef}>
-            {jdDataObj?.jdDataArr.map((jd) => {
-              return <JdCard key={jd.id} jd={jd} />;
-            })}
+            {jdDataObj?.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)}
           </Slider>
         )}
       </div>

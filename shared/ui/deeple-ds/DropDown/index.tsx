@@ -40,7 +40,7 @@ export const DropDown = ({
 
     return defaultLocation;
   });
-
+  const dropDownWrapperRef = useRef<HTMLDivElement | null>(null);
   const customTitleRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -50,8 +50,30 @@ export const DropDown = ({
     }
   }, []);
 
+  useEffect(() => {
+    if (!menuVisible) {
+      return;
+    }
+    const close = (event: MouseEvent) => {
+      if (
+        dropDownWrapperRef.current &&
+        event.target instanceof Node &&
+        !dropDownWrapperRef.current.contains(event.target)
+      ) {
+        setMenuVisible(false);
+      }
+    };
+
+    window.addEventListener("click", close);
+
+    // eslint-disable-next-line consistent-return
+    return () => {
+      window.removeEventListener("click", close);
+    };
+  }, [menuVisible]);
+
   return (
-    <div css={dropDownCssObj.dropDownWrapper}>
+    <div css={dropDownCssObj.dropDownWrapper} ref={dropDownWrapperRef}>
       <button type="button" css={dropDownCssObj.titleWrapper} onClick={() => setMenuVisible(!menuVisible)}>
         {customTitle === undefined && (
           <>
@@ -72,13 +94,15 @@ export const DropDown = ({
           <Menu
             {...menu}
             options={
+              // TODO: 메뉴아이템 별로 Close의 상황이 나올 수 있는지 논의하기
               menu.closeAfterClickEvent
                 ? menu.options?.map((option) => ({
                     ...option,
                     onClick: () => {
+                      setMenuVisible(false);
+
                       if (option.onClick) {
                         option.onClick();
-                        setMenuVisible(false);
                       }
                     },
                   }))

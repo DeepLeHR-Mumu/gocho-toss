@@ -2,8 +2,8 @@ import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { Button, Input } from "shared-ui/deeple-ds";
-import { cssObj } from "./style";
 import { usePatchUserPassword } from "@/apis/auth";
+import { cssObj } from "./style";
 import { PwdChangeFormProps, PwdInputForm } from "./type";
 
 export const PwdChangeForm: FC<PwdChangeFormProps> = ({ userData, handleFormClose }) => {
@@ -85,9 +85,7 @@ export const PwdChangeForm: FC<PwdChangeFormProps> = ({ userData, handleFormClos
               required: true,
               minLength: { value: 8, message: "8자 이상 입력해주세요." },
               maxLength: { value: 20, message: "20자까지 입력 가능합니다." },
-              validate: (checkPassword, formValues) => {
-                return checkPassword === formValues.newPassword;
-              },
+              validate: (checkPassword, formValues) => checkPassword === formValues.newPassword,
             })}
             state={{
               state: errors.checkPassword ? "error" : "default",

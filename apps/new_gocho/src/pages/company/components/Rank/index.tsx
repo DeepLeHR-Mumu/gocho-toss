@@ -1,8 +1,8 @@
+import { useCompanyArr } from "@/apis/company/useCompanyArr";
 import { HeaderTitle } from "../HeaderTitle";
 import { RankItem } from "./RankItem";
 import { TodayIcon } from "./TodayIcon";
 
-import { useCompanyArr } from "@/apis/company/useCompanyArr";
 
 import { cssObj } from "./style";
 
@@ -19,8 +19,7 @@ export const RankCompany = () => {
         <TodayIcon />
       </div>
       <div css={cssObj.rankItemBox}>
-        {rankCompanyArr?.companyDataArr.map(({ id, name, size, logoUrl, industry }, index) => {
-          return (
+        {rankCompanyArr?.companyDataArr.map(({ id, name, size, logoUrl, industry }, index) => (
             <RankItem
               key={id}
               id={id}
@@ -30,8 +29,7 @@ export const RankCompany = () => {
               industry={industry}
               rank={index + 1}
             />
-          );
-        })}
+          ))}
       </div>
     </section>
   );

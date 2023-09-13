@@ -1,8 +1,6 @@
 import { ParsedUrlQuery } from "querystring";
 
-export const isInvalidDate = (date: Date) => {
-  return Number.isNaN(date.getTime());
-};
+export const isInvalidDate = (date: Date) => Number.isNaN(date.getTime());
 
 export const isExpired = (date: Date) => {
   const today = new Date();
@@ -27,9 +25,7 @@ export const isStringArray = (param: unknown): param is string[] => {
     return false;
   }
 
-  return param.every((item) => {
-    return typeof item === "string";
-  });
+  return param.every((item) => typeof item === "string");
 };
 
 export const isQueryString = <T extends keyof ParsedUrlQuery>(query: ParsedUrlQuery[T]): query is string => {
@@ -43,6 +39,4 @@ export const isQueryString = <T extends keyof ParsedUrlQuery>(query: ParsedUrlQu
   return false;
 };
 
-export const copyToClipboard = (target: string) => {
-  return navigator.clipboard.writeText(target);
-};
+export const copyToClipboard = (target: string) => navigator.clipboard.writeText(target);

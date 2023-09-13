@@ -19,23 +19,19 @@ export const AdPart: FunctionComponent = () => {
   return (
     <section css={cssObj.sectionContainer}>
       <Slider {...setCarouselSetting(isMobile)} ref={sliderRef} css={cssObj.sliderContainer}>
-        {bannerDataObj?.bannerDataArr.map((banner) => {
-          return (
+        {bannerDataObj?.bannerDataArr.map((banner) => (
             <Link key={`indexMainBanner${banner.id}`} css={cssObj.banner} href={banner.link || ""}>
               <div css={cssObj.imageWrapper}>
                 <Image src={banner.pcImageUrl} alt="메인 배너" fill priority />
               </div>
             </Link>
-          );
-        })}
+          ))}
       </Slider>
       <button
         css={cssObj.sliderButton("left")}
         aria-label="이전 추천공고보기"
         type="button"
-        onClick={() => {
-          return sliderRef.current?.slickPrev();
-        }}
+        onClick={() => sliderRef.current?.slickPrev()}
       >
         <FiChevronLeft />
       </button>
@@ -43,9 +39,7 @@ export const AdPart: FunctionComponent = () => {
         css={cssObj.sliderButton("right")}
         aria-label="이전 추천공고보기"
         type="button"
-        onClick={() => {
-          return sliderRef.current?.slickNext();
-        }}
+        onClick={() => sliderRef.current?.slickNext()}
       >
         <FiChevronRight />
       </button>

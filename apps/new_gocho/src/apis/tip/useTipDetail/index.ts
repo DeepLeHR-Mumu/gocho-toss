@@ -11,12 +11,8 @@ export const getTipDetail: GetTipDetailDef = async ({ queryKey: [{ requestObj }]
   return data;
 };
 
-export const useTipDetail = (requestObj: TipRequestObjDef) => {
-  return useQuery({
+export const useTipDetail = (requestObj: TipRequestObjDef) => useQuery({
     queryKey: tipDetailKeyObj.detail(requestObj),
     queryFn: getTipDetail,
-    select: ({ data }) => {
-      return selector(data);
-    },
+    select: ({ data }) => selector(data),
   });
-};

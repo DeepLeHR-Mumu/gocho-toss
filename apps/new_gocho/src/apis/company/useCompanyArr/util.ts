@@ -11,8 +11,7 @@ export const selector = (companyArr: CompanyDef[], page_result: PageResultDef) =
     isFirst: page_result.is_first,
     isLast: page_result.is_last,
   };
-  const companyDataArr = companyArr.map((data) => {
-    return {
+  const companyDataArr = companyArr.map((data) => ({
       id: data.id,
       logoUrl: data.logo_url,
       name: data.name,
@@ -45,7 +44,6 @@ export const selector = (companyArr: CompanyDef[], page_result: PageResultDef) =
         exists: data.nozo.exists,
         desc: data.nozo.desc,
       },
-    };
-  });
+    }));
   return { companyDataArr, pageResult };
 };

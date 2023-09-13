@@ -14,13 +14,9 @@ export const getUserJdHistoryArr: GetUserJdHistoryArrDef = async ({ queryKey: [{
   return data;
 };
 
-export const useUserJdHistoryArr = (requestObj: UserHistoryJdArrRequestDef) => {
-  return useQuery({
+export const useUserJdHistoryArr = (requestObj: UserHistoryJdArrRequestDef) => useQuery({
     queryKey: userJdHistoriesKeyObj.jdHistoriesArr(requestObj),
     queryFn: getUserJdHistoryArr,
     enabled: Boolean(requestObj.userId),
-    select: ({ data, page_result }) => {
-      return selector(data, page_result);
-    },
+    select: ({ data, page_result }) => selector(data, page_result),
   });
-};

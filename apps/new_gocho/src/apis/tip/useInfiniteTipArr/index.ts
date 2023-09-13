@@ -14,20 +14,12 @@ export const getInfiniteTipArr: GetInfiniteTipArrObjDef = async ({ queryKey: [{ 
   return { ...data, nextPage };
 };
 
-export const useInfiniteTipArr = (requestObj: TipArrRequestObjDef) => {
-  return useInfiniteQuery({
+export const useInfiniteTipArr = (requestObj: TipArrRequestObjDef) => useInfiniteQuery({
     queryKey: tipArrKeyObj.infinite(requestObj),
     queryFn: getInfiniteTipArr,
-    getNextPageParam: (responseObj) => {
-      return responseObj.data.length !== 0 ? responseObj.nextPage : undefined;
-    },
-    select: (data) => {
-      return {
-        pages: data.pages.map((page) => {
-          return selector(page.data);
-        }),
+    getNextPageParam: (responseObj) => responseObj.data.length !== 0 ? responseObj.nextPage : undefined,
+    select: (data) => ({
+        pages: data.pages.map((page) => selector(page.data)),
         pageParams: [...data.pageParams],
-      };
-    },
+      }),
   });
-};

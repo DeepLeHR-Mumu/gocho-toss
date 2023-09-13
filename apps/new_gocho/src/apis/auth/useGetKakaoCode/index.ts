@@ -19,6 +19,4 @@ const getKakaoCode: getKakaoCodeDef = async (requestObj) => {
   });
 };
 
-export const useGetKakaoCode: useGetKakaoCodeProps = () => {
-  return useMutation<ResponseObjDef, AxiosError, RequestObjDef>({ mutationFn: getKakaoCode });
-};
+export const useGetKakaoCode: useGetKakaoCodeProps = () => useMutation<ResponseObjDef, AxiosError, RequestObjDef>({ mutationFn: getKakaoCode });

@@ -6,8 +6,7 @@ import { AdPart } from "./index/part/AdPart";
 import { JdPart } from "./index/part/JdPart";
 import { CompanyPart } from "./index/part/CompanyPart";
 
-const Home: NextPage = () => {
-  return (
+const Home: NextPage = () => (
     <main>
       <AdPart />
       <Layout>
@@ -16,6 +15,5 @@ const Home: NextPage = () => {
       </Layout>
     </main>
   );
-};
 
 export default Home;

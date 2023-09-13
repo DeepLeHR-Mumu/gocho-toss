@@ -13,13 +13,9 @@ export const getCompanyArr: GetCompanyArrDef = async ({ queryKey: [{ requestObj 
   return data;
 };
 
-export const useCompanyArr = (requestObj: CompanyArrRequestDef) => {
-  return useQuery({
+export const useCompanyArr = (requestObj: CompanyArrRequestDef) => useQuery({
     queryKey: companyArrKeyObj.companyArr(requestObj),
     queryFn: getCompanyArr,
     enabled: Boolean(requestObj.order),
-    select: ({ data, page_result }) => {
-      return selector(data, page_result);
-    },
+    select: ({ data, page_result }) => selector(data, page_result),
   });
-};

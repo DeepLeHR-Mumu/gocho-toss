@@ -15,8 +15,7 @@ export const FactoryInfoModal = ({
   bus,
   dormitory,
   close,
-}: FactoryInfoModalProps) => {
-  return (
+}: FactoryInfoModalProps) => (
     <Modal>
       <div css={cssObj.wrapper}>
         <div css={cssObj.header}>
@@ -44,4 +43,3 @@ export const FactoryInfoModal = ({
       </div>
     </Modal>
   );
-};

@@ -12,6 +12,4 @@ const addJdViewCount: AddJdViewCountDef = async (requestObj) => {
   return data;
 };
 
-export const useAddJdViewCount: UseAddJdViewCountProps = () => {
-  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({ mutationFn: addJdViewCount });
-};
+export const useAddJdViewCount: UseAddJdViewCountProps = () => useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({ mutationFn: addJdViewCount });

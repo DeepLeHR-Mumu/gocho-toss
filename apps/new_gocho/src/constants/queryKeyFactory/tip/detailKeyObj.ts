@@ -4,7 +4,5 @@ export interface TipRequestObjDef {
 
 export const tipDetailKeyObj = {
   all: [{ data: "tipDetail" }] as const,
-  detail: (requestObj: TipRequestObjDef) => {
-    return [{ data: "tipDetail", requestObj }] as const;
-  },
+  detail: (requestObj: TipRequestObjDef) => [{ data: "tipDetail", requestObj }] as const,
 };

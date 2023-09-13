@@ -12,13 +12,9 @@ export const getUserCompanyBookmarkArr: GetUserCompanyBookmarkArrDef = async ({ 
   return data;
 };
 
-export const useUserCompanyBookmarkArr = (requestObj: UserBookmarkArrRequestDef) => {
-  return useQuery({
+export const useUserCompanyBookmarkArr = (requestObj: UserBookmarkArrRequestDef) => useQuery({
     queryKey: userBookmarkKeyObj.companyBookmarkArr(requestObj),
     queryFn: getUserCompanyBookmarkArr,
     enabled: Boolean(requestObj.userId),
-    select: ({ data, page_result }) => {
-      return selector(data, page_result);
-    },
+    select: ({ data, page_result }) => selector(data, page_result),
   });
-};

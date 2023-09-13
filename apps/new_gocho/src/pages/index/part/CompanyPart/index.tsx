@@ -34,9 +34,7 @@ export const CompanyPart: FunctionComponent = () => {
       <section css={cssObj.sectionContainer}>
         <h2 css={cssObj.title}>키워드 별 기업 모아보기</h2>
         <Slider {...setCarouselSetting} ref={sliderRef}>
-          {dummyArrCreator(3).map((dummy) => {
-            return <p key={`mainCompanyCard${dummy}`}>{dummy}</p>;
-          })}
+          {dummyArrCreator(3).map((dummy) => <p key={`mainCompanyCard${dummy}`}>{dummy}</p>)}
         </Slider>
       </section>
     );
@@ -47,8 +45,7 @@ export const CompanyPart: FunctionComponent = () => {
       <h2 css={cssObj.title}>키워드 별 기업 모아보기</h2>
       <div css={cssObj.controlContainer}>
         <div css={cssObj.keywordContainer}>
-          {companyKeywordDataObj.map((companyKeyword) => {
-            return (
+          {companyKeywordDataObj.map((companyKeyword) => (
               <Chip
                 type="button"
                 size={isMobile ? "small" : "large"}
@@ -61,17 +58,14 @@ export const CompanyPart: FunctionComponent = () => {
               >
                 {companyKeyword.keyword}
               </Chip>
-            );
-          })}
+            ))}
         </div>
         <div css={cssObj.buttonContainer}>
           <button
             css={cssObj.sliderButton}
             aria-label="이전 회사보기"
             type="button"
-            onClick={() => {
-              return sliderRef.current?.slickPrev();
-            }}
+            onClick={() => sliderRef.current?.slickPrev()}
           >
             <FiChevronLeft />
           </button>
@@ -79,9 +73,7 @@ export const CompanyPart: FunctionComponent = () => {
             css={cssObj.sliderButton}
             aria-label="다음 회사보기"
             type="button"
-            onClick={() => {
-              return sliderRef.current?.slickNext();
-            }}
+            onClick={() => sliderRef.current?.slickNext()}
           >
             <FiChevronRight />
           </button>
@@ -90,8 +82,7 @@ export const CompanyPart: FunctionComponent = () => {
       <div css={cssObj.sliderContainer}>
         {isMobile ? (
           <div css={cssObj.cardContainer}>
-            {selectedCompanyArr?.map((company) => {
-              return (
+            {selectedCompanyArr?.map((company) => (
                 <CompanyCard
                   key={company.id}
                   id={company.id}
@@ -100,13 +91,11 @@ export const CompanyPart: FunctionComponent = () => {
                   hashTagArr={[company.name]}
                   bookmark={{ state: company.isBookmark }}
                 />
-              );
-            })}
+              ))}
           </div>
         ) : (
           <Slider {...setCarouselSetting} ref={sliderRef}>
-            {selectedCompanyArr?.map((company) => {
-              return (
+            {selectedCompanyArr?.map((company) => (
                 <CompanyCard
                   key={company.id}
                   id={company.id}
@@ -115,8 +104,7 @@ export const CompanyPart: FunctionComponent = () => {
                   hashTagArr={[company.name]}
                   bookmark={{ state: company.isBookmark }}
                 />
-              );
-            })}
+              ))}
           </Slider>
         )}
       </div>

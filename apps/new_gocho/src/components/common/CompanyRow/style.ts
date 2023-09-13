@@ -4,8 +4,7 @@ import { MOBILE } from "shared-style/mediaQuery";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
-  wrapper: (border: boolean) => {
-    return css`
+  wrapper: (border: boolean) => css`
       display: flex;
       flex-direction: row;
       padding: 1.25rem 1.5rem;
@@ -16,8 +15,7 @@ export const cssObj = {
       ${MOBILE} {
         padding: 0.75rem 0;
       }
-    `;
-  },
+    `,
 
   infoWrapper: css`
     display: flex;

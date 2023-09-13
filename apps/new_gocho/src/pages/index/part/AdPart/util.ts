@@ -1,5 +1,4 @@
-export const setCarouselSetting = (isMobile: boolean) => {
-  return {
+export const setCarouselSetting = (isMobile: boolean) => ({
     speed: 500,
     dots: isMobile,
     arrows: false,
@@ -11,5 +10,4 @@ export const setCarouselSetting = (isMobile: boolean) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     variableWidth: true,
-  };
-};
+  });

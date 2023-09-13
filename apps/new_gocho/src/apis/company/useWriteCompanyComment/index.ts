@@ -14,6 +14,4 @@ const postWriteCompanyComment: PostWriteCompanyCommentDef = async (requestObj) =
   return data;
 };
 
-export const useWriteCompanyComment: useWriteCompanyCommentProps = () => {
-  return useMutation<ResponseDef, AxiosError, RequestObjDef>({ mutationFn: postWriteCompanyComment });
-};
+export const useWriteCompanyComment: useWriteCompanyCommentProps = () => useMutation<ResponseDef, AxiosError, RequestObjDef>({ mutationFn: postWriteCompanyComment });

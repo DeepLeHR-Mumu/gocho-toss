@@ -3,15 +3,15 @@ import { DropDown } from "shared-ui/deeple-ds";
 import { FiChevronDown } from "react-icons/fi";
 
 import { CompanyRow } from "@/components";
-import { NoListCard } from "../NoListCard";
 
 import { useUserInfo } from "@/apis/auth/useUserInfo";
 import { useUserCompanyBookmarkArr } from "@/apis/company";
+import { NoListCard } from "../NoListCard";
 
 import { cssObj } from "./style";
 import { BookmarkFilterType } from "./type";
 
-export const FallowPart = () => {
+export const FollowPart = () => {
   const [filter, setFilter] = useState<BookmarkFilterType>("recent");
   const [title, setTitle] = useState<string>("팔로우한 순");
 
@@ -69,37 +69,33 @@ export const FallowPart = () => {
           menu={{
             width: 180,
             closeAfterClickEvent: true,
-            options: filterOption.map(({ content, setState }) => {
-              return {
-                key: content,
-                focused: title === content,
-                content: <p>{content}</p>,
-                onClick: () => {
-                  setTitle(content);
-                  setState();
-                },
-              };
-            }),
+            options: filterOption.map(({ content, setState }) => ({
+              key: content,
+              focused: title === content,
+              content: <p>{content}</p>,
+              onClick: () => {
+                setTitle(content);
+                setState();
+              },
+            })),
           }}
         />
       </div>
       <div css={cssObj.listWrapper}>
-        {companyList.companyBookmarkDataArr.map(({ id, industry, name, logoUrl, size }) => {
-          return (
-            <CompanyRow
-              key={id}
-              id={id}
-              logo={logoUrl || ""}
-              name={name}
-              size={size}
-              industry={industry}
-              border
-              bookmark={{
-                state: true,
-              }}
-            />
-          );
-        })}
+        {companyList.companyBookmarkDataArr.map(({ id, industry, name, logoUrl, size }) => (
+          <CompanyRow
+            key={id}
+            id={id}
+            logo={logoUrl || ""}
+            name={name}
+            size={size}
+            industry={industry}
+            border
+            bookmark={{
+              state: true,
+            }}
+          />
+        ))}
       </div>
     </div>
   ) : (

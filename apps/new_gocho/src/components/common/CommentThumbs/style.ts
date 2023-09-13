@@ -3,8 +3,7 @@ import { NEWCOLORS } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
-  thumbsUpWrapper: (isClicked: boolean) => {
-    return css`
+  thumbsUpWrapper: (isClicked: boolean) => css`
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
@@ -13,11 +12,9 @@ export const cssObj = {
       svg {
         color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY400};
       }
-    `;
-  },
+    `,
 
-  thumbsDownWrapper: (isClicked: boolean) => {
-    return css`
+  thumbsDownWrapper: (isClicked: boolean) => css`
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
@@ -26,8 +23,7 @@ export const cssObj = {
       svg {
         color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.BLUEGRAY400};
       }
-    `;
-  },
+    `,
 
   large: css`
     svg {

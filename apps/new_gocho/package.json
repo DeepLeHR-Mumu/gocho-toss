@@ -35,11 +35,13 @@
     "react-slick": "^0.29.0",
     "shared-api": "workspace:^",
     "shared-constant": "workspace:^",
+    "shared-ga": "workspace:^",
     "shared-hooks": "workspace:^",
     "shared-image": "workspace:^",
     "shared-style": "workspace:^",
     "shared-type": "workspace:^",
     "shared-ui": "workspace:^",
+    "shared-user": "workspace:^",
     "shared-util": "workspace:^",
     "typescript": "4.7.2",
     "zustand": "4.3.8"

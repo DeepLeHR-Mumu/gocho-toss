@@ -7,8 +7,10 @@ export const INTERNAL_URL = {
   MAIN: "/",
   SEARCH: "/search",
   COMPANY: "/company",
+  COMPANY_LIST: "/company/list",
   COMPANY_DETAIL: "/company/detail",
-  JDS_LIST: "/jd",
+  JDS: "/jd",
+  JDS_LIST: "/jd/list",
   JDS_DETAIL: "/jd/detail",
   COMMUNITY: "/community",
 

@@ -4,7 +4,5 @@ export interface CommunityCommentArrReqObj {
 
 export const communityCommentArrKeyObj = {
   all: [{ data: "communityCommentArr" }] as const,
-  commentArr: (requestObj: CommunityCommentArrReqObj) => {
-    return [{ data: "communityCommentArr", requestObj }] as const;
-  },
+  commentArr: (requestObj: CommunityCommentArrReqObj) => [{ data: "communityCommentArr", requestObj }] as const,
 };

@@ -66,8 +66,7 @@ export const SearchDropDown = ({
       {recentWordArr.length !== 0 && dropDownVisible && (
         <div css={cssObj.dropDownWrapper}>
           <ul>
-            {recentWordArr.slice(0, 10).map((recentWord) => {
-              return (
+            {recentWordArr.slice(0, 10).map((recentWord) => (
                 <li key={recentWord} css={cssObj.listItem}>
                   <Image src={recentLogo} alt="recent" />
                   <button
@@ -83,8 +82,7 @@ export const SearchDropDown = ({
                   </button>
                   <FiArrowUpLeft css={cssObj.arrow} />
                 </li>
-              );
-            })}
+              ))}
           </ul>
         </div>
       )}

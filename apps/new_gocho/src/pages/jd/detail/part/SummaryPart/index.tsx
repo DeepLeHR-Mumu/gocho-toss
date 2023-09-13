@@ -9,8 +9,7 @@ import { Layout } from "@/components";
 import { SummaryPartProps } from "./type";
 import { cssObj } from "./style";
 
-export const SummaryPart = ({ company, title, endTime, view }: SummaryPartProps) => {
-  return (
+export const SummaryPart = ({ company, title, endTime, view }: SummaryPartProps) => (
     <section css={cssObj.background}>
       <Layout>
         <div css={cssObj.wrapper}>
@@ -42,4 +41,3 @@ export const SummaryPart = ({ company, title, endTime, view }: SummaryPartProps)
       </Layout>
     </section>
   );
-};

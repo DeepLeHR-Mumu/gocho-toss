@@ -4,8 +4,7 @@ import { NEWTEXTS } from "shared-style/text";
 import { MOBILE } from "shared-style/mediaQuery";
 
 export const cssObj = {
-  cardWrapper: (isButtonExist: boolean) => {
-    return css`
+  cardWrapper: (isButtonExist: boolean) => css`
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -22,11 +21,9 @@ export const cssObj = {
         height: ${isButtonExist ? "12.75rem" : "9rem"};
         padding: ${isButtonExist ? "1.25rem 1rem" : "1.25rem 1.5rem 1.25rem 1.4375rem"};
       }
-    `;
-  },
+    `,
 
-  name: (isButtonExist: boolean) => {
-    return css`
+  name: (isButtonExist: boolean) => css`
       width: 100%;
       text-align: center;
       margin-top: 1rem;
@@ -41,11 +38,9 @@ export const cssObj = {
         margin-bottom: 0;
         ${isButtonExist ? NEWTEXTS.TITLE6 : NEWTEXTS.TITLE5}
       }
-    `;
-  },
+    `,
 
-  hashTags: (isButtonExist: boolean) => {
-    return css`
+  hashTags: (isButtonExist: boolean) => css`
       width: 100%;
       display: flex;
       justify-content: center;
@@ -62,6 +57,5 @@ export const cssObj = {
         ${NEWTEXTS.TITLE1}
         ${isButtonExist ? "" : "display: none;"}
       }
-    `;
-  },
+    `,
 };

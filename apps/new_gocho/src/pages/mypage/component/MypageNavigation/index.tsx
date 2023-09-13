@@ -8,8 +8,7 @@ import { Box } from "../Box";
 import { cssObj } from "./style";
 import { MypageNavigationProps } from "./type";
 
-export const MypageNavigation: FC<MypageNavigationProps> = ({ currentPart }) => {
-  return (
+export const MypageNavigation: FC<MypageNavigationProps> = ({ currentPart }) => (
     <div css={cssObj.navigationBox}>
       <Box>
         <div css={cssObj.sideNavigation}>
@@ -64,4 +63,3 @@ export const MypageNavigation: FC<MypageNavigationProps> = ({ currentPart }) => 
       </Box>
     </div>
   );
-};

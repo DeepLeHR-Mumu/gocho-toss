@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FiShare2, FiEye } from "react-icons/fi";
@@ -9,6 +10,7 @@ import { useCompanyDetail } from "@/apis/company";
 import { useUserProfile } from "@/apis/auth";
 import { isQueryString } from "@/utils";
 import { INTERNAL_URL } from "@/pages/constants";
+import backgroundImage from "@/public/companyBackground.png";
 
 import { cssObj } from "./style";
 
@@ -28,6 +30,9 @@ export const TitlePart = () => {
   return (
     <>
       <section css={cssObj.background}>
+        <div css={cssObj.imageWrapper}>
+          <Image src={backgroundImage} alt="company" fill priority />
+        </div>
         {/** TODO 사진 추가? */}
         <Layout>
           <div css={cssObj.wrapper}>

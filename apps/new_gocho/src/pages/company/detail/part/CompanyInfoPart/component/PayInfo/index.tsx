@@ -5,8 +5,7 @@ import { commonCssObj } from "@/pages/company/detail/style";
 import { PayInfoProps } from "./type";
 import { cssObj } from "./style";
 
-export const PayInfo = ({ payStart, payAvg, payDesc }: PayInfoProps) => {
-  return (
+export const PayInfo = ({ payStart, payAvg, payDesc }: PayInfoProps) => (
     <section css={commonCssObj.box}>
       <h3 css={commonCssObj.title}>연봉 정보</h3>
       <Divider />
@@ -26,4 +25,3 @@ export const PayInfo = ({ payStart, payAvg, payDesc }: PayInfoProps) => {
       </div>
     </section>
   );
-};

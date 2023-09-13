@@ -10,8 +10,6 @@ const patchUserPassword: PatchUserPasswordDef = async (requestObj) => {
   return data;
 };
 
-export const usePatchUserPassword: UsePatchUserPasswordProps = () => {
-  return useMutation<UserPasswordResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
+export const usePatchUserPassword: UsePatchUserPasswordProps = () => useMutation<UserPasswordResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
     mutationFn: patchUserPassword,
   });
-};

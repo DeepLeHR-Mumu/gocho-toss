@@ -1,8 +1,7 @@
 import { JdDetailObjDef } from "../type/jdDetail";
 
 export const selector = (jdDetailObj: JdDetailObjDef) => {
-  const factoryCamelArr = jdDetailObj.place.factory_arr?.map((factory) => {
-    return {
+  const factoryCamelArr = jdDetailObj.place.factory_arr?.map((factory) => ({
       id: factory.id,
       name: factory.name,
       address: factory.address,
@@ -17,8 +16,7 @@ export const selector = (jdDetailObj: JdDetailObjDef) => {
         exists: factory.dormitory.exists,
         desc: factory.dormitory.desc,
       },
-    };
-  });
+    }));
 
   return {
     id: jdDetailObj.id,

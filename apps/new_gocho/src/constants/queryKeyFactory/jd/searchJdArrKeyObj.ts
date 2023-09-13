@@ -6,7 +6,5 @@ export interface SearchJdRequestObj {
 
 export const searchJdArrKeyObj = {
   all: [{ data: "searchJdArr" }] as const,
-  searchArr: (requestObj: SearchJdRequestObj) => {
-    return [{ data: "searchJdArr", requestObj }] as const;
-  },
+  searchArr: (requestObj: SearchJdRequestObj) => [{ data: "searchJdArr", requestObj }] as const,
 };

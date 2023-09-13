@@ -3,8 +3,7 @@ import { NEWCOLORS } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
-  wrapper: (width: number) => {
-    return css`
+  wrapper: (width: number) => css`
       width: ${width}rem;
       display: flex;
       flex-direction: column;
@@ -16,8 +15,7 @@ export const cssObj = {
       padding: 1.5rem;
       background-color: ${NEWCOLORS.WHITE};
       overflow: auto;
-    `;
-  },
+    `,
 
   header: css`
     display: flex;

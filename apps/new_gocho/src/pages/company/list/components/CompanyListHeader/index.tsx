@@ -32,8 +32,7 @@ export const CompanyListHeader: FunctionComponent<CompanyListHeaderProps> = ({
           menu={{
             width: 180,
             closeAfterClickEvent: true,
-            options: filterOption.map(({ key, content, setState }) => {
-              return {
+            options: filterOption.map(({ key, content, setState }) => ({
                 key,
                 focused: title === content,
                 content: <p>{content}</p>,
@@ -41,8 +40,7 @@ export const CompanyListHeader: FunctionComponent<CompanyListHeaderProps> = ({
                   setTitle(content);
                   setState();
                 },
-              };
-            }),
+              })),
           }}
         />
       </div>

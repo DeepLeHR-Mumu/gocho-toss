@@ -4,7 +4,5 @@ export interface CommunityPostingDetailRequestDef {
 
 export const communityPostingDetailKeyObj = {
   all: [{ data: "communityPostingDetail" }] as const,
-  postingDetail: (requestObj: CommunityPostingDetailRequestDef) => {
-    return [{ data: "communityPostingDetail", requestObj }] as const;
-  },
+  postingDetail: (requestObj: CommunityPostingDetailRequestDef) => [{ data: "communityPostingDetail", requestObj }] as const,
 };
