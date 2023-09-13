@@ -8,7 +8,7 @@ import { useCompanyArr } from "@/apis/company";
 
 import { INTERNAL_URL } from "@/pages/constants";
 
-import { Layout } from "@/components";
+import { Layout } from "../../Layout";
 import { CompanyCard } from "../../common/CompanyCard";
 import { JdRow } from "../../common/JdRow";
 

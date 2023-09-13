@@ -2,7 +2,8 @@ import { useState } from "react";
 import { FiMoreVertical } from "react-icons/fi";
 import { DropDown } from "shared-ui/deeple-ds";
 
-import { ReportUserModal, BlockUserModal } from "@/components";
+import { ReportUserModal } from "../../modal/ReportUserModal";
+import { BlockUserModal } from "../../modal/BlockUserModal";
 
 import { BlockReportDropDownProps } from "./type";
 import { cssObj } from "./style";

@@ -12,8 +12,8 @@ import { useGetDeviceType } from "@/globalStates";
 import { INTERNAL_URL } from "@/pages/constants";
 import logoWhite from "@/public/logoWhite.svg";
 import logoBlue from "@/public/logoBlue.svg";
-import { SearchModal } from "@/components/modal/SearchModal";
-import { LoginModal } from "@/components/modal/LoginModal";
+import { SearchModal } from "../../modal/SearchModal";
+import { LoginModal } from "../../modal/LoginModal";
 
 import { Layout } from "../../Layout";
 
