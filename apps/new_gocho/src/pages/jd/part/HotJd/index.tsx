@@ -9,6 +9,7 @@ import JobiChatting from "shared-image/global/jobi/chatting.png";
 import { useJdArr } from "@/apis/jd";
 import { JdCard } from "@/components/common/JdCard";
 import { useGetDeviceType } from "@/globalStates";
+import { INTERNAL_URL } from "@/pages/constants";
 
 import { setCarouselSetting } from "./util";
 import { cssObj } from "./style";
@@ -48,7 +49,7 @@ export const HotJd: FunctionComponent = () => {
         </div>
       </div>
       <div css={cssObj.contentContainer}>
-        <Link href="/jd/list?page=1&order=recent" css={cssObj.nowJdBanner}>
+        <Link href={`${INTERNAL_URL.JD_LIST}/?page=1&order=recent`} css={cssObj.nowJdBanner}>
           <p css={cssObj.bannerTitle}>
             지금
             <br />
@@ -64,11 +65,15 @@ export const HotJd: FunctionComponent = () => {
         </Link>
         {isMobile ? (
           <div css={cssObj.cardContainer}>
-            {jdDataObj?.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)}
+            {jdDataObj?.jdDataArr.map((jd) => (
+              <JdCard key={jd.id} jd={jd} />
+            ))}
           </div>
         ) : (
           <Slider {...setCarouselSetting} ref={sliderRef}>
-            {jdDataObj?.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)}
+            {jdDataObj?.jdDataArr.map((jd) => (
+              <JdCard key={jd.id} jd={jd} />
+            ))}
           </Slider>
         )}
       </div>

@@ -106,8 +106,8 @@ export const GlobalNavigationBar = () => {
               <div css={navigationArea}>
                 <nav>
                   <ul css={navigationWrapper}>
-                    <li css={router.pathname.includes(INTERNAL_URL.JDS) && selected}>
-                      <Link href={INTERNAL_URL.JDS_LIST}>채용공고</Link>
+                    <li css={router.pathname.includes(INTERNAL_URL.JD) && selected}>
+                      <Link href={INTERNAL_URL.JD_LIST}>채용공고</Link>
                     </li>
                     <li css={router.pathname.includes(INTERNAL_URL.COMPANY) && selected}>
                       <Link href={INTERNAL_URL.COMPANY}>기업정보</Link>
@@ -139,7 +139,7 @@ export const GlobalNavigationBar = () => {
                               content: (
                                 <Link
                                   href={{
-                                    pathname: "/mypage",
+                                    pathname: INTERNAL_URL.MYPAGE,
                                     query: { type: "profile" },
                                   }}
                                 >
@@ -151,7 +151,7 @@ export const GlobalNavigationBar = () => {
                               content: (
                                 <Link
                                   href={{
-                                    pathname: "/mypage",
+                                    pathname: INTERNAL_URL.MYPAGE,
                                     query: { type: "account" },
                                   }}
                                 >
@@ -163,7 +163,7 @@ export const GlobalNavigationBar = () => {
                               content: (
                                 <Link
                                   href={{
-                                    pathname: "/mypage",
+                                    pathname: INTERNAL_URL.MYPAGE,
                                     query: { type: "bookmark" },
                                   }}
                                 >
@@ -175,7 +175,7 @@ export const GlobalNavigationBar = () => {
                               content: (
                                 <Link
                                   href={{
-                                    pathname: "/mypage",
+                                    pathname: INTERNAL_URL.MYPAGE,
                                     query: { type: "alarm" },
                                   }}
                                 >
