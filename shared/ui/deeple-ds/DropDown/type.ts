@@ -11,7 +11,7 @@ export type MenuLocation = {
 };
 
 export interface MenuProps {
-  width?: 128 | 180;
+  width?: number;
   options?: MenuOption[];
   header?: Omit<MenuOption, "key" | "focused">;
   footer?: Omit<MenuOption, "key" | "focused">;
