@@ -9,7 +9,7 @@ import { Layout, LoginModal, ShareModal, CompanyBookmark } from "@/components";
 import { useCompanyDetail } from "@/apis/company";
 import { useUserProfile } from "@/apis/auth";
 import { isQueryString } from "@/utils";
-import { URL } from "@/pages/constants";
+import { INTERNAL_URL } from "@/pages/constants";
 import backgroundImage from "@/public/companyBackground.png";
 
 import { cssObj } from "./style";
@@ -65,15 +65,15 @@ export const TitlePart = () => {
         <Layout>
           <nav>
             <ul css={cssObj.listWrapper}>
-              <li css={router.query.type === "company" && cssObj.selected}>
-                <Link href={`${URL.COMPANY_DETAIL}/${router.query.companyId}?type=company`}>기업정보</Link>
+              <li css={cssObj.menu(router.query.type === "company")}>
+                <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${router.query.companyId}?type=company`}>기업정보</Link>
               </li>
-              <li css={router.query.type === "jd" && cssObj.selected}>
-                <Link href={`${URL.COMPANY_DETAIL}/${router.query.companyId}?type=jd`}>채용정보</Link>
+              <li css={cssObj.menu(router.query.type === "jd")}>
+                <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${router.query.companyId}?type=jd`}>채용정보</Link>
               </li>
               {userData && (
-                <li css={router.query.type === "review" && cssObj.selected}>
-                  <Link href={`${URL.COMPANY_DETAIL}/${router.query.companyId}?type=review`}>기업리뷰</Link>
+                <li css={cssObj.menu(router.query.type === "review")}>
+                  <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${router.query.companyId}?type=review`}>기업리뷰</Link>
                 </li>
               )}
             </ul>

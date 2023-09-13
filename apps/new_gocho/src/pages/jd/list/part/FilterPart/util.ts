@@ -23,13 +23,11 @@ export const getAllFilter = (filterFormValues: FilterFormValues) => {
   const entries = Object.entries(filterFormValuesNoOrder) as Entries<Omit<FilterFormValues, "order">>;
 
   const flattedFilterArr: { key: FilterKey; text: string }[] = entries
-    .map(([key, filterArr]) => {
-      return filterArr.map((filter) => {
+    .map(([key, filterArr]) => filterArr.map((filter) => {
         const typedKey: FilterKey = key;
 
         return { key: typedKey, text: filter };
-      });
-    })
+      }))
     .flat();
 
   return flattedFilterArr;

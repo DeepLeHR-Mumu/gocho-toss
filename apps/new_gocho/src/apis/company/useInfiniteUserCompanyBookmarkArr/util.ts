@@ -11,13 +11,11 @@ export const selector = (data: CompanyBookmarkArrDef[], page_result: PageResultD
     isFirst: page_result.is_first,
     isLast: page_result.is_last,
   };
-  const userCompanyBookmarkArr = data.map((company) => {
-    return {
+  const userCompanyBookmarkArr = data.map((company) => ({
       id: company.id,
       name: company.name,
       logoUrl: company.logo_url,
-    };
-  });
+    }));
 
   return { userCompanyBookmarkArr, pageResult };
 };

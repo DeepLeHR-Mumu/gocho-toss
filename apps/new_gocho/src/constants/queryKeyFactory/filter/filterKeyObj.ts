@@ -3,7 +3,5 @@ export interface FilterRequestObjDef {
 }
 
 export const filterKeyObj = {
-  all: (requestObj: FilterRequestObjDef) => {
-    return [{ data: "userFilter", requestObj }] as const;
-  },
+  all: (requestObj: FilterRequestObjDef) => [{ data: "userFilter", requestObj }] as const,
 };

@@ -11,8 +11,6 @@ const addCompanyViewCount: AddCompanyViewCountDef = async (requestObj) => {
   return data;
 };
 
-export const useAddCompanyViewCount: UseAddCompanyViewCountProps = () => {
-  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
+export const useAddCompanyViewCount: UseAddCompanyViewCountProps = () => useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
     mutationFn: addCompanyViewCount,
   });
-};

@@ -45,8 +45,7 @@ export const cssObj = {
     gap: 1.25rem;
   `,
 
-  thumbsUpWrapper: (isClicked: boolean) => {
-    return css`
+  thumbsUpWrapper: (isClicked: boolean) => css`
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -60,11 +59,9 @@ export const cssObj = {
       span {
         ${NEWTEXTS.TITLE1}
       }
-    `;
-  },
+    `,
 
-  thumbsDownWrapper: (isClicked: boolean) => {
-    return css`
+  thumbsDownWrapper: (isClicked: boolean) => css`
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -78,6 +75,5 @@ export const cssObj = {
       span {
         ${NEWTEXTS.TITLE1}
       }
-    `;
-  },
+    `,
 };

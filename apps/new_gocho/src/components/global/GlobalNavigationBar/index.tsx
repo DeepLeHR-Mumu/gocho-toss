@@ -9,13 +9,13 @@ import { SearchBar, DropDown, Profile } from "shared-ui/deeple-ds";
 
 import { useUserProfile } from "@/apis/auth";
 import { useGetDeviceType } from "@/globalStates";
-import { URL } from "@/pages/constants";
+import { INTERNAL_URL } from "@/pages/constants";
 import logoWhite from "@/public/logoWhite.svg";
 import logoBlue from "@/public/logoBlue.svg";
+import { SearchModal } from "../../modal/SearchModal";
+import { LoginModal } from "../../modal/LoginModal";
 
 import { Layout } from "../../Layout";
-import { LoginModal } from "../../modal/LoginModal";
-import { SearchModal } from "../../modal/SearchModal";
 
 import { THEME_WHITE_PAGES } from "./constant";
 import { getCssObj } from "./style";
@@ -49,7 +49,7 @@ export const GlobalNavigationBar = () => {
   const { data: userData, isSuccess } = useUserProfile();
 
   const openSearchModal = () => {
-    router.push(URL.SEARCH);
+    router.push(INTERNAL_URL.SEARCH);
     setSearchModal(true);
   };
 
@@ -69,7 +69,7 @@ export const GlobalNavigationBar = () => {
         <Layout>
           {isMobile ? (
             <div css={titleArea}>
-              <Link href={URL.MAIN} css={logoWrapper}>
+              <Link href={INTERNAL_URL.MAIN} css={logoWrapper}>
                 <Image src={isThemeWhite ? logoBlue : logoWhite} alt="고초대졸_로고" />
               </Link>
               <div>
@@ -91,7 +91,7 @@ export const GlobalNavigationBar = () => {
           ) : (
             <>
               <div css={titleArea}>
-                <Link href={URL.MAIN} css={logoWrapper}>
+                <Link href={INTERNAL_URL.MAIN} css={logoWrapper}>
                   <Image src={isThemeWhite ? logoBlue : logoWhite} alt="고초대졸_로고" />
                 </Link>
                 <div css={searchBarWrapper}>
@@ -106,14 +106,14 @@ export const GlobalNavigationBar = () => {
               <div css={navigationArea}>
                 <nav>
                   <ul css={navigationWrapper}>
-                    <li css={router.pathname.includes(URL.JDS) && selected}>
-                      <Link href={URL.JDS_LIST}>채용공고</Link>
+                    <li css={router.pathname.includes(INTERNAL_URL.JD) && selected}>
+                      <Link href={INTERNAL_URL.JD_LIST}>채용공고</Link>
                     </li>
-                    <li css={router.pathname.includes(URL.COMPANY) && selected}>
-                      <Link href={URL.COMPANY}>기업정보</Link>
+                    <li css={router.pathname.includes(INTERNAL_URL.COMPANY) && selected}>
+                      <Link href={INTERNAL_URL.COMPANY}>기업정보</Link>
                     </li>
-                    <li css={router.pathname.includes(URL.COMMUNITY) && selected}>
-                      <Link href={URL.COMMUNITY}>커뮤니티</Link>
+                    <li css={router.pathname.includes(INTERNAL_URL.COMMUNITY) && selected}>
+                      <Link href={INTERNAL_URL.COMMUNITY}>커뮤니티</Link>
                     </li>
                   </ul>
                 </nav>
@@ -139,7 +139,7 @@ export const GlobalNavigationBar = () => {
                               content: (
                                 <Link
                                   href={{
-                                    pathname: "/mypage",
+                                    pathname: INTERNAL_URL.MYPAGE,
                                     query: { type: "profile" },
                                   }}
                                 >
@@ -151,7 +151,7 @@ export const GlobalNavigationBar = () => {
                               content: (
                                 <Link
                                   href={{
-                                    pathname: "/mypage",
+                                    pathname: INTERNAL_URL.MYPAGE,
                                     query: { type: "account" },
                                   }}
                                 >
@@ -163,7 +163,7 @@ export const GlobalNavigationBar = () => {
                               content: (
                                 <Link
                                   href={{
-                                    pathname: "/mypage",
+                                    pathname: INTERNAL_URL.MYPAGE,
                                     query: { type: "bookmark" },
                                   }}
                                 >
@@ -175,7 +175,7 @@ export const GlobalNavigationBar = () => {
                               content: (
                                 <Link
                                   href={{
-                                    pathname: "/mypage",
+                                    pathname: INTERNAL_URL.MYPAGE,
                                     query: { type: "alarm" },
                                   }}
                                 >

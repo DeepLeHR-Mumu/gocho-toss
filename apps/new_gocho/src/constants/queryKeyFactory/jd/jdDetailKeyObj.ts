@@ -5,7 +5,5 @@ export interface JdDetailRequestObjDef {
 
 export const jdDetailKeyObj = {
   all: [{ data: "jdDetail" }] as const,
-  detail: (requestObj: JdDetailRequestObjDef) => {
-    return [{ data: "jdDetail", requestObj }] as const;
-  },
+  detail: (requestObj: JdDetailRequestObjDef) => [{ data: "jdDetail", requestObj }] as const,
 };

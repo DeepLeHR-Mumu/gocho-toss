@@ -13,12 +13,8 @@ export const getSpecArr: GetSpecArrDef = async ({ queryKey: [{ requestObj }] }) 
   return data;
 };
 
-export const useSpecArr = (requestObj: SpecArrInfinityRequestDef) => {
-  return useQuery({
+export const useSpecArr = (requestObj: SpecArrInfinityRequestDef) => useQuery({
     queryKey: specArrKeyObj.list(requestObj),
     queryFn: getSpecArr,
-    select: ({ data }) => {
-      return selector(data);
-    },
+    select: ({ data }) => selector(data),
   });
-};

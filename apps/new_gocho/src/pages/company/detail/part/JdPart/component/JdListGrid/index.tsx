@@ -30,9 +30,7 @@ export const JdListGrid = ({ filter }: JdListGridProps) => {
       return;
     }
 
-    setJdArrSize((prev) => {
-      return prev + BUNDLE_SIZE;
-    });
+    setJdArrSize((prev) => prev + BUNDLE_SIZE);
   };
 
   return (
@@ -44,8 +42,7 @@ export const JdListGrid = ({ filter }: JdListGridProps) => {
       <div css={cssObj.jdWrapper}>
         {jdData && totalJdNumber !== 0 ? (
           <>
-            {jdData.jdDataArr.map((jd) => {
-              return (
+            {jdData.jdDataArr.map((jd) => (
                 <JdRow
                   key={jd.id}
                   jdId={jd.id}
@@ -55,8 +52,7 @@ export const JdListGrid = ({ filter }: JdListGridProps) => {
                   bookmarked={jd.isBookmark}
                   cut={jd.cut}
                 />
-              );
-            })}
+              ))}
             {jdData.jdDataArr.length > totalJdNumber && (
               <button
                 type="button"

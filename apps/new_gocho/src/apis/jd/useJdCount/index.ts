@@ -10,9 +10,7 @@ export const getJdCount: GetJdCountDef = async ({ queryKey: [{ requestObj }] }) 
   return data;
 };
 
-export const useJdCount = (requestObj: JdCountRequestObjDef) => {
-  return useQuery({
+export const useJdCount = (requestObj: JdCountRequestObjDef) => useQuery({
     queryKey: jdCountKeyObj.jdCount(requestObj),
     queryFn: getJdCount,
   });
-};

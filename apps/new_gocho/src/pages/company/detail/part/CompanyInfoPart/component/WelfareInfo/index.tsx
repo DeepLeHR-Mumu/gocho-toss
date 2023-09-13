@@ -17,9 +17,7 @@ import { cssObj } from "./style";
 
 export const WelfareInfo = ({ welfare }: WelfareInfoProps) => {
   const isAllEmpty =
-    (Object.entries(welfare) as Entries<typeof welfare>).findIndex(([, value]) => {
-      return value && value.length !== 0;
-    }) === -1;
+    (Object.entries(welfare) as Entries<typeof welfare>).findIndex(([, value]) => value && value.length !== 0) === -1;
 
   if (isAllEmpty) {
     return <> </>;

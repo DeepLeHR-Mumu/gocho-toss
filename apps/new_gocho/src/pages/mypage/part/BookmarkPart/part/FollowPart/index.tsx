@@ -3,10 +3,10 @@ import { DropDown } from "shared-ui/deeple-ds";
 import { FiChevronDown } from "react-icons/fi";
 
 import { CompanyRow } from "@/components";
-import { NoListCard } from "../NoListCard";
 
 import { useUserInfo } from "@/apis/auth/useUserInfo";
 import { useUserCompanyBookmarkArr } from "@/apis/company";
+import { NoListCard } from "../NoListCard";
 
 import { cssObj } from "./style";
 import { BookmarkFilterType } from "./type";

@@ -1,8 +1,8 @@
+import { useUserInfo } from "@/apis/auth/useUserInfo";
 import { AlarmItem } from "./component/AlarmItem";
 import { cssObj } from "./style";
 
 import { alarmItemArr } from "./constants";
-import { useUserInfo } from "@/apis/auth/useUserInfo";
 
 export const AlarmPart = () => {
   const { data: userInfo } = useUserInfo();

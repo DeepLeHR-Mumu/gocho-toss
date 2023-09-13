@@ -4,11 +4,11 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 import { Layout } from "@/components/Layout";
+import { useCompanyArr } from "@/apis/company";
+import { isQueryString } from "@/utils";
 import { CompanyList } from "../components/CompanyList";
 import { CompanyListHeader } from "./components/CompanyListHeader";
 
-import { useCompanyArr } from "@/apis/company";
-import { isQueryString } from "@/utils";
 import { FilterType } from "./type";
 import { CompanyListFooter } from "./components/CompanyListFooter";
 

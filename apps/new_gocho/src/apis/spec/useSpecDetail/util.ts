@@ -1,7 +1,6 @@
 import { SpecDetailObjDef } from "../type/specDetail";
 
-export const selector = (data: SpecDetailObjDef) => {
-  return {
+export const selector = (data: SpecDetailObjDef) => ({
     id: data.id,
     profileImg: data.image,
     uploader: {
@@ -60,5 +59,4 @@ export const selector = (data: SpecDetailObjDef) => {
     isMine: data.is_mine,
     didEval: data.did_eval,
     evalCount: data.eval_count,
-  };
-};
+  });

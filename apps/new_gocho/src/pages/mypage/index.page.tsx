@@ -2,13 +2,11 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { Layout, LoginModal } from "@/components";
-import { useUserProfile } from "@/apis/auth";
 import { useUserInfo } from "@/apis/auth/useUserInfo";
 
 import { MypageNavigation, Box } from "./component";
 import { partElementArray } from "./constants";
 import { cssObj } from "./style";
-
 
 const MyPage: NextPage = () => {
   const router = useRouter();

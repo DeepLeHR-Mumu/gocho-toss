@@ -31,8 +31,7 @@ export const cssObj = {
     margin-top: 3.5rem;
   `,
 
-  iconButton: (clicked: boolean) => {
-    return css`
+  iconButton: (clicked: boolean) => css`
       border-radius: 0.5rem;
       padding: 0.25rem;
       background-color: ${clicked ? NEWCOLORS.GRAY100 : "transparent"};
@@ -43,8 +42,7 @@ export const cssObj = {
         height: 1.5rem;
         color: ${clicked ? NEWCOLORS.BLACK : NEWCOLORS.GRAY300};
       }
-    `;
-  },
+    `,
 
   jdGridWrapper: css`
     display: grid;

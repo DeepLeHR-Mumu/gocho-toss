@@ -5,8 +5,7 @@ import { Layout, JdBookmark } from "@/components";
 import { TitlePartProps } from "./type";
 import { cssObj } from "./style";
 
-export const TitlePart = ({ jdId, companyName, title, isBookmark, applyUrl }: TitlePartProps) => {
-  return (
+export const TitlePart = ({ jdId, companyName, title, isBookmark, applyUrl }: TitlePartProps) => (
     <section css={cssObj.background}>
       <Layout>
         <div css={cssObj.wrapper}>
@@ -22,4 +21,3 @@ export const TitlePart = ({ jdId, companyName, title, isBookmark, applyUrl }: Ti
       </Layout>
     </section>
   );
-};

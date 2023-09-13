@@ -58,8 +58,7 @@ export const cssObj = {
     }
   `,
 
-  eduChip: (isActive: boolean) => {
-    return css`
+  eduChip: (isActive: boolean) => css`
       ${NEWTEXTS.TITLE9}
       width: 1.875rem;
       height: 1.875rem;
@@ -75,8 +74,7 @@ export const cssObj = {
         height: 1.5rem;
         ${NEWTEXTS.TITLE3}
       }
-    `;
-  },
+    `,
 
   title: css`
     margin-top: 1rem;

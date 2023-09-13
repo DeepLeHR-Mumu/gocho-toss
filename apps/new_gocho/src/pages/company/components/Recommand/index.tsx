@@ -1,7 +1,7 @@
 import { CompanyCard } from "@/components/common/CompanyCard/index";
+import { useCompanyArr } from "@/apis/company/useCompanyArr";
 import { HeaderTitle } from "../HeaderTitle";
 
-import { useCompanyArr } from "@/apis/company/useCompanyArr";
 
 import { cssObj } from "./style";
 
@@ -18,8 +18,7 @@ export const RecommandCompany = () => {
         <p css={cssObj.description}>고초대졸닷컴에서 개인화 추천 서비스를 제공하고 있어요!</p>
       </div>
       <div css={cssObj.contentBox}>
-        {recommandArr?.companyDataArr.map(({ id, logoUrl, name, industry, isBookmark }) => {
-          return (
+        {recommandArr?.companyDataArr.map(({ id, logoUrl, name, industry, isBookmark }) => (
             <CompanyCard
               key={id}
               id={id}
@@ -28,8 +27,7 @@ export const RecommandCompany = () => {
               hashTagArr={[industry]}
               bookmark={{ state: isBookmark }}
             />
-          );
-        })}
+          ))}
       </div>
     </section>
   );

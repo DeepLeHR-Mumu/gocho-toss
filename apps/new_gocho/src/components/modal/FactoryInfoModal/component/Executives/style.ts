@@ -19,8 +19,7 @@ export const cssObj = {
     margin-bottom: 1.25rem;
   `,
 
-  maleBar: (percent: number) => {
-    return css`
+  maleBar: (percent: number) => css`
       width: 2rem;
       height: ${percent}%;
       background-color: ${NEWCOLORS.BLUE250};
@@ -36,11 +35,9 @@ export const cssObj = {
         color: ${NEWCOLORS.BLUE250};
         ${NEWTEXTS.TITLE5}
       }
-    `;
-  },
+    `,
 
-  femaleBar: (percent: number) => {
-    return css`
+  femaleBar: (percent: number) => css`
       width: 2rem;
       height: ${percent}%;
       background-color: ${NEWCOLORS.RED100};
@@ -56,8 +53,7 @@ export const cssObj = {
         color: ${NEWCOLORS.RED100};
         ${NEWTEXTS.TITLE5}
       }
-    `;
-  },
+    `,
 
   contentTitle: css`
     color: ${NEWCOLORS.BLUEGRAY400};

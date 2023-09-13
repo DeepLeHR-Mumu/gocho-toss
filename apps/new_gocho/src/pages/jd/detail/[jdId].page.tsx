@@ -65,8 +65,7 @@ const JdDetailPage: NextPage = () => {
         <div css={cssObj.similarJdWrapper}>
           <h3 css={cssObj.similarJdTitle}>이 공고와 비슷한 공고들도 둘러보세요.</h3>
           <div css={cssObj.similarJdList}>
-            {jdArrData?.jdDataArr.map((jd) => {
-              return (
+            {jdArrData?.jdDataArr.map((jd) => (
                 <JdRow
                   key={jd.id}
                   jdId={jd.id}
@@ -76,8 +75,7 @@ const JdDetailPage: NextPage = () => {
                   bookmarked={jd.isBookmark}
                   cut={jd.cut}
                 />
-              );
-            })}
+              ))}
           </div>
         </div>
       </Layout>

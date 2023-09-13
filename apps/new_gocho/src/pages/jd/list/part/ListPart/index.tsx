@@ -98,19 +98,20 @@ export const ListPart = ({ filterObj }: ListPartProps) => {
         </button>
       </div>
       <div css={viewMode === "grid" ? cssObj.jdGridWrapper : cssObj.jdListWrapper}>
-        {jdArrData?.jdDataArr.map((jd) => {
-          return viewMode === "grid" ? (
+        {jdArrData?.jdDataArr.map((jd) =>
+          viewMode === "grid" ? (
             <JdCard key={jd.id} jd={{ ...jd }} />
           ) : (
             <JdRow
+              key={jd.id}
               jdId={jd.id}
               companyName={jd.company.name}
               jdTitle={jd.title}
               dueDate={jd.endTime}
               bookmarked={jd.isBookmark}
             />
-          );
-        })}
+          )
+        )}
       </div>
       <div css={cssObj.paginationWrapper}>
         <Pagination totalPage={jdArrData ? jdArrData.pageResult.totalPages : 0} />

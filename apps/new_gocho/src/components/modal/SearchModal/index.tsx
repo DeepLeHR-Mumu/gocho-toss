@@ -6,9 +6,9 @@ import { Divider, Chip, Modal } from "shared-ui/deeple-ds";
 import { useJdArr } from "@/apis/jd";
 import { useCompanyArr } from "@/apis/company";
 
-import { URL } from "@/pages/constants";
+import { INTERNAL_URL } from "@/pages/constants";
 
-import { Layout } from "@/components";
+import { Layout } from "../../Layout";
 import { CompanyCard } from "../../common/CompanyCard";
 import { JdRow } from "../../common/JdRow";
 
@@ -30,7 +30,7 @@ export const SearchModal = ({ close }: SearchModalProps) => {
   const [recentSearchWordArr, setRecentSearchWordArr] = useState<string[]>([]);
 
   const searchAndSave = (text: string) => {
-    router.replace({ pathname: URL.SEARCH, query: { q: text, page: 1 } });
+    router.replace({ pathname: INTERNAL_URL.SEARCH, query: { q: text, page: 1 } });
     saveRecentWordToStorage(text);
   };
 

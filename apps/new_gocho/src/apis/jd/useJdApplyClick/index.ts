@@ -12,6 +12,4 @@ const postJdApplyClick: PostJdApplyClickDef = async (requestObj) => {
   return data;
 };
 
-export const useJdApplyClick = () => {
-  return useMutation<AxiosResponse, AxiosError, RequestObjDef>({ mutationFn: postJdApplyClick });
-};
+export const useJdApplyClick = () => useMutation<AxiosResponse, AxiosError, RequestObjDef>({ mutationFn: postJdApplyClick });

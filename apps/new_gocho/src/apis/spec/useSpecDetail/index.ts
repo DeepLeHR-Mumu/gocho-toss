@@ -11,14 +11,10 @@ export const getSpecDetail: GetSpecDetailDef = async ({ queryKey: [{ requestObj 
   return data;
 };
 
-export const useSpecDetail = (requestObj: SpecDetailRequestDef) => {
-  return useQuery({
+export const useSpecDetail = (requestObj: SpecDetailRequestDef) => useQuery({
     queryKey: specDetailKeyObj.detail(requestObj),
     queryFn: getSpecDetail,
     staleTime: Infinity,
     enabled: Boolean(requestObj.specId),
-    select: ({ data }) => {
-      return selector(data);
-    },
+    select: ({ data }) => selector(data),
   });
-};

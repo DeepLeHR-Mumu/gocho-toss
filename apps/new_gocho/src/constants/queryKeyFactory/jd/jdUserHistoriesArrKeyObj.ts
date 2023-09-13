@@ -6,16 +6,12 @@ export interface UserHistoryJdArrRequestDef {
 
 export const userJdHistoriesKeyObj = {
   all: [{ data: "userJdHistoryArr" }] as const,
-  jdHistoriesArr: (requestObj: UserHistoryJdArrRequestDef) => {
-    return [{ data: "userJdHistoryArr", requestObj }] as const;
-  },
-  infinite: (requestObj: UserHistoryJdArrRequestDef) => {
-    return [
+  jdHistoriesArr: (requestObj: UserHistoryJdArrRequestDef) => [{ data: "userJdHistoryArr", requestObj }] as const,
+  infinite: (requestObj: UserHistoryJdArrRequestDef) => [
       {
         data: "userJdHistoryArr",
         usage: "infinite",
         requestObj,
       },
-    ] as const;
-  },
+    ] as const,
 };

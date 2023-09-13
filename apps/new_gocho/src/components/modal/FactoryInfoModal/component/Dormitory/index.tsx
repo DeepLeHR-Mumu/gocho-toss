@@ -5,8 +5,7 @@ import dorm from "@/public/dorm.svg";
 import { DormitoryProps } from "./type";
 import { cssObj } from "./style";
 
-export const Dormitory = ({ dormitory }: DormitoryProps) => {
-  return (
+export const Dormitory = ({ dormitory }: DormitoryProps) => (
     <div css={cssObj.wrapper}>
       <div css={cssObj.imageWrapper}>
         <Image src={dorm} alt="dorm" />
@@ -15,4 +14,3 @@ export const Dormitory = ({ dormitory }: DormitoryProps) => {
       <span css={cssObj.content}>{dormitory ? "있음" : "없음"}</span>
     </div>
   );
-};

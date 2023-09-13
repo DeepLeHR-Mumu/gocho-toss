@@ -1,10 +1,8 @@
 import { getMySpecHistoryDef } from "../type/mySpecHistory";
 
-export const selector = (mySpecHistoryData: getMySpecHistoryDef) => {
-  return {
+export const selector = (mySpecHistoryData: getMySpecHistoryDef) => ({
     evalCount: mySpecHistoryData.eval_count,
-    specArr: mySpecHistoryData.spec_arr.map((mySpec) => {
-      return {
+    specArr: mySpecHistoryData.spec_arr.map((mySpec) => ({
         age: mySpec.age,
         award: mySpec.award,
         career: mySpec.career,
@@ -37,7 +35,5 @@ export const selector = (mySpecHistoryData: getMySpecHistoryDef) => {
         score: mySpec.score,
         scoreCount: mySpec.score_count,
         secret: mySpec.secret,
-      };
-    }),
-  };
-};
+      })),
+  });

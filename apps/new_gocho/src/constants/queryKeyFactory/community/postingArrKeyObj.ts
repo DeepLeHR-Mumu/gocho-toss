@@ -12,16 +12,12 @@ export interface CommunityPostingArrRequestDef {
 
 export const communityPostingArrKeyObj = {
   all: [{ data: "communityPostingArr" }] as const,
-  postingArr: (requestObj: CommunityPostingArrRequestDef) => {
-    return [{ data: "communityPostingArr", requestObj }] as const;
-  },
-  infinite: (requestObj: CommunityPostingArrRequestDef) => {
-    return [
+  postingArr: (requestObj: CommunityPostingArrRequestDef) => [{ data: "communityPostingArr", requestObj }] as const,
+  infinite: (requestObj: CommunityPostingArrRequestDef) => [
       {
         data: "communityPostingArr",
         usage: "infinite",
         requestObj,
       },
-    ] as const;
-  },
+    ] as const,
 };

@@ -17,16 +17,12 @@ export interface JdArrRequestObjDef {
 
 export const jdArrKeyObj = {
   all: [{ data: "jdArr" }] as const,
-  jdArr: (requestObj: JdArrRequestObjDef) => {
-    return [{ data: "jdArr", requestObj }] as const;
-  },
-  infinite: (requestObj: JdArrRequestObjDef) => {
-    return [
+  jdArr: (requestObj: JdArrRequestObjDef) => [{ data: "jdArr", requestObj }] as const,
+  infinite: (requestObj: JdArrRequestObjDef) => [
       {
         data: "jdArr",
         usage: "infinite",
         requestObj,
       },
-    ] as const;
-  },
+    ] as const,
 };

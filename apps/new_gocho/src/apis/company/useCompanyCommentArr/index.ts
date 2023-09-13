@@ -16,13 +16,9 @@ export const getCompanyComment: GetCompanyCommentDef = async ({ queryKey: [{ req
   return data;
 };
 
-export const useCompanyCommentArr = (requestObj: CompanyCommentArrRequestDef) => {
-  return useQuery({
+export const useCompanyCommentArr = (requestObj: CompanyCommentArrRequestDef) => useQuery({
     queryKey: companyCommentArrKeyObj.commentArr(requestObj),
     queryFn: getCompanyComment,
     enabled: Boolean(requestObj.companyId),
-    select: ({ data }) => {
-      return data;
-    },
+    select: ({ data }) => data,
   });
-};

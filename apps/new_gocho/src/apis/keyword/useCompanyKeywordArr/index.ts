@@ -11,12 +11,8 @@ export const getCompanyKeywordArr: GetCompanyKeywordArrDef = async () => {
   return data;
 };
 
-export const useCompanyKeywordArr = () => {
-  return useQuery<ResponseObjDef, AxiosError<ErrorResponseDef>, ReturnType<typeof companyKeywordArrSelector>>({
+export const useCompanyKeywordArr = () => useQuery<ResponseObjDef, AxiosError<ErrorResponseDef>, ReturnType<typeof companyKeywordArrSelector>>({
     queryKey: companyKeywordArrKeyObj.all,
     queryFn: getCompanyKeywordArr,
-    select: (data: ResponseObjDef) => {
-      return companyKeywordArrSelector(data);
-    },
+    select: (data: ResponseObjDef) => companyKeywordArrSelector(data),
   });
-};

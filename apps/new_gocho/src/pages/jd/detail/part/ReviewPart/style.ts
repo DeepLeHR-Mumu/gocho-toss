@@ -64,8 +64,7 @@ export const cssObj = {
     ${NEWTEXTS.BODY2}
   `,
 
-  contentsWrapper: (blurred: boolean) => {
-    return css`
+  contentsWrapper: (blurred: boolean) => css`
       padding: 1.125rem 1rem 1rem;
       background-color: ${NEWCOLORS.GRAY100};
       height: 20.5rem;
@@ -74,8 +73,7 @@ export const cssObj = {
       flex-direction: column;
       gap: 1.25rem;
       ${blurred && "-webkit-filter: blur(3px); filter: blur(3px);"}
-    `;
-  },
+    `,
 
   noComment: css`
     margin: auto;

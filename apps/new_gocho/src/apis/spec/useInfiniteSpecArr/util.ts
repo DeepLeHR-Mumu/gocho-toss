@@ -1,8 +1,6 @@
 import { SpecObjDef } from "../type/specArr";
 
-export const selector = (specDataArr: SpecObjDef[]) => {
-  return specDataArr.map((specData) => {
-    return {
+export const selector = (specDataArr: SpecObjDef[]) => specDataArr.map((specData) => ({
       id: specData.id,
       uploader: {
         nickname: specData.uploader.nickname,
@@ -41,6 +39,4 @@ export const selector = (specDataArr: SpecObjDef[]) => {
               level2: specData.certificate.level2,
               level3: specData.certificate.level3,
             },
-    };
-  });
-};
+    }));

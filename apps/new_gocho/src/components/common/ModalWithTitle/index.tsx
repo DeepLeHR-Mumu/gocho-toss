@@ -6,8 +6,7 @@ import { Modal, Divider } from "shared-ui/deeple-ds";
 import { ModalWithTitleProps } from "./type";
 import { cssObj } from "./style";
 
-export const ModalWithTitle = ({ title, width = 46, children, closeHandler }: ModalWithTitleProps) => {
-  return (
+export const ModalWithTitle = ({ title, width = 46, children, closeHandler }: ModalWithTitleProps) => (
     <Modal>
       <div css={cssObj.wrapper(width)}>
         <div css={cssObj.header}>
@@ -23,4 +22,3 @@ export const ModalWithTitle = ({ title, width = 46, children, closeHandler }: Mo
       </div>
     </Modal>
   );
-};

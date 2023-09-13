@@ -8,16 +8,12 @@ export interface UserBookmarkArrRequestDef {
 
 export const userBookmarkKeyObj = {
   all: [{ data: "userJdBookmarkArr" }] as const,
-  jdBookmarkArr: (requestObj: UserBookmarkArrRequestDef) => {
-    return [{ data: "userJdBookmarkArr", requestObj }] as const;
-  },
-  infinite: (requestObj: UserBookmarkArrRequestDef) => {
-    return [
+  jdBookmarkArr: (requestObj: UserBookmarkArrRequestDef) => [{ data: "userJdBookmarkArr", requestObj }] as const,
+  infinite: (requestObj: UserBookmarkArrRequestDef) => [
       {
         data: "userJdBookmarkArr",
         usage: "infinite",
         requestObj,
       },
-    ] as const;
-  },
+    ] as const,
 };

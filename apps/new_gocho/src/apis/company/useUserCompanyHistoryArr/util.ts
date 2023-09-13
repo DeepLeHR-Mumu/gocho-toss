@@ -12,16 +12,14 @@ export const selector = (data: CompanyHistoriesArr[], page_result: PageResultDef
     isLast: page_result.is_last,
   };
 
-  const companyHistoryDataArr = data.map((company) => {
-    return {
+  const companyHistoryDataArr = data.map((company) => ({
       id: company.id,
       name: company.name,
       size: company.size,
       logoUrl: company.logo_url,
       industry: company.industry,
       isBookmark: company.is_bookmark,
-    };
-  });
+    }));
 
   return { companyHistoryDataArr, pageResult };
 };

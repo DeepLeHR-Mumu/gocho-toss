@@ -40,16 +40,14 @@ export const ReviewPart = () => {
         </div>
         {writeReview && <WriteReview />}
         {companyCommentData.comment_arr
-          .map((comment) => {
-            return (
+          .map((comment) => (
               <Review
                 key={comment.id}
                 companyId={companyCommentData.company.id}
                 comment={comment}
                 isMyComment={comment.uploader.id === userData?.id}
               />
-            );
-          })
+            ))
           .reverse()}
       </div>
     </section>

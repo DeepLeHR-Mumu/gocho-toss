@@ -26,9 +26,7 @@ export const useAxiosInterceptor = () => {
   };
 
   const onRefreshed = () => {
-    refreshSubscribers.map((cb) => {
-      return cb();
-    });
+    refreshSubscribers.map((cb) => cb());
     refreshSubscribers = [];
   };
 
@@ -154,28 +152,18 @@ export const useAxiosInterceptor = () => {
   };
 
   const requestInterceptor = axiosInstance.interceptors.request.use(
-    (config: AxiosRequestConfig) => {
-      return requestConfigHandler(config);
-    },
+    (config: AxiosRequestConfig) => requestConfigHandler(config),
 
-    (error) => {
-      return Promise.reject(error);
-    }
+    (error) => Promise.reject(error)
   );
 
   const responseInterceptor = axiosInstance.interceptors.response.use(
-    (response) => {
-      return response;
-    },
-    (error) => {
-      return responseErrorHandler(error);
-    }
+    (response) => response,
+    (error) => responseErrorHandler(error)
   );
 
-  useEffect(() => {
-    return () => {
+  useEffect(() => () => {
       axiosInstance.interceptors.request.eject(requestInterceptor);
       axiosInstance.interceptors.response.eject(responseInterceptor);
-    };
-  }, [requestInterceptor, responseInterceptor]);
+    }, [requestInterceptor, responseInterceptor]);
 };

@@ -11,13 +11,9 @@ export const getUserJdBookmarkArr: GetUserJdBookmarkArrDef = async ({ queryKey: 
   return data;
 };
 
-export const useUserJdBookmarkArr = (requestObj: UserBookmarkArrRequestDef) => {
-  return useQuery({
+export const useUserJdBookmarkArr = (requestObj: UserBookmarkArrRequestDef) => useQuery({
     queryKey: userBookmarkKeyObj.jdBookmarkArr(requestObj),
     queryFn: getUserJdBookmarkArr,
     enabled: Boolean(requestObj.userId),
-    select: ({ data, page_result }) => {
-      return selector(data, page_result);
-    },
+    select: ({ data, page_result }) => selector(data, page_result),
   });
-};

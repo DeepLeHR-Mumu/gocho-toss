@@ -5,7 +5,5 @@ export interface CompanyCommentArrRequestDef {
 
 export const companyCommentArrKeyObj = {
   all: [{ data: "companyCommentArr" }] as const,
-  commentArr: (requestObj: CompanyCommentArrRequestDef) => {
-    return [{ data: "companyCommentArr", requestObj }] as const;
-  },
+  commentArr: (requestObj: CompanyCommentArrRequestDef) => [{ data: "companyCommentArr", requestObj }] as const,
 };

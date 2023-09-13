@@ -51,11 +51,9 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
     [ROTATION_FILTER_KEY]: watch(ROTATION_FILTER_KEY).join(","),
   });
 
-  const filterButton = (sourceKey: FilterKey, targetKey: string) => {
-    return css`
+  const filterButton = (sourceKey: FilterKey, targetKey: string) => css`
       ${cssObj.filter}${watch(sourceKey).includes(targetKey) && cssObj.appliedFilter}
     `;
-  };
 
   const filterHandler = (targetKey: FilterKey, value: string) => {
     const appliedFilter = getValues(targetKey);
@@ -63,9 +61,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
     if (appliedFilter.includes(value)) {
       setValue(
         targetKey,
-        appliedFilter.filter((filter) => {
-          return filter !== value;
-        })
+        appliedFilter.filter((filter) => filter !== value)
       );
       return;
     }
@@ -124,8 +120,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
               <h5 css={cssObj.leftTopBorder}>직무</h5>
               <div>
                 <ul>
-                  {JOB_FILTER_ARR.map((filter) => {
-                    return (
+                  {JOB_FILTER_ARR.map((filter) => (
                       <li key={filter}>
                         <button
                           css={filterButton(JOB_FILTER_KEY, filter)}
@@ -137,8 +132,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
                           {getFilterText(filter)}
                         </button>
                       </li>
-                    );
-                  })}
+                    ))}
                 </ul>
               </div>
             </div>
@@ -146,8 +140,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
               <h5>업종</h5>
               <div>
                 <ul>
-                  {INDUSTRY_FILTER_ARR.map((filter) => {
-                    return (
+                  {INDUSTRY_FILTER_ARR.map((filter) => (
                       <li key={filter}>
                         <button
                           css={filterButton(INDUSTRY_FILTER_KEY, filter)}
@@ -159,8 +152,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
                           {getFilterText(filter)}
                         </button>
                       </li>
-                    );
-                  })}
+                    ))}
                 </ul>
               </div>
             </div>
@@ -168,8 +160,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
               <h5>학력</h5>
               <div>
                 <ul>
-                  {EDUCATION_FILTER_ARR.map((filter) => {
-                    return (
+                  {EDUCATION_FILTER_ARR.map((filter) => (
                       <li key={filter}>
                         <button
                           css={filterButton(EDUCATION_FILTER_KEY, filter)}
@@ -181,8 +172,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
                           {getFilterText(filter)}
                         </button>
                       </li>
-                    );
-                  })}
+                    ))}
                 </ul>
               </div>
             </div>
@@ -190,8 +180,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
               <h5>근무지</h5>
               <div>
                 <ul>
-                  {PLACE_FILTER_ARR.map((filter) => {
-                    return (
+                  {PLACE_FILTER_ARR.map((filter) => (
                       <li key={filter}>
                         <button
                           css={filterButton(PLACE_FILTER_KEY, filter)}
@@ -203,8 +192,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
                           {getFilterText(filter)}
                         </button>
                       </li>
-                    );
-                  })}
+                    ))}
                 </ul>
               </div>
             </div>
@@ -212,8 +200,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
               <h5>경력</h5>
               <div>
                 <ul>
-                  {REQUIRED_EXP_FILTER_ARR.map((filter) => {
-                    return (
+                  {REQUIRED_EXP_FILTER_ARR.map((filter) => (
                       <li key={filter}>
                         <button
                           css={filterButton(REQUIRED_EXP_FILTER_KEY, filter)}
@@ -225,8 +212,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
                           {getFilterText(filter)}
                         </button>
                       </li>
-                    );
-                  })}
+                    ))}
                 </ul>
               </div>
             </div>
@@ -234,8 +220,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
               <h5>계약형태</h5>
               <div>
                 <ul>
-                  {CONTRACT_FILTER_ARR.map((filter) => {
-                    return (
+                  {CONTRACT_FILTER_ARR.map((filter) => (
                       <li key={filter}>
                         <button
                           css={filterButton(CONTRACT_FILTER_KEY, filter)}
@@ -247,8 +232,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
                           {getFilterText(filter)}
                         </button>
                       </li>
-                    );
-                  })}
+                    ))}
                 </ul>
               </div>
             </div>
@@ -256,8 +240,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
               <h5 css={cssObj.rightTopBorder}>교대형태</h5>
               <div>
                 <ul>
-                  {ROTATION_FILTER_ARR.map((filter) => {
-                    return (
+                  {ROTATION_FILTER_ARR.map((filter) => (
                       <li key={filter}>
                         <button
                           css={filterButton(ROTATION_FILTER_KEY, filter)}
@@ -269,8 +252,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
                           {getFilterText(filter)}
                         </button>
                       </li>
-                    );
-                  })}
+                    ))}
                 </ul>
               </div>
             </div>

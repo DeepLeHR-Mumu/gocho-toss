@@ -10,16 +10,12 @@ export interface TipArrRequestObjDef {
 
 export const tipArrKeyObj = {
   all: [{ data: "tipArr" }] as const,
-  tipArr: (requestObj: TipArrRequestObjDef) => {
-    return [{ data: "tipArr", requestObj }] as const;
-  },
-  infinite: (requestObj: TipArrRequestObjDef) => {
-    return [
+  tipArr: (requestObj: TipArrRequestObjDef) => [{ data: "tipArr", requestObj }] as const,
+  infinite: (requestObj: TipArrRequestObjDef) => [
       {
         data: "tipArr",
         usage: "infinite",
         requestObj,
       },
-    ] as const;
-  },
+    ] as const,
 };

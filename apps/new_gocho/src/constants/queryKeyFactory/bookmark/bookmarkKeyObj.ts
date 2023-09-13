@@ -8,10 +8,6 @@ export interface UserBookmarkArrRequestDef {
 export const userBookmarkKeyObj = {
   jdAll: [{ data: "userJobBookmarkArr" }] as const,
   companyAll: [{ data: "userCompanyBookmarkArr" }] as const,
-  jobBookmarkArr: (requestObj: UserBookmarkArrRequestDef) => {
-    return [{ data: "userJobBookmarkArr", requestObj }] as const;
-  },
-  companyBookmarkArr: (requestObj: UserBookmarkArrRequestDef) => {
-    return [{ data: "userCompanyBookmarkArr", requestObj }] as const;
-  },
+  jobBookmarkArr: (requestObj: UserBookmarkArrRequestDef) => [{ data: "userJobBookmarkArr", requestObj }] as const,
+  companyBookmarkArr: (requestObj: UserBookmarkArrRequestDef) => [{ data: "userCompanyBookmarkArr", requestObj }] as const,
 };

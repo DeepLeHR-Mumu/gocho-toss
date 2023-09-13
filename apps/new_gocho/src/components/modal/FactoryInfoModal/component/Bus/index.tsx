@@ -5,8 +5,7 @@ import busImage from "@/public/bus.svg";
 import { BusProps } from "./type";
 import { cssObj } from "./style";
 
-export const Bus = ({ bus }: BusProps) => {
-  return (
+export const Bus = ({ bus }: BusProps) => (
     <div css={cssObj.wrapper}>
       <div css={cssObj.imageWrapper}>
         <Image src={busImage} alt="bus" />
@@ -15,4 +14,3 @@ export const Bus = ({ bus }: BusProps) => {
       <span css={cssObj.content}>{bus ? "있음" : "없음"}</span>
     </div>
   );
-};

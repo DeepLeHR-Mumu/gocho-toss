@@ -3,8 +3,7 @@ import { NEWTEXTS } from "shared-style/text";
 import { NEWCOLORS } from "shared-style/color";
 import { MOBILE } from "shared-style/mediaQuery";
 
-export const getCssObj = (themeWhite: boolean) => {
-  return {
+export const getCssObj = (themeWhite: boolean) => ({
     wrapper: css`
       width: 100%;
       height: 8.75rem;
@@ -115,5 +114,4 @@ export const getCssObj = (themeWhite: boolean) => {
       height: 1.5rem;
       color: ${themeWhite ? NEWCOLORS.BLACK : NEWCOLORS.WHITE};
     `,
-  };
-};
+  });

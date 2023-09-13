@@ -4,7 +4,5 @@ export interface FactoryArrRequestObjDef {
 
 export const factoryArrKeyObj = {
   all: [{ data: "factoryArr" }] as const,
-  arr: (requestObj: FactoryArrRequestObjDef) => {
-    return [{ data: "factoryArr", requestObj }] as const;
-  },
+  arr: (requestObj: FactoryArrRequestObjDef) => [{ data: "factoryArr", requestObj }] as const,
 };

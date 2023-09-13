@@ -10,6 +10,4 @@ const postSignUp: PostSignUpDef = async (requestObj) => {
   return data;
 };
 
-export const useDoSignUp: UseDoSignUpProps = () => {
-  return useMutation<SignUpResponseDef, AxiosError, RequestObjDef>({ mutationFn: postSignUp });
-};
+export const useDoSignUp: UseDoSignUpProps = () => useMutation<SignUpResponseDef, AxiosError, RequestObjDef>({ mutationFn: postSignUp });

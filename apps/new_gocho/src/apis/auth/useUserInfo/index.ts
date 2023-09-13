@@ -9,12 +9,8 @@ export const getUserInfo = async () => {
   return data;
 };
 
-export const useUserInfo = () => {
-  return useQuery({
+export const useUserInfo = () => useQuery({
     queryKey: userInfoKeyObj.userInfo,
     queryFn: getUserInfo,
-    select: ({ data }) => {
-      return selector(data);
-    },
+    select: ({ data }) => selector(data),
   });
-};

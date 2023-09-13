@@ -87,8 +87,7 @@ export const cssObj = {
     }
   `,
 
-  sliderButton: (position: "left" | "right") => {
-    return css`
+  sliderButton: (position: "left" | "right") => css`
       position: absolute;
       transform: translate(0, -50%);
       top: 50%;
@@ -108,6 +107,5 @@ export const cssObj = {
         width: 2rem;
         height: 2rem;
       }
-    `;
-  },
+    `,
 };

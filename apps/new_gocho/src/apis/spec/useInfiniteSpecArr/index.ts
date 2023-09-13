@@ -15,20 +15,12 @@ export const getInfiniteSpecArr: GetInifiniteSpecArrDef = async ({ queryKey: [{ 
   return { ...data, nextPage };
 };
 
-export const useInfiniteSpecArr = (requestObj: SpecArrInfinityRequestDef) => {
-  return useInfiniteQuery({
+export const useInfiniteSpecArr = (requestObj: SpecArrInfinityRequestDef) => useInfiniteQuery({
     queryKey: specArrKeyObj.infinite(requestObj),
     queryFn: getInfiniteSpecArr,
-    getNextPageParam: (responseObj) => {
-      return responseObj.data.length !== 0 ? responseObj.nextPage : undefined;
-    },
-    select: (data) => {
-      return {
-        pages: data.pages.map((page) => {
-          return selector(page.data);
-        }),
+    getNextPageParam: (responseObj) => responseObj.data.length !== 0 ? responseObj.nextPage : undefined,
+    select: (data) => ({
+        pages: data.pages.map((page) => selector(page.data)),
         pageParams: [...data.pageParams],
-      };
-    },
+      }),
   });
-};

@@ -1,7 +1,6 @@
 import { CompanyObjDef } from "../type/company";
 
-export const selector = (data: CompanyObjDef) => {
-  return {
+export const selector = (data: CompanyObjDef) => ({
     id: data.id,
     name: data.name,
     industry: data.industry,
@@ -33,8 +32,7 @@ export const selector = (data: CompanyObjDef) => {
       exists: data.nozo.exists,
       desc: data.nozo.desc,
     },
-    factoryArr: data.factory_arr.map((factory) => {
-      return {
+    factoryArr: data.factory_arr.map((factory) => ({
         name: factory.name,
         id: factory.id,
         companyId: factory.company_id,
@@ -50,7 +48,5 @@ export const selector = (data: CompanyObjDef) => {
           exists: factory.dormitory.exists,
           desc: factory.dormitory.desc,
         },
-      };
-    }),
-  };
-};
+      })),
+  });

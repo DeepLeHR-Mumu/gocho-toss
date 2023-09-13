@@ -15,13 +15,9 @@ export const getUserCompanyHistoryArr: GetUserCompanyHistoriesDef = async ({ que
   return data;
 };
 
-export const useUserCompanyHistoryArr = (requestObj: UserCompanyHistoryArrRequestDef) => {
-  return useQuery({
+export const useUserCompanyHistoryArr = (requestObj: UserCompanyHistoryArrRequestDef) => useQuery({
     queryKey: userCompanyHistoryArrKeyObj.companyHistoryArr(requestObj),
     queryFn: getUserCompanyHistoryArr,
     enabled: Boolean(requestObj.userId),
-    select: ({ data, page_result }) => {
-      return selector(data, page_result);
-    },
+    select: ({ data, page_result }) => selector(data, page_result),
   });
-};

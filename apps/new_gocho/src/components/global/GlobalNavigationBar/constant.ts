@@ -1,3 +1,8 @@
-import { URL } from "../../../pages/constants";
+import { INTERNAL_URL } from "../../../pages/constants";
 
-export const THEME_WHITE_PAGES = [URL.SEARCH, URL.COMPANY_DETAIL, URL.JDS_DETAIL, URL.JDS_LIST];
+export const THEME_WHITE_PAGES = [
+  INTERNAL_URL.SEARCH,
+  INTERNAL_URL.COMPANY_DETAIL,
+  INTERNAL_URL.JD_DETAIL,
+  INTERNAL_URL.JD_LIST,
+];

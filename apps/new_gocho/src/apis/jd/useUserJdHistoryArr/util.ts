@@ -11,8 +11,7 @@ export const selector = (data: JdHistoriesArrDef[], page_result: PageResultDef) 
     isFirst: page_result.is_first,
     isLast: page_result.is_last,
   };
-  const userJdHistoriesArr = data.map((jd) => {
-    return {
+  const userJdHistoriesArr = data.map((jd) => ({
       id: jd.id,
       company: {
         id: jd.company.id,
@@ -23,8 +22,7 @@ export const selector = (data: JdHistoriesArrDef[], page_result: PageResultDef) 
       cut: jd.cut,
       endTime: jd.end_time,
       isExpired: jd.is_expired,
-    };
-  });
+    }));
 
   return { userJdHistoriesArr, pageResult };
 };

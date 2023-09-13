@@ -22,9 +22,7 @@ export const Pagination = ({ totalPage }: PaginationProps) => {
 
   const isLastRange = totalPage >= currentStart && totalPage <= currentEnd;
 
-  const pageNumberArr = Array.from({ length: totalPage }, (_, index) => {
-    return index + 1;
-  });
+  const pageNumberArr = Array.from({ length: totalPage }, (_, index) => index + 1);
 
   const changePageNumber = (pageNumber: number) => {
     router.push({ query: { ...router.query, page: pageNumber } });
@@ -73,8 +71,7 @@ export const Pagination = ({ totalPage }: PaginationProps) => {
           </button>
         </div>
       )}
-      {pageNumberArr.slice(currentStart, currentEnd).map((pageNumber) => {
-        return (
+      {pageNumberArr.slice(currentStart, currentEnd).map((pageNumber) => (
           <button
             key={pageNumber}
             type="button"
@@ -87,8 +84,7 @@ export const Pagination = ({ totalPage }: PaginationProps) => {
           >
             {pageNumber}
           </button>
-        );
-      })}
+        ))}
       {!isLastRange && (
         <div css={cssObj.nextWrapper}>
           <button

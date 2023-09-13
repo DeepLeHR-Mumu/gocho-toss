@@ -1,8 +1,6 @@
 import { TipObjDef } from "../type/tipArr";
 
-export const selector = (tipArr: TipObjDef[]) => {
-  return tipArr.map((tip) => {
-    return {
+export const selector = (tipArr: TipObjDef[]) => tipArr.map((tip) => ({
       id: tip.id,
       uploaderName: tip.uploader.nickname,
       title: tip.title,
@@ -10,6 +8,4 @@ export const selector = (tipArr: TipObjDef[]) => {
       thumbnailSrc: tip.thumbnail_url,
       thumbnailSvgSrc: tip.svg_thumbnail_url,
       tag: tip.tag,
-    };
-  });
-};
+    }));

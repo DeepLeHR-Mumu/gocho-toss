@@ -6,7 +6,5 @@ export interface UserCompanyHistoryArrRequestDef {
 
 export const userCompanyHistoryArrKeyObj = {
   all: [{ data: "companyHistoryArr" }] as const,
-  companyHistoryArr: (requestObj: UserCompanyHistoryArrRequestDef) => {
-    return [{ data: "companyHistoryArr", requestObj }] as const;
-  },
+  companyHistoryArr: (requestObj: UserCompanyHistoryArrRequestDef) => [{ data: "companyHistoryArr", requestObj }] as const,
 };

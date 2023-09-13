@@ -12,8 +12,7 @@ const getUserFilter: GetUserFilterDef = async ({ queryKey: [{ requestObj }] }) =
   return data;
 };
 
-export const useUserFilter = (requestObj: FilterRequestObjDef) => {
-  return useQuery({
+export const useUserFilter = (requestObj: FilterRequestObjDef) => useQuery({
     queryKey: filterKeyObj.all(requestObj),
     queryFn: getUserFilter,
     onError: (error) => {
@@ -23,8 +22,5 @@ export const useUserFilter = (requestObj: FilterRequestObjDef) => {
       return error;
     },
     enabled: Boolean(requestObj.userId),
-    select: ({ data }) => {
-      return selector(data);
-    },
+    select: ({ data }) => selector(data),
   });
-};

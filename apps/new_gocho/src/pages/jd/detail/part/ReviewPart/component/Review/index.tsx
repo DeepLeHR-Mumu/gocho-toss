@@ -14,8 +14,7 @@ export const Review = ({
   thumbsUp,
   thumbsDown,
   isMyComment,
-}: ReviewProps) => {
-  return (
+}: ReviewProps) => (
     <div>
       <div css={cssObj.titleWrapper}>
         <span css={cssObj.name}>{uploader.nickname}</span>
@@ -35,4 +34,3 @@ export const Review = ({
       </div>
     </div>
   );
-};

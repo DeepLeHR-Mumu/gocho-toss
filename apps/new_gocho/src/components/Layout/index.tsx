@@ -7,8 +7,7 @@ interface LayoutDef {
   children: ReactNode;
 }
 
-export const Layout: FunctionComponent<LayoutDef> = ({ children }) => {
-  return (
+export const Layout: FunctionComponent<LayoutDef> = ({ children }) => (
     <div
       css={css`
         ${layout}
@@ -17,4 +16,3 @@ export const Layout: FunctionComponent<LayoutDef> = ({ children }) => {
       {children}
     </div>
   );
-};

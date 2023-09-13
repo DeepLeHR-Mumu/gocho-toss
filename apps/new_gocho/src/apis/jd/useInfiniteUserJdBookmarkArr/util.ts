@@ -11,8 +11,7 @@ export const selector = (data: JdBookmarkArrDef[], page_result: PageResultDef) =
     isFirst: page_result.is_first,
     isLast: page_result.is_last,
   };
-  const userJdBookmarkArr = data.map((jd) => {
-    return {
+  const userJdBookmarkArr = data.map((jd) => ({
       id: jd.id,
       company: {
         id: jd.company.id,
@@ -22,7 +21,6 @@ export const selector = (data: JdBookmarkArrDef[], page_result: PageResultDef) =
       title: jd.title,
       cut: jd.cut,
       endTime: jd.end_time,
-    };
-  });
+    }));
   return { userJdBookmarkArr, pageResult };
 };

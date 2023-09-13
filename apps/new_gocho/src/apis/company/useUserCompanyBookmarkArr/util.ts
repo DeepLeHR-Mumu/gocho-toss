@@ -12,15 +12,13 @@ export const selector = (data: CompanyBookmarkObjDef[], page_result: PageResultD
     isLast: page_result.is_last,
   };
 
-  const companyBookmarkDataArr = data.map((company) => {
-    return {
+  const companyBookmarkDataArr = data.map((company) => ({
       id: company.id,
       name: company.name,
       logoUrl: company.logo_url,
       industry: company.industry,
       size: company.size,
-    };
-  });
+    }));
 
   return { companyBookmarkDataArr, pageResult };
 };

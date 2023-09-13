@@ -10,6 +10,4 @@ const postEvalSpec: PostEvalSpecDef = async (requestObj) => {
   return data;
 };
 
-export const useEvalSpec: UseEvalSpecProps = () => {
-  return useMutation<PostEvalSpecResponse, AxiosError, RequestObjDef>({ mutationFn: postEvalSpec });
-};
+export const useEvalSpec: UseEvalSpecProps = () => useMutation<PostEvalSpecResponse, AxiosError, RequestObjDef>({ mutationFn: postEvalSpec });

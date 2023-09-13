@@ -13,7 +13,5 @@ export interface JdCountRequestObjDef {
 
 export const jdCountKeyObj = {
   all: [{ data: "jdCount" }] as const,
-  jdCount: (requestObj: JdCountRequestObjDef) => {
-    return [{ data: "jdCount", requestObj }] as const;
-  },
+  jdCount: (requestObj: JdCountRequestObjDef) => [{ data: "jdCount", requestObj }] as const,
 };

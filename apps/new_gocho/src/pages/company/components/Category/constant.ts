@@ -1,4 +1,3 @@
-import { CategoryIcon } from "./type";
 
 import semiconductorIcon from "@/public/categoryIcon/semiconductor.svg";
 import bioIcon from "@/public/categoryIcon/bio.svg";
@@ -8,6 +7,7 @@ import electronicMaterialIcon from "@/public/categoryIcon/electronicMaterials.sv
 import petrochemiRefineIcon from "@/public/categoryIcon/petrochmicalRefine.svg";
 import secondBetteryIcon from "@/public/categoryIcon/secondBattery.svg";
 import pharmaceuticalIcon from "@/public/categoryIcon/pharmaceutical.svg";
+import { CategoryIcon } from "./type";
 
 export const topCategoryIconArr: CategoryIcon[] = [
   {

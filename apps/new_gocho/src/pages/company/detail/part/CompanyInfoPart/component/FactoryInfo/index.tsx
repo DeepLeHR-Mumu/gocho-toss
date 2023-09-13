@@ -27,8 +27,7 @@ export const FactoryInfo = ({ factoryArr }: FactoryInfoProps) => {
     <section css={commonCssObj.box}>
       <h3 css={commonCssObj.title}>공장 정보</h3>
       <div css={cssObj.factoryChipWrapper}>
-        {factoryArr.map((factory) => {
-          return (
+        {factoryArr.map((factory) => (
             <Chip
               key={factory.id}
               size="large"
@@ -39,8 +38,7 @@ export const FactoryInfo = ({ factoryArr }: FactoryInfoProps) => {
             >
               {factory.name}
             </Chip>
-          );
-        })}
+          ))}
       </div>
       {selected && (
         <div css={cssObj.factoryInfoWrapper}>

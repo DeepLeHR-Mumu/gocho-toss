@@ -20,8 +20,6 @@ const patchUserAlarmSetting: PatchUserAlarmSettingDef = async (requestObj) => {
   return data;
 };
 
-export const usePatchAlarmSetting: PatchUserAlarmSettingProps = () => {
-  return useMutation<PatchUserAlarmSettingResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
+export const usePatchAlarmSetting: PatchUserAlarmSettingProps = () => useMutation<PatchUserAlarmSettingResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
     mutationFn: patchUserAlarmSetting,
   });
-};

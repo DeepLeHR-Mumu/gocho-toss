@@ -10,12 +10,8 @@ export const getTopBannerArr: GetBannerArrDef = async () => {
   return data;
 };
 
-export const useTopBannerArr = () => {
-  return useQuery({
+export const useTopBannerArr = () => useQuery({
     queryKey: bannerArrKeyObj.top,
     queryFn: getTopBannerArr,
-    select: ({ data, count }) => {
-      return selector(data, count);
-    },
+    select: ({ data, count }) => selector(data, count),
   });
-};

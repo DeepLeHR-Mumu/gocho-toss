@@ -6,15 +6,11 @@ export interface SpecArrInfinityRequestDef {
 
 export const specArrKeyObj = {
   all: [{ data: "specArr" }] as const,
-  list: (requestObj: SpecArrInfinityRequestDef) => {
-    return [{ data: "specArr", requestObj }] as const;
-  },
-  infinite: (requestObj: SpecArrInfinityRequestDef) => {
-    return [
+  list: (requestObj: SpecArrInfinityRequestDef) => [{ data: "specArr", requestObj }] as const,
+  infinite: (requestObj: SpecArrInfinityRequestDef) => [
       {
         usage: "infinite",
         requestObj,
       },
-    ] as const;
-  },
+    ] as const,
 };

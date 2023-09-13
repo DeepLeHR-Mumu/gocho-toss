@@ -12,14 +12,10 @@ export const getJdDetail: GetJdDetailDef = async ({ queryKey: [{ requestObj }] }
   return data;
 };
 
-export const useJdDetail = (requestObj: JdDetailRequestObjDef) => {
-  return useQuery({
+export const useJdDetail = (requestObj: JdDetailRequestObjDef) => useQuery({
     queryKey: jdDetailKeyObj.detail(requestObj),
     queryFn: getJdDetail,
     staleTime: Infinity,
     enabled: Boolean(requestObj.id),
-    select: ({ data }) => {
-      return data;
-    },
+    select: ({ data }) => data,
   });
-};

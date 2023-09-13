@@ -3,8 +3,7 @@ import { NEWCOLORS } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
-  wrapper: (half?: boolean) => {
-    return css`
+  wrapper: (half?: boolean) => css`
       border: 1px solid ${NEWCOLORS.GRAY200};
       border-radius: 1rem;
       display: flex;
@@ -13,8 +12,7 @@ export const cssObj = {
       justify-content: space-between;
       align-items: center;
       background-color: ${NEWCOLORS.WHITE};
-    `;
-  },
+    `,
 
   descriptionWrapper: css`
     display: flex;

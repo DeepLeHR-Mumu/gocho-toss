@@ -1,8 +1,7 @@
 import { TopBannerDef } from "../type";
 
 export const selector = (bannerArr: TopBannerDef[], count: number) => {
-  const bannerDataArr = bannerArr.map((banner) => {
-    return {
+  const bannerDataArr = bannerArr.map((banner) => ({
       id: banner.id,
       startTime: banner.end_time,
       endTime: banner.end_time,
@@ -18,7 +17,6 @@ export const selector = (bannerArr: TopBannerDef[], count: number) => {
         startTime: banner.jd.start_time,
         endTime: banner.jd.end_time,
       },
-    };
-  });
+    }));
   return { bannerDataArr, count };
 };

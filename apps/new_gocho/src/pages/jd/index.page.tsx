@@ -7,8 +7,7 @@ import { Layout } from "@/components";
 import { HotJd, JdSlider } from "./part";
 import { cssObj } from "./style";
 
-const JdList: NextPage = () => {
-  return (
+const JdList: NextPage = () => (
     <main>
       <Layout>
         <HotJd />
@@ -23,6 +22,5 @@ const JdList: NextPage = () => {
       </Layout>
     </main>
   );
-};
 
 export default JdList;
