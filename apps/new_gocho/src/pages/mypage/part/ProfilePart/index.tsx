@@ -6,6 +6,7 @@ import { Profile, Button, Input } from "shared-ui/deeple-ds";
 
 import { FiEdit3 } from "react-icons/fi";
 
+import { useToast } from "@/globalStates";
 import { usePatchUserProfile, useUserProfile } from "@/apis/auth";
 
 import { fileEncording } from "./utils";
@@ -29,6 +30,7 @@ export const ProfilePart: FC = () => {
 
   const [userProfile, setProfile] = useState<string>(userData?.image || "");
   const [useProfileFile, setProfileFile] = useState<File | null>(null);
+  const { setToastMessage } = useToast();
 
   const handleUploadButton = () => {
     if (uploadDom.current) {
@@ -52,7 +54,6 @@ export const ProfilePart: FC = () => {
         }
       } catch (error) {
         // TODO: 토스트로 알림주기
-        // console.error("An error occurred while reading the file: ", error);
       }
     }
   };
@@ -76,8 +77,7 @@ export const ProfilePart: FC = () => {
         });
       },
       onSuccess: () => {
-        // TODO: 토스트로 알림주기
-        alert("업로드 성공");
+        setToastMessage("프로필 변경이 완료되었습니다");
         setProfileFile(null);
       },
     };
