@@ -6,6 +6,11 @@ export const cssObj = {
   subContainer: css`
     display: flex;
     flex-direction: column;
+    padding-bottom: 4rem;
+
+    :last-of-type {
+      padding-bottom: 0;
+    }
   `,
 
   title: css`

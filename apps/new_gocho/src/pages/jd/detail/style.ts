@@ -5,8 +5,7 @@ import { NEWTEXTS } from "shared-style/text";
 export const cssObj = {
   background: css`
     background-color: ${NEWCOLORS.GRAY100};
-    padding-top: 1.75rem;
-    padding-bottom: 0.875rem;
+    padding: 1.75rem 0;
   `,
 
   wrapper: css`

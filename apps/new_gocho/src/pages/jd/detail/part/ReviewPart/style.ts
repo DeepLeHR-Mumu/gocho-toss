@@ -54,7 +54,7 @@ export const cssObj = {
   `,
 
   alertHoverBox: css`
-    width: 14.75rem;
+    width: 15.375rem;
     position: absolute;
     z-index: 20;
     top: 2rem;

@@ -4,6 +4,7 @@ export interface JdObjDef {
     id: number;
     name: string;
     logo_url: string;
+    is_bookmark: boolean;
   };
   title: string;
   cut: boolean;

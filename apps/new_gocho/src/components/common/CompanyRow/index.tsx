@@ -18,7 +18,7 @@ export const CompanyRow = ({ id, logo, name, size, industry, bookmark, border }:
 
   return (
     <>
-      <div css={cssObj.wrapper(!!border)}>
+      <div css={cssObj.wrapper(Boolean(border))}>
         <Profile size={isMobile ? 52 : 60} src={logo} />
         <div css={cssObj.infoWrapper}>
           <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${id}`} css={cssObj.companyName}>
