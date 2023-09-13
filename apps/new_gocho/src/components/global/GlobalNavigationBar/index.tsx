@@ -130,7 +130,9 @@ export const GlobalNavigationBar = () => {
                     <>
                       <FiBell css={alarmIcon} />
                       <DropDown
-                        customTitle={<Profile src={userData.image} size={40} />}
+                        customTitle={
+                          <Profile src={userData.image} size={40} altText={`${userData.nickname} 유저 로고`} />
+                        }
                         menu={{
                           width: 180,
                           closeAfterClickEvent: true,

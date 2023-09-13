@@ -116,7 +116,7 @@ export const ProfilePart: FC = () => {
   return (
     <form css={cssObj.contentWrapper} onSubmit={handleSubmit(onSubmit)}>
       <div css={cssObj.profileBox}>
-        <Profile src={userProfile} size={120} />
+        <Profile src={userProfile} size={120} altText={`${userData?.nickname} 유저 로고`} />
         <button type="button" css={cssObj.uploadBox} onClick={handleUploadButton}>
           <FiEdit3 css={cssObj.uploadIcon} />
         </button>

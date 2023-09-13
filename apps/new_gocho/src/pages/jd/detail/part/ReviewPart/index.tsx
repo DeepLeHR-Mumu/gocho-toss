@@ -70,7 +70,7 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
       <aside css={cssObj.wrapper}>
         <div css={cssObj.headerWrapper}>
           <div css={cssObj.companyWrapper}>
-            <Profile src={company?.logoUrl || ""} size={24} />
+            <Profile src={company?.logoUrl || ""} size={24} altText={`${company?.name} 회사 로고`} />
             <span>{company?.name}</span>
           </div>
           <h3 css={cssObj.title}>{title}</h3>
@@ -137,18 +137,18 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
           <div css={cssObj.contentsWrapper(false)} ref={scrollRef}>
             {companyCommentData?.comment_arr && companyCommentData.comment_arr.length !== 0 ? (
               companyCommentData.comment_arr.map((comment) => (
-                  <Review
-                    key={comment.id}
-                    companyId={company.id}
-                    commentId={comment.id}
-                    uploader={{ ...comment.uploader }}
-                    time={comment.created_time}
-                    comment={comment.description}
-                    thumbsUp={{ count: comment.like, isClicked: comment.is_liked }}
-                    thumbsDown={{ count: comment.dislike, isClicked: comment.is_disliked }}
-                    isMyComment={comment.uploader.nickname === userData?.nickname}
-                  />
-                ))
+                <Review
+                  key={comment.id}
+                  companyId={company.id}
+                  commentId={comment.id}
+                  uploader={{ ...comment.uploader }}
+                  time={comment.created_time}
+                  comment={comment.description}
+                  thumbsUp={{ count: comment.like, isClicked: comment.is_liked }}
+                  thumbsDown={{ count: comment.dislike, isClicked: comment.is_disliked }}
+                  isMyComment={comment.uploader.nickname === userData?.nickname}
+                />
+              ))
             ) : (
               <p css={cssObj.noComment}>
                 아직 등록된 {reviewState === "jd" ? "공고" : "기업"} 리뷰가 없습니다.

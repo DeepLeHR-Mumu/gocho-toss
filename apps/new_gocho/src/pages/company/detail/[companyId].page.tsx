@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { Layout } from "@/components";
 import { isQueryString } from "@/utils";
 
+import { INTERNAL_URL } from "@/pages/constants";
 import { JdPart } from "./part/JdPart";
 import { CompanyInfoPart } from "./part/CompanyInfoPart";
 import { ReviewPart } from "./part/ReviewPart";
@@ -18,7 +19,7 @@ const CompanyDetailPage: NextPage = () => {
     if (router.query.companyId && !isQueryString(router.query.type)) {
       router.replace(
         { pathname: router.pathname, query: { companyId: router.query.companyId, type: "company" } },
-        `/company/detail/[companyId]?type=company`
+        `${INTERNAL_URL.COMPANY_DETAIL}/[companyId]?type=company`
       );
     }
   }, [router]);

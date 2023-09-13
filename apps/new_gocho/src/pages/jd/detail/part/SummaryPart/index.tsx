@@ -16,7 +16,7 @@ export const SummaryPart = ({ company, title, endTime, view }: SummaryPartProps)
       <div css={cssObj.wrapper}>
         <div css={cssObj.companyWrapper}>
           {/* TODO "" 대신 default 이미지 추가 */}
-          <Profile src={company.logoUrl || ""} size={48} />
+          <Profile src={company.logoUrl || ""} size={48} altText={`${company.name} 회사 로고`} />
           <span css={cssObj.companyName}>
             <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${company.id}`}>{company.name}</Link>
           </span>

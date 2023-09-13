@@ -32,7 +32,7 @@ export const WithMenu: Story = {
 
 export const CustomTitle: Story = {
   args: {
-    customTitle: <Profile src={testSmallImage1} />,
+    customTitle: <Profile src={testSmallImage1} altText="test profile alt" />,
     menu: { options: [{ content: "option 1", focused: true }, { content: "option 2" }], footer: { content: "footer" } },
   },
 };
