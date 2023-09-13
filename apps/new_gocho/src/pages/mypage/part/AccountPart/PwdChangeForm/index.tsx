@@ -2,12 +2,16 @@ import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { Button, Input } from "shared-ui/deeple-ds";
+
+import { useToast } from "@/globalStates";
 import { usePatchUserPassword } from "@/apis/auth";
+
 import { cssObj } from "./style";
 import { PwdChangeFormProps, PwdInputForm } from "./type";
 
 export const PwdChangeForm: FC<PwdChangeFormProps> = ({ userData, handleFormClose }) => {
   const { mutate: patchPassword } = usePatchUserPassword();
+  const { setToastMessage } = useToast();
 
   const {
     register,
@@ -32,8 +36,7 @@ export const PwdChangeForm: FC<PwdChangeFormProps> = ({ userData, handleFormClos
           setError("originPassword", { type: "custom", message: "" });
         },
         onSuccess: () => {
-          // TODO: 토스트로 변경하기
-          alert("비밀번호 변경 성공");
+          setToastMessage("비밀번호 변경이 완료되었습니다.");
           handleFormClose();
         },
       }

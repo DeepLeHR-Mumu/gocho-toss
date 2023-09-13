@@ -4,6 +4,8 @@ import { FiTrash2 } from "react-icons/fi";
 
 import { Popup } from "shared-ui/deeple-ds";
 
+import { useToast } from "@/globalStates";
+
 import { useDeleteCompanyComment } from "@/apis/company";
 
 import { DeleteCommentProps } from "./type";
@@ -11,6 +13,7 @@ import { cssObj } from "./style";
 
 export const DeleteComment = ({ size, color, companyId, commentId }: DeleteCommentProps) => {
   const [deleteModal, setDeleteModal] = useState(false);
+  const { setToastMessage } = useToast();
 
   const { mutate: deleteCompanyComment } = useDeleteCompanyComment({ companyId });
 
@@ -43,6 +46,7 @@ export const DeleteComment = ({ size, color, companyId, commentId }: DeleteComme
             handler: () => {
               if (commentId && companyId) {
                 deleteCompanyComment({ commentId, companyId });
+                setToastMessage("리뷰가 삭제되었습니다.");
               }
             },
           }}

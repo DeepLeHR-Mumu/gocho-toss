@@ -18,19 +18,6 @@ const MyPage: NextPage = () => {
     return <h1>Error</h1>;
   }
 
-  if (!userProfile) {
-    /* TODO: 모달창 논의 필요 */
-    return (
-      <div css={cssObj.background}>
-        <LoginModal
-          close={() => {
-            router.push("/");
-          }}
-        />
-      </div>
-    );
-  }
-
   return (
     <Layout>
       <main css={cssObj.wrapper}>
@@ -40,7 +27,17 @@ const MyPage: NextPage = () => {
         <section>
           <Box css={cssObj.elementBox}>
             <h3 css={cssObj.title}>{currentPart.title}</h3>
-            {currentPart.element}
+            {userProfile ? (
+              currentPart.element
+            ) : (
+              <div css={cssObj.background}>
+                <LoginModal
+                  close={() => {
+                    router.push("/");
+                  }}
+                />
+              </div>
+            )}
           </Box>
         </section>
       </main>

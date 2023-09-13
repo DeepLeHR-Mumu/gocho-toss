@@ -5,6 +5,7 @@ import { FiAlertCircle, FiSend } from "react-icons/fi";
 
 import { Profile, Chip, Input } from "shared-ui/deeple-ds";
 
+import { useToast } from "@/globalStates";
 import { useWriteCompanyComment, useCompanyCommentArr } from "@/apis/company";
 import { RequestObjDef as CompanyCommentFormValues } from "@/apis/company/useWriteCompanyComment/type";
 import { useUserProfile } from "@/apis/auth";
@@ -19,6 +20,8 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
   const [reviewState, setReviewState] = useState<"jd" | "company">("jd");
   const [loginModal, setLoginModal] = useState(false);
   const [warning, setWarning] = useState(false);
+
+  const { setToastMessage } = useToast();
 
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const scrollWillbeBottom = useRef(false);
@@ -55,6 +58,7 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
     postWriteCompanyComment(commentObj, {
       onSuccess: () => {
         reset();
+        setToastMessage("공고리뷰가 업로드 되었습니다.");
         queryClient.invalidateQueries(companyCommentArrKeyObj.all);
         scrollWillbeBottom.current = true;
       },

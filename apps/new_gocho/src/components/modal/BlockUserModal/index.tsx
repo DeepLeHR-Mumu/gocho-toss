@@ -3,9 +3,11 @@ import { Popup } from "shared-ui/deeple-ds";
 import { useBlockUser } from "@/apis/users";
 
 import { BlockUserModalProps } from "./type";
+import { useToast } from "@/globalStates";
 
 export const BlockUserModal = ({ companyId, userId, cancelHandler, confirmHandler }: BlockUserModalProps) => {
   const { mutate: postBlockUser } = useBlockUser({ companyId });
+  const { setToastMessage } = useToast();
 
   return (
     <Popup
@@ -28,6 +30,11 @@ export const BlockUserModal = ({ companyId, userId, cancelHandler, confirmHandle
 
           if (confirmHandler) {
             confirmHandler();
+          }
+
+          if (cancelHandler) {
+            setToastMessage("유저가 차단 되었습니다.");
+            cancelHandler();
           }
         },
       }}

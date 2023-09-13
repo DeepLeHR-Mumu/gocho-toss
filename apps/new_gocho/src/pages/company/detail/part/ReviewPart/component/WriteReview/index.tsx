@@ -1,7 +1,10 @@
 import { useRouter } from "next/router";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
+
 import { Profile, Textarea, Button } from "shared-ui/deeple-ds";
+
+import { useToast } from "@/globalStates/index";
 
 import { useWriteCompanyComment } from "@/apis/company";
 import { useUserProfile } from "@/apis/auth";
@@ -15,6 +18,8 @@ export const WriteReview = () => {
   const { data: userData } = useUserProfile();
   const { mutate: postWriteCompanyComment } = useWriteCompanyComment();
 
+  const { setToastMessage } = useToast();
+
   const { register, handleSubmit, reset } = useForm<{ comment: string }>();
 
   const writeComment: SubmitHandler<{ comment: string }> = (commentObj) => {
@@ -24,6 +29,7 @@ export const WriteReview = () => {
         onSuccess: () => {
           reset();
           queryClient.invalidateQueries(companyCommentArrKeyObj.all);
+          setToastMessage("기업리뷰가 업로드 되었습니다.");
         },
         onError: () => {
           // TODO 실패 시
