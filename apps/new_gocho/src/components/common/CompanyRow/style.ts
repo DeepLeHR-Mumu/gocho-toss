@@ -5,17 +5,24 @@ import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
   wrapper: (border: boolean) => css`
-      display: flex;
-      flex-direction: row;
-      padding: 1.25rem 1.5rem;
-      align-items: center;
-      border-radius: 1rem;
-      border: ${border ? `1px solid ${NEWCOLORS.GRAY200}` : "none"};
+    display: flex;
+    flex-direction: row;
+    padding: 1.25rem 1.5rem;
+    align-items: center;
+    border-radius: 1rem;
+    border: ${border ? `1px solid ${NEWCOLORS.GRAY200}` : "none"};
 
-      ${MOBILE} {
-        padding: 0.75rem 0;
-      }
-    `,
+    ${MOBILE} {
+      padding: 0.75rem 0;
+    }
+  `,
+
+  skeletonWrapper: css`
+    width: 100%;
+    height: 5.75rem;
+    border-radius: 1rem;
+    overflow: hidden;
+  `,
 
   infoWrapper: css`
     display: flex;

@@ -4,15 +4,22 @@ import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
   wrapper: (half?: boolean) => css`
-      border: 1px solid ${NEWCOLORS.GRAY200};
-      border-radius: 1rem;
-      display: flex;
-      flex-direction: row;
-      padding: 1.25rem ${half ? "1.5rem" : "2.5rem"} 1.375rem 1.5rem;
-      justify-content: space-between;
-      align-items: center;
-      background-color: ${NEWCOLORS.WHITE};
-    `,
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+    padding: 1.25rem ${half ? "1.5rem" : "2.5rem"} 1.375rem 1.5rem;
+    justify-content: space-between;
+    align-items: center;
+    background-color: ${NEWCOLORS.WHITE};
+  `,
+
+  skeletonWrapper: css`
+    width: 100%;
+    height: 7.25rem;
+    border-radius: 1rem;
+    overflow: hidden;
+  `,
 
   descriptionWrapper: css`
     display: flex;

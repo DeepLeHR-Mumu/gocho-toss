@@ -5,20 +5,25 @@ import { dateConverter } from "shared-util";
 
 import { isInvalidDate, isExpired } from "@/utils";
 
+import { SkeletonBox } from "../SkeletonBox";
 import { JdBookmark } from "../JdBookmark";
 
 import { JdRowProps } from "./type";
 import { cssObj } from "./style";
 
 // TODO 모바일 반응형 추가
-export const JdRow = ({ jdId, companyName, jdTitle, dueDate, bookmarked, cut, half }: JdRowProps) => {
+export const JdRow = ({ jd, half }: JdRowProps) => {
   const validDueDate = useMemo(() => {
-    const date = new Date(dueDate);
+    if (!jd) {
+      return null;
+    }
+
+    const date = new Date(jd.dueDate);
     if (!isInvalidDate(date)) {
       return date;
     }
     return null;
-  }, [dueDate]);
+  }, [jd]);
 
   /** NOTE JdRow 에서 end_time 이 만료인지 확인하는 로직과 DDayChip 내부에서 endTime 이 만료인지 확인하는 로직이 나뉘어 있다. 단일화 하는 게 좋아 보임. */
   const isDueDateExpired = isExpired(validDueDate || new Date(0));
@@ -38,6 +43,16 @@ export const JdRow = ({ jdId, companyName, jdTitle, dueDate, bookmarked, cut, ha
 
     return customDate;
   };
+
+  if (!jd) {
+    return (
+      <div css={cssObj.skeletonWrapper}>
+        <SkeletonBox />
+      </div>
+    );
+  }
+
+  const { jdId, companyName, jdTitle, dueDate, bookmarked, cut } = jd;
 
   return (
     <div

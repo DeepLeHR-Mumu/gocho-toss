@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import JobiChatting from "shared-image/global/jobi/chatting.png";
+import { dummyArrCreator } from "shared-util";
 
 import { useJdArr } from "@/apis/jd";
 import { JdCard } from "@/components/common/JdCard";
@@ -65,15 +66,15 @@ export const HotJd: FunctionComponent = () => {
         </Link>
         {isMobile ? (
           <div css={cssObj.cardContainer}>
-            {jdDataObj?.jdDataArr.map((jd) => (
-              <JdCard key={jd.id} jd={jd} />
-            ))}
+            {jdDataObj
+              ? jdDataObj.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)
+              : dummyArrCreator(3).map((dummy) => <JdCard key={`hotJd${dummy}`} />)}
           </div>
         ) : (
           <Slider {...setCarouselSetting} ref={sliderRef}>
-            {jdDataObj?.jdDataArr.map((jd) => (
-              <JdCard key={jd.id} jd={jd} />
-            ))}
+            {jdDataObj
+              ? jdDataObj.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)
+              : dummyArrCreator(3).map((dummy) => <JdCard key={`hotJd${dummy}`} />)}
           </Slider>
         )}
       </div>

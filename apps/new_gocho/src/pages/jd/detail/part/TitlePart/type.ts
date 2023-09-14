@@ -1,7 +1,9 @@
 export interface TitlePartProps {
-  jdId: number;
-  companyName: string;
-  title: string;
-  isBookmark: boolean;
-  applyUrl: string;
+  jd?: {
+    jdId: number;
+    companyName: string;
+    title: string;
+    isBookmark: boolean;
+    applyUrl: string;
+  };
 }

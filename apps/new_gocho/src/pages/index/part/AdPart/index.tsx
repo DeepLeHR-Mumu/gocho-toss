@@ -4,9 +4,12 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Image from "next/image";
 import Link from "next/link";
 
-import { useMainBannerArr } from "@/apis/ads";
+import { dummyArrCreator } from "shared-util";
 
+import { useMainBannerArr } from "@/apis/ads";
+import { SkeletonBox } from "@/components";
 import { useGetDeviceType } from "@/globalStates";
+
 import { cssObj } from "./style";
 import { setCarouselSetting } from "./util";
 
@@ -19,13 +22,21 @@ export const AdPart: FunctionComponent = () => {
   return (
     <section css={cssObj.sectionContainer}>
       <Slider {...setCarouselSetting(isMobile)} ref={sliderRef} css={cssObj.sliderContainer}>
-        {bannerDataObj?.bannerDataArr.map((banner) => (
-            <Link key={`indexMainBanner${banner.id}`} css={cssObj.banner} href={banner.link || ""}>
-              <div css={cssObj.imageWrapper}>
-                <Image src={banner.pcImageUrl} alt="메인 배너" fill priority />
-              </div>
-            </Link>
-          ))}
+        {bannerDataObj
+          ? bannerDataObj.bannerDataArr.map((banner) => (
+              <Link key={`indexMainBanner${banner.id}`} css={cssObj.banner} href={banner.link || ""}>
+                <div css={cssObj.imageWrapper}>
+                  <Image src={banner.pcImageUrl} alt="메인 배너" fill priority />
+                </div>
+              </Link>
+            ))
+          : dummyArrCreator(3).map((dummy) => (
+              <Link key={`indexMainBanner${dummy}`} css={cssObj.banner} href="/">
+                <div css={cssObj.imageWrapper}>
+                  <SkeletonBox />
+                </div>
+              </Link>
+            ))}
       </Slider>
       <button
         css={cssObj.sliderButton("left")}

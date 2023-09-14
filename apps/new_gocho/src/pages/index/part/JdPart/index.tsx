@@ -23,19 +23,6 @@ export const JdPart: FunctionComponent = () => {
     size: 12,
   });
 
-  if (!jdDataObj) {
-    return (
-      <section css={cssObj.sectionContainer}>
-        <h2 css={cssObj.title}>
-          오늘의 <span css={cssObj.colorPoint}>HOT</span> 공고
-        </h2>
-        <Slider {...setCarouselSetting} ref={sliderRef}>
-          {dummyArrCreator(3).map((dummy) => <p key={`mainJobCard${dummy}`}>{dummy}</p>)}
-        </Slider>
-      </section>
-    );
-  }
-
   return (
     <>
       <section css={cssObj.sectionContainer}>
@@ -65,11 +52,15 @@ export const JdPart: FunctionComponent = () => {
         <div css={cssObj.sliderContainer}>
           {isMobile ? (
             <div css={cssObj.cardContainer}>
-              {jdDataObj?.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)}
+              {jdDataObj
+                ? jdDataObj.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)
+                : dummyArrCreator(4).map((dummy) => <JdCard key={`mainJobCard${dummy}`} />)}
             </div>
           ) : (
             <Slider {...setCarouselSetting} ref={sliderRef}>
-              {jdDataObj?.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)}
+              {jdDataObj
+                ? jdDataObj.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)
+                : dummyArrCreator(4).map((dummy) => <JdCard key={`mainJobCard${dummy}`} />)}
             </Slider>
           )}
         </div>
