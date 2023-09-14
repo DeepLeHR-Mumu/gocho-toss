@@ -12,7 +12,7 @@ import { ReviewPart } from "./part/ReviewPart";
 import { TitlePart } from "./part/TitlePart";
 import { cssObj } from "./style";
 
-const CompanyDetailPage: NextPage = () => {
+const CompanyDetail: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
@@ -36,4 +36,4 @@ const CompanyDetailPage: NextPage = () => {
   );
 };
 
-export default CompanyDetailPage;
+export default CompanyDetail;

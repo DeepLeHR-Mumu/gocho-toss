@@ -6,6 +6,7 @@ import { CompanyRow } from "@/components";
 
 import { useUserInfo } from "@/apis/auth/useUserInfo";
 import { useUserCompanyBookmarkArr } from "@/apis/company";
+import { INTERNAL_URL } from "@/pages/constants";
 import { NoListCard } from "../NoListCard";
 
 import { cssObj } from "./style";
@@ -99,6 +100,6 @@ export const FollowPart = () => {
       </div>
     </div>
   ) : (
-    <NoListCard text="아직 팔로우한 기업이 없습니다." linkText="기업보러가기" href="company" />
+    <NoListCard text="아직 팔로우한 기업이 없습니다." linkText="기업보러가기" href={INTERNAL_URL.COMPANY} />
   );
 };

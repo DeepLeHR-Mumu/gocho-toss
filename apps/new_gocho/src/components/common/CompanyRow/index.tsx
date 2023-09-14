@@ -8,7 +8,6 @@ import { LoginModal } from "@/components/modal/LoginModal";
 import { INTERNAL_URL } from "@/pages/constants";
 
 import { CompanyBookmark } from "../CompanyBookmark";
-
 import { CompanyRowProps } from "./type";
 import { cssObj } from "./style";
 

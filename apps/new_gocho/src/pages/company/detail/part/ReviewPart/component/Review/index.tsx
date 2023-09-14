@@ -6,6 +6,7 @@ import { getCommunityDateFormat } from "shared-util";
 
 import { CommentThumbs, BlockReportDropDown, DeleteComment } from "@/components";
 
+import { INTERNAL_URL } from "@/pages/constants";
 import { ReviewProps } from "./type";
 import { cssObj } from "./style";
 
@@ -23,7 +24,7 @@ export const Review = ({ companyId, comment, isMyComment }: ReviewProps) => (
     </div>
     <div css={cssObj.commentWrapper}>
       {comment.jd && (
-        <Link href={`/jd/detail/${comment.jd.id}`} css={cssObj.jdLink}>
+        <Link href={`${INTERNAL_URL.JD_DETAIL}/${comment.jd.id}`} css={cssObj.jdLink}>
           {comment.jd.title} <FiChevronRight css={cssObj.rightIcon} />
         </Link>
       )}

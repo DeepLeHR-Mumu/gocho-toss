@@ -1,67 +1,85 @@
 import { NextPage } from "next";
-import { useState } from "react";
-
 import { useRouter } from "next/router";
+import { useState } from "react";
+import { FiChevronDown } from "react-icons/fi";
 
+import { DropDown } from "shared-ui/deeple-ds";
+
+import { CompanyRow, Pagination } from "@/components";
 import { Layout } from "@/components/Layout";
 import { useCompanyArr } from "@/apis/company";
 import { isQueryString } from "@/utils";
-import { CompanyList } from "../components/CompanyList";
-import { CompanyListHeader } from "./components/CompanyListHeader";
 
+import { HeaderTitle } from "../component/HeaderTitle";
 import { FilterType } from "./type";
-import { CompanyListFooter } from "./components/CompanyListFooter";
+import { cssObj } from "./style";
+import { filterOption } from "./constants";
 
-const CompanyListPage: NextPage = () => {
+const CompanyList: NextPage = () => {
+  const [title, setTitle] = useState<string>("이름 순");
+  const [currentFilter, setCurrentFilter] = useState<FilterType>("name");
+
   const { query } = useRouter();
-
   const category = query.category as string | undefined;
-
-  const [filter, setFilter] = useState<FilterType>("name");
-
-  const filterOption = [
-    {
-      key: 1,
-      content: "이름 순",
-      filter: "name",
-      setState: () => {
-        setFilter("name");
-      },
-    },
-    {
-      key: 2,
-      content: "팔로워 많은 순",
-      filter: "popular",
-      setState: () => {
-        setFilter("popular");
-      },
-    },
-    {
-      key: 3,
-      content: "리뷰 많은 순",
-      filter: "comment",
-      setState: () => {
-        setFilter("comment");
-      },
-    },
-  ];
 
   const currentPageNumber = isQueryString(query.page) ? Number(query.page) : 1;
 
-  const { data: companyList } = useCompanyArr({
-    order: filter,
+  const { data: companyDataObj } = useCompanyArr({
+    order: currentFilter,
     page: currentPageNumber,
-    size: 14,
+    size: 15,
     industry: category,
   });
 
   return (
     <Layout>
-      <CompanyListHeader category={category} defaultFilter="이름 순" filterOption={filterOption} />
-      <CompanyList companyData={companyList} />
-      <CompanyListFooter totalPages={companyList?.pageResult.totalPages} />
+      <div css={cssObj.titleContainer}>
+        {category ? <HeaderTitle title={category} /> : <HeaderTitle title="기업리스트" />}
+        <div css={cssObj.filterBox}>
+          <DropDown
+            title={title}
+            customTitle={
+              <div css={cssObj.filterBox}>
+                <p css={cssObj.filterText}>{title}</p>
+                <p>
+                  <FiChevronDown css={cssObj.filterIcon} />
+                </p>
+              </div>
+            }
+            menu={{
+              width: 180,
+              closeAfterClickEvent: true,
+              options: filterOption.map(({ content, filter }) => ({
+                focused: title === content,
+                content: <p>{content}</p>,
+                onClick: () => {
+                  setTitle(content);
+                  setCurrentFilter(filter);
+                },
+              })),
+            }}
+          />
+        </div>
+      </div>
+      <div css={cssObj.companyList}>
+        {companyDataObj?.companyDataArr.map(({ id, industry, size, name, logoUrl, isBookmark }) => (
+          <CompanyRow
+            key={id}
+            id={id}
+            size={size}
+            logo={logoUrl || ""}
+            name={name}
+            industry={industry}
+            border
+            bookmark={{ state: isBookmark }}
+          />
+        ))}
+      </div>
+      <div css={cssObj.paginationBox}>
+        <Pagination totalPage={companyDataObj?.pageResult.totalPages || 0} />
+      </div>
     </Layout>
   );
 };
 
-export default CompanyListPage;
+export default CompanyList;

@@ -3,7 +3,7 @@ import { NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
   divider: css`
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
     margin: 0;
   `,
 };
