@@ -66,7 +66,6 @@ const EmailLogin = ({ toFindPassword, toSignUp, ...actionBarHandlers }: EmailLog
             <form css={cssObj.form}>
               <Input
                 label="이메일"
-                {...register("email")}
                 {...register("email", {
                   pattern: {
                     value: EMAIL_REGEXP,
@@ -87,7 +86,6 @@ const EmailLogin = ({ toFindPassword, toSignUp, ...actionBarHandlers }: EmailLog
                     <FiEyeOff css={cssObj.eyeOff} onClick={changePasswordVisible} />
                   )
                 }
-                {...register("password")}
                 {...register("password", {
                   minLength: { value: 8, message: PWD_ERROR_MESSAGE.MIN_MAX },
                   pattern: {
