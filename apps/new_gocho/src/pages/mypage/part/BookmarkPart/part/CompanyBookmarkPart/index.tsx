@@ -4,57 +4,27 @@ import { FiChevronDown } from "react-icons/fi";
 
 import { CompanyRow } from "@/components";
 
-import { useUserInfo } from "@/apis/auth/useUserInfo";
+import { useUserInfo } from "@/apis/auth";
 import { useUserCompanyBookmarkArr } from "@/apis/company";
 import { INTERNAL_URL } from "@/pages/constants";
-import { NoListCard } from "../NoListCard";
 
+import { NoListCard } from "../../component";
+import { filterOption } from "./constant";
 import { cssObj } from "./style";
 import { BookmarkFilterType } from "./type";
 
-export const FollowPart = () => {
-  const [filter, setFilter] = useState<BookmarkFilterType>("recent");
+export const CompanyBookmarkPart = () => {
+  const [currentFilter, setCurrentFilter] = useState<BookmarkFilterType>("recent");
   const [title, setTitle] = useState<string>("팔로우한 순");
 
-  const filterOption = [
-    {
-      content: "팔로우한 순",
-      filter: "recent",
-      setState: () => {
-        setFilter("recent");
-      },
-    },
-    {
-      content: "팔로워 많은 순",
-      filter: "popular",
-      setState: () => {
-        setFilter("popular");
-      },
-    },
-    {
-      content: "이름 순",
-      filter: "name",
-      setState: () => {
-        setFilter("name");
-      },
-    },
-    {
-      content: "평균 연봉 순",
-      filter: "pay",
-      setState: () => {
-        setFilter("pay");
-      },
-    },
-  ];
-
   const { data: userInfo } = useUserInfo();
-  const { data: companyList } = useUserCompanyBookmarkArr({
+  const { data: companyBookmarkDataObj } = useUserCompanyBookmarkArr({
     userId: userInfo?.id,
-    order: filter,
+    order: currentFilter,
     size: 100,
   });
 
-  return companyList ? (
+  return companyBookmarkDataObj ? (
     <div css={cssObj.wrapper}>
       <div css={cssObj.dropdownWrapper}>
         <DropDown
@@ -70,20 +40,20 @@ export const FollowPart = () => {
           menu={{
             width: 180,
             closeAfterClickEvent: true,
-            options: filterOption.map(({ content, setState }) => ({
+            options: filterOption.map(({ content, filter }) => ({
               key: content,
               focused: title === content,
               content: <p>{content}</p>,
               onClick: () => {
                 setTitle(content);
-                setState();
+                setCurrentFilter(filter);
               },
             })),
           }}
         />
       </div>
       <div css={cssObj.listWrapper}>
-        {companyList.companyBookmarkDataArr.map(({ id, industry, name, logoUrl, size }) => (
+        {companyBookmarkDataObj.companyBookmarkDataArr.map(({ id, industry, name, logoUrl, size }) => (
           <CompanyRow
             key={id}
             id={id}

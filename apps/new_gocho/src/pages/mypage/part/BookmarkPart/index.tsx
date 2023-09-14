@@ -1,15 +1,14 @@
 import { useState } from "react";
 
 import { BookmarkPage } from "./type";
-import { bookmarkPart } from "./constants";
-
+import { bookmarkPart } from "./constant";
 import { cssObj } from "./style";
 
 export const BookmarkPart = () => {
   const [currentPart, setCurrentPart] = useState<BookmarkPage>(bookmarkPart[0]);
 
-  const handlePartClick = (partKey: number) => {
-    const part = bookmarkPart.find(({ key }) => key === partKey);
+  const handlePartClick = (partTitle: string) => {
+    const part = bookmarkPart.find(({ title }) => title === partTitle);
     if (!part) return;
     setCurrentPart(part);
   };
@@ -17,22 +16,20 @@ export const BookmarkPart = () => {
   return (
     <div>
       <div css={cssObj.navWrapper}>
-        {bookmarkPart.map(({ key, title }) => (
-          <div key={key} css={cssObj.navItem}>
-            <button
-              type="button"
-              css={key === currentPart.key ? cssObj.selectedText : cssObj.buttonText}
-              onClick={() => {
-                handlePartClick(key);
-              }}
-            >
-              {title}
-            </button>
-            {key === currentPart.key && <hr css={cssObj.selectedHr} />}
-          </div>
+        {bookmarkPart.map(({ title }) => (
+          <button
+            key={title}
+            type="button"
+            css={cssObj.subMenu(title === currentPart.title)}
+            onClick={() => {
+              handlePartClick(title);
+            }}
+          >
+            {title}
+          </button>
         ))}
       </div>
-      <hr css={cssObj.bottomHr} />
+      <div css={cssObj.bottomLine} />
       {currentPart.element}
     </div>
   );

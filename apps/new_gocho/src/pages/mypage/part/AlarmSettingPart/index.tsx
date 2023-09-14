@@ -2,9 +2,9 @@ import { useUserInfo } from "@/apis/auth/useUserInfo";
 import { AlarmItem } from "./component/AlarmItem";
 import { cssObj } from "./style";
 
-import { alarmItemArr } from "./constants";
+import { alarmItemArr } from "./constant";
 
-export const AlarmPart = () => {
+export const AlarmSettingPart = () => {
   const { data: userInfo } = useUserInfo();
 
   if (!userInfo) return null;

@@ -1,6 +1,6 @@
 export { AccountPart } from "./AccountPart";
-export { AlarmPart } from "./AlarmPart";
+export { AlarmSettingPart } from "./AlarmSettingPart";
 export { BookmarkPart } from "./BookmarkPart";
 export { PrivacyPart } from "./PrivacyPart";
 export { ProfilePart } from "./ProfilePart";
-export { TOSPart } from "./TosPart";
+export { TOSPart } from "./TOSPart";

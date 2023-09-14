@@ -1,16 +1,9 @@
 import { ReactNode } from "react";
 
-import { AccountPart, ProfilePart, AlarmPart, PrivacyPart, TOSPart, BookmarkPart } from "./part";
-
-import { LinkItem, PageItem } from "./type";
+import { LinkItem, PageItem } from "@/pages/mypage/type";
+import { AccountPart, AlarmSettingPart, BookmarkPart, PrivacyPart, ProfilePart, TOSPart } from "@/pages/mypage/part";
 
 export const myPageMenu: PageItem[] = [
-  {
-    text: "프로필 관리",
-    isNewTab: false,
-    type: undefined,
-    element: <ProfilePart />,
-  },
   {
     text: "프로필 관리",
     isNewTab: false,
@@ -33,7 +26,7 @@ export const myPageMenu: PageItem[] = [
     text: "알림 설정",
     isNewTab: false,
     type: "alarm",
-    element: <AlarmPart />,
+    element: <AlarmSettingPart />,
   },
 ];
 
@@ -67,7 +60,7 @@ export const sideNavMenu: (LinkItem | PageItem)[] = [
   },
 ];
 
-export const partElementArray = sideNavMenu.concat(myPageMenu).reduce((acc, cur) => {
+export const partElementArr = sideNavMenu.concat(myPageMenu).reduce((acc, cur) => {
   if (!cur.isNewTab) {
     acc.push({
       key: cur.type ?? "mypage",

@@ -9,7 +9,7 @@ import { usePatchUserPassword } from "@/apis/auth";
 import { cssObj } from "./style";
 import { PwdChangeFormProps, PwdInputForm } from "./type";
 
-export const PwdChangeForm: FC<PwdChangeFormProps> = ({ userData, handleFormClose }) => {
+export const PasswordChangeForm: FC<PwdChangeFormProps> = ({ userData, handleFormClose }) => {
   const { mutate: patchPassword } = usePatchUserPassword();
   const { setToastMessage } = useToast();
 

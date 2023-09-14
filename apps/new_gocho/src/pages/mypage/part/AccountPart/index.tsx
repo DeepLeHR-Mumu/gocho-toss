@@ -4,16 +4,16 @@ import { Divider, Button } from "shared-ui/deeple-ds";
 
 import { useUserProfile } from "@/apis/auth";
 
+import { PasswordChangeForm } from "./PasswordChangeForm";
 import { cssObj } from "./style";
-import { PwdChangeForm } from "./PwdChangeForm";
 
 export const AccountPart: FC = () => {
   const { data: userData } = useUserProfile();
 
-  const [isPwdFormOpen, setPwdFornOpen] = useState<boolean>(false);
+  const [isPasswordFormOpen, setIsPasswordFormOpen] = useState<boolean>(false);
 
-  const handlePwdFormOpen = () => {
-    setPwdFornOpen(!isPwdFormOpen);
+  const handlePasswordFormOpen = () => {
+    setIsPasswordFormOpen(!isPasswordFormOpen);
   };
 
   return (
@@ -26,11 +26,17 @@ export const AccountPart: FC = () => {
         <Divider />
         <div css={cssObj.inputBox}>
           <p>비밀번호 변경</p>
-          <Button size="small" color="outlineGray" type="button" css={cssObj.pwdButton} onClick={handlePwdFormOpen}>
+          <Button
+            size="small"
+            color="outlineGray"
+            type="button"
+            css={cssObj.passwordButton}
+            onClick={handlePasswordFormOpen}
+          >
             비밀번호 변경
           </Button>
         </div>
-        {isPwdFormOpen && <PwdChangeForm userData={userData} handleFormClose={handlePwdFormOpen} />}
+        {isPasswordFormOpen && <PasswordChangeForm userData={userData} handleFormClose={handlePasswordFormOpen} />}
       </div>
     </div>
   );

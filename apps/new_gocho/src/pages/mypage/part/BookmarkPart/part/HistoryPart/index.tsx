@@ -5,8 +5,8 @@ import { useUserCompanyHistoryArr } from "@/apis/company/useUserCompanyHistoryAr
 import { useUserJdHistoryArr } from "@/apis/jd/useUserJdHistoryArr";
 
 import { CompanyRow, JdRow } from "@/components";
-import { NoListCard } from "../NoListCard";
 
+import { NoListCard } from "../../component";
 import { RecentMenu } from "./type";
 import { cssObj } from "./style";
 
