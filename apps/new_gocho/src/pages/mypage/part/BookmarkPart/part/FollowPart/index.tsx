@@ -68,16 +68,18 @@ export const FollowPart = () => {
           }
           menu={{
             width: 180,
-            closeAfterClickEvent: true,
             options: filterOption.map(({ content, setState }) => ({
               key: content,
               focused: title === content,
-              content: <p>{content}</p>,
+              content,
               onClick: () => {
                 setTitle(content);
                 setState();
               },
             })),
+          }}
+          menuConfig={{
+            closeAfterClickEvent: true,
           }}
         />
       </div>

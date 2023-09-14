@@ -17,6 +17,7 @@ import { LoginModal } from "../../modal/LoginModal";
 
 import { Layout } from "../../Layout";
 
+import { Alarm } from "./component/Alarm";
 import { THEME_WHITE_PAGES } from "./constant";
 import { getCssObj } from "./style";
 
@@ -107,7 +108,7 @@ export const GlobalNavigationBar = () => {
                 <nav>
                   <ul css={navigationWrapper}>
                     <li css={router.pathname.includes(INTERNAL_URL.JD) && selected}>
-                      <Link href={INTERNAL_URL.JD_LIST}>채용공고</Link>
+                      <Link href={INTERNAL_URL.JD}>채용공고</Link>
                     </li>
                     <li css={router.pathname.includes(INTERNAL_URL.COMPANY) && selected}>
                       <Link href={INTERNAL_URL.COMPANY}>기업정보</Link>
@@ -128,18 +129,17 @@ export const GlobalNavigationBar = () => {
                   </a>
                   {isSuccess ? (
                     <>
-                      <FiBell css={alarmIcon} />
+                      <Alarm userId={userData.id} css={alarmIcon} />
                       <DropDown
                         customTitle={<Profile src={userData.image} size={40} />}
                         menu={{
                           width: 180,
-                          closeAfterClickEvent: true,
                           options: [
                             {
                               content: (
                                 <Link
                                   href={{
-                                    pathname: INTERNAL_URL.MYPAGE,
+                                    pathname: "/mypage",
                                     query: { type: "profile" },
                                   }}
                                 >
@@ -185,6 +185,9 @@ export const GlobalNavigationBar = () => {
                             },
                           ],
                           footer: { content: "로그아웃", onClick: doLogout },
+                        }}
+                        menuConfig={{
+                          closeAfterClickEvent: true,
                         }}
                       />
                     </>

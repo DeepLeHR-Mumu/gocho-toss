@@ -92,7 +92,6 @@ export const JdBookmarkPart = () => {
               }
               menu={{
                 width: 180,
-                closeAfterClickEvent: true,
                 options: filterOption.map(({ content, setState }) => ({
                   key: content,
                   focused: dropTitle === content,
@@ -102,6 +101,9 @@ export const JdBookmarkPart = () => {
                     setState();
                   },
                 })),
+              }}
+              menuConfig={{
+                closeAfterClickEvent: true,
               }}
             />
           </div>

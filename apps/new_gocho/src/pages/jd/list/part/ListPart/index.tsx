@@ -55,7 +55,6 @@ export const ListPart = ({ filterObj }: ListPartProps) => {
         <DropDown
           title={getDropDownTitle(order)}
           menu={{
-            closeAfterClickEvent: true,
             options: [
               {
                 content: "최신 순",
@@ -76,6 +75,9 @@ export const ListPart = ({ filterObj }: ListPartProps) => {
                 },
               },
             ],
+          }}
+          menuConfig={{
+            closeAfterClickEvent: true,
           }}
         />
         <button

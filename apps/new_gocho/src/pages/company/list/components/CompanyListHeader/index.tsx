@@ -31,16 +31,18 @@ export const CompanyListHeader: FunctionComponent<CompanyListHeaderProps> = ({
           }
           menu={{
             width: 180,
-            closeAfterClickEvent: true,
             options: filterOption.map(({ key, content, setState }) => ({
-                key,
-                focused: title === content,
-                content: <p>{content}</p>,
-                onClick: () => {
-                  setTitle(content);
-                  setState();
-                },
-              })),
+              key,
+              focused: title === content,
+              content,
+              onClick: () => {
+                setTitle(content);
+                setState();
+              },
+            })),
+          }}
+          menuConfig={{
+            closeAfterClickEvent: true,
           }}
         />
       </div>
