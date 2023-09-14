@@ -28,6 +28,7 @@ export interface JdCompanyObjDef {
   industry: string;
   found_date: string;
   employee_number: number;
+  is_bookmark: boolean;
 }
 
 export interface JdDetailObjDef {

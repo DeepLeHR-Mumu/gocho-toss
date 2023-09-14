@@ -24,7 +24,14 @@ export const JdBookmark = ({ jdId, marked = false, className }: JdBookmarkProps)
 
   return (
     <>
-      <button type="button" className={className} onClick={bookmarkToggleHandler}>
+      <button
+        type="button"
+        className={className}
+        onClick={(e) => {
+          e.preventDefault();
+          bookmarkToggleHandler();
+        }}
+      >
         {marked ? (
           <AiFillHeart css={cssObj.bookmarkIcon(marked)} />
         ) : (

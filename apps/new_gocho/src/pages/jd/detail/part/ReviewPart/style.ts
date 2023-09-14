@@ -8,8 +8,9 @@ export const cssObj = {
     border-radius: 1rem;
     border: 1px solid ${NEWCOLORS.GRAY200};
     position: sticky;
-    top: calc(8rem + 1.75rem);
+    top: 15rem;
     right: 0;
+    box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.05);
   `,
 
   headerWrapper: css`
@@ -53,9 +54,10 @@ export const cssObj = {
   `,
 
   alertHoverBox: css`
-    width: 15.125rem;
+    width: 15.375rem;
     position: absolute;
-    top: 1.5rem;
+    z-index: 20;
+    top: 2rem;
     right: 0;
     padding: 0.75rem 1rem;
     background-color: ${NEWCOLORS.BLUE100};
@@ -65,15 +67,15 @@ export const cssObj = {
   `,
 
   contentsWrapper: (blurred: boolean) => css`
-      padding: 1.125rem 1rem 1rem;
-      background-color: ${NEWCOLORS.GRAY100};
-      height: 20.5rem;
-      overflow: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-      ${blurred && "-webkit-filter: blur(3px); filter: blur(3px);"}
-    `,
+    padding: 1.125rem 1rem 1rem;
+    background-color: ${NEWCOLORS.GRAY100};
+    height: 20.5rem;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    ${blurred && "-webkit-filter: blur(3px); filter: blur(3px);"}
+  `,
 
   noComment: css`
     margin: auto;

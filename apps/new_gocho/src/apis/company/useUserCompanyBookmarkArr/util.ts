@@ -13,12 +13,12 @@ export const selector = (data: CompanyBookmarkObjDef[], page_result: PageResultD
   };
 
   const companyBookmarkDataArr = data.map((company) => ({
-      id: company.id,
-      name: company.name,
-      logoUrl: company.logo_url,
-      industry: company.industry,
-      size: company.size,
-    }));
+    id: company.id,
+    name: company.name,
+    logo: company.logo_url,
+    industry: company.industry,
+    size: company.size,
+  }));
 
   return { companyBookmarkDataArr, pageResult };
 };

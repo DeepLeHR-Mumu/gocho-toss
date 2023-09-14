@@ -50,6 +50,9 @@ export const cssObj = {
   `,
 
   jdDueDate: css`
+    display: flex;
+    align-items: center;
+    height: 1.875rem;
     color: ${NEWCOLORS.BLUEGRAY400};
     ${NEWTEXTS.TITLE4}
   `,

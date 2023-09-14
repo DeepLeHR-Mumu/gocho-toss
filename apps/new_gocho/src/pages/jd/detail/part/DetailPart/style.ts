@@ -4,10 +4,7 @@ import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-    flex-grow: 1;
+    width: 48.5rem;
   `,
 
   skeletonWrapper: css`
@@ -23,10 +20,13 @@ export const cssObj = {
     border-radius: 1rem;
     border: 1px solid ${NEWCOLORS.GRAY200};
     background-color: ${NEWCOLORS.WHITE};
-    display: flex;
-    flex-direction: column;
     padding: 2rem 1.5rem;
-    gap: 4rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.05);
+
+    :last-of-type {
+      margin-bottom: 0;
+    }
   `,
 
   placeWrapper: css`
@@ -38,6 +38,7 @@ export const cssObj = {
   factoryWrapper: css`
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 0.5rem;
   `,
 

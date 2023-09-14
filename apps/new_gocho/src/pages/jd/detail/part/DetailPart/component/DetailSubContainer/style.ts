@@ -6,11 +6,16 @@ export const cssObj = {
   subContainer: css`
     display: flex;
     flex-direction: column;
+    padding-bottom: 4rem;
+
+    :last-of-type {
+      padding-bottom: 0;
+    }
   `,
 
   title: css`
     ${NEWTEXTS.TITLE14}
-    margin-bottom:1.75rem;
+    margin-bottom: 1.75rem;
   `,
 
   contentWrapper: css`

@@ -24,7 +24,13 @@ export const CompanyBookmark = ({ companyId, isBookmark }: CompanyBookmarkProps)
 
   return (
     <>
-      <FollowButton color={isBookmark ? "follow" : "unfollow"} onClick={bookmarkToggleHandler}>
+      <FollowButton
+        color={isBookmark ? "follow" : "unfollow"}
+        onClick={(e) => {
+          e.preventDefault();
+          bookmarkToggleHandler();
+        }}
+      >
         {isBookmark ? "팔로잉" : "팔로우"}
       </FollowButton>
       {loginModal && (

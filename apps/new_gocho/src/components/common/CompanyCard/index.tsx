@@ -38,13 +38,11 @@ export const CompanyCard = ({ company }: CompanyCardProps) => {
 
   return (
     <div css={cssObj.cardWrapper(isButtonExist)}>
-      <Profile src={company.logoSrc} size={getProfileSize()} />
+      <Profile src={company.logoSrc} size={getProfileSize()} altText={`${name} 로고`} />
       <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${company.id}`}>
         <h3 css={cssObj.name(isButtonExist)}>{company.name}</h3>
       </Link>
-      {!isMobile && (
-        <p css={cssObj.hashTags(isButtonExist)}>{company.hashTagArr?.map((hashTag) => `#${hashTag}`).join(" ")}</p>
-      )}
+      {!isMobile && <p css={cssObj.hashTags(isButtonExist)}>{company.hashTagArr?.map((hashTag) => `#${hashTag}`).join(" ")}</p>}
       {isButtonExist && <CompanyBookmark companyId={company.id} isBookmark={!!company.bookmark?.state} />}
     </div>
   );

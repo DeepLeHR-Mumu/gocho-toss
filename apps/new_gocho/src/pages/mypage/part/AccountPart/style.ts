@@ -26,6 +26,7 @@ export const cssObj = {
     flex-direction: column;
     gap: 1rem;
   `,
+
   inputBox: css`
     display: flex;
 
@@ -37,14 +38,13 @@ export const cssObj = {
       color: ${NEWCOLORS.BLUEGRAY400};
     }
 
-    // 이메일
     span {
       padding-top: 0.8rem;
       font-weight: 500;
     }
   `,
 
-  pwdButton: css`
+  passwordButton: css`
     padding: 1rem 0.75rem;
     width: 8.75rem;
     height: 2.75rem;

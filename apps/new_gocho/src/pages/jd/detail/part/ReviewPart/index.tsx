@@ -74,7 +74,7 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
       <aside css={cssObj.wrapper}>
         <div css={cssObj.headerWrapper}>
           <div css={cssObj.companyWrapper}>
-            <Profile src={company?.logoUrl || ""} size={24} />
+            <Profile src={company?.logoUrl || ""} size={24} altText={`${company?.name} 회사 로고`} />
             <span>{company?.name}</span>
           </div>
           <h3 css={cssObj.title}>{title}</h3>

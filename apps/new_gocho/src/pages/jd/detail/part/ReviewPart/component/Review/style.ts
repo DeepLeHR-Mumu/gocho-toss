@@ -36,6 +36,7 @@ export const cssObj = {
 
   comment: css`
     margin-bottom: 0.75rem;
+    word-break: break-all;
     ${NEWTEXTS.BODY2}
   `,
 
@@ -46,34 +47,34 @@ export const cssObj = {
   `,
 
   thumbsUpWrapper: (isClicked: boolean) => css`
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY400};
+
+    svg {
       color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY400};
+    }
 
-      svg {
-        color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY400};
-      }
-
-      span {
-        ${NEWTEXTS.TITLE1}
-      }
-    `,
+    span {
+      ${NEWTEXTS.TITLE1}
+    }
+  `,
 
   thumbsDownWrapper: (isClicked: boolean) => css`
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.BLUEGRAY400};
+
+    svg {
       color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.BLUEGRAY400};
+    }
 
-      svg {
-        color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.BLUEGRAY400};
-      }
-
-      span {
-        ${NEWTEXTS.TITLE1}
-      }
-    `,
+    span {
+      ${NEWTEXTS.TITLE1}
+    }
+  `,
 };

@@ -17,7 +17,16 @@ export const ReviewPart = () => {
   const { data: userData } = useUserInfo();
 
   if (!companyCommentData) {
-    return <> </>;
+    return (
+      <section css={cssObj.wrapper}>
+        <div css={cssObj.box}>
+          <div css={cssObj.titleWrapper}>
+            <h3 css={cssObj.title}>최근 리뷰</h3>
+            <span css={cssObj.reviewNumber}>로딩중입니다.</span>
+          </div>
+        </div>
+      </section>
+    );
   }
 
   return (

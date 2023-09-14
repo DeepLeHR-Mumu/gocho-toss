@@ -41,7 +41,7 @@ export const WriteReview = () => {
   return (
     <div css={cssObj.wrapper}>
       <div css={cssObj.profileWrapper}>
-        <Profile src={userData?.image || ""} size={40} />
+        <Profile src={userData?.image || ""} size={40} altText={`${userData?.nickname} 유저 로고`} />
         <span>{userData?.nickname}</span>
       </div>
       <form onSubmit={handleSubmit(writeComment)}>

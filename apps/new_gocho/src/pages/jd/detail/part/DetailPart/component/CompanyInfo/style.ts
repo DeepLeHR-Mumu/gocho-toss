@@ -13,7 +13,7 @@ export const cssObj = {
 
   contentWrapper: css`
     ${subContainerCssObj.contentWrapper}
-    padding: 2rem 1.5rem;
+    padding: 0 1.5rem 2rem;
   `,
 
   rowWrapper: css`

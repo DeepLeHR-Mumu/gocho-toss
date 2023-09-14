@@ -4,8 +4,11 @@ import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
   background: css`
+    position: sticky;
+    top: 8.75rem;
     padding: 1rem 0;
     background: ${NEWCOLORS.WHITE};
+    z-index: 20;
   `,
 
   wrapper: css`

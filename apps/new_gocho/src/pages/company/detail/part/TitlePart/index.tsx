@@ -3,7 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FiShare2, FiEye } from "react-icons/fi";
-import { Profile, Divider } from "shared-ui/deeple-ds";
+
+import { Divider } from "shared-ui/deeple-ds";
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
 import { Layout, LoginModal, ShareModal, CompanyBookmark } from "@/components";
 import { useCompanyDetail } from "@/apis/company";
@@ -31,12 +33,13 @@ export const TitlePart = () => {
     <>
       <section css={cssObj.background}>
         <div css={cssObj.imageWrapper}>
-          <Image src={backgroundImage} alt="company" fill priority />
+          <Image src={backgroundImage} alt="회사 배경" fill priority />
         </div>
-        {/** TODO 사진 추가? */}
         <Layout>
           <div css={cssObj.wrapper}>
-            <Profile src={companyData.logo_url || ""} size={100} css={cssObj.companyLogo} />
+            <div css={cssObj.companyLogo}>
+              <Image src={companyData.logo_url || defaultCompanyLogo} alt="회사 로고" fill priority />
+            </div>
             <div css={cssObj.followWrapper}>
               <CompanyBookmark companyId={companyId} isBookmark={companyData.is_bookmark} />
               <button
@@ -56,7 +59,7 @@ export const TitlePart = () => {
             <div css={cssObj.introWrapper}>
               <span css={cssObj.intro}>{companyData.intro}</span>
               <span css={cssObj.follower}>
-                현재 해당 기업을 <span>{companyData.bookmark}</span>명이 팔로우하고 있어요
+                현재 해당 기업을 <span>{companyData.bookmark}</span>명이 팔로우하고 있어요!
               </span>
             </div>
           </div>

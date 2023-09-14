@@ -5,6 +5,8 @@ import { dateConverter } from "shared-util";
 
 import { isInvalidDate, isExpired } from "@/utils";
 
+import Link from "next/link";
+import { INTERNAL_URL } from "@/pages/constants";
 import { SkeletonBox } from "../SkeletonBox";
 import { JdBookmark } from "../JdBookmark";
 
@@ -55,7 +57,8 @@ export const JdRow = ({ jd, half }: JdRowProps) => {
   const { jdId, companyName, jdTitle, dueDate, bookmarked, cut } = jd;
 
   return (
-    <div
+    <Link
+      href={`${INTERNAL_URL.JD_DETAIL}/${jdId}`}
       css={css`
         ${cssObj.wrapper(half)}${isDueDateExpired ? cssObj.expired : ""}
       `}
@@ -77,6 +80,6 @@ export const JdRow = ({ jd, half }: JdRowProps) => {
         </div>
       </div>
       {!isDueDateExpired && <JdBookmark jdId={jdId} marked={bookmarked} />}
-    </div>
+    </Link>
   );
 };

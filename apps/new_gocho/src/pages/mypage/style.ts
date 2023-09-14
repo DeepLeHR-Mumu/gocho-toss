@@ -24,9 +24,34 @@ export const cssObj = {
     ${NEWTEXTS.TITLE7}
   `,
 
+  navigationBox: css`
+    width: 10.5rem;
+  `,
+
+  sideNavigation: css`
+    padding: 2rem 1.25rem;
+    border-radius: 1rem;
+    border: 1px solid ${NEWCOLORS.GRAY200};
+    margin-bottom: 1.5rem;
+  `,
+
+  menu: (isSelected: boolean) => css`
+    display: block;
+    cursor: pointer;
+    ${isSelected ? NEWTEXTS.TITLE9 : NEWTEXTS.TITLE7}
+    color: ${isSelected ? NEWCOLORS.BLUE300 : NEWCOLORS.BLACK};
+    margin-bottom: 1.5rem;
+
+    :last-of-type {
+      margin-bottom: 0;
+    }
+  `,
+
   elementBox: css`
+    border-radius: 1rem;
+    border: 1px solid ${NEWCOLORS.GRAY200};
     padding: 2rem;
-    box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.05);
   `,
 
   title: css`

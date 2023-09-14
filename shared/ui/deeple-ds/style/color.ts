@@ -100,7 +100,7 @@ export const chipColor = {
 export const dDayChipColor = {
   fillBlue: css`
     border: none;
-    background-color: ${NEWCOLORS.BLUE200};
+    background-color: ${NEWCOLORS.BLUE100};
     color: ${NEWCOLORS.BLUE300};
   `,
 

@@ -138,7 +138,7 @@ export const DetailPart = () => {
               logo: jdData.company.logo_url,
               size: jdData.company.size,
               industry: jdData.company.industry,
-              bookmark: { state: jdData.is_bookmark },
+              bookmark: { state: jdData.company.is_bookmark },
             }}
             contents={getCompanyInfoContents({ ...jdData.company })}
           />

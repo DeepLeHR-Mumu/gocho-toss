@@ -12,7 +12,7 @@ export const cssObj = {
     height: ${isButtonExist ? "20rem" : "13.75rem"};
     padding: ${isButtonExist ? "2.25rem 1.5rem" : "1.5625rem 1.125rem"};
     border-radius: 1rem;
-    border: 1px solid ${NEWCOLORS.GRAY100};
+    border: 1px solid ${NEWCOLORS.GRAY200};
     background-color: ${NEWCOLORS.WHITE};
     flex-shrink: 0;
 

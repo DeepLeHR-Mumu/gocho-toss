@@ -27,8 +27,8 @@ export const CompanyRow = ({ company, border }: CompanyRowProps) => {
 
   return (
     <>
-      <div css={cssObj.wrapper(!!border)}>
-        <Profile size={isMobile ? 52 : 60} src={company.logo} />
+      <div css={cssObj.wrapper(Boolean(border))}>
+        <Profile size={isMobile ? 52 : 60} src={company.logo} altText={`${name} 로고`} />
         <div css={cssObj.infoWrapper}>
           <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${company.id}`} css={cssObj.companyName}>
             {company.name}

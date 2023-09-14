@@ -85,8 +85,18 @@ export const cssObj = {
   `,
 
   companyLogo: css`
+    border-radius: 50%;
+    overflow: hidden;
+    width: 6.25rem;
+    height: 6.25rem;
+    border: 1px solid ${NEWCOLORS.GRAY100};
+    background-color: ${NEWCOLORS.WHITE};
     position: absolute;
     top: 4.375rem;
+
+    > img {
+      object-fit: contain;
+    }
   `,
 
   listWrapper: css`

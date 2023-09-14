@@ -67,27 +67,33 @@ export const getCssObj = (themeWhite: boolean) => ({
     flex-direction: row;
     align-items: center;
     gap: 3rem;
+  `,
 
-    li {
+  menu: (isSelected: boolean) => {
+    let color;
+
+    if (isSelected) {
+      color = themeWhite ? NEWCOLORS.BLUE300 : NEWCOLORS.WHITE;
+    } else {
+      color = themeWhite ? NEWCOLORS.BLUEGRAY400 : NEWCOLORS.WHITE;
+    }
+
+    return css`
       color: ${themeWhite ? NEWCOLORS.BLUEGRAY400 : NEWCOLORS.WHITE};
       ${NEWTEXTS.TITLE12}
       cursor: pointer;
       padding-bottom: 1.625rem;
-    }
-  `,
-
-  selected: css`
-    color: ${themeWhite ? NEWCOLORS.BLUE300 : NEWCOLORS.WHITE};
-    border-bottom: 1px solid ${themeWhite ? NEWCOLORS.BLUE300 : NEWCOLORS.WHITE};
-    ${NEWTEXTS.TITLE12}
-  `,
+      color: ${color};
+      border-bottom: ${isSelected ? `1px solid ${color}` : "none"};
+    `;
+  },
 
   etcWrapper: css`
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 2rem;
-    padding-bottom: 1.0625rem;
+    padding-bottom: 1rem;
   `,
 
   businessServiceButton: css`
@@ -110,8 +116,7 @@ export const getCssObj = (themeWhite: boolean) => ({
     height: 1.5rem;
     color: ${themeWhite ? NEWCOLORS.BLACK : NEWCOLORS.WHITE};
   `,
-
-  profileDropDownMenu: css`
+profileDropDownMenu: css`
     display: block;
     width: 100%;
     text-align: left;

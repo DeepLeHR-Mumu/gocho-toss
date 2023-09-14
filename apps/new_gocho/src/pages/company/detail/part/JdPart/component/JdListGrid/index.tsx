@@ -43,17 +43,17 @@ export const JdListGrid = ({ filter }: JdListGridProps) => {
         {jdData && totalJdNumber !== 0 ? (
           <>
             {jdData.jdDataArr.map((jd) => (
-                <JdRow
-                  key={jd.id}
-                  jdId={jd.id}
-                  companyName={jd.company.name}
-                  jdTitle={jd.title}
-                  dueDate={jd.endTime}
-                  bookmarked={jd.isBookmark}
-                  cut={jd.cut}
-                />
-              ))}
-            {jdData.jdDataArr.length > totalJdNumber && (
+              <JdRow
+                key={jd.id}
+                jdId={jd.id}
+                companyName={jd.company.name}
+                jdTitle={jd.title}
+                dueDate={jd.endTime}
+                bookmarked={jd.isBookmark}
+                cut={jd.cut}
+              />
+            ))}
+            {jdData.jdDataArr.length < totalJdNumber && (
               <button
                 type="button"
                 css={cssObj.seeMoreButton}
