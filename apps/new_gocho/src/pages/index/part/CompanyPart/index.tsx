@@ -33,9 +33,13 @@ export const CompanyPart: FunctionComponent = () => {
     return (
       <section css={cssObj.sectionContainer}>
         <h2 css={cssObj.title}>키워드 별 기업 모아보기</h2>
-        <Slider {...setCarouselSetting} ref={sliderRef}>
-          {dummyArrCreator(3).map((dummy) => <p key={`mainCompanyCard${dummy}`}>{dummy}</p>)}
-        </Slider>
+        <div css={cssObj.sliderContainer}>
+          <Slider {...setCarouselSetting} ref={sliderRef}>
+            {dummyArrCreator(4).map((dummy) => (
+              <CompanyCard key={`mainCompanyCard${dummy}`} />
+            ))}
+          </Slider>
+        </div>
       </section>
     );
   }
@@ -46,19 +50,19 @@ export const CompanyPart: FunctionComponent = () => {
       <div css={cssObj.controlContainer}>
         <div css={cssObj.keywordContainer}>
           {companyKeywordDataObj.map((companyKeyword) => (
-              <Chip
-                type="button"
-                size={isMobile ? "small" : "large"}
-                color={selectedKeyword === companyKeyword.keyword ? "fillBlue" : "fillGray"}
-                key={`indexCompanyKeyword${companyKeyword.keyword}`}
-                onClick={() => {
-                  setSelectedKeyword(companyKeyword.keyword);
-                  setSelectedCompanyArr(companyKeyword.companyArr);
-                }}
-              >
-                {companyKeyword.keyword}
-              </Chip>
-            ))}
+            <Chip
+              type="button"
+              size={isMobile ? "small" : "large"}
+              color={selectedKeyword === companyKeyword.keyword ? "fillBlue" : "fillGray"}
+              key={`indexCompanyKeyword${companyKeyword.keyword}`}
+              onClick={() => {
+                setSelectedKeyword(companyKeyword.keyword);
+                setSelectedCompanyArr(companyKeyword.companyArr);
+              }}
+            >
+              {companyKeyword.keyword}
+            </Chip>
+          ))}
         </div>
         <div css={cssObj.buttonContainer}>
           <button
@@ -83,28 +87,30 @@ export const CompanyPart: FunctionComponent = () => {
         {isMobile ? (
           <div css={cssObj.cardContainer}>
             {selectedCompanyArr?.map((company) => (
-                <CompanyCard
-                  key={company.id}
-                  id={company.id}
-                  logoSrc={company.logoUrl || defaultCompanyLogo}
-                  name={company.name}
-                  hashTagArr={[company.name]}
-                  bookmark={{ state: company.isBookmark }}
-                />
-              ))}
+              <CompanyCard
+                key={company.id}
+                company={{
+                  ...company,
+                  logoSrc: company.logoUrl || defaultCompanyLogo,
+                  hashTagArr: [company.name],
+                  bookmark: { state: company.isBookmark },
+                }}
+              />
+            ))}
           </div>
         ) : (
           <Slider {...setCarouselSetting} ref={sliderRef}>
             {selectedCompanyArr?.map((company) => (
-                <CompanyCard
-                  key={company.id}
-                  id={company.id}
-                  logoSrc={company.logoUrl || defaultCompanyLogo}
-                  name={company.name}
-                  hashTagArr={[company.name]}
-                  bookmark={{ state: company.isBookmark }}
-                />
-              ))}
+              <CompanyCard
+                key={company.id}
+                company={{
+                  ...company,
+                  logoSrc: company.logoUrl || defaultCompanyLogo,
+                  hashTagArr: [company.name],
+                  bookmark: { state: company.isBookmark },
+                }}
+              />
+            ))}
           </Slider>
         )}
       </div>
