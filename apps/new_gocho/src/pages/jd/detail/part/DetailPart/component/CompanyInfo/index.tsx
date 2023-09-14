@@ -10,7 +10,7 @@ export const CompanyInfo = ({ contents, company }: CompanyInfoProps) => {
 
   return (
     <div css={cssObj.subContainer}>
-      <CompanyRow {...company} />
+      <CompanyRow company={company} />
       <Divider css={cssObj.divider} />
       <div css={cssObj.contentWrapper}>
         {contentEntries.map(([subtitle, content]) => (

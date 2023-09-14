@@ -17,6 +17,13 @@ export const cssObj = {
     background-color: ${NEWCOLORS.WHITE};
   `,
 
+  skeletonWrapper: css`
+    width: 100%;
+    height: 15.875rem;
+    border-radius: 1rem;
+    overflow: hidden;
+  `,
+
   companyWrapper: css`
     display: flex;
     flex-direction: row;

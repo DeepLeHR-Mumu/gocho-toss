@@ -2,6 +2,8 @@ import { FunctionComponent, useRef } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Slider from "react-slick";
 
+import { dummyArrCreator } from "shared-util";
+
 import { useJdArr } from "@/apis/jd";
 import { useGetDeviceType } from "@/globalStates";
 import { JdCard } from "@/components/common/JdCard";
@@ -47,11 +49,15 @@ export const JdSlider: FunctionComponent<JdSliderProps> = ({ title, order, filte
       <div css={cssObj.sliderContainer}>
         {isMobile ? (
           <div css={cssObj.cardContainer}>
-            {jdDataObj?.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)}
+            {jdDataObj
+              ? jdDataObj.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)
+              : dummyArrCreator(4).map((dummy) => <JdCard key={`jdSlider${dummy}`} />)}
           </div>
         ) : (
           <Slider {...setCarouselSetting} ref={sliderRef}>
-            {jdDataObj?.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)}
+            {jdDataObj
+              ? jdDataObj.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)
+              : dummyArrCreator(4).map((dummy) => <JdCard key={`jdSlider${dummy}`} />)}
           </Slider>
         )}
       </div>
