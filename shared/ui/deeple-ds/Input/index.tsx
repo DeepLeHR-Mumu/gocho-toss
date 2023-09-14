@@ -8,7 +8,7 @@ const ForwardedRefInput: ForwardRefRenderFunction<HTMLInputElement, InputProps> 
   { label, prefix, suffix, state, underline, ...props },
   ref
 ) => (
-  <InputWrapper label={label} prefix={prefix} suffix={suffix} underline={underline}>
+  <InputWrapper label={label} prefix={prefix} suffix={suffix} underline={underline} state={state}>
     <input css={cssObj.input} disabled={state?.state === "disabled"} {...props} ref={ref} />
   </InputWrapper>
 );

@@ -1,41 +1,49 @@
 import { useState, useEffect, useRef, cloneElement } from "react";
+import { css } from "@emotion/react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 import { MenuProps, DropDownProps, MenuLocation } from "./type";
 import { menuCssObj, dropDownCssObj } from "./style";
 
-export const Menu = ({ width = 180, options = [], header, footer }: MenuProps) => (
-  <div css={menuCssObj.menuContainer(width)}>
-    {header && <div css={menuCssObj.header(!!header.onClick)}>{header.content}</div>}
-    {options.map((option, index) => (
-      <button
-        type="button"
-        key={option.key ? option.key : index}
-        css={menuCssObj.option(!!option.focused, !!option.onClick)}
-        onClick={option.onClick}
-      >
-        {option.content}
-      </button>
-    ))}
-    {footer && (
-      <button type="button" css={menuCssObj.footer(!!footer.onClick)} onClick={footer.onClick}>
-        {footer.content}
-      </button>
-    )}
-  </div>
-);
+export const Menu = ({ width = 180, options = [], optionContainer, header, footer }: MenuProps) => {
+  const optionArr = options.map((option, index) => (
+    <button
+      type="button"
+      key={option.key ? option.key : index}
+      css={css`
+        ${menuCssObj.option(!!option.focused, !!option.onClick, option.flexibleHeight)}${option.additionalButtonCss}
+      `}
+      onClick={option.onClick}
+    >
+      {option.content}
+    </button>
+  ));
+
+  return (
+    <div css={menuCssObj.menuContainer(width)}>
+      {header && <div css={menuCssObj.header(!!header.onClick)}>{header.content}</div>}
+      {optionContainer ? <div css={optionContainer.css}>{optionArr}</div> : optionArr}
+      {footer && (
+        <button type="button" css={menuCssObj.footer(!!footer.onClick)} onClick={footer.onClick}>
+          {footer.content}
+        </button>
+      )}
+    </div>
+  );
+};
 
 export const DropDown = ({
   title,
   icon = { location: "suffix", whenMenuVisible: <FiChevronUp />, whenMenuInvisible: <FiChevronDown /> },
   customTitle,
   menu,
+  menuConfig,
 }: DropDownProps) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [menuLocation, setMenuLocation] = useState<MenuLocation>(() => {
     const defaultLocation: MenuLocation = { direction: "top-right", topOrBottom: 2.625, leftOrRight: 0 };
-    if (menu && menu.direction) {
-      defaultLocation.direction = menu.direction;
+    if (menuConfig && menuConfig.direction) {
+      defaultLocation.direction = menuConfig.direction;
     }
 
     return defaultLocation;
@@ -95,18 +103,19 @@ export const DropDown = ({
             {...menu}
             options={
               // TODO: 메뉴아이템 별로 Close의 상황이 나올 수 있는지 논의하기
-              menu.closeAfterClickEvent
-                ? menu.options?.map((option) => ({
-                    ...option,
-                    onClick: () => {
-                      setMenuVisible(false);
+              menu.options?.map((option) => ({
+                flexibleHeight: menuConfig?.flexibleHeight,
+                ...option,
+                onClick: () => {
+                  if (menuConfig?.closeAfterClickEvent) {
+                    setMenuVisible(false);
+                  }
 
-                      if (option.onClick) {
-                        option.onClick();
-                      }
-                    },
-                  }))
-                : menu.options
+                  if (option.onClick) {
+                    option.onClick();
+                  }
+                },
+              }))
             }
           />
         </div>

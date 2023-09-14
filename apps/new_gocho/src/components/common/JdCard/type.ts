@@ -1,5 +1,5 @@
 export interface JdCardProps {
-  jd: {
+  jd?: {
     id: number;
     company: {
       name: string;

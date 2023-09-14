@@ -7,6 +7,15 @@ export const cssObj = {
     width: 48.5rem;
   `,
 
+  skeletonWrapper: css`
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 60rem;
+    overflow: hidden;
+    border-radius: 1rem;
+  `,
+
   container: css`
     border-radius: 1rem;
     border: 1px solid ${NEWCOLORS.GRAY200};

@@ -7,6 +7,7 @@ import { useJdDetail } from "@/apis/jd";
 import { isQueryString } from "@/utils";
 import { FactoryInfoModal } from "@/components/modal/FactoryInfoModal";
 import { FactoryInfoModalProps } from "@/components/modal/FactoryInfoModal/type";
+import { SkeletonBox } from "@/components";
 
 import { DetailSubContainer } from "./component/DetailSubContainer";
 import {
@@ -71,8 +72,11 @@ export const DetailPart = () => {
   };
 
   if (!jdData) {
-    // TODO 값이 없을 때 or 로딩화면
-    return <div />;
+    return (
+      <section css={cssObj.skeletonWrapper}>
+        <SkeletonBox color="GRAY50" />
+      </section>
+    );
   }
 
   return (

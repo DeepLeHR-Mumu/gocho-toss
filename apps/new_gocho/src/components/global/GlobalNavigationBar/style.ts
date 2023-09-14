@@ -116,4 +116,10 @@ export const getCssObj = (themeWhite: boolean) => ({
     height: 1.5rem;
     color: ${themeWhite ? NEWCOLORS.BLACK : NEWCOLORS.WHITE};
   `,
+profileDropDownMenu: css`
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.625rem 1rem;
+  `,
 });

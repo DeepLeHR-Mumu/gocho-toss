@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { FiGrid, FiList } from "react-icons/fi";
 
 import { DropDown } from "shared-ui/deeple-ds";
+import { dummyArrCreator } from "shared-util";
 
 import { useJdArr } from "@/apis/jd";
 import { JdCard } from "@/components/common/JdCard";
@@ -55,7 +56,6 @@ export const ListPart = ({ filterObj }: ListPartProps) => {
         <DropDown
           title={getDropDownTitle(order)}
           menu={{
-            closeAfterClickEvent: true,
             options: [
               {
                 content: "최신 순",
@@ -76,6 +76,9 @@ export const ListPart = ({ filterObj }: ListPartProps) => {
                 },
               },
             ],
+          }}
+          menuConfig={{
+            closeAfterClickEvent: true,
           }}
         />
         <button
@@ -98,20 +101,26 @@ export const ListPart = ({ filterObj }: ListPartProps) => {
         </button>
       </div>
       <div css={viewMode === "grid" ? cssObj.jdGridWrapper : cssObj.jdListWrapper}>
-        {jdArrData?.jdDataArr.map((jd) =>
-          viewMode === "grid" ? (
-            <JdCard key={jd.id} jd={{ ...jd }} />
-          ) : (
-            <JdRow
-              key={jd.id}
-              jdId={jd.id}
-              companyName={jd.company.name}
-              jdTitle={jd.title}
-              dueDate={jd.endTime}
-              bookmarked={jd.isBookmark}
-            />
-          )
-        )}
+        {jdArrData
+          ? jdArrData.jdDataArr.map((jd) =>
+              viewMode === "grid" ? (
+                <JdCard key={jd.id} jd={{ ...jd }} />
+              ) : (
+                <JdRow
+                  key={jd.id}
+                  jd={{
+                    jdId: jd.id,
+                    companyName: jd.company.name,
+                    jdTitle: jd.title,
+                    dueDate: jd.endTime,
+                    bookmarked: jd.isBookmark,
+                  }}
+                />
+              )
+            )
+          : dummyArrCreator(viewMode === "grid" ? 20 : 10).map((dummy) =>
+              viewMode === "grid" ? <JdCard key={`jdPageListPart${dummy}`} /> : <JdRow key={`jdPageListPart${dummy}`} />
+            )}
       </div>
       <div css={cssObj.paginationWrapper}>
         <Pagination totalPage={jdArrData ? jdArrData.pageResult.totalPages : 0} />

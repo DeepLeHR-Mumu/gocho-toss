@@ -17,6 +17,7 @@ import { LoginModal } from "../../modal/LoginModal";
 
 import { Layout } from "../../Layout";
 
+import { Alarm } from "./component/Alarm";
 import { THEME_WHITE_PAGES } from "./constant";
 import { getCssObj } from "./style";
 
@@ -128,14 +129,13 @@ export const GlobalNavigationBar = () => {
                   </a>
                   {isSuccess ? (
                     <>
-                      <FiBell css={alarmIcon} />
+                      <Alarm userId={userData.id} css={alarmIcon} />
                       <DropDown
                         customTitle={
                           <Profile src={userData.image} size={40} altText={`${userData.nickname} 유저 로고`} />
                         }
                         menu={{
                           width: 180,
-                          closeAfterClickEvent: true,
                           options: [
                             {
                               content: (
@@ -187,6 +187,9 @@ export const GlobalNavigationBar = () => {
                             },
                           ],
                           footer: { content: "로그아웃", onClick: doLogout },
+                        }}
+                        menuConfig={{
+                          closeAfterClickEvent: true,
                         }}
                       />
                     </>

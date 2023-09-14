@@ -36,3 +36,14 @@ export const CustomTitle: Story = {
     menu: { options: [{ content: "option 1", focused: true }, { content: "option 2" }], footer: { content: "footer" } },
   },
 };
+
+export const FlexibleHeight: Story = {
+  args: {
+    customTitle: <Profile src={testSmallImage1} altText="test profile alt 2" />,
+    menu: {
+      options: [{ content: <div style={{ height: "23rem" }}>option 1</div>, focused: true }, { content: "option 2" }],
+      footer: { content: "footer" },
+    },
+    menuConfig: { flexibleHeight: true },
+  },
+};

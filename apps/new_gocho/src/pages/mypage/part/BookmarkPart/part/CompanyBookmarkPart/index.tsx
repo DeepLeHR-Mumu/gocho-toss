@@ -39,33 +39,24 @@ export const CompanyBookmarkPart = () => {
           }
           menu={{
             width: 180,
-            closeAfterClickEvent: true,
             options: filterOption.map(({ content, filter }) => ({
               key: content,
               focused: title === content,
-              content: <p>{content}</p>,
+              content,
               onClick: () => {
                 setTitle(content);
                 setCurrentFilter(filter);
               },
             })),
           }}
+          menuConfig={{
+            closeAfterClickEvent: true,
+          }}
         />
       </div>
       <div css={cssObj.listWrapper}>
-        {companyBookmarkDataObj.companyBookmarkDataArr.map(({ id, industry, name, logoUrl, size }) => (
-          <CompanyRow
-            key={id}
-            id={id}
-            logo={logoUrl || ""}
-            name={name}
-            size={size}
-            industry={industry}
-            border
-            bookmark={{
-              state: true,
-            }}
-          />
+        {companyBookmarkDataObj.companyBookmarkDataArr.map((company) => (
+          <CompanyRow key={company.id} company={{ ...company, bookmark: { state: true } }} border />
         ))}
       </div>
     </div>
