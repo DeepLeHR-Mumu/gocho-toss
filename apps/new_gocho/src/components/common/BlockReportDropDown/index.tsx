@@ -17,7 +17,6 @@ export const BlockReportDropDown = ({ size, companyId, uploaderId }: BlockReport
       <DropDown
         customTitle={<FiMoreVertical css={cssObj.submenuIcon(size)} />}
         menu={{
-          closeAfterClickEvent: true,
           options: [
             {
               content: "신고하기",
@@ -32,6 +31,9 @@ export const BlockReportDropDown = ({ size, companyId, uploaderId }: BlockReport
               },
             },
           ],
+        }}
+        menuConfig={{
+          closeAfterClickEvent: true,
         }}
       />
       {blockUserModal && (
