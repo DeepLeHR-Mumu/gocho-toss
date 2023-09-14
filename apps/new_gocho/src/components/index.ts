@@ -7,6 +7,7 @@ export { CommentThumbs } from "./common/CommentThumbs";
 export { BlockReportDropDown } from "./common/BlockReportDropDown";
 export { DeleteComment } from "./common/DeleteComment";
 export { CompanyBookmark } from "./common/CompanyBookmark";
+export { SkeletonBox } from "./common/SkeletonBox";
 
 export { Footer } from "./global/Footer";
 export { GlobalNavigationBar } from "./global/GlobalNavigationBar";

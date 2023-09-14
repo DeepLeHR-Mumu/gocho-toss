@@ -16,6 +16,19 @@ export const cssObj = {
     }
   `,
 
+  skeletonWrapper: css`
+    width: 15.75rem;
+    height: 23.125rem;
+    flex-shrink: 0;
+    border-radius: 1rem;
+    overflow: hidden;
+
+    ${MOBILE} {
+      width: 8.75rem;
+      height: 15rem;
+    }
+  `,
+
   imageWrapper: css`
     height: 10.875rem;
     border-radius: 1rem;
@@ -59,22 +72,22 @@ export const cssObj = {
   `,
 
   eduChip: (isActive: boolean) => css`
-      ${NEWTEXTS.TITLE9}
-      width: 1.875rem;
-      height: 1.875rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: ${NEWCOLORS.GRAY100};
-      color: ${isActive ? NEWCOLORS.BLUE250 : NEWCOLORS.BLUEGRAY100};
-      border-radius: 0.5rem;
+    ${NEWTEXTS.TITLE9}
+    width: 1.875rem;
+    height: 1.875rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ${NEWCOLORS.GRAY100};
+    color: ${isActive ? NEWCOLORS.BLUE250 : NEWCOLORS.BLUEGRAY100};
+    border-radius: 0.5rem;
 
-      ${MOBILE} {
-        width: 1.5rem;
-        height: 1.5rem;
-        ${NEWTEXTS.TITLE3}
-      }
-    `,
+    ${MOBILE} {
+      width: 1.5rem;
+      height: 1.5rem;
+      ${NEWTEXTS.TITLE3}
+    }
+  `,
 
   title: css`
     margin-top: 1rem;
