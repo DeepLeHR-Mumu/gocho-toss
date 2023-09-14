@@ -3,6 +3,7 @@ import { FiMapPin } from "react-icons/fi";
 
 import { Chip } from "shared-ui/deeple-ds";
 
+import { useToast } from "@/globalStates";
 import { Executives } from "@/components/modal/FactoryInfoModal/component/Executives";
 import { Bus } from "@/components/modal/FactoryInfoModal/component/Bus";
 import { Dormitory } from "@/components/modal/FactoryInfoModal/component/Dormitory";
@@ -12,7 +13,6 @@ import { commonCssObj } from "@/pages/company/detail/style";
 
 import { FactoryInfoProps } from "./type";
 import { cssObj } from "./style";
-import { useToast } from "@/globalStates";
 
 export const FactoryInfo = ({ factoryArr }: FactoryInfoProps) => {
   const [selected, setSelected] = useState<FactoryDef | null>(null);
