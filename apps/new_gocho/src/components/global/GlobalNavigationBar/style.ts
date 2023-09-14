@@ -73,10 +73,6 @@ export const getCssObj = (themeWhite: boolean) => ({
       ${NEWTEXTS.TITLE12}
       cursor: pointer;
       padding-bottom: 1.625rem;
-
-      :focused {
-        color: red;
-      }
     }
   `,
 

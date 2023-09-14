@@ -139,7 +139,7 @@ export const GlobalNavigationBar = () => {
                               content: (
                                 <Link
                                   href={{
-                                    pathname: "/mypage",
+                                    pathname: INTERNAL_URL.MYPAGE,
                                     query: { type: "profile" },
                                   }}
                                 >
