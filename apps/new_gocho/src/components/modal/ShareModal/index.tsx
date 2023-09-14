@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "shared-ui/deeple-ds";
 
+import { useToast } from "@/globalStates";
+
 import { ModalWithTitle } from "@/components/common/ModalWithTitle";
 import { copyToClipboard } from "@/utils";
 
@@ -9,10 +11,11 @@ import { cssObj } from "./style";
 
 export const ShareModal = ({ close }: ShareModalProps) => {
   const [link, setLink] = useState("");
+  const { setToastMessage } = useToast();
 
   const copyURL = () => {
     copyToClipboard(window.document.location.href);
-    // TODO 토스트 메시지 같은 거 추가해야할 듯?
+    setToastMessage("주소가 복사되었습니다!");
   };
 
   useEffect(() => {
