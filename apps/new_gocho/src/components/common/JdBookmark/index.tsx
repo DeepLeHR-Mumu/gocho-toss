@@ -7,11 +7,13 @@ import { LoginModal } from "@/components/modal/LoginModal";
 
 import { JdBookmarkProps } from "./type";
 import { cssObj } from "./style";
+import { useToast } from "@/globalStates";
 
 export const JdBookmark = ({ jdId, marked = false, className }: JdBookmarkProps) => {
   const [loginModal, setLoginModal] = useState(false);
   const { data: userData } = useUserProfile();
   const { mutate: postJdBookmarkToggle } = useJdBookmarkToggle();
+  const { setToastMessage } = useToast();
 
   const bookmarkToggleHandler = () => {
     if (!userData) {
@@ -30,6 +32,9 @@ export const JdBookmark = ({ jdId, marked = false, className }: JdBookmarkProps)
         onClick={(e) => {
           e.preventDefault();
           bookmarkToggleHandler();
+
+          if (marked) setToastMessage("찜한 공고 목록에서 제외 되었습니다.");
+          if (!marked) setToastMessage("공고 찜 등록이 완료 되었습니다.");
         }}
       >
         {marked ? (

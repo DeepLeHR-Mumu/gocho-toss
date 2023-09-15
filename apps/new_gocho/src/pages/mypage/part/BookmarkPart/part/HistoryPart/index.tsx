@@ -16,9 +16,11 @@ export const HistoryPart = () => {
   const { data: userInfo } = useUserInfo();
   const { data: companyHistoryObj } = useUserCompanyHistoryArr({
     userId: userInfo?.id,
+    size: 100,
   });
   const { data: jdHistoryObj } = useUserJdHistoryArr({
     userId: userInfo?.id,
+    size: 100,
   });
 
   return (
