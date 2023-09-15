@@ -2,9 +2,9 @@ import { QueryFunctionContext } from "@tanstack/react-query";
 
 import { PageResultDef } from "shared-type/api/paginationType";
 
-import { userCompanyHistoriesArrKeyObj } from "@/constants/queryKeyFactory/company/companyHistoriesKeyObj";
+import { userCompanyHistoryArrKeyObj } from "@/constants/queryKeyFactory/company/companyHistoryKeyObj";
 
-export interface CompanyHistoriesArr {
+export interface CompanyHistoryArr {
   id: number;
   name: string;
   logo_url: string;
@@ -14,12 +14,12 @@ export interface CompanyHistoriesArr {
 }
 
 export interface ResponseObjDef {
-  data: CompanyHistoriesArr[];
+  data: CompanyHistoryArr[];
   page_result: PageResultDef;
 }
 
-export interface GetUserCompanyHistoriesDef {
+export interface GetUserCompanyHistoryDef {
   (
-    requestObj: QueryFunctionContext<ReturnType<typeof userCompanyHistoriesArrKeyObj.companyHistoriesArr>>
+    requestObj: QueryFunctionContext<ReturnType<typeof userCompanyHistoryArrKeyObj.companyHistoryArr>>
   ): Promise<ResponseObjDef>;
 }

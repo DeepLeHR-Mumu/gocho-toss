@@ -61,7 +61,7 @@ export const HistoryPart = () => {
                 />
               ))}
             {currentMenu === "공고" &&
-              jdArr.userJdHistoriesArr.map(({ id, title, endTime, company }) => (
+              jdArr.userJdHistoryArr.map(({ id, title, endTime, company }) => (
                 <JdRow jdId={id} key={id} dueDate={endTime} jdTitle={title} bookmarked companyName={company.name} />
               ))}
           </div>
