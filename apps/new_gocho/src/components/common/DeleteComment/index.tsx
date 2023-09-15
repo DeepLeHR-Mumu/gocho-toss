@@ -5,7 +5,6 @@ import { FiTrash2 } from "react-icons/fi";
 import { Popup } from "shared-ui/deeple-ds";
 
 import { useToast } from "@/globalStates";
-
 import { useDeleteCompanyComment } from "@/apis/company";
 
 import { DeleteCommentProps } from "./type";
