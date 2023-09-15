@@ -21,5 +21,7 @@ cd ../gocho_admin && tsc --noEmit
 echo "Admin 타입 검사 완료"
 cd ../gocho_business && tsc --noEmit
 echo "Business 타입 검사 완료"
+cd ../new_gocho && tsc --noEmit
+echo "NewGocho 타입 검사 완료"
 
 cd ../../ && pnpm lint-staged
