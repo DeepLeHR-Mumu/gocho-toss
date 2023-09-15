@@ -42,39 +42,41 @@ export const HistoryPart = () => {
         </div>
       </div>
       <div css={cssObj.listWrapper}>
-        {currentMenu === "기업" && companyHistoryObj?.companyHistoryDataArr.length ? (
-          companyHistoryObj?.companyHistoryDataArr.map(({ id, industry, name, logoUrl, size, isBookmark }) => (
-            <CompanyRow
-              key={id}
-              company={{
-                id,
-                size,
-                industry,
-                name,
-                logo: logoUrl || "",
-                bookmark: { state: isBookmark },
-              }}
-            />
-          ))
-        ) : (
-          <NoListCard text="최근 본 내역이 없습니다." />
-        )}
-        {currentMenu === "공고" && jdHistoryObj?.userJdHistoryArr.length ? (
-          jdHistoryObj.userJdHistoryArr.map(({ id, title, endTime, company, isBookmark }) => (
-            <JdRow
-              key={id}
-              jd={{
-                jdId: id,
-                dueDate: endTime,
-                jdTitle: title,
-                companyName: company.name,
-                bookmarked: isBookmark,
-              }}
-            />
-          ))
-        ) : (
-          <NoListCard text="최근 본 내역이 없습니다." />
-        )}
+        {currentMenu === "기업" &&
+          (companyHistoryObj?.companyHistoryDataArr.length ? (
+            companyHistoryObj?.companyHistoryDataArr.map(({ id, industry, name, logoUrl, size, isBookmark }) => (
+              <CompanyRow
+                key={id}
+                company={{
+                  id,
+                  size,
+                  industry,
+                  name,
+                  logo: logoUrl || "",
+                  bookmark: { state: isBookmark },
+                }}
+              />
+            ))
+          ) : (
+            <NoListCard text="최근 본 내역이 없습니다." />
+          ))}
+        {currentMenu === "공고" &&
+          (jdHistoryObj?.userJdHistoryArr.length ? (
+            jdHistoryObj.userJdHistoryArr.map(({ id, title, endTime, company, isBookmark }) => (
+              <JdRow
+                key={id}
+                jd={{
+                  jdId: id,
+                  dueDate: endTime,
+                  jdTitle: title,
+                  companyName: company.name,
+                  bookmarked: isBookmark,
+                }}
+              />
+            ))
+          ) : (
+            <NoListCard text="최근 본 내역이 없습니다." />
+          ))}
       </div>
     </>
   );
