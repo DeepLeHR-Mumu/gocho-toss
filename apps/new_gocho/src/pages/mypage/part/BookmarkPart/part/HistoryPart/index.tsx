@@ -43,7 +43,7 @@ export const HistoryPart = () => {
       </div>
       <div css={cssObj.listWrapper}>
         {currentMenu === "기업" && companyHistoryObj?.companyHistoryDataArr.length ? (
-          companyHistoryObj?.companyHistoryDataArr.map(({ id, industry, name, logoUrl, size }) => (
+          companyHistoryObj?.companyHistoryDataArr.map(({ id, industry, name, logoUrl, size, isBookmark }) => (
             <CompanyRow
               key={id}
               company={{
@@ -52,7 +52,7 @@ export const HistoryPart = () => {
                 industry,
                 name,
                 logo: logoUrl || "",
-                bookmark: { state: true },
+                bookmark: { state: isBookmark },
               }}
             />
           ))
