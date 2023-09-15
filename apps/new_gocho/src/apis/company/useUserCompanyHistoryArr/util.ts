@@ -1,8 +1,8 @@
 import { PageResultDef } from "shared-type/api/paginationType";
 
-import { CompanyHistoriesArr } from "./type";
+import { CompanyHistoryArr } from "./type";
 
-export const selector = (data: CompanyHistoriesArr[], page_result: PageResultDef) => {
+export const selector = (data: CompanyHistoryArr[], page_result: PageResultDef) => {
   const pageResult = {
     totalElements: page_result.total_elements,
     totalPages: page_result.total_pages,
@@ -13,13 +13,13 @@ export const selector = (data: CompanyHistoriesArr[], page_result: PageResultDef
   };
 
   const companyHistoryDataArr = data.map((company) => ({
-      id: company.id,
-      name: company.name,
-      size: company.size,
-      logoUrl: company.logo_url,
-      industry: company.industry,
-      isBookmark: company.is_bookmark,
-    }));
+    id: company.id,
+    name: company.name,
+    size: company.size,
+    logoUrl: company.logo_url,
+    industry: company.industry,
+    isBookmark: company.is_bookmark,
+  }));
 
   return { companyHistoryDataArr, pageResult };
 };

@@ -4,10 +4,11 @@ export interface UserHistoryJdArrRequestDef {
   size?: number;
 }
 
-export const userJdHistoriesKeyObj = {
+export const userJdHistoryKeyObj = {
   all: [{ data: "userJdHistoryArr" }] as const,
-  jdHistoriesArr: (requestObj: UserHistoryJdArrRequestDef) => [{ data: "userJdHistoryArr", requestObj }] as const,
-  infinite: (requestObj: UserHistoryJdArrRequestDef) => [
+  jdHistoryArr: (requestObj: UserHistoryJdArrRequestDef) => [{ data: "userJdHistoryArr", requestObj }] as const,
+  infinite: (requestObj: UserHistoryJdArrRequestDef) =>
+    [
       {
         data: "userJdHistoryArr",
         usage: "infinite",

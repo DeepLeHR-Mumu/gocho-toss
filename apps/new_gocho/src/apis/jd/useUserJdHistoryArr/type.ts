@@ -2,7 +2,7 @@ import { QueryFunctionContext } from "@tanstack/react-query";
 
 import { PageResultDef } from "shared-type/api/paginationType";
 
-import { userJdHistoriesKeyObj } from "@/constants/queryKeyFactory/jd/jdUserHistoriesArrKeyObj";
+import { userJdHistoryKeyObj } from "@/constants/queryKeyFactory/jd/jdUserHistoryArrKeyObj";
 
 export interface JdHistoryArrDef {
   id: number;
@@ -23,7 +23,5 @@ export interface ResponseObjDef {
 }
 
 export interface GetUserJdHistoryArrDef {
-  ({
-    queryKey,
-  }: QueryFunctionContext<ReturnType<typeof userJdHistoriesKeyObj.jdHistoriesArr>>): Promise<ResponseObjDef>;
+  ({ queryKey }: QueryFunctionContext<ReturnType<typeof userJdHistoryKeyObj.jdHistoryArr>>): Promise<ResponseObjDef>;
 }

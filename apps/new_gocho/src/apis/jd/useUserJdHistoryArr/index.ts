@@ -1,9 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import {
-  UserHistoryJdArrRequestDef,
-  userJdHistoriesKeyObj,
-} from "@/constants/queryKeyFactory/jd/jdUserHistoriesArrKeyObj";
+import { UserHistoryJdArrRequestDef, userJdHistoryKeyObj } from "@/constants/queryKeyFactory/jd/jdUserHistoryArrKeyObj";
 
 import { axiosInstance } from "../../axiosInstance";
 import { GetUserJdHistoryArrDef } from "./type";
@@ -14,8 +11,9 @@ export const getUserJdHistoryArr: GetUserJdHistoryArrDef = async ({ queryKey: [{
   return data;
 };
 
-export const useUserJdHistoryArr = (requestObj: UserHistoryJdArrRequestDef) => useQuery({
-    queryKey: userJdHistoriesKeyObj.jdHistoriesArr(requestObj),
+export const useUserJdHistoryArr = (requestObj: UserHistoryJdArrRequestDef) =>
+  useQuery({
+    queryKey: userJdHistoryKeyObj.jdHistoryArr(requestObj),
     queryFn: getUserJdHistoryArr,
     enabled: Boolean(requestObj.userId),
     select: ({ data, page_result }) => selector(data, page_result),
