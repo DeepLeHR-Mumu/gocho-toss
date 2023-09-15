@@ -25,11 +25,11 @@ const JdDetailPage: NextPage = () => {
   const { mutate: addJdViewCount } = useAddJdViewCount();
 
   useEffect(() => {
-    if (router.query.jdId && !isFirstRender.current) {
+    if (jdId && !isFirstRender.current) {
       isFirstRender.current = true;
-      addJdViewCount({ jdId: Number(router.query.jdId) });
+      addJdViewCount({ jdId: Number(jdId) });
     }
-  }, [addJdViewCount, router.query.jdId]);
+  }, [addJdViewCount, jdId]);
 
   return (
     <main>
