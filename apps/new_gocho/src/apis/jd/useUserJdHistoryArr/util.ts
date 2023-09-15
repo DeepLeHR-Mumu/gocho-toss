@@ -1,6 +1,6 @@
 import { PageResultDef } from "shared-type/api/paginationType";
 
-import { JdHistoryArrDef } from "./type";
+import { JdHistoryArrDef } from "../type/jdHistoryArr";
 
 export const selector = (data: JdHistoryArrDef[], page_result: PageResultDef) => {
   const pageResult = {
@@ -21,7 +21,7 @@ export const selector = (data: JdHistoryArrDef[], page_result: PageResultDef) =>
     title: jd.title,
     cut: jd.cut,
     endTime: jd.end_time,
-    isExpired: jd.is_expired,
+    isBookmark: jd.is_bookmark,
   }));
 
   return { userJdHistoryArr, pageResult };

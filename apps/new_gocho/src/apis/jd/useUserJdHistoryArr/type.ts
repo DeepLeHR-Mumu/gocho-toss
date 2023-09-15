@@ -4,18 +4,9 @@ import { PageResultDef } from "shared-type/api/paginationType";
 
 import { userJdHistoryKeyObj } from "@/constants/queryKeyFactory/jd/jdUserHistoryArrKeyObj";
 
-export interface JdHistoryArrDef {
-  id: number;
-  company: {
-    id: number;
-    name: string;
-    logo_url: string;
-  };
-  title: string;
-  cut: boolean;
-  end_time: string;
-  is_expired: boolean;
-}
+import { JdHistoryArrDef } from "../type/jdHistoryArr";
+
+import { selector } from "./util";
 
 export interface ResponseObjDef {
   data: JdHistoryArrDef[];
@@ -25,3 +16,5 @@ export interface ResponseObjDef {
 export interface GetUserJdHistoryArrDef {
   ({ queryKey }: QueryFunctionContext<ReturnType<typeof userJdHistoryKeyObj.jdHistoryArr>>): Promise<ResponseObjDef>;
 }
+
+export type SelectorJdHistoryArr = ReturnType<typeof selector>;

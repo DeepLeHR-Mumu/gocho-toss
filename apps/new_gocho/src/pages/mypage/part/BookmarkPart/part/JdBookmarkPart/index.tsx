@@ -30,7 +30,7 @@ export const JdBookmarkPart = () => {
     setIsExpiredJdView(!isExpiredJdView);
   };
 
-  return jdBookmarkDataObj ? (
+  return jdBookmarkDataObj?.pageResult.totalElements ? (
     <>
       <div css={cssObj.wrapper}>
         <div css={cssObj.checkWrapper}>
