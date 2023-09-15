@@ -56,7 +56,7 @@ export const CompanyBookmarkPart = () => {
       </div>
       <div css={cssObj.listWrapper}>
         {companyBookmarkDataObj.companyBookmarkDataArr.map((company) => (
-          <CompanyRow key={company.id} company={{ ...company, bookmark: { state: true } }} border />
+          <CompanyRow key={company.id} company={{ ...company, bookmark: { state: true } }} />
         ))}
       </div>
     </div>
