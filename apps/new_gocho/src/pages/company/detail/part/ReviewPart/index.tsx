@@ -36,19 +36,6 @@ export const ReviewPart = () => {
     );
   }
 
-  if (companyCommentData.comment_arr.length === 0) {
-    return (
-      <section css={cssObj.wrapper}>
-        <div css={cssObj.box}>
-          <div css={cssObj.titleWrapper}>
-            <h3 css={cssObj.title}>최근 리뷰</h3>
-          </div>
-          <NoReview />
-        </div>
-      </section>
-    );
-  }
-
   return (
     <section css={cssObj.wrapper}>
       <div css={cssObj.box}>
@@ -62,6 +49,7 @@ export const ReviewPart = () => {
           </div>
         </div>
         {writeReview && <WriteReview />}
+        {companyCommentData.comment_arr.length === 0 && <NoReview />}
         {companyCommentData.comment_arr
           .map((comment) => (
             <Review
