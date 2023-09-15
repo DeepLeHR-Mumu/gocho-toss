@@ -52,6 +52,7 @@ const FindPassword = ({ ...actionBarHandlers }: ActionBarHandlers) => {
           <Input
             label="이메일"
             {...register("email", {
+              required: EMAIL_ERROR_MESSAGE.REQUIRED,
               pattern: {
                 value: EMAIL_REGEXP,
                 message: EMAIL_ERROR_MESSAGE.REGEX,
@@ -59,6 +60,7 @@ const FindPassword = ({ ...actionBarHandlers }: ActionBarHandlers) => {
             })}
             underline={isMobile}
             state={errors.email ? { state: "error", message: errors.email.message } : undefined}
+            placeholder="이메일을 입력해주세요."
           />
         </form>
       </div>

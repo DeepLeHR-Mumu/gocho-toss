@@ -38,7 +38,8 @@ export const cssObj = {
 
   message: css`
     position: absolute;
-    bottom: -1.5rem;
+    bottom: -1.25rem;
+    left: 0.25rem;
   `,
 
   // NOTE 공통 스타일로 빼도 될듯?

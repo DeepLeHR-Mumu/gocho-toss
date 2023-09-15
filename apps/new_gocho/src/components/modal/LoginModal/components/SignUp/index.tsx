@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import axios from "axios";
 
 import { Input, Button, Divider } from "shared-ui/deeple-ds";
 import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE, EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
+import { ErrorResponseDef } from "shared-type/api/errorResponseType";
 
 import { useDoSignUp } from "@/apis/auth";
 import { RequestObjDef as SignUpFormValues } from "@/apis/auth/useDoSignup/type";
@@ -14,13 +16,13 @@ import { ActionBarHandlers } from "../ActionBar/type";
 import { cssObj } from "./style";
 
 const SignUp = ({ ...actionBarHandlers }: ActionBarHandlers) => {
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const { isMobile, browserSize } = useGetDeviceType();
   const { setToastMessage } = useToast();
 
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors },
   } = useForm<SignUpFormValues>({ mode: "onChange" });
   const { mutate: postSignUp } = useDoSignUp();
@@ -29,13 +31,8 @@ const SignUp = ({ ...actionBarHandlers }: ActionBarHandlers) => {
     postSignUp(signUpObj, {
       onError: (error) => {
         if (axios.isAxiosError(error) && error.response) {
-          switch (error.response.status) {
-            case 409:
-              setError("email", { type: "custom", message: "이미 가입된 메일입니다." });
-              break;
-            default:
-              break;
-          }
+          const errorResponse = error.response?.data as ErrorResponseDef;
+          setErrorMessage(errorResponse.error_message);
         }
       },
       onSuccess: (response) => {
@@ -70,6 +67,7 @@ const SignUp = ({ ...actionBarHandlers }: ActionBarHandlers) => {
           <Input
             label="이메일"
             {...register("email", {
+              required: EMAIL_ERROR_MESSAGE.REQUIRED,
               pattern: {
                 value: EMAIL_REGEXP,
                 message: EMAIL_ERROR_MESSAGE.REGEX,
@@ -77,12 +75,15 @@ const SignUp = ({ ...actionBarHandlers }: ActionBarHandlers) => {
             })}
             underline={isMobile}
             state={errors.email ? { state: "error", message: errors.email.message } : undefined}
+            autoComplete="off"
+            placeholder="이메일을 입력해주세요."
           />
           <Input
             label="비밀번호"
             type="password"
             maxLength={20}
             {...register("password", {
+              required: PWD_ERROR_MESSAGE.REQUIRED,
               minLength: { value: 8, message: PWD_ERROR_MESSAGE.MIN_MAX },
               pattern: {
                 value: PWD_REGEXP,
@@ -91,9 +92,12 @@ const SignUp = ({ ...actionBarHandlers }: ActionBarHandlers) => {
             })}
             underline={isMobile}
             state={errors.password ? { state: "error", message: errors.password.message } : undefined}
+            autoComplete="off"
+            placeholder="비밀번호를 입력해주세요."
           />
         </form>
       </div>
+      {errorMessage && <p css={cssObj.errorMessage}>{errorMessage}</p>}
       <div css={cssObj.signUpButtonWrapper}>
         <Button type="submit" size="large" fill={isMobile} onClick={handleSubmit(signUpSubmit)}>
           가입하기
