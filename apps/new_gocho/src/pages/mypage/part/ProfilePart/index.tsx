@@ -122,6 +122,7 @@ export const ProfilePart: FC = () => {
         </button>
         <input
           type="file"
+          accept="image/png, image/gif, image/jpeg, image/jpg"
           aria-label="프로필 업로드"
           css={cssObj.upload}
           onChange={handleProfileChange}

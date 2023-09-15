@@ -5,12 +5,13 @@ import { ButtonProps } from "./type";
 import { cssObj } from "./style";
 
 export const Button = ({ size, color = "active", fill, children, ...props }: ButtonProps) => (
-  // eslint-disable-next-line react/button-has-type
   <button
+    type="button"
     css={css`
       ${cssObj.buttonWrapper(size, fill)}${buttonColor[color]}
     `}
     {...props}
+    disabled={color === "disable"}
   >
     {children}
   </button>

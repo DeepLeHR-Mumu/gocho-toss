@@ -21,6 +21,8 @@ export const JdBookmark = ({ jdId, marked = false, className }: JdBookmarkProps)
       return;
     }
 
+    if (userData && marked) setToastMessage("찜한 공고 목록에서 제외 되었습니다.");
+    if (userData && !marked) setToastMessage("공고 찜 등록이 완료 되었습니다.");
     postJdBookmarkToggle({ jdId });
   };
 
@@ -32,9 +34,6 @@ export const JdBookmark = ({ jdId, marked = false, className }: JdBookmarkProps)
         onClick={(e) => {
           e.preventDefault();
           bookmarkToggleHandler();
-
-          if (marked) setToastMessage("찜한 공고 목록에서 제외 되었습니다.");
-          if (!marked) setToastMessage("공고 찜 등록이 완료 되었습니다.");
         }}
       >
         {marked ? (
