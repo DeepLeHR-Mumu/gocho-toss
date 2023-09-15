@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
@@ -14,6 +14,7 @@ import { TitlePart } from "./part/TitlePart";
 import { cssObj } from "./style";
 
 const CompanyDetail: NextPage = () => {
+  const isFirstRender = useRef(false);
   const router = useRouter();
   const { mutate: addViewCount } = useAddCompanyViewCount();
 
@@ -27,7 +28,8 @@ const CompanyDetail: NextPage = () => {
   }, [router]);
 
   useEffect(() => {
-    if (router.query.companyId) {
+    if (router.query.companyId && !isFirstRender.current) {
+      isFirstRender.current = true;
       addViewCount({ companyId: Number(router.query.companyId) });
     }
   }, [router.query.companyId, addViewCount]);
