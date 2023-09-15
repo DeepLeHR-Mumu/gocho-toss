@@ -24,7 +24,7 @@ export const CompanyBookmarkPart = () => {
     size: 100,
   });
 
-  return companyBookmarkDataObj?.companyBookmarkDataArr.length ? (
+  return companyBookmarkDataObj?.pageResult.totalElements ? (
     <div css={cssObj.wrapper}>
       <div css={cssObj.dropdownWrapper}>
         <DropDown

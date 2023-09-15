@@ -45,7 +45,7 @@ export const HistoryPart = () => {
       </div>
       <div css={cssObj.listWrapper}>
         {currentMenu === "기업" &&
-          (companyHistoryObj?.companyHistoryDataArr.length ? (
+          (companyHistoryObj?.pageResult.totalElements ? (
             companyHistoryObj?.companyHistoryDataArr.map(({ id, industry, name, logoUrl, size, isBookmark }) => (
               <CompanyRow
                 key={id}
@@ -63,7 +63,7 @@ export const HistoryPart = () => {
             <NoListCard text="최근 본 내역이 없습니다." />
           ))}
         {currentMenu === "공고" &&
-          (jdHistoryObj?.userJdHistoryArr.length ? (
+          (jdHistoryObj?.pageResult.totalElements ? (
             jdHistoryObj.userJdHistoryArr.map(({ id, title, endTime, company, isBookmark }) => (
               <JdRow
                 key={id}
