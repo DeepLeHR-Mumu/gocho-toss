@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { Chip } from "shared-ui/deeple-ds";
@@ -15,6 +15,12 @@ export const ReviewPart = () => {
   const router = useRouter();
   const { data: companyCommentData } = useCompanyCommentArr({ companyId: Number(router.query.companyId) });
   const { data: userData } = useUserInfo();
+
+  useEffect(() => {
+    if (!userData) {
+      router.replace({ query: { type: "company", companyId: Number(router.query.companyId) } });
+    }
+  }, [userData, router]);
 
   if (!companyCommentData) {
     return (

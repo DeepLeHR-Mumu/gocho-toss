@@ -7,7 +7,7 @@ import { FiShare2, FiEye } from "react-icons/fi";
 import { Divider } from "shared-ui/deeple-ds";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
-import { Layout, LoginModal, ShareModal, CompanyBookmark } from "@/components";
+import { Layout, ShareModal, CompanyBookmark } from "@/components";
 import { useCompanyDetail } from "@/apis/company";
 import { useUserProfile } from "@/apis/auth";
 import { isQueryString } from "@/utils";
@@ -17,7 +17,6 @@ import backgroundImage from "@/public/companyBackground.png";
 import { cssObj } from "./style";
 
 export const TitlePart = () => {
-  const [loginModal, setLoginModal] = useState(false);
   const [shareModal, setShareModal] = useState(false);
   const router = useRouter();
   const companyId = isQueryString(router.query.companyId) ? Number(router.query.companyId) : undefined;
@@ -26,7 +25,16 @@ export const TitlePart = () => {
   const { data: userData } = useUserProfile();
 
   if (!companyData) {
-    return <> </>;
+    return (
+      <section css={cssObj.background}>
+        <div css={cssObj.imageWrapper}>
+          <Image src={backgroundImage} alt="회사 배경" fill priority />
+        </div>
+        <Layout>
+          <div css={cssObj.skeletonWrapper} />
+        </Layout>
+      </section>
+    );
   }
 
   return (
@@ -84,13 +92,6 @@ export const TitlePart = () => {
         </Layout>
         <Divider />
       </section>
-      {loginModal && (
-        <LoginModal
-          close={() => {
-            setLoginModal(false);
-          }}
-        />
-      )}
       {shareModal && (
         <ShareModal
           close={() => {

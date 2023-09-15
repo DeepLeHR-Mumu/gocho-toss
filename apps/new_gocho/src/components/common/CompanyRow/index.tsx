@@ -13,7 +13,7 @@ import { SkeletonBox } from "../SkeletonBox";
 import { CompanyRowProps } from "./type";
 import { cssObj } from "./style";
 
-export const CompanyRow = ({ company, border }: CompanyRowProps) => {
+export const CompanyRow = ({ company, border = true }: CompanyRowProps) => {
   const [loginModal, setLoginModal] = useState(false);
   const { isMobile } = useGetDeviceType();
 

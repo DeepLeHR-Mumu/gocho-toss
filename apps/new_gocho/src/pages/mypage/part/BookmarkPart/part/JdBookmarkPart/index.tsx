@@ -49,7 +49,6 @@ export const JdBookmarkPart = () => {
           }
           menu={{
             width: 180,
-            closeAfterClickEvent: true,
             options: filterOption.map(({ content, filter }) => ({
               key: content,
               focused: filterText === content,
@@ -60,11 +59,17 @@ export const JdBookmarkPart = () => {
               },
             })),
           }}
+          menuConfig={{
+            closeAfterClickEvent: true,
+          }}
         />
       </div>
       <div css={cssObj.listWrapper}>
         {jdBookmarkDataObj.userJdBookmarkArr.map(({ id, title, endTime, company }) => (
-          <JdRow jdId={id} key={id} dueDate={endTime} jdTitle={title} bookmarked companyName={company.name} />
+          <JdRow
+            key={id}
+            jd={{ jdId: id, dueDate: endTime, jdTitle: title, bookmarked: true, companyName: company.name }}
+          />
         ))}
       </div>
     </>
