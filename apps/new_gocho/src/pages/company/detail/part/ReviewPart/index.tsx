@@ -9,6 +9,7 @@ import { useCompanyCommentArr } from "@/apis/company";
 import { WriteReview } from "./component/WriteReview";
 import { Review } from "./component/Review";
 import { cssObj } from "./style";
+import { NoReview } from "./component/NoReview";
 
 export const ReviewPart = () => {
   const [writeReview, setWriteReview] = useState(false);
@@ -30,6 +31,19 @@ export const ReviewPart = () => {
             <h3 css={cssObj.title}>최근 리뷰</h3>
             <span css={cssObj.reviewNumber}>로딩중입니다.</span>
           </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (companyCommentData.comment_arr.length === 0) {
+    return (
+      <section css={cssObj.wrapper}>
+        <div css={cssObj.box}>
+          <div css={cssObj.titleWrapper}>
+            <h3 css={cssObj.title}>최근 리뷰</h3>
+          </div>
+          <NoReview />
         </div>
       </section>
     );
