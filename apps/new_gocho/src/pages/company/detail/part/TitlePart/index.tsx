@@ -7,7 +7,7 @@ import { FiShare2, FiEye } from "react-icons/fi";
 import { Divider } from "shared-ui/deeple-ds";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
-import { Layout, ShareModal, CompanyBookmark } from "@/components";
+import { Layout, ShareModal, CompanyBookmark, SkeletonBox } from "@/components";
 import { useCompanyDetail } from "@/apis/company";
 import { useUserProfile } from "@/apis/auth";
 import { isQueryString } from "@/utils";
@@ -31,7 +31,24 @@ export const TitlePart = () => {
           <Image src={backgroundImage} alt="회사 배경" fill priority />
         </div>
         <Layout>
-          <div css={cssObj.skeletonWrapper} />
+          <div css={cssObj.wrapper}>
+            <div css={cssObj.companyLogo}>
+              <Image src={defaultCompanyLogo} alt="회사 로고" fill priority />
+            </div>
+            <div css={cssObj.emptyDiv1} />
+            <div css={cssObj.skeletonBoxWrapper1}>
+              <SkeletonBox />
+            </div>
+            <div css={cssObj.introWrapper}>
+              <div css={cssObj.skeletonBoxWrapper2}>
+                <SkeletonBox />
+              </div>
+            </div>
+          </div>
+        </Layout>
+        <Divider />
+        <Layout>
+          <div css={cssObj.emptyDiv2} />
         </Layout>
       </section>
     );
