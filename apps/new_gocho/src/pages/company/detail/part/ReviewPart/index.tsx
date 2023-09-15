@@ -7,9 +7,9 @@ import { useUserInfo } from "@/apis/auth/useUserInfo";
 import { useCompanyCommentArr } from "@/apis/company";
 
 import { WriteReview } from "./component/WriteReview";
+import { NoReview } from "./component/NoReview";
 import { Review } from "./component/Review";
 import { cssObj } from "./style";
-import { NoReview } from "./component/NoReview";
 
 export const ReviewPart = () => {
   const [writeReview, setWriteReview] = useState(false);
