@@ -14,7 +14,7 @@ import { isQueryString } from "@/utils";
 import { INTERNAL_URL } from "@/pages/constants";
 import backgroundImage from "@/public/companyBackground.png";
 
-import { cssObj } from "./style";
+import { cssObj, skeletonCssObj } from "./style";
 
 export const TitlePart = () => {
   const [shareModal, setShareModal] = useState(false);
@@ -35,12 +35,12 @@ export const TitlePart = () => {
             <div css={cssObj.companyLogo}>
               <Image src={defaultCompanyLogo} alt="회사 로고" fill priority />
             </div>
-            <div css={cssObj.emptyDiv1} />
-            <div css={cssObj.skeletonBoxWrapper1}>
+            <div css={skeletonCssObj.emptyDiv1} />
+            <div css={skeletonCssObj.skeletonBoxWrapper1}>
               <SkeletonBox />
             </div>
             <div css={cssObj.introWrapper}>
-              <div css={cssObj.skeletonBoxWrapper2}>
+              <div css={skeletonCssObj.skeletonBoxWrapper2}>
                 <SkeletonBox />
               </div>
             </div>
@@ -48,7 +48,7 @@ export const TitlePart = () => {
         </Layout>
         <Divider />
         <Layout>
-          <div css={cssObj.emptyDiv2} />
+          <div css={skeletonCssObj.emptyDiv2} />
         </Layout>
       </section>
     );

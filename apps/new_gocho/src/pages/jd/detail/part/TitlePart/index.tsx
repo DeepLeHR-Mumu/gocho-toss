@@ -8,7 +8,7 @@ import { cssObj } from "./style";
 export const TitlePart = ({ jd }: TitlePartProps) => {
   if (!jd) {
     return (
-      <section style={{ height: "4.875rem" }}>
+      <section css={cssObj.skeletonWrapper}>
         <SkeletonBox color="GRAY50" />
       </section>
     );
