@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
 
-import { ChipColor } from "deeple-ds/type";
+import { ChipColor } from "../type";
 
 export interface ChipProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size: "small" | "large";

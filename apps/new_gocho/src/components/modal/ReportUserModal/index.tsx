@@ -2,13 +2,13 @@ import { useForm, SubmitHandler } from "react-hook-form";
 
 import { Button, Radio } from "shared-ui/deeple-ds";
 
+import { useToast } from "@/globalStates";
 import { useReportUser } from "@/apis/users";
 import { ModalWithTitle } from "@/components/common/ModalWithTitle";
 
 import { ReportUserModalProps, ReportFormValues } from "./type";
 import { REPORT_REASON_ARR } from "./constant";
 import { cssObj } from "./style";
-import { useToast } from "@/globalStates";
 
 export const ReportUserModal = ({ companyId, userId, closeHandler }: ReportUserModalProps) => {
   const { mutate: postReportUser } = useReportUser({ companyId });

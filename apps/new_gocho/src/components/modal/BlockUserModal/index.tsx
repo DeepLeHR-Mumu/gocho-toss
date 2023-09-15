@@ -1,9 +1,9 @@
 import { Popup } from "shared-ui/deeple-ds";
 
+import { useToast } from "@/globalStates";
 import { useBlockUser } from "@/apis/users";
 
 import { BlockUserModalProps } from "./type";
-import { useToast } from "@/globalStates";
 
 export const BlockUserModal = ({ companyId, userId, cancelHandler, confirmHandler }: BlockUserModalProps) => {
   const { mutate: postBlockUser } = useBlockUser({ companyId });

@@ -4,11 +4,9 @@ import Link from "next/link";
 
 import { DDayChip } from "shared-ui/deeple-ds";
 
-import { JdBookmark } from "@/components";
-
-import { SkeletonBox } from "../SkeletonBox";
-
 import { INTERNAL_URL } from "@/pages/constants";
+import { JdBookmark, SkeletonBox } from "@/components";
+
 import { JdCardProps } from "./type";
 import { cssObj } from "./style";
 
