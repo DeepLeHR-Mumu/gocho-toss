@@ -7,6 +7,7 @@ import { useUserInfo } from "@/apis/auth/useUserInfo";
 import { useCompanyCommentArr } from "@/apis/company";
 
 import { WriteReview } from "./component/WriteReview";
+import { NoReview } from "./component/NoReview";
 import { Review } from "./component/Review";
 import { cssObj } from "./style";
 
@@ -48,6 +49,7 @@ export const ReviewPart = () => {
           </div>
         </div>
         {writeReview && <WriteReview />}
+        {companyCommentData.comment_arr.length === 0 && <NoReview />}
         {companyCommentData.comment_arr
           .map((comment) => (
             <Review

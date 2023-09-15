@@ -26,6 +26,9 @@ export const CompanyInfoPart = () => {
         <div css={cssObj.skeletonWrapper}>
           <SkeletonBox color="GRAY50" />
         </div>
+        <div css={cssObj.skeletonWrapper}>
+          <SkeletonBox color="GRAY50" />
+        </div>
       </section>
     );
   }
