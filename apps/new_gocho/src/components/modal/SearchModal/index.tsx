@@ -133,10 +133,12 @@ export const SearchModal = ({ close }: SearchModalProps) => {
                 {companyData?.companyDataArr.map((company) => (
                   <CompanyCard
                     key={company.id}
-                    id={company.id}
-                    logoSrc={company.logoUrl || ""}
-                    name={company.name}
-                    hashTagArr={[company.industry, company.size]}
+                    company={{
+                      ...company,
+                      logoSrc: company.logoUrl || "",
+                      hashTagArr: [company.industry],
+                      bookmark: { state: company.isBookmark },
+                    }}
                   />
                 ))}
               </div>
@@ -147,12 +149,14 @@ export const SearchModal = ({ close }: SearchModalProps) => {
                 {jobData?.jdDataArr.map((job) => (
                   <JdRow
                     key={job.id}
-                    jdId={job.id}
-                    companyName={job.company.name}
-                    jdTitle={job.title}
-                    dueDate={job.endTime}
-                    bookmarked={false}
-                    cut={job.cut}
+                    jd={{
+                      jdId: job.id,
+                      companyName: job.company.name,
+                      jdTitle: job.title,
+                      dueDate: job.endTime,
+                      bookmarked: job.isBookmark,
+                      cut: job.cut,
+                    }}
                   />
                 ))}
               </div>

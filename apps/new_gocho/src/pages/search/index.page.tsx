@@ -109,24 +109,25 @@ const SearchPage: NextPage = () => {
               jdData?.jdDataArr.map((jd) => (
                 <JdRow
                   key={jd.id}
-                  jdId={jd.id}
-                  companyName={jd.company.name}
-                  jdTitle={jd.title}
-                  dueDate={jd.endTime}
-                  bookmarked={false}
-                  cut={jd.cut}
+                  jd={{
+                    jdId: jd.id,
+                    companyName: jd.company.name,
+                    jdTitle: jd.title,
+                    dueDate: jd.endTime,
+                    bookmarked: jd.isBookmark,
+                    cut: jd.cut,
+                  }}
                 />
               ))}
             {tab === "company" &&
               companyData?.companyDataArr.map((company) => (
                 <CompanyRow
                   key={company.id}
-                  id={company.id}
-                  logo={company.logoUrl}
-                  name={company.name}
-                  size={company.size}
-                  industry={company.industry}
-                  bookmark={{ state: company.isBookmark }}
+                  company={{
+                    ...company,
+                    logo: company.logoUrl,
+                    bookmark: { state: company.isBookmark },
+                  }}
                 />
               ))}
             {total.elements === 0 && (

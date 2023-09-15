@@ -46,23 +46,18 @@ export const HistoryPart = () => {
           </div>
           <div css={cssObj.listWrapper}>
             {currentMenu === "기업" &&
-              companyArr.companyHistoryDataArr.map(({ id, industry, name, logoUrl, size }) => (
+              companyArr.companyHistoryDataArr.map(({ id, industry, name, logoUrl, size, isBookmark }) => (
                 <CompanyRow
                   key={id}
-                  id={id}
-                  size={size}
-                  logo={logoUrl || ""}
-                  name={name}
-                  industry={industry}
-                  border
-                  bookmark={{
-                    state: true,
-                  }}
+                  company={{ id, size, name, industry, logo: logoUrl || "", bookmark: { state: isBookmark } }}
                 />
               ))}
             {currentMenu === "공고" &&
               jdArr.userJdHistoryArr.map(({ id, title, endTime, company }) => (
-                <JdRow jdId={id} key={id} dueDate={endTime} jdTitle={title} bookmarked companyName={company.name} />
+                <JdRow
+                  key={id}
+                  jd={{ jdId: id, dueDate: endTime, jdTitle: title, companyName: company.name, bookmarked: true }}
+                />
               ))}
           </div>
         </>

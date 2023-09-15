@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 
 import { useCompanyDetail } from "@/apis/company";
 import { isQueryString } from "@/utils";
+import { SkeletonBox } from "@/components";
 
 import { CommonInfo } from "./component/CommonInfo";
 import { FactoryInfo } from "./component/FactoryInfo";
@@ -17,7 +18,16 @@ export const CompanyInfoPart = () => {
   const { data: companyData } = useCompanyDetail({ companyId, isStatic: false });
 
   if (!companyData) {
-    return <> </>;
+    return (
+      <section css={cssObj.wrapper}>
+        <div css={cssObj.skeletonWrapper}>
+          <SkeletonBox color="GRAY50" />
+        </div>
+        <div css={cssObj.skeletonWrapper}>
+          <SkeletonBox color="GRAY50" />
+        </div>
+      </section>
+    );
   }
 
   return (

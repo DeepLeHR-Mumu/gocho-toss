@@ -26,6 +26,11 @@ export const cssObj = {
     position: relative;
   `,
 
+  skeletonWrapper: css`
+    width: 100%;
+    height: 23.75rem;
+  `,
+
   followWrapper: css`
     display: flex;
     flex-direction: row;

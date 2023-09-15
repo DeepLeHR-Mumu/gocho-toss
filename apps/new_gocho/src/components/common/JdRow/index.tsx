@@ -1,11 +1,11 @@
 import { useMemo } from "react";
+import Link from "next/link";
 import { css } from "@emotion/react";
 import { DDayChip } from "shared-ui/deeple-ds";
 import { dateConverter } from "shared-util";
 
 import { isInvalidDate, isExpired } from "@/utils";
 
-import Link from "next/link";
 import { INTERNAL_URL } from "@/pages/constants";
 import { SkeletonBox } from "../SkeletonBox";
 import { JdBookmark } from "../JdBookmark";

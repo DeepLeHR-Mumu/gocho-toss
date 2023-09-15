@@ -26,13 +26,7 @@ export const AllPart: FunctionComponent = () => {
         {companyDataObj?.companyDataArr.map(({ id, industry, size, name, logoUrl, isBookmark }) => (
           <CompanyRow
             key={id}
-            id={id}
-            size={size}
-            logo={logoUrl || ""}
-            name={name}
-            industry={industry}
-            border
-            bookmark={{ state: isBookmark }}
+            company={{ id, name, size, logo: logoUrl || "", industry, bookmark: { state: isBookmark } }}
           />
         ))}
       </div>
