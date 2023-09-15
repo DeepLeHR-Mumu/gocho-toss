@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
+import { useToast } from "@/globalStates";
 import { useUserProfile } from "@/apis/auth";
 import { useJdBookmarkToggle } from "@/apis/jd";
 import { LoginModal } from "@/components/modal/LoginModal";
 
 import { JdBookmarkProps } from "./type";
 import { cssObj } from "./style";
-import { useToast } from "@/globalStates";
 
 export const JdBookmark = ({ jdId, marked = false, className }: JdBookmarkProps) => {
   const [loginModal, setLoginModal] = useState(false);

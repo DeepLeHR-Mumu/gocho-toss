@@ -8,6 +8,7 @@ import { useGetKakaoCode } from "shared-api/auth/useGetKakaoCode";
 // import { loginSuccessEvent } from "shared-ga/auth";
 // import { tokenDecryptor } from "shared-util";
 import { KAKAO_API_KEY } from "shared-user/src/constants";
+
 import { useToast } from "@/globalStates";
 
 const KakaoLogin: NextPage = () => {

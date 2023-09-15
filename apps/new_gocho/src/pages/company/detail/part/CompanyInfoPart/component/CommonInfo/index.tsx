@@ -1,7 +1,6 @@
 import { Divider } from "shared-ui/deeple-ds";
 
 import { useToast } from "@/globalStates";
-
 import { copyToClipboard } from "@/utils";
 import { commonCssObj } from "@/pages/company/detail/style";
 

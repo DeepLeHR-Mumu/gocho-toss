@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Button } from "shared-ui/deeple-ds";
 
 import { useToast } from "@/globalStates";
-
 import { ModalWithTitle } from "@/components/common/ModalWithTitle";
 import { copyToClipboard } from "@/utils";
 
