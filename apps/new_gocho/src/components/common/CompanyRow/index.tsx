@@ -13,7 +13,7 @@ import { SkeletonBox } from "../SkeletonBox";
 import { CompanyRowProps } from "./type";
 import { cssObj } from "./style";
 
-export const CompanyRow = ({ company, border }: CompanyRowProps) => {
+export const CompanyRow = ({ company, border = true }: CompanyRowProps) => {
   const [loginModal, setLoginModal] = useState(false);
   const { isMobile } = useGetDeviceType();
 
@@ -28,7 +28,7 @@ export const CompanyRow = ({ company, border }: CompanyRowProps) => {
   return (
     <>
       <div css={cssObj.wrapper(Boolean(border))}>
-        <Profile size={isMobile ? 52 : 60} src={company.logo} altText={`${name} 로고`} />
+        <Profile size={isMobile ? 52 : 60} src={company.logo} altText={`${company.name} 로고`} />
         <div css={cssObj.infoWrapper}>
           <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${company.id}`} css={cssObj.companyName}>
             {company.name}

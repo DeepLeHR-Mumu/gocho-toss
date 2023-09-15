@@ -45,12 +45,14 @@ export const JdListGrid = ({ filter }: JdListGridProps) => {
             {jdData.jdDataArr.map((jd) => (
               <JdRow
                 key={jd.id}
-                jdId={jd.id}
-                companyName={jd.company.name}
-                jdTitle={jd.title}
-                dueDate={jd.endTime}
-                bookmarked={jd.isBookmark}
-                cut={jd.cut}
+                jd={{
+                  jdId: jd.id,
+                  companyName: jd.company.name,
+                  jdTitle: jd.title,
+                  dueDate: jd.endTime,
+                  bookmarked: jd.isBookmark,
+                  cut: jd.cut,
+                }}
               />
             ))}
             {jdData.jdDataArr.length < totalJdNumber && (
