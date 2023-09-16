@@ -33,6 +33,19 @@ export const JdListGrid = ({ filter }: JdListGridProps) => {
     setJdArrSize((prev) => prev + BUNDLE_SIZE);
   };
 
+  if (!jdData) {
+    return (
+      <section css={commonCssObj.box}>
+        <div css={cssObj.titleWrapper}>
+          <h3 css={commonCssObj.title}>{filter === "valid" ? "채용중 공고" : "만료된 공고"}</h3>
+        </div>
+        <div css={cssObj.jdWrapper}>
+          <p css={cssObj.noJd} />
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section css={commonCssObj.box}>
       <div css={cssObj.titleWrapper}>
@@ -40,7 +53,7 @@ export const JdListGrid = ({ filter }: JdListGridProps) => {
         <span css={cssObj.jdNumber}>{totalJdNumber} 건</span>
       </div>
       <div css={cssObj.jdWrapper}>
-        {jdData && totalJdNumber !== 0 ? (
+        {totalJdNumber !== 0 ? (
           <>
             {jdData.jdDataArr.map((jd) => (
               <JdRow

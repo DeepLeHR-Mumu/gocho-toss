@@ -26,11 +26,6 @@ export const cssObj = {
     position: relative;
   `,
 
-  skeletonWrapper: css`
-    width: 100%;
-    height: 23.75rem;
-  `,
-
   followWrapper: css`
     display: flex;
     flex-direction: row;
@@ -117,5 +112,31 @@ export const cssObj = {
     padding-bottom: 1.5rem;
     border-bottom: ${isSelected ? `2px solid ${NEWCOLORS.BLUE300}` : `none`};
     color: ${isSelected ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY200};
+  `,
+
+  emptyDiv1: css`
+    width: 100%;
+    height: 2.75rem;
+  `,
+
+  emptyDiv2: css`
+    width: 100%;
+    height: 4.5rem;
+  `,
+
+  skeletonBoxWrapper1: css`
+    width: 10rem;
+    height: 2rem;
+    margin-top: 0.875rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  `,
+
+  skeletonBoxWrapper2: css`
+    width: 15rem;
+    height: 1.25rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
   `,
 };

@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
@@ -6,6 +7,7 @@ import { dummyArrCreator } from "shared-util";
 import { Layout, JdRow } from "@/components";
 import { useJdDetail, useJdArr } from "@/apis/jd";
 import { isQueryString } from "@/utils";
+import { useAddJdViewCount } from "@/apis/viewCount";
 
 import { TitlePart } from "./part/TitlePart";
 import { SummaryPart } from "./part/SummaryPart";
@@ -14,11 +16,20 @@ import { ReviewPart } from "./part/ReviewPart";
 import { cssObj } from "./style";
 
 const JdDetailPage: NextPage = () => {
+  const isFirstRender = useRef(false);
   const router = useRouter();
   const jdId = isQueryString(router.query.jdId) ? Number(router.query.jdId) : null;
 
   const { data: jdDetailData } = useJdDetail({ id: jdId, isStatic: false });
   const { data: jdArrData } = useJdArr({ order: "rand", size: 3, filter: "valid" });
+  const { mutate: addJdViewCount } = useAddJdViewCount();
+
+  useEffect(() => {
+    if (jdId && !isFirstRender.current) {
+      isFirstRender.current = true;
+      addJdViewCount({ jdId: Number(jdId) });
+    }
+  }, [addJdViewCount, jdId]);
 
   return (
     <main>
