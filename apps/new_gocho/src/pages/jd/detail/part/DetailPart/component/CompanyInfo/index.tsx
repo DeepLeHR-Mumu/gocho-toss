@@ -8,6 +8,10 @@ import { cssObj } from "./style";
 export const CompanyInfo = ({ contents, company }: CompanyInfoProps) => {
   const contentEntries = Object.entries(contents);
 
+  if (!company) {
+    return <> </>;
+  }
+
   return (
     <div css={cssObj.subContainer}>
       <CompanyRow company={company} />
