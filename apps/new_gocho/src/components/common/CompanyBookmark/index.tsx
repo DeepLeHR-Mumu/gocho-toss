@@ -3,14 +3,14 @@ import { FollowButton } from "shared-ui/deeple-ds";
 
 import { useToast } from "@/globalStates";
 import { useCompanyBookmarkToggle } from "@/apis/company";
-import { useUserProfile } from "@/apis/auth";
+import { useUserInfo } from "@/apis/auth";
 import { LoginModal } from "@/components/modal/LoginModal";
 
 import { CompanyBookmarkProps } from "./type";
 
 export const CompanyBookmark = ({ companyId, isBookmark }: CompanyBookmarkProps) => {
   const [loginModal, setLoginModal] = useState(false);
-  const { data: userData } = useUserProfile();
+  const { data: userData } = useUserInfo();
   const { mutate: companyBookmarkToggle } = useCompanyBookmarkToggle();
   const { setToastMessage } = useToast();
 

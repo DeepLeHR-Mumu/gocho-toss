@@ -9,9 +9,10 @@ import { FiEdit3 } from "react-icons/fi";
 import { useToast } from "@/globalStates";
 import { usePatchUserProfile, useUserInfo } from "@/apis/auth";
 
-import { fileEncording } from "./utils";
 import { cssObj } from "./style";
 import { NickNameInputs } from "./type";
+import { profileImgObjArr } from "./constant";
+import { convertToBlob, fileEncording } from "./utils";
 
 export const ProfilePart: FC = () => {
   const { data: userData } = useUserInfo();
@@ -125,21 +126,57 @@ export const ProfilePart: FC = () => {
     }
   };
 
+  const handleBasicProfile = async () => {
+    if (!userData) return;
+
+    const random = Math.floor(Math.random() * 5);
+
+    const profileBlob = await convertToBlob(profileImgObjArr[random].image);
+
+    const profileFile = new File([profileBlob], `${profileImgObjArr[random].key}.png`, { type: "image/png" });
+
+    const result = await fileEncording(profileFile);
+
+    if (typeof result === "string") {
+      setProfile(result);
+    }
+
+    postProfile(
+      {
+        userId: userData?.id,
+        image: profileFile,
+      },
+      {
+        onSuccess: () => {
+          setToastMessage("프로필 변경이 완료되었습니다");
+          setProfileFile(null);
+        },
+      }
+    );
+  };
+
   return (
     <form css={cssObj.contentWrapper} onSubmit={handleSubmit(onSubmit)}>
-      <div css={cssObj.profileBox}>
-        <Profile src={userProfile} size={120} altText={`${userData?.nickname} 유저 로고`} />
-        <button type="button" css={cssObj.uploadBox} onClick={handleUploadButton}>
-          <FiEdit3 css={cssObj.uploadIcon} />
-        </button>
-        <input
-          type="file"
-          accept="image/png, image/gif, image/jpeg, image/jpg"
-          aria-label="프로필 업로드"
-          css={cssObj.upload}
-          onChange={handleProfileChange}
-          ref={uploadDom}
-        />
+      <div css={cssObj.profileWrapper}>
+        <div css={cssObj.profileBox}>
+          <Profile src={userProfile} size={120} altText={`${userData?.nickname} 유저 로고`} />
+          <button type="button" css={cssObj.uploadBox} onClick={handleUploadButton}>
+            <FiEdit3 css={cssObj.uploadIcon} />
+          </button>
+          <input
+            type="file"
+            accept="image/png, image/gif, image/jpeg, image/jpg"
+            aria-label="프로필 업로드"
+            css={cssObj.upload}
+            onChange={handleProfileChange}
+            ref={uploadDom}
+          />
+        </div>
+        <div>
+          <button type="button" css={cssObj.basicProfileButton} onClick={handleBasicProfile}>
+            기본 프로필로 변경
+          </button>
+        </div>
       </div>
       <div css={cssObj.formBox}>
         <Input

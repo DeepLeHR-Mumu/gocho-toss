@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { NEWCOLORS } from "shared-style/color";
+import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
@@ -19,6 +20,17 @@ export const cssObj = {
   profileBox: css`
     position: relative;
     gap: 2rem;
+  `,
+
+  profileWrapper: css`
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  `,
+
+  basicProfileButton: css`
+    color: ${NEWCOLORS.BLUEGRAY400};
+    font: ${NEWTEXTS.TITLE7};
   `,
 
   upload: css`
