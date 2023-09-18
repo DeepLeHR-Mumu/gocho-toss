@@ -7,14 +7,14 @@ import { Profile, Button, Input } from "shared-ui/deeple-ds";
 import { FiEdit3 } from "react-icons/fi";
 
 import { useToast } from "@/globalStates";
-import { usePatchUserProfile, useUserProfile } from "@/apis/auth";
+import { usePatchUserProfile, useUserInfo } from "@/apis/auth";
 
 import { fileEncording } from "./utils";
 import { cssObj } from "./style";
 import { NickNameInputs } from "./type";
 
 export const ProfilePart: FC = () => {
-  const { data: userData } = useUserProfile();
+  const { data: userData } = useUserInfo();
   const { mutate: postProfile } = usePatchUserProfile();
 
   const {
@@ -24,7 +24,7 @@ export const ProfilePart: FC = () => {
     clearErrors,
     trigger,
     formState: { errors, isValid },
-  } = useForm<NickNameInputs>({ mode: "onChange" });
+  } = useForm<NickNameInputs>({ mode: "onChange", defaultValues: { nickName: userData?.nickname || "" } });
 
   const uploadDom = useRef<HTMLInputElement>(null);
 
@@ -82,23 +82,35 @@ export const ProfilePart: FC = () => {
       },
     };
 
-    if (useProfileFile) {
-      postProfile(
-        {
-          userId: userData.id,
-          image: useProfileFile,
-          nickname: data.nickName !== userData?.nickname ? data.nickName : undefined,
-        },
-        queryOption
-      );
-      return;
-    }
-
     if (!useProfileFile && data.nickName === userData?.nickname) {
       setError("nickName", {
         type: "custom",
         message: "닉네임이나 프로필을 변경해주세요.",
       });
+      return;
+    }
+
+    if (useProfileFile) {
+      if (data.nickName === userData.nickname) {
+        postProfile(
+          {
+            userId: userData.id,
+            image: useProfileFile,
+          },
+          queryOption
+        );
+        return;
+      }
+
+      postProfile(
+        {
+          userId: userData.id,
+          image: useProfileFile,
+          nickname: data.nickName,
+        },
+        queryOption
+      );
+
       return;
     }
 
@@ -132,7 +144,6 @@ export const ProfilePart: FC = () => {
         <Input
           type="text"
           css={cssObj.inputBox}
-          defaultValue={userData?.nickname}
           state={{
             state: errors.nickName ? "error" : "default",
             message: errors.nickName ? errors.nickName.message : "",
