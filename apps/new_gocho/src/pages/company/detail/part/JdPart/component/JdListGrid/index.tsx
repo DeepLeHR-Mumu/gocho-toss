@@ -18,6 +18,7 @@ export const JdListGrid = ({ filter }: JdListGridProps) => {
   const { data: jdData } = useJdArr({
     companyId: Number(router.query.companyId),
     order: "recent",
+    page: 1,
     filter,
     size: jdArrSize,
   });

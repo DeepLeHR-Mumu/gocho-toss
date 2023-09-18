@@ -1,5 +1,4 @@
 export interface JdArrRequestObjDef {
-  enable?: boolean;
   order: "recent" | "popular" | "rand" | "view" | "end" | "com";
   page?: number;
   size?: number;
@@ -18,7 +17,8 @@ export interface JdArrRequestObjDef {
 export const jdArrKeyObj = {
   all: [{ data: "jdArr" }] as const,
   jdArr: (requestObj: JdArrRequestObjDef) => [{ data: "jdArr", requestObj }] as const,
-  infinite: (requestObj: JdArrRequestObjDef) => [
+  infinite: (requestObj: JdArrRequestObjDef) =>
+    [
       {
         data: "jdArr",
         usage: "infinite",

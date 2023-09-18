@@ -29,7 +29,6 @@ export const ListPart = ({ filterObj }: ListPartProps) => {
   }, [router.query.order]);
 
   const { data: jdArrData } = useJdArr({
-    enable: true,
     filter: "valid",
     size: viewMode === "grid" ? 20 : 10,
     page: Number(router.query.page),

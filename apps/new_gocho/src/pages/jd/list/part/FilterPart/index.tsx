@@ -301,6 +301,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
                   type="button"
                   onClick={() => {
                     reset();
+                    triggerHandler();
                   }}
                 >
                   <FiRefreshCw />
