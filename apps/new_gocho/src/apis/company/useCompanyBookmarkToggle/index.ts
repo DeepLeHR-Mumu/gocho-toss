@@ -7,6 +7,7 @@ import { userBookmarkKeyObj } from "@/constants/queryKeyFactory/bookmark/bookmar
 
 import { axiosInstance } from "../../axiosInstance";
 import { PostCompanyBookmarkDef, RequestObjDef } from "./type";
+import { jdDetailKeyObj } from "@/constants/queryKeyFactory/jd/jdDetailKeyObj";
 
 const postCompanyBookmarkToggle: PostCompanyBookmarkDef = async (requestObj: RequestObjDef) => {
   const { data } = await axiosInstance.post(`companies/${requestObj.companyId}/bookmarks`, null);
@@ -21,6 +22,7 @@ export const useCompanyBookmarkToggle = () => {
       queryClient.invalidateQueries(companyArrKeyObj.all);
       queryClient.invalidateQueries(companyDetailKeyObj.all);
       queryClient.invalidateQueries(userBookmarkKeyObj.companyAll);
+      queryClient.invalidateQueries(jdDetailKeyObj.all);
     },
   });
 };
