@@ -18,6 +18,7 @@ export const buttonColor = {
     border: 1px solid ${NEWCOLORS.GRAY200};
     background-color: ${NEWCOLORS.GRAY200};
     color: ${NEWCOLORS.GRAY300};
+    cursor: default;
   `,
 
   fillWhite: css`

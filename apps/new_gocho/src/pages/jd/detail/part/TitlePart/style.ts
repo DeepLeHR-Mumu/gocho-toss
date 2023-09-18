@@ -3,6 +3,10 @@ import { NEWCOLORS } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
+  skeletonWrapper: css`
+    height: 4.875rem;
+  `,
+
   background: css`
     position: sticky;
     top: 8.75rem;

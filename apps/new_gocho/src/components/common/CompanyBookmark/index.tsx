@@ -19,6 +19,7 @@ export const CompanyBookmark = ({ companyId, isBookmark }: CompanyBookmarkProps)
       setLoginModal(true);
       return;
     }
+
     if (companyId) {
       companyBookmarkToggle({ companyId });
     }
