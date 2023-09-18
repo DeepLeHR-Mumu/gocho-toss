@@ -19,7 +19,6 @@ import { cssObj } from "./style";
 const SearchPage: NextPage = () => {
   const [searchModal, setSearchModal] = useState(false);
 
-  // TODO 나중에 "community" 추가할 것.
   const [tab, setTab] = useState<Tab>("jd");
 
   const router = useRouter();
@@ -81,26 +80,26 @@ const SearchPage: NextPage = () => {
             <button
               type="button"
               css={css`
-                ${cssObj.tabButton}${tab === "jd" ? cssObj.selectedTap : ""}
+                ${cssObj.tabButton(tab === "jd")}
               `}
               onClick={() => {
                 setTab("jd");
                 router.push({ query: { ...router.query } });
               }}
             >
-              공고
+              공고 {companyData?.pageResult.totalElements}
             </button>
             <button
               type="button"
               css={css`
-                ${cssObj.tabButton}${tab === "company" ? cssObj.selectedTap : ""}
+                ${cssObj.tabButton(tab === "company")}
               `}
               onClick={() => {
                 setTab("company");
                 router.push({ query: { ...router.query } });
               }}
             >
-              기업
+              기업 {jdData?.pageResult.totalElements}
             </button>
           </div>
           <span css={cssObj.total}>총 {total.elements}건</span>

@@ -74,42 +74,46 @@ export const SearchModal = ({ close }: SearchModalProps) => {
           />
           <SearchDropDown recentWordArr={recentSearchWordArr} searchHandler={searchHandler} />
           <div css={cssObj.etcWrapper}>
-            <div css={cssObj.recentWordWrapper}>
-              <div css={cssObj.recentWordHeader}>
-                <h3 css={cssObj.recentWordTitle}>최근 검색어</h3>
-                <button
-                  type="button"
-                  css={cssObj.recentWordDelete}
-                  onClick={() => {
-                    deleteAllChip();
-                  }}
-                >
-                  전체삭제
-                </button>
-              </div>
-              <div css={cssObj.recentWordChipsWrapper}>
-                {recentSearchWordArr.map((word) => (
-                  <Chip
-                    size="large"
-                    key={word}
-                    color="fillGray"
+            {recentSearchWordArr.length > 0 && (
+              <div>
+                <div css={cssObj.recentWordHeader}>
+                  <h3 css={cssObj.recentWordTitle}>최근 검색어</h3>
+                  <button
+                    type="button"
+                    css={cssObj.recentWordDelete}
                     onClick={() => {
-                      searchHandler(word);
+                      deleteAllChip();
                     }}
                   >
-                    {word}
-                    <FiX
-                      css={cssObj.chipDelete}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        deleteChip(word);
+                    전체삭제
+                  </button>
+                </div>
+                <div css={cssObj.recentWordChipsWrapper}>
+                  {recentSearchWordArr.map((word) => (
+                    <Chip
+                      size="large"
+                      key={word}
+                      color="fillGray"
+                      onClick={() => {
+                        searchHandler(word);
                       }}
-                    />
-                  </Chip>
-                ))}
+                    >
+                      <div css={cssObj.chipBox}>
+                        <p css={cssObj.chipText}>{word}</p>
+                        <FiX
+                          css={cssObj.chipDelete}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            deleteChip(word);
+                          }}
+                        />
+                      </div>
+                    </Chip>
+                  ))}
+                </div>
+                <Divider />
               </div>
-              <Divider />
-            </div>
+            )}
             <div>
               <h3 css={cssObj.recommendationWordTitle}>추천 검색어</h3>
               <div css={cssObj.recommendationWordChipsWrapper}>
