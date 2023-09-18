@@ -67,6 +67,7 @@ const EmailLogin = ({ toFindPassword, toSignUp, ...actionBarHandlers }: EmailLog
               <Input
                 label="이메일"
                 {...register("email", {
+                  required: EMAIL_ERROR_MESSAGE.REQUIRED,
                   pattern: {
                     value: EMAIL_REGEXP,
                     message: EMAIL_ERROR_MESSAGE.REGEX,
@@ -74,6 +75,7 @@ const EmailLogin = ({ toFindPassword, toSignUp, ...actionBarHandlers }: EmailLog
                 })}
                 underline={isMobile}
                 state={errors.email ? { state: "error", message: errors.email.message } : undefined}
+                placeholder="이메일을 입력해주세요."
               />
               <Input
                 label="비밀번호"
@@ -87,6 +89,7 @@ const EmailLogin = ({ toFindPassword, toSignUp, ...actionBarHandlers }: EmailLog
                   )
                 }
                 {...register("password", {
+                  required: PWD_ERROR_MESSAGE.REQUIRED,
                   minLength: { value: 8, message: PWD_ERROR_MESSAGE.MIN_MAX },
                   pattern: {
                     value: PWD_REGEXP,
@@ -95,6 +98,7 @@ const EmailLogin = ({ toFindPassword, toSignUp, ...actionBarHandlers }: EmailLog
                 })}
                 underline={isMobile}
                 state={errors.password ? { state: "error", message: errors.password.message } : undefined}
+                placeholder="비밀번호를 입력해주세요."
               />
             </form>
           </div>
@@ -127,8 +131,8 @@ const EmailLogin = ({ toFindPassword, toSignUp, ...actionBarHandlers }: EmailLog
             <form css={cssObj.form}>
               <Input
                 label="이메일"
-                {...register("email")}
                 {...register("email", {
+                  required: EMAIL_ERROR_MESSAGE.REQUIRED,
                   pattern: {
                     value: EMAIL_REGEXP,
                     message: EMAIL_ERROR_MESSAGE.REGEX,
@@ -136,13 +140,14 @@ const EmailLogin = ({ toFindPassword, toSignUp, ...actionBarHandlers }: EmailLog
                 })}
                 underline={isMobile}
                 state={errors.email ? { state: "error", message: errors.email.message } : undefined}
+                placeholder="이메일을 입력해주세요."
               />
               <Input
                 label="비밀번호"
                 type="password"
                 maxLength={20}
-                {...register("password")}
                 {...register("password", {
+                  required: PWD_ERROR_MESSAGE.REQUIRED,
                   minLength: { value: 8, message: PWD_ERROR_MESSAGE.MIN_MAX },
                   pattern: {
                     value: PWD_REGEXP,
@@ -151,6 +156,7 @@ const EmailLogin = ({ toFindPassword, toSignUp, ...actionBarHandlers }: EmailLog
                 })}
                 underline={isMobile}
                 state={errors.password ? { state: "error", message: errors.password.message } : undefined}
+                placeholder="비밀번호를 입력해주세요."
               />
             </form>
           </div>

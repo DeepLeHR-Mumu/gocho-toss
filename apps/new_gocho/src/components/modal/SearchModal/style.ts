@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import { NEWCOLORS } from "shared-style/color";
 import { MOBILE } from "shared-style/mediaQuery";
 import { NEWTEXTS } from "shared-style/text";
+import { shorten } from "shared-style/common";
 
 export const cssObj = {
   wrapper: css`
@@ -41,13 +42,20 @@ export const cssObj = {
   `,
 
   etcWrapper: css`
+    margin-top: 2.25rem;
+
     display: flex;
     flex-direction: column;
     gap: 4rem;
   `,
 
-  recentWordWrapper: css`
-    margin-top: 2.25rem;
+  chipBox: css`
+    display: flex;
+  `,
+
+  chipText: css`
+    max-width: 25rem;
+    ${shorten()};
   `,
 
   chipDelete: css`
@@ -77,7 +85,6 @@ export const cssObj = {
 
   recentWordChipsWrapper: css`
     display: flex;
-    flex-direction: row;
     gap: 1rem;
     flex-wrap: wrap;
     margin-bottom: 2rem;

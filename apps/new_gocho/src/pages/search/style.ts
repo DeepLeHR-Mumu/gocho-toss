@@ -37,14 +37,13 @@ export const cssObj = {
     }
   `,
 
-  tabButton: css`
+  tabButton: (isSelected: boolean) => css`
     width: 8.75rem;
     padding-bottom: 1.5rem;
+    color: ${isSelected ? NEWCOLORS.BLACK : NEWCOLORS.BLUEGRAY200};
+    border-bottom: ${isSelected ? `2px solid ${NEWCOLORS.BLACK}` : `none`};
     ${NEWTEXTS.TITLE12}
-  `,
-
-  selectedTap: css`
-    border-bottom: 2px solid ${NEWCOLORS.BLACK};
+  }
   `,
 
   total: css`

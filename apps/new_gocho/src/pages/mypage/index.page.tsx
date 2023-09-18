@@ -11,7 +11,7 @@ import { cssObj } from "./style";
 
 const MyPage: NextPage = () => {
   const router = useRouter();
-  const { data: userProfile } = useUserInfo();
+  const { isError } = useUserInfo();
 
   const currentPart = partElementArr.find(({ type }) => type === router.query.type);
 
@@ -21,8 +21,16 @@ const MyPage: NextPage = () => {
     }
   }, [router]);
 
-  if (!currentPart) {
-    return <h1>Error</h1>;
+  if (isError) {
+    return (
+      <div css={cssObj.background}>
+        <LoginModal
+          close={() => {
+            router.push("/");
+          }}
+        />
+      </div>
+    );
   }
 
   return (
@@ -32,7 +40,7 @@ const MyPage: NextPage = () => {
           <div css={cssObj.navigationBox}>
             <div css={cssObj.sideNavigation}>
               {myPageMenu.map(({ type, text }) => {
-                const isSelected = currentPart.type === type;
+                const isSelected = currentPart?.type === type;
                 return <MenuLink key={text} text={text} type={type} isSelected={isSelected} />;
               })}
             </div>
@@ -52,7 +60,7 @@ const MyPage: NextPage = () => {
                   );
                 }
 
-                const isSelected = currentPart.type === menuItem.type;
+                const isSelected = currentPart?.type === menuItem.type;
                 return (
                   <MenuLink key={menuItem.text} text={menuItem.text} type={menuItem.type} isSelected={isSelected} />
                 );
@@ -62,18 +70,8 @@ const MyPage: NextPage = () => {
         </section>
         <section>
           <div css={cssObj.elementBox}>
-            <h3 css={cssObj.title}>{currentPart.title}</h3>
-            {userProfile ? (
-              currentPart.element
-            ) : (
-              <div css={cssObj.background}>
-                <LoginModal
-                  close={() => {
-                    router.push("/");
-                  }}
-                />
-              </div>
-            )}
+            <h3 css={cssObj.title}>{currentPart?.title}</h3>
+            {currentPart?.element}
           </div>
         </section>
       </main>

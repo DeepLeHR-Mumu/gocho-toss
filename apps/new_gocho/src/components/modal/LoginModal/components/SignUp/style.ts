@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { MOBILE } from "shared-style/mediaQuery";
+import { NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
   wrapper: css`
@@ -25,6 +26,12 @@ export const cssObj = {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+  `,
+
+  errorMessage: css`
+    color: ${NEWCOLORS.RED300};
+    position: absolute;
+    bottom: 5rem;
   `,
 
   signUpButtonWrapper: css`

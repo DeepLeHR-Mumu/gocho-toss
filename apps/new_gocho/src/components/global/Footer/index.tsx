@@ -6,11 +6,11 @@ import gochoTextMono from "shared-image/global/deepLeLogo/textMono.svg";
 import kakaoLogo from "shared-image/global/sns/kakaoLogo.svg";
 import { kakaoChannelUrl } from "shared-constant";
 
+import { INTERNAL_URL } from "@/pages/constants";
 import { useGetDeviceType } from "@/globalStates";
 
 import { Layout } from "../../Layout";
 import { cssObj } from "./style";
-import { INTERNAL_URL } from "@/pages/constants";
 
 export const Footer: FunctionComponent = () => {
   const { isMobile } = useGetDeviceType();

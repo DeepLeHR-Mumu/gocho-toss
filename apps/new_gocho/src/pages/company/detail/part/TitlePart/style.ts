@@ -113,7 +113,9 @@ export const cssObj = {
     border-bottom: ${isSelected ? `2px solid ${NEWCOLORS.BLUE300}` : `none`};
     color: ${isSelected ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY200};
   `,
+};
 
+export const skeletonCssObj = {
   emptyDiv1: css`
     width: 100%;
     height: 2.75rem;
