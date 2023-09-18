@@ -47,6 +47,7 @@ export const BlockReportDropDown = ({ size, companyId, uploaderId }: BlockReport
       )}
       {reportUserModal && (
         <ReportUserModal
+          companyId={companyId}
           userId={uploaderId}
           closeHandler={() => {
             setReportUserModal(false);
