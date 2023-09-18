@@ -21,12 +21,14 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
 
   return (
     <div css={cssObj.cardWrapper}>
-      <div css={cssObj.imageWrapper}>
-        <Image src={jd.company.logoUrl} alt="회사 로고" fill />
-        <div css={cssObj.likeButton}>
-          <JdBookmark jdId={jd.id} marked={jd.isBookmark} />
+      <Link href={`${INTERNAL_URL.JD_DETAIL}/${jd.id}`}>
+        <div css={cssObj.imageWrapper}>
+          <Image src={jd.company.logoUrl} alt="회사 로고" fill />
+          <div css={cssObj.likeButton}>
+            <JdBookmark jdId={jd.id} marked={jd.isBookmark} />
+          </div>
         </div>
-      </div>
+      </Link>
       <div css={cssObj.chipContainer}>
         <DDayChip endTime={jd.endTime} />
         <div css={cssObj.eduChip(jd.high)}>고</div>
