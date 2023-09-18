@@ -10,6 +10,7 @@ import { useGetDeviceType } from "@/globalStates";
 
 import { Layout } from "../../Layout";
 import { cssObj } from "./style";
+import { INTERNAL_URL } from "@/pages/constants";
 
 export const Footer: FunctionComponent = () => {
   const { isMobile } = useGetDeviceType();
@@ -59,11 +60,30 @@ export const Footer: FunctionComponent = () => {
               </a>
             </div>
             <div css={cssObj.linkBox}>
-              <Link href="/help" passHref css={cssObj.underlineLink}>
+              {/* TODO: 로그인이 필요한 화면인데 어떻게 처리해야 할지 논의하기 */}
+              <Link
+                href={{
+                  pathname: INTERNAL_URL.MYPAGE,
+                  query: {
+                    type: "terms-of-service",
+                  },
+                }}
+                passHref
+                css={cssObj.underlineLink}
+              >
                 이용약관
               </Link>
               <div css={cssObj.contour} />
-              <Link href="/help" passHref css={cssObj.underlineLink}>
+              <Link
+                href={{
+                  pathname: INTERNAL_URL.MYPAGE,
+                  query: {
+                    type: "privacy",
+                  },
+                }}
+                passHref
+                css={cssObj.underlineLink}
+              >
                 개인정보처리방침
               </Link>
             </div>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FiEye } from "react-icons/fi";
 
 import { Profile, DDayChip, Chip } from "shared-ui/deeple-ds";
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { dateConverter } from "shared-util";
 
 import { Layout, SkeletonBox } from "@/components";
@@ -28,8 +29,11 @@ export const SummaryPart = ({ jd }: SummaryPartProps) => {
       <Layout>
         <div css={cssObj.wrapper}>
           <div css={cssObj.companyWrapper}>
-            {/* TODO "" 대신 default 이미지 추가 */}
-            <Profile src={jd.company.logoUrl || ""} size={48} altText={`${jd.company.name} 회사 로고`} />
+            <Profile
+              src={jd.company.logoUrl || defaultCompanyLogo}
+              size={48}
+              altText={`${jd.company.name} 회사 로고`}
+            />
             <span css={cssObj.companyName}>
               <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${jd.company.id}`}>{jd.company.name}</Link>
             </span>
