@@ -15,7 +15,7 @@ import { FactoryInfoProps } from "./type";
 import { cssObj } from "./style";
 
 export const FactoryInfo = ({ factoryArr }: FactoryInfoProps) => {
-  const [selected, setSelected] = useState<FactoryDef | null>(null);
+  const [selected, setSelected] = useState<FactoryDef | null>(factoryArr[0]);
   const { setToastMessage } = useToast();
   const copyAddress = (address: string) => {
     copyToClipboard(address);
