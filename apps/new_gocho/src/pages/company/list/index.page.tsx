@@ -11,16 +11,18 @@ import { useCompanyArr } from "@/apis/company";
 import { isQueryString } from "@/utils";
 
 import { HeaderTitle } from "../component/HeaderTitle";
-import { FilterType } from "./type";
+import { FilterType, IndustryRouteType } from "./type";
 import { cssObj } from "./style";
 import { filterOption } from "./constants";
+import { categoryArr } from "../part/CategoryPart/constant";
 
 const CompanyList: NextPage = () => {
   const [title, setTitle] = useState<string>("이름 순");
   const [currentFilter, setCurrentFilter] = useState<FilterType>("name");
 
   const { query } = useRouter();
-  const category = query.category as string | undefined;
+
+  const [currentCategory, setCurrentCategory] = useState<IndustryRouteType>(query.category as IndustryRouteType);
 
   const currentPageNumber = isQueryString(query.page) ? Number(query.page) : 1;
 
@@ -28,13 +30,35 @@ const CompanyList: NextPage = () => {
     order: currentFilter,
     page: currentPageNumber,
     size: 15,
-    industry: category,
+    industry: currentCategory,
   });
 
   return (
     <Layout>
       <div css={cssObj.titleContainer}>
-        {category ? <HeaderTitle title={category} /> : <HeaderTitle title="기업리스트" />}
+        <DropDown
+          customTitle={
+            <div css={cssObj.titleFilterBox}>
+              {currentCategory ? <HeaderTitle title={currentCategory} /> : <HeaderTitle title="전체기업" />}
+              <FiChevronDown css={cssObj.titleFilterIcon} />
+            </div>
+          }
+          isRightDirection={false}
+          menu={{
+            width: 180,
+            options: categoryArr.map(({ categoryText }) => ({
+              focused: currentCategory === categoryText,
+              content: categoryText,
+              onClick: () => {
+                setCurrentCategory(categoryText);
+              },
+            })),
+          }}
+          menuConfig={{
+            closeAfterClickEvent: true,
+          }}
+        />
+
         <div css={cssObj.filterBox}>
           <DropDown
             title={title}
@@ -49,8 +73,8 @@ const CompanyList: NextPage = () => {
             menu={{
               width: 180,
               options: filterOption.map(({ content, filter }) => ({
+                content,
                 focused: title === content,
-                content: <p>{content}</p>,
                 onClick: () => {
                   setTitle(content);
                   setCurrentFilter(filter);
