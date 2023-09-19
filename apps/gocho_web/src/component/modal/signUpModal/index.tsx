@@ -1,5 +1,6 @@
 import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import axios from "axios";
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -44,6 +45,9 @@ export const SignUpBox: FunctionComponent = () => {
         signupAttempt.current += 1;
       },
       onSuccess: (response) => {
+        if (process.env.NODE_ENV === "production") {
+          axios.post("/api/event-register", { email: signUpObj.email });
+        }
         localStorage.setItem("accessToken", `${response?.data.access_token}`);
         localStorage.setItem("refreshToken", `${response?.data.refresh_token}`);
         const { nickname } = tokenDecryptor(response.data.access_token);

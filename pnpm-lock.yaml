@@ -386,6 +386,9 @@ importers:
       shared-image:
         specifier: workspace:^0.0.0
         version: link:../../shared/image
+      shared-meta:
+        specifier: workspace:^
+        version: link:../../shared/meta
       shared-style:
         specifier: workspace:^0.0.0
         version: link:../../shared/style
@@ -558,6 +561,9 @@ importers:
       shared-image:
         specifier: workspace:^0.0.0
         version: link:../../shared/image
+      shared-meta:
+        specifier: workspace:^
+        version: link:../../shared/meta
       shared-style:
         specifier: workspace:^0.0.0
         version: link:../../shared/style
@@ -1008,6 +1014,25 @@ importers:
 
   shared/image:
     devDependencies:
+      eslint-config-deeple:
+        specifier: workspace:^1.0.0
+        version: link:../../packages/eslint-config-deeple
+      tsconfig-deeple:
+        specifier: workspace:^0.0.0
+        version: link:../../packages/tsconfig-deeple
+      typescript:
+        specifier: 4.7.2
+        version: 4.7.2
+
+  shared/meta:
+    dependencies:
+      facebook-nodejs-business-sdk:
+        specifier: ^17.0.3
+        version: 17.0.3
+    devDependencies:
+      '@types/facebook-nodejs-business-sdk':
+        specifier: ^15.0.2
+        version: 15.0.2
       eslint-config-deeple:
         specifier: workspace:^1.0.0
         version: link:../../packages/eslint-config-deeple
@@ -14353,6 +14378,10 @@ packages:
       '@types/serve-static': 1.15.1
     dev: true
 
+  /@types/facebook-nodejs-business-sdk@15.0.2:
+    resolution: {integrity: sha512-9NBRIT9uZ35VNm56N3QmWOHu/BU3YvZYCRQorzU5F8sYjQZSIEGOeMeEAQLnbykhBSghicQ2lPEUmjZLokdOdg==}
+    dev: true
+
   /@types/find-cache-dir@3.2.1:
     resolution: {integrity: sha512-frsJrz2t/CeGifcu/6uRo4b+SzAwT4NYCVPu1GN8IB9XTzrpPkGuV0tmh9mN+/L0PklAlsC3u5Fxt0ju00LXIw==}
     dev: true
@@ -15376,6 +15405,16 @@ packages:
     dependencies:
       follow-redirects: 1.15.2
       form-data: 4.0.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /axios@1.5.0:
+    resolution: {integrity: sha512-D4DdjDo5CY50Qms0qGQTTw6Q44jl7zRwY7bthds06pUGfChBCTcQs+N743eFWGEd6pRTMd6A+I87aWyFV5wiZQ==}
+    dependencies:
+      follow-redirects: 1.15.2
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
     dev: false
@@ -16827,6 +16866,13 @@ packages:
   /csstype@3.1.2:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
 
+  /currency-codes@1.5.1:
+    resolution: {integrity: sha512-hqy8vtlIYKzO6pe2TE0V4/riZALIc7nhtE9cvxk5FDRCvfGplgzUvpTmZlMsyO+NeK5U41j+sQXJOo8l8v9kdg==}
+    dependencies:
+      first-match: 0.0.1
+      nub: 0.0.0
+    dev: false
+
   /d3-array@3.2.4:
     resolution: {integrity: sha512-tdQAmyA18i4J7wprpYq8ClcxZy3SC31QMeByyCFyRt7BVHdREQZ5lpzoe5mFEYZUWe+oq8HBvk9JjpibyEV4Jg==}
     engines: {node: '>=12'}
@@ -18098,6 +18144,18 @@ packages:
       - supports-color
     dev: true
 
+  /facebook-nodejs-business-sdk@17.0.3:
+    resolution: {integrity: sha512-WGSSt+WKs2leujJIMQiCmxDlrPOl1A7BDHmzuI6hfwUq9fk6OoVii83HHBNkzz7OSFh0YLdWOxrYDwCvIhrVaA==}
+    dependencies:
+      axios: 1.5.0
+      currency-codes: 1.5.1
+      iso-3166-1: 2.1.1
+      js-sha256: 0.9.0
+      mixwith: 0.1.1
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /fast-deep-equal@3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
 
@@ -18239,6 +18297,10 @@ packages:
     dependencies:
       locate-path: 6.0.0
       path-exists: 4.0.0
+
+  /first-match@0.0.1:
+    resolution: {integrity: sha512-VvKbnaxrC0polTFDC+teKPTdl2mn6B/KUW+WB3C9RzKDeNwbzfLdnUz3FxC+tnjvus6bI0jWrWicQyVIPdS37A==}
+    dev: false
 
   /flat-cache@3.0.4:
     resolution: {integrity: sha512-dm9s5Pw7Jc0GvMYbshN6zchCA9RgQlzzEZX3vylR9IqFfS8XciblUXOKfW6SiuJ0e13eDYZoZV5wdrev7P3Nwg==}
@@ -19421,6 +19483,10 @@ packages:
   /isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
 
+  /iso-3166-1@2.1.1:
+    resolution: {integrity: sha512-RZxXf8cw5Y8LyHZIwIRvKw8sWTIHh2/txBT+ehO0QroesVfnz3JNFFX4i/OC/Yuv2bDIVYrHna5PMvjtpefq5w==}
+    dev: false
+
   /isobject@3.0.1:
     resolution: {integrity: sha512-WhB9zCku7EGTj/HQQRz5aUQEUeoQZH2bWcltRErOpymJ4boYE6wL9Tbr23krRPSZ+C5zqNSrSw+Cc7sZZ4b7vg==}
     engines: {node: '>=0.10.0'}
@@ -20355,6 +20421,10 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /js-sha256@0.9.0:
+    resolution: {integrity: sha512-sga3MHh9sgQN2+pJ9VYZ+1LPwXOxuBJBA5nrR5/ofPfuiJBE2hnjsaN8se8JznOmGLN2p49Pe5U/ttafcs/apA==}
+    dev: false
+
   /js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
@@ -21012,6 +21082,10 @@ packages:
       yallist: 4.0.0
     dev: true
 
+  /mixwith@0.1.1:
+    resolution: {integrity: sha512-DQsf/liljH/9e+94jR+xfK8vlKceeKdOM9H9UEXLwGuvEEpO6debNtJ9yt1ZKzPKPrwqGxzMdu0BR1fnQb6i4A==}
+    dev: false
+
   /mkdirp-classic@0.5.3:
     resolution: {integrity: sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==}
     dev: true
@@ -21358,6 +21432,10 @@ packages:
     dependencies:
       boolbase: 1.0.0
     dev: true
+
+  /nub@0.0.0:
+    resolution: {integrity: sha512-dK0Ss9C34R/vV0FfYJXuqDAqHlaW9fvWVufq9MmGF2umCuDbd5GRfRD9fpi/LiM0l4ZXf8IBB+RYmZExqCrf0w==}
+    dev: false
 
   /nwsapi@2.2.2:
     resolution: {integrity: sha512-90yv+6538zuvUMnN+zCr8LuV6bPFdq50304114vJYJ8RDyK8D5O9Phpbd6SZWgI7PwzmmfN1upeOJlvybDSgCw==}
@@ -22083,7 +22161,6 @@ packages:
 
   /proxy-from-env@1.1.0:
     resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
-    dev: true
 
   /psl@1.9.0:
     resolution: {integrity: sha512-E/ZsdU4HLs/68gYzgGTkMicWTLPdAftJLfJFlLUAAKZGkStNU72sZjT66SnMDVOfOWY/YAoiD7Jxa9iHvngcag==}

@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 import { useDoSignUp, useUserProfile } from "shared-api/auth";
 import {
@@ -52,6 +53,10 @@ export const SignUpModal: FunctionComponent = () => {
         setErrorMsg(errorResponse.error_message);
       },
       onSuccess: (response) => {
+        if (process.env.NODE_ENV === "production") {
+          axios.post("/api/event-register", { email: signUpObj.email });
+        }
+
         localStorage.setItem("accessToken", `${response?.data.access_token}`);
         const { nickname } = tokenDecryptor(response.data.access_token);
         signupSuccessEvent();
