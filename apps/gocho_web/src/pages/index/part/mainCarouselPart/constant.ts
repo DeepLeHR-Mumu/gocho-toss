@@ -1,30 +1,11 @@
-import banner00 from "@public/images/global/MainCarousel/poscoFutureM.jpg";
 import banner01 from "@public/images/global/MainCarousel/gocho_blog.png";
 import banner02 from "@public/images/global/MainCarousel/factory_banner.jpg";
 import banner03 from "@public/images/global/MainCarousel/openTalk_banner.jpg";
 
 import checkIconImage from "shared-image/global/common/yellow_check.svg";
-import { adClickEvent } from "shared-ga/home";
+// import { adClickEvent } from "shared-ga/home";
 
 export const carouselArr = [
-  {
-    id: 0,
-    middleDesc: "포스코퓨처엠",
-    title: "포스코퓨처엠 생산기술직 신입/경력 채용",
-    lastDesc: "포스코퓨처엠과 함께 할 인재를 모집합니다!",
-    backgroundImage: banner00,
-    iconImage: checkIconImage,
-    backgroundColor: "#0077c3",
-    topButtonObj: null,
-    bottomButtonObj: {
-      target: "_blank" as const,
-      text: "공고 바로가기",
-      color: "#fff",
-      backgroundColor: "#333",
-      url: "https://고초대졸.com/jd/detail/18195",
-      onClick: adClickEvent,
-    },
-  },
   {
     id: 1,
     middleDesc: "고초대졸 블로그",
