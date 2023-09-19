@@ -79,8 +79,13 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
       return;
     }
 
-    if (!userFilter) {
+    if (!userFilter) return;
+
+    const isAllArrayEmpty = Object.values(userFilter).every((arr) => arr.length === 0);
+
+    if (isAllArrayEmpty) {
       setToastMessage("저장된 My필터가 없습니다.");
+      return;
     }
 
     setValue(JOB_FILTER_KEY, userFilter ? userFilter[JOB_FILTER_KEY] : []);

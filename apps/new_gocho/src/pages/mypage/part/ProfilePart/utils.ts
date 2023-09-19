@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export const fileEncording = (profile: File) => {
   const reader = new FileReader();
 
@@ -14,3 +16,9 @@ export const fileEncording = (profile: File) => {
 
   return fileToBase64;
 };
+
+export async function convertToBlob(staticImageData: StaticImageData) {
+  const response = await fetch(staticImageData.src);
+  const blob = await response.blob();
+  return blob;
+}

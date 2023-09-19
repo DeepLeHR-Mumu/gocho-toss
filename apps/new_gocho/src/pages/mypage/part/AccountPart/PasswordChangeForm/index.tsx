@@ -25,6 +25,14 @@ export const PasswordChangeForm: FC<PwdChangeFormProps> = ({ userData, handleFor
   const onSubmit: SubmitHandler<PwdInputForm> = (data) => {
     if (!userData) return;
 
+    if (data.originPassword === data.newPassword) {
+      setError("newPassword", {
+        type: "custom",
+        message: "기존 비밀번호와 다른 비밀번호를 입력해주세요.",
+      });
+      return;
+    }
+
     patchPassword(
       {
         userId: userData?.id,

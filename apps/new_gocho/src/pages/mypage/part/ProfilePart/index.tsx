@@ -7,14 +7,15 @@ import { Profile, Button, Input } from "shared-ui/deeple-ds";
 import { FiEdit3 } from "react-icons/fi";
 
 import { useToast } from "@/globalStates";
-import { usePatchUserProfile, useUserProfile } from "@/apis/auth";
+import { usePatchUserProfile, useUserInfo } from "@/apis/auth";
 
-import { fileEncording } from "./utils";
 import { cssObj } from "./style";
 import { NickNameInputs } from "./type";
+import { profileImgObjArr } from "./constant";
+import { convertToBlob, fileEncording } from "./utils";
 
 export const ProfilePart: FC = () => {
-  const { data: userData } = useUserProfile();
+  const { data: userData } = useUserInfo();
   const { mutate: postProfile } = usePatchUserProfile();
 
   const {
@@ -24,7 +25,7 @@ export const ProfilePart: FC = () => {
     clearErrors,
     trigger,
     formState: { errors, isValid },
-  } = useForm<NickNameInputs>({ mode: "onChange" });
+  } = useForm<NickNameInputs>({ mode: "onChange", defaultValues: { nickName: userData?.nickname || "" } });
 
   const uploadDom = useRef<HTMLInputElement>(null);
 
@@ -82,23 +83,35 @@ export const ProfilePart: FC = () => {
       },
     };
 
-    if (useProfileFile) {
-      postProfile(
-        {
-          userId: userData.id,
-          image: useProfileFile,
-          nickname: data.nickName !== userData?.nickname ? data.nickName : undefined,
-        },
-        queryOption
-      );
-      return;
-    }
-
     if (!useProfileFile && data.nickName === userData?.nickname) {
       setError("nickName", {
         type: "custom",
         message: "닉네임이나 프로필을 변경해주세요.",
       });
+      return;
+    }
+
+    if (useProfileFile) {
+      if (data.nickName === userData.nickname) {
+        postProfile(
+          {
+            userId: userData.id,
+            image: useProfileFile,
+          },
+          queryOption
+        );
+        return;
+      }
+
+      postProfile(
+        {
+          userId: userData.id,
+          image: useProfileFile,
+          nickname: data.nickName,
+        },
+        queryOption
+      );
+
       return;
     }
 
@@ -113,27 +126,62 @@ export const ProfilePart: FC = () => {
     }
   };
 
+  const handleBasicProfile = async () => {
+    if (!userData) return;
+
+    const random = Math.floor(Math.random() * 5);
+
+    const profileBlob = await convertToBlob(profileImgObjArr[random].image);
+
+    const profileFile = new File([profileBlob], `${profileImgObjArr[random].key}.png`, { type: "image/png" });
+
+    const result = await fileEncording(profileFile);
+
+    if (typeof result === "string") {
+      setProfile(result);
+    }
+
+    postProfile(
+      {
+        userId: userData?.id,
+        image: profileFile,
+      },
+      {
+        onSuccess: () => {
+          setToastMessage("프로필 변경이 완료되었습니다");
+          setProfileFile(null);
+        },
+      }
+    );
+  };
+
   return (
     <form css={cssObj.contentWrapper} onSubmit={handleSubmit(onSubmit)}>
-      <div css={cssObj.profileBox}>
-        <Profile src={userProfile} size={120} altText={`${userData?.nickname} 유저 로고`} />
-        <button type="button" css={cssObj.uploadBox} onClick={handleUploadButton}>
-          <FiEdit3 css={cssObj.uploadIcon} />
-        </button>
-        <input
-          type="file"
-          accept="image/png, image/gif, image/jpeg, image/jpg"
-          aria-label="프로필 업로드"
-          css={cssObj.upload}
-          onChange={handleProfileChange}
-          ref={uploadDom}
-        />
+      <div css={cssObj.profileWrapper}>
+        <div css={cssObj.profileBox}>
+          <Profile src={userProfile} size={120} altText={`${userData?.nickname} 유저 로고`} />
+          <button type="button" css={cssObj.uploadBox} onClick={handleUploadButton}>
+            <FiEdit3 css={cssObj.uploadIcon} />
+          </button>
+          <input
+            type="file"
+            accept="image/png, image/gif, image/jpeg, image/jpg"
+            aria-label="프로필 업로드"
+            css={cssObj.upload}
+            onChange={handleProfileChange}
+            ref={uploadDom}
+          />
+        </div>
+        <div>
+          <button type="button" css={cssObj.basicProfileButton} onClick={handleBasicProfile}>
+            기본 프로필로 변경
+          </button>
+        </div>
       </div>
       <div css={cssObj.formBox}>
         <Input
           type="text"
           css={cssObj.inputBox}
-          defaultValue={userData?.nickname}
           state={{
             state: errors.nickName ? "error" : "default",
             message: errors.nickName ? errors.nickName.message : "",

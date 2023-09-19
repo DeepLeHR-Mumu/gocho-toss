@@ -1,28 +1,42 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { Button, Radio } from "shared-ui/deeple-ds";
 
 import { useToast } from "@/globalStates";
 import { useReportUser } from "@/apis/users";
 import { ModalWithTitle } from "@/components/common/ModalWithTitle";
+import { companyCommentArrKeyObj } from "@/constants/queryKeyFactory/company/commentArrKeyObj";
 
 import { ReportUserModalProps, ReportFormValues } from "./type";
 import { REPORT_REASON_ARR } from "./constant";
 import { cssObj } from "./style";
 
 export const ReportUserModal = ({ companyId, userId, closeHandler }: ReportUserModalProps) => {
-  const { mutate: postReportUser } = useReportUser({ companyId });
+  const queryClient = useQueryClient();
+  const { mutate: postReportUser } = useReportUser();
   const { register, handleSubmit } = useForm<ReportFormValues>();
   const { setToastMessage } = useToast();
 
   const submitReport: SubmitHandler<ReportFormValues> = (reportObj) => {
-    if (userId) {
-      postReportUser({ userId, reason: reportObj.reason });
-      setToastMessage("신고가 접수되었습니다.");
-    }
+    if (userId !== undefined) {
+      postReportUser(
+        { userId, reason: reportObj.reason },
+        {
+          onSuccess: () => {
+            setToastMessage("신고가 접수되었습니다.");
 
-    if (closeHandler) {
-      closeHandler();
+            if (companyId !== undefined) {
+              queryClient.invalidateQueries(companyCommentArrKeyObj.commentArr({ companyId }));
+            }
+          },
+          onSettled: () => {
+            if (closeHandler) {
+              closeHandler();
+            }
+          },
+        }
+      );
     }
   };
 

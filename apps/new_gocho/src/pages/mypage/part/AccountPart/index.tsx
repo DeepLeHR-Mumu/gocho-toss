@@ -2,13 +2,13 @@ import { FC, useState } from "react";
 
 import { Divider, Button } from "shared-ui/deeple-ds";
 
-import { useUserProfile } from "@/apis/auth";
+import { useUserInfo } from "@/apis/auth";
 
 import { PasswordChangeForm } from "./PasswordChangeForm";
 import { cssObj } from "./style";
 
 export const AccountPart: FC = () => {
-  const { data: userData } = useUserProfile();
+  const { data: userData } = useUserInfo();
 
   const [isPasswordFormOpen, setIsPasswordFormOpen] = useState<boolean>(false);
 
