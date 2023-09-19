@@ -1,4 +1,4 @@
-import { FunctionComponent, useRef } from "react";
+import { FunctionComponent, useRef, useState } from "react";
 import Slider from "react-slick";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 
@@ -11,17 +11,35 @@ import { JdCard } from "@/components/common/JdCard";
 import { useGetDeviceType } from "@/globalStates";
 import { cssObj } from "./style";
 import { setCarouselSetting } from "./util";
+import { JD_ARR_SIZE, MAX_SLIDER_INDEX } from "./constant";
 
 export const JdPart: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
+  const [currentSlide, setCurrentSlide] = useState<number>(0);
 
   const { isMobile } = useGetDeviceType();
   const { data: jdDataObj } = useJdArr({
     order: "rand",
     filter: "valid",
     page: 1,
-    size: 12,
+    size: JD_ARR_SIZE,
   });
+
+  const handlePrev = () => {
+    const slideToMove = Math.min(currentSlide, 4);
+    const nextSlide = currentSlide - slideToMove;
+    if (nextSlide >= 0) {
+      sliderRef.current?.slickGoTo(nextSlide);
+    }
+  };
+
+  const handleNext = () => {
+    const slideToMove = Math.min(MAX_SLIDER_INDEX - currentSlide, 4);
+    const nextSlide = currentSlide + slideToMove;
+    if (nextSlide <= MAX_SLIDER_INDEX) {
+      sliderRef.current?.slickGoTo(nextSlide);
+    }
+  };
 
   return (
     <>
@@ -32,18 +50,18 @@ export const JdPart: FunctionComponent = () => {
           </h2>
           <div css={cssObj.buttonContainer}>
             <button
-              css={cssObj.sliderButton}
+              css={cssObj.sliderButton(currentSlide === 0)}
               aria-label="이전 추천공고보기"
               type="button"
-              onClick={() => sliderRef.current?.slickPrev()}
+              onClick={handlePrev}
             >
               <FiChevronLeft />
             </button>
             <button
-              css={cssObj.sliderButton}
+              css={cssObj.sliderButton(currentSlide >= MAX_SLIDER_INDEX)}
               aria-label="이전 추천공고보기"
               type="button"
-              onClick={() => sliderRef.current?.slickNext()}
+              onClick={handleNext}
             >
               <FiChevronRight />
             </button>
@@ -57,7 +75,15 @@ export const JdPart: FunctionComponent = () => {
                 : dummyArrCreator(4).map((dummy) => <JdCard key={`mainJobCard${dummy}`} />)}
             </div>
           ) : (
-            <Slider {...setCarouselSetting} ref={sliderRef}>
+            <Slider
+              {...setCarouselSetting}
+              ref={sliderRef}
+              beforeChange={(_oldIndex, newIndex) => {
+                if (newIndex <= MAX_SLIDER_INDEX) {
+                  setCurrentSlide(newIndex);
+                }
+              }}
+            >
               {jdDataObj
                 ? jdDataObj.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)
                 : dummyArrCreator(4).map((dummy) => <JdCard key={`mainJobCard${dummy}`} />)}
