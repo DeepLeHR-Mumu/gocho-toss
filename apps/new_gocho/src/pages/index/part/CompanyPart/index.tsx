@@ -47,7 +47,6 @@ export const CompanyPart: FunctionComponent = () => {
       </section>
     );
   }
-  // console.log(maxSliderIndex, currentSlide);
 
   const changeKeywordHandler = (companyKeyword: { keyword: string; companyArr: selectedCompanyDef[] }) => {
     setSelectedKeyword(companyKeyword.keyword);
