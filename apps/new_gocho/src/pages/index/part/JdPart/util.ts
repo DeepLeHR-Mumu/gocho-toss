@@ -5,6 +5,7 @@ export const setCarouselSetting = {
   autoplay: false,
   infinite: false,
   swipeToSlide: true,
+  draggable: true,
   slidesToShow: 4,
-  slidesToScroll: 4,
+  slidesToScroll: 1,
 };

@@ -25,7 +25,7 @@ import { cssObj } from "./style";
 
 export const SearchModal = ({ close }: SearchModalProps) => {
   const router = useRouter();
-  const { data: jobData } = useJdArr({ order: "rand", filter: "valid", size: 5 });
+  const { data: jdData } = useJdArr({ order: "rand", filter: "valid", page: 1, size: 5 });
   const { data: companyData } = useCompanyArr({ order: "rank", size: 4 });
   const [recentSearchWordArr, setRecentSearchWordArr] = useState<string[]>([]);
 
@@ -150,16 +150,16 @@ export const SearchModal = ({ close }: SearchModalProps) => {
             <div>
               <h3 css={cssObj.recommendationJdTitle}>추천공고</h3>
               <div css={cssObj.recommendationJdList}>
-                {jobData?.jdDataArr.map((job) => (
+                {jdData?.jdDataArr.map((jd) => (
                   <JdRow
-                    key={job.id}
+                    key={jd.id}
                     jd={{
-                      jdId: job.id,
-                      companyName: job.company.name,
-                      jdTitle: job.title,
-                      dueDate: job.endTime,
-                      bookmarked: job.isBookmark,
-                      cut: job.cut,
+                      jdId: jd.id,
+                      companyName: jd.company.name,
+                      jdTitle: jd.title,
+                      dueDate: jd.endTime,
+                      bookmarked: jd.isBookmark,
+                      cut: jd.cut,
                     }}
                   />
                 ))}

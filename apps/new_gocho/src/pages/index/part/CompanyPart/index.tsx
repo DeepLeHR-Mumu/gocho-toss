@@ -8,8 +8,8 @@ import defaultCompanyLogo from "shared-image/global/common/default_company_logo.
 
 import { useCompanyKeywordArr } from "@/apis/keyword";
 import { CompanyCard } from "@/components";
-
 import { useGetDeviceType } from "@/globalStates";
+
 import { setCarouselSetting } from "./util";
 import { selectedCompanyDef } from "./type";
 import { cssObj } from "./style";
@@ -17,6 +17,8 @@ import { cssObj } from "./style";
 export const CompanyPart: FunctionComponent = () => {
   const [selectedKeyword, setSelectedKeyword] = useState<string>();
   const [selectedCompanyArr, setSelectedCompanyArr] = useState<selectedCompanyDef[]>();
+  const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const [maxSliderIndex, setMaxSliderIndex] = useState<number>(0);
   const sliderRef = useRef<Slider>(null);
 
   const { isMobile } = useGetDeviceType();
@@ -26,6 +28,8 @@ export const CompanyPart: FunctionComponent = () => {
     if (companyKeywordDataObj) {
       setSelectedKeyword(companyKeywordDataObj[0].keyword);
       setSelectedCompanyArr(companyKeywordDataObj[0].companyArr);
+      setMaxSliderIndex(Math.max(companyKeywordDataObj[0].companyArr.length - 4, 0));
+      setCurrentSlide(0);
     }
   }, [companyKeywordDataObj]);
 
@@ -44,6 +48,32 @@ export const CompanyPart: FunctionComponent = () => {
     );
   }
 
+  const changeKeywordHandler = (companyKeyword: { keyword: string; companyArr: selectedCompanyDef[] }) => {
+    setSelectedKeyword(companyKeyword.keyword);
+    setSelectedCompanyArr(companyKeyword.companyArr);
+    setMaxSliderIndex(Math.max(companyKeyword.companyArr.length - 4, 0));
+    setCurrentSlide(0);
+    sliderRef.current?.slickGoTo(0);
+  };
+
+  const handlePrev = () => {
+    const slideToMove = Math.min(currentSlide, 4);
+    const nextSlide = currentSlide - slideToMove;
+    if (nextSlide >= 0) {
+      setCurrentSlide(nextSlide);
+      sliderRef.current?.slickGoTo(nextSlide);
+    }
+  };
+
+  const handleNext = () => {
+    const slideToMove = Math.min(maxSliderIndex - currentSlide, 4);
+    const nextSlide = currentSlide + slideToMove;
+    if (nextSlide <= maxSliderIndex) {
+      setCurrentSlide(nextSlide);
+      sliderRef.current?.slickGoTo(nextSlide);
+    }
+  };
+
   return (
     <section css={cssObj.sectionContainer}>
       <h2 css={cssObj.title}>키워드 별 기업 모아보기</h2>
@@ -56,8 +86,7 @@ export const CompanyPart: FunctionComponent = () => {
               color={selectedKeyword === companyKeyword.keyword ? "fillBlue" : "fillGray"}
               key={`indexCompanyKeyword${companyKeyword.keyword}`}
               onClick={() => {
-                setSelectedKeyword(companyKeyword.keyword);
-                setSelectedCompanyArr(companyKeyword.companyArr);
+                changeKeywordHandler(companyKeyword);
               }}
             >
               {companyKeyword.keyword}
@@ -66,18 +95,18 @@ export const CompanyPart: FunctionComponent = () => {
         </div>
         <div css={cssObj.buttonContainer}>
           <button
-            css={cssObj.sliderButton}
+            css={cssObj.sliderButton(currentSlide === 0)}
             aria-label="이전 회사보기"
             type="button"
-            onClick={() => sliderRef.current?.slickPrev()}
+            onClick={handlePrev}
           >
             <FiChevronLeft />
           </button>
           <button
-            css={cssObj.sliderButton}
+            css={cssObj.sliderButton(currentSlide >= maxSliderIndex)}
             aria-label="다음 회사보기"
             type="button"
-            onClick={() => sliderRef.current?.slickNext()}
+            onClick={handleNext}
           >
             <FiChevronRight />
           </button>
@@ -99,7 +128,15 @@ export const CompanyPart: FunctionComponent = () => {
             ))}
           </div>
         ) : (
-          <Slider {...setCarouselSetting} ref={sliderRef}>
+          <Slider
+            {...setCarouselSetting}
+            ref={sliderRef}
+            beforeChange={(_oldIndex, newIndex) => {
+              if (newIndex <= maxSliderIndex) {
+                setCurrentSlide(Math.max(newIndex, 0));
+              }
+            }}
+          >
             {selectedCompanyArr?.map((company) => (
               <CompanyCard
                 key={company.id}

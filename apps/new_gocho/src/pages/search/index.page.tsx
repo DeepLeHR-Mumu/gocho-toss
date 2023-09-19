@@ -27,7 +27,6 @@ const SearchPage: NextPage = () => {
 
   const { isMobile } = useGetDeviceType();
   const { data: jdData } = useJdArr({
-    enable: Boolean(searchWord && tab === "jd"),
     order: "recent",
     filter: "valid",
     searchWord,

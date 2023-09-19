@@ -7,13 +7,14 @@ import { GetJdArrDef } from "./type";
 import { selector } from "./util";
 
 export const getJdArr: GetJdArrDef = async ({ queryKey: [{ requestObj }] }) => {
-  const { data } = await axiosInstance.get("/jds", { params: { ...requestObj, enable: undefined } });
+  const { data } = await axiosInstance.get("/jds", { params: { ...requestObj } });
   return data;
 };
 
-export const useJdArr = (requestObj: JdArrRequestObjDef) => useQuery({
+export const useJdArr = (requestObj: JdArrRequestObjDef) =>
+  useQuery({
     queryKey: jdArrKeyObj.jdArr(requestObj),
     queryFn: getJdArr,
     select: ({ data, page_result }) => selector(data, page_result),
-    enabled: requestObj.enable,
+    enabled: Boolean(requestObj.page),
   });

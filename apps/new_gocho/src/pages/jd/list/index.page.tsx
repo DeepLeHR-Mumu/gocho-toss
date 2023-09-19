@@ -1,8 +1,10 @@
-import { useState } from "react";
-import { NextPage } from "next";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { NextPage } from "next";
+import { useRouter } from "next/router";
 
 import { Layout } from "@/components";
+import { INTERNAL_URL } from "@/pages/constants";
 
 import {
   JOB_FILTER_KEY,
@@ -19,6 +21,8 @@ import { cssObj } from "./style";
 import { ListPart } from "./part/ListPart";
 
 const JdListPage: NextPage = () => {
+  const router = useRouter();
+
   // TODO trigger
   const [filterObj, setFilterObj] = useState<FilterObj>({
     [JOB_FILTER_KEY]: "",
@@ -42,6 +46,12 @@ const JdListPage: NextPage = () => {
     },
   });
   const { getValues } = filterForm;
+
+  useEffect(() => {
+    if (Object.keys(router.query).length === 0 && router.isReady) {
+      router.replace({ pathname: INTERNAL_URL.JD_LIST, query: { page: 1, order: "recent" } });
+    }
+  }, [router]);
 
   return (
     <main>

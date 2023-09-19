@@ -46,10 +46,11 @@ export const cssObj = {
     gap: 0 1.75rem;
   `,
 
-  sliderButton: css`
+  sliderButton: (isDisabled: boolean) => css`
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
+    background-color: ${isDisabled ? NEWCOLORS.GRAY50 : NEWCOLORS.WHITE};
     border: 1px solid ${NEWCOLORS.GRAY200};
 
     ${MOBILE} {
@@ -57,7 +58,7 @@ export const cssObj = {
     }
 
     > svg {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${isDisabled ? NEWCOLORS.GRAY100 : NEWCOLORS.GRAY300};
       width: 2rem;
       height: 2rem;
     }
