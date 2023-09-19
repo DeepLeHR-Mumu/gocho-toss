@@ -1,8 +1,7 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
 import { axiosInstance } from "@/apis/axiosInstance";
-import { companyCommentArrKeyObj } from "@/constants/queryKeyFactory/company/commentArrKeyObj";
 
 import { ReportUserDef, RequestObjDef } from "./type";
 
@@ -11,14 +10,7 @@ const postReportUser: ReportUserDef = async (requestObj) => {
   return data;
 };
 
-export const useReportUser = (requestObj: { companyId?: number }) => {
-  const queryClient = useQueryClient();
-  return useMutation<AxiosResponse, AxiosError, RequestObjDef>({
+export const useReportUser = () =>
+  useMutation<AxiosResponse, AxiosError, RequestObjDef>({
     mutationFn: postReportUser,
-    onSuccess: () => {
-      if (requestObj.companyId) {
-        queryClient.invalidateQueries(companyCommentArrKeyObj.commentArr({ companyId: requestObj.companyId }));
-      }
-    },
   });
-};
