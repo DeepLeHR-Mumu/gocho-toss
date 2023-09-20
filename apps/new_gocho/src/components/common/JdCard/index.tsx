@@ -25,7 +25,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
         <div css={cssObj.imageWrapper}>
           <Image src={jd.company.logoUrl} alt="회사 로고" fill />
           <div css={cssObj.likeButton}>
-            <JdBookmark jdId={jd.id} marked={jd.isBookmark} />
+            <JdBookmark jdId={jd.id} isBookmarked={jd.isBookmark} />
           </div>
         </div>
       </Link>

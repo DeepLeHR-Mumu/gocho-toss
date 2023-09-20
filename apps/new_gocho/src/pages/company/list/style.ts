@@ -48,6 +48,6 @@ export const cssObj = {
   paginationBox: css`
     display: flex;
     justify-content: center;
-    margin-top: 3rem;
+    margin: 3rem 0 7.5rem;
   `,
 };

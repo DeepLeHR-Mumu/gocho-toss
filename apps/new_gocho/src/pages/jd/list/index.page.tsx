@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -16,12 +16,14 @@ import {
   ROTATION_FILTER_KEY,
 } from "./part/FilterPart/constant";
 import { FilterPart } from "./part/FilterPart";
+import { ListPart } from "./part/ListPart";
 import { FilterFormValues, FilterObj } from "./type";
 import { cssObj } from "./style";
-import { ListPart } from "./part/ListPart";
 
 const JdListPage: NextPage = () => {
   const router = useRouter();
+  const firstRenderingRef = useRef<boolean>(true);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
 
   // TODO trigger
   const [filterObj, setFilterObj] = useState<FilterObj>({
@@ -53,6 +55,17 @@ const JdListPage: NextPage = () => {
     }
   }, [router]);
 
+  useEffect(() => {
+    if (router.query.page && firstRenderingRef.current) {
+      firstRenderingRef.current = false;
+      return;
+    }
+    if (!firstRenderingRef.current) {
+      const location = (scrollRef.current?.getBoundingClientRect().top as number) + window.pageYOffset - 250;
+      window.scrollTo(0, location);
+    }
+  }, [router.query.page]);
+
   return (
     <main>
       <Layout>
@@ -71,6 +84,7 @@ const JdListPage: NextPage = () => {
               });
             }}
           />
+          <div ref={scrollRef} />
           <ListPart filterObj={filterObj} />
         </div>
       </Layout>

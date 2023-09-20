@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import { NEWCOLORS } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 import { MOBILE } from "shared-style/mediaQuery";
+import { shorten } from "shared-style/common";
 
 export const cssObj = {
   cardWrapper: (isButtonExist: boolean) => css`
@@ -28,10 +29,7 @@ export const cssObj = {
   name: (isButtonExist: boolean) => css`
     text-align: center;
     width: ${isButtonExist ? "13rem" : "10.5rem"};
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    ${shorten()};
 
     margin-top: 1rem;
     margin-bottom: 0.5rem;

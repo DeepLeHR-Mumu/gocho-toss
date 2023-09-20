@@ -6,7 +6,6 @@ import { MOBILE } from "shared-style/mediaQuery";
 
 export const cssObj = {
   footer: css`
-    margin-top: 7.5rem;
     background-color: #f2f2f5;
     width: 100%;
 

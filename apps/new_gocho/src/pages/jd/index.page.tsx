@@ -19,6 +19,7 @@ const JdList: NextPage = () => (
         <Divider />
       </div>
       <JdSlider title="오늘 올라온 공고 💡" order="recent" filter="valid" />
+      <div css={cssObj.blank} />
     </Layout>
   </main>
 );

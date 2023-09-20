@@ -4,6 +4,7 @@ import { AxiosError, AxiosResponse } from "axios";
 import { userBookmarkKeyObj } from "@/constants/queryKeyFactory/bookmark/bookmarkKeyObj";
 import { jdArrKeyObj } from "@/constants/queryKeyFactory/jd/jdArrKeyObj";
 import { jdDetailKeyObj } from "@/constants/queryKeyFactory/jd/jdDetailKeyObj";
+import { bannerArrKeyObj } from "@/constants/queryKeyFactory/banner/bannerArrKeyObj";
 
 import { axiosInstance } from "../../axiosInstance";
 import { PostJdApplyClickDef, RequestObjDef } from "./type";
@@ -18,6 +19,7 @@ export const useJdBookmarkToggle = () => {
   return useMutation<AxiosResponse, AxiosError, RequestObjDef>({
     mutationFn: postJdBookmarkToggle,
     onSuccess: () => {
+      queryClient.invalidateQueries(bannerArrKeyObj.top);
       queryClient.invalidateQueries(jdArrKeyObj.all);
       queryClient.invalidateQueries(jdDetailKeyObj.all);
       queryClient.invalidateQueries(userBookmarkKeyObj.jdAll);

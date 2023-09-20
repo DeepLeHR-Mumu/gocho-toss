@@ -1,8 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
-import { companyKeywordArrKeyObj } from "@/apis/keyword/useCompanyKeywordArr/type";
-
 import { companyArrKeyObj } from "@/constants/queryKeyFactory/company/arrKeyObj";
 import { companyDetailKeyObj } from "@/constants/queryKeyFactory/company/companyDetailKeyObj";
 import { userBookmarkKeyObj } from "@/constants/queryKeyFactory/bookmark/bookmarkKeyObj";

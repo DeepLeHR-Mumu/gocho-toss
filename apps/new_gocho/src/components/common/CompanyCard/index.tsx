@@ -6,9 +6,9 @@ import { useGetDeviceType } from "@/globalStates";
 import { INTERNAL_URL } from "@/pages/constants";
 
 import { CompanyBookmark } from "../CompanyBookmark";
+import { SkeletonBox } from "../SkeletonBox";
 import { CompanyCardProps } from "./type";
 import { cssObj } from "./style";
-import { SkeletonBox } from "../SkeletonBox";
 
 export const CompanyCard = ({ company }: CompanyCardProps) => {
   const { isMobile } = useGetDeviceType();

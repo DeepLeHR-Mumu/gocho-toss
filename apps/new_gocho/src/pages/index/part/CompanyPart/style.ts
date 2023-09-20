@@ -5,7 +5,7 @@ import { MOBILE } from "shared-style/mediaQuery";
 
 export const cssObj = {
   sectionContainer: css`
-    margin: 4.5rem 0;
+    margin: 4.5rem 0 7.5rem;
 
     ${MOBILE} {
       margin: 1.5rem 0;

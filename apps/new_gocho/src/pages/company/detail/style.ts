@@ -5,6 +5,7 @@ import { NEWTEXTS } from "shared-style/text";
 export const cssObj = {
   background: css`
     background-color: ${NEWCOLORS.GRAY100};
+    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
   `,
 
   wrapper: css`
