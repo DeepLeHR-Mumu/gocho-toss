@@ -86,7 +86,7 @@ const SearchPage: NextPage = () => {
                 router.push({ query: { ...router.query } });
               }}
             >
-              공고 {companyData?.pageResult.totalElements}
+              공고 {jdData?.pageResult.totalElements}
             </button>
             <button
               type="button"
@@ -98,7 +98,7 @@ const SearchPage: NextPage = () => {
                 router.push({ query: { ...router.query } });
               }}
             >
-              기업 {jdData?.pageResult.totalElements}
+              기업 {companyData?.pageResult.totalElements}
             </button>
           </div>
           <span css={cssObj.total}>총 {total.elements}건</span>
