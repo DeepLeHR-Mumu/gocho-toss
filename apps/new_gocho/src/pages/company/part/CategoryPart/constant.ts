@@ -45,3 +45,10 @@ export const bottomCategoryIconArr: CategoryIcon[] = [
     categoryText: "전자재료",
   },
 ];
+
+type CategoryText = Array<{ categoryText: string }>;
+
+export const categoryArr: CategoryText = [{ categoryText: "전체기업" }]
+  .concat(topCategoryIconArr)
+  .concat(bottomCategoryIconArr)
+  .map((item) => ({ categoryText: item.categoryText }));
