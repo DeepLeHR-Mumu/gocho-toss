@@ -42,6 +42,7 @@ const JdDetailPage: NextPage = () => {
                 title: jdDetailData.title,
                 isBookmark: jdDetailData.is_bookmark,
                 applyUrl: jdDetailData.apply_url,
+                endTime: jdDetailData.end_time,
               }
             : undefined
         }
