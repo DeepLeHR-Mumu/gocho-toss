@@ -41,6 +41,16 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
   const { data: userFilter } = useUserFilter({ userId: userData?.id });
   const { mutate: doUserFilter } = useDoUserFilter();
 
+  const { data: totalJd } = useJdCount({
+    filter: "valid",
+    [JOB_FILTER_KEY]: "",
+    [INDUSTRY_FILTER_KEY]: "",
+    [EDUCATION_FILTER_KEY]: "",
+    [PLACE_FILTER_KEY]: "",
+    [REQUIRED_EXP_FILTER_KEY]: "",
+    [CONTRACT_FILTER_KEY]: "",
+    [ROTATION_FILTER_KEY]: "",
+  });
   const { data: jdCount } = useJdCount({
     filter: "valid",
     [JOB_FILTER_KEY]: watch(JOB_FILTER_KEY).join(","),
@@ -69,7 +79,12 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
       return;
     }
 
-    setValue(targetKey, appliedFilter.concat(value));
+    if (value === "") {
+      setValue(targetKey, [value]);
+      return;
+    }
+
+    setValue(targetKey, appliedFilter.filter((filter) => filter !== "").concat(value));
   };
 
   const loadMyFilter = () => {
@@ -126,7 +141,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
     <>
       <div css={cssObj.titleWrapper}>
         <h3>지금 채용중 공고</h3>
-        <span>총 {jdCount ? jdCount.data : 0}건</span>
+        <span>총 {totalJd ? totalJd.data : 0}건</span>
         <button type="button" onClick={loadMyFilter}>
           My필터 불러오기
         </button>
@@ -135,7 +150,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
         <section>
           <div css={cssObj.wrapper}>
             <div css={cssObj.column}>
-              <h5 css={cssObj.leftTopBorder}>직무</h5>
+              <h5>직무</h5>
               <div>
                 <ul>
                   {JOB_FILTER_ARR.map((filter) => (
@@ -255,7 +270,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
               </div>
             </div>
             <div css={cssObj.column}>
-              <h5 css={cssObj.rightTopBorder}>교대형태</h5>
+              <h5>교대형태</h5>
               <div>
                 <ul>
                   {ROTATION_FILTER_ARR.map((filter) => (
