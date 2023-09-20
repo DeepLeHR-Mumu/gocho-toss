@@ -23,5 +23,8 @@ export interface TopBannerDef {
     title: string;
     start_time: string;
     end_time: string;
+    high: boolean;
+    college: boolean;
+    is_bookmark: boolean;
   };
 }

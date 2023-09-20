@@ -7,7 +7,7 @@ import Link from "next/link";
 import JobiChatting from "shared-image/global/jobi/chatting.png";
 import { dummyArrCreator } from "shared-util";
 
-import { useJdArr } from "@/apis/jd";
+import { useTopBannerArr } from "@/apis/ads";
 import { JdCard } from "@/components/common/JdCard";
 import { useGetDeviceType } from "@/globalStates";
 import { INTERNAL_URL } from "@/pages/constants";
@@ -19,12 +19,7 @@ export const HotJd: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
 
   const { isMobile } = useGetDeviceType();
-  const { data: jdDataObj } = useJdArr({
-    order: "rand",
-    filter: "valid",
-    page: 1,
-    size: 12,
-  });
+  const { data: jdDataObj } = useTopBannerArr();
 
   return (
     <section css={cssObj.sectionContainer}>
@@ -67,13 +62,13 @@ export const HotJd: FunctionComponent = () => {
         {isMobile ? (
           <div css={cssObj.cardContainer}>
             {jdDataObj
-              ? jdDataObj.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)
+              ? jdDataObj.bannerDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)
               : dummyArrCreator(3).map((dummy) => <JdCard key={`hotJd${dummy}`} />)}
           </div>
         ) : (
           <Slider {...setCarouselSetting} ref={sliderRef}>
             {jdDataObj
-              ? jdDataObj.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)
+              ? jdDataObj.bannerDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)
               : dummyArrCreator(3).map((dummy) => <JdCard key={`hotJd${dummy}`} />)}
           </Slider>
         )}

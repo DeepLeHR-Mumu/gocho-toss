@@ -6,7 +6,7 @@ import { commonCssObj } from "../../style";
 export const cssObj = {
   wrapper: css`
     padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
+    padding-bottom: 7.5rem;
     display: flex;
     flex-direction: column;
     gap: 2.5rem;

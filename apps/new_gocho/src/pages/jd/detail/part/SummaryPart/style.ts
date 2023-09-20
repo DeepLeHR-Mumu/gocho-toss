@@ -61,5 +61,9 @@ export const cssObj = {
     display: flex;
     flex-direction: row;
     gap: 1rem;
+
+    > button {
+      cursor: default;
+    }
   `,
 };

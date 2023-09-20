@@ -79,7 +79,7 @@ export const JdRow = ({ jd, half }: JdRowProps) => {
           )}
         </div>
       </div>
-      {!isDueDateExpired && <JdBookmark jdId={jdId} marked={bookmarked} />}
+      {!isDueDateExpired && <JdBookmark jdId={jdId} isBookmarked={bookmarked} />}
     </Link>
   );
 };

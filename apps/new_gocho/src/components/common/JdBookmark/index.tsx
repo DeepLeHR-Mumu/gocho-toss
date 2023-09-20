@@ -9,7 +9,7 @@ import { LoginModal } from "@/components/modal/LoginModal";
 import { JdBookmarkProps } from "./type";
 import { cssObj } from "./style";
 
-export const JdBookmark = ({ jdId, marked = false, className }: JdBookmarkProps) => {
+export const JdBookmark = ({ jdId, isBookmarked }: JdBookmarkProps) => {
   const [loginModal, setLoginModal] = useState(false);
   const { data: userData } = useUserProfile();
   const { mutate: postJdBookmarkToggle } = useJdBookmarkToggle();
@@ -21,26 +21,30 @@ export const JdBookmark = ({ jdId, marked = false, className }: JdBookmarkProps)
       return;
     }
 
-    postJdBookmarkToggle({ jdId });
-
-    if (marked) setToastMessage("찜한 공고 목록에서 제외 되었습니다.");
-    if (!marked) setToastMessage("공고 찜 등록이 완료 되었습니다.");
+    postJdBookmarkToggle(
+      { jdId },
+      {
+        onSuccess: () => {
+          if (isBookmarked) setToastMessage("찜한 공고 목록에서 제외 되었습니다.");
+          else setToastMessage("공고 찜 등록이 완료 되었습니다.");
+        },
+      }
+    );
   };
 
   return (
     <>
       <button
         type="button"
-        className={className}
         onClick={(e) => {
           e.preventDefault();
           bookmarkToggleHandler();
         }}
       >
-        {marked ? (
-          <AiFillHeart css={cssObj.bookmarkIcon(marked)} />
+        {isBookmarked ? (
+          <AiFillHeart css={cssObj.bookmarkIcon(isBookmarked)} />
         ) : (
-          <AiOutlineHeart css={cssObj.bookmarkIcon(marked)} />
+          <AiOutlineHeart css={cssObj.bookmarkIcon(isBookmarked)} />
         )}
       </button>
       {loginModal && (

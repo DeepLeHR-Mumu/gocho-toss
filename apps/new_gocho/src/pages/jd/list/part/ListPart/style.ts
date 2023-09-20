@@ -18,7 +18,7 @@ export const cssObj = {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     row-gap: 4rem;
     column-gap: 1.5rem;
-    margin-bottom: 10rem;
+    margin-bottom: 7.5rem;
   `,
 
   jdListWrapper: css`
@@ -54,20 +54,21 @@ export const cssObj = {
   `,
 
   iconButton: (clicked: boolean) => css`
-      border-radius: 0.5rem;
-      padding: 0.25rem;
-      background-color: ${clicked ? NEWCOLORS.GRAY100 : "transparent"};
-      margin-left: 1.875rem;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    background-color: ${clicked ? NEWCOLORS.GRAY100 : "transparent"};
+    margin-left: 1.875rem;
 
-      svg {
-        width: 1.5rem;
-        height: 1.5rem;
-        color: ${clicked ? NEWCOLORS.BLACK : NEWCOLORS.GRAY300};
-      }
-    `,
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: ${clicked ? NEWCOLORS.BLACK : NEWCOLORS.GRAY300};
+    }
+  `,
 
   paginationWrapper: css`
-    display: grid;
-    place-items: center;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 7.5rem;
   `,
 };

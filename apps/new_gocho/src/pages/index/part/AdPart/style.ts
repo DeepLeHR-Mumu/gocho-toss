@@ -88,24 +88,24 @@ export const cssObj = {
   `,
 
   sliderButton: (position: "left" | "right") => css`
-      position: absolute;
-      transform: translate(0, -50%);
-      top: 50%;
-      ${position === "left" ? "left: calc(max(25px, 50% - 520px));" : "right: calc(max(25px, 50% - 520px));"};
-      width: 2.5rem;
-      height: 2.5rem;
-      border-radius: 1rem;
-      border: 1px solid ${NEWCOLORS.WHITE};
-      box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    position: absolute;
+    transform: translate(0, -50%);
+    top: 50%;
+    ${position === "left" ? "left: calc(max(25px, 50% - 520px));" : "right: calc(max(25px, 50% - 520px));"};
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 1rem;
+    border: 1px solid ${NEWCOLORS.WHITE};
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
 
-      ${MOBILE} {
-        display: none;
-      }
+    ${MOBILE} {
+      display: none;
+    }
 
-      > svg {
-        color: ${NEWCOLORS.GRAY300};
-        width: 2rem;
-        height: 2rem;
-      }
-    `,
+    > svg {
+      color: ${NEWCOLORS.GRAY300};
+      width: 2rem;
+      height: 2rem;
+    }
+  `,
 };

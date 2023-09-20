@@ -6,9 +6,10 @@ export const cssObj = {
     border-radius: 50%;
     border: 1px solid ${NEWCOLORS.GRAY100};
     overflow: hidden;
+    background-color: ${NEWCOLORS.WHITE};
     cursor: ${clickable ? "pointer" : "auto"};
-    width: calc((${size} / 16) * 1rem);
-    height: calc((${size} / 16) * 1rem);
+    width: calc((${size} + 1) / 16 * 1rem);
+    height: calc((${size} + 1) / 16 * 1rem);
 
     > img {
       object-fit: contain;

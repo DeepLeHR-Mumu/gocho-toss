@@ -22,7 +22,15 @@ export const CompanyBookmark = ({ companyId, isBookmark }: CompanyBookmarkProps)
     }
 
     if (companyId) {
-      companyBookmarkToggle({ companyId });
+      companyBookmarkToggle(
+        { companyId },
+        {
+          onSuccess: () => {
+            if (isBookmark) setToastMessage("팔로잉 기업 목록에서 제외 되었습니다.");
+            else setToastMessage("기업 팔로우가 완료 되었습니다");
+          },
+        }
+      );
     }
   };
 
@@ -33,8 +41,6 @@ export const CompanyBookmark = ({ companyId, isBookmark }: CompanyBookmarkProps)
         onClick={(e) => {
           e.preventDefault();
           bookmarkToggleHandler();
-          if (isBookmark) setToastMessage("팔로잉 기업 목록에서 제외 되었습니다.");
-          if (!isBookmark) setToastMessage("기업 팔로우가 완료 되었습니다");
         }}
       >
         {isBookmark ? "팔로잉" : "팔로우"}
