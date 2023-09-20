@@ -57,6 +57,16 @@ export const cssObj = {
       }
     }
   `,
+  menuNoContent: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22.5rem;
+    height: 7.875rem;
+    color: ${NEWCOLORS.BLUEGRAY400};
+    ${NEWTEXTS.TITLE7};
+    padding-bottom: 2rem;
+  `,
 
   alarmContainer: css`
     max-height: 29.25rem;

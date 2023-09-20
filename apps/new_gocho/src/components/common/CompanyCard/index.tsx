@@ -39,8 +39,11 @@ export const CompanyCard = ({ company }: CompanyCardProps) => {
   return (
     <div css={cssObj.cardWrapper(isButtonExist)}>
       <Profile src={company.logoSrc} size={getProfileSize()} altText={`${company.name} 로고`} />
+
       <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${company.id}`}>
-        <h3 css={cssObj.name(isButtonExist)}>{company.name}</h3>
+        <div css={cssObj.linkBox}>
+          <h3 css={cssObj.name(isButtonExist)}>{company.name}</h3>
+        </div>
       </Link>
       {!isMobile && (
         <p css={cssObj.hashTags(isButtonExist)}>{company.hashTagArr?.map((hashTag) => `#${hashTag}`).join(" ")}</p>

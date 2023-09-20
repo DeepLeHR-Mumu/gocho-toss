@@ -5,5 +5,6 @@ export interface TitlePartProps {
     title: string;
     isBookmark: boolean;
     applyUrl: string;
+    endTime: string;
   };
 }

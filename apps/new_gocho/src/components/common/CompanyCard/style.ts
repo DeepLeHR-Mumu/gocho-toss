@@ -23,14 +23,18 @@ export const cssObj = {
     }
   `,
 
+  linkBox: css``,
+
   name: (isButtonExist: boolean) => css`
-    width: 100%;
     text-align: center;
+    width: ${isButtonExist ? "13rem" : "10.5rem"};
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
     margin-top: 1rem;
     margin-bottom: 0.5rem;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
     ${isButtonExist ? NEWTEXTS.TITLE13 : NEWTEXTS.TITLE12}
 
     ${MOBILE} {

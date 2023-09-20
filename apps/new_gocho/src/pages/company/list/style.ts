@@ -7,6 +7,18 @@ export const cssObj = {
     margin: 3rem 0;
   `,
 
+  titleFilterBox: css`
+    display: flex;
+    padding-top: 0.25rem;
+    justify-content: space-between;
+    gap: 0.75rem;
+  `,
+
+  titleFilterIcon: css`
+    width: 2rem;
+    height: 2rem;
+  `,
+
   filterBox: css`
     display: flex;
     padding-top: 0.25rem;
