@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
+import { companyKeywordArrKeyObj } from "@/apis/keyword/useCompanyKeywordArr/type";
+
 import { companyArrKeyObj } from "@/constants/queryKeyFactory/company/arrKeyObj";
 import { companyDetailKeyObj } from "@/constants/queryKeyFactory/company/companyDetailKeyObj";
 import { userBookmarkKeyObj } from "@/constants/queryKeyFactory/bookmark/bookmarkKeyObj";
@@ -8,7 +10,6 @@ import { jdDetailKeyObj } from "@/constants/queryKeyFactory/jd/jdDetailKeyObj";
 
 import { axiosInstance } from "../../axiosInstance";
 import { PostCompanyBookmarkDef, RequestObjDef } from "./type";
-import { companyKeywordArrKeyObj } from "@/apis/keyword/useCompanyKeywordArr/type";
 
 const postCompanyBookmarkToggle: PostCompanyBookmarkDef = async (requestObj: RequestObjDef) => {
   const { data } = await axiosInstance.post(`companies/${requestObj.companyId}/bookmarks`, null);
