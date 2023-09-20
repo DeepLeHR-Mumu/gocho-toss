@@ -35,10 +35,10 @@ export const cssObj = {
     border: 1px solid ${NEWCOLORS.GRAY300};
     display: flex;
     flex-direction: row;
+    overflow: hidden;
   `,
 
   header: css`
-    border-radius: 0.5rem;
     background-color: ${NEWCOLORS.GRAY50};
     display: flex;
     flex-direction: row;
@@ -61,14 +61,6 @@ export const cssObj = {
       height: 16.5rem;
       overflow: auto;
     }
-  `,
-
-  leftTopBorder: css`
-    border-radius: 0.5rem 0 0 0;
-  `,
-
-  rightTopBorder: css`
-    border-radius: 0 0.5rem 0 0;
   `,
 
   title: css`

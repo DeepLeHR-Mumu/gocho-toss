@@ -69,7 +69,12 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
       return;
     }
 
-    setValue(targetKey, appliedFilter.concat(value));
+    if (value === "") {
+      setValue(targetKey, [value]);
+      return;
+    }
+
+    setValue(targetKey, appliedFilter.filter((filter) => filter !== "").concat(value));
   };
 
   const loadMyFilter = () => {
@@ -135,7 +140,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
         <section>
           <div css={cssObj.wrapper}>
             <div css={cssObj.column}>
-              <h5 css={cssObj.leftTopBorder}>직무</h5>
+              <h5>직무</h5>
               <div>
                 <ul>
                   {JOB_FILTER_ARR.map((filter) => (
@@ -255,7 +260,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
               </div>
             </div>
             <div css={cssObj.column}>
-              <h5 css={cssObj.rightTopBorder}>교대형태</h5>
+              <h5>교대형태</h5>
               <div>
                 <ul>
                   {ROTATION_FILTER_ARR.map((filter) => (
