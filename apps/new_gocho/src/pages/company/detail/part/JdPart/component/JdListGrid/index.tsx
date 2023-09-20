@@ -37,8 +37,8 @@ export const JdListGrid = ({ filter }: JdListGridProps) => {
   if (!jdData) {
     return (
       <section css={commonCssObj.box}>
-        <div css={cssObj.titleWrapper}>
-          <h3 css={commonCssObj.title}>{filter === "valid" ? "채용중 공고" : "만료된 공고"}</h3>
+        <div css={cssObj.titleWrapper(filter === "valid")}>
+          <h3 css={commonCssObj}>{filter === "valid" ? "채용중 공고" : "만료된 공고"}</h3>
         </div>
         <div css={cssObj.jdWrapper}>
           <p css={cssObj.noJd} />
@@ -49,8 +49,8 @@ export const JdListGrid = ({ filter }: JdListGridProps) => {
 
   return (
     <section css={commonCssObj.box}>
-      <div css={cssObj.titleWrapper}>
-        <h3 css={commonCssObj.title}>{filter === "valid" ? "채용중 공고" : "만료된 공고"}</h3>
+      <div css={cssObj.titleWrapper(filter === "valid")}>
+        <h3 css={commonCssObj}>{filter === "valid" ? "채용중 공고" : "만료된 공고"}</h3>
         <span css={cssObj.jdNumber}>{totalJdNumber} 건</span>
       </div>
       <div css={cssObj.jdWrapper}>

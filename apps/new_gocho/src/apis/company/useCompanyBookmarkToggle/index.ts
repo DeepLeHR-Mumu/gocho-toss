@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
+import { companyKeywordArrKeyObj } from "@/apis/keyword/useCompanyKeywordArr/type";
+
 import { companyArrKeyObj } from "@/constants/queryKeyFactory/company/arrKeyObj";
 import { companyDetailKeyObj } from "@/constants/queryKeyFactory/company/companyDetailKeyObj";
 import { userBookmarkKeyObj } from "@/constants/queryKeyFactory/bookmark/bookmarkKeyObj";
@@ -19,6 +21,7 @@ export const useCompanyBookmarkToggle = () => {
   return useMutation<AxiosResponse, AxiosError, RequestObjDef>({
     mutationFn: postCompanyBookmarkToggle,
     onSuccess: () => {
+      queryClient.invalidateQueries(companyKeywordArrKeyObj.all);
       queryClient.invalidateQueries(companyArrKeyObj.all);
       queryClient.invalidateQueries(companyDetailKeyObj.all);
       queryClient.invalidateQueries(userBookmarkKeyObj.companyAll);

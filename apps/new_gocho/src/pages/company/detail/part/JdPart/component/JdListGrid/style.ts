@@ -3,15 +3,21 @@ import { NEWCOLORS } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
-  titleWrapper: css`
+  titleWrapper: (isValid = true) => css`
     display: flex;
     flex-direction: row;
     align-items: flex-end;
     gap: 1rem;
+    ${isValid ? `color: ${NEWCOLORS.BLACK};` : `color: ${NEWCOLORS.BLUEGRAY400};`}
+
+    h3 {
+      margin-bottom: 1.75rem;
+      ${NEWTEXTS.TITLE14}
+    }
   `,
 
   jdNumber: css`
-    margin-bottom: 1.75rem;
+    margin-bottom: 2rem;
     ${NEWTEXTS.TITLE7}
   `,
 

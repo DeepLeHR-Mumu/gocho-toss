@@ -45,6 +45,7 @@ export const Alarm = ({ className, userId }: AlarmProps) => {
   };
 
   const flattedAlarmArr = alarmData?.pages.map((page) => page.data).flat();
+  const isAlarmListClean = flattedAlarmArr?.length === 0;
 
   return (
     <DropDown
@@ -71,37 +72,51 @@ export const Alarm = ({ className, userId }: AlarmProps) => {
                 );
               }}
             >
-              <FiCheck />
-              <span>모두 읽음 표시</span>
+              {!isAlarmListClean && (
+                <>
+                  <FiCheck />
+                  <span>모두 읽음 표시</span>
+                </>
+              )}
             </button>
           ),
         },
         optionContainer: { css: cssObj.alarmContainer },
-        options: flattedAlarmArr?.map((alarm, index) => ({
-          content: (
-            <div css={cssObj.menuContent(alarm.is_read)} ref={index === flattedAlarmArr.length - 1 ? ref : null}>
-              <strong>
-                {getIconForType(alarm.type)}
-                <span>{alarm.title}</span>
-              </strong>
-              <p>{alarm.description}</p>
-              <span>{getCommunityDateFormat(alarm.created_time)}</span>
-            </div>
-          ),
-          onClick: () => {
-            if (!alarm.is_read) {
-              readAlarmOne(
-                { userId, alarmId: alarm.id },
-                {
-                  onSuccess: () => {
-                    queryClient.invalidateQueries(alarmArrKeyObj.all);
-                  },
+        options: isAlarmListClean
+          ? [
+              {
+                content: (
+                  <div css={cssObj.menuNoContent}>
+                    <p>알림 내역이 없습니다.</p>
+                  </div>
+                ),
+              },
+            ]
+          : flattedAlarmArr?.map((alarm, index) => ({
+              content: (
+                <div css={cssObj.menuContent(alarm.is_read)} ref={index === flattedAlarmArr.length - 1 ? ref : null}>
+                  <strong>
+                    {getIconForType(alarm.type)}
+                    <span>{alarm.title}</span>
+                  </strong>
+                  <p>{alarm.description}</p>
+                  <span>{getCommunityDateFormat(alarm.created_time)}</span>
+                </div>
+              ),
+              onClick: () => {
+                if (!alarm.is_read) {
+                  readAlarmOne(
+                    { userId, alarmId: alarm.id },
+                    {
+                      onSuccess: () => {
+                        queryClient.invalidateQueries(alarmArrKeyObj.all);
+                      },
+                    }
+                  );
                 }
-              );
-            }
-          },
-          additionalButtonCss: cssObj.dropDownMenuWrapper,
-        })),
+              },
+              additionalButtonCss: cssObj.dropDownMenuWrapper,
+            })),
       }}
       menuConfig={{ flexibleHeight: true }}
     />

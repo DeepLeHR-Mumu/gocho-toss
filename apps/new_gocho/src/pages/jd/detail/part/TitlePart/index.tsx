@@ -1,4 +1,5 @@
 import { Button } from "shared-ui/deeple-ds";
+import { dDayCalculator } from "shared-util";
 
 import { Layout, JdBookmark, SkeletonBox } from "@/components";
 
@@ -14,6 +15,8 @@ export const TitlePart = ({ jd }: TitlePartProps) => {
     );
   }
 
+  const isExpired = dDayCalculator(jd.endTime) === "만료";
+
   return (
     <section css={cssObj.background}>
       <Layout>
@@ -21,10 +24,14 @@ export const TitlePart = ({ jd }: TitlePartProps) => {
           <span css={cssObj.companyName}>{jd.companyName}</span>
           <h3 css={cssObj.jdTitle}>{jd.title}</h3>
           <JdBookmark jdId={jd.jdId} marked={jd.isBookmark} css={cssObj.bookmarkWrapper} />
-          <Button size="small">
-            <a href={jd.applyUrl || ""} target="_blank" rel="noreferrer">
-              지원하기
-            </a>
+          <Button size="small" color={isExpired ? "disable" : undefined}>
+            {isExpired ? (
+              <p>만료공고</p>
+            ) : (
+              <a href={jd.applyUrl || ""} target="_blank" rel="noreferrer">
+                지원하기
+              </a>
+            )}
           </Button>
         </div>
       </Layout>
