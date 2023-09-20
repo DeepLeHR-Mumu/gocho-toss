@@ -8,6 +8,7 @@ import { jdDetailKeyObj } from "@/constants/queryKeyFactory/jd/jdDetailKeyObj";
 
 import { axiosInstance } from "../../axiosInstance";
 import { PostCompanyBookmarkDef, RequestObjDef } from "./type";
+import { companyKeywordArrKeyObj } from "@/apis/keyword/useCompanyKeywordArr/type";
 
 const postCompanyBookmarkToggle: PostCompanyBookmarkDef = async (requestObj: RequestObjDef) => {
   const { data } = await axiosInstance.post(`companies/${requestObj.companyId}/bookmarks`, null);
@@ -19,6 +20,7 @@ export const useCompanyBookmarkToggle = () => {
   return useMutation<AxiosResponse, AxiosError, RequestObjDef>({
     mutationFn: postCompanyBookmarkToggle,
     onSuccess: () => {
+      queryClient.invalidateQueries(companyKeywordArrKeyObj.all);
       queryClient.invalidateQueries(companyArrKeyObj.all);
       queryClient.invalidateQueries(companyDetailKeyObj.all);
       queryClient.invalidateQueries(userBookmarkKeyObj.companyAll);
