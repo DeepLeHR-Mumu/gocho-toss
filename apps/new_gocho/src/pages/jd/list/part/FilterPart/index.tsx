@@ -41,6 +41,16 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
   const { data: userFilter } = useUserFilter({ userId: userData?.id });
   const { mutate: doUserFilter } = useDoUserFilter();
 
+  const { data: totalJd } = useJdCount({
+    filter: "valid",
+    [JOB_FILTER_KEY]: "",
+    [INDUSTRY_FILTER_KEY]: "",
+    [EDUCATION_FILTER_KEY]: "",
+    [PLACE_FILTER_KEY]: "",
+    [REQUIRED_EXP_FILTER_KEY]: "",
+    [CONTRACT_FILTER_KEY]: "",
+    [ROTATION_FILTER_KEY]: "",
+  });
   const { data: jdCount } = useJdCount({
     filter: "valid",
     [JOB_FILTER_KEY]: watch(JOB_FILTER_KEY).join(","),
@@ -131,7 +141,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
     <>
       <div css={cssObj.titleWrapper}>
         <h3>지금 채용중 공고</h3>
-        <span>총 {jdCount ? jdCount.data : 0}건</span>
+        <span>총 {totalJd ? totalJd.data : 0}건</span>
         <button type="button" onClick={loadMyFilter}>
           My필터 불러오기
         </button>
