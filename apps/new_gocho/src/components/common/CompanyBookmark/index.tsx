@@ -17,6 +17,7 @@ export const CompanyBookmark = ({ companyId, isBookmark }: CompanyBookmarkProps)
   const bookmarkToggleHandler = () => {
     if (!userData) {
       setLoginModal(true);
+
       return;
     }
 
