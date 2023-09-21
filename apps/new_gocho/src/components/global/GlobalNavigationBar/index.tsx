@@ -7,7 +7,7 @@ import { FiBell, FiSearch, FiUser } from "react-icons/fi";
 
 import { SearchBar, DropDown, Profile } from "shared-ui/deeple-ds";
 
-import { useUserProfile } from "@/apis/auth";
+import { useUserInfo } from "@/apis/auth";
 import { useGetDeviceType } from "@/globalStates";
 import { INTERNAL_URL } from "@/pages/constants";
 import logoWhite from "@/public/logoWhite.svg";
@@ -47,7 +47,7 @@ export const GlobalNavigationBar = () => {
 
   const { isMobile } = useGetDeviceType();
 
-  const { data: userData, isSuccess } = useUserProfile();
+  const { data: userData, isSuccess } = useUserInfo();
 
   const openSearchModal = () => {
     router.push(INTERNAL_URL.SEARCH);

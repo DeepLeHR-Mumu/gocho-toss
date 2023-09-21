@@ -7,7 +7,7 @@ import { Profile, Textarea, Button } from "shared-ui/deeple-ds";
 import { useToast } from "@/globalStates/index";
 
 import { useWriteCompanyComment } from "@/apis/company";
-import { useUserProfile } from "@/apis/auth";
+import { useUserInfo } from "@/apis/auth";
 import { companyCommentArrKeyObj } from "@/constants/queryKeyFactory/company/commentArrKeyObj";
 
 import { cssObj } from "./style";
@@ -15,7 +15,7 @@ import { cssObj } from "./style";
 export const WriteReview = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const { data: userData } = useUserProfile();
+  const { data: userData } = useUserInfo();
   const { mutate: postWriteCompanyComment } = useWriteCompanyComment();
 
   const { setToastMessage } = useToast();

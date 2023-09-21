@@ -6,7 +6,7 @@ import { FiX, FiRefreshCw, FiFilter } from "react-icons/fi";
 import { Button } from "shared-ui/deeple-ds";
 
 import { useToast } from "@/globalStates";
-import { useUserProfile } from "@/apis/auth";
+import { useUserInfo } from "@/apis/auth";
 import { useUserFilter, useDoUserFilter } from "@/apis/filter";
 import { useJdCount } from "@/apis/jd";
 import { LoginModal } from "@/components";
@@ -37,7 +37,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
   const router = useRouter();
   const { setValue, watch, getValues, reset } = filterForm;
 
-  const { data: userData } = useUserProfile();
+  const { data: userData } = useUserInfo();
   const { data: userFilter } = useUserFilter({ userId: userData?.id });
   const { mutate: doUserFilter } = useDoUserFilter();
 
