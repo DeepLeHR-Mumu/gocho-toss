@@ -39,7 +39,7 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
     mode: "onChange",
   });
 
-  const { mutate: postManagersRegister } = useManagerRegister();
+  const { mutate: postManagersRegister, isLoading } = useManagerRegister();
   const { mutate: postLogin } = useDoLogin();
 
   useEffect(() => {
@@ -64,8 +64,6 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
   }, [flag]);
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
-    registerCompleteClickEvent();
-
     const newFormData = {
       ...formData,
       token_version_id: tokenVersionId.current !== null ? tokenVersionId.current : undefined,
@@ -79,39 +77,43 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
     const currentSpecObj = Object.assign(prevSpecObj, newFormData);
     sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
 
-    postManagersRegister(currentSpecObj, {
-      onSuccess: () => {
-        if (isSpecObj(currentSpecObj)) {
-          const { email, password } = currentSpecObj;
+    if (!isLoading) {
+      registerCompleteClickEvent();
 
-          postLogin(
-            { email, password, auto_login: false },
-            {
-              onSuccess: (response) => {
-                loginSuccessEvent(false);
-                localStorage.setItem("accessToken", response.data.access_token);
-                localStorage.setItem("refreshToken", response.data.refresh_token);
-                queryClient.invalidateQueries();
+      postManagersRegister(currentSpecObj, {
+        onSuccess: () => {
+          if (isSpecObj(currentSpecObj)) {
+            const { email, password } = currentSpecObj;
 
-                router.push(INTERNAL_URL.HOME);
-              },
+            postLogin(
+              { email, password, auto_login: false },
+              {
+                onSuccess: (response) => {
+                  loginSuccessEvent(false);
+                  localStorage.setItem("accessToken", response.data.access_token);
+                  localStorage.setItem("refreshToken", response.data.refresh_token);
+                  queryClient.invalidateQueries();
 
-              onError: () => {
-                router.push(INTERNAL_URL.LOGIN);
-              },
-            }
-          );
-        } else {
-          router.push(INTERNAL_URL.LOGIN);
-        }
-        sessionStorage.removeItem("specObj");
-        tokenVersionId.current = null;
-      },
-      onError: (error) => {
-        const errorResponse = error.response?.data as ErrorResponseDef;
-        setErrorMessage(errorResponse.error_message);
-      },
-    });
+                  router.push(INTERNAL_URL.HOME);
+                },
+
+                onError: () => {
+                  router.push(INTERNAL_URL.LOGIN);
+                },
+              }
+            );
+          } else {
+            router.push(INTERNAL_URL.LOGIN);
+          }
+          sessionStorage.removeItem("specObj");
+          tokenVersionId.current = null;
+        },
+        onError: (error) => {
+          const errorResponse = error.response?.data as ErrorResponseDef;
+          setErrorMessage(errorResponse.error_message);
+        },
+      });
+    }
   };
 
   const handleIdentityCheck = async () => {
@@ -246,6 +248,7 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
           !isDepartment ||
           !isPosition ||
           !isTerm ||
+          isLoading ||
           errors.department?.message ||
           errors.position?.message
             ? "disabled"
