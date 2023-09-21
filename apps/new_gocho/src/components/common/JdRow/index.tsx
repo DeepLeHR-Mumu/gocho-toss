@@ -57,29 +57,34 @@ export const JdRow = ({ jd, half }: JdRowProps) => {
   const { jdId, companyName, jdTitle, dueDate, bookmarked, cut } = jd;
 
   return (
-    <Link
-      href={`${INTERNAL_URL.JD_DETAIL}/${jdId}`}
+    <div
       css={css`
         ${cssObj.wrapper(half)}${isDueDateExpired ? cssObj.expired : ""}
       `}
     >
       <div css={cssObj.descriptionWrapper}>
-        <span css={cssObj.jdCompanyName}>{companyName}</span>
-        <div css={cssObj.jdTitleWrapper}>
-          <h3 css={cssObj.jdTitle}>{jdTitle}</h3>
-        </div>
-        <div css={cssObj.jdDueDateWrapper}>
-          {validDueDate && (
-            <>
-              {!isDueDateExpired && formatDateToCustomString(validDueDate, !!cut) !== "상시 채용" && (
-                <DDayChip endTime={dueDate} />
-              )}
-              <span css={cssObj.jdDueDate}>{formatDateToCustomString(validDueDate, !!cut)}</span>
-            </>
-          )}
-        </div>
+        <Link href={`${INTERNAL_URL.JD_DETAIL}/${jdId}`}>
+          <span css={cssObj.jdCompanyName}>{companyName}</span>
+        </Link>
+        <Link href={`${INTERNAL_URL.JD_DETAIL}/${jdId}`}>
+          <div css={cssObj.jdTitleWrapper}>
+            <h3 css={cssObj.jdTitle}>{jdTitle}</h3>
+          </div>
+        </Link>
+        <Link href={`${INTERNAL_URL.JD_DETAIL}/${jdId}`}>
+          <div css={cssObj.jdDueDateWrapper}>
+            {validDueDate && (
+              <>
+                {!isDueDateExpired && formatDateToCustomString(validDueDate, !!cut) !== "상시 채용" && (
+                  <DDayChip endTime={dueDate} />
+                )}
+                <span css={cssObj.jdDueDate}>{formatDateToCustomString(validDueDate, !!cut)}</span>
+              </>
+            )}
+          </div>
+        </Link>
       </div>
       {!isDueDateExpired && <JdBookmark jdId={jdId} isBookmarked={bookmarked} />}
-    </Link>
+    </div>
   );
 };

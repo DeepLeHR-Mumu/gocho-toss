@@ -29,7 +29,14 @@ export const CompanyRow = ({ company, border = true }: CompanyRowProps) => {
   return (
     <>
       <div css={cssObj.wrapper(Boolean(border))}>
-        <Profile size={isMobile ? 52 : 60} src={company.logo || defaultCompanyLogo} altText={`${company.name} 로고`} />
+        <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${company.id}`} css={cssObj.companyName}>
+          <Profile
+            size={isMobile ? 52 : 60}
+            src={company.logo || defaultCompanyLogo}
+            altText={`${company.name} 로고`}
+            css={cssObj.cursorPointer}
+          />
+        </Link>
         <div css={cssObj.infoWrapper}>
           <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${company.id}`} css={cssObj.companyName}>
             {company.name}

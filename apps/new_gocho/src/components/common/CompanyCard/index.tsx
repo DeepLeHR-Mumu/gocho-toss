@@ -38,8 +38,14 @@ export const CompanyCard = ({ company }: CompanyCardProps) => {
 
   return (
     <div css={cssObj.cardWrapper(isButtonExist)}>
-      <Profile src={company.logoSrc} size={getProfileSize()} altText={`${company.name} 로고`} />
-
+      <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${company.id}`}>
+        <Profile
+          src={company.logoSrc}
+          size={getProfileSize()}
+          altText={`${company.name} 로고`}
+          css={cssObj.cursorPointer}
+        />
+      </Link>
       <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${company.id}`}>
         <div css={cssObj.linkBox}>
           <h3 css={cssObj.name(isButtonExist)}>{company.name}</h3>
