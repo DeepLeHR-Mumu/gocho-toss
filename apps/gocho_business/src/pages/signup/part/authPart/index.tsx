@@ -39,7 +39,7 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
     mode: "onChange",
   });
 
-  const { mutate: postManagersRegister } = useManagerRegister();
+  const { mutate: postManagersRegister, isLoading } = useManagerRegister();
   const { mutate: postLogin } = useDoLogin();
 
   useEffect(() => {
@@ -64,54 +64,56 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
   }, [flag]);
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
-    registerCompleteClickEvent();
+    if (!isLoading) {
+      registerCompleteClickEvent();
 
-    const newFormData = {
-      ...formData,
-      token_version_id: tokenVersionId.current !== null ? tokenVersionId.current : undefined,
-      manager_agreement: {
-        terms: formData.manager_agreement.terms && 1,
-        privacy: formData.manager_agreement.privacy && 1,
-      },
-    };
+      const newFormData = {
+        ...formData,
+        token_version_id: tokenVersionId.current !== null ? tokenVersionId.current : undefined,
+        manager_agreement: {
+          terms: formData.manager_agreement.terms && 1,
+          privacy: formData.manager_agreement.privacy && 1,
+        },
+      };
 
-    const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
-    const currentSpecObj = Object.assign(prevSpecObj, newFormData);
-    sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
+      const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
+      const currentSpecObj = Object.assign(prevSpecObj, newFormData);
+      sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
 
-    postManagersRegister(currentSpecObj, {
-      onSuccess: () => {
-        if (isSpecObj(currentSpecObj)) {
-          const { email, password } = currentSpecObj;
+      postManagersRegister(currentSpecObj, {
+        onSuccess: () => {
+          if (isSpecObj(currentSpecObj)) {
+            const { email, password } = currentSpecObj;
 
-          postLogin(
-            { email, password, auto_login: false },
-            {
-              onSuccess: (response) => {
-                loginSuccessEvent(false);
-                localStorage.setItem("accessToken", response.data.access_token);
-                localStorage.setItem("refreshToken", response.data.refresh_token);
-                queryClient.invalidateQueries();
+            postLogin(
+              { email, password, auto_login: false },
+              {
+                onSuccess: (response) => {
+                  loginSuccessEvent(false);
+                  localStorage.setItem("accessToken", response.data.access_token);
+                  localStorage.setItem("refreshToken", response.data.refresh_token);
+                  queryClient.invalidateQueries();
 
-                router.push(INTERNAL_URL.HOME);
-              },
+                  router.push(INTERNAL_URL.HOME);
+                },
 
-              onError: () => {
-                router.push(INTERNAL_URL.LOGIN);
-              },
-            }
-          );
-        } else {
-          router.push(INTERNAL_URL.LOGIN);
-        }
-        sessionStorage.removeItem("specObj");
-        tokenVersionId.current = null;
-      },
-      onError: (error) => {
-        const errorResponse = error.response?.data as ErrorResponseDef;
-        setErrorMessage(errorResponse.error_message);
-      },
-    });
+                onError: () => {
+                  router.push(INTERNAL_URL.LOGIN);
+                },
+              }
+            );
+          } else {
+            router.push(INTERNAL_URL.LOGIN);
+          }
+          sessionStorage.removeItem("specObj");
+          tokenVersionId.current = null;
+        },
+        onError: (error) => {
+          const errorResponse = error.response?.data as ErrorResponseDef;
+          setErrorMessage(errorResponse.error_message);
+        },
+      });
+    }
   };
 
   const handleIdentityCheck = async () => {
@@ -246,6 +248,7 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
           !isDepartment ||
           !isPosition ||
           !isTerm ||
+          isLoading ||
           errors.department?.message ||
           errors.position?.message
             ? "disabled"
