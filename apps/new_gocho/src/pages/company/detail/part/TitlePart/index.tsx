@@ -9,7 +9,7 @@ import defaultCompanyLogo from "shared-image/global/common/default_company_logo.
 
 import { Layout, ShareModal, CompanyBookmark, SkeletonBox } from "@/components";
 import { useCompanyDetail } from "@/apis/company";
-import { useUserProfile } from "@/apis/auth";
+import { useUserInfo } from "@/apis/auth";
 import { isQueryString } from "@/utils";
 import { INTERNAL_URL } from "@/pages/constants";
 import backgroundImage from "@/public/companyBackground.png";
@@ -22,7 +22,7 @@ export const TitlePart = () => {
   const companyId = isQueryString(router.query.companyId) ? Number(router.query.companyId) : undefined;
 
   const { data: companyData } = useCompanyDetail({ companyId, isStatic: false });
-  const { data: userData } = useUserProfile();
+  const { data: userData } = useUserInfo();
 
   if (!companyData) {
     return (

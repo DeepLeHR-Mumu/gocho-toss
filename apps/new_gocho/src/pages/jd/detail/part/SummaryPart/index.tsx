@@ -3,7 +3,7 @@ import { FiEye } from "react-icons/fi";
 
 import { Profile, DDayChip, Chip } from "shared-ui/deeple-ds";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-import { dateConverter } from "shared-util";
+import { dateConverter, dDayCalculator } from "shared-util";
 
 import { Layout, SkeletonBox } from "@/components";
 import { INTERNAL_URL } from "@/pages/constants";
@@ -23,6 +23,8 @@ export const SummaryPart = ({ jd }: SummaryPartProps) => {
       </section>
     );
   }
+
+  const isAlwaysJob = dDayCalculator(jd.endTime) === "상시채용";
 
   return (
     <section css={cssObj.background}>
@@ -45,7 +47,11 @@ export const SummaryPart = ({ jd }: SummaryPartProps) => {
           <h3 css={cssObj.title}>{jd.title}</h3>
           <div css={cssObj.dueDateWrapper}>
             <DDayChip endTime={jd.endTime} />
-            <span>{dateConverter(jd.endTime).date} 까지</span>
+            {!isAlwaysJob && (
+              <span>
+                {dateConverter(jd.endTime).date} 까지{jd.cut && " 채용 시 마감"}
+              </span>
+            )}
           </div>
           <div css={cssObj.chipsWrapper}>
             <Chip size="small" color="fillGray">
