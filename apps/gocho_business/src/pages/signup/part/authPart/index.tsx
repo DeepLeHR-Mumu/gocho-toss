@@ -64,21 +64,21 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
   }, [flag]);
 
   const postSubmit: SubmitHandler<PostSubmitValues> = (formData) => {
-    const newFormData = {
-      ...formData,
-      token_version_id: tokenVersionId.current !== null ? tokenVersionId.current : undefined,
-      manager_agreement: {
-        terms: formData.manager_agreement.terms && 1,
-        privacy: formData.manager_agreement.privacy && 1,
-      },
-    };
-
-    const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
-    const currentSpecObj = Object.assign(prevSpecObj, newFormData);
-    sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
-
     if (!isLoading) {
       registerCompleteClickEvent();
+
+      const newFormData = {
+        ...formData,
+        token_version_id: tokenVersionId.current !== null ? tokenVersionId.current : undefined,
+        manager_agreement: {
+          terms: formData.manager_agreement.terms && 1,
+          privacy: formData.manager_agreement.privacy && 1,
+        },
+      };
+
+      const prevSpecObj = JSON.parse(sessionStorage.getItem("specObj") || "{}");
+      const currentSpecObj = Object.assign(prevSpecObj, newFormData);
+      sessionStorage.setItem("specObj", JSON.stringify(currentSpecObj));
 
       postManagersRegister(currentSpecObj, {
         onSuccess: () => {
