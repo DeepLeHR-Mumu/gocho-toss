@@ -46,17 +46,15 @@ export const cssObj = {
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 1rem;
   `,
 
   startTime: css`
-    margin-left: 1rem;
     color: ${NEWCOLORS.BLUEGRAY400};
     ${NEWTEXTS.TITLE10}
   `,
 
   endTime: css`
-    margin-left: 1rem;
-    margin-right: 0.75rem;
     color: ${NEWCOLORS.BLACK};
     ${NEWTEXTS.TITLE11}
   `,

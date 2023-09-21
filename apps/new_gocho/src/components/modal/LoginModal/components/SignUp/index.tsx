@@ -25,34 +25,29 @@ const SignUp = ({ ...actionBarHandlers }: ActionBarHandlers) => {
     handleSubmit,
     formState: { errors },
   } = useForm<SignUpFormValues>({ mode: "onChange" });
-  const { mutate: postSignUp } = useDoSignUp();
+  const { mutate: postSignUp, isLoading } = useDoSignUp();
 
   const signUpSubmit: SubmitHandler<SignUpFormValues> = (signUpObj) => {
-    postSignUp(signUpObj, {
-      onError: (error) => {
-        if (axios.isAxiosError(error) && error.response) {
-          const errorResponse = error.response?.data as ErrorResponseDef;
-          setErrorMessage(errorResponse.error_message);
-        }
-      },
-      onSuccess: (response) => {
-        localStorage.setItem("accessToken", `${response?.data.access_token}`);
-        localStorage.setItem("refreshToken", `${response?.data.refresh_token}`);
+    if (!isLoading) {
+      postSignUp(signUpObj, {
+        onError: (error) => {
+          if (axios.isAxiosError(error) && error.response) {
+            const errorResponse = error.response?.data as ErrorResponseDef;
+            setErrorMessage(errorResponse.error_message);
+          }
+        },
+        onSuccess: (response) => {
+          localStorage.setItem("accessToken", `${response?.data.access_token}`);
+          localStorage.setItem("refreshToken", `${response?.data.refresh_token}`);
 
-        setToastMessage("환영합니다.");
+          setToastMessage("환영합니다.");
 
-        if (actionBarHandlers.closeHandler) {
-          actionBarHandlers.closeHandler();
-        }
-
-        // const { nickname } = tokenDecryptor(response.data.access_token);
-        // signupSuccessEvent();
-        // queryClient.invalidateQueries();
-        // refetch();
-        // closeModal();
-        // setToastMessage("님 환영합니다.", nickname);
-      },
-    });
+          if (actionBarHandlers.closeHandler) {
+            actionBarHandlers.closeHandler();
+          }
+        },
+      });
+    }
   };
 
   return (
@@ -99,7 +94,7 @@ const SignUp = ({ ...actionBarHandlers }: ActionBarHandlers) => {
       </div>
       {errorMessage && <p css={cssObj.errorMessage}>{errorMessage}</p>}
       <div css={cssObj.signUpButtonWrapper}>
-        <Button type="submit" size="large" fill={isMobile} onClick={handleSubmit(signUpSubmit)}>
+        <Button type="submit" size="large" fill={isMobile} disabled={isLoading} onClick={handleSubmit(signUpSubmit)}>
           가입하기
         </Button>
       </div>

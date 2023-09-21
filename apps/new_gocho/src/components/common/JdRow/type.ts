@@ -7,5 +7,5 @@ export interface JdRowProps {
     bookmarked: boolean;
     cut?: boolean;
   };
-  half?: boolean; // NOTE 불필요해 보임.
+  half?: boolean;
 }

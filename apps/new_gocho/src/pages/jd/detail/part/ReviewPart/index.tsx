@@ -8,7 +8,7 @@ import { Profile, Chip, Textarea } from "shared-ui/deeple-ds";
 import { useToast } from "@/globalStates";
 import { useWriteCompanyComment, useCompanyCommentArr } from "@/apis/company";
 import { RequestObjDef as CompanyCommentFormValues } from "@/apis/company/useWriteCompanyComment/type";
-import { useUserProfile } from "@/apis/auth";
+import { useUserInfo } from "@/apis/auth";
 import { companyCommentArrKeyObj } from "@/constants/queryKeyFactory/company/commentArrKeyObj";
 import { LoginModal } from "@/components";
 
@@ -31,7 +31,7 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
     defaultValues: { companyId: company.id, jdId: reviewState === "jd" ? jdId : undefined, description: "" },
   });
 
-  const { data: userData } = useUserProfile();
+  const { data: userData } = useUserInfo();
   const { data: companyCommentData } = useCompanyCommentArr({
     companyId: Number(company.id),
     jdId: reviewState === "jd" ? jdId : undefined,
