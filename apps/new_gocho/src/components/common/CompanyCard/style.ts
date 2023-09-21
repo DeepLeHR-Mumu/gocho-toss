@@ -11,7 +11,7 @@ export const cssObj = {
     align-items: center;
     width: ${isButtonExist ? "15.75rem" : "10.5rem"};
     height: ${isButtonExist ? "20rem" : "13.75rem"};
-    padding: ${isButtonExist ? "2.25rem 1.5rem" : "1.5625rem 1.125rem"};
+    padding: ${isButtonExist ? "2rem 1.5rem" : "1.5625rem 1.125rem"};
     border-radius: 1rem;
     border: 1px solid ${NEWCOLORS.GRAY200};
     background-color: ${NEWCOLORS.WHITE};
@@ -59,5 +59,9 @@ export const cssObj = {
       ${NEWTEXTS.TITLE1}
       ${isButtonExist ? "" : "display: none;"}
     }
+  `,
+
+  cursorPointer: css`
+    cursor: pointer;
   `,
 };

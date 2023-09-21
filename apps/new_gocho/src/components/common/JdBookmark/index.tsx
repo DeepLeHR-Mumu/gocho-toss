@@ -9,7 +9,7 @@ import { LoginModal } from "@/components/modal/LoginModal";
 import { JdBookmarkProps } from "./type";
 import { cssObj } from "./style";
 
-export const JdBookmark = ({ jdId, isBookmarked }: JdBookmarkProps) => {
+export const JdBookmark = ({ jdId, isBookmarked, className }: JdBookmarkProps) => {
   const [loginModal, setLoginModal] = useState(false);
   const { data: userData } = useUserProfile();
   const { mutate: postJdBookmarkToggle } = useJdBookmarkToggle();
@@ -36,6 +36,7 @@ export const JdBookmark = ({ jdId, isBookmarked }: JdBookmarkProps) => {
     <>
       <button
         type="button"
+        className={className}
         onClick={(e) => {
           e.preventDefault();
           bookmarkToggleHandler();

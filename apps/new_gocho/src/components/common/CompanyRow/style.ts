@@ -49,4 +49,8 @@ export const cssObj = {
       ${NEWTEXTS.TITLE1}
     }
   `,
+
+  cursorPointer: css`
+    cursor: pointer;
+  `,
 };
