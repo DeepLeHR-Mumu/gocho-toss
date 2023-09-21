@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { FiAlertCircle, FiSend } from "react-icons/fi";
 
-import { Profile, Chip, Input } from "shared-ui/deeple-ds";
+import { Profile, Chip, Textarea } from "shared-ui/deeple-ds";
 
 import { useToast } from "@/globalStates";
 import { useWriteCompanyComment, useCompanyCommentArr } from "@/apis/company";
@@ -23,8 +23,8 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
 
   const { setToastMessage } = useToast();
 
+  const scrollDownRef = useRef<boolean>(false);
   const scrollRef = useRef<HTMLDivElement | null>(null);
-  const scrollWillbeBottom = useRef(false);
   const queryClient = useQueryClient();
 
   const { register, reset, handleSubmit } = useForm<CompanyCommentFormValues>({
@@ -39,9 +39,10 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
   const { mutate: postWriteCompanyComment } = useWriteCompanyComment();
 
   const scrollToBottom = () => {
-    if (scrollRef.current) {
+    if (scrollDownRef.current && scrollRef.current) {
       const scrollBottom = scrollRef.current.scrollHeight;
       scrollRef.current.scrollTo(0, scrollBottom);
+      scrollDownRef.current = false;
     }
   };
 
@@ -57,10 +58,10 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
 
     postWriteCompanyComment(commentObj, {
       onSuccess: () => {
+        scrollDownRef.current = true;
         reset();
         setToastMessage("공고리뷰가 업로드 되었습니다.");
         queryClient.invalidateQueries(companyCommentArrKeyObj.all);
-        scrollWillbeBottom.current = true;
       },
     });
   };
@@ -83,8 +84,8 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
               size="small"
               color={reviewState === "jd" ? "fillBlack" : "transparent"}
               onClick={() => {
+                scrollDownRef.current = true;
                 setReviewState("jd");
-                scrollToBottom();
               }}
             >
               공고 리뷰
@@ -93,8 +94,8 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
               size="small"
               color={reviewState === "company" ? "fillBlack" : "transparent"}
               onClick={() => {
+                scrollDownRef.current = true;
                 setReviewState("company");
-                scrollToBottom();
               }}
             >
               기업 리뷰
@@ -163,8 +164,8 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
         )}
         <div css={cssObj.footerWrapper}>
           <form onSubmit={handleSubmit(commentSubmit)}>
-            <Input
-              type="textarea"
+            <Textarea
+              css={cssObj.commentInput}
               suffix={
                 <button type="submit">
                   <FiSend css={cssObj.sendIcon} />

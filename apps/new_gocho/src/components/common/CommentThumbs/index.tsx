@@ -3,6 +3,7 @@ import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 
 import { useCompanyCommentToggle } from "@/apis/company";
 
+import axios from "axios";
 import { CommentThumbsProps } from "./type";
 import { cssObj } from "./style";
 
@@ -11,7 +12,34 @@ export const CommentThumbs = ({ type, size, companyId, commentId, count, isClick
 
   const commentToggleHandler = () => {
     if (companyId && commentId) {
-      companyCommentToggle({ type, companyId, commentId });
+      companyCommentToggle(
+        { type, companyId, commentId },
+        {
+          onError: (error) => {
+            if (axios.isAxiosError(error) && error.response?.status === 409) {
+              if (type === "likes")
+                companyCommentToggle(
+                  { type: "dislikes", companyId, commentId },
+                  {
+                    onSuccess: () => {
+                      companyCommentToggle({ type, companyId, commentId });
+                    },
+                  }
+                );
+              else
+                companyCommentToggle(
+                  { type: "likes", companyId, commentId },
+                  {
+                    onSuccess: () => {
+                      companyCommentToggle({ type, companyId, commentId });
+                    },
+                  }
+                );
+            }
+            return error;
+          },
+        }
+      );
     }
   };
 
