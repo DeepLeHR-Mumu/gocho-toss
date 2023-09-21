@@ -5,7 +5,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { dateConverter } from "shared-util";
 import { bannerArrKeyObj } from "shared-constant/queryKeyFactory/banner/bannerArrKeyObj";
 
-import { useDeleteMainBanner } from "@/api";
+import { useDeleteJdBanner } from "@/api";
 
 import { cssObj } from "./style";
 import { BannerBoxProps } from "./type";
@@ -13,14 +13,14 @@ import { BannerBoxProps } from "./type";
 export const BannerBox: FunctionComponent<BannerBoxProps> = ({ banner }) => {
   const queryClient = useQueryClient();
 
-  const { mutate: deleteMutate } = useDeleteMainBanner();
+  const { mutate: deleteMutate } = useDeleteJdBanner();
 
   const bannerDeleteHandler = (id: number) => {
     deleteMutate(
       { bannerId: id },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries(bannerArrKeyObj.main);
+          queryClient.invalidateQueries(bannerArrKeyObj.jd);
         },
       }
     );
