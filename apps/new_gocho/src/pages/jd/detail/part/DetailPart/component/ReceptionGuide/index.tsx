@@ -1,13 +1,15 @@
 import { FiChevronRight } from "react-icons/fi";
 
 import { Chip, DDayChip } from "shared-ui/deeple-ds";
-import { dateConverter } from "shared-util";
+import { dDayCalculator, dateConverter } from "shared-util";
 
 import { ReceptionGuideProps } from "./type";
 import { cssObj } from "./style";
 
-export const ReceptionGuide = ({ title, contents, processArr, startTime, endTime }: ReceptionGuideProps) => {
+export const ReceptionGuide = ({ title, contents, processArr, startTime, endTime, cut }: ReceptionGuideProps) => {
   const contentEntries = Object.entries(contents);
+
+  const isAlwaysJob = dDayCalculator(endTime) === "상시채용";
 
   return (
     <div css={cssObj.subContainer}>
@@ -36,8 +38,9 @@ export const ReceptionGuide = ({ title, contents, processArr, startTime, endTime
           <Chip size="small" rect>
             종료
           </Chip>
-          <span css={cssObj.endTime}>{dateConverter(endTime).dateWithDay}</span>
-          <DDayChip endTime={endTime} />
+          {isAlwaysJob && <span css={cssObj.endTime}>{cut ? "채용 시 마감" : "상시채용"}</span>}
+          {!isAlwaysJob && <span css={cssObj.endTime}>{dateConverter(endTime).dateWithDay}</span>}
+          {!isAlwaysJob && <DDayChip endTime={endTime} />}
         </div>
       </div>
       <div css={cssObj.contentWrapper}>

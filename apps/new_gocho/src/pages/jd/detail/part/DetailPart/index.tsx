@@ -124,6 +124,7 @@ export const DetailPart = () => {
             processArr={jdData.process_arr}
             startTime={jdData.start_time}
             endTime={jdData.end_time}
+            cut={jdData.cut}
           />
         </div>
         <div

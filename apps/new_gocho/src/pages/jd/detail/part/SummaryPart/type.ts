@@ -4,5 +4,6 @@ export interface SummaryPartProps {
     title: string;
     endTime: string;
     view: number;
+    cut: boolean;
   };
 }

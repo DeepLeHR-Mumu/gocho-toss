@@ -61,6 +61,7 @@ const JdDetailPage: NextPage = () => {
                 title: jdDetailData.title,
                 endTime: jdDetailData.end_time,
                 view: jdDetailData.view,
+                cut: jdDetailData.cut,
               }
             : undefined
         }
