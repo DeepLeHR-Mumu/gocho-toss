@@ -71,7 +71,20 @@ export default function Document() {
         )}
 
         <div id="portal" />
-        <div id="toastPortal" />
+        <div
+          id="toastPortal"
+          style={{
+            display: "flex",
+            height: "100vh",
+            flexDirection: "column",
+            justifyContent: "flex-end",
+            gap: "1rem",
+            position: "fixed",
+            left: "50%",
+            transform: "translate(0, 0)",
+            zIndex: "110",
+          }}
+        />
         <Main />
         <NextScript />
       </body>
