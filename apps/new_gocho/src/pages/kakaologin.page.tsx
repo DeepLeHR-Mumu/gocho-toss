@@ -44,7 +44,7 @@ const KakaoLogin: NextPage = () => {
                   const kakaopath = sessionStorage.getItem("kakaopath");
                   // loginSuccessEvent(id, "kakao", kakaopath);
                   router.push(kakaopath as string);
-                  setToastMessage("환영합니다.");
+                  setToastMessage("고초대졸닷컴에 오신 것을 환영합니다.");
                 },
               }
             );

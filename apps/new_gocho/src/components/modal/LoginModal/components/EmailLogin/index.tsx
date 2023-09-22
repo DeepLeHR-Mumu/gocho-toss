@@ -44,7 +44,7 @@ const EmailLogin = ({ toFindPassword, toSignUp, ...actionBarHandlers }: EmailLog
         localStorage.setItem("accessToken", `${response.data.access_token}`);
         localStorage.setItem("refreshToken", `${response.data.refresh_token}`);
         queryClient.invalidateQueries();
-        setToastMessage("반갑습니다.");
+        setToastMessage("고초대졸닷컴에 오신 것을 환영합니다.");
 
         if (actionBarHandlers.closeHandler) {
           actionBarHandlers.closeHandler();

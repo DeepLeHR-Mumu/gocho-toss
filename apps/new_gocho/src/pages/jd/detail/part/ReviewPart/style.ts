@@ -96,6 +96,10 @@ export const cssObj = {
     }
   `,
 
+  commentInput: css`
+    ${NEWTEXTS.BODY2};
+  `,
+
   sendIcon: css`
     -ms-transform: rotate(-90deg); /* IE 9 */
     -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
