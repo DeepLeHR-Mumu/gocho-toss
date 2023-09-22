@@ -97,6 +97,7 @@ export const GlobalNavigationBar = () => {
                 </Link>
                 <div css={searchBarWrapper}>
                   <SearchBar
+                    maxLength={0}
                     onClick={() => {
                       openSearchModal();
                     }}
