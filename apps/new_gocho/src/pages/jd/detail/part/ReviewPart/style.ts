@@ -69,7 +69,7 @@ export const cssObj = {
   contentsWrapper: (blurred: boolean) => css`
     padding: 1.125rem 1rem 1rem;
     background-color: ${NEWCOLORS.GRAY100};
-    height: 20.5rem;
+    height: 17rem;
     overflow: auto;
     display: flex;
     flex-direction: column;

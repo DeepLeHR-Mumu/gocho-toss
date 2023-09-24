@@ -6,7 +6,6 @@ import { Layout } from "@/components";
 import { isQueryString } from "@/utils";
 import { useAddCompanyViewCount } from "@/apis/viewCount";
 
-import { INTERNAL_URL } from "@/pages/constants";
 import { JdPart } from "./part/JdPart";
 import { CompanyInfoPart } from "./part/CompanyInfoPart";
 import { ReviewPart } from "./part/ReviewPart";
@@ -19,11 +18,8 @@ const CompanyDetail: NextPage = () => {
   const { mutate: addViewCount } = useAddCompanyViewCount();
 
   useEffect(() => {
-    if (router.query.companyId && !isQueryString(router.query.type)) {
-      router.replace(
-        { pathname: router.pathname, query: { companyId: router.query.companyId, type: "company" } },
-        `${INTERNAL_URL.COMPANY_DETAIL}/[companyId]?type=company`
-      );
+    if (router.isReady && !isQueryString(router.query.type)) {
+      router.replace({ pathname: router.pathname, query: { companyId: router.query.companyId, type: "company" } });
     }
   }, [router]);
 

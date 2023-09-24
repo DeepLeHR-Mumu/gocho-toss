@@ -1,9 +1,16 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
 
+import { NEWCOLORS } from "shared-style/color";
 import { commonCssObj } from "../../style";
 
 export const cssObj = {
+  background: css`
+    width: 100vw;
+    height: 100vh;
+    background-color: ${NEWCOLORS.WHITE};
+  `,
+
   wrapper: css`
     padding-top: 2.5rem;
     padding-bottom: 7.5rem;
