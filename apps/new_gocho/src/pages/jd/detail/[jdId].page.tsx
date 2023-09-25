@@ -21,7 +21,7 @@ const JdDetailPage: NextPage = () => {
   const jdId = isQueryString(router.query.jdId) ? Number(router.query.jdId) : null;
 
   const { data: jdDetailData } = useJdDetail({ id: jdId, isStatic: false });
-  const { data: jdArrData } = useJdArr({ order: "rand", size: 3, filter: "valid" });
+  const { data: jdArrData } = useJdArr({ order: "rand", size: 3, filter: "valid", page: 1 });
   const { mutate: addJdViewCount } = useAddJdViewCount();
 
   useEffect(() => {
