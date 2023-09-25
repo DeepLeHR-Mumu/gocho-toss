@@ -14,7 +14,7 @@ import { JdRowProps } from "./type";
 import { cssObj } from "./style";
 
 // TODO 모바일 반응형 추가
-export const JdRow = ({ jd, half }: JdRowProps) => {
+export const JdRow = ({ jd, half, replace, callback }: JdRowProps) => {
   const validDueDate = useMemo(() => {
     if (!jd) {
       return null;
@@ -63,15 +63,15 @@ export const JdRow = ({ jd, half }: JdRowProps) => {
       `}
     >
       <div css={cssObj.descriptionWrapper}>
-        <Link href={`${INTERNAL_URL.JD_DETAIL}/${jdId}`}>
+        <Link href={`${INTERNAL_URL.JD_DETAIL}/${jdId}`} replace={replace} onClick={callback}>
           <span css={cssObj.jdCompanyName}>{companyName}</span>
         </Link>
-        <Link href={`${INTERNAL_URL.JD_DETAIL}/${jdId}`}>
+        <Link href={`${INTERNAL_URL.JD_DETAIL}/${jdId}`} replace={replace} onClick={callback}>
           <div css={cssObj.jdTitleWrapper}>
             <h3 css={cssObj.jdTitle}>{jdTitle}</h3>
           </div>
         </Link>
-        <Link href={`${INTERNAL_URL.JD_DETAIL}/${jdId}`}>
+        <Link href={`${INTERNAL_URL.JD_DETAIL}/${jdId}`} replace={replace} onClick={callback}>
           <div css={cssObj.jdDueDateWrapper}>
             {validDueDate && (
               <>

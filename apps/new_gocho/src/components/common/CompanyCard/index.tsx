@@ -10,7 +10,7 @@ import { SkeletonBox } from "../SkeletonBox";
 import { CompanyCardProps } from "./type";
 import { cssObj } from "./style";
 
-export const CompanyCard = ({ company }: CompanyCardProps) => {
+export const CompanyCard = ({ company, replace = false, callback }: CompanyCardProps) => {
   const { isMobile } = useGetDeviceType();
 
   const isButtonExist = !!company?.bookmark;
@@ -38,7 +38,7 @@ export const CompanyCard = ({ company }: CompanyCardProps) => {
 
   return (
     <div css={cssObj.cardWrapper(isButtonExist)}>
-      <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${company.id}`}>
+      <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${company.id}`} replace={replace} onClick={callback}>
         <Profile
           src={company.logoSrc}
           size={getProfileSize()}
@@ -46,7 +46,7 @@ export const CompanyCard = ({ company }: CompanyCardProps) => {
           css={cssObj.cursorPointer}
         />
       </Link>
-      <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${company.id}`}>
+      <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${company.id}`} replace={replace} onClick={callback}>
         <div css={cssObj.linkBox}>
           <h3 css={cssObj.name(isButtonExist)}>{company.name}</h3>
         </div>

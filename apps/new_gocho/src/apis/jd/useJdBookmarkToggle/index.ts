@@ -5,6 +5,7 @@ import { userBookmarkKeyObj } from "@/constants/queryKeyFactory/bookmark/bookmar
 import { jdArrKeyObj } from "@/constants/queryKeyFactory/jd/jdArrKeyObj";
 import { jdDetailKeyObj } from "@/constants/queryKeyFactory/jd/jdDetailKeyObj";
 import { bannerArrKeyObj } from "@/constants/queryKeyFactory/banner/bannerArrKeyObj";
+import { userJdHistoryKeyObj } from "@/constants/queryKeyFactory/jd/jdUserHistoryArrKeyObj";
 
 import { axiosInstance } from "../../axiosInstance";
 import { PostJdApplyClickDef, RequestObjDef } from "./type";
@@ -23,6 +24,7 @@ export const useJdBookmarkToggle = () => {
       queryClient.invalidateQueries(jdArrKeyObj.all);
       queryClient.invalidateQueries(jdDetailKeyObj.all);
       queryClient.invalidateQueries(userBookmarkKeyObj.jdAll);
+      queryClient.invalidateQueries(userJdHistoryKeyObj.all);
     },
   });
 };

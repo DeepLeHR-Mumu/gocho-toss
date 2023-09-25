@@ -89,6 +89,11 @@ export const cssObj = {
     border-radius: 0 0 1rem 1rem;
     background-color: ${NEWCOLORS.WHITE};
 
+    > h5 {
+      padding-bottom: 0.75rem;
+      ${NEWTEXTS.TITLE6}
+    }
+
     :focus-within {
       svg {
         color: ${NEWCOLORS.BLUE200};

@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { FiBell, FiCheck, FiFileText, FiClock } from "react-icons/fi";
 import { AiOutlineMessage } from "react-icons/ai";
 import { useQueryClient } from "@tanstack/react-query";
@@ -15,19 +14,14 @@ import { AlarmProps } from "./type";
 import { cssObj } from "./style";
 
 export const Alarm = ({ className, userId }: AlarmProps) => {
-  const alarmPage = useRef(1);
   const queryClient = useQueryClient();
-  const { data: alarmData, fetchNextPage } = useInfiniteAlarmArr({ userId, size: 5, page: 1 });
+  const { data: alarmData, fetchNextPage } = useInfiniteAlarmArr({ userId, size: 5 });
   const { mutate: readAlarmAll } = useReadAlarmAll();
   const { mutate: readAlarmOne } = useReadAlarmOne();
   const { ref } = useInView({
     onChange: (inView) => {
       if (inView) {
-        alarmPage.current += 1;
-
-        if (alarmData?.pages[0] && alarmData.pages[0].page_result.total_pages >= alarmPage.current) {
-          fetchNextPage({ pageParam: alarmPage.current });
-        }
+        fetchNextPage();
       }
     },
   });
@@ -44,8 +38,12 @@ export const Alarm = ({ className, userId }: AlarmProps) => {
     }
   };
 
-  const flattedAlarmArr = alarmData?.pages.map((page) => page.data).flat();
+  const flattedAlarmArr = alarmData?.pages
+    .map((page) => page.data)
+    .flat()
+    .filter((alarm) => !alarm.link.includes("qnas"));
   const isAlarmListClean = flattedAlarmArr?.length === 0;
+  const isAllReadClickable = flattedAlarmArr?.some((data) => data.is_read === false);
 
   return (
     <DropDown
@@ -61,6 +59,7 @@ export const Alarm = ({ className, userId }: AlarmProps) => {
             <button
               type="button"
               css={cssObj.menuHeader}
+              disabled={!isAllReadClickable}
               onClick={() => {
                 readAlarmAll(
                   { userId, category: "all" },

@@ -163,6 +163,7 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
           </div>
         )}
         <div css={cssObj.footerWrapper}>
+          {userData && <h5>{userData.nickname}</h5>}
           <form onSubmit={handleSubmit(commentSubmit)}>
             <Textarea
               css={cssObj.commentInput}

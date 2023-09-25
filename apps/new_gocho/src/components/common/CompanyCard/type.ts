@@ -6,4 +6,6 @@ export interface CompanyCardProps {
     hashTagArr?: string[];
     bookmark?: { state: boolean };
   };
+  replace?: boolean;
+  callback?: () => void;
 }
