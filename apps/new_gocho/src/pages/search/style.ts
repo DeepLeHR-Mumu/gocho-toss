@@ -87,7 +87,7 @@ export const cssObj = {
   `,
 
   paginationWrapper: css`
-    margin-top: 5rem;
+    margin: 5rem 0 9.5rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
