@@ -46,6 +46,7 @@ export const Alarm = ({ className, userId }: AlarmProps) => {
 
   const flattedAlarmArr = alarmData?.pages.map((page) => page.data).flat();
   const isAlarmListClean = flattedAlarmArr?.length === 0;
+  const isAllReadClickable = flattedAlarmArr?.some((data) => data.is_read === false);
 
   return (
     <DropDown
@@ -61,6 +62,7 @@ export const Alarm = ({ className, userId }: AlarmProps) => {
             <button
               type="button"
               css={cssObj.menuHeader}
+              disabled={!isAllReadClickable}
               onClick={() => {
                 readAlarmAll(
                   { userId, category: "all" },
