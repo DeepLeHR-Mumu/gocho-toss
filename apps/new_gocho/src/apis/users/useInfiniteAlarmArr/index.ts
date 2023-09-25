@@ -13,9 +13,11 @@ export const getAlarmArr: GetAlarmArrDef = async (requestObj) => {
 };
 
 export const useInfiniteAlarmArr = (requestObj: AlarmArrRequestDef) =>
-  useInfiniteQuery(alarmArrKeyObj.alarmArr(requestObj), () => getAlarmArr({ ...requestObj }), {
-    getNextPageParam: (lastPage, allPosts) =>
-      lastPage.page_result.total_pages !== allPosts[0].page_result.total_pages
-        ? lastPage.page_result.page + 1
-        : undefined,
-  });
+  useInfiniteQuery(
+    alarmArrKeyObj.alarmArr(requestObj),
+    ({ pageParam = 1 }) => getAlarmArr({ ...requestObj, page: pageParam }),
+    {
+      getNextPageParam: (lastPage, allPosts) =>
+        lastPage.page_result.page < allPosts[0].page_result.total_pages ? lastPage.page_result.page + 1 : undefined,
+    }
+  );
