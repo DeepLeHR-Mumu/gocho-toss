@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -22,10 +22,7 @@ import { cssObj } from "./style";
 
 const JdListPage: NextPage = () => {
   const router = useRouter();
-  const firstRenderingRef = useRef<boolean>(true);
-  const scrollRef = useRef<HTMLDivElement | null>(null);
 
-  // TODO trigger
   const [filterObj, setFilterObj] = useState<FilterObj>({
     [JOB_FILTER_KEY]: "",
     [INDUSTRY_FILTER_KEY]: "",
@@ -35,6 +32,7 @@ const JdListPage: NextPage = () => {
     [CONTRACT_FILTER_KEY]: "",
     [ROTATION_FILTER_KEY]: "",
   });
+
   const filterForm = useForm<FilterFormValues>({
     defaultValues: {
       order: "recent",
@@ -47,6 +45,7 @@ const JdListPage: NextPage = () => {
       [ROTATION_FILTER_KEY]: [],
     },
   });
+
   const { getValues } = filterForm;
 
   useEffect(() => {
@@ -54,17 +53,6 @@ const JdListPage: NextPage = () => {
       router.replace({ pathname: INTERNAL_URL.JD_LIST, query: { page: 1, order: "recent" } });
     }
   }, [router]);
-
-  useEffect(() => {
-    if (router.query.page && firstRenderingRef.current) {
-      firstRenderingRef.current = false;
-      return;
-    }
-    if (!firstRenderingRef.current) {
-      const location = (scrollRef.current?.getBoundingClientRect().top as number) + window.pageYOffset - 250;
-      window.scrollTo(0, location);
-    }
-  }, [router.query.page]);
 
   return (
     <main>
@@ -84,7 +72,6 @@ const JdListPage: NextPage = () => {
               });
             }}
           />
-          <div ref={scrollRef} />
           <ListPart filterObj={filterObj} />
         </div>
       </Layout>

@@ -8,7 +8,7 @@ import { cssObj } from "./style";
 
 export const RecommendPart = () => {
   const { data: companyDataObj } = useCompanyArr({
-    order: "rand",
+    order: "pay",
     size: 4,
   });
 
