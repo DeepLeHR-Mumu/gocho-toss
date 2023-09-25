@@ -7,6 +7,7 @@ import { useUserJdHistoryArr } from "@/apis/jd/useUserJdHistoryArr";
 import { CompanyRow, JdRow } from "@/components";
 
 import { NoListCard } from "../../component";
+import { HISTORY_MAX_SIZE } from "./constant";
 import { RecentMenu } from "./type";
 import { cssObj } from "./style";
 
@@ -16,11 +17,11 @@ export const HistoryPart = () => {
   const { data: userInfo } = useUserInfo();
   const { data: companyHistoryObj } = useUserCompanyHistoryArr({
     userId: userInfo?.id,
-    size: 100,
+    size: HISTORY_MAX_SIZE,
   });
   const { data: jdHistoryObj } = useUserJdHistoryArr({
     userId: userInfo?.id,
-    size: 100,
+    size: HISTORY_MAX_SIZE,
   });
 
   return (
