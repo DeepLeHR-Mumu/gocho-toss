@@ -143,6 +143,8 @@ export const SearchModal = ({ close }: SearchModalProps) => {
                       hashTagArr: [company.industry],
                       bookmark: { state: company.isBookmark },
                     }}
+                    replace
+                    callback={close}
                   />
                 ))}
               </div>
@@ -161,6 +163,8 @@ export const SearchModal = ({ close }: SearchModalProps) => {
                       bookmarked: jd.isBookmark,
                       cut: jd.cut,
                     }}
+                    replace
+                    callback={close}
                   />
                 ))}
               </div>

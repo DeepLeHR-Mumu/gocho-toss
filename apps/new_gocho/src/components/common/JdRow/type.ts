@@ -8,4 +8,6 @@ export interface JdRowProps {
     cut?: boolean;
   };
   half?: boolean;
+  replace?: boolean;
+  callback?: () => void;
 }
