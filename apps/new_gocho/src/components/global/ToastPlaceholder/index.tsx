@@ -1,14 +1,15 @@
-import { FunctionComponent } from "react";
-
 import { Toast } from "shared-ui/deeple-ds";
 
-import { useToast } from "@/globalStates";
+import { useToast } from "@/globalStates/useToast";
 
-export const ToastPlaceholder: FunctionComponent = () => {
-  const { toastMessage } = useToast();
+export const ToastPlaceholder = () => {
+  const { toastStack } = useToast();
 
-  if (toastMessage) {
-    return <Toast>{toastMessage}</Toast>;
-  }
-  return null;
+  return (
+    <>
+      {toastStack.map((toast) => (
+        <Toast key={toast.id}>{toast.message}</Toast>
+      ))}
+    </>
+  );
 };
