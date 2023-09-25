@@ -10,6 +10,7 @@ import { JdPart } from "./part/JdPart";
 import { CompanyInfoPart } from "./part/CompanyInfoPart";
 import { ReviewPart } from "./part/ReviewPart";
 import { TitlePart } from "./part/TitlePart";
+import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
 const CompanyDetail: NextPage = () => {
@@ -32,6 +33,7 @@ const CompanyDetail: NextPage = () => {
 
   return (
     <main css={cssObj.background}>
+      <PageHead />
       <TitlePart />
       <Layout>
         {router.query.type === "company" && <CompanyInfoPart />}

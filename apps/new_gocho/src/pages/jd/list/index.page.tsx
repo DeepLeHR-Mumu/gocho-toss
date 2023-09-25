@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { Layout } from "@/components";
 import { INTERNAL_URL } from "@/pages/constants";
 
+import { PageHead } from "./pageHead";
 import {
   JOB_FILTER_KEY,
   PLACE_FILTER_KEY,
@@ -56,6 +57,7 @@ const JdListPage: NextPage = () => {
 
   return (
     <main>
+      <PageHead />
       <Layout>
         <div css={cssObj.wrapper}>
           <FilterPart

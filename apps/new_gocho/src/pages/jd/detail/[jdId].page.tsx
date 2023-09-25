@@ -13,6 +13,7 @@ import { TitlePart } from "./part/TitlePart";
 import { SummaryPart } from "./part/SummaryPart";
 import { DetailPart } from "./part/DetailPart";
 import { ReviewPart } from "./part/ReviewPart";
+import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
 const JdDetailPage: NextPage = () => {
@@ -38,8 +39,24 @@ const JdDetailPage: NextPage = () => {
     }
   }, [addJdViewCount, jdId]);
 
+  if (!jdDetailData) {
+    return null;
+  }
+
   return (
     <main>
+      <PageHead
+        option={{
+          id: jdDetailData.id,
+          title: jdDetailData.title,
+          companyName: jdDetailData.company.name,
+          rotation: jdDetailData.rotation_arr[0],
+          pay: jdDetailData.pay_arr && jdDetailData.pay_arr[0],
+          place: jdDetailData.place.address_arr && jdDetailData.place.address_arr[0],
+          possibleEdu: jdDetailData.possible_edu.summary,
+          taskDetail: jdDetailData.task_detail_arr[0],
+        }}
+      />
       <TitlePart
         jd={
           jdDetailData

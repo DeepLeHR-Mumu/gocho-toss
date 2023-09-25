@@ -14,6 +14,7 @@ import { DEFAULT_PAGE_SIZE } from "@/pages/constants";
 import { isQueryString } from "@/utils";
 
 import { Tab } from "./type";
+import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
 const SearchPage: NextPage = () => {
@@ -57,6 +58,7 @@ const SearchPage: NextPage = () => {
 
   return (
     <main>
+      <PageHead />
       <Layout>
         <div css={cssObj.wrapper}>
           <div css={cssObj.searchWrapper}>

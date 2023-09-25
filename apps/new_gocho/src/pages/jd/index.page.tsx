@@ -6,9 +6,11 @@ import { Layout } from "@/components";
 
 import { HotJd, JdSlider } from "./part";
 import { cssObj } from "./style";
+import { PageHead } from "./pageHead";
 
 const JdList: NextPage = () => (
   <main>
+    <PageHead />
     <Layout>
       <HotJd />
       <div css={cssObj.divider}>

@@ -11,10 +11,11 @@ import { useCompanyArr } from "@/apis/company";
 import { isQueryString } from "@/utils";
 
 import { HeaderTitle } from "../component/HeaderTitle";
+import { categoryArr } from "../part/CategoryPart/constant";
 import { FilterType, IndustryRouteType } from "./type";
 import { cssObj } from "./style";
+import { PageHead } from "./pageHead";
 import { filterOption } from "./constants";
-import { categoryArr } from "../part/CategoryPart/constant";
 
 const CompanyList: NextPage = () => {
   const [title, setTitle] = useState<string>("이름 순");
@@ -35,6 +36,7 @@ const CompanyList: NextPage = () => {
 
   return (
     <Layout>
+      <PageHead />
       <div css={cssObj.titleContainer}>
         <DropDown
           customTitle={
