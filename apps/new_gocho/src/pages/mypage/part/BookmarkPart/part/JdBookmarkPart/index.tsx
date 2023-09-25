@@ -30,7 +30,7 @@ export const JdBookmarkPart = () => {
     setIsExpiredJdView(!isExpiredJdView);
   };
 
-  return jdBookmarkDataObj?.pageResult.totalElements ? (
+  return (
     <>
       <div css={cssObj.wrapper}>
         <div css={cssObj.checkWrapper}>
@@ -64,16 +64,18 @@ export const JdBookmarkPart = () => {
           }}
         />
       </div>
-      <div css={cssObj.listWrapper}>
-        {jdBookmarkDataObj.userJdBookmarkArr.map(({ id, title, endTime, company }) => (
-          <JdRow
-            key={id}
-            jd={{ jdId: id, dueDate: endTime, jdTitle: title, bookmarked: true, companyName: company.name }}
-          />
-        ))}
-      </div>
+      {jdBookmarkDataObj?.pageResult.totalElements ? (
+        <div css={cssObj.listWrapper}>
+          {jdBookmarkDataObj?.userJdBookmarkArr.map(({ id, title, endTime, company }) => (
+            <JdRow
+              key={id}
+              jd={{ jdId: id, dueDate: endTime, jdTitle: title, bookmarked: true, companyName: company.name }}
+            />
+          ))}
+        </div>
+      ) : (
+        <NoListCard text="아직 찜한 공고가 없습니다." linkText="공고 보러가기" href={INTERNAL_URL.JD} />
+      )}
     </>
-  ) : (
-    <NoListCard text="아직 찜한 공고가 없습니다." linkText="공고 보러가기" href={INTERNAL_URL.JD} />
   );
 };
