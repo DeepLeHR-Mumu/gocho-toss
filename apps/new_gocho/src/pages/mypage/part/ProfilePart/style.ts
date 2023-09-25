@@ -44,10 +44,12 @@ export const cssObj = {
 
   uploadBox: css`
     position: absolute;
-    display: inline-block;
-    vertical-align: middle;
-    left: 5.25rem;
-    top: 5.25rem;
+    left: 5.375rem;
+    top: 5.375rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
     background-color: ${NEWCOLORS.GRAY100};
     border-radius: 2rem;
     width: 2.25rem;

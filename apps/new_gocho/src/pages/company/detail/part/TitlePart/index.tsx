@@ -9,7 +9,6 @@ import defaultCompanyLogo from "shared-image/global/common/default_company_logo.
 
 import { Layout, ShareModal, CompanyBookmark, SkeletonBox } from "@/components";
 import { useCompanyDetail } from "@/apis/company";
-import { useUserInfo } from "@/apis/auth";
 import { isQueryString } from "@/utils";
 import { INTERNAL_URL } from "@/pages/constants";
 import backgroundImage from "@/public/companyBackground.png";
@@ -22,7 +21,6 @@ export const TitlePart = () => {
   const companyId = isQueryString(router.query.companyId) ? Number(router.query.companyId) : undefined;
 
   const { data: companyData } = useCompanyDetail({ companyId, isStatic: false });
-  const { data: userData } = useUserInfo();
 
   if (!companyData) {
     return (
@@ -99,11 +97,9 @@ export const TitlePart = () => {
               <li css={cssObj.menu(router.query.type === "jd")}>
                 <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${router.query.companyId}?type=jd`}>채용정보</Link>
               </li>
-              {userData && (
-                <li css={cssObj.menu(router.query.type === "review")}>
-                  <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${router.query.companyId}?type=review`}>기업리뷰</Link>
-                </li>
-              )}
+              <li css={cssObj.menu(router.query.type === "review")}>
+                <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${router.query.companyId}?type=review`}>기업리뷰</Link>
+              </li>
             </ul>
           </nav>
         </Layout>

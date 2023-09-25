@@ -1,22 +1,25 @@
-import { FC, useRef, useState } from "react";
-
+import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { FiEdit3 } from "react-icons/fi";
 
 import { Profile, Button, Input } from "shared-ui/deeple-ds";
-
-import { FiEdit3 } from "react-icons/fi";
 
 import { useToast } from "@/globalStates";
 import { usePatchUserProfile, useUserInfo } from "@/apis/auth";
 
 import { cssObj } from "./style";
-import { NickNameInputs } from "./type";
+import { NicknameInput } from "./type";
 import { profileImgObjArr } from "./constant";
 import { convertToBlob, fileEncording } from "./utils";
 
 export const ProfilePart: FC = () => {
+  const [userProfilePreview, setUserProfilePreview] = useState<string>();
+  const [userProfile, setUserProfile] = useState<File | null>(null);
+  const [isProfileDirty, setIsProfileDirty] = useState<boolean>(false);
+
   const { data: userData } = useUserInfo();
   const { mutate: postProfile } = usePatchUserProfile();
+  const { setToastMessage } = useToast();
 
   const {
     register,
@@ -24,26 +27,21 @@ export const ProfilePart: FC = () => {
     setError,
     clearErrors,
     trigger,
-    formState: { errors, isValid },
-  } = useForm<NickNameInputs>({ mode: "onChange", defaultValues: { nickName: userData?.nickname || "" } });
+    reset,
+    formState: { errors, isDirty },
+  } = useForm<NicknameInput>({ mode: "onChange" });
 
-  const uploadDom = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    reset({ nickName: userData?.nickname });
+  }, [reset, userData]);
 
-  const [userProfile, setProfile] = useState<string>(userData?.image || "");
-  const [useProfileFile, setProfileFile] = useState<File | null>(null);
-  const { setToastMessage } = useToast();
-
-  const handleUploadButton = () => {
-    if (uploadDom.current) {
-      uploadDom.current.click();
-    }
-  };
+  const isFormDirty = isDirty || isProfileDirty;
 
   const handleProfileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const profile = event.target.files?.[0];
 
     if (profile) {
-      setProfileFile(profile);
+      setUserProfile(profile);
       clearErrors("nickName");
       trigger("nickName");
 
@@ -51,16 +49,23 @@ export const ProfilePart: FC = () => {
         const result = await fileEncording(profile);
 
         if (typeof result === "string") {
-          setProfile(result);
+          setUserProfilePreview(result);
+          setIsProfileDirty(true);
         }
       } catch (error) {
-        // TODO: 토스트로 알림주기
+        setToastMessage("파일 업로드 중 오류가 발생했습니다. 파일 양식을 확인하거나 다시 시도해 주세요.");
       }
     }
   };
 
-  const onSubmit: SubmitHandler<NickNameInputs> = (data) => {
+  const onSubmit: SubmitHandler<NicknameInput> = (data) => {
     if (!userData) return;
+
+    if (!isFormDirty) {
+      window.alert("변경사항이 없습니다.");
+      return;
+    }
+
     if (data.nickName.trim().length < 1) {
       setError("nickName", {
         type: "custom",
@@ -79,24 +84,17 @@ export const ProfilePart: FC = () => {
       },
       onSuccess: () => {
         setToastMessage("프로필 변경이 완료되었습니다");
-        setProfileFile(null);
+        setUserProfile(null);
+        setIsProfileDirty(false);
       },
     };
 
-    if (!useProfileFile && data.nickName === userData?.nickname) {
-      setError("nickName", {
-        type: "custom",
-        message: "닉네임이나 프로필을 변경해주세요.",
-      });
-      return;
-    }
-
-    if (useProfileFile) {
+    if (userProfile) {
       if (data.nickName === userData.nickname) {
         postProfile(
           {
             userId: userData.id,
-            image: useProfileFile,
+            image: userProfile,
           },
           queryOption
         );
@@ -106,7 +104,7 @@ export const ProfilePart: FC = () => {
       postProfile(
         {
           userId: userData.id,
-          image: useProfileFile,
+          image: userProfile,
           nickname: data.nickName,
         },
         queryOption
@@ -115,7 +113,7 @@ export const ProfilePart: FC = () => {
       return;
     }
 
-    if (!useProfileFile) {
+    if (!userProfile) {
       postProfile(
         {
           userId: userData.id,
@@ -130,47 +128,36 @@ export const ProfilePart: FC = () => {
     if (!userData) return;
 
     const random = Math.floor(Math.random() * 5);
-
     const profileBlob = await convertToBlob(profileImgObjArr[random].image);
-
     const profileFile = new File([profileBlob], `${profileImgObjArr[random].key}.png`, { type: "image/png" });
-
     const result = await fileEncording(profileFile);
-
     if (typeof result === "string") {
-      setProfile(result);
+      setUserProfile(profileFile);
+      setUserProfilePreview(result);
+      setIsProfileDirty(true);
     }
-
-    postProfile(
-      {
-        userId: userData?.id,
-        image: profileFile,
-      },
-      {
-        onSuccess: () => {
-          setToastMessage("프로필 변경이 완료되었습니다");
-          setProfileFile(null);
-        },
-      }
-    );
   };
 
   return (
     <form css={cssObj.contentWrapper} onSubmit={handleSubmit(onSubmit)}>
       <div css={cssObj.profileWrapper}>
         <div css={cssObj.profileBox}>
-          <Profile src={userProfile} size={120} altText={`${userData?.nickname} 유저 로고`} />
-          <button type="button" css={cssObj.uploadBox} onClick={handleUploadButton}>
+          {userProfilePreview ? (
+            <Profile src={userProfilePreview} size={120} altText={`${userData?.nickname} 유저 로고`} />
+          ) : (
+            <Profile src={userData?.image || ""} size={120} altText={`${userData?.nickname} 유저 로고`} />
+          )}
+          <label htmlFor="userProfile" css={cssObj.uploadBox}>
             <FiEdit3 css={cssObj.uploadIcon} />
-          </button>
-          <input
-            type="file"
-            accept="image/png, image/gif, image/jpeg, image/jpg"
-            aria-label="프로필 업로드"
-            css={cssObj.upload}
-            onChange={handleProfileChange}
-            ref={uploadDom}
-          />
+            <input
+              id="userProfile"
+              type="file"
+              accept="image/png, image/gif, image/jpeg, image/jpg"
+              aria-label="프로필 업로드"
+              css={cssObj.upload}
+              onChange={handleProfileChange}
+            />
+          </label>
         </div>
         <div>
           <button type="button" css={cssObj.basicProfileButton} onClick={handleBasicProfile}>
@@ -199,7 +186,7 @@ export const ProfilePart: FC = () => {
         />
       </div>
       <div css={cssObj.submitBox}>
-        <Button size="small" type="submit" color={isValid ? "active" : "disable"} disabled={!isValid}>
+        <Button size="small" type="submit" color={isFormDirty ? "active" : "disable"} disabled={!isFormDirty}>
           저장하기
         </Button>
       </div>

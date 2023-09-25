@@ -63,6 +63,7 @@ export const PasswordChangeForm: FC<PwdChangeFormProps> = ({ userData, handleFor
               state: errors.originPassword ? "error" : "default",
               message: errors.originPassword ? "기존의 비밀번호랑 일치하지 않습니다." : "",
             }}
+            maxLength={20}
             placeholder="기존의 비밀번호를 입력해 주세요"
             {...register("originPassword", {
               required: true,
@@ -80,6 +81,7 @@ export const PasswordChangeForm: FC<PwdChangeFormProps> = ({ userData, handleFor
               minLength: { value: 8, message: "8자 이상 입력해주세요." },
               maxLength: { value: 20, message: "최대 20자 까지 입력 가능합니다." },
             })}
+            maxLength={20}
             state={{
               state: errors.newPassword ? "error" : "default",
               message: errors.newPassword ? errors.newPassword.message : "",
@@ -98,6 +100,7 @@ export const PasswordChangeForm: FC<PwdChangeFormProps> = ({ userData, handleFor
               maxLength: { value: 20, message: "20자까지 입력 가능합니다." },
               validate: (checkPassword, formValues) => checkPassword === formValues.newPassword,
             })}
+            maxLength={20}
             state={{
               state: errors.checkPassword ? "error" : "default",
               message: errors.checkPassword ? "새로운 비밀번호랑 동일하지 않습니다." : "",
