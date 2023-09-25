@@ -1,6 +1,6 @@
 import { useUserProfile } from "@/apis/auth";
 
-export type NickNameInputs = {
+export type NicknameInput = {
   nickName: string;
 };
 
