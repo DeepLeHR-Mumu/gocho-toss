@@ -6,6 +6,7 @@ import { companyDetailKeyObj } from "@/constants/queryKeyFactory/company/company
 import { userBookmarkKeyObj } from "@/constants/queryKeyFactory/bookmark/bookmarkKeyObj";
 import { jdDetailKeyObj } from "@/constants/queryKeyFactory/jd/jdDetailKeyObj";
 import { companyKeywordArrKeyObj } from "@/apis/keyword/useCompanyKeywordArr/type";
+import { userCompanyHistoryArrKeyObj } from "@/constants/queryKeyFactory/company/companyHistoryKeyObj";
 
 import { axiosInstance } from "../../axiosInstance";
 import { PostCompanyBookmarkDef, RequestObjDef } from "./type";
@@ -26,6 +27,7 @@ export const useCompanyBookmarkToggle = () => {
       queryClient.invalidateQueries(userBookmarkKeyObj.companyAll);
       queryClient.invalidateQueries(jdDetailKeyObj.all);
       queryClient.invalidateQueries(companyKeywordArrKeyObj.all);
+      queryClient.invalidateQueries(userCompanyHistoryArrKeyObj.all);
     },
   });
 };
