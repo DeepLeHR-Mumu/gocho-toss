@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Button from ".";
+import { Button } from ".";
 
 const meta: Meta<typeof Button> = {
   component: Button,
@@ -7,8 +7,8 @@ const meta: Meta<typeof Button> = {
   decorators: [
     (Component, context) => (
       <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
-        {Component({ args: { size: "small", children: "smallButton", ...context.args } })}
-        {Component({ args: { size: "large", children: "largeButton", ...context.args } })}
+        {Component({ args: { ...context.args, size: "small", children: "smallButton" } })}
+        {Component({ args: { ...context.args, size: "large", children: "largeButton" } })}
       </div>
     ),
   ],
@@ -24,3 +24,4 @@ export const Disable: Story = { args: { children: "Disable", color: "disable" } 
 export const FillWhite: Story = { args: { children: "FillWhite", color: "fillWhite" } };
 export const OutlineGray: Story = { args: { children: "OutlineGray", color: "outlineGray" } };
 export const FillSelected: Story = { args: { children: "FillSelected", color: "fillSelected" } };
+export const Fill: Story = { args: { children: "Fill", fill: true, color: "active" } };

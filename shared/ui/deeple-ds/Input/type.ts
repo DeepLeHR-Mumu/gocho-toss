@@ -1,12 +1,6 @@
-import { InputHTMLAttributes, ReactNode } from "react";
+import { InputHTMLAttributes } from "react";
 
-export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "prefix" | "suffix" | "disabled"> {
-  label?: string;
-  prefix?: ReactNode;
-  suffix?: ReactNode;
-  state?: {
-    state: "default" | "disabled" | "error" | "success";
-    message?: string;
-  };
-  underline?: boolean;
-}
+import { InputWrapperProps } from "../InputWrapper/type";
+
+export type InputProps = Omit<InputWrapperProps, "children"> &
+  Omit<InputHTMLAttributes<HTMLInputElement>, "prefix" | "suffix" | "disabled" | "children">;

@@ -1,6 +1,14 @@
+import { SerializedStyles } from "@emotion/react";
 import { Key, ReactNode, ReactElement } from "react";
 
-export type MenuOption = { text: string; key?: Key; focused?: boolean; onClick?: () => void };
+export type MenuOption = {
+  content: ReactNode;
+  key?: Key;
+  focused?: boolean;
+  onClick?: () => void;
+  flexibleHeight?: boolean;
+  additionalButtonCss?: SerializedStyles;
+};
 
 export type MenuDirection = "top-left" | "top-right" | "bottom-left" | "bottom-right";
 
@@ -11,14 +19,18 @@ export type MenuLocation = {
 };
 
 export interface MenuProps {
-  width?: 128 | 180;
+  width?: number;
   options?: MenuOption[];
+  optionContainer?: { css?: SerializedStyles };
+  header?: Omit<MenuOption, "key" | "focused">;
   footer?: Omit<MenuOption, "key" | "focused">;
 }
 
 export interface DropDownProps {
   title?: string;
   icon?: { location?: "prefix" | "suffix"; whenMenuVisible?: ReactNode; whenMenuInvisible?: ReactNode };
+  isRightDirection?: boolean;
   customTitle?: ReactElement;
-  menu?: MenuProps & { direction?: MenuDirection };
+  menu?: MenuProps;
+  menuConfig?: { direction?: MenuDirection; closeAfterClickEvent?: boolean; flexibleHeight?: boolean };
 }

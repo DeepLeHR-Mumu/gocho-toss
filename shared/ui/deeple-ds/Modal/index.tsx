@@ -1,10 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 import { ModalProps } from "./type";
 import { cssObj } from "./style";
 
-const Modal = ({ children }: ModalProps) => {
+export const Modal = ({ portalId = "portal", children, ...props }: ModalProps) => {
+  const [isClient, setIsClient] = useState(false);
+
   useEffect(() => {
+    setIsClient(true);
+
     document.body.style.overflow = "hidden";
 
     return () => {
@@ -12,7 +17,14 @@ const Modal = ({ children }: ModalProps) => {
     };
   }, []);
 
-  return <div css={cssObj.layout}>{children}</div>;
-};
+  if (!isClient) {
+    return null;
+  }
 
-export default Modal;
+  return createPortal(
+    <div css={cssObj.layout} {...props}>
+      {children}
+    </div>,
+    document.getElementById(portalId) as HTMLElement
+  );
+};

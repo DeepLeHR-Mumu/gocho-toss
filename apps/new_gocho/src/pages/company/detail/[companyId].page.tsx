@@ -1,0 +1,54 @@
+import { useEffect, useRef } from "react";
+import { NextPage } from "next";
+import { useRouter } from "next/router";
+
+import { Layout } from "@/components";
+import { isQueryString } from "@/utils";
+import { companyDetailFunnelEvent } from "@/ga/company";
+import { useAddCompanyViewCount } from "@/apis/viewCount";
+
+import { JdPart } from "./part/JdPart";
+import { CompanyInfoPart } from "./part/CompanyInfoPart";
+import { ReviewPart } from "./part/ReviewPart";
+import { TitlePart } from "./part/TitlePart";
+import { PageHead } from "./pageHead";
+import { cssObj } from "./style";
+
+const CompanyDetail: NextPage = () => {
+  const isFirstRender = useRef(false);
+  const router = useRouter();
+  const { mutate: addViewCount } = useAddCompanyViewCount();
+
+  useEffect(() => {
+    if (router.isReady && !isQueryString(router.query.type)) {
+      router.replace({ pathname: router.pathname, query: { companyId: router.query.companyId, type: "company" } });
+    }
+  }, [router]);
+
+  useEffect(() => {
+    if (router.query.companyId && !isFirstRender.current) {
+      isFirstRender.current = true;
+      addViewCount({ companyId: Number(router.query.companyId) });
+    }
+  }, [router.query.companyId, addViewCount]);
+
+  useEffect(() => {
+    if (router.isReady) {
+      companyDetailFunnelEvent(Number(router.query.companyId));
+    }
+  }, [router.isReady, router.query.companyId]);
+
+  return (
+    <main css={cssObj.background}>
+      <PageHead />
+      <TitlePart />
+      <Layout>
+        {router.query.type === "company" && <CompanyInfoPart />}
+        {router.query.type === "jd" && <JdPart />}
+        {router.query.type === "review" && <ReviewPart />}
+      </Layout>
+    </main>
+  );
+};
+
+export default CompanyDetail;

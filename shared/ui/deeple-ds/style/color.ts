@@ -18,6 +18,7 @@ export const buttonColor = {
     border: 1px solid ${NEWCOLORS.GRAY200};
     background-color: ${NEWCOLORS.GRAY200};
     color: ${NEWCOLORS.GRAY300};
+    cursor: default;
   `,
 
   fillWhite: css`
@@ -100,7 +101,7 @@ export const chipColor = {
 export const dDayChipColor = {
   fillBlue: css`
     border: none;
-    background-color: ${NEWCOLORS.BLUE200};
+    background-color: ${NEWCOLORS.BLUE100};
     color: ${NEWCOLORS.BLUE300};
   `,
 

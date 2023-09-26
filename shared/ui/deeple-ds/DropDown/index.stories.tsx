@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Profile from "deeple-ds/Profile";
+import { Profile } from "deeple-ds/Profile";
 
 import testSmallImage1 from "shared-image/global/common/cho_color.svg";
 
-import DropDown from ".";
+import { DropDown } from ".";
 
 const meta: Meta<typeof DropDown> = {
   component: DropDown,
@@ -26,13 +26,24 @@ export const Default: Story = {};
 export const WithMenu: Story = {
   args: {
     title: "Title",
-    menu: { options: [{ text: "option 1", focused: true }, { text: "option 2" }], footer: { text: "footer" } },
+    menu: { options: [{ content: "option 1", focused: true }, { content: "option 2" }], footer: { content: "footer" } },
   },
 };
 
 export const CustomTitle: Story = {
   args: {
-    customTitle: <Profile src={testSmallImage1} />,
-    menu: { options: [{ text: "option 1", focused: true }, { text: "option 2" }], footer: { text: "footer" } },
+    customTitle: <Profile src={testSmallImage1} altText="test profile alt" />,
+    menu: { options: [{ content: "option 1", focused: true }, { content: "option 2" }], footer: { content: "footer" } },
+  },
+};
+
+export const FlexibleHeight: Story = {
+  args: {
+    customTitle: <Profile src={testSmallImage1} altText="test profile alt 2" />,
+    menu: {
+      options: [{ content: <div style={{ height: "23rem" }}>option 1</div>, focused: true }, { content: "option 2" }],
+      footer: { content: "footer" },
+    },
+    menuConfig: { flexibleHeight: true },
   },
 };

@@ -10,24 +10,32 @@ export const menuCssObj = {
     border: 1px solid ${NEWCOLORS.BLACK};
     border-radius: 0.75rem;
     background-color: ${NEWCOLORS.WHITE};
+    overflow: hidden;
   `,
 
-  option: (focused: boolean, clickable: boolean) => css`
-    height: 2.5rem;
+  optionContainer: css`
+    height: 29.25rem;
+    overflow: auto;
+  `,
+
+  option: (focused: boolean, clickable: boolean, flexibleHeight?: boolean) => css`
+    height: ${flexibleHeight ? "auto" : "2.5rem"};
     display: flex;
     flex-direction: row;
     padding: 0.625rem 1rem;
     color: ${focused ? NEWCOLORS.BLUE300 : NEWCOLORS.BLACK};
     cursor: ${clickable ? "pointer" : "auto"};
-    ${NEWTEXTS.TITLE7}
+    ${focused ? NEWTEXTS.TITLE9 : NEWTEXTS.TITLE7};
+  `,
+
+  header: (clickable: boolean) => css`
+    padding: 1rem;
+    cursor: ${clickable ? "pointer" : "auto"};
   `,
 
   footer: (clickable: boolean) => css`
     padding: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
     border-radius: 0 0 0.75rem 0.75rem;
     cursor: ${clickable ? "pointer" : "auto"};
     background-color: ${NEWCOLORS.GRAY50};
@@ -48,12 +56,17 @@ export const dropDownCssObj = {
     ${NEWTEXTS.TITLE7}
   `,
 
-  menuWrapper: (location: MenuLocation) => {
+  // ${directionTopOrBottom}: ${location.topOrBottom}rem;
+
+  menuWrapper: (location: MenuLocation, isRightDirection = true) => {
     const [directionTopOrBottom, directionLeftOrRight] = location.direction.split("-");
     return css`
       position: absolute;
+      z-index: 50;
       ${directionTopOrBottom}: ${location.topOrBottom}rem;
-      ${directionLeftOrRight}: ${location.leftOrRight}rem;
+      ${isRightDirection
+        ? `${directionLeftOrRight}: ${location.leftOrRight}rem;`
+        : `${directionLeftOrRight}: 100vh - ${location.leftOrRight}rem;`}
     `;
   },
 };

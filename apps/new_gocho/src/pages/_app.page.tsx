@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -11,9 +11,12 @@ import { datadogRum } from "@datadog/browser-rum";
 import ReactGA from "react-ga4";
 
 import { KEY, FB_PIXEL_ID } from "shared-constant";
-import { useAxiosInterceptor } from "shared-api/axiosInstance";
 
+import { useAxiosInterceptor } from "@/apis/axiosInstance";
+import { useSetDeviceType } from "@/globalStates";
 import { globalStyle } from "@/styles/globalStyle";
+import { GlobalNavigationBar, Footer, ToastPlaceholder } from "@/components";
+import {} from "@/components/global/Footer";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -47,28 +50,61 @@ declare global {
 
 function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const isFirstRender = useRef<boolean>(true);
   ReactGA.initialize(KEY);
 
-  const [queryClient] = useState(() => {
-    return new QueryClient({
-      defaultOptions: {
-        queries: {
-          staleTime: 15000,
-          refetchOnWindowFocus: false,
-          keepPreviousData: true,
-          retry: 0,
-          onError: (error) => {
-            if (axios.isAxiosError(error) && error.response?.status === 404) {
-              router.push("/404");
-            }
-            if (axios.isAxiosError(error) && error.response?.status === 500) {
-              router.push("/500");
-            }
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 15000,
+            refetchOnWindowFocus: false,
+            keepPreviousData: true,
+            retry: 0,
+            onError: (error) => {
+              if (axios.isAxiosError(error) && error.response?.status === 404) {
+                router.push("/404");
+              }
+              if (axios.isAxiosError(error) && error.response?.status === 500) {
+                router.push("/500");
+              }
+            },
           },
         },
-      },
-    });
-  });
+      })
+  );
+
+  useEffect(() => {
+    const isMobile = [
+      /Android/i,
+      /webOS/i,
+      /iPhone/i,
+      /iPad/i,
+      /iPod/i,
+      /BlackBerry/i,
+      /Windows Phone/i,
+      /Mobile/i,
+    ].some((toMatchItem) => navigator.userAgent.match(toMatchItem));
+    const isVercel = window.location.href.includes("vercel");
+    const isLocal = window.location.href.includes("localhost");
+
+    const { host, pathname, protocol, search } = window.location;
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+
+      if (isVercel || isLocal || !isMobile) {
+        return;
+      }
+
+      if (host.includes("www")) {
+        const mobileHost = host.slice(host.indexOf(".") + 1);
+        window.location.href = `${protocol}//m.${mobileHost}${pathname}${search}`;
+        return;
+      }
+      window.location.href = `${protocol}//m.${host}${pathname}${search}`;
+    }
+  }, []);
 
   useEffect(() => {
     const pageview = () => {
@@ -91,6 +127,8 @@ function App({ Component, pageProps }: AppProps) {
       window.Kakao.init("0687bed33c060c4758f582d26ff44e16");
     }
   }, []);
+
+  useSetDeviceType();
 
   useAxiosInterceptor();
 
@@ -119,7 +157,10 @@ function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <Global styles={globalStyle} />
+          <GlobalNavigationBar />
+          <ToastPlaceholder />
           <Component {...pageProps} />
+          <Footer />
           <ReactQueryDevtools initialIsOpen={false} />
         </Hydrate>
       </QueryClientProvider>

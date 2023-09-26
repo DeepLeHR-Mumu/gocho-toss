@@ -1,8 +1,40 @@
+import { ForwardRefRenderFunction, forwardRef, useState, useCallback, ChangeEvent } from "react";
+import { FiCheck } from "react-icons/fi";
 import { CheckboxProps } from "./type";
 import { cssObj } from "./style";
 
-const Checkbox = ({ id, disabled, checked, onChange }: CheckboxProps) => (
-  <input type="checkbox" css={cssObj.checkbox} id={id} disabled={disabled} checked={checked} onChange={onChange} />
-);
+export const ForwardedCheckbox: ForwardRefRenderFunction<HTMLInputElement, CheckboxProps> = (props, ref) => {
+  const { onChange, checked } = props;
 
-export default Checkbox;
+  const [isChecked, setIsChecked] = useState(checked ?? false);
+
+  const toggleCheck = useCallback(() => {
+    setIsChecked((prev) => !prev);
+    if (onChange) {
+      onChange({ target: { checked: !isChecked } } as ChangeEvent<HTMLInputElement>);
+    }
+  }, [isChecked, onChange]);
+
+  return (
+    <div>
+      <button type="button" css={cssObj.check(isChecked)} onClick={toggleCheck}>
+        {isChecked && <FiCheck />}
+      </button>
+      <input
+        type="checkbox"
+        css={cssObj.checkbox}
+        checked={isChecked}
+        {...props}
+        ref={ref}
+        onChange={(e) => {
+          setIsChecked(e.target.checked);
+          if (onChange) {
+            onChange(e);
+          }
+        }}
+      />
+    </div>
+  );
+};
+
+export const Checkbox = forwardRef(ForwardedCheckbox);

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { DESKTOP, TABLET } from "shared-style/mediaQuery";
+import { NEWCOLORS } from "shared-style/color";
 
 export const globalStyle = css`
   * {
@@ -94,16 +94,10 @@ export const globalStyle = css`
     vertical-align: baseline;
   }
   html {
-    font-family: "Noto Sans KR", Verdana, sans-serif;
-    min-width: 768px;
-    /* overflow-x: hidden; */
+    font-family: Pretendard Variable, serif;
+    color: ${NEWCOLORS.BLACK};
+    min-width: 1200px;
     font-size: 16px;
-    ${DESKTOP} {
-      font-size: 14px;
-    }
-    ${TABLET} {
-      font-size: 12px;
-    }
   }
   /* HTML5 display-role reset for older browsers */
   article,
@@ -135,7 +129,6 @@ export const globalStyle = css`
   q:before,
   q:after {
     content: "";
-    content: none;
   }
   table {
     border-collapse: collapse;
@@ -187,6 +180,24 @@ export const globalStyle = css`
     :focus-visible {
       outline: none;
     }
+  }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-text-fill-color: #000;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+  input:autofill,
+  input:autofill:hover,
+  input:autofill:focus,
+  input:autofill:active {
+    -webkit-text-fill-color: #000;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
   }
   textarea {
     font-family: "Noto Sans KR", Verdana, sans-serif;

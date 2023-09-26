@@ -17,11 +17,25 @@ export const cssObj = {
     :focus-within {
       border: 1px solid ${NEWCOLORS.BLUE200};
     }
+
+    input::-ms-clear,
+    input::-ms-reveal {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+    input::-webkit-search-decoration,
+    input::-webkit-search-cancel-button,
+    input::-webkit-search-results-button,
+    input::-webkit-search-results-decoration {
+      display: none;
+    }
   `,
 
   searchIcon: css`
     width: 1.5rem;
     height: 1.5rem;
+    color: ${NEWCOLORS.BLUE300};
 
     ${MOBILE} {
       width: 1.25rem;
@@ -54,5 +68,9 @@ export const cssObj = {
 
   grayLine: css`
     border: 1px solid ${NEWCOLORS.GRAY200};
+  `,
+
+  gray: css`
+    background-color: ${NEWCOLORS.GRAY50};
   `,
 };

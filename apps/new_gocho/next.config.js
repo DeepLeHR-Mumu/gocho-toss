@@ -8,8 +8,11 @@ const nextConfig = {
   images: {
     domains: [`cdn.gocho-back.com`, "devcdn.gocho-back.com"],
     formats: ["image/avif", "image/webp"],
-    deviceSizes: [1256],
+    deviceSizes: [1200],
     imageSizes: [],
+  },
+  compiler: {
+    emotion: true,
   },
   pageExtensions: ["page.tsx"],
   transpilePackages: [

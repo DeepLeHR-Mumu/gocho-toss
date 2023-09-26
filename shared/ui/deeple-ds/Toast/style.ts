@@ -11,6 +11,25 @@ export const cssObj = {
     opacity: 0.65;
     background-color: ${NEWCOLORS.BLACK};
     color: ${NEWCOLORS.WHITE};
+    position: relative;
+    top: -17%;
+    transform: translate(-50%, 0);
+    z-index: 110;
+
+    animation: upAndFadeOut 3.2s forwards cubic-bezier(0.69, 0, 0.23, 1);
+
+    @keyframes upAndFadeOut {
+      from {
+        top: 10%;
+      }
+      20% {
+        top: -18%;
+      }
+      30% {
+        top: -17%;
+      }
+    }
+
     ${NEWTEXTS.TITLE7}
 
     ${MOBILE} {

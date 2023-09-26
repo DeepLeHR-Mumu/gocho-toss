@@ -1,9 +1,8 @@
-import { ChangeEventHandler, ReactNode } from "react";
+import { ReactNode, InputHTMLAttributes } from "react";
 
-export interface SearchBarProps {
+export interface SearchBarProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "prefix" | "type"> {
   border?: "grayLine";
   prefix?: ReactNode;
   suffix?: ReactNode;
-  value?: string;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
+  color?: "gray";
 }

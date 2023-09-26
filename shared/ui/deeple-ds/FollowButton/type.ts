@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from "react";
 
-import { FollowButtonColor } from "deeple-ds/type";
+import { FollowButtonColor } from "../type";
 
 export interface FollowButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color?: FollowButtonColor;

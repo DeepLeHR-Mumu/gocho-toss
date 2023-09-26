@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import FollowButton from ".";
+import { FollowButton } from ".";
 
 const meta: Meta<typeof FollowButton> = {
   component: FollowButton,

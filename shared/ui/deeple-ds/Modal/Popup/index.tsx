@@ -1,13 +1,13 @@
 import { FiX } from "react-icons/fi";
 
-import Divider from "../../Divider";
-import Button from "../../Button";
-import Modal from "..";
+import { Divider } from "../../Divider";
+import { Button } from "../../Button";
+import { Modal } from "..";
 
 import { PopupProps } from "./type";
 import { cssObj } from "./style";
 
-const Popup = ({ title, description, closeHandler, cancel, confirm }: PopupProps) => (
+export const Popup = ({ title, description, closeHandler, cancel, confirm }: PopupProps) => (
   <Modal>
     <div css={cssObj.wrapper}>
       <div css={cssObj.header}>
@@ -42,5 +42,3 @@ const Popup = ({ title, description, closeHandler, cancel, confirm }: PopupProps
     </div>
   </Modal>
 );
-
-export default Popup;

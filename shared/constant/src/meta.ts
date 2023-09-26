@@ -86,6 +86,24 @@ export const COMPANY_RECRUIT_META = {
   ogAuthor: "고초대졸닷컴 | 생산직 취업의 새로운 기준",
 };
 
+export const COMPANY_LIST_META = {
+  keywords: `공장,채용,연봉,복지,통근버스,노조,기숙사,${defaultKeyword}`,
+  ogTitle: "기업 리스트 - 고초대졸닷컴",
+  ogDesc: "생산직 채용 기업들을 한눈에 확인해보세요!",
+  ogSiteName: "고초대졸닷컴 | 기업 리스트",
+  ogImage: `${CDN_URL}og_image/company.png`,
+  ogAuthor: "고초대졸닷컴 | 생산직 취업의 새로운 기준",
+};
+
+export const COMPANY_META = {
+  keywords: `공장,채용,연봉,복지,통근버스,노조,기숙사,${defaultKeyword}`,
+  ogTitle: "기업 홈 - 고초대졸닷컴",
+  ogDesc: "생산직 채용에 관련된 기업 정보를 한눈에 확인해보세요!",
+  ogSiteName: "고초대졸닷컴 | 기업 홈",
+  ogImage: `${CDN_URL}og_image/company.png`,
+  ogAuthor: "고초대졸닷컴 | 생산직 취업의 새로운 기준",
+};
+
 export const SPEC_DETAIL_META = {
   ogTitle: "님의 생산직 스펙평가 - 고초대졸닷컴",
   ogSiteName: "고초대졸닷컴 | 스펙상세",
@@ -161,6 +179,17 @@ export const JD_LIST_META = {
   desc: "고초대졸닷컴은 생산직 현장직 기능직에 특화된 자세한 채용공고를 제공합니다. 어디에서도 볼 수 없는 빠르고 정확한 생산직 공고를 느껴보세요! 생산직 취업의 새로운 기준, 고초대졸닷컴.",
   keywords: defaultKeyword,
   ogTitle: "실시간 생산직 채용공고 - 고초대졸닷컴",
+  ogDesc: "어디에서도 볼 수 없는 빠르고 정확한 생산직 채용공고를 느껴보세요! ",
+  ogSiteName: "고초대졸닷컴 | 채용공고",
+  ogImage: `${CDN_URL}og_image/jd.png`,
+  ogAuthor: "고초대졸닷컴 | 생산직 취업의 새로운 기준",
+};
+
+export const JD_NOW_HIRING_META = {
+  title: "지금 채용중 공고 - 고초대졸닷컴",
+  desc: "생산직 취업정보 찾으러 이리저리 헤매지말고 고초대졸닷컴으로 취업 준비 끝! 지금까지 어디에서도 볼 수 없었던 생산직 공고 모음을 이곳에서 확인해보세요",
+  keywords: defaultKeyword,
+  ogTitle: "지금 채용중 공고 - 고초대졸닷컴",
   ogDesc: "어디에서도 볼 수 없는 빠르고 정확한 생산직 채용공고를 느껴보세요! ",
   ogSiteName: "고초대졸닷컴 | 채용공고",
   ogImage: `${CDN_URL}og_image/jd.png`,

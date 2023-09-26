@@ -4,16 +4,15 @@ import { buttonColor } from "../style/color";
 import { ButtonProps } from "./type";
 import { cssObj } from "./style";
 
-const Button = ({ size, color = "active", children, ...props }: ButtonProps) => (
-  // eslint-disable-next-line react/button-has-type
+export const Button = ({ size, color = "active", fill, children, ...props }: ButtonProps) => (
   <button
+    type="button"
     css={css`
-      ${cssObj.default}${size ? cssObj[size] : ""}${buttonColor[color]}
+      ${cssObj.buttonWrapper(size, fill)}${buttonColor[color]}
     `}
     {...props}
+    disabled={color === "disable"}
   >
     {children}
   </button>
 );
-
-export default Button;

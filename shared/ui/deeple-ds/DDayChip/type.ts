@@ -1,8 +1,5 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
-
-import { DDayChipColor } from "deeple-ds/type";
+import { ButtonHTMLAttributes } from "react";
 
 export interface DDayChipProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children?: ReactNode;
-  color?: DDayChipColor;
+  endTime: string;
 }
