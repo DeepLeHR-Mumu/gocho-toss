@@ -5,7 +5,7 @@ export const Executives = ({ maleNumber, femaleNumber }: ExecutivesProps) => {
   const total = maleNumber + femaleNumber;
   const maleRatio = Math.floor((maleNumber / total) * 100);
 
-  return (
+  return total ? (
     <div css={cssObj.wrapper}>
       <div css={cssObj.simpleChartWrapper}>
         <div css={cssObj.maleBar(maleRatio)} />
@@ -14,5 +14,7 @@ export const Executives = ({ maleNumber, femaleNumber }: ExecutivesProps) => {
       <span css={cssObj.contentTitle}>임직원</span>
       <span css={cssObj.content}>{total}명</span>
     </div>
+  ) : (
+    <> </>
   );
 };

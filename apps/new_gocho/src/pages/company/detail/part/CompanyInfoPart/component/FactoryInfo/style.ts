@@ -47,6 +47,8 @@ export const cssObj = {
   summaryWrapper: css`
     display: flex;
     flex-direction: row;
+    width: 32rem;
+    justify-content: center;
     gap: 2.5rem;
   `,
 

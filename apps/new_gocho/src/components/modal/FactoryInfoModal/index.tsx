@@ -16,30 +16,30 @@ export const FactoryInfoModal = ({
   dormitory,
   close,
 }: FactoryInfoModalProps) => (
-    <Modal>
-      <div css={cssObj.wrapper}>
-        <div css={cssObj.header}>
-          <h3 css={cssObj.title}>공장정보</h3>
-          <button type="button" onClick={close}>
-            <FiX css={cssObj.close} />
-          </button>
-        </div>
-        <div css={cssObj.infoWrapper}>
-          <div css={cssObj.infoTitleWrapper}>
-            <FiMapPin css={cssObj.mapIcon} />
-            <h3 css={cssObj.infoTitle}>{name}</h3>
-            <span css={cssObj.infoSubtitle}>{product}</span>
-          </div>
-          <div css={cssObj.contentWrapper}>
-            <Executives maleNumber={male_number} femaleNumber={female_number} />
-            <Bus bus={bus.exists} />
-            <Dormitory dormitory={dormitory.exists} />
-          </div>
-          <ul css={cssObj.descriptionList}>
-            {bus.desc && <li>통근버스: {bus.desc}</li>}
-            {dormitory.desc && <li>기숙사: {dormitory.desc}</li>}
-          </ul>
-        </div>
+  <Modal>
+    <div css={cssObj.wrapper}>
+      <div css={cssObj.header}>
+        <h3 css={cssObj.title}>공장정보</h3>
+        <button type="button" onClick={close}>
+          <FiX css={cssObj.close} />
+        </button>
       </div>
-    </Modal>
-  );
+      <div css={cssObj.infoWrapper}>
+        <div css={cssObj.infoTitleWrapper}>
+          <FiMapPin css={cssObj.mapIcon} />
+          <h3 css={cssObj.infoTitle}>{name}</h3>
+          <span css={cssObj.infoSubtitle}>{product}</span>
+        </div>
+        <div css={cssObj.contentWrapper}>
+          <Executives maleNumber={male_number} femaleNumber={female_number} />
+          <Bus bus={bus.exists} />
+          <Dormitory dormitory={dormitory.exists} />
+        </div>
+        <ul css={cssObj.descriptionList}>
+          {bus.desc && <li>통근버스: {bus.desc}</li>}
+          {dormitory.desc && <li>기숙사: {dormitory.desc}</li>}
+        </ul>
+      </div>
+    </div>
+  </Modal>
+);

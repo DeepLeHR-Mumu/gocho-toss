@@ -200,7 +200,7 @@ export const getReceptionGuideContents = (receptionGuide: {
     receptionGuideContents["기타사항"] = createElement(
       "div",
       { style: { display: "flex", flexDirection: "column", gap: "1rem" } },
-      etcArr.map((etc) => createElement("p", {}, etc))
+      etcArr.map((etc) => createElement("p", { key: `ReceptionGuide${etc}` }, etc))
     );
   }
 

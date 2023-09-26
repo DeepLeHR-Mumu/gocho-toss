@@ -37,8 +37,9 @@ export const cssObj = {
     padding: 0.25rem 1.25rem;
     margin: 1rem 0;
     display: flex;
-    flex-direction: row;
+    width: 100%;
     align-items: center;
+    flex-direction: row;
     justify-content: space-between;
     gap: 1.75rem;
   `,
@@ -46,6 +47,10 @@ export const cssObj = {
   word: css`
     margin-right: auto;
     ${NEWTEXTS.TITLE7}
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflox: ellipsis;
+    word-breal: break-all;
   `,
 
   arrow: css`

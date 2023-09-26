@@ -36,7 +36,7 @@ export const Footer: FunctionComponent = () => {
                   연락처 : 010-6680-8170
                 </a>
               </div>
-              <p css={cssObj.info}>서울특별시 서초구 강남대로 311, 드림플러스 1203호/ 1204호</p>
+              <p css={cssObj.info}>서울특별시 서초구 강남대로 311, 드림플러스 1714호</p>
             </div>
             {!isMobile && <p css={cssObj.info}>copyright by 주식회사 디플에이치알 All rights reserved.</p>}
           </div>

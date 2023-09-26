@@ -75,7 +75,7 @@ export const useAxiosInterceptor = () => {
   const requestConfigHandler = async (config: AxiosRequestConfig) => {
     const accessTokenData = localStorage.getItem("accessToken");
     const refreshTokenData = localStorage.getItem("refreshToken");
-    const matchingUrlReGex = /^(?!.*comments)(?!.*bookmark).*\b(companies|jds|keywords)\b.*$/i;
+    const matchingUrlReGex = /^(?!.*comments)(?!.*bookmark).*\b(companies|jds|keywords|ads)\b.*$/i;
 
     // 0. token 없는 경우
     if (!accessTokenData || !refreshTokenData) {
@@ -86,7 +86,7 @@ export const useAxiosInterceptor = () => {
 
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      throw new axios.Cancel("RequestConfig - No Token");
+      throw new axios.Cancel(`RequestConfig - No Token (${config.url})`);
     }
 
     const { exp: accessTokenExp } = tokenDecryptor(accessTokenData);
@@ -162,8 +162,11 @@ export const useAxiosInterceptor = () => {
     (error) => responseErrorHandler(error)
   );
 
-  useEffect(() => () => {
+  useEffect(
+    () => () => {
       axiosInstance.interceptors.request.eject(requestInterceptor);
       axiosInstance.interceptors.response.eject(responseInterceptor);
-    }, [requestInterceptor, responseInterceptor]);
+    },
+    [requestInterceptor, responseInterceptor]
+  );
 };
