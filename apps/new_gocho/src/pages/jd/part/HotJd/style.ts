@@ -1,13 +1,13 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
 import { NEWCOLORS } from "shared-style/color";
-import { MOBILE } from "shared-style/mediaQuery";
+import { TEMP } from "shared-style/mediaQuery";
 
 export const cssObj = {
   sectionContainer: css`
     margin: 3rem 0;
 
-    ${MOBILE} {
+    ${TEMP} {
       margin: 1.5rem 0;
     }
   `,
@@ -20,7 +20,7 @@ export const cssObj = {
   title: css`
     ${NEWTEXTS.TITLE15};
 
-    ${MOBILE} {
+    ${TEMP} {
       ${NEWTEXTS.TITLE9};
     }
   `,
@@ -36,7 +36,7 @@ export const cssObj = {
     border-radius: 50%;
     border: 1px solid ${NEWCOLORS.GRAY200};
 
-    ${MOBILE} {
+    ${TEMP} {
       display: none;
     }
 
@@ -56,7 +56,7 @@ export const cssObj = {
       width: calc(100% - 17.25rem);
     }
 
-    ${MOBILE} {
+    ${TEMP} {
       margin-top: 1.5rem;
     }
   `,
@@ -71,7 +71,7 @@ export const cssObj = {
     background-color: ${NEWCOLORS.BLUE400};
     border-radius: 0.5rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       width: 8.75rem;
       height: 12.25rem;
       padding: 1rem 0.75rem;
@@ -82,7 +82,7 @@ export const cssObj = {
     ${NEWTEXTS.TITLE16};
     color: ${NEWCOLORS.WHITE};
 
-    ${MOBILE} {
+    ${TEMP} {
       ${NEWTEXTS.TITLE14};
     }
   `,
@@ -94,7 +94,7 @@ export const cssObj = {
     cursor: pointer;
     margin-top: 1rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       ${NEWTEXTS.TITLE1};
     }
   `,
@@ -107,7 +107,7 @@ export const cssObj = {
     right: 0.5rem;
     margin: 0 0 0 auto;
 
-    ${MOBILE} {
+    ${TEMP} {
       width: 3.75rem;
       height: 5.125rem;
     }

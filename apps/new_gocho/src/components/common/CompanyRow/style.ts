@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { NEWCOLORS } from "shared-style/color";
-import { MOBILE } from "shared-style/mediaQuery";
+import { TEMP } from "shared-style/mediaQuery";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -12,7 +12,7 @@ export const cssObj = {
     border-radius: 1rem;
     border: ${border ? `1px solid ${NEWCOLORS.GRAY200}` : "none"};
 
-    ${MOBILE} {
+    ${TEMP} {
       padding: 0.75rem 0;
     }
   `,
@@ -36,7 +36,7 @@ export const cssObj = {
     color: ${NEWCOLORS.BLACK};
     ${NEWTEXTS.TITLE12}
 
-    ${MOBILE} {
+    ${TEMP} {
       ${NEWTEXTS.TITLE9}
     }
   `,
@@ -45,7 +45,7 @@ export const cssObj = {
     color: ${NEWCOLORS.BLUEGRAY400};
     ${NEWTEXTS.TITLE4}
 
-    ${MOBILE} {
+    ${TEMP} {
       ${NEWTEXTS.TITLE1}
     }
   `,

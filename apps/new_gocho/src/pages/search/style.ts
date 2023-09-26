@@ -1,14 +1,14 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
 import { NEWCOLORS } from "shared-style/color";
-import { MOBILE } from "shared-style/mediaQuery";
+import { TEMP } from "shared-style/mediaQuery";
 
 export const cssObj = {
   wrapper: css`
     padding-top: 2.4375rem;
     width: 100%;
 
-    ${MOBILE} {
+    ${TEMP} {
       padding-top: 0.375rem;
     }
   `,
@@ -17,7 +17,7 @@ export const cssObj = {
     max-width: 46.5rem;
     margin: 0 auto 3rem auto;
 
-    ${MOBILE} {
+    ${TEMP} {
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -32,7 +32,7 @@ export const cssObj = {
     border-bottom: 1px solid ${NEWCOLORS.GRAY200};
     margin-bottom: 2.5rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       margin-bottom: 1.125rem;
     }
   `,
@@ -57,7 +57,7 @@ export const cssObj = {
     gap: 1rem;
     min-height: 20rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       padding-top: 1.125rem;
     }
   `,
@@ -69,7 +69,7 @@ export const cssObj = {
       color: ${NEWCOLORS.BLACK};
       ${NEWTEXTS.TITLE7}
 
-      ${MOBILE} {
+      ${TEMP} {
         color: ${NEWCOLORS.BLUE300};
         ${NEWTEXTS.TITLE4}
       }
@@ -79,7 +79,7 @@ export const cssObj = {
       color: ${NEWCOLORS.BLUEGRAY400};
       ${NEWTEXTS.TITLE7}
 
-      ${MOBILE} {
+      ${TEMP} {
         color: ${NEWCOLORS.BLACK};
         ${NEWTEXTS.TITLE4}
       }

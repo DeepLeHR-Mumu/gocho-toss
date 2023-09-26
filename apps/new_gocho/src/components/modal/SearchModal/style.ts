@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { NEWCOLORS } from "shared-style/color";
-import { MOBILE } from "shared-style/mediaQuery";
+import { TEMP } from "shared-style/mediaQuery";
 import { NEWTEXTS } from "shared-style/text";
 import { shorten } from "shared-style/common";
 
@@ -26,7 +26,7 @@ export const cssObj = {
     display: flex;
     flex-direction: column;
 
-    ${MOBILE} {
+    ${TEMP} {
       padding-left: 1rem;
       padding-right: 1rem;
     }
@@ -89,7 +89,7 @@ export const cssObj = {
     flex-wrap: wrap;
     margin-bottom: 2rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       overflow-x: auto;
       flex-wrap: nowrap;
     }
@@ -105,7 +105,7 @@ export const cssObj = {
     flex-direction: row;
     gap: 1rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       overflow-x: auto;
     }
   `,
@@ -120,7 +120,7 @@ export const cssObj = {
     flex-direction: row;
     justify-content: space-between;
 
-    ${MOBILE} {
+    ${TEMP} {
       overflow-x: auto;
       gap: 0.75rem;
     }

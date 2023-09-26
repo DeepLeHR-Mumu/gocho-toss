@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -13,7 +13,7 @@ import ReactGA from "react-ga4";
 import { KEY, FB_PIXEL_ID } from "shared-constant";
 
 import { useAxiosInterceptor } from "@/apis/axiosInstance";
-import { useSetDeviceType, useGetDeviceType } from "@/globalStates";
+import { useSetDeviceType } from "@/globalStates";
 import { globalStyle } from "@/styles/globalStyle";
 import { GlobalNavigationBar, Footer, ToastPlaceholder } from "@/components";
 import {} from "@/components/global/Footer";
@@ -50,6 +50,7 @@ declare global {
 
 function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const isFirstRender = useRef<boolean>(true);
   ReactGA.initialize(KEY);
 
   const [queryClient] = useState(
@@ -75,6 +76,37 @@ function App({ Component, pageProps }: AppProps) {
   );
 
   useEffect(() => {
+    const isMobile = [
+      /Android/i,
+      /webOS/i,
+      /iPhone/i,
+      /iPad/i,
+      /iPod/i,
+      /BlackBerry/i,
+      /Windows Phone/i,
+      /Mobile/i,
+    ].some((toMatchItem) => navigator.userAgent.match(toMatchItem));
+    const isVercel = window.location.href.includes("vercel");
+    const isLocal = window.location.href.includes("localhost");
+
+    const { host, pathname, protocol, search } = window.location;
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+
+      if (isVercel || isLocal || !isMobile) {
+        return;
+      }
+
+      if (host.includes("www")) {
+        const mobileHost = host.slice(host.indexOf(".") + 1);
+        window.location.href = `${protocol}//m.${mobileHost}${pathname}${search}`;
+        return;
+      }
+      window.location.href = `${protocol}//m.${host}${pathname}${search}`;
+    }
+  }, []);
+
+  useEffect(() => {
     const pageview = () => {
       window.fbq("track", "PageView");
     };
@@ -97,7 +129,6 @@ function App({ Component, pageProps }: AppProps) {
   }, []);
 
   useSetDeviceType();
-  const { isMobile } = useGetDeviceType();
 
   useAxiosInterceptor();
 
@@ -126,9 +157,8 @@ function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <Global styles={globalStyle} />
-          {!(isMobile && router.pathname === "/search") && <GlobalNavigationBar />}
+          <GlobalNavigationBar />
           <ToastPlaceholder />
-          {/* <GlobalNavigationBar /> */}
           <Component {...pageProps} />
           <Footer />
           <ReactQueryDevtools initialIsOpen={false} />

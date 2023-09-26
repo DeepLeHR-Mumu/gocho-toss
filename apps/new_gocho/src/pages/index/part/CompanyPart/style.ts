@@ -1,13 +1,13 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
 import { NEWCOLORS } from "shared-style/color";
-import { MOBILE } from "shared-style/mediaQuery";
+import { TEMP } from "shared-style/mediaQuery";
 
 export const cssObj = {
   sectionContainer: css`
     margin: 4.5rem 0 7.5rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       margin: 1.5rem 0;
     }
   `,
@@ -15,7 +15,7 @@ export const cssObj = {
   title: css`
     ${NEWTEXTS.TITLE15};
 
-    ${MOBILE} {
+    ${TEMP} {
       ${NEWTEXTS.TITLE9};
     }
   `,
@@ -26,7 +26,7 @@ export const cssObj = {
     justify-content: space-between;
     margin-top: 2.25rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       margin-top: 1rem;
     }
   `,
@@ -36,7 +36,7 @@ export const cssObj = {
     flex-wrap: wrap;
     gap: 1rem 1.25rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       gap: 0.5rem 0.75rem;
     }
   `,
@@ -53,7 +53,7 @@ export const cssObj = {
     background-color: ${isDisabled ? NEWCOLORS.GRAY50 : NEWCOLORS.WHITE};
     border: 1px solid ${NEWCOLORS.GRAY200};
 
-    ${MOBILE} {
+    ${TEMP} {
       display: none;
     }
 
@@ -67,7 +67,7 @@ export const cssObj = {
   sliderContainer: css`
     margin-top: 2.25rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       margin-top: 1.5rem;
     }
   `,

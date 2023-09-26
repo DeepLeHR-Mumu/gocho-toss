@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { MOBILE } from "shared-style/mediaQuery";
+import { TEMP } from "shared-style/mediaQuery";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -12,7 +12,7 @@ export const cssObj = {
     justify-content: space-between;
     ${NEWTEXTS.TITLE12}
 
-    ${MOBILE} {
+    ${TEMP} {
       padding: 1.25rem 1rem 1.25rem 1rem;
     }
   `,

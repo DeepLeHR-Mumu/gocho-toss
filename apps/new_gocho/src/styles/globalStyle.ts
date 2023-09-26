@@ -96,7 +96,7 @@ export const globalStyle = css`
   html {
     font-family: Pretendard Variable, serif;
     color: ${NEWCOLORS.BLACK};
-    min-width: 360px;
+    min-width: 1200px;
     font-size: 16px;
   }
   /* HTML5 display-role reset for older browsers */
@@ -129,7 +129,6 @@ export const globalStyle = css`
   q:before,
   q:after {
     content: "";
-    content: none;
   }
   table {
     border-collapse: collapse;

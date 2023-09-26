@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { MOBILE } from "shared-style/mediaQuery";
+import { TEMP } from "shared-style/mediaQuery";
 
 export const layout = css`
   width: 100%;
@@ -8,7 +8,7 @@ export const layout = css`
   margin: auto auto 0 auto;
   transition: padding 0.2s ease;
 
-  ${MOBILE} {
+  ${TEMP} {
     padding: 0 1rem;
   }
 `;
