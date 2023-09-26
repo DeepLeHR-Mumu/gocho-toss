@@ -16,6 +16,7 @@ import { JD_ARR_SIZE, MAX_SLIDER_INDEX } from "./constant";
 export const JdSlider: FunctionComponent<JdSliderProps> = ({ title, order, filter }) => {
   const sliderRef = useRef<Slider>(null);
   const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const [isDragging, setIsDragging] = useState(false);
 
   const { isMobile } = useGetDeviceType();
   const { data: jdDataObj } = useJdArr({
@@ -76,13 +77,17 @@ export const JdSlider: FunctionComponent<JdSliderProps> = ({ title, order, filte
             {...setCarouselSetting}
             ref={sliderRef}
             beforeChange={(_oldIndex, newIndex) => {
+              setIsDragging(true);
               if (newIndex <= MAX_SLIDER_INDEX) {
                 setCurrentSlide(newIndex);
               }
             }}
+            afterChange={() => {
+              setIsDragging(false);
+            }}
           >
             {jdDataObj
-              ? jdDataObj.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)
+              ? jdDataObj.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} blockClick={isDragging} />)
               : dummyArrCreator(4).map((dummy) => <JdCard key={`jdSlider${dummy}`} />)}
           </Slider>
         )}

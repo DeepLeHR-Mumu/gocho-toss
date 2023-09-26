@@ -14,4 +14,5 @@ export interface JdCardProps {
     isBookmark: boolean;
   };
   ad?: boolean;
+  blockClick?: boolean;
 }

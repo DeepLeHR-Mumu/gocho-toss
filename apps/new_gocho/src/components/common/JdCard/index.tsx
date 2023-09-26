@@ -12,7 +12,7 @@ import { jdAdClickEvent } from "@/ga/jd";
 import { JdCardProps } from "./type";
 import { cssObj } from "./style";
 
-export const JdCard: FunctionComponent<JdCardProps> = ({ jd, ad }) => {
+export const JdCard: FunctionComponent<JdCardProps> = ({ jd, ad, blockClick }) => {
   const router = useRouter();
 
   if (!jd) {
@@ -40,6 +40,9 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd, ad }) => {
           fill
           onClick={() => {
             // TODO 로그인 모달 전역으로 옮기면 이 함수는 삭제하고 위의 주석처리한 Link 를 사용할 것.
+            if (blockClick) {
+              return;
+            }
             router.push(`${INTERNAL_URL.JD_DETAIL}/${jd.id}`);
             if (ad) {
               jdAdClickEvent(jd.id);

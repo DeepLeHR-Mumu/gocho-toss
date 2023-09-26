@@ -8,4 +8,5 @@ export interface CompanyCardProps {
   };
   replace?: boolean;
   callback?: () => void;
+  blockClick?: boolean;
 }
