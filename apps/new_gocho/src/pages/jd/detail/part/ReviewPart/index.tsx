@@ -12,6 +12,7 @@ import { useUserInfo } from "@/apis/auth";
 import { companyCommentArrKeyObj } from "@/constants/queryKeyFactory/company/commentArrKeyObj";
 import { LoginModal } from "@/components";
 
+import { REVIEW_MAX_LENGTH } from "./constant";
 import { Review } from "./component/Review";
 import { ReviewPartProps } from "./type";
 import { cssObj } from "./style";
@@ -27,7 +28,13 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const queryClient = useQueryClient();
 
-  const { register, reset, handleSubmit } = useForm<CompanyCommentFormValues>({
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CompanyCommentFormValues>({
+    mode: "onChange",
     defaultValues: { companyId: company.id, jdId: reviewState === "jd" ? jdId : undefined, description: "" },
   });
 
@@ -167,12 +174,14 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
           <form onSubmit={handleSubmit(commentSubmit)}>
             <Textarea
               css={cssObj.commentInput}
+              placeholder={`공고에 대한 리뷰를 작성해 보세요. (최대 ${REVIEW_MAX_LENGTH}자)`}
               suffix={
                 <button type="submit">
                   <FiSend css={cssObj.sendIcon} />
                 </button>
               }
-              {...register("description")}
+              {...register("description", { maxLength: REVIEW_MAX_LENGTH })}
+              state={errors.description ? { state: "error" } : undefined}
             />
           </form>
         </div>
