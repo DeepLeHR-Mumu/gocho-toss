@@ -114,9 +114,9 @@ export const GlobalNavigationBar = () => {
                     <li css={menu(router.pathname.includes(INTERNAL_URL.COMPANY))}>
                       <Link href={INTERNAL_URL.COMPANY}>기업정보</Link>
                     </li>
-                    <li css={menu(router.pathname.includes(INTERNAL_URL.COMMUNITY))}>
-                      <Link href={INTERNAL_URL.COMMUNITY}>커뮤니티</Link>
-                    </li>
+                    {/* <li css={menu(router.pathname.includes(INTERNAL_URL.COMMUNITY))}> */}
+                    {/*  <Link href={INTERNAL_URL.COMMUNITY}>커뮤니티</Link> */}
+                    {/* </li> */}
                   </ul>
                 </nav>
                 <div css={etcWrapper}>

@@ -71,8 +71,8 @@ export const cssObj = {
   `,
 
   imageWrapper: css`
-    width: 67.5rem;
-    height: 26.25rem;
+    width: 62.5rem;
+    height: 25rem;
     border-radius: 1rem;
     overflow: hidden;
     position: relative;
