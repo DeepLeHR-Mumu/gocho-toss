@@ -72,6 +72,7 @@ export const FactoryInfo = ({ factoryArr }: FactoryInfoProps) => {
               </button>
             </span>
             <h3>특이사항</h3>
+            {!selected.bus.desc && !selected.dormitory.desc && <p>없음</p>}
             {selected.bus.desc && (
               <p>
                 <strong>통근버스</strong> {selected.bus.desc}
