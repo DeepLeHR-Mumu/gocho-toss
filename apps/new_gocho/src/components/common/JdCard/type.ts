@@ -13,4 +13,5 @@ export interface JdCardProps {
     placeArr: string[];
     isBookmark: boolean;
   };
+  ad?: boolean;
 }

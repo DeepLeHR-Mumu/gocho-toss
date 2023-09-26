@@ -9,14 +9,14 @@ import { SearchBar, DropDown, Profile } from "shared-ui/deeple-ds";
 
 import { useUserInfo } from "@/apis/auth";
 import { useGetDeviceType } from "@/globalStates";
+import { searchFunnelEvent } from "@/ga/search";
 import { INTERNAL_URL } from "@/pages/constants";
 import logoWhite from "@/public/logoWhite.svg";
 import logoBlue from "@/public/logoBlue.svg";
+
 import { SearchModal } from "../../modal/SearchModal";
 import { LoginModal } from "../../modal/LoginModal";
-
 import { Layout } from "../../Layout";
-
 import { Alarm } from "./component/Alarm";
 import { THEME_WHITE_PAGES } from "./constant";
 import { getCssObj } from "./style";
@@ -51,6 +51,7 @@ export const GlobalNavigationBar = () => {
 
   const openSearchModal = () => {
     router.push(INTERNAL_URL.SEARCH);
+    searchFunnelEvent();
     setSearchModal(true);
   };
 

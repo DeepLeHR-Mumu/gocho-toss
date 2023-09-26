@@ -6,6 +6,7 @@ import { MOBILE } from "shared-style/mediaQuery";
 
 export const cssObj = {
   cardWrapper: css`
+    display: block;
     width: 15.75rem;
     height: 23.125rem;
     flex-shrink: 0;

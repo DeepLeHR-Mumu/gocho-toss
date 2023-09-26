@@ -10,8 +10,10 @@ import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE, EMAIL_REGEXP, PWD_REGEXP } from
 import { useDoLogin } from "@/apis/auth";
 import { RequestObjDef as LoginFormValues } from "@/apis/auth/useDoLogin/type";
 import { useGetDeviceType, useToast } from "@/globalStates";
+import { loginModalCloseEvent, loginSuccessEvent } from "@/ga/auth";
 import kakaoLogo from "@/public/kakao.svg";
 
+import { tokenDecryptor } from "shared-util";
 import ActionBar from "../ActionBar";
 
 import { EmailLoginProps } from "./type";
@@ -43,7 +45,9 @@ const EmailLogin = ({ toFindPassword, toSignUp, ...actionBarHandlers }: EmailLog
       onSuccess: (response) => {
         localStorage.setItem("accessToken", `${response.data.access_token}`);
         localStorage.setItem("refreshToken", `${response.data.refresh_token}`);
+        const { id } = tokenDecryptor(response.data.access_token as string);
         queryClient.invalidateQueries();
+        loginSuccessEvent(id, "gocho");
         setToastMessage("고초대졸닷컴에 오신 것을 환영합니다.");
 
         if (actionBarHandlers.closeHandler) {
@@ -58,7 +62,7 @@ const EmailLogin = ({ toFindPassword, toSignUp, ...actionBarHandlers }: EmailLog
       css={cssObj.wrapper}
       style={isMobile ? { width: `${browserSize.innerWidth}px`, height: `${browserSize.innerHeight}px` } : {}}
     >
-      <ActionBar title="로그인" {...actionBarHandlers} />
+      <ActionBar title="로그인" gaEvent={loginModalCloseEvent} {...actionBarHandlers} />
       {isMobile ? (
         <>
           <Divider css={cssObj.mobileDivider} />

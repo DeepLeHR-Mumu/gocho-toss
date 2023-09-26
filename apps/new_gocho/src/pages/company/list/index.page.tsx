@@ -1,12 +1,13 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 
 import { DropDown } from "shared-ui/deeple-ds";
 
 import { CompanyRow, Pagination } from "@/components";
 import { Layout } from "@/components/Layout";
+import { companyListFunnelEvent } from "@/ga/company";
 import { useCompanyArr } from "@/apis/company";
 import { isQueryString } from "@/utils";
 
@@ -33,6 +34,10 @@ const CompanyList: NextPage = () => {
     size: 15,
     industry: currentCategory,
   });
+
+  useEffect(() => {
+    companyListFunnelEvent();
+  }, []);
 
   return (
     <Layout>

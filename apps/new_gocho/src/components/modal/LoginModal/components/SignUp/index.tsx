@@ -8,6 +8,7 @@ import { ErrorResponseDef } from "shared-type/api/errorResponseType";
 
 import { useDoSignUp } from "@/apis/auth";
 import { RequestObjDef as SignUpFormValues } from "@/apis/auth/useDoSignup/type";
+import { signupModalCloseEvent, signupSuccessEvent } from "@/ga/auth";
 import { useGetDeviceType, useToast } from "@/globalStates";
 
 import ActionBar from "../ActionBar";
@@ -39,7 +40,7 @@ const SignUp = ({ ...actionBarHandlers }: ActionBarHandlers) => {
         onSuccess: (response) => {
           localStorage.setItem("accessToken", `${response?.data.access_token}`);
           localStorage.setItem("refreshToken", `${response?.data.refresh_token}`);
-
+          signupSuccessEvent();
           setToastMessage("환영합니다.");
 
           if (actionBarHandlers.closeHandler) {
@@ -55,7 +56,7 @@ const SignUp = ({ ...actionBarHandlers }: ActionBarHandlers) => {
       css={cssObj.wrapper}
       style={isMobile ? { width: `${browserSize.innerWidth}px`, height: `${browserSize.innerHeight}px` } : {}}
     >
-      <ActionBar title="회원가입" {...actionBarHandlers} />
+      <ActionBar title="회원가입" gaEvent={signupModalCloseEvent} {...actionBarHandlers} />
       <Divider css={cssObj.mobileDivider} />
       <div css={cssObj.signUpWrapper}>
         <form css={cssObj.form}>

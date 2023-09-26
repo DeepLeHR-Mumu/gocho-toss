@@ -1,6 +1,9 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
+
 import { Modal } from "shared-ui/deeple-ds";
+
+import { loginModalOpenEvent, signupModalOpenEvent } from "@/ga/auth";
 
 import SocialLogin from "./components/SocialLogin";
 import EmailLogin from "./components/EmailLogin";
@@ -47,6 +50,7 @@ export const LoginModal = ({ close }: LoginModalProps) => {
 
   const toSignUp = () => {
     setCurrent("signup");
+    signupModalOpenEvent();
     next();
   };
 
@@ -54,6 +58,10 @@ export const LoginModal = ({ close }: LoginModalProps) => {
     previousHandler: prev,
     closeHandler: close,
   };
+
+  useEffect(() => {
+    loginModalOpenEvent();
+  }, []);
 
   return (
     <Modal>

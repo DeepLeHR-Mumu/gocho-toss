@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 
 import { Layout } from "@/components";
 import { INTERNAL_URL } from "@/pages/constants";
+import { jdListFunnelEvent } from "@/ga/jd";
 
 import { PageHead } from "./pageHead";
 import {
@@ -21,7 +22,7 @@ import { ListPart } from "./part/ListPart";
 import { FilterFormValues, FilterObj } from "./type";
 import { cssObj } from "./style";
 
-const JdListPage: NextPage = () => {
+const JdList: NextPage = () => {
   const router = useRouter();
 
   const [filterObj, setFilterObj] = useState<FilterObj>({
@@ -55,6 +56,10 @@ const JdListPage: NextPage = () => {
     }
   }, [router]);
 
+  useEffect(() => {
+    jdListFunnelEvent();
+  }, []);
+
   return (
     <main>
       <PageHead />
@@ -81,4 +86,4 @@ const JdListPage: NextPage = () => {
   );
 };
 
-export default JdListPage;
+export default JdList;

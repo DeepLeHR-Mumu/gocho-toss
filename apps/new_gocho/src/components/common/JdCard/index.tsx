@@ -7,10 +7,11 @@ import { DDayChip } from "shared-ui/deeple-ds";
 import { INTERNAL_URL } from "@/pages/constants";
 import { JdBookmark, SkeletonBox } from "@/components";
 
+import { jdAdClickEvent } from "@/ga/jd";
 import { JdCardProps } from "./type";
 import { cssObj } from "./style";
 
-export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
+export const JdCard: FunctionComponent<JdCardProps> = ({ jd, ad }) => {
   if (!jd) {
     return (
       <div css={cssObj.skeletonWrapper}>
@@ -21,7 +22,14 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
 
   return (
     <div css={cssObj.cardWrapper}>
-      <Link href={`${INTERNAL_URL.JD_DETAIL}/${jd.id}`}>
+      <Link
+        href={`${INTERNAL_URL.JD_DETAIL}/${jd.id}`}
+        onClick={() => {
+          if (ad) {
+            jdAdClickEvent(jd.id);
+          }
+        }}
+      >
         <div css={cssObj.imageWrapper}>
           <Image src={jd.company.logoUrl} alt="회사 로고" fill />
           <div css={cssObj.likeButton}>
@@ -35,7 +43,16 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
         <div css={cssObj.eduChip(jd.college)}>초</div>
       </div>
       <strong css={cssObj.title}>
-        <Link href={`${INTERNAL_URL.JD_DETAIL}/${jd.id}`}>{jd.title}</Link>
+        <Link
+          href={`${INTERNAL_URL.JD_DETAIL}/${jd.id}`}
+          onClick={() => {
+            if (ad) {
+              jdAdClickEvent(jd.id);
+            }
+          }}
+        >
+          {jd.title}
+        </Link>
       </strong>
       <div css={cssObj.descWrapper}>
         <p css={cssObj.desc}>{jd.company.name}</p>

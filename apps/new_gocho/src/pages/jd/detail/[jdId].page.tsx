@@ -8,11 +8,9 @@ import { Layout, JdRow } from "@/components";
 import { useJdDetail, useJdArr } from "@/apis/jd";
 import { isQueryString } from "@/utils";
 import { useAddJdViewCount } from "@/apis/viewCount";
+import { jdDetailFunnelEvent } from "@/ga/jd";
 
-import { TitlePart } from "./part/TitlePart";
-import { SummaryPart } from "./part/SummaryPart";
-import { DetailPart } from "./part/DetailPart";
-import { ReviewPart } from "./part/ReviewPart";
+import { TitlePart, SummaryPart, DetailPart, ReviewPart } from "./part";
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
@@ -38,6 +36,10 @@ const JdDetailPage: NextPage = () => {
       addJdViewCount({ jdId: Number(jdId) });
     }
   }, [addJdViewCount, jdId]);
+
+  useEffect(() => {
+    if (jdDetailData) jdDetailFunnelEvent(jdDetailData.id);
+  }, [jdDetailData]);
 
   if (!jdDetailData) {
     return null;
