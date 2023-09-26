@@ -2,17 +2,17 @@ import { useQuery } from "@tanstack/react-query";
 
 import { bannerArrKeyObj } from "@/constants/queryKeyFactory/banner/bannerArrKeyObj";
 import { axiosInstance } from "../../axiosInstance";
-import { GetBannerArrDef } from "./type";
+import { GetJdBannerArrDef } from "./type";
 import { selector } from "./util";
 
-export const getTopBannerArr: GetBannerArrDef = async () => {
-  const { data } = await axiosInstance.get("/ads/jd-top");
+export const getJdBannerArr: GetJdBannerArrDef = async () => {
+  const { data } = await axiosInstance.get("/ads/jd-banner");
   return data;
 };
 
-export const useTopBannerArr = () =>
+export const useJdBannerArr = () =>
   useQuery({
-    queryKey: bannerArrKeyObj.top,
-    queryFn: getTopBannerArr,
+    queryKey: bannerArrKeyObj.jd,
+    queryFn: getJdBannerArr,
     select: ({ data }) => selector(data),
   });

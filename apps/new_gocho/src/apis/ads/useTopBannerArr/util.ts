@@ -1,19 +1,25 @@
 import { TopBannerDef } from "../type";
 
-export const selector = (bannerArr: TopBannerDef[], count: number) => {
+export const selector = (bannerArr: TopBannerDef[]) => {
   const bannerDataArr = bannerArr.map((banner) => ({
     id: banner.id,
-    company: {
-      name: banner.jd.company.name,
-      logoUrl: banner.jd.company.logo_url,
-    },
+    color: banner.color,
     startTime: banner.jd.start_time,
     endTime: banner.jd.end_time,
-    high: banner.jd.high,
-    college: banner.jd.college,
-    title: banner.jd.title,
-    placeArr: [""],
-    isBookmark: banner.jd.is_bookmark,
+    jd: {
+      company: {
+        id: banner.jd.company.id,
+        name: banner.jd.company.name,
+        logoUrl: banner.jd.company.logo_url,
+      },
+      id: banner.jd.id,
+      title: banner.jd.title,
+      startTime: banner.jd.start_time,
+      endTime: banner.jd.end_time,
+      high: banner.jd.high,
+      college: banner.jd.college,
+      isBookmark: banner.jd.is_bookmark,
+    },
   }));
-  return { bannerDataArr, count };
+  return { bannerDataArr };
 };

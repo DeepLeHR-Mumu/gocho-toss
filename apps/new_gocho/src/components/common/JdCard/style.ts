@@ -43,6 +43,7 @@ export const cssObj = {
     > img {
       object-fit: contain;
       padding: 1rem;
+      cursor: pointer;
     }
   `,
 
