@@ -27,7 +27,13 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const queryClient = useQueryClient();
 
-  const { register, reset, handleSubmit } = useForm<CompanyCommentFormValues>({
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CompanyCommentFormValues>({
+    mode: "onChange",
     defaultValues: { companyId: company.id, jdId: reviewState === "jd" ? jdId : undefined, description: "" },
   });
 
@@ -167,12 +173,14 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
           <form onSubmit={handleSubmit(commentSubmit)}>
             <Textarea
               css={cssObj.commentInput}
+              placeholder="공고에 대한 리뷰를 작성해 보세요. (최대 1000자)"
               suffix={
                 <button type="submit">
                   <FiSend css={cssObj.sendIcon} />
                 </button>
               }
-              {...register("description")}
+              {...register("description", { maxLength: 1000 })}
+              state={errors.description ? { state: "error" } : undefined}
             />
           </form>
         </div>
