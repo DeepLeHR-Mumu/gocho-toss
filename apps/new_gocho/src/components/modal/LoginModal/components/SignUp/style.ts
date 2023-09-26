@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { MOBILE } from "shared-style/mediaQuery";
+import { TEMP } from "shared-style/mediaQuery";
 import { NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
@@ -16,7 +16,7 @@ export const cssObj = {
     padding: 1.25rem 0.5rem 0 0.5rem;
     margin-bottom: 18.125rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       padding: 1rem;
       margin-bottom: 0;
     }
@@ -35,7 +35,7 @@ export const cssObj = {
   `,
 
   signUpButtonWrapper: css`
-    ${MOBILE} {
+    ${TEMP} {
       width: 100%;
       padding: 0 1rem;
       margin-top: 0.75rem;
@@ -45,7 +45,7 @@ export const cssObj = {
   mobileDivider: css`
     display: none;
 
-    ${MOBILE} {
+    ${TEMP} {
       display: block;
       width: 100%;
     }

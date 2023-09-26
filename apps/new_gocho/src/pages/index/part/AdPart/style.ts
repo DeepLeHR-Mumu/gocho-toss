@@ -1,13 +1,13 @@
 import { css } from "@emotion/react";
 import { NEWCOLORS } from "shared-style/color";
-import { MOBILE } from "shared-style/mediaQuery";
+import { TEMP } from "shared-style/mediaQuery";
 
 export const cssObj = {
   sectionContainer: css`
     position: relative;
     background: linear-gradient(to bottom, ${NEWCOLORS.BLUE300} 320px, white 320px);
 
-    ${MOBILE} {
+    ${TEMP} {
       background: linear-gradient(to bottom, ${NEWCOLORS.BLUE300} 120px, white 120px);
     }
 
@@ -57,7 +57,7 @@ export const cssObj = {
   sliderContainer: css`
     padding-top: 2.5rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       padding-top: 1rem;
     }
   `,
@@ -65,7 +65,7 @@ export const cssObj = {
   banner: css`
     margin: 0 1rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       margin: 0 0.5rem;
     }
   `,
@@ -77,7 +77,7 @@ export const cssObj = {
     overflow: hidden;
     position: relative;
 
-    ${MOBILE} {
+    ${TEMP} {
       width: calc(100vw - 5rem);
       height: calc(100vw / 1080 * 420);
     }
@@ -98,7 +98,7 @@ export const cssObj = {
     border: 1px solid ${NEWCOLORS.WHITE};
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
 
-    ${MOBILE} {
+    ${TEMP} {
       display: none;
     }
 

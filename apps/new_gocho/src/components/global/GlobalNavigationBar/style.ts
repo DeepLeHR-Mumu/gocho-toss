@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
 import { NEWCOLORS } from "shared-style/color";
-import { MOBILE } from "shared-style/mediaQuery";
+import { TEMP } from "shared-style/mediaQuery";
 
 export const getCssObj = (themeWhite: boolean) => ({
   wrapper: css`
@@ -17,7 +17,7 @@ export const getCssObj = (themeWhite: boolean) => ({
     background-color: ${themeWhite ? NEWCOLORS.WHITE : NEWCOLORS.BLUE300};
     border-bottom: 1px solid ${themeWhite ? NEWCOLORS.GRAY200 : NEWCOLORS.WHITE};
 
-    ${MOBILE} {
+    ${TEMP} {
       height: 3.5rem;
     }
   `,
@@ -36,7 +36,7 @@ export const getCssObj = (themeWhite: boolean) => ({
       width: 12rem;
       object-fit: contain;
 
-      ${MOBILE} {
+      ${TEMP} {
         width: 7.8rem;
       }
     }
@@ -116,7 +116,7 @@ export const getCssObj = (themeWhite: boolean) => ({
     height: 1.5rem;
     color: ${themeWhite ? NEWCOLORS.BLACK : NEWCOLORS.WHITE};
   `,
-profileDropDownMenu: css`
+  profileDropDownMenu: css`
     display: block;
     width: 100%;
     text-align: left;

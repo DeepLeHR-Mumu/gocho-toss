@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { NEWCOLORS } from "shared-style/color";
-import { MOBILE } from "shared-style/mediaQuery";
+import { TEMP } from "shared-style/mediaQuery";
 
 export const cssObj = {
   wrapper: css`
@@ -17,7 +17,7 @@ export const cssObj = {
     background-color: ${NEWCOLORS.WHITE};
     overflow: auto;
 
-    ${MOBILE} {
+    ${TEMP} {
       width: 100%;
       height: 100%;
       border-radius: 0;

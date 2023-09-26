@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { MOBILE } from "shared-style/mediaQuery";
+import { TEMP } from "shared-style/mediaQuery";
 
 export const cssObj = {
   wrapper: css`
@@ -15,7 +15,7 @@ export const cssObj = {
     padding: 1.25rem 0.5rem 0 0.5rem;
     margin-bottom: 20.625rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       padding: 1rem;
       margin-bottom: 0.75rem;
     }
@@ -26,7 +26,7 @@ export const cssObj = {
     flex-direction: column;
     gap: 1rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       width: 100%;
       padding: 0 1rem;
     }
@@ -35,7 +35,7 @@ export const cssObj = {
   mobileDivider: css`
     display: none;
 
-    ${MOBILE} {
+    ${TEMP} {
       display: block;
       width: 100%;
     }

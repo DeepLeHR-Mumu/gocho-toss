@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
 import { NEWCOLORS } from "shared-style/color";
-import { MOBILE } from "shared-style/mediaQuery";
+import { TEMP } from "shared-style/mediaQuery";
 
 export const cssObj = {
   wrapper: css`
@@ -12,7 +12,7 @@ export const cssObj = {
     align-items: center;
     padding: 1.5rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       padding: 2rem;
       overflow: auto;
     }
@@ -25,7 +25,7 @@ export const cssObj = {
     align-self: flex-end;
     cursor: pointer;
 
-    ${MOBILE} {
+    ${TEMP} {
       width: 1.5rem;
       height: 1.5rem;
       color: ${NEWCOLORS.BLACK};
@@ -43,7 +43,7 @@ export const cssObj = {
     margin-bottom: 0.5rem;
     ${NEWTEXTS.TITLE13}
 
-    ${MOBILE} {
+    ${TEMP} {
       font-size: 2.5rem;
       font-style: normal;
       font-weight: 900;
@@ -56,7 +56,7 @@ export const cssObj = {
   logo: css`
     margin-bottom: 2.5rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       margin-bottom: 1.25rem;
       align-self: flex-start;
     }
@@ -67,7 +67,7 @@ export const cssObj = {
     color: ${NEWCOLORS.BLUEGRAY400};
     ${NEWTEXTS.TITLE7}
 
-    ${MOBILE} {
+    ${TEMP} {
       margin-bottom: auto;
       align-self: flex-start;
     }
@@ -105,7 +105,7 @@ export const cssObj = {
     color: #392020;
     ${NEWTEXTS.TITLE8}
 
-    ${MOBILE} {
+    ${TEMP} {
       width: 100%;
       margin-bottom: 2.5rem;
       ${NEWTEXTS.TITLE6}
@@ -118,7 +118,7 @@ export const cssObj = {
     color: ${NEWCOLORS.BLUEGRAY400};
     ${NEWTEXTS.UNDERLINE_M1620}
 
-    ${MOBILE} {
+    ${TEMP} {
       margin-bottom: 3rem;
     }
   `,

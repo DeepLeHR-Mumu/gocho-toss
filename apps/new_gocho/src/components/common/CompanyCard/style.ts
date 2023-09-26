@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { NEWCOLORS } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
-import { MOBILE } from "shared-style/mediaQuery";
+import { TEMP } from "shared-style/mediaQuery";
 import { shorten } from "shared-style/common";
 
 export const cssObj = {
@@ -17,7 +17,7 @@ export const cssObj = {
     background-color: ${NEWCOLORS.WHITE};
     flex-shrink: 0;
 
-    ${MOBILE} {
+    ${TEMP} {
       width: ${isButtonExist ? "8.75rem" : "7.5rem"};
       height: ${isButtonExist ? "12.75rem" : "9rem"};
       padding: ${isButtonExist ? "1.25rem 1rem" : "1.25rem 1.5rem 1.25rem 1.4375rem"};
@@ -35,7 +35,7 @@ export const cssObj = {
     margin-bottom: 0.5rem;
     ${isButtonExist ? NEWTEXTS.TITLE13 : NEWTEXTS.TITLE12}
 
-    ${MOBILE} {
+    ${TEMP} {
       margin-top: 0.875rem;
       margin-bottom: 0;
       ${isButtonExist ? NEWTEXTS.TITLE6 : NEWTEXTS.TITLE5}
@@ -55,7 +55,7 @@ export const cssObj = {
     white-space: nowrap;
     ${NEWTEXTS.TITLE7}
 
-    ${MOBILE} {
+    ${TEMP} {
       ${NEWTEXTS.TITLE1}
       ${isButtonExist ? "" : "display: none;"}
     }

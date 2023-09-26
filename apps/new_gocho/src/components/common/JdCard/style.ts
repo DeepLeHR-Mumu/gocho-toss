@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import { NEWCOLORS } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 import { shorten } from "shared-style/common";
-import { MOBILE } from "shared-style/mediaQuery";
+import { TEMP } from "shared-style/mediaQuery";
 
 export const cssObj = {
   cardWrapper: css`
@@ -11,7 +11,7 @@ export const cssObj = {
     height: 23.125rem;
     flex-shrink: 0;
 
-    ${MOBILE} {
+    ${TEMP} {
       width: 8.75rem;
       height: 15rem;
     }
@@ -24,7 +24,7 @@ export const cssObj = {
     border-radius: 1rem;
     overflow: hidden;
 
-    ${MOBILE} {
+    ${TEMP} {
       width: 8.75rem;
       height: 15rem;
     }
@@ -36,7 +36,7 @@ export const cssObj = {
     border: 1px solid ${NEWCOLORS.GRAY200};
     position: relative;
 
-    ${MOBILE} {
+    ${TEMP} {
       height: 6.125rem;
     }
 
@@ -55,7 +55,7 @@ export const cssObj = {
     justify-content: center;
     cursor: pointer;
 
-    ${MOBILE} {
+    ${TEMP} {
       top: 0.5rem;
       right: 0.5rem;
     }
@@ -67,7 +67,7 @@ export const cssObj = {
     gap: 0 0.5rem;
     margin-top: 1.5rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       margin-top: 0.75rem;
     }
   `,
@@ -83,7 +83,7 @@ export const cssObj = {
     color: ${isActive ? NEWCOLORS.BLUE250 : NEWCOLORS.BLUEGRAY100};
     border-radius: 0.5rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       width: 1.5rem;
       height: 1.5rem;
       ${NEWTEXTS.TITLE3}
@@ -94,7 +94,7 @@ export const cssObj = {
     margin-top: 1rem;
     ${NEWTEXTS.BODY8};
     ${shorten(2)};
-    ${MOBILE} {
+    ${TEMP} {
       ${NEWTEXTS.TITLE5};
       margin-top: 0.5rem;
     }
@@ -106,7 +106,7 @@ export const cssObj = {
     gap: 0.25rem 0;
     margin-top: 0.5rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       gap: 0.125rem 0;
       margin-top: 0.25rem;
     }
@@ -116,7 +116,7 @@ export const cssObj = {
     ${NEWTEXTS.TITLE7};
     color: ${NEWCOLORS.BLUEGRAY300};
 
-    ${MOBILE} {
+    ${TEMP} {
       ${NEWTEXTS.TITLE1};
     }
   `,

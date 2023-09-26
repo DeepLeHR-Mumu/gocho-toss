@@ -2,14 +2,14 @@ import { css } from "@emotion/react";
 
 import { NEWCOLORS } from "shared-style/color";
 import { NEWTEXTS, TEXTS } from "shared-style/text";
-import { MOBILE } from "shared-style/mediaQuery";
+import { TEMP } from "shared-style/mediaQuery";
 
 export const cssObj = {
   footer: css`
     background-color: #f2f2f5;
     width: 100%;
 
-    ${MOBILE} {
+    ${TEMP} {
       margin-top: 2.5rem;
     }
   `,
@@ -21,14 +21,14 @@ export const cssObj = {
     padding: 4.375rem 0;
     gap: 0 1.25rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       padding: 1.25rem 0;
       flex-direction: column;
     }
   `,
 
   infoContainer: css`
-    ${MOBILE} {
+    ${TEMP} {
       margin-bottom: 0.5rem;
     }
   `,
@@ -40,7 +40,7 @@ export const cssObj = {
     display: block;
     margin-bottom: 1.75rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       margin-bottom: 1rem;
     }
 
@@ -54,7 +54,7 @@ export const cssObj = {
     gap: 0 1rem;
     margin-bottom: 0.5rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       gap: 0 0.5rem;
     }
   `,
@@ -63,7 +63,7 @@ export const cssObj = {
     ${TEXTS.TITLE5};
     color: ${NEWCOLORS.BLUEGRAY400};
 
-    ${MOBILE} {
+    ${TEMP} {
       ${NEWTEXTS.TITLE4};
     }
   `,
@@ -72,7 +72,7 @@ export const cssObj = {
     ${TEXTS.TITLE5};
     color: ${NEWCOLORS.BLUEGRAY400};
 
-    ${MOBILE} {
+    ${TEMP} {
       ${NEWTEXTS.TITLE1};
     }
   `,
@@ -84,7 +84,7 @@ export const cssObj = {
   middleBox: css`
     margin: 1.25rem 0 2.5rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       margin: 1rem 0;
     }
   `,
@@ -100,7 +100,7 @@ export const cssObj = {
     ${TEXTS.TITLE7};
     color: ${NEWCOLORS.BLUEGRAY400};
 
-    ${MOBILE} {
+    ${TEMP} {
       ${NEWTEXTS.TITLE6};
     }
   `,
@@ -111,7 +111,7 @@ export const cssObj = {
     ${TEXTS.TITLE5};
     color: ${NEWCOLORS.BLUEGRAY400};
 
-    ${MOBILE} {
+    ${TEMP} {
       ${NEWTEXTS.TITLE1};
     }
   `,
@@ -132,7 +132,7 @@ export const cssObj = {
     display: flex;
     gap: 0 1rem;
 
-    ${MOBILE} {
+    ${TEMP} {
       margin-bottom: 1rem;
     }
   `,
@@ -141,7 +141,7 @@ export const cssObj = {
     ${TEXTS.UNDERLINE};
     color: ${NEWCOLORS.BLUEGRAY400};
 
-    ${MOBILE} {
+    ${TEMP} {
       ${NEWTEXTS.TITLE6};
     }
   `,
