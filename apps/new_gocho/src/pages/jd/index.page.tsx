@@ -6,7 +6,7 @@ import { Divider } from "shared-ui/deeple-ds";
 import { Layout } from "@/components";
 import { jdHomeFunnelEvent } from "@/ga/jd";
 
-import { HotJd, JdSlider } from "./part";
+import { HotJd, JdSlider, JdBanner } from "./part";
 import { cssObj } from "./style";
 import { PageHead } from "./pageHead";
 
@@ -18,6 +18,7 @@ const JdHome: NextPage = () => {
   return (
     <main>
       <PageHead />
+      <JdBanner />
       <Layout>
         <HotJd />
         <div css={cssObj.divider}>
