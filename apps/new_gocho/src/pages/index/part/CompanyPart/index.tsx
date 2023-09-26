@@ -19,6 +19,7 @@ export const CompanyPart: FunctionComponent = () => {
   const [selectedCompanyArr, setSelectedCompanyArr] = useState<selectedCompanyDef[]>();
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [maxSliderIndex, setMaxSliderIndex] = useState<number>(0);
+  const [isDragging, setIsDragging] = useState(false);
   const sliderRef = useRef<Slider>(null);
 
   const { isMobile } = useGetDeviceType();
@@ -132,9 +133,13 @@ export const CompanyPart: FunctionComponent = () => {
             {...setCarouselSetting}
             ref={sliderRef}
             beforeChange={(_oldIndex, newIndex) => {
+              setIsDragging(true);
               if (newIndex <= maxSliderIndex) {
                 setCurrentSlide(Math.max(newIndex, 0));
               }
+            }}
+            afterChange={() => {
+              setIsDragging(false);
             }}
           >
             {selectedCompanyArr?.map((company) => (
@@ -146,6 +151,7 @@ export const CompanyPart: FunctionComponent = () => {
                   hashTagArr: [company.name],
                   bookmark: { state: company.isBookmark },
                 }}
+                blockClick={isDragging}
               />
             ))}
           </Slider>

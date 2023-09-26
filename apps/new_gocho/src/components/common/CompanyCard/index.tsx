@@ -10,7 +10,7 @@ import { SkeletonBox } from "../SkeletonBox";
 import { CompanyCardProps } from "./type";
 import { cssObj } from "./style";
 
-export const CompanyCard = ({ company, replace = false, callback }: CompanyCardProps) => {
+export const CompanyCard = ({ company, replace = false, callback, blockClick }: CompanyCardProps) => {
   const { isMobile } = useGetDeviceType();
 
   const isButtonExist = !!company?.bookmark;
@@ -38,7 +38,20 @@ export const CompanyCard = ({ company, replace = false, callback }: CompanyCardP
 
   return (
     <div css={cssObj.cardWrapper(isButtonExist)}>
-      <Link href={`${INTERNAL_URL.COMPANY_DETAIL}/${company.id}`} replace={replace} onClick={callback}>
+      <Link
+        href={`${INTERNAL_URL.COMPANY_DETAIL}/${company.id}`}
+        replace={replace}
+        onClick={(e) => {
+          if (blockClick) {
+            e.preventDefault();
+            return;
+          }
+
+          if (callback) {
+            callback();
+          }
+        }}
+      >
         <Profile
           src={company.logoSrc}
           size={getProfileSize()}
