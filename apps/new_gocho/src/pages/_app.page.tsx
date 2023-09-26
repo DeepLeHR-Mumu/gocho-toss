@@ -89,7 +89,7 @@ function App({ Component, pageProps }: AppProps) {
     const isVercel = window.location.href.includes("vercel");
     const isLocal = window.location.href.includes("localhost");
 
-    const { host, pathname, protocol, search } = window.location;
+    const { protocol } = window.location;
     if (isFirstRender.current) {
       isFirstRender.current = false;
 
@@ -97,12 +97,7 @@ function App({ Component, pageProps }: AppProps) {
         return;
       }
 
-      if (host.includes("www")) {
-        const mobileHost = host.slice(host.indexOf(".") + 1);
-        window.location.href = `${protocol}//m.${mobileHost}${pathname}${search}`;
-        return;
-      }
-      window.location.href = `${protocol}//m.${host}${pathname}${search}`;
+      window.location.href = `${protocol}//m.고초대졸.com`;
     }
   }, []);
 

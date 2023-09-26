@@ -25,7 +25,7 @@ import { cssObj } from "./style";
 
 export const SearchModal = ({ close }: SearchModalProps) => {
   const router = useRouter();
-  const { data: jdData } = useJdArr({ order: "rand", filter: "valid", page: 1, size: 5 });
+  const { data: jdData } = useJdArr({ order: "view", filter: "valid", page: 1, size: 5 });
   const { data: companyData } = useCompanyArr({ order: "rank", size: 4 });
   const [recentSearchWordArr, setRecentSearchWordArr] = useState<string[]>([]);
 
