@@ -19,7 +19,7 @@ export const JdPart: FunctionComponent = () => {
 
   const { isMobile } = useGetDeviceType();
   const { data: jdDataObj } = useJdArr({
-    order: "rand",
+    order: "recent",
     filter: "valid",
     page: 1,
     size: JD_ARR_SIZE,

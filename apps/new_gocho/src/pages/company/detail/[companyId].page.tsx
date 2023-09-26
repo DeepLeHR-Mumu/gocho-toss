@@ -4,12 +4,14 @@ import { useRouter } from "next/router";
 
 import { Layout } from "@/components";
 import { isQueryString } from "@/utils";
+import { companyDetailFunnelEvent } from "@/ga/company";
 import { useAddCompanyViewCount } from "@/apis/viewCount";
 
 import { JdPart } from "./part/JdPart";
 import { CompanyInfoPart } from "./part/CompanyInfoPart";
 import { ReviewPart } from "./part/ReviewPart";
 import { TitlePart } from "./part/TitlePart";
+import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
 const CompanyDetail: NextPage = () => {
@@ -30,8 +32,15 @@ const CompanyDetail: NextPage = () => {
     }
   }, [router.query.companyId, addViewCount]);
 
+  useEffect(() => {
+    if (router.isReady) {
+      companyDetailFunnelEvent(Number(router.query.companyId));
+    }
+  }, [router.isReady, router.query.companyId]);
+
   return (
     <main css={cssObj.background}>
+      <PageHead />
       <TitlePart />
       <Layout>
         {router.query.type === "company" && <CompanyInfoPart />}

@@ -29,7 +29,7 @@ export const cssObj = {
     display: flex;
     ${NEWTEXTS.BODY6}
 
-    span:first-child {
+    span:first-of-type {
       flex-direction: row;
       flex-basis: 7.1875rem;
       flex-shrink: 0;

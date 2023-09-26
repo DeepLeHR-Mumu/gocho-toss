@@ -8,11 +8,10 @@ import { Layout, JdRow } from "@/components";
 import { useJdDetail, useJdArr } from "@/apis/jd";
 import { isQueryString } from "@/utils";
 import { useAddJdViewCount } from "@/apis/viewCount";
+import { jdDetailFunnelEvent } from "@/ga/jd";
 
-import { TitlePart } from "./part/TitlePart";
-import { SummaryPart } from "./part/SummaryPart";
-import { DetailPart } from "./part/DetailPart";
-import { ReviewPart } from "./part/ReviewPart";
+import { TitlePart, SummaryPart, DetailPart, ReviewPart } from "./part";
+import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
 const JdDetailPage: NextPage = () => {
@@ -21,7 +20,14 @@ const JdDetailPage: NextPage = () => {
   const jdId = isQueryString(router.query.jdId) ? Number(router.query.jdId) : null;
 
   const { data: jdDetailData } = useJdDetail({ id: jdId, isStatic: false });
-  const { data: jdArrData } = useJdArr({ order: "rand", size: 3, filter: "valid", page: 1 });
+  const { data: jdArrData } = useJdArr({
+    order: "view",
+    size: 3,
+    filter: "valid",
+    page: 1,
+    task: jdDetailData?.task.main_task,
+    contractType: jdDetailData?.contract_type.type,
+  });
   const { mutate: addJdViewCount } = useAddJdViewCount();
 
   useEffect(() => {
@@ -31,8 +37,28 @@ const JdDetailPage: NextPage = () => {
     }
   }, [addJdViewCount, jdId]);
 
+  useEffect(() => {
+    if (jdDetailData) jdDetailFunnelEvent(jdDetailData.id);
+  }, [jdDetailData]);
+
+  if (!jdDetailData) {
+    return null;
+  }
+
   return (
     <main>
+      <PageHead
+        option={{
+          id: jdDetailData.id,
+          title: jdDetailData.title,
+          companyName: jdDetailData.company.name,
+          rotation: jdDetailData.rotation_arr[0],
+          pay: jdDetailData.pay_arr && jdDetailData.pay_arr[0],
+          place: jdDetailData.place.address_arr && jdDetailData.place.address_arr[0],
+          possibleEdu: jdDetailData.possible_edu.summary,
+          taskDetail: jdDetailData.task_detail_arr[0],
+        }}
+      />
       <TitlePart
         jd={
           jdDetailData

@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { FiGrid, FiList } from "react-icons/fi";
 
@@ -14,7 +14,10 @@ import { cssObj } from "./style";
 
 export const ListPart = ({ filterObj }: ListPartProps) => {
   const [viewMode, setViewMode] = useState<"list" | "grid">("grid");
+  const firstRenderingRef = useRef<boolean>(true);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
+
   const order = useMemo(() => {
     switch (router.query.order) {
       case "recent":
@@ -49,8 +52,20 @@ export const ListPart = ({ filterObj }: ListPartProps) => {
     }
   };
 
+  useEffect(() => {
+    if (router.query.page && firstRenderingRef.current) {
+      firstRenderingRef.current = false;
+      return;
+    }
+    if (!firstRenderingRef.current) {
+      const location = (scrollRef.current?.getBoundingClientRect().top as number) + window.pageYOffset - 250;
+      window.scrollTo(0, location);
+    }
+  }, [router.query.page]);
+
   return (
     <section css={cssObj.wrapper}>
+      <div ref={scrollRef} />
       <div css={cssObj.dropDownWrapper}>
         <DropDown
           title={getDropDownTitle(order)}

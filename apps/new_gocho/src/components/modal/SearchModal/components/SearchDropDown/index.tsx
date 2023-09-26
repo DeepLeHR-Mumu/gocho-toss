@@ -6,6 +6,7 @@ import { RiCloseCircleFill } from "react-icons/ri";
 import { SearchBar } from "shared-ui/deeple-ds";
 
 import recentLogo from "@/public/recent.svg";
+import { globalSearchEvent } from "@/ga/search";
 
 import { SearchDropDownProps } from "./type";
 import { cssObj } from "./style";
@@ -24,6 +25,7 @@ export const SearchDropDown = ({
 
   const submitHandler: SubmitHandler<SearchFormProps> = (searchObj) => {
     if (searchHandler) {
+      globalSearchEvent(searchObj.search);
       searchHandler(searchObj.search);
     }
   };
@@ -67,22 +69,22 @@ export const SearchDropDown = ({
         <div css={cssObj.dropDownWrapper}>
           <ul>
             {recentWordArr.slice(0, 10).map((recentWord) => (
-                <li key={recentWord} css={cssObj.listItem}>
-                  <Image src={recentLogo} alt="recent" />
-                  <button
-                    type="button"
-                    css={cssObj.word}
-                    onMouseDown={() => {
-                      if (searchHandler) {
-                        searchHandler(recentWord);
-                      }
-                    }}
-                  >
-                    {recentWord}
-                  </button>
-                  <FiArrowUpLeft css={cssObj.arrow} />
-                </li>
-              ))}
+              <li key={recentWord} css={cssObj.listItem}>
+                <Image src={recentLogo} alt="recent" />
+                <button
+                  type="button"
+                  css={cssObj.word}
+                  onMouseDown={() => {
+                    if (searchHandler) {
+                      searchHandler(recentWord);
+                    }
+                  }}
+                >
+                  {recentWord}
+                </button>
+                <FiArrowUpLeft css={cssObj.arrow} />
+              </li>
+            ))}
           </ul>
         </div>
       )}

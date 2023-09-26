@@ -5,11 +5,11 @@ import { useEffect } from "react";
 
 import { useDoKakaoLogin } from "shared-api/auth/useDoKakaoLogin";
 import { useGetKakaoCode } from "shared-api/auth/useGetKakaoCode";
-// import { loginSuccessEvent } from "shared-ga/auth";
-// import { tokenDecryptor } from "shared-util";
+import { tokenDecryptor } from "shared-util";
 import { KAKAO_API_KEY } from "shared-user/src/constants";
 
 import { useToast } from "@/globalStates";
+import { loginSuccessEvent } from "@/ga/auth";
 
 const KakaoLogin: NextPage = () => {
   const queryClient = useQueryClient();
@@ -40,9 +40,9 @@ const KakaoLogin: NextPage = () => {
                   localStorage.setItem("accessToken", `${response.data.access_token}`);
                   localStorage.setItem("refreshToken", `${response.data.refresh_token}`);
                   queryClient.invalidateQueries();
-                  // const { id, nickname } = tokenDecryptor(response.data.access_token as string);
+                  const { id } = tokenDecryptor(response.data.access_token as string);
                   const kakaopath = sessionStorage.getItem("kakaopath");
-                  // loginSuccessEvent(id, "kakao", kakaopath);
+                  loginSuccessEvent(id, "kakao", kakaopath);
                   router.push(kakaopath as string);
                   setToastMessage("고초대졸닷컴에 오신 것을 환영합니다.");
                 },

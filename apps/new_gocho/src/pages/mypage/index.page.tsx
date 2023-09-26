@@ -5,8 +5,10 @@ import { useRouter } from "next/router";
 import { Layout, LoginModal } from "@/components";
 import { useUserInfo } from "@/apis/auth/useUserInfo";
 
+import { mypageFunnelEvent } from "@/ga/mypage";
 import { MenuLink } from "./component";
 import { myPageMenu, sideNavMenu, partElementArr } from "./constant";
+import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
 const MyPage: NextPage = () => {
@@ -20,6 +22,10 @@ const MyPage: NextPage = () => {
       router.replace({ query: { type: "profile" } });
     }
   }, [router]);
+
+  useEffect(() => {
+    mypageFunnelEvent();
+  }, []);
 
   if (isError) {
     return (
@@ -35,6 +41,7 @@ const MyPage: NextPage = () => {
 
   return (
     <Layout>
+      <PageHead />
       <main css={cssObj.wrapper}>
         <section css={cssObj.navBox}>
           <div css={cssObj.navigationBox}>

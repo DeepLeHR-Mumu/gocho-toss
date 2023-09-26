@@ -10,6 +10,7 @@ import { useUserInfo } from "@/apis/auth";
 import { useUserFilter, useDoUserFilter } from "@/apis/filter";
 import { useJdCount } from "@/apis/jd";
 import { LoginModal } from "@/components";
+import { myFilterLoadEvent, myFilterSaveEvent } from "@/ga/jd";
 
 import {
   JOB_FILTER_ARR,
@@ -111,6 +112,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
     setValue(CONTRACT_FILTER_KEY, userFilter ? userFilter[CONTRACT_FILTER_KEY] : []);
     setValue(ROTATION_FILTER_KEY, userFilter ? userFilter[ROTATION_FILTER_KEY] : []);
 
+    myFilterLoadEvent();
     setToastMessage("저장된 My필터를 불러왔습니다.");
   };
 
@@ -132,6 +134,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
       },
     });
 
+    myFilterSaveEvent();
     setToastMessage("My필터가 저장되었습니다.");
   };
 

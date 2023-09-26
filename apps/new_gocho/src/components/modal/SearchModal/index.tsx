@@ -7,11 +7,11 @@ import { useJdArr } from "@/apis/jd";
 import { useCompanyArr } from "@/apis/company";
 
 import { INTERNAL_URL } from "@/pages/constants";
+import { globalSearchEvent } from "@/ga/search";
 
 import { Layout } from "../../Layout";
 import { CompanyCard } from "../../common/CompanyCard";
 import { JdRow } from "../../common/JdRow";
-
 import { SearchDropDown } from "./components/SearchDropDown";
 import {
   saveRecentWordToStorage,
@@ -36,6 +36,7 @@ export const SearchModal = ({ close }: SearchModalProps) => {
 
   const searchHandler = (searchText: string) => {
     searchAndSave(searchText);
+    globalSearchEvent(searchText);
 
     if (close) {
       close();

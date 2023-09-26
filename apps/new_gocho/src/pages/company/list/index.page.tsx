@@ -1,20 +1,22 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 
 import { DropDown } from "shared-ui/deeple-ds";
 
 import { CompanyRow, Pagination } from "@/components";
 import { Layout } from "@/components/Layout";
+import { companyListFunnelEvent } from "@/ga/company";
 import { useCompanyArr } from "@/apis/company";
 import { isQueryString } from "@/utils";
 
 import { HeaderTitle } from "../component/HeaderTitle";
+import { categoryArr } from "../part/CategoryPart/constant";
 import { FilterType, IndustryRouteType } from "./type";
 import { cssObj } from "./style";
+import { PageHead } from "./pageHead";
 import { filterOption } from "./constants";
-import { categoryArr } from "../part/CategoryPart/constant";
 
 const CompanyList: NextPage = () => {
   const [title, setTitle] = useState<string>("이름 순");
@@ -33,8 +35,13 @@ const CompanyList: NextPage = () => {
     industry: currentCategory,
   });
 
+  useEffect(() => {
+    companyListFunnelEvent();
+  }, []);
+
   return (
     <Layout>
+      <PageHead />
       <div css={cssObj.titleContainer}>
         <DropDown
           customTitle={
