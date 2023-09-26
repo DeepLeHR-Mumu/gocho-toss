@@ -14,5 +14,5 @@ export const useTopBannerArr = () =>
   useQuery({
     queryKey: bannerArrKeyObj.top,
     queryFn: getTopBannerArr,
-    select: ({ data, count }) => selector(data, count),
+    select: ({ data }) => selector(data),
   });

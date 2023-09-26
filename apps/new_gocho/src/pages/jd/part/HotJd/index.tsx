@@ -62,13 +62,17 @@ export const HotJd: FunctionComponent = () => {
         {isMobile ? (
           <div css={cssObj.cardContainer}>
             {jdDataObj
-              ? jdDataObj.bannerDataArr.map((jd) => <JdCard key={jd.id} jd={jd} ad />)
+              ? jdDataObj.bannerDataArr.map((banner) => (
+                  <JdCard key={banner.id} jd={{ ...banner.jd, placeArr: [""] }} ad />
+                ))
               : dummyArrCreator(3).map((dummy) => <JdCard key={`hotJd${dummy}`} />)}
           </div>
         ) : (
           <Slider {...setCarouselSetting} ref={sliderRef}>
             {jdDataObj
-              ? jdDataObj.bannerDataArr.map((jd) => <JdCard key={jd.id} jd={jd} ad />)
+              ? jdDataObj.bannerDataArr.map((banner) => (
+                  <JdCard key={banner.id} jd={{ ...banner.jd, placeArr: [""] }} ad />
+                ))
               : dummyArrCreator(3).map((dummy) => <JdCard key={`hotJd${dummy}`} />)}
           </Slider>
         )}
