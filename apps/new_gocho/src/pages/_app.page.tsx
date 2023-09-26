@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -50,6 +50,7 @@ declare global {
 
 function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const isFirstRender = useRef<boolean>(true);
   ReactGA.initialize(KEY);
 
   const [queryClient] = useState(
@@ -88,17 +89,21 @@ function App({ Component, pageProps }: AppProps) {
     const isVercel = window.location.href.includes("vercel");
     const isLocal = window.location.href.includes("localhost");
 
-    if (isVercel || isLocal || !isMobile) {
-      return;
-    }
-
     const { host, pathname, protocol, search } = window.location;
-    if (host.includes("www")) {
-      const mobileHost = host.slice(host.indexOf(".") + 1);
-      window.location.href = `${protocol}//m.${mobileHost}${pathname}${search}`;
-      return;
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+
+      if (isVercel || isLocal || !isMobile) {
+        return;
+      }
+
+      if (host.includes("www")) {
+        const mobileHost = host.slice(host.indexOf(".") + 1);
+        window.location.href = `${protocol}//m.${mobileHost}${pathname}${search}`;
+        return;
+      }
+      window.location.href = `${protocol}//m.${host}${pathname}${search}`;
     }
-    window.location.href = `${protocol}//m.${host}${pathname}${search}`;
   }, []);
 
   useEffect(() => {
@@ -152,9 +157,8 @@ function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <Global styles={globalStyle} />
-          {!(router.pathname === "/search") && <GlobalNavigationBar />}
+          <GlobalNavigationBar />
           <ToastPlaceholder />
-          {/* <GlobalNavigationBar /> */}
           <Component {...pageProps} />
           <Footer />
           <ReactQueryDevtools initialIsOpen={false} />

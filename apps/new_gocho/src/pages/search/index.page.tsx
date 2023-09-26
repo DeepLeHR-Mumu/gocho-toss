@@ -37,7 +37,7 @@ const SearchPage: NextPage = () => {
   });
 
   const { data: companyData } = useCompanyArr({
-    order: searchWord && tab === "company" ? "recent" : undefined,
+    order: "recent",
     q: searchWord,
     size: DEFAULT_PAGE_SIZE,
     page: currentPageNumber,
