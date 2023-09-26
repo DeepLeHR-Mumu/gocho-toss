@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { FiChevronRight } from "react-icons/fi";
 
 import { Chip, DDayChip } from "shared-ui/deeple-ds";
@@ -20,10 +21,10 @@ export const ReceptionGuide = ({ title, contents, processArr, startTime, endTime
             return <span key={`ReceptionProcess${process}`}>{process}</span>;
           }
           return (
-            <>
+            <Fragment key={`ReceptionProcess${process}`}>
               <span>{process}</span>
               <FiChevronRight css={cssObj.rightIcon} />
-            </>
+            </Fragment>
           );
         })}
       </div>
