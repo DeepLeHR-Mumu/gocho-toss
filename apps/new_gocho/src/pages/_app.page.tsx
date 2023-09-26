@@ -13,7 +13,7 @@ import ReactGA from "react-ga4";
 import { KEY, FB_PIXEL_ID } from "shared-constant";
 
 import { useAxiosInterceptor } from "@/apis/axiosInstance";
-import { useSetDeviceType, useGetDeviceType } from "@/globalStates";
+import { useSetDeviceType } from "@/globalStates";
 import { globalStyle } from "@/styles/globalStyle";
 import { GlobalNavigationBar, Footer, ToastPlaceholder } from "@/components";
 import {} from "@/components/global/Footer";
@@ -75,6 +75,33 @@ function App({ Component, pageProps }: AppProps) {
   );
 
   useEffect(() => {
+    const isMobile = [
+      /Android/i,
+      /webOS/i,
+      /iPhone/i,
+      /iPad/i,
+      /iPod/i,
+      /BlackBerry/i,
+      /Windows Phone/i,
+      /Mobile/i,
+    ].some((toMatchItem) => navigator.userAgent.match(toMatchItem));
+    const isVercel = window.location.href.includes("vercel");
+    const isLocal = window.location.href.includes("localhost");
+
+    if (isVercel || isLocal || !isMobile) {
+      return;
+    }
+
+    const { host, pathname, protocol, search } = window.location;
+    if (host.includes("www")) {
+      const mobileHost = host.slice(host.indexOf(".") + 1);
+      window.location.href = `${protocol}//m.${mobileHost}${pathname}${search}`;
+      return;
+    }
+    window.location.href = `${protocol}//m.${host}${pathname}${search}`;
+  }, []);
+
+  useEffect(() => {
     const pageview = () => {
       window.fbq("track", "PageView");
     };
@@ -97,7 +124,6 @@ function App({ Component, pageProps }: AppProps) {
   }, []);
 
   useSetDeviceType();
-  const { isMobile } = useGetDeviceType();
 
   useAxiosInterceptor();
 
@@ -126,7 +152,7 @@ function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <Global styles={globalStyle} />
-          {!(isMobile && router.pathname === "/search") && <GlobalNavigationBar />}
+          {!(router.pathname === "/search") && <GlobalNavigationBar />}
           <ToastPlaceholder />
           {/* <GlobalNavigationBar /> */}
           <Component {...pageProps} />
