@@ -89,7 +89,7 @@ function App({ Component, pageProps }: AppProps) {
     const isVercel = window.location.href.includes("vercel");
     const isLocal = window.location.href.includes("localhost");
 
-    const { protocol } = window.location;
+    const { pathname, protocol, search } = window.location;
     if (isFirstRender.current) {
       isFirstRender.current = false;
 
@@ -97,7 +97,7 @@ function App({ Component, pageProps }: AppProps) {
         return;
       }
 
-      window.location.href = `${protocol}//m.고초대졸.com`;
+      window.location.href = `${protocol}//m.고초대졸.com${pathname}${search}`;
     }
   }, []);
 

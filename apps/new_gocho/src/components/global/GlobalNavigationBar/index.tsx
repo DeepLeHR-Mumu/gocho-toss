@@ -11,8 +11,8 @@ import { useUserInfo } from "@/apis/auth";
 import { useGetDeviceType } from "@/globalStates";
 import { searchFunnelEvent } from "@/ga/search";
 import { INTERNAL_URL } from "@/pages/constants";
-import logoWhite from "@/public/logoWhite.svg";
-import logoBlue from "@/public/logoBlue.svg";
+import logoWhite from "@/public/image/logo/gocho/white.svg";
+import logoBlue from "@/public/image/logo/gocho/blue.svg";
 
 import { SearchModal } from "../../modal/SearchModal";
 import { LoginModal } from "../../modal/LoginModal";
