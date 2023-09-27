@@ -2,14 +2,14 @@ import Image from "next/image";
 
 import { Entries } from "shared-type";
 
-import moneyIcon from "@/public/welfare/money.svg";
-import healthIcon from "@/public/welfare/health.svg";
-import lifeIcon from "@/public/welfare/life.svg";
-import holidayIcon from "@/public/welfare/holiday.svg";
-import facilityIcon from "@/public/welfare/facility.svg";
-import vacationIcon from "@/public/welfare/vacation.svg";
-import growthIcon from "@/public/welfare/growth.svg";
-import etcIcon from "@/public/welfare/etc.svg";
+import moneyIcon from "@/public/image/company/welfare/money.svg";
+import healthIcon from "@/public/image/company/welfare/health.svg";
+import lifeIcon from "@/public/image/company/welfare/life.svg";
+import holidayIcon from "@/public/image/company/welfare/holiday.svg";
+import facilityIcon from "@/public/image/company/welfare/facility.svg";
+import vacationIcon from "@/public/image/company/welfare/vacation.svg";
+import growthIcon from "@/public/image/company/welfare/growth.svg";
+import etcIcon from "@/public/image/company/welfare/etc.svg";
 import { commonCssObj } from "@/pages/company/detail/style";
 
 import { WelfareInfoProps } from "./type";

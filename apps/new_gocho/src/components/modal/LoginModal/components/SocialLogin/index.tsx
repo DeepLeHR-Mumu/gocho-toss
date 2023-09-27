@@ -4,10 +4,10 @@ import { FiX } from "react-icons/fi";
 import { Button } from "shared-ui/deeple-ds";
 
 import logoColor from "shared-image/global/deepLeLogo/largeColor.svg";
-import logoColorForMobile from "@/public/logoColor.svg";
+import logoColorForMobile from "@/public/image/logo/gocho/color.svg";
 
 import { useGetDeviceType } from "@/globalStates";
-import kakao from "@/public/kakao.svg";
+import kakaoLogo from "@/public/image/logo/kakao.svg";
 
 import { SocialLoginProps } from "./type";
 import { cssObj } from "./style";
@@ -39,7 +39,7 @@ const SocialLogin = ({ closeHandler, toEmailLogin }: SocialLoginProps) => {
           <span css={cssObj.subtitle}>가장 빠르고 정확한 생산직, 기술직 엄선 매칭 플랫폼</span>
           <div css={cssObj.tooltip}>3초만에 쉽게 가입하기</div>
           <Button size="large" css={cssObj.kakaoButton}>
-            <Image src={kakao} alt="카카오" css={cssObj.kakaoLogo} />
+            <Image src={kakaoLogo} alt="카카오" css={cssObj.kakaoLogo} />
             카카오로 로그인
           </Button>
           <Button size="small" css={cssObj.emailLogin} onClick={toEmailLogin}>
@@ -55,7 +55,7 @@ const SocialLogin = ({ closeHandler, toEmailLogin }: SocialLoginProps) => {
           <span css={cssObj.subtitle}>가장 빠르고 정확한 생산직, 기술직 엄선 매칭 플랫폼</span>
           <div css={cssObj.tooltip}>3초만에 쉽게 가입하기</div>
           <Button size="large" css={cssObj.kakaoButton} onClick={kakaoLogin}>
-            <Image src={kakao} alt="카카오" css={cssObj.kakaoLogo} />
+            <Image src={kakaoLogo} alt="카카오" css={cssObj.kakaoLogo} />
             카카오로 로그인
           </Button>
           <Button size="small" css={cssObj.emailLogin} onClick={toEmailLogin}>
