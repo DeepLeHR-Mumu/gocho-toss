@@ -11,7 +11,7 @@ import { useDoLogin } from "@/apis/auth";
 import { RequestObjDef as LoginFormValues } from "@/apis/auth/useDoLogin/type";
 import { useGetDeviceType, useToast } from "@/globalStates";
 import { loginModalCloseEvent, loginSuccessEvent } from "@/ga/auth";
-import kakaoLogo from "@/public/kakao.svg";
+import kakaoLogo from "@/public/image/logo/kakao.svg";
 
 import { tokenDecryptor } from "shared-util";
 import ActionBar from "../ActionBar";

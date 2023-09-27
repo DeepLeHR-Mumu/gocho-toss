@@ -1,11 +1,11 @@
-import semiconductorIcon from "@/public/categoryIcon/semiconductor.svg";
-import bioIcon from "@/public/categoryIcon/bio.svg";
-import chemicalIcon from "@/public/categoryIcon/chemical.svg";
-import displayIcon from "@/public/categoryIcon/display.svg";
-import electronicMaterialIcon from "@/public/categoryIcon/electronicMaterials.svg";
-import petrochemiRefineIcon from "@/public/categoryIcon/petrochmicalRefine.svg";
-import secondBetteryIcon from "@/public/categoryIcon/secondBattery.svg";
-import pharmaceuticalIcon from "@/public/categoryIcon/pharmaceutical.svg";
+import semiconductorIcon from "@/public/image/company/categoryIcon/semiconductor.svg";
+import bioIcon from "@/public/image/company/categoryIcon/bio.svg";
+import chemicalIcon from "@/public/image/company/categoryIcon/chemical.svg";
+import displayIcon from "@/public/image/company/categoryIcon/display.svg";
+import electronicMaterialIcon from "@/public/image/company/categoryIcon/electronicMaterials.svg";
+import petrochemiRefineIcon from "@/public/image/company/categoryIcon/petrochmicalRefine.svg";
+import secondBetteryIcon from "@/public/image/company/categoryIcon/secondBattery.svg";
+import pharmaceuticalIcon from "@/public/image/company/categoryIcon/pharmaceutical.svg";
 import { CategoryIcon } from "./type";
 
 export const topCategoryIconArr: CategoryIcon[] = [

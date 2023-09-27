@@ -6,7 +6,7 @@ import Image from "next/image";
 import deepLeLogo from "shared-image/global/deepLeLogo/smallMono.svg";
 import { unknownErrorEvent, unknownErrorFunnelEvent } from "@/ga/error";
 
-import jobiError from "@/public/jobi/jobi_500.png";
+import jobiError from "@/public/image/jobi/jobi_500.png";
 
 import { Layout } from "@/components";
 import { INTERNAL_URL } from "@/pages/constants";

@@ -11,7 +11,7 @@ import { Layout, ShareModal, CompanyBookmark, SkeletonBox } from "@/components";
 import { useCompanyDetail } from "@/apis/company";
 import { isQueryString } from "@/utils";
 import { INTERNAL_URL } from "@/pages/constants";
-import backgroundImage from "@/public/companyBackground.png";
+import backgroundImage from "@/public/image/company/background.png";
 
 import { cssObj, skeletonCssObj } from "./style";
 

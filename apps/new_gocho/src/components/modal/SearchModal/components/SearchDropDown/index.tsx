@@ -5,7 +5,7 @@ import { FiArrowUpLeft, FiSearch } from "react-icons/fi";
 import { RiCloseCircleFill } from "react-icons/ri";
 import { SearchBar } from "shared-ui/deeple-ds";
 
-import recentLogo from "@/public/recent.svg";
+import recentImage from "@/public/image/search/recent.svg";
 import { globalSearchEvent } from "@/ga/search";
 
 import { SearchDropDownProps } from "./type";
@@ -70,7 +70,7 @@ export const SearchDropDown = ({
           <ul>
             {recentWordArr.slice(0, 10).map((recentWord) => (
               <li key={recentWord} css={cssObj.listItem}>
-                <Image src={recentLogo} alt="recent" />
+                <Image src={recentImage} alt="recent" />
                 <button
                   type="button"
                   css={cssObj.word}

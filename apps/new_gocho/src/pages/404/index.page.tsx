@@ -6,7 +6,7 @@ import Image from "next/image";
 import deepLeLogo from "shared-image/global/deepLeLogo/smallMono.svg";
 import { notFoundEvent, notFoundFunnelEvent } from "@/ga/error";
 
-import jobiError from "@/public/jobi/jobi_404.png";
+import jobiError from "@/public/image/jobi/jobi_404.png";
 
 import { Layout } from "@/components";
 import { INTERNAL_URL } from "@/pages/constants";
