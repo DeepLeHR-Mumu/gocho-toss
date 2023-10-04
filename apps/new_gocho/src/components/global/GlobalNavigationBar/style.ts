@@ -15,7 +15,7 @@ export const getCssObj = (themeWhite: boolean) => ({
     left: 0;
     top: 0;
     background-color: ${themeWhite ? NEWCOLORS.WHITE : NEWCOLORS.BLUE300};
-    border-bottom: 1px solid ${themeWhite ? NEWCOLORS.GRAY200 : NEWCOLORS.WHITE};
+    border-bottom: ${themeWhite ? `1px solid ${NEWCOLORS.GRAY200}` : "1px solid rgba(255, 255, 255, 0.2)"};
 
     ${TEMP} {
       height: 3.5rem;
@@ -92,7 +92,7 @@ export const getCssObj = (themeWhite: boolean) => ({
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
     padding-bottom: 1rem;
   `,
 
@@ -104,6 +104,10 @@ export const getCssObj = (themeWhite: boolean) => ({
     color: ${themeWhite ? NEWCOLORS.BLUE200 : NEWCOLORS.BLUE100};
     background-color: transparent;
     ${NEWTEXTS.TITLE9}
+
+    :last-of-type {
+      margin-right: 1rem;
+    }
   `,
 
   loginButton: css`

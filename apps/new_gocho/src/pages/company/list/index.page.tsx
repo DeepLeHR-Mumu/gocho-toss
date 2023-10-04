@@ -13,31 +13,38 @@ import { isQueryString } from "@/utils";
 
 import { HeaderTitle } from "../component/HeaderTitle";
 import { categoryArr } from "../part/CategoryPart/constant";
-import { FilterType, IndustryRouteType } from "./type";
+import { OrderType, IndustryRouteType } from "./type";
 import { cssObj } from "./style";
 import { PageHead } from "./pageHead";
 import { filterOption } from "./constants";
 
 const CompanyList: NextPage = () => {
+  const router = useRouter();
+
   const [title, setTitle] = useState<string>("이름 순");
-  const [currentFilter, setCurrentFilter] = useState<FilterType>("name");
+  const [currentCategory, setCurrentCategory] = useState<IndustryRouteType>(router.query.category as IndustryRouteType);
+  const [currentOrder, setCurrentOrder] = useState<OrderType>("name");
 
-  const { query } = useRouter();
-
-  const [currentCategory, setCurrentCategory] = useState<IndustryRouteType>(query.category as IndustryRouteType);
-
-  const currentPageNumber = isQueryString(query.page) ? Number(query.page) : 1;
+  const currentPageNumber = isQueryString(router.query.page) ? Number(router.query.page) : 1;
 
   const { data: companyDataObj } = useCompanyArr({
-    order: currentFilter,
+    order: currentOrder,
     page: currentPageNumber,
     size: 15,
-    industry: currentCategory,
+    industry: String(router.query.category),
   });
 
   useEffect(() => {
     companyListFunnelEvent();
   }, []);
+
+  useEffect(() => {
+    if (Object.keys(router.query).length === 0 && router.isReady) {
+      router.replace({ query: { category: "전체기업" } });
+    } else if (router.isReady) {
+      setCurrentCategory(router.query.category as IndustryRouteType);
+    }
+  }, [router]);
 
   return (
     <Layout>
@@ -46,7 +53,7 @@ const CompanyList: NextPage = () => {
         <DropDown
           customTitle={
             <div css={cssObj.titleFilterBox}>
-              {currentCategory ? <HeaderTitle title={currentCategory} /> : <HeaderTitle title="전체기업" />}
+              <HeaderTitle title={currentCategory} />
               <FiChevronDown css={cssObj.titleFilterIcon} />
             </div>
           }
@@ -58,6 +65,7 @@ const CompanyList: NextPage = () => {
               content: categoryText,
               onClick: () => {
                 setCurrentCategory(categoryText);
+                router.replace({ query: { category: categoryText } });
               },
             })),
           }}
@@ -79,12 +87,12 @@ const CompanyList: NextPage = () => {
             }
             menu={{
               width: 180,
-              options: filterOption.map(({ content, filter }) => ({
+              options: filterOption.map(({ content, order }) => ({
                 content,
                 focused: title === content,
                 onClick: () => {
                   setTitle(content);
-                  setCurrentFilter(filter);
+                  setCurrentOrder(order);
                 },
               })),
             }}

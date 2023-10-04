@@ -1,15 +1,10 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
 import { NEWCOLORS } from "shared-style/color";
-import { TEMP } from "shared-style/mediaQuery";
 
 export const cssObj = {
   sectionContainer: css`
     margin: 3rem 0;
-
-    ${TEMP} {
-      margin: 1.5rem 0;
-    }
   `,
 
   titleContainer: css`
@@ -19,10 +14,6 @@ export const cssObj = {
 
   title: css`
     ${NEWTEXTS.TITLE15};
-
-    ${TEMP} {
-      ${NEWTEXTS.TITLE9};
-    }
   `,
 
   buttonContainer: css`
@@ -36,10 +27,7 @@ export const cssObj = {
     border-radius: 50%;
     background-color: ${isDisabled ? NEWCOLORS.GRAY50 : NEWCOLORS.WHITE};
     border: 1px solid ${NEWCOLORS.GRAY200};
-
-    ${TEMP} {
-      display: none;
-    }
+    cursor: ${isDisabled ? "default" : "pointer"};
 
     > svg {
       color: ${isDisabled ? NEWCOLORS.GRAY100 : NEWCOLORS.GRAY300};
@@ -50,10 +38,6 @@ export const cssObj = {
 
   sliderContainer: css`
     margin-top: 2.25rem;
-
-    ${TEMP} {
-      margin-top: 1.5rem;
-    }
   `,
 
   cardContainer: css`

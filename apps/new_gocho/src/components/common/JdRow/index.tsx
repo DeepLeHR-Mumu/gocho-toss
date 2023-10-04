@@ -63,10 +63,22 @@ export const JdRow = ({ jd, half, replace, callback }: JdRowProps) => {
       `}
     >
       <div css={cssObj.descriptionWrapper}>
-        <Link href={`${INTERNAL_URL.JD_DETAIL}/${jdId}`} replace={replace} onClick={callback}>
+        <Link
+          href={`${INTERNAL_URL.JD_DETAIL}/${jdId}`}
+          replace={replace}
+          onClick={callback}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <span css={cssObj.jdCompanyName}>{companyName}</span>
         </Link>
-        <Link href={`${INTERNAL_URL.JD_DETAIL}/${jdId}`} replace={replace} onClick={callback}>
+        <Link
+          href={`${INTERNAL_URL.JD_DETAIL}/${jdId}`}
+          replace={replace}
+          onClick={callback}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <div css={cssObj.jdTitleWrapper}>
             <h3 css={cssObj.jdTitle}>{jdTitle}</h3>
           </div>

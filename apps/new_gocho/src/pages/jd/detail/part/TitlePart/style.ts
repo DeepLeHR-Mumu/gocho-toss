@@ -31,10 +31,19 @@ export const cssObj = {
     ${NEWTEXTS.TITLE12}
   `,
 
-  bookmarkWrapper: css`
+  bookmarkWrapper: (isBookmarked: boolean) => css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    min-width: 5rem;
     padding: 0.625rem;
     margin-right: 1.25rem;
     border: 1px solid ${NEWCOLORS.GRAY200};
     border-radius: 0.5rem;
+
+    > span {
+      color: ${isBookmarked ? NEWCOLORS.BLACK : NEWCOLORS.GRAY200};
+    }
   `,
 };

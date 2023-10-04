@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { dummyArrCreator } from "shared-util";
+import defaultCompanyBg from "shared-image/global/common/default_company_bg.webp";
 
 import { useMainBannerArr } from "@/apis/ads";
 import { SkeletonBox } from "@/components";
@@ -33,13 +34,13 @@ export const AdPart: FunctionComponent = () => {
                   rel="noopener noreferrer"
                 >
                   <div css={cssObj.imageWrapper}>
-                    <Image src={banner.pcImageUrl} alt="메인 배너" fill priority />
+                    <Image src={banner.pcImageUrl || defaultCompanyBg} alt="메인 배너" fill priority />
                   </div>
                 </Link>
               ) : (
                 <div key={`indexMainBanner${banner.id}`} css={cssObj.banner}>
                   <div css={cssObj.imageWrapper}>
-                    <Image src={banner.pcImageUrl} alt="메인 배너" fill priority />
+                    <Image src={banner.pcImageUrl || defaultCompanyBg} alt="메인 배너" fill priority />
                   </div>
                 </div>
               )

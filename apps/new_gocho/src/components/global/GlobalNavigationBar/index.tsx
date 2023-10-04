@@ -122,6 +122,14 @@ export const GlobalNavigationBar = () => {
                 </nav>
                 <div css={etcWrapper}>
                   <a
+                    href="https://blog.gochodaejol.com/?utm_source=gochodaejoldotcom&utm_medium=GNB"
+                    target="_blank"
+                    rel="noreferrer"
+                    css={businessServiceButton}
+                  >
+                    블로그
+                  </a>
+                  <a
                     href="https://gocho.biz/?utm_source=gochodaejoldotcom&utm_medium=GNB"
                     target="_blank"
                     rel="noreferrer"

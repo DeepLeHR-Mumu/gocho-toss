@@ -134,4 +134,8 @@ export const cssObj = {
       }
     }
   `,
+
+  filterButton: css`
+    width: fit-content;
+  `,
 };

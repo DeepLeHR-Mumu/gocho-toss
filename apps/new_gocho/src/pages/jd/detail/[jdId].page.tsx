@@ -67,6 +67,7 @@ const JdDetailPage: NextPage = () => {
                 companyName: jdDetailData.company.name,
                 title: jdDetailData.title,
                 isBookmark: jdDetailData.is_bookmark,
+                bookmarkCount: jdDetailData.bookmark,
                 applyUrl: jdDetailData.apply_url,
                 endTime: jdDetailData.end_time,
               }

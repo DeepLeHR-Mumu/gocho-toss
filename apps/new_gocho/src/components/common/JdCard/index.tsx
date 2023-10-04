@@ -1,5 +1,4 @@
 import { FunctionComponent } from "react";
-import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,8 +13,6 @@ import { JdCardProps } from "./type";
 import { cssObj } from "./style";
 
 export const JdCard: FunctionComponent<JdCardProps> = ({ jd, ad, blockClick }) => {
-  const router = useRouter();
-
   if (!jd) {
     return (
       <div css={cssObj.skeletonWrapper}>
@@ -33,6 +30,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd, ad, blockClick }) =
             jdAdClickEvent(jd.id);
           }
         }}
+        rel="noopener noreferrer"
       > */}
       <div css={cssObj.imageWrapper}>
         <Image
@@ -44,7 +42,9 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd, ad, blockClick }) =
             if (blockClick) {
               return;
             }
-            router.push(`${INTERNAL_URL.JD_DETAIL}/${jd.id}`);
+            const newUrl = `${INTERNAL_URL.JD_DETAIL}/${jd.id}`;
+            const newWindow = window.open(newUrl, "_blank", "noopener, noreferrer");
+            if (newWindow) newWindow.opener = null;
             if (ad) {
               jdAdClickEvent(jd.id);
             }
