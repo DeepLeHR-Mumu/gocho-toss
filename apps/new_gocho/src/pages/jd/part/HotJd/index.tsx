@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import Image from "next/image";
 import Link from "next/link";
 
-import JobiChatting from "shared-image/global/jobi/chatting.png";
+import jobiChatting from "shared-image/global/jobi/chatting.png";
 import { dummyArrCreator } from "shared-util";
 
 import { useTopBannerArr } from "@/apis/ads";
@@ -56,7 +56,7 @@ export const HotJd: FunctionComponent = () => {
           </p>
           <div css={cssObj.nowLink}>바로가기 {">"}</div>
           <div css={cssObj.imageWrapper}>
-            <Image src={JobiChatting} alt="채용중 공고" fill />
+            <Image src={jobiChatting} alt="채용중 공고" fill />
           </div>
         </Link>
         {isMobile ? (
