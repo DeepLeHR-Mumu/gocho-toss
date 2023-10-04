@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { DDayChip } from "shared-ui/deeple-ds";
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
 import { INTERNAL_URL } from "@/pages/constants";
 import { JdBookmark, SkeletonBox } from "@/components";
@@ -35,7 +36,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd, ad, blockClick }) =
       > */}
       <div css={cssObj.imageWrapper}>
         <Image
-          src={jd.company.logoUrl}
+          src={jd.company.logoUrl || defaultCompanyLogo}
           alt="회사 로고"
           fill
           onClick={() => {
