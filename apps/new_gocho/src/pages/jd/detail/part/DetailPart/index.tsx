@@ -83,7 +83,10 @@ export const DetailPart = () => {
     <>
       <section css={cssObj.wrapper}>
         <div css={cssObj.container}>
-          <DetailSubContainer title="주요업무" contents={getTaskContents(jdData.task)} />
+          <DetailSubContainer
+            title="주요업무"
+            contents={getTaskContents({ task_detail_arr: jdData.task_detail_arr, ...jdData.task })}
+          />
           <DetailSubContainer
             title="자격요건"
             contents={{
