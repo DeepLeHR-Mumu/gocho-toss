@@ -8,6 +8,7 @@ addAssignees: author
 reviewers:
   - DeepLeHR-Mumu
   - DeepLeHR-Dari
+  - DeepLeHR/frontend
 
 # A number of reviewers added to the PR
 # Set 0 to add all the reviewers (default: 0)

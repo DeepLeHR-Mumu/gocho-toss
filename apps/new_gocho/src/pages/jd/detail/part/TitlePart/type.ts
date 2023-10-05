@@ -4,6 +4,7 @@ export interface TitlePartProps {
     companyName: string;
     title: string;
     isBookmark: boolean;
+    bookmarkCount: number;
     applyUrl: string;
     endTime: string;
   };

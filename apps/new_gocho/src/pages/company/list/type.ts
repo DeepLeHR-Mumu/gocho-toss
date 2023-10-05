@@ -1,3 +1,3 @@
-export type FilterType = "name" | "popular" | "comment";
+export type OrderType = "name" | "popular" | "comment";
 
-export type IndustryRouteType = string | undefined;
+export type IndustryRouteType = string;

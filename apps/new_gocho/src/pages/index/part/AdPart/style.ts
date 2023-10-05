@@ -71,16 +71,12 @@ export const cssObj = {
   `,
 
   imageWrapper: css`
-    width: 62.5rem;
-    height: 25rem;
+    width: 67.5rem;
+    height: 27rem;
     border-radius: 1rem;
+    border: 1px solid ${NEWCOLORS.GRAY200};
     overflow: hidden;
     position: relative;
-
-    ${TEMP} {
-      width: calc(100vw - 5rem);
-      height: calc(100vw / 1080 * 420);
-    }
 
     > img {
       object-fit: cover;
@@ -91,16 +87,13 @@ export const cssObj = {
     position: absolute;
     transform: translate(0, -50%);
     top: 50%;
-    ${position === "left" ? "left: calc(max(25px, 50% - 520px));" : "right: calc(max(25px, 50% - 520px));"};
+    ${position === "left" ? "left: calc(50% - 520px);" : "right: calc(50% - 520px);"};
     width: 2.5rem;
     height: 2.5rem;
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 1rem;
     border: 1px solid ${NEWCOLORS.WHITE};
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
-
-    ${TEMP} {
-      display: none;
-    }
 
     > svg {
       color: ${NEWCOLORS.GRAY300};

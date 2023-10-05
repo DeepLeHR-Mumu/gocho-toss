@@ -124,7 +124,6 @@ function App({ Component, pageProps }: AppProps) {
   }, []);
 
   useSetDeviceType();
-
   useAxiosInterceptor();
 
   return (

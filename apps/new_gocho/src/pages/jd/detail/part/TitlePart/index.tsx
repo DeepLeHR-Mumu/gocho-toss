@@ -23,7 +23,9 @@ export const TitlePart = ({ jd }: TitlePartProps) => {
         <div css={cssObj.wrapper}>
           <span css={cssObj.companyName}>{jd.companyName}</span>
           <h3 css={cssObj.jdTitle}>{jd.title}</h3>
-          <JdBookmark jdId={jd.jdId} isBookmarked={jd.isBookmark} css={cssObj.bookmarkWrapper} />
+          <div css={cssObj.bookmarkWrapper(jd.isBookmark)}>
+            <JdBookmark jdId={jd.jdId} isBookmarked={jd.isBookmark} /> <span>{jd.bookmarkCount}</span>
+          </div>
           <Button size="small" color={isExpired ? "disable" : undefined}>
             {isExpired ? (
               <p>만료공고</p>

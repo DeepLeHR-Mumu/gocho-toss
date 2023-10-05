@@ -336,6 +336,7 @@ export const FilterPart = ({ filterForm, triggerHandler }: FilterPartProps) => {
                 </button>
                 <Button
                   type="button"
+                  css={cssObj.filterButton}
                   size="small"
                   onClick={() => {
                     triggerHandler();

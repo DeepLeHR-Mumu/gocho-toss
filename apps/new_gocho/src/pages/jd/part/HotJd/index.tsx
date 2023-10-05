@@ -1,4 +1,4 @@
-import { FunctionComponent, useRef } from "react";
+import { FunctionComponent, useRef, useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Slider from "react-slick";
 import Image from "next/image";
@@ -9,7 +9,6 @@ import { dummyArrCreator } from "shared-util";
 
 import { useTopBannerArr } from "@/apis/ads";
 import { JdCard } from "@/components/common/JdCard";
-import { useGetDeviceType } from "@/globalStates";
 import { INTERNAL_URL } from "@/pages/constants";
 
 import { setCarouselSetting } from "./util";
@@ -17,9 +16,23 @@ import { cssObj } from "./style";
 
 export const HotJd: FunctionComponent = () => {
   const sliderRef = useRef<Slider>(null);
+  const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const [isDragging, setIsDragging] = useState(false);
 
-  const { isMobile } = useGetDeviceType();
   const { data: jdDataObj } = useTopBannerArr();
+
+  const MAX_SLIDER_INDEX = (jdDataObj?.bannerDataArr.length || 0) - 3;
+  const handlePrev = () => {
+    if (currentSlide - 1 >= 0) {
+      sliderRef.current?.slickGoTo(currentSlide - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentSlide + 1 <= MAX_SLIDER_INDEX) {
+      sliderRef.current?.slickGoTo(currentSlide + 1);
+    }
+  };
 
   return (
     <section css={cssObj.sectionContainer}>
@@ -27,18 +40,18 @@ export const HotJd: FunctionComponent = () => {
         <h2 css={cssObj.title}>지금 HOT한 공고 🔥</h2>
         <div css={cssObj.buttonContainer}>
           <button
-            css={cssObj.sliderButton}
+            css={cssObj.sliderButton(currentSlide === 0)}
             aria-label="이전 추천공고보기"
             type="button"
-            onClick={() => sliderRef.current?.slickPrev()}
+            onClick={handlePrev}
           >
             <FiChevronLeft />
           </button>
           <button
-            css={cssObj.sliderButton}
+            css={cssObj.sliderButton(currentSlide >= MAX_SLIDER_INDEX)}
             aria-label="이전 추천공고보기"
             type="button"
-            onClick={() => sliderRef.current?.slickNext()}
+            onClick={handleNext}
           >
             <FiChevronRight />
           </button>
@@ -59,23 +72,25 @@ export const HotJd: FunctionComponent = () => {
             <Image src={jobiChatting} alt="채용중 공고" fill />
           </div>
         </Link>
-        {isMobile ? (
-          <div css={cssObj.cardContainer}>
-            {jdDataObj
-              ? jdDataObj.bannerDataArr.map((banner) => (
-                  <JdCard key={banner.id} jd={{ ...banner.jd, placeArr: [""] }} ad />
-                ))
-              : dummyArrCreator(3).map((dummy) => <JdCard key={`hotJd${dummy}`} />)}
-          </div>
-        ) : (
-          <Slider {...setCarouselSetting} ref={sliderRef}>
-            {jdDataObj
-              ? jdDataObj.bannerDataArr.map((banner) => (
-                  <JdCard key={banner.id} jd={{ ...banner.jd, placeArr: [""] }} ad />
-                ))
-              : dummyArrCreator(3).map((dummy) => <JdCard key={`hotJd${dummy}`} />)}
-          </Slider>
-        )}
+        <Slider
+          {...setCarouselSetting}
+          ref={sliderRef}
+          beforeChange={(_oldIndex, newIndex) => {
+            setIsDragging(true);
+            if (newIndex <= MAX_SLIDER_INDEX) {
+              setCurrentSlide(newIndex);
+            }
+          }}
+          afterChange={() => {
+            setIsDragging(false);
+          }}
+        >
+          {jdDataObj
+            ? jdDataObj.bannerDataArr.map((banner) => (
+                <JdCard key={banner.id} jd={{ ...banner.jd, placeArr: [""] }} blockClick={isDragging} ad />
+              ))
+            : dummyArrCreator(3).map((dummy) => <JdCard key={`hotJd${dummy}`} />)}
+        </Slider>
       </div>
     </section>
   );
