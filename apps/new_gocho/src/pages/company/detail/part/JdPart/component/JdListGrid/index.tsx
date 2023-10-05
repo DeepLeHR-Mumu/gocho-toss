@@ -12,17 +12,18 @@ import { JdListGridProps } from "./type";
 import { cssObj } from "./style";
 
 export const JdListGrid = ({ filter }: JdListGridProps) => {
-  const [jdArrSize, setJdArrSize] = useState(BUNDLE_SIZE);
   const router = useRouter();
 
-  const { data: jdData } = useJdArr({
+  const [jdArrSize, setJdArrSize] = useState(BUNDLE_SIZE);
+
+  const { data: jdDataObj } = useJdArr({
     companyId: Number(router.query.companyId),
     order: "recent",
     page: 1,
     filter,
     size: jdArrSize,
   });
-  const totalJdNumber = jdData ? jdData.pageResult.totalElements : 0;
+  const totalJdNumber = jdDataObj ? jdDataObj.pageResult.totalElements : 0;
   const isTotalJd = totalJdNumber < jdArrSize;
 
   const seeMore = () => {
@@ -34,7 +35,7 @@ export const JdListGrid = ({ filter }: JdListGridProps) => {
     setJdArrSize((prev) => prev + BUNDLE_SIZE);
   };
 
-  if (!jdData) {
+  if (!jdDataObj) {
     return (
       <section css={commonCssObj.box}>
         <div css={cssObj.titleWrapper(filter === "valid")}>
@@ -56,7 +57,7 @@ export const JdListGrid = ({ filter }: JdListGridProps) => {
       <div css={cssObj.jdWrapper}>
         {totalJdNumber !== 0 ? (
           <>
-            {jdData.jdDataArr.map((jd) => (
+            {jdDataObj.jdDataArr.map((jd) => (
               <JdRow
                 key={jd.id}
                 jd={{
@@ -69,17 +70,15 @@ export const JdListGrid = ({ filter }: JdListGridProps) => {
                 }}
               />
             ))}
-            {jdData.jdDataArr.length < totalJdNumber && (
-              <button
-                type="button"
-                css={cssObj.seeMoreButton}
-                onClick={() => {
-                  seeMore();
-                }}
-              >
-                {isTotalJd ? "접기" : "더보기"} {isTotalJd ? <FiChevronUp /> : <FiChevronDown />}
-              </button>
-            )}
+            <button
+              type="button"
+              css={cssObj.seeMoreButton}
+              onClick={() => {
+                seeMore();
+              }}
+            >
+              {isTotalJd ? "접기" : "더보기"} {isTotalJd ? <FiChevronUp /> : <FiChevronDown />}
+            </button>
           </>
         ) : (
           <p css={cssObj.noJd}>현재 채용중인 공고가 없습니다.</p>

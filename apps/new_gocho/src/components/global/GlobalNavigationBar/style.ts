@@ -16,10 +16,6 @@ export const getCssObj = (themeWhite: boolean) => ({
     top: 0;
     background-color: ${themeWhite ? NEWCOLORS.WHITE : NEWCOLORS.BLUE300};
     border-bottom: ${themeWhite ? `1px solid ${NEWCOLORS.GRAY200}` : "1px solid rgba(255, 255, 255, 0.2)"};
-
-    ${TEMP} {
-      height: 3.5rem;
-    }
   `,
 
   titleArea: css`
@@ -35,19 +31,7 @@ export const getCssObj = (themeWhite: boolean) => ({
     > img {
       width: 12rem;
       object-fit: contain;
-
-      ${TEMP} {
-        width: 7.8rem;
-      }
     }
-  `,
-
-  mobileIcon: css`
-    width: 1.25rem;
-    height: 1.25rem;
-    color: ${NEWCOLORS.WHITE};
-    margin-left: 1rem;
-    cursor: pointer;
   `,
 
   searchBarWrapper: css`
@@ -119,7 +103,9 @@ export const getCssObj = (themeWhite: boolean) => ({
     width: 1.5rem;
     height: 1.5rem;
     color: ${themeWhite ? NEWCOLORS.BLACK : NEWCOLORS.WHITE};
+    margin-right: 0.5rem;
   `,
+
   profileDropDownMenu: css`
     display: block;
     width: 100%;
