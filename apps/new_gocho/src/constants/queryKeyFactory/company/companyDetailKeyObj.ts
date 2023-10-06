@@ -1,5 +1,5 @@
 export interface CompanyDetailRequestDef {
-  companyId?: number;
+  companyId: number | null;
   isStatic: boolean;
 }
 

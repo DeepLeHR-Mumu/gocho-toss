@@ -14,7 +14,7 @@ import { INTERNAL_URL } from "@/pages/constants";
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
-const NotFoundPage: NextPage = () => {
+const UnknownError: NextPage = () => {
   useEffect(() => {
     unknownErrorFunnelEvent();
     unknownErrorEvent();
@@ -47,4 +47,4 @@ const NotFoundPage: NextPage = () => {
   );
 };
 
-export default NotFoundPage;
+export default UnknownError;
