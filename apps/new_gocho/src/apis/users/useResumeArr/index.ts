@@ -2,8 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 
 import { axiosInstance } from "@/apis/axiosInstance";
 
-import { GetUserResumeArrDef } from "./type";
 import { resumeArrKeyObj } from "@/constants/queryKeyFactory/user/resumeKeyObj";
+
+import { GetUserResumeArrDef } from "./type";
 
 export const getUserResumeArr: GetUserResumeArrDef = async (userId: number) => {
   const { data } = await axiosInstance.get(`/users/${userId}/resumes`);
