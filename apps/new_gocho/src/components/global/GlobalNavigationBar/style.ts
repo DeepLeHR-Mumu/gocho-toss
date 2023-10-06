@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
 import { NEWCOLORS } from "shared-style/color";
-import { TEMP } from "shared-style/mediaQuery";
 
 export const getCssObj = (themeWhite: boolean) => ({
   wrapper: css`
@@ -15,11 +14,7 @@ export const getCssObj = (themeWhite: boolean) => ({
     left: 0;
     top: 0;
     background-color: ${themeWhite ? NEWCOLORS.WHITE : NEWCOLORS.BLUE300};
-    border-bottom: 1px solid ${themeWhite ? NEWCOLORS.GRAY200 : NEWCOLORS.WHITE};
-
-    ${TEMP} {
-      height: 3.5rem;
-    }
+    border-bottom: ${themeWhite ? `1px solid ${NEWCOLORS.GRAY200}` : "1px solid rgba(255, 255, 255, 0.2)"};
   `,
 
   titleArea: css`
@@ -35,19 +30,7 @@ export const getCssObj = (themeWhite: boolean) => ({
     > img {
       width: 12rem;
       object-fit: contain;
-
-      ${TEMP} {
-        width: 7.8rem;
-      }
     }
-  `,
-
-  mobileIcon: css`
-    width: 1.25rem;
-    height: 1.25rem;
-    color: ${NEWCOLORS.WHITE};
-    margin-left: 1rem;
-    cursor: pointer;
   `,
 
   searchBarWrapper: css`
@@ -92,7 +75,7 @@ export const getCssObj = (themeWhite: boolean) => ({
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
     padding-bottom: 1rem;
   `,
 
@@ -104,6 +87,10 @@ export const getCssObj = (themeWhite: boolean) => ({
     color: ${themeWhite ? NEWCOLORS.BLUE200 : NEWCOLORS.BLUE100};
     background-color: transparent;
     ${NEWTEXTS.TITLE9}
+
+    :last-of-type {
+      margin-right: 1rem;
+    }
   `,
 
   loginButton: css`
@@ -115,7 +102,9 @@ export const getCssObj = (themeWhite: boolean) => ({
     width: 1.5rem;
     height: 1.5rem;
     color: ${themeWhite ? NEWCOLORS.BLACK : NEWCOLORS.WHITE};
+    margin-right: 0.5rem;
   `,
+
   profileDropDownMenu: css`
     display: block;
     width: 100%;

@@ -51,7 +51,7 @@ export const ReviewPart = () => {
       <div css={cssObj.box}>
         <div css={cssObj.titleWrapper}>
           <h3 css={cssObj.title}>최근 리뷰</h3>
-          <span css={cssObj.reviewNumber}>{companyCommentData.comment_arr.length}건</span>
+          <p css={cssObj.reviewNumber}>{companyCommentData.comment_arr.length}건</p>
           <div css={cssObj.reviewButtonWrapper}>
             <Chip size="large" color="outlineBlue" onClick={() => setWriteReview(!writeReview)}>
               {writeReview ? "닫기" : "+ 리뷰 남기기"}

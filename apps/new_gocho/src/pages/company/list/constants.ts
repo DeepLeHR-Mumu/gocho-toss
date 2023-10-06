@@ -1,21 +1,21 @@
-import { FilterType } from "./type";
+import { OrderType } from "./type";
 
 interface filterArrDef {
   content: string;
-  filter: FilterType;
+  order: OrderType;
 }
 
 export const filterOption: filterArrDef[] = [
   {
     content: "이름 순",
-    filter: "name",
+    order: "name",
   },
   {
     content: "팔로워 많은 순",
-    filter: "popular",
+    order: "popular",
   },
   {
     content: "리뷰 많은 순",
-    filter: "comment",
+    order: "comment",
   },
 ];

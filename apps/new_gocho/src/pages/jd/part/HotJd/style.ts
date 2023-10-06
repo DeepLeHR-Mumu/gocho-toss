@@ -1,15 +1,10 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
 import { NEWCOLORS } from "shared-style/color";
-import { TEMP } from "shared-style/mediaQuery";
 
 export const cssObj = {
   sectionContainer: css`
     margin: 3rem 0;
-
-    ${TEMP} {
-      margin: 1.5rem 0;
-    }
   `,
 
   titleContainer: css`
@@ -19,10 +14,6 @@ export const cssObj = {
 
   title: css`
     ${NEWTEXTS.TITLE15};
-
-    ${TEMP} {
-      ${NEWTEXTS.TITLE9};
-    }
   `,
 
   buttonContainer: css`
@@ -30,18 +21,16 @@ export const cssObj = {
     gap: 0 1.75rem;
   `,
 
-  sliderButton: css`
+  sliderButton: (isDisabled: boolean) => css`
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
+    background-color: ${isDisabled ? NEWCOLORS.GRAY50 : NEWCOLORS.WHITE};
     border: 1px solid ${NEWCOLORS.GRAY200};
-
-    ${TEMP} {
-      display: none;
-    }
+    cursor: ${isDisabled ? "default" : "pointer"};
 
     > svg {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${isDisabled ? NEWCOLORS.GRAY100 : NEWCOLORS.GRAY300};
       width: 2rem;
       height: 2rem;
     }
@@ -55,10 +44,6 @@ export const cssObj = {
     .slick-slider {
       width: calc(100% - 17.25rem);
     }
-
-    ${TEMP} {
-      margin-top: 1.5rem;
-    }
   `,
 
   nowJdBanner: css`
@@ -70,21 +55,11 @@ export const cssObj = {
     padding: 1.75rem;
     background-color: ${NEWCOLORS.BLUE400};
     border-radius: 0.5rem;
-
-    ${TEMP} {
-      width: 8.75rem;
-      height: 12.25rem;
-      padding: 1rem 0.75rem;
-    }
   `,
 
   bannerTitle: css`
     ${NEWTEXTS.TITLE16};
     color: ${NEWCOLORS.WHITE};
-
-    ${TEMP} {
-      ${NEWTEXTS.TITLE14};
-    }
   `,
 
   nowLink: css`
@@ -93,10 +68,6 @@ export const cssObj = {
     display: block;
     cursor: pointer;
     margin-top: 1rem;
-
-    ${TEMP} {
-      ${NEWTEXTS.TITLE1};
-    }
   `,
 
   imageWrapper: css`
@@ -106,11 +77,6 @@ export const cssObj = {
     bottom: 1rem;
     right: 0.5rem;
     margin: 0 0 0 auto;
-
-    ${TEMP} {
-      width: 3.75rem;
-      height: 5.125rem;
-    }
 
     > img {
       object-fit: contain;

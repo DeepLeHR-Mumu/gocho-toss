@@ -5,19 +5,19 @@ import { dateConverter } from "shared-util";
 
 import { JdDetailObjDef } from "@/apis/jd/type/jdDetail";
 import { DetailContents } from "./component/DetailSubContainer/type";
+import { TaskContensType } from "./type";
 
 const createSpanTag = (children: string) => createElement("span", {}, children);
 
-export const getTaskContents = (task: JdDetailObjDef["task"]): DetailContents => {
+export const getTaskContents = (task: TaskContensType): DetailContents => {
   const taskContents: DetailContents = {};
-  const { main_task, sub_task_arr } = task;
+  const { main_task, sub_task_arr, task_detail_arr } = task;
 
   if (main_task) {
-    taskContents["채용 직무"] = createSpanTag(main_task);
+    taskContents["채용 직무"] = createSpanTag(`${main_task} > ${sub_task_arr.join(", ")}`);
   }
-
-  if (sub_task_arr.length !== 0) {
-    taskContents["세부 직무"] = createSpanTag(sub_task_arr.join(", "));
+  if (task_detail_arr.length !== 0) {
+    taskContents["세부 직무"] = createSpanTag(task_detail_arr.join(", "));
   }
 
   return taskContents;

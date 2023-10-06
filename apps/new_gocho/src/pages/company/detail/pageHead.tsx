@@ -2,8 +2,9 @@ import { FunctionComponent } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
-import { useCompanyDetail } from "shared-api/company";
-import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL, COMPANY_INFO_META } from "shared-constant";
+import { GOCHO_DESKTOP_URL, COMPANY_INFO_META } from "shared-constant";
+
+import { useCompanyDetail } from "@/apis/company";
 
 export const PageHead: FunctionComponent = () => {
   const router = useRouter();
@@ -23,17 +24,12 @@ export const PageHead: FunctionComponent = () => {
       <meta property="og:title" content={`[${companyDetailData?.name}] ${COMPANY_INFO_META.ogTitle}`} />
       <meta property="og:description" content={`${companyDetailData?.name} ${COMPANY_INFO_META.ogDesc}`} />
       <meta property="og:type" content="website" />
-      <meta property="og:url" content={`${GOCHO_DESKTOP_URL}/company/${companyDetailData?.id}/detail`} />
+      <meta property="og:url" content={`${GOCHO_DESKTOP_URL}/company/detail/${companyDetailData?.id}`} />
       <meta property="og:site_name" content={COMPANY_INFO_META.ogSiteName} />
       <meta property="og:image" content={COMPANY_INFO_META.ogImage} />
       <meta property="og:image_secure" content={COMPANY_INFO_META.ogImage} />
       <meta property="og:article:author" content={COMPANY_INFO_META.ogAuthor} />
-      <link rel="canonical" href={`${GOCHO_DESKTOP_URL}/company/${companyDetailData?.id}/detail`} />
-      <link
-        rel="alternate"
-        media="only screen and (max-width: 640px)"
-        href={`${GOCHO_MOBILE_URL}/company/${companyDetailData?.id}/detail`}
-      />
+      <link rel="canonical" href={`${GOCHO_DESKTOP_URL}/company/detail/${companyDetailData?.id}`} />
     </Head>
   );
 };

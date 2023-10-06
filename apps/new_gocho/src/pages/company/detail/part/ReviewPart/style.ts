@@ -26,7 +26,7 @@ export const cssObj = {
 
   titleWrapper: css`
     display: flex;
-    flex-direction: row;
+    align-items: center;
     position: relative;
   `,
 
@@ -36,7 +36,6 @@ export const cssObj = {
   `,
 
   reviewNumber: css`
-    align-self: flex-end;
     margin-left: 1.5rem;
     ${NEWTEXTS.TITLE7}
   `,

@@ -21,9 +21,9 @@ export const JdBanner = () => {
       <Layout>
         <div css={cssObj.wrapper}>
           <div css={cssObj.sideTitleWrapper}>
-            <span>
+            <div>
               고초대졸닷컴 PICK <BsMegaphone />
-            </span>
+            </div>
             <p>오늘의 추천 컨텐츠</p>
           </div>
           <div css={cssObj.sliderWrapper}>

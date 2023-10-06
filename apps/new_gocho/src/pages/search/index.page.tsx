@@ -18,7 +18,7 @@ import { Tab } from "./type";
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
-const SearchPage: NextPage = () => {
+const Search: NextPage = () => {
   const [searchModal, setSearchModal] = useState(false);
 
   const [tab, setTab] = useState<Tab>("jd");
@@ -157,4 +157,4 @@ const SearchPage: NextPage = () => {
   );
 };
 
-export default SearchPage;
+export default Search;

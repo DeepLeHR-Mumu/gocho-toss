@@ -19,13 +19,15 @@ export const cssObj = {
   sideTitleWrapper: css`
     color: ${NEWCOLORS.WHITE};
 
-    > span {
+    > div {
       ${NEWTEXTS.TITLE11}
+      display: flex;
+      align-items: center;
 
       > svg {
         width: 1.5rem;
         height: 1.5rem;
-        margin-left: 0.5rem;
+        margin: 0 0 0.25rem 0.5rem;
       }
     }
 
@@ -40,6 +42,14 @@ export const cssObj = {
     position: relative;
     width: 51rem;
     height: 25rem;
+    border-radius: 1rem;
+    overflow: hidden;
+
+    .slick-track,
+    .slick-list {
+      -webkit-perspective: 2000px;
+      perspective: 2000px;
+    }
 
     .slick-dots {
       display: inline-block;
@@ -82,11 +92,12 @@ export const cssObj = {
     position: absolute;
     transform: translate(0, -50%);
     top: 50%;
-    ${position === "left" ? "left: 3rem;" : "right: 2rem;"};
+    ${position === "left" ? "left: 2.5rem;" : "right: 1.5rem;"};
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 1rem;
     border: 1px solid ${NEWCOLORS.WHITE};
+    background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
 
     ${MOBILE} {

@@ -5,7 +5,6 @@ import Slider from "react-slick";
 import { dummyArrCreator } from "shared-util";
 
 import { useJdArr } from "@/apis/jd";
-import { useGetDeviceType } from "@/globalStates";
 import { JdCard } from "@/components/common/JdCard";
 
 import { setCarouselSetting } from "./util";
@@ -18,7 +17,6 @@ export const JdSlider: FunctionComponent<JdSliderProps> = ({ title, order, filte
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [isDragging, setIsDragging] = useState(false);
 
-  const { isMobile } = useGetDeviceType();
   const { data: jdDataObj } = useJdArr({
     order,
     filter,
@@ -66,31 +64,23 @@ export const JdSlider: FunctionComponent<JdSliderProps> = ({ title, order, filte
         </div>
       </div>
       <div css={cssObj.sliderContainer}>
-        {isMobile ? (
-          <div css={cssObj.cardContainer}>
-            {jdDataObj
-              ? jdDataObj.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)
-              : dummyArrCreator(4).map((dummy) => <JdCard key={`jdSlider${dummy}`} />)}
-          </div>
-        ) : (
-          <Slider
-            {...setCarouselSetting}
-            ref={sliderRef}
-            beforeChange={(_oldIndex, newIndex) => {
-              setIsDragging(true);
-              if (newIndex <= MAX_SLIDER_INDEX) {
-                setCurrentSlide(newIndex);
-              }
-            }}
-            afterChange={() => {
-              setIsDragging(false);
-            }}
-          >
-            {jdDataObj
-              ? jdDataObj.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} blockClick={isDragging} />)
-              : dummyArrCreator(4).map((dummy) => <JdCard key={`jdSlider${dummy}`} />)}
-          </Slider>
-        )}
+        <Slider
+          {...setCarouselSetting}
+          ref={sliderRef}
+          beforeChange={(_oldIndex, newIndex) => {
+            setIsDragging(true);
+            if (newIndex <= MAX_SLIDER_INDEX) {
+              setCurrentSlide(newIndex);
+            }
+          }}
+          afterChange={() => {
+            setIsDragging(false);
+          }}
+        >
+          {jdDataObj
+            ? jdDataObj.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} blockClick={isDragging} />)
+            : dummyArrCreator(4).map((dummy) => <JdCard key={`jdSlider${dummy}`} />)}
+        </Slider>
       </div>
     </section>
   );
