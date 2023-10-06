@@ -6,7 +6,7 @@ import { GetResumeCollegeDef } from "./type";
 import { selector } from "./util";
 
 export const getResumeCollege: GetResumeCollegeDef = async (resumeId, collegeId) => {
-  const { data } = await axiosInstance.get(`/resumes/${resumeId}/colleges/${collegeId}`);
+  const { data } = await axiosInstance.get(`/resumes/${resumeId}/educations/colleges/${collegeId}`);
   return data;
 };
 

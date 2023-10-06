@@ -5,8 +5,8 @@ import { resumeCertificationKeyObj } from "@/constants/queryKeyFactory/resume/re
 import { GetResumeCertificationDef } from "./type";
 import { selector } from "./util";
 
-export const getResumeCollege: GetResumeCertificationDef = async (resumeId, collegeId) => {
-  const { data } = await axiosInstance.get(`/resumes/${resumeId}/educations/colleges/${collegeId}`);
+export const getResumeCollege: GetResumeCertificationDef = async (resumeId, certificationId) => {
+  const { data } = await axiosInstance.get(`/resumes/${resumeId}/certifications/${certificationId}`);
   return data;
 };
 
