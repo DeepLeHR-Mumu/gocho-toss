@@ -1,4 +1,4 @@
 export interface CompanyBookmarkProps {
-  companyId?: number;
+  companyId?: number | null;
   isBookmark: boolean;
 }

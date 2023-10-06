@@ -43,13 +43,14 @@ export const Alarm = ({ className, userId }: AlarmProps) => {
     .flat()
     .filter((alarm) => !alarm.link.includes("qnas"));
   const isAlarmListClean = flattedAlarmArr?.length === 0;
-  const isAllReadClickable = flattedAlarmArr?.some((data) => data.is_read === false);
+  const isAlarmAllRead = flattedAlarmArr?.every((data) => data.is_read) || true;
 
   return (
     <DropDown
       customTitle={
-        <button type="button">
+        <button type="button" css={cssObj.alarmIcon}>
           <FiBell className={className} />
+          {!isAlarmAllRead && <span css={cssObj.redDot} />}
         </button>
       }
       menu={{
@@ -59,7 +60,7 @@ export const Alarm = ({ className, userId }: AlarmProps) => {
             <button
               type="button"
               css={cssObj.menuHeader}
-              disabled={!isAllReadClickable}
+              disabled={isAlarmAllRead}
               onClick={() => {
                 readAlarmAll(
                   { userId, category: "all" },

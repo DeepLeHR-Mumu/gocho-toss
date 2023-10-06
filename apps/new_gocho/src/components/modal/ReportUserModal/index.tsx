@@ -15,7 +15,7 @@ import { cssObj } from "./style";
 export const ReportUserModal = ({ companyId, userId, closeHandler }: ReportUserModalProps) => {
   const queryClient = useQueryClient();
   const { mutate: postReportUser } = useReportUser();
-  const { register, handleSubmit } = useForm<ReportFormValues>();
+  const { register, handleSubmit, watch } = useForm<ReportFormValues>();
   const { setToastMessage } = useToast();
 
   const submitReport: SubmitHandler<ReportFormValues> = (reportObj) => {
@@ -40,18 +40,20 @@ export const ReportUserModal = ({ companyId, userId, closeHandler }: ReportUserM
     }
   };
 
+  const isReason = Boolean(watch("reason"));
+
   return (
     <ModalWithTitle width={25} title="신고하기" closeHandler={closeHandler}>
       <form onSubmit={handleSubmit(submitReport)}>
         <div css={cssObj.wrapper}>
           {REPORT_REASON_ARR.map((reason) => (
             <div key={reason} css={cssObj.rowWrapper}>
-              <Radio value={reason} {...register("reason")} />
+              <Radio value={reason} {...register("reason", { required: "이유를 선택해 주세요." })} />
               <span>{reason}</span>
             </div>
           ))}
         </div>
-        <Button type="submit" size="small" fill>
+        <Button type="submit" size="small" color={isReason ? "active" : "disable"} fill>
           확인
         </Button>
       </form>

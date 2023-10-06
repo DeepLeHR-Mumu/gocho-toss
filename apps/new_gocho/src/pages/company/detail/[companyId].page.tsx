@@ -1,11 +1,14 @@
 import { useEffect, useRef } from "react";
-import { NextPage } from "next";
+import { NextPage, GetStaticProps, GetStaticPropsContext, GetStaticPaths } from "next";
 import { useRouter } from "next/router";
+import { QueryClient, dehydrate } from "@tanstack/react-query";
 
 import { Layout } from "@/components";
+import { getCompanyDetail } from "@/apis/company";
+import { useAddCompanyViewCount } from "@/apis/viewCount";
+import { companyDetailKeyObj } from "@/constants/queryKeyFactory/company/companyDetailKeyObj";
 import { isQueryString } from "@/utils";
 import { companyDetailFunnelEvent } from "@/ga/company";
-import { useAddCompanyViewCount } from "@/apis/viewCount";
 
 import { JdPart } from "./part/JdPart";
 import { CompanyInfoPart } from "./part/CompanyInfoPart";
@@ -15,8 +18,10 @@ import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
 const CompanyDetail: NextPage = () => {
-  const isFirstRender = useRef(false);
   const router = useRouter();
+
+  const isFirstRender = useRef(false);
+
   const { mutate: addViewCount } = useAddCompanyViewCount();
 
   useEffect(() => {
@@ -52,3 +57,30 @@ const CompanyDetail: NextPage = () => {
 };
 
 export default CompanyDetail;
+
+export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
+  const { params } = context;
+  const queryClient = new QueryClient();
+
+  if (Number.isNaN(Number(params?.companyId))) {
+    return { notFound: true };
+  }
+
+  if (params)
+    await queryClient.prefetchQuery(
+      companyDetailKeyObj.detail({ companyId: Number(params.companyId), isStatic: true }),
+      getCompanyDetail
+    );
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+    revalidate: process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? 600 : 10,
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: [],
+  fallback: true,
+});

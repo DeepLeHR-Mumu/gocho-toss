@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { jdDetailKeyObj, JdDetailRequestObjDef } from "@/constants/queryKeyFactory/jd/jdDetailKeyObj";
 
 import { axiosNoTokenInstance, axiosInstance } from "../../axiosInstance";
-// import { selector } from "./util";
 import { GetJdDetailDef } from "./type";
 
 export const getJdDetail: GetJdDetailDef = async ({ queryKey: [{ requestObj }] }) => {
@@ -12,7 +11,8 @@ export const getJdDetail: GetJdDetailDef = async ({ queryKey: [{ requestObj }] }
   return data;
 };
 
-export const useJdDetail = (requestObj: JdDetailRequestObjDef) => useQuery({
+export const useJdDetail = (requestObj: JdDetailRequestObjDef) =>
+  useQuery({
     queryKey: jdDetailKeyObj.detail(requestObj),
     queryFn: getJdDetail,
     staleTime: Infinity,

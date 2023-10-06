@@ -3,10 +3,25 @@ import { NEWCOLORS } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
-  alarmIcon: (themeWhite: boolean) => css`
-    width: 1.5rem;
-    height: 1.5rem;
-    color: ${themeWhite ? NEWCOLORS.BLACK : NEWCOLORS.WHITE};
+  alarmIcon: css`
+    position: relative;
+
+    > span {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: ${NEWCOLORS.RED300};
+    }
+  `,
+
+  redDot: css`
+    position: absolute;
+    top: 1rem;
+    left: 0;
+    width: 0.25rem;
+    height: 0.25rem;
+    background-color: ${NEWCOLORS.RED200};
+    border-radius: 50%;
   `,
 
   menuHeader: css`
