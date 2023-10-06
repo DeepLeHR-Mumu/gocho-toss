@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { FiLink2, FiMail } from "react-icons/fi";
 
 import { useToast } from "@/globalStates";
