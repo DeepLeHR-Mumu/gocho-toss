@@ -2,11 +2,11 @@ import { ResumeHighSchoolDef } from "../type";
 import { selector } from "./util";
 
 export interface ResponseObjDef {
-  data: ResumeHighSchoolDef[];
+  data: ResumeHighSchoolDef;
 }
 
-export interface GetResumeHighschoolDef {
+export interface GetResumeHighSchoolDef {
   (resumeId: number, highschoolId: number): Promise<ResponseObjDef>;
 }
 
-export type SelectorResumeHighschool = ReturnType<typeof selector>;
+export type SelectorResumeHighSchool = ReturnType<typeof selector>;

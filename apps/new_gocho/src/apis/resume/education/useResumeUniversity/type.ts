@@ -2,7 +2,7 @@ import { ResumeUniversityDef } from "../type";
 import { selector } from "./util";
 
 export interface ResponseObjDef {
-  data: ResumeUniversityDef[];
+  data: ResumeUniversityDef;
 }
 
 export interface GetResumeUniversityDef {

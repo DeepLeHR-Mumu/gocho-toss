@@ -49,7 +49,7 @@ export interface RequestObjDef {
     | "화장품/헬스케어"
   )[];
   last_education?: "고졸" | "초대졸";
-  highschool?: {
+  highSchool?: {
     type: "일반고" | "공업고" | "마이스터고" | "농업고" | "상업고" | "검정고시" | "기타";
     naesin: number;
     absent: number;
@@ -83,7 +83,7 @@ export interface postRegisterSpecDef {
     desired_task,
     desired_industry,
     last_education,
-    highschool,
+    highSchool,
     college,
     certificate,
     language,

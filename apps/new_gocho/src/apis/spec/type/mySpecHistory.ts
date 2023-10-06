@@ -71,7 +71,7 @@ export interface specArrDef {
   desired_industry: IndustryType | null;
   desired_task: TaskType | null;
   gender: "남" | "여";
-  highschool: {
+  highSchool: {
     type: string;
     naesin: number;
     absent: number;
