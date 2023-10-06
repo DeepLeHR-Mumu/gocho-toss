@@ -21,3 +21,4 @@ export { ReportUserModal } from "./modal/ReportUserModal";
 export { BlockUserModal } from "./modal/BlockUserModal";
 export { FactoryInfoModal } from "./modal/FactoryInfoModal";
 export { ShareModal } from "./modal/ShareModal";
+export { EmailApplyModal } from "./modal/EmailApplyModal";
