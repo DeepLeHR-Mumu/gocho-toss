@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "@/apis/axiosInstance";
 
 import { resumeHighSchoolKeyObj } from "@/constants/queryKeyFactory/resume/resumeHighSchoolKeyObj";
+
 import { GetResumeHighSchoolDef } from "./type";
 import { selector } from "./util";
 
