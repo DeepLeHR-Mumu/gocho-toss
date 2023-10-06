@@ -24,13 +24,13 @@ export const selector = (specDataArr: SpecObjDef[]) =>
             grade: specData.college.grade,
             maxGrade: specData.college.max_grade,
           },
-    highSchool: {
-      naesin: specData.highSchool.naesin,
-      type: specData.highSchool.type,
-      absent: specData.highSchool.absent,
-      classMiss: specData.highSchool.class_miss,
-      tardy: specData.highSchool.tardy,
-      leaveEarly: specData.highSchool.leave_early,
+    highschool: {
+      naesin: specData.highschool.naesin,
+      type: specData.highschool.type,
+      absent: specData.highschool.absent,
+      classMiss: specData.highschool.class_miss,
+      tardy: specData.highschool.tardy,
+      leaveEarly: specData.highschool.leave_early,
     },
     certificate:
       specData.certificate === null || specData.certificate === undefined

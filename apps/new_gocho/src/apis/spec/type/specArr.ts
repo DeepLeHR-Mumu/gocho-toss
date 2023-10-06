@@ -18,7 +18,7 @@ export interface SpecObjDef {
   score: number | null;
   score_count: number;
   created_time: number;
-  highSchool: {
+  highschool: {
     type: string;
     naesin: number;
     absent: number;

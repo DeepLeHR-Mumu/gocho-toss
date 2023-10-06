@@ -14,13 +14,13 @@ export const selector = (data: SpecDetailObjDef) => ({
   desiredTask: data.desired_task,
   desiredIndustry: data.desired_industry,
   lastEducation: data.last_education,
-  highSchool: {
-    type: data.highSchool.type,
-    naesin: data.highSchool.naesin,
-    absent: data.highSchool.absent,
-    tardy: data.highSchool.tardy,
-    leaveEarly: data.highSchool.leave_early,
-    classMiss: data.highSchool.class_miss,
+  highschool: {
+    type: data.highschool.type,
+    naesin: data.highschool.naesin,
+    absent: data.highschool.absent,
+    tardy: data.highschool.tardy,
+    leaveEarly: data.highschool.leave_early,
+    classMiss: data.highschool.class_miss,
   },
   // NOTMYFAULT undefined 수정하기 - null로 와야함
   certificate:
