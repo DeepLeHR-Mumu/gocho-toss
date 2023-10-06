@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import Head from "next/head";
 
-import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL, INDEX_META } from "shared-constant";
+import { GOCHO_DESKTOP_URL, INDEX_META } from "shared-constant";
 
 export const PageHead: FunctionComponent = () => (
   <Head>
@@ -17,6 +17,5 @@ export const PageHead: FunctionComponent = () => (
     <meta property="og:image_secure" content={INDEX_META.ogImage} />
     <meta property="og:article:author" content={INDEX_META.ogAuthor} />
     <link rel="canonical" href={GOCHO_DESKTOP_URL} />
-    <link rel="alternate" media="only screen and (max-width: 640px)" href={GOCHO_MOBILE_URL} />
   </Head>
 );

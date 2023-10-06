@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
 import { NEWCOLORS } from "shared-style/color";
-import { TEMP } from "shared-style/mediaQuery";
 
 export const getCssObj = (themeWhite: boolean) => ({
   wrapper: css`

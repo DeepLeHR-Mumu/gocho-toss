@@ -13,7 +13,7 @@ import { cssObj } from "./style";
 
 export const CompanyInfoPart = () => {
   const router = useRouter();
-  const companyId = isQueryString(router.query.companyId) ? Number(router.query.companyId) : undefined;
+  const companyId = isQueryString(router.query.companyId) ? Number(router.query.companyId) : null;
 
   const { data: companyData } = useCompanyDetail({ companyId, isStatic: false });
 

@@ -1,11 +1,13 @@
-import { useEffect, useRef } from "react";
-import { NextPage } from "next";
+import { useEffect, useRef, useState } from "react";
+import { NextPage, GetStaticProps, GetStaticPropsContext, GetStaticPaths } from "next";
 import { useRouter } from "next/router";
+import { QueryClient, dehydrate } from "@tanstack/react-query";
 
 import { dummyArrCreator } from "shared-util";
 
 import { Layout, JdRow } from "@/components";
-import { useJdDetail, useJdArr } from "@/apis/jd";
+import { getJdDetail, useJdDetail, useJdArr } from "@/apis/jd";
+import { jdDetailKeyObj } from "@/constants/queryKeyFactory/jd/jdDetailKeyObj";
 import { isQueryString } from "@/utils";
 import { useAddJdViewCount } from "@/apis/viewCount";
 import { jdDetailFunnelEvent } from "@/ga/jd";
@@ -14,12 +16,14 @@ import { TitlePart, SummaryPart, DetailPart, ReviewPart } from "./part";
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
 
-const JdDetailPage: NextPage = () => {
-  const isFirstRender = useRef(false);
+const JdDetail: NextPage = () => {
   const router = useRouter();
-  const jdId = isQueryString(router.query.jdId) ? Number(router.query.jdId) : null;
 
-  const { data: jdDetailData } = useJdDetail({ id: jdId, isStatic: false });
+  const [isStatic, setIsStatic] = useState<boolean>(true);
+  const isFirstRender = useRef(false);
+
+  const jdId = isQueryString(router.query.jdId) ? Number(router.query.jdId) : null;
+  const { data: jdDetailData } = useJdDetail({ id: jdId, isStatic });
   const { data: jdArrData } = useJdArr({
     order: "view",
     size: 3,
@@ -40,6 +44,10 @@ const JdDetailPage: NextPage = () => {
   useEffect(() => {
     if (jdDetailData) jdDetailFunnelEvent(jdDetailData.id);
   }, [jdDetailData]);
+
+  useEffect(() => {
+    setIsStatic(false);
+  }, []);
 
   if (!jdDetailData) {
     return null;
@@ -139,4 +147,29 @@ const JdDetailPage: NextPage = () => {
   );
 };
 
-export default JdDetailPage;
+export default JdDetail;
+
+export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
+  const { params } = context;
+  const queryClient = new QueryClient();
+
+  if (Number.isNaN(Number(params?.jdId))) {
+    return { notFound: true };
+  }
+
+  if (params) {
+    await queryClient.prefetchQuery(jdDetailKeyObj.detail({ id: Number(params.jdId), isStatic: true }), getJdDetail);
+  }
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+    revalidate: process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? 600 : 10,
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: [],
+  fallback: true,
+});

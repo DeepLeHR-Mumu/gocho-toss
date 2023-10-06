@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import Head from "next/head";
 
-import { GOCHO_DESKTOP_URL, GOCHO_MOBILE_URL, JD_DETAIL_META } from "shared-constant";
+import { GOCHO_DESKTOP_URL, JD_DETAIL_META } from "shared-constant";
 
 import { PageHeadProps } from "./type";
 
@@ -28,11 +28,6 @@ export const PageHead: FunctionComponent<PageHeadProps> = ({ option }) => {
       <meta property="og:image_secure" content={JD_DETAIL_META.ogImage} />
       <meta property="og:article:author" content={JD_DETAIL_META.ogAuthor} />
       <link rel="canonical" href={`${GOCHO_DESKTOP_URL}/jd/detail/${option.id}`} />
-      <link
-        rel="alternate"
-        media="only screen and (max-width: 640px)"
-        href={`${GOCHO_MOBILE_URL}/jd/detail/${option.id}`}
-      />
     </Head>
   );
 };
