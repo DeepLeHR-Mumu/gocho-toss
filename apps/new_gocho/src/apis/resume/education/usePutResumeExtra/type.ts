@@ -2,19 +2,22 @@ import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
 import { ErrorResponseDef } from "shared-type/api/errorResponseType";
+
 import { PostExtraDef } from "../type";
 
 export interface RequestObjDef extends PostExtraDef {
   resumeId: number;
+  extraId: number;
 }
 
-export interface PostResumeExtraResponse {
+export interface PutResumeExtraResponse {
   data: { id: number };
 }
 
-export interface PostResumeExtraDef {
+export interface PutResumeExtraDef {
   ({
     resumeId,
+    extraId,
     name,
     graduate_type,
     start_date,
@@ -23,9 +26,9 @@ export interface PostResumeExtraDef {
     grade,
     max_grade,
     etc,
-  }: RequestObjDef): Promise<PostResumeExtraResponse>;
+  }: RequestObjDef): Promise<PutResumeExtraResponse>;
 }
 
-export interface UsePostResumeExtraProps {
-  (): UseMutationResult<PostResumeExtraResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
+export interface UsePutResumeExtraProps {
+  (): UseMutationResult<PutResumeExtraResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

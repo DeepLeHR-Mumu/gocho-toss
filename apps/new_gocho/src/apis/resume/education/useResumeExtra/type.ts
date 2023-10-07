@@ -1,12 +1,12 @@
-import { ResumeExtrasDef } from "../type";
+import { ResumeExtraDef } from "../type";
 import { selector } from "./util";
 
 export interface ResponseObjDef {
-  data: ResumeExtrasDef[];
+  data: ResumeExtraDef[];
 }
 
-export interface GetResumeExtrasDef {
+export interface GetResumeExtraDef {
   (resumeId: number, extraId: number): Promise<ResponseObjDef>;
 }
 
-export type SelectorResumeExtras = ReturnType<typeof selector>;
+export type SelectorResumeExtra = ReturnType<typeof selector>;

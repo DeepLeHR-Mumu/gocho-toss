@@ -56,7 +56,7 @@ export interface PostUniversityDef extends PostEducationBase {
   max_grade: number;
   etc: string | null;
 }
-export interface ResumeExtrasDef extends ResumeEducationBase {
+export interface ResumeExtraDef extends ResumeEducationBase {
   end_date: string;
   graduate_type: string;
   grade: number;
@@ -64,7 +64,7 @@ export interface ResumeExtrasDef extends ResumeEducationBase {
   etc: string | null;
 }
 
-export interface PostExtrasDef extends PostEducationBase {
+export interface PostExtraDef extends PostEducationBase {
   end_date: string;
   graduate_type: string;
   grade: number;

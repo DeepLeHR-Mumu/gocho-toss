@@ -1,6 +1,6 @@
-import { ResumeExtrasDef } from "../type";
+import { ResumeExtraDef } from "../type";
 
-export const selector = (extraArr: ResumeExtrasDef[]) =>
+export const selector = (extraArr: ResumeExtraDef[]) =>
   extraArr.map((extra) => ({
     id: extra.id,
     name: extra.name,
