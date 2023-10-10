@@ -3,10 +3,6 @@ import { resumeArrKeyObj } from "@/constants/queryKeyFactory/user/resumeArrKeyOb
 
 import { UserResumeProfileDef } from "../type";
 
-export interface RequestObj {
-  userId: number;
-}
-
 export interface GetUserResumeProfileResponseDef {
   userId: number;
   data: UserResumeProfileDef;

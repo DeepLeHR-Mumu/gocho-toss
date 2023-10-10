@@ -4,13 +4,6 @@ import { resumeArrKeyObj } from "@/constants/queryKeyFactory/user/resumeArrKeyOb
 
 import { UserResumeApplyDef } from "../type";
 
-export interface RequestObj {
-  userId: number;
-  filter?: "complte" | "cancel" | "read" | "unread";
-  page?: number;
-  size?: number;
-}
-
 export interface GetApplyArrResponseDef {
   data: UserResumeApplyDef[];
 }

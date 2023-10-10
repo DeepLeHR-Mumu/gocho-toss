@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 
 import { axiosInstance } from "@/apis/axiosInstance";
 
-import { resumeArrKeyObj } from "@/constants/queryKeyFactory/user/resumeArrKeyObj";
+import { UserApplyArrRequestObj, resumeArrKeyObj } from "@/constants/queryKeyFactory/user/resumeArrKeyObj";
 
-import { GetApplyArrDef, RequestObj } from "./type";
+import { GetApplyArrDef } from "./type";
 import { selector } from "./util";
 
 export const getUserApplyArr: GetApplyArrDef = async ({ queryKey: [{ requestObj }] }) => {
@@ -12,7 +12,7 @@ export const getUserApplyArr: GetApplyArrDef = async ({ queryKey: [{ requestObj 
   return data;
 };
 
-export const useUserApplyArr = (requestObj: RequestObj) =>
+export const useUserApplyArr = (requestObj: UserApplyArrRequestObj) =>
   useQuery({
     queryKey: resumeArrKeyObj.applyArr(requestObj),
     queryFn: getUserApplyArr,

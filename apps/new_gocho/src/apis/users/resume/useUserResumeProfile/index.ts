@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 
 import { axiosInstance } from "@/apis/axiosInstance";
 
-import { resumeArrKeyObj } from "@/constants/queryKeyFactory/user/resumeArrKeyObj";
+import { resumeArrKeyObj, UserResumeProfileRequestObj } from "@/constants/queryKeyFactory/user/resumeArrKeyObj";
 
-import { GetUserResumeProfileDef, RequestObj } from "./type";
+import { GetUserResumeProfileDef } from "./type";
 import { selector } from "./util";
 
 export const getUserResumeProfile: GetUserResumeProfileDef = async ({ queryKey: [{ requestObj }] }) => {
@@ -12,7 +12,7 @@ export const getUserResumeProfile: GetUserResumeProfileDef = async ({ queryKey: 
   return data;
 };
 
-export const useUserResumeProfile = (requestObj: RequestObj) =>
+export const useUserResumeProfile = (requestObj: UserResumeProfileRequestObj) =>
   useQuery({
     queryKey: resumeArrKeyObj.resumeProfile(requestObj),
     enabled: Boolean(requestObj.userId),
