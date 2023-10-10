@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { axiosInstance } from "@/apis/axiosInstance";
 
-import { resumeArrKeyObj } from "@/constants/queryKeyFactory/user/resumeKeyObj";
+import { resumeArrKeyObj } from "@/constants/queryKeyFactory/user/resumeArrKeyObj";
 
 import { GetUserResumeArrDef } from "./type";
 

@@ -1,4 +1,4 @@
-import { RequestObjDef as ReportUserObjDef } from "@/apis/users/useReportUser/type";
+import { RequestObjDef as ReportUserObjDef } from "@/apis/users/user/useReportUser/type";
 import { ModalWithTitleProps } from "@/components/common/ModalWithTitle/type";
 
 export interface ReportUserModalProps extends Pick<ModalWithTitleProps, "closeHandler"> {
