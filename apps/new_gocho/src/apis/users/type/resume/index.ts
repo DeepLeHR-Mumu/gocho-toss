@@ -9,11 +9,11 @@ export interface UserResumeProfileDef {
   phone_number: string;
   email: string;
   birth_date: string;
-  "location | null": {
+  location: {
     address: string;
     x: string;
     y: string;
-  };
+  } | null;
   hobby: string;
   specialty: string;
 }
