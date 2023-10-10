@@ -2,8 +2,7 @@ import { FunctionComponent } from "react";
 import { FiLock, FiXCircle } from "react-icons/fi";
 import dayjs from "dayjs";
 
-import { Spinner } from "shared-ui/common/atom/spinner";
-
+import { Spinner } from "shared-ui/common/spinner/spinner";
 import { useCompanyDetail, useManagerProfile } from "@/apis";
 
 import { cssObj } from "./style";

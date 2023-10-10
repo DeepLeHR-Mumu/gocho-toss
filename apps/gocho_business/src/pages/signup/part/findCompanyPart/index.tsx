@@ -2,8 +2,7 @@ import { FunctionComponent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FiArrowUp } from "react-icons/fi";
 
-import { NewSharedButton } from "shared-ui/common/newSharedButton";
-
+import { SharedButton } from "shared-ui/common/sharedButton";
 import { commonCssObj } from "@/styles";
 import { useFindCompany } from "@/apis";
 import {
@@ -175,7 +174,7 @@ export const FindCompanyPart: FunctionComponent<FindCompanyPartProps> = ({ slide
           </div>
         )}
       </div>
-      <NewSharedButton
+      <SharedButton
         buttonType={
           !isCompanyName || errors.company_name?.message || !isBusinessNumber || isBusinessNumberError
             ? "disabled"

@@ -4,7 +4,7 @@ import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import dayjs from "dayjs";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
-import { CheckBox } from "shared-ui/common/atom/checkbox";
+import { CheckBox } from "shared-ui/common/checkbox/checkbox";
 
 import {
   booleanInputBox,

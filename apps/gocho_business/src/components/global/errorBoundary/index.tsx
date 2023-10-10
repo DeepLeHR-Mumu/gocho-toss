@@ -1,10 +1,10 @@
 import { Component } from "react";
 import Image from "next/image";
 
-import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { NEWCOLORS } from "shared-style/color";
 
+import { InvisibleH2 } from "shared-ui/common/invisibleH2/invisibleH2";
 import jobi_500 from "@/public/image/jobi_500.svg";
 import { INTERNAL_URL } from "@/constants";
 

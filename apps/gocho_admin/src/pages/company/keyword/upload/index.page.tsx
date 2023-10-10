@@ -3,10 +3,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
+import { SharedRadioButton } from "shared-ui/common/sharedRadioButton/sharedRadioButton";
 import { useAddCompanyKeyword, useFindCompany } from "@/api";
 import { NextPageWithLayout } from "@/types";
 import { GlobalLayout, PageLayout } from "@/component";

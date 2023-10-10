@@ -2,8 +2,7 @@ import { FunctionComponent } from "react";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { FiPlus } from "react-icons/fi";
 
-import { CheckBox } from "shared-ui/common/atom/checkbox";
-
+import { CheckBox } from "shared-ui/common/checkbox/checkbox";
 import { useFactoryArr } from "@/apis";
 import { commonCssObj } from "@/styles";
 

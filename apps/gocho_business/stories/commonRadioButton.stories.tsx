@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
+import { SharedRadioButton } from "shared-ui/common/sharedRadioButton/sharedRadioButton";
 
 export default {
   title: "SharedRadioButton",

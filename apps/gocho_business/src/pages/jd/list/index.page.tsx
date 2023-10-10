@@ -4,8 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { CheckBox } from "shared-ui/common/atom/checkbox";
-
+import { CheckBox } from "shared-ui/common/checkbox/checkbox";
 import { useModal } from "@/globalStates";
 import { useJdArr, useManagerProfile } from "@/apis";
 import { PageLayout, Pagination } from "@/components";

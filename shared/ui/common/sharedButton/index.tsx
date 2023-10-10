@@ -3,7 +3,7 @@ import { FunctionComponent } from "react";
 import { cssObj } from "./style";
 import { SharedButtonProps } from "./type";
 
-export const NewSharedButton: FunctionComponent<SharedButtonProps> = ({
+export const SharedButton: FunctionComponent<SharedButtonProps> = ({
   buttonType,
   width,
   isMobile,

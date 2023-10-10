@@ -1,12 +1,11 @@
 import { ChangeEvent, FunctionComponent, useEffect, useState } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
-import { CheckBox } from "shared-ui/common/atom/checkbox";
-import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
-
+import { CheckBox } from "shared-ui/common/checkbox/checkbox";
+import { SharedRadioButton } from "shared-ui/common/sharedRadioButton/sharedRadioButton";
 import { commonCssObj } from "@/styles";
-
 import { jdCareerClickEvent } from "@/ga";
+
 import { AddFieldButton, DeleteInputButton } from "../../component";
 import { setFieldErrorIfEmpty } from "../../../upload/util";
 import { BasicPartProps } from "./type";

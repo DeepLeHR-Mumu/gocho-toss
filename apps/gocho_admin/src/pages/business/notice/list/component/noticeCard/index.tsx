@@ -3,8 +3,7 @@ import { useRouter } from "next/router";
 import { useQueryClient } from "@tanstack/react-query";
 import dayjs from "dayjs";
 
-import { NewSharedButton } from "shared-ui/common/newSharedButton";
-
+import { SharedButton } from "shared-ui/common/sharedButton/sharedButton";
 import { useDeleteNotice } from "@/api";
 import { INTERNAL_URL } from "@/constant";
 
@@ -36,7 +35,7 @@ export const NoticeCard: FunctionComponent<NoticeCardProps> = ({ notice }) => {
         <li css={cssObj.desc}>{notice.description}</li>
         <li css={cssObj.data}>{dayjs(notice.createdTime).format("YYYY-MM-DD")}</li>
         <li css={cssObj.flexBox}>
-          <NewSharedButton
+          <SharedButton
             buttonType="fillBlue"
             onClickHandler={() => {
               router.push(INTERNAL_URL.BUSINESS_NOTICE_DETAIL(notice.id));
@@ -44,8 +43,8 @@ export const NoticeCard: FunctionComponent<NoticeCardProps> = ({ notice }) => {
             text="상세보기"
             width={6}
           />
-          <NewSharedButton buttonType="outLineBlue" onClickHandler="submit" text="수정" width={6} />
-          <NewSharedButton
+          <SharedButton buttonType="outLineBlue" onClickHandler="submit" text="수정" width={6} />
+          <SharedButton
             buttonType="fillRed"
             onClickHandler={() => deleteNoticeHandler(notice.id)}
             text="삭제"

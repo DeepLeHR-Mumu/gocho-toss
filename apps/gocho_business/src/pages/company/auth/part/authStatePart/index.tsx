@@ -3,8 +3,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { FiArrowUpRight } from "react-icons/fi";
 
-import { Spinner } from "shared-ui/common/atom/spinner";
-
+import { Spinner } from "shared-ui/common/spinner/spinner";
 import factory from "@/public/image/factory.svg";
 import { AuthName } from "@/apis/manager/useManagerProfile/type";
 import { INTERNAL_URL } from "@/constants";

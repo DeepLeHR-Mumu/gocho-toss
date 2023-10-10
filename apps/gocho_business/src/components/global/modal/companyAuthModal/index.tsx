@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import { useFocusTrap } from "shared-hooks";
 
-import { NewSharedButton } from "shared-ui/common/newSharedButton";
+import { SharedButton } from "shared-ui/common/sharedButton";
 import { useModal } from "@/globalStates";
 import { INTERNAL_URL } from "@/constants";
 
@@ -63,7 +63,7 @@ export const CompanyAuthModal: FunctionComponent = () => {
           </a>
         </div>
         <div css={cssObj.buttonWrapper}>
-          <NewSharedButton
+          <SharedButton
             buttonType="fillBlue"
             text="인증하기"
             width={11.25}

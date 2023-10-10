@@ -2,10 +2,10 @@ import { ChangeEvent, Dispatch, FocusEvent, FunctionComponent, SetStateAction, u
 import Image from "next/image";
 import { FiEdit3, FiX, FiEye, FiUserCheck } from "react-icons/fi";
 
-import { Spinner } from "shared-ui/common/atom/spinner";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import defaultCompanyBg from "shared-image/global/common/default_company_bg.webp";
 
+import { Spinner } from "shared-ui/common/spinner/spinner";
 import { useCountInfo, useManagerProfile } from "@/apis";
 import { commonCssObj } from "@/styles";
 
