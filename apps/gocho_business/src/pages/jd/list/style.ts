@@ -47,11 +47,11 @@ export const cssObj = {
     width: 8.75rem;
     height: 3rem;
     font-weight: 700;
-    color: ${isSelected ? `${NEWCOLORS.BLUE300}` : `${NEWCOLORS.BLUEGRAY400}`};
+    color: ${isSelected ? `${NEWCOLORS.BLUE300}` : `${NEWCOLORS.GRAY600}`};
     border-bottom: ${isSelected ? `2px solid ${NEWCOLORS.BLUE300}` : "none"};
 
     > p {
-      color: ${isSelected ? `${NEWCOLORS.BLUE300}` : `${NEWCOLORS.BLUEGRAY400}`};
+      color: ${isSelected ? `${NEWCOLORS.BLUE300}` : `${NEWCOLORS.GRAY600}`};
     }
   `,
 
@@ -75,10 +75,10 @@ export const cssObj = {
     border-radius: 1rem;
     border: 1px solid ${NEWCOLORS.GRAY200};
     background-color: ${NEWCOLORS.WHITE};
-    color: ${NEWCOLORS.BLUEGRAY700};
+    color: ${NEWCOLORS.GRAY900};
 
     ::placeholder {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
   `,
 
@@ -126,7 +126,7 @@ export const cssObj = {
     font-weight: 400;
 
     ::placeholder {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
   `,
 
@@ -165,7 +165,7 @@ export const cssObj = {
 
   noAuthJdCard: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     height: 10rem;
     display: flex;
     align-items: center;

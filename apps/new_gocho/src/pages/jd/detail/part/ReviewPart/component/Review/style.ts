@@ -12,19 +12,19 @@ export const cssObj = {
   `,
 
   name: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE5}
+    color: ${NEWCOLORS.GRAY600};
+    ${NEWTEXTS.TITLE6_M1418}
   `,
 
   time: css`
     margin-left: 0.5rem;
     margin-right: auto;
-    color: ${NEWCOLORS.BLUEGRAY300};
-    ${NEWTEXTS.TITLE1}
+    color: ${NEWCOLORS.GRAY500};
+    ${NEWTEXTS.TITLE7_M1218}
   `,
 
   submenuIcon: css`
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
   `,
 
   textBox: css`
@@ -37,7 +37,7 @@ export const cssObj = {
   comment: css`
     margin-bottom: 0.75rem;
     word-break: break-all;
-    ${NEWTEXTS.BODY2}
+    ${NEWTEXTS.BODY3_R1422}
   `,
 
   reactionWrapper: css`
@@ -51,14 +51,14 @@ export const cssObj = {
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
-    color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY400};
+    color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.GRAY600};
 
     svg {
-      color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY400};
+      color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.GRAY600};
     }
 
     span {
-      ${NEWTEXTS.TITLE1}
+      ${NEWTEXTS.TITLE7_M1218}
     }
   `,
 
@@ -67,14 +67,14 @@ export const cssObj = {
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
-    color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.BLUEGRAY400};
+    color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.GRAY600};
 
     svg {
-      color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.BLUEGRAY400};
+      color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.GRAY600};
     }
 
     span {
-      ${NEWTEXTS.TITLE1}
+      ${NEWTEXTS.TITLE7_M1218}
     }
   `,
 };

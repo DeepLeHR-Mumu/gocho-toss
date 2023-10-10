@@ -79,11 +79,11 @@ export const cssObj = {
     const waitCss = css`
       ${defaultCss}
       background-color: ${NEWCOLORS.GRAY100};
-      border: 1px solid ${NEWCOLORS.GRAY300};
+      border: 1px solid ${NEWCOLORS.GRAY450};
 
       h4,
       p {
-        color: ${NEWCOLORS.BLUEGRAY400};
+        color: ${NEWCOLORS.GRAY600};
       }
     `;
 
@@ -109,7 +109,7 @@ export const cssObj = {
 
       span {
         ${TEXTS.BODY7}
-        color: ${NEWCOLORS.GRAY300};
+        color: ${NEWCOLORS.GRAY450};
         margin-left: 1rem;
       }
 
@@ -204,7 +204,7 @@ export const cssObj = {
     p:nth-of-type(2),
     p:nth-of-type(3) {
       ${TEXTS.BODY2}
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${NEWCOLORS.GRAY600};
     }
   `,
 
@@ -237,7 +237,7 @@ export const cssObj = {
 
     &:disabled {
       background-color: ${NEWCOLORS.GRAY200};
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
       cursor: not-allowed;
     }
   `,

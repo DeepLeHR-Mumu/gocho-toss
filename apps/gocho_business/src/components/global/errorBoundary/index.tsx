@@ -37,7 +37,7 @@ export class ErrorBoundary extends Component<PropsDef, StateDef> {
           <div css={cssObj.linkContainer}>
             <SharedButton
               radius="round"
-              fontColor={NEWCOLORS.BLUEGRAY700}
+              fontColor={NEWCOLORS.GRAY900}
               backgroundColor={NEWCOLORS.GRAY200}
               size="medium"
               text="새로고침"

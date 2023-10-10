@@ -42,7 +42,7 @@ export const cssObj = {
     right: -0.25rem;
 
     > svg {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
       width: 2rem;
       height: 2rem;
     }
@@ -55,6 +55,6 @@ export const cssObj = {
 
   text: css`
     ${TEXTS.BODY4};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 };

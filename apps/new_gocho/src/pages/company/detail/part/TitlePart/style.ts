@@ -48,21 +48,21 @@ export const cssObj = {
 
   title: css`
     margin-right: auto;
-    ${NEWTEXTS.TITLE14}
+    ${NEWTEXTS.TITLE1_B2832}
   `,
 
   eyeIcon: css`
     width: 1.25rem;
     height: 1.25rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
     align-self: flex-end;
   `,
 
   views: css`
     align-self: flex-end;
     margin-left: 0.5rem;
-    color: ${NEWCOLORS.GRAY300};
-    ${NEWTEXTS.TITLE7}
+    color: ${NEWCOLORS.GRAY450};
+    ${NEWTEXTS.TITLE5_M1620}
   `,
 
   introWrapper: css`
@@ -72,12 +72,12 @@ export const cssObj = {
 
   intro: css`
     margin-right: auto;
-    ${NEWTEXTS.TITLE7}
+    ${NEWTEXTS.TITLE5_M1620}
   `,
 
   follower: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE7}
+    color: ${NEWCOLORS.GRAY600};
+    ${NEWTEXTS.TITLE5_M1620}
 
     > span {
       color: ${NEWCOLORS.BLUE300};
@@ -106,12 +106,12 @@ export const cssObj = {
   `,
 
   menu: (isSelected: boolean) => css`
-    ${NEWTEXTS.TITLE12}
+    ${NEWTEXTS.TITLE4_B1822}
     width: 8.75rem;
     text-align: center;
     padding-bottom: 1.5rem;
     border-bottom: ${isSelected ? `2px solid ${NEWCOLORS.BLUE300}` : `none`};
-    color: ${isSelected ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY200};
+    color: ${isSelected ? NEWCOLORS.BLUE300 : NEWCOLORS.GRAY400};
   `,
 };
 

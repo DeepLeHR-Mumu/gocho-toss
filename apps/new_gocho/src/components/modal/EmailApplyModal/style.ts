@@ -16,7 +16,7 @@ export const cssObj = {
     border: 1px solid ${NEWCOLORS.GRAY200};
     padding: 0.875rem 1.25rem 0.875rem 1.25rem;
     flex-grow: 1;
-    ${NEWTEXTS.TITLE7}
+    ${NEWTEXTS.TITLE5_M1620}
   `,
 
   button: (buttonType: string) => css`
@@ -35,8 +35,8 @@ export const cssObj = {
   `,
 
   desc: css`
-    ${NEWTEXTS.BODY2};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    ${NEWTEXTS.BODY3_R1422};
+    color: ${NEWCOLORS.GRAY600};
     margin-top: 0.5rem;
   `,
 };

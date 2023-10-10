@@ -53,6 +53,6 @@ export const cssObj = {
 
   helpDesc: css`
     ${TEXTS.TITLE1};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 };

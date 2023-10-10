@@ -23,11 +23,11 @@ export const cssObj = {
   `,
 
   title: css`
-    ${NEWTEXTS.TITLE14}
+    ${NEWTEXTS.TITLE1_B2832}
   `,
 
   desc: css`
-    ${NEWTEXTS.BODY5};
+    ${NEWTEXTS.BODY2_R1624};
     margin-top: 0.5rem;
   `,
 
@@ -39,7 +39,7 @@ export const cssObj = {
   `,
 
   companyDesc: css`
-    ${NEWTEXTS.BODY4};
+    ${NEWTEXTS.BODY2_R1624};
 
     > span {
       color: ${NEWCOLORS.BLUE300};
@@ -63,7 +63,7 @@ export const cssObj = {
     color: ${NEWCOLORS.WHITE};
     padding: 1rem 2rem;
     margin-top: 2rem;
-    ${NEWTEXTS.TITLE12};
+    ${NEWTEXTS.TITLE4_B1822};
   `,
 
   jobiImageBox: css`

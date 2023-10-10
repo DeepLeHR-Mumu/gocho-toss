@@ -25,7 +25,7 @@ export const menuCssObj = {
     padding: 0.625rem 1rem;
     color: ${focused ? NEWCOLORS.BLUE300 : NEWCOLORS.BLACK};
     cursor: ${clickable ? "pointer" : "auto"};
-    ${focused ? NEWTEXTS.TITLE9 : NEWTEXTS.TITLE7};
+    ${focused ? NEWTEXTS.TITLE5_B1620 : NEWTEXTS.TITLE5_M1620};
   `,
 
   header: (clickable: boolean) => css`
@@ -39,7 +39,7 @@ export const menuCssObj = {
     border-radius: 0 0 0.75rem 0.75rem;
     cursor: ${clickable ? "pointer" : "auto"};
     background-color: ${NEWCOLORS.GRAY50};
-    ${NEWTEXTS.TITLE7}
+    ${NEWTEXTS.TITLE5_M1620}
   `,
 };
 
@@ -53,7 +53,7 @@ export const dropDownCssObj = {
     display: flex;
     flex-direction: row;
     align-items: center;
-    ${NEWTEXTS.TITLE7}
+    ${NEWTEXTS.TITLE5_M1620}
   `,
 
   // ${directionTopOrBottom}: ${location.topOrBottom}rem;

@@ -69,7 +69,7 @@ export const cssObj = {
     padding: 0.5rem 0.75rem;
     font-size: 0.875rem;
     border-radius: 5px;
-    border: 1px solid ${NEWCOLORS.BLUEGRAY200};
+    border: 1px solid ${NEWCOLORS.GRAY400};
     background-color: ${NEWCOLORS.GRAY50};
   `,
 
@@ -79,7 +79,7 @@ export const cssObj = {
     padding: 0 1rem;
     border: 1px solid ${NEWCOLORS.GRAY200};
     background-color: ${NEWCOLORS.WHITE};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     border-radius: 0.5rem;
   `,
 

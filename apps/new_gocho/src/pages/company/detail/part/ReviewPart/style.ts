@@ -37,7 +37,7 @@ export const cssObj = {
 
   reviewNumber: css`
     margin-left: 1.5rem;
-    ${NEWTEXTS.TITLE7}
+    ${NEWTEXTS.TITLE5_M1620}
   `,
 
   reviewButtonWrapper: css`

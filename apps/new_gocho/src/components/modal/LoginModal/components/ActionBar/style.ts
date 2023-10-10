@@ -10,7 +10,7 @@ export const cssObj = {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    ${NEWTEXTS.TITLE12}
+    ${NEWTEXTS.TITLE4_B1822}
 
     ${TEMP} {
       padding: 1.25rem 1rem 1.25rem 1rem;
@@ -18,7 +18,7 @@ export const cssObj = {
   `,
 
   title: css`
-    ${NEWTEXTS.TITLE12}
+    ${NEWTEXTS.TITLE4_B1822}
   `,
 
   icon: css`

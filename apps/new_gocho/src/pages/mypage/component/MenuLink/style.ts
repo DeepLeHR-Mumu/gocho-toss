@@ -6,7 +6,7 @@ export const cssObj = {
   menu: (isSelected: boolean) => css`
     display: block;
     cursor: pointer;
-    ${isSelected ? NEWTEXTS.TITLE9 : NEWTEXTS.TITLE7}
+    ${isSelected ? NEWTEXTS.TITLE5_B1620 : NEWTEXTS.TITLE5_M1620}
     color: ${isSelected ? NEWCOLORS.BLUE300 : NEWCOLORS.BLACK};
     margin-bottom: 1.5rem;
 

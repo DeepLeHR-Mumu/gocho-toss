@@ -14,6 +14,6 @@ export const cssObj = {
     gap: 0.5rem;
     padding: 0.625rem 1rem;
     color: ${NEWCOLORS.BLACK};
-    ${NEWTEXTS.TITLE7};
+    ${NEWTEXTS.TITLE5_M1620};
   `,
 };

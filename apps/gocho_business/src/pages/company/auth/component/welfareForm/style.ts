@@ -17,7 +17,7 @@ export const cssObj = {
   title: (isMine: boolean) => css`
     font-size: 1rem;
     font-weight: 400;
-    color: ${isMine ? NEWCOLORS.BLUEGRAY200 : NEWCOLORS.BLACK};
+    color: ${isMine ? NEWCOLORS.GRAY400 : NEWCOLORS.BLACK};
     margin-bottom: 0.5rem;
     display: block;
   `,
@@ -36,7 +36,7 @@ export const cssObj = {
     width: 100%;
     justify-content: space-between;
     display: flex;
-    border-bottom: 1px solid ${NEWCOLORS.BLUEGRAY100};
+    border-bottom: 1px solid ${NEWCOLORS.GRAY300};
     background-color: ${NEWCOLORS.WHITE};
   `,
 
@@ -45,7 +45,7 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${NEWCOLORS.BLUEGRAY200};
+    color: ${NEWCOLORS.GRAY400};
     padding: 1rem 0;
   `,
 
@@ -78,7 +78,7 @@ export const cssObj = {
 
     ::placeholder {
       ${TEXTS.TITLE5};
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
   `,
 
@@ -90,7 +90,7 @@ export const cssObj = {
     width: 1.75rem;
     height: 1.75rem;
     color: ${NEWCOLORS.BLACK};
-    background-color: ${NEWCOLORS.BLUEGRAY100};
+    background-color: ${NEWCOLORS.GRAY300};
     z-index: 20;
   `,
 };

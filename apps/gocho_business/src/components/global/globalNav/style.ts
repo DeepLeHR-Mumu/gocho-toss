@@ -110,12 +110,12 @@ export const cssObj = {
 
   infoType: (isRead: boolean) => css`
     ${TEXTS.TITLE4};
-    color: ${isRead ? NEWCOLORS.BLUEGRAY400 : NEWCOLORS.BLUE200};
+    color: ${isRead ? NEWCOLORS.GRAY600 : NEWCOLORS.BLUE200};
   `,
 
   infoTitle: (isRead: boolean) => css`
     ${TEXTS.BODY3};
-    color: ${isRead ? NEWCOLORS.BLUEGRAY400 : NEWCOLORS.BLACK};
+    color: ${isRead ? NEWCOLORS.GRAY600 : NEWCOLORS.BLACK};
     ${shorten(3)};
   `,
 
@@ -131,7 +131,7 @@ export const cssObj = {
     justify-content: center;
     text-align: center;
     ${TEXTS.TITLE4};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 
   profileButton: css`

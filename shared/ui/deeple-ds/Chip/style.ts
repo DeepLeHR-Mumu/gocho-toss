@@ -9,7 +9,7 @@ export const cssObj = {
       height: 1.875rem;
       border-radius: 1.5rem;
       padding: 0.375rem 0.5rem;
-      ${NEWTEXTS.TITLE4}
+      ${NEWTEXTS.TITLE6_M1418}
     `}
 
     ${size === "large" &&
@@ -17,7 +17,7 @@ export const cssObj = {
       height: 2.875rem;
       border-radius: 1.5rem;
       padding: 0.75rem 1rem;
-      ${NEWTEXTS.TITLE10}
+      ${NEWTEXTS.TITLE4_M1822}
     `}
   `,
 

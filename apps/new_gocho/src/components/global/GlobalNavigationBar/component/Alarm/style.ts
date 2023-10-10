@@ -26,11 +26,11 @@ export const cssObj = {
 
   menuHeader: css`
     margin-left: auto;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
 
     > span {
       margin-left: 0.5rem;
-      ${NEWTEXTS.TITLE4}
+      ${NEWTEXTS.TITLE6_M1418}
     }
 
     :hover {
@@ -50,12 +50,12 @@ export const cssObj = {
     > p {
       word-break: break-all;
       text-align: left;
-      ${NEWTEXTS.BODY4}
+      ${NEWTEXTS.BODY2_R1624}
     }
 
     > span {
-      color: ${NEWCOLORS.BLUEGRAY400};
-      ${NEWTEXTS.TITLE7}
+      color: ${NEWCOLORS.GRAY600};
+      ${NEWTEXTS.TITLE5_M1620}
     }
 
     > strong {
@@ -64,7 +64,7 @@ export const cssObj = {
       text-align: left;
       gap: 0.5rem;
       color: ${isRead ? NEWCOLORS.BLACK : NEWCOLORS.BLUE300};
-      ${NEWTEXTS.TITLE9}
+      ${NEWTEXTS.TITLE5_B1620}
 
       > svg {
         width: 1.5rem;
@@ -78,8 +78,8 @@ export const cssObj = {
     justify-content: center;
     width: 22.5rem;
     height: 7.875rem;
-    color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE7};
+    color: ${NEWCOLORS.GRAY600};
+    ${NEWTEXTS.TITLE5_M1620};
     padding-bottom: 2rem;
   `,
 

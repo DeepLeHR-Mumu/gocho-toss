@@ -33,7 +33,7 @@ export const cssObj = {
     > svg {
       width: 1.25rem;
       height: 1.25rem;
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${NEWCOLORS.GRAY600};
     }
   `,
 
@@ -82,10 +82,10 @@ export const cssObj = {
     gap: 0 0.5rem;
     margin-bottom: 0.5rem;
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
 
     > svg {
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${NEWCOLORS.GRAY600};
       font-size: 1.125rem;
     }
 
@@ -107,11 +107,11 @@ export const cssObj = {
   businessNumber: css`
     margin-left: 1rem;
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    color: ${NEWCOLORS.GRAY500};
 
     > span {
       margin-left: 0.5rem;
-      color: ${NEWCOLORS.BLUEGRAY500};
+      color: ${NEWCOLORS.GRAY700};
     }
   `,
 

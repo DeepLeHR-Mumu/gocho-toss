@@ -45,10 +45,10 @@ export const cssObj = {
 
   input: css`
     flex: 1;
-    ${NEWTEXTS.TITLE7}
+    ${NEWTEXTS.TITLE5_M1620}
 
     ::placeholder {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
 
     :focus {
@@ -57,12 +57,12 @@ export const cssObj = {
 
     :disabled {
       background-color: ${NEWCOLORS.GRAY200};
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
       cursor: not-allowed;
     }
 
     ${MOBILE} {
-      ${NEWTEXTS.TITLE4}
+      ${NEWTEXTS.TITLE6_M1418}
     }
   `,
 

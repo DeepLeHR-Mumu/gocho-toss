@@ -34,10 +34,10 @@ export const cssObj = {
 
   title: css`
     color: ${NEWCOLORS.BLACK};
-    ${NEWTEXTS.TITLE14}
+    ${NEWTEXTS.TITLE1_B2832}
 
     ${MOBILE} {
-      ${NEWTEXTS.TITLE9}
+      ${NEWTEXTS.TITLE5_B1620}
       position:relative;
       left: 50%;
       transform: translate(-50%, 0);
@@ -67,7 +67,7 @@ export const cssObj = {
     width: 100%;
     color: ${NEWCOLORS.BLACK};
     word-wrap: break-word;
-    ${NEWTEXTS.BODY4};
+    ${NEWTEXTS.BODY2_R1624};
   `,
 
   buttonGroup: css`

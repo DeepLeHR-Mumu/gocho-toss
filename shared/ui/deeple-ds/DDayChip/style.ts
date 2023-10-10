@@ -30,14 +30,14 @@ export const cssObj = {
     border-radius: 1.5rem;
     padding: 0.375rem 1rem;
     white-space: nowrap;
-    ${NEWTEXTS.TITLE6}
+    ${NEWTEXTS.TITLE6_B1418}
     ${chipColor(dDay, year)};
 
     ${MOBILE} {
       width: fit-content;
       border-radius: 1.5rem;
       padding: 0.25rem 0.5rem;
-      ${NEWTEXTS.TITLE3}
+      ${NEWTEXTS.TITLE7_M1218}
     }
   `,
 };

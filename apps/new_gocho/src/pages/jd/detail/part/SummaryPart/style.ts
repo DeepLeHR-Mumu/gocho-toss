@@ -33,19 +33,19 @@ export const cssObj = {
   companyName: css`
     margin-left: 1rem;
     margin-right: auto;
-    ${NEWTEXTS.TITLE8}
+    ${NEWTEXTS.TITLE5_M1620}
   `,
 
   viewWrapper: css`
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: ${NEWCOLORS.GRAY300};
-    ${NEWTEXTS.TITLE7}
+    color: ${NEWCOLORS.GRAY450};
+    ${NEWTEXTS.TITLE5_M1620}
   `,
 
   title: css`
-    ${NEWTEXTS.TITLE15}
+    ${NEWTEXTS.DISPLAY2_B3236}
   `,
 
   dueDateWrapper: css`
@@ -54,7 +54,7 @@ export const cssObj = {
     align-items: center;
     gap: 1rem;
 
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 
   chipsWrapper: css`

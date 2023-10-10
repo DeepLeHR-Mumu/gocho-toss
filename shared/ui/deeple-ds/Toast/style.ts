@@ -30,10 +30,10 @@ export const cssObj = {
       }
     }
 
-    ${NEWTEXTS.TITLE7}
+    ${NEWTEXTS.TITLE5_M1620}
 
     ${MOBILE} {
-      ${NEWTEXTS.TITLE4};
+      ${NEWTEXTS.TITLE6_M1418};
     }
   `,
 };

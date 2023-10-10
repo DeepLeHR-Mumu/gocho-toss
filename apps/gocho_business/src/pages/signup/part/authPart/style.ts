@@ -32,7 +32,7 @@ export const cssObj = {
   `,
 
   desc: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     ${TEXTS.BODY2};
   `,
 
@@ -43,7 +43,7 @@ export const cssObj = {
 
   inputTitle: css`
     ${TEXTS.TITLE7};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     margin-bottom: 0.75rem;
   `,
 
@@ -56,7 +56,7 @@ export const cssObj = {
   `,
 
   termLink: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     text-decoration: underline;
   `,
 

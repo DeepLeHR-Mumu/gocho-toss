@@ -15,7 +15,7 @@ export const cssObj = {
     padding: 0.5rem 1rem;
     background-color: ${NEWCOLORS.BLUE100};
     ${TEXTS.BODY2}
-    color: ${NEWCOLORS.BLUEGRAY500};
+    color: ${NEWCOLORS.GRAY700};
     border-radius: 0.5rem;
   `,
 

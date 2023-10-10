@@ -15,12 +15,12 @@ export const cssObj = {
     }
     if (status === "공고마감") {
       fontColor = css`
-        color: ${NEWCOLORS.BLUEGRAY400};
+        color: ${NEWCOLORS.GRAY600};
       `;
     }
     if (status === "대기중") {
       fontColor = css`
-        color: ${NEWCOLORS.GREEN};
+        color: ${NEWCOLORS.GREEN300};
       `;
     }
     if (status === "반려") {

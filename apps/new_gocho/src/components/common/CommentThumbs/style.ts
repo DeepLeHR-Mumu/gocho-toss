@@ -4,26 +4,26 @@ import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
   thumbsUpWrapper: (isClicked: boolean) => css`
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY400};
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.GRAY600};
 
-      svg {
-        color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY400};
-      }
-    `,
+    svg {
+      color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.GRAY600};
+    }
+  `,
 
   thumbsDownWrapper: (isClicked: boolean) => css`
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.BLUEGRAY400};
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.GRAY600};
 
-      svg {
-        color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.BLUEGRAY400};
-      }
-    `,
+    svg {
+      color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.GRAY600};
+    }
+  `,
 
   large: css`
     svg {
@@ -32,7 +32,7 @@ export const cssObj = {
     }
 
     span {
-      ${NEWTEXTS.TITLE7}
+      ${NEWTEXTS.TITLE5_M1620}
     }
   `,
 
@@ -43,7 +43,7 @@ export const cssObj = {
     }
 
     span {
-      ${NEWTEXTS.TITLE1}
+      ${NEWTEXTS.TITLE7_M1218}
     }
   `,
 };

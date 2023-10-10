@@ -40,14 +40,14 @@ export const cssObj = {
   tabButton: (isSelected: boolean) => css`
     width: 8.75rem;
     padding-bottom: 1.5rem;
-    color: ${isSelected ? NEWCOLORS.BLACK : NEWCOLORS.BLUEGRAY200};
+    color: ${isSelected ? NEWCOLORS.BLACK : NEWCOLORS.GRAY400};
     border-bottom: ${isSelected ? `2px solid ${NEWCOLORS.BLACK}` : `none`};
-    ${NEWTEXTS.TITLE12}
+    ${NEWTEXTS.TITLE4_B1822}
   }
   `,
 
   total: css`
-    ${NEWTEXTS.TITLE10}
+    ${NEWTEXTS.TITLE4_M1822}
   `,
 
   resultWrapper: css`
@@ -67,21 +67,21 @@ export const cssObj = {
 
     > strong {
       color: ${NEWCOLORS.BLACK};
-      ${NEWTEXTS.TITLE7}
+      ${NEWTEXTS.TITLE5_M1620}
 
       ${TEMP} {
         color: ${NEWCOLORS.BLUE300};
-        ${NEWTEXTS.TITLE4}
+        ${NEWTEXTS.TITLE6_M1418}
       }
     }
 
     > span {
-      color: ${NEWCOLORS.BLUEGRAY400};
-      ${NEWTEXTS.TITLE7}
+      color: ${NEWCOLORS.GRAY600};
+      ${NEWTEXTS.TITLE5_M1620}
 
       ${TEMP} {
         color: ${NEWCOLORS.BLACK};
-        ${NEWTEXTS.TITLE4}
+        ${NEWTEXTS.TITLE6_M1418}
       }
     }
   `,

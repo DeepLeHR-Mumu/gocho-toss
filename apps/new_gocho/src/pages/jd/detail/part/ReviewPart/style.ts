@@ -31,7 +31,7 @@ export const cssObj = {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    ${NEWTEXTS.TITLE9}
+    ${NEWTEXTS.TITLE5_B1620}
   `,
 
   chipsWrapper: css`
@@ -63,7 +63,7 @@ export const cssObj = {
     background-color: ${NEWCOLORS.BLUE100};
     border-radius: 1rem;
     border: 1px solid ${NEWCOLORS.BLUE200};
-    ${NEWTEXTS.BODY2}
+    ${NEWTEXTS.BODY3_R1422}
   `,
 
   contentsWrapper: (blurred: boolean) => css`
@@ -80,8 +80,8 @@ export const cssObj = {
   noComment: css`
     margin: auto;
     text-align: center;
-    color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.BODY2}
+    color: ${NEWCOLORS.GRAY600};
+    ${NEWTEXTS.BODY3_R1422}
   `,
 
   footerWrapper: css`
@@ -91,7 +91,7 @@ export const cssObj = {
 
     > h5 {
       padding-bottom: 0.75rem;
-      ${NEWTEXTS.TITLE6}
+      ${NEWTEXTS.TITLE6_B1418}
     }
 
     :focus-within {
@@ -102,13 +102,13 @@ export const cssObj = {
   `,
 
   commentInput: css`
-    ${NEWTEXTS.BODY2};
+    ${NEWTEXTS.BODY3_R1422};
   `,
 
   sendIcon: css`
     -ms-transform: rotate(-90deg); /* IE 9 */
     -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
     transform: rotate(-90deg);
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
   `,
 };

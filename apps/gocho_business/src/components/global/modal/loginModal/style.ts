@@ -78,7 +78,7 @@ export const cssObj = {
     }
     return css`
       ${defaultCSS};
-      color: ${NEWCOLORS.BLUEGRAY200};
+      color: ${NEWCOLORS.GRAY400};
     `;
   },
 
@@ -106,7 +106,7 @@ export const cssObj = {
     }
     return css`
       ${defaultCSS};
-      border-color: ${NEWCOLORS.BLUEGRAY200};
+      border-color: ${NEWCOLORS.GRAY400};
     `;
   },
 

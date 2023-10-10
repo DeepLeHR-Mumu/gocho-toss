@@ -12,24 +12,24 @@ export const cssObj = {
 
   rowWrapper: css`
     display: flex;
-    ${NEWTEXTS.BODY6}
+    ${NEWTEXTS.BODY1_R1826}
 
     span:first-of-type {
       flex-direction: row;
       flex-basis: 7.1875rem;
       flex-shrink: 0;
-      color: ${NEWCOLORS.BLUEGRAY400};
-      ${NEWTEXTS.TITLE10}
+      color: ${NEWCOLORS.GRAY600};
+      ${NEWTEXTS.TITLE4_M1822}
     }
   `,
 
   content: css`
-    ${NEWTEXTS.TITLE10}
+    ${NEWTEXTS.TITLE4_M1822}
   `,
 
   copy: css`
     margin-left: 1rem;
     color: ${NEWCOLORS.BLUE300};
-    ${NEWTEXTS.TITLE11}
+    ${NEWTEXTS.TITLE4_M1822}
   `,
 };

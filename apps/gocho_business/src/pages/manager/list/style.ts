@@ -41,24 +41,24 @@ export const cssObj = {
 
   companyName: css`
     ${TEXTS.TITLE10};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 
   businessNumber: css`
     margin-left: 1rem;
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    color: ${NEWCOLORS.GRAY500};
 
     > span {
       margin-left: 0.5rem;
-      color: ${NEWCOLORS.BLUEGRAY500};
+      color: ${NEWCOLORS.GRAY700};
     }
   `,
 
   pageDesc: css`
     text-align: left;
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     padding-bottom: 2rem;
     border-bottom: 1px solid ${NEWCOLORS.GRAY200};
   `,

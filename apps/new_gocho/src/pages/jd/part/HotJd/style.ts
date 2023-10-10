@@ -13,7 +13,7 @@ export const cssObj = {
   `,
 
   title: css`
-    ${NEWTEXTS.TITLE15};
+    ${NEWTEXTS.DISPLAY2_B3236};
   `,
 
   buttonContainer: css`
@@ -30,7 +30,7 @@ export const cssObj = {
     cursor: ${isDisabled ? "default" : "pointer"};
 
     > svg {
-      color: ${isDisabled ? NEWCOLORS.GRAY100 : NEWCOLORS.GRAY300};
+      color: ${isDisabled ? NEWCOLORS.GRAY100 : NEWCOLORS.GRAY450};
       width: 2rem;
       height: 2rem;
     }
@@ -58,12 +58,12 @@ export const cssObj = {
   `,
 
   bannerTitle: css`
-    ${NEWTEXTS.TITLE16};
+    ${NEWTEXTS.DISPLAY1_B4044};
     color: ${NEWCOLORS.WHITE};
   `,
 
   nowLink: css`
-    ${NEWTEXTS.TITLE11};
+    ${NEWTEXTS.TITLE4_M1822};
     color: ${NEWCOLORS.WHITE};
     display: block;
     cursor: pointer;

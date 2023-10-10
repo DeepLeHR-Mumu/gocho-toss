@@ -25,7 +25,7 @@ export const cssObj = {
         -webkit-transition: 0.4s;
         transition: 0.4s;
         background: ${NEWCOLORS.WHITE};
-        box-shadow: 0 0 3px ${NEWCOLORS.GRAY300};
+        box-shadow: 0 0 3px ${NEWCOLORS.GRAY450};
       }
     }
 
@@ -47,7 +47,7 @@ export const cssObj = {
     }
 
     input:disabled + span::before {
-      box-shadow: 0 0 3px ${NEWCOLORS.GRAY300};
+      box-shadow: 0 0 3px ${NEWCOLORS.GRAY450};
     }
 
     input:disabled + span {

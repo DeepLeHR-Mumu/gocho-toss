@@ -27,8 +27,8 @@ export const cssObj = {
     width: 17.5rem;
     height: 3.25rem;
     font-weight: 400;
-    background-color: ${NEWCOLORS.BLUEGRAY100};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    background-color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY600};
   `,
 
   processBox: css`
@@ -45,13 +45,13 @@ export const cssObj = {
     width: 1.75rem;
     height: 1.75rem;
     color: ${NEWCOLORS.BLACK};
-    background-color: ${NEWCOLORS.BLUEGRAY100};
+    background-color: ${NEWCOLORS.GRAY300};
   `,
 
   icon: css`
     margin-top: 0.5rem;
     font-size: 1.5rem;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 
   addButtonWrapper: css`
@@ -80,10 +80,10 @@ export const cssObj = {
     padding: 0.5rem 1rem;
     background-color: ${NEWCOLORS.GRAY100};
     ${TEXTS.TITLE4};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
 
     > svg {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
   `,
 };

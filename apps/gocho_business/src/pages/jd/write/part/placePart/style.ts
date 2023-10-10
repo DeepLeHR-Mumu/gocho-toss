@@ -37,7 +37,7 @@ export const cssObj = {
     > svg {
       width: 1.25rem;
       height: 1.25rem;
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
   `,
 
@@ -49,14 +49,14 @@ export const cssObj = {
 
   factoryAddress: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    color: ${NEWCOLORS.GRAY500};
   `,
 
   editButton: css`
     > svg {
       width: 1.25rem;
       height: 1.25rem;
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
   `,
 
@@ -65,7 +65,7 @@ export const cssObj = {
     width: 1.75rem;
     height: 1.75rem;
     color: ${NEWCOLORS.BLACK};
-    background-color: ${NEWCOLORS.BLUEGRAY100};
+    background-color: ${NEWCOLORS.GRAY300};
   `,
 
   addPlaceButtonContainer: css`
@@ -84,7 +84,7 @@ export const cssObj = {
     ${TEXTS.TITLE5};
 
     > svg {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
   `,
 
