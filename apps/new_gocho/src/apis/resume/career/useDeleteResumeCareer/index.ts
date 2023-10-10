@@ -5,16 +5,16 @@ import { ErrorResponseDef } from "shared-type/api/errorResponseType";
 
 import { axiosInstance } from "@/apis/axiosInstance";
 
-import { DeleteResumeCarrerDef, RequestObjDef, UseDeleteResumeCarrerProps } from "./type";
+import { DeleteResumeCareerDef, RequestObjDef, UseDeleteResumeCareerProps } from "./type";
 
-export const deleteResumeCarrer: DeleteResumeCarrerDef = async ({ resumeId, careerId }) => {
+export const deleteResumeCareer: DeleteResumeCareerDef = async ({ resumeId, careerId }) => {
   const { data } = await axiosInstance.delete(`/resumes/${resumeId}/careers/${careerId}`);
 
   return data;
 };
 
 // TODO: 삭제된 후 로직 생각하기
-export const useDeleteResumeCarrer: UseDeleteResumeCarrerProps = () =>
+export const useDeleteResumeCareer: UseDeleteResumeCareerProps = () =>
   useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
-    mutationFn: deleteResumeCarrer,
+    mutationFn: deleteResumeCareer,
   });

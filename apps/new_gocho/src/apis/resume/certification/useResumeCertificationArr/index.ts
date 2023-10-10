@@ -10,9 +10,10 @@ export const getResumeCertificationArr: GetResumeCertificationArrDef = async (re
   return data;
 };
 
-export const useResumeCertificationArr = (resumeId?: number) =>
+export const useResumeCertificationArr = (resumeId: number) =>
   useQuery({
-    queryKey: resumeId ? resumeCertificationKeyObj.certificationArr(resumeId) : undefined,
+    enabled: Boolean(resumeId),
+    queryKey: resumeCertificationKeyObj.certificationArr(resumeId),
     queryFn: ({ queryKey: [{ resumeId: queryKeyResumeId }] }) => getResumeCertificationArr(queryKeyResumeId),
     select: ({ data }) => selector(data),
   });

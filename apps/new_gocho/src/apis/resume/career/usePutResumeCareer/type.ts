@@ -14,20 +14,7 @@ export interface PutResumeCareerResponse {
 }
 
 export interface PutResumeCareerDef {
-  ({
-    resumeId,
-    careerId,
-    name,
-    is_working,
-    start_date,
-    end_date,
-    contract_type,
-    department,
-    position,
-    job_description,
-    pay,
-    retire_description,
-  }: RequestObjDef): Promise<PutResumeCareerResponse>;
+  ({ resumeId, careerId, ...requestObj }: RequestObjDef): Promise<PutResumeCareerResponse>;
 }
 
 export interface UsePostResumeCareerProps {

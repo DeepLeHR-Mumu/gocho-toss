@@ -13,7 +13,8 @@ export const getResumeHighSchool: GetResumeHighSchoolDef = async (resumeId: numb
 
 export const useResumeHighSchool = (resumeId: number, highschoolId: number) =>
   useQuery({
-    queryKey: resumeId ? resumeHighSchoolKeyObj.highSchool(resumeId, highschoolId) : undefined,
+    enabled: Boolean(resumeId && highschoolId),
+    queryKey: resumeHighSchoolKeyObj.highSchool(resumeId, highschoolId),
     queryFn: ({ queryKey: [{ resumeId: queryKeyResumeId }] }) => getResumeHighSchool(queryKeyResumeId, highschoolId),
     select: ({ data }) => selector(data),
   });

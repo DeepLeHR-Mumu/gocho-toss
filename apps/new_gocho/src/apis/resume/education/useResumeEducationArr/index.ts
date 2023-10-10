@@ -11,9 +11,10 @@ export const getResumeEducationArr: GetResumeEducationDef = async (resumeId) => 
   return data;
 };
 
-export const useResumeEducationArr = (resumeId?: number) =>
+export const useResumeEducationArr = (resumeId: number) =>
   useQuery({
-    queryKey: resumeId ? resumeEducationKeyObj.educationArr(resumeId) : undefined,
+    enabled: Boolean(resumeId),
+    queryKey: resumeEducationKeyObj.educationArr(resumeId),
     queryFn: ({ queryKey: [{ resumeId: queryKeyResumeId }] }) => getResumeEducationArr(queryKeyResumeId),
     select: ({ data }) => selector(data),
   });

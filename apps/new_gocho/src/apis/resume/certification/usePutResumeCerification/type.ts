@@ -14,13 +14,7 @@ export interface PutResumeCertificationResponse {
 }
 
 export interface PutResumeCertificationDef {
-  ({
-    resumeId,
-    certificationId,
-    name,
-    issuing_authority,
-    acquisition_date,
-  }: RequestObjDef): Promise<PutResumeCertificationResponse>;
+  ({ resumeId, certificationId, ...requestObj }: RequestObjDef): Promise<PutResumeCertificationResponse>;
 }
 
 export interface UsePutResumeCertificationProps {

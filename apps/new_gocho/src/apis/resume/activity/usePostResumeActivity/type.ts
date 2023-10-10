@@ -13,14 +13,7 @@ export interface PostResumeActivityResponse {
 }
 
 export interface PostResumeActivityDef {
-  ({
-    resumeId,
-    activity_type,
-    name,
-    organizer,
-    activity_date,
-    activity_description,
-  }: RequestObjDef): Promise<PostResumeActivityResponse>;
+  ({ resumeId, ...requestObj }: RequestObjDef): Promise<PostResumeActivityResponse>;
 }
 
 export interface UsePostResumeActivityProps {

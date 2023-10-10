@@ -13,7 +13,8 @@ export const getResumeUniversity: GetResumeUniversityDef = async (resumeId, univ
 
 export const useResumeUniversity = (resumeId: number, universityId: number) =>
   useQuery({
-    queryKey: resumeId ? resumeUniversityKeyObj.university(resumeId, universityId) : undefined,
+    enabled: Boolean(resumeId && universityId),
+    queryKey: resumeUniversityKeyObj.university(resumeId, universityId),
     queryFn: ({ queryKey: [{ resumeId: queryKeyResumeId }] }) => getResumeUniversity(queryKeyResumeId, universityId),
     select: ({ data }) => selector(data),
   });

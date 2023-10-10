@@ -8,10 +8,10 @@ export interface RequestObjDef {
   careerId: number;
 }
 
-export interface DeleteResumeCarrerDef {
+export interface DeleteResumeCareerDef {
   ({ resumeId, careerId }: RequestObjDef): Promise<AxiosResponse>;
 }
 
-export interface UseDeleteResumeCarrerProps {
+export interface UseDeleteResumeCareerProps {
   (): UseMutationResult<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

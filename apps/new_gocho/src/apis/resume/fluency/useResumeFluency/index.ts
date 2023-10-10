@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "@/apis/axiosInstance";
-
 import { resumeFluencyKeyObj } from "@/constants/queryKeyFactory/resume/resumeFluencyKeyObj";
 
 import { GetResumeFluencyDef } from "./type";
@@ -13,7 +12,8 @@ export const getResumeFluency: GetResumeFluencyDef = async (resumeId, fluencyId)
 
 export const useResumeFluency = (resumeId: number, fluencyId: number) =>
   useQuery({
-    queryKey: resumeId ? resumeFluencyKeyObj.fluency(resumeId, fluencyId) : undefined,
+    enabled: Boolean(resumeId && fluencyId),
+    queryKey: resumeFluencyKeyObj.fluency(resumeId, fluencyId),
     queryFn: ({ queryKey: [{ resumeId: queryKeyResumeId }] }) => getResumeFluency(queryKeyResumeId, fluencyId),
     select: ({ data }) => selector(data),
   });

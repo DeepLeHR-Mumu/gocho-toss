@@ -11,9 +11,10 @@ export const getResumeActivity: GetResumeActivityDef = async (resumeId, activity
   return data;
 };
 
-export const useResumeActivity = (resumeId?: number, activityId?: number) =>
+export const useResumeActivity = (resumeId: number, activityId: number) =>
   useQuery({
-    queryKey: resumeId && activityId ? resumeActivityKeyObj.activity(resumeId, activityId) : undefined,
+    enabled: Boolean(resumeId && activityId),
+    queryKey: resumeActivityKeyObj.activity(resumeId, activityId),
     queryFn: ({ queryKey: [{ resumeId: queryKeyResumeId, activityId: queryKeyActivityId }] }) =>
       getResumeActivity(queryKeyResumeId, queryKeyActivityId),
     select: ({ data }) => selector(data),

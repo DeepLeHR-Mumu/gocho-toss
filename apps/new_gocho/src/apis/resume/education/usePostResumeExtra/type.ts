@@ -13,17 +13,7 @@ export interface PostResumeExtraResponse {
 }
 
 export interface PostResumeExtraDef {
-  ({
-    resumeId,
-    name,
-    graduate_type,
-    start_date,
-    end_date,
-    major,
-    grade,
-    max_grade,
-    etc,
-  }: RequestObjDef): Promise<PostResumeExtraResponse>;
+  ({ resumeId, ...requestObj }: RequestObjDef): Promise<PostResumeExtraResponse>;
 }
 
 export interface UsePostResumeExtraProps {

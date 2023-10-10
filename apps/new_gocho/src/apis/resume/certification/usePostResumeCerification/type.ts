@@ -13,7 +13,7 @@ export interface PostResumeCertificationResponse {
 }
 
 export interface PostResumeCertificationDef {
-  ({ resumeId, name, issuing_authority, acquisition_date }: RequestObjDef): Promise<PostResumeCertificationResponse>;
+  ({ resumeId, ...requestObj }: RequestObjDef): Promise<PostResumeCertificationResponse>;
 }
 
 export interface UsePostResumeCertificationProps {

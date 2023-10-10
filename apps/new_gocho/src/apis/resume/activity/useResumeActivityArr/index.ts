@@ -11,9 +11,10 @@ export const getResumeActivityArr: GetResumeActivityArrDef = async (resumeId: nu
   return data;
 };
 
-export const useResumeActivityArr = (resumeId?: number) =>
+export const useResumeActivityArr = (resumeId: number) =>
   useQuery({
-    queryKey: resumeId ? resumeActivityKeyObj.activityArr(resumeId) : undefined,
+    enabled: Boolean(resumeId),
+    queryKey: resumeActivityKeyObj.activityArr(resumeId),
     queryFn: ({ queryKey: [{ resumeId: queryKeyResumeId }] }) => getResumeActivityArr(queryKeyResumeId),
     select: ({ data }) => selector(data),
   });

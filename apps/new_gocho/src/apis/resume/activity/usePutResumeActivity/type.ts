@@ -14,15 +14,7 @@ export interface PutResumeActivityResponse {
 }
 
 export interface PutResumeActivityDef {
-  ({
-    resumeId,
-    activityId,
-    activity_type,
-    name,
-    organizer,
-    activity_date,
-    activity_description,
-  }: RequestObjDef): Promise<PutResumeActivityResponse>;
+  ({ resumeId, activityId, ...requestObj }: RequestObjDef): Promise<PutResumeActivityResponse>;
 }
 
 export interface UsePutResumeActivityProps {

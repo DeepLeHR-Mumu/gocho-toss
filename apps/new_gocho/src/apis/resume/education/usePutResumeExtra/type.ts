@@ -15,18 +15,7 @@ export interface PutResumeExtraResponse {
 }
 
 export interface PutResumeExtraDef {
-  ({
-    resumeId,
-    extraId,
-    name,
-    graduate_type,
-    start_date,
-    end_date,
-    major,
-    grade,
-    max_grade,
-    etc,
-  }: RequestObjDef): Promise<PutResumeExtraResponse>;
+  ({ resumeId, extraId, ...requestObj }: RequestObjDef): Promise<PutResumeExtraResponse>;
 }
 
 export interface UsePutResumeExtraProps {

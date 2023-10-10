@@ -13,7 +13,8 @@ export const getResumeExtra: GetResumeExtraDef = async (resumeId, extraId) => {
 
 export const useResumeExtra = (resumeId: number, extraId: number) =>
   useQuery({
-    queryKey: resumeId ? resumeExtraKeyObj.extra(resumeId, extraId) : undefined,
+    enabled: Boolean(resumeId && extraId),
+    queryKey: resumeExtraKeyObj.extra(resumeId, extraId),
     queryFn: ({ queryKey: [{ resumeId: queryKeyResumeId }] }) => getResumeExtra(queryKeyResumeId, extraId),
     select: ({ data }) => selector(data),
   });

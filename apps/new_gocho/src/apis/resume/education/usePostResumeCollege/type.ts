@@ -14,17 +14,7 @@ export interface PostResumeCollegeResponse {
 }
 
 export interface PostResumeCollegeDef {
-  ({
-    resumeId,
-    name,
-    graduate_type,
-    start_date,
-    end_date,
-    major,
-    grade,
-    max_grade,
-    etc,
-  }: RequestObjDef): Promise<PostResumeCollegeResponse>;
+  ({ resumeId, name, ...requestObj }: RequestObjDef): Promise<PostResumeCollegeResponse>;
 }
 
 export interface UsePostResumeCollegeProps {

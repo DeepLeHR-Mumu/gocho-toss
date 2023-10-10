@@ -10,9 +10,10 @@ export const getResumeCollege: GetResumeCollegeDef = async (resumeId, collegeId)
   return data;
 };
 
-export const useResumeCollege = (resumeId?: number, collegeId?: number) =>
+export const useResumeCollege = (resumeId: number, collegeId: number) =>
   useQuery({
-    queryKey: resumeId && collegeId ? resumeCollegeKeyObj.college(resumeId, collegeId) : undefined,
+    enabled: Boolean(resumeId && collegeId),
+    queryKey: resumeCollegeKeyObj.college(resumeId, collegeId),
     queryFn: ({ queryKey: [{ resumeId: queryKeyResumeId, collegeId: queryKeyCertificationId }] }) =>
       getResumeCollege(queryKeyResumeId, queryKeyCertificationId),
     select: ({ data }) => selector(data),
