@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { axiosInstance } from "@/apis/axiosInstance";
 
+import { axiosInstance } from "@/apis/axiosInstance";
 import { resumeCareerKeyObj } from "@/constants/queryKeyFactory/resume/resumeCareerKeyObj";
+
 import { GetResumeCareerDef } from "./type";
 import { selector } from "./util";
 

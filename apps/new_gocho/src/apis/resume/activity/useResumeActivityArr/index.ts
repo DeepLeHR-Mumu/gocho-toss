@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { axiosInstance } from "@/apis/axiosInstance";
 
+import { axiosInstance } from "@/apis/axiosInstance";
 import { resumeActivityKeyObj } from "@/constants/queryKeyFactory/resume/resumeActivityKeyObj";
+
 import { GetResumeActivityArrDef } from "./type";
 import { selector } from "./util";
 
