@@ -4,10 +4,10 @@ import { useRouter } from "next/router";
 
 import { useFocusTrap } from "shared-hooks";
 
+import { NewSharedButton } from "shared-ui/common/newSharedButton";
 import { useModal } from "@/globalStates";
 import { INTERNAL_URL } from "@/constants";
 
-import { NewSharedButton } from "shared-ui/common/newSharedButton";
 import { ModalComponent } from "../modalBackground";
 import { cssObj } from "./style";
 

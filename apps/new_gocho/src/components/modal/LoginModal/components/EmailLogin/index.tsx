@@ -7,13 +7,13 @@ import { FiEyeOff, FiEye } from "react-icons/fi";
 import { Input, Button, Divider } from "shared-ui/deeple-ds";
 import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE, EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 
+import { tokenDecryptor } from "shared-util";
 import { useDoLogin } from "@/apis/auth";
 import { RequestObjDef as LoginFormValues } from "@/apis/auth/useDoLogin/type";
 import { useGetDeviceType, useToast } from "@/globalStates";
 import { loginModalCloseEvent, loginSuccessEvent } from "@/ga/auth";
 import kakaoLogo from "@/public/image/logo/kakao.svg";
 
-import { tokenDecryptor } from "shared-util";
 import ActionBar from "../ActionBar";
 
 import { EmailLoginProps } from "./type";
