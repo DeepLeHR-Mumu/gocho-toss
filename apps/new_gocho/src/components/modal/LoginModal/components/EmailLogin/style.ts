@@ -54,7 +54,7 @@ export const cssObj = {
   eyeOff: css`
     width: 1rem;
     height: 1rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
   `,
 
   findPasswordButtonWrapper: css`
@@ -71,7 +71,7 @@ export const cssObj = {
     border: none;
     padding: 0;
     background-color: transparent;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     ${NEWTEXTS.UNDERLINE1_M1620}
 
     ${TEMP} {
@@ -93,7 +93,7 @@ export const cssObj = {
   `,
 
   mobileDescription: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 
   mobileKakaoButton: css`

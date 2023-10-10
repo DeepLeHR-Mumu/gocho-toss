@@ -15,7 +15,7 @@ export const cssObj = {
 
   inputTitle: css`
     ${TEXTS.TITLE7};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     margin-bottom: 0.75rem;
   `,
 

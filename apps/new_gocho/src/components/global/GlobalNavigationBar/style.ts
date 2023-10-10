@@ -58,11 +58,11 @@ export const getCssObj = (themeWhite: boolean) => ({
     if (isSelected) {
       color = themeWhite ? NEWCOLORS.BLUE300 : NEWCOLORS.WHITE;
     } else {
-      color = themeWhite ? NEWCOLORS.BLUEGRAY400 : NEWCOLORS.WHITE;
+      color = themeWhite ? NEWCOLORS.GRAY600 : NEWCOLORS.WHITE;
     }
 
     return css`
-      color: ${themeWhite ? NEWCOLORS.BLUEGRAY400 : NEWCOLORS.WHITE};
+      color: ${themeWhite ? NEWCOLORS.GRAY600 : NEWCOLORS.WHITE};
       ${NEWTEXTS.TITLE4_B1822}
       cursor: pointer;
       padding-bottom: 1.625rem;

@@ -12,12 +12,12 @@ export const cssObj = {
     }
 
     :disabled {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
       cursor: not-allowed;
     }
 
     ::placeholder {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
   `,
 };

@@ -29,7 +29,7 @@ export const cssObj = {
   `,
 
   basicProfileButton: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     font: ${NEWTEXTS.TITLE5_M1620};
   `,
 
@@ -65,7 +65,7 @@ export const cssObj = {
       width: 8.25rem;
       line-height: 1rem;
       font-weight: 500;
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${NEWCOLORS.GRAY600};
     }
 
     span {

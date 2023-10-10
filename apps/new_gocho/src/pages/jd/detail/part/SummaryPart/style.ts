@@ -40,7 +40,7 @@ export const cssObj = {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
     ${NEWTEXTS.TITLE5_M1620}
   `,
 
@@ -54,7 +54,7 @@ export const cssObj = {
     align-items: center;
     gap: 1rem;
 
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 
   chipsWrapper: css`

@@ -42,7 +42,7 @@ export const cssObj = {
     }
 
     > svg {
-      color: ${isDisabled ? NEWCOLORS.GRAY100 : NEWCOLORS.GRAY300};
+      color: ${isDisabled ? NEWCOLORS.GRAY100 : NEWCOLORS.GRAY450};
       width: 2rem;
       height: 2rem;
     }

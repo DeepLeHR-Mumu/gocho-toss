@@ -46,12 +46,12 @@ export const cssObj = {
 
   email: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     margin-bottom: 0.5rem;
 
     > a {
       margin-left: 0.5rem;
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${NEWCOLORS.GRAY600};
     }
   `,
 };

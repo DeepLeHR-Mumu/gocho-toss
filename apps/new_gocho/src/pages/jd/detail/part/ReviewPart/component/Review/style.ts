@@ -12,19 +12,19 @@ export const cssObj = {
   `,
 
   name: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     ${NEWTEXTS.TITLE6_M1418}
   `,
 
   time: css`
     margin-left: 0.5rem;
     margin-right: auto;
-    color: ${NEWCOLORS.BLUEGRAY300};
+    color: ${NEWCOLORS.GRAY500};
     ${NEWTEXTS.TITLE7_M1218}
   `,
 
   submenuIcon: css`
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
   `,
 
   textBox: css`
@@ -51,10 +51,10 @@ export const cssObj = {
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
-    color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY400};
+    color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.GRAY600};
 
     svg {
-      color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY400};
+      color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.GRAY600};
     }
 
     span {
@@ -67,10 +67,10 @@ export const cssObj = {
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
-    color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.BLUEGRAY400};
+    color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.GRAY600};
 
     svg {
-      color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.BLUEGRAY400};
+      color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.GRAY600};
     }
 
     span {

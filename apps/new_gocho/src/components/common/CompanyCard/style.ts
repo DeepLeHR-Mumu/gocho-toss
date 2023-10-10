@@ -49,7 +49,7 @@ export const cssObj = {
     margin-bottom: 1rem;
     word-wrap: break-word;
     word-break: break-all;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;

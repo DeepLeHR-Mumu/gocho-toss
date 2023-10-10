@@ -20,11 +20,11 @@ export const cssObj = {
 
   label: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     width: 100%;
     padding-bottom: 1rem;
     margin-bottom: 2rem;
-    border-bottom: 1px solid ${NEWCOLORS.BLUEGRAY400};
+    border-bottom: 1px solid ${NEWCOLORS.GRAY600};
   `,
 
   title: css`
@@ -41,7 +41,7 @@ export const cssObj = {
 
     > p {
       ${TEXTS.TITLE3};
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${NEWCOLORS.GRAY600};
     }
   `,
 
@@ -70,6 +70,6 @@ export const cssObj = {
 
   relatedDate: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    color: ${NEWCOLORS.GRAY500};
   `,
 };

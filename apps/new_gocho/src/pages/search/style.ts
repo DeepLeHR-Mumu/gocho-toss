@@ -40,7 +40,7 @@ export const cssObj = {
   tabButton: (isSelected: boolean) => css`
     width: 8.75rem;
     padding-bottom: 1.5rem;
-    color: ${isSelected ? NEWCOLORS.BLACK : NEWCOLORS.BLUEGRAY200};
+    color: ${isSelected ? NEWCOLORS.BLACK : NEWCOLORS.GRAY400};
     border-bottom: ${isSelected ? `2px solid ${NEWCOLORS.BLACK}` : `none`};
     ${NEWTEXTS.TITLE4_B1822}
   }
@@ -76,7 +76,7 @@ export const cssObj = {
     }
 
     > span {
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${NEWCOLORS.GRAY600};
       ${NEWTEXTS.TITLE5_M1620}
 
       ${TEMP} {

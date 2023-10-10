@@ -35,7 +35,7 @@ export const cssObj = {
 
   closeButton: css`
     > svg {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
       width: 2rem;
       height: 2rem;
     }
@@ -80,7 +80,7 @@ export const cssObj = {
     border-left: 1px solid ${NEWCOLORS.GRAY200};
     ${TEXTS.TITLE6}
     background-color: ${NEWCOLORS.GRAY50};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 
   number: css`
@@ -99,7 +99,7 @@ export const cssObj = {
     grid-row-end: 3;
     border: 1px solid ${NEWCOLORS.GRAY200};
     ${TEXTS.TITLE6}
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     flex-direction: column;
   `,
 
@@ -115,7 +115,7 @@ export const cssObj = {
     border-right: 1px solid ${NEWCOLORS.GRAY200};
     ${TEXTS.TITLE5}
     background-color: ${NEWCOLORS.GRAY50};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    color: ${NEWCOLORS.GRAY500};
   `,
 
   due: css`
@@ -126,7 +126,7 @@ export const cssObj = {
     border-right: 1px solid ${NEWCOLORS.GRAY200};
     ${TEXTS.TITLE5}
     background-color: ${NEWCOLORS.GRAY100};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    color: ${NEWCOLORS.GRAY500};
   `,
 
   businessLink: css`

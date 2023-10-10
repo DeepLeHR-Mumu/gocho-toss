@@ -33,7 +33,7 @@ export const cssObj = {
     ${TEXTS.TITLE11};
 
     > svg {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
       font-size: 1.75rem;
     }
   `,
@@ -49,19 +49,19 @@ export const cssObj = {
     }
 
     > svg {
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${NEWCOLORS.GRAY600};
     }
   `,
 
   infoTitle: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     flex-grow: 1;
   `,
 
   info: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 
   companyAuthButton: css`
@@ -94,7 +94,7 @@ export const cssObj = {
 
   countNumber: (isAuth: boolean) => css`
     ${TEXTS.TITLE10};
-    color: ${isAuth ? NEWCOLORS.BLACK : NEWCOLORS.BLUEGRAY200};
+    color: ${isAuth ? NEWCOLORS.BLACK : NEWCOLORS.GRAY400};
   `,
 
   contour: css`

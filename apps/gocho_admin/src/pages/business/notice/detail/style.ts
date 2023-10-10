@@ -17,7 +17,7 @@ export const cssObj = {
 
   dataTitle: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    color: ${NEWCOLORS.GRAY500};
   `,
 
   data: css`

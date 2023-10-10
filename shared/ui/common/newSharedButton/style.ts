@@ -50,13 +50,13 @@ export const cssObj = {
     css`
       border: 1px solid ${NEWCOLORS.GRAY200};
       background-color: ${NEWCOLORS.WHITE};
-      color: ${NEWCOLORS.BLUEGRAY300};
+      color: ${NEWCOLORS.GRAY500};
     `}
 
     ${type === "disabled" &&
     css`
       background-color: ${NEWCOLORS.GRAY200};
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     `}
   `,
 };

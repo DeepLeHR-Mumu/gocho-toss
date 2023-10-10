@@ -23,7 +23,7 @@ export const cssObj = {
 
   time: css`
     margin-right: auto;
-    color: ${NEWCOLORS.BLUEGRAY300};
+    color: ${NEWCOLORS.GRAY500};
     ${NEWTEXTS.TITLE5_M1620}
   `,
 
@@ -47,14 +47,14 @@ export const cssObj = {
   `,
 
   comment: css`
-    color: ${NEWCOLORS.BLUEGRAY600};
+    color: ${NEWCOLORS.GRAY800};
     ${NEWTEXTS.BODY2_R1624}
   `,
 
   moreIcon: css`
     width: 1.5rem;
     height: 1.5rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
   `,
 
   reactionWrapper: css`

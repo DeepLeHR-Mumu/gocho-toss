@@ -26,7 +26,7 @@ export const cssObj = {
 
   menuHeader: css`
     margin-left: auto;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
 
     > span {
       margin-left: 0.5rem;
@@ -54,7 +54,7 @@ export const cssObj = {
     }
 
     > span {
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${NEWCOLORS.GRAY600};
       ${NEWTEXTS.TITLE5_M1620}
     }
 
@@ -78,7 +78,7 @@ export const cssObj = {
     justify-content: center;
     width: 22.5rem;
     height: 7.875rem;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     ${NEWTEXTS.TITLE5_M1620};
     padding-bottom: 2rem;
   `,

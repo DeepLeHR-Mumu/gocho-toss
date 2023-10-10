@@ -16,7 +16,7 @@ export const cssObj = {
   link: css`
     font-size: 1rem;
     padding-top: 0.625%;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 
   companyList: css`

@@ -15,7 +15,7 @@ export const cssObj = {
 
   inputTitle: css`
     ${TEXTS.TITLE7};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     margin-bottom: 0.75rem;
   `,
 
@@ -88,6 +88,6 @@ export const cssObj = {
     display: flex;
     align-items: center;
     gap: 0 0.5rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
   `,
 };

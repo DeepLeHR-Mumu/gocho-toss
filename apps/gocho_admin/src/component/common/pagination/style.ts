@@ -15,7 +15,7 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     margin: 0 0.75rem;
     font-size: 1rem;
     transition: all 0.2s ease-in;
@@ -39,6 +39,6 @@ export const cssObj = {
     height: 2.5rem;
     border-radius: 0.5rem;
     background-color: ${isActivePage ? NEWCOLORS.BLUE100 : "none"};
-    color: ${isActivePage ? NEWCOLORS.BLACK : NEWCOLORS.BLUEGRAY400};
+    color: ${isActivePage ? NEWCOLORS.BLACK : NEWCOLORS.GRAY600};
   `,
 };

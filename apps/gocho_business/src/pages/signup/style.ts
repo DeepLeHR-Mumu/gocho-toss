@@ -28,7 +28,7 @@ export const cssObj = {
     > svg {
       width: 1.5rem;
       height: 1.5rem;
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
   `,
 

@@ -28,7 +28,7 @@ export const cssObj = {
 
     ::placeholder {
       ${TEXTS.TITLE9}
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
   `,
 };

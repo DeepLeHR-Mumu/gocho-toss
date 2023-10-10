@@ -36,7 +36,7 @@ export const cssObj = {
 
   desc: css`
     ${NEWTEXTS.BODY3_R1422};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     margin-top: 0.5rem;
   `,
 };

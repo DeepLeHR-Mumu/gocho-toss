@@ -15,7 +15,7 @@ export const cssObj = {
     justify-content: center;
     width: 8.75rem;
     height: 3rem;
-    color: ${isSelected ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY200};
+    color: ${isSelected ? NEWCOLORS.BLUE300 : NEWCOLORS.GRAY400};
     border-bottom: ${isSelected ? `2px solid ${NEWCOLORS.BLUE300}` : "none"};
   `,
 

@@ -40,7 +40,7 @@ export const cssObj = {
 
   svg: css`
     margin-left: 0.5rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
   `,
 
   fileAddButton: css`

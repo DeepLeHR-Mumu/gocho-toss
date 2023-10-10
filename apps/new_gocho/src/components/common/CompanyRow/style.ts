@@ -42,7 +42,7 @@ export const cssObj = {
   `,
 
   companyCategory: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     ${NEWTEXTS.TITLE6_M1418}
 
     ${TEMP} {

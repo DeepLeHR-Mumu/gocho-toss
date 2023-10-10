@@ -13,7 +13,7 @@ export const cssObj = {
   `,
 
   text: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     text-align: center;
     font-size: 1rem;
     font-weight: 400;

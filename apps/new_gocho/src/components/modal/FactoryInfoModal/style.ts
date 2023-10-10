@@ -47,7 +47,7 @@ export const cssObj = {
   `,
 
   infoSubtitle: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     ${NEWTEXTS.TITLE4_M1822}
   `,
 

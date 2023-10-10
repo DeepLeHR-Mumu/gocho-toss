@@ -54,14 +54,14 @@ export const cssObj = {
   eyeIcon: css`
     width: 1.25rem;
     height: 1.25rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
     align-self: flex-end;
   `,
 
   views: css`
     align-self: flex-end;
     margin-left: 0.5rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
     ${NEWTEXTS.TITLE5_M1620}
   `,
 
@@ -76,7 +76,7 @@ export const cssObj = {
   `,
 
   follower: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     ${NEWTEXTS.TITLE5_M1620}
 
     > span {
@@ -111,7 +111,7 @@ export const cssObj = {
     text-align: center;
     padding-bottom: 1.5rem;
     border-bottom: ${isSelected ? `2px solid ${NEWCOLORS.BLUE300}` : `none`};
-    color: ${isSelected ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY200};
+    color: ${isSelected ? NEWCOLORS.BLUE300 : NEWCOLORS.GRAY400};
   `,
 };
 

@@ -19,7 +19,7 @@ export const cssObj = {
       width: 1rem;
       height: 1rem;
       margin-left: 0.5rem;
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
   `,
 
@@ -63,7 +63,7 @@ export const cssObj = {
     > svg {
       width: 1.25rem;
       height: 1.25rem;
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
   `,
 
@@ -75,7 +75,7 @@ export const cssObj = {
 
   factoryAddress: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    color: ${NEWCOLORS.GRAY500};
   `,
 
   buttonContainer: css`
@@ -88,7 +88,7 @@ export const cssObj = {
     > svg {
       width: 1.25rem;
       height: 1.25rem;
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
   `,
 
@@ -97,7 +97,7 @@ export const cssObj = {
     width: 1.75rem;
     height: 1.75rem;
     color: ${NEWCOLORS.BLACK};
-    background-color: ${NEWCOLORS.BLUEGRAY100};
+    background-color: ${NEWCOLORS.GRAY300};
     z-index: 20;
   `,
 };

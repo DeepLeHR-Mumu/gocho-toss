@@ -33,7 +33,7 @@ export const cssObj = {
   `,
 
   dash: css`
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
     margin: 0 8px;
   `,
 

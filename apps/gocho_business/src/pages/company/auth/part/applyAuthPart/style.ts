@@ -65,7 +65,7 @@ export const cssObj = {
   `,
 
   dash: css`
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
     margin: 0 8px;
   `,
 
@@ -108,7 +108,7 @@ export const cssObj = {
 
     &:disabled {
       background-color: ${NEWCOLORS.GRAY200};
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
       cursor: not-allowed;
     }
   `,

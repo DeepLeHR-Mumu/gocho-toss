@@ -30,10 +30,10 @@ export const cssObj = {
 
     :disabled {
       cursor: not-allowed;
-      border-color: ${NEWCOLORS.GRAY300};
+      border-color: ${NEWCOLORS.GRAY450};
 
       :after {
-        background-color: ${NEWCOLORS.GRAY300};
+        background-color: ${NEWCOLORS.GRAY450};
       }
     }
   `,

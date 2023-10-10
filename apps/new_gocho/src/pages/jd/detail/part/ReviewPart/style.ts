@@ -80,7 +80,7 @@ export const cssObj = {
   noComment: css`
     margin: auto;
     text-align: center;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     ${NEWTEXTS.BODY3_R1422}
   `,
 
@@ -109,6 +109,6 @@ export const cssObj = {
     -ms-transform: rotate(-90deg); /* IE 9 */
     -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
     transform: rotate(-90deg);
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
   `,
 };

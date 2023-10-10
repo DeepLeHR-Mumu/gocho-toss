@@ -7,10 +7,10 @@ export const cssObj = {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY400};
+    color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.GRAY600};
 
     svg {
-      color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY400};
+      color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.GRAY600};
     }
   `,
 
@@ -18,10 +18,10 @@ export const cssObj = {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.BLUEGRAY400};
+    color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.GRAY600};
 
     svg {
-      color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.BLUEGRAY400};
+      color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.GRAY600};
     }
   `,
 

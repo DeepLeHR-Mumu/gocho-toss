@@ -21,7 +21,7 @@ export const cssObj = {
   closeIcon: css`
     width: 2rem;
     height: 2rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
     align-self: flex-end;
     cursor: pointer;
 
@@ -64,7 +64,7 @@ export const cssObj = {
 
   subtitle: css`
     margin-bottom: 6.5rem;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     ${NEWTEXTS.TITLE5_M1620}
 
     ${TEMP} {
@@ -115,7 +115,7 @@ export const cssObj = {
   emailLogin: css`
     border: none;
     background-color: transparent;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     ${NEWTEXTS.UNDERLINE1_M1620}
 
     ${TEMP} {
@@ -124,7 +124,7 @@ export const cssObj = {
   `,
 
   mobileDescription: css`
-    color: ${NEWCOLORS.BLUEGRAY200};
+    color: ${NEWCOLORS.GRAY400};
     ${NEWTEXTS.BODY3_R1422}
   `,
 };

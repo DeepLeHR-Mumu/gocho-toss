@@ -18,7 +18,7 @@ export const cssObj = {
       width: 8.25rem;
       line-height: 1rem;
       font-weight: 500;
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${NEWCOLORS.GRAY600};
     }
 
     > div {

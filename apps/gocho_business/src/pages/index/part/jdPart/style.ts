@@ -15,12 +15,12 @@ export const cssObj = {
     display: block;
     cursor: pointer;
     ${TEXTS.TITLE11};
-    color: ${isAuth ? NEWCOLORS.BLACK : NEWCOLORS.BLUEGRAY400};
+    color: ${isAuth ? NEWCOLORS.BLACK : NEWCOLORS.GRAY600};
   `,
 
   moreButton: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 
   contour: css`
@@ -35,7 +35,7 @@ export const cssObj = {
 
   noAuthJdCard: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     height: 30rem;
     display: flex;
     align-items: center;

@@ -20,13 +20,13 @@ export const cssObj = {
     ${TEXTS.TITLE9};
     padding: 0.75rem 1.25rem;
     background-color: ${isActive ? `${NEWCOLORS.BLUE300}` : `${NEWCOLORS.WHITE}`};
-    color: ${isActive ? `${NEWCOLORS.WHITE}` : `${NEWCOLORS.BLUEGRAY400}`};
+    color: ${isActive ? `${NEWCOLORS.WHITE}` : `${NEWCOLORS.GRAY600}`};
     border-radius: 1.5rem;
   `,
 
   moreButton: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 
   infoList: css`
@@ -52,6 +52,6 @@ export const cssObj = {
 
   infoDate: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    color: ${NEWCOLORS.GRAY500};
   `,
 };

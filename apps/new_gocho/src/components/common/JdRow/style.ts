@@ -28,7 +28,7 @@ export const cssObj = {
   `,
 
   jdCompanyName: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     ${NEWTEXTS.TITLE6_M1418}
   `,
 
@@ -53,12 +53,12 @@ export const cssObj = {
     display: flex;
     align-items: center;
     height: 1.875rem;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     ${NEWTEXTS.TITLE6_M1418}
   `,
 
   expired: css`
-    color: ${NEWCOLORS.BLUEGRAY300} !important;
+    color: ${NEWCOLORS.GRAY500} !important;
     border-color: ${NEWCOLORS.GRAY200};
     background-color: ${NEWCOLORS.GRAY100};
   `,

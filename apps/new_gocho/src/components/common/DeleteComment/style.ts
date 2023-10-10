@@ -3,12 +3,12 @@ import { NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
   size: (size: number) => css`
-      width: ${size}rem;
-      height: ${size}rem;
-    `,
+    width: ${size}rem;
+    height: ${size}rem;
+  `,
 
   gray: css`
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
   `,
 
   red: css`

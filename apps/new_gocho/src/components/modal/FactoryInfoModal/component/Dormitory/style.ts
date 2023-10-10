@@ -20,7 +20,7 @@ export const cssObj = {
   `,
 
   contentTitle: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     margin-bottom: 0.5rem;
     ${NEWTEXTS.TITLE4_M1822}
   `,

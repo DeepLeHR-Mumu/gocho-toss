@@ -81,7 +81,7 @@ export const cssObj = {
     align-items: center;
     justify-content: center;
     background-color: ${NEWCOLORS.GRAY100};
-    color: ${isActive ? NEWCOLORS.BLUE250 : NEWCOLORS.BLUEGRAY100};
+    color: ${isActive ? NEWCOLORS.BLUE250 : NEWCOLORS.GRAY300};
     border-radius: 0.5rem;
 
     ${TEMP} {
@@ -115,7 +115,7 @@ export const cssObj = {
 
   desc: css`
     ${NEWTEXTS.TITLE5_M1620};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    color: ${NEWCOLORS.GRAY500};
 
     ${TEMP} {
       ${NEWTEXTS.TITLE7_M1218};

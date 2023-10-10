@@ -8,7 +8,7 @@ export const cssObj = {
     flex-direction: row;
     align-items: flex-end;
     gap: 1rem;
-    ${isValid ? `color: ${NEWCOLORS.BLACK};` : `color: ${NEWCOLORS.BLUEGRAY400};`}
+    ${isValid ? `color: ${NEWCOLORS.BLACK};` : `color: ${NEWCOLORS.GRAY600};`}
 
     h3 {
       margin-bottom: 1.75rem;
@@ -33,13 +33,13 @@ export const cssObj = {
     grid-column-start: 1;
     grid-column-end: 3;
     margin-top: 1.0625rem;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     ${NEWTEXTS.TITLE4_M1822}
 
     > svg {
       width: 1.5rem;
       height: 1.5rem;
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
   `,
 

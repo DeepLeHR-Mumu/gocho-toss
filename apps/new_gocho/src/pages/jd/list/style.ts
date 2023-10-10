@@ -18,7 +18,7 @@ export const cssObj = {
 
     > span {
       margin-left: 1.75rem;
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${NEWCOLORS.GRAY600};
       ${NEWTEXTS.TITLE4_M1822}
     }
   `,
@@ -40,7 +40,7 @@ export const cssObj = {
     svg {
       width: 1.5rem;
       height: 1.5rem;
-      color: ${clicked ? NEWCOLORS.BLACK : NEWCOLORS.GRAY300};
+      color: ${clicked ? NEWCOLORS.BLACK : NEWCOLORS.GRAY450};
     }
   `,
 

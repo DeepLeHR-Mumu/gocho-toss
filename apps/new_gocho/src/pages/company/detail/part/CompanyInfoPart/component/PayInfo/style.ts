@@ -18,7 +18,7 @@ export const cssObj = {
       flex-direction: row;
       flex-basis: 7.1875rem;
       flex-shrink: 0;
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${NEWCOLORS.GRAY600};
       ${NEWTEXTS.TITLE4_M1822}
     }
   `,

@@ -17,7 +17,7 @@ export const buttonColor = {
   disable: css`
     border: 1px solid ${NEWCOLORS.GRAY200};
     background-color: ${NEWCOLORS.GRAY200};
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
     cursor: default;
   `,
 
@@ -30,7 +30,7 @@ export const buttonColor = {
   outlineGray: css`
     border: 1px solid ${NEWCOLORS.GRAY200};
     background-color: transparent;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 
   fillSelected: css`
@@ -50,7 +50,7 @@ export const followButtonColor = {
   follow: css`
     border: 1px solid ${NEWCOLORS.GRAY200};
     background-color: ${NEWCOLORS.GRAY200};
-    color: ${NEWCOLORS.BLUEGRAY200};
+    color: ${NEWCOLORS.GRAY400};
   `,
 };
 
@@ -58,7 +58,7 @@ export const chipColor = {
   nonSelected: css`
     border: 1px solid ${NEWCOLORS.GRAY200};
     background-color: ${NEWCOLORS.WHITE};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 
   selected: css`
@@ -76,7 +76,7 @@ export const chipColor = {
   fillGray: css`
     border: 1px solid ${NEWCOLORS.GRAY100};
     background-color: ${NEWCOLORS.GRAY100};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    color: ${NEWCOLORS.GRAY500};
   `,
 
   outlineBlue: css`
@@ -94,7 +94,7 @@ export const chipColor = {
   transparent: css`
     border: none;
     background-color: transparent;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 };
 
@@ -113,7 +113,7 @@ export const dDayChipColor = {
 
   fillGray: css`
     border: none;
-    background-color: ${NEWCOLORS.BLUEGRAY100};
+    background-color: ${NEWCOLORS.GRAY300};
     color: ${NEWCOLORS.BLACK};
   `,
 };

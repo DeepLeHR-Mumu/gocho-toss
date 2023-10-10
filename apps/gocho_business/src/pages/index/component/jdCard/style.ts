@@ -43,7 +43,7 @@ export const cssObj = {
   `,
 
   info: css`
-    color: ${NEWCOLORS.BLUEGRAY600};
+    color: ${NEWCOLORS.GRAY800};
   `,
 
   date: css`
@@ -53,6 +53,6 @@ export const cssObj = {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: ${NEWCOLORS.BLUEGRAY300};
+    color: ${NEWCOLORS.GRAY500};
   `,
 };

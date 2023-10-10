@@ -16,7 +16,7 @@ export const cssObj = {
 
   infoTitle: css`
     ${TEXTS.TITLE6};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     width: 8rem;
   `,
 
@@ -39,7 +39,7 @@ export const cssObj = {
     display: flex;
     align-items: center;
     ${TEXTS.TITLE6};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     width: 8rem;
 
     :after {
@@ -63,7 +63,7 @@ export const cssObj = {
     right: 1rem;
     z-index: 10;
     font-size: 1.25rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
   `,
 
   errorDesc: css`
@@ -76,7 +76,7 @@ export const cssObj = {
 
   desc: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY500};
+    color: ${NEWCOLORS.GRAY700};
     margin-top: 1.5rem;
   `,
 

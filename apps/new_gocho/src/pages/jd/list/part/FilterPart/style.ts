@@ -14,13 +14,13 @@ export const cssObj = {
 
     > span {
       margin-left: 1.75rem;
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${NEWCOLORS.GRAY600};
       ${NEWTEXTS.TITLE4_M1822}
     }
 
     > button {
       margin-left: auto;
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${NEWCOLORS.GRAY600};
       ${NEWTEXTS.TITLE4_M1822}
 
       :hover {
@@ -32,7 +32,7 @@ export const cssObj = {
   wrapper: css`
     border-radius: 0.5rem;
     background-color: ${NEWCOLORS.WHITE};
-    border: 1px solid ${NEWCOLORS.GRAY300};
+    border: 1px solid ${NEWCOLORS.GRAY450};
     display: flex;
     flex-direction: row;
     overflow: hidden;
@@ -90,7 +90,7 @@ export const cssObj = {
     margin-top: 1rem;
     padding: 1.75rem 1.5rem;
     border-radius: 0.5rem;
-    border: 1px solid ${NEWCOLORS.GRAY300};
+    border: 1px solid ${NEWCOLORS.GRAY450};
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -112,7 +112,7 @@ export const cssObj = {
     > svg {
       width: 1.25rem;
       height: 1.25rem;
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
   `,
 
@@ -126,7 +126,7 @@ export const cssObj = {
 
     button:nth-child(1),
     button:nth-child(2) {
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${NEWCOLORS.GRAY600};
       ${NEWTEXTS.TITLE6_M1418}
 
       svg {

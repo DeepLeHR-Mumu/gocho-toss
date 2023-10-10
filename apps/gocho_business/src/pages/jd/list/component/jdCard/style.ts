@@ -47,7 +47,7 @@ export const cssObj = {
   `,
 
   info: css`
-    color: ${NEWCOLORS.BLUEGRAY600};
+    color: ${NEWCOLORS.GRAY800};
   `,
 
   commonInfoContainer: css`
@@ -73,7 +73,7 @@ export const cssObj = {
   count: (isExpired: boolean) => css`
     font-size: 1.5rem;
     font-weight: 600;
-    color: ${isExpired ? `${NEWCOLORS.BLUEGRAY200}` : `${NEWCOLORS.BLACK}`};
+    color: ${isExpired ? `${NEWCOLORS.GRAY400}` : `${NEWCOLORS.BLACK}`};
   `,
 
   date: css`
@@ -83,7 +83,7 @@ export const cssObj = {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 
   bottomContainer: css`
@@ -113,7 +113,7 @@ export const cssObj = {
     width: 5rem;
     border: 1px solid ${NEWCOLORS.GRAY200};
     background-color: ${NEWCOLORS.WHITE};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    color: ${NEWCOLORS.GRAY500};
     text-align: center;
   `,
 
@@ -125,7 +125,7 @@ export const cssObj = {
     align-items: center;
     justify-content: center;
     color: ${NEWCOLORS.WHITE};
-    background-color: ${NEWCOLORS.BLUEGRAY200};
+    background-color: ${NEWCOLORS.GRAY400};
     border-radius: 50rem;
   `,
 };

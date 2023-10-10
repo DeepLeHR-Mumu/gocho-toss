@@ -32,7 +32,7 @@ export const cssObj = {
     > svg {
       width: 1.5rem;
       height: 1.5rem;
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
   `,
 
@@ -42,7 +42,7 @@ export const cssObj = {
 
   resultContainer: css`
     ${TEXTS.TITLE7};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     height: 30.75rem;
   `,
 
@@ -62,7 +62,7 @@ export const cssObj = {
 
   inputTitle: css`
     ${TEXTS.TITLE7};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     margin-bottom: 0.75rem;
   `,
 

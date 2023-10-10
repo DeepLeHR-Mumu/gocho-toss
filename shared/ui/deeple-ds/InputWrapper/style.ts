@@ -12,7 +12,7 @@ export const cssObj = {
 
   label: css`
     ${NEWTEXTS.TITLE5_B1620}
-    color: ${NEWCOLORS.BLUEGRAY400}
+    color: ${NEWCOLORS.GRAY600}
   `,
 
   inputWrapper: (disabled?: boolean) => css`
