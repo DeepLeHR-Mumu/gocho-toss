@@ -33,7 +33,7 @@ export const cssObj = {
   companyName: css`
     margin-left: 1rem;
     margin-right: auto;
-    ${NEWTEXTS.TITLE8}
+    ${NEWTEXTS.TITLE5_M1620}
   `,
 
   viewWrapper: css`
@@ -41,11 +41,11 @@ export const cssObj = {
     align-items: center;
     gap: 0.5rem;
     color: ${NEWCOLORS.GRAY300};
-    ${NEWTEXTS.TITLE7}
+    ${NEWTEXTS.TITLE5_M1620}
   `,
 
   title: css`
-    ${NEWTEXTS.TITLE15}
+    ${NEWTEXTS.DISPLAY2_B3236}
   `,
 
   dueDateWrapper: css`

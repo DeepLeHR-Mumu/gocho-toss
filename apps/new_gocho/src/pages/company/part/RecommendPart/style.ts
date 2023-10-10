@@ -13,7 +13,7 @@ export const cssObj = {
   `,
 
   desc: css`
-    ${NEWTEXTS.TITLE7};
+    ${NEWTEXTS.TITLE5_M1620};
     margin-top: 1rem;
     color: ${NEWCOLORS.BLUEGRAY400};
   `,

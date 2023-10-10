@@ -20,48 +20,48 @@ export const cssObj = {
   `,
 
   maleBar: (percent: number) => css`
-      width: 2rem;
-      height: ${percent}%;
-      background-color: ${NEWCOLORS.BLUE250};
-      border-radius: 0.5rem 0.5rem 0 0;
-      position: relative;
+    width: 2rem;
+    height: ${percent}%;
+    background-color: ${NEWCOLORS.BLUE250};
+    border-radius: 0.5rem 0.5rem 0 0;
+    position: relative;
 
-      ::after {
-        content: "${percent}%";
-        width: 100%;
-        position: absolute;
-        top: -1.375rem;
-        text-align: center;
-        color: ${NEWCOLORS.BLUE250};
-        ${NEWTEXTS.TITLE5}
-      }
-    `,
+    ::after {
+      content: "${percent}%";
+      width: 100%;
+      position: absolute;
+      top: -1.375rem;
+      text-align: center;
+      color: ${NEWCOLORS.BLUE250};
+      ${NEWTEXTS.TITLE6_M1418}
+    }
+  `,
 
   femaleBar: (percent: number) => css`
-      width: 2rem;
-      height: ${percent}%;
-      background-color: ${NEWCOLORS.RED100};
-      border-radius: 0.5rem 0.5rem 0 0;
-      position: relative;
+    width: 2rem;
+    height: ${percent}%;
+    background-color: ${NEWCOLORS.RED100};
+    border-radius: 0.5rem 0.5rem 0 0;
+    position: relative;
 
-      ::after {
-        content: "${percent}%";
-        width: 100%;
-        position: absolute;
-        top: -1.375rem;
-        text-align: center;
-        color: ${NEWCOLORS.RED100};
-        ${NEWTEXTS.TITLE5}
-      }
-    `,
+    ::after {
+      content: "${percent}%";
+      width: 100%;
+      position: absolute;
+      top: -1.375rem;
+      text-align: center;
+      color: ${NEWCOLORS.RED100};
+      ${NEWTEXTS.TITLE6_M1418}
+    }
+  `,
 
   contentTitle: css`
     color: ${NEWCOLORS.BLUEGRAY400};
     margin-bottom: 0.5rem;
-    ${NEWTEXTS.TITLE10}
+    ${NEWTEXTS.TITLE4_M1822}
   `,
 
   content: css`
-    ${NEWTEXTS.TITLE11}
+    ${NEWTEXTS.TITLE4_M1822}
   `,
 };

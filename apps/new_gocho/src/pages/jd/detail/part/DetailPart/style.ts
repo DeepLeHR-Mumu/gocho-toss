@@ -44,7 +44,7 @@ export const cssObj = {
 
   factoryName: css`
     color: ${NEWCOLORS.BLACK};
-    ${NEWTEXTS.TITLE12}
+    ${NEWTEXTS.TITLE4_B1822}
   `,
 
   rightIcon: css`
@@ -56,6 +56,6 @@ export const cssObj = {
 
   factoryAddress: css`
     color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE10}
+    ${NEWTEXTS.TITLE4_M1822}
   `,
 };

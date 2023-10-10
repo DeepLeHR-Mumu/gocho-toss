@@ -20,7 +20,7 @@ export const cssObj = {
   `,
 
   rankNumber: css`
-    ${NEWTEXTS.TITLE13};
+    ${NEWTEXTS.TITLE2_B2428};
     color: ${NEWCOLORS.BLUE300};
     margin-right: 1.25rem;
   `,

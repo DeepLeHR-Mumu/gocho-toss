@@ -17,12 +17,12 @@ export const cssObj = {
   `,
 
   welfareTitle: css`
-    ${NEWTEXTS.TITLE12}
+    ${NEWTEXTS.TITLE4_B1822}
   `,
 
   welfareDescription: css`
     width: 100%;
     margin-top: 1rem;
-    ${NEWTEXTS.BODY4};
+    ${NEWTEXTS.BODY2_R1624};
   `,
 };

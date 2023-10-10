@@ -14,7 +14,7 @@ export const cssObj = {
   `,
 
   text: css`
-    ${NEWTEXTS.BODY6}
+    ${NEWTEXTS.BODY1_R1826}
     color: ${NEWCOLORS.BLUEGRAY400};
     text-align: center;
   `,

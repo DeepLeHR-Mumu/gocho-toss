@@ -9,19 +9,19 @@ export const cssObj = {
     margin-bottom: 2rem;
 
     > h3 {
-      ${NEWTEXTS.TITLE16}
+      ${NEWTEXTS.DISPLAY1_B4044}
     }
 
     > span {
       margin-left: 1.75rem;
       color: ${NEWCOLORS.BLUEGRAY400};
-      ${NEWTEXTS.TITLE11}
+      ${NEWTEXTS.TITLE4_M1822}
     }
 
     > button {
       margin-left: auto;
       color: ${NEWCOLORS.BLUEGRAY400};
-      ${NEWTEXTS.TITLE11}
+      ${NEWTEXTS.TITLE4_M1822}
 
       :hover {
         color: ${NEWCOLORS.BLUE300};
@@ -54,7 +54,7 @@ export const cssObj = {
     > h5 {
       padding: 1.0625rem 1rem;
       background-color: ${NEWCOLORS.GRAY50};
-      ${NEWTEXTS.TITLE12}
+      ${NEWTEXTS.TITLE4_B1822}
     }
 
     ul {
@@ -64,7 +64,7 @@ export const cssObj = {
   `,
 
   title: css`
-    ${NEWTEXTS.TITLE16}
+    ${NEWTEXTS.DISPLAY1_B4044}
   `,
 
   filter: css`
@@ -72,18 +72,18 @@ export const cssObj = {
     text-align: left;
     padding: 0.625rem 1rem;
     width: 100%;
-    ${NEWTEXTS.TITLE7}
+    ${NEWTEXTS.TITLE5_M1620}
 
     :hover {
       color: ${NEWCOLORS.BLUE300};
-      ${NEWTEXTS.TITLE8}
+      ${NEWTEXTS.TITLE5_M1620}
     }
   `,
 
   appliedFilter: css`
     color: ${NEWCOLORS.BLUE300};
     background-color: ${NEWCOLORS.BLUE50};
-    ${NEWTEXTS.TITLE8}
+    ${NEWTEXTS.TITLE5_M1620}
   `,
 
   filterStatus: css`
@@ -107,7 +107,7 @@ export const cssObj = {
     align-items: center;
     gap: 0.25rem;
     color: ${NEWCOLORS.BLUE300};
-    ${NEWTEXTS.TITLE8}
+    ${NEWTEXTS.TITLE5_M1620}
 
     > svg {
       width: 1.25rem;
@@ -127,7 +127,7 @@ export const cssObj = {
     button:nth-child(1),
     button:nth-child(2) {
       color: ${NEWCOLORS.BLUEGRAY400};
-      ${NEWTEXTS.TITLE4}
+      ${NEWTEXTS.TITLE6_M1418}
 
       svg {
         margin-right: 0.25rem;

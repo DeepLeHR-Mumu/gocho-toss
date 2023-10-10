@@ -36,7 +36,7 @@ export const cssObj = {
 
   similarJdTitle: css`
     margin-bottom: 2.5rem;
-    ${NEWTEXTS.TITLE14}
+    ${NEWTEXTS.TITLE1_B2832}
   `,
 
   similarJdList: css`

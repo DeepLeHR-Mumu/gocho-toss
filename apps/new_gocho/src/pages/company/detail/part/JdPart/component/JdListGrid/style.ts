@@ -12,13 +12,13 @@ export const cssObj = {
 
     h3 {
       margin-bottom: 1.75rem;
-      ${NEWTEXTS.TITLE14}
+      ${NEWTEXTS.TITLE1_B2832}
     }
   `,
 
   jdNumber: css`
     margin-bottom: 2rem;
-    ${NEWTEXTS.TITLE7}
+    ${NEWTEXTS.TITLE5_M1620}
   `,
 
   jdWrapper: css`
@@ -34,7 +34,7 @@ export const cssObj = {
     grid-column-end: 3;
     margin-top: 1.0625rem;
     color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE11}
+    ${NEWTEXTS.TITLE4_M1822}
 
     > svg {
       width: 1.5rem;
@@ -50,6 +50,6 @@ export const cssObj = {
     display: grid;
     place-items: center;
     margin-bottom: 2rem;
-    ${NEWTEXTS.TITLE10}
+    ${NEWTEXTS.TITLE4_M1822}
   `,
 };

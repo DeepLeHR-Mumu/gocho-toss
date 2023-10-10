@@ -63,7 +63,7 @@ export const getCssObj = (themeWhite: boolean) => ({
 
     return css`
       color: ${themeWhite ? NEWCOLORS.BLUEGRAY400 : NEWCOLORS.WHITE};
-      ${NEWTEXTS.TITLE12}
+      ${NEWTEXTS.TITLE4_B1822}
       cursor: pointer;
       padding-bottom: 1.625rem;
       color: ${color};
@@ -86,7 +86,7 @@ export const getCssObj = (themeWhite: boolean) => ({
     padding: 0.5rem 1rem;
     color: ${themeWhite ? NEWCOLORS.BLUE200 : NEWCOLORS.BLUE100};
     background-color: transparent;
-    ${NEWTEXTS.TITLE9}
+    ${NEWTEXTS.TITLE5_B1620}
 
     :last-of-type {
       margin-right: 1rem;
@@ -94,7 +94,7 @@ export const getCssObj = (themeWhite: boolean) => ({
   `,
 
   loginButton: css`
-    ${NEWTEXTS.TITLE12}
+    ${NEWTEXTS.TITLE4_B1822}
     color: ${themeWhite ? NEWCOLORS.BLUE300 : NEWCOLORS.WHITE};
   `,
 

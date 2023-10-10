@@ -26,7 +26,7 @@ export const cssObj = {
 
   title: css`
     color: ${NEWCOLORS.BLACK};
-    ${NEWTEXTS.TITLE14}
+    ${NEWTEXTS.TITLE1_B2832}
   `,
 
   close: css`

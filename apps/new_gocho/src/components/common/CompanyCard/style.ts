@@ -33,12 +33,12 @@ export const cssObj = {
 
     margin-top: 1rem;
     margin-bottom: 0.5rem;
-    ${isButtonExist ? NEWTEXTS.TITLE13 : NEWTEXTS.TITLE12}
+    ${isButtonExist ? NEWTEXTS.TITLE2_B2428 : NEWTEXTS.TITLE4_B1822}
 
     ${TEMP} {
       margin-top: 0.875rem;
       margin-bottom: 0;
-      ${isButtonExist ? NEWTEXTS.TITLE6 : NEWTEXTS.TITLE5}
+      ${isButtonExist ? NEWTEXTS.TITLE6_B1418 : NEWTEXTS.TITLE6_M1418}
     }
   `,
 
@@ -53,10 +53,10 @@ export const cssObj = {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    ${NEWTEXTS.TITLE7}
+    ${NEWTEXTS.TITLE5_M1620}
 
     ${TEMP} {
-      ${NEWTEXTS.TITLE1}
+      ${NEWTEXTS.TITLE7_M1218}
       ${isButtonExist ? "" : "display: none;"}
     }
   `,

@@ -13,7 +13,7 @@ export const cssObj = {
   `,
 
   title: css`
-    ${NEWTEXTS.TITLE15};
+    ${NEWTEXTS.DISPLAY2_B3236};
   `,
 
   buttonContainer: css`

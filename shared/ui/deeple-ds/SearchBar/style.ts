@@ -45,7 +45,7 @@ export const cssObj = {
 
   input: css`
     flex: 1;
-    ${NEWTEXTS.TITLE7}
+    ${NEWTEXTS.TITLE5_M1620}
 
     ::placeholder {
       color: ${NEWCOLORS.GRAY300};
@@ -62,7 +62,7 @@ export const cssObj = {
     }
 
     ${MOBILE} {
-      ${NEWTEXTS.TITLE4}
+      ${NEWTEXTS.TITLE6_M1418}
     }
   `,
 

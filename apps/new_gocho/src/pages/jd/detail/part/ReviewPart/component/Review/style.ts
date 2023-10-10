@@ -13,14 +13,14 @@ export const cssObj = {
 
   name: css`
     color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE5}
+    ${NEWTEXTS.TITLE6_M1418}
   `,
 
   time: css`
     margin-left: 0.5rem;
     margin-right: auto;
     color: ${NEWCOLORS.BLUEGRAY300};
-    ${NEWTEXTS.TITLE1}
+    ${NEWTEXTS.TITLE7_M1218}
   `,
 
   submenuIcon: css`
@@ -37,7 +37,7 @@ export const cssObj = {
   comment: css`
     margin-bottom: 0.75rem;
     word-break: break-all;
-    ${NEWTEXTS.BODY2}
+    ${NEWTEXTS.BODY3_R1422}
   `,
 
   reactionWrapper: css`
@@ -58,7 +58,7 @@ export const cssObj = {
     }
 
     span {
-      ${NEWTEXTS.TITLE1}
+      ${NEWTEXTS.TITLE7_M1218}
     }
   `,
 
@@ -74,7 +74,7 @@ export const cssObj = {
     }
 
     span {
-      ${NEWTEXTS.TITLE1}
+      ${NEWTEXTS.TITLE7_M1218}
     }
   `,
 };

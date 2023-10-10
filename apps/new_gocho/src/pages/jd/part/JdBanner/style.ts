@@ -20,7 +20,7 @@ export const cssObj = {
     color: ${NEWCOLORS.WHITE};
 
     > div {
-      ${NEWTEXTS.TITLE11}
+      ${NEWTEXTS.TITLE4_M1822}
       display: flex;
       align-items: center;
 
@@ -33,7 +33,7 @@ export const cssObj = {
 
     > p {
       margin-top: 1rem;
-      ${NEWTEXTS.TITLE15}
+      ${NEWTEXTS.DISPLAY2_B3236}
     }
   `,
 

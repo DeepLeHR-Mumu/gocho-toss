@@ -30,6 +30,6 @@ export const commonCssObj = {
 
   title: css`
     margin-bottom: 1.75rem;
-    ${NEWTEXTS.TITLE14}
+    ${NEWTEXTS.TITLE1_B2832}
   `,
 };

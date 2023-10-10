@@ -30,7 +30,7 @@ export const cssObj = {
 
   basicProfileButton: css`
     color: ${NEWCOLORS.BLUEGRAY400};
-    font: ${NEWTEXTS.TITLE7};
+    font: ${NEWTEXTS.TITLE5_M1620};
   `,
 
   upload: css`

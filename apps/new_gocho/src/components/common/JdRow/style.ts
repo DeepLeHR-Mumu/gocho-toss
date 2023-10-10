@@ -29,7 +29,7 @@ export const cssObj = {
 
   jdCompanyName: css`
     color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE4}
+    ${NEWTEXTS.TITLE6_M1418}
   `,
 
   jdTitleWrapper: css`
@@ -39,7 +39,7 @@ export const cssObj = {
   `,
 
   jdTitle: css`
-    ${NEWTEXTS.TITLE12}
+    ${NEWTEXTS.TITLE4_B1822}
   `,
 
   jdDueDateWrapper: css`
@@ -54,7 +54,7 @@ export const cssObj = {
     align-items: center;
     height: 1.875rem;
     color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE4}
+    ${NEWTEXTS.TITLE6_M1418}
   `,
 
   expired: css`

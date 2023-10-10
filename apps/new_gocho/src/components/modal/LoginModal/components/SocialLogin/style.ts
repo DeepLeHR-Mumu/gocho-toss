@@ -41,7 +41,7 @@ export const cssObj = {
   title: css`
     margin-top: 4.5rem;
     margin-bottom: 0.5rem;
-    ${NEWTEXTS.TITLE13}
+    ${NEWTEXTS.TITLE2_B2428}
 
     ${TEMP} {
       font-size: 2.5rem;
@@ -65,7 +65,7 @@ export const cssObj = {
   subtitle: css`
     margin-bottom: 6.5rem;
     color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE7}
+    ${NEWTEXTS.TITLE5_M1620}
 
     ${TEMP} {
       margin-bottom: auto;
@@ -103,12 +103,12 @@ export const cssObj = {
     border-color: #fee500;
     background-color: #fee500;
     color: #392020;
-    ${NEWTEXTS.TITLE8}
+    ${NEWTEXTS.TITLE5_M1620}
 
     ${TEMP} {
       width: 100%;
       margin-bottom: 2.5rem;
-      ${NEWTEXTS.TITLE6}
+      ${NEWTEXTS.TITLE6_B1418}
     }
   `,
 
@@ -116,7 +116,7 @@ export const cssObj = {
     border: none;
     background-color: transparent;
     color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.UNDERLINE_M1620}
+    ${NEWTEXTS.UNDERLINE1_M1620}
 
     ${TEMP} {
       margin-bottom: 3rem;
@@ -125,6 +125,6 @@ export const cssObj = {
 
   mobileDescription: css`
     color: ${NEWCOLORS.BLUEGRAY200};
-    ${NEWTEXTS.BODY2}
+    ${NEWTEXTS.BODY3_R1422}
   `,
 };

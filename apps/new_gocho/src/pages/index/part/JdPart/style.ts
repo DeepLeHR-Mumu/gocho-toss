@@ -18,10 +18,10 @@ export const cssObj = {
   `,
 
   title: css`
-    ${NEWTEXTS.TITLE15};
+    ${NEWTEXTS.DISPLAY2_B3236};
 
     ${TEMP} {
-      ${NEWTEXTS.TITLE9};
+      ${NEWTEXTS.TITLE5_B1620};
     }
   `,
 

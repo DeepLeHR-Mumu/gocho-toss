@@ -14,7 +14,7 @@ export const cssObj = {
   `,
 
   title: css`
-    ${NEWTEXTS.TITLE14}
+    ${NEWTEXTS.TITLE1_B2832}
     margin-bottom: 1.75rem;
   `,
 
@@ -27,7 +27,7 @@ export const cssObj = {
 
   rowWrapper: css`
     display: flex;
-    ${NEWTEXTS.BODY6}
+    ${NEWTEXTS.BODY1_R1826}
 
     span:first-of-type {
       flex-direction: row;

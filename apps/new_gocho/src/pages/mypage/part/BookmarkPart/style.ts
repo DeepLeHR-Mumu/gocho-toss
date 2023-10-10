@@ -9,7 +9,7 @@ export const cssObj = {
   `,
 
   subMenu: (isSelected: boolean) => css`
-    ${NEWTEXTS.TITLE12};
+    ${NEWTEXTS.TITLE4_B1822};
     display: flex;
     align-items: flex-start;
     justify-content: center;

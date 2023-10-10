@@ -18,13 +18,13 @@ export const cssObj = {
   `,
 
   nickname: css`
-    ${NEWTEXTS.TITLE8}
+    ${NEWTEXTS.TITLE5_M1620}
   `,
 
   time: css`
     margin-right: auto;
     color: ${NEWCOLORS.BLUEGRAY300};
-    ${NEWTEXTS.TITLE7}
+    ${NEWTEXTS.TITLE5_M1620}
   `,
 
   commentWrapper: css`
@@ -38,7 +38,7 @@ export const cssObj = {
     width: fit-content;
     gap: 0.5rem;
     color: ${NEWCOLORS.BLUE300};
-    ${NEWTEXTS.TITLE8}
+    ${NEWTEXTS.TITLE5_M1620}
   `,
 
   rightIcon: css`
@@ -48,7 +48,7 @@ export const cssObj = {
 
   comment: css`
     color: ${NEWCOLORS.BLUEGRAY600};
-    ${NEWTEXTS.BODY4}
+    ${NEWTEXTS.BODY2_R1624}
   `,
 
   moreIcon: css`

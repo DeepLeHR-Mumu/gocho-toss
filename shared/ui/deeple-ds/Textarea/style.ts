@@ -8,7 +8,7 @@ export const cssObj = {
     resize: none;
     flex: 1;
     height: ${height}rem;
-    ${NEWTEXTS.TITLE7}
+    ${NEWTEXTS.TITLE5_M1620}
 
     :focus {
       outline: none;

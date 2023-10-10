@@ -72,10 +72,10 @@ export const cssObj = {
     padding: 0;
     background-color: transparent;
     color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.UNDERLINE_M1620}
+    ${NEWTEXTS.UNDERLINE1_M1620}
 
     ${TEMP} {
-      ${NEWTEXTS.UNDERLINE_M1418}
+      ${NEWTEXTS.UNDERLINE2_M1418}
     }
   `,
 

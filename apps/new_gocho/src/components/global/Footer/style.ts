@@ -64,7 +64,7 @@ export const cssObj = {
     color: ${NEWCOLORS.BLUEGRAY400};
 
     ${TEMP} {
-      ${NEWTEXTS.TITLE4};
+      ${NEWTEXTS.TITLE6_M1418};
     }
   `,
 
@@ -73,7 +73,7 @@ export const cssObj = {
     color: ${NEWCOLORS.BLUEGRAY400};
 
     ${TEMP} {
-      ${NEWTEXTS.TITLE1};
+      ${NEWTEXTS.TITLE7_M1218};
     }
   `,
 
@@ -101,7 +101,7 @@ export const cssObj = {
     color: ${NEWCOLORS.BLUEGRAY400};
 
     ${TEMP} {
-      ${NEWTEXTS.TITLE6};
+      ${NEWTEXTS.TITLE6_B1418};
     }
   `,
 
@@ -112,7 +112,7 @@ export const cssObj = {
     color: ${NEWCOLORS.BLUEGRAY400};
 
     ${TEMP} {
-      ${NEWTEXTS.TITLE1};
+      ${NEWTEXTS.TITLE7_M1218};
     }
   `,
 
@@ -142,7 +142,7 @@ export const cssObj = {
     color: ${NEWCOLORS.BLUEGRAY400};
 
     ${TEMP} {
-      ${NEWTEXTS.TITLE6};
+      ${NEWTEXTS.TITLE6_B1418};
     }
   `,
 };
