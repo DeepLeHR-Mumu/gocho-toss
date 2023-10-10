@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useQueryClient } from "@tanstack/react-query";
 import dayjs from "dayjs";
 
-import { SharedButton } from "shared-ui/common/sharedButton/sharedButton";
+import { SharedButton } from "shared-ui/common/sharedButton";
 import { useDeleteNotice } from "@/api";
 import { INTERNAL_URL } from "@/constant";
 
