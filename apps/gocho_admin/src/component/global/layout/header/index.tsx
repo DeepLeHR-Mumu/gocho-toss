@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 
-import { SharedButton } from "shared-ui/business/sharedButton";
+import { SharedButton } from "shared-ui/common/sharedButton";
 import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
 import { COLORS } from "shared-style/color";
 
@@ -36,15 +36,8 @@ export const Header: FunctionComponent = () => {
         <Image src={colorLogoSrc} alt="고초대졸닷컴" fill />
         <strong css={cssObj.title}>Admin 페이지</strong>
       </Link>
-      {!isLogined ? (
-        <SharedButton
-          onClickHandler={doLogout}
-          text="로그아웃"
-          size="large"
-          radius="round"
-          fontColor={COLORS.BLUE_FIRST40}
-          backgroundColor={COLORS.GRAY100}
-        />
+      {isLogined ? (
+        <SharedButton buttonType="fillWhite" width={7} onClickHandler={doLogout} text="로그아웃" />
       ) : (
         <Link href={INTERNAL_URL.LOGIN_URL} css={cssObj.loginButton}>
           로그인

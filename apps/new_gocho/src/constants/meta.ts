@@ -1,4 +1,6 @@
-import { CDN_URL } from "./externalURL";
+import { CDN_URL } from "shared-constant/src/externalURL";
+
+export const GOCHO_DESKTOP_URL = "https://고초대졸.com";
 
 export const defaultKeyword =
   "고초대졸, 고초대졸닷컴, 초대졸취업, 생산직, 현장직, 기능직, 고졸, 초대졸, 전문대졸, 채용정보, 공장정보, 기업정보, 복지, 통근버스, 기숙사, 노조, 현대모비스, 현대두산인프라코어, sk하이닉스, 유한양행, 삼성바이오로직스, sk이노베이션, 버슘머트리얼즈, 공무, 메인트, sk트리캠, 고졸채용, 오비맥주, ls전선, lg에너지솔루션, 생산직채용, 덕양산업, 앰코, 미원상사, 해성디에스";

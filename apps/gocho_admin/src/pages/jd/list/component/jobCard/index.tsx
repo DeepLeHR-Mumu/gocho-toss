@@ -1,10 +1,9 @@
 import { FunctionComponent } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { dateConverter } from "shared-util";
-import { SharedButton } from "shared-ui/business/sharedButton";
-import { COLORS } from "shared-style/color";
+import { SharedButton } from "shared-ui/common/sharedButton";
 
 import { useDeleteJd, useEndJd } from "@/api";
 import { INTERNAL_URL } from "@/constant";
@@ -13,6 +12,8 @@ import { JobCardProps } from "./type";
 import { cssObj } from "./style";
 
 export const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
+  const router = useRouter();
+
   const queryClient = useQueryClient();
 
   const { mutate: deleteJobMutate } = useDeleteJd();
@@ -62,25 +63,14 @@ export const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
           <a href={job.applyUrl} css={cssObj.applyButton} target="_blank" rel="noopener noreferrer">
             채용 링크
           </a>
+          <SharedButton buttonType="fillWhite" width={4.5} onClickHandler={() => endJobHandler(job.id)} text="마감" />
           <SharedButton
-            onClickHandler={() => endJobHandler(job.id)}
-            text="마감"
-            size="medium"
-            radius="round"
-            fontColor={COLORS.GRAY10}
-            backgroundColor={COLORS.GRAY90}
+            buttonType="fillBlue"
+            width={4.5}
+            onClickHandler={() => router.push(`${INTERNAL_URL.JD_EDIT_URL}/?id=${job.id}`)}
+            text="수정"
           />
-          <Link href={`${INTERNAL_URL.JD_EDIT_URL}/?id=${job.id}`} css={cssObj.jdEditButton}>
-            수정 {">"}
-          </Link>
-          <SharedButton
-            onClickHandler={() => deleteJobHandler(job.id)}
-            text="삭제"
-            size="medium"
-            radius="round"
-            fontColor={COLORS.GRAY100}
-            backgroundColor={COLORS.ERROR_RED30}
-          />
+          <SharedButton buttonType="fillRed" width={4.5} onClickHandler={() => deleteJobHandler(job.id)} text="삭제" />
         </li>
       </ul>
     </li>
