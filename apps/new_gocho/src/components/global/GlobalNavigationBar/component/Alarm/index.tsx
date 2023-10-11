@@ -8,7 +8,7 @@ import { getCommunityDateFormat } from "shared-util";
 
 import { alarmArrKeyObj } from "@/constants/queryKeyFactory/user/alarmKeyObj";
 import { useReadAlarmAll, useReadAlarmOne, useInfiniteAlarmArr } from "@/apis/users";
-import { AlarmDef } from "@/apis/users/type/alarm";
+import { AlarmDef } from "@/apis/users/alarm/type";
 
 import { AlarmProps } from "./type";
 import { cssObj } from "./style";
