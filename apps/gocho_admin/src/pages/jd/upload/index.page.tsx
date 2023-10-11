@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { SharedButton } from "shared-ui/common/sharedButton";
-import { useDisabledKeydownSubmit } from "shared-hooks/src";
+import { useDisabledKeydownSubmit } from "shared-hook";
 
 import { useAddJd } from "@/api";
 import { useToast } from "@/globalStates";

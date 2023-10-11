@@ -2,9 +2,9 @@ import { FunctionComponent, useRef } from "react";
 import { FiX, FiArrowUp } from "react-icons/fi";
 import { useRouter } from "next/router";
 
-import { useFocusTrap } from "shared-hooks";
-
 import { SharedButton } from "shared-ui/common/sharedButton";
+import { useFocusTrap } from "shared-hook";
+
 import { useModal } from "@/globalStates";
 import { INTERNAL_URL } from "@/constants";
 

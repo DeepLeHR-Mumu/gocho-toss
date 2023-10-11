@@ -1,14 +1,13 @@
 import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { FiX } from "react-icons/fi";
 
-import { useFocusTrap } from "shared-hooks";
-
 import { SharedButton } from "shared-ui/common/sharedButton";
+import { useFocusTrap } from "shared-hook";
+
 import { useModal, certiModalDef } from "@/globalStates";
-
 import { commonCssObj } from "@/styles";
-import { ModalComponent } from "../modalBackground";
 
+import { ModalComponent } from "../modalBackground";
 import { CERTI_ARR } from "./constant";
 import { cssObj } from "./style";
 

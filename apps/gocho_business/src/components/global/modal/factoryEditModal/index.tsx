@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { FiX } from "react-icons/fi";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 
-import { useFocusTrap } from "shared-hooks";
-
 import { SharedRadioButton } from "shared-ui/common/sharedRadioButton";
 import { SharedButton } from "shared-ui/common/sharedButton";
+import { useFocusTrap } from "shared-hook";
+
 import { factoryObjDef, useModal } from "@/globalStates";
 import { commonCssObj } from "@/styles";
 

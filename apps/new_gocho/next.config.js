@@ -22,7 +22,7 @@ const nextConfig = {
     "shared-type",
     "shared-style",
     "shared-image",
-    "shared-hooks",
+    "shared-hook",
   ],
 };
 
