@@ -16,7 +16,6 @@ import { useAxiosInterceptor } from "@/apis/axiosInstance";
 import { useSetDeviceType } from "@/globalStates";
 import { globalStyle } from "@/styles/globalStyle";
 import { GlobalNavigationBar, Footer, ToastPlaceholder } from "@/components";
-import {} from "@/components/global/Footer";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

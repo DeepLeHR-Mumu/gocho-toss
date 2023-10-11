@@ -42,6 +42,7 @@
     "shared-type": "workspace:^",
     "shared-ui": "workspace:^",
     "shared-util": "workspace:^",
+    "sharp": "^0.32.6",
     "typescript": "4.7.2",
     "zustand": "4.3.8"
   },
