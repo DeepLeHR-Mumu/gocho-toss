@@ -5,7 +5,7 @@ import { FiEdit3, FiX, FiEye, FiUserCheck } from "react-icons/fi";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import defaultCompanyBg from "shared-image/global/common/default_company_bg.webp";
 
-import { Spinner } from "shared-ui/common/spinner/spinner";
+import { Spinner } from "shared-ui/common/spinner";
 import { useCountInfo, useManagerProfile } from "@/apis";
 import { commonCssObj } from "@/styles";
 

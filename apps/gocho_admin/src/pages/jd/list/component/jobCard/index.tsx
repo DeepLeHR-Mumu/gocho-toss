@@ -1,9 +1,9 @@
 import { FunctionComponent } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
 
 import { dateConverter } from "shared-util";
 import { SharedButton } from "shared-ui/business/sharedButton";
-import { SharedBoxLink } from "shared-ui/business/sharedBoxLink";
 import { COLORS } from "shared-style/color";
 
 import { useDeleteJd, useEndJd } from "@/api";
@@ -68,21 +68,18 @@ export const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
             size="medium"
             radius="round"
             fontColor={COLORS.GRAY10}
-            backgroundColor={COLORS.GRAY100}
+            backgroundColor={COLORS.GRAY90}
           />
-          <SharedBoxLink
-            internalUrl={`${INTERNAL_URL.JD_EDIT_URL}/?id=${job.id}`}
-            text="수정"
-            colorVariation="blue"
-            iconLocation="right"
-          />
+          <Link href={`${INTERNAL_URL.JD_EDIT_URL}/?id=${job.id}`} css={cssObj.jdEditButton}>
+            수정 {">"}
+          </Link>
           <SharedButton
             onClickHandler={() => deleteJobHandler(job.id)}
             text="삭제"
             size="medium"
             radius="round"
-            fontColor={COLORS.GRAY10}
-            backgroundColor={COLORS.GRAY100}
+            fontColor={COLORS.GRAY100}
+            backgroundColor={COLORS.ERROR_RED30}
           />
         </li>
       </ul>

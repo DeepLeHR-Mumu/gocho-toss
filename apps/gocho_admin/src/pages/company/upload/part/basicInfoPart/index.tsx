@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 
 import dayjs from "dayjs";
-import { CheckBox } from "shared-ui/common/checkbox/checkbox";
+import { CheckBox } from "shared-ui/common/checkbox";
 import {
   booleanInputBox,
   checkboxText,

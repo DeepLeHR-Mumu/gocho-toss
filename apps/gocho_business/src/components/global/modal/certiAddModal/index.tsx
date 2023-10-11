@@ -3,7 +3,7 @@ import { FiX } from "react-icons/fi";
 
 import { useFocusTrap } from "shared-hooks";
 
-import { SharedButton } from "shared-ui/common/SharedButton";
+import { SharedButton } from "shared-ui/common/sharedButton";
 import { useModal, certiModalDef } from "@/globalStates";
 
 import { commonCssObj } from "@/styles";

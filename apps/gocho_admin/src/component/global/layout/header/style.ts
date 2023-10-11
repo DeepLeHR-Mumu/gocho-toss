@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { COLORS, NEWCOLORS } from "shared-style/color";
 
 export const cssObj = {
   header: css`
@@ -17,6 +17,7 @@ export const cssObj = {
     align-items: center;
     justify-content: space-between;
   `,
+
   logo: css`
     position: relative;
     width: 7.5rem;
@@ -26,6 +27,7 @@ export const cssObj = {
       object-fit: contain;
     }
   `,
+
   title: css`
     display: block;
     position: absolute;
@@ -35,5 +37,16 @@ export const cssObj = {
     font-size: 1.125rem;
     font-weight: 600;
     color: ${COLORS.GRAY10};
+  `,
+
+  loginButton: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6.25rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    background-color: ${NEWCOLORS.BLUE300};
+    color: ${NEWCOLORS.WHITE};
   `,
 };

@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 
 import { usePreventRouting } from "shared-hooks";
 
-import { Spinner } from "shared-ui/common/spinner/spinner";
+import { Spinner } from "shared-ui/common/spinner";
 import { useEditCompanyDetail, useCompanyDetail, useManagerProfile } from "@/apis";
 import { PageLayout } from "@/components";
 import { useModal, useToast } from "@/globalStates";

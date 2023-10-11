@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { FiX } from "react-icons/fi";
 
-import { CheckBox } from "shared-ui/common/checkbox/checkbox";
+import { CheckBox } from "shared-ui/common/checkbox";
 import { commonCssObj } from "@/styles";
 import { useModal } from "@/globalStates";
 import { jdAcademicClickEvent } from "@/ga";

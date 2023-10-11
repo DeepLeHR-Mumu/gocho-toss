@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 
-import { CheckBoxWithDesc } from "shared-ui/common/checkbox_desc/checkbox_desc";
-import { SharedRadioButton } from "shared-ui/common/sharedRadioButton/sharedRadioButton";
+import { CheckBoxWithDesc } from "shared-ui/common/checkbox_desc";
+import { SharedRadioButton } from "shared-ui/common/sharedRadioButton";
 
 import { ErrorMessage } from "../../component";
 import { requiredExpArr } from "./constant";

@@ -4,7 +4,7 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 import { NUMBER_REGEXP } from "shared-constant";
 
-import { SharedRadioButton } from "shared-ui/common/sharedRadioButton/sharedRadioButton";
+import { SharedRadioButton } from "shared-ui/common/sharedRadioButton";
 import { commonCssObj } from "@/styles";
 
 import { MAX_LENGTH_ERROR_TEXT, ONLY_INT_ERROR_TEXT, INDUSTRY_ARR, SIZE_ARR } from "./constant";

@@ -5,7 +5,7 @@ import { FiX } from "react-icons/fi";
 
 import { useFocusTrap } from "shared-hooks";
 
-import { SharedRadioButton } from "shared-ui/common/sharedRadioButton/sharedRadioButton";
+import { SharedRadioButton } from "shared-ui/common/sharedRadioButton";
 import { SharedButton } from "shared-ui/common/sharedButton";
 import { useModal } from "@/globalStates";
 import { useAddFactory } from "@/apis";

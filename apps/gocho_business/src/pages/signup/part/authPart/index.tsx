@@ -7,7 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { ErrorResponseDef } from "shared-type/api/errorResponseType";
 
 import { SharedButton } from "shared-ui/common/sharedButton";
-import { CheckBox } from "shared-ui/common/checkbox/checkbox";
+import { CheckBox } from "shared-ui/common/checkbox";
 import { loginSuccessEvent, registerCompleteClickEvent, registerPhoneValidationClickEvent } from "@/ga";
 import { getPass, getPassCheck, useManagerRegister, useDoLogin } from "@/apis";
 import { useModal } from "@/globalStates";

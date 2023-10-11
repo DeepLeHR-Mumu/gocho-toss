@@ -8,9 +8,9 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 
-import { InvisibleH2 } from "shared-ui/common/invisibleH2/invisibleH2";
+import { InvisibleH2 } from "shared-ui/common/invisibleH2";
 import { SharedButton } from "shared-ui/common/sharedButton";
-import { CheckBoxWithDesc } from "shared-ui/common/checkbox_desc/checkbox_desc";
+import { CheckBoxWithDesc } from "shared-ui/common/checkbox_desc";
 import { useDoLogin, useManagerProfile } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 import { loginPageFunnelEvent, loginSuccessEvent, registerClickEvent } from "@/ga";

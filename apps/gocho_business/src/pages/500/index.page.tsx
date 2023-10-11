@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Image from "next/image";
 import { NextPage } from "next";
 
-import { InvisibleH2 } from "shared-ui/common/invisibleH2/invisibleH2";
+import { InvisibleH2 } from "shared-ui/common/invisibleH2";
 import jobi_500 from "@/public/image/jobi_500.svg";
 
 import { unknownPageErrorEvent } from "@/ga";

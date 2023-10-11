@@ -2,8 +2,8 @@ import { ChangeEvent, FunctionComponent } from "react";
 import { RiAddFill } from "react-icons/ri";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 
-import { SharedRadioButton } from "shared-ui/common/sharedRadioButton/sharedRadioButton";
-import { CheckBoxWithDesc } from "shared-ui/common/checkbox_desc/checkbox_desc";
+import { SharedRadioButton } from "shared-ui/common/sharedRadioButton";
+import { CheckBoxWithDesc } from "shared-ui/common/checkbox_desc";
 import { useFindFactory } from "@/api";
 
 import { ErrorMessage } from "../../component";

@@ -4,7 +4,7 @@ import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { FiX } from "react-icons/fi";
 
 import { useFocusTrap } from "shared-hooks";
-import { SharedRadioButton } from "shared-ui/common/sharedRadioButton/sharedRadioButton";
+import { SharedRadioButton } from "shared-ui/common/sharedRadioButton";
 import { SharedButton } from "shared-ui/common/sharedButton";
 import { commonCssObj } from "@/styles";
 import { ModalComponent } from "@/components/global/modal/modalBackground";

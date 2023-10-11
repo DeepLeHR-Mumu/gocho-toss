@@ -4,7 +4,7 @@ import { FiX } from "react-icons/fi";
 import { NextPage } from "next";
 import Link from "next/link";
 
-import { Spinner } from "shared-ui/common/spinner/spinner";
+import { Spinner } from "shared-ui/common/spinner";
 import { AuthNav } from "@/components/global/authNav";
 import { INTERNAL_URL } from "@/constants";
 

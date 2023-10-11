@@ -1,8 +1,8 @@
 import { ChangeEvent, FunctionComponent, useEffect, useState } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
-import { CheckBox } from "shared-ui/common/checkbox/checkbox";
-import { SharedRadioButton } from "shared-ui/common/sharedRadioButton/sharedRadioButton";
+import { CheckBox } from "shared-ui/common/checkbox";
+import { SharedRadioButton } from "shared-ui/common/sharedRadioButton";
 import { commonCssObj } from "@/styles";
 import { jdCareerClickEvent } from "@/ga";
 

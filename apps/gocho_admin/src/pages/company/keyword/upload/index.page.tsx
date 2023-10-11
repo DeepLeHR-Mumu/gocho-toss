@@ -6,7 +6,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { SharedButton } from "shared-ui/business/sharedButton";
 import { COLORS } from "shared-style/color";
 
-import { SharedRadioButton } from "shared-ui/common/sharedRadioButton/sharedRadioButton";
+import { SharedRadioButton } from "shared-ui/common/sharedRadioButton";
 import { useAddCompanyKeyword, useFindCompany } from "@/api";
 import { NextPageWithLayout } from "@/types";
 import { GlobalLayout, PageLayout } from "@/component";

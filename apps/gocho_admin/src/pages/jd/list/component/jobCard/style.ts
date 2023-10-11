@@ -1,12 +1,12 @@
 import { css } from "@emotion/react";
 
 import { shorten } from "shared-style/common";
-import { COLORS } from "shared-style/color";
+import { COLORS, NEWCOLORS } from "shared-style/color";
 
 const defaultButton = css`
-  padding: 0.25rem 0.5rem;
   font-size: 0.8125rem;
-  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,22 +90,9 @@ export const cssObj = {
     border: 1px solid ${COLORS.GRAY80};
   `,
 
-  editButton: css`
+  jdEditButton: css`
     ${defaultButton};
-    color: ${COLORS.GRAY10};
-    background-color: ${COLORS.ERROR_YELLOW50};
-  `,
-
-  deleteButton: css`
-    ${defaultButton};
-    color: ${COLORS.GRAY100};
-    background-color: ${COLORS.ERROR_RED30};
-  `,
-
-  endJobButton: css`
-    ${defaultButton};
-    color: ${COLORS.GRAY10};
-    background-color: ${COLORS.GRAY90};
-    border: 1px solid ${COLORS.GRAY80};
+    background-color: ${NEWCOLORS.BLUE300};
+    color: ${NEWCOLORS.WHITE};
   `,
 };
