@@ -1,6 +1,6 @@
 export interface ResumeActivityDef {
   id: number;
-  activity_type: string;
+  activity_type: "수상" | "봉사" | "기타";
   name: string;
   organizer: string;
   activity_date: string | null;
@@ -8,8 +8,7 @@ export interface ResumeActivityDef {
 }
 
 export interface PostActivityDef {
-  id: number;
-  activity_type: string;
+  activity_type: "수상" | "봉사" | "기타";
   name: string;
   organizer: string;
   activity_date: string | null;
