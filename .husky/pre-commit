@@ -13,15 +13,11 @@ cd ../type && tsc --noEmit
 echo "shared type 컴포넌트 타입 검사 완료"
 cd ../util && tsc --noEmit
 echo "shared util 컴포넌트 타입 검사 완료"
-cd ../../apps/gocho_web && tsc --noEmit
-echo "PC 타입 검사 완료"
-cd ../gocho_mobile && tsc --noEmit
-echo "Mobile 타입 검사 완료"
-cd ../gocho_admin && tsc --noEmit
+cd ../../apps/gocho_admin && tsc --noEmit
 echo "Admin 타입 검사 완료"
 cd ../gocho_business && tsc --noEmit
 echo "Business 타입 검사 완료"
 cd ../new_gocho && tsc --noEmit
-echo "NewGocho 타입 검사 완료"
+echo "Web 타입 검사 완료"
 
 cd ../../ && pnpm lint-staged

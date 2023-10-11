@@ -1,7 +1,6 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 
 import { PageResultDef } from "shared-type/api/paginationType";
-import { companyArrKeyObj } from "@/constants/queryKeyFactory/company/arrKeyObj";
 
 import { companyArrKeyObj } from "@/constants/queryKeyFactory/company/arrKeyObj";
 

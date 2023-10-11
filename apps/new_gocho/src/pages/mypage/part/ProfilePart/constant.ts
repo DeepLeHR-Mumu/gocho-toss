@@ -1,10 +1,10 @@
 import { StaticImageData } from "next/image";
 
-import jobiChatProfile from "shared-image/global/profile/jobi_chat.png";
-import jobiPlayProfile from "shared-image/global/profile/jobi_play.png";
-import jobiSafetyProfile from "shared-image/global/profile/jobi_safety.png";
-import jobiTeachProfile from "shared-image/global/profile/jobi_teach.png";
-import jobiProfile from "shared-image/global/profile/jobi.png";
+import jobiChatProfile from "@/public/image/profile/jobi_chat.png";
+import jobiPlayProfile from "@/public/image/profile/jobi_play.png";
+import jobiSafetyProfile from "@/public/image/profile/jobi_safety.png";
+import jobiTeachProfile from "@/public/image/profile/jobi_teach.png";
+import jobiProfile from "@/public/image/profile/jobi.png";
 
 interface ProfileImgObjArrDef {
   key: "default" | "default_work" | "jobi_chat" | "jobi_play" | "jobi_safety" | "jobi_teach" | "jobi";

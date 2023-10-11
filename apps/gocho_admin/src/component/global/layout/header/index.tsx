@@ -5,8 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { SharedButton } from "shared-ui/common/sharedButton";
-import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
-import { COLORS } from "shared-style/color";
+import colorLogoSrc from "shared-image/global/deeple/smallColor.svg";
 
 import { userGetLocalStoargetItem, userResetLocalStorageItem } from "@/utils";
 import { INTERNAL_URL } from "@/constant";

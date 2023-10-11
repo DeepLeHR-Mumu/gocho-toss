@@ -13,7 +13,6 @@ const nextConfig = {
   },
   pageExtensions: ["page.tsx"],
   transpilePackages: [
-    "shared-api",
     "shared-constant",
     "shared-util",
     "shared-type",

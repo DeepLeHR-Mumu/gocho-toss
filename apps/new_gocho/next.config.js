@@ -17,13 +17,11 @@ const nextConfig = {
   pageExtensions: ["page.tsx"],
   transpilePackages: [
     "shared-ui",
-    "shared-api",
     "shared-constant",
     "shared-util",
     "shared-type",
     "shared-style",
     "shared-image",
-    "shared-ga",
     "shared-hooks",
   ],
 };

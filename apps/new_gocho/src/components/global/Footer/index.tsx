@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import gochoTextMono from "shared-image/global/deepLeLogo/textMono.svg";
+import gochoTextMono from "shared-image/global/deeple/textMono.svg";
 import kakaoLogo from "shared-image/global/sns/kakaoLogo.svg";
 import { kakaoChannelUrl } from "shared-constant";
 

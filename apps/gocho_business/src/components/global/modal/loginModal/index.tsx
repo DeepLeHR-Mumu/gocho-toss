@@ -3,7 +3,7 @@ import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
+import smallMono from "shared-image/global/deeple/smallMono.svg";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 import { useFocusTrap } from "shared-hooks";
 
