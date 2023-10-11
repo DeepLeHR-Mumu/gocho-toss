@@ -21,7 +21,7 @@ export const cssObj = {
   // TODO: 나중에 색상/폰트 확인하기
   contentsIndexList: css`
     > li {
-      color: ${NEWCOLORS.BLUE400};
+      color: ${NEWCOLORS.GRAY600};
       margin-bottom: 1.25rem;
       ${NEWTEXTS.TITLE5_M1620}
 
