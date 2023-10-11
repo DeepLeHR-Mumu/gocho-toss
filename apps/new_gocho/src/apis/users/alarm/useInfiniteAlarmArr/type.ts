@@ -2,7 +2,7 @@ import { PageResultDef } from "shared-type/api/paginationType";
 
 import { AlarmArrRequestDef } from "@/constants/queryKeyFactory/user/alarmKeyObj";
 
-import { AlarmDef } from "../type/alarm";
+import { AlarmDef } from "../type";
 
 export interface AlarmArrResponseObjDef {
   data: AlarmDef[];

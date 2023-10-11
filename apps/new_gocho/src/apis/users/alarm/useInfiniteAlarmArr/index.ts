@@ -1,8 +1,8 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 
+import { axiosInstance } from "@/apis/axiosInstance";
 import { alarmArrKeyObj, AlarmArrRequestDef } from "@/constants/queryKeyFactory/user/alarmKeyObj";
 
-import { axiosInstance } from "../../axiosInstance";
 import { GetAlarmArrDef } from "./type";
 
 export const getAlarmArr: GetAlarmArrDef = async (requestObj) => {
