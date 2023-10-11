@@ -11,8 +11,8 @@ export const cssObj = {
   `,
 
   label: css`
-    ${NEWTEXTS.TITLE9}
-    color: ${NEWCOLORS.BLUEGRAY400}
+    ${NEWTEXTS.TITLE5_B1620}
+    color: ${NEWCOLORS.GRAY600}
   `,
 
   inputWrapper: (disabled?: boolean) => css`
@@ -54,7 +54,7 @@ export const cssObj = {
   // NOTE 공통 스타일로 빼도 될듯?
   errorMessage: css`
     color: ${NEWCOLORS.RED300};
-    ${NEWTEXTS.TITLE1}
+    ${NEWTEXTS.TITLE7_M1218}
   `,
 
   // NOTE 공통 스타일로 빼도 될듯?
@@ -69,7 +69,7 @@ export const cssObj = {
   // NOTE 공통 스타일로 빼도 될듯?
   successMessage: css`
     color: ${NEWCOLORS.BLUE300};
-    ${NEWTEXTS.TITLE1}
+    ${NEWTEXTS.TITLE7_M1218}
   `,
 
   underLine: (disabled?: boolean) => css`

@@ -17,7 +17,7 @@ export const cssObj = {
   `,
 
   itemText: css`
-    ${NEWTEXTS.TITLE11};
+    ${NEWTEXTS.TITLE4_M1822};
     text-align: center;
   `,
 };

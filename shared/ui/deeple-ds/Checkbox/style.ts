@@ -12,7 +12,7 @@ export const cssObj = {
     height: 1rem;
     margin-right: 0.25rem;
     background-color: ${isChecked ? `${NEWCOLORS.BLUE300}` : `${NEWCOLORS.WHITE}`};
-    border: 1px solid ${isChecked ? `${NEWCOLORS.BLUE300}` : `${NEWCOLORS.GRAY300}`};
+    border: 1px solid ${isChecked ? `${NEWCOLORS.BLUE300}` : `${NEWCOLORS.GRAY450}`};
     display: flex;
     align-items: center;
     justify-content: center;

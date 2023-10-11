@@ -36,12 +36,12 @@ export const cssObj = {
   `,
 
   infoTitle: css`
-    ${NEWTEXTS.TITLE13}
+    ${NEWTEXTS.TITLE2_B2428}
   `,
 
   infoSubtitle: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE10}
+    color: ${NEWCOLORS.GRAY600};
+    ${NEWTEXTS.TITLE4_M1822}
   `,
 
   summaryWrapper: css`
@@ -59,16 +59,16 @@ export const cssObj = {
 
     > h3 {
       margin-bottom: 1.25rem;
-      ${NEWTEXTS.TITLE12};
+      ${NEWTEXTS.TITLE4_B1822};
     }
 
     > span {
       margin-bottom: 2.5rem;
-      ${NEWTEXTS.TITLE10}
+      ${NEWTEXTS.TITLE4_M1822}
     }
 
     > p {
-      ${NEWTEXTS.BODY6}
+      ${NEWTEXTS.BODY1_R1826}
     }
   `,
 
@@ -76,6 +76,6 @@ export const cssObj = {
     display: inline-block;
     margin-left: 1rem;
     color: ${NEWCOLORS.BLUE250};
-    ${NEWTEXTS.TITLE11}
+    ${NEWTEXTS.TITLE4_M1822}
   `,
 };

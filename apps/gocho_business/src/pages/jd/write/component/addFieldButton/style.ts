@@ -14,7 +14,7 @@ export const cssObj = {
     ${TEXTS.TITLE5};
 
     > svg {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
   `,
 };

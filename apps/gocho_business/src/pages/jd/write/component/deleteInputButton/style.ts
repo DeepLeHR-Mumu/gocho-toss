@@ -10,6 +10,6 @@ export const cssObj = {
     width: 1.75rem;
     height: 1.75rem;
     color: ${NEWCOLORS.BLACK};
-    background-color: ${NEWCOLORS.BLUEGRAY100};
+    background-color: ${NEWCOLORS.GRAY300};
   `,
 };

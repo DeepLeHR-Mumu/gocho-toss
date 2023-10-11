@@ -28,8 +28,8 @@ export const cssObj = {
   `,
 
   jdCompanyName: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE4}
+    color: ${NEWCOLORS.GRAY600};
+    ${NEWTEXTS.TITLE6_M1418}
   `,
 
   jdTitleWrapper: css`
@@ -39,7 +39,7 @@ export const cssObj = {
   `,
 
   jdTitle: css`
-    ${NEWTEXTS.TITLE12}
+    ${NEWTEXTS.TITLE4_B1822}
   `,
 
   jdDueDateWrapper: css`
@@ -53,12 +53,12 @@ export const cssObj = {
     display: flex;
     align-items: center;
     height: 1.875rem;
-    color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE4}
+    color: ${NEWCOLORS.GRAY600};
+    ${NEWTEXTS.TITLE6_M1418}
   `,
 
   expired: css`
-    color: ${NEWCOLORS.BLUEGRAY300} !important;
+    color: ${NEWCOLORS.GRAY500} !important;
     border-color: ${NEWCOLORS.GRAY200};
     background-color: ${NEWCOLORS.GRAY100};
   `,

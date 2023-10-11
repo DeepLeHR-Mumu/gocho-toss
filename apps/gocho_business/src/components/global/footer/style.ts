@@ -44,7 +44,7 @@ export const cssObj = {
 
   info: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 
   contour: css`
@@ -69,14 +69,14 @@ export const cssObj = {
 
   contactTitle: css`
     ${TEXTS.TITLE7};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 
   link: css`
     display: flex;
     align-items: center;
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 
   kakaoLogo: css`
@@ -98,6 +98,6 @@ export const cssObj = {
 
   underlineLink: css`
     ${TEXTS.UNDERLINE};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 };

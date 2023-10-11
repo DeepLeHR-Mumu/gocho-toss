@@ -74,29 +74,29 @@ export const cssObj = {
   `,
 
   eduChip: (isActive: boolean) => css`
-    ${NEWTEXTS.TITLE9}
+    ${NEWTEXTS.TITLE5_B1620}
     width: 1.875rem;
     height: 1.875rem;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: ${NEWCOLORS.GRAY100};
-    color: ${isActive ? NEWCOLORS.BLUE250 : NEWCOLORS.BLUEGRAY100};
+    color: ${isActive ? NEWCOLORS.BLUE250 : NEWCOLORS.GRAY300};
     border-radius: 0.5rem;
 
     ${TEMP} {
       width: 1.5rem;
       height: 1.5rem;
-      ${NEWTEXTS.TITLE3}
+      ${NEWTEXTS.TITLE7_M1218}
     }
   `,
 
   title: css`
     margin-top: 1rem;
-    ${NEWTEXTS.BODY8};
+    ${NEWTEXTS.TITLE1_B2832};
     ${shorten(2)};
     ${TEMP} {
-      ${NEWTEXTS.TITLE5};
+      ${NEWTEXTS.TITLE6_M1418};
       margin-top: 0.5rem;
     }
   `,
@@ -114,11 +114,11 @@ export const cssObj = {
   `,
 
   desc: css`
-    ${NEWTEXTS.TITLE7};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    ${NEWTEXTS.TITLE5_M1620};
+    color: ${NEWCOLORS.GRAY500};
 
     ${TEMP} {
-      ${NEWTEXTS.TITLE1};
+      ${NEWTEXTS.TITLE7_M1218};
     }
   `,
 };

@@ -25,7 +25,7 @@ export const cssObj = {
 
   info: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY500};
+    color: ${NEWCOLORS.GRAY700};
     margin-bottom: 0.5rem;
   `,
 };

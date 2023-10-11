@@ -105,7 +105,7 @@ export const getRecruitDetailContents = (recruitDetail: {
         createElement(
           "span",
           {
-            style: { marginLeft: "0.75rem", color: NEWCOLORS.BLUEGRAY400 },
+            style: { marginLeft: "0.75rem", color: NEWCOLORS.GRAY600 },
           },
           contractType.conversion_rate ? `(전환율 ${contractType.conversion_rate}%)` : ""
         ),

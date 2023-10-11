@@ -23,12 +23,12 @@ export const cssObj = {
 
   companyName: css`
     margin-right: 1.5rem;
-    ${NEWTEXTS.TITLE11}
+    ${NEWTEXTS.TITLE4_M1822}
   `,
 
   jdTitle: css`
     margin-right: auto;
-    ${NEWTEXTS.TITLE12}
+    ${NEWTEXTS.TITLE4_B1822}
   `,
 
   bookmarkWrapper: (isBookmarked: boolean) => css`

@@ -4,8 +4,8 @@ import { NEWTEXTS } from "shared-style/text";
 
 const paginationItem = css`
   padding: 0.675rem;
-  color: ${NEWCOLORS.BLUEGRAY400};
-  ${NEWTEXTS.TITLE7}
+  color: ${NEWCOLORS.GRAY600};
+  ${NEWTEXTS.TITLE5_M1620}
 `;
 
 export const cssObj = {
@@ -38,7 +38,7 @@ export const cssObj = {
 
   prevText: css`
     ${paginationItem}
-    ${NEWTEXTS.TITLE8}
+    ${NEWTEXTS.TITLE5_M1620}
     padding: 0;
   `,
 
@@ -62,7 +62,7 @@ export const cssObj = {
 
   nextText: css`
     ${paginationItem}
-    ${NEWTEXTS.TITLE8}
+    ${NEWTEXTS.TITLE5_M1620}
     padding: 0;
   `,
 
@@ -70,6 +70,6 @@ export const cssObj = {
     width: 1.25rem;
     height: 1.25rem;
     padding: 0;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 };

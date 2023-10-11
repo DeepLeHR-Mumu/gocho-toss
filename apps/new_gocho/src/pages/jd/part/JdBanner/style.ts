@@ -20,7 +20,7 @@ export const cssObj = {
     color: ${NEWCOLORS.WHITE};
 
     > div {
-      ${NEWTEXTS.TITLE11}
+      ${NEWTEXTS.TITLE4_M1822}
       display: flex;
       align-items: center;
 
@@ -33,7 +33,7 @@ export const cssObj = {
 
     > p {
       margin-top: 1rem;
-      ${NEWTEXTS.TITLE15}
+      ${NEWTEXTS.DISPLAY2_B3236}
     }
   `,
 
@@ -68,7 +68,7 @@ export const cssObj = {
 
     .slick-dots li button {
       border-radius: 50%;
-      background-color: ${NEWCOLORS.GRAY300};
+      background-color: ${NEWCOLORS.GRAY450};
       color: transparent;
       cursor: pointer;
       display: block;
@@ -105,7 +105,7 @@ export const cssObj = {
     }
 
     > svg {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
       width: 2rem;
       height: 2rem;
     }

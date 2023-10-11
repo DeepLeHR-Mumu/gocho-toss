@@ -27,7 +27,7 @@ export const cssObj = {
 
   inquiry: css`
     margin-top: 0.5rem;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     ${TEXTS.BODY1}
   `,
 };

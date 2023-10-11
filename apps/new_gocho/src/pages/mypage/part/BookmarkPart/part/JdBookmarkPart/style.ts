@@ -13,7 +13,7 @@ export const cssObj = {
     gap: 0.5rem;
     align-items: center;
     p {
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${NEWCOLORS.GRAY600};
       font-size: 0.875rem;
       font-style: normal;
       font-weight: 400;

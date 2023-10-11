@@ -24,7 +24,7 @@ export const cssObj = {
   `,
 
   defaultButton: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     background: ${NEWCOLORS.WHITE};
   `,
 

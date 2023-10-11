@@ -70,7 +70,7 @@ export const commonCssObj = {
 
     ::placeholder {
       ${TEXTS.TITLE5};
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
 
     :disabled {
@@ -90,7 +90,7 @@ export const commonCssObj = {
     overflow-y: auto;
     z-index: 20;
     background-color: ${NEWCOLORS.WHITE};
-    border: ${isOpen ? `1px solid ${NEWCOLORS.BLUEGRAY400}` : 0};
+    border: ${isOpen ? `1px solid ${NEWCOLORS.GRAY600}` : 0};
 
     ::-webkit-scrollbar {
       padding: 0.25rem 0;
@@ -101,7 +101,7 @@ export const commonCssObj = {
 
     ::-webkit-scrollbar-thumb {
       border-radius: 0.5rem;
-      background-color: ${NEWCOLORS.BLUEGRAY200};
+      background-color: ${NEWCOLORS.GRAY400};
     }
   `,
 
@@ -134,7 +134,7 @@ export const commonCssObj = {
 
     ::placeholder {
       ${TEXTS.TITLE5};
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
   `,
 
@@ -151,7 +151,7 @@ export const commonCssObj = {
 
     ::placeholder {
       ${TEXTS.TITLE5};
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
 
     :disabled {
@@ -217,7 +217,7 @@ export const commonCssObj = {
   `,
 
   radioBox: css`
-    border: 1.5px solid ${NEWCOLORS.GRAY300};
+    border: 1.5px solid ${NEWCOLORS.GRAY450};
     width: 1.25rem;
     height: 1.25rem;
     position: relative;

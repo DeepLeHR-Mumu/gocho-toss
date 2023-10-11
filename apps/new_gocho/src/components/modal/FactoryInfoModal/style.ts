@@ -43,12 +43,12 @@ export const cssObj = {
   `,
 
   infoTitle: css`
-    ${NEWTEXTS.TITLE13}
+    ${NEWTEXTS.TITLE2_B2428}
   `,
 
   infoSubtitle: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE10}
+    color: ${NEWCOLORS.GRAY600};
+    ${NEWTEXTS.TITLE4_M1822}
   `,
 
   contentWrapper: css`
@@ -59,6 +59,6 @@ export const cssObj = {
   `,
 
   descriptionList: css`
-    ${NEWTEXTS.TITLE10}
+    ${NEWTEXTS.TITLE4_M1822}
   `,
 };

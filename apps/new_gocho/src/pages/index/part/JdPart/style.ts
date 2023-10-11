@@ -18,10 +18,10 @@ export const cssObj = {
   `,
 
   title: css`
-    ${NEWTEXTS.TITLE15};
+    ${NEWTEXTS.DISPLAY2_B3236};
 
     ${TEMP} {
-      ${NEWTEXTS.TITLE9};
+      ${NEWTEXTS.TITLE5_B1620};
     }
   `,
 
@@ -42,7 +42,7 @@ export const cssObj = {
     }
 
     > svg {
-      color: ${isDisabled ? NEWCOLORS.GRAY100 : NEWCOLORS.GRAY300};
+      color: ${isDisabled ? NEWCOLORS.GRAY100 : NEWCOLORS.GRAY450};
       width: 2rem;
       height: 2rem;
     }

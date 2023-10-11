@@ -23,14 +23,14 @@ export const cssObj = {
 
     span {
       color: ${NEWCOLORS.BLUE300};
-      ${NEWTEXTS.TITLE11}
+      ${NEWTEXTS.TITLE4_M1822}
     }
   `,
 
   rightIcon: css`
     width: 1.5rem;
     height: 1.5rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
   `,
 
   periodWrapper: css`
@@ -50,13 +50,13 @@ export const cssObj = {
   `,
 
   startTime: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE10}
+    color: ${NEWCOLORS.GRAY600};
+    ${NEWTEXTS.TITLE4_M1822}
   `,
 
   endTime: css`
     color: ${NEWCOLORS.BLACK};
-    ${NEWTEXTS.TITLE11}
+    ${NEWTEXTS.TITLE4_M1822}
   `,
 
   contentWrapper: css`

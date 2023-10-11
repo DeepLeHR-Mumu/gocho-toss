@@ -44,7 +44,7 @@ export const cssObj = {
 
   desc: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     width: 100%;
     text-align: left;
     margin-bottom: 1.5rem;
@@ -60,12 +60,12 @@ export const cssObj = {
     align-items: center;
     justify-content: center;
     ${TEXTS.BODY3};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
   `,
 
   addCertiButton: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     width: 100%;
     justify-content: flex-start;
     padding: 0 1rem;

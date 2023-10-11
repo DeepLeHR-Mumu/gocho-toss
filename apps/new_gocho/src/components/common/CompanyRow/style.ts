@@ -34,19 +34,19 @@ export const cssObj = {
 
   companyName: css`
     color: ${NEWCOLORS.BLACK};
-    ${NEWTEXTS.TITLE12}
+    ${NEWTEXTS.TITLE4_B1822}
 
     ${TEMP} {
-      ${NEWTEXTS.TITLE9}
+      ${NEWTEXTS.TITLE5_B1620}
     }
   `,
 
   companyCategory: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE4}
+    color: ${NEWCOLORS.GRAY600};
+    ${NEWTEXTS.TITLE6_M1418}
 
     ${TEMP} {
-      ${NEWTEXTS.TITLE1}
+      ${NEWTEXTS.TITLE7_M1218}
     }
   `,
 

@@ -44,18 +44,18 @@ export const cssObj = {
 
   factoryName: css`
     color: ${NEWCOLORS.BLACK};
-    ${NEWTEXTS.TITLE12}
+    ${NEWTEXTS.TITLE4_B1822}
   `,
 
   rightIcon: css`
     width: 1.25rem;
     height: 1.25rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
     margin-left: 0.5rem;
   `,
 
   factoryAddress: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE10}
+    color: ${NEWCOLORS.GRAY600};
+    ${NEWTEXTS.TITLE4_M1822}
   `,
 };

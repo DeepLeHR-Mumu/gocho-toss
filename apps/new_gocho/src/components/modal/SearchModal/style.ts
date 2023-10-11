@@ -36,7 +36,7 @@ export const cssObj = {
     width: 1.5rem;
     height: 1.5rem;
     align-self: flex-end;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
     margin-bottom: 1.5rem;
     cursor: pointer;
   `,
@@ -62,7 +62,7 @@ export const cssObj = {
     width: 1.25rem;
     height: 1.25rem;
     margin-left: 0.25rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
     cursor: pointer;
   `,
 
@@ -74,13 +74,13 @@ export const cssObj = {
   `,
 
   recentWordTitle: css`
-    ${NEWTEXTS.TITLE12}
+    ${NEWTEXTS.TITLE4_B1822}
   `,
 
   recentWordDelete: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     cursor: pointer;
-    ${NEWTEXTS.TITLE7};
+    ${NEWTEXTS.TITLE5_M1620};
   `,
 
   recentWordChipsWrapper: css`
@@ -96,7 +96,7 @@ export const cssObj = {
   `,
 
   recommendationWordTitle: css`
-    ${NEWTEXTS.TITLE12}
+    ${NEWTEXTS.TITLE4_B1822}
     margin-bottom: 1.75rem;
   `,
 
@@ -111,7 +111,7 @@ export const cssObj = {
   `,
 
   recommendationCompanyTitle: css`
-    ${NEWTEXTS.TITLE12}
+    ${NEWTEXTS.TITLE4_B1822}
     margin-bottom: 1.75rem;
   `,
 
@@ -127,7 +127,7 @@ export const cssObj = {
   `,
 
   recommendationJdTitle: css`
-    ${NEWTEXTS.TITLE12}
+    ${NEWTEXTS.TITLE4_B1822}
     margin-bottom: 1.75rem;
   `,
 

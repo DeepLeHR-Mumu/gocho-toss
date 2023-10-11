@@ -5,19 +5,19 @@ import { NEWTEXTS } from "shared-style/text";
 export const cssObj = {
   input: css`
     flex: 1;
-    ${NEWTEXTS.TITLE7}
+    ${NEWTEXTS.TITLE5_M1620}
 
     :focus {
       outline: none;
     }
 
     :disabled {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
       cursor: not-allowed;
     }
 
     ::placeholder {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
     }
   `,
 };

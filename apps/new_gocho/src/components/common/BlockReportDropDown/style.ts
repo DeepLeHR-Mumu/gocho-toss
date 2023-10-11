@@ -5,7 +5,7 @@ export const cssObj = {
   submenuIcon: (size: number) => css`
     width: ${size}rem;
     height: ${size}rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
   `,
 
   submenu: css`

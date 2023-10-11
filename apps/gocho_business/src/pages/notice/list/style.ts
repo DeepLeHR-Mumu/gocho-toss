@@ -28,9 +28,9 @@ export const cssObj = {
 
   pageDesc: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
     padding-bottom: 2rem;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY300};
+    border-bottom: 1px solid ${NEWCOLORS.GRAY450};
   `,
 
   infoList: css`
@@ -63,6 +63,6 @@ export const cssObj = {
 
   infoDate: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    color: ${NEWCOLORS.GRAY500};
   `,
 };

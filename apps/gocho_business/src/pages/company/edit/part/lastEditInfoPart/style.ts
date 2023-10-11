@@ -9,7 +9,7 @@ export const cssObj = {
   `,
 
   wrapper: (isWaiting: boolean) => css`
-    border: 1px solid ${isWaiting ? NEWCOLORS.GREEN : NEWCOLORS.RED300};
+    border: 1px solid ${isWaiting ? NEWCOLORS.GREEN300 : NEWCOLORS.RED300};
     background-color: ${NEWCOLORS.WHITE};
     box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.05);
     padding: 1.5rem 2rem;
@@ -26,12 +26,12 @@ export const cssObj = {
       width: 1.5rem;
       height: 1.5rem;
       margin-right: 0.5rem;
-      color: ${isWaiting ? NEWCOLORS.GREEN : NEWCOLORS.RED300};
+      color: ${isWaiting ? NEWCOLORS.GREEN300 : NEWCOLORS.RED300};
     }
 
     > p {
       ${TEXTS.TITLE9}
-      color: ${isWaiting ? NEWCOLORS.GREEN : NEWCOLORS.RED300};
+      color: ${isWaiting ? NEWCOLORS.GREEN300 : NEWCOLORS.RED300};
     }
   `,
 
@@ -48,11 +48,11 @@ export const cssObj = {
 
   infoBox: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    color: ${NEWCOLORS.GRAY500};
 
     > span {
       margin-left: 0.5rem;
-      color: ${NEWCOLORS.BLUEGRAY500};
+      color: ${NEWCOLORS.GRAY700};
     }
   `,
 
@@ -62,7 +62,7 @@ export const cssObj = {
 
   email: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
 
     > span {
       margin-left: 0.5rem;
@@ -82,7 +82,7 @@ export const cssObj = {
 
     > span {
       ${TEXTS.TITLE3};
-      color: ${NEWCOLORS.BLUEGRAY300};
+      color: ${NEWCOLORS.GRAY500};
       margin-left: 0.5rem;
     }
   `,

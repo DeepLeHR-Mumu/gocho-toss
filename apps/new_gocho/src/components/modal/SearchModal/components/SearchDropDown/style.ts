@@ -46,7 +46,7 @@ export const cssObj = {
 
   word: css`
     margin-right: auto;
-    ${NEWTEXTS.TITLE7}
+    ${NEWTEXTS.TITLE5_M1620}
     overflow: hidden;
     white-space: nowrap;
     text-overflox: ellipsis;
@@ -56,6 +56,6 @@ export const cssObj = {
   arrow: css`
     width: 1.25rem;
     height: 1.25rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${NEWCOLORS.GRAY450};
   `,
 };

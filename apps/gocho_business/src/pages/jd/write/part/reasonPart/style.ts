@@ -48,11 +48,11 @@ export const cssObj = {
 
   infoBox: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    color: ${NEWCOLORS.GRAY500};
 
     > span {
       margin-left: 0.5rem;
-      color: ${NEWCOLORS.BLUEGRAY500};
+      color: ${NEWCOLORS.GRAY700};
     }
   `,
 
@@ -62,7 +62,7 @@ export const cssObj = {
 
   email: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${NEWCOLORS.GRAY600};
 
     > span {
       margin-left: 0.5rem;
@@ -82,7 +82,7 @@ export const cssObj = {
 
     > span {
       ${TEXTS.TITLE3};
-      color: ${NEWCOLORS.BLUEGRAY300};
+      color: ${NEWCOLORS.GRAY500};
       margin-left: 0.5rem;
     }
   `,

@@ -28,7 +28,7 @@ export const cssObj = {
 
     .slick-dots li button {
       border-radius: 50%;
-      background-color: ${NEWCOLORS.GRAY300};
+      background-color: ${NEWCOLORS.GRAY450};
       color: transparent;
       cursor: pointer;
       display: block;
@@ -96,7 +96,7 @@ export const cssObj = {
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
 
     > svg {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${NEWCOLORS.GRAY450};
       width: 2rem;
       height: 2rem;
     }
