@@ -2,7 +2,7 @@ import { NextPage } from "next";
 
 import { Layout } from "@/components";
 
-import { SidePart, InfoPart, EducationPart, CareerPart } from "./part";
+import { SidePart, InfoPart, EducationPart, CareerPart, ActivityPart } from "./part";
 import { cssObj } from "./style";
 
 const ResumePage: NextPage = () => (
@@ -13,6 +13,7 @@ const ResumePage: NextPage = () => (
           <InfoPart />
           <EducationPart />
           <CareerPart />
+          <ActivityPart />
         </div>
         <div css={cssObj.sideContentsWrapper}>
           <SidePart />

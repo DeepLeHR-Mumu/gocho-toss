@@ -16,7 +16,6 @@ export const cssObj = {
     justify-content: space-between;
     padding-bottom: 1.25rem;
     border-bottom: 1px solid ${NEWCOLORS.GRAY700};
-    margin-bottom: 2rem;
   `,
 
   require: css`
