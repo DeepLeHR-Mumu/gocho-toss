@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 import { TEMP } from "shared-style/mediaQuery";
 import { shorten } from "shared-style/common";
@@ -13,8 +13,8 @@ export const cssObj = {
     height: ${isButtonExist ? "20rem" : "13.75rem"};
     padding: ${isButtonExist ? "2rem 1.5rem" : "1.5625rem 1.125rem"};
     border-radius: 1rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
-    background-color: ${NEWCOLORS.WHITE};
+    border: 1px solid ${COLOR.GRAY200};
+    background-color: ${COLOR.WHITE};
     flex-shrink: 0;
 
     ${TEMP} {
@@ -49,7 +49,7 @@ export const cssObj = {
     margin-bottom: 1rem;
     word-wrap: break-word;
     word-break: break-all;
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;

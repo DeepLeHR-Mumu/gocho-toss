@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   sectionContainer: css`
@@ -28,7 +28,7 @@ export const cssObj = {
   `,
 
   positionContainer: css`
-    background-color: ${COLORS.BLUE_SECOND70};
+    background-color: ${COLOR.BLUE200};
     padding: 1rem;
     margin: 1rem 0;
   `,

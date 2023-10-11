@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { MOBILE } from "shared-style/mediaQuery";
 import { NEWTEXTS } from "shared-style/text";
 
@@ -8,7 +8,7 @@ export const cssObj = {
     width: 46rem;
     padding: 2rem;
     border-radius: 1rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     position: relative;
     top: 50%;
     left: 50%;
@@ -33,7 +33,7 @@ export const cssObj = {
   `,
 
   title: css`
-    color: ${NEWCOLORS.BLACK};
+    color: ${COLOR.BLACK};
     ${NEWTEXTS.TITLE1_B2832}
 
     ${MOBILE} {
@@ -65,7 +65,7 @@ export const cssObj = {
 
   description: css`
     width: 100%;
-    color: ${NEWCOLORS.BLACK};
+    color: ${COLOR.BLACK};
     word-wrap: break-word;
     ${NEWTEXTS.BODY2_R1624};
   `,

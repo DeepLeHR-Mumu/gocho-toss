@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const sectionContainer = css`
   margin-bottom: 2rem;
@@ -19,7 +19,7 @@ export const inputContainer = css`
 `;
 
 export const inputTitle = css`
-  color: ${COLORS.GRAY30};
+  color: ${COLOR.GRAY600};
   margin-right: 1rem;
 `;
 
@@ -37,8 +37,8 @@ export const currentLogo = css`
 export const inputBox = css`
   width: 50%;
   border-radius: 0.5rem;
-  border: 1px solid ${COLORS.GRAY70};
-  background-color: ${COLORS.GRAY100};
+  border: 1px solid ${COLOR.GRAY300};
+  background-color: ${COLOR.WHITE};
   height: 2rem;
   text-align: left;
   display: block;
@@ -46,8 +46,8 @@ export const inputBox = css`
   margin-right: 1rem;
 `;
 export const addressButton = css`
-  background-color: ${COLORS.GRAY10};
-  color: ${COLORS.GRAY100};
+  background-color: ${COLOR.GRAY900};
+  color: ${COLOR.WHITE};
   height: 2rem;
   padding: 0 1rem;
   display: flex;
@@ -59,9 +59,9 @@ export const logoUploadLabel = css`
   cursor: pointer;
   padding: 0.25rem 0.5rem;
   margin: 0 1rem;
-  background-color: ${COLORS.BLUE_NEON50};
-  color: ${COLORS.GRAY100};
-  border: 2px solid ${COLORS.GRAY10};
+  background-color: ${COLOR.BLUE250};
+  color: ${COLOR.WHITE};
+  border: 2px solid ${COLOR.GRAY900};
 `;
 
 export const imageUploadInput = css`
@@ -85,7 +85,7 @@ export const logoPreviewContainer = css`
 `;
 
 export const selectBox = css`
-  background-color: ${COLORS.GRAY100};
+  background-color: ${COLOR.WHITE};
   border-radius: 0.5rem;
   padding: 0.25rem 0.5rem;
   margin-right: 1rem;
@@ -99,9 +99,9 @@ export const inputLabel = css`
 
 export const booleanInputBox = (disabled: boolean) => css`
   width: 50%;
-  background-color: ${disabled ? COLORS.GRAY70 : COLORS.GRAY100};
+  background-color: ${disabled ? COLOR.GRAY300 : COLOR.WHITE};
   border-radius: 0.5rem;
-  border: 1px solid ${COLORS.GRAY70};
+  border: 1px solid ${COLOR.GRAY300};
   height: 2rem;
   padding: 0.25rem 0.5rem;
   margin: 0 0.5rem;

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -7,10 +7,10 @@ export const cssObj = {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.GRAY600};
+    color: ${isClicked ? COLOR.BLUE300 : COLOR.GRAY600};
 
     svg {
-      color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.GRAY600};
+      color: ${isClicked ? COLOR.BLUE300 : COLOR.GRAY600};
     }
   `,
 
@@ -18,10 +18,10 @@ export const cssObj = {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.GRAY600};
+    color: ${isClicked ? COLOR.RED200 : COLOR.GRAY600};
 
     svg {
-      color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.GRAY600};
+      color: ${isClicked ? COLOR.RED200 : COLOR.GRAY600};
     }
   `,
 

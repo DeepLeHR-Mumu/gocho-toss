@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   sectionContainer: css`
@@ -25,12 +25,12 @@ export const cssObj = {
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
-    background-color: ${isDisabled ? NEWCOLORS.GRAY50 : NEWCOLORS.WHITE};
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    background-color: ${isDisabled ? COLOR.GRAY50 : COLOR.WHITE};
+    border: 1px solid ${COLOR.GRAY200};
     cursor: ${isDisabled ? "default" : "pointer"};
 
     > svg {
-      color: ${isDisabled ? NEWCOLORS.GRAY100 : NEWCOLORS.GRAY450};
+      color: ${isDisabled ? COLOR.GRAY100 : COLOR.GRAY450};
       width: 2rem;
       height: 2rem;
     }

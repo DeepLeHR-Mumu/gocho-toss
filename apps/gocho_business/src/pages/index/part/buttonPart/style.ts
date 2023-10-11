@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -17,25 +17,25 @@ export const cssObj = {
     margin-bottom: 1.25rem;
     padding: 1.5rem;
     border-radius: 1rem;
-    background-color: ${bgColor === "blue" ? `${NEWCOLORS.BLUE250}` : `${NEWCOLORS.WHITE}`};
-    border: 1px solid ${NEWCOLORS.BLUE250};
+    background-color: ${bgColor === "blue" ? `${COLOR.BLUE250}` : `${COLOR.WHITE}`};
+    border: 1px solid ${COLOR.BLUE250};
   `,
 
   uploadTitle: (bgColor: string) => css`
     ${TEXTS.TITLE11};
-    color: ${bgColor === "blue" ? `${NEWCOLORS.BLUE250}` : `${NEWCOLORS.WHITE}`};
+    color: ${bgColor === "blue" ? `${COLOR.BLUE250}` : `${COLOR.WHITE}`};
     margin-bottom: 0.5rem;
   `,
 
   helpTitle: css`
     ${TEXTS.TITLE11};
-    color: ${NEWCOLORS.BLUE250};
+    color: ${COLOR.BLUE250};
     margin-bottom: 0.5rem;
   `,
 
   helpSubtitle: (textColor: string) => css`
     ${TEXTS.BODY4};
-    color: ${textColor === "blue" ? `${NEWCOLORS.BLUE250}` : `${NEWCOLORS.WHITE}`};
+    color: ${textColor === "blue" ? `${COLOR.BLUE250}` : `${COLOR.WHITE}`};
     margin-bottom: 0.5rem;
   `,
 
@@ -53,6 +53,6 @@ export const cssObj = {
 
   helpDesc: css`
     ${TEXTS.TITLE1};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
   `,
 };

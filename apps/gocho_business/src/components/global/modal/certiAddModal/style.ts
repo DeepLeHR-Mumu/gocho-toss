@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -12,7 +12,7 @@ export const cssObj = {
     z-index: 80;
     width: 50rem;
     padding: 2rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     border-radius: 1rem;
     display: flex;
     flex-direction: column;
@@ -44,7 +44,7 @@ export const cssObj = {
 
   desc: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     width: 100%;
     text-align: left;
     margin-bottom: 1.5rem;
@@ -60,12 +60,12 @@ export const cssObj = {
     align-items: center;
     justify-content: center;
     ${TEXTS.BODY3};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
   `,
 
   addCertiButton: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     width: 100%;
     justify-content: flex-start;
     padding: 0 1rem;
@@ -81,8 +81,8 @@ export const cssObj = {
     flex-wrap: wrap;
     gap: 1rem;
     padding: 1rem;
-    background-color: ${NEWCOLORS.GRAY50};
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    background-color: ${COLOR.GRAY50};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 0.75rem;
     margin-top: 1.25rem;
   `,
@@ -93,8 +93,8 @@ export const cssObj = {
     width: fit-content;
     padding: 0.75rem 1rem;
     border-radius: 1.5rem;
-    background-color: ${NEWCOLORS.BLUE100};
-    color: ${NEWCOLORS.BLUE300};
+    background-color: ${COLOR.BLUE100};
+    color: ${COLOR.BLUE300};
   `,
 
   smallDeleteButton: css`
@@ -103,7 +103,7 @@ export const cssObj = {
       width: 1.25rem;
       height: 1.25rem;
     }
-    color: ${NEWCOLORS.BLUE300};
+    color: ${COLOR.BLUE300};
   `,
 
   buttonContainer: css`

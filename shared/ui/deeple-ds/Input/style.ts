@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -12,12 +12,12 @@ export const cssObj = {
     }
 
     :disabled {
-      color: ${NEWCOLORS.GRAY450};
+      color: ${COLOR.GRAY450};
       cursor: not-allowed;
     }
 
     ::placeholder {
-      color: ${NEWCOLORS.GRAY450};
+      color: ${COLOR.GRAY450};
     }
   `,
 };

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -18,8 +18,8 @@ export const cssObj = {
 
   container: css`
     border-radius: 1rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
-    background-color: ${NEWCOLORS.WHITE};
+    border: 1px solid ${COLOR.GRAY200};
+    background-color: ${COLOR.WHITE};
     padding: 2rem 1.5rem;
     margin-bottom: 2.5rem;
     box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.05);
@@ -43,19 +43,19 @@ export const cssObj = {
   `,
 
   factoryName: css`
-    color: ${NEWCOLORS.BLACK};
+    color: ${COLOR.BLACK};
     ${NEWTEXTS.TITLE4_B1822}
   `,
 
   rightIcon: css`
     width: 1.25rem;
     height: 1.25rem;
-    color: ${NEWCOLORS.GRAY450};
+    color: ${COLOR.GRAY450};
     margin-left: 0.5rem;
   `,
 
   factoryAddress: css`
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     ${NEWTEXTS.TITLE4_M1822}
   `,
 };

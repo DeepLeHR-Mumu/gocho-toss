@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { shorten } from "shared-style/common";
 
 export const bannerBox = css`
@@ -37,7 +37,7 @@ export const expireDateBox = css`
 export const deleteBannerButton = css`
   flex-grow: 1;
   padding: 0.25rem 1rem;
-  border: 2px solid ${COLORS.GRAY10};
+  border: 2px solid ${COLOR.GRAY900};
   background-color: #b32100;
-  color: ${COLORS.GRAY100};
+  color: ${COLOR.WHITE};
 `;

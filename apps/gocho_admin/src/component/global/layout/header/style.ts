@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS, NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   header: css`
@@ -9,10 +9,10 @@ export const cssObj = {
     left: 0;
     z-index: 10;
     min-width: 97.5rem;
-    border-bottom: 1px solid ${COLORS.GRAY80};
+    border-bottom: 1px solid ${COLOR.GRAY100};
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
     padding: 0.5rem 2rem;
-    background-color: ${COLORS.GRAY100};
+    background-color: ${COLOR.WHITE};
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -36,7 +36,7 @@ export const cssObj = {
     transform: translate(0, -50%);
     font-size: 1.125rem;
     font-weight: 600;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
   `,
 
   loginButton: css`
@@ -46,7 +46,7 @@ export const cssObj = {
     width: 6.25rem;
     height: 2.5rem;
     border-radius: 0.5rem;
-    background-color: ${NEWCOLORS.BLUE300};
-    color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.BLUE300};
+    color: ${COLOR.WHITE};
   `,
 };

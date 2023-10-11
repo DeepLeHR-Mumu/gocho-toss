@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -12,24 +12,24 @@ export const cssObj = {
   `,
 
   name: css`
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     ${NEWTEXTS.TITLE6_M1418}
   `,
 
   time: css`
     margin-left: 0.5rem;
     margin-right: auto;
-    color: ${NEWCOLORS.GRAY500};
+    color: ${COLOR.GRAY500};
     ${NEWTEXTS.TITLE7_M1218}
   `,
 
   submenuIcon: css`
-    color: ${NEWCOLORS.GRAY450};
+    color: ${COLOR.GRAY450};
   `,
 
   textBox: css`
     border-radius: 0 1rem 1rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     padding: 0.75rem;
     margin-top: 0.75rem;
   `,
@@ -51,10 +51,10 @@ export const cssObj = {
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
-    color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.GRAY600};
+    color: ${isClicked ? COLOR.BLUE300 : COLOR.GRAY600};
 
     svg {
-      color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.GRAY600};
+      color: ${isClicked ? COLOR.BLUE300 : COLOR.GRAY600};
     }
 
     span {
@@ -67,10 +67,10 @@ export const cssObj = {
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
-    color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.GRAY600};
+    color: ${isClicked ? COLOR.RED200 : COLOR.GRAY600};
 
     svg {
-      color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.GRAY600};
+      color: ${isClicked ? COLOR.RED200 : COLOR.GRAY600};
     }
 
     span {

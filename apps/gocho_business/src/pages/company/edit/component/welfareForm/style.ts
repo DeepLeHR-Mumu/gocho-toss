@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -17,7 +17,7 @@ export const cssObj = {
   title: (isMine: boolean) => css`
     font-size: 1rem;
     font-weight: 400;
-    color: ${isMine ? NEWCOLORS.GRAY400 : NEWCOLORS.BLACK};
+    color: ${isMine ? COLOR.GRAY400 : COLOR.BLACK};
     margin-bottom: 0.5rem;
     display: block;
   `,
@@ -36,8 +36,8 @@ export const cssObj = {
     width: 100%;
     justify-content: space-between;
     display: flex;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY300};
-    background-color: ${NEWCOLORS.WHITE};
+    border-bottom: 1px solid ${COLOR.GRAY300};
+    background-color: ${COLOR.WHITE};
   `,
 
   noData: css`
@@ -45,7 +45,7 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${NEWCOLORS.GRAY400};
+    color: ${COLOR.GRAY400};
     padding: 1rem 0;
   `,
 
@@ -68,17 +68,17 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 0.75rem;
-    color: ${NEWCOLORS.BLACK};
+    color: ${COLOR.BLACK};
     height: 3.25rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     padding: 0 1rem;
     font-weight: 400;
 
     ::placeholder {
       ${TEXTS.TITLE5};
-      color: ${NEWCOLORS.GRAY450};
+      color: ${COLOR.GRAY450};
     }
   `,
 
@@ -89,8 +89,8 @@ export const cssObj = {
     border-radius: 50%;
     width: 1.75rem;
     height: 1.75rem;
-    color: ${NEWCOLORS.BLACK};
-    background-color: ${NEWCOLORS.GRAY300};
+    color: ${COLOR.BLACK};
+    background-color: ${COLOR.GRAY300};
     z-index: 20;
   `,
 };

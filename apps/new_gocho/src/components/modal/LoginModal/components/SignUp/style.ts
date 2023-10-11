@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { TEMP } from "shared-style/mediaQuery";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   wrapper: css`
@@ -29,7 +29,7 @@ export const cssObj = {
   `,
 
   errorMessage: css`
-    color: ${NEWCOLORS.RED300};
+    color: ${COLOR.RED300};
     position: absolute;
     bottom: 5rem;
   `,

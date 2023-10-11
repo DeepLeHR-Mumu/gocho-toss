@@ -126,6 +126,7 @@ const JdEdit: NextPageWithLayout = () => {
             <PositionTaskDataPart jobForm={jobForm} />
             <PositionEtcDataPart jobForm={jobForm} jobData={jobData} />
             {checkMsg && <p css={cssObj.warning}>{checkMsg}</p>}
+            <p css={cssObj.warning}>asdf</p>
             <SharedButton buttonType="fillBlue" width={10} onClickHandler="submit" text="공고 수정하기" />
           </form>
         </section>

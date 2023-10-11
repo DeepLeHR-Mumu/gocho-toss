@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   headerWrapper: css`
@@ -8,8 +8,8 @@ export const cssObj = {
     justify-content: center;
     height: 4rem;
     width: 100%;
-    background-color: ${NEWCOLORS.WHITE};
-    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+    background-color: ${COLOR.WHITE};
+    border-bottom: 1px solid ${COLOR.GRAY200};
   `,
 
   logoBox: css`

@@ -1,14 +1,14 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { commonCssObj } from "../../style";
 
 export const cssObj = {
   background: css`
     width: 100vw;
     height: 100vh;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
   `,
 
   wrapper: css`

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS, TEXTS } from "shared-style/text";
 import { TEMP } from "shared-style/mediaQuery";
 
@@ -61,7 +61,7 @@ export const cssObj = {
 
   ceoInfo: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
 
     ${TEMP} {
       ${NEWTEXTS.TITLE6_M1418};
@@ -70,7 +70,7 @@ export const cssObj = {
 
   info: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
 
     ${TEMP} {
       ${NEWTEXTS.TITLE7_M1218};
@@ -78,7 +78,7 @@ export const cssObj = {
   `,
 
   contour: css`
-    border-left: 1px solid ${NEWCOLORS.GRAY200};
+    border-left: 1px solid ${COLOR.GRAY200};
   `,
 
   middleBox: css`
@@ -98,7 +98,7 @@ export const cssObj = {
 
   contactTitle: css`
     ${TEXTS.TITLE7};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
 
     ${TEMP} {
       ${NEWTEXTS.TITLE6_B1418};
@@ -109,7 +109,7 @@ export const cssObj = {
     display: flex;
     align-items: center;
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
 
     ${TEMP} {
       ${NEWTEXTS.TITLE7_M1218};
@@ -139,7 +139,7 @@ export const cssObj = {
 
   underlineLink: css`
     ${TEXTS.UNDERLINE};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
 
     ${TEMP} {
       ${NEWTEXTS.TITLE6_B1418};

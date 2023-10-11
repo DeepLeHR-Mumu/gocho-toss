@@ -1,12 +1,12 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
   contentContainer: css`
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     padding: 2rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 1rem;
     box-shadow: 0 2px 16px 0 #0000000d;
   `,
@@ -37,7 +37,7 @@ export const cssObj = {
   filterBox: css`
     display: flex;
     margin-top: 2rem;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+    border-bottom: 1px solid ${COLOR.GRAY200};
   `,
 
   filterOption: (isSelected: boolean) => css`
@@ -47,11 +47,11 @@ export const cssObj = {
     width: 8.75rem;
     height: 3rem;
     font-weight: 700;
-    color: ${isSelected ? `${NEWCOLORS.BLUE300}` : `${NEWCOLORS.GRAY600}`};
-    border-bottom: ${isSelected ? `2px solid ${NEWCOLORS.BLUE300}` : "none"};
+    color: ${isSelected ? `${COLOR.BLUE300}` : `${COLOR.GRAY600}`};
+    border-bottom: ${isSelected ? `2px solid ${COLOR.BLUE300}` : "none"};
 
     > p {
-      color: ${isSelected ? `${NEWCOLORS.BLUE300}` : `${NEWCOLORS.GRAY600}`};
+      color: ${isSelected ? `${COLOR.BLUE300}` : `${COLOR.GRAY600}`};
     }
   `,
 
@@ -61,7 +61,7 @@ export const cssObj = {
     justify-content: space-between;
     margin-top: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+    border-bottom: 1px solid ${COLOR.GRAY200};
   `,
 
   searchWrapper: css`
@@ -73,12 +73,12 @@ export const cssObj = {
     height: 2.75rem;
     padding: 0.5rem 1rem 0.5rem 3.25rem;
     border-radius: 1rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
-    background-color: ${NEWCOLORS.WHITE};
-    color: ${NEWCOLORS.GRAY900};
+    border: 1px solid ${COLOR.GRAY200};
+    background-color: ${COLOR.WHITE};
+    color: ${COLOR.GRAY900};
 
     ::placeholder {
-      color: ${NEWCOLORS.GRAY450};
+      color: ${COLOR.GRAY450};
     }
   `,
 
@@ -87,7 +87,7 @@ export const cssObj = {
     top: 50%;
     left: 1.375rem;
     transform: translate(0, -50%);
-    color: ${NEWCOLORS.BLUE300};
+    color: ${COLOR.BLUE300};
 
     > svg {
       width: 1.5rem;
@@ -122,11 +122,11 @@ export const cssObj = {
     width: 6.625rem;
     height: 2.5rem;
     font-size: 1rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     font-weight: 400;
 
     ::placeholder {
-      color: ${NEWCOLORS.GRAY450};
+      color: ${COLOR.GRAY450};
     }
   `,
 
@@ -139,10 +139,10 @@ export const cssObj = {
     max-height: 20rem;
     overflow-x: hidden;
     overflow-y: scroll;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     z-index: 20;
     padding: 0.5rem 0;
-    border: 1px solid ${NEWCOLORS.BLACK};
+    border: 1px solid ${COLOR.BLACK};
     border-radius: 1rem;
   `,
 
@@ -155,7 +155,7 @@ export const cssObj = {
     transition: 0.1s;
 
     :hover {
-      background-color: ${NEWCOLORS.GRAY100};
+      background-color: ${COLOR.GRAY100};
     }
   `,
 
@@ -165,7 +165,7 @@ export const cssObj = {
 
   noAuthJdCard: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     height: 10rem;
     display: flex;
     align-items: center;

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   sectionContainer: css`
@@ -42,7 +42,7 @@ export const cssObj = {
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 0.5rem;
-    background-color: ${NEWCOLORS.BLUE50};
+    background-color: ${COLOR.BLUE50};
     padding: 1rem;
     margin: 1rem 0;
   `,
@@ -52,7 +52,7 @@ export const cssObj = {
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 0.5rem;
-    background-color: ${NEWCOLORS.GRAY100};
+    background-color: ${COLOR.GRAY100};
     padding: 1rem;
     margin: 1rem 0;
   `,

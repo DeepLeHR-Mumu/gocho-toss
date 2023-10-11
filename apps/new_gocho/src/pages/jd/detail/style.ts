@@ -1,15 +1,15 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
   background: css`
-    background-color: ${NEWCOLORS.GRAY100};
+    background-color: ${COLOR.GRAY100};
     padding: 1.75rem 0;
   `,
 
   wrapper: css`
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     backdrop-filter: none;
     overflow: auto;
 

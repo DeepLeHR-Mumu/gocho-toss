@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -8,7 +8,7 @@ export const cssObj = {
     flex-direction: row;
     align-items: flex-end;
     gap: 1rem;
-    ${isValid ? `color: ${NEWCOLORS.BLACK};` : `color: ${NEWCOLORS.GRAY600};`}
+    ${isValid ? `color: ${COLOR.BLACK};` : `color: ${COLOR.GRAY600};`}
 
     h3 {
       margin-bottom: 1.75rem;
@@ -33,13 +33,13 @@ export const cssObj = {
     grid-column-start: 1;
     grid-column-end: 3;
     margin-top: 1.0625rem;
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     ${NEWTEXTS.TITLE4_M1822}
 
     > svg {
       width: 1.5rem;
       height: 1.5rem;
-      color: ${NEWCOLORS.GRAY450};
+      color: ${COLOR.GRAY450};
     }
   `,
 

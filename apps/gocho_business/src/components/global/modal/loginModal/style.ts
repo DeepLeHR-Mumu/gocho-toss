@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   wrapper: css`
@@ -12,7 +12,7 @@ export const cssObj = {
     width: 22rem;
     height: auto;
     padding: 2rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     border-radius: 1rem;
     display: flex;
     flex-direction: column;
@@ -31,7 +31,7 @@ export const cssObj = {
   `,
 
   desc: css`
-    color: ${NEWCOLORS.BLUE300};
+    color: ${COLOR.BLUE300};
     font-size: 0.875rem;
     font-weight: 400;
   `,
@@ -58,7 +58,7 @@ export const cssObj = {
       top: 0;
       margin-left: 1.75rem;
       transform: translate(0%, -50%);
-      background-color: ${NEWCOLORS.WHITE};
+      background-color: ${COLOR.WHITE};
       padding: 0 0.25rem;
       height: 1rem;
       text-align: center;
@@ -67,18 +67,18 @@ export const cssObj = {
     if (isError) {
       return css`
         ${defaultCSS};
-        color: ${NEWCOLORS.RED300};
+        color: ${COLOR.RED300};
       `;
     }
     if (isFocus || isSuccess) {
       return css`
         ${defaultCSS};
-        color: ${NEWCOLORS.BLUE300};
+        color: ${COLOR.BLUE300};
       `;
     }
     return css`
       ${defaultCSS};
-      color: ${NEWCOLORS.GRAY400};
+      color: ${COLOR.GRAY400};
     `;
   },
 
@@ -95,18 +95,18 @@ export const cssObj = {
     if (isError) {
       return css`
         ${defaultCSS};
-        border-color: ${NEWCOLORS.RED300};
+        border-color: ${COLOR.RED300};
       `;
     }
     if (isFocus || isSuccess) {
       return css`
         ${defaultCSS};
-        border-color: ${NEWCOLORS.BLUE300};
+        border-color: ${COLOR.BLUE300};
       `;
     }
     return css`
       ${defaultCSS};
-      border-color: ${NEWCOLORS.GRAY400};
+      border-color: ${COLOR.GRAY400};
     `;
   },
 
@@ -116,7 +116,7 @@ export const cssObj = {
     top: 50%;
     transform: translate(0, -50%);
     font-size: 1.2rem;
-    color: ${NEWCOLORS.RED300};
+    color: ${COLOR.RED300};
   `,
 
   successIconBox: css`
@@ -125,7 +125,7 @@ export const cssObj = {
     top: 50%;
     transform: translate(0, -50%);
     font-size: 1.2rem;
-    color: ${NEWCOLORS.BLUE300};
+    color: ${COLOR.BLUE300};
   `,
 
   errorBox: css`
@@ -136,7 +136,7 @@ export const cssObj = {
 
   errorMsgCSS: css`
     font-size: 0.875rem;
-    color: ${NEWCOLORS.RED300};
+    color: ${COLOR.RED300};
     text-align: center;
   `,
 

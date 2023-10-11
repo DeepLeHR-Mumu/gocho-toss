@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -16,7 +16,7 @@ export const cssObj = {
     padding: 0 1.5rem;
     margin: 0 auto;
     gap: 0 1.25rem;
-    border-top: 1px solid ${NEWCOLORS.GRAY200};
+    border-top: 1px solid ${COLOR.GRAY200};
   `,
 
   infoContainer: css`
@@ -44,11 +44,11 @@ export const cssObj = {
 
   info: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
   `,
 
   contour: css`
-    border-left: 1px solid ${NEWCOLORS.GRAY200};
+    border-left: 1px solid ${COLOR.GRAY200};
   `,
 
   middleBox: css`
@@ -69,14 +69,14 @@ export const cssObj = {
 
   contactTitle: css`
     ${TEXTS.TITLE7};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
   `,
 
   link: css`
     display: flex;
     align-items: center;
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
   `,
 
   kakaoLogo: css`
@@ -98,6 +98,6 @@ export const cssObj = {
 
   underlineLink: css`
     ${TEXTS.UNDERLINE};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
   `,
 };

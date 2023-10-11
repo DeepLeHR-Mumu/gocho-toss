@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -15,7 +15,7 @@ export const cssObj = {
 
   inputTitle: css`
     ${TEXTS.TITLE7};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     margin-bottom: 0.75rem;
   `,
 
@@ -24,8 +24,8 @@ export const cssObj = {
     top: 5.75rem;
     width: 25.5rem;
     display: ${isSearched ? "block" : "none"};
-    background-color: ${NEWCOLORS.WHITE};
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    background-color: ${COLOR.WHITE};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 1rem;
     box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.05);
     max-height: 11.5rem;
@@ -44,7 +44,7 @@ export const cssObj = {
     ${TEXTS.TITLE5};
 
     :hover {
-      background-color: ${NEWCOLORS.GRAY100};
+      background-color: ${COLOR.GRAY100};
     }
   `,
 
@@ -58,7 +58,7 @@ export const cssObj = {
     padding: 0.75rem 1.5rem;
 
     :hover {
-      background-color: ${NEWCOLORS.GRAY100};
+      background-color: ${COLOR.GRAY100};
     }
   `,
 
@@ -80,7 +80,7 @@ export const cssObj = {
   `,
 
   point: css`
-    color: ${NEWCOLORS.BLUE300};
+    color: ${COLOR.BLUE300};
     margin-left: 0.25rem;
   `,
 
@@ -88,6 +88,6 @@ export const cssObj = {
     display: flex;
     align-items: center;
     gap: 0 0.5rem;
-    color: ${NEWCOLORS.GRAY450};
+    color: ${COLOR.GRAY450};
   `,
 };

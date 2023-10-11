@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   wrapper: css`
@@ -13,7 +13,7 @@ export const cssObj = {
     gap: 0.5rem;
     align-items: center;
     p {
-      color: ${NEWCOLORS.GRAY600};
+      color: ${COLOR.GRAY600};
       font-size: 0.875rem;
       font-style: normal;
       font-weight: 400;

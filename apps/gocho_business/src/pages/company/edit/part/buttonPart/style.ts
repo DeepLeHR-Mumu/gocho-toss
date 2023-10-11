@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   headerContainer: css`
@@ -9,7 +9,7 @@ export const cssObj = {
     left: 0;
     display: flex;
     align-items: center;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     height: 5rem;
     z-index: 50;
     box-shadow: 0 2px 10px 0 #00000008;

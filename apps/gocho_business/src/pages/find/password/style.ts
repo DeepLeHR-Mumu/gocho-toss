@@ -1,13 +1,13 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
   sectionContainer: css`
     width: fit-content;
     height: 41rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     margin: 6rem auto;
     padding: 1.5rem;
     border-radius: 1rem;
@@ -32,7 +32,7 @@ export const cssObj = {
     > svg {
       width: 1.5rem;
       height: 1.5rem;
-      color: ${NEWCOLORS.GRAY450};
+      color: ${COLOR.GRAY450};
     }
   `,
 
@@ -42,7 +42,7 @@ export const cssObj = {
 
   resultContainer: css`
     ${TEXTS.TITLE7};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     height: 30.75rem;
   `,
 
@@ -62,7 +62,7 @@ export const cssObj = {
 
   inputTitle: css`
     ${TEXTS.TITLE7};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     margin-bottom: 0.75rem;
   `,
 
@@ -73,7 +73,7 @@ export const cssObj = {
     text-align: center;
     line-height: 1;
     display: block;
-    color: ${NEWCOLORS.RED300};
+    color: ${COLOR.RED300};
     font-weight: 400;
   `,
 };

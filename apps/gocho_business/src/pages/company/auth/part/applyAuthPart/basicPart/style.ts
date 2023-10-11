@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 import { commonCssObj } from "@/styles";
 
@@ -18,11 +18,11 @@ export const cssObj = {
 
   addAddressButton: css`
     display: flex;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 0.75rem;
     height: 3.25rem;
     padding: 1rem 2rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     ${TEXTS.TITLE4};
   `,
 
@@ -63,11 +63,11 @@ export const cssObj = {
   customInput: (width: number, isError: boolean) => css`
     ${commonCssObj.input(width, isError)}
     :disabled {
-      background-color: ${NEWCOLORS.WHITE};
+      background-color: ${COLOR.WHITE};
     }
   `,
 
   errorRadioButton: css`
-    border-color: ${NEWCOLORS.RED300};
+    border-color: ${COLOR.RED300};
   `,
 };

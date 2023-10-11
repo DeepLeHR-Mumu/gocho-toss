@@ -1,28 +1,28 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 const defaultConversionCSS = css`
   width: 5rem;
   padding: 0 1rem;
   border-radius: 0.625rem;
   height: 2.5rem;
-  background-color: ${COLORS.GRAY100};
-  border: 1px solid ${COLORS.GRAY10};
+  background-color: ${COLOR.WHITE};
+  border: 1px solid ${COLOR.GRAY900};
   font-size: 1rem;
-  color: ${COLORS.GRAY10};
+  color: ${COLOR.GRAY900};
 `;
 
 export const cssObj = {
   wrapper: css`
-    border-bottom: 1px solid ${COLORS.GRAY70};
+    border-bottom: 1px solid ${COLOR.GRAY300};
     padding-bottom: 1rem;
     margin-bottom: 1rem;
   `,
   title: css`
     font-size: 1.25rem;
     font-weight: 500;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
     margin-bottom: 1rem;
     display: block;
   `,
@@ -44,31 +44,31 @@ export const cssObj = {
   requiredTitle: css`
     font-size: 1.125rem;
     font-weight: 500;
-    color: ${COLORS.GRAY20};
+    color: ${COLOR.GRAY700};
     margin-bottom: 1rem;
     display: block;
     padding-left: 0.5rem;
-    border-left: 3px solid ${COLORS.BLUE_SECOND70};
+    border-left: 3px solid ${COLOR.BLUE200};
   `,
   noRequiredTitle: css`
     font-size: 1.125rem;
     font-weight: 500;
-    color: ${COLORS.GRAY20};
+    color: ${COLOR.GRAY700};
     margin-bottom: 1rem;
     display: block;
     padding-left: 0.5rem;
-    border-left: 3px solid ${COLORS.ERROR_YELLOW50};
+    border-left: 3px solid ${COLOR.YELLOW100};
   `,
   subTitle: css`
     font-size: 1rem;
     font-weight: 500;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
     display: block;
     margin: 2rem 0 1rem;
   `,
   warningDesc: css`
     display: block;
-    color: ${COLORS.BLUE_FIRST40};
+    color: ${COLOR.BLUE300};
     font-size: 0.875rem;
     font-weight: 400;
     padding: 0.5rem 0;
@@ -81,21 +81,21 @@ export const cssObj = {
     gap: 0.5rem;
   `,
   deleteButton: css`
-    background-color: ${COLORS.BLUE_FIRST40};
+    background-color: ${COLOR.BLUE300};
     padding: 0.25rem 1rem;
     width: fit-content;
     border-radius: 0.3125rem;
     font-size: 0.875rem;
-    color: ${COLORS.GRAY100};
+    color: ${COLOR.WHITE};
     font-weight: 400;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${COLORS.GRAY100};
+    color: ${COLOR.WHITE};
     transition: all 200ms ease-in;
 
     :hover {
-      background-color: ${COLORS.ERROR_RED30};
+      background-color: ${COLOR.RED300};
     }
 
     > svg {
@@ -104,7 +104,7 @@ export const cssObj = {
   `,
   isHaveFactoryButton: css`
     font-size: 0.875rem;
-    color: ${COLORS.BLUE_FIRST40};
+    color: ${COLOR.BLUE300};
     padding: 0.5rem;
     display: flex;
     text-align: left;
@@ -117,13 +117,13 @@ export const cssObj = {
       width: 0.5rem;
       height: 0.5rem;
       border-radius: 50%;
-      background-color: ${COLORS.BLUE_FIRST40};
+      background-color: ${COLOR.BLUE300};
     }
   `,
   factoryButton: css`
     font-size: 0.875rem;
     width: 100%;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
     padding: 0.5rem;
     text-align: left;
     display: flex;
@@ -134,13 +134,13 @@ export const cssObj = {
       width: 0.5rem;
       height: 0.5rem;
       border-radius: 50%;
-      background-color: ${COLORS.GRAY100};
-      border: 1px solid ${COLORS.GRAY10};
+      background-color: ${COLOR.WHITE};
+      border: 1px solid ${COLOR.GRAY900};
     }
   `,
   radioDesc: css`
     font-size: 0.875rem;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
     font-weight: 400;
     padding-left: 0.5rem;
   `,
@@ -149,10 +149,10 @@ export const cssObj = {
     flex-direction: column;
   `,
   textareaWarning: css`
-    background-color: ${COLORS.BLUE_SECOND70};
+    background-color: ${COLOR.BLUE200};
     padding: 0.25rem 1rem;
     font-size: 0.875rem;
-    color: ${COLORS.BLUE_FIRST40};
+    color: ${COLOR.BLUE300};
     width: fit-content;
     margin: 0.25rem 0;
   `,
@@ -161,22 +161,22 @@ export const cssObj = {
     padding: 1rem;
     max-width: 40rem;
     border-radius: 0.625rem;
-    border: 1px solid ${COLORS.GRAY10};
+    border: 1px solid ${COLOR.GRAY900};
     font-size: 1rem;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
     min-height: 8rem;
   `,
   inputCSS: css`
     width: 100%;
     max-width: 40rem;
-    border: 1px solid ${COLORS.GRAY10};
-    background-color: ${COLORS.GRAY100};
+    border: 1px solid ${COLOR.GRAY900};
+    background-color: ${COLOR.WHITE};
     padding: 0 1rem;
     font-size: 1rem;
     font-weight: 400;
     border-radius: 0.625rem;
     height: 2.5rem;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
     margin-right: 1rem;
   `,
   conversionLabel: css`
@@ -188,25 +188,25 @@ export const cssObj = {
   `,
   disabledConversionInput: css`
     ${defaultConversionCSS};
-    background-color: ${COLORS.GRAY80};
+    background-color: ${COLOR.GRAY100};
     border: 0;
   `,
   conversionDesc: css`
     font-size: 0.875rem;
     padding: 0 1rem;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
   `,
   selectCSS: css`
     width: 100%;
     max-width: 40rem;
-    border: 1px solid ${COLORS.GRAY10};
-    background-color: ${COLORS.GRAY100};
+    border: 1px solid ${COLOR.GRAY900};
+    background-color: ${COLOR.WHITE};
     padding: 0 1rem;
     font-size: 1rem;
     font-weight: 400;
     border-radius: 0.625rem;
     height: 2.5rem;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
     margin-right: 1rem;
   `,
   selectBox: css`
@@ -220,8 +220,8 @@ export const cssObj = {
     align-items: center;
     justify-content: center;
     font-size: 1.25rem;
-    background-color: ${COLORS.GRAY80};
-    color: ${COLORS.GRAY100};
+    background-color: ${COLOR.GRAY100};
+    color: ${COLOR.WHITE};
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
@@ -231,8 +231,8 @@ export const cssObj = {
     align-items: center;
     justify-content: center;
     font-size: 1.25rem;
-    background-color: ${COLORS.BLUE_FIRST40};
-    color: ${COLORS.GRAY100};
+    background-color: ${COLOR.BLUE300};
+    color: ${COLOR.WHITE};
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
@@ -248,13 +248,13 @@ export const cssObj = {
     align-items: center;
     justify-content: center;
     border-radius: 0.4rem;
-    border: 1px solid ${COLORS.GRAY70};
+    border: 1px solid ${COLOR.GRAY300};
     margin-bottom: 1rem;
     font-size: 0.875rem;
     width: fit-content;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
     font-weight: 400;
-    background-color: ${COLORS.GRAY100};
+    background-color: ${COLOR.WHITE};
     padding: 0.25rem 1rem;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
   `,
@@ -278,7 +278,7 @@ export const cssObj = {
       content: "";
       width: 0.5rem;
       height: 0.5rem;
-      background-color: ${COLORS.GRAY10};
+      background-color: ${COLOR.GRAY900};
       border-radius: 50%;
     }
 

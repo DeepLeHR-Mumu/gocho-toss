@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 import { shorten } from "shared-style/common";
 import { TEMP } from "shared-style/mediaQuery";
@@ -33,7 +33,7 @@ export const cssObj = {
   imageWrapper: css`
     height: 10.875rem;
     border-radius: 1rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     position: relative;
 
     ${TEMP} {
@@ -80,8 +80,8 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: ${NEWCOLORS.GRAY100};
-    color: ${isActive ? NEWCOLORS.BLUE250 : NEWCOLORS.GRAY300};
+    background-color: ${COLOR.GRAY100};
+    color: ${isActive ? COLOR.BLUE250 : COLOR.GRAY300};
     border-radius: 0.5rem;
 
     ${TEMP} {
@@ -115,7 +115,7 @@ export const cssObj = {
 
   desc: css`
     ${NEWTEXTS.TITLE5_M1620};
-    color: ${NEWCOLORS.GRAY500};
+    color: ${COLOR.GRAY500};
 
     ${TEMP} {
       ${NEWTEXTS.TITLE7_M1218};

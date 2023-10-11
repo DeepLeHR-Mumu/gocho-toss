@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   wrapper: css`
@@ -9,7 +9,7 @@ export const cssObj = {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: ${COLORS.GRAY100};
+    background-color: ${COLOR.WHITE};
   `,
   container: css`
     z-index: 60;
@@ -20,10 +20,10 @@ export const cssObj = {
     height: 5rem;
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    background-color: ${COLORS.GRAY100};
+    background-color: ${COLOR.WHITE};
   `,
   spinner: css`
-    color: ${COLORS.BLUE_FIRST40};
+    color: ${COLOR.BLUE300};
     font-size: 0.75rem;
     text-indent: -99999em;
     position: absolute;
@@ -41,7 +41,7 @@ export const cssObj = {
       content: "";
       width: 4em;
       height: 6em;
-      background: ${COLORS.GRAY100};
+      background: ${COLOR.WHITE};
       border-radius: 5.5em 0 0 5.5em;
       top: -0.5em;
       left: -0.5em;
@@ -54,7 +54,7 @@ export const cssObj = {
       content: "";
       width: 4em;
       height: 6em;
-      background: ${COLORS.GRAY100};
+      background: ${COLOR.WHITE};
       border-radius: 0 5em 5em 0;
       top: -0.5em;
       left: 2.5em;

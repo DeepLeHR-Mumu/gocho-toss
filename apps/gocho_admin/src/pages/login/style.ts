@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const title = css`
   font-size: 1.5rem;
@@ -15,15 +15,15 @@ export const inputContainer = css`
 `;
 
 export const inputTitle = css`
-  color: ${COLORS.GRAY30};
+  color: ${COLOR.GRAY600};
   margin-right: 1rem;
 `;
 
 export const inputBox = css`
   width: 30%;
   border-radius: 0.5rem;
-  border: 1px solid ${COLORS.GRAY70};
-  background-color: ${COLORS.GRAY100};
+  border: 1px solid ${COLOR.GRAY300};
+  background-color: ${COLOR.WHITE};
   height: 2rem;
   padding: 0.25rem 0.5rem;
   margin-right: 1rem;
@@ -34,7 +34,7 @@ export const submitButton = css`
   margin: 2rem auto 0;
   padding: 0.5rem;
   width: 30%;
-  border: 2px solid ${COLORS.GRAY10};
-  background-color: ${COLORS.BLUE_FIRST40};
-  color: ${COLORS.GRAY100};
+  border: 2px solid ${COLOR.GRAY900};
+  background-color: ${COLOR.BLUE300};
+  color: ${COLOR.WHITE};
 `;

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const sectionContainer = css`
   margin: 1.5rem 0;
@@ -8,13 +8,13 @@ export const sectionContainer = css`
 export const sectionTitle = css`
   font-size: 1.125rem;
   font-weight: 700;
-  color: ${COLORS.GRAY30};
+  color: ${COLOR.GRAY600};
   margin-bottom: 1rem;
 `;
 
 export const jobContainer = css`
   padding: 1rem 0;
-  border-bottom: 2px solid ${COLORS.GRAY10};
+  border-bottom: 2px solid ${COLOR.GRAY900};
 `;
 
 export const jobInfoContainer = css`
@@ -42,7 +42,7 @@ export const companyInfo = css`
 
 export const infoName = css`
   font-weight: 700;
-  color: ${COLORS.GRAY10};
+  color: ${COLOR.GRAY900};
 `;
 
 export const jobTitle = css`
@@ -64,13 +64,13 @@ export const longInfoBox = css`
 export const info = css`
   display: flex;
   font-weight: 400;
-  color: ${COLORS.GRAY30};
+  color: ${COLOR.GRAY600};
   margin-bottom: 0.25rem;
 `;
 
 export const infoText = css`
   font-weight: 400;
-  color: ${COLORS.GRAY30};
+  color: ${COLOR.GRAY600};
   margin-right: 0.125rem;
 
   :after {
@@ -86,7 +86,7 @@ export const infoText = css`
 
 export const placeContainer = css`
   font-weight: 400;
-  color: ${COLORS.GRAY30};
+  color: ${COLOR.GRAY600};
   margin-bottom: 0.25rem;
 `;
 
@@ -114,6 +114,6 @@ export const copyButton = css`
   font-weight: 500;
   padding: 0.25rem 0.5rem;
   background: linear-gradient(to top right, #ffcf23, #bb00b1);
-  color: ${COLORS.GRAY100};
+  color: ${COLOR.WHITE};
   border-radius: 0.5rem;
 `;

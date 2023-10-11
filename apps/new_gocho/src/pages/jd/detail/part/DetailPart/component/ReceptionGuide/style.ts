@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 import { cssObj as subContainerCssObj } from "../DetailSubContainer/style";
@@ -22,7 +22,7 @@ export const cssObj = {
     gap: 0.5rem;
 
     span {
-      color: ${NEWCOLORS.BLUE300};
+      color: ${COLOR.BLUE300};
       ${NEWTEXTS.TITLE4_M1822}
     }
   `,
@@ -30,13 +30,13 @@ export const cssObj = {
   rightIcon: css`
     width: 1.5rem;
     height: 1.5rem;
-    color: ${NEWCOLORS.GRAY450};
+    color: ${COLOR.GRAY450};
   `,
 
   periodWrapper: css`
     padding: 1rem 1.5rem;
     border-radius: 1rem;
-    background-color: ${NEWCOLORS.GRAY50};
+    background-color: ${COLOR.GRAY50};
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -50,12 +50,12 @@ export const cssObj = {
   `,
 
   startTime: css`
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     ${NEWTEXTS.TITLE4_M1822}
   `,
 
   endTime: css`
-    color: ${NEWCOLORS.BLACK};
+    color: ${COLOR.BLACK};
     ${NEWTEXTS.TITLE4_M1822}
   `,
 

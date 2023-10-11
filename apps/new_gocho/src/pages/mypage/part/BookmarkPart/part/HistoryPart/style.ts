@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   menuWrapper: css`
@@ -18,14 +18,14 @@ export const cssObj = {
   `,
 
   selectedButton: css`
-    color: ${NEWCOLORS.WHITE};
+    color: ${COLOR.WHITE};
     border-radius: 1.5rem;
-    background: ${NEWCOLORS.BLACK};
+    background: ${COLOR.BLACK};
   `,
 
   defaultButton: css`
-    color: ${NEWCOLORS.GRAY600};
-    background: ${NEWCOLORS.WHITE};
+    color: ${COLOR.GRAY600};
+    background: ${COLOR.WHITE};
   `,
 
   listWrapper: css`

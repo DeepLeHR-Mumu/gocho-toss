@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const globalStyle = css`
   * {
@@ -156,11 +156,11 @@ export const globalStyle = css`
   h4,
   h5,
   h6 {
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
   }
   a {
     text-decoration: none;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
   }
   input,
   select,

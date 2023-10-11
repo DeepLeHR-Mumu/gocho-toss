@@ -1,12 +1,12 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
   background: css`
     width: 100vw;
     height: 100vh;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
   `,
 
   wrapper: css`
@@ -32,7 +32,7 @@ export const cssObj = {
   sideNavigation: css`
     padding: 2rem 1.25rem;
     border-radius: 1rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     margin-bottom: 1.5rem;
   `,
 
@@ -40,7 +40,7 @@ export const cssObj = {
     display: block;
     cursor: pointer;
     ${isSelected ? NEWTEXTS.TITLE5_B1620 : NEWTEXTS.TITLE5_M1620}
-    color: ${isSelected ? NEWCOLORS.BLUE300 : NEWCOLORS.BLACK};
+    color: ${isSelected ? COLOR.BLUE300 : COLOR.BLACK};
     margin-bottom: 1.5rem;
 
     :last-of-type {
@@ -50,7 +50,7 @@ export const cssObj = {
 
   elementBox: css`
     border-radius: 1rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     padding: 2rem;
     box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.05);
   `,

@@ -1,13 +1,13 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   label: (isFocus: boolean) => css`
     display: flex;
     cursor: pointer;
     align-items: center;
-    border: 0.13rem solid ${isFocus ? COLORS.BLUE_FIRST40 : "transparent"};
+    border: 0.13rem solid ${isFocus ? COLOR.BLUE300 : "transparent"};
     border-radius: 0.3125rem;
     padding: 0 0.25rem;
   `,
@@ -17,7 +17,7 @@ export const cssObj = {
     margin: 0;
 
     :checked ~ div {
-      border-color: ${COLORS.BLUE_FIRST40};
+      border-color: ${COLOR.BLUE300};
 
       :after {
         position: absolute;
@@ -26,18 +26,18 @@ export const cssObj = {
         transform: translate(-50%, -50%);
         width: 0.75rem;
         height: 0.75rem;
-        background-color: ${COLORS.BLUE_FIRST40};
+        background-color: ${COLOR.BLUE300};
         border-radius: 50%;
         content: "";
       }
     }
   `,
   radioBox: (isDisabled: boolean) => css`
-    border: 1.5px solid ${isDisabled ? COLORS.GRAY70 : COLORS.GRAY40};
+    border: 1.5px solid ${isDisabled ? COLOR.GRAY300 : COLOR.GRAY600};
     width: 1.25rem;
     position: relative;
     height: 1.25rem;
-    background-color: ${isDisabled ? COLORS.GRAY80 : COLORS.GRAY100};
+    background-color: ${isDisabled ? COLOR.GRAY100 : COLOR.WHITE};
     border-radius: 50%;
   `,
 };

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const globalStyle = css`
   * {
@@ -97,7 +97,7 @@ export const globalStyle = css`
     font-family: Pretendard Variable, serif;
     font-size: 16px;
     min-width: 1440px;
-    color: ${NEWCOLORS.BLACK};
+    color: ${COLOR.BLACK};
   }
   /* HTML5 display-role reset for older browsers */
   article,
@@ -155,11 +155,11 @@ export const globalStyle = css`
   h4,
   h5,
   h6 {
-    color: ${NEWCOLORS.BLACK};
+    color: ${COLOR.BLACK};
   }
   a {
     text-decoration: none;
-    color: ${NEWCOLORS.BLACK};
+    color: ${COLOR.BLACK};
 
     :focus {
       outline: none;
