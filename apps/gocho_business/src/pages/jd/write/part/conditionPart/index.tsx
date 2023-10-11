@@ -2,8 +2,7 @@ import { FunctionComponent, useState } from "react";
 import { FiChevronUp, FiChevronDown } from "react-icons/fi";
 import { UseFieldArrayReturn } from "react-hook-form";
 
-import { CheckBox } from "shared-ui/common/atom/checkbox";
-
+import { CheckBox } from "shared-ui/common/checkbox";
 import { commonCssObj } from "@/styles";
 import { jdRotationClickEvent } from "@/ga";
 

@@ -1,12 +1,12 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   msg: css`
     font-size: 0.875rem;
     font-weight: 500;
-    color: ${COLORS.ERROR_RED40};
+    color: ${COLOR.RED200};
     line-height: 2;
   `,
 };

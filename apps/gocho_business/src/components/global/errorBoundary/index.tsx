@@ -1,9 +1,8 @@
 import { Component } from "react";
 import Image from "next/image";
 
-import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
-import { SharedButton } from "shared-ui/business/sharedButton";
-import { NEWCOLORS } from "shared-style/color";
+import { SharedButton } from "shared-ui/common/sharedButton";
+import { InvisibleH2 } from "shared-ui/common/invisibleH2";
 
 import jobi_500 from "@/public/image/jobi_500.svg";
 import { INTERNAL_URL } from "@/constants";
@@ -36,20 +35,16 @@ export class ErrorBoundary extends Component<PropsDef, StateDef> {
           </div>
           <div css={cssObj.linkContainer}>
             <SharedButton
-              radius="round"
-              fontColor={NEWCOLORS.GRAY900}
-              backgroundColor={NEWCOLORS.GRAY200}
-              size="medium"
+              buttonType="fillWhite"
+              width={18}
               text="새로고침"
               onClickHandler={() => {
                 window.location.reload();
               }}
             />
             <SharedButton
-              radius="round"
-              fontColor={NEWCOLORS.WHITE}
-              backgroundColor={NEWCOLORS.BLUE250}
-              size="medium"
+              buttonType="fillBlue"
+              width={18}
               text="홈으로"
               onClickHandler={() => {
                 window.location.href = INTERNAL_URL.JD_LIST;

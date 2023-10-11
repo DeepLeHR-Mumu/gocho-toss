@@ -1,17 +1,17 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
   wrapper: (half?: boolean) => css`
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 1rem;
     display: flex;
     flex-direction: row;
     padding: 1.25rem ${half ? "1.5rem" : "2.5rem"} 1.375rem 1.5rem;
     justify-content: space-between;
     align-items: center;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
   `,
 
   skeletonWrapper: css`
@@ -28,7 +28,7 @@ export const cssObj = {
   `,
 
   jdCompanyName: css`
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     ${NEWTEXTS.TITLE6_M1418}
   `,
 
@@ -53,13 +53,13 @@ export const cssObj = {
     display: flex;
     align-items: center;
     height: 1.875rem;
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     ${NEWTEXTS.TITLE6_M1418}
   `,
 
   expired: css`
-    color: ${NEWCOLORS.GRAY500} !important;
-    border-color: ${NEWCOLORS.GRAY200};
-    background-color: ${NEWCOLORS.GRAY100};
+    color: ${COLOR.GRAY500} !important;
+    border-color: ${COLOR.GRAY200};
+    background-color: ${COLOR.GRAY100};
   `,
 };

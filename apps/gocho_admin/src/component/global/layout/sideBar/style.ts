@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 const linkButtonCSS = css`
   display: block;
@@ -13,7 +13,7 @@ export const cssObj = {
     position: relative;
     flex-shrink: 0;
     width: 17.5rem;
-    background-color: ${COLORS.GRAY90};
+    background-color: ${COLOR.GRAY50};
     padding: 1rem;
   `,
   listBox: css`
@@ -29,7 +29,7 @@ export const cssObj = {
       flex-direction: column;
       margin-bottom: 1.25rem;
       padding-bottom: 1.25rem;
-      border-bottom: 1px solid ${COLORS.GRAY70};
+      border-bottom: 1px solid ${COLOR.GRAY300};
 
       :last-of-type {
         border-bottom: 0;
@@ -40,16 +40,16 @@ export const cssObj = {
     display: block;
     font-size: 1.25rem;
     font-weight: 500;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
     padding-bottom: 0.5rem;
   `,
   linkButton: css`
     ${linkButtonCSS};
-    color: ${COLORS.GRAY20};
+    color: ${COLOR.GRAY700};
   `,
   activeButton: css`
     ${linkButtonCSS};
-    color: ${COLORS.BLUE_FIRST40};
+    color: ${COLOR.BLUE300};
     font-weight: 600;
   `,
 };

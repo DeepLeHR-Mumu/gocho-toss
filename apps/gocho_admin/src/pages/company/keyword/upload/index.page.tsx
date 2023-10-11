@@ -3,10 +3,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
-import { SharedButton } from "shared-ui/business/sharedButton";
-import { COLORS } from "shared-style/color";
+import { SharedButton } from "shared-ui/common/sharedButton";
 
+import { SharedRadioButton } from "shared-ui/common/sharedRadioButton";
 import { useAddCompanyKeyword, useFindCompany } from "@/api";
 import { NextPageWithLayout } from "@/types";
 import { GlobalLayout, PageLayout } from "@/component";
@@ -105,14 +104,7 @@ const CompanyKeywordUpload: NextPageWithLayout = () => {
             <input css={cssObj.inputBox} {...register("keyword", { required: true })} />
           </div>
           <div css={cssObj.buttonBox}>
-            <SharedButton
-              onClickHandler="submit"
-              text="키워드 등록하기"
-              size="xLarge"
-              radius="round"
-              backgroundColor={COLORS.BLUE_FIRST40}
-              fontColor={COLORS.GRAY100}
-            />
+            <SharedButton buttonType="fillBlue" width={10} onClickHandler="submit" text="키워드 등록하기" />
           </div>
         </form>
         {checkMsg && <p css={cssObj.errorMsgBox}>{checkMsg}</p>}

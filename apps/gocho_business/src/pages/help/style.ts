@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -13,9 +13,9 @@ export const cssObj = {
     flex-grow: 1;
     position: relative;
     height: 45rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     padding: 2rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 1rem;
     box-shadow: 0 2px 16px 0 #0000000d;
   `,
@@ -27,9 +27,9 @@ export const cssObj = {
   `,
 
   descWrapper: css`
-    background-color: ${NEWCOLORS.GRAY50};
+    background-color: ${COLOR.GRAY50};
     padding: 1.5rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 1rem;
     margin-bottom: 1.75rem;
   `,
@@ -46,12 +46,12 @@ export const cssObj = {
 
   email: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     margin-bottom: 0.5rem;
 
     > a {
       margin-left: 0.5rem;
-      color: ${NEWCOLORS.GRAY600};
+      color: ${COLOR.GRAY600};
     }
   `,
 };

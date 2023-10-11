@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   size: (size: number) => css`
@@ -8,10 +8,10 @@ export const cssObj = {
   `,
 
   gray: css`
-    color: ${NEWCOLORS.GRAY450};
+    color: ${COLOR.GRAY450};
   `,
 
   red: css`
-    color: ${NEWCOLORS.RED200};
+    color: ${COLOR.RED200};
   `,
 };

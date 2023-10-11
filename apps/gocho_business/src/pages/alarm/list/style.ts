@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 import { shorten } from "shared-style/common";
 
@@ -13,9 +13,9 @@ export const cssObj = {
   partContainer: css`
     flex-grow: 1;
     min-height: 50rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     padding: 2rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 1rem;
     box-shadow: 0 2px 16px 0 #0000000d;
   `,
@@ -29,9 +29,9 @@ export const cssObj = {
   pageDesc: css`
     text-align: left;
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     padding-bottom: 2rem;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY450};
+    border-bottom: 1px solid ${COLOR.GRAY450};
   `,
 
   infoList: css`
@@ -43,7 +43,7 @@ export const cssObj = {
     align-items: center;
     text-align: left;
     padding: 1rem 1.5rem;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+    border-bottom: 1px solid ${COLOR.GRAY200};
   `,
 
   infoType: css`
@@ -59,6 +59,6 @@ export const cssObj = {
 
   infoDate: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.GRAY500};
+    color: ${COLOR.GRAY500};
   `,
 };

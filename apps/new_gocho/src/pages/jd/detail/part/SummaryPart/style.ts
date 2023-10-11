@@ -1,11 +1,11 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
   background: css`
     padding: 1.75rem 0;
-    background: ${NEWCOLORS.BLUE250};
+    background: ${COLOR.BLUE250};
   `,
 
   wrapper: css`
@@ -14,7 +14,7 @@ export const cssObj = {
     flex-direction: column;
     gap: 1.25rem;
     border-radius: 1rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
   `,
 
   skeletonWrapper: css`
@@ -40,7 +40,7 @@ export const cssObj = {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: ${NEWCOLORS.GRAY450};
+    color: ${COLOR.GRAY450};
     ${NEWTEXTS.TITLE5_M1620}
   `,
 
@@ -54,7 +54,7 @@ export const cssObj = {
     align-items: center;
     gap: 1rem;
 
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
   `,
 
   chipsWrapper: css`

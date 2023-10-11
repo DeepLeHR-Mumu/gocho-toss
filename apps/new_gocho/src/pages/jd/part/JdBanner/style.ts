@@ -1,11 +1,11 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 import { MOBILE } from "shared-style/mediaQuery";
 
 export const cssObj = {
   background: css`
-    background-color: ${NEWCOLORS.BLUE300};
+    background-color: ${COLOR.BLUE300};
   `,
 
   wrapper: css`
@@ -17,7 +17,7 @@ export const cssObj = {
   `,
 
   sideTitleWrapper: css`
-    color: ${NEWCOLORS.WHITE};
+    color: ${COLOR.WHITE};
 
     > div {
       ${NEWTEXTS.TITLE4_M1822}
@@ -68,7 +68,7 @@ export const cssObj = {
 
     .slick-dots li button {
       border-radius: 50%;
-      background-color: ${NEWCOLORS.GRAY450};
+      background-color: ${COLOR.GRAY450};
       color: transparent;
       cursor: pointer;
       display: block;
@@ -82,7 +82,7 @@ export const cssObj = {
     }
 
     .slick-dots li.slick-active button {
-      background-color: ${NEWCOLORS.WHITE};
+      background-color: ${COLOR.WHITE};
       width: 10px;
       height: 10px;
     }
@@ -96,7 +96,7 @@ export const cssObj = {
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 1rem;
-    border: 1px solid ${NEWCOLORS.WHITE};
+    border: 1px solid ${COLOR.WHITE};
     background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
 
@@ -105,7 +105,7 @@ export const cssObj = {
     }
 
     > svg {
-      color: ${NEWCOLORS.GRAY450};
+      color: ${COLOR.GRAY450};
       width: 2rem;
       height: 2rem;
     }
@@ -136,6 +136,6 @@ export const cssObj = {
     box-sizing: border-box;
     margin-left: 1rem;
 
-    background-color: ${NEWCOLORS.GRAY100};
+    background-color: ${COLOR.GRAY100};
   `,
 };

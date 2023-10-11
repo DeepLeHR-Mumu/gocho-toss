@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -15,18 +15,18 @@ export const cssObj = {
     display: block;
     cursor: pointer;
     ${TEXTS.TITLE11};
-    color: ${isAuth ? NEWCOLORS.BLACK : NEWCOLORS.GRAY600};
+    color: ${isAuth ? COLOR.BLACK : COLOR.GRAY600};
   `,
 
   moreButton: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
   `,
 
   contour: css`
     width: 100%;
     margin: 0 -0.5rem;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+    border-bottom: 1px solid ${COLOR.GRAY200};
   `,
 
   cardContainer: css`
@@ -35,7 +35,7 @@ export const cssObj = {
 
   noAuthJdCard: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     height: 30rem;
     display: flex;
     align-items: center;

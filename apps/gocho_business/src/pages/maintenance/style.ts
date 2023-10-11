@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   container: css`
@@ -24,7 +24,7 @@ export const cssObj = {
   `,
 
   title: css`
-    color: ${NEWCOLORS.BLACK};
+    color: ${COLOR.BLACK};
     font-size: 2.25rem;
   `,
 
@@ -35,6 +35,6 @@ export const cssObj = {
   `,
 
   catchPhrase: css`
-    color: ${NEWCOLORS.BLACK};
+    color: ${COLOR.BLACK};
   `,
 };

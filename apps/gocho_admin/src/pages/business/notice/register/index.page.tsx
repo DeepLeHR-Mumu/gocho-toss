@@ -1,8 +1,7 @@
 import { ReactElement, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { NewSharedButton } from "shared-ui/common/newSharedButton";
-
+import { SharedButton } from "shared-ui/common/sharedButton";
 import { mainContainer, pageTitle } from "@/style";
 import { NextPageWithLayout } from "@/types";
 import { useAddNotice } from "@/api";
@@ -71,7 +70,7 @@ const BusinessNoticeRegister: NextPageWithLayout = () => {
         </div>
         <div css={cssObj.buttonWrapper}>
           {" "}
-          <NewSharedButton buttonType="fillBlue" width={10} text="공지사항 등록" onClickHandler="submit" />
+          <SharedButton buttonType="fillBlue" width={10} text="공지사항 등록" onClickHandler="submit" />
         </div>
       </form>
       <p css={cssObj.checkMsgBox}>{checkMsg}</p>

@@ -1,10 +1,10 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   mainContainer: css`
-    background-color: ${NEWCOLORS.GRAY100};
+    background-color: ${COLOR.GRAY100};
     padding: 5rem 0;
     display: flex;
     align-items: center;
@@ -13,7 +13,7 @@ export const cssObj = {
 
   errorContainer: css`
     position: relative;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     border-radius: 1rem;
     display: flex;
     align-items: center;
@@ -42,7 +42,7 @@ export const cssObj = {
     ${NEWTEXTS.BODY2_R1624};
 
     > span {
-      color: ${NEWCOLORS.BLUE300};
+      color: ${COLOR.BLUE300};
       font-weight: 700;
     }
   `,
@@ -59,8 +59,8 @@ export const cssObj = {
 
   link: css`
     border-radius: 2rem;
-    background-color: ${NEWCOLORS.BLUE300};
-    color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.BLUE300};
+    color: ${COLOR.WHITE};
     padding: 1rem 2rem;
     margin-top: 2rem;
     ${NEWTEXTS.TITLE4_B1822};

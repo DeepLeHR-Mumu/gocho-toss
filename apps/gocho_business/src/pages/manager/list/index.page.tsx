@@ -3,8 +3,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
-import { Spinner } from "shared-ui/common/atom/spinner";
-
+import { Spinner } from "shared-ui/common/spinner";
 import { PageLayout, Pagination } from "@/components";
 import { useCompanyDetail, useManagerArr, useManagerProfile } from "@/apis";
 import { managerListPageFunnelEvent } from "@/ga";

@@ -1,10 +1,10 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 const paginationItem = css`
   padding: 0.675rem;
-  color: ${NEWCOLORS.GRAY600};
+  color: ${COLOR.GRAY600};
   ${NEWTEXTS.TITLE5_M1620}
 `;
 
@@ -24,8 +24,8 @@ export const cssObj = {
 
   selected: css`
     border-radius: 0.5rem;
-    background-color: ${NEWCOLORS.BLUE100};
-    color: ${NEWCOLORS.BLACK};
+    background-color: ${COLOR.BLUE100};
+    color: ${COLOR.BLACK};
   `,
 
   prevWrapper: css`
@@ -70,6 +70,6 @@ export const cssObj = {
     width: 1.25rem;
     height: 1.25rem;
     padding: 0;
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
   `,
 };

@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
-import { usePreventRouting } from "shared-hooks";
+import { usePreventRouting } from "shared-hook";
 
 import { useModal, useToast } from "@/globalStates";
 import {

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -18,13 +18,13 @@ export const cssObj = {
       flex-direction: row;
       flex-basis: 7.1875rem;
       flex-shrink: 0;
-      color: ${NEWCOLORS.GRAY600};
+      color: ${COLOR.GRAY600};
       ${NEWTEXTS.TITLE4_M1822}
     }
   `,
 
   pay: css`
-    color: ${NEWCOLORS.BLUE300};
+    color: ${COLOR.BLUE300};
     ${NEWTEXTS.TITLE4_B1822}
   `,
 };

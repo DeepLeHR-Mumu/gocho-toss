@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEMP } from "shared-style/mediaQuery";
 
 export const cssObj = {
@@ -21,14 +21,14 @@ export const cssObj = {
   closeIcon: css`
     width: 2rem;
     height: 2rem;
-    color: ${NEWCOLORS.GRAY450};
+    color: ${COLOR.GRAY450};
     align-self: flex-end;
     cursor: pointer;
 
     ${TEMP} {
       width: 1.5rem;
       height: 1.5rem;
-      color: ${NEWCOLORS.BLACK};
+      color: ${COLOR.BLACK};
     }
   `,
 
@@ -64,7 +64,7 @@ export const cssObj = {
 
   subtitle: css`
     margin-bottom: 6.5rem;
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     ${NEWTEXTS.TITLE5_M1620}
 
     ${TEMP} {
@@ -77,8 +77,8 @@ export const cssObj = {
     padding: 0.5rem 0.75rem;
     margin-bottom: 1.5rem;
     border-radius: 0.25rem;
-    color: ${NEWCOLORS.WHITE};
-    background-color: ${NEWCOLORS.BLUE300};
+    color: ${COLOR.WHITE};
+    background-color: ${COLOR.BLUE300};
     position: relative;
 
     ::after {
@@ -89,7 +89,7 @@ export const cssObj = {
       transform: translate(-50%, 0);
       border-width: 0.5rem;
       border-style: solid;
-      border-color: ${NEWCOLORS.BLUE300} transparent transparent transparent;
+      border-color: ${COLOR.BLUE300} transparent transparent transparent;
     }
   `,
 
@@ -115,7 +115,7 @@ export const cssObj = {
   emailLogin: css`
     border: none;
     background-color: transparent;
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     ${NEWTEXTS.UNDERLINE1_M1620}
 
     ${TEMP} {
@@ -124,7 +124,7 @@ export const cssObj = {
   `,
 
   mobileDescription: css`
-    color: ${NEWCOLORS.GRAY400};
+    color: ${COLOR.GRAY400};
     ${NEWTEXTS.BODY3_R1422}
   `,
 };

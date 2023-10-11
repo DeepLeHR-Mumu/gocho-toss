@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEMP } from "shared-style/mediaQuery";
 
 export const cssObj = {
@@ -29,7 +29,7 @@ export const cssObj = {
   tabBar: css`
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+    border-bottom: 1px solid ${COLOR.GRAY200};
     margin-bottom: 2.5rem;
 
     ${TEMP} {
@@ -40,8 +40,8 @@ export const cssObj = {
   tabButton: (isSelected: boolean) => css`
     width: 8.75rem;
     padding-bottom: 1.5rem;
-    color: ${isSelected ? NEWCOLORS.BLACK : NEWCOLORS.GRAY400};
-    border-bottom: ${isSelected ? `2px solid ${NEWCOLORS.BLACK}` : `none`};
+    color: ${isSelected ? COLOR.BLACK : COLOR.GRAY400};
+    border-bottom: ${isSelected ? `2px solid ${COLOR.BLACK}` : `none`};
     ${NEWTEXTS.TITLE4_B1822}
   }
   `,
@@ -66,21 +66,21 @@ export const cssObj = {
     margin: auto;
 
     > strong {
-      color: ${NEWCOLORS.BLACK};
+      color: ${COLOR.BLACK};
       ${NEWTEXTS.TITLE5_M1620}
 
       ${TEMP} {
-        color: ${NEWCOLORS.BLUE300};
+        color: ${COLOR.BLUE300};
         ${NEWTEXTS.TITLE6_M1418}
       }
     }
 
     > span {
-      color: ${NEWCOLORS.GRAY600};
+      color: ${COLOR.GRAY600};
       ${NEWTEXTS.TITLE5_M1620}
 
       ${TEMP} {
-        color: ${NEWCOLORS.BLACK};
+        color: ${COLOR.BLACK};
         ${NEWTEXTS.TITLE6_M1418}
       }
     }

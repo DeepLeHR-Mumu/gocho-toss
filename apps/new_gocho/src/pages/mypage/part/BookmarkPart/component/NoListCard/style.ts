@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   listWrapper: css`
@@ -13,7 +13,7 @@ export const cssObj = {
   `,
 
   text: css`
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     text-align: center;
     font-size: 1rem;
     font-weight: 400;
@@ -25,7 +25,7 @@ export const cssObj = {
     justify-content: space-between;
     gap: 0.25rem;
     p {
-      color: ${NEWCOLORS.BLUE300};
+      color: ${COLOR.BLUE300};
       text-align: center;
       font-size: 1rem;
       line-height: 1.25rem;
@@ -35,7 +35,7 @@ export const cssObj = {
   linkIcon: css`
     width: 1.25rem;
     height: 1.25rem;
-    color: ${NEWCOLORS.BLUE300};
+    color: ${COLOR.BLUE300};
     line-height: 1.25rem;
   `,
 };

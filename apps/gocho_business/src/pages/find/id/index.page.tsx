@@ -5,8 +5,7 @@ import { FiArrowLeft, FiX } from "react-icons/fi";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { NewSharedButton } from "shared-ui/common/newSharedButton";
-
+import { SharedButton } from "shared-ui/common/sharedButton";
 import { useSendAuthNumber, useCheckAuthNumber, useFindEmail } from "@/apis";
 import { AuthNav } from "@/components/global/authNav";
 import { commonCssObj } from "@/styles";
@@ -104,7 +103,7 @@ const FindEmail: NextPage = () => {
             <div css={cssObj.buttonContainer}>
               {email ? (
                 <>
-                  <NewSharedButton
+                  <SharedButton
                     buttonType="outLineGray"
                     width={12}
                     text="비밀번호 찾기"
@@ -113,7 +112,7 @@ const FindEmail: NextPage = () => {
                       router.push(INTERNAL_URL.FIND_PASSWORD);
                     }}
                   />
-                  <NewSharedButton
+                  <SharedButton
                     buttonType="fillBlue"
                     width={12}
                     text="로그인 하기"
@@ -124,7 +123,7 @@ const FindEmail: NextPage = () => {
                   />
                 </>
               ) : (
-                <NewSharedButton
+                <SharedButton
                   buttonType="fillBlue"
                   width={25.5}
                   text="회원가입 하기"
@@ -173,7 +172,7 @@ const FindEmail: NextPage = () => {
                       clearErrors("phone_number");
                     }}
                   />
-                  <NewSharedButton
+                  <SharedButton
                     buttonType={isPhoneNumber ? "fillBlue" : "disabled"}
                     width={5}
                     text="인증요청"
@@ -192,7 +191,7 @@ const FindEmail: NextPage = () => {
               />
               <p css={cssObj.errorMsg}>{errors.name?.message || errors.phone_number?.message}</p>
             </div>
-            <NewSharedButton
+            <SharedButton
               buttonType={
                 !isName || !isPhoneNumber || errors.name?.message || errors.phone_number?.message
                   ? "disabled"

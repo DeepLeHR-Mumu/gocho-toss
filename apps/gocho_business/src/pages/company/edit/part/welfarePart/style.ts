@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   welfareButtonContainer: css`
@@ -8,6 +8,6 @@ export const cssObj = {
     gap: 0 1rem;
     justify-content: space-between;
     padding-bottom: 1.25rem;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+    border-bottom: 1px solid ${COLOR.GRAY200};
   `,
 };

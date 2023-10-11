@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -15,7 +15,7 @@ export const cssObj = {
 
   text: css`
     ${NEWTEXTS.BODY1_R1826}
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     text-align: center;
   `,
 };

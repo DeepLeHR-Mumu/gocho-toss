@@ -1,8 +1,7 @@
 import { ReactElement } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { COLORS } from "shared-style/color";
-import { SharedButton } from "shared-ui/business/sharedButton";
+import { SharedButton } from "shared-ui/common/sharedButton";
 
 import { useDeleteSearchKeyword, useSearchKeywordArr } from "@/api";
 import { searchKeywordArrKeyObj } from "@/api/keyword/useSearchKeywordArr/type";
@@ -54,12 +53,10 @@ const SearchKeyword: NextPageWithLayout = () => {
             <li css={cssObj.cardWrapper} key={keyword}>
               <div>{keyword}</div>
               <SharedButton
+                buttonType="fillRed"
+                width={5}
                 onClickHandler={() => deleteSearchKeywordHandler(keyword)}
                 text="삭제"
-                size="medium"
-                radius="round"
-                fontColor={COLORS.GRAY100}
-                backgroundColor={COLORS.ERROR_RED30}
               />
             </li>
           ))}

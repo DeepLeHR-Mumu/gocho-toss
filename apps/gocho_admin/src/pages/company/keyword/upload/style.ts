@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 import { subPageTitle } from "@/style";
 
@@ -24,16 +24,16 @@ export const cssObj = {
   inputBox: css`
     flex-grow: 1;
     border-radius: 0.5rem;
-    border: 1px solid ${COLORS.GRAY70};
-    background-color: ${COLORS.GRAY100};
+    border: 1px solid ${COLOR.GRAY300};
+    background-color: ${COLOR.WHITE};
     height: 2rem;
     padding: 0.25rem 0.5rem;
     margin-right: 1rem;
   `,
 
   button: css`
-    background-color: ${COLORS.BLUE_NEON50};
-    color: ${COLORS.GRAY100};
+    background-color: ${COLOR.BLUE250};
+    color: ${COLOR.WHITE};
     font-size: 0.75rem;
     width: fit-content;
     padding: 0.25rem 1rem;
@@ -45,7 +45,7 @@ export const cssObj = {
   `,
 
   errorMsgBox: css`
-    color: ${COLORS.BLUE_FIRST40};
+    color: ${COLOR.BLUE300};
     font-weight: 500;
     text-align: center;
     margin-top: 1rem;
@@ -61,13 +61,13 @@ export const cssObj = {
 
     p {
       font-size: 1rem;
-      color: ${COLORS.GRAY20};
+      color: ${COLOR.GRAY700};
       padding: 0.25rem;
     }
   `,
 
   point: css`
-    color: ${COLORS.BLUE_FIRST40};
+    color: ${COLOR.BLUE300};
     font-weight: 500;
   `,
 

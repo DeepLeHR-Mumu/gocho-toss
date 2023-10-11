@@ -1,13 +1,13 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
   sectionContainer: css`
     max-width: 28.5rem;
     height: 41rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     margin: 6rem auto;
     padding: 1.5rem;
     border-radius: 1rem;
@@ -28,7 +28,7 @@ export const cssObj = {
     > svg {
       width: 1.5rem;
       height: 1.5rem;
-      color: ${NEWCOLORS.GRAY450};
+      color: ${COLOR.GRAY450};
     }
   `,
 

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEMP } from "shared-style/mediaQuery";
 
 export const cssObj = {
@@ -48,13 +48,13 @@ export const cssObj = {
   eye: css`
     width: 1rem;
     height: 1rem;
-    color: ${NEWCOLORS.BLUE300};
+    color: ${COLOR.BLUE300};
   `,
 
   eyeOff: css`
     width: 1rem;
     height: 1rem;
-    color: ${NEWCOLORS.GRAY450};
+    color: ${COLOR.GRAY450};
   `,
 
   findPasswordButtonWrapper: css`
@@ -71,7 +71,7 @@ export const cssObj = {
     border: none;
     padding: 0;
     background-color: transparent;
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     ${NEWTEXTS.UNDERLINE1_M1620}
 
     ${TEMP} {
@@ -93,7 +93,7 @@ export const cssObj = {
   `,
 
   mobileDescription: css`
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
   `,
 
   mobileKakaoButton: css`

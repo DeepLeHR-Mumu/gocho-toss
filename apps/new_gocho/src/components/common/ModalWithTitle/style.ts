@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -13,7 +13,7 @@ export const cssObj = {
     transform: translate(-50%, -50%);
     border-radius: 1.25rem;
     padding: 2rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     overflow: auto;
   `,
 
@@ -25,7 +25,7 @@ export const cssObj = {
   `,
 
   title: css`
-    color: ${NEWCOLORS.BLACK};
+    color: ${COLOR.BLACK};
     ${NEWTEXTS.TITLE1_B2832}
   `,
 

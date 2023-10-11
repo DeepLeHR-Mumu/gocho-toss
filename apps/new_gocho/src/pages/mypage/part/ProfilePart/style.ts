@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -29,7 +29,7 @@ export const cssObj = {
   `,
 
   basicProfileButton: css`
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     font: ${NEWTEXTS.TITLE5_M1620};
   `,
 
@@ -50,7 +50,7 @@ export const cssObj = {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    background-color: ${NEWCOLORS.GRAY100};
+    background-color: ${COLOR.GRAY100};
     border-radius: 2rem;
     width: 2.25rem;
     height: 2.25rem;
@@ -65,7 +65,7 @@ export const cssObj = {
       width: 8.25rem;
       line-height: 1rem;
       font-weight: 500;
-      color: ${NEWCOLORS.GRAY600};
+      color: ${COLOR.GRAY600};
     }
 
     span {

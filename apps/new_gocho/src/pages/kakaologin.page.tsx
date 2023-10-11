@@ -3,11 +3,10 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import { useDoKakaoLogin } from "shared-api/auth/useDoKakaoLogin";
-import { useGetKakaoCode } from "shared-api/auth/useGetKakaoCode";
 import { tokenDecryptor } from "shared-util";
-import { KAKAO_API_KEY } from "shared-user/src/constants";
 
+import { useDoKakaoLogin } from "@/apis/auth/useDoKakaoLogin";
+import { useGetKakaoCode } from "@/apis/auth/useGetKakaoCode";
 import { useToast } from "@/globalStates";
 import { loginSuccessEvent } from "@/ga/auth";
 
@@ -19,6 +18,7 @@ const KakaoLogin: NextPage = () => {
   const { setToastMessage } = useToast();
   const { mutate: kakaoCodeMutation } = useGetKakaoCode();
   const { mutate: kakaologinMutation } = useDoKakaoLogin();
+  const KAKAO_API_KEY = "562427e798f089a255bd9da44dfc29e6";
 
   useEffect(() => {
     if (code && queryClient && router) {

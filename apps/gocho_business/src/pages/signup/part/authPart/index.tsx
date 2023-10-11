@@ -4,10 +4,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { FiCheck, FiChevronRight, FiSmartphone } from "react-icons/fi";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { NewSharedButton } from "shared-ui/common/newSharedButton";
-import { CheckBox } from "shared-ui/common/atom/checkbox";
 import { ErrorResponseDef } from "shared-type/api/errorResponseType";
 
+import { SharedButton } from "shared-ui/common/sharedButton";
+import { CheckBox } from "shared-ui/common/checkbox";
 import { loginSuccessEvent, registerCompleteClickEvent, registerPhoneValidationClickEvent } from "@/ga";
 import { getPass, getPassCheck, useManagerRegister, useDoLogin } from "@/apis";
 import { useModal } from "@/globalStates";
@@ -242,7 +242,7 @@ export const AuthPart: FunctionComponent<AuthPartProps> = () => {
         </label>
         <p css={cssObj.errorMessage}>{errorMessage && errorMessage}</p>
       </div>
-      <NewSharedButton
+      <SharedButton
         buttonType={
           !passState ||
           !isDepartment ||

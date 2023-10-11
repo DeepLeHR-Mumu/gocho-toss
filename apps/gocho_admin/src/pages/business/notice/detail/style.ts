@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { TEXTS } from "shared-style/text";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   flexBox: css`
@@ -17,7 +17,7 @@ export const cssObj = {
 
   dataTitle: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.GRAY500};
+    color: ${COLOR.GRAY500};
   `,
 
   data: css`

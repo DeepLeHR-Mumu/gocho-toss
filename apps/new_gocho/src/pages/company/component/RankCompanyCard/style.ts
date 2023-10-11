@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -21,7 +21,7 @@ export const cssObj = {
 
   rankNumber: css`
     ${NEWTEXTS.TITLE2_B2428};
-    color: ${NEWCOLORS.BLUE300};
+    color: ${COLOR.BLUE300};
     margin-right: 1.25rem;
   `,
 

@@ -1,7 +1,7 @@
 import { FunctionComponent, useRef } from "react";
 import { FiX } from "react-icons/fi";
 
-import { useFocusTrap } from "shared-hooks";
+import { useFocusTrap } from "shared-hook";
 
 import { useModal } from "@/globalStates";
 

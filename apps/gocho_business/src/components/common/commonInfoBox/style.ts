@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   viewInfoBox: css`
@@ -9,7 +9,7 @@ export const cssObj = {
     justify-content: space-between;
     width: 9.25rem;
     height: 4rem;
-    border-right: 1px solid ${NEWCOLORS.GRAY200};
+    border-right: 1px solid ${COLOR.GRAY200};
 
     :last-of-type {
       border-right: none;

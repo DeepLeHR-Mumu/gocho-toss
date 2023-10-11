@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const sectionContainer = css`
   margin-bottom: 2rem;
@@ -19,15 +19,15 @@ export const inputContainer = css`
 `;
 
 export const inputTitle = css`
-  color: ${COLORS.GRAY30};
+  color: ${COLOR.GRAY600};
   margin-right: 1rem;
 `;
 
 export const inputBox = css`
   width: 50%;
   border-radius: 0.5rem;
-  border: 1px solid ${COLORS.GRAY70};
-  background-color: ${COLORS.GRAY100};
+  border: 1px solid ${COLOR.GRAY300};
+  background-color: ${COLOR.WHITE};
   height: 2rem;
   padding: 0.25rem 0.5rem;
   margin-right: 1rem;

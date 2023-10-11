@@ -1,12 +1,12 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
     width: 100%;
     border-radius: 1rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     position: sticky;
     top: 15rem;
     right: 0;
@@ -16,7 +16,7 @@ export const cssObj = {
   headerWrapper: css`
     padding: 1rem;
     border-radius: 1rem 1rem 0 0;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
   `,
 
   companyWrapper: css`
@@ -50,7 +50,7 @@ export const cssObj = {
   alertIcon: css`
     width: 1rem;
     height: 1rem;
-    color: ${NEWCOLORS.BLACK};
+    color: ${COLOR.BLACK};
   `,
 
   alertHoverBox: css`
@@ -60,15 +60,15 @@ export const cssObj = {
     top: 2rem;
     right: 0;
     padding: 0.75rem 1rem;
-    background-color: ${NEWCOLORS.BLUE100};
+    background-color: ${COLOR.BLUE100};
     border-radius: 1rem;
-    border: 1px solid ${NEWCOLORS.BLUE200};
+    border: 1px solid ${COLOR.BLUE200};
     ${NEWTEXTS.BODY3_R1422}
   `,
 
   contentsWrapper: (blurred: boolean) => css`
     padding: 1.125rem 1rem 1rem;
-    background-color: ${NEWCOLORS.GRAY100};
+    background-color: ${COLOR.GRAY100};
     height: 17rem;
     overflow: auto;
     display: flex;
@@ -80,14 +80,14 @@ export const cssObj = {
   noComment: css`
     margin: auto;
     text-align: center;
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     ${NEWTEXTS.BODY3_R1422}
   `,
 
   footerWrapper: css`
     padding: 1rem;
     border-radius: 0 0 1rem 1rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
 
     > h5 {
       padding-bottom: 0.75rem;
@@ -96,7 +96,7 @@ export const cssObj = {
 
     :focus-within {
       svg {
-        color: ${NEWCOLORS.BLUE200};
+        color: ${COLOR.BLUE200};
       }
     }
   `,
@@ -109,6 +109,6 @@ export const cssObj = {
     -ms-transform: rotate(-90deg); /* IE 9 */
     -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
     transform: rotate(-90deg);
-    color: ${NEWCOLORS.GRAY450};
+    color: ${COLOR.GRAY450};
   `,
 };

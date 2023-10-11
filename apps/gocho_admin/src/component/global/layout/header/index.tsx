@@ -4,10 +4,8 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 
-import { SharedButton } from "shared-ui/business/sharedButton";
-import { SharedBoxLink } from "shared-ui/business/sharedBoxLink";
-import colorLogoSrc from "shared-image/global/deepLeLogo/smallColor.svg";
-import { COLORS } from "shared-style/color";
+import { SharedButton } from "shared-ui/common/sharedButton";
+import colorLogoSrc from "shared-image/global/deeple/smallColor.svg";
 
 import { userGetLocalStoargetItem, userResetLocalStorageItem } from "@/utils";
 import { INTERNAL_URL } from "@/constant";
@@ -38,16 +36,11 @@ export const Header: FunctionComponent = () => {
         <strong css={cssObj.title}>Admin 페이지</strong>
       </Link>
       {isLogined ? (
-        <SharedButton
-          onClickHandler={doLogout}
-          text="로그아웃"
-          size="large"
-          radius="round"
-          fontColor={COLORS.BLUE_FIRST40}
-          backgroundColor={COLORS.GRAY100}
-        />
+        <SharedButton buttonType="fillWhite" width={7} onClickHandler={doLogout} text="로그아웃" />
       ) : (
-        <SharedBoxLink internalUrl={INTERNAL_URL.LOGIN_URL} text="로그인" colorVariation="blue" iconLocation="left" />
+        <Link href={INTERNAL_URL.LOGIN_URL} css={cssObj.loginButton}>
+          로그인
+        </Link>
       )}
     </header>
   );

@@ -1,6 +1,0 @@
-export const ACCESS_TOKEN =
-  "EAAEBp6UZAKesBO4UXLlTVWAZA3ABPNQS7IGg6gG2rWzbusQlpO3ZBad9x8mwMa3iTiW9uVbMds4GqsLfe0g0AL9bAepQpNZBzZCYsxI1xFiB1iZAgIlWkqOGPAMrGPAz6SS9T45RmK7FBe6QJy14KZBPwlrq5UQR4JAD9zFRaZAFZASvlbmxdjDPyUT3goo7iaUbHhwZDZD";
-export const PIXEL_ID = "1172126310190855";
-
-// NOTE 이벤트 테스트 시 관리자 페이지에서 테스트코드 확인 후 변경하고 테스트할 것
-// export const TEST_EVENT_CODE = "TEST80360";

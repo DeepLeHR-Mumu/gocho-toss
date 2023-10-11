@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { FiX } from "react-icons/fi";
 import { Button } from "shared-ui/deeple-ds";
 
-import logoColor from "shared-image/global/deepLeLogo/largeColor.svg";
+import logoColor from "shared-image/global/deeple/largeColor.svg";
 import logoColorForMobile from "@/public/image/logo/gocho/color.svg";
 
 import { useGetDeviceType } from "@/globalStates";

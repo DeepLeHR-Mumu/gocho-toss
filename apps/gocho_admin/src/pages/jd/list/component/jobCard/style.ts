@@ -1,12 +1,12 @@
 import { css } from "@emotion/react";
 
 import { shorten } from "shared-style/common";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 const defaultButton = css`
-  padding: 0.25rem 0.5rem;
   font-size: 0.8125rem;
-  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,7 +15,7 @@ const defaultButton = css`
 
 export const cssObj = {
   wrapper: css`
-    border-bottom: 1px solid ${COLORS.GRAY80};
+    border-bottom: 1px solid ${COLOR.GRAY100};
     padding: 1rem 0;
   `,
   container: css`
@@ -28,7 +28,7 @@ export const cssObj = {
       font-size: 1rem;
       font-weight: 400;
       line-height: 1.8;
-      color: ${COLORS.GRAY10};
+      color: ${COLOR.GRAY900};
       padding: 0 1rem;
     }
   `,
@@ -50,7 +50,7 @@ export const cssObj = {
 
   task: css`
     font-size: 0.75rem;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
     word-break: keep-all;
     text-align: center;
   `,
@@ -85,27 +85,14 @@ export const cssObj = {
 
   applyButton: css`
     ${defaultButton};
-    color: ${COLORS.BLUE_FIRST40};
-    background-color: ${COLORS.GRAY90};
-    border: 1px solid ${COLORS.GRAY80};
+    color: ${COLOR.BLUE300};
+    background-color: ${COLOR.GRAY50};
+    border: 1px solid ${COLOR.GRAY100};
   `,
 
-  editButton: css`
+  jdEditButton: css`
     ${defaultButton};
-    color: ${COLORS.GRAY10};
-    background-color: ${COLORS.ERROR_YELLOW50};
-  `,
-
-  deleteButton: css`
-    ${defaultButton};
-    color: ${COLORS.GRAY100};
-    background-color: ${COLORS.ERROR_RED30};
-  `,
-
-  endJobButton: css`
-    ${defaultButton};
-    color: ${COLORS.GRAY10};
-    background-color: ${COLORS.GRAY90};
-    border: 1px solid ${COLORS.GRAY80};
+    background-color: ${COLOR.BLUE300};
+    color: ${COLOR.WHITE};
   `,
 };

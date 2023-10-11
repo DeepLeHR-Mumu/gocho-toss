@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 import { FiArrowLeft, FiX } from "react-icons/fi";
 
 import { EMAIL_REGEXP, EMAIL_ERROR_MESSAGE } from "shared-constant";
-import { NewSharedButton } from "shared-ui/common/newSharedButton";
 
+import { SharedButton } from "shared-ui/common/sharedButton";
 import { AuthNav } from "@/components/global/authNav";
 import { INTERNAL_URL } from "@/constants";
 import { commonCssObj } from "@/styles";
@@ -65,7 +65,7 @@ const FindPassword: NextPage = () => {
               아래 메일로 임시 비밀번호가 전송되었습니다.
               <p css={cssObj.result}>{watch("email")}</p>
             </div>
-            <NewSharedButton
+            <SharedButton
               buttonType="fillBlue"
               width={25.5}
               text="로그인 하기"
@@ -99,7 +99,7 @@ const FindPassword: NextPage = () => {
               </div>
               <p css={cssObj.errorMsg}>{errors.email?.message}</p>
             </div>
-            <NewSharedButton
+            <SharedButton
               buttonType={!isEmail || errors.email?.message ? "disabled" : "fillBlue"}
               width={25.5}
               text="다음"

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { MOBILE } from "shared-style/mediaQuery";
 import { NEWTEXTS } from "shared-style/text";
 
@@ -9,13 +9,13 @@ export const cssObj = {
     flex-direction: row;
     gap: 0.5rem;
     border-radius: 1rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     padding: 0.625rem 1.25rem;
     align-items: center;
-    border: 1px solid ${NEWCOLORS.WHITE};
+    border: 1px solid ${COLOR.WHITE};
 
     :focus-within {
-      border: 1px solid ${NEWCOLORS.BLUE200};
+      border: 1px solid ${COLOR.BLUE200};
     }
 
     input::-ms-clear,
@@ -35,7 +35,7 @@ export const cssObj = {
   searchIcon: css`
     width: 1.5rem;
     height: 1.5rem;
-    color: ${NEWCOLORS.BLUE300};
+    color: ${COLOR.BLUE300};
 
     ${MOBILE} {
       width: 1.25rem;
@@ -48,7 +48,7 @@ export const cssObj = {
     ${NEWTEXTS.TITLE5_M1620}
 
     ::placeholder {
-      color: ${NEWCOLORS.GRAY450};
+      color: ${COLOR.GRAY450};
     }
 
     :focus {
@@ -56,8 +56,8 @@ export const cssObj = {
     }
 
     :disabled {
-      background-color: ${NEWCOLORS.GRAY200};
-      color: ${NEWCOLORS.GRAY450};
+      background-color: ${COLOR.GRAY200};
+      color: ${COLOR.GRAY450};
       cursor: not-allowed;
     }
 
@@ -67,10 +67,10 @@ export const cssObj = {
   `,
 
   grayLine: css`
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
   `,
 
   gray: css`
-    background-color: ${NEWCOLORS.GRAY50};
+    background-color: ${COLOR.GRAY50};
   `,
 };

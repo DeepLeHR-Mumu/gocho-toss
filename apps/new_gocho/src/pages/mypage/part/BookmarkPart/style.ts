@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -15,11 +15,11 @@ export const cssObj = {
     justify-content: center;
     width: 8.75rem;
     height: 3rem;
-    color: ${isSelected ? NEWCOLORS.BLUE300 : NEWCOLORS.GRAY400};
-    border-bottom: ${isSelected ? `2px solid ${NEWCOLORS.BLUE300}` : "none"};
+    color: ${isSelected ? COLOR.BLUE300 : COLOR.GRAY400};
+    border-bottom: ${isSelected ? `2px solid ${COLOR.BLUE300}` : "none"};
   `,
 
   bottomLine: css`
-    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+    border-bottom: 1px solid ${COLOR.GRAY200};
   `,
 };

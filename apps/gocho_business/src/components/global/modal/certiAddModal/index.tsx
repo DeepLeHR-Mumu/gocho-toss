@@ -1,14 +1,13 @@
 import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { FiX } from "react-icons/fi";
 
-import { NewSharedButton } from "shared-ui/common/newSharedButton";
-import { useFocusTrap } from "shared-hooks";
+import { SharedButton } from "shared-ui/common/sharedButton";
+import { useFocusTrap } from "shared-hook";
 
 import { useModal, certiModalDef } from "@/globalStates";
-
 import { commonCssObj } from "@/styles";
-import { ModalComponent } from "../modalBackground";
 
+import { ModalComponent } from "../modalBackground";
 import { CERTI_ARR } from "./constant";
 import { cssObj } from "./style";
 
@@ -98,8 +97,8 @@ export const CertiAddModal: FunctionComponent = () => {
         </div>
         <div>
           <div css={cssObj.buttonContainer}>
-            <NewSharedButton onClickHandler={() => closeModal()} buttonType="outLineGray" text="취소" width={8.75} />
-            <NewSharedButton onClickHandler={() => closeModal()} buttonType="fillBlue" text="확인" width={8.75} />
+            <SharedButton onClickHandler={() => closeModal()} buttonType="outLineGray" text="취소" width={8.75} />
+            <SharedButton onClickHandler={() => closeModal()} buttonType="fillBlue" text="확인" width={8.75} />
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -11,20 +11,20 @@ export const cssObj = {
   partContainer: css`
     flex-grow: 1;
     height: 45rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     padding: 2rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 1rem;
     box-shadow: 0 2px 16px 0 #0000000d;
   `,
 
   label: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     width: 100%;
     padding-bottom: 1rem;
     margin-bottom: 2rem;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY600};
+    border-bottom: 1px solid ${COLOR.GRAY600};
   `,
 
   title: css`
@@ -37,25 +37,25 @@ export const cssObj = {
     gap: 0 1rem;
     padding-bottom: 2rem;
     margin-bottom: 2rem;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+    border-bottom: 1px solid ${COLOR.GRAY200};
 
     > p {
       ${TEXTS.TITLE3};
-      color: ${NEWCOLORS.GRAY600};
+      color: ${COLOR.GRAY600};
     }
   `,
 
   body: css`
     ${TEXTS.BODY4};
     padding-bottom: 2rem;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+    border-bottom: 1px solid ${COLOR.GRAY200};
   `,
 
   relatedNotice: css`
     display: flex;
     align-items: center;
     padding: 1rem 1.5rem;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+    border-bottom: 1px solid ${COLOR.GRAY200};
   `,
 
   relatedLabel: css`
@@ -70,6 +70,6 @@ export const cssObj = {
 
   relatedDate: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.GRAY500};
+    color: ${COLOR.GRAY500};
   `,
 };

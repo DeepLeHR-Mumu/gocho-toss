@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEMP } from "shared-style/mediaQuery";
 
 export const cssObj = {
@@ -14,7 +14,7 @@ export const cssObj = {
     transform: translate(-50%, -50%);
     border-radius: 1.25rem;
     padding: 1.5rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     overflow: auto;
 
     ${TEMP} {

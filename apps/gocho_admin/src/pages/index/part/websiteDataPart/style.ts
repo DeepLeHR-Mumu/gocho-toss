@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const sectionTitle = css`
   font-size: 1.25rem;
@@ -23,18 +23,18 @@ export const flexBox = css`
 
 export const dataTitle = css`
   font-size: 1.25rem;
-  color: ${COLORS.GRAY30};
+  color: ${COLOR.GRAY600};
   margin-right: 1rem;
 `;
 
 export const dataTextPoint = css`
   font-size: 1.25rem;
   font-weight: 700;
-  color: ${COLORS.BLUE_FIRST40};
+  color: ${COLOR.BLUE300};
 `;
 
 export const dataText = css`
   font-size: 1.25rem;
   font-weight: 700;
-  color: ${COLORS.GRAY10};
+  color: ${COLOR.GRAY900};
 `;
