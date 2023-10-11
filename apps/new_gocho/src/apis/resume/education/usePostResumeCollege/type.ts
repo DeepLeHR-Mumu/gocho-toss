@@ -14,7 +14,7 @@ export interface PostResumeCollegeResponse {
 }
 
 export interface PostResumeCollegeDef {
-  ({ resumeId, name, ...requestObj }: RequestObjDef): Promise<PostResumeCollegeResponse>;
+  ({ resumeId, ...requestObj }: RequestObjDef): Promise<PostResumeCollegeResponse>;
 }
 
 export interface UsePostResumeCollegeProps {

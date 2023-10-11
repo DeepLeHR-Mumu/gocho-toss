@@ -18,11 +18,12 @@ export const cssObj = {
     padding: 2rem 1.25rem;
   `,
 
+  // TODO: 나중에 색상/폰트 확인하기
   contentsIndexList: css`
     > li {
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${NEWCOLORS.BLUE400};
       margin-bottom: 1.25rem;
-      ${NEWTEXTS.TITLE7}
+      ${NEWTEXTS.TITLE5_M1620}
 
       ::before {
         content: "";
