@@ -1,25 +1,25 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
     padding: 2rem;
-    width 100%;
-    background-color:${NEWCOLORS.WHITE};
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    width: 100%;
+    background-color: ${COLOR.WHITE};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 1rem;
-    `,
+  `,
 
   headerWrapper: css`
     display: flex;
     justify-content: space-between;
     padding-bottom: 1.25rem;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY700};
+    border-bottom: 1px solid ${COLOR.GRAY700};
   `,
 
   require: css`
-    color: ${NEWCOLORS.RED200};
+    color: ${COLOR.RED200};
   `,
 
   icon: css`
