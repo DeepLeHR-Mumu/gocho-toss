@@ -47,7 +47,7 @@ export const cssObj = {
 
   navLink: (isActive: boolean) => css`
     position: relative;
-    width: 4rem;
+    min-width: 4rem;
     height: 4rem;
     font-weight: ${isActive ? 700 : 500};
     font-style: normal;

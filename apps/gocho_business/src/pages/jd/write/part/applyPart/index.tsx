@@ -1,5 +1,4 @@
 import { FunctionComponent, useState } from "react";
-import { FiExternalLink } from "react-icons/fi";
 import { MdOutlineNavigateNext } from "react-icons/md";
 
 import { CheckBox } from "shared-ui/common/atom/checkbox";
@@ -10,7 +9,6 @@ import { jdMailClickEvent } from "@/ga";
 import { AddFieldButton, DeleteInputButton } from "../../component";
 import { setFieldErrorIfEmpty } from "../../../upload/util";
 import { ApplyPartProps } from "./type";
-import { APPLY_EXTERNAL_LINK_ARR } from "./constant";
 import { cssObj } from "./style";
 
 export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
@@ -247,22 +245,22 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
         </div>
       </div>
       <div css={commonCssObj.longContainer}>
-        <p css={commonCssObj.inputTitle(false)}>접수링크</p>
+        <p css={commonCssObj.inputTitle(false)}>지원 방법</p>
         <div>
           <div css={cssObj.linkLabelContainer}>
-            <label css={commonCssObj.label} htmlFor="website">
+            <label css={commonCssObj.label} htmlFor="gocho">
               <input
-                defaultChecked={linkType === "website"}
+                // defaultChecked={linkType === "email"}
                 type="radio"
                 name="link"
-                id="website"
+                id="gocho"
                 css={commonCssObj.radio}
-                onClick={() => {
-                  linkButtonClickHandler("website");
-                }}
+                // onClick={() => {
+                //   linkButtonClickHandler("email");
+                // }}
               />
               <div css={commonCssObj.radioBox} />
-              <p>채용 링크</p>
+              <p>고초대졸닷컴으로 지원받기</p>
             </label>
             <label css={commonCssObj.label} htmlFor="email">
               <input
@@ -277,6 +275,20 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
               />
               <div css={commonCssObj.radioBox} />
               <p>이메일</p>
+            </label>
+            <label css={commonCssObj.label} htmlFor="website">
+              <input
+                defaultChecked={linkType === "website"}
+                type="radio"
+                name="link"
+                id="website"
+                css={commonCssObj.radio}
+                onClick={() => {
+                  linkButtonClickHandler("website");
+                }}
+              />
+              <div css={commonCssObj.radioBox} />
+              <p>채용 링크</p>
             </label>
             <p css={commonCssObj.errorMessage}>{errors.apply_url && errors.apply_url.message}</p>
           </div>
@@ -299,20 +311,6 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                     })}
                   />
                 </label>
-                <div css={cssObj.linkButtonContainer}>
-                  {APPLY_EXTERNAL_LINK_ARR.map((linkObj) => (
-                    <a
-                      key={linkObj.url}
-                      href={linkObj.url}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      css={cssObj.externalLinkButton}
-                    >
-                      {linkObj.text}
-                      <FiExternalLink />
-                    </a>
-                  ))}
-                </div>
               </div>
             ) : (
               <div>
@@ -320,7 +318,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                   <input
                     css={commonCssObj.input(47, Boolean(errors.apply_url))}
                     onClick={() => jdMailClickEvent()}
-                    placeholder="@"
+                    placeholder="gocho@gocho.com"
                     {...register("apply_url", {
                       required: "* 채용 사이트 링크 또는 이메일을 기입해 주세요",
                       validate: (value) =>

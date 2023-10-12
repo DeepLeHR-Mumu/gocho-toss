@@ -17,6 +17,86 @@ import { JdCard, FilterCount } from "./component";
 import { OrderDef, FilterDef, SearchValues } from "./type";
 import { cssObj } from "./style";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const testData = [
+  {
+    id: 0,
+    applyUrl: "test url",
+    status: {
+      name: "등록대기" as const,
+      reason: "test reason",
+    },
+    uploader: { name: "test uploader", department: "test department", is_mine: true },
+    title: "test title",
+    cut: false,
+    view: 12,
+    bookmark: 134,
+    click: 52,
+    startTime: new Date().toString(),
+    endTime: "2023.10.30",
+    createdTime: new Date().toString(),
+    updatedTime: new Date().toString(),
+    task: "test task",
+  },
+  {
+    id: 1,
+    applyUrl: "test url",
+    status: {
+      name: "등록반려" as const,
+      reason: "test reason",
+    },
+    uploader: { name: "test uploader", department: "test department", is_mine: false },
+    title: "test title",
+    cut: false,
+    view: 12,
+    bookmark: 134,
+    click: 52,
+    startTime: new Date().toString(),
+    endTime: "2023.10.30",
+    createdTime: new Date().toString(),
+    updatedTime: new Date().toString(),
+    task: "test task",
+  },
+  {
+    id: 2,
+    applyUrl: "test url",
+    status: {
+      name: "진행중" as const,
+      reason: "test reason",
+    },
+    uploader: { name: "test uploader", department: "test department", is_mine: false },
+    title: "test title",
+    cut: false,
+    view: 12,
+    bookmark: 134,
+    click: 52,
+    startTime: new Date().toString(),
+    endTime: "2023.10.30",
+    createdTime: new Date().toString(),
+    updatedTime: new Date().toString(),
+    task: "test task",
+  },
+  {
+    id: 3,
+    applyUrl: "test url",
+    status: {
+      name: "등록대기" as const,
+      reason: "test reason",
+    },
+    uploader: { name: "test uploader", department: "test department", is_mine: true },
+    title: "test title",
+    cut: false,
+    view: 12,
+    bookmark: 134,
+    click: 52,
+    startTime: new Date().toString(),
+    endTime: "2023.10.1",
+    createdTime: new Date().toString(),
+    updatedTime: new Date().toString(),
+    task: "test task",
+  },
+];
+
 const JdListPage: NextPage = () => {
   const { setModal } = useModal();
 
@@ -76,7 +156,7 @@ const JdListPage: NextPage = () => {
   return (
     <PageLayout>
       <div css={cssObj.contentContainer}>
-        <h2 css={cssObj.title}>공고관리</h2>
+        <h2 css={cssObj.title}>공고·지원자 관리</h2>
         <div css={cssObj.filterBox}>
           {JD_FILTER_BUTTON_ARR.map((filterObj) => (
             <button
