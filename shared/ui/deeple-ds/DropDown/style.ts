@@ -56,17 +56,13 @@ export const dropDownCssObj = {
     ${NEWTEXTS.TITLE5_M1620}
   `,
 
-  // ${directionTopOrBottom}: ${location.topOrBottom}rem;
-
-  menuWrapper: (location: MenuLocation, isRightDirection = true) => {
+  menuWrapper: (location: MenuLocation) => {
     const [directionTopOrBottom, directionLeftOrRight] = location.direction.split("-");
     return css`
       position: absolute;
       z-index: 50;
       ${directionTopOrBottom}: ${location.topOrBottom}rem;
-      ${isRightDirection
-        ? `${directionLeftOrRight}: ${location.leftOrRight}rem;`
-        : `${directionLeftOrRight}: 100vh - ${location.leftOrRight}rem;`}
+      ${directionLeftOrRight}: ${location.leftOrRight}rem;
     `;
   },
 };

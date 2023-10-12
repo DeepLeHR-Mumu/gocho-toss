@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 
 import { FiEdit2, FiPlus } from "react-icons/fi";
 import { ListCardProps } from "./type";
 
 import { cssObj } from "./style";
 
-export const ListCard = ({ title, children, isRequired = false, iconType = "add", iconHandler }: ListCardProps) => {
+export const ListCard: FC<ListCardProps> = ({ title, children, isRequired = false, iconType = "add", iconHandler }) => {
   // TODO: 프로필 수정 시 editMessage 추가 하기
   const [,] = useState<boolean>(false);
 

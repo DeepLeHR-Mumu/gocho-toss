@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 import Image from "next/image";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 
@@ -6,7 +8,7 @@ import IsUturn from "@/public/image/resume/uturn.svg";
 import { cssObj } from "./style";
 import { ListItemProps } from "./type";
 
-export const ListItem = ({
+export const ListItem: FC<ListItemProps> = ({
   title,
   titleDes,
   isUturn = false,
@@ -14,7 +16,7 @@ export const ListItem = ({
   date,
   editHadnler,
   deleteHandler,
-}: ListItemProps) => (
+}) => (
   <section css={cssObj.wrapper}>
     <div css={cssObj.headerWrapper}>
       <div css={cssObj.titleWrapper}>

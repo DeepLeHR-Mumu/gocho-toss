@@ -18,7 +18,6 @@ export const cssObj = {
     padding: 2rem 1.25rem;
   `,
 
-  // TODO: 나중에 색상/폰트 확인하기
   contentsIndexList: css`
     > li {
       color: ${NEWCOLORS.GRAY600};
