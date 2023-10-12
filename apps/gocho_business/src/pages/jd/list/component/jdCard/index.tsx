@@ -2,8 +2,12 @@ import { FunctionComponent, useRef } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
+import { FiEdit3, FiTrash2, FiCopy } from "react-icons/fi";
+import Link from "next/link";
 
 import { SharedButton } from "shared-ui/common/sharedButton";
+import { Button } from "shared-ui/deeple-ds";
+
 import { useToast } from "@/globalStates";
 import { jdDeleteButtonEvent, jdDeleteDoneEvent, jdEndButtonEvent, jdEndDoneEvent, jdEditButtonEvent } from "@/ga";
 import { CommonStatusChip } from "@/components";
@@ -117,12 +121,16 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
             <p css={cssObj.countName}>공고 찜</p>
             <p css={cssObj.count(isExpired)}>{numberFormat.format(jd.bookmark)}</p>
           </div>
+          <div css={cssObj.verticalBorder} />
           <div css={cssObj.viewInfoBox}>
-            <p css={cssObj.countName}>지원하기 클릭 수</p>
+            <p css={cssObj.countName}>전체 지원자</p>
+            {/** TODO click 말고 다른 값으로 변경될 예정 */}
             <p css={cssObj.count(isExpired)}>{numberFormat.format(jd.click)}</p>
           </div>
+          <div css={cssObj.verticalBorder} />
           <div css={cssObj.viewInfoBox}>
-            <p css={cssObj.countName}>공고 조회수</p>
+            <p css={cssObj.countName}>미열람</p>
+            {/** TODO view 말고 다른 값으로 변경될 예정 */}
             <p css={cssObj.count(isExpired)}>{numberFormat.format(jd.view)}</p>
           </div>
         </div>
@@ -136,36 +144,42 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
         </div>
 
         <div css={cssObj.buttonContainer}>
-          {isViewOn && (
-            <a
-              href={`https://고초대졸.com/jd/detail/${jd.id}`}
-              css={cssObj.linkButton}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              공고보기
-            </a>
-          )}
           {isEditOn && (
-            <SharedButton
-              buttonType="outLineGray"
-              width={5}
-              text="수정"
-              onClickHandler={() => {
-                jdEditButtonEvent(jd.id);
-                router.push({
-                  pathname: INTERNAL_URL.JD_EDIT(jd.id),
-                });
-              }}
-            />
+            <>
+              <button
+                type="button"
+                css={cssObj.button}
+                onClick={() => {
+                  jdEditButtonEvent(jd.id);
+                  router.push({
+                    pathname: INTERNAL_URL.JD_EDIT(jd.id),
+                  });
+                }}
+              >
+                <FiEdit3 css={cssObj.buttonIcon} />
+                수정
+              </button>
+              <div css={cssObj.verticalBorder} />
+            </>
           )}
           {isCopyOn && (
-            <SharedButton
-              buttonType="outLineGray"
-              width={5}
-              text="복사"
-              onClickHandler={() => router.push(`${INTERNAL_URL.JD_UPLOAD}?copy=${jd.id}`)}
-            />
+            <>
+              <button
+                type="button"
+                css={cssObj.button}
+                onClick={() => router.push(`${INTERNAL_URL.JD_UPLOAD}?copy=${jd.id}`)}
+              >
+                <FiCopy css={cssObj.buttonIcon} />
+                복사
+              </button>
+              <div css={cssObj.verticalBorder} />
+            </>
+          )}
+          {isDeleteOn && (
+            <button type="button" css={cssObj.button} onClick={() => deleteJdHandler(jd.id)}>
+              <FiTrash2 css={cssObj.buttonIcon} />
+              삭제
+            </button>
           )}
           {isEndOn && (
             <SharedButton
@@ -177,15 +191,23 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
               }}
             />
           )}
-          {isDeleteOn && (
-            <SharedButton
-              buttonType="outLineGray"
-              width={5}
-              text="삭제"
-              onClickHandler={() => {
-                deleteJdHandler(jd.id);
-              }}
-            />
+          {isViewOn && (
+            <a
+              href={`https://고초대졸.com/jd/detail/${jd.id}`}
+              css={cssObj.linkButton}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              공고보기
+            </a>
+          )}
+          {isViewOn && (
+            // TODO Button 의 outline 색상의 color 속성이 BLUE300 으로 변경 시 css 삭제할 것.
+            <Link href={`/jd/${jd.id}/detail`}>
+              <Button size="small" color="outline" css={cssObj.tmpColor}>
+                지원현황보기
+              </Button>
+            </Link>
           )}
         </div>
       </div>

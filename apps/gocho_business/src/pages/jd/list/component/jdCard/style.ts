@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
 import { shorten } from "shared-style/common";
-import { TEXTS } from "shared-style/text";
+import { NEWTEXTS, TEXTS } from "shared-style/text";
 
 export const cssObj = {
   cardContainer: css`
@@ -52,6 +52,14 @@ export const cssObj = {
 
   commonInfoContainer: css`
     display: flex;
+    border: 1px solid ${COLOR.GRAY200};
+    border-radius: 1rem;
+  `,
+
+  verticalBorder: css`
+    border-right: 1px solid ${COLOR.GRAY200};
+    margin: 1rem 0;
+    min-height: 1rem;
   `,
 
   viewInfoBox: css`
@@ -59,13 +67,17 @@ export const cssObj = {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    width: 9.25rem;
-    height: 4rem;
-    border-right: 1px solid ${COLOR.GRAY200};
+    width: 8.25rem;
+    height: 6rem;
+    padding: 1rem;
 
-    :last-of-type {
-      border-right: none;
-    }
+    // width: 9.25rem;
+    // height: 4rem;
+    // border-right: 1px solid ${COLOR.GRAY200};
+
+    // :last-of-type {
+    //   border-right: none;
+    // }
   `,
 
   countName: css``,
@@ -127,5 +139,22 @@ export const cssObj = {
     color: ${COLOR.WHITE};
     background-color: ${COLOR.GRAY400};
     border-radius: 50rem;
+  `,
+
+  button: css`
+    color: ${COLOR.GRAY600};
+    ${NEWTEXTS.TITLE6_M1418}
+  `,
+
+  buttonIcon: css`
+    width: 0.75rem;
+    height: 0.75rem;
+    margin-right: 0.25rem;
+  `,
+
+  // TODO Button 의 outline 색상의 color 속성이 BLUE300 으로 변경 시 삭제할 것.
+  tmpColor: css`
+    background-color: ${COLOR.WHITE};
+    color: ${COLOR.BLUE300};
   `,
 };
