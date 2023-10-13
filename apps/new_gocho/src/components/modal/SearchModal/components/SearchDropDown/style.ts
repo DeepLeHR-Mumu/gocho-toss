@@ -1,6 +1,5 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { TEMP } from "shared-style/mediaQuery";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -27,10 +26,6 @@ export const cssObj = {
     position: absolute;
     margin-top: 1rem;
     width: 100%;
-
-    ${TEMP} {
-      width: calc(100% - 2rem);
-    }
   `,
 
   listItem: css`

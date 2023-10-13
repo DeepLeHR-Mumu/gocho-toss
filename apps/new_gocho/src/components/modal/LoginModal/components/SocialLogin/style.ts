@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
 import { COLOR } from "shared-style/color";
-import { TEMP } from "shared-style/mediaQuery";
 
 export const cssObj = {
   wrapper: css`
@@ -11,11 +10,6 @@ export const cssObj = {
     flex-direction: column;
     align-items: center;
     padding: 1.5rem;
-
-    ${TEMP} {
-      padding: 2rem;
-      overflow: auto;
-    }
   `,
 
   closeIcon: css`
@@ -24,12 +18,6 @@ export const cssObj = {
     color: ${COLOR.GRAY450};
     align-self: flex-end;
     cursor: pointer;
-
-    ${TEMP} {
-      width: 1.5rem;
-      height: 1.5rem;
-      color: ${COLOR.BLACK};
-    }
   `,
 
   mobileTitleWrapper: css`
@@ -42,35 +30,16 @@ export const cssObj = {
     margin-top: 4.5rem;
     margin-bottom: 0.5rem;
     ${NEWTEXTS.TITLE2_B2428}
-
-    ${TEMP} {
-      font-size: 2.5rem;
-      font-style: normal;
-      font-weight: 900;
-      line-height: 3.125rem;
-      margin-top: 0rem;
-      margin-bottom: 0rem;
-    }
   `,
 
   logo: css`
     margin-bottom: 2.5rem;
-
-    ${TEMP} {
-      margin-bottom: 1.25rem;
-      align-self: flex-start;
-    }
   `,
 
   subtitle: css`
     margin-bottom: 6.5rem;
     color: ${COLOR.GRAY600};
     ${NEWTEXTS.TITLE5_M1620}
-
-    ${TEMP} {
-      margin-bottom: auto;
-      align-self: flex-start;
-    }
   `,
 
   tooltip: css`
@@ -104,12 +73,6 @@ export const cssObj = {
     background-color: #fee500;
     color: #392020;
     ${NEWTEXTS.TITLE5_M1620}
-
-    ${TEMP} {
-      width: 100%;
-      margin-bottom: 2.5rem;
-      ${NEWTEXTS.TITLE6_B1418}
-    }
   `,
 
   emailLogin: css`
@@ -117,10 +80,6 @@ export const cssObj = {
     background-color: transparent;
     color: ${COLOR.GRAY600};
     ${NEWTEXTS.UNDERLINE1_M1620}
-
-    ${TEMP} {
-      margin-bottom: 3rem;
-    }
   `,
 
   mobileDescription: css`

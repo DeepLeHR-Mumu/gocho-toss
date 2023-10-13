@@ -1,5 +1,4 @@
 import { css } from "@emotion/react";
-import { TEMP } from "shared-style/mediaQuery";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -11,10 +10,6 @@ export const cssObj = {
     align-items: center;
     justify-content: space-between;
     ${NEWTEXTS.TITLE4_B1822}
-
-    ${TEMP} {
-      padding: 1.25rem 1rem 1.25rem 1rem;
-    }
   `,
 
   title: css`
