@@ -11,6 +11,8 @@ import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 import { InvisibleH2 } from "shared-ui/common/invisibleH2";
 import { SharedButton } from "shared-ui/common/sharedButton";
 import { CheckBoxWithDesc } from "shared-ui/common/checkbox_desc";
+import { ErrorResponseDef } from "shared-type/api";
+
 import { useDoLogin, useManagerProfile } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
 import { loginPageFunnelEvent, loginSuccessEvent, registerClickEvent } from "@/ga";
@@ -48,7 +50,7 @@ const LoginPage: NextPage = () => {
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     postLogin(loginObj, {
       onError: (error) => {
-        const errorResponse = error.response?.data;
+        const errorResponse = error.response?.data as ErrorResponseDef;
         if (errorResponse?.error_code === "BLANK_MEMBER" || errorResponse?.error_code === "NOT_MATCHED_INFO") {
           setError("email", { type: "custom", message: LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO });
           setError("password", { type: "custom", message: LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO });

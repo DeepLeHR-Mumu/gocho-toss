@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { SharedButton } from "shared-ui/common/sharedButton";
-import { useDisabledKeydownSubmit } from "shared-hook";
+import { useDisabledKeydownSubmit, usePreventRouting } from "shared-hook";
 
 import { useEditJd, useJdDetail } from "@/api";
 import { useToast } from "@/globalStates";
@@ -13,6 +13,7 @@ import { GlobalLayout, LoadingScreen, PageLayout } from "@/component";
 import type { NextPageWithLayout } from "@/types";
 import { INTERNAL_URL } from "@/constant";
 import { jdArrKeyObj } from "@/api/jd/useJdArr/type";
+
 import { CommonDataPart, PositionRequiredDataPart, PositionTaskDataPart, PositionEtcDataPart } from "./part";
 import { JobFormValues } from "./type";
 import { cssObj } from "./style";
@@ -35,6 +36,8 @@ const JdEdit: NextPageWithLayout = () => {
   const { mutate: editJobMutate } = useEditJd();
 
   useDisabledKeydownSubmit();
+
+  usePreventRouting(Boolean(Object.keys(jobForm.formState.dirtyFields).length));
 
   useEffect(() => {
     const newStartTime = dayjs(jobData?.startTime, "YYYY-MM-DDTHH:mm:ss").add(9, "hour").toDate();

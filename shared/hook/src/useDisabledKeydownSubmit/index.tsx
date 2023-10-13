@@ -2,21 +2,18 @@ import { useEffect } from "react";
 
 export const useDisabledKeydownSubmit = () => {
   useEffect(() => {
-    document.addEventListener("keydown", (keyDownEvent: KeyboardEvent) => {
+    const handleKeyDown = (keyDownEvent: KeyboardEvent) => {
       const target = keyDownEvent.target as HTMLInputElement | HTMLTextAreaElement;
 
       if (keyDownEvent.key === "Enter" && !["TEXTAREA"].includes(target.tagName)) {
         keyDownEvent.preventDefault();
       }
-    });
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener("keydown", (keyDownEvent) => {
-        const target = keyDownEvent.target as HTMLInputElement | HTMLTextAreaElement;
-        if (keyDownEvent.key === "Enter" && !["TEXTAREA"].includes(target.tagName)) {
-          keyDownEvent.preventDefault();
-        }
-      });
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 };
