@@ -1,4 +1,3 @@
-
 export const COLOR = {
   BLUE50: "#EFF5FC",
   BLUE100: "#E8F3FF",

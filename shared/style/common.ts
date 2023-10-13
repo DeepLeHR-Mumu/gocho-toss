@@ -1,4 +1,3 @@
-import { PC_HOVER } from "./mediaQuery";
 import { COLOR } from "./color";
 
 interface shortenDef {
@@ -36,12 +35,3 @@ export const skeletonCreatorCSS: skeletonCreatorCSS = (minWidth = "100%") => {
     white-space: nowrap;
   `;
 };
-
-export const hoverShadow = `
-  ${PC_HOVER} {
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 2px 2px 0 #00000040;
-    }
-  }
-`;
