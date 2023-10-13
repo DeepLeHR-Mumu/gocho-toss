@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -31,13 +31,13 @@ export const cssObj = {
     width: 100%;
     height: 2.5rem;
     padding: 0 1rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     transition: 0.1s;
-    color: ${isSelected ? `${NEWCOLORS.BLUE300}` : `${NEWCOLORS.BLACK}`};
+    color: ${isSelected ? `${COLOR.BLUE300}` : `${COLOR.BLACK}`};
     ${TEXTS.TITLE5};
 
     :hover {
-      background-color: ${NEWCOLORS.GRAY100};
+      background-color: ${COLOR.GRAY100};
     }
   `,
 
@@ -55,11 +55,11 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 0.5rem;
     width: 6.625rem;
     height: 3.25rem;
-    background-color: ${NEWCOLORS.GRAY200};
+    background-color: ${COLOR.GRAY200};
     padding: 0 1rem;
     font-weight: 400;
   `,
@@ -69,17 +69,17 @@ export const cssObj = {
     padding: 0.5rem 0.75rem;
     font-size: 0.875rem;
     border-radius: 5px;
-    border: 1px solid ${NEWCOLORS.GRAY400};
-    background-color: ${NEWCOLORS.GRAY50};
+    border: 1px solid ${COLOR.GRAY400};
+    background-color: ${COLOR.GRAY50};
   `,
 
   hireNumberButton: css`
     height: 2.25rem;
     margin-top: 1rem;
     padding: 0 1rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
-    background-color: ${NEWCOLORS.WHITE};
-    color: ${NEWCOLORS.GRAY600};
+    border: 1px solid ${COLOR.GRAY200};
+    background-color: ${COLOR.WHITE};
+    color: ${COLOR.GRAY600};
     border-radius: 0.5rem;
   `,
 
@@ -89,7 +89,7 @@ export const cssObj = {
 
   borderLine: css`
     height: 1.25rem;
-    border-left: 1px solid ${NEWCOLORS.GRAY200};
+    border-left: 1px solid ${COLOR.GRAY200};
     margin-right: 1rem;
   `,
 
@@ -103,7 +103,7 @@ export const cssObj = {
   optionalInput: css`
     display: flex;
     align-items: center;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 0.5rem;
     width: 3.5rem;
     margin: 0 0.5rem 0 1rem;

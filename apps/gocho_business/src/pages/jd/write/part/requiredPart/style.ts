@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   selectedCertiContainer: css`
@@ -15,8 +15,8 @@ export const cssObj = {
     width: fit-content;
     padding: 0.75rem 1rem;
     border-radius: 1.5rem;
-    background-color: ${NEWCOLORS.BLUE100};
-    color: ${NEWCOLORS.BLUE300};
+    background-color: ${COLOR.BLUE100};
+    color: ${COLOR.BLUE300};
   `,
 
   smallDeleteButton: css`
@@ -25,6 +25,6 @@ export const cssObj = {
       width: 1.25rem;
       height: 1.25rem;
     }
-    color: ${NEWCOLORS.BLUE300};
+    color: ${COLOR.BLUE300};
   `,
 };

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -22,7 +22,7 @@ export const cssObj = {
   maleBar: (percent: number) => css`
     width: 2rem;
     height: ${percent}%;
-    background-color: ${NEWCOLORS.BLUE250};
+    background-color: ${COLOR.BLUE250};
     border-radius: 0.5rem 0.5rem 0 0;
     position: relative;
 
@@ -32,7 +32,7 @@ export const cssObj = {
       position: absolute;
       top: -1.375rem;
       text-align: center;
-      color: ${NEWCOLORS.BLUE250};
+      color: ${COLOR.BLUE250};
       ${NEWTEXTS.TITLE6_M1418}
     }
   `,
@@ -40,7 +40,7 @@ export const cssObj = {
   femaleBar: (percent: number) => css`
     width: 2rem;
     height: ${percent}%;
-    background-color: ${NEWCOLORS.RED100};
+    background-color: ${COLOR.RED100};
     border-radius: 0.5rem 0.5rem 0 0;
     position: relative;
 
@@ -50,13 +50,13 @@ export const cssObj = {
       position: absolute;
       top: -1.375rem;
       text-align: center;
-      color: ${NEWCOLORS.RED100};
+      color: ${COLOR.RED100};
       ${NEWTEXTS.TITLE6_M1418}
     }
   `,
 
   contentTitle: css`
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     margin-bottom: 0.5rem;
     ${NEWTEXTS.TITLE4_M1822}
   `,

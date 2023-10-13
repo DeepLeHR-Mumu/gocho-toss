@@ -1,13 +1,13 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   wrapper: css``,
   title: css`
     font-size: 1.25rem;
     font-weight: 500;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
     margin-bottom: 1rem;
     display: block;
   `,
@@ -26,7 +26,7 @@ export const cssObj = {
     padding: 0 3px;
     height: 1.875rem;
     width: fit-content;
-    border: 0.13rem solid ${isFocus ? COLORS.BLUE_FIRST40 : "transparent"};
+    border: 0.13rem solid ${isFocus ? COLOR.BLUE300 : "transparent"};
     border-radius: 0.3125rem;
   `,
   checkBoxInput: css`
@@ -35,10 +35,10 @@ export const cssObj = {
     margin: 0;
 
     :checked ~ div {
-      background-color: ${COLORS.BLUE_FIRST40};
+      background-color: ${COLOR.BLUE300};
       border: 0;
       > svg {
-        color: ${COLORS.GRAY100};
+        color: ${COLOR.WHITE};
         display: block;
       }
     }
@@ -49,8 +49,8 @@ export const cssObj = {
     justify-content: center;
     width: 1.125rem;
     height: 1.125rem;
-    border: 1px solid ${COLORS.GRAY60};
-    background-color: ${isDisabled ? COLORS.GRAY90 : COLORS.GRAY100};
+    border: 1px solid ${COLOR.GRAY400};
+    background-color: ${isDisabled ? COLOR.GRAY50 : COLOR.WHITE};
     border-radius: 5px;
     margin-right: 0.5rem;
 
@@ -61,34 +61,34 @@ export const cssObj = {
   dateInput: css`
     width: 100%;
     border-radius: 0.625rem;
-    border: 1px solid ${COLORS.GRAY10};
+    border: 1px solid ${COLOR.GRAY900};
     padding: 0 1rem;
     height: 2.5rem;
-    background-color: ${COLORS.GRAY100};
+    background-color: ${COLOR.WHITE};
   `,
   checkboxDesc: css`
     font-size: 0.875rem;
     font-weight: 400;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
   `,
   infoBox: css``,
   requiredTitle: css`
     font-size: 1.125rem;
     font-weight: 500;
-    color: ${COLORS.GRAY20};
+    color: ${COLOR.GRAY700};
     margin-bottom: 1rem;
     display: block;
     padding-left: 0.5rem;
-    border-left: 3px solid ${COLORS.BLUE_SECOND70};
+    border-left: 3px solid ${COLOR.BLUE200};
   `,
   noRequiredTitle: css`
     font-size: 1.125rem;
     font-weight: 500;
-    color: ${COLORS.GRAY20};
+    color: ${COLOR.GRAY700};
     margin-bottom: 1rem;
     display: block;
     padding-left: 0.5rem;
-    border-left: 3px solid ${COLORS.ERROR_YELLOW50};
+    border-left: 3px solid ${COLOR.YELLOW100};
   `,
   flexFullBox: css`
     display: flex;
@@ -107,10 +107,10 @@ export const cssObj = {
     flex-direction: column;
   `,
   textareaWarning: css`
-    background-color: ${COLORS.BLUE_SECOND70};
+    background-color: ${COLOR.BLUE200};
     padding: 0.25rem 1rem;
     font-size: 0.875rem;
-    color: ${COLORS.BLUE_FIRST40};
+    color: ${COLOR.BLUE300};
     width: fit-content;
     margin: 0.25rem 0;
   `,
@@ -119,9 +119,9 @@ export const cssObj = {
     padding: 1rem;
     max-width: 40rem;
     border-radius: 0.625rem;
-    border: 1px solid ${COLORS.GRAY10};
+    border: 1px solid ${COLOR.GRAY900};
     font-size: 1rem;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
     min-height: 8rem;
   `,
   flexLiCSS: css`
@@ -135,24 +135,24 @@ export const cssObj = {
     }
   `,
   point: css`
-    color: ${COLORS.BLUE_FIRST40};
+    color: ${COLOR.BLUE300};
     font-weight: 500;
   `,
   inputCSS: css`
     width: 100%;
     max-width: 40rem;
-    border: 1px solid ${COLORS.GRAY10};
+    border: 1px solid ${COLOR.GRAY900};
     padding: 0 1rem;
     font-size: 1rem;
     font-weight: 400;
     border-radius: 0.625rem;
     height: 2.5rem;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
     margin-right: 1rem;
   `,
   buttonCSS: css`
-    background-color: ${COLORS.BLUE_FIRST40};
-    color: ${COLORS.GRAY100};
+    background-color: ${COLOR.BLUE300};
+    color: ${COLOR.WHITE};
     font-size: 1rem;
     width: fit-content;
     padding: 0 1rem;
@@ -171,7 +171,7 @@ export const cssObj = {
 
     p {
       font-size: 1rem;
-      color: ${COLORS.GRAY20};
+      color: ${COLOR.GRAY700};
       padding-left: 0.25rem;
       padding: 0.25rem;
     }
@@ -194,7 +194,7 @@ export const cssObj = {
         transform: translate(-50%, -50%);
         width: 0.625rem;
         height: 0.625rem;
-        background-color: ${COLORS.GRAY10};
+        background-color: ${COLOR.GRAY900};
         border-radius: 50%;
         content: "";
       }
@@ -206,15 +206,15 @@ export const cssObj = {
     align-items: center;
   `,
   radioBox: css`
-    border: 2px solid ${COLORS.GRAY10};
+    border: 2px solid ${COLOR.GRAY900};
     width: 1.125rem;
     height: 1.125rem;
     position: relative;
-    background-color: ${COLORS.GRAY100};
+    background-color: ${COLOR.WHITE};
     border-radius: 50%;
     margin-right: 0.25rem;
   `,
   labelTitle: css`
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
   `,
 };

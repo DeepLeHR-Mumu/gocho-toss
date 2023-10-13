@@ -1,6 +1,6 @@
 import { Fragment, createElement } from "react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { dateConverter } from "shared-util";
 
 import { JdDetailObjDef } from "@/apis/jd/type/jdDetail";
@@ -105,7 +105,7 @@ export const getRecruitDetailContents = (recruitDetail: {
         createElement(
           "span",
           {
-            style: { marginLeft: "0.75rem", color: NEWCOLORS.GRAY600 },
+            style: { marginLeft: "0.75rem", color: COLOR.GRAY600 },
           },
           contractType.conversion_rate ? `(전환율 ${contractType.conversion_rate}%)` : ""
         ),

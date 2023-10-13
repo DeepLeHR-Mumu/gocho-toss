@@ -1,7 +1,6 @@
-import { privacyExecutionDesc, privacyArr, CTOINFO } from "shared-constant";
-
 import { PrivacyDef } from "./type";
 import { cssObj } from "./style";
+import { privacyExecutionDesc, privacyArr, CTOINFO } from "./constant";
 
 export const PrivacyPart = () => (
   <section css={cssObj.wrapper}>

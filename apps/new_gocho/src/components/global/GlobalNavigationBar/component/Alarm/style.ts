@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -10,7 +10,7 @@ export const cssObj = {
       position: absolute;
       top: 0;
       left: 0;
-      color: ${NEWCOLORS.RED300};
+      color: ${COLOR.RED300};
     }
   `,
 
@@ -20,13 +20,13 @@ export const cssObj = {
     left: 0;
     width: 0.25rem;
     height: 0.25rem;
-    background-color: ${NEWCOLORS.RED200};
+    background-color: ${COLOR.RED200};
     border-radius: 50%;
   `,
 
   menuHeader: css`
     margin-left: auto;
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
 
     > span {
       margin-left: 0.5rem;
@@ -34,7 +34,7 @@ export const cssObj = {
     }
 
     :hover {
-      color: ${NEWCOLORS.BLUE300};
+      color: ${COLOR.BLUE300};
     }
   `,
 
@@ -45,7 +45,7 @@ export const cssObj = {
     flex-grow: 1;
     align-items: flex-start;
     gap: 1rem;
-    ${!isRead && `background-color: ${NEWCOLORS.BLUE50};`}
+    ${!isRead && `background-color: ${COLOR.BLUE50};`}
 
     > p {
       word-break: break-all;
@@ -54,7 +54,7 @@ export const cssObj = {
     }
 
     > span {
-      color: ${NEWCOLORS.GRAY600};
+      color: ${COLOR.GRAY600};
       ${NEWTEXTS.TITLE5_M1620}
     }
 
@@ -63,7 +63,7 @@ export const cssObj = {
       align-items: center;
       text-align: left;
       gap: 0.5rem;
-      color: ${isRead ? NEWCOLORS.BLACK : NEWCOLORS.BLUE300};
+      color: ${isRead ? COLOR.BLACK : COLOR.BLUE300};
       ${NEWTEXTS.TITLE5_B1620}
 
       > svg {
@@ -78,7 +78,7 @@ export const cssObj = {
     justify-content: center;
     width: 22.5rem;
     height: 7.875rem;
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     ${NEWTEXTS.TITLE5_M1620};
     padding-bottom: 2rem;
   `,

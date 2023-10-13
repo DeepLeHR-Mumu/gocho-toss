@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -12,8 +12,8 @@ export const cssObj = {
     border-radius: 1rem;
     padding: 1.25rem 1rem;
     margin-bottom: 2rem;
-    border: 1px solid ${NEWCOLORS.BLUE200};
-    background-color: ${NEWCOLORS.BLUE50};
+    border: 1px solid ${COLOR.BLUE200};
+    background-color: ${COLOR.BLUE50};
   `,
 
   authLink: css`
@@ -28,11 +28,11 @@ export const cssObj = {
   icon: css`
     display: flex;
     align-items: center;
-    color: ${NEWCOLORS.BLUE200};
+    color: ${COLOR.BLUE200};
   `,
 
   desc: css`
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     ${TEXTS.BODY2};
   `,
 
@@ -43,7 +43,7 @@ export const cssObj = {
 
   inputTitle: css`
     ${TEXTS.TITLE7};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     margin-bottom: 0.75rem;
   `,
 
@@ -56,13 +56,13 @@ export const cssObj = {
   `,
 
   termLink: css`
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     text-decoration: underline;
   `,
 
   errorMessage: css`
     ${TEXTS.BODY3};
-    color: ${NEWCOLORS.RED300};
+    color: ${COLOR.RED300};
     margin-top: 1.5rem;
     text-align: center;
   `,

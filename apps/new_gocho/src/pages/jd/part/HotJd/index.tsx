@@ -4,10 +4,10 @@ import Slider from "react-slick";
 import Image from "next/image";
 import Link from "next/link";
 
-import jobiChatting from "shared-image/global/jobi/chatting.png";
 import { dummyArrCreator } from "shared-util";
 
 import { useTopBannerArr } from "@/apis/ads";
+import jobiChatting from "@/public/image/jobi/chatting.png";
 import { JdCard } from "@/components/common/JdCard";
 import { INTERNAL_URL } from "@/pages/constants";
 

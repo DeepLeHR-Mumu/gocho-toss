@@ -1,9 +1,9 @@
 import { css } from "@emotion/react";
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 
+import axios from "axios";
 import { useCompanyCommentToggle } from "@/apis/company";
 
-import axios from "axios";
 import { CommentThumbsProps } from "./type";
 import { cssObj } from "./style";
 

@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { NewSharedButton } from "shared-ui/common/newSharedButton";
+import { SharedButton } from "shared-ui/common/sharedButton";
 
 import { ModalComponent } from "../modalBackground";
 import { ConfirmModalProps } from "./type";
@@ -17,10 +17,10 @@ export const ConfirmModal: FunctionComponent<ConfirmModalProps> = ({ title, desc
       {(cancel || confirm) && (
         <div css={cssObj.buttonContainer}>
           {cancel && (
-            <NewSharedButton buttonType="outLineGray" text={cancel.name} width={8.75} onClickHandler={cancel.onClick} />
+            <SharedButton buttonType="outLineGray" text={cancel.name} width={8.75} onClickHandler={cancel.onClick} />
           )}
           {confirm && (
-            <NewSharedButton buttonType="fillBlue" text={confirm.name} width={8.75} onClickHandler={confirm.onClick} />
+            <SharedButton buttonType="fillBlue" text={confirm.name} width={8.75} onClickHandler={confirm.onClick} />
           )}
         </div>
       )}

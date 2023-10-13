@@ -1,11 +1,11 @@
 import { css } from "@emotion/react";
 import { shorten } from "shared-style/common";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const sectionContainer = css`
   margin: 2rem 0;
   padding: 1rem;
-  background-color: ${COLORS.BLUE_SECOND90};
+  background-color: ${COLOR.BLUE50};
 `;
 
 export const tableTitle = css`

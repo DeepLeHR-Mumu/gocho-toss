@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 import { MenuLocation } from "./type";
@@ -7,9 +7,9 @@ import { MenuLocation } from "./type";
 export const menuCssObj = {
   menuContainer: (width: number) => css`
     width: ${width / 16}rem;
-    border: 1px solid ${NEWCOLORS.BLACK};
+    border: 1px solid ${COLOR.BLACK};
     border-radius: 0.75rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     overflow: hidden;
   `,
 
@@ -23,7 +23,7 @@ export const menuCssObj = {
     display: flex;
     flex-direction: row;
     padding: 0.625rem 1rem;
-    color: ${focused ? NEWCOLORS.BLUE300 : NEWCOLORS.BLACK};
+    color: ${focused ? COLOR.BLUE300 : COLOR.BLACK};
     cursor: ${clickable ? "pointer" : "auto"};
     ${focused ? NEWTEXTS.TITLE5_B1620 : NEWTEXTS.TITLE5_M1620};
   `,
@@ -38,7 +38,7 @@ export const menuCssObj = {
     width: 100%;
     border-radius: 0 0 0.75rem 0.75rem;
     cursor: ${clickable ? "pointer" : "auto"};
-    background-color: ${NEWCOLORS.GRAY50};
+    background-color: ${COLOR.GRAY50};
     ${NEWTEXTS.TITLE5_M1620}
   `,
 };

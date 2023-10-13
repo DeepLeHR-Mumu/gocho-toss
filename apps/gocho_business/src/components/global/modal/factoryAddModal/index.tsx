@@ -3,17 +3,16 @@ import { useForm } from "react-hook-form";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { FiX } from "react-icons/fi";
 
-import { useFocusTrap } from "shared-hooks";
+import { SharedRadioButton } from "shared-ui/common/sharedRadioButton";
+import { SharedButton } from "shared-ui/common/sharedButton";
+import { useFocusTrap } from "shared-hook";
 
 import { useModal } from "@/globalStates";
 import { useAddFactory } from "@/apis";
 import { commonCssObj } from "@/styles";
-
 import { factoryUploadConfirmEvent, factoryUploadDoneEvent } from "@/ga";
-import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
-import { NewSharedButton } from "shared-ui/common/newSharedButton";
-import { ModalComponent } from "../modalBackground";
 
+import { ModalComponent } from "../modalBackground";
 import { cssObj } from "./style";
 import { FactoryRegisterFormValues } from "./type";
 
@@ -248,8 +247,8 @@ export const FactoryAddModal: FunctionComponent = () => {
             </div>
           </div>
           <div css={cssObj.buttonContainer}>
-            <NewSharedButton onClickHandler={() => closeModal()} buttonType="outLineGray" text="취소" width={8.75} />
-            <NewSharedButton onClickHandler="submit" buttonType="fillBlue" text="등록하기" width={8.75} />
+            <SharedButton onClickHandler={() => closeModal()} buttonType="outLineGray" text="취소" width={8.75} />
+            <SharedButton onClickHandler="submit" buttonType="fillBlue" text="등록하기" width={8.75} />
           </div>
         </form>
       </div>

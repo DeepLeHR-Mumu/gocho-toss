@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -11,7 +11,7 @@ export const cssObj = {
     position: sticky;
     top: 8.75rem;
     padding: 1rem 0;
-    background: ${NEWCOLORS.WHITE};
+    background: ${COLOR.WHITE};
     z-index: 20;
   `,
 
@@ -39,11 +39,11 @@ export const cssObj = {
     min-width: 5rem;
     padding: 0.625rem;
     margin-right: 1.25rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 0.5rem;
 
     > span {
-      color: ${isBookmarked ? NEWCOLORS.BLACK : NEWCOLORS.GRAY200};
+      color: ${isBookmarked ? COLOR.BLACK : COLOR.GRAY200};
     }
   `,
 };

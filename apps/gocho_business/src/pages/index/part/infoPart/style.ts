@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { TEXTS } from "shared-style/text";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { shorten } from "shared-style/common";
 
 export const cssObj = {
@@ -19,14 +19,14 @@ export const cssObj = {
   infoTypeButton: (isActive: boolean) => css`
     ${TEXTS.TITLE9};
     padding: 0.75rem 1.25rem;
-    background-color: ${isActive ? `${NEWCOLORS.BLUE300}` : `${NEWCOLORS.WHITE}`};
-    color: ${isActive ? `${NEWCOLORS.WHITE}` : `${NEWCOLORS.GRAY600}`};
+    background-color: ${isActive ? `${COLOR.BLUE300}` : `${COLOR.WHITE}`};
+    color: ${isActive ? `${COLOR.WHITE}` : `${COLOR.GRAY600}`};
     border-radius: 1.5rem;
   `,
 
   moreButton: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
   `,
 
   infoList: css`
@@ -52,6 +52,6 @@ export const cssObj = {
 
   infoDate: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.GRAY500};
+    color: ${COLOR.GRAY500};
   `,
 };

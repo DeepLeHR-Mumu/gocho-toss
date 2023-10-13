@@ -2,8 +2,8 @@ import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
-import { NewSharedButton } from "shared-ui/common/newSharedButton";
 
+import { SharedButton } from "shared-ui/common/sharedButton";
 import { useCheckEmail } from "@/apis";
 import { commonCssObj } from "@/styles";
 import { registerEmailNextClickEvent } from "@/ga";
@@ -99,7 +99,7 @@ export const IdPasswordPart: FunctionComponent<FindCompanyPartProps> = ({ slider
         </div>
         <p css={cssObj.errorMsg}>{errors.email?.message || errors.password?.message}</p>
       </div>
-      <NewSharedButton
+      <SharedButton
         buttonType={
           !isEmail || !isPassword || errors.email?.message || errors.password?.message ? "disabled" : "fillBlue"
         }

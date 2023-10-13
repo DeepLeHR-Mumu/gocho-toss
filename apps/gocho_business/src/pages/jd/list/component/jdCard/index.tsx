@@ -3,8 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
-import { NewSharedButton } from "shared-ui/common/newSharedButton";
-
+import { SharedButton } from "shared-ui/common/sharedButton";
 import { useToast } from "@/globalStates";
 import { jdDeleteButtonEvent, jdDeleteDoneEvent, jdEndButtonEvent, jdEndDoneEvent, jdEditButtonEvent } from "@/ga";
 import { CommonStatusChip } from "@/components";
@@ -148,7 +147,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
             </a>
           )}
           {isEditOn && (
-            <NewSharedButton
+            <SharedButton
               buttonType="outLineGray"
               width={5}
               text="수정"
@@ -161,7 +160,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
             />
           )}
           {isCopyOn && (
-            <NewSharedButton
+            <SharedButton
               buttonType="outLineGray"
               width={5}
               text="복사"
@@ -169,7 +168,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
             />
           )}
           {isEndOn && (
-            <NewSharedButton
+            <SharedButton
               buttonType="outLineGray"
               width={5}
               text="마감"
@@ -179,7 +178,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
             />
           )}
           {isDeleteOn && (
-            <NewSharedButton
+            <SharedButton
               buttonType="outLineGray"
               width={5}
               text="삭제"

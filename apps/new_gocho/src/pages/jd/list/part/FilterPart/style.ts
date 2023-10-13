@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   titleWrapper: css`
@@ -14,32 +14,32 @@ export const cssObj = {
 
     > span {
       margin-left: 1.75rem;
-      color: ${NEWCOLORS.GRAY600};
+      color: ${COLOR.GRAY600};
       ${NEWTEXTS.TITLE4_M1822}
     }
 
     > button {
       margin-left: auto;
-      color: ${NEWCOLORS.GRAY600};
+      color: ${COLOR.GRAY600};
       ${NEWTEXTS.TITLE4_M1822}
 
       :hover {
-        color: ${NEWCOLORS.BLUE300};
+        color: ${COLOR.BLUE300};
       }
     }
   `,
 
   wrapper: css`
     border-radius: 0.5rem;
-    background-color: ${NEWCOLORS.WHITE};
-    border: 1px solid ${NEWCOLORS.GRAY450};
+    background-color: ${COLOR.WHITE};
+    border: 1px solid ${COLOR.GRAY450};
     display: flex;
     flex-direction: row;
     overflow: hidden;
   `,
 
   header: css`
-    background-color: ${NEWCOLORS.GRAY50};
+    background-color: ${COLOR.GRAY50};
     display: flex;
     flex-direction: row;
 
@@ -49,11 +49,11 @@ export const cssObj = {
   `,
 
   column: css`
-    border-right: 1px solid ${NEWCOLORS.GRAY200};
+    border-right: 1px solid ${COLOR.GRAY200};
     flex: 1;
     > h5 {
       padding: 1.0625rem 1rem;
-      background-color: ${NEWCOLORS.GRAY50};
+      background-color: ${COLOR.GRAY50};
       ${NEWTEXTS.TITLE4_B1822}
     }
 
@@ -75,14 +75,14 @@ export const cssObj = {
     ${NEWTEXTS.TITLE5_M1620}
 
     :hover {
-      color: ${NEWCOLORS.BLUE300};
+      color: ${COLOR.BLUE300};
       ${NEWTEXTS.TITLE5_M1620}
     }
   `,
 
   appliedFilter: css`
-    color: ${NEWCOLORS.BLUE300};
-    background-color: ${NEWCOLORS.BLUE50};
+    color: ${COLOR.BLUE300};
+    background-color: ${COLOR.BLUE50};
     ${NEWTEXTS.TITLE5_M1620}
   `,
 
@@ -90,7 +90,7 @@ export const cssObj = {
     margin-top: 1rem;
     padding: 1.75rem 1.5rem;
     border-radius: 0.5rem;
-    border: 1px solid ${NEWCOLORS.GRAY450};
+    border: 1px solid ${COLOR.GRAY450};
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -106,13 +106,13 @@ export const cssObj = {
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
-    color: ${NEWCOLORS.BLUE300};
+    color: ${COLOR.BLUE300};
     ${NEWTEXTS.TITLE5_M1620}
 
     > svg {
       width: 1.25rem;
       height: 1.25rem;
-      color: ${NEWCOLORS.GRAY450};
+      color: ${COLOR.GRAY450};
     }
   `,
 
@@ -126,7 +126,7 @@ export const cssObj = {
 
     button:nth-child(1),
     button:nth-child(2) {
-      color: ${NEWCOLORS.GRAY600};
+      color: ${COLOR.GRAY600};
       ${NEWTEXTS.TITLE6_M1418}
 
       svg {

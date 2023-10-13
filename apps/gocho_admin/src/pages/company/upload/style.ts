@@ -1,8 +1,8 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const formContainer = css`
-  background-color: ${COLORS.BLUE_SECOND90};
+  background-color: ${COLOR.BLUE50};
   padding: 1rem;
 `;
 
@@ -15,9 +15,9 @@ export const inputLabel = css`
 export const addFactoryButton = css`
   margin: 0 0 1.5rem auto;
   padding: 0.25rem 1rem;
-  border: 2px solid ${COLORS.GRAY10};
-  background-color: ${COLORS.BLUE_NEON40};
-  color: ${COLORS.GRAY100};
+  border: 2px solid ${COLOR.GRAY900};
+  background-color: ${COLOR.BLUE300};
+  color: ${COLOR.WHITE};
 `;
 
 export const submitButton = css`
@@ -25,13 +25,13 @@ export const submitButton = css`
   margin: 0 auto;
   padding: 0.5rem 1rem;
   width: 50%;
-  border: 2px solid ${COLORS.GRAY10};
-  background-color: ${COLORS.BLUE_FIRST40};
-  color: ${COLORS.GRAY100};
+  border: 2px solid ${COLOR.GRAY900};
+  background-color: ${COLOR.BLUE300};
+  color: ${COLOR.WHITE};
 `;
 
 export const checkMsgBox = css`
-  color: ${COLORS.BLUE_FIRST40};
+  color: ${COLOR.BLUE300};
   font-weight: 500;
   text-align: center;
   margin-top: 1rem;

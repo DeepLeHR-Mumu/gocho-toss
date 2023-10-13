@@ -2,8 +2,7 @@ import { FunctionComponent, useState } from "react";
 import { FiExternalLink } from "react-icons/fi";
 import { MdOutlineNavigateNext } from "react-icons/md";
 
-import { CheckBox } from "shared-ui/common/atom/checkbox";
-
+import { CheckBox } from "shared-ui/common/checkbox";
 import { commonCssObj } from "@/styles";
 
 import { jdMailClickEvent } from "@/ga";

@@ -6,8 +6,8 @@ import Link from "next/link";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { PWD_REGEXP } from "shared-constant";
-import { NewSharedButton } from "shared-ui/common/newSharedButton";
 
+import { SharedButton } from "shared-ui/common/sharedButton";
 import { PageLayout } from "@/components";
 import { mypageFunnelEvent } from "@/ga";
 import { useEditUserPassword, useManagerProfile } from "@/apis";
@@ -121,7 +121,7 @@ const MyPage: NextPage = () => {
             </ul>
             <div css={cssObj.infoWrapper}>
               <strong css={cssObj.infoTitle}>비밀번호</strong>
-              <NewSharedButton
+              <SharedButton
                 buttonType="outLineGray"
                 text="비밀번호 변경"
                 width={7}
@@ -264,7 +264,7 @@ const MyPage: NextPage = () => {
             로 문의 부탁드립니다
           </p>
           <div css={cssObj.buttonWrapper}>
-            <NewSharedButton
+            <SharedButton
               buttonType={
                 isOriginPassword && isNewPassword && isCheckPassword && Object.keys(errors).length === 0
                   ? "fillBlue"

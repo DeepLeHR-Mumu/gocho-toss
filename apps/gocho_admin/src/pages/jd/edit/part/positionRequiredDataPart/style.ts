@@ -1,28 +1,28 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 const defaultMinMaxCSS = css`
   width: 5rem;
   padding: 0 1rem;
   border-radius: 0.625rem;
   height: 2.5rem;
-  background-color: ${COLORS.GRAY100};
-  border: 1px solid ${COLORS.GRAY10};
+  background-color: ${COLOR.WHITE};
+  border: 1px solid ${COLOR.GRAY900};
   font-size: 1rem;
-  color: ${COLORS.GRAY10};
+  color: ${COLOR.GRAY900};
 `;
 
 export const cssObj = {
   wrapper: css`
-    border-bottom: 1px solid ${COLORS.GRAY70};
+    border-bottom: 1px solid ${COLOR.GRAY300};
     padding-bottom: 1rem;
     margin-bottom: 1rem;
   `,
   title: css`
     font-size: 1.25rem;
     font-weight: 500;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
     margin-bottom: 1rem;
     display: block;
   `,
@@ -45,20 +45,20 @@ export const cssObj = {
   requiredTitle: css`
     font-size: 1.125rem;
     font-weight: 500;
-    color: ${COLORS.GRAY20};
+    color: ${COLOR.GRAY700};
     margin-bottom: 1rem;
     display: block;
     padding-left: 0.5rem;
-    border-left: 3px solid ${COLORS.BLUE_SECOND70};
+    border-left: 3px solid ${COLOR.BLUE200};
   `,
   noRequiredTitle: css`
     font-size: 1.125rem;
     font-weight: 500;
-    color: ${COLORS.GRAY20};
+    color: ${COLOR.GRAY700};
     margin-bottom: 1rem;
     display: block;
     padding-left: 0.5rem;
-    border-left: 3px solid ${COLORS.ERROR_YELLOW50};
+    border-left: 3px solid ${COLOR.YELLOW100};
   `,
   flexBox: css`
     display: flex;
@@ -70,7 +70,7 @@ export const cssObj = {
   `,
   radioDesc: css`
     font-size: 0.875rem;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
     font-weight: 400;
     padding-left: 0.5rem;
   `,
@@ -79,10 +79,10 @@ export const cssObj = {
     flex-direction: column;
   `,
   textareaWarning: css`
-    background-color: ${COLORS.BLUE_SECOND70};
+    background-color: ${COLOR.BLUE200};
     padding: 0.25rem 1rem;
     font-size: 0.875rem;
-    color: ${COLORS.BLUE_FIRST40};
+    color: ${COLOR.BLUE300};
     width: fit-content;
     margin: 0.25rem 0;
   `,
@@ -91,9 +91,9 @@ export const cssObj = {
     padding: 1rem;
     max-width: 40rem;
     border-radius: 0.625rem;
-    border: 1px solid ${COLORS.GRAY10};
+    border: 1px solid ${COLOR.GRAY900};
     font-size: 1rem;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
     min-height: 8rem;
   `,
   minMaxLabel: css`
@@ -105,12 +105,12 @@ export const cssObj = {
   `,
   disabledMinMaxInput: css`
     ${defaultMinMaxCSS};
-    background-color: ${COLORS.GRAY80};
+    background-color: ${COLOR.GRAY100};
     border: 0;
   `,
   minMaxDesc: css`
     font-size: 0.875rem;
     padding: 0 1rem;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
   `,
 };

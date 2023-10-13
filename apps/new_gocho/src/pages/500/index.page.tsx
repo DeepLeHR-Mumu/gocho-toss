@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import deepLeLogo from "shared-image/global/deepLeLogo/smallMono.svg";
+import deepLeLogo from "shared-image/global/deeple/smallMono.svg";
 import { unknownErrorEvent, unknownErrorFunnelEvent } from "@/ga/error";
 
 import jobiError from "@/public/image/jobi/jobi_500.png";

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -9,8 +9,8 @@ export const cssObj = {
   `,
 
   wrapper: (isWaiting: boolean) => css`
-    border: 1px solid ${isWaiting ? NEWCOLORS.GREEN300 : NEWCOLORS.RED300};
-    background-color: ${NEWCOLORS.WHITE};
+    border: 1px solid ${isWaiting ? COLOR.GREEN300 : COLOR.RED300};
+    background-color: ${COLOR.WHITE};
     box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.05);
     padding: 1.5rem 2rem;
     border-radius: 1rem;
@@ -26,12 +26,12 @@ export const cssObj = {
       width: 1.5rem;
       height: 1.5rem;
       margin-right: 0.5rem;
-      color: ${isWaiting ? NEWCOLORS.GREEN300 : NEWCOLORS.RED300};
+      color: ${isWaiting ? COLOR.GREEN300 : COLOR.RED300};
     }
 
     > p {
       ${TEXTS.TITLE9}
-      color: ${isWaiting ? NEWCOLORS.GREEN300 : NEWCOLORS.RED300};
+      color: ${isWaiting ? COLOR.GREEN300 : COLOR.RED300};
     }
   `,
 
@@ -48,21 +48,21 @@ export const cssObj = {
 
   infoBox: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.GRAY500};
+    color: ${COLOR.GRAY500};
 
     > span {
       margin-left: 0.5rem;
-      color: ${NEWCOLORS.GRAY700};
+      color: ${COLOR.GRAY700};
     }
   `,
 
   contour: css`
-    border-left: 1px solid ${NEWCOLORS.GRAY200};
+    border-left: 1px solid ${COLOR.GRAY200};
   `,
 
   email: css`
     ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
 
     > span {
       margin-left: 0.5rem;
@@ -70,19 +70,19 @@ export const cssObj = {
   `,
 
   reasonContainer: css`
-    border-top: 1px solid ${NEWCOLORS.GRAY200};
+    border-top: 1px solid ${COLOR.GRAY200};
     margin-top: 1.25rem;
     padding-top: 1.25rem;
   `,
 
   reasonTitle: css`
     ${TEXTS.TITLE6};
-    color: ${NEWCOLORS.RED300};
+    color: ${COLOR.RED300};
     margin-bottom: 1.25rem;
 
     > span {
       ${TEXTS.TITLE3};
-      color: ${NEWCOLORS.GRAY500};
+      color: ${COLOR.GRAY500};
       margin-left: 0.5rem;
     }
   `,

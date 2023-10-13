@@ -1,17 +1,17 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const sectionContainer = css`
   margin: 2rem 0;
   padding: 1rem;
-  background-color: ${COLORS.BLUE_SECOND90};
+  background-color: ${COLOR.BLUE50};
 `;
 
 export const inputBox = (isSmall: boolean) => css`
   width: ${isSmall ? "6rem" : "30%"};
   border-radius: 0.5rem;
-  border: 1px solid ${COLORS.GRAY70};
-  background-color: ${COLORS.GRAY100};
+  border: 1px solid ${COLOR.GRAY300};
+  background-color: ${COLOR.WHITE};
   height: 2rem;
   padding: 0.25rem 0.5rem;
   margin-right: 1rem;
@@ -28,7 +28,7 @@ export const changeBannerButton = css`
   font-weight: 500;
   margin-left: auto;
   padding: 0.25rem 3rem;
-  border: 2px solid ${COLORS.GRAY10};
-  background-color: ${COLORS.BLUE_NEON40};
-  color: ${COLORS.GRAY100};
+  border: 2px solid ${COLOR.GRAY900};
+  background-color: ${COLOR.BLUE300};
+  color: ${COLOR.WHITE};
 `;

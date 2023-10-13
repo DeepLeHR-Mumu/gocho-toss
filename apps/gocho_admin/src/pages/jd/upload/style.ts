@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 import { subPageTitle } from "@/style";
 
@@ -16,10 +16,10 @@ export const cssObj = {
       padding-left: 1rem;
       margin-right: 2rem;
       :first-of-type {
-        border-left: 3px solid ${COLORS.BLUE_SECOND70};
+        border-left: 3px solid ${COLOR.BLUE200};
       }
       :last-child {
-        border-left: 3px solid ${COLORS.ERROR_YELLOW50};
+        border-left: 3px solid ${COLOR.YELLOW100};
       }
     }
   `,
@@ -28,10 +28,10 @@ export const cssObj = {
     margin-bottom: 3rem;
 
     > li {
-      border: 1px solid ${COLORS.GRAY70};
+      border: 1px solid ${COLOR.GRAY300};
       padding: 2rem;
       margin-bottom: 1rem;
-      background-color: ${COLORS.GRAY95};
+      background-color: ${COLOR.WHITE};
       position: relative;
       overflow: hidden;
 
@@ -39,7 +39,7 @@ export const cssObj = {
         position: absolute;
         width: 1.875rem;
         height: 1.875rem;
-        background-color: ${COLORS.BLUE_FIRST40};
+        background-color: ${COLOR.BLUE300};
         left: -0.9375rem;
         top: -0.9375rem;
         content: "";
@@ -65,12 +65,12 @@ export const cssObj = {
   `,
   warning: css`
     width: 100%;
-    border: 1px solid ${COLORS.ERROR_YELLOW50};
+    border: 1px solid ${COLOR.YELLOW100};
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${COLORS.ERROR_RED30};
-    background-color: ${COLORS.ERROR_YELLOW70};
+    color: ${COLOR.RED300};
+    background-color: ${COLOR.YELLOW100};
     padding: 1.25rem;
     margin: 1.25rem 0;
     font-size: 1rem;

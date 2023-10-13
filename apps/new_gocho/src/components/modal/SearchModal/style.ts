@@ -1,12 +1,12 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEMP } from "shared-style/mediaQuery";
 import { NEWTEXTS } from "shared-style/text";
 import { shorten } from "shared-style/common";
 
 export const cssObj = {
   wrapper: css`
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     backdrop-filter: none;
     overflow: auto;
 
@@ -36,7 +36,7 @@ export const cssObj = {
     width: 1.5rem;
     height: 1.5rem;
     align-self: flex-end;
-    color: ${NEWCOLORS.GRAY450};
+    color: ${COLOR.GRAY450};
     margin-bottom: 1.5rem;
     cursor: pointer;
   `,
@@ -62,7 +62,7 @@ export const cssObj = {
     width: 1.25rem;
     height: 1.25rem;
     margin-left: 0.25rem;
-    color: ${NEWCOLORS.GRAY450};
+    color: ${COLOR.GRAY450};
     cursor: pointer;
   `,
 
@@ -78,7 +78,7 @@ export const cssObj = {
   `,
 
   recentWordDelete: css`
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     cursor: pointer;
     ${NEWTEXTS.TITLE5_M1620};
   `,

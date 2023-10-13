@@ -4,16 +4,14 @@ import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { SharedButton } from "shared-ui/business/sharedButton";
-import { useDisabledKeydownSubmit } from "shared-hooks";
-import { COLORS } from "shared-style/color";
+import { SharedButton } from "shared-ui/common/sharedButton";
+import { useDisabledKeydownSubmit } from "shared-hook";
 
 import { useEditJd, useJdDetail } from "@/api";
 import { useToast } from "@/globalStates";
 import { GlobalLayout, LoadingScreen, PageLayout } from "@/component";
 import type { NextPageWithLayout } from "@/types";
 import { INTERNAL_URL } from "@/constant";
-
 import { jdArrKeyObj } from "@/api/jd/useJdArr/type";
 import { CommonDataPart, PositionRequiredDataPart, PositionTaskDataPart, PositionEtcDataPart } from "./part";
 import { JobFormValues } from "./type";
@@ -128,14 +126,8 @@ const JdEdit: NextPageWithLayout = () => {
             <PositionTaskDataPart jobForm={jobForm} />
             <PositionEtcDataPart jobForm={jobForm} jobData={jobData} />
             {checkMsg && <p css={cssObj.warning}>{checkMsg}</p>}
-            <SharedButton
-              onClickHandler="submit"
-              text="공고 수정하기"
-              size="large"
-              radius="round"
-              backgroundColor={COLORS.BLUE_FIRST40}
-              fontColor={COLORS.GRAY100}
-            />
+            <p css={cssObj.warning}>asdf</p>
+            <SharedButton buttonType="fillBlue" width={10} onClickHandler="submit" text="공고 수정하기" />
           </form>
         </section>
       </PageLayout>

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { shorten } from "shared-style/common";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const companyContainer = css`
   height: 3rem;
@@ -36,18 +36,18 @@ export const fixButton = css`
   align-items: center;
   justify-content: center;
   font-weight: 500;
-  border: 2px solid ${COLORS.GRAY10};
+  border: 2px solid ${COLOR.GRAY900};
   padding: 0.25rem 1rem;
   height: 2.25rem;
-  background-color: ${COLORS.BLUE_NEON40};
-  color: ${COLORS.GRAY100};
+  background-color: ${COLOR.BLUE300};
+  color: ${COLOR.WHITE};
 `;
 
 export const deleteButton = css`
   font-weight: 500;
-  border: 2px solid ${COLORS.GRAY10};
+  border: 2px solid ${COLOR.GRAY900};
   padding: 0.25rem 1rem;
   height: 2.25rem;
   background-color: #b32100;
-  color: ${COLORS.GRAY100};
+  color: ${COLOR.WHITE};
 `;

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -15,13 +15,13 @@ export const cssObj = {
 
   inputTitle: css`
     ${TEXTS.TITLE7};
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     margin-bottom: 0.75rem;
   `,
 
   errorMsg: css`
     ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.RED300};
+    color: ${COLOR.RED300};
     height: 1rem;
     margin: 3rem 0;
     text-align: center;

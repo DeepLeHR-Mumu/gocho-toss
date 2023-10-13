@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const sectionContainer = css`
   margin-bottom: 2rem;
@@ -13,7 +13,7 @@ export const sectionTitle = css`
 `;
 
 export const inputTitle = css`
-  color: ${COLORS.GRAY30};
+  color: ${COLOR.GRAY600};
   margin-right: 1rem;
 `;
 
@@ -39,13 +39,13 @@ export const welfareInputBox = css`
   font-size: 16px;
   height: 5rem;
   border-radius: 0.5rem;
-  border: 1px solid ${COLORS.GRAY70};
+  border: 1px solid ${COLOR.GRAY300};
   padding: 0.25rem 0.5rem;
   margin-right: 1rem;
 `;
 
 export const enterNotice = css`
   font-size: 0.875rem;
-  color: ${COLORS.BLUE_NEON40};
+  color: ${COLOR.BLUE300};
   line-height: 1.5;
 `;

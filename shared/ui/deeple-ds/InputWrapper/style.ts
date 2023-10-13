@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -12,7 +12,7 @@ export const cssObj = {
 
   label: css`
     ${NEWTEXTS.TITLE5_B1620}
-    color: ${NEWCOLORS.GRAY600}
+    color: ${COLOR.GRAY600}
   `,
 
   inputWrapper: (disabled?: boolean) => css`
@@ -21,16 +21,16 @@ export const cssObj = {
     align-items: center;
     gap: 0.75rem;
     border-radius: 0.75rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     padding: 1rem;
 
     &:focus-within {
-      border-color: ${NEWCOLORS.BLUE200};
+      border-color: ${COLOR.BLUE200};
     }
 
     ${disabled
       ? css`
-          background-color: ${NEWCOLORS.GRAY100};
+          background-color: ${COLOR.GRAY100};
           cursor: not-allowed;
         `
       : ""}
@@ -44,31 +44,31 @@ export const cssObj = {
 
   // NOTE 공통 스타일로 빼도 될듯?
   error: css`
-    border-color: ${NEWCOLORS.RED300};
+    border-color: ${COLOR.RED300};
 
     &:focus-within {
-      border-color: ${NEWCOLORS.RED300};
+      border-color: ${COLOR.RED300};
     }
   `,
 
   // NOTE 공통 스타일로 빼도 될듯?
   errorMessage: css`
-    color: ${NEWCOLORS.RED300};
+    color: ${COLOR.RED300};
     ${NEWTEXTS.TITLE7_M1218}
   `,
 
   // NOTE 공통 스타일로 빼도 될듯?
   success: css`
-    border-color: ${NEWCOLORS.BLUE300};
+    border-color: ${COLOR.BLUE300};
 
     &:focus-within {
-      border-color: ${NEWCOLORS.BLUE300};
+      border-color: ${COLOR.BLUE300};
     }
   `,
 
   // NOTE 공통 스타일로 빼도 될듯?
   successMessage: css`
-    color: ${NEWCOLORS.BLUE300};
+    color: ${COLOR.BLUE300};
     ${NEWTEXTS.TITLE7_M1218}
   `,
 

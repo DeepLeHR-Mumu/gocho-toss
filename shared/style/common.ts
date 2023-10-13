@@ -1,5 +1,5 @@
 import { PC_HOVER } from "./mediaQuery";
-import { COLORS } from "./color";
+import { COLOR } from "./color";
 
 interface shortenDef {
   (line?: number): string;
@@ -28,7 +28,7 @@ interface skeletonCreatorCSS {
 
 export const skeletonCreatorCSS: skeletonCreatorCSS = (minWidth = "100%") => {
   return `
-    background-color: ${COLORS.GRAY90};
+    background-color: ${COLOR.GRAY50};
     border-radius: 3px;
     text-indent: -9999px;
     min-width: ${minWidth};

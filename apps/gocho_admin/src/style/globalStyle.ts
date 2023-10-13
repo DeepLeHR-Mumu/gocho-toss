@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const globalStyle = css`
   * {
@@ -135,7 +135,7 @@ export const globalStyle = css`
   }
   a {
     text-decoration: none;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
 
     :focus {
       outline: none;

@@ -1,8 +1,7 @@
 import { FunctionComponent } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { COLORS } from "shared-style/color";
-import { SharedButton } from "shared-ui/business/sharedButton";
+import { SharedButton } from "shared-ui/common/sharedButton";
 
 import { useDeleteCompanyKeyword } from "@/api";
 import { companyKeywordArrKeyObj } from "@/api/company/useCompanyKeywordArr/type";
@@ -38,12 +37,10 @@ export const KeywordCard: FunctionComponent<KeywordCardProps> = ({ keywordObj })
         ))}
       </div>
       <SharedButton
+        buttonType="fillRed"
+        width={5}
         onClickHandler={() => deleteCompanyKeywordHandler(keywordObj.keyword)}
         text="삭제"
-        size="medium"
-        radius="round"
-        fontColor={COLORS.GRAY100}
-        backgroundColor={COLORS.ERROR_RED30}
       />
     </li>
   );

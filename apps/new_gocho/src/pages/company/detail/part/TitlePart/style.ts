@@ -1,10 +1,10 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
   background: css`
-    background: ${NEWCOLORS.WHITE};
+    background: ${COLOR.WHITE};
   `,
 
   imageWrapper: css`
@@ -54,14 +54,14 @@ export const cssObj = {
   eyeIcon: css`
     width: 1.25rem;
     height: 1.25rem;
-    color: ${NEWCOLORS.GRAY450};
+    color: ${COLOR.GRAY450};
     align-self: flex-end;
   `,
 
   views: css`
     align-self: flex-end;
     margin-left: 0.5rem;
-    color: ${NEWCOLORS.GRAY450};
+    color: ${COLOR.GRAY450};
     ${NEWTEXTS.TITLE5_M1620}
   `,
 
@@ -76,11 +76,11 @@ export const cssObj = {
   `,
 
   follower: css`
-    color: ${NEWCOLORS.GRAY600};
+    color: ${COLOR.GRAY600};
     ${NEWTEXTS.TITLE5_M1620}
 
     > span {
-      color: ${NEWCOLORS.BLUE300};
+      color: ${COLOR.BLUE300};
     }
   `,
 
@@ -89,8 +89,8 @@ export const cssObj = {
     overflow: hidden;
     width: 6.25rem;
     height: 6.25rem;
-    border: 1px solid ${NEWCOLORS.GRAY100};
-    background-color: ${NEWCOLORS.WHITE};
+    border: 1px solid ${COLOR.GRAY100};
+    background-color: ${COLOR.WHITE};
     position: absolute;
     top: 4.375rem;
 
@@ -110,8 +110,8 @@ export const cssObj = {
     width: 8.75rem;
     text-align: center;
     padding-bottom: 1.5rem;
-    border-bottom: ${isSelected ? `2px solid ${NEWCOLORS.BLUE300}` : `none`};
-    color: ${isSelected ? NEWCOLORS.BLUE300 : NEWCOLORS.GRAY400};
+    border-bottom: ${isSelected ? `2px solid ${COLOR.BLUE300}` : `none`};
+    color: ${isSelected ? COLOR.BLUE300 : COLOR.GRAY400};
   `,
 };
 

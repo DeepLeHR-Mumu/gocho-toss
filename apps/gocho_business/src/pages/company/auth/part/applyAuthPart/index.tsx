@@ -2,8 +2,7 @@ import { FunctionComponent, useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
-import { Spinner } from "shared-ui/common/atom/spinner";
-
+import { Spinner } from "shared-ui/common/spinner";
 import { useManagerProfile, useCompanyDetail, useManagerAuth } from "@/apis";
 import { RequestObjDef as AuthRequestObjDef } from "@/apis/manager/auth/useManagerAuth/type";
 import { ConfirmModal } from "@/components/global/modal/confirmModal";

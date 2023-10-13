@@ -1,11 +1,11 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
     padding: 2rem 0;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+    border-bottom: 1px solid ${COLOR.GRAY200};
   `,
 
   headerWrapper: css`
@@ -21,13 +21,13 @@ export const cssObj = {
   `,
 
   require: css`
-    color: ${NEWCOLORS.RED200};
+    color: ${COLOR.RED200};
   `,
 
   icon: css`
     width: 1.25rem;
     height: 1.25rem;
-    color: ${NEWCOLORS.GRAY450};
+    color: ${COLOR.GRAY450};
   `,
 
   titleWrapper: css`
@@ -41,7 +41,7 @@ export const cssObj = {
   `,
   titelDes: css`
     ${NEWTEXTS.BODY2_R1624};
-    color: ${NEWCOLORS.GRAY500};
+    color: ${COLOR.GRAY500};
     line-height: 1.25rem;
     margin-right: 0.5rem;
   `,
@@ -53,11 +53,11 @@ export const cssObj = {
 
   date: css`
     ${NEWTEXTS.BODY2_R1624};
-    color: ${NEWCOLORS.GRAY700};
+    color: ${COLOR.GRAY700};
   `,
 
   uTurnImage: css`
     border-radius: 50%;
-    background-color: ${NEWCOLORS.BLUE100};
+    background-color: ${COLOR.BLUE100};
   `,
 };

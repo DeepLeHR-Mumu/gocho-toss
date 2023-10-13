@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 const defaultFocus = css`
   display: flex;
@@ -20,7 +20,7 @@ export const cssObj = {
   `,
   focusLabel: css`
     ${defaultFocus};
-    border: 0.13rem solid ${COLORS.BLUE_FIRST40};
+    border: 0.13rem solid ${COLOR.BLUE300};
   `,
   input: css`
     width: 0;
@@ -28,11 +28,11 @@ export const cssObj = {
     margin: 0;
 
     :checked ~ div {
-      background-color: ${COLORS.BLUE_FIRST40};
+      background-color: ${COLOR.BLUE300};
       border: 0;
 
       > svg {
-        color: ${COLORS.GRAY100};
+        color: ${COLOR.WHITE};
         display: block;
       }
     }
@@ -43,7 +43,7 @@ export const cssObj = {
     justify-content: center;
     width: 1.125rem;
     height: 1.125rem;
-    border: 1px solid ${COLORS.GRAY60};
+    border: 1px solid ${COLOR.GRAY400};
     border-radius: 5px;
     margin-right: 0.5rem;
 
@@ -54,6 +54,6 @@ export const cssObj = {
   desc: css`
     font-size: 0.875rem;
     font-weight: 400;
-    color: ${COLORS.GRAY10};
+    color: ${COLOR.GRAY900};
   `,
 };

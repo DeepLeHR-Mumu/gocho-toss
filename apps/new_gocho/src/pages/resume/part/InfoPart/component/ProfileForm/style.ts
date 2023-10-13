@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -86,7 +86,7 @@ export const cssObj = {
 
     & > p {
       ${NEWTEXTS.BODY4_R1220};
-      color: ${NEWCOLORS.GRAY500};
+      color: ${COLOR.GRAY500};
       text-align: center;
     }
   `,
@@ -94,7 +94,7 @@ export const cssObj = {
   searchIcon: css`
     width: 1.25rem;
     height: 1.25rem;
-    color: ${NEWCOLORS.GRAY450};
+    color: ${COLOR.GRAY450};
   `,
 
   buttonWrapper: css`

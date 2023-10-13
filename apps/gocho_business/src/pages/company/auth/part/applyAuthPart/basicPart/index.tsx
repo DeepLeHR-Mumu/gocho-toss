@@ -2,9 +2,9 @@ import { FunctionComponent, useState } from "react";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
-import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
 import { NUMBER_REGEXP } from "shared-constant";
 
+import { SharedRadioButton } from "shared-ui/common/sharedRadioButton";
 import { commonCssObj } from "@/styles";
 
 import { companyAuthUnionClickEvent } from "@/ga";

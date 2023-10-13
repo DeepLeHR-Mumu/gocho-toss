@@ -1,12 +1,12 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
   partContainer: css`
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     padding: 2rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 1rem;
     box-shadow: 0 2px 16px 0 #0000000d;
     text-align: center;
@@ -21,14 +21,14 @@ export const cssObj = {
     width: 45.875rem;
     height: 3.25rem;
     margin: 0 auto;
-    border: 1px solid ${isError ? `${NEWCOLORS.RED300}` : `${NEWCOLORS.GRAY200}`};
+    border: 1px solid ${isError ? `${COLOR.RED300}` : `${COLOR.GRAY200}`};
     border-radius: 0.5rem;
     text-align: center;
     ${TEXTS.TITLE9}
 
     ::placeholder {
       ${TEXTS.TITLE9}
-      color: ${NEWCOLORS.GRAY450};
+      color: ${COLOR.GRAY450};
     }
   `,
 };

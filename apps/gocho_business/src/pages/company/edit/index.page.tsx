@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import { NextPage } from "next";
 import dayjs from "dayjs";
 
-import { Spinner } from "shared-ui/common/atom/spinner";
-import { usePreventRouting } from "shared-hooks";
+import { Spinner } from "shared-ui/common/spinner";
+import { usePreventRouting } from "shared-hook";
 
 import { useEditCompanyDetail, useCompanyDetail, useManagerProfile } from "@/apis";
 import { PageLayout } from "@/components";

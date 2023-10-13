@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { TEXTS } from "shared-style/text";
 
 import { commonCssObj } from "@/styles";
@@ -14,7 +14,7 @@ export const cssObj = {
     z-index: 80;
     width: 50rem;
     padding: 2rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     border-radius: 1rem;
     display: flex;
     flex-direction: column;
@@ -43,7 +43,7 @@ export const cssObj = {
     margin-left: 0.5rem;
     height: 3.25rem;
     padding: 0.75rem 1rem;
-    background-color: ${NEWCOLORS.GRAY200};
+    background-color: ${COLOR.GRAY200};
     border-radius: 0.5rem;
   `,
 
@@ -98,6 +98,6 @@ export const cssObj = {
   `,
 
   errorRadioButton: css`
-    border-color: ${NEWCOLORS.RED300};
+    border-color: ${COLOR.RED300};
   `,
 };

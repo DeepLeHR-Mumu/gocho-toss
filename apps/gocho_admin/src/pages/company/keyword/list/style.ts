@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 import { subPageTitle } from "@/style";
 
@@ -13,19 +13,19 @@ export const cssObj = {
     justify-content: space-between;
     text-align: center;
     padding: 1rem 0;
-    background-color: ${COLORS.GRAY90};
+    background-color: ${COLOR.GRAY50};
 
     > li {
-      border-right: 1px solid ${COLORS.GRAY70};
+      border-right: 1px solid ${COLOR.GRAY300};
       white-space: nowrap;
       font-size: 1rem;
       font-weight: 400;
-      color: ${COLORS.GRAY30};
+      color: ${COLOR.GRAY600};
     }
   `,
   tbody: css`
     display: flex;
     flex-direction: column;
-    background-color: ${COLORS.GRAY100};
+    background-color: ${COLOR.WHITE};
   `,
 };
