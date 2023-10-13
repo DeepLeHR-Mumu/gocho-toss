@@ -1,16 +1,14 @@
 import { UseMutationResult } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-
-import { AdminResponseDef } from "@/types";
+import { AxiosResponse, AxiosError } from "axios";
 
 export interface RequestObjDef {
   managerId: number;
 }
 
 export interface DeleteRecruiterDef {
-  ({ managerId }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ managerId }: RequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface useDeleteRecruiterProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError, RequestObjDef>;
 }

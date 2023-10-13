@@ -1,7 +1,5 @@
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
-
-import { AdminResponseDef } from "@/types";
 
 export interface RequestObjDef {
   managerId: number;
@@ -9,9 +7,9 @@ export interface RequestObjDef {
 }
 
 export interface PostAuthRejectDef {
-  ({ managerId }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ managerId }: RequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface useAuthRejectProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError, RequestObjDef>;
 }

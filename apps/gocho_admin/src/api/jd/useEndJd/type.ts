@@ -1,16 +1,14 @@
 import { UseMutationResult } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-
-import { AdminResponseDef } from "@/types";
+import { AxiosResponse, AxiosError } from "axios";
 
 export interface RequestObjDef {
   jdId: number;
 }
 
 export interface EndJdDef {
-  ({ jdId }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ jdId }: RequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface useEndJdProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError, RequestObjDef>;
 }

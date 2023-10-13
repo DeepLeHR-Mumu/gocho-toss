@@ -1,7 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-
-import { AdminResponseDef } from "@/types";
+import { AxiosResponse, AxiosError } from "axios";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { DeleteFactoryDef, RequestObjDef, useDeleteFactoryProps } from "./type";
@@ -12,4 +10,4 @@ export const deleteFactory: DeleteFactoryDef = async (requestObj) => {
 };
 
 export const useDeleteFactory: useDeleteFactoryProps = () =>
-  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: deleteFactory });
+  useMutation<AxiosResponse, AxiosError, RequestObjDef>({ mutationFn: deleteFactory });

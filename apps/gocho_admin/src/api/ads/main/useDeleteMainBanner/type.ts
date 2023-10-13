@@ -1,16 +1,14 @@
 import { UseMutationResult } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-
-import { AdminResponseDef } from "@/types";
+import { AxiosResponse, AxiosError } from "axios";
 
 export interface RequestObjDef {
   bannerId: number;
 }
 
 export interface DeleteMainBannerDef {
-  ({ bannerId }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ bannerId }: RequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface useDeleteMainBannerProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError, RequestObjDef>;
 }

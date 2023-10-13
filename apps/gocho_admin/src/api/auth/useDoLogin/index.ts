@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 
 import { axiosNoTokenInstance } from "@/api/useAxiosInterceptor";
 

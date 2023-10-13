@@ -1,7 +1,5 @@
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
-
-import { AdminResponseDef } from "@/types";
 
 export interface RequestObjDef {
   company_id: number;
@@ -28,9 +26,9 @@ export interface PostFactoryDef {
     bus_etc,
     dormitory_bool,
     dormitory_etc,
-  }: RequestObjDef): Promise<AdminResponseDef>;
+  }: RequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface useAddFactoryProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError, RequestObjDef>;
 }

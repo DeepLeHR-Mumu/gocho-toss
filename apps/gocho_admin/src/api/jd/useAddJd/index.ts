@@ -1,10 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import dayjs from "dayjs";
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 
 import { ErrorResponseDef } from "shared-type/api";
-
-import { AdminResponseDef } from "@/types";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { PostJdDef, RequestObjDef, useAddJdProps } from "./type";
@@ -18,7 +16,7 @@ export const postAddJd: PostJdDef = async (requestObj) => {
 };
 
 export const useAddJd: useAddJdProps = () =>
-  useMutation<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>({
+  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
     mutationFn: (requestObj) => {
       const newRequestObj = {
         dto: {

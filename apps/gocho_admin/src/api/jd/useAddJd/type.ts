@@ -1,9 +1,7 @@
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
 import { ErrorResponseDef } from "shared-type/api";
-
-import { AdminResponseDef } from "@/types";
 
 export interface RequestObjDef {
   dto: {
@@ -84,9 +82,9 @@ interface axiosRequestObjDef {
 }
 
 export interface PostJdDef {
-  (dto: axiosRequestObjDef): Promise<AdminResponseDef>;
+  (dto: axiosRequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface useAddJdProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

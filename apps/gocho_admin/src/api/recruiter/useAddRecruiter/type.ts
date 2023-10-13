@@ -1,7 +1,5 @@
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
-
-import { AdminResponseDef } from "@/types";
 
 export interface RequestObjDef {
   company_id: number;
@@ -11,9 +9,9 @@ export interface RequestObjDef {
 }
 
 export interface PostRecruiterDef {
-  ({ company_id, email, name, department }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ company_id, email, name, department }: RequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface useAddRecruiterProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError, RequestObjDef>;
 }

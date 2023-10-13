@@ -1,7 +1,5 @@
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
-
-import { AdminResponseDef } from "@/types";
 
 export interface RequestObjDef {
   pcImage: File;
@@ -15,9 +13,9 @@ export interface RequestObjDef {
 }
 
 export interface PostMainBannerDef {
-  ({ pcImage, mobileImage, dto }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ pcImage, mobileImage, dto }: RequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface useAddMainBannerProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError, RequestObjDef>;
 }
