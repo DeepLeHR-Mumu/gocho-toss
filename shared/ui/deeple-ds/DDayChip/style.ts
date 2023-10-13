@@ -1,6 +1,5 @@
 import { css } from "@emotion/react";
 import { NEWTEXTS } from "shared-style/text";
-import { MOBILE } from "shared-style/mediaQuery";
 
 import { dDayChipColor } from "../style/color";
 
@@ -32,12 +31,5 @@ export const cssObj = {
     white-space: nowrap;
     ${NEWTEXTS.TITLE6_B1418}
     ${chipColor(dDay, year)};
-
-    ${MOBILE} {
-      width: fit-content;
-      border-radius: 1.5rem;
-      padding: 0.25rem 0.5rem;
-      ${NEWTEXTS.TITLE7_M1218}
-    }
   `,
 };

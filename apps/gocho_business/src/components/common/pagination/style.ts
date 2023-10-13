@@ -1,6 +1,5 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { PC_HOVER } from "shared-style/mediaQuery";
 import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -19,12 +18,6 @@ export const cssObj = {
     margin: 0 0.75rem;
     font-size: 1rem;
     transition: all 0.2s ease-in;
-
-    ${PC_HOVER} {
-      :hover {
-        color: ${COLOR.BLACK};
-      }
-    }
   `,
 
   paginationBox: css`

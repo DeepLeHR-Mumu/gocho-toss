@@ -1,6 +1,5 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { MOBILE } from "shared-style/mediaQuery";
 import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -36,11 +35,6 @@ export const cssObj = {
     width: 1.5rem;
     height: 1.5rem;
     color: ${COLOR.BLUE300};
-
-    ${MOBILE} {
-      width: 1.25rem;
-      height: 1.25rem;
-    }
   `,
 
   input: css`
@@ -59,10 +53,6 @@ export const cssObj = {
       background-color: ${COLOR.GRAY200};
       color: ${COLOR.GRAY450};
       cursor: not-allowed;
-    }
-
-    ${MOBILE} {
-      ${NEWTEXTS.TITLE6_M1418}
     }
   `,
 
