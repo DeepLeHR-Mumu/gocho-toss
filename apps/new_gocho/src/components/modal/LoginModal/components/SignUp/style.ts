@@ -1,5 +1,4 @@
 import { css } from "@emotion/react";
-import { TEMP } from "shared-style/mediaQuery";
 import { COLOR } from "shared-style/color";
 
 export const cssObj = {
@@ -15,11 +14,6 @@ export const cssObj = {
     width: 100%;
     padding: 1.25rem 0.5rem 0 0.5rem;
     margin-bottom: 18.125rem;
-
-    ${TEMP} {
-      padding: 1rem;
-      margin-bottom: 0;
-    }
   `,
 
   form: css`
@@ -34,20 +28,9 @@ export const cssObj = {
     bottom: 5rem;
   `,
 
-  signUpButtonWrapper: css`
-    ${TEMP} {
-      width: 100%;
-      padding: 0 1rem;
-      margin-top: 0.75rem;
-    }
-  `,
+  signUpButtonWrapper: css``,
 
   mobileDivider: css`
     display: none;
-
-    ${TEMP} {
-      display: block;
-      width: 100%;
-    }
   `,
 };
