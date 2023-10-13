@@ -1,19 +1,22 @@
 import Image from "next/image";
 import { FC, useRef, useState } from "react";
+import { Address, useDaumPostcodePopup } from "react-daum-postcode";
+
 import { FiSearch } from "react-icons/fi";
 
 import { Button, Input } from "shared-ui/deeple-ds";
 
+import { useToast } from "@/globalStates";
 import { fileEncording } from "@/pages/mypage/part/ProfilePart/utils";
 import basicProfile from "@/public/image/jobi/jobi_500.png";
 
 import { cssObj } from "./style";
-
-interface ProfileFormProps {
-  handleEditMode: () => void;
-}
+import { ProfileFormProps } from "./type";
+import { MAX_PROFILE_SIZE } from "./constants";
 
 export const ProfileForm: FC<ProfileFormProps> = ({ handleEditMode }) => {
+  const { setToastMessage } = useToast();
+
   const [userProfilePreview, setUserProfilePreview] = useState<string>();
   // const [userProfile, setUserProfile] = useState<File | null>(null);
   // const [isProfileDirty, setIsProfileDirty] = useState<boolean>(false);
@@ -22,6 +25,11 @@ export const ProfileForm: FC<ProfileFormProps> = ({ handleEditMode }) => {
 
   const handleProfileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const profile = event.target.files?.[0];
+
+    if (profile && profile.size > MAX_PROFILE_SIZE) {
+      setToastMessage("5MB 이하의 사진을 첨부해 주세요.");
+      return;
+    }
 
     if (profile) {
       // setUserProfile(profile);
@@ -36,9 +44,41 @@ export const ProfileForm: FC<ProfileFormProps> = ({ handleEditMode }) => {
           // setIsProfileDirty(true);
         }
       } catch (error) {
-        // setToastMessage("파일 업로드 중 오류가 발생했습니다. 파일 양식을 확인하거나 다시 시도해 주세요.");
+        setToastMessage("파일 업로드 중 오류가 발생했습니다. 파일 양식을 확인하거나 다시 시도해 주세요.");
       }
     }
+  };
+
+  const openPostCodePopup = useDaumPostcodePopup();
+
+  const onClickAddress = () => {
+    const mapScript = document.createElement("script");
+
+    mapScript.async = true;
+    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=0687bed33c060c4758f582d26ff44e16&libraries=services&libraries=services&autoload=false`;
+    document.head.appendChild(mapScript);
+
+    openPostCodePopup({
+      onComplete: (addressObj: Address) => {
+        // console.log(addressObj.address);
+        // setValue("location.address", addressObj.address, { shouldDirty: true });
+        // clearErrors("location.address");
+
+        window.kakao.maps.load(() => {
+          const geocoder = new window.kakao.maps.services.Geocoder();
+
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          geocoder.addressSearch(addressObj.address, (result: any, status: any) => {
+            if (status === window.kakao.maps.services.Status.OK) {
+              // const { x, y } = result[0];
+              // console.log(x, y);
+              // setValue("location.x", x);
+              // setValue("location.y", y);
+            }
+          });
+        });
+      },
+    });
   };
 
   return (
@@ -91,6 +131,7 @@ export const ProfileForm: FC<ProfileFormProps> = ({ handleEditMode }) => {
               <Input
                 type="text"
                 placeholder="거주지를 입력해 주세요"
+                onClick={onClickAddress}
                 aria-disabled
                 suffix={<FiSearch css={cssObj.searchIcon} />}
               />
