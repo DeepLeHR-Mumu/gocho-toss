@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 import { OutPutStatusType } from "./type";
 
@@ -29,7 +29,7 @@ export const cssObj = {
       `;
     }
     return css`
-      ${TEXTS.TITLE6};
+      ${TEXT.TITLE5_M1620};
       ${fontColor};
       margin-bottom: 0.5rem;
     `;

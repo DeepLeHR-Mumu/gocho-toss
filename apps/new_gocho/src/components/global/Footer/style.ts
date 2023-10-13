@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   footer: css`
@@ -38,12 +38,12 @@ export const cssObj = {
   `,
 
   ceoInfo: css`
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.GRAY600};
   `,
 
   info: css`
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.GRAY600};
   `,
 
@@ -63,14 +63,14 @@ export const cssObj = {
   `,
 
   contactTitle: css`
-    ${TEXTS.TITLE7};
+    ${TEXT.TITLE5_B1620};
     color: ${COLOR.GRAY600};
   `,
 
   link: css`
     display: flex;
     align-items: center;
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.GRAY600};
   `,
 
@@ -92,7 +92,7 @@ export const cssObj = {
   `,
 
   underlineLink: css`
-    ${TEXTS.UNDERLINE};
+    ${TEXT.UNDERLINE1_M1620};
     color: ${COLOR.GRAY600};
   `,
 };

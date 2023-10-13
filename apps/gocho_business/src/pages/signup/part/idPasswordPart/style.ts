@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   formWrapper: css`
@@ -14,13 +14,13 @@ export const cssObj = {
   `,
 
   inputTitle: css`
-    ${TEXTS.TITLE7};
+    ${TEXT.TITLE5_B1620};
     color: ${COLOR.GRAY600};
     margin-bottom: 0.75rem;
   `,
 
   errorMsg: css`
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.RED300};
     height: 1rem;
     margin: 3rem 0;

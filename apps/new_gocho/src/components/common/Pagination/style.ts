@@ -1,11 +1,11 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 const paginationItem = css`
   padding: 0.675rem;
   color: ${COLOR.GRAY600};
-  ${NEWTEXTS.TITLE5_M1620}
+  ${TEXT.TITLE5_M1620}
 `;
 
 export const cssObj = {
@@ -38,7 +38,7 @@ export const cssObj = {
 
   prevText: css`
     ${paginationItem}
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
     padding: 0;
   `,
 
@@ -62,7 +62,7 @@ export const cssObj = {
 
   nextText: css`
     ${paginationItem}
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
     padding: 0;
   `,
 

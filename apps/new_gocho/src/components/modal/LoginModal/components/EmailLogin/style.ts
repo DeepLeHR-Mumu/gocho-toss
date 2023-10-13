@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { COLOR } from "shared-style/color";
 
 export const cssObj = {
@@ -51,7 +51,7 @@ export const cssObj = {
     padding: 0;
     background-color: transparent;
     color: ${COLOR.GRAY600};
-    ${NEWTEXTS.UNDERLINE1_M1620}
+    ${TEXT.UNDERLINE1_M1620}
   `,
 
   mobileFooterWrapper: css``,

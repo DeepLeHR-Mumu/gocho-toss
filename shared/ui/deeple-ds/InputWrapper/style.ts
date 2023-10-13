@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
@@ -11,7 +11,7 @@ export const cssObj = {
   `,
 
   label: css`
-    ${NEWTEXTS.TITLE5_B1620}
+    ${TEXT.TITLE5_B1620}
     color: ${COLOR.GRAY600}
   `,
 
@@ -54,7 +54,7 @@ export const cssObj = {
   // NOTE 공통 스타일로 빼도 될듯?
   errorMessage: css`
     color: ${COLOR.RED300};
-    ${NEWTEXTS.TITLE7_M1218}
+    ${TEXT.TITLE7_M1218}
   `,
 
   // NOTE 공통 스타일로 빼도 될듯?
@@ -69,7 +69,7 @@ export const cssObj = {
   // NOTE 공통 스타일로 빼도 될듯?
   successMessage: css`
     color: ${COLOR.BLUE300};
-    ${NEWTEXTS.TITLE7_M1218}
+    ${TEXT.TITLE7_M1218}
   `,
 
   underLine: (disabled?: boolean) => css`

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { shorten } from "shared-style/common";
 
 export const cssObj = {
@@ -26,7 +26,7 @@ export const cssObj = {
 
     margin-top: 1rem;
     margin-bottom: 0.5rem;
-    ${isButtonExist ? NEWTEXTS.TITLE2_B2428 : NEWTEXTS.TITLE4_B1822}
+    ${isButtonExist ? TEXT.TITLE2_B2428 : TEXT.TITLE4_B1822}
   `,
 
   hashTags: css`
@@ -40,7 +40,7 @@ export const cssObj = {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
   `,
 
   cursorPointer: css`

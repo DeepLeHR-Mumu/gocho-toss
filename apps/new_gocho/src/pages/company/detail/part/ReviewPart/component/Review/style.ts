@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 // import { NEWTEXTS } from "shared-style/text";
 
 export const cssObj = {
@@ -18,13 +18,13 @@ export const cssObj = {
   `,
 
   nickname: css`
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
   `,
 
   time: css`
     margin-right: auto;
     color: ${COLOR.GRAY500};
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
   `,
 
   commentWrapper: css`
@@ -38,7 +38,7 @@ export const cssObj = {
     width: fit-content;
     gap: 0.5rem;
     color: ${COLOR.BLUE300};
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
   `,
 
   rightIcon: css`
@@ -48,7 +48,7 @@ export const cssObj = {
 
   comment: css`
     color: ${COLOR.GRAY800};
-    ${NEWTEXTS.BODY2_R1624}
+    ${TEXT.BODY2_R1624}
   `,
 
   moreIcon: css`

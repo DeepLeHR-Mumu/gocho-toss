@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   modalContainer: css`
@@ -31,7 +31,7 @@ export const cssObj = {
   `,
 
   title: css`
-    ${TEXTS.TITLE11};
+    ${TEXT.TITLE1_B2832};
     display: block;
   `,
 
@@ -43,7 +43,7 @@ export const cssObj = {
   `,
 
   desc: css`
-    ${TEXTS.TITLE3};
+    ${TEXT.TITLE6_M1418};
     color: ${COLOR.GRAY600};
     width: 100%;
     text-align: left;
@@ -59,12 +59,12 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: center;
-    ${TEXTS.BODY3};
+    ${TEXT.BODY3_R1422};
     color: ${COLOR.GRAY600};
   `,
 
   addCertiButton: css`
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.GRAY600};
     width: 100%;
     justify-content: flex-start;

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { shorten } from "shared-style/common";
 
 export const cssObj = {
@@ -68,13 +68,13 @@ export const cssObj = {
   `,
 
   recentWordTitle: css`
-    ${NEWTEXTS.TITLE4_B1822}
+    ${TEXT.TITLE4_B1822}
   `,
 
   recentWordDelete: css`
     color: ${COLOR.GRAY600};
     cursor: pointer;
-    ${NEWTEXTS.TITLE5_M1620};
+    ${TEXT.TITLE5_M1620};
   `,
 
   recentWordChipsWrapper: css`
@@ -85,7 +85,7 @@ export const cssObj = {
   `,
 
   recommendationWordTitle: css`
-    ${NEWTEXTS.TITLE4_B1822}
+    ${TEXT.TITLE4_B1822}
     margin-bottom: 1.75rem;
   `,
 
@@ -96,7 +96,7 @@ export const cssObj = {
   `,
 
   recommendationCompanyTitle: css`
-    ${NEWTEXTS.TITLE4_B1822}
+    ${TEXT.TITLE4_B1822}
     margin-bottom: 1.75rem;
   `,
 
@@ -107,7 +107,7 @@ export const cssObj = {
   `,
 
   recommendationJdTitle: css`
-    ${NEWTEXTS.TITLE4_B1822}
+    ${TEXT.TITLE4_B1822}
     margin-bottom: 1.75rem;
   `,
 

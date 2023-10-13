@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   titleWrapper: css`
@@ -48,7 +48,7 @@ export const cssObj = {
   `,
 
   factoryAddress: css`
-    ${TEXTS.TITLE3};
+    ${TEXT.TITLE6_M1418};
     color: ${COLOR.GRAY500};
   `,
 
@@ -81,7 +81,7 @@ export const cssObj = {
     height: 3.25rem;
     padding: 1rem;
     background-color: ${COLOR.BLUE100};
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
 
     > svg {
       color: ${COLOR.GRAY450};

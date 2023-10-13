@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   userInfoContainer: css`
@@ -15,13 +15,13 @@ export const cssObj = {
   `,
 
   infoTitle: css`
-    ${TEXTS.TITLE6};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.GRAY600};
     width: 8rem;
   `,
 
   infoDesc: css`
-    ${TEXTS.TITLE6};
+    ${TEXT.TITLE5_M1620};
   `,
 
   inputWrapper: css`
@@ -38,7 +38,7 @@ export const cssObj = {
   inputTitle: css`
     display: flex;
     align-items: center;
-    ${TEXTS.TITLE6};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.GRAY600};
     width: 8rem;
 
@@ -67,7 +67,7 @@ export const cssObj = {
   `,
 
   errorDesc: css`
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     height: 3.25rem;
     line-height: 3.25rem;
     margin-left: 1.5rem;
@@ -75,7 +75,7 @@ export const cssObj = {
   `,
 
   desc: css`
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.GRAY700};
     margin-top: 1.5rem;
   `,

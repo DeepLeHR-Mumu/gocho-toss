@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { COLOR } from "shared-style/color";
 
 export const cssObj = {
@@ -25,12 +25,12 @@ export const cssObj = {
     padding-bottom: 1.5rem;
     color: ${isSelected ? COLOR.BLACK : COLOR.GRAY400};
     border-bottom: ${isSelected ? `2px solid ${COLOR.BLACK}` : `none`};
-    ${NEWTEXTS.TITLE4_B1822}
+    ${TEXT.TITLE4_B1822}
   }
   `,
 
   total: css`
-    ${NEWTEXTS.TITLE4_M1822}
+    ${TEXT.TITLE4_M1822}
   `,
 
   resultWrapper: css`
@@ -46,12 +46,12 @@ export const cssObj = {
 
     > strong {
       color: ${COLOR.BLACK};
-      ${NEWTEXTS.TITLE5_M1620}
+      ${TEXT.TITLE5_M1620}
     }
 
     > span {
       color: ${COLOR.GRAY600};
-      ${NEWTEXTS.TITLE5_M1620}
+      ${TEXT.TITLE5_M1620}
     }
   `,
 

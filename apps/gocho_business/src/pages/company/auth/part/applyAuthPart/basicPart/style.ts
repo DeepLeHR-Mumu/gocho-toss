@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { commonCssObj } from "@/styles";
 
 export const cssObj = {
@@ -23,7 +23,7 @@ export const cssObj = {
     height: 3.25rem;
     padding: 1rem 2rem;
     background-color: ${COLOR.WHITE};
-    ${TEXTS.TITLE4};
+    ${TEXT.TITLE6_M1418};
   `,
 
   inputWrapper: css`

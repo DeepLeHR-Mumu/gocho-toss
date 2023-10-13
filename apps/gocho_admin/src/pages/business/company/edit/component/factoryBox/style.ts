@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   factoryBox: css`
@@ -23,11 +23,11 @@ export const cssObj = {
 
   title: css`
     display: block;
-    ${TEXTS.TITLE9};
+    ${TEXT.TITLE4_B1822};
     margin-bottom: 0.5rem;
   `,
 
   dataTitle: css`
-    ${TEXTS.TITLE8};
+    ${TEXT.TITLE4_M1822};
   `,
 };

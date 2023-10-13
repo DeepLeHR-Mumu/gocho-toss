@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: (half?: boolean) => css`
@@ -29,7 +29,7 @@ export const cssObj = {
 
   jdCompanyName: css`
     color: ${COLOR.GRAY600};
-    ${NEWTEXTS.TITLE6_M1418}
+    ${TEXT.TITLE6_M1418}
   `,
 
   jdTitleWrapper: css`
@@ -39,7 +39,7 @@ export const cssObj = {
   `,
 
   jdTitle: css`
-    ${NEWTEXTS.TITLE4_B1822}
+    ${TEXT.TITLE4_B1822}
   `,
 
   jdDueDateWrapper: css`
@@ -54,7 +54,7 @@ export const cssObj = {
     align-items: center;
     height: 1.875rem;
     color: ${COLOR.GRAY600};
-    ${NEWTEXTS.TITLE6_M1418}
+    ${TEXT.TITLE6_M1418}
   `,
 
   expired: css`

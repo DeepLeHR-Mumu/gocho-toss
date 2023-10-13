@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   partContainer: css`
@@ -22,19 +22,19 @@ export const cssObj = {
   `,
 
   uploadTitle: (bgColor: string) => css`
-    ${TEXTS.TITLE11};
+    ${TEXT.TITLE1_B2832};
     color: ${bgColor === "blue" ? `${COLOR.BLUE250}` : `${COLOR.WHITE}`};
     margin-bottom: 0.5rem;
   `,
 
   helpTitle: css`
-    ${TEXTS.TITLE11};
+    ${TEXT.TITLE1_B2832};
     color: ${COLOR.BLUE250};
     margin-bottom: 0.5rem;
   `,
 
   helpSubtitle: (textColor: string) => css`
-    ${TEXTS.BODY4};
+    ${TEXT.BODY2_R1624};
     color: ${textColor === "blue" ? `${COLOR.BLUE250}` : `${COLOR.WHITE}`};
     margin-bottom: 0.5rem;
   `,
@@ -52,7 +52,7 @@ export const cssObj = {
   `,
 
   helpDesc: css`
-    ${TEXTS.TITLE1};
+    ${TEXT.TITLE7_M1218};
     color: ${COLOR.GRAY600};
   `,
 };

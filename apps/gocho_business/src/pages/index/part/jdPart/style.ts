@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   titleWrapper: css`
@@ -14,12 +14,12 @@ export const cssObj = {
   partTitle: (isAuth: boolean) => css`
     display: block;
     cursor: pointer;
-    ${TEXTS.TITLE11};
+    ${TEXT.TITLE1_B2832};
     color: ${isAuth ? COLOR.BLACK : COLOR.GRAY600};
   `,
 
   moreButton: css`
-    ${TEXTS.TITLE3};
+    ${TEXT.TITLE6_M1418};
     color: ${COLOR.GRAY600};
   `,
 
@@ -34,7 +34,7 @@ export const cssObj = {
   `,
 
   noAuthJdCard: css`
-    ${TEXTS.TITLE3};
+    ${TEXT.TITLE6_M1418};
     color: ${COLOR.GRAY600};
     height: 30rem;
     display: flex;

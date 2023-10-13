@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   contentsWrapper: css`
@@ -12,19 +12,19 @@ export const cssObj = {
 
   rowWrapper: css`
     display: flex;
-    ${NEWTEXTS.BODY1_R1826}
+    ${TEXT.BODY1_R1826}
 
     span:first-of-type {
       flex-direction: row;
       flex-basis: 7.1875rem;
       flex-shrink: 0;
       color: ${COLOR.GRAY600};
-      ${NEWTEXTS.TITLE4_M1822}
+      ${TEXT.TITLE4_M1822}
     }
   `,
 
   pay: css`
     color: ${COLOR.BLUE300};
-    ${NEWTEXTS.TITLE4_B1822}
+    ${TEXT.TITLE4_B1822}
   `,
 };

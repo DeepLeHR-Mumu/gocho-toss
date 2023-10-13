@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { COLOR } from "shared-style/color";
 
 export const cssObj = {
@@ -29,7 +29,7 @@ export const cssObj = {
   title: css`
     margin-top: 4.5rem;
     margin-bottom: 0.5rem;
-    ${NEWTEXTS.TITLE2_B2428}
+    ${TEXT.TITLE2_B2428}
   `,
 
   logo: css`
@@ -39,7 +39,7 @@ export const cssObj = {
   subtitle: css`
     margin-bottom: 6.5rem;
     color: ${COLOR.GRAY600};
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
   `,
 
   tooltip: css`
@@ -72,18 +72,18 @@ export const cssObj = {
     border-color: #fee500;
     background-color: #fee500;
     color: #392020;
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
   `,
 
   emailLogin: css`
     border: none;
     background-color: transparent;
     color: ${COLOR.GRAY600};
-    ${NEWTEXTS.UNDERLINE1_M1620}
+    ${TEXT.UNDERLINE1_M1620}
   `,
 
   mobileDescription: css`
     color: ${COLOR.GRAY400};
-    ${NEWTEXTS.BODY3_R1422}
+    ${TEXT.BODY3_R1422}
   `,
 };

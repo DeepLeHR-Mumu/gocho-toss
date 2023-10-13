@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: (border: boolean) => css`
@@ -29,12 +29,12 @@ export const cssObj = {
 
   companyName: css`
     color: ${COLOR.BLACK};
-    ${NEWTEXTS.TITLE4_B1822}
+    ${TEXT.TITLE4_B1822}
   `,
 
   companyCategory: css`
     color: ${COLOR.GRAY600};
-    ${NEWTEXTS.TITLE6_M1418}
+    ${TEXT.TITLE6_M1418}
   `,
 
   cursorPointer: css`

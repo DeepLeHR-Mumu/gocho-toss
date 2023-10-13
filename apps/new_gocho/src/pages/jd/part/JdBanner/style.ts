@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   background: css`
@@ -19,7 +19,7 @@ export const cssObj = {
     color: ${COLOR.WHITE};
 
     > div {
-      ${NEWTEXTS.TITLE4_M1822}
+      ${TEXT.TITLE4_M1822}
       display: flex;
       align-items: center;
 
@@ -32,7 +32,7 @@ export const cssObj = {
 
     > p {
       margin-top: 1rem;
-      ${NEWTEXTS.DISPLAY2_B3236}
+      ${TEXT.DISPLAY2_B3236}
     }
   `,
 
