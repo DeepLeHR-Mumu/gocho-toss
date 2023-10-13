@@ -30,7 +30,7 @@ export const cssObj = {
 
     ${disabled
       ? css`
-          background-color: ${COLOR.GRAY200};
+          background-color: ${COLOR.GRAY100};
           cursor: not-allowed;
         `
       : ""}

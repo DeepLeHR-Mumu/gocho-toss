@@ -57,7 +57,6 @@ const CompanyList: NextPage = () => {
               <FiChevronDown css={cssObj.titleFilterIcon} />
             </div>
           }
-          isRightDirection={false}
           menu={{
             width: 180,
             options: categoryArr.map(({ categoryText }) => ({
@@ -71,6 +70,7 @@ const CompanyList: NextPage = () => {
           }}
           menuConfig={{
             closeAfterClickEvent: true,
+            direction: "top-left",
           }}
         />
 

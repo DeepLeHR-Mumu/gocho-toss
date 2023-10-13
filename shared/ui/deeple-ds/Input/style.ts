@@ -5,7 +5,7 @@ import { TEXT } from "shared-style/text";
 export const cssObj = {
   input: css`
     flex: 1;
-    ${TEXT.TITLE5_M1620}
+    ${TEXT.BODY2_R1624};
 
     :focus {
       outline: none;

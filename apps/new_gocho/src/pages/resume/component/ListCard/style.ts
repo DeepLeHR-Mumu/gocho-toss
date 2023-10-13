@@ -14,6 +14,7 @@ export const cssObj = {
   headerWrapper: css`
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding-bottom: 1.25rem;
     border-bottom: 1px solid ${COLOR.GRAY700};
   `,

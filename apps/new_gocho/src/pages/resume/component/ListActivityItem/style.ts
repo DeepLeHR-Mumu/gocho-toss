@@ -59,6 +59,7 @@ export const cssObj = {
     margin-right: 0.5rem;
   `,
 
+  // TODO: 2줄 바꿈 글자 수 넘으면 ... 추가하기
   description: css`
     ${TEXT.BODY2_R1624};
     color: ${COLOR.GRAY700};
