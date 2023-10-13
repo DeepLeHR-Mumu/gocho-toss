@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
 import { usePreventRouting } from "shared-hook";
+import { ErrorResponseDef } from "shared-type/api";
 
 import { useModal, useToast } from "@/globalStates";
 import {
@@ -18,7 +19,6 @@ import {
 import { PageLayout } from "@/components";
 import { useEditJd, useJdDetail, useManagerProfile } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
-import { ErrorResponseDef } from "@/types";
 
 import {
   ReasonPart,

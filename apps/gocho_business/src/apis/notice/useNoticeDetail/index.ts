@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import { ErrorResponseDef } from "@/types";
+import { ErrorResponseDef } from "shared-type/api";
 
 import { axiosNoTokenInstance } from "../../axiosInstance";
 import { GetNoticeDetailDef, noticeDetailKeyObj, RequestObjDef, ResponseObjDef } from "./type";

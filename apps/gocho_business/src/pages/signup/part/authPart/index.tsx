@@ -4,10 +4,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { FiCheck, FiChevronRight, FiSmartphone } from "react-icons/fi";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { ErrorResponseDef } from "shared-type/api/errorResponseType";
-
+import { ErrorResponseDef } from "shared-type/api";
 import { SharedButton } from "shared-ui/common/sharedButton";
 import { CheckBox } from "shared-ui/common/checkbox";
+
 import { loginSuccessEvent, registerCompleteClickEvent, registerPhoneValidationClickEvent } from "@/ga";
 import { getPass, getPassCheck, useManagerRegister, useDoLogin } from "@/apis";
 import { useModal } from "@/globalStates";
@@ -15,7 +15,6 @@ import { INTERNAL_URL } from "@/constants";
 import { commonCssObj } from "@/styles";
 
 import { AuthPartProps, PostSubmitValues } from "./type";
-
 import { cssObj } from "./style";
 import { isSpecObj } from "./util";
 
