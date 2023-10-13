@@ -1,8 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import { AdminResponseDef } from "shared-type/api/responseType";
-
+import { AdminResponseDef } from "@/types";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { RejectUploadJdDef, RequestObjDef, UseRejectUploadJdProps } from "./type";

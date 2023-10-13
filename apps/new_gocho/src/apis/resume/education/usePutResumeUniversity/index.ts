@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { ErrorResponseDef } from "shared-type/api/errorResponseType";
+import { ErrorResponseDef } from "shared-type/api";
 
 import { axiosInstance } from "@/apis/axiosInstance";
 

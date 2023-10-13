@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import { AdminResponseDef } from "shared-type/api/responseType";
+import { ErrorResponseDef } from "shared-type/api";
 
-import { ErrorResponseDef } from "@/types";
+import { AdminResponseDef } from "@/types";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { RequestObjDef, PostSearchKeywordDef, useAddSearchKeywordProps } from "./type";

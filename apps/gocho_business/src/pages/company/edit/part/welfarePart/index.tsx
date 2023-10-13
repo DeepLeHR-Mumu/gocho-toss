@@ -1,9 +1,10 @@
 import { FunctionComponent, useRef, useState } from "react";
 
+import { Entries } from "shared-type";
+
 import { commonCssObj } from "@/styles";
 
 import { PostWelfareSubmitValues, WelfareKey } from "@/pages/company/auth/part/applyAuthPart/welfarePart/type";
-import { Entries } from "@/types";
 import { WelfareForm, AddFieldButton } from "../../component";
 import { WELFARE_DESC_OBJ } from "./constant";
 import { welfareArrCreator } from "./util";

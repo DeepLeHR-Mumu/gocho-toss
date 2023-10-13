@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
-import { ErrorResponseDef } from "shared-type/api/errorResponseType";
+import { ErrorResponseDef } from "shared-type/api";
 
 import { axiosInstance } from "../../axiosInstance";
 
@@ -12,4 +12,5 @@ const addJdViewCount: AddJdViewCountDef = async (requestObj) => {
   return data;
 };
 
-export const useAddJdViewCount: UseAddJdViewCountProps = () => useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({ mutationFn: addJdViewCount });
+export const useAddJdViewCount: UseAddJdViewCountProps = () =>
+  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({ mutationFn: addJdViewCount });

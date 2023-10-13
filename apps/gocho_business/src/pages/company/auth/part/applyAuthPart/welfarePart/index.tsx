@@ -1,8 +1,8 @@
 import { FunctionComponent, useState, useRef } from "react";
 
-import { commonCssObj } from "@/styles";
+import { Entries } from "shared-type";
 
-import { Entries } from "@/types";
+import { commonCssObj } from "@/styles";
 
 import { WelfareForm, AddFieldButton } from "../../../component";
 import { WELFARE_DESC_OBJ } from "./constant";

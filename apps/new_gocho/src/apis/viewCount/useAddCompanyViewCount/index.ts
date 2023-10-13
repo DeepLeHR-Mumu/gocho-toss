@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
-import { ErrorResponseDef } from "shared-type/api/errorResponseType";
+import { ErrorResponseDef } from "shared-type/api";
 
 import { axiosInstance } from "../../axiosInstance";
 import { RequestObjDef, AddCompanyViewCountDef, UseAddCompanyViewCountProps } from "./type";
@@ -11,6 +11,7 @@ const addCompanyViewCount: AddCompanyViewCountDef = async (requestObj) => {
   return data;
 };
 
-export const useAddCompanyViewCount: UseAddCompanyViewCountProps = () => useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
+export const useAddCompanyViewCount: UseAddCompanyViewCountProps = () =>
+  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
     mutationFn: addCompanyViewCount,
   });

@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 
 import { BACKEND_URL } from "shared-constant";
 import { tokenDecryptor } from "shared-util";
-import { ErrorResponseDef } from "shared-type/api/errorResponseType";
+import { ErrorResponseDef } from "shared-type/api";
 
 export const axiosNoTokenInstance = axios.create({
   timeout: 10000,

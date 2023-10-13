@@ -1,8 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import { AdminResponseDef } from "shared-type/api/responseType";
+import { AdminResponseDef } from "@/types";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
+
 import { EditCompanyDef, RequestObjDef, useEditCompanyProps } from "./type";
 
 export const editCompany: EditCompanyDef = async (requestObj) => {

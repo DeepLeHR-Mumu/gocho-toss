@@ -1,6 +1,7 @@
-import { AdminResponseDef } from "shared-type/api/responseType";
 import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
+
+import { AdminResponseDef } from "@/types";
 
 export interface RequestObjDef {
   company_id: number;

@@ -5,10 +5,10 @@ import dayjs from "dayjs";
 
 import { BUSINESS_BACKEND_URL } from "shared-constant";
 import { managerTokenDecryptor } from "shared-util";
+import { ErrorResponseDef } from "shared-type/api";
 
 import { useModal } from "@/globalStates";
 import { INTERNAL_URL } from "@/constants";
-import { ErrorResponseDef } from "@/types";
 
 export const axiosNoTokenInstance = axios.create({
   timeout: 10000,
