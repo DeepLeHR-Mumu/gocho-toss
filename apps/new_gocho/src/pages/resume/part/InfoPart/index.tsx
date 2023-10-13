@@ -1,31 +1,32 @@
 import { useState } from "react";
-import { ListCard, ResumeDropDown } from "../../component";
+import { ListCard } from "../../component";
+import { ProfileForm, ResumeProfile } from "./component";
 
-const menuArr = [
-  {
-    content: "고등학교",
-  },
-  {
-    content: "대학교 (2,3년제)",
-  },
-  {
-    content: "대학교 ( 4년제 )",
-  },
-  {
-    content: "기타",
-  },
-];
+import { cssObj } from "./style";
+
+// TODO: 유저아이디 가져오기
+const userId = 12;
 
 export const InfoPart = () => {
-  // TODO: 유저아이디 가져오기
-  const userId = 12;
+  const [isEditMode, setEditMode] = useState(false);
 
-  const [education, setEducation] = useState("고등학교");
+  const handleEditMode = () => setEditMode(!isEditMode);
 
   return (
     <div>
-      <ListCard title="기본정보" isRequired iconType="edit" userId={userId}>
-        <ResumeDropDown setValue={setEducation} value={education} menuArr={menuArr} />
+      <ListCard
+        title="기본정보"
+        isRequired
+        iconType={isEditMode ? "none" : "edit"}
+        editMessage={
+          <p css={cssObj.editMsg}>
+            이름, 생년월일, 연락처는 [마이페이지{">"} <b>계정 관리</b>]에서 수정할 수 있습니다
+          </p>
+        }
+        userId={userId}
+        iconHandler={handleEditMode}
+      >
+        {isEditMode ? <ProfileForm handleEditMode={handleEditMode} /> : <ResumeProfile />}
       </ListCard>
     </div>
   );
