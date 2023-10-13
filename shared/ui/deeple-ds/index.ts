@@ -1,12 +1,14 @@
 import SearchBar from "./SearchBar";
 
 export { Button } from "./Button";
-export { FollowButton } from "./FollowButton";
 export { Checkbox } from "./Checkbox";
 export { Chip } from "./Chip";
 export { DDayChip } from "./DDayChip";
 export { Divider } from "./Divider";
 export { DropDown } from "./DropDown";
+export { FollowButton } from "./FollowButton";
+export { HiddenH1 } from "./HiddenH1";
+export { HiddenH2 } from "./HiddenH2";
 export { Modal } from "./Modal";
 export { Popup } from "./Modal/Popup";
 export { Profile } from "./Profile";

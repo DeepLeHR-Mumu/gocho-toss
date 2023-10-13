@@ -1,8 +1,8 @@
 import { Component } from "react";
 import Image from "next/image";
 
+import { HiddenH2 } from "shared-ui/deeple-ds";
 import { SharedButton } from "shared-ui/common/sharedButton";
-import { InvisibleH2 } from "shared-ui/common/invisibleH2";
 
 import jobi_500 from "@/public/image/jobi_500.svg";
 import { INTERNAL_URL } from "@/constants";
@@ -25,7 +25,7 @@ export class ErrorBoundary extends Component<PropsDef, StateDef> {
     if (state.hasError) {
       return (
         <main css={cssObj.container}>
-          <InvisibleH2 title="없는 페이지" />
+          <HiddenH2 title="없는 페이지" />
           <div css={cssObj.jobiImage}>
             <Image src={jobi_500} alt="" fill priority />
           </div>

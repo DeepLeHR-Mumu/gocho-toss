@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FiShare2, FiEye } from "react-icons/fi";
 
-import { Divider } from "shared-ui/deeple-ds";
+import { Divider, HiddenH1 } from "shared-ui/deeple-ds";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
 import { Layout, ShareModal, CompanyBookmark, SkeletonBox } from "@/components";
@@ -54,6 +54,8 @@ export const TitlePart = () => {
 
   return (
     <>
+      <HiddenH1 title={`${companyData.name} 기업 정보`} />
+
       <section css={cssObj.background}>
         <div css={cssObj.imageWrapper}>
           <Image src={backgroundImage} alt="회사 배경" fill priority />

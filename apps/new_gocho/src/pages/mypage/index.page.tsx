@@ -2,10 +2,12 @@ import { useEffect } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
+import { HiddenH1 } from "shared-ui/deeple-ds";
+
 import { Layout, LoginModal } from "@/components";
 import { useUserInfo } from "@/apis/auth/useUserInfo";
-
 import { mypageFunnelEvent } from "@/ga/mypage";
+
 import { MenuLink } from "./component";
 import { myPageMenu, sideNavMenu, partElementArr } from "./constant";
 import { PageHead } from "./pageHead";
@@ -42,6 +44,8 @@ const MyPage: NextPage = () => {
   return (
     <Layout>
       <PageHead />
+      <HiddenH1 title="마이페이지 - 고초대졸닷컴" />
+
       <main css={cssObj.wrapper}>
         <section css={cssObj.navBox}>
           <div css={cssObj.navigationBox}>
