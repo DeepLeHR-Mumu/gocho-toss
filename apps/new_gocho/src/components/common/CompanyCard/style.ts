@@ -29,7 +29,7 @@ export const cssObj = {
     ${isButtonExist ? NEWTEXTS.TITLE2_B2428 : NEWTEXTS.TITLE4_B1822}
   `,
 
-  hashTags: (isButtonExist: boolean) => css`
+  hashTags: css`
     width: 100%;
     display: flex;
     justify-content: center;
