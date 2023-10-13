@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import gochoTextMono from "shared-image/global/deeple/textMono.svg";
 import kakaoLogo from "shared-image/global/sns/kakaoLogo.svg";
-import { kakaoChannelUrl } from "shared-constant";
+import { KAKAO_CHANNEL_URL } from "shared-constant";
 
 import { INTERNAL_URL } from "@/pages/constants";
 import { useGetDeviceType } from "@/globalStates";
@@ -52,7 +52,7 @@ export const Footer: FunctionComponent = () => {
               <a css={cssObj.link} href="mailto:cs@deeplehr.com">
                 cs@deeplehr.com
               </a>
-              <a css={cssObj.link} href={kakaoChannelUrl} target="_blank" rel="noreferrer">
+              <a css={cssObj.link} href={KAKAO_CHANNEL_URL} target="_blank" rel="noreferrer">
                 <span css={cssObj.kakaoLogo}>
                   <Image src={kakaoLogo} alt="카카오톡 플러스친구" fill sizes="1" />
                 </span>

@@ -37,7 +37,6 @@ export const DropDown = ({
   icon = { location: "suffix", whenMenuVisible: <FiChevronUp />, whenMenuInvisible: <FiChevronDown /> },
   customTitle,
   menu,
-  isRightDirection,
   menuConfig,
 }: DropDownProps) => {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -99,7 +98,7 @@ export const DropDown = ({
           })}
       </button>
       {!!menu && menuVisible && (
-        <div css={dropDownCssObj.menuWrapper(menuLocation, isRightDirection)}>
+        <div css={dropDownCssObj.menuWrapper(menuLocation)}>
           <Menu
             {...menu}
             options={

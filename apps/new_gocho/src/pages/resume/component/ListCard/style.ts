@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
@@ -14,6 +14,7 @@ export const cssObj = {
   headerWrapper: css`
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding-bottom: 1.25rem;
     border-bottom: 1px solid ${COLOR.GRAY700};
   `,
@@ -30,6 +31,6 @@ export const cssObj = {
   titleWrapper: css`
     display: flex;
     gap: 0.5rem;
-    ${NEWTEXTS.TITLE2_B2428}
+    ${TEXT.TITLE2_B2428}
   `,
 };

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   factoryChipWrapper: css`
@@ -36,12 +36,12 @@ export const cssObj = {
   `,
 
   infoTitle: css`
-    ${NEWTEXTS.TITLE2_B2428}
+    ${TEXT.TITLE2_B2428}
   `,
 
   infoSubtitle: css`
     color: ${COLOR.GRAY600};
-    ${NEWTEXTS.TITLE4_M1822}
+    ${TEXT.TITLE4_M1822}
   `,
 
   summaryWrapper: css`
@@ -59,16 +59,16 @@ export const cssObj = {
 
     > h3 {
       margin-bottom: 1.25rem;
-      ${NEWTEXTS.TITLE4_B1822};
+      ${TEXT.TITLE4_B1822};
     }
 
     > span {
       margin-bottom: 2.5rem;
-      ${NEWTEXTS.TITLE4_M1822}
+      ${TEXT.TITLE4_M1822}
     }
 
     > p {
-      ${NEWTEXTS.BODY1_R1826}
+      ${TEXT.BODY1_R1826}
     }
   `,
 
@@ -76,6 +76,6 @@ export const cssObj = {
     display: inline-block;
     margin-left: 1rem;
     color: ${COLOR.BLUE250};
-    ${NEWTEXTS.TITLE4_M1822}
+    ${TEXT.TITLE4_M1822}
   `,
 };

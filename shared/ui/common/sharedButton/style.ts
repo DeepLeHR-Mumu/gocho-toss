@@ -1,15 +1,15 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 import { ButtonDef } from "./type";
 
 export const cssObj = {
   buttonWrapper: (type: ButtonDef, isMobile: boolean | undefined, isLong: boolean | undefined, width: number) => css`
-    ${TEXTS.TITLE6}
-    ${isMobile && `${TEXTS.TITLE4}`};
-    ${isLong && `${TEXTS.TITLE7}`};
+    ${TEXT.TITLE5_M1620}
+    ${isMobile && `${TEXT.TITLE6_M1418}`};
+    ${isLong && `${TEXT.TITLE5_B1620}`};
     height: ${isLong ? "3.25rem" : "2.75rem"};
     padding: 0.75rem 0;
     border-radius: 0.5rem;

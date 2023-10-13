@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import testSmallImage1 from "shared-image/global/common/cho_color.svg";
+import testSmallImage1 from "shared-image/global/deeple/logoIconColor.svg";
 import testLargeImage1 from "shared-image/global/deeple/largeMono.svg";
 
 import { Profile } from ".";

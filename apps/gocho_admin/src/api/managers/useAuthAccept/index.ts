@@ -1,9 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-
-import { AdminResponseDef } from "shared-type/api/responseType";
-
+import { AxiosResponse, AxiosError } from "axios";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
+
 import { PostAuthAcceptDef, RequestObjDef, useAuthAcceptProps } from "./type";
 
 export const postAuthAccept: PostAuthAcceptDef = async (requestObj) => {
@@ -12,4 +10,4 @@ export const postAuthAccept: PostAuthAcceptDef = async (requestObj) => {
 };
 
 export const useAuthAccept: useAuthAcceptProps = () =>
-  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: postAuthAccept });
+  useMutation<AxiosResponse, AxiosError, RequestObjDef>({ mutationFn: postAuthAccept });

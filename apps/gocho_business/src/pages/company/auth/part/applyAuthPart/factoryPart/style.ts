@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 import { commonCssObj } from "@/styles";
 
@@ -36,7 +36,7 @@ export const cssObj = {
     padding: 1rem;
     margin-bottom: 1.25rem;
     background-color: ${COLOR.BLUE50};
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
 
     > svg {
       margin-right: 0.25rem;
@@ -74,7 +74,7 @@ export const cssObj = {
   `,
 
   factoryAddress: css`
-    ${TEXTS.TITLE3};
+    ${TEXT.TITLE6_M1418};
     color: ${COLOR.GRAY500};
   `,
 

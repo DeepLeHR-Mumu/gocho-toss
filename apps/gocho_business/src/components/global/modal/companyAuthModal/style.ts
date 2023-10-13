@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   modalContainer: css`
@@ -29,7 +29,7 @@ export const cssObj = {
   `,
 
   title: css`
-    ${TEXTS.TITLE11};
+    ${TEXT.TITLE1_B2832};
     display: block;
   `,
 
@@ -43,7 +43,7 @@ export const cssObj = {
 
   desc: css`
     margin-bottom: 1.25rem;
-    ${TEXTS.BODY4};
+    ${TEXT.BODY2_R1624};
   `,
 
   descWrapper: css`
@@ -54,7 +54,7 @@ export const cssObj = {
 
   descTitle: css`
     display: block;
-    ${TEXTS.TITLE9};
+    ${TEXT.TITLE4_B1822};
     margin-bottom: 0.5rem;
   `,
 
@@ -78,7 +78,7 @@ export const cssObj = {
     border-radius: 1rem 0 0 0;
     border-top: 1px solid ${COLOR.GRAY200};
     border-left: 1px solid ${COLOR.GRAY200};
-    ${TEXTS.TITLE6}
+    ${TEXT.TITLE5_M1620}
     background-color: ${COLOR.GRAY50};
     color: ${COLOR.GRAY600};
   `,
@@ -89,7 +89,7 @@ export const cssObj = {
     border-radius: 0 0 0 1rem;
     border-bottom: 1px solid ${COLOR.GRAY200};
     border-left: 1px solid ${COLOR.GRAY200};
-    ${TEXTS.TITLE6}
+    ${TEXT.TITLE5_M1620}
     background-color: ${COLOR.BLUE100};
     color: ${COLOR.BLUE400};
   `,
@@ -98,13 +98,13 @@ export const cssObj = {
     grid-row-start: 1;
     grid-row-end: 3;
     border: 1px solid ${COLOR.GRAY200};
-    ${TEXTS.TITLE6}
+    ${TEXT.TITLE5_M1620}
     color: ${COLOR.GRAY600};
     flex-direction: column;
   `,
 
   smallDesc: css`
-    ${TEXTS.TITLE1}
+    ${TEXT.TITLE7_M1218}
   `,
 
   dueTitle: css`
@@ -113,7 +113,7 @@ export const cssObj = {
     border-radius: 0 1rem 0 0;
     border-top: 1px solid ${COLOR.GRAY200};
     border-right: 1px solid ${COLOR.GRAY200};
-    ${TEXTS.TITLE5}
+    ${TEXT.TITLE5_M1620}
     background-color: ${COLOR.GRAY50};
     color: ${COLOR.GRAY500};
   `,
@@ -124,13 +124,13 @@ export const cssObj = {
     border-radius: 0 0 1rem 0;
     border-bottom: 1px solid ${COLOR.GRAY200};
     border-right: 1px solid ${COLOR.GRAY200};
-    ${TEXTS.TITLE5}
+    ${TEXT.TITLE5_M1620}
     background-color: ${COLOR.GRAY100};
     color: ${COLOR.GRAY500};
   `,
 
   businessLink: css`
-    ${TEXTS.UNDERLINE};
+    ${TEXT.UNDERLINE1_M1620};
     color: ${COLOR.BLUE250};
     display: flex;
     align-items: center;

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { COLOR } from "shared-style/color";
 
 export const cssObj = {
@@ -13,7 +13,7 @@ export const cssObj = {
   `,
 
   title: css`
-    ${NEWTEXTS.DISPLAY2_B3236};
+    ${TEXT.DISPLAY2_B3236};
   `,
 
   buttonContainer: css`
@@ -58,12 +58,12 @@ export const cssObj = {
   `,
 
   bannerTitle: css`
-    ${NEWTEXTS.DISPLAY1_B4044};
+    ${TEXT.DISPLAY1_B4044};
     color: ${COLOR.WHITE};
   `,
 
   nowLink: css`
-    ${NEWTEXTS.TITLE4_M1822};
+    ${TEXT.TITLE4_M1822};
     color: ${COLOR.WHITE};
     display: block;
     cursor: pointer;

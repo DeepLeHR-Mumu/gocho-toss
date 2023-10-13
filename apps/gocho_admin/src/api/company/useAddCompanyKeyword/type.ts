@@ -1,9 +1,7 @@
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
-import { AdminResponseDef } from "shared-type/api/responseType";
-
-import { ErrorResponseDef } from "@/types";
+import { ErrorResponseDef } from "shared-type/api";
 
 export interface RequestObjDef {
   keyword: string;
@@ -11,9 +9,9 @@ export interface RequestObjDef {
 }
 
 export interface PostCompanyKeywordDef {
-  ({ keyword, company_id }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ keyword, company_id }: RequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface useAddCompanyKeywordProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

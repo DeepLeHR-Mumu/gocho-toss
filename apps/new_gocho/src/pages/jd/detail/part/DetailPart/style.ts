@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
@@ -44,7 +44,7 @@ export const cssObj = {
 
   factoryName: css`
     color: ${COLOR.BLACK};
-    ${NEWTEXTS.TITLE4_B1822}
+    ${TEXT.TITLE4_B1822}
   `,
 
   rightIcon: css`
@@ -56,6 +56,6 @@ export const cssObj = {
 
   factoryAddress: css`
     color: ${COLOR.GRAY600};
-    ${NEWTEXTS.TITLE4_M1822}
+    ${TEXT.TITLE4_M1822}
   `,
 };

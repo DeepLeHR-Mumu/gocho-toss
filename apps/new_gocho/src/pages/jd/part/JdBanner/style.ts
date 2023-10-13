@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
-import { MOBILE } from "shared-style/mediaQuery";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   background: css`
@@ -20,7 +19,7 @@ export const cssObj = {
     color: ${COLOR.WHITE};
 
     > div {
-      ${NEWTEXTS.TITLE4_M1822}
+      ${TEXT.TITLE4_M1822}
       display: flex;
       align-items: center;
 
@@ -33,7 +32,7 @@ export const cssObj = {
 
     > p {
       margin-top: 1rem;
-      ${NEWTEXTS.DISPLAY2_B3236}
+      ${TEXT.DISPLAY2_B3236}
     }
   `,
 
@@ -99,10 +98,6 @@ export const cssObj = {
     border: 1px solid ${COLOR.WHITE};
     background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
-
-    ${MOBILE} {
-      display: none;
-    }
 
     > svg {
       color: ${COLOR.GRAY450};

@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { shorten } from "shared-style/common";
 
 export const cssObj = {
@@ -109,12 +109,12 @@ export const cssObj = {
   `,
 
   infoType: (isRead: boolean) => css`
-    ${TEXTS.TITLE4};
+    ${TEXT.TITLE6_M1418};
     color: ${isRead ? COLOR.GRAY600 : COLOR.BLUE200};
   `,
 
   infoTitle: (isRead: boolean) => css`
-    ${TEXTS.BODY3};
+    ${TEXT.BODY3_R1422};
     color: ${isRead ? COLOR.GRAY600 : COLOR.BLACK};
     ${shorten(3)};
   `,
@@ -130,7 +130,7 @@ export const cssObj = {
     align-items: center;
     justify-content: center;
     text-align: center;
-    ${TEXTS.TITLE4};
+    ${TEXT.TITLE6_M1418};
     color: ${COLOR.GRAY600};
   `,
 
@@ -190,16 +190,16 @@ export const cssObj = {
   `,
 
   companyName: css`
-    ${TEXTS.TITLE9};
+    ${TEXT.TITLE4_B1822};
     margin-bottom: 0.25rem;
   `,
 
   industry: css`
-    ${TEXTS.TITLE3};
+    ${TEXT.TITLE6_M1418};
   `,
 
   companyMenuLink: css`
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     display: block;
     padding: 0.75rem 1rem;
   `,
@@ -223,12 +223,12 @@ export const cssObj = {
   `,
 
   userName: css`
-    ${TEXTS.TITLE9};
+    ${TEXT.TITLE4_B1822};
     margin-bottom: 0.25rem;
   `,
 
   userDepartment: css`
-    ${TEXTS.TITLE3};
+    ${TEXT.TITLE6_M1418};
   `,
 
   logoutButton: css`

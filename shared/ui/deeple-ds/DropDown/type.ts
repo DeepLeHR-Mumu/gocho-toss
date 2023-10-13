@@ -29,7 +29,6 @@ export interface MenuProps {
 export interface DropDownProps {
   title?: string;
   icon?: { location?: "prefix" | "suffix"; whenMenuVisible?: ReactNode; whenMenuInvisible?: ReactNode };
-  isRightDirection?: boolean;
   customTitle?: ReactElement;
   menu?: MenuProps;
   menuConfig?: { direction?: MenuDirection; closeAfterClickEvent?: boolean; flexibleHeight?: boolean };

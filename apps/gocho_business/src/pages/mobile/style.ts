@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   container: css`
@@ -22,12 +22,12 @@ export const cssObj = {
 
   description: css`
     text-align: center;
-    ${TEXTS.BODY2}
+    ${TEXT.BODY3_R1422}
   `,
 
   inquiry: css`
     margin-top: 0.5rem;
     color: ${COLOR.GRAY600};
-    ${TEXTS.BODY1}
+    ${TEXT.BODY4_R1220}
   `,
 };

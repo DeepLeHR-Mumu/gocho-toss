@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   subContainer: css`
@@ -14,7 +14,7 @@ export const cssObj = {
   `,
 
   title: css`
-    ${NEWTEXTS.TITLE1_B2832}
+    ${TEXT.TITLE1_B2832}
     margin-bottom: 1.75rem;
   `,
 
@@ -27,7 +27,7 @@ export const cssObj = {
 
   rowWrapper: css`
     display: flex;
-    ${NEWTEXTS.BODY1_R1826}
+    ${TEXT.BODY1_R1826}
 
     span:first-of-type {
       flex-direction: row;

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { COLOR } from "shared-style/color";
 
 export const cssObj = {
@@ -13,7 +13,7 @@ export const cssObj = {
   `,
 
   title: css`
-    ${NEWTEXTS.DISPLAY2_B3236};
+    ${TEXT.DISPLAY2_B3236};
   `,
 
   buttonContainer: css`

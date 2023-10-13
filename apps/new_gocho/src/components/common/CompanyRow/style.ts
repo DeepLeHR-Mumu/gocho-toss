@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { TEMP } from "shared-style/mediaQuery";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: (border: boolean) => css`
@@ -11,10 +10,6 @@ export const cssObj = {
     align-items: center;
     border-radius: 1rem;
     border: ${border ? `1px solid ${COLOR.GRAY200}` : "none"};
-
-    ${TEMP} {
-      padding: 0.75rem 0;
-    }
   `,
 
   skeletonWrapper: css`
@@ -34,20 +29,12 @@ export const cssObj = {
 
   companyName: css`
     color: ${COLOR.BLACK};
-    ${NEWTEXTS.TITLE4_B1822}
-
-    ${TEMP} {
-      ${NEWTEXTS.TITLE5_B1620}
-    }
+    ${TEXT.TITLE4_B1822}
   `,
 
   companyCategory: css`
     color: ${COLOR.GRAY600};
-    ${NEWTEXTS.TITLE6_M1418}
-
-    ${TEMP} {
-      ${NEWTEXTS.TITLE7_M1218}
-    }
+    ${TEXT.TITLE6_M1418}
   `,
 
   cursorPointer: css`

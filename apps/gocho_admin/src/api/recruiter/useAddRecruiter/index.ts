@@ -1,8 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-
-import { AdminResponseDef } from "shared-type/api/responseType";
-
+import { AxiosResponse, AxiosError } from "axios";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { PostRecruiterDef, RequestObjDef, useAddRecruiterProps } from "./type";
@@ -13,4 +10,4 @@ export const postAddRecruiter: PostRecruiterDef = async (requestObj) => {
 };
 
 export const useAddRecruiter: useAddRecruiterProps = () =>
-  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: postAddRecruiter });
+  useMutation<AxiosResponse, AxiosError, RequestObjDef>({ mutationFn: postAddRecruiter });

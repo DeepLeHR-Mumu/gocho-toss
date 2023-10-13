@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   welFareWrapper: css`
@@ -41,7 +41,7 @@ export const cssObj = {
   `,
 
   noData: css`
-    ${TEXTS.TITLE4};
+    ${TEXT.TITLE6_M1418};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,7 +77,7 @@ export const cssObj = {
     font-weight: 400;
 
     ::placeholder {
-      ${TEXTS.TITLE5};
+      ${TEXT.TITLE5_M1620};
       color: ${COLOR.GRAY450};
     }
   `,

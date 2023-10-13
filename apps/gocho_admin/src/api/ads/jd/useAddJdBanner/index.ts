@@ -1,8 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-
-import { AdminResponseDef } from "shared-type/api/responseType";
-
+import { AxiosResponse, AxiosError } from "axios";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { PostJdBannerDef, RequestObjDef, useAddJdBannerProps } from "./type";
@@ -20,4 +17,4 @@ export const postAddJdBanner: PostJdBannerDef = async (requestObj) => {
 };
 
 export const useAddJdBanner: useAddJdBannerProps = () =>
-  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: postAddJdBanner });
+  useMutation<AxiosResponse, AxiosError, RequestObjDef>({ mutationFn: postAddJdBanner });

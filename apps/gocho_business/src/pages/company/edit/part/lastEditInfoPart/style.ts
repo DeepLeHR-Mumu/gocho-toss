@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   spinnerBox: css`
@@ -30,7 +30,7 @@ export const cssObj = {
     }
 
     > p {
-      ${TEXTS.TITLE9}
+      ${TEXT.TITLE4_B1822}
       color: ${isWaiting ? COLOR.GREEN300 : COLOR.RED300};
     }
   `,
@@ -47,7 +47,7 @@ export const cssObj = {
   `,
 
   infoBox: css`
-    ${TEXTS.TITLE3};
+    ${TEXT.TITLE6_M1418};
     color: ${COLOR.GRAY500};
 
     > span {
@@ -61,7 +61,7 @@ export const cssObj = {
   `,
 
   email: css`
-    ${TEXTS.TITLE3};
+    ${TEXT.TITLE6_M1418};
     color: ${COLOR.GRAY600};
 
     > span {
@@ -76,23 +76,23 @@ export const cssObj = {
   `,
 
   reasonTitle: css`
-    ${TEXTS.TITLE6};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.RED300};
     margin-bottom: 1.25rem;
 
     > span {
-      ${TEXTS.TITLE3};
+      ${TEXT.TITLE6_M1418};
       color: ${COLOR.GRAY500};
       margin-left: 0.5rem;
     }
   `,
 
   reason: css`
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     margin-bottom: 0.5rem;
 
     :before {
-      ${TEXTS.TITLE5};
+      ${TEXT.TITLE5_M1620};
       font-weight: 700;
       content: "·";
       margin-right: 0.25rem;

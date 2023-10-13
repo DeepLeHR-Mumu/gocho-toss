@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Profile } from "deeple-ds/Profile";
 
-import testSmallImage1 from "shared-image/global/common/cho_color.svg";
+import testSmallImage1 from "shared-image/global/deeple/logoIconColor.svg";
 
 import { DropDown } from ".";
 

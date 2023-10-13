@@ -1,23 +1,14 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { COLOR } from "shared-style/color";
-import { TEMP } from "shared-style/mediaQuery";
 
 export const cssObj = {
   sectionContainer: css`
     margin: 4.5rem 0 7.5rem;
-
-    ${TEMP} {
-      margin: 1.5rem 0;
-    }
   `,
 
   title: css`
-    ${NEWTEXTS.DISPLAY2_B3236};
-
-    ${TEMP} {
-      ${NEWTEXTS.TITLE5_B1620};
-    }
+    ${TEXT.DISPLAY2_B3236};
   `,
 
   controlContainer: css`
@@ -25,20 +16,12 @@ export const cssObj = {
     align-items: flex-end;
     justify-content: space-between;
     margin-top: 2.25rem;
-
-    ${TEMP} {
-      margin-top: 1rem;
-    }
   `,
 
   keywordContainer: css`
     display: flex;
     flex-wrap: wrap;
     gap: 1rem 1.25rem;
-
-    ${TEMP} {
-      gap: 0.5rem 0.75rem;
-    }
   `,
 
   buttonContainer: css`
@@ -52,11 +35,6 @@ export const cssObj = {
     border-radius: 50%;
     background-color: ${isDisabled ? COLOR.GRAY50 : COLOR.WHITE};
     border: 1px solid ${COLOR.GRAY200};
-
-    ${TEMP} {
-      display: none;
-    }
-
     > svg {
       color: ${isDisabled ? COLOR.GRAY100 : COLOR.GRAY450};
       width: 2rem;
@@ -66,10 +44,6 @@ export const cssObj = {
 
   sliderContainer: css`
     margin-top: 2.25rem;
-
-    ${TEMP} {
-      margin-top: 1.5rem;
-    }
   `,
 
   cardContainer: css`

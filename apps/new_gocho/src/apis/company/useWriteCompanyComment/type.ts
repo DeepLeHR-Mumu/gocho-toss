@@ -1,5 +1,4 @@
-import { ResponseDef } from "shared-type/api/responseType";
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
@@ -9,9 +8,9 @@ export interface RequestObjDef {
 }
 
 export interface PostWriteCompanyCommentDef {
-  ({ companyId, description }: RequestObjDef): Promise<ResponseDef>;
+  ({ companyId, description }: RequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface useWriteCompanyCommentProps {
-  (): UseMutationResult<ResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError, RequestObjDef>;
 }

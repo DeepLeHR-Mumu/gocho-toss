@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   addFieldButton: (state: boolean) => css`
@@ -11,7 +11,7 @@ export const cssObj = {
     height: 3.25rem;
     padding: 1rem;
     background-color: ${state ? COLOR.BLUE100 : COLOR.GRAY50};
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
 
     > svg {
       color: ${COLOR.GRAY450};

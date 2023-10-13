@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { COLOR } from "shared-style/color";
 
 export const getCssObj = (themeWhite: boolean) => ({
@@ -63,7 +63,7 @@ export const getCssObj = (themeWhite: boolean) => ({
 
     return css`
       color: ${themeWhite ? COLOR.GRAY600 : COLOR.WHITE};
-      ${NEWTEXTS.TITLE4_B1822}
+      ${TEXT.TITLE4_B1822}
       cursor: pointer;
       padding-bottom: 1.625rem;
       color: ${color};
@@ -86,7 +86,7 @@ export const getCssObj = (themeWhite: boolean) => ({
     padding: 0.5rem 1rem;
     color: ${themeWhite ? COLOR.BLUE200 : COLOR.BLUE100};
     background-color: transparent;
-    ${NEWTEXTS.TITLE5_B1620}
+    ${TEXT.TITLE5_B1620}
 
     :last-of-type {
       margin-right: 1rem;
@@ -94,7 +94,7 @@ export const getCssObj = (themeWhite: boolean) => ({
   `,
 
   loginButton: css`
-    ${NEWTEXTS.TITLE4_B1822}
+    ${TEXT.TITLE4_B1822}
     color: ${themeWhite ? COLOR.BLUE300 : COLOR.WHITE};
   `,
 

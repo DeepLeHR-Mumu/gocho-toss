@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   background: css`
@@ -30,6 +30,6 @@ export const commonCssObj = {
 
   title: css`
     margin-bottom: 1.75rem;
-    ${NEWTEXTS.TITLE1_B2832}
+    ${TEXT.TITLE1_B2832}
   `,
 };

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   titleWrapper: (isValid = true) => css`
@@ -12,13 +12,13 @@ export const cssObj = {
 
     h3 {
       margin-bottom: 1.75rem;
-      ${NEWTEXTS.TITLE1_B2832}
+      ${TEXT.TITLE1_B2832}
     }
   `,
 
   jdNumber: css`
     margin-bottom: 2rem;
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
   `,
 
   jdWrapper: css`
@@ -34,7 +34,7 @@ export const cssObj = {
     grid-column-end: 3;
     margin-top: 1.0625rem;
     color: ${COLOR.GRAY600};
-    ${NEWTEXTS.TITLE4_M1822}
+    ${TEXT.TITLE4_M1822}
 
     > svg {
       width: 1.5rem;
@@ -50,6 +50,6 @@ export const cssObj = {
     display: grid;
     place-items: center;
     margin-bottom: 2rem;
-    ${NEWTEXTS.TITLE4_M1822}
+    ${TEXT.TITLE4_M1822}
   `,
 };

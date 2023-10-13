@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { COLOR } from "shared-style/color";
 
 export const cssObj = {
@@ -13,13 +13,13 @@ export const cssObj = {
     margin-bottom: 2rem;
 
     > h3 {
-      ${NEWTEXTS.DISPLAY1_B4044}
+      ${TEXT.DISPLAY1_B4044}
     }
 
     > span {
       margin-left: 1.75rem;
       color: ${COLOR.GRAY600};
-      ${NEWTEXTS.TITLE4_M1822}
+      ${TEXT.TITLE4_M1822}
     }
   `,
 

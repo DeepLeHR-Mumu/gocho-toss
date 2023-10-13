@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
@@ -31,7 +31,7 @@ export const cssObj = {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    ${NEWTEXTS.TITLE5_B1620}
+    ${TEXT.TITLE5_B1620}
   `,
 
   chipsWrapper: css`
@@ -63,7 +63,7 @@ export const cssObj = {
     background-color: ${COLOR.BLUE100};
     border-radius: 1rem;
     border: 1px solid ${COLOR.BLUE200};
-    ${NEWTEXTS.BODY3_R1422}
+    ${TEXT.BODY3_R1422}
   `,
 
   contentsWrapper: (blurred: boolean) => css`
@@ -81,7 +81,7 @@ export const cssObj = {
     margin: auto;
     text-align: center;
     color: ${COLOR.GRAY600};
-    ${NEWTEXTS.BODY3_R1422}
+    ${TEXT.BODY3_R1422}
   `,
 
   footerWrapper: css`
@@ -91,7 +91,7 @@ export const cssObj = {
 
     > h5 {
       padding-bottom: 0.75rem;
-      ${NEWTEXTS.TITLE6_B1418}
+      ${TEXT.TITLE6_B1418}
     }
 
     :focus-within {
@@ -102,7 +102,7 @@ export const cssObj = {
   `,
 
   commentInput: css`
-    ${NEWTEXTS.BODY3_R1422};
+    ${TEXT.BODY3_R1422};
   `,
 
   sendIcon: css`

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   navWrapper: css`
@@ -9,7 +9,7 @@ export const cssObj = {
   `,
 
   subMenu: (isSelected: boolean) => css`
-    ${NEWTEXTS.TITLE4_B1822};
+    ${TEXT.TITLE4_B1822};
     display: flex;
     align-items: flex-start;
     justify-content: center;

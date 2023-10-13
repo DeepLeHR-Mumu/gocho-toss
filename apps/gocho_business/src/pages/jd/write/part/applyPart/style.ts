@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   dateInputContainer: css`
@@ -79,7 +79,7 @@ export const cssObj = {
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
     background-color: ${COLOR.GRAY100};
-    ${TEXTS.TITLE4};
+    ${TEXT.TITLE6_M1418};
     color: ${COLOR.GRAY600};
 
     > svg {

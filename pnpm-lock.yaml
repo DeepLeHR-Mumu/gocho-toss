@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
 
   .:
@@ -373,6 +377,9 @@ importers:
       react:
         specifier: 18.2.0
         version: 18.2.0
+      react-daum-postcode:
+        specifier: ^3.1.1
+        version: 3.1.1(react@18.2.0)
       react-dom:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
@@ -7037,7 +7044,7 @@ packages:
       react-refresh: 0.11.0
       schema-utils: 3.1.2
       source-map: 0.7.4
-      webpack: 5.84.1(@swc/core@1.3.71)(esbuild@0.18.17)
+      webpack: 5.84.1(esbuild@0.17.19)
     dev: true
 
   /@polka/url@1.0.0-next.21:
@@ -8298,7 +8305,7 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       semver: 7.5.4
       style-loader: 3.3.3(webpack@5.83.1)
-      terser-webpack-plugin: 5.3.9(@swc/core@1.3.71)(esbuild@0.18.17)(webpack@5.84.1)
+      terser-webpack-plugin: 5.3.9(esbuild@0.17.19)(webpack@5.83.1)
       ts-dedent: 2.2.0
       typescript: 4.7.2
       util: 0.12.5
@@ -8363,12 +8370,12 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       semver: 7.5.1
       style-loader: 3.3.3(webpack@5.84.1)
-      terser-webpack-plugin: 5.3.9(@swc/core@1.3.71)(esbuild@0.18.17)(webpack@5.84.1)
+      terser-webpack-plugin: 5.3.9(esbuild@0.17.19)(webpack@5.84.1)
       ts-dedent: 2.2.0
       typescript: 4.7.2
       util: 0.12.5
       util-deprecate: 1.0.2
-      webpack: 5.84.1(@swc/core@1.3.71)(esbuild@0.18.17)
+      webpack: 5.84.1(esbuild@0.17.19)
       webpack-dev-middleware: 5.3.3(webpack@5.84.1)
       webpack-hot-middleware: 2.25.3
       webpack-virtual-modules: 0.4.6
@@ -9648,7 +9655,7 @@ packages:
       tsconfig-paths: 4.2.0
       tsconfig-paths-webpack-plugin: 3.5.2
       typescript: 4.7.2
-      webpack: 5.84.1(@swc/core@1.3.71)(esbuild@0.18.17)
+      webpack: 5.84.1(esbuild@0.17.19)
     transitivePeerDependencies:
       - '@swc/core'
       - '@types/webpack'
@@ -9734,7 +9741,7 @@ packages:
       tsconfig-paths: 4.2.0
       tsconfig-paths-webpack-plugin: 3.5.2
       typescript: 4.7.2
-      webpack: 5.84.1(@swc/core@1.3.71)(esbuild@0.18.17)
+      webpack: 5.84.1(esbuild@0.17.19)
     transitivePeerDependencies:
       - '@swc/core'
       - '@types/webpack'
@@ -9966,7 +9973,7 @@ packages:
       react-refresh: 0.11.0
       semver: 7.5.1
       typescript: 4.7.2
-      webpack: 5.84.1(@swc/core@1.3.71)(esbuild@0.18.17)
+      webpack: 5.84.1(esbuild@0.17.19)
     transitivePeerDependencies:
       - '@swc/core'
       - '@types/webpack'
@@ -10156,7 +10163,7 @@ packages:
       react-docgen-typescript: 2.2.2(typescript@4.7.2)
       tslib: 2.5.2
       typescript: 4.7.2
-      webpack: 5.84.1(@swc/core@1.3.71)(esbuild@0.18.17)
+      webpack: 5.84.1(esbuild@0.17.19)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -11940,7 +11947,7 @@ packages:
       loader-utils: 2.0.4
       make-dir: 3.1.0
       schema-utils: 2.7.1
-      webpack: 5.84.1(@swc/core@1.3.71)(esbuild@0.18.17)
+      webpack: 5.84.1(esbuild@0.17.19)
     dev: true
 
   /babel-loader@9.1.2(@babel/core@7.21.8)(webpack@5.83.1):
@@ -11966,7 +11973,7 @@ packages:
       '@babel/core': 7.22.1
       find-cache-dir: 3.3.2
       schema-utils: 4.0.1
-      webpack: 5.84.1(@swc/core@1.3.71)(esbuild@0.18.17)
+      webpack: 5.84.1(esbuild@0.17.19)
     dev: true
 
   /babel-loader@9.1.2(@babel/core@7.22.9)(webpack@5.84.1):
@@ -13067,7 +13074,7 @@ packages:
       postcss-modules-values: 4.0.0(postcss@8.4.24)
       postcss-value-parser: 4.2.0
       semver: 7.5.4
-      webpack: 5.84.1(@swc/core@1.3.71)(esbuild@0.18.17)
+      webpack: 5.84.1(esbuild@0.17.19)
     dev: true
 
   /css-loader@6.8.1(webpack@5.83.1):
@@ -13101,7 +13108,7 @@ packages:
       postcss-modules-values: 4.0.0(postcss@8.4.24)
       postcss-value-parser: 4.2.0
       semver: 7.5.1
-      webpack: 5.84.1(@swc/core@1.3.71)(esbuild@0.18.17)
+      webpack: 5.84.1(esbuild@0.17.19)
     dev: true
 
   /css-select@4.3.0:
@@ -14663,7 +14670,7 @@ packages:
       semver: 7.5.4
       tapable: 2.2.1
       typescript: 4.7.2
-      webpack: 5.84.1(@swc/core@1.3.71)(esbuild@0.18.17)
+      webpack: 5.84.1(esbuild@0.17.19)
     dev: true
 
   /fork-ts-checker-webpack-plugin@8.0.0(typescript@4.7.2)(webpack@5.84.1):
@@ -15197,7 +15204,7 @@ packages:
       lodash: 4.17.21
       pretty-error: 4.0.0
       tapable: 2.2.1
-      webpack: 5.84.1(@swc/core@1.3.71)(esbuild@0.18.17)
+      webpack: 5.84.1(esbuild@0.17.19)
     dev: true
 
   /htmlparser2@6.1.0:
@@ -17404,7 +17411,7 @@ packages:
       url: 0.11.0
       util: 0.12.5
       vm-browserify: 1.1.2
-      webpack: 5.84.1(@swc/core@1.3.71)(esbuild@0.18.17)
+      webpack: 5.84.1(esbuild@0.17.19)
     dev: true
 
   /node-releases@2.0.11:
@@ -17895,7 +17902,7 @@ packages:
       klona: 2.0.6
       postcss: 8.4.23
       semver: 7.5.4
-      webpack: 5.84.1(@swc/core@1.3.71)(esbuild@0.18.17)
+      webpack: 5.84.1(esbuild@0.17.19)
     dev: true
 
   /postcss-loader@7.3.2(postcss@8.4.24)(webpack@5.84.1):
@@ -17910,7 +17917,7 @@ packages:
       klona: 2.0.6
       postcss: 8.4.24
       semver: 7.5.1
-      webpack: 5.84.1(@swc/core@1.3.71)(esbuild@0.18.17)
+      webpack: 5.84.1(esbuild@0.17.19)
     dev: true
 
   /postcss-modules-extract-imports@3.0.0(postcss@8.4.24):
@@ -18951,7 +18958,7 @@ packages:
     dependencies:
       klona: 2.0.6
       neo-async: 2.6.2
-      webpack: 5.84.1(@swc/core@1.3.71)(esbuild@0.18.17)
+      webpack: 5.84.1(esbuild@0.17.19)
     dev: true
 
   /saxes@6.0.0:
@@ -19538,7 +19545,7 @@ packages:
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
-      webpack: 5.84.1(@swc/core@1.3.71)(esbuild@0.18.17)
+      webpack: 5.84.1(esbuild@0.17.19)
     dev: true
 
   /styled-jsx@5.1.1(@babel/core@7.22.9)(react@18.2.0):
@@ -19756,6 +19763,56 @@ packages:
       serialize-javascript: 6.0.1
       terser: 5.17.4
       webpack: 5.84.1(@swc/core@1.3.71)(esbuild@0.18.17)
+    dev: true
+
+  /terser-webpack-plugin@5.3.9(esbuild@0.17.19)(webpack@5.83.1):
+    resolution: {integrity: sha512-ZuXsqE07EcggTWQjXUj+Aot/OMcD0bMKGgF63f7UxYcu5/AJF53aIpK1YoP5xR9l6s/Hy2b+t1AM0bLNPRuhwA==}
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      '@swc/core': '*'
+      esbuild: '*'
+      uglify-js: '*'
+      webpack: ^5.1.0
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      esbuild:
+        optional: true
+      uglify-js:
+        optional: true
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.18
+      esbuild: 0.17.19
+      jest-worker: 27.5.1
+      schema-utils: 3.1.2
+      serialize-javascript: 6.0.1
+      terser: 5.17.4
+      webpack: 5.83.1(esbuild@0.17.19)
+    dev: true
+
+  /terser-webpack-plugin@5.3.9(esbuild@0.17.19)(webpack@5.84.1):
+    resolution: {integrity: sha512-ZuXsqE07EcggTWQjXUj+Aot/OMcD0bMKGgF63f7UxYcu5/AJF53aIpK1YoP5xR9l6s/Hy2b+t1AM0bLNPRuhwA==}
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      '@swc/core': '*'
+      esbuild: '*'
+      uglify-js: '*'
+      webpack: ^5.1.0
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      esbuild:
+        optional: true
+      uglify-js:
+        optional: true
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.18
+      esbuild: 0.17.19
+      jest-worker: 27.5.1
+      schema-utils: 3.1.2
+      serialize-javascript: 6.0.1
+      terser: 5.17.4
+      webpack: 5.84.1(esbuild@0.17.19)
     dev: true
 
   /terser@5.17.4:
@@ -20447,7 +20504,7 @@ packages:
       mime-types: 2.1.35
       range-parser: 1.2.1
       schema-utils: 4.0.0
-      webpack: 5.84.1(@swc/core@1.3.71)(esbuild@0.18.17)
+      webpack: 5.84.1(esbuild@0.17.19)
     dev: true
 
   /webpack-dev-middleware@6.1.1(webpack@5.84.1):
@@ -20519,7 +20576,7 @@ packages:
       neo-async: 2.6.2
       schema-utils: 3.1.2
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.9(@swc/core@1.3.71)(esbuild@0.18.17)(webpack@5.84.1)
+      terser-webpack-plugin: 5.3.9(esbuild@0.17.19)(webpack@5.83.1)
       watchpack: 2.4.0
       webpack-sources: 3.2.3
     transitivePeerDependencies:
@@ -20560,6 +20617,46 @@ packages:
       schema-utils: 3.1.2
       tapable: 2.2.1
       terser-webpack-plugin: 5.3.9(@swc/core@1.3.71)(esbuild@0.18.17)(webpack@5.84.1)
+      watchpack: 2.4.0
+      webpack-sources: 3.2.3
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
+    dev: true
+
+  /webpack@5.84.1(esbuild@0.17.19):
+    resolution: {integrity: sha512-ZP4qaZ7vVn/K8WN/p990SGATmrL1qg4heP/MrVneczYtpDGJWlrgZv55vxaV2ul885Kz+25MP2kSXkPe3LZfmg==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    peerDependencies:
+      webpack-cli: '*'
+    peerDependenciesMeta:
+      webpack-cli:
+        optional: true
+    dependencies:
+      '@types/eslint-scope': 3.7.4
+      '@types/estree': 1.0.1
+      '@webassemblyjs/ast': 1.11.6
+      '@webassemblyjs/wasm-edit': 1.11.6
+      '@webassemblyjs/wasm-parser': 1.11.6
+      acorn: 8.8.2
+      acorn-import-assertions: 1.9.0(acorn@8.8.2)
+      browserslist: 4.21.7
+      chrome-trace-event: 1.0.3
+      enhanced-resolve: 5.14.1
+      es-module-lexer: 1.2.1
+      eslint-scope: 5.1.1
+      events: 3.3.0
+      glob-to-regexp: 0.4.1
+      graceful-fs: 4.2.11
+      json-parse-even-better-errors: 2.3.1
+      loader-runner: 4.3.0
+      mime-types: 2.1.35
+      neo-async: 2.6.2
+      schema-utils: 3.1.2
+      tapable: 2.2.1
+      terser-webpack-plugin: 5.3.9(esbuild@0.17.19)(webpack@5.84.1)
       watchpack: 2.4.0
       webpack-sources: 3.2.3
     transitivePeerDependencies:
@@ -20854,7 +20951,3 @@ packages:
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false

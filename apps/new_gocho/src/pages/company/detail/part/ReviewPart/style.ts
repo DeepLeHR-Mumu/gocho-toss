@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 import { COLOR } from "shared-style/color";
 import { commonCssObj } from "../../style";
@@ -37,7 +37,7 @@ export const cssObj = {
 
   reviewNumber: css`
     margin-left: 1.5rem;
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
   `,
 
   reviewButtonWrapper: css`

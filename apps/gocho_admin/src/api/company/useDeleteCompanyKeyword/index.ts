@@ -1,11 +1,9 @@
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
 
-import { AdminResponseDef } from "shared-type/api/responseType";
-
+import { ErrorResponseDef } from "shared-type/api";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
-import { ErrorResponseDef } from "@/types";
 import { DeleteCompanyKeywordDef, RequestObjDef, useDeleteCompanyKeywordProps } from "./type";
 
 export const deleteCompanyKeyword: DeleteCompanyKeywordDef = async (requestObj) => {
@@ -14,4 +12,4 @@ export const deleteCompanyKeyword: DeleteCompanyKeywordDef = async (requestObj) 
 };
 
 export const useDeleteCompanyKeyword: useDeleteCompanyKeywordProps = () =>
-  useMutation<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>({ mutationFn: deleteCompanyKeyword });
+  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({ mutationFn: deleteCompanyKeyword });

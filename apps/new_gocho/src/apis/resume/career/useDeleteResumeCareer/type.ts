@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
-import { ErrorResponseDef } from "shared-type/api/errorResponseType";
+import { ErrorResponseDef } from "shared-type/api";
 
 export interface RequestObjDef {
   resumeId: number;

@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { MOBILE } from "shared-style/mediaQuery";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
@@ -30,10 +29,6 @@ export const cssObj = {
       }
     }
 
-    ${NEWTEXTS.TITLE5_M1620}
-
-    ${MOBILE} {
-      ${NEWTEXTS.TITLE6_M1418};
-    }
+    ${TEXT.TITLE5_M1620}
   `,
 };

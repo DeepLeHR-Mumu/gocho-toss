@@ -1,6 +1,5 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { TEMP } from "shared-style/mediaQuery";
 
 export const cssObj = {
   wrapper: css`
@@ -16,12 +15,5 @@ export const cssObj = {
     padding: 1.5rem;
     background-color: ${COLOR.WHITE};
     overflow: auto;
-
-    ${TEMP} {
-      width: 100%;
-      height: 100%;
-      border-radius: 0;
-      padding: 0;
-    }
   `,
 };

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   sectionContainer: css`
@@ -13,7 +13,7 @@ export const cssObj = {
   `,
 
   desc: css`
-    ${NEWTEXTS.TITLE5_M1620};
+    ${TEXT.TITLE5_M1620};
     margin-top: 1rem;
     color: ${COLOR.GRAY600};
   `,

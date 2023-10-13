@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   background: css`
@@ -33,7 +33,7 @@ export const cssObj = {
   companyName: css`
     margin-left: 1rem;
     margin-right: auto;
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
   `,
 
   viewWrapper: css`
@@ -41,11 +41,11 @@ export const cssObj = {
     align-items: center;
     gap: 0.5rem;
     color: ${COLOR.GRAY450};
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
   `,
 
   title: css`
-    ${NEWTEXTS.DISPLAY2_B3236}
+    ${TEXT.DISPLAY2_B3236}
   `,
 
   dueDateWrapper: css`

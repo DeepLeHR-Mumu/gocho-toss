@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { TEMP } from "shared-style/mediaQuery";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { shorten } from "shared-style/common";
 
 export const cssObj = {
@@ -25,11 +24,6 @@ export const cssObj = {
     transform: translate(-50%, 0);
     display: flex;
     flex-direction: column;
-
-    ${TEMP} {
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
   `,
 
   closeIcon: css`
@@ -74,13 +68,13 @@ export const cssObj = {
   `,
 
   recentWordTitle: css`
-    ${NEWTEXTS.TITLE4_B1822}
+    ${TEXT.TITLE4_B1822}
   `,
 
   recentWordDelete: css`
     color: ${COLOR.GRAY600};
     cursor: pointer;
-    ${NEWTEXTS.TITLE5_M1620};
+    ${TEXT.TITLE5_M1620};
   `,
 
   recentWordChipsWrapper: css`
@@ -88,15 +82,10 @@ export const cssObj = {
     gap: 1rem;
     flex-wrap: wrap;
     margin-bottom: 2rem;
-
-    ${TEMP} {
-      overflow-x: auto;
-      flex-wrap: nowrap;
-    }
   `,
 
   recommendationWordTitle: css`
-    ${NEWTEXTS.TITLE4_B1822}
+    ${TEXT.TITLE4_B1822}
     margin-bottom: 1.75rem;
   `,
 
@@ -104,14 +93,10 @@ export const cssObj = {
     display: flex;
     flex-direction: row;
     gap: 1rem;
-
-    ${TEMP} {
-      overflow-x: auto;
-    }
   `,
 
   recommendationCompanyTitle: css`
-    ${NEWTEXTS.TITLE4_B1822}
+    ${TEXT.TITLE4_B1822}
     margin-bottom: 1.75rem;
   `,
 
@@ -119,15 +104,10 @@ export const cssObj = {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
-    ${TEMP} {
-      overflow-x: auto;
-      gap: 0.75rem;
-    }
   `,
 
   recommendationJdTitle: css`
-    ${NEWTEXTS.TITLE4_B1822}
+    ${TEXT.TITLE4_B1822}
     margin-bottom: 1.75rem;
   `,
 
