@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS, TEXTS } from "shared-style/text";
+import { TEXTS } from "shared-style/text";
 
 export const cssObj = {
   footer: css`
