@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   contentWrapper: css`
@@ -19,7 +19,7 @@ export const cssObj = {
   `,
 
   label: css`
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.GRAY600};
     width: 100%;
     padding-bottom: 1rem;
@@ -28,7 +28,7 @@ export const cssObj = {
   `,
 
   title: css`
-    ${TEXTS.TITLE10};
+    ${TEXT.TITLE2_B2428};
     margin-bottom: 1.5rem;
   `,
 
@@ -40,13 +40,13 @@ export const cssObj = {
     border-bottom: 1px solid ${COLOR.GRAY200};
 
     > p {
-      ${TEXTS.TITLE3};
+      ${TEXT.TITLE6_M1418};
       color: ${COLOR.GRAY600};
     }
   `,
 
   body: css`
-    ${TEXTS.BODY4};
+    ${TEXT.BODY2_R1624};
     padding-bottom: 2rem;
     border-bottom: 1px solid ${COLOR.GRAY200};
   `,
@@ -59,17 +59,17 @@ export const cssObj = {
   `,
 
   relatedLabel: css`
-    ${TEXTS.TITLE6};
+    ${TEXT.TITLE5_M1620};
     margin-right: 2.5rem;
   `,
 
   relatedTitle: css`
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     flex-grow: 1;
   `,
 
   relatedDate: css`
-    ${TEXTS.TITLE3};
+    ${TEXT.TITLE6_M1418};
     color: ${COLOR.GRAY500};
   `,
 };

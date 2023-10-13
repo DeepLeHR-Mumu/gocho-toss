@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   headerContainer: css`
@@ -28,7 +28,7 @@ export const cssObj = {
     padding: 0.75rem 1rem;
     border: 1px solid ${COLOR.BLUE300};
     border-radius: 0.5rem;
-    ${TEXTS.TITLE6};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.BLUE300};
     margin-right: 1.25rem;
   `,
@@ -39,7 +39,7 @@ export const cssObj = {
     padding: 0.75rem 1rem;
     background-color: ${COLOR.BLUE300};
     border-radius: 0.5rem;
-    ${TEXTS.TITLE6};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.WHITE};
   `,
 };

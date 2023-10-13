@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 import { commonCssObj } from "@/styles";
 
@@ -40,7 +40,7 @@ export const cssObj = {
   `,
 
   subContainerTitle: css`
-    ${TEXTS.TITLE11};
+    ${TEXT.TITLE1_B2832};
     display: block;
     margin-bottom: 2rem;
   `,
@@ -78,7 +78,7 @@ export const cssObj = {
     margin-left: 1.25rem;
     background-color: ${COLOR.WHITE};
     cursor: pointer;
-    ${TEXTS.TITLE4};
+    ${TEXT.TITLE6_M1418};
   `,
 
   customInput: (width: number, isError: boolean) => css`
@@ -101,7 +101,7 @@ export const cssObj = {
     padding: 0.75rem 1rem;
     background-color: ${COLOR.BLUE300};
     border-radius: 0.5rem;
-    ${TEXTS.TITLE6};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.WHITE};
     margin-top: 3rem;
     margin-bottom: 1.25rem;
@@ -117,9 +117,9 @@ export const cssObj = {
     width: 100%;
 
     & > li {
-      ${TEXTS.BODY4}
+      ${TEXT.BODY2_R1624}
       &:first-child {
-        ${TEXTS.BODY5}
+        font-weight: 500;
         color: ${COLOR.RED300};
       }
     }

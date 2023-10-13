@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   thumbsUpWrapper: (isClicked: boolean) => css`
@@ -32,7 +32,7 @@ export const cssObj = {
     }
 
     span {
-      ${NEWTEXTS.TITLE5_M1620}
+      ${TEXT.TITLE5_M1620}
     }
   `,
 
@@ -43,7 +43,7 @@ export const cssObj = {
     }
 
     span {
-      ${NEWTEXTS.TITLE7_M1218}
+      ${TEXT.TITLE7_M1218}
     }
   `,
 };

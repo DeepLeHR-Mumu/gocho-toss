@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 import { dDayChipColor } from "../style/color";
 
@@ -29,7 +29,7 @@ export const cssObj = {
     border-radius: 1.5rem;
     padding: 0.375rem 1rem;
     white-space: nowrap;
-    ${NEWTEXTS.TITLE6_B1418}
+    ${TEXT.TITLE6_B1418}
     ${chipColor(dDay, year)};
   `,
 };

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   categoryItem: css`
@@ -17,7 +17,7 @@ export const cssObj = {
   `,
 
   itemText: css`
-    ${NEWTEXTS.TITLE4_M1822};
+    ${TEXT.TITLE4_M1822};
     text-align: center;
   `,
 };

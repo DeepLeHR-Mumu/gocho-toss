@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   hiddenInput: css`
@@ -34,7 +34,7 @@ export const cssObj = {
     background-color: ${COLOR.WHITE};
     transition: 0.1s;
     color: ${isSelected ? `${COLOR.BLUE300}` : `${COLOR.BLACK}`};
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
 
     :hover {
       background-color: ${COLOR.GRAY100};
@@ -109,7 +109,7 @@ export const cssObj = {
     margin: 0 0.5rem 0 1rem;
     padding: 0.5rem 0.875rem;
     font-weight: 400;
-    ${TEXTS.TITLE4};
+    ${TEXT.TITLE6_M1418};
   `,
 
   yearInputWrapper: css`

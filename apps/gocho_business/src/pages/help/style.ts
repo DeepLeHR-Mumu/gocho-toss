@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   contentWrapper: css`
@@ -23,7 +23,7 @@ export const cssObj = {
   pageTitle: css`
     width: fit-content;
     margin-bottom: 1.5rem;
-    ${TEXTS.TITLE11};
+    ${TEXT.TITLE1_B2832};
   `,
 
   descWrapper: css`
@@ -36,16 +36,16 @@ export const cssObj = {
 
   descTitle: css`
     display: block;
-    ${TEXTS.TITLE9};
+    ${TEXT.TITLE4_B1822};
     margin-bottom: 0.5rem;
   `,
 
   desc: css`
-    ${TEXTS.TITLE3};
+    ${TEXT.TITLE6_M1418};
   `,
 
   email: css`
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.GRAY600};
     margin-bottom: 0.5rem;
 

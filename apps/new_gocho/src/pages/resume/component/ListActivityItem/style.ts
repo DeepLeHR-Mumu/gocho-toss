@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
@@ -24,7 +24,7 @@ export const cssObj = {
   `,
 
   titleHeader: css`
-    ${NEWTEXTS.TITLE5_M1620};
+    ${TEXT.TITLE5_M1620};
     display: flex;
     align-item: center;
     gap: 0.5rem;
@@ -47,26 +47,26 @@ export const cssObj = {
   `,
 
   title: css`
-    ${NEWTEXTS.TITLE4_B1822};
+    ${TEXT.TITLE4_B1822};
     line-height: 1.375rem;
     margin-right: 1rem;
   `,
 
   titelDes: css`
-    ${NEWTEXTS.BODY2_R1624};
+    ${TEXT.BODY2_R1624};
     color: ${COLOR.GRAY500};
     line-height: 1.25rem;
     margin-right: 0.5rem;
   `,
 
   description: css`
-    ${NEWTEXTS.BODY2_R1624};
+    ${TEXT.BODY2_R1624};
     color: ${COLOR.GRAY700};
     margin-bottom: 1rem;
   `,
 
   date: css`
-    ${NEWTEXTS.BODY2_R1624};
+    ${TEXT.BODY2_R1624};
     color: ${COLOR.GRAY700};
   `,
 };

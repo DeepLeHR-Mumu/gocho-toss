@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   sideNavContainer: css`
@@ -13,7 +13,7 @@ export const cssObj = {
   `,
 
   link: (isActive: boolean) => css`
-    ${isActive ? `${TEXTS.TITLE7}` : `${TEXTS.TITLE5}`};
+    ${isActive ? `${TEXT.TITLE5_B1620}` : `${TEXT.TITLE5_M1620}`};
     display: block;
     cursor: pointer;
     margin-bottom: 1.5rem;

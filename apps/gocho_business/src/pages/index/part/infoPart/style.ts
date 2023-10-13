@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { COLOR } from "shared-style/color";
 import { shorten } from "shared-style/common";
 
@@ -17,7 +17,7 @@ export const cssObj = {
   `,
 
   infoTypeButton: (isActive: boolean) => css`
-    ${TEXTS.TITLE9};
+    ${TEXT.TITLE4_B1822};
     padding: 0.75rem 1.25rem;
     background-color: ${isActive ? `${COLOR.BLUE300}` : `${COLOR.WHITE}`};
     color: ${isActive ? `${COLOR.WHITE}` : `${COLOR.GRAY600}`};
@@ -25,7 +25,7 @@ export const cssObj = {
   `,
 
   moreButton: css`
-    ${TEXTS.TITLE3};
+    ${TEXT.TITLE6_M1418};
     color: ${COLOR.GRAY600};
   `,
 
@@ -40,18 +40,18 @@ export const cssObj = {
   `,
 
   infoType: css`
-    ${TEXTS.TITLE7};
+    ${TEXT.TITLE5_B1620};
     min-width: 5.25rem;
   `,
 
   infoTitle: css`
     flex-grow: 1;
-    ${TEXTS.TITLE6};
+    ${TEXT.TITLE5_M1620};
     ${shorten()};
   `,
 
   infoDate: css`
-    ${TEXTS.TITLE3};
+    ${TEXT.TITLE6_M1418};
     color: ${COLOR.GRAY500};
   `,
 };

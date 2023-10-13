@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
@@ -30,7 +30,7 @@ export const cssObj = {
 
   basicProfileButton: css`
     color: ${COLOR.GRAY600};
-    font: ${NEWTEXTS.TITLE5_M1620};
+    font: ${TEXT.TITLE5_M1620};
   `,
 
   upload: css`

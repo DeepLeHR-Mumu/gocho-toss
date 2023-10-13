@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
@@ -9,11 +9,11 @@ export const cssObj = {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    ${NEWTEXTS.TITLE4_B1822}
+    ${TEXT.TITLE4_B1822}
   `,
 
   title: css`
-    ${NEWTEXTS.TITLE4_B1822}
+    ${TEXT.TITLE4_B1822}
   `,
 
   icon: css`

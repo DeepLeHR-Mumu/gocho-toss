@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   contentWrapper: css`
@@ -24,7 +24,7 @@ export const cssObj = {
   `,
 
   info: css`
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.GRAY700};
     margin-bottom: 0.5rem;
   `,

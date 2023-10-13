@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 import { cssObj as subContainerCssObj } from "../DetailSubContainer/style";
 
@@ -23,7 +23,7 @@ export const cssObj = {
 
     span {
       color: ${COLOR.BLUE300};
-      ${NEWTEXTS.TITLE4_M1822}
+      ${TEXT.TITLE4_M1822}
     }
   `,
 
@@ -51,12 +51,12 @@ export const cssObj = {
 
   startTime: css`
     color: ${COLOR.GRAY600};
-    ${NEWTEXTS.TITLE4_M1822}
+    ${TEXT.TITLE4_M1822}
   `,
 
   endTime: css`
     color: ${COLOR.BLACK};
-    ${NEWTEXTS.TITLE4_M1822}
+    ${TEXT.TITLE4_M1822}
   `,
 
   contentWrapper: css`

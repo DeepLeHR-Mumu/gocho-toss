@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { shorten } from "shared-style/common";
 
 export const cssObj = {
@@ -50,7 +50,7 @@ export const cssObj = {
   `,
 
   eduChip: (isActive: boolean) => css`
-    ${NEWTEXTS.TITLE5_B1620}
+    ${TEXT.TITLE5_B1620}
     width: 1.875rem;
     height: 1.875rem;
     display: flex;
@@ -63,7 +63,7 @@ export const cssObj = {
 
   title: css`
     margin-top: 1rem;
-    ${NEWTEXTS.TITLE1_B2832};
+    ${TEXT.TITLE1_B2832};
     ${shorten(2)};
   `,
 
@@ -75,7 +75,7 @@ export const cssObj = {
   `,
 
   desc: css`
-    ${NEWTEXTS.TITLE5_M1620};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.GRAY500};
   `,
 };

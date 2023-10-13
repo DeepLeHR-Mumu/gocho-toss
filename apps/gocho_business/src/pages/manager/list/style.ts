@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   spinner: css`
@@ -30,7 +30,7 @@ export const cssObj = {
   pageTitle: css`
     width: fit-content;
     margin-bottom: 2rem;
-    ${TEXTS.TITLE11};
+    ${TEXT.TITLE1_B2832};
   `,
 
   companyInfoContainer: css`
@@ -40,13 +40,13 @@ export const cssObj = {
   `,
 
   companyName: css`
-    ${TEXTS.TITLE10};
+    ${TEXT.TITLE2_B2428};
     color: ${COLOR.GRAY600};
   `,
 
   businessNumber: css`
     margin-left: 1rem;
-    ${TEXTS.TITLE3};
+    ${TEXT.TITLE6_M1418};
     color: ${COLOR.GRAY500};
 
     > span {
@@ -57,7 +57,7 @@ export const cssObj = {
 
   pageDesc: css`
     text-align: left;
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.GRAY600};
     padding-bottom: 2rem;
     border-bottom: 1px solid ${COLOR.GRAY200};
@@ -80,7 +80,7 @@ export const cssObj = {
   `,
 
   header: (isCenter: boolean) => css`
-    ${TEXTS.TITLE7};
+    ${TEXT.TITLE5_B1620};
     text-align: ${isCenter ? "center" : "left"};
   `,
 
@@ -96,7 +96,7 @@ export const cssObj = {
   `,
 
   data: (isCenter: boolean) => css`
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     padding: 1rem 0;
     text-align: ${isCenter ? "center" : "left"};
   `,

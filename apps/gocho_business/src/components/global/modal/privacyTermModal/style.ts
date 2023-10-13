@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   modalContainer: css`
@@ -32,7 +32,7 @@ export const cssObj = {
   `,
 
   title: css`
-    ${TEXTS.TITLE9};
+    ${TEXT.TITLE4_B1822};
     display: block;
   `,
 
@@ -55,7 +55,7 @@ export const cssObj = {
   `,
 
   text: css`
-    ${TEXTS.BODY4};
+    ${TEXT.BODY2_R1624};
     color: ${COLOR.GRAY600};
   `,
 };

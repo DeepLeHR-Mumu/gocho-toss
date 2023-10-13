@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { COLOR } from "shared-style/color";
 
 export const cssObj = {
@@ -23,11 +23,11 @@ export const cssObj = {
   `,
 
   title: css`
-    ${NEWTEXTS.TITLE1_B2832}
+    ${TEXT.TITLE1_B2832}
   `,
 
   desc: css`
-    ${NEWTEXTS.BODY2_R1624};
+    ${TEXT.BODY2_R1624};
     margin-top: 0.5rem;
   `,
 
@@ -39,7 +39,7 @@ export const cssObj = {
   `,
 
   companyDesc: css`
-    ${NEWTEXTS.BODY2_R1624};
+    ${TEXT.BODY2_R1624};
 
     > span {
       color: ${COLOR.BLUE300};
@@ -63,7 +63,7 @@ export const cssObj = {
     color: ${COLOR.WHITE};
     padding: 1rem 2rem;
     margin-top: 2rem;
-    ${NEWTEXTS.TITLE4_B1822};
+    ${TEXT.TITLE4_B1822};
   `,
 
   jobiImageBox: css`

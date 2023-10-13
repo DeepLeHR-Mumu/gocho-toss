@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const commonCssObj = {
   partContainer: css`
@@ -13,7 +13,7 @@ export const commonCssObj = {
   `,
 
   partTitle: css`
-    ${TEXTS.TITLE11};
+    ${TEXT.TITLE1_B2832};
     display: block;
     margin-bottom: 2rem;
   `,
@@ -33,7 +33,7 @@ export const commonCssObj = {
   inputTitle: (hasMargin: boolean) => css`
     display: flex;
     align-items: center;
-    ${TEXTS.TITLE9};
+    ${TEXT.TITLE4_B1822};
     margin-top: ${hasMargin ? "1rem" : 0};
     width: 8.25rem;
 
@@ -53,7 +53,7 @@ export const commonCssObj = {
     align-items: center;
     width: 8.25rem;
     margin-top: ${hasMargin ? "1rem" : 0};
-    ${TEXTS.TITLE9};
+    ${TEXT.TITLE4_B1822};
   `,
 
   select: (width: number, isError: boolean) => css`
@@ -69,7 +69,7 @@ export const commonCssObj = {
     font-weight: 400;
 
     ::placeholder {
-      ${TEXTS.TITLE5};
+      ${TEXT.TITLE5_M1620};
       color: ${COLOR.GRAY450};
     }
 
@@ -115,7 +115,7 @@ export const commonCssObj = {
     padding: 0 1rem;
     background-color: ${COLOR.WHITE};
     transition: 0.1s;
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
 
     :hover {
       background-color: ${COLOR.GRAY100};
@@ -133,7 +133,7 @@ export const commonCssObj = {
     font-weight: 400;
 
     ::placeholder {
-      ${TEXTS.TITLE5};
+      ${TEXT.TITLE5_M1620};
       color: ${COLOR.GRAY450};
     }
   `,
@@ -150,7 +150,7 @@ export const commonCssObj = {
     font-weight: 400;
 
     ::placeholder {
-      ${TEXTS.TITLE5};
+      ${TEXT.TITLE5_M1620};
       color: ${COLOR.GRAY450};
     }
 
@@ -188,7 +188,7 @@ export const commonCssObj = {
     cursor: pointer;
     align-items: center;
     gap: 0 0.25rem;
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
 
     > input {
       margin: 0;

@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { shorten } from "shared-style/common";
 
 export const cssObj = {
@@ -23,12 +23,12 @@ export const cssObj = {
   pageTitle: css`
     width: fit-content;
     margin-bottom: 2rem;
-    ${TEXTS.TITLE11};
+    ${TEXT.TITLE1_B2832};
   `,
 
   pageDesc: css`
     text-align: left;
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.GRAY600};
     padding-bottom: 2rem;
     border-bottom: 1px solid ${COLOR.GRAY450};
@@ -47,18 +47,18 @@ export const cssObj = {
   `,
 
   infoType: css`
-    ${TEXTS.TITLE7};
+    ${TEXT.TITLE5_B1620};
     width: 5.25rem;
   `,
 
   infoTitle: css`
     flex-grow: 1;
-    ${TEXTS.TITLE6};
+    ${TEXT.TITLE5_M1620};
     ${shorten()};
   `,
 
   infoDate: css`
-    ${TEXTS.TITLE3};
+    ${TEXT.TITLE6_M1418};
     color: ${COLOR.GRAY500};
   `,
 };

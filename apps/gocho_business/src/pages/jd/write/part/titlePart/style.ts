@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   partContainer: css`
@@ -13,7 +13,7 @@ export const cssObj = {
   `,
 
   inputTitle: css`
-    ${TEXTS.TITLE11};
+    ${TEXT.TITLE1_B2832};
     margin-bottom: 1.25rem;
   `,
 
@@ -24,10 +24,10 @@ export const cssObj = {
     border: 1px solid ${isError ? `${COLOR.RED300}` : `${COLOR.GRAY200}`};
     border-radius: 0.5rem;
     text-align: center;
-    ${TEXTS.TITLE9}
+    ${TEXT.TITLE4_B1822}
 
     ::placeholder {
-      ${TEXTS.TITLE9}
+      ${TEXT.TITLE4_B1822}
       color: ${COLOR.GRAY450};
     }
   `,

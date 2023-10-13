@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   contentContainer: css`
@@ -164,7 +164,7 @@ export const cssObj = {
   `,
 
   noAuthJdCard: css`
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.GRAY600};
     height: 10rem;
     display: flex;
