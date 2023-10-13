@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   formWrapper: css`
@@ -85,7 +85,7 @@ export const cssObj = {
     }
 
     & > p {
-      ${NEWTEXTS.BODY4_R1220};
+      ${TEXT.BODY4_R1220};
       color: ${COLOR.GRAY500};
       text-align: center;
     }

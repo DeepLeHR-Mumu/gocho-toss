@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
@@ -14,15 +14,15 @@ export const cssObj = {
     border: 1px solid ${COLOR.GRAY200};
     border-radius: 0.75rem;
 
-    ${NEWTEXTS.BODY2_R1624};
+    ${TEXT.BODY2_R1624};
   `,
 
   placeholder: css`
-    ${NEWTEXTS.BODY2_R1624};
+    ${TEXT.BODY2_R1624};
     color: ${COLOR.GRAY450};
   `,
 
   item: css`
-    ${NEWTEXTS.BODY2_R1624};
+    ${TEXT.BODY2_R1624};
   `,
 };
