@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
-import { usePreventRouting } from "shared-hook";
+import { useDisabledKeydownSubmit, usePreventRouting } from "shared-hook";
 import { ErrorResponseDef } from "shared-type/api";
 
 import { useModal, useToast } from "@/globalStates";
@@ -198,6 +198,8 @@ const JdUploadPage: NextPage = () => {
       });
     }
   }, [jdData, reset]);
+
+  useDisabledKeydownSubmit();
 
   usePreventRouting(
     Boolean(Object.keys(dirtyFields).length) && !isSubmitSuccessful,
