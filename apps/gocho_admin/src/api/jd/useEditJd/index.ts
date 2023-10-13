@@ -1,10 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import dayjs from "dayjs";
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 
 import { ErrorResponseDef } from "shared-type/api";
-
-import { AdminResponseDef } from "@/types";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { jdDetailKeyObj, PostEditJdDef, RequestObjDef, useEditJdProps } from "./type";
@@ -19,7 +17,7 @@ export const putEditJd: PostEditJdDef = async (requestObj) => {
 export const useEditJd: useEditJdProps = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>({
+  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
     mutationFn: (requestObj) => {
       const newRequestObj = {
         ...requestObj,

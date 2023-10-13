@@ -1,9 +1,7 @@
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
 
 import { ErrorResponseDef } from "shared-type/api";
-
-import { AdminResponseDef } from "@/types";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { DeleteSearchKeywordDef, RequestObjDef, useDeleteSearchKeywordProps } from "./type";
@@ -14,4 +12,4 @@ export const deleteSearchKeyword: DeleteSearchKeywordDef = async (requestObj) =>
 };
 
 export const useDeleteSearchKeyword: useDeleteSearchKeywordProps = () =>
-  useMutation<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>({ mutationFn: deleteSearchKeyword });
+  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({ mutationFn: deleteSearchKeyword });

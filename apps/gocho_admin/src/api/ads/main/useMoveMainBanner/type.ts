@@ -1,7 +1,5 @@
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
-
-import { AdminResponseDef } from "@/types";
 
 export interface RequestObjDef {
   type: "M" | "T" | "S";
@@ -10,9 +8,9 @@ export interface RequestObjDef {
 }
 
 export interface MoveBannerDef {
-  ({ type, from, to }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ type, from, to }: RequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface UseMoveBannerProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError, RequestObjDef>;
 }

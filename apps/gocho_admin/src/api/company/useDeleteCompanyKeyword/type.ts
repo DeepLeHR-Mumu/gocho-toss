@@ -1,18 +1,16 @@
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
 import { ErrorResponseDef } from "shared-type/api";
-
-import { AdminResponseDef } from "@/types";
 
 export interface RequestObjDef {
   keyword: string;
 }
 
 export interface DeleteCompanyKeywordDef {
-  ({ keyword }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ keyword }: RequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface useDeleteCompanyKeywordProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

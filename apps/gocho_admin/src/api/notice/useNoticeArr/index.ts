@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 
 import { ErrorResponseDef } from "shared-type/api";
 

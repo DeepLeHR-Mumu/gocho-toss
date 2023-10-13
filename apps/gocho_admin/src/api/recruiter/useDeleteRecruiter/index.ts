@@ -1,7 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-
-import { AdminResponseDef } from "@/types";
+import { AxiosResponse, AxiosError } from "axios";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { DeleteRecruiterDef, RequestObjDef, useDeleteRecruiterProps } from "./type";
@@ -12,4 +10,4 @@ export const deleteRecruiter: DeleteRecruiterDef = async (requestObj) => {
 };
 
 export const useDeleteRecruiter: useDeleteRecruiterProps = () =>
-  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: deleteRecruiter });
+  useMutation<AxiosResponse, AxiosError, RequestObjDef>({ mutationFn: deleteRecruiter });

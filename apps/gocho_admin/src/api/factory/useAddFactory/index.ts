@@ -1,7 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-
-import { AdminResponseDef } from "@/types";
+import { AxiosResponse, AxiosError } from "axios";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { RequestObjDef, PostFactoryDef, useAddFactoryProps } from "./type";
@@ -12,4 +10,4 @@ export const postAddFactory: PostFactoryDef = async (requestObj) => {
 };
 
 export const useAddFactory: useAddFactoryProps = () =>
-  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: postAddFactory });
+  useMutation<AxiosResponse, AxiosError, RequestObjDef>({ mutationFn: postAddFactory });

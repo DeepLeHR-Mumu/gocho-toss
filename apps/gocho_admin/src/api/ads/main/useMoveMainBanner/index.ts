@@ -1,7 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-
-import { AdminResponseDef } from "@/types";
+import { AxiosResponse, AxiosError } from "axios";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { MoveBannerDef, RequestObjDef, UseMoveBannerProps } from "./type";
@@ -14,4 +12,4 @@ const patchMoveBanner: MoveBannerDef = async (requestObj) => {
 };
 
 export const useMoveMainBanner: UseMoveBannerProps = () =>
-  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: patchMoveBanner });
+  useMutation<AxiosResponse, AxiosError, RequestObjDef>({ mutationFn: patchMoveBanner });

@@ -1,9 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 
 import { ErrorResponseDef } from "shared-type/api";
-
-import { AdminResponseDef } from "@/types";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { RequestObjDef, PostSearchKeywordDef, useAddSearchKeywordProps } from "./type";
@@ -14,4 +12,4 @@ export const postAddSearchKeyword: PostSearchKeywordDef = async (requestObj) => 
 };
 
 export const useAddSearchKeyword: useAddSearchKeywordProps = () =>
-  useMutation<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>({ mutationFn: postAddSearchKeyword });
+  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({ mutationFn: postAddSearchKeyword });

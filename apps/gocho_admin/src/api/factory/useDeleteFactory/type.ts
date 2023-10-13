@@ -1,16 +1,14 @@
 import { UseMutationResult } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-
-import { AdminResponseDef } from "@/types";
+import { AxiosResponse, AxiosError } from "axios";
 
 export interface RequestObjDef {
   factoryId: number;
 }
 
 export interface DeleteFactoryDef {
-  ({ factoryId }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ factoryId }: RequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface useDeleteFactoryProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError, RequestObjDef>;
 }

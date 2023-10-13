@@ -1,7 +1,5 @@
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
-
-import { AdminResponseDef } from "@/types";
 
 export interface RequestObjDef {
   dto: {
@@ -100,9 +98,9 @@ interface axiosRequestObjDef {
 }
 
 export interface PostCompanyDef {
-  ({ dto, logo, bgImage }: axiosRequestObjDef): Promise<AdminResponseDef>;
+  ({ dto, logo, bgImage }: axiosRequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface useAddCompanyProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError, RequestObjDef>;
 }

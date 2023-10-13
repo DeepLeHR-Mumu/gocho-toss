@@ -1,7 +1,5 @@
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
-
-import { AdminResponseDef } from "@/types";
 
 export interface RequestObjDef {
   color: string;
@@ -11,9 +9,9 @@ export interface RequestObjDef {
 }
 
 export interface PostTopBannerDef {
-  ({ color, jd_id, end_time, start_time }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ color, jd_id, end_time, start_time }: RequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface useAddTopBannerProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError, RequestObjDef>;
 }
