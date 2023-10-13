@@ -14,7 +14,7 @@ import { cssObj } from "./style";
 import { ProfileFormProps } from "./type";
 import { MAX_PROFILE_SIZE } from "./constants";
 
-export const ProfileForm: FC<ProfileFormProps> = ({ handleEditMode }) => {
+export const ProfileForm: FC<ProfileFormProps> = ({ handleEditMode, resumeProfile }) => {
   const { setToastMessage } = useToast();
 
   const [userProfilePreview, setUserProfilePreview] = useState<string>();
@@ -94,7 +94,7 @@ export const ProfileForm: FC<ProfileFormProps> = ({ handleEditMode }) => {
                 state={{
                   state: "disabled",
                 }}
-                value="장의영"
+                value={resumeProfile.name}
                 css={cssObj.rMargin}
               />
             </div>
@@ -106,7 +106,7 @@ export const ProfileForm: FC<ProfileFormProps> = ({ handleEditMode }) => {
                 state={{
                   state: "disabled",
                 }}
-                value="19980928"
+                value={resumeProfile.birthDate}
               />
             </div>
             <div>
@@ -117,7 +117,7 @@ export const ProfileForm: FC<ProfileFormProps> = ({ handleEditMode }) => {
                 state={{
                   state: "disabled",
                 }}
-                value="01022724575"
+                value={resumeProfile.phoneNumber}
               />
             </div>
           </div>
@@ -132,21 +132,22 @@ export const ProfileForm: FC<ProfileFormProps> = ({ handleEditMode }) => {
                 type="text"
                 placeholder="거주지를 입력해 주세요"
                 onClick={onClickAddress}
+                value={resumeProfile.location.address}
                 aria-disabled
                 suffix={<FiSearch css={cssObj.searchIcon} />}
               />
             </div>
             <div>
-              <p>취미</p> <Input type="text" placeholder="취미를 입력해 주세요" />
+              <p>취미</p> <Input type="text" placeholder="취미를 입력해 주세요" value={resumeProfile.hobby} />
             </div>
             <div>
-              <p>특기 </p> <Input type="text" placeholder="특기를 입력해 주세요" />
+              <p>특기 </p> <Input type="text" placeholder="특기를 입력해 주세요" value={resumeProfile.specialty} />
             </div>
           </div>
         </section>
 
         <section css={cssObj.profileWrapper}>
-          <Image src={userProfilePreview ?? basicProfile} alt="" width={168} height={200} />
+          <Image src={resumeProfile.image ?? userProfilePreview ?? basicProfile} alt="" width={168} height={200} />
 
           <input
             id="userProfile"

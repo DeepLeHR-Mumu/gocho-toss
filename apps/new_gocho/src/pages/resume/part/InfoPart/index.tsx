@@ -1,16 +1,22 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { ListCard } from "../../component";
 import { ProfileForm, ResumeProfile } from "./component";
 
 import { cssObj } from "./style";
+import { useUserResumeProfile } from "@/apis/users/resume/useUserResumeProfile";
 
-// TODO: 유저아이디 가져오기
-const userId = 12;
+interface InfoPartProps {
+  userId: number;
+}
 
-export const InfoPart = () => {
+export const InfoPart: FC<InfoPartProps> = ({ userId }) => {
   const [isEditMode, setEditMode] = useState(false);
 
+  const { data: resumeProfile } = useUserResumeProfile({ userId });
+
   const handleEditMode = () => setEditMode(!isEditMode);
+
+  if (!resumeProfile) return <> </>;
 
   return (
     <div>
@@ -26,7 +32,11 @@ export const InfoPart = () => {
         userId={userId}
         iconHandler={handleEditMode}
       >
-        {isEditMode ? <ProfileForm handleEditMode={handleEditMode} /> : <ResumeProfile />}
+        {isEditMode ? (
+          <ProfileForm handleEditMode={handleEditMode} resumeProfile={{ ...resumeProfile }} />
+        ) : (
+          <ResumeProfile resumeProfile={{ ...resumeProfile }} />
+        )}
       </ListCard>
     </div>
   );

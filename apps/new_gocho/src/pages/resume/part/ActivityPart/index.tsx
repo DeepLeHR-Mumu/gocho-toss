@@ -37,7 +37,7 @@ export const ActivityPart = () => {
 
   return (
     <div>
-      <ListCard title="대외활동" isRequired userId={userId}>
+      <ListCard title="대외활동" userId={userId}>
         {itemProps.map((obj) => (
           <ListActivityItem key={obj.title} {...obj} />
         ))}

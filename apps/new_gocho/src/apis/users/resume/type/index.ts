@@ -1,5 +1,8 @@
 export interface ResumeDef {
   id: number;
+  title: string;
+  is_complete: string;
+  updated_time: string;
 }
 
 export interface UserResumeProfileDef {
