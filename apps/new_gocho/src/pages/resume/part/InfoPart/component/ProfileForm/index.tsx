@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { FC, useRef, useState } from "react";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 
@@ -7,19 +8,33 @@ import { FiSearch } from "react-icons/fi";
 import { Button, Input } from "shared-ui/deeple-ds";
 
 import { useToast } from "@/globalStates";
+import { PutResumeProfileDef } from "@/apis/users/resume/usePutUserResumeProfile/type";
 import { fileEncording } from "@/pages/mypage/part/ProfilePart/utils";
-import basicProfile from "@/public/image/jobi/jobi_500.png";
+import basicProfile from "@/public/image/resume/BasicProfile.svg";
 
 import { cssObj } from "./style";
 import { ProfileFormProps } from "./type";
 import { MAX_PROFILE_SIZE } from "./constants";
+import { usePutUserResumeProfile } from "@/apis/users/resume/usePutUserResumeProfile";
 
-export const ProfileForm: FC<ProfileFormProps> = ({ handleEditMode, resumeProfile }) => {
+export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resumeProfile }) => {
   const { setToastMessage } = useToast();
 
+  const { mutate: putResumeProfile } = usePutUserResumeProfile();
+
+  const { register, handleSubmit, setValue } = useForm<PutResumeProfileDef>({
+    defaultValues: {
+      email: resumeProfile.email,
+      location: {
+        address: resumeProfile.location.address,
+      },
+      hobby: resumeProfile.hobby,
+      specialty: resumeProfile.specialty,
+    },
+  });
+
+  const [profileFile, setProfileFile] = useState<File | null>(null);
   const [userProfilePreview, setUserProfilePreview] = useState<string>();
-  // const [userProfile, setUserProfile] = useState<File | null>(null);
-  // const [isProfileDirty, setIsProfileDirty] = useState<boolean>(false);
 
   const uploadRef = useRef<HTMLInputElement>(null);
 
@@ -32,7 +47,7 @@ export const ProfileForm: FC<ProfileFormProps> = ({ handleEditMode, resumeProfil
     }
 
     if (profile) {
-      // setUserProfile(profile);
+      setProfileFile(profile);
       // clearErrors("nickName");
       // trigger("nickName");
 
@@ -41,7 +56,6 @@ export const ProfileForm: FC<ProfileFormProps> = ({ handleEditMode, resumeProfil
 
         if (typeof result === "string") {
           setUserProfilePreview(result);
-          // setIsProfileDirty(true);
         }
       } catch (error) {
         setToastMessage("파일 업로드 중 오류가 발생했습니다. 파일 양식을 확인하거나 다시 시도해 주세요.");
@@ -60,8 +74,7 @@ export const ProfileForm: FC<ProfileFormProps> = ({ handleEditMode, resumeProfil
 
     openPostCodePopup({
       onComplete: (addressObj: Address) => {
-        // console.log(addressObj.address);
-        // setValue("location.address", addressObj.address, { shouldDirty: true });
+        setValue("location.address", addressObj.address, { shouldDirty: true });
         // clearErrors("location.address");
 
         window.kakao.maps.load(() => {
@@ -70,10 +83,9 @@ export const ProfileForm: FC<ProfileFormProps> = ({ handleEditMode, resumeProfil
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           geocoder.addressSearch(addressObj.address, (result: any, status: any) => {
             if (status === window.kakao.maps.services.Status.OK) {
-              // const { x, y } = result[0];
-              // console.log(x, y);
-              // setValue("location.x", x);
-              // setValue("location.y", y);
+              const { x, y } = result[0];
+              setValue("location.x", x);
+              setValue("location.y", y);
             }
           });
         });
@@ -81,8 +93,22 @@ export const ProfileForm: FC<ProfileFormProps> = ({ handleEditMode, resumeProfil
     });
   };
 
+  const onSubmitResumeProfile: SubmitHandler<PutResumeProfileDef> = async (data) => {
+    if (!profileFile) return;
+
+    await putResumeProfile({
+      userId,
+      image: profileFile,
+      requestObj: data,
+    });
+
+    setToastMessage("기본정보가 업로드 완료되었습니다.");
+
+    handleEditMode();
+  };
+
   return (
-    <form css={cssObj.formWrapper}>
+    <form onSubmit={handleSubmit(onSubmitResumeProfile)} css={cssObj.formWrapper}>
       <div css={cssObj.formBox}>
         <section css={cssObj.infoWrapper}>
           <div css={cssObj.basicInfoWrapper}>
@@ -124,7 +150,7 @@ export const ProfileForm: FC<ProfileFormProps> = ({ handleEditMode, resumeProfil
 
           <div css={cssObj.etcInfoWrapper}>
             <div>
-              <p>이메일</p> <Input type="text" placeholder="이메일을 입력해 주세요" />
+              <p>이메일</p> <Input type="text" placeholder="이메일을 입력해 주세요" {...register("email")} />
             </div>
             <div>
               <p>거주지</p>
@@ -134,14 +160,27 @@ export const ProfileForm: FC<ProfileFormProps> = ({ handleEditMode, resumeProfil
                 onClick={onClickAddress}
                 value={resumeProfile.location.address}
                 aria-disabled
+                {...register("location.address")}
                 suffix={<FiSearch css={cssObj.searchIcon} />}
               />
             </div>
             <div>
-              <p>취미</p> <Input type="text" placeholder="취미를 입력해 주세요" value={resumeProfile.hobby} />
+              <p>취미</p>
+              <Input
+                type="text"
+                placeholder="취미를 입력해 주세요"
+                value={resumeProfile.hobby}
+                {...register("hobby")}
+              />
             </div>
             <div>
-              <p>특기 </p> <Input type="text" placeholder="특기를 입력해 주세요" value={resumeProfile.specialty} />
+              <p>특기 </p>{" "}
+              <Input
+                type="text"
+                placeholder="특기를 입력해 주세요"
+                value={resumeProfile.specialty}
+                {...register("specialty")}
+              />
             </div>
           </div>
         </section>
@@ -175,7 +214,7 @@ export const ProfileForm: FC<ProfileFormProps> = ({ handleEditMode, resumeProfil
       </div>
 
       <div css={cssObj.buttonWrapper}>
-        <Button size="small" type="submit" onClick={handleEditMode}>
+        <Button size="small" type="submit">
           저장
         </Button>
         <Button size="small" type="button" onClick={handleEditMode} color="outlineGray">

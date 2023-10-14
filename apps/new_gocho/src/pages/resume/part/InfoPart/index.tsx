@@ -33,7 +33,7 @@ export const InfoPart: FC<InfoPartProps> = ({ userId }) => {
         iconHandler={handleEditMode}
       >
         {isEditMode ? (
-          <ProfileForm handleEditMode={handleEditMode} resumeProfile={{ ...resumeProfile }} />
+          <ProfileForm handleEditMode={handleEditMode} userId={userId} resumeProfile={{ ...resumeProfile }} />
         ) : (
           <ResumeProfile resumeProfile={{ ...resumeProfile }} />
         )}
