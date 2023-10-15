@@ -24,5 +24,5 @@ export interface PutUserResumeProfile {
 }
 
 export interface UserPutUserResumeProfile {
-  (): UseMutationResult<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (userId: number): UseMutationResult<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

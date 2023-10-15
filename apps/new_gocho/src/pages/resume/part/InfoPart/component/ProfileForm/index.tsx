@@ -1,13 +1,15 @@
 import Image from "next/image";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { FC, useRef, useState } from "react";
-import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { FiSearch } from "react-icons/fi";
 
 import { Button, Input } from "shared-ui/deeple-ds";
 
 import { useToast } from "@/globalStates";
+
+import { usePutUserResumeProfile } from "@/apis/users/resume/usePutUserResumeProfile";
 import { PutResumeProfileDef } from "@/apis/users/resume/usePutUserResumeProfile/type";
 import { fileEncording } from "@/pages/mypage/part/ProfilePart/utils";
 import basicProfile from "@/public/image/resume/BasicProfile.svg";
@@ -15,14 +17,14 @@ import basicProfile from "@/public/image/resume/BasicProfile.svg";
 import { cssObj } from "./style";
 import { ProfileFormProps } from "./type";
 import { MAX_PROFILE_SIZE } from "./constants";
-import { usePutUserResumeProfile } from "@/apis/users/resume/usePutUserResumeProfile";
 
 export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resumeProfile }) => {
   const { setToastMessage } = useToast();
 
-  const { mutate: putResumeProfile } = usePutUserResumeProfile();
+  const { mutate: putResumeProfile } = usePutUserResumeProfile(userId);
 
   const { register, handleSubmit, setValue } = useForm<PutResumeProfileDef>({
+    mode: "onChange",
     defaultValues: {
       email: resumeProfile.email,
       location: {
@@ -42,6 +44,8 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
     const profile = event.target.files?.[0];
 
     if (profile && profile.size > MAX_PROFILE_SIZE) {
+      setProfileFile(null);
+
       setToastMessage("5MB 이하의 사진을 첨부해 주세요.");
       return;
     }
@@ -158,7 +162,6 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
                 type="text"
                 placeholder="거주지를 입력해 주세요"
                 onClick={onClickAddress}
-                value={resumeProfile.location.address}
                 aria-disabled
                 {...register("location.address")}
                 suffix={<FiSearch css={cssObj.searchIcon} />}
@@ -166,27 +169,16 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
             </div>
             <div>
               <p>취미</p>
-              <Input
-                type="text"
-                placeholder="취미를 입력해 주세요"
-                value={resumeProfile.hobby}
-                {...register("hobby")}
-              />
+              <Input type="text" placeholder="취미를 입력해 주세요" {...register("hobby")} />
             </div>
             <div>
-              <p>특기 </p>{" "}
-              <Input
-                type="text"
-                placeholder="특기를 입력해 주세요"
-                value={resumeProfile.specialty}
-                {...register("specialty")}
-              />
+              <p>특기 </p> <Input type="text" placeholder="특기를 입력해 주세요" {...register("specialty")} />
             </div>
           </div>
         </section>
 
         <section css={cssObj.profileWrapper}>
-          <Image src={resumeProfile.image ?? userProfilePreview ?? basicProfile} alt="" width={168} height={200} />
+          <Image src={userProfilePreview ?? resumeProfile.image ?? basicProfile} alt="" width={168} height={200} />
 
           <input
             id="userProfile"

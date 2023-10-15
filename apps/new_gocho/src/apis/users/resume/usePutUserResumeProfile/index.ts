@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
 import { ErrorResponseDef } from "shared-type/api";
@@ -6,6 +6,7 @@ import { ErrorResponseDef } from "shared-type/api";
 import { axiosInstance } from "@/apis/axiosInstance";
 
 import { PutUserResumeProfile, RequestObjDef, UserPutUserResumeProfile } from "./type";
+import { resumeArrKeyObj } from "@/constants/queryKeyFactory/user/resumeArrKeyObj";
 
 export const putUserResumeProfile: PutUserResumeProfile = async ({ userId, image, requestObj }) => {
   const formData = new FormData();
@@ -19,7 +20,14 @@ export const putUserResumeProfile: PutUserResumeProfile = async ({ userId, image
   return data;
 };
 
-export const usePutUserResumeProfile: UserPutUserResumeProfile = () =>
-  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
+export const usePutUserResumeProfile: UserPutUserResumeProfile = (userId) => {
+  const queryClient = useQueryClient();
+
+  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
     mutationFn: putUserResumeProfile,
+    onSuccess: () => {
+      queryClient.invalidateQueries(resumeArrKeyObj.resumeArr(userId));
+      queryClient.invalidateQueries(resumeArrKeyObj.resumeProfile({ userId }));
+    },
   });
+};
