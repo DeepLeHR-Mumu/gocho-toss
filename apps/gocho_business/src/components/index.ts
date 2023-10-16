@@ -1,4 +1,3 @@
-export { CommonInfoBox } from "./common/commonInfoBox";
 export { CommonStatusChip } from "./common/commonStatusChip";
 export { Pagination } from "./common/pagination";
 
