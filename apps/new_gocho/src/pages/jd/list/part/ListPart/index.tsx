@@ -128,6 +128,7 @@ export const ListPart = ({ filterObj }: ListPartProps) => {
                     jdTitle: jd.title,
                     dueDate: jd.endTime,
                     bookmarked: jd.isBookmark,
+                    cut: jd.cut,
                   }}
                 />
               )

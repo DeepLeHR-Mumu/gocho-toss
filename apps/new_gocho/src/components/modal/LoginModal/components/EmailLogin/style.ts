@@ -27,7 +27,7 @@ export const cssObj = {
   `,
 
   loginButtonWrapper: css`
-    margin-top: 3.38rem;
+    margin-top: 2.75rem;
   `,
 
   eye: css`

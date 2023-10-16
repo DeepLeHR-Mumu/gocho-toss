@@ -96,10 +96,9 @@ export const getRecruitDetailContents = (recruitDetail: {
   const { contractType, payArr, hireNumber, rotationArr } = recruitDetail;
 
   if (contractType) {
-    // TODO 전환율 추가해야함!
     recruitDetailContents["계약형태"] = createSpanTag(contractType.type);
 
-    if (contractType.type === "계약>정규") {
+    if (contractType.type === "계약>정규" || contractType.type === "인턴") {
       recruitDetailContents["계약형태"] = createElement(Fragment, {}, [
         createElement("span", {}, contractType.type),
         createElement(

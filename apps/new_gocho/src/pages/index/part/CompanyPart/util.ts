@@ -6,12 +6,4 @@ export const setCarouselSetting = {
   infinite: false,
   swipeToSlide: true,
   slidesToShow: 4,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-      },
-    },
-  ],
 };

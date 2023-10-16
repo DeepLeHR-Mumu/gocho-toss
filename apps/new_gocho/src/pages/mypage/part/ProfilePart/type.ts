@@ -1,8 +1,8 @@
-import { useUserProfile } from "@/apis/auth";
+import { useUserInfo } from "@/apis/auth";
 
 export type NicknameInput = {
   nickName: string;
 };
 
-type UserProfileRes = ReturnType<typeof useUserProfile>;
+type UserProfileRes = ReturnType<typeof useUserInfo>;
 export type UserData = UserProfileRes["data"];
