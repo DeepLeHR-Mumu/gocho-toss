@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { INTERNAL_URL } from "@/pages/constants";
+import { INTERNAL_URL } from "@/constants";
 import { CategoryProps } from "./type";
 
 import { cssObj } from "./style";

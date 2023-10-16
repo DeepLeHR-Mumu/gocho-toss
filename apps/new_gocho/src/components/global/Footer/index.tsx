@@ -6,7 +6,7 @@ import gochoTextMono from "shared-image/global/deeple/textMono.svg";
 import kakaoLogo from "shared-image/global/sns/kakaoLogo.svg";
 import { KAKAO_CHANNEL_URL } from "shared-constant";
 
-import { INTERNAL_URL } from "@/pages/constants";
+import { INTERNAL_URL } from "@/constants";
 
 import { Layout } from "../../Layout";
 import { cssObj } from "./style";

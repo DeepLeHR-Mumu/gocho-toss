@@ -10,7 +10,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { datadogRum } from "@datadog/browser-rum";
 import ReactGA from "react-ga4";
 
-import { GA_KEY, FB_PIXEL_ID } from "@/constants/key";
+import { GA_KEY, FB_PIXEL_ID } from "@/constants";
 
 import { useAxiosInterceptor } from "@/apis/axiosInstance";
 import { useSetDeviceType } from "@/globalStates";
@@ -47,7 +47,7 @@ declare global {
   }
 }
 
-function App({ Component, pageProps }: AppProps) {
+function WebService({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const isFirstRender = useRef<boolean>(true);
   ReactGA.initialize(GA_KEY);
@@ -161,4 +161,4 @@ function App({ Component, pageProps }: AppProps) {
   );
 }
 
-export default App;
+export default WebService;

@@ -11,7 +11,7 @@ import defaultCompanyBg from "shared-image/global/common/default_company_bg.webp
 import { Layout, ShareModal, CompanyBookmark, SkeletonBox } from "@/components";
 import { useCompanyDetail } from "@/apis/company";
 import { isQueryString } from "@/utils";
-import { INTERNAL_URL } from "@/pages/constants";
+import { INTERNAL_URL } from "@/constants";
 
 import { cssObj, skeletonCssObj } from "./style";
 

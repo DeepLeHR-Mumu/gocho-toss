@@ -6,7 +6,7 @@ import defaultCompanyLogo from "shared-image/global/common/default_company_logo.
 import { dateConverter, dDayCalculator } from "shared-util";
 
 import { Layout, SkeletonBox } from "@/components";
-import { INTERNAL_URL } from "@/pages/constants";
+import { INTERNAL_URL } from "@/constants";
 
 import { SummaryPartProps } from "./type";
 import { cssObj } from "./style";

@@ -16,7 +16,7 @@ import { categoryArr } from "../part/CategoryPart/constant";
 import { OrderType, IndustryRouteType } from "./type";
 import { cssObj } from "./style";
 import { PageHead } from "./pageHead";
-import { filterOption } from "./constants";
+import { filterOption } from "./constant";
 
 const CompanyList: NextPage = () => {
   const router = useRouter();

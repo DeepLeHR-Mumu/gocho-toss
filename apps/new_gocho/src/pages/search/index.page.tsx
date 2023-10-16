@@ -11,9 +11,9 @@ import { useCompanyArr } from "@/apis/company";
 import { Layout, SearchModal, Pagination, JdRow, CompanyRow } from "@/components";
 import { SearchDropDown } from "@/components/modal/SearchModal/components/SearchDropDown";
 import { useGetDeviceType } from "@/globalStates";
-import { DEFAULT_PAGE_SIZE } from "@/pages/constants";
 import { isQueryString } from "@/utils";
 import { searchFunnelEvent } from "@/ga/search";
+import { DEFAULT_PAGE_SIZE } from "@/constants";
 
 import { Tab } from "./type";
 import { PageHead } from "./pageHead";
