@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { NextPage } from "next";
 
-import { Divider } from "shared-ui/deeple-ds";
+import { HiddenH1, Divider } from "shared-ui/deeple-ds";
 
 import { Layout } from "@/components";
 import { jdHomeFunnelEvent } from "@/ga/jd";
@@ -18,6 +18,7 @@ const JdHome: NextPage = () => {
   return (
     <main>
       <PageHead />
+      <HiddenH1 title="고초대졸닷컴 | 생산직 취업의 새로운 기준" />
       <JdBanner />
       <Layout>
         <HotJd />

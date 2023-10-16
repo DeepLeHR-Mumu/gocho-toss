@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { NextPage } from "next";
 
+import { HiddenH1 } from "shared-ui/deeple-ds";
+
 import { Layout } from "@/components/Layout";
 import { companyHomeFunnelEvent } from "@/ga/company";
 
@@ -15,6 +17,8 @@ const Company: NextPage = () => {
   return (
     <Layout>
       <PageHead />
+      <HiddenH1 title="고초대졸닷컴 | 생산직 취업의 새로운 기준" />
+
       <CategoryPart />
       <RecommendPart />
       <RankPart />

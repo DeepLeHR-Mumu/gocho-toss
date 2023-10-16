@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 
-import { DropDown } from "shared-ui/deeple-ds";
+import { DropDown, HiddenH1 } from "shared-ui/deeple-ds";
 
 import { CompanyRow, Pagination } from "@/components";
 import { Layout } from "@/components/Layout";
@@ -49,6 +49,8 @@ const CompanyList: NextPage = () => {
   return (
     <Layout>
       <PageHead />
+      <HiddenH1 title="고초대졸닷컴 | 생산직 기업 정보의 모든 것" />
+
       <div css={cssObj.titleContainer}>
         <DropDown
           customTitle={

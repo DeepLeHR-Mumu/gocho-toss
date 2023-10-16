@@ -14,7 +14,6 @@ export const cssObj = {
   loginWrapper: css`
     width: 100%;
     padding: 1.25rem 0.5rem 0 0.5rem;
-    margin-bottom: rem;
   `,
 
   mobileDivider: css`
