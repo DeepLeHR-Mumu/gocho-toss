@@ -8,9 +8,9 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
 
-import { InvisibleH2 } from "shared-ui/common/invisibleH2";
 import { SharedButton } from "shared-ui/common/sharedButton";
 import { CheckBoxWithDesc } from "shared-ui/common/checkbox_desc";
+import { HiddenH2 } from "shared-ui/deeple-ds";
 import { ErrorResponseDef } from "shared-type/api";
 
 import { useDoLogin, useManagerProfile } from "@/apis";
@@ -86,7 +86,7 @@ const LoginPage: NextPage = () => {
           <Image src={randomNumber ? homeBg1 : homeBg2} alt="로그인 페이지 배경화면" fill quality={100} />
         </div>
         <section css={cssObj.loginWrapper}>
-          <InvisibleH2 title="고초대졸닷컴 로그인하기" />
+          <HiddenH2 title="고초대졸닷컴 로그인하기" />
           <div css={cssObj.logoBox}>
             <Image src={bizTextColor} alt="고초대졸닷컴" fill />
           </div>
