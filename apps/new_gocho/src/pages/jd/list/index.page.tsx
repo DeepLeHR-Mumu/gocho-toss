@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 import { HiddenH1 } from "shared-ui/deeple-ds";
 
 import { Layout } from "@/components";
-import { INTERNAL_URL } from "@/pages/constants";
 import { jdListFunnelEvent } from "@/ga/jd";
+import { INTERNAL_URL } from "@/constants";
 
 import { PageHead } from "./pageHead";
 import {

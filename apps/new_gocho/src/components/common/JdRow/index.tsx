@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import { DDayChip } from "shared-ui/deeple-ds";
 import { dateConverter, dDayCalculator } from "shared-util";
 
-import { INTERNAL_URL } from "@/pages/constants";
+import { INTERNAL_URL } from "@/constants";
 import { SkeletonBox } from "../SkeletonBox";
 import { JdBookmark } from "../JdBookmark";
 

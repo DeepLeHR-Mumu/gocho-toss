@@ -5,8 +5,8 @@ import { Chip } from "shared-ui/deeple-ds";
 
 import { useUserInfo } from "@/apis/auth/useUserInfo";
 import { useCompanyCommentArr } from "@/apis/company";
-import { INTERNAL_URL } from "@/pages/constants";
 import { LoginModal } from "@/components";
+import { INTERNAL_URL } from "@/constants";
 
 import { WriteReview } from "./component/WriteReview";
 import { NoReview } from "./component/NoReview";
@@ -14,9 +14,10 @@ import { Review } from "./component/Review";
 import { cssObj } from "./style";
 
 export const ReviewPart = () => {
+  const router = useRouter();
+
   const [loginModal, setLoginModal] = useState(false);
   const [writeReview, setWriteReview] = useState(false);
-  const router = useRouter();
   const { data: companyCommentData } = useCompanyCommentArr({ companyId: Number(router.query.companyId) });
   const { data: userData } = useUserInfo();
   const companyId = Number(router.query.companyId);

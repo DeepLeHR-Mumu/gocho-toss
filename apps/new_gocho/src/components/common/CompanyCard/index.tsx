@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import { Profile } from "shared-ui/deeple-ds";
 
 import { useGetDeviceType } from "@/globalStates";
-import { INTERNAL_URL } from "@/pages/constants";
+import { INTERNAL_URL } from "@/constants";
 
 import { CompanyBookmark } from "../CompanyBookmark";
 import { SkeletonBox } from "../SkeletonBox";

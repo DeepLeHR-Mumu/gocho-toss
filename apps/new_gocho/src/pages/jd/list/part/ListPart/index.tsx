@@ -118,7 +118,7 @@ export const ListPart = ({ filterObj }: ListPartProps) => {
         {jdArrData
           ? jdArrData.jdDataArr.map((jd) =>
               viewMode === "grid" ? (
-                <JdCard key={jd.id} jd={{ ...jd }} />
+                <JdCard key={jd.id} jd={jd} />
               ) : (
                 <JdRow
                   key={jd.id}
