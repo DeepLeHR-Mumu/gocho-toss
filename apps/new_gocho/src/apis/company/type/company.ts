@@ -51,6 +51,7 @@ export interface CompanyObjDef {
   is_bookmark: boolean;
   view: number;
   logo_url: string | null;
+  background_image_url: string | null;
   welfare: WelfareDef;
   nozo: {
     exists: boolean;
