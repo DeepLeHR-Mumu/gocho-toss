@@ -6,6 +6,12 @@ export const cssObj = {
     position: relative;
     background: linear-gradient(to bottom, ${COLOR.BLUE300} 320px, white 320px);
 
+    .slick-track,
+    .slick-list {
+      -webkit-perspective: 2000px;
+      perspective: 2000px;
+    }
+
     .slick-dots {
       display: inline-block;
       vertical-align: middle;
