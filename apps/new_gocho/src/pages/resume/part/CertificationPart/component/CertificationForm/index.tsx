@@ -45,7 +45,7 @@ export const CertificationForm: FC<CertificationFormProps> = ({ resumeId, handle
   useDisabledKeydownSubmit();
 
   const { mutate: postCertification } = usePostResumeCertification(resumeId);
-  const { mutate: putCertification } = usePutResumeCertification();
+  const { mutate: putCertification } = usePutResumeCertification(resumeId);
 
   const onSubmitResumeCertifiaction: SubmitHandler<PostCertificationDef> = async (data) => {
     const onSuccess = () => {

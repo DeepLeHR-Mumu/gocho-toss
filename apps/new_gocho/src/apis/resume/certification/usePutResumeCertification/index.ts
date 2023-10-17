@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { ErrorResponseDef } from "shared-type/api";
 
@@ -9,6 +9,7 @@ import {
   RequestObjDef,
   UsePutResumeCertificationProps,
 } from "./type";
+import { resumeCertificationKeyObj } from "@/constants/queryKeyFactory/resume/resumeCertificationKeyObj";
 
 export const putResumeCertification: PutResumeCertificationDef = async ({
   resumeId,
@@ -19,7 +20,13 @@ export const putResumeCertification: PutResumeCertificationDef = async ({
   return data;
 };
 
-export const usePutResumeCertification: UsePutResumeCertificationProps = () =>
-  useMutation<PutResumeCertificationResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
+export const usePutResumeCertification: UsePutResumeCertificationProps = (resumeId) => {
+  const queryClient = useQueryClient();
+
+  return useMutation<PutResumeCertificationResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
     mutationFn: putResumeCertification,
+    onSuccess: () => {
+      queryClient.invalidateQueries(resumeCertificationKeyObj.certificationArr(resumeId));
+    },
   });
+};
