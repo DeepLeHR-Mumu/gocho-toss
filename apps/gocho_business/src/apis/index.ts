@@ -25,6 +25,8 @@ export { useEditJd } from "./jd/useEditJd";
 export { useEndJd } from "./jd/useEndJd";
 export { useJdArr } from "./jd/useJdArr";
 export { useJdDetail } from "./jd/useJdDetail";
+export { useJdStatistics } from "./jd/useJdStatistics";
+export { useJdApplicantArr } from "./jd/useJdApplicantArr";
 export { jdArrKeyObj } from "./jd/useJdArr/type";
 
 export { useNoticeArr } from "./notice/useNoticeArr";
