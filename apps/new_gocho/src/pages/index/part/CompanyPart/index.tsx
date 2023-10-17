@@ -8,7 +8,6 @@ import defaultCompanyLogo from "shared-image/global/common/default_company_logo.
 
 import { useCompanyKeywordArr } from "@/apis/keyword";
 import { CompanyCard } from "@/components";
-import { useGetDeviceType } from "@/globalStates";
 
 import { setCarouselSetting } from "./util";
 import { selectedCompanyDef } from "./type";
@@ -22,7 +21,6 @@ export const CompanyPart: FunctionComponent = () => {
   const [isDragging, setIsDragging] = useState(false);
   const sliderRef = useRef<Slider>(null);
 
-  const { isMobile } = useGetDeviceType();
   const { data: companyKeywordDataObj } = useCompanyKeywordArr();
 
   useEffect(() => {
@@ -83,7 +81,7 @@ export const CompanyPart: FunctionComponent = () => {
           {companyKeywordDataObj.map((companyKeyword) => (
             <Chip
               type="button"
-              size={isMobile ? "small" : "large"}
+              size="large"
               color={selectedKeyword === companyKeyword.keyword ? "fillBlue" : "fillGray"}
               key={`indexCompanyKeyword${companyKeyword.keyword}`}
               onClick={() => {
@@ -114,48 +112,32 @@ export const CompanyPart: FunctionComponent = () => {
         </div>
       </div>
       <div css={cssObj.sliderContainer}>
-        {isMobile ? (
-          <div css={cssObj.cardContainer}>
-            {selectedCompanyArr?.map((company) => (
-              <CompanyCard
-                key={company.id}
-                company={{
-                  ...company,
-                  logoSrc: company.logoUrl || defaultCompanyLogo,
-                  hashTagArr: [company.name],
-                  bookmark: { state: company.isBookmark },
-                }}
-              />
-            ))}
-          </div>
-        ) : (
-          <Slider
-            {...setCarouselSetting}
-            ref={sliderRef}
-            beforeChange={(_oldIndex, newIndex) => {
-              setIsDragging(true);
-              if (newIndex <= maxSliderIndex) {
-                setCurrentSlide(Math.max(newIndex, 0));
-              }
-            }}
-            afterChange={() => {
-              setIsDragging(false);
-            }}
-          >
-            {selectedCompanyArr?.map((company) => (
-              <CompanyCard
-                key={company.id}
-                company={{
-                  ...company,
-                  logoSrc: company.logoUrl || defaultCompanyLogo,
-                  hashTagArr: [company.name],
-                  bookmark: { state: company.isBookmark },
-                }}
-                blockClick={isDragging}
-              />
-            ))}
-          </Slider>
-        )}
+        <Slider
+          {...setCarouselSetting}
+          ref={sliderRef}
+          beforeChange={(_oldIndex, newIndex) => {
+            setIsDragging(true);
+            if (newIndex <= maxSliderIndex) {
+              setCurrentSlide(Math.max(newIndex, 0));
+            }
+          }}
+          afterChange={() => {
+            setIsDragging(false);
+          }}
+        >
+          {selectedCompanyArr?.map((company) => (
+            <CompanyCard
+              key={company.id}
+              company={{
+                ...company,
+                logoSrc: company.logoUrl || defaultCompanyLogo,
+                hashTagArr: [company.industry],
+                bookmark: { state: company.isBookmark },
+              }}
+              blockClick={isDragging}
+            />
+          ))}
+        </Slider>
       </div>
     </section>
   );
