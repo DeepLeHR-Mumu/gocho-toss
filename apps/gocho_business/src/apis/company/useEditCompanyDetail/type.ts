@@ -7,6 +7,7 @@ export interface RequestObjDef {
     logo_url: string;
     background_image_url: string;
     manager_id: number;
+    industry: string[];
     employee_number: number;
     location: {
       address: string;

@@ -7,6 +7,19 @@ export interface RequestObjDef {
 export interface ResponseObjDef {
   data: {
     id: number;
+    apply: {
+      start_time: string;
+      end_time: string;
+      cut: boolean;
+      document: string[];
+      etc: string[];
+      process: string[];
+      route: {
+        email: string | null;
+        link: string | null;
+        type: "고초대졸닷컴으로 지원받기" | "외부 링크" | "이메일 지원";
+      }[];
+    };
     status: {
       name: "진행중" | "등록대기" | "수정대기" | "등록반려" | "수정반려";
       reason: string[];
@@ -16,54 +29,44 @@ export interface ResponseObjDef {
       is_mine: boolean;
     };
     title: string;
-    cut: boolean;
-    view: number;
-    bookmark: number;
-    click: number;
-    start_time: string;
-    end_time: string;
-    process_arr: string[];
-    apply_route_arr: string[];
-    apply_document_arr: string[];
-    apply_url: string;
-    etc_arr: string[];
-    education: {
-      high: boolean;
-      college: boolean;
-      four: boolean;
-    };
-    career: {
-      type: "신입" | "경력" | "무관" | "신입/경력";
-      max_year: number | null;
-      min_year: number | null;
-    };
-    required_etc_arr: string[] | null;
-    contract: {
-      type: "정규직" | "계약직" | "계약>정규" | "연수생" | "인턴";
-      conversion_rate: number | null;
-    };
-    task: {
+    detail: {
       task_main: string;
       task_sub_arr: string[];
-      task_detail_arr: string[];
-    };
-    rotation_arr: string[];
-    place: {
-      type: "일반" | "전국" | "해외" | "기타";
-      address_arr: string[] | null;
-      factory_arr:
-        | {
-            id: number;
+      task_description: string[];
+      contract_type: string;
+      conversion_rate?: number;
+      hire_number: number;
+      pay: string[];
+      rotation: string[];
+      place: [
+        {
+          type: string;
+          location?: {
             address: string;
+            x: number;
+            y: number;
+          };
+          factory?: {
+            id: number;
             name: string;
-          }[]
-        | null;
-      etc: string | null;
+            address: string;
+          };
+          etc: string | null;
+        }
+      ];
     };
-    hire_number: number;
-    pay_arr: string[] | null;
-    preferred_certi_arr: string[] | null;
-    preferred_etc_arr: string[] | null;
+    qualification: {
+      highschool: boolean;
+      college: boolean;
+      university: boolean;
+      required_experience: string;
+      required_min_year: number | null;
+      required_max_year: number | null;
+      required_etc: string[];
+      preferred_certification: string[];
+      preferred_etc: string[];
+    };
+    created_time: string;
   };
 }
 

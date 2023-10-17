@@ -6,11 +6,11 @@ import { ErrorResponseDef } from "@/types";
 import { axiosInstance } from "../../axiosInstance";
 import { PostEditJdDef, RequestObjDef, useEditJdProps } from "./type";
 
-export const putEditJd: PostEditJdDef = async (requestObj) => {
+export const putEditJd: PostEditJdDef = async ({ jdId, ...jdDetailObj }) => {
   const formData = new FormData();
-  formData.append("json", JSON.stringify(requestObj.dto));
+  formData.append("json", JSON.stringify(jdDetailObj));
 
-  const { data } = await axiosInstance.put(`/jds/${requestObj.jdId}`, formData);
+  const { data } = await axiosInstance.put(`/jds/${jdId}`, formData);
   return data;
 };
 

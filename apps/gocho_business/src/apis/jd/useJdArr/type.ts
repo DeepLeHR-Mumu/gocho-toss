@@ -15,22 +15,23 @@ export interface ResponseObjDef {
   data:
     | {
         id: number;
-        uploader: { name: string; department: string; is_mine: boolean };
         status: {
           name: "진행중" | "등록대기" | "수정대기" | "등록반려" | "수정반려";
-          reason: string;
+          reason: string[];
+        };
+        uploader: {
+          name: string;
+          is_mine: boolean;
         };
         title: string;
         cut: boolean;
-        view: number;
-        bookmark: number;
-        click: number;
         start_time: string;
         end_time: string;
         created_time: string;
-        updated_time: string;
-        apply_url: string;
-        task: string;
+        updated_time: string | null;
+        bookmark: number;
+        total_applicant: number;
+        unread_applicant: number;
       }[]
     | [];
   page_result: PageResultDef;
