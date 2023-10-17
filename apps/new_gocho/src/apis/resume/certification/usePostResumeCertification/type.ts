@@ -17,5 +17,5 @@ export interface PostResumeCertificationDef {
 }
 
 export interface UsePostResumeCertificationProps {
-  (): UseMutationResult<PostResumeCertificationResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (resumeId: number): UseMutationResult<PostResumeCertificationResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

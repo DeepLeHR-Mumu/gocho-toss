@@ -16,7 +16,7 @@ export const getCertificationList: GetCertificationListDef = async (q) => {
 
 export const useCertificationList = (q: string) =>
   useQuery({
-    enabled: Boolean(q.length),
+    enabled: !!q,
     queryKey: resumeCertificationKeyObj.certificationList(q),
     queryFn: ({ queryKey: [{ q: queryKeyParams }] }) => getCertificationList(queryKeyParams),
   });

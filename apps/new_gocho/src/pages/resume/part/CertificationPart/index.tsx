@@ -1,13 +1,46 @@
-import { ListCard } from "../../component";
+import { FC, useState } from "react";
 
-export const CertificationPart = () => {
-  // TODO: 유저아이디 가져오기
-  const userId = 12;
+import { useResumeCertificationArr } from "@/apis/resume/certification/useResumeCertificationArr";
+
+import { ListCard } from "../../component";
+import { CertificationForm, CertificationList } from "./component";
+import { SelectorResumeCertification } from "@/apis/resume/certification/useResumeCertification/type";
+import { CertificationPartProps } from "./type";
+
+export const CertificationPart: FC<CertificationPartProps> = ({ userId, resumeId }) => {
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [currentCertification, setCurrentCertification] = useState<SelectorResumeCertification>();
+
+  const handleEditMode = () => {
+    setEditMode(!editMode);
+    setCurrentCertification(undefined);
+  };
+
+  const { data: myCertificationList } = useResumeCertificationArr(resumeId);
+
+  const selectCertification = (certi: SelectorResumeCertification) => {
+    setCurrentCertification(certi);
+    setEditMode(!editMode);
+  };
 
   return (
     <div>
-      <ListCard title="자격증" userId={userId}>
-        <h1>안녕하시요</h1>
+      <ListCard title="자격증" userId={userId} iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
+        {editMode ? (
+          <CertificationForm
+            handleEditMode={handleEditMode}
+            resumeId={resumeId}
+            currentCertification={currentCertification}
+          />
+        ) : (
+          myCertificationList && (
+            <CertificationList
+              resumeId={resumeId}
+              myCertificationList={myCertificationList}
+              selectCertification={selectCertification}
+            />
+          )
+        )}
       </ListCard>
     </div>
   );

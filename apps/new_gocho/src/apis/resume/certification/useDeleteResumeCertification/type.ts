@@ -13,5 +13,5 @@ export interface DeleteResumeCertificationDef {
 }
 
 export interface UseDeleteResumeCertificationProps {
-  (): UseMutationResult<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (resumeId: number): UseMutationResult<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

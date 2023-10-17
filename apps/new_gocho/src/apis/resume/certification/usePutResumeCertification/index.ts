@@ -10,7 +10,7 @@ import {
   UsePutResumeCertificationProps,
 } from "./type";
 
-export const putResumeCerification: PutResumeCertificationDef = async ({
+export const putResumeCertification: PutResumeCertificationDef = async ({
   resumeId,
   certificationId,
   ...requestObj
@@ -19,7 +19,7 @@ export const putResumeCerification: PutResumeCertificationDef = async ({
   return data;
 };
 
-export const usePutResumeCerification: UsePutResumeCertificationProps = () =>
+export const usePutResumeCertification: UsePutResumeCertificationProps = () =>
   useMutation<PutResumeCertificationResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
-    mutationFn: putResumeCerification,
+    mutationFn: putResumeCertification,
   });

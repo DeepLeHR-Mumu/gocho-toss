@@ -21,7 +21,7 @@ const ResumePage: NextPage = () => {
   }
 
   // TODO: resume 하나만 사용하는것으로 판단 추후 변경
-  // const resumeId = resumeArr.data[0].id;
+  const resumeId = resumeArr.data[0].id;
 
   return (
     <main css={cssObj.background}>
@@ -31,7 +31,7 @@ const ResumePage: NextPage = () => {
             <InfoPart userId={userData.id} />
             <EducationPart />
             <CareerPart />
-            <CertificationPart />
+            <CertificationPart resumeId={resumeId} userId={userData.id} />
             <FluencyPart />
             <ActivityPart />
           </div>
