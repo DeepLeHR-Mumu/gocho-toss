@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   wrapper: css`
@@ -35,7 +35,7 @@ export const cssObj = {
       width: 8.25rem;
       line-height: 1rem;
       font-weight: 500;
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${COLOR.GRAY600};
     }
 
     span {

@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 import { OutPutStatusType } from "./type";
 
@@ -10,26 +10,26 @@ export const cssObj = {
     let fontColor = css``;
     if (status === "진행중") {
       fontColor = css`
-        color: ${NEWCOLORS.BLUE250};
+        color: ${COLOR.BLUE250};
       `;
     }
     if (status === "공고마감") {
       fontColor = css`
-        color: ${NEWCOLORS.BLUEGRAY400};
+        color: ${COLOR.GRAY600};
       `;
     }
     if (status === "대기중") {
       fontColor = css`
-        color: ${NEWCOLORS.GREEN};
+        color: ${COLOR.GREEN300};
       `;
     }
     if (status === "반려") {
       fontColor = css`
-        color: ${NEWCOLORS.RED200};
+        color: ${COLOR.RED200};
       `;
     }
     return css`
-      ${TEXTS.TITLE6};
+      ${TEXT.TITLE5_M1620};
       ${fontColor};
       margin-bottom: 0.5rem;
     `;

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { shorten } from "shared-style/common";
 
 export const cssObj = {
@@ -33,9 +33,9 @@ export const cssObj = {
     font-weight: 500;
     width: 20%;
     height: 2rem;
-    border: 2px solid ${COLORS.GRAY10};
+    border: 2px solid ${COLOR.GRAY900};
     padding: 0.125rem 0.25rem;
-    background-color: ${COLORS.BLUE_NEON40};
-    color: ${COLORS.GRAY100};
+    background-color: ${COLOR.BLUE300};
+    color: ${COLOR.WHITE};
   `,
 };

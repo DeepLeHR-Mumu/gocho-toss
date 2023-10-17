@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
-import { NEWCOLORS } from "shared-style/color";
-import { TEMP } from "shared-style/mediaQuery";
+import { TEXT } from "shared-style/text";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   wrapper: css`
@@ -11,25 +10,14 @@ export const cssObj = {
     flex-direction: column;
     align-items: center;
     padding: 1.5rem;
-
-    ${TEMP} {
-      padding: 2rem;
-      overflow: auto;
-    }
   `,
 
   closeIcon: css`
     width: 2rem;
     height: 2rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${COLOR.GRAY450};
     align-self: flex-end;
     cursor: pointer;
-
-    ${TEMP} {
-      width: 1.5rem;
-      height: 1.5rem;
-      color: ${NEWCOLORS.BLACK};
-    }
   `,
 
   mobileTitleWrapper: css`
@@ -41,44 +29,25 @@ export const cssObj = {
   title: css`
     margin-top: 4.5rem;
     margin-bottom: 0.5rem;
-    ${NEWTEXTS.TITLE13}
-
-    ${TEMP} {
-      font-size: 2.5rem;
-      font-style: normal;
-      font-weight: 900;
-      line-height: 3.125rem;
-      margin-top: 0rem;
-      margin-bottom: 0rem;
-    }
+    ${TEXT.TITLE2_B2428}
   `,
 
   logo: css`
     margin-bottom: 2.5rem;
-
-    ${TEMP} {
-      margin-bottom: 1.25rem;
-      align-self: flex-start;
-    }
   `,
 
   subtitle: css`
     margin-bottom: 6.5rem;
-    color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE7}
-
-    ${TEMP} {
-      margin-bottom: auto;
-      align-self: flex-start;
-    }
+    color: ${COLOR.GRAY600};
+    ${TEXT.TITLE5_M1620}
   `,
 
   tooltip: css`
     padding: 0.5rem 0.75rem;
     margin-bottom: 1.5rem;
     border-radius: 0.25rem;
-    color: ${NEWCOLORS.WHITE};
-    background-color: ${NEWCOLORS.BLUE300};
+    color: ${COLOR.WHITE};
+    background-color: ${COLOR.BLUE300};
     position: relative;
 
     ::after {
@@ -89,7 +58,7 @@ export const cssObj = {
       transform: translate(-50%, 0);
       border-width: 0.5rem;
       border-style: solid;
-      border-color: ${NEWCOLORS.BLUE300} transparent transparent transparent;
+      border-color: ${COLOR.BLUE300} transparent transparent transparent;
     }
   `,
 
@@ -103,28 +72,18 @@ export const cssObj = {
     border-color: #fee500;
     background-color: #fee500;
     color: #392020;
-    ${NEWTEXTS.TITLE8}
-
-    ${TEMP} {
-      width: 100%;
-      margin-bottom: 2.5rem;
-      ${NEWTEXTS.TITLE6}
-    }
+    ${TEXT.TITLE5_M1620}
   `,
 
   emailLogin: css`
     border: none;
     background-color: transparent;
-    color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.UNDERLINE_M1620}
-
-    ${TEMP} {
-      margin-bottom: 3rem;
-    }
+    color: ${COLOR.GRAY600};
+    ${TEXT.UNDERLINE1_M1620}
   `,
 
   mobileDescription: css`
-    color: ${NEWCOLORS.BLUEGRAY200};
-    ${NEWTEXTS.BODY2}
+    color: ${COLOR.GRAY400};
+    ${TEXT.BODY3_R1422}
   `,
 };

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
@@ -20,48 +20,48 @@ export const cssObj = {
   `,
 
   maleBar: (percent: number) => css`
-      width: 2rem;
-      height: ${percent}%;
-      background-color: ${NEWCOLORS.BLUE250};
-      border-radius: 0.5rem 0.5rem 0 0;
-      position: relative;
+    width: 2rem;
+    height: ${percent}%;
+    background-color: ${COLOR.BLUE250};
+    border-radius: 0.5rem 0.5rem 0 0;
+    position: relative;
 
-      ::after {
-        content: "${percent}%";
-        width: 100%;
-        position: absolute;
-        top: -1.375rem;
-        text-align: center;
-        color: ${NEWCOLORS.BLUE250};
-        ${NEWTEXTS.TITLE5}
-      }
-    `,
+    ::after {
+      content: "${percent}%";
+      width: 100%;
+      position: absolute;
+      top: -1.375rem;
+      text-align: center;
+      color: ${COLOR.BLUE250};
+      ${TEXT.TITLE6_M1418}
+    }
+  `,
 
   femaleBar: (percent: number) => css`
-      width: 2rem;
-      height: ${percent}%;
-      background-color: ${NEWCOLORS.RED100};
-      border-radius: 0.5rem 0.5rem 0 0;
-      position: relative;
+    width: 2rem;
+    height: ${percent}%;
+    background-color: ${COLOR.RED100};
+    border-radius: 0.5rem 0.5rem 0 0;
+    position: relative;
 
-      ::after {
-        content: "${percent}%";
-        width: 100%;
-        position: absolute;
-        top: -1.375rem;
-        text-align: center;
-        color: ${NEWCOLORS.RED100};
-        ${NEWTEXTS.TITLE5}
-      }
-    `,
+    ::after {
+      content: "${percent}%";
+      width: 100%;
+      position: absolute;
+      top: -1.375rem;
+      text-align: center;
+      color: ${COLOR.RED100};
+      ${TEXT.TITLE6_M1418}
+    }
+  `,
 
   contentTitle: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${COLOR.GRAY600};
     margin-bottom: 0.5rem;
-    ${NEWTEXTS.TITLE10}
+    ${TEXT.TITLE4_M1822}
   `,
 
   content: css`
-    ${NEWTEXTS.TITLE11}
+    ${TEXT.TITLE4_M1822}
   `,
 };

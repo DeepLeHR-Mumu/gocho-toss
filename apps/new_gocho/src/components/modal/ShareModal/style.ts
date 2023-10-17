@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
-import { NEWCOLORS } from "shared-style/color";
+import { TEXT } from "shared-style/text";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   wrapper: css`
@@ -12,13 +12,13 @@ export const cssObj = {
 
   link: css`
     border-radius: 0.5rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     padding: 0.875rem 1.25rem 0.875rem 1.25rem;
     flex-grow: 1;
-    ${NEWTEXTS.TITLE7}
+    ${TEXT.TITLE5_M1620}
   `,
 
   copyButton: css`
-    color: ${NEWCOLORS.BLUE300};
+    color: ${COLOR.BLUE300};
   `,
 };

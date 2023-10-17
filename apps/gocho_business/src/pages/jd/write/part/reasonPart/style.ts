@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   spinnerBox: css`
@@ -9,8 +9,8 @@ export const cssObj = {
   `,
 
   wrapper: css`
-    border: 1px solid ${NEWCOLORS.RED300};
-    background-color: ${NEWCOLORS.WHITE};
+    border: 1px solid ${COLOR.RED300};
+    background-color: ${COLOR.WHITE};
     box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.05);
     padding: 1.5rem 2rem;
     border-radius: 1rem;
@@ -26,12 +26,12 @@ export const cssObj = {
       width: 1.5rem;
       height: 1.5rem;
       margin-right: 0.5rem;
-      color: ${NEWCOLORS.RED300};
+      color: ${COLOR.RED300};
     }
 
     > p {
-      ${TEXTS.TITLE9}
-      color: ${NEWCOLORS.RED300};
+      ${TEXT.TITLE4_B1822}
+      color: ${COLOR.RED300};
     }
   `,
 
@@ -47,22 +47,22 @@ export const cssObj = {
   `,
 
   infoBox: css`
-    ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    ${TEXT.TITLE6_M1418};
+    color: ${COLOR.GRAY500};
 
     > span {
       margin-left: 0.5rem;
-      color: ${NEWCOLORS.BLUEGRAY500};
+      color: ${COLOR.GRAY700};
     }
   `,
 
   contour: css`
-    border-left: 1px solid ${NEWCOLORS.GRAY200};
+    border-left: 1px solid ${COLOR.GRAY200};
   `,
 
   email: css`
-    ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    ${TEXT.TITLE6_M1418};
+    color: ${COLOR.GRAY600};
 
     > span {
       margin-left: 0.5rem;
@@ -70,29 +70,29 @@ export const cssObj = {
   `,
 
   reasonContainer: css`
-    border-top: 1px solid ${NEWCOLORS.GRAY200};
+    border-top: 1px solid ${COLOR.GRAY200};
     margin-top: 1.25rem;
     padding-top: 1.25rem;
   `,
 
   reasonTitle: css`
-    ${TEXTS.TITLE6};
-    color: ${NEWCOLORS.RED300};
+    ${TEXT.TITLE5_M1620};
+    color: ${COLOR.RED300};
     margin-bottom: 1.25rem;
 
     > span {
-      ${TEXTS.TITLE3};
-      color: ${NEWCOLORS.BLUEGRAY300};
+      ${TEXT.TITLE6_M1418};
+      color: ${COLOR.GRAY500};
       margin-left: 0.5rem;
     }
   `,
 
   reason: css`
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     margin-bottom: 0.5rem;
 
     :before {
-      ${TEXTS.TITLE5};
+      ${TEXT.TITLE5_M1620};
       font-weight: 700;
       content: "·";
       margin-right: 0.25rem;

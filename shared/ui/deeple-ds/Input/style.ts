@@ -1,23 +1,23 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   input: css`
     flex: 1;
-    ${NEWTEXTS.TITLE7}
+    ${TEXT.BODY2_R1624};
 
     :focus {
       outline: none;
     }
 
     :disabled {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${COLOR.GRAY450};
       cursor: not-allowed;
     }
 
     ::placeholder {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${COLOR.GRAY450};
     }
   `,
 };

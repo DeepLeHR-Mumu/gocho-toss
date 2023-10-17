@@ -1,29 +1,29 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   thumbsUpWrapper: (isClicked: boolean) => css`
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY400};
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: ${isClicked ? COLOR.BLUE300 : COLOR.GRAY600};
 
-      svg {
-        color: ${isClicked ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY400};
-      }
-    `,
+    svg {
+      color: ${isClicked ? COLOR.BLUE300 : COLOR.GRAY600};
+    }
+  `,
 
   thumbsDownWrapper: (isClicked: boolean) => css`
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.BLUEGRAY400};
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: ${isClicked ? COLOR.RED200 : COLOR.GRAY600};
 
-      svg {
-        color: ${isClicked ? NEWCOLORS.RED200 : NEWCOLORS.BLUEGRAY400};
-      }
-    `,
+    svg {
+      color: ${isClicked ? COLOR.RED200 : COLOR.GRAY600};
+    }
+  `,
 
   large: css`
     svg {
@@ -32,7 +32,7 @@ export const cssObj = {
     }
 
     span {
-      ${NEWTEXTS.TITLE7}
+      ${TEXT.TITLE5_M1620}
     }
   `,
 
@@ -43,7 +43,7 @@ export const cssObj = {
     }
 
     span {
-      ${NEWTEXTS.TITLE1}
+      ${TEXT.TITLE7_M1218}
     }
   `,
 };

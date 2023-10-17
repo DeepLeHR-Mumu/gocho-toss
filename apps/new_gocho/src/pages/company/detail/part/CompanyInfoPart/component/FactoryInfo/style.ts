@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   factoryChipWrapper: css`
@@ -19,7 +19,7 @@ export const cssObj = {
   factorySummary: css`
     border-radius: 1rem;
     padding: 2rem;
-    border: 1px solid ${NEWCOLORS.GRAY100};
+    border: 1px solid ${COLOR.GRAY100};
   `,
 
   infoTitleWrapper: css`
@@ -36,12 +36,12 @@ export const cssObj = {
   `,
 
   infoTitle: css`
-    ${NEWTEXTS.TITLE13}
+    ${TEXT.TITLE2_B2428}
   `,
 
   infoSubtitle: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE10}
+    color: ${COLOR.GRAY600};
+    ${TEXT.TITLE4_M1822}
   `,
 
   summaryWrapper: css`
@@ -59,23 +59,23 @@ export const cssObj = {
 
     > h3 {
       margin-bottom: 1.25rem;
-      ${NEWTEXTS.TITLE12};
+      ${TEXT.TITLE4_B1822};
     }
 
     > span {
       margin-bottom: 2.5rem;
-      ${NEWTEXTS.TITLE10}
+      ${TEXT.TITLE4_M1822}
     }
 
     > p {
-      ${NEWTEXTS.BODY6}
+      ${TEXT.BODY1_R1826}
     }
   `,
 
   copy: css`
     display: inline-block;
     margin-left: 1rem;
-    color: ${NEWCOLORS.BLUE250};
-    ${NEWTEXTS.TITLE11}
+    color: ${COLOR.BLUE250};
+    ${TEXT.TITLE4_M1822}
   `,
 };

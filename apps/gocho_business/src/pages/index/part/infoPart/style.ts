@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { TEXTS } from "shared-style/text";
-import { NEWCOLORS } from "shared-style/color";
+import { TEXT } from "shared-style/text";
+import { COLOR } from "shared-style/color";
 import { shorten } from "shared-style/common";
 
 export const cssObj = {
@@ -17,16 +17,16 @@ export const cssObj = {
   `,
 
   infoTypeButton: (isActive: boolean) => css`
-    ${TEXTS.TITLE9};
+    ${TEXT.TITLE4_B1822};
     padding: 0.75rem 1.25rem;
-    background-color: ${isActive ? `${NEWCOLORS.BLUE300}` : `${NEWCOLORS.WHITE}`};
-    color: ${isActive ? `${NEWCOLORS.WHITE}` : `${NEWCOLORS.BLUEGRAY400}`};
+    background-color: ${isActive ? `${COLOR.BLUE300}` : `${COLOR.WHITE}`};
+    color: ${isActive ? `${COLOR.WHITE}` : `${COLOR.GRAY600}`};
     border-radius: 1.5rem;
   `,
 
   moreButton: css`
-    ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    ${TEXT.TITLE6_M1418};
+    color: ${COLOR.GRAY600};
   `,
 
   infoList: css`
@@ -40,18 +40,18 @@ export const cssObj = {
   `,
 
   infoType: css`
-    ${TEXTS.TITLE7};
+    ${TEXT.TITLE5_B1620};
     min-width: 5.25rem;
   `,
 
   infoTitle: css`
     flex-grow: 1;
-    ${TEXTS.TITLE6};
+    ${TEXT.TITLE5_M1620};
     ${shorten()};
   `,
 
   infoDate: css`
-    ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    ${TEXT.TITLE6_M1418};
+    color: ${COLOR.GRAY500};
   `,
 };

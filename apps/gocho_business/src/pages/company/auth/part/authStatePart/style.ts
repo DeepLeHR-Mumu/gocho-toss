@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 import { AuthName } from "@/apis/manager/useManagerProfile/type";
 
@@ -26,9 +26,9 @@ export const cssObj = {
     flex-grow: 1;
     width: 59.5rem;
     position: relative;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     padding: 2rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 1rem;
     box-shadow: 0 2px 16px 0 #0000000d;
   `,
@@ -36,7 +36,7 @@ export const cssObj = {
   contentTitle: (giveMarginTop?: boolean) => css`
     width: fit-content;
     margin-bottom: 1.5rem;
-    ${TEXTS.TITLE14};
+    ${TEXT.TITLE1_B2832};
     ${giveMarginTop ? "margin-top: 3rem;" : ""}
   `,
 
@@ -50,72 +50,72 @@ export const cssObj = {
 
       h4 {
         margin-bottom: 8px;
-        ${TEXTS.TITLE8};
-        color: ${NEWCOLORS.BLACK};
+        ${TEXT.TITLE4_M1822};
+        color: ${COLOR.BLACK};
       }
 
       p {
-        ${TEXTS.BODY7}
-        color: ${NEWCOLORS.BLACK};
+        ${TEXT.BODY3_R1422}
+        color: ${COLOR.BLACK};
       }
     `;
 
     const notCss = css`
       ${defaultCss}
-      background-color: ${NEWCOLORS.GRAY50};
-      border: 1px solid ${NEWCOLORS.GRAY200};
+      background-color: ${COLOR.GRAY50};
+      border: 1px solid ${COLOR.GRAY200};
     `;
 
     const completeCss = css`
       ${defaultCss}
-      background-color: ${NEWCOLORS.BLUE50};
-      border: 1px solid ${NEWCOLORS.BLUE200};
+      background-color: ${COLOR.BLUE50};
+      border: 1px solid ${COLOR.BLUE200};
 
       h4 {
-        color: ${NEWCOLORS.BLUE300};
+        color: ${COLOR.BLUE300};
       }
     `;
 
     const waitCss = css`
       ${defaultCss}
-      background-color: ${NEWCOLORS.GRAY100};
-      border: 1px solid ${NEWCOLORS.GRAY300};
+      background-color: ${COLOR.GRAY100};
+      border: 1px solid ${COLOR.GRAY450};
 
       h4,
       p {
-        color: ${NEWCOLORS.BLUEGRAY400};
+        color: ${COLOR.GRAY600};
       }
     `;
 
     const rejectCss = css`
       ${defaultCss}
-      background-color: ${NEWCOLORS.GRAY50};
-      border: 1px solid ${NEWCOLORS.RED300};
+      background-color: ${COLOR.GRAY50};
+      border: 1px solid ${COLOR.RED300};
 
       h4 {
-        color: ${NEWCOLORS.RED300};
+        color: ${COLOR.RED300};
       }
 
       hr {
-        border: 1px solid ${NEWCOLORS.GRAY200};
+        border: 1px solid ${COLOR.GRAY200};
         width: 100%;
         margin: 1.25rem 0;
       }
 
       h5 {
-        ${TEXTS.TITLE6}
-        color: ${NEWCOLORS.RED300};
+        ${TEXT.TITLE5_M1620}
+        color: ${COLOR.RED300};
       }
 
       span {
-        ${TEXTS.BODY7}
-        color: ${NEWCOLORS.GRAY300};
+        ${TEXT.BODY3_R1422}
+        color: ${COLOR.GRAY450};
         margin-left: 1rem;
       }
 
       ul {
         margin-top: 1.25rem;
-        ${TEXTS.TITLE5}
+        ${TEXT.TITLE5_M1620}
 
         li::before {
           content: " · ";
@@ -165,13 +165,13 @@ export const cssObj = {
 
     a {
       text-decoration: underline;
-      color: ${NEWCOLORS.BLUE250};
+      color: ${COLOR.BLUE250};
     }
   `,
 
   authProcessContainer: css`
     border-radius: 1rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     padding: 1.5rem 3.18rem 1.5rem 2.5625rem;
     display: flex;
     flex-direction: row;
@@ -188,7 +188,7 @@ export const cssObj = {
       width: 2rem;
       height: 2rem;
       border-radius: 50%;
-      background: ${NEWCOLORS.BLUE100};
+      background: ${COLOR.BLUE100};
       display: flex;
       justify-content: center;
       align-items: center;
@@ -198,18 +198,18 @@ export const cssObj = {
     p:nth-of-type(1) {
       margin-top: 16px;
       margin-bottom: 8px;
-      ${TEXTS.TITLE6}
+      ${TEXT.TITLE5_M1620}
     }
 
     p:nth-of-type(2),
     p:nth-of-type(3) {
-      ${TEXTS.BODY2}
-      color: ${NEWCOLORS.BLUEGRAY400};
+      ${TEXT.BODY3_R1422}
+      color: ${COLOR.GRAY600};
     }
   `,
 
   line: css`
-    border: 1px solid ${NEWCOLORS.BLUE100};
+    border: 1px solid ${COLOR.BLUE100};
     height: 1px;
     width: 70%;
     position: absolute;
@@ -228,16 +228,16 @@ export const cssObj = {
     width: 11.25rem;
     height: 3rem;
     padding: 0.75rem 1rem;
-    background-color: ${NEWCOLORS.BLUE300};
+    background-color: ${COLOR.BLUE300};
     border-radius: 0.5rem;
-    ${TEXTS.TITLE6};
-    color: ${NEWCOLORS.WHITE};
+    ${TEXT.TITLE5_M1620};
+    color: ${COLOR.WHITE};
     margin-top: 3rem;
     margin-bottom: 1.25rem;
 
     &:disabled {
-      background-color: ${NEWCOLORS.GRAY200};
-      color: ${NEWCOLORS.GRAY300};
+      background-color: ${COLOR.GRAY200};
+      color: ${COLOR.GRAY450};
       cursor: not-allowed;
     }
   `,

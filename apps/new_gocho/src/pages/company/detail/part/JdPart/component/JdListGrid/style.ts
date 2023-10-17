@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   titleWrapper: (isValid = true) => css`
@@ -8,17 +8,17 @@ export const cssObj = {
     flex-direction: row;
     align-items: flex-end;
     gap: 1rem;
-    ${isValid ? `color: ${NEWCOLORS.BLACK};` : `color: ${NEWCOLORS.BLUEGRAY400};`}
+    ${isValid ? `color: ${COLOR.BLACK};` : `color: ${COLOR.GRAY600};`}
 
     h3 {
       margin-bottom: 1.75rem;
-      ${NEWTEXTS.TITLE14}
+      ${TEXT.TITLE1_B2832}
     }
   `,
 
   jdNumber: css`
     margin-bottom: 2rem;
-    ${NEWTEXTS.TITLE7}
+    ${TEXT.TITLE5_M1620}
   `,
 
   jdWrapper: css`
@@ -33,13 +33,13 @@ export const cssObj = {
     grid-column-start: 1;
     grid-column-end: 3;
     margin-top: 1.0625rem;
-    color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE11}
+    color: ${COLOR.GRAY600};
+    ${TEXT.TITLE4_M1822}
 
     > svg {
       width: 1.5rem;
       height: 1.5rem;
-      color: ${NEWCOLORS.GRAY300};
+      color: ${COLOR.GRAY450};
     }
   `,
 
@@ -50,6 +50,6 @@ export const cssObj = {
     display: grid;
     place-items: center;
     margin-bottom: 2rem;
-    ${NEWTEXTS.TITLE10}
+    ${TEXT.TITLE4_M1822}
   `,
 };

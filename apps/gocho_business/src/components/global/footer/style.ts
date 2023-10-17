@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   footer: css`
@@ -16,7 +16,7 @@ export const cssObj = {
     padding: 0 1.5rem;
     margin: 0 auto;
     gap: 0 1.25rem;
-    border-top: 1px solid ${NEWCOLORS.GRAY200};
+    border-top: 1px solid ${COLOR.GRAY200};
   `,
 
   infoContainer: css`
@@ -43,12 +43,12 @@ export const cssObj = {
   `,
 
   info: css`
-    ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    ${TEXT.TITLE5_M1620};
+    color: ${COLOR.GRAY600};
   `,
 
   contour: css`
-    border-left: 1px solid ${NEWCOLORS.GRAY200};
+    border-left: 1px solid ${COLOR.GRAY200};
   `,
 
   middleBox: css`
@@ -68,15 +68,15 @@ export const cssObj = {
   `,
 
   contactTitle: css`
-    ${TEXTS.TITLE7};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    ${TEXT.TITLE5_B1620};
+    color: ${COLOR.GRAY600};
   `,
 
   link: css`
     display: flex;
     align-items: center;
-    ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    ${TEXT.TITLE5_M1620};
+    color: ${COLOR.GRAY600};
   `,
 
   kakaoLogo: css`
@@ -97,7 +97,7 @@ export const cssObj = {
   `,
 
   underlineLink: css`
-    ${TEXTS.UNDERLINE};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    ${TEXT.UNDERLINE1_M1620};
+    color: ${COLOR.GRAY600};
   `,
 };

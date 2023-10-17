@@ -4,8 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import dayjs from "dayjs";
 
-import { Spinner } from "shared-ui/common/atom/spinner";
-
+import { Spinner } from "shared-ui/common/spinner";
 import { EtcSideNav } from "@/components/global/etcSideNav";
 import { PageLayout } from "@/components";
 import { useNoticeDetail, useAddNoticeView } from "@/apis";

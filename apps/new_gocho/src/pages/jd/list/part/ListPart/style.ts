@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   wrapper: css`
@@ -31,13 +31,13 @@ export const cssObj = {
   listButton: css`
     border-radius: 0.5rem;
     padding: 0.25rem;
-    background-color: ${NEWCOLORS.GRAY100};
+    background-color: ${COLOR.GRAY100};
     margin-left: 1.875rem;
 
     svg {
       width: 1.5rem;
       height: 1.5rem;
-      color: ${NEWCOLORS.BLACK};
+      color: ${COLOR.BLACK};
     }
   `,
 
@@ -49,20 +49,20 @@ export const cssObj = {
     svg {
       width: 1.5rem;
       height: 1.5rem;
-      color: ${NEWCOLORS.GRAY300};
+      color: ${COLOR.GRAY450};
     }
   `,
 
   iconButton: (clicked: boolean) => css`
     border-radius: 0.5rem;
     padding: 0.25rem;
-    background-color: ${clicked ? NEWCOLORS.GRAY100 : "transparent"};
+    background-color: ${clicked ? COLOR.GRAY100 : "transparent"};
     margin-left: 1.875rem;
 
     svg {
       width: 1.5rem;
       height: 1.5rem;
-      color: ${clicked ? NEWCOLORS.BLACK : NEWCOLORS.GRAY300};
+      color: ${clicked ? COLOR.BLACK : COLOR.GRAY450};
     }
   `,
 

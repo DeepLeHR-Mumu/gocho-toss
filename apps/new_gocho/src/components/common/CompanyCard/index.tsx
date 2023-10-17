@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import { Profile } from "shared-ui/deeple-ds";
 
 import { useGetDeviceType } from "@/globalStates";
-import { INTERNAL_URL } from "@/pages/constants";
+import { INTERNAL_URL } from "@/constants";
 
 import { CompanyBookmark } from "../CompanyBookmark";
 import { SkeletonBox } from "../SkeletonBox";
@@ -64,9 +64,7 @@ export const CompanyCard = ({ company, replace = false, callback, blockClick }: 
           <h3 css={cssObj.name(isButtonExist)}>{company.name}</h3>
         </div>
       </Link>
-      {!isMobile && (
-        <p css={cssObj.hashTags(isButtonExist)}>{company.hashTagArr?.map((hashTag) => `#${hashTag}`).join(" ")}</p>
-      )}
+      {!isMobile && <p css={cssObj.hashTags}>{company.hashTagArr?.map((hashTag) => `#${hashTag}`).join(" ")}</p>}
       {isButtonExist && <CompanyBookmark companyId={company.id} isBookmark={!!company.bookmark?.state} />}
     </div>
   );

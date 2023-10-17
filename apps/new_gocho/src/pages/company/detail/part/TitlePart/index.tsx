@@ -4,14 +4,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FiShare2, FiEye } from "react-icons/fi";
 
-import { Divider } from "shared-ui/deeple-ds";
+import { Divider, HiddenH1 } from "shared-ui/deeple-ds";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
+import defaultCompanyBg from "shared-image/global/common/default_company_bg.webp";
 
 import { Layout, ShareModal, CompanyBookmark, SkeletonBox } from "@/components";
 import { useCompanyDetail } from "@/apis/company";
 import { isQueryString } from "@/utils";
-import { INTERNAL_URL } from "@/pages/constants";
-import backgroundImage from "@/public/image/company/background.png";
+import { INTERNAL_URL } from "@/constants";
 
 import { cssObj, skeletonCssObj } from "./style";
 
@@ -26,7 +26,7 @@ export const TitlePart = () => {
     return (
       <section css={cssObj.background}>
         <div css={cssObj.imageWrapper}>
-          <Image src={backgroundImage} alt="회사 배경" fill priority />
+          <Image src={defaultCompanyBg} alt="회사 배경" fill priority />
         </div>
         <Layout>
           <div css={cssObj.wrapper}>
@@ -54,9 +54,11 @@ export const TitlePart = () => {
 
   return (
     <>
+      <HiddenH1 title={`${companyData.name} 기업 정보`} />
+
       <section css={cssObj.background}>
         <div css={cssObj.imageWrapper}>
-          <Image src={backgroundImage} alt="회사 배경" fill priority />
+          <Image src={companyData.background_image_url || defaultCompanyBg} alt="회사 배경" fill priority />
         </div>
         <Layout>
           <div css={cssObj.wrapper}>

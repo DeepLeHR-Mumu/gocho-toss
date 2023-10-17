@@ -1,8 +1,6 @@
 import { useEffect, useCallback, useMemo } from "react";
 import { create } from "zustand";
 
-import { TEMP } from "shared-style/mediaQuery";
-
 import { DeviceType, DeviceStore } from "./type";
 
 const useDeviceStore = create<DeviceStore>((set) => ({
@@ -28,7 +26,7 @@ export const useSetDeviceType = () => {
   const resizeCallback = useCallback(() => {
     const deviceWidth = window.innerWidth;
     const deviceHeight = window.innerHeight;
-    const [, , mobileStandardWidth] = TEMP.split(" ");
+    const [, , mobileStandardWidth] = `@media (max-width: 100px)`.split(" ");
 
     let newDeviceType: DeviceType = "DESKTOP";
 

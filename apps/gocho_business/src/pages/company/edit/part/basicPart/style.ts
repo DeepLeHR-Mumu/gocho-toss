@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   spinnerBox: css`
@@ -28,12 +28,12 @@ export const cssObj = {
 
   addAddressButton: css`
     display: flex;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 0.75rem;
     height: 3.25rem;
     padding: 1rem 2rem;
-    background-color: ${NEWCOLORS.WHITE};
-    ${TEXTS.TITLE4};
+    background-color: ${COLOR.WHITE};
+    ${TEXT.TITLE6_M1418};
   `,
 
   hiddenInput: css`

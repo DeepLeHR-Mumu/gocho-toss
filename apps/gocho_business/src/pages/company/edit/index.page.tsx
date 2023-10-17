@@ -3,15 +3,15 @@ import { useForm } from "react-hook-form";
 import { NextPage } from "next";
 import dayjs from "dayjs";
 
-import { Spinner } from "shared-ui/common/atom/spinner";
-import { usePreventRouting } from "shared-hooks";
+import { Spinner } from "shared-ui/common/spinner";
+import { usePreventRouting } from "shared-hook";
+import { ErrorResponseDef } from "shared-type/api";
 
 import { useEditCompanyDetail, useCompanyDetail, useManagerProfile } from "@/apis";
 import { PageLayout } from "@/components";
 import { useModal, useToast } from "@/globalStates";
 import { companyEditConfirmEvent, companyEditDoneEvent, companyEditFailEvent, companyEditPageFunnelEvent } from "@/ga";
 import { CompanySideNav } from "@/components/global/companySideNav";
-import { ErrorResponseDef } from "@/types";
 
 import { PageHead } from "./pageHead";
 import { ButtonPart, CompanyInfoPart, LastEditInfoPart, BasicPart, WelfarePart, FactoryPart } from "./part";

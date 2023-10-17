@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   contentWrapper: css`
@@ -13,9 +13,9 @@ export const cssObj = {
     flex-grow: 1;
     position: relative;
     height: 45rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     padding: 2rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 1rem;
     box-shadow: 0 2px 16px 0 #0000000d;
   `,
@@ -23,35 +23,35 @@ export const cssObj = {
   pageTitle: css`
     width: fit-content;
     margin-bottom: 1.5rem;
-    ${TEXTS.TITLE11};
+    ${TEXT.TITLE1_B2832};
   `,
 
   descWrapper: css`
-    background-color: ${NEWCOLORS.GRAY50};
+    background-color: ${COLOR.GRAY50};
     padding: 1.5rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 1rem;
     margin-bottom: 1.75rem;
   `,
 
   descTitle: css`
     display: block;
-    ${TEXTS.TITLE9};
+    ${TEXT.TITLE4_B1822};
     margin-bottom: 0.5rem;
   `,
 
   desc: css`
-    ${TEXTS.TITLE3};
+    ${TEXT.TITLE6_M1418};
   `,
 
   email: css`
-    ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    ${TEXT.TITLE5_M1620};
+    color: ${COLOR.GRAY600};
     margin-bottom: 0.5rem;
 
     > a {
       margin-left: 0.5rem;
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${COLOR.GRAY600};
     }
   `,
 };

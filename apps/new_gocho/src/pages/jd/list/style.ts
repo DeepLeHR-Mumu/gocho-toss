@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
-import { NEWCOLORS } from "shared-style/color";
+import { TEXT } from "shared-style/text";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   wrapper: css`
@@ -13,13 +13,13 @@ export const cssObj = {
     margin-bottom: 2rem;
 
     > h3 {
-      ${NEWTEXTS.TITLE16}
+      ${TEXT.DISPLAY1_B4044}
     }
 
     > span {
       margin-left: 1.75rem;
-      color: ${NEWCOLORS.BLUEGRAY400};
-      ${NEWTEXTS.TITLE11}
+      color: ${COLOR.GRAY600};
+      ${TEXT.TITLE4_M1822}
     }
   `,
 
@@ -32,17 +32,17 @@ export const cssObj = {
   `,
 
   iconButton: (clicked: boolean) => css`
-      border-radius: 0.5rem;
-      padding: 0.25rem;
-      background-color: ${clicked ? NEWCOLORS.GRAY100 : "transparent"};
-      margin-left: 1.875rem;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    background-color: ${clicked ? COLOR.GRAY100 : "transparent"};
+    margin-left: 1.875rem;
 
-      svg {
-        width: 1.5rem;
-        height: 1.5rem;
-        color: ${clicked ? NEWCOLORS.BLACK : NEWCOLORS.GRAY300};
-      }
-    `,
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: ${clicked ? COLOR.BLACK : COLOR.GRAY450};
+    }
+  `,
 
   jdGridWrapper: css`
     display: grid;

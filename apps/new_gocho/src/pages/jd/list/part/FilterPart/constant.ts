@@ -52,7 +52,7 @@ export const INDUSTRY_FILTER_ARR = [
 ];
 
 export const EDUCATION_FILTER_KEY = "possibleEdu";
-export const EDUCATION_FILTER_ARR = ["", "중졸", "고졸", "초대졸", "4년제"];
+export const EDUCATION_FILTER_ARR = ["", "고졸", "초대졸", "4년제"];
 
 export const PLACE_FILTER_KEY = "place";
 export const PLACE_FILTER_ARR = [

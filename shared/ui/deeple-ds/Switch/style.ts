@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   switchWrapper: css`
@@ -7,7 +7,7 @@ export const cssObj = {
       display: block;
       width: 3rem;
       height: 1.5rem;
-      background-color: ${NEWCOLORS.GRAY200};
+      background-color: ${COLOR.GRAY200};
       border-radius: 1.5rem;
       position: relative;
       cursor: pointer;
@@ -24,8 +24,8 @@ export const cssObj = {
         left: 0.125rem;
         -webkit-transition: 0.4s;
         transition: 0.4s;
-        background: ${NEWCOLORS.WHITE};
-        box-shadow: 0 0 3px ${NEWCOLORS.GRAY300};
+        background: ${COLOR.WHITE};
+        box-shadow: 0 0 3px ${COLOR.GRAY450};
       }
     }
 
@@ -37,22 +37,22 @@ export const cssObj = {
       -webkit-transition: 0.4s;
       transition: 0.4s;
       transform: translateX(24px);
-      box-shadow: 0 0 3px ${NEWCOLORS.BLACK};
+      box-shadow: 0 0 3px ${COLOR.BLACK};
     }
 
     input:checked + span {
       -webkit-transition: 0.4s;
       transition: 0.4s;
-      background-color: ${NEWCOLORS.BLUE300};
+      background-color: ${COLOR.BLUE300};
     }
 
     input:disabled + span::before {
-      box-shadow: 0 0 3px ${NEWCOLORS.GRAY300};
+      box-shadow: 0 0 3px ${COLOR.GRAY450};
     }
 
     input:disabled + span {
       cursor: not-allowed;
-      background-color: ${NEWCOLORS.GRAY200};
+      background-color: ${COLOR.GRAY200};
     }
   `,
 };

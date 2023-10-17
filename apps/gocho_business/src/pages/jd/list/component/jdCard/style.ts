@@ -1,14 +1,14 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { shorten } from "shared-style/common";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   cardContainer: css`
     margin-top: 1.25rem;
-    background-color: ${NEWCOLORS.WHITE};
-    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+    background-color: ${COLOR.WHITE};
+    border-bottom: 1px solid ${COLOR.GRAY200};
   `,
 
   topContainer: css`
@@ -38,7 +38,7 @@ export const cssObj = {
     display: flex;
     align-items: center;
     padding-right: 1rem;
-    border-right: 1px solid ${NEWCOLORS.GRAY200};
+    border-right: 1px solid ${COLOR.GRAY200};
     gap: 0 0.5rem;
 
     :last-of-type {
@@ -47,7 +47,7 @@ export const cssObj = {
   `,
 
   info: css`
-    color: ${NEWCOLORS.BLUEGRAY600};
+    color: ${COLOR.GRAY800};
   `,
 
   commonInfoContainer: css`
@@ -61,7 +61,7 @@ export const cssObj = {
     justify-content: space-between;
     width: 9.25rem;
     height: 4rem;
-    border-right: 1px solid ${NEWCOLORS.GRAY200};
+    border-right: 1px solid ${COLOR.GRAY200};
 
     :last-of-type {
       border-right: none;
@@ -73,7 +73,7 @@ export const cssObj = {
   count: (isExpired: boolean) => css`
     font-size: 1.5rem;
     font-weight: 600;
-    color: ${isExpired ? `${NEWCOLORS.BLUEGRAY200}` : `${NEWCOLORS.BLACK}`};
+    color: ${isExpired ? `${COLOR.GRAY400}` : `${COLOR.BLACK}`};
   `,
 
   date: css`
@@ -83,7 +83,7 @@ export const cssObj = {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${COLOR.GRAY600};
   `,
 
   bottomContainer: css`
@@ -91,7 +91,7 @@ export const cssObj = {
     align-items: center;
     justify-content: space-between;
     padding: 0.875rem 1.5rem;
-    background-color: ${NEWCOLORS.GRAY50};
+    background-color: ${COLOR.GRAY50};
     height: 4.625rem;
   `,
 
@@ -107,13 +107,13 @@ export const cssObj = {
   `,
 
   linkButton: css`
-    ${TEXTS.TITLE6}
+    ${TEXT.TITLE5_M1620}
     padding: 0.75rem 0;
     border-radius: 0.5rem;
     width: 5rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
-    background-color: ${NEWCOLORS.WHITE};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    border: 1px solid ${COLOR.GRAY200};
+    background-color: ${COLOR.WHITE};
+    color: ${COLOR.GRAY500};
     text-align: center;
   `,
 
@@ -124,8 +124,8 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${NEWCOLORS.WHITE};
-    background-color: ${NEWCOLORS.BLUEGRAY200};
+    color: ${COLOR.WHITE};
+    background-color: ${COLOR.GRAY400};
     border-radius: 50rem;
   `,
 };

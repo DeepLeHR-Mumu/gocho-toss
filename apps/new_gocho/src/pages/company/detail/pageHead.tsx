@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
-import { GOCHO_DESKTOP_URL, COMPANY_INFO_META } from "shared-constant";
+import { GOCHO_DESKTOP_URL, COMPANY_INFO_META } from "@/constants/meta";
 
 import { useCompanyDetail } from "@/apis/company";
 

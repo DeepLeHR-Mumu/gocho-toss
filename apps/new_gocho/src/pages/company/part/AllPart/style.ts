@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   sectionContainer: css`
@@ -16,7 +16,7 @@ export const cssObj = {
   link: css`
     font-size: 1rem;
     padding-top: 0.625%;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${COLOR.GRAY600};
   `,
 
   companyList: css`

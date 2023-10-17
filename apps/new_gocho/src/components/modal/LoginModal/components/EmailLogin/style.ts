@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
-import { NEWCOLORS } from "shared-style/color";
-import { TEMP } from "shared-style/mediaQuery";
+import { TEXT } from "shared-style/text";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   wrapper: css`
@@ -15,10 +14,6 @@ export const cssObj = {
   loginWrapper: css`
     width: 100%;
     padding: 1.25rem 0.5rem 0 0.5rem;
-
-    ${TEMP} {
-      padding: 1rem;
-    }
   `,
 
   mobileDivider: css`
@@ -29,40 +24,26 @@ export const cssObj = {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-
-    ${TEMP} {
-      gap: 1.75rem;
-    }
   `,
 
   loginButtonWrapper: css`
-    margin-top: 3.375rem;
-
-    ${TEMP} {
-      width: 100%;
-      padding: 0 1rem;
-      margin-top: 0.75rem;
-    }
+    margin-top: 2.75rem;
   `,
 
   eye: css`
     width: 1rem;
     height: 1rem;
-    color: ${NEWCOLORS.BLUE300};
+    color: ${COLOR.BLUE300};
   `,
 
   eyeOff: css`
     width: 1rem;
     height: 1rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${COLOR.GRAY450};
   `,
 
   findPasswordButtonWrapper: css`
     margin-top: 2.625rem;
-
-    ${TEMP} {
-      margin-top: 1.75rem;
-    }
   `,
 
   findPasswordButton: css`
@@ -71,29 +52,14 @@ export const cssObj = {
     border: none;
     padding: 0;
     background-color: transparent;
-    color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.UNDERLINE_M1620}
-
-    ${TEMP} {
-      ${NEWTEXTS.UNDERLINE_M1418}
-    }
+    color: ${COLOR.GRAY600};
+    ${TEXT.UNDERLINE1_M1620}
   `,
 
-  mobileFooterWrapper: css`
-    ${TEMP} {
-      margin-top: auto;
-      padding-bottom: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-      align-items: center;
-      width: 100%;
-      padding: 0 1rem 1rem 1rem;
-    }
-  `,
+  mobileFooterWrapper: css``,
 
   mobileDescription: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${COLOR.GRAY600};
   `,
 
   mobileKakaoButton: css`
@@ -109,10 +75,5 @@ export const cssObj = {
 
   signUpButtonWrapper: css`
     margin-top: 7.625rem;
-
-    ${TEMP} {
-      width: 100%;
-      margin-top: 0;
-    }
   `,
 };

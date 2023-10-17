@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   textarea: (height: number) => css`
@@ -8,19 +8,19 @@ export const cssObj = {
     resize: none;
     flex: 1;
     height: ${height}rem;
-    ${NEWTEXTS.TITLE7}
+    ${TEXT.TITLE5_M1620}
 
     :focus {
       outline: none;
     }
 
     :disabled {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${COLOR.GRAY450};
       cursor: not-allowed;
     }
 
     ::placeholder {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${COLOR.GRAY450};
     }
   `,
 };

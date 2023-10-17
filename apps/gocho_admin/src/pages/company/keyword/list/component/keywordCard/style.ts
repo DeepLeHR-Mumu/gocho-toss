@@ -1,9 +1,9 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   cardWrapper: css`
-    border-bottom: 1px solid ${COLORS.GRAY80};
+    border-bottom: 1px solid ${COLOR.GRAY100};
     padding: 1rem 0;
     display: grid;
     grid-template-columns: 10% 80% 10%;

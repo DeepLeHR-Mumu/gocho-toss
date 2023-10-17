@@ -4,7 +4,8 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
-import { usePreventRouting } from "shared-hooks";
+import { useDisabledKeydownSubmit, usePreventRouting } from "shared-hook";
+import { ErrorResponseDef } from "shared-type/api";
 
 import { useModal, useToast } from "@/globalStates";
 import {
@@ -18,7 +19,6 @@ import {
 import { PageLayout } from "@/components";
 import { useEditJd, useJdDetail, useManagerProfile } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
-import { ErrorResponseDef } from "@/types";
 
 import {
   ReasonPart,
@@ -210,6 +210,8 @@ const JdEditPage: NextPage = () => {
       preferred_etc_arr: setFieldArray(jdData?.preferredEtcArr || []),
     });
   }, [jdData, reset]);
+
+  useDisabledKeydownSubmit();
 
   usePreventRouting(
     Boolean(Object.keys(dirtyFields).length) && !isSubmitSuccessful,

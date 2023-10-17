@@ -1,11 +1,11 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   userInfoContainer: css`
     padding-bottom: 2rem;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+    border-bottom: 1px solid ${COLOR.GRAY200};
   `,
 
   infoWrapper: css`
@@ -15,13 +15,13 @@ export const cssObj = {
   `,
 
   infoTitle: css`
-    ${TEXTS.TITLE6};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    ${TEXT.TITLE5_M1620};
+    color: ${COLOR.GRAY600};
     width: 8rem;
   `,
 
   infoDesc: css`
-    ${TEXTS.TITLE6};
+    ${TEXT.TITLE5_M1620};
   `,
 
   inputWrapper: css`
@@ -38,13 +38,13 @@ export const cssObj = {
   inputTitle: css`
     display: flex;
     align-items: center;
-    ${TEXTS.TITLE6};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    ${TEXT.TITLE5_M1620};
+    color: ${COLOR.GRAY600};
     width: 8rem;
 
     :after {
       content: "·";
-      color: ${NEWCOLORS.BLUE300};
+      color: ${COLOR.BLUE300};
       line-height: 0.5;
       font-size: 2rem;
       font-weight: 700;
@@ -63,26 +63,26 @@ export const cssObj = {
     right: 1rem;
     z-index: 10;
     font-size: 1.25rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${COLOR.GRAY450};
   `,
 
   errorDesc: css`
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     height: 3.25rem;
     line-height: 3.25rem;
     margin-left: 1.5rem;
-    color: ${NEWCOLORS.RED300};
+    color: ${COLOR.RED300};
   `,
 
   desc: css`
-    ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY500};
+    ${TEXT.TITLE5_M1620};
+    color: ${COLOR.GRAY700};
     margin-top: 1.5rem;
   `,
 
   link: css`
     text-decoration: underline;
-    color: ${NEWCOLORS.BLUE300};
+    color: ${COLOR.BLUE300};
     padding: 0 0.25rem;
   `,
 

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   companyCompareContainer: css`
@@ -28,10 +28,10 @@ export const cssObj = {
 
   acceptButton: css`
     font-weight: 500;
-    border: 2px solid ${COLORS.GRAY10};
+    border: 2px solid ${COLOR.GRAY900};
     padding: 0.25rem 1rem;
-    background-color: ${COLORS.BLUE_NEON40};
-    color: ${COLORS.GRAY100};
+    background-color: ${COLOR.BLUE300};
+    color: ${COLOR.WHITE};
   `,
 
   rejectForm: css`
@@ -47,23 +47,23 @@ export const cssObj = {
     height: 5rem;
     width: 80%;
     border-radius: 0.5rem;
-    border: 1px solid ${COLORS.GRAY70};
+    border: 1px solid ${COLOR.GRAY300};
     padding: 0.25rem 0.5rem;
     margin-bottom: 1rem;
   `,
 
   rejectButton: css`
     font-weight: 500;
-    border: 2px solid ${COLORS.GRAY10};
+    border: 2px solid ${COLOR.GRAY900};
     padding: 0.25rem 1rem;
     background-color: #b32100;
-    color: ${COLORS.GRAY100};
+    color: ${COLOR.WHITE};
   `,
 
   checkMessage: css`
     width: fit-content;
     margin: 1rem auto 0;
-    color: ${COLORS.BLUE_NEON40};
+    color: ${COLOR.BLUE300};
     font-weight: 700;
   `,
 };

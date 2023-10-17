@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 import { shorten } from "shared-style/common";
 
 export const cssObj = {
@@ -13,9 +13,9 @@ export const cssObj = {
   partContainer: css`
     flex-grow: 1;
     height: 50rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     padding: 2rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 1rem;
     box-shadow: 0 2px 16px 0 #0000000d;
   `,
@@ -23,14 +23,14 @@ export const cssObj = {
   pageTitle: css`
     width: fit-content;
     margin-bottom: 2rem;
-    ${TEXTS.TITLE11};
+    ${TEXT.TITLE1_B2832};
   `,
 
   pageDesc: css`
-    ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    ${TEXT.TITLE5_M1620};
+    color: ${COLOR.GRAY600};
     padding-bottom: 2rem;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY300};
+    border-bottom: 1px solid ${COLOR.GRAY450};
   `,
 
   infoList: css`
@@ -39,30 +39,30 @@ export const cssObj = {
 
   noticeCount: css`
     margin: 0 0.25rem;
-    color: ${NEWCOLORS.RED200};
+    color: ${COLOR.RED200};
   `,
 
   infoContainer: css`
     display: flex;
     align-items: center;
     padding: 1rem 1.5rem;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+    border-bottom: 1px solid ${COLOR.GRAY200};
   `,
 
   infoType: (isAnnounce: boolean) => css`
-    ${isAnnounce ? TEXTS.TITLE7 : TEXTS.TITLE6};
-    color: ${isAnnounce ? NEWCOLORS.BLUE250 : NEWCOLORS.BLACK};
+    ${isAnnounce ? TEXT.TITLE5_B1620 : TEXT.TITLE5_M1620};
+    color: ${isAnnounce ? COLOR.BLUE250 : COLOR.BLACK};
     width: 5.25rem;
   `,
 
   infoTitle: (isAnnounce: boolean) => css`
-    ${isAnnounce ? TEXTS.TITLE7 : TEXTS.TITLE5};
+    ${isAnnounce ? TEXT.TITLE5_B1620 : TEXT.TITLE5_M1620};
     flex-grow: 1;
     ${shorten()};
   `,
 
   infoDate: css`
-    ${TEXTS.TITLE3};
-    color: ${NEWCOLORS.BLUEGRAY300};
+    ${TEXT.TITLE6_M1418};
+    color: ${COLOR.GRAY500};
   `,
 };

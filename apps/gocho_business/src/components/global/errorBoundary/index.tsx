@@ -1,9 +1,8 @@
 import { Component } from "react";
 import Image from "next/image";
 
-import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
-import { SharedButton } from "shared-ui/business/sharedButton";
-import { NEWCOLORS } from "shared-style/color";
+import { HiddenH2 } from "shared-ui/deeple-ds";
+import { SharedButton } from "shared-ui/common/sharedButton";
 
 import jobi_500 from "@/public/image/jobi_500.svg";
 import { INTERNAL_URL } from "@/constants";
@@ -26,7 +25,7 @@ export class ErrorBoundary extends Component<PropsDef, StateDef> {
     if (state.hasError) {
       return (
         <main css={cssObj.container}>
-          <InvisibleH2 title="없는 페이지" />
+          <HiddenH2 title="없는 페이지" />
           <div css={cssObj.jobiImage}>
             <Image src={jobi_500} alt="" fill priority />
           </div>
@@ -36,20 +35,16 @@ export class ErrorBoundary extends Component<PropsDef, StateDef> {
           </div>
           <div css={cssObj.linkContainer}>
             <SharedButton
-              radius="round"
-              fontColor={NEWCOLORS.BLUEGRAY700}
-              backgroundColor={NEWCOLORS.GRAY200}
-              size="medium"
+              buttonType="fillWhite"
+              width={18}
               text="새로고침"
               onClickHandler={() => {
                 window.location.reload();
               }}
             />
             <SharedButton
-              radius="round"
-              fontColor={NEWCOLORS.WHITE}
-              backgroundColor={NEWCOLORS.BLUE250}
-              size="medium"
+              buttonType="fillBlue"
+              width={18}
               text="홈으로"
               onClickHandler={() => {
                 window.location.href = INTERNAL_URL.JD_LIST;

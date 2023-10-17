@@ -1,11 +1,14 @@
 import { FunctionComponent } from "react";
+import Image from "next/image";
 
 import { Divider } from "shared-ui/deeple-ds";
 import { dummyArrCreator } from "shared-util";
 
 import { useCompanyArr } from "@/apis/company/useCompanyArr";
+import leftToday from "@/public/image/todayIcon/leftTodayIcon.svg";
+import today from "@/public/image/todayIcon/todayIcon.svg";
 
-import { HeaderTitle, RankCompanyCard, TodayIcon } from "../../component";
+import { HeaderTitle, RankCompanyCard } from "../../component";
 import { cssObj } from "./style";
 
 export const RankPart: FunctionComponent = () => {
@@ -19,7 +22,10 @@ export const RankPart: FunctionComponent = () => {
       <section css={cssObj.sectionContainer}>
         <div css={cssObj.headerContainer}>
           <HeaderTitle title="인기기업" />
-          <TodayIcon />
+          <p css={cssObj.iconWrap}>
+            <Image src={leftToday} alt="today" css={cssObj.left} />
+            <Image src={today} alt="today" css={cssObj.today} />
+          </p>
         </div>
         <div css={cssObj.companyList}>
           {companyDataObj

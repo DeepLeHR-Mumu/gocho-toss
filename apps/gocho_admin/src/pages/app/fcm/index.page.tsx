@@ -2,8 +2,7 @@ import { ReactElement, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 
-import { SharedButton } from "shared-ui/business/sharedButton";
-import { COLORS } from "shared-style/color";
+import { SharedButton } from "shared-ui/common/sharedButton";
 
 import { useAddPush } from "@/api";
 import { NextPageWithLayout } from "@/types";
@@ -94,14 +93,7 @@ const PushUpload: NextPageWithLayout = () => {
             <textarea css={cssObj.inputBox} {...register("notification.body", { required: true })} />
           </div>
           <div css={cssObj.buttonBox}>
-            <SharedButton
-              onClickHandler="submit"
-              text="알림 발송하기"
-              size="xLarge"
-              radius="round"
-              backgroundColor={COLORS.BLUE_FIRST40}
-              fontColor={COLORS.GRAY100}
-            />
+            <SharedButton buttonType="fillBlue" width={10} onClickHandler="submit" text="알림 발송하기" />
           </div>
         </form>
         {checkMsg && <p css={cssObj.errorMsgBox}>{checkMsg}</p>}

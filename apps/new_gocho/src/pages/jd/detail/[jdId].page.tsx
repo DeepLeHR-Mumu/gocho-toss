@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 
 import { dummyArrCreator } from "shared-util";
+import { HiddenH1 } from "shared-ui/deeple-ds";
 
 import { Layout, JdRow } from "@/components";
 import { getJdDetail, useJdDetail, useJdArr } from "@/apis/jd";
@@ -67,6 +68,8 @@ const JdDetail: NextPage = () => {
           taskDetail: jdDetailData.task_detail_arr[0],
         }}
       />
+      <HiddenH1 title={`[${jdDetailData.company.name}] ${jdDetailData.title} - 고초대졸닷컴`} />
+
       <TitlePart
         jd={
           jdDetailData

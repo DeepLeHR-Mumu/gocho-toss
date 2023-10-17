@@ -1,12 +1,11 @@
 import { FunctionComponent, useRef } from "react";
 import { FiX } from "react-icons/fi";
 
-import { useFocusTrap } from "shared-hooks";
+import { useFocusTrap } from "shared-hook";
 
 import { useModal } from "@/globalStates";
 
 import { ModalComponent } from "../modalBackground";
-
 import { USAGE_TERM } from "./constant";
 import { cssObj } from "./style";
 

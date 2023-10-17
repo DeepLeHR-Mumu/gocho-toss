@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   modalContainer: css`
@@ -32,7 +32,7 @@ export const cssObj = {
   `,
 
   download: css`
-    color: ${COLORS.BLUE_FIRST30};
+    color: ${COLOR.BLUE400};
   `,
 
   customUl: css`
@@ -70,8 +70,8 @@ x    }
   `,
 
   customButton: css`
-    border: 1px solid ${COLORS.BLUE_FIRST30};
-    background-color: ${COLORS.BLUE_FIRST50};
+    border: 1px solid ${COLOR.BLUE400};
+    background-color: ${COLOR.BLUE250};
     color: white;
     border-radius: 6px;
     width: 6rem;

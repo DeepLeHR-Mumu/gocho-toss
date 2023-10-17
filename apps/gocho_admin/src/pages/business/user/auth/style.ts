@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 // import { shorten } from "shared-style/common";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   sectionContainer: css`
@@ -15,15 +15,15 @@ export const cssObj = {
   listChangeButton: css`
     font-size: 1.125rem;
     padding: 0.25rem 1rem;
-    border: 2px solid ${COLORS.GRAY10};
-    background-color: ${COLORS.GRAY30};
-    color: ${COLORS.GRAY100};
+    border: 2px solid ${COLOR.GRAY900};
+    background-color: ${COLOR.GRAY600};
+    color: ${COLOR.WHITE};
     margin-bottom: 2rem;
   `,
 
   customButton: css`
-    border: 1px solid ${COLORS.BLUE_FIRST30};
-    background-color: ${COLORS.BLUE_FIRST50};
+    border: 1px solid ${COLOR.BLUE400};
+    background-color: ${COLOR.BLUE250};
     color: white;
     border-radius: 6px;
     width: 6rem;

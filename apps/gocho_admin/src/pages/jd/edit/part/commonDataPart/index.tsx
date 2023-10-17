@@ -1,9 +1,8 @@
 import { FunctionComponent, FocusEvent, useEffect, useState } from "react";
 
-import { SharedRadioButton } from "shared-ui/common/atom/sharedRadioButton";
-import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
 import { EMAIL_REGEXP, URL_REGEXP } from "shared-constant/src/regExp";
-
+import { SharedRadioButton } from "shared-ui/common/sharedRadioButton";
+import { CheckBoxWithDesc } from "shared-ui/common/checkbox_desc";
 import { useFindCompany } from "@/api";
 
 import { ErrorMessage, AutoEndTimeCheckBox } from "../../component";

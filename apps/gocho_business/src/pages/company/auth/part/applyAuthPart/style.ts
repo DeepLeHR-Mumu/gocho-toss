@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 import { commonCssObj } from "@/styles";
 
@@ -10,9 +10,9 @@ export const cssObj = {
     flex-grow: 1;
     width: 59.5rem;
     position: relative;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     padding: 2rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 1rem;
     box-shadow: 0 2px 16px 0 #0000000d;
 
@@ -40,7 +40,7 @@ export const cssObj = {
   `,
 
   subContainerTitle: css`
-    ${TEXTS.TITLE11};
+    ${TEXT.TITLE1_B2832};
     display: block;
     margin-bottom: 2rem;
   `,
@@ -65,27 +65,27 @@ export const cssObj = {
   `,
 
   dash: css`
-    color: ${NEWCOLORS.GRAY300};
+    color: ${COLOR.GRAY450};
     margin: 0 8px;
   `,
 
   fileAddButton: css`
     display: flex;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 0.75rem;
     height: 3.25rem;
     padding: 1rem 2rem;
     margin-left: 1.25rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     cursor: pointer;
-    ${TEXTS.TITLE4};
+    ${TEXT.TITLE6_M1418};
   `,
 
   customInput: (width: number, isError: boolean) => css`
     ${commonCssObj.input(width, isError)}
 
     &:disabled {
-      background-color: ${NEWCOLORS.GRAY100};
+      background-color: ${COLOR.GRAY100};
     }
   `,
 
@@ -99,16 +99,16 @@ export const cssObj = {
     width: 11.25rem;
     height: 3rem;
     padding: 0.75rem 1rem;
-    background-color: ${NEWCOLORS.BLUE300};
+    background-color: ${COLOR.BLUE300};
     border-radius: 0.5rem;
-    ${TEXTS.TITLE6};
-    color: ${NEWCOLORS.WHITE};
+    ${TEXT.TITLE5_M1620};
+    color: ${COLOR.WHITE};
     margin-top: 3rem;
     margin-bottom: 1.25rem;
 
     &:disabled {
-      background-color: ${NEWCOLORS.GRAY200};
-      color: ${NEWCOLORS.GRAY300};
+      background-color: ${COLOR.GRAY200};
+      color: ${COLOR.GRAY450};
       cursor: not-allowed;
     }
   `,
@@ -117,10 +117,10 @@ export const cssObj = {
     width: 100%;
 
     & > li {
-      ${TEXTS.BODY4}
+      ${TEXT.BODY2_R1624}
       &:first-child {
-        ${TEXTS.BODY5}
-        color: ${NEWCOLORS.RED300};
+        font-weight: 500;
+        color: ${COLOR.RED300};
       }
     }
   `,

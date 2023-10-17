@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   dateInputContainer: css`
@@ -27,8 +27,8 @@ export const cssObj = {
     width: 17.5rem;
     height: 3.25rem;
     font-weight: 400;
-    background-color: ${NEWCOLORS.BLUEGRAY100};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    background-color: ${COLOR.GRAY300};
+    color: ${COLOR.GRAY600};
   `,
 
   processBox: css`
@@ -44,14 +44,14 @@ export const cssObj = {
     border-radius: 50%;
     width: 1.75rem;
     height: 1.75rem;
-    color: ${NEWCOLORS.BLACK};
-    background-color: ${NEWCOLORS.BLUEGRAY100};
+    color: ${COLOR.BLACK};
+    background-color: ${COLOR.GRAY300};
   `,
 
   icon: css`
     margin-top: 0.5rem;
     font-size: 1.5rem;
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${COLOR.GRAY600};
   `,
 
   addButtonWrapper: css`
@@ -78,12 +78,12 @@ export const cssObj = {
     gap: 0 0.5rem;
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
-    background-color: ${NEWCOLORS.GRAY100};
-    ${TEXTS.TITLE4};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    background-color: ${COLOR.GRAY100};
+    ${TEXT.TITLE6_M1418};
+    color: ${COLOR.GRAY600};
 
     > svg {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${COLOR.GRAY450};
     }
   `,
 };

@@ -1,14 +1,16 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
-import { TEMP } from "shared-style/mediaQuery";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   sectionContainer: css`
     position: relative;
-    background: linear-gradient(to bottom, ${NEWCOLORS.BLUE300} 320px, white 320px);
+    min-height: 27rem;
+    background: linear-gradient(to bottom, ${COLOR.BLUE300} 320px, white 320px);
 
-    ${TEMP} {
-      background: linear-gradient(to bottom, ${NEWCOLORS.BLUE300} 120px, white 120px);
+    .slick-track,
+    .slick-list {
+      -webkit-perspective: 2000px;
+      perspective: 2000px;
     }
 
     .slick-dots {
@@ -28,7 +30,7 @@ export const cssObj = {
 
     .slick-dots li button {
       border-radius: 50%;
-      background-color: ${NEWCOLORS.GRAY300};
+      background-color: ${COLOR.GRAY450};
       color: transparent;
       cursor: pointer;
       display: block;
@@ -48,7 +50,7 @@ export const cssObj = {
     }
 
     .slick-dots li.slick-active button {
-      background-color: ${NEWCOLORS.WHITE};
+      background-color: ${COLOR.WHITE};
       width: 6px;
       height: 6px;
     }
@@ -56,25 +58,17 @@ export const cssObj = {
 
   sliderContainer: css`
     padding-top: 2.5rem;
-
-    ${TEMP} {
-      padding-top: 1rem;
-    }
   `,
 
   banner: css`
     margin: 0 1rem;
-
-    ${TEMP} {
-      margin: 0 0.5rem;
-    }
   `,
 
   imageWrapper: css`
     width: 67.5rem;
     height: 27rem;
     border-radius: 1rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     overflow: hidden;
     position: relative;
 
@@ -92,11 +86,11 @@ export const cssObj = {
     height: 2.5rem;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 1rem;
-    border: 1px solid ${NEWCOLORS.WHITE};
+    border: 1px solid ${COLOR.WHITE};
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
 
     > svg {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${COLOR.GRAY450};
       width: 2rem;
       height: 2rem;
     }

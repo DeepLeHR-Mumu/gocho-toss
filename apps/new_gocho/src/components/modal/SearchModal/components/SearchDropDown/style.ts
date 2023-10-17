@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
-import { TEMP } from "shared-style/mediaQuery";
-import { NEWTEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
@@ -11,26 +10,22 @@ export const cssObj = {
   searchIcon: css`
     width: 1.5rem;
     height: 1.5rem;
-    color: ${NEWCOLORS.BLUE300};
+    color: ${COLOR.BLUE300};
   `,
 
   resetIcon: css`
     width: 1.5rem;
     height: 1.5rem;
-    color: ${NEWCOLORS.GRAY200};
+    color: ${COLOR.GRAY200};
   `,
 
   dropDownWrapper: css`
     border-radius: 1rem;
-    border: 1px solid ${NEWCOLORS.BLUE200};
-    background-color: ${NEWCOLORS.WHITE};
+    border: 1px solid ${COLOR.BLUE200};
+    background-color: ${COLOR.WHITE};
     position: absolute;
     margin-top: 1rem;
     width: 100%;
-
-    ${TEMP} {
-      width: calc(100% - 2rem);
-    }
   `,
 
   listItem: css`
@@ -46,7 +41,7 @@ export const cssObj = {
 
   word: css`
     margin-right: auto;
-    ${NEWTEXTS.TITLE7}
+    ${TEXT.TITLE5_M1620}
     overflow: hidden;
     white-space: nowrap;
     text-overflox: ellipsis;
@@ -56,6 +51,6 @@ export const cssObj = {
   arrow: css`
     width: 1.25rem;
     height: 1.25rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${COLOR.GRAY450};
   `,
 };

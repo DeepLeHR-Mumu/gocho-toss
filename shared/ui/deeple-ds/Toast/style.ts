@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
-import { MOBILE } from "shared-style/mediaQuery";
-import { NEWTEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
@@ -9,8 +8,8 @@ export const cssObj = {
     padding: 0.75rem 1.25rem;
     border-radius: 0.75rem;
     opacity: 0.65;
-    background-color: ${NEWCOLORS.BLACK};
-    color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.BLACK};
+    color: ${COLOR.WHITE};
     position: relative;
     top: -17%;
     transform: translate(-50%, 0);
@@ -30,10 +29,6 @@ export const cssObj = {
       }
     }
 
-    ${NEWTEXTS.TITLE7}
-
-    ${MOBILE} {
-      ${NEWTEXTS.TITLE4};
-    }
+    ${TEXT.TITLE5_M1620}
   `,
 };

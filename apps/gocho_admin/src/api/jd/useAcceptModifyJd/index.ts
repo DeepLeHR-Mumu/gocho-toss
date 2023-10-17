@@ -1,8 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-
-import { AdminResponseDef } from "shared-type/api/responseType";
-
+import { AxiosResponse, AxiosError } from "axios";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { AcceptModifyJdDef, RequestObjDef, UseAcceptModifyJdProps } from "./type";
@@ -13,4 +10,4 @@ const putAcceptModifyJd: AcceptModifyJdDef = async (requestObj) => {
 };
 
 export const useAcceptModifyJd: UseAcceptModifyJdProps = () =>
-  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: putAcceptModifyJd });
+  useMutation<AxiosResponse, AxiosError, RequestObjDef>({ mutationFn: putAcceptModifyJd });

@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   modalContainer: css`
@@ -12,7 +12,7 @@ export const cssObj = {
     z-index: 80;
     width: 50rem;
     padding: 2rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     border-radius: 1rem;
     display: flex;
     flex-direction: column;
@@ -32,7 +32,7 @@ export const cssObj = {
   `,
 
   title: css`
-    ${TEXTS.TITLE9};
+    ${TEXT.TITLE4_B1822};
     display: block;
   `,
 
@@ -42,7 +42,7 @@ export const cssObj = {
     right: -0.25rem;
 
     > svg {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${COLOR.GRAY450};
       width: 2rem;
       height: 2rem;
     }
@@ -55,7 +55,7 @@ export const cssObj = {
   `,
 
   text: css`
-    ${TEXTS.BODY4};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    ${TEXT.BODY2_R1624};
+    color: ${COLOR.GRAY600};
   `,
 };

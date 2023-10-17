@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   formWrapper: css`
@@ -12,12 +12,12 @@ export const cssObj = {
     border-radius: 1rem;
     padding: 1.25rem 1rem;
     margin-bottom: 2rem;
-    border: 1px solid ${NEWCOLORS.BLUE200};
-    background-color: ${NEWCOLORS.BLUE50};
+    border: 1px solid ${COLOR.BLUE200};
+    background-color: ${COLOR.BLUE50};
   `,
 
   authLink: css`
-    ${TEXTS.TITLE9};
+    ${TEXT.TITLE4_B1822};
     display: flex;
     align-items: center;
     gap: 0 0.5rem;
@@ -28,12 +28,12 @@ export const cssObj = {
   icon: css`
     display: flex;
     align-items: center;
-    color: ${NEWCOLORS.BLUE200};
+    color: ${COLOR.BLUE200};
   `,
 
   desc: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
-    ${TEXTS.BODY2};
+    color: ${COLOR.GRAY600};
+    ${TEXT.BODY3_R1422};
   `,
 
   inputWrapper: css`
@@ -42,13 +42,13 @@ export const cssObj = {
   `,
 
   inputTitle: css`
-    ${TEXTS.TITLE7};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    ${TEXT.TITLE5_B1620};
+    color: ${COLOR.GRAY600};
     margin-bottom: 0.75rem;
   `,
 
   termBox: css`
-    ${TEXTS.TITLE6};
+    ${TEXT.TITLE5_M1620};
     display: flex;
     align-items: center;
     gap: 0 0.5rem;
@@ -56,13 +56,13 @@ export const cssObj = {
   `,
 
   termLink: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
+    color: ${COLOR.GRAY600};
     text-decoration: underline;
   `,
 
   errorMessage: css`
-    ${TEXTS.BODY3};
-    color: ${NEWCOLORS.RED300};
+    ${TEXT.BODY3_R1422};
+    color: ${COLOR.RED300};
     margin-top: 1.5rem;
     text-align: center;
   `,

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const inputContainer = css`
   display: flex;
@@ -8,15 +8,15 @@ export const inputContainer = css`
 `;
 
 export const inputTitle = css`
-  color: ${COLORS.GRAY30};
+  color: ${COLOR.GRAY600};
   margin-right: 1rem;
 `;
 
 export const inputBox = css`
   width: 50%;
   border-radius: 0.5rem;
-  border: 1px solid ${COLORS.GRAY70};
-  background-color: ${COLORS.GRAY100};
+  border: 1px solid ${COLOR.GRAY300};
+  background-color: ${COLOR.WHITE};
   height: 2rem;
   padding: 0.25rem 0.5rem;
   margin-right: 1rem;
@@ -25,8 +25,8 @@ export const inputBox = css`
 export const addressInput = css`
   width: 50%;
   border-radius: 0.5rem;
-  border: 1px solid ${COLORS.GRAY70};
-  background-color: ${COLORS.GRAY100};
+  border: 1px solid ${COLOR.GRAY300};
+  background-color: ${COLOR.WHITE};
   height: 2rem;
   padding: 0.25rem 0.5rem;
   margin-right: 1rem;
@@ -47,8 +47,8 @@ export const welfareBox = css`
 export const factoryContainer = css`
   margin: 1rem 0;
   padding: 1rem;
-  border: 1px solid ${COLORS.GRAY10};
-  background-color: ${COLORS.BLUE_SECOND70};
+  border: 1px solid ${COLOR.GRAY900};
+  background-color: ${COLOR.BLUE200};
 `;
 
 export const factoryTitle = css`
@@ -64,9 +64,9 @@ export const inputLabel = css`
 
 export const booleanInputBox = (disabled: boolean) => css`
   width: 50%;
-  background-color: ${disabled ? COLORS.GRAY70 : COLORS.GRAY100};
+  background-color: ${disabled ? COLOR.GRAY300 : COLOR.WHITE};
   border-radius: 0.5rem;
-  border: 1px solid ${COLORS.GRAY70};
+  border: 1px solid ${COLOR.GRAY300};
   height: 2rem;
   padding: 0.25rem 0.5rem;
   margin: 0 0.5rem;
@@ -79,9 +79,9 @@ export const checkboxText = css`
 export const deleteFactoryButton = css`
   margin: 0 0 0 auto;
   padding: 0.25rem 1rem;
-  border: 2px solid ${COLORS.GRAY10};
+  border: 2px solid ${COLOR.GRAY900};
   background-color: #b32100;
-  color: ${COLORS.GRAY100};
+  color: ${COLOR.WHITE};
 `;
 
 export const submitButton = css`
@@ -89,7 +89,7 @@ export const submitButton = css`
   margin: 0 auto;
   padding: 0.5rem 1rem;
   width: 50%;
-  border: 2px solid ${COLORS.GRAY10};
-  background-color: ${COLORS.BLUE_FIRST40};
-  color: ${COLORS.GRAY100};
+  border: 2px solid ${COLOR.GRAY900};
+  background-color: ${COLOR.BLUE300};
+  color: ${COLOR.WHITE};
 `;

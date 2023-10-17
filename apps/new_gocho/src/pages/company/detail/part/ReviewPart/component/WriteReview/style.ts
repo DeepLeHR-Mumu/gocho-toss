@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-// import { NEWTEXTS } from "shared-style/text";
+// import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`

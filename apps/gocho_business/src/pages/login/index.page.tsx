@@ -6,10 +6,12 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { InvisibleH2 } from "shared-ui/common/atom/invisibleH2";
-import { CheckBoxWithDesc } from "shared-ui/common/atom/checkbox_desc";
-import { NewSharedButton } from "shared-ui/common/newSharedButton";
 import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
+
+import { SharedButton } from "shared-ui/common/sharedButton";
+import { CheckBoxWithDesc } from "shared-ui/common/checkbox_desc";
+import { HiddenH2 } from "shared-ui/deeple-ds";
+import { ErrorResponseDef } from "shared-type/api";
 
 import { useDoLogin, useManagerProfile } from "@/apis";
 import { INTERNAL_URL } from "@/constants";
@@ -48,7 +50,7 @@ const LoginPage: NextPage = () => {
   const loginSubmit: SubmitHandler<LoginFormValues> = (loginObj) => {
     postLogin(loginObj, {
       onError: (error) => {
-        const errorResponse = error.response?.data;
+        const errorResponse = error.response?.data as ErrorResponseDef;
         if (errorResponse?.error_code === "BLANK_MEMBER" || errorResponse?.error_code === "NOT_MATCHED_INFO") {
           setError("email", { type: "custom", message: LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO });
           setError("password", { type: "custom", message: LOGIN_ERROR_MESSAGES.NOT_MATCHED_INFO });
@@ -84,7 +86,7 @@ const LoginPage: NextPage = () => {
           <Image src={randomNumber ? homeBg1 : homeBg2} alt="로그인 페이지 배경화면" fill quality={100} />
         </div>
         <section css={cssObj.loginWrapper}>
-          <InvisibleH2 title="고초대졸닷컴 로그인하기" />
+          <HiddenH2 title="고초대졸닷컴 로그인하기" />
           <div css={cssObj.logoBox}>
             <Image src={bizTextColor} alt="고초대졸닷컴" fill />
           </div>
@@ -181,7 +183,7 @@ const LoginPage: NextPage = () => {
               </div>
             </div>
             <p css={cssObj.errorMsg}>{errors.email?.message || errors.password?.message}</p>
-            <NewSharedButton
+            <SharedButton
               buttonType={
                 !isEmail || !isPassword || errors.email?.message || errors.password?.message ? "disabled" : "fillBlue"
               }
@@ -191,7 +193,7 @@ const LoginPage: NextPage = () => {
               isLong
             />
             <div css={cssObj.buttonDivider} />
-            <NewSharedButton
+            <SharedButton
               buttonType="outLineGray"
               width={25.5}
               text="기업회원 가입하기"

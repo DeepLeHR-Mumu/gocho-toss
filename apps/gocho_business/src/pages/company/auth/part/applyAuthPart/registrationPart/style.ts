@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 import { commonCssObj } from "@/styles";
 
@@ -12,7 +12,7 @@ export const cssObj = {
   `,
 
   subContainerTitle: css`
-    ${TEXTS.TITLE11};
+    ${TEXT.TITLE1_B2832};
     display: block;
     margin-bottom: 2rem;
   `,
@@ -40,19 +40,19 @@ export const cssObj = {
 
   svg: css`
     margin-left: 0.5rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${COLOR.GRAY450};
   `,
 
   fileAddButton: css`
     display: flex;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 0.75rem;
     height: 3.25rem;
     padding: 1rem 2rem;
     margin-left: 1.25rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     cursor: pointer;
-    ${TEXTS.TITLE4};
+    ${TEXT.TITLE6_M1418};
   `,
 
   errorWrapper: css`
@@ -71,7 +71,7 @@ export const cssObj = {
     ${commonCssObj.input(width, isError)}
 
     :disabled {
-      background-color: ${NEWCOLORS.WHITE};
+      background-color: ${COLOR.WHITE};
     }
   `,
 };

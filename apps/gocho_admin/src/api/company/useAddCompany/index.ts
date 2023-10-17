@@ -1,8 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-
-import { AdminResponseDef } from "shared-type/api/responseType";
+import { AxiosResponse, AxiosError } from "axios";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
+
 import { PostCompanyDef, RequestObjDef, useAddCompanyProps } from "./type";
 
 export const postAddCompany: PostCompanyDef = async (requestObj) => {
@@ -16,7 +15,7 @@ export const postAddCompany: PostCompanyDef = async (requestObj) => {
 };
 
 export const useAddCompany: useAddCompanyProps = () =>
-  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({
+  useMutation<AxiosResponse, AxiosError, RequestObjDef>({
     mutationFn: (requestObj) => {
       const newRequestObj = {
         dto: {

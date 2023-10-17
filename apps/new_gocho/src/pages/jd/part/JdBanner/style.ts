@@ -1,11 +1,11 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
-import { MOBILE } from "shared-style/mediaQuery";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   background: css`
-    background-color: ${NEWCOLORS.BLUE300};
+    background-color: ${COLOR.BLUE300};
+    height: 28.5rem;
   `,
 
   wrapper: css`
@@ -17,10 +17,10 @@ export const cssObj = {
   `,
 
   sideTitleWrapper: css`
-    color: ${NEWCOLORS.WHITE};
+    color: ${COLOR.WHITE};
 
     > div {
-      ${NEWTEXTS.TITLE11}
+      ${TEXT.TITLE4_M1822}
       display: flex;
       align-items: center;
 
@@ -33,7 +33,7 @@ export const cssObj = {
 
     > p {
       margin-top: 1rem;
-      ${NEWTEXTS.TITLE15}
+      ${TEXT.DISPLAY2_B3236}
     }
   `,
 
@@ -68,7 +68,7 @@ export const cssObj = {
 
     .slick-dots li button {
       border-radius: 50%;
-      background-color: ${NEWCOLORS.GRAY300};
+      background-color: ${COLOR.GRAY450};
       color: transparent;
       cursor: pointer;
       display: block;
@@ -82,7 +82,7 @@ export const cssObj = {
     }
 
     .slick-dots li.slick-active button {
-      background-color: ${NEWCOLORS.WHITE};
+      background-color: ${COLOR.WHITE};
       width: 10px;
       height: 10px;
     }
@@ -96,16 +96,12 @@ export const cssObj = {
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 1rem;
-    border: 1px solid ${NEWCOLORS.WHITE};
+    border: 1px solid ${COLOR.WHITE};
     background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
 
-    ${MOBILE} {
-      display: none;
-    }
-
     > svg {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${COLOR.GRAY450};
       width: 2rem;
       height: 2rem;
     }
@@ -136,6 +132,6 @@ export const cssObj = {
     box-sizing: border-box;
     margin-left: 1rem;
 
-    background-color: ${NEWCOLORS.GRAY100};
+    background-color: ${COLOR.GRAY100};
   `,
 };

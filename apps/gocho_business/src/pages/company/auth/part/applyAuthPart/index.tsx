@@ -2,14 +2,14 @@ import { FunctionComponent, useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
-import { Spinner } from "shared-ui/common/atom/spinner";
+import { Spinner } from "shared-ui/common/spinner";
+import { ErrorResponseDef } from "shared-type/api";
 
 import { useManagerProfile, useCompanyDetail, useManagerAuth } from "@/apis";
 import { RequestObjDef as AuthRequestObjDef } from "@/apis/manager/auth/useManagerAuth/type";
 import { ConfirmModal } from "@/components/global/modal/confirmModal";
 import { INTERNAL_URL } from "@/constants";
 import { companyAuthSubmitClickEvent } from "@/ga";
-import { ErrorResponseDef } from "@/types";
 
 import { stringOrNull } from "../../util";
 

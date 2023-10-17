@@ -6,7 +6,7 @@ import { Checkbox, DropDown } from "shared-ui/deeple-ds";
 import { useUserInfo } from "@/apis/auth";
 import { useUserJdBookmarkArr } from "@/apis/jd";
 import { JdRow } from "@/components";
-import { INTERNAL_URL } from "@/pages/constants";
+import { INTERNAL_URL } from "@/constants";
 
 import { NoListCard } from "../../component";
 import { filterOption } from "./constant";

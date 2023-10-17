@@ -5,10 +5,10 @@ import Link from "next/link";
 import { DDayChip } from "shared-ui/deeple-ds";
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
-import { INTERNAL_URL } from "@/pages/constants";
 import { JdBookmark, SkeletonBox } from "@/components";
 
 import { jdAdClickEvent } from "@/ga/jd";
+import { INTERNAL_URL } from "@/constants";
 import { JdCardProps } from "./type";
 import { cssObj } from "./style";
 

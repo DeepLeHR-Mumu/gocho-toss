@@ -9,20 +9,18 @@ import defaultCompanyBg from "shared-image/global/common/default_company_bg.webp
 
 import { useMainBannerArr } from "@/apis/ads";
 import { SkeletonBox } from "@/components";
-import { useGetDeviceType } from "@/globalStates";
 
 import { cssObj } from "./style";
 import { setCarouselSetting } from "./util";
 
 export const AdPart: FunctionComponent = () => {
   const { data: bannerDataObj } = useMainBannerArr();
-  const { isMobile } = useGetDeviceType();
 
   const sliderRef = useRef<Slider>(null);
 
   return (
     <section css={cssObj.sectionContainer}>
-      <Slider {...setCarouselSetting(isMobile)} ref={sliderRef} css={cssObj.sliderContainer}>
+      <Slider {...setCarouselSetting} ref={sliderRef} css={cssObj.sliderContainer}>
         {bannerDataObj
           ? bannerDataObj.bannerDataArr.map((banner) =>
               banner.link !== null ? (

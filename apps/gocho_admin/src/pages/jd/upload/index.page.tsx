@@ -2,9 +2,8 @@ import { ReactElement, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { SharedButton } from "shared-ui/business/sharedButton";
-import { useDisabledKeydownSubmit } from "shared-hooks/src";
-import { COLORS } from "shared-style/color";
+import { SharedButton } from "shared-ui/common/sharedButton";
+import { useDisabledKeydownSubmit, usePreventRouting } from "shared-hook";
 
 import { useAddJd } from "@/api";
 import { useToast } from "@/globalStates";
@@ -28,6 +27,9 @@ const JdUpload: NextPageWithLayout = () => {
   });
 
   useDisabledKeydownSubmit();
+
+  usePreventRouting(Boolean(Object.keys(jobForm.formState.dirtyFields).length));
+
   const { setToast } = useToast();
   const { handleSubmit } = jobForm;
 
@@ -74,14 +76,7 @@ const JdUpload: NextPageWithLayout = () => {
           <PositionEtcDataPart jobForm={jobForm} />
 
           {checkMsg && <p css={cssObj.warning}>{checkMsg}</p>}
-          <SharedButton
-            onClickHandler="submit"
-            text="공고 등록하기"
-            size="large"
-            radius="round"
-            backgroundColor={COLORS.BLUE_FIRST40}
-            fontColor={COLORS.GRAY100}
-          />
+          <SharedButton buttonType="fillBlue" width={10} onClickHandler="submit" text="공고 등록하기" />
         </form>
       </PageLayout>
     </main>

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   skeletonWrapper: css`
@@ -11,7 +11,7 @@ export const cssObj = {
     position: sticky;
     top: 8.75rem;
     padding: 1rem 0;
-    background: ${NEWCOLORS.WHITE};
+    background: ${COLOR.WHITE};
     z-index: 20;
   `,
 
@@ -23,12 +23,12 @@ export const cssObj = {
 
   companyName: css`
     margin-right: 1.5rem;
-    ${NEWTEXTS.TITLE11}
+    ${TEXT.TITLE4_M1822}
   `,
 
   jdTitle: css`
     margin-right: auto;
-    ${NEWTEXTS.TITLE12}
+    ${TEXT.TITLE4_B1822}
   `,
 
   bookmarkWrapper: (isBookmarked: boolean) => css`
@@ -39,11 +39,11 @@ export const cssObj = {
     min-width: 5rem;
     padding: 0.625rem;
     margin-right: 1.25rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
     border-radius: 0.5rem;
 
     > span {
-      color: ${isBookmarked ? NEWCOLORS.BLACK : NEWCOLORS.GRAY200};
+      color: ${isBookmarked ? COLOR.BLACK : COLOR.GRAY200};
     }
   `,
 };

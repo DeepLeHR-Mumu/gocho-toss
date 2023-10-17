@@ -1,4 +1,4 @@
-import { Entries } from "@/types";
+import { Entries } from "shared-type";
 
 import { WelfareFormProps, WelfareKey } from "../../component/welfareForm/type";
 import { WELFARE_DESC_OBJ } from "./constant";

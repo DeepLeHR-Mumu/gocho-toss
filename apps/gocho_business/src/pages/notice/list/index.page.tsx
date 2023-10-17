@@ -4,8 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
-import { Spinner } from "shared-ui/common/atom/spinner";
-
+import { Spinner } from "shared-ui/common/spinner";
 import { INTERNAL_URL } from "@/constants";
 import { EtcSideNav } from "@/components/global/etcSideNav";
 import { PageLayout, Pagination } from "@/components";

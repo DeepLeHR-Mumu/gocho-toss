@@ -70,15 +70,26 @@ export const JdListGrid = ({ filter }: JdListGridProps) => {
                 }}
               />
             ))}
-            <button
-              type="button"
-              css={cssObj.seeMoreButton}
-              onClick={() => {
-                seeMore();
-              }}
-            >
-              {isTotalJd ? "접기" : "더보기"} {isTotalJd ? <FiChevronUp /> : <FiChevronDown />}
-            </button>
+            {totalJdNumber > 6 && (
+              <button
+                type="button"
+                css={cssObj.seeMoreButton}
+                onClick={() => {
+                  seeMore();
+                }}
+              >
+                {isTotalJd ? (
+                  <>
+                    접기
+                    <FiChevronUp />
+                  </>
+                ) : (
+                  <>
+                    더보기 <FiChevronDown />
+                  </>
+                )}
+              </button>
+            )}
           </>
         ) : (
           <p css={cssObj.noJd}>현재 채용중인 공고가 없습니다.</p>

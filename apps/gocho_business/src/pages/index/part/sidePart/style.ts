@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { TEXTS } from "shared-style/text";
-import { NEWCOLORS } from "shared-style/color";
+import { TEXT } from "shared-style/text";
+import { COLOR } from "shared-style/color";
 
 export const cssObj = {
   companyContainer: css`
@@ -9,7 +9,7 @@ export const cssObj = {
     align-items: center;
     margin-bottom: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+    border-bottom: 1px solid ${COLOR.GRAY200};
   `,
 
   companyLogo: css`
@@ -30,10 +30,10 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    ${TEXTS.TITLE11};
+    ${TEXT.TITLE1_B2832};
 
     > svg {
-      color: ${NEWCOLORS.GRAY300};
+      color: ${COLOR.GRAY450};
       font-size: 1.75rem;
     }
   `,
@@ -49,19 +49,19 @@ export const cssObj = {
     }
 
     > svg {
-      color: ${NEWCOLORS.BLUEGRAY400};
+      color: ${COLOR.GRAY600};
     }
   `,
 
   infoTitle: css`
-    ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    ${TEXT.TITLE5_M1620};
+    color: ${COLOR.GRAY600};
     flex-grow: 1;
   `,
 
   info: css`
-    ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    ${TEXT.TITLE5_M1620};
+    color: ${COLOR.GRAY600};
   `,
 
   companyAuthButton: css`
@@ -71,8 +71,8 @@ export const cssObj = {
     margin: 1.25rem auto 0;
     padding: 0.75rem 1rem;
     border-radius: 1.5rem;
-    background-color: ${NEWCOLORS.BLUE100};
-    color: ${NEWCOLORS.BLUE300};
+    background-color: ${COLOR.BLUE100};
+    color: ${COLOR.BLUE300};
   `,
 
   jdCountContainer: css`
@@ -88,18 +88,18 @@ export const cssObj = {
   `,
 
   countInfo: css`
-    ${TEXTS.TITLE6};
+    ${TEXT.TITLE5_M1620};
     margin-bottom: 1rem;
   `,
 
   countNumber: (isAuth: boolean) => css`
-    ${TEXTS.TITLE10};
-    color: ${isAuth ? NEWCOLORS.BLACK : NEWCOLORS.BLUEGRAY200};
+    ${TEXT.TITLE2_B2428};
+    color: ${isAuth ? COLOR.BLACK : COLOR.GRAY400};
   `,
 
   contour: css`
     margin: 1rem 0;
-    border-left: 1px solid ${NEWCOLORS.GRAY200};
+    border-left: 1px solid ${COLOR.GRAY200};
   `,
 
   adImageWrapper: css`

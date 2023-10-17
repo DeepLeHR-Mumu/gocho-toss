@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
-import { NEWCOLORS } from "shared-style/color";
+import { TEXT } from "shared-style/text";
+import { COLOR } from "shared-style/color";
 
 export const getCssObj = (themeWhite: boolean) => ({
   wrapper: css`
@@ -13,8 +13,8 @@ export const getCssObj = (themeWhite: boolean) => ({
     position: sticky;
     left: 0;
     top: 0;
-    background-color: ${themeWhite ? NEWCOLORS.WHITE : NEWCOLORS.BLUE300};
-    border-bottom: ${themeWhite ? `1px solid ${NEWCOLORS.GRAY200}` : "1px solid rgba(255, 255, 255, 0.2)"};
+    background-color: ${themeWhite ? COLOR.WHITE : COLOR.BLUE300};
+    border-bottom: ${themeWhite ? `1px solid ${COLOR.GRAY200}` : "1px solid rgba(255, 255, 255, 0.2)"};
   `,
 
   titleArea: css`
@@ -56,14 +56,14 @@ export const getCssObj = (themeWhite: boolean) => ({
     let color;
 
     if (isSelected) {
-      color = themeWhite ? NEWCOLORS.BLUE300 : NEWCOLORS.WHITE;
+      color = themeWhite ? COLOR.BLUE300 : COLOR.WHITE;
     } else {
-      color = themeWhite ? NEWCOLORS.BLUEGRAY400 : NEWCOLORS.WHITE;
+      color = themeWhite ? COLOR.GRAY600 : COLOR.WHITE;
     }
 
     return css`
-      color: ${themeWhite ? NEWCOLORS.BLUEGRAY400 : NEWCOLORS.WHITE};
-      ${NEWTEXTS.TITLE12}
+      color: ${themeWhite ? COLOR.GRAY600 : COLOR.WHITE};
+      ${TEXT.TITLE4_B1822}
       cursor: pointer;
       padding-bottom: 1.625rem;
       color: ${color};
@@ -82,11 +82,11 @@ export const getCssObj = (themeWhite: boolean) => ({
   businessServiceButton: css`
     flex-basis: fit-content;
     border-radius: 1.25rem;
-    border: 1px solid ${NEWCOLORS.BLUE200};
+    border: 1px solid ${COLOR.BLUE200};
     padding: 0.5rem 1rem;
-    color: ${themeWhite ? NEWCOLORS.BLUE200 : NEWCOLORS.BLUE100};
+    color: ${themeWhite ? COLOR.BLUE200 : COLOR.BLUE100};
     background-color: transparent;
-    ${NEWTEXTS.TITLE9}
+    ${TEXT.TITLE5_B1620}
 
     :last-of-type {
       margin-right: 1rem;
@@ -94,14 +94,14 @@ export const getCssObj = (themeWhite: boolean) => ({
   `,
 
   loginButton: css`
-    ${NEWTEXTS.TITLE12}
-    color: ${themeWhite ? NEWCOLORS.BLUE300 : NEWCOLORS.WHITE};
+    ${TEXT.TITLE4_B1822}
+    color: ${themeWhite ? COLOR.BLUE300 : COLOR.WHITE};
   `,
 
   alarmIcon: css`
     width: 1.5rem;
     height: 1.5rem;
-    color: ${themeWhite ? NEWCOLORS.BLACK : NEWCOLORS.WHITE};
+    color: ${themeWhite ? COLOR.BLACK : COLOR.WHITE};
     margin-right: 0.5rem;
   `,
 

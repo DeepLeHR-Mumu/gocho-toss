@@ -1,6 +1,6 @@
 import { Fragment, createElement } from "react";
 
-import { NEWCOLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 import { dateConverter } from "shared-util";
 
 import { JdDetailObjDef } from "@/apis/jd/type/jdDetail";
@@ -96,16 +96,15 @@ export const getRecruitDetailContents = (recruitDetail: {
   const { contractType, payArr, hireNumber, rotationArr } = recruitDetail;
 
   if (contractType) {
-    // TODO 전환율 추가해야함!
     recruitDetailContents["계약형태"] = createSpanTag(contractType.type);
 
-    if (contractType.type === "계약>정규") {
+    if (contractType.type === "계약>정규" || contractType.type === "인턴") {
       recruitDetailContents["계약형태"] = createElement(Fragment, {}, [
         createElement("span", {}, contractType.type),
         createElement(
           "span",
           {
-            style: { marginLeft: "0.75rem", color: NEWCOLORS.BLUEGRAY400 },
+            style: { marginLeft: "0.75rem", color: COLOR.GRAY600 },
           },
           contractType.conversion_rate ? `(전환율 ${contractType.conversion_rate}%)` : ""
         ),

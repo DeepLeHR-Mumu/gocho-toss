@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
@@ -13,7 +13,7 @@ export const cssObj = {
     align-items: center;
     gap: 0.5rem;
     padding: 0.625rem 1rem;
-    color: ${NEWCOLORS.BLACK};
-    ${NEWTEXTS.TITLE7};
+    color: ${COLOR.BLACK};
+    ${TEXT.TITLE5_M1620};
   `,
 };

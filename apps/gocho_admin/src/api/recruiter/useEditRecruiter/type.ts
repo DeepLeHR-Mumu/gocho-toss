@@ -1,7 +1,5 @@
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
-
-import { AdminResponseDef } from "shared-type/api/responseType";
 
 export interface RequestObjDef {
   managerId: number;
@@ -10,9 +8,9 @@ export interface RequestObjDef {
 }
 
 export interface EditRecruiterDef {
-  ({ managerId }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ managerId }: RequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface UseEditRecruiterProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError, RequestObjDef>;
 }

@@ -1,5 +1,6 @@
-export { useBlockUser } from "./useBlockUser";
-export { useReportUser } from "./useReportUser";
-export { useInfiniteAlarmArr } from "./useInfiniteAlarmArr";
-export { useReadAlarmAll } from "./useReadAlarmAll";
-export { useReadAlarmOne } from "./useReadAlarmOne";
+export { useBlockUser } from "./user/useBlockUser";
+export { useReportUser } from "./user/useReportUser";
+
+export { useInfiniteAlarmArr } from "./alarm/useInfiniteAlarmArr";
+export { useReadAlarmAll } from "./alarm/useReadAlarmAll";
+export { useReadAlarmOne } from "./alarm/useReadAlarmOne";

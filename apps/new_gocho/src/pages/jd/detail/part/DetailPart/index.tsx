@@ -60,7 +60,7 @@ export const DetailPart = () => {
                     >
                       {factory.name} <FiChevronRight css={cssObj.rightIcon} />
                     </button>
-                    <span css={cssObj.factoryAddress}>{factory.address}</span>
+                    <p css={cssObj.factoryAddress}>{factory.address}</p>
                   </div>
                 ))}
             </div>

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { useCompanyArr } from "@/apis/company";
 import { CompanyRow } from "@/components";
-import { INTERNAL_URL } from "@/pages/constants";
+import { INTERNAL_URL } from "@/constants";
 
 import { HeaderTitle } from "../../component";
 import { cssObj } from "./style";

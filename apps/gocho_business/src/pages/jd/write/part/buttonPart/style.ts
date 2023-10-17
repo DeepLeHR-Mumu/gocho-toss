@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   headerContainer: css`
@@ -9,7 +9,7 @@ export const cssObj = {
     top: 0;
     display: flex;
     align-items: center;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     height: 5rem;
     z-index: 30;
     box-shadow: 0 2px 10px 0 #00000008;
@@ -26,10 +26,10 @@ export const cssObj = {
     width: 8.75rem;
     height: 3rem;
     padding: 0.75rem 1rem;
-    border: 1px solid ${NEWCOLORS.BLUE300};
+    border: 1px solid ${COLOR.BLUE300};
     border-radius: 0.5rem;
-    ${TEXTS.TITLE6};
-    color: ${NEWCOLORS.BLUE300};
+    ${TEXT.TITLE5_M1620};
+    color: ${COLOR.BLUE300};
     margin-right: 1.25rem;
   `,
 
@@ -37,9 +37,9 @@ export const cssObj = {
     width: 8.75rem;
     height: 3rem;
     padding: 0.75rem 1rem;
-    background-color: ${NEWCOLORS.BLUE300};
+    background-color: ${COLOR.BLUE300};
     border-radius: 0.5rem;
-    ${TEXTS.TITLE6};
-    color: ${NEWCOLORS.WHITE};
+    ${TEXT.TITLE5_M1620};
+    color: ${COLOR.WHITE};
   `,
 };

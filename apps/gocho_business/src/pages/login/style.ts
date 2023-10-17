@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   mainContainer: css``,
@@ -24,7 +24,7 @@ export const cssObj = {
     right: 20%;
     transform: translate(50%, -50%);
     width: fit-content;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     margin: auto;
     padding: 3rem 1.5rem 1.5rem;
     border-radius: 1rem;
@@ -49,23 +49,23 @@ export const cssObj = {
   `,
 
   inputTitle: css`
-    ${TEXTS.TITLE7};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    ${TEXT.TITLE5_B1620};
+    color: ${COLOR.GRAY600};
     margin-bottom: 0.75rem;
   `,
 
   eyeButtonCSS: css`
     z-index: 10;
     font-size: 1.5rem;
-    color: ${NEWCOLORS.GRAY200};
+    color: ${COLOR.GRAY200};
     position: absolute;
     top: 2.875rem;
     right: 1rem;
   `,
 
   errorMsg: css`
-    ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.RED300};
+    ${TEXT.TITLE5_M1620};
+    color: ${COLOR.RED300};
     height: 1rem;
     margin: 3rem 0;
     text-align: center;
@@ -84,14 +84,14 @@ export const cssObj = {
   `,
 
   findButton: css`
-    ${TEXTS.TITLE5};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    ${TEXT.TITLE5_M1620};
+    color: ${COLOR.GRAY600};
   `,
 
   contour: css`
     :after {
       content: "|";
-      color: ${NEWCOLORS.GRAY200};
+      color: ${COLOR.GRAY200};
     }
   `,
 

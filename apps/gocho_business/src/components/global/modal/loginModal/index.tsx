@@ -2,13 +2,13 @@ import { FunctionComponent, useState, useRef } from "react";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
-
-import smallMono from "shared-image/global/deepLeLogo/smallMono.svg";
-import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
-import { NormalButton } from "shared-ui/common/atom/button";
-import { useFocusTrap } from "shared-hooks";
-
 import { FiCheckCircle, FiX } from "react-icons/fi";
+
+import smallMono from "shared-image/global/deeple/smallMono.svg";
+import { EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
+import { useFocusTrap } from "shared-hook";
+import { SharedButton } from "shared-ui/common/sharedButton";
+
 import { useDoLogin } from "@/apis";
 import { useModal, useToast } from "@/globalStates";
 import { loginSuccessEvent } from "@/ga";
@@ -193,7 +193,7 @@ export const LoginModal: FunctionComponent = () => {
           </div>
 
           <div css={cssObj.loginButton}>
-            <NormalButton wide variant="filled" text="로그인 하기" isSubmit />
+            <SharedButton buttonType="fillBlue" text="로그인 하기" onClickHandler="submit" isLong width={18} />
           </div>
         </form>
       </div>

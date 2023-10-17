@@ -6,7 +6,7 @@ import { CompanyRow } from "@/components";
 
 import { useUserInfo } from "@/apis/auth";
 import { useUserCompanyBookmarkArr } from "@/apis/company";
-import { INTERNAL_URL } from "@/pages/constants";
+import { INTERNAL_URL } from "@/constants";
 
 import { NoListCard } from "../../component";
 import { filterOption } from "./constant";

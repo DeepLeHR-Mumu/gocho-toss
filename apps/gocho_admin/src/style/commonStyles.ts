@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { COLORS } from "shared-style/color";
+import { COLOR } from "shared-style/color";
 
 export const mainContainer = css`
   flex-grow: 1;
@@ -10,13 +10,13 @@ export const mainContainer = css`
 export const pageTitle = css`
   font-weight: 700;
   font-size: 1.75rem;
-  color: ${COLORS.GRAY10};
+  color: ${COLOR.GRAY900};
   margin-bottom: 2rem;
 `;
 
 export const subPageTitle = css`
   font-size: 1.75rem;
   font-weight: 500;
-  color: ${COLORS.GRAY10};
+  color: ${COLOR.GRAY900};
   margin-bottom: 2rem;
 `;

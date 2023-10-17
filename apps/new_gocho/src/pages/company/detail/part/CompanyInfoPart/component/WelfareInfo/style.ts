@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   welfareWrapper: css`
@@ -17,12 +17,12 @@ export const cssObj = {
   `,
 
   welfareTitle: css`
-    ${NEWTEXTS.TITLE12}
+    ${TEXT.TITLE4_B1822}
   `,
 
   welfareDescription: css`
     width: 100%;
     margin-top: 1rem;
-    ${NEWTEXTS.BODY4};
+    ${TEXT.BODY2_R1624};
   `,
 };

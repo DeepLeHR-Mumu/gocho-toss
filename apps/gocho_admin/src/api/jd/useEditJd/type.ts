@@ -1,8 +1,7 @@
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
-import { AdminResponseDef } from "shared-type/api/responseType";
-import { ErrorResponseDef } from "@/types";
+import { ErrorResponseDef } from "shared-type/api";
 
 export interface RequestObjDef {
   jdId: number;
@@ -87,7 +86,7 @@ interface axiosRequestObjDef {
 }
 
 export interface PostEditJdDef {
-  ({ jdId, dto }: axiosRequestObjDef): Promise<AdminResponseDef>;
+  ({ jdId, dto }: axiosRequestObjDef): Promise<AxiosResponse>;
 }
 
 export const jdDetailKeyObj = {
@@ -96,5 +95,5 @@ export const jdDetailKeyObj = {
 };
 
 export interface useEditJdProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

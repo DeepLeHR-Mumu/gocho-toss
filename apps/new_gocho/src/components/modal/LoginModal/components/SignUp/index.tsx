@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { Input, Button, Divider } from "shared-ui/deeple-ds";
 import { EMAIL_ERROR_MESSAGE, PWD_ERROR_MESSAGE, EMAIL_REGEXP, PWD_REGEXP } from "shared-constant";
-import { ErrorResponseDef } from "shared-type/api/errorResponseType";
+import { ErrorResponseDef } from "shared-type/api";
 
 import { useDoSignUp } from "@/apis/auth";
 import { RequestObjDef as SignUpFormValues } from "@/apis/auth/useDoSignup/type";

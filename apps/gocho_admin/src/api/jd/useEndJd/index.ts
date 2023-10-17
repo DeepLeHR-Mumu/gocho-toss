@@ -1,7 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-
-import { AdminResponseDef } from "shared-type/api/responseType";
+import { AxiosResponse, AxiosError } from "axios";
 
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
@@ -13,4 +11,4 @@ export const patchEndJd: EndJdDef = async (requestObj) => {
 };
 
 export const useEndJd: useEndJdProps = () =>
-  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: patchEndJd });
+  useMutation<AxiosResponse, AxiosError, RequestObjDef>({ mutationFn: patchEndJd });

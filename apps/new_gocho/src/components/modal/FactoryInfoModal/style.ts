@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 import { cssObj as modalWithTitleCssObj } from "@/components/common/ModalWithTitle/style";
 
@@ -26,7 +26,7 @@ export const cssObj = {
   infoWrapper: css`
     padding: 1.25rem;
     border-radius: 1rem;
-    border: 1px solid ${NEWCOLORS.GRAY200};
+    border: 1px solid ${COLOR.GRAY200};
   `,
 
   infoTitleWrapper: css`
@@ -43,12 +43,12 @@ export const cssObj = {
   `,
 
   infoTitle: css`
-    ${NEWTEXTS.TITLE13}
+    ${TEXT.TITLE2_B2428}
   `,
 
   infoSubtitle: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE10}
+    color: ${COLOR.GRAY600};
+    ${TEXT.TITLE4_M1822}
   `,
 
   contentWrapper: css`
@@ -59,6 +59,6 @@ export const cssObj = {
   `,
 
   descriptionList: css`
-    ${NEWTEXTS.TITLE10}
+    ${TEXT.TITLE4_M1822}
   `,
 };

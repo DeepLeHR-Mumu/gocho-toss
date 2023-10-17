@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   navWrapper: css`
@@ -9,17 +9,17 @@ export const cssObj = {
   `,
 
   subMenu: (isSelected: boolean) => css`
-    ${NEWTEXTS.TITLE12};
+    ${TEXT.TITLE4_B1822};
     display: flex;
     align-items: flex-start;
     justify-content: center;
     width: 8.75rem;
     height: 3rem;
-    color: ${isSelected ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY200};
-    border-bottom: ${isSelected ? `2px solid ${NEWCOLORS.BLUE300}` : "none"};
+    color: ${isSelected ? COLOR.BLUE300 : COLOR.GRAY400};
+    border-bottom: ${isSelected ? `2px solid ${COLOR.BLUE300}` : "none"};
   `,
 
   bottomLine: css`
-    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+    border-bottom: 1px solid ${COLOR.GRAY200};
   `,
 };

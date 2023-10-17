@@ -1,10 +1,10 @@
 import { css } from "@emotion/react";
-import { NEWCOLORS } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   background: css`
-    background: ${NEWCOLORS.WHITE};
+    background: ${COLOR.WHITE};
   `,
 
   imageWrapper: css`
@@ -48,21 +48,21 @@ export const cssObj = {
 
   title: css`
     margin-right: auto;
-    ${NEWTEXTS.TITLE14}
+    ${TEXT.TITLE1_B2832}
   `,
 
   eyeIcon: css`
     width: 1.25rem;
     height: 1.25rem;
-    color: ${NEWCOLORS.GRAY300};
+    color: ${COLOR.GRAY450};
     align-self: flex-end;
   `,
 
   views: css`
     align-self: flex-end;
     margin-left: 0.5rem;
-    color: ${NEWCOLORS.GRAY300};
-    ${NEWTEXTS.TITLE7}
+    color: ${COLOR.GRAY450};
+    ${TEXT.TITLE5_M1620}
   `,
 
   introWrapper: css`
@@ -72,15 +72,15 @@ export const cssObj = {
 
   intro: css`
     margin-right: auto;
-    ${NEWTEXTS.TITLE7}
+    ${TEXT.TITLE5_M1620}
   `,
 
   follower: css`
-    color: ${NEWCOLORS.BLUEGRAY400};
-    ${NEWTEXTS.TITLE7}
+    color: ${COLOR.GRAY600};
+    ${TEXT.TITLE5_M1620}
 
     > span {
-      color: ${NEWCOLORS.BLUE300};
+      color: ${COLOR.BLUE300};
     }
   `,
 
@@ -89,8 +89,8 @@ export const cssObj = {
     overflow: hidden;
     width: 6.25rem;
     height: 6.25rem;
-    border: 1px solid ${NEWCOLORS.GRAY100};
-    background-color: ${NEWCOLORS.WHITE};
+    border: 1px solid ${COLOR.GRAY100};
+    background-color: ${COLOR.WHITE};
     position: absolute;
     top: 4.375rem;
 
@@ -106,12 +106,12 @@ export const cssObj = {
   `,
 
   menu: (isSelected: boolean) => css`
-    ${NEWTEXTS.TITLE12}
+    ${TEXT.TITLE4_B1822}
     width: 8.75rem;
     text-align: center;
     padding-bottom: 1.5rem;
-    border-bottom: ${isSelected ? `2px solid ${NEWCOLORS.BLUE300}` : `none`};
-    color: ${isSelected ? NEWCOLORS.BLUE300 : NEWCOLORS.BLUEGRAY200};
+    border-bottom: ${isSelected ? `2px solid ${COLOR.BLUE300}` : `none`};
+    color: ${isSelected ? COLOR.BLUE300 : COLOR.GRAY400};
   `,
 };
 

@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import { ErrorResponseDef } from "shared-type/api/errorResponseType";
+import { ErrorResponseDef } from "shared-type/api";
 
 import { axiosInstance } from "../../axiosInstance";
 
@@ -20,6 +20,7 @@ const patchUserAlarmSetting: PatchUserAlarmSettingDef = async (requestObj) => {
   return data;
 };
 
-export const usePatchAlarmSetting: PatchUserAlarmSettingProps = () => useMutation<PatchUserAlarmSettingResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
+export const usePatchAlarmSetting: PatchUserAlarmSettingProps = () =>
+  useMutation<PatchUserAlarmSettingResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
     mutationFn: patchUserAlarmSetting,
   });

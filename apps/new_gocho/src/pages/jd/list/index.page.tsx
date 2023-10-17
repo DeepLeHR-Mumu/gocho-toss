@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
+import { HiddenH1 } from "shared-ui/deeple-ds";
+
 import { Layout } from "@/components";
-import { INTERNAL_URL } from "@/pages/constants";
 import { jdListFunnelEvent } from "@/ga/jd";
+import { INTERNAL_URL } from "@/constants";
 
 import { PageHead } from "./pageHead";
 import {
@@ -63,6 +65,7 @@ const JdList: NextPage = () => {
   return (
     <main>
       <PageHead />
+      <HiddenH1 title="고초대졸닷컴 | 실시간 생산직 채용공고" />
       <Layout>
         <div css={cssObj.wrapper}>
           <FilterPart

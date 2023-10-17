@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-import { NEWCOLORS } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 import { shorten } from "shared-style/common";
 
 export const cssObj = {
@@ -12,7 +12,7 @@ export const cssObj = {
     padding: 1rem 2rem;
     height: 4rem;
     width: 100%;
-    background-color: ${NEWCOLORS.BLUE300};
+    background-color: ${COLOR.BLUE300};
   `,
 
   headerContainer: css`
@@ -55,8 +55,8 @@ export const cssObj = {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: ${isActive ? `2px solid ${NEWCOLORS.WHITE}` : "none"};
-    color: ${NEWCOLORS.WHITE};
+    border-bottom: ${isActive ? `2px solid ${COLOR.WHITE}` : "none"};
+    color: ${COLOR.WHITE};
     transition: color 0.2s ease;
   `,
 
@@ -73,7 +73,7 @@ export const cssObj = {
     padding: 1rem 0;
 
     > svg {
-      color: ${NEWCOLORS.WHITE};
+      color: ${COLOR.WHITE};
       width: 1.25rem;
       height: 1.25rem;
     }
@@ -82,7 +82,7 @@ export const cssObj = {
   redDot: css`
     width: 3px;
     height: 3px;
-    background-color: ${NEWCOLORS.RED200};
+    background-color: ${COLOR.RED200};
     border-radius: 50%;
     position: absolute;
     top: 1rem;
@@ -93,13 +93,13 @@ export const cssObj = {
     position: absolute;
     top: 4.25rem;
     right: 0;
-    border: 1px solid ${NEWCOLORS.BLACK};
+    border: 1px solid ${COLOR.BLACK};
     border-radius: 1rem;
     width: 25rem;
     max-height: 28rem;
     padding: 0.25rem 0;
     overflow-y: scroll;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     z-index: 100;
   `,
 
@@ -109,19 +109,19 @@ export const cssObj = {
   `,
 
   infoType: (isRead: boolean) => css`
-    ${TEXTS.TITLE4};
-    color: ${isRead ? NEWCOLORS.BLUEGRAY400 : NEWCOLORS.BLUE200};
+    ${TEXT.TITLE6_M1418};
+    color: ${isRead ? COLOR.GRAY600 : COLOR.BLUE200};
   `,
 
   infoTitle: (isRead: boolean) => css`
-    ${TEXTS.BODY3};
-    color: ${isRead ? NEWCOLORS.BLUEGRAY400 : NEWCOLORS.BLACK};
+    ${TEXT.BODY3_R1422};
+    color: ${isRead ? COLOR.GRAY600 : COLOR.BLACK};
     ${shorten(3)};
   `,
 
   contour: css`
     margin: 0.25rem 1rem;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+    border-bottom: 1px solid ${COLOR.GRAY200};
   `,
 
   noAlarmDesc: css`
@@ -130,8 +130,8 @@ export const cssObj = {
     align-items: center;
     justify-content: center;
     text-align: center;
-    ${TEXTS.TITLE4};
-    color: ${NEWCOLORS.BLUEGRAY400};
+    ${TEXT.TITLE6_M1418};
+    color: ${COLOR.GRAY600};
   `,
 
   profileButton: css`
@@ -139,7 +139,7 @@ export const cssObj = {
     padding: 1rem 0;
     align-items: center;
     cursor: pointer;
-    color: ${NEWCOLORS.WHITE};
+    color: ${COLOR.WHITE};
     font-weight: 700;
   `,
 
@@ -152,7 +152,7 @@ export const cssObj = {
     font-size: 1rem;
     font-weight: 700;
     margin-left: 0.5rem;
-    color: ${NEWCOLORS.WHITE};
+    color: ${COLOR.WHITE};
     transition: all 0.2s ease-in;
     transform: ${isActive ? "rotate(0deg)" : "rotate(180deg)"};
   `,
@@ -161,11 +161,11 @@ export const cssObj = {
     position: absolute;
     top: 4.25rem;
     right: 0;
-    border: 1px solid ${NEWCOLORS.BLACK};
+    border: 1px solid ${COLOR.BLACK};
     border-radius: 1rem;
     width: 15rem;
     padding: 1rem 0 0.25rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     z-index: 100;
   `,
 
@@ -190,16 +190,16 @@ export const cssObj = {
   `,
 
   companyName: css`
-    ${TEXTS.TITLE9};
+    ${TEXT.TITLE4_B1822};
     margin-bottom: 0.25rem;
   `,
 
   industry: css`
-    ${TEXTS.TITLE3};
+    ${TEXT.TITLE6_M1418};
   `,
 
   companyMenuLink: css`
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     display: block;
     padding: 0.75rem 1rem;
   `,
@@ -208,34 +208,34 @@ export const cssObj = {
     position: absolute;
     top: 4.25rem;
     right: 0;
-    border: 1px solid ${NEWCOLORS.BLACK};
+    border: 1px solid ${COLOR.BLACK};
     border-radius: 1rem;
     width: 15rem;
     padding-top: 1.25rem;
-    background-color: ${NEWCOLORS.WHITE};
+    background-color: ${COLOR.WHITE};
     z-index: 100;
   `,
 
   userInfoContainer: css`
     margin: 0 1rem;
     padding-bottom: 1.5rem;
-    border-bottom: 1px solid ${NEWCOLORS.GRAY200};
+    border-bottom: 1px solid ${COLOR.GRAY200};
   `,
 
   userName: css`
-    ${TEXTS.TITLE9};
+    ${TEXT.TITLE4_B1822};
     margin-bottom: 0.25rem;
   `,
 
   userDepartment: css`
-    ${TEXTS.TITLE3};
+    ${TEXT.TITLE6_M1418};
   `,
 
   logoutButton: css`
     width: 100%;
     text-align: center;
     padding: 1rem 0;
-    background-color: ${NEWCOLORS.GRAY50};
+    background-color: ${COLOR.GRAY50};
     border-radius: 0 0 1rem 1rem;
   `,
 };
