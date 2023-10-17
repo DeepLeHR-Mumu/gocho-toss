@@ -1,4 +1,4 @@
-import { INTERNAL_URL } from "../../../pages/constants";
+import { INTERNAL_URL } from "@/constants";
 
 export const THEME_WHITE_PAGES = [
   INTERNAL_URL.SEARCH,

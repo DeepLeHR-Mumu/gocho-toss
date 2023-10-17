@@ -8,7 +8,7 @@ import secondBetteryIcon from "@/public/image/company/categoryIcon/secondBattery
 import pharmaceuticalIcon from "@/public/image/company/categoryIcon/pharmaceutical.svg";
 import { CategoryIcon } from "./type";
 
-export const topCategoryIconArr: CategoryIcon[] = [
+export const categoryIconArr: CategoryIcon[] = [
   {
     src: petrochemiRefineIcon,
     categoryText: "정유석화",
@@ -25,9 +25,6 @@ export const topCategoryIconArr: CategoryIcon[] = [
     src: bioIcon,
     categoryText: "바이오",
   },
-];
-
-export const bottomCategoryIconArr: CategoryIcon[] = [
   {
     src: secondBetteryIcon,
     categoryText: "2차전지",
@@ -49,6 +46,5 @@ export const bottomCategoryIconArr: CategoryIcon[] = [
 type CategoryText = Array<{ categoryText: string }>;
 
 export const categoryArr: CategoryText = [{ categoryText: "전체기업" }]
-  .concat(topCategoryIconArr)
-  .concat(bottomCategoryIconArr)
+  .concat(categoryIconArr)
   .map((item) => ({ categoryText: item.categoryText }));

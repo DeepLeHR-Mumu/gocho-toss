@@ -26,7 +26,9 @@ export const cssObj = {
     gap: 1.5rem;
   `,
 
-  loginButtonWrapper: css``,
+  loginButtonWrapper: css`
+    margin-top: 2.75rem;
+  `,
 
   eye: css`
     width: 1rem;

@@ -5,6 +5,7 @@ import { TEXT } from "shared-style/text";
 export const cssObj = {
   background: css`
     background-color: ${COLOR.BLUE300};
+    height: 28.5rem;
   `,
 
   wrapper: css`

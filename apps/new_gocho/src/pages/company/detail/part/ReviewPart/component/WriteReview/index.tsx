@@ -32,7 +32,7 @@ export const WriteReview = () => {
           setToastMessage("기업리뷰가 업로드 되었습니다.");
         },
         onError: () => {
-          // TODO 실패 시
+          setToastMessage("오류가 발생했습니다. 다시 한 번 시도해주세요.");
         },
       }
     );

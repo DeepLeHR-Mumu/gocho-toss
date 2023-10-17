@@ -8,9 +8,9 @@ import { SearchBar, DropDown, Profile } from "shared-ui/deeple-ds";
 
 import { useUserInfo } from "@/apis/auth";
 import { searchFunnelEvent } from "@/ga/search";
-import { INTERNAL_URL } from "@/pages/constants";
 import logoWhite from "@/public/image/logo/gocho/white.svg";
 import logoBlue from "@/public/image/logo/gocho/blue.svg";
+import { INTERNAL_URL } from "@/constants";
 
 import { SearchModal } from "../../modal/SearchModal";
 import { LoginModal } from "../../modal/LoginModal";

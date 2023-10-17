@@ -4,7 +4,14 @@ import { COLOR } from "shared-style/color";
 export const cssObj = {
   sectionContainer: css`
     position: relative;
+    min-height: 27rem;
     background: linear-gradient(to bottom, ${COLOR.BLUE300} 320px, white 320px);
+
+    .slick-track,
+    .slick-list {
+      -webkit-perspective: 2000px;
+      perspective: 2000px;
+    }
 
     .slick-dots {
       display: inline-block;
