@@ -1,9 +1,10 @@
 import { FC } from "react";
 
+import { useToast } from "@/globalStates";
+import { useDeleteResumeCertification } from "@/apis/resume/certification/useDeleteResumeCertification";
+
 import { ListItem } from "@/pages/resume/component";
 import { CertificationListProps } from "./type";
-import { useDeleteResumeCertification } from "@/apis/resume/certification/useDeleteResumeCertification";
-import { useToast } from "@/globalStates";
 
 export const CertificationList: FC<CertificationListProps> = ({
   myCertificationList,

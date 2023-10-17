@@ -3,10 +3,11 @@ import { AxiosError, AxiosResponse } from "axios";
 
 import { ErrorResponseDef } from "shared-type/api";
 
+import { resumeArrKeyObj } from "@/constants/queryKeyFactory/user/resumeArrKeyObj";
+
 import { axiosInstance } from "@/apis/axiosInstance";
 
 import { PutUserResumeProfile, RequestObjDef, UserPutUserResumeProfile } from "./type";
-import { resumeArrKeyObj } from "@/constants/queryKeyFactory/user/resumeArrKeyObj";
 
 export const putUserResumeProfile: PutUserResumeProfile = async ({ userId, image, requestObj }) => {
   const formData = new FormData();

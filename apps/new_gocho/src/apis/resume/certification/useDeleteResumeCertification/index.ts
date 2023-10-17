@@ -3,10 +3,11 @@ import { AxiosError, AxiosResponse } from "axios";
 
 import { ErrorResponseDef } from "shared-type/api";
 
+import { resumeCertificationKeyObj } from "@/constants/queryKeyFactory/resume/resumeCertificationKeyObj";
+
 import { axiosInstance } from "@/apis/axiosInstance";
 
 import { DeleteResumeCertificationDef, RequestObjDef, UseDeleteResumeCertificationProps } from "./type";
-import { resumeCertificationKeyObj } from "@/constants/queryKeyFactory/resume/resumeCertificationKeyObj";
 
 export const deleteResumeCertification: DeleteResumeCertificationDef = async ({ resumeId, certificationId }) => {
   const { data } = await axiosInstance.delete(`/resumes/${resumeId}/certifications/${certificationId}`);

@@ -2,6 +2,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { ErrorResponseDef } from "shared-type/api";
 
+import { resumeCertificationKeyObj } from "@/constants/queryKeyFactory/resume/resumeCertificationKeyObj";
+
 import { axiosInstance } from "@/apis/axiosInstance";
 import {
   PutResumeCertificationDef,
@@ -9,7 +11,6 @@ import {
   RequestObjDef,
   UsePutResumeCertificationProps,
 } from "./type";
-import { resumeCertificationKeyObj } from "@/constants/queryKeyFactory/resume/resumeCertificationKeyObj";
 
 export const putResumeCertification: PutResumeCertificationDef = async ({
   resumeId,

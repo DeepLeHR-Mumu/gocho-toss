@@ -1,9 +1,10 @@
 import { FC, useState } from "react";
+
+import { useUserResumeProfile } from "@/apis/users/resume/useUserResumeProfile";
+
 import { ListCard } from "../../component";
 import { ProfileForm, ResumeProfile } from "./component";
-
 import { cssObj } from "./style";
-import { useUserResumeProfile } from "@/apis/users/resume/useUserResumeProfile";
 
 interface InfoPartProps {
   userId: number;
