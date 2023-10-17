@@ -23,12 +23,19 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
 
   const { mutate: putResumeProfile } = usePutUserResumeProfile(userId);
 
-  const { register, handleSubmit, setValue } = useForm<PutResumeProfileDef>({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<PutResumeProfileDef>({
     mode: "onChange",
     defaultValues: {
       email: resumeProfile.email,
       location: {
         address: resumeProfile.location.address,
+        x: resumeProfile.location.x,
+        y: resumeProfile.location.y,
       },
       hobby: resumeProfile.hobby,
       specialty: resumeProfile.specialty,
@@ -52,8 +59,6 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
 
     if (profile) {
       setProfileFile(profile);
-      // clearErrors("nickName");
-      // trigger("nickName");
 
       try {
         const result = await fileEncording(profile);
@@ -79,7 +84,6 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
     openPostCodePopup({
       onComplete: (addressObj: Address) => {
         setValue("location.address", addressObj.address, { shouldDirty: true });
-        // clearErrors("location.address");
 
         window.kakao.maps.load(() => {
           const geocoder = new window.kakao.maps.services.Geocoder();
@@ -98,13 +102,18 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
   };
 
   const onSubmitResumeProfile: SubmitHandler<PutResumeProfileDef> = async (data) => {
-    if (!profileFile) return;
-
-    await putResumeProfile({
-      userId,
-      image: profileFile,
-      requestObj: data,
-    });
+    if (!profileFile) {
+      await putResumeProfile({
+        userId,
+        requestObj: data,
+      });
+    } else {
+      await putResumeProfile({
+        userId,
+        image: profileFile,
+        requestObj: data,
+      });
+    }
 
     setToastMessage("기본정보가 업로드 완료되었습니다.");
 
@@ -154,7 +163,22 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
 
           <div css={cssObj.etcInfoWrapper}>
             <div>
-              <p>이메일</p> <Input type="text" placeholder="이메일을 입력해 주세요" {...register("email")} />
+              <p>이메일</p>{" "}
+              <Input
+                type="text"
+                placeholder="이메일을 입력해 주세요"
+                maxLength={20}
+                state={{
+                  state: errors.email ? "error" : "default",
+                  message: errors.email ? errors.email.message : "",
+                }}
+                {...register("email", {
+                  pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+$/i,
+                    message: "올바른 이메일을 입력해 주세요.",
+                  },
+                })}
+              />
             </div>
             <div>
               <p>거주지</p>
@@ -169,10 +193,11 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
             </div>
             <div>
               <p>취미</p>
-              <Input type="text" placeholder="취미를 입력해 주세요" {...register("hobby")} />
+              <Input type="text" placeholder="취미를 입력해 주세요" maxLength={40} {...register("hobby")} />
             </div>
             <div>
-              <p>특기 </p> <Input type="text" placeholder="특기를 입력해 주세요" {...register("specialty")} />
+              <p>특기 </p>
+              <Input type="text" placeholder="특기를 입력해 주세요" maxLength={40} {...register("specialty")} />
             </div>
           </div>
         </section>

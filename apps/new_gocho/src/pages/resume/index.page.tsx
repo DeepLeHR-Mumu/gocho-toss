@@ -12,11 +12,7 @@ const ResumePage: NextPage = () => {
   const { data: userData } = useUserInfo();
   const { data: resumeArr } = useResumeArr(userData?.id);
 
-  if (!userData) {
-    return <> </>;
-  }
-
-  if (!resumeArr) {
+  if (!userData || !resumeArr) {
     return <> </>;
   }
 

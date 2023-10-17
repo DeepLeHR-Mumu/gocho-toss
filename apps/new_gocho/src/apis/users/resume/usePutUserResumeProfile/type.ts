@@ -6,8 +6,8 @@ export interface PutResumeProfileDef {
   email: string;
   location: {
     address: string;
-    x: number;
-    y: number;
+    x: string;
+    y: string;
   };
   hobby: string;
   specialty: string;
@@ -15,7 +15,7 @@ export interface PutResumeProfileDef {
 
 export interface RequestObjDef {
   userId: number;
-  image: File;
+  image?: File;
   requestObj: PutResumeProfileDef;
 }
 

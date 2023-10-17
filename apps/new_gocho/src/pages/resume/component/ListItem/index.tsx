@@ -30,6 +30,7 @@ export const ListItem: FC<ListItemProps> = ({
       </div>
     </div>
     <p css={cssObj.description}>{desciption}</p>
+    {/* TODO: 날짜 형식 변경하기 */}
     <p css={cssObj.date}>{date.join(" - ")}</p>
   </section>
 );
