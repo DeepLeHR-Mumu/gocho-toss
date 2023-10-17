@@ -1,10 +1,10 @@
 import { FC, useState } from "react";
 
 import { useResumeCertificationArr } from "@/apis/resume/certification/useResumeCertificationArr";
+import { SelectorResumeCertification } from "@/apis/resume/certification/useResumeCertification/type";
 
 import { ListCard } from "../../component";
 import { CertificationForm, CertificationList } from "./component";
-import { SelectorResumeCertification } from "@/apis/resume/certification/useResumeCertification/type";
 import { CertificationPartProps } from "./type";
 
 export const CertificationPart: FC<CertificationPartProps> = ({ userId, resumeId }) => {
