@@ -94,10 +94,9 @@ export const useAxiosInterceptor = () => {
     const accessExpireTime = dayjs(new Date(accessTokenExp * 1000), "YYYY-MM-DDTHH:mm:ss");
     const refreshExpireTime = dayjs(new Date(refreshTokenExp * 1000), "YYYY-MM-DDTHH:mm:ss");
     const currentTime = dayjs(new Date(), "YYYY-MM-DDTHH:mm:ss");
-    console.log("accessExpireTime", accessExpireTime.format("YYYY-MM-DDTHH:mm:ss"));
 
     const isRefreshExpired = currentTime.isAfter(refreshExpireTime);
-    const isAccessExpired = accessExpireTime.diff(currentTime, "ms") <= 1000000;
+    const isAccessExpired = accessExpireTime.diff(currentTime, "ms") <= accessTokenLimitMs;
 
     // 1. refreshToken 만료된 경우 -> 모든 token 삭제
     if (isRefreshExpired) {
@@ -126,8 +125,6 @@ export const useAxiosInterceptor = () => {
   };
 
   const responseErrorHandler = async (error: AxiosError<ErrorResponseDef>) => {
-    console.log(error);
-
     if (error.response?.data.error_code === "EXPIRED_JWT") {
       await getNewAccessToken();
     }
