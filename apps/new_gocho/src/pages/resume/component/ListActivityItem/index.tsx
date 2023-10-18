@@ -6,6 +6,7 @@ import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import etc from "@/public/image/resume/activity/etc.svg";
 import prize from "@/public/image/resume/activity/prize.svg";
 import volunteer from "@/public/image/resume/activity/volunteer.svg";
+import { dateToYYDOTMM } from "@/utils";
 
 import { cssObj } from "./style";
 import { ListActivityItemProps } from "./type";
@@ -39,6 +40,6 @@ export const ListActivityItem: FC<ListActivityItemProps> = ({
       <p css={cssObj.titelDes}>{titleDes}</p>
     </div>
     <p css={cssObj.description}>{desciption}</p>
-    <p css={cssObj.date}>{date.join(" - ")}</p>
+    <p css={cssObj.date}>{date.map((d) => dateToYYDOTMM(d)).join(" - ")}</p>
   </section>
 );

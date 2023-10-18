@@ -26,7 +26,13 @@ export const YYMMToDate = (yymm: string) => {
   const a = dayjs(yymm);
   return [a.year(), a.month() + 1 < 10 ? `0${a.month() + 1}` : a.month() + 1, "01"].join("-");
 };
+
 export const dateToYYMM = (date: string) => {
   const a = dayjs(date);
   return [a.year(), a.month() + 1 < 10 ? `0${a.month() + 1}` : a.month() + 1].join("");
+};
+
+export const dateToYYDOTMM = (date: string) => {
+  const a = dayjs(date);
+  return [a.year(), a.month() + 1 < 10 ? `0${a.month() + 1}` : a.month() + 1].join(".");
 };
