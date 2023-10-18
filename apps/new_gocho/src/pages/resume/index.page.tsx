@@ -29,7 +29,7 @@ const ResumePage: NextPage = () => {
             <CareerPart />
             <CertificationPart resumeId={resumeId} userId={userData.id} />
             <FluencyPart />
-            <ActivityPart />
+            <ActivityPart userId={userData.id} resumeId={resumeId} />
           </div>
           <div css={cssObj.sideContentsWrapper}>
             <SidePart />

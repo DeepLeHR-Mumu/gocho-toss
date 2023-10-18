@@ -1,16 +1,16 @@
 export interface ResumeActivityDef {
   id: number;
-  activity_type: "수상" | "봉사" | "기타";
+  activity_type: string;
   name: string;
   organizer: string;
-  activity_date: string | null;
-  activity_description: string | null;
+  activity_date: string;
+  activity_description: string;
 }
 
 export interface PostActivityDef {
-  activity_type: "수상" | "봉사" | "기타";
+  activity_type: string;
   name: string;
   organizer: string;
-  activity_date: string | null;
-  activity_description: string | null;
+  activity_date: string;
+  activity_description: string;
 }

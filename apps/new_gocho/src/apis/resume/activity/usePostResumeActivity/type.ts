@@ -17,5 +17,5 @@ export interface PostResumeActivityDef {
 }
 
 export interface UsePostResumeActivityProps {
-  (): UseMutationResult<PostResumeActivityResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (resumeId: number): UseMutationResult<PostResumeActivityResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

@@ -13,5 +13,5 @@ export interface DeleteResumeActivityDef {
 }
 
 export interface UseDeleteResumeActivityProps {
-  (): UseMutationResult<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (resumeId: number): UseMutationResult<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

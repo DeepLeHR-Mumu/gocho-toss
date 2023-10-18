@@ -18,5 +18,5 @@ export interface PutResumeActivityDef {
 }
 
 export interface UsePutResumeActivityProps {
-  (): UseMutationResult<PutResumeActivityResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (userId: number): UseMutationResult<PutResumeActivityResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }
