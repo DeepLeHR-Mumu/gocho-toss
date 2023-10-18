@@ -5,7 +5,7 @@ import { useResumeArr } from "@/apis/users/resume/useResumeArr";
 
 import { Layout } from "@/components";
 
-import { SidePart, InfoPart, EducationPart, CareerPart, ActivityPart, CertificationPart, FluencyPart } from "./part";
+import { SidePart, ProfilePart, EducationPart, CareerPart, ActivityPart, CertificationPart, FluencyPart } from "./part";
 import { cssObj } from "./style";
 
 const ResumePage: NextPage = () => {
@@ -24,7 +24,7 @@ const ResumePage: NextPage = () => {
       <Layout>
         <div css={cssObj.contentsWrapper}>
           <div css={cssObj.mainContentsWrapper}>
-            <InfoPart userId={userData.id} />
+            <ProfilePart userId={userData.id} />
             <EducationPart />
             <CareerPart />
             <CertificationPart resumeId={resumeId} userId={userData.id} />

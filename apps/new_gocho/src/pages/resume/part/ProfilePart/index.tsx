@@ -6,11 +6,11 @@ import { ListCard } from "../../component";
 import { ProfileForm, ResumeProfile } from "./component";
 import { cssObj } from "./style";
 
-interface InfoPartProps {
+interface ProfilePartProps {
   userId: number;
 }
 
-export const InfoPart: FC<InfoPartProps> = ({ userId }) => {
+export const ProfilePart: FC<ProfilePartProps> = ({ userId }) => {
   const [isEditMode, setEditMode] = useState(false);
 
   const { data: resumeProfile } = useUserResumeProfile({ userId });

@@ -1,4 +1,4 @@
-export { InfoPart } from "./InfoPart";
+export { ProfilePart } from "./ProfilePart";
 export { EducationPart } from "./EducationPart";
 export { CareerPart } from "./CareerPart";
 export { ActivityPart } from "./ActivityPart";
