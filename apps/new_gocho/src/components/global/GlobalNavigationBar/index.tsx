@@ -56,11 +56,18 @@ export const GlobalNavigationBar = () => {
   };
 
   const doLogout = () => {
-    postLogout(null);
-
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    queryClient.resetQueries();
+    postLogout(null, {
+      onError: () => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        queryClient.resetQueries();
+      },
+      onSuccess: () => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        queryClient.resetQueries();
+      },
+    });
   };
 
   return (
