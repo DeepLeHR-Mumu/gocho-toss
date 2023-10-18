@@ -1,7 +1,8 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { ErrorResponseDef } from "shared-type/api";
 
+import { resumeFluencyKeyObj } from "@/constants/queryKeyFactory/resume/resumeFluencyKeyObj";
 import { axiosInstance } from "@/apis/axiosInstance";
 
 import { PostResumeFluencyResponse, UsePostResumeFluencyProps, RequestObjDef, PostResumeFluencyDef } from "./type";
@@ -11,7 +12,13 @@ export const postResumeFluency: PostResumeFluencyDef = async ({ resumeId, ...req
   return data;
 };
 
-export const usePostResumeFluency: UsePostResumeFluencyProps = () =>
-  useMutation<PostResumeFluencyResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
+export const usePostResumeFluency: UsePostResumeFluencyProps = (resumeId) => {
+  const queryClient = useQueryClient();
+
+  return useMutation<PostResumeFluencyResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
     mutationFn: postResumeFluency,
+    onSuccess: () => {
+      queryClient.invalidateQueries(resumeFluencyKeyObj.fluencyArr(resumeId));
+    },
   });
+};

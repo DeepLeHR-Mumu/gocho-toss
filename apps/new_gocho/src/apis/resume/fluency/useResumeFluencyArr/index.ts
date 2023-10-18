@@ -13,7 +13,7 @@ export const getResumeFluencyArr: GetResumeFluencyArrDef = async (resumeId) => {
 
 export const useResumeFluencyArr = (resumeId: number) =>
   useQuery({
-    enabled: Boolean(resumeId),
+    enabled: !!resumeId,
     queryKey: resumeFluencyKeyObj.fluencyArr(resumeId),
     queryFn: ({ queryKey: [{ resumeId: queryKeyResumeId }] }) => getResumeFluencyArr(queryKeyResumeId),
     select: ({ data }) => selector(data),

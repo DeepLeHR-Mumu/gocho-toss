@@ -17,6 +17,7 @@ export const cssObj = {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    width: 55.5rem;
     gap: 2rem;
   `,
 

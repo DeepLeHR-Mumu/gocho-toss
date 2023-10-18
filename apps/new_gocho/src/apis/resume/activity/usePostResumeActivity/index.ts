@@ -2,10 +2,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { ErrorResponseDef } from "shared-type/api";
 
+import { resumeActivityKeyObj } from "@/constants/queryKeyFactory/resume/resumeActivityKeyObj";
 import { axiosInstance } from "@/apis/axiosInstance";
 
 import { PostResumeActivityDef, PostResumeActivityResponse, RequestObjDef, UsePostResumeActivityProps } from "./type";
-import { resumeActivityKeyObj } from "@/constants/queryKeyFactory/resume/resumeActivityKeyObj";
 
 const postResumeActivity: PostResumeActivityDef = async ({ resumeId, ...requestObj }) => {
   const { data } = await axiosInstance.post(`/resumes/${resumeId}/activities`, requestObj);

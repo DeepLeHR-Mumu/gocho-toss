@@ -1,5 +1,5 @@
 export interface ResumeFluencyDef {
-  id: string;
+  id: number;
   language_type: string;
   name: string;
   acquisition_date: string;

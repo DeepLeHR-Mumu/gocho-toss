@@ -17,5 +17,5 @@ export interface PostResumeFluencyDef {
 }
 
 export interface UsePostResumeFluencyProps {
-  (): UseMutationResult<PostResumeFluencyResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (resumeId: number): UseMutationResult<PostResumeFluencyResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

@@ -26,13 +26,13 @@ export const cssObj = {
   titleHeader: css`
     ${TEXT.TITLE5_M1620};
     display: flex;
-    align-item: center;
+    align-items: center;
     gap: 0.5rem;
   `,
 
   image: css`
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1.5rem;
+    height: 1.5rem;
   `,
 
   icon: css`

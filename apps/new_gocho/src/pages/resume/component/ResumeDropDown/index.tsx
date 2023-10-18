@@ -6,7 +6,13 @@ import { DropDown } from "shared-ui/deeple-ds";
 import { cssObj } from "./style";
 import { ResumeDropDownProps } from "./type";
 
-export const ResumeDropDown: FC<ResumeDropDownProps> = ({ placeholder, value = "", setValue, menuArr }) => (
+export const ResumeDropDown: FC<ResumeDropDownProps> = ({
+  placeholder,
+  value = "",
+  setValue,
+  menuArr,
+  onClickCallback,
+}) => (
   <DropDown
     customTitle={
       <div css={cssObj.wrapper}>
@@ -22,6 +28,7 @@ export const ResumeDropDown: FC<ResumeDropDownProps> = ({ placeholder, value = "
         content: <p css={cssObj.item}>{content}</p>,
         onClick: () => {
           setValue(content);
+          if (onClickCallback) onClickCallback();
         },
       })),
     }}

@@ -3,4 +3,5 @@ export interface ResumeDropDownProps {
   menuArr: { content: string }[];
   value?: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
+  onClickCallback?: () => void;
 }

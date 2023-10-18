@@ -10,9 +10,10 @@ export const getResumeCareerArr: GetResumeCareerArrDef = async (resumeId: number
   return data;
 };
 
-export const useResumeCareerArr = (resumeId?: number) =>
+export const useResumeCareerArr = (resumeId: number) =>
   useQuery({
-    queryKey: resumeId ? resumeCareerKeyObj.careerArr(resumeId) : undefined,
+    enabled: !!resumeId,
+    queryKey: resumeCareerKeyObj.careerArr(resumeId),
     queryFn: ({ queryKey: [{ resumeId: queryKeyResumeId }] }) => getResumeCareerArr(queryKeyResumeId),
     select: ({ data }) => selector(data),
   });

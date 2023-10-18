@@ -1,5 +1,5 @@
-import { ResumeFluencyDef } from "../type";
 import { selector } from "./util";
+import { ResumeFluencyDef } from "../type";
 
 export interface ResponseObjDef {
   data: ResumeFluencyDef[];

@@ -18,5 +18,5 @@ export interface PutResumeFluencyDef {
 }
 
 export interface UsePutResumeFluencyProps {
-  (): UseMutationResult<PutResumeFluencyResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (resumeId: number): UseMutationResult<PutResumeFluencyResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

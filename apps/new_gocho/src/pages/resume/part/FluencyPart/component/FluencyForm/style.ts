@@ -10,14 +10,6 @@ export const cssObj = {
     flex-direction: column;
   `,
 
-  inputWidth: css`
-    width: 33.825rem;
-  `,
-
-  desWidth: css`
-    width: 43.825rem;
-  `,
-
   inputWrapper: css`
     display: flex;
     align-items: center;
@@ -26,6 +18,11 @@ export const cssObj = {
       width: 5.625rem;
       ${TEXT.TITLE5_M1620};
     }
+  `,
+
+  inputBox: css`
+    display: flex;
+    gap: 3.25rem;
   `,
 
   required: css`

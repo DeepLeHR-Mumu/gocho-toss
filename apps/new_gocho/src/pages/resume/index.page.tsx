@@ -28,7 +28,7 @@ const ResumePage: NextPage = () => {
             <EducationPart />
             <CareerPart />
             <CertificationPart resumeId={resumeId} userId={userData.id} />
-            <FluencyPart />
+            <FluencyPart resumeId={resumeId} userId={userData.id} />
             <ActivityPart userId={userData.id} resumeId={resumeId} />
           </div>
           <div css={cssObj.sideContentsWrapper}>
