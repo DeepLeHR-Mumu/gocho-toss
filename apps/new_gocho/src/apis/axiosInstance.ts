@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import { BACKEND_URL } from "shared-constant";
 import { tokenDecryptor } from "shared-util";
 import { ErrorResponseDef } from "shared-type/api";
+import { datadogRum } from "@datadog/browser-rum";
 
 export const axiosNoTokenInstance = axios.create({
   timeout: 10000,
@@ -54,7 +55,7 @@ export const useAxiosInterceptor = () => {
         .catch((error) => {
           isRefreshing = false;
           const { error_code } = error.response.data;
-          if (error_code === "EMPTY_JWT") {
+          if (error_code === "EMPTY_JWT_REDIS" || error_code === "UNAUTHORIZED") {
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
             throw new axios.Cancel("getNewAccessToken - No Token");
@@ -116,15 +117,6 @@ export const useAxiosInterceptor = () => {
       };
     }
 
-    // if (config.url && config.url.includes("jds") && accessTokenData) {
-    //   return {
-    //     ...config,
-    //     headers: {
-    //       "x-access-token": accessTokenData,
-    //     },
-    //   };
-    // }
-
     return {
       ...config,
       headers: {
@@ -134,6 +126,10 @@ export const useAxiosInterceptor = () => {
   };
 
   const responseErrorHandler = async (error: AxiosError<ErrorResponseDef>) => {
+    datadogRum.addAction("http_request_failed", {
+      AxiosError: error,
+    });
+
     if (error.response?.data.error_code === "EXPIRED_JWT") {
       await getNewAccessToken();
     }
@@ -144,7 +140,7 @@ export const useAxiosInterceptor = () => {
       return Promise.resolve();
     }
 
-    if (error.response?.data.error_code === "EMPTY_JWT_REDIS") {
+    if (error.response?.data.error_code === "EMPTY_JWT_REDIS" || error.response?.data.error_code === "UNAUTHORIZED") {
       return Promise.resolve();
     }
 
@@ -153,7 +149,6 @@ export const useAxiosInterceptor = () => {
 
   const requestInterceptor = axiosInstance.interceptors.request.use(
     (config: AxiosRequestConfig) => requestConfigHandler(config),
-
     (error) => Promise.reject(error)
   );
 
