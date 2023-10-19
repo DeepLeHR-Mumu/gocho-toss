@@ -41,7 +41,7 @@ export const GlobalNav: FunctionComponent = () => {
       router.push(INTERNAL_URL.LOGIN);
     };
 
-    postLogout(undefined, {
+    postLogout(null, {
       onError(error) {
         if (error.response?.data.error_code === "EXPIRED_JWT") {
           afterLogoutActiveFunction();
