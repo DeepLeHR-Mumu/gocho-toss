@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import { BACKEND_URL } from "shared-constant";
 import { tokenDecryptor } from "shared-util";
 import { ErrorResponseDef } from "shared-type/api";
+import { datadogRum } from "@datadog/browser-rum";
 
 export const axiosNoTokenInstance = axios.create({
   timeout: 10000,
@@ -125,6 +126,10 @@ export const useAxiosInterceptor = () => {
   };
 
   const responseErrorHandler = async (error: AxiosError<ErrorResponseDef>) => {
+    datadogRum.addAction("http_request_failed", {
+      AxiosError: error,
+    });
+
     if (error.response?.data.error_code === "EXPIRED_JWT") {
       await getNewAccessToken();
     }
